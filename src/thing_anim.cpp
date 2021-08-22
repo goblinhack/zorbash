@@ -447,6 +447,8 @@ if (is_debug_type()) { con("No tile"); }
         if (delay) {
             delay = delay + (non_pcg_rand() % delay) / 5;
         }
+    } else {
+        delay /= 2;
     }
 
     timestamp_next_frame = time_get_time_ms_cached() + delay;

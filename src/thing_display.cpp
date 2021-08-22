@@ -501,7 +501,7 @@ bool Thing::get_coords (point &blit_tl,
                     // Slow flip
                     //
                     auto diff = time_get_time_ms_cached() - get_timestamp_flip_start();
-                    timestamp_t flip_time = 100;
+                    timestamp_t flip_time = game->current_move_speed;
                     timestamp_t flip_steps = flip_time;
 
                     if (diff > flip_time) {

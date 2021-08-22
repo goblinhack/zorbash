@@ -171,7 +171,7 @@ bool Thing::try_to_jump (point to)
     auto th = TILE_HEIGHT;
     auto sz = isize(last_blit_br.x - last_blit_tl.x, last_blit_br.y - last_blit_tl.y);
     auto delay = PARTICLE_SPEED_MS;
-    auto delay_shorter = delay - (delay / 20);
+    auto delay_shorter = delay - 10;
     point dst(src.x + dx * tw , src.y + dy * th );
 
     if (is_player()) {
@@ -285,8 +285,17 @@ bool Thing::try_to_jump (point to)
             if (level->is_shallow_water((int)mid_at.x, (int)mid_at.y)) {
                 fpoint at(mid_at.x, mid_at.y);
                 dbg("Causes ripples");
-                if (pcg_random_range(0, 1000) > 500) {
-                    level->thing_new(tp_random_ripple()->name(), at);
+                if (game->robot_mode) {
+                    //
+                    // Faster
+                    //
+                    if (pcg_random_range(0, 1000) > 900) {
+                        level->thing_new(tp_random_ripple()->name(), at);
+                    }
+                } else {
+                    if (pcg_random_range(0, 1000) > 500) {
+                        level->thing_new(tp_random_ripple()->name(), at);
+                    }
                 }
             }
         }

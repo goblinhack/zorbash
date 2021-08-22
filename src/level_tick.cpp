@@ -96,7 +96,9 @@ _
                 }
                 game->things_are_moving = true;
             }
-        } else if (t->is_falling) {
+        }
+
+        if (t->is_falling) {
             //
             // If falling we need to update the z depth and position; and wait.
             //
@@ -107,20 +109,27 @@ _
                 }
                 game->things_are_moving = true;
             }
-        } else if (t->is_scheduled_for_death) {
+        }
+
+        if (t->is_scheduled_for_death) {
             if ((wait_count > 100) && !game->things_are_moving) {
                 t->con("Waiting on scheduled for death thing longer than expected");
             }
             game->things_are_moving = true;
-        } else if ((t->is_dead_on_end_of_anim() && !t->is_dead) ||
-                   (t->is_alive_on_end_of_anim() && t->is_resurrecting) ||
-                   (t->get_weapon_id_use_anim().ok())) {
+        }
+
+        if ((t->is_dead_on_end_of_anim() && !t->is_dead) ||
+            (t->is_alive_on_end_of_anim() && t->is_resurrecting) ||
+            t->get_timestamp_flip_start() ||
+            (t->get_weapon_id_use_anim().ok())) {
 
             if (game->robot_mode) {
                 if ((wait_count > 100) && !game->things_are_moving) {
                     t->con("Waiting on animated thing longer than expected");
                 }
                 game->things_are_moving = true;
+
+                t->set_timestamp_flip_start(0);
             }
 
             //
@@ -235,6 +244,27 @@ _
     }
 
     //
+    // Not sure if we need to delay for these
+    //
+    if (0) {
+        if (all_internal_particles.size()) {
+            return false;
+        }
+
+        if (new_internal_particles.size()) {
+            return false;
+        }
+
+        if (all_external_particles.size()) {
+            return false;
+        }
+
+        if (new_external_particles.size()) {
+            return false;
+        }
+    }
+
+    //
     // If things have stopped moving, perform location checks on where they
     // are now. This handles things like shoving a monst into a chasm. We do
     // location checks on the ends of moves, but this is a backup and will
@@ -282,7 +312,7 @@ _
                     CON("Robot: Try the next move");
                     player->cursor_path_pop_next_and_move();
                 }
-               
+
                 if (game->tick_requested.empty()) {
                     game->robot_mode_tick();
                 }
