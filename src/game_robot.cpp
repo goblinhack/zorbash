@@ -25,7 +25,8 @@ void Game::robot_mode_tick (void)
         return;
     }
 
-    if (player->monstp->robot_state != ROBOT_STATE_IDLE) {
+    if ((player->monstp->robot_state != ROBOT_STATE_IDLE) &&
+        (player->monstp->robot_state != ROBOT_STATE_RESTING)) {
         return;
     }
 

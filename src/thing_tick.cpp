@@ -167,7 +167,12 @@ void Thing::achieve_goals_in_life (void)
 
     if (monstp && monstp->move_path.empty()) {
         if (is_player()) {
-            robot_change_state(ROBOT_STATE_IDLE, "move path is empty");
+            //
+            // If resting, keep resting
+            //
+            if (monstp->robot_state == ROBOT_STATE_MOVING) {
+                robot_change_state(ROBOT_STATE_IDLE, "move path is empty");
+            }
         }
     }
 }

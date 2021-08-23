@@ -86,10 +86,10 @@ _
     wait_count++;
 
     FOR_ALL_INTERESTING_THINGS_ON_LEVEL(this, t) {
+        //
+        // Check if we finished moving above. If not, keep waiting.
+        //
         if (t->is_moving) {
-            //
-            // Check if we finished moving above. If not, keep waiting.
-            //
             t->update_interpolated_position();
             if (t->is_moving) {
                 if ((wait_count > wait_count_max) && !game->things_are_moving) {
@@ -99,10 +99,10 @@ _
             }
         }
 
+        //
+        // If falling we need to update the z depth and position; and wait.
+        //
         if (t->is_falling) {
-            //
-            // If falling we need to update the z depth and position; and wait.
-            //
             t->update_interpolated_position();
             if (t->is_falling) {
                 if ((wait_count > wait_count_max) && !game->things_are_moving) {
@@ -112,26 +112,14 @@ _
             }
         }
 
-        if (t->is_scheduled_for_death) {
+        //
+        // Wait on dying thing?
+        //
+        if ((t->is_dead_on_end_of_anim() && !t->is_dead)) {
             if ((wait_count > wait_count_max) && !game->things_are_moving) {
-                t->con("Waiting on scheduled for death thing longer than expected");
+                t->con("Waiting on dying thing longer than expected");
             }
             game->things_are_moving = true;
-        }
-
-        if ((t->is_dead_on_end_of_anim() && !t->is_dead) ||
-            (t->is_alive_on_end_of_anim() && t->is_resurrecting) ||
-            t->get_timestamp_flip_start() ||
-            (t->get_weapon_id_use_anim().ok())) {
-
-            if (game->robot_mode) {
-                if ((wait_count > wait_count_max) && !game->things_are_moving) {
-                    t->con("Waiting on animated thing longer than expected");
-                }
-                game->things_are_moving = true;
-
-                t->set_timestamp_flip_start(0);
-            }
 
             //
             // Wait for animation end. Only if the thing is onscreen
@@ -143,21 +131,85 @@ _
                     } else {
                         t->is_offscreen = true;
                     }
-                } else {
-                    //
-                    // Make sure offscreen resurrection occurs.
-                    //
-                    auto tpp = t->tp();
-                    if (unlikely(tpp->gfx_animated())) {
-                        t->animate();
-                    }
                 }
             }
         }
+
+        //
+        // Wait on resurrecting thing?
+        //
+        if (t->is_alive_on_end_of_anim() && t->is_resurrecting) {
+            if ((wait_count > wait_count_max) && !game->things_are_moving) {
+                t->con("Waiting on resurrecting thing longer than expected");
+            }
+            game->things_are_moving = true;
+
+            //
+            // Wait for animation end. Only if the thing is onscreen
+            //
+            if (t->frame_count != game->frame_count) {
+                //
+                // Make sure offscreen animation occurs.
+                //
+                auto tpp = t->tp();
+                if (unlikely(tpp->gfx_animated())) {
+                    t->animate();
+                }
+            }
+        }
+
+        if (t->get_weapon_id_use_anim().ok()) {
+            if ((wait_count > wait_count_max) && !game->things_are_moving) {
+                t->con("Waiting on weapon thing longer than expected");
+            }
+            game->things_are_moving = true;
+
+            //
+            // Wait for animation end. Only if the thing is onscreen
+            //
+            if (t->frame_count != game->frame_count) {
+                //
+                // Make sure offscreen animation occurs.
+                //
+                auto tpp = t->tp();
+                if (unlikely(tpp->gfx_animated())) {
+                    t->animate();
+                }
+            }
+        }
+
+        if (t->get_timestamp_flip_start()) {
+            if ((wait_count > wait_count_max) && !game->things_are_moving) {
+                t->con("Waiting on flipping thing longer than expected");
+            }
+            game->things_are_moving = true;
+
+            //
+            // Wait for animation end. Only if the thing is onscreen
+            //
+            if (t->frame_count != game->frame_count) {
+                //
+                // Make sure offscreen animation occurs.
+                //
+                if (t->is_offscreen) {
+                    t->set_timestamp_flip_start(0);
+                } else {
+                    t->is_offscreen = true;
+                }
+            }
+        }
+
         if (t->is_waiting_to_fall) {
             t->fall_to_next_level();
             if ((wait_count > wait_count_max) && !game->things_are_moving) {
                 t->con("Waiting on waiting to fall thing longer than expected");
+            }
+            game->things_are_moving = true;
+        }
+
+        if (t->is_scheduled_for_death) {
+            if ((wait_count > wait_count_max) && !game->things_are_moving) {
+                t->con("Waiting on scheduled for death thing longer than expected");
             }
             game->things_are_moving = true;
         }

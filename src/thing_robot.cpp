@@ -921,7 +921,7 @@ void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals)
         }
     }
 
-#if 1
+#if 0
     printf("\nrobot\n");
     for (int y = 0; y < MAP_HEIGHT; y++) {
         for (int x = 0; x < MAP_WIDTH; x++) {
@@ -1180,7 +1180,9 @@ void Thing::robot_tick (void)
             }
 
             CON("Robot: Nothing to do");
-            wid_actionbar_robot_mode_off();
+            // wid_actionbar_robot_mode_off();
+            game->tick_begin("nothing to do, rest");
+            robot_change_state(ROBOT_STATE_RESTING, "nothing to do, need to rest");
         }
         break;
         case ROBOT_STATE_MOVING:

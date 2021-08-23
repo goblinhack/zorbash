@@ -493,49 +493,41 @@ bool Thing::get_coords (point &blit_tl,
     auto falling = is_falling || (owner && owner->is_falling);
     if (likely(!falling)) {
         if (unlikely(tpp->gfx_animated_can_hflip())) {
-            if (is_player() ||
-                (level->player &&
-                 (get_immediate_owner_id() == level->player->id))) {
-                if (get_timestamp_flip_start()) {
-                    //
-                    // Slow flip
-                    //
-                    auto diff = time_get_time_ms_cached() - get_timestamp_flip_start();
-                    timestamp_t flip_time = game->current_move_speed;
-                    timestamp_t flip_steps = flip_time;
+            if (get_timestamp_flip_start()) {
+                //
+                // Slow flip
+                //
+                auto diff = time_get_time_ms_cached() - get_timestamp_flip_start();
+                timestamp_t flip_time = game->current_move_speed;
+                timestamp_t flip_steps = flip_time;
 
-                    if (diff > flip_time) {
-                        set_timestamp_flip_start(0);
-                        is_facing_left = !is_facing_left;
-                        if (is_dir_left() ||
-                            is_dir_tl()   ||
-                            is_dir_bl()) {
-                            std::swap(blit_tl.x, blit_br.x);
-                        }
-                    } else {
-                        if (is_dir_right() ||
-                            is_dir_tr()   ||
-                            is_dir_br()) {
-                            std::swap(blit_tl.x, blit_br.x);
-                        }
-                        float w = blit_br.x - blit_tl.x;
-                        float dw = w / flip_steps;
-                        float tlx = blit_tl.x;
-                        float brx = blit_br.x;
-
-                        blit_tl.x = tlx + dw * diff;
-                        blit_br.x = brx - dw * diff;
+                if (diff > flip_time) {
+                    set_timestamp_flip_start(0);
+                    is_facing_left = !is_facing_left;
+                    if (is_dir_left() ||
+                        is_dir_tl()   ||
+                        is_dir_bl()) {
                         std::swap(blit_tl.x, blit_br.x);
                     }
                 } else {
-                    //
-                    // Fast flip
-                    //
-                    if (is_dir_right() || is_dir_tr() || is_dir_br()) {
+                    if (is_dir_right() ||
+                        is_dir_tr()   ||
+                        is_dir_br()) {
                         std::swap(blit_tl.x, blit_br.x);
                     }
+                    float w = blit_br.x - blit_tl.x;
+                    float dw = w / flip_steps;
+                    float tlx = blit_tl.x;
+                    float brx = blit_br.x;
+
+                    blit_tl.x = tlx + dw * diff;
+                    blit_br.x = brx - dw * diff;
+                    std::swap(blit_tl.x, blit_br.x);
                 }
             } else {
+                //
+                // Fast flip
+                //
                 if (is_dir_right() || is_dir_tr() || is_dir_br()) {
                     std::swap(blit_tl.x, blit_br.x);
                 }

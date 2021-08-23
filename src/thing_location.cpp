@@ -45,10 +45,6 @@ void Thing::location_check_forced (void)
         return;
     }
 
-    if (is_player()) {
-        dbg("Location check, do");
-    }
-
     //
     // Put chasm checks first as you can still fall when dead!
     //
