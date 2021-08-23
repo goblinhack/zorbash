@@ -434,7 +434,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         }
 
         if (real_hitter->is_player()) {
-            if (is_alive_monst()) {
+            if (is_alive_monst() || is_minion_generator()) {
                 if (crit) {
                     TOPCON("%%fg=red$You CRIT hit %s for %d damage!%%fg=reset$",
                            text_the().c_str(), damage);

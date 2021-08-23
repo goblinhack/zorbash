@@ -19,6 +19,10 @@
 
 void Level::cursor_describe (void)
 {_
+    if (game->robot_mode) {
+        return;
+    }
+
     dbg("Cursor describe");
     if (!cursor) {
         return;

@@ -163,7 +163,7 @@ public:
     void tick_begin(const std::string &);
     void tick_begin_now(void);
     void tick_update(void);
-    void tick_end();
+    bool tick_end();
     void save_snapshot_check();
     void robot_mode_tick();
     void wid_collect_create(const std::list<Thingp> items);

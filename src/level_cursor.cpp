@@ -38,6 +38,10 @@ void Level::cursor_check_if_scroll_needed (void)
 //
 void Level::cursor_move (void)
 {_
+    if (game->robot_mode) {
+        return;
+    }
+
     if (is_mouse_over_any_bag()) {
         return;
     }

@@ -13,6 +13,7 @@
 #include "my_monst.h"
 #include "my_python.h"
 #include "my_player.h"
+#include "my_random.h"
 #include "my_array_bounds_check.h"
 #include "my_wid_actionbar.h"
 #include "my_ptrcheck.h"
@@ -81,7 +82,7 @@ _
     //
     game->things_are_moving = false;
 
-    static const int wait_count_max = 100;
+    static const int wait_count_max = 1;
     static int wait_count;
     wait_count++;
 
@@ -344,19 +345,19 @@ _
     //
     // We've finished waiting on all things, bump the game tick.
     //
-    game->tick_end();
-
-    //
-    // Only update robot mode if things have stopped moving so we get
-    // consistent random behaviour.
-    //
-    if (game->tick_completed == game->tick_current) {
-        if (game->robot_mode_requested != game->robot_mode) {
-            LOG("Update robot mode");
-            game->robot_mode = game->robot_mode_requested;
-            wid_actionbar_robot_mode_update();
-        }
-
+    if (game->tick_end()) {
+#if 0
+        //
+        // For debugging consistent randomness
+        //
+        float h = 0;
+        FOR_ALL_INTERESTING_THINGS_ON_LEVEL(this, t) {
+            h += t->mid_at.x;
+            h += t->mid_at.y;
+            t->con("at %f,%f", t->mid_at.x, t->mid_at.y);
+        } FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(this)
+        CON("TICK %d hash %f random %d", game->tick_current, h, pcg_rand());
+#endif
         if (game->robot_mode_tick_requested) {
             game->robot_mode_tick_requested = false;
             if (player) {
@@ -377,18 +378,19 @@ _
             }
         }
     }
-_
-#if 0
+
     //
-    // For debugging consistent randomness
+    // Only update robot mode if things have stopped moving so we get
+    // consistent random behaviour.
     //
-    uint32_t h = 0;
-    FOR_ALL_INTERESTING_THINGS_ON_LEVEL(this, t) {
-        h += (int)t->mid_at.x;
-        h += (int)t->mid_at.y;
-    } FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(this)
-    CON("TICK %d hash %u", game->tick_current, h);
-#endif
+    if (game->robot_mode_requested != game->robot_mode) {
+        LOG("Update robot mode");
+        game->robot_mode = game->robot_mode_requested;
+        game->robot_mode_requested = true;
+        wid_actionbar_robot_mode_update();
+        game->tick_begin("Robot mode");
+    }
+
     if (!game->tick_requested.empty()) {
         return true;
     }

@@ -88,17 +88,13 @@ void Game::tick_begin_now (void)
     }
 }
 
-void Game::tick_end (void)
+bool Game::tick_end (void)
 {_
-    if (game->things_are_moving) {
-        return;
-    }
-
     //
     // Move when all things are done moving
     //
     if (game->tick_completed == game->tick_current) {
-        return;
+        return false;
     }
     game->tick_completed = game->tick_current;
 
@@ -144,6 +140,8 @@ void Game::tick_end (void)
         CON("TICK %d hash %u rand %d", tick_current, h, pcg_random_range(1, 10000));
 #endif
     }
+
+    return true;
 }
 
 void Game::tick_update (void)
