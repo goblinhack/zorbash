@@ -284,6 +284,9 @@ _
                     CON("Robot: Found a goal: %s %s, score %d",
                         it->to_string().c_str(), result.goal.msg.c_str(),
                         (int)result.goal.score);
+                    BOTCON("Robot: goal %s %s",
+                           result.goal.msg.c_str(),
+                           it->text_the().c_str());
                 } else {
                     log("Monst: Found a goal: %s %s, score %d",
                         it->to_string().c_str(), result.goal.msg.c_str(),
@@ -1023,6 +1026,7 @@ bool Thing::robot_ai_choose_nearby_goal (void)
                 if (it->is_door() && !it->is_open) {
                     if (get_keys()) {
                         if (open_door(it)) {
+                            BOTCON("Robot opened a door");
                             game->tick_begin("Robot opened a door");
                             return true;
                         }
@@ -1060,6 +1064,7 @@ bool Thing::robot_ai_choose_nearby_goal (void)
                     for (auto item : items) {
                         CON("Robot: Try to carry %s", item->to_string().c_str());
                         if (try_to_carry(item)) {
+                            BOTCON("Robot collected %s", item->text_the().c_str());
                             game->tick_begin("Robot collected " + item->to_string());
                             return true;
                         }
@@ -1152,6 +1157,7 @@ void Thing::robot_tick (void)
         {
             CON("Robot: Is idle, look for something to do");
             if (!get_stamina()) {
+                BOTCON("Robot is forced to rest");
                 game->tick_begin("Robot is forced to rest");
                 robot_change_state(ROBOT_STATE_RESTING, "need to rest");
                 return;
@@ -1163,12 +1169,14 @@ void Thing::robot_tick (void)
             if (threat && (is_dangerous(threat) || is_enemy(threat))) {
                 CON("Robot: A threat is nearby");
                 if (get_stamina() < get_stamina_max() / 10) {
+                    BOTCON("Robot needs to rest, low on stamina and not safe");
                     game->tick_begin("Robot needs to rest, low on stamina and not safe");
                     robot_change_state(ROBOT_STATE_RESTING, "very low on stamina, rest");
                     return;
                 }
             } else {
                 if (get_stamina() < get_stamina_max() / 3) {
+                    BOTCON("Robot needs to rest, low on stamina");
                     game->tick_begin("Robot needs to rest, low on stamina");
                     robot_change_state(ROBOT_STATE_RESTING, "low on stamina, rest");
                     return;
@@ -1193,10 +1201,9 @@ void Thing::robot_tick (void)
                 return;
             }
 
-            CON("Robot: Nothing to do");
-            // wid_actionbar_robot_mode_off();
+            BOTCON("Robot has nothing to do, rest");
             game->tick_begin("nothing to do, rest");
-            robot_change_state(ROBOT_STATE_RESTING, "nothing to do, need to rest");
+            robot_change_state(ROBOT_STATE_RESTING, "nothing to do, rest");
         }
         break;
         case ROBOT_STATE_MOVING:
@@ -1214,6 +1221,7 @@ void Thing::robot_tick (void)
             }
 
             if (monstp->move_path.empty()) {
+                BOTCON("Robot move finished");
                 game->tick_begin("Robot move finished");
                 robot_change_state(ROBOT_STATE_IDLE, "move finished");
                 wid_actionbar_init();
@@ -1227,6 +1235,7 @@ void Thing::robot_tick (void)
         case ROBOT_STATE_RESTING:
         {
             if (get_stamina() >= get_stamina_max() / 2) {
+                BOTCON("Robot has rested enough");
                 game->tick_begin("Robot has rested enough");
                 robot_change_state(ROBOT_STATE_IDLE, "rested enough");
                 return;
@@ -1234,6 +1243,7 @@ void Thing::robot_tick (void)
 
             if (get_stamina()) {
                 if (threat && (is_dangerous(threat) || is_enemy(threat))) {
+                    BOTCON("Robot sees a nearby threat, stop resting");
                     game->tick_begin("Robot sees a nearby threat, stop resting");
                     robot_change_state(ROBOT_STATE_IDLE, "threat nearby, stop resting");
                     return;
@@ -1292,10 +1302,13 @@ void Thing::robot_change_state (int new_state, const std::string &why)
     switch (new_state) {
         case ROBOT_STATE_IDLE:
             clear_move_path("Robot is idle");
+            BOTCON("Robot is idle");
             break;
         case ROBOT_STATE_MOVING:
+            BOTCON("Robot is moving");
             break;
         case ROBOT_STATE_RESTING:
+            BOTCON("Robot is resting");
             break;
     }
 }

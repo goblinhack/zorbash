@@ -98,34 +98,37 @@ _
     }
 
     //
-    // Stop rapid pickup/drop events if particles are still in progress
+    // Stop rapid pickup/drop events if particles are still in progress.
+    // Robot mode waits anyway.
     //
-    if (player && player->particle_anim_exists()) {
-        DBG3("Ignore input; anim exists");
-        return false;
-    }
+    if (!game->robot_mode) {
+        if (player && player->particle_anim_exists()) {
+            DBG3("Ignore input; anim exists");
+            return false;
+        }
 
-    //
-    // No moving if weapons have not finished firing
-    //
-    if (level->all_projectiles.size()) {
-        DBG3("Ignore input; projectile exists");
-        return false;
-    }
+        //
+        // No moving if weapons have not finished firing
+        //
+        if (level->all_projectiles.size()) {
+            DBG3("Ignore input; projectile exists");
+            return false;
+        }
 
-    if (level->new_projectiles.size()) {
-        DBG3("Ignore input; projectile exists");
-        return false;
-    }
+        if (level->new_projectiles.size()) {
+            DBG3("Ignore input; projectile exists");
+            return false;
+        }
 
-    if (level->all_lasers.size()) {
-        DBG3("Ignore input; laser exists");
-        return false;
-    }
+        if (level->all_lasers.size()) {
+            DBG3("Ignore input; laser exists");
+            return false;
+        }
 
-    if (level->new_lasers.size()) {
-        DBG3("Ignore input; laser exists");
-        return false;
+        if (level->new_lasers.size()) {
+            DBG3("Ignore input; laser exists");
+            return false;
+        }
     }
 
     if (game->state == Game::STATE_MOVING_ITEMS) {

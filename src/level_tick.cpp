@@ -370,12 +370,14 @@ _
     //
     if (!timestamp_fade_in_begin) {
         if (game->robot_mode_requested != game->robot_mode) {
-            CON("Update robot mode");
             game->robot_mode = game->robot_mode_requested;
             game->robot_mode_tick_requested = true;
             wid_actionbar_robot_mode_update();
             if (game->robot_mode) {
                 game->tick_begin("robot mode");
+                BOTCON("Robot mode");
+            } else {
+                BOTCON("Robot mode off");
             }
         }
     }
