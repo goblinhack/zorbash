@@ -26,6 +26,10 @@ bool Level::tick (void)
         return false;
     }
 
+    if (timestamp_fade_in_begin) {
+        return false;
+    }
+
     //
     // A new game event has occurred?
     //
@@ -82,7 +86,7 @@ _
     //
     game->things_are_moving = false;
 
-    static const int wait_count_max = 1;
+    static const int wait_count_max = 100;
     static int wait_count;
     wait_count++;
 
@@ -345,8 +349,9 @@ _
     //
     // We've finished waiting on all things, bump the game tick.
     //
-    if (game->tick_end()) {
+    bool tick_done = game->tick_end();
 #if 0
+    if (tick_done) {
         //
         // For debugging consistent randomness
         //
@@ -357,7 +362,25 @@ _
             t->con("at %f,%f", t->mid_at.x, t->mid_at.y);
         } FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(this)
         CON("TICK %d hash %f random %d", game->tick_current, h, pcg_rand());
+    }
 #endif
+
+    //
+    // If the level has started, we can enter robot mode.
+    //
+    if (!timestamp_fade_in_begin) {
+        if (game->robot_mode_requested != game->robot_mode) {
+            CON("Update robot mode");
+            game->robot_mode = game->robot_mode_requested;
+            game->robot_mode_tick_requested = true;
+            wid_actionbar_robot_mode_update();
+            if (game->robot_mode) {
+                game->tick_begin("robot mode");
+            }
+        }
+    }
+
+    if (tick_done) {
         if (game->robot_mode_tick_requested) {
             game->robot_mode_tick_requested = false;
             if (player) {
@@ -383,13 +406,6 @@ _
     // Only update robot mode if things have stopped moving so we get
     // consistent random behaviour.
     //
-    if (game->robot_mode_requested != game->robot_mode) {
-        LOG("Update robot mode");
-        game->robot_mode = game->robot_mode_requested;
-        game->robot_mode_requested = true;
-        wid_actionbar_robot_mode_update();
-        game->tick_begin("Robot mode");
-    }
 
     if (!game->tick_requested.empty()) {
         return true;

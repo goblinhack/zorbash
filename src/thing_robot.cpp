@@ -351,7 +351,10 @@ int Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy)
                 continue;
             }
 
-            if (is_jumper()) {
+            //
+            // Can jump but only if not tired.
+            //
+            if (is_jumper() && (get_stamina() > get_stamina_max() / 2)) {
                 //
                 // Trace all possible jump paths to see if we can jump over
                 //
@@ -1149,7 +1152,7 @@ void Thing::robot_tick (void)
         {
             CON("Robot: Is idle, look for something to do");
             if (!get_stamina()) {
-                game->tick_begin("Robot needs to rest");
+                game->tick_begin("Robot is forced to rest");
                 robot_change_state(ROBOT_STATE_RESTING, "need to rest");
                 return;
             }
@@ -1159,7 +1162,18 @@ void Thing::robot_tick (void)
             //
             if (threat && (is_dangerous(threat) || is_enemy(threat))) {
                 CON("Robot: A threat is nearby");
+                if (get_stamina() < get_stamina_max() / 10) {
+                    game->tick_begin("Robot needs to rest, low on stamina and not safe");
+                    robot_change_state(ROBOT_STATE_RESTING, "very low on stamina, rest");
+                    return;
+                }
             } else {
+                if (get_stamina() < get_stamina_max() / 3) {
+                    game->tick_begin("Robot needs to rest, low on stamina");
+                    robot_change_state(ROBOT_STATE_RESTING, "low on stamina, rest");
+                    return;
+                }
+
                 if (robot_ai_choose_nearby_goal()) {
                     return;
                 }
@@ -1200,6 +1214,7 @@ void Thing::robot_tick (void)
             }
 
             if (monstp->move_path.empty()) {
+                game->tick_begin("Robot move finished");
                 robot_change_state(ROBOT_STATE_IDLE, "move finished");
                 wid_actionbar_init();
                 return;
@@ -1212,12 +1227,14 @@ void Thing::robot_tick (void)
         case ROBOT_STATE_RESTING:
         {
             if (get_stamina() >= get_stamina_max() / 2) {
+                game->tick_begin("Robot has rested enough");
                 robot_change_state(ROBOT_STATE_IDLE, "rested enough");
                 return;
             }
 
             if (get_stamina()) {
                 if (threat && (is_dangerous(threat) || is_enemy(threat))) {
+                    game->tick_begin("Robot sees a nearby threat, stop resting");
                     robot_change_state(ROBOT_STATE_IDLE, "threat nearby, stop resting");
                     return;
                 }

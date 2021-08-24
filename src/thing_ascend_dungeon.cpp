@@ -22,6 +22,12 @@ bool Thing::ascend_dungeon_tick (void)
     }
 
     if (is_player()) {
+        //
+        // Robot only goes down
+        //
+        if (game->robot_mode) {
+            return false;
+        }
         dbg("Location check, ascend");
     }
 

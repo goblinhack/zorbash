@@ -124,5 +124,12 @@ bool Thing::ascend_sewer (void)
         level->timestamp_fade_in_begin = time_get_time_ms_cached();
         level->update_new_level();
     }
+
+    if (is_player()) {
+        if (game->robot_mode) {
+            game->tick_begin("Begin exploring");
+        }
+    }
+
     return true;
 }
