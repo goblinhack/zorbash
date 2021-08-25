@@ -529,6 +529,11 @@ _
                 }
 
                 //
+                // An attempt at an attack counts
+                //
+                it->add_enemy(this);
+
+                //
                 // We tried to attack, so do not move
                 //
                 return true;

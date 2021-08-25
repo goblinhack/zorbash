@@ -163,27 +163,32 @@ _
             }
         }
 
-        if (t->get_weapon_id_use_anim().ok()) {
-            if ((wait_count > wait_count_max) && !game->things_are_moving) {
-                t->con("Waiting on weapon thing longer than expected");
-            }
-            game->things_are_moving = true;
+        auto weapon_id = t->get_weapon_id_use_anim();
+        if (weapon_id.ok()) {
+            auto w = thing_find(weapon_id);
+            if (w && !w->is_dead) {
+                if ((wait_count > wait_count_max) && !game->things_are_moving) {
+                    w->con("Waiting on weapon thing owner longer than expected");
+                    t->con("Waiting on weapon thing longer than expected");
+                }
+                game->things_are_moving = true;
 
-            //
-            // Wait for animation end. Only if the thing is onscreen
-            //
-            if (t->frame_count != game->frame_count) {
                 //
-                // Make sure offscreen animation occurs.
+                // Wait for animation end. Only if the thing is onscreen
                 //
-                auto tpp = t->tp();
-                if (unlikely(tpp->gfx_animated())) {
-                    t->animate();
+                if (t->frame_count != game->frame_count) {
+                    //
+                    // Make sure offscreen animation occurs.
+                    //
+                    auto tpp = t->tp();
+                    if (unlikely(tpp->gfx_animated())) {
+                        t->animate();
+                    }
                 }
             }
         }
 
-        if (t->get_timestamp_flip_start()) {
+        if (t->get_timestamp_flip_start() && !t->is_dead) {
             if ((wait_count > wait_count_max) && !game->things_are_moving) {
                 t->con("Waiting on flipping thing longer than expected");
             }
@@ -350,8 +355,11 @@ _
     // We've finished waiting on all things, bump the game tick.
     //
     bool tick_done = game->tick_end();
-#if 0
+
     if (tick_done) {
+        things_gc_if_possible();
+
+#if 0
         //
         // For debugging consistent randomness
         //
@@ -362,8 +370,8 @@ _
             t->con("at %f,%f", t->mid_at.x, t->mid_at.y);
         } FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(this)
         CON("TICK %d hash %f random %d", game->tick_current, h, pcg_rand());
-    }
 #endif
+    }
 
     //
     // If the level has started, we can enter robot mode.
@@ -408,7 +416,6 @@ _
     // Only update robot mode if things have stopped moving so we get
     // consistent random behaviour.
     //
-
     if (!game->tick_requested.empty()) {
         return true;
     }
