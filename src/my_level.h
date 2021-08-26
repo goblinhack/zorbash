@@ -293,6 +293,21 @@ public:
     #define FOR_ALL_THINGS(level, t, x, y)                                        \
         FOR_ALL_THINGS_WALKER(level, t, x, y)                                     \
 
+    #define FOR_TMP_THINGS_WALKER(level, t, x, y)                                 \
+        if (!(level)->is_oob(x, y)) {                                             \
+            static Thingp things_to_walk[MAP_SLOTS];                              \
+            auto _vec_ = getptr(level->all_things_ptr_at[THING_GROUP_TMP], x, y); \
+            auto things_to_walk_size = _vec_->size();                             \
+            for(size_t idx = 0; idx < things_to_walk_size; idx++)                 \
+                things_to_walk[idx] = (*_vec_)[idx];                              \
+            for(size_t idx = 0; idx < things_to_walk_size; idx++) {               \
+                Thingp t;                                                         \
+                t = things_to_walk[idx];                                          \
+                verify(t);                                                        \
+
+    #define FOR_ALL_THINGS(level, t, x, y)                                        \
+        FOR_ALL_THINGS_WALKER(level, t, x, y)                                     \
+
     #define FOR_ALL_THINGS_END() } }
 
     //
@@ -358,6 +373,13 @@ public:
 
     #define FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z)              \
         FOR_ALL_THINGS_WALKER(level, t, x, y)                       \
+                if (t->z_depth != z) {                              \
+                    continue;                                       \
+                }                                                   \
+                if (t->is_hidden) { continue; }                     \
+
+    #define FOR_TMP_THINGS_AT_DEPTH(level, t, x, y, z)              \
+        FOR_TMP_THINGS_WALKER(level, t, x, y)                       \
                 if (t->z_depth != z) {                              \
                     continue;                                       \
                 }                                                   \

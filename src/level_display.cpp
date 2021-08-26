@@ -191,6 +191,10 @@ void Level::display_map_things (int fbo,
                 FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) {
                     t->blit(fbo);
                 } FOR_ALL_THINGS_END()
+
+                FOR_TMP_THINGS_AT_DEPTH(this, t, x, y, z) {
+                    t->blit(fbo);
+                } FOR_ALL_THINGS_END()
             }
         }
     }
@@ -261,6 +265,10 @@ void Level::display_map_fg2_things (int fbo,
                     if (unlikely(tpp->gfx_animated())) {
                         t->animate();
                     }
+                } FOR_ALL_THINGS_END()
+
+                FOR_TMP_THINGS_AT_DEPTH(this, t, x, y, z) {
+                    t->blit(fbo);
                 } FOR_ALL_THINGS_END()
             }
         }
