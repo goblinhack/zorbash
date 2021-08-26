@@ -318,13 +318,15 @@ std::ostream& operator<<(std::ostream &out, Bits<Levelp & > const my)
     }
 
     uint32_t csum = 0;
-    for (auto p : my.t->all_things) {
-        auto t = p.second;
-        if (t->is_cursor()) {
-            continue;
+    FOR_ALL_THING_GROUPS(group) {
+        for (auto p : my.t->all_things[group]) {
+            auto t = p.second;
+            if (t->is_cursor()) {
+                continue;
+            }
+            csum += t->mid_at.x + t->mid_at.y + t->id.id;
+            // t->con("SAVE %f %f %d", t->mid_at.x, t->mid_at.y, t->id.id);
         }
-        csum += t->mid_at.x + t->mid_at.y + t->id.id;
-        // t->con("SAVE %f %f %d", t->mid_at.x, t->mid_at.y, t->id.id);
     }
     out << bits(csum);
 
@@ -476,19 +478,21 @@ std::ostream& operator<<(std::ostream &out, Bits<Levelp & > const my)
     /* world_at */              out << bits(my.t->world_at);
 
     LOG("DGN: Save things");
-    for (auto x = 0; x < MAP_WIDTH; x++) {
-        for (auto y = 0; y < MAP_HEIGHT; y++) {
-            for (auto slot = 0; slot < MAP_SLOTS; slot++) {
-                auto id = get(my.t->all_things_id_at, x, y, slot);
-                if (id.ok()) {
-                    const Thingp t = my.t->thing_find(id);
-                    if (!t) {
-                        continue;
+    FOR_ALL_THING_GROUPS(group) {
+        for (auto x = 0; x < MAP_WIDTH; x++) {
+            for (auto y = 0; y < MAP_HEIGHT; y++) {
+                for (auto slot = 0; slot < MAP_SLOTS; slot++) {
+                    auto id = get(my.t->all_things_id_at[group], x, y, slot);
+                    if (id.ok()) {
+                        const Thingp t = my.t->thing_find(id);
+                        if (!t) {
+                            continue;
+                        }
+                        if (DEBUG4) {
+                            t->log("Save");
+                        }
+                        out << bits(t);
                     }
-                    if (DEBUG4) {
-                        t->log("Save");
-                    }
-                    out << bits(t);
                 }
             }
         }

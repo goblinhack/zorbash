@@ -184,7 +184,7 @@ for (auto i = 0; i < 1000; i++) {
 Tpp tp_random_monst_easy (void)
 {_
 #if 0
-CON("TODO using debug monster");
+CON("TMP using debug monster");
 return (tp_find("skeleton_fire"));
 #endif
     return tp_random_monst();

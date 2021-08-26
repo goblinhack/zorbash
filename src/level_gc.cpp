@@ -15,71 +15,73 @@
 
 void Level::things_gc (bool force)
 {
-    if (all_things_to_be_destroyed.empty()) {
-        return;
-    }
-
-    if (force) {
-        dbg("Begin forced thing garbage collection");
-    } else {
-        dbg("Begin thing garbage collection");
-    }
-_
-    for (auto it = all_things_to_be_destroyed.cbegin(), next_it = it;
-         it != all_things_to_be_destroyed.cend(); it = next_it) {
-	++next_it;
-
-        auto id = it->first;
-        auto t = thing_find(id);
-        if (!t) {
-            ERR("Thing %08" PRIx32 " not found to garbage collect", id.id);
+    FOR_ALL_THING_GROUPS(group) {
+        if (all_things_to_be_destroyed[group].empty()) {
             continue;
         }
 
-        if (!force) {
-            //
-            // Allow the particles to finish
-            //
-            if (t->has_internal_particle) {
-                if (DEBUG1) {
-                    t->log("Thing garbage collect delayed due to internal particle");
-                }
-                continue;
-            }
-
-            if (t->has_external_particle) {
-                if (DEBUG1) {
-                    t->log("Thing garbage collect delayed due to external particle");
-                }
-                continue;
-            }
-
-            if (t->has_laser) {
-                if (DEBUG1) {
-                    t->log("Thing garbage collect delayed due to laser");
-                }
-                continue;
-            }
-
-            if (t->has_projectile) {
-                if (DEBUG1) {
-                    t->log("Thing garbage collect delayed due to projectile");
-                }
-                continue;
-            }
-	}
-
-	all_things_to_be_destroyed.erase(it);
-
-        if (t->is_monst()) {
-            monst_count--;
+        if (force) {
+            dbg("Begin forced thing garbage collection");
+        } else {
+            dbg("Begin thing garbage collection");
         }
+    _
+        for (auto it = all_things_to_be_destroyed[group].cbegin(), next_it = it;
+            it != all_things_to_be_destroyed[group].cend(); it = next_it) {
+            ++next_it;
 
-        if (DEBUG1) {
-            t->log("Thing garbage collect");
+            auto id = it->first;
+            auto t = thing_find(id);
+            if (!t) {
+                ERR("Thing %08" PRIx32 " not found to garbage collect", id.id);
+                continue;
+            }
+
+            if (!force) {
+                //
+                // Allow the particles to finish
+                //
+                if (t->has_internal_particle) {
+                    if (DEBUG1) {
+                        t->log("Thing garbage collect delayed due to internal particle");
+                    }
+                    continue;
+                }
+
+                if (t->has_external_particle) {
+                    if (DEBUG1) {
+                        t->log("Thing garbage collect delayed due to external particle");
+                    }
+                    continue;
+                }
+
+                if (t->has_laser) {
+                    if (DEBUG1) {
+                        t->log("Thing garbage collect delayed due to laser");
+                    }
+                    continue;
+                }
+
+                if (t->has_projectile) {
+                    if (DEBUG1) {
+                        t->log("Thing garbage collect delayed due to projectile");
+                    }
+                    continue;
+                }
+            }
+
+            all_things_to_be_destroyed[group].erase(it);
+
+            if (t->is_monst()) {
+                monst_count--;
+            }
+
+            if (DEBUG1) {
+                t->log("Thing garbage collect");
+            }
+
+            delete t;
         }
-
-        delete t;
     }
 
     dbg("End thing garbage collection");

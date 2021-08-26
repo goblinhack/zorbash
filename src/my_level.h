@@ -124,10 +124,16 @@ public:
     point                      map_tl;        // visible map tl
     point                      pixel_map_at;  // map pixel location
 
+#define MAX_THING_GROUPS 2
+#define THING_GROUP_ALL 0
+#define THING_GROUP_TMP 1
+#define FOR_ALL_THING_GROUPS(_group_) for (auto _group_ = THING_GROUP_ALL; _group_ < MAX_THING_GROUPS; _group_++)
+
     //
     // Everything thing on the level. Not all in the game, just this level.
     //
-    std::map<ThingId, Thingp> all_things {};
+    std::array<
+        std::map<ThingId, Thingp>, MAX_THING_GROUPS > all_things {};
 
     //
     // For all things that move, like monsters, or those that do not, like
@@ -135,32 +141,43 @@ public:
     // walls. Omits things like floors, corridors, the grid; those that
     // generally do nothing or are hidden.
     //
-    std::map<ThingId, Thingp> all_things_of_interest {};
+    std::array<
+        std::map<ThingId, Thingp>, MAX_THING_GROUPS > all_things_of_interest {};
+
     //
     // These are used to add/remove to all_things_of_interest when walking
     // is done; aboids the map becoming invalidated due to changes.
     //
     bool all_things_of_interest_walk_in_progress {};
-    std::map<ThingId, Thingp> all_things_of_interest_pending_add {};
-    std::map<ThingId, Thingp> all_things_of_interest_pending_remove {};
+    std::array<
+        std::map<ThingId, Thingp>, MAX_THING_GROUPS > 
+            all_things_of_interest_pending_add {};
+
+    std::array<
+        std::map<ThingId, Thingp>, MAX_THING_GROUPS > 
+            all_things_of_interest_pending_remove {};
 
     //
     // All things that are to be destroyed
     //
-    std::map<ThingId, Thingp> all_things_to_be_destroyed {};
+    std::array<
+        std::map<ThingId, Thingp>, MAX_THING_GROUPS > 
+            all_things_to_be_destroyed {};
 
     //
     // All thing IDs
     //
     std::array<
-      std::array<
-        std::array<ThingId, MAP_SLOTS>, MAP_HEIGHT>, MAP_WIDTH>
-          all_things_id_at {};
+        std::array<
+            std::array<
+                std::array<ThingId, MAP_SLOTS>, MAP_HEIGHT>, MAP_WIDTH>,MAX_THING_GROUPS >
+                    all_things_id_at {};
 
     std::array<
-      std::array<
-        std::vector<Thingp>, MAP_HEIGHT>, MAP_WIDTH>
-          all_things_ptr_at {};
+        std::array<
+            std::array<
+                std::vector<Thingp>, MAP_HEIGHT>, MAP_WIDTH>, MAX_THING_GROUPS >
+                    all_things_ptr_at {};
 
     //
     // This is what we've lit on this level, so we can restore it
@@ -252,97 +269,83 @@ public:
     Level(void);
     ~Level(void);
 
-    void remove_thing(int x, int y, ThingId id);
-    void remove_thing(point p, ThingId id);
+    void remove_thing(int x, int y, ThingId id, int group);
+    void remove_thing(point p, ThingId id, int group);
 
-    void put_thing(int x, int y, ThingId id);
-    void put_thing(point p, ThingId id);
+    void put_thing(int x, int y, ThingId id, int group);
+    void put_thing(point p, ThingId id, int group);
 
     #define JOIN1(X,Y) X##Y
     #define JOIN(X,Y) JOIN1(X,Y)
 
-    #define FOR_ALL_THINGS_WALKER(level, t, x, y)                   \
-        if (!(level)->is_oob(x, y)) {                               \
-            static Thingp things_to_walk[MAP_SLOTS];                \
-            auto _vec_ = getptr(level->all_things_ptr_at, x, y);    \
-            auto things_to_walk_size = _vec_->size();               \
-            for(size_t idx = 0; idx < things_to_walk_size; idx++)   \
-                things_to_walk[idx] = (*_vec_)[idx];                \
-            for(size_t idx = 0; idx < things_to_walk_size; idx++) { \
-                Thingp t;                                           \
-                t = things_to_walk[idx];                            \
-                verify(t);                                          \
+    #define FOR_ALL_THINGS_WALKER(level, t, x, y)                                 \
+        if (!(level)->is_oob(x, y)) {                                             \
+            static Thingp things_to_walk[MAP_SLOTS];                              \
+            auto _vec_ = getptr(level->all_things_ptr_at[THING_GROUP_ALL], x, y); \
+            auto things_to_walk_size = _vec_->size();                             \
+            for(size_t idx = 0; idx < things_to_walk_size; idx++)                 \
+                things_to_walk[idx] = (*_vec_)[idx];                              \
+            for(size_t idx = 0; idx < things_to_walk_size; idx++) {               \
+                Thingp t;                                                         \
+                t = things_to_walk[idx];                                          \
+                verify(t);                                                        \
 
-    #define FOR_ALL_THINGS(level, t, x, y)                          \
-        FOR_ALL_THINGS_WALKER(level, t, x, y)                       \
+    #define FOR_ALL_THINGS(level, t, x, y)                                        \
+        FOR_ALL_THINGS_WALKER(level, t, x, y)                                     \
 
     #define FOR_ALL_THINGS_END() } }
 
     //
     // Things that can move or fall or catch fire etc...
     //
-    #define FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL(level, t) {       \
-        level->all_things_of_interest_walk_in_progress = true;      \
-        auto c = level->all_things_of_interest;                     \
-        auto i = level->all_things_of_interest.begin();             \
-        while (i != level->all_things_of_interest.end()) {          \
-            auto t = i->second;                                     \
-            i++;                                                    \
-            if (t->is_hidden) {                                     \
-                t->set_tick_last_did_something(game->tick_current); \
-                continue;                                           \
-            }                                                       \
-                                                                    \
-            verify(t);                                              \
+    #define FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL(level, t) {                \
+        level->all_things_of_interest_walk_in_progress = true;               \
+        auto c =                                                             \
+            level->all_things_of_interest[THING_GROUP_ALL];                  \
+        auto i =                                                             \
+            level->all_things_of_interest[THING_GROUP_ALL].begin();          \
+        while (i != level->all_things_of_interest[THING_GROUP_ALL].end()) {  \
+            auto t = i->second;                                              \
+            i++;                                                             \
+            if (t->is_hidden) {                                              \
+                t->set_tick_last_did_something(game->tick_current);          \
+                continue;                                                    \
+            }                                                                \
+                                                                             \
+            verify(t);                                                       \
 
-    #define FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL_END(level)        \
-            if (i == level->all_things_of_interest.end()) {         \
-                break;                                              \
-            }                                                       \
-        }                                                           \
-        level->all_things_of_interest_walk_in_progress = false;     \
+    #define FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL_END(level)                 \
+            if (i == level->all_things_of_interest[THING_GROUP_ALL].end()) { \
+                break;                                                       \
+            }                                                                \
+        }                                                                    \
+        level->all_things_of_interest_walk_in_progress = false;              \
     }
-
-#if 0
-            {                                                       \
-                bool got = false;                                   \
-                for (auto p : level->all_things_of_interest) {      \
-                    if (p.second == t) {                            \
-                        got = true;                                 \
-                        break;                                      \
-                    }                                               \
-                }                                                   \
-                if (!got) {                                         \
-                    t->die("Found thing not on list");              \
-                }                                                   \
-            }                                                       \
-
-#endif
 
     //
     // Things that make decisions or have a lifespan
     //
-    #define FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL(level, t) {       \
-        level->all_things_of_interest_walk_in_progress = true;      \
-        auto c = level->all_things_of_interest;                     \
-        auto i = level->all_things_of_interest.begin();             \
-        while (i != level->all_things_of_interest.end()) {          \
-            auto t = i->second;                                     \
-            i++;                                                    \
-            if (t->is_hidden) {                                     \
-                if (!t->is_tickable()) { /* e.g. carried wand */    \
-                    continue;                                       \
-                }                                                   \
-            }                                                       \
-                                                                    \
-            verify(t);                                              \
+    #define FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL(level, t) {                \
+        level->all_things_of_interest_walk_in_progress = true;               \
+        auto c = level->all_things_of_interest[THING_GROUP_ALL];             \
+        auto i = level->all_things_of_interest[THING_GROUP_ALL].begin();     \
+        while (i != level->all_things_of_interest[THING_GROUP_ALL].end()) {  \
+            auto t = i->second;                                              \
+            i++;                                                             \
+            if (t->is_hidden) {                                              \
+                if (!t->is_tickable()) { /* e.g. carried wand */             \
+                    continue;                                                \
+                }                                                            \
+            }                                                                \
+                                                                             \
+            verify(t);                                                       \
 
-    #define FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL_END(level)        \
-            if (i == level->all_things_of_interest.end()) {         \
-                break;                                              \
-            }                                                       \
-        }                                                           \
-        level->all_things_of_interest_walk_in_progress = false;     \
+    #define FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL_END(level)                 \
+            if (i == level->all_things_of_interest[THING_GROUP_ALL].end()) { \
+                break;                                                       \
+            }                                                                \
+        }                                                                    \
+        level->all_things_of_interest_walk_in_progress = false;              \
     }
 
     //
@@ -368,7 +371,7 @@ public:
     //
     // Things that move around
     //
-    #define FOR_ALL_THINGS_THAT_DO_STUFF(level, t, x, y)                 \
+    #define FOR_ALL_THINGS_THAT_DO_STUFF(level, t, x, y)            \
         FOR_ALL_THINGS_WALKER(level, t, x, y)                       \
                 if (t->is_the_grid) { continue; }                   \
                 if (t->is_hidden) { continue; }                     \
@@ -380,7 +383,7 @@ public:
     // Things that move around and things that do not, but are interesting
     // like food or walls that can be destroyed
     //
-    #define FOR_ALL_THINGS_THAT_INTERACT(level, t, x, y)              \
+    #define FOR_ALL_THINGS_THAT_INTERACT(level, t, x, y)            \
         FOR_ALL_THINGS_WALKER(level, t, x, y)                       \
                 if (t->is_the_grid) { continue; }                   \
                 if (t->is_hidden) { continue; }                     \

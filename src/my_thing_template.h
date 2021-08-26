@@ -301,7 +301,6 @@ private:
     int _is_rrr6 {};
     int _is_rrr60 {};
     int _is_rrr61 {};
-    int _is_rrr62 {};
     int _is_rrr7 {};
     int _is_rrr8 {};
     int _is_rrr9 {};
@@ -324,6 +323,7 @@ private:
     int _is_throwable {};
     int _is_thrown_automatically_when_chosen {};
     int _is_tickable {}; // e.g. a monst or player or something moveable
+    int _is_tmp_thing {};
     int _is_torch {};
     int _is_treasure_class_a {};
     int _is_treasure_class_b {};
@@ -762,7 +762,6 @@ public:
     int is_rrr5(void) const;
     int is_rrr60(void) const;
     int is_rrr61(void) const;
-    int is_rrr62(void) const;
     int is_rrr6(void) const;
     int is_rrr7(void) const;
     int is_rrr8(void) const;
@@ -786,6 +785,7 @@ public:
     int is_throwable(void) const;
     int is_thrown_automatically_when_chosen(void) const;
     int is_tickable(void) const;
+    int is_tmp_thing(void) const;
     int is_torch(void) const;
     int is_treasure_class_a(void) const;
     int is_treasure_class_b(void) const;
@@ -1089,7 +1089,6 @@ public:
     void set_is_rrr5(int);
     void set_is_rrr60(int);
     void set_is_rrr61(int);
-    void set_is_rrr62(int);
     void set_is_rrr6(int);
     void set_is_rrr7(int);
     void set_is_rrr8(int);
@@ -1113,6 +1112,7 @@ public:
     void set_is_throwable(int);
     void set_is_thrown_automatically_when_chosen(int);
     void set_is_tickable(int);
+    void set_is_tmp_thing(int);
     void set_is_torch(int);
     void set_is_treasure_class_a(int);
     void set_is_treasure_class_b(int);

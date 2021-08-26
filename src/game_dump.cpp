@@ -22,16 +22,18 @@ void Level::dump (std::string pfx, std::ostream &out)
     out << pfx << "timestamp_dungeon_created " << timestamp_dungeon_created << std::endl;
 
     out << pfx << "all_things" << std::endl;
-    for (auto x = 0; x < MAP_WIDTH; ++x) {
-        for (auto y = 0; y < MAP_HEIGHT; ++y) {
-            for (auto z = 0; z < MAP_SLOTS; ++z) {
-                auto id = get(all_things_id_at, x, y, z);
-                if (id.ok()) {
-                    auto t = thing_find(id);
-                    if (!t) {
-                        continue;
+    FOR_ALL_THING_GROUPS(group) {
+        for (auto x = 0; x < MAP_WIDTH; ++x) {
+             for (auto y = 0; y < MAP_HEIGHT; ++y) {
+                 for (auto z = 0; z < MAP_SLOTS; ++z) {
+                    auto id = get(all_things_id_at[group], x, y, z);
+                    if (id.ok()) {
+                        auto t = thing_find(id);
+                        if (!t) {
+                            continue;
+                        }
+                        t->log("Dump");
                     }
-                    t->log("Dump");
                 }
             }
         }

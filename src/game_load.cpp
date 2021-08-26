@@ -457,59 +457,63 @@ _
     //
     // Operate on a copy, not live data that might change as we add things
     //
-    auto ids = my.t->all_things_id_at;
+    FOR_ALL_THING_GROUPS(group) {
+        auto ids = my.t->all_things_id_at[group];
 
-    for (auto x = 0; x < MAP_WIDTH; x++) {
-        for (auto y = 0; y < MAP_HEIGHT; y++) {
-            for (auto slot = 0; slot < MAP_SLOTS; slot++) {
-                auto id = get(ids, x, y, slot);
-                if (id.ok()) {
-                    auto t = new Thing();
-                    in >> bits(t);
+        for (auto x = 0; x < MAP_WIDTH; x++) {
+            for (auto y = 0; y < MAP_HEIGHT; y++) {
+                for (auto slot = 0; slot < MAP_SLOTS; slot++) {
+                    auto id = get(ids, x, y, slot);
+                    if (id.ok()) {
+                        auto t = new Thing();
+                        in >> bits(t);
 
-                    if (game_load_error != "") {
-                        return in;
-                    }
-
-                    //
-                    // Cannot use t->log here as thing is no inited yet
-                    //
-                    t->level = l;
-                    if (t->id != id) {
-                        game_load_error =
-                          string_sprintf("found different thing than expected at map position %d,%d slot %d: %x expected %x",
-                             x, y, slot, t->id.id, id.id);
-                        return in;
-                    }
-
-                    t->reinit();
-                    //t->con("LOADED %f %f %d", t->mid_at.x, t->mid_at.y, t->id.id);
-
-                    // CON("From save file  : %s", t->debug_str.c_str());
-                    // CON("Newly created as: %s", t->to_dbg_string().c_str());
-#ifdef ENABLE_DEBUG_THING_SER
-                    if (t->to_dbg_string() != t->debug_str) {
-                        if (!t->is_cursor()) {
-                            CON("From save file  : %s", t->debug_str.c_str());
-                            CON("Newly created as: %s", t->to_dbg_string().c_str());
-                            game_load_error = "loaded thing is corrupt";
+                        if (game_load_error != "") {
                             return in;
                         }
-                    }
+
+                        //
+                        // Cannot use t->log here as thing is no inited yet
+                        //
+                        t->level = l;
+                        if (t->id != id) {
+                            game_load_error =
+                            string_sprintf("found different thing than expected at map position %d,%d slot %d: %x expected %x",
+                                x, y, slot, t->id.id, id.id);
+                            return in;
+                        }
+
+                        t->reinit();
+                        //t->con("LOADED %f %f %d", t->mid_at.x, t->mid_at.y, t->id.id);
+
+                        // CON("From save file  : %s", t->debug_str.c_str());
+                        // CON("Newly created as: %s", t->to_dbg_string().c_str());
+#ifdef ENABLE_DEBUG_THING_SER
+                        if (t->to_dbg_string() != t->debug_str) {
+                            if (!t->is_cursor()) {
+                                CON("From save file  : %s", t->debug_str.c_str());
+                                CON("Newly created as: %s", t->to_dbg_string().c_str());
+                                game_load_error = "loaded thing is corrupt";
+                                return in;
+                            }
+                        }
 #endif
+                    }
                 }
             }
         }
     }
 
     uint32_t csum = 0;
-    for (auto p : l->all_things) {
-        auto t = p.second;
-        if (t->is_cursor()) {
-            continue;
+    FOR_ALL_THING_GROUPS(group) {
+        for (auto p : l->all_things[group]) {
+            auto t = p.second;
+            if (t->is_cursor()) {
+                continue;
+            }
+            csum += t->mid_at.x + t->mid_at.y + t->id.id;
+            //t->con("LOAD %f %f %d", t->mid_at.x, t->mid_at.y, t->id.id);
         }
-        csum += t->mid_at.x + t->mid_at.y + t->id.id;
-        //t->con("LOAD %f %f %d", t->mid_at.x, t->mid_at.y, t->id.id);
     }
 
     if (csum != csum_in) {

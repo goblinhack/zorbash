@@ -34,21 +34,29 @@ bool Level::tick (void)
     // A new game event has occurred?
     //
     if (!game->tick_requested.empty()) {
+        //
+        // For things that might have been killed at the start of the level,
+        // like collecting items
+        //
+        things_gc_if_possible();
+
         game->tick_begin_now();
 
         FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL(this, t) {
             t->tick();
         } FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL_END(this)
 
-        for (auto& i : all_things_of_interest_pending_remove) {
-            all_things_of_interest.erase(i.first);
-        }
-        all_things_of_interest_pending_remove = {};
+        FOR_ALL_THING_GROUPS(group) {
+            for (auto& i : all_things_of_interest_pending_remove[group]) {
+                all_things_of_interest[group].erase(i.first);
+            }
+            all_things_of_interest_pending_remove[group] = {};
 
-        for (auto& i : all_things_of_interest_pending_add) {
-            all_things_of_interest.insert(i);
+            for (auto& i : all_things_of_interest_pending_add[group]) {
+                all_things_of_interest[group].insert(i);
+            }
+            all_things_of_interest_pending_add[group] = {};
         }
-        all_things_of_interest_pending_add = {};
     }
 
     FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL(this, t) {
@@ -341,15 +349,17 @@ _
         t->location_check();
     } FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL_END(this)
 
-    for (auto& i : all_things_of_interest_pending_remove) {
-        all_things_of_interest.erase(i.first);
-    }
-    all_things_of_interest_pending_remove = {};
+    FOR_ALL_THING_GROUPS(group) {
+        for (auto& i : all_things_of_interest_pending_remove[group]) {
+            all_things_of_interest[group].erase(i.first);
+        }
+        all_things_of_interest_pending_remove[group] = {};
 
-    for (auto& i : all_things_of_interest_pending_add) {
-        all_things_of_interest.insert(i);
+        for (auto& i : all_things_of_interest_pending_add[group]) {
+            all_things_of_interest[group].insert(i);
+        }
+        all_things_of_interest_pending_add[group] = {};
     }
-    all_things_of_interest_pending_add = {};
 _
     //
     // We've finished waiting on all things, bump the game tick.
@@ -449,8 +459,10 @@ void Level::sanity_check (void)
 
 void Level::update_all_ticks (void)
 {_
-    for (auto& i : all_things_of_interest) {
-        auto t = i.second;
-        t->update_tick();
+    FOR_ALL_THING_GROUPS(group) {
+        for (auto& i : all_things_of_interest[group]) {
+            auto t = i.second;
+            t->update_tick();
+        }
     }
 }

@@ -104,7 +104,6 @@ static uint8_t game_main_menu_config (Widp w, int32_t x, int32_t y, uint32_t but
 
 static uint8_t game_menu_slow_start (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
-    CON("TODO slow start");
     game_menu_quick_start(nullptr, 0, 0, 0);
     return false;
 }

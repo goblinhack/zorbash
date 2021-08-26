@@ -116,12 +116,14 @@ void Thing::kill_spawned (Thingp killer)
     //
     // Slow, but not used too often
     //
-    for (auto p : level->all_things) {
-        auto spawner = p.second;
-        auto o = spawner->get_immediate_spawned_owner();
-        if (o && (o == this)) {
-            spawner->remove_spawner_owner();
-            spawner->dead(killer, "its spawner died");
+    FOR_ALL_THING_GROUPS(group) {
+        for (auto p : level->all_things[group]) {
+            auto spawner = p.second;
+            auto o = spawner->get_immediate_spawned_owner();
+            if (o && (o == this)) {
+                spawner->remove_spawner_owner();
+                spawner->dead(killer, "its spawner died");
+            }
         }
     }
 }
@@ -139,11 +141,13 @@ void Thing::unleash_spawners_things (void)
     //
     // Slow, but not used too often
     //
-    for (auto p : level->all_things) {
-        auto spawner = p.second;
-        auto o = spawner->get_immediate_spawned_owner();
-        if (o && (o == this)) {
-            spawner->remove_spawner_owner();
+    FOR_ALL_THING_GROUPS(group) {
+        for (auto p : level->all_things[group]) {
+            auto spawner = p.second;
+            auto o = spawner->get_immediate_spawned_owner();
+            if (o && (o == this)) {
+                spawner->remove_spawner_owner();
+            }
         }
     }
 }

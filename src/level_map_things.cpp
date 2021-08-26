@@ -9,7 +9,7 @@
 #include "my_ptrcheck.h"
 #include "my_array_bounds_check.h"
 
-void Level::put_thing (int x, int y, ThingId id)
+void Level::put_thing (int x, int y, ThingId id, int group)
 {_
     auto t = thing_find(id);
     if (!t) {
@@ -36,7 +36,7 @@ void Level::put_thing (int x, int y, ThingId id)
 do_retry:
     free_slot = -1;
     for (auto slot = 0; slot < MAP_SLOTS; slot++) {
-        auto idp = &getref(all_things_id_at, x, y, slot);
+        auto idp = &getref(all_things_id_at[group], x, y, slot);
         if (idp->id == id.id) {
             if (DEBUG5) {
                 t->log("Found %08" PRIx32 " at %u,%u slot %u", id.id, x, y, slot);
@@ -50,11 +50,11 @@ do_retry:
     }
 
     if (free_slot != -1) {
-        auto idp = &getref(all_things_id_at, x, y, free_slot);
-        all_things_ptr_at[x][y].push_back(t);
+        auto idp = &getref(all_things_id_at[group], x, y, free_slot);
+        all_things_ptr_at[group][x][y].push_back(t);
 
-        sort(all_things_ptr_at[x][y].begin(),
-             all_things_ptr_at[x][y].end(),
+        sort(all_things_ptr_at[group][x][y].begin(),
+             all_things_ptr_at[group][x][y].end(),
              [](const Thingp &a, const Thingp &b) -> bool {
                return a->z_prio() < b->z_prio();
              });
@@ -73,7 +73,7 @@ do_retry:
     if (retry < MAP_SLOTS) {
         t->log("Out of thing slots at map (%d,%d) for put of %08" PRIx32 ", try to cleanup", x, y, id.id);
         for (auto slot = 0; slot < MAP_SLOTS; slot++) {
-            auto idp = &getref(all_things_id_at, x, y, slot);
+            auto idp = &getref(all_things_id_at[group], x, y, slot);
             if (idp->id) {
                 auto t = thing_find(*idp);
                 if (!t) {
@@ -93,12 +93,12 @@ do_retry:
     t->log("Out of thing slots at map (%d,%d) for put of %08" PRIx32 ", see below:", x, y, id.id);
 
     for (auto slot = 0; slot < MAP_SLOTS; slot++) {
-        auto idp = &getref(all_things_id_at, x, y, slot);
+        auto idp = &getref(all_things_id_at[group], x, y, slot);
         LOG("- slot %u %08" PRIx32 "", slot, idp->id);
     }
 
     for (auto slot = 0; slot < MAP_SLOTS; slot++) {
-        auto idp = &getref(all_things_id_at, x, y, slot);
+        auto idp = &getref(all_things_id_at[group], x, y, slot);
         if (idp->id) {
             auto t = thing_find(*idp);
             if (!t) {
@@ -112,12 +112,12 @@ do_retry:
     t->err("Out of thing slots at map (%d,%d) for put of %08" PRIx32 "", x, y, id.id);
 }
 
-void Level::put_thing (point p, ThingId id)
+void Level::put_thing (point p, ThingId id, int group)
 {_
-    put_thing(p.x, p.y, id);
+    put_thing(p.x, p.y, id, group);
 }
 
-void Level::remove_thing (int x, int y, ThingId id)
+void Level::remove_thing (int x, int y, ThingId id, int group)
 {_
     auto t = thing_find(id);
     if (!t) {
@@ -131,10 +131,10 @@ void Level::remove_thing (int x, int y, ThingId id)
     }
 
     for (auto slot = 0; slot < MAP_SLOTS; slot++) {
-        auto idp = &getref(all_things_id_at, x, y, slot);
+        auto idp = &getref(all_things_id_at[group], x, y, slot);
         if (idp->id == id.id) {
             idp->id = 0;
-            auto v = &all_things_ptr_at[x][y];
+            auto v = &all_things_ptr_at[group][x][y];
             auto b = v->begin();
             auto e = v->end();
 
@@ -166,7 +166,7 @@ void Level::remove_thing (int x, int y, ThingId id)
             {
                 for (auto x = 0; x < MAP_WIDTH; x++) {
                     for (auto y = 0; y < MAP_HEIGHT; y++) {
-                        auto v = &all_things_ptr_at[x][y];
+                        auto v = &all_things_ptr_at[group][x][y];
                         auto b = v->begin();
                         auto e = v->end();
 
@@ -186,7 +186,7 @@ void Level::remove_thing (int x, int y, ThingId id)
     t->err("Did not find thing in any slot at map (%d,%d) for remove of %08" PRIx32 "", x, y, id.id);
 }
 
-void Level::remove_thing (point p, ThingId id)
+void Level::remove_thing (point p, ThingId id, int group)
 {_
-    remove_thing(p.x, p.y, id);
+    remove_thing(p.x, p.y, id, group);
 }

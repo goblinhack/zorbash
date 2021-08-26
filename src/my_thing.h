@@ -385,6 +385,7 @@ public:
     const std::string& text_title(void) const;
     const std::string& text_unused(void) const;
     const std::string& title(void) const;
+    int get_group (void);
     const std::string& weapon_carry_anim(void) const;
     const ThingId& get_immediate_minion_owner_id (void) const;
     const ThingId& get_immediate_owner_id (void) const;
@@ -842,7 +843,7 @@ public:
     int is_rrr5(void) const;
     int is_rrr60(void) const;
     int is_rrr61(void) const;
-    int is_rrr62(void) const;
+    int is_tmp_thing(void) const;
     int is_debug_type(void) const;
     int is_hittable(void) const;
     int is_alive_on_end_of_anim(void) const;

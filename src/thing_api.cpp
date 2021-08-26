@@ -276,7 +276,6 @@ int Thing::is_rrr59(void) const                                         {_ retur
 int Thing::is_rrr5(void) const                                          {_ return (tp()->is_rrr5()); }
 int Thing::is_rrr60(void) const                                         {_ return (tp()->is_rrr60()); }
 int Thing::is_rrr61(void) const                                         {_ return (tp()->is_rrr61()); }
-int Thing::is_rrr62(void) const                                         {_ return (tp()->is_rrr62()); }
 int Thing::is_rrr6(void) const                                          {_ return (tp()->is_rrr6()); }
 int Thing::is_rrr7(void) const                                          {_ return (tp()->is_rrr7()); }
 int Thing::is_rrr8(void) const                                          {_ return (tp()->is_rrr8()); }
@@ -299,6 +298,7 @@ int Thing::is_target_select_automatically_when_chosen(void) const       {_ retur
 int Thing::is_throwable(void) const                                     {_ return (tp()->is_throwable()); }
 int Thing::is_thrown_automatically_when_chosen(void) const              {_ return (tp()->is_thrown_automatically_when_chosen()); }
 int Thing::is_tickable(void) const                                      {_ return (tp()->is_tickable()); }
+int Thing::is_tmp_thing(void) const                                     {_ return (tp()->is_tmp_thing()); }
 int Thing::is_torch(void) const                                         {_ return (tp()->is_torch()); }
 int Thing::is_treasure_class_a(void) const                              {_ return (tp()->is_treasure_class_a()); }
 int Thing::is_treasure_class_b(void) const                              {_ return (tp()->is_treasure_class_b()); }
@@ -3827,4 +3827,12 @@ const std::string &Thing::title (void) const
     } else {
         return g_opt_player_name;
     }
+}
+
+int Thing::get_group (void)
+{
+    if (is_tmp_thing()) {
+        return THING_GROUP_TMP;
+    }
+    return THING_GROUP_ALL;
 }

@@ -164,11 +164,13 @@ void Thing::remove_all_references ()
         //
         // Slow, but not used too often
         //
-        for (auto p : level->all_things) {
-            auto t = p.second;
-            auto o = t->get_immediate_owner();
-            if (o == this) {
-                t->remove_owner();
+        FOR_ALL_THING_GROUPS(group) {
+            for (auto p : level->all_things[group]) {
+                auto t = p.second;
+                auto o = t->get_immediate_owner();
+                if (o == this) {
+                    t->remove_owner();
+                }
             }
         }
     }
@@ -179,11 +181,13 @@ void Thing::remove_all_references ()
         //
         // Slow, but not used too often
         //
-        for (auto p : level->all_things) {
-            auto t = p.second;
-            auto o = t->get_immediate_minion_owner();
-            if (o == this) {
-                t->remove_minion_owner();
+        FOR_ALL_THING_GROUPS(group) {
+            for (auto p : level->all_things[group]) {
+                auto t = p.second;
+                auto o = t->get_immediate_minion_owner();
+                if (o == this) {
+                    t->remove_minion_owner();
+                }
             }
         }
     }
@@ -194,48 +198,53 @@ void Thing::remove_all_references ()
         //
         // Slow, but not used too often
         //
-        for (auto p : level->all_things) {
-            auto t = p.second;
-            auto o = t->get_immediate_spawned_owner();
-            if (o == this) {
-                t->remove_spawner_owner();
+        FOR_ALL_THING_GROUPS(group) {
+            for (auto p : level->all_things[group]) {
+                auto t = p.second;
+                auto o = t->get_immediate_spawned_owner();
+                if (o == this) {
+                    t->remove_spawner_owner();
+                }
             }
         }
     }
 
     if (DEBUG4) {
-        for (auto p : level->all_things) {
-            auto t = p.second;
-            if (!t->monstp) {
-                continue;
-            }
-            if (t == this) {
-                continue;
-            }
-            if (id == t->monstp->on_fire_id_anim) {
-                err("thing is still attached to (on fire) %s", t->to_string().c_str());
-            }
-            if (id == t->monstp->owner_id) {
-                err("thing is still attached to (owner) %s", t->to_string().c_str());
-            }
-            if (id == t->monstp->minion_owner_id) {
-                err("thing is still attached to (minion owner) %s", t->to_string().c_str());
-            }
-            if (id == t->monstp->spawner_owner_id) {
-                err("thing is still attached to (spawner owner) %s", t->to_string().c_str());
-            }
-            if (id == t->monstp->weapon_id) {
-                err("thing is still attached to (weapon) %s", t->to_string().c_str());
-            }
-            if (id == t->monstp->weapon_id_carry_anim) {
-                err("thing is still attached to (weapon carry) %s", t->to_string().c_str());
-            }
-            if (id == t->monstp->weapon_id_use_anim) {
-                err("thing is still attached to (weapon use) %s", t->to_string().c_str());
+        FOR_ALL_THING_GROUPS(group) {
+            for (auto p : level->all_things[group]) {
+                auto t = p.second;
+                if (!t->monstp) {
+                    continue;
+                }
+                if (t == this) {
+                    continue;
+                }
+                if (id == t->monstp->on_fire_id_anim) {
+                    err("thing is still attached to (on fire) %s", t->to_string().c_str());
+                }
+                if (id == t->monstp->owner_id) {
+                    err("thing is still attached to (owner) %s", t->to_string().c_str());
+                }
+                if (id == t->monstp->minion_owner_id) {
+                    err("thing is still attached to (minion owner) %s", t->to_string().c_str());
+                }
+                if (id == t->monstp->spawner_owner_id) {
+                    err("thing is still attached to (spawner owner) %s", t->to_string().c_str());
+                }
+                if (id == t->monstp->weapon_id) {
+                    err("thing is still attached to (weapon) %s", t->to_string().c_str());
+                }
+                if (id == t->monstp->weapon_id_carry_anim) {
+                    err("thing is still attached to (weapon carry) %s", t->to_string().c_str());
+                }
+                if (id == t->monstp->weapon_id_use_anim) {
+                    err("thing is still attached to (weapon use) %s", t->to_string().c_str());
+                }
             }
         }
 
-        for (auto p : level->all_things_of_interest) {
+        int group = get_group();
+        for (auto p : level->all_things_of_interest[group]) {
             auto t = p.second;
             if (!t->monstp) {
                 continue;

@@ -415,8 +415,8 @@ class Tp:
     def set_is_rrr61(self, value):
         zx.tp_set_is_rrr61(self, value)
 
-    def set_is_rrr62(self, value):
-        zx.tp_set_is_rrr62(self, value)
+    def set_is_tmp_thing(self, value):
+        zx.tp_set_is_tmp_thing(self, value)
 
     def set_is_debug_type(self, value):
         zx.tp_set_is_debug_type(self, value)
