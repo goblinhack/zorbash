@@ -91,7 +91,7 @@ game_mouse_down (int32_t x, int32_t y, uint32_t button)
             (std::abs(player->mid_at.y - level->cursor->mid_at.y) <= 1)) {
             int x = level->cursor->mid_at.x;
             int y = level->cursor->mid_at.y;
-            FOR_ALL_INTERESTING_THINGS(level, t, x, y) {
+            FOR_ALL_THINGS_THAT_INTERACT(level, t, x, y) {
                 if (t == level->player) {
                     continue;
                 }
@@ -196,7 +196,7 @@ uint8_t game_mouse_motion (int32_t x, int32_t y,
 
     point p(level->cursor->mid_at.x, level->cursor->mid_at.y);
     TOPCON("monst %d corpse %d", level->is_monst(p), level->is_corpse(p));
-    FOR_ALL_INTERESTING_THINGS(level, t, level->cursor->mid_at.x, level->cursor->mid_at.y) {
+    FOR_ALL_THINGS_THAT_INTERACT(level, t, level->cursor->mid_at.x, level->cursor->mid_at.y) {
         if (level->cursor->mid_at != t->mid_at) {
             continue;
         }

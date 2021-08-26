@@ -19,7 +19,7 @@ bool Thing::ai_obstacle_for_me (const point &p)
     //
     // Avoid threats and treat them as obstacles
     //
-    for (auto& t : get(level->all_thing_ptrs_at, p.x, p.y)) {
+    for (auto& t : get(level->all_things_ptr_at, p.x, p.y)) {
         if (!t) {
             continue;
         }

@@ -101,7 +101,7 @@ bool Thing::will_avoid_threat (const point &p)
         }
     }
 
-    FOR_ALL_INTERESTING_THINGS(level, it, p.x, p.y) {
+    FOR_ALL_THINGS_THAT_INTERACT(level, it, p.x, p.y) {
         if (it == this) { continue; }
         if (is_dangerous(it)) {
             return true;
@@ -205,7 +205,7 @@ bool Thing::will_avoid_threat (const Thingp itp)
         }
     }
 
-    FOR_ALL_INTERESTING_THINGS(level, it, itp->mid_at.x, itp->mid_at.y) {
+    FOR_ALL_THINGS_THAT_INTERACT(level, it, itp->mid_at.x, itp->mid_at.y) {
         if (it == this) { continue; }
         if (is_dangerous(it)) {
             return true;

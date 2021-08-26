@@ -266,7 +266,7 @@ _
 
             auto p = new_move_path[new_move_path.size() - 1];
 
-            FOR_ALL_INTERESTING_THINGS(level, it, p.x, p.y) {
+            FOR_ALL_THINGS_THAT_INTERACT(level, it, p.x, p.y) {
                 if (it == this) { continue; }
 
                 if (it->is_changing_level ||
@@ -526,7 +526,7 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
 
         std::string last_msg;
 
-        FOR_ALL_INTERESTING_THINGS(level, it, p.x, p.y) {
+        FOR_ALL_THINGS_THAT_INTERACT(level, it, p.x, p.y) {
             last_msg = "";
 
             if (it == this) { continue; }

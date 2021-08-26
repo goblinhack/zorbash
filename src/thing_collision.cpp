@@ -943,7 +943,7 @@ bool Thing::collision_obstacle (fpoint p)
     //
     // Avoid threats and treat them as obstacles
     //
-    for (const auto& it : get(level->all_thing_ptrs_at, p.x, p.y)) {
+    for (const auto& it : get(level->all_things_ptr_at, p.x, p.y)) {
         if (!it) {
             continue;
         }

@@ -67,10 +67,10 @@ void Thing::destroy (void)
     delete_particle();
 
     {
-        auto f = level->all_gc_things.find(id);
-        if (f != level->all_gc_things.end()) {
+        auto f = level->all_things_to_be_destroyed.find(id);
+        if (f != level->all_things_to_be_destroyed.end()) {
             dbg2("Remove from gc");
-            level->all_gc_things.erase(f);
+            level->all_things_to_be_destroyed.erase(f);
         }
     }
 

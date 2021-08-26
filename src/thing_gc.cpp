@@ -15,7 +15,7 @@
 
 void Thing::gc (void)
 {_
-    auto result = level->all_gc_things.insert(std::pair(id, this));
+    auto result = level->all_things_to_be_destroyed.insert(std::pair(id, this));
     if (result.second == false) {
         //
         // Is this a problem?

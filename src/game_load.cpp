@@ -343,13 +343,13 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
 
     l->player = nullptr;
     l->cursor = nullptr;
-    l->all_thing_ids_at = {};
-    l->all_thing_ptrs_at = {};
+    l->all_things_id_at = {};
+    l->all_things_ptr_at = {};
     l->all_things = {};
-    l->all_interesting_things = {};
-    l->pending_add_all_interesting_things = {};
-    l->pending_remove_all_interesting_things = {};
-    l->all_gc_things = {};
+    l->all_things_of_interest = {};
+    l->all_things_of_interest_pending_add = {};
+    l->all_things_of_interest_pending_remove = {};
+    l->all_things_to_be_destroyed = {};
 
     uint32_t csum_in = 0;
     in >> bits(csum_in);
@@ -418,7 +418,7 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_wall {};                */ in >> bits(my.t->_is_wall);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_wand {};                */ in >> bits(my.t->_is_wand);
 
-    /* all_thing_ids_at */      in >> bits(l->all_thing_ids_at);
+    /* all_things_id_at */      in >> bits(l->all_things_id_at);
     /* cursor_at */             in >> bits(l->cursor_at);
     /* cursor_old */            in >> bits(l->cursor_old);
     /* cursor_found */          in >> bits(l->cursor_found);
@@ -457,7 +457,7 @@ _
     //
     // Operate on a copy, not live data that might change as we add things
     //
-    auto ids = my.t->all_thing_ids_at;
+    auto ids = my.t->all_things_id_at;
 
     for (auto x = 0; x < MAP_WIDTH; x++) {
         for (auto y = 0; y < MAP_HEIGHT; y++) {

@@ -97,7 +97,7 @@ _
 
         std::string last_msg;
 
-        FOR_ALL_INTERESTING_THINGS(level, it, p.x, p.y) {
+        FOR_ALL_THINGS_THAT_INTERACT(level, it, p.x, p.y) {
             if (it == this) { continue; }
 
             if (it->is_changing_level ||

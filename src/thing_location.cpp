@@ -152,7 +152,7 @@ void Thing::location_check (void)
 void Thing::location_check_all_things_at (void)
 {_
     dbg("Do location checks");
-    FOR_ALL_INTERESTING_THINGS(level, t, mid_at.x, mid_at.y) {_
+    FOR_ALL_THINGS_THAT_INTERACT(level, t, mid_at.x, mid_at.y) {_
         if (DEBUG2) {
             t->log("Do location check");
         }
@@ -166,7 +166,7 @@ void Thing::location_check_all_things_at (void)
 void Thing::location_check_forced_all_things_at (void)
 {_
     dbg("Do location checks");
-    FOR_ALL_INTERESTING_THINGS(level, t, mid_at.x, mid_at.y) {_
+    FOR_ALL_THINGS_THAT_INTERACT(level, t, mid_at.x, mid_at.y) {_
         if (DEBUG2) {
             t->log("Do location check");
         }

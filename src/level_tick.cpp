@@ -36,22 +36,22 @@ bool Level::tick (void)
     if (!game->tick_requested.empty()) {
         game->tick_begin_now();
 
-        FOR_ALL_TICKABLE_THINGS_ON_LEVEL(this, t) {
+        FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL(this, t) {
             t->tick();
-        } FOR_ALL_TICKABLE_THINGS_ON_LEVEL_END(this)
+        } FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL_END(this)
 
-        for (auto& i : pending_remove_all_interesting_things) {
-            all_interesting_things.erase(i.first);
+        for (auto& i : all_things_of_interest_pending_remove) {
+            all_things_of_interest.erase(i.first);
         }
-        pending_remove_all_interesting_things = {};
+        all_things_of_interest_pending_remove = {};
 
-        for (auto& i : pending_add_all_interesting_things) {
-            all_interesting_things.insert(i);
+        for (auto& i : all_things_of_interest_pending_add) {
+            all_things_of_interest.insert(i);
         }
-        pending_add_all_interesting_things = {};
+        all_things_of_interest_pending_add = {};
     }
 
-    FOR_ALL_TICKABLE_THINGS_ON_LEVEL(this, t) {
+    FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL(this, t) {
         if (t->is_scheduled_for_jump_end) {
             t->is_scheduled_for_jump_end = false;
             t->jump_end();
@@ -60,7 +60,7 @@ bool Level::tick (void)
             t->is_scheduled_for_death = false;
             t->dead(t->get_dead_reason());
         }
-    } FOR_ALL_TICKABLE_THINGS_ON_LEVEL_END(this)
+    } FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL_END(this)
 
     game->tick_update();
 
@@ -90,7 +90,7 @@ _
     static int wait_count;
     wait_count++;
 
-    FOR_ALL_INTERESTING_THINGS_ON_LEVEL(this, t) {
+    FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL(this, t) {
         //
         // Check if we finished moving above. If not, keep waiting.
         //
@@ -223,7 +223,7 @@ _
             }
             game->things_are_moving = true;
         }
-    } FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(this)
+    } FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL_END(this)
 
     if (fade_out_finished) {
         if (player && player->is_waiting_to_descend_dungeon) {
@@ -333,23 +333,23 @@ _
     // location checks on the ends of moves, but this is a backup and will
     // also handle things that do not move, like a wand that is now on fire.
     //
-    FOR_ALL_TICKABLE_THINGS_ON_LEVEL(this, t) {
+    FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL(this, t) {
         //
         // Need to do this even for dead things, so corpses don't hover over
         // chasms.
         //
         t->location_check();
-    } FOR_ALL_TICKABLE_THINGS_ON_LEVEL_END(this)
+    } FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL_END(this)
 
-    for (auto& i : pending_remove_all_interesting_things) {
-        all_interesting_things.erase(i.first);
+    for (auto& i : all_things_of_interest_pending_remove) {
+        all_things_of_interest.erase(i.first);
     }
-    pending_remove_all_interesting_things = {};
+    all_things_of_interest_pending_remove = {};
 
-    for (auto& i : pending_add_all_interesting_things) {
-        all_interesting_things.insert(i);
+    for (auto& i : all_things_of_interest_pending_add) {
+        all_things_of_interest.insert(i);
     }
-    pending_add_all_interesting_things = {};
+    all_things_of_interest_pending_add = {};
 _
     //
     // We've finished waiting on all things, bump the game tick.
@@ -364,11 +364,11 @@ _
         // For debugging consistent randomness
         //
         float h = 0;
-        FOR_ALL_INTERESTING_THINGS_ON_LEVEL(this, t) {
+        FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL(this, t) {
             h += t->mid_at.x;
             h += t->mid_at.y;
             t->con("at %f,%f", t->mid_at.x, t->mid_at.y);
-        } FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(this)
+        } FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL_END(this)
         CON("TICK %d hash %f random %d", game->tick_current, h, pcg_rand());
 #endif
     }
@@ -449,7 +449,7 @@ void Level::sanity_check (void)
 
 void Level::update_all_ticks (void)
 {_
-    for (auto& i : all_interesting_things) {
+    for (auto& i : all_things_of_interest) {
         auto t = i.second;
         t->update_tick();
     }

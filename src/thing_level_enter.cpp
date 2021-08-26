@@ -28,11 +28,11 @@ void Thing::level_enter (void)
         //
         // If doing a walk, we must be careful and cannot modify the map
         //
-        if (level->all_interesting_things_walk_in_progress) {
-            level->pending_remove_all_interesting_things.erase(id);
-            level->pending_add_all_interesting_things.insert(std::pair(id, this));
+        if (level->all_things_of_interest_walk_in_progress) {
+            level->all_things_of_interest_pending_remove.erase(id);
+            level->all_things_of_interest_pending_add.insert(std::pair(id, this));
         } else {
-            auto result = level->all_interesting_things.insert(std::pair(id, this));
+            auto result = level->all_things_of_interest.insert(std::pair(id, this));
             if (result.second == false) {
                 err("Failed to insert into active thing map");
             }

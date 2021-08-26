@@ -235,7 +235,7 @@ void Thing::remove_all_references ()
             }
         }
 
-        for (auto p : level->all_interesting_things) {
+        for (auto p : level->all_things_of_interest) {
             auto t = p.second;
             if (!t->monstp) {
                 continue;

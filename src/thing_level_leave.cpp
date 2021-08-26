@@ -46,11 +46,11 @@ void Thing::level_leave (void)
         //
         // If doing a walk, we must be careful and cannot modify the map
         //
-        if (level->all_interesting_things_walk_in_progress) {
-            level->pending_add_all_interesting_things.erase(id);
-            level->pending_remove_all_interesting_things.insert(std::pair(id, this));
+        if (level->all_things_of_interest_walk_in_progress) {
+            level->all_things_of_interest_pending_add.erase(id);
+            level->all_things_of_interest_pending_remove.insert(std::pair(id, this));
         } else {
-            level->all_interesting_things.erase(id);
+            level->all_things_of_interest.erase(id);
         }
     }
 

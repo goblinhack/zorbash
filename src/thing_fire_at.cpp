@@ -151,7 +151,7 @@ bool Thing::fire_at_target (void)
             continue;
         }
 
-        FOR_ALL_INTERESTING_THINGS(level, it, x, y) {
+        FOR_ALL_THINGS_THAT_INTERACT(level, it, x, y) {
             if (this == it) {
                 continue;
             }

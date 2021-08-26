@@ -37,4 +37,13 @@ void tp_fixup (void)
             }
         }
     }
+
+    for (auto& tp : tp_name_map) {
+        auto tpp = tp.second;
+        if (!tpp->lifespan_dice_str().empty()) {
+            if (!tpp->is_tickable()) {
+                DIE("Thing template must be set to be is_tickable [%s] for lifespan tick to work", tp.first.c_str());
+            }
+        }
+    }
 }

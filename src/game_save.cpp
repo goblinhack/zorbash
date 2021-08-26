@@ -441,8 +441,8 @@ std::ostream& operator<<(std::ostream &out, Bits<Levelp & > const my)
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_wand {};                */ out << bits(my.t->_is_wand);
     LOG("DGN: - Save _is_wand");
 
-    LOG("DGN: - Save all_thing_ids_at");
-    /* all_thing_ids_at */      out << bits(my.t->all_thing_ids_at);
+    LOG("DGN: - Save all_things_id_at");
+    /* all_things_id_at */      out << bits(my.t->all_things_id_at);
     /* cursor_at */             out << bits(my.t->cursor_at);
     /* cursor_old */            out << bits(my.t->cursor_old);
     /* cursor_found */          out << bits(my.t->cursor_found);
@@ -479,7 +479,7 @@ std::ostream& operator<<(std::ostream &out, Bits<Levelp & > const my)
     for (auto x = 0; x < MAP_WIDTH; x++) {
         for (auto y = 0; y < MAP_HEIGHT; y++) {
             for (auto slot = 0; slot < MAP_SLOTS; slot++) {
-                auto id = get(my.t->all_thing_ids_at, x, y, slot);
+                auto id = get(my.t->all_things_id_at, x, y, slot);
                 if (id.ok()) {
                     const Thingp t = my.t->thing_find(id);
                     if (!t) {

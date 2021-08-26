@@ -201,7 +201,7 @@ ThingShoved Thing::try_to_shove (fpoint future_pos)
     auto y = future_pos.y;
     auto delta = fpoint(x, y) - mid_at;
     point p(future_pos.x, future_pos.y);
-    FOR_ALL_INTERESTING_THINGS(level, it, p.x, p.y) {
+    FOR_ALL_THINGS_THAT_INTERACT(level, it, p.x, p.y) {
         if (this == it) {
             continue;
         }

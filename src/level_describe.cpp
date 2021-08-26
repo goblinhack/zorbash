@@ -56,7 +56,7 @@ _
     std::vector<Thingp> hover_over_things;
     hover_over = nullptr;
 
-    FOR_ALL_TICKABLE_THINGS(this, t, p.x, p.y) {
+    FOR_ALL_THINGS_THAT_DO_STUFF(this, t, p.x, p.y) {
         int x = p.x;
         int y = p.y;
         if (DEBUG3) {
@@ -122,7 +122,7 @@ _
         }
     } FOR_ALL_THINGS_END()
 
-    FOR_ALL_INTERESTING_THINGS(this, t, p.x, p.y) {
+    FOR_ALL_THINGS_THAT_INTERACT(this, t, p.x, p.y) {
         int x = p.x;
         int y = p.y;
         if (DEBUG3) {

@@ -15,7 +15,7 @@
 
 void Level::things_gc (bool force)
 {
-    if (all_gc_things.empty()) {
+    if (all_things_to_be_destroyed.empty()) {
         return;
     }
 
@@ -25,8 +25,8 @@ void Level::things_gc (bool force)
         dbg("Begin thing garbage collection");
     }
 _
-    for (auto it = all_gc_things.cbegin(), next_it = it;
-         it != all_gc_things.cend(); it = next_it) {
+    for (auto it = all_things_to_be_destroyed.cbegin(), next_it = it;
+         it != all_things_to_be_destroyed.cend(); it = next_it) {
 	++next_it;
 
         auto id = it->first;
@@ -69,7 +69,7 @@ _
             }
 	}
 
-	all_gc_things.erase(it);
+	all_things_to_be_destroyed.erase(it);
 
         if (t->is_monst()) {
             monst_count--;
