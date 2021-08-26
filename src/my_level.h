@@ -432,13 +432,13 @@ public:
     // Cursor path is the highlighted path the player follows.
     //
     #define FOR_ALL_CURSOR_PATH_THINGS(level, t, x, y)              \
-        FOR_ALL_THINGS_WALKER(level, t, x, y)                       \
+        FOR_TMP_THINGS_WALKER(level, t, x, y)                       \
                 if (!t->is_cursor_path()) {                         \
                     continue;                                       \
                 }                                                   \
 
     #define FOR_ALL_DEBUG_PATH_THINGS(level, t, x, y)               \
-        FOR_ALL_THINGS_WALKER(level, t, x, y)                       \
+        FOR_TMP_THINGS_WALKER(level, t, x, y)                       \
                 if (!t->is_debug_path()) {                          \
                     continue;                                       \
                 }                                                   \

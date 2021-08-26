@@ -169,6 +169,10 @@ void Level::display_map_things (int fbo,
                         t->animate();
                     }
                 } FOR_ALL_THINGS_END()
+
+                FOR_TMP_THINGS_AT_DEPTH(this, t, x, y, z) {
+                    t->blit(fbo);
+                } FOR_ALL_THINGS_END()
             }
         }
     }
@@ -237,6 +241,10 @@ void Level::display_map_fg_things (int fbo,
                             }
                         }
                     }
+                } FOR_ALL_THINGS_END()
+
+                FOR_TMP_THINGS_AT_DEPTH(this, t, x, y, z) {
+                    t->blit(fbo);
                 } FOR_ALL_THINGS_END()
             }
         }

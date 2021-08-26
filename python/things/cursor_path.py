@@ -8,6 +8,7 @@ def tp_init(name):
     mytp.set_gfx_animated(True)
     mytp.set_is_able_to_fall(False)
     mytp.set_is_cursor_path(True)
+    mytp.set_is_tmp_thing(True)
     mytp.set_is_floating(True)
     mytp.set_is_moveable(True)
     mytp.set_is_removeable_if_out_of_slots(True)
