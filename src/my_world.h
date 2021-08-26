@@ -36,6 +36,7 @@ public:
     friend std::istream& operator>>(std::istream &in, Bits<World &> my);
 
     void alloc_thing_id(Thingp t);
+    void alloc_tmp_thing_id(Thingp t);
     void realloc_thing_id(Thingp t);
     void free_thing_id(Thingp t);
     Thingp thing_find_optional(ThingId id);

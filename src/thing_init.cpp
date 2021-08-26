@@ -149,7 +149,16 @@ _
     //
     // Must do this after TP assignment or logging will fail
     //
-    game->world.alloc_thing_id(this);
+    if (!pcg_random_allowed ) {
+        err("trying to create a thing outside of game loop");
+    }
+
+    if (is_tmp_thing()) {
+        game->world.alloc_tmp_thing_id(this);
+        pcg_random_allowed = false;
+    } else {
+        game->world.alloc_thing_id(this);
+    }
     if (mid_at != fpoint(-1, -1)) {
         level_enter();
         level_push();
@@ -484,6 +493,10 @@ _
     }
 
     on_born();
+
+    if (is_tmp_thing()) {
+        pcg_random_allowed = true;
+    }
 }
 
 void Thing::reinit (void)

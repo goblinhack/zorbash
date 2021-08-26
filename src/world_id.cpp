@@ -36,7 +36,21 @@ Thingp World::thing_find (ThingId id)
 void World::alloc_thing_id (Thingp t)
 {_
     for (;;) {
-        auto id = pcg_rand();
+        auto id = pcg_rand() & 0x0ffffff;
+        if (thing_find_optional(id)) {
+            continue;
+        }
+
+        t->id = id;
+        all_thing_ptrs[id] = t;
+        return;
+    }
+}
+
+void World::alloc_tmp_thing_id (Thingp t)
+{_
+    for (;;) {
+        auto id = pcg_rand() | 0x8000000;
         if (thing_find_optional(id)) {
             continue;
         }
