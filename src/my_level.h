@@ -150,11 +150,11 @@ public:
     //
     bool all_things_of_interest_walk_in_progress {};
     std::array<
-        std::map<ThingId, Thingp>, MAX_THING_GROUPS > 
+        std::map<ThingId, Thingp>, MAX_THING_GROUPS >
             all_things_of_interest_pending_add {};
 
     std::array<
-        std::map<ThingId, Thingp>, MAX_THING_GROUPS > 
+        std::map<ThingId, Thingp>, MAX_THING_GROUPS >
             all_things_of_interest_pending_remove {};
 
     std::array<
@@ -162,18 +162,18 @@ public:
 
     bool all_animated_things_walk_in_progress {};
     std::array<
-        std::map<ThingId, Thingp>, MAX_THING_GROUPS > 
+        std::map<ThingId, Thingp>, MAX_THING_GROUPS >
             all_animated_things_pending_add {};
 
     std::array<
-        std::map<ThingId, Thingp>, MAX_THING_GROUPS > 
+        std::map<ThingId, Thingp>, MAX_THING_GROUPS >
             all_animated_things_pending_remove {};
 
     //
     // All things that are to be destroyed
     //
     std::array<
-        std::map<ThingId, Thingp>, MAX_THING_GROUPS > 
+        std::map<ThingId, Thingp>, MAX_THING_GROUPS >
             all_things_to_be_destroyed {};
 
     //
