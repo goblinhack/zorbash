@@ -22,6 +22,12 @@ std::array<isize, MAX_FBO> fbo_size = {};
 
 void gl_init_2d_mode (void)
 {_
+    GL_ERROR_CHECK();
+
+    if (in_2d_mode) {
+        gl_leave_2d_mode();
+    }
+
     //
     // Enable Texture Worldping
     //

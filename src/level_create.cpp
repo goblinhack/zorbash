@@ -50,6 +50,8 @@ void Level::create (point3d at, int seed)
     is_starting = false;
 
     timestamp_fade_in_begin = time_get_time_ms_cached();
+
+    things_gc_force();
 }
 
 void Level::place_the_grid (void)

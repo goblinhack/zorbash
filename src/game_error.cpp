@@ -11,6 +11,10 @@
 #include "my_traceback.h"
 #include "my_sdl.h"
 #include "my_ui.h"
+#include "my_wid_topcon.h"
+#include "my_wid_botcon.h"
+#include "my_wid_popup.h"
+#include "my_wid_actionbar.h"
 #include "my_thing.h"
 
 static WidPopup *game_error_window;
@@ -19,6 +23,16 @@ static void game_error_destroy (void)
 {_
     delete game_error_window;
     game_error_window = nullptr;
+
+    game_quit_destroy();
+    wid_topcon_fini();
+    wid_topcon_init();
+    wid_actionbar_fini();
+    wid_botcon_fini();
+    wid_botcon_init();
+    game->fini();
+    game->main_menu_select();
+    TOPCON("The dungeon went dark briefly. What happened?");
 }
 
 static uint8_t game_error_key_up (Widp w, const struct SDL_Keysym *key)

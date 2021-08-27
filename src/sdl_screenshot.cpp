@@ -20,19 +20,33 @@ void sdl_screenshot (void)
 
 void sdl_screenshot_do (void)
 {_
-    int fbo = FBO_FULLMAP;
+    GL_ERROR_CHECK();
+    int fbo = FBO_FINAL;
     int w;
     int h;
+    GL_ERROR_CHECK();
     fbo_get_size(fbo, w, h);
+    GL_ERROR_CHECK();
     blit_fbo_bind(fbo);
+    GL_ERROR_CHECK();
 
     static int count = 1;
 
+    GL_ERROR_CHECK();
     glPixelStorei(GL_PACK_ALIGNMENT, 1);
+    GL_ERROR_CHECK();
+
+#if 0
+    //
+    // Not sure what this does and why I had it!
+    //
     glReadBuffer(GL_BACK_LEFT);
+    GL_ERROR_CHECK();
+#endif
 
     std::vector<uint8_t> pixels(3 * w * h);
     glReadPixels(0, 0, w, h, GL_RGB, GL_UNSIGNED_BYTE, pixels.data());
+    GL_ERROR_CHECK();
 
     for(int line = 0; line != h/2; ++line) {
         std::swap_ranges(pixels.begin() + 3 * w * line,
@@ -44,9 +58,11 @@ void sdl_screenshot_do (void)
 
     char *png = dynprintf("screenshot.%d.png", count);
     stbi_write_png(png, w, h, components, pixels.data(), 3 * w);
+    GL_ERROR_CHECK();
     BOTCON("Screenshot: %s", png);
     myfree(png);
     blit_fbo_unbind();
+    GL_ERROR_CHECK();
 
     count++;
 }

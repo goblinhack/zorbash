@@ -186,6 +186,26 @@ void Level::remove_thing (int x, int y, ThingId id, int group)
     t->err("Did not find thing in any slot at map (%d,%d) for remove of %08" PRIx32 "", x, y, id.id);
 }
 
+void Level::check_thing (Thingp t)
+{_
+    int group = t->get_group();
+    int x = t->mid_at.x;
+    int y = t->mid_at.y;
+
+    if (is_oob(x, y)) {
+        t->err("Oob thing");
+        return;
+    }
+
+    for (auto slot = 0; slot < MAP_SLOTS; slot++) {
+        auto idp = &getref(all_things_id_at[group], x, y, slot);
+        if (idp->id == t->id.id) {
+            return;
+        }
+    }
+    t->err("Did not find thing in any slot");
+}
+
 void Level::remove_thing (point p, ThingId id, int group)
 {_
     remove_thing(p.x, p.y, id, group);

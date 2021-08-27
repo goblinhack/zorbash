@@ -271,9 +271,9 @@ public:
 
     void remove_thing(int x, int y, ThingId id, int group);
     void remove_thing(point p, ThingId id, int group);
-
     void put_thing(int x, int y, ThingId id, int group);
     void put_thing(point p, ThingId id, int group);
+    void check_thing(Thingp t);
 
     #define JOIN1(X,Y) X##Y
     #define JOIN(X,Y) JOIN1(X,Y)

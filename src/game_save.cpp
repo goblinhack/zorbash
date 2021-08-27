@@ -324,8 +324,11 @@ std::ostream& operator<<(std::ostream &out, Bits<Levelp & > const my)
             if (t->is_cursor()) {
                 continue;
             }
+            if (t->is_debug_path()) {
+                continue;
+            }
             csum += t->mid_at.x + t->mid_at.y + t->id.id;
-            // t->con("SAVE %f %f %d", t->mid_at.x, t->mid_at.y, t->id.id);
+            //t->con("SAVE %f %f %d", t->mid_at.x, t->mid_at.y, t->id.id);
         }
     }
     out << bits(csum);
@@ -477,6 +480,16 @@ std::ostream& operator<<(std::ostream &out, Bits<Levelp & > const my)
     /* seed */                  out << bits(my.t->seed);
     /* world_at */              out << bits(my.t->world_at);
 
+#ifdef ENABLE_DEBUG_THING_SER
+    LOG("DGN: Check things");
+    FOR_ALL_THING_GROUPS(group) {
+        for (auto p : my.t->all_things[group]) {
+            auto t = p.second;
+            my.t->check_thing(t);
+        }
+    }
+#endif
+
     LOG("DGN: Save things");
     FOR_ALL_THING_GROUPS(group) {
         for (auto x = 0; x < MAP_WIDTH; x++) {
@@ -486,10 +499,12 @@ std::ostream& operator<<(std::ostream &out, Bits<Levelp & > const my)
                     if (id.ok()) {
                         const Thingp t = my.t->thing_find(id);
                         if (!t) {
-                            continue;
+                            ERR("Found a thing I could not save %08" PRIx32, id.id);
+                            return out;
                         }
+
                         if (DEBUG4) {
-                            t->log("Save");
+                            t->con("Save");
                         }
                         out << bits(t);
                     }
@@ -497,6 +512,7 @@ std::ostream& operator<<(std::ostream &out, Bits<Levelp & > const my)
             }
         }
     }
+
     WRITE_MAGIC(THING_MAGIC_FINAL);
     LOG("DGN: Saved things");
 
@@ -779,6 +795,18 @@ Game::save (int slot)
         return;
     }
 
+    for (auto x = 0; x < LEVELS_ACROSS; ++x) {
+        for (auto y = 0; y < LEVELS_DOWN; ++y) {
+            for (auto z = 0; z < LEVELS_DEEP; ++z) {
+                point3d p(x, y, z);
+                auto l = get(game->world.levels, x, y, z);
+                if (l) {
+                    l->things_gc_force();
+                }
+            }
+        }
+    }
+
     auto save_file = saved_dir + "saved-slot-" + std::to_string(slot);
 
     LOG("-");
@@ -799,6 +827,18 @@ Game::save (int slot)
 void
 Game::save_snapshot (void)
 {_
+    for (auto x = 0; x < LEVELS_ACROSS; ++x) {
+        for (auto y = 0; y < LEVELS_DOWN; ++y) {
+            for (auto z = 0; z < LEVELS_DEEP; ++z) {
+                point3d p(x, y, z);
+                auto l = get(game->world.levels, x, y, z);
+                if (l) {
+                    l->things_gc_force();
+                }
+            }
+        }
+    }
+
     auto save_file = saved_dir + "saved-snapshot";
 
     LOG("-");

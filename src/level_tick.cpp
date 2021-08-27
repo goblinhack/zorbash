@@ -34,12 +34,6 @@ bool Level::tick (void)
     // A new game event has occurred?
     //
     if (!game->tick_requested.empty()) {
-        //
-        // For things that might have been killed at the start of the level,
-        // like collecting items
-        //
-        things_gc_if_possible();
-
         game->tick_begin_now();
 
         FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL(this, t) {

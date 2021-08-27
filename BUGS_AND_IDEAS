@@ -2,18 +2,8 @@
 Todo
 ----
 
-- monst over chasm not falling
-
-- robot can jump over walls sometimes
-- crash on ascend
-00:05:26.252: You ascend.
-00:05:26.252: ERROR: Thing L36,36,3 d7156015(player2/chg-level/asc-dung T560 @28,16): Failed to insert into active thing map
-> Level::tick()
-> Thing_::ascend_dungeon()
-> Thing_::level_change(Level*)
-> Thing_::level_enter()
-> Thing_::err(char const*, ...) const
-> Thing_::err_(char const*, char*) const
+- i no longer works
+- cannot load snapshot
 
 Level
 -----

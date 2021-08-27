@@ -17,6 +17,7 @@
 #include "my_array_bounds_check.h"
 #include "my_ptrcheck.h"
 #include "my_string.h"
+#include "my_traceback.h"
 
 Thingp Level::thing_new (Tpp tp, const point at)
 {
@@ -149,8 +150,11 @@ _
     //
     // Must do this after TP assignment or logging will fail
     //
-    if (!pcg_random_allowed ) {
-        err("trying to create a thing outside of game loop");
+    if (game->robot_mode) {
+        if (!pcg_random_allowed) {
+            con("Error, trying to create a thing outside of game loop");
+            traceback_dump();
+        }
     }
 
     if (is_tmp_thing()) {

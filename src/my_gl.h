@@ -343,14 +343,14 @@ void gl_push(float **P, float *p_end, uint8_t first, float tex_left, float tex_t
 void glcolor(color s);
 void glcolorfast(color s);
 
-#define GL_ERROR_CHECK() {                                         \
-    auto errCode = glGetError();                                   \
-    if (likely(errCode == GL_NO_ERROR)) {                          \
-    } else {                                                       \
-        ERR("GFX: error at %s:%s line %u",                      \
-            __FILE__, __PRETTY_FUNCTION__, __LINE__);              \
-        gl_error(errCode);                                         \
-    }                                                              \
+#define GL_ERROR_CHECK() {                                                              \
+    auto errCode = glGetError();                                                        \
+    if (likely(errCode == GL_NO_ERROR)) {                                               \
+        /* CON("GFX: ok at %s:%s line %u", __FILE__, __PRETTY_FUNCTION__, __LINE__); */ \
+    } else {                                                                            \
+        ERR("GFX: error at %s:%s line %u", __FILE__, __PRETTY_FUNCTION__, __LINE__);    \
+        gl_error(errCode);                                                              \
+    }                                                                                   \
 }
 
 #endif

@@ -486,11 +486,11 @@ _
                         t->reinit();
                         //t->con("LOADED %f %f %d", t->mid_at.x, t->mid_at.y, t->id.id);
 
-                        // CON("From save file  : %s", t->debug_str.c_str());
-                        // CON("Newly created as: %s", t->to_dbg_string().c_str());
+                        //CON("From save file  : %s", t->debug_str.c_str());
+                        //CON("Newly created as: %s", t->to_dbg_string().c_str());
 #ifdef ENABLE_DEBUG_THING_SER
                         if (t->to_dbg_string() != t->debug_str) {
-                            if (!t->is_cursor()) {
+                            if (!t->is_cursor() && !t->is_debug_path()) {
                                 CON("From save file  : %s", t->debug_str.c_str());
                                 CON("Newly created as: %s", t->to_dbg_string().c_str());
                                 game_load_error = "loaded thing is corrupt";
@@ -511,8 +511,11 @@ _
             if (t->is_cursor()) {
                 continue;
             }
+            if (t->is_debug_path()) {
+                continue;
+            }
             csum += t->mid_at.x + t->mid_at.y + t->id.id;
-            //t->con("LOAD %f %f %d", t->mid_at.x, t->mid_at.y, t->id.id);
+            // t->con("LOAD %f %f %d", t->mid_at.x, t->mid_at.y, t->id.id);
         }
     }
 
