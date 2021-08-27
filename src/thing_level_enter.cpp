@@ -40,6 +40,21 @@ void Thing::level_enter (void)
         }
     }
 
+    if (gfx_animated()) {
+        //
+        // If doing a walk, we must be careful and cannot modify the map
+        //
+        if (level->all_animated_things_walk_in_progress) {
+            level->all_animated_things_pending_remove[group].erase(id);
+            level->all_animated_things_pending_add[group].insert(std::pair(id, this));
+        } else {
+            auto result = level->all_animated_things[group].insert(std::pair(id, this));
+            if (result.second == false) {
+                err("Failed to insert into animated thing map");
+            }
+        }
+    }
+
     //
     // If this is the player create a new cursor for us.
     // If this is something else, do not, else the cursor winds up

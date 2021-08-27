@@ -119,7 +119,7 @@ void Thing::level_push (void)
                                                    level->set_is_brazier(mx, my); }
     if (is_barrel())                             { i_set_is_barrel = true;
                                                    level->set_is_barrel(mx, my); }
-    if (is_treasure_type())                           { i_set_is_treasure_type = true;
+    if (is_treasure_type())                      { i_set_is_treasure_type = true;
                                                    level->set_is_treasure_type(mx, my); }
     if (is_wall())                               { i_set_is_wall = true;
                                                    level->set_is_wall(mx, my); }

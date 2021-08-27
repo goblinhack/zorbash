@@ -13,11 +13,6 @@
 void Thing::level_pop (void)
 {_
     if (!is_attached) {
-#if 0
-        if (tp()->gfx_weapon_carry_anim()) {
-            con("cannot pop");
-        }
-#endif
         return;
     }
     is_attached = false;

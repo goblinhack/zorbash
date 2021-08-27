@@ -55,5 +55,18 @@ void Thing::level_leave (void)
         }
     }
 
+    if (gfx_animated()) {
+        //
+        // If doing a walk, we must be careful and cannot modify the map
+        //
+        int group = get_group();
+        if (level->all_animated_things_walk_in_progress) {
+            level->all_animated_things_pending_add[group].erase(id);
+            level->all_animated_things_pending_remove[group].insert(std::pair(id, this));
+        } else {
+            level->all_animated_things[group].erase(id);
+        }
+    }
+
     game->request_update_rightbar = true;
 }

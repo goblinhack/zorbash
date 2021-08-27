@@ -31,6 +31,13 @@ bool Level::tick (void)
     }
 
     //
+    // Prefer to cleanup on ticks, to make the randomness more reproducable.
+    //
+    if (!game->robot_mode) {
+        things_gc_if_possible();
+    }
+
+    //
     // A new game event has occurred?
     //
     if (!game->tick_requested.empty()) {
@@ -64,21 +71,39 @@ bool Level::tick (void)
         }
     } FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL_END(this)
 
+    //
+    // Animate anything that needs it
+    //
+    FOR_ALL_THING_GROUPS(group) {
+        FOR_ALL_ANIMATED_THINGS_LEVEL(this, group, t) {
+            t->animate();
+            t->update_interpolated_position();
+        } FOR_ALL_ANIMATED_THINGS_LEVEL_END(this)
+
+        FOR_ALL_ANIMATED_THINGS_LEVEL(this, group, t) {
+            if (t->is_scheduled_for_death) {
+                t->is_scheduled_for_death = false;
+                t->dead(t->get_dead_reason());
+            }
+        } FOR_ALL_ANIMATED_THINGS_LEVEL_END(this)
+
+        for (auto& i : all_animated_things_pending_remove[group]) {
+            all_animated_things[group].erase(i.first);
+        }
+        all_animated_things_pending_remove[group] = {};
+
+        for (auto& i : all_animated_things_pending_add[group]) {
+            all_animated_things[group].insert(i);
+        }
+        all_animated_things_pending_add[group] = {};
+    }
+
     game->tick_update();
 
     //
     // Update the cursor position.
     //
     cursor_move();
-
-    //
-    // Allows for debugging
-    //
-    if (wid_console_window && wid_console_window->visible) {
-        return false;
-    }
-_
-    // LOG("-");
 
     //
     // For all things that move, like monsters, or those that do not, like
@@ -94,15 +119,32 @@ _
 
     FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL(this, t) {
         //
+        // Wait for animation end. Only if the thing is onscreen
+        //
+        if (t->frame_count != game->frame_count) {
+            t->is_offscreen = true;
+        } else {
+            t->is_offscreen = false;
+        }
+
+        t->update_interpolated_position();
+
+        //
         // Check if we finished moving above. If not, keep waiting.
         //
         if (t->is_moving) {
-            t->update_interpolated_position();
             if (t->is_moving) {
-                if ((wait_count > wait_count_max) && !game->things_are_moving) {
-                    t->con("Waiting on moving thing longer than expected");
+                if (game->robot_mode) {
+                    if ((wait_count > wait_count_max) && !game->things_are_moving) {
+                        t->con("Waiting on moving thing longer than expected");
+                    }
+                    game->things_are_moving = true;
+                } else if (!t->is_offscreen) {
+                    if ((wait_count > wait_count_max) && !game->things_are_moving) {
+                        t->con("Waiting on moving thing longer than expected");
+                    }
+                    game->things_are_moving = true;
                 }
-                game->things_are_moving = true;
             }
         }
 
@@ -110,12 +152,18 @@ _
         // If falling we need to update the z depth and position; and wait.
         //
         if (t->is_falling) {
-            t->update_interpolated_position();
             if (t->is_falling) {
-                if ((wait_count > wait_count_max) && !game->things_are_moving) {
-                    t->con("Waiting on falling thing longer than expected");
+                if (game->robot_mode) {
+                    if ((wait_count > wait_count_max) && !game->things_are_moving) {
+                        t->con("Waiting on falling thing longer than expected");
+                    }
+                    game->things_are_moving = true;
+                } else if (!t->is_offscreen) {
+                    if ((wait_count > wait_count_max) && !game->things_are_moving) {
+                        t->con("Waiting on fallingmoving thing longer than expected");
+                    }
+                    game->things_are_moving = true;
                 }
-                game->things_are_moving = true;
             }
         }
 
@@ -123,22 +171,16 @@ _
         // Wait on dying thing?
         //
         if ((t->is_dead_on_end_of_anim() && !t->is_dead)) {
-            if ((wait_count > wait_count_max) && !game->things_are_moving) {
-                t->con("Waiting on dying thing longer than expected");
-            }
-            game->things_are_moving = true;
-
-            //
-            // Wait for animation end. Only if the thing is onscreen
-            //
-            if (t->frame_count != game->frame_count) {
-                if (!t->is_dead) {
-                    if (t->is_offscreen) {
-                        t->dead("offscreen");
-                    } else {
-                        t->is_offscreen = true;
-                    }
+            if (game->robot_mode) {
+                if ((wait_count > wait_count_max) && !game->things_are_moving) {
+                    t->con("Waiting on dying thing longer than expected");
                 }
+                game->things_are_moving = true;
+            } else if (!t->is_offscreen) {
+                if ((wait_count > wait_count_max) && !game->things_are_moving) {
+                    t->con("Waiting on dying thing longer than expected");
+                }
+                game->things_are_moving = true;
             }
         }
 
@@ -146,22 +188,16 @@ _
         // Wait on resurrecting thing?
         //
         if (t->is_alive_on_end_of_anim() && t->is_resurrecting) {
-            if ((wait_count > wait_count_max) && !game->things_are_moving) {
-                t->con("Waiting on resurrecting thing longer than expected");
-            }
-            game->things_are_moving = true;
-
-            //
-            // Wait for animation end. Only if the thing is onscreen
-            //
-            if (t->frame_count != game->frame_count) {
-                //
-                // Make sure offscreen animation occurs.
-                //
-                auto tpp = t->tp();
-                if (unlikely(tpp->gfx_animated())) {
-                    t->animate();
+            if (game->robot_mode) {
+                if ((wait_count > wait_count_max) && !game->things_are_moving) {
+                    t->con("Waiting on resurrecting thing longer than expected");
                 }
+                game->things_are_moving = true;
+            } else if (!t->is_offscreen) {
+                if ((wait_count > wait_count_max) && !game->things_are_moving) {
+                    t->con("Waiting on resurrecting thing longer than expected");
+                }
+                game->things_are_moving = true;
             }
         }
 
@@ -174,39 +210,22 @@ _
                     t->con("Waiting on weapon thing longer than expected");
                 }
                 game->things_are_moving = true;
-
-                //
-                // Wait for animation end. Only if the thing is onscreen
-                //
-                if (t->frame_count != game->frame_count) {
-                    //
-                    // Make sure offscreen animation occurs.
-                    //
-                    auto tpp = t->tp();
-                    if (unlikely(tpp->gfx_animated())) {
-                        t->animate();
-                    }
-                }
             }
         }
 
         if (t->get_timestamp_flip_start() && !t->is_dead) {
-            if ((wait_count > wait_count_max) && !game->things_are_moving) {
-                t->con("Waiting on flipping thing longer than expected");
-            }
-            game->things_are_moving = true;
+            if (game->robot_mode) {
+                if ((wait_count > wait_count_max) && !game->things_are_moving) {
+                    t->con("Waiting on flipping thing longer than expected");
+                }
 
-            //
-            // Wait for animation end. Only if the thing is onscreen
-            //
-            if (t->frame_count != game->frame_count) {
+                game->things_are_moving = true;
+
                 //
                 // Make sure offscreen animation occurs.
                 //
                 if (t->is_offscreen) {
                     t->set_timestamp_flip_start(0);
-                } else {
-                    t->is_offscreen = true;
                 }
             }
         }
@@ -354,7 +373,7 @@ _
         }
         all_things_of_interest_pending_add[group] = {};
     }
-_
+
     //
     // We've finished waiting on all things, bump the game tick.
     //

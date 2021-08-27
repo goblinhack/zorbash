@@ -164,9 +164,10 @@ void Level::display_map_things (int fbo,
                         t->blit(fbo);
                     }
 
-                    auto tpp = t->tp();
-                    if (unlikely(tpp->gfx_animated())) {
-                        t->animate();
+                    if (unlikely(game->robot_mode)) {
+                        if (unlikely(t->gfx_animated())) {
+                            t->animate();
+                        }
                     }
                 } FOR_ALL_THINGS_END()
 
@@ -224,9 +225,11 @@ void Level::display_map_fg_things (int fbo,
             for (auto x = minx; x < maxx; x++) {
                 FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) {
                     t->blit(fbo);
-                    auto tpp = t->tp();
-                    if (unlikely(tpp->gfx_animated())) {
-                        t->animate();
+
+                    if (unlikely(game->robot_mode)) {
+                        if (unlikely(t->gfx_animated())) {
+                            t->animate();
+                        }
                     }
 
                     //
@@ -269,9 +272,11 @@ void Level::display_map_fg2_things (int fbo,
             for (auto x = minx; x < maxx; x++) {
                 FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) {
                     t->blit(fbo);
-                    auto tpp = t->tp();
-                    if (unlikely(tpp->gfx_animated())) {
-                        t->animate();
+
+                    if (unlikely(game->robot_mode)) {
+                        if (unlikely(t->gfx_animated())) {
+                            t->animate();
+                        }
                     }
                 } FOR_ALL_THINGS_END()
 

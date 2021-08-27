@@ -342,7 +342,7 @@ _
             //
             // This is an odd one.
             //
-            err("Trying to eat self");
+            err("Trying to attack self");
         } else if (owner->can_eat(it)) {
             //
             // Eat corpse?

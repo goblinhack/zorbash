@@ -274,5 +274,36 @@ void Thing::remove_all_references ()
                 err("interesting thing is still attached to (weapon use) %s", t->to_string().c_str());
             }
         }
+
+        for (auto p : level->all_animated_things[group]) {
+            auto t = p.second;
+            if (!t->monstp) {
+                continue;
+            }
+            if (t == this) {
+                continue;
+            }
+            if (id == t->monstp->on_fire_id_anim) {
+                err("interesting thing is still attached to (on fire) %s", t->to_string().c_str());
+            }
+            if (id == t->monstp->owner_id) {
+                err("interesting thing is still attached to (owner) %s", t->to_string().c_str());
+            }
+            if (id == t->monstp->minion_owner_id) {
+                err("interesting thing is still attached to (minion owner) %s", t->to_string().c_str());
+            }
+            if (id == t->monstp->spawner_owner_id) {
+                err("interesting thing is still attached to (spawner owner) %s", t->to_string().c_str());
+            }
+            if (id == t->monstp->weapon_id) {
+                err("interesting thing is still attached to (weapon) %s", t->to_string().c_str());
+            }
+            if (id == t->monstp->weapon_id_carry_anim) {
+                err("interesting thing is still attached to (weapon carry) %s", t->to_string().c_str());
+            }
+            if (id == t->monstp->weapon_id_use_anim) {
+                err("interesting thing is still attached to (weapon use) %s", t->to_string().c_str());
+            }
+        }
     }
 }

@@ -11,6 +11,7 @@ def tp_init(name):
     mytp.set_is_cursor(True)
     mytp.set_is_floating(True)
     mytp.set_is_moveable(True)
+    mytp.set_is_tmp_thing(True)
     mytp.set_text_a_or_an("the")
     mytp.set_text_description("Cursor.")
     mytp.set_z_depth(zx.MAP_DEPTH_OBJ)

@@ -157,6 +157,18 @@ public:
         std::map<ThingId, Thingp>, MAX_THING_GROUPS > 
             all_things_of_interest_pending_remove {};
 
+    std::array<
+        std::map<ThingId, Thingp>, MAX_THING_GROUPS > all_animated_things {};
+
+    bool all_animated_things_walk_in_progress {};
+    std::array<
+        std::map<ThingId, Thingp>, MAX_THING_GROUPS > 
+            all_animated_things_pending_add {};
+
+    std::array<
+        std::map<ThingId, Thingp>, MAX_THING_GROUPS > 
+            all_animated_things_pending_remove {};
+
     //
     // All things that are to be destroyed
     //
@@ -335,6 +347,25 @@ public:
             }                                                                \
         }                                                                    \
         level->all_things_of_interest_walk_in_progress = false;              \
+    }
+
+    #define FOR_ALL_ANIMATED_THINGS_LEVEL(level, group, t) {                 \
+        level->all_animated_things_walk_in_progress = true;                  \
+        auto c =                                                             \
+            level->all_animated_things[group];                               \
+        auto i =                                                             \
+            level->all_animated_things[group].begin();                       \
+        while (i != level->all_animated_things[group].end()) {               \
+            auto t = i->second;                                              \
+            i++;                                                             \
+            verify(t);                                                       \
+
+    #define FOR_ALL_ANIMATED_THINGS_LEVEL_END(level)                         \
+            if (i == level->all_animated_things[group].end()) {              \
+                break;                                                       \
+            }                                                                \
+        }                                                                    \
+        level->all_animated_things_walk_in_progress = false;                 \
     }
 
     //
