@@ -414,13 +414,15 @@ bool Level::tick (void)
     }
 
     if (tick_done) {
-        if (game->robot_mode_tick_requested) {
-            game->robot_mode_tick_requested = false;
-            if (player) {
-                if (player->monstp &&
-                    player->monstp->move_path.size()) {
-                    CON("Robot: Try the next move");
-                    player->cursor_path_pop_next_and_move();
+        if (game->robot_mode) {
+            if (game->robot_mode_tick_requested) {
+                game->robot_mode_tick_requested = false;
+                if (player) {
+                    if (player->monstp &&
+                        player->monstp->move_path.size()) {
+                        CON("Robot: Try the next move");
+                        player->cursor_path_pop_next_and_move();
+                    }
                 }
             }
 

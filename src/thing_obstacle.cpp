@@ -245,9 +245,14 @@ bool Thing::ai_obstacle (Thingp it)
         //     return true;
         // }
 
-        if (will_avoid_threat(it)) {
-            return true;
-        }
+        //
+        // Don't include this, it means a monst will not attack a threat as
+        // it effectively is not allowed to see it as we consider it like a
+        // hard obstacle
+        //
+        // if (will_avoid_threat(it)) {
+        //     return true;
+        // }
     } else if (is_player()) {
         if (it->is_alive_monst()) {
             //

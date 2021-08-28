@@ -539,11 +539,10 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                 it->is_hidden ||
                 it->is_falling ||
                 it->is_jumping) {
-                if (DEBUG4) {
-                    dbg2(" ignore %s", it->to_string().c_str());
-                }
+                    log(" ignore %s", it->to_string().c_str());
                 continue;
             }
+                    log(" check %s", it->to_string().c_str());
 
             if (it->get_immediate_spawned_owner_id().ok()) {
                 continue;
@@ -1179,6 +1178,13 @@ void Thing::robot_tick (void)
                     return;
                 }
             } else {
+                if (get_health() < get_stamina_max() / 2) {
+                    BOTCON("Robot needs to rest, low on health");
+                    game->tick_begin("Robot needs to rest, low on health");
+                    robot_change_state(ROBOT_STATE_RESTING, "low on health, rest");
+                    return;
+                }
+
                 if (get_stamina() < get_stamina_max() / 3) {
                     BOTCON("Robot needs to rest, low on stamina");
                     game->tick_begin("Robot needs to rest, low on stamina");
@@ -1238,7 +1244,9 @@ void Thing::robot_tick (void)
         break;
         case ROBOT_STATE_RESTING:
         {
-            if (get_stamina() >= get_stamina_max() / 2) {
+            if ((get_health() >= (get_health_max() / 4) * 3) &&
+                (get_stamina() >= (get_stamina_max() / 4) * 3)) {
+
                 BOTCON("Robot has rested enough");
                 game->tick_begin("Robot has rested enough");
                 robot_change_state(ROBOT_STATE_IDLE, "rested enough");
@@ -1252,6 +1260,19 @@ void Thing::robot_tick (void)
                     robot_change_state(ROBOT_STATE_IDLE, "threat nearby, stop resting");
                     return;
                 }
+            }
+
+            if (eat_something()) {
+                BOTCON("Robot needs to eat");
+                game->tick_begin("Robot ate something");
+                return;
+            }
+
+            if (get_stamina() >= (get_stamina_max() / 4) * 3) {
+                BOTCON("Robot has recovered stamina");
+                game->tick_begin("Robot has recovered stamina");
+                robot_change_state(ROBOT_STATE_IDLE, "threat nearby, stop resting");
+                return;
             }
 
             CON("Robot: Wait and rest");

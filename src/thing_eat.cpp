@@ -9,6 +9,7 @@
 #include "my_main.h"
 #include "my_tile.h"
 #include "my_thing.h"
+#include "my_monst.h"
 #include "my_thing_template.h"
 #include "my_sprintf.h"
 
@@ -106,6 +107,26 @@ bool Thing::can_eat (const Thingp itp)
     }
     if (is_player()) {
         if (it->is_food()) {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool Thing::eat_something (void)
+{_
+    for (const auto& item : monstp->carrying) {
+        auto t = level->thing_find(item.id);
+        if (!t) {
+            continue;
+        }
+        if (!can_eat(t)) {
+            continue;
+        }
+        if (!worth_eating(t)) {
+            continue;
+        }
+        if (eat(t)) {
             return true;
         }
     }

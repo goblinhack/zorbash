@@ -221,6 +221,7 @@ public:
     bool bag_remove(Thingp);
     void clear_move_path(const std::string &why);
     bool can_eat(const Thingp it);
+    bool eat_something(void);
     bool carry(Thingp w);
     bool change_owner(Thingp new_owner);
     bool check_anything_to_carry(bool auto_collect_allowed);
