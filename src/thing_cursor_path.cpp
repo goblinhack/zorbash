@@ -65,7 +65,7 @@ _
                     // can we jump further?
                     //
                     CON("Robot: Next-next position %d,%d is a threat",
-                        (int)future_pos.x, (int)future_pos.y);
+                        (int)jump_pos.x, (int)jump_pos.y);
 _
                     if (will_avoid_threat(jump_pos) && monstp->move_path.size()) {
                         auto jump_pos = monstp->move_path[0];
@@ -99,9 +99,12 @@ _
                         return false;
                     }
                 } else {
+                    //
+                    // Fall through to allow attack
+                    //
                     CON("Robot: Cannot pass");
-                    clear_move_path("Player cannot pass");
-                    return false;
+                    //clear_move_path("Player cannot pass");
+                    //return false;
                 }
             }
         }
@@ -109,6 +112,7 @@ _
         if (game->robot_mode) {
             CON("Robot: Try to move without shoving to %s", future_pos.to_string().c_str());
         }
+
         if (move_no_shove(future_pos)) {
             return true;
         }

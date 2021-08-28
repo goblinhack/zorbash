@@ -315,6 +315,10 @@ _
                 monstp->move_path = new_move_path;
                 return true;
             }
+
+            if (is_player()) {
+                log("Robot: Failed to move to goal");
+            }
         }
     }
 
@@ -1250,8 +1254,8 @@ void Thing::robot_tick (void)
                 }
             }
 
-            do_something = true;
             CON("Robot: Wait and rest");
+            do_something = true;
             wait = true;
             break;
         }

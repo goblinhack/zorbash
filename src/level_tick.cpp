@@ -422,10 +422,10 @@ bool Level::tick (void)
                     CON("Robot: Try the next move");
                     player->cursor_path_pop_next_and_move();
                 }
+            }
 
-                if (game->tick_requested.empty()) {
-                    game->robot_mode_tick();
-                }
+            if (game->tick_requested.empty()) {
+                game->robot_mode_tick();
             }
         } else if (player) {
             if (player->monstp &&
