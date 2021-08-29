@@ -99,9 +99,11 @@ void Level::cursor_move (void)
             // But only do this if it is the result of a real mouse move
             // and not just the level auto scrolling.
             //
-            if (!time_have_x_tenths_passed_since(10, wid_last_mouse_motion)) {
-                wid_thing_info_fini();
-                cursor_describe();
+            if (time_have_x_tenths_passed_since(10, timestamp_dungeon_created)) {
+                if (!time_have_x_tenths_passed_since(10, wid_last_mouse_motion)) {
+                    wid_thing_info_fini();
+                    cursor_describe();
+                }
             }
         }
     }

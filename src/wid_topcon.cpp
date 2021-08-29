@@ -564,7 +564,7 @@ _
         return true;
     }
     if (key->scancode == (SDL_Scancode)game->config.key_inventory) {
-        DBG3("Pressed inventory key");
+        CON("Pressed inventory key");
         if (player) {
             game->wid_thing_info_create(player, false);
         }

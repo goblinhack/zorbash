@@ -24,6 +24,7 @@ std::list<WidPopup *> wid_thing_info_window;
 void wid_thing_info_fini (void)
 {_
     DBG3("Destroy wid thing info");
+    // traceback_dump();
 _
     if (game->bag_primary) {
         delete game->bag_primary;
