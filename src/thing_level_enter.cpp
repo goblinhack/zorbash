@@ -61,13 +61,6 @@ void Thing::level_enter (void)
     // following whatever fell in.
     //
     if (is_player()) {
-        if (!level->cursor) {
-            if (!is_cursor()) {
-                level->cursor = level->thing_new("cursor", mid_at);
-                level->cursor->hide();
-            }
-        }
-
         //
         // Flush the persistent light map
         //

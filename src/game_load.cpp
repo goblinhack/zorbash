@@ -458,6 +458,22 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
 
     auto p = l->world_at;
     LOG("DGN: Loading things for level %d,%d,%d", p.x, p.y, p.z);
+
+#if 0
+    LOG("DGN: Loaded slots");
+    FOR_ALL_THING_GROUPS(group) {
+        for (auto x = 0; x < MAP_WIDTH; x++) {
+            for (auto y = 0; y < MAP_HEIGHT; y++) {
+                for (auto slot = 0; slot < MAP_SLOTS; slot++) {
+                    auto id = get(my.t->all_things_id_at[group], x, y, slot);
+                    if (id.ok()) {
+                        CON("Load save slot %d @ %d,%d group %d : %08" PRIx32, slot, x, y, group, id.id);
+                    }
+                }
+            }
+        }
+    }
+#endif
 _
     //
     // Operate on a copy, not live data that might change as we add things
@@ -483,24 +499,30 @@ _
                         t->level = l;
                         if (t->id != id) {
                             game_load_error =
-                            string_sprintf("found different thing than expected at map position %d,%d slot %d: %x expected %x",
-                                x, y, slot, t->id.id, id.id);
+                                string_sprintf(
+                                    "found different thing than expected at map position "
+                                    "%d,%d slot %d: found %08" PRIx32 ", expected %08" PRIx32,
+                                    x, y, slot, t->id.id, id.id);
+
+                            for (auto slot = 0; slot < MAP_SLOTS; slot++) {
+                                auto id = get(ids, x, y, slot);
+                                CON("slot %d : %08" PRIx32, slot, id.id);
+                            }
+
                             return in;
                         }
 
                         t->reinit();
-                        t->con("LOADED %f %f %d", t->mid_at.x, t->mid_at.y, t->id.id);
+                        // t->con("LOADED %f %f %d", t->mid_at.x, t->mid_at.y, t->id.id);
 
-                        CON("From save file  : %s", t->debug_str.c_str());
-                        CON("Newly created as: %s", t->to_dbg_saved_string().c_str());
+                        // CON("From save file  : %s", t->debug_str.c_str());
+                        // CON("Newly created as: %s", t->to_dbg_saved_string().c_str());
 #ifdef ENABLE_DEBUG_THING_SER
                         if (t->to_dbg_saved_string() != t->debug_str) {
-                            if (!t->is_cursor() && !t->is_debug_path()) {
-                                CON("From save file  : %s", t->debug_str.c_str());
-                                CON("Newly created as: %s", t->to_dbg_saved_string().c_str());
-                                game_load_error = "loaded thing is corrupt";
-                                return in;
-                            }
+                            CON("From save file  : %s", t->debug_str.c_str());
+                            CON("Newly created as: %s", t->to_dbg_saved_string().c_str());
+                            game_load_error = "loaded thing is corrupt";
+                            return in;
                         }
 #endif
                     }
@@ -513,14 +535,8 @@ _
     FOR_ALL_THING_GROUPS(group) {
         for (auto p : l->all_things[group]) {
             auto t = p.second;
-            if (t->is_cursor()) {
-                continue;
-            }
-            if (t->is_debug_path()) {
-                continue;
-            }
             csum += t->mid_at.x + t->mid_at.y + t->id.id;
-            t->con("LOAD %f %f %d", t->mid_at.x, t->mid_at.y, t->id.id);
+            // t->con("LOAD %f %f %d", t->mid_at.x, t->mid_at.y, t->id.id);
         }
     }
 
@@ -920,7 +936,9 @@ Game::load (void)
     LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
     LOG("v v v v v v v v v v v v v v v v v v v v v v v v v v v ");
 
+    g_loading = true;
     load(save_file, *this);
+    g_loading = false;
 
     sdl_config_update_all();
 
@@ -955,7 +973,9 @@ Game::load (int slot)
     LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
     LOG("v v v v v v v v v v v v v v v v v v v v v v v v v v v ");
 
+    g_loading = true;
     load(save_file, *this);
+    g_loading = false;
 
     sdl_config_update_all();
 
@@ -979,7 +999,9 @@ Game::load_snapshot (void)
     LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
     LOG("v v v v v v v v v v v v v v v v v v v v v v v v v v v ");
 
+    g_loading = true;
     load(save_file, *this);
+    g_loading = false;
 
     sdl_config_update_all();
 

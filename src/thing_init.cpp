@@ -126,9 +126,9 @@ void Thing::init (Levelp level,
     tp_id = tpp->id;
     tp_or_update();
 
-    if (tpp->is_loggable_for_unimportant_stuff()) {
-        dbg("Creating");
-    }
+//    if (tpp->is_loggable_for_unimportant_stuff()) {
+        log("Creating");
+//    }
 _
     //
     // Init the z depth
@@ -501,6 +501,13 @@ _
     if (is_tmp_thing()) {
         pcg_random_allowed = true;
     }
+
+    //
+    // We should not create things until we have fully loaded.
+    //
+    if (g_loading) {
+        err("Trying to create a thing during loading.");
+    }
 }
 
 void Thing::reinit (void)
@@ -559,6 +566,7 @@ void Thing::reinit (void)
         new_seen_map();
     }
 
+#if 0
     //
     // Relearn the cursor after loading.
     //
@@ -569,6 +577,7 @@ void Thing::reinit (void)
             level->cursor = this;
         }
     }
+#endif
 
     init_lights();
 }

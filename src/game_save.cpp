@@ -323,12 +323,6 @@ std::ostream& operator<<(std::ostream &out, Bits<Levelp & > const my)
     FOR_ALL_THING_GROUPS(group) {
         for (auto p : my.t->all_things[group]) {
             auto t = p.second;
-            if (t->is_cursor()) {
-                continue;
-            }
-            if (t->is_debug_path()) {
-                continue;
-            }
             csum += t->mid_at.x + t->mid_at.y + t->id.id;
             t->con("SAVE %f %f %d", t->mid_at.x, t->mid_at.y, t->id.id);
         }
@@ -492,6 +486,22 @@ std::ostream& operator<<(std::ostream &out, Bits<Levelp & > const my)
     }
 #endif
 
+#if 0
+    LOG("DGN: Saved slots");
+    FOR_ALL_THING_GROUPS(group) {
+        for (auto x = 0; x < MAP_WIDTH; x++) {
+            for (auto y = 0; y < MAP_HEIGHT; y++) {
+                for (auto slot = 0; slot < MAP_SLOTS; slot++) {
+                    auto id = get(my.t->all_things_id_at[group], x, y, slot);
+                    if (id.ok()) {
+                        CON("save slot %d @ %d,%d group %d : %08" PRIx32, slot, x, y, group, id.id);
+                    }
+                }
+            }
+        }
+    }
+#endif
+
     LOG("DGN: Save things");
     FOR_ALL_THING_GROUPS(group) {
         for (auto x = 0; x < MAP_WIDTH; x++) {
@@ -505,9 +515,7 @@ std::ostream& operator<<(std::ostream &out, Bits<Levelp & > const my)
                             return out;
                         }
 
-                        if (DEBUG4) {
-                            t->con("Save");
-                        }
+                        // t->con("Save");
                         out << bits(t);
                     }
                 }

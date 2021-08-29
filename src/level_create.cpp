@@ -52,6 +52,11 @@ void Level::create (point3d at, int seed)
     timestamp_fade_in_begin = time_get_time_ms_cached();
 
     things_gc_force();
+
+    if (!cursor) {
+        cursor = thing_new("cursor", player->mid_at);
+        cursor->hide();
+    }
 }
 
 void Level::place_the_grid (void)
