@@ -1290,10 +1290,10 @@ public:
     void robot_tick(void);
     void enemies_tick(void);
     void robot_change_state(int new_state, const std::string &why);
-    bool robot_ai_create_path_to_goal(int minx, int miny, int maxx, int maxy);
+    bool robot_ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int try_harder = 0);
     int robot_ai_init_can_see_dmap(int minx, int miny, int maxx, int maxy);
     void robot_ai_choose_initial_goals(std::multiset<Goal> &goals, int minx, int miny, int maxx, int maxy);
-    void robot_ai_choose_search_goals(std::multiset<Goal> &goals, bool try_harder);
+    void robot_ai_choose_search_goals(std::multiset<Goal> &goals, int try_harder);
     bool robot_ai_choose_nearby_goal(void);
     void used(Thingp w, Thingp target, bool remove_after_use);
     void use_weapon(void);

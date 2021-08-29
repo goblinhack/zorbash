@@ -1899,7 +1899,7 @@ uint8_t Level::is_lit_recently (const int x, const int y)
     //
     // So anything older than 10 ticks we consider no lit recently
     //
-    return (get(_is_lit_currently, x, y) > 240);
+    return (get(_is_lit_currently, x, y) > 250);
 }
 
 //

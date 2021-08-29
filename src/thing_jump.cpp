@@ -77,7 +77,7 @@ bool Thing::try_to_jump (point to)
     // Block jumping over doors
     //
     if (is_player()) {
-        if (!level->is_lit_recently(x, y)) {
+        if (!level->is_lit_ever(x, y)) {
             if (DEBUG2) {
                 log("No, is not lit or visited");
             }

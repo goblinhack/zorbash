@@ -152,5 +152,8 @@ bool Thing::descend_dungeon (void)
         }
     }
 
+    if (game->robot_mode) {
+        game->robot_mode_tick_requested = true;
+    }
     return false;
 }

@@ -221,6 +221,25 @@ int Thing::is_dangerous (Thingp it)
     int b = it->get_danger_current_level();
 
     //
+    // If I'm low on health then consider it more dangereous
+    //
+    if (get_stamina_max() < get_stamina_max() / 5) {
+        b *= 2;
+    }
+
+    if (get_stamina_max() < get_stamina_max() / 10) {
+        b *= 2;
+    }
+
+    if (get_health() < get_health_max() / 5) {
+        b *= 2;
+    }
+
+    if (get_health() < get_health_max() / 10) {
+        b *= 2;
+    }
+
+    //
     // So giant rats will attack each other if at the same danger level
     //
     return b > a;

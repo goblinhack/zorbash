@@ -22,6 +22,8 @@
 #include "my_wid_actionbar.h"
 #include "my_player.h"
 
+#define MAX_TRY_HARD_LEVEL 3
+
 #define GOAL_ADD(score, msg)                                               \
         total_score += (score);                                            \
         got_a_goal = true;                                                 \
@@ -39,7 +41,8 @@
 // have touched them) and choose the best goal. Create a path to that goal for
 // the thing to walk.
 //
-bool Thing::robot_ai_create_path_to_goal (int minx, int miny, int maxx, int maxy)
+bool Thing::robot_ai_create_path_to_goal (int minx, int miny, int maxx, int maxy,
+                                          int try_harder)
 {_
     point start((int)mid_at.x, (int)mid_at.y);
 
@@ -71,10 +74,7 @@ _
     if (is_player()) {
         robot_ai_init_can_see_dmap(minx, miny, maxx, maxy);
 
-        robot_ai_choose_search_goals(search_goals, false);
-        if (search_goals.empty()) {
-            robot_ai_choose_search_goals(search_goals, true);
-        }
+        robot_ai_choose_search_goals(search_goals, try_harder);
         goalmaps.push_back(GoalMap{search_goals, dmap_can_see});
     }
 
@@ -548,10 +548,8 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                 it->is_hidden ||
                 it->is_falling ||
                 it->is_jumping) {
-                    log(" ignore %s", it->to_string().c_str());
                 continue;
             }
-                    log(" check %s", it->to_string().c_str());
 
             if (it->get_immediate_spawned_owner_id().ok()) {
                 continue;
@@ -820,7 +818,7 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
 // and then create a path to that edge.
 //
 void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals,
-                                          bool try_harder)
+                                          int try_harder)
 {_
     point start((int)mid_at.x, (int)mid_at.y);
 
@@ -897,6 +895,14 @@ void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals,
             in.push_back(point(p.x, p.y - 1));
         }
 
+        if (try_harder < 1) {
+            auto dist = distance(make_fpoint(p), mid_at);
+            float max_dist = ai_scent_distance();
+            if (dist >= max_dist) {
+                continue;
+            }
+        }
+
         int dist = how_far_i_can_jump();
         for (int dx = -dist; dx <= dist; dx++) {
             for (int dy = -dist; dy <= dist; dy++) {
@@ -933,7 +939,7 @@ void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals,
                         continue;
                     }
 
-                    if (!try_harder) {
+                    if (try_harder < 2) {
                         continue;
                     }
                 } else if (level->is_descend_dungeon(o)) {
@@ -944,7 +950,7 @@ void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals,
                         continue;
                     }
 
-                    if (!try_harder) {
+                    if (try_harder < 2) {
                         continue;
                     }
                 } else if (level->is_door(o)) {
@@ -1047,7 +1053,7 @@ next:
             total_score += 10;
         }
 
-        if (try_harder) {
+        if (try_harder < 2) {
             if (level->is_ascend_sewer(p.x, p.y)) {
                 total_score += 10;
             }
@@ -1228,7 +1234,7 @@ void Thing::robot_tick (void)
                     return;
                 }
             } else {
-                if (get_health() < get_stamina_max() / 2) {
+                if (get_health() < get_health_max() / 2) {
                     BOTCON("Robot needs to rest, low on health");
                     game->tick_begin("Robot needs to rest, low on health");
                     robot_change_state(ROBOT_STATE_RESTING, "low on health, rest");
@@ -1247,19 +1253,21 @@ void Thing::robot_tick (void)
                 }
             }
 
-            if (robot_ai_create_path_to_goal(minx, miny, maxx, maxy)) {
-                std::string s = "new goal: ";
-                for (auto p : monstp->move_path) {
-                    s += p.to_string() + " ";
-                }
+            for (int try_harder = 0; try_harder < MAX_TRY_HARD_LEVEL; try_harder++) {
+                if (robot_ai_create_path_to_goal(minx, miny, maxx, maxy, try_harder)) {
+                    std::string s = "new goal: ";
+                    for (auto p : monstp->move_path) {
+                        s += p.to_string() + " ";
+                    }
 
-                if (monstp->move_path.size()) {
-                    robot_change_state(ROBOT_STATE_MOVING, s.c_str());
-                } else {
-                    CON("Robot: Did something");
+                    if (monstp->move_path.size()) {
+                        robot_change_state(ROBOT_STATE_MOVING, s.c_str());
+                    } else {
+                        CON("Robot: Did something");
+                    }
+                    return;
                 }
-                return;
-            }
+            } 
 
             BOTCON("Robot has nothing to do, rest");
             game->tick_begin("nothing to do, rest");

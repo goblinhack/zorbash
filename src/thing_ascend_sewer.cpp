@@ -125,5 +125,9 @@ bool Thing::ascend_sewer (void)
         level->update_new_level();
     }
 
+    if (game->robot_mode) {
+        game->robot_mode_tick_requested = true;
+    }
+
     return true;
 }
