@@ -332,7 +332,7 @@ int Tp::is_rrr58(void) const                                         { return _i
 int Tp::is_rrr59(void) const                                         { return _is_rrr59; }
 int Tp::is_rrr5(void) const                                          { return _is_rrr5; }
 int Tp::is_rrr60(void) const                                         { return _is_rrr60; }
-int Tp::is_rrr61(void) const                                         { return _is_rrr61; }
+int Tp::is_health_booster(void) const                                         { return _is_health_booster; }
 int Tp::is_tmp_thing(void) const                                         { return _is_tmp_thing; }
 int Tp::is_rrr6(void) const                                          { return _is_rrr6; }
 int Tp::is_rrr7(void) const                                          { return _is_rrr7; }
@@ -654,7 +654,7 @@ void Tp::set_is_rrr58(int v)                                         { _is_rrr58
 void Tp::set_is_rrr59(int v)                                         { _is_rrr59 = v; }
 void Tp::set_is_rrr5(int v)                                          { _is_rrr5 = v; }
 void Tp::set_is_rrr60(int v)                                         { _is_rrr60 = v; }
-void Tp::set_is_rrr61(int v)                                         { _is_rrr61 = v; }
+void Tp::set_is_health_booster(int v)                                         { _is_health_booster = v; }
 void Tp::set_is_tmp_thing(int v)                                         { _is_tmp_thing = v; }
 void Tp::set_is_rrr6(int v)                                          { _is_rrr6 = v; }
 void Tp::set_is_rrr7(int v)                                          { _is_rrr7 = v; }

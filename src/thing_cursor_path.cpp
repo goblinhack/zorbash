@@ -102,9 +102,7 @@ _
                     //
                     // Fall through to allow attack
                     //
-                    CON("Robot: Cannot pass");
-                    //clear_move_path("Player cannot pass");
-                    //return false;
+                    CON("Robot: Cannot pass, try to shove/attack?");
                 }
             }
         }
@@ -112,7 +110,6 @@ _
         if (game->robot_mode) {
             CON("Robot: Try to move without shoving to %s", future_pos.to_string().c_str());
         }
-
         if (move_no_shove(future_pos)) {
             return true;
         }

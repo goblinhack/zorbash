@@ -88,6 +88,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_thrown_automatically_when_chosen(False)
     mytp.set_is_treasure_class_b(True)
     mytp.set_is_treasure_type(True)
+    mytp.set_is_health_booster(True)
     mytp.set_is_usable(True)
     mytp.set_is_used_when_thrown(False)
     mytp.set_item_height(4)

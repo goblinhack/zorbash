@@ -71,7 +71,10 @@ _
     if (is_player()) {
         robot_ai_init_can_see_dmap(minx, miny, maxx, maxy);
 
-        robot_ai_choose_search_goals(search_goals);
+        robot_ai_choose_search_goals(search_goals, false);
+        if (search_goals.empty()) {
+            robot_ai_choose_search_goals(search_goals, true);
+        }
         goalmaps.push_back(GoalMap{search_goals, dmap_can_see});
     }
 
@@ -631,44 +634,53 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                     }
                 }
 
-                if (is_enemy(it) && (dist < max_dist)) {
-                    //
-                    // Cannot avoid if this thing is beating on us
-                    //
-                    avoid = false;
+                //
+                // If we can see an enemy, get them! If the monster is not lit
+                // then it's not really fair to use that knowledge.
+                //
+                auto lit_currently = level->is_lit_currently(it->mid_at.x, it->mid_at.y);
+                if (lit_currently) {
+                    if (is_enemy(it) && (dist < max_dist)) {
+                        //
+                        // Cannot avoid if this thing is beating on us
+                        //
+                        avoid = false;
 
-                    //
-                    // The closer an enemy is (something that attacked us), the
-                    // higher the score
-                    //
-                    GOAL_ADD((int)(max_dist - dist) * 200, "attack-enemy");
-                    got_one_this_tile = true;
-                } else if (!avoid && (dist < ai_avoid_distance() && will_avoid_monst(it))) {
-                    //
-                    // Monsters we avoid are more serious threats
-                    //
-                    avoid = true;
-                } else if (!avoid && it->is_minion_generator()) {
-                    //
-                    // Very close, high priority attack
-                    //
-                    GOAL_ADD((int)(max_dist - dist) * 200, "attack-nearby-generator");
-                    got_one_this_tile = true;
-                } else if (!avoid && it->is_monst()) {
-                    if (dist < 2) {
+                        //
+                        // The closer an enemy is (something that attacked us), the
+                        // higher the score
+                        //
+                        GOAL_ADD((int)(max_dist - dist) * 200, "attack-enemy");
+                        got_one_this_tile = true;
+                    } else if (!avoid &&(dist < ai_avoid_distance() && will_avoid_monst(it))) {
+                        //
+                        // Monsters we avoid are more serious threats
+                        //
+                        avoid = true;
+                    } else if (!avoid && it->is_minion_generator()) {
                         //
                         // Very close, high priority attack
                         //
-                        GOAL_ADD((int)(max_dist - dist) * 100, "attack-nearby-monst");
+                        GOAL_ADD((int)(max_dist - dist) * 200, "attack-nearby-generator");
                         got_one_this_tile = true;
-                    } else if (dist < max_dist) {
-                        //
-                        // Further away close, lower priority attack
-                        //
-                        GOAL_ADD((int)(max_dist - dist) * 10, "attack-maybe-monst");
-                        got_one_this_tile = true;
+                    } else if (!avoid && it->is_monst()) {
+                        if (dist < 2) {
+                            //
+                            // Very close, high priority attack
+                            //
+                            GOAL_ADD((int)(max_dist - dist) * 100, "attack-nearby-monst");
+                            got_one_this_tile = true;
+                        } else if (dist < max_dist) {
+                            //
+                            // Further away close, lower priority attack
+                            //
+                            GOAL_ADD((int)(max_dist - dist) * 10, "attack-maybe-monst");
+                            got_one_this_tile = true;
+                        }
                     }
-                } else if (!avoid && it->is_spiderweb() && !dist) {
+                } 
+
+                if (!avoid && it->is_spiderweb() && !dist) {
                     //
                     // Very close, high priority attack
                     //
@@ -801,7 +813,8 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
 // what is currently visible and find the most interesting point at that edge
 // and then create a path to that edge.
 //
-void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals)
+void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals,
+                                          bool try_harder)
 {_
     point start((int)mid_at.x, (int)mid_at.y);
 
@@ -894,18 +907,36 @@ void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals)
                     continue;
                 }
 
+
                 if (level->is_descend_sewer(o)) {
                     //
-                    // Worth investigating
+                    // Worth investigating unless over
                     //
+                    if ((o.x == mid_at.x) && (o.y == mid_at.y)) {
+                        continue;
+                    }
                 } else if (level->is_ascend_sewer(o)) {
                     //
                     // Worth investigating
                     //
+                    if ((o.x == mid_at.x) && (o.y == mid_at.y)) {
+                        continue;
+                    }
+
+                    if (!try_harder) {
+                        continue;
+                    }
                 } else if (level->is_descend_dungeon(o)) {
                     //
                     // Worth investigating
                     //
+                    if ((o.x == mid_at.x) && (o.y == mid_at.y)) {
+                        continue;
+                    }
+
+                    if (!try_harder) {
+                        continue;
+                    }
                 } else if (level->is_door(o)) {
                     //
                     // A locked door is worth investigating
@@ -977,6 +1008,13 @@ next:
     //
     for (auto p : can_reach_cands) {
         //
+        // Avoid sewer descend/ascend loop
+        //
+        if ((p.x == mid_at.x) && (p.y == mid_at.y)) {
+            continue;
+        }
+
+        //
         // Prefer easier terrain
         //
         int terrain_cost = get_terrain_cost(p);
@@ -999,12 +1037,14 @@ next:
             total_score += 10;
         }
 
-        if (level->is_ascend_sewer(p.x, p.y)) {
-            total_score += 10;
-        }
+        if (try_harder) {
+            if (level->is_ascend_sewer(p.x, p.y)) {
+                total_score += 10;
+            }
 
-        if (level->is_descend_dungeon(p.x, p.y)) {
-            total_score += 10;
+            if (level->is_descend_dungeon(p.x, p.y)) {
+                total_score += 10;
+            }
         }
 
         goals.insert(Goal(total_score, p, "search cand"));

@@ -300,7 +300,7 @@ private:
     int _is_rrr59 {};
     int _is_rrr6 {};
     int _is_rrr60 {};
-    int _is_rrr61 {};
+    int _is_health_booster {};
     int _is_rrr7 {};
     int _is_rrr8 {};
     int _is_rrr9 {};
@@ -761,7 +761,7 @@ public:
     int is_rrr59(void) const;
     int is_rrr5(void) const;
     int is_rrr60(void) const;
-    int is_rrr61(void) const;
+    int is_health_booster(void) const;
     int is_rrr6(void) const;
     int is_rrr7(void) const;
     int is_rrr8(void) const;
@@ -1088,7 +1088,7 @@ public:
     void set_is_rrr59(int);
     void set_is_rrr5(int);
     void set_is_rrr60(int);
-    void set_is_rrr61(int);
+    void set_is_health_booster(int);
     void set_is_rrr6(int);
     void set_is_rrr7(int);
     void set_is_rrr8(int);

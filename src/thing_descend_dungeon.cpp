@@ -147,12 +147,6 @@ bool Thing::descend_dungeon (void)
                     level->update_new_level();
                 }
 
-                if (is_player()) {
-                    if (game->robot_mode) {
-                        game->tick_begin("Begin exploring");
-                    }
-                }
-
                 return true;
             }
         }

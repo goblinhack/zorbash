@@ -275,7 +275,7 @@ int Thing::is_rrr58(void) const                                         {_ retur
 int Thing::is_rrr59(void) const                                         {_ return (tp()->is_rrr59()); }
 int Thing::is_rrr5(void) const                                          {_ return (tp()->is_rrr5()); }
 int Thing::is_rrr60(void) const                                         {_ return (tp()->is_rrr60()); }
-int Thing::is_rrr61(void) const                                         {_ return (tp()->is_rrr61()); }
+int Thing::is_health_booster(void) const                                         {_ return (tp()->is_health_booster()); }
 int Thing::is_rrr6(void) const                                          {_ return (tp()->is_rrr6()); }
 int Thing::is_rrr7(void) const                                          {_ return (tp()->is_rrr7()); }
 int Thing::is_rrr8(void) const                                          {_ return (tp()->is_rrr8()); }

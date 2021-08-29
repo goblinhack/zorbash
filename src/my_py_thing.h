@@ -256,7 +256,7 @@ PyObject *thing_is_rrr58(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr59(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr5(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr60(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_rrr61(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_health_booster(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr6(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr7(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr8(PyObject *obj, PyObject *args, PyObject *keywds);

@@ -843,7 +843,7 @@ public:
     int is_rrr59(void) const;
     int is_rrr5(void) const;
     int is_rrr60(void) const;
-    int is_rrr61(void) const;
+    int is_health_booster(void) const;
     int is_tmp_thing(void) const;
     int is_debug_type(void) const;
     int is_hittable(void) const;
@@ -1292,7 +1292,7 @@ public:
     bool robot_ai_create_path_to_goal(int minx, int miny, int maxx, int maxy);
     int robot_ai_init_can_see_dmap(int minx, int miny, int maxx, int maxy);
     void robot_ai_choose_initial_goals(std::multiset<Goal> &goals, int minx, int miny, int maxx, int maxy);
-    void robot_ai_choose_search_goals(std::multiset<Goal> &goals);
+    void robot_ai_choose_search_goals(std::multiset<Goal> &goals, bool try_harder);
     bool robot_ai_choose_nearby_goal(void);
     void used(Thingp w, Thingp target, bool remove_after_use);
     void use_weapon(void);

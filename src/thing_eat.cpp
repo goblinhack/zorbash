@@ -115,6 +115,9 @@ bool Thing::can_eat (const Thingp itp)
 
 bool Thing::eat_something (void)
 {_
+    //
+    // Try for food first, ignoring potions
+    //
     for (const auto& item : monstp->carrying) {
         auto t = level->thing_find(item.id);
         if (!t) {
@@ -128,6 +131,21 @@ bool Thing::eat_something (void)
         }
         if (eat(t)) {
             return true;
+        }
+    }
+
+    //
+    // Try again but include potions
+    //
+    for (const auto& item : monstp->carrying) {
+        auto t = level->thing_find(item.id);
+        if (!t) {
+            continue;
+        }
+        if (t->is_health_booster()) {
+            if (use(t)) {
+                return true;
+            }
         }
     }
     return false;

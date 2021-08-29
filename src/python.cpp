@@ -1484,7 +1484,7 @@ static PyMethodDef python_c_METHODS[] = {
     {"level_is_rrr59_at",                                      (PyCFunction)level_is_rrr59_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_rrr5_at",                                       (PyCFunction)level_is_rrr5_at,                                       METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_rrr60_at",                                      (PyCFunction)level_is_rrr60_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"level_is_rrr61_at",                                      (PyCFunction)level_is_rrr61_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"level_is_health_booster_at",                                      (PyCFunction)level_is_health_booster_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_rrr6_at",                                       (PyCFunction)level_is_rrr6_at,                                       METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_rrr7_at",                                       (PyCFunction)level_is_rrr7_at,                                       METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_rrr8_at",                                       (PyCFunction)level_is_rrr8_at,                                       METH_VARARGS | METH_KEYWORDS, "thing api"},
@@ -1780,7 +1780,7 @@ static PyMethodDef python_c_METHODS[] = {
     {"thing_is_rrr59",                                         (PyCFunction)thing_is_rrr59,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_rrr5",                                          (PyCFunction)thing_is_rrr5,                                          METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_rrr60",                                         (PyCFunction)thing_is_rrr60,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"thing_is_rrr61",                                         (PyCFunction)thing_is_rrr61,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_health_booster",                                         (PyCFunction)thing_is_health_booster,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_rrr6",                                          (PyCFunction)thing_is_rrr6,                                          METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_rrr7",                                          (PyCFunction)thing_is_rrr7,                                          METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_rrr8",                                          (PyCFunction)thing_is_rrr8,                                          METH_VARARGS | METH_KEYWORDS, "thing api"},
@@ -2098,7 +2098,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr59)
     TP_SET_DECL(is_rrr6)
     TP_SET_DECL(is_rrr60)
-    TP_SET_DECL(is_rrr61)
+    TP_SET_DECL(is_health_booster)
     TP_SET_DECL(is_rrr7)
     TP_SET_DECL(is_rrr8)
     TP_SET_DECL(is_rrr9)

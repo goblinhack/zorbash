@@ -412,8 +412,8 @@ class Tp:
     def set_is_rrr60(self, value):
         zx.tp_set_is_rrr60(self, value)
 
-    def set_is_rrr61(self, value):
-        zx.tp_set_is_rrr61(self, value)
+    def set_is_health_booster(self, value):
+        zx.tp_set_is_health_booster(self, value)
 
     def set_is_tmp_thing(self, value):
         zx.tp_set_is_tmp_thing(self, value)

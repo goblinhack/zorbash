@@ -225,7 +225,7 @@ bool Thing::matches (const std::string& what) const
     if (is_rrr59() &&                                         (what == "is_rrr59"))                                         { return true; }
     if (is_rrr5() &&                                          (what == "is_rrr5"))                                          { return true; }
     if (is_rrr60() &&                                         (what == "is_rrr60"))                                         { return true; }
-    if (is_rrr61() &&                                         (what == "is_rrr61"))                                         { return true; }
+    if (is_health_booster() &&                                         (what == "is_health_booster"))                                         { return true; }
     if (is_rrr6() &&                                          (what == "is_rrr6"))                                          { return true; }
     if (is_rrr7() &&                                          (what == "is_rrr7"))                                          { return true; }
     if (is_rrr8() &&                                          (what == "is_rrr8"))                                          { return true; }
@@ -486,7 +486,7 @@ std::function<int(Thingp)> Thing::matches_to_func (const std::string& what)
     if (what == "is_rrr59")                                         { return &Thing::is_rrr59; }
     if (what == "is_rrr5")                                          { return &Thing::is_rrr5; }
     if (what == "is_rrr60")                                         { return &Thing::is_rrr60; }
-    if (what == "is_rrr61")                                         { return &Thing::is_rrr61; }
+    if (what == "is_health_booster")                                         { return &Thing::is_health_booster; }
     if (what == "is_rrr6")                                          { return &Thing::is_rrr6; }
     if (what == "is_rrr7")                                          { return &Thing::is_rrr7; }
     if (what == "is_rrr8")                                          { return &Thing::is_rrr8; }
