@@ -126,7 +126,7 @@ bool Thing::ascend_sewer (void)
     }
 
     if (game->robot_mode) {
-        game->robot_mode_tick_requested = true;
+        game->tick_begin("Begin exploring the new level");
     }
 
     return true;

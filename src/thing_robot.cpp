@@ -1338,8 +1338,11 @@ void Thing::robot_tick (void)
             wait = true;
             break;
         }
-
         break;
+
+        case ROBOT_STATE_OPEN_INVENTORY:
+        {
+        }
     }
 
     log("Robot: Do something");
@@ -1366,6 +1369,9 @@ void Thing::robot_change_state (int new_state, const std::string &why)
         case ROBOT_STATE_RESTING:
             to = "RESTING";
             break;
+        case ROBOT_STATE_OPEN_INVENTORY:
+            to = "OPEN-INVENTORY";
+            break;
     }
     switch (monstp->robot_state) {
         case ROBOT_STATE_IDLE:
@@ -1376,6 +1382,9 @@ void Thing::robot_change_state (int new_state, const std::string &why)
             break;
         case ROBOT_STATE_RESTING:
             from = "RESTING";
+            break;
+        case ROBOT_STATE_OPEN_INVENTORY:
+            from = "OPEN-INVENTORY";
             break;
     }
 
@@ -1392,6 +1401,9 @@ void Thing::robot_change_state (int new_state, const std::string &why)
             break;
         case ROBOT_STATE_RESTING:
             BOTCON("Robot is resting");
+            break;
+        case ROBOT_STATE_OPEN_INVENTORY:
+            BOTCON("Robot is looking in its inventory");
             break;
     }
 }
