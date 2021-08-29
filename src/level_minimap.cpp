@@ -119,7 +119,7 @@ void Level::update_minimap (bool showing_two_levels, bool show_faded)
                     c = BLACK;
                 }
 
-                if (!is_lit_currently(x, y)) {
+                if (!is_lit_recently(x, y)) {
                     c.r /= 2;
                     c.g /= 2;
                     c.b /= 2;
@@ -259,7 +259,7 @@ void Level::update_minimap (bool showing_two_levels, bool show_faded)
                     }
                 }
 
-                if (!is_lit_currently(x, y)) {
+                if (!is_lit_recently(x, y)) {
                     c.r /= 2;
                     c.g /= 2;
                     c.b /= 2;

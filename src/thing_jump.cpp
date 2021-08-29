@@ -76,15 +76,17 @@ bool Thing::try_to_jump (point to)
     //
     // Block jumping over doors
     //
-    if (!level->is_lit_currently(x, y) && !level->is_lit_ever(x, y)) {_
-        if (DEBUG2) {
-            log("No, is not lit or visited");
-        }
+    if (is_player()) {
+        if (!level->is_lit_recently(x, y)) {
+            if (DEBUG2) {
+                log("No, is not lit or visited");
+            }
 
-        if (is_player()) {
-            TOPCON("You can't jump into the unknown.");
+            if (is_player()) {
+                TOPCON("You can't jump into the unknown.");
+            }
+            return false;
         }
-        return false;
     }
 
     bool check_dest = true;

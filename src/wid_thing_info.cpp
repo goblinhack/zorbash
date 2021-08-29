@@ -324,7 +324,7 @@ _
     }
 
     if (when_hovering_over) {
-        if (!level->is_lit_currently(t->mid_at.x, t->mid_at.y)) {
+        if (!level->is_lit_recently(t->mid_at.x, t->mid_at.y)) {
             if (DEBUG1) {
                 t->log("No; not lit");
             }

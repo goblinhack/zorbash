@@ -584,6 +584,7 @@ public:
     uint8_t is_lava(const int x, const int y);
     uint8_t is_lava(const point &p);
     uint8_t is_lit_currently(const int x, const int y);
+    uint8_t is_lit_recently(const int x, const int y);
     uint8_t is_lit_currently(const point &p);
     uint8_t is_lit_currently_no_check(const int x, const int y);
     uint8_t is_lit_currently_no_check(const point &p);

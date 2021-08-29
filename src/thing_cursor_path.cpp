@@ -28,7 +28,7 @@ bool Thing::cursor_path_pop_next_and_move (void)
         }
 
         auto to = monstp->move_path[0];
-        auto future_pos = fpoint(to.x, to.y);
+        auto future_pos = point(to.x, to.y);
 
         FOR_ALL_CURSOR_PATH_THINGS(level, t, to.x, to.y) {
             t->dead("by end of life");
@@ -110,6 +110,7 @@ _
         if (game->robot_mode) {
             CON("Robot: Try to move without shoving to %s", future_pos.to_string().c_str());
         }
+
         if (move_no_shove(future_pos)) {
             return true;
         }

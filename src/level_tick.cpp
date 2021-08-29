@@ -420,7 +420,6 @@ bool Level::tick (void)
                 if (player) {
                     if (player->monstp &&
                         player->monstp->move_path.size()) {
-                        CON("Robot: Try the next move");
                         player->cursor_path_pop_next_and_move();
                     }
                 }

@@ -861,6 +861,9 @@ void Thing::blit_internal (int fbo,
         c = fire_color;
     }
 
+    //
+    // Means it has been lit, but light does fade
+    //
     uint8_t fade = level->is_lit_currently(mid_at.x, mid_at.y);
     if (fbo == FBO_FULLMAP) {
         c.a = 255;

@@ -1888,6 +1888,23 @@ uint8_t Level::is_lit_currently_no_check (const point &p)
     return (get_no_check(_is_lit_currently, p.x, p.y));
 }
 
+//
+// Note light fades
+//
+uint8_t Level::is_lit_recently (const int x, const int y)
+{
+    if (unlikely(is_oob(x, y))) {
+        return (false);
+    }
+    //
+    // So anything older than 10 ticks we consider no lit recently
+    //
+    return (get(_is_lit_currently, x, y) > 240);
+}
+
+//
+// Note light fades
+//
 uint8_t Level::is_lit_currently (const int x, const int y)
 {
     if (unlikely(is_oob(x, y))) {

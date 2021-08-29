@@ -31,8 +31,8 @@
             last_msg += ", ";                                              \
             last_msg += msg;                                               \
         }                                                                  \
-        dbg2(" add goal (%d,%d) score %d %s, %s",                          \
-             p.x + minx, p.y + miny, score, msg, it->to_string().c_str()); \
+        dbg(" add goal (%d,%d) score %d %s, %s",                           \
+            p.x + minx, p.y + miny, score, msg, it->to_string().c_str());  \
 
 //
 // Look at all the things that are currently visited (read that as light rays
@@ -82,7 +82,9 @@ _
     // No goals?
     //
     if (goalmaps.empty()) {
-        dbg2("No goals found");
+        if (is_player()) {
+            CON("Robot: @(%d,%d) No goals found", (int)mid_at.x, (int)mid_at.y);
+        }
         return false;
     }
 
@@ -284,7 +286,9 @@ _
                 }
 
                 if (is_player()) {
-                    CON("Robot: Found a goal: %s %s, score %d",
+                    CON("Robot: @(%d,%d) Found a goal: %s %s, score %d",
+                        (int)mid_at.x,
+                        (int)mid_at.y,
                         it->to_string().c_str(), result.goal.msg.c_str(),
                         (int)result.goal.score);
                     BOTCON("Robot: goal %s %s",
@@ -495,7 +499,9 @@ int Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy)
     // We want to find how far everything is from us.
     //
     set(dmap_can_see->val, start.x - minx, start.y - miny, DMAP_IS_GOAL);
-    dmap_print(dmap_can_see);
+    if (DEBUG3) {
+        dmap_print(dmap_can_see);
+    }
     dmap_process(dmap_can_see, point(0, 0), point(maxx - minx, maxy - miny));
 
     auto t = nearby_most_dangerous_thing_get();
@@ -638,8 +644,8 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                 // If we can see an enemy, get them! If the monster is not lit
                 // then it's not really fair to use that knowledge.
                 //
-                auto lit_currently = level->is_lit_currently(it->mid_at.x, it->mid_at.y);
-                if (lit_currently) {
+                auto lit_recently = level->is_lit_recently(it->mid_at.x, it->mid_at.y);
+                if (lit_recently) {
                     if (is_enemy(it) && (dist < max_dist)) {
                         //
                         // Cannot avoid if this thing is beating on us
@@ -826,13 +832,17 @@ void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals,
     in.push_back(start);
     set(pushed, start.x, start.y, true);
 
-    log("Dmap, to player:");
     auto dmap_to_player = &level->dmap_to_player;
-    dmap_print(dmap_to_player);
+    if (DEBUG3) {
+        log("Dmap, to player:");
+        dmap_print(dmap_to_player);
+    }
 
-    log("Dmap, can see:");
     auto dmap_can_see = get_dmap_can_see();
-    dmap_print(dmap_can_see);
+    if (DEBUG3) {
+        log("Dmap, can see:");
+        dmap_print(dmap_can_see);
+    }
 
     while (!in.empty()) {
         auto p = in.front();

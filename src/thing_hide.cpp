@@ -39,6 +39,4 @@ void Thing::hide (void)
         auto w = level->thing_find(on_fire_anim_id);
         if (w) { w->hide(); }
     }
-
-    dbg("Is now hidden");
 }

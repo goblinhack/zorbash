@@ -35,7 +35,6 @@ void Thing::visible (void)
         }
     }
 
-    dbg("Is now visible");
     is_hidden = false;
 
     //

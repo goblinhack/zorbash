@@ -280,6 +280,7 @@ public:
     bool move(fpoint future_pos);
     bool move(fpoint future_pos, uint8_t up, uint8_t down, uint8_t left, uint8_t right, uint8_t fire, uint8_t idle, bool shove_allowed);
     bool move_no_shove(fpoint future_pos);
+    bool move_no_shove(point future_pos);
     bool move_to_try(const point&, const bool escaping, bool check_only);
     bool move_to_or_attack(const point&);
     bool move_to_or_escape(const point&);
