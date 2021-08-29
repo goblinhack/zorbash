@@ -1119,9 +1119,11 @@ bool Thing::robot_ai_choose_nearby_goal (void)
                 }
 
                 auto items = anything_to_carry_at(at);
+                int item_count = 1;
                 if (items.size() >= 1) {
                     for (auto item : items) {
-                        CON("Robot: Try to carry %s", item->to_string().c_str());
+                        CON("Robot: Try to carry [%d] %s", item_count, item->to_string().c_str());
+                        item_count++;
                         if (try_to_carry(item)) {
                             BOTCON("Robot collected %s", item->text_the().c_str());
                             game->tick_begin("Robot collected " + item->to_string());
@@ -1283,6 +1285,7 @@ void Thing::robot_tick (void)
             //
             if (robot_ai_init_can_see_dmap(minx, miny, maxx, maxy)) {
                 CON("Robot: Something interrupted me");
+                game->tick_begin("Robot move interrupted by something");
                 robot_change_state(ROBOT_STATE_IDLE, "move interrupted by a change");
                 wid_actionbar_init();
                 return;

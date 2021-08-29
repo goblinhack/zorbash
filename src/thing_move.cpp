@@ -233,22 +233,24 @@ bool Thing::move (fpoint future_pos,
             game->tick_begin("player idled");
         }
 
-        dbg("Check if there is anything to carry here");
-        auto items = anything_to_carry();
-        if (!items.empty()) {
-            //
-            // In mouse mode, it really is better to open a window to allow
-            // choosing
-            //
+        if (!game->robot_mode) {
+            dbg("Check if there is anything to carry here");
+            auto items = anything_to_carry();
+            if (!items.empty()) {
+                //
+                // In mouse mode, it really is better to open a window to allow
+                // choosing
+                //
 #if 0
-            if (items.size() > 1) {
-                game->wid_collect_create(items);
-            } else {
-                try_to_carry(items);
-            }
+                if (items.size() > 1) {
+                    game->wid_collect_create(items);
+                } else {
+                    try_to_carry(items);
+                }
 #else
-            game->wid_collect_create(items);
+                game->wid_collect_create(items);
 #endif
+            }
         } else {
             TOPCON("You wait...");
 

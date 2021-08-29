@@ -42,6 +42,10 @@ void Level::cursor_move (void)
         return;
     }
 
+    if (player && player->is_dead) {
+        return;
+    }
+
     if (is_mouse_over_any_bag()) {
         return;
     }
@@ -122,6 +126,10 @@ void Level::cursor_recreate (void)
     // Distracting when in robot mode
     //
     if (game->robot_mode) {
+        return;
+    }
+
+    if (player && player->is_dead) {
         return;
     }
 

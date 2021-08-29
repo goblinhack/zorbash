@@ -30,6 +30,10 @@ bool Level::tick (void)
         return false;
     }
 
+    if (!cursor) {
+        cursor = thing_new("cursor", player->mid_at);
+    }
+
     //
     // Prefer to cleanup on ticks, to make the randomness more reproducable.
     //

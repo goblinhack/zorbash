@@ -1410,6 +1410,14 @@ void sdl_loop (void)
         if (unlikely(g_need_restart)) {
             break;
         }
+
+#if 0
+        if (unlikely(g_saved_snapshot)) {
+            g_saved_snapshot = false;
+            game->load_snapshot();
+            game->tick_begin("Resume after snapshot");
+        }
+#endif
     }
 
     LOG("Exited main loop");

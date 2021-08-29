@@ -53,7 +53,7 @@ void Level::create (point3d at, int seed)
 
     things_gc_force();
 
-    if (!cursor) {
+    if (!cursor && player) {
         cursor = thing_new("cursor", player->mid_at);
         cursor->hide();
     }

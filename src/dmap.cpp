@@ -248,6 +248,7 @@ void dmap_process (Dmap *D, point tl, point br)
 
 void dmap_process (Dmap *D)
 {
+#if 0
     //
     // Sanity check the dmap does not take too much time
     //
@@ -262,6 +263,9 @@ void dmap_process (Dmap *D)
     } else {
         dmap_process(D, point(0, 0), point(MAP_WIDTH, MAP_HEIGHT));
     }
+#else
+    dmap_process(D, point(0, 0), point(MAP_WIDTH, MAP_HEIGHT));
+#endif
 }
 
 static bool is_movement_blocking_hard_at (const Dmap *D, int x, int y)

@@ -324,7 +324,7 @@ std::ostream& operator<<(std::ostream &out, Bits<Levelp & > const my)
         for (auto p : my.t->all_things[group]) {
             auto t = p.second;
             csum += t->mid_at.x + t->mid_at.y + t->id.id;
-            t->con("SAVE %f %f %d", t->mid_at.x, t->mid_at.y, t->id.id);
+            // t->con("SAVE %f %f %d", t->mid_at.x, t->mid_at.y, t->id.id);
         }
     }
     out << bits(csum);

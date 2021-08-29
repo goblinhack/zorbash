@@ -31,6 +31,7 @@ extern bool g_errored;                  // An error has occurred
 extern bool g_grab_next_key;            // Waiting for key input
 extern bool g_need_restart;             // Need to restart game
 extern bool g_loading;                  // Currently loading
+extern bool g_saved_snapshot;           // Just saved a snapshot
 extern bool g_opt_debug1;               // Basic debug
 extern bool g_opt_debug2;               // As above but includes log indentation and more detailed debugs
 extern bool g_opt_debug3;               // As above but show the entire level

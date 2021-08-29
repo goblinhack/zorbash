@@ -25,6 +25,7 @@ bool g_grab_next_key;            // Waiting for key input
 bool g_need_restart;             // Need to restart game
 bool g_opt_debug1;               // Basic debug
 bool g_loading;                  // Currently loading
+bool g_saved_snapshot;           // Just saved a snapshot
 bool g_opt_debug2;               // As above but includes log indentation and more detailed debugs
 bool g_opt_debug3;               // As above but show the entire level
 bool g_opt_debug4;               // As above but include memory checks
