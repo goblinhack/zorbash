@@ -175,7 +175,9 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     uint64_t bits64 = 0;
     int shift = 0;
     /* uint64_t */ bits64 |= (my.t->has_ever_moved               ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->has_laser                    ? 1LLU : 0LLU) << shift; shift++;
     /* uint64_t */ bits64 |= (my.t->has_light                    ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->has_projectile               ? 1LLU : 0LLU) << shift; shift++;
     /* uint64_t */ bits64 |= (my.t->is_activated                 ? 1LLU : 0LLU) << shift; shift++;
     /* uint64_t */ bits64 |= (my.t->is_attached                  ? 1LLU : 0LLU) << shift; shift++;
     /* uint64_t */ bits64 |= (my.t->is_being_destroyed           ? 1LLU : 0LLU) << shift; shift++;
@@ -280,7 +282,7 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     /////////////////////////////////////////////////////////////////////////
 
 #ifdef ENABLE_DEBUG_THING_SER
-    out << bits(my.t->to_dbg_string());
+    out << bits(my.t->to_dbg_saved_string());
 #endif
 
     WRITE_MAGIC(THING_MAGIC_END);
@@ -328,7 +330,7 @@ std::ostream& operator<<(std::ostream &out, Bits<Levelp & > const my)
                 continue;
             }
             csum += t->mid_at.x + t->mid_at.y + t->id.id;
-            //t->con("SAVE %f %f %d", t->mid_at.x, t->mid_at.y, t->id.id);
+            t->con("SAVE %f %f %d", t->mid_at.x, t->mid_at.y, t->id.id);
         }
     }
     out << bits(csum);

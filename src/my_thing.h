@@ -78,8 +78,6 @@ public:
     // v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v
     /////////////////////////////////////////////////////////////////////////
     uint64_t has_ever_moved:1                  {};
-    uint64_t has_external_particle:1           {}; // current in motion particle
-    uint64_t has_internal_particle:1           {}; // current in motion particle
     uint64_t has_laser:1                       {}; // current laser being fired
     uint64_t has_light:1                       {};
     uint64_t has_projectile:1                  {}; // current projectile being fired
@@ -180,6 +178,8 @@ public:
     uint64_t is_being_dropped:1                {};
     uint64_t is_blitted:1                      {};
     uint64_t inited_tiles:1                    {};
+    uint64_t has_external_particle:1           {}; // current in motion particle
+    uint64_t has_internal_particle:1           {}; // current in motion particle
 #ifdef ENABLE_DEBUG_THING_SER
     std::string debug_str;
 #endif
@@ -975,6 +975,7 @@ public:
     std::string text_The(void) const;
     std::string to_string(void) const;
     std::string to_dbg_string(void) const;
+    std::string to_dbg_saved_string(void) const;
     std::string to_short_string(void) const;
     std::vector<Lightp> &get_light(void);
     std::vector<Thingp> get_item_list(void);

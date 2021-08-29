@@ -227,7 +227,9 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     int shift = 0;
 //CON("LOAD %016LX ",bits64);
     /* uint64_t */            my.t->has_ever_moved                = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->has_laser                     = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
     /* uint64_t */            my.t->has_light                     = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->has_projectile                = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
     /* uint64_t */            my.t->is_activated                  = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
     /* uint64_t */            my.t->is_attached                   = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
     /* uint64_t */            my.t->is_being_destroyed            = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
@@ -487,15 +489,15 @@ _
                         }
 
                         t->reinit();
-                        //t->con("LOADED %f %f %d", t->mid_at.x, t->mid_at.y, t->id.id);
+                        t->con("LOADED %f %f %d", t->mid_at.x, t->mid_at.y, t->id.id);
 
-                        //CON("From save file  : %s", t->debug_str.c_str());
-                        //CON("Newly created as: %s", t->to_dbg_string().c_str());
+                        CON("From save file  : %s", t->debug_str.c_str());
+                        CON("Newly created as: %s", t->to_dbg_saved_string().c_str());
 #ifdef ENABLE_DEBUG_THING_SER
-                        if (t->to_dbg_string() != t->debug_str) {
+                        if (t->to_dbg_saved_string() != t->debug_str) {
                             if (!t->is_cursor() && !t->is_debug_path()) {
                                 CON("From save file  : %s", t->debug_str.c_str());
-                                CON("Newly created as: %s", t->to_dbg_string().c_str());
+                                CON("Newly created as: %s", t->to_dbg_saved_string().c_str());
                                 game_load_error = "loaded thing is corrupt";
                                 return in;
                             }
@@ -518,7 +520,7 @@ _
                 continue;
             }
             csum += t->mid_at.x + t->mid_at.y + t->id.id;
-            // t->con("LOAD %f %f %d", t->mid_at.x, t->mid_at.y, t->id.id);
+            t->con("LOAD %f %f %d", t->mid_at.x, t->mid_at.y, t->id.id);
         }
     }
 
