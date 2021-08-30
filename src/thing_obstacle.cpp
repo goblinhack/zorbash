@@ -142,15 +142,7 @@ bool Thing::collision_obstacle (Thingp it)
             }
         }
 
-        //
-        // Do not include this check. It stops monsts seeing down a corridor
-        // with a monst already in it
-        //
-        // if (it->is_alive_monst()) {
-        //     return true;
-        // }
-
-        if (will_avoid_threat(it)) {
+        if (will_avoid_hazard(it)) {
             return true;
         }
 

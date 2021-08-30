@@ -16,7 +16,7 @@
 #include "my_array_bounds_check.h"
 #include "my_vector_bounds_check.h"
 
-bool Tp::will_avoid_threat (Levelp level, point p) const
+bool Tp::will_avoid_hazard (Levelp level, point p) const
 {_
     if (level->is_shallow_water(p) || level->is_deep_water(p)) {
         if (hates_water()) {
@@ -58,7 +58,7 @@ bool Tp::will_avoid_threat (Levelp level, point p) const
     return false;
 }
 
-bool Thing::will_avoid_threat (const point &p)
+bool Thing::will_avoid_hazard (const point &p)
 {_
     if (level->is_shallow_water(p) || level->is_deep_water(p)) {
         if (hates_water()) {
@@ -101,17 +101,10 @@ bool Thing::will_avoid_threat (const point &p)
         }
     }
 
-    FOR_ALL_THINGS_THAT_INTERACT(level, it, p.x, p.y) {
-        if (it == this) { continue; }
-        if (is_dangerous(it)) {
-            return true;
-        }
-    } FOR_ALL_THINGS_END()
-
     return false;
 }
 
-bool Thing::will_avoid_threat (const Thingp itp)
+bool Thing::will_avoid_hazard (const Thingp itp)
 {_
     auto me = tp();
     auto it = itp->tp();
@@ -205,13 +198,6 @@ bool Thing::will_avoid_threat (const Thingp itp)
         }
     }
 
-    FOR_ALL_THINGS_THAT_INTERACT(level, it, itp->mid_at.x, itp->mid_at.y) {
-        if (it == this) { continue; }
-        if (is_dangerous(it)) {
-            return true;
-        }
-    } FOR_ALL_THINGS_END()
-
     return false;
 }
 
@@ -260,10 +246,67 @@ bool Thing::will_avoid_monst (const Thingp it)
         }
     }
 
+    FOR_ALL_THINGS_THAT_INTERACT(level, it, mid_at.x, mid_at.y) {
+        if (it == this) { continue; }
+        if (is_dangerous(it)) {
+            return true;
+        }
+    } FOR_ALL_THINGS_END()
+
     return false;
 }
 
-bool Thing::will_avoid_threat (const fpoint &p)
+bool Thing::will_avoid_monst (const point &p)
 {_
-    return will_avoid_threat(point(p.x, p.y));
+    auto me = tp();
+
+    FOR_ALL_THINGS_THAT_INTERACT(level, it, mid_at.x, mid_at.y) {
+        if (it == this) { continue; }
+        if (me->is_monst()) {
+            if (it->is_player()) {
+                if (is_dangerous(it)) {
+                    return true;
+                }
+            }
+        }
+
+        if (me->is_meat()) {
+            if (it->is_meat_eater() || it->attack_meat()) {
+                if (is_dangerous(it)) {
+                    return true;
+                }
+            }
+        }
+
+        if (me->is_humanoid()) {
+            if (it->attack_humanoid()) {
+                if (is_dangerous(it)) {
+                    return true;
+                }
+            }
+        }
+
+        if (me->is_living()) {
+            if (it->attack_living()) {
+                if (is_dangerous(it)) {
+                    return true;
+                }
+            }
+        }
+
+        if (me->is_jelly_baby()) {
+            //
+            // But allow baby slimes to attack each other!
+            //
+            if (it->is_jelly_parent()) {
+                return true;
+            }
+        }
+
+        if (is_dangerous(it)) {
+            return true;
+        }
+    } FOR_ALL_THINGS_END()
+
+    return false;
 }

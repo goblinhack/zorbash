@@ -428,7 +428,7 @@ public:
     Tp (void);
     ~Tp (void);
 
-    bool will_avoid_threat(class Level*, point p) const;
+    bool will_avoid_hazard(class Level*, point p) const;
     const Dice& get_damage_bite_dice(void) const;
     const Dice& get_damage_crush_dice(void) const;
     const Dice& get_damage_melee_dice(void) const;

@@ -632,7 +632,7 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                 // If this is something we really want to avoid, like
                 // fire, then stay away from it
                 //
-                if (will_avoid_threat(it)) {
+                if (will_avoid_hazard(it)) {
                     if (dist < 2) {
                         avoid = true;
                     }

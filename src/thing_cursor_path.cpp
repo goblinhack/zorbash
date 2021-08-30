@@ -52,8 +52,8 @@ bool Thing::cursor_path_pop_next_and_move (void)
         // appear in the path
         //
         if (is_player() && game->robot_mode) {
-            if (will_avoid_threat(future_pos)) {
-                CON("Robot: Next position %d,%d is a threat",
+            if (will_avoid_hazard(future_pos)) {
+                CON("Robot: Next position %d,%d is a hazard",
                     (int)future_pos.x, (int)future_pos.y);
 _
                 if (monstp->move_path.size()) {
@@ -67,11 +67,11 @@ _
                     CON("Robot: Next-next position %d,%d is a threat",
                         (int)jump_pos.x, (int)jump_pos.y);
 _
-                    if (will_avoid_threat(jump_pos) && monstp->move_path.size()) {
+                    if (will_avoid_hazard(jump_pos) && monstp->move_path.size()) {
                         auto jump_pos = monstp->move_path[0];
                         monstp->move_path.erase(monstp->move_path.begin());
 
-                        if (will_avoid_threat(jump_pos)) {
+                        if (will_avoid_hazard(jump_pos)) {
                             //
                             // Give up
                             //
@@ -102,12 +102,19 @@ _
                     //
                     // Fall through to allow attack
                     //
-                    CON("Robot: Cannot pass, try to shove/attack?");
+                    CON("Robot: Cannot pass, hazard?");
+                    return false;
                 }
             }
-        }
 
-        if (game->robot_mode) {
+            if (will_avoid_monst(future_pos)) {
+                CON("Robot: Try to attack monst at %s", future_pos.to_string().c_str());
+
+                if (move_no_shove(future_pos)) {
+                    return true;
+                }
+            }
+
             CON("Robot: Try to move without shoving to %s", future_pos.to_string().c_str());
         }
 

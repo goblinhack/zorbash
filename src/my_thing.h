@@ -324,9 +324,9 @@ public:
     bool use(Thingp w);
     bool wield(Thingp w);
     bool will_avoid_monst(const Thingp it);
-    bool will_avoid_threat(const fpoint &p);
-    bool will_avoid_threat(const point &p);
-    bool will_avoid_threat(const Thingp it);
+    bool will_avoid_monst(const point &p);
+    bool will_avoid_hazard(const point &p);
+    bool will_avoid_hazard(const Thingp it);
     bool will_prefer_terrain(const Thingp it);
     bool worth_eating(const Thingp it);
     int worth_collecting(const Thingp it);

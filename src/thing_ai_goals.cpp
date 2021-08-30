@@ -162,9 +162,9 @@ _
                 // If this is something we really want to avoid, like
                 // fire, then stay away from it
                 //
-                if (will_avoid_threat(it)) {
+                if (will_avoid_hazard(it)) {
                     if (distance(mid_at, it->mid_at) < 2) {
-                        dbg2("Need to avoid threat %s", it->to_string().c_str());
+                        dbg2("Need to avoid hazard %s", it->to_string().c_str());
                         avoid = true;
                     }
                 }

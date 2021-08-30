@@ -203,7 +203,7 @@ Tpp Level::tp_random_monst (const point &p)
             return nullptr;
         }
         auto tpp = ::tp_random_monst();
-        if (tpp->will_avoid_threat(this, p)) {
+        if (tpp->will_avoid_hazard(this, p)) {
             continue;
         }
 
@@ -236,7 +236,7 @@ Tpp Level::tp_random_monst_easy (const point &p)
             return nullptr;
         }
         auto tpp = ::tp_random_monst();
-        if (tpp->will_avoid_threat(this, p)) {
+        if (tpp->will_avoid_hazard(this, p)) {
             continue;
         }
 
@@ -274,7 +274,7 @@ Tpp Level::tp_random_monst_hard (const point &p)
             return nullptr;
         }
         auto tpp = ::tp_random_monst();
-        if (tpp->will_avoid_threat(this, p)) {
+        if (tpp->will_avoid_hazard(this, p)) {
             continue;
         }
 
@@ -584,7 +584,7 @@ Tpp Level::tp_random_minion_generator (const point &p)
             return nullptr;
         }
         auto tpp = ::tp_random_minion_generator();
-        if (tpp->will_avoid_threat(this, p)) {
+        if (tpp->will_avoid_hazard(this, p)) {
             continue;
         }
         return tpp;

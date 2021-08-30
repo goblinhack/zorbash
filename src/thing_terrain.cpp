@@ -46,25 +46,13 @@ void Thing::dmap_modify_terrain_cost (point p, uint8_t *d)
         auto x = p.x + d.x;
         auto y = p.y + d.y;
 
-        FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, MAP_DEPTH_OBJ) {
-            auto tpp = t->tp();
-            if (!tpp->is_monst()) {
-                continue;
-            }
+        if (will_avoid_monst(point(x, y))) {
+            pref += DMAP_LESS_PREFERRED_TERRAIN;
+        }
 
-            if (t->is_dead) {
-                continue;
-            }
-
-            if (will_avoid_threat(point(x, y))) {
-                pref += t->get_health_max();
-            }
-
-            if (is_dangerous(t)) {
-                pref += DMAP_LESS_PREFERRED_TERRAIN;
-            }
-
-        } FOR_ALL_THINGS_END()
+        if (will_avoid_hazard(point(x, y))) {
+            pref += DMAP_LESS_PREFERRED_TERRAIN;
+        }
     }
 
     if (pref > DMAP_MAX_LESS_PREFERRED_TERRAIN) {

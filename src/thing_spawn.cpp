@@ -67,7 +67,7 @@ _
         //
         // No spawning onto chasms for example
         //
-        if (tpp->will_avoid_threat(level, p)) {
+        if (tpp->will_avoid_hazard(level, p)) {
             continue;
         }
 
@@ -152,7 +152,7 @@ bool Thing::spawn_next_to_or_on_monst (const std::string& what)
         //
         // No spawning onto chasms for example
         //
-        if (tpp->will_avoid_threat(level, p)) {
+        if (tpp->will_avoid_hazard(level, p)) {
             continue;
         }
 
