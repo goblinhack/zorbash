@@ -24,34 +24,55 @@ void Thing::dmap_modify_terrain_cost (point p, uint8_t *d)
         pref++;
     }
 
+    std::vector<std::pair<Thingp, int> > possible;
+
+    {
+        static const std::vector<point> all_deltas = {
+            point(-1, -1),
+            point( 1, -1),
+            point(-1,  1),
+            point( 1,  1),
+            point(0, 0),
+            point(0, -1),
+            point(-1, 0),
+            point(1, 0),
+            point(0, 1),
+        };
+
+        for (const auto& d : all_deltas) {
+            auto x = p.x + d.x;
+            auto y = p.y + d.y;
+
+            if (will_avoid_monst(point(x, y))) {
+                pref += DMAP_LESS_PREFERRED_TERRAIN;
+            }
+        }
+    }
+
     if (is_hazardous_to_me(p)) {
         pref += DMAP_LESS_PREFERRED_TERRAIN;
     }
 
-    std::vector<std::pair<Thingp, int> > possible;
+    {
+        static const std::vector<point> all_deltas = {
+            point(-1, -1),
+            point( 1, -1),
+            point(-1,  1),
+            point( 1,  1),
+            // no 0, 0
+            point(0, -1),
+            point(-1, 0),
+            point(1, 0),
+            point(0, 1),
+        };
 
-    static const std::vector<point> all_deltas = {
-        point(-1, -1),
-        point( 1, -1),
-        point(-1,  1),
-        point( 1,  1),
-        point(0, 0),
-        point(0, -1),
-        point(-1, 0),
-        point(1, 0),
-        point(0, 1),
-    };
+        for (const auto& d : all_deltas) {
+            auto x = p.x + d.x;
+            auto y = p.y + d.y;
 
-    for (const auto& d : all_deltas) {
-        auto x = p.x + d.x;
-        auto y = p.y + d.y;
-
-        if (will_avoid_monst(point(x, y))) {
-            pref += DMAP_LESS_PREFERRED_TERRAIN;
-        }
-
-        if (will_avoid_hazard(point(x, y))) {
-            pref += DMAP_LESS_PREFERRED_TERRAIN;
+            if (will_avoid_hazard(point(x, y))) {
+                pref += DMAP_LESS_PREFERRED_TERRAIN / 2;
+            }
         }
     }
 
