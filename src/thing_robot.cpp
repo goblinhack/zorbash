@@ -22,7 +22,7 @@
 #include "my_wid_actionbar.h"
 #include "my_player.h"
 
-#define MAX_TRY_HARD_LEVEL 3
+#define MAX_TRY_HARD_LEVEL 4
 
 #define GOAL_ADD(score, msg)                                               \
         total_score += (score);                                            \
@@ -895,7 +895,7 @@ void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals,
             in.push_back(point(p.x, p.y - 1));
         }
 
-        if (try_harder < 1) {
+        if (try_harder < 3) {
             auto dist = distance(make_fpoint(p), mid_at);
             float max_dist = ai_scent_distance();
             if (dist >= max_dist) {
@@ -923,12 +923,22 @@ void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals,
                     continue;
                 }
 
-
-                if (level->is_descend_sewer(o)) {
+                if (level->is_door(o)) {
+                    //
+                    // A locked door is worth investigating
+                    //
+                    if (try_harder != 1) {
+                        continue;
+                    }
+                } else if (level->is_descend_sewer(o)) {
                     //
                     // Worth investigating unless over
                     //
                     if ((o.x == mid_at.x) && (o.y == mid_at.y)) {
+                        continue;
+                    }
+
+                    if (try_harder != 2) {
                         continue;
                     }
                 } else if (level->is_ascend_sewer(o)) {
@@ -939,7 +949,7 @@ void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals,
                         continue;
                     }
 
-                    if (try_harder < 2) {
+                    if (try_harder != 3) {
                         continue;
                     }
                 } else if (level->is_descend_dungeon(o)) {
@@ -950,13 +960,9 @@ void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals,
                         continue;
                     }
 
-                    if (try_harder < 2) {
+                    if (try_harder != 3) {
                         continue;
                     }
-                } else if (level->is_door(o)) {
-                    //
-                    // A locked door is worth investigating
-                    //
                 } else {
                     //
                     // If lit then we can already see it, so not worth
@@ -1045,15 +1051,19 @@ next:
         //
         // Be curious
         //
-        if (level->is_door(p.x, p.y)) {
-            total_score += 10;
+        if (try_harder == 1) {
+            if (level->is_door(p.x, p.y)) {
+                total_score += 10;
+            }
         }
 
-        if (level->is_descend_sewer(p.x, p.y)) {
-            total_score += 10;
+        if (try_harder == 2) {
+            if (level->is_descend_sewer(p.x, p.y)) {
+                total_score += 10;
+            }
         }
 
-        if (try_harder < 2) {
+        if (try_harder == 3) {
             if (level->is_ascend_sewer(p.x, p.y)) {
                 total_score += 10;
             }
