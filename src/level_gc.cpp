@@ -11,21 +11,22 @@
 #include "my_color.h"
 #include "my_dmap.h"
 #include "my_sprintf.h"
+#include "my_traceback.h"
 #include "my_thing.h"
 
 void Level::things_gc (bool force)
 {
+    if (force) {
+        dbg("Begin forced thing garbage collection");
+    } else {
+        dbg("Begin thing garbage collection");
+    }
+
     FOR_ALL_THING_GROUPS(group) {
         if (all_things_to_be_destroyed[group].empty()) {
             continue;
         }
 
-        if (force) {
-            dbg("Begin forced thing garbage collection");
-        } else {
-            dbg("Begin thing garbage collection");
-        }
-    _
         for (auto it = all_things_to_be_destroyed[group].cbegin(), next_it = it;
             it != all_things_to_be_destroyed[group].cend(); it = next_it) {
             ++next_it;
@@ -82,6 +83,18 @@ void Level::things_gc (bool force)
 
             delete t;
         }
+    }
+
+    FOR_ALL_THING_GROUPS(group) {
+        for (auto& i : all_things_of_interest_pending_remove[group]) {
+            all_things_of_interest[group].erase(i.first);
+        }
+        all_things_of_interest_pending_remove[group] = {};
+
+        for (auto& i : all_things_of_interest_pending_add[group]) {
+            all_things_of_interest[group].insert(i);
+        }
+        all_things_of_interest_pending_add[group] = {};
     }
 
     dbg("End thing garbage collection");

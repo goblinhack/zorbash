@@ -144,16 +144,6 @@ bool Thing::try_to_jump (point to, bool be_careful)
             return false;
         }
 
-        if (level->is_ascend_dungeon(x, y) ||
-            level->is_monst(x, y) ||
-            level->is_descend_dungeon(x, y)) {_
-            dbg("No, jump failed, onto monst");
-            if (is_player()) {
-                TOPCON("You can't quite into that.");
-            }
-            return false;
-        }
-
         if (collision_obstacle(point(x, y))) {_
             dbg("No, jump failed, avoid destination");
             if (is_player()) {

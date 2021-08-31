@@ -36,6 +36,13 @@ void tp_fixup (void)
                     tp->name().c_str());
             }
         }
+
+        if (tp->is_interesting()) {
+            if (tp->is_tmp_thing()) {
+                DIE("Tp %s cannot be both interesting and temporary",
+                    tp->name().c_str());
+            }
+        }
     }
 
     for (auto& tp : tp_name_map) {

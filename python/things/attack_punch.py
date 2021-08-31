@@ -15,7 +15,6 @@ def init1(name, text_name):
     mytp.set_is_loggable_for_unimportant_stuff(False)
     mytp.set_is_moveable(True)
     mytp.set_is_removeable_if_out_of_slots(True)
-    mytp.set_is_tickable(True)
     mytp.set_is_tmp_thing(True)
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("Punch out.")

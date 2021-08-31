@@ -25,11 +25,13 @@
 //
 // Search priorities in order
 //
-#define SEARCH_TYPE_MAX                 4
-#define SEARCH_TYPE_LOCAL_NO_JUMP       0
-#define SEARCH_TYPE_LOCAL_JUMP_ALLOWED  1
-#define SEARCH_TYPE_GLOBAL_NO_JUMP      2
-#define SEARCH_TYPE_GLOBAL_JUMP_ALLOWED 3
+#define SEARCH_TYPE_MAX                       6
+#define SEARCH_TYPE_LOCAL_NO_JUMP             0
+#define SEARCH_TYPE_LOCAL_JUMP_ALLOWED        1
+#define SEARCH_TYPE_GLOBAL_NO_JUMP            2
+#define SEARCH_TYPE_GLOBAL_JUMP_ALLOWED       3
+#define SEARCH_TYPE_LAST_RESORTS_NO_JUMP      4
+#define SEARCH_TYPE_LAST_RESORTS_JUMP_ALLOWED 5
 
 #define GOAL_ADD(score, msg)                                               \
         total_score += (score);                                            \
@@ -78,6 +80,11 @@ _
             break;
         case SEARCH_TYPE_GLOBAL_JUMP_ALLOWED:
         case SEARCH_TYPE_GLOBAL_NO_JUMP:
+            robot_ai_choose_search_goals(goals, search_type);
+            goalmaps.push_back(GoalMap{goals, dmap_can_see});
+            break;
+        case SEARCH_TYPE_LAST_RESORTS_NO_JUMP:
+        case SEARCH_TYPE_LAST_RESORTS_JUMP_ALLOWED:
             robot_ai_choose_search_goals(goals, search_type);
             goalmaps.push_back(GoalMap{goals, dmap_can_see});
             break;
@@ -414,6 +421,12 @@ int Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy,
         case SEARCH_TYPE_GLOBAL_NO_JUMP:
             jump_allowed = false;
             break;
+        case SEARCH_TYPE_LAST_RESORTS_NO_JUMP:
+            jump_allowed = false;
+            break;
+        case SEARCH_TYPE_LAST_RESORTS_JUMP_ALLOWED:
+            jump_allowed = true;
+            break;
     }
 
     for (int y = miny; y < maxy; y++) {
@@ -441,7 +454,7 @@ int Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy,
 
             if (level->is_secret_door(p)) {
                 auto dist = distance(p, at);
-                if (dist > 2) {
+                if (dist > ROBOT_CAN_SEE_SECRET_DOOR_DISTANCE) {
                     set(dmap_can_see->val, X, Y, DMAP_IS_WALL);
                     continue;
                 }
@@ -1004,6 +1017,12 @@ void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals,
             case SEARCH_TYPE_GLOBAL_NO_JUMP:
                 jump_distance = 0;
                 break;
+            case SEARCH_TYPE_LAST_RESORTS_JUMP_ALLOWED:
+                jump_distance = how_far_i_can_jump();
+                break;
+            case SEARCH_TYPE_LAST_RESORTS_NO_JUMP:
+                jump_distance = 0;
+                break;
             default:
                 DIE("unexpected search-type case");
                 break;
@@ -1043,11 +1062,17 @@ void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals,
                     if ((o.x == mid_at.x) && (o.y == mid_at.y)) {
                         continue;
                     }
+                    if (search_type < SEARCH_TYPE_LAST_RESORTS_NO_JUMP) {
+                        continue;
+                    }
                 } else if (level->is_ascend_sewer(o)) {
                     //
                     // Worth investigating
                     //
                     if ((o.x == mid_at.x) && (o.y == mid_at.y)) {
+                        continue;
+                    }
+                    if (search_type < SEARCH_TYPE_LAST_RESORTS_NO_JUMP) {
                         continue;
                     }
                 } else if (level->is_descend_dungeon(o)) {
@@ -1057,11 +1082,17 @@ void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals,
                     if ((o.x == mid_at.x) && (o.y == mid_at.y)) {
                         continue;
                     }
+                    if (search_type < SEARCH_TYPE_LAST_RESORTS_NO_JUMP) {
+                        continue;
+                    }
                 } else if (level->is_ascend_dungeon(o)) {
                     //
                     // Worth investigating
                     //
                     if ((o.x == mid_at.x) && (o.y == mid_at.y)) {
+                        continue;
+                    }
+                    if (search_type < SEARCH_TYPE_LAST_RESORTS_NO_JUMP) {
                         continue;
                     }
                 } else {
@@ -1158,18 +1189,25 @@ next:
 
         if (level->is_descend_sewer(p.x, p.y)) {
             total_score -= 1000;
+            //
+            // Prefer not to walk over if there is a way around
+            //
+            terrain_cost += 10;
         }
 
         if (level->is_ascend_sewer(p.x, p.y)) {
             total_score -= 2000;
+            terrain_cost += 10;
         }
 
         if (level->is_descend_dungeon(p.x, p.y)) {
             total_score -= 3000;
+            terrain_cost += 10;
         }
 
         if (level->is_ascend_dungeon(p.x, p.y)) {
             total_score -= 4000;
+            terrain_cost += 10;
         }
 
         goals.insert(Goal(total_score, p, "search cand"));
@@ -1325,7 +1363,9 @@ void Thing::robot_tick (void)
     switch (monstp->robot_state) {
         case ROBOT_STATE_IDLE:
         {
-            CON("Robot: Is idle, look for something to do");
+            CON("Robot: @(%d,%d) Is idle, look for something to do",
+                (int)mid_at.x, (int)mid_at.y);
+
             if (!get_stamina()) {
                 BOTCON("Robot is forced to rest");
                 game->tick_begin("Robot is forced to rest");
@@ -1381,7 +1421,7 @@ void Thing::robot_tick (void)
                     }
                     return;
                 }
-            } 
+            }
 
             if ((get_health() >= (get_health_max() / 4) * 3) &&
                 (get_stamina() >= (get_stamina_max() / 4) * 3)) {

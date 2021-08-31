@@ -28,7 +28,6 @@ def init_swing(name):
     mytp.set_is_loggable_for_important_stuff(True)
     mytp.set_is_loggable_for_unimportant_stuff(True)
     mytp.set_is_moveable(True)
-    mytp.set_is_tickable(True)
     mytp.set_is_tmp_thing(True)
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("Thy wooden mechanism of justice.")

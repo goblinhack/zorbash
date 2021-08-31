@@ -22,6 +22,7 @@ bool Level::tick (void)
 {_
     // LOG("Tick");
     // TOPCON("monsts %d.", monst_count);
+    uint32_t tick_begin_ms = time_get_time_ms();
     if (!game->started) {
         return false;
     }
@@ -34,11 +35,18 @@ bool Level::tick (void)
         cursor = thing_new("cursor", player->mid_at);
     }
 
-    //
-    // Prefer to cleanup on ticks, to make the randomness more reproducable.
-    //
-    if (!game->robot_mode) {
-        things_gc_if_possible();
+    {
+        FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL(this, t) {
+            t->log("all thing pre gc");
+        } FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL_END(this)
+    }
+
+    things_gc_if_possible();
+
+    {
+        FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL(this, t) {
+            t->log("all thing post gc");
+        } FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL_END(this)
     }
 
     //
@@ -47,21 +55,20 @@ bool Level::tick (void)
     if (!game->tick_requested.empty()) {
         game->tick_begin_now();
 
+        uint32_t tick_begin_ms = time_get_time_ms();
+
         FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL(this, t) {
+            uint32_t tick_begin_ms = time_get_time_ms();
             t->tick();
+            if ((time_get_time_ms() - tick_begin_ms) > THING_TICK_DURATION_TOO_LONG) {
+                t->con("PERF: Thing tick duration %u ms", time_get_time_ms() - tick_begin_ms);
+            }
         } FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL_END(this)
 
-        FOR_ALL_THING_GROUPS(group) {
-            for (auto& i : all_things_of_interest_pending_remove[group]) {
-                all_things_of_interest[group].erase(i.first);
-            }
-            all_things_of_interest_pending_remove[group] = {};
-
-            for (auto& i : all_things_of_interest_pending_add[group]) {
-                all_things_of_interest[group].insert(i);
-            }
-            all_things_of_interest_pending_add[group] = {};
+        if ((time_get_time_ms() - tick_begin_ms) > LEVEL_TICK_DURATION_TOO_LONG) {
+            con("PERF: All things tick duration %u ms", time_get_time_ms() - tick_begin_ms);
         }
+
     }
 
     FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL(this, t) {
@@ -117,7 +124,7 @@ bool Level::tick (void)
     //
     game->things_are_moving = false;
 
-    static const int wait_count_max = 20;
+    static const int wait_count_max = LEVEL_TICK_DURATION_TOO_LONG;
     static int wait_count;
     wait_count++;
 
@@ -164,7 +171,7 @@ bool Level::tick (void)
                     game->things_are_moving = true;
                 } else if (!t->is_offscreen) {
                     if ((wait_count > wait_count_max) && !game->things_are_moving) {
-                        t->con("Waiting on fallingmoving thing longer than expected");
+                        t->con("Waiting on falling thing longer than expected");
                     }
                     game->things_are_moving = true;
                 }
@@ -299,6 +306,10 @@ bool Level::tick (void)
     }
 
     if (game->things_are_moving) {
+        if ((time_get_time_ms() - tick_begin_ms) > LEVEL_TICK_DURATION_TOO_LONG) {
+            con("PERF: Level completed (waiting on moving things) tick duration %u ms",
+                time_get_time_ms() - tick_begin_ms);
+        }
         return false;
     }
 
@@ -371,18 +382,6 @@ bool Level::tick (void)
         t->location_check();
     } FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL_END(this)
 
-    FOR_ALL_THING_GROUPS(group) {
-        for (auto& i : all_things_of_interest_pending_remove[group]) {
-            all_things_of_interest[group].erase(i.first);
-        }
-        all_things_of_interest_pending_remove[group] = {};
-
-        for (auto& i : all_things_of_interest_pending_add[group]) {
-            all_things_of_interest[group].insert(i);
-        }
-        all_things_of_interest_pending_add[group] = {};
-    }
-
     //
     // We've finished waiting on all things, bump the game tick.
     //
@@ -390,7 +389,6 @@ bool Level::tick (void)
 
     if (tick_done) {
         things_gc_if_possible();
-
 #if 0
         //
         // For debugging consistent randomness
@@ -443,6 +441,10 @@ bool Level::tick (void)
                 player->cursor_path_pop_next_and_move();
             }
         }
+    }
+
+    if ((time_get_time_ms() - tick_begin_ms) > LEVEL_TICK_DURATION_TOO_LONG) {
+        con("PERF: Level completed tick duration %u ms", time_get_time_ms() - tick_begin_ms);
     }
 
     //

@@ -377,6 +377,7 @@ public:
         auto i = level->all_things_of_interest[THING_GROUP_ALL].begin();     \
         while (i != level->all_things_of_interest[THING_GROUP_ALL].end()) {  \
             auto t = i->second;                                              \
+            /* LOG("ID %08x -> %p", i->first.id, t); */                      \
             i++;                                                             \
             if (t->is_hidden) {                                              \
                 if (!t->is_tickable()) { /* e.g. carried wand */             \

@@ -254,7 +254,7 @@ bool Thing::ai_wander (void)
     }
 
     dbg("AI wander");
-    auto tries = 10;
+    auto tries = THING_AI_WANDER_TRIES;
     while (tries--) {
         point nh;
         if (ai_choose_wander(nh)) {
@@ -283,7 +283,7 @@ bool Thing::ai_escape (void)
     }
 
     dbg("AI escape");
-    auto tries = 4;
+    auto tries = THING_AI_ESCAPE_ATTEMPTS;
     while (tries--) {
         point nh;
         if (ai_choose_wander(nh)) {

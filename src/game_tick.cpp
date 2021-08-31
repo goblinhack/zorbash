@@ -81,7 +81,7 @@ void Game::tick_begin_now (void)
             game->tick_current, why.c_str());
     }
 
-    game->tick_begin_ms = time_get_time_ms_cached();
+    game->tick_begin_ms = time_get_time_ms();
 
     if (level) {
         level->lights_fade();
@@ -107,20 +107,20 @@ bool Game::tick_end (void)
             CON("Game (%s) tick %d end, duration %d ms: %s",
                 game->seed_name.c_str(),
                 game->tick_current,
-                time_get_time_ms_cached() - game->tick_begin_ms,
+                time_get_time_ms() - game->tick_begin_ms,
                 player->to_short_string().c_str());
         } else {
             CON("Game (%s) tick %d end, duration %d ms: %s",
                 game->seed_name.c_str(),
                 game->tick_current,
-                time_get_time_ms_cached() - game->tick_begin_ms,
+                time_get_time_ms() - game->tick_begin_ms,
                 level->to_string().c_str());
         }
     } else {
         CON("Game (%s) tick %d end, duration %d ms",
             game->seed_name.c_str(),
             game->tick_current,
-            time_get_time_ms_cached() - game->tick_begin_ms);
+            time_get_time_ms() - game->tick_begin_ms);
     }
 
     CON("-");
@@ -150,7 +150,7 @@ void Game::tick_update (void)
     // Work out the current timestep in this move
     //
     if (game->tick_begin_ms) {
-        float move_at = time_get_time_ms_cached() - game->tick_begin_ms;
+        float move_at = time_get_time_ms() - game->tick_begin_ms;
         float move_duration = game->current_move_speed;
         game->tick_dt = move_at / move_duration;
         if (game->tick_dt > 1) {
@@ -159,5 +159,5 @@ void Game::tick_update (void)
     } else {
         game->tick_dt = 0;
     }
-    // CON("DT %f at %u %u",game->tick_dt, time_get_time_ms_cached() - game->tick_begin_ms, game->current_move_speed);
+    // CON("DT %f at %u %u",game->tick_dt, time_get_time_ms() - game->tick_begin_ms, game->current_move_speed);
 }

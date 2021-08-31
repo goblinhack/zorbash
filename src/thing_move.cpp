@@ -74,8 +74,8 @@ void Thing::move_finish (void)
                    SDL_GetScancodeName(
                         (SDL_Scancode)game->config.key_wait_or_collect));
             level->describe(mid_at);
+            wid_actionbar_init();
         }
-        wid_actionbar_init();
     }
 
     if (!is_hidden) {
