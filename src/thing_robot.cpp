@@ -22,7 +22,14 @@
 #include "my_wid_actionbar.h"
 #include "my_player.h"
 
-#define MAX_TRY_HARD_LEVEL 4
+//
+// Search priorities in order
+//
+#define SEARCH_TYPE_MAX                 4
+#define SEARCH_TYPE_LOCAL_NO_JUMP       0
+#define SEARCH_TYPE_LOCAL_JUMP_ALLOWED  1
+#define SEARCH_TYPE_GLOBAL_NO_JUMP      2
+#define SEARCH_TYPE_GLOBAL_JUMP_ALLOWED 3
 
 #define GOAL_ADD(score, msg)                                               \
         total_score += (score);                                            \
@@ -42,7 +49,7 @@
 // the thing to walk.
 //
 bool Thing::robot_ai_create_path_to_goal (int minx, int miny, int maxx, int maxy,
-                                          int try_harder)
+                                          int search_type)
 {_
     point start((int)mid_at.x, (int)mid_at.y);
 
@@ -51,9 +58,6 @@ _
     //
     // Find all the possible goals. Higher scores, lower costs are preferred
     //
-    std::multiset<Goal> main_goals;
-    std::multiset<Goal> search_goals;
-    std::multiset<Goal> open_door_goals;
     auto dmap_can_see = get_dmap_can_see();
     auto age_map = get_age_map();
 
@@ -61,21 +65,22 @@ _
     // Initialize basic visibility and things that are lit and can be seen
     //
     dbg("Choose goals (higher scores, lower costs are preferred):");
-    robot_ai_init_can_see_dmap(minx, miny, maxx, maxy);
-    robot_ai_choose_initial_goals(main_goals, minx, miny, maxx, maxy);
 
+    std::multiset<Goal> goals;
     std::list<GoalMap> goalmaps;
-    goalmaps.push_back(GoalMap{main_goals, dmap_can_see});
+    robot_ai_init_can_see_dmap(minx, miny, maxx, maxy, search_type);
 
-    //
-    // Even if we found main goals we need to add backup ones in case any
-    // of the main ones are not reachable.
-    //
-    if (is_player()) {
-        robot_ai_init_can_see_dmap(minx, miny, maxx, maxy);
-
-        robot_ai_choose_search_goals(search_goals, try_harder);
-        goalmaps.push_back(GoalMap{search_goals, dmap_can_see});
+    switch (search_type) {
+        case SEARCH_TYPE_LOCAL_JUMP_ALLOWED:
+        case SEARCH_TYPE_LOCAL_NO_JUMP:
+            robot_ai_choose_initial_goals(goals, minx, miny, maxx, maxy);
+            goalmaps.push_back(GoalMap{goals, dmap_can_see});
+            break;
+        case SEARCH_TYPE_GLOBAL_JUMP_ALLOWED:
+        case SEARCH_TYPE_GLOBAL_NO_JUMP:
+            robot_ai_choose_search_goals(goals, search_type);
+            goalmaps.push_back(GoalMap{goals, dmap_can_see});
+            break;
     }
 
     //
@@ -271,6 +276,7 @@ _
 
             auto p = new_move_path[new_move_path.size() - 1];
 
+            bool logged_one = false;
             FOR_ALL_THINGS_THAT_INTERACT(level, it, p.x, p.y) {
                 if (it == this) { continue; }
 
@@ -284,6 +290,8 @@ _
                 if (it->get_immediate_spawned_owner_id().ok()) {
                     continue;
                 }
+
+                logged_one = true;
 
                 if (is_player()) {
                     CON("Robot: @(%d,%d) Found a goal: %s %s, score %d",
@@ -300,6 +308,54 @@ _
                         (int)result.goal.score);
                 }
             } FOR_ALL_THINGS_END();
+
+            if (!logged_one) {
+                FOR_ALL_THINGS(level, it, p.x, p.y) {
+                    if (it == this) { continue; }
+
+                    if (it->is_changing_level ||
+                        it->is_hidden ||
+                        it->is_falling ||
+                        it->is_jumping) {
+                        continue;
+                    }
+
+                    if (it->get_immediate_spawned_owner_id().ok()) {
+                        continue;
+                    }
+
+                    logged_one = true;
+
+                    if (is_player()) {
+                        CON("Robot: @(%d,%d) Found a non active-thing goal: %s %s, score %d",
+                            (int)mid_at.x,
+                            (int)mid_at.y,
+                            it->to_string().c_str(), result.goal.msg.c_str(),
+                            (int)result.goal.score);
+                        BOTCON("Robot: goal %s %s",
+                            result.goal.msg.c_str(),
+                            it->text_the().c_str());
+                    } else {
+                        log("Monst: Found a non active-thing goal: %s %s, score %d",
+                            it->to_string().c_str(), result.goal.msg.c_str(),
+                            (int)result.goal.score);
+                    }
+                } FOR_ALL_THINGS_END();
+            }
+
+            if (!logged_one) {
+                if (is_player()) {
+                    CON("Robot: @(%d,%d) Found a non thing goal: %s, score %d",
+                        (int)mid_at.x,
+                        (int)mid_at.y,
+                        result.goal.msg.c_str(),
+                        (int)result.goal.score);
+                    BOTCON("Robot: goal %s", result.goal.msg.c_str());
+                } else {
+                    log("Monst: Found a non thing goal: %s score %d",
+                        result.goal.msg.c_str(), (int)result.goal.score);
+                }
+            }
 
             if (is_player()) {
                 level->cursor_path_create(new_move_path);
@@ -335,12 +391,30 @@ _
 //
 // Initialize basic visibility and things that are lit and can be seen
 //
-int Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy)
+int Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy,
+                                       int search_type)
 {_
     std::array< std::array<uint8_t, MAP_WIDTH>, MAP_HEIGHT> can_jump = {};
     point start((int)mid_at.x, (int)mid_at.y);
     auto dmap_can_see = get_dmap_can_see();
     auto seen_map = get_seen_map();
+    point at = make_point(mid_at);
+    bool jump_allowed = false;
+
+    switch (search_type) {
+        case SEARCH_TYPE_LOCAL_JUMP_ALLOWED:
+            jump_allowed = true;
+            break;
+        case SEARCH_TYPE_LOCAL_NO_JUMP:
+            jump_allowed = false;
+            break;
+        case SEARCH_TYPE_GLOBAL_JUMP_ALLOWED:
+            jump_allowed = true;
+            break;
+        case SEARCH_TYPE_GLOBAL_NO_JUMP:
+            jump_allowed = false;
+            break;
+    }
 
     for (int y = miny; y < maxy; y++) {
         for (int x = minx; x < maxx; x++) {
@@ -363,6 +437,14 @@ int Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy)
             if (level->is_movement_blocking_hard(p)) {
                 set(dmap_can_see->val, X, Y, DMAP_IS_WALL);
                 continue;
+            }
+
+            if (level->is_secret_door(p)) {
+                auto dist = distance(p, at);
+                if (dist > 2) {
+                    set(dmap_can_see->val, X, Y, DMAP_IS_WALL);
+                    continue;
+                }
             }
 
             //
@@ -633,7 +715,7 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                 // fire, then stay away from it
                 //
                 if (will_avoid_hazard(it)) {
-                    if (dist < 2) {
+                    if (dist == 1) {
                         avoid = true;
                     }
                 }
@@ -656,7 +738,7 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                         //
                         GOAL_ADD((int)(max_dist - dist) * 200, "attack-enemy");
                         got_one_this_tile = true;
-                    } else if (!avoid &&(dist < ai_avoid_distance() && will_avoid_monst(it))) {
+                    } else if (!avoid && (dist < ai_avoid_distance() && will_avoid_monst(it))) {
                         //
                         // Monsters we avoid are more serious threats
                         //
@@ -682,7 +764,7 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                             got_one_this_tile = true;
                         }
                     }
-                } 
+                }
 
                 if (!avoid && it->is_spiderweb() && !dist) {
                     //
@@ -818,7 +900,7 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
 // and then create a path to that edge.
 //
 void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals,
-                                          int try_harder)
+                                          int search_type)
 {_
     point start((int)mid_at.x, (int)mid_at.y);
 
@@ -895,17 +977,40 @@ void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals,
             in.push_back(point(p.x, p.y - 1));
         }
 
-        if (try_harder < 3) {
-            auto dist = distance(make_fpoint(p), mid_at);
-            float max_dist = ai_scent_distance();
-            if (dist >= max_dist) {
-                continue;
-            }
+        //
+        // Look as far as our memory and lighting permits
+        //
+        auto dist = distance(make_fpoint(p), mid_at);
+        float max_dist = ai_scent_distance();
+
+        int jump_distance;
+
+        switch (search_type) {
+            case SEARCH_TYPE_LOCAL_JUMP_ALLOWED:
+                if (dist >= max_dist) {
+                    continue;
+                }
+                jump_distance = how_far_i_can_jump();
+                break;
+            case SEARCH_TYPE_LOCAL_NO_JUMP:
+                if (dist >= max_dist) {
+                    continue;
+                }
+                jump_distance = 0;
+                break;
+            case SEARCH_TYPE_GLOBAL_JUMP_ALLOWED:
+                jump_distance = how_far_i_can_jump();
+                break;
+            case SEARCH_TYPE_GLOBAL_NO_JUMP:
+                jump_distance = 0;
+                break;
+            default:
+                DIE("unexpected search-type case");
+                break;
         }
 
-        int dist = how_far_i_can_jump();
-        for (int dx = -dist; dx <= dist; dx++) {
-            for (int dy = -dist; dy <= dist; dy++) {
+        for (int dx = -jump_distance; dx <= jump_distance; dx++) {
+            for (int dy = -jump_distance; dy <= jump_distance; dy++) {
                 if (!dx && !dy) {
                     continue;
                 }
@@ -927,7 +1032,8 @@ void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals,
                     //
                     // A locked door is worth investigating
                     //
-                    if (try_harder != 1) {
+                } else if (level->is_secret_door(o)) {
+                    if (dist > ROBOT_CAN_SEE_SECRET_DOOR_DISTANCE) {
                         continue;
                     }
                 } else if (level->is_descend_sewer(o)) {
@@ -937,19 +1043,11 @@ void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals,
                     if ((o.x == mid_at.x) && (o.y == mid_at.y)) {
                         continue;
                     }
-
-                    if (try_harder != 2) {
-                        continue;
-                    }
                 } else if (level->is_ascend_sewer(o)) {
                     //
                     // Worth investigating
                     //
                     if ((o.x == mid_at.x) && (o.y == mid_at.y)) {
-                        continue;
-                    }
-
-                    if (try_harder != 3) {
                         continue;
                     }
                 } else if (level->is_descend_dungeon(o)) {
@@ -959,8 +1057,11 @@ void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals,
                     if ((o.x == mid_at.x) && (o.y == mid_at.y)) {
                         continue;
                     }
-
-                    if (try_harder != 3) {
+                } else if (level->is_ascend_dungeon(o)) {
+                    //
+                    // Worth investigating
+                    //
+                    if ((o.x == mid_at.x) && (o.y == mid_at.y)) {
                         continue;
                     }
                 } else {
@@ -1049,28 +1150,26 @@ next:
         total_score -= dist * dist;
 
         //
-        // Be curious
+        // Choose doors etc... as a last resort when nothing else
         //
-        if (try_harder == 1) {
-            if (level->is_door(p.x, p.y)) {
-                total_score += 10;
-            }
+        if (level->is_door(p.x, p.y)) {
+            total_score -= 100;
         }
 
-        if (try_harder == 2) {
-            if (level->is_descend_sewer(p.x, p.y)) {
-                total_score += 10;
-            }
+        if (level->is_descend_sewer(p.x, p.y)) {
+            total_score -= 1000;
         }
 
-        if (try_harder == 3) {
-            if (level->is_ascend_sewer(p.x, p.y)) {
-                total_score += 10;
-            }
+        if (level->is_ascend_sewer(p.x, p.y)) {
+            total_score -= 2000;
+        }
 
-            if (level->is_descend_dungeon(p.x, p.y)) {
-                total_score += 10;
-            }
+        if (level->is_descend_dungeon(p.x, p.y)) {
+            total_score -= 3000;
+        }
+
+        if (level->is_ascend_dungeon(p.x, p.y)) {
+            total_score -= 4000;
         }
 
         goals.insert(Goal(total_score, p, "search cand"));
@@ -1265,8 +1364,11 @@ void Thing::robot_tick (void)
                 }
             }
 
-            for (int try_harder = 0; try_harder < MAX_TRY_HARD_LEVEL; try_harder++) {
-                if (robot_ai_create_path_to_goal(minx, miny, maxx, maxy, try_harder)) {
+            for (int search_type = 0; search_type < SEARCH_TYPE_MAX; search_type++) {
+                if (search_type > 0) {
+                    CON("Robot: try to find goals, search-type %d", search_type);
+                }
+                if (robot_ai_create_path_to_goal(minx, miny, maxx, maxy, search_type)) {
                     std::string s = "new goal: ";
                     for (auto p : monstp->move_path) {
                         s += p.to_string() + " ";
@@ -1275,15 +1377,21 @@ void Thing::robot_tick (void)
                     if (monstp->move_path.size()) {
                         robot_change_state(ROBOT_STATE_MOVING, s.c_str());
                     } else {
-                        CON("Robot: Did something");
+                        CON("Robot: Did not move, but did something");
                     }
                     return;
                 }
             } 
 
-            BOTCON("Robot has nothing to do, rest");
-            game->tick_begin("nothing to do, rest");
-            robot_change_state(ROBOT_STATE_RESTING, "nothing to do, rest");
+            if ((get_health() >= (get_health_max() / 4) * 3) &&
+                (get_stamina() >= (get_stamina_max() / 4) * 3)) {
+                BOTCON("Robot has nothing to do at all");
+                wid_actionbar_robot_mode_off();
+            } else {
+                BOTCON("Robot has nothing to do, rest");
+                game->tick_begin("nothing to do, rest");
+                robot_change_state(ROBOT_STATE_RESTING, "nothing to do, rest");
+            }
         }
         break;
         case ROBOT_STATE_MOVING:
@@ -1293,7 +1401,8 @@ void Thing::robot_tick (void)
             //
             // Check for interrupts
             //
-            if (robot_ai_init_can_see_dmap(minx, miny, maxx, maxy)) {
+            if (robot_ai_init_can_see_dmap(minx, miny, maxx, maxy,
+                                           SEARCH_TYPE_LOCAL_JUMP_ALLOWED)) {
                 CON("Robot: Something interrupted me");
                 game->tick_begin("Robot move interrupted by something");
                 robot_change_state(ROBOT_STATE_IDLE, "move interrupted by a change");
@@ -1302,6 +1411,7 @@ void Thing::robot_tick (void)
             }
 
             if (monstp->move_path.empty()) {
+                CON("Robot: Move finished");
                 BOTCON("Robot move finished");
                 game->tick_begin("Robot move finished");
                 robot_change_state(ROBOT_STATE_IDLE, "move finished");
@@ -1309,6 +1419,7 @@ void Thing::robot_tick (void)
                 return;
             } else {
                 CON("Robot: Moving");
+                game->tick_begin("Robot move");
                 return;
             }
         }

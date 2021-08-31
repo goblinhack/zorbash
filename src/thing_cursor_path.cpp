@@ -64,7 +64,7 @@ _
                     // If the thing we are going to land on is also a threat,
                     // can we jump further?
                     //
-                    CON("Robot: Next-next position %d,%d is a threat",
+                    CON("Robot: Next-next position %d,%d is also a threat",
                         (int)jump_pos.x, (int)jump_pos.y);
 _
                     if (will_avoid_hazard(jump_pos) && monstp->move_path.size()) {
@@ -76,26 +76,28 @@ _
                             // Give up
                             //
                             CON("Robot: Cannot jump over threats");
+                            game->tick_begin("robot failed to jump over all threats");
                             clear_move_path("Cannot jump over all threats");
                             return false;
-                        } else if (try_to_jump(jump_pos)) {
+                        } else if (try_to_jump_carefully(jump_pos)) {
                             CON("Robot: Try a long jump");
-                            game->tick_begin("player tried a long jump");
-                            clear_move_path("Player tried a long jump");
+                            game->tick_begin("robot tried a long jump");
+                            clear_move_path("robot tried a long jump");
                             return true;
                         } else {
                             CON("Robot: Failed to try a long jump");
-                            clear_move_path("Player tried a jump but cannot pass");
+                            clear_move_path("robot tried a jump but cannot pass");
                             return false;
                         }
-                    } else if (try_to_jump(jump_pos)) {
+                    } else if (try_to_jump_carefully(jump_pos)) {
                         CON("Robot: Try to jump");
-                        game->tick_begin("player tried to jump");
-                        clear_move_path("Player tried to jump");
+                        game->tick_begin("robot tried to jump");
+                        clear_move_path("robot tried to jump");
                         return true;
                     } else {
                         CON("Robot: Failed to jump");
-                        clear_move_path("Player cannot pass");
+                        game->tick_begin("robot failed to jump");
+                        clear_move_path("robot cannot pass");
                         return false;
                     }
                 } else {
@@ -103,11 +105,12 @@ _
                     // Fall through to allow attack
                     //
                     CON("Robot: Cannot pass, hazard?");
+                    game->tick_begin("robot cannot pass hazard");
                     return false;
                 }
             }
 
-            if (will_avoid_monst(future_pos)) {
+            if (level->is_monst(future_pos)) {
                 CON("Robot: Try to attack monst at %s", future_pos.to_string().c_str());
 
                 if (move_no_shove(future_pos)) {
@@ -184,9 +187,16 @@ bool Thing::cursor_path_pop_first_move (void)
     //
     // If not adjacent, try and jump.
     //
-    if (try_to_jump(future_pos)) {
-        game->tick_begin("player tried to jump");
-        return true;
+    if (game->robot_mode) {
+        if (try_to_jump_carefully(future_pos)) {
+            game->tick_begin("player tried to jump");
+            return true;
+        }
+    } else {
+        if (try_to_jump_carefree(future_pos)) {
+            game->tick_begin("player tried to jump");
+            return true;
+        }
     }
 
     //

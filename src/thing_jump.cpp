@@ -28,7 +28,7 @@ float Thing::how_far_i_can_jump (void)
     return d;
 }
 
-bool Thing::try_to_jump (point to)
+bool Thing::try_to_jump (point to, bool be_careful)
 {_
     if (is_changing_level ||
         is_hidden ||
@@ -89,12 +89,6 @@ bool Thing::try_to_jump (point to)
         }
     }
 
-    bool check_dest = true;
-
-    if (is_player()) {
-        check_dest = false;
-    }
-
     auto fto = make_fpoint(to);
 
     //
@@ -110,10 +104,13 @@ bool Thing::try_to_jump (point to)
         to = make_point(fto);
         x = to.x;
         y = to.y;
-        //
-        // Not sure I want to. This allows for more fun.
-        //
-        // check_dest = true;
+
+        if (be_careful) {
+            if (is_player() && game->robot_mode) {
+                CON("Robot: cannot jump as far as it would like");
+            }
+            return false;
+        }
     }
 
     //
@@ -138,7 +135,7 @@ bool Thing::try_to_jump (point to)
         return false;
     }
 
-    if (check_dest) {
+    if (be_careful) {
         if (!level->is_dungeon(x, y)) {_
             dbg("No, jump failed, not dungeon");
             if (is_player()) {
@@ -310,6 +307,16 @@ bool Thing::try_to_jump (point to)
     return true;
 }
 
+bool Thing::try_to_jump_carefully (point p)
+{_
+    return try_to_jump(p, true);
+}
+
+bool Thing::try_to_jump_carefree (point p)
+{_
+    return try_to_jump(p, false);
+}
+
 bool Thing::try_to_jump (void)
 {_
     if (is_changing_level ||
@@ -330,7 +337,7 @@ bool Thing::try_to_jump (void)
     while (tries-- > 0) {
         int x = pcg_random_range(mid_at.x - d, mid_at.x + d);
         int y = pcg_random_range(mid_at.y - d, mid_at.y + d);
-        if (try_to_jump(point(x, y))) {
+        if (try_to_jump_carefully(point(x, y))) {
             return true;
         }
     }
@@ -374,7 +381,7 @@ bool Thing::try_to_jump_towards_player (void)
             continue;
         }
 
-        if (try_to_jump(point(x, y))) {
+        if (try_to_jump_carefully(point(x, y))) {
             return true;
         }
     }
@@ -411,7 +418,7 @@ bool Thing::try_to_jump_away_from_player (void)
             continue;
         }
 
-        if (try_to_jump(point(x, y))) {
+        if (try_to_jump_carefree(point(x, y))) {
             return true;
         }
     }
@@ -439,7 +446,7 @@ bool Thing::try_harder_to_jump (void)
     while (tries-- > 0) {
         int x = pcg_random_range(mid_at.x - d, mid_at.x + d);
         int y = pcg_random_range(mid_at.y - d, mid_at.y + d);
-        if (try_to_jump(point(x, y))) {
+        if (try_to_jump_carefree(point(x, y))) {
             return true;
         }
     }

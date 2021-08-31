@@ -288,7 +288,7 @@ void player_tick (bool left, bool right, bool up, bool down, bool attack, bool w
             for (auto i = game->cursor_move_path.rbegin();
                  i != game->cursor_move_path.rend(); i++) {
                 auto p = *i;
-                if (player->try_to_jump(make_point(p.x, p.y))) {
+                if (player->try_to_jump_carefree(make_point(p.x, p.y))) {
                     player->clear_move_path("Tried to jump");
                     break;
                 }
@@ -299,18 +299,18 @@ void player_tick (bool left, bool right, bool up, bool down, bool attack, bool w
                                  player->mid_at.y + player_move_delta.y);
             if (level->is_movement_blocking_hard(p.x, p.y) ||
                 level->is_movement_blocking_soft(p.x, p.y)) {
-                player->try_to_jump(make_point(player->mid_at));
+                player->try_to_jump_carefree(make_point(player->mid_at));
             } else {
-                player->try_to_jump(p);
+                player->try_to_jump_carefree(p);
             }
         } else if (level->cursor) {
             point p = make_point(level->cursor->mid_at.x,
                                  level->cursor->mid_at.y);
             if (level->is_movement_blocking_hard(p.x, p.y) ||
                 level->is_movement_blocking_soft(p.x, p.y)) {
-                player->try_to_jump(make_point(player->mid_at));
+                player->try_to_jump_carefree(make_point(player->mid_at));
             } else {
-                player->try_to_jump(p);
+                player->try_to_jump_carefree(p);
             }
         }
         player->clear_move_path("Tried to jump");

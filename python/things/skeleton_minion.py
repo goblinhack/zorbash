@@ -80,7 +80,7 @@ def tp_init(name, text_name):
     mytp.set_on_hit_do("skeleton_minion.on_hit()")
     mytp.set_on_miss_do("skeleton_minion.on_miss()")
     mytp.set_rarity(zx.RARITY_COMMON)
-    mytp.set_resurrect_dice("1d10+30")
+    mytp.set_resurrect_dice("1d20+30")
     mytp.set_stat_attack(10) # 10, means no bonus
     mytp.set_stat_constitution(9)
     mytp.set_stat_defence(9)

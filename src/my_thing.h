@@ -318,7 +318,9 @@ public:
     bool try_to_carry(Thingp w);
     bool try_to_escape(void);
     bool try_to_jump_away_from_player(void);
-    bool try_to_jump(point p);
+    bool try_to_jump_carefree(point to);
+    bool try_to_jump_carefully(point to);
+    bool try_to_jump(point to, bool carefully);
     bool try_to_jump_towards_player(void);
     bool try_to_jump(void);
     bool use(Thingp w);
@@ -1291,10 +1293,10 @@ public:
     void robot_tick(void);
     void enemies_tick(void);
     void robot_change_state(int new_state, const std::string &why);
-    bool robot_ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int try_harder = 0);
-    int robot_ai_init_can_see_dmap(int minx, int miny, int maxx, int maxy);
+    bool robot_ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int search_type = 0);
+    int robot_ai_init_can_see_dmap(int minx, int miny, int maxx, int maxy, int search_type);
     void robot_ai_choose_initial_goals(std::multiset<Goal> &goals, int minx, int miny, int maxx, int maxy);
-    void robot_ai_choose_search_goals(std::multiset<Goal> &goals, int try_harder);
+    void robot_ai_choose_search_goals(std::multiset<Goal> &goals, int search_type);
     bool robot_ai_choose_nearby_goal(void);
     void used(Thingp w, Thingp target, bool remove_after_use);
     void use_weapon(void);

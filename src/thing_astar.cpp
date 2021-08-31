@@ -243,10 +243,20 @@ public:
             eval_neighbor(current, point( 1,  0));
             eval_neighbor(current, point( 0, -1));
             eval_neighbor(current, point( 0,  1));
+
+            //
+            // This leads to the robot taking diagonals across lava which looks
+            // like cheating.
+            //
+            // Also leads to zig zag paths over chasms that would need
+            // optimized.
+            //
+#if 0
             eval_neighbor(current, point(-1, -1));
             eval_neighbor(current, point(-1,  1));
             eval_neighbor(current, point( 1, -1));
             eval_neighbor(current, point( 1,  1));
+#endif
         }
 
         cleanup();

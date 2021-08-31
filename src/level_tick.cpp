@@ -117,7 +117,7 @@ bool Level::tick (void)
     //
     game->things_are_moving = false;
 
-    static const int wait_count_max = 100;
+    static const int wait_count_max = 20;
     static int wait_count;
     wait_count++;
 
@@ -217,19 +217,24 @@ bool Level::tick (void)
             }
         }
 
-        if (t->get_timestamp_flip_start() && !t->is_dead) {
-            if (game->robot_mode) {
-                if ((wait_count > wait_count_max) && !game->things_are_moving) {
-                    t->con("Waiting on flipping thing longer than expected");
-                }
+        //
+        // Do we really need to wait on this?
+        //
+        if (0) {
+            if (t->get_timestamp_flip_start() && !t->is_dead) {
+                if (game->robot_mode) {
+                    if ((wait_count > wait_count_max) && !game->things_are_moving) {
+                        t->con("Waiting on flipping thing longer than expected");
+                    }
 
-                game->things_are_moving = true;
+                    game->things_are_moving = true;
 
-                //
-                // Make sure offscreen animation occurs.
-                //
-                if (t->is_offscreen) {
-                    t->set_timestamp_flip_start(0);
+                    //
+                    // Make sure offscreen animation occurs.
+                    //
+                    if (t->is_offscreen) {
+                        t->set_timestamp_flip_start(0);
+                    }
                 }
             }
         }

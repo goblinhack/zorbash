@@ -11,12 +11,12 @@ def tp_init(name, text_name):
     mytp.set_gfx_dead_anim(False)
     mytp.set_gfx_show_outlined(True)
     mytp.set_is_able_to_fall(False)
-    mytp.set_is_tickable(True) # for lifespan tick
     mytp.set_is_loggable_for_important_stuff(False)
     mytp.set_is_loggable_for_unimportant_stuff(False)
     mytp.set_is_moveable(True)
     mytp.set_is_removeable_if_out_of_slots(True)
-    mytp.set_lifespan_dice("1d10+10")
+    mytp.set_is_tickable(True) # for lifespan tick
+    mytp.set_is_tmp_thing(True)
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("Splat attack.")
     mytp.set_z_depth(zx.MAP_DEPTH_WEAPON)
