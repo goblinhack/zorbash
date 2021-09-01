@@ -874,11 +874,14 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                 }
 
                 if (!got_one_this_tile) {
-                    if (is_player() && lit_recently) {
-                        if (possible_to_attack(it)) {
-                            GOAL_ADD(- health_diff, "can-attack-monst");
-                        }
-                    } else {
+                    //
+                    // No hunting monsters we cannot see just because we
+                    // have visited that area before.
+                    //
+                    // Well this is true for the player. Monsters, we're
+                    // lenient.
+                    //
+                    if (lit_recently) {
                         if (possible_to_attack(it)) {
                             GOAL_ADD(- health_diff, "can-attack-monst");
                         }

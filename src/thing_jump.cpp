@@ -140,6 +140,7 @@ bool Thing::try_to_jump (point to, bool be_careful)
             dbg("No, jump failed, not dungeon");
             if (is_player()) {
                 TOPCON("You can't jump outside the dungeon.");
+                err("You can't jump outside the dungeon to %d,%d", x, y);
             }
             return false;
         }

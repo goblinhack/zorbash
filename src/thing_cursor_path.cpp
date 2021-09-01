@@ -104,18 +104,26 @@ _
                     //
                     // Fall through to allow attack
                     //
-                    CON("Robot: Cannot pass, hazard?");
-                    game->tick_begin("robot cannot pass hazard");
-                    return false;
                 }
             }
 
+            //
+            // Someone in our way?
+            //
             if (level->is_monst(future_pos)) {
                 CON("Robot: Try to attack monst at %s", future_pos.to_string().c_str());
-
                 if (move_no_shove(future_pos)) {
                     return true;
                 }
+            }
+
+            //
+            // Make sure and check for hazard after the monst, as the monst
+            // could be floating over lava or a chasm
+            //
+            if (will_avoid_hazard(future_pos)) {
+                CON("Robot: Cannot pass hazard at %s", future_pos.to_string().c_str());
+                return false;
             }
 
             CON("Robot: Try to move without shoving to %s", future_pos.to_string().c_str());
