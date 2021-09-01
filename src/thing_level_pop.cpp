@@ -110,7 +110,7 @@ void Thing::level_pop (void)
                                                          level->unset_is_brazier(mx, my); }
     if (i_set_is_barrel)                               { i_set_is_barrel = false;
                                                          level->unset_is_barrel(mx, my); }
-    if (i_set_is_treasure_type)                             { i_set_is_treasure_type = false;
+    if (i_set_is_treasure_type)                        { i_set_is_treasure_type = false;
                                                          level->unset_is_treasure_type(mx, my); }
     if (i_set_is_wall)                                 { i_set_is_wall = false;
                                                          level->unset_is_wall(mx, my); }

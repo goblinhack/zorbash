@@ -11,6 +11,7 @@
 #include "my_sprintf.h"
 #include "my_ptrcheck.h"
 #include "my_array_bounds_check.h"
+#include "my_monst.h"
 
 //
 // This is called if we move onto or fall onto a new location
@@ -102,29 +103,35 @@ void Thing::location_check_forced (void)
         return;
     }
 
-    if (descend_dungeon_tick()) {
-        if (is_player()) {
-            dbg("Location check, descending dungeon");
+    //
+    // If we have a move path then we are perhaps trying to do descend into the
+    // level below.
+    //
+    if (monstp && monstp->move_path.size() <= 1) {
+        if (descend_dungeon_tick()) {
+            if (is_player()) {
+                dbg("Location check, descending dungeon");
+            }
+            return;
         }
-        return;
-    }
-    if (ascend_dungeon_tick()) {
-        if (is_player()) {
-            dbg("Location check, ascending dungeon");
+        if (ascend_dungeon_tick()) {
+            if (is_player()) {
+                dbg("Location check, ascending dungeon");
+            }
+            return;
         }
-        return;
-    }
-    if (descend_sewer_tick()) {
-        if (is_player()) {
-            dbg("Location check, descending sewer");
+        if (descend_sewer_tick()) {
+            if (is_player()) {
+                dbg("Location check, descending sewer");
+            }
+            return;
         }
-        return;
-    }
-    if (ascend_sewer_tick()) {
-        if (is_player()) {
-            dbg("Location check, ascending sewer");
+        if (ascend_sewer_tick()) {
+            if (is_player()) {
+                dbg("Location check, ascending sewer");
+            }
+            return;
         }
-        return;
     }
 }
 

@@ -658,6 +658,19 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
             auto health_diff = it_health - my_health;
             bool got_one_this_tile = false;
 
+            //
+            // Don't allow of attacking monsts from memory if the player or
+            // robot
+            //
+            auto lit_recently = level->is_lit_recently(it->mid_at.x, it->mid_at.y);
+            if (is_player()) {
+                if (it->is_offscreen) {
+                    lit_recently = false;
+                }
+            } else {
+                lit_recently = true;
+            }
+
             if (is_starving) {
                 if (worth_eating(it)) {
                     //
@@ -737,7 +750,6 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                 // If we can see an enemy, get them! If the monster is not lit
                 // then it's not really fair to use that knowledge.
                 //
-                auto lit_recently = level->is_lit_recently(it->mid_at.x, it->mid_at.y);
                 if (lit_recently) {
                     if (is_enemy(it) && (dist < max_dist)) {
                         //
@@ -860,11 +872,17 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                         CON("Robot could not avoid, so attack %s", it->to_string().c_str());
                     }
                 }
-            }
 
-            if (!got_one_this_tile) {
-                if (possible_to_attack(it)) {
-                    GOAL_ADD(- health_diff, "can-attack-monst");
+                if (!got_one_this_tile) {
+                    if (is_player() && lit_recently) {
+                        if (possible_to_attack(it)) {
+                            GOAL_ADD(- health_diff, "can-attack-monst");
+                        }
+                    } else {
+                        if (possible_to_attack(it)) {
+                            GOAL_ADD(- health_diff, "can-attack-monst");
+                        }
+                    }
                 }
             }
 
