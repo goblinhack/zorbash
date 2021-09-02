@@ -164,6 +164,17 @@ bool Thing::try_to_jump (point to, bool be_careful)
                                      false,
                                      true /* make_visible_at_end */);
     } else {
+        //
+        // If offscreen and in robot mode, then jump quicker, so the robot does
+        // not have to wait so long/
+        //
+        if (game->robot_mode) {
+            if (!level->is_lit_currently(make_point(mid_at.x, mid_at.y)) &&
+                !level->is_lit_currently(make_point(to.x, to.y))) {
+                delay = 0;
+            }
+        }
+
         level->new_internal_particle(id, src, dst, sz, delay,
                                      tile_index_to_tile(tile_curr),
                                      false,

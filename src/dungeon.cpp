@@ -1555,18 +1555,10 @@ void Dungeon::rooms_print_all (Grid *g)
 
 bool Dungeon::room_is_a_candidate (int x, int y, const DungeonNode *n, Roomp r)
 {
-#if 0
-CON("%d %d depth %d up %d down %d left %d right %d", x, y,
-    n->depth, n->has_door_up, n->has_door_down, n->has_door_left, n->has_door_right);
-#endif
     for (auto x = 0; x < nodes->grid_width; x++) {
         for (auto y = 0; y < nodes->grid_height; y++) {
             auto o = get(grid.node_rooms, x, y);
             if (o == r) {
-#if 0
-CON("skip %d",__LINE__);
-r->dump();
-#endif
                 return false;
             }
         }
@@ -1574,104 +1566,48 @@ r->dump();
 
     if ((n->has_door_down || n->has_secret_exit_down) &&
         !r->doors_down.size()) {
-#if 0
-CON("skip %d",__LINE__);
-r->dump();
-#endif
         return false;
     }
     if ((n->has_door_up || n->has_secret_exit_up) &&
         !r->doors_up.size()) {
-#if 0
-CON("skip %d",__LINE__);
-r->dump();
-#endif
         return false;
     }
     if ((n->has_door_left || n->has_secret_exit_left) &&
         !r->doors_left.size()) {
-#if 0
-CON("skip %d",__LINE__);
-r->dump();
-#endif
         return false;
     }
     if ((n->has_door_right || n->has_secret_exit_right) &&
         !r->doors_right.size()) {
-#if 0
-CON("skip %d",__LINE__);
-r->dump();
-#endif
         return false;
     }
     if (n->dir_left != r->dir_left) {
-#if 0
-CON("skip %d",__LINE__);
-r->dump();
-#endif
         return false;
     }
     if (n->dir_right != r->dir_right) {
-#if 0
-CON("skip %d",__LINE__);
-r->dump();
-#endif
         return false;
     }
     if (n->dir_up != r->dir_up) {
-#if 0
-CON("skip %d",__LINE__);
-r->dump();
-#endif
         return false;
     }
     if (n->dir_down != r->dir_down) {
-#if 0
-CON("skip %d",__LINE__);
-r->dump();
-#endif
         return false;
     }
     if (n->is_descend_dungeon) {
-#if 0
-CON("skip %d",__LINE__);
-r->dump();
-#endif
         return (n->is_descend_dungeon == r->is_descend_dungeon);
     }
     if (n->is_ascend_dungeon) {
-#if 0
-CON("skip %d",__LINE__);
-r->dump();
-#endif
         return (n->is_ascend_dungeon == r->is_ascend_dungeon);
     }
     if (n->is_lock) {
-#if 0
-CON("skip %d",__LINE__);
-r->dump();
-#endif
         return (n->is_lock == r->is_lock);
     }
     if (n->is_key) {
-#if 0
-CON("skip %d",__LINE__);
-r->dump();
-#endif
         return (n->is_key == r->is_key);
     }
     if (n->is_secret) {
-#if 0
-CON("skip %d",__LINE__);
-r->dump();
-#endif
         return (n->is_secret == r->is_secret);
     }
     if (n->depth != r->depth) {
-#if 0
-CON("skip %d depth %d roomno %d",__LINE__, r->depth, r->roomno);
-r->dump();
-#endif
         return false;
     }
     return true;

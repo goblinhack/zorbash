@@ -74,6 +74,10 @@ void Thing::location_check_forced (void)
     if (is_dead) {
         return;
     }
+    secret_door_tick();
+    if (is_dead) {
+        return;
+    }
     brazier_tick();
     if (is_dead) {
         return;

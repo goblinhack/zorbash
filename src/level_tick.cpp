@@ -144,18 +144,33 @@ bool Level::tick (void)
         // Check if we finished moving above. If not, keep waiting.
         //
         if (t->is_moving) {
-            if (t->is_moving) {
-                if (game->robot_mode) {
-                    if ((wait_count > wait_count_max) && !game->things_are_moving) {
-                        t->con("Waiting on moving thing longer than expected");
-                    }
-                    game->things_are_moving = true;
-                } else if (!t->is_offscreen) {
-                    if ((wait_count > wait_count_max) && !game->things_are_moving) {
-                        t->con("Waiting on moving thing longer than expected");
-                    }
-                    game->things_are_moving = true;
+            if (game->robot_mode) {
+                if ((wait_count > wait_count_max) && !game->things_are_moving) {
+                    t->con("Waiting on moving thing longer than expected");
                 }
+                game->things_are_moving = true;
+            } else if (!t->is_offscreen) {
+                if ((wait_count > wait_count_max) && !game->things_are_moving) {
+                    t->con("Waiting on moving thing longer than expected");
+                }
+                game->things_are_moving = true;
+            }
+        }
+
+        //
+        // Check if we finished moving above. If not, keep waiting.
+        //
+        if (t->is_jumping) {
+            if (game->robot_mode) {
+                if ((wait_count > wait_count_max) && !game->things_are_moving) {
+                    t->con("Waiting on jumping thing longer than expected");
+                }
+                game->things_are_moving = true;
+            } else if (!t->is_offscreen) {
+                if ((wait_count > wait_count_max) && !game->things_are_moving) {
+                    t->con("Waiting on jumping thing longer than expected");
+                }
+                game->things_are_moving = true;
             }
         }
 
@@ -163,18 +178,16 @@ bool Level::tick (void)
         // If falling we need to update the z depth and position; and wait.
         //
         if (t->is_falling) {
-            if (t->is_falling) {
-                if (game->robot_mode) {
-                    if ((wait_count > wait_count_max) && !game->things_are_moving) {
-                        t->con("Waiting on falling thing longer than expected");
-                    }
-                    game->things_are_moving = true;
-                } else if (!t->is_offscreen) {
-                    if ((wait_count > wait_count_max) && !game->things_are_moving) {
-                        t->con("Waiting on falling thing longer than expected");
-                    }
-                    game->things_are_moving = true;
+            if (game->robot_mode) {
+                if ((wait_count > wait_count_max) && !game->things_are_moving) {
+                    t->con("Waiting on falling thing longer than expected");
                 }
+                game->things_are_moving = true;
+            } else if (!t->is_offscreen) {
+                if ((wait_count > wait_count_max) && !game->things_are_moving) {
+                    t->con("Waiting on falling thing longer than expected");
+                }
+                game->things_are_moving = true;
             }
         }
 
@@ -324,28 +337,28 @@ bool Level::tick (void)
     }
 
     //
-    // No moving if weapons have not finished firing
-    //
-    if (all_projectiles.size()) {
-        return false;
-    }
-
-    if (new_projectiles.size()) {
-        return false;
-    }
-
-    if (all_lasers.size()) {
-        return false;
-    }
-
-    if (new_lasers.size()) {
-        return false;
-    }
-
-    //
-    // Not sure if we need to delay for these
+    // The robot needs to be more deterministic and less loosy goosey
     //
     if (game->robot_mode) {
+        //
+        // No moving if weapons have not finished firing
+        //
+        if (all_projectiles.size()) {
+            return false;
+        }
+
+        if (new_projectiles.size()) {
+            return false;
+        }
+
+        if (all_lasers.size()) {
+            return false;
+        }
+
+        if (new_lasers.size()) {
+            return false;
+        }
+
         if (all_internal_particles.size()) {
             return false;
         }

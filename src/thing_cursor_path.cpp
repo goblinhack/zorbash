@@ -61,10 +61,10 @@ _
                     monstp->move_path.erase(monstp->move_path.begin());
 
                     //
-                    // If the thing we are going to land on is also a threat,
+                    // If the thing we are going to land on is also a hazard,
                     // can we jump further?
                     //
-                    CON("Robot: Next-next position %d,%d is also a threat",
+                    CON("Robot: Next-next position %d,%d is also a hazard",
                         (int)jump_pos.x, (int)jump_pos.y);
 _
                     if (will_avoid_hazard(jump_pos) && monstp->move_path.size()) {
@@ -75,9 +75,11 @@ _
                             //
                             // Give up
                             //
-                            CON("Robot: Cannot jump over threats");
-                            game->tick_begin("robot failed to jump over all threats");
-                            clear_move_path("Cannot jump over all threats");
+                            // Don't bump the tick. This allows the robot to try an
+                            // alternative path.
+                            //
+                            CON("Robot: Cannot jump over hazards");
+                            clear_move_path("Cannot jump over all hazards");
                             return false;
                         } else if (try_to_jump_carefully(jump_pos)) {
                             CON("Robot: Try a long jump");
@@ -85,6 +87,10 @@ _
                             clear_move_path("robot tried a long jump");
                             return true;
                         } else {
+                            //
+                            // Don't bump the tick. This allows the robot to try an
+                            // alternative path.
+                            //
                             CON("Robot: Failed to try a long jump");
                             clear_move_path("robot tried a jump but cannot pass");
                             return false;
@@ -95,8 +101,11 @@ _
                         clear_move_path("robot tried to jump");
                         return true;
                     } else {
+                        //
+                        // Don't bump the tick. This allows the robot to try an
+                        // alternative path.
+                        //
                         CON("Robot: Failed to jump");
-                        game->tick_begin("robot failed to jump");
                         clear_move_path("robot cannot pass");
                         return false;
                     }

@@ -81,7 +81,6 @@ const ThingId& Thing::get_top_owner_id (void) const
 const ThingId& Thing::set_owner_id (const ThingId &v)
 {_
     new_monst();
-//con("%s", __FUNCTION__);
     return (monstp->owner_id = v);
 }
 
@@ -98,7 +97,6 @@ const ThingId& Thing::get_immediate_minion_owner_id (void) const
 const ThingId& Thing::set_minion_owner_id (const ThingId &v)
 {_
     new_monst();
-//con("%s", __FUNCTION__);
     return (monstp->minion_owner_id = v);
 }
 
@@ -115,7 +113,6 @@ const ThingId& Thing::get_immediate_spawned_owner_id (void) const
 const ThingId& Thing::set_spawned_owner_id (const ThingId &v)
 {_
     new_monst();
-//con("%s", __FUNCTION__);
     return (monstp->spawner_owner_id = v);
 }
 
@@ -126,6 +123,5 @@ const fpoint &Thing::get_interpolated_mid_at (void) const
 
 void Thing::set_interpolated_mid_at (fpoint v)
 {_
-//con("%s", __FUNCTION__);
     interpolated_mid_at = v;
 }

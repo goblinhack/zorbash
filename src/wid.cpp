@@ -5391,15 +5391,15 @@ int g_blend_b;
 #endif
 
 #if 0
-//
-// Paste this code prior to the blend in question
-//
-extern int vals[];
-extern std::string vals_str[];
-extern int g_blend_a;
-extern int g_blend_b;
-CON("glBlendFunc(%s, %s)", vals_str[g_blend_a].c_str(), vals_str[g_blend_b].c_str());
-glBlendFunc(vals[g_blend_a], vals[g_blend_b]);
+    //
+    // Paste this code prior to the blend in question
+    //
+    extern int vals[];
+    extern std::string vals_str[];
+    extern int g_blend_a;
+    extern int g_blend_b;
+    CON("glBlendFunc(%s, %s)", vals_str[g_blend_a].c_str(), vals_str[g_blend_b].c_str());
+    glBlendFunc(vals[g_blend_a], vals[g_blend_b]);
 #endif
 
 void wid_key_down (const struct SDL_Keysym *key, int32_t x, int32_t y)

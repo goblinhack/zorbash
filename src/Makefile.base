@@ -175,6 +175,7 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/thing_avoid.o                 \
     $(OBJDIR)/thing_bag.o                   \
     $(OBJDIR)/thing_barrel.o                \
+    $(OBJDIR)/thing_secret_door.o           \
     $(OBJDIR)/thing_bounce.o                \
     $(OBJDIR)/thing_brazier.o               \
     $(OBJDIR)/thing_collect.o               \
