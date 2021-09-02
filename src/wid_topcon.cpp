@@ -232,16 +232,6 @@ _
         return true;
     }
 
-    if (key->scancode == (SDL_Scancode)game->config.key_help) {
-        DBG3("Pressed help key");
-_
-        wid_actionbar_robot_mode_off();
-        game->change_state(Game::STATE_NORMAL);
-        wid_thing_info_fini(); // To remove bag or other info
-        game->config_keyboard_select();
-        return true;
-    }
-
     if (key->scancode == (SDL_Scancode)game->config.key_quit) {
         DBG3("Pressed quit key");
 _
@@ -257,9 +247,18 @@ _
         // Avoid random keypresses interrupting the robot
         //
     } else {
+        if (key->scancode == (SDL_Scancode)game->config.key_help) {
+            DBG3("Pressed help key");
+_
+            wid_actionbar_robot_mode_off();
+            game->change_state(Game::STATE_NORMAL);
+            wid_thing_info_fini(); // To remove bag or other info
+            game->config_keyboard_select();
+            return true;
+        }
         if (key->scancode == (SDL_Scancode)game->config.key_load) {
             DBG3("Pressed load key");
-    _
+_
             wid_actionbar_robot_mode_off();
             game->change_state(Game::STATE_NORMAL);
             wid_thing_info_fini(); // To remove bag or other info
@@ -269,7 +268,7 @@ _
         }
         if (key->scancode == (SDL_Scancode)game->config.key_save) {
             DBG3("Pressed save key");
-    _
+_
             wid_actionbar_robot_mode_off();
             game->change_state(Game::STATE_NORMAL);
             wid_thing_info_fini(); // To remove bag or other info
@@ -277,278 +276,9 @@ _
             game->save_select();
             return true;
         }
-
-        if (sdl_shift_held) {
-            //
-            // If shift is held, select skills
-            //
-            if (key->scancode == (SDL_Scancode)game->config.key_action0) {
-                DBG3("Pressed skill action key");
-    _
-                game->change_state(Game::STATE_NORMAL);
-                wid_thing_info_fini(); // To remove bag or other info
-                level->skillbox_chosen(9);
-                wid_rightbar_init();
-                auto what = level->skillbox_get();
-                if (what) {
-                    game->wid_items_options_create(w, what, true /* came from inventory */);
-                }
-                return true;
-            }
-            if (key->scancode == (SDL_Scancode)game->config.key_action1) {
-                DBG3("Pressed skill action key");
-    _
-                game->change_state(Game::STATE_NORMAL);
-                wid_thing_info_fini(); // To remove bag or other info
-                level->skillbox_chosen(0);
-                wid_rightbar_init();
-                auto what = level->skillbox_get();
-                if (what) {
-                    game->wid_items_options_create(w, what, true /* came from inventory */);
-                }
-                return true;
-            }
-            if (key->scancode == (SDL_Scancode)game->config.key_action2) {
-                DBG3("Pressed skill action key");
-    _
-                game->change_state(Game::STATE_NORMAL);
-                wid_thing_info_fini(); // To remove bag or other info
-                level->skillbox_chosen(1);
-                wid_rightbar_init();
-                auto what = level->skillbox_get();
-                if (what) {
-                    game->wid_items_options_create(w, what, true /* came from inventory */);
-                }
-                return true;
-            }
-            if (key->scancode == (SDL_Scancode)game->config.key_action3) {
-                DBG3("Pressed skill action key");
-    _
-                game->change_state(Game::STATE_NORMAL);
-                wid_thing_info_fini(); // To remove bag or other info
-                level->skillbox_chosen(2);
-                wid_rightbar_init();
-                auto what = level->skillbox_get();
-                if (what) {
-                    game->wid_items_options_create(w, what, true /* came from inventory */);
-                }
-                return true;
-            }
-            if (key->scancode == (SDL_Scancode)game->config.key_action4) {
-                DBG3("Pressed skill action key");
-    _
-                game->change_state(Game::STATE_NORMAL);
-                wid_thing_info_fini(); // To remove bag or other info
-                level->skillbox_chosen(3);
-                wid_rightbar_init();
-                auto what = level->skillbox_get();
-                if (what) {
-                    game->wid_items_options_create(w, what, true /* came from inventory */);
-                }
-                return true;
-            }
-            if (key->scancode == (SDL_Scancode)game->config.key_action5) {
-                DBG3("Pressed skill action key");
-    _
-                game->change_state(Game::STATE_NORMAL);
-                wid_thing_info_fini(); // To remove bag or other info
-                level->skillbox_chosen(4);
-                wid_rightbar_init();
-                auto what = level->skillbox_get();
-                if (what) {
-                    game->wid_items_options_create(w, what, true /* came from inventory */);
-                }
-                return true;
-            }
-            if (key->scancode == (SDL_Scancode)game->config.key_action6) {
-                DBG3("Pressed skill action key");
-    _
-                game->change_state(Game::STATE_NORMAL);
-                wid_thing_info_fini(); // To remove bag or other info
-                level->skillbox_chosen(5);
-                wid_rightbar_init();
-                auto what = level->skillbox_get();
-                if (what) {
-                    game->wid_items_options_create(w, what, true /* came from inventory */);
-                }
-                return true;
-            }
-            if (key->scancode == (SDL_Scancode)game->config.key_action7) {
-                DBG3("Pressed skill action key");
-    _
-                game->change_state(Game::STATE_NORMAL);
-                wid_thing_info_fini(); // To remove bag or other info
-                level->skillbox_chosen(6);
-                wid_rightbar_init();
-                auto what = level->skillbox_get();
-                if (what) {
-                    game->wid_items_options_create(w, what, true /* came from inventory */);
-                }
-                return true;
-            }
-            if (key->scancode == (SDL_Scancode)game->config.key_action8) {
-                DBG3("Pressed skill action key");
-    _
-                game->change_state(Game::STATE_NORMAL);
-                wid_thing_info_fini(); // To remove bag or other info
-                level->skillbox_chosen(7);
-                wid_rightbar_init();
-                auto what = level->skillbox_get();
-                if (what) {
-                    game->wid_items_options_create(w, what, true /* came from inventory */);
-                }
-                return true;
-            }
-            if (key->scancode == (SDL_Scancode)game->config.key_action9) {
-                DBG3("Pressed skill action key");
-    _
-                game->change_state(Game::STATE_NORMAL);
-                wid_thing_info_fini(); // To remove bag or other info
-                level->skillbox_chosen(8);
-                wid_rightbar_init();
-                auto what = level->skillbox_get();
-                if (what) {
-                    game->wid_items_options_create(w, what, true /* came from inventory */);
-                }
-                return true;
-            }
-        } else {
-            //
-            // If shift is not held, select inventory
-            //
-            if (key->scancode == (SDL_Scancode)game->config.key_action0) {
-                DBG3("Pressed action key");
-    _
-                game->change_state(Game::STATE_NORMAL);
-                wid_thing_info_fini(); // To remove bag or other info
-                level->inventory_chosen(9);
-                wid_rightbar_init();
-                auto what = level->inventory_get();
-                if (what) {
-                    game->wid_items_options_create(w, what, true /* came from inventory */);
-                }
-                return true;
-            }
-            if (key->scancode == (SDL_Scancode)game->config.key_action1) {
-                DBG3("Pressed action key");
-    _
-                game->change_state(Game::STATE_NORMAL);
-                wid_thing_info_fini(); // To remove bag or other info
-                level->inventory_chosen(0);
-                wid_rightbar_init();
-                auto what = level->inventory_get();
-                if (what) {
-                    game->wid_items_options_create(w, what, true /* came from inventory */);
-                }
-                return true;
-            }
-            if (key->scancode == (SDL_Scancode)game->config.key_action2) {
-                DBG3("Pressed action key");
-    _
-                game->change_state(Game::STATE_NORMAL);
-                wid_thing_info_fini(); // To remove bag or other info
-                level->inventory_chosen(1);
-                wid_rightbar_init();
-                auto what = level->inventory_get();
-                if (what) {
-                    game->wid_items_options_create(w, what, true /* came from inventory */);
-                }
-                return true;
-            }
-            if (key->scancode == (SDL_Scancode)game->config.key_action3) {
-                DBG3("Pressed action key");
-    _
-                game->change_state(Game::STATE_NORMAL);
-                wid_thing_info_fini(); // To remove bag or other info
-                level->inventory_chosen(2);
-                wid_rightbar_init();
-                auto what = level->inventory_get();
-                if (what) {
-                    game->wid_items_options_create(w, what, true /* came from inventory */);
-                }
-                return true;
-            }
-            if (key->scancode == (SDL_Scancode)game->config.key_action4) {
-                DBG3("Pressed action key");
-    _
-                game->change_state(Game::STATE_NORMAL);
-                wid_thing_info_fini(); // To remove bag or other info
-                level->inventory_chosen(3);
-                wid_rightbar_init();
-                auto what = level->inventory_get();
-                if (what) {
-                    game->wid_items_options_create(w, what, true /* came from inventory */);
-                }
-                return true;
-            }
-            if (key->scancode == (SDL_Scancode)game->config.key_action5) {
-                DBG3("Pressed action key");
-    _
-                game->change_state(Game::STATE_NORMAL);
-                wid_thing_info_fini(); // To remove bag or other info
-                level->inventory_chosen(4);
-                wid_rightbar_init();
-                auto what = level->inventory_get();
-                if (what) {
-                    game->wid_items_options_create(w, what, true /* came from inventory */);
-                }
-                return true;
-            }
-            if (key->scancode == (SDL_Scancode)game->config.key_action6) {
-                DBG3("Pressed action key");
-    _
-                game->change_state(Game::STATE_NORMAL);
-                wid_thing_info_fini(); // To remove bag or other info
-                level->inventory_chosen(5);
-                wid_rightbar_init();
-                auto what = level->inventory_get();
-                if (what) {
-                    game->wid_items_options_create(w, what, true /* came from inventory */);
-                }
-                return true;
-            }
-            if (key->scancode == (SDL_Scancode)game->config.key_action7) {
-                DBG3("Pressed action key");
-    _
-                game->change_state(Game::STATE_NORMAL);
-                wid_thing_info_fini(); // To remove bag or other info
-                level->inventory_chosen(6);
-                wid_rightbar_init();
-                auto what = level->inventory_get();
-                if (what) {
-                    game->wid_items_options_create(w, what, true /* came from inventory */);
-                }
-                return true;
-            }
-            if (key->scancode == (SDL_Scancode)game->config.key_action8) {
-                DBG3("Pressed action key");
-    _
-                game->change_state(Game::STATE_NORMAL);
-                wid_thing_info_fini(); // To remove bag or other info
-                level->inventory_chosen(7);
-                wid_rightbar_init();
-                auto what = level->inventory_get();
-                if (what) {
-                    game->wid_items_options_create(w, what, true /* came from inventory */);
-                }
-                return true;
-            }
-            if (key->scancode == (SDL_Scancode)game->config.key_action9) {
-                DBG3("Pressed action key");
-    _
-                game->change_state(Game::STATE_NORMAL);
-                wid_thing_info_fini(); // To remove bag or other info
-                level->inventory_chosen(8);
-                wid_rightbar_init();
-                auto what = level->inventory_get();
-                if (what) {
-                    game->wid_items_options_create(w, what, true /* came from inventory */);
-                }
-                return true;
-            }
-        }
         if (key->scancode == (SDL_Scancode)game->config.key_use) {
             DBG3("Pressed use key");
+_
             if (game->state == Game::STATE_CHOOSING_TARGET ||
                 game->state == Game::STATE_COLLECTING_ITEMS) {
                 return false;
@@ -559,7 +289,6 @@ _
             }
             return true;
         }
-
         if (key->scancode == (SDL_Scancode)game->config.key_throw) {
             DBG3("Pressed throw key");
     _
@@ -582,6 +311,276 @@ _
             DBG3("Pressed inventory key; change state");
             game->change_state(Game::STATE_MOVING_ITEMS);
             return true;
+        }
+
+        if (sdl_shift_held) {
+            //
+            // If shift is held, select skills
+            //
+            if (key->scancode == (SDL_Scancode)game->config.key_action0) {
+                DBG3("Pressed skill action key");
+_
+                game->change_state(Game::STATE_NORMAL);
+                wid_thing_info_fini(); // To remove bag or other info
+                level->skillbox_chosen(9);
+                wid_rightbar_init();
+                auto what = level->skillbox_get();
+                if (what) {
+                    game->wid_items_options_create(w, what, true /* came from inventory */);
+                }
+                return true;
+            }
+            if (key->scancode == (SDL_Scancode)game->config.key_action1) {
+                DBG3("Pressed skill action key");
+_
+                game->change_state(Game::STATE_NORMAL);
+                wid_thing_info_fini(); // To remove bag or other info
+                level->skillbox_chosen(0);
+                wid_rightbar_init();
+                auto what = level->skillbox_get();
+                if (what) {
+                    game->wid_items_options_create(w, what, true /* came from inventory */);
+                }
+                return true;
+            }
+            if (key->scancode == (SDL_Scancode)game->config.key_action2) {
+                DBG3("Pressed skill action key");
+_
+                game->change_state(Game::STATE_NORMAL);
+                wid_thing_info_fini(); // To remove bag or other info
+                level->skillbox_chosen(1);
+                wid_rightbar_init();
+                auto what = level->skillbox_get();
+                if (what) {
+                    game->wid_items_options_create(w, what, true /* came from inventory */);
+                }
+                return true;
+            }
+            if (key->scancode == (SDL_Scancode)game->config.key_action3) {
+                DBG3("Pressed skill action key");
+_
+                game->change_state(Game::STATE_NORMAL);
+                wid_thing_info_fini(); // To remove bag or other info
+                level->skillbox_chosen(2);
+                wid_rightbar_init();
+                auto what = level->skillbox_get();
+                if (what) {
+                    game->wid_items_options_create(w, what, true /* came from inventory */);
+                }
+                return true;
+            }
+            if (key->scancode == (SDL_Scancode)game->config.key_action4) {
+                DBG3("Pressed skill action key");
+_
+                game->change_state(Game::STATE_NORMAL);
+                wid_thing_info_fini(); // To remove bag or other info
+                level->skillbox_chosen(3);
+                wid_rightbar_init();
+                auto what = level->skillbox_get();
+                if (what) {
+                    game->wid_items_options_create(w, what, true /* came from inventory */);
+                }
+                return true;
+            }
+            if (key->scancode == (SDL_Scancode)game->config.key_action5) {
+                DBG3("Pressed skill action key");
+_
+                game->change_state(Game::STATE_NORMAL);
+                wid_thing_info_fini(); // To remove bag or other info
+                level->skillbox_chosen(4);
+                wid_rightbar_init();
+                auto what = level->skillbox_get();
+                if (what) {
+                    game->wid_items_options_create(w, what, true /* came from inventory */);
+                }
+                return true;
+            }
+            if (key->scancode == (SDL_Scancode)game->config.key_action6) {
+                DBG3("Pressed skill action key");
+_
+                game->change_state(Game::STATE_NORMAL);
+                wid_thing_info_fini(); // To remove bag or other info
+                level->skillbox_chosen(5);
+                wid_rightbar_init();
+                auto what = level->skillbox_get();
+                if (what) {
+                    game->wid_items_options_create(w, what, true /* came from inventory */);
+                }
+                return true;
+            }
+            if (key->scancode == (SDL_Scancode)game->config.key_action7) {
+                DBG3("Pressed skill action key");
+_
+                game->change_state(Game::STATE_NORMAL);
+                wid_thing_info_fini(); // To remove bag or other info
+                level->skillbox_chosen(6);
+                wid_rightbar_init();
+                auto what = level->skillbox_get();
+                if (what) {
+                    game->wid_items_options_create(w, what, true /* came from inventory */);
+                }
+                return true;
+            }
+            if (key->scancode == (SDL_Scancode)game->config.key_action8) {
+                DBG3("Pressed skill action key");
+_
+                game->change_state(Game::STATE_NORMAL);
+                wid_thing_info_fini(); // To remove bag or other info
+                level->skillbox_chosen(7);
+                wid_rightbar_init();
+                auto what = level->skillbox_get();
+                if (what) {
+                    game->wid_items_options_create(w, what, true /* came from inventory */);
+                }
+                return true;
+            }
+            if (key->scancode == (SDL_Scancode)game->config.key_action9) {
+                DBG3("Pressed skill action key");
+_
+                game->change_state(Game::STATE_NORMAL);
+                wid_thing_info_fini(); // To remove bag or other info
+                level->skillbox_chosen(8);
+                wid_rightbar_init();
+                auto what = level->skillbox_get();
+                if (what) {
+                    game->wid_items_options_create(w, what, true /* came from inventory */);
+                }
+                return true;
+            }
+        } else {
+            //
+            // If shift is not held, select inventory
+            //
+            if (key->scancode == (SDL_Scancode)game->config.key_action0) {
+                DBG3("Pressed action key");
+_
+                game->change_state(Game::STATE_NORMAL);
+                wid_thing_info_fini(); // To remove bag or other info
+                level->inventory_chosen(9);
+                wid_rightbar_init();
+                auto what = level->inventory_get();
+                if (what) {
+                    game->wid_items_options_create(w, what, true /* came from inventory */);
+                }
+                return true;
+            }
+            if (key->scancode == (SDL_Scancode)game->config.key_action1) {
+                DBG3("Pressed action key");
+_
+                game->change_state(Game::STATE_NORMAL);
+                wid_thing_info_fini(); // To remove bag or other info
+                level->inventory_chosen(0);
+                wid_rightbar_init();
+                auto what = level->inventory_get();
+                if (what) {
+                    game->wid_items_options_create(w, what, true /* came from inventory */);
+                }
+                return true;
+            }
+            if (key->scancode == (SDL_Scancode)game->config.key_action2) {
+                DBG3("Pressed action key");
+_
+                game->change_state(Game::STATE_NORMAL);
+                wid_thing_info_fini(); // To remove bag or other info
+                level->inventory_chosen(1);
+                wid_rightbar_init();
+                auto what = level->inventory_get();
+                if (what) {
+                    game->wid_items_options_create(w, what, true /* came from inventory */);
+                }
+                return true;
+            }
+            if (key->scancode == (SDL_Scancode)game->config.key_action3) {
+                DBG3("Pressed action key");
+_
+                game->change_state(Game::STATE_NORMAL);
+                wid_thing_info_fini(); // To remove bag or other info
+                level->inventory_chosen(2);
+                wid_rightbar_init();
+                auto what = level->inventory_get();
+                if (what) {
+                    game->wid_items_options_create(w, what, true /* came from inventory */);
+                }
+                return true;
+            }
+            if (key->scancode == (SDL_Scancode)game->config.key_action4) {
+                DBG3("Pressed action key");
+_
+                game->change_state(Game::STATE_NORMAL);
+                wid_thing_info_fini(); // To remove bag or other info
+                level->inventory_chosen(3);
+                wid_rightbar_init();
+                auto what = level->inventory_get();
+                if (what) {
+                    game->wid_items_options_create(w, what, true /* came from inventory */);
+                }
+                return true;
+            }
+            if (key->scancode == (SDL_Scancode)game->config.key_action5) {
+                DBG3("Pressed action key");
+_
+                game->change_state(Game::STATE_NORMAL);
+                wid_thing_info_fini(); // To remove bag or other info
+                level->inventory_chosen(4);
+                wid_rightbar_init();
+                auto what = level->inventory_get();
+                if (what) {
+                    game->wid_items_options_create(w, what, true /* came from inventory */);
+                }
+                return true;
+            }
+            if (key->scancode == (SDL_Scancode)game->config.key_action6) {
+                DBG3("Pressed action key");
+_
+                game->change_state(Game::STATE_NORMAL);
+                wid_thing_info_fini(); // To remove bag or other info
+                level->inventory_chosen(5);
+                wid_rightbar_init();
+                auto what = level->inventory_get();
+                if (what) {
+                    game->wid_items_options_create(w, what, true /* came from inventory */);
+                }
+                return true;
+            }
+            if (key->scancode == (SDL_Scancode)game->config.key_action7) {
+                DBG3("Pressed action key");
+_
+                game->change_state(Game::STATE_NORMAL);
+                wid_thing_info_fini(); // To remove bag or other info
+                level->inventory_chosen(6);
+                wid_rightbar_init();
+                auto what = level->inventory_get();
+                if (what) {
+                    game->wid_items_options_create(w, what, true /* came from inventory */);
+                }
+                return true;
+            }
+            if (key->scancode == (SDL_Scancode)game->config.key_action8) {
+                DBG3("Pressed action key");
+_
+                game->change_state(Game::STATE_NORMAL);
+                wid_thing_info_fini(); // To remove bag or other info
+                level->inventory_chosen(7);
+                wid_rightbar_init();
+                auto what = level->inventory_get();
+                if (what) {
+                    game->wid_items_options_create(w, what, true /* came from inventory */);
+                }
+                return true;
+            }
+            if (key->scancode == (SDL_Scancode)game->config.key_action9) {
+                DBG3("Pressed action key");
+_
+                game->change_state(Game::STATE_NORMAL);
+                wid_thing_info_fini(); // To remove bag or other info
+                level->inventory_chosen(8);
+                wid_rightbar_init();
+                auto what = level->inventory_get();
+                if (what) {
+                    game->wid_items_options_create(w, what, true /* came from inventory */);
+                }
+                return true;
+            }
         }
     }
 

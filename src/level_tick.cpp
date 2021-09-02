@@ -35,19 +35,7 @@ bool Level::tick (void)
         cursor = thing_new("cursor", player->mid_at);
     }
 
-    {
-        FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL(this, t) {
-            t->log("all thing pre gc");
-        } FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL_END(this)
-    }
-
     things_gc_if_possible();
-
-    {
-        FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL(this, t) {
-            t->log("all thing post gc");
-        } FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL_END(this)
-    }
 
     //
     // A new game event has occurred?
