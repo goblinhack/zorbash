@@ -345,7 +345,7 @@ bool Level::tick (void)
     //
     // Not sure if we need to delay for these
     //
-    if (0) {
+    if (game->robot_mode) {
         if (all_internal_particles.size()) {
             return false;
         }

@@ -190,6 +190,22 @@ void Level::update_deep_water (void)
     }
 }
 
+void Level::update_map_things_to_stand_on (void)
+{_
+    _is_able_to_stand_on = {};
+
+    for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
+        for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
+            if (is_floor(x, y)       ||
+                is_corridor(x, y)    ||
+                is_dirt(x, y)        ||
+                is_bridge(x, y)) {
+                set_is_able_to_stand_on(x, y);
+            }
+        }
+    }
+}
+
 void Level::update_map (void)
 {
     log("Update map start");
@@ -198,5 +214,6 @@ void Level::update_map (void)
     update_things_next_to_a_chasm();
     update_deep_water();
     update_hazard_tile_map();
+    update_map_things_to_stand_on();
     log("Update map end");
 }

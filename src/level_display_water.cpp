@@ -41,7 +41,7 @@ void Level::display_water (int fbo,
     static std::array<std::array<Tilep, WATER_DOWN>, WATER_ACROSS> water[2];
 
     int level_type = 0;
-    if (is_sewer_level) {
+    if (is_level_type_sewer) {
         level_type = 1;
     }
 
@@ -286,7 +286,7 @@ void Level::display_water (int fbo,
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     color c = WHITE;
     c.a = 100;
-    if (is_sewer_level) {
+    if (is_level_type_sewer) {
         c = DARKGREEN;
     }
     glcolor(c);

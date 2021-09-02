@@ -155,7 +155,7 @@ _
     // Fall from a dungeon to the next dungeon, 2 levels down
     //
     auto where_to = level->world_at + point3d(0, 0, 2);
-    if (level->is_sewer_level) {
+    if (level->is_level_type_sewer) {
         //
         // If in a sewer then we drop only one level to the next dungeon.
         //
@@ -211,8 +211,7 @@ _
         }
 
         dbg("Try to fall to %d,%d", x, y);
-        if (!next_level->is_dungeon(x, y)) {
-            dbg("No, %d,%d is not a dungeon tile", x, y);
+        if (!next_level->is_able_to_stand_on(x, y)) {
             continue;
         }
 

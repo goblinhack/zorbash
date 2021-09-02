@@ -629,7 +629,7 @@ void Level::lights_render (int minx, int miny, int maxx, int maxy,
     // Blit a dark background which we will fill with lights
     //
     glClear(GL_COLOR_BUFFER_BIT);
-    if (is_sewer_level) {
+    if (is_level_type_sewer) {
         glColor4ub(0,0,0,220);
     } else {
         glColor4ub(0,0,0,180);

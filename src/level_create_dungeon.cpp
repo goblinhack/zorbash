@@ -18,7 +18,7 @@ bool Level::create_dungeon (point3d at, int seed)
     log("DGN: Create dungeon at (%d,%d,%d)", at.x, at.y, at.z);
     TOPCON("Dungeon level %d is coming into being...", (at.z / 2) + 1);
 
-    is_dungeon_level = true;
+    is_level_type_dungeon = true;
 
     while (true) {
         log("DGN: Create dungeon");
@@ -398,10 +398,6 @@ placed_player:
 
         dbg2("DGN: Place sewer pipes");
         create_dungeon_place_sewer_pipes(dungeon);
-        if (g_errored) { return false; }
-
-        dbg2("DGN: Mark dungeon tiles");
-        create_dungeon_game_mark_dungeon_tiles(dungeon);
         if (g_errored) { return false; }
 
         dbg2("DGN: Place grass");
@@ -1566,27 +1562,6 @@ void Level::create_dungeon_place_remaining_rocks (Dungeonp d, const std::string 
             // Need this so we can display chasms under walls
             //
             (void) thing_new("wall_floor1", fpoint(x, y));
-        }
-    }
-}
-
-//
-// Keep track of which tiles were part of the original dungeon so we can
-// display things like just the walls without all the hidden stuff like rock
-//
-void Level::create_dungeon_game_mark_dungeon_tiles (Dungeonp d)
-{_
-    for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
-        for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
-            if (d->is_floor(x, y)    ||
-                d->is_corridor(x, y) ||
-                d->is_bridge(x, y)   ||
-                d->is_wall(x, y)     ||
-                is_floor(x, y)       ||
-                is_corridor(x, y)    ||
-                is_bridge(x, y)) {
-                set_is_dungeon(x, y);
-            }
         }
     }
 }

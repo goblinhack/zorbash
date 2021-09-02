@@ -17,8 +17,8 @@ void Level::create (point3d at, int seed)
     is_starting = true;
     clear();
 
-    is_dungeon_level = false;
-    is_sewer_level = false;
+    is_level_type_dungeon = false;
+    is_level_type_sewer = false;
 
     this->seed = seed;
     world_at = at;

@@ -283,6 +283,11 @@ _
 
             auto p = new_move_path[new_move_path.size() - 1];
 
+            std::string goal_path_str = "";
+            for (auto p1 : new_move_path) {
+                goal_path_str += p1.to_string() + " ";
+            }
+
             bool logged_one = false;
             FOR_ALL_THINGS_THAT_INTERACT(level, it, p.x, p.y) {
                 if (it == this) { continue; }
@@ -301,17 +306,19 @@ _
                 logged_one = true;
 
                 if (is_player()) {
-                    CON("Robot: @(%d,%d) Found a goal: %s %s, score %d",
+                    CON("Robot: @(%d,%d) Found a goal: %s %s, via (%s) score %d",
                         (int)mid_at.x,
                         (int)mid_at.y,
                         it->to_string().c_str(), result.goal.msg.c_str(),
+                        goal_path_str.c_str(),
                         (int)result.goal.score);
                     BOTCON("Robot: goal %s %s",
                            result.goal.msg.c_str(),
                            it->text_the().c_str());
                 } else {
-                    log("Monst: Found a goal: %s %s, score %d",
+                    log("Monst: Found a goal: %s %s, via (%s) score %d",
                         it->to_string().c_str(), result.goal.msg.c_str(),
+                        goal_path_str.c_str(),
                         (int)result.goal.score);
                 }
             } FOR_ALL_THINGS_END();
@@ -334,17 +341,19 @@ _
                     logged_one = true;
 
                     if (is_player()) {
-                        CON("Robot: @(%d,%d) Found a non active-thing goal: %s %s, score %d",
+                        CON("Robot: @(%d,%d) Found a non active-thing goal: %s %s, via (%s) score %d",
                             (int)mid_at.x,
                             (int)mid_at.y,
                             it->to_string().c_str(), result.goal.msg.c_str(),
+                            goal_path_str.c_str(),
                             (int)result.goal.score);
                         BOTCON("Robot: goal %s %s",
                             result.goal.msg.c_str(),
                             it->text_the().c_str());
                     } else {
-                        log("Monst: Found a non active-thing goal: %s %s, score %d",
+                        log("Monst: Found a non active-thing goal: %s %s, via (%s) score %d",
                             it->to_string().c_str(), result.goal.msg.c_str(),
+                            goal_path_str.c_str(),
                             (int)result.goal.score);
                     }
                 } FOR_ALL_THINGS_END();
@@ -352,15 +361,18 @@ _
 
             if (!logged_one) {
                 if (is_player()) {
-                    CON("Robot: @(%d,%d) Found a non thing goal: %s, score %d",
+                    CON("Robot: @(%d,%d) Found a non thing goal: %s, via (%s) score %d",
                         (int)mid_at.x,
                         (int)mid_at.y,
                         result.goal.msg.c_str(),
+                        goal_path_str.c_str(),
                         (int)result.goal.score);
                     BOTCON("Robot: goal %s", result.goal.msg.c_str());
                 } else {
-                    log("Monst: Found a non thing goal: %s score %d",
-                        result.goal.msg.c_str(), (int)result.goal.score);
+                    log("Monst: Found a non thing goal: %s via (%s) score %d",
+                        result.goal.msg.c_str(),
+                        goal_path_str.c_str(),
+                        (int)result.goal.score);
                 }
             }
 
@@ -458,6 +470,22 @@ int Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy,
                     set(dmap_can_see->val, X, Y, DMAP_IS_WALL);
                     continue;
                 }
+            }
+
+            switch (search_type) {
+                case SEARCH_TYPE_LOCAL_NO_JUMP:
+                case SEARCH_TYPE_GLOBAL_NO_JUMP:
+                case SEARCH_TYPE_LAST_RESORTS_NO_JUMP:
+                    if (level->is_lava(p) ||
+                        level->is_chasm(p)) {
+                        set(dmap_can_see->val, X, Y, DMAP_IS_WALL);
+                        continue;
+                    }
+                    break;
+                case SEARCH_TYPE_GLOBAL_JUMP_ALLOWED:
+                case SEARCH_TYPE_LOCAL_JUMP_ALLOWED:
+                case SEARCH_TYPE_LAST_RESORTS_JUMP_ALLOWED:
+                    break;
             }
 
             //
@@ -1430,13 +1458,8 @@ void Thing::robot_tick (void)
                     CON("Robot: try to find goals, search-type %d", search_type);
                 }
                 if (robot_ai_create_path_to_goal(minx, miny, maxx, maxy, search_type)) {
-                    std::string s = "new goal: ";
-                    for (auto p : monstp->move_path) {
-                        s += p.to_string() + " ";
-                    }
-
                     if (monstp->move_path.size()) {
-                        robot_change_state(ROBOT_STATE_MOVING, s.c_str());
+                        robot_change_state(ROBOT_STATE_MOVING, "found a new goal");
                     } else {
                         CON("Robot: Did not move, but did something");
                     }

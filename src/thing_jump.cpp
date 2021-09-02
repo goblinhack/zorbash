@@ -136,20 +136,11 @@ bool Thing::try_to_jump (point to, bool be_careful)
     }
 
     if (be_careful) {
-        if (!level->is_dungeon(x, y)) {_
-            dbg("No, jump failed, not dungeon");
-            if (is_player()) {
-                TOPCON("You can't jump outside the dungeon.");
-                err("You can't jump outside the dungeon to %d,%d", x, y);
-            }
+        if (!level->is_able_to_stand_on(x, y)) {_
             return false;
         }
 
         if (collision_obstacle(point(x, y))) {_
-            dbg("No, jump failed, avoid destination");
-            if (is_player()) {
-                TOPCON("You can't quite onto that.");
-            }
             return false;
         }
     }

@@ -376,6 +376,7 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _fade_in_map {};            */ in >> bits(my.t->_fade_in_map);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _gfx_water {};              */ in >> bits(my.t->_gfx_water);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _heatmap {};                */ in >> bits(my.t->_heatmap);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_able_to_stand_on {};    */ in >> bits(my.t->_is_able_to_stand_on);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_acid {};                */ in >> bits(my.t->_is_acid);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_ascend_dungeon {};      */ in >> bits(my.t->_is_ascend_dungeon);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_ascend_sewer {};        */ in >> bits(my.t->_is_ascend_sewer);
@@ -392,7 +393,6 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_dirt {};                */ in >> bits(my.t->_is_dirt);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_door {};                */ in >> bits(my.t->_is_door);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_dry_grass {};           */ in >> bits(my.t->_is_dry_grass);
-    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_dungeon {};             */ in >> bits(my.t->_is_dungeon);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_enchantstone {};        */ in >> bits(my.t->_is_enchantstone);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_extreme_hazard {};      */ in >> bits(my.t->_is_extreme_hazard);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_fire {};                */ in >> bits(my.t->_is_fire);
@@ -428,9 +428,9 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     /* cursor_old */            in >> bits(l->cursor_old);
     /* cursor_found */          in >> bits(l->cursor_found);
     /* fbo_light */             in >> bits(l->fbo_light);
-    /* is_dungeon_level */      in >> bits(l->is_dungeon_level);
+    /* is_level_type_dungeon */      in >> bits(l->is_level_type_dungeon);
     /* is_heatmap_valid */      in >> bits(l->is_heatmap_valid);
-    /* is_sewer_level */        in >> bits(l->is_sewer_level);
+    /* is_level_type_sewer */        in >> bits(l->is_level_type_sewer);
     /* is_starting */           in >> bits(l->is_starting);
     /* map_at */                in >> bits(l->map_at);
     /* map_br */                in >> bits(l->map_br);

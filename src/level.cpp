@@ -12,7 +12,7 @@ std::string Level::to_string (void)
     int level_no = (int)(world_at.z / 2) + 1;
     auto level_no_str = std::to_string(level_no);
 
-    if (is_sewer_level) {
+    if (is_level_type_sewer) {
         return ("sewer " + level_no_str);
     } else {
         return ("level " + level_no_str);
@@ -1013,38 +1013,38 @@ void Level::unset_is_rock (const int x, const int y)
     decr(_is_rock, x, y, (uint8_t)1);
 }
 
-uint8_t Level::is_dungeon (const point &p)
+uint8_t Level::is_able_to_stand_on (const point &p)
 {_
     if (unlikely(is_oob(p.x, p.y))) {
         return (false);
     }
-    return (get(_is_dungeon, p.x, p.y));
+    return (get(_is_able_to_stand_on, p.x, p.y));
 }
 
-uint8_t Level::is_dungeon (const int x, const int y)
+uint8_t Level::is_able_to_stand_on (const int x, const int y)
 {_
     if (unlikely(is_oob(x, y))) {
         return (false);
     }
-    return (get(_is_dungeon, x, y));
+    return (get(_is_able_to_stand_on, x, y));
 }
 
-void Level::set_is_dungeon (const int x, const int y)
+void Level::set_is_able_to_stand_on (const int x, const int y)
 {_
     if (unlikely(is_oob(x, y))) {
         return;
     }
     map_changed = true;
-    incr(_is_dungeon, x, y, (uint8_t)1);
+    incr(_is_able_to_stand_on, x, y, (uint8_t)1);
 }
 
-void Level::unset_is_dungeon (const int x, const int y)
+void Level::unset_is_able_to_stand_on (const int x, const int y)
 {_
     if (unlikely(is_oob(x, y))) {
         return;
     }
     map_changed = true;
-    decr(_is_dungeon, x, y, (uint8_t)1);
+    decr(_is_able_to_stand_on, x, y, (uint8_t)1);
 }
 
 uint8_t Level::is_corpse (const point &p)

@@ -17,7 +17,7 @@ bool Level::create_sewer (point3d at, int seed)
 {_
     log("Create sewer at (%d,%d,%d)", at.x, at.y, at.z);
 
-    is_sewer_level = true;
+    is_level_type_sewer = true;
 
     place_the_grid();
     if (g_errored) { return false; }
