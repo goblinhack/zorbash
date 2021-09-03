@@ -53,29 +53,6 @@ void Thing::dmap_modify_terrain_cost (point p, uint8_t *d)
         pref += DMAP_LESS_PREFERRED_TERRAIN;
     }
 
-    {
-        static const std::vector<point> all_deltas = {
-            point(-1, -1),
-            point( 1, -1),
-            point(-1,  1),
-            point( 1,  1),
-            // no 0, 0
-            point(0, -1),
-            point(-1, 0),
-            point(1, 0),
-            point(0, 1),
-        };
-
-        for (const auto& d : all_deltas) {
-            auto x = p.x + d.x;
-            auto y = p.y + d.y;
-
-            if (will_avoid_hazard(point(x, y))) {
-                pref += DMAP_LESS_PREFERRED_TERRAIN / 2;
-            }
-        }
-    }
-
     if (pref > DMAP_MAX_LESS_PREFERRED_TERRAIN) {
         pref = DMAP_MAX_LESS_PREFERRED_TERRAIN;
     }

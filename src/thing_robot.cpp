@@ -536,7 +536,7 @@ int Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy,
                         }
 
                         //
-                        // Too close?
+                        // Too far?
                         //
                         float dist = DISTANCE(jump_begin.x, jump_begin.y,
                                               jump_end.x, jump_end.y);
@@ -581,6 +581,117 @@ int Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy,
             continue;
         }
     }
+
+    //
+    // Grow the search space beyond the light
+    //
+    std::array< std::array<bool, MAP_WIDTH>, MAP_HEIGHT> walked = {};
+    if (is_player()) {
+        for (int y = miny; y < maxy; y++) {
+            for (int x = minx; x < maxx; x++) {
+                point p(x, y);
+
+                if (p.x >= MAP_WIDTH - MAP_BORDER_ROCK) {
+                    continue;
+                }
+                if (p.y >= MAP_HEIGHT - MAP_BORDER_ROCK) {
+                    continue;
+                }
+                if (p.x < MAP_BORDER_ROCK) {
+                    continue;
+                }
+                if (p.y < MAP_BORDER_ROCK) {
+                    continue;
+                }
+
+                int X = x - minx;
+                int Y = y - miny;
+
+                if (get(dmap_can_see->val, X, Y) == DMAP_IS_WALL) {
+                    continue;
+                }
+
+                if (!level->is_lit_ever(p)) {
+                    continue;
+                }
+
+                if (!ai_obstacle_for_me(p)) {
+                    //
+                    // Door
+                    //
+                } else if (level->is_movement_blocking_hard(p.x, p.y)) {
+                    continue;
+                }
+
+                set(walked, x, y, true);
+
+                for (auto dx = -1; dx <= 1; dx++) {
+                    for (auto dy = -1; dy <= 1; dy++) {
+                        point o(p.x + dx, p.y + dy);
+                        if (!dx && !dy) {
+                            continue;
+                        }
+                        if (level->is_oob(o)) {
+                            continue;
+                        }
+                        if (!level->is_able_to_stand_on(o)) {
+                            continue;
+                        }
+                        if (level->is_door(o) ||
+                            level->is_secret_door(o) ||
+                            level->is_descend_sewer(o) ||
+                            level->is_ascend_sewer(o) ||
+                            level->is_descend_dungeon(o) ||
+                            level->is_ascend_dungeon(o)) {
+                            //
+                            // Allow locked door
+                            //
+                        } else if (ai_obstacle_for_me(o)) {
+                            //
+                            // Locked door or walls
+                            //
+                            continue;
+                        }
+                        set(dmap_can_see->val, X + dx, Y + dy, DMAP_IS_PASSABLE);
+                    }
+                }
+            }
+        }
+    }
+#if 1
+    printf("\nrobot search grown:\n");
+    for (int y = 0; y < MAP_HEIGHT; y++) {
+        for (int x = 0; x < MAP_WIDTH; x++) {
+            if ((x == (int)mid_at.x) && (y == (int)mid_at.y)) {
+                if (level->is_lit_ever(x, y)) {
+                    printf("*");
+                } else {
+                    printf("o");
+                }
+                continue;
+            }
+            if (get(walked, x, y)) {
+                if (level->is_movement_blocking_hard(x, y)) {
+                    printf("X");
+                } else {
+                    printf("?");
+                }
+            } else {
+                if (level->is_movement_blocking_hard(x, y)) {
+                    printf("x");
+                } else {
+                    if (level->is_lit_currently(x, y)) {
+                        printf("l");
+                    } else {
+                        printf(" ");
+                    }
+                }
+            }
+            continue;
+        }
+        printf("\n");
+    }
+#endif
 
     int something_changed = 0;
 
@@ -974,12 +1085,6 @@ void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals,
     in.push_back(start);
     set(pushed, start.x, start.y, true);
 
-    auto dmap_to_player = &level->dmap_to_player;
-    if (DEBUG3) {
-        log("Dmap, to player:");
-        dmap_print(dmap_to_player);
-    }
-
     auto dmap_can_see = get_dmap_can_see();
     if (DEBUG3) {
         log("Dmap, can see:");
@@ -1082,17 +1187,16 @@ void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals,
                 if (!dx && !dy) {
                     continue;
                 }
-
                 point o(p.x + dx, p.y + dy);
                 if (level->is_oob(o)) {
                     continue;
                 }
 
-                if (get(walked, o.x, o.y)) {
+                if (get(dmap_can_see->val, o.x, o.y) > DMAP_IS_PASSABLE) {
                     continue;
                 }
 
-                if (is_hazardous_to_me(o)) {
+                if (get(walked, o.x, o.y)) {
                     continue;
                 }
 
@@ -1164,8 +1268,8 @@ void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals,
         }
     }
 
-#if 0
-    printf("\nrobot\n");
+#if 1
+    printf("\nrobot search cand\n");
     for (int y = 0; y < MAP_HEIGHT; y++) {
         for (int x = 0; x < MAP_WIDTH; x++) {
             if ((x == (int)mid_at.x) && (y == (int)mid_at.y)) {
@@ -1184,18 +1288,18 @@ void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals,
             }
             if (get(walked, x, y)) {
                 if (level->is_movement_blocking_hard(x, y)) {
-                    printf("W");
+                    printf("X");
                 } else {
-                    printf("w");
+                    printf("?");
                 }
             } else {
                 if (level->is_movement_blocking_hard(x, y)) {
-                    printf("X");
+                    printf("x");
                 } else {
-                    if (level->is_lit_ever(x, y)) {
+                    if (level->is_lit_currently(x, y)) {
                         printf("l");
                     } else {
-                        printf(".");
+                        printf(" ");
                     }
                 }
             }
