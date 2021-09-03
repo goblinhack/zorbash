@@ -151,7 +151,7 @@ bool Thing::try_to_jump (point to, bool be_careful)
     auto tw = TILE_WIDTH;
     auto th = TILE_HEIGHT;
     auto sz = isize(last_blit_br.x - last_blit_tl.x, last_blit_br.y - last_blit_tl.y);
-    auto delay = PARTICLE_SPEED_MS;
+    auto delay = THING_JUMP_SPEED;
     auto delay_shorter = delay - 10;
     point dst(src.x + dx * tw , src.y + dy * th );
 
@@ -164,6 +164,8 @@ bool Thing::try_to_jump (point to, bool be_careful)
                                      false,
                                      true /* make_visible_at_end */);
     } else {
+        delay = MONST_JUMP_SPEED;
+
         //
         // If offscreen and in robot mode, then jump quicker, so the robot does
         // not have to wait so long/

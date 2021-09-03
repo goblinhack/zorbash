@@ -27,6 +27,8 @@
 #define MAX_BAG_HEIGHT                     20
 #define MAX_BAG_WIDTH                      20
 #define PARTICLE_SPEED_MS                  450
+#define THING_JUMP_SPEED                   450
+#define MONST_JUMP_SPEED                   150
 #define ROBOT_CAN_SEE_SECRET_DOOR_DISTANCE 3
 #define THING_DAMAGE_SHAKE_ABOVE           10   // Damage above this causes shakes
 #define THING_DAMAGE_SHAKE_SCALE           40.0 // Smaller means more shaking
