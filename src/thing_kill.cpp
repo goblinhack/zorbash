@@ -242,6 +242,11 @@ void Thing::kill (Thingp killer, const char *reason)
         }
 
         level->set_is_corpse(mid_at.x, mid_at.y);
+
+        if (i_set_is_monst) {
+            i_set_is_monst = false;
+            level->unset_is_monst(mid_at.x, mid_at.y);
+        }
         return;
     }
 
