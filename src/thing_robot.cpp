@@ -95,7 +95,8 @@ _
     //
     if (goalmaps.empty()) {
         if (is_player()) {
-            CON("Robot: @(%d,%d) No goals found", (int)mid_at.x, (int)mid_at.y);
+            CON("Robot: @(%s, %d,%d) No goals found",
+                level->to_string().c_str(), (int)mid_at.x, (int)mid_at.y);
         }
         return false;
     }
@@ -306,9 +307,8 @@ _
                 logged_one = true;
 
                 if (is_player()) {
-                    CON("Robot: @(%d,%d) Found a goal: %s %s, via (%s) score %d",
-                        (int)mid_at.x,
-                        (int)mid_at.y,
+                    CON("Robot: @(%s, %d,%d) Found a goal: %s %s, via (%s) score %d",
+                        level->to_string().c_str(), (int)mid_at.x, (int)mid_at.y,
                         it->to_string().c_str(), result.goal.msg.c_str(),
                         goal_path_str.c_str(),
                         (int)result.goal.score);
@@ -341,9 +341,8 @@ _
                     logged_one = true;
 
                     if (is_player()) {
-                        CON("Robot: @(%d,%d) Found a non active-thing goal: %s %s, via (%s) score %d",
-                            (int)mid_at.x,
-                            (int)mid_at.y,
+                        CON("Robot: @(%s, %d,%d) Found a non active-thing goal: %s %s, via (%s) score %d",
+                            level->to_string().c_str(), (int)mid_at.x, (int)mid_at.y,
                             it->to_string().c_str(), result.goal.msg.c_str(),
                             goal_path_str.c_str(),
                             (int)result.goal.score);
@@ -361,9 +360,8 @@ _
 
             if (!logged_one) {
                 if (is_player()) {
-                    CON("Robot: @(%d,%d) Found a non thing goal: %s, via (%s) score %d",
-                        (int)mid_at.x,
-                        (int)mid_at.y,
+                    CON("Robot: @(%s, %d,%d) Found a non thing goal: %s, via (%s) score %d",
+                        level->to_string().c_str(), (int)mid_at.x, (int)mid_at.y,
                         result.goal.msg.c_str(),
                         goal_path_str.c_str(),
                         (int)result.goal.score);
@@ -1516,8 +1514,8 @@ void Thing::robot_tick (void)
     switch (monstp->robot_state) {
         case ROBOT_STATE_IDLE:
         {
-            CON("Robot: @(%d,%d) Is idle, look for something to do",
-                (int)mid_at.x, (int)mid_at.y);
+            CON("Robot: @(%s, %d,%d) Is idle, look for something to do",
+                level->to_string().c_str(), (int)mid_at.x, (int)mid_at.y);
 
             if (!get_stamina()) {
                 BOTCON("Robot is forced to rest");

@@ -144,8 +144,10 @@ void Level::update_minimap (bool showing_two_levels, bool show_faded)
                         (game->minimap_over.y == y)) {
                         c = YELLOW;
                     }
-                    if ((cursor_at.x == x) && (cursor_at.y == y)) {
-                        c = YELLOW;
+                    if (!game->robot_mode) {
+                        if ((cursor_at.x == x) && (cursor_at.y == y)) {
+                            c = YELLOW;
+                        }
                     }
                 }
 
@@ -288,8 +290,10 @@ void Level::update_minimap (bool showing_two_levels, bool show_faded)
                         (game->minimap_over.y == y)) {
                         c = YELLOW;
                     }
-                    if ((cursor_at.x == x) && (cursor_at.y == y)) {
-                        c = YELLOW;
+                    if (!game->robot_mode) {
+                        if ((cursor_at.x == x) && (cursor_at.y == y)) {
+                            c = YELLOW;
+                        }
                     }
                 }
 

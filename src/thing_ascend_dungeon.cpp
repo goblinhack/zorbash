@@ -132,14 +132,14 @@ bool Thing::ascend_dungeon (void)
                 if (is_player()) {
                     level->timestamp_fade_in_begin = time_get_time_ms_cached();
                     level->update_new_level();
+
+                    if (game->robot_mode) {
+                        game->tick_begin("Begin exploring the new level");
+                    }
                 }
                 return true;
             }
         }
-    }
-
-    if (game->robot_mode) {
-        game->tick_begin("Begin exploring the new level");
     }
 
     return false;
