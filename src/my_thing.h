@@ -159,6 +159,7 @@ public:
     uint64_t i_set_is_smoke:1                  {};
     uint64_t i_set_is_spiderweb:1              {};
     uint64_t i_set_is_sticky:1                 {};
+    uint64_t i_set_is_shovable:1               {};
     uint64_t i_set_is_treasure_class_a:1       {};
     uint64_t i_set_is_treasure_class_b:1       {};
     uint64_t i_set_is_treasure_class_c:1       {};
@@ -277,6 +278,7 @@ public:
     bool laser_choose_target(Thingp item);
     bool matches(const std::string& what) const;
     bool move(fpoint future_pos);
+    bool move(point future_pos);
     bool move(fpoint future_pos, uint8_t up, uint8_t down, uint8_t left, uint8_t right, uint8_t fire, uint8_t idle, bool shove_allowed);
     bool move_no_shove(fpoint future_pos);
     bool move_no_shove(point future_pos);
@@ -1010,8 +1012,8 @@ public:
     Thingp weapon_get() const;
     Thingp weapon_get_use_anim(void) const;
     ThingShoved try_to_shove(fpoint future_pos);
-    ThingShoved try_to_shove_into_hazard(Thingp it, fpoint delta);
-    ThingShoved try_to_shove(Thingp it, fpoint delta);
+    ThingShoved try_to_shove_into_hazard(Thingp it, fpoint fdelta);
+    ThingShoved try_to_shove(Thingp it, fpoint fdelta);
     timestamp_t decr_timestamp_anim_delay_end(timestamp_t);
     timestamp_t decr_timestamp_anim_delay_end(void);
     timestamp_t decr_timestamp_bounce_begin(timestamp_t);

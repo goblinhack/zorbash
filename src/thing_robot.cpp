@@ -613,11 +613,19 @@ int Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy,
                     continue;
                 }
 
-                if (!ai_obstacle_for_me(p)) {
+                //
+                // Can't see past walls. However we can see over chasms
+                // to expand the search space
+                //
+                if (level->is_door(p)) {
                     //
-                    // Door
+                    // Allow us to see doors so we can search them
                     //
-                } else if (level->is_movement_blocking_hard(p.x, p.y)) {
+                } else if (level->is_movement_blocking_hard(p)) {
+                    //
+                    // But allow chasms and lava so we can see over. Just block
+                    // on walls and pillars etc...
+                    //
                     continue;
                 }
 
@@ -635,18 +643,14 @@ int Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy,
                         if (!level->is_able_to_stand_on(o)) {
                             continue;
                         }
-                        if (level->is_door(o) ||
-                            level->is_secret_door(o) ||
-                            level->is_descend_sewer(o) ||
-                            level->is_ascend_sewer(o) ||
-                            level->is_descend_dungeon(o) ||
-                            level->is_ascend_dungeon(o)) {
+                        if (level->is_door(o)) {
                             //
-                            // Allow locked door
+                            // Allow us to see doors so we can search them
                             //
-                        } else if (ai_obstacle_for_me(o)) {
+                        } else if (level->is_movement_blocking_hard(o)) {
                             //
-                            // Locked door or walls
+                            // But allow chasms and lava so we can see over. Just block
+                            // on walls and pillars etc...
                             //
                             continue;
                         }

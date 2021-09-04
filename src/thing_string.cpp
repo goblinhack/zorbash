@@ -161,7 +161,7 @@ std::string Thing::to_dbg_string (void) const
 {_
     verify(this);
 
-    return (string_sprintf("L%d,%d,%d %08" PRIx32 " %s (@%g,%g)%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s)",
+    return (string_sprintf("L%d,%d,%d %08" PRIx32 " %s (@%g,%g)%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s)",
                             level->world_at.x,
                             level->world_at.y,
                             level->world_at.z,
@@ -246,6 +246,7 @@ std::string Thing::to_dbg_string (void) const
                             i_set_is_smoke                  ?  ", i_set_is_smoke" : "",
                             i_set_is_spiderweb              ?  ", i_set_is_spiderweb" : "",
                             i_set_is_sticky                 ?  ", i_set_is_sticky" : "",
+                            i_set_is_shovable               ?  ", i_set_is_shovable" : "",
                             i_set_is_treasure_class_a       ?  ", i_set_is_treasure_class_a" : "",
                             i_set_is_treasure_class_b       ?  ", i_set_is_treasure_class_b" : "",
                             i_set_is_treasure_class_c       ?  ", i_set_is_treasure_class_c" : "",
@@ -262,7 +263,7 @@ std::string Thing::to_dbg_saved_string (void) const
 {_
     verify(this);
 
-    return (string_sprintf("L%d,%d,%d %08" PRIx32 " %s (@%g,%g)%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s)",
+    return (string_sprintf("L%d,%d,%d %08" PRIx32 " %s (@%g,%g)%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s)",
                             level->world_at.x,
                             level->world_at.y,
                             level->world_at.z,
@@ -345,6 +346,7 @@ std::string Thing::to_dbg_saved_string (void) const
                             i_set_is_smoke                  ?  ", i_set_is_smoke" : "",
                             i_set_is_spiderweb              ?  ", i_set_is_spiderweb" : "",
                             i_set_is_sticky                 ?  ", i_set_is_sticky" : "",
+                            i_set_is_shovable               ?  ", i_set_is_shovable" : "",
                             i_set_is_treasure_class_a       ?  ", i_set_is_treasure_class_a" : "",
                             i_set_is_treasure_class_b       ?  ", i_set_is_treasure_class_b" : "",
                             i_set_is_treasure_class_c       ?  ", i_set_is_treasure_class_c" : "",

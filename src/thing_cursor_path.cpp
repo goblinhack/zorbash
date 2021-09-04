@@ -120,6 +120,30 @@ _
             // Someone in our way?
             //
             if (level->is_monst(future_pos)) {
+                //
+                // Can the robot shove it into a something bad?
+                //
+                auto delta = mid_at - make_fpoint(future_pos);
+                FOR_ALL_MONSTS(level, t, mid_at.x, mid_at.y) {
+                    if (!t->is_shovable()) {
+                        continue;
+                    }
+                    switch (try_to_shove_into_hazard(t, delta)) {
+                        case THING_SHOVE_TRIED_AND_FAILED:
+                            CON("Robot: Try to shove monst at %s but failed", future_pos.to_string().c_str());
+                            game->tick_begin("robot tried to shove but failed");
+                            clear_move_path("robot tried to shove but failed");
+                            return false;
+                        case THING_SHOVE_TRIED_AND_PASSED:
+                            CON("Robot: Shoved monst at %s", future_pos.to_string().c_str());
+                            game->tick_begin("robot tried to shove");
+                            clear_move_path("robot tried to shove");
+                            return true;
+                        case THING_SHOVE_NEVER_TRIED:
+                            break;
+                    }
+                } FOR_ALL_THINGS_END()
+
                 CON("Robot: Try to attack monst at %s", future_pos.to_string().c_str());
                 if (move_no_shove(future_pos)) {
                     return true;
@@ -135,7 +159,10 @@ _
                 return false;
             }
 
-            CON("Robot: Try to move without shoving to %s", future_pos.to_string().c_str());
+            CON("Robot: Try to move (shoving allowed) to %s", future_pos.to_string().c_str());
+            if (move(future_pos)) {
+                return true;
+            }
         }
 
         if (move_no_shove(future_pos)) {

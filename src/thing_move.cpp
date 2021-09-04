@@ -123,6 +123,11 @@ bool Thing::move (fpoint future_pos)
     return (move(future_pos, up, down, left, right, attack, wait_or_collect, true));
 }
 
+bool Thing::move (point future_pos)
+{_
+    return move(make_fpoint(future_pos));
+}
+
 bool Thing::move_no_shove (fpoint future_pos)
 {
     dbg("Move, without shoving to %f,%f", future_pos.x, future_pos.y);

@@ -52,6 +52,8 @@ void Thing::level_pop (void)
                                                          level->unset_is_spiderweb(mx, my); }
     if (i_set_is_sticky)                               { i_set_is_sticky = false;
                                                          level->unset_is_sticky(mx, my); }
+    if (i_set_is_shovable)                             { i_set_is_shovable = false;
+                                                         level->unset_is_shovable(mx, my); }
     if (i_set_is_door)                                 { i_set_is_door = false;
                                                          level->unset_is_door(mx, my); }
     if (i_set_is_ascend_dungeon)                       { i_set_is_ascend_dungeon = false;

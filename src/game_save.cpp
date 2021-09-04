@@ -260,6 +260,7 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     /* uint64_t */ bits64 |= (my.t->i_set_is_smoke                 ? 1LLU : 0LLU) << shift; shift++;
     /* uint64_t */ bits64 |= (my.t->i_set_is_spiderweb             ? 1LLU : 0LLU) << shift; shift++;
     /* uint64_t */ bits64 |= (my.t->i_set_is_sticky                ? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->i_set_is_shovable              ? 1LLU : 0LLU) << shift; shift++;
     /* uint64_t */ bits64 |= (my.t->i_set_is_treasure_class_a      ? 1LLU : 0LLU) << shift; shift++;
     /* uint64_t */ bits64 |= (my.t->i_set_is_treasure_class_b      ? 1LLU : 0LLU) << shift; shift++;
     /* uint64_t */ bits64 |= (my.t->i_set_is_treasure_class_c      ? 1LLU : 0LLU) << shift; shift++;
@@ -382,6 +383,7 @@ std::ostream& operator<<(std::ostream &out, Bits<Levelp & > const my)
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_smoke {};               */ out << bits(my.t->_is_smoke);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_spiderweb {};           */ out << bits(my.t->_is_spiderweb);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_sticky {};              */ out << bits(my.t->_is_sticky);
+    /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_shovable {};            */ out << bits(my.t->_is_shovable);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_treasure_class_a {};    */ out << bits(my.t->_is_treasure_class_a);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_treasure_class_b {};    */ out << bits(my.t->_is_treasure_class_b);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_treasure_class_c {};    */ out << bits(my.t->_is_treasure_class_c);

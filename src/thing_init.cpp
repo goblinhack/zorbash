@@ -126,10 +126,6 @@ void Thing::init (Levelp level,
     tp_id = tpp->id;
     tp_or_update();
 
-//    if (tpp->is_loggable_for_unimportant_stuff()) {
-        log("Creating");
-//    }
-_
     //
     // Init the z depth
     //
@@ -166,6 +162,10 @@ _
     if (mid_at != fpoint(-1, -1)) {
         level_enter();
         level_push();
+    }
+
+    if (tpp->is_loggable_for_unimportant_stuff()) {
+        log("Creating");
     }
 
     //

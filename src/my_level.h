@@ -73,6 +73,7 @@ public:
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_smoke {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_spiderweb {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_sticky {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_shovable {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_treasure_class_a {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_treasure_class_b {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_treasure_class_c {};
@@ -460,6 +461,10 @@ public:
                     continue;                                       \
                 }
 
+    #define FOR_ALL_MONSTS(level, t, x, y)                          \
+        FOR_ALL_THINGS_WALKER(level, t, x, y)                       \
+                if (!t->is_monst()) { continue; }                   \
+
     //
     // Cursor path is the highlighted path the player follows.
     //
@@ -628,6 +633,8 @@ public:
     uint8_t is_spiderweb(const point &p);
     uint8_t is_sticky(const int x, const int y);
     uint8_t is_sticky(const point &p);
+    uint8_t is_shovable(const int x, const int y);
+    uint8_t is_shovable(const point &p);
     uint8_t is_treasure_class_a(const int x, const int y);
     uint8_t is_treasure_class_a(const point &p);
     uint8_t is_treasure_class_b(const int x, const int y);
@@ -795,6 +802,7 @@ public:
     void set_is_smoke(const int x, const int y);
     void set_is_spiderweb(const int x, const int y);
     void set_is_sticky(const int x, const int y);
+    void set_is_shovable(const int x, const int y);
     void set_is_treasure_class_a(const int x, const int y);
     void set_is_treasure_class_b(const int x, const int y);
     void set_is_treasure_class_c(const int x, const int y);
@@ -860,6 +868,7 @@ public:
     void unset_is_smoke(const int x, const int y);
     void unset_is_spiderweb(const int x, const int y);
     void unset_is_sticky(const int x, const int y);
+    void unset_is_shovable(const int x, const int y);
     void unset_is_treasure_class_a(const int x, const int y);
     void unset_is_treasure_class_b(const int x, const int y);
     void unset_is_treasure_class_c(const int x, const int y);
