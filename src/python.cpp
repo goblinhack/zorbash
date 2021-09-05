@@ -1413,8 +1413,8 @@ static PyMethodDef python_c_METHODS[] = {
     {"level_is_minion_generator_at",                           (PyCFunction)level_is_minion_generator_at,                           METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_monst_at",                                      (PyCFunction)level_is_monst_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_moveable_at",                                   (PyCFunction)level_is_moveable_at,                                   METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"level_is_movement_blocking_hard_at",                     (PyCFunction)level_is_movement_blocking_hard_at,                     METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"level_is_movement_blocking_soft_at",                     (PyCFunction)level_is_movement_blocking_soft_at,                     METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"level_is_movement_blocking_wall_or_locked_door_at",      (PyCFunction)level_is_movement_blocking_wall_or_locked_door_at,                     METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"level_is_movement_blocking_but_destructable_at",         (PyCFunction)level_is_movement_blocking_but_destructable_at,                     METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_msg_at",                                        (PyCFunction)level_is_msg_at,                                        METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_no_tile_at",                                    (PyCFunction)level_is_no_tile_at,                                    METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_is_on_firing_at_something",                        (PyCFunction)level_is_on_firing_at_something,                                    METH_VARARGS | METH_KEYWORDS, "thing api"},
@@ -1710,8 +1710,8 @@ static PyMethodDef python_c_METHODS[] = {
     {"thing_is_minion",                                        (PyCFunction)thing_is_minion,                                        METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_monst",                                         (PyCFunction)thing_is_monst,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_moveable",                                      (PyCFunction)thing_is_moveable,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"thing_is_movement_blocking_hard",                        (PyCFunction)thing_is_movement_blocking_hard,                        METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"thing_is_movement_blocking_soft",                        (PyCFunction)thing_is_movement_blocking_soft,                        METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_movement_blocking_wall_or_locked_door",         (PyCFunction)thing_is_movement_blocking_wall_or_locked_door,                        METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_movement_blocking_but_destructable",            (PyCFunction)thing_is_movement_blocking_but_destructable,                        METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_msg",                                           (PyCFunction)thing_is_msg,                                           METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_no_tile",                                       (PyCFunction)thing_is_no_tile,                                       METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_is_on_fire",                                       (PyCFunction)thing_is_on_fire,                                       METH_VARARGS | METH_KEYWORDS, "thing api"},
@@ -2028,8 +2028,8 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_minion_generator)
     TP_SET_DECL(is_monst)
     TP_SET_DECL(is_moveable)
-    TP_SET_DECL(is_movement_blocking_hard)
-    TP_SET_DECL(is_movement_blocking_soft)
+    TP_SET_DECL(is_movement_blocking_wall_or_locked_door)
+    TP_SET_DECL(is_movement_blocking_but_destructable)
     TP_SET_DECL(is_msg)
     TP_SET_DECL(is_no_tile)
     TP_SET_DECL(is_openable)

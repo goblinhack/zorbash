@@ -296,8 +296,8 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     /* uint64_t */            my.t->i_set_is_light_blocker          = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
     /* uint64_t */            my.t->i_set_is_minion_generator       = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
     /* uint64_t */            my.t->i_set_is_monst                  = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
-    /* uint64_t */            my.t->i_set_is_movement_blocking_hard = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
-    /* uint64_t */            my.t->i_set_is_movement_blocking_soft = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->i_set_is_movement_blocking_wall_or_locked_door = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+    /* uint64_t */            my.t->i_set_is_movement_blocking_but_destructable = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
     /* uint64_t */            my.t->i_set_is_poison                 = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
     /* uint64_t */            my.t->i_set_is_potion                 = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
     /* uint64_t */            my.t->i_set_is_ripple                 = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
@@ -372,8 +372,8 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
 
     /* std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_light_blocker {};          */ in >> bits(my.t->_is_light_blocker);
     /* std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_lit_ever {};               */ in >> bits(my.t->_is_lit_ever);
-    /* std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_movement_blocking_hard {}; */ in >> bits(my.t->_is_movement_blocking_hard);
-    /* std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_movement_blocking_soft {}; */ in >> bits(my.t->_is_movement_blocking_soft);
+    /* std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_movement_blocking_wall_or_locked_door {}; */ in >> bits(my.t->_is_movement_blocking_wall_or_locked_door);
+    /* std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_movement_blocking_but_destructable {}; */ in >> bits(my.t->_is_movement_blocking_but_destructable);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _fade_in_map {};            */ in >> bits(my.t->_fade_in_map);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _gfx_water {};              */ in >> bits(my.t->_gfx_water);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _heatmap {};                */ in >> bits(my.t->_heatmap);

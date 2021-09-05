@@ -98,7 +98,7 @@ void Level::update_heatmap (void)
     printf("\n");
     for (auto y = 0; y < MAP_HEIGHT; y++) {
         for (auto x = 0; x < MAP_WIDTH; x++) {
-            if (is_movement_blocking_hard(x, y)) {
+            if (is_movement_blocking_wall_or_locked_door(x, y)) {
                 printf("X");
                 continue;
             }

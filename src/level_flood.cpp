@@ -37,7 +37,7 @@ std::deque<point> Level::flood_fill (point p) const
         }
         set(walked, p.x, p.y, true);
 
-        if (is_movement_blocking_hard(p)) {
+        if (is_movement_blocking_wall_or_locked_door(p)) {
             continue;
         }
 
@@ -94,7 +94,7 @@ std::deque<point> Level::flood_fill_points (point p, std::function<int(Thingp)> 
         }
         set(walked, p.x, p.y, true);
 
-        if (is_movement_blocking_hard(p)) {
+        if (is_movement_blocking_wall_or_locked_door(p)) {
             continue;
         }
 
@@ -163,7 +163,7 @@ std::deque<Thingp> Level::flood_fill_things (point p, std::function<int(Thingp)>
         }
         set(walked, p.x, p.y, true);
 
-        if (is_movement_blocking_hard(p)) {
+        if (is_movement_blocking_wall_or_locked_door(p)) {
             continue;
         }
 

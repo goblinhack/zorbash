@@ -155,8 +155,8 @@ bool Thing::matches (const std::string& what) const
     if (is_minion() &&                                        (what == "is_minion"))                                        { return true; }
     if (is_monst() &&                                         (what == "is_monst"))                                         { return true; }
     if (is_moveable() &&                                      (what == "is_moveable"))                                      { return true; }
-    if (is_movement_blocking_hard() &&                        (what == "is_movement_blocking_hard"))                        { return true; }
-    if (is_movement_blocking_soft() &&                        (what == "is_movement_blocking_soft"))                        { return true; }
+    if (is_movement_blocking_wall_or_locked_door() &&                           (what == "is_movement_blocking_wall_or_locked_door"))                        { return true; }
+    if (is_movement_blocking_but_destructable() &&                        (what == "is_movement_blocking_but_destructable"))                        { return true; }
     if (is_msg() &&                                           (what == "is_msg"))                                           { return true; }
     if (is_no_tile() &&                                       (what == "is_no_tile"))                                       { return true; }
     if (is_openable() &&                                      (what == "is_openable"))                                      { return true; }
@@ -225,7 +225,7 @@ bool Thing::matches (const std::string& what) const
     if (is_rrr59() &&                                         (what == "is_rrr59"))                                         { return true; }
     if (is_rrr5() &&                                          (what == "is_rrr5"))                                          { return true; }
     if (is_rrr60() &&                                         (what == "is_rrr60"))                                         { return true; }
-    if (is_health_booster() &&                                         (what == "is_health_booster"))                                         { return true; }
+    if (is_health_booster() &&                                (what == "is_health_booster"))                                         { return true; }
     if (is_rrr6() &&                                          (what == "is_rrr6"))                                          { return true; }
     if (is_rrr7() &&                                          (what == "is_rrr7"))                                          { return true; }
     if (is_rrr8() &&                                          (what == "is_rrr8"))                                          { return true; }
@@ -416,8 +416,8 @@ std::function<int(Thingp)> Thing::matches_to_func (const std::string& what)
     if (what == "is_minion")                                        { return &Thing::is_minion; }
     if (what == "is_monst")                                         { return &Thing::is_monst; }
     if (what == "is_moveable")                                      { return &Thing::is_moveable; }
-    if (what == "is_movement_blocking_hard")                        { return &Thing::is_movement_blocking_hard; }
-    if (what == "is_movement_blocking_soft")                        { return &Thing::is_movement_blocking_soft; }
+    if (what == "is_movement_blocking_wall_or_locked_door")                           { return &Thing::is_movement_blocking_wall_or_locked_door; }
+    if (what == "is_movement_blocking_but_destructable")                        { return &Thing::is_movement_blocking_but_destructable; }
     if (what == "is_msg")                                           { return &Thing::is_msg; }
     if (what == "is_no_tile")                                       { return &Thing::is_no_tile; }
     if (what == "is_openable")                                      { return &Thing::is_openable; }

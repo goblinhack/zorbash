@@ -486,13 +486,13 @@ bool Light::calculate (void)
                     continue;
                 }
                 if (get(walked, x, y)) {
-                    if (level->is_movement_blocking_hard(x, y)) {
+                    if (level->is_movement_blocking_wall_or_locked_door(x, y)) {
                         printf("L");
                     } else {
                         printf("l");
                     }
                 } else {
-                    if (level->is_movement_blocking_hard(x, y)) {
+                    if (level->is_movement_blocking_wall_or_locked_door(x, y)) {
                         printf("X");
                     } else {
                         if (level->is_lit_ever(x, y)) {

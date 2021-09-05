@@ -457,7 +457,7 @@ int Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy,
                 continue;
             }
 
-            if (level->is_movement_blocking_hard(p)) {
+            if (level->is_movement_blocking_wall_or_locked_door(p)) {
                 set(dmap_can_see->val, X, Y, DMAP_IS_WALL);
                 continue;
             }
@@ -555,7 +555,7 @@ int Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy,
                             if (j == p) {
                                 continue;
                             }
-                            if (level->is_movement_blocking_hard(j)) {
+                            if (level->is_movement_blocking_wall_or_locked_door(j)) {
                                 jump = false;
                                 break;
                             }
@@ -605,10 +605,6 @@ int Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy,
                 int X = x - minx;
                 int Y = y - miny;
 
-                if (get(dmap_can_see->val, X, Y) == DMAP_IS_WALL) {
-                    continue;
-                }
-
                 if (!level->is_lit_ever(p)) {
                     continue;
                 }
@@ -621,7 +617,7 @@ int Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy,
                     //
                     // Allow us to see doors so we can search them
                     //
-                } else if (level->is_movement_blocking_hard(p)) {
+                } else if (level->is_movement_blocking_wall_or_locked_door(p)) {
                     //
                     // But allow chasms and lava so we can see over. Just block
                     // on walls and pillars etc...
@@ -647,7 +643,7 @@ int Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy,
                             //
                             // Allow us to see doors so we can search them
                             //
-                        } else if (level->is_movement_blocking_hard(o)) {
+                        } else if (level->is_movement_blocking_wall_or_locked_door(o)) {
                             //
                             // But allow chasms and lava so we can see over. Just block
                             // on walls and pillars etc...
@@ -673,13 +669,13 @@ int Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy,
                 continue;
             }
             if (get(walked, x, y)) {
-                if (level->is_movement_blocking_hard(x, y)) {
+                if (level->is_movement_blocking_wall_or_locked_door(x, y)) {
                     printf("X");
                 } else {
                     printf("?");
                 }
             } else {
-                if (level->is_movement_blocking_hard(x, y)) {
+                if (level->is_movement_blocking_wall_or_locked_door(x, y)) {
                     printf("x");
                 } else {
                     if (level->is_lit_currently(x, y)) {
@@ -1122,7 +1118,7 @@ void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals,
             continue;
         }
 
-        if (level->is_movement_blocking_hard(p.x, p.y)) {
+        if (level->is_movement_blocking_wall_or_locked_door(p.x, p.y)) {
             continue;
         }
 
@@ -1259,7 +1255,7 @@ void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals,
                         continue;
                     }
 
-                    if (level->is_movement_blocking_hard(o)) {
+                    if (level->is_movement_blocking_wall_or_locked_door(o)) {
                         continue;
                     }
                 }
@@ -1289,13 +1285,13 @@ void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals,
                 }
             }
             if (get(walked, x, y)) {
-                if (level->is_movement_blocking_hard(x, y)) {
+                if (level->is_movement_blocking_wall_or_locked_door(x, y)) {
                     printf("X");
                 } else {
                     printf("?");
                 }
             } else {
-                if (level->is_movement_blocking_hard(x, y)) {
+                if (level->is_movement_blocking_wall_or_locked_door(x, y)) {
                     printf("x");
                 } else {
                     if (level->is_lit_currently(x, y)) {

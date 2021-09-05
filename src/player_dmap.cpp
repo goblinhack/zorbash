@@ -59,7 +59,7 @@ void Level::dmap_to_player_update (void)
     for (auto y = 0; y < MAP_HEIGHT; y++) {
         for (auto x = 0; x < MAP_WIDTH; x++) {
             if ((x >= minx) && (x <= maxx) && (y >= miny) && (y <= maxy)) {
-                if (is_movement_blocking_hard(point(x, y))) {
+                if (is_movement_blocking_wall_or_locked_door(point(x, y))) {
                     set(dmap_to_player.val, x, y, DMAP_IS_WALL);
                 } else {
                     set(dmap_to_player.val, x, y, DMAP_IS_PASSABLE);

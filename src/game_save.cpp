@@ -248,8 +248,8 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     /* uint64_t */ bits64 |= (my.t->i_set_is_light_blocker         ? 1LLU : 0LLU) << shift; shift++;
     /* uint64_t */ bits64 |= (my.t->i_set_is_minion_generator      ? 1LLU : 0LLU) << shift; shift++;
     /* uint64_t */ bits64 |= (my.t->i_set_is_monst                 ? 1LLU : 0LLU) << shift; shift++;
-    /* uint64_t */ bits64 |= (my.t->i_set_is_movement_blocking_hard? 1LLU : 0LLU) << shift; shift++;
-    /* uint64_t */ bits64 |= (my.t->i_set_is_movement_blocking_soft? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->i_set_is_movement_blocking_wall_or_locked_door? 1LLU : 0LLU) << shift; shift++;
+    /* uint64_t */ bits64 |= (my.t->i_set_is_movement_blocking_but_destructable? 1LLU : 0LLU) << shift; shift++;
     /* uint64_t */ bits64 |= (my.t->i_set_is_poison                ? 1LLU : 0LLU) << shift; shift++;
     /* uint64_t */ bits64 |= (my.t->i_set_is_potion                ? 1LLU : 0LLU) << shift; shift++;
     /* uint64_t */ bits64 |= (my.t->i_set_is_ripple                ? 1LLU : 0LLU) << shift; shift++;
@@ -338,8 +338,8 @@ std::ostream& operator<<(std::ostream &out, Bits<Levelp & > const my)
 
     /* std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_light_blocker {};          */ out << bits(my.t->_is_light_blocker);
     /* std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_lit_ever {};               */ out << bits(my.t->_is_lit_ever);
-    /* std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_movement_blocking_hard {}; */ out << bits(my.t->_is_movement_blocking_hard);
-    /* std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_movement_blocking_soft {}; */ out << bits(my.t->_is_movement_blocking_soft);
+    /* std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_movement_blocking_wall_or_locked_door {}; */ out << bits(my.t->_is_movement_blocking_wall_or_locked_door);
+    /* std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_movement_blocking_but_destructable {}; */ out << bits(my.t->_is_movement_blocking_but_destructable);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _fade_in_map {};            */ out << bits(my.t->_fade_in_map);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _gfx_water {};              */ out << bits(my.t->_gfx_water);
     /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _heatmap {};                */ out << bits(my.t->_heatmap);

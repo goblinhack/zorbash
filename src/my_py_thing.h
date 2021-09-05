@@ -185,8 +185,8 @@ PyObject *thing_is_minion_generator(PyObject *obj, PyObject *args, PyObject *key
 PyObject *thing_is_minion(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_monst(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_moveable(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_movement_blocking_hard(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_movement_blocking_soft(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_movement_blocking_wall_or_locked_door(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_movement_blocking_but_destructable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_msg(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_no_tile(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_on_fire(PyObject *obj, PyObject *args, PyObject *keywds);

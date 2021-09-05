@@ -36,7 +36,7 @@ def tp_init(name, text_name):
     mytp.set_is_loggable_for_important_stuff(True)
     mytp.set_is_loggable_for_unimportant_stuff(True)
     mytp.set_is_minion_generator(True)
-    mytp.set_is_movement_blocking_soft(True)
+    mytp.set_is_movement_blocking_but_destructable(True)
     mytp.set_is_shovable(True)
     mytp.set_light_color("cyan")
     mytp.set_light_strength(2)

@@ -99,12 +99,12 @@ void Thing::level_push (void)
                                                    level->set_is_light_blocker(mx, my); }
     if (is_monst())                              { i_set_is_monst = true;
                                                    level->set_is_monst(mx, my); }
-    if (is_movement_blocking_hard() && !is_open && !is_dead) {
-                                                   i_set_is_movement_blocking_hard = true;
-                                                   level->set_is_movement_blocking_hard(mx, my); }
-    if (is_movement_blocking_soft() && !is_open && !is_dead) {
-                                                   i_set_is_movement_blocking_soft = true;
-                                                   level->set_is_movement_blocking_soft(mx, my); }
+    if (is_movement_blocking_wall_or_locked_door() && !is_open && !is_dead) {
+                                                   i_set_is_movement_blocking_wall_or_locked_door = true;
+                                                   level->set_is_movement_blocking_wall_or_locked_door(mx, my); }
+    if (is_movement_blocking_but_destructable() && !is_open && !is_dead) {
+                                                   i_set_is_movement_blocking_but_destructable = true;
+                                                   level->set_is_movement_blocking_but_destructable(mx, my); }
     if (is_potion())                             { i_set_is_potion = true;
                                                    level->set_is_potion(mx, my); }
     if (is_wand())                               { i_set_is_wand = true;

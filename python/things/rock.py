@@ -36,7 +36,7 @@ def tp_init(name,
     mytp.set_is_light_blocker(True)
     mytp.set_is_loggable_for_important_stuff(False)
     mytp.set_is_loggable_for_unimportant_stuff(False)
-    mytp.set_is_movement_blocking_hard(True)
+    mytp.set_is_movement_blocking_wall_or_locked_door(True)
     mytp.set_is_rock(True)
     mytp.set_is_wall(True)
     mytp.set_text_a_or_an("the")

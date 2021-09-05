@@ -716,8 +716,8 @@ class Tp:
     def set_is_item_eater(self, value):
         zx.tp_set_is_item_eater(self, value)
 
-    def set_is_movement_blocking_soft(self, value):
-        zx.tp_set_is_movement_blocking_soft(self, value)
+    def set_is_movement_blocking_but_destructable(self, value):
+        zx.tp_set_is_movement_blocking_but_destructable(self, value)
 
     def set_is_the_grid(self, value):
         zx.tp_set_is_the_grid(self, value)
@@ -1155,8 +1155,8 @@ class Tp:
     def set_gfx_animated_can_vflip(self, value):
         zx.tp_set_gfx_animated_can_vflip(self, value)
 
-    def set_is_movement_blocking_hard(self, value):
-        zx.tp_set_is_movement_blocking_hard(self, value)
+    def set_is_movement_blocking_wall_or_locked_door(self, value):
+        zx.tp_set_is_movement_blocking_wall_or_locked_door(self, value)
 
     def set_is_treasure_type(self, value):
         zx.tp_set_is_treasure_type(self, value)

@@ -45,8 +45,8 @@ void Level::clear (void)
     _is_lit_currently = {};
     _is_lit_ever = {};
     _is_monst = {};
-    _is_movement_blocking_hard = {};
-    _is_movement_blocking_soft = {};
+    _is_movement_blocking_wall_or_locked_door = {};
+    _is_movement_blocking_but_destructable = {};
     _is_poison = {};
     _is_rock = {};
     _is_shallow_water = {};

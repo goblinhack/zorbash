@@ -254,7 +254,7 @@ void Thing::kill (Thingp killer, const char *reason)
     // If this was blocking the way to the player, update that now
     //
     if (!level->is_being_destroyed) {
-        if (is_movement_blocking_hard()) {
+        if (is_movement_blocking_wall_or_locked_door()) {
             level->dmap_to_player_update();
         }
     }

@@ -126,8 +126,8 @@ bool Thing::try_to_jump (point to, bool be_careful)
     //
     // No sneaky jumping onto doors to get passed them
     //
-    if (level->is_movement_blocking_hard(x, y) ||
-        level->is_movement_blocking_soft(x, y)) {_
+    if (level->is_movement_blocking_wall_or_locked_door(x, y) ||
+        level->is_movement_blocking_but_destructable(x, y)) {_
         dbg("No, jump failed, into obstacle");
         if (is_player()) {
             TOPCON("You can't jump into solid objects.");

@@ -262,8 +262,8 @@ int Tp::is_minion_generator(void) const                              { return _i
 int Tp::is_minion(void) const                                        { return _is_minion; }
 int Tp::is_monst(void) const                                         { return _is_monst; }
 int Tp::is_moveable(void) const                                      { return _is_moveable; }
-int Tp::is_movement_blocking_hard(void) const                        { return _is_movement_blocking_hard; }
-int Tp::is_movement_blocking_soft(void) const                        { return _is_movement_blocking_soft; }
+int Tp::is_movement_blocking_wall_or_locked_door(void) const                        { return _is_movement_blocking_wall_or_locked_door; }
+int Tp::is_movement_blocking_but_destructable(void) const                        { return _is_movement_blocking_but_destructable; }
 int Tp::is_msg(void) const                                           { return _is_msg; }
 int Tp::is_no_tile(void) const                                       { return _is_no_tile; }
 int Tp::is_openable(void) const                                      { return _is_openable; }
@@ -584,8 +584,8 @@ void Tp::set_is_minion_generator(int v)                              { _is_minio
 void Tp::set_is_minion(int v)                                        { _is_minion = v; }
 void Tp::set_is_monst(int v)                                         { _is_monst = v; }
 void Tp::set_is_moveable(int v)                                      { _is_moveable = v; }
-void Tp::set_is_movement_blocking_hard(int v)                        { _is_movement_blocking_hard = v; }
-void Tp::set_is_movement_blocking_soft(int v)                        { _is_movement_blocking_soft = v; }
+void Tp::set_is_movement_blocking_wall_or_locked_door(int v)                        { _is_movement_blocking_wall_or_locked_door = v; }
+void Tp::set_is_movement_blocking_but_destructable(int v)                        { _is_movement_blocking_but_destructable = v; }
 void Tp::set_is_msg(int v)                                           { _is_msg = v; }
 void Tp::set_is_no_tile(int v)                                       { _is_no_tile = v; }
 void Tp::set_is_openable(int v)                                      { _is_openable = v; }

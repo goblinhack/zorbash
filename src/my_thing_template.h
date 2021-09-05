@@ -229,8 +229,8 @@ private:
     int _is_minion_generator {};
     int _is_monst {};
     int _is_moveable {};
-    int _is_movement_blocking_hard {};
-    int _is_movement_blocking_soft {};
+    int _is_movement_blocking_wall_or_locked_door {};
+    int _is_movement_blocking_but_destructable {};
     int _is_msg {};
     int _is_no_tile {};
     int _is_openable {};
@@ -691,8 +691,8 @@ public:
     int is_minion(void) const;
     int is_monst(void) const;
     int is_moveable(void) const;
-    int is_movement_blocking_hard(void) const;
-    int is_movement_blocking_soft(void) const;
+    int is_movement_blocking_wall_or_locked_door(void) const;
+    int is_movement_blocking_but_destructable(void) const;
     int is_msg(void) const;
     int is_no_tile(void) const;
     int is_openable(void) const;
@@ -1018,8 +1018,8 @@ public:
     void set_is_minion(int);
     void set_is_monst(int);
     void set_is_moveable(int);
-    void set_is_movement_blocking_hard(int);
-    void set_is_movement_blocking_soft(int);
+    void set_is_movement_blocking_wall_or_locked_door(int);
+    void set_is_movement_blocking_but_destructable(int);
     void set_is_msg(int);
     void set_is_no_tile(int);
     void set_is_openable(int);

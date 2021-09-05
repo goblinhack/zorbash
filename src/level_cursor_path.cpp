@@ -128,7 +128,7 @@ void Level::cursor_path_draw_line (point start, point end)
         //
         for (auto y = miny; y < maxy; y++) {
             for (auto x = minx; x < maxx; x++) {
-                if (is_movement_blocking_hard(x, y)) {
+                if (is_movement_blocking_wall_or_locked_door(x, y)) {
                     set(d.val, x, y, DMAP_IS_WALL);
                 } else {
                     set(d.val, x, y, DMAP_IS_PASSABLE);
@@ -141,7 +141,7 @@ void Level::cursor_path_draw_line (point start, point end)
         //
         for (auto y = miny; y < maxy; y++) {
             for (auto x = minx; x < maxx; x++) {
-                if (is_movement_blocking_hard(x, y)) {
+                if (is_movement_blocking_wall_or_locked_door(x, y)) {
                     set(d.val, x, y, DMAP_IS_WALL);
                 } else {
                     set(d.val, x, y, DMAP_IS_PASSABLE);
@@ -155,7 +155,7 @@ void Level::cursor_path_draw_line (point start, point end)
         for (auto y = miny; y < maxy; y++) {
             for (auto x = minx; x < maxx; x++) {
                 if (is_extreme_hazard(x, y) ||
-                    is_movement_blocking_hard(x, y)) {
+                    is_movement_blocking_wall_or_locked_door(x, y)) {
                     set(d.val, x, y, DMAP_IS_WALL);
                 } else {
                     set(d.val, x, y, DMAP_IS_PASSABLE);

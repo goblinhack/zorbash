@@ -1802,111 +1802,111 @@ void Level::unset_is_light_blocker_no_check (const int x, const int y)
 //
 // Used in lighting, so inlined
 //
-bool Level::is_movement_blocking_hard (const point &p) const
+bool Level::is_movement_blocking_wall_or_locked_door (const point &p) const
 {
     if (unlikely(is_oob(p.x, p.y))) {
         return (false);
     }
-    return (get(_is_movement_blocking_hard, p.x, p.y));
+    return (get(_is_movement_blocking_wall_or_locked_door, p.x, p.y));
 }
 
-bool Level::is_movement_blocking_hard_no_check (const point &p) const
+bool Level::is_movement_blocking_wall_or_locked_door_no_check (const point &p) const
 {
-    return (get_no_check(_is_movement_blocking_hard, p.x, p.y));
+    return (get_no_check(_is_movement_blocking_wall_or_locked_door, p.x, p.y));
 }
 
-bool Level::is_movement_blocking_hard (const int x, const int y) const
+bool Level::is_movement_blocking_wall_or_locked_door (const int x, const int y) const
 {
     if (unlikely(is_oob(x, y))) {
         return (false);
     }
-    return (get(_is_movement_blocking_hard, x, y));
+    return (get(_is_movement_blocking_wall_or_locked_door, x, y));
 }
 
-bool Level::is_movement_blocking_hard_no_check (const int x, const int y) const
+bool Level::is_movement_blocking_wall_or_locked_door_no_check (const int x, const int y) const
 {
-    return (get_no_check(_is_movement_blocking_hard, x, y));
+    return (get_no_check(_is_movement_blocking_wall_or_locked_door, x, y));
 }
 
-void Level::set_is_movement_blocking_hard (const int x, const int y)
-{
-    if (unlikely(is_oob(x, y))) {
-        return;
-    }
-    set(_is_movement_blocking_hard, x, y, true);
-}
-
-void Level::set_is_movement_blocking_hard_no_check (const int x, const int y)
-{
-    set_no_check(_is_movement_blocking_hard, x, y, true);
-}
-
-void Level::unset_is_movement_blocking_hard (const int x, const int y)
+void Level::set_is_movement_blocking_wall_or_locked_door (const int x, const int y)
 {
     if (unlikely(is_oob(x, y))) {
         return;
     }
-    set(_is_movement_blocking_hard, x, y, false);
+    set(_is_movement_blocking_wall_or_locked_door, x, y, true);
 }
 
-void Level::unset_is_movement_blocking_hard_no_check (const int x, const int y)
+void Level::set_is_movement_blocking_wall_or_locked_door_no_check (const int x, const int y)
 {
-    set_no_check(_is_movement_blocking_hard, x, y, false);
+    set_no_check(_is_movement_blocking_wall_or_locked_door, x, y, true);
+}
+
+void Level::unset_is_movement_blocking_wall_or_locked_door (const int x, const int y)
+{
+    if (unlikely(is_oob(x, y))) {
+        return;
+    }
+    set(_is_movement_blocking_wall_or_locked_door, x, y, false);
+}
+
+void Level::unset_is_movement_blocking_wall_or_locked_door_no_check (const int x, const int y)
+{
+    set_no_check(_is_movement_blocking_wall_or_locked_door, x, y, false);
 }
 
 //
 // Used in lighting, so inlined
 //
-bool Level::is_movement_blocking_soft (const point &p) const
+bool Level::is_movement_blocking_but_destructable (const point &p) const
 {
     if (unlikely(is_oob(p.x, p.y))) {
         return (false);
     }
-    return (get(_is_movement_blocking_soft, p.x, p.y));
+    return (get(_is_movement_blocking_but_destructable, p.x, p.y));
 }
 
-bool Level::is_movement_blocking_soft_no_check (const point &p) const
+bool Level::is_movement_blocking_but_destructable_no_check (const point &p) const
 {
-    return (get_no_check(_is_movement_blocking_soft, p.x, p.y));
+    return (get_no_check(_is_movement_blocking_but_destructable, p.x, p.y));
 }
 
-bool Level::is_movement_blocking_soft (const int x, const int y) const
+bool Level::is_movement_blocking_but_destructable (const int x, const int y) const
 {
     if (unlikely(is_oob(x, y))) {
         return (false);
     }
-    return (get(_is_movement_blocking_soft, x, y));
+    return (get(_is_movement_blocking_but_destructable, x, y));
 }
 
-bool Level::is_movement_blocking_soft_no_check (const int x, const int y) const
+bool Level::is_movement_blocking_but_destructable_no_check (const int x, const int y) const
 {
-    return (get_no_check(_is_movement_blocking_soft, x, y));
+    return (get_no_check(_is_movement_blocking_but_destructable, x, y));
 }
 
-void Level::set_is_movement_blocking_soft (const int x, const int y)
-{
-    if (unlikely(is_oob(x, y))) {
-        return;
-    }
-    set(_is_movement_blocking_soft, x, y, true);
-}
-
-void Level::set_is_movement_blocking_soft_no_check (const int x, const int y)
-{
-    set_no_check(_is_movement_blocking_soft, x, y, true);
-}
-
-void Level::unset_is_movement_blocking_soft (const int x, const int y)
+void Level::set_is_movement_blocking_but_destructable (const int x, const int y)
 {
     if (unlikely(is_oob(x, y))) {
         return;
     }
-    set(_is_movement_blocking_soft, x, y, false);
+    set(_is_movement_blocking_but_destructable, x, y, true);
 }
 
-void Level::unset_is_movement_blocking_soft_no_check (const int x, const int y)
+void Level::set_is_movement_blocking_but_destructable_no_check (const int x, const int y)
 {
-    set_no_check(_is_movement_blocking_soft, x, y, false);
+    set_no_check(_is_movement_blocking_but_destructable, x, y, true);
+}
+
+void Level::unset_is_movement_blocking_but_destructable (const int x, const int y)
+{
+    if (unlikely(is_oob(x, y))) {
+        return;
+    }
+    set(_is_movement_blocking_but_destructable, x, y, false);
+}
+
+void Level::unset_is_movement_blocking_but_destructable_no_check (const int x, const int y)
+{
+    set_no_check(_is_movement_blocking_but_destructable, x, y, false);
 }
 
 uint8_t Level::is_lit_currently (const point &p)

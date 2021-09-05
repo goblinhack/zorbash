@@ -205,8 +205,8 @@ int Thing::is_minion_generator(void) const                              {_ retur
 int Thing::is_minion(void) const                                        {_ return (tp()->is_minion()); }
 int Thing::is_monst(void) const                                         {_ return (tp()->is_monst()); }
 int Thing::is_moveable(void) const                                      {_ return (tp()->is_moveable()); }
-int Thing::is_movement_blocking_hard(void) const                        {_ return (tp()->is_movement_blocking_hard()); }
-int Thing::is_movement_blocking_soft(void) const                        {_ return (tp()->is_movement_blocking_soft()); }
+int Thing::is_movement_blocking_wall_or_locked_door(void) const                        {_ return (tp()->is_movement_blocking_wall_or_locked_door()); }
+int Thing::is_movement_blocking_but_destructable(void) const                        {_ return (tp()->is_movement_blocking_but_destructable()); }
 int Thing::is_msg(void) const                                           {_ return (tp()->is_msg()); }
 int Thing::is_no_tile(void) const                                       {_ return (tp()->is_no_tile()); }
 int Thing::is_openable(void) const                                      {_ return (tp()->is_openable()); }

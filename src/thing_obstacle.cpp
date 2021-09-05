@@ -79,7 +79,7 @@ bool Thing::collision_obstacle (Thingp it)
     //
     // Allow movement through open doors only
     //
-    if (it->is_movement_blocking_hard()) {
+    if (it->is_movement_blocking_wall_or_locked_door()) {
         if (is_able_to_walk_through_walls()) {
             return false;
         }
@@ -89,7 +89,7 @@ bool Thing::collision_obstacle (Thingp it)
         }
     }
 
-    if (it->is_movement_blocking_soft()) {
+    if (it->is_movement_blocking_but_destructable()) {
         if (!it->is_open) {
             return true;
         }
@@ -212,7 +212,7 @@ bool Thing::ai_obstacle (Thingp it)
     //
     if (it->is_brazier() ||
         it->is_barrel() ||
-        it->is_movement_blocking_hard()) {
+        it->is_movement_blocking_wall_or_locked_door()) {
         if (is_able_to_walk_through_walls()) {
             return false;
         }

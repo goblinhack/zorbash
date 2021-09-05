@@ -83,7 +83,7 @@ bool Thing::thing_sound_play_channel (int channel, const std::string &alias)
 
     int distance = distance_to_player();
     if (distance == DMAP_IS_WALL) {
-        if (level->is_movement_blocking_hard(mid_at.x, mid_at.y)) {
+        if (level->is_movement_blocking_wall_or_locked_door(mid_at.x, mid_at.y)) {
             //
             // Ok to hit walls or doors.
             //

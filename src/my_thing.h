@@ -147,8 +147,8 @@ public:
     uint64_t i_set_is_light_blocker:1          {};
     uint64_t i_set_is_minion_generator:1       {};
     uint64_t i_set_is_monst:1                  {};
-    uint64_t i_set_is_movement_blocking_hard:1 {};
-    uint64_t i_set_is_movement_blocking_soft:1 {};
+    uint64_t i_set_is_movement_blocking_wall_or_locked_door:1 {};
+    uint64_t i_set_is_movement_blocking_but_destructable:1 {};
     uint64_t i_set_is_poison:1                 {};
     uint64_t i_set_is_potion:1                 {};
     uint64_t i_set_is_ripple:1                 {};
@@ -786,8 +786,8 @@ public:
     int is_minion(void) const;
     int is_monst(void) const;
     int is_moveable(void) const;
-    int is_movement_blocking_hard(void) const;
-    int is_movement_blocking_soft(void) const;
+    int is_movement_blocking_wall_or_locked_door(void) const;
+    int is_movement_blocking_but_destructable(void) const;
     int is_msg(void) const;
     int is_no_tile(void) const;
     int is_openable(void) const;
