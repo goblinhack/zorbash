@@ -452,9 +452,19 @@ int Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy,
                 }
             }
 
-            if (!ai_obstacle_for_me(p)) {
-                set(dmap_can_see->val, X, Y, DMAP_IS_PASSABLE);
-                continue;
+            //
+            // Don't block on things like chasms so we can jump
+            //
+            if (is_jumper()) {
+                if (!ai_obstacle_for_me(p)) {
+                    set(dmap_can_see->val, X, Y, DMAP_IS_PASSABLE);
+                    continue;
+                }
+            } else {
+                if (ai_obstacle_for_me(p)) {
+                    set(dmap_can_see->val, X, Y, DMAP_IS_WALL);
+                    continue;
+                }
             }
 
             if (level->is_movement_blocking_wall_or_locked_door(p)) {
@@ -493,7 +503,7 @@ int Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy,
                 //
                 // Trace all possible jump paths to see if we can jump over
                 //
-                if (is_hazardous_to_me(p)) {
+                if (is_hazardous_to_me(p) || ai_obstacle_for_me(p)) {
                     auto jump_dist = how_far_i_can_jump();
                     for (const auto &jp : game->jump_paths) {
                         point jump_begin(p.x + jp.begin.x, p.y + jp.begin.y);
@@ -507,22 +517,15 @@ int Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy,
                             continue;
                         }
 
-                        if (is_hazardous_to_me(jump_end)) {
-                            continue;
-                        }
-
-                        if (is_hazardous_to_me(jump_begin)) {
-                            continue;
-                        }
-
                         //
-                        // No jump begin/end from a chasm for example
+                        // No jump begin/end from a chasm or barrel for example
                         //
-                        if (ai_obstacle_for_me(jump_begin)) {
+                        if (is_hazardous_to_me(jump_begin) ||
+                            ai_obstacle_for_me(jump_begin)) {
                             continue;
                         }
-
-                        if (ai_obstacle_for_me(jump_end)) {
+                        if (is_hazardous_to_me(jump_end) ||
+                            ai_obstacle_for_me(jump_end)) {
                             continue;
                         }
 
@@ -1347,17 +1350,17 @@ next:
         }
 
         if (level->is_ascend_sewer(p.x, p.y)) {
-            total_score -= 2000;
+            total_score -= 5000;
             terrain_cost += 10;
         }
 
         if (level->is_descend_dungeon(p.x, p.y)) {
-            total_score -= 3000;
+            total_score -= 10000;
             terrain_cost += 10;
         }
 
         if (level->is_ascend_dungeon(p.x, p.y)) {
-            total_score -= 4000;
+            total_score -= 100000;
             terrain_cost += 10;
         }
 
@@ -1420,11 +1423,21 @@ bool Thing::robot_ai_choose_nearby_goal (void)
                 int item_count = 1;
                 if (items.size() >= 1) {
                     for (auto item : items) {
+                        if (!worth_collecting(item)) {
+                            continue;
+                        }
                         CON("Robot: Try to carry [%d] %s", item_count, item->to_string().c_str());
                         item_count++;
                         if (try_to_carry(item)) {
                             BOTCON("Robot collected %s", item->text_the().c_str());
                             game->tick_begin("Robot collected " + item->to_string());
+                            return true;
+                        } else if (item->is_weapon()) {
+                            BOTCON("Robot dropped %s", item->text_the().c_str());
+                            game->tick_begin("Robot dropped " + item->to_string());
+                            try_to_carry(item);
+                            drop(item);
+
                             return true;
                         }
                     }

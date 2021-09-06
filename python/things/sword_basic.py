@@ -102,6 +102,7 @@ def init_weapon(name, text_name, short_text_name):
     mytp.set_gfx_anim_attack("sword_basic_swing")
     mytp.set_gfx_short_shadow_caster(True)
     mytp.set_gfx_show_outlined(True)
+    mytp.set_gold_value_dice("100")
     mytp.set_is_able_to_fall(True)
     mytp.set_is_bag_item(True)
     mytp.set_is_collectable(True)

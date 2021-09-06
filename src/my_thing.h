@@ -906,7 +906,13 @@ public:
     int item_height(void) const;
     int item_slot_charge_count(const uint32_t slot);
     int item_slot_count(const uint32_t slot);
-    int item_value(const Thingp it);
+    int get_item_value(const Thingp it);
+    int get_carried_weapon_least_value(Thingp *out);
+    int get_carried_wand_least_value(Thingp *out);
+    int get_carried_food_least_value(Thingp *out);
+    int get_carried_weapon_count(void);
+    int get_carried_wand_count(void);
+    int get_carried_food_count(void);
     int item_width(void) const;
     int light_strength(void);
     int loves_fire(void) const;

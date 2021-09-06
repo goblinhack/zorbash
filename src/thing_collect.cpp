@@ -9,6 +9,7 @@
 #include "my_main.h"
 #include "my_tile.h"
 #include "my_thing.h"
+#include "my_monst.h"
 #include "my_thing_template.h"
 #include "my_sprintf.h"
 
@@ -17,6 +18,22 @@
 //
 int Thing::worth_collecting (Thingp it)
 {_
+    if (it->is_weapon()) {
+        auto dam = it->get_damage_max();
+        for (const auto& item : monstp->carrying) {
+            auto t = level->thing_find(item.id);
+            if (!t) {
+                continue;
+            }
+            if (!t->is_weapon()) {
+                continue;
+            }
+            if (t->get_damage_max() > dam) {
+                return true;
+            }
+        }
+    }
+
     if (it->is_treasure_type()) {
         int gold_value = it->get_gold_value();
 
@@ -26,7 +43,7 @@ int Thing::worth_collecting (Thingp it)
 
         if (it->is_bag_item()) {
             if (bag_add_test(it)) {
-                return item_value(it);
+                return get_item_value(it);
             }
         }
     }

@@ -96,9 +96,9 @@ _
                             return false;
                         }
                     } else if (try_to_jump_carefully(jump_pos)) {
-                        CON("Robot: Try to jump");
-                        game->tick_begin("robot tried to jump");
-                        clear_move_path("robot tried to jump");
+                        CON("Robot: Jumped carefully");
+                        game->tick_begin("robot Jumped carefully");
+                        clear_move_path("robot Jumped carefully");
                         return true;
                     } else {
                         //

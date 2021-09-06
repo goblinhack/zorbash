@@ -131,6 +131,7 @@ def init_weapon(name, text_name, short_text_name):
     mytp.set_text_enchant("increase damage by 1")
     mytp.set_weapon_carry_anim("axe_basic_carry")
     mytp.set_weapon_use_distance(1)
+    mytp.set_gold_value_dice("150")
     mytp.set_z_depth(zx.MAP_DEPTH_OBJ)
     mytp.set_z_prio(zx.MAP_PRIO_BEHIND)
 
