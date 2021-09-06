@@ -304,7 +304,7 @@ int Thing::is_treasure_class_a(void) const                              {_ retur
 int Thing::is_treasure_class_b(void) const                              {_ return (tp()->is_treasure_class_b()); }
 int Thing::is_treasure_class_c(void) const                              {_ return (tp()->is_treasure_class_c()); }
 int Thing::is_treasure_type_chest(void) const                           {_ return (tp()->is_treasure_type_chest()); }
-int Thing::is_treasure_type_collector(void) const                       {_ return (tp()->is_treasure_type_collector()); }
+int Thing::is_item_collector(void) const                       {_ return (tp()->is_item_collector()); }
 int Thing::is_treasure_type_eater(void) const                           {_ return (tp()->is_treasure_type_eater()); }
 int Thing::is_treasure_type(void) const                                 {_ return (tp()->is_treasure_type()); }
 int Thing::is_undead(void) const                                        {_ return (tp()->is_undead()); }

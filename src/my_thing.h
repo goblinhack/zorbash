@@ -884,7 +884,7 @@ public:
     int is_treasure_class_b(void) const;
     int is_treasure_class_c(void) const;
     int is_treasure_type_chest(void) const;
-    int is_treasure_type_collector(void) const;
+    int is_item_collector(void) const;
     int is_treasure_type_eater(void) const;
     int is_treasure_type(void) const;
     int is_undead(void) const;
@@ -910,6 +910,9 @@ public:
     int get_carried_weapon_least_value(Thingp *out);
     int get_carried_wand_least_value(Thingp *out);
     int get_carried_food_least_value(Thingp *out);
+    int get_carried_weapon_highest_value(Thingp *out);
+    int get_carried_wand_highest_value(Thingp *out);
+    int get_carried_food_highest_value(Thingp *out);
     int get_carried_weapon_count(void);
     int get_carried_wand_count(void);
     int get_carried_food_count(void);
@@ -966,6 +969,7 @@ public:
     int update_light_strength(void);
     int weapon_damage(void) const;
     int weapon_use_distance(void) const;
+    int worth_collecting(const Thingp it, Thingp *would_need_to_drop);
     int worth_collecting(const Thingp it);
     point dir_to_direction() const;
     point get_random_scent_target(void);

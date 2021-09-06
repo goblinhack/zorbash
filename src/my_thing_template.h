@@ -330,7 +330,7 @@ private:
     int _is_treasure_class_c {};
     int _is_treasure_type {};
     int _is_treasure_type_chest {};
-    int _is_treasure_type_collector {};
+    int _is_item_collector {};
     int _is_treasure_type_eater {};
     int _is_undead {};
     int _is_usable {};
@@ -791,7 +791,7 @@ public:
     int is_treasure_class_b(void) const;
     int is_treasure_class_c(void) const;
     int is_treasure_type_chest(void) const;
-    int is_treasure_type_collector(void) const;
+    int is_item_collector(void) const;
     int is_treasure_type_eater(void) const;
     int is_treasure_type(void) const;
     int is_undead(void) const;
@@ -1118,7 +1118,7 @@ public:
     void set_is_treasure_class_b(int);
     void set_is_treasure_class_c(int);
     void set_is_treasure_type_chest(int);
-    void set_is_treasure_type_collector(int);
+    void set_is_item_collector(int);
     void set_is_treasure_type_eater(int);
     void set_is_treasure_type(int);
     void set_is_undead(int);

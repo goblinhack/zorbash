@@ -439,8 +439,8 @@ class Tp:
     def set_is_key_collector(self, value):
         zx.tp_set_is_key_collector(self, value)
 
-    def set_is_treasure_type_collector(self, value):
-        zx.tp_set_is_treasure_type_collector(self, value)
+    def set_is_item_collector(self, value):
+        zx.tp_set_is_item_collector(self, value)
 
     def set_is_item(self, value):
         zx.tp_set_is_item(self, value)

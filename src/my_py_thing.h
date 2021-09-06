@@ -285,7 +285,7 @@ PyObject *thing_is_treasure_class_a(PyObject *obj, PyObject *args, PyObject *key
 PyObject *thing_is_treasure_class_b(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_treasure_class_c(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_treasure_type_chest(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_treasure_type_collector(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_item_collector(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_treasure_type_eater(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_treasure_type(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_undead(PyObject *obj, PyObject *args, PyObject *keywds);

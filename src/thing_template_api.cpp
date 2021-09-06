@@ -362,7 +362,7 @@ int Tp::is_treasure_class_a(void) const                              { return _i
 int Tp::is_treasure_class_b(void) const                              { return _is_treasure_class_b; }
 int Tp::is_treasure_class_c(void) const                              { return _is_treasure_class_c; }
 int Tp::is_treasure_type_chest(void) const                           { return _is_treasure_type_chest; }
-int Tp::is_treasure_type_collector(void) const                       { return _is_treasure_type_collector; }
+int Tp::is_item_collector(void) const                       { return _is_item_collector; }
 int Tp::is_treasure_type_eater(void) const                           { return _is_treasure_type_eater; }
 int Tp::is_treasure_type(void) const                                 { return _is_treasure_type; }
 int Tp::is_undead(void) const                                        { return _is_undead; }
@@ -684,7 +684,7 @@ void Tp::set_is_treasure_class_a(int v)                              { _is_treas
 void Tp::set_is_treasure_class_b(int v)                              { _is_treasure_class_b = v; }
 void Tp::set_is_treasure_class_c(int v)                              { _is_treasure_class_c = v; }
 void Tp::set_is_treasure_type_chest(int v)                           { _is_treasure_type_chest = v; }
-void Tp::set_is_treasure_type_collector(int v)                       { _is_treasure_type_collector = v; }
+void Tp::set_is_item_collector(int v)                       { _is_item_collector = v; }
 void Tp::set_is_treasure_type_eater(int v)                           { _is_treasure_type_eater = v; }
 void Tp::set_is_treasure_type(int v)                                 { _is_treasure_type = v; }
 void Tp::set_is_undead(int v)                                        { _is_undead = v; }

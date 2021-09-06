@@ -173,3 +173,99 @@ int Thing::get_carried_food_least_value (Thingp *out)
     }
     return least_value;
 }
+
+int Thing::get_carried_weapon_highest_value (Thingp *out)
+{_
+    int highest_value = -1;
+
+    *out = nullptr;
+    if (!monstp) {
+        return highest_value;
+    }
+
+    for (const auto& item : monstp->carrying) {
+        auto t = level->thing_find(item.id);
+        if (!t) {
+            continue;
+        }
+        if (!t->is_weapon()) {
+            continue;
+        }
+
+        auto v = get_item_value(t);
+        if (!*out) {
+            *out = t;
+            highest_value = v;
+        } else {
+            if (v > highest_value) {
+                *out = t;
+                highest_value = v;
+            }
+        }
+    }
+    return highest_value;
+}
+
+int Thing::get_carried_wand_highest_value (Thingp *out)
+{_
+    int highest_value = -1;
+
+    *out = nullptr;
+    if (!monstp) {
+        return highest_value;
+    }
+
+    for (const auto& item : monstp->carrying) {
+        auto t = level->thing_find(item.id);
+        if (!t) {
+            continue;
+        }
+        if (!t->is_wand()) {
+            continue;
+        }
+
+        auto v = get_item_value(t);
+        if (!*out) {
+            *out = t;
+            highest_value = v;
+        } else {
+            if (v > highest_value) {
+                *out = t;
+                highest_value = v;
+            }
+        }
+    }
+    return highest_value;
+}
+
+int Thing::get_carried_food_highest_value (Thingp *out)
+{_
+    int highest_value = -1;
+
+    *out = nullptr;
+    if (!monstp) {
+        return highest_value;
+    }
+
+    for (const auto& item : monstp->carrying) {
+        auto t = level->thing_find(item.id);
+        if (!t) {
+            continue;
+        }
+        if (!t->is_food()) {
+            continue;
+        }
+
+        auto v = get_item_value(t);
+        if (!*out) {
+            *out = t;
+            highest_value = v;
+        } else {
+            if (v > highest_value) {
+                *out = t;
+                highest_value = v;
+            }
+        }
+    }
+    return highest_value;
+}

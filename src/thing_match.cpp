@@ -254,7 +254,7 @@ bool Thing::matches (const std::string& what) const
     if (is_treasure_class_b() &&                              (what == "is_treasure_class_b"))                              { return true; }
     if (is_treasure_class_c() &&                              (what == "is_treasure_class_c"))                              { return true; }
     if (is_treasure_type_chest() &&                           (what == "is_treasure_type_chest"))                           { return true; }
-    if (is_treasure_type_collector() &&                       (what == "is_treasure_type_collector"))                       { return true; }
+    if (is_item_collector() &&                       (what == "is_item_collector"))                       { return true; }
     if (is_treasure_type_eater() &&                           (what == "is_treasure_type_eater"))                           { return true; }
     if (is_treasure_type() &&                                 (what == "is_treasure_type"))                                 { return true; }
     if (is_undead() &&                                        (what == "is_undead"))                                        { return true; }
@@ -515,7 +515,7 @@ std::function<int(Thingp)> Thing::matches_to_func (const std::string& what)
     if (what == "is_treasure_class_b")                              { return &Thing::is_treasure_class_b; }
     if (what == "is_treasure_class_c")                              { return &Thing::is_treasure_class_c; }
     if (what == "is_treasure_type_chest")                           { return &Thing::is_treasure_type_chest; }
-    if (what == "is_treasure_type_collector")                       { return &Thing::is_treasure_type_collector; }
+    if (what == "is_item_collector")                       { return &Thing::is_item_collector; }
     if (what == "is_treasure_type_eater")                           { return &Thing::is_treasure_type_eater; }
     if (what == "is_treasure_type")                                 { return &Thing::is_treasure_type; }
     if (what == "is_undead")                                        { return &Thing::is_undead; }
