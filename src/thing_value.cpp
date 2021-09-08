@@ -46,7 +46,7 @@ int Thing::get_item_value (Thingp it)
 
     value *= 1 + it->get_charge_count();
 
-    dbg3("Item value for %s is %d", it->to_string().c_str(), value);
+    dbg4("Item value for %s is %d", it->to_string().c_str(), value);
 
     return value;
 }

@@ -10,6 +10,7 @@ def key_init(name, text_name):
     mytp.set_gfx_bounce_always(True)
     mytp.set_gfx_short_shadow_caster(True)
     mytp.set_gfx_show_outlined(True)
+    mytp.set_gold_value_dice("10")
     mytp.set_is_able_to_fall(True)
     mytp.set_is_auto_collect_item(True)
     mytp.set_is_collectable(True)

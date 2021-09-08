@@ -159,6 +159,11 @@ _
                 return false;
             }
 
+            CON("Robot: Try to move (shoving not allowed) to %s", future_pos.to_string().c_str());
+            if (move_no_shove(future_pos)) {
+                return true;
+            }
+
             CON("Robot: Try to move (shoving allowed) to %s", future_pos.to_string().c_str());
             if (move(future_pos)) {
                 return true;

@@ -260,7 +260,7 @@ have_dungeon_start:
                         t->carry(w);
 #endif
 
-                        auto w3 = thing_new("axe_basic", fpoint(x, y));
+                        auto w3 = thing_new("sword_wooden", fpoint(x, y));
                         t->carry(w3);
 
 #if 0

@@ -185,6 +185,8 @@ std::list<Thingp> Thing::anything_to_carry_at (fpoint at)
 {_
     std::vector<std::pair<Thingp, int>> items;
 
+    dbg("Anything to carry at %d,%d", (int)at.x, (int)at.y);
+_
     FOR_ALL_THINGS(level, t, at.x, at.y) {
         if (t->is_hidden) {
             continue;
@@ -202,6 +204,12 @@ std::list<Thingp> Thing::anything_to_carry_at (fpoint at)
 
         if (t->get_immediate_owner()) {
             dbg("Potential item to carry, no, has owner: %s",
+                t->to_string().c_str());
+            continue;
+        }
+
+        if (worth_collecting(t) < 0) {
+            dbg("Potential item to carry, no, not worth it: %s",
                 t->to_string().c_str());
             continue;
         }

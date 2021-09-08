@@ -19,6 +19,8 @@
 #include "my_ptrcheck.h"
 #include "my_monst.h"
 #include "my_wid_popup.h"
+#include "my_wid_thing_info.h"
+#include "my_wid_inventory.h"
 #include "my_wid_actionbar.h"
 #include "my_player.h"
 
@@ -791,7 +793,7 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                 continue;
             }
 
-            if (it->get_immediate_spawned_owner_id().ok()) {
+            if (it->get_immediate_owner_id().ok()) {
                 continue;
             }
 
@@ -1450,7 +1452,8 @@ bool Thing::robot_ai_choose_nearby_goal (void)
                                 (int)mid_at.x, (int)mid_at.y,
                                 would_need_to_drop->to_string().c_str());
                             BOTCON("Robot dropped %s", would_need_to_drop->text_the().c_str());
-                            game->tick_begin("Robot dropped " + would_need_to_drop->to_string());
+                            game->tick_begin("Robot dropped an item");
+                            robot_change_state(ROBOT_STATE_OPEN_INVENTORY, "dropped an item");
                             return true;
                         } else {
                             CON("Robot: @(%s, %d,%d) Failed to drop %s",
@@ -1469,7 +1472,8 @@ bool Thing::robot_ai_choose_nearby_goal (void)
                             (int)mid_at.x, (int)mid_at.y,
                             item->to_string().c_str());
                         BOTCON("Robot collected %s", item->text_the().c_str());
-                        game->tick_begin("Robot collected " + item->to_string());
+                        game->tick_begin("Robot collected an item");
+                        robot_change_state(ROBOT_STATE_OPEN_INVENTORY, "collected an item");
                         return true;
                     } else {
                         CON("Robot: @(%s, %d,%d) Failed to collect %s",
@@ -1718,7 +1722,8 @@ void Thing::robot_tick (void)
 
             if (eat_something()) {
                 BOTCON("Robot needs to eat");
-                game->tick_begin("Robot ate something");
+                game->tick_begin("Robot ate an item");
+                robot_change_state(ROBOT_STATE_OPEN_INVENTORY, "eat something");
                 return;
             }
 
@@ -1739,6 +1744,18 @@ void Thing::robot_tick (void)
 
         case ROBOT_STATE_OPEN_INVENTORY:
         {
+            //
+            // Wait for the inventory to be remade
+            //
+            if (game->request_remake_inventory) {
+                return;
+            }
+
+            //
+            // Then close it. This is really just visual feedback.
+            //
+            robot_change_state(ROBOT_STATE_IDLE, "close inventory");
+            game->tick_begin("Robot finished collecting");
         }
     }
 
@@ -1782,6 +1799,8 @@ void Thing::robot_change_state (int new_state, const std::string &why)
             break;
         case ROBOT_STATE_OPEN_INVENTORY:
             from = "OPEN-INVENTORY";
+            wid_thing_info_fini();
+            wid_inventory_init();
             break;
     }
 
@@ -1802,6 +1821,9 @@ void Thing::robot_change_state (int new_state, const std::string &why)
             BOTCON("Robot is resting");
             break;
         case ROBOT_STATE_OPEN_INVENTORY:
+            game->change_state(Game::STATE_MOVING_ITEMS);
+            game->request_remake_inventory = true;
+            game->wid_thing_info_create(game->level->player, false);
             BOTCON("Robot is looking in its inventory");
             break;
     }
