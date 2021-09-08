@@ -133,6 +133,10 @@ public:
     //
     uint32_t     tick_last_did_something {};
     //
+    // When this thing was dropped
+    //
+    uint32_t     tick_last_dropped {};
+    //
     // If things have stopped moving, perform location checks on where theuy
     // are now. This handles things like shoving a monst into a chasm. We do
     // location checks on the ends of moves, but this is a backup and will

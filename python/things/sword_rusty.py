@@ -143,6 +143,6 @@ def init_weapon(name, text_name, short_text_name):
 def init():
     init_swing(name="sword_rusty_swing")
     init_carry(name="sword_rusty_carry")
-    init_weapon(name="sword_rusty", text_name="short sword", short_text_name="short sword")
+    init_weapon(name="sword_rusty", text_name="rusty short sword", short_text_name="rusty short sword")
 
 init()

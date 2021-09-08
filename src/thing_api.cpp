@@ -3027,6 +3027,49 @@ uint32_t Thing::incr_tick_last_did_something (void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
+// tick_last_dropped
+////////////////////////////////////////////////////////////////////////////
+uint32_t Thing::get_tick_last_dropped (void) const
+{_
+    if (monstp) {
+        verify(monstp);
+        return (monstp->tick_last_dropped);
+    } else {
+        return (0);
+    }
+}
+
+uint32_t Thing::set_tick_last_dropped (uint32_t v)
+{_
+    new_monst();
+    return (monstp->tick_last_dropped = v);
+}
+
+uint32_t Thing::decr_tick_last_dropped (uint32_t v)
+{_
+    new_monst();
+    return (monstp->tick_last_dropped -= v);
+}
+
+uint32_t Thing::incr_tick_last_dropped (uint32_t v)
+{_
+    new_monst();
+    return (monstp->tick_last_dropped += v);
+}
+
+uint32_t Thing::decr_tick_last_dropped (void)
+{_
+    new_monst();
+    return (monstp->tick_last_dropped--);
+}
+
+uint32_t Thing::incr_tick_last_dropped (void)
+{_
+    new_monst();
+    return (monstp->tick_last_dropped++);
+}
+
+////////////////////////////////////////////////////////////////////////////
 // tick_last_location_check
 ////////////////////////////////////////////////////////////////////////////
 uint32_t Thing::get_tick_last_location_check (void) const

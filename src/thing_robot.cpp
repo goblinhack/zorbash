@@ -664,7 +664,7 @@ int Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy,
             }
         }
     }
-#if 1
+#if 0
     printf("\nrobot search grown:\n");
     for (int y = 0; y < MAP_HEIGHT; y++) {
         for (int x = 0; x < MAP_WIDTH; x++) {
@@ -1268,7 +1268,7 @@ void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals,
         }
     }
 
-#if 1
+#if 0
     printf("\nrobot search cand\n");
     for (int y = 0; y < MAP_HEIGHT; y++) {
         for (int x = 0; x < MAP_WIDTH; x++) {
@@ -1423,61 +1423,65 @@ bool Thing::robot_ai_choose_nearby_goal (void)
                     player_tick(left, right, up, down, attack, wait, jump);
                     return true;
                 }
+            } FOR_ALL_THINGS_END();
 
-                auto items = anything_to_carry_at(at);
-                if (items.size() >= 1) {
-                    for (auto item : items) {
-                        Thingp would_need_to_drop = nullptr;
-                        if (worth_collecting(item, &would_need_to_drop) < 0) {
-                            continue;
-                        }
+            auto items = anything_to_carry_at(at);
+            if (items.size() >= 1) {
+                for (auto item : items) {
+                    Thingp would_need_to_drop = nullptr;
+                    if (worth_collecting(item, &would_need_to_drop) < 0) {
+                        CON("Robot: @(%s, %d,%d) Is not worth collecting %s",
+                            level->to_string().c_str(),
+                            (int)mid_at.x, (int)mid_at.y,
+                            item->to_string().c_str());
+                        continue;
+                    }
 
-                        if (would_need_to_drop) {
-                            CON("Robot: @(%s, %d,%d) Try to carry %s by dropping %s",
+                    if (would_need_to_drop) {
+                        CON("Robot: @(%s, %d,%d) Try to carry %s by dropping %s",
+                            level->to_string().c_str(),
+                            (int)mid_at.x, (int)mid_at.y,
+                            item->to_string().c_str(),
+                            would_need_to_drop->to_string().c_str());
+
+                        if (drop(would_need_to_drop)) {
+                            CON("Robot: @(%s, %d,%d) Dropped %s",
                                 level->to_string().c_str(),
                                 (int)mid_at.x, (int)mid_at.y,
-                                item->to_string().c_str(),
                                 would_need_to_drop->to_string().c_str());
-
-                            if (drop(would_need_to_drop)) {
-                                CON("Robot: @(%s, %d,%d) Dropped %s",
-                                    level->to_string().c_str(),
-                                    (int)mid_at.x, (int)mid_at.y,
-                                    would_need_to_drop->to_string().c_str());
-                                BOTCON("Robot dropped %s", would_need_to_drop->text_the().c_str());
-                                game->tick_begin("Robot dropped " + would_need_to_drop->to_string());
-                                return true;
-                            } else {
-                                CON("Robot: @(%s, %d,%d) Failed to drop %s",
-                                    level->to_string().c_str(),
-                                    (int)mid_at.x, (int)mid_at.y,
-                                    would_need_to_drop->to_string().c_str());
-                                BOTCON("Robot failed to drop %s", would_need_to_drop->text_the().c_str());
-                                game->tick_begin("Robot failed to drop " + would_need_to_drop->to_string());
-                                return true;
-                            }
-                        }
-
-                        if (try_to_carry(item)) {
-                            CON("Robot: @(%s, %d,%d) Collected %s",
-                                level->to_string().c_str(),
-                                (int)mid_at.x, (int)mid_at.y,
-                                item->to_string().c_str());
-                            BOTCON("Robot collected %s", item->text_the().c_str());
-                            game->tick_begin("Robot collected " + item->to_string());
+                            BOTCON("Robot dropped %s", would_need_to_drop->text_the().c_str());
+                            game->tick_begin("Robot dropped " + would_need_to_drop->to_string());
                             return true;
                         } else {
-                            CON("Robot: @(%s, %d,%d) Failed to collect %s",
+                            CON("Robot: @(%s, %d,%d) Failed to drop %s",
                                 level->to_string().c_str(),
                                 (int)mid_at.x, (int)mid_at.y,
-                                item->to_string().c_str());
-                            BOTCON("Robot failed to collect %s", item->text_the().c_str());
-                            game->tick_begin("Robot failed to collect " + item->to_string());
+                                would_need_to_drop->to_string().c_str());
+                            BOTCON("Robot failed to drop %s", would_need_to_drop->text_the().c_str());
+                            game->tick_begin("Robot failed to drop " + would_need_to_drop->to_string());
                             return true;
                         }
                     }
+
+                    if (try_to_carry(item)) {
+                        CON("Robot: @(%s, %d,%d) Collected %s",
+                            level->to_string().c_str(),
+                            (int)mid_at.x, (int)mid_at.y,
+                            item->to_string().c_str());
+                        BOTCON("Robot collected %s", item->text_the().c_str());
+                        game->tick_begin("Robot collected " + item->to_string());
+                        return true;
+                    } else {
+                        CON("Robot: @(%s, %d,%d) Failed to collect %s",
+                            level->to_string().c_str(),
+                            (int)mid_at.x, (int)mid_at.y,
+                            item->to_string().c_str());
+                        BOTCON("Robot failed to collect %s", item->text_the().c_str());
+                        game->tick_begin("Robot failed to collect " + item->to_string());
+                        return true;
+                    }
                 }
-            } FOR_ALL_THINGS_END();
+            }
         }
     }
     return false;
@@ -1621,6 +1625,9 @@ void Thing::robot_tick (void)
                         level->to_string().c_str(), (int)mid_at.x, (int)mid_at.y,
                         best_weapon->to_string().c_str());
                 }
+
+                CON("Robot: @(%s, %d,%d) Is idle, look for nearby goal",
+                    level->to_string().c_str(), (int)mid_at.x, (int)mid_at.y);
 
                 if (robot_ai_choose_nearby_goal()) {
                     return;

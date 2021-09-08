@@ -43,7 +43,7 @@ bool Thing::carry (Thingp it)
             return false;
         }
 
-        if (get_where_i_dropped_an_item_last() == make_point(mid_at)) {
+        if (game->tick_current < it->get_tick_last_dropped() + 1) {
             dbg("No; was dropped here recently");
             return false;
         }
@@ -183,7 +183,7 @@ bool Thing::try_to_carry (Thingp it)
 
 std::list<Thingp> Thing::anything_to_carry_at (fpoint at)
 {_
-    std::list<Thingp> items;
+    std::vector<std::pair<Thingp, int>> items;
 
     FOR_ALL_THINGS(level, t, at.x, at.y) {
         if (t->is_hidden) {
@@ -207,7 +207,7 @@ std::list<Thingp> Thing::anything_to_carry_at (fpoint at)
         }
 
         dbg("Potential item to carry: %s", t->to_string().c_str());
-        items.push_back(t);
+        items.push_back(std::make_pair(t, get_item_value(t)));
 
         if (t->is_bag_item_container()) {
             //
@@ -218,13 +218,25 @@ std::list<Thingp> Thing::anything_to_carry_at (fpoint at)
             for (const auto& item : t->monstp->carrying) {
                 auto t = level->thing_find(item.id);
                 if (t) {
-                    items.push_back(t);
+                    items.push_back(std::make_pair(t, get_item_value(t)));
                 }
             }
         }
     } FOR_ALL_THINGS_END()
 
-    return items;
+    sort(items.begin(),
+         items.end(),
+         [](const std::pair<Thingp, int> &a,
+            const std::pair<Thingp, int> &b) -> bool {
+             return a.second > b.second;
+         });
+
+    std::list<Thingp> out;
+    for (auto i : items) {
+        out.push_back(i.first);
+    }
+
+    return out;
 }
 
 std::list<Thingp> Thing::anything_to_carry (void)

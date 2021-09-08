@@ -130,6 +130,7 @@ _
         }
     }
     what->is_being_dropped = false;
+    what->set_tick_last_dropped(game->tick_current);
 
     return true;
 }
@@ -237,6 +238,7 @@ _
     if (is_player()) {
         sound_play("drop");
     }
+    what->set_tick_last_dropped(game->tick_current);
 
     return true;
 }

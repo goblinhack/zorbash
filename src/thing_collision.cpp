@@ -887,7 +887,7 @@ _
             dbg("No; cannot attack %s, no overlap", it->to_string().c_str());
         }
     } else if (can_eat(it)) {
-        if (get_where_i_dropped_an_item_last() == make_point(it->mid_at)) {
+        if (game->tick_current < it->get_tick_last_dropped() + 1) {
             dbg("No; can eat but was seen previously");
             //
             // Continue the walk
@@ -1156,7 +1156,7 @@ _
             return false;
         }
 
-        if (get_where_i_dropped_an_item_last() == make_point(it->mid_at)) {
+        if (game->tick_current < it->get_tick_last_dropped() + 1) {
             dbg("No; can eat but was seen previously");
             return false;
         }

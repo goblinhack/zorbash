@@ -117,6 +117,7 @@ std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
     /* timestamp_t  timestamp_lunge_end       */ out << bits(my.t->timestamp_lunge_end);
     /* timestamp_t  timestamp_anim_delay_end  */ out << bits(my.t->timestamp_anim_delay_end);
     /* uint32_t     tick_last_did_something   */ out << bits(my.t->tick_last_did_something);
+    /* uint32_t     tick_last_dropped         */ out << bits(my.t->tick_last_dropped);
     /* uint32_t     tick_last_location_check  */ out << bits(my.t->tick_last_location_check);
     /* uint32_t     tick_last_escape          */ out << bits(my.t->tick_last_escape);
     /* uint32_t     tick_last_level_change    */ out << bits(my.t->tick_last_level_change);

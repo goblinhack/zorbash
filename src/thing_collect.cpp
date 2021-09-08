@@ -22,6 +22,7 @@ int Thing::worth_collecting (Thingp it, Thingp *would_need_to_drop)
     // Don't try to pick up goblins carrying gold
     //
     if (!it->is_collectable()) {
+        dbg2("Is not worth collecting: %s", it->to_string().c_str());
         return -1;
     }
 
@@ -30,6 +31,7 @@ int Thing::worth_collecting (Thingp it, Thingp *would_need_to_drop)
     //
     if (game->robot_mode) {
         if (it->is_bag()) {
+            dbg2("Is not worth collecting: %s", it->to_string().c_str());
             return -1;
         }
     }
@@ -37,7 +39,8 @@ int Thing::worth_collecting (Thingp it, Thingp *would_need_to_drop)
     //
     // Don't pick up things we dropped
     //
-    if (get_where_i_dropped_an_item_last() == make_point(it->mid_at)) {
+    if (game->tick_current < it->get_tick_last_dropped() + 1) {
+        dbg2("Is not worth collecting (dropped location): %s", it->to_string().c_str());
         return -1;
     }
 
@@ -45,6 +48,7 @@ int Thing::worth_collecting (Thingp it, Thingp *would_need_to_drop)
 
     int value = get_item_value(it);
     if (value < 0) {
+        dbg2("Is not worth collecting (no value): %s", it->to_string().c_str());
         return value;
     }
 
@@ -69,6 +73,18 @@ int Thing::worth_collecting (Thingp it, Thingp *would_need_to_drop)
                     //
                     // No space. Try dropping the worst weapon.
                     //
+                    if (!worst_weapon) {
+                        //
+                        // If there is no worst weapon, then ignore
+                        //
+                        return false;
+                    } else if (value <= get_item_value(worst_weapon)) {
+                        //
+                        // If this is worse than the worst weapon then no way
+                        // collect this!
+                        //
+                        return false;
+                    }
                     *would_need_to_drop = worst_weapon;
                 }
             }
@@ -96,6 +112,18 @@ int Thing::worth_collecting (Thingp it, Thingp *would_need_to_drop)
                     //
                     // No space. Try dropping the worst wand.
                     //
+                    if (!worst_wand) {
+                        //
+                        // If there is no worst wand, then ignore
+                        //
+                        return false;
+                    } else if (value <= get_item_value(worst_wand)) {
+                        //
+                        // If this is worse than the worst wand then no way
+                        // collect this!
+                        //
+                        return false;
+                    }
                     *would_need_to_drop = worst_wand;
                 }
             }
@@ -117,6 +145,18 @@ int Thing::worth_collecting (Thingp it, Thingp *would_need_to_drop)
                     //
                     // No space. Try dropping the worst food.
                     //
+                    if (!worst_food) {
+                        //
+                        // If there is no worst food, then ignore
+                        //
+                        return false;
+                    } else if (value <= get_item_value(worst_food)) {
+                        //
+                        // If this is worse than the worst food then no way
+                        // collect this!
+                        //
+                        return false;
+                    }
                     *would_need_to_drop = worst_food;
                 }
             }
