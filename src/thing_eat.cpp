@@ -162,3 +162,38 @@ bool Thing::eat_something (void)
 
     return false;
 }
+
+bool Thing::can_eat_something (void)
+{_
+    //
+    // Try for food first, ignoring potions
+    //
+    for (const auto& item : monstp->carrying) {
+        auto t = level->thing_find(item.id);
+        if (!t) {
+            continue;
+        }
+        if (!can_eat(t)) {
+            continue;
+        }
+        if (!worth_eating(t)) {
+            continue;
+        }
+        return true;
+    }
+
+    //
+    // Try again but include potions
+    //
+    for (const auto& item : monstp->carrying) {
+        auto t = level->thing_find(item.id);
+        if (!t) {
+            continue;
+        }
+        if (t->is_health_booster()) {
+            return true;
+        }
+    }
+
+    return false;
+}

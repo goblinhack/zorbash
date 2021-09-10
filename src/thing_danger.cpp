@@ -207,7 +207,7 @@ int Thing::get_danger_current_level (void)
         danger_level /= 10;
     }
 
-    // con("XXX %d", danger_level);
+    //con("XXX %d", danger_level);
     return danger_level;
 }
 

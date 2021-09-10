@@ -253,6 +253,7 @@ public:
     bool drop(Thingp w);
     bool drop(Thingp w, Thingp target, bool stolen=false);
     bool eat_something(void);
+    bool can_eat_something(void);
     bool eat(Thingp it);
     bool enchant(Thingp);
     bool fall_to_next_level(void);

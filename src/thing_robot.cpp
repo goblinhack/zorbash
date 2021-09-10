@@ -1627,14 +1627,20 @@ void Thing::robot_tick (void)
                 return;
             }
 
+            //
+            // If really low on health and we have something we can eat, try
+            // that.
+            //
             if (get_health() < get_health_max() / 5) {
-                CON("Robot: @(%s, %d,%d %d/%dh) Robot needs to rest, very low on health",
-                    level->to_string().c_str(),
-                    (int)mid_at.x, (int)mid_at.y,get_health(), get_health_max());
-                BOTCON("Robot needs to rest, very low on health");
-                game->tick_begin("Robot needs to rest, very low on health");
-                robot_change_state(ROBOT_STATE_RESTING, "need to rest, very low on health");
-                return;
+                if (can_eat_something()) {
+                    CON("Robot: @(%s, %d,%d %d/%dh) Robot needs to rest, very low on health",
+                        level->to_string().c_str(),
+                        (int)mid_at.x, (int)mid_at.y,get_health(), get_health_max());
+                    BOTCON("Robot needs to rest, very low on health");
+                    game->tick_begin("Robot needs to rest, very low on health");
+                    robot_change_state(ROBOT_STATE_RESTING, "need to rest, very low on health");
+                    return;
+                }
             }
 
             //
