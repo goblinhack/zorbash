@@ -42,10 +42,6 @@ void Level::cursor_move (void)
         return;
     }
 
-    if (player && player->is_dead) {
-        return;
-    }
-
     if (is_mouse_over_any_bag()) {
         return;
     }
@@ -72,6 +68,13 @@ void Level::cursor_move (void)
 
         map_wanted_at += fpoint(dx, dy);
         map_follow_player = false;
+        return;
+    }
+
+    //
+    // Check for dead after scrolling so we can look around when dead
+    //
+    if (player && player->is_dead) {
         return;
     }
 

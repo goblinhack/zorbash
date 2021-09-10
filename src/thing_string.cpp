@@ -50,7 +50,7 @@ std::string Thing::to_string (void) const
                                is_falling                    ? "/falling" : "",
                                mid_at.x, mid_at.y));
     } else if (get_health_max() || is_tickable() || is_interesting()) {_
-        return (string_sprintf("L%d,%d,%d %08" PRIx32 "(%s%s%s%s%s%s%s%s%s%s%s%s%s%s @%g,%g)",
+        return (string_sprintf("L%d,%d,%d %08" PRIx32 "(%s%s%s%s%s%s%s%s%s%s%s%s%s%s @%g,%g %d/%dh)",
                                level->world_at.x,
                                level->world_at.y,
                                level->world_at.z,
@@ -68,7 +68,8 @@ std::string Thing::to_string (void) const
                                is_waiting_to_descend_dungeon ? "/descend-dungeon" : "",
                                is_waiting_to_ascend_sewer    ? "/ascend-sewer" : "",
                                is_waiting_to_descend_sewer   ? "/descend-sewer" : "",
-                               mid_at.x, mid_at.y));
+                               mid_at.x, mid_at.y,
+                               get_health(), get_health_max()));
     } else {_
         return (string_sprintf("L%d,%d,%d %08" PRIx32 "(%s%s%s%s%s%s%s%s%s @%g,%g)",
                                level->world_at.x,

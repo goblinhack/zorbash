@@ -22,12 +22,12 @@ void Game::tick_begin (const std::string &why)
         auto player = level->player;
 
         if (player) {
-            CON("Game (%s) tick %d requested (%s): %s",
+            CON("Game (%s) tick %d asked (%s): %s",
                 game->seed_name.c_str(),
                 game->tick_current, why.c_str(),
                 player->to_short_string().c_str());
         } else {
-            CON("Game (%s) tick %d requested (%s): %s",
+            CON("Game (%s) tick %d asked (%s): %s",
                 game->seed_name.c_str(),
                 game->tick_current, why.c_str(),
                 level->to_string().c_str());
@@ -52,7 +52,7 @@ void Game::tick_begin_now (void)
     pcg_srand(game->tick_current);
 
     if (game->robot_mode) {
-        game->current_move_speed = game->fast_move_speed * 2;
+        game->current_move_speed = game->fast_move_speed;
     } else if (!game->cursor_move_path.empty()) {
         game->current_move_speed = game->fast_move_speed;
     } else {

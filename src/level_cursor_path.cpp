@@ -192,8 +192,10 @@ void Level::cursor_path_draw_line (point start, point end)
     game->cursor_move_path = p;
 
     for (auto& c : p) {
-        if ((c.x == cursor_at.x) && (c.y == cursor_at.y)) {
-            continue;
+        if (cursor && cursor->is_visible()) {
+            if ((c.x == cursor_at.x) && (c.y == cursor_at.y)) {
+                continue;
+            }
         }
         thing_new("cursor_path", fpoint(c.x , c.y));
     }
@@ -204,8 +206,10 @@ void Level::cursor_path_draw_line (const std::vector<point> &move_path)
     game->cursor_move_path = move_path;
 
     for (auto& c : move_path) {
-        if ((c.x == cursor_at.x) && (c.y == cursor_at.y)) {
-            continue;
+        if (cursor && cursor->is_visible()) {
+            if ((c.x == cursor_at.x) && (c.y == cursor_at.y)) {
+                continue;
+            }
         }
         thing_new("cursor_path", fpoint(c.x , c.y));
     }

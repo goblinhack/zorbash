@@ -431,9 +431,9 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     /* cursor_old */            in >> bits(l->cursor_old);
     /* cursor_found */          in >> bits(l->cursor_found);
     /* fbo_light */             in >> bits(l->fbo_light);
-    /* is_level_type_dungeon */      in >> bits(l->is_level_type_dungeon);
+    /* is_level_type_dungeon */ in >> bits(l->is_level_type_dungeon);
     /* is_heatmap_valid */      in >> bits(l->is_heatmap_valid);
-    /* is_level_type_sewer */        in >> bits(l->is_level_type_sewer);
+    /* is_level_type_sewer */   in >> bits(l->is_level_type_sewer);
     /* is_starting */           in >> bits(l->is_starting);
     /* map_at */                in >> bits(l->map_at);
     /* map_br */                in >> bits(l->map_br);

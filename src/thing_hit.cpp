@@ -206,7 +206,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     // If hit by something then abort following any path
     //
     if (is_player()) {
-        clear_move_path("Player was hit");
+        clear_move_path("player was hit");
     }
 
     if (real_hitter->tp()->gfx_bounce_on_move()) {
@@ -330,7 +330,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
                 }
 
                 if (game->robot_mode) {
-                    robot_change_state(ROBOT_STATE_IDLE, "Robot CRIT attacked itself");
+                    robot_change_state(ROBOT_STATE_IDLE, "robot CRIT attacked itself");
                 }
             } else {
                 if (crit) {
@@ -391,7 +391,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
                 }
 
                 if (game->robot_mode) {
-                    robot_change_state(ROBOT_STATE_IDLE, "Robot attacked itself");
+                    robot_change_state(ROBOT_STATE_IDLE, "robot attacked itself");
                 }
             } else {
                 if (bite) {
@@ -430,7 +430,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         }
     } else {
         if (game->robot_mode) {
-            robot_change_state(ROBOT_STATE_IDLE, "Robot attacked");
+            robot_change_state(ROBOT_STATE_IDLE, "robot attacked");
         }
 
         if (real_hitter->is_player()) {

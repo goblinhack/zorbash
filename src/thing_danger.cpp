@@ -63,7 +63,7 @@ int Tp::get_danger_level (void)
     // Don't include crush damage as it is non typical
     //
 
-    // topcon("level %d", danger_level);
+    //CON("level %d", danger_level);
     return danger_level;
 }
 
@@ -126,18 +126,18 @@ int Thing::get_danger_initial_level (void)
     // Low on health, reduce the level
     //
     if (get_health() < get_health_max() / 5) {
-        danger_level /= 2;
+        danger_level /= 5;
     }
 
     if (get_health() < get_health_max() / 10) {
-        danger_level /= 2;
+        danger_level /= 10;
     }
 
     //
     // Don't include crush damage as it is non typical
     //
 
-    // topcon("level %d", danger_level);
+    con("XXX %d", danger_level);
     return danger_level;
 }
 
@@ -204,10 +204,10 @@ int Thing::get_danger_current_level (void)
     }
 
     if (get_health() < get_health_max() / 10) {
-        danger_level /= 2;
+        danger_level /= 10;
     }
 
-    // topcon("level %d", danger_level);
+    // con("XXX %d", danger_level);
     return danger_level;
 }
 

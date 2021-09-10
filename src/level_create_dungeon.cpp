@@ -263,11 +263,11 @@ have_dungeon_start:
                             auto p = thing_new("potion_health", fpoint(x, y));
                             t->carry(p);
                         }
+#endif
                         {
                             auto b = thing_new("food_frog", fpoint(x, y));
                             t->carry(b);
                         }
-#endif
 
                         auto w3 = thing_new("sword_wooden", fpoint(x, y));
                         t->carry(w3);
