@@ -115,6 +115,8 @@ bool Thing::can_eat (const Thingp itp)
 
 bool Thing::eat_something (void)
 {_
+    Thingp best = nullptr;
+
     //
     // Try for food first, ignoring potions
     //
@@ -129,7 +131,16 @@ bool Thing::eat_something (void)
         if (!worth_eating(t)) {
             continue;
         }
-        if (use(t)) {
+
+        if (!best) {
+            best = t;
+        } else if (t->get_nutrition() > best->get_nutrition()) {
+            best = t;
+        }
+    }
+
+    if (best) {
+        if (use(best)) {
             return true;
         }
     }
@@ -148,5 +159,6 @@ bool Thing::eat_something (void)
             }
         }
     }
+
     return false;
 }
