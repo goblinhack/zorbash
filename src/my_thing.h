@@ -1016,7 +1016,8 @@ public:
     Thingp get_top_owner() const;
     Thingp get_top_spawned_owner() const;
     Thingp laser_fire_at(const std::string &item, Thingp target);
-    Thingp nearby_most_dangerous_thing_get(void);
+    Thingp most_dangerous_adjacent_thing_get(void);
+    Thingp most_dangerous_visible_thing_get(void);
     Thingp projectile_fire_at(const std::string &item, Thingp target);
     Thingp weapon_get_carry_anim(void);
     Thingp weapon_get() const;

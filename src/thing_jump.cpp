@@ -500,7 +500,7 @@ void Thing::jump_end (void)
     // Attack of opportunity
     //
     if (is_player()) {
-        auto t = nearby_most_dangerous_thing_get();
+        auto t = most_dangerous_adjacent_thing_get();
         if (t) {
             std::string s = t->text_The() + " attacks as you land";
             game->tick_begin("monst attacked as player landed");

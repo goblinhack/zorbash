@@ -246,13 +246,6 @@ bool Thing::will_avoid_monst (const Thingp it)
         }
     }
 
-    FOR_ALL_THINGS_THAT_INTERACT(level, it, mid_at.x, mid_at.y) {
-        if (it == this) { continue; }
-        if (is_dangerous(it)) {
-            return true;
-        }
-    } FOR_ALL_THINGS_END()
-
     return false;
 }
 

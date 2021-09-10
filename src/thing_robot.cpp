@@ -97,9 +97,9 @@ _
     //
     if (goalmaps.empty()) {
         if (is_player()) {
-            CON("Robot: @(%s, %d,%d) No goals found",
+            CON("Robot: @(%s, %d,%d %dH) No goals found",
                 level->to_string().c_str(),
-                (int)mid_at.x, (int)mid_at.y);
+                (int)mid_at.x, (int)mid_at.y, get_health());
         }
         return false;
     }
@@ -276,14 +276,11 @@ _
 
             if (new_move_path.empty()) {
                 if (level->is_sticky(mid_at.x, mid_at.y)) {
-                    CON("Robot: @(%s, %d,%d) Try to break free from the web",
+                    CON("Robot: @(%s, %d,%d %dH) Try to break free from the web",
                         level->to_string().c_str(),
-                        (int)mid_at.x, (int)mid_at.y);
+                        (int)mid_at.x, (int)mid_at.y, get_health());
                     return true;
                 }
-                CON("Robot: @(%s, %d,%d) Empty move path",
-                    level->to_string().c_str(),
-                    (int)mid_at.x, (int)mid_at.y);
                 continue;
             }
 
@@ -298,14 +295,16 @@ _
 
             bool logged_one = false;
             FOR_ALL_THINGS_THAT_INTERACT(level, it, p.x, p.y) {
-                if (it == this) { continue; }
 
                 if (it->is_changing_level ||
                     it->is_hidden ||
+                    it->is_the_grid ||
                     it->is_falling ||
                     it->is_jumping) {
                     continue;
                 }
+
+                if (it == this) { continue; }
 
                 if (it->get_immediate_spawned_owner_id().ok()) {
                     continue;
@@ -314,8 +313,9 @@ _
                 logged_one = true;
 
                 if (is_player()) {
-                    CON("Robot: @(%s, %d,%d) Found a goal: %s %s, via (%s) score %d",
-                        level->to_string().c_str(), (int)mid_at.x, (int)mid_at.y,
+                    CON("Robot: @(%s, %d,%d %dH) Found a goal: %s %s via (%s) score %d",
+                        level->to_string().c_str(),
+                        (int)mid_at.x, (int)mid_at.y, get_health(),
                         it->to_string().c_str(), result.goal.msg.c_str(),
                         goal_path_str.c_str(),
                         (int)result.goal.score);
@@ -323,7 +323,7 @@ _
                            result.goal.msg.c_str(),
                            it->text_the().c_str());
                 } else {
-                    log("Monst: Found a goal: %s %s, via (%s) score %d",
+                    log("Monst: Found a goal: %s %s via (%s) score %d",
                         it->to_string().c_str(), result.goal.msg.c_str(),
                         goal_path_str.c_str(),
                         (int)result.goal.score);
@@ -332,14 +332,16 @@ _
 
             if (!logged_one) {
                 FOR_ALL_THINGS(level, it, p.x, p.y) {
-                    if (it == this) { continue; }
 
                     if (it->is_changing_level ||
                         it->is_hidden ||
+                        it->is_the_grid ||
                         it->is_falling ||
                         it->is_jumping) {
                         continue;
                     }
+
+                    if (it == this) { continue; }
 
                     if (it->get_immediate_spawned_owner_id().ok()) {
                         continue;
@@ -348,8 +350,9 @@ _
                     logged_one = true;
 
                     if (is_player()) {
-                        CON("Robot: @(%s, %d,%d) Found a non active-thing goal: %s %s, via (%s) score %d",
-                            level->to_string().c_str(), (int)mid_at.x, (int)mid_at.y,
+                        CON("Robot: @(%s, %d,%d %dH) Found a non active-thing goal: %s %s via (%s) score %d",
+                            level->to_string().c_str(),
+                            (int)mid_at.x, (int)mid_at.y, get_health(),
                             it->to_string().c_str(), result.goal.msg.c_str(),
                             goal_path_str.c_str(),
                             (int)result.goal.score);
@@ -357,7 +360,7 @@ _
                             result.goal.msg.c_str(),
                             it->text_the().c_str());
                     } else {
-                        log("Monst: Found a non active-thing goal: %s %s, via (%s) score %d",
+                        log("Monst: Found a non active-thing goal: %s %s via (%s) score %d",
                             it->to_string().c_str(), result.goal.msg.c_str(),
                             goal_path_str.c_str(),
                             (int)result.goal.score);
@@ -367,8 +370,9 @@ _
 
             if (!logged_one) {
                 if (is_player()) {
-                    CON("Robot: @(%s, %d,%d) Found a non thing goal: %s, via (%s) score %d",
-                        level->to_string().c_str(), (int)mid_at.x, (int)mid_at.y,
+                    CON("Robot: @(%s, %d,%d %dH) Found a non thing goal: %s via (%s) score %d",
+                        level->to_string().c_str(),
+                        (int)mid_at.x, (int)mid_at.y, get_health(),
                         result.goal.msg.c_str(),
                         goal_path_str.c_str(),
                         (int)result.goal.score);
@@ -746,7 +750,7 @@ int Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy,
     }
     dmap_process(dmap_can_see, point(0, 0), point(maxx - minx, maxy - miny));
 
-    auto t = nearby_most_dangerous_thing_get();
+    auto t = most_dangerous_visible_thing_get();
     if (t) {
         something_changed = true;
     }
@@ -784,14 +788,15 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
         FOR_ALL_THINGS_THAT_INTERACT(level, it, p.x, p.y) {
             last_msg = "";
 
-            if (it == this) { continue; }
-
             if (it->is_changing_level ||
                 it->is_hidden ||
+                it->is_the_grid ||
                 it->is_falling ||
                 it->is_jumping) {
                 continue;
             }
+
+            if (it == this) { continue; }
 
             if (it->get_immediate_owner_id().ok()) {
                 continue;
@@ -853,18 +858,18 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                         GOAL_ADD(score, "collect");
                         got_one_this_tile = true;
                         if (is_player()) {
-                            CON("Robot: @(%s, %d,%d) Is considering collecting %s",
+                            CON("Robot: @(%s, %d,%d %dH) Is considering collecting %s",
                                 level->to_string().c_str(),
-                                (int)mid_at.x, (int)mid_at.y,
+                                (int)mid_at.x, (int)mid_at.y, get_health(),
                                 it->to_string().c_str());
                         } else {
                             con("Monst: Is considering collecting %s", it->to_string().c_str());
                         }
                     } else {
                         if (is_player()) {
-                            CON("Robot: @(%s, %d,%d) Is not collecting %s",
+                            CON("Robot: @(%s, %d,%d %dH) Is not collecting %s",
                                 level->to_string().c_str(),
-                                (int)mid_at.x, (int)mid_at.y,
+                                (int)mid_at.x, (int)mid_at.y, get_health(),
                                 it->to_string().c_str());
                         } else {
                             con("Monst: Is not collecting %s", it->to_string().c_str());
@@ -905,18 +910,23 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                 //
                 if (lit_recently) {
                     if (is_enemy(it) && (dist < max_dist)) {
-                        //
-                        // Cannot avoid if this thing is beating on us
-                        //
-                        avoid = false;
-
-                        //
-                        // The closer an enemy is (something that attacked us), the
-                        // higher the score
-                        //
-                        GOAL_ADD((int)(max_dist - dist) * 200, "attack-enemy");
-                        got_one_this_tile = true;
-                    } else if (!avoid && (dist < ai_avoid_distance() && will_avoid_monst(it))) {
+                        if (get_health() < get_health_max() / 4) {
+                            //
+                            // Low on health. Best to avoid this enemy.
+                            //
+                            avoid = true;
+                            GOAL_ADD(-(int)((max_dist - dist) + it_health) * 200, "avoid-enemy");
+                            got_one_this_tile = true;
+                        } else {
+                            //
+                            // The closer an enemy is (something that attacked us), the
+                            // higher the score
+                            //
+                            avoid = false;
+                            GOAL_ADD((int)(max_dist - dist) * 200, "attack-enemy");
+                            got_one_this_tile = true;
+                        }
+                    } else if (!avoid && (dist < ai_avoid_distance()) && will_avoid_monst(it)) {
                         //
                         // Monsters we avoid are more serious threats
                         //
@@ -954,9 +964,9 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
 
                 if (avoid) {
                     if (is_player()) {
-                        CON("Robot: @(%s, %d,%d) Needs to avoid %s",
+                        CON("Robot: @(%s, %d,%d %dH) Needs to avoid %s",
                             level->to_string().c_str(),
-                            (int)mid_at.x, (int)mid_at.y,
+                            (int)mid_at.x, (int)mid_at.y, get_health(),
                             it->to_string().c_str());
                     } else {
                         log("Monst: Thinks it needs to avoid %s", it->to_string().c_str());
@@ -988,14 +998,18 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                             int terrain_cost = get_terrain_cost(p);
                             int total_score = -(int)terrain_cost;
                             total_score += dist * dist;
+                            total_score += 1000;
                             goals.insert(Goal(total_score, point(X + dx, Y + dy), last_msg));
                             set(dmap_can_see->val, X + dx, Y + dy, DMAP_IS_GOAL);
-                            dbg2("Add avoid location offset %d,%d score %d", dx, dy, total_score);
+                            log("Add avoid location offset %d,%d score %d", dx, dy, total_score);
 
                             got_avoid = true;
                         }
                     }
 
+                    //
+                    // Try again with more lenient checks
+                    //
                     if (!got_avoid) {
                         for (auto dx = -d; dx <= d; dx++) {
                             for (auto dy = -d; dy <= d; dy++) {
@@ -1009,9 +1023,36 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                                 int terrain_cost = get_terrain_cost(p);
                                 int total_score = -(int)terrain_cost;
                                 total_score += dist * dist;
+                                total_score += 1000;
                                 goals.insert(Goal(total_score, point(X + dx, Y + dy), last_msg));
                                 set(dmap_can_see->val, X + dx, Y + dy, DMAP_IS_GOAL);
-                                dbg2("Add avoid location offset %d,%d score %d", dx, dy, total_score);
+                                log("Add avoid 2nd location offset %d,%d score %d", dx, dy, total_score);
+
+                                got_avoid = true;
+                            }
+                        }
+                    }
+
+                    //
+                    // Try again with even more lenient checks
+                    //
+                    if (!got_avoid) {
+                        for (auto dx = -d; dx <= d; dx++) {
+                            for (auto dy = -d; dy <= d; dy++) {
+
+                                int dist = distance(mid_at + fpoint(dx, dy), it->mid_at);
+                                point p(mid_at.x + dx, mid_at.y + dy);
+                                if (level->is_movement_blocking_wall_or_locked_door(p)) {
+                                    continue;
+                                }
+
+                                int terrain_cost = get_terrain_cost(p);
+                                int total_score = -(int)terrain_cost;
+                                total_score += dist * dist;
+                                total_score += 1000;
+                                goals.insert(Goal(total_score, point(X + dx, Y + dy), last_msg));
+                                set(dmap_can_see->val, X + dx, Y + dy, DMAP_IS_GOAL);
+                                log("Add avoid 3rd location offset %d,%d score %d", dx, dy, total_score);
 
                                 got_avoid = true;
                             }
@@ -1401,9 +1442,9 @@ bool Thing::robot_ai_choose_nearby_goal (void)
                     up = dy < 0;
                     down = dy > 0;
                     attack = true;
-                    CON("Robot: @(%s, %d,%d) Try hitting the door",
+                    CON("Robot: @(%s, %d,%d %dH) Try hitting the door",
                         level->to_string().c_str(),
-                        (int)mid_at.x, (int)mid_at.y);
+                        (int)mid_at.x, (int)mid_at.y, get_health());
                     BOTCON("Robot is trying to break the door down");
                     player_tick(left, right, up, down, attack, wait, jump);
                     return true;
@@ -1418,9 +1459,9 @@ bool Thing::robot_ai_choose_nearby_goal (void)
                     up = dy < 0;
                     down = dy > 0;
                     attack = true;
-                    CON("Robot: @(%s, %d,%d) Try hitting the web",
+                    CON("Robot: @(%s, %d,%d %dH) Try hitting the web",
                         level->to_string().c_str(),
-                        (int)mid_at.x, (int)mid_at.y);
+                        (int)mid_at.x, (int)mid_at.y, get_health());
                     BOTCON("Robot is trying to escape the web");
                     player_tick(left, right, up, down, attack, wait, jump);
                     return true;
@@ -1432,33 +1473,33 @@ bool Thing::robot_ai_choose_nearby_goal (void)
                 for (auto item : items) {
                     Thingp would_need_to_drop = nullptr;
                     if (worth_collecting(item, &would_need_to_drop) < 0) {
-                        CON("Robot: @(%s, %d,%d) Is not worth collecting %s",
+                        CON("Robot: @(%s, %d,%d %dH) Is not worth collecting %s",
                             level->to_string().c_str(),
-                            (int)mid_at.x, (int)mid_at.y,
+                            (int)mid_at.x, (int)mid_at.y, get_health(),
                             item->to_string().c_str());
                         continue;
                     }
 
                     if (would_need_to_drop) {
-                        CON("Robot: @(%s, %d,%d) Try to carry %s by dropping %s",
+                        CON("Robot: @(%s, %d,%d %dH) Try to carry %s by dropping %s",
                             level->to_string().c_str(),
-                            (int)mid_at.x, (int)mid_at.y,
+                            (int)mid_at.x, (int)mid_at.y, get_health(),
                             item->to_string().c_str(),
                             would_need_to_drop->to_string().c_str());
 
                         if (drop(would_need_to_drop)) {
-                            CON("Robot: @(%s, %d,%d) Dropped %s",
+                            CON("Robot: @(%s, %d,%d %dH) Dropped %s",
                                 level->to_string().c_str(),
-                                (int)mid_at.x, (int)mid_at.y,
+                                (int)mid_at.x, (int)mid_at.y, get_health(),
                                 would_need_to_drop->to_string().c_str());
                             BOTCON("Robot dropped %s", would_need_to_drop->text_the().c_str());
                             game->tick_begin("Robot dropped an item");
                             robot_change_state(ROBOT_STATE_OPEN_INVENTORY, "dropped an item");
                             return true;
                         } else {
-                            CON("Robot: @(%s, %d,%d) Failed to drop %s",
+                            CON("Robot: @(%s, %d,%d %dH) Failed to drop %s",
                                 level->to_string().c_str(),
-                                (int)mid_at.x, (int)mid_at.y,
+                                (int)mid_at.x, (int)mid_at.y, get_health(),
                                 would_need_to_drop->to_string().c_str());
                             BOTCON("Robot failed to drop %s", would_need_to_drop->text_the().c_str());
                             game->tick_begin("Robot failed to drop " + would_need_to_drop->to_string());
@@ -1467,18 +1508,18 @@ bool Thing::robot_ai_choose_nearby_goal (void)
                     }
 
                     if (try_to_carry(item)) {
-                        CON("Robot: @(%s, %d,%d) Collected %s",
+                        CON("Robot: @(%s, %d,%d %dH) Collected %s",
                             level->to_string().c_str(),
-                            (int)mid_at.x, (int)mid_at.y,
+                            (int)mid_at.x, (int)mid_at.y, get_health(),
                             item->to_string().c_str());
                         BOTCON("Robot collected %s", item->text_the().c_str());
                         game->tick_begin("Robot collected an item");
                         robot_change_state(ROBOT_STATE_OPEN_INVENTORY, "collected an item");
                         return true;
                     } else {
-                        CON("Robot: @(%s, %d,%d) Failed to collect %s",
+                        CON("Robot: @(%s, %d,%d %dH) Failed to collect %s",
                             level->to_string().c_str(),
-                            (int)mid_at.x, (int)mid_at.y,
+                            (int)mid_at.x, (int)mid_at.y, get_health(),
                             item->to_string().c_str());
                         BOTCON("Robot failed to collect %s", item->text_the().c_str());
                         game->tick_begin("Robot failed to collect " + item->to_string());
@@ -1562,20 +1603,24 @@ void Thing::robot_tick (void)
     //
     // See if anything dangerous is close
     //
-    auto threat = nearby_most_dangerous_thing_get();
+    auto threat = most_dangerous_visible_thing_get();
     if (threat) {
-        CON("Robot: @(%s, %d,%d) Nearest thread is %s",
-            level->to_string().c_str(), (int)mid_at.x, (int)mid_at.y,
+        CON("Robot: @(%s, %d,%d %dH) Nearest thread is %s",
+            level->to_string().c_str(),
+            (int)mid_at.x, (int)mid_at.y, get_health(),
             threat->to_string().c_str());
     }
 
     switch (monstp->robot_state) {
         case ROBOT_STATE_IDLE:
         {
-            CON("Robot: @(%s, %d,%d) Is idle, look for something to do",
-                level->to_string().c_str(), (int)mid_at.x, (int)mid_at.y);
-
+            //
+            // If we're absolutely exhausted, we must rest, threat or no threat
+            //
             if (!get_stamina()) {
+                CON("Robot: @(%s, %d,%d %dH) Is forced to rest",
+                    level->to_string().c_str(),
+                    (int)mid_at.x, (int)mid_at.y, get_health());
                 BOTCON("Robot is forced to rest");
                 game->tick_begin("Robot is forced to rest");
                 robot_change_state(ROBOT_STATE_RESTING, "need to rest");
@@ -1586,19 +1631,22 @@ void Thing::robot_tick (void)
             // Look for doors or things to collect, if not being attacked.
             //
             if (threat && (is_dangerous(threat) || is_enemy(threat))) {
-                CON("Robot: @(%s, %d,%d) A threat is nearby",
-                    level->to_string().c_str(), (int)mid_at.x, (int)mid_at.y);
-
-                if (get_stamina() < get_stamina_max() / 10) {
-                    BOTCON("Robot needs to rest, low on stamina and not safe");
-                    game->tick_begin("Robot needs to rest, low on stamina and not safe");
-                    robot_change_state(ROBOT_STATE_RESTING, "very low on stamina, rest");
-                    return;
-                }
+                //
+                // No resting when in danger
+                //
+                CON("Robot: @(%s, %d,%d %dH) A threat is nearby: %s",
+                    level->to_string().c_str(),
+                    (int)mid_at.x, (int)mid_at.y, get_health(),
+                    threat->to_string().c_str());
+                BOTCON("Robot is facing a threat");
             } else {
+                CON("Robot: @(%s, %d,%d %dH) Is idle, look for something to do",
+                    level->to_string().c_str(), (int)mid_at.x, (int)mid_at.y, get_health());
+
                 if (get_health() < get_health_max() / 2) {
-                    CON("Robot: @(%s, %d,%d) Robot needs to rest, low on health",
-                        level->to_string().c_str(), (int)mid_at.x, (int)mid_at.y);
+                    CON("Robot: @(%s, %d,%d %dH) Robot needs to rest, low on health",
+                        level->to_string().c_str(),
+                        (int)mid_at.x, (int)mid_at.y, get_health());
                     BOTCON("Robot needs to rest, low on health");
                     game->tick_begin("Robot needs to rest, low on health");
                     robot_change_state(ROBOT_STATE_RESTING, "low on health, rest");
@@ -1606,8 +1654,9 @@ void Thing::robot_tick (void)
                 }
 
                 if (get_stamina() < get_stamina_max() / 3) {
-                    CON("Robot: @(%s, %d,%d) Robot needs to rest, low on stamina",
-                        level->to_string().c_str(), (int)mid_at.x, (int)mid_at.y);
+                    CON("Robot: @(%s, %d,%d %dH) Robot needs to rest, low on stamina",
+                        level->to_string().c_str(), 
+                        (int)mid_at.x, (int)mid_at.y, get_health());
                     BOTCON("Robot needs to rest, low on stamina");
                     game->tick_begin("Robot needs to rest, low on stamina");
                     robot_change_state(ROBOT_STATE_RESTING, "low on stamina, rest");
@@ -1618,20 +1667,23 @@ void Thing::robot_tick (void)
                 get_carried_weapon_highest_value(&best_weapon);
                 if (best_weapon && (best_weapon != weapon_get())) {
                     if (wield(best_weapon)) {
-                        CON("Robot: @(%s, %d,%d) Robot is changing weapon to %s",
-                            level->to_string().c_str(), (int)mid_at.x, (int)mid_at.y,
+                        CON("Robot: @(%s, %d,%d %dH) Robot is changing weapon to %s",
+                            level->to_string().c_str(), 
+                            (int)mid_at.x, (int)mid_at.y, get_health(),
                             best_weapon->to_string().c_str());
                         BOTCON("Robot is changing weapon");
                         game->tick_begin("Robot is changing weapon");
                         return;
                     }
-                    CON("Robot: @(%s, %d,%d) Robot failed to change weapon to %s",
-                        level->to_string().c_str(), (int)mid_at.x, (int)mid_at.y,
+                    CON("Robot: @(%s, %d,%d %dH) Robot failed to change weapon to %s",
+                        level->to_string().c_str(),
+                        (int)mid_at.x, (int)mid_at.y, get_health(),
                         best_weapon->to_string().c_str());
                 }
 
-                CON("Robot: @(%s, %d,%d) Is idle, look for nearby goal",
-                    level->to_string().c_str(), (int)mid_at.x, (int)mid_at.y);
+                CON("Robot: @(%s, %d,%d %dH) Is idle, look for nearby goal",
+                    level->to_string().c_str(),
+                    (int)mid_at.x, (int)mid_at.y, get_health());
 
                 if (robot_ai_choose_nearby_goal()) {
                     return;
@@ -1640,16 +1692,18 @@ void Thing::robot_tick (void)
 
             for (int search_type = 0; search_type < SEARCH_TYPE_MAX; search_type++) {
                 if (search_type > 0) {
-                    CON("Robot: @(%s, %d,%d) Try to find goals, search-type %d",
-                        level->to_string().c_str(), (int)mid_at.x, (int)mid_at.y,
+                    CON("Robot: @(%s, %d,%d %dH) Try to find goals, search-type %d",
+                        level->to_string().c_str(),
+                        (int)mid_at.x, (int)mid_at.y, get_health(),
                         search_type);
                 }
                 if (robot_ai_create_path_to_goal(minx, miny, maxx, maxy, search_type)) {
                     if (monstp->move_path.size()) {
                         robot_change_state(ROBOT_STATE_MOVING, "found a new goal");
                     } else {
-                        CON("Robot: @(%s, %d,%d) Robot did not move, but did no something else",
-                            level->to_string().c_str(), (int)mid_at.x, (int)mid_at.y);
+                        CON("Robot: @(%s, %d,%d %dH) Robot did not move, but did something else",
+                            level->to_string().c_str(),
+                            (int)mid_at.x, (int)mid_at.y, get_health());
                     }
                     return;
                 }
@@ -1668,16 +1722,17 @@ void Thing::robot_tick (void)
         break;
         case ROBOT_STATE_MOVING:
         {
-            CON("Robot: @(%s, %d,%d) Continue moving",
-                level->to_string().c_str(), (int)mid_at.x, (int)mid_at.y);
+            CON("Robot: @(%s, %d,%d %dH) Continue moving",
+                level->to_string().c_str(),
+                (int)mid_at.x, (int)mid_at.y, get_health());
 
             //
             // Check for interrupts
             //
             if (robot_ai_init_can_see_dmap(minx, miny, maxx, maxy,
                                            SEARCH_TYPE_LOCAL_JUMP_ALLOWED)) {
-                CON("Robot: @(%s, %d,%d) Something interrupted me",
-                    level->to_string().c_str(), (int)mid_at.x, (int)mid_at.y);
+                CON("Robot: @(%s, %d,%d %dH) Something interrupted me",
+                    level->to_string().c_str(), (int)mid_at.x, (int)mid_at.y, get_health());
                 game->tick_begin("Robot move interrupted by something");
                 robot_change_state(ROBOT_STATE_IDLE, "move interrupted by a change");
                 wid_actionbar_init();
@@ -1685,16 +1740,16 @@ void Thing::robot_tick (void)
             }
 
             if (monstp->move_path.empty()) {
-                CON("Robot: @(%s, %d,%d) Robot: Move finished",
-                    level->to_string().c_str(), (int)mid_at.x, (int)mid_at.y);
+                CON("Robot: @(%s, %d,%d %dH) Robot: Move finished",
+                    level->to_string().c_str(), (int)mid_at.x, (int)mid_at.y, get_health());
                 BOTCON("Robot move finished");
                 game->tick_begin("Robot move finished");
                 robot_change_state(ROBOT_STATE_IDLE, "move finished");
                 wid_actionbar_init();
                 return;
             } else {
-                CON("Robot: @(%s, %d,%d) Moving",
-                    level->to_string().c_str(), (int)mid_at.x, (int)mid_at.y);
+                CON("Robot: @(%s, %d,%d %dH) Moving",
+                    level->to_string().c_str(), (int)mid_at.x, (int)mid_at.y, get_health());
                 game->tick_begin("Robot move");
                 return;
             }
@@ -1734,8 +1789,8 @@ void Thing::robot_tick (void)
                 return;
             }
 
-            CON("Robot: @(%s, %d,%d) Wait and rest",
-                level->to_string().c_str(), (int)mid_at.x, (int)mid_at.y);
+            CON("Robot: @(%s, %d,%d %dH) Wait and rest",
+                level->to_string().c_str(), (int)mid_at.x, (int)mid_at.y, get_health());
             do_something = true;
             wait = true;
             break;

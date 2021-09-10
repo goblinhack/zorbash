@@ -148,6 +148,13 @@ _
                 if (move_no_shove(future_pos)) {
                     return true;
                 }
+
+                //
+                // Did we try or attempt to try to do something?
+                //
+                if (!game->tick_requested.empty()) {
+                    return true;
+                }
             }
 
             //
@@ -164,8 +171,22 @@ _
                 return true;
             }
 
+            //
+            // Did we try or attempt to try to do something?
+            //
+            if (!game->tick_requested.empty()) {
+                return true;
+            }
+
             CON("Robot: Try to move (shoving allowed) to %s", future_pos.to_string().c_str());
             if (move(future_pos)) {
+                return true;
+            }
+
+            //
+            // Did we try or attempt to try to do something?
+            //
+            if (!game->tick_requested.empty()) {
                 return true;
             }
         }
