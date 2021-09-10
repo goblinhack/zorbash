@@ -258,6 +258,15 @@ have_dungeon_start:
 #if 0
                         auto w = thing_new("scythe", fpoint(x, y));
                         t->carry(w);
+
+                        {
+                            auto p = thing_new("potion_health", fpoint(x, y));
+                            t->carry(p);
+                        }
+                        {
+                            auto b = thing_new("food_frog", fpoint(x, y));
+                            t->carry(b);
+                        }
 #endif
 
                         auto w3 = thing_new("sword_wooden", fpoint(x, y));
@@ -298,11 +307,6 @@ have_dungeon_start:
                         {
                             auto f = thing_new("skillstone", fpoint(x, y));
                             t->carry(f);
-                        }
-
-                        {
-                            auto p = thing_new("potion_health", fpoint(x, y));
-                            t->carry(p);
                         }
 
                         {

@@ -25,12 +25,12 @@ bool Thing::eat (Thingp it)
     }
 
     if (attack_eater()) {
-        if ((is_jelly_eater()    && it->is_jelly())    ||
-            (is_meat_eater()     && it->is_meat())     ||
-            (is_food_eater()     && it->is_food())     ||
+        if ((is_jelly_eater()         && it->is_jelly())         ||
+            (is_meat_eater()          && it->is_meat())          ||
+            (is_food_eater()          && it->is_food())          ||
             (is_treasure_type_eater() && it->is_treasure_type()) ||
-            (is_wand_eater()     && it->is_wand())     ||
-            (is_potion_eater()   && it->is_potion())) {
+            (is_wand_eater()          && it->is_wand())          ||
+            (is_potion_eater()        && it->is_potion())) {
 
             //
             // For treasure what should the boost be?
@@ -129,7 +129,7 @@ bool Thing::eat_something (void)
         if (!worth_eating(t)) {
             continue;
         }
-        if (eat(t)) {
+        if (use(t)) {
             return true;
         }
     }

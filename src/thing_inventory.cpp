@@ -302,8 +302,10 @@ _
                     (game->state != Game::STATE_COLLECTING_ITEMS)) {
                     wid_thing_info_fini();
                 }
-                if (game->state != Game::STATE_CHOOSING_TARGET &&
-                    game->state != Game::STATE_MOVING_ITEMS) {
+                if (game->robot_mode) {
+                    inventory_particle(item, i);
+                } else if (game->state != Game::STATE_CHOOSING_TARGET &&
+                           game->state != Game::STATE_MOVING_ITEMS) {
                     inventory_particle(item, i);
                 } else {
                     // no particle, too noisy
@@ -334,8 +336,10 @@ _
         wid_thing_info_fini();
     }
 
-    if (game->state != Game::STATE_CHOOSING_TARGET &&
-        game->state != Game::STATE_MOVING_ITEMS) {
+    if (game->robot_mode) {
+        inventory_particle(item, item_slot);
+    } else if (game->state != Game::STATE_CHOOSING_TARGET &&
+               game->state != Game::STATE_MOVING_ITEMS) {
         inventory_particle(item, item_slot);
     } else {
         // no particle, too noisy

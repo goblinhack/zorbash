@@ -6141,6 +6141,15 @@ void wid_tick_all (void)
         if (wid_rightbar_init()) {
             game->request_remake_inventory = false;
             game->request_remake_skillbox = false;
+
+            //
+            // Drive closure of the inventory if we're waiting on it.
+            //
+            if (game->robot_mode) {
+                if (game->tick_requested.empty()) {
+                    game->robot_mode_tick();
+                }
+            }
         }
         wid_actionbar_init();
     }

@@ -56,7 +56,6 @@ bool Level::tick (void)
         if ((time_get_time_ms() - tick_begin_ms) > LEVEL_TICK_DURATION_TOO_LONG) {
             con("PERF: All things tick duration %u ms", time_get_time_ms() - tick_begin_ms);
         }
-
     }
 
     FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL(this, t) {
