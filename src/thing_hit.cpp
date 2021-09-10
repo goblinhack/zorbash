@@ -206,7 +206,18 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     // If hit by something then abort following any path
     //
     if (is_player()) {
-        clear_move_path("player was hit");
+        if (game->robot_mode) {
+            if (monstp->robot_state == ROBOT_STATE_MOVING) {
+                clear_move_path("robot was hit while moving");
+            } else {
+                //
+                // Allow the robot to continue resting as it might have been
+                // trying to eat food to recover.
+                //
+            }
+        } else {
+            clear_move_path("player was hit");
+        }
     }
 
     if (real_hitter->tp()->gfx_bounce_on_move()) {

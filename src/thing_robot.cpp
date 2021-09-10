@@ -910,7 +910,7 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                 //
                 if (lit_recently) {
                     if (is_enemy(it) && (dist < max_dist)) {
-                        if (get_health() < get_health_max() / 4) {
+                        if (get_health() < get_health_max() / 2) {
                             //
                             // Low on health. Best to avoid this enemy.
                             //
@@ -985,7 +985,7 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                                 continue;
                             }
 
-                            int dist = distance(mid_at + fpoint(dx, dy), it->mid_at);
+                            float dist = distance(mid_at + fpoint(dx, dy), it->mid_at);
                             if (dist < ai_avoid_distance()) {
                                 continue;
                             }
@@ -997,7 +997,7 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
 
                             int terrain_cost = get_terrain_cost(p);
                             int total_score = -(int)terrain_cost;
-                            total_score += dist * dist;
+                            total_score += dist * 100;
                             total_score += 1000;
                             goals.insert(Goal(total_score, point(X + dx, Y + dy), last_msg));
                             set(dmap_can_see->val, X + dx, Y + dy, DMAP_IS_GOAL);
@@ -1014,7 +1014,7 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                         for (auto dx = -d; dx <= d; dx++) {
                             for (auto dy = -d; dy <= d; dy++) {
 
-                                int dist = distance(mid_at + fpoint(dx, dy), it->mid_at);
+                                float dist = distance(mid_at + fpoint(dx, dy), it->mid_at);
                                 point p(mid_at.x + dx, mid_at.y + dy);
                                 if (ai_obstacle_for_me(p)) {
                                     continue;
@@ -1022,7 +1022,7 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
 
                                 int terrain_cost = get_terrain_cost(p);
                                 int total_score = -(int)terrain_cost;
-                                total_score += dist * dist;
+                                total_score += dist * 100;
                                 total_score += 1000;
                                 goals.insert(Goal(total_score, point(X + dx, Y + dy), last_msg));
                                 set(dmap_can_see->val, X + dx, Y + dy, DMAP_IS_GOAL);
@@ -1040,7 +1040,7 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                         for (auto dx = -d; dx <= d; dx++) {
                             for (auto dy = -d; dy <= d; dy++) {
 
-                                int dist = distance(mid_at + fpoint(dx, dy), it->mid_at);
+                                float dist = distance(mid_at + fpoint(dx, dy), it->mid_at);
                                 point p(mid_at.x + dx, mid_at.y + dy);
                                 if (level->is_movement_blocking_wall_or_locked_door(p)) {
                                     continue;
@@ -1048,7 +1048,7 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
 
                                 int terrain_cost = get_terrain_cost(p);
                                 int total_score = -(int)terrain_cost;
-                                total_score += dist * dist;
+                                total_score += dist * 100;
                                 total_score += 1000;
                                 goals.insert(Goal(total_score, point(X + dx, Y + dy), last_msg));
                                 set(dmap_can_see->val, X + dx, Y + dy, DMAP_IS_GOAL);
@@ -1064,6 +1064,7 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                     //
                     if (got_avoid) {
                         avoiding = true;
+                        CON("Robot is avoiding");
                         break;
                     } else {
                         CON("Robot could not avoid, so attack %s", it->to_string().c_str());
@@ -1631,7 +1632,7 @@ void Thing::robot_tick (void)
             // If really low on health and we have something we can eat, try
             // that.
             //
-            if (get_health() < get_health_max() / 5) {
+            if (get_health() < get_health_max() / 3) {
                 if (can_eat_something()) {
                     CON("Robot: @(%s, %d,%d %d/%dh) Robot needs to rest, very low on health",
                         level->to_string().c_str(),
@@ -1661,13 +1662,15 @@ void Thing::robot_tick (void)
                     (int)mid_at.x, (int)mid_at.y,get_health(), get_health_max());
 
                 if (get_health() < get_health_max() / 2) {
-                    CON("Robot: @(%s, %d,%d %d/%dh) Robot needs to rest, low on health",
-                        level->to_string().c_str(),
-                        (int)mid_at.x, (int)mid_at.y,get_health(), get_health_max());
-                    BOTCON("Robot needs to rest, low on health");
-                    game->tick_begin("Robot needs to rest, low on health");
-                    robot_change_state(ROBOT_STATE_RESTING, "need to rest, low on health");
-                    return;
+                    if (can_eat_something()) {
+                        CON("Robot: @(%s, %d,%d %d/%dh) Robot needs to rest, low on health",
+                            level->to_string().c_str(),
+                            (int)mid_at.x, (int)mid_at.y,get_health(), get_health_max());
+                        BOTCON("Robot needs to rest, low on health");
+                        game->tick_begin("Robot needs to rest, low on health");
+                        robot_change_state(ROBOT_STATE_RESTING, "need to rest, low on health");
+                        return;
+                    }
                 }
 
                 if (get_stamina() < get_stamina_max() / 3) {
@@ -1737,6 +1740,7 @@ void Thing::robot_tick (void)
             }
         }
         break;
+
         case ROBOT_STATE_MOVING:
         {
             CON("Robot: @(%s, %d,%d %d/%dh) Continue moving",
