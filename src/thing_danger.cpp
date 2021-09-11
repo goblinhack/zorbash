@@ -137,7 +137,6 @@ int Thing::get_danger_initial_level (void)
     // Don't include crush damage as it is non typical
     //
 
-    con("XXX %d", danger_level);
     return danger_level;
 }
 
@@ -207,7 +206,6 @@ int Thing::get_danger_current_level (void)
         danger_level /= 10;
     }
 
-    //con("XXX %d", danger_level);
     return danger_level;
 }
 
@@ -223,20 +221,10 @@ int Thing::is_dangerous (Thingp it)
     //
     // If I'm low on health then consider it more dangereous
     //
-    if (get_stamina_max() < get_stamina_max() / 5) {
-        b *= 2;
-    }
-
-    if (get_stamina_max() < get_stamina_max() / 10) {
-        b *= 2;
-    }
-
     if (get_health() < get_health_max() / 5) {
-        b *= 2;
-    }
-
-    if (get_health() < get_health_max() / 10) {
-        b *= 2;
+        b++;
+    } else if (get_health() < get_health_max() / 10) {
+        b += 2;
     }
 
     //

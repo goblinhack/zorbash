@@ -711,9 +711,9 @@ void Thing::move_to_immediately (fpoint to)
 bool Thing::move_to_try (const point& nh, const bool escaping, bool check_only)
 {_
     if (escaping) {
-        dbg("Escape to try %d,%d", nh.x, nh.y);
+        dbg("Escape to attempt %d,%d", nh.x, nh.y);
     } else {
-        dbg("Move to try %d,%d", nh.x, nh.y);
+        dbg("Move to attempt %d,%d", nh.x, nh.y);
     }
 
     //

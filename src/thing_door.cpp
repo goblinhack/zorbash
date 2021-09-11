@@ -43,7 +43,7 @@ bool Thing::open_door (Thingp it)
 
     if (get_keys()) {
         decr_keys();
-        if (DEBUG1) {
+        IF_DEBUG1 {
             it->log("Open");
         }
         it->level_pop();
@@ -94,7 +94,7 @@ bool Thing::close_door (Thingp it)
         return false;
     }
 
-    if (DEBUG1) {
+    IF_DEBUG1 {
         it->log("Close");
     }
     it->level_pop();

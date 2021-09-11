@@ -509,7 +509,7 @@ void tile_load_arr_sprites (std::string file,
                 ERR("Tile name [%s] already used", name.c_str());
             }
 
-            if (DEBUG4) {
+            IF_DEBUG4 {
                 LOG("Add tile name [%s]", name.c_str());
             }
 

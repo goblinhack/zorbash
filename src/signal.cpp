@@ -15,7 +15,7 @@
 
 void callstack_dump (void)
 {_
-    if (NODEBUG2) {
+    IF_NODEBUG2 {
         return;
     }
 

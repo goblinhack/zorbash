@@ -78,7 +78,7 @@ bool Thing::try_to_jump (point to, bool be_careful)
     //
     if (is_player()) {
         if (!level->is_lit_ever(x, y)) {
-            if (DEBUG2) {
+            IF_DEBUG2 {
                 log("No, is not lit or visited");
             }
 

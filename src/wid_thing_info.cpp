@@ -91,7 +91,7 @@ WidPopup *Game::wid_thing_info_create_popup (Thingp t, point tl, point br)
         return nullptr;
     }
 
-    if (DEBUG1) {
+    IF_DEBUG1 {
         t->log("Create popup");
     }
 
@@ -232,7 +232,7 @@ WidPopup *Game::wid_thing_info_create_popup_compact (const std::vector<Thingp> &
 bool Game::wid_thing_info_push_popup (Thingp t)
 {_
     if (t->long_text_description() == "") {
-        if (DEBUG1) {
+        IF_DEBUG1 {
             t->log("No; cannot push, no text");
         }
         return false;
@@ -243,7 +243,7 @@ bool Game::wid_thing_info_push_popup (Thingp t)
         existing_height += wid_get_height(w->wid_popup_container);
 
         if (w->t == t) {
-            if (DEBUG1) {
+            IF_DEBUG1 {
                 t->log("No; cannot push, already shown");
             }
             return true;
@@ -256,7 +256,7 @@ bool Game::wid_thing_info_push_popup (Thingp t)
 
     auto w = game->wid_thing_info_create_popup(t, tl, br);
     if (!w) {
-        if (DEBUG1) {
+        IF_DEBUG1 {
             t->log("No; cannot create popup");
         }
         return false;
@@ -272,13 +272,13 @@ bool Game::wid_thing_info_push_popup (Thingp t)
 
     if (wid_get_tl_y(w->wid_popup_container) <= UI_TOPCON_VIS_HEIGHT) {
         delete w;
-        if (DEBUG1) {
+        IF_DEBUG1 {
             t->log("No; cannot fit");
         }
         return false;
     }
 
-    if (DEBUG1) {
+    IF_DEBUG1 {
         t->log("Yes; pushed");
     }
     wid_thing_info_window.push_back(w);
@@ -307,18 +307,18 @@ _
         //
         // Continue
         //
-        if (DEBUG1) {
+        IF_DEBUG1 {
             t->log("Remake thing info");
         }
     } else if (game->state == Game::STATE_MOVING_ITEMS) {
-        if (DEBUG1) {
+        IF_DEBUG1 {
             t->log("Ignore, already moving items");
         }
         return;
     }
 _
     if (wid_console_window && wid_console_window->visible) {
-        if (DEBUG1) {
+        IF_DEBUG1 {
             t->log("No; console visible");
         }
         return;
@@ -326,7 +326,7 @@ _
 
     if (when_hovering_over) {
         if (!level->is_lit_recently(t->mid_at.x, t->mid_at.y)) {
-            if (DEBUG1) {
+            IF_DEBUG1 {
                 t->log("No; not lit");
             }
             return;
@@ -334,7 +334,7 @@ _
     }
 
     if (!wid_thing_info_window.empty()) {
-        if (DEBUG1) {
+        IF_DEBUG1 {
             t->log("Yes; destroy window");
         }
         wid_thing_info_destroy_immediate();
@@ -355,7 +355,7 @@ _
     }
     recursion = true;
 _
-    if (DEBUG1) {
+    IF_DEBUG1 {
         t->log("Yes; create window");
     }
 
@@ -377,7 +377,7 @@ _
     point mid(TERM_WIDTH / 2, TERM_HEIGHT - 5);
 
     if (t->is_player() || t->is_bag_item_container()) {
-        if (DEBUG1) {
+        IF_DEBUG1 {
             t->log("Thing info create bags");
         }
 
@@ -530,7 +530,7 @@ _
         }
     }
 _
-    if (DEBUG1) {
+    IF_DEBUG1 {
         for (auto t : ts) {
             t->log("- candidate");
         }
@@ -563,7 +563,7 @@ _
             i++;
             if (!wid_thing_info_push_popup(t)) {
                 wid_thing_info_fini();
-                if (DEBUG1) {
+                IF_DEBUG1 {
                     t->log("No; cannot push");
                 }
                 compact = true;

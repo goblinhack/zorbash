@@ -237,7 +237,7 @@ _
             next_level->is_fire(x, y) ||
             next_level->is_lava(x, y)) {
 
-            if (DEBUG1) {
+            IF_DEBUG1 {
                 FOR_ALL_THINGS(next_level, t, x, y) {
                     t->log("Landed under thing on new level");
                 } FOR_ALL_THINGS_END()

@@ -15,9 +15,11 @@
 #undef _
 
 #ifdef ENABLE_DEBUG_TRACE
-#define _ tracer_t CAT2(__my_trace__, __LINE__) (__PRETTY_FUNCTION__, __LINE__);
+#define _                 tracer_t           CAT2(__my_trace__, __LINE__) (__PRETTY_FUNCTION__, __LINE__);
+#define _trace_no_indent_ tracer_no_indent_t CAT2(__my_trace__, __LINE__) (__PRETTY_FUNCTION__, __LINE__);
 #else
 #define _
+#define _trace_no_indent_
 #endif
 
 struct callframe {
@@ -73,6 +75,26 @@ struct tracer_t {
                 g_callframes_depth--;
             }
         }
+    }
+};
+
+struct tracer_no_indent_t {
+    inline tracer_no_indent_t (const char *func,
+                               const unsigned short line)
+    {
+        // useful for code tracing in real time
+        // fprintf(stderr, "%s %s() line %d\n", file, func, line);
+        if (DEBUG1) {
+            if (unlikely(g_callframes_depth < MAXCALLFRAME)) {
+                callframe *c = &callframes[g_callframes_depth];
+                c->func = func;
+                c->line = line;
+            }
+        }
+    }
+
+    inline ~tracer_no_indent_t()
+    {
     }
 };
 #endif

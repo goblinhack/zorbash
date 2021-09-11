@@ -71,7 +71,7 @@ _
     }
     chosen->hide();
 
-    if (DEBUG2) {
+    IF_DEBUG2 {
         it->log("New carried list:");
     }
     it->get_item_list();

@@ -302,7 +302,7 @@ bool Thing::spawn_fire (const std::string& what)
     auto chosen = possible[pcg_random_range(0, cands)];
 
     auto c = level->thing_new(what, chosen);
-    if (DEBUG2) {
+    IF_DEBUG2 {
         c->log("Spawned");
     }
     c->inherit_from(this);

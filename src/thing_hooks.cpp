@@ -209,7 +209,7 @@ void Thing::remove_all_references ()
         }
     }
 
-    if (DEBUG4) {
+    IF_DEBUG4 {
         FOR_ALL_THING_GROUPS(group) {
             for (auto p : level->all_things[group]) {
                 auto t = p.second;

@@ -307,7 +307,7 @@ bool Dungeon::is_oob (const int x, const int y)
 
 void Dungeon::debug (const std::string s)
 {_
-    if (DEBUG2) {
+    IF_DEBUG2 {
         LOG("DUNGEON (%u) %s", seed, s.c_str());
         LOG("===========================================================");
         dump();
@@ -1357,7 +1357,7 @@ void Dungeon::create_node_map (void)
 
 void Dungeon::dump (void)
 {_
-    if (DEBUG2) {
+    IF_DEBUG2 {
         LOG("DGN: Seed %u (with room depth)", seed);
         for (auto y = 0; y < map_height; y++) {
             std::string s;

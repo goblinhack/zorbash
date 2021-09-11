@@ -35,17 +35,17 @@
 #define SEARCH_TYPE_LAST_RESORTS_NO_JUMP      4
 #define SEARCH_TYPE_LAST_RESORTS_JUMP_ALLOWED 5
 
-#define GOAL_ADD(score, msg)                                               \
-        total_score += (score);                                            \
-        got_a_goal = true;                                                 \
-        if (last_msg.empty()) {                                            \
-            last_msg = msg;                                                \
-        } else {                                                           \
-            last_msg += ", ";                                              \
-            last_msg += msg;                                               \
-        }                                                                  \
-        dbg(" add goal (%d,%d) score %d %s, %s",                           \
-            p.x + minx, p.y + miny, score, msg, it->to_string().c_str());  \
+#define SCORE_ADD(score, msg)                               \
+        total_score += (score);                             \
+        got_a_goal = true;                                  \
+        if (last_msg.empty()) {                             \
+            last_msg = msg;                                 \
+        } else {                                            \
+            last_msg += ", ";                               \
+            last_msg += msg;                                \
+        }                                                   \
+        dbg("Add sub-goal score %d @(%d,%d) %s, %s",        \
+            score, p.x, p.y, msg, it->to_string().c_str()); \
 
 //
 // Look at all the things that are currently visited (read that as light rays
@@ -171,9 +171,9 @@ _
             uint8_t score8 = DMAP_LESS_PREFERRED_TERRAIN - (int)score;
             set(g.dmap->val, goal_target.x, goal_target.y, score8);
 
-            dbg2(" scale goal (%d,%d) score %d to dmap score %d",
-                (int)minx + goal.at.x, (int)miny + goal.at.y,
-                (int)orig_score, (int)score8);
+            dbg("Scale goal (score %d -> %d) @(%d,%d) %s",
+                (int)orig_score, (int)score8,
+                goal.at.x, goal.at.y, goal.msg.c_str());
         }
 
         //
@@ -185,12 +185,12 @@ _
         // Find the best next-hop to the best goal.
         //
 #ifdef ENABLE_DEBUG_AI_VERBOSE
-        if (DEBUG3) {
+        IF_DEBUG4 {
             dbg("Goals:");
             dmap_print(g.dmap,
-                       point(start.x - minx, start.y - miny),
-                       point(0, 0),
-                       point(maxx - minx, maxy - miny));
+                       point(min.x, min.y),
+                       point(start.x, start.y),
+                       point(max.x, max.y));
         }
 #endif
 
@@ -198,14 +198,14 @@ _
         // Make sure we do not want to stay in the same position by making
         // our current cell passable but the very least preferred it can be.
         //
-        if (get(g.dmap->val, start.x - minx, start.y - miny) > 0) {
-            set(g.dmap->val, start.x - minx, start.y - miny, DMAP_IS_PASSABLE);
+        if (get(g.dmap->val, start.x, start.y) > 0) {
+            set(g.dmap->val, start.x, start.y, DMAP_IS_PASSABLE);
         }
 
         //
         // Move diagonally if not blocked by walls
         //
-        point astar_start(start.x - minx, start.y - miny);
+        point astar_start(start.x, start.y);
 
         //
         // Modify the given goals with scores that indicate the cost of the
@@ -219,14 +219,6 @@ _
             astar_debug = {};
 #endif
             auto astar_end = goal.at;
-#if 0
-            {
-                dbg2("ASTAR pre solve:");
-                auto start = point(0, 0);
-                auto end = point(maxx - minx, maxy - miny);
-                astar_dump(g.dmap, goal.at, start, end);
-            }
-#endif
             auto result = astar_solve(&goal,
                                       path_debug,
                                       astar_start,
@@ -236,28 +228,28 @@ _
             // Unreachable?
             //
             if (result.cost == std::numeric_limits<int>::max()) {
-                dbg2(" goal (%d,%d) score %d -> unreachable",
-                    goal.at.x + minx, goal.at.y + miny,
-                    (int)goal.score);
+                dbg("Unreachable goal score %d @(%d,%d) %s",
+                    (int)goal.score,
+                    goal.at.x, goal.at.y, goal.msg.c_str());
 #ifdef ENABLE_DEBUG_AI_ASTAR
-                auto start = point(0, 0);
-                auto end = point(maxx - minx, maxy - miny);
+                auto start = point(minx, miny);
+                auto end = point(maxx, maxy);
                 astar_dump(g.dmap, goal.at, start, end);
 #endif
                 continue;
             }
 
             paths.insert(result);
-            dbg2(" goal (%d,%d) score %d -> cost %d",
-                goal.at.x + minx, goal.at.y + miny,
-                (int)goal.score, (int)result.cost);
+            dbg("Reachable goal (score %d -> cost %d) @(%d,%d) %s",
+                (int)goal.score, (int)result.cost,
+                goal.at.x, goal.at.y, goal.msg.c_str());
 
 #ifdef ENABLE_DEBUG_AI_ASTAR
             for (auto& p : result.path) {
                 set(astar_debug, p.x, p.y, '*');
             }
-            auto start = point(0, 0);
-            auto end = point(maxx - minx, maxy - miny);
+            auto start = point(minx, miny);
+            auto end = point(maxx, maxy);
             astar_dump(g.dmap, goal.at, start, end);
 #endif
         }
@@ -266,8 +258,6 @@ _
             std::vector<point> new_move_path;
 
             for (point p : result.path) {
-                p.x += minx;
-                p.y += miny;
                 if ((p.x == mid_at.x) && (p.y == mid_at.y)) {
                     continue;
                 }
@@ -295,10 +285,8 @@ _
 
             bool logged_one = false;
             FOR_ALL_THINGS_THAT_INTERACT(level, it, p.x, p.y) {
-
                 if (it->is_changing_level ||
                     it->is_hidden ||
-                    it->is_the_grid ||
                     it->is_falling ||
                     it->is_jumping) {
                     continue;
@@ -336,6 +324,7 @@ _
                     if (it->is_changing_level ||
                         it->is_hidden ||
                         it->is_the_grid ||
+                        it->is_tmp_thing() ||
                         it->is_falling ||
                         it->is_jumping) {
                         continue;
@@ -453,12 +442,9 @@ int Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy,
     for (int y = miny; y < maxy; y++) {
         for (int x = minx; x < maxx; x++) {
             point p(x, y);
-            int X = x - minx;
-            int Y = y - miny;
-
             if (is_player()) {
                 if (!level->is_lit_ever(p)) {
-                    set(dmap_can_see->val, X, Y, DMAP_IS_WALL);
+                    set(dmap_can_see->val, x, y, DMAP_IS_WALL);
                     continue;
                 }
             }
@@ -468,25 +454,25 @@ int Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy,
             //
             if (is_jumper()) {
                 if (!ai_obstacle_for_me(p)) {
-                    set(dmap_can_see->val, X, Y, DMAP_IS_PASSABLE);
+                    set(dmap_can_see->val, x, y, DMAP_IS_PASSABLE);
                     continue;
                 }
             } else {
                 if (ai_obstacle_for_me(p)) {
-                    set(dmap_can_see->val, X, Y, DMAP_IS_WALL);
+                    set(dmap_can_see->val, x, y, DMAP_IS_WALL);
                     continue;
                 }
             }
 
             if (level->is_movement_blocking_wall_or_locked_door(p)) {
-                set(dmap_can_see->val, X, Y, DMAP_IS_WALL);
+                set(dmap_can_see->val, x, y, DMAP_IS_WALL);
                 continue;
             }
 
             if (level->is_secret_door(p)) {
                 auto dist = distance(p, at);
                 if (dist > ROBOT_CAN_SEE_SECRET_DOOR_DISTANCE) {
-                    set(dmap_can_see->val, X, Y, DMAP_IS_WALL);
+                    set(dmap_can_see->val, x, y, DMAP_IS_WALL);
                     continue;
                 }
             }
@@ -497,7 +483,7 @@ int Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy,
                 case SEARCH_TYPE_LAST_RESORTS_NO_JUMP:
                     if (level->is_lava(p) ||
                         level->is_chasm(p)) {
-                        set(dmap_can_see->val, X, Y, DMAP_IS_WALL);
+                        set(dmap_can_see->val, x, y, DMAP_IS_WALL);
                         continue;
                     }
                     break;
@@ -582,14 +568,14 @@ int Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy,
                         if (jump) {
                             for (const auto &jump_over : jp.path) {
                                 auto j = jump_over + p;
-                                set(can_jump, j.x - minx, j.y - miny, DMAP_IS_PASSABLE);
+                                set(can_jump, j.x, j.y, DMAP_IS_PASSABLE);
                             }
                         }
                     }
                 }
             }
 
-            set(dmap_can_see->val, X, Y, DMAP_IS_WALL);
+            set(dmap_can_see->val, x, y, DMAP_IS_WALL);
             continue;
         }
     }
@@ -615,9 +601,6 @@ int Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy,
                 if (p.y < MAP_BORDER_ROCK) {
                     continue;
                 }
-
-                int X = x - minx;
-                int Y = y - miny;
 
                 if (!level->is_lit_ever(p)) {
                     continue;
@@ -664,7 +647,7 @@ int Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy,
                             //
                             continue;
                         }
-                        set(dmap_can_see->val, X + dx, Y + dy, DMAP_IS_PASSABLE);
+                        set(dmap_can_see->val, p.x, p.y, DMAP_IS_PASSABLE);
                     }
                 }
             }
@@ -709,10 +692,9 @@ int Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy,
 
     for (int y = miny; y < maxy; y++) {
         for (int x = minx; x < maxx; x++) {
-            int X = x - minx;
-            int Y = y - miny;
-            if (get(can_jump, X, Y)) {
-                set(dmap_can_see->val, X, Y, DMAP_IS_PASSABLE);
+
+            if (get(can_jump, x, y)) {
+                set(dmap_can_see->val, x, y, DMAP_IS_PASSABLE);
             }
 
             //
@@ -744,11 +726,12 @@ int Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy,
     //
     // We want to find how far everything is from us.
     //
-    set(dmap_can_see->val, start.x - minx, start.y - miny, DMAP_IS_GOAL);
-    if (DEBUG3) {
+    set(dmap_can_see->val, start.x, start.y, DMAP_IS_GOAL);
+    IF_DEBUG4 {
         dmap_print(dmap_can_see);
     }
-    dmap_process(dmap_can_see, point(0, 0), point(maxx - minx, maxy - miny));
+
+    dmap_process(dmap_can_see, point(minx, miny), point(maxx, maxy));
 
     auto t = most_dangerous_visible_thing_get();
     if (t) {
@@ -771,10 +754,8 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
 
     for (int y = miny; y < maxy; y++) { for (int x = minx; x < maxx; x++) {
         point p(x, y);
-        int X = x - minx;
-        int Y = y - miny;
 
-        if (get(dmap_can_see->val, X, Y) == DMAP_IS_WALL) {
+        if (get(dmap_can_see->val, x, y) == DMAP_IS_WALL) {
             continue;
         }
 
@@ -790,7 +771,6 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
 
             if (it->is_changing_level ||
                 it->is_hidden ||
-                it->is_the_grid ||
                 it->is_falling ||
                 it->is_jumping) {
                 continue;
@@ -828,7 +808,7 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                     //
                     // If starving, prefer the thing with most health
                     //
-                    GOAL_ADD(it_health, "eat-it");
+                    SCORE_ADD(it_health, "eat-it");
                     got_one_this_tile = true;
                 }
             } else if (is_hungry) {
@@ -839,13 +819,13 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                     // go for the easier kill in preference.
                     //
                     if (it->is_player()) {
-                        GOAL_ADD(it_health / 2, "eat-player");
+                        SCORE_ADD(it_health / 2, "eat-player");
                         got_one_this_tile = true;
                     } else if (it->is_alive_monst()) {
-                        GOAL_ADD(it_health / 2, "eat-monst");
+                        SCORE_ADD(it_health / 2, "eat-monst");
                         got_one_this_tile = true;
                     } else {
-                        GOAL_ADD(it_health / 2, "eat-food");
+                        SCORE_ADD(it_health / 2, "eat-food");
                         got_one_this_tile = true;
                     }
                 }
@@ -855,7 +835,7 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                 if (it->is_collectable()) {
                     auto score = worth_collecting(it);
                     if (score > 0) {
-                        GOAL_ADD(score, "collect");
+                        SCORE_ADD(score, "collect");
                         got_one_this_tile = true;
                         if (is_player()) {
                             CON("Robot: @(%s, %d,%d %d/%dh) Is considering collecting %s",
@@ -884,7 +864,7 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
             //
             if (is_key_collector()) {
                 if (it->is_key()) {
-                    GOAL_ADD(100, "collect-key");
+                    SCORE_ADD(100, "collect-key");
                     got_one_this_tile = true;
                 }
             }
@@ -915,7 +895,7 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                             // Low on health. Best to avoid this enemy.
                             //
                             avoid = true;
-                            GOAL_ADD(-(int)((max_dist - dist) + it_health) * 200, "avoid-enemy");
+                            SCORE_ADD(-(int)((max_dist - dist) + it_health) * 200, "avoid-enemy");
                             got_one_this_tile = true;
                         } else {
                             //
@@ -923,7 +903,7 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                             // higher the score
                             //
                             avoid = false;
-                            GOAL_ADD((int)(max_dist - dist) * 200, "attack-enemy");
+                            SCORE_ADD((int)(max_dist - dist) * 200, "attack-enemy");
                             got_one_this_tile = true;
                         }
                     } else if (!avoid && (dist < ai_avoid_distance()) && will_avoid_monst(it)) {
@@ -935,20 +915,20 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                         //
                         // Very close, high priority attack
                         //
-                        GOAL_ADD((int)(max_dist - dist) * 200, "attack-nearby-generator");
+                        SCORE_ADD((int)(max_dist - dist) * 1000, "attack-nearby-generator");
                         got_one_this_tile = true;
                     } else if (!avoid && it->is_monst()) {
                         if (dist < 2) {
                             //
                             // Very close, high priority attack
                             //
-                            GOAL_ADD((int)(max_dist - dist) * 100, "attack-nearby-monst");
+                            SCORE_ADD((int)(max_dist - dist) * 100, "attack-nearby-monst");
                             got_one_this_tile = true;
                         } else if (dist < max_dist) {
                             //
                             // Further away close, lower priority attack
                             //
-                            GOAL_ADD((int)(max_dist - dist) * 10, "attack-maybe-monst");
+                            SCORE_ADD((int)(max_dist - dist) * 10, "attack-maybe-monst");
                             got_one_this_tile = true;
                         }
                     }
@@ -958,7 +938,7 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                     //
                     // Very close, high priority attack
                     //
-                    GOAL_ADD(666, "get-out-of-web");
+                    SCORE_ADD(666, "get-out-of-web");
                     got_one_this_tile = true;
                 }
 
@@ -999,10 +979,9 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                             int total_score = -(int)terrain_cost;
                             total_score += dist * 100;
                             total_score += 1000;
-                            goals.insert(Goal(total_score, point(X + dx, Y + dy), last_msg));
-                            set(dmap_can_see->val, X + dx, Y + dy, DMAP_IS_GOAL);
-                            log("Add avoid location offset %d,%d score %d", dx, dy, total_score);
-
+                            goals.insert(Goal(total_score, p, last_msg));
+                            set(dmap_can_see->val, p.x, p.y, DMAP_IS_GOAL);
+                            dbg("Avoid goal (score %d) @(%d,%d)", total_score, p.x, p.y);
                             got_avoid = true;
                         }
                     }
@@ -1024,9 +1003,9 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                                 int total_score = -(int)terrain_cost;
                                 total_score += dist * 100;
                                 total_score += 1000;
-                                goals.insert(Goal(total_score, point(X + dx, Y + dy), last_msg));
-                                set(dmap_can_see->val, X + dx, Y + dy, DMAP_IS_GOAL);
-                                log("Add avoid 2nd location offset %d,%d score %d", dx, dy, total_score);
+                                goals.insert(Goal(total_score, p, last_msg));
+                                set(dmap_can_see->val, p.x, p.y, DMAP_IS_GOAL);
+                                dbg("Avoid goal (2) (score %d) @(%d,%d)", total_score, p.x, p.y);
 
                                 got_avoid = true;
                             }
@@ -1050,9 +1029,9 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                                 int total_score = -(int)terrain_cost;
                                 total_score += dist * 100;
                                 total_score += 1000;
-                                goals.insert(Goal(total_score, point(X + dx, Y + dy), last_msg));
-                                set(dmap_can_see->val, X + dx, Y + dy, DMAP_IS_GOAL);
-                                log("Add avoid 3rd location offset %d,%d score %d", dx, dy, total_score);
+                                goals.insert(Goal(total_score, p, last_msg));
+                                set(dmap_can_see->val, p.x, p.y, DMAP_IS_GOAL);
+                                dbg("Avoid goal (3) (score %d) @(%d,%d)", total_score, p.x, p.y);
 
                                 got_avoid = true;
                             }
@@ -1081,7 +1060,7 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                     //
                     if (lit_recently) {
                         if (possible_to_attack(it)) {
-                            GOAL_ADD(- health_diff, "can-attack-monst");
+                            SCORE_ADD(- health_diff, "can-attack-monst");
                         }
                     }
                 }
@@ -1093,20 +1072,22 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                 //
                 auto age = get(age_map->val, p.x, p.y);
                 if (age - game->tick_current < 10) {
-                    GOAL_ADD(1, "preferred-terrain");
+                    SCORE_ADD(1, "preferred-terrain");
                 }
             }
         } FOR_ALL_THINGS_END();
 
         if (avoiding) {
-            set(dmap_can_see->val, X, Y, DMAP_IS_WALL);
+            set(dmap_can_see->val, x, y, DMAP_IS_WALL);
         } else if (got_a_goal) {
-            goals.insert(Goal(total_score, point(X, Y), last_msg));
-            set(dmap_can_see->val, X, Y, DMAP_IS_GOAL);
+            goals.insert(Goal(total_score, p, last_msg));
+            dbg("Add goal (score %d) @(%d,%d) %s",
+                total_score, p.x, p.y, last_msg.c_str());
+            set(dmap_can_see->val, x, y, DMAP_IS_GOAL);
         } else if (terrain_cost) {
-            set(dmap_can_see->val, X, Y, (uint8_t)terrain_cost);
+            set(dmap_can_see->val, x, y, (uint8_t)terrain_cost);
         } else {
-            set(dmap_can_see->val, X, Y, DMAP_IS_PASSABLE);
+            set(dmap_can_see->val, x, y, DMAP_IS_PASSABLE);
         }
     } }
 }
@@ -1130,7 +1111,7 @@ void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals,
     set(pushed, start.x, start.y, true);
 
     auto dmap_can_see = get_dmap_can_see();
-    if (DEBUG3) {
+    IF_DEBUG3 {
         log("Dmap, can see:");
         dmap_print(dmap_can_see);
     }
@@ -1407,6 +1388,7 @@ next:
             terrain_cost += 10;
         }
 
+        dbg("Add search cand (score %d) @(%d,%d)", total_score, p.x, p.y);
         goals.insert(Goal(total_score, p, "search cand"));
     }
 }
@@ -1560,7 +1542,6 @@ void Thing::robot_tick (void)
         is_waiting_to_descend_dungeon ||
         is_waiting_to_ascend_sewer ||
         is_waiting_to_fall ||
-        is_the_grid ||
         is_jumping) {
         return;
     }

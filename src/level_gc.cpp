@@ -43,28 +43,28 @@ void Level::things_gc (bool force)
                 // Allow the particles to finish
                 //
                 if (t->has_internal_particle) {
-                    if (DEBUG3) {
+                    IF_DEBUG3 {
                         t->log("Thing garbage collect delayed due to internal particle");
                     }
                     continue;
                 }
 
                 if (t->has_external_particle) {
-                    if (DEBUG3) {
+                    IF_DEBUG3 {
                         t->log("Thing garbage collect delayed due to external particle");
                     }
                     continue;
                 }
 
                 if (t->has_laser) {
-                    if (DEBUG3) {
+                    IF_DEBUG3 {
                         t->log("Thing garbage collect delayed due to laser");
                     }
                     continue;
                 }
 
                 if (t->has_projectile) {
-                    if (DEBUG3) {
+                    IF_DEBUG3 {
                         t->log("Thing garbage collect delayed due to projectile");
                     }
                     continue;
@@ -77,7 +77,7 @@ void Level::things_gc (bool force)
                 monst_count--;
             }
 
-            if (DEBUG3) {
+            IF_DEBUG3 {
                 t->log("Thing garbage collect");
             }
 

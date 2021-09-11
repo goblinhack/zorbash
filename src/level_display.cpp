@@ -235,7 +235,7 @@ void Level::display_map_fg_things (int fbo,
                     //
                     // Sanity checks
                     //
-                    if (DEBUG3) {
+                    IF_DEBUG3 {
                         if (!t->is_moving && !t->is_jumping && !t->is_falling) {
                             if (t->mid_at != t->get_interpolated_mid_at()) {
                                 t->die("Thing is not where its interpolated to be; is at %f,%f",
@@ -457,7 +457,7 @@ void Level::display_map (void)
         display_lasers();
         display_projectiles();
         display_map_fg_things(FBO_MAP_VISIBLE, minx, miny, maxx, maxy);
-        if (NODEBUG3) {
+        IF_NODEBUG3 {
             glBlendFunc(GL_DST_COLOR, GL_SRC_ALPHA_SATURATE);
             blit_fbo_game_pix(FBO_PLAYER_VISIBLE_LIGHTING);
         }
@@ -487,7 +487,7 @@ void Level::display_map (void)
         glcolor(WHITE);
         blit_fbo_game_pix(FBO_MAP_VISIBLE);
 
-        if (NODEBUG3) {
+        IF_NODEBUG3 {
             if (fade_out) {
                 glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
                 display_fade_out();

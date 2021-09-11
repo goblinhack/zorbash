@@ -131,7 +131,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         return false;
     }
 
-    if (DEBUG2) {
+    IF_DEBUG2 {
         hitter->log("Hit %s (health %d) for damage %d", text_the().c_str(), get_health(), damage);
     }
 
@@ -183,19 +183,19 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     //
     if (is_dead) {
         if (real_hitter->can_eat(this)) {
-            if (DEBUG2) {
+            IF_DEBUG2 {
                 hitter->log("Hit bypass, eat it");
             }
             damage = 0;
         } else {
-            if (DEBUG2) {
+            IF_DEBUG2 {
                 hitter->log("Hit fails, it's dead");
             }
             return false;
         }
     } else {
         if (!damage) {
-            if (DEBUG2) {
+            IF_DEBUG2 {
                 hitter->log("Hit fails, no damage");
             }
             return false;
@@ -573,7 +573,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
 //
 int Thing::is_hit_by (Thingp hitter, bool crit, bool bite, int damage)
 {_
-    if (DEBUG2) {
+    IF_DEBUG2 {
         hitter->log("Possible hit %s for %u", to_string().c_str(), damage);
     }
 _
@@ -608,11 +608,11 @@ _
     //
     if (is_dead) {
         if (real_hitter->can_eat(this)) {
-            if (DEBUG2) {
+            IF_DEBUG2 {
                 hitter->log("Cannot hit dead thing, but can eat: %s", to_string().c_str());
             }
         } else {
-            if (DEBUG2) {
+            IF_DEBUG2 {
                 hitter->log("Cannot hit: %s is dead", to_string().c_str());
             }
             return false;
@@ -620,14 +620,14 @@ _
     }
 
     if (is_indestructible()) {
-        if (DEBUG2) {
+        IF_DEBUG2 {
             hitter->log("Cannot hit: %s is indestructible", to_string().c_str());
         }
         return false;
     }
 
     if (is_resurrecting) {
-        if (DEBUG2) {
+        IF_DEBUG2 {
             hitter->log("Cannot hit: %s is resurrecting", to_string().c_str());
         }
         return false;
@@ -639,7 +639,7 @@ _
         // damage. We don't want the player to keep absorbing hits when
         // already dead though.
         //
-        if (DEBUG2) {
+        IF_DEBUG2 {
             hitter->log("No, hitter %s is already dead", to_string().c_str());
         }
         return false;
@@ -666,7 +666,7 @@ _
                 //
                 // Not something that typically damages walls.
                 //
-                if (DEBUG2) {
+                IF_DEBUG2 {
                     hitter->log("No, %s is immune (1)", to_string().c_str());
                 }
                 return false;
@@ -682,7 +682,7 @@ _
                 //
                 // Not something that typically damages walls.
                 //
-                if (DEBUG2) {
+                IF_DEBUG2 {
                     hitter->log("No, %s is immune (2)", to_string().c_str());
                 }
                 return false;
@@ -690,13 +690,13 @@ _
         }
 
         if (hitter->is_fire()) {
-            if (DEBUG2) {
+            IF_DEBUG2 {
                 hitter->log("Fire attack");
             }
         }
     }
 
-    if (DEBUG2) {
+    IF_DEBUG2 {
         hitter->log("Hit succeeds");
     }
     int hit_and_killed;

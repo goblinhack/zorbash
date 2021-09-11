@@ -38,7 +38,7 @@ do_retry:
     for (auto slot = 0; slot < MAP_SLOTS; slot++) {
         auto idp = &getref(all_things_id_at[group], x, y, slot);
         if (idp->id == id.id) {
-            if (DEBUG5) {
+            IF_DEBUG5 {
                 t->log("Found %08" PRIx32 " at %u,%u slot %u", id.id, x, y, slot);
             }
             return;
@@ -59,7 +59,7 @@ do_retry:
                return a->z_prio() < b->z_prio();
              });
 
-        if (DEBUG5) {
+        IF_DEBUG5 {
             t->log("Put thing %p %08" PRIx32 " at %u,%u slot %u", t, id.id, x, y, free_slot);
         }
 
@@ -138,7 +138,7 @@ void Level::remove_thing (int x, int y, ThingId id, int group)
             auto b = v->begin();
             auto e = v->end();
 
-            if (DEBUG5) {
+            IF_DEBUG5 {
                 t->log("Rem thing %p %08" PRIx32 " at %u,%u slot %u", t, id.id, x, y, slot);
             }
 

@@ -472,6 +472,14 @@ _
                 if (t->is_very_combustible()) {
                     continue;
                 }
+                if (!t->is_attackable_by_player()) {
+                    continue;
+                }
+            }
+            if (is_monst()) {
+                if (!t->is_attackable_by_monst()) {
+                    continue;
+                }
             }
 
             if (t->is_dead) {
@@ -541,6 +549,14 @@ _
                 if (t->is_very_combustible()) {
                     continue;
                 }
+                if (!t->is_attackable_by_player()) {
+                    continue;
+                }
+            }
+            if (is_monst()) {
+                if (!t->is_attackable_by_monst()) {
+                    continue;
+                }
             }
 
             if (t->is_dead) {
@@ -602,6 +618,14 @@ _
                 // Don't be silly and hit things that can blow up
                 //
                 if (t->is_very_combustible()) {
+                    continue;
+                }
+                if (!t->is_attackable_by_player()) {
+                    continue;
+                }
+            }
+            if (is_monst()) {
+                if (!t->is_attackable_by_monst()) {
                     continue;
                 }
             }

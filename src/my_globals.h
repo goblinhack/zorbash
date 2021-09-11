@@ -60,22 +60,31 @@ extern int TILES_DOWN;
 #define NODEBUG4 (likely(!g_opt_debug4))
 #define NODEBUG5 (likely(!g_opt_debug5))
 
-//
-// _ adds recording of this traceback
-//
-#define ERR _ myerr
+#define IF_DEBUG1 _trace_no_indent_ if (DEBUG1)
+#define IF_DEBUG2 _trace_no_indent_ if (DEBUG2)
+#define IF_DEBUG3 _trace_no_indent_ if (DEBUG3)
+#define IF_DEBUG4 _trace_no_indent_ if (DEBUG4)
+#define IF_DEBUG5 _trace_no_indent_ if (DEBUG5)
 
-#define dbg _ if (DEBUG1) log
-#define dbg2 _ if (DEBUG2) log
-#define dbg3 _ if (DEBUG3) log
-#define dbg4 _ if (DEBUG4) log
-#define dbg5 _ if (DEBUG5) log
+#define IF_NODEBUG1 _trace_no_indent_ if (NODEBUG1)
+#define IF_NODEBUG2 _trace_no_indent_ if (NODEBUG2)
+#define IF_NODEBUG3 _trace_no_indent_ if (NODEBUG3)
+#define IF_NODEBUG4 _trace_no_indent_ if (NODEBUG4)
+#define IF_NODEBUG5 _trace_no_indent_ if (NODEBUG5)
 
-#define DBG _ if (DEBUG1) LOG
-#define DBG2 _ if (DEBUG2) LOG
-#define DBG3 _ if (DEBUG3) LOG
-#define DBG4 _ if (DEBUG4) LOG
-#define DBG5 _ if (DEBUG5) LOG
+#define ERR  _trace_no_indent_ myerr
+
+#define dbg  _trace_no_indent_ if (DEBUG1) log
+#define dbg2 _trace_no_indent_ if (DEBUG2) log
+#define dbg3 _trace_no_indent_ if (DEBUG3) log
+#define dbg4 _trace_no_indent_ if (DEBUG4) log
+#define dbg5 _trace_no_indent_ if (DEBUG5) log
+
+#define DBG  _trace_no_indent_ if (DEBUG1) LOG
+#define DBG2 _trace_no_indent_ if (DEBUG2) LOG
+#define DBG3 _trace_no_indent_ if (DEBUG3) LOG
+#define DBG4 _trace_no_indent_ if (DEBUG4) LOG
+#define DBG5 _trace_no_indent_ if (DEBUG5) LOG
 
 //
 // Used to fill in gaps in log depth

@@ -40,7 +40,7 @@ void PY_DBG (const char *fmt, ...)
 {
     va_list args;
 
-    if (NODEBUG4) {
+    IF_NODEBUG4 {
         return;
     }
 

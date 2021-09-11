@@ -25,7 +25,7 @@ void log_catchup_missing_indent_levels (void)
     // Seems to need more work - not reliable
     //
 #if 0
-    if (NODEBUG2) {
+    IF_NODEBUG2 {
         return;
     }
 

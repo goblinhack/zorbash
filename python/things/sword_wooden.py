@@ -74,7 +74,6 @@ def init_carry(name):
     mytp.set_gfx_short_shadow_caster(True)
     mytp.set_gfx_weapon_carry_anim(True)
     mytp.set_is_able_to_fall(False)
-    mytp.set_is_tickable(True)
     mytp.set_is_loggable_for_important_stuff(True)
     mytp.set_is_loggable_for_unimportant_stuff(True)
     mytp.set_is_moveable(True)

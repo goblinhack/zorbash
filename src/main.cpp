@@ -681,7 +681,7 @@ int32_t main (int32_t argc, char *argv[])
     }
 #endif
 
-    if (DEBUG2) {
+    IF_DEBUG2 {
         if (game) {
             game->config.debug_mode = g_opt_debug2;
         }

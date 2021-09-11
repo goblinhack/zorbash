@@ -211,7 +211,7 @@ bool Thing::collision_check_do (void)
 
 void Thing::tick (void)
 {_
-    if (DEBUG4) {
+    IF_DEBUG4 {
         dbg("Tick");
     }
 _
@@ -229,14 +229,14 @@ _
             achieve_goals_in_death();
         }
 
-        if (DEBUG4) {
+        IF_DEBUG4 {
             log("Tick; is dead");
         }
         return;
     }
 
     if (unlikely(is_dead)) {
-        if (DEBUG4) {
+        IF_DEBUG4 {
             log("Tick; died");
         }
         return;

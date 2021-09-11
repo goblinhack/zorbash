@@ -55,7 +55,7 @@ bool Thing::open (Thingp it)
         return false;
     }
 
-    if (DEBUG1) {
+    IF_DEBUG1 {
         it->log("Open");
     }
 

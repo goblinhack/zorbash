@@ -35,7 +35,7 @@ bool Thing::possible_to_attack (const Thingp it)
         }
     }
 
-    dbg("Is possible to attack %s?", it->to_string().c_str());
+    dbg("Is it possible to attack %s?", it->to_string().c_str());
 _
     //
     // Fire attacks via tick so it can get you when you fall or jump into it.
@@ -299,7 +299,7 @@ _
     } else if (owner && owner->is_player() && it->is_attackable_by_player()) {
         // continue
     } else {
-        if (DEBUG4) { // very noisy
+        IF_DEBUG4 { // very noisy
             dbg("Cannot attack %s", it->to_string().c_str());
         }
         return false;
@@ -350,7 +350,7 @@ _
             //
             // Eat corpse?
             //
-            if (DEBUG2) {
+            IF_DEBUG2 {
                 owner->log("Can eat %s", it->to_string().c_str());
             }
 
@@ -359,7 +359,7 @@ _
                     //
                     // Can't kill it twice, so hide it
                     //
-                    if (DEBUG1) {
+                    IF_DEBUG1 {
                         owner->log("Eat corpse %s", it->to_string().c_str());
                     }
                     it->hide();
