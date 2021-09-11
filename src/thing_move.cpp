@@ -118,9 +118,12 @@ bool Thing::move (fpoint future_pos)
     bool right           = future_pos.x > mid_at.x;
     bool attack          = false;
     bool wait_or_collect = false;
+    bool shove_allowed   = true;
+    bool attack_allowed  = true;
 
     verify(this);
-    return (move(future_pos, up, down, left, right, attack, wait_or_collect, true));
+    return (move(future_pos, up, down, left, right, attack, wait_or_collect,
+                 shove_allowed, attack_allowed));
 }
 
 bool Thing::move (point future_pos)
@@ -128,7 +131,7 @@ bool Thing::move (point future_pos)
     return move(make_fpoint(future_pos));
 }
 
-bool Thing::move_no_shove (fpoint future_pos)
+bool Thing::move_no_shove_no_attack (fpoint future_pos)
 {
     dbg("Move, without shoving to %f,%f", future_pos.x, future_pos.y);
     bool up              = future_pos.y < mid_at.y;
@@ -137,12 +140,15 @@ bool Thing::move_no_shove (fpoint future_pos)
     bool right           = future_pos.x > mid_at.x;
     bool attack          = false;
     bool wait_or_collect = false;
+    bool shove_allowed   = false;
+    bool attack_allowed  = false;
 
     verify(this);
-    return (move(future_pos, up, down, left, right, attack, wait_or_collect, false));
+    return (move(future_pos, up, down, left, right, attack, wait_or_collect,
+                 shove_allowed, attack_allowed));
 }
 
-bool Thing::move_no_shove (point future_pos)
+bool Thing::move_no_shove_no_attack (point future_pos)
 {
     dbg("Move, without shoving to %d,%d", future_pos.x, future_pos.y);
     bool up              = future_pos.y < mid_at.y;
@@ -151,9 +157,47 @@ bool Thing::move_no_shove (point future_pos)
     bool right           = future_pos.x > mid_at.x;
     bool attack          = false;
     bool wait_or_collect = false;
+    bool shove_allowed   = false;
+    bool attack_allowed  = false;
 
     verify(this);
-    return (move(make_fpoint(future_pos), up, down, left, right, attack, wait_or_collect, false));
+    return (move(make_fpoint(future_pos),
+                 up, down, left, right, attack, wait_or_collect,
+                 shove_allowed, attack_allowed));
+}
+
+bool Thing::move_no_shove_attack_allowed (fpoint future_pos)
+{
+    dbg("Move, without shoving to %f,%f", future_pos.x, future_pos.y);
+    bool up              = future_pos.y < mid_at.y;
+    bool down            = future_pos.y > mid_at.y;
+    bool left            = future_pos.x < mid_at.x;
+    bool right           = future_pos.x > mid_at.x;
+    bool attack          = false;
+    bool wait_or_collect = false;
+    bool shove_allowed   = false;
+    bool attack_allowed  = true;
+
+    verify(this);
+    return (move(future_pos, up, down, left, right, attack, wait_or_collect,
+                 shove_allowed, attack_allowed));
+}
+
+bool Thing::move_no_shove_attack_allowed (point future_pos)
+{
+    dbg("Move, without shoving to %d,%d", future_pos.x, future_pos.y);
+    bool up              = future_pos.y < mid_at.y;
+    bool down            = future_pos.y > mid_at.y;
+    bool left            = future_pos.x < mid_at.x;
+    bool right           = future_pos.x > mid_at.x;
+    bool attack          = false;
+    bool wait_or_collect = false;
+    bool shove_allowed   = false;
+    bool attack_allowed  = true;
+
+    verify(this);
+    return (move(make_fpoint(future_pos), up, down, left, right, attack, wait_or_collect,
+                 shove_allowed, attack_allowed));
 }
 
 bool Thing::move (fpoint future_pos,
@@ -163,7 +207,8 @@ bool Thing::move (fpoint future_pos,
                   uint8_t right,
                   uint8_t attack,
                   uint8_t wait_or_collect,
-                  bool shove_allowed)
+                  bool shove_allowed,
+                  bool attack_allowed)
 {_
     dbg("Move");
 
@@ -343,7 +388,7 @@ bool Thing::move (fpoint future_pos,
                 if (shove_allowed) {
                     game->tick_begin("player tried to shove");
                     try_to_shove(future_pos);
-                } else {
+                } else if (attack_allowed) {
                     game->tick_begin("player tried to attack");
                     use_weapon();
                 }

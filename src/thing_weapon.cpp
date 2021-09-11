@@ -465,6 +465,15 @@ _
             //
             // Get the most important thing to hit.
             //
+            if (is_player() && game->robot_mode) {
+                //
+                // Don't be silly and hit things that can blow up
+                //
+                if (t->is_very_combustible()) {
+                    continue;
+                }
+            }
+
             if (t->is_dead) {
                 continue;
             } else if (t->is_monst()) {
@@ -525,6 +534,15 @@ _
             //
             // Get the most important thing to hit.
             //
+            if (is_player() && game->robot_mode) {
+                //
+                // Don't be silly and hit things that can blow up
+                //
+                if (t->is_very_combustible()) {
+                    continue;
+                }
+            }
+
             if (t->is_dead) {
                 continue;
             } else if (t->is_door()) {
@@ -579,6 +597,15 @@ _
             //
             // Get the most important thing to hit.
             //
+            if (is_player() && game->robot_mode) {
+                //
+                // Don't be silly and hit things that can blow up
+                //
+                if (t->is_very_combustible()) {
+                    continue;
+                }
+            }
+
             if (t->is_dead) {
                 continue;
             } else if (t->is_hittable()) {

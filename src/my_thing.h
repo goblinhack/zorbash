@@ -280,9 +280,11 @@ public:
     bool matches(const std::string& what) const;
     bool move(fpoint future_pos);
     bool move(point future_pos);
-    bool move(fpoint future_pos, uint8_t up, uint8_t down, uint8_t left, uint8_t right, uint8_t fire, uint8_t idle, bool shove_allowed);
-    bool move_no_shove(fpoint future_pos);
-    bool move_no_shove(point future_pos);
+    bool move(fpoint future_pos, uint8_t up, uint8_t down, uint8_t left, uint8_t right, uint8_t attack , uint8_t idle, bool shove_allowed, bool attack_allowed);
+    bool move_no_shove_no_attack(fpoint future_pos);
+    bool move_no_shove_no_attack(point future_pos);
+    bool move_no_shove_attack_allowed(fpoint future_pos);
+    bool move_no_shove_attack_allowed(point future_pos);
     bool move_to_or_attack_check_only(const point& nh);
     bool move_to_or_attack(const point&);
     bool move_to_or_escape_check_only(const point& nh);

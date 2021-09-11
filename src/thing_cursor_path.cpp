@@ -52,7 +52,7 @@ bool Thing::cursor_path_pop_next_and_move (void)
         // appear in the path
         //
         if (is_player() && game->robot_mode) {
-            if (will_avoid_hazard(future_pos)) {
+            if (will_avoid_hazard(future_pos) || level->is_barrel(future_pos)) {
                 CON("Robot: Next position %d,%d is a hazard",
                     (int)future_pos.x, (int)future_pos.y);
 _
@@ -119,12 +119,12 @@ _
             //
             // Someone in our way?
             //
-            if (level->is_monst(future_pos)) {
+            if (level->is_shovable(future_pos)) {
                 //
                 // Can the robot shove it into a something bad?
                 //
                 auto delta = mid_at - make_fpoint(future_pos);
-                FOR_ALL_MONSTS(level, t, mid_at.x, mid_at.y) {
+                FOR_ALL_THINGS(level, t, future_pos.x, future_pos.y) {
                     if (!t->is_shovable()) {
                         continue;
                     }
@@ -145,7 +145,7 @@ _
                 } FOR_ALL_THINGS_END()
 
                 CON("Robot: Try to attack monst at %s", future_pos.to_string().c_str());
-                if (move_no_shove(future_pos)) {
+                if (move_no_shove_no_attack(future_pos)) {
                     return true;
                 }
 
@@ -166,8 +166,9 @@ _
                 return false;
             }
 
-            CON("Robot: Try to move (shoving not allowed) to %s", future_pos.to_string().c_str());
-            if (move_no_shove(future_pos)) {
+            CON("Robot: Try to move (shoving not allowed, attack allowed) to %s",
+                future_pos.to_string().c_str());
+            if (move_no_shove_attack_allowed(future_pos)) {
                 return true;
             }
 
@@ -178,7 +179,8 @@ _
                 return true;
             }
 
-            CON("Robot: Try to move (shoving allowed) to %s", future_pos.to_string().c_str());
+            CON("Robot: Try to move (shoving and attacking allowed) to %s",
+                future_pos.to_string().c_str());
             if (move(future_pos)) {
                 return true;
             }
@@ -191,7 +193,7 @@ _
             }
         }
 
-        if (move_no_shove(future_pos)) {
+        if (move_no_shove_no_attack(future_pos)) {
             return true;
         }
     }

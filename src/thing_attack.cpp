@@ -318,7 +318,10 @@ bool Thing::attack (fpoint future_pos)
     bool idle   = false;
 
     verify(this);
-    return (move(future_pos, up, down, left, right, attack, idle, true));
+    bool shove_allowed = true;
+    bool attack_allowed = true;
+    return (move(future_pos, up, down, left, right, attack, idle, 
+                 shove_allowed, attack_allowed));
 }
 
 bool Thing::attack (Thingp it)
