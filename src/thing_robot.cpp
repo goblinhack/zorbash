@@ -647,7 +647,7 @@ int Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy,
                             //
                             continue;
                         }
-                        set(dmap_can_see->val, p.x, p.y, DMAP_IS_PASSABLE);
+                        set(dmap_can_see->val, o.x, o.y, DMAP_IS_PASSABLE);
                     }
                 }
             }
