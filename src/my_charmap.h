@@ -42,7 +42,8 @@ public:
         MINION_GENERATOR_EASY =       'g',
         MINION_GENERATOR_HARD =       'G',
         MONST_EASY       =            'm',
-        MONST_HARD       =            'M',
+        MONST_MED        =            'M',
+        MONST_HARD       =            'H',
         NONE             =            '\0',
         POTION           =            '!',
         ROCK             =            'r',
@@ -66,7 +67,7 @@ public:
     bool                      is_bridge                       {false};
     bool                      is_deep_water                   {false};
     bool                      is_dirt                         {false};
-    bool                      is_dry_grass                   {false};
+    bool                      is_dry_grass                    {false};
     bool                      is_enchantstone                 {false};
     bool                      is_skillstone                   {false};
     bool                      is_foilage                      {false};
@@ -84,6 +85,7 @@ public:
     bool                      is_minion_generator_hard        {false};
     bool                      is_minion_generator_easy        {false};
     bool                      is_monst_easy                   {false};
+    bool                      is_monst_med                    {false};
     bool                      is_monst_hard                   {false};
     bool                      is_potion                       {false};
     bool                      is_wand                         {false};

@@ -9,7 +9,7 @@
 
 std::string Level::to_string (void)
 {_
-    int level_no = (int)(world_at.z / 2) + 1;
+    int level_no = num();
     auto level_no_str = std::to_string(level_no);
 
     if (is_level_type_sewer) {
@@ -17,6 +17,11 @@ std::string Level::to_string (void)
     } else {
         return ("level " + level_no_str);
     }
+}
+
+int Level::num (void)
+{_
+    return (int)(world_at.z / 2) + 1;
 }
 
 uint8_t Level::is_lava (const point &p)

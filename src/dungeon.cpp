@@ -750,7 +750,27 @@ bool Dungeon::is_monst_any (const int x, const int y)
         if (v.is_monst_easy) {
             return true;
         }
+        if (v.is_monst_med) {
+            return true;
+        }
         if (v.is_monst_hard) {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool Dungeon::is_monst_med (const int x, const int y)
+{
+    if (is_oob(x, y)) {
+        ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+    }
+
+    for (auto d = 0; d < map_depth; d++) {
+        auto c = getc(x, y, d);
+        auto v = get(Charmap::all_charmaps, c);
+
+        if (v.is_monst_med) {
             return true;
         }
     }

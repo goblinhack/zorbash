@@ -145,7 +145,7 @@ static bool wid_rightbar_create (void)
         //
         point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at + 1);
 
-        auto s = dynprintf("Level %u", (level->world_at.z + 1) / 2);
+        auto s = dynprintf("Level %u", level->num());
         wid_set_pos(w, tl, br);
         wid_set_text(w, s);
         wid_set_shape_none(w);

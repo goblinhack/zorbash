@@ -122,6 +122,7 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                            m.is_minion_generator_easy ||
                            m.is_minion_generator_hard ||
                            m.is_monst_easy            ||
+                           m.is_monst_med             ||
                            m.is_monst_hard            ||
                            m.is_potion                ||
                            m.is_secret_door           ||
@@ -186,6 +187,7 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                     m.is_gold                  ||
                     m.is_key                   ||
                     m.is_monst_easy            ||
+                    m.is_monst_med             ||
                     m.is_monst_hard            ||
                     m.is_enchantstone          ||
                     m.is_skillstone            ||

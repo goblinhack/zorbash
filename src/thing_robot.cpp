@@ -301,7 +301,7 @@ _
                 logged_one = true;
 
                 if (is_player()) {
-                    CON("Robot: @(%s, %d,%d %d/%dh) Found a goal: %s %s via (%s) score %d",
+                    CON("Robot: @(%s, %d,%d %d/%dh) Found a goal: %s %s via %sscore %d",
                         level->to_string().c_str(),
                         (int)mid_at.x, (int)mid_at.y, get_health(), get_health_max(),
                         it->to_string().c_str(), result.goal.msg.c_str(),
@@ -311,7 +311,7 @@ _
                            result.goal.msg.c_str(),
                            it->text_the().c_str());
                 } else {
-                    log("Monst: Found a goal: %s %s via (%s) score %d",
+                    log("Monst: Found a goal: %s %s via %sscore %d",
                         it->to_string().c_str(), result.goal.msg.c_str(),
                         goal_path_str.c_str(),
                         (int)result.goal.score);
@@ -339,7 +339,7 @@ _
                     logged_one = true;
 
                     if (is_player()) {
-                        CON("Robot: @(%s, %d,%d %d/%dh) Found a non active-thing goal: %s %s via (%s) score %d",
+                        CON("Robot: @(%s, %d,%d %d/%dh) Found a non active-thing goal: %s %s via %sscore %d",
                             level->to_string().c_str(),
                             (int)mid_at.x, (int)mid_at.y, get_health(), get_health_max(),
                             it->to_string().c_str(), result.goal.msg.c_str(),
@@ -349,7 +349,7 @@ _
                             result.goal.msg.c_str(),
                             it->text_the().c_str());
                     } else {
-                        log("Monst: Found a non active-thing goal: %s %s via (%s) score %d",
+                        log("Monst: Found a non active-thing goal: %s %s via %sscore %d",
                             it->to_string().c_str(), result.goal.msg.c_str(),
                             goal_path_str.c_str(),
                             (int)result.goal.score);
@@ -359,7 +359,7 @@ _
 
             if (!logged_one) {
                 if (is_player()) {
-                    CON("Robot: @(%s, %d,%d %d/%dh) Found a non thing goal: %s via (%s) score %d",
+                    CON("Robot: @(%s, %d,%d %d/%dh) Found a non thing goal: %s via %sscore %d",
                         level->to_string().c_str(),
                         (int)mid_at.x, (int)mid_at.y, get_health(), get_health_max(),
                         result.goal.msg.c_str(),
@@ -367,7 +367,7 @@ _
                         (int)result.goal.score);
                     BOTCON("Robot: goal %s", result.goal.msg.c_str());
                 } else {
-                    log("Monst: Found a non thing goal: %s via (%s) score %d",
+                    log("Monst: Found a non thing goal: %s via %sscore %d",
                         result.goal.msg.c_str(),
                         goal_path_str.c_str(),
                         (int)result.goal.score);
@@ -890,7 +890,7 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                 //
                 if (lit_recently) {
                     if (is_enemy(it) && (dist < max_dist)) {
-                        if (get_health() < get_health_max() / 2) {
+                        if (is_dangerous(it) && (get_health() < get_health_max() / 2)) {
                             //
                             // Low on health. Best to avoid this enemy.
                             //
@@ -1586,12 +1586,6 @@ void Thing::robot_tick (void)
     // See if anything dangerous is close
     //
     auto threat = most_dangerous_visible_thing_get();
-    if (threat) {
-        CON("Robot: @(%s, %d,%d %d/%dh) Nearest threat is %s",
-            level->to_string().c_str(),
-            (int)mid_at.x, (int)mid_at.y, get_health(), get_health_max(),
-            threat->to_string().c_str());
-    }
 
     switch (monstp->robot_state) {
         case ROBOT_STATE_IDLE:

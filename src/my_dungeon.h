@@ -122,6 +122,7 @@ public:
     bool is_lava_no_check(const int x, const int y);
     bool is_monst_any(const int x, const int y);
     bool is_monst_easy(const int x, const int y);
+    bool is_monst_med(const int x, const int y);
     bool is_monst_hard(const int x, const int y);
     bool is_potion(const int x, const int y);
     bool is_wand(const int x, const int y);

@@ -88,6 +88,7 @@ PyObject *level_add_ (PyObject *obj, PyObject *args, PyObject *keywds)
                            m.is_key                   ||
                            m.is_lava                  ||
                            m.is_monst_easy            ||
+                           m.is_monst_med             ||
                            m.is_monst_hard            ||
                            m.is_enchantstone          ||
                            m.is_skillstone            ||
@@ -155,6 +156,7 @@ PyObject *level_add_ (PyObject *obj, PyObject *args, PyObject *keywds)
                     m.is_gold                  ||
                     m.is_key                   ||
                     m.is_monst_easy            ||
+                    m.is_monst_med             ||
                     m.is_monst_hard            ||
                     m.is_enchantstone          ||
                     m.is_skillstone            ||

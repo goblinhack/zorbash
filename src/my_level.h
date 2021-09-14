@@ -519,6 +519,7 @@ public:
     friend std::istream& operator>>(std::istream &in, Bits<Levelp &> my);
     friend std::ostream& operator<<(std::ostream &out, Bits<Levelp & > const my);
     int inventory_get_slot(Thingp item);
+    int num(void);
     std::string to_string(void);
     Thingp inventory_describe(const uint32_t slot);
     Thingp skillbox_describe(const uint32_t slot);
@@ -535,6 +536,7 @@ public:
     Tpp tp_random_minion_generator_hard(const point &p);
     Tpp tp_random_monst(const point &p);
     Tpp tp_random_monst_easy(const point &p);
+    Tpp tp_random_monst_med(const point &p);
     Tpp tp_random_monst_hard(const point &p);
     uint8_t fade_in_map(const int x, const int y);
     uint8_t fade_in_map(const point &p);

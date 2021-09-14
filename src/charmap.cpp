@@ -185,6 +185,11 @@ void Charmap::init_charmaps (void)
     c->c                    = char_index;
     c->is_monst_easy        = true;
 
+    char_index              = Charmap::MONST_MED;
+    c = &all_charmaps[char_index];
+    c->c                    = char_index;
+    c->is_monst_hard        = true;
+
     char_index              = Charmap::MONST_HARD;
     c = &all_charmaps[char_index];
     c->c                    = char_index;

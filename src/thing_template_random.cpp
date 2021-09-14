@@ -190,6 +190,11 @@ Tpp tp_random_monst_easy (void)
     return tp_random_monst();
 }
 
+Tpp tp_random_monst_med (void)
+{_
+    return tp_random_monst();
+}
+
 Tpp tp_random_monst_hard (void)
 {_
     return tp_random_monst();
@@ -229,6 +234,11 @@ Tpp Level::tp_random_monst_easy (const point &p)
 
     auto player_danger_level = current_player->get_danger_initial_level();
 
+    //
+    // Increase the danger level of the parent as we go deeper
+    //
+    player_danger_level += num() * 10;
+
     auto tries = 0U;
     for (;;) {
         if (tries++ > 1000) {
@@ -245,6 +255,52 @@ Tpp Level::tp_random_monst_easy (const point &p)
         }
 
         con("DGN: Placed easy monst %s", tpp->short_text_capitalized().c_str());
+        return tpp;
+    }
+}
+
+Tpp Level::tp_random_monst_med (const point &p)
+{_
+    Thingp current_player = player;
+    if (!current_player) {
+        //
+        // Try the current level
+        //
+        if (game->level) {
+            current_player = game->level->player;
+        }
+        if (!current_player) {
+            ERR("Cannot place medium monst if no player yet");
+            return nullptr;
+        }
+    }
+
+    auto player_danger_level = current_player->get_danger_initial_level();
+
+    //
+    // Increase the danger level of the parent as we go deeper
+    //
+    player_danger_level += num() * 10;
+
+    auto tries = 0U;
+    for (;;) {
+        if (tries++ > 1000) {
+            ERR("Cannot place medium monst");
+            return nullptr;
+        }
+        auto tpp = ::tp_random_monst();
+        if (tpp->will_avoid_hazard(this, p)) {
+            continue;
+        }
+
+        if (tpp->get_danger_level() < (int)((float)player_danger_level * 1.0)) {
+            continue;
+        }
+        if (tpp->get_danger_level() > (int)((float)player_danger_level * 1.5)) {
+            continue;
+        }
+
+        con("DGN: Placed hard monst %s", tpp->short_text_capitalized().c_str());
         return tpp;
     }
 }
@@ -267,6 +323,11 @@ Tpp Level::tp_random_monst_hard (const point &p)
 
     auto player_danger_level = current_player->get_danger_initial_level();
 
+    //
+    // Increase the danger level of the parent as we go deeper
+    //
+    player_danger_level += num() * 10;
+
     auto tries = 0U;
     for (;;) {
         if (tries++ > 1000) {
@@ -278,7 +339,10 @@ Tpp Level::tp_random_monst_hard (const point &p)
             continue;
         }
 
-        if (tpp->get_danger_level() < player_danger_level) {
+        if (tpp->get_danger_level() < (int)((float)player_danger_level * 1.0)) {
+            continue;
+        }
+        if (tpp->get_danger_level() > (int)((float)player_danger_level * 2.0)) {
             continue;
         }
 

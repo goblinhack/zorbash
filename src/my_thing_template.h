@@ -1253,6 +1253,7 @@ class Tp* tp_random_weapon_class_c(void);
 class Tp* tp_random_key(void);
 class Tp* tp_random_monst(void);
 class Tp* tp_random_monst_easy(void);
+class Tp* tp_random_monst_med(void);
 class Tp* tp_random_monst_hard(void);
 class Tp* tp_random_potion(void);
 class Tp* tp_random_wand(void);

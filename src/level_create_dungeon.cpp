@@ -741,13 +741,21 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules (Dungeonp d
             if (d->is_secret_door(x, y))      { tp = tp_random_secret_door(); }
 
             if (d->is_monst_easy(x, y)) {
-                if (pcg_random_range(0, 100) < 75) {
+                if (pcg_random_range(0, 100) < 50) {
                     tp = tp_random_monst_easy(p);
                 }
             }
 
+            if (d->is_monst_med(x, y)) {
+                if (pcg_random_range(0, 100) < 50) {
+                    tp = tp_random_monst_med(p);
+                }
+            }
+
             if (d->is_monst_hard(x, y)) {
-                tp = tp_random_monst_hard(p);
+                if (pcg_random_range(0, 100) < 50) {
+                    tp = tp_random_monst_hard(p);
+                }
             }
 
             //
@@ -757,7 +765,8 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules (Dungeonp d
             bool always_give_treasure = false;
             if (r) {
                 always_give_treasure = r->contains(MAP_DEPTH_OBJ, Charmap::MONST_HARD) ||
-                                       r->contains(MAP_DEPTH_WATER, Charmap::DOOR);
+                                       r->contains(MAP_DEPTH_OBJ, Charmap::MONST_MED)  ||
+                                       r->contains(MAP_DEPTH_OBJ, Charmap::DOOR);
             }
 
             //
