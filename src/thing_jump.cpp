@@ -66,7 +66,10 @@ bool Thing::try_to_jump (point to, bool be_careful)
         return false;
     }
 
-    if (level->is_sticky(mid_at.x, mid_at.y)) {
+    //
+    // Ensure cleaners do not get stuck in themselves!
+    //
+    if (!is_sticky() && level->is_sticky(mid_at.x, mid_at.y)) {
         if (is_player()) {
             TOPCON("You try to jump but are stuck fast.");
         }

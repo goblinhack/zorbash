@@ -43,6 +43,11 @@ const int Tp::get_damage_bite(void) const { return _damage_bite_dice.roll(); }
 const std::string& Tp::get_damage_bite_dice_str(void) const { return _damage_bite_dice_str; }
 void Tp::set_damage_bite_dice(const std::string &v) { _damage_bite_dice = v; _damage_bite_dice_str = v; }
 
+const Dice& Tp::get_damage_swallow_dice(void) const { return _damage_swallow_dice; }
+const int Tp::get_damage_swallow(void) const { return _damage_swallow_dice.roll(); }
+const std::string& Tp::get_damage_swallow_dice_str(void) const { return _damage_swallow_dice_str; }
+void Tp::set_damage_swallow_dice(const std::string &v) { _damage_swallow_dice = v; _damage_swallow_dice_str = v; }
+
 const Dice& Tp::get_health_initial_dice(void) const { return _health_initial_dice; }
 const int Tp::get_health_initial(void) const { return _health_initial_dice.roll(); }
 const std::string& Tp::get_health_initial_dice_str(void) const { return _health_initial_dice_str; }
@@ -331,7 +336,7 @@ int Tp::is_rrr57(void) const                                         { return _i
 int Tp::is_rrr58(void) const                                         { return _is_rrr58; }
 int Tp::is_rrr59(void) const                                         { return _is_rrr59; }
 int Tp::is_rrr5(void) const                                          { return _is_rrr5; }
-int Tp::is_rrr60(void) const                                         { return _is_rrr60; }
+int Tp::is_engulfer(void) const                                         { return _is_engulfer; }
 int Tp::is_health_booster(void) const                                { return _is_health_booster; }
 int Tp::is_tmp_thing(void) const                                     { return _is_tmp_thing; }
 int Tp::is_rrr6(void) const                                          { return _is_rrr6; }
@@ -362,7 +367,7 @@ int Tp::is_treasure_class_a(void) const                              { return _i
 int Tp::is_treasure_class_b(void) const                              { return _is_treasure_class_b; }
 int Tp::is_treasure_class_c(void) const                              { return _is_treasure_class_c; }
 int Tp::is_treasure_type_chest(void) const                           { return _is_treasure_type_chest; }
-int Tp::is_item_collector(void) const                       { return _is_item_collector; }
+int Tp::is_item_collector(void) const                                { return _is_item_collector; }
 int Tp::is_treasure_type_eater(void) const                           { return _is_treasure_type_eater; }
 int Tp::is_treasure_type(void) const                                 { return _is_treasure_type; }
 int Tp::is_undead(void) const                                        { return _is_undead; }
@@ -653,7 +658,7 @@ void Tp::set_is_rrr57(int v)                                         { _is_rrr57
 void Tp::set_is_rrr58(int v)                                         { _is_rrr58 = v; }
 void Tp::set_is_rrr59(int v)                                         { _is_rrr59 = v; }
 void Tp::set_is_rrr5(int v)                                          { _is_rrr5 = v; }
-void Tp::set_is_rrr60(int v)                                         { _is_rrr60 = v; }
+void Tp::set_is_engulfer(int v)                                         { _is_engulfer = v; }
 void Tp::set_is_health_booster(int v)                                { _is_health_booster = v; }
 void Tp::set_is_tmp_thing(int v)                                     { _is_tmp_thing = v; }
 void Tp::set_is_rrr6(int v)                                          { _is_rrr6 = v; }

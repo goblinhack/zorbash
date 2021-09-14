@@ -50,6 +50,7 @@ public:
     Tilemap tr2_tiles;
 private:
     Dice _damage_bite_dice {};
+    Dice _damage_swallow_dice {};
     Dice _damage_crush_dice {};
     Dice _damage_melee_dice {};
     Dice _gold_value_dice {};
@@ -299,7 +300,7 @@ private:
     int _is_rrr58 {};
     int _is_rrr59 {};
     int _is_rrr6 {};
-    int _is_rrr60 {};
+    int _is_engulfer {};
     int _is_health_booster {};
     int _is_rrr7 {};
     int _is_rrr8 {};
@@ -380,6 +381,7 @@ private:
     int _weapon_damage {};
     int _weapon_use_distance {};
     std::string _damage_bite_dice_str;
+    std::string _damage_swallow_dice_str;
     std::string _damage_crush_dice_str;
     std::string _damage_melee_dice_str;
     std::string _gfx_anim_attack;
@@ -430,6 +432,7 @@ public:
 
     bool will_avoid_hazard(class Level*, point p) const;
     const Dice& get_damage_bite_dice(void) const;
+    const Dice& get_damage_swallow_dice(void) const;
     const Dice& get_damage_crush_dice(void) const;
     const Dice& get_damage_melee_dice(void) const;
     const Dice& get_health_initial_dice(void) const;
@@ -440,6 +443,7 @@ public:
     const Dice& resurrect_dice(void) const;
     const int cash(void) const;
     const int get_damage_bite(void) const;
+    const int get_damage_swallow(void) const;
     const int get_damage_crush(void) const;
     const int get_damage_melee(void) const;
     const int get_health_initial(void) const;
@@ -448,6 +452,7 @@ public:
     const int nutrition(void) const;
     const int resurrect(void) const;
     const std::string& get_damage_bite_dice_str(void) const;
+    const std::string& get_damage_swallow_dice_str(void) const;
     const std::string& get_damage_crush_dice_str(void) const;
     const std::string& get_damage_melee_dice_str(void) const;
     const std::string& get_health_initial_dice_str(void) const;
@@ -760,7 +765,7 @@ public:
     int is_rrr58(void) const;
     int is_rrr59(void) const;
     int is_rrr5(void) const;
-    int is_rrr60(void) const;
+    int is_engulfer(void) const;
     int is_health_booster(void) const;
     int is_rrr6(void) const;
     int is_rrr7(void) const;
@@ -872,6 +877,7 @@ public:
     void set_collision_hit_priority(int);
     void set_collision_radius(float);
     void set_damage_bite_dice(const std::string &);
+    void set_damage_swallow_dice(const std::string &);
     void set_damage_crush_dice(const std::string &);
     void set_damage_doubled_from_acid(int);
     void set_damage_doubled_from_fire(int);
@@ -1087,7 +1093,7 @@ public:
     void set_is_rrr58(int);
     void set_is_rrr59(int);
     void set_is_rrr5(int);
-    void set_is_rrr60(int);
+    void set_is_engulfer(int);
     void set_is_health_booster(int);
     void set_is_rrr6(int);
     void set_is_rrr7(int);

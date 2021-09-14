@@ -548,6 +548,19 @@ _
         total_damage = 1;
     }
 
+    //
+    // This handles when we are stuck inside a cleaner
+    //
+    if (is_sticky()) {
+        if (it->mid_at == mid_at) {
+            bite_damage = get_damage_swallow();
+            if (is_player()) {
+                TOPCON("%%fg=red$You are being consumed by %s¬!%%fg=reset$",
+                        text_the().c_str());
+            }
+        }
+    }
+
     if (it->is_hit_by(this, crit, bite, total_damage)) {
         dbg("The attack succeeded (dmg %d att, def %d) on %s",
             att_mod, def_mod, it->to_string().c_str());

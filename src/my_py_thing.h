@@ -255,7 +255,7 @@ PyObject *thing_is_rrr57(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr58(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr59(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr5(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_rrr60(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_engulfer(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_health_booster(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr6(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr7(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -311,6 +311,7 @@ PyObject *thing_possible_to_attack(PyObject *obj, PyObject *args, PyObject *keyw
 
 PyObject *thing_get_damage_crush(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_get_damage_bite(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_get_damage_swallow(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_get_damage_melee(PyObject *obj, PyObject *args, PyObject *keywds);
 
 #endif

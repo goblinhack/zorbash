@@ -206,7 +206,7 @@ PyObject *level_is_rrr57_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_rrr58_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_rrr59_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_rrr5_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_rrr60_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_engulfer_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_health_booster_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_rrr6_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_rrr7_at(PyObject *obj, PyObject *args, PyObject *keywds);

@@ -266,9 +266,11 @@ _
 
             if (new_move_path.empty()) {
                 if (level->is_sticky(mid_at.x, mid_at.y)) {
-                    CON("Robot: @(%s, %d,%d %d/%dh) Try to break free from the web",
+                    BOTCON("Robot is stuck");
+                    CON("Robot: @(%s, %d,%d %d/%dh) Try to break free from the sticky stuff",
                         level->to_string().c_str(),
                         (int)mid_at.x, (int)mid_at.y,get_health(), get_health_max());
+                    game->tick_begin("Try to break free");
                     return true;
                 }
                 continue;

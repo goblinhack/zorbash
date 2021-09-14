@@ -241,8 +241,9 @@ bool Thing::move (fpoint future_pos,
             level->is_spiderweb(mid_at.x, mid_at.y)) {
             //
             // No getting stuck in webs
+            // Also no cleaners stuck in their own gel
             //
-        } else if (level->is_sticky(mid_at.x, mid_at.y)) {
+        } else if (!is_sticky() && level->is_sticky(mid_at.x, mid_at.y)) {
             //
             // Makes sure ghosts (or the cursor!) do not get stuck in webs.
             //

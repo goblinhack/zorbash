@@ -104,6 +104,16 @@ bool Thing::collision_obstacle (Thingp it)
         }
     } else if (is_monst()) {
         auto monst_count = level->is_monst(p);
+
+        //
+        // Allow cleaners to engulf/swallow attack
+        //
+        if (is_engulfer()) {
+            if (!it->is_engulfer()) {
+                return false;
+            }
+        }
+
         if (level->is_corpse(p)) {
             if (monst_count > 2) {
 		//
@@ -147,6 +157,13 @@ bool Thing::collision_obstacle (Thingp it)
         }
 
         if (it->is_player()) {
+            //
+            // Allow cleaners to engulf/swallow attack
+            //
+            if (is_engulfer()) {
+                return false;
+            }
+
             return true;
         }
     }

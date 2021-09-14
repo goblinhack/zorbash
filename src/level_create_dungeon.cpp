@@ -757,6 +757,15 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules (Dungeonp d
                     tp = tp_random_monst_hard(p);
                 }
             }
+#if 1
+            if (tp && tp->is_monst()) {
+                CON("TMP using debug monster");
+                tp = tp_find("cleaner");
+                if (!tp) {
+                    DIE("can't find debug monster");
+                }
+            }
+#endif
 
             //
             // If a hard monst room then always give treasure
@@ -893,11 +902,25 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules (Dungeonp d
             dbg2("DGN: Creating %s", tp->name().c_str());
             auto t = thing_new(tp->name(), fpoint(x, y));
             if (t) {
-                if (t->is_treasure_type()) {
+                if (t->is_weapon()) {
                     if (r && r->is_secret) {
                         t->enchant_randomly();
                     }
-                    con("DGN: Placed %s", t->short_text_capitalized().c_str());
+                    con("DGN: Placed weapon '%s'", t->short_text_capitalized().c_str());
+                } else if (t->is_treasure_type()) {
+                    if (r && r->is_secret) {
+                        t->enchant_randomly();
+                    }
+                    con("DGN: Placed treasure '%s'", t->short_text_capitalized().c_str());
+                } else if (t->is_monst()) {
+                    //
+                    // Already logged
+                    //
+                    // con("DGN: Placed random monster '%s'", t->short_text_capitalized().c_str());
+                } else {
+                    //
+                    // Doors etc... don't log, not as interesting
+                    //
                 }
             }
         }
@@ -1453,16 +1476,24 @@ void Level::place_random_treasure (Dungeonp d)
             // Be nice and enchant this lost treasure.
             //
             auto t = thing_new(tp->name(), fpoint(x, y));
-            t->enchant_randomly();
+            if (pcg_random_range(0, 100) < 20) {
+                t->enchant_randomly();
+            }
 
             //
             // Double enchant swords in lakes :)
             //
             if (t->is_sword()) {
+                if (d->is_shallow_water(x, y)) {
+                    t->enchant_randomly();
+                }
+
                 if (d->is_deep_water(x, y)) {
                     t->enchant_randomly();
                 }
             }
+
+            con("DGN: Placed random item '%s'", t->short_text_capitalized().c_str());
 
             if (treasure_max-- < 0) {
                 return;

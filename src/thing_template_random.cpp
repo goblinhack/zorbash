@@ -173,20 +173,11 @@ Tpp tp_random_monst (void)
         ERR("No monsts found");
         return (nullptr);
     }
-#if 0
-for (auto i = 0; i < 1000; i++) {
-    CON("%s",tp_get_with_rarity_filter(tp_monst)->name().c_str());
-}
-#endif
     return tp_get_with_rarity_filter(tp_monst);
 }
 
 Tpp tp_random_monst_easy (void)
 {_
-#if 0
-    CON("TMP using debug monster");
-    return (tp_find("skeleton_fire"));
-#endif
     return tp_random_monst();
 }
 
@@ -254,7 +245,7 @@ Tpp Level::tp_random_monst_easy (const point &p)
             continue;
         }
 
-        con("DGN: Placed easy monst %s", tpp->short_text_capitalized().c_str());
+        con("DGN: Placed easy monster '%s'", tpp->short_text_capitalized().c_str());
         return tpp;
     }
 }
@@ -300,7 +291,7 @@ Tpp Level::tp_random_monst_med (const point &p)
             continue;
         }
 
-        con("DGN: Placed hard monst %s", tpp->short_text_capitalized().c_str());
+        con("DGN: Placed medium monster '%s'", tpp->short_text_capitalized().c_str());
         return tpp;
     }
 }
@@ -346,7 +337,7 @@ Tpp Level::tp_random_monst_hard (const point &p)
             continue;
         }
 
-        con("DGN: Placed hard monst %s", tpp->short_text_capitalized().c_str());
+        con("DGN: Placed hard monster '%s'", tpp->short_text_capitalized().c_str());
         return tpp;
     }
 }

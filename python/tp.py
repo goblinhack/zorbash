@@ -409,8 +409,8 @@ class Tp:
     def set_is_rrr59(self, value):
         zx.tp_set_is_rrr59(self, value)
 
-    def set_is_rrr60(self, value):
-        zx.tp_set_is_rrr60(self, value)
+    def set_is_engulfer(self, value):
+        zx.tp_set_is_engulfer(self, value)
 
     def set_is_health_booster(self, value):
         zx.tp_set_is_health_booster(self, value)
@@ -1001,6 +1001,9 @@ class Tp:
 
     def set_damage_bite_dice(self, value):
         zx.tp_set_damage_bite_dice(self, value)
+
+    def set_damage_swallow_dice(self, value):
+        zx.tp_set_damage_swallow_dice(self, value)
 
     def set_gold_value_dice(self, value):
         zx.tp_set_gold_value_dice(self, value)

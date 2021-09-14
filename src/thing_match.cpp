@@ -224,7 +224,7 @@ bool Thing::matches (const std::string& what) const
     if (is_rrr58() &&                                         (what == "is_rrr58"))                                         { return true; }
     if (is_rrr59() &&                                         (what == "is_rrr59"))                                         { return true; }
     if (is_rrr5() &&                                          (what == "is_rrr5"))                                          { return true; }
-    if (is_rrr60() &&                                         (what == "is_rrr60"))                                         { return true; }
+    if (is_engulfer() &&                                         (what == "is_engulfer"))                                         { return true; }
     if (is_health_booster() &&                                (what == "is_health_booster"))                                         { return true; }
     if (is_rrr6() &&                                          (what == "is_rrr6"))                                          { return true; }
     if (is_rrr7() &&                                          (what == "is_rrr7"))                                          { return true; }
@@ -254,7 +254,7 @@ bool Thing::matches (const std::string& what) const
     if (is_treasure_class_b() &&                              (what == "is_treasure_class_b"))                              { return true; }
     if (is_treasure_class_c() &&                              (what == "is_treasure_class_c"))                              { return true; }
     if (is_treasure_type_chest() &&                           (what == "is_treasure_type_chest"))                           { return true; }
-    if (is_item_collector() &&                       (what == "is_item_collector"))                       { return true; }
+    if (is_item_collector() &&                                (what == "is_item_collector"))                       { return true; }
     if (is_treasure_type_eater() &&                           (what == "is_treasure_type_eater"))                           { return true; }
     if (is_treasure_type() &&                                 (what == "is_treasure_type"))                                 { return true; }
     if (is_undead() &&                                        (what == "is_undead"))                                        { return true; }
@@ -485,7 +485,7 @@ std::function<int(Thingp)> Thing::matches_to_func (const std::string& what)
     if (what == "is_rrr58")                                         { return &Thing::is_rrr58; }
     if (what == "is_rrr59")                                         { return &Thing::is_rrr59; }
     if (what == "is_rrr5")                                          { return &Thing::is_rrr5; }
-    if (what == "is_rrr60")                                         { return &Thing::is_rrr60; }
+    if (what == "is_engulfer")                                         { return &Thing::is_engulfer; }
     if (what == "is_health_booster")                                         { return &Thing::is_health_booster; }
     if (what == "is_rrr6")                                          { return &Thing::is_rrr6; }
     if (what == "is_rrr7")                                          { return &Thing::is_rrr7; }

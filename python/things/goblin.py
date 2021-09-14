@@ -82,7 +82,7 @@ def tp_init(name, text_name):
     mytp.set_stat_defence(14)
     mytp.set_stat_strength(8)
     mytp.set_text_a_or_an("a")
-    mytp.set_text_description("A very lesser goblin.")
+    mytp.set_text_description("A very lesser and a bit insecure goblin.")
     mytp.set_text_hits("claws")
     mytp.set_z_depth(zx.MAP_DEPTH_OBJ)
     mytp.set_z_prio(zx.MAP_PRIO_NORMAL)

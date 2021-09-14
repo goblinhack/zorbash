@@ -337,6 +337,7 @@ public:
     bool will_prefer_terrain(const Thingp it);
     bool worth_eating(const Thingp it);
     const Dice& get_damage_bite_dice(void) const;
+    const Dice& get_damage_swallow_dice(void) const;
     const Dice& get_damage_crush_dice(void) const;
     const Dice& get_damage_melee_dice(void) const;
     const Dice& get_gold_value_dice(void) const;
@@ -348,6 +349,7 @@ public:
     const fpoint &get_interpolated_mid_at (void) const;
     const std::array<std::array<ThingId, MAX_BAG_WIDTH>, MAX_BAG_HEIGHT> * get_const_bag(void) const;
     const std::string& get_damage_bite_dice_str(void) const;
+    const std::string& get_damage_swallow_dice_str(void) const;
     const std::string& get_damage_crush_dice_str(void) const;
     const std::string& get_damage_melee_dice_str(void) const;
     const std::string get_danger_level_str(Thingp); // Cannot return reference
@@ -524,6 +526,7 @@ public:
     int get_charge_count(void) const;
     int get_current_damage(void) const;
     int get_damage_bite(void) const;
+    int get_damage_swallow(void) const;
     int get_damage_crush(void) const;
     int get_damage_max(void);
     int get_damage_melee(void) const;
@@ -858,7 +861,7 @@ public:
     int is_rrr58(void) const;
     int is_rrr59(void) const;
     int is_rrr5(void) const;
-    int is_rrr60(void) const;
+    int is_engulfer(void) const;
     int is_rrr6(void) const;
     int is_rrr7(void) const;
     int is_rrr8(void) const;
