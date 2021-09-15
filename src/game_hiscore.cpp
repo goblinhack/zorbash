@@ -135,9 +135,9 @@ void Game::hiscore_select (void)
 
         char tmp[200];
 
-        int name_field_len = 25;
+        int name_field_len = 15;
         int when_field_len = 25;
-        int killed_by_field_len = 30;
+        int killed_by_field_len = 40;
 
         if (first) {
             first = false;

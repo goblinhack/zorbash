@@ -545,6 +545,10 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
             reason = "by " + killer;
         }
 
+        if ((real_hitter->mid_at == mid_at) && real_hitter->is_engulfer()) {
+            reason = "in the bowels of " + killer;
+        }
+
         dead(real_hitter, reason);
 
         //

@@ -107,6 +107,8 @@ bool Thing::matches (const std::string& what) const
     if (is_dry_grass() &&                                     (what == "is_dry_grass"))                                     { return true; }
     if (is_enchantable() &&                                   (what == "is_enchantable"))                                   { return true; }
     if (is_enchantstone() &&                                  (what == "is_enchantstone"))                                  { return true; }
+    if (is_engulf_chance_d1000() &&                           (what == "is_engulf_chance_d1000"))                           { return true; }
+    if (is_engulfer() &&                                      (what == "is_engulfer"))                                      { return true; }
     if (is_ethereal_minion_generator() &&                     (what == "is_ethereal_minion_generator"))                     { return true; }
     if (is_ethereal() &&                                      (what == "is_ethereal"))                                      { return true; }
     if (is_explosion() &&                                     (what == "is_explosion"))                                     { return true; }
@@ -121,6 +123,7 @@ bool Thing::matches (const std::string& what) const
     if (is_food() &&                                          (what == "is_food"))                                          { return true; }
     if (is_gold() &&                                          (what == "is_gold"))                                          { return true; }
     if (is_hazard() &&                                        (what == "is_hazard"))                                        { return true; }
+    if (is_health_booster() &&                                (what == "is_health_booster"))                                { return true; }
     if (is_hittable() &&                                      (what == "is_hittable"))                                      { return true; }
     if (is_humanoid() &&                                      (what == "is_humanoid"))                                      { return true; }
     if (is_hunger_insatiable() &&                             (what == "is_hunger_insatiable"))                             { return true; }
@@ -128,6 +131,7 @@ bool Thing::matches (const std::string& what) const
     if (is_intelligent() &&                                   (what == "is_intelligent"))                                   { return true; }
     if (is_interesting() &&                                   (what == "is_interesting"))                                   { return true; }
     if (is_item_carrier() &&                                  (what == "is_item_carrier"))                                  { return true; }
+    if (is_item_collector() &&                                (what == "is_item_collector"))                                { return true; }
     if (is_item_eater() &&                                    (what == "is_item_eater"))                                    { return true; }
     if (is_item() &&                                          (what == "is_item"))                                          { return true; }
     if (is_jelly_baby_eater() &&                              (what == "is_jelly_baby_eater"))                              { return true; }
@@ -155,8 +159,8 @@ bool Thing::matches (const std::string& what) const
     if (is_minion() &&                                        (what == "is_minion"))                                        { return true; }
     if (is_monst() &&                                         (what == "is_monst"))                                         { return true; }
     if (is_moveable() &&                                      (what == "is_moveable"))                                      { return true; }
-    if (is_movement_blocking_wall_or_locked_door() &&                           (what == "is_movement_blocking_wall_or_locked_door"))                        { return true; }
-    if (is_movement_blocking_but_destructable() &&                        (what == "is_movement_blocking_but_destructable"))                        { return true; }
+    if (is_movement_blocking_but_destructable() &&            (what == "is_movement_blocking_but_destructable"))            { return true; }
+    if (is_movement_blocking_wall_or_locked_door() &&         (what == "is_movement_blocking_wall_or_locked_door"))         { return true; }
     if (is_msg() &&                                           (what == "is_msg"))                                           { return true; }
     if (is_no_tile() &&                                       (what == "is_no_tile"))                                       { return true; }
     if (is_openable() &&                                      (what == "is_openable"))                                      { return true; }
@@ -224,8 +228,6 @@ bool Thing::matches (const std::string& what) const
     if (is_rrr58() &&                                         (what == "is_rrr58"))                                         { return true; }
     if (is_rrr59() &&                                         (what == "is_rrr59"))                                         { return true; }
     if (is_rrr5() &&                                          (what == "is_rrr5"))                                          { return true; }
-    if (is_engulfer() &&                                         (what == "is_engulfer"))                                         { return true; }
-    if (is_health_booster() &&                                (what == "is_health_booster"))                                         { return true; }
     if (is_rrr6() &&                                          (what == "is_rrr6"))                                          { return true; }
     if (is_rrr7() &&                                          (what == "is_rrr7"))                                          { return true; }
     if (is_rrr8() &&                                          (what == "is_rrr8"))                                          { return true; }
@@ -254,7 +256,6 @@ bool Thing::matches (const std::string& what) const
     if (is_treasure_class_b() &&                              (what == "is_treasure_class_b"))                              { return true; }
     if (is_treasure_class_c() &&                              (what == "is_treasure_class_c"))                              { return true; }
     if (is_treasure_type_chest() &&                           (what == "is_treasure_type_chest"))                           { return true; }
-    if (is_item_collector() &&                                (what == "is_item_collector"))                       { return true; }
     if (is_treasure_type_eater() &&                           (what == "is_treasure_type_eater"))                           { return true; }
     if (is_treasure_type() &&                                 (what == "is_treasure_type"))                                 { return true; }
     if (is_undead() &&                                        (what == "is_undead"))                                        { return true; }
@@ -368,6 +369,8 @@ std::function<int(Thingp)> Thing::matches_to_func (const std::string& what)
     if (what == "is_dry_grass")                                     { return &Thing::is_dry_grass; }
     if (what == "is_enchantable")                                   { return &Thing::is_enchantable; }
     if (what == "is_enchantstone")                                  { return &Thing::is_enchantstone; }
+    if (what == "is_engulf_chance_d1000")                           { return &Thing::is_engulf_chance_d1000; }
+    if (what == "is_engulfer")                                      { return &Thing::is_engulfer; }
     if (what == "is_ethereal_minion_generator")                     { return &Thing::is_ethereal_minion_generator; }
     if (what == "is_ethereal")                                      { return &Thing::is_ethereal; }
     if (what == "is_explosion")                                     { return &Thing::is_explosion; }
@@ -382,6 +385,7 @@ std::function<int(Thingp)> Thing::matches_to_func (const std::string& what)
     if (what == "is_food")                                          { return &Thing::is_food; }
     if (what == "is_gold")                                          { return &Thing::is_gold; }
     if (what == "is_hazard")                                        { return &Thing::is_hazard; }
+    if (what == "is_health_booster")                                { return &Thing::is_health_booster; }
     if (what == "is_hittable")                                      { return &Thing::is_hittable; }
     if (what == "is_humanoid")                                      { return &Thing::is_humanoid; }
     if (what == "is_hunger_insatiable")                             { return &Thing::is_hunger_insatiable; }
@@ -389,6 +393,7 @@ std::function<int(Thingp)> Thing::matches_to_func (const std::string& what)
     if (what == "is_intelligent")                                   { return &Thing::is_intelligent; }
     if (what == "is_interesting")                                   { return &Thing::is_interesting; }
     if (what == "is_item_carrier")                                  { return &Thing::is_item_carrier; }
+    if (what == "is_item_collector")                                { return &Thing::is_item_collector; }
     if (what == "is_item_eater")                                    { return &Thing::is_item_eater; }
     if (what == "is_item")                                          { return &Thing::is_item; }
     if (what == "is_jelly_baby_eater")                              { return &Thing::is_jelly_baby_eater; }
@@ -416,8 +421,8 @@ std::function<int(Thingp)> Thing::matches_to_func (const std::string& what)
     if (what == "is_minion")                                        { return &Thing::is_minion; }
     if (what == "is_monst")                                         { return &Thing::is_monst; }
     if (what == "is_moveable")                                      { return &Thing::is_moveable; }
-    if (what == "is_movement_blocking_wall_or_locked_door")                           { return &Thing::is_movement_blocking_wall_or_locked_door; }
-    if (what == "is_movement_blocking_but_destructable")                        { return &Thing::is_movement_blocking_but_destructable; }
+    if (what == "is_movement_blocking_but_destructable")            { return &Thing::is_movement_blocking_but_destructable; }
+    if (what == "is_movement_blocking_wall_or_locked_door")         { return &Thing::is_movement_blocking_wall_or_locked_door; }
     if (what == "is_msg")                                           { return &Thing::is_msg; }
     if (what == "is_no_tile")                                       { return &Thing::is_no_tile; }
     if (what == "is_openable")                                      { return &Thing::is_openable; }
@@ -485,8 +490,6 @@ std::function<int(Thingp)> Thing::matches_to_func (const std::string& what)
     if (what == "is_rrr58")                                         { return &Thing::is_rrr58; }
     if (what == "is_rrr59")                                         { return &Thing::is_rrr59; }
     if (what == "is_rrr5")                                          { return &Thing::is_rrr5; }
-    if (what == "is_engulfer")                                         { return &Thing::is_engulfer; }
-    if (what == "is_health_booster")                                         { return &Thing::is_health_booster; }
     if (what == "is_rrr6")                                          { return &Thing::is_rrr6; }
     if (what == "is_rrr7")                                          { return &Thing::is_rrr7; }
     if (what == "is_rrr8")                                          { return &Thing::is_rrr8; }
@@ -515,7 +518,6 @@ std::function<int(Thingp)> Thing::matches_to_func (const std::string& what)
     if (what == "is_treasure_class_b")                              { return &Thing::is_treasure_class_b; }
     if (what == "is_treasure_class_c")                              { return &Thing::is_treasure_class_c; }
     if (what == "is_treasure_type_chest")                           { return &Thing::is_treasure_type_chest; }
-    if (what == "is_item_collector")                       { return &Thing::is_item_collector; }
     if (what == "is_treasure_type_eater")                           { return &Thing::is_treasure_type_eater; }
     if (what == "is_treasure_type")                                 { return &Thing::is_treasure_type; }
     if (what == "is_undead")                                        { return &Thing::is_undead; }

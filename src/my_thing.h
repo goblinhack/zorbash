@@ -878,6 +878,7 @@ public:
     int is_spiderweb(void) const;
     int is_stamina_check(void) const;
     int is_steal_item_chance_d1000(void) const;
+    int is_engulf_chance_d1000(void) const;
     int is_sticky(void) const;
     int is_sword(void) const;
     int is_target_select_automatically_when_chosen(void) const;

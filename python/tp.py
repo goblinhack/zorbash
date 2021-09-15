@@ -701,6 +701,9 @@ class Tp:
     def set_is_steal_item_chance_d1000(self, value):
         zx.tp_set_is_steal_item_chance_d1000(self, value)
 
+    def set_is_engulf_chance_d1000(self, value):
+        zx.tp_set_is_engulf_chance_d1000(self, value)
+
     def set_is_weapon_wielder(self, value):
         zx.tp_set_is_weapon_wielder(self, value)
 

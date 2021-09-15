@@ -205,8 +205,8 @@ int Thing::is_minion_generator(void) const                              {_ retur
 int Thing::is_minion(void) const                                        {_ return (tp()->is_minion()); }
 int Thing::is_monst(void) const                                         {_ return (tp()->is_monst()); }
 int Thing::is_moveable(void) const                                      {_ return (tp()->is_moveable()); }
-int Thing::is_movement_blocking_wall_or_locked_door(void) const                        {_ return (tp()->is_movement_blocking_wall_or_locked_door()); }
-int Thing::is_movement_blocking_but_destructable(void) const                        {_ return (tp()->is_movement_blocking_but_destructable()); }
+int Thing::is_movement_blocking_wall_or_locked_door(void) const         {_ return (tp()->is_movement_blocking_wall_or_locked_door()); }
+int Thing::is_movement_blocking_but_destructable(void) const            {_ return (tp()->is_movement_blocking_but_destructable()); }
 int Thing::is_msg(void) const                                           {_ return (tp()->is_msg()); }
 int Thing::is_no_tile(void) const                                       {_ return (tp()->is_no_tile()); }
 int Thing::is_openable(void) const                                      {_ return (tp()->is_openable()); }
@@ -274,7 +274,7 @@ int Thing::is_rrr57(void) const                                         {_ retur
 int Thing::is_rrr58(void) const                                         {_ return (tp()->is_rrr58()); }
 int Thing::is_rrr59(void) const                                         {_ return (tp()->is_rrr59()); }
 int Thing::is_rrr5(void) const                                          {_ return (tp()->is_rrr5()); }
-int Thing::is_engulfer(void) const                                         {_ return (tp()->is_engulfer()); }
+int Thing::is_engulfer(void) const                                      {_ return (tp()->is_engulfer()); }
 int Thing::is_health_booster(void) const                                {_ return (tp()->is_health_booster()); }
 int Thing::is_rrr6(void) const                                          {_ return (tp()->is_rrr6()); }
 int Thing::is_rrr7(void) const                                          {_ return (tp()->is_rrr7()); }
@@ -292,6 +292,7 @@ int Thing::is_spawner(void) const                                       {_ retur
 int Thing::is_spiderweb(void) const                                     {_ return (tp()->is_spiderweb()); }
 int Thing::is_stamina_check(void) const                                 {_ return (tp()->is_stamina_check()); }
 int Thing::is_steal_item_chance_d1000(void) const                       {_ return (tp()->is_steal_item_chance_d1000()); }
+int Thing::is_engulf_chance_d1000(void) const                           {_ return (tp()->is_engulf_chance_d1000()); }
 int Thing::is_sticky(void) const                                        {_ return (tp()->is_sticky()); }
 int Thing::is_sword(void) const                                         {_ return (tp()->is_sword()); }
 int Thing::is_target_select_automatically_when_chosen(void) const       {_ return (tp()->is_target_select_automatically_when_chosen()); }

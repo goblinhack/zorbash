@@ -317,6 +317,7 @@ private:
     int _is_spiderweb {};
     int _is_stamina_check {};
     int _is_steal_item_chance_d1000 {};
+    int _is_engulf_chance_d1000 {};
     int _is_sticky {};
     int _is_sword {};
     int _is_target_select_automatically_when_chosen {};
@@ -783,6 +784,7 @@ public:
     int is_spiderweb(void) const;
     int is_stamina_check(void) const;
     int is_steal_item_chance_d1000(void) const;
+    int is_engulf_chance_d1000(void) const;
     int is_sticky(void) const;
     int is_sword(void) const;
     int is_target_select_automatically_when_chosen(void) const;
@@ -1111,6 +1113,7 @@ public:
     void set_is_spiderweb(int);
     void set_is_stamina_check(int);
     void set_is_steal_item_chance_d1000(int);
+    void set_is_engulf_chance_d1000(int);
     void set_is_sticky(int);
     void set_is_sword(int);
     void set_is_target_select_automatically_when_chosen(int);
