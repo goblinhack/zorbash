@@ -363,6 +363,10 @@ void player_tick (bool left, bool right, bool up, bool down, bool attack, bool w
         fpoint future_pos = player->mid_at + fpoint(dx, dy);
         bool shove_allowed = true;
         bool attack_allowed = true;
+        if (wait) {
+            shove_allowed = false;
+            attack_allowed = false;
+        }
         bool moved = player->move(future_pos, up, down, left, right, attack, wait,
                                   shove_allowed, attack_allowed);
 

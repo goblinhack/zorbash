@@ -247,13 +247,19 @@ _
             }
         }
 
-        if (!*target_attacked) {
-            if (attack(it)) {
-                *target_attacked = true;
-                ret = true;
-            } else {
-                if (is_loggable_for_unimportant_stuff()) {
-                    dbg("Collision: Cannot hit %s", it->to_string().c_str());
+        //
+        // Cannot do this for players or we end up attacking when waiting whilst
+        // being consumed by a cleaner
+        //
+        if (!is_player()) {
+            if (!*target_attacked) {
+                if (attack(it)) {
+                    *target_attacked = true;
+                    ret = true;
+                } else {
+                    if (is_loggable_for_unimportant_stuff()) {
+                        dbg("Collision: Cannot hit %s", it->to_string().c_str());
+                    }
                 }
             }
         }
