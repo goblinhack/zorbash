@@ -88,7 +88,6 @@
 
 static inline int32_t bitcount (int32_t w)
 {
-#if 1
    w = (0x55555555LU & w) + (0x55555555LU & (w>> 1));
    w = (0x33333333LU & w) + (0x33333333LU & (w>> 2));
    w = (0x0f0f0f0fLU & w) + (0x0f0f0f0fLU & (w>> 4));
@@ -96,15 +95,5 @@ static inline int32_t bitcount (int32_t w)
    w = (0x0000ffffLU & w) + (0x0000ffffLU & (w>>16));
 
    return (w);
-
-#else
-    w = w - ((w >> 1) & 0x5555555555555555UL);
-    w = (w & 0x3333333333333333UL) + ((w >> 2) & 0x3333333333333333UL);
-    return (int)(unchecked(((w +
-                             (w >> 4)) & 0xF0F0F0F0F0F0F0FUL)
-                           0x101010101010101UL) >> 56);
-
-    return (__builtin_popcount(w));
-#endif
 }
 #endif

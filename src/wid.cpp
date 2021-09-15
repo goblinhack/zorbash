@@ -6402,74 +6402,14 @@ static void wid_move_enqueue (Widp w,
                               int32_t moving_end_y,
                               uint32_t ms)
 {_
-    if (w->moving) {
-        //
-        // Smoother character moves with this.
-        //
-#if 1
-        w->moving_start.x = moving_start_x;
-        w->moving_start.y = moving_start_y;
-        w->moving_end.x = moving_end_x;
-        w->moving_end.y = moving_end_y;
-        w->timestamp_moving_begin = wid_time;
-        w->timestamp_moving_end = wid_time + ms;
-        return;
-#else
-        //
-        // If this is not a widget with a thing, then just zoom it to the
-        // destination. We don't need queues.
-        //
-        Thingp t = wid_get_thing(w);
-        if (!t) {
-            w->moving_end.x = moving_end_x;
-            w->moving_end.y = moving_end_y;
-            w->timestamp_moving_begin = wid_time;
-            w->timestamp_moving_end = wid_time + ms;
-            return;
-        }
+    w->moving_start.x = moving_start_x;
+    w->moving_start.y = moving_start_y;
+    w->moving_end.x = moving_end_x;
+    w->moving_end.y = moving_end_y;
+    w->timestamp_moving_begin = wid_time;
+    w->timestamp_moving_end = wid_time + ms;
 
-        if (w->moving == WID_MAX_MOVE_QUEUE) {
-            Thingp t = wid_get_thing(w);
-
-            ERR("Too many moves queued up for widget %s",
-                to_string(w));
-
-            if (t) {
-                log(t, "Too many moves queued up");
-            }
-
-#ifdef DEBUG_WID_MOVE
-            int i;
-            CON("    [-] to %f,%f in %d",
-                w->moving_end.x, w->moving_end.y,
-                w->timestamp_moving_end - wid_time);
-
-            for (i = 0; i < w->moving - 1; i++) {
-                wid_move_t *c = &w->move[i];
-
-                CON("    [%d] to %f,%f in %d", i,
-                    c->moving_end.x, c->moving_end.y,
-                    c->timestamp_moving_end - wid_time);
-            }
-#endif
-        }
-
-        wid_move_t *c = &w->move[w->moving - 1];
-
-        c->timestamp_moving_end = wid_time + ms;
-        c->moving_end.x = moving_end_x;
-        c->moving_end.y = moving_end_y;
-#endif
-    } else {
-        w->moving_start.x = moving_start_x;
-        w->moving_start.y = moving_start_y;
-        w->moving_end.x = moving_end_x;
-        w->moving_end.y = moving_end_y;
-        w->timestamp_moving_begin = wid_time;
-        w->timestamp_moving_end = wid_time + ms;
-
-        wid_tree3_moving_wids_insert(w);
-    }
+    wid_tree3_moving_wids_insert(w);
 
     w->moving++;
 }

@@ -510,7 +510,16 @@ _
             //
         } else {
             //it->topcon("att_mod %d def_mod %d", att_mod, def_mod);
-            if (!d20roll(att_mod, def_mod, fumble, crit)) {
+            auto hit = d20roll(att_mod, def_mod, fumble, crit);
+
+            //
+            // Cannot miss (if engulfing?)
+            //
+            if (it->mid_at == mid_at) {
+                hit = true;
+            }
+
+            if (!hit) {
                 if (is_player() || (owner && owner->is_player())) {
                     TOPCON("You miss %s.", it->text_the().c_str());
                     msg("!");
@@ -551,12 +560,13 @@ _
     //
     // This handles when we are stuck inside a cleaner
     //
-    if (is_sticky()) {
+    if (is_engulfer()) {
         if (it->mid_at == mid_at) {
             bite_damage = get_damage_swallow();
-            if (is_player()) {
-                TOPCON("%%fg=red$You are being consumed by %s¬!%%fg=reset$",
+            if (it->is_player()) {
+                TOPCON("%%fg=red$You are being consumed by %s!%%fg=reset$",
                         text_the().c_str());
+                msg("Gulp!");
             }
         }
     }

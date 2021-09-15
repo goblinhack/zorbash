@@ -43,9 +43,14 @@ bool Thing::carry (Thingp it)
             return false;
         }
 
-        if (game->tick_current < it->get_tick_last_dropped() + 1) {
-            dbg("No; was dropped here recently");
-            return false;
+        //
+        // Need this check to ensure cleaners can always collect items
+        //
+        if (is_player()) {
+            if (game->tick_current < it->get_tick_last_dropped() + 1) {
+                dbg("No; was dropped here recently");
+                return false;
+            }
         }
     }
 
@@ -187,6 +192,24 @@ std::list<Thingp> Thing::anything_to_carry_at (fpoint at)
 
     dbg("Anything to carry at %d,%d", (int)at.x, (int)at.y);
 _
+    //
+    // Can't pick things up whilst being swallowed!
+    //
+    FOR_ALL_THINGS(level, t, mid_at.x, mid_at.y) {
+        if (t->is_dead) {
+            continue;
+        }
+
+        if (t == this) {
+            continue;
+        }
+
+        if (t->is_engulfer()) {
+            dbg("Nope, I'm being swallowed");
+            goto end;
+        }
+    } FOR_ALL_THINGS_END()
+
     FOR_ALL_THINGS(level, t, at.x, at.y) {
         if (t->is_hidden) {
             continue;
@@ -232,6 +255,7 @@ _
         }
     } FOR_ALL_THINGS_END()
 
+end:
     sort(items.begin(),
          items.end(),
          [](const std::pair<Thingp, int> &a,
@@ -254,6 +278,23 @@ std::list<Thingp> Thing::anything_to_carry (void)
 
 bool Thing::check_anything_to_carry (bool auto_collect_allowed)
 {
+    //
+    // Can't pick things up whilst being swallowed!
+    //
+    FOR_ALL_THINGS(level, t, mid_at.x, mid_at.y) {
+        if (t->is_dead) {
+            continue;
+        }
+
+        if (t == this) {
+            continue;
+        }
+
+        if (t->is_engulfer()) {
+            return false;
+        }
+    } FOR_ALL_THINGS_END()
+
     FOR_ALL_THINGS(level, t, mid_at.x, mid_at.y) {
         if (t->is_dead) {
             continue;

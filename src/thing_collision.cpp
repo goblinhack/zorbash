@@ -136,7 +136,7 @@ things_tile_overlap (Thingp A, Thingp B)
 }
 
 static bool
-things_tile_overlap (Thingp A, fpoint A_at, Thingp B)
+things_tile_overlap (Thingp A, fpoint future_pos, Thingp B)
 {
     auto A_tile = tile_index_to_tile(A->tile_curr);
     if (!A_tile) {
@@ -170,8 +170,8 @@ things_tile_overlap (Thingp A, fpoint A_at, Thingp B)
 #endif
 
             auto m = A->get_interpolated_mid_at();
-            float Adx = A_at.x - m.x;
-            float Ady = A_at.y - m.y;
+            float Adx = future_pos.x - m.x;
+            float Ady = future_pos.y - m.y;
             Adx *= game->config.tile_gl_width;
             Ady *= game->config.tile_gl_height;
 
@@ -390,7 +390,7 @@ static int circle_circle_collision (Thingp A,
                                     Thingp B,
                                     fpoint *intersect)
 {
-    fpoint A_at = A->get_interpolated_mid_at();
+    fpoint future_pos = A->get_interpolated_mid_at();
     fpoint B_at = B->get_interpolated_mid_at();
 
     //fpoint A0, A1, A2, A3;
@@ -403,7 +403,7 @@ static int circle_circle_collision (Thingp A,
     //B->to_coords(&B0, &B1, &B2, &B3);
     //float B_radius = fmin((B1.x - B0.x) / 2.0, (B2.y - B0.y) / 2.0);
 
-    fpoint n = B_at - A_at;
+    fpoint n = B_at - future_pos;
     float touching_dist = A_radius + B_radius;
     float dist_squared = n.x*n.x + n.y*n.y;
 
@@ -420,7 +420,7 @@ static int circle_circle_collision (Thingp A,
 
     n = unit(n);
     n *= (A_radius - diff);
-    n += A_at;
+    n += future_pos;
 
     if (intersect) {
         *intersect = n;
@@ -430,7 +430,7 @@ static int circle_circle_collision (Thingp A,
 }
 
 static int circle_circle_collision (Thingp A,
-                                    fpoint A_at,
+                                    fpoint future_pos,
                                     Thingp B,
                                     fpoint B_at,
                                     fpoint *intersect)
@@ -445,7 +445,7 @@ static int circle_circle_collision (Thingp A,
     //B->to_coords(&B0, &B1, &B2, &B3);
     //float B_radius = fmin((B1.x - B0.x) / 2.0, (B2.y - B0.y) / 2.0);
 
-    fpoint n = B_at - A_at;
+    fpoint n = B_at - future_pos;
     float touching_dist = A_radius + B_radius;
     float dist_squared = n.x*n.x + n.y*n.y;
 
@@ -462,7 +462,7 @@ static int circle_circle_collision (Thingp A,
 
     n = unit(n);
     n *= (A_radius - diff);
-    n += A_at;
+    n += future_pos;
 
     if (intersect) {
         *intersect = n;
@@ -472,7 +472,7 @@ static int circle_circle_collision (Thingp A,
 }
 
 static int circle_circle_collision_attack (Thingp A,
-                                           fpoint A_at,
+                                           fpoint future_pos,
                                            Thingp B,
                                            fpoint B_at,
                                            fpoint *intersect)
@@ -490,7 +490,7 @@ static int circle_circle_collision_attack (Thingp A,
     //B->to_coords(&B0, &B1, &B2, &B3);
     //float B_radius = fmin((B1.x - B0.x) / 2.0, (B2.y - B0.y) / 2.0);
 
-    fpoint n = B_at - A_at;
+    fpoint n = B_at - future_pos;
     float touching_dist = A_radius + B_radius;
     float dist_squared = n.x*n.x + n.y*n.y;
 
@@ -507,7 +507,7 @@ static int circle_circle_collision_attack (Thingp A,
 
     n = unit(n);
     n *= (A_radius - diff);
-    n += A_at;
+    n += future_pos;
 
     if (intersect) {
         *intersect = n;
@@ -1000,7 +1000,7 @@ bool Thing::ai_obstacle (fpoint p)
 //
 // "true" on collision
 //
-bool Thing::collision_check_only (Thingp it, fpoint A_at, int x, int y)
+bool Thing::collision_check_only (Thingp it, fpoint future_pos, int x, int y)
 {
     auto me = this;
     auto it_tp = it->tp();
@@ -1017,12 +1017,21 @@ bool Thing::collision_check_only (Thingp it, fpoint A_at, int x, int y)
 
     IF_DEBUG2 {
         dbg("Collision check only? @%f,%f with %s",
-            A_at.x, A_at.y, it->to_string().c_str());
+            future_pos.x, future_pos.y, it->to_string().c_str());
     }
+
 _
+    //
+    // Allow cleaners to engulf/swallow attack
+    //
+    if (is_engulfer() && can_eat(it) && (it->mid_at == future_pos)) {
+        dbg("No; can engulf");
+        return false;
+    }
+
     if (it->is_monst()) {
         if (is_barrel()) {
-            if (things_overlap(me, A_at, it)) {
+            if (things_overlap(me, future_pos, it)) {
                 if (it->is_soft_body()) {
                     dbg("Overlaps; barrel can splat soft monst");
                     return false;
@@ -1076,7 +1085,7 @@ _
             //
             // Allow movement away. This happens if you jump onto a barrel.
             //
-        } else if (things_overlap_attack(me, A_at, it)) {
+        } else if (things_overlap_attack(me, future_pos, it)) {
             dbg("Yes; overlaps barrel");
             return true;
         }
@@ -1091,7 +1100,7 @@ _
             //
             // Allow movement away. This happens if you jump onto a brazier.
             //
-        } else if (things_overlap_attack(me, A_at, it)) {
+        } else if (things_overlap_attack(me, future_pos, it)) {
             dbg("Yes; overlaps brazier");
             return true;
         }
@@ -1102,18 +1111,18 @@ _
             //
             // Weapon hits monster or generator.
             //
-            if (things_overlap_attack(me, A_at, it)) {
+            if (things_overlap_attack(me, future_pos, it)) {
                 dbg("Yes; overlaps and can attack");
                 return true;
             }
         }
     } else if (it->is_door() && !it->is_open) {
         if (!it->is_dead) {
-            if (things_overlap(me, A_at, it)) {
+            if (things_overlap(me, future_pos, it)) {
                 dbg("Yes; overlaps and can open");
                 if (open_door(it)) {
                     return false;
-                } else if (things_overlap_attack(me, A_at, it)) {
+                } else if (things_overlap_attack(me, future_pos, it)) {
                     dbg("Yes; overlaps and can attack");
                     return true;
                 }
@@ -1125,17 +1134,17 @@ _
         //
         dbg("No; can pass through");
     } else if (it->is_descend_dungeon()) {
-        if (things_overlap(me, A_at, it)) {
+        if (things_overlap(me, future_pos, it)) {
             dbg("No; overlaps but can exit");
             return false;
         }
     } else if (it->is_ascend_sewer()) {
-        if (things_overlap(me, A_at, it)) {
+        if (things_overlap(me, future_pos, it)) {
             dbg("No; overlaps but can exit via sewer entrance");
             return false;
         }
     } else if (it->is_descend_sewer()) {
-        if (things_overlap(me, A_at, it)) {
+        if (things_overlap(me, future_pos, it)) {
             dbg("No; overlaps but can exit via sewer exit");
             return false;
         }
@@ -1143,7 +1152,7 @@ _
         dbg("No; allow manual collect instead");
         return false;
     } else if (possible_to_attack(it)) {
-        if (things_overlap(me, A_at, it)) {
+        if (things_overlap(me, future_pos, it)) {
             dbg("Yes; overlaps and can attack");
             return true;
         } else {
@@ -1168,7 +1177,7 @@ _
             dbg("Yes; can eat but no overlap");
         }
     } else {
-        if (things_overlap(me, A_at, it)) {
+        if (things_overlap(me, future_pos, it)) {
             //
             // "true" on collision
             //
