@@ -419,6 +419,7 @@ int Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy,
     auto seen_map = get_seen_map();
     point at = make_point(mid_at);
     bool jump_allowed = false;
+    int something_changed = 0;
 
     switch (search_type) {
         case SEARCH_TYPE_LOCAL_JUMP_ALLOWED:
@@ -649,6 +650,22 @@ int Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy,
                             //
                             continue;
                         }
+
+                        if (!level->is_lit_currently(p.x, p.y)) {
+                            FOR_ALL_THINGS_THAT_INTERACT(level, it, p.x, p.y) {
+                                if (it->is_changing_level ||
+                                    it->is_hidden ||
+                                    it->is_falling ||
+                                    it->is_jumping) {
+                                    continue;
+                                }
+
+                                if (worth_collecting(it) || worth_eating(it) || is_dangerous(it)) {
+                                    something_changed++;
+                                }
+                            } FOR_ALL_THINGS_END();
+                        }
+
                         set(dmap_can_see->val, o.x, o.y, DMAP_IS_PASSABLE);
                     }
                 }
@@ -689,8 +706,6 @@ int Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy,
         printf("\n");
     }
 #endif
-
-    int something_changed = 0;
 
     for (int y = miny; y < maxy; y++) {
         for (int x = minx; x < maxx; x++) {
@@ -849,10 +864,11 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                         }
                     } else {
                         if (is_player()) {
-                            CON("Robot: @(%s, %d,%d %d/%dh) Is not collecting %s",
+                            CON("Robot: @(%s, %d,%d %d/%dh) Is not collecting %s (score %d)",
                                 level->to_string().c_str(),
                                 (int)mid_at.x, (int)mid_at.y, get_health(), get_health_max(),
-                                it->to_string().c_str());
+                                it->to_string().c_str(),
+                                score);
                         } else {
                             con("Monst: Is not collecting %s", it->to_string().c_str());
                         }
@@ -919,7 +935,12 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                         //
                         SCORE_ADD((int)(max_dist - dist) * 1000, "attack-nearby-generator");
                         got_one_this_tile = true;
-                    } else if (!avoid && it->is_monst()) {
+                    } else if (!avoid && it->is_monst() && !will_avoid_hazard(it)) {
+                        //
+                        // Hazard check above is for cleaners standing on their
+                        // pool of acid. Do we want to attack that without good
+                        // reason?
+                        //
                         if (dist < 2) {
                             //
                             // Very close, high priority attack
@@ -1364,11 +1385,11 @@ next:
         // Choose doors etc... as a last resort when nothing else
         //
         if (level->is_door(p.x, p.y)) {
-            total_score -= 100;
+            total_score -= 1000;
         }
 
         if (level->is_descend_sewer(p.x, p.y)) {
-            total_score -= 1000;
+            total_score -= 5000;
             //
             // Prefer not to walk over if there is a way around
             //
@@ -1376,12 +1397,12 @@ next:
         }
 
         if (level->is_ascend_sewer(p.x, p.y)) {
-            total_score -= 5000;
+            total_score -= 10000;
             terrain_cost += 10;
         }
 
         if (level->is_descend_dungeon(p.x, p.y)) {
-            total_score -= 10000;
+            total_score -= 50000;
             terrain_cost += 10;
         }
 

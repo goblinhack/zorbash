@@ -48,12 +48,15 @@ _
 
     *would_need_to_drop = nullptr;
 
-    int value = get_item_value(it);
-    if (value < 0) {
+    //
+    // This can be nutrition or gold value etc... just something that is worth
+    // something to us
+    //
+    int value_to_me = get_item_value(it);
+    if (value_to_me < 0) {
         dbg("Worth collecting? no, worthless: %s", it->to_string().c_str());
         return -1;
     }
-
 
     //
     // If this is a weapon, and we can carry it, do so. If we are out of space,
@@ -66,19 +69,19 @@ _
         if (worst_weapon) {
             if (it->is_bag_item()) {
                 if (!bag_add_test(it)) {
-                    if (value > worst_weapon_value) {
+                    if (value_to_me > worst_weapon_value) {
                         *would_need_to_drop = worst_weapon;
                         dbg("Worth collecting? no space for %s, would need to drop %s",
                             it->to_string().c_str(),
                             worst_weapon->to_string().c_str());
-                        return value;
+                        return value_to_me;
                     }
                     dbg("Worth collecting? no space for %s, worst weapon is %s",
                         it->to_string().c_str(),
                         worst_weapon->to_string().c_str());
                     return -1;
                 } else {
-                    if (value > worst_weapon_value) {
+                    if (value_to_me > worst_weapon_value) {
                         if (get_carried_weapon_count() > 1) {
                             *would_need_to_drop = worst_weapon;
                             dbg("Worth collecting? no space for %s, too many weapons, would need to drop %s",
@@ -86,7 +89,7 @@ _
                                 worst_weapon->to_string().c_str());
                         }
                     }
-                    return value;
+                    return value_to_me;
                 }
             }
         } else {
@@ -96,7 +99,7 @@ _
                     return -1;
                 }
             }
-            return value;
+            return value_to_me;
         }
     }
 
@@ -106,19 +109,19 @@ _
         if (worst_wand) {
             if (it->is_bag_item()) {
                 if (!bag_add_test(it)) {
-                    if (value > worst_wand_value) {
+                    if (value_to_me > worst_wand_value) {
                         *would_need_to_drop = worst_wand;
                         dbg("Worth collecting? no space for %s, would need to drop %s",
                             it->to_string().c_str(),
                             worst_wand->to_string().c_str());
-                        return value;
+                        return value_to_me;
                     }
                     dbg("Worth collecting? no space for %s, worst wand is %s",
                         it->to_string().c_str(),
                         worst_wand->to_string().c_str());
                     return -1;
                 } else {
-                    if (value > worst_wand_value) {
+                    if (value_to_me > worst_wand_value) {
                         if (get_carried_wand_count() > 3) {
                             *would_need_to_drop = worst_wand;
                             dbg("Worth collecting? no space for %s, too many wands, would need to drop %s",
@@ -126,7 +129,7 @@ _
                                 worst_wand->to_string().c_str());
                         }
                     }
-                    return value;
+                    return value_to_me;
                 }
             }
         } else {
@@ -136,7 +139,7 @@ _
                     return -1;
                 }
             }
-            return value;
+            return value_to_me;
         }
     }
 
@@ -146,19 +149,19 @@ _
         if (worst_food) {
             if (it->is_bag_item()) {
                 if (!bag_add_test(it)) {
-                    if (value > worst_food_value) {
+                    if (value_to_me > worst_food_value) {
                         *would_need_to_drop = worst_food;
                         dbg("Worth collecting? no space for %s, would need to drop %s",
                             it->to_string().c_str(),
                             worst_food->to_string().c_str());
-                        return value;
+                        return value_to_me;
                     }
                     dbg("Worth collecting? no space for %s, worst food is %s",
                         it->to_string().c_str(),
                         worst_food->to_string().c_str());
                     return -1;
                 } else {
-                    if (value > worst_food_value) {
+                    if (value_to_me > worst_food_value) {
                         if (get_carried_food_count() > 4) {
                             *would_need_to_drop = worst_food;
                             dbg("Worth collecting? no space for %s, too many foods, would need to drop %s",
@@ -166,7 +169,7 @@ _
                                 worst_food->to_string().c_str());
                         }
                     }
-                    return value;
+                    return value_to_me;
                 }
             }
         } else {
@@ -176,7 +179,7 @@ _
                     return -1;
                 }
             }
-            return value;
+            return value_to_me;
         }
     }
 
@@ -187,9 +190,9 @@ _
         }
     }
 
-    dbg("Worth collecting? yes has value %d: %s", value, it->to_string().c_str());
+    dbg("Worth collecting? yes has value %d: %s", value_to_me, it->to_string().c_str());
 
-    return value;
+    return value_to_me;
 }
 
 int Thing::worth_collecting (Thingp it)

@@ -23,8 +23,8 @@ def tp_init(name, tiles=[]):
     mytp.set_is_loggable_for_unimportant_stuff(False)
     mytp.set_text_a_or_an("the")
     mytp.set_text_description("Thick and sicky looking foilage and roots.")
-    mytp.set_z_depth(zx.MAP_DEPTH_WEAPON)
-    mytp.set_z_prio(zx.MAP_PRIO_BEHIND)
+    mytp.set_z_depth(zx.MAP_DEPTH_OBJ)
+    mytp.set_z_prio(zx.MAP_PRIO_INFRONT)
 
     for t in tiles:
         mytp.set_tile(t)

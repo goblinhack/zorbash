@@ -70,12 +70,43 @@ bool Level::tick (void)
     } FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL_END(this)
 
     //
+    // For all things that move, like monsters, or those that do not, like
+    // wands, and even those that do not move but can be destroyed, like
+    // walls. Omits things like floors, corridors, the grid; those that
+    // generally do nothing or are hidden.
+    //
+    game->things_are_moving = false;
+
+    static const int wait_count_max = LEVEL_TICK_DURATION_TOO_LONG;
+    static int wait_count;
+    wait_count++;
+
+    //
     // Animate anything that needs it
     //
     FOR_ALL_THING_GROUPS(group) {
         FOR_ALL_ANIMATED_THINGS_LEVEL(this, group, t) {
             t->animate();
             t->update_interpolated_position();
+
+            //
+            // We need to check all animated things are finished moving as they
+            // may not intersect with all interactive things. i.e a carried
+            // sword animation.
+            //
+            if (t->is_moving) {
+                if (game->robot_mode) {
+                    if ((wait_count > wait_count_max) && !game->things_are_moving) {
+                        t->con("Waiting on animated moving thing longer than expected");
+                    }
+                    game->things_are_moving = true;
+                } else if (!t->is_offscreen) {
+                    if ((wait_count > wait_count_max) && !game->things_are_moving) {
+                        t->con("Waiting on animated moving thing longer than expected");
+                    }
+                    game->things_are_moving = true;
+                }
+            }
         } FOR_ALL_ANIMATED_THINGS_LEVEL_END(this)
 
         FOR_ALL_ANIMATED_THINGS_LEVEL(this, group, t) {
@@ -102,18 +133,6 @@ bool Level::tick (void)
     // Update the cursor position.
     //
     cursor_move();
-
-    //
-    // For all things that move, like monsters, or those that do not, like
-    // wands, and even those that do not move but can be destroyed, like
-    // walls. Omits things like floors, corridors, the grid; those that
-    // generally do nothing or are hidden.
-    //
-    game->things_are_moving = false;
-
-    static const int wait_count_max = LEVEL_TICK_DURATION_TOO_LONG;
-    static int wait_count;
-    wait_count++;
 
     FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL(this, t) {
         //

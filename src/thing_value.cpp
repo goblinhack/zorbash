@@ -36,6 +36,10 @@ int Thing::get_item_value (Thingp it)
         value += 100;
     }
 
+    //
+    // Things are more "valuable" if we need them now for a health boost
+    //
+    value += it->get_nutrition();
     value += health_boost_would_occur(it->get_nutrition());
 
     value += it->get_damage_max();

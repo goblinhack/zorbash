@@ -67,7 +67,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_nutrition_dice("1d4")
     mytp.set_on_death_do("cleaner.on_death()")
     mytp.set_on_death_drop_all_items(True)
-    mytp.set_on_idle_dice("1d0:cleaner.on_idle()")
+    mytp.set_on_idle_dice("1d5:cleaner.on_idle()")
     mytp.set_rarity(zx.RARITY_COMMON)
     mytp.set_stamina(100)
     mytp.set_stat_attack(10) # 10, means no bonus
@@ -78,7 +78,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_text_description("A dungeon auto cleaner jelly thingy.")
     mytp.set_text_hits("burns")
     mytp.set_z_depth(zx.MAP_DEPTH_OBJ)
-    mytp.set_z_prio(zx.MAP_PRIO_NORMAL)
+    mytp.set_z_prio(zx.MAP_PRIO_INFRONT) # so it appears over things when consuming
 
     delay = 200
     mytp.set_tile(tile=name + ".1.100", is_hp_100_percent=True, delay_ms=delay)

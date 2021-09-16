@@ -169,6 +169,7 @@ void Level::cursor_path_draw_line (point start, point end)
         for (auto y = miny; y < maxy; y++) {
             for (auto x = minx; x < maxx; x++) {
                 if (is_extreme_hazard(x, y) ||
+                    player->ai_obstacle_for_me(make_point(x, y)) ||
                     player->collision_obstacle(point(x, y))) {
                     set(d.val, x, y, DMAP_IS_WALL);
                 } else {
