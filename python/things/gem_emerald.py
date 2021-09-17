@@ -16,6 +16,7 @@ def tp_init(name, text_name):
     mytp.set_is_described_when_hovering_over(True)
     mytp.set_is_interesting(True)
     mytp.set_is_item(True)
+    mytp.set_is_stone(True)
     mytp.set_is_treasure_class_b(True)
     mytp.set_is_treasure_type(True)
     mytp.set_long_text_description("The stone of loyalty. Can't be that loyal as someone left it lying here. Best to pick it up for safe keeping.")

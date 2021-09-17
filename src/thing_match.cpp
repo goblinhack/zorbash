@@ -221,12 +221,12 @@ bool Thing::matches (const std::string& what) const
     if (is_rrr51() &&                                         (what == "is_rrr51"))                                         { return true; }
     if (is_rrr52() &&                                         (what == "is_rrr52"))                                         { return true; }
     if (is_rrr53() &&                                         (what == "is_rrr53"))                                         { return true; }
-    if (is_rrr54() &&                                         (what == "is_rrr54"))                                         { return true; }
-    if (is_rrr55() &&                                         (what == "is_rrr55"))                                         { return true; }
-    if (is_rrr56() &&                                         (what == "is_rrr56"))                                         { return true; }
-    if (is_rrr57() &&                                         (what == "is_rrr57"))                                         { return true; }
-    if (is_rrr58() &&                                         (what == "is_rrr58"))                                         { return true; }
-    if (is_rrr59() &&                                         (what == "is_rrr59"))                                         { return true; }
+    if (is_organic() &&                                         (what == "is_organic"))                                         { return true; }
+    if (is_glass() &&                                         (what == "is_glass"))                                         { return true; }
+    if (is_stone() &&                                         (what == "is_stone"))                                         { return true; }
+    if (is_item_organic() &&                                         (what == "is_item_organic"))                                         { return true; }
+    if (is_metal() &&                                         (what == "is_metal"))                                         { return true; }
+    if (is_wooden() &&                                         (what == "is_wooden"))                                         { return true; }
     if (is_rrr5() &&                                          (what == "is_rrr5"))                                          { return true; }
     if (is_rrr6() &&                                          (what == "is_rrr6"))                                          { return true; }
     if (is_rrr7() &&                                          (what == "is_rrr7"))                                          { return true; }
@@ -483,12 +483,12 @@ std::function<int(Thingp)> Thing::matches_to_func (const std::string& what)
     if (what == "is_rrr51")                                         { return &Thing::is_rrr51; }
     if (what == "is_rrr52")                                         { return &Thing::is_rrr52; }
     if (what == "is_rrr53")                                         { return &Thing::is_rrr53; }
-    if (what == "is_rrr54")                                         { return &Thing::is_rrr54; }
-    if (what == "is_rrr55")                                         { return &Thing::is_rrr55; }
-    if (what == "is_rrr56")                                         { return &Thing::is_rrr56; }
-    if (what == "is_rrr57")                                         { return &Thing::is_rrr57; }
-    if (what == "is_rrr58")                                         { return &Thing::is_rrr58; }
-    if (what == "is_rrr59")                                         { return &Thing::is_rrr59; }
+    if (what == "is_organic")                                         { return &Thing::is_organic; }
+    if (what == "is_glass")                                         { return &Thing::is_glass; }
+    if (what == "is_stone")                                         { return &Thing::is_stone; }
+    if (what == "is_item_organic")                                         { return &Thing::is_item_organic; }
+    if (what == "is_metal")                                         { return &Thing::is_metal; }
+    if (what == "is_wooden")                                         { return &Thing::is_wooden; }
     if (what == "is_rrr5")                                          { return &Thing::is_rrr5; }
     if (what == "is_rrr6")                                          { return &Thing::is_rrr6; }
     if (what == "is_rrr7")                                          { return &Thing::is_rrr7; }

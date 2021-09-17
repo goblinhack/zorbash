@@ -17,6 +17,7 @@ def key_init(name, text_name):
     mytp.set_is_collect_as_keys(True)
     mytp.set_is_interesting(True)
     mytp.set_is_item(True)
+    mytp.set_is_metal(True)
     mytp.set_is_key(True)
     mytp.set_is_moveable(True)
     mytp.set_is_treasure_class_a(False)

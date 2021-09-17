@@ -25,6 +25,7 @@ def tp_init(name, text_name, tiles=[]):
     mytp.set_is_droppable(True)
     mytp.set_is_hittable(True)
     mytp.set_is_item(True)
+    mytp.set_is_wooden(True)
     mytp.set_is_loggable_for_important_stuff(True)
     mytp.set_is_loggable_for_unimportant_stuff(True)
     mytp.set_is_torch(True)

@@ -22,6 +22,7 @@ def tp_init(name, text_name):
     mytp.set_is_interesting(True)
     mytp.set_is_item_carrier(True)
     mytp.set_is_item(True)
+    mytp.set_is_organic(True)
     mytp.set_is_moveable(True)
     mytp.set_is_treasure_class_a(True)
     mytp.set_item_height(4)

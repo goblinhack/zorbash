@@ -16,6 +16,7 @@ def tp_init(name, text_name):
     mytp.set_is_described_when_hovering_over(True)
     mytp.set_is_interesting(True)
     mytp.set_is_item(True)
+    mytp.set_is_stone(True)
     mytp.set_is_treasure_class_c(True)
     mytp.set_is_treasure_type(True)
     mytp.set_long_text_description("Blood red ruby. A bit too red if you ask me. Actually it looks wet and red. Anyway, best pick it up and clean it off.")

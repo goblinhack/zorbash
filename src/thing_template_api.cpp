@@ -332,12 +332,12 @@ int Tp::is_rrr50(void) const                                         { return _i
 int Tp::is_rrr51(void) const                                         { return _is_rrr51; }
 int Tp::is_rrr52(void) const                                         { return _is_rrr52; }
 int Tp::is_rrr53(void) const                                         { return _is_rrr53; }
-int Tp::is_rrr54(void) const                                         { return _is_rrr54; }
-int Tp::is_rrr55(void) const                                         { return _is_rrr55; }
-int Tp::is_rrr56(void) const                                         { return _is_rrr56; }
-int Tp::is_rrr57(void) const                                         { return _is_rrr57; }
-int Tp::is_rrr58(void) const                                         { return _is_rrr58; }
-int Tp::is_rrr59(void) const                                         { return _is_rrr59; }
+int Tp::is_organic(void) const                                         { return _is_organic; }
+int Tp::is_glass(void) const                                         { return _is_glass; }
+int Tp::is_stone(void) const                                         { return _is_stone; }
+int Tp::is_item_organic(void) const                                         { return _is_item_organic; }
+int Tp::is_metal(void) const                                         { return _is_metal; }
+int Tp::is_wooden(void) const                                         { return _is_wooden; }
 int Tp::is_rrr5(void) const                                          { return _is_rrr5; }
 int Tp::is_rrr6(void) const                                          { return _is_rrr6; }
 int Tp::is_rrr7(void) const                                          { return _is_rrr7; }
@@ -651,12 +651,12 @@ void Tp::set_is_rrr50(int v)                                         { _is_rrr50
 void Tp::set_is_rrr51(int v)                                         { _is_rrr51 = v; }
 void Tp::set_is_rrr52(int v)                                         { _is_rrr52 = v; }
 void Tp::set_is_rrr53(int v)                                         { _is_rrr53 = v; }
-void Tp::set_is_rrr54(int v)                                         { _is_rrr54 = v; }
-void Tp::set_is_rrr55(int v)                                         { _is_rrr55 = v; }
-void Tp::set_is_rrr56(int v)                                         { _is_rrr56 = v; }
-void Tp::set_is_rrr57(int v)                                         { _is_rrr57 = v; }
-void Tp::set_is_rrr58(int v)                                         { _is_rrr58 = v; }
-void Tp::set_is_rrr59(int v)                                         { _is_rrr59 = v; }
+void Tp::set_is_organic(int v)                                         { _is_organic = v; }
+void Tp::set_is_glass(int v)                                         { _is_glass = v; }
+void Tp::set_is_stone(int v)                                         { _is_stone = v; }
+void Tp::set_is_item_organic(int v)                                         { _is_item_organic = v; }
+void Tp::set_is_metal(int v)                                         { _is_metal = v; }
+void Tp::set_is_wooden(int v)                                         { _is_wooden = v; }
 void Tp::set_is_rrr5(int v)                                          { _is_rrr5 = v; }
 void Tp::set_is_rrr6(int v)                                          { _is_rrr6 = v; }
 void Tp::set_is_rrr7(int v)                                          { _is_rrr7 = v; }

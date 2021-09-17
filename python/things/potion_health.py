@@ -80,6 +80,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_enchantable(True)
     mytp.set_is_hittable(True)
     mytp.set_is_item(True)
+    mytp.set_is_glass(True)
     mytp.set_is_loggable_for_important_stuff(True)
     mytp.set_is_loggable_for_unimportant_stuff(True)
     mytp.set_is_moveable(True)

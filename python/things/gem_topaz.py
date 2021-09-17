@@ -16,6 +16,7 @@ def tp_init(name, text_name):
     mytp.set_is_described_when_hovering_over(True)
     mytp.set_is_interesting(True)
     mytp.set_is_item(True)
+    mytp.set_is_stone(True)
     mytp.set_is_treasure_class_b(True)
     mytp.set_is_treasure_type(True)
     mytp.set_long_text_description("Topaz is prized for its ability to help you make friends. Just what you need. There are some entrails left on this piece. Just wipe them off.")

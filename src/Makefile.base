@@ -182,6 +182,7 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/thing_carry.o                 \
     $(OBJDIR)/thing_carried.o               \
     $(OBJDIR)/thing_chasm.o                 \
+    $(OBJDIR)/thing_corrodes.o              \
     $(OBJDIR)/thing_collision.o             \
     $(OBJDIR)/thing_cursor.o                \
     $(OBJDIR)/thing_cursor_path.o           \

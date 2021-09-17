@@ -854,12 +854,12 @@ public:
     int is_rrr51(void) const;
     int is_rrr52(void) const;
     int is_rrr53(void) const;
-    int is_rrr54(void) const;
-    int is_rrr55(void) const;
-    int is_rrr56(void) const;
-    int is_rrr57(void) const;
-    int is_rrr58(void) const;
-    int is_rrr59(void) const;
+    int is_organic(void) const;
+    int is_glass(void) const;
+    int is_stone(void) const;
+    int is_item_organic(void) const;
+    int is_metal(void) const;
+    int is_wooden(void) const;
     int is_rrr5(void) const;
     int is_engulfer(void) const;
     int is_rrr6(void) const;
@@ -1166,6 +1166,7 @@ public:
     void bounce(float bounce_height, float bounce_fade, timestamp_t ms, int bounce_count);
     void brazier_tick();
     void chasm_tick();
+    void corrode_tick();
     void clear_age_map(void);
     void clear_dmap_can_see(void);
     void clear_dmap_unused(void);

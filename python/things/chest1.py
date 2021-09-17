@@ -23,6 +23,8 @@ def tp_init(name, text_name):
     mytp.set_is_interesting(True)
     mytp.set_is_item_carrier(True)
     mytp.set_is_item(True)
+    mytp.set_is_wooden(True)
+    mytp.set_is_metal(True)
     mytp.set_is_moveable(True)
     mytp.set_is_openable(True)
     mytp.set_is_treasure_type_chest(True)

@@ -16,9 +16,6 @@
 void Thing::chasm_tick (void)
 {_
     if (is_floating() || is_ethereal()) {
-        if (is_player()) {
-            dbg("Chasm tick: No is floating");
-        }
         return;
     }
 

@@ -391,23 +391,23 @@ class Tp:
     def set_is_rrr53(self, value):
         zx.tp_set_is_rrr53(self, value)
 
-    def set_is_rrr54(self, value):
-        zx.tp_set_is_rrr54(self, value)
+    def set_is_organic(self, value):
+        zx.tp_set_is_organic(self, value)
 
-    def set_is_rrr55(self, value):
-        zx.tp_set_is_rrr55(self, value)
+    def set_is_glass(self, value):
+        zx.tp_set_is_glass(self, value)
 
-    def set_is_rrr56(self, value):
-        zx.tp_set_is_rrr56(self, value)
+    def set_is_stone(self, value):
+        zx.tp_set_is_stone(self, value)
 
-    def set_is_rrr57(self, value):
-        zx.tp_set_is_rrr57(self, value)
+    def set_is_item_organic(self, value):
+        zx.tp_set_is_item_organic(self, value)
 
-    def set_is_rrr58(self, value):
-        zx.tp_set_is_rrr58(self, value)
+    def set_is_metal(self, value):
+        zx.tp_set_is_metal(self, value)
 
-    def set_is_rrr59(self, value):
-        zx.tp_set_is_rrr59(self, value)
+    def set_is_wooden(self, value):
+        zx.tp_set_is_wooden(self, value)
 
     def set_is_engulfer(self, value):
         zx.tp_set_is_engulfer(self, value)

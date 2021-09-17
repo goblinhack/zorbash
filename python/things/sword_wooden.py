@@ -110,6 +110,7 @@ def init_weapon(name, text_name, short_text_name):
     mytp.set_is_enchantable(True)
     mytp.set_is_interesting(True)
     mytp.set_is_item(True)
+    mytp.set_is_wooden(True)
     mytp.set_is_loggable_for_important_stuff(True)
     mytp.set_is_loggable_for_unimportant_stuff(True)
     mytp.set_is_moveable(True)
