@@ -529,6 +529,7 @@ void Thing::update_interpolated_position (void)
 void Thing::update_pos (fpoint to, bool immediately)
 {_
     if (!is_hidden) {
+        dbg("Update pos to %f,%f", to.x, to.y);
     }
 
     point new_at((int)to.x, (int)to.y);
