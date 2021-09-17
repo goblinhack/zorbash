@@ -757,7 +757,8 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules (Dungeonp d
                     tp = tp_random_monst_hard(p);
                 }
             }
-#if 1
+
+#if 0
             if (tp && tp->is_monst()) {
                 CON("TMP using debug monster");
                 tp = tp_find("cleaner");
@@ -766,7 +767,6 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules (Dungeonp d
                 }
             }
 #endif
-
             //
             // If a hard monst room then always give treasure
             //
