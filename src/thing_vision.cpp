@@ -11,10 +11,10 @@
 bool Level::can_see_obstacle (int x, int y)
 {
     if (is_wall(x, y) || is_door(x, y) || is_rock(x, y)) {
-        return (true);
+        return true;
     }
 
-    return (false);
+    return false;
 }
 
 bool Level::can_see_ (int x0_in, int y0_in, int x1_in, int y1_in, int flag)
@@ -56,19 +56,19 @@ bool Level::can_see_ (int x0_in, int y0_in, int x1_in, int y1_in, int flag)
 
     if (flag == 0) {
         if (can_see_obstacle((int)x, (int)y)) {
-            return (true);
+            return true;
         }
     } else if (flag == 1) {
         if (can_see_obstacle((int)y, (int)x)) {
-            return (true);
+            return true;
         }
     } else if (flag == 2) {
         if (can_see_obstacle((int)y, (int)-x)) {
-            return (true);
+            return true;
         }
     } else if (flag == 3) {
         if (can_see_obstacle((int)x, (int)-y)) {
-            return (true);
+            return true;
         }
     }
 
@@ -84,24 +84,24 @@ bool Level::can_see_ (int x0_in, int y0_in, int x1_in, int y1_in, int flag)
 
         if (flag == 0) {
             if (can_see_obstacle((int)x, (int)y)) {
-                return (true);
+                return true;
             }
         } else if (flag == 1) {
             if (can_see_obstacle((int)y, (int)x)) {
-                return (true);
+                return true;
             }
         } else if (flag == 2) {
             if (can_see_obstacle((int)y, (int)-x)) {
-                return (true);
+                return true;
             }
         } else if (flag == 3) {
             if (can_see_obstacle((int)x, (int)-y)) {
-                return (true);
+                return true;
             }
         }
     }
 
-    return (false);
+    return false;
 }
 
 /*

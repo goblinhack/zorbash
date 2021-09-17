@@ -18,6 +18,26 @@
 #include "my_wid_actionbar.h"
 #include "my_ptrcheck.h"
 
+void Level::handle_all_pending_things (int group)
+{
+    for (auto& i : all_animated_things_pending_remove[group]) {
+        all_animated_things[group].erase(i.first);
+    }
+    all_animated_things_pending_remove[group] = {};
+
+    for (auto& i : all_animated_things_pending_add[group]) {
+        all_animated_things[group].insert(i);
+    }
+    all_animated_things_pending_add[group] = {};
+}
+
+void Level::handle_all_pending_things (void)
+{
+    FOR_ALL_THING_GROUPS(group) {
+        handle_all_pending_things(group);
+    }
+}
+
 bool Level::tick (void)
 {_
     // LOG("Tick");
@@ -35,6 +55,7 @@ bool Level::tick (void)
         cursor = thing_new("cursor", player->mid_at);
     }
 
+    handle_all_pending_things();
     things_gc_if_possible();
 
     //
@@ -115,16 +136,6 @@ bool Level::tick (void)
                 t->dead(t->get_dead_reason());
             }
         } FOR_ALL_ANIMATED_THINGS_LEVEL_END(this)
-
-        for (auto& i : all_animated_things_pending_remove[group]) {
-            all_animated_things[group].erase(i.first);
-        }
-        all_animated_things_pending_remove[group] = {};
-
-        for (auto& i : all_animated_things_pending_add[group]) {
-            all_animated_things[group].insert(i);
-        }
-        all_animated_things_pending_add[group] = {};
     }
 
     game->tick_update();
@@ -402,6 +413,7 @@ bool Level::tick (void)
     bool tick_done = game->tick_end();
 
     if (tick_done) {
+        handle_all_pending_things();
         things_gc_if_possible();
 #if 0
         //

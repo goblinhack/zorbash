@@ -22,7 +22,17 @@
 // Lower level function than dead. Adds the thing to gc.
 //
 void Thing::kill (Thingp killer, const char *reason)
-{_
+{
+    //
+    // Check we're not in a death loop
+    //
+    if (is_dying) {
+        return;
+    }
+    is_dying = true;
+
+    dbg("Kill");
+_
     ///////////////////////////////////////////////////////////////
     // WARNING: killer can be nullptr
     ///////////////////////////////////////////////////////////////
@@ -48,35 +58,27 @@ void Thing::kill (Thingp killer, const char *reason)
         }
     }
 
-    //
-    // Call a python function on death? It's ok to do this on death,
-    // but if being destroyed then its being garbage collected, like
-    // at the end of the level.
-    //
-    if (!is_dying) {
-        is_dying = true;
 
-        if (!level->is_being_destroyed) {
-            auto on_death = on_death_do();
-            if (!std::empty(on_death)) {
-                auto t = split_tokens(on_death, '.');
-                if (t.size() == 2) {
-                    auto mod = t[0];
-                    auto fn = t[1];
-                    std::size_t found = fn.find("()");
-                    if (found != std::string::npos) {
-                        fn = fn.replace(found, 2, "");
-                    }
-
-                    dbg("Call %s.%s(%s)", mod.c_str(), fn.c_str(),
-                        to_string().c_str());
-
-                    py_call_void_fn(mod.c_str(), fn.c_str(),
-                                    id.id, (unsigned int)mid_at.x, (unsigned int)mid_at.y);
-                } else {
-                    ERR("Bad on_death call [%s] expected mod:function, got %d elems",
-                        on_death.c_str(), (int)on_death.size());
+    if (!level->is_being_destroyed) {
+        auto on_death = on_death_do();
+        if (!std::empty(on_death)) {
+            auto t = split_tokens(on_death, '.');
+            if (t.size() == 2) {
+                auto mod = t[0];
+                auto fn = t[1];
+                std::size_t found = fn.find("()");
+                if (found != std::string::npos) {
+                    fn = fn.replace(found, 2, "");
                 }
+
+                dbg("Call %s.%s(%s)", mod.c_str(), fn.c_str(),
+                    to_string().c_str());
+
+                py_call_void_fn(mod.c_str(), fn.c_str(),
+                                id.id, (unsigned int)mid_at.x, (unsigned int)mid_at.y);
+            } else {
+                ERR("Bad on_death call [%s] expected mod:function, got %d elems",
+                    on_death.c_str(), (int)on_death.size());
             }
         }
     }
@@ -108,6 +110,7 @@ void Thing::kill (Thingp killer, const char *reason)
     //
     // Set is_dead after the log message or we print it as dead
     //
+    auto The = text_The();
     is_dead = true;
 
     //
@@ -131,6 +134,7 @@ void Thing::kill (Thingp killer, const char *reason)
         if (on_death_drop_all_items()) {
             dbg("Drop all items on death");
             drop_all();
+            dbg("Dropped all items");
         }
 
         skill_remove_all();
@@ -205,13 +209,13 @@ void Thing::kill (Thingp killer, const char *reason)
         level->map_follow_player = false;
         game->dead_select(reason);
     } else if (is_loggable_for_important_stuff()) {
-        dbg("%s is dead, %s", text_The().c_str(), reason);
+        dbg("%s is dead, %s", The.c_str(), reason);
         if (killer && (killer != this)) {
             if (killer->is_player()) {
                 if (is_monst()) {
-                    TOPCON("%s is dead, %s.", text_The().c_str(), reason);
+                    TOPCON("%s is dead, %s.", The.c_str(), reason);
                 } else {
-                    TOPCON("%s is destroyed %s.", text_The().c_str(), reason);
+                    TOPCON("%s is destroyed %s.", The.c_str(), reason);
                 }
 
                 killer->score_add(this);

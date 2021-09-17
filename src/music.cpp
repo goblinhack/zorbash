@@ -49,7 +49,7 @@ bool music_init (void)
     }
 
     music_init_done = true;
-    return (true);
+    return true;
 }
 
 void music_fini (void)
@@ -74,7 +74,7 @@ bool music_load (uint32_t rate, const std::string &file,
     if (name_alias == "") {
         auto m = music_find(name_alias);
         if (m) {
-            return (true);
+            return true;
         }
     }
 
@@ -111,7 +111,7 @@ bool music_load (uint32_t rate, const std::string &file,
 
     // DBG("Load %s", file.c_str());
 
-    return (true);
+    return true;
 }
 
 /*

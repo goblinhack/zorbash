@@ -93,7 +93,7 @@ uint8_t get_line_intersection (fpoint p0,
         ((p3.y - p2.y) * (p1.x - p0.x)) - ((p3.x - p2.x) * (p1.y - p0.y));
 
     if (denominator == 0) {
-        return (false);
+        return false;
     }
 
     double a = p0.y - p2.y;
@@ -112,10 +112,10 @@ uint8_t get_line_intersection (fpoint p0,
 
     // if line1 is a segment and line2 is infinite, they intersect if:
     if ((a >= 0) && (a <= 1.0) && (b >= 0) && (b <= 1.0)) {
-        return (true);
+        return true;
     }
 
-    return (false);
+    return false;
 }
 
 uint8_t get_line_intersection (fpoint p0,
@@ -127,7 +127,7 @@ uint8_t get_line_intersection (fpoint p0,
         ((p3.y - p2.y) * (p1.x - p0.x)) - ((p3.x - p2.x) * (p1.y - p0.y));
 
     if (denominator == 0) {
-        return (false);
+        return false;
     }
 
     double a = p0.y - p2.y;
@@ -141,10 +141,10 @@ uint8_t get_line_intersection (fpoint p0,
 
     // if line1 is a segment and line2 is infinite, they intersect if:
     if ((a >= 0) && (a <= 1.0) && (b >= 0) && (b <= 1.0)) {
-        return (true);
+        return true;
     }
 
-    return (false);
+    return false;
 }
 
 //
@@ -160,7 +160,7 @@ uint8_t get_line_known_intersection (fpoint p0,
         ((p3.y - p2.y) * (p1.x - p0.x)) - ((p3.x - p2.x) * (p1.y - p0.y));
 
     if (denominator == 0) {
-        return (false);
+        return false;
     }
 
     double a = p0.y - p2.y;
@@ -177,7 +177,7 @@ uint8_t get_line_known_intersection (fpoint p0,
     intersect->x = p0.x + (a * (p1.x - p0.x));
     intersect->y = p0.y + (a * (p1.y - p0.y));
 
-    return (true);
+    return true;
 }
 
 int

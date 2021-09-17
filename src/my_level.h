@@ -334,6 +334,7 @@ public:
             level->all_things_of_interest[THING_GROUP_ALL].begin();          \
         while (i != level->all_things_of_interest[THING_GROUP_ALL].end()) {  \
             auto t = i->second;                                              \
+            /* LOG("ID %08x -> %p", i->first.id, t); */                      \
             i++;                                                             \
             if (t->is_hidden) {                                              \
                 t->set_tick_last_did_something(game->tick_current);          \
@@ -348,6 +349,7 @@ public:
             }                                                                \
         }                                                                    \
         level->all_things_of_interest_walk_in_progress = false;              \
+        level->handle_all_pending_things(THING_GROUP_ALL);                   \
     }
 
     #define FOR_ALL_ANIMATED_THINGS_LEVEL(level, group, t) {                 \
@@ -367,6 +369,7 @@ public:
             }                                                                \
         }                                                                    \
         level->all_animated_things_walk_in_progress = false;                 \
+        level->handle_all_pending_things(group);                             \
     }
 
     //
@@ -394,6 +397,7 @@ public:
             }                                                                \
         }                                                                    \
         level->all_things_of_interest_walk_in_progress = false;              \
+        level->handle_all_pending_things(THING_GROUP_ALL);                   \
     }
 
     //
@@ -514,6 +518,8 @@ public:
     bool skillbox_chosen(const uint32_t slot);
     bool skillbox_over(const uint32_t slot);
     bool tick(void);
+    void handle_all_pending_things(int group);
+    void handle_all_pending_things(void);
     float get_wobble(void) const;
     float update_wobble(void);
     friend std::istream& operator>>(std::istream &in, Bits<Levelp &> my);

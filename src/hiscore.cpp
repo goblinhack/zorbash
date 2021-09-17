@@ -73,17 +73,17 @@ bool HiScores::is_new_hiscore (Thingp player)
         //
         // Poor player.
         //
-        return (false);
+        return false;
     }
 
     while (h != hiscores.end()) {
         if (player->get_score() > h->score) {
-            return (true);
+            return true;
         }
         h++;
     }
 
-    return (false);
+    return false;
 }
 
 bool HiScores::is_new_highest_hiscore (Thingp player)
@@ -94,16 +94,16 @@ bool HiScores::is_new_highest_hiscore (Thingp player)
         //
         // Poor player.
         //
-        return (false);
+        return false;
     }
 
     while (h != hiscores.end()) {
         if (player->get_score() > h->score) {
-            return (true);
+            return true;
         }
-        return (false);
+        return false;
     }
-    return (false);
+    return false;
 }
 
 const char *HiScores::place_str (Thingp player)

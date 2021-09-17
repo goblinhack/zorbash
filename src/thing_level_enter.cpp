@@ -12,13 +12,12 @@
 #include "my_thing.h"
 #include "my_sdl.h"
 #include "my_gl.h"
+#include "my_ptrcheck.h"
 
 void Thing::level_enter (void)
 {_
-    if (is_player()) {
-        dbg("Level enter");
-    }
-
+    dbg("Enter level");
+_
     int group = get_group();
     auto result = level->all_things[group].insert(std::pair(id, this));
     if (result.second == false) {
@@ -32,11 +31,13 @@ void Thing::level_enter (void)
         if (level->all_things_of_interest_walk_in_progress) {
             level->all_things_of_interest_pending_remove[group].erase(id);
             level->all_things_of_interest_pending_add[group].insert(std::pair(id, this));
+            dbg("Pending remove and then add to interesting things");
         } else {
             auto result = level->all_things_of_interest[group].insert(std::pair(id, this));
             if (result.second == false) {
                 err("Failed to insert into active thing map");
             }
+            dbg("Added to interesting things");
         }
     }
 
@@ -47,11 +48,13 @@ void Thing::level_enter (void)
         if (level->all_animated_things_walk_in_progress) {
             level->all_animated_things_pending_remove[group].erase(id);
             level->all_animated_things_pending_add[group].insert(std::pair(id, this));
+            dbg("Pending remove and then add to animated things");
         } else {
             auto result = level->all_animated_things[group].insert(std::pair(id, this));
             if (result.second == false) {
                 err("Failed to insert into animated thing map");
             }
+            dbg("Added to pending things");
         }
     }
 

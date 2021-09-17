@@ -118,48 +118,48 @@ static bool scissors_enabled = false;
 int ascii_ok (int x, int y)
 {
     if (unlikely(x < 0)) {
-        return (false);
+        return false;
     }
 
     if (unlikely(x >= TERM_WIDTH)) {
-        return (false);
+        return false;
     }
 
     if (unlikely(y < 0)) {
-        return (false);
+        return false;
     }
 
     if (unlikely(y >= TERM_HEIGHT)) {
-        return (false);
+        return false;
     }
 
-    return (true);
+    return true;
 }
 
 int ascii_x_ok (int x)
 {
     if (unlikely(x < 0)) {
-        return (false);
+        return false;
     }
 
     if (unlikely(x >= TERM_WIDTH)) {
-        return (false);
+        return false;
     }
 
-    return (true);
+    return true;
 }
 
 int ascii_y_ok (int y)
 {
     if (unlikely(y < 0)) {
-        return (false);
+        return false;
     }
 
     if (unlikely(y >= TERM_HEIGHT)) {
-        return (false);
+        return false;
     }
 
-    return (true);
+    return true;
 }
 
 void ascii_clear_scissors (void)

@@ -293,24 +293,24 @@ struct tree_wid_key_cmp : public std::binary_function<class tree_wid_key, class 
     bool operator()(const tree_wid_key& lhs, const tree_wid_key& rhs) const
     {
         if (lhs.priority < rhs.priority) {
-            return (true);
+            return true;
         } else if (lhs.priority > rhs.priority) {
-            return (false);
+            return false;
         }
 
         if (lhs.br.y < rhs.br.y) {
-            return (true);
+            return true;
         } else if (lhs.br.y > rhs.br.y) {
-            return (false);
+            return false;
         }
 
         if (lhs.key < rhs.key) {
-            return (true);
+            return true;
         } else if (lhs.key > rhs.key) {
-            return (false);
+            return false;
         }
 
-        return (false);
+        return false;
     }
 };
 

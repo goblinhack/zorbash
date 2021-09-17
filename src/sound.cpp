@@ -24,7 +24,7 @@ bool sound_init (void)
 
     sound_init_done = true;
 
-    return (true);
+    return true;
 }
 
 void sound_fini (void)
@@ -57,7 +57,7 @@ bool sound_load (float volume, const std::string &file,
     if (alias == "") {
         auto s = sound_find(alias);
         if (s) {
-            return (true);
+            return true;
         }
     }
 
@@ -100,7 +100,7 @@ bool sound_load (float volume, const std::string &file,
 
     // DBG("Load %s", file.c_str());
 
-    return (true);
+    return true;
 }
 
 //

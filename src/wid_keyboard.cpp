@@ -169,7 +169,7 @@ static uint8_t wid_keyboard_mouse_event (Widp w,
 {
     wid_keyboard_event(w, focusx, focusy, 0 /* key */);
 
-    return (true);
+    return true;
 }
 
 static uint8_t wid_keyboard_button_mouse_event (Widp w,
@@ -259,20 +259,20 @@ static uint8_t wid_keyboard_parent_key_down (Widp w,
      * appeared.
      */
     if (time_get_time_ms() - ctx->created < 100) {
-        return (false);
+        return false;
     }
 
     switch (key->sym) {
         case '`':
-            return (false);
+            return false;
 
         case SDLK_ESCAPE:
             (ctx->cancelled)(ctx->w, wid_get_text(ctx->input));
-            return (true);
+            return true;
 
         case SDLK_RETURN: {
             (ctx->selected)(ctx->w, wid_get_text(ctx->input));
-            return (true);
+            return true;
 
         case SDLK_LEFT:
             wid_keyboard_focus_left(ctx);
@@ -300,11 +300,11 @@ static uint8_t wid_keyboard_parent_key_down (Widp w,
 
         default:
             wid_keyboard_event(ctx->w, -1, -1, key);
-            return (true);
+            return true;
         }
     }
 
-    return (true);
+    return true;
 }
 
 static uint8_t wid_keyboard_parent_joy_button (Widp w,
@@ -320,7 +320,7 @@ static uint8_t wid_keyboard_parent_joy_button (Widp w,
      * appeared.
      */
     if (time_get_time_ms() - ctx->created < 100) {
-        return (false);
+        return false;
     }
 
     if (sdl_joy_buttons[SDL_JOY_BUTTON_A]) {
@@ -400,20 +400,20 @@ static uint8_t wid_keyboard_button_key_event (Widp w, const SDL_Keysym *key)
      * appeared.
      */
     if (time_get_time_ms() - ctx->created < 100) {
-        return (false);
+        return false;
     }
 
     switch (key->sym) {
         case '`':
-            return (false);
+            return false;
 
         case SDLK_ESCAPE:
             (ctx->cancelled)(ctx->w, wid_get_text(ctx->input));
-            return (true);
+            return true;
 
         case SDLK_RETURN:
             (ctx->selected)(ctx->w, wid_get_text(ctx->input));
-            return (true);
+            return true;
 
         case SDLK_BACKSPACE:
         case SDLK_DELETE:
@@ -427,10 +427,10 @@ static uint8_t wid_keyboard_button_key_event (Widp w, const SDL_Keysym *key)
 
         default:
             wid_keyboard_event(w, -1, -1, key);
-            return (true);
+            return true;
     }
 
-    return (false);
+    return false;
 }
 
 static uint8_t wid_keyboard_button_joy_button_event (Widp w,
@@ -445,7 +445,7 @@ static uint8_t wid_keyboard_button_joy_button_event (Widp w,
      * appeared.
      */
     if (time_get_time_ms() - ctx->created < 100) {
-        return (false);
+        return false;
     }
 
     if (sdl_joy_buttons[SDL_JOY_BUTTON_A]) {
@@ -529,17 +529,17 @@ static uint8_t wid_keyboard_text_input_key_event (Widp w, const SDL_Keysym *key)
      * appeared.
      */
     if (time_get_time_ms() - ctx->created < 100) {
-        return (false);
+        return false;
     }
 
     switch (key->sym) {
         case SDLK_ESCAPE:
             (ctx->cancelled)(ctx->w, wid_get_text(ctx->input));
-            return (true);
+            return true;
 
         case SDLK_RETURN:
             (ctx->selected)(ctx->w, wid_get_text(ctx->input));
-            return (true);
+            return true;
 
         case SDLK_BACKSPACE:
         case SDLK_DELETE:
@@ -550,14 +550,14 @@ static uint8_t wid_keyboard_text_input_key_event (Widp w, const SDL_Keysym *key)
         case SDLK_HOME:
         case SDLK_END:
             wid_receive_input(ctx->input, key);
-            return (true);
+            return true;
 
         default:
             wid_keyboard_event(w, -1, -1, key);
-            return (true);
+            return true;
     }
 
-    return (false);
+    return false;
 }
 
 static void wid_keyboard_mouse_over (Widp w,

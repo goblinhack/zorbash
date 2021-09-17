@@ -21,6 +21,8 @@ void Thing::gc (void)
         //
         // Is this a problem?
         //
-        dbg("Failed to insert into gc thing map");
+        err("Failed to insert into gc thing map");
+    } else {
+        dbg("Inserted into gc thing map");
     }
 }

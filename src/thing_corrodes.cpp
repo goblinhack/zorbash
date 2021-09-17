@@ -20,6 +20,10 @@ void Thing::corrode_tick (void)
         return;
     }
 
+    if (is_acid()) {
+        return;
+    }
+
     //
     // Need to check if being consumed by a cleaner, hence owner check
     //

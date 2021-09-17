@@ -17,11 +17,11 @@ template <class T, template <typename ELEM, typename ALLOC = std::allocator<ELEM
 
         while (i != c->end()) {
             if (*i == t) {
-                return (true);
+                return true;
             }
             i++;
         }
-        return (false);
+        return false;
     }
 
 template <class T, template <typename ELEM, typename ALLOC = std::allocator<ELEM> > class C>
