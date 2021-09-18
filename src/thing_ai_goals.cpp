@@ -454,6 +454,7 @@ _
             dbg2("Best is where we are, cost %d, %d hops away",
                  result.cost, (int)hops_len);
             best = point(mid_at.x - minx, mid_at.y - miny);
+            return false;
         }
 
         auto nh = point(best.x + minx, best.y + miny);

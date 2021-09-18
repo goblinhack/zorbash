@@ -41,7 +41,7 @@ def tp_init(name, text_name):
     mytp.set_collision_radius(0.40)
     mytp.set_damage_bite_dice("1d3")
     mytp.set_damage_doubled_from_water(True)
-    mytp.set_damage_melee_dice("1d3")
+    mytp.set_damage_melee_dice("1d2")
     mytp.set_gfx_animated_can_hflip(True)
     mytp.set_gfx_animated(True)
     mytp.set_gfx_anim_attack("attack_claws")
