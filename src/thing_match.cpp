@@ -173,53 +173,53 @@ bool Thing::matches (const std::string& what) const
     if (is_resurrectable() &&                                 (what == "is_resurrectable"))                                 { return true; }
     if (is_ripple() &&                                        (what == "is_ripple"))                                        { return true; }
     if (is_rock() &&                                          (what == "is_rock"))                                          { return true; }
-    if (is_rrr10() &&                                         (what == "is_rrr10"))                                         { return true; }
-    if (is_rrr11() &&                                         (what == "is_rrr11"))                                         { return true; }
-    if (is_rrr12() &&                                         (what == "is_rrr12"))                                         { return true; }
-    if (is_rrr13() &&                                         (what == "is_rrr13"))                                         { return true; }
-    if (is_rrr14() &&                                         (what == "is_rrr14"))                                         { return true; }
-    if (is_rrr15() &&                                         (what == "is_rrr15"))                                         { return true; }
-    if (is_rrr16() &&                                         (what == "is_rrr16"))                                         { return true; }
-    if (is_rrr17() &&                                         (what == "is_rrr17"))                                         { return true; }
-    if (is_rrr18() &&                                         (what == "is_rrr18"))                                         { return true; }
-    if (is_rrr19() &&                                         (what == "is_rrr19"))                                         { return true; }
-    if (is_rrr1() &&                                          (what == "is_rrr1"))                                          { return true; }
-    if (is_rrr20() &&                                         (what == "is_rrr20"))                                         { return true; }
-    if (is_rrr21() &&                                         (what == "is_rrr21"))                                         { return true; }
-    if (is_rrr22() &&                                         (what == "is_rrr22"))                                         { return true; }
-    if (is_rrr23() &&                                         (what == "is_rrr23"))                                         { return true; }
-    if (is_rrr24() &&                                         (what == "is_rrr24"))                                         { return true; }
-    if (is_rrr25() &&                                         (what == "is_rrr25"))                                         { return true; }
-    if (is_rrr26() &&                                         (what == "is_rrr26"))                                         { return true; }
-    if (is_rrr27() &&                                         (what == "is_rrr27"))                                         { return true; }
-    if (is_rrr28() &&                                         (what == "is_rrr28"))                                         { return true; }
-    if (is_rrr29() &&                                         (what == "is_rrr29"))                                         { return true; }
-    if (is_rrr2() &&                                          (what == "is_rrr2"))                                          { return true; }
-    if (is_rrr30() &&                                         (what == "is_rrr30"))                                         { return true; }
-    if (is_rrr31() &&                                         (what == "is_rrr31"))                                         { return true; }
-    if (is_rrr32() &&                                         (what == "is_rrr32"))                                         { return true; }
-    if (is_rrr33() &&                                         (what == "is_rrr33"))                                         { return true; }
-    if (is_rrr34() &&                                         (what == "is_rrr34"))                                         { return true; }
-    if (is_rrr35() &&                                         (what == "is_rrr35"))                                         { return true; }
-    if (is_rrr36() &&                                         (what == "is_rrr36"))                                         { return true; }
-    if (is_rrr37() &&                                         (what == "is_rrr37"))                                         { return true; }
-    if (is_rrr38() &&                                         (what == "is_rrr38"))                                         { return true; }
-    if (is_rrr39() &&                                         (what == "is_rrr39"))                                         { return true; }
-    if (is_rrr3() &&                                          (what == "is_rrr3"))                                          { return true; }
-    if (is_rrr40() &&                                         (what == "is_rrr40"))                                         { return true; }
-    if (is_rrr41() &&                                         (what == "is_rrr41"))                                         { return true; }
-    if (is_rrr42() &&                                         (what == "is_rrr42"))                                         { return true; }
-    if (is_rrr43() &&                                         (what == "is_rrr43"))                                         { return true; }
-    if (is_rrr44() &&                                         (what == "is_rrr44"))                                         { return true; }
-    if (is_rrr45() &&                                         (what == "is_rrr45"))                                         { return true; }
-    if (is_rrr46() &&                                         (what == "is_rrr46"))                                         { return true; }
-    if (is_rrr47() &&                                         (what == "is_rrr47"))                                         { return true; }
-    if (is_rrr48() &&                                         (what == "is_rrr48"))                                         { return true; }
-    if (is_rrr49() &&                                         (what == "is_rrr49"))                                         { return true; }
-    if (is_rrr4() &&                                          (what == "is_rrr4"))                                          { return true; }
-    if (is_rrr50() &&                                         (what == "is_rrr50"))                                         { return true; }
-    if (is_rrr51() &&                                         (what == "is_rrr51"))                                         { return true; }
-    if (is_rrr52() &&                                         (what == "is_rrr52"))                                         { return true; }
+    if (unused_flag10() &&                                         (what == "unused_flag10"))                                         { return true; }
+    if (unused_flag11() &&                                         (what == "unused_flag11"))                                         { return true; }
+    if (unused_flag12() &&                                         (what == "unused_flag12"))                                         { return true; }
+    if (unused_flag13() &&                                         (what == "unused_flag13"))                                         { return true; }
+    if (unused_flag14() &&                                         (what == "unused_flag14"))                                         { return true; }
+    if (unused_flag15() &&                                         (what == "unused_flag15"))                                         { return true; }
+    if (unused_flag16() &&                                         (what == "unused_flag16"))                                         { return true; }
+    if (unused_flag17() &&                                         (what == "unused_flag17"))                                         { return true; }
+    if (unused_flag18() &&                                         (what == "unused_flag18"))                                         { return true; }
+    if (unused_flag19() &&                                         (what == "unused_flag19"))                                         { return true; }
+    if (unused_flag1() &&                                          (what == "unused_flag1"))                                          { return true; }
+    if (unused_flag20() &&                                         (what == "unused_flag20"))                                         { return true; }
+    if (unused_flag21() &&                                         (what == "unused_flag21"))                                         { return true; }
+    if (unused_flag22() &&                                         (what == "unused_flag22"))                                         { return true; }
+    if (unused_flag23() &&                                         (what == "unused_flag23"))                                         { return true; }
+    if (unused_flag24() &&                                         (what == "unused_flag24"))                                         { return true; }
+    if (unused_flag25() &&                                         (what == "unused_flag25"))                                         { return true; }
+    if (unused_flag26() &&                                         (what == "unused_flag26"))                                         { return true; }
+    if (unused_flag27() &&                                         (what == "unused_flag27"))                                         { return true; }
+    if (unused_flag28() &&                                         (what == "unused_flag28"))                                         { return true; }
+    if (unused_flag29() &&                                         (what == "unused_flag29"))                                         { return true; }
+    if (unused_flag2() &&                                          (what == "unused_flag2"))                                          { return true; }
+    if (unused_flag30() &&                                         (what == "unused_flag30"))                                         { return true; }
+    if (unused_flag31() &&                                         (what == "unused_flag31"))                                         { return true; }
+    if (unused_flag32() &&                                         (what == "unused_flag32"))                                         { return true; }
+    if (unused_flag33() &&                                         (what == "unused_flag33"))                                         { return true; }
+    if (unused_flag34() &&                                         (what == "unused_flag34"))                                         { return true; }
+    if (unused_flag35() &&                                         (what == "unused_flag35"))                                         { return true; }
+    if (unused_flag36() &&                                         (what == "unused_flag36"))                                         { return true; }
+    if (unused_flag37() &&                                         (what == "unused_flag37"))                                         { return true; }
+    if (unused_flag38() &&                                         (what == "unused_flag38"))                                         { return true; }
+    if (unused_flag39() &&                                         (what == "unused_flag39"))                                         { return true; }
+    if (unused_flag3() &&                                          (what == "unused_flag3"))                                          { return true; }
+    if (unused_flag40() &&                                         (what == "unused_flag40"))                                         { return true; }
+    if (unused_flag41() &&                                         (what == "unused_flag41"))                                         { return true; }
+    if (unused_flag42() &&                                         (what == "unused_flag42"))                                         { return true; }
+    if (unused_flag43() &&                                         (what == "unused_flag43"))                                         { return true; }
+    if (unused_flag44() &&                                         (what == "unused_flag44"))                                         { return true; }
+    if (unused_flag45() &&                                         (what == "unused_flag45"))                                         { return true; }
+    if (unused_flag46() &&                                         (what == "unused_flag46"))                                         { return true; }
+    if (unused_flag47() &&                                         (what == "unused_flag47"))                                         { return true; }
+    if (unused_flag48() &&                                         (what == "unused_flag48"))                                         { return true; }
+    if (unused_flag49() &&                                         (what == "unused_flag49"))                                         { return true; }
+    if (unused_flag4() &&                                          (what == "unused_flag4"))                                          { return true; }
+    if (unused_flag50() &&                                         (what == "unused_flag50"))                                         { return true; }
+    if (unused_flag51() &&                                         (what == "unused_flag51"))                                         { return true; }
+    if (unused_flag52() &&                                         (what == "unused_flag52"))                                         { return true; }
     if (is_ai_wanderer() &&                                         (what == "is_ai_wanderer"))                                         { return true; }
     if (is_organic() &&                                         (what == "is_organic"))                                         { return true; }
     if (is_glass() &&                                         (what == "is_glass"))                                         { return true; }
@@ -227,11 +227,11 @@ bool Thing::matches (const std::string& what) const
     if (is_item_organic() &&                                         (what == "is_item_organic"))                                         { return true; }
     if (is_metal() &&                                         (what == "is_metal"))                                         { return true; }
     if (is_wooden() &&                                         (what == "is_wooden"))                                         { return true; }
-    if (is_rrr5() &&                                          (what == "is_rrr5"))                                          { return true; }
-    if (is_rrr6() &&                                          (what == "is_rrr6"))                                          { return true; }
-    if (is_rrr7() &&                                          (what == "is_rrr7"))                                          { return true; }
-    if (is_rrr8() &&                                          (what == "is_rrr8"))                                          { return true; }
-    if (is_rrr9() &&                                          (what == "is_rrr9"))                                          { return true; }
+    if (unused_flag5() &&                                          (what == "unused_flag5"))                                          { return true; }
+    if (unused_flag6() &&                                          (what == "unused_flag6"))                                          { return true; }
+    if (unused_flag7() &&                                          (what == "unused_flag7"))                                          { return true; }
+    if (unused_flag8() &&                                          (what == "unused_flag8"))                                          { return true; }
+    if (unused_flag9() &&                                          (what == "unused_flag9"))                                          { return true; }
     if (is_secret_door() &&                                   (what == "is_secret_door"))                                   { return true; }
     if (is_sewer_wall() &&                                    (what == "is_sewer_wall"))                                    { return true; }
     if (is_shallow_water() &&                                 (what == "is_shallow_water"))                                 { return true; }
@@ -435,53 +435,53 @@ std::function<int(Thingp)> Thing::matches_to_func (const std::string& what)
     if (what == "is_resurrectable")                                 { return &Thing::is_resurrectable; }
     if (what == "is_ripple")                                        { return &Thing::is_ripple; }
     if (what == "is_rock")                                          { return &Thing::is_rock; }
-    if (what == "is_rrr10")                                         { return &Thing::is_rrr10; }
-    if (what == "is_rrr11")                                         { return &Thing::is_rrr11; }
-    if (what == "is_rrr12")                                         { return &Thing::is_rrr12; }
-    if (what == "is_rrr13")                                         { return &Thing::is_rrr13; }
-    if (what == "is_rrr14")                                         { return &Thing::is_rrr14; }
-    if (what == "is_rrr15")                                         { return &Thing::is_rrr15; }
-    if (what == "is_rrr16")                                         { return &Thing::is_rrr16; }
-    if (what == "is_rrr17")                                         { return &Thing::is_rrr17; }
-    if (what == "is_rrr18")                                         { return &Thing::is_rrr18; }
-    if (what == "is_rrr19")                                         { return &Thing::is_rrr19; }
-    if (what == "is_rrr1")                                          { return &Thing::is_rrr1; }
-    if (what == "is_rrr20")                                         { return &Thing::is_rrr20; }
-    if (what == "is_rrr21")                                         { return &Thing::is_rrr21; }
-    if (what == "is_rrr22")                                         { return &Thing::is_rrr22; }
-    if (what == "is_rrr23")                                         { return &Thing::is_rrr23; }
-    if (what == "is_rrr24")                                         { return &Thing::is_rrr24; }
-    if (what == "is_rrr25")                                         { return &Thing::is_rrr25; }
-    if (what == "is_rrr26")                                         { return &Thing::is_rrr26; }
-    if (what == "is_rrr27")                                         { return &Thing::is_rrr27; }
-    if (what == "is_rrr28")                                         { return &Thing::is_rrr28; }
-    if (what == "is_rrr29")                                         { return &Thing::is_rrr29; }
-    if (what == "is_rrr2")                                          { return &Thing::is_rrr2; }
-    if (what == "is_rrr30")                                         { return &Thing::is_rrr30; }
-    if (what == "is_rrr31")                                         { return &Thing::is_rrr31; }
-    if (what == "is_rrr32")                                         { return &Thing::is_rrr32; }
-    if (what == "is_rrr33")                                         { return &Thing::is_rrr33; }
-    if (what == "is_rrr34")                                         { return &Thing::is_rrr34; }
-    if (what == "is_rrr35")                                         { return &Thing::is_rrr35; }
-    if (what == "is_rrr36")                                         { return &Thing::is_rrr36; }
-    if (what == "is_rrr37")                                         { return &Thing::is_rrr37; }
-    if (what == "is_rrr38")                                         { return &Thing::is_rrr38; }
-    if (what == "is_rrr39")                                         { return &Thing::is_rrr39; }
-    if (what == "is_rrr3")                                          { return &Thing::is_rrr3; }
-    if (what == "is_rrr40")                                         { return &Thing::is_rrr40; }
-    if (what == "is_rrr41")                                         { return &Thing::is_rrr41; }
-    if (what == "is_rrr42")                                         { return &Thing::is_rrr42; }
-    if (what == "is_rrr43")                                         { return &Thing::is_rrr43; }
-    if (what == "is_rrr44")                                         { return &Thing::is_rrr44; }
-    if (what == "is_rrr45")                                         { return &Thing::is_rrr45; }
-    if (what == "is_rrr46")                                         { return &Thing::is_rrr46; }
-    if (what == "is_rrr47")                                         { return &Thing::is_rrr47; }
-    if (what == "is_rrr48")                                         { return &Thing::is_rrr48; }
-    if (what == "is_rrr49")                                         { return &Thing::is_rrr49; }
-    if (what == "is_rrr4")                                          { return &Thing::is_rrr4; }
-    if (what == "is_rrr50")                                         { return &Thing::is_rrr50; }
-    if (what == "is_rrr51")                                         { return &Thing::is_rrr51; }
-    if (what == "is_rrr52")                                         { return &Thing::is_rrr52; }
+    if (what == "unused_flag10")                                         { return &Thing::unused_flag10; }
+    if (what == "unused_flag11")                                         { return &Thing::unused_flag11; }
+    if (what == "unused_flag12")                                         { return &Thing::unused_flag12; }
+    if (what == "unused_flag13")                                         { return &Thing::unused_flag13; }
+    if (what == "unused_flag14")                                         { return &Thing::unused_flag14; }
+    if (what == "unused_flag15")                                         { return &Thing::unused_flag15; }
+    if (what == "unused_flag16")                                         { return &Thing::unused_flag16; }
+    if (what == "unused_flag17")                                         { return &Thing::unused_flag17; }
+    if (what == "unused_flag18")                                         { return &Thing::unused_flag18; }
+    if (what == "unused_flag19")                                         { return &Thing::unused_flag19; }
+    if (what == "unused_flag1")                                          { return &Thing::unused_flag1; }
+    if (what == "unused_flag20")                                         { return &Thing::unused_flag20; }
+    if (what == "unused_flag21")                                         { return &Thing::unused_flag21; }
+    if (what == "unused_flag22")                                         { return &Thing::unused_flag22; }
+    if (what == "unused_flag23")                                         { return &Thing::unused_flag23; }
+    if (what == "unused_flag24")                                         { return &Thing::unused_flag24; }
+    if (what == "unused_flag25")                                         { return &Thing::unused_flag25; }
+    if (what == "unused_flag26")                                         { return &Thing::unused_flag26; }
+    if (what == "unused_flag27")                                         { return &Thing::unused_flag27; }
+    if (what == "unused_flag28")                                         { return &Thing::unused_flag28; }
+    if (what == "unused_flag29")                                         { return &Thing::unused_flag29; }
+    if (what == "unused_flag2")                                          { return &Thing::unused_flag2; }
+    if (what == "unused_flag30")                                         { return &Thing::unused_flag30; }
+    if (what == "unused_flag31")                                         { return &Thing::unused_flag31; }
+    if (what == "unused_flag32")                                         { return &Thing::unused_flag32; }
+    if (what == "unused_flag33")                                         { return &Thing::unused_flag33; }
+    if (what == "unused_flag34")                                         { return &Thing::unused_flag34; }
+    if (what == "unused_flag35")                                         { return &Thing::unused_flag35; }
+    if (what == "unused_flag36")                                         { return &Thing::unused_flag36; }
+    if (what == "unused_flag37")                                         { return &Thing::unused_flag37; }
+    if (what == "unused_flag38")                                         { return &Thing::unused_flag38; }
+    if (what == "unused_flag39")                                         { return &Thing::unused_flag39; }
+    if (what == "unused_flag3")                                          { return &Thing::unused_flag3; }
+    if (what == "unused_flag40")                                         { return &Thing::unused_flag40; }
+    if (what == "unused_flag41")                                         { return &Thing::unused_flag41; }
+    if (what == "unused_flag42")                                         { return &Thing::unused_flag42; }
+    if (what == "unused_flag43")                                         { return &Thing::unused_flag43; }
+    if (what == "unused_flag44")                                         { return &Thing::unused_flag44; }
+    if (what == "unused_flag45")                                         { return &Thing::unused_flag45; }
+    if (what == "unused_flag46")                                         { return &Thing::unused_flag46; }
+    if (what == "unused_flag47")                                         { return &Thing::unused_flag47; }
+    if (what == "unused_flag48")                                         { return &Thing::unused_flag48; }
+    if (what == "unused_flag49")                                         { return &Thing::unused_flag49; }
+    if (what == "unused_flag4")                                          { return &Thing::unused_flag4; }
+    if (what == "unused_flag50")                                         { return &Thing::unused_flag50; }
+    if (what == "unused_flag51")                                         { return &Thing::unused_flag51; }
+    if (what == "unused_flag52")                                         { return &Thing::unused_flag52; }
     if (what == "is_ai_wanderer")                                         { return &Thing::is_ai_wanderer; }
     if (what == "is_organic")                                         { return &Thing::is_organic; }
     if (what == "is_glass")                                         { return &Thing::is_glass; }
@@ -489,11 +489,11 @@ std::function<int(Thingp)> Thing::matches_to_func (const std::string& what)
     if (what == "is_item_organic")                                         { return &Thing::is_item_organic; }
     if (what == "is_metal")                                         { return &Thing::is_metal; }
     if (what == "is_wooden")                                         { return &Thing::is_wooden; }
-    if (what == "is_rrr5")                                          { return &Thing::is_rrr5; }
-    if (what == "is_rrr6")                                          { return &Thing::is_rrr6; }
-    if (what == "is_rrr7")                                          { return &Thing::is_rrr7; }
-    if (what == "is_rrr8")                                          { return &Thing::is_rrr8; }
-    if (what == "is_rrr9")                                          { return &Thing::is_rrr9; }
+    if (what == "unused_flag5")                                          { return &Thing::unused_flag5; }
+    if (what == "unused_flag6")                                          { return &Thing::unused_flag6; }
+    if (what == "unused_flag7")                                          { return &Thing::unused_flag7; }
+    if (what == "unused_flag8")                                          { return &Thing::unused_flag8; }
+    if (what == "unused_flag9")                                          { return &Thing::unused_flag9; }
     if (what == "is_secret_door")                                   { return &Thing::is_secret_door; }
     if (what == "is_sewer_wall")                                    { return &Thing::is_sewer_wall; }
     if (what == "is_shallow_water")                                 { return &Thing::is_shallow_water; }

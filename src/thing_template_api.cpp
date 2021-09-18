@@ -284,53 +284,53 @@ int Tp::is_removeable_if_out_of_slots(void) const                    { return _i
 int Tp::is_resurrectable(void) const                                 { return _is_resurrectable; }
 int Tp::is_ripple(void) const                                        { return _is_ripple; }
 int Tp::is_rock(void) const                                          { return _is_rock; }
-int Tp::is_rrr10(void) const                                         { return _is_rrr10; }
-int Tp::is_rrr11(void) const                                         { return _is_rrr11; }
-int Tp::is_rrr12(void) const                                         { return _is_rrr12; }
-int Tp::is_rrr13(void) const                                         { return _is_rrr13; }
-int Tp::is_rrr14(void) const                                         { return _is_rrr14; }
-int Tp::is_rrr15(void) const                                         { return _is_rrr15; }
-int Tp::is_rrr16(void) const                                         { return _is_rrr16; }
-int Tp::is_rrr17(void) const                                         { return _is_rrr17; }
-int Tp::is_rrr18(void) const                                         { return _is_rrr18; }
-int Tp::is_rrr19(void) const                                         { return _is_rrr19; }
-int Tp::is_rrr1(void) const                                          { return _is_rrr1; }
-int Tp::is_rrr20(void) const                                         { return _is_rrr20; }
-int Tp::is_rrr21(void) const                                         { return _is_rrr21; }
-int Tp::is_rrr22(void) const                                         { return _is_rrr22; }
-int Tp::is_rrr23(void) const                                         { return _is_rrr23; }
-int Tp::is_rrr24(void) const                                         { return _is_rrr24; }
-int Tp::is_rrr25(void) const                                         { return _is_rrr25; }
-int Tp::is_rrr26(void) const                                         { return _is_rrr26; }
-int Tp::is_rrr27(void) const                                         { return _is_rrr27; }
-int Tp::is_rrr28(void) const                                         { return _is_rrr28; }
-int Tp::is_rrr29(void) const                                         { return _is_rrr29; }
-int Tp::is_rrr2(void) const                                          { return _is_rrr2; }
-int Tp::is_rrr30(void) const                                         { return _is_rrr30; }
-int Tp::is_rrr31(void) const                                         { return _is_rrr31; }
-int Tp::is_rrr32(void) const                                         { return _is_rrr32; }
-int Tp::is_rrr33(void) const                                         { return _is_rrr33; }
-int Tp::is_rrr34(void) const                                         { return _is_rrr34; }
-int Tp::is_rrr35(void) const                                         { return _is_rrr35; }
-int Tp::is_rrr36(void) const                                         { return _is_rrr36; }
-int Tp::is_rrr37(void) const                                         { return _is_rrr37; }
-int Tp::is_rrr38(void) const                                         { return _is_rrr38; }
-int Tp::is_rrr39(void) const                                         { return _is_rrr39; }
-int Tp::is_rrr3(void) const                                          { return _is_rrr3; }
-int Tp::is_rrr40(void) const                                         { return _is_rrr40; }
-int Tp::is_rrr41(void) const                                         { return _is_rrr41; }
-int Tp::is_rrr42(void) const                                         { return _is_rrr42; }
-int Tp::is_rrr43(void) const                                         { return _is_rrr43; }
-int Tp::is_rrr44(void) const                                         { return _is_rrr44; }
-int Tp::is_rrr45(void) const                                         { return _is_rrr45; }
-int Tp::is_rrr46(void) const                                         { return _is_rrr46; }
-int Tp::is_rrr47(void) const                                         { return _is_rrr47; }
-int Tp::is_rrr48(void) const                                         { return _is_rrr48; }
-int Tp::is_rrr49(void) const                                         { return _is_rrr49; }
-int Tp::is_rrr4(void) const                                          { return _is_rrr4; }
-int Tp::is_rrr50(void) const                                         { return _is_rrr50; }
-int Tp::is_rrr51(void) const                                         { return _is_rrr51; }
-int Tp::is_rrr52(void) const                                         { return _is_rrr52; }
+int Tp::unused_flag10(void) const                                         { return _unused_flag10; }
+int Tp::unused_flag11(void) const                                         { return _unused_flag11; }
+int Tp::unused_flag12(void) const                                         { return _unused_flag12; }
+int Tp::unused_flag13(void) const                                         { return _unused_flag13; }
+int Tp::unused_flag14(void) const                                         { return _unused_flag14; }
+int Tp::unused_flag15(void) const                                         { return _unused_flag15; }
+int Tp::unused_flag16(void) const                                         { return _unused_flag16; }
+int Tp::unused_flag17(void) const                                         { return _unused_flag17; }
+int Tp::unused_flag18(void) const                                         { return _unused_flag18; }
+int Tp::unused_flag19(void) const                                         { return _unused_flag19; }
+int Tp::unused_flag1(void) const                                          { return _unused_flag1; }
+int Tp::unused_flag20(void) const                                         { return _unused_flag20; }
+int Tp::unused_flag21(void) const                                         { return _unused_flag21; }
+int Tp::unused_flag22(void) const                                         { return _unused_flag22; }
+int Tp::unused_flag23(void) const                                         { return _unused_flag23; }
+int Tp::unused_flag24(void) const                                         { return _unused_flag24; }
+int Tp::unused_flag25(void) const                                         { return _unused_flag25; }
+int Tp::unused_flag26(void) const                                         { return _unused_flag26; }
+int Tp::unused_flag27(void) const                                         { return _unused_flag27; }
+int Tp::unused_flag28(void) const                                         { return _unused_flag28; }
+int Tp::unused_flag29(void) const                                         { return _unused_flag29; }
+int Tp::unused_flag2(void) const                                          { return _unused_flag2; }
+int Tp::unused_flag30(void) const                                         { return _unused_flag30; }
+int Tp::unused_flag31(void) const                                         { return _unused_flag31; }
+int Tp::unused_flag32(void) const                                         { return _unused_flag32; }
+int Tp::unused_flag33(void) const                                         { return _unused_flag33; }
+int Tp::unused_flag34(void) const                                         { return _unused_flag34; }
+int Tp::unused_flag35(void) const                                         { return _unused_flag35; }
+int Tp::unused_flag36(void) const                                         { return _unused_flag36; }
+int Tp::unused_flag37(void) const                                         { return _unused_flag37; }
+int Tp::unused_flag38(void) const                                         { return _unused_flag38; }
+int Tp::unused_flag39(void) const                                         { return _unused_flag39; }
+int Tp::unused_flag3(void) const                                          { return _unused_flag3; }
+int Tp::unused_flag40(void) const                                         { return _unused_flag40; }
+int Tp::unused_flag41(void) const                                         { return _unused_flag41; }
+int Tp::unused_flag42(void) const                                         { return _unused_flag42; }
+int Tp::unused_flag43(void) const                                         { return _unused_flag43; }
+int Tp::unused_flag44(void) const                                         { return _unused_flag44; }
+int Tp::unused_flag45(void) const                                         { return _unused_flag45; }
+int Tp::unused_flag46(void) const                                         { return _unused_flag46; }
+int Tp::unused_flag47(void) const                                         { return _unused_flag47; }
+int Tp::unused_flag48(void) const                                         { return _unused_flag48; }
+int Tp::unused_flag49(void) const                                         { return _unused_flag49; }
+int Tp::unused_flag4(void) const                                          { return _unused_flag4; }
+int Tp::unused_flag50(void) const                                         { return _unused_flag50; }
+int Tp::unused_flag51(void) const                                         { return _unused_flag51; }
+int Tp::unused_flag52(void) const                                         { return _unused_flag52; }
 int Tp::is_ai_wanderer(void) const                                         { return _is_ai_wanderer; }
 int Tp::is_organic(void) const                                         { return _is_organic; }
 int Tp::is_glass(void) const                                         { return _is_glass; }
@@ -338,11 +338,11 @@ int Tp::is_stone(void) const                                         { return _i
 int Tp::is_item_organic(void) const                                         { return _is_item_organic; }
 int Tp::is_metal(void) const                                         { return _is_metal; }
 int Tp::is_wooden(void) const                                         { return _is_wooden; }
-int Tp::is_rrr5(void) const                                          { return _is_rrr5; }
-int Tp::is_rrr6(void) const                                          { return _is_rrr6; }
-int Tp::is_rrr7(void) const                                          { return _is_rrr7; }
-int Tp::is_rrr8(void) const                                          { return _is_rrr8; }
-int Tp::is_rrr9(void) const                                          { return _is_rrr9; }
+int Tp::unused_flag5(void) const                                          { return _unused_flag5; }
+int Tp::unused_flag6(void) const                                          { return _unused_flag6; }
+int Tp::unused_flag7(void) const                                          { return _unused_flag7; }
+int Tp::unused_flag8(void) const                                          { return _unused_flag8; }
+int Tp::unused_flag9(void) const                                          { return _unused_flag9; }
 int Tp::is_secret_door(void) const                                   { return _is_secret_door; }
 int Tp::is_sewer_wall(void) const                                    { return _is_sewer_wall; }
 int Tp::is_shallow_water(void) const                                 { return _is_shallow_water; }
@@ -603,53 +603,53 @@ void Tp::set_is_removeable_if_out_of_slots(int v)                    { _is_remov
 void Tp::set_is_resurrectable(int v)                                 { _is_resurrectable = v; }
 void Tp::set_is_ripple(int v)                                        { _is_ripple = v; }
 void Tp::set_is_rock(int v)                                          { _is_rock = v; }
-void Tp::set_is_rrr10(int v)                                         { _is_rrr10 = v; }
-void Tp::set_is_rrr11(int v)                                         { _is_rrr11 = v; }
-void Tp::set_is_rrr12(int v)                                         { _is_rrr12 = v; }
-void Tp::set_is_rrr13(int v)                                         { _is_rrr13 = v; }
-void Tp::set_is_rrr14(int v)                                         { _is_rrr14 = v; }
-void Tp::set_is_rrr15(int v)                                         { _is_rrr15 = v; }
-void Tp::set_is_rrr16(int v)                                         { _is_rrr16 = v; }
-void Tp::set_is_rrr17(int v)                                         { _is_rrr17 = v; }
-void Tp::set_is_rrr18(int v)                                         { _is_rrr18 = v; }
-void Tp::set_is_rrr19(int v)                                         { _is_rrr19 = v; }
-void Tp::set_is_rrr1(int v)                                          { _is_rrr1 = v; }
-void Tp::set_is_rrr20(int v)                                         { _is_rrr20 = v; }
-void Tp::set_is_rrr21(int v)                                         { _is_rrr21 = v; }
-void Tp::set_is_rrr22(int v)                                         { _is_rrr22 = v; }
-void Tp::set_is_rrr23(int v)                                         { _is_rrr23 = v; }
-void Tp::set_is_rrr24(int v)                                         { _is_rrr24 = v; }
-void Tp::set_is_rrr25(int v)                                         { _is_rrr25 = v; }
-void Tp::set_is_rrr26(int v)                                         { _is_rrr26 = v; }
-void Tp::set_is_rrr27(int v)                                         { _is_rrr27 = v; }
-void Tp::set_is_rrr28(int v)                                         { _is_rrr28 = v; }
-void Tp::set_is_rrr29(int v)                                         { _is_rrr29 = v; }
-void Tp::set_is_rrr2(int v)                                          { _is_rrr2 = v; }
-void Tp::set_is_rrr30(int v)                                         { _is_rrr30 = v; }
-void Tp::set_is_rrr31(int v)                                         { _is_rrr31 = v; }
-void Tp::set_is_rrr32(int v)                                         { _is_rrr32 = v; }
-void Tp::set_is_rrr33(int v)                                         { _is_rrr33 = v; }
-void Tp::set_is_rrr34(int v)                                         { _is_rrr34 = v; }
-void Tp::set_is_rrr35(int v)                                         { _is_rrr35 = v; }
-void Tp::set_is_rrr36(int v)                                         { _is_rrr36 = v; }
-void Tp::set_is_rrr37(int v)                                         { _is_rrr37 = v; }
-void Tp::set_is_rrr38(int v)                                         { _is_rrr38 = v; }
-void Tp::set_is_rrr39(int v)                                         { _is_rrr39 = v; }
-void Tp::set_is_rrr3(int v)                                          { _is_rrr3 = v; }
-void Tp::set_is_rrr40(int v)                                         { _is_rrr40 = v; }
-void Tp::set_is_rrr41(int v)                                         { _is_rrr41 = v; }
-void Tp::set_is_rrr42(int v)                                         { _is_rrr42 = v; }
-void Tp::set_is_rrr43(int v)                                         { _is_rrr43 = v; }
-void Tp::set_is_rrr44(int v)                                         { _is_rrr44 = v; }
-void Tp::set_is_rrr45(int v)                                         { _is_rrr45 = v; }
-void Tp::set_is_rrr46(int v)                                         { _is_rrr46 = v; }
-void Tp::set_is_rrr47(int v)                                         { _is_rrr47 = v; }
-void Tp::set_is_rrr48(int v)                                         { _is_rrr48 = v; }
-void Tp::set_is_rrr49(int v)                                         { _is_rrr49 = v; }
-void Tp::set_is_rrr4(int v)                                          { _is_rrr4 = v; }
-void Tp::set_is_rrr50(int v)                                         { _is_rrr50 = v; }
-void Tp::set_is_rrr51(int v)                                         { _is_rrr51 = v; }
-void Tp::set_is_rrr52(int v)                                         { _is_rrr52 = v; }
+void Tp::set_unused_flag10(int v)                                         { _unused_flag10 = v; }
+void Tp::set_unused_flag11(int v)                                         { _unused_flag11 = v; }
+void Tp::set_unused_flag12(int v)                                         { _unused_flag12 = v; }
+void Tp::set_unused_flag13(int v)                                         { _unused_flag13 = v; }
+void Tp::set_unused_flag14(int v)                                         { _unused_flag14 = v; }
+void Tp::set_unused_flag15(int v)                                         { _unused_flag15 = v; }
+void Tp::set_unused_flag16(int v)                                         { _unused_flag16 = v; }
+void Tp::set_unused_flag17(int v)                                         { _unused_flag17 = v; }
+void Tp::set_unused_flag18(int v)                                         { _unused_flag18 = v; }
+void Tp::set_unused_flag19(int v)                                         { _unused_flag19 = v; }
+void Tp::set_unused_flag1(int v)                                          { _unused_flag1 = v; }
+void Tp::set_unused_flag20(int v)                                         { _unused_flag20 = v; }
+void Tp::set_unused_flag21(int v)                                         { _unused_flag21 = v; }
+void Tp::set_unused_flag22(int v)                                         { _unused_flag22 = v; }
+void Tp::set_unused_flag23(int v)                                         { _unused_flag23 = v; }
+void Tp::set_unused_flag24(int v)                                         { _unused_flag24 = v; }
+void Tp::set_unused_flag25(int v)                                         { _unused_flag25 = v; }
+void Tp::set_unused_flag26(int v)                                         { _unused_flag26 = v; }
+void Tp::set_unused_flag27(int v)                                         { _unused_flag27 = v; }
+void Tp::set_unused_flag28(int v)                                         { _unused_flag28 = v; }
+void Tp::set_unused_flag29(int v)                                         { _unused_flag29 = v; }
+void Tp::set_unused_flag2(int v)                                          { _unused_flag2 = v; }
+void Tp::set_unused_flag30(int v)                                         { _unused_flag30 = v; }
+void Tp::set_unused_flag31(int v)                                         { _unused_flag31 = v; }
+void Tp::set_unused_flag32(int v)                                         { _unused_flag32 = v; }
+void Tp::set_unused_flag33(int v)                                         { _unused_flag33 = v; }
+void Tp::set_unused_flag34(int v)                                         { _unused_flag34 = v; }
+void Tp::set_unused_flag35(int v)                                         { _unused_flag35 = v; }
+void Tp::set_unused_flag36(int v)                                         { _unused_flag36 = v; }
+void Tp::set_unused_flag37(int v)                                         { _unused_flag37 = v; }
+void Tp::set_unused_flag38(int v)                                         { _unused_flag38 = v; }
+void Tp::set_unused_flag39(int v)                                         { _unused_flag39 = v; }
+void Tp::set_unused_flag3(int v)                                          { _unused_flag3 = v; }
+void Tp::set_unused_flag40(int v)                                         { _unused_flag40 = v; }
+void Tp::set_unused_flag41(int v)                                         { _unused_flag41 = v; }
+void Tp::set_unused_flag42(int v)                                         { _unused_flag42 = v; }
+void Tp::set_unused_flag43(int v)                                         { _unused_flag43 = v; }
+void Tp::set_unused_flag44(int v)                                         { _unused_flag44 = v; }
+void Tp::set_unused_flag45(int v)                                         { _unused_flag45 = v; }
+void Tp::set_unused_flag46(int v)                                         { _unused_flag46 = v; }
+void Tp::set_unused_flag47(int v)                                         { _unused_flag47 = v; }
+void Tp::set_unused_flag48(int v)                                         { _unused_flag48 = v; }
+void Tp::set_unused_flag49(int v)                                         { _unused_flag49 = v; }
+void Tp::set_unused_flag4(int v)                                          { _unused_flag4 = v; }
+void Tp::set_unused_flag50(int v)                                         { _unused_flag50 = v; }
+void Tp::set_unused_flag51(int v)                                         { _unused_flag51 = v; }
+void Tp::set_unused_flag52(int v)                                         { _unused_flag52 = v; }
 void Tp::set_is_ai_wanderer(int v)                                         { _is_ai_wanderer = v; }
 void Tp::set_is_organic(int v)                                         { _is_organic = v; }
 void Tp::set_is_glass(int v)                                         { _is_glass = v; }
@@ -657,11 +657,11 @@ void Tp::set_is_stone(int v)                                         { _is_stone
 void Tp::set_is_item_organic(int v)                                         { _is_item_organic = v; }
 void Tp::set_is_metal(int v)                                         { _is_metal = v; }
 void Tp::set_is_wooden(int v)                                         { _is_wooden = v; }
-void Tp::set_is_rrr5(int v)                                          { _is_rrr5 = v; }
-void Tp::set_is_rrr6(int v)                                          { _is_rrr6 = v; }
-void Tp::set_is_rrr7(int v)                                          { _is_rrr7 = v; }
-void Tp::set_is_rrr8(int v)                                          { _is_rrr8 = v; }
-void Tp::set_is_rrr9(int v)                                          { _is_rrr9 = v; }
+void Tp::set_unused_flag5(int v)                                          { _unused_flag5 = v; }
+void Tp::set_unused_flag6(int v)                                          { _unused_flag6 = v; }
+void Tp::set_unused_flag7(int v)                                          { _unused_flag7 = v; }
+void Tp::set_unused_flag8(int v)                                          { _unused_flag8 = v; }
+void Tp::set_unused_flag9(int v)                                          { _unused_flag9 = v; }
 void Tp::set_is_secret_door(int v)                                   { _is_secret_door = v; }
 void Tp::set_is_sewer_wall(int v)                                    { _is_sewer_wall = v; }
 void Tp::set_is_shallow_water(int v)                                 { _is_shallow_water = v; }

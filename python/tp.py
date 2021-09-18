@@ -232,161 +232,161 @@ class Tp:
     def set_gfx_anim_attack(self, value):
         zx.tp_set_gfx_anim_attack(self, value)
 
-    def set_is_rrr1(self, value):
-        zx.tp_set_is_rrr1(self, value)
+    def set_unused_flag1(self, value):
+        zx.tp_set_unused_flag1(self, value)
 
-    def set_is_rrr2(self, value):
-        zx.tp_set_is_rrr2(self, value)
+    def set_unused_flag2(self, value):
+        zx.tp_set_unused_flag2(self, value)
 
-    def set_is_rrr3(self, value):
-        zx.tp_set_is_rrr3(self, value)
+    def set_unused_flag3(self, value):
+        zx.tp_set_unused_flag3(self, value)
 
-    def set_is_rrr4(self, value):
-        zx.tp_set_is_rrr4(self, value)
+    def set_unused_flag4(self, value):
+        zx.tp_set_unused_flag4(self, value)
 
-    def set_is_rrr5(self, value):
-        zx.tp_set_is_rrr5(self, value)
+    def set_unused_flag5(self, value):
+        zx.tp_set_unused_flag5(self, value)
 
-    def set_is_rrr6(self, value):
-        zx.tp_set_is_rrr6(self, value)
+    def set_unused_flag6(self, value):
+        zx.tp_set_unused_flag6(self, value)
 
-    def set_is_rrr7(self, value):
-        zx.tp_set_is_rrr7(self, value)
+    def set_unused_flag7(self, value):
+        zx.tp_set_unused_flag7(self, value)
 
-    def set_is_rrr8(self, value):
-        zx.tp_set_is_rrr8(self, value)
+    def set_unused_flag8(self, value):
+        zx.tp_set_unused_flag8(self, value)
 
-    def set_is_rrr9(self, value):
-        zx.tp_set_is_rrr9(self, value)
+    def set_unused_flag9(self, value):
+        zx.tp_set_unused_flag9(self, value)
 
-    def set_is_rrr10(self, value):
-        zx.tp_set_is_rrr10(self, value)
+    def set_unused_flag10(self, value):
+        zx.tp_set_unused_flag10(self, value)
 
-    def set_is_rrr11(self, value):
-        zx.tp_set_is_rrr11(self, value)
+    def set_unused_flag11(self, value):
+        zx.tp_set_unused_flag11(self, value)
 
-    def set_is_rrr12(self, value):
-        zx.tp_set_is_rrr12(self, value)
+    def set_unused_flag12(self, value):
+        zx.tp_set_unused_flag12(self, value)
 
-    def set_is_rrr13(self, value):
-        zx.tp_set_is_rrr13(self, value)
+    def set_unused_flag13(self, value):
+        zx.tp_set_unused_flag13(self, value)
 
-    def set_is_rrr14(self, value):
-        zx.tp_set_is_rrr14(self, value)
+    def set_unused_flag14(self, value):
+        zx.tp_set_unused_flag14(self, value)
 
-    def set_is_rrr15(self, value):
-        zx.tp_set_is_rrr15(self, value)
+    def set_unused_flag15(self, value):
+        zx.tp_set_unused_flag15(self, value)
 
-    def set_is_rrr16(self, value):
-        zx.tp_set_is_rrr16(self, value)
+    def set_unused_flag16(self, value):
+        zx.tp_set_unused_flag16(self, value)
 
-    def set_is_rrr17(self, value):
-        zx.tp_set_is_rrr17(self, value)
+    def set_unused_flag17(self, value):
+        zx.tp_set_unused_flag17(self, value)
 
-    def set_is_rrr18(self, value):
-        zx.tp_set_is_rrr18(self, value)
+    def set_unused_flag18(self, value):
+        zx.tp_set_unused_flag18(self, value)
 
-    def set_is_rrr19(self, value):
-        zx.tp_set_is_rrr19(self, value)
+    def set_unused_flag19(self, value):
+        zx.tp_set_unused_flag19(self, value)
 
-    def set_is_rrr20(self, value):
-        zx.tp_set_is_rrr20(self, value)
+    def set_unused_flag20(self, value):
+        zx.tp_set_unused_flag20(self, value)
 
-    def set_is_rrr21(self, value):
-        zx.tp_set_is_rrr21(self, value)
+    def set_unused_flag21(self, value):
+        zx.tp_set_unused_flag21(self, value)
 
-    def set_is_rrr22(self, value):
-        zx.tp_set_is_rrr22(self, value)
+    def set_unused_flag22(self, value):
+        zx.tp_set_unused_flag22(self, value)
 
-    def set_is_rrr23(self, value):
-        zx.tp_set_is_rrr23(self, value)
+    def set_unused_flag23(self, value):
+        zx.tp_set_unused_flag23(self, value)
 
-    def set_is_rrr24(self, value):
-        zx.tp_set_is_rrr24(self, value)
+    def set_unused_flag24(self, value):
+        zx.tp_set_unused_flag24(self, value)
 
-    def set_is_rrr25(self, value):
-        zx.tp_set_is_rrr25(self, value)
+    def set_unused_flag25(self, value):
+        zx.tp_set_unused_flag25(self, value)
 
-    def set_is_rrr26(self, value):
-        zx.tp_set_is_rrr26(self, value)
+    def set_unused_flag26(self, value):
+        zx.tp_set_unused_flag26(self, value)
 
-    def set_is_rrr27(self, value):
-        zx.tp_set_is_rrr27(self, value)
+    def set_unused_flag27(self, value):
+        zx.tp_set_unused_flag27(self, value)
 
-    def set_is_rrr28(self, value):
-        zx.tp_set_is_rrr28(self, value)
+    def set_unused_flag28(self, value):
+        zx.tp_set_unused_flag28(self, value)
 
-    def set_is_rrr29(self, value):
-        zx.tp_set_is_rrr29(self, value)
+    def set_unused_flag29(self, value):
+        zx.tp_set_unused_flag29(self, value)
 
-    def set_is_rrr30(self, value):
-        zx.tp_set_is_rrr30(self, value)
+    def set_unused_flag30(self, value):
+        zx.tp_set_unused_flag30(self, value)
 
-    def set_is_rrr31(self, value):
-        zx.tp_set_is_rrr31(self, value)
+    def set_unused_flag31(self, value):
+        zx.tp_set_unused_flag31(self, value)
 
-    def set_is_rrr32(self, value):
-        zx.tp_set_is_rrr32(self, value)
+    def set_unused_flag32(self, value):
+        zx.tp_set_unused_flag32(self, value)
 
-    def set_is_rrr33(self, value):
-        zx.tp_set_is_rrr33(self, value)
+    def set_unused_flag33(self, value):
+        zx.tp_set_unused_flag33(self, value)
 
-    def set_is_rrr34(self, value):
-        zx.tp_set_is_rrr34(self, value)
+    def set_unused_flag34(self, value):
+        zx.tp_set_unused_flag34(self, value)
 
-    def set_is_rrr35(self, value):
-        zx.tp_set_is_rrr35(self, value)
+    def set_unused_flag35(self, value):
+        zx.tp_set_unused_flag35(self, value)
 
-    def set_is_rrr36(self, value):
-        zx.tp_set_is_rrr36(self, value)
+    def set_unused_flag36(self, value):
+        zx.tp_set_unused_flag36(self, value)
 
-    def set_is_rrr37(self, value):
-        zx.tp_set_is_rrr37(self, value)
+    def set_unused_flag37(self, value):
+        zx.tp_set_unused_flag37(self, value)
 
-    def set_is_rrr38(self, value):
-        zx.tp_set_is_rrr38(self, value)
+    def set_unused_flag38(self, value):
+        zx.tp_set_unused_flag38(self, value)
 
-    def set_is_rrr39(self, value):
-        zx.tp_set_is_rrr39(self, value)
+    def set_unused_flag39(self, value):
+        zx.tp_set_unused_flag39(self, value)
 
-    def set_is_rrr40(self, value):
-        zx.tp_set_is_rrr40(self, value)
+    def set_unused_flag40(self, value):
+        zx.tp_set_unused_flag40(self, value)
 
-    def set_is_rrr41(self, value):
-        zx.tp_set_is_rrr41(self, value)
+    def set_unused_flag41(self, value):
+        zx.tp_set_unused_flag41(self, value)
 
-    def set_is_rrr42(self, value):
-        zx.tp_set_is_rrr42(self, value)
+    def set_unused_flag42(self, value):
+        zx.tp_set_unused_flag42(self, value)
 
-    def set_is_rrr43(self, value):
-        zx.tp_set_is_rrr43(self, value)
+    def set_unused_flag43(self, value):
+        zx.tp_set_unused_flag43(self, value)
 
-    def set_is_rrr44(self, value):
-        zx.tp_set_is_rrr44(self, value)
+    def set_unused_flag44(self, value):
+        zx.tp_set_unused_flag44(self, value)
 
-    def set_is_rrr45(self, value):
-        zx.tp_set_is_rrr45(self, value)
+    def set_unused_flag45(self, value):
+        zx.tp_set_unused_flag45(self, value)
 
-    def set_is_rrr46(self, value):
-        zx.tp_set_is_rrr46(self, value)
+    def set_unused_flag46(self, value):
+        zx.tp_set_unused_flag46(self, value)
 
-    def set_is_rrr47(self, value):
-        zx.tp_set_is_rrr47(self, value)
+    def set_unused_flag47(self, value):
+        zx.tp_set_unused_flag47(self, value)
 
-    def set_is_rrr48(self, value):
-        zx.tp_set_is_rrr48(self, value)
+    def set_unused_flag48(self, value):
+        zx.tp_set_unused_flag48(self, value)
 
-    def set_is_rrr49(self, value):
-        zx.tp_set_is_rrr49(self, value)
+    def set_unused_flag49(self, value):
+        zx.tp_set_unused_flag49(self, value)
 
-    def set_is_rrr50(self, value):
-        zx.tp_set_is_rrr50(self, value)
+    def set_unused_flag50(self, value):
+        zx.tp_set_unused_flag50(self, value)
 
-    def set_is_rrr51(self, value):
-        zx.tp_set_is_rrr51(self, value)
+    def set_unused_flag51(self, value):
+        zx.tp_set_unused_flag51(self, value)
 
-    def set_is_rrr52(self, value):
-        zx.tp_set_is_rrr52(self, value)
+    def set_unused_flag52(self, value):
+        zx.tp_set_unused_flag52(self, value)
 
     def set_is_ai_wanderer(self, value):
         zx.tp_set_is_ai_wanderer(self, value)
