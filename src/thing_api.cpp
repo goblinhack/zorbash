@@ -266,7 +266,7 @@ int Thing::is_rrr4(void) const                                          {_ retur
 int Thing::is_rrr50(void) const                                         {_ return (tp()->is_rrr50()); }
 int Thing::is_rrr51(void) const                                         {_ return (tp()->is_rrr51()); }
 int Thing::is_rrr52(void) const                                         {_ return (tp()->is_rrr52()); }
-int Thing::is_rrr53(void) const                                         {_ return (tp()->is_rrr53()); }
+int Thing::is_ai_wanderer(void) const                                         {_ return (tp()->is_ai_wanderer()); }
 int Thing::is_organic(void) const                                         {_ return (tp()->is_organic()); }
 int Thing::is_glass(void) const                                         {_ return (tp()->is_glass()); }
 int Thing::is_stone(void) const                                         {_ return (tp()->is_stone()); }

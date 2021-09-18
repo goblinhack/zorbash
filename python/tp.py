@@ -388,8 +388,8 @@ class Tp:
     def set_is_rrr52(self, value):
         zx.tp_set_is_rrr52(self, value)
 
-    def set_is_rrr53(self, value):
-        zx.tp_set_is_rrr53(self, value)
+    def set_is_ai_wanderer(self, value):
+        zx.tp_set_is_ai_wanderer(self, value)
 
     def set_is_organic(self, value):
         zx.tp_set_is_organic(self, value)
@@ -688,7 +688,6 @@ class Tp:
     def set_rarity(self, value):
         zx.tp_set_rarity(self, value)
 
-
     def set_is_stamina_check(self, value):
         zx.tp_set_is_stamina_check(self, value)
 
@@ -781,7 +780,6 @@ class Tp:
 
     def set_is_potion(self, value):
         zx.tp_set_is_potion(self, value)
-
 
     def set_is_floating(self, value):
         zx.tp_set_is_floating(self, value)

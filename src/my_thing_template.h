@@ -292,7 +292,7 @@ private:
     int _is_rrr50 {};
     int _is_rrr51 {};
     int _is_rrr52 {};
-    int _is_rrr53 {};
+    int _is_ai_wanderer {};
     int _is_organic {};
     int _is_glass {};
     int _is_stone {};
@@ -758,7 +758,7 @@ public:
     int is_rrr50(void) const;
     int is_rrr51(void) const;
     int is_rrr52(void) const;
-    int is_rrr53(void) const;
+    int is_ai_wanderer(void) const;
     int is_organic(void) const;
     int is_glass(void) const;
     int is_stone(void) const;
@@ -1087,7 +1087,7 @@ public:
     void set_is_rrr50(int);
     void set_is_rrr51(int);
     void set_is_rrr52(int);
-    void set_is_rrr53(int);
+    void set_is_ai_wanderer(int);
     void set_is_organic(int);
     void set_is_glass(int);
     void set_is_stone(int);

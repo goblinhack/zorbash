@@ -23,6 +23,7 @@ def on_death(me, x, y):
 def tp_init(name, text_name):
     mytp = tp.Tp(name, text_name)
     mytp.set_ai_avoid_distance(3)
+    mytp.set_is_ai_wanderer(True)
     mytp.set_ai_enemy_memory(100)
     mytp.set_ai_scent_distance(3)
     mytp.set_ai_vision_distance(3)
@@ -61,6 +62,7 @@ def tp_init(name, text_name):
     mytp.set_is_meat_eater(True)
     mytp.set_is_meat(True)
     mytp.set_is_monst(True)
+    mytp.set_is_ai_wanderer(True)
     mytp.set_is_moveable(True)
     mytp.set_is_shovable(True)
     mytp.set_long_text_description("A snarling mass of flying cuteness. They don't see so well, so best to keep far away.")

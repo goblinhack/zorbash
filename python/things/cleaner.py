@@ -57,6 +57,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_loggable_for_unimportant_stuff(True)
     mytp.set_is_meat_eater(True)
     mytp.set_is_monst(True)
+    mytp.set_is_ai_wanderer(True)
     mytp.set_is_moveable(True)
     mytp.set_is_potion_eater(True)
     mytp.set_is_steal_item_chance_d1000(200)

@@ -220,7 +220,7 @@ bool Thing::matches (const std::string& what) const
     if (is_rrr50() &&                                         (what == "is_rrr50"))                                         { return true; }
     if (is_rrr51() &&                                         (what == "is_rrr51"))                                         { return true; }
     if (is_rrr52() &&                                         (what == "is_rrr52"))                                         { return true; }
-    if (is_rrr53() &&                                         (what == "is_rrr53"))                                         { return true; }
+    if (is_ai_wanderer() &&                                         (what == "is_ai_wanderer"))                                         { return true; }
     if (is_organic() &&                                         (what == "is_organic"))                                         { return true; }
     if (is_glass() &&                                         (what == "is_glass"))                                         { return true; }
     if (is_stone() &&                                         (what == "is_stone"))                                         { return true; }
@@ -482,7 +482,7 @@ std::function<int(Thingp)> Thing::matches_to_func (const std::string& what)
     if (what == "is_rrr50")                                         { return &Thing::is_rrr50; }
     if (what == "is_rrr51")                                         { return &Thing::is_rrr51; }
     if (what == "is_rrr52")                                         { return &Thing::is_rrr52; }
-    if (what == "is_rrr53")                                         { return &Thing::is_rrr53; }
+    if (what == "is_ai_wanderer")                                         { return &Thing::is_ai_wanderer; }
     if (what == "is_organic")                                         { return &Thing::is_organic; }
     if (what == "is_glass")                                         { return &Thing::is_glass; }
     if (what == "is_stone")                                         { return &Thing::is_stone; }

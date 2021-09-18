@@ -198,7 +198,7 @@ PyObject *level_is_rrr4_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_rrr50_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_rrr51_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_rrr52_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_rrr53_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_ai_wanderer_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_organic_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_glass_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_stone_at(PyObject *obj, PyObject *args, PyObject *keywds);

@@ -247,7 +247,7 @@ PyObject *thing_is_rrr4(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr50(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr51(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rrr52(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_rrr53(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_ai_wanderer(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_organic(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_glass(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_stone(PyObject *obj, PyObject *args, PyObject *keywds);

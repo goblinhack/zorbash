@@ -38,6 +38,7 @@ def tp_init(name, text_name):
     mytp.set_is_loggable_for_important_stuff(True)
     mytp.set_is_loggable_for_unimportant_stuff(True)
     mytp.set_is_monst(True)
+    mytp.set_is_ai_wanderer(True)
     mytp.set_is_moveable(True)
     mytp.set_is_undead(True)
     mytp.set_light_color("green")

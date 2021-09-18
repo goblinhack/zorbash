@@ -331,7 +331,7 @@ int Tp::is_rrr4(void) const                                          { return _i
 int Tp::is_rrr50(void) const                                         { return _is_rrr50; }
 int Tp::is_rrr51(void) const                                         { return _is_rrr51; }
 int Tp::is_rrr52(void) const                                         { return _is_rrr52; }
-int Tp::is_rrr53(void) const                                         { return _is_rrr53; }
+int Tp::is_ai_wanderer(void) const                                         { return _is_ai_wanderer; }
 int Tp::is_organic(void) const                                         { return _is_organic; }
 int Tp::is_glass(void) const                                         { return _is_glass; }
 int Tp::is_stone(void) const                                         { return _is_stone; }
@@ -650,7 +650,7 @@ void Tp::set_is_rrr4(int v)                                          { _is_rrr4 
 void Tp::set_is_rrr50(int v)                                         { _is_rrr50 = v; }
 void Tp::set_is_rrr51(int v)                                         { _is_rrr51 = v; }
 void Tp::set_is_rrr52(int v)                                         { _is_rrr52 = v; }
-void Tp::set_is_rrr53(int v)                                         { _is_rrr53 = v; }
+void Tp::set_is_ai_wanderer(int v)                                         { _is_ai_wanderer = v; }
 void Tp::set_is_organic(int v)                                         { _is_organic = v; }
 void Tp::set_is_glass(int v)                                         { _is_glass = v; }
 void Tp::set_is_stone(int v)                                         { _is_stone = v; }
