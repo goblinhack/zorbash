@@ -313,7 +313,7 @@ def tp_init(name, text_name):
     mytp.set_unused_flag8(False)
     mytp.set_unused_flag9(False)
     mytp.set_z_depth(zx.MAP_DEPTH_OBJ)
-    mytp.set_z_prio(zx.MAP_PRIO_BEHIND)
+    mytp.set_z_prio(zx.MAP_PRIO_INFRONT)
 
     delay = 70
     mytp.set_tile(tile=name + ".1.100", is_hp_100_percent=True, delay_ms=delay)
