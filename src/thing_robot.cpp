@@ -499,7 +499,9 @@ int Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy,
             //
             // Can jump but only if not tired.
             //
-            if (is_jumper() && (get_stamina() > get_stamina_max() / 2)) {
+            if (jump_allowed &&
+                    is_jumper() &&
+                    (get_stamina() > get_stamina_max() / 2)) {
                 //
                 // Trace all possible jump paths to see if we can jump over
                 //

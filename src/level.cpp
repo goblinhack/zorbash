@@ -19,9 +19,9 @@ std::string Level::to_string (void)
     }
 }
 
-int Level::num (void)
+uint32_t Level::num (void)
 {_
-    return (int)(world_at.z / 2) + 1;
+    return (uint32_t)(world_at.z / 2) + 1;
 }
 
 uint8_t Level::is_lava (const point &p)

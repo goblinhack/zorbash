@@ -61,7 +61,7 @@ bool Thing::open_door (Thingp it)
     }
 
     if (is_player()) {
-        static int last_told_when;
+        static uint32_t last_told_when;
         if (!last_told_when || (game->tick_current >= last_told_when + 10)) {
             TOPCON("You need a key.");
         }

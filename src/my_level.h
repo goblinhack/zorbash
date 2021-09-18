@@ -525,7 +525,7 @@ public:
     friend std::istream& operator>>(std::istream &in, Bits<Levelp &> my);
     friend std::ostream& operator<<(std::ostream &out, Bits<Levelp & > const my);
     int inventory_get_slot(Thingp item);
-    int num(void);
+    uint32_t num(void);
     std::string to_string(void);
     Thingp inventory_describe(const uint32_t slot);
     Thingp skillbox_describe(const uint32_t slot);
