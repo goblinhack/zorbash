@@ -844,9 +844,6 @@ class Tp:
     def set_is_loggable_for_important_stuff(self, value):
         zx.tp_set_is_loggable_for_important_stuff(self, value)
 
-    def set_tick_catches_up_on_attack(self, value):
-        zx.tp_set_tick_catches_up_on_attack(self, value)
-
     def set_is_removeable_if_out_of_slots(self, value):
         zx.tp_set_is_removeable_if_out_of_slots(self, value)
 
@@ -951,9 +948,6 @@ class Tp:
 
     def set_throw_distance(self, value):
         zx.tp_set_throw_distance(self, value)
-
-    def set_tick_rate_tenths(self, value):
-        zx.tp_set_tick_rate_tenths(self, value)
 
     def set_lifespan_dice(self, value):
         zx.tp_set_lifespan_dice(self, value)
@@ -1065,9 +1059,6 @@ class Tp:
 
     def set_stat_defence(self, value):
         zx.tp_set_stat_defence(self, value)
-
-    def set_hunger_clock_freq_ms(self, value):
-        zx.tp_set_hunger_clock_freq_ms(self, value)
 
     def set_ai_scent_distance(self, value):
         zx.tp_set_ai_scent_distance(self, value)

@@ -266,17 +266,17 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_wooden(False)
     mytp.set_item_height(4)
     mytp.set_item_width(4)
-    mytp.set_long_text_description("An enormous cherry.")
+    mytp.set_long_text_description("Dungeon durian. The best kind. It smells a bit like a dead goblin and tastes like heaven.")
     mytp.set_loves_fire(False)
     mytp.set_loves_poison(False)
     mytp.set_loves_spiderwebs(False)
     mytp.set_normal_placement_rules(True)
-    mytp.set_nutrition_dice("10+1d15")
+    mytp.set_nutrition_dice("10+1d50")
     mytp.set_on_death_drop_all_items(False)
     mytp.set_on_death_is_open(False)
     mytp.set_rarity(zx.RARITY_COMMON)
     mytp.set_text_a_or_an("a")
-    mytp.set_text_description("%%fg=pink$Cherry.")
+    mytp.set_text_description("%%fg=yellow$Durian.")
     mytp.set_z_depth(zx.MAP_DEPTH_OBJ)
     mytp.set_z_prio(zx.MAP_PRIO_BEHIND)
 
@@ -284,6 +284,6 @@ def tp_init(name, text_name, short_text_name):
     mytp.update()
 
 def init():
-    tp_init(name="food_cherry", text_name="cherry", short_text_name="cherry")
+    tp_init(name="food_durian", text_name="durian", short_text_name="durian")
 
 init()
