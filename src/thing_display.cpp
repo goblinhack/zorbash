@@ -871,6 +871,10 @@ void Thing::blit_internal (int fbo,
         c.a = fade;
     }
 
+    IF_DEBUG3 {
+        c.a = 255;
+    }
+
     glcolor(c);
 
     auto wobble = update_wobble();
