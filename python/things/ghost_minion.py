@@ -64,7 +64,7 @@ def tp_init(name, text_name):
     mytp.set_is_able_to_walk_through_walls(True)
     mytp.set_is_acid(False)
     mytp.set_is_acid_lover(False)
-    mytp.set_is_ai_wanderer(True)
+    mytp.set_is_ai_wanderer(False)
     mytp.set_is_alive_on_end_of_anim(False)
     mytp.set_is_always_hit(False)
     mytp.set_is_ascend_dungeon(False)
