@@ -36,7 +36,7 @@ def tp_init(name, text_name):
     mytp.set_z_depth(zx.MAP_DEPTH_OBJ)
     mytp.set_z_prio(zx.MAP_PRIO_BEHIND)
 
-    mytp.set_tile(tile="bag", delay_ms=1000)
+    mytp.set_tile(tile="bag_large", delay_ms=1000)
     mytp.update()
 
 def init():

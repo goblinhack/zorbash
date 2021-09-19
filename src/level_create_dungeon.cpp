@@ -269,11 +269,13 @@ have_dungeon_start:
                             t->carry(b);
                         }
 
-                        auto w3 = thing_new("sword_wooden", fpoint(x, y));
+                        auto w3 = thing_new("sword_short_wooden", fpoint(x, y));
                         t->carry(w3);
 
 #if 0
-                        auto w2 = thing_new("sword_basic", fpoint(x, y));
+                        auto w2 = thing_new("sword_short_basic", fpoint(x, y));
+                        t->carry(w2);
+                        auto w2 = thing_new("sword_rusty_basic", fpoint(x, y));
                         t->carry(w2);
 
                         auto b = thing_new("bag_small", fpoint(x, y));

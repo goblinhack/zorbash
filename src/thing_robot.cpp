@@ -884,7 +884,7 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
             //
             if (is_key_collector()) {
                 if (it->is_key()) {
-                    SCORE_ADD(100, "collect-key");
+                    SCORE_ADD(1000, "collect-key");
                     got_one_this_tile = true;
                 }
             }

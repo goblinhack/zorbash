@@ -116,6 +116,10 @@ bool Level::tick (void)
             // may not intersect with all interactive things. i.e a carried
             // sword animation.
             //
+            if (t->is_cursor()) {
+                continue;
+            }
+
             if (t->is_moving) {
                 if (game->robot_mode) {
                     if ((wait_count > wait_count_max) && !game->things_are_moving) {
