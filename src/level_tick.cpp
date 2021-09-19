@@ -16,6 +16,7 @@
 #include "my_random.h"
 #include "my_array_bounds_check.h"
 #include "my_wid_actionbar.h"
+#include "my_sdl.h"
 #include "my_ptrcheck.h"
 
 void Level::handle_all_pending_things (int group)
@@ -144,7 +145,9 @@ bool Level::tick (void)
     // Update the cursor position. But only if the mouse has moved. So if the
     // player is moving via keyboard alone, we don't pollute the screen.
     //
-    if (!time_have_x_tenths_passed_since(10, wid_last_mouse_motion)) {
+    if ((wheel_x != 0) || (wheel_y != 0)) {
+        cursor_move();
+    } else if (!time_have_x_tenths_passed_since(10, wid_last_mouse_motion)) {
         cursor_move();
     }
 
