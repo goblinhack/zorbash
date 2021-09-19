@@ -2980,7 +2980,7 @@ void Dungeon::place_doors_between_depth_changes (void)
                     ERR("Room linkage bug");
                 }
 
-                if (r->depth > o->depth) {
+                if (o->depth && (r->depth > o->depth)) {
                     putc(r->down_door_at.x, r->down_door_at.y,
                          MAP_DEPTH_OBJ, Charmap::DOOR);
                 }
@@ -2992,7 +2992,7 @@ void Dungeon::place_doors_between_depth_changes (void)
                     ERR("Room linkage bug");
                 }
 
-                if (r->depth > o->depth) {
+                if (o->depth && (r->depth > o->depth)) {
                     putc(r->up_door_at.x, r->up_door_at.y,
                          MAP_DEPTH_OBJ, Charmap::DOOR);
                 }
@@ -3004,7 +3004,7 @@ void Dungeon::place_doors_between_depth_changes (void)
                     ERR("Room linkage bug");
                 }
 
-                if (r->depth > o->depth) {
+                if (o->depth && (r->depth > o->depth)) {
                     putc(r->right_door_at.x, r->right_door_at.y,
                          MAP_DEPTH_OBJ, Charmap::DOOR);
                 }
@@ -3016,7 +3016,7 @@ void Dungeon::place_doors_between_depth_changes (void)
                     ERR("Room linkage bug");
                 }
 
-                if (r->depth > o->depth) {
+                if (o->depth && (r->depth > o->depth)) {
                     putc(r->left_door_at.x, r->left_door_at.y,
                          MAP_DEPTH_OBJ, Charmap::DOOR);
                 }
