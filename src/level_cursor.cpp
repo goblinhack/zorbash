@@ -15,6 +15,7 @@
 #include "my_array_bounds_check.h"
 #include "my_ptrcheck.h"
 #include "my_sdl.h"
+//#include "my_traceback.h"
 
 void Level::cursor_check_if_scroll_needed (void)
 {_
@@ -118,6 +119,7 @@ void Level::cursor_move (void)
 
 void Level::cursor_recreate (void)
 {_
+//traceback_dump();
     //
     // Player might be on another level
     //

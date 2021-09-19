@@ -141,9 +141,12 @@ bool Level::tick (void)
     game->tick_update();
 
     //
-    // Update the cursor position.
+    // Update the cursor position. But only if the mouse has moved. So if the
+    // player is moving via keyboard alone, we don't pollute the screen.
     //
-    cursor_move();
+    if (!time_have_x_tenths_passed_since(10, wid_last_mouse_motion)) {
+        cursor_move();
+    }
 
     FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL(this, t) {
         //

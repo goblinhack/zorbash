@@ -155,51 +155,99 @@ void player_tick (bool left, bool right, bool up, bool down, bool attack, bool w
 
     if (state[game->config.key_move_left]) {
         left = true;
+        if (level && level->cursor) {
+            level->cursor_path_clear();
+            level->cursor->hide();
+        }
     }
 
     if (state[game->config.key_move_right]) {
         right = true;
+        if (level && level->cursor) {
+            level->cursor_path_clear();
+            level->cursor->hide();
+        }
     }
 
     if (state[game->config.key_move_up]) {
         up = true;
+        if (level && level->cursor) {
+            level->cursor_path_clear();
+            level->cursor->hide();
+        }
     }
 
     if (state[game->config.key_move_down]) {
         down = true;
+        if (level && level->cursor) {
+            level->cursor_path_clear();
+            level->cursor->hide();
+        }
     }
 
     if (get(sdl_joy_buttons, SDL_JOY_BUTTON_UP)) {
         up = true;
+        if (level && level->cursor) {
+            level->cursor_path_clear();
+            level->cursor->hide();
+        }
     }
 
     if (get(sdl_joy_buttons, SDL_JOY_BUTTON_DOWN)) {
         down = true;
+        if (level && level->cursor) {
+            level->cursor_path_clear();
+            level->cursor->hide();
+        }
     }
 
     if (get(sdl_joy_buttons, SDL_JOY_BUTTON_LEFT)) {
         left = true;
+        if (level && level->cursor) {
+            level->cursor_path_clear();
+            level->cursor->hide();
+        }
     }
 
     if (get(sdl_joy_buttons, SDL_JOY_BUTTON_RIGHT)) {
         right = true;
+        if (level && level->cursor) {
+            level->cursor_path_clear();
+            level->cursor->hide();
+        }
     }
 
     if (sdl_joy_axes) {
         if (sdl_joy_axes[3] > sdl_joy_deadzone) {
             right = true;
+            if (level && level->cursor) {
+                level->cursor_path_clear();
+                level->cursor->hide();
+            }
         }
 
         if (sdl_joy_axes[3] < -sdl_joy_deadzone) {
             left = true;
+            if (level && level->cursor) {
+                level->cursor_path_clear();
+                level->cursor->hide();
+            }
         }
 
         if (sdl_joy_axes[4] > sdl_joy_deadzone) {
             down = true;
+            if (level && level->cursor) {
+                level->cursor_path_clear();
+                level->cursor->hide();
+            }
         }
 
         if (sdl_joy_axes[4] < -sdl_joy_deadzone) {
             up = true;
+            if (level && level->cursor) {
+                level->cursor_path_clear();
+                level->cursor->hide();
+            }
         }
 
         if (sdl_joy_axes[0] > sdl_joy_deadzone) {
@@ -208,74 +256,32 @@ void player_tick (bool left, bool right, bool up, bool down, bool attack, bool w
 
         if (sdl_joy_axes[0] < -sdl_joy_deadzone) {
             left = true;
+            if (level && level->cursor) {
+                level->cursor_path_clear();
+                level->cursor->hide();
+            }
         }
 
         if (sdl_joy_axes[1] > sdl_joy_deadzone) {
             down = true;
+            if (level && level->cursor) {
+                level->cursor_path_clear();
+                level->cursor->hide();
+            }
         }
 
         if (sdl_joy_axes[1] < -sdl_joy_deadzone) {
             up = true;
+            if (level && level->cursor) {
+                level->cursor_path_clear();
+                level->cursor->hide();
+            }
         }
     }
 
     attack |= state[game->config.key_attack] ? true : false;
     wait   |= state[game->config.key_wait_or_collect] ? true : false;
     jump   |= state[game->config.key_jump] ? true : false;
-
-    if (get(sdl_joy_buttons, SDL_JOY_BUTTON_UP)) {
-        up = true;
-    }
-
-    if (get(sdl_joy_buttons, SDL_JOY_BUTTON_DOWN)) {
-        down = true;
-    }
-
-    if (get(sdl_joy_buttons, SDL_JOY_BUTTON_LEFT)) {
-        left = true;
-    }
-
-    if (get(sdl_joy_buttons, SDL_JOY_BUTTON_RIGHT)) {
-        right = true;
-    }
-
-    if (get(sdl_joy_buttons, SDL_JOY_BUTTON_LEFT_FIRE)) {
-        attack = true;
-    }
-
-    if (sdl_joy_axes) {
-        if (sdl_joy_axes[3] > sdl_joy_deadzone) {
-            right = true;
-        }
-
-        if (sdl_joy_axes[3] < -sdl_joy_deadzone) {
-            left = true;
-        }
-
-        if (sdl_joy_axes[4] > sdl_joy_deadzone) {
-            down = true;
-        }
-
-        if (sdl_joy_axes[4] < -sdl_joy_deadzone) {
-            up = true;
-        }
-
-        if (sdl_joy_axes[0] > sdl_joy_deadzone) {
-            right = true;
-        }
-
-        if (sdl_joy_axes[0] < -sdl_joy_deadzone) {
-            left = true;
-        }
-
-        if (sdl_joy_axes[1] > sdl_joy_deadzone) {
-            down = true;
-        }
-
-        if (sdl_joy_axes[1] < -sdl_joy_deadzone) {
-            up = true;
-        }
-    }
 
     double d = 1.0;
     double dx = 0.0;
