@@ -33,6 +33,11 @@ const int Tp::get_damage_melee(void) const { return _damage_melee_dice.roll(); }
 const std::string& Tp::get_damage_melee_dice_str(void) const { return _damage_melee_dice_str; }
 void Tp::set_damage_melee_dice(const std::string &v) { _damage_melee_dice = v; _damage_melee_dice_str = v; }
 
+const Dice& Tp::get_damage_poison_dice(void) const { return _damage_poison_dice; }
+const int Tp::get_damage_poison(void) const { return _damage_poison_dice.roll(); }
+const std::string& Tp::get_damage_poison_dice_str(void) const { return _damage_poison_dice_str; }
+void Tp::set_damage_poison_dice(const std::string &v) { _damage_poison_dice = v; _damage_poison_dice_str = v; }
+
 const Dice& Tp::get_damage_crush_dice(void) const { return _damage_crush_dice; }
 const int Tp::get_damage_crush(void) const { return _damage_crush_dice.roll(); }
 const std::string& Tp::get_damage_crush_dice_str(void) const { return _damage_crush_dice_str; }
@@ -326,7 +331,7 @@ int Tp::unused_flag45(void) const                                         { retu
 int Tp::unused_flag46(void) const                                         { return _unused_flag46; }
 int Tp::unused_flag47(void) const                                         { return _unused_flag47; }
 int Tp::unused_flag48(void) const                                         { return _unused_flag48; }
-int Tp::unused_flag49(void) const                                         { return _unused_flag49; }
+int Tp::is_rusty(void) const                                         { return _is_rusty; }
 int Tp::unused_flag4(void) const                                          { return _unused_flag4; }
 int Tp::unused_flag50(void) const                                         { return _unused_flag50; }
 int Tp::unused_flag51(void) const                                         { return _unused_flag51; }
@@ -645,7 +650,7 @@ void Tp::set_unused_flag45(int v)                                         { _unu
 void Tp::set_unused_flag46(int v)                                         { _unused_flag46 = v; }
 void Tp::set_unused_flag47(int v)                                         { _unused_flag47 = v; }
 void Tp::set_unused_flag48(int v)                                         { _unused_flag48 = v; }
-void Tp::set_unused_flag49(int v)                                         { _unused_flag49 = v; }
+void Tp::set_is_rusty(int v)                                         { _is_rusty = v; }
 void Tp::set_unused_flag4(int v)                                          { _unused_flag4 = v; }
 void Tp::set_unused_flag50(int v)                                         { _unused_flag50 = v; }
 void Tp::set_unused_flag51(int v)                                         { _unused_flag51 = v; }

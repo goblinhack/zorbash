@@ -261,7 +261,7 @@ int Thing::unused_flag45(void) const                                         {_ 
 int Thing::unused_flag46(void) const                                         {_ return (tp()->unused_flag46()); }
 int Thing::unused_flag47(void) const                                         {_ return (tp()->unused_flag47()); }
 int Thing::unused_flag48(void) const                                         {_ return (tp()->unused_flag48()); }
-int Thing::unused_flag49(void) const                                         {_ return (tp()->unused_flag49()); }
+int Thing::is_rusty(void) const                                         {_ return (tp()->is_rusty()); }
 int Thing::unused_flag4(void) const                                          {_ return (tp()->unused_flag4()); }
 int Thing::unused_flag50(void) const                                         {_ return (tp()->unused_flag50()); }
 int Thing::unused_flag51(void) const                                         {_ return (tp()->unused_flag51()); }

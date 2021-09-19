@@ -193,7 +193,7 @@ PyObject *level_unused_flag45_at(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *level_unused_flag46_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag47_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag48_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag49_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_rusty_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag4_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag50_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag51_at(PyObject *obj, PyObject *args, PyObject *keywds);

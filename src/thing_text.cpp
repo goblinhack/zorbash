@@ -232,6 +232,11 @@ void Thing::show_botcon_description (void) const
                 "%%fg=reset$.";
     }
 
+    if (is_poison()){
+        text += " Poison %%fg=red$" + tp()->get_damage_poison_dice_str() +
+                "%%fg=reset$.";
+    }
+
     if (get_immediate_owner()) {
         if (is_usable()){
             if (is_food()){

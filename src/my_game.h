@@ -185,6 +185,7 @@ public:
     void wid_thing_info_add_item_rarity(WidPopup *w, Thingp t);
     void wid_thing_info_add_enchant(WidPopup *w, Thingp t);
     void wid_thing_info_add_melee_damage(WidPopup *w, Thingp t);
+    void wid_thing_info_add_poison_damage(WidPopup *w, Thingp t);
     void wid_thing_info_add_monst_rarity(WidPopup *w, Thingp t);
     void wid_thing_info_add_nutrition(WidPopup *w, Thingp t);
     void wid_thing_info_add_strength(WidPopup *w, Thingp t);

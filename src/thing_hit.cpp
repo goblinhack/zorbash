@@ -114,6 +114,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
                           Thingp real_hitter, // who fired the arrow?
                           bool crit,
                           bool bite,
+                          int poison,
                           int damage)
 {_
     if (!hitter) {
@@ -155,7 +156,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         }
     }
 
-    if (bite) {
+    if (bite || poison) {
         if (loves_poison()) {
             if (hitter->is_poison() || real_hitter->is_poison()) {
                 if (is_player()) {
@@ -163,7 +164,17 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
                 } else if (real_hitter->is_player()) {
                     TOPCON("%s drinks in the poison!", text_The().c_str());
                 }
+                health_boost(poison);
                 return false;
+            }
+        } else if (poison) {
+            incr_poison(poison);
+            if (is_player()) {
+                TOPCON("%%fg=yellow$You are poisoned for %d damage!%%fg=reset$",
+                       poison);
+            } else if (real_hitter->is_player()) {
+                TOPCON("%%fg=yellow$You poison %s for %d damage!%%fg=reset$",
+                       text_The().c_str(), poison);
             }
         }
     }
@@ -575,7 +586,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
 //
 // Returns true on the target being dead.
 //
-int Thing::is_hit_by (Thingp hitter, bool crit, bool bite, int damage)
+int Thing::is_hit_by (Thingp hitter, bool crit, bool bite, int poison, int damage)
 {_
     IF_DEBUG2 {
         hitter->log("Possible hit %s for %u", to_string().c_str(), damage);
@@ -705,17 +716,19 @@ _
     }
     int hit_and_killed;
 
-    hit_and_killed = ai_hit_actual(hitter, real_hitter, crit, bite, damage);
+    hit_and_killed = ai_hit_actual(hitter, real_hitter, crit, bite, poison, damage);
 
     return (hit_and_killed);
 }
 
 int Thing::is_hit_by (Thingp hitter, int damage)
 {_
-    return (is_hit_by(hitter, false, false, damage));
+    return (is_hit_by(hitter, false, false, 0, damage));
 }
 
 int Thing::is_hit_by (Thingp hitter)
 {_
-    return (is_hit_by(hitter, false, false, hitter->get_damage_melee()));
+    return (is_hit_by(hitter, false, false, 
+                      hitter->get_damage_poison(),
+                      hitter->get_damage_melee()));
 }

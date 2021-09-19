@@ -53,6 +53,7 @@ private:
     Dice _damage_swallow_dice {};
     Dice _damage_crush_dice {};
     Dice _damage_melee_dice {};
+    Dice _damage_poison_dice {};
     Dice _gold_value_dice {};
     Dice _health_initial_dice {};
     Dice _lifespan_dice {};
@@ -287,7 +288,7 @@ private:
     int _unused_flag46 {};
     int _unused_flag47 {};
     int _unused_flag48 {};
-    int _unused_flag49 {};
+    int _is_rusty {};
     int _unused_flag5 {};
     int _unused_flag50 {};
     int _unused_flag51 {};
@@ -385,6 +386,7 @@ private:
     std::string _damage_swallow_dice_str;
     std::string _damage_crush_dice_str;
     std::string _damage_melee_dice_str;
+    std::string _damage_poison_dice_str;
     std::string _gfx_anim_attack;
     std::string _gold_value_dice_str;
     std::string _health_initial_dice_str;
@@ -436,6 +438,7 @@ public:
     const Dice& get_damage_swallow_dice(void) const;
     const Dice& get_damage_crush_dice(void) const;
     const Dice& get_damage_melee_dice(void) const;
+    const Dice& get_damage_poison_dice(void) const;
     const Dice& get_health_initial_dice(void) const;
     const Dice& gold_value_dice(void) const;
     const Dice& lifespan_dice(void) const;
@@ -447,6 +450,7 @@ public:
     const int get_damage_swallow(void) const;
     const int get_damage_crush(void) const;
     const int get_damage_melee(void) const;
+    const int get_damage_poison(void) const;
     const int get_health_initial(void) const;
     const int idle_tick(void) const;
     const int lifespan(void) const;
@@ -456,6 +460,7 @@ public:
     const std::string& get_damage_swallow_dice_str(void) const;
     const std::string& get_damage_crush_dice_str(void) const;
     const std::string& get_damage_melee_dice_str(void) const;
+    const std::string& get_damage_poison_dice_str(void) const;
     const std::string& get_health_initial_dice_str(void) const;
     const std::string& gfx_anim_attack(void) const;
     const std::string& gold_value_dice_str(void) const;
@@ -753,7 +758,7 @@ public:
     int unused_flag46(void) const;
     int unused_flag47(void) const;
     int unused_flag48(void) const;
-    int unused_flag49(void) const;
+    int is_rusty(void) const;
     int unused_flag4(void) const;
     int unused_flag50(void) const;
     int unused_flag51(void) const;
@@ -886,6 +891,7 @@ public:
     void set_damage_doubled_from_poison(int);
     void set_damage_doubled_from_water(int);
     void set_damage_melee_dice(const std::string &);
+    void set_damage_poison_dice(const std::string &);
     void set_enchant_level(int);
     void set_enchant_max(int);
     void set_gfx_an_animation_only(int);
@@ -1082,7 +1088,7 @@ public:
     void set_unused_flag46(int);
     void set_unused_flag47(int);
     void set_unused_flag48(int);
-    void set_unused_flag49(int);
+    void set_is_rusty(int);
     void set_unused_flag4(int);
     void set_unused_flag50(int);
     void set_unused_flag51(int);

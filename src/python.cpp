@@ -1473,7 +1473,7 @@ static PyMethodDef python_c_METHODS[] = {
     {"level_unused_flag46_at",                                      (PyCFunction)level_unused_flag46_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_unused_flag47_at",                                      (PyCFunction)level_unused_flag47_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_unused_flag48_at",                                      (PyCFunction)level_unused_flag48_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"level_unused_flag49_at",                                      (PyCFunction)level_unused_flag49_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"level_is_rusty_at",                                      (PyCFunction)level_is_rusty_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_unused_flag4_at",                                       (PyCFunction)level_unused_flag4_at,                                       METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_unused_flag50_at",                                      (PyCFunction)level_unused_flag50_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"level_unused_flag51_at",                                      (PyCFunction)level_unused_flag51_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
@@ -1771,7 +1771,7 @@ static PyMethodDef python_c_METHODS[] = {
     {"thing_unused_flag46",                                         (PyCFunction)thing_unused_flag46,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_unused_flag47",                                         (PyCFunction)thing_unused_flag47,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_unused_flag48",                                         (PyCFunction)thing_unused_flag48,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-    {"thing_unused_flag49",                                         (PyCFunction)thing_unused_flag49,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
+    {"thing_is_rusty",                                         (PyCFunction)thing_is_rusty,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_unused_flag4",                                          (PyCFunction)thing_unused_flag4,                                          METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_unused_flag50",                                         (PyCFunction)thing_unused_flag50,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
     {"thing_unused_flag51",                                         (PyCFunction)thing_unused_flag51,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
@@ -1894,6 +1894,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(damage_doubled_from_poison)
     TP_SET_DECL(damage_doubled_from_water)
     TP_SET_DECL(damage_melee_dice)
+    TP_SET_DECL(damage_poison_dice)
     TP_SET_DECL(enchant_level)
     TP_SET_DECL(enchant_max)
     TP_SET_DECL(gfx_an_animation_only)
@@ -2088,7 +2089,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(unused_flag46)
     TP_SET_DECL(unused_flag47)
     TP_SET_DECL(unused_flag48)
-    TP_SET_DECL(unused_flag49)
+    TP_SET_DECL(is_rusty)
     TP_SET_DECL(unused_flag5)
     TP_SET_DECL(unused_flag50)
     TP_SET_DECL(unused_flag51)

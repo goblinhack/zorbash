@@ -336,7 +336,7 @@ do
       set_unused_flag46 \
       set_unused_flag47 \
       set_unused_flag48 \
-      set_unused_flag49 \
+      set_is_rusty \
       set_unused_flag5 \
       set_unused_flag50 \
       set_unused_flag51 \

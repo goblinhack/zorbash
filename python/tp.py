@@ -376,8 +376,8 @@ class Tp:
     def set_unused_flag48(self, value):
         zx.tp_set_unused_flag48(self, value)
 
-    def set_unused_flag49(self, value):
-        zx.tp_set_unused_flag49(self, value)
+    def set_is_rusty(self, value):
+        zx.tp_set_is_rusty(self, value)
 
     def set_unused_flag50(self, value):
         zx.tp_set_unused_flag50(self, value)
@@ -990,6 +990,9 @@ class Tp:
 
     def set_damage_melee_dice(self, value):
         zx.tp_set_damage_melee_dice(self, value)
+
+    def set_damage_poison_dice(self, value):
+        zx.tp_set_damage_poison_dice(self, value)
 
     def set_damage_crush_dice(self, value):
         zx.tp_set_damage_crush_dice(self, value)

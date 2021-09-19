@@ -242,7 +242,7 @@ PyObject *thing_unused_flag45(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag46(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag47(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag48(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag49(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_rusty(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag4(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag50(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag51(PyObject *obj, PyObject *args, PyObject *keywds);

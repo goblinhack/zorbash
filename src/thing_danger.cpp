@@ -57,8 +57,9 @@ int Tp::get_danger_level (void)
     }
 
     danger_level += std::max(get_damage_melee_dice().max_roll(),
-                      std::max(get_damage_swallow_dice().max_roll(),
-                               get_damage_bite_dice().max_roll()));
+                      std::max(get_damage_poison_dice().max_roll(),
+                        std::max(get_damage_swallow_dice().max_roll(),
+                                 get_damage_bite_dice().max_roll())));
 
     //
     // Don't include crush damage as it is non typical

@@ -453,6 +453,7 @@ _
     // We hit. See how much damage.
     //
     auto damage = get_damage_melee();
+    auto poison = get_damage_poison();
     auto total_damage = damage + att_mod;
 
     //
@@ -571,7 +572,7 @@ _
         }
     }
 
-    if (it->is_hit_by(this, crit, bite, total_damage)) {
+    if (it->is_hit_by(this, crit, bite, poison, total_damage)) {
         dbg("The attack succeeded (dmg %d att, def %d) on %s",
             att_mod, def_mod, it->to_string().c_str());
 

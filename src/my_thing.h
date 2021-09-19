@@ -340,6 +340,7 @@ public:
     const Dice& get_damage_swallow_dice(void) const;
     const Dice& get_damage_crush_dice(void) const;
     const Dice& get_damage_melee_dice(void) const;
+    const Dice& get_damage_poison_dice(void) const;
     const Dice& get_gold_value_dice(void) const;
     const Dice& get_health_initial_dice(void) const;
     const Dice& get_lifespan_dice(void) const;
@@ -352,6 +353,7 @@ public:
     const std::string& get_damage_swallow_dice_str(void) const;
     const std::string& get_damage_crush_dice_str(void) const;
     const std::string& get_damage_melee_dice_str(void) const;
+    const std::string& get_damage_poison_dice_str(void) const;
     const std::string get_danger_level_str(Thingp); // Cannot return reference
     const std::string& get_dead_reason(void) const;
     const std::string& get_gold_value_dice_str(void) const;
@@ -423,7 +425,7 @@ public:
     int ai_avoid_distance(void) const;
     int ai_choose_goal(void);
     int ai_enemy_memory(void) const;
-    int ai_hit_actual(Thingp hitter, Thingp real_hitter, bool crit, bool bite, int damage);
+    int ai_hit_actual(Thingp hitter, Thingp real_hitter, bool crit, bool bite, int poison, int damage);
     int ai_obstacle(void) const;
     int ai_scent_distance(void) const;
     int ai_vision_distance(void) const;
@@ -530,6 +532,7 @@ public:
     int get_damage_crush(void) const;
     int get_damage_max(void);
     int get_damage_melee(void) const;
+    int get_damage_poison(void) const;
     int get_damage_min(void);
     int get_danger_current_level(Thingp);
     int get_danger_current_level(void);
@@ -756,7 +759,7 @@ public:
     int is_hazard(void) const;
     int is_health_booster(void) const;
     int is_hit_by(Thingp hitter);
-    int is_hit_by(Thingp hitter, bool crit, bool bite, int damage);
+    int is_hit_by(Thingp hitter, bool crit, bool bite, int poison, int damage);
     int is_hit_by(Thingp hitter, int damage);
     int is_hittable(void) const;
     int is_humanoid(void) const;
@@ -848,7 +851,7 @@ public:
     int unused_flag46(void) const;
     int unused_flag47(void) const;
     int unused_flag48(void) const;
-    int unused_flag49(void) const;
+    int is_rusty(void) const;
     int unused_flag4(void) const;
     int unused_flag50(void) const;
     int unused_flag51(void) const;
@@ -1275,7 +1278,7 @@ public:
     void on_open(void);
     void on_use(Thingp what);
     void on_use(Thingp what, Thingp target);
-    void poison_boost(int v);
+    void poison_tick(void);
     void reinit(void);
     void remove_all_references();
     void remove_minion_owner(void);

@@ -319,7 +319,7 @@ def tp_init(name, text_name, short_text_name, title):
     mytp.set_unused_flag46(False)
     mytp.set_unused_flag47(False)
     mytp.set_unused_flag48(False)
-    mytp.set_unused_flag49(False)
+    mytp.set_is_rusty(False)
     mytp.set_unused_flag4(False)
     mytp.set_unused_flag50(False)
     mytp.set_unused_flag51(False)
