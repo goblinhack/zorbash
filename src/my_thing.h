@@ -900,7 +900,7 @@ public:
   int is_treasure_type(void) const;
   int is_undead(void) const;
   int is_usable(void) const;
-  int is_used_automatically_when_selected(void) const;
+  int is_auto_use(void) const;
   int is_used_when_thrown(void) const;
   int is_very_combustible(void) const;
   int is_wall_dungeon(void) const;

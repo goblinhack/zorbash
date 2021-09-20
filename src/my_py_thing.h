@@ -292,7 +292,7 @@ PyObject *thing_is_treasure_type_eater(PyObject *obj, PyObject *args, PyObject *
 PyObject *thing_is_treasure_type(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_undead(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_usable(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_used_automatically_when_selected(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_auto_use(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_used_when_thrown(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_very_combustible(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_visible(PyObject *obj, PyObject *args, PyObject *keywds);

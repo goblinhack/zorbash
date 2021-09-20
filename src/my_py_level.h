@@ -244,7 +244,7 @@ PyObject *level_is_item_collector_at(PyObject *obj, PyObject *args, PyObject *ke
 PyObject *level_is_treasure_type_eater_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_undead_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_usable_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_used_automatically_when_selected_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_auto_use_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_used_when_thrown_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_very_combustible_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_visible_at(PyObject *obj, PyObject *args, PyObject *keywds);

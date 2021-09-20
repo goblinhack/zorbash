@@ -227,7 +227,7 @@ def tp_init(name, text_name):
     mytp.set_is_treasure_type(False)
     mytp.set_is_undead(False)
     mytp.set_is_usable(False)
-    mytp.set_is_used_automatically_when_selected(False)
+    mytp.set_is_auto_use(False)
     mytp.set_is_used_when_thrown(False)
     mytp.set_is_very_combustible(False)
     mytp.set_is_wall_dungeon(False)

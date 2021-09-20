@@ -338,7 +338,7 @@ private:
   int _is_treasure_type_eater {};
   int _is_undead {};
   int _is_usable {};
-  int _is_used_automatically_when_selected {};
+  int _is_auto_use {};
   int _is_used_when_thrown {};
   int _is_very_combustible {};
   int _is_wall {};
@@ -809,7 +809,7 @@ public:
   int is_treasure_type(void) const;
   int is_undead(void) const;
   int is_usable(void) const;
-  int is_used_automatically_when_selected(void) const;
+  int is_auto_use(void) const;
   int is_used_when_thrown(void) const;
   int is_very_combustible(void) const;
   int is_wall_dungeon(void) const;
@@ -1139,7 +1139,7 @@ public:
   void set_is_treasure_type(int);
   void set_is_undead(int);
   void set_is_usable(int);
-  void set_is_used_automatically_when_selected(int);
+  void set_is_auto_use(int);
   void set_is_used_when_thrown(int);
   void set_is_very_combustible(int);
   void set_is_wall_dungeon(int);

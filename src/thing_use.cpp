@@ -159,7 +159,7 @@ _
   } else if (what->is_target_auto_select()) {
     fire_at_and_choose_target(what);
     level->describe(what);
-  } else if (what->is_used_automatically_when_selected()) {
+  } else if (what->is_auto_use()) {
     use(what);
     level->describe(what);
   } else if (what->is_food()) {

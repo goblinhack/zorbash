@@ -374,7 +374,7 @@ do
       set_is_treasure_type_eater \
       set_is_undead \
       set_is_usable \
-      set_is_used_automatically_when_selected \
+      set_is_auto_use \
       set_is_used_when_thrown \
       set_is_very_combustible \
       set_is_wall \

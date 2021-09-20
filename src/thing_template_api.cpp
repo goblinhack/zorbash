@@ -378,7 +378,7 @@ int Tp::is_treasure_type_eater(void) const                           { return _i
 int Tp::is_treasure_type(void) const                                 { return _is_treasure_type; }
 int Tp::is_undead(void) const                                        { return _is_undead; }
 int Tp::is_usable(void) const                                        { return _is_usable; }
-int Tp::is_used_automatically_when_selected(void) const              { return _is_used_automatically_when_selected; }
+int Tp::is_auto_use(void) const              { return _is_auto_use; }
 int Tp::is_used_when_thrown(void) const                              { return _is_used_when_thrown; }
 int Tp::is_very_combustible(void) const                              { return _is_very_combustible; }
 int Tp::is_wall_dungeon(void) const                                  { return _is_wall_dungeon; }
@@ -698,7 +698,7 @@ void Tp::set_is_treasure_type_eater(int v)                           { _is_treas
 void Tp::set_is_treasure_type(int v)                                 { _is_treasure_type = v; }
 void Tp::set_is_undead(int v)                                        { _is_undead = v; }
 void Tp::set_is_usable(int v)                                        { _is_usable = v; }
-void Tp::set_is_used_automatically_when_selected(int v)              { _is_used_automatically_when_selected = v; }
+void Tp::set_is_auto_use(int v)              { _is_auto_use = v; }
 void Tp::set_is_used_when_thrown(int v)                              { _is_used_when_thrown = v; }
 void Tp::set_is_very_combustible(int v)                              { _is_very_combustible = v; }
 void Tp::set_is_wall_dungeon(int v)                                  { _is_wall_dungeon = v; }

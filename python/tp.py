@@ -637,8 +637,8 @@ class Tp:
     def set_is_used_when_thrown(self, value):
         zx.tp_set_is_used_when_thrown(self, value)
 
-    def set_is_used_automatically_when_selected(self, value):
-        zx.tp_set_is_used_automatically_when_selected(self, value)
+    def set_is_auto_use(self, value):
+        zx.tp_set_is_auto_use(self, value)
 
     def set_is_auto_throw(self, value):
         zx.tp_set_is_auto_throw(self, value)

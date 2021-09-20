@@ -82,11 +82,11 @@ int Thing::gfx_bounce_on_move(void) const                      {_ return (tp()->
 int Thing::gfx_dead_anim(void) const                           {_ return (tp()->gfx_dead_anim()); }
 int Thing::gfx_flickers(void) const                            {_ return (tp()->gfx_flickers()); }
 int Thing::gfx_glows(void) const                               {_ return (tp()->gfx_glows()); }
-int Thing::gfx_health_bar_autohide(void) const  {_ return (tp()->gfx_health_bar_autohide()); }
+int Thing::gfx_health_bar_autohide(void) const                 {_ return (tp()->gfx_health_bar_autohide()); }
 int Thing::gfx_health_bar_shown(void) const                    {_ return (tp()->gfx_health_bar_shown()); }
 int Thing::gfx_long_shadow_caster(void) const                  {_ return (tp()->gfx_long_shadow_caster()); }
 int Thing::gfx_on_fire_anim(void) const                        {_ return (tp()->gfx_on_fire_anim()); }
-int Thing::gfx_oversized_and_on_floor(void) const {_ return (tp()->gfx_oversized_and_on_floor()); }
+int Thing::gfx_oversized_and_on_floor(void) const              {_ return (tp()->gfx_oversized_and_on_floor()); }
 int Thing::gfx_short_shadow_caster(void) const                 {_ return (tp()->gfx_short_shadow_caster()); }
 int Thing::gfx_shown_in_bg(void) const                         {_ return (tp()->gfx_shown_in_bg()); }
 int Thing::gfx_show_outlined(void) const                       {_ return (tp()->gfx_show_outlined()); }
@@ -139,7 +139,7 @@ int Thing::is_corpse_on_death(void) const                      {_ return (tp()->
 int Thing::is_corpse (void) const                              {_ return (is_dead && is_corpse_on_death()); }
 int Thing::is_corridor(void) const                             {_ return (tp()->is_corridor()); }
 int Thing::is_critical_to_level(void) const                    {_ return (tp()->is_critical_to_level()); }
-int Thing::is_cursor_can_hover_over_2x_click(void) const  {_ return (tp()->is_cursor_can_hover_over_2x_click()); }
+int Thing::is_cursor_can_hover_over_2x_click(void) const       {_ return (tp()->is_cursor_can_hover_over_2x_click()); }
 int Thing::is_cursor_can_hover_over(void) const                {_ return (tp()->is_cursor_can_hover_over()); }
 int Thing::is_cursor_path(void) const                          {_ return (tp()->is_cursor_path()); }
 int Thing::is_cursor(void) const                               {_ return (tp()->is_cursor()); }
@@ -296,9 +296,9 @@ int Thing::is_steal_item_chance_d1000(void) const              {_ return (tp()->
 int Thing::is_engulf_chance_d1000(void) const                  {_ return (tp()->is_engulf_chance_d1000()); }
 int Thing::is_sticky(void) const                               {_ return (tp()->is_sticky()); }
 int Thing::is_sword(void) const                                {_ return (tp()->is_sword()); }
-int Thing::is_target_auto_select(void) const {_ return (tp()->is_target_auto_select()); }
+int Thing::is_target_auto_select(void) const                   {_ return (tp()->is_target_auto_select()); }
 int Thing::is_throwable(void) const                            {_ return (tp()->is_throwable()); }
-int Thing::is_auto_throw(void) const     {_ return (tp()->is_auto_throw()); }
+int Thing::is_auto_throw(void) const                           {_ return (tp()->is_auto_throw()); }
 int Thing::is_tickable(void) const                             {_ return (tp()->is_tickable()); }
 int Thing::is_tmp_thing(void) const                            {_ return (tp()->is_tmp_thing()); }
 int Thing::is_torch(void) const                                {_ return (tp()->is_torch()); }
@@ -311,7 +311,7 @@ int Thing::is_treasure_type_eater(void) const                  {_ return (tp()->
 int Thing::is_treasure_type(void) const                        {_ return (tp()->is_treasure_type()); }
 int Thing::is_undead(void) const                               {_ return (tp()->is_undead()); }
 int Thing::is_usable(void) const                               {_ return (tp()->is_usable()); }
-int Thing::is_used_automatically_when_selected(void) const     {_ return (tp()->is_used_automatically_when_selected()); }
+int Thing::is_auto_use(void) const                             {_ return (tp()->is_auto_use()); }
 int Thing::is_used_when_thrown(void) const                     {_ return (tp()->is_used_when_thrown()); }
 int Thing::is_very_combustible(void) const                     {_ return (tp()->is_very_combustible()); }
 int Thing::is_wall_dungeon(void) const                         {_ return (tp()->is_wall_dungeon()); }
