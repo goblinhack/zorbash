@@ -1,6 +1,7 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
+// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #include <math.h>
@@ -13,11 +14,11 @@
 
 void Thing::bounce (float bounce_height,
           float bounce_fade,
-          timestamp_t ms,
+          ts_t ms,
           int bounce_count)
 {
-  auto t = set_timestamp_bounce_begin(time_get_time_ms_cached());
-  set_timestamp_bounce_end(t + ms);
+  auto t = set_ts_bounce_begin(time_get_time_ms_cached());
+  set_ts_bounce_end(t + ms);
 
   set_bounce_height(bounce_height);
   set_bounce_fade(bounce_fade);
@@ -33,15 +34,15 @@ float Thing::get_bounce (void)
 
   auto t = time_get_time_ms_cached();
 
-  if (t >= get_timestamp_bounce_end()) {
+  if (t >= get_ts_bounce_end()) {
     is_bouncing = false;
 
     if (get_bounce_count()) {
       bounce(
         get_bounce_height() * get_bounce_fade(),
         get_bounce_fade(),
-        (float)(get_timestamp_bounce_end() -
-            get_timestamp_bounce_begin()) * get_bounce_fade(),
+        (float)(get_ts_bounce_end() -
+            get_ts_bounce_begin()) * get_bounce_fade(),
         get_bounce_count() - 1);
     }
 
@@ -49,8 +50,8 @@ float Thing::get_bounce (void)
   }
 
   float time_step =
-    (float)(t - get_timestamp_bounce_begin()) /
-    (float)(get_timestamp_bounce_end() - get_timestamp_bounce_begin());
+    (float)(t - get_ts_bounce_begin()) /
+    (float)(get_ts_bounce_end() - get_ts_bounce_begin());
 
   float height = 1.0;
 

@@ -31,7 +31,7 @@ def tp_init(name, text_name):
     mytp.set_collision_radius(0.40)
     mytp.set_damage_crush_dice("2d6")
     mytp.set_damage_doubled_from_fire(True)
-    mytp.set_gfx_oversized_but_sitting_on_the_ground(True)
+    mytp.set_gfx_oversized_and_on_floor(True)
     mytp.set_gfx_short_shadow_caster(True)
     mytp.set_gfx_shown_in_bg(True)
     mytp.set_gfx_show_outlined(True)

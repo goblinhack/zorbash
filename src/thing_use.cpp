@@ -1,6 +1,7 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
+// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #include "my_sys.h"
@@ -152,10 +153,10 @@ _
       TOPCON("You wield the %s.", what->text_the().c_str());
       game->tick_begin("player changed weapon");
     }
-  } else if (what->is_thrown_automatically_when_chosen()) {
+  } else if (what->is_auto_throw()) {
     throw_item_choose_target(what);
     level->describe(what);
-  } else if (what->is_target_select_automatically_when_chosen()) {
+  } else if (what->is_target_auto_select()) {
     fire_at_and_choose_target(what);
     level->describe(what);
   } else if (what->is_used_automatically_when_selected()) {

@@ -1,6 +1,7 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
+// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #include "my_sys.h"
@@ -437,12 +438,12 @@ bool Thing::move (fpoint future_pos,
 
   if (tp()->gfx_animated_can_hflip()) {
     if (future_pos.x > mid_at.x) {
-      if (is_facing_left && !get_timestamp_flip_start()) {
-        set_timestamp_flip_start(time_get_time_ms_cached());
+      if (is_facing_left && !get_ts_flip_start()) {
+        set_ts_flip_start(time_get_time_ms_cached());
       }
     } else if (future_pos.x < mid_at.x) {
-      if (!is_facing_left && !get_timestamp_flip_start()) {
-        set_timestamp_flip_start(time_get_time_ms_cached());
+      if (!is_facing_left && !get_ts_flip_start()) {
+        set_ts_flip_start(time_get_time_ms_cached());
       }
     }
   }
@@ -585,7 +586,7 @@ void Thing::move_set_dir_from_delta (fpoint delta)
   // idle animation.
   //
   if (is_dir_none()) {
-    timestamp_next_frame = time_get_time_ms_cached();
+    ts_next_frame = time_get_time_ms_cached();
   }
 
   if (delta.x < 0) {

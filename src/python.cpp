@@ -1,6 +1,7 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
+// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #include <map>
@@ -293,7 +294,12 @@ void py_call_void_fn (const char *module, const char *name, unsigned int val1, u
   py_err();
 }
 
-void py_call_void_fn (const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3, unsigned int val4)
+void py_call_void_fn (const char *module,
+    const char *name,
+    unsigned int val1,
+    unsigned int val2,
+    unsigned int val3,
+    unsigned int val4)
 {_
   auto pmod = py_add_module(module);
   if (!pmod) {
@@ -315,7 +321,13 @@ void py_call_void_fn (const char *module, const char *name, unsigned int val1, u
   py_err();
 }
 
-void py_call_void_fn (const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3, unsigned int val4, unsigned int val5)
+void py_call_void_fn (const char *module,
+    const char *name,
+    unsigned int val1,
+    unsigned int val2,
+    unsigned int val3,
+    unsigned int val4,
+    unsigned int val5)
 {_
   auto pmod = py_add_module(module);
   if (!pmod) {
@@ -337,8 +349,14 @@ void py_call_void_fn (const char *module, const char *name, unsigned int val1, u
   py_err();
 }
 
-void py_call_void_fn (const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3, unsigned int val4, unsigned int val5,
-            unsigned int val6)
+void py_call_void_fn (const char *module,
+    const char *name,
+    unsigned int val1,
+    unsigned int val2,
+    unsigned int val3,
+    unsigned int val4,
+    unsigned int val5,
+   unsigned int val6)
 {_
   auto pmod = py_add_module(module);
   if (!pmod) {
@@ -360,8 +378,15 @@ void py_call_void_fn (const char *module, const char *name, unsigned int val1, u
   py_err();
 }
 
-void py_call_void_fn (const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3, unsigned int val4, unsigned int val5,
-            unsigned int val6, unsigned int val7)
+void py_call_void_fn (const char *module,
+    const char *name,
+    unsigned int val1,
+    unsigned int val2,
+    unsigned int val3,
+    unsigned int val4,
+    unsigned int val5,
+    unsigned int val6,
+    unsigned int val7)
 {_
   auto pmod = py_add_module(module);
   if (!pmod) {
@@ -383,8 +408,16 @@ void py_call_void_fn (const char *module, const char *name, unsigned int val1, u
   py_err();
 }
 
-void py_call_void_fn (const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3, unsigned int val4, unsigned int val5,
-            unsigned int val6, unsigned int val7, unsigned int val8)
+void py_call_void_fn (const char *module,
+    const char *name,
+    unsigned int val1,
+    unsigned int val2,
+    unsigned int val3,
+    unsigned int val4,
+    unsigned int val5,
+    unsigned int val6,
+    unsigned int val7,
+    unsigned int val8)
 {_
   auto pmod = py_add_module(module);
   if (!pmod) {
@@ -719,7 +752,12 @@ bool py_call_bool_fn (const char *module, const char *name, unsigned int val1, u
   return false;
 }
 
-bool py_call_bool_fn (const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3, unsigned int val4)
+bool py_call_bool_fn (const char *module,
+    const char *name,
+    unsigned int val1,
+    unsigned int val2,
+    unsigned int val3,
+    unsigned int val4)
 {_
   auto pmod = py_add_module(module);
   if (!pmod) {
@@ -745,7 +783,13 @@ bool py_call_bool_fn (const char *module, const char *name, unsigned int val1, u
   return false;
 }
 
-bool py_call_bool_fn (const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3, unsigned int val4, unsigned int val5)
+bool py_call_bool_fn (const char *module,
+    const char *name,
+    unsigned int val1,
+    unsigned int val2,
+    unsigned int val3,
+    unsigned int val4,
+    unsigned int val5)
 {_
   auto pmod = py_add_module(module);
   if (!pmod) {
@@ -771,8 +815,14 @@ bool py_call_bool_fn (const char *module, const char *name, unsigned int val1, u
   return false;
 }
 
-bool py_call_bool_fn (const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3, unsigned int val4, unsigned int val5,
-            unsigned int val6)
+bool py_call_bool_fn (const char *module,
+    const char *name,
+    unsigned int val1,
+    unsigned int val2,
+    unsigned int val3,
+    unsigned int val4,
+    unsigned int val5,
+    unsigned int val6)
 {_
   auto pmod = py_add_module(module);
   if (!pmod) {
@@ -798,8 +848,15 @@ bool py_call_bool_fn (const char *module, const char *name, unsigned int val1, u
   return false;
 }
 
-bool py_call_bool_fn (const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3, unsigned int val4, unsigned int val5,
-            unsigned int val6, unsigned int val7)
+bool py_call_bool_fn (const char *module,
+    const char *name,
+    unsigned int val1,
+    unsigned int val2,
+    unsigned int val3,
+    unsigned int val4,
+    unsigned int val5,
+    unsigned int val6,
+    unsigned int val7)
 {_
   auto pmod = py_add_module(module);
   if (!pmod) {
@@ -825,8 +882,16 @@ bool py_call_bool_fn (const char *module, const char *name, unsigned int val1, u
   return false;
 }
 
-bool py_call_bool_fn (const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3, unsigned int val4, unsigned int val5,
-            unsigned int val6, unsigned int val7, unsigned int val8)
+bool py_call_bool_fn (const char *module,
+    const char *name,
+    unsigned int val1,
+    unsigned int val2,
+    unsigned int val3,
+    unsigned int val4,
+    unsigned int val5,
+    unsigned int val6,
+    unsigned int val7,
+    unsigned int val8)
 {_
   auto pmod = py_add_module(module);
   if (!pmod) {
@@ -1281,960 +1346,966 @@ static PyMethodDef python_c_METHODS[] = {
    * only take two PyObject *parameters, and some take three.
    */
 
-  {"abs_to_pct",                                             (PyCFunction)abs_to_pct_,                                            METH_VARARGS | METH_KEYWORDS, "abs to pct "},
-  {"con",                                                    (PyCFunction)con_,                                                   METH_VARARGS,                 "log to the console"},
-  {"die",                                                    (PyCFunction)die_,                                                   METH_VARARGS,                 "exit game with error"},
-  {"err",                                                    (PyCFunction)err_,                                                   METH_VARARGS,                 "error to the log file"},
-  {"if_matches",                                             (PyCFunction)if_matches_,                                            METH_VARARGS | METH_KEYWORDS, "if matches"},
-  {"if_matches_then_kill",                                   (PyCFunction)if_matches_then_kill_,                                  METH_VARARGS | METH_KEYWORDS, "if matches then kill"},
-  {"level_add",                                              (PyCFunction)level_add_,                                             METH_VARARGS | METH_KEYWORDS, "load a level"},
-  {"level_ai_enemy_memory_at",                               (PyCFunction)level_ai_enemy_memory_at,                               METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_enchant_level_at",                                 (PyCFunction)level_enchant_level_at,                                 METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_enchant_max_at",                                   (PyCFunction)level_enchant_max_at,                                   METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_flood_fill_get_all_things",                        (PyCFunction)level_flood_fill_get_all_things,                        METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_get_all",                                          (PyCFunction)level_get_all,                                          METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_gfx_flickers_at",                                  (PyCFunction)level_gfx_flickers_at,                                  METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_gfx_long_shadow_caster_at",                        (PyCFunction)level_gfx_long_shadow_caster_at,                        METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_gfx_solid_shadow_at",                              (PyCFunction)level_gfx_solid_shadow_at,                              METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_gfx_very_short_shadow_caster_at",                  (PyCFunction)level_gfx_very_short_shadow_caster_at,                  METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_gfx_water_at",                                     (PyCFunction)level_gfx_water_at,                                     METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_able_to_change_levels_at",                      (PyCFunction)level_is_able_to_change_levels_at,                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_able_to_fall_at",                               (PyCFunction)level_is_able_to_fall_at,                               METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_able_to_fire_at_at",                            (PyCFunction)level_is_able_to_fire_at_at,                            METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_able_to_fire_at",                               (PyCFunction)level_is_able_to_fire_at,                               METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_able_to_see_through_doors_at",                  (PyCFunction)level_is_able_to_see_through_doors_at,                  METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_able_to_walk_through_walls_at",                 (PyCFunction)level_is_able_to_walk_through_walls_at,                 METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_acid_at",                                       (PyCFunction)level_is_acid_at,                                       METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_acid_lover_at",                                 (PyCFunction)level_is_acid_lover_at,                                 METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_alive_monst_at",                                (PyCFunction)level_is_alive_monst_at,                                METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_alive_on_end_of_anim_at",                       (PyCFunction)level_is_alive_on_end_of_anim_at,                       METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_always_hit_at",                                 (PyCFunction)level_is_always_hit_at,                                 METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_ascend_dungeon_at",                             (PyCFunction)level_is_ascend_dungeon_at,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_ascend_sewer_at",                               (PyCFunction)level_is_ascend_sewer_at,                               METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_attackable_by_monst_at",                        (PyCFunction)level_is_attackable_by_monst_at,                        METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_attackable_by_player_at",                       (PyCFunction)level_is_attackable_by_player_at,                       METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_auto_collect_item_at",                          (PyCFunction)level_is_auto_collect_item_at,                          METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_bag_at",                                        (PyCFunction)level_is_bag_at,                                        METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_bag_item_at",                                   (PyCFunction)level_is_bag_item_at,                                   METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_bag_item_container_at",                         (PyCFunction)level_is_bag_item_container_at,                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_bag_item_not_stackable_at",                     (PyCFunction)level_is_bag_item_not_stackable_at,                     METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_barrel_at",                                     (PyCFunction)level_is_barrel_at,                                     METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_bleeder_at",                                    (PyCFunction)level_is_bleeder_at,                                    METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_blood_at",                                      (PyCFunction)level_is_blood_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_bloodied_at",                                   (PyCFunction)level_is_bloodied_at,                                   METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_blood_splatter_at",                             (PyCFunction)level_is_blood_splatter_at,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_bones_at",                                      (PyCFunction)level_is_bones_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_brazier_at",                                    (PyCFunction)level_is_brazier_at,                                    METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_bridge_at",                                     (PyCFunction)level_is_bridge_at,                                     METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_burnable_at",                                   (PyCFunction)level_is_burnable_at,                                   METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_carrier_of_treasure_class_a_at",                (PyCFunction)level_is_carrier_of_treasure_class_a_at,                METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_carrier_of_treasure_class_b_at",                (PyCFunction)level_is_carrier_of_treasure_class_b_at,                METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_carrier_of_treasure_class_c_at",                (PyCFunction)level_is_carrier_of_treasure_class_c_at,                METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_carrying_item_at",                              (PyCFunction)level_is_carrying_item_at,                              METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_carrying_treasure_at",                          (PyCFunction)level_is_carrying_treasure_at,                          METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_chasm_at",                                      (PyCFunction)level_is_chasm_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_collectable_at",                                (PyCFunction)level_is_collectable_at,                                METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_collect_as_keys_at",                            (PyCFunction)level_is_collect_as_keys_at,                            METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_collected_as_gold_at",                          (PyCFunction)level_is_collected_as_gold_at,                          METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_combustible_at",                                (PyCFunction)level_is_combustible_at,                                METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_corpse_at",                                     (PyCFunction)level_is_corpse_at,                                     METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_corpse_on_death_at",                            (PyCFunction)level_is_corpse_on_death_at,                            METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_corridor_at",                                   (PyCFunction)level_is_corridor_at,                                   METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_critical_to_level_at",                          (PyCFunction)level_is_critical_to_level_at,                          METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_cursor_at",                                     (PyCFunction)level_is_cursor_at,                                     METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_cursor_can_hover_over_at",                      (PyCFunction)level_is_cursor_can_hover_over_at,                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_cursor_path_at",                                (PyCFunction)level_is_cursor_path_at,                                METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_dead_on_end_of_anim_at",                        (PyCFunction)level_is_dead_on_end_of_anim_at,                        METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_dead_on_shove_at",                              (PyCFunction)level_is_dead_on_shove_at,                              METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_debug_path_at",                                 (PyCFunction)level_is_debug_path_at,                                 METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_debug_type_at",                                 (PyCFunction)level_is_debug_type_at,                                 METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_deep_water_at",                                 (PyCFunction)level_is_deep_water_at,                                 METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_descend_dungeon_at",                            (PyCFunction)level_is_descend_dungeon_at,                            METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_descend_sewer_at",                              (PyCFunction)level_is_descend_sewer_at,                              METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_described_when_hovering_over_at",               (PyCFunction)level_is_described_when_hovering_over_at,               METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_dir_bl_at",                                     (PyCFunction)level_is_dir_bl_at,                                     METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_dir_br_at",                                     (PyCFunction)level_is_dir_br_at,                                     METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_dir_down_at",                                   (PyCFunction)level_is_dir_down_at,                                   METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_dir_left_at",                                   (PyCFunction)level_is_dir_left_at,                                   METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_dir_none_at",                                   (PyCFunction)level_is_dir_none_at,                                   METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_dir_right_at",                                  (PyCFunction)level_is_dir_right_at,                                  METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_dirt_at",                                       (PyCFunction)level_is_dirt_at,                                       METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_dir_tl_at",                                     (PyCFunction)level_is_dir_tl_at,                                     METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_dir_tr_at",                                     (PyCFunction)level_is_dir_tr_at,                                     METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_dir_up_at",                                     (PyCFunction)level_is_dir_up_at,                                     METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_door_at",                                       (PyCFunction)level_is_door_at,                                       METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_droppable_at",                                  (PyCFunction)level_is_droppable_at,                                  METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_dry_grass_at",                                  (PyCFunction)level_is_dry_grass_at,                                  METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_enchantable_at",                                (PyCFunction)level_is_enchantable_at,                                METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_enchantstone_at",                               (PyCFunction)level_is_enchantstone_at,                               METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_engulfer_at",                                   (PyCFunction)level_is_engulfer_at,                                   METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_ethereal_at",                                   (PyCFunction)level_is_ethereal_at,                                   METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_ethereal_minion_generator_at",                  (PyCFunction)level_is_ethereal_minion_generator_at,                  METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_explosion_at",                                  (PyCFunction)level_is_explosion_at,                                  METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_extreme_hazard_at",                             (PyCFunction)level_is_extreme_hazard_at,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_fearless_at",                                   (PyCFunction)level_is_fearless_at,                                   METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_fire_at",                                       (PyCFunction)level_is_fire_at,                                       METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_floating_at",                                   (PyCFunction)level_is_floating_at,                                   METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_floor_at",                                      (PyCFunction)level_is_floor_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_floor_deco_at",                                 (PyCFunction)level_is_floor_deco_at,                                 METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_foilage_at",                                    (PyCFunction)level_is_foilage_at,                                    METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_food_at",                                       (PyCFunction)level_is_food_at,                                       METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_food_eater_at",                                 (PyCFunction)level_is_food_eater_at,                                 METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_gold_at",                                       (PyCFunction)level_is_gold_at,                                       METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_hazard_at",                                     (PyCFunction)level_is_hazard_at,                                     METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_health_booster_at",                             (PyCFunction)level_is_health_booster_at,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_hittable_at",                                   (PyCFunction)level_is_hittable_at,                                   METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_humanoid_at",                                   (PyCFunction)level_is_humanoid_at,                                   METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_hunger_insatiable_at",                          (PyCFunction)level_is_hunger_insatiable_at,                          METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_indestructible_at",                             (PyCFunction)level_is_indestructible_at,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_intelligent_at",                                (PyCFunction)level_is_intelligent_at,                                METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_interesting_at",                                (PyCFunction)level_is_interesting_at,                                METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_item_at",                                       (PyCFunction)level_is_item_at,                                       METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_item_carrier_at",                               (PyCFunction)level_is_item_carrier_at,                               METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_item_collector_at",                             (PyCFunction)level_is_item_collector_at,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_item_eater_at",                                 (PyCFunction)level_is_item_eater_at,                                 METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_jelly_at",                                      (PyCFunction)level_is_jelly_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_jelly_baby_at",                                 (PyCFunction)level_is_jelly_baby_at,                                 METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_jelly_baby_eater_at",                           (PyCFunction)level_is_jelly_baby_eater_at,                           METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_jelly_eater_at",                                (PyCFunction)level_is_jelly_eater_at,                                METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_jelly_parent_at",                               (PyCFunction)level_is_jelly_parent_at,                               METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_jumper_at",                                     (PyCFunction)level_is_jumper_at,                                     METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_jumper_chance_d1000_at",                        (PyCFunction)level_is_jumper_chance_d1000_at,                        METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_jumper_distance_at",                            (PyCFunction)level_is_jumper_distance_at,                            METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_jumper_on_low_hp_chance_d1000_at",              (PyCFunction)level_is_jumper_on_low_hp_chance_d1000_at,              METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_key_at",                                        (PyCFunction)level_is_key_at,                                        METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_key_collector_at",                              (PyCFunction)level_is_key_collector_at,                              METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_killed_on_hit_or_miss_at",                      (PyCFunction)level_is_killed_on_hit_or_miss_at,                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_killed_on_hitting_at",                          (PyCFunction)level_is_killed_on_hitting_at,                          METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_laser_at",                                      (PyCFunction)level_is_laser_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_lava_at",                                       (PyCFunction)level_is_lava_at,                                       METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_light_blocker_at",                              (PyCFunction)level_is_light_blocker_at,                              METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_living_at",                                     (PyCFunction)level_is_living_at,                                     METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_meat_at",                                       (PyCFunction)level_is_meat_at,                                       METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_meat_eater_at",                                 (PyCFunction)level_is_meat_eater_at,                                 METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_minion_at",                                     (PyCFunction)level_is_minion_at,                                     METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_minion_generator_at",                           (PyCFunction)level_is_minion_generator_at,                           METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_monst_at",                                      (PyCFunction)level_is_monst_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_moveable_at",                                   (PyCFunction)level_is_moveable_at,                                   METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_movement_blocking_but_destructable_at",         (PyCFunction)level_is_movement_blocking_but_destructable_at,         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_movement_blocking_wall_or_locked_door_at",      (PyCFunction)level_is_movement_blocking_wall_or_locked_door_at,      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_msg_at",                                        (PyCFunction)level_is_msg_at,                                        METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_no_tile_at",                                    (PyCFunction)level_is_no_tile_at,                                    METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_on_firing_at_something",                        (PyCFunction)level_is_on_firing_at_something,                        METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_openable_at",                                   (PyCFunction)level_is_openable_at,                                   METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_player_at",                                     (PyCFunction)level_is_player_at,                                     METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_poison_at",                                     (PyCFunction)level_is_poison_at,                                     METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_potion_at",                                     (PyCFunction)level_is_potion_at,                                     METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_potion_eater_at",                               (PyCFunction)level_is_potion_eater_at,                               METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_projectile_at",                                 (PyCFunction)level_is_projectile_at,                                 METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_removeable_if_out_of_slots_at",                 (PyCFunction)level_is_removeable_if_out_of_slots_at,                 METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_resurrectable_at",                              (PyCFunction)level_is_resurrectable_at,                              METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_ripple_at",                                     (PyCFunction)level_is_ripple_at,                                     METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_rock_at",                                       (PyCFunction)level_is_rock_at,                                       METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_unused_flag10_at",                                      (PyCFunction)level_unused_flag10_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_unused_flag11_at",                                      (PyCFunction)level_unused_flag11_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_unused_flag12_at",                                      (PyCFunction)level_unused_flag12_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_unused_flag13_at",                                      (PyCFunction)level_unused_flag13_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_unused_flag14_at",                                      (PyCFunction)level_unused_flag14_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_unused_flag15_at",                                      (PyCFunction)level_unused_flag15_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_unused_flag16_at",                                      (PyCFunction)level_unused_flag16_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_unused_flag17_at",                                      (PyCFunction)level_unused_flag17_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_unused_flag18_at",                                      (PyCFunction)level_unused_flag18_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_unused_flag19_at",                                      (PyCFunction)level_unused_flag19_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_unused_flag1_at",                                       (PyCFunction)level_unused_flag1_at,                                       METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_unused_flag20_at",                                      (PyCFunction)level_unused_flag20_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_unused_flag21_at",                                      (PyCFunction)level_unused_flag21_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_unused_flag22_at",                                      (PyCFunction)level_unused_flag22_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_unused_flag23_at",                                      (PyCFunction)level_unused_flag23_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_unused_flag24_at",                                      (PyCFunction)level_unused_flag24_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_unused_flag25_at",                                      (PyCFunction)level_unused_flag25_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_unused_flag26_at",                                      (PyCFunction)level_unused_flag26_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_unused_flag27_at",                                      (PyCFunction)level_unused_flag27_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_unused_flag28_at",                                      (PyCFunction)level_unused_flag28_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_unused_flag29_at",                                      (PyCFunction)level_unused_flag29_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_unused_flag2_at",                                       (PyCFunction)level_unused_flag2_at,                                       METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_unused_flag30_at",                                      (PyCFunction)level_unused_flag30_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_unused_flag31_at",                                      (PyCFunction)level_unused_flag31_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_unused_flag32_at",                                      (PyCFunction)level_unused_flag32_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_unused_flag33_at",                                      (PyCFunction)level_unused_flag33_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_unused_flag34_at",                                      (PyCFunction)level_unused_flag34_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_unused_flag35_at",                                      (PyCFunction)level_unused_flag35_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_unused_flag36_at",                                      (PyCFunction)level_unused_flag36_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_unused_flag37_at",                                      (PyCFunction)level_unused_flag37_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_unused_flag38_at",                                      (PyCFunction)level_unused_flag38_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_unused_flag39_at",                                      (PyCFunction)level_unused_flag39_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_unused_flag3_at",                                       (PyCFunction)level_unused_flag3_at,                                       METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_unused_flag40_at",                                      (PyCFunction)level_unused_flag40_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_unused_flag41_at",                                      (PyCFunction)level_unused_flag41_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_unused_flag42_at",                                      (PyCFunction)level_unused_flag42_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_unused_flag43_at",                                      (PyCFunction)level_unused_flag43_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_unused_flag44_at",                                      (PyCFunction)level_unused_flag44_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_unused_flag45_at",                                      (PyCFunction)level_unused_flag45_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_unused_flag46_at",                                      (PyCFunction)level_unused_flag46_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_unused_flag47_at",                                      (PyCFunction)level_unused_flag47_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_unused_flag48_at",                                      (PyCFunction)level_unused_flag48_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_rusty_at",                                      (PyCFunction)level_is_rusty_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_unused_flag4_at",                                       (PyCFunction)level_unused_flag4_at,                                       METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_unused_flag50_at",                                      (PyCFunction)level_unused_flag50_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_unused_flag51_at",                                      (PyCFunction)level_unused_flag51_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_unused_flag52_at",                                      (PyCFunction)level_unused_flag52_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_ai_wanderer_at",                                      (PyCFunction)level_is_ai_wanderer_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_organic_at",                                      (PyCFunction)level_is_organic_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_glass_at",                                      (PyCFunction)level_is_glass_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_stone_at",                                      (PyCFunction)level_is_stone_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_item_organic_at",                                      (PyCFunction)level_is_item_organic_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_metal_at",                                      (PyCFunction)level_is_metal_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_wooden_at",                                      (PyCFunction)level_is_wooden_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_unused_flag5_at",                                       (PyCFunction)level_unused_flag5_at,                                       METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_unused_flag6_at",                                       (PyCFunction)level_unused_flag6_at,                                       METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_unused_flag7_at",                                       (PyCFunction)level_unused_flag7_at,                                       METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_unused_flag8_at",                                       (PyCFunction)level_unused_flag8_at,                                       METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_unused_flag9_at",                                       (PyCFunction)level_unused_flag9_at,                                       METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_secret_door_at",                                (PyCFunction)level_is_secret_door_at,                                METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_sewer_wall_at",                                 (PyCFunction)level_is_sewer_wall_at,                                 METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_shallow_water_at",                              (PyCFunction)level_is_shallow_water_at,                              METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_shovable_at",                                   (PyCFunction)level_is_shovable_at,                                   METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_skill_at",                                      (PyCFunction)level_is_skill_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_skillstone_at",                                 (PyCFunction)level_is_skillstone_at,                                 METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_smoke_at",                                      (PyCFunction)level_is_smoke_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_soft_body_at",                                  (PyCFunction)level_is_soft_body_at,                                  METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_spawner_at",                                    (PyCFunction)level_is_spawner_at,                                    METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_spiderweb_at",                                  (PyCFunction)level_is_spiderweb_at,                                  METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_stamina_check_at",                              (PyCFunction)level_is_stamina_check_at,                              METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_steal_item_chance_d1000_at",                    (PyCFunction)level_is_steal_item_chance_d1000_at,                    METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_engulf_chance_d1000_at",                        (PyCFunction)level_is_engulf_chance_d1000_at,                        METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_sticky_at",                                     (PyCFunction)level_is_sticky_at,                                     METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_sword_at",                                      (PyCFunction)level_is_sword_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_throwable_at",                                  (PyCFunction)level_is_throwable_at,                                  METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_tickable_at",                                   (PyCFunction)level_is_tickable_at,                                   METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_tmp_thing_at",                                  (PyCFunction)level_is_tmp_thing_at,                                  METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_torch_at",                                      (PyCFunction)level_is_torch_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_treasure_class_a_at",                           (PyCFunction)level_is_treasure_class_a_at,                           METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_treasure_class_b_at",                           (PyCFunction)level_is_treasure_class_b_at,                           METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_treasure_class_c_at",                           (PyCFunction)level_is_treasure_class_c_at,                           METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_treasure_type_at",                              (PyCFunction)level_is_treasure_type_at,                              METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_treasure_type_chest_at",                        (PyCFunction)level_is_treasure_type_chest_at,                        METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_treasure_type_eater_at",                        (PyCFunction)level_is_treasure_type_eater_at,                        METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_undead_at",                                     (PyCFunction)level_is_undead_at,                                     METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_usable_at",                                     (PyCFunction)level_is_usable_at,                                     METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_used_when_thrown_at",                           (PyCFunction)level_is_used_when_thrown_at,                           METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_very_combustible_at",                           (PyCFunction)level_is_very_combustible_at,                           METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_visible_at",                                    (PyCFunction)level_is_visible_at,                                    METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_wall_at",                                       (PyCFunction)level_is_wall_at,                                       METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_wall_dungeon_at",                               (PyCFunction)level_is_wall_dungeon_at,                               METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_wand_at",                                       (PyCFunction)level_is_wand_at,                                       METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_wand_eater_at",                                 (PyCFunction)level_is_wand_eater_at,                                 METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_water_at",                                      (PyCFunction)level_is_water_at,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_water_lover_at",                                (PyCFunction)level_is_water_lover_at,                                METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_weapon_at",                                     (PyCFunction)level_is_weapon_at,                                     METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_is_weapon_wielder_at",                             (PyCFunction)level_is_weapon_wielder_at,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_loves_fire_at",                                    (PyCFunction)level_loves_fire_at,                                    METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_loves_poison_at",                                  (PyCFunction)level_loves_poison_at,                                  METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_loves_spiderwebs_at",                              (PyCFunction)level_loves_spiderwebs_at,                              METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"level_place_at",                                         (PyCFunction)level_place_at,                                         METH_VARARGS | METH_KEYWORDS, "kill place"},
-  {"level_spawn_at_thing_if_possible",                       (PyCFunction)level_spawn_at_thing_if_possible,                       METH_VARARGS | METH_KEYWORDS, "spawn under"},
-  {"level_spawn_at_thing",                                   (PyCFunction)level_spawn_at_thing,                                   METH_VARARGS | METH_KEYWORDS, "spawn under"},
-  {"level_spawn_fire_around_thing",                          (PyCFunction)level_spawn_fire_around_thing,                          METH_VARARGS | METH_KEYWORDS, "spawn fire"},
-  {"level_spawn_next_to_or_on_monst",                        (PyCFunction)level_spawn_next_to_or_on_monst_,                       METH_VARARGS | METH_KEYWORDS, "spawn thing"},
-  {"level_spawn_next_to",                                    (PyCFunction)level_spawn_next_to_,                                   METH_VARARGS | METH_KEYWORDS, "spawn thing"},
-  {"level_spawn_using_items_radius_range",                   (PyCFunction)level_spawn_using_items_radius_range_,                  METH_VARARGS | METH_KEYWORDS, "spawn things"},
-  {"log",                                                    (PyCFunction)log_,                                                   METH_VARARGS,                 "log to the log file"},
-  {"map_load_room",                                          (PyCFunction)map_load_room_,                                         METH_VARARGS | METH_KEYWORDS, "load a room"},
-  {"music_load",                                             (PyCFunction)music_load_,                                            METH_VARARGS | METH_KEYWORDS, "load a sound"},
-  {"music_play",                                             (PyCFunction)music_play_,                                            METH_VARARGS | METH_KEYWORDS, "play a sound"},
-  {"non_pcg_randint",                                        (PyCFunction)non_pcg_randint,                                        METH_VARARGS | METH_KEYWORDS, "rand int "},
-  {"pcg_randint",                                            (PyCFunction)pcg_randint,                                            METH_VARARGS | METH_KEYWORDS, "rand int "},
-  {"pct_to_abs",                                             (PyCFunction)pct_to_abs_,                                            METH_VARARGS | METH_KEYWORDS, "pct to abs"},
-  {"puts",                                                   (PyCFunction)puts_,                                                  METH_VARARGS,                 "log to the console"},
-  {"sound_load",                                             (PyCFunction)sound_load_,                                            METH_VARARGS | METH_KEYWORDS, "load a sound"},
-  {"sound_play_channel",                                     (PyCFunction)sound_play_channel_,                                    METH_VARARGS | METH_KEYWORDS, "play a sound"},
-  {"sound_play",                                             (PyCFunction)sound_play_,                                            METH_VARARGS | METH_KEYWORDS, "play a sound"},
-  {"tex_load",                                               (PyCFunction)tex_load_,                                              METH_VARARGS | METH_KEYWORDS, "load a texture"},
-  {"text_size",                                              (PyCFunction)text_size_,                                             METH_VARARGS | METH_KEYWORDS, "text size in pixels"},
-  {"thing_ai_enemy_memory",                                  (PyCFunction)thing_ai_enemy_memory,                                  METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_decr_charge_count",                                (PyCFunction)thing_decr_charge_count,                                METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_decr_current_damage",                              (PyCFunction)thing_decr_current_damage,                              METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_decr_enchant_max",                                 (PyCFunction)thing_decr_enchant_max,                                 METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_decr_enchant",                                     (PyCFunction)thing_decr_enchant,                                     METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_decr_health_max",                                  (PyCFunction)thing_decr_health_max,                                  METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_decr_health",                                      (PyCFunction)thing_decr_health,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_decr_stamina_max",                                 (PyCFunction)thing_decr_stamina_max,                                 METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_decr_stamina",                                     (PyCFunction)thing_decr_stamina,                                     METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_enchant_level",                                    (PyCFunction)thing_enchant_level,                                    METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_enchant_max",                                      (PyCFunction)thing_enchant_max,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_fire_at",                                          (PyCFunction)thing_fire_at,                                          METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_get_charge_count",                                 (PyCFunction)thing_get_charge_count,                                 METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_get_coords",                                       (PyCFunction)thing_get_coords,                                       METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_get_current_damage",                               (PyCFunction)thing_get_current_damage,                               METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_get_damage_bite",                                  (PyCFunction)thing_get_damage_bite,                                  METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_get_damage_crush",                                 (PyCFunction)thing_get_damage_crush,                                 METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_get_damage_melee",                                 (PyCFunction)thing_get_damage_melee,                                 METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_get_damage_swallow",                               (PyCFunction)thing_get_damage_swallow,                               METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_get_enchant_max",                                  (PyCFunction)thing_get_enchant_max,                                  METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_get_enchant",                                      (PyCFunction)thing_get_enchant,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_get_health_max",                                   (PyCFunction)thing_get_health_max,                                   METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_get_health",                                       (PyCFunction)thing_get_health,                                       METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_get_immediate_minion_owner_id",                    (PyCFunction)thing_get_immediate_minion_owner_id,                    METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_get_immediate_owner_id",                           (PyCFunction)thing_get_immediate_owner_id,                           METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_get_immediate_spawned_owner_id",                   (PyCFunction)thing_get_immediate_spawned_owner_id,                   METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_get_initial_charge_count",                         (PyCFunction)thing_get_initial_charge_count,                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_get_name",                                         (PyCFunction)thing_get_name,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_get_stamina_max",                                  (PyCFunction)thing_get_stamina_max,                                  METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_get_stamina",                                      (PyCFunction)thing_get_stamina,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_get_top_owner_id",                                 (PyCFunction)thing_get_top_owner_id,                                 METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_gfx_flickers",                                     (PyCFunction)thing_gfx_flickers,                                     METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_gfx_long_shadow_caster",                           (PyCFunction)thing_gfx_long_shadow_caster,                           METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_gfx_solid_shadow",                                 (PyCFunction)thing_gfx_solid_shadow,                                 METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_gfx_very_short_shadow_caster",                     (PyCFunction)thing_gfx_very_short_shadow_caster,                     METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_gfx_water",                                        (PyCFunction)thing_gfx_water,                                        METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_hit",                                              (PyCFunction)thing_hit,                                              METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_incr_charge_count",                                (PyCFunction)thing_incr_charge_count,                                METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_incr_current_damage",                              (PyCFunction)thing_incr_current_damage,                              METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_incr_enchant_max",                                 (PyCFunction)thing_incr_enchant_max,                                 METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_incr_enchant",                                     (PyCFunction)thing_incr_enchant,                                     METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_incr_health_max",                                  (PyCFunction)thing_incr_health_max,                                  METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_incr_health",                                      (PyCFunction)thing_incr_health,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_incr_stamina_max",                                 (PyCFunction)thing_incr_stamina_max,                                 METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_incr_stamina",                                     (PyCFunction)thing_incr_stamina,                                     METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_able_to_change_levels",                         (PyCFunction)thing_is_able_to_change_levels,                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_able_to_fall",                                  (PyCFunction)thing_is_able_to_fall,                                  METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_able_to_see_through_doors",                     (PyCFunction)thing_is_able_to_see_through_doors,                     METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_able_to_walk_through_walls",                    (PyCFunction)thing_is_able_to_walk_through_walls,                    METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_acid_lover",                                    (PyCFunction)thing_is_acid_lover,                                    METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_acid",                                          (PyCFunction)thing_is_acid,                                          METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_alive_monst",                                   (PyCFunction)thing_is_alive_monst,                                   METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_alive_on_end_of_anim",                          (PyCFunction)thing_is_alive_on_end_of_anim,                          METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_always_hit",                                    (PyCFunction)thing_is_always_hit,                                    METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_ascend_dungeon",                                (PyCFunction)thing_is_ascend_dungeon,                                METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_ascend_sewer",                                  (PyCFunction)thing_is_ascend_sewer,                                  METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_auto_collect_item",                             (PyCFunction)thing_is_auto_collect_item,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_bag_item_container",                            (PyCFunction)thing_is_bag_item_container,                            METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_bag_item_not_stackable",                        (PyCFunction)thing_is_bag_item_not_stackable,                        METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_bag_item",                                      (PyCFunction)thing_is_bag_item,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_bag",                                           (PyCFunction)thing_is_bag,                                           METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_barrel",                                        (PyCFunction)thing_is_barrel,                                        METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_bleeder",                                       (PyCFunction)thing_is_bleeder,                                       METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_bloodied",                                      (PyCFunction)thing_is_bloodied,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_blood",                                         (PyCFunction)thing_is_blood,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_blood_splatter",                                (PyCFunction)thing_is_blood_splatter,                                METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_bones",                                         (PyCFunction)thing_is_bones,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_brazier",                                       (PyCFunction)thing_is_brazier,                                       METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_bridge",                                        (PyCFunction)thing_is_bridge,                                        METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_burnable",                                      (PyCFunction)thing_is_burnable,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_carrier_of_treasure_class_a",                   (PyCFunction)thing_is_carrier_of_treasure_class_a,                   METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_carrier_of_treasure_class_b",                   (PyCFunction)thing_is_carrier_of_treasure_class_b,                   METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_carrier_of_treasure_class_c",                   (PyCFunction)thing_is_carrier_of_treasure_class_c,                   METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_carrying_item",                                 (PyCFunction)thing_is_carrying_item,                                 METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_carrying_treasure",                             (PyCFunction)thing_is_carrying_treasure,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_chasm",                                         (PyCFunction)thing_is_chasm,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_collectable",                                   (PyCFunction)thing_is_collectable,                                   METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_collect_as_keys",                               (PyCFunction)thing_is_collect_as_keys,                               METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_collected_as_gold",                             (PyCFunction)thing_is_collected_as_gold,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_combustible",                                   (PyCFunction)thing_is_combustible,                                   METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_corpse_on_death",                               (PyCFunction)thing_is_corpse_on_death,                               METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_corpse",                                        (PyCFunction)thing_is_corpse,                                        METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_corridor",                                      (PyCFunction)thing_is_corridor,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_critical_to_level",                             (PyCFunction)thing_is_critical_to_level,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_cursor_can_hover_over_but_needs_double_click",  (PyCFunction)thing_is_cursor_can_hover_over_but_needs_double_click,  METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_cursor_can_hover_over",                         (PyCFunction)thing_is_cursor_can_hover_over,                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_cursor_path",                                   (PyCFunction)thing_is_cursor_path,                                   METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_cursor",                                        (PyCFunction)thing_is_cursor,                                        METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_dead_on_end_of_anim",                           (PyCFunction)thing_is_dead_on_end_of_anim,                           METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_dead_or_dying_on_shove",                        (PyCFunction)thing_is_dead_or_dying_on_shove,                        METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_dead_or_dying",                                 (PyCFunction)thing_is_dead_or_dying,                                 METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_debug_path",                                    (PyCFunction)thing_is_debug_path,                                    METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_debug_type",                                    (PyCFunction)thing_is_debug_type,                                    METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_deep_water",                                    (PyCFunction)thing_is_deep_water,                                    METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_descend_dungeon",                               (PyCFunction)thing_is_descend_dungeon,                               METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_descend_sewer",                                 (PyCFunction)thing_is_descend_sewer,                                 METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_described_when_hovering_over",                  (PyCFunction)thing_is_described_when_hovering_over,                  METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_dir_bl",                                        (PyCFunction)thing_is_dir_bl,                                        METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_dir_br",                                        (PyCFunction)thing_is_dir_br,                                        METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_dir_down",                                      (PyCFunction)thing_is_dir_down,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_dir_left",                                      (PyCFunction)thing_is_dir_left,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_dir_none",                                      (PyCFunction)thing_is_dir_none,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_dir_right",                                     (PyCFunction)thing_is_dir_right,                                     METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_dir_tl",                                        (PyCFunction)thing_is_dir_tl,                                        METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_dirt",                                          (PyCFunction)thing_is_dirt,                                          METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_dir_tr",                                        (PyCFunction)thing_is_dir_tr,                                        METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_dir_up",                                        (PyCFunction)thing_is_dir_up,                                        METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_door",                                          (PyCFunction)thing_is_door,                                          METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_droppable",                                     (PyCFunction)thing_is_droppable,                                     METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_dry_grass",                                     (PyCFunction)thing_is_dry_grass,                                     METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_enchantable",                                   (PyCFunction)thing_is_enchantable,                                   METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_enchantstone",                                  (PyCFunction)thing_is_enchantstone,                                  METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_engulfer",                                      (PyCFunction)thing_is_engulfer,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_ethereal_minion_generator",                     (PyCFunction)thing_is_ethereal_minion_generator,                     METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_ethereal",                                      (PyCFunction)thing_is_ethereal,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_explosion",                                     (PyCFunction)thing_is_explosion,                                     METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_extreme_hazard",                                (PyCFunction)thing_is_extreme_hazard,                                METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_fearless",                                      (PyCFunction)thing_is_fearless,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_fire",                                          (PyCFunction)thing_is_fire,                                          METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_floating",                                      (PyCFunction)thing_is_floating,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_floor_deco",                                    (PyCFunction)thing_is_floor_deco,                                    METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_floor",                                         (PyCFunction)thing_is_floor,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_foilage",                                       (PyCFunction)thing_is_foilage,                                       METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_food_eater",                                    (PyCFunction)thing_is_food_eater,                                    METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_food",                                          (PyCFunction)thing_is_food,                                          METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_gold",                                          (PyCFunction)thing_is_gold,                                          METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_hazard",                                        (PyCFunction)thing_is_hazard,                                        METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_health_booster",                                (PyCFunction)thing_is_health_booster,                                METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_hittable",                                      (PyCFunction)thing_is_hittable,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_humanoid",                                      (PyCFunction)thing_is_humanoid,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_hunger_insatiable",                             (PyCFunction)thing_is_hunger_insatiable,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_indestructible",                                (PyCFunction)thing_is_indestructible,                                METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_intelligent",                                   (PyCFunction)thing_is_intelligent,                                   METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_interesting",                                   (PyCFunction)thing_is_interesting,                                   METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_item_carrier",                                  (PyCFunction)thing_is_item_carrier,                                  METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_item_collector",                                (PyCFunction)thing_is_item_collector,                                METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_item_eater",                                    (PyCFunction)thing_is_item_eater,                                    METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_item",                                          (PyCFunction)thing_is_item,                                          METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_jelly_baby_eater",                              (PyCFunction)thing_is_jelly_baby_eater,                              METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_jelly_baby",                                    (PyCFunction)thing_is_jelly_baby,                                    METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_jelly_eater",                                   (PyCFunction)thing_is_jelly_eater,                                   METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_jelly_parent",                                  (PyCFunction)thing_is_jelly_parent,                                  METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_jelly",                                         (PyCFunction)thing_is_jelly,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_jumper_chance_d1000",                           (PyCFunction)thing_is_jumper_chance_d1000,                           METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_jumper_distance",                               (PyCFunction)thing_is_jumper_distance,                               METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_jumper_on_low_hp_chance_d1000",                 (PyCFunction)thing_is_jumper_on_low_hp_chance_d1000,                 METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_jumper",                                        (PyCFunction)thing_is_jumper,                                        METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_key_collector",                                 (PyCFunction)thing_is_key_collector,                                 METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_key",                                           (PyCFunction)thing_is_key,                                           METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_killed_on_hit_or_miss",                         (PyCFunction)thing_is_killed_on_hit_or_miss,                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_killed_on_hitting",                             (PyCFunction)thing_is_killed_on_hitting,                             METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_laser",                                         (PyCFunction)thing_is_laser,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_lava",                                          (PyCFunction)thing_is_lava,                                          METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_light_blocker",                                 (PyCFunction)thing_is_light_blocker,                                 METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_living",                                        (PyCFunction)thing_is_living,                                        METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_loggable_for_important_stuff",                  (PyCFunction)thing_is_loggable_for_important_stuff,                  METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_loggable_for_unimportant_stuff",                (PyCFunction)thing_is_loggable_for_unimportant_stuff,                METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_meat_eater",                                    (PyCFunction)thing_is_meat_eater,                                    METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_meat",                                          (PyCFunction)thing_is_meat,                                          METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_minion_generator",                              (PyCFunction)thing_is_minion_generator,                              METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_minion",                                        (PyCFunction)thing_is_minion,                                        METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_monst",                                         (PyCFunction)thing_is_monst,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_moveable",                                      (PyCFunction)thing_is_moveable,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_movement_blocking_but_destructable",            (PyCFunction)thing_is_movement_blocking_but_destructable,            METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_movement_blocking_wall_or_locked_door",         (PyCFunction)thing_is_movement_blocking_wall_or_locked_door,         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_msg",                                           (PyCFunction)thing_is_msg,                                           METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_no_tile",                                       (PyCFunction)thing_is_no_tile,                                       METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_on_fire",                                       (PyCFunction)thing_is_on_fire,                                       METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_openable",                                      (PyCFunction)thing_is_openable,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_player",                                        (PyCFunction)thing_is_player,                                        METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_poison",                                        (PyCFunction)thing_is_poison,                                        METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_potion_eater",                                  (PyCFunction)thing_is_potion_eater,                                  METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_potion",                                        (PyCFunction)thing_is_potion,                                        METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_projectile",                                    (PyCFunction)thing_is_projectile,                                    METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_removeable_if_out_of_slots",                    (PyCFunction)thing_is_removeable_if_out_of_slots,                    METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_resurrectable",                                 (PyCFunction)thing_is_resurrectable,                                 METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_ripple",                                        (PyCFunction)thing_is_ripple,                                        METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_rock",                                          (PyCFunction)thing_is_rock,                                          METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_unused_flag10",                                         (PyCFunction)thing_unused_flag10,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_unused_flag11",                                         (PyCFunction)thing_unused_flag11,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_unused_flag12",                                         (PyCFunction)thing_unused_flag12,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_unused_flag13",                                         (PyCFunction)thing_unused_flag13,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_unused_flag14",                                         (PyCFunction)thing_unused_flag14,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_unused_flag15",                                         (PyCFunction)thing_unused_flag15,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_unused_flag16",                                         (PyCFunction)thing_unused_flag16,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_unused_flag17",                                         (PyCFunction)thing_unused_flag17,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_unused_flag18",                                         (PyCFunction)thing_unused_flag18,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_unused_flag19",                                         (PyCFunction)thing_unused_flag19,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_unused_flag1",                                          (PyCFunction)thing_unused_flag1,                                          METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_unused_flag20",                                         (PyCFunction)thing_unused_flag20,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_unused_flag21",                                         (PyCFunction)thing_unused_flag21,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_unused_flag22",                                         (PyCFunction)thing_unused_flag22,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_unused_flag23",                                         (PyCFunction)thing_unused_flag23,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_unused_flag24",                                         (PyCFunction)thing_unused_flag24,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_unused_flag25",                                         (PyCFunction)thing_unused_flag25,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_unused_flag26",                                         (PyCFunction)thing_unused_flag26,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_unused_flag27",                                         (PyCFunction)thing_unused_flag27,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_unused_flag28",                                         (PyCFunction)thing_unused_flag28,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_unused_flag29",                                         (PyCFunction)thing_unused_flag29,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_unused_flag2",                                          (PyCFunction)thing_unused_flag2,                                          METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_unused_flag30",                                         (PyCFunction)thing_unused_flag30,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_unused_flag31",                                         (PyCFunction)thing_unused_flag31,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_unused_flag32",                                         (PyCFunction)thing_unused_flag32,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_unused_flag33",                                         (PyCFunction)thing_unused_flag33,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_unused_flag34",                                         (PyCFunction)thing_unused_flag34,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_unused_flag35",                                         (PyCFunction)thing_unused_flag35,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_unused_flag36",                                         (PyCFunction)thing_unused_flag36,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_unused_flag37",                                         (PyCFunction)thing_unused_flag37,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_unused_flag38",                                         (PyCFunction)thing_unused_flag38,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_unused_flag39",                                         (PyCFunction)thing_unused_flag39,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_unused_flag3",                                          (PyCFunction)thing_unused_flag3,                                          METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_unused_flag40",                                         (PyCFunction)thing_unused_flag40,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_unused_flag41",                                         (PyCFunction)thing_unused_flag41,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_unused_flag42",                                         (PyCFunction)thing_unused_flag42,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_unused_flag43",                                         (PyCFunction)thing_unused_flag43,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_unused_flag44",                                         (PyCFunction)thing_unused_flag44,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_unused_flag45",                                         (PyCFunction)thing_unused_flag45,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_unused_flag46",                                         (PyCFunction)thing_unused_flag46,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_unused_flag47",                                         (PyCFunction)thing_unused_flag47,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_unused_flag48",                                         (PyCFunction)thing_unused_flag48,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_rusty",                                         (PyCFunction)thing_is_rusty,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_unused_flag4",                                          (PyCFunction)thing_unused_flag4,                                          METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_unused_flag50",                                         (PyCFunction)thing_unused_flag50,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_unused_flag51",                                         (PyCFunction)thing_unused_flag51,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_unused_flag52",                                         (PyCFunction)thing_unused_flag52,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_ai_wanderer",                                         (PyCFunction)thing_is_ai_wanderer,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_organic",                                         (PyCFunction)thing_is_organic,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_glass",                                         (PyCFunction)thing_is_glass,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_stone",                                         (PyCFunction)thing_is_stone,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_item_organic",                                         (PyCFunction)thing_is_item_organic,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_metal",                                         (PyCFunction)thing_is_metal,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_wooden",                                         (PyCFunction)thing_is_wooden,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_unused_flag5",                                          (PyCFunction)thing_unused_flag5,                                          METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_unused_flag6",                                          (PyCFunction)thing_unused_flag6,                                          METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_unused_flag7",                                          (PyCFunction)thing_unused_flag7,                                          METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_unused_flag8",                                          (PyCFunction)thing_unused_flag8,                                          METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_unused_flag9",                                          (PyCFunction)thing_unused_flag9,                                          METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_secret_door",                                   (PyCFunction)thing_is_secret_door,                                   METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_sewer_wall",                                    (PyCFunction)thing_is_sewer_wall,                                    METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_shallow_water",                                 (PyCFunction)thing_is_shallow_water,                                 METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_shovable",                                      (PyCFunction)thing_is_shovable,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_skill",                                         (PyCFunction)thing_is_skill,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_skillstone",                                    (PyCFunction)thing_is_skillstone,                                    METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_smoke",                                         (PyCFunction)thing_is_smoke,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_soft_body",                                     (PyCFunction)thing_is_soft_body,                                     METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_spawner",                                       (PyCFunction)thing_is_spawner,                                       METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_spiderweb",                                     (PyCFunction)thing_is_spiderweb,                                     METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_stamina_check",                                 (PyCFunction)thing_is_stamina_check,                                 METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_steal_item_chance_d1000",                       (PyCFunction)thing_is_steal_item_chance_d1000,                       METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_engulf_chance_d1000",                           (PyCFunction)thing_is_engulf_chance_d1000,                           METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_sticky",                                        (PyCFunction)thing_is_sticky,                                        METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_sword",                                         (PyCFunction)thing_is_sword,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_target_select_automatically_when_chosen",       (PyCFunction)thing_is_target_select_automatically_when_chosen,       METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_throwable",                                     (PyCFunction)thing_is_throwable,                                     METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_thrown_automatically_when_chosen",              (PyCFunction)thing_is_thrown_automatically_when_chosen,              METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_tickable",                                      (PyCFunction)thing_is_tickable,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_tmp_thing",                                     (PyCFunction)thing_is_tmp_thing,                                     METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_torch",                                         (PyCFunction)thing_is_torch,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_treasure_class_a",                              (PyCFunction)thing_is_treasure_class_a,                              METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_treasure_class_b",                              (PyCFunction)thing_is_treasure_class_b,                              METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_treasure_class_c",                              (PyCFunction)thing_is_treasure_class_c,                              METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_treasure_type_chest",                           (PyCFunction)thing_is_treasure_type_chest,                           METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_treasure_type_eater",                           (PyCFunction)thing_is_treasure_type_eater,                           METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_treasure_type",                                 (PyCFunction)thing_is_treasure_type,                                 METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_undead",                                        (PyCFunction)thing_is_undead,                                        METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_usable",                                        (PyCFunction)thing_is_usable,                                        METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_used_automatically_when_selected",              (PyCFunction)thing_is_used_automatically_when_selected,              METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_used_when_thrown",                              (PyCFunction)thing_is_used_when_thrown,                              METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_very_combustible",                              (PyCFunction)thing_is_very_combustible,                              METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_visible",                                       (PyCFunction)thing_is_visible,                                       METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_wall_dungeon",                                  (PyCFunction)thing_is_wall_dungeon,                                  METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_wall",                                          (PyCFunction)thing_is_wall,                                          METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_wand_eater",                                    (PyCFunction)thing_is_wand_eater,                                    METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_wand",                                          (PyCFunction)thing_is_wand,                                          METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_water_lover",                                   (PyCFunction)thing_is_water_lover,                                   METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_water",                                         (PyCFunction)thing_is_water,                                         METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_weapon",                                        (PyCFunction)thing_is_weapon,                                        METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_is_weapon_wielder",                                (PyCFunction)thing_is_weapon_wielder,                                METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_killed_by",                                        (PyCFunction)thing_killed_by,                                        METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_killed",                                           (PyCFunction)thing_killed,                                           METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_loves_fire",                                       (PyCFunction)thing_loves_fire,                                       METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_loves_poison",                                     (PyCFunction)thing_loves_poison,                                     METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_loves_spiderwebs",                                 (PyCFunction)thing_loves_spiderwebs,                                 METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_msg",                                              (PyCFunction)thing_msg,                                              METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_possible_to_attack",                               (PyCFunction)thing_possible_to_attack,                               METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_set_current_damage",                               (PyCFunction)thing_set_current_damage,                               METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_set_enchant_max",                                  (PyCFunction)thing_set_enchant_max,                                  METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_set_enchant",                                      (PyCFunction)thing_set_enchant,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_set_health_max",                                   (PyCFunction)thing_set_health_max,                                   METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_set_health",                                       (PyCFunction)thing_set_health,                                       METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_set_stamina_max",                                  (PyCFunction)thing_set_stamina_max,                                  METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_set_stamina",                                      (PyCFunction)thing_set_stamina,                                      METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_skill_activate",                                   (PyCFunction)thing_skill_activate,                                   METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_skill_deactivate",                                 (PyCFunction)thing_skill_deactivate,                                 METH_VARARGS | METH_KEYWORDS, "thing api"},
-  {"thing_sound_play_channel",                               (PyCFunction)thing_sound_play_channel_,                              METH_VARARGS | METH_KEYWORDS, "play a sound"},
-  {"thing_sound_play",                                       (PyCFunction)thing_sound_play_,                                      METH_VARARGS | METH_KEYWORDS, "play a sound"},
-  {"tile_load_arr",                                          (PyCFunction)tile_load_arr_,                                         METH_VARARGS | METH_KEYWORDS, "load a tile array"},
-  {"tile_load_arr_sprites",                                  (PyCFunction)tile_load_arr_sprites_,                                 METH_VARARGS | METH_KEYWORDS, "load a tile array in color and black and white"},
-  {"topcon",                                                 (PyCFunction)topcon_,                                                METH_VARARGS,                 "log to the mini console"},
-  {"tp_load",                                                (PyCFunction)tp_load_,                                               METH_VARARGS | METH_KEYWORDS, "load a thing template"},
-  TP_SET_DECL(ai_avoid_distance)
-  TP_SET_DECL(ai_enemy_memory)
-  TP_SET_DECL(ai_obstacle)
-  TP_SET_DECL(ai_scent_distance)
-  TP_SET_DECL(ai_vision_distance)
-  TP_SET_DECL(attack_eater)
-  TP_SET_DECL(attack_humanoid)
-  TP_SET_DECL(attack_living)
-  TP_SET_DECL(attack_lunge)
-  TP_SET_DECL(attack_meat)
-  TP_SET_DECL(attack_shove)
-  TP_SET_DECL(attack_shove_chance_d1000)
-  TP_SET_DECL(bl1_tile)
-  TP_SET_DECL(bl2_tile)
-  TP_SET_DECL(blast_max_radius)
-  TP_SET_DECL(blast_min_radius)
-  TP_SET_DECL(blit_bot_off)
-  TP_SET_DECL(blit_left_off)
-  TP_SET_DECL(blit_right_off)
-  TP_SET_DECL(blit_top_off)
-  TP_SET_DECL(bot1_tile)
-  TP_SET_DECL(bot2_tile)
-  TP_SET_DECL(bot3_tile)
-  TP_SET_DECL(br1_tile)
-  TP_SET_DECL(br2_tile)
-  TP_SET_DECL(capacity_height)
-  TP_SET_DECL(capacity_width)
-  TP_SET_DECL(charge_count)
-  TP_SET_DECL(collision_attack)
-  TP_SET_DECL(collision_attack_radius)
-  TP_SET_DECL(collision_box)
-  TP_SET_DECL(collision_check)
-  TP_SET_DECL(collision_circle)
-  TP_SET_DECL(collision_hit_priority)
-  TP_SET_DECL(collision_radius)
-  TP_SET_DECL(damage_bite_dice)
-  TP_SET_DECL(damage_swallow_dice)
-  TP_SET_DECL(damage_crush_dice)
-  TP_SET_DECL(damage_doubled_from_acid)
-  TP_SET_DECL(damage_doubled_from_fire)
-  TP_SET_DECL(damage_doubled_from_poison)
-  TP_SET_DECL(damage_doubled_from_water)
-  TP_SET_DECL(damage_melee_dice)
-  TP_SET_DECL(damage_poison_dice)
-  TP_SET_DECL(enchant_level)
-  TP_SET_DECL(enchant_max)
-  TP_SET_DECL(gfx_an_animation_only)
-  TP_SET_DECL(gfx_animated)
-  TP_SET_DECL(gfx_animated_can_hflip)
-  TP_SET_DECL(gfx_animated_can_vflip)
-  TP_SET_DECL(gfx_animated_no_dir)
-  TP_SET_DECL(gfx_anim_attack)
-  TP_SET_DECL(gfx_attack_anim)
-  TP_SET_DECL(gfx_bounce_always)
-  TP_SET_DECL(gfx_bounce_on_move)
-  TP_SET_DECL(gfx_dead_anim)
-  TP_SET_DECL(gfx_flickers)
-  TP_SET_DECL(gfx_glows)
-  TP_SET_DECL(gfx_health_bar_shown)
-  TP_SET_DECL(gfx_health_bar_shown_only_when_injured)
-  TP_SET_DECL(gfx_long_shadow_caster)
-  TP_SET_DECL(gfx_on_fire_anim)
-  TP_SET_DECL(gfx_oversized_but_sitting_on_the_ground)
-  TP_SET_DECL(gfx_short_shadow_caster)
-  TP_SET_DECL(gfx_shown_in_bg)
-  TP_SET_DECL(gfx_show_outlined)
-  TP_SET_DECL(gfx_solid_shadow)
-  TP_SET_DECL(gfx_very_short_shadow_caster)
-  TP_SET_DECL(gfx_water)
-  TP_SET_DECL(gfx_weapon_carry_anim)
-  TP_SET_DECL(gold_value_dice)
-  TP_SET_DECL(hates_acid)
-  TP_SET_DECL(hates_fire)
-  TP_SET_DECL(hates_poison)
-  TP_SET_DECL(hates_water)
-  TP_SET_DECL(health_hunger_pct)
-  TP_SET_DECL(health_initial_dice)
-  TP_SET_DECL(health_starving_pct)
-  TP_SET_DECL(is_able_to_change_levels)
-  TP_SET_DECL(is_able_to_fall)
-  TP_SET_DECL(is_able_to_fire_at)
-  TP_SET_DECL(is_able_to_see_through_doors)
-  TP_SET_DECL(is_able_to_walk_through_walls)
-  TP_SET_DECL(is_acid)
-  TP_SET_DECL(is_acid_lover)
-  TP_SET_DECL(is_alive_on_end_of_anim)
-  TP_SET_DECL(is_always_hit)
-  TP_SET_DECL(is_ascend_dungeon)
-  TP_SET_DECL(is_ascend_sewer)
-  TP_SET_DECL(is_attackable_by_monst)
-  TP_SET_DECL(is_attackable_by_player)
-  TP_SET_DECL(is_auto_collect_item)
-  TP_SET_DECL(is_bag)
-  TP_SET_DECL(is_bag_item)
-  TP_SET_DECL(is_bag_item_container)
-  TP_SET_DECL(is_bag_item_not_stackable)
-  TP_SET_DECL(is_barrel)
-  TP_SET_DECL(is_bleeder)
-  TP_SET_DECL(is_blood)
-  TP_SET_DECL(is_blood_splatter)
-  TP_SET_DECL(is_bones)
-  TP_SET_DECL(is_brazier)
-  TP_SET_DECL(is_bridge)
-  TP_SET_DECL(is_burnable)
-  TP_SET_DECL(is_carrier_of_treasure_class_a)
-  TP_SET_DECL(is_carrier_of_treasure_class_b)
-  TP_SET_DECL(is_carrier_of_treasure_class_c)
-  TP_SET_DECL(is_chasm)
-  TP_SET_DECL(is_collectable)
-  TP_SET_DECL(is_collect_as_keys)
-  TP_SET_DECL(is_collected_as_gold)
-  TP_SET_DECL(is_combustible)
-  TP_SET_DECL(is_corpse_on_death)
-  TP_SET_DECL(is_corridor)
-  TP_SET_DECL(is_critical_to_level)
-  TP_SET_DECL(is_cursor)
-  TP_SET_DECL(is_cursor_can_hover_over)
-  TP_SET_DECL(is_cursor_can_hover_over_but_needs_double_click)
-  TP_SET_DECL(is_cursor_path)
-  TP_SET_DECL(is_dead_on_end_of_anim)
-  TP_SET_DECL(is_dead_on_shove)
-  TP_SET_DECL(is_debug_path)
-  TP_SET_DECL(is_debug_type)
-  TP_SET_DECL(is_deep_water)
-  TP_SET_DECL(is_descend_dungeon)
-  TP_SET_DECL(is_descend_sewer)
-  TP_SET_DECL(is_described_when_hovering_over)
-  TP_SET_DECL(is_dirt)
-  TP_SET_DECL(is_door)
-  TP_SET_DECL(is_droppable)
-  TP_SET_DECL(is_dry_grass)
-  TP_SET_DECL(is_enchantable)
-  TP_SET_DECL(is_enchantstone)
-  TP_SET_DECL(is_ethereal)
-  TP_SET_DECL(is_ethereal_minion_generator)
-  TP_SET_DECL(is_explosion)
-  TP_SET_DECL(is_extreme_hazard)
-  TP_SET_DECL(is_fearless)
-  TP_SET_DECL(is_fire)
-  TP_SET_DECL(is_floating)
-  TP_SET_DECL(is_floor)
-  TP_SET_DECL(is_floor_deco)
-  TP_SET_DECL(is_foilage)
-  TP_SET_DECL(is_food)
-  TP_SET_DECL(is_food_eater)
-  TP_SET_DECL(is_gold)
-  TP_SET_DECL(is_hazard)
-  TP_SET_DECL(is_hittable)
-  TP_SET_DECL(is_humanoid)
-  TP_SET_DECL(is_hunger_insatiable)
-  TP_SET_DECL(is_indestructible)
-  TP_SET_DECL(is_intelligent)
-  TP_SET_DECL(is_interesting)
-  TP_SET_DECL(is_item)
-  TP_SET_DECL(is_item_carrier)
-  TP_SET_DECL(is_item_eater)
-  TP_SET_DECL(is_jelly)
-  TP_SET_DECL(is_jelly_baby)
-  TP_SET_DECL(is_jelly_baby_eater)
-  TP_SET_DECL(is_jelly_eater)
-  TP_SET_DECL(is_jelly_parent)
-  TP_SET_DECL(is_jumper)
-  TP_SET_DECL(is_jumper_chance_d1000)
-  TP_SET_DECL(is_jumper_distance)
-  TP_SET_DECL(is_jumper_on_low_hp_chance_d1000)
-  TP_SET_DECL(is_key)
-  TP_SET_DECL(is_key_collector)
-  TP_SET_DECL(is_killed_on_hit_or_miss)
-  TP_SET_DECL(is_killed_on_hitting)
-  TP_SET_DECL(is_laser)
-  TP_SET_DECL(is_lava)
-  TP_SET_DECL(is_light_blocker)
-  TP_SET_DECL(is_living)
-  TP_SET_DECL(is_loggable_for_important_stuff)
-  TP_SET_DECL(is_loggable_for_unimportant_stuff)
-  TP_SET_DECL(is_meat)
-  TP_SET_DECL(is_meat_eater)
-  TP_SET_DECL(is_minion)
-  TP_SET_DECL(is_minion_generator)
-  TP_SET_DECL(is_monst)
-  TP_SET_DECL(is_moveable)
-  TP_SET_DECL(is_movement_blocking_wall_or_locked_door)
-  TP_SET_DECL(is_movement_blocking_but_destructable)
-  TP_SET_DECL(is_msg)
-  TP_SET_DECL(is_no_tile)
-  TP_SET_DECL(is_openable)
-  TP_SET_DECL(is_player)
-  TP_SET_DECL(is_poison)
-  TP_SET_DECL(is_potion)
-  TP_SET_DECL(is_potion_eater)
-  TP_SET_DECL(is_projectile)
-  TP_SET_DECL(is_removeable_if_out_of_slots)
-  TP_SET_DECL(is_resurrectable)
-  TP_SET_DECL(is_ripple)
-  TP_SET_DECL(is_rock)
-  TP_SET_DECL(unused_flag1)
-  TP_SET_DECL(unused_flag10)
-  TP_SET_DECL(unused_flag11)
-  TP_SET_DECL(unused_flag12)
-  TP_SET_DECL(unused_flag13)
-  TP_SET_DECL(unused_flag14)
-  TP_SET_DECL(unused_flag15)
-  TP_SET_DECL(unused_flag16)
-  TP_SET_DECL(unused_flag17)
-  TP_SET_DECL(unused_flag18)
-  TP_SET_DECL(unused_flag19)
-  TP_SET_DECL(unused_flag2)
-  TP_SET_DECL(unused_flag20)
-  TP_SET_DECL(unused_flag21)
-  TP_SET_DECL(unused_flag22)
-  TP_SET_DECL(unused_flag23)
-  TP_SET_DECL(unused_flag24)
-  TP_SET_DECL(unused_flag25)
-  TP_SET_DECL(unused_flag26)
-  TP_SET_DECL(unused_flag27)
-  TP_SET_DECL(unused_flag28)
-  TP_SET_DECL(unused_flag29)
-  TP_SET_DECL(unused_flag3)
-  TP_SET_DECL(unused_flag30)
-  TP_SET_DECL(unused_flag31)
-  TP_SET_DECL(unused_flag32)
-  TP_SET_DECL(unused_flag33)
-  TP_SET_DECL(unused_flag34)
-  TP_SET_DECL(unused_flag35)
-  TP_SET_DECL(unused_flag36)
-  TP_SET_DECL(unused_flag37)
-  TP_SET_DECL(unused_flag38)
-  TP_SET_DECL(unused_flag39)
-  TP_SET_DECL(unused_flag4)
-  TP_SET_DECL(unused_flag40)
-  TP_SET_DECL(unused_flag41)
-  TP_SET_DECL(unused_flag42)
-  TP_SET_DECL(unused_flag43)
-  TP_SET_DECL(unused_flag44)
-  TP_SET_DECL(unused_flag45)
-  TP_SET_DECL(unused_flag46)
-  TP_SET_DECL(unused_flag47)
-  TP_SET_DECL(unused_flag48)
-  TP_SET_DECL(is_rusty)
-  TP_SET_DECL(unused_flag5)
-  TP_SET_DECL(unused_flag50)
-  TP_SET_DECL(unused_flag51)
-  TP_SET_DECL(unused_flag52)
-  TP_SET_DECL(is_ai_wanderer)
-  TP_SET_DECL(is_organic)
-  TP_SET_DECL(is_glass)
-  TP_SET_DECL(is_stone)
-  TP_SET_DECL(is_item_organic)
-  TP_SET_DECL(is_metal)
-  TP_SET_DECL(is_wooden)
-  TP_SET_DECL(unused_flag6)
-  TP_SET_DECL(is_engulfer)
-  TP_SET_DECL(is_health_booster)
-  TP_SET_DECL(unused_flag7)
-  TP_SET_DECL(unused_flag8)
-  TP_SET_DECL(unused_flag9)
-  TP_SET_DECL(is_secret_door)
-  TP_SET_DECL(is_sewer_wall)
-  TP_SET_DECL(is_shallow_water)
-  TP_SET_DECL(is_shovable)
-  TP_SET_DECL(is_skill)
-  TP_SET_DECL(is_skillstone)
-  TP_SET_DECL(is_smoke)
-  TP_SET_DECL(is_soft_body)
-  TP_SET_DECL(is_spawner)
-  TP_SET_DECL(is_spiderweb)
-  TP_SET_DECL(is_stamina_check)
-  TP_SET_DECL(is_steal_item_chance_d1000)
-  TP_SET_DECL(is_engulf_chance_d1000)
-  TP_SET_DECL(is_sticky)
-  TP_SET_DECL(is_sword)
-  TP_SET_DECL(is_target_select_automatically_when_chosen)
-  TP_SET_DECL(is_the_grid)
-  TP_SET_DECL(is_throwable)
-  TP_SET_DECL(is_thrown_automatically_when_chosen)
-  TP_SET_DECL(is_tickable)
-  TP_SET_DECL(is_tmp_thing)
-  TP_SET_DECL(is_torch)
-  TP_SET_DECL(is_treasure_class_a)
-  TP_SET_DECL(is_treasure_class_b)
-  TP_SET_DECL(is_treasure_class_c)
-  TP_SET_DECL(is_treasure_type)
-  TP_SET_DECL(is_treasure_type_chest)
-  TP_SET_DECL(is_item_collector)
-  TP_SET_DECL(is_treasure_type_eater)
-  TP_SET_DECL(is_undead)
-  TP_SET_DECL(is_usable)
-  TP_SET_DECL(is_used_automatically_when_selected)
-  TP_SET_DECL(is_used_when_thrown)
-  TP_SET_DECL(is_very_combustible)
-  TP_SET_DECL(is_wall)
-  TP_SET_DECL(is_wall_dungeon)
-  TP_SET_DECL(is_wand)
-  TP_SET_DECL(is_wand_eater)
-  TP_SET_DECL(is_water_lover)
-  TP_SET_DECL(is_weapon)
-  TP_SET_DECL(is_weapon_wielder)
-  TP_SET_DECL(item_height)
-  TP_SET_DECL(item_width)
-  TP_SET_DECL(laser_name)
-  TP_SET_DECL(left1_tile)
-  TP_SET_DECL(left2_tile)
-  TP_SET_DECL(lifespan_dice)
-  TP_SET_DECL(light_color)
-  TP_SET_DECL(light_strength)
-  TP_SET_DECL(long_text_description)
-  TP_SET_DECL(loves_fire)
-  TP_SET_DECL(loves_poison)
-  TP_SET_DECL(loves_spiderwebs)
-  TP_SET_DECL(minion_leash_distance)
-  TP_SET_DECL(minion_limit)
-  TP_SET_DECL(monst_size)
-  TP_SET_DECL(name)
-  TP_SET_DECL(normal_placement_rules)
-  TP_SET_DECL(nutrition_dice)
-  TP_SET_DECL(on_birth_do)
-  TP_SET_DECL(on_bite_do)
-  TP_SET_DECL(on_born_do)
-  TP_SET_DECL(on_death_do)
-  TP_SET_DECL(on_death_drop_all_items)
-  TP_SET_DECL(on_death_is_open)
-  TP_SET_DECL(on_enchant_do)
-  TP_SET_DECL(on_fall_do)
-  TP_SET_DECL(on_fire_do)
-  TP_SET_DECL(on_firing_at_something_do)
-  TP_SET_DECL(on_hit_do)
-  TP_SET_DECL(on_idle_dice)
-  TP_SET_DECL(on_lifespan_do)
-  TP_SET_DECL(on_miss_do)
-  TP_SET_DECL(on_move_do)
-  TP_SET_DECL(on_open_do)
-  TP_SET_DECL(on_tick_do)
-  TP_SET_DECL(on_use_do)
-  TP_SET_DECL(projectile_name)
-  TP_SET_DECL(range_max)
-  TP_SET_DECL(rarity)
-  TP_SET_DECL(resurrect_dice)
-  TP_SET_DECL(right1_tile)
-  TP_SET_DECL(right2_tile)
-  TP_SET_DECL(spawn_on_shoved)
-  TP_SET_DECL(stamina)
-  TP_SET_DECL(stat_attack)
-  TP_SET_DECL(stat_constitution)
-  TP_SET_DECL(stat_defence)
-  TP_SET_DECL(stats01)
-  TP_SET_DECL(stats02)
-  TP_SET_DECL(stats03)
-  TP_SET_DECL(stats04)
-  TP_SET_DECL(stats05)
-  TP_SET_DECL(stats06)
-  TP_SET_DECL(stats07)
-  TP_SET_DECL(stats08)
-  TP_SET_DECL(stats09)
-  TP_SET_DECL(stats10)
-  TP_SET_DECL(stats11)
-  TP_SET_DECL(stats12)
-  TP_SET_DECL(stats17)
-  TP_SET_DECL(stat_strength)
-  TP_SET_DECL(str1)
-  TP_SET_DECL(str2)
-  TP_SET_DECL(str4)
-  TP_SET_DECL(str5)
-  TP_SET_DECL(text_a_or_an)
-  TP_SET_DECL(text_description)
-  TP_SET_DECL(text_enchant)
-  TP_SET_DECL(text_hits)
-  TP_SET_DECL(text_name)
-  TP_SET_DECL(text_skill)
-  TP_SET_DECL(text_title)
-  TP_SET_DECL(text_unused)
-  TP_SET_DECL(throw_distance)
-  TP_SET_DECL(tile)
-  TP_SET_DECL(tl1_tile)
-  TP_SET_DECL(tl2_tile)
-  TP_SET_DECL(top1_tile)
-  TP_SET_DECL(top2_tile)
-  TP_SET_DECL(tr1_tile)
-  TP_SET_DECL(tr2_tile)
-  TP_SET_DECL(weapon_carry_anim)
-  TP_SET_DECL(weapon_damage)
-  TP_SET_DECL(weapon_use_distance)
-  TP_SET_DECL(z_depth)
-  TP_SET_DECL(z_prio)
-  {"tp_update",                                              (PyCFunction)tp_update_,                                             METH_VARARGS | METH_KEYWORDS, "update template"},
+  #define ZX_ADD_PYTHON_FUNCTION(__func__) \
+    { #__func__, (PyCFunction)__func__, METH_VARARGS | METH_KEYWORDS, #__func__ },
+
+  #define ZX_ADD_WRAPPED_PYTHON_FUNCTION(__func__) \
+    { #__func__, (PyCFunction)__func__ ## _, METH_VARARGS | METH_KEYWORDS, #__func__ },
+
+  ZX_ADD_PYTHON_TP_FUNCTION(ai_avoid_distance)
+  ZX_ADD_PYTHON_TP_FUNCTION(ai_enemy_memory)
+  ZX_ADD_PYTHON_TP_FUNCTION(ai_obstacle)
+  ZX_ADD_PYTHON_TP_FUNCTION(ai_scent_distance)
+  ZX_ADD_PYTHON_TP_FUNCTION(ai_vision_distance)
+  ZX_ADD_PYTHON_TP_FUNCTION(attack_eater)
+  ZX_ADD_PYTHON_TP_FUNCTION(attack_humanoid)
+  ZX_ADD_PYTHON_TP_FUNCTION(attack_living)
+  ZX_ADD_PYTHON_TP_FUNCTION(attack_lunge)
+  ZX_ADD_PYTHON_TP_FUNCTION(attack_meat)
+  ZX_ADD_PYTHON_TP_FUNCTION(attack_shove)
+  ZX_ADD_PYTHON_TP_FUNCTION(attack_shove_chance_d1000)
+  ZX_ADD_PYTHON_TP_FUNCTION(bl1_tile)
+  ZX_ADD_PYTHON_TP_FUNCTION(bl2_tile)
+  ZX_ADD_PYTHON_TP_FUNCTION(blast_max_radius)
+  ZX_ADD_PYTHON_TP_FUNCTION(blast_min_radius)
+  ZX_ADD_PYTHON_TP_FUNCTION(blit_bot_off)
+  ZX_ADD_PYTHON_TP_FUNCTION(blit_left_off)
+  ZX_ADD_PYTHON_TP_FUNCTION(blit_right_off)
+  ZX_ADD_PYTHON_TP_FUNCTION(blit_top_off)
+  ZX_ADD_PYTHON_TP_FUNCTION(bot1_tile)
+  ZX_ADD_PYTHON_TP_FUNCTION(bot2_tile)
+  ZX_ADD_PYTHON_TP_FUNCTION(bot3_tile)
+  ZX_ADD_PYTHON_TP_FUNCTION(br1_tile)
+  ZX_ADD_PYTHON_TP_FUNCTION(br2_tile)
+  ZX_ADD_PYTHON_TP_FUNCTION(capacity_height)
+  ZX_ADD_PYTHON_TP_FUNCTION(capacity_width)
+  ZX_ADD_PYTHON_TP_FUNCTION(charge_count)
+  ZX_ADD_PYTHON_TP_FUNCTION(collision_attack)
+  ZX_ADD_PYTHON_TP_FUNCTION(collision_attack_radius)
+  ZX_ADD_PYTHON_TP_FUNCTION(collision_box)
+  ZX_ADD_PYTHON_TP_FUNCTION(collision_check)
+  ZX_ADD_PYTHON_TP_FUNCTION(collision_circle)
+  ZX_ADD_PYTHON_TP_FUNCTION(collision_hit_priority)
+  ZX_ADD_PYTHON_TP_FUNCTION(collision_radius)
+  ZX_ADD_PYTHON_TP_FUNCTION(damage_bite_dice)
+  ZX_ADD_PYTHON_TP_FUNCTION(damage_crush_dice)
+  ZX_ADD_PYTHON_TP_FUNCTION(damage_doubled_from_acid)
+  ZX_ADD_PYTHON_TP_FUNCTION(damage_doubled_from_fire)
+  ZX_ADD_PYTHON_TP_FUNCTION(damage_doubled_from_poison)
+  ZX_ADD_PYTHON_TP_FUNCTION(damage_doubled_from_water)
+  ZX_ADD_PYTHON_TP_FUNCTION(damage_melee_dice)
+  ZX_ADD_PYTHON_TP_FUNCTION(damage_poison_dice)
+  ZX_ADD_PYTHON_TP_FUNCTION(damage_swallow_dice)
+  ZX_ADD_PYTHON_TP_FUNCTION(enchant_level)
+  ZX_ADD_PYTHON_TP_FUNCTION(enchant_max)
+  ZX_ADD_PYTHON_TP_FUNCTION(gfx_an_animation_only)
+  ZX_ADD_PYTHON_TP_FUNCTION(gfx_anim_attack)
+  ZX_ADD_PYTHON_TP_FUNCTION(gfx_animated)
+  ZX_ADD_PYTHON_TP_FUNCTION(gfx_animated_can_hflip)
+  ZX_ADD_PYTHON_TP_FUNCTION(gfx_animated_can_vflip)
+  ZX_ADD_PYTHON_TP_FUNCTION(gfx_animated_no_dir)
+  ZX_ADD_PYTHON_TP_FUNCTION(gfx_attack_anim)
+  ZX_ADD_PYTHON_TP_FUNCTION(gfx_bounce_always)
+  ZX_ADD_PYTHON_TP_FUNCTION(gfx_bounce_on_move)
+  ZX_ADD_PYTHON_TP_FUNCTION(gfx_dead_anim)
+  ZX_ADD_PYTHON_TP_FUNCTION(gfx_flickers)
+  ZX_ADD_PYTHON_TP_FUNCTION(gfx_glows)
+  ZX_ADD_PYTHON_TP_FUNCTION(gfx_health_bar_shown)
+  ZX_ADD_PYTHON_TP_FUNCTION(gfx_health_bar_autohide)
+  ZX_ADD_PYTHON_TP_FUNCTION(gfx_long_shadow_caster)
+  ZX_ADD_PYTHON_TP_FUNCTION(gfx_on_fire_anim)
+  ZX_ADD_PYTHON_TP_FUNCTION(gfx_oversized_and_on_floor)
+  ZX_ADD_PYTHON_TP_FUNCTION(gfx_short_shadow_caster)
+  ZX_ADD_PYTHON_TP_FUNCTION(gfx_show_outlined)
+  ZX_ADD_PYTHON_TP_FUNCTION(gfx_shown_in_bg)
+  ZX_ADD_PYTHON_TP_FUNCTION(gfx_solid_shadow)
+  ZX_ADD_PYTHON_TP_FUNCTION(gfx_very_short_shadow_caster)
+  ZX_ADD_PYTHON_TP_FUNCTION(gfx_water)
+  ZX_ADD_PYTHON_TP_FUNCTION(gfx_weapon_carry_anim)
+  ZX_ADD_PYTHON_TP_FUNCTION(gold_value_dice)
+  ZX_ADD_PYTHON_TP_FUNCTION(hates_acid)
+  ZX_ADD_PYTHON_TP_FUNCTION(hates_fire)
+  ZX_ADD_PYTHON_TP_FUNCTION(hates_poison)
+  ZX_ADD_PYTHON_TP_FUNCTION(hates_water)
+  ZX_ADD_PYTHON_TP_FUNCTION(health_hunger_pct)
+  ZX_ADD_PYTHON_TP_FUNCTION(health_initial_dice)
+  ZX_ADD_PYTHON_TP_FUNCTION(health_starving_pct)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_able_to_change_levels)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_able_to_fall)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_able_to_fire_at)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_able_to_see_through_doors)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_able_to_walk_through_walls)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_acid)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_acid_lover)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_ai_wanderer)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_alive_on_end_of_anim)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_always_hit)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_ascend_dungeon)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_ascend_sewer)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_attackable_by_monst)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_attackable_by_player)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_auto_collect_item)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_bag)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_bag_item)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_bag_item_container)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_bag_item_not_stackable)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_barrel)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_bleeder)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_blood)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_blood_splatter)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_bones)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_brazier)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_bridge)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_burnable)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_carrier_of_treasure_class_a)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_carrier_of_treasure_class_b)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_carrier_of_treasure_class_c)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_chasm)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_collect_as_keys)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_collectable)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_collected_as_gold)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_combustible)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_corpse_on_death)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_corridor)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_critical_to_level)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_cursor)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_cursor_can_hover_over)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_cursor_can_hover_over_2x_click)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_cursor_path)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_dead_on_end_of_anim)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_dead_on_shove)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_debug_path)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_debug_type)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_deep_water)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_descend_dungeon)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_descend_sewer)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_described_when_hovering_over)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_dirt)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_door)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_droppable)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_dry_grass)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_enchantable)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_enchantstone)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_engulf_chance_d1000)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_engulfer)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_ethereal)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_ethereal_minion_generator)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_explosion)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_extreme_hazard)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_fearless)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_fire)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_floating)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_floor)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_floor_deco)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_foilage)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_food)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_food_eater)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_glass)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_gold)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_hazard)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_health_booster)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_hittable)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_humanoid)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_hunger_insatiable)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_indestructible)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_intelligent)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_interesting)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_item)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_item_carrier)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_item_collector)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_item_eater)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_item_organic)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_jelly)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_jelly_baby)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_jelly_baby_eater)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_jelly_eater)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_jelly_parent)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_jumper)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_jumper_chance_d1000)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_jumper_distance)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_jumper_on_low_hp_chance_d1000)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_key)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_key_collector)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_killed_on_hit_or_miss)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_killed_on_hitting)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_laser)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_lava)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_light_blocker)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_living)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_loggable_for_important_stuff)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_loggable_for_unimportant_stuff)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_meat)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_meat_eater)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_metal)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_minion)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_minion_generator)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_monst)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_moveable)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_msg)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_no_tile)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_obs_destructable)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_obs_wall_or_door)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_openable)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_organic)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_player)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_poison)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_potion)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_potion_eater)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_projectile)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_removeable_if_out_of_slots)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_resurrectable)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_ripple)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_rock)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_rusty)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_secret_door)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_sewer_wall)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_shallow_water)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_shovable)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_skill)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_skillstone)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_smoke)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_soft_body)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_spawner)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_spiderweb)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_stamina_check)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_steal_item_chance_d1000)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_sticky)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_stone)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_sword)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_target_auto_select)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_the_grid)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_throwable)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_auto_throw)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_tickable)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_tmp_thing)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_torch)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_treasure_class_a)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_treasure_class_b)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_treasure_class_c)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_treasure_type)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_treasure_type_chest)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_treasure_type_eater)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_undead)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_usable)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_used_automatically_when_selected)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_used_when_thrown)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_very_combustible)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_wall)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_wall_dungeon)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_wand)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_wand_eater)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_water_lover)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_weapon)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_weapon_wielder)
+  ZX_ADD_PYTHON_TP_FUNCTION(is_wooden)
+  ZX_ADD_PYTHON_TP_FUNCTION(item_height)
+  ZX_ADD_PYTHON_TP_FUNCTION(item_width)
+  ZX_ADD_PYTHON_TP_FUNCTION(laser_name)
+  ZX_ADD_PYTHON_TP_FUNCTION(left1_tile)
+  ZX_ADD_PYTHON_TP_FUNCTION(left2_tile)
+  ZX_ADD_PYTHON_TP_FUNCTION(lifespan_dice)
+  ZX_ADD_PYTHON_TP_FUNCTION(light_color)
+  ZX_ADD_PYTHON_TP_FUNCTION(light_strength)
+  ZX_ADD_PYTHON_TP_FUNCTION(long_text_description)
+  ZX_ADD_PYTHON_TP_FUNCTION(loves_fire)
+  ZX_ADD_PYTHON_TP_FUNCTION(loves_poison)
+  ZX_ADD_PYTHON_TP_FUNCTION(loves_spiderwebs)
+  ZX_ADD_PYTHON_TP_FUNCTION(minion_leash_distance)
+  ZX_ADD_PYTHON_TP_FUNCTION(minion_limit)
+  ZX_ADD_PYTHON_TP_FUNCTION(monst_size)
+  ZX_ADD_PYTHON_TP_FUNCTION(name)
+  ZX_ADD_PYTHON_TP_FUNCTION(normal_placement_rules)
+  ZX_ADD_PYTHON_TP_FUNCTION(nutrition_dice)
+  ZX_ADD_PYTHON_TP_FUNCTION(on_birth_do)
+  ZX_ADD_PYTHON_TP_FUNCTION(on_bite_do)
+  ZX_ADD_PYTHON_TP_FUNCTION(on_born_do)
+  ZX_ADD_PYTHON_TP_FUNCTION(on_death_do)
+  ZX_ADD_PYTHON_TP_FUNCTION(on_death_drop_all_items)
+  ZX_ADD_PYTHON_TP_FUNCTION(on_death_is_open)
+  ZX_ADD_PYTHON_TP_FUNCTION(on_enchant_do)
+  ZX_ADD_PYTHON_TP_FUNCTION(on_fall_do)
+  ZX_ADD_PYTHON_TP_FUNCTION(on_fire_do)
+  ZX_ADD_PYTHON_TP_FUNCTION(on_firing_at_something_do)
+  ZX_ADD_PYTHON_TP_FUNCTION(on_hit_do)
+  ZX_ADD_PYTHON_TP_FUNCTION(on_idle_dice)
+  ZX_ADD_PYTHON_TP_FUNCTION(on_lifespan_do)
+  ZX_ADD_PYTHON_TP_FUNCTION(on_miss_do)
+  ZX_ADD_PYTHON_TP_FUNCTION(on_move_do)
+  ZX_ADD_PYTHON_TP_FUNCTION(on_open_do)
+  ZX_ADD_PYTHON_TP_FUNCTION(on_tick_do)
+  ZX_ADD_PYTHON_TP_FUNCTION(on_use_do)
+  ZX_ADD_PYTHON_TP_FUNCTION(projectile_name)
+  ZX_ADD_PYTHON_TP_FUNCTION(range_max)
+  ZX_ADD_PYTHON_TP_FUNCTION(rarity)
+  ZX_ADD_PYTHON_TP_FUNCTION(resurrect_dice)
+  ZX_ADD_PYTHON_TP_FUNCTION(right1_tile)
+  ZX_ADD_PYTHON_TP_FUNCTION(right2_tile)
+  ZX_ADD_PYTHON_TP_FUNCTION(spawn_on_shoved)
+  ZX_ADD_PYTHON_TP_FUNCTION(stamina)
+  ZX_ADD_PYTHON_TP_FUNCTION(stat_attack)
+  ZX_ADD_PYTHON_TP_FUNCTION(stat_constitution)
+  ZX_ADD_PYTHON_TP_FUNCTION(stat_defence)
+  ZX_ADD_PYTHON_TP_FUNCTION(stat_strength)
+  ZX_ADD_PYTHON_TP_FUNCTION(stats01)
+  ZX_ADD_PYTHON_TP_FUNCTION(stats02)
+  ZX_ADD_PYTHON_TP_FUNCTION(stats03)
+  ZX_ADD_PYTHON_TP_FUNCTION(stats04)
+  ZX_ADD_PYTHON_TP_FUNCTION(stats05)
+  ZX_ADD_PYTHON_TP_FUNCTION(stats06)
+  ZX_ADD_PYTHON_TP_FUNCTION(stats07)
+  ZX_ADD_PYTHON_TP_FUNCTION(stats08)
+  ZX_ADD_PYTHON_TP_FUNCTION(stats09)
+  ZX_ADD_PYTHON_TP_FUNCTION(stats10)
+  ZX_ADD_PYTHON_TP_FUNCTION(stats11)
+  ZX_ADD_PYTHON_TP_FUNCTION(stats12)
+  ZX_ADD_PYTHON_TP_FUNCTION(stats17)
+  ZX_ADD_PYTHON_TP_FUNCTION(str1)
+  ZX_ADD_PYTHON_TP_FUNCTION(str2)
+  ZX_ADD_PYTHON_TP_FUNCTION(str4)
+  ZX_ADD_PYTHON_TP_FUNCTION(str5)
+  ZX_ADD_PYTHON_TP_FUNCTION(text_a_or_an)
+  ZX_ADD_PYTHON_TP_FUNCTION(text_description)
+  ZX_ADD_PYTHON_TP_FUNCTION(text_enchant)
+  ZX_ADD_PYTHON_TP_FUNCTION(text_hits)
+  ZX_ADD_PYTHON_TP_FUNCTION(text_name)
+  ZX_ADD_PYTHON_TP_FUNCTION(text_skill)
+  ZX_ADD_PYTHON_TP_FUNCTION(text_title)
+  ZX_ADD_PYTHON_TP_FUNCTION(text_unused)
+  ZX_ADD_PYTHON_TP_FUNCTION(throw_distance)
+  ZX_ADD_PYTHON_TP_FUNCTION(tile)
+  ZX_ADD_PYTHON_TP_FUNCTION(tl1_tile)
+  ZX_ADD_PYTHON_TP_FUNCTION(tl2_tile)
+  ZX_ADD_PYTHON_TP_FUNCTION(top1_tile)
+  ZX_ADD_PYTHON_TP_FUNCTION(top2_tile)
+  ZX_ADD_PYTHON_TP_FUNCTION(tr1_tile)
+  ZX_ADD_PYTHON_TP_FUNCTION(tr2_tile)
+  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag1)
+  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag10)
+  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag11)
+  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag12)
+  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag13)
+  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag14)
+  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag15)
+  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag16)
+  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag17)
+  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag18)
+  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag19)
+  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag2)
+  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag20)
+  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag21)
+  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag22)
+  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag23)
+  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag24)
+  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag25)
+  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag26)
+  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag27)
+  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag28)
+  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag29)
+  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag3)
+  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag30)
+  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag31)
+  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag32)
+  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag33)
+  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag34)
+  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag35)
+  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag36)
+  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag37)
+  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag38)
+  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag39)
+  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag4)
+  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag40)
+  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag41)
+  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag42)
+  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag43)
+  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag44)
+  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag45)
+  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag46)
+  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag47)
+  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag48)
+  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag5)
+  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag50)
+  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag51)
+  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag52)
+  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag6)
+  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag7)
+  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag8)
+  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag9)
+  ZX_ADD_PYTHON_TP_FUNCTION(weapon_carry_anim)
+  ZX_ADD_PYTHON_TP_FUNCTION(weapon_damage)
+  ZX_ADD_PYTHON_TP_FUNCTION(weapon_use_distance)
+  ZX_ADD_PYTHON_TP_FUNCTION(z_depth)
+  ZX_ADD_PYTHON_TP_FUNCTION(z_prio)
+  ZX_ADD_PYTHON_FUNCTION(level_ai_enemy_memory_at)
+  ZX_ADD_PYTHON_FUNCTION(level_enchant_level_at)
+  ZX_ADD_PYTHON_FUNCTION(level_enchant_max_at)
+  ZX_ADD_PYTHON_FUNCTION(level_flood_fill_get_all_things)
+  ZX_ADD_PYTHON_FUNCTION(level_get_all)
+  ZX_ADD_PYTHON_FUNCTION(level_gfx_flickers_at)
+  ZX_ADD_PYTHON_FUNCTION(level_gfx_long_shadow_caster_at)
+  ZX_ADD_PYTHON_FUNCTION(level_gfx_solid_shadow_at)
+  ZX_ADD_PYTHON_FUNCTION(level_gfx_very_short_shadow_caster_at)
+  ZX_ADD_PYTHON_FUNCTION(level_gfx_water_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_able_to_change_levels_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_able_to_fall_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_able_to_fire_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_able_to_fire_at_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_able_to_see_through_doors_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_able_to_walk_through_walls_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_acid_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_acid_lover_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_ai_wanderer_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_alive_monst_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_alive_on_end_of_anim_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_always_hit_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_ascend_dungeon_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_ascend_sewer_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_attackable_by_monst_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_attackable_by_player_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_auto_collect_item_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_bag_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_bag_item_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_bag_item_container_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_bag_item_not_stackable_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_barrel_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_bleeder_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_blood_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_blood_splatter_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_bloodied_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_bones_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_brazier_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_bridge_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_burnable_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_carrier_of_treasure_class_a_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_carrier_of_treasure_class_b_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_carrier_of_treasure_class_c_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_carrying_item_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_carrying_treasure_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_chasm_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_collect_as_keys_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_collectable_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_collected_as_gold_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_combustible_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_corpse_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_corpse_on_death_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_corridor_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_critical_to_level_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_cursor_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_cursor_can_hover_over_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_cursor_path_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_dead_on_end_of_anim_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_dead_on_shove_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_debug_path_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_debug_type_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_deep_water_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_descend_dungeon_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_descend_sewer_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_described_when_hovering_over_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_dir_bl_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_dir_br_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_dir_down_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_dir_left_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_dir_none_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_dir_right_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_dir_tl_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_dir_tr_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_dir_up_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_dirt_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_door_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_droppable_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_dry_grass_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_enchantable_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_enchantstone_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_engulf_chance_d1000_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_engulfer_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_ethereal_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_ethereal_minion_generator_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_explosion_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_extreme_hazard_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_fearless_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_fire_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_floating_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_floor_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_floor_deco_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_foilage_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_food_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_food_eater_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_glass_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_gold_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_hazard_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_health_booster_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_hittable_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_humanoid_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_hunger_insatiable_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_indestructible_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_intelligent_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_interesting_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_item_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_item_carrier_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_item_collector_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_item_eater_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_item_organic_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_jelly_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_jelly_baby_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_jelly_baby_eater_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_jelly_eater_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_jelly_parent_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_jumper_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_jumper_chance_d1000_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_jumper_distance_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_jumper_on_low_hp_chance_d1000_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_key_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_key_collector_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_killed_on_hit_or_miss_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_killed_on_hitting_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_laser_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_lava_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_light_blocker_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_living_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_meat_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_meat_eater_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_metal_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_minion_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_minion_generator_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_monst_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_moveable_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_msg_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_no_tile_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_obs_destructable_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_obs_wall_or_door_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_on_firing_at_something)
+  ZX_ADD_PYTHON_FUNCTION(level_is_openable_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_organic_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_player_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_poison_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_potion_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_potion_eater_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_projectile_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_removeable_if_out_of_slots_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_resurrectable_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_ripple_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_rock_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_rusty_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_secret_door_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_sewer_wall_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_shallow_water_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_shovable_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_skill_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_skillstone_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_smoke_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_soft_body_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_spawner_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_spiderweb_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_stamina_check_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_steal_item_chance_d1000_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_sticky_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_stone_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_sword_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_throwable_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_tickable_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_tmp_thing_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_torch_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_treasure_class_a_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_treasure_class_b_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_treasure_class_c_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_treasure_type_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_treasure_type_chest_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_treasure_type_eater_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_undead_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_usable_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_used_when_thrown_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_very_combustible_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_visible_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_wall_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_wall_dungeon_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_wand_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_wand_eater_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_water_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_water_lover_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_weapon_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_weapon_wielder_at)
+  ZX_ADD_PYTHON_FUNCTION(level_is_wooden_at)
+  ZX_ADD_PYTHON_FUNCTION(level_loves_fire_at)
+  ZX_ADD_PYTHON_FUNCTION(level_loves_poison_at)
+  ZX_ADD_PYTHON_FUNCTION(level_loves_spiderwebs_at)
+  ZX_ADD_PYTHON_FUNCTION(level_place_at)
+  ZX_ADD_PYTHON_FUNCTION(level_spawn_at_thing)
+  ZX_ADD_PYTHON_FUNCTION(level_spawn_at_thing_if_possible)
+  ZX_ADD_PYTHON_FUNCTION(level_spawn_fire_around_thing)
+  ZX_ADD_PYTHON_FUNCTION(level_unused_flag10_at)
+  ZX_ADD_PYTHON_FUNCTION(level_unused_flag11_at)
+  ZX_ADD_PYTHON_FUNCTION(level_unused_flag12_at)
+  ZX_ADD_PYTHON_FUNCTION(level_unused_flag13_at)
+  ZX_ADD_PYTHON_FUNCTION(level_unused_flag14_at)
+  ZX_ADD_PYTHON_FUNCTION(level_unused_flag15_at)
+  ZX_ADD_PYTHON_FUNCTION(level_unused_flag16_at)
+  ZX_ADD_PYTHON_FUNCTION(level_unused_flag17_at)
+  ZX_ADD_PYTHON_FUNCTION(level_unused_flag18_at)
+  ZX_ADD_PYTHON_FUNCTION(level_unused_flag19_at)
+  ZX_ADD_PYTHON_FUNCTION(level_unused_flag1_at)
+  ZX_ADD_PYTHON_FUNCTION(level_unused_flag20_at)
+  ZX_ADD_PYTHON_FUNCTION(level_unused_flag21_at)
+  ZX_ADD_PYTHON_FUNCTION(level_unused_flag22_at)
+  ZX_ADD_PYTHON_FUNCTION(level_unused_flag23_at)
+  ZX_ADD_PYTHON_FUNCTION(level_unused_flag24_at)
+  ZX_ADD_PYTHON_FUNCTION(level_unused_flag25_at)
+  ZX_ADD_PYTHON_FUNCTION(level_unused_flag26_at)
+  ZX_ADD_PYTHON_FUNCTION(level_unused_flag27_at)
+  ZX_ADD_PYTHON_FUNCTION(level_unused_flag28_at)
+  ZX_ADD_PYTHON_FUNCTION(level_unused_flag29_at)
+  ZX_ADD_PYTHON_FUNCTION(level_unused_flag2_at)
+  ZX_ADD_PYTHON_FUNCTION(level_unused_flag30_at)
+  ZX_ADD_PYTHON_FUNCTION(level_unused_flag31_at)
+  ZX_ADD_PYTHON_FUNCTION(level_unused_flag32_at)
+  ZX_ADD_PYTHON_FUNCTION(level_unused_flag33_at)
+  ZX_ADD_PYTHON_FUNCTION(level_unused_flag34_at)
+  ZX_ADD_PYTHON_FUNCTION(level_unused_flag35_at)
+  ZX_ADD_PYTHON_FUNCTION(level_unused_flag36_at)
+  ZX_ADD_PYTHON_FUNCTION(level_unused_flag37_at)
+  ZX_ADD_PYTHON_FUNCTION(level_unused_flag38_at)
+  ZX_ADD_PYTHON_FUNCTION(level_unused_flag39_at)
+  ZX_ADD_PYTHON_FUNCTION(level_unused_flag3_at)
+  ZX_ADD_PYTHON_FUNCTION(level_unused_flag40_at)
+  ZX_ADD_PYTHON_FUNCTION(level_unused_flag41_at)
+  ZX_ADD_PYTHON_FUNCTION(level_unused_flag42_at)
+  ZX_ADD_PYTHON_FUNCTION(level_unused_flag43_at)
+  ZX_ADD_PYTHON_FUNCTION(level_unused_flag44_at)
+  ZX_ADD_PYTHON_FUNCTION(level_unused_flag45_at)
+  ZX_ADD_PYTHON_FUNCTION(level_unused_flag46_at)
+  ZX_ADD_PYTHON_FUNCTION(level_unused_flag47_at)
+  ZX_ADD_PYTHON_FUNCTION(level_unused_flag48_at)
+  ZX_ADD_PYTHON_FUNCTION(level_unused_flag4_at)
+  ZX_ADD_PYTHON_FUNCTION(level_unused_flag50_at)
+  ZX_ADD_PYTHON_FUNCTION(level_unused_flag51_at)
+  ZX_ADD_PYTHON_FUNCTION(level_unused_flag52_at)
+  ZX_ADD_PYTHON_FUNCTION(level_unused_flag5_at)
+  ZX_ADD_PYTHON_FUNCTION(level_unused_flag6_at)
+  ZX_ADD_PYTHON_FUNCTION(level_unused_flag7_at)
+  ZX_ADD_PYTHON_FUNCTION(level_unused_flag8_at)
+  ZX_ADD_PYTHON_FUNCTION(level_unused_flag9_at)
+  ZX_ADD_PYTHON_FUNCTION(non_pcg_randint)
+  ZX_ADD_PYTHON_FUNCTION(pcg_randint)
+  ZX_ADD_PYTHON_FUNCTION(sound_play)
+  ZX_ADD_PYTHON_FUNCTION(sound_play_channel)
+  ZX_ADD_PYTHON_FUNCTION(thing_ai_enemy_memory)
+  ZX_ADD_PYTHON_FUNCTION(thing_decr_charge_count)
+  ZX_ADD_PYTHON_FUNCTION(thing_decr_current_damage)
+  ZX_ADD_PYTHON_FUNCTION(thing_decr_enchant)
+  ZX_ADD_PYTHON_FUNCTION(thing_decr_enchant_max)
+  ZX_ADD_PYTHON_FUNCTION(thing_decr_health)
+  ZX_ADD_PYTHON_FUNCTION(thing_decr_health_max)
+  ZX_ADD_PYTHON_FUNCTION(thing_decr_stamina)
+  ZX_ADD_PYTHON_FUNCTION(thing_decr_stamina_max)
+  ZX_ADD_PYTHON_FUNCTION(thing_enchant_level)
+  ZX_ADD_PYTHON_FUNCTION(thing_enchant_max)
+  ZX_ADD_PYTHON_FUNCTION(thing_fire_at)
+  ZX_ADD_PYTHON_FUNCTION(thing_get_charge_count)
+  ZX_ADD_PYTHON_FUNCTION(thing_get_coords)
+  ZX_ADD_PYTHON_FUNCTION(thing_get_current_damage)
+  ZX_ADD_PYTHON_FUNCTION(thing_get_damage_bite)
+  ZX_ADD_PYTHON_FUNCTION(thing_get_damage_crush)
+  ZX_ADD_PYTHON_FUNCTION(thing_get_damage_melee)
+  ZX_ADD_PYTHON_FUNCTION(thing_get_damage_swallow)
+  ZX_ADD_PYTHON_FUNCTION(thing_get_enchant)
+  ZX_ADD_PYTHON_FUNCTION(thing_get_enchant_max)
+  ZX_ADD_PYTHON_FUNCTION(thing_get_health)
+  ZX_ADD_PYTHON_FUNCTION(thing_get_health_max)
+  ZX_ADD_PYTHON_FUNCTION(thing_get_immediate_minion_owner_id)
+  ZX_ADD_PYTHON_FUNCTION(thing_get_immediate_owner_id)
+  ZX_ADD_PYTHON_FUNCTION(thing_get_immediate_spawned_owner_id)
+  ZX_ADD_PYTHON_FUNCTION(thing_get_initial_charge_count)
+  ZX_ADD_PYTHON_FUNCTION(thing_get_name)
+  ZX_ADD_PYTHON_FUNCTION(thing_get_stamina)
+  ZX_ADD_PYTHON_FUNCTION(thing_get_stamina_max)
+  ZX_ADD_PYTHON_FUNCTION(thing_get_top_owner_id)
+  ZX_ADD_PYTHON_FUNCTION(thing_gfx_flickers)
+  ZX_ADD_PYTHON_FUNCTION(thing_gfx_long_shadow_caster)
+  ZX_ADD_PYTHON_FUNCTION(thing_gfx_solid_shadow)
+  ZX_ADD_PYTHON_FUNCTION(thing_gfx_very_short_shadow_caster)
+  ZX_ADD_PYTHON_FUNCTION(thing_gfx_water)
+  ZX_ADD_PYTHON_FUNCTION(thing_hit)
+  ZX_ADD_PYTHON_FUNCTION(thing_incr_charge_count)
+  ZX_ADD_PYTHON_FUNCTION(thing_incr_current_damage)
+  ZX_ADD_PYTHON_FUNCTION(thing_incr_enchant)
+  ZX_ADD_PYTHON_FUNCTION(thing_incr_enchant_max)
+  ZX_ADD_PYTHON_FUNCTION(thing_incr_health)
+  ZX_ADD_PYTHON_FUNCTION(thing_incr_health_max)
+  ZX_ADD_PYTHON_FUNCTION(thing_incr_stamina)
+  ZX_ADD_PYTHON_FUNCTION(thing_incr_stamina_max)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_able_to_change_levels)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_able_to_fall)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_able_to_see_through_doors)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_able_to_walk_through_walls)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_acid)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_acid_lover)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_ai_wanderer)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_alive_monst)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_alive_on_end_of_anim)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_always_hit)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_ascend_dungeon)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_ascend_sewer)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_auto_collect_item)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_bag)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_bag_item)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_bag_item_container)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_bag_item_not_stackable)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_barrel)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_bleeder)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_blood)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_blood_splatter)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_bloodied)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_bones)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_brazier)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_bridge)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_burnable)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_carrier_of_treasure_class_a)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_carrier_of_treasure_class_b)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_carrier_of_treasure_class_c)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_carrying_item)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_carrying_treasure)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_chasm)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_collect_as_keys)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_collectable)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_collected_as_gold)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_combustible)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_corpse)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_corpse_on_death)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_corridor)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_critical_to_level)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_cursor)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_cursor_can_hover_over)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_cursor_can_hover_over_2x_click)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_cursor_path)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_dead_on_end_of_anim)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_dead_or_dying)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_dead_or_dying_on_shove)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_debug_path)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_debug_type)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_deep_water)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_descend_dungeon)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_descend_sewer)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_described_when_hovering_over)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_dir_bl)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_dir_br)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_dir_down)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_dir_left)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_dir_none)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_dir_right)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_dir_tl)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_dir_tr)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_dir_up)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_dirt)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_door)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_droppable)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_dry_grass)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_enchantable)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_enchantstone)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_engulf_chance_d1000)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_engulfer)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_ethereal)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_ethereal_minion_generator)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_explosion)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_extreme_hazard)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_fearless)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_fire)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_floating)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_floor)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_floor_deco)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_foilage)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_food)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_food_eater)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_glass)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_gold)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_hazard)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_health_booster)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_hittable)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_humanoid)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_hunger_insatiable)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_indestructible)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_intelligent)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_interesting)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_item)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_item_carrier)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_item_collector)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_item_eater)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_item_organic)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_jelly)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_jelly_baby)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_jelly_baby_eater)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_jelly_eater)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_jelly_parent)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_jumper)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_jumper_chance_d1000)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_jumper_distance)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_jumper_on_low_hp_chance_d1000)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_key)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_key_collector)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_killed_on_hit_or_miss)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_killed_on_hitting)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_laser)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_lava)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_light_blocker)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_living)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_loggable_for_important_stuff)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_loggable_for_unimportant_stuff)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_meat)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_meat_eater)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_metal)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_minion)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_minion_generator)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_monst)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_moveable)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_msg)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_no_tile)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_obs_destructable)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_obs_wall_or_door)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_on_fire)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_openable)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_organic)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_player)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_poison)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_potion)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_potion_eater)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_projectile)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_removeable_if_out_of_slots)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_resurrectable)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_ripple)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_rock)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_rusty)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_secret_door)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_sewer_wall)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_shallow_water)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_shovable)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_skill)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_skillstone)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_smoke)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_soft_body)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_spawner)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_spiderweb)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_stamina_check)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_steal_item_chance_d1000)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_sticky)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_stone)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_sword)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_target_auto_select)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_throwable)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_auto_throw)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_tickable)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_tmp_thing)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_torch)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_treasure_class_a)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_treasure_class_b)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_treasure_class_c)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_treasure_type)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_treasure_type_chest)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_treasure_type_eater)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_undead)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_usable)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_used_automatically_when_selected)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_used_when_thrown)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_very_combustible)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_visible)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_wall)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_wall_dungeon)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_wand)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_wand_eater)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_water)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_water_lover)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_weapon)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_weapon_wielder)
+  ZX_ADD_PYTHON_FUNCTION(thing_is_wooden)
+  ZX_ADD_PYTHON_FUNCTION(thing_killed)
+  ZX_ADD_PYTHON_FUNCTION(thing_killed_by)
+  ZX_ADD_PYTHON_FUNCTION(thing_loves_fire)
+  ZX_ADD_PYTHON_FUNCTION(thing_loves_poison)
+  ZX_ADD_PYTHON_FUNCTION(thing_loves_spiderwebs)
+  ZX_ADD_PYTHON_FUNCTION(thing_msg)
+  ZX_ADD_PYTHON_FUNCTION(thing_possible_to_attack)
+  ZX_ADD_PYTHON_FUNCTION(thing_set_current_damage)
+  ZX_ADD_PYTHON_FUNCTION(thing_set_enchant)
+  ZX_ADD_PYTHON_FUNCTION(thing_set_enchant_max)
+  ZX_ADD_PYTHON_FUNCTION(thing_set_health)
+  ZX_ADD_PYTHON_FUNCTION(thing_set_health_max)
+  ZX_ADD_PYTHON_FUNCTION(thing_set_stamina)
+  ZX_ADD_PYTHON_FUNCTION(thing_set_stamina_max)
+  ZX_ADD_PYTHON_FUNCTION(thing_skill_activate)
+  ZX_ADD_PYTHON_FUNCTION(thing_skill_deactivate)
+  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag1)
+  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag10)
+  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag11)
+  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag12)
+  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag13)
+  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag14)
+  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag15)
+  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag16)
+  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag17)
+  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag18)
+  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag19)
+  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag2)
+  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag20)
+  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag21)
+  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag22)
+  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag23)
+  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag24)
+  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag25)
+  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag26)
+  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag27)
+  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag28)
+  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag29)
+  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag3)
+  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag30)
+  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag31)
+  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag32)
+  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag33)
+  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag34)
+  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag35)
+  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag36)
+  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag37)
+  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag38)
+  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag39)
+  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag4)
+  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag40)
+  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag41)
+  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag42)
+  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag43)
+  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag44)
+  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag45)
+  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag46)
+  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag47)
+  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag48)
+  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag5)
+  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag50)
+  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag51)
+  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag52)
+  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag6)
+  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag7)
+  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag8)
+  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag9)
+  ZX_ADD_WRAPPED_PYTHON_FUNCTION(abs_to_pct)
+  ZX_ADD_WRAPPED_PYTHON_FUNCTION(con)
+  ZX_ADD_WRAPPED_PYTHON_FUNCTION(die)
+  ZX_ADD_WRAPPED_PYTHON_FUNCTION(err)
+  ZX_ADD_WRAPPED_PYTHON_FUNCTION(if_matches)
+  ZX_ADD_WRAPPED_PYTHON_FUNCTION(if_matches_then_kill)
+  ZX_ADD_WRAPPED_PYTHON_FUNCTION(level_add)
+  ZX_ADD_WRAPPED_PYTHON_FUNCTION(level_spawn_next_to)
+  ZX_ADD_WRAPPED_PYTHON_FUNCTION(level_spawn_next_to_or_on_monst)
+  ZX_ADD_WRAPPED_PYTHON_FUNCTION(level_spawn_using_items_radius_range)
+  ZX_ADD_WRAPPED_PYTHON_FUNCTION(log)
+  ZX_ADD_WRAPPED_PYTHON_FUNCTION(map_load_room)
+  ZX_ADD_WRAPPED_PYTHON_FUNCTION(music_load)
+  ZX_ADD_WRAPPED_PYTHON_FUNCTION(music_play)
+  ZX_ADD_WRAPPED_PYTHON_FUNCTION(pct_to_abs)
+  ZX_ADD_WRAPPED_PYTHON_FUNCTION(puts)
+  ZX_ADD_WRAPPED_PYTHON_FUNCTION(sound_load)
+  ZX_ADD_WRAPPED_PYTHON_FUNCTION(tex_load)
+  ZX_ADD_WRAPPED_PYTHON_FUNCTION(text_size)
+  ZX_ADD_WRAPPED_PYTHON_FUNCTION(thing_sound_play)
+  ZX_ADD_WRAPPED_PYTHON_FUNCTION(thing_sound_play_channel)
+  ZX_ADD_WRAPPED_PYTHON_FUNCTION(tile_load_arr)
+  ZX_ADD_WRAPPED_PYTHON_FUNCTION(tile_load_arr_sprites)
+  ZX_ADD_WRAPPED_PYTHON_FUNCTION(topcon)
+  ZX_ADD_WRAPPED_PYTHON_FUNCTION(tp_load)
+  ZX_ADD_WRAPPED_PYTHON_FUNCTION(tp_update)
 
   PYFUNC_REF(SDLGetKeyState),
 

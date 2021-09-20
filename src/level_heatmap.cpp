@@ -1,6 +1,7 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
+// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #include "my_level.h"
@@ -98,7 +99,7 @@ void Level::update_heatmap (void)
   printf("\n");
   for (auto y = 0; y < MAP_HEIGHT; y++) {
     for (auto x = 0; x < MAP_WIDTH; x++) {
-      if (is_movement_blocking_wall_or_locked_door(x, y)) {
+      if (is_obs_wall_or_door(x, y)) {
         printf("X");
         continue;
       }

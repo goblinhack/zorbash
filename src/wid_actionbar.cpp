@@ -1,6 +1,7 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
+// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #include <SDL_mixer.h>
@@ -23,8 +24,8 @@
 
 static Widp wid_actionbar;
 
-static timestamp_t wid_last_wait;
-static timestamp_t wid_last_wait_repeat;
+static ts_t wid_last_wait;
+static ts_t wid_last_wait_repeat;
 
 void wid_actionbar_close_all_popups (void)
 {_

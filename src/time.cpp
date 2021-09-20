@@ -1,6 +1,7 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
+// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #include "my_sys.h"
@@ -8,23 +9,23 @@
 #include "my_time.h"
 #include "my_sdl.h"
 
-timestamp_t time_now;
-timestamp_t base_time_in_mill;
+ts_t time_now;
+ts_t base_time_in_mill;
 static char buf_[MAXSHORTSTR];
 
-timestamp_t time_get_time_ms (void)
+ts_t time_get_time_ms (void)
 {
   time_update_time_milli();
 
   return (time_now);
 }
 
-timestamp_t time_get_time_ms_cached (void)
+ts_t time_get_time_ms_cached (void)
 {
   return (time_now);
 }
 
-const char *time2str (timestamp_t ms, char *buf, int len)
+const char *time2str (ts_t ms, char *buf, int len)
 {
   int log_msec = ms;
   int log_secs = log_msec / ONESEC;
@@ -78,70 +79,70 @@ const char *timestamp (char *buf, int len)
   return (buf_);
 }
 
-bool time_have_x_hundredths_passed_since (timestamp_t val, timestamp_t since)
+bool time_have_x_hundredths_passed_since (ts_t val, ts_t since)
 {
   time_get_time_ms();
 
   //
   // Cater for negative future times.
   //
-  timestamp_t delay = time_now - since;
+  ts_t delay = time_now - since;
 
-  return ((timestamp_t)(delay / 10) > (timestamp_t)val);
+  return ((ts_t)(delay / 10) > (ts_t)val);
 }
 
-bool time_have_x_ms_passed_since (timestamp_t val, timestamp_t since)
+bool time_have_x_ms_passed_since (ts_t val, ts_t since)
 {
   time_get_time_ms();
 
   //
   // Cater for negative future times.
   //
-  timestamp_t delay = time_now - since;
+  ts_t delay = time_now - since;
 
-  return ((timestamp_t)(delay) >= (timestamp_t)val);
+  return ((ts_t)(delay) >= (ts_t)val);
 }
 
-bool time_have_x_tenths_passed_since (timestamp_t val, timestamp_t since)
+bool time_have_x_tenths_passed_since (ts_t val, ts_t since)
 {
   time_get_time_ms();
 
   //
   // Cater for negative future times.
   //
-  timestamp_t delay = time_now - since;
+  ts_t delay = time_now - since;
 
-  return ((timestamp_t)(delay / 100) >= (timestamp_t)val);
+  return ((ts_t)(delay / 100) >= (ts_t)val);
 }
 
-bool time_have_x_secs_passed_since (timestamp_t val, timestamp_t since)
+bool time_have_x_secs_passed_since (ts_t val, ts_t since)
 {
   time_get_time_ms();
 
   //
   // Cater for negative future times.
   //
-  timestamp_t delay = time_now - since;
+  ts_t delay = time_now - since;
 
-  return ((timestamp_t)(delay / ONESEC) >= (timestamp_t)val);
+  return ((ts_t)(delay / ONESEC) >= (ts_t)val);
 }
 
-timestamp_t time_get_elapsed_secs (timestamp_t val, timestamp_t since)
+ts_t time_get_elapsed_secs (ts_t val, ts_t since)
 {
   time_get_time_ms();
 
-  timestamp_t delay = val - since;
+  ts_t delay = val - since;
 
-  return ((timestamp_t)(delay / ONESEC));
+  return ((ts_t)(delay / ONESEC));
 }
 
-timestamp_t time_get_elapsed_tenths (timestamp_t val, timestamp_t since)
+ts_t time_get_elapsed_tenths (ts_t val, ts_t since)
 {
   time_get_time_ms();
 
-  timestamp_t delay = val - since;
+  ts_t delay = val - since;
 
-  return ((timestamp_t)(delay / (ONESEC / 10)));
+  return ((ts_t)(delay / (ONESEC / 10)));
 }
 
 void get_timestamp (char *buf, int32_t len)
@@ -155,7 +156,7 @@ void get_timestamp (char *buf, int32_t len)
 #endif
 }
 
-timestamp_t time_update_time_milli (void)
+ts_t time_update_time_milli (void)
 {
 #ifdef NOT_NEEDED
   //

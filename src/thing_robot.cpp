@@ -1,6 +1,7 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
+// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #include <algorithm>
@@ -468,7 +469,7 @@ int Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy,
         }
       }
 
-      if (level->is_movement_blocking_wall_or_locked_door(p)) {
+      if (level->is_obs_wall_or_door(p)) {
         set(dmap_can_see->val, x, y, DMAP_IS_WALL);
         continue;
       }
@@ -561,7 +562,7 @@ int Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy,
               if (j == p) {
                 continue;
               }
-              if (level->is_movement_blocking_wall_or_locked_door(j)) {
+              if (level->is_obs_wall_or_door(j)) {
                 jump = false;
                 break;
               }
@@ -620,7 +621,7 @@ int Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy,
           //
           // Allow us to see doors so we can search them
           //
-        } else if (level->is_movement_blocking_wall_or_locked_door(p)) {
+        } else if (level->is_obs_wall_or_door(p)) {
           //
           // But allow chasms and lava so we can see over. Just block
           // on walls and pillars etc...
@@ -646,7 +647,7 @@ int Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy,
               //
               // Allow us to see doors so we can search them
               //
-            } else if (level->is_movement_blocking_wall_or_locked_door(o)) {
+            } else if (level->is_obs_wall_or_door(o)) {
               //
               // But allow chasms and lava so we can see over. Just block
               // on walls and pillars etc...
@@ -688,13 +689,13 @@ int Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy,
         continue;
       }
       if (get(walked, x, y)) {
-        if (level->is_movement_blocking_wall_or_locked_door(x, y)) {
+        if (level->is_obs_wall_or_door(x, y)) {
           printf("X");
         } else {
           printf("?");
         }
       } else {
-        if (level->is_movement_blocking_wall_or_locked_door(x, y)) {
+        if (level->is_obs_wall_or_door(x, y)) {
           printf("x");
         } else {
           if (level->is_lit_currently(x, y)) {
@@ -1047,7 +1048,7 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
 
                 float dist = distance(mid_at + fpoint(dx, dy), it->mid_at);
                 point p(mid_at.x + dx, mid_at.y + dy);
-                if (level->is_movement_blocking_wall_or_locked_door(p)) {
+                if (level->is_obs_wall_or_door(p)) {
                   continue;
                 }
 
@@ -1171,7 +1172,7 @@ void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals,
       continue;
     }
 
-    if (level->is_movement_blocking_wall_or_locked_door(p.x, p.y)) {
+    if (level->is_obs_wall_or_door(p.x, p.y)) {
       continue;
     }
 
@@ -1308,7 +1309,7 @@ void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals,
             continue;
           }
 
-          if (level->is_movement_blocking_wall_or_locked_door(o)) {
+          if (level->is_obs_wall_or_door(o)) {
             continue;
           }
         }
@@ -1338,13 +1339,13 @@ void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals,
         }
       }
       if (get(walked, x, y)) {
-        if (level->is_movement_blocking_wall_or_locked_door(x, y)) {
+        if (level->is_obs_wall_or_door(x, y)) {
           printf("X");
         } else {
           printf("?");
         }
       } else {
-        if (level->is_movement_blocking_wall_or_locked_door(x, y)) {
+        if (level->is_obs_wall_or_door(x, y)) {
           printf("x");
         } else {
           if (level->is_lit_currently(x, y)) {
@@ -1572,7 +1573,7 @@ void Thing::robot_tick (void)
     return;
   }
 
-  if (level->timestamp_fade_in_begin) {
+  if (level->ts_fade_in_begin) {
     return;
   }
 

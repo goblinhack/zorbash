@@ -1,6 +1,7 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
+// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #include <array>
@@ -458,7 +459,7 @@ LEVEL_BODY_GET_BOOL_AT(level_is_corridor_at, is_corridor)
 LEVEL_BODY_GET_BOOL_AT(level_is_critical_to_level_at, is_critical_to_level)
 LEVEL_BODY_GET_BOOL_AT(level_is_cursor_at, is_cursor)
 LEVEL_BODY_GET_BOOL_AT(level_is_cursor_can_hover_over_at, is_cursor_can_hover_over)
-LEVEL_BODY_GET_BOOL_AT(level_is_cursor_can_hover_over_but_needs_double_click_at, is_cursor_can_hover_over_but_needs_double_click)
+LEVEL_BODY_GET_BOOL_AT(level_is_cursor_can_hover_over_2x_click_at, is_cursor_can_hover_over_2x_click)
 LEVEL_BODY_GET_BOOL_AT(level_is_cursor_path_at, is_cursor_path)
 LEVEL_BODY_GET_BOOL_AT(level_is_dead_on_end_of_anim_at, is_dead_on_end_of_anim)
 LEVEL_BODY_GET_BOOL_AT(level_is_dead_on_shove_at, is_dead_on_shove)
@@ -531,8 +532,8 @@ LEVEL_BODY_GET_BOOL_AT(level_is_minion_at, is_minion)
 LEVEL_BODY_GET_BOOL_AT(level_is_minion_generator_at, is_minion_generator)
 LEVEL_BODY_GET_BOOL_AT(level_is_monst_at, is_monst)
 LEVEL_BODY_GET_BOOL_AT(level_is_moveable_at, is_moveable)
-LEVEL_BODY_GET_BOOL_AT(level_is_movement_blocking_wall_or_locked_door_at, is_movement_blocking_wall_or_locked_door)
-LEVEL_BODY_GET_BOOL_AT(level_is_movement_blocking_but_destructable_at, is_movement_blocking_but_destructable)
+LEVEL_BODY_GET_BOOL_AT(level_is_obs_wall_or_door_at, is_obs_wall_or_door)
+LEVEL_BODY_GET_BOOL_AT(level_is_obs_destructable_at, is_obs_destructable)
 LEVEL_BODY_GET_BOOL_AT(level_is_msg_at, is_msg)
 LEVEL_BODY_GET_BOOL_AT(level_is_no_tile_at, is_no_tile)
 LEVEL_BODY_GET_BOOL_AT(level_is_on_firing_at_something, is_on_fire)
@@ -622,9 +623,9 @@ LEVEL_BODY_GET_BOOL_AT(level_is_engulf_chance_d1000_at, is_engulf_chance_d1000)
 LEVEL_BODY_GET_BOOL_AT(level_is_sticky_at, is_sticky)
 LEVEL_BODY_GET_BOOL_AT(level_is_shovable_at, is_shovable)
 LEVEL_BODY_GET_BOOL_AT(level_is_sword_at, is_sword)
-LEVEL_BODY_GET_BOOL_AT(level_is_target_select_automatically_when_chosen_at, is_target_select_automatically_when_chosen)
+LEVEL_BODY_GET_BOOL_AT(level_is_target_auto_select_at, is_target_auto_select)
 LEVEL_BODY_GET_BOOL_AT(level_is_throwable_at, is_throwable)
-LEVEL_BODY_GET_BOOL_AT(level_is_thrown_automatically_when_chosen_at, is_thrown_automatically_when_chosen)
+LEVEL_BODY_GET_BOOL_AT(level_is_auto_throw_at, is_auto_throw)
 LEVEL_BODY_GET_BOOL_AT(level_is_tickable_at, is_tickable)
 LEVEL_BODY_GET_BOOL_AT(level_is_tmp_thing_at, is_tmp_thing)
 LEVEL_BODY_GET_BOOL_AT(level_is_torch_at, is_torch)

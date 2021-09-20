@@ -1,6 +1,7 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
+// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #include <libgen.h>
@@ -1413,7 +1414,7 @@ std::wstring trim_ws(const std::wstring& s)
 
 std::string& string_timestamp (void)
 {
-  static timestamp_t time_last;
+  static ts_t time_last;
   static std::string last_timestamp;
   auto time_now = time_get_time_ms_cached();
 

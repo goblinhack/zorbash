@@ -1,6 +1,7 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
+// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #include "my_sys.h"
@@ -99,12 +100,12 @@ void Thing::level_push (void)
                            level->set_is_light_blocker(mx, my); }
   if (is_monst())                              { i_set_is_monst = true;
                            level->set_is_monst(mx, my); }
-  if (is_movement_blocking_wall_or_locked_door() && !is_open && !is_dead) {
-                           i_set_is_movement_blocking_wall_or_locked_door = true;
-                           level->set_is_movement_blocking_wall_or_locked_door(mx, my); }
-  if (is_movement_blocking_but_destructable() && !is_open && !is_dead) {
-                           i_set_is_movement_blocking_but_destructable = true;
-                           level->set_is_movement_blocking_but_destructable(mx, my); }
+  if (is_obs_wall_or_door() && !is_open && !is_dead) {
+                           i_set_is_obs_wall_or_door = true;
+                           level->set_is_obs_wall_or_door(mx, my); }
+  if (is_obs_destructable() && !is_open && !is_dead) {
+                           i_set_is_obs_destructable = true;
+                           level->set_is_obs_destructable(mx, my); }
   if (is_potion())                             { i_set_is_potion = true;
                            level->set_is_potion(mx, my); }
   if (is_wand())                               { i_set_is_wand = true;
@@ -147,11 +148,11 @@ void Thing::level_push (void)
   if (is_lava() || is_fire()) { level->is_heatmap_valid = false; }
 
   if (!is_hidden) {
-    if (gfx_shown_in_bg()) { level->timestamp_redraw_bg = time_get_time_ms_cached() + 1000; }
+    if (gfx_shown_in_bg()) { level->ts_redraw_bg = time_get_time_ms_cached() + 1000; }
   }
 
   if (gfx_shown_in_bg()) {
-    level->timestamp_redraw_bg = time_get_time_ms_cached() + 500;
+    level->ts_redraw_bg = time_get_time_ms_cached() + 500;
   }
 
   // dbg("Is_monst count %d (after push) at %d,%d", level->is_monst(mx, my), mx, my);

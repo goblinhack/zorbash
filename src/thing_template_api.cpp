@@ -1,6 +1,7 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
+// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #include "my_sys.h"
@@ -148,11 +149,11 @@ int Tp::gfx_bounce_on_move(void) const                               { return _g
 int Tp::gfx_dead_anim(void) const                                    { return _gfx_dead_anim; }
 int Tp::gfx_flickers(void) const                                     { return _gfx_flickers; }
 int Tp::gfx_glows(void) const                                        { return _gfx_glows; }
-int Tp::gfx_health_bar_shown_only_when_injured(void) const           { return _gfx_health_bar_shown_only_when_injured; }
+int Tp::gfx_health_bar_autohide(void) const           { return _gfx_health_bar_autohide; }
 int Tp::gfx_health_bar_shown(void) const                             { return _gfx_health_bar_shown; }
 int Tp::gfx_long_shadow_caster(void) const                           { return _gfx_long_shadow_caster; }
 int Tp::gfx_on_fire_anim(void) const                                 { return _gfx_on_fire_anim; }
-int Tp::gfx_oversized_but_sitting_on_the_ground(void) const          { return _gfx_oversized_but_sitting_on_the_ground; }
+int Tp::gfx_oversized_and_on_floor(void) const          { return _gfx_oversized_and_on_floor; }
 int Tp::gfx_short_shadow_caster(void) const                          { return _gfx_short_shadow_caster; }
 int Tp::gfx_shown_in_bg(void) const                                  { return _gfx_shown_in_bg; }
 int Tp::gfx_show_outlined(void) const                                { return _gfx_show_outlined; }
@@ -205,7 +206,7 @@ int Tp::is_combustible(void) const                                   { return _i
 int Tp::is_corpse_on_death(void) const                               { return _is_corpse_on_death; }
 int Tp::is_corridor(void) const                                      { return _is_corridor; }
 int Tp::is_critical_to_level(void) const                             { return _is_critical_to_level; }
-int Tp::is_cursor_can_hover_over_but_needs_double_click(void) const  { return _is_cursor_can_hover_over_but_needs_double_click; }
+int Tp::is_cursor_can_hover_over_2x_click(void) const  { return _is_cursor_can_hover_over_2x_click; }
 int Tp::is_cursor_can_hover_over(void) const                         { return _is_cursor_can_hover_over; }
 int Tp::is_cursor_path(void) const                                   { return _is_cursor_path; }
 int Tp::is_cursor(void) const                                        { return _is_cursor; }
@@ -275,8 +276,8 @@ int Tp::is_minion_generator(void) const                              { return _i
 int Tp::is_minion(void) const                                        { return _is_minion; }
 int Tp::is_monst(void) const                                         { return _is_monst; }
 int Tp::is_moveable(void) const                                      { return _is_moveable; }
-int Tp::is_movement_blocking_but_destructable(void) const            { return _is_movement_blocking_but_destructable; }
-int Tp::is_movement_blocking_wall_or_locked_door(void) const         { return _is_movement_blocking_wall_or_locked_door; }
+int Tp::is_obs_destructable(void) const            { return _is_obs_destructable; }
+int Tp::is_obs_wall_or_door(void) const         { return _is_obs_wall_or_door; }
 int Tp::is_msg(void) const                                           { return _is_msg; }
 int Tp::is_no_tile(void) const                                       { return _is_no_tile; }
 int Tp::is_openable(void) const                                      { return _is_openable; }
@@ -362,10 +363,10 @@ int Tp::is_stamina_check(void) const                                 { return _i
 int Tp::is_steal_item_chance_d1000(void) const                       { return _is_steal_item_chance_d1000; }
 int Tp::is_sticky(void) const                                        { return _is_sticky; }
 int Tp::is_sword(void) const                                         { return _is_sword; }
-int Tp::is_target_select_automatically_when_chosen(void) const       { return _is_target_select_automatically_when_chosen; }
+int Tp::is_target_auto_select(void) const       { return _is_target_auto_select; }
 int Tp::is_the_grid(void) const                                      { return _is_the_grid; }
 int Tp::is_throwable(void) const                                     { return _is_throwable; }
-int Tp::is_thrown_automatically_when_chosen(void) const              { return _is_thrown_automatically_when_chosen; }
+int Tp::is_auto_throw(void) const              { return _is_auto_throw; }
 int Tp::is_tickable(void) const                                      { return _is_tickable; }
 int Tp::is_tmp_thing(void) const                                     { return _is_tmp_thing; }
 int Tp::is_torch(void) const                                         { return _is_torch; }
@@ -469,10 +470,10 @@ void Tp::set_gfx_dead_anim(int v)                                    { _gfx_dead
 void Tp::set_gfx_flickers(int v)                                     { _gfx_flickers = v; }
 void Tp::set_gfx_glows(int v)                                        { _gfx_glows = v; }
 void Tp::set_gfx_health_bar_shown(int v)                             { _gfx_health_bar_shown = v; }
-void Tp::set_gfx_health_bar_shown_only_when_injured(int v)           { _gfx_health_bar_shown_only_when_injured = v; }
+void Tp::set_gfx_health_bar_autohide(int v)           { _gfx_health_bar_autohide = v; }
 void Tp::set_gfx_long_shadow_caster(int v)                           { _gfx_long_shadow_caster = v; }
 void Tp::set_gfx_on_fire_anim(int v)                                 { _gfx_on_fire_anim = v; }
-void Tp::set_gfx_oversized_but_sitting_on_the_ground(int v)          { _gfx_oversized_but_sitting_on_the_ground = v; }
+void Tp::set_gfx_oversized_and_on_floor(int v)          { _gfx_oversized_and_on_floor = v; }
 void Tp::set_gfx_short_shadow_caster(int v)                          { _gfx_short_shadow_caster = v; }
 void Tp::set_gfx_shown_in_bg(int v)                                  { _gfx_shown_in_bg = v; }
 void Tp::set_gfx_show_outlined(int v)                                { _gfx_show_outlined = v; }
@@ -525,7 +526,7 @@ void Tp::set_is_combustible(int v)                                   { _is_combu
 void Tp::set_is_corpse_on_death(int v)                               { _is_corpse_on_death = v; }
 void Tp::set_is_corridor(int v)                                      { _is_corridor = v; }
 void Tp::set_is_critical_to_level(int v)                             { _is_critical_to_level = v; }
-void Tp::set_is_cursor_can_hover_over_but_needs_double_click(int v)  { _is_cursor_can_hover_over_but_needs_double_click = v; }
+void Tp::set_is_cursor_can_hover_over_2x_click(int v)  { _is_cursor_can_hover_over_2x_click = v; }
 void Tp::set_is_cursor_can_hover_over(int v)                         { _is_cursor_can_hover_over = v; }
 void Tp::set_is_cursor(int v)                                        { _is_cursor = v; }
 void Tp::set_is_cursor_path(int v)                                   { _is_cursor_path = v; }
@@ -594,8 +595,8 @@ void Tp::set_is_minion_generator(int v)                              { _is_minio
 void Tp::set_is_minion(int v)                                        { _is_minion = v; }
 void Tp::set_is_monst(int v)                                         { _is_monst = v; }
 void Tp::set_is_moveable(int v)                                      { _is_moveable = v; }
-void Tp::set_is_movement_blocking_but_destructable(int v)            { _is_movement_blocking_but_destructable = v; }
-void Tp::set_is_movement_blocking_wall_or_locked_door(int v)         { _is_movement_blocking_wall_or_locked_door = v; }
+void Tp::set_is_obs_destructable(int v)            { _is_obs_destructable = v; }
+void Tp::set_is_obs_wall_or_door(int v)         { _is_obs_wall_or_door = v; }
 void Tp::set_is_msg(int v)                                           { _is_msg = v; }
 void Tp::set_is_no_tile(int v)                                       { _is_no_tile = v; }
 void Tp::set_is_openable(int v)                                      { _is_openable = v; }
@@ -682,10 +683,10 @@ void Tp::set_is_steal_item_chance_d1000(int v)                       { _is_steal
 void Tp::set_is_engulf_chance_d1000(int v)                           { _is_engulf_chance_d1000 = v; }
 void Tp::set_is_sticky(int v)                                        { _is_sticky = v; }
 void Tp::set_is_sword(int v)                                         { _is_sword = v; }
-void Tp::set_is_target_select_automatically_when_chosen(int v)       { _is_target_select_automatically_when_chosen = v; }
+void Tp::set_is_target_auto_select(int v)       { _is_target_auto_select = v; }
 void Tp::set_is_the_grid(int v)                                      { _is_the_grid = v; }
 void Tp::set_is_throwable(int v)                                     { _is_throwable = v; }
-void Tp::set_is_thrown_automatically_when_chosen(int v)              { _is_thrown_automatically_when_chosen = v; }
+void Tp::set_is_auto_throw(int v)              { _is_auto_throw = v; }
 void Tp::set_is_tickable(int v)                                      { _is_tickable = v; }
 void Tp::set_is_tmp_thing(int v)                                     { _is_tmp_thing = v; }
 void Tp::set_is_torch(int v)                                         { _is_torch = v; }

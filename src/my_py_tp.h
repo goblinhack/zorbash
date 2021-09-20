@@ -1,6 +1,7 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
+// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #pragma once
@@ -23,8 +24,8 @@ PyObject *level_place_at(PyObject *obj, PyObject *args, PyObject *keywds);
 #define TP_SET_PROTO(__field__) \
 PyObject *tp_set_ ## __field__ (PyObject *obj, PyObject *args, PyObject *keywds);
 
-#define TP_SET_DECL(__field__)                       \
-  {"tp_set_" #__field__,                           \
+#define ZX_ADD_PYTHON_TP_FUNCTION(__field__)                   \
+  {"tp_set_" #__field__,                         \
     (PyCFunction)tp_set_ ## __field__,           \
     METH_VARARGS | METH_KEYWORDS,                \
     "set a " #__field__ " in a thing template"}, \
@@ -89,9 +90,9 @@ TP_SET_PROTO(gfx_bounce_on_move)
 TP_SET_PROTO(gfx_dead_anim)
 TP_SET_PROTO(gfx_glows)
 TP_SET_PROTO(gfx_health_bar_shown)
-TP_SET_PROTO(gfx_health_bar_shown_only_when_injured)
+TP_SET_PROTO(gfx_health_bar_autohide)
 TP_SET_PROTO(gfx_on_fire_anim)
-TP_SET_PROTO(gfx_oversized_but_sitting_on_the_ground)
+TP_SET_PROTO(gfx_oversized_and_on_floor)
 TP_SET_PROTO(gfx_show_outlined)
 TP_SET_PROTO(gfx_shown_in_bg)
 TP_SET_PROTO(gfx_short_shadow_caster)
@@ -133,7 +134,7 @@ TP_SET_PROTO(is_corridor)
 TP_SET_PROTO(is_critical_to_level)
 TP_SET_PROTO(is_cursor)
 TP_SET_PROTO(is_cursor_can_hover_over)
-TP_SET_PROTO(is_cursor_can_hover_over_but_needs_double_click)
+TP_SET_PROTO(is_cursor_can_hover_over_2x_click)
 TP_SET_PROTO(is_cursor_path)
 TP_SET_PROTO(is_dead_on_shove)
 TP_SET_PROTO(is_deep_water)
@@ -180,7 +181,7 @@ TP_SET_PROTO(is_jumper_on_low_hp_chance_d1000)
 TP_SET_PROTO(is_key)
 TP_SET_PROTO(is_killed_on_hit_or_miss)
 TP_SET_PROTO(is_killed_on_hitting)
-TP_SET_PROTO(is_target_select_automatically_when_chosen)
+TP_SET_PROTO(is_target_auto_select)
 TP_SET_PROTO(is_lava)
 TP_SET_PROTO(is_light_blocker)
 TP_SET_PROTO(is_living)
@@ -193,8 +194,8 @@ TP_SET_PROTO(is_minion)
 TP_SET_PROTO(is_minion_generator)
 TP_SET_PROTO(is_monst)
 TP_SET_PROTO(is_moveable)
-TP_SET_PROTO(is_movement_blocking_wall_or_locked_door)
-TP_SET_PROTO(is_movement_blocking_but_destructable)
+TP_SET_PROTO(is_obs_wall_or_door)
+TP_SET_PROTO(is_obs_destructable)
 TP_SET_PROTO(is_msg)
 TP_SET_PROTO(is_no_tile)
 TP_SET_PROTO(is_plant)
@@ -324,7 +325,7 @@ TP_SET_PROTO(is_steal_item_chance_d1000)
 TP_SET_PROTO(is_engulf_chance_d1000)
 TP_SET_PROTO(is_the_grid)
 TP_SET_PROTO(is_throwable)
-TP_SET_PROTO(is_thrown_automatically_when_chosen)
+TP_SET_PROTO(is_auto_throw)
 TP_SET_PROTO(is_torch)
 TP_SET_PROTO(is_treasure_type)
 TP_SET_PROTO(is_treasure_class_a)

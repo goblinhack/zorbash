@@ -1,6 +1,7 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
+// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #pragma once
@@ -64,7 +65,7 @@ public:
   point       last_blit_br;        // Last blit coords
   point       last_blit_tl;        // Offset from top left of map
   point       last_blit_at;        // Center of the above
-  timestamp_t timestamp_next_frame {};
+  ts_t ts_next_frame {};
   uint16_t    tile_curr            {};
   uint8_t     alpha                {255}; // For fading
   uint8_t     z_depth              {};
@@ -147,8 +148,8 @@ public:
   uint64_t i_set_is_light_blocker:1          {};
   uint64_t i_set_is_minion_generator:1       {};
   uint64_t i_set_is_monst:1                  {};
-  uint64_t i_set_is_movement_blocking_wall_or_locked_door:1 {};
-  uint64_t i_set_is_movement_blocking_but_destructable:1 {};
+  uint64_t i_set_is_obs_wall_or_door:1 {};
+  uint64_t i_set_is_obs_destructable:1 {};
   uint64_t i_set_is_poison:1                 {};
   uint64_t i_set_is_potion:1                 {};
   uint64_t i_set_is_ripple:1                 {};
@@ -594,11 +595,11 @@ public:
   int gfx_dead_anim(void) const;
   int gfx_flickers(void) const;
   int gfx_glows(void) const;
-  int gfx_health_bar_shown_only_when_injured(void) const;
+  int gfx_health_bar_autohide(void) const;
   int gfx_health_bar_shown(void) const;
   int gfx_long_shadow_caster(void) const;
   int gfx_on_fire_anim(void) const;
-  int gfx_oversized_but_sitting_on_the_ground(void) const;
+  int gfx_oversized_and_on_floor(void) const;
   int gfx_short_shadow_caster(void) const;
   int gfx_shown_in_bg(void) const;
   int gfx_show_outlined(void) const;
@@ -722,7 +723,7 @@ public:
   int is_corpse(void) const;
   int is_corridor(void) const;
   int is_critical_to_level(void) const;
-  int is_cursor_can_hover_over_but_needs_double_click(void) const;
+  int is_cursor_can_hover_over_2x_click(void) const;
   int is_cursor_can_hover_over(void) const;
   int is_cursor_path(void) const;
   int is_cursor(void) const;
@@ -795,8 +796,8 @@ public:
   int is_minion(void) const;
   int is_monst(void) const;
   int is_moveable(void) const;
-  int is_movement_blocking_wall_or_locked_door(void) const;
-  int is_movement_blocking_but_destructable(void) const;
+  int is_obs_wall_or_door(void) const;
+  int is_obs_destructable(void) const;
   int is_msg(void) const;
   int is_no_tile(void) const;
   int is_openable(void) const;
@@ -884,9 +885,9 @@ public:
   int is_engulf_chance_d1000(void) const;
   int is_sticky(void) const;
   int is_sword(void) const;
-  int is_target_select_automatically_when_chosen(void) const;
+  int is_target_auto_select(void) const;
   int is_throwable(void) const;
-  int is_thrown_automatically_when_chosen(void) const;
+  int is_auto_throw(void) const;
   int is_tickable(void) const;
   int is_tmp_thing(void) const;
   int is_torch(void) const;
@@ -1035,66 +1036,66 @@ public:
   ThingShoved try_to_shove(fpoint future_pos);
   ThingShoved try_to_shove_into_hazard(Thingp it, fpoint fdelta);
   ThingShoved try_to_shove(Thingp it, fpoint fdelta);
-  timestamp_t decr_timestamp_anim_delay_end(timestamp_t);
-  timestamp_t decr_timestamp_anim_delay_end(void);
-  timestamp_t decr_timestamp_bounce_begin(timestamp_t);
-  timestamp_t decr_timestamp_bounce_begin(void);
-  timestamp_t decr_timestamp_bounce_end(timestamp_t);
-  timestamp_t decr_timestamp_bounce_end(void);
-  timestamp_t decr_timestamp_fadeup_begin(timestamp_t);
-  timestamp_t decr_timestamp_fadeup_begin(void);
-  timestamp_t decr_timestamp_fadeup_end(timestamp_t);
-  timestamp_t decr_timestamp_fadeup_end(void);
-  timestamp_t decr_timestamp_fall_begin(timestamp_t);
-  timestamp_t decr_timestamp_fall_begin(void);
-  timestamp_t decr_timestamp_fall_end(timestamp_t);
-  timestamp_t decr_timestamp_fall_end(void);
-  timestamp_t decr_timestamp_flip_start(timestamp_t);
-  timestamp_t decr_timestamp_flip_start(void);
-  timestamp_t decr_timestamp_lunge_begin(timestamp_t);
-  timestamp_t decr_timestamp_lunge_begin(void);
-  timestamp_t decr_timestamp_lunge_end(timestamp_t);
-  timestamp_t decr_timestamp_lunge_end(void);
-  timestamp_t get_timestamp_anim_delay_end(void) const;
-  timestamp_t get_timestamp_bounce_begin(void) const;
-  timestamp_t get_timestamp_bounce_end(void) const;
-  timestamp_t get_timestamp_fadeup_begin(void) const;
-  timestamp_t get_timestamp_fadeup_end(void) const;
-  timestamp_t get_timestamp_fall_begin(void) const;
-  timestamp_t get_timestamp_fall_end(void) const;
-  timestamp_t get_timestamp_flip_start(void) const;
-  timestamp_t get_timestamp_lunge_begin(void) const;
-  timestamp_t get_timestamp_lunge_end(void) const;
-  timestamp_t incr_timestamp_anim_delay_end(timestamp_t);
-  timestamp_t incr_timestamp_anim_delay_end(void);
-  timestamp_t incr_timestamp_bounce_begin(timestamp_t);
-  timestamp_t incr_timestamp_bounce_begin(void);
-  timestamp_t incr_timestamp_bounce_end(timestamp_t);
-  timestamp_t incr_timestamp_bounce_end(void);
-  timestamp_t incr_timestamp_fadeup_begin(timestamp_t);
-  timestamp_t incr_timestamp_fadeup_begin(void);
-  timestamp_t incr_timestamp_fadeup_end(timestamp_t);
-  timestamp_t incr_timestamp_fadeup_end(void);
-  timestamp_t incr_timestamp_fall_begin(timestamp_t);
-  timestamp_t incr_timestamp_fall_begin(void);
-  timestamp_t incr_timestamp_fall_end(timestamp_t);
-  timestamp_t incr_timestamp_fall_end(void);
-  timestamp_t incr_timestamp_flip_start(timestamp_t);
-  timestamp_t incr_timestamp_flip_start(void);
-  timestamp_t incr_timestamp_lunge_begin(timestamp_t);
-  timestamp_t incr_timestamp_lunge_begin(void);
-  timestamp_t incr_timestamp_lunge_end(timestamp_t);
-  timestamp_t incr_timestamp_lunge_end(void);
-  timestamp_t set_timestamp_anim_delay_end(timestamp_t);
-  timestamp_t set_timestamp_bounce_begin(timestamp_t);
-  timestamp_t set_timestamp_bounce_end(timestamp_t);
-  timestamp_t set_timestamp_fadeup_begin(timestamp_t);
-  timestamp_t set_timestamp_fadeup_end(timestamp_t);
-  timestamp_t set_timestamp_fall_begin(timestamp_t);
-  timestamp_t set_timestamp_fall_end(timestamp_t);
-  timestamp_t set_timestamp_flip_start(timestamp_t);
-  timestamp_t set_timestamp_lunge_begin(timestamp_t);
-  timestamp_t set_timestamp_lunge_end(timestamp_t);
+  ts_t decr_ts_anim_delay_end(ts_t);
+  ts_t decr_ts_anim_delay_end(void);
+  ts_t decr_ts_bounce_begin(ts_t);
+  ts_t decr_ts_bounce_begin(void);
+  ts_t decr_ts_bounce_end(ts_t);
+  ts_t decr_ts_bounce_end(void);
+  ts_t decr_ts_fadeup_begin(ts_t);
+  ts_t decr_ts_fadeup_begin(void);
+  ts_t decr_ts_fadeup_end(ts_t);
+  ts_t decr_ts_fadeup_end(void);
+  ts_t decr_ts_fall_begin(ts_t);
+  ts_t decr_ts_fall_begin(void);
+  ts_t decr_ts_fall_end(ts_t);
+  ts_t decr_ts_fall_end(void);
+  ts_t decr_ts_flip_start(ts_t);
+  ts_t decr_ts_flip_start(void);
+  ts_t decr_ts_lunge_begin(ts_t);
+  ts_t decr_ts_lunge_begin(void);
+  ts_t decr_ts_lunge_end(ts_t);
+  ts_t decr_ts_lunge_end(void);
+  ts_t get_ts_anim_delay_end(void) const;
+  ts_t get_ts_bounce_begin(void) const;
+  ts_t get_ts_bounce_end(void) const;
+  ts_t get_ts_fadeup_begin(void) const;
+  ts_t get_ts_fadeup_end(void) const;
+  ts_t get_ts_fall_begin(void) const;
+  ts_t get_ts_fall_end(void) const;
+  ts_t get_ts_flip_start(void) const;
+  ts_t get_ts_lunge_begin(void) const;
+  ts_t get_ts_lunge_end(void) const;
+  ts_t incr_ts_anim_delay_end(ts_t);
+  ts_t incr_ts_anim_delay_end(void);
+  ts_t incr_ts_bounce_begin(ts_t);
+  ts_t incr_ts_bounce_begin(void);
+  ts_t incr_ts_bounce_end(ts_t);
+  ts_t incr_ts_bounce_end(void);
+  ts_t incr_ts_fadeup_begin(ts_t);
+  ts_t incr_ts_fadeup_begin(void);
+  ts_t incr_ts_fadeup_end(ts_t);
+  ts_t incr_ts_fadeup_end(void);
+  ts_t incr_ts_fall_begin(ts_t);
+  ts_t incr_ts_fall_begin(void);
+  ts_t incr_ts_fall_end(ts_t);
+  ts_t incr_ts_fall_end(void);
+  ts_t incr_ts_flip_start(ts_t);
+  ts_t incr_ts_flip_start(void);
+  ts_t incr_ts_lunge_begin(ts_t);
+  ts_t incr_ts_lunge_begin(void);
+  ts_t incr_ts_lunge_end(ts_t);
+  ts_t incr_ts_lunge_end(void);
+  ts_t set_ts_anim_delay_end(ts_t);
+  ts_t set_ts_bounce_begin(ts_t);
+  ts_t set_ts_bounce_end(ts_t);
+  ts_t set_ts_fadeup_begin(ts_t);
+  ts_t set_ts_fadeup_end(ts_t);
+  ts_t set_ts_fall_begin(ts_t);
+  ts_t set_ts_fall_end(ts_t);
+  ts_t set_ts_flip_start(ts_t);
+  ts_t set_ts_lunge_begin(ts_t);
+  ts_t set_ts_lunge_end(ts_t);
   uint32_t decr_tick_last_escape(uint32_t);
   uint32_t decr_tick_last_escape(void);
   uint32_t decr_tick_last_level_change(uint32_t);
@@ -1166,7 +1167,7 @@ public:
   void blit_wall_shadow(point &tl, point &br, const ThingTiles *tiles);
   void botcon(const char *fmt, ...) const __attribute__ ((format (printf, 2, 3)));
   void botcon_(const char *fmt, va_list args) const; // compile error without
-  void bounce(float bounce_height, float bounce_fade, timestamp_t ms, int bounce_count);
+  void bounce(float bounce_height, float bounce_fade, ts_t ms, int bounce_count);
   void brazier_tick();
   void chasm_tick();
   void corrode_tick();
@@ -1215,8 +1216,8 @@ public:
   void enemies_tick(void);
   void err(const char *fmt, ...) const __attribute__ ((format (printf, 2, 3)));
   void err_(const char *fmt, va_list args) const; // compile error without
-  void fadeup(float fadeup_height, float fadeup_fade, timestamp_t ms);
-  void fall(float fall_height, timestamp_t ms);
+  void fadeup(float fadeup_height, float fadeup_fade, ts_t ms);
+  void fall(float fall_height, ts_t ms);
   void fire_tick();
   void gc(void);
   void get_light_strength_including_torch_effect(int &light_strength) const;

@@ -1,6 +1,7 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
+// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #pragma once
@@ -340,7 +341,7 @@ WidKeyType wid_unsorted_get_key(Widp w);
 typedef struct wid_move_ {
   int moving_endx;
   int moving_endy;
-  timestamp_t timestamp_moving_end;
+  ts_t ts_moving_end;
 } wid_move_t;
 
 class Wid {
@@ -490,9 +491,9 @@ public:
   //
   point text_pos {};
 
-  timestamp_t destroy_when {};
-  timestamp_t timestamp_created {};
-  timestamp_t timestamp_last_mode_change {};
+  ts_t destroy_when {};
+  ts_t ts_created {};
+  ts_t ts_last_mode_change {};
 
   //
   // Queue of wid move requests.
@@ -501,8 +502,8 @@ public:
   std::array<wid_move_t, WID_MAX_MOVE_QUEUE> move {};
   point moving_start {};
   point moving_end {};
-  timestamp_t timestamp_moving_begin {};
-  timestamp_t timestamp_moving_end {};
+  ts_t ts_moving_begin {};
+  ts_t ts_moving_end {};
   uint8_t moving {};
 
   //
@@ -568,13 +569,13 @@ void wid_set_fg3_tile(Widp w, Tilep tile);
 void wid_ignore_events_briefly(void);
 bool wid_some_recent_event_occurred(void);
 
-extern bool wid_mouse_double_click;
+extern bool wid_mouse_two_clicks;
 extern const int32_t wid_destroy_delay_ms;
 extern int wid_mouse_visible;
 extern std::array<std::array<Widp, TERM_HEIGHT_MAX>, TERM_WIDTH_MAX> wid_on_screen_at;
-extern timestamp_t wid_ignore_events_briefly_ts;
-extern timestamp_t wid_last_mouse_motion;
-extern timestamp_t wid_last_over_event;
+extern ts_t wid_ignore_events_briefly_ts;
+extern ts_t wid_last_mouse_motion;
+extern ts_t wid_last_over_event;
 extern Widp wid_focus;
 extern Widp wid_mouse_template;
 extern Widp wid_over;

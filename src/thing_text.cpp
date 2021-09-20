@@ -1,6 +1,7 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
+// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #include "my_sys.h"
@@ -266,7 +267,7 @@ void Thing::show_botcon_description (void) const
       }
     }
 
-    if (is_throwable() && !is_thrown_automatically_when_chosen()){
+    if (is_throwable() && !is_auto_throw()){
       text += " %%fg=purple$" +
           std::string(
             SDL_GetScancodeName(

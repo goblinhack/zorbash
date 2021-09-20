@@ -1,6 +1,7 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
+// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #include "my_sys.h"
@@ -115,10 +116,10 @@ game_mouse_down (int32_t x, int32_t y, uint32_t button)
   // If hovering over a double click thing then don't jump in unless
   // the user really means it.
   //
-  if (!wid_mouse_double_click) {
+  if (!wid_mouse_two_clicks) {
     auto to = level->cursor->mid_at;
     FOR_ALL_THINGS(level, t, to.x, to.y) {
-      if (t->is_cursor_can_hover_over_but_needs_double_click()) {
+      if (t->is_cursor_can_hover_over_2x_click()) {
         player->log("Needs double click");
         TOPCON("Double click to move.");
         return true;
@@ -180,8 +181,8 @@ uint8_t game_mouse_motion (int32_t x, int32_t y,
   }
 
   if (level->cursor) {_
-    if (level->timestamp_dungeon_created &&
-      time_have_x_tenths_passed_since(10, level->timestamp_dungeon_created)) {
+    if (level->ts_dungeon_created &&
+      time_have_x_tenths_passed_since(10, level->ts_dungeon_created)) {
       if (level->player && !level->player->is_dead) {
         level->cursor->visible();
       }

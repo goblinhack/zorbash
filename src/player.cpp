@@ -1,4 +1,5 @@
 // See the README.md file for license info.
+// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #include "my_sys.h"
@@ -26,8 +27,8 @@ void player_tick (bool left, bool right, bool up, bool down, bool attack, bool w
     return;
   }
 
-  if (game->level->timestamp_fade_in_begin ||
-    game->level->timestamp_fade_out_begin) {
+  if (game->level->ts_fade_in_begin ||
+    game->level->ts_fade_out_begin) {
     IF_DEBUG4 {
       LOG("Player tick; ignore, level fading im/out");
     }
@@ -319,8 +320,8 @@ void player_tick (bool left, bool right, bool up, bool down, bool attack, bool w
       auto player_move_delta = player->dir_to_direction();
       point p = make_point(player->mid_at.x + player_move_delta.x,
                  player->mid_at.y + player_move_delta.y);
-      if (level->is_movement_blocking_wall_or_locked_door(p.x, p.y) ||
-        level->is_movement_blocking_but_destructable(p.x, p.y)) {
+      if (level->is_obs_wall_or_door(p.x, p.y) ||
+        level->is_obs_destructable(p.x, p.y)) {
         player->try_to_jump_carefree(make_point(player->mid_at));
       } else {
         player->try_to_jump_carefree(p);
@@ -328,8 +329,8 @@ void player_tick (bool left, bool right, bool up, bool down, bool attack, bool w
     } else if (level->cursor) {
       point p = make_point(level->cursor->mid_at.x,
                  level->cursor->mid_at.y);
-      if (level->is_movement_blocking_wall_or_locked_door(p.x, p.y) ||
-        level->is_movement_blocking_but_destructable(p.x, p.y)) {
+      if (level->is_obs_wall_or_door(p.x, p.y) ||
+        level->is_obs_destructable(p.x, p.y)) {
         player->try_to_jump_carefree(make_point(player->mid_at));
       } else {
         player->try_to_jump_carefree(p);

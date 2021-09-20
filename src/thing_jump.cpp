@@ -1,6 +1,7 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
+// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #include <math.h>
@@ -129,8 +130,8 @@ bool Thing::try_to_jump (point to, bool be_careful)
   //
   // No sneaky jumping onto doors to get passed them
   //
-  if (level->is_movement_blocking_wall_or_locked_door(x, y) ||
-    level->is_movement_blocking_but_destructable(x, y)) {_
+  if (level->is_obs_wall_or_door(x, y) ||
+    level->is_obs_destructable(x, y)) {_
     dbg("No, jump failed, into obstacle");
     if (is_player()) {
       TOPCON("You can't jump into solid objects.");

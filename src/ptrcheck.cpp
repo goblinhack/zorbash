@@ -84,7 +84,7 @@ public:
 
 static std::string &timestamp(void)
 {
-  static timestamp_t time_last;
+  static ts_t time_last;
   static std::string last_timestamp;
   auto time_now = time_get_time_ms_cached();
 

@@ -1,6 +1,7 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
+// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #include "my_sys.h"
@@ -49,7 +50,7 @@ void Level::create (point3d at, int seed)
   game->started = true;
   is_starting = false;
 
-  timestamp_fade_in_begin = time_get_time_ms_cached();
+  ts_fade_in_begin = time_get_time_ms_cached();
 
   things_gc_force();
 

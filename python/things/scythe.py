@@ -100,7 +100,7 @@ def init_weapon(name, text_name, short_text_name):
     mytp.set_gfx_animated_can_hflip(True)
     mytp.set_gfx_animated(True)
     mytp.set_gfx_anim_attack("scythe_swing")
-    mytp.set_gfx_oversized_but_sitting_on_the_ground(True)
+    mytp.set_gfx_oversized_and_on_floor(True)
     mytp.set_gfx_short_shadow_caster(True)
     mytp.set_gfx_show_outlined(False)
     mytp.set_gold_value_dice("250")

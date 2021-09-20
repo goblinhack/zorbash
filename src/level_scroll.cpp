@@ -1,6 +1,7 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
+// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #include "my_sys.h"
@@ -172,7 +173,7 @@ void Level::scroll_map_to_player (void)
 
   mouse_at = -1;
   mouse_old = -1;
-  timestamp_redraw_bg = time_get_time_ms_cached() + 500;
+  ts_redraw_bg = time_get_time_ms_cached() + 500;
   map_follow_player = true;
 
   map_wanted_at = player->mid_at - fpoint(TILES_ACROSS / 2, TILES_DOWN / 2);

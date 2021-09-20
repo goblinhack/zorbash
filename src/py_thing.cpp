@@ -1,6 +1,7 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
+// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #include "my_sys.h"
@@ -595,7 +596,7 @@ THING_BODY_GET_BOOL(thing_is_corridor, is_corridor)
 THING_BODY_GET_BOOL(thing_is_critical_to_level, is_critical_to_level)
 THING_BODY_GET_BOOL(thing_is_cursor, is_cursor)
 THING_BODY_GET_BOOL(thing_is_cursor_can_hover_over, is_cursor_can_hover_over)
-THING_BODY_GET_BOOL(thing_is_cursor_can_hover_over_but_needs_double_click, is_cursor_can_hover_over_but_needs_double_click)
+THING_BODY_GET_BOOL(thing_is_cursor_can_hover_over_2x_click, is_cursor_can_hover_over_2x_click)
 THING_BODY_GET_BOOL(thing_is_cursor_path, is_cursor_path)
 THING_BODY_GET_BOOL(thing_is_dead_or_dying_on_shove, is_dead_on_shove)
 THING_BODY_GET_BOOL(thing_is_dead_or_dying, is_dead_or_dying)
@@ -661,8 +662,8 @@ THING_BODY_GET_BOOL(thing_is_minion, is_minion)
 THING_BODY_GET_BOOL(thing_is_minion_generator, is_minion_generator)
 THING_BODY_GET_BOOL(thing_is_monst, is_monst)
 THING_BODY_GET_BOOL(thing_is_moveable, is_moveable)
-THING_BODY_GET_BOOL(thing_is_movement_blocking_wall_or_locked_door, is_movement_blocking_wall_or_locked_door)
-THING_BODY_GET_BOOL(thing_is_movement_blocking_but_destructable, is_movement_blocking_but_destructable)
+THING_BODY_GET_BOOL(thing_is_obs_wall_or_door, is_obs_wall_or_door)
+THING_BODY_GET_BOOL(thing_is_obs_destructable, is_obs_destructable)
 THING_BODY_GET_BOOL(thing_is_msg, is_msg)
 THING_BODY_GET_BOOL(thing_is_no_tile, is_no_tile)
 THING_BODY_GET_BOOL(thing_is_on_fire, is_on_fire)
@@ -777,9 +778,9 @@ THING_BODY_GET_BOOL(thing_is_spawner, is_spawner)
 THING_BODY_GET_BOOL(thing_is_stamina_check, is_stamina_check)
 THING_BODY_GET_BOOL(thing_is_steal_item_chance_d1000, is_steal_item_chance_d1000)
 THING_BODY_GET_BOOL(thing_is_engulf_chance_d1000, is_engulf_chance_d1000)
-THING_BODY_GET_BOOL(thing_is_target_select_automatically_when_chosen, is_target_select_automatically_when_chosen)
+THING_BODY_GET_BOOL(thing_is_target_auto_select, is_target_auto_select)
 THING_BODY_GET_BOOL(thing_is_throwable, is_throwable)
-THING_BODY_GET_BOOL(thing_is_thrown_automatically_when_chosen, is_thrown_automatically_when_chosen)
+THING_BODY_GET_BOOL(thing_is_auto_throw, is_auto_throw)
 THING_BODY_GET_BOOL(thing_is_torch, is_torch)
 THING_BODY_GET_BOOL(thing_is_treasure_type, is_treasure_type)
 THING_BODY_GET_BOOL(thing_is_treasure_class_a, is_treasure_class_a)

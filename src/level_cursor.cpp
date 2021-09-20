@@ -1,6 +1,7 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
+// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #include "my_sys.h"
@@ -82,8 +83,8 @@ void Level::cursor_move (void)
   //
   // Dampen mouse moves at level start
   //
-  if (timestamp_dungeon_created &&
-    time_have_x_tenths_passed_since(2, timestamp_dungeon_created)) {
+  if (ts_dungeon_created &&
+    time_have_x_tenths_passed_since(2, ts_dungeon_created)) {
     mouse_at = mouse_tick;
     if (mouse_at > mouse_old) {
       mouse_old = mouse_at;
@@ -107,7 +108,7 @@ void Level::cursor_move (void)
       // But only do this if it is the result of a real mouse move
       // and not just the level auto scrolling.
       //
-      if (time_have_x_tenths_passed_since(10, timestamp_dungeon_created)) {
+      if (time_have_x_tenths_passed_since(10, ts_dungeon_created)) {
         if (!time_have_x_tenths_passed_since(10, wid_last_mouse_motion)) {
           wid_thing_info_fini();
           cursor_describe();

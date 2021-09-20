@@ -1,6 +1,7 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
+// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #include <algorithm>
@@ -89,7 +90,7 @@ bool Thing::matches (const std::string& what) const
   if (is_corpse() &&                                        (what == "is_corpse"))                                        { return true; }
   if (is_corridor() &&                                      (what == "is_corridor"))                                      { return true; }
   if (is_critical_to_level() &&                             (what == "is_critical_to_level"))                             { return true; }
-  if (is_cursor_can_hover_over_but_needs_double_click() &&  (what == "is_cursor_can_hover_over_but_needs_double_click"))  { return true; }
+  if (is_cursor_can_hover_over_2x_click() &&  (what == "is_cursor_can_hover_over_2x_click"))  { return true; }
   if (is_cursor_can_hover_over() &&                         (what == "is_cursor_can_hover_over"))                         { return true; }
   if (is_cursor_path() &&                                   (what == "is_cursor_path"))                                   { return true; }
   if (is_cursor() &&                                        (what == "is_cursor"))                                        { return true; }
@@ -159,8 +160,8 @@ bool Thing::matches (const std::string& what) const
   if (is_minion() &&                                        (what == "is_minion"))                                        { return true; }
   if (is_monst() &&                                         (what == "is_monst"))                                         { return true; }
   if (is_moveable() &&                                      (what == "is_moveable"))                                      { return true; }
-  if (is_movement_blocking_but_destructable() &&            (what == "is_movement_blocking_but_destructable"))            { return true; }
-  if (is_movement_blocking_wall_or_locked_door() &&         (what == "is_movement_blocking_wall_or_locked_door"))         { return true; }
+  if (is_obs_destructable() &&            (what == "is_obs_destructable"))            { return true; }
+  if (is_obs_wall_or_door() &&         (what == "is_obs_wall_or_door"))         { return true; }
   if (is_msg() &&                                           (what == "is_msg"))                                           { return true; }
   if (is_no_tile() &&                                       (what == "is_no_tile"))                                       { return true; }
   if (is_openable() &&                                      (what == "is_openable"))                                      { return true; }
@@ -246,9 +247,9 @@ bool Thing::matches (const std::string& what) const
   if (is_steal_item_chance_d1000() &&                       (what == "is_steal_item_chance_d1000"))                       { return true; }
   if (is_sticky() &&                                        (what == "is_sticky"))                                        { return true; }
   if (is_sword() &&                                         (what == "is_sword"))                                         { return true; }
-  if (is_target_select_automatically_when_chosen() &&       (what == "is_target_select_automatically_when_chosen"))       { return true; }
+  if (is_target_auto_select() &&       (what == "is_target_auto_select"))       { return true; }
   if (is_throwable() &&                                     (what == "is_throwable"))                                     { return true; }
-  if (is_thrown_automatically_when_chosen() &&              (what == "is_thrown_automatically_when_chosen"))              { return true; }
+  if (is_auto_throw() &&              (what == "is_auto_throw"))              { return true; }
   if (is_tickable() &&                                      (what == "is_tickable"))                                      { return true; }
   if (is_tmp_thing() &&                                     (what == "is_tmp_thing"))                                     { return true; }
   if (is_torch() &&                                         (what == "is_torch"))                                         { return true; }
@@ -351,7 +352,7 @@ std::function<int(Thingp)> Thing::matches_to_func (const std::string& what)
   if (what == "is_corpse")                                        { return &Thing::is_corpse; }
   if (what == "is_corridor")                                      { return &Thing::is_corridor; }
   if (what == "is_critical_to_level")                             { return &Thing::is_critical_to_level; }
-  if (what == "is_cursor_can_hover_over_but_needs_double_click")  { return &Thing::is_cursor_can_hover_over_but_needs_double_click; }
+  if (what == "is_cursor_can_hover_over_2x_click")  { return &Thing::is_cursor_can_hover_over_2x_click; }
   if (what == "is_cursor_can_hover_over")                         { return &Thing::is_cursor_can_hover_over; }
   if (what == "is_cursor_path")                                   { return &Thing::is_cursor_path; }
   if (what == "is_cursor")                                        { return &Thing::is_cursor; }
@@ -421,8 +422,8 @@ std::function<int(Thingp)> Thing::matches_to_func (const std::string& what)
   if (what == "is_minion")                                        { return &Thing::is_minion; }
   if (what == "is_monst")                                         { return &Thing::is_monst; }
   if (what == "is_moveable")                                      { return &Thing::is_moveable; }
-  if (what == "is_movement_blocking_but_destructable")            { return &Thing::is_movement_blocking_but_destructable; }
-  if (what == "is_movement_blocking_wall_or_locked_door")         { return &Thing::is_movement_blocking_wall_or_locked_door; }
+  if (what == "is_obs_destructable")            { return &Thing::is_obs_destructable; }
+  if (what == "is_obs_wall_or_door")         { return &Thing::is_obs_wall_or_door; }
   if (what == "is_msg")                                           { return &Thing::is_msg; }
   if (what == "is_no_tile")                                       { return &Thing::is_no_tile; }
   if (what == "is_openable")                                      { return &Thing::is_openable; }
@@ -508,9 +509,9 @@ std::function<int(Thingp)> Thing::matches_to_func (const std::string& what)
   if (what == "is_steal_item_chance_d1000")                       { return &Thing::is_steal_item_chance_d1000; }
   if (what == "is_sticky")                                        { return &Thing::is_sticky; }
   if (what == "is_sword")                                         { return &Thing::is_sword; }
-  if (what == "is_target_select_automatically_when_chosen")       { return &Thing::is_target_select_automatically_when_chosen; }
+  if (what == "is_target_auto_select")       { return &Thing::is_target_auto_select; }
   if (what == "is_throwable")                                     { return &Thing::is_throwable; }
-  if (what == "is_thrown_automatically_when_chosen")              { return &Thing::is_thrown_automatically_when_chosen; }
+  if (what == "is_auto_throw")              { return &Thing::is_auto_throw; }
   if (what == "is_tickable")                                      { return &Thing::is_tickable; }
   if (what == "is_tmp_thing")                                     { return &Thing::is_tmp_thing; }
   if (what == "is_torch")                                         { return &Thing::is_torch; }

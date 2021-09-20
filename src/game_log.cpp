@@ -1,6 +1,7 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
+// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #include "my_sys.h"
@@ -19,7 +20,7 @@ void Level::dump (std::string pfx)
   LOG("%s map_at                    %s", pfx.c_str(), map_at.to_string().c_str());
   LOG("%s map_follow_player         %u", pfx.c_str(), map_follow_player);
   LOG("%s map_wanted_at             %s", pfx.c_str(), map_wanted_at.to_string().c_str());
-  LOG("%s timestamp_dungeon_created %u", pfx.c_str(), timestamp_dungeon_created);
+  LOG("%s ts_dungeon_created %u", pfx.c_str(), ts_dungeon_created);
 
   LOG("%s all_things", pfx.c_str());
   FOR_ALL_THING_GROUPS(group) {

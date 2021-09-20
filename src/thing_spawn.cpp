@@ -1,6 +1,7 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
+// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #include <algorithm>
@@ -243,7 +244,7 @@ bool Thing::spawn_radius_range (Thingp item, Thingp target,
 
       auto c = level->thing_new(what, fpoint(x, y));
       c->inherit_from(this);
-      c->set_timestamp_anim_delay_end(time_get_time_ms_cached() + dist * 100);
+      c->set_ts_anim_delay_end(time_get_time_ms_cached() + dist * 100);
 
       if (is_spawner()) {
         c->set_spawned_owner(this);

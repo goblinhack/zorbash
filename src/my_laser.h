@@ -1,6 +1,7 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
+// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #pragma once
@@ -19,7 +20,7 @@ public:
        ThingId thing_id,
        point start, point stop,
        point pixel_map_at,
-       uint32_t timestamp_start, uint32_t timestamp_stop);
+       uint32_t ts_start, uint32_t ts_stop);
 
   Levelp level {};
   ThingId id {};
@@ -27,8 +28,8 @@ public:
   point stop;
   point pixel_map_at;
 
-  uint32_t timestamp_start {};
-  uint32_t timestamp_stop {};
+  uint32_t ts_start {};
+  uint32_t ts_stop {};
 
   //
   // Animation frames

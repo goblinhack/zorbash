@@ -1,6 +1,7 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
+// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #include "my_sys.h"
@@ -37,7 +38,7 @@ std::deque<point> Level::flood_fill (point p) const
     }
     set(walked, p.x, p.y, true);
 
-    if (is_movement_blocking_wall_or_locked_door(p)) {
+    if (is_obs_wall_or_door(p)) {
       continue;
     }
 
@@ -94,7 +95,7 @@ std::deque<point> Level::flood_fill_points (point p, std::function<int(Thingp)> 
     }
     set(walked, p.x, p.y, true);
 
-    if (is_movement_blocking_wall_or_locked_door(p)) {
+    if (is_obs_wall_or_door(p)) {
       continue;
     }
 
@@ -163,7 +164,7 @@ std::deque<Thingp> Level::flood_fill_things (point p, std::function<int(Thingp)>
     }
     set(walked, p.x, p.y, true);
 
-    if (is_movement_blocking_wall_or_locked_door(p)) {
+    if (is_obs_wall_or_door(p)) {
       continue;
     }
 

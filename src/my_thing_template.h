@@ -1,6 +1,7 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
+// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #pragma once
@@ -108,10 +109,10 @@ private:
   int _gfx_flickers {};
   int _gfx_glows {};
   int _gfx_health_bar_shown {};
-  int _gfx_health_bar_shown_only_when_injured {};
+  int _gfx_health_bar_autohide {};
   int _gfx_long_shadow_caster {};
   int _gfx_on_fire_anim {};
-  int _gfx_oversized_but_sitting_on_the_ground {};
+  int _gfx_oversized_and_on_floor {};
   int _gfx_short_shadow_caster {};
   int _gfx_shown_in_bg {};
   int _gfx_show_outlined {};
@@ -166,7 +167,7 @@ private:
   int _is_critical_to_level {};
   int _is_cursor {};
   int _is_cursor_can_hover_over {};
-  int _is_cursor_can_hover_over_but_needs_double_click {};
+  int _is_cursor_can_hover_over_2x_click {};
   int _is_cursor_path {};
   int _is_dead_on_end_of_anim {};
   int _is_dead_on_shove {};
@@ -231,8 +232,8 @@ private:
   int _is_minion_generator {};
   int _is_monst {};
   int _is_moveable {};
-  int _is_movement_blocking_wall_or_locked_door {};
-  int _is_movement_blocking_but_destructable {};
+  int _is_obs_wall_or_door {};
+  int _is_obs_destructable {};
   int _is_msg {};
   int _is_no_tile {};
   int _is_openable {};
@@ -321,10 +322,10 @@ private:
   int _is_engulf_chance_d1000 {};
   int _is_sticky {};
   int _is_sword {};
-  int _is_target_select_automatically_when_chosen {};
+  int _is_target_auto_select {};
   int _is_the_grid {};
   int _is_throwable {};
-  int _is_thrown_automatically_when_chosen {};
+  int _is_auto_throw {};
   int _is_tickable {}; // e.g. a monst or player or something moveable
   int _is_tmp_thing {};
   int _is_torch {};
@@ -579,11 +580,11 @@ public:
   int gfx_dead_anim(void) const;
   int gfx_flickers(void) const;
   int gfx_glows(void) const;
-  int gfx_health_bar_shown_only_when_injured(void) const;
+  int gfx_health_bar_autohide(void) const;
   int gfx_health_bar_shown(void) const;
   int gfx_long_shadow_caster(void) const;
   int gfx_on_fire_anim(void) const;
-  int gfx_oversized_but_sitting_on_the_ground(void) const;
+  int gfx_oversized_and_on_floor(void) const;
   int gfx_short_shadow_caster(void) const;
   int gfx_shown_in_bg(void) const;
   int gfx_show_outlined(void) const;
@@ -636,7 +637,7 @@ public:
   int is_corpse_on_death(void) const;
   int is_corridor(void) const;
   int is_critical_to_level(void) const;
-  int is_cursor_can_hover_over_but_needs_double_click(void) const;
+  int is_cursor_can_hover_over_2x_click(void) const;
   int is_cursor_can_hover_over(void) const;
   int is_cursor_path(void) const;
   int is_cursor(void) const;
@@ -702,8 +703,8 @@ public:
   int is_minion(void) const;
   int is_monst(void) const;
   int is_moveable(void) const;
-  int is_movement_blocking_wall_or_locked_door(void) const;
-  int is_movement_blocking_but_destructable(void) const;
+  int is_obs_wall_or_door(void) const;
+  int is_obs_destructable(void) const;
   int is_msg(void) const;
   int is_no_tile(void) const;
   int is_openable(void) const;
@@ -792,10 +793,10 @@ public:
   int is_engulf_chance_d1000(void) const;
   int is_sticky(void) const;
   int is_sword(void) const;
-  int is_target_select_automatically_when_chosen(void) const;
+  int is_target_auto_select(void) const;
   int is_the_grid(void) const;
   int is_throwable(void) const;
-  int is_thrown_automatically_when_chosen(void) const;
+  int is_auto_throw(void) const;
   int is_tickable(void) const;
   int is_tmp_thing(void) const;
   int is_torch(void) const;
@@ -907,10 +908,10 @@ public:
   void set_gfx_flickers(int);
   void set_gfx_glows(int);
   void set_gfx_health_bar_shown(int);
-  void set_gfx_health_bar_shown_only_when_injured(int);
+  void set_gfx_health_bar_autohide(int);
   void set_gfx_long_shadow_caster(int);
   void set_gfx_on_fire_anim(int);
-  void set_gfx_oversized_but_sitting_on_the_ground(int);
+  void set_gfx_oversized_and_on_floor(int);
   void set_gfx_short_shadow_caster(int);
   void set_gfx_shown_in_bg(int);
   void set_gfx_show_outlined(int);
@@ -965,7 +966,7 @@ public:
   void set_is_corpse_on_death(int);
   void set_is_corridor(int);
   void set_is_critical_to_level(int);
-  void set_is_cursor_can_hover_over_but_needs_double_click(int);
+  void set_is_cursor_can_hover_over_2x_click(int);
   void set_is_cursor_can_hover_over(int);
   void set_is_cursor(int);
   void set_is_cursor_path(int);
@@ -1032,8 +1033,8 @@ public:
   void set_is_minion(int);
   void set_is_monst(int);
   void set_is_moveable(int);
-  void set_is_movement_blocking_wall_or_locked_door(int);
-  void set_is_movement_blocking_but_destructable(int);
+  void set_is_obs_wall_or_door(int);
+  void set_is_obs_destructable(int);
   void set_is_msg(int);
   void set_is_no_tile(int);
   void set_is_openable(int);
@@ -1122,10 +1123,10 @@ public:
   void set_is_engulf_chance_d1000(int);
   void set_is_sticky(int);
   void set_is_sword(int);
-  void set_is_target_select_automatically_when_chosen(int);
+  void set_is_target_auto_select(int);
   void set_is_the_grid(int);
   void set_is_throwable(int);
-  void set_is_thrown_automatically_when_chosen(int);
+  void set_is_auto_throw(int);
   void set_is_tickable(int);
   void set_is_tmp_thing(int);
   void set_is_torch(int);

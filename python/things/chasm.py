@@ -10,7 +10,7 @@ def chasm_init(name, text_name, tiles=[]):
     mytp = tp.Tp(name, text_name)
     mytp.set_ai_obstacle(True)
     mytp.set_is_chasm(True)
-    mytp.set_is_cursor_can_hover_over_but_needs_double_click(True)
+    mytp.set_is_cursor_can_hover_over_2x_click(True)
     mytp.set_is_described_when_hovering_over(True)
     mytp.set_is_extreme_hazard(True)
     mytp.set_is_hazard(True)

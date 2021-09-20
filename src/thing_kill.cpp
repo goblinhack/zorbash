@@ -1,6 +1,7 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
+// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #include "my_sys.h"
@@ -258,7 +259,7 @@ _
   // If this was blocking the way to the player, update that now
   //
   if (!level->is_being_destroyed) {
-    if (is_movement_blocking_wall_or_locked_door()) {
+    if (is_obs_wall_or_door()) {
       level->dmap_to_player_update();
     }
   }

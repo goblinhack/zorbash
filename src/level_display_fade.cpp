@@ -1,6 +1,7 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
+// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #include "my_sys.h"
@@ -15,7 +16,7 @@ void Level::display_fade_out (void)
 {
   int lines = 1000;
   float step = RAD_360 / (float) lines;
-  float ts = (float)(time_get_time_ms_cached() - timestamp_fade_out_begin) / LEVEL_FADE_OUT_MS;
+  float ts = (float)(time_get_time_ms_cached() - ts_fade_out_begin) / LEVEL_FADE_OUT_MS;
   if (ts >= 1) {
     return;
   }
@@ -63,7 +64,7 @@ void Level::display_fade_in (void)
 {
   int lines = 1000;
   float step = RAD_360 / (float) lines;
-  float ts = (float)(time_get_time_ms_cached() - timestamp_fade_in_begin) / LEVEL_FADE_IN_MS;
+  float ts = (float)(time_get_time_ms_cached() - ts_fade_in_begin) / LEVEL_FADE_IN_MS;
   if (ts >= 1) {
     return;
   }

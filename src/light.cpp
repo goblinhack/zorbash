@@ -1,6 +1,7 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
+// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #include "my_sys.h"
@@ -229,23 +230,23 @@ bool Light::calculate (void)
   uint8_t last_x;
   uint8_t last_y;
 
-#define AVOID_LOOKING_AT_THE_SAME_TILE()               \
-  {                                                  \
+#define AVOID_LOOKING_AT_THE_SAME_TILE()           \
+  {                                                \
     if (likely((x == last_x) && (y == last_y))) {  \
-      rp++;                                      \
-      continue;                                  \
+      rp++;                                        \
+      continue;                                    \
     }                                              \
     last_x = x; last_y = y;                        \
   }
 
-#define AVOID_LOOKING_AT_THE_SAME_TILE2()              \
-  {                                                  \
-    if (likely((x == last_x) && (y == last_y))) {  \
-      rp++;                                      \
-      step2++;                                   \
-      continue;                                  \
-    }                                              \
-    last_x = x; last_y = y;                        \
+#define AVOID_LOOKING_AT_THE_SAME_TILE2()         \
+  {                                               \
+    if (likely((x == last_x) && (y == last_y))) { \
+      rp++;                                       \
+      step2++;                                    \
+      continue;                                   \
+    }                                             \
+    last_x = x; last_y = y;                       \
   }
 
   //
@@ -486,13 +487,13 @@ bool Light::calculate (void)
           continue;
         }
         if (get(walked, x, y)) {
-          if (level->is_movement_blocking_wall_or_locked_door(x, y)) {
+          if (level->is_obs_wall_or_door(x, y)) {
             printf("L");
           } else {
             printf("l");
           }
         } else {
-          if (level->is_movement_blocking_wall_or_locked_door(x, y)) {
+          if (level->is_obs_wall_or_door(x, y)) {
             printf("X");
           } else {
             if (level->is_lit_ever(x, y)) {

@@ -71,12 +71,12 @@ static wid_key_map_int wid_top_level5;
 // Ignore events to avoid processing the same event twice if we
 // look at scancodes and bypass wid events
 //
-timestamp_t wid_ignore_events_briefly_ts;
+ts_t wid_ignore_events_briefly_ts;
 
 //
 // Last time we changed what we were over.
 //
-timestamp_t wid_last_over_event;
+ts_t wid_last_over_event;
 
 //
 // Scope the focus to children of this widget and do not change it.
@@ -90,8 +90,8 @@ Widp wid_over {};
 // Mouse
 //
 int wid_mouse_visible = 1;
-bool wid_mouse_double_click;
-timestamp_t wid_last_mouse_motion;
+bool wid_mouse_two_clicks;
+ts_t wid_last_mouse_motion;
 
 //
 // Widget moving
@@ -100,12 +100,12 @@ static Widp wid_moving {};
 static int32_t wid_moving_last_x;
 static int32_t wid_moving_last_y;
 
-static timestamp_t wid_time;
+static ts_t wid_time;
 
 //
 // Widget effects
 //
-const timestamp_t wid_destroy_delay_ms = 200;
+const ts_t wid_destroy_delay_ms = 200;
 
 //
 // Prototypes.
@@ -1037,7 +1037,7 @@ char wid_event_to_char (const struct SDL_Keysym *evt)
 //
 void wid_set_mode (Widp w, wid_mode mode)
 {_
-  w->timestamp_last_mode_change = wid_time;
+  w->ts_last_mode_change = wid_time;
   w->mode = mode;
 }
 
@@ -1951,7 +1951,7 @@ static Widp wid_new (Widp parent)
   auto w = new Wid ();
 
   w->parent = parent;
-  w->timestamp_created = wid_time;
+  w->ts_created = wid_time;
 
   wid_tree_insert(w);
   wid_tree2_unsorted_insert(w);
@@ -1972,7 +1972,7 @@ static Widp wid_new (void)
 {_
   auto w = new Wid ();
 
-  w->timestamp_created = wid_time;
+  w->ts_created = wid_time;
 
   wid_tree_insert(w);
   wid_tree2_unsorted_insert(w);
@@ -5006,7 +5006,7 @@ void wid_joy_button (int32_t x, int32_t y)
   //
   // Only if there is a change in status, send an event.
   //
-  static std::array<timestamp_t, SDL_MAX_BUTTONS> ts;
+  static std::array<ts_t, SDL_MAX_BUTTONS> ts;
   int changed = false;
   int b;
 
@@ -5777,7 +5777,7 @@ static void wid_display (Widp w,
   //
   auto mode = wid_get_mode(w);
   if (mode == WID_MODE_ACTIVE) {
-    if ((wid_time - w->timestamp_last_mode_change) > 250) {
+    if ((wid_time - w->ts_last_mode_change) > 250) {
       wid_set_mode(w, WID_MODE_NORMAL);
     }
   }
@@ -6040,7 +6040,7 @@ void wid_move_all (void)
     double x;
     double y;
 
-    if (wid_time >= w->timestamp_moving_end) {
+    if (wid_time >= w->ts_moving_end) {
 
       wid_move_dequeue(w);
 
@@ -6053,8 +6053,8 @@ void wid_move_all (void)
     }
 
     double time_step =
-      (double)(wid_time - w->timestamp_moving_begin) /
-      (double)(w->timestamp_moving_end - w->timestamp_moving_begin);
+      (double)(wid_time - w->ts_moving_begin) /
+      (double)(w->ts_moving_end - w->ts_moving_begin);
 
     x = (time_step * (double)(w->moving_end.x - w->moving_start.x)) +
       w->moving_start.x;
@@ -6406,8 +6406,8 @@ static void wid_move_enqueue (Widp w,
   w->moving_start.y = moving_start_y;
   w->moving_end.x = moving_end_x;
   w->moving_end.y = moving_end_y;
-  w->timestamp_moving_begin = wid_time;
-  w->timestamp_moving_end = wid_time + ms;
+  w->ts_moving_begin = wid_time;
+  w->ts_moving_end = wid_time + ms;
 
   wid_tree3_moving_wids_insert(w);
 
@@ -6434,8 +6434,8 @@ static void wid_move_dequeue (Widp w)
   w->moving_start.y = w->moving_end.y;
   w->moving_end.x = c->moving_endx;
   w->moving_end.y = c->moving_endy;
-  w->timestamp_moving_begin = wid_time;
-  w->timestamp_moving_end = c->timestamp_moving_end;
+  w->ts_moving_begin = wid_time;
+  w->ts_moving_end = c->ts_moving_end;
 
   uint8_t i;
   for (i = 0; i < w->moving; i++) {

@@ -1,6 +1,7 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
+// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #include "my_game.h"
@@ -19,7 +20,7 @@ void Thing::animate (void)
   Tilep tile;
   auto tpp = tp();
 
-  if (time_get_time_ms_cached() <= get_timestamp_anim_delay_end()) {
+  if (time_get_time_ms_cached() <= get_ts_anim_delay_end()) {
 #ifdef DEBUG_ANIM
 if (is_debug_type()) { con("Waiting on anim frame"); }
 #endif
@@ -47,7 +48,7 @@ if (is_debug_type()) { con("Has no tiles"); }
     //
     // If within the animate time of this frame, keep with it.
     //
-    if (timestamp_next_frame > time_get_time_ms_cached()) {
+    if (ts_next_frame > time_get_time_ms_cached()) {
 #ifdef DEBUG_ANIM
 if (is_debug_type()) { con("Same frame"); }
 #endif
@@ -437,7 +438,7 @@ if (is_debug_type()) { con("No tile"); }
   //
   // When does this tile expire ?
   //
-  timestamp_t delay = tile_delay_ms(tile);
+  ts_t delay = tile_delay_ms(tile);
 
   //
   // Worried this might cause things to move to destinations at slightly
@@ -451,5 +452,5 @@ if (is_debug_type()) { con("No tile"); }
     delay /= 2;
   }
 
-  timestamp_next_frame = time_get_time_ms_cached() + delay;
+  ts_next_frame = time_get_time_ms_cached() + delay;
 }

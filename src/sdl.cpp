@@ -1,6 +1,7 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
+// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #include "stb_image_write.h"
@@ -94,7 +95,7 @@ static inline void sdl_list_video_size (void)
   }
 }
 
-void sdl_joy_rumble (float strength, timestamp_t ms)
+void sdl_joy_rumble (float strength, ts_t ms)
 {_
   if (!haptic) {
     return;
@@ -442,7 +443,7 @@ static void sdl_event (SDL_Event * event)
 {_
   SDL_Keysym *key;
 
-  wid_mouse_double_click = false;
+  wid_mouse_two_clicks = false;
 
   switch (event->type) {
     case SDL_KEYDOWN: {
@@ -468,7 +469,7 @@ static void sdl_event (SDL_Event * event)
 
       {
         static struct SDL_Keysym last;
-        static timestamp_t last_time_for_key;
+        static ts_t last_time_for_key;
 
         //
         // SDL2 has no auto repeat.
@@ -513,7 +514,7 @@ static void sdl_event (SDL_Event * event)
       static double accel = 1.0;
 
       {
-        static timestamp_t ts;
+        static ts_t ts;
 
         if (time_have_x_tenths_passed_since(5, ts)) {
           accel = 1.0;
@@ -566,7 +567,7 @@ static void sdl_event (SDL_Event * event)
 
       auto now = time_get_time_ms_cached();
       wid_mouse_visible = 1;
-      wid_mouse_double_click =
+      wid_mouse_two_clicks =
       (now - mouse_down_when < UI_MOUSE_DOUBLE_CLICK);
 
       wid_mouse_down(event->button.button, mouse_x, mouse_y);
@@ -862,7 +863,7 @@ static void sdl_tick (void)
   }
 
   static double accel = 1.0;
-  static timestamp_t ts;
+  static ts_t ts;
 
   if (time_have_x_tenths_passed_since(5, ts)) {
     accel = 1.0;
@@ -1154,8 +1155,8 @@ void sdl_loop (void)
   //
   // Wait for events
   //
-  int ui_timestamp_fast_last = time_get_time_ms();
-  int ui_timestamp_slow_last = ui_timestamp_fast_last;
+  int ui_ts_fast_last = time_get_time_ms();
+  int ui_ts_slow_last = ui_ts_fast_last;
 
   sdl_main_loop_running = true;
 
@@ -1191,7 +1192,7 @@ void sdl_loop (void)
   // Reset the fade in due to the above
   //
   if (game->level) {
-    game->level->timestamp_fade_in_begin = time_get_time_ms_cached();
+    game->level->ts_fade_in_begin = time_get_time_ms_cached();
   }
 
   for (;/*ever*/;) {
@@ -1238,15 +1239,15 @@ void sdl_loop (void)
     //
     // Less frequent updates
     //
-    int timestamp_now = time_update_time_milli();
-    bool update_slow = (timestamp_now - ui_timestamp_slow_last >= UI_UPDATE_SLOW_MS);
-    bool update_fast = (timestamp_now - ui_timestamp_fast_last >= UI_UPDATE_FAST_MS);
+    int ts_now = time_update_time_milli();
+    bool update_slow = (ts_now - ui_ts_slow_last >= UI_UPDATE_SLOW_MS);
+    bool update_fast = (ts_now - ui_ts_fast_last >= UI_UPDATE_FAST_MS);
 
     //
     // Less frequent updates
     //
     if (unlikely(update_slow)) {
-      ui_timestamp_slow_last = timestamp_now;
+      ui_ts_slow_last = ts_now;
 
       //
       // Update status and rightbars
@@ -1289,7 +1290,7 @@ void sdl_loop (void)
     // stuff with widgets only occasionally if we do not need to.
     //
     if (unlikely(update_fast)) {
-      ui_timestamp_fast_last = timestamp_now;
+      ui_ts_fast_last = ts_now;
 
       //
       // Clean up dead widgets.

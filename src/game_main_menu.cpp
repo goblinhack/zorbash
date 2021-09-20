@@ -1,6 +1,7 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
+// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #include "my_sys.h"
@@ -265,15 +266,29 @@ static uint8_t clamp(float v) //define a function to bound and round the input f
 }
 
 // https://stackoverflow.com/questions/8507885/shift-hue-of-an-rgb-color#8509802
-static color TransformH(const color &in, const float fHue)
+static color color_change_hue (const color &in, const float fHue)
 {
   color out;
   const float cosA = cos(fHue*3.14159265f/180); //convert degrees to radians
   const float sinA = sin(fHue*3.14159265f/180); //convert degrees to radians
   //calculate the rotation matrix, only depends on Hue
-  float matrix[3][3] = {{cosA + (1.0f - cosA) / 3.0f, 1.0f/3.0f * (1.0f - cosA) - sqrtf(1.0f/3.0f) * sinA, 1.0f/3.0f * (1.0f - cosA) + sqrtf(1.0f/3.0f) * sinA},
-    {1.0f/3.0f * (1.0f - cosA) + sqrtf(1.0f/3.0f) * sinA, cosA + 1.0f/3.0f*(1.0f - cosA), 1.0f/3.0f * (1.0f - cosA) - sqrtf(1.0f/3.0f) * sinA},
-    {1.0f/3.0f * (1.0f - cosA) - sqrtf(1.0f/3.0f) * sinA, 1.0f/3.0f * (1.0f - cosA) + sqrtf(1.0f/3.0f) * sinA, cosA + 1.0f/3.0f * (1.0f - cosA)}};
+  float matrix[3][3] = {
+    {
+      cosA + (1.0f - cosA) / 3.0f,
+      1.0f/3.0f * (1.0f - cosA) - sqrtf(1.0f/3.0f) * sinA,
+      1.0f/3.0f * (1.0f - cosA) + sqrtf(1.0f/3.0f) * sinA
+    },
+    {
+      1.0f/3.0f * (1.0f - cosA) + sqrtf(1.0f/3.0f) * sinA,
+      cosA + 1.0f/3.0f*(1.0f - cosA),
+      1.0f/3.0f * (1.0f - cosA) - sqrtf(1.0f/3.0f) * sinA
+    },
+    {
+      1.0f/3.0f * (1.0f - cosA) - sqrtf(1.0f/3.0f) * sinA,
+      1.0f/3.0f * (1.0f - cosA) + sqrtf(1.0f/3.0f) * sinA,
+      cosA + 1.0f/3.0f * (1.0f - cosA)
+    }
+  };
   //Use the rotation matrix to convert the RGB directly
   out.r = clamp(in.r*matrix[0][0] + in.g*matrix[0][1] + in.b*matrix[0][2]);
   out.g = clamp(in.r*matrix[1][0] + in.g*matrix[1][1] + in.b*matrix[1][2]);
@@ -291,7 +306,7 @@ static void game_display_title_fg3 (void)
     hue = 0;
   }
 
-  fg = TransformH(fg, hue);
+  fg = color_change_hue(fg, hue);
   fg.a = 255;
 
   if (fg.r + fg.g + fg.b < 100) {
@@ -322,7 +337,7 @@ static void game_display_title_fg4 (void)
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
   static int frame = 1;
-  static timestamp_t ts;
+  static ts_t ts;
 
   if (time_have_x_tenths_passed_since(5, ts)) {
     frame++;

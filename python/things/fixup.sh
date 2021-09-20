@@ -157,10 +157,10 @@ do
       set_gfx_flickers \
       set_gfx_glows \
       set_gfx_health_bar_shown \
-      set_gfx_health_bar_shown_only_when_injured \
+      set_gfx_health_bar_autohide \
       set_gfx_long_shadow_caster \
       set_gfx_on_fire_anim \
-      set_gfx_oversized_but_sitting_on_the_ground \
+      set_gfx_oversized_and_on_floor \
       set_gfx_shown_in_bg \
       set_gfx_show_outlined \
       set_gfx_solid_shadow \
@@ -211,7 +211,7 @@ do
       set_is_critical_to_level \
       set_is_cursor \
       set_is_cursor_can_hover_over \
-      set_is_cursor_can_hover_over_but_needs_double_click \
+      set_is_cursor_can_hover_over_2x_click \
       set_is_cursor_path \
       set_is_dead_on_end_of_anim \
       set_is_dead_on_shove \
@@ -278,8 +278,8 @@ do
       set_is_minion_generator \
       set_is_monst \
       set_is_moveable \
-      set_is_movement_blocking_but_destructable \
-      set_is_movement_blocking_wall_or_locked_door \
+      set_is_obs_destructable \
+      set_is_obs_wall_or_door \
       set_is_msg \
       set_is_no_tile \
       set_is_openable \
@@ -359,10 +359,10 @@ do
       set_is_sticky \
       set_is_stone \
       set_is_sword \
-      set_is_target_select_automatically_when_chosen \
+      set_is_target_auto_select \
       set_is_the_grid \
       set_is_throwable \
-      set_is_thrown_automatically_when_chosen \
+      set_is_auto_throw \
       set_is_tickable \
       set_is_tmp_thing \
       set_is_torch \

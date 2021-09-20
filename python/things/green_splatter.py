@@ -6,7 +6,7 @@ def tp_init(name, text_name):
     mytp = tp.Tp(name, text_name)
     mytp.set_collision_circle(True)
     mytp.set_collision_radius(0.40)
-    mytp.set_gfx_oversized_but_sitting_on_the_ground(True)
+    mytp.set_gfx_oversized_and_on_floor(True)
     mytp.set_gfx_show_outlined(True)
     mytp.set_is_able_to_fall(True)
     mytp.set_is_loggable_for_important_stuff(False)

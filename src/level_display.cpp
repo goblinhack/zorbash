@@ -1,6 +1,7 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
+// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #include "my_sys.h"
@@ -28,13 +29,13 @@ void Level::display (void)
 
   display_external_particles();
 
-  if (timestamp_redraw_bg &&
-    (time_get_time_ms_cached() > timestamp_redraw_bg)) {
-    timestamp_redraw_bg = 0;
+  if (ts_redraw_bg &&
+    (time_get_time_ms_cached() > ts_redraw_bg)) {
+    ts_redraw_bg = 0;
 
     auto delta = 0;
-    if (timestamp_fade_in_begin) {
-      delta = time_get_time_ms_cached() - timestamp_fade_in_begin;
+    if (ts_fade_in_begin) {
+      delta = time_get_time_ms_cached() - ts_fade_in_begin;
     }
 
     g_render_black_and_white = true;
@@ -44,8 +45,8 @@ void Level::display (void)
     //
     // Reset the fade in timestamp as the above is a bit slow
     //
-    if (timestamp_fade_in_begin) {
-      timestamp_fade_in_begin = time_get_time_ms_cached() - delta;
+    if (ts_fade_in_begin) {
+      ts_fade_in_begin = time_get_time_ms_cached() - delta;
     }
   }
 
@@ -322,16 +323,16 @@ void Level::display_map (void)
   scroll_map_set_target();
   scroll_map();
 
-  bool fade_out = timestamp_fade_out_begin != 0;
-  bool fade_in = timestamp_fade_in_begin != 0;
+  bool fade_out = ts_fade_out_begin != 0;
+  bool fade_in = ts_fade_in_begin != 0;
   bool frozen = player ? player->is_changing_level : false;
   fade_out_finished = false;
 
    if (fade_out) {
-    if ((time_get_time_ms_cached() < timestamp_fade_out_begin) ||
-      (time_get_time_ms_cached() - timestamp_fade_out_begin > LEVEL_FADE_OUT_MS)) {
+    if ((time_get_time_ms_cached() < ts_fade_out_begin) ||
+      (time_get_time_ms_cached() - ts_fade_out_begin > LEVEL_FADE_OUT_MS)) {
       minimap_valid = false;
-      timestamp_fade_out_begin = 0;
+      ts_fade_out_begin = 0;
       fade_out_finished = true;
       if (player) {
         player->log("Fade out of level finished");
@@ -340,10 +341,10 @@ void Level::display_map (void)
   }
 
   if (fade_in) {
-    if ((time_get_time_ms_cached() < timestamp_fade_in_begin) ||
-      (time_get_time_ms_cached() - timestamp_fade_in_begin > LEVEL_FADE_IN_MS)) {
+    if ((time_get_time_ms_cached() < ts_fade_in_begin) ||
+      (time_get_time_ms_cached() - ts_fade_in_begin > LEVEL_FADE_IN_MS)) {
       minimap_valid = false;
-      timestamp_fade_in_begin = 0;
+      ts_fade_in_begin = 0;
       if (player) {
         player->log("Fade in of level finished");
       }

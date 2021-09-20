@@ -1,6 +1,7 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
+// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #pragma once
@@ -109,7 +110,7 @@ PyObject *thing_is_corpse_on_death(PyObject *obj, PyObject *args, PyObject *keyw
 PyObject *thing_is_corpse(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_corridor(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_critical_to_level(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_cursor_can_hover_over_but_needs_double_click(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_cursor_can_hover_over_2x_click(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_cursor_can_hover_over(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_cursor_path(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_cursor(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -185,8 +186,8 @@ PyObject *thing_is_minion_generator(PyObject *obj, PyObject *args, PyObject *key
 PyObject *thing_is_minion(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_monst(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_moveable(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_movement_blocking_wall_or_locked_door(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_movement_blocking_but_destructable(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_obs_wall_or_door(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_obs_destructable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_msg(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_no_tile(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_on_fire(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -276,9 +277,9 @@ PyObject *thing_is_steal_item_chance_d1000(PyObject *obj, PyObject *args, PyObje
 PyObject *thing_is_engulf_chance_d1000(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_sticky(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_sword(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_target_select_automatically_when_chosen(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_target_auto_select(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_throwable(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_thrown_automatically_when_chosen(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_auto_throw(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_tickable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_tmp_thing(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_torch(PyObject *obj, PyObject *args, PyObject *keywds);

@@ -1,6 +1,7 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
+// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #pragma once
@@ -309,13 +310,13 @@ public:
   //
   // Temporary. Dampens mouse clicks
   //
-  timestamp_t        last_mouse_down {};
-  timestamp_t        last_pause {};
+  ts_t        last_mouse_down {};
+  ts_t        last_pause {};
 
   //
   // When the last tick started. Used for looking at spikes in time.
   //
-  timestamp_t        tick_begin_ms {};
+  ts_t        tick_begin_ms {};
 
   //
   // Auto generated

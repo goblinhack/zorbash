@@ -19,7 +19,7 @@ def tp_init(name):
     mytp = tp.Tp(name, "huge explosion")
     mytp.set_damage_melee_dice("2d6")
     mytp.set_gfx_animated(True)
-    mytp.set_gfx_oversized_but_sitting_on_the_ground(True)
+    mytp.set_gfx_oversized_and_on_floor(True)
     mytp.set_gfx_short_shadow_caster(True)
     mytp.set_gfx_show_outlined(False)
     mytp.set_is_able_to_fall(False)

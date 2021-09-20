@@ -1,6 +1,7 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
+// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #pragma once
@@ -18,7 +19,7 @@ public:
         point start, point stop,
         point pixel_map_at,
         isize sz,
-        uint32_t timestamp_start, uint32_t timestamp_stop,
+        uint32_t ts_start, uint32_t ts_stop,
         class Tile* tile,
         bool hflip,
         bool make_visible_at_end) :
@@ -27,8 +28,8 @@ public:
     stop(stop),
     pixel_map_at(pixel_map_at),
     sz(sz),
-    timestamp_start(timestamp_start),
-    timestamp_stop(timestamp_stop),
+    ts_start(ts_start),
+    ts_stop(ts_stop),
     tile(tile),
     hflip(hflip),
     make_visible_at_end(make_visible_at_end) { }
@@ -36,7 +37,7 @@ public:
   Particle_(point start, point stop,
         point pixel_map_at,
         isize sz,
-        uint32_t timestamp_start, uint32_t timestamp_stop,
+        uint32_t ts_start, uint32_t ts_stop,
         class Tile* tile,
         bool hflip,
         bool make_visible_at_end) :
@@ -44,8 +45,8 @@ public:
     stop(stop),
     pixel_map_at(pixel_map_at),
     sz(sz),
-    timestamp_start(timestamp_start),
-    timestamp_stop(timestamp_stop),
+    ts_start(ts_start),
+    ts_stop(ts_stop),
     tile(tile),
     hflip(hflip),
     make_visible_at_end(make_visible_at_end) { }
@@ -55,8 +56,8 @@ public:
   point stop;
   point pixel_map_at;
   isize sz;
-  uint32_t timestamp_start {};
-  uint32_t timestamp_stop {};
+  uint32_t ts_start {};
+  uint32_t ts_stop {};
   class Tile* tile {};
   bool hflip {};
   bool make_visible_at_end {};

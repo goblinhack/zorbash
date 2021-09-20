@@ -1,6 +1,7 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
+// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #include <algorithm>
@@ -121,8 +122,8 @@ void Level::display_internal_particles (void)
         p.height = non_pcg_random_range(30, 50);
       }
 
-      float t = p.timestamp_stop - p.timestamp_start;
-      float dt = ((float)(now - p.timestamp_start)) / t;
+      float t = p.ts_stop - p.ts_start;
+      float dt = ((float)(now - p.ts_start)) / t;
       if (dt > 1) {
         if (p.id.id) {
           auto t = thing_find(p.id);
@@ -187,7 +188,7 @@ void Level::display_internal_particles (void)
 #endif
 
       if (unlikely(tpp &&
-             tpp->gfx_oversized_but_sitting_on_the_ground())) {
+             tpp->gfx_oversized_and_on_floor())) {
         float y_offset =
           (((tile_pix_height - TILE_HEIGHT) / TILE_HEIGHT) * tileh) / 2.0;
         blit_tl.y -= y_offset;
@@ -326,8 +327,8 @@ void Level::display_external_particles (void)
         }
       }
 
-      float t = p.timestamp_stop - p.timestamp_start;
-      float dt = ((float)(now - p.timestamp_start)) / t;
+      float t = p.ts_stop - p.ts_start;
+      float dt = ((float)(now - p.ts_start)) / t;
       if (dt > 1) {
         if (p.id.id) {
           auto t = thing_find(p.id);
@@ -386,7 +387,7 @@ void Level::display_external_particles (void)
       }
 
       if (unlikely(tpp &&
-             tpp->gfx_oversized_but_sitting_on_the_ground())) {
+             tpp->gfx_oversized_and_on_floor())) {
         float y_offset =
           (((tile_pix_height - TILE_HEIGHT) / TILE_HEIGHT) * tileh) / 2.0;
         blit_tl.y -= y_offset;

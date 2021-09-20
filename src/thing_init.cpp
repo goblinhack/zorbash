@@ -1,6 +1,7 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
+// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #include "my_sys.h"
@@ -112,7 +113,7 @@ void Thing::init (Levelp level,
   mid_at      = born;
   last_mid_at = born;
 
-  timestamp_next_frame = 0;
+  ts_next_frame = 0;
   if (name == "") {
     DIE("Thing template cannot be created: No name given");
   }
@@ -524,7 +525,7 @@ void Thing::reinit (void)
   //
   // Probably safest to reset this else things might expire on load
   //
-  timestamp_next_frame = 0;
+  ts_next_frame = 0;
 
   if (unlikely(is_player())) {
     if (level->player && (level->player != this)) {

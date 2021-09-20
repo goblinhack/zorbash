@@ -1,6 +1,7 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
+// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #include <algorithm>
@@ -25,13 +26,13 @@ Projectile_::Projectile_(
     ThingId thing_id,
     point start, point stop,
     point pixel_map_at,
-    uint32_t timestamp_start, uint32_t timestamp_stop) :
+    uint32_t ts_start, uint32_t ts_stop) :
   id(thing_id),
   start(start),
   stop(stop),
   pixel_map_at(pixel_map_at),
-  timestamp_start(timestamp_start),
-  timestamp_stop(timestamp_stop)
+  ts_start(ts_start),
+  ts_stop(ts_stop)
 {_
   auto t = level->thing_find(id);
   if (!t) {
@@ -131,8 +132,8 @@ void Level::display_projectiles (void)
   auto e = std::remove_if(all_projectiles.begin(),
               all_projectiles.end(),
     [=, this] (Projectile &p) {
-      float timestep = p.timestamp_stop - p.timestamp_start;
-      float dt = ((float)(now - p.timestamp_start)) / timestep;
+      float timestep = p.ts_stop - p.ts_start;
+      float dt = ((float)(now - p.ts_start)) / timestep;
 
       Thingp t;
 

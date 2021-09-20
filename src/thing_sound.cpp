@@ -1,6 +1,7 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
+// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #include <SDL_mixer.h>
@@ -83,7 +84,7 @@ bool Thing::thing_sound_play_channel (int channel, const std::string &alias)
 
   int distance = distance_to_player();
   if (distance == DMAP_IS_WALL) {
-    if (level->is_movement_blocking_wall_or_locked_door(mid_at.x, mid_at.y)) {
+    if (level->is_obs_wall_or_door(mid_at.x, mid_at.y)) {
       //
       // Ok to hit walls or doors.
       //

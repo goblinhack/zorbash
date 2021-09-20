@@ -559,8 +559,8 @@ class Tp:
     def set_range_max(self, value):
         zx.tp_set_range_max(self, value)
 
-    def set_is_target_select_automatically_when_chosen(self, value):
-        zx.tp_set_is_target_select_automatically_when_chosen(self, value)
+    def set_is_target_auto_select(self, value):
+        zx.tp_set_is_target_auto_select(self, value)
 
     def set_is_wand(self, value):
         zx.tp_set_is_wand(self, value)
@@ -640,8 +640,8 @@ class Tp:
     def set_is_used_automatically_when_selected(self, value):
         zx.tp_set_is_used_automatically_when_selected(self, value)
 
-    def set_is_thrown_automatically_when_chosen(self, value):
-        zx.tp_set_is_thrown_automatically_when_chosen(self, value)
+    def set_is_auto_throw(self, value):
+        zx.tp_set_is_auto_throw(self, value)
 
     def set_is_extreme_hazard(self, value):
         zx.tp_set_is_extreme_hazard(self, value)
@@ -718,20 +718,20 @@ class Tp:
     def set_is_item_eater(self, value):
         zx.tp_set_is_item_eater(self, value)
 
-    def set_is_movement_blocking_but_destructable(self, value):
-        zx.tp_set_is_movement_blocking_but_destructable(self, value)
+    def set_is_obs_destructable(self, value):
+        zx.tp_set_is_obs_destructable(self, value)
 
     def set_is_the_grid(self, value):
         zx.tp_set_is_the_grid(self, value)
 
-    def set_is_cursor_can_hover_over_but_needs_double_click(self, value):
-        zx.tp_set_is_cursor_can_hover_over_but_needs_double_click(self, value)
+    def set_is_cursor_can_hover_over_2x_click(self, value):
+        zx.tp_set_is_cursor_can_hover_over_2x_click(self, value)
 
     def set_gfx_glows(self, value):
         zx.tp_set_gfx_glows(self, value)
 
-    def set_gfx_health_bar_shown_only_when_injured(self, value):
-        zx.tp_set_gfx_health_bar_shown_only_when_injured(self, value)
+    def set_gfx_health_bar_autohide(self, value):
+        zx.tp_set_gfx_health_bar_autohide(self, value)
 
     def set_gfx_health_bar_shown(self, value):
         zx.tp_set_gfx_health_bar_shown(self, value)
@@ -1081,8 +1081,8 @@ class Tp:
     def set_is_corridor(self, value):
         zx.tp_set_is_corridor(self, value)
 
-    def set_gfx_oversized_but_sitting_on_the_ground(self, value):
-        zx.tp_set_gfx_oversized_but_sitting_on_the_ground(self, value)
+    def set_gfx_oversized_and_on_floor(self, value):
+        zx.tp_set_gfx_oversized_and_on_floor(self, value)
 
     def set_is_interesting(self, value):
         zx.tp_set_is_interesting(self, value)
@@ -1153,8 +1153,8 @@ class Tp:
     def set_gfx_animated_can_vflip(self, value):
         zx.tp_set_gfx_animated_can_vflip(self, value)
 
-    def set_is_movement_blocking_wall_or_locked_door(self, value):
-        zx.tp_set_is_movement_blocking_wall_or_locked_door(self, value)
+    def set_is_obs_wall_or_door(self, value):
+        zx.tp_set_is_obs_wall_or_door(self, value)
 
     def set_is_treasure_type(self, value):
         zx.tp_set_is_treasure_type(self, value)

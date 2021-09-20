@@ -1,6 +1,7 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
+// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #include "my_sys.h"
@@ -479,7 +480,7 @@ bool Thing::get_coords (point &blit_tl,
   //
   // Put larger tiles on the same y base as small ones.
   //
-  if (unlikely(tpp->gfx_oversized_but_sitting_on_the_ground())) {
+  if (unlikely(tpp->gfx_oversized_and_on_floor())) {
     float y_offset =
       (((tile_pix_height - TILE_HEIGHT) / TILE_HEIGHT) * tileh) / 2.0;
     blit_tl.y -= y_offset;
@@ -493,16 +494,16 @@ bool Thing::get_coords (point &blit_tl,
   auto falling = is_falling || (owner && owner->is_falling);
   if (likely(!falling)) {
     if (unlikely(tpp->gfx_animated_can_hflip())) {
-      if (get_timestamp_flip_start()) {
+      if (get_ts_flip_start()) {
         //
         // Slow flip
         //
-        auto diff = time_get_time_ms_cached() - get_timestamp_flip_start();
-        timestamp_t flip_time = game->current_move_speed;
-        timestamp_t flip_steps = flip_time;
+        auto diff = time_get_time_ms_cached() - get_ts_flip_start();
+        ts_t flip_time = game->current_move_speed;
+        ts_t flip_steps = flip_time;
 
         if (diff > flip_time) {
-          set_timestamp_flip_start(0);
+          set_ts_flip_start(0);
           is_facing_left = !is_facing_left;
           if (is_dir_left() ||
             is_dir_tl()   ||
@@ -818,7 +819,7 @@ void Thing::blit_internal (int fbo,
     lit &&
     (
      gfx_health_bar_shown() ||
-     (gfx_health_bar_shown_only_when_injured() && (h < m))
+     (gfx_health_bar_autohide() && (h < m))
     )) {
 
     int h_step = (1.0 - ((float)h / (float)m)) *
@@ -897,7 +898,7 @@ void Thing::blit_internal (int fbo,
         blit_end_reflection_submerged(submerged);
       } else {
         if (tile && tile_get_height(tile) != TILE_HEIGHT) {
-          if (tpp->gfx_oversized_but_sitting_on_the_ground()) {
+          if (tpp->gfx_oversized_and_on_floor()) {
             //
             // Seems to be ok
             //
@@ -1011,7 +1012,7 @@ void Thing::blit_upside_down (int fbo)
   std::swap(blit_tl.y, blit_br.y);
 
   if (tile && tile_get_height(tile) != TILE_HEIGHT) {
-    if (tpp->gfx_oversized_but_sitting_on_the_ground()) {
+    if (tpp->gfx_oversized_and_on_floor()) {
       blit_br.y += diff;
       blit_tl.y += diff;
     } else {

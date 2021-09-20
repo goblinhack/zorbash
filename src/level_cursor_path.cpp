@@ -1,6 +1,7 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
+// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #include "my_sys.h"
@@ -128,7 +129,7 @@ void Level::cursor_path_draw_line (point start, point end)
     //
     for (auto y = miny; y < maxy; y++) {
       for (auto x = minx; x < maxx; x++) {
-        if (is_movement_blocking_wall_or_locked_door(x, y)) {
+        if (is_obs_wall_or_door(x, y)) {
           set(d.val, x, y, DMAP_IS_WALL);
         } else {
           set(d.val, x, y, DMAP_IS_PASSABLE);
@@ -141,7 +142,7 @@ void Level::cursor_path_draw_line (point start, point end)
     //
     for (auto y = miny; y < maxy; y++) {
       for (auto x = minx; x < maxx; x++) {
-        if (is_movement_blocking_wall_or_locked_door(x, y)) {
+        if (is_obs_wall_or_door(x, y)) {
           set(d.val, x, y, DMAP_IS_WALL);
         } else {
           set(d.val, x, y, DMAP_IS_PASSABLE);
@@ -155,7 +156,7 @@ void Level::cursor_path_draw_line (point start, point end)
     for (auto y = miny; y < maxy; y++) {
       for (auto x = minx; x < maxx; x++) {
         if (is_extreme_hazard(x, y) ||
-          is_movement_blocking_wall_or_locked_door(x, y)) {
+          is_obs_wall_or_door(x, y)) {
           set(d.val, x, y, DMAP_IS_WALL);
         } else {
           set(d.val, x, y, DMAP_IS_PASSABLE);

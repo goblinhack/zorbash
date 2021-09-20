@@ -1,6 +1,7 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
+// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #pragma once
@@ -102,7 +103,7 @@ void sdl_config_update_all(void);
 void sdl_exit(void);
 void sdl_fini(void);
 void sdl_flush_display(void);
-void sdl_joy_rumble(float strength, timestamp_t ms);
+void sdl_joy_rumble(float strength, ts_t ms);
 void sdl_loop(void);
 void sdl_screenshot_do(void);
 void sdl_screenshot(void);

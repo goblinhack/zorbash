@@ -1,6 +1,7 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
+// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #include "my_sys.h"
@@ -92,10 +93,10 @@ void Thing::level_pop (void)
                              level->unset_is_light_blocker(mx, my); }
   if (i_set_is_monst)                                { i_set_is_monst = false;
                              level->unset_is_monst(mx, my); }
-  if (i_set_is_movement_blocking_wall_or_locked_door)                  { i_set_is_movement_blocking_wall_or_locked_door = false;
-                             level->unset_is_movement_blocking_wall_or_locked_door(mx, my); }
-  if (i_set_is_movement_blocking_but_destructable)               { i_set_is_movement_blocking_but_destructable = false;
-                             level->unset_is_movement_blocking_but_destructable(mx, my); }
+  if (i_set_is_obs_wall_or_door)                  { i_set_is_obs_wall_or_door = false;
+                             level->unset_is_obs_wall_or_door(mx, my); }
+  if (i_set_is_obs_destructable)               { i_set_is_obs_destructable = false;
+                             level->unset_is_obs_destructable(mx, my); }
   if (i_set_is_potion)                               { i_set_is_potion = false;
                              level->unset_is_potion(mx, my); }
   if (i_set_is_wand)                                 { i_set_is_wand = false;
@@ -124,7 +125,7 @@ void Thing::level_pop (void)
   if (is_lava() || is_fire()) { level->is_heatmap_valid = false; }
 
   if (gfx_shown_in_bg()) {
-    level->timestamp_redraw_bg = time_get_time_ms_cached() + 500;
+    level->ts_redraw_bg = time_get_time_ms_cached() + 500;
   }
 
 #if 0

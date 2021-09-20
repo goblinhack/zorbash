@@ -1,6 +1,7 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
+// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #include <algorithm>
@@ -79,7 +80,7 @@ bool Thing::collision_obstacle (Thingp it)
   //
   // Allow movement through open doors only
   //
-  if (it->is_movement_blocking_wall_or_locked_door()) {
+  if (it->is_obs_wall_or_door()) {
     if (is_able_to_walk_through_walls()) {
       return false;
     }
@@ -89,7 +90,7 @@ bool Thing::collision_obstacle (Thingp it)
     }
   }
 
-  if (it->is_movement_blocking_but_destructable()) {
+  if (it->is_obs_destructable()) {
     if (!it->is_open) {
       return true;
     }
@@ -229,7 +230,7 @@ bool Thing::ai_obstacle (Thingp it)
   //
   if (it->is_brazier() ||
     it->is_barrel() ||
-    it->is_movement_blocking_wall_or_locked_door()) {
+    it->is_obs_wall_or_door()) {
     if (is_able_to_walk_through_walls()) {
       return false;
     }

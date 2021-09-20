@@ -1,6 +1,7 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
+// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #pragma once
@@ -63,7 +64,7 @@ PyObject *level_is_corridor_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_critical_to_level_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_cursor_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_cursor_can_hover_over_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_cursor_can_hover_over_but_needs_double_click_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_cursor_can_hover_over_2x_click_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_cursor_path_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_dead_on_end_of_anim_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_dead_on_shove_at(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -136,8 +137,8 @@ PyObject *level_is_minion_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_minion_generator_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_monst_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_moveable_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_movement_blocking_wall_or_locked_door_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_movement_blocking_but_destructable_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_obs_wall_or_door_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_obs_destructable_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_msg_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_no_tile_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_on_firing_at_something(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -228,9 +229,9 @@ PyObject *level_is_engulf_chance_d1000_at(PyObject *obj, PyObject *args, PyObjec
 PyObject *level_is_sticky_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_shovable_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_sword_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_target_select_automatically_when_chosen_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_target_auto_select_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_throwable_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_thrown_automatically_when_chosen_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_auto_throw_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_tickable_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_tmp_thing_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_torch_at(PyObject *obj, PyObject *args, PyObject *keywds);

@@ -1,6 +1,7 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
+// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #include "my_sdl.h"
@@ -268,7 +269,7 @@ void dmap_process (Dmap *D)
 #endif
 }
 
-static bool is_movement_blocking_wall_or_locked_door_at (const Dmap *D, int x, int y)
+static bool is_obs_wall_or_door_at (const Dmap *D, int x, int y)
 {
   if ((x >= MAP_WIDTH) || (y >= MAP_HEIGHT) || (x < 0) || (y < 0)) {
     return true;
@@ -296,42 +297,42 @@ bool dmap_can_i_move_diagonally (const Dmap *D, point a, point b, point c)
   auto my = c.y;
 
   if (px - 1 == mx && py + 1 == my && px == nx && py + 1 == ny &&
-    ! is_movement_blocking_wall_or_locked_door_at(D, px - 1, py)) {
+    ! is_obs_wall_or_door_at(D, px - 1, py)) {
     return true;
   }
 
   if (px - 1 == mx && py + 1 == my && px - 1 == nx && py == ny &&
-    ! is_movement_blocking_wall_or_locked_door_at(D, px, py + 1)) {
+    ! is_obs_wall_or_door_at(D, px, py + 1)) {
     return true;
   }
 
   if (px + 1 == mx && py + 1 == my && px == nx && py + 1 == ny &&
-    ! is_movement_blocking_wall_or_locked_door_at(D, px + 1, py)) {
+    ! is_obs_wall_or_door_at(D, px + 1, py)) {
     return true;
   }
 
   if (px + 1 == mx && py + 1 == my && px + 1 == nx && py == ny &&
-    ! is_movement_blocking_wall_or_locked_door_at(D, px, py + 1)) {
+    ! is_obs_wall_or_door_at(D, px, py + 1)) {
     return true;
   }
 
   if (px - 1 == mx && py - 1 == my && px == nx && py - 1 == ny &&
-    ! is_movement_blocking_wall_or_locked_door_at(D, px - 1, py)) {
+    ! is_obs_wall_or_door_at(D, px - 1, py)) {
     return true;
   }
 
   if (px - 1 == mx && py - 1 == my && px - 1 == nx && py == ny &&
-    ! is_movement_blocking_wall_or_locked_door_at(D, px, py - 1)) {
+    ! is_obs_wall_or_door_at(D, px, py - 1)) {
     return true;
   }
 
   if (px + 1 == mx && py - 1 == my && px == nx && py - 1 == ny &&
-    ! is_movement_blocking_wall_or_locked_door_at(D, px + 1, py)) {
+    ! is_obs_wall_or_door_at(D, px + 1, py)) {
     return true;
   }
 
   if (px + 1 == mx && py - 1 == my && px + 1 == nx && py == ny && \
-    ! is_movement_blocking_wall_or_locked_door_at(D, px, py - 1)) {
+    ! is_obs_wall_or_door_at(D, px, py - 1)) {
     return true;
   }
   return false;

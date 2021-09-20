@@ -1,6 +1,7 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
+// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #include "my_sys.h"
@@ -48,7 +49,7 @@ bool Level::tick (void)
     return false;
   }
 
-  if (timestamp_fade_in_begin) {
+  if (ts_fade_in_begin) {
     return false;
   }
 
@@ -264,7 +265,7 @@ bool Level::tick (void)
       }
     }
 
-    if (t->get_timestamp_flip_start() && !t->is_dead) {
+    if (t->get_ts_flip_start() && !t->is_dead) {
       if (game->robot_mode) {
         if ((wait_count > wait_count_max) && !game->things_are_moving) {
           t->con("Waiting on flipping thing longer than expected");
@@ -276,7 +277,7 @@ bool Level::tick (void)
         // Make sure offscreen animation occurs.
         //
         if (t->is_offscreen) {
-          t->set_timestamp_flip_start(0);
+          t->set_ts_flip_start(0);
         }
       }
     }
@@ -442,7 +443,7 @@ bool Level::tick (void)
   //
   // If the level has started, we can enter robot mode.
   //
-  if (!timestamp_fade_in_begin) {
+  if (!ts_fade_in_begin) {
     if (game->robot_mode_requested != game->robot_mode) {
       game->robot_mode = game->robot_mode_requested;
       game->robot_mode_tick_requested = true;

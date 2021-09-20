@@ -1,6 +1,7 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
+// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #include "my_sys.h"
@@ -349,12 +350,20 @@ static void gl_init_fbo_ (int fbo,
 
 #ifdef GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT
     if (status == GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT) {
-      ERR("OpenGl: - GFX: GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT Not all framebuffer attachment points are framebuffer attachment complete. This means that at least one attachment point with a renderbuffer or texture attached has its attached object no longer in existence or has an attached image with a width or height of zero, or the color attachment point has a non-color-renderable image attached, or the depth attachment point has a non-depth-renderable image attached, or the stencil attachment point has a non-stencil-renderable image attached.  Color-renderable formats include GL_RGBA4, GL_RGB5_A1, and GL_RGB565. GL_DEPTH_COMPONENT16 is the only depth-renderable format. GL_STENCIL_INDEX8 is the only stencil-renderable format.");
+      ERR("OpenGl: - GFX: GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT Not all framebuffer attachment points "
+          "are framebuffer attachment complete. This means that at least one attachment point with a "
+          "renderbuffer or texture attached has its attached object no longer in existence or has an "
+          "attached image with a width or height of zero, or the color attachment point has a "
+          "non-color-renderable image attached, or the depth attachment point has a non-depth-renderable "
+          "image attached, or the stencil attachment point has a non-stencil-renderable image attached. "
+          "Color-renderable formats include GL_RGBA4, GL_RGB5_A1, and GL_RGB565. GL_DEPTH_COMPONENT16 is "
+          "the only depth-renderable format. GL_STENCIL_INDEX8 is the only stencil-renderable format.");
     }
 #endif
 #ifdef GL_FRAMEBUFFER_INCOMPLETE_DIMENSIONS
     if (status == GL_FRAMEBUFFER_INCOMPLETE_DIMENSIONS) {
-      ERR("OpenGl: - GFX: GL_FRAMEBUFFER_INCOMPLETE_DIMENSIONS Not all attached images have the same width and height.");
+      ERR("OpenGl: - GFX: GL_FRAMEBUFFER_INCOMPLETE_DIMENSIONS Not all attached images have the same "
+          "width and height.");
     }
 #endif
 #ifdef GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT
@@ -364,7 +373,8 @@ static void gl_init_fbo_ (int fbo,
 #endif
 #ifdef GL_FRAMEBUFFER_UNSUPPORTED
     if (status == GL_FRAMEBUFFER_UNSUPPORTED) {
-      ERR("OpenGl: - GFX: GL_FRAMEBUFFER_UNSUPPORTED The combination of internal formats of the attached images violates an implementation-dependent set of restrictions.");
+      ERR("OpenGl: - GFX: GL_FRAMEBUFFER_UNSUPPORTED The combination of internal formats of the attached images "
+          "violates an implementation-dependent set of restrictions.");
     }
 #endif
 #ifdef GL_FRAMEBUFFER_UNSUPPORTED

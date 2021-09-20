@@ -1,6 +1,7 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
+// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #pragma once
@@ -28,8 +29,8 @@ public:
   //
   std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_light_blocker {};
   std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_lit_ever {};
-  std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_movement_blocking_wall_or_locked_door {};
-  std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_movement_blocking_but_destructable {};
+  std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_obs_wall_or_door {};
+  std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_obs_destructable {};
   std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _fade_in_map {};
   std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _gfx_water {};
   std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _heatmap {};
@@ -84,10 +85,10 @@ public:
   //
   // When this Level was made. Used to restore timestamps relative to this.
   //
-  timestamp_t                timestamp_dungeon_created {};
-  timestamp_t                timestamp_dungeon_saved {};
-  timestamp_t                timestamp_fade_out_begin {};
-  timestamp_t                timestamp_fade_in_begin {};
+  ts_t                ts_dungeon_created {};
+  ts_t                ts_dungeon_saved {};
+  ts_t                ts_fade_out_begin {};
+  ts_t                ts_fade_in_begin {};
 
   //
   // Where we are in the world
@@ -241,7 +242,7 @@ public:
   //
   // If set, redraw the background; allows for dampening
   //
-  timestamp_t                timestamp_redraw_bg {};
+  ts_t                ts_redraw_bg {};
 
   //
   // For thing effects, like jumping
@@ -502,14 +503,14 @@ public:
   bool is_light_blocker(const point &p) const;
   bool is_light_blocker_no_check(const int x, const int y) const;
   bool is_light_blocker_no_check(const point &p) const;
-  bool is_movement_blocking_wall_or_locked_door(const int x, const int y) const;
-  bool is_movement_blocking_wall_or_locked_door(const point &p) const;
-  bool is_movement_blocking_wall_or_locked_door_no_check(const int x, const int y) const;
-  bool is_movement_blocking_wall_or_locked_door_no_check(const point &p) const;
-  bool is_movement_blocking_but_destructable(const int x, const int y) const;
-  bool is_movement_blocking_but_destructable(const point &p) const;
-  bool is_movement_blocking_but_destructable_no_check(const int x, const int y) const;
-  bool is_movement_blocking_but_destructable_no_check(const point &p) const;
+  bool is_obs_wall_or_door(const int x, const int y) const;
+  bool is_obs_wall_or_door(const point &p) const;
+  bool is_obs_wall_or_door_no_check(const int x, const int y) const;
+  bool is_obs_wall_or_door_no_check(const point &p) const;
+  bool is_obs_destructable(const int x, const int y) const;
+  bool is_obs_destructable(const point &p) const;
+  bool is_obs_destructable_no_check(const int x, const int y) const;
+  bool is_obs_destructable_no_check(const point &p) const;
   bool is_oob(const fpoint p) const;
   bool is_oob(const int x, const int y) const;
   bool is_oob(const int x, const int y, const int z) const;
@@ -796,10 +797,10 @@ public:
   void set_is_lit_ever_no_check(const int x, const int y);
   void set_is_minion_generator(const int x, const int y);
   void set_is_monst(const int x, const int y);
-  void set_is_movement_blocking_wall_or_locked_door(const int x, const int y);
-  void set_is_movement_blocking_wall_or_locked_door_no_check(const int x, const int y);
-  void set_is_movement_blocking_but_destructable(const int x, const int y);
-  void set_is_movement_blocking_but_destructable_no_check(const int x, const int y);
+  void set_is_obs_wall_or_door(const int x, const int y);
+  void set_is_obs_wall_or_door_no_check(const int x, const int y);
+  void set_is_obs_destructable(const int x, const int y);
+  void set_is_obs_destructable_no_check(const int x, const int y);
   void set_is_poison(const int x, const int y);
   void set_is_potion(const int x, const int y);
   void set_is_ripple(const int x, const int y);
@@ -862,10 +863,10 @@ public:
   void unset_is_lit_ever_no_check(const int x, const int y);
   void unset_is_minion_generator(const int x, const int y);
   void unset_is_monst(const int x, const int y);
-  void unset_is_movement_blocking_wall_or_locked_door(const int x, const int y);
-  void unset_is_movement_blocking_wall_or_locked_door_no_check(const int x, const int y);
-  void unset_is_movement_blocking_but_destructable(const int x, const int y);
-  void unset_is_movement_blocking_but_destructable_no_check(const int x, const int y);
+  void unset_is_obs_wall_or_door(const int x, const int y);
+  void unset_is_obs_wall_or_door_no_check(const int x, const int y);
+  void unset_is_obs_destructable(const int x, const int y);
+  void unset_is_obs_destructable_no_check(const int x, const int y);
   void unset_is_poison(const int x, const int y);
   void unset_is_potion(const int x, const int y);
   void unset_is_ripple(const int x, const int y);

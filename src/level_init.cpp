@@ -1,6 +1,7 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
+// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #include "my_sys.h"
@@ -45,8 +46,8 @@ void Level::clear (void)
   _is_lit_currently = {};
   _is_lit_ever = {};
   _is_monst = {};
-  _is_movement_blocking_wall_or_locked_door = {};
-  _is_movement_blocking_but_destructable = {};
+  _is_obs_wall_or_door = {};
+  _is_obs_destructable = {};
   _is_poison = {};
   _is_rock = {};
   _is_shallow_water = {};
@@ -61,6 +62,6 @@ void Level::clear (void)
   _is_treasure_type = {};
   _is_wall = {};
 
-  timestamp_dungeon_created = time_get_time_ms();
-  timestamp_dungeon_saved = 0;
+  ts_dungeon_created = time_get_time_ms();
+  ts_dungeon_saved = 0;
 }

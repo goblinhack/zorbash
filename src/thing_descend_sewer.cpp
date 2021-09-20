@@ -1,6 +1,7 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
+// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #include "my_sys.h"
@@ -37,7 +38,7 @@ bool Thing::descend_sewer_tick (void)
   if (is_player()) {
     if (level->world_at.z & 1) {
       dbg("Descending sewer");
-      level->timestamp_fade_out_begin = time_get_time_ms_cached();
+      level->ts_fade_out_begin = time_get_time_ms_cached();
       level->fbo_light = sdl_fbo_save(FBO_FULLMAP_LIGHT);
       is_waiting_to_descend_sewer = true;
       move_finish();
@@ -139,7 +140,7 @@ bool Thing::descend_sewer (void)
   is_changing_level = false;
   dbg("Moved to next level sewer");
   if (is_player()) {
-    level->timestamp_fade_in_begin = time_get_time_ms_cached();
+    level->ts_fade_in_begin = time_get_time_ms_cached();
     level->update_new_level();
 
     if (game->robot_mode) {

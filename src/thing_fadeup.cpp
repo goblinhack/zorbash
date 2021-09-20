@@ -1,6 +1,7 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
+// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #include <math.h>
@@ -13,10 +14,10 @@
 
 void Thing::fadeup (float fadeup_height,
           float fadeup_fade,
-          timestamp_t ms)
+          ts_t ms)
 {
-  auto t = set_timestamp_fadeup_begin(time_get_time_ms_cached());
-  set_timestamp_fadeup_end(t + ms);
+  auto t = set_ts_fadeup_begin(time_get_time_ms_cached());
+  set_ts_fadeup_end(t + ms);
 
   set_fadeup_height(fadeup_height);
   set_fadeup_fade(fadeup_fade);
@@ -32,15 +33,15 @@ float Thing::get_fadeup (void)
 
   auto t = time_get_time_ms_cached();
 
-  if (t >= get_timestamp_fadeup_end()) {
+  if (t >= get_ts_fadeup_end()) {
     dead("by fadeup finished");
     alpha = 0;
     return (-1);
   }
 
   float time_step =
-    (float)(t - get_timestamp_fadeup_begin()) /
-    (float)(get_timestamp_fadeup_end() - get_timestamp_fadeup_begin());
+    (float)(t - get_ts_fadeup_begin()) /
+    (float)(get_ts_fadeup_end() - get_ts_fadeup_begin());
 
   float height = last_blit_br.y - last_blit_tl.y;
 

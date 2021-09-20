@@ -1,6 +1,7 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
+// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #pragma once
@@ -118,16 +119,16 @@ public:
   std::vector<point>    move_path;
   std::vector<uint16_t> inventory_id;      // Vector of tp_id
   std::vector<uint16_t> skillbox_id;       // Vector of tp_id
-  timestamp_t  timestamp_bounce_begin {};
-  timestamp_t  timestamp_bounce_end {};
-  timestamp_t  timestamp_fadeup_begin {};
-  timestamp_t  timestamp_fadeup_end {};
-  timestamp_t  timestamp_fall_begin {};
-  timestamp_t  timestamp_fall_end {};
-  timestamp_t  timestamp_flip_start {};    // Used for animating the steps.
-  timestamp_t  timestamp_lunge_begin {};
-  timestamp_t  timestamp_lunge_end {};
-  timestamp_t  timestamp_anim_delay_end {};
+  ts_t  ts_bounce_begin {};
+  ts_t  ts_bounce_end {};
+  ts_t  ts_fadeup_begin {};
+  ts_t  ts_fadeup_end {};
+  ts_t  ts_fall_begin {};
+  ts_t  ts_fall_end {};
+  ts_t  ts_flip_start {};    // Used for animating the steps.
+  ts_t  ts_lunge_begin {};
+  ts_t  ts_lunge_end {};
+  ts_t  ts_anim_delay_end {};
   //
   // Used for calling on_idle()
   //

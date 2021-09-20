@@ -1,6 +1,7 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
+// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #include "my_sys.h"
@@ -43,10 +44,10 @@ _
     // Don't move onto lava unless double click
     //
     auto to = make_fpoint(game->minimap_over);
-    if (!wid_mouse_double_click) {
+    if (!wid_mouse_two_clicks) {
       if (cursor) {_
         FOR_ALL_THINGS(this, t, to.x, to.y) {
-          if (t->is_cursor_can_hover_over_but_needs_double_click()) {
+          if (t->is_cursor_can_hover_over_2x_click()) {
             goto done;
           }
         } FOR_ALL_THINGS_END()

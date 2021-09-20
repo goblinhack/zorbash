@@ -12,7 +12,7 @@ def tp_init(name, text_name, tiles=[]):
     mytp.set_gfx_animated(True)
     mytp.set_gfx_flickers(True)
     mytp.set_gfx_glows(True)
-    mytp.set_gfx_oversized_but_sitting_on_the_ground(True)
+    mytp.set_gfx_oversized_and_on_floor(True)
     mytp.set_gfx_short_shadow_caster(True)
     mytp.set_gfx_show_outlined(True)
     mytp.set_is_able_to_fall(True)

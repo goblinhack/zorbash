@@ -1,6 +1,7 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
+// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #include "my_sys.h"
@@ -44,7 +45,7 @@ void Thing::on_fall (void)
   }
 }
 
-void Thing::fall (float fall_height, timestamp_t ms)
+void Thing::fall (float fall_height, ts_t ms)
 {_
   dbg("Can fall?");
 _
@@ -76,8 +77,8 @@ _
     return;
   }
 
-  auto t = set_timestamp_fall_begin(time_get_time_ms_cached());
-  set_timestamp_fall_end(t + ms);
+  auto t = set_ts_fall_begin(time_get_time_ms_cached());
+  set_ts_fall_end(t + ms);
 
   set_fall_height(fall_height);
 
@@ -113,7 +114,7 @@ float Thing::get_fall (void)
 {
   auto t = time_get_time_ms_cached();
 
-  if (t >= get_timestamp_fall_end()) {
+  if (t >= get_ts_fall_end()) {
     is_falling = false;
     dbg("End of falling timestamp");
     level_push();
@@ -122,8 +123,8 @@ float Thing::get_fall (void)
   }
 
   float time_step =
-    (float)(t - get_timestamp_fall_begin()) /
-    (float)(get_timestamp_fall_end() - get_timestamp_fall_begin());
+    (float)(t - get_ts_fall_begin()) /
+    (float)(get_ts_fall_end() - get_ts_fall_begin());
 
   //
   // This hide things like the sword
@@ -133,7 +134,7 @@ float Thing::get_fall (void)
 
     if (is_player()) {
       dbg("Player is waiting to complete the fall");
-      level->timestamp_fade_out_begin = time_get_time_ms_cached();
+      level->ts_fade_out_begin = time_get_time_ms_cached();
       is_waiting_to_fall = true;
     }
   }
@@ -348,7 +349,7 @@ _
 
       if (is_player()) {
         game->tick_begin("finished fall to next level");
-        level->timestamp_fade_in_begin = time_get_time_ms_cached();
+        level->ts_fade_in_begin = time_get_time_ms_cached();
         level->update_new_level();
       }
 

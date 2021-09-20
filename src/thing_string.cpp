@@ -1,6 +1,7 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
+// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #include "my_game.h"
@@ -244,8 +245,8 @@ std::string Thing::to_dbg_string (void) const
               i_set_is_light_blocker          ?  ", i_set_is_light_blocker" : "",
               i_set_is_minion_generator       ?  ", i_set_is_minion_generator" : "",
               i_set_is_monst                  ?  ", i_set_is_monst" : "",
-              i_set_is_movement_blocking_wall_or_locked_door ?  ", i_set_is_movement_blocking_wall_or_locked_door" : "",
-              i_set_is_movement_blocking_but_destructable ?  ", i_set_is_movement_blocking_but_destructable" : "",
+              i_set_is_obs_wall_or_door ?  ", i_set_is_obs_wall_or_door" : "",
+              i_set_is_obs_destructable ?  ", i_set_is_obs_destructable" : "",
               i_set_is_poison                 ?  ", i_set_is_poison" : "",
               i_set_is_potion                 ?  ", i_set_is_potion" : "",
               i_set_is_ripple                 ?  ", i_set_is_ripple" : "",
@@ -344,8 +345,8 @@ std::string Thing::to_dbg_saved_string (void) const
               i_set_is_light_blocker          ?  ", i_set_is_light_blocker" : "",
               i_set_is_minion_generator       ?  ", i_set_is_minion_generator" : "",
               i_set_is_monst                  ?  ", i_set_is_monst" : "",
-              i_set_is_movement_blocking_wall_or_locked_door ?  ", i_set_is_movement_blocking_wall_or_locked_door" : "",
-              i_set_is_movement_blocking_but_destructable ?  ", i_set_is_movement_blocking_but_destructable" : "",
+              i_set_is_obs_wall_or_door ?  ", i_set_is_obs_wall_or_door" : "",
+              i_set_is_obs_destructable ?  ", i_set_is_obs_destructable" : "",
               i_set_is_poison                 ?  ", i_set_is_poison" : "",
               i_set_is_potion                 ?  ", i_set_is_potion" : "",
               i_set_is_ripple                 ?  ", i_set_is_ripple" : "",

@@ -1,6 +1,7 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
+// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #include "my_sys.h"
@@ -26,33 +27,34 @@
 WidPopup *wid_load;
 void wid_load_destroy(void);
 
-static timestamp_t old_timestamp_dungeon_created;
-static timestamp_t new_timestamp_dungeon_created;
-static timestamp_t T;
+static ts_t old_ts_dungeon_created;
+static ts_t new_ts_dungeon_created;
+static ts_t T;
 static std::string game_load_error;
 bool game_load_headers_only;
 extern int GAME_SAVE_MARKER_EOL;
 std::array<bool, UI_WID_SAVE_SLOTS> slot_valid;
 
-#define READ_MAGIC(what, m) { \
-  uint32_t magic; \
-  in >> bits(magic); \
-  if (magic != m) { \
-    game_load_error = \
-      "bad " what " magic expected: " + std::to_string(m) + " got " + std::to_string(magic); \
-    return (in); \
-  } \
+#define READ_MAGIC(what, m) {                               \
+  uint32_t magic;                                           \
+  in >> bits(magic);                                        \
+  if (magic != m) {                                         \
+    game_load_error =                                       \
+      "bad " what " magic expected: " + std::to_string(m) + \
+      " got " + std::to_string(magic);                      \
+    return (in);                                            \
+  }                                                         \
 }
 
 //
 // Save timestamps as a delta we can restore.
 //
-static timestamp_t load (timestamp_t T)
+static ts_t load (ts_t T)
 {_
   if (!T) {
     return (0);
   }
-  return (T - old_timestamp_dungeon_created + new_timestamp_dungeon_created);
+  return (T - old_ts_dungeon_created + new_ts_dungeon_created);
 }
 
 std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
@@ -64,89 +66,89 @@ std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
   // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
   // v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v
   /////////////////////////////////////////////////////////////////////////
-  /* ThingId      on_fire_id_anim           */ in >> bits(my.t->on_fire_id_anim);
-  /* ThingId      owner_id                  */ in >> bits(my.t->owner_id);
-  /* ThingId      minion_owner_id           */ in >> bits(my.t->minion_owner_id);
-  /* ThingId      spawner_owner_id          */ in >> bits(my.t->spawner_owner_id);
-  /* ThingId      weapon_id                 */ in >> bits(my.t->weapon_id);
-  /* ThingId      weapon_id_carry_anim      */ in >> bits(my.t->weapon_id_carry_anim);
-  /* ThingId      weapon_id_use_anim        */ in >> bits(my.t->weapon_id_use_anim);
-  /* color        light_col                 */ in >> bits(my.t->light_col);
-  /* float        bounce_fade               */ in >> bits(my.t->bounce_fade);
-  /* float        bounce_height             */ in >> bits(my.t->bounce_height);
-  /* float        fadeup_fade               */ in >> bits(my.t->fadeup_fade);
-  /* float        fadeup_height             */ in >> bits(my.t->fadeup_height);
-  /* float        fall_height               */ in >> bits(my.t->fall_height);
-  /* float        wobble                    */ in >> bits(my.t->wobble);
-  /* fpoint       lunge_to                  */ in >> bits(my.t->lunge_to);
-  /* int          bounce_count              */ in >> bits(my.t->bounce_count);
-  /* int          capacity_height           */ in >> bits(my.t->capacity_height);
-  /* int          capacity_width            */ in >> bits(my.t->capacity_width);
-  /* int          charge_count              */ in >> bits(my.t->charge_count);
-  /* int          enchant                   */ in >> bits(my.t->enchant);
-  /* int          enchant                   */ in >> bits(my.t->enchant_max);
-  /* int          gold                      */ in >> bits(my.t->gold);
-  /* int          health                    */ in >> bits(my.t->health);
-  /* int          health                    */ in >> bits(my.t->health_max);
-  /* int          keys                      */ in >> bits(my.t->keys);
-  /* int          lifespan                  */ in >> bits(my.t->lifespan);
-  /* int          light_quality             */ in >> bits(my.t->light_quality);
-  /* int          light_strength            */ in >> bits(my.t->light_strength);
-  /* int          minion_count              */ in >> bits(my.t->minion_count);
-  /* int          owned_count               */ in >> bits(my.t->owned_count);
-  /* int          poison                    */ in >> bits(my.t->poison);
-  /* int          robot_state               */ in >> bits(my.t->robot_state);
-  /* int          stamina                   */ in >> bits(my.t->stamina);
-  /* int          stamina                   */ in >> bits(my.t->stamina_max);
-  /* int          stat_attack               */ in >> bits(my.t->stat_attack);
-  /* int          stat_constitution         */ in >> bits(my.t->stat_constitution);
-  /* int          stat_defence              */ in >> bits(my.t->stat_defence);
-  /* int          stats01                   */ in >> bits(my.t->stats01);
-  /* int          stats02                   */ in >> bits(my.t->stats02);
-  /* int          stats03                   */ in >> bits(my.t->stats03);
-  /* int          stats04                   */ in >> bits(my.t->stats04);
-  /* int          stats05                   */ in >> bits(my.t->stats05);
-  /* int          stats06                   */ in >> bits(my.t->stats06);
-  /* int          stats07                   */ in >> bits(my.t->stats07);
-  /* int          stats08                   */ in >> bits(my.t->stats08);
-  /* int          stats09                   */ in >> bits(my.t->stats09);
-  /* int          stats10                   */ in >> bits(my.t->stats10);
-  /* int          stats11                   */ in >> bits(my.t->stats11);
-  /* int          stats12                   */ in >> bits(my.t->stats12);
-  /* int          stats17                   */ in >> bits(my.t->stats17);
-  /* int          stats19                   */ in >> bits(my.t->stats19);
-  /* int          stat_strength             */ in >> bits(my.t->stat_strength);
-  /* int          submerged_offset          */ in >> bits(my.t->submerged_offset);
-  /* int          throw_distance            */ in >> bits(my.t->throw_distance);
-  /* int          tick_resurrect_when       */ in >> bits(my.t->tick_resurrect_when);
-  /* point        bag_position              */ in >> bits(my.t->bag_position);
-  /* point        wander_target             */ in >> bits(my.t->wander_target);
-  /* point     where_i_dropped_an_item_last */ in >> bits(my.t->where_i_dropped_an_item_last);
-  /* point   where_i_failed_to_collect_last */ in >> bits(my.t->where_i_failed_to_collect_last);
-  /* std::array<std::array<ThingId > >      */ in >> bits(my.t->bag);
-  /* std::list<ThingId>   carrying          */ in >> bits(my.t->carrying);
-  /* std::list<ThingId>   skills            */ in >> bits(my.t->skills);
-  /* std::string          msg               */ in >> bits(my.t->msg);
-  /* std::string          dead_reason       */ in >> bits(my.t->dead_reason);
-  /* std::vector<ThingId> enemies           */ in >> bits(my.t->enemies);
-  /* std::vector<point>   move_path         */ in >> bits(my.t->move_path);
-  /* std::vector<uint16_t> inventory_id     */ in >> bits(my.t->inventory_id);
-  /* std::vector<uint16_t> skillbox_id      */ in >> bits(my.t->skillbox_id);
-  /* timestamp_t  timestamp_bounce_begin    */ in >> bits(T); my.t->timestamp_bounce_begin = load(T);
-  /* timestamp_t  timestamp_bounce_end      */ in >> bits(T); my.t->timestamp_bounce_end = load(T);
-  /* timestamp_t  timestamp_fadeup_begin    */ in >> bits(T); my.t->timestamp_fadeup_begin = load(T);
-  /* timestamp_t  timestamp_fadeup_end      */ in >> bits(T); my.t->timestamp_fadeup_end = load(T);
-  /* timestamp_t  timestamp_fall_begin      */ in >> bits(T); my.t->timestamp_fall_begin = load(T);
-  /* timestamp_t  timestamp_fall_end        */ in >> bits(T); my.t->timestamp_fall_end = load(T);
-  /* timestamp_t  timestamp_flip_start      */ in >> bits(T); my.t->timestamp_flip_start = load(T);
-  /* timestamp_t  timestamp_lunge_begin     */ in >> bits(T); my.t->timestamp_lunge_begin = load(T);
-  /* timestamp_t  timestamp_lunge_end       */ in >> bits(T); my.t->timestamp_lunge_end = load(T);
-  /* timestamp_t  timestamp_anim_delay_end  */ in >> bits(T); my.t->timestamp_anim_delay_end = load(T);
-  /* uint32_t     tick_last_did_something   */ in >> bits(my.t->tick_last_did_something);
-  /* uint32_t     tick_last_dropped         */ in >> bits(my.t->tick_last_dropped);
-  /* uint32_t     tick_last_location_check  */ in >> bits(my.t->tick_last_location_check);
-  /* uint32_t     tick_last_escape          */ in >> bits(my.t->tick_last_escape);
-  /* uint32_t     tick_last_level_change    */ in >> bits(my.t->tick_last_level_change);
+/* ThingId      on_fire_id_anim           */ in >> bits(my.t->on_fire_id_anim);
+/* ThingId      owner_id                  */ in >> bits(my.t->owner_id);
+/* ThingId      minion_owner_id           */ in >> bits(my.t->minion_owner_id);
+/* ThingId      spawner_owner_id          */ in >> bits(my.t->spawner_owner_id);
+/* ThingId      weapon_id                 */ in >> bits(my.t->weapon_id);
+/* ThingId      weapon_id_carry_anim      */ in >> bits(my.t->weapon_id_carry_anim);
+/* ThingId      weapon_id_use_anim        */ in >> bits(my.t->weapon_id_use_anim);
+/* color        light_col                 */ in >> bits(my.t->light_col);
+/* float        bounce_fade               */ in >> bits(my.t->bounce_fade);
+/* float        bounce_height             */ in >> bits(my.t->bounce_height);
+/* float        fadeup_fade               */ in >> bits(my.t->fadeup_fade);
+/* float        fadeup_height             */ in >> bits(my.t->fadeup_height);
+/* float        fall_height               */ in >> bits(my.t->fall_height);
+/* float        wobble                    */ in >> bits(my.t->wobble);
+/* fpoint       lunge_to                  */ in >> bits(my.t->lunge_to);
+/* int          bounce_count              */ in >> bits(my.t->bounce_count);
+/* int          capacity_height           */ in >> bits(my.t->capacity_height);
+/* int          capacity_width            */ in >> bits(my.t->capacity_width);
+/* int          charge_count              */ in >> bits(my.t->charge_count);
+/* int          enchant                   */ in >> bits(my.t->enchant);
+/* int          enchant                   */ in >> bits(my.t->enchant_max);
+/* int          gold                      */ in >> bits(my.t->gold);
+/* int          health                    */ in >> bits(my.t->health);
+/* int          health                    */ in >> bits(my.t->health_max);
+/* int          keys                      */ in >> bits(my.t->keys);
+/* int          lifespan                  */ in >> bits(my.t->lifespan);
+/* int          light_quality             */ in >> bits(my.t->light_quality);
+/* int          light_strength            */ in >> bits(my.t->light_strength);
+/* int          minion_count              */ in >> bits(my.t->minion_count);
+/* int          owned_count               */ in >> bits(my.t->owned_count);
+/* int          poison                    */ in >> bits(my.t->poison);
+/* int          robot_state               */ in >> bits(my.t->robot_state);
+/* int          stamina                   */ in >> bits(my.t->stamina);
+/* int          stamina                   */ in >> bits(my.t->stamina_max);
+/* int          stat_attack               */ in >> bits(my.t->stat_attack);
+/* int          stat_constitution         */ in >> bits(my.t->stat_constitution);
+/* int          stat_defence              */ in >> bits(my.t->stat_defence);
+/* int          stats01                   */ in >> bits(my.t->stats01);
+/* int          stats02                   */ in >> bits(my.t->stats02);
+/* int          stats03                   */ in >> bits(my.t->stats03);
+/* int          stats04                   */ in >> bits(my.t->stats04);
+/* int          stats05                   */ in >> bits(my.t->stats05);
+/* int          stats06                   */ in >> bits(my.t->stats06);
+/* int          stats07                   */ in >> bits(my.t->stats07);
+/* int          stats08                   */ in >> bits(my.t->stats08);
+/* int          stats09                   */ in >> bits(my.t->stats09);
+/* int          stats10                   */ in >> bits(my.t->stats10);
+/* int          stats11                   */ in >> bits(my.t->stats11);
+/* int          stats12                   */ in >> bits(my.t->stats12);
+/* int          stats17                   */ in >> bits(my.t->stats17);
+/* int          stats19                   */ in >> bits(my.t->stats19);
+/* int          stat_strength             */ in >> bits(my.t->stat_strength);
+/* int          submerged_offset          */ in >> bits(my.t->submerged_offset);
+/* int          throw_distance            */ in >> bits(my.t->throw_distance);
+/* int          tick_resurrect_when       */ in >> bits(my.t->tick_resurrect_when);
+/* point        bag_position              */ in >> bits(my.t->bag_position);
+/* point        wander_target             */ in >> bits(my.t->wander_target);
+/* point     where_i_dropped_an_item_last */ in >> bits(my.t->where_i_dropped_an_item_last);
+/* point   where_i_failed_to_collect_last */ in >> bits(my.t->where_i_failed_to_collect_last);
+/* std::array<std::array<ThingId > >      */ in >> bits(my.t->bag);
+/* std::list<ThingId>   carrying          */ in >> bits(my.t->carrying);
+/* std::list<ThingId>   skills            */ in >> bits(my.t->skills);
+/* std::string          msg               */ in >> bits(my.t->msg);
+/* std::string          dead_reason       */ in >> bits(my.t->dead_reason);
+/* std::vector<ThingId> enemies           */ in >> bits(my.t->enemies);
+/* std::vector<point>   move_path         */ in >> bits(my.t->move_path);
+/* std::vector<uint16_t> inventory_id     */ in >> bits(my.t->inventory_id);
+/* std::vector<uint16_t> skillbox_id      */ in >> bits(my.t->skillbox_id);
+/* ts_t  ts_bounce_begin    */ in >> bits(T); my.t->ts_bounce_begin = load(T);
+/* ts_t  ts_bounce_end      */ in >> bits(T); my.t->ts_bounce_end = load(T);
+/* ts_t  ts_fadeup_begin    */ in >> bits(T); my.t->ts_fadeup_begin = load(T);
+/* ts_t  ts_fadeup_end      */ in >> bits(T); my.t->ts_fadeup_end = load(T);
+/* ts_t  ts_fall_begin      */ in >> bits(T); my.t->ts_fall_begin = load(T);
+/* ts_t  ts_fall_end        */ in >> bits(T); my.t->ts_fall_end = load(T);
+/* ts_t  ts_flip_start      */ in >> bits(T); my.t->ts_flip_start = load(T);
+/* ts_t  ts_lunge_begin     */ in >> bits(T); my.t->ts_lunge_begin = load(T);
+/* ts_t  ts_lunge_end       */ in >> bits(T); my.t->ts_lunge_end = load(T);
+/* ts_t  ts_anim_delay_end  */ in >> bits(T); my.t->ts_anim_delay_end = load(T);
+/* uint32_t     tick_last_did_something   */ in >> bits(my.t->tick_last_did_something);
+/* uint32_t     tick_last_dropped         */ in >> bits(my.t->tick_last_dropped);
+/* uint32_t     tick_last_location_check  */ in >> bits(my.t->tick_last_location_check);
+/* uint32_t     tick_last_escape          */ in >> bits(my.t->tick_last_escape);
+/* uint32_t     tick_last_level_change    */ in >> bits(my.t->tick_last_level_change);
   /////////////////////////////////////////////////////////////////////////
   // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
   // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
@@ -211,7 +213,7 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
   in >> bits(my.t->last_blit_br);
   in >> bits(my.t->last_blit_tl);
   in >> bits(my.t->last_blit_at);
-  in >> bits(T); my.t->timestamp_next_frame = load(T);
+  in >> bits(T); my.t->ts_next_frame = load(T);
   in >> bits(my.t->tile_curr);
   in >> bits(my.t->alpha);
   in >> bits(my.t->z_depth);
@@ -297,8 +299,8 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
   /* uint64_t */            my.t->i_set_is_light_blocker          = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   /* uint64_t */            my.t->i_set_is_minion_generator       = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   /* uint64_t */            my.t->i_set_is_monst                  = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
-  /* uint64_t */            my.t->i_set_is_movement_blocking_wall_or_locked_door = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
-  /* uint64_t */            my.t->i_set_is_movement_blocking_but_destructable = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+  /* uint64_t */            my.t->i_set_is_obs_wall_or_door = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+  /* uint64_t */            my.t->i_set_is_obs_destructable = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   /* uint64_t */            my.t->i_set_is_poison                 = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   /* uint64_t */            my.t->i_set_is_potion                 = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   /* uint64_t */            my.t->i_set_is_ripple                 = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
@@ -361,70 +363,70 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
   uint32_t csum_in = 0;
   in >> bits(csum_in);
 
-  in >> bits(l->timestamp_dungeon_created); old_timestamp_dungeon_created = l->timestamp_dungeon_created;
-  in >> bits(l->timestamp_dungeon_saved);
-  auto dungeon_age = l->timestamp_dungeon_saved -
-             l->timestamp_dungeon_created;
-  new_timestamp_dungeon_created = time_get_time_ms() - dungeon_age;
-  l->timestamp_dungeon_created = new_timestamp_dungeon_created;
-  l->timestamp_dungeon_saved = new_timestamp_dungeon_created + dungeon_age;
-  in >> bits(l->timestamp_fade_out_begin);
-  in >> bits(l->timestamp_fade_in_begin);
+  in >> bits(l->ts_dungeon_created); old_ts_dungeon_created = l->ts_dungeon_created;
+  in >> bits(l->ts_dungeon_saved);
+  auto dungeon_age = l->ts_dungeon_saved -
+             l->ts_dungeon_created;
+  new_ts_dungeon_created = time_get_time_ms() - dungeon_age;
+  l->ts_dungeon_created = new_ts_dungeon_created;
+  l->ts_dungeon_saved = new_ts_dungeon_created + dungeon_age;
+  in >> bits(l->ts_fade_out_begin);
+  in >> bits(l->ts_fade_in_begin);
 
-  /* std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_light_blocker {};          */ in >> bits(my.t->_is_light_blocker);
-  /* std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_lit_ever {};               */ in >> bits(my.t->_is_lit_ever);
-  /* std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_movement_blocking_wall_or_locked_door {}; */ in >> bits(my.t->_is_movement_blocking_wall_or_locked_door);
-  /* std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_movement_blocking_but_destructable {}; */ in >> bits(my.t->_is_movement_blocking_but_destructable);
-  /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _fade_in_map {};            */ in >> bits(my.t->_fade_in_map);
-  /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _gfx_water {};              */ in >> bits(my.t->_gfx_water);
-  /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _heatmap {};                */ in >> bits(my.t->_heatmap);
-  /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_able_to_stand_on {};    */ in >> bits(my.t->_is_able_to_stand_on);
-  /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_acid {};                */ in >> bits(my.t->_is_acid);
-  /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_ascend_dungeon {};      */ in >> bits(my.t->_is_ascend_dungeon);
-  /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_ascend_sewer {};        */ in >> bits(my.t->_is_ascend_sewer);
-  /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_barrel {};              */ in >> bits(my.t->_is_barrel);
-  /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_blood {};               */ in >> bits(my.t->_is_blood);
-  /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_brazier {};             */ in >> bits(my.t->_is_brazier);
-  /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_bridge {};              */ in >> bits(my.t->_is_bridge);
-  /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_chasm {};               */ in >> bits(my.t->_is_chasm);
-  /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_corpse {};              */ in >> bits(my.t->_is_corpse);
-  /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_corridor {};            */ in >> bits(my.t->_is_corridor);
-  /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_deep_water {};          */ in >> bits(my.t->_is_deep_water);
-  /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_descend_dungeon {};     */ in >> bits(my.t->_is_descend_dungeon);
-  /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_descend_sewer {};       */ in >> bits(my.t->_is_descend_sewer);
-  /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_dirt {};                */ in >> bits(my.t->_is_dirt);
-  /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_door {};                */ in >> bits(my.t->_is_door);
-  /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_dry_grass {};           */ in >> bits(my.t->_is_dry_grass);
-  /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_enchantstone {};        */ in >> bits(my.t->_is_enchantstone);
-  /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_extreme_hazard {};      */ in >> bits(my.t->_is_extreme_hazard);
-  /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_fire {};                */ in >> bits(my.t->_is_fire);
-  /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_floor {};               */ in >> bits(my.t->_is_floor);
-  /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_foilage {};             */ in >> bits(my.t->_is_foilage);
-  /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_food {};                */ in >> bits(my.t->_is_food);
-  /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_gold {};                */ in >> bits(my.t->_is_gold);
-  /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_hazard {};              */ in >> bits(my.t->_is_hazard);
-  /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_key {};                 */ in >> bits(my.t->_is_key);
-  /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_lava {};                */ in >> bits(my.t->_is_lava);
-  /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_lit_currently {};       */ in >> bits(my.t->_is_lit_currently);
-  /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_minion_generator {};    */ in >> bits(my.t->_is_minion_generator);
-  /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_monst {};               */ in >> bits(my.t->_is_monst);
-  /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_poison {};              */ in >> bits(my.t->_is_poison);
-  /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_potion {};              */ in >> bits(my.t->_is_potion);
-  /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_ripple {};              */ in >> bits(my.t->_is_ripple);
-  /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_rock {};                */ in >> bits(my.t->_is_rock);
-  /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_secret_door {};         */ in >> bits(my.t->_is_secret_door);
-  /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_shallow_water {};       */ in >> bits(my.t->_is_shallow_water);
-  /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_skillstone {};          */ in >> bits(my.t->_is_skillstone);
-  /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_smoke {};               */ in >> bits(my.t->_is_smoke);
-  /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_spiderweb {};           */ in >> bits(my.t->_is_spiderweb);
-  /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_sticky {};              */ in >> bits(my.t->_is_sticky);
-  /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_shovable {};            */ in >> bits(my.t->_is_shovable);
-  /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_treasure_class_a {};    */ in >> bits(my.t->_is_treasure_class_a);
-  /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_treasure_class_b {};    */ in >> bits(my.t->_is_treasure_class_b);
-  /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_treasure_class_c {};    */ in >> bits(my.t->_is_treasure_class_c);
-  /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_treasure_type {};       */ in >> bits(my.t->_is_treasure_type);
-  /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_wall {};                */ in >> bits(my.t->_is_wall);
-  /* std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_wand {};                */ in >> bits(my.t->_is_wand);
+  /* array<array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_light_blocker {};        */ in >> bits(my.t->_is_light_blocker);
+  /* array<array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_lit_ever {};             */ in >> bits(my.t->_is_lit_ever);
+  /* array<array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_obs_wall_or_door {};     */ in >> bits(my.t->_is_obs_wall_or_door);
+  /* array<array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_obs_destructable {};     */ in >> bits(my.t->_is_obs_destructable);
+  /* array<array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _fade_in_map {};          */ in >> bits(my.t->_fade_in_map);
+  /* array<array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _gfx_water {};            */ in >> bits(my.t->_gfx_water);
+  /* array<array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _heatmap {};              */ in >> bits(my.t->_heatmap);
+  /* array<array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_able_to_stand_on {};  */ in >> bits(my.t->_is_able_to_stand_on);
+  /* array<array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_acid {};              */ in >> bits(my.t->_is_acid);
+  /* array<array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_ascend_dungeon {};    */ in >> bits(my.t->_is_ascend_dungeon);
+  /* array<array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_ascend_sewer {};      */ in >> bits(my.t->_is_ascend_sewer);
+  /* array<array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_barrel {};            */ in >> bits(my.t->_is_barrel);
+  /* array<array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_blood {};             */ in >> bits(my.t->_is_blood);
+  /* array<array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_brazier {};           */ in >> bits(my.t->_is_brazier);
+  /* array<array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_bridge {};            */ in >> bits(my.t->_is_bridge);
+  /* array<array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_chasm {};             */ in >> bits(my.t->_is_chasm);
+  /* array<array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_corpse {};            */ in >> bits(my.t->_is_corpse);
+  /* array<array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_corridor {};          */ in >> bits(my.t->_is_corridor);
+  /* array<array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_deep_water {};        */ in >> bits(my.t->_is_deep_water);
+  /* array<array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_descend_dungeon {};   */ in >> bits(my.t->_is_descend_dungeon);
+  /* array<array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_descend_sewer {};     */ in >> bits(my.t->_is_descend_sewer);
+  /* array<array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_dirt {};              */ in >> bits(my.t->_is_dirt);
+  /* array<array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_door {};              */ in >> bits(my.t->_is_door);
+  /* array<array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_dry_grass {};         */ in >> bits(my.t->_is_dry_grass);
+  /* array<array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_enchantstone {};      */ in >> bits(my.t->_is_enchantstone);
+  /* array<array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_extreme_hazard {};    */ in >> bits(my.t->_is_extreme_hazard);
+  /* array<array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_fire {};              */ in >> bits(my.t->_is_fire);
+  /* array<array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_floor {};             */ in >> bits(my.t->_is_floor);
+  /* array<array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_foilage {};           */ in >> bits(my.t->_is_foilage);
+  /* array<array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_food {};              */ in >> bits(my.t->_is_food);
+  /* array<array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_gold {};              */ in >> bits(my.t->_is_gold);
+  /* array<array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_hazard {};            */ in >> bits(my.t->_is_hazard);
+  /* array<array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_key {};               */ in >> bits(my.t->_is_key);
+  /* array<array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_lava {};              */ in >> bits(my.t->_is_lava);
+  /* array<array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_lit_currently {};     */ in >> bits(my.t->_is_lit_currently);
+  /* array<array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_minion_generator {};  */ in >> bits(my.t->_is_minion_generator);
+  /* array<array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_monst {};             */ in >> bits(my.t->_is_monst);
+  /* array<array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_poison {};            */ in >> bits(my.t->_is_poison);
+  /* array<array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_potion {};            */ in >> bits(my.t->_is_potion);
+  /* array<array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_ripple {};            */ in >> bits(my.t->_is_ripple);
+  /* array<array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_rock {};              */ in >> bits(my.t->_is_rock);
+  /* array<array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_secret_door {};       */ in >> bits(my.t->_is_secret_door);
+  /* array<array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_shallow_water {};     */ in >> bits(my.t->_is_shallow_water);
+  /* array<array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_skillstone {};        */ in >> bits(my.t->_is_skillstone);
+  /* array<array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_smoke {};             */ in >> bits(my.t->_is_smoke);
+  /* array<array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_spiderweb {};         */ in >> bits(my.t->_is_spiderweb);
+  /* array<array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_sticky {};            */ in >> bits(my.t->_is_sticky);
+  /* array<array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_shovable {};          */ in >> bits(my.t->_is_shovable);
+  /* array<array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_treasure_class_a {};  */ in >> bits(my.t->_is_treasure_class_a);
+  /* array<array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_treasure_class_b {};  */ in >> bits(my.t->_is_treasure_class_b);
+  /* array<array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_treasure_class_c {};  */ in >> bits(my.t->_is_treasure_class_c);
+  /* array<array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_treasure_type {};     */ in >> bits(my.t->_is_treasure_type);
+  /* array<array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_wall {};              */ in >> bits(my.t->_is_wall);
+  /* array<array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_wand {};              */ in >> bits(my.t->_is_wand);
 
   /* all_things_id_at */      in >> bits(l->all_things_id_at);
   /* cursor_at */             in >> bits(l->cursor_at);
@@ -454,8 +456,8 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
   /* world_at */              in >> bits(l->world_at);
 
   l->update_new_level();
-  l->timestamp_redraw_bg = 1; // Force redraw
-  l->timestamp_fade_in_begin = time_get_time_ms_cached();
+  l->ts_redraw_bg = 1; // Force redraw
+  l->ts_fade_in_begin = time_get_time_ms_cached();
   l->map_changed = true;
   l->map_follow_player = true;
 
