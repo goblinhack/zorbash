@@ -650,7 +650,7 @@ void Game::wid_thing_info_add_gold_value (WidPopup *w, Thingp t)
     if (min_value > 0) {
         if (min_value == max_value) {
             snprintf(tmp2, sizeof(tmp2) - 1,
-                     "(%s)",
+                     "%s",
                      t->get_gold_value_dice_str().c_str());
         } else {
             snprintf(tmp2, sizeof(tmp2) - 1,
@@ -681,7 +681,7 @@ void Game::wid_thing_info_add_nutrition (WidPopup *w, Thingp t)
         if (min_value > 0) {
             if (min_value == max_value) {
                 snprintf(tmp2, sizeof(tmp2) - 1,
-                         "(%s)",
+                         "%s",
                          t->get_nutrition_dice_str().c_str());
             } else {
                 snprintf(tmp2, sizeof(tmp2) - 1,
@@ -822,7 +822,7 @@ void Game::wid_thing_info_add_swallow_damage (WidPopup *w, Thingp t)
                          "%%fg=gray$Digest%15s ``````", tmp2);
             } else {
                 snprintf(tmp2, sizeof(tmp2) - 1,
-                         "%d-%d(%s)",
+                         "%d-%d%s",
                          min_value,
                          max_value,
                          t->get_damage_swallow_dice_str().c_str());
