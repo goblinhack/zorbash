@@ -14,61 +14,61 @@ std::vector<LevelStaticp> LevelStatic::all_static_levels;
 
 LevelStatic::LevelStatic (void)
 {
-    this->levelno = all_static_levels.size();
+  this->levelno = all_static_levels.size();
 
-    newptr(this, "level");
+  newptr(this, "level");
 }
 
 LevelStatic::~LevelStatic (void)
 {
-    oldptr(this);
+  oldptr(this);
 }
 
 void level_fini (void)
 {_
-    LevelStatic::all_static_levels.clear();
+  LevelStatic::all_static_levels.clear();
 }
 
 LevelStaticp LevelStatic::level_new (void)
 {_
-    auto r = new LevelStatic();
-    LevelStatic::all_static_levels.push_back(r);
-    return (r);
+  auto r = new LevelStatic();
+  LevelStatic::all_static_levels.push_back(r);
+  return (r);
 }
 
 void LevelStatic::finalize (void)
 {
-    if (debug_enabled) {
-        dump();
-    }
+  if (debug_enabled) {
+    dump();
+  }
 }
 
 void LevelStatic::dump (void)
 {
-    std::array<std::array<char, MAP_HEIGHT>, MAP_WIDTH> tmp;
-    for (auto y = 0; y < height; y++) {
-        for (auto x = 0; x < width; x++) {
-            set(tmp, x, y, ' ');
-        }
+  std::array<std::array<char, MAP_HEIGHT>, MAP_WIDTH> tmp;
+  for (auto y = 0; y < height; y++) {
+    for (auto x = 0; x < width; x++) {
+      set(tmp, x, y, ' ');
     }
+  }
 
-    for (auto y = 0; y < height; y++) {
-        for (auto x = 0; x < width; x++) {
-            auto c = get(data, x, y, MAP_DEPTH_OBJ);
-            if (!c || (c == ' ')) {
-                c = get(data, x, y, MAP_DEPTH_FLOOR);
-            }
-            set(tmp, x, y, c);
-        }
+  for (auto y = 0; y < height; y++) {
+    for (auto x = 0; x < width; x++) {
+      auto c = get(data, x, y, MAP_DEPTH_OBJ);
+      if (!c || (c == ' ')) {
+        c = get(data, x, y, MAP_DEPTH_FLOOR);
+      }
+      set(tmp, x, y, c);
     }
+  }
 
-    LOG("LEVEL(%d):", levelno);
-    for (auto y = 0; y < height; y++) {
-        std::string s;
-        for (auto x = 0; x < width; x++) {
-            s += get(tmp, x, y);
-        }
-        LOG("LEVEL(%d): %s", levelno, s.c_str());
+  LOG("LEVEL(%d):", levelno);
+  for (auto y = 0; y < height; y++) {
+    std::string s;
+    for (auto x = 0; x < width; x++) {
+      s += get(tmp, x, y);
     }
-    LOG("-");
+    LOG("LEVEL(%d): %s", levelno, s.c_str());
+  }
+  LOG("-");
 }

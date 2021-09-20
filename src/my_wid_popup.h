@@ -12,33 +12,33 @@
 
 class WidPopup {
 private:
-    std::map< unsigned int, std::wstring > wid_popup_lines;
-    std::vector<Widp> children;
+  std::map< unsigned int, std::wstring > wid_popup_lines;
+  std::vector<Widp> children;
 
 public:
-    Widp wid_popup_container {};
-    Widp wid_title {};
-    WidTextBox *wid_text_area {};
+  Widp wid_popup_container {};
+  Widp wid_title {};
+  WidTextBox *wid_text_area {};
 
-    point       tl;
-    point       br;
-    Tilep       title_tile {};
-    Thingp      t {};
-    std::string background;
-
-public:
-    ~WidPopup();
-    WidPopup (const std::string name,
-              point tl, point br,
-              Tilep title_tile=nullptr,
-              const std::string background = "",
-              bool horiz_scroll=true,
-              bool vert_scoll=true,
-              int vert_scroll_size=-1);
+  point       tl;
+  point       br;
+  Tilep       title_tile {};
+  Thingp      t {};
+  std::string background;
 
 public:
-    void log(std::string s, bool lhs = false, bool rhs = false);
-    void log(std::wstring s, bool lhs = false, bool rhs = false);
+  ~WidPopup();
+  WidPopup (const std::string name,
+        point tl, point br,
+        Tilep title_tile=nullptr,
+        const std::string background = "",
+        bool horiz_scroll=true,
+        bool vert_scoll=true,
+        int vert_scroll_size=-1);
+
+public:
+  void log(std::string s, bool lhs = false, bool rhs = false);
+  void log(std::wstring s, bool lhs = false, bool rhs = false);
 };
 
 extern void wid_popup_test(void);

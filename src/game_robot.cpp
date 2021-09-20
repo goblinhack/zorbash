@@ -12,18 +12,18 @@
 
 void Game::robot_mode_tick (void)
 {_
-    if (!game->robot_mode) {
-        return;
-    }
+  if (!game->robot_mode) {
+    return;
+  }
 
-    if (!level) {
-        return;
-    }
+  if (!level) {
+    return;
+  }
 
-    auto player = level->player;
-    if (!player) {
-        return;
-    }
+  auto player = level->player;
+  if (!player) {
+    return;
+  }
 
-    player->robot_tick();
+  player->robot_tick();
 }

@@ -11,22 +11,22 @@
 
 class Dice {
 private:
-    int ndice {};
-    int sides {};
-    int stat {};
-    std::string hd;
+  int ndice {};
+  int sides {};
+  int stat {};
+  std::string hd;
 public:
-    std::string python_func;
-    std::string python_mod;
-    Dice (void);
-    std::string to_string (void) const;
-    Dice (std::string s);
-    int roll(void) const;
-    int max_roll(void) const;
-    int min_roll(void) const;
-    bool crit_roll(void) const;
-    bool crit_roll_minus_stat(void) const;
-    int operator ()() const;
+  std::string python_func;
+  std::string python_mod;
+  Dice (void);
+  std::string to_string (void) const;
+  Dice (std::string s);
+  int roll(void) const;
+  int max_roll(void) const;
+  int min_roll(void) const;
+  bool crit_roll(void) const;
+  bool crit_roll_minus_stat(void) const;
+  int operator ()() const;
 };
 
 bool d20roll(int stat_a, int stat_b);

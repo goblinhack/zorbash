@@ -14,320 +14,320 @@
 
 bool Thing::carry (Thingp it)
 {_
-    if (!it) {
-        err("No thing to carry");
+  if (!it) {
+    err("No thing to carry");
+    return false;
+  }
+
+  dbg("Try to carry %s", it->to_string().c_str());
+
+  if (!monstp) {
+    dbg("No; not a monst");
+    return false;
+  }
+
+  if (game->state == Game::STATE_COLLECTING_ITEMS) {
+    //
+    // Avoid carry checks
+    //
+  } else if (game->state == Game::STATE_MOVING_ITEMS) {
+    //
+    // Avoid carry checks
+    //
+  } else {
+    //
+    // Stop fast loops in collecting things
+    //
+    if (particle_anim_exists()) {
+      dbg("No; particle anim exists");
+      return false;
+    }
+
+    //
+    // Need this check to ensure cleaners can always collect items
+    //
+    if (is_player()) {
+      if (game->tick_current < it->get_tick_last_dropped() + 1) {
+        dbg("No; was dropped here recently");
         return false;
+      }
     }
+  }
 
-    dbg("Try to carry %s", it->to_string().c_str());
-
-    if (!monstp) {
-        dbg("No; not a monst");
-        return false;
-    }
-
-    if (game->state == Game::STATE_COLLECTING_ITEMS) {
-        //
-        // Avoid carry checks
-        //
-    } else if (game->state == Game::STATE_MOVING_ITEMS) {
-        //
-        // Avoid carry checks
-        //
-    } else {
-        //
-        // Stop fast loops in collecting things
-        //
-        if (particle_anim_exists()) {
-            dbg("No; particle anim exists");
-            return false;
-        }
-
-        //
-        // Need this check to ensure cleaners can always collect items
-        //
-        if (is_player()) {
-            if (game->tick_current < it->get_tick_last_dropped() + 1) {
-                dbg("No; was dropped here recently");
-                return false;
-            }
-        }
-    }
-
-    if (is_monst()) {
-        //
-        // Always carry
-        //
-        dbg("Monsts always carry items");
-    } else if (it->is_bag_item_container() && bag_add(it)) {
-        //
-        // Bag being carried
-        //
-        dbg("Added bag to bag at %d,%d",
-            it->monstp->bag_position.x, it->monstp->bag_position.y);
-    } else if (!it->is_bag_item()) {
-        //
-        // A key for example, does not go in a bag
-        //
-        dbg("Non item not added to bag");
-    } else if (bag_add(it)) {
-        dbg("Added to bag at %d,%d",
-            it->monstp->bag_position.x, it->monstp->bag_position.y);
-    } else {
-        dbg("No; cannot store in a bag");
-        set_where_i_failed_to_collect_last(make_point(it->mid_at));
-
-        if (is_player()) {
-            TOPCON("%%fg=red$No space to carry %s.%%fg=reset$", it->text_the().c_str());
-        }
-        return false;
-    }
-
-    auto existing_owner = it->get_immediate_owner();
-    if (existing_owner) {
-        if (existing_owner == this) {
-            dbg("No; same owner");
-            return false;
-        }
-
-        //
-        // Can't use drop as that can cause things to interact with
-        // the level. If this is moving between bags, this is safer.
-        //
-        dbg("Drop from existing owner");
-        existing_owner->drop_into_ether(it);
-    }
-
-    for (const auto& item : monstp->carrying) {
-        if (item == it->id) {
-            dbg("No; already carried");
-            return false;
-        }
-    }
+  if (is_monst()) {
+    //
+    // Always carry
+    //
+    dbg("Monsts always carry items");
+  } else if (it->is_bag_item_container() && bag_add(it)) {
+    //
+    // Bag being carried
+    //
+    dbg("Added bag to bag at %d,%d",
+      it->monstp->bag_position.x, it->monstp->bag_position.y);
+  } else if (!it->is_bag_item()) {
+    //
+    // A key for example, does not go in a bag
+    //
+    dbg("Non item not added to bag");
+  } else if (bag_add(it)) {
+    dbg("Added to bag at %d,%d",
+      it->monstp->bag_position.x, it->monstp->bag_position.y);
+  } else {
+    dbg("No; cannot store in a bag");
+    set_where_i_failed_to_collect_last(make_point(it->mid_at));
 
     if (is_player()) {
-        if (!inventory_id_insert(it)) {
-            dbg("No; no space in inventory");
-            return false;
-        }
-
-        if (it->is_collected_as_gold()) {
-            return true;
-        }
-
-        if (it->is_collect_as_keys()) {
-            return true;
-        }
+      TOPCON("%%fg=red$No space to carry %s.%%fg=reset$", it->text_the().c_str());
     }
+    return false;
+  }
 
-    monstp->carrying.push_front(it->id);
-    it->set_owner(this);
-    it->hide();
-
-    if (game->state == Game::STATE_MOVING_ITEMS) {
-        //
-        // Avoid dup message
-        //
-    } else {
-        if (is_player()) {
-            if (!level->is_starting) {
-                TOPCON("You carry %s.", it->text_the().c_str());
-            }
-        }
+  auto existing_owner = it->get_immediate_owner();
+  if (existing_owner) {
+    if (existing_owner == this) {
+      dbg("No; same owner");
+      return false;
     }
 
     //
-    // If we have no weapon, wield it
+    // Can't use drop as that can cause things to interact with
+    // the level. If this is moving between bags, this is safer.
     //
-    if (is_weapon_wielder()) {
-        if (it->is_weapon() && !get_weapon_id()) {
-            wield(it);
-        }
+    dbg("Drop from existing owner");
+    existing_owner->drop_into_ether(it);
+  }
+
+  for (const auto& item : monstp->carrying) {
+    if (item == it->id) {
+      dbg("No; already carried");
+      return false;
+    }
+  }
+
+  if (is_player()) {
+    if (!inventory_id_insert(it)) {
+      dbg("No; no space in inventory");
+      return false;
     }
 
+    if (it->is_collected_as_gold()) {
+      return true;
+    }
+
+    if (it->is_collect_as_keys()) {
+      return true;
+    }
+  }
+
+  monstp->carrying.push_front(it->id);
+  it->set_owner(this);
+  it->hide();
+
+  if (game->state == Game::STATE_MOVING_ITEMS) {
+    //
+    // Avoid dup message
+    //
+  } else {
     if (is_player()) {
-        wid_inventory_init();
+      if (!level->is_starting) {
+        TOPCON("You carry %s.", it->text_the().c_str());
+      }
+    }
+  }
+
+  //
+  // If we have no weapon, wield it
+  //
+  if (is_weapon_wielder()) {
+    if (it->is_weapon() && !get_weapon_id()) {
+      wield(it);
+    }
+  }
+
+  if (is_player()) {
+    wid_inventory_init();
+  }
+
+  //
+  // Auto carry items in the bag? like keys?
+  //
+  if (it->is_bag_item_container()) {
+    auto carrying_copy = it->monstp->carrying;
+    for (const auto& item : carrying_copy) {
+      auto t = level->thing_find(item.id);
+      if (t) {
+        log("Carrying %s that contains: %s",
+          it->to_string().c_str(),
+          t->to_string().c_str());
+      }
     }
 
-    //
-    // Auto carry items in the bag? like keys?
-    //
-    if (it->is_bag_item_container()) {
-        auto carrying_copy = it->monstp->carrying;
-        for (const auto& item : carrying_copy) {
-            auto t = level->thing_find(item.id);
-            if (t) {
-                log("Carrying %s that contains: %s",
-                    it->to_string().c_str(),
-                    t->to_string().c_str());
-            }
+    for (const auto& item : carrying_copy) {
+      auto t = level->thing_find(item.id);
+      if (t) {
+        if (!t->is_bag_item()) {
+          if (!carry(t)) {
+            err("Could not auto carry %s's non item: %s",
+              it->to_string().c_str(),
+              t->to_string().c_str());
+          }
         }
-
-        for (const auto& item : carrying_copy) {
-            auto t = level->thing_find(item.id);
-            if (t) {
-                if (!t->is_bag_item()) {
-                    if (!carry(t)) {
-                        err("Could not auto carry %s's non item: %s",
-                            it->to_string().c_str(),
-                            t->to_string().c_str());
-                    }
-                }
-            }
-        }
+      }
     }
+  }
 
-    return true;
+  return true;
 }
 
 bool Thing::try_to_carry (Thingp it)
 {_
-    dbg("Try to carry: %s", it->to_string().c_str());
-    return carry(it);
+  dbg("Try to carry: %s", it->to_string().c_str());
+  return carry(it);
 }
 
 std::list<Thingp> Thing::anything_to_carry_at (fpoint at)
 {_
-    std::vector<std::pair<Thingp, int>> items;
+  std::vector<std::pair<Thingp, int>> items;
 
-    dbg("Anything to carry at %d,%d", (int)at.x, (int)at.y);
+  dbg("Anything to carry at %d,%d", (int)at.x, (int)at.y);
 _
-    //
-    // Can't pick things up whilst being swallowed!
-    //
-    FOR_ALL_THINGS(level, t, mid_at.x, mid_at.y) {
-        if (t->is_dead) {
-            continue;
-        }
-
-        if (t == this) {
-            continue;
-        }
-
-        if (t->is_engulfer()) {
-            dbg("Nope, I'm being swallowed");
-            goto end;
-        }
-    } FOR_ALL_THINGS_END()
-
-    FOR_ALL_THINGS(level, t, at.x, at.y) {
-        if (t->is_hidden) {
-            continue;
-        }
-
-        if (!t->is_collectable()) {
-            continue;
-        }
-
-        if (t->is_dead) {
-            dbg("Potential item to carry, no, is dead: %s",
-                t->to_string().c_str());
-            continue;
-        }
-
-        if (t->get_immediate_owner()) {
-            dbg("Potential item to carry, no, has owner: %s",
-                t->to_string().c_str());
-            continue;
-        }
-
-        if (worth_collecting(t) < 0) {
-            dbg("Potential item to carry, no, not worth it: %s",
-                t->to_string().c_str());
-            continue;
-        }
-
-        dbg("Potential item to carry: %s", t->to_string().c_str());
-        items.push_back(std::make_pair(t, get_item_value(t)));
-
-        if (t->is_bag_item_container()) {
-            //
-            // Open chests etc...
-            //
-            open(t);
-
-            for (const auto& item : t->monstp->carrying) {
-                auto t = level->thing_find(item.id);
-                if (t) {
-                    items.push_back(std::make_pair(t, get_item_value(t)));
-                }
-            }
-        }
-    } FOR_ALL_THINGS_END()
-
-end:
-    sort(items.begin(),
-         items.end(),
-         [](const std::pair<Thingp, int> &a,
-            const std::pair<Thingp, int> &b) -> bool {
-             return a.second > b.second;
-         });
-
-    std::list<Thingp> out;
-    for (auto i : items) {
-        out.push_back(i.first);
+  //
+  // Can't pick things up whilst being swallowed!
+  //
+  FOR_ALL_THINGS(level, t, mid_at.x, mid_at.y) {
+    if (t->is_dead) {
+      continue;
     }
 
-    return out;
+    if (t == this) {
+      continue;
+    }
+
+    if (t->is_engulfer()) {
+      dbg("Nope, I'm being swallowed");
+      goto end;
+    }
+  } FOR_ALL_THINGS_END()
+
+  FOR_ALL_THINGS(level, t, at.x, at.y) {
+    if (t->is_hidden) {
+      continue;
+    }
+
+    if (!t->is_collectable()) {
+      continue;
+    }
+
+    if (t->is_dead) {
+      dbg("Potential item to carry, no, is dead: %s",
+        t->to_string().c_str());
+      continue;
+    }
+
+    if (t->get_immediate_owner()) {
+      dbg("Potential item to carry, no, has owner: %s",
+        t->to_string().c_str());
+      continue;
+    }
+
+    if (worth_collecting(t) < 0) {
+      dbg("Potential item to carry, no, not worth it: %s",
+        t->to_string().c_str());
+      continue;
+    }
+
+    dbg("Potential item to carry: %s", t->to_string().c_str());
+    items.push_back(std::make_pair(t, get_item_value(t)));
+
+    if (t->is_bag_item_container()) {
+      //
+      // Open chests etc...
+      //
+      open(t);
+
+      for (const auto& item : t->monstp->carrying) {
+        auto t = level->thing_find(item.id);
+        if (t) {
+          items.push_back(std::make_pair(t, get_item_value(t)));
+        }
+      }
+    }
+  } FOR_ALL_THINGS_END()
+
+end:
+  sort(items.begin(),
+     items.end(),
+     [](const std::pair<Thingp, int> &a,
+      const std::pair<Thingp, int> &b) -> bool {
+       return a.second > b.second;
+     });
+
+  std::list<Thingp> out;
+  for (auto i : items) {
+    out.push_back(i.first);
+  }
+
+  return out;
 }
 
 std::list<Thingp> Thing::anything_to_carry (void)
 {_
-    return anything_to_carry_at(mid_at);
+  return anything_to_carry_at(mid_at);
 }
 
 bool Thing::check_anything_to_carry (bool auto_collect_allowed)
 {
-    //
-    // Can't pick things up whilst being swallowed!
-    //
-    FOR_ALL_THINGS(level, t, mid_at.x, mid_at.y) {
-        if (t->is_dead) {
-            continue;
-        }
+  //
+  // Can't pick things up whilst being swallowed!
+  //
+  FOR_ALL_THINGS(level, t, mid_at.x, mid_at.y) {
+    if (t->is_dead) {
+      continue;
+    }
 
-        if (t == this) {
-            continue;
-        }
+    if (t == this) {
+      continue;
+    }
 
-        if (t->is_engulfer()) {
-            return false;
-        }
-    } FOR_ALL_THINGS_END()
+    if (t->is_engulfer()) {
+      return false;
+    }
+  } FOR_ALL_THINGS_END()
 
-    FOR_ALL_THINGS(level, t, mid_at.x, mid_at.y) {
-        if (t->is_dead) {
-            continue;
-        }
+  FOR_ALL_THINGS(level, t, mid_at.x, mid_at.y) {
+    if (t->is_dead) {
+      continue;
+    }
 
-        if (t->is_hidden) {
-            continue;
-        }
+    if (t->is_hidden) {
+      continue;
+    }
 
-        if (t->get_immediate_owner()) {
-            continue;
-        }
+    if (t->get_immediate_owner()) {
+      continue;
+    }
 
-        if (!t->is_collectable()) {
-            continue;
-        }
+    if (!t->is_collectable()) {
+      continue;
+    }
 
-        if (t->is_auto_collect_item()) {
-            if (auto_collect_allowed) {
-                carry(t);
-                continue;
-            }
-        }
+    if (t->is_auto_collect_item()) {
+      if (auto_collect_allowed) {
+        carry(t);
+        continue;
+      }
+    }
 
-        return true;
-    } FOR_ALL_THINGS_END()
+    return true;
+  } FOR_ALL_THINGS_END()
 
-    return false;
+  return false;
 }
 
 void Thing::try_to_carry (const std::list<Thingp> &items)
 {
-    for (auto item : items) {
-        try_to_carry(item);
-    }
+  for (auto item : items) {
+    try_to_carry(item);
+  }
 }

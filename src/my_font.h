@@ -20,23 +20,23 @@ extern Fontp font_large;
 #define TTF_GLYPH_PER_ROW          60
 
 typedef struct {
-    double width;
-    double height;
-    double minx;
-    double maxx;
-    double miny;
-    double maxy;
-    double advance;
-    double texMinX;
-    double texMaxX;
-    double texMinY;
-    double texMaxY;
+  double width;
+  double height;
+  double minx;
+  double maxx;
+  double miny;
+  double maxy;
+  double advance;
+  double texMinX;
+  double texMaxX;
+  double texMinY;
+  double texMaxY;
 } glyph;
 
 typedef struct glyphtex_ {
-    SDL_Surface *image {};
-    uint32_t tex;
-    Texp tex_p = {};
+  SDL_Surface *image {};
+  uint32_t tex;
+  Texp tex_p = {};
 } glyphtex;
 
 void font_fini(void);
@@ -46,16 +46,16 @@ Fontp font_find(std::string);
 class Font {
 
 public:
-    Font (void) { }
-    ~Font (void) { }
-    std::array<glyph, TTF_GLYPH_MAX+1> glyphs {};
-    std::array<glyphtex, TTF_GLYPH_MAX+1> tex {};
-    SDL_Color foreground = {};
-    SDL_Color background = {};
-    std::array<int, TTF_GLYPH_MAX+1> u_to_c {};
-    std::array<int, TTF_GLYPH_MAX+1> valid {};
-    std::array<Tilep, TTF_GLYPH_MAX+1> cache {};
-    int tile_index;
-    Tilep unicode_to_tile(int u);
+  Font (void) { }
+  ~Font (void) { }
+  std::array<glyph, TTF_GLYPH_MAX+1> glyphs {};
+  std::array<glyphtex, TTF_GLYPH_MAX+1> tex {};
+  SDL_Color foreground = {};
+  SDL_Color background = {};
+  std::array<int, TTF_GLYPH_MAX+1> u_to_c {};
+  std::array<int, TTF_GLYPH_MAX+1> valid {};
+  std::array<Tilep, TTF_GLYPH_MAX+1> cache {};
+  int tile_index;
+  Tilep unicode_to_tile(int u);
 };
 #endif

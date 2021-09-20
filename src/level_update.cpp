@@ -15,17 +15,17 @@
 //
 void Level::update_new_level (void)
 {_
-    minimap_valid = false;
-    is_heatmap_valid = false;
+  minimap_valid = false;
+  is_heatmap_valid = false;
 
-    scroll_map_to_player_immediately();
-    lights_update_new_level();
-    dmap_to_player_update();
+  scroll_map_to_player_immediately();
+  lights_update_new_level();
+  dmap_to_player_update();
 
-    //
-    // Load what we were able to see previously
-    //
-    sdl_fbo_load(FBO_FULLMAP_LIGHT, fbo_light);
+  //
+  // Load what we were able to see previously
+  //
+  sdl_fbo_load(FBO_FULLMAP_LIGHT, fbo_light);
 }
 
 //
@@ -33,11 +33,11 @@ void Level::update_new_level (void)
 //
 void Level::update_same_level (void)
 {_
-    minimap_valid = false;
-    is_heatmap_valid = false;
+  minimap_valid = false;
+  is_heatmap_valid = false;
 
-    lights_update_same_level();
-    dmap_to_player_update();
+  lights_update_same_level();
+  dmap_to_player_update();
 }
 
 //
@@ -45,10 +45,10 @@ void Level::update_same_level (void)
 //
 void Level::update_same_level_immediately (void)
 {_
-    minimap_valid = false;
-    is_heatmap_valid = false;
+  minimap_valid = false;
+  is_heatmap_valid = false;
 
-    scroll_map_to_player_immediately();
-    lights_update_new_level();
-    dmap_to_player_update();
+  scroll_map_to_player_immediately();
+  lights_update_new_level();
+  dmap_to_player_update();
 }

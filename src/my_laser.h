@@ -14,27 +14,27 @@
 
 typedef class Laser_ {
 public:
-    Laser_(
-           Levelp level,
-           ThingId thing_id,
-           point start, point stop,
-           point pixel_map_at,
-           uint32_t timestamp_start, uint32_t timestamp_stop);
+  Laser_(
+       Levelp level,
+       ThingId thing_id,
+       point start, point stop,
+       point pixel_map_at,
+       uint32_t timestamp_start, uint32_t timestamp_stop);
 
-    Levelp level {};
-    ThingId id {};
-    point start;
-    point stop;
-    point pixel_map_at;
+  Levelp level {};
+  ThingId id {};
+  point start;
+  point stop;
+  point pixel_map_at;
 
-    uint32_t timestamp_start {};
-    uint32_t timestamp_stop {};
+  uint32_t timestamp_start {};
+  uint32_t timestamp_stop {};
 
-    //
-    // Animation frames
-    //
-    std::vector< std::vector<Tilep> > tiles;
-    static const auto max_frames = 16;
+  //
+  // Animation frames
+  //
+  std::vector< std::vector<Tilep> > tiles;
+  static const auto max_frames = 16;
 } Laser;
 
 #endif // _MY_LASER_H_

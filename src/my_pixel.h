@@ -17,12 +17,12 @@
 //
 static inline void lock (SDL_Surface *surface)
 {
-    //
-    // Is this needed? unlocking seems slow
-    //
-    if (SDL_MUSTLOCK(surface)) {
-        SDL_LockSurface(surface);
-    }
+  //
+  // Is this needed? unlocking seems slow
+  //
+  if (SDL_MUSTLOCK(surface)) {
+    SDL_LockSurface(surface);
+  }
 }
 
 //
@@ -30,12 +30,12 @@ static inline void lock (SDL_Surface *surface)
 //
 static inline void unlock (SDL_Surface *surface)
 {
-    //
-    // Is this needed? unlocking seems slow
-    //
-    if (SDL_MUSTLOCK(surface)) {
-        SDL_UnlockSurface(surface);
-    }
+  //
+  // Is this needed? unlocking seems slow
+  //
+  if (SDL_MUSTLOCK(surface)) {
+    SDL_UnlockSurface(surface);
+  }
 }
 
 //
@@ -45,28 +45,28 @@ static inline void unlock (SDL_Surface *surface)
 //
 static void inline putPixel (SDL_Surface * surface, uint16_t x, uint16_t y, const color &col)
 {
-    uint32_t rgb;
+  uint32_t rgb;
 
 #if 0
-    //
-    // Optimize these out
-    //
-    if (x >= (uint32_t)surface->w) {
-        ERR("out of range x %u, max %u", x, surface->w);
-    }
+  //
+  // Optimize these out
+  //
+  if (x >= (uint32_t)surface->w) {
+    ERR("out of range x %u, max %u", x, surface->w);
+  }
 
-    if (y >= (uint32_t)surface->h) {
-        ERR("out of range y %u, max %u", y, surface->h);
-    }
+  if (y >= (uint32_t)surface->h) {
+    ERR("out of range y %u, max %u", y, surface->h);
+  }
 #endif
 
 #if SDL_BYTEORDER == SDL_BIG_ENDIAN
-    rgb = ((col.r << 24) | (col.g << 16) | (col.b << 8) | col.a);
+  rgb = ((col.r << 24) | (col.g << 16) | (col.b << 8) | col.a);
 #else
-    rgb = (col.r | (col.g << 8) | (col.b << 16) | (col.a << 24));
+  rgb = (col.r | (col.g << 8) | (col.b << 16) | (col.a << 24));
 #endif
 
-    putPixel_32bpp(surface, x, y, rgb);
+  putPixel_32bpp(surface, x, y, rgb);
 }
 
 //
@@ -76,50 +76,50 @@ static void inline putPixel (SDL_Surface * surface, uint16_t x, uint16_t y, cons
 //
 static inline void getPixel (SDL_Surface * surface, uint16_t x, uint16_t y, color &col)
 {
-    uint32_t rgb;
+  uint32_t rgb;
 
-    extern bool g_opt_debug3;
-    if (DEBUG3) {
-        if (unlikely((x >= (uint32_t)surface->w) || (y >= (uint32_t)surface->h))) {
-            DIE("getPixel out of range, pix %d,%d in size %d,%d",
-                x, y, surface->w, surface->h);
-        }
+  extern bool g_opt_debug3;
+  if (DEBUG3) {
+    if (unlikely((x >= (uint32_t)surface->w) || (y >= (uint32_t)surface->h))) {
+      DIE("getPixel out of range, pix %d,%d in size %d,%d",
+        x, y, surface->w, surface->h);
     }
+  }
 
-    lock(surface);
-    getPixel_32bpp(surface, x, y, &rgb);
+  lock(surface);
+  getPixel_32bpp(surface, x, y, &rgb);
 
 #if SDL_BYTEORDER == SDL_BIG_ENDIAN
-    col.r = (rgb & 0xff000000) >> 24;
-    col.g = (rgb & 0x00ff0000) >> 16;
-    col.b = (rgb & 0x0000ff00) >> 8;
-    col.a = (rgb & 0x000000ff);
+  col.r = (rgb & 0xff000000) >> 24;
+  col.g = (rgb & 0x00ff0000) >> 16;
+  col.b = (rgb & 0x0000ff00) >> 8;
+  col.a = (rgb & 0x000000ff);
 #else
-    col.r = (rgb & 0x000000ff);
-    col.g = (rgb & 0x0000ff00) >> 8;
-    col.b = (rgb & 0x00ff0000) >> 16;
-    col.a = (rgb & 0xff000000) >> 24;
+  col.r = (rgb & 0x000000ff);
+  col.g = (rgb & 0x0000ff00) >> 8;
+  col.b = (rgb & 0x00ff0000) >> 16;
+  col.a = (rgb & 0xff000000) >> 24;
 #endif
-    unlock(surface);
+  unlock(surface);
 }
 
 static inline void getPixelFast (SDL_Surface * surface, uint16_t x, uint16_t y, color &col)
 {
-    uint32_t rgb;
-    getPixel_32bpp(surface, x, y, &rgb);
+  uint32_t rgb;
+  getPixel_32bpp(surface, x, y, &rgb);
 
 #if SDL_BYTEORDER == SDL_BIG_ENDIAN
-    col.r = (rgb & 0xff000000) >> 24;
-    col.g = (rgb & 0x00ff0000) >> 16;
-    col.b = (rgb & 0x0000ff00) >> 8;
-    col.a = (rgb & 0x000000ff);
+  col.r = (rgb & 0xff000000) >> 24;
+  col.g = (rgb & 0x00ff0000) >> 16;
+  col.b = (rgb & 0x0000ff00) >> 8;
+  col.a = (rgb & 0x000000ff);
 #else
-    col.r = (rgb & 0x000000ff);
-    col.g = (rgb & 0x0000ff00) >> 8;
-    col.b = (rgb & 0x00ff0000) >> 16;
-    col.a = (rgb & 0xff000000) >> 24;
+  col.r = (rgb & 0x000000ff);
+  col.g = (rgb & 0x0000ff00) >> 8;
+  col.b = (rgb & 0x00ff0000) >> 16;
+  col.a = (rgb & 0xff000000) >> 24;
 #endif
 
-    unlock(surface);
+  unlock(surface);
 }
 #endif

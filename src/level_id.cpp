@@ -15,14 +15,14 @@
 //
 Thingp Level::thing_find (const ThingId id)
 {_
-    //
-    // All levels share the same thing ID namespace so we can find any
-    // thing on any level just by its number
-    //
-    return game->world.thing_find(id);
+  //
+  // All levels share the same thing ID namespace so we can find any
+  // thing on any level just by its number
+  //
+  return game->world.thing_find(id);
 }
 
 Thingp Level::thing_find_optional (const ThingId id)
 {_
-    return game->world.thing_find_optional(id);
+  return game->world.thing_find_optional(id);
 }

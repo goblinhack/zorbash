@@ -20,141 +20,141 @@
 
 std::vector<Lightp> &Thing::get_light (void)
 {_
-    if (monstp) {
-        verify(monstp);
-        return (monstp->light);
-    } else {
-        static std::vector<Lightp> no_light;
-        return no_light;
-    }
+  if (monstp) {
+    verify(monstp);
+    return (monstp->light);
+  } else {
+    static std::vector<Lightp> no_light;
+    return no_light;
+  }
 }
 
 void Thing::new_light (point offset, int strength, color col, int fbo)
 {_
-    new_monst();
-    auto l = light_new(this, offset, strength, col, fbo);
-    monstp->light.push_back(l);
-    monstp->light_strength = strength;
-    monstp->light_col = col;
+  new_monst();
+  auto l = light_new(this, offset, strength, col, fbo);
+  monstp->light.push_back(l);
+  monstp->light_strength = strength;
+  monstp->light_col = col;
 }
 
 void Thing::new_light (point offset, int strength)
 {_
-    new_monst();
-    auto l = light_new(this, offset, strength);
-    monstp->light.push_back(l);
-    monstp->light_strength = strength;
+  new_monst();
+  auto l = light_new(this, offset, strength);
+  monstp->light.push_back(l);
+  monstp->light_strength = strength;
 }
 
 void Thing::delete_lights (void)
 {_
-    if (monstp) {
-        verify(monstp);
-        for (auto& l : monstp->light) {
-            delete l;
-        }
-        monstp->light.resize(0);
+  if (monstp) {
+    verify(monstp);
+    for (auto& l : monstp->light) {
+      delete l;
     }
+    monstp->light.resize(0);
+  }
 }
 
 void Thing::init_lights (void)
 {_
-    if (unlikely(is_player())) {
-        if (level->player && (level->player != this)) {
-            DIE("Player exists in multiple places on map, %f, %f and %f, %f",
-                level->player->mid_at.x, level->player->mid_at.y,
-                mid_at.x, mid_at.y);
-            return;
-        }
-        level->player = this;
-
-        //
-        // keep the light strength half the tiles drawn or we get artifacts
-        // at the edges of the fbo
-        //
-        color col = WHITE;
-
-        int strength = get_initial_light_strength();
-        int d1 = 1;
-        int d2 = 2;
-
-        //
-        // This is a raycast only light to mark things as visible
-        //
-        new_light(point(0, 0), strength);
-
-        new_light(point(0, 0), strength, col, FBO_FULLMAP_LIGHT);
-        new_light(point(0, 0), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-        new_light(point(0, 0), 3, col, FBO_SMALL_POINT_LIGHTS);
-
-        new_light(point(-d1, -d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-        new_light(point( d1, -d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-        new_light(point(-d1,  d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-        new_light(point( d1,  d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-
-        new_light(point(-d2, -d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-        new_light(point( d2, -d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-        new_light(point(-d2,  d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-        new_light(point( d2,  d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-
-        new_light(point(-d1, -d2), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-        new_light(point( d1, -d2), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-        new_light(point(-d1,  d2), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-        new_light(point( d1,  d2), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-
-        {
-            d1 = 3;
-            d2 = 5;
-
-            new_light(point(-d1, -d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-            new_light(point( d1, -d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-            new_light(point(-d1,  d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-            new_light(point( d1,  d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-
-            new_light(point(-d2, -d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-            new_light(point( d2, -d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-            new_light(point(-d2,  d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-            new_light(point( d2,  d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-
-            new_light(point(-d1, -d2), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-            new_light(point( d1, -d2), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-            new_light(point(-d1,  d2), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-            new_light(point( d1,  d2), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-        }
-
-        has_light = true;
-        dbg("Player created");
-    } else {
-        if (unlikely(get_light_strength())) {
-            std::string l = light_color();
-            if (l.empty()) {
-                l = "white";
-            }
-            bool add_light = true;
-            if (is_lava()) {
-//                if (random_range(0, 100) < 80) {
-                    add_light = true;
-//                }
-            }
-            if (add_light) {
-                color c = string2color(l);
-                new_light(point(0, 0), get_light_strength(), c, FBO_PLAYER_VISIBLE_LIGHTING);
-                has_light = true;
-            }
-        }
+  if (unlikely(is_player())) {
+    if (level->player && (level->player != this)) {
+      DIE("Player exists in multiple places on map, %f, %f and %f, %f",
+        level->player->mid_at.x, level->player->mid_at.y,
+        mid_at.x, mid_at.y);
+      return;
     }
+    level->player = this;
+
+    //
+    // keep the light strength half the tiles drawn or we get artifacts
+    // at the edges of the fbo
+    //
+    color col = WHITE;
+
+    int strength = get_initial_light_strength();
+    int d1 = 1;
+    int d2 = 2;
+
+    //
+    // This is a raycast only light to mark things as visible
+    //
+    new_light(point(0, 0), strength);
+
+    new_light(point(0, 0), strength, col, FBO_FULLMAP_LIGHT);
+    new_light(point(0, 0), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
+    new_light(point(0, 0), 3, col, FBO_SMALL_POINT_LIGHTS);
+
+    new_light(point(-d1, -d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
+    new_light(point( d1, -d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
+    new_light(point(-d1,  d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
+    new_light(point( d1,  d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
+
+    new_light(point(-d2, -d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
+    new_light(point( d2, -d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
+    new_light(point(-d2,  d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
+    new_light(point( d2,  d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
+
+    new_light(point(-d1, -d2), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
+    new_light(point( d1, -d2), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
+    new_light(point(-d1,  d2), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
+    new_light(point( d1,  d2), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
+
+    {
+      d1 = 3;
+      d2 = 5;
+
+      new_light(point(-d1, -d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
+      new_light(point( d1, -d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
+      new_light(point(-d1,  d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
+      new_light(point( d1,  d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
+
+      new_light(point(-d2, -d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
+      new_light(point( d2, -d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
+      new_light(point(-d2,  d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
+      new_light(point( d2,  d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
+
+      new_light(point(-d1, -d2), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
+      new_light(point( d1, -d2), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
+      new_light(point(-d1,  d2), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
+      new_light(point( d1,  d2), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
+    }
+
+    has_light = true;
+    dbg("Player created");
+  } else {
+    if (unlikely(get_light_strength())) {
+      std::string l = light_color();
+      if (l.empty()) {
+        l = "white";
+      }
+      bool add_light = true;
+      if (is_lava()) {
+//                if (random_range(0, 100) < 80) {
+          add_light = true;
+//                }
+      }
+      if (add_light) {
+        color c = string2color(l);
+        new_light(point(0, 0), get_light_strength(), c, FBO_PLAYER_VISIBLE_LIGHTING);
+        has_light = true;
+      }
+    }
+  }
 }
 
 void Thing::light_update_strength (void)
 {_
-    auto str = get_light_strength();
-    for (auto l : get_light()) {
-        if (l->ray_cast_only) {
-            continue;
-        }
-
-        if (str != l->prev_strength) {
-            l->update(str);
-        }
+  auto str = get_light_strength();
+  for (auto l : get_light()) {
+    if (l->ray_cast_only) {
+      continue;
     }
+
+    if (str != l->prev_strength) {
+      l->update(str);
+    }
+  }
 }

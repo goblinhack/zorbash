@@ -29,34 +29,34 @@ void sound_halt(void);
 
 class sound {
 public:
-    sound (std::string alias) : alias(alias)
-    {
-    }
+  sound (std::string alias) : alias(alias)
+  {
+  }
 
-    ~sound (void)
-    {
-        Mix_FreeChunk(chunk);
-        myfree(data);
-    }
+  ~sound (void)
+  {
+    Mix_FreeChunk(chunk);
+    myfree(data);
+  }
 
-    std::string alias;
-    Mix_Chunk *chunk = {};
-    unsigned char *data = {};
-    int32_t len = {};
-    float volume {};
+  std::string alias;
+  Mix_Chunk *chunk = {};
+  unsigned char *data = {};
+  int32_t len = {};
+  float volume {};
 };
 
 extern std::map<std::string, class sound *> all_sound;
 
 enum {
-    CHANNEL_MISC,
-    CHANNEL_FOOTSTEPS,
-    CHANNEL_IMPACT,
-    CHANNEL_MONST,
-    CHANNEL_MONST_DEATH,
-    CHANNEL_MONST_BIRTH,
-    CHANNEL_WEAPON,
-    CHANNEL_EXPLOSION,
+  CHANNEL_MISC,
+  CHANNEL_FOOTSTEPS,
+  CHANNEL_IMPACT,
+  CHANNEL_MONST,
+  CHANNEL_MONST_DEATH,
+  CHANNEL_MONST_BIRTH,
+  CHANNEL_WEAPON,
+  CHANNEL_EXPLOSION,
 };
 
 #endif

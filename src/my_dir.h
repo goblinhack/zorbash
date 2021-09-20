@@ -19,26 +19,26 @@ class file_node
 private:
 
 public:
-    file_node (void)
-    {
-    }
+  file_node (void)
+  {
+  }
 
-    ~file_node (void)
-    {
-    }
+  ~file_node (void)
+  {
+  }
 
-    std::string name; // key
+  std::string name; // key
 
-    int8_t is_file {};
+  int8_t is_file {};
 };
 
 uint8_t dir_exists(const char *filename);
 
 file_nodes dirlist(const char *dir,
-                   const char *include_suffix,
-                   const char *exclude_suffix,
-                   uint8_t include_dirs,
-                   uint8_t include_ramdisk);
+           const char *include_suffix,
+           const char *exclude_suffix,
+           uint8_t include_dirs,
+           uint8_t include_ramdisk);
 
 char *dir_dot(void);
 char *dir_dotdot(char *in);

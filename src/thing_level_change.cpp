@@ -19,104 +19,104 @@
 //
 void Thing::level_change (Levelp l)
 {_
-    if (level == l) {
-        dbg("Change level; no, same level");
-        return;
+  if (level == l) {
+    dbg("Change level; no, same level");
+    return;
+  }
+
+  auto old_level = level;
+
+  dbg("Change level");
+  level_leave();
+  level = l;
+  level_enter();
+
+  if (monstp) {
+    monstp->move_path = {};
+    clear_age_map();
+    clear_seen_map();
+    clear_dmap_can_see();
+    if (is_jumper()) {
+      clear_dmap_unused();
     }
+    move_finish();
+  }
 
-    auto old_level = level;
+  if (is_player()) {
+    old_level->player = nullptr;
+    level->player = this;
+  }
 
-    dbg("Change level");
-    level_leave();
-    level = l;
-    level_enter();
-
-    if (monstp) {
-        monstp->move_path = {};
-        clear_age_map();
-        clear_seen_map();
-        clear_dmap_can_see();
-        if (is_jumper()) {
-            clear_dmap_unused();
-        }
-        move_finish();
+  {
+    auto it = get_immediate_owner();
+    if (it) {
+      it->level_change(l);
     }
+  }
 
-    if (is_player()) {
-        old_level->player = nullptr;
-        level->player = this;
+  {
+    auto it = weapon_get();
+    if (it) {
+      it->level_change(l);
     }
+  }
 
-    {
-        auto it = get_immediate_owner();
-        if (it) {
-            it->level_change(l);
-        }
+  {
+    auto it = weapon_get_carry_anim();
+    if (it) {
+      it->level_change(l);
     }
+  }
 
-    {
-        auto it = weapon_get();
-        if (it) {
-            it->level_change(l);
-        }
+  {
+    auto it = weapon_get_use_anim();
+    if (it) {
+      it->level_change(l);
     }
+  }
 
-    {
-        auto it = weapon_get_carry_anim();
-        if (it) {
-            it->level_change(l);
-        }
+  {
+    auto id = get_on_fire_anim_id();
+    if (id.ok()) {
+      auto it = level->thing_find(id);
+      if (it) {
+        it->level_change(l);
+      }
     }
+  }
 
-    {
-        auto it = weapon_get_use_anim();
-        if (it) {
-            it->level_change(l);
-        }
+  if (monstp) {
+    for (auto id : monstp->carrying) {
+      auto it = level->thing_find(id);
+      if (it) {
+        it->level_change(l);
+      }
     }
+  }
 
-    {
-        auto id = get_on_fire_anim_id();
-        if (id.ok()) {
-            auto it = level->thing_find(id);
-            if (it) {
-                it->level_change(l);
-            }
-        }
-    }
+  for (auto l : get_light()) {
+    l->level = level;
+    l->reset();
+  }
 
-    if (monstp) {
-        for (auto id : monstp->carrying) {
-            auto it = level->thing_find(id);
-            if (it) {
-                it->level_change(l);
-            }
-        }
-    }
+  dbg("Changed level");
 
-    for (auto l : get_light()) {
-        l->level = level;
-        l->reset();
-    }
+  if (is_player()) {
+    l->scroll_map_to_player();
+  }
 
-    dbg("Changed level");
+  //
+  // Update the cursor position.
+  //
+  l->cursor_recreate();
+  l->cursor_path_clear();
 
-    if (is_player()) {
-        l->scroll_map_to_player();
-    }
+  //
+  // For auto and normal save
+  //
+  if (is_player()) {
+    game->set_meta_data(l);
+  }
 
-    //
-    // Update the cursor position.
-    //
-    l->cursor_recreate();
-    l->cursor_path_clear();
-
-    //
-    // For auto and normal save
-    //
-    if (is_player()) {
-        game->set_meta_data(l);
-    }
-
-    game->request_snapshot = true;
+  game->request_snapshot = true;
 }

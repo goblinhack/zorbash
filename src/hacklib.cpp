@@ -7,17 +7,17 @@
 
 static struct tm *getlt (void)
 {_
-        time_t date;
+    time_t date;
 
 #if defined(BSD) && !defined(POSIX_TYPES)
-        (void) time((long *)(&date));
+    (void) time((long *)(&date));
 #else
-        (void) time(&date);
+    (void) time(&date);
 #endif
 #if (defined(ULTRIX) && !(defined(ULTRIX_PROTO) || defined(NHSTDC))) || (defined(BSD) && !defined(POSIX_TYPES))
-        return(localtime((long *)(&date)));
+    return(localtime((long *)(&date)));
 #else
-        return(localtime(&date));
+    return(localtime(&date));
 #endif
 }
 
@@ -36,74 +36,74 @@ static struct tm *getlt (void)
  */
 int phase_of_the_moon (void)            /* 0-7, with 0: new, 4: full */
 {_
-        struct tm *lt = getlt();
-        int epact, diy, goldn;
+    struct tm *lt = getlt();
+    int epact, diy, goldn;
 
-        diy = lt->tm_yday;
-        goldn = (lt->tm_year % 19) + 1;
-        epact = (11 * goldn + 18) % 30;
-        if ((epact == 25 && goldn > 11) || epact == 24)
-                epact++;
+    diy = lt->tm_yday;
+    goldn = (lt->tm_year % 19) + 1;
+    epact = (11 * goldn + 18) % 30;
+    if ((epact == 25 && goldn > 11) || epact == 24)
+        epact++;
 
-        return( (((((diy + epact) * 6) + 11) % 177) / 22) & 7 );
+    return( (((((diy + epact) * 6) + 11) % 177) / 22) & 7 );
 }
 
 int friday_13th (void)
 {_
-        struct tm *lt = getlt();
+    struct tm *lt = getlt();
 
-        return((int)((lt->tm_wday == 5) /* friday */ && (lt->tm_mday == 13)));
+    return((int)((lt->tm_wday == 5) /* friday */ && (lt->tm_mday == 13)));
 }
 
 int halloween (void)
 {_
-        struct tm *lt = getlt();
+    struct tm *lt = getlt();
 
-        return((int)((lt->tm_mday == 31) && (lt->tm_mon == 9)));
+    return((int)((lt->tm_mday == 31) && (lt->tm_mon == 9)));
 }
 
 int night (void)
 {_
-        int hour = getlt()->tm_hour;
+    int hour = getlt()->tm_hour;
 
-        return((hour < 6) || (hour > 21));
+    return((hour < 6) || (hour > 21));
 }
 
 int december (void)
 {_
-        struct tm *lt = getlt();
+    struct tm *lt = getlt();
 
-        return((int)(lt->tm_mon == 11));
+    return((int)(lt->tm_mon == 11));
 }
 
 int xmas (void)
 {_
-        struct tm *lt = getlt();
+    struct tm *lt = getlt();
 
-        return((int)((lt->tm_mday == 25) && (lt->tm_mon == 11)));
+    return((int)((lt->tm_mday == 25) && (lt->tm_mon == 11)));
 }
 
 int first_of_month (void)
 {_
-        struct tm *lt = getlt();
+    struct tm *lt = getlt();
 
-        return (int)((lt->tm_mday == 1));
+    return (int)((lt->tm_mday == 1));
 }
 
 int midnight (void)
 {_
-        return(getlt()->tm_hour == 0);
+    return(getlt()->tm_hour == 0);
 }
 
 int midnight_close (void)
 {_
-        int hour = getlt()->tm_hour;
+    int hour = getlt()->tm_hour;
 
-        return (hour > 23);
+    return (hour > 23);
 }
 
 int getyear (void)
 {_
-        return(1900 + getlt()->tm_year);
+    return(1900 + getlt()->tm_year);
 }
 

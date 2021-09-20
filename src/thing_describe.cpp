@@ -13,12 +13,12 @@
 
 bool Thing::describe_when_hovered_over_in_rightbar (void)
 {_
-    level->describe(this);
-    return true;
+  level->describe(this);
+  return true;
 }
 
 bool Thing::describe_when_hovering_over (void)
 {_
-    level->describe(this);
-    return true;
+  level->describe(this);
+  return true;
 }

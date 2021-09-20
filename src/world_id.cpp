@@ -14,71 +14,71 @@
 
 Thingp World::thing_find_optional (ThingId id)
 {_
-    auto f = all_thing_ptrs.find(id);
-    if (f == all_thing_ptrs.end()) {
-        return nullptr;
-    }
+  auto f = all_thing_ptrs.find(id);
+  if (f == all_thing_ptrs.end()) {
+    return nullptr;
+  }
 
-    return (f->second);
+  return (f->second);
 }
 
 Thingp World::thing_find (ThingId id)
 {_
-    auto f = all_thing_ptrs.find(id);
-    if (f == all_thing_ptrs.end()) {
-        ERR("Thing ptr not found for id, %08" PRIx32 "", id.id);
-        return nullptr;
-    }
+  auto f = all_thing_ptrs.find(id);
+  if (f == all_thing_ptrs.end()) {
+    ERR("Thing ptr not found for id, %08" PRIx32 "", id.id);
+    return nullptr;
+  }
 
-    return (f->second);
+  return (f->second);
 }
 
 void World::alloc_thing_id (Thingp t)
 {_
-    for (;;) {
-        auto id = pcg_rand() & 0x0ffffff;
-        if (thing_find_optional(id)) {
-            continue;
-        }
-
-        t->id = id;
-        all_thing_ptrs[id] = t;
-        return;
+  for (;;) {
+    auto id = pcg_rand() & 0x0ffffff;
+    if (thing_find_optional(id)) {
+      continue;
     }
+
+    t->id = id;
+    all_thing_ptrs[id] = t;
+    return;
+  }
 }
 
 void World::alloc_tmp_thing_id (Thingp t)
 {_
-    for (;;) {
-        auto id = pcg_rand() | 0x8000000;
-        if (thing_find_optional(id)) {
-            continue;
-        }
-
-        t->id = id;
-        all_thing_ptrs[id] = t;
-        return;
+  for (;;) {
+    auto id = pcg_rand() | 0x8000000;
+    if (thing_find_optional(id)) {
+      continue;
     }
+
+    t->id = id;
+    all_thing_ptrs[id] = t;
+    return;
+  }
 }
 
 void World::free_thing_id (Thingp t)
 {_
-    auto f = all_thing_ptrs.find(t->id);
-    if (f == all_thing_ptrs.end()) {
-        t->err("Unknown id for thing %08" PRIx32 "", t->id.id);
-        return;
-    }
+  auto f = all_thing_ptrs.find(t->id);
+  if (f == all_thing_ptrs.end()) {
+    t->err("Unknown id for thing %08" PRIx32 "", t->id.id);
+    return;
+  }
 
-    if (f->second != t) {
-        t->err("Mismatch id for thing %08" PRIx32 "", t->id.id);
-        return;
-    }
+  if (f->second != t) {
+    t->err("Mismatch id for thing %08" PRIx32 "", t->id.id);
+    return;
+  }
 
-    t->id = 0;
-    all_thing_ptrs.erase(f);
+  t->id = 0;
+  all_thing_ptrs.erase(f);
 }
 
 void World::realloc_thing_id (Thingp t)
 {_
-    all_thing_ptrs[t->id] = t;
+  all_thing_ptrs[t->id] = t;
 }

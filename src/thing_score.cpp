@@ -23,20 +23,20 @@
 //
 void Thing::score_add (Thingp victim)
 {_
-    if (victim->is_monst()) {
-        auto score = get_danger_initial_level(victim);
-        if (score > 0) {
-            if (get_health() < get_health_initial() / 10) {
-                TOPCON("%%fg=red$Glory kill x10 score!%%fg=reset$");
-                incr_score(score * 10);
-            } else {
-                incr_score(score);
-            }
-        } else {
-            //
-            // Give something, but not a lot as it was not a challenge
-            //
-            incr_score(victim->get_health_initial());
-        }
+  if (victim->is_monst()) {
+    auto score = get_danger_initial_level(victim);
+    if (score > 0) {
+      if (get_health() < get_health_initial() / 10) {
+        TOPCON("%%fg=red$Glory kill x10 score!%%fg=reset$");
+        incr_score(score * 10);
+      } else {
+        incr_score(score);
+      }
+    } else {
+      //
+      // Give something, but not a lot as it was not a challenge
+      //
+      incr_score(victim->get_health_initial());
     }
+  }
 }

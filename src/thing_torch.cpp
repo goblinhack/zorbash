@@ -19,57 +19,57 @@
 
 void Thing::get_light_strength_including_torch_effect (int &out_light_strength) const
 {_
-    auto light_strength = get_initial_light_strength();
+  auto light_strength = get_initial_light_strength();
 
-    auto torch_count = 0;
-    for (auto oid : monstp->carrying) {
-        auto o = level->thing_find(oid);
-        if (!o) {
-            continue;
-        }
-
-        if (!o->is_torch()) {
-            continue;
-        }
-
-        if (o->get_charge_count()) {
-            torch_count += o->get_charge_count();
-        } else {
-            torch_count++;
-        }
+  auto torch_count = 0;
+  for (auto oid : monstp->carrying) {
+    auto o = level->thing_find(oid);
+    if (!o) {
+      continue;
     }
 
-    if (torch_count < 6) {
-        light_strength -= 7 - torch_count;
+    if (!o->is_torch()) {
+      continue;
     }
 
-    if (torch_count == 0) {
-        light_strength = 1;
+    if (o->get_charge_count()) {
+      torch_count += o->get_charge_count();
+    } else {
+      torch_count++;
     }
+  }
+
+  if (torch_count < 6) {
+    light_strength -= 7 - torch_count;
+  }
+
+  if (torch_count == 0) {
+    light_strength = 1;
+  }
 }
 
 void Thing::update_light_strength_including_torch_effect (int &out_light_strength)
 {_
-    auto orig_light_strength = out_light_strength;
-    int light_strength;
+  auto orig_light_strength = out_light_strength;
+  int light_strength;
 
-    get_light_strength_including_torch_effect (light_strength);
+  get_light_strength_including_torch_effect (light_strength);
 
-    if (orig_light_strength) {
-        if (light_strength != orig_light_strength) {
-            if (light_strength <= 1) {
-                TOPCON("You are plunged into darkness.");
-            } else if (light_strength < orig_light_strength) {
-                TOPCON("It gets darker...");
-            }
+  if (orig_light_strength) {
+    if (light_strength != orig_light_strength) {
+      if (light_strength <= 1) {
+        TOPCON("You are plunged into darkness.");
+      } else if (light_strength < orig_light_strength) {
+        TOPCON("It gets darker...");
+      }
 
-            //
-            // This causes a flicker and I slightly like that without
-            // this you see a bit more of the level before it goes dark.
-            //
-            game->request_update_same_level = true;
-        }
+      //
+      // This causes a flicker and I slightly like that without
+      // this you see a bit more of the level before it goes dark.
+      //
+      game->request_update_same_level = true;
     }
+  }
 
-    out_light_strength = light_strength;
+  out_light_strength = light_strength;
 }

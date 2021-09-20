@@ -12,30 +12,30 @@
 
 void Thing::water_tick (void)
 {_
-    if (!level->is_water(mid_at.x, mid_at.y)) {
-        return;
+  if (!level->is_water(mid_at.x, mid_at.y)) {
+    return;
+  }
+
+  if (is_on_fire()) {
+    unset_on_fire();
+
+    auto owner = get_top_owner();
+    if (owner) {
+      if (owner->is_player()) {
+        TOPCON("%%fg=green$You quench the flames!%%fg=reset$");
+      }
     }
 
-    if (is_on_fire()) {
-        unset_on_fire();
-
-        auto owner = get_top_owner();
-        if (owner) {
-            if (owner->is_player()) {
-                TOPCON("%%fg=green$You quench the flames!%%fg=reset$");
-            }
-        }
-
-        auto smoke = level->thing_new("smoke", mid_at);
-        smoke->set_lifespan(pcg_random_range(1, 10));
-        return;
-    }
-
-    if (!hates_water()) {
-        return;
-    }
-
-    dead("by a watery end");
     auto smoke = level->thing_new("smoke", mid_at);
     smoke->set_lifespan(pcg_random_range(1, 10));
+    return;
+  }
+
+  if (!hates_water()) {
+    return;
+  }
+
+  dead("by a watery end");
+  auto smoke = level->thing_new("smoke", mid_at);
+  smoke->set_lifespan(pcg_random_range(1, 10));
 }

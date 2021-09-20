@@ -23,8 +23,8 @@
 #endif
 
 struct callframe {
-    const char *func;
-    unsigned short line;
+  const char *func;
+  unsigned short line;
 };
 
 //
@@ -54,47 +54,47 @@ extern unsigned char g_callframes_depth;
 extern void callstack_dump(void);
 
 struct tracer_t {
-    inline tracer_t (const char *func,
-                     const unsigned short line)
-    {
-        // useful for code tracing in real time
-        // fprintf(stderr, "%s %s() line %d\n", file, func, line);
-        if (DEBUG1) {
-            if (unlikely(g_callframes_depth < MAXCALLFRAME)) {
-                callframe *c = &callframes[g_callframes_depth++];
-                c->func = func;
-                c->line = line;
-            }
-        }
+  inline tracer_t (const char *func,
+           const unsigned short line)
+  {
+    // useful for code tracing in real time
+    // fprintf(stderr, "%s %s() line %d\n", file, func, line);
+    if (DEBUG1) {
+      if (unlikely(g_callframes_depth < MAXCALLFRAME)) {
+        callframe *c = &callframes[g_callframes_depth++];
+        c->func = func;
+        c->line = line;
+      }
     }
+  }
 
-    inline ~tracer_t()
-    {
-        if (DEBUG1) {
-            if (g_callframes_depth > 0) {
-                g_callframes_depth--;
-            }
-        }
+  inline ~tracer_t()
+  {
+    if (DEBUG1) {
+      if (g_callframes_depth > 0) {
+        g_callframes_depth--;
+      }
     }
+  }
 };
 
 struct tracer_no_indent_t {
-    inline tracer_no_indent_t (const char *func,
-                               const unsigned short line)
-    {
-        // useful for code tracing in real time
-        // fprintf(stderr, "%s %s() line %d\n", file, func, line);
-        if (DEBUG1) {
-            if (unlikely(g_callframes_depth < MAXCALLFRAME)) {
-                callframe *c = &callframes[g_callframes_depth];
-                c->func = func;
-                c->line = line;
-            }
-        }
+  inline tracer_no_indent_t (const char *func,
+                 const unsigned short line)
+  {
+    // useful for code tracing in real time
+    // fprintf(stderr, "%s %s() line %d\n", file, func, line);
+    if (DEBUG1) {
+      if (unlikely(g_callframes_depth < MAXCALLFRAME)) {
+        callframe *c = &callframes[g_callframes_depth];
+        c->func = func;
+        c->line = line;
+      }
     }
+  }
 
-    inline ~tracer_no_indent_t()
-    {
-    }
+  inline ~tracer_no_indent_t()
+  {
+  }
 };
 #endif

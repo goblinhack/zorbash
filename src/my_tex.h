@@ -17,15 +17,15 @@ void tex_fini(void);
 void tex_free(Texp tex);
 Texp tex_load(std::string file, std::string name, int mode);
 void tex_load(Texp *tex,
-              Texp *tex_black_and_white,
-              Texp *tex_mask,
-              std::string file,
-              std::string name,
-              int mode);
+        Texp *tex_black_and_white,
+        Texp *tex_mask,
+        std::string file,
+        std::string name,
+        int mode);
 Texp tex_find(std::string name);
 Texp tex_from_surface(SDL_Surface *surface,
-                      std::string file,
-                      std::string name, int mode);
+            std::string file,
+            std::string name, int mode);
 int32_t tex_get_gl_binding(Texp);
 uint32_t tex_get_width(Texp);
 uint32_t tex_get_height(Texp);

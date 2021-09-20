@@ -10,14 +10,14 @@
 
 bool Thing::target_select (Thingp what)
 {_
-    if (game->state != Game::STATE_CHOOSING_TARGET) {
-        TOPCON("Choose a target to use %s at.", what->text_the().c_str());
-    }
+  if (game->state != Game::STATE_CHOOSING_TARGET) {
+    TOPCON("Choose a target to use %s at.", what->text_the().c_str());
+  }
 
-    game->change_state(Game::STATE_CHOOSING_TARGET);
-    level->cursor_recreate();
-    level->cursor->visible();
-    level->describe(what);
+  game->change_state(Game::STATE_CHOOSING_TARGET);
+  level->cursor_recreate();
+  level->cursor->visible();
+  level->describe(what);
 
-    return true;
+  return true;
 }

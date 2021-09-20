@@ -14,58 +14,58 @@ typedef void(*wid_keyboard_event_t)(Widp, const std::wstring& text);
 #define WID_KEYBOARD_DOWN   5
 
 typedef struct {
-    /*
-     * Parent widget
-     */
-    Widp w;
+  /*
+   * Parent widget
+   */
+  Widp w;
 
-    /*
-     * Current button
-     */
-    Widp b;
+  /*
+   * Current button
+   */
+  Widp b;
 
-    /*
-     * Text input widget
-     */
-    Widp input;
+  /*
+   * Text input widget
+   */
+  Widp input;
 
-    /*
-     * Entered text.
-     */
-    std::wstring text;
+  /*
+   * Entered text.
+   */
+  std::wstring text;
 
-    /*
-     * Item currently in focus
-     */
-    int focusx;
-    int focusy;
+  /*
+   * Item currently in focus
+   */
+  int focusx;
+  int focusy;
 
-    /*
-     * When the keyboard was made.
-     */
-    uint32_t created;
+  /*
+   * When the keyboard was made.
+   */
+  uint32_t created;
 
-    /*
-     * Items in the keyboard
-     */
-    Widp buttons[WID_KEYBOARD_DOWN][WID_KEYBOARD_ACROSS];
+  /*
+   * Items in the keyboard
+   */
+  Widp buttons[WID_KEYBOARD_DOWN][WID_KEYBOARD_ACROSS];
 
-    /*
-     * What to call on events
-     */
-    wid_keyboard_event_t selected;
-    wid_keyboard_event_t cancelled;
+  /*
+   * What to call on events
+   */
+  wid_keyboard_event_t selected;
+  wid_keyboard_event_t cancelled;
 
-    /*
-     * Just created?
-     */
-    int is_new;
+  /*
+   * Just created?
+   */
+  int is_new;
 
 } wid_keyboard_ctx;
 
 Widp wid_keyboard (const std::wstring &text,
-                   const std::wstring &title,
-                   wid_keyboard_event_t selected,
-                   wid_keyboard_event_t cancelled);
+           const std::wstring &title,
+           wid_keyboard_event_t selected,
+           wid_keyboard_event_t cancelled);
 
 extern int wid_keyboard_visible;

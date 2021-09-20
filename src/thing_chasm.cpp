@@ -15,12 +15,12 @@
 
 void Thing::chasm_tick (void)
 {_
-    if (is_floating() || is_ethereal()) {
-        return;
-    }
+  if (is_floating() || is_ethereal()) {
+    return;
+  }
 
-    if (level->is_chasm(mid_at.x, mid_at.y)) {
-        dbg("Over a chasm");
-        fall(1, 750);
-    }
+  if (level->is_chasm(mid_at.x, mid_at.y)) {
+    dbg("Over a chasm");
+    fall(1, 750);
+  }
 }

@@ -14,21 +14,21 @@
 
 void Thing::update_light (void)
 {_
-    if (!is_player()) {
-        return;
-    }
+  if (!is_player()) {
+    return;
+  }
 
-    if (is_hidden) {
-        return;
-    }
+  if (is_hidden) {
+    return;
+  }
 
-    if (!level) {
-        return;
-    }
+  if (!level) {
+    return;
+  }
 
-    size_t c = 0;
-    for (auto l : get_light()) {
-        l->cached_light_pos = point(-1, -1);
-        c++;
-    }
+  size_t c = 0;
+  for (auto l : get_light()) {
+    l->cached_light_pos = point(-1, -1);
+    c++;
+  }
 }

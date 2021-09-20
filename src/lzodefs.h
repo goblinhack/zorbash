@@ -2335,14 +2335,14 @@ LZO_COMPILE_TIME_ASSERT_HEADER(sizeof(long) == 8)
 #  define LZO_SIZEOF_VOID_P         2
 #elif (LZO_ARCH_H8300)
 #  if defined(__H8300H__) || defined(__H8300S__) || defined(__H8300SX__)
-     LZO_COMPILE_TIME_ASSERT_HEADER(LZO_WORDSIZE == 4)
+   LZO_COMPILE_TIME_ASSERT_HEADER(LZO_WORDSIZE == 4)
 #    if defined(__NORMAL_MODE__)
 #      define LZO_SIZEOF_VOID_P     2
 #    else
 #      define LZO_SIZEOF_VOID_P     4
 #    endif
 #  else
-     LZO_COMPILE_TIME_ASSERT_HEADER(LZO_WORDSIZE == 2)
+   LZO_COMPILE_TIME_ASSERT_HEADER(LZO_WORDSIZE == 2)
 #    define LZO_SIZEOF_VOID_P       2
 #  endif
 #  if (LZO_CC_GNUC && (LZO_CC_GNUC < 0x040000ul)) && (LZO_SIZEOF_INT == 4)
@@ -2801,8 +2801,8 @@ LZO_COMPILE_TIME_ASSERT_HEADER(LZO_SIZEOF_PTRDIFF_T == sizeof(ptrdiff_t))
 #  define __LZO_INFOSTR_CCVER       ""
 #endif
 #define LZO_INFO_STRING \
-    LZO_INFO_ARCH __LZO_INFOSTR_MM __LZO_INFOSTR_PM __LZO_INFOSTR_ENDIAN \
-    " " __LZO_INFOSTR_OSNAME __LZO_INFOSTR_LIBC " " LZO_INFO_CC __LZO_INFOSTR_CCVER
+  LZO_INFO_ARCH __LZO_INFOSTR_MM __LZO_INFOSTR_PM __LZO_INFOSTR_ENDIAN \
+  " " __LZO_INFOSTR_OSNAME __LZO_INFOSTR_LIBC " " LZO_INFO_CC __LZO_INFOSTR_CCVER
 #if !(LZO_CFG_SKIP_LZO_TYPES)
 #if (!(LZO_SIZEOF_SHORT+0 > 0 && LZO_SIZEOF_INT+0 > 0 && LZO_SIZEOF_LONG+0 > 0))
 #  error "missing defines for sizes"
@@ -3088,8 +3088,8 @@ LZO_COMPILE_TIME_ASSERT_HEADER(LZO_SIZEOF_PTRDIFF_T == sizeof(ptrdiff_t))
 #endif
 #endif
 #if 1
-    LZO_COMPILE_TIME_ASSERT_HEADER(sizeof(lzo_intptr_t) >= sizeof(void *))
-    LZO_COMPILE_TIME_ASSERT_HEADER(sizeof(lzo_intptr_t) == sizeof(lzo_uintptr_t))
+  LZO_COMPILE_TIME_ASSERT_HEADER(sizeof(lzo_intptr_t) >= sizeof(void *))
+  LZO_COMPILE_TIME_ASSERT_HEADER(sizeof(lzo_intptr_t) == sizeof(lzo_uintptr_t))
 #endif
 #if !defined(lzo_word_t)
 #if defined(LZO_WORDSIZE) && (LZO_WORDSIZE+0 > 0)
@@ -3140,8 +3140,8 @@ LZO_COMPILE_TIME_ASSERT_HEADER(LZO_SIZEOF_PTRDIFF_T == sizeof(ptrdiff_t))
 #endif
 #endif
 #if 1 && defined(lzo_word_t)
-    LZO_COMPILE_TIME_ASSERT_HEADER(sizeof(lzo_word_t)  == LZO_WORDSIZE)
-    LZO_COMPILE_TIME_ASSERT_HEADER(sizeof(lzo_sword_t) == LZO_WORDSIZE)
+  LZO_COMPILE_TIME_ASSERT_HEADER(sizeof(lzo_word_t)  == LZO_WORDSIZE)
+  LZO_COMPILE_TIME_ASSERT_HEADER(sizeof(lzo_sword_t) == LZO_WORDSIZE)
 #endif
 #if 1
 #define lzo_int8_t                  signed char

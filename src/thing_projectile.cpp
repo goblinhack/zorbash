@@ -13,61 +13,61 @@
 
 bool Thing::projectile_choose_target (Thingp item)
 {_
-    dbg("Trying to target a projectile with: %s", item->to_string().c_str());
+  dbg("Trying to target a projectile with: %s", item->to_string().c_str());
 
-    if (!target_select(item)) {
-        return false;
-    }
+  if (!target_select(item)) {
+    return false;
+  }
 
-    game->request_to_fire_item = item;
+  game->request_to_fire_item = item;
 
-    return target_select(item);
+  return target_select(item);
 }
 
 Thingp Thing::projectile_fire_at (const std::string &projectile_name, Thingp target)
 {_
-    if (projectile_name == "") {
-        die("No projectile name");
-    }
+  if (projectile_name == "") {
+    die("No projectile name");
+  }
 
-    auto start = last_blit_at;
-    auto end = target->last_blit_at;
+  auto start = last_blit_at;
+  auto end = target->last_blit_at;
 
-    if (!start.x && !start.y) {
-        return nullptr;
-    }
+  if (!start.x && !start.y) {
+    return nullptr;
+  }
 
-    if (!end.x && !end.y) {
-        return nullptr;
-    }
+  if (!end.x && !end.y) {
+    return nullptr;
+  }
 
-    auto projectile = level->thing_new(projectile_name, mid_at);
-    if (!projectile) {
-        return nullptr;
-    }
+  auto projectile = level->thing_new(projectile_name, mid_at);
+  if (!projectile) {
+    return nullptr;
+  }
 
-    projectile->set_owner(this);
-    projectile->move_to_immediately(target->mid_at);
+  projectile->set_owner(this);
+  projectile->move_to_immediately(target->mid_at);
 
-    dbg("Firing named projectile with: %s at %s", projectile->to_string().c_str(),
-        target->to_string().c_str());
+  dbg("Firing named projectile with: %s at %s", projectile->to_string().c_str(),
+    target->to_string().c_str());
 
-    if (!projectile->is_projectile()) {
-        if (is_player()) {
-            TOPCON("I don't know how to fire %s.", projectile->text_the().c_str());
-            game->tick_begin("player tried to use something they could not");
-        }
-        return nullptr;
-    }
-
+  if (!projectile->is_projectile()) {
     if (is_player()) {
-        game->tick_begin("player fired " + projectile->text_the());
-        game->change_state(Game::STATE_NORMAL);
+      TOPCON("I don't know how to fire %s.", projectile->text_the().c_str());
+      game->tick_begin("player tried to use something they could not");
     }
+    return nullptr;
+  }
 
-    level->new_projectile(projectile->id, start, end, 200);
+  if (is_player()) {
+    game->tick_begin("player fired " + projectile->text_the());
+    game->change_state(Game::STATE_NORMAL);
+  }
 
-    on_use(projectile, target);
+  level->new_projectile(projectile->id, start, end, 200);
 
-    return projectile;
+  on_use(projectile, target);
+
+  return projectile;
 }

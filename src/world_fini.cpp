@@ -10,17 +10,17 @@
 
 void World::fini (void)
 {_
-    LOG("World fini: Destroy all levels");
-    for (auto x = 0; x < LEVELS_ACROSS; ++x) {
-        for (auto y = 0; y < LEVELS_DOWN; ++y) {
-            for (auto z = 0; z < LEVELS_DEEP; ++z) {
-                auto l = get(levels, x, y, z);
-                if (l) {
-                    l->fini();
-                    delete l;
-                    set(levels, x, y, z, (Level*)nullptr);
-                }
-            }
+  LOG("World fini: Destroy all levels");
+  for (auto x = 0; x < LEVELS_ACROSS; ++x) {
+    for (auto y = 0; y < LEVELS_DOWN; ++y) {
+      for (auto z = 0; z < LEVELS_DEEP; ++z) {
+        auto l = get(levels, x, y, z);
+        if (l) {
+          l->fini();
+          delete l;
+          set(levels, x, y, z, (Level*)nullptr);
         }
+      }
     }
+  }
 }

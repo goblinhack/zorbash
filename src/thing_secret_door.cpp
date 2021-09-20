@@ -17,25 +17,25 @@
 
 void Thing::secret_door_tick (void)
 {_
-    if (!is_player()) {
-        return;
+  if (!is_player()) {
+    return;
+  }
+
+  if (!level->is_secret_door(mid_at.x, mid_at.y)) {
+    return;
+  }
+
+  dbg("Opened a secret door");
+
+  FOR_ALL_THINGS(level, t, mid_at.x, mid_at.y) {
+    if (!t->is_secret_door()) {
+      continue;
     }
 
-    if (!level->is_secret_door(mid_at.x, mid_at.y)) {
-        return;
-    }
-
-    dbg("Opened a secret door");
-
-    FOR_ALL_THINGS(level, t, mid_at.x, mid_at.y) {
-        if (!t->is_secret_door()) {
-            continue;
-        }
-
-        //
-        // This stops the robot continually looking at secret doors
-        //
-        t->dead("opened");
-        break;
-    } FOR_ALL_THINGS_END()
+    //
+    // This stops the robot continually looking at secret doors
+    //
+    t->dead("opened");
+    break;
+  } FOR_ALL_THINGS_END()
 }

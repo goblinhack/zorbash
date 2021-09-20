@@ -14,7 +14,7 @@ uint8_t file_non_zero_size_exists(const char *filename);
 uint8_t file_unlink(const char *filename);
 double file_age(const char *filename);
 uint8_t file_exists_and_is_newer_than(const char *filename,
-                                      const char *filename2);
+                    const char *filename2);
 unsigned char *file_load(const char *filename, int *outlen);
 
 #if defined(MSDOS) || defined(OS2) || defined(WIN32) || defined(__CYGWIN__)

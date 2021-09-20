@@ -16,130 +16,130 @@
 
 void Light::log_ (const char *fmt, va_list args)
 {
-    verify(this);
-    char buf[MAXLONGSTR];
-    int len;
+  verify(this);
+  char buf[MAXLONGSTR];
+  int len;
 
-    buf[0] = '\0';
-    get_timestamp(buf, MAXLONGSTR);
-    len = (int)strlen(buf);
-    snprintf(buf + len, MAXLONGSTR - len, "light: ");
+  buf[0] = '\0';
+  get_timestamp(buf, MAXLONGSTR);
+  len = (int)strlen(buf);
+  snprintf(buf + len, MAXLONGSTR - len, "light: ");
 
-    len = (int)strlen(buf);
-    vsnprintf(buf + len, MAXLONGSTR - len, fmt, args);
+  len = (int)strlen(buf);
+  vsnprintf(buf + len, MAXLONGSTR - len, fmt, args);
 
-    putf(MY_STDOUT, buf);
+  putf(MY_STDOUT, buf);
 }
 
 void Light::log (const char *fmt, ...)
 {
-    verify(this);
-    auto t = this;
-    va_list args;
+  verify(this);
+  auto t = this;
+  va_list args;
 
-    va_start(args, fmt);
-    t->log_(fmt, args);
-    va_end(args);
+  va_start(args, fmt);
+  t->log_(fmt, args);
+  va_end(args);
 }
 
 void Light::die_ (const char *fmt, va_list args)
 {
-    verify(this);
-    char buf[MAXLONGSTR];
-    int len;
+  verify(this);
+  char buf[MAXLONGSTR];
+  int len;
 
-    buf[0] = '\0';
-    get_timestamp(buf, MAXLONGSTR);
-    len = (int)strlen(buf);
-    snprintf(buf + len, MAXLONGSTR - len, "light: ");
+  buf[0] = '\0';
+  get_timestamp(buf, MAXLONGSTR);
+  len = (int)strlen(buf);
+  snprintf(buf + len, MAXLONGSTR - len, "light: ");
 
-    len = (int)strlen(buf);
-    vsnprintf(buf + len, MAXLONGSTR - len, fmt, args);
+  len = (int)strlen(buf);
+  vsnprintf(buf + len, MAXLONGSTR - len, fmt, args);
 
-    DIE("%s",buf);
+  DIE("%s",buf);
 }
 
 void Light::die (const char *fmt, ...)
 {
-    g_errored = true;
+  g_errored = true;
 
-    verify(this);
-    auto t = this;
-    va_list args;
+  verify(this);
+  auto t = this;
+  va_list args;
 
-    va_start(args, fmt);
-    t->die_(fmt, args);
-    va_end(args);
+  va_start(args, fmt);
+  t->die_(fmt, args);
+  va_end(args);
 }
 
 void Light::con_ (const char *fmt, va_list args)
 {
-    verify(this);
-    char buf[MAXLONGSTR];
-    int len;
+  verify(this);
+  char buf[MAXLONGSTR];
+  int len;
 
-    buf[0] = '\0';
-    get_timestamp(buf, MAXLONGSTR);
-    len = (int)strlen(buf);
-    snprintf(buf + len, MAXLONGSTR - len, "light: ");
+  buf[0] = '\0';
+  get_timestamp(buf, MAXLONGSTR);
+  len = (int)strlen(buf);
+  snprintf(buf + len, MAXLONGSTR - len, "light: ");
 
-    len = (int)strlen(buf);
-    vsnprintf(buf + len, MAXLONGSTR - len, fmt, args);
+  len = (int)strlen(buf);
+  vsnprintf(buf + len, MAXLONGSTR - len, fmt, args);
 
-    putf(MY_STDOUT, buf);
+  putf(MY_STDOUT, buf);
 
-    term_log(buf);
-    putchar('\n');
-    wid_console_log(buf);
+  term_log(buf);
+  putchar('\n');
+  wid_console_log(buf);
 }
 
 void Light::con (const char *fmt, ...)
 {
-    verify(this);
-    auto t = this;
-    va_list args;
+  verify(this);
+  auto t = this;
+  va_list args;
 
-    va_start(args, fmt);
-    t->con_(fmt, args);
-    va_end(args);
+  va_start(args, fmt);
+  t->con_(fmt, args);
+  va_end(args);
 }
 
 void Light::err_ (const char *fmt, va_list args)
 {
-    verify(this);
-    char buf[MAXLONGSTR];
-    int len;
+  verify(this);
+  char buf[MAXLONGSTR];
+  int len;
 
-    buf[0] = '\0';
-    get_timestamp(buf, MAXLONGSTR);
-    len = (int)strlen(buf);
-    snprintf(buf + len, MAXLONGSTR - len, "ERROR: Light: ");
+  buf[0] = '\0';
+  get_timestamp(buf, MAXLONGSTR);
+  len = (int)strlen(buf);
+  snprintf(buf + len, MAXLONGSTR - len, "ERROR: Light: ");
 
-    len = (int)strlen(buf);
-    vsnprintf(buf + len, MAXLONGSTR - len, fmt, args);
+  len = (int)strlen(buf);
+  vsnprintf(buf + len, MAXLONGSTR - len, fmt, args);
 
-    putf(MY_STDOUT, buf);
+  putf(MY_STDOUT, buf);
 
-    putf(MY_STDERR, buf);
+  putf(MY_STDERR, buf);
 
-    fprintf(stderr, "%s\n", buf);
+  fprintf(stderr, "%s\n", buf);
 
-    callstack_dump();
-    traceback_dump();
+  callstack_dump();
+  traceback_dump();
 
-    wid_console_log(buf);
-    FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS();
+  wid_console_log(buf);
+  FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS();
 }
 
 void Light::err (const char *fmt, ...)
 {
-    g_errored = true;
+  g_errored = true;
 
-    verify(this);
-    auto t = this;
-    va_list args;
+  verify(this);
+  auto t = this;
+  va_list args;
 
-    va_start(args, fmt);
-    t->err_(fmt, args);
-    va_end(args);
+  va_start(args, fmt);
+  t->err_(fmt, args);
+  va_end(args);
 }

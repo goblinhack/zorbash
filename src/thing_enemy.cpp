@@ -14,14 +14,14 @@
 
 bool Thing::is_enemy (Thingp attacker) const
 {_
-    if (unlikely(!monstp)) {
-        return false;
-    }
-
-    if (monstp->enemies.find(attacker->id) != monstp->enemies.end()) {
-        return true;
-    }
+  if (unlikely(!monstp)) {
     return false;
+  }
+
+  if (monstp->enemies.find(attacker->id) != monstp->enemies.end()) {
+    return true;
+  }
+  return false;
 }
 
 //
@@ -29,68 +29,68 @@ bool Thing::is_enemy (Thingp attacker) const
 //
 void Thing::enemies_tick (void)
 {_
-    if (!monstp) {
-        return;
+  if (!monstp) {
+    return;
+  }
+
+  for (auto &p : monstp->enemies) {
+    if (--p.second > 0) {
+      continue;
     }
 
-    for (auto &p : monstp->enemies) {
-        if (--p.second > 0) {
-            continue;
-        }
+    auto attacker = level->thing_find_optional(p.first);
+    if (attacker) {
+      //
+      // If far enough away start to forget this enemy
+      //
+      if (distance(attacker->mid_at, mid_at) > ai_scent_distance()) {
+        monstp->enemies.erase(p.first);
+      }
 
-        auto attacker = level->thing_find_optional(p.first);
-        if (attacker) {
-            //
-            // If far enough away start to forget this enemy
-            //
-            if (distance(attacker->mid_at, mid_at) > ai_scent_distance()) {
-                monstp->enemies.erase(p.first);
-            }
-
-            if (is_player() && game->robot_mode) {
-                CON("Robot: Remove enemy: %s", attacker->to_string().c_str());
-            }
-        } else {
-            monstp->enemies.erase(p.first);
-        }
-        return;
+      if (is_player() && game->robot_mode) {
+        CON("Robot: Remove enemy: %s", attacker->to_string().c_str());
+      }
+    } else {
+      monstp->enemies.erase(p.first);
     }
+    return;
+  }
 }
 
 void Thing::add_enemy (Thingp attacker)
 {_
-    if (unlikely(!attacker->is_monst())) {
-        return;
-    }
+  if (unlikely(!attacker->is_monst())) {
+    return;
+  }
 
-    if (unlikely(!monstp)) {
-        return;
-    }
+  if (unlikely(!monstp)) {
+    return;
+  }
 
-    if (!ai_enemy_memory()) {
-        return;
-    }
+  if (!ai_enemy_memory()) {
+    return;
+  }
 
-    if (unlikely(is_player())) {
-        //
-        // Allow the robot to make enemies
-        //
-    } else if (unlikely(!is_monst())) {
-        //
-        // Only monsts make enemies
-        //
-        return;
-    }
+  if (unlikely(is_player())) {
+    //
+    // Allow the robot to make enemies
+    //
+  } else if (unlikely(!is_monst())) {
+    //
+    // Only monsts make enemies
+    //
+    return;
+  }
 
-    if (!monstp->enemies[attacker->id]) {
-        if (is_player() && game->robot_mode) {
-            CON("Robot: Add new enemy %s", attacker->to_string().c_str());
-        } else {
-            dbg("Add new enemy %s", attacker->to_string().c_str());
-        }
-        monstp->enemies[attacker->id] = ai_enemy_memory();
+  if (!monstp->enemies[attacker->id]) {
+    if (is_player() && game->robot_mode) {
+      CON("Robot: Add new enemy %s", attacker->to_string().c_str());
     } else {
-        dbg("Increment old enemy %s", attacker->to_string().c_str());
-        monstp->enemies[attacker->id] *= 2;
+      dbg("Add new enemy %s", attacker->to_string().c_str());
     }
+    monstp->enemies[attacker->id] = ai_enemy_memory();
+  } else {
+    dbg("Increment old enemy %s", attacker->to_string().c_str());
+    monstp->enemies[attacker->id] *= 2;
+  }
 }

@@ -11,36 +11,36 @@
 
 Game::Game (std::string appdata)
 {_
-    config.reset();
+  config.reset();
 
-    this->appdata = appdata;
+  this->appdata = appdata;
 
-    saved_dir = appdata + DIR_SEP + "zorbash" + DIR_SEP;
-    save_slot = 1;
+  saved_dir = appdata + DIR_SEP + "zorbash" + DIR_SEP;
+  save_slot = 1;
 
-    set_meta_data(nullptr);
-    save_file = saved_dir + "saved-slot-" + std::to_string(save_slot);
+  set_meta_data(nullptr);
+  save_file = saved_dir + "saved-slot-" + std::to_string(save_slot);
 }
 
 void
 Game::set_meta_data (Levelp l)
 {_
-    save_meta = "";
+  save_meta = "";
 
-    if (l && l->player) {
-        save_meta += l->player->title() + ", ";
-    }
+  if (l && l->player) {
+    save_meta += l->player->title() + ", ";
+  }
 
-    save_meta += "seed " + seed_name + ", ";
+  save_meta += "seed " + seed_name + ", ";
 
-    if (l) {
-        save_meta += l->to_string() + ", ";
-    }
+  if (l) {
+    save_meta += l->to_string() + ", ";
+  }
 
-    save_meta += string_timestamp();
+  save_meta += string_timestamp();
 }
 
 int Game::get_move_speed (void)
 {_
-    return current_move_speed;
+  return current_move_speed;
 }

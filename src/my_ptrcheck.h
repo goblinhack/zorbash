@@ -23,22 +23,22 @@ char *dupstr_(const char *in, std::string what, std::string func, std::string fi
 char *strsub_(const char *in, const char *old, const char *replace_with, std::string what, std::string file, std::string func, int line);
 
 #define myzalloc(__size__, __what__) \
-    myzalloc_((__size__), (__what__), PTRCHECK_AT)
+  myzalloc_((__size__), (__what__), PTRCHECK_AT)
 
 #define mymalloc(__size__, __what__) \
-    mymalloc_((__size__), (__what__), PTRCHECK_AT)
+  mymalloc_((__size__), (__what__), PTRCHECK_AT)
 
 #define myrealloc(__ptr__, __size__, __what__) \
-    myrealloc_((__ptr__), (__size__), (__what__), PTRCHECK_AT)
+  myrealloc_((__ptr__), (__size__), (__what__), PTRCHECK_AT)
 
 #define myfree(__ptr__)             \
-    myfree_((__ptr__), PTRCHECK_AT)
+  myfree_((__ptr__), PTRCHECK_AT)
 
 #define dupstr(__ptr__, __what__)   \
-    dupstr_((__ptr__), (__what__), PTRCHECK_AT)
+  dupstr_((__ptr__), (__what__), PTRCHECK_AT)
 
 #define strsub(a, b, c, __what__) \
-    strsub_(a, b, c, (__what__), PTRCHECK_AT)
+  strsub_(a, b, c, (__what__), PTRCHECK_AT)
 
 void *ptrcheck_alloc(const void *ptr, std::string what, int size, std::string file, std::string func, int line);
 int ptrcheck_verify(const void *ptr, std::string &file, std::string &func, int line);
@@ -47,26 +47,26 @@ void ptrcheck_leak_print(void);
 
 #define newptr(__ptr__, __what__)                                 \
 {                                                                 \
-    if (DEBUG4) {_                                \
-        ptrcheck_alloc((__ptr__), (__what__), sizeof(*(__ptr__)), \
-                       PTRCHECK_AT);                              \
-    }                                                             \
+  if (DEBUG4) {_                                \
+    ptrcheck_alloc((__ptr__), (__what__), sizeof(*(__ptr__)), \
+             PTRCHECK_AT);                              \
+  }                                                             \
 }
 
 #define oldptr(__ptr__)                                           \
 {                                                                 \
-    if (DEBUG4) {_                                \
-        ptrcheck_free((__ptr__), PTRCHECK_AT);                    \
-    }                                                             \
+  if (DEBUG4) {_                                \
+    ptrcheck_free((__ptr__), PTRCHECK_AT);                    \
+  }                                                             \
 }
 
 #define verify(__ptr__)                                           \
 {                                                                 \
-    if (DEBUG4) {_                                \
-        static std::string a = std::string(__FILE__);             \
-        static std::string b = std::string(__PRETTY_FUNCTION__);  \
-        ptrcheck_verify((__ptr__), a, b, __LINE__);               \
-    }                                                             \
+  if (DEBUG4) {_                                \
+    static std::string a = std::string(__FILE__);             \
+    static std::string b = std::string(__PRETTY_FUNCTION__);  \
+    ptrcheck_verify((__ptr__), a, b, __LINE__);               \
+  }                                                             \
 }
 
 #endif // __PTRCHECK_H__

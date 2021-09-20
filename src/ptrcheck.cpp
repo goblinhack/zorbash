@@ -26,22 +26,22 @@ bool ptr_check_some_pointers_changed;
 //
 class Ptrcheck_history {
 public:
-    std::string file;
-    std::string func;
-    int         line {};
-    std::string ts;
-    Traceback   *tb {};
+  std::string file;
+  std::string func;
+  int         line {};
+  std::string ts;
+  Traceback   *tb {};
 
-    Ptrcheck_history() { }
-    Ptrcheck_history(const Ptrcheck_history& other) {
-        file = other.file;
-        func = other.func;
-        line = other.line;
-        ts = other.ts;
-        if (other.tb) {
-            tb = new Traceback(other.tb);
-        }
+  Ptrcheck_history() { }
+  Ptrcheck_history(const Ptrcheck_history& other) {
+    file = other.file;
+    func = other.func;
+    line = other.line;
+    ts = other.ts;
+    if (other.tb) {
+      tb = new Traceback(other.tb);
     }
+  }
 };
 
 //
@@ -49,119 +49,119 @@ public:
 //
 class Ptrcheck {
 public:
-    Ptrcheck(void) {}
+  Ptrcheck(void) {}
 
-    //
-    // For sanity, the pointer itself.
-    //
-    void *ptr {};
+  //
+  // For sanity, the pointer itself.
+  //
+  void *ptr {};
 
-    //
-    // The type of memory.
-    //
-    std::string what;
+  //
+  // The type of memory.
+  //
+  std::string what;
 
-    //
-    // How much memory it is using.
-    //
-    int size {};
+  //
+  // How much memory it is using.
+  //
+  int size {};
 
-    //
-    // Where did the pointer get allocated/freed/last_seen from?
-    //
-    Ptrcheck_history *allocated_by {};
-    Ptrcheck_history *freed_by {};
+  //
+  // Where did the pointer get allocated/freed/last_seen from?
+  //
+  Ptrcheck_history *allocated_by {};
+  Ptrcheck_history *freed_by {};
 #ifdef ENABLE_PTRCHECK_HISTORY
-    std::array<Ptrcheck_history *, ENABLE_PTRCHECK_HISTORY> last_seen {};
+  std::array<Ptrcheck_history *, ENABLE_PTRCHECK_HISTORY> last_seen {};
 #endif
 
-    //
-    // Where in the history buffer we are.
-    //
-    int last_seen_at {};
-    int last_seen_size {};
+  //
+  // Where in the history buffer we are.
+  //
+  int last_seen_at {};
+  int last_seen_size {};
 };
 
 static std::string &timestamp(void)
 {
-    static timestamp_t time_last;
-    static std::string last_timestamp;
-    auto time_now = time_get_time_ms_cached();
+  static timestamp_t time_last;
+  static std::string last_timestamp;
+  auto time_now = time_get_time_ms_cached();
 
-    if (time_now - time_last < 1000) {
-        return last_timestamp;
-    }
-
-    time_last = time_now;
-    std::time_t result = std::time(nullptr);
-    auto s = std::string(std::asctime(std::localtime(&result)));
-    s.pop_back();
-    last_timestamp = s;
+  if (time_now - time_last < 1000) {
     return last_timestamp;
+  }
+
+  time_last = time_now;
+  std::time_t result = std::time(nullptr);
+  auto s = std::string(std::asctime(std::localtime(&result)));
+  s.pop_back();
+  last_timestamp = s;
+  return last_timestamp;
 }
 
 #ifndef DIE
 static void die (void)
 {
-    std::cerr << "exit(1) error" << std::endl;
-    exit(1);
+  std::cerr << "exit(1) error" << std::endl;
+  exit(1);
 }
 
 static void croak_ (const char *fmt, va_list args)
 {
-    static int g_die_occurred;
-    if (g_die_occurred) {
-        std::cerr <<
-          string_sprintf("\nPTRCHECK: NESTED FATAL ERROR %s %s %d ",
-                         __FILE__, __FUNCTION__, __LINE__);
-        exit(1);
-    }
-    g_die_occurred = 1;
+  static int g_die_occurred;
+  if (g_die_occurred) {
+    std::cerr <<
+      string_sprintf("\nPTRCHECK: NESTED FATAL ERROR %s %s %d ",
+             __FILE__, __FUNCTION__, __LINE__);
+    exit(1);
+  }
+  g_die_occurred = 1;
 
-    auto err = "\n" + timestamp();
-    err += ": PTRCHECK: FATAL ERROR: ";
-    err += string_sprintf(fmt, args);
-    std::cerr << err << std::endl;
-    g_die_occurred = true;
-    die();
+  auto err = "\n" + timestamp();
+  err += ": PTRCHECK: FATAL ERROR: ";
+  err += string_sprintf(fmt, args);
+  std::cerr << err << std::endl;
+  g_die_occurred = true;
+  die();
 }
 
 void CROAK (const char *fmt, ...)
 {
-    va_list args;
-    va_start(args, fmt);
-    croak_(fmt, args);
-    va_end(args);
+  va_list args;
+  va_start(args, fmt);
+  croak_(fmt, args);
+  va_end(args);
 }
 
 static void error_ (const char *fmt, va_list args)
 {
-    auto err = timestamp();
-    err += ": PTRCHECK: ERROR: ";
-    err += string_sprintf(fmt, args);
-    std::cerr << err << std::endl;
+  auto err = timestamp();
+  err += ": PTRCHECK: ERROR: ";
+  err += string_sprintf(fmt, args);
+  std::cerr << err << std::endl;
 }
 
 void ERROR(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
 void ERROR (const char *fmt, ...)
 {
-    va_list args;
-    va_start(args, fmt);
-    error_(fmt, args);
-    va_end(args);
+  va_list args;
+  va_start(args, fmt);
+  error_(fmt, args);
+  va_end(args);
 }
 
 #define DIE(args...)                                           \
-    std::cerr <<                                               \
-      string_sprintf("Died at %s:%s line %u",                  \
-                     __FILE__, __PRETTY_FUNCTION__, __LINE__); \
-    CROAK(args);                                               \
+  std::cerr <<                                               \
+    string_sprintf("Died at %s:%s line %u",                  \
+           __FILE__, __PRETTY_FUNCTION__, __LINE__); \
+  CROAK(args);                                               \
 
 #define ERR(args...)                                           \
-    std::cerr <<                                               \
-      string_sprintf("Error at %s:%s line %u",                 \
-                     __FILE__, __PRETTY_FUNCTION__, __LINE__); \
-    ERROR(args);                                               \
+  std::cerr <<                                               \
+    string_sprintf("Error at %s:%s line %u",                 \
+           __FILE__, __PRETTY_FUNCTION__, __LINE__); \
+  ERROR(args);                                               \
 
 #endif
 
@@ -169,13 +169,13 @@ void ERROR (const char *fmt, ...)
 // A hash table so we can check pointers fast.
 //
 typedef struct hash_elem_t_ {
-    struct hash_elem_t_ *next;
-    Ptrcheck *pc;
+  struct hash_elem_t_ *next;
+  Ptrcheck *pc;
 } hash_elem_t;
 
 typedef struct hash_t_ {
-    int hash_size;
-    hash_elem_t **elements;
+  int hash_size;
+  hash_elem_t **elements;
 } hash_t;
 
 static hash_t *hash;
@@ -195,9 +195,9 @@ static Ptrcheck *ringbuf_base;
 //
 static void *local_zalloc (int size)
 {
-    void *p;
-    p = calloc(1, size);
-    return (p);
+  void *p;
+  p = calloc(1, size);
+  return (p);
 }
 
 //
@@ -205,7 +205,7 @@ static void *local_zalloc (int size)
 //
 static void local_free (void *ptr)
 {
-    free(ptr);
+  free(ptr);
 }
 
 //
@@ -213,14 +213,14 @@ static void local_free (void *ptr)
 //
 static hash_elem_t ** ptr2hash (hash_t *hash_table, void *ptr)
 {
-    int slot;
+  int slot;
 
-    //
-    // Knock lower 2 bits off of pointer - these are always 0.
-    //
-    slot = (int)((((uintptr_t)(ptr)) >> 2) % hash_table->hash_size);
+  //
+  // Knock lower 2 bits off of pointer - these are always 0.
+  //
+  slot = (int)((((uintptr_t)(ptr)) >> 2) % hash_table->hash_size);
 
-    return (&hash_table->elements[slot]);
+  return (&hash_table->elements[slot]);
 }
 
 //
@@ -228,17 +228,17 @@ static hash_elem_t ** ptr2hash (hash_t *hash_table, void *ptr)
 //
 static hash_t *hash_init (int hash_size)
 {
-    hash_t *hash_table;
+  hash_t *hash_table;
 
-    hash_table = (__typeof__(hash_table)) local_zalloc(sizeof(hash_t));
+  hash_table = (__typeof__(hash_table)) local_zalloc(sizeof(hash_t));
 
-    hash_table->hash_size = hash_size;
+  hash_table->hash_size = hash_size;
 
-    hash_table->elements =
-        (__typeof__(hash_table->elements))
-                local_zalloc(hash_size * sizeof(hash_elem_t *));
+  hash_table->elements =
+    (__typeof__(hash_table->elements))
+        local_zalloc(hash_size * sizeof(hash_elem_t *));
 
-    return (hash_table);
+  return (hash_table);
 }
 
 //
@@ -246,35 +246,35 @@ static hash_t *hash_init (int hash_size)
 //
 static void hash_add (hash_t *hash_table, Ptrcheck *pc)
 {
-    hash_elem_t **slot;
-    hash_elem_t *elem;
+  hash_elem_t **slot;
+  hash_elem_t *elem;
 
-    if (!pc) {
-        return;
-    }
+  if (!pc) {
+    return;
+  }
 
-    if (!hash_table) {
-        local_free(pc);
-        return;
-    }
+  if (!hash_table) {
+    local_free(pc);
+    return;
+  }
 
-    slot = ptr2hash(hash_table, pc->ptr);
-    elem = *slot;
-    while (elem && (elem->pc->ptr != pc->ptr)) {
-        elem = elem->next;
-    }
+  slot = ptr2hash(hash_table, pc->ptr);
+  elem = *slot;
+  while (elem && (elem->pc->ptr != pc->ptr)) {
+    elem = elem->next;
+  }
 
-    if (elem != 0) {
-        local_free(pc);
-        return;
-    }
+  if (elem != 0) {
+    local_free(pc);
+    return;
+  }
 
-    elem = (__typeof__(elem)) local_zalloc(sizeof(*elem));
-    elem->pc = pc;
-    elem->next = *slot;
-    *slot = elem;
+  elem = (__typeof__(elem)) local_zalloc(sizeof(*elem));
+  elem->pc = pc;
+  elem->next = *slot;
+  *slot = elem;
 
-    ptr_check_some_pointers_changed = true;
+  ptr_check_some_pointers_changed = true;
 }
 
 //
@@ -282,24 +282,24 @@ static void hash_add (hash_t *hash_table, Ptrcheck *pc)
 //
 static hash_elem_t *hash_find (hash_t *hash_table, void *ptr)
 {
-    hash_elem_t **slot;
-    hash_elem_t *elem;
+  hash_elem_t **slot;
+  hash_elem_t *elem;
 
-    if (!hash_table) {
-        return (0);
-    }
+  if (!hash_table) {
+    return (0);
+  }
 
-    if (!ptr) {
-        return (0);
-    }
+  if (!ptr) {
+    return (0);
+  }
 
-    slot = ptr2hash(hash_table, ptr);
-    elem = *slot;
-    while (elem && (elem->pc->ptr != ptr)) {
-        elem = elem->next;
-    }
+  slot = ptr2hash(hash_table, ptr);
+  elem = *slot;
+  while (elem && (elem->pc->ptr != ptr)) {
+    elem = elem->next;
+  }
 
-    return (elem);
+  return (elem);
 }
 
 //
@@ -307,349 +307,349 @@ static hash_elem_t *hash_find (hash_t *hash_table, void *ptr)
 //
 static void hash_free (hash_t *hash_table, void *ptr)
 {
-    hash_elem_t **slot;
-    hash_elem_t *prev;
-    hash_elem_t *elem;
+  hash_elem_t **slot;
+  hash_elem_t *prev;
+  hash_elem_t *elem;
 
-    if (!hash_table) {
-        return;
-    }
+  if (!hash_table) {
+    return;
+  }
 
-    if (!ptr) {
-        return;
-    }
+  if (!ptr) {
+    return;
+  }
 
-    slot = ptr2hash(hash_table, ptr);
-    elem = *slot;
-    prev = 0;
+  slot = ptr2hash(hash_table, ptr);
+  elem = *slot;
+  prev = 0;
 
-    while (elem && (elem->pc->ptr != ptr)) {
-        prev = elem;
-        elem = elem->next;
-    }
+  while (elem && (elem->pc->ptr != ptr)) {
+    prev = elem;
+    elem = elem->next;
+  }
 
-    if (!elem) {
-        return;
-    }
+  if (!elem) {
+    return;
+  }
 
-    if (prev) {
-        prev->next = elem->next;
-    } else {
-        *slot = elem->next;
-    }
+  if (prev) {
+    prev->next = elem->next;
+  } else {
+    *slot = elem->next;
+  }
 
-    delete elem->pc;
-    local_free(elem);
+  delete elem->pc;
+  local_free(elem);
 
-    ptr_check_some_pointers_changed = true;
+  ptr_check_some_pointers_changed = true;
 }
 
 //
 // Check a pointer for validity.
 //
 static Ptrcheck *ptrcheck_verify_pointer (const void *ptr,
-                                          std::string &func,
-                                          std::string &file,
-                                          int line,
-                                          int dont_store)
+                      std::string &func,
+                      std::string &file,
+                      int line,
+                      int dont_store)
 {
-    static const char *unknown_ptr_warning = "** UNKNOWN POINTER ** ";
-    static const char *null_pointer_warning = "** NULL POINTER ** ";
-    int ring_ptr_size;
-    Ptrcheck *pc;
-    hash_elem_t *e;
+  static const char *unknown_ptr_warning = "** UNKNOWN POINTER ** ";
+  static const char *null_pointer_warning = "** NULL POINTER ** ";
+  int ring_ptr_size;
+  Ptrcheck *pc;
+  hash_elem_t *e;
 
-    if (!hash) {
-        return (0);
-    }
+  if (!hash) {
+    return (0);
+  }
 
-    if (!ptr) {
-        ERR("%s%p NULL pointer %s:%s line %u",
-            null_pointer_warning, ptr, file.c_str(), func.c_str(), line);
-    }
+  if (!ptr) {
+    ERR("%s%p NULL pointer %s:%s line %u",
+      null_pointer_warning, ptr, file.c_str(), func.c_str(), line);
+  }
 
-    //
-    // Check the robust handle is valid.
-    //
-    e = hash_find(hash, (void*) ptr);
-    if (e) {
-        pc = e->pc;
+  //
+  // Check the robust handle is valid.
+  //
+  e = hash_find(hash, (void*) ptr);
+  if (e) {
+    pc = e->pc;
 
-        if (dont_store) {
+    if (dont_store) {
 #ifdef ENABLE_DEBUG_PTRCHECK
-            std::cerr <<
-                string_sprintf(
-                    "PTRCHECK: %p verified at \"%s\" (%u bytes) at %s:%s line %u (do not store)\n",
-                    ptr,
-                    pc->what.c_str(),
-                    pc->size,
-                    file.c_str(),
-                    func.c_str(),
-                    line);
+      std::cerr <<
+        string_sprintf(
+          "PTRCHECK: %p verified at \"%s\" (%u bytes) at %s:%s line %u (do not store)\n",
+          ptr,
+          pc->what.c_str(),
+          pc->size,
+          file.c_str(),
+          func.c_str(),
+          line);
 #endif
-            return (pc);
-        }
+      return (pc);
+    }
 
-        //
-        // Add some free information that we know the pointer is safe at this
-        // point in time.
-        //
+    //
+    // Add some free information that we know the pointer is safe at this
+    // point in time.
+    //
 #ifdef ENABLE_PTRCHECK_HISTORY
-        auto l = pc->last_seen[pc->last_seen_at];
-        if (!l) {
-            l = pc->last_seen[pc->last_seen_at] = new Ptrcheck_history();
-        }
-        l->file = file;
-        l->func = func;
-        l->line = line;
-        delete l->tb;
+    auto l = pc->last_seen[pc->last_seen_at];
+    if (!l) {
+      l = pc->last_seen[pc->last_seen_at] = new Ptrcheck_history();
+    }
+    l->file = file;
+    l->func = func;
+    l->line = line;
+    delete l->tb;
 
-        l->tb = new Traceback();
-        l->tb->init();
-        l->ts = timestamp();
+    l->tb = new Traceback();
+    l->tb->init();
+    l->ts = timestamp();
 
-        pc->last_seen_at++;
-        pc->last_seen_size++;
+    pc->last_seen_at++;
+    pc->last_seen_size++;
 
-        if (pc->last_seen_at >= ENABLE_PTRCHECK_HISTORY) {
-            pc->last_seen_at = 0;
-        }
-
-        if (pc->last_seen_size >= ENABLE_PTRCHECK_HISTORY) {
-            pc->last_seen_size = ENABLE_PTRCHECK_HISTORY;
-        }
-#endif
-#ifdef ENABLE_DEBUG_PTRCHECK
-        std::cerr <<
-            string_sprintf(
-                "PTRCHECK: %p verified at \"%s\" (%u bytes) at %s:%s line %u at %s\n",
-                ptr,
-                pc->what.c_str(),
-                pc->size,
-                file.c_str(),
-                func.c_str(),
-                line,
-                l->ts.c_str());
-#endif
-        return (pc);
+    if (pc->last_seen_at >= ENABLE_PTRCHECK_HISTORY) {
+      pc->last_seen_at = 0;
     }
 
-    //
-    // We may be about to crash. Complain!
-    //
-    ERR("%s%p %s:%s line %u",
-        unknown_ptr_warning, ptr, file.c_str(), func.c_str(), line);
+    if (pc->last_seen_size >= ENABLE_PTRCHECK_HISTORY) {
+      pc->last_seen_size = ENABLE_PTRCHECK_HISTORY;
+    }
+#endif
+#ifdef ENABLE_DEBUG_PTRCHECK
+    std::cerr <<
+      string_sprintf(
+        "PTRCHECK: %p verified at \"%s\" (%u bytes) at %s:%s line %u at %s\n",
+        ptr,
+        pc->what.c_str(),
+        pc->size,
+        file.c_str(),
+        func.c_str(),
+        line,
+        l->ts.c_str());
+#endif
+    return (pc);
+  }
 
+  //
+  // We may be about to crash. Complain!
+  //
+  ERR("%s%p %s:%s line %u",
+    unknown_ptr_warning, ptr, file.c_str(), func.c_str(), line);
+
+  //
+  // Check the ring buffer to see if we've seen this pointer before.
+  //
+  pc = &ringbuf_next[0];
+  pc--;
+
+  if (pc < ringbuf_base) {
+    pc = ringbuf_base + ringbuf_max_size - 1;
+  }
+
+  ring_ptr_size = ringbuf_current_size;
+
+  CON("vvvvv Pointer history for %p vvvvv (max %u ptrs saved)", ptr, ring_ptr_size);
+
+  //
+  // Walk back through the ring buffer.
+  //
+  while (ring_ptr_size) {
     //
-    // Check the ring buffer to see if we've seen this pointer before.
+    // Found a match?
     //
-    pc = &ringbuf_next[0];
+    if (pc->ptr == ptr) {
+      CON("----- Pointer is known");
+
+      auto a = pc->allocated_by;
+      auto ts = timestamp();
+      if (a) {
+        std::cerr <<
+          string_sprintf(
+            "PTRCHECK: %p allocated at \"%s\" (%u bytes) at %s:%s line %u at %s\n",
+            ptr,
+            pc->what.c_str(),
+            pc->size,
+            a->file.c_str(),
+            a->func.c_str(),
+            a->line,
+            a->ts.c_str());
+        std::cerr << a->tb->to_string() << std::endl;
+
+    LOG("PTRCHECK:");
+        LOG("PTRCHECK: %p allocated at \"%s\" (%u bytes) at %s:%s line %u at %s",
+          ptr,
+          pc->what.c_str(),
+          pc->size,
+          a->file.c_str(),
+          a->func.c_str(),
+          a->line,
+          a->ts.c_str());
+    a->tb->log();
+      }
+
+      auto f = pc->freed_by;
+      if (f) {
+        std::cerr <<
+          string_sprintf(
+            "PTRCHECK: %p freed at %s:%s line %u at %s\n",
+            ptr,
+            f->file.c_str(),
+            f->func.c_str(),
+            f->line,
+            f->ts.c_str());
+        std::cerr << f->tb->to_string() << std::endl;
+
+    LOG("PTRCHECK:");
+        LOG("PTRCHECK: %p freed at %s:%s line %u at %s",
+          ptr,
+          f->file.c_str(),
+          f->func.c_str(),
+          f->line,
+          f->ts.c_str());
+        f->tb->log();
+      }
+
+      //
+      // Dump the pointer history.
+      //
+#ifdef ENABLE_PTRCHECK_HISTORY
+      int h = pc->last_seen_at;
+      for (auto i=0; i < pc->last_seen_size; i++) {
+        if (--h < 0) {
+          h = ENABLE_PTRCHECK_HISTORY-1;
+        }
+
+        auto H = pc->last_seen[h];
+        if (H) {
+          std::cerr <<
+            string_sprintf(
+              "PTRCHECK: %p last seen at [%u] at %s:%s line %u at %s\n",
+              ptr,
+              i,
+              H->file.c_str(),
+              H->func.c_str(),
+              H->line,
+              H->ts.c_str());
+          std::cerr << H->tb->to_string() << std::endl;
+
+          LOG("PTRCHECK:");
+          LOG("PTRCHECK: %p last seen at [%u] at %s:%s line %u at %s",
+            ptr,
+            i,
+            H->file.c_str(),
+            H->func.c_str(),
+            H->line,
+            H->ts.c_str());
+          H->tb->log();
+        }
+      }
+#endif
+      //
+      // Memory reuse can cause a lot of false hits, so stop after
+      // the first match.
+      //
+      break;
+    }
+
+    ring_ptr_size--;
     pc--;
 
+    //
+    // Handle wraps.
+    //
     if (pc < ringbuf_base) {
-        pc = ringbuf_base + ringbuf_max_size - 1;
+      pc = ringbuf_base + ringbuf_max_size - 1;
     }
+  }
 
-    ring_ptr_size = ringbuf_current_size;
-
-    CON("vvvvv Pointer history for %p vvvvv (max %u ptrs saved)", ptr, ring_ptr_size);
-
-    //
-    // Walk back through the ring buffer.
-    //
-    while (ring_ptr_size) {
-        //
-        // Found a match?
-        //
-        if (pc->ptr == ptr) {
-            CON("----- Pointer is known");
-
-            auto a = pc->allocated_by;
-            auto ts = timestamp();
-            if (a) {
-                std::cerr <<
-                    string_sprintf(
-                        "PTRCHECK: %p allocated at \"%s\" (%u bytes) at %s:%s line %u at %s\n",
-                        ptr,
-                        pc->what.c_str(),
-                        pc->size,
-                        a->file.c_str(),
-                        a->func.c_str(),
-                        a->line,
-                        a->ts.c_str());
-                std::cerr << a->tb->to_string() << std::endl;
-
-		LOG("PTRCHECK:");
-                LOG("PTRCHECK: %p allocated at \"%s\" (%u bytes) at %s:%s line %u at %s",
-                    ptr,
-                    pc->what.c_str(),
-                    pc->size,
-                    a->file.c_str(),
-                    a->func.c_str(),
-                    a->line,
-                    a->ts.c_str());
-		a->tb->log();
-            }
-
-            auto f = pc->freed_by;
-            if (f) {
-                std::cerr <<
-                    string_sprintf(
-                        "PTRCHECK: %p freed at %s:%s line %u at %s\n",
-                        ptr,
-                        f->file.c_str(),
-                        f->func.c_str(),
-                        f->line,
-                        f->ts.c_str());
-                std::cerr << f->tb->to_string() << std::endl;
-
-		LOG("PTRCHECK:");
-                LOG("PTRCHECK: %p freed at %s:%s line %u at %s",
-                    ptr,
-                    f->file.c_str(),
-                    f->func.c_str(),
-                    f->line,
-                    f->ts.c_str());
-                f->tb->log();
-            }
-
-            //
-            // Dump the pointer history.
-            //
-#ifdef ENABLE_PTRCHECK_HISTORY
-            int h = pc->last_seen_at;
-            for (auto i=0; i < pc->last_seen_size; i++) {
-                if (--h < 0) {
-                    h = ENABLE_PTRCHECK_HISTORY-1;
-                }
-
-                auto H = pc->last_seen[h];
-                if (H) {
-                    std::cerr <<
-                        string_sprintf(
-                            "PTRCHECK: %p last seen at [%u] at %s:%s line %u at %s\n",
-                            ptr,
-                            i,
-                            H->file.c_str(),
-                            H->func.c_str(),
-                            H->line,
-                            H->ts.c_str());
-                    std::cerr << H->tb->to_string() << std::endl;
-
-                    LOG("PTRCHECK:");
-                    LOG("PTRCHECK: %p last seen at [%u] at %s:%s line %u at %s",
-                        ptr,
-                        i,
-                        H->file.c_str(),
-                        H->func.c_str(),
-                        H->line,
-                        H->ts.c_str());
-                    H->tb->log();
-                }
-            }
-#endif
-            //
-            // Memory reuse can cause a lot of false hits, so stop after
-            // the first match.
-            //
-            break;
-        }
-
-        ring_ptr_size--;
-        pc--;
-
-        //
-        // Handle wraps.
-        //
-        if (pc < ringbuf_base) {
-            pc = ringbuf_base + ringbuf_max_size - 1;
-        }
-    }
-
-    CON("^^^^^ End of pointer history for %p ^^^^^", ptr);
-    exit(1);
+  CON("^^^^^ End of pointer history for %p ^^^^^", ptr);
+  exit(1);
 }
 
 //
 // Record this pointer.
 //
 void *ptrcheck_alloc (const void *ptr,
-                      std::string what, int size, std::string func,
-                      std::string file, int line)
+            std::string what, int size, std::string func,
+            std::string file, int line)
 {
-    Ptrcheck *pc;
+  Ptrcheck *pc;
 
 #ifdef ENABLE_DEBUG_PTRCHECK
-    auto ts = timestamp();
-    fprintf(stderr, "%s: PTRCHECK: Alloc %p \"%s\" (%u bytes) at %s:%s line %u\n",
-            ts.c_str(),
-            ptr,
-            what.c_str(),
-            size,
-            file.c_str(),
-            func.c_str(),
-            line);
+  auto ts = timestamp();
+  fprintf(stderr, "%s: PTRCHECK: Alloc %p \"%s\" (%u bytes) at %s:%s line %u\n",
+      ts.c_str(),
+      ptr,
+      what.c_str(),
+      size,
+      file.c_str(),
+      func.c_str(),
+      line);
 #endif
 
-    if (!ptr) {
-        ERR("Null pointer");
-    }
+  if (!ptr) {
+    ERR("Null pointer");
+  }
 
+  //
+  // Create a hash table to store pointers.
+  //
+  if (!hash) {
     //
-    // Create a hash table to store pointers.
+    // Create enough space for lots of pointers.
     //
+    hash = hash_init(1046527 * 11/* prime */);
+
     if (!hash) {
-        //
-        // Create enough space for lots of pointers.
-        //
-        hash = hash_init(1046527 * 11/* prime */);
-
-        if (!hash) {
-            return ((void*) ptr);
-        }
-
-        //
-        // And a ring buffer to store old pointer into.
-        //
-        ringbuf_next = &ringbuf[0];
-        ringbuf_base = &ringbuf[0];
-        ringbuf_current_size = 0;
+      return ((void*) ptr);
     }
 
     //
-    // Missing an earlier free?
+    // And a ring buffer to store old pointer into.
     //
-    if (hash_find(hash, (void*) ptr)) {
-        ERR("Pointer %p already exists and attempting to add again", ptr);
-        return ((void*) ptr);
-    }
+    ringbuf_next = &ringbuf[0];
+    ringbuf_base = &ringbuf[0];
+    ringbuf_current_size = 0;
+  }
 
-    //
-    // Allocate a block of data to describe the pointer and owner.
-    //
-    pc = new Ptrcheck();
-
-    //
-    // Populate the data block.
-    //
-    pc->ptr = (void*) ptr;
-    pc->what = what;
-    pc->size = size;
-
-    auto a = pc->allocated_by = new Ptrcheck_history();
-    a->func = func;
-    a->file = file;
-    a->line = line;
-    a->ts = timestamp();
-    a->tb = new Traceback();
-    a->tb->init();
-
-    //
-    // Add it to the hash. Not the ring buffer (only when freed).
-    //
-    hash_add(hash, pc);
-
+  //
+  // Missing an earlier free?
+  //
+  if (hash_find(hash, (void*) ptr)) {
+    ERR("Pointer %p already exists and attempting to add again", ptr);
     return ((void*) ptr);
+  }
+
+  //
+  // Allocate a block of data to describe the pointer and owner.
+  //
+  pc = new Ptrcheck();
+
+  //
+  // Populate the data block.
+  //
+  pc->ptr = (void*) ptr;
+  pc->what = what;
+  pc->size = size;
+
+  auto a = pc->allocated_by = new Ptrcheck_history();
+  a->func = func;
+  a->file = file;
+  a->line = line;
+  a->ts = timestamp();
+  a->tb = new Traceback();
+  a->tb->init();
+
+  //
+  // Add it to the hash. Not the ring buffer (only when freed).
+  //
+  hash_add(hash, pc);
+
+  return ((void*) ptr);
 }
 
 //
@@ -658,82 +658,82 @@ void *ptrcheck_alloc (const void *ptr,
 //
 int ptrcheck_free (void *ptr, std::string func, std::string file, int line)
 {
-    Ptrcheck *pc;
+  Ptrcheck *pc;
 
 #ifdef ENABLE_DEBUG_PTRCHECK
-    auto ts = timestamp();
-    fprintf(stderr, "%s: PTRCHECK: Free %p at %s:%s line %u ringbuf_current_size %u\n",
-            ts.c_str(),
-            ptr,
-            file.c_str(),
-            func.c_str(),
-            line, ringbuf_current_size);
+  auto ts = timestamp();
+  fprintf(stderr, "%s: PTRCHECK: Free %p at %s:%s line %u ringbuf_current_size %u\n",
+      ts.c_str(),
+      ptr,
+      file.c_str(),
+      func.c_str(),
+      line, ringbuf_current_size);
 #endif
 
-    if (!ptr) {
-        ERR("Null pointer");
-        return false;
-    }
+  if (!ptr) {
+    ERR("Null pointer");
+    return false;
+  }
 
-    pc = ptrcheck_verify_pointer(ptr, file, func, line, true /* dont store */);
-    if (!pc) {
-        DIE("Failed to save pointer history");
-        return false;
-    }
+  pc = ptrcheck_verify_pointer(ptr, file, func, line, true /* dont store */);
+  if (!pc) {
+    DIE("Failed to save pointer history");
+    return false;
+  }
 
-    //
-    // Add some free information that we know the pointer is safe at this
-    // point in time.
-    //
-    auto f = pc->freed_by = new Ptrcheck_history();
-    f->file = file;
-    f->func = func;
-    f->line = line;
-    f->tb = new Traceback();
-    f->tb->init();
-    f->ts = timestamp();
+  //
+  // Add some free information that we know the pointer is safe at this
+  // point in time.
+  //
+  auto f = pc->freed_by = new Ptrcheck_history();
+  f->file = file;
+  f->func = func;
+  f->line = line;
+  f->tb = new Traceback();
+  f->tb->init();
+  f->ts = timestamp();
 
-    //
-    // Add the free info to the ring buffer.
-    //
-    *ringbuf_next = *pc;
+  //
+  // Add the free info to the ring buffer.
+  //
+  *ringbuf_next = *pc;
 
-    //
-    // Take care of wraps.
-    //
-    ringbuf_next++;
-    if (ringbuf_next >= ringbuf_base + ringbuf_max_size) {
-        ringbuf_next = ringbuf_base;
-    }
+  //
+  // Take care of wraps.
+  //
+  ringbuf_next++;
+  if (ringbuf_next >= ringbuf_base + ringbuf_max_size) {
+    ringbuf_next = ringbuf_base;
+  }
 
-    //
-    // Increment the ring buffer used size up to the limit.
-    //
-    if (ringbuf_current_size < ringbuf_max_size) {
-        ringbuf_current_size++;
-    } else {
-        ERR("overflowed ptrcheck ring buf size %u", ringbuf_current_size);
-    }
+  //
+  // Increment the ring buffer used size up to the limit.
+  //
+  if (ringbuf_current_size < ringbuf_max_size) {
+    ringbuf_current_size++;
+  } else {
+    ERR("overflowed ptrcheck ring buf size %u", ringbuf_current_size);
+  }
 
-    hash_free(hash, ptr);
+  hash_free(hash, ptr);
 
-    return true;
+  return true;
 }
 
 //
 // Check a pointer for validity with no recording of history.
 //
 int ptrcheck_verify (const void *ptr, std::string &func, std::string &file,
-                     int line)
+           int line)
 {
-    IF_NODEBUG5 {
-        if (!ptr_check_some_pointers_changed) {
-            return true;
-        }
+  IF_NODEBUG5 {
+    if (!ptr_check_some_pointers_changed) {
+      return true;
     }
+  }
 
-    return (ptrcheck_verify_pointer(ptr, file, func, line,
-                                    false /* don't store */) != 0);
+  return (ptrcheck_verify_pointer(ptr, file, func, line,
+                  false /* don't store */) != 0);
 }
 
 //
@@ -741,117 +741,117 @@ int ptrcheck_verify (const void *ptr, std::string &func, std::string &file,
 //
 void ptrcheck_leak_print (void)
 {
-    hash_elem_t **slot;
-    hash_elem_t *elem;
-    Ptrcheck *pc;
-    int i;
-    int leak;
+  hash_elem_t **slot;
+  hash_elem_t *elem;
+  Ptrcheck *pc;
+  int i;
+  int leak;
 
-    leak = 0;
+  leak = 0;
 
-    if (!hash) {
-        return;
-    }
+  if (!hash) {
+    return;
+  }
 
-    for (i = 0; i < hash->hash_size; i++) {
-        slot = &hash->elements[i];
-        elem = *slot;
+  for (i = 0; i < hash->hash_size; i++) {
+    slot = &hash->elements[i];
+    elem = *slot;
 
-        while (elem) {
-            pc = elem->pc;
-            leak++;
+    while (elem) {
+      pc = elem->pc;
+      leak++;
 
-            auto a = pc->allocated_by;
-            if (a) {
-                fprintf(stderr,
-                    "PTRCHECK: Leak %p \"%s\" (%u bytes) at %s:%s line %u at %s\n",
-                    pc->ptr,
-                    pc->what.c_str(),
-                    pc->size,
-                    a->file.c_str(),
-                    a->func.c_str(),
-                    a->line,
-                    a->ts.c_str());
+      auto a = pc->allocated_by;
+      if (a) {
+        fprintf(stderr,
+          "PTRCHECK: Leak %p \"%s\" (%u bytes) at %s:%s line %u at %s\n",
+          pc->ptr,
+          pc->what.c_str(),
+          pc->size,
+          a->file.c_str(),
+          a->func.c_str(),
+          a->line,
+          a->ts.c_str());
 
-		fprintf(stderr, "%s", a->tb->to_string().c_str());
-            } else {
-                fprintf(stderr, "PTRCHECK: Leak \"%s\" (%u bytes)\n",
-                        pc->what.c_str(), pc->size);
-            }
+    fprintf(stderr, "%s", a->tb->to_string().c_str());
+      } else {
+        fprintf(stderr, "PTRCHECK: Leak \"%s\" (%u bytes)\n",
+            pc->what.c_str(), pc->size);
+      }
 
-            //
-            // Dump the pointer history.
-            //
+      //
+      // Dump the pointer history.
+      //
 #ifdef ENABLE_PTRCHECK_HISTORY
-            int h = pc->last_seen_at;
-            for (auto j=0; j < pc->last_seen_size; j++) {
-                if (--h < 0) {
-                    h = ENABLE_PTRCHECK_HISTORY-1;
-                }
-
-                auto H = pc->last_seen[h];
-                if (H) {
-		    fprintf(stderr,
-                        "PTRCHECK: Last seen at [%u] at %s:%s line %u at %s\n",
-                        j,
-                        H->file.c_str(),
-                        H->func.c_str(),
-                        H->line,
-                        H->ts.c_str());
-		    fprintf(stderr, "%s", H->tb->to_string().c_str());
-                }
-            }
-#endif
-            if (elem->next == elem) {
-                ERR("Hash table corruption");
-            }
-
-            elem = elem->next;
+      int h = pc->last_seen_at;
+      for (auto j=0; j < pc->last_seen_size; j++) {
+        if (--h < 0) {
+          h = ENABLE_PTRCHECK_HISTORY-1;
         }
-    }
 
-    if (!leak) {
-        CON("No memory leaks!");
+        auto H = pc->last_seen[h];
+        if (H) {
+      fprintf(stderr,
+            "PTRCHECK: Last seen at [%u] at %s:%s line %u at %s\n",
+            j,
+            H->file.c_str(),
+            H->func.c_str(),
+            H->line,
+            H->ts.c_str());
+      fprintf(stderr, "%s", H->tb->to_string().c_str());
+        }
+      }
+#endif
+      if (elem->next == elem) {
+        ERR("Hash table corruption");
+      }
+
+      elem = elem->next;
     }
+  }
+
+  if (!leak) {
+    CON("No memory leaks!");
+  }
 }
 
 #if 0
 void ptrcheck_usage_cleanup (void)
 {
-    hash_elem_t //slot;
-    hash_elem_t *elem;
-    hash_elem_t *next;
-    Ptrcheck *pc;
-    int i;
-    int j;
+  hash_elem_t //slot;
+  hash_elem_t *elem;
+  hash_elem_t *next;
+  Ptrcheck *pc;
+  int i;
+  int j;
 
-    if (!hash) {
-        return;
+  if (!hash) {
+    return;
+  }
+
+  for (i = 0; i < hash->hash_size; i++) {
+    slot = &hash->elements[i];
+    elem = *slot;
+
+    while (elem) {
+      pc = elem->pc;
+
+      delete (pc->allocated_by);
+      delete (pc->freed_by);
+
+      for (j=0; j < ENABLE_PTRCHECK_HISTORY; j++) {
+        delete (pc->last_seen[j]);
+      }
+
+      next = elem->next;
+      local_free(elem);
+      elem = next;
     }
+  }
 
-    for (i = 0; i < hash->hash_size; i++) {
-        slot = &hash->elements[i];
-        elem = *slot;
+  local_free(hash->elements);
+  local_free(hash);
 
-        while (elem) {
-            pc = elem->pc;
-
-            delete (pc->allocated_by);
-            delete (pc->freed_by);
-
-            for (j=0; j < ENABLE_PTRCHECK_HISTORY; j++) {
-                delete (pc->last_seen[j]);
-            }
-
-            next = elem->next;
-            local_free(elem);
-            elem = next;
-        }
-    }
-
-    local_free(hash->elements);
-    local_free(hash);
-
-    hash = 0;
+  hash = 0;
 }
 #endif

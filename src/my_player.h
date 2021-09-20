@@ -8,11 +8,11 @@
 #define _MY_PLAYER_H_
 
 extern void player_tick(bool left = false,
-                        bool right = false,
-                        bool up = false,
-                        bool down = false,
-                        bool attack = false,
-                        bool wait = false,
-                        bool jump = false);
+            bool right = false,
+            bool up = false,
+            bool down = false,
+            bool attack = false,
+            bool wait = false,
+            bool jump = false);
 
 #endif

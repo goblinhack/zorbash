@@ -15,14 +15,14 @@
 
 void Thing::gc (void)
 {_
-    int group = get_group();
-    auto result = level->all_things_to_be_destroyed[group].insert(std::pair(id, this));
-    if (result.second == false) {
-        //
-        // Is this a problem?
-        //
-        err("Failed to insert into gc thing map");
-    } else {
-        dbg("Inserted into gc thing map");
-    }
+  int group = get_group();
+  auto result = level->all_things_to_be_destroyed[group].insert(std::pair(id, this));
+  if (result.second == false) {
+    //
+    // Is this a problem?
+    //
+    err("Failed to insert into gc thing map");
+  } else {
+    dbg("Inserted into gc thing map");
+  }
 }

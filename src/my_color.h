@@ -13,94 +13,94 @@ class color
 {
 public:
 
-    unsigned char r {};
-    unsigned char g {};
-    unsigned char b {};
-    unsigned char a {};
+  unsigned char r {};
+  unsigned char g {};
+  unsigned char b {};
+  unsigned char a {};
 
-    color (void) : r(0), g(0), b(0), a(0) { }
+  color (void) : r(0), g(0), b(0), a(0) { }
 
-    color (unsigned char r, unsigned char g, unsigned char b) : r(r), g(g), b(b), a(255) { }
+  color (unsigned char r, unsigned char g, unsigned char b) : r(r), g(g), b(b), a(255) { }
 
-    color (unsigned char r, unsigned char g, unsigned char b, unsigned char a) : r(r), g(g), b(b), a(a) { }
+  color (unsigned char r, unsigned char g, unsigned char b, unsigned char a) : r(r), g(g), b(b), a(a) { }
 
-    color (const color &c) : r(c.r), g(c.g), b(c.b), a(c.a) { }
+  color (const color &c) : r(c.r), g(c.g), b(c.b), a(c.a) { }
 
 #ifdef UNUSED
-    friend std::ostream& operator<<(std::ostream &out,
-                                    Bits<const color & > const my)
-    {
-        out << bits(my.t.r) << bits(my.t.g) << bits(my.t.b) << bits(my.t.a);
-        return (out);
-    }
+  friend std::ostream& operator<<(std::ostream &out,
+                  Bits<const color & > const my)
+  {
+    out << bits(my.t.r) << bits(my.t.g) << bits(my.t.b) << bits(my.t.a);
+    return (out);
+  }
 
-    friend std::istream& operator>>(std::istream &in, Bits<color &> my)
-    {
-        in >> bits(my.t.r) >> bits(my.t.g) >> bits(my.t.b) >> bits(my.t.a);
-        return (in);
-    }
+  friend std::istream& operator>>(std::istream &in, Bits<color &> my)
+  {
+    in >> bits(my.t.r) >> bits(my.t.g) >> bits(my.t.b) >> bits(my.t.a);
+    return (in);
+  }
 
-    friend std::ostream& operator << (std::ostream &out, const color &my)
-    {
-        out << "(" << my.r << ", " << my.g << ", " << my.b << ", " << my.a << ")";
-        return (out);
-    }
+  friend std::ostream& operator << (std::ostream &out, const color &my)
+  {
+    out << "(" << my.r << ", " << my.g << ", " << my.b << ", " << my.a << ")";
+    return (out);
+  }
 
-    void operator+= (color c)
-    {
-        r += c.r; g += c.g; b += c.b; a += c.a;
-    }
+  void operator+= (color c)
+  {
+    r += c.r; g += c.g; b += c.b; a += c.a;
+  }
 
-    void operator-= (color c)
-    {
-        c -= c.r; c -= c.g; c -= c.b; a -= c.a;
-    }
+  void operator-= (color c)
+  {
+    c -= c.r; c -= c.g; c -= c.b; a -= c.a;
+  }
 
-    friend color operator+ (color c, color b)
-    {
-        return (color(c.r + b.r, c.g + b.g, c.b + b.b, c.a + b.a));
-    }
+  friend color operator+ (color c, color b)
+  {
+    return (color(c.r + b.r, c.g + b.g, c.b + b.b, c.a + b.a));
+  }
 
-    friend color operator- (color c, color b)
-    {
-        return (color(c.r - b.r, c.g - b.g, c.b - b.b, c.a - b.a));
-    }
+  friend color operator- (color c, color b)
+  {
+    return (color(c.r - b.r, c.g - b.g, c.b - b.b, c.a - b.a));
+  }
 
-    friend color operator/ (color c, color b)
-    {
-        return (color(c.r / b.r, c.g / b.g, c.b / b.b, c.a / b.a));
-    }
+  friend color operator/ (color c, color b)
+  {
+    return (color(c.r / b.r, c.g / b.g, c.b / b.b, c.a / b.a));
+  }
 
-    friend color operator* (color c, color b)
-    {
-        return (color(c.r * b.r, c.g * b.g, c.b * b.b, c.a * b.a));
-    }
+  friend color operator* (color c, color b)
+  {
+    return (color(c.r * b.r, c.g * b.g, c.b * b.b, c.a * b.a));
+  }
 
-    friend color operator/ (color c, T b)
-    {
-        return (color(c.r / b, c.g / b, c.b / b, c.a / b));
-    }
+  friend color operator/ (color c, T b)
+  {
+    return (color(c.r / b, c.g / b, c.b / b, c.a / b));
+  }
 
-    void operator*= (T c)
-    {
-        r *= c; g *= c; b *= c; a *= c;
-    }
+  void operator*= (T c)
+  {
+    r *= c; g *= c; b *= c; a *= c;
+  }
 
-    void operator/= (T c)
-    {
-        r /= c; g /= c; b /= c; a /= c;
-    }
+  void operator/= (T c)
+  {
+    r /= c; g /= c; b /= c; a /= c;
+  }
 #endif
 
-    friend bool operator== (const color &c, const color &b)
-    {
-        return (c.r == b.r) && (c.g == b.g) && (c.b == b.b) && (c.a == b.a);
-    }
+  friend bool operator== (const color &c, const color &b)
+  {
+    return (c.r == b.r) && (c.g == b.g) && (c.b == b.b) && (c.a == b.a);
+  }
 
-    friend bool operator!= (const color &c, const color &b)
-    {
-        return (!(c==b));
-    }
+  friend bool operator!= (const color &c, const color &b)
+  {
+    return (!(c==b));
+  }
 };
 
 #if 0

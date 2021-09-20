@@ -31,23 +31,23 @@
 #ifdef _WIN32
 //    #include "GL/glew.h"
 #elif __APPLE__
-    #include "OpenGL/gl.h"
-    #include "OpenGL/glext.h"
-    #include "TargetConditionals.h"
+  #include "OpenGL/gl.h"
+  #include "OpenGL/glext.h"
+  #include "TargetConditionals.h"
 
-    #if TARGET_IPHONE_SIMULATOR
-        // iOS Simulator
-    #elif TARGET_OS_IPHONE
-        // iOS device
-    #elif TARGET_OS_MAC
-        // Other kinds of Mac OS
-    #else
-        // Unsupported platform
-    #endif
+  #if TARGET_IPHONE_SIMULATOR
+    // iOS Simulator
+  #elif TARGET_OS_IPHONE
+    // iOS device
+  #elif TARGET_OS_MAC
+    // Other kinds of Mac OS
+  #else
+    // Unsupported platform
+  #endif
 #else
-    // linux
-    #include "GL/gl.h"
-    #include "GL/glext.h"
+  // linux
+  #include "GL/gl.h"
+  #include "GL/glext.h"
 #endif
 
 #include "my_color.h"
@@ -59,8 +59,8 @@
 //
 #define gl_push_texcoord(p, x, y) \
 { \
-    *p++ = x; \
-    *p++ = y; \
+  *p++ = x; \
+  *p++ = y; \
 }
 
 //
@@ -68,10 +68,10 @@
 //
 #define gl_push_vertex(p, x, y) \
 { \
-    auto c = (GLushort*) p; \
-    *c++ = x; \
-    *c++ = y; \
-    p = (GLfloat*)c; \
+  auto c = (GLushort*) p; \
+  *c++ = x; \
+  *c++ = y; \
+  p = (GLfloat*)c; \
 }
 
 //
@@ -79,99 +79,99 @@
 //
 #define gl_push_rgba(p, r, g, b, a) \
 { \
-    auto c = (GLubyte*) p; \
-    *c++ = r; \
-    *c++ = g; \
-    *c++ = b; \
-    *c++ = a; \
-    p = (GLfloat*)c; \
+  auto c = (GLubyte*) p; \
+  *c++ = r; \
+  *c++ = g; \
+  *c++ = b; \
+  *c++ = a; \
+  p = (GLfloat*)c; \
 } \
 
 #define Vertex2(x, y) \
-    *xyp++ = x;       \
-    *xyp++ = y;
+  *xyp++ = x;       \
+  *xyp++ = y;
 
 //
 // gl_push_triangle
 //
 #define gl_push_triangle_colored(p, \
-                                 p_end, \
-                                 x1, y1, \
-                                 x2, y2, \
-                                 x3, y3, \
-                                 r1, g1, b1, a1, \
-                                 r2, g2, b2, a2, \
-                                 r3, g3, b3, a3) \
+                 p_end, \
+                 x1, y1, \
+                 x2, y2, \
+                 x3, y3, \
+                 r1, g1, b1, a1, \
+                 r2, g2, b2, a2, \
+                 r3, g3, b3, a3) \
 { \
-    gl_push_vertex(p, x1, y1); \
-    gl_push_rgba(p, r1, g1, b1, a1); \
-    gl_push_vertex(p, x2, y2); \
-    gl_push_rgba(p, r2, g2, b2, a2); \
-    gl_push_vertex(p, x3, y3); \
-    gl_push_rgba(p, r2, g3, b3, a3); \
+  gl_push_vertex(p, x1, y1); \
+  gl_push_rgba(p, r1, g1, b1, a1); \
+  gl_push_vertex(p, x2, y2); \
+  gl_push_rgba(p, r2, g2, b2, a2); \
+  gl_push_vertex(p, x3, y3); \
+  gl_push_rgba(p, r2, g3, b3, a3); \
 } \
 
 #define gl_push_colored_point(p, p_end, x1, y1, r1, g1, b1, a1) \
 { \
-    gl_push_vertex(p, x1, y1); \
-    gl_push_rgba(p, r1, g1, b1, a1); \
+  gl_push_vertex(p, x1, y1); \
+  gl_push_rgba(p, r1, g1, b1, a1); \
 } \
 
 #define gl_push_point(p, p_end, x1, y1) \
 { \
-    gl_push_vertex(p, x1, y1); \
+  gl_push_vertex(p, x1, y1); \
 } \
 
 //
 // gl_push_tex_point
 //
 #define gl_push_tex_point(p, p_end, \
-                          tx, ty, \
-                          x1, y1, \
-                          r1, g1, b1, a1) \
+              tx, ty, \
+              x1, y1, \
+              r1, g1, b1, a1) \
 { \
-    gl_push_texcoord(p, tx, ty); \
-    gl_push_vertex(p, x1, y1); \
-    gl_push_rgba(p, r1, g1, b1, a1); \
+  gl_push_texcoord(p, tx, ty); \
+  gl_push_vertex(p, x1, y1); \
+  gl_push_rgba(p, r1, g1, b1, a1); \
 } \
 
 #define triangle_colored(x1, y1, \
-                         x2, y2, \
-                         x3, y3, \
-                         r1, g1, b1, a1, \
-                         r2, g2, b2, a2, \
-                         r3, g3, b3, a3) \
+             x2, y2, \
+             x3, y3, \
+             r1, g1, b1, a1, \
+             r2, g2, b2, a2, \
+             r3, g3, b3, a3) \
 { \
-    gl_push_triangle_colored(bufp, \
-                             bufp_end, \
-                             x1, y1, \
-                             x2, y2, \
-                             x3, y3, \
-                             r1, g1, b1, a1, \
-                             r2, g2, b2, a2, \
-                             r3, g3, b3, a3); \
+  gl_push_triangle_colored(bufp, \
+               bufp_end, \
+               x1, y1, \
+               x2, y2, \
+               x3, y3, \
+               r1, g1, b1, a1, \
+               r2, g2, b2, a2, \
+               r3, g3, b3, a3); \
 } \
 
 #define push_colored_point(x1, y1, r1, g1, b1, a1) \
 { \
-    gl_push_colored_point(bufp, \
-                          bufp_end, \
-                          x1, y1, \
-                          r1, g1, b1, a1); \
+  gl_push_colored_point(bufp, \
+              bufp_end, \
+              x1, y1, \
+              r1, g1, b1, a1); \
 } \
 
 #define push_point(x1, y1) \
 { \
-    gl_push_point(bufp, bufp_end, x1, y1); \
+  gl_push_point(bufp, bufp_end, x1, y1); \
 } \
 
 #define push_tex_point(tx, ty, x1, y1, r1, g1, b1, a1) \
 { \
-    gl_push_tex_point(bufp, \
-                      bufp_end, \
-                      tx, ty, \
-                      x1, y1, \
-                      r1, g1, b1, a1); \
+  gl_push_tex_point(bufp, \
+            bufp_end, \
+            tx, ty, \
+            x1, y1, \
+            r1, g1, b1, a1); \
 } \
 
 //
@@ -179,18 +179,18 @@
 //
 #define gl_push_triangle(p, p_end, x1, y1, x2, y2, x3, y3) \
 { \
-    gl_push_vertex(p, x1, y1); \
-    gl_push_vertex(p, x2, y2); \
-    gl_push_vertex(p, x3, y3); \
+  gl_push_vertex(p, x1, y1); \
+  gl_push_vertex(p, x2, y2); \
+  gl_push_vertex(p, x3, y3); \
 } \
 
 #define triangle(x1, y1, x2, y2, x3, y3) \
 { \
-    gl_push_triangle(bufp, \
-                     bufp_end, \
-                     x1, y1, \
-                     x2, y2, \
-                     x3, y3); \
+  gl_push_triangle(bufp, \
+           bufp_end, \
+           x1, y1, \
+           x2, y2, \
+           x3, y3); \
 }
 
 #ifdef _WIN32
@@ -344,13 +344,13 @@ void glcolor(color s);
 void glcolorfast(color s);
 
 #define GL_ERROR_CHECK() {                                                              \
-    auto errCode = glGetError();                                                        \
-    if (likely(errCode == GL_NO_ERROR)) {                                               \
-        /* CON("GFX: ok at %s:%s line %u", __FILE__, __PRETTY_FUNCTION__, __LINE__); */ \
-    } else {                                                                            \
-        ERR("GFX: error at %s:%s line %u", __FILE__, __PRETTY_FUNCTION__, __LINE__);    \
-        gl_error(errCode);                                                              \
-    }                                                                                   \
+  auto errCode = glGetError();                                                        \
+  if (likely(errCode == GL_NO_ERROR)) {                                               \
+    /* CON("GFX: ok at %s:%s line %u", __FILE__, __PRETTY_FUNCTION__, __LINE__); */ \
+  } else {                                                                            \
+    ERR("GFX: error at %s:%s line %u", __FILE__, __PRETTY_FUNCTION__, __LINE__);    \
+    gl_error(errCode);                                                              \
+  }                                                                                   \
 }
 
 #endif

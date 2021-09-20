@@ -22,75 +22,75 @@ typedef int (*ascii_mouse_down_callback)(int x, int y, int button);
 typedef int (*ascii_mouse_over_callback)(int x, int y);
 
 struct ascii_ {
-    //
-    // In ascii mode, where on the ASCII we are
-    //
-    point mouse_at;
-    //
-    // UI triggers for ASCII co-ords.
-    //
-    std::array<std::array<int32_t,
-                    TERM_HEIGHT_MAX>, TERM_WIDTH_MAX> sdl_mod {};
-    std::array<std::array<int32_t,
-                    TERM_HEIGHT_MAX>, TERM_WIDTH_MAX> sdl_key {};
-    std::array<std::array<int32_t,
-                    TERM_HEIGHT_MAX>, TERM_WIDTH_MAX> mouse_button {};
+  //
+  // In ascii mode, where on the ASCII we are
+  //
+  point mouse_at;
+  //
+  // UI triggers for ASCII co-ords.
+  //
+  std::array<std::array<int32_t,
+          TERM_HEIGHT_MAX>, TERM_WIDTH_MAX> sdl_mod {};
+  std::array<std::array<int32_t,
+          TERM_HEIGHT_MAX>, TERM_WIDTH_MAX> sdl_key {};
+  std::array<std::array<int32_t,
+          TERM_HEIGHT_MAX>, TERM_WIDTH_MAX> mouse_button {};
 
-    //
-    // Callbacks for ASCII co-ords.
-    //
-    std::array<
-      std::array<ascii_key_down_callback, TERM_HEIGHT_MAX>,
-                    TERM_WIDTH_MAX> key_down {};
-    std::array<
-      std::array<ascii_mouse_down_callback, TERM_HEIGHT_MAX>,
-                    TERM_WIDTH_MAX> mouse_down {};
-    std::array<
-      std::array<ascii_mouse_over_callback, TERM_HEIGHT_MAX>,
-                    TERM_WIDTH_MAX> mouse_over {};
+  //
+  // Callbacks for ASCII co-ords.
+  //
+  std::array<
+    std::array<ascii_key_down_callback, TERM_HEIGHT_MAX>,
+          TERM_WIDTH_MAX> key_down {};
+  std::array<
+    std::array<ascii_mouse_down_callback, TERM_HEIGHT_MAX>,
+          TERM_WIDTH_MAX> mouse_down {};
+  std::array<
+    std::array<ascii_mouse_over_callback, TERM_HEIGHT_MAX>,
+          TERM_WIDTH_MAX> mouse_over {};
 };
 
 extern int16_t TERM_WIDTH;
 extern int16_t TERM_HEIGHT;
 
 typedef struct {
-    int x;
-    int y;
-    int width;
-    int over;
+  int x;
+  int y;
+  int width;
+  int over;
 
-    int sdl_mod;
-    int sdl_key;
-    int mouse_button;
+  int sdl_mod;
+  int sdl_key;
+  int mouse_button;
 
-    color col;
+  color col;
 
-    ascii_key_down_callback key_down;
-    ascii_mouse_down_callback mouse_down;
-    ascii_mouse_over_callback mouse_over;
+  ascii_key_down_callback key_down;
+  ascii_mouse_down_callback mouse_down;
+  ascii_mouse_over_callback mouse_over;
 
-    void *context;
+  void *context;
 } button_args;
 
 typedef struct {
-    int x;
-    int y;
-    int width;
-    int height;
-    int over;
+  int x;
+  int y;
+  int width;
+  int height;
+  int over;
 
-    int sdl_mod;
-    int sdl_key;
-    int mouse_button;
+  int sdl_mod;
+  int sdl_key;
+  int mouse_button;
 
-    color col_bg;
-    color col_text;
+  color col_bg;
+  color col_text;
 
-    ascii_key_down_callback key_down;
-    ascii_mouse_down_callback mouse_down;
-    ascii_mouse_over_callback mouse_over;
+  ascii_key_down_callback key_down;
+  ascii_mouse_down_callback mouse_down;
+  ascii_mouse_over_callback mouse_over;
 
-    void *context;
+  void *context;
 } box_args;
 
 bool ascii_is_empty(int x, int y);

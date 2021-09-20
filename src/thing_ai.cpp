@@ -15,71 +15,71 @@
 
 void Thing::ai_get_next_hop (void)
 {_
-    dbg("AI");
+  dbg("AI");
 _
-    point start((int)mid_at.x, (int)mid_at.y);
+  point start((int)mid_at.x, (int)mid_at.y);
 
-    //
-    // If on fire, try and put it out!
-    //
-    if (is_on_fire() && hates_fire()) {
-        if (is_intelligent()) {
-            if (ai_on_fire()) {
-                return;
-            }
-        }
-    }
-
-    //
-    // If somewhere bad, escape
-    //
-    if (get_terrain_cost(start) >= DMAP_LESS_PREFERRED_TERRAIN) {
-        dbg("On bad terrain, escape");
-        if (ai_escape()) {
-            return;
-        }
-
-        monstp->wander_target = point(0, 0);
-        dbg("Cannot escape, try to wander");
-        if (ai_wander()) {
-            return;
-        }
-    }
-
-    //
-    // If going somewhere, continue
-    //
-    if (monstp->wander_target != point(0, 0)) {
-        if (pcg_random_range(0, 100) < 50) {
-            dbg("Try to continue wander");
-            if (ai_wander()) {
-                return;
-            }
-        }
-    }
-
-    //
-    // Find the best goal to go to
-    //
-    if (ai_choose_goal()) {
-        monstp->wander_target = point(0, 0);
+  //
+  // If on fire, try and put it out!
+  //
+  if (is_on_fire() && hates_fire()) {
+    if (is_intelligent()) {
+      if (ai_on_fire()) {
         return;
+      }
+    }
+  }
+
+  //
+  // If somewhere bad, escape
+  //
+  if (get_terrain_cost(start) >= DMAP_LESS_PREFERRED_TERRAIN) {
+    dbg("On bad terrain, escape");
+    if (ai_escape()) {
+      return;
     }
 
-    //
-    // If we get here we found no goal. Try to wander.
-    //
+    monstp->wander_target = point(0, 0);
+    dbg("Cannot escape, try to wander");
     if (ai_wander()) {
-        return;
+      return;
     }
+  }
 
-    //
-    // Ok our attempted move is done. We failed.
-    //
-    move_finish();
+  //
+  // If going somewhere, continue
+  //
+  if (monstp->wander_target != point(0, 0)) {
+    if (pcg_random_range(0, 100) < 50) {
+      dbg("Try to continue wander");
+      if (ai_wander()) {
+        return;
+      }
+    }
+  }
 
-    //
-    // If cannot move (maybe over a chasm that spawned) then fall
-    //
-    location_check();
+  //
+  // Find the best goal to go to
+  //
+  if (ai_choose_goal()) {
+    monstp->wander_target = point(0, 0);
+    return;
+  }
+
+  //
+  // If we get here we found no goal. Try to wander.
+  //
+  if (ai_wander()) {
+    return;
+  }
+
+  //
+  // Ok our attempted move is done. We failed.
+  //
+  move_finish();
+
+  //
+  // If cannot move (maybe over a chasm that spawned) then fall
+  //
+  location_check();
 }

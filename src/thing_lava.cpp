@@ -17,54 +17,54 @@
 
 void Thing::lava_tick (void)
 {_
-    if (!hates_fire()) {
-        if (is_player()) {
-            dbg("Lava tick: No, not a fire avoider");
-        }
-        return;
+  if (!hates_fire()) {
+    if (is_player()) {
+      dbg("Lava tick: No, not a fire avoider");
     }
+    return;
+  }
 
-    fpoint at = get_interpolated_mid_at();
-    if (!level->is_lava(at.x, at.y)) {
-        if (is_player()) {
-            dbg("Lava tick: No, no lava");
-        }
-        return;
+  fpoint at = get_interpolated_mid_at();
+  if (!level->is_lava(at.x, at.y)) {
+    if (is_player()) {
+      dbg("Lava tick: No, no lava");
     }
+    return;
+  }
 
-    bool hit = false;
+  bool hit = false;
 
-    //
-    // Give the player a chance
-    //
-    if (!level->is_smoke(at.x, at.y)) {
-        hit = ((int)pcg_random_range(0, 100) < 80);
-    } else {
-        hit = true;
+  //
+  // Give the player a chance
+  //
+  if (!level->is_smoke(at.x, at.y)) {
+    hit = ((int)pcg_random_range(0, 100) < 80);
+  } else {
+    hit = true;
+  }
+
+  if (is_on_fire()) {
+    hit = true;
+  }
+
+  if (hit) {
+    FOR_ALL_THINGS_AT_DEPTH(level, t, at.x, at.y, MAP_DEPTH_LAVA) {
+      if (!t->is_lava()) {
+        continue;
+      }
+
+      is_hit_by(t, t->get_damage_melee());
+      break;
+    } FOR_ALL_THINGS_END()
+  } else {
+    if (is_player()) {
+      TOPCON("You stand on a sightly cooler rock in the lava!");
+      TOPCON("Your feet are warm and toasty!");
     }
+  }
 
-    if (is_on_fire()) {
-        hit = true;
-    }
-
-    if (hit) {
-        FOR_ALL_THINGS_AT_DEPTH(level, t, at.x, at.y, MAP_DEPTH_LAVA) {
-            if (!t->is_lava()) {
-                continue;
-            }
-
-            is_hit_by(t, t->get_damage_melee());
-            break;
-        } FOR_ALL_THINGS_END()
-    } else {
-        if (is_player()) {
-            TOPCON("You stand on a sightly cooler rock in the lava!");
-            TOPCON("Your feet are warm and toasty!");
-        }
-    }
-
-    if (!level->is_smoke(at.x, at.y)) {
-        auto smoke = level->thing_new("smoke", at);
-        smoke->set_lifespan(pcg_random_range(1, 10));
-    }
+  if (!level->is_smoke(at.x, at.y)) {
+    auto smoke = level->thing_new("smoke", at);
+    smoke->set_lifespan(pcg_random_range(1, 10));
+  }
 }

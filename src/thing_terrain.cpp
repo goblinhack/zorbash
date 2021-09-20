@@ -18,73 +18,73 @@
 
 void Thing::dmap_modify_terrain_cost (point p, uint8_t *d)
 {_
-    int pref = *d;
+  int pref = *d;
 
-    if (collision_obstacle(p)) {
-        pref++;
-    }
+  if (collision_obstacle(p)) {
+    pref++;
+  }
 
-    std::vector<std::pair<Thingp, int> > possible;
+  std::vector<std::pair<Thingp, int> > possible;
 
-    {
-        static const std::vector<point> all_deltas = {
-            point(-1, -1),
-            point( 1, -1),
-            point(-1,  1),
-            point( 1,  1),
-            point(0, 0),
-            point(0, -1),
-            point(-1, 0),
-            point(1, 0),
-            point(0, 1),
-        };
+  {
+    static const std::vector<point> all_deltas = {
+      point(-1, -1),
+      point( 1, -1),
+      point(-1,  1),
+      point( 1,  1),
+      point(0, 0),
+      point(0, -1),
+      point(-1, 0),
+      point(1, 0),
+      point(0, 1),
+    };
 
-        for (const auto& d : all_deltas) {
-            auto x = p.x + d.x;
-            auto y = p.y + d.y;
+    for (const auto& d : all_deltas) {
+      auto x = p.x + d.x;
+      auto y = p.y + d.y;
 
-            if (will_avoid_monst(point(x, y))) {
-                pref += DMAP_LESS_PREFERRED_TERRAIN;
-            }
-        }
-    }
-
-    if (is_hazardous_to_me(p)) {
+      if (will_avoid_monst(point(x, y))) {
         pref += DMAP_LESS_PREFERRED_TERRAIN;
+      }
     }
+  }
 
-    if (pref > DMAP_MAX_LESS_PREFERRED_TERRAIN) {
-        pref = DMAP_MAX_LESS_PREFERRED_TERRAIN;
-    }
+  if (is_hazardous_to_me(p)) {
+    pref += DMAP_LESS_PREFERRED_TERRAIN;
+  }
 
-    *d = (uint8_t) pref;
+  if (pref > DMAP_MAX_LESS_PREFERRED_TERRAIN) {
+    pref = DMAP_MAX_LESS_PREFERRED_TERRAIN;
+  }
+
+  *d = (uint8_t) pref;
 }
 
 uint8_t Thing::get_terrain_cost (point p)
 {_
-    uint8_t pref = 0;
+  uint8_t pref = 0;
 
-    dmap_modify_terrain_cost(p, &pref);
+  dmap_modify_terrain_cost(p, &pref);
 
-    return (uint8_t) pref;
+  return (uint8_t) pref;
 }
 
 bool Thing::will_prefer_terrain (const Thingp itp)
 {_
-    auto me = tp();
-    auto it = itp->tp();
+  auto me = tp();
+  auto it = itp->tp();
 
-    if (me->is_water_lover()) {
-        if (it->is_shallow_water() || it->is_deep_water()) {
-            return true;
-        }
+  if (me->is_water_lover()) {
+    if (it->is_shallow_water() || it->is_deep_water()) {
+      return true;
     }
+  }
 
-    if (me->is_acid_lover()) {
-        if (it->is_acid()) {
-            return true;
-        }
+  if (me->is_acid_lover()) {
+    if (it->is_acid()) {
+      return true;
     }
+  }
 
-    return false;
+  return false;
 }

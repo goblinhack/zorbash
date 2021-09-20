@@ -25,80 +25,80 @@
 //
 void hexdump (const unsigned char *addr, size_t len)
 {
-    int skipping_blanks = false;
-    unsigned char empty[HEX_DUMP_WIDTH] = {0};
-    unsigned char buf[HEX_DUMP_WIDTH + 1];
-    unsigned char *pc = (__typeof__(pc)) addr;
-    size_t i;
-    unsigned int x;
+  int skipping_blanks = false;
+  unsigned char empty[HEX_DUMP_WIDTH] = {0};
+  unsigned char buf[HEX_DUMP_WIDTH + 1];
+  unsigned char *pc = (__typeof__(pc)) addr;
+  size_t i;
+  unsigned int x;
 
-    std::cout << std::dec << len << " bytes:" << std::endl;
+  std::cout << std::dec << len << " bytes:" << std::endl;
 
-    if (!len) {
-        return;
+  if (!len) {
+    return;
+  }
+
+  for (i = 0, x = 0; i < len; i++, x++) {
+    if ((i % HEX_DUMP_WIDTH) == 0) {
+      if (!skipping_blanks) {
+        if (i != 0) {
+          std::cout << " |" << std::setw(HEX_DUMP_WIDTH) << buf << "|" << std::endl;
+        }
+      }
+
+      /*
+       * Skip blank blocks.
+       */
+      if (!memcmp(pc + i, empty, sizeof(empty))) {
+        i += HEX_DUMP_WIDTH - 1;
+        skipping_blanks = true;
+        buf[0] = '\0';
+        continue;
+      }
+
+      std::cout << "  " << std::setfill('0') << std::setw(4) << std::hex << i;
+
+      x = 0;
     }
 
-    for (i = 0, x = 0; i < len; i++, x++) {
-        if ((i % HEX_DUMP_WIDTH) == 0) {
-            if (!skipping_blanks) {
-                if (i != 0) {
-                    std::cout << " |" << std::setw(HEX_DUMP_WIDTH) << buf << "|" << std::endl;
-                }
-            }
-
-            /*
-             * Skip blank blocks.
-             */
-            if (!memcmp(pc + i, empty, sizeof(empty))) {
-                i += HEX_DUMP_WIDTH - 1;
-                skipping_blanks = true;
-                buf[0] = '\0';
-                continue;
-            }
-
-            std::cout << "  " << std::setfill('0') << std::setw(4) << std::hex << i;
-
-            x = 0;
-        }
-
-        if (x && (((i % (HEX_DUMP_WIDTH/2))) == 0)) {
-            std::cout << " ";
-        }
-
-        skipping_blanks = false;
-
-        std::cout << " " << std::setfill('0') << std::setw(2) << std::hex << (int) pc[i];
-
-        if ((pc[i] < ' ') || (pc[i] > '~')) {
-            buf[i % HEX_DUMP_WIDTH] = '.';
-        } else {
-            buf[i % HEX_DUMP_WIDTH] = pc[i];
-        }
-
-        buf[(i % HEX_DUMP_WIDTH) + 1] = '\0';
+    if (x && (((i % (HEX_DUMP_WIDTH/2))) == 0)) {
+      std::cout << " ";
     }
 
-    if (!buf[0]) {
-        if (skipping_blanks) {
-            std::cout << "  *\n";
-        }
+    skipping_blanks = false;
 
-        return;
+    std::cout << " " << std::setfill('0') << std::setw(2) << std::hex << (int) pc[i];
+
+    if ((pc[i] < ' ') || (pc[i] > '~')) {
+      buf[i % HEX_DUMP_WIDTH] = '.';
+    } else {
+      buf[i % HEX_DUMP_WIDTH] = pc[i];
     }
 
-    while ((i % HEX_DUMP_WIDTH) != 0) {
-        std::cout << "   ";
-        if (i && (((i % (HEX_DUMP_WIDTH/2))) == 0)) {
-            std::cout << " ";
-        }
+    buf[(i % HEX_DUMP_WIDTH) + 1] = '\0';
+  }
 
-        i++;
+  if (!buf[0]) {
+    if (skipping_blanks) {
+      std::cout << "  *\n";
     }
 
-    std::cout << " |" << std::setw(-HEX_DUMP_WIDTH) << buf << "|" << std::endl;
+    return;
+  }
+
+  while ((i % HEX_DUMP_WIDTH) != 0) {
+    std::cout << "   ";
+    if (i && (((i % (HEX_DUMP_WIDTH/2))) == 0)) {
+      std::cout << " ";
+    }
+
+    i++;
+  }
+
+  std::cout << " |" << std::setw(-HEX_DUMP_WIDTH) << buf << "|" << std::endl;
 }
 
 void hexdump (std::vector<unsigned char> &v)
 {
-    hexdump(v.data(), v.size());
+  hexdump(v.data(), v.size());
 }

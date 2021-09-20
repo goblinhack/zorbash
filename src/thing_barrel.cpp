@@ -17,30 +17,30 @@
 
 void Thing::barrel_tick (void)
 {_
-    if (is_floating()) {
-        return;
+  if (is_floating()) {
+    return;
+  }
+
+  if (is_ethereal()) {
+    return;
+  }
+
+  if (!is_soft_body()) {
+    return;
+  }
+
+  if (!level->is_barrel(mid_at.x, mid_at.y)) {
+    return;
+  }
+
+  dbg("Crushed by a barrel");
+
+  FOR_ALL_THINGS(level, t, mid_at.x, mid_at.y) {
+    if (!t->is_barrel()) {
+      continue;
     }
 
-    if (is_ethereal()) {
-        return;
-    }
-
-    if (!is_soft_body()) {
-        return;
-    }
-
-    if (!level->is_barrel(mid_at.x, mid_at.y)) {
-        return;
-    }
-
-    dbg("Crushed by a barrel");
-
-    FOR_ALL_THINGS(level, t, mid_at.x, mid_at.y) {
-        if (!t->is_barrel()) {
-            continue;
-        }
-
-        is_hit_by(t, t->get_damage_crush());
-        break;
-    } FOR_ALL_THINGS_END()
+    is_hit_by(t, t->get_damage_crush());
+    break;
+  } FOR_ALL_THINGS_END()
 }

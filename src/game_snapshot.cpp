@@ -14,16 +14,16 @@
 
 void Game::save_snapshot_check (void)
 {_
-    //
-    // Periodic snapshot saves
-    //
-    static int move_count;
-    if (game->request_snapshot || (move_count++ > ENABLE_SAVE_SNAPSHOT_FREQ)) {
-        move_count = 0;
-        game->request_snapshot = false;
-        game->saving_snapshot = true;
-        game->save_snapshot();
-        game->saving_snapshot = false;
-        g_saved_snapshot = true;
-    }
+  //
+  // Periodic snapshot saves
+  //
+  static int move_count;
+  if (game->request_snapshot || (move_count++ > ENABLE_SAVE_SNAPSHOT_FREQ)) {
+    move_count = 0;
+    game->request_snapshot = false;
+    game->saving_snapshot = true;
+    game->save_snapshot();
+    game->saving_snapshot = false;
+    g_saved_snapshot = true;
+  }
 }

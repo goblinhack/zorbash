@@ -14,20 +14,20 @@ typedef std::shared_ptr< class WidTiles > wid_tilesp;
 
 class WidTiles {
 public:
-    WidTiles (void)
-    {
-    }
+  WidTiles (void)
+  {
+  }
 
-    ~WidTiles (void)
-    {
-    }
+  ~WidTiles (void)
+  {
+  }
 
-    int across = {};
-    int down = {};
-    int tile_w = {};
-    int tile_h = {};
-    double scale = {};
-    std::array<std::array<Tilep, 32>, 32> tile {};
+  int across = {};
+  int down = {};
+  int tile_w = {};
+  int tile_h = {};
+  double scale = {};
+  std::array<std::array<Tilep, 32>, 32> tile {};
 };
 
 uint8_t wid_tiles_init(void);

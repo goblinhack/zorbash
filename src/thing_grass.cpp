@@ -17,33 +17,33 @@
 
 void Thing::grass_tick (void)
 {_
-    if (!level->is_dry_grass(mid_at.x, mid_at.y)) {
-        return;
+  if (!level->is_dry_grass(mid_at.x, mid_at.y)) {
+    return;
+  }
+
+  if (!is_alive_monst() && !is_player()) {
+    return;
+  }
+
+  if (is_ethereal()) {
+    return;
+  }
+
+  if (is_floating()) {
+    return;
+  }
+
+  FOR_ALL_THINGS_AT_DEPTH(level, t, mid_at.x, mid_at.y, MAP_DEPTH_FLOOR2) {
+    if (!t->is_dry_grass()) {
+      continue;
     }
 
-    if (!is_alive_monst() && !is_player()) {
-        return;
+    if (t->name() != "dry_grass") {
+      return;
     }
 
-    if (is_ethereal()) {
-        return;
-    }
+    t->dead("trampled");
+    level->thing_new("dry_grass_trampled", t->mid_at);
 
-    if (is_floating()) {
-        return;
-    }
-
-    FOR_ALL_THINGS_AT_DEPTH(level, t, mid_at.x, mid_at.y, MAP_DEPTH_FLOOR2) {
-        if (!t->is_dry_grass()) {
-            continue;
-        }
-
-        if (t->name() != "dry_grass") {
-            return;
-        }
-
-        t->dead("trampled");
-        level->thing_new("dry_grass_trampled", t->mid_at);
-
-    } FOR_ALL_THINGS_END()
+  } FOR_ALL_THINGS_END()
 }

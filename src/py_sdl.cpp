@@ -13,14 +13,14 @@
  */
 PYFUNC(SDLGetKeyState, "get a snapshot of the current keyboard state")
 {_
-    int numkeys;
-    const uint8_t *keys = SDL_GetKeyboardState(&numkeys);
+  int numkeys;
+  const uint8_t *keys = SDL_GetKeyboardState(&numkeys);
 
-    PyObject *lst = PyList_New(numkeys);
+  PyObject *lst = PyList_New(numkeys);
 
-    for (int i = 0; i < numkeys; i++) {
-        PyList_SetItem(lst, i, Py_BuildValue("i", keys[i]));
-    }
+  for (int i = 0; i < numkeys; i++) {
+    PyList_SetItem(lst, i, Py_BuildValue("i", keys[i]));
+  }
 
-    return (lst);
+  return (lst);
 }

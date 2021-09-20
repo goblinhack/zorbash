@@ -20,390 +20,390 @@
 
 PyObject *level_add_ (PyObject *obj, PyObject *args, PyObject *keywds)
 {_
-    char *level_name = 0;
-    PyObject *py_level_data = 0;
+  char *level_name = 0;
+  PyObject *py_level_data = 0;
 
-    static char *kwlist[] = {
-        (char*) "level_data",
-        (char*) "level_name",
-        0};
+  static char *kwlist[] = {
+    (char*) "level_data",
+    (char*) "level_name",
+    0};
 
-    if (!PyArg_ParseTupleAndKeywords(args, keywds,
-                                     "|Os",
-                                     kwlist,
-                                     &py_level_data,
-                                     &level_name)) {
-        ERR("map_load: Bad args");
-        Py_RETURN_FALSE;
-    }
+  if (!PyArg_ParseTupleAndKeywords(args, keywds,
+                   "|Os",
+                   kwlist,
+                   &py_level_data,
+                   &level_name)) {
+    ERR("map_load: Bad args");
+    Py_RETURN_FALSE;
+  }
 
-    if (!py_level_data) {
-        ERR("Map_load_level, missing floor data");
-        Py_RETURN_FALSE;
-    }
+  if (!py_level_data) {
+    ERR("Map_load_level, missing floor data");
+    Py_RETURN_FALSE;
+  }
 
-    int level_data_elems = PyList_Size(py_level_data);
-    if (level_data_elems % MAP_HEIGHT) {
-        ERR("map_load: Level elems needs to be evenly dividable by level height %d, got %d elems when loading %s",
-            (int) MAP_HEIGHT, (int) PyList_Size(py_level_data), level_name);
-        Py_RETURN_FALSE;
-    }
+  int level_data_elems = PyList_Size(py_level_data);
+  if (level_data_elems % MAP_HEIGHT) {
+    ERR("map_load: Level elems needs to be evenly dividable by level height %d, got %d elems when loading %s",
+      (int) MAP_HEIGHT, (int) PyList_Size(py_level_data), level_name);
+    Py_RETURN_FALSE;
+  }
 
-    auto l = LevelStatic::level_new();
-    for (auto n=0; n < MAP_WIDTH; n++) {
-        for (auto y=0; y<MAP_HEIGHT; y++) {
-            auto o = PyList_GetItem(py_level_data, y); /* Can't fail */
-            if (!o) {
-                continue;
-            }
+  auto l = LevelStatic::level_new();
+  for (auto n=0; n < MAP_WIDTH; n++) {
+    for (auto y=0; y<MAP_HEIGHT; y++) {
+      auto o = PyList_GetItem(py_level_data, y); /* Can't fail */
+      if (!o) {
+        continue;
+      }
 
-            std::string floor_string;
-            std::string floor2_string;
-            std::string water_string;
-            std::string lava_string;
-            std::string chasm_string;
-            std::string walls_string;
-            std::string obj_strings;
+      std::string floor_string;
+      std::string floor2_string;
+      std::string water_string;
+      std::string lava_string;
+      std::string chasm_string;
+      std::string walls_string;
+      std::string obj_strings;
 
-            for (auto& c : py_obj_to_string(o)) {
-                auto m = get(Charmap::all_charmaps, c);
+      for (auto& c : py_obj_to_string(o)) {
+        auto m = get(Charmap::all_charmaps, c);
 
-                if (m.is_floor           ||
-                    m.is_bridge          ||
-                    m.is_corridor        ||
-                    m.is_secret_corridor ||
-                    m.is_dirt) {
-                    floor_string += c;
-                } else if (m.is_blood                 ||
-                           m.is_deep_water            ||
-                           m.is_door                  ||
-                           m.is_ascend_dungeon        ||
-                           m.is_descend_dungeon       ||
-                           m.is_descend_sewer         ||
-                           m.is_floor_deco            ||
-                           m.is_food                  ||
-                           m.is_minion_generator_easy ||
-                           m.is_minion_generator_hard ||
-                           m.is_gold                  ||
-                           m.is_key                   ||
-                           m.is_lava                  ||
-                           m.is_monst_easy            ||
-                           m.is_monst_med             ||
-                           m.is_monst_hard            ||
-                           m.is_enchantstone          ||
-                           m.is_skillstone            ||
-                           m.is_treasure_class_a      ||
-                           m.is_treasure_class_b      ||
-                           m.is_treasure_class_c      ||
-                           m.is_potion                ||
-                           m.is_wand                  ||
-                           m.is_secret_door           ||
-                           m.is_brazier               ||
-                           m.is_barrel                ||
-                           m.is_trap                  ||
-                           m.is_shallow_water         ||
-                           m.is_deep_water            ||
-                           m.is_floor_deco) {
-                    floor_string += Charmap::FLOOR;
-                } else {
-                    floor_string += Charmap::SPACE;
-                }
-
-                if (m.is_foilage ||
-                    m.is_spiderweb ||
-                    m.is_dry_grass) {
-                    floor2_string += c;
-                } else {
-                    floor2_string += Charmap::SPACE;
-                }
-
-                if (m.is_shallow_water || m.is_deep_water) {
-                    water_string += c;
-                } else {
-                    water_string += Charmap::SPACE;
-                }
-
-                if (m.is_lava) {
-                    lava_string += c;
-                } else {
-                    lava_string += Charmap::SPACE;
-                }
-
-                if (m.is_chasm) {
-                    chasm_string += c;
-                } else {
-                    chasm_string += Charmap::SPACE;
-                }
-
-                if (m.is_wall ||
-                    m.is_secret_door ||
-                    m.is_door) {
-                    walls_string += c;
-                } else if (m.is_descend_sewer) {
-                    walls_string += Charmap::WALL;
-                } else {
-                    walls_string += Charmap::SPACE;
-                }
-
-                if (m.is_blood                 ||
-                    m.is_ascend_dungeon        ||
-                    m.is_descend_dungeon       ||
-                    m.is_descend_sewer         ||
-                    m.is_floor_deco            ||
-                    m.is_food                  ||
-                    m.is_minion_generator_easy ||
-                    m.is_minion_generator_hard ||
-                    m.is_gold                  ||
-                    m.is_key                   ||
-                    m.is_monst_easy            ||
-                    m.is_monst_med             ||
-                    m.is_monst_hard            ||
-                    m.is_enchantstone          ||
-                    m.is_skillstone            ||
-                    m.is_treasure_class_a      ||
-                    m.is_treasure_class_b      ||
-                    m.is_treasure_class_c      ||
-                    m.is_potion                ||
-                    m.is_wand                  ||
-                    m.is_brazier               ||
-                    m.is_barrel                ||
-                    m.is_trap                  ||
-                    m.is_descend_sewer) {
-                    obj_strings += c;
-                } else {
-                    obj_strings += Charmap::SPACE;
-                }
-            }
-
-            if (floor_string.size() != MAP_WIDTH){
-                DIE("Level floor width mismatch, %d, expected %d",
-                    (int)floor_string.size(), MAP_WIDTH);
-                Py_RETURN_FALSE;
-            }
-            if (floor2_string.size() != MAP_WIDTH){
-                DIE("Room floor2 width mismatch, %d, expected %d",
-                    (int)floor2_string.size(), MAP_WIDTH);
-                Py_RETURN_FALSE;
-            }
-            if (water_string.size() != MAP_WIDTH){
-                DIE("Level water width mismatch, %d, expected %d",
-                    (int)water_string.size(), MAP_WIDTH);
-                Py_RETURN_FALSE;
-            }
-            if (lava_string.size() != MAP_WIDTH){
-                DIE("Level lava width mismatch, %d, expected %d",
-                    (int)lava_string.size(), MAP_WIDTH);
-                Py_RETURN_FALSE;
-            }
-            if (chasm_string.size() != MAP_WIDTH){
-                DIE("Level chasm width mismatch, %d, expected %d",
-                    (int)chasm_string.size(), MAP_WIDTH);
-                Py_RETURN_FALSE;
-            }
-            if (walls_string.size() != MAP_WIDTH){
-                DIE("Level walls width mismatch, %d, expected %d",
-                    (int)walls_string.size(), MAP_WIDTH);
-                Py_RETURN_FALSE;
-            }
-            if (obj_strings.size() != MAP_WIDTH){
-                DIE("Level items width mismatch, %d, expected %d",
-                    (int)obj_strings.size(), MAP_WIDTH);
-                Py_RETURN_FALSE;
-            }
-
-            for (auto x = 0; x < MAP_WIDTH; x++) {
-                if (floor_string[x] != ' ') {
-                    set(l->data, x, y, MAP_DEPTH_FLOOR, floor_string[x]);
-                }
-                if (floor2_string[x] != ' ') {
-                    set(l->data, x, y, MAP_DEPTH_FLOOR2, floor2_string[x]);
-                }
-                if (water_string[x] != ' ') {
-                    set(l->data, x, y, MAP_DEPTH_WATER, water_string[x]);
-                }
-                if (lava_string[x] != ' ') {
-                    set(l->data, x, y, MAP_DEPTH_LAVA,  lava_string[x]);
-                }
-                if (chasm_string[x] != ' ') {
-                    set(l->data, x, y, MAP_DEPTH_CHASM, chasm_string[x]);
-                }
-                if (walls_string[x] != ' ') {
-                    set(l->data, x, y, MAP_DEPTH_OBJ,  walls_string[x]);
-                }
-                if (obj_strings[x] != ' ') {
-                    set(l->data, x, y, MAP_DEPTH_OBJ,  obj_strings[x]);
-                }
-            }
-
-            if (floor_string.size() != MAP_WIDTH){
-                ERR("Level floor width mismatch, %d, expected %d",
-                    (int)floor_string.size(), MAP_WIDTH);
-                Py_RETURN_FALSE;
-            }
-            if (water_string.size() != MAP_WIDTH){
-                ERR("Level water width mismatch, %d, expected %d",
-                    (int)water_string.size(), MAP_WIDTH);
-                Py_RETURN_FALSE;
-            }
-            if (walls_string.size() != MAP_WIDTH){
-                ERR("Level walls width mismatch, %d, expected %d",
-                    (int)walls_string.size(), MAP_WIDTH);
-                Py_RETURN_FALSE;
-            }
-            if (obj_strings.size() != MAP_WIDTH){
-                ERR("Level items width mismatch, %d, expected %d",
-                    (int)obj_strings.size(), MAP_WIDTH);
-                Py_RETURN_FALSE;
-            }
-
-            for (auto x = 0; x < MAP_WIDTH; x++) {
-                set(l->data, x, y, MAP_DEPTH_FLOOR, floor_string[x]);
-                set(l->data, x, y, MAP_DEPTH_WATER, water_string[x]);
-                set(l->data, x, y, MAP_DEPTH_LAVA,  lava_string[x]);
-                set(l->data, x, y, MAP_DEPTH_CHASM, chasm_string[x]);
-                set(l->data, x, y, MAP_DEPTH_OBJ,   walls_string[x]);
-            }
+        if (m.is_floor           ||
+          m.is_bridge          ||
+          m.is_corridor        ||
+          m.is_secret_corridor ||
+          m.is_dirt) {
+          floor_string += c;
+        } else if (m.is_blood                 ||
+               m.is_deep_water            ||
+               m.is_door                  ||
+               m.is_ascend_dungeon        ||
+               m.is_descend_dungeon       ||
+               m.is_descend_sewer         ||
+               m.is_floor_deco            ||
+               m.is_food                  ||
+               m.is_minion_generator_easy ||
+               m.is_minion_generator_hard ||
+               m.is_gold                  ||
+               m.is_key                   ||
+               m.is_lava                  ||
+               m.is_monst_easy            ||
+               m.is_monst_med             ||
+               m.is_monst_hard            ||
+               m.is_enchantstone          ||
+               m.is_skillstone            ||
+               m.is_treasure_class_a      ||
+               m.is_treasure_class_b      ||
+               m.is_treasure_class_c      ||
+               m.is_potion                ||
+               m.is_wand                  ||
+               m.is_secret_door           ||
+               m.is_brazier               ||
+               m.is_barrel                ||
+               m.is_trap                  ||
+               m.is_shallow_water         ||
+               m.is_deep_water            ||
+               m.is_floor_deco) {
+          floor_string += Charmap::FLOOR;
+        } else {
+          floor_string += Charmap::SPACE;
         }
-    }
-    l->finalize();
 
-    Py_RETURN_TRUE;
+        if (m.is_foilage ||
+          m.is_spiderweb ||
+          m.is_dry_grass) {
+          floor2_string += c;
+        } else {
+          floor2_string += Charmap::SPACE;
+        }
+
+        if (m.is_shallow_water || m.is_deep_water) {
+          water_string += c;
+        } else {
+          water_string += Charmap::SPACE;
+        }
+
+        if (m.is_lava) {
+          lava_string += c;
+        } else {
+          lava_string += Charmap::SPACE;
+        }
+
+        if (m.is_chasm) {
+          chasm_string += c;
+        } else {
+          chasm_string += Charmap::SPACE;
+        }
+
+        if (m.is_wall ||
+          m.is_secret_door ||
+          m.is_door) {
+          walls_string += c;
+        } else if (m.is_descend_sewer) {
+          walls_string += Charmap::WALL;
+        } else {
+          walls_string += Charmap::SPACE;
+        }
+
+        if (m.is_blood                 ||
+          m.is_ascend_dungeon        ||
+          m.is_descend_dungeon       ||
+          m.is_descend_sewer         ||
+          m.is_floor_deco            ||
+          m.is_food                  ||
+          m.is_minion_generator_easy ||
+          m.is_minion_generator_hard ||
+          m.is_gold                  ||
+          m.is_key                   ||
+          m.is_monst_easy            ||
+          m.is_monst_med             ||
+          m.is_monst_hard            ||
+          m.is_enchantstone          ||
+          m.is_skillstone            ||
+          m.is_treasure_class_a      ||
+          m.is_treasure_class_b      ||
+          m.is_treasure_class_c      ||
+          m.is_potion                ||
+          m.is_wand                  ||
+          m.is_brazier               ||
+          m.is_barrel                ||
+          m.is_trap                  ||
+          m.is_descend_sewer) {
+          obj_strings += c;
+        } else {
+          obj_strings += Charmap::SPACE;
+        }
+      }
+
+      if (floor_string.size() != MAP_WIDTH){
+        DIE("Level floor width mismatch, %d, expected %d",
+          (int)floor_string.size(), MAP_WIDTH);
+        Py_RETURN_FALSE;
+      }
+      if (floor2_string.size() != MAP_WIDTH){
+        DIE("Room floor2 width mismatch, %d, expected %d",
+          (int)floor2_string.size(), MAP_WIDTH);
+        Py_RETURN_FALSE;
+      }
+      if (water_string.size() != MAP_WIDTH){
+        DIE("Level water width mismatch, %d, expected %d",
+          (int)water_string.size(), MAP_WIDTH);
+        Py_RETURN_FALSE;
+      }
+      if (lava_string.size() != MAP_WIDTH){
+        DIE("Level lava width mismatch, %d, expected %d",
+          (int)lava_string.size(), MAP_WIDTH);
+        Py_RETURN_FALSE;
+      }
+      if (chasm_string.size() != MAP_WIDTH){
+        DIE("Level chasm width mismatch, %d, expected %d",
+          (int)chasm_string.size(), MAP_WIDTH);
+        Py_RETURN_FALSE;
+      }
+      if (walls_string.size() != MAP_WIDTH){
+        DIE("Level walls width mismatch, %d, expected %d",
+          (int)walls_string.size(), MAP_WIDTH);
+        Py_RETURN_FALSE;
+      }
+      if (obj_strings.size() != MAP_WIDTH){
+        DIE("Level items width mismatch, %d, expected %d",
+          (int)obj_strings.size(), MAP_WIDTH);
+        Py_RETURN_FALSE;
+      }
+
+      for (auto x = 0; x < MAP_WIDTH; x++) {
+        if (floor_string[x] != ' ') {
+          set(l->data, x, y, MAP_DEPTH_FLOOR, floor_string[x]);
+        }
+        if (floor2_string[x] != ' ') {
+          set(l->data, x, y, MAP_DEPTH_FLOOR2, floor2_string[x]);
+        }
+        if (water_string[x] != ' ') {
+          set(l->data, x, y, MAP_DEPTH_WATER, water_string[x]);
+        }
+        if (lava_string[x] != ' ') {
+          set(l->data, x, y, MAP_DEPTH_LAVA,  lava_string[x]);
+        }
+        if (chasm_string[x] != ' ') {
+          set(l->data, x, y, MAP_DEPTH_CHASM, chasm_string[x]);
+        }
+        if (walls_string[x] != ' ') {
+          set(l->data, x, y, MAP_DEPTH_OBJ,  walls_string[x]);
+        }
+        if (obj_strings[x] != ' ') {
+          set(l->data, x, y, MAP_DEPTH_OBJ,  obj_strings[x]);
+        }
+      }
+
+      if (floor_string.size() != MAP_WIDTH){
+        ERR("Level floor width mismatch, %d, expected %d",
+          (int)floor_string.size(), MAP_WIDTH);
+        Py_RETURN_FALSE;
+      }
+      if (water_string.size() != MAP_WIDTH){
+        ERR("Level water width mismatch, %d, expected %d",
+          (int)water_string.size(), MAP_WIDTH);
+        Py_RETURN_FALSE;
+      }
+      if (walls_string.size() != MAP_WIDTH){
+        ERR("Level walls width mismatch, %d, expected %d",
+          (int)walls_string.size(), MAP_WIDTH);
+        Py_RETURN_FALSE;
+      }
+      if (obj_strings.size() != MAP_WIDTH){
+        ERR("Level items width mismatch, %d, expected %d",
+          (int)obj_strings.size(), MAP_WIDTH);
+        Py_RETURN_FALSE;
+      }
+
+      for (auto x = 0; x < MAP_WIDTH; x++) {
+        set(l->data, x, y, MAP_DEPTH_FLOOR, floor_string[x]);
+        set(l->data, x, y, MAP_DEPTH_WATER, water_string[x]);
+        set(l->data, x, y, MAP_DEPTH_LAVA,  lava_string[x]);
+        set(l->data, x, y, MAP_DEPTH_CHASM, chasm_string[x]);
+        set(l->data, x, y, MAP_DEPTH_OBJ,   walls_string[x]);
+      }
+    }
+  }
+  l->finalize();
+
+  Py_RETURN_TRUE;
 }
 
 PyObject *level_get_all (PyObject *obj, PyObject *args, PyObject *keywds)
 {_
-    uint32_t id = 0;
-    int x = -1;
-    int y = -1;
-    static char *kwlist[] = {(char*)"id", (char*)"x", (char*)"y", 0};	
-	
-    if (!PyArg_ParseTupleAndKeywords(args, keywds, "Iii", kwlist, &id, &x, &y)) {
-        ERR("%s: Failed parsing keywords", __FUNCTION__);	
-        Py_RETURN_FALSE;	
-    }	
-	
-    if (!id) {
-        ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);	
-        Py_RETURN_FALSE;	
-    }
+  uint32_t id = 0;
+  int x = -1;
+  int y = -1;
+  static char *kwlist[] = {(char*)"id", (char*)"x", (char*)"y", 0};	
+  
+  if (!PyArg_ParseTupleAndKeywords(args, keywds, "Iii", kwlist, &id, &x, &y)) {
+    ERR("%s: Failed parsing keywords", __FUNCTION__);	
+    Py_RETURN_FALSE;	
+  }	
+  
+  if (!id) {
+    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);	
+    Py_RETURN_FALSE;	
+  }
 
-    Thingp t = game->thing_find(id);	
-    if (!t) {	
-        ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
-        Py_RETURN_NONE;	
-    }	
+  Thingp t = game->thing_find(id);	
+  if (!t) {	
+    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
+    Py_RETURN_NONE;	
+  }	
 
-    if (t->level->is_oob(x, y)) {
-        PyObject *lst = PyList_New(0);
-        return (lst);
-    }
-
-    auto items = 0;
-    FOR_ALL_THINGS(t->level, t, x, y) {
-        //
-        // Don't include carried things else lasers will destroy all items carried!
-        //
-        if (t->get_immediate_owner()) {
-            continue;
-        }
-        items++;
-    } FOR_ALL_THINGS_END()
-
-    PyObject *lst = PyList_New(items);
-    auto item = 0;
-    FOR_ALL_THINGS(t->level, t, x, y) {
-        //
-        // Don't include carried things else lasers will destroy all items carried!
-        //
-        if (t->get_immediate_owner()) {
-            continue;
-        }
-        PyList_SetItem(lst, item, Py_BuildValue("I", t->id));
-        item++;
-    } FOR_ALL_THINGS_END()
-
+  if (t->level->is_oob(x, y)) {
+    PyObject *lst = PyList_New(0);
     return (lst);
+  }
+
+  auto items = 0;
+  FOR_ALL_THINGS(t->level, t, x, y) {
+    //
+    // Don't include carried things else lasers will destroy all items carried!
+    //
+    if (t->get_immediate_owner()) {
+      continue;
+    }
+    items++;
+  } FOR_ALL_THINGS_END()
+
+  PyObject *lst = PyList_New(items);
+  auto item = 0;
+  FOR_ALL_THINGS(t->level, t, x, y) {
+    //
+    // Don't include carried things else lasers will destroy all items carried!
+    //
+    if (t->get_immediate_owner()) {
+      continue;
+    }
+    PyList_SetItem(lst, item, Py_BuildValue("I", t->id));
+    item++;
+  } FOR_ALL_THINGS_END()
+
+  return (lst);
 }
 
 PyObject *level_flood_fill_get_all_things (PyObject *obj, PyObject *args, PyObject *keywds)
 {_
-    uint32_t id = 0;
-    int x = -1;
-    int y = -1;
-    static char *kwlist[] = {(char*)"id", (char*)"x", (char*)"y", (char*)"filter", 0};	
-    char *filter = nullptr;
-	
-    if (!PyArg_ParseTupleAndKeywords(args, keywds, "Iiis", kwlist, &id, &x, &y, &filter)) {
-        ERR("%s: Failed parsing keywords", __FUNCTION__);	
-        Py_RETURN_FALSE;	
-    }	
-	
-    if (!id) {
-        ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);	
-        Py_RETURN_FALSE;	
-    }
+  uint32_t id = 0;
+  int x = -1;
+  int y = -1;
+  static char *kwlist[] = {(char*)"id", (char*)"x", (char*)"y", (char*)"filter", 0};	
+  char *filter = nullptr;
+  
+  if (!PyArg_ParseTupleAndKeywords(args, keywds, "Iiis", kwlist, &id, &x, &y, &filter)) {
+    ERR("%s: Failed parsing keywords", __FUNCTION__);	
+    Py_RETURN_FALSE;	
+  }	
+  
+  if (!id) {
+    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);	
+    Py_RETURN_FALSE;	
+  }
 
-    if (!filter) {
-        ERR("%s: No filter specified %u", __FUNCTION__, id);	
-        Py_RETURN_FALSE;	
-    }
+  if (!filter) {
+    ERR("%s: No filter specified %u", __FUNCTION__, id);	
+    Py_RETURN_FALSE;	
+  }
 
-    Thingp t = game->thing_find(id);	
-    if (!t) {	
-        ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
-        Py_RETURN_NONE;	
-    }	
+  Thingp t = game->thing_find(id);	
+  if (!t) {	
+    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
+    Py_RETURN_NONE;	
+  }	
 
-    if (t->level->is_oob(x, y)) {
-        PyObject *lst = PyList_New(0);
-        return (lst);
-    }
-
-    auto things = t->level->flood_fill_things(point(x, y), Thing::matches_to_func(filter));
-    auto items = things.size();
-    PyObject *lst = PyList_New(items);
-    auto item = 0;
-    for (auto t : things) {
-        PyList_SetItem(lst, item, Py_BuildValue("I", t->id));
-        item++;
-    }
-
+  if (t->level->is_oob(x, y)) {
+    PyObject *lst = PyList_New(0);
     return (lst);
+  }
+
+  auto things = t->level->flood_fill_things(point(x, y), Thing::matches_to_func(filter));
+  auto items = things.size();
+  PyObject *lst = PyList_New(items);
+  auto item = 0;
+  for (auto t : things) {
+    PyList_SetItem(lst, item, Py_BuildValue("I", t->id));
+    item++;
+  }
+
+  return (lst);
 }
 
 #define LEVEL_BODY_GET_BOOL_AT(__func__, __api__)                                   \
 PyObject *__func__ (PyObject *obj, PyObject *args, PyObject *keywds)                \
 {_	                                                                            \
-    uint32_t id = 0;	                                                            \
-    int x = -1;                                                                     \
-    int y = -1;                                                                     \
-    static char *kwlist[] = {(char*)"id", (char*)"x", (char*)"y", 0};	            \
-	                                                                            \
-    if (!PyArg_ParseTupleAndKeywords(args, keywds, "Iii", kwlist, &id, &x, &y)) {   \
-        ERR("%s: Failed parsing keywords", __FUNCTION__);	                    \
-        Py_RETURN_FALSE;	                                                    \
-    }	                                                                            \
-	                                                                            \
-    if (!id) {	                                                                    \
-        ERR("%s: No thing ID set", __FUNCTION__);	                            \
-        Py_RETURN_FALSE;	                                                    \
-    }	                                                                            \
-	                                                                            \
-    Thingp t = game->thing_find(id);	                                            \
-    if (!t) {	                                                                    \
-        ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);	                    \
-        Py_RETURN_FALSE;	                                                    \
-    }	                                                                            \
-	                                                                            \
-    if (t->level->is_oob(x, y)) { Py_RETURN_FALSE; }                                \
-                                                                                    \
-    FOR_ALL_THINGS(t->level, t, x, y) {                                             \
-        if (t->__api__()) {                                                         \
-            Py_RETURN_TRUE;	                                                    \
-        }                                                                           \
-    } FOR_ALL_THINGS_END()                                                          \
-                                                                                    \
-    Py_RETURN_FALSE;	                                                            \
+  uint32_t id = 0;	                                                            \
+  int x = -1;                                                                     \
+  int y = -1;                                                                     \
+  static char *kwlist[] = {(char*)"id", (char*)"x", (char*)"y", 0};	            \
+                                        \
+  if (!PyArg_ParseTupleAndKeywords(args, keywds, "Iii", kwlist, &id, &x, &y)) {   \
+    ERR("%s: Failed parsing keywords", __FUNCTION__);	                    \
+    Py_RETURN_FALSE;	                                                    \
+  }	                                                                            \
+                                        \
+  if (!id) {	                                                                    \
+    ERR("%s: No thing ID set", __FUNCTION__);	                            \
+    Py_RETURN_FALSE;	                                                    \
+  }	                                                                            \
+                                        \
+  Thingp t = game->thing_find(id);	                                            \
+  if (!t) {	                                                                    \
+    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);	                    \
+    Py_RETURN_FALSE;	                                                    \
+  }	                                                                            \
+                                        \
+  if (t->level->is_oob(x, y)) { Py_RETURN_FALSE; }                                \
+                                          \
+  FOR_ALL_THINGS(t->level, t, x, y) {                                             \
+    if (t->__api__()) {                                                         \
+      Py_RETURN_TRUE;	                                                    \
+    }                                                                           \
+  } FOR_ALL_THINGS_END()                                                          \
+                                          \
+  Py_RETURN_FALSE;	                                                            \
 }
 
 LEVEL_BODY_GET_BOOL_AT(level_ai_enemy_memory_at, ai_enemy_memory)

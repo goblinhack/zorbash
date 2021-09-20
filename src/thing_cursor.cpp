@@ -18,33 +18,33 @@
 
 void Thing::cursor_hover_over_check (void)
 {
-    if (!is_blitted) {
+  if (!is_blitted) {
+    return;
+  }
+
+  point tblit_tl = last_blit_tl;
+  point tblit_br = last_blit_br;
+
+  auto mx = mouse_x;
+  auto my = mouse_y;
+  mx /= game->config.game_pix_scale_width;
+  my /= game->config.game_pix_scale_height;
+
+  if ((mx >= tblit_tl.x) && (mx <= tblit_br.x)) {
+    if ((my >= tblit_tl.y) && (my <= tblit_br.y)) {
+      if (is_mouse_over_rightbar()) {
         return;
+      }
+
+      if (is_mouse_over_any_bag()) {
+        return;
+      }
+
+      if (level->cursor_at != mid_at) {
+        level->cursor_at = mid_at;
+        level->cursor_describe();
+      }
+      level->cursor_found = true;
     }
-
-    point tblit_tl = last_blit_tl;
-    point tblit_br = last_blit_br;
-
-    auto mx = mouse_x;
-    auto my = mouse_y;
-    mx /= game->config.game_pix_scale_width;
-    my /= game->config.game_pix_scale_height;
-
-    if ((mx >= tblit_tl.x) && (mx <= tblit_br.x)) {
-        if ((my >= tblit_tl.y) && (my <= tblit_br.y)) {
-            if (is_mouse_over_rightbar()) {
-                return;
-            }
-
-            if (is_mouse_over_any_bag()) {
-                return;
-            }
-
-            if (level->cursor_at != mid_at) {
-                level->cursor_at = mid_at;
-                level->cursor_describe();
-            }
-            level->cursor_found = true;
-        }
-    }
+  }
 }

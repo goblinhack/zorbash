@@ -16,173 +16,173 @@
 
 bool Thing::skill_add (Thingp what)
 {_
-    dbg("Try to add skill %s", what->to_string().c_str());
+  dbg("Try to add skill %s", what->to_string().c_str());
 _
-    if (!monstp) {
-        dbg("No; not a monst");
-        return false;
+  if (!monstp) {
+    dbg("No; not a monst");
+    return false;
+  }
+
+  auto existing_owner = what->get_immediate_owner();
+  if (existing_owner) {
+    if (existing_owner == this) {
+      dbg("No; same owner");
+      return false;
     }
+    existing_owner->drop(what);
+  }
 
-    auto existing_owner = what->get_immediate_owner();
-    if (existing_owner) {
-        if (existing_owner == this) {
-            dbg("No; same owner");
-            return false;
-        }
-        existing_owner->drop(what);
+  for (const auto& item : monstp->skills) {
+    if (item == what->id) {
+      dbg("No; already carried");
+      return false;
     }
+  }
 
-    for (const auto& item : monstp->skills) {
-        if (item == what->id) {
-            dbg("No; already carried");
-            return false;
-        }
+  if (is_player()) {
+    if (!skillbox_id_insert(what)) {
+      dbg("No; no space in skillbox");
+      return false;
     }
+  }
 
-    if (is_player()) {
-        if (!skillbox_id_insert(what)) {
-            dbg("No; no space in skillbox");
-            return false;
-        }
-    }
+  monstp->skills.push_front(what->id);
+  what->set_owner(this);
+  what->hide();
 
-    monstp->skills.push_front(what->id);
-    what->set_owner(this);
-    what->hide();
+  dbg("Add skill %s", what->to_string().c_str());
 
-    dbg("Add skill %s", what->to_string().c_str());
+  if (is_player()) {
+    wid_skillbox_init();
+  }
 
-    if (is_player()) {
-        wid_skillbox_init();
-    }
-
-    return true;
+  return true;
 }
 
 bool Thing::skill_remove (Thingp what)
 {_
-    dbg("Removing skill %s", what->to_string().c_str());
+  dbg("Removing skill %s", what->to_string().c_str());
 _
-    auto existing_owner = what->get_immediate_owner();
-    if (existing_owner != this) {
-        err("Attempt to remove skill %s which is not owned",
-            what->to_string().c_str());
-        return false;
+  auto existing_owner = what->get_immediate_owner();
+  if (existing_owner != this) {
+    err("Attempt to remove skill %s which is not owned",
+      what->to_string().c_str());
+    return false;
+  }
+
+  Thingp top_owner;
+  if (is_player()) {
+    top_owner = this;
+  } else {
+    top_owner = get_top_owner();
+  }
+
+  if (top_owner) {
+    if (top_owner->is_player()) {
+      top_owner->skillbox_id_remove(what);
     }
+  }
 
-    Thingp top_owner;
-    if (is_player()) {
-        top_owner = this;
-    } else {
-        top_owner = get_top_owner();
-    }
+  dbg("Update bag with drop of: %s", what->to_string().c_str());
+  bag_remove(what);
+  while (bag_compress()) { }
 
-    if (top_owner) {
-        if (top_owner->is_player()) {
-            top_owner->skillbox_id_remove(what);
-        }
-    }
+  what->remove_owner();
+  monstp->skills.remove(what->id);
+  game->request_remake_skillbox = true;
 
-    dbg("Update bag with drop of: %s", what->to_string().c_str());
-    bag_remove(what);
-    while (bag_compress()) { }
+  dbg("Dropped %s into the ether", what->to_string().c_str());
 
-    what->remove_owner();
-    monstp->skills.remove(what->id);
-    game->request_remake_skillbox = true;
-
-    dbg("Dropped %s into the ether", what->to_string().c_str());
-
-    return true;
+  return true;
 }
 
 void Thing::skill_remove_all (void)
 {_
-    if (!monstp) {
-        return;
-    }
+  if (!monstp) {
+    return;
+  }
 
-    while (!monstp->skills.empty()) {
-        auto id = *monstp->skills.begin();
-        auto t = level->thing_find(id);
-        if (!t) {
-            return;
-        }
-        skill_remove(t);
+  while (!monstp->skills.empty()) {
+    auto id = *monstp->skills.begin();
+    auto t = level->thing_find(id);
+    if (!t) {
+      return;
     }
+    skill_remove(t);
+  }
 }
 
 bool Thing::skill_use (Thingp what)
 {_
-    dbg("Try to use skill %s", what->to_string().c_str());
-    used(what, this, false /* remove after use */);
-    return true;
+  dbg("Try to use skill %s", what->to_string().c_str());
+  used(what, this, false /* remove after use */);
+  return true;
 }
 
 void Thing::skill_deactivate (Thingp what)
 {_
-    what->is_activated = false;
-    game->request_remake_skillbox = true;
+  what->is_activated = false;
+  game->request_remake_skillbox = true;
 }
 
 void Thing::skill_activate (Thingp what)
 {_
-    what->is_activated = true;
-    game->request_remake_skillbox = true;
+  what->is_activated = true;
+  game->request_remake_skillbox = true;
 }
 
 int Thing::skill_enchant_count (const uint32_t slot)
 {_
-    if (!monstp) {
-        return 0;
-    }
-
-    auto tp_id = get(monstp->skillbox_id, slot);
-    if (!tp_id) {
-        return 0;
-    }
-
-    for (auto oid : monstp->skills) {
-        auto o = game->level->thing_find(oid);
-        if (o) {
-            if (o->tp()->id == tp_id) {
-                return o->get_enchant();
-            }
-        }
-    }
-
+  if (!monstp) {
     return 0;
+  }
+
+  auto tp_id = get(monstp->skillbox_id, slot);
+  if (!tp_id) {
+    return 0;
+  }
+
+  for (auto oid : monstp->skills) {
+    auto o = game->level->thing_find(oid);
+    if (o) {
+      if (o->tp()->id == tp_id) {
+        return o->get_enchant();
+      }
+    }
+  }
+
+  return 0;
 }
 
 bool Thing::add_skill (Tpp what)
 {_
-    auto t = level->thing_new(what, mid_at);
+  auto t = level->thing_new(what, mid_at);
+  if (!t) {
+    err("Cannot learn skill");
+    return false;
+  }
+
+  TOPCON("You learn %s skill.", t->text_the().c_str());
+  skill_add(t);
+
+  //
+  // Drop an skillstone
+  //
+  auto found = false;
+  for (auto id : monstp->carrying) {
+    auto t = level->thing_find(id);
     if (!t) {
-        err("Cannot learn skill");
-        return false;
+      continue;
     }
-
-    TOPCON("You learn %s skill.", t->text_the().c_str());
-    skill_add(t);
-
-    //
-    // Drop an skillstone
-    //
-    auto found = false;
-    for (auto id : monstp->carrying) {
-        auto t = level->thing_find(id);
-        if (!t) {
-            continue;
-        }
-        if (t->is_skillstone()) {
-            t->dead("used");
-            found = true;
-            break;
-        }
+    if (t->is_skillstone()) {
+      t->dead("used");
+      found = true;
+      break;
     }
-    if (!found) {
-        err("no skillstone found");
-    }
+  }
+  if (!found) {
+    err("no skillstone found");
+  }
 
-    return true;
+  return true;
 }

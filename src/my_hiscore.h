@@ -10,36 +10,36 @@
 class HiScore
 {
 public:
-    HiScore (void) {}
-    HiScore (std::string name,
-             std::string when,
-             int score,
-             int level_reached,
-             std::string killed_by)
-    {
-        this->name = name;
-        this->when = when;
-        this->score = score;
-        this->level_reached = level_reached;
-        this->killed_by = killed_by;
-    }
+  HiScore (void) {}
+  HiScore (std::string name,
+       std::string when,
+       int score,
+       int level_reached,
+       std::string killed_by)
+  {
+    this->name = name;
+    this->when = when;
+    this->score = score;
+    this->level_reached = level_reached;
+    this->killed_by = killed_by;
+  }
 
-    ~HiScore (void) { }
+  ~HiScore (void) { }
 
-    //
-    // Who made the score?
-    //
-    std::string  name;
-    std::string  when;
-    std::string  killed_by;
-    int          score;
-    int          level_reached;
+  //
+  // Who made the score?
+  //
+  std::string  name;
+  std::string  when;
+  std::string  killed_by;
+  int          score;
+  int          level_reached;
 
-    //
-    // The number of scores in the table.
-    //
-    static const int max = 20;
-    static const int max_displayed = 20;
+  //
+  // The number of scores in the table.
+  //
+  static const int max = 20;
+  static const int max_displayed = 20;
 
 };
 std::ostream& operator<<(std::ostream &out, Bits<const HiScore & > const my); // save
@@ -48,18 +48,18 @@ std::istream& operator>>(std::istream &in, Bits<HiScore &> my); // load
 class HiScores
 {
 public:
-    HiScores (void);
-    ~HiScores (void);
+  HiScores (void);
+  ~HiScores (void);
 
-    //
-    // All the hiscores held in the file.
-    //
-    std::vector<HiScore> hiscores;
+  //
+  // All the hiscores held in the file.
+  //
+  std::vector<HiScore> hiscores;
 
-    void add_new_hiscore(Thingp player, const std::string &name, const std::string &killed_by);
-    bool is_new_hiscore(Thingp player);
-    bool is_new_highest_hiscore(Thingp player);
-    const char *place_str(Thingp player);
+  void add_new_hiscore(Thingp player, const std::string &name, const std::string &killed_by);
+  bool is_new_hiscore(Thingp player);
+  bool is_new_highest_hiscore(Thingp player);
+  const char *place_str(Thingp player);
 };
 std::ostream& operator<<(std::ostream &out, Bits<const HiScores & > const my); // save
 std::istream& operator>>(std::istream &in, Bits<HiScores &> my); // load

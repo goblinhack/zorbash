@@ -20,25 +20,25 @@
  */
 uint8_t dir_exists (const char *indir)
 {_
-    struct stat buf;
-    char *dir;
-    uint8_t rc;
+  struct stat buf;
+  char *dir;
+  uint8_t rc;
 
-    /*
-     * msys is crap and unless you remove the / from the end of the name
-     * will not think it is a dir.
-     */
-    dir = dupstr(indir, "dir");
-    strchopc(dir, DIR_SEP_CHAR);
+  /*
+   * msys is crap and unless you remove the / from the end of the name
+   * will not think it is a dir.
+   */
+  dir = dupstr(indir, "dir");
+  strchopc(dir, DIR_SEP_CHAR);
 
-    rc = 0;
-    if (stat(dir, &buf) >= 0) {
-        rc = S_ISDIR(buf.st_mode);
-    }
+  rc = 0;
+  if (stat(dir, &buf) >= 0) {
+    rc = S_ISDIR(buf.st_mode);
+  }
 
-    myfree(dir);
+  myfree(dir);
 
-    return (rc);
+  return (rc);
 }
 
 /*
@@ -46,11 +46,11 @@ uint8_t dir_exists (const char *indir)
  */
 char *dir_dot (void)
 {_
-    static char buf[MAXPATHLEN];
+  static char buf[MAXPATHLEN];
 
-    dospath2unix(getcwd(buf, sizeof(buf)));
+  dospath2unix(getcwd(buf, sizeof(buf)));
 
-    return (buf);
+  return (buf);
 }
 
 /*
@@ -59,25 +59,25 @@ char *dir_dot (void)
  */
 char *dir_dotdot (char *s)
 {_
-    uint32_t size;
-    char *end;
+  uint32_t size;
+  char *end;
 
-    size = (uint32_t)strlen(s);
-    if (size <= 1) {
-        return (s);
-    }
+  size = (uint32_t)strlen(s);
+  if (size <= 1) {
+    return (s);
+  }
 
-    /*
-     * Skip trailing /
-     */
-    end = s + size - 2;
-    while ((end >= s) && (*end != '/') && (*end != '\\')) {
-        end--;
-    }
+  /*
+   * Skip trailing /
+   */
+  end = s + size - 2;
+  while ((end >= s) && (*end != '/') && (*end != '\\')) {
+    end--;
+  }
 
-    *(end + 1) = '\0';
+  *(end + 1) = '\0';
 
-    return (dospath2unix(s));
+  return (dospath2unix(s));
 }
 
 /*
@@ -85,15 +85,15 @@ char *dir_dotdot (char *s)
  */
 char *dospath2unix (char *in)
 {_
-    char *s = in;
+  char *s = in;
 
-    while (*s) {
-        if (*s == '\\') {
-            *s = '/';
-        }
-
-        s++;
+  while (*s) {
+    if (*s == '\\') {
+      *s = '/';
     }
 
-    return (in);
+    s++;
+  }
+
+  return (in);
 }

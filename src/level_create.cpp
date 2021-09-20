@@ -12,63 +12,63 @@
 
 void Level::create (point3d at, int seed)
 {_
-    pcg_srand(game->seed + at.z);
+  pcg_srand(game->seed + at.z);
 
-    is_starting = true;
-    clear();
+  is_starting = true;
+  clear();
 
-    is_level_type_dungeon = false;
-    is_level_type_sewer = false;
+  is_level_type_dungeon = false;
+  is_level_type_sewer = false;
 
-    this->seed = seed;
-    world_at = at;
+  this->seed = seed;
+  world_at = at;
 
-    log("-");
-    log("Creating, seed %u", seed);
-    log("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
-    log("v v v v v v v v v v v v v v v v v v v v v v v v v v v ");
+  log("-");
+  log("Creating, seed %u", seed);
+  log("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
+  log("v v v v v v v v v v v v v v v v v v v v v v v v v v v ");
 
-    bool ret;
-    if (at.z & 1) {
-        ret = create_dungeon(at, seed);
-    } else {
-        ret = create_sewer(at, seed);
-    }
+  bool ret;
+  if (at.z & 1) {
+    ret = create_dungeon(at, seed);
+  } else {
+    ret = create_sewer(at, seed);
+  }
 
-    log("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ");
-    log("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
-    log("Created, seed %u", seed);
-    log("-");
+  log("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ");
+  log("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
+  log("Created, seed %u", seed);
+  log("-");
 
-    if (!ret) {
-        err("Failed to create level");
-    }
+  if (!ret) {
+    err("Failed to create level");
+  }
 
-    update_map();
+  update_map();
 
-    game->started = true;
-    is_starting = false;
+  game->started = true;
+  is_starting = false;
 
-    timestamp_fade_in_begin = time_get_time_ms_cached();
+  timestamp_fade_in_begin = time_get_time_ms_cached();
 
-    things_gc_force();
+  things_gc_force();
 
-    if (!cursor && player) {
-        cursor = thing_new("cursor", player->mid_at);
-        cursor->hide();
-    }
+  if (!cursor && player) {
+    cursor = thing_new("cursor", player->mid_at);
+    cursor->hide();
+  }
 }
 
 void Level::place_the_grid (void)
 {_
-    for (auto x = 0; x < MAP_WIDTH; x++) {
-        for (auto y = 0; y < MAP_HEIGHT; y++) {
-            (void) thing_new("the_grid", fpoint(x, y));
-            if (g_errored) {
-                ERR("Could not create level");
-                return;
-            }
-        }
+  for (auto x = 0; x < MAP_WIDTH; x++) {
+    for (auto y = 0; y < MAP_HEIGHT; y++) {
+      (void) thing_new("the_grid", fpoint(x, y));
+      if (g_errored) {
+        ERR("Could not create level");
+        return;
+      }
     }
+  }
 }
 

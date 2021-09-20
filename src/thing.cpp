@@ -13,115 +13,115 @@ Thingp g_debug_thing;
 
 const Tpp Thing::tp_or_update(void)
 {
-    if (likely(mytp != nullptr)) {
-        return (mytp);
-    }
-    if (unlikely(tp_id == -1)) {
-        return (nullptr);
-    }
-    mytp = tp_id_map[tp_id - 1];
+  if (likely(mytp != nullptr)) {
     return (mytp);
+  }
+  if (unlikely(tp_id == -1)) {
+    return (nullptr);
+  }
+  mytp = tp_id_map[tp_id - 1];
+  return (mytp);
 }
 
 const Tpp Thing::tp(void) const
 {
-    if (likely(mytp != nullptr)) {
-        return (mytp);
-    }
-    if (unlikely(tp_id == -1)) {
-        err("no tp set for tp_id %d", tp_id);
-        return (nullptr);
-    }
-
-    //
-    // Means a missing call to tp_or_update
-    //
-    if (tp_id_map[tp_id - 1]) {
-        ERR("no tp has been set yet for tp_id %d", tp_id);
-    } else {
-        DIE("no tp has been set for invalid tp_id %d", tp_id);
-    }
+  if (likely(mytp != nullptr)) {
+    return (mytp);
+  }
+  if (unlikely(tp_id == -1)) {
+    err("no tp set for tp_id %d", tp_id);
     return (nullptr);
+  }
+
+  //
+  // Means a missing call to tp_or_update
+  //
+  if (tp_id_map[tp_id - 1]) {
+    ERR("no tp has been set yet for tp_id %d", tp_id);
+  } else {
+    DIE("no tp has been set for invalid tp_id %d", tp_id);
+  }
+  return (nullptr);
 }
 
 uint8_t Thing::z_prio (void) const
 {
-    return (tp()->z_prio);
+  return (tp()->z_prio);
 }
 
 std::size_t Thing::get_light_count (void) const
 {
-    if (likely(monstp != nullptr)) {
-        verify(monstp);
-        return (monstp->light.size());
-    } else {
-        return (0);
-    }
+  if (likely(monstp != nullptr)) {
+    verify(monstp);
+    return (monstp->light.size());
+  } else {
+    return (0);
+  }
 }
 
 const ThingId& Thing::get_immediate_owner_id (void) const
 {_
-    if (likely(monstp != nullptr)) {
-        verify(monstp);
-        return (monstp->owner_id);
-    } else {
-        return (NoThingId);
-    }
+  if (likely(monstp != nullptr)) {
+    verify(monstp);
+    return (monstp->owner_id);
+  } else {
+    return (NoThingId);
+  }
 }
 
 const ThingId& Thing::get_top_owner_id (void) const
 {_
-    auto t = get_top_owner();
-    if (t) {
-        return t->id;
-    }
-    return (NoThingId);
+  auto t = get_top_owner();
+  if (t) {
+    return t->id;
+  }
+  return (NoThingId);
 }
 
 const ThingId& Thing::set_owner_id (const ThingId &v)
 {_
-    new_monst();
-    return (monstp->owner_id = v);
+  new_monst();
+  return (monstp->owner_id = v);
 }
 
 const ThingId& Thing::get_immediate_minion_owner_id (void) const
 {_
-    if (likely(monstp != nullptr)) {
-        verify(monstp);
-        return (monstp->minion_owner_id);
-    } else {
-        return (NoThingId);
-    }
+  if (likely(monstp != nullptr)) {
+    verify(monstp);
+    return (monstp->minion_owner_id);
+  } else {
+    return (NoThingId);
+  }
 }
 
 const ThingId& Thing::set_minion_owner_id (const ThingId &v)
 {_
-    new_monst();
-    return (monstp->minion_owner_id = v);
+  new_monst();
+  return (monstp->minion_owner_id = v);
 }
 
 const ThingId& Thing::get_immediate_spawned_owner_id (void) const
 {_
-    if (likely(monstp != nullptr)) {
-        verify(monstp);
-        return (monstp->spawner_owner_id);
-    } else {
-        return (NoThingId);
-    }
+  if (likely(monstp != nullptr)) {
+    verify(monstp);
+    return (monstp->spawner_owner_id);
+  } else {
+    return (NoThingId);
+  }
 }
 
 const ThingId& Thing::set_spawned_owner_id (const ThingId &v)
 {_
-    new_monst();
-    return (monstp->spawner_owner_id = v);
+  new_monst();
+  return (monstp->spawner_owner_id = v);
 }
 
 const fpoint &Thing::get_interpolated_mid_at (void) const
 {_
-    return (interpolated_mid_at);
+  return (interpolated_mid_at);
 }
 
 void Thing::set_interpolated_mid_at (fpoint v)
 {_
-    interpolated_mid_at = v;
+  interpolated_mid_at = v;
 }

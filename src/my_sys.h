@@ -80,10 +80,10 @@
 #define ARRAY_SIZE(_array_) (sizeof(_array_)/sizeof(_array_[0]))
 
 #define FOR_ALL_IN_ARRAY(iterator, _array_)                                 \
-    __typeof__(&_array_[0]) iterator;                                       \
-    for ((iterator) = (_array_);                                            \
-         (iterator) < ((_array_) + ARRAY_SIZE(_array_));                    \
-         (iterator)++)
+  __typeof__(&_array_[0]) iterator;                                       \
+  for ((iterator) = (_array_);                                            \
+     (iterator) < ((_array_) + ARRAY_SIZE(_array_));                    \
+     (iterator)++)
 
 //
 // GCC extensions
@@ -162,14 +162,14 @@ void CROAK(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
 void CROAK_CLEAN(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
 
 #define DIE(args...)                                                          \
-    DYING("Died at %s:%s():%u", __FILE__, __FUNCTION__, __LINE__);            \
-    CROAK(args);                                                              \
-    exit(1);
+  DYING("Died at %s:%s():%u", __FILE__, __FUNCTION__, __LINE__);            \
+  CROAK(args);                                                              \
+  exit(1);
 
 #define DIE_CLEAN(args...)                                                    \
-    DYING("Exiting at %s:%s():%u", __FILE__, __FUNCTION__, __LINE__);         \
-    CROAK_CLEAN(args);                                                        \
-    exit(1);
+  DYING("Exiting at %s:%s():%u", __FILE__, __FUNCTION__, __LINE__);         \
+  CROAK_CLEAN(args);                                                        \
+  exit(1);
 
 #ifdef DEBUG
 #define DODEBUG(x) x
@@ -180,13 +180,13 @@ void CROAK_CLEAN(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
 #ifdef ENABLE_ASSERT
 #undef ASSERT
 #define ASSERT(x) \
-    if (! (x)) {_ \
-        std::stringstream ss; \
-        ss << "Assert '" << #x << "' failed at line " \
-           << __LINE__ << ", file " << __FILE__ \
-           << ", function " << __FUNCTION__ << "()"; \
-        { auto s = ss.str(); DIE("%s", s.c_str()); } \
-    }
+  if (! (x)) {_ \
+    std::stringstream ss; \
+    ss << "Assert '" << #x << "' failed at line " \
+       << __LINE__ << ", file " << __FILE__ \
+       << ", function " << __FUNCTION__ << "()"; \
+    { auto s = ss.str(); DIE("%s", s.c_str()); } \
+  }
 #else
 #define ASSERT(x)
 #endif
@@ -195,10 +195,10 @@ void CROAK_CLEAN(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
 // https://stackoverflow.com/questions/2193544/how-to-print-additional-information-when-assert-fails
 #ifdef ENABLE_ASSERT
 #define ASSERT_EX(left, operator, right) \
-    if (!((left) operator (right))) {_ \
-        std::cerr << "ASSERT FAILED: " << #left << " " << #operator << " " << #right << " @ " << __FILE__ << ":" << __PRETTY_FUNCTION__ << " line " << __LINE__ << " " << #left << "=" << (left) << "; " << #right << "=" << (right) << std::endl; \
-        ASSERT(left operator right); \
-    }
+  if (!((left) operator (right))) {_ \
+    std::cerr << "ASSERT FAILED: " << #left << " " << #operator << " " << #right << " @ " << __FILE__ << ":" << __PRETTY_FUNCTION__ << " line " << __LINE__ << " " << #left << "=" << (left) << "; " << #right << "=" << (right) << std::endl; \
+    ASSERT(left operator right); \
+  }
 #else
 #define ASSERT_EX(left, operator, right)
 #endif

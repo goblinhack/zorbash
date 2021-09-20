@@ -19,15 +19,15 @@
 
 void Level::cursor_describe (void)
 {_
-    if (game->robot_mode) {
-        return;
-    }
+  if (game->robot_mode) {
+    return;
+  }
 
-    dbg("Cursor describe");
-    if (!cursor) {
-        return;
-    }
+  dbg("Cursor describe");
+  if (!cursor) {
+    return;
+  }
 
-    auto p = cursor->mid_at;
-    describe(p);
+  auto p = cursor->mid_at;
+  describe(p);
 }

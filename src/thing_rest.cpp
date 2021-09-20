@@ -10,6 +10,6 @@
 
 void Thing::rest (void)
 {_
-    dbg("Resting");
-    stamina_boost(1);
+  dbg("Resting");
+  stamina_boost(1);
 }

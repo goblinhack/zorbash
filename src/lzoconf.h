@@ -92,12 +92,12 @@ extern "C" {
 #if !defined(LZO_UINT_MAX)
 #  if (LZO_ABI_LLP64)
 #    if (LZO_OS_WIN64)
-     typedef unsigned __int64   lzo_uint;
-     typedef __int64            lzo_int;
+   typedef unsigned __int64   lzo_uint;
+   typedef __int64            lzo_int;
 #    define LZO_TYPEOF_LZO_INT  LZO_TYPEOF___INT64
 #    else
-     typedef lzo_ullong_t       lzo_uint;
-     typedef lzo_llong_t        lzo_int;
+   typedef lzo_ullong_t       lzo_uint;
+   typedef lzo_llong_t        lzo_int;
 #    define LZO_TYPEOF_LZO_INT  LZO_TYPEOF_LONG_LONG
 #    endif
 #    define LZO_SIZEOF_LZO_INT  8
@@ -105,16 +105,16 @@ extern "C" {
 #    define LZO_INT_MAX         9223372036854775807LL
 #    define LZO_INT_MIN         (-1LL - LZO_INT_MAX)
 #  elif (LZO_ABI_IP32L64) /* MIPS R5900 */
-     typedef unsigned int       lzo_uint;
-     typedef int                lzo_int;
+   typedef unsigned int       lzo_uint;
+   typedef int                lzo_int;
 #    define LZO_SIZEOF_LZO_INT  LZO_SIZEOF_INT
 #    define LZO_TYPEOF_LZO_INT  LZO_TYPEOF_INT
 #    define LZO_UINT_MAX        UINT_MAX
 #    define LZO_INT_MAX         INT_MAX
 #    define LZO_INT_MIN         INT_MIN
 #  elif (ULONG_MAX >= LZO_0xffffffffL)
-     typedef unsigned long      lzo_uint;
-     typedef long               lzo_int;
+   typedef unsigned long      lzo_uint;
+   typedef long               lzo_int;
 #    define LZO_SIZEOF_LZO_INT  LZO_SIZEOF_LONG
 #    define LZO_TYPEOF_LZO_INT  LZO_TYPEOF_LONG
 #    define LZO_UINT_MAX        ULONG_MAX
@@ -238,30 +238,30 @@ LZO_COMPILE_TIME_ASSERT_HEADER(sizeof(char *)   == sizeof(lzo_bytep))
 /* function types */
 typedef int
 (__LZO_CDECL *lzo_compress_t)   ( const lzo_bytep src, lzo_uint  src_len,
-                                        lzo_bytep dst, lzo_uintp dst_len,
-                                        lzo_voidp wrkmem );
+                    lzo_bytep dst, lzo_uintp dst_len,
+                    lzo_voidp wrkmem );
 
 typedef int
 (__LZO_CDECL *lzo_decompress_t) ( const lzo_bytep src, lzo_uint  src_len,
-                                        lzo_bytep dst, lzo_uintp dst_len,
-                                        lzo_voidp wrkmem );
+                    lzo_bytep dst, lzo_uintp dst_len,
+                    lzo_voidp wrkmem );
 
 typedef int
 (__LZO_CDECL *lzo_optimize_t)   (       lzo_bytep src, lzo_uint  src_len,
-                                        lzo_bytep dst, lzo_uintp dst_len,
-                                        lzo_voidp wrkmem );
+                    lzo_bytep dst, lzo_uintp dst_len,
+                    lzo_voidp wrkmem );
 
 typedef int
 (__LZO_CDECL *lzo_compress_dict_t)(const lzo_bytep src, lzo_uint  src_len,
-                                         lzo_bytep dst, lzo_uintp dst_len,
-                                         lzo_voidp wrkmem,
-                                   const lzo_bytep dict, lzo_uint dict_len );
+                     lzo_bytep dst, lzo_uintp dst_len,
+                     lzo_voidp wrkmem,
+                   const lzo_bytep dict, lzo_uint dict_len );
 
 typedef int
 (__LZO_CDECL *lzo_decompress_dict_t)(const lzo_bytep src, lzo_uint  src_len,
-                                           lzo_bytep dst, lzo_uintp dst_len,
-                                           lzo_voidp wrkmem,
-                                     const lzo_bytep dict, lzo_uint dict_len );
+                       lzo_bytep dst, lzo_uintp dst_len,
+                       lzo_voidp wrkmem,
+                   const lzo_bytep dict, lzo_uint dict_len );
 
 
 /* Callback interface. Currently only the progress indicator ("nprogress")
@@ -273,29 +273,29 @@ typedef struct lzo_callback_t lzo_callback_t;
 
 /* malloc & free function types */
 typedef lzo_voidp (__LZO_CDECL *lzo_alloc_func_t)
-    (lzo_callback_p self, lzo_uint items, lzo_uint size);
+  (lzo_callback_p self, lzo_uint items, lzo_uint size);
 typedef void      (__LZO_CDECL *lzo_free_func_t)
-    (lzo_callback_p self, lzo_voidp ptr);
+  (lzo_callback_p self, lzo_voidp ptr);
 
 /* a progress indicator callback function */
 typedef void (__LZO_CDECL *lzo_progress_func_t)
-    (lzo_callback_p, lzo_uint, lzo_uint, int);
+  (lzo_callback_p, lzo_uint, lzo_uint, int);
 
 struct lzo_callback_t
 {
-    /* custom allocators (set to 0 to disable) */
-    lzo_alloc_func_t nalloc;                /* [not used right now] */
-    lzo_free_func_t nfree;                  /* [not used right now] */
+  /* custom allocators (set to 0 to disable) */
+  lzo_alloc_func_t nalloc;                /* [not used right now] */
+  lzo_free_func_t nfree;                  /* [not used right now] */
 
-    /* a progress indicator callback function (set to 0 to disable) */
-    lzo_progress_func_t nprogress;
+  /* a progress indicator callback function (set to 0 to disable) */
+  lzo_progress_func_t nprogress;
 
-    /* INFO: the first parameter "self" of the nalloc/nfree/nprogress
-     * callbacks points back to this struct, so you are free to store
-     * some extra info in the following variables. */
-    lzo_voidp user1;
-    lzo_xint user2;
-    lzo_xint user3;
+  /* INFO: the first parameter "self" of the nalloc/nfree/nprogress
+   * callbacks points back to this struct, so you are free to store
+   * some extra info in the following variables. */
+  lzo_voidp user1;
+  lzo_xint user2;
+  lzo_xint user3;
 };
 
 
@@ -334,9 +334,9 @@ struct lzo_callback_t
  * compiler's view of various types are consistent.
  */
 #define lzo_init() __lzo_init_v2(LZO_VERSION,(int)sizeof(short),(int)sizeof(int),\
-    (int)sizeof(long),(int)sizeof(lzo_uint32_t),(int)sizeof(lzo_uint),\
-    (int)lzo_sizeof_dict_t,(int)sizeof(char *),(int)sizeof(lzo_voidp),\
-    (int)sizeof(lzo_callback_t))
+  (int)sizeof(long),(int)sizeof(lzo_uint32_t),(int)sizeof(lzo_uint),\
+  (int)lzo_sizeof_dict_t,(int)sizeof(char *),(int)sizeof(lzo_voidp),\
+  (int)sizeof(lzo_callback_t))
 LZO_EXTERN(int) __lzo_init_v2(unsigned,int,int,int,int,int,int,int,int,int);
 
 /* version functions (useful for shared libraries) */
@@ -348,36 +348,36 @@ LZO_EXTERN(const lzo_charp) _lzo_version_date(void);
 
 /* string functions */
 LZO_EXTERN(int)
-    lzo_memcmp(const lzo_voidp a, const lzo_voidp b, lzo_uint len);
+  lzo_memcmp(const lzo_voidp a, const lzo_voidp b, lzo_uint len);
 LZO_EXTERN(lzo_voidp)
-    lzo_memcpy(lzo_voidp dst, const lzo_voidp src, lzo_uint len);
+  lzo_memcpy(lzo_voidp dst, const lzo_voidp src, lzo_uint len);
 LZO_EXTERN(lzo_voidp)
-    lzo_memmove(lzo_voidp dst, const lzo_voidp src, lzo_uint len);
+  lzo_memmove(lzo_voidp dst, const lzo_voidp src, lzo_uint len);
 LZO_EXTERN(lzo_voidp)
-    lzo_memset(lzo_voidp buf, int c, lzo_uint len);
+  lzo_memset(lzo_voidp buf, int c, lzo_uint len);
 
 /* checksum functions */
 LZO_EXTERN(lzo_uint32_t)
-    lzo_adler32(lzo_uint32_t c, const lzo_bytep buf, lzo_uint len);
+  lzo_adler32(lzo_uint32_t c, const lzo_bytep buf, lzo_uint len);
 LZO_EXTERN(lzo_uint32_t)
-    lzo_crc32(lzo_uint32_t c, const lzo_bytep buf, lzo_uint len);
+  lzo_crc32(lzo_uint32_t c, const lzo_bytep buf, lzo_uint len);
 LZO_EXTERN(const lzo_uint32_tp)
-    lzo_get_crc32_table(void);
+  lzo_get_crc32_table(void);
 
 /* misc. */
 LZO_EXTERN(int) _lzo_config_check(void);
 typedef union {
-    lzo_voidp a00; lzo_bytep a01; lzo_uint a02; lzo_xint a03; lzo_uintptr_t a04;
-    void *a05; unsigned char *a06; unsigned long a07; size_t a08; ptrdiff_t a09;
+  lzo_voidp a00; lzo_bytep a01; lzo_uint a02; lzo_xint a03; lzo_uintptr_t a04;
+  void *a05; unsigned char *a06; unsigned long a07; size_t a08; ptrdiff_t a09;
 #if defined(lzo_int64_t)
-    lzo_uint64_t a10;
+  lzo_uint64_t a10;
 #endif
 } lzo_align_t;
 
 /* align a char pointer on a boundary that is a multiple of 'size' */
 LZO_EXTERN(unsigned) __lzo_align_gap(const lzo_voidp p, lzo_uint size);
 #define LZO_PTR_ALIGN_UP(p,size) \
-    ((p) + (lzo_uint) __lzo_align_gap((const lzo_voidp)(p),(lzo_uint)(size)))
+  ((p) + (lzo_uint) __lzo_align_gap((const lzo_voidp)(p),(lzo_uint)(size)))
 
 
 /***********************************************************************
