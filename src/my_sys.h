@@ -80,9 +80,9 @@
 //
 #define ARRAY_SIZE(_array_) (sizeof(_array_)/sizeof(_array_[0]))
 
-#define FOR_ALL_IN_ARRAY(iterator, _array_)                                 \
-  __typeof__(&_array_[0]) iterator;                                       \
-  for ((iterator) = (_array_);                                            \
+#define FOR_ALL_IN_ARRAY(iterator, _array_)                             \
+  __typeof__(&_array_[0]) iterator;                                     \
+  for ((iterator) = (_array_);                                          \
      (iterator) < ((_array_) + ARRAY_SIZE(_array_));                    \
      (iterator)++)
 
@@ -162,12 +162,12 @@ void DYING(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
 void CROAK(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
 void CROAK_CLEAN(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
 
-#define DIE(args...)                                                          \
+#define DIE(args...)                                                        \
   DYING("Died at %s:%s():%u", __FILE__, __FUNCTION__, __LINE__);            \
   CROAK(args);                                                              \
   exit(1);
 
-#define DIE_CLEAN(args...)                                                    \
+#define DIE_CLEAN(args...)                                                  \
   DYING("Exiting at %s:%s():%u", __FILE__, __FUNCTION__, __LINE__);         \
   CROAK_CLEAN(args);                                                        \
   exit(1);

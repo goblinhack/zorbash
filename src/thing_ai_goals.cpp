@@ -84,16 +84,16 @@ _
     int terrain_score = get_terrain_cost(p);
     int total_score = -(int)terrain_score;
 
-#define GOAL_ADD(score, msg)                                               \
-    total_score += (score);                                            \
-    got_a_goal = true;                                                 \
-    if (last_msg.empty()) {                                            \
+#define GOAL_ADD(score, msg)                                         \
+    total_score += (score);                                          \
+    got_a_goal = true;                                               \
+    if (last_msg.empty()) {                                          \
       last_msg = msg;                                                \
-    } else {                                                           \
+    } else {                                                         \
       last_msg += ", ";                                              \
       last_msg += msg;                                               \
-    }                                                                  \
-    dbg2(" add goal (%d,%d) score %d %s, %s",                          \
+    }                                                                \
+    dbg2(" add goal (%d,%d) score %d %s, %s",                        \
        p.x + minx, p.y + miny, score, msg, it->to_string().c_str()); \
 
     std::string last_msg;

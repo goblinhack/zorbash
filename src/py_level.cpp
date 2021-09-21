@@ -374,37 +374,37 @@ PyObject *level_flood_fill_get_all_things (PyObject *obj, PyObject *args, PyObje
 
 #define LEVEL_BODY_GET_BOOL_AT(__func__, __api__)                                   \
 PyObject *__func__ (PyObject *obj, PyObject *args, PyObject *keywds)                \
-{_	                                                                            \
-  uint32_t id = 0;	                                                            \
-  int x = -1;                                                                     \
-  int y = -1;                                                                     \
-  static char *kwlist[] = {(char*)"id", (char*)"x", (char*)"y", 0};	            \
-                                        \
-  if (!PyArg_ParseTupleAndKeywords(args, keywds, "Iii", kwlist, &id, &x, &y)) {   \
-    ERR("%s: Failed parsing keywords", __FUNCTION__);	                    \
-    Py_RETURN_FALSE;	                                                    \
-  }	                                                                            \
-                                        \
-  if (!id) {	                                                                    \
-    ERR("%s: No thing ID set", __FUNCTION__);	                            \
-    Py_RETURN_FALSE;	                                                    \
-  }	                                                                            \
-                                        \
-  Thingp t = game->thing_find(id);	                                            \
-  if (!t) {	                                                                    \
-    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);	                    \
-    Py_RETURN_FALSE;	                                                    \
-  }	                                                                            \
-                                        \
-  if (t->level->is_oob(x, y)) { Py_RETURN_FALSE; }                                \
-                                          \
-  FOR_ALL_THINGS(t->level, t, x, y) {                                             \
-    if (t->__api__()) {                                                         \
-      Py_RETURN_TRUE;	                                                    \
-    }                                                                           \
-  } FOR_ALL_THINGS_END()                                                          \
-                                          \
-  Py_RETURN_FALSE;	                                                            \
+{_	                                                                                \
+  uint32_t id = 0;	                                                                \
+  int x = -1;                                                                       \
+  int y = -1;                                                                       \
+  static char *kwlist[] = {(char*)"id", (char*)"x", (char*)"y", 0};	                \
+                                                                                    \
+  if (!PyArg_ParseTupleAndKeywords(args, keywds, "Iii", kwlist, &id, &x, &y)) {     \
+    ERR("%s: Failed parsing keywords", __FUNCTION__);	                              \
+    Py_RETURN_FALSE;	                                                              \
+  }	                                                                                \
+                                                                                    \
+  if (!id) {	                                                                      \
+    ERR("%s: No thing ID set", __FUNCTION__);	                                      \
+    Py_RETURN_FALSE;	                                                              \
+  }	                                                                                \
+                                                                                    \
+  Thingp t = game->thing_find(id);	                                                \
+  if (!t) {	                                                                        \
+    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);	                          \
+    Py_RETURN_FALSE;	                                                              \
+  }	                                                                                \
+                                                                                    \
+  if (t->level->is_oob(x, y)) { Py_RETURN_FALSE; }                                  \
+                                                                                    \
+  FOR_ALL_THINGS(t->level, t, x, y) {                                               \
+    if (t->__api__()) {                                                             \
+      Py_RETURN_TRUE;	                                                              \
+    }                                                                               \
+  } FOR_ALL_THINGS_END()                                                            \
+                                                                                    \
+  Py_RETURN_FALSE;	                                                                \
 }
 
 LEVEL_BODY_GET_BOOL_AT(level_ai_enemy_memory_at, ai_enemy_memory)

@@ -59,9 +59,9 @@
 // Push elements onto the array buffer.
 //
 #define gl_push_texcoord(p, x, y) \
-{ \
-  *p++ = x; \
-  *p++ = y; \
+{                                 \
+  *p++ = x;                       \
+  *p++ = y;                       \
 }
 
 //

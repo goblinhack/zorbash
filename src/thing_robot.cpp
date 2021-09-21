@@ -290,9 +290,9 @@ _
       bool logged_one = false;
       FOR_ALL_THINGS_THAT_INTERACT(level, it, p.x, p.y) {
         if (it->is_changing_level ||
-          it->is_hidden ||
-          it->is_falling ||
-          it->is_jumping) {
+            it->is_hidden ||
+            it->is_falling ||
+            it->is_jumping) {
           continue;
         }
 
@@ -311,9 +311,7 @@ _
             it->to_string().c_str(), result.goal.msg.c_str(),
             goal_path_str.c_str(),
             (int)result.goal.score);
-          BOTCON("Robot: goal %s %s",
-               result.goal.msg.c_str(),
-               it->text_the().c_str());
+          BOTCON("Robot: goal %s %s", result.goal.msg.c_str(), it->text_the().c_str());
         } else {
           log("Monst: Found a goal: %s %s, via %sscore %d",
             it->to_string().c_str(), result.goal.msg.c_str(),
@@ -326,11 +324,11 @@ _
         FOR_ALL_THINGS(level, it, p.x, p.y) {
 
           if (it->is_changing_level ||
-            it->is_hidden ||
-            it->is_the_grid ||
-            it->is_tmp_thing() ||
-            it->is_falling ||
-            it->is_jumping) {
+              it->is_hidden ||
+              it->is_the_grid ||
+              it->is_tmp_thing() ||
+              it->is_falling ||
+              it->is_jumping) {
             continue;
           }
 
@@ -349,9 +347,7 @@ _
               it->to_string().c_str(), result.goal.msg.c_str(),
               goal_path_str.c_str(),
               (int)result.goal.score);
-            BOTCON("Robot: goal %s %s",
-              result.goal.msg.c_str(),
-              it->text_the().c_str());
+            BOTCON("Robot: goal %s %s", result.goal.msg.c_str(), it->text_the().c_str());
           } else {
             log("Monst: Found a non active-thing goal: %s %s, via %sscore %d",
               it->to_string().c_str(), result.goal.msg.c_str(),
@@ -1681,7 +1677,7 @@ void Thing::robot_tick (void)
       }
 
       if ((get_health() >= (get_health_max() / 4) * 3) &&
-        (get_stamina() >= (get_stamina_max() / 4) * 3)) {
+          (get_stamina() >= (get_stamina_max() / 4) * 3)) {
         BOTCON("Robot has nothing to do at all");
         wid_actionbar_robot_mode_off();
       } else {
@@ -1733,7 +1729,7 @@ void Thing::robot_tick (void)
     case ROBOT_STATE_RESTING:
     {
       if ((get_health() >= (get_health_max() / 4) * 3) &&
-        (get_stamina() >= (get_stamina_max() / 4) * 3)) {
+          (get_stamina() >= (get_stamina_max() / 4) * 3)) {
 
         BOTCON("Robot has rested enough");
         game->tick_begin("Robot has rested enough");

@@ -340,11 +340,6 @@ bool Thing::try_to_carry_if_worthwhile_dropping_items_if_needed (Thingp item)
 {_
   Thingp would_need_to_drop = nullptr;
 
-  log("Carry check: @(%s, %d,%d %d/%dh)",
-    level->to_string().c_str(),
-    (int)mid_at.x, (int)mid_at.y, get_health(), get_health_max(),
-    item->to_string().c_str());
-_
   if (worth_collecting(item, &would_need_to_drop) < 0) {
     log("Carry check: @(%s, %d,%d %d/%dh) is not worth collecting %s",
       level->to_string().c_str(),

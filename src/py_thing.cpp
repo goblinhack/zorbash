@@ -15,161 +15,161 @@
 #include "my_hiscore.h"
 #include "my_ptrcheck.h"
 
-#define THING_BODY_SET_INT(__func__, __api__)                                       \
-PyObject *__func__ (PyObject *obj, PyObject *args, PyObject *keywds)                \
-{_	                                                                            \
-  uint32_t id = 0;	                                                            \
-  uint32_t value = 0;	                                                            \
-  static char *kwlist[] = {(char*)"id", (char*)"value", 0};	                    \
-                                        \
-  if (!PyArg_ParseTupleAndKeywords(args, keywds, "Ii", kwlist, &id, &value)) {    \
-    ERR("%s: Failed parsing keywords", __FUNCTION__);	                    \
-    Py_RETURN_FALSE;	                                                    \
-  }	                                                                            \
-                                        \
-  Thingp t = game->thing_find(id);	                                            \
-  if (!t) {	                                                                    \
-    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);	                    \
-    Py_RETURN_FALSE;	                                                    \
-  }	                                                                            \
-                                        \
-  t->__api__(value);                                                              \
-  Py_RETURN_TRUE;	                                                            \
+#define THING_BODY_SET_INT(__func__, __api__)                                                       \
+PyObject *__func__ (PyObject *obj, PyObject *args, PyObject *keywds)                                \
+{_	                                                                                                \
+  uint32_t id = 0;	                                                                                \
+  uint32_t value = 0;	                                                                              \
+  static char *kwlist[] = {(char*)"id", (char*)"value", 0};	                                        \
+                                                                                                    \
+  if (!PyArg_ParseTupleAndKeywords(args, keywds, "Ii", kwlist, &id, &value)) {                      \
+    ERR("%s: Failed parsing keywords", __FUNCTION__);	                                              \
+    Py_RETURN_FALSE;	                                                                              \
+  }	                                                                                                \
+                                                                                                    \
+  Thingp t = game->thing_find(id);	                                                                \
+  if (!t) {	                                                                                        \
+    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);	                                          \
+    Py_RETURN_FALSE;	                                                                              \
+  }	                                                                                                \
+                                                                                                    \
+  t->__api__(value);                                                                                \
+  Py_RETURN_TRUE;	                                                                                  \
 }
 
-#define THING_BODY_GET_INT(__func__, __api__)                                       \
-PyObject *__func__ (PyObject *obj, PyObject *args, PyObject *keywds)                \
-{_	                                                                            \
-  uint32_t id = 0;	                                                            \
-  static char *kwlist[] = {(char*)"id", 0};	                                    \
-                                        \
-  if (!PyArg_ParseTupleAndKeywords(args, keywds, "I", kwlist, &id)) {             \
-    ERR("%s: Failed parsing keywords", __FUNCTION__);	                    \
-    Py_RETURN_FALSE;	                                                    \
-  }	                                                                            \
-                                        \
-  Thingp t = game->thing_find(id);	                                            \
-  if (!t) {	                                                                    \
-    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);	                    \
-    Py_RETURN_FALSE;	                                                    \
-  }	                                                                            \
-                                        \
-  auto value = t->__api__();                                                      \
-  return Py_BuildValue("i", (int) value);                                         \
+#define THING_BODY_GET_INT(__func__, __api__)                                                       \
+PyObject *__func__ (PyObject *obj, PyObject *args, PyObject *keywds)                                \
+{_	                                                                                                \
+  uint32_t id = 0;	                                                                                \
+  static char *kwlist[] = {(char*)"id", 0};	                                                        \
+                                                                                                    \
+  if (!PyArg_ParseTupleAndKeywords(args, keywds, "I", kwlist, &id)) {                               \
+    ERR("%s: Failed parsing keywords", __FUNCTION__);	                                              \
+    Py_RETURN_FALSE;	                                                                              \
+  }	                                                                                                \
+                                                                                                    \
+  Thingp t = game->thing_find(id);	                                                                \
+  if (!t) {	                                                                                        \
+    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);	                                          \
+    Py_RETURN_FALSE;	                                                                              \
+  }	                                                                                                \
+                                                                                                    \
+  auto value = t->__api__();                                                                        \
+  return Py_BuildValue("i", (int) value);                                                           \
 }
 
-#define THING_BODY_GET_STRING(__func__, __api__)                                    \
-PyObject *__func__ (PyObject *obj, PyObject *args, PyObject *keywds)                \
-{_	                                                                            \
-  uint32_t id = 0;	                                                            \
-  static char *kwlist[] = {(char*)"id", 0};	                                    \
-                                        \
-  if (!PyArg_ParseTupleAndKeywords(args, keywds, "I", kwlist, &id)) {             \
-    ERR("%s: Failed parsing keywords", __FUNCTION__);	                    \
-    Py_RETURN_FALSE;	                                                    \
-  }	                                                                            \
-                                        \
-  Thingp t = game->thing_find(id);	                                            \
-  if (!t) {	                                                                    \
-    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);	                    \
-    Py_RETURN_FALSE;	                                                    \
-  }	                                                                            \
-                                        \
-  auto value = t->__api__();                                                      \
-  return Py_BuildValue("s", value.c_str());                                       \
+#define THING_BODY_GET_STRING(__func__, __api__)                                                    \
+PyObject *__func__ (PyObject *obj, PyObject *args, PyObject *keywds)                                \
+{_	                                                                                                \
+  uint32_t id = 0;	                                                                                \
+  static char *kwlist[] = {(char*)"id", 0};	                                                        \
+                                                                                                    \
+  if (!PyArg_ParseTupleAndKeywords(args, keywds, "I", kwlist, &id)) {                               \
+    ERR("%s: Failed parsing keywords", __FUNCTION__);	                                              \
+    Py_RETURN_FALSE;	                                                                              \
+  }	                                                                                                \
+                                                                                                    \
+  Thingp t = game->thing_find(id);	                                                                \
+  if (!t) {	                                                                                        \
+    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);	                                          \
+    Py_RETURN_FALSE;	                                                                              \
+  }	                                                                                                \
+                                                                                                    \
+  auto value = t->__api__();                                                                        \
+  return Py_BuildValue("s", value.c_str());                                                         \
 }
 
-#define THING_BODY_SET_THING(__func__, __api__)                                     \
-PyObject *__func__ (PyObject *obj, PyObject *args, PyObject *keywds)                \
-{_	                                                                            \
-  uint32_t id = 0;	                                                            \
-  uint32_t oid = 0;	                                                            \
-  static char *kwlist[] = {(char*)"id", (char*)"oid", 0};	                    \
-                                        \
-  if (!PyArg_ParseTupleAndKeywords(args, keywds, "II", kwlist, &id, &oid)) {      \
-    ERR("%s: Failed parsing keywords", __FUNCTION__);	                    \
-    Py_RETURN_FALSE;	                                                    \
-  }	                                                                            \
-                                        \
-  if (!id) {	                                                                    \
-    ERR("%s: No thing ID set", __FUNCTION__);	                            \
-    Py_RETURN_FALSE;	                                                    \
-  }	                                                                            \
-                                        \
-  if (!oid) {	                                                                    \
-    ERR("%s: No oid thing ID set", __FUNCTION__);	                            \
-    Py_RETURN_FALSE;	                                                    \
-  }	                                                                            \
-                                        \
-  Thingp t = game->thing_find(id);	                                            \
-  if (!t) {	                                                                    \
-    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);	                    \
-    Py_RETURN_FALSE;	                                                    \
-  }	                                                                            \
-                                          \
-  Thingp o = game->thing_find(oid);	                                            \
-  if (!t) {	                                                                    \
-    ERR("%s: Cannot find thing ID %u", __FUNCTION__, oid);	                    \
-    Py_RETURN_FALSE;	                                                    \
-  }	                                                                            \
-                                        \
-  t->__api__(o);                                                                  \
-  Py_RETURN_TRUE;                                                                 \
+#define THING_BODY_SET_THING(__func__, __api__)                                                     \
+PyObject *__func__ (PyObject *obj, PyObject *args, PyObject *keywds)                                \
+{_	                                                                                                \
+  uint32_t id = 0;	                                                                                \
+  uint32_t oid = 0;	                                                                                \
+  static char *kwlist[] = {(char*)"id", (char*)"oid", 0};	                                          \
+                                                                                                    \
+  if (!PyArg_ParseTupleAndKeywords(args, keywds, "II", kwlist, &id, &oid)) {                        \
+    ERR("%s: Failed parsing keywords", __FUNCTION__);	                                              \
+    Py_RETURN_FALSE;	                                                                              \
+  }	                                                                                                \
+                                                                                                    \
+  if (!id) {	                                                                                      \
+    ERR("%s: No thing ID set", __FUNCTION__);	                                                      \
+    Py_RETURN_FALSE;	                                                                              \
+  }	                                                                                                \
+                                                                                                    \
+  if (!oid) {	                                                                                      \
+    ERR("%s: No oid thing ID set", __FUNCTION__);	                                                  \
+    Py_RETURN_FALSE;	                                                                              \
+  }	                                                                                                \
+                                                                                                    \
+  Thingp t = game->thing_find(id);	                                                                \
+  if (!t) {	                                                                                        \
+    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);	                                          \
+    Py_RETURN_FALSE;	                                                                              \
+  }	                                                                                                \
+                                                                                                    \
+  Thingp o = game->thing_find(oid);	                                                                \
+  if (!t) {	                                                                                        \
+    ERR("%s: Cannot find thing ID %u", __FUNCTION__, oid);	                                        \
+    Py_RETURN_FALSE;	                                                                              \
+  }	                                                                                                \
+                                                                                                    \
+  t->__api__(o);                                                                                    \
+  Py_RETURN_TRUE;                                                                                   \
 }
 
-#define THING_BODY_GET_THING(__func__, __api__)                                     \
-PyObject *__func__ (PyObject *obj, PyObject *args, PyObject *keywds)                \
-{_	                                                                            \
-  uint32_t id = 0;	                                                            \
-  static char *kwlist[] = {(char*)"id", 0};	                                    \
-                                        \
-  if (!PyArg_ParseTupleAndKeywords(args, keywds, "I", kwlist, &id)) {             \
-    ERR("%s: Failed parsing keywords", __FUNCTION__);	                    \
-    Py_RETURN_FALSE;	                                                    \
-  }	                                                                            \
-                                        \
-  if (!id) {	                                                                    \
-    ERR("%s: No thing ID set", __FUNCTION__);	                            \
-    return Py_BuildValue("I", 0);                                               \
-  }	                                                                            \
-                                        \
-  Thingp t = game->thing_find(id);	                                            \
-  if (!t) {	                                                                    \
-    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);	                    \
-    return Py_BuildValue("I", 0);                                               \
-  }	                                                                            \
-                                        \
-  ThingId found = t->__api__();                                                   \
-  return Py_BuildValue("I", found.id);                                            \
+#define THING_BODY_GET_THING(__func__, __api__)                                                     \
+PyObject *__func__ (PyObject *obj, PyObject *args, PyObject *keywds)                                \
+{_	                                                                                                \
+  uint32_t id = 0;	                                                                                \
+  static char *kwlist[] = {(char*)"id", 0};	                                                        \
+                                                                                                    \
+  if (!PyArg_ParseTupleAndKeywords(args, keywds, "I", kwlist, &id)) {                               \
+    ERR("%s: Failed parsing keywords", __FUNCTION__);	                                              \
+    Py_RETURN_FALSE;	                                                                              \
+  }	                                                                                                \
+                                                                                                    \
+  if (!id) {	                                                                                      \
+    ERR("%s: No thing ID set", __FUNCTION__);	                                                      \
+    return Py_BuildValue("I", 0);                                                                   \
+  }	                                                                                                \
+                                                                                                    \
+  Thingp t = game->thing_find(id);	                                                                \
+  if (!t) {	                                                                                        \
+    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);	                                          \
+    return Py_BuildValue("I", 0);                                                                   \
+  }	                                                                                                \
+                                                                                                    \
+  ThingId found = t->__api__();                                                                     \
+  return Py_BuildValue("I", found.id);                                                              \
 }
 
-#define THING_BODY_GET_BOOL(__func__, __api__)                                      \
-PyObject *__func__ (PyObject *obj, PyObject *args, PyObject *keywds)                \
-{_	                                                                            \
-  uint32_t id = 0;	                                                            \
-  static char *kwlist[] = {(char*)"id", 0};	                                    \
-                                        \
-  if (!PyArg_ParseTupleAndKeywords(args, keywds, "I", kwlist, &id)) {             \
-    ERR("%s: Failed parsing keywords", __FUNCTION__);	                    \
-    Py_RETURN_FALSE;	                                                    \
-  }	                                                                            \
-                                        \
-  if (!id) {	                                                                    \
-    ERR("%s: No thing ID set", __FUNCTION__);	                            \
-    Py_RETURN_FALSE;	                                                    \
-  }	                                                                            \
-                                        \
-  Thingp t = game->thing_find(id);	                                            \
-  if (!t) {	                                                                    \
-    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);	                    \
-    Py_RETURN_FALSE;	                                                    \
-  }	                                                                            \
-                                        \
-  if (t->__api__()) {                                                             \
-    Py_RETURN_TRUE;	                                                            \
-  } else {                                                                        \
-    Py_RETURN_FALSE;	                                                    \
-  }                                                                               \
+#define THING_BODY_GET_BOOL(__func__, __api__)                                                      \
+PyObject *__func__ (PyObject *obj, PyObject *args, PyObject *keywds)                                \
+{_	                                                                                                \
+  uint32_t id = 0;	                                                                                \
+  static char *kwlist[] = {(char*)"id", 0};	                                                        \
+                                                                                                    \
+  if (!PyArg_ParseTupleAndKeywords(args, keywds, "I", kwlist, &id)) {                               \
+    ERR("%s: Failed parsing keywords", __FUNCTION__);	                                              \
+    Py_RETURN_FALSE;	                                                                              \
+  }	                                                                                                \
+                                                                                                    \
+  if (!id) {	                                                                                      \
+    ERR("%s: No thing ID set", __FUNCTION__);	                                                      \
+    Py_RETURN_FALSE;	                                                                              \
+  }	                                                                                                \
+                                                                                                    \
+  Thingp t = game->thing_find(id);	                                                                \
+  if (!t) {	                                                                                        \
+    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);	                                          \
+    Py_RETURN_FALSE;	                                                                              \
+  }	                                                                                                \
+                                                                                                    \
+  if (t->__api__()) {                                                                               \
+    Py_RETURN_TRUE;	                                                                                \
+  } else {                                                                                          \
+    Py_RETURN_FALSE;	                                                                              \
+  }                                                                                                 \
 }
 
 PyObject *thing_get_coords (PyObject *obj, PyObject *args, PyObject *keywds)

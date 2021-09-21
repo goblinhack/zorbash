@@ -151,16 +151,16 @@ void ERROR (const char *fmt, ...)
   va_end(args);
 }
 
-#define DIE(args...)                                           \
+#define DIE(args...)                                         \
   std::cerr <<                                               \
     string_sprintf("Died at %s:%s line %u",                  \
-           __FILE__, __PRETTY_FUNCTION__, __LINE__); \
+           __FILE__, __PRETTY_FUNCTION__, __LINE__);         \
   CROAK(args);                                               \
 
-#define ERR(args...)                                           \
+#define ERR(args...)                                         \
   std::cerr <<                                               \
     string_sprintf("Error at %s:%s line %u",                 \
-           __FILE__, __PRETTY_FUNCTION__, __LINE__); \
+           __FILE__, __PRETTY_FUNCTION__, __LINE__);         \
   ERROR(args);                                               \
 
 #endif

@@ -24,10 +24,10 @@ PyObject *level_place_at(PyObject *obj, PyObject *args, PyObject *keywds);
 #define TP_SET_PROTO(__field__) \
 PyObject *tp_set_ ## __field__ (PyObject *obj, PyObject *args, PyObject *keywds);
 
-#define ZX_ADD_PYTHON_TP_FUNCTION(__field__)                   \
-  {"tp_set_" #__field__,                         \
-    (PyCFunction)tp_set_ ## __field__,           \
-    METH_VARARGS | METH_KEYWORDS,                \
+#define ZX_ADD_PYTHON_TP_FUNCTION(__field__) \
+  {"tp_set_" #__field__, \
+    (PyCFunction)tp_set_ ## __field__, \
+    METH_VARARGS | METH_KEYWORDS, \
     "set a " #__field__ " in a thing template"}, \
 
 TP_SET_PROTO(ai_avoid_distance)

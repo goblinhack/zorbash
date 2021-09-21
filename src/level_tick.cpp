@@ -498,15 +498,15 @@ bool Level::tick (void)
 void Level::sanity_check (void)
 {_
   for (auto x = 0; x < MAP_WIDTH; x++) {
-  for (auto y = 0; y < MAP_HEIGHT; y++) {
-      auto monst_count = 0;
-    FOR_ALL_THINGS(this, t, x, y) {
-    if (t->is_monst()) {
-          monst_count++;
-    }
-    } FOR_ALL_THINGS_END()
-
-      if (monst_count) {
+    for (auto y = 0; y < MAP_HEIGHT; y++) {
+        auto monst_count = 0;
+      FOR_ALL_THINGS(this, t, x, y) {
+        if (t->is_monst()) {
+              monst_count++;
+        }
+      } FOR_ALL_THINGS_END()
+  
+     if (monst_count) {
         if (!is_monst(x, y)) {
           DIE("Level sanity fail. monst count exists, but no monster found, at %d,%d", x, y);
         }
@@ -515,7 +515,7 @@ void Level::sanity_check (void)
           DIE("Level sanity fail. no monst count exists, but monster found, at %d,%d", x, y);
         }
       }
-  }
+    }
   }
 }
 
