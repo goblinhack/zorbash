@@ -115,9 +115,16 @@ bool sound_find (const std::string &alias)
 
 bool sound_play (const std::string &alias)
 {_
+  LOG("Play sound %s", alias.c_str());
+
   auto sound = all_sound.find(alias);
   if (sound == all_sound.end()) {
     ERR("Cannot find sound %s", alias.c_str());
+    return false;
+  }
+
+  if (!sound->second) {
+    ERR("Cannot find sound data %s", alias.c_str());
     return false;
   }
 
@@ -125,6 +132,11 @@ bool sound_play (const std::string &alias)
     ((float) game->config.sound_volume / (float) MIX_MAX_VOLUME);
 
   volume *= MIX_MAX_VOLUME;
+
+  if (!sound->second->chunk) {
+    ERR("Cannot find sound chunk %s", alias.c_str());
+    return false;
+  }
 
   Mix_VolumeChunk(sound->second->chunk, volume);
 
@@ -149,9 +161,16 @@ bool sound_play (const std::string &alias)
 
 bool sound_play_channel (int channel, const std::string &alias)
 {_
+  LOG("Play sound %s on channel %d", alias.c_str(), channel);
+
   auto sound = all_sound.find(alias);
   if (sound == all_sound.end()) {
     ERR("Cannot find sound %s", alias.c_str());
+    return false;
+  }
+
+  if (!sound->second) {
+    ERR("Cannot find sound data %s", alias.c_str());
     return false;
   }
 
@@ -172,6 +191,11 @@ bool sound_play_channel (int channel, const std::string &alias)
     return true;
   }
 
+  if (!sound->second->chunk) {
+    ERR("Cannot find sound chunk %s", alias.c_str());
+    return false;
+  }
+
   if (Mix_PlayChannel(channel,
             sound->second->chunk,
             0 /* loops */) == -1) {
@@ -183,8 +207,6 @@ bool sound_play_channel (int channel, const std::string &alias)
       return false;
     }
   }
-
-  LOG("Play sound %s on channel %d", alias.c_str(), channel);
 
   return true;
 }
