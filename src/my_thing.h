@@ -322,6 +322,7 @@ public:
   bool throw_item_choose_target(Thingp item);
   bool try_harder_to_jump(void);
   bool try_to_carry(Thingp w);
+  bool try_to_carry_if_worthwhile_dropping_items_if_needed(Thingp it);
   bool try_to_escape(void);
   bool try_to_jump_away_from_player(void);
   bool try_to_jump_carefree(point to);

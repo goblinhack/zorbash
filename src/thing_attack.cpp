@@ -321,8 +321,7 @@ bool Thing::attack (fpoint future_pos)
   verify(this);
   bool shove_allowed = true;
   bool attack_allowed = true;
-  return (move(future_pos, up, down, left, right, attack, idle, 
-         shove_allowed, attack_allowed));
+  return (move(future_pos, up, down, left, right, attack, idle, shove_allowed, attack_allowed));
 }
 
 bool Thing::attack (Thingp it)
@@ -368,7 +367,7 @@ _
         }
       } else if (owner->is_player()) {
         owner->log("Carry %s", it->to_string().c_str());
-        if (owner->try_to_carry(it)) {
+        if (owner->try_to_carry_if_worthwhile_dropping_items_if_needed(it)) {
           return true;
         }
         return false;
@@ -389,7 +388,7 @@ _
          (is_treasure_type_eater() && it->is_treasure_type()) ||
          (is_wand_eater()     && it->is_wand())     ||
          (is_potion_eater()   && it->is_potion())) &&
-         try_to_carry(it)) {
+         try_to_carry_if_worthwhile_dropping_items_if_needed(it)) {
         dbg("Don't eat, try to carry %s", it->to_string().c_str());
         return true;
       }
@@ -415,7 +414,7 @@ _
 
       if (is_player()) {
         dbg("Don't attack, try to carry %s", it->to_string().c_str());
-        if (try_to_carry(it)) {
+        if (try_to_carry_if_worthwhile_dropping_items_if_needed(it)) {
           return true;
         }
         return false;

@@ -30,11 +30,15 @@ int Thing::get_item_value (Thingp it)
   }
 
   if (it->is_treasure_class_b()) {
-    value += 100;
+    value += 1000;
   }
 
   if (it->is_treasure_class_c()) {
-    value += 100;
+    value += 1000;
+  }
+
+  if (it->is_potion()) {
+    value += 10000;
   }
 
   //

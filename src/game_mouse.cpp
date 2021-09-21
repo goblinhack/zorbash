@@ -133,7 +133,7 @@ game_mouse_down (int32_t x, int32_t y, uint32_t button)
   //
   if (level->cursor) {
     if ((std::abs(player->mid_at.x - level->cursor->mid_at.x) <= 1) &&
-      (std::abs(player->mid_at.y - level->cursor->mid_at.y) <= 1)) {
+        (std::abs(player->mid_at.y - level->cursor->mid_at.y) <= 1)) {
       //
       // If more than one item, best to let the player move their and
       // open the collect popup.

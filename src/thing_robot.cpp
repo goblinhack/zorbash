@@ -305,7 +305,7 @@ _
         logged_one = true;
 
         if (is_player()) {
-          CON("Robot: @(%s, %d,%d %d/%dh) Found a goal: %s %svia %sscore %d",
+          CON("Robot: @(%s, %d,%d %d/%dh) Found a goal: %s %s, via %sscore %d",
             level->to_string().c_str(),
             (int)mid_at.x, (int)mid_at.y, get_health(), get_health_max(),
             it->to_string().c_str(), result.goal.msg.c_str(),
@@ -315,7 +315,7 @@ _
                result.goal.msg.c_str(),
                it->text_the().c_str());
         } else {
-          log("Monst: Found a goal: %s %svia %sscore %d",
+          log("Monst: Found a goal: %s %s, via %sscore %d",
             it->to_string().c_str(), result.goal.msg.c_str(),
             goal_path_str.c_str(),
             (int)result.goal.score);
@@ -343,7 +343,7 @@ _
           logged_one = true;
 
           if (is_player()) {
-            CON("Robot: @(%s, %d,%d %d/%dh) Found a non active-thing goal: %s %svia %sscore %d",
+            CON("Robot: @(%s, %d,%d %d/%dh) Found a non active-thing goal: %s %s, via %sscore %d",
               level->to_string().c_str(),
               (int)mid_at.x, (int)mid_at.y, get_health(), get_health_max(),
               it->to_string().c_str(), result.goal.msg.c_str(),
@@ -353,7 +353,7 @@ _
               result.goal.msg.c_str(),
               it->text_the().c_str());
           } else {
-            log("Monst: Found a non active-thing goal: %s %svia %sscore %d",
+            log("Monst: Found a non active-thing goal: %s %s, via %sscore %d",
               it->to_string().c_str(), result.goal.msg.c_str(),
               goal_path_str.c_str(),
               (int)result.goal.score);
@@ -363,7 +363,7 @@ _
 
       if (!logged_one) {
         if (is_player()) {
-          CON("Robot: @(%s, %d,%d %d/%dh) Found a non thing goal: %svia %sscore %d",
+          CON("Robot: @(%s, %d,%d %d/%dh) Found a non thing goal: %s, via %sscore %d",
             level->to_string().c_str(),
             (int)mid_at.x, (int)mid_at.y, get_health(), get_health_max(),
             result.goal.msg.c_str(),
@@ -371,7 +371,7 @@ _
             (int)result.goal.score);
           BOTCON("Robot: goal %s", result.goal.msg.c_str());
         } else {
-          log("Monst: Found a non thing goal: %svia %sscore %d",
+          log("Monst: Found a non thing goal: %s, via %sscore %d",
             result.goal.msg.c_str(),
             goal_path_str.c_str(),
             (int)result.goal.score);
@@ -1481,58 +1481,7 @@ bool Thing::robot_ai_choose_nearby_goal (void)
       auto items = anything_to_carry_at(at);
       if (items.size() >= 1) {
         for (auto item : items) {
-          Thingp would_need_to_drop = nullptr;
-          if (worth_collecting(item, &would_need_to_drop) < 0) {
-            CON("Robot: @(%s, %d,%d %d/%dh) Is not worth collecting %s",
-              level->to_string().c_str(),
-              (int)mid_at.x, (int)mid_at.y, get_health(), get_health_max(),
-              item->to_string().c_str());
-            continue;
-          }
-
-          if (would_need_to_drop) {
-            CON("Robot: @(%s, %d,%d %d/%dh) Try to carry %s by dropping %s",
-              level->to_string().c_str(),
-              (int)mid_at.x, (int)mid_at.y, get_health(), get_health_max(),
-              item->to_string().c_str(),
-              would_need_to_drop->to_string().c_str());
-
-            if (drop(would_need_to_drop)) {
-              CON("Robot: @(%s, %d,%d %d/%dh) Dropped %s",
-                level->to_string().c_str(),
-                (int)mid_at.x, (int)mid_at.y, get_health(), get_health_max(),
-                would_need_to_drop->to_string().c_str());
-              BOTCON("Robot dropped %s", would_need_to_drop->text_the().c_str());
-              game->tick_begin("Robot dropped an item");
-              robot_change_state(ROBOT_STATE_OPEN_INVENTORY, "dropped an item");
-              return true;
-            } else {
-              CON("Robot: @(%s, %d,%d %d/%dh) Failed to drop %s",
-                level->to_string().c_str(),
-                (int)mid_at.x, (int)mid_at.y, get_health(), get_health_max(),
-                would_need_to_drop->to_string().c_str());
-              BOTCON("Robot failed to drop %s", would_need_to_drop->text_the().c_str());
-              game->tick_begin("Robot failed to drop " + would_need_to_drop->to_string());
-              return true;
-            }
-          }
-
-          if (try_to_carry(item)) {
-            CON("Robot: @(%s, %d,%d %d/%dh) Collected %s",
-              level->to_string().c_str(),
-              (int)mid_at.x, (int)mid_at.y, get_health(), get_health_max(),
-              item->to_string().c_str());
-            BOTCON("Robot collected %s", item->text_the().c_str());
-            game->tick_begin("Robot collected an item");
-            robot_change_state(ROBOT_STATE_OPEN_INVENTORY, "collected an item");
-            return true;
-          } else {
-            CON("Robot: @(%s, %d,%d %d/%dh) Failed to collect %s",
-              level->to_string().c_str(),
-              (int)mid_at.x, (int)mid_at.y, get_health(), get_health_max(),
-              item->to_string().c_str());
-            BOTCON("Robot failed to collect %s", item->text_the().c_str());
-            game->tick_begin("Robot failed to collect " + item->to_string());
+          if (try_to_carry_if_worthwhile_dropping_items_if_needed(item)) {
             return true;
           }
         }
@@ -1677,7 +1626,7 @@ void Thing::robot_tick (void)
 
         if (get_stamina() < get_stamina_max() / 3) {
           CON("Robot: @(%s, %d,%d %d/%dh) Robot needs to rest, low on stamina",
-            level->to_string().c_str(), 
+            level->to_string().c_str(),
             (int)mid_at.x, (int)mid_at.y,get_health(), get_health_max());
           BOTCON("Robot needs to rest, low on stamina");
           game->tick_begin("Robot needs to rest, low on stamina");
@@ -1690,7 +1639,7 @@ void Thing::robot_tick (void)
         if (best_weapon && (best_weapon != weapon_get())) {
           if (wield(best_weapon)) {
             CON("Robot: @(%s, %d,%d %d/%dh) Robot is changing weapon to %s",
-              level->to_string().c_str(), 
+              level->to_string().c_str(),
               (int)mid_at.x, (int)mid_at.y, get_health(), get_health_max(),
               best_weapon->to_string().c_str());
             BOTCON("Robot is changing weapon");

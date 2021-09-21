@@ -107,7 +107,7 @@ with open("src/ramdisk_data.cpp".format(ram_file), "w") as myfile:
             rel_path_filename = os.path.join(folder, orig_filename)
 
             myfile.write("    {\n")
-            myfile.write("        extern unsigned char *data_{}_start_ \n          asm(\"data_{}_start_\");\n".format(c_filename, c_filename))
+            myfile.write("        extern unsigned char *data_{}_start_\n           asm(\"data_{}_start_\");\n".format(c_filename, c_filename))
             myfile.write("        extern unsigned char *data_{}_end_\n           asm(\"data_{}_end_\");\n".format(c_filename, c_filename))
             myfile.write("        static const unsigned char *const start =\n           (const unsigned char *const) (char*)&data_{}_start_;\n".format(c_filename, c_filename))
             myfile.write("        static const unsigned char *const end   =\n           (const unsigned char *const) (char*)&data_{}_end_;\n".format(c_filename, c_filename))

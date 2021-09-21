@@ -45,11 +45,10 @@ void Thing::enemies_tick (void)
       // If far enough away start to forget this enemy
       //
       if (distance(attacker->mid_at, mid_at) > ai_scent_distance()) {
+        if (is_player() && game->robot_mode) {
+          CON("Robot: Remove enemy: %s", attacker->to_string().c_str());
+        }
         monstp->enemies.erase(p.first);
-      }
-
-      if (is_player() && game->robot_mode) {
-        CON("Robot: Remove enemy: %s", attacker->to_string().c_str());
       }
     } else {
       monstp->enemies.erase(p.first);

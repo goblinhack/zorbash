@@ -277,12 +277,12 @@ PyObject *level_get_all (PyObject *obj, PyObject *args, PyObject *keywds)
   int x = -1;
   int y = -1;
   static char *kwlist[] = {(char*)"id", (char*)"x", (char*)"y", 0};	
-  
+
   if (!PyArg_ParseTupleAndKeywords(args, keywds, "Iii", kwlist, &id, &x, &y)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);	
     Py_RETURN_FALSE;	
   }	
-  
+
   if (!id) {
     ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);	
     Py_RETURN_FALSE;	
@@ -333,12 +333,12 @@ PyObject *level_flood_fill_get_all_things (PyObject *obj, PyObject *args, PyObje
   int y = -1;
   static char *kwlist[] = {(char*)"id", (char*)"x", (char*)"y", (char*)"filter", 0};	
   char *filter = nullptr;
-  
+
   if (!PyArg_ParseTupleAndKeywords(args, keywds, "Iiis", kwlist, &id, &x, &y, &filter)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);	
     Py_RETURN_FALSE;	
   }	
-  
+
   if (!id) {
     ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);	
     Py_RETURN_FALSE;	

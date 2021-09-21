@@ -574,6 +574,10 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
       real_hitter->to_string().c_str(), damage, h);
   }
 
+  if (is_player()) {
+    incr_score(damage);
+  }
+
   //
   // Python callback
   //
@@ -729,7 +733,7 @@ int Thing::is_hit_by (Thingp hitter, int damage)
 
 int Thing::is_hit_by (Thingp hitter)
 {_
-  return (is_hit_by(hitter, false, false, 
-            hitter->get_damage_poison(),
-            hitter->get_damage_melee()));
+  return (is_hit_by(hitter, false, false,
+                    hitter->get_damage_poison(),
+                    hitter->get_damage_melee()));
 }

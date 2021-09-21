@@ -13,14 +13,14 @@
 #include "my_array_bounds_check.h"
 #include "my_ptrcheck.h"
 
-bool Thing::carry (Thingp it)
+bool Thing::carry (Thingp item)
 {_
-  if (!it) {
+  if (!item) {
     err("No thing to carry");
     return false;
   }
 
-  dbg("Try to carry %s", it->to_string().c_str());
+  dbg("Try to carry %s", item->to_string().c_str());
 
   if (!monstp) {
     dbg("No; not a monst");
@@ -48,7 +48,7 @@ bool Thing::carry (Thingp it)
     // Need this check to ensure cleaners can always collect items
     //
     if (is_player()) {
-      if (game->tick_current < it->get_tick_last_dropped() + 1) {
+      if (game->tick_current < item->get_tick_last_dropped() + 1) {
         dbg("No; was dropped here recently");
         return false;
       }
@@ -60,31 +60,31 @@ bool Thing::carry (Thingp it)
     // Always carry
     //
     dbg("Monsts always carry items");
-  } else if (it->is_bag_item_container() && bag_add(it)) {
+  } else if (item->is_bag_item_container() && bag_add(item)) {
     //
     // Bag being carried
     //
     dbg("Added bag to bag at %d,%d",
-      it->monstp->bag_position.x, it->monstp->bag_position.y);
-  } else if (!it->is_bag_item()) {
+      item->monstp->bag_position.x, item->monstp->bag_position.y);
+  } else if (!item->is_bag_item()) {
     //
     // A key for example, does not go in a bag
     //
     dbg("Non item not added to bag");
-  } else if (bag_add(it)) {
+  } else if (bag_add(item)) {
     dbg("Added to bag at %d,%d",
-      it->monstp->bag_position.x, it->monstp->bag_position.y);
+      item->monstp->bag_position.x, item->monstp->bag_position.y);
   } else {
     dbg("No; cannot store in a bag");
-    set_where_i_failed_to_collect_last(make_point(it->mid_at));
+    set_where_i_failed_to_collect_last(make_point(item->mid_at));
 
     if (is_player()) {
-      TOPCON("%%fg=red$No space to carry %s.%%fg=reset$", it->text_the().c_str());
+      TOPCON("%%fg=red$No space to carry %s.%%fg=reset$", item->text_the().c_str());
     }
     return false;
   }
 
-  auto existing_owner = it->get_immediate_owner();
+  auto existing_owner = item->get_immediate_owner();
   if (existing_owner) {
     if (existing_owner == this) {
       dbg("No; same owner");
@@ -96,34 +96,34 @@ bool Thing::carry (Thingp it)
     // the level. If this is moving between bags, this is safer.
     //
     dbg("Drop from existing owner");
-    existing_owner->drop_into_ether(it);
+    existing_owner->drop_into_ether(item);
   }
 
-  for (const auto& item : monstp->carrying) {
-    if (item == it->id) {
+  for (const auto& item2 : monstp->carrying) {
+    if (item2 == item->id) {
       dbg("No; already carried");
       return false;
     }
   }
 
   if (is_player()) {
-    if (!inventory_id_insert(it)) {
+    if (!inventory_id_insert(item)) {
       dbg("No; no space in inventory");
       return false;
     }
 
-    if (it->is_collected_as_gold()) {
+    if (item->is_collected_as_gold()) {
       return true;
     }
 
-    if (it->is_collect_as_keys()) {
+    if (item->is_collect_as_keys()) {
       return true;
     }
   }
 
-  monstp->carrying.push_front(it->id);
-  it->set_owner(this);
-  it->hide();
+  monstp->carrying.push_front(item->id);
+  item->set_owner(this);
+  item->hide();
 
   if (game->state == Game::STATE_MOVING_ITEMS) {
     //
@@ -132,7 +132,7 @@ bool Thing::carry (Thingp it)
   } else {
     if (is_player()) {
       if (!level->is_starting) {
-        TOPCON("You carry %s.", it->text_the().c_str());
+        TOPCON("You carry %s.", item->text_the().c_str());
       }
     }
   }
@@ -141,8 +141,8 @@ bool Thing::carry (Thingp it)
   // If we have no weapon, wield it
   //
   if (is_weapon_wielder()) {
-    if (it->is_weapon() && !get_weapon_id()) {
-      wield(it);
+    if (item->is_weapon() && !get_weapon_id()) {
+      wield(item);
     }
   }
 
@@ -153,24 +153,24 @@ bool Thing::carry (Thingp it)
   //
   // Auto carry items in the bag? like keys?
   //
-  if (it->is_bag_item_container()) {
-    auto carrying_copy = it->monstp->carrying;
-    for (const auto& item : carrying_copy) {
-      auto t = level->thing_find(item.id);
+  if (item->is_bag_item_container()) {
+    auto carrying_copy = item->monstp->carrying;
+    for (const auto& item2 : carrying_copy) {
+      auto t = level->thing_find(item2.id);
       if (t) {
         log("Carrying %s that contains: %s",
-          it->to_string().c_str(),
+          item->to_string().c_str(),
           t->to_string().c_str());
       }
     }
 
-    for (const auto& item : carrying_copy) {
-      auto t = level->thing_find(item.id);
+    for (const auto& item2 : carrying_copy) {
+      auto t = level->thing_find(item2.id);
       if (t) {
         if (!t->is_bag_item()) {
           if (!carry(t)) {
             err("Could not auto carry %s's non item: %s",
-              it->to_string().c_str(),
+              item->to_string().c_str(),
               t->to_string().c_str());
           }
         }
@@ -181,10 +181,10 @@ bool Thing::carry (Thingp it)
   return true;
 }
 
-bool Thing::try_to_carry (Thingp it)
+bool Thing::try_to_carry (Thingp item)
 {_
-  dbg("Try to carry: %s", it->to_string().c_str());
-  return carry(it);
+  dbg("Try to carry: %s", item->to_string().c_str());
+  return carry(item);
 }
 
 std::list<Thingp> Thing::anything_to_carry_at (fpoint at)
@@ -331,4 +331,83 @@ void Thing::try_to_carry (const std::list<Thingp> &items)
   for (auto item : items) {
     try_to_carry(item);
   }
+}
+
+//
+// Returns true if we tried to collect or drop something to make space
+//
+bool Thing::try_to_carry_if_worthwhile_dropping_items_if_needed (Thingp item)
+{_
+  Thingp would_need_to_drop = nullptr;
+
+  log("Carry check: @(%s, %d,%d %d/%dh)",
+    level->to_string().c_str(),
+    (int)mid_at.x, (int)mid_at.y, get_health(), get_health_max(),
+    item->to_string().c_str());
+_
+  if (worth_collecting(item, &would_need_to_drop) < 0) {
+    log("Carry check: @(%s, %d,%d %d/%dh) is not worth collecting %s",
+      level->to_string().c_str(),
+      (int)mid_at.x, (int)mid_at.y, get_health(), get_health_max(),
+      item->to_string().c_str());
+    return false;
+  }
+
+  if (would_need_to_drop) {
+    log("Carry check: @(%s, %d,%d %d/%dh) try to carry %s by dropping %s",
+      level->to_string().c_str(),
+      (int)mid_at.x, (int)mid_at.y, get_health(), get_health_max(),
+      item->to_string().c_str(),
+      would_need_to_drop->to_string().c_str());
+
+    if (drop(would_need_to_drop)) {
+      log("Carry check: @(%s, %d,%d %d/%dh) dropped %s",
+        level->to_string().c_str(),
+        (int)mid_at.x, (int)mid_at.y, get_health(), get_health_max(),
+        would_need_to_drop->to_string().c_str());
+
+      if (is_player() && game->robot_mode) {
+        BOTCON("Robot dropped %s", would_need_to_drop->text_the().c_str());
+        game->tick_begin("Robot dropped an item");
+        robot_change_state(ROBOT_STATE_OPEN_INVENTORY, "dropped an item");
+      }
+      return true;
+    }
+
+    log("Carry check: @(%s, %d,%d %d/%dh) failed to drop %s",
+      level->to_string().c_str(),
+      (int)mid_at.x, (int)mid_at.y, get_health(), get_health_max(),
+      would_need_to_drop->to_string().c_str());
+
+    if (is_player() && game->robot_mode) {
+      BOTCON("Robot failed to drop %s", would_need_to_drop->text_the().c_str());
+      game->tick_begin("Robot failed to drop " + would_need_to_drop->to_string());
+    }
+    return true;
+  }
+
+  if (try_to_carry(item)) {
+    log("Carry check: @(%s, %d,%d %d/%dh) collected %s",
+      level->to_string().c_str(),
+      (int)mid_at.x, (int)mid_at.y, get_health(), get_health_max(),
+      item->to_string().c_str());
+
+    if (is_player() && game->robot_mode) {
+      BOTCON("Robot collected %s", item->text_the().c_str());
+      game->tick_begin("Robot collected an item");
+      robot_change_state(ROBOT_STATE_OPEN_INVENTORY, "collected an item");
+    }
+    return true;
+  }
+
+  log("Carry check: @(%s, %d,%d %d/%dh) failed to collect %s",
+    level->to_string().c_str(),
+    (int)mid_at.x, (int)mid_at.y, get_health(), get_health_max(),
+    item->to_string().c_str());
+
+  if (is_player() && game->robot_mode) {
+    BOTCON("Robot failed to collect %s", item->text_the().c_str());
+    game->tick_begin("Robot failed to collect " + item->to_string());
+  }
+  return true;
 }

@@ -176,23 +176,23 @@ PyObject *thing_get_coords (PyObject *obj, PyObject *args, PyObject *keywds)
 {_	
   uint32_t id = 0;	
   static char *kwlist[] = {(char*)"id", 0};	
-  
+
   if (!PyArg_ParseTupleAndKeywords(args, keywds, "I", kwlist, &id)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);	
     Py_RETURN_NONE;	
   }	
-  
+
   if (!id) {	
     ERR("%s: No thing ID set", __FUNCTION__);	
     Py_RETURN_NONE;	
   }	
-  
+
   Thingp t = game->thing_find(id);	
   if (!t) {	
     ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);	
     Py_RETURN_NONE;	
   }	
-  
+
   Py_ssize_t size = 2;
   auto the_tuple = PyTuple_New(size);
   if (!the_tuple) {
@@ -220,17 +220,17 @@ PyObject *thing_hit (PyObject *obj, PyObject *args, PyObject *keywds)
   uint32_t hitter_id = 0;	
   uint32_t target_id = 0;	
   static char *kwlist[] = {(char*)"hitter", (char*)"target", 0};	
-  
+
   if (!PyArg_ParseTupleAndKeywords(args, keywds, "II", kwlist, &hitter_id, &target_id)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);	
     Py_RETURN_NONE;	
   }	
-  
+
   if (!hitter_id) {	
     ERR("%s: No hitter thing ID set", __FUNCTION__);	
     Py_RETURN_NONE;	
   }	
-  
+
   Thingp hitter = game->thing_find(hitter_id);	
   if (!hitter) {	
     ERR("%s: Cannot find hitter thing ID %u", __FUNCTION__, hitter_id);	
@@ -241,7 +241,7 @@ PyObject *thing_hit (PyObject *obj, PyObject *args, PyObject *keywds)
     ERR("%s: No target thing ID set", __FUNCTION__);	
     Py_RETURN_NONE;	
   }	
-  
+
   Thingp target = game->thing_find(target_id);	
   if (!target) {	
     ERR("%s: Cannot find target thing ID %u", __FUNCTION__, target_id);	
@@ -262,17 +262,17 @@ PyObject *thing_possible_to_attack (PyObject *obj, PyObject *args, PyObject *key
   uint32_t hitter_id = 0;	
   uint32_t target_id = 0;	
   static char *kwlist[] = {(char*)"hitter", (char*)"target", 0};	
-  
+
   if (!PyArg_ParseTupleAndKeywords(args, keywds, "II", kwlist, &hitter_id, &target_id)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);	
     Py_RETURN_NONE;	
   }	
-  
+
   if (!hitter_id) {	
     ERR("%s: No hitter thing ID set", __FUNCTION__);	
     Py_RETURN_NONE;	
   }	
-  
+
   Thingp hitter = game->thing_find(hitter_id);	
   if (!hitter) {	
     ERR("%s: Cannot find hitter thing ID %u", __FUNCTION__, hitter_id);	
@@ -283,7 +283,7 @@ PyObject *thing_possible_to_attack (PyObject *obj, PyObject *args, PyObject *key
     ERR("%s: No target thing ID set", __FUNCTION__);	
     Py_RETURN_NONE;	
   }	
-  
+
   Thingp target = game->thing_find(target_id);	
   if (!target) {	
     ERR("%s: Cannot find target thing ID %u", __FUNCTION__, target_id);	
@@ -310,17 +310,17 @@ PyObject *thing_fire_at (PyObject *obj, PyObject *args, PyObject *keywds)
   char *item = nullptr;
   uint32_t target_id = 0;	
   static char *kwlist[] = {(char*)"owner", (char*)"item", (char*)"target", 0};	
-  
+
   if (!PyArg_ParseTupleAndKeywords(args, keywds, "IsI", kwlist, &owner_id, &item, &target_id)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);	
     Py_RETURN_NONE;	
   }	
-  
+
   if (!owner_id) {	
     ERR("%s: No owner thing ID set", __FUNCTION__);	
     Py_RETURN_NONE;	
   }	
-  
+
   Thingp owner = game->thing_find(owner_id);	
   if (!owner) {	
     ERR("%s: Cannot find owner thing ID %u", __FUNCTION__, owner_id);	
@@ -331,12 +331,12 @@ PyObject *thing_fire_at (PyObject *obj, PyObject *args, PyObject *keywds)
     ERR("%s: No item thing ID set", __FUNCTION__);	
     Py_RETURN_NONE;	
   }	
-  
+
   if (!target_id) {	
     ERR("%s: No target thing ID set", __FUNCTION__);	
     Py_RETURN_NONE;	
   }	
-  
+
   Thingp target = game->thing_find(target_id);	
   if (!target) {	
     ERR("%s: Cannot find target thing ID %u", __FUNCTION__, target_id);	
@@ -371,17 +371,17 @@ PyObject *thing_killed_by (PyObject *obj, PyObject *args, PyObject *keywds)
   char *reason = nullptr;
   uint32_t killer_id = 0;	
   static char *kwlist[] = {(char*)"owner", (char*)"reason", (char*)"killer", 0};	
-  
+
   if (!PyArg_ParseTupleAndKeywords(args, keywds, "IsI", kwlist, &owner_id, &reason, &killer_id)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);	
     Py_RETURN_NONE;	
   }	
-  
+
   if (!owner_id) {	
     ERR("%s: No owner thing ID set", __FUNCTION__);	
     Py_RETURN_NONE;	
   }	
-  
+
   Thingp owner = game->thing_find(owner_id);	
   if (!owner) {	
     ERR("%s: Cannot find owner thing ID %u", __FUNCTION__, owner_id);	
@@ -392,12 +392,12 @@ PyObject *thing_killed_by (PyObject *obj, PyObject *args, PyObject *keywds)
     ERR("%s: No reason thing ID set", __FUNCTION__);	
     Py_RETURN_NONE;	
   }	
-  
+
   if (!killer_id) {	
     ERR("%s: No killer thing ID set", __FUNCTION__);	
     Py_RETURN_NONE;	
   }	
-  
+
   Thingp killer = game->thing_find(killer_id);	
   if (!killer) {	
     ERR("%s: Cannot find killer thing ID %u", __FUNCTION__, killer_id);	
@@ -415,17 +415,17 @@ PyObject *thing_killed (PyObject *obj, PyObject *args, PyObject *keywds)
   uint32_t owner_id = 0;	
   char *reason = nullptr;
   static char *kwlist[] = {(char*)"owner", (char*)"reason", 0};	
-  
+
   if (!PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &owner_id, &reason)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);	
     Py_RETURN_NONE;	
   }	
-  
+
   if (!owner_id) {	
     ERR("%s: No owner thing ID set", __FUNCTION__);	
     Py_RETURN_NONE;	
   }	
-  
+
   Thingp owner = game->thing_find(owner_id);	
   if (!owner) {	
     ERR("%s: Cannot find owner thing ID %u", __FUNCTION__, owner_id);	
@@ -436,7 +436,7 @@ PyObject *thing_killed (PyObject *obj, PyObject *args, PyObject *keywds)
     ERR("%s: No reason thing ID set", __FUNCTION__);	
     Py_RETURN_NONE;	
   }	
-  
+
   owner->log("Killed: Reason %s", reason);
   owner->dead("%s", reason);
   Py_RETURN_NONE;	
@@ -447,17 +447,17 @@ PyObject *thing_msg (PyObject *obj, PyObject *args, PyObject *keywds)
   uint32_t owner_id = 0;	
   char *msg = nullptr;
   static char *kwlist[] = {(char*)"owner", (char*)"msg", 0};	
-  
+
   if (!PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &owner_id, &msg)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);	
     Py_RETURN_NONE;	
   }	
-  
+
   if (!owner_id) {	
     ERR("%s: No owner thing ID set", __FUNCTION__);	
     Py_RETURN_NONE;	
   }	
-  
+
   Thingp owner = game->thing_find(owner_id);	
   if (!owner) {	
     ERR("%s: Cannot find owner thing ID %u", __FUNCTION__, owner_id);	
@@ -468,7 +468,7 @@ PyObject *thing_msg (PyObject *obj, PyObject *args, PyObject *keywds)
     ERR("%s: No msg thing ID set", __FUNCTION__);	
     Py_RETURN_NONE;	
   }	
-  
+
   //
   // If not reachable, suppress the msg
   //
@@ -495,7 +495,7 @@ PyObject *thing_sound_play_ (PyObject *obj, PyObject *args, PyObject *keywds)
     ERR("%s: No owner thing ID set", __FUNCTION__);	
     Py_RETURN_NONE;	
   }	
-  
+
   Thingp owner = game->thing_find(owner_id);	
   if (!owner) {	
     ERR("%s: Cannot find owner thing ID %u", __FUNCTION__, owner_id);	
