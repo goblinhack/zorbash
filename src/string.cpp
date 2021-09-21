@@ -478,17 +478,7 @@ strcasestr_ (const char *s, const char*find)
 }
 
 /*
- * Split a string "like\nthis" into "like" and "this". e.g.:
- *
- * split("To support multiple versions, the program named perl now just selects the real version of Perl to run, and the program named a2p now just selects the real version of the awk-to-perl translator to run, depending on various settings.  The current supported versions are 5.8.8 (provided for back-ward-compatibility with the Perl 5.8 family) and 5.10.0, with the default being 5.10.0. ", 80);
- *
- * yields:
- *
-"To support multiple versions, the program named perl now just selects the real"
-"version of Perl to run, and the program named a2p now just selects the real"
-"version of the awk-to-perl translator to run, depending on various settings."
-"The current supported versions are 5.8.8 (provided for back-ward-compatibility"
-"with the Perl 5.8 family) and 5.10.0, with the default being 5.10.0."
+ * Split a string "like\nthis" into "like" and "this".
  */
 shared_vector_string split (const char *text, int max_line_len)
 {_

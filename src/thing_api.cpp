@@ -319,7 +319,6 @@ int Thing::is_wall(void) const                                 {_ return (tp()->
 int Thing::is_wand_eater(void) const                           {_ return (tp()->is_wand_eater()); }
 int Thing::is_wand(void) const                                 {_ return (tp()->is_wand()); }
 int Thing::is_water_lover(void) const                          {_ return (tp()->is_water_lover()); }
-int Thing::is_water(void) const                                {_ return (tp()->is_shallow_water() || tp()->is_deep_water()); }
 int Thing::is_weapon(void) const                               {_ return (tp()->is_weapon()); }
 int Thing::is_weapon_wielder(void) const                       {_ return (tp()->is_weapon_wielder()); }
 int Thing::loves_fire(void) const                              {_ return (tp()->loves_fire()); }
@@ -333,6 +332,9 @@ int Thing::on_death_is_open(void) const                        {_ return (tp()->
 int Thing::range_max(void) const                               {_ return (tp()->range_max()); }
 int Thing::weapon_damage(void) const                           {_ return (tp()->weapon_damage()); }
 int Thing::weapon_use_distance(void) const                     {_ return (tp()->weapon_use_distance()); }
+
+int Thing::is_water(void) const                                {_ return (tp()->is_shallow_water() ||
+                                                                          tp()->is_deep_water()); }
 
 void Thing::new_monst (void)
 {_

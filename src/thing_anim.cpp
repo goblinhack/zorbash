@@ -189,7 +189,8 @@ if (is_debug_type()) { con("Choose tiles hp %d "
       }
       verify(tile);
 #ifdef DEBUG_ANIM
-if (is_debug_type()) { con("Tile %s moving %d up %d down %d left %d right %d dir none %d tl %d bl %d tr %d br %d", tile_name(tile).c_str(),
+if (is_debug_type()) { con("Tile %s moving %d up %d down %d left %d right %d "
+                           "dir none %d tl %d bl %d tr %d br %d", tile_name(tile).c_str(),
              tile_is_moving(tile),
              tile_is_dir_up(tile),
              tile_is_dir_down(tile),

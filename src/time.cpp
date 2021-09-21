@@ -236,8 +236,11 @@ std::string current_date (void)
   //  %Z  UTC Time zone name (empty string if the object is naive).
   //  %j  251 Day of the year as a zero-padded decimal number.
   //  %-j 251 Day of the year as a decimal number. (Platform specific)
-  //  %U  36  Week number of the year (Sunday as the first day of the week) as a zero padded decimal number. All days in a new year preceding the first Sunday are considered to be in week 0.
-  //  %W  35  Week number of the year (Monday as the first day of the week) as a decimal number. All days in a new year preceding the first Monday are considered to be in week 0.
+  //  %U  36  Week number of the year (Sunday as the first day of the week)
+  //          as a zero padded decimal number. All days in a new year preceding the first Sunday
+  //          are considered to be in week 0.
+  //  %W  35  Week number of the year (Monday as the first day of the week)
+  //          as a decimal number. All days in a new year preceding the first Monday are considered to be in week 0.
   //  %c  Sun Sep 8 07:06:05 2013 Locale’s appropriate date and time representation.
   //  %x  09/08/13    Locale’s appropriate date representation.
   //  %X  07:06:05    Locale’s appropriate time representation.
