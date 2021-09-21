@@ -74,8 +74,7 @@ static inline std::istream& operator>> (std::istream& in, Bits<std::string &> v)
   return in;
 }
 
-static inline std::ostream& operator<< (std::ostream &out,
-                     Bits<const std::string &> const v)
+static inline std::ostream& operator<< (std::ostream &out, Bits<const std::string &> const v)
 {
 #ifdef DEBUG_C_PLUS_PLUS_SERIALIZER
   std::cout << "write const '" << v.t << "'" << std::endl;
@@ -116,8 +115,7 @@ static inline std::istream& operator>> (std::istream& in, Bits<std::wstring &> v
   return in;
 }
 
-static inline std::ostream& operator<< (std::ostream &out,
-                    Bits<const std::wstring &> const v)
+static inline std::ostream& operator<< (std::ostream &out, Bits<const std::wstring &> const v)
 {
   my_size_t sz = v.t.size();
   out << bits(sz);
@@ -178,8 +176,7 @@ static inline std::istream& operator>> (std::istream& in, Bits<wchar_t &> v)
   return in;
 }
 
-static inline std::ostream& operator<< (std::ostream &out,
-                     Bits<const wchar_t &> const v)
+static inline std::ostream& operator<< (std::ostream &out, Bits<const wchar_t &> const v)
 {
 #ifdef DEBUG_C_PLUS_PLUS_SERIALIZER
   std::wcout << "write const '" << v.t << "'" << std::endl;
@@ -248,8 +245,7 @@ std::ostream& operator<< (std::ostream &out, Bits<wchar_t &> const v)
 template <
   class T,
   template <typename ELEM, typename ALLOC = std::allocator<ELEM> > class C>
-static inline std::ostream& operator<< (std::ostream &out,
-                     Bits<C<T> &> const v)
+static inline std::ostream& operator<< (std::ostream &out, Bits<C<T> &> const v)
 {
 #ifdef DEBUG_C_PLUS_PLUS_SERIALIZER
   std::cout << "write container<T> " << v.t.size() << " elems" << std::endl;
@@ -263,8 +259,7 @@ static inline std::ostream& operator<< (std::ostream &out,
 template <
   class T,
   template <typename ELEM, typename ALLOC = std::allocator<ELEM> > class C>
-static inline std::ostream& operator<< (std::ostream &out,
-                     Bits<const C<T> &> const v)
+static inline std::ostream& operator<< (std::ostream &out, Bits<const C<T> &> const v)
 {
 #ifdef DEBUG_C_PLUS_PLUS_SERIALIZER
   std::cout << "write container<const T> " << v.t.size() << " elems" << std::endl;
@@ -303,8 +298,7 @@ template <
   class T,
   std::size_t N,
   template <typename ELEM, std::size_t > class C>
-static inline std::ostream& operator<< (std::ostream &out,
-                     Bits<C<T, N> &> const v)
+static inline std::ostream& operator<< (std::ostream &out, Bits<C<T, N> &> const v)
 {
 #ifdef DEBUG_C_PLUS_PLUS_SERIALIZER
   std::cout << "write array container<T> " << v.t.size() << " elems" << std::endl;
@@ -319,8 +313,7 @@ template <
   class T,
   std::size_t N,
   template <typename ELEM, std::size_t > class C>
-static inline std::ostream& operator<< (std::ostream &out,
-                     Bits<const C<T, N> &> const v)
+static inline std::ostream& operator<< (std::ostream &out, Bits<const C<T, N> &> const v)
 {
 #ifdef DEBUG_C_PLUS_PLUS_SERIALIZER
   std::cout << "write array container<const T> " << v.t.size() << " elems" << std::endl;
@@ -365,8 +358,7 @@ template <
          > class M,
   class K, class V >
 
-static inline std::ostream& operator<< (std::ostream &out,
-                     Bits<M<K,V> &> const m)
+static inline std::ostream& operator<< (std::ostream &out, Bits<M<K,V> &> const m)
 {
 #ifdef DEBUG_C_PLUS_PLUS_SERIALIZER
   std::cout << "write map<K,V> " << m.t.size() << " elems" << std::endl;
@@ -385,8 +377,7 @@ template <
          > class M,
   class K, class V >
 
-static inline std::ostream& operator<< (std::ostream &out,
-                     Bits<M<K,const V> &> const m)
+static inline std::ostream& operator<< (std::ostream &out, Bits<M<K,const V> &> const m)
 {
 #ifdef DEBUG_C_PLUS_PLUS_SERIALIZER
   std::cout << "write map<K,const V> " << m.t.size() << " elems" << std::endl;
@@ -405,8 +396,7 @@ template <
          > class M,
   class K, class V >
 
-static inline std::istream& operator>> (std::istream &in,
-                     Bits<M<K,V> &> m)
+static inline std::istream& operator>> (std::istream &in, Bits<M<K,V> &> m)
 {
   my_size_t sz = 0;
   in >> bits(sz);
@@ -438,8 +428,7 @@ template <
          > class M,
   class K, class V >
 
-static inline std::ostream& operator<< (std::ostream &out,
-                     Bits<M<K,V> &> const m)
+static inline std::ostream& operator<< (std::ostream &out, Bits<M<K,V> &> const m)
 {
 #ifdef DEBUG_C_PLUS_PLUS_SERIALIZER
   std::cout << "write unordered_map<K,V> " << m.t.size() << " elems" << std::endl;
@@ -459,8 +448,7 @@ template <
          > class M,
   class K, class V >
 
-static inline std::ostream& operator<< (std::ostream &out,
-                     Bits<M<K,const V> &> const m)
+static inline std::ostream& operator<< (std::ostream &out, Bits<M<K,const V> &> const m)
 {
 #ifdef DEBUG_C_PLUS_PLUS_SERIALIZER
   std::cout << "write unordered_map<K,const V> " << m.t.size() << " elems" << std::endl;
@@ -480,8 +468,7 @@ template <
          > class M,
   class K, class V >
 
-static inline std::istream& operator>> (std::istream &in,
-                     Bits<M<K,V> &> m)
+static inline std::istream& operator>> (std::istream &in, Bits<M<K,V> &> m)
 {
   my_size_t sz = 0;
   in >> bits(sz);

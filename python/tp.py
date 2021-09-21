@@ -724,8 +724,8 @@ class Tp:
     def set_is_the_grid(self, value):
         zx.tp_set_is_the_grid(self, value)
 
-    def set_is_cursor_can_hover_over_2x_click(self, value):
-        zx.tp_set_is_cursor_can_hover_over_2x_click(self, value)
+    def set_is_cursor_can_hover_over_x2_click(self, value):
+        zx.tp_set_is_cursor_can_hover_over_x2_click(self, value)
 
     def set_gfx_glows(self, value):
         zx.tp_set_gfx_glows(self, value)

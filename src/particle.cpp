@@ -20,12 +20,11 @@
 #include "my_thing_template.h"
 #include "my_random.h"
 
-void Level::new_internal_particle (
-              ThingId id,
-              point start, point stop, isize sz, uint32_t dur,
-              const Tilep tile,
-              bool hflip,
-              bool make_visible_at_end)
+void Level::new_internal_particle (ThingId id,
+                                   point start, point stop, isize sz, uint32_t dur,
+                                   const Tilep tile,
+                                   bool hflip,
+                                   bool make_visible_at_end)
 {_
   log("Create new internal particle");
 _
@@ -57,11 +56,10 @@ _
                    make_visible_at_end));
 }
 
-void Level::new_internal_particle (
-              point start, point stop, isize sz, uint32_t dur,
-              const Tilep tile,
-              bool hflip,
-              bool make_visible_at_end)
+void Level::new_internal_particle (point start, point stop, isize sz, uint32_t dur,
+                                   const Tilep tile,
+                                   bool hflip,
+                                   bool make_visible_at_end)
 {_
   log("Create new internal particle");
 _
@@ -211,11 +209,10 @@ void Level::display_internal_particles (void)
   blit_flush();
 }
 
-void Level::new_external_particle (
-              ThingId id,
-              point start, point stop, isize sz, uint32_t dur,
-              const Tilep tile, bool hflip,
-              bool make_visible_at_end)
+void Level::new_external_particle (ThingId id,
+                                   point start, point stop, isize sz, uint32_t dur,
+                                   const Tilep tile, bool hflip,
+                                   bool make_visible_at_end)
 {_
   log("Create new external particle");
 _
@@ -251,8 +248,8 @@ _
 }
 
 void Level::new_external_particle (point start, point stop, isize sz, uint32_t dur,
-                   const Tilep tile, bool hflip,
-                   bool make_visible_at_end)
+                                   const Tilep tile, bool hflip,
+                                   bool make_visible_at_end)
 {_
   log("Create new external particle");
 _

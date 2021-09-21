@@ -148,7 +148,7 @@ static void thing_possible_init (void)
 // Find the thing with the highest priority to hit.
 //
 bool Thing::collision_find_best_target (bool *target_attacked,
-                    bool *target_overlaps)
+                                        bool *target_overlaps)
 {_
   bool ret = false;
   auto me = this;
@@ -361,7 +361,7 @@ bool things_overlap_attack (const Thingp A, fpoint A_at, const Thingp B)
 // If two things collide, return false to stop the walk
 //
 bool Thing::collision_add_candidates (Thingp it, fpoint future_pos,
-                    int x, int y, int dx, int dy)
+                                      int x, int y, int dx, int dy)
 {_
   auto me = this;
 
@@ -708,9 +708,9 @@ _
 }
 
 bool Thing::collision_check_and_handle (fpoint future_pos,
-                    bool *target_attacked,
-                    bool *target_overlaps,
-                    float radius)
+                                        bool *target_attacked,
+                                        bool *target_overlaps,
+                                        float radius)
 {_
   if (is_loggable_for_unimportant_stuff()) {
     dbg("Collision handle");
@@ -786,30 +786,23 @@ _
 // position.
 //
 bool Thing::collision_check_and_handle_nearby (fpoint future_pos,
-                         bool *target_attacked,
-                         bool *target_overlaps)
+                                               bool *target_attacked,
+                                               bool *target_overlaps)
 {
-  return (collision_check_and_handle(future_pos,
-                     target_attacked,
-                     target_overlaps,
-                     thing_collision_tiles));
+  return (collision_check_and_handle(future_pos, target_attacked, target_overlaps, thing_collision_tiles));
 }
 
 bool Thing::collision_check_and_handle_at (fpoint future_pos,
-                       bool *target_attacked,
-                       bool *target_overlaps)
+                                           bool *target_attacked,
+                                           bool *target_overlaps)
 {
-  return (collision_check_and_handle(future_pos,
-                     target_attacked,
-                     target_overlaps,
-                     0.0));
+  return (collision_check_and_handle(future_pos, target_attacked, target_overlaps, 0.0));
 }
 
 bool Thing::collision_check_and_handle_at (bool *target_attacked,
-                       bool *target_overlaps)
+                                           bool *target_overlaps)
 {
-  return (collision_check_and_handle_at(mid_at,
-                      target_attacked, target_overlaps));
+  return (collision_check_and_handle_at(mid_at, target_attacked, target_overlaps));
 }
 
 

@@ -27,7 +27,7 @@ public:
 
   color (const color &c) : r(c.r), g(c.g), b(c.b), a(c.a) { }
 
-#ifdef UNUSED
+#ifdef unused_flag
   friend std::ostream& operator<<(std::ostream &out,
                   Bits<const color & > const my)
   {

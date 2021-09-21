@@ -291,9 +291,9 @@ Texp tex_load (std::string file, std::string name, int mode)
 // 2 - mask for sprites
 //
 static std::pair<Texp, Texp> tex_sprite (SDL_Surface *in,
-                     std::string file,
-                     std::string name,
-                     int mode)
+                                         std::string file,
+                                         std::string name,
+                                         int mode)
 {
   auto n1 = name + "_black_and_white";
   auto n2 = name + "_mask";

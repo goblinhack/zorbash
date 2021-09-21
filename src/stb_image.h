@@ -4880,7 +4880,7 @@ static int stbi__expand_png_palette(stbi__png *a, stbi_uc *palette, int len, int
 }
 
 static int stbi__unpremultiply_on_load = 0;
-static int stbi__de_iphone_flag = 0;
+static int stbi__de_iphone_unused_flag = 0;
 
 STBIDEF void stbi_set_unpremultiply_on_load(int flag_true_if_should_unpremultiply)
 {
@@ -4889,7 +4889,7 @@ STBIDEF void stbi_set_unpremultiply_on_load(int flag_true_if_should_unpremultipl
 
 STBIDEF void stbi_convert_iphone_png_to_rgb(int flag_true_if_should_convert)
 {
-   stbi__de_iphone_flag = flag_true_if_should_convert;
+   stbi__de_iphone_unused_flag = flag_true_if_should_convert;
 }
 
 static void stbi__de_iphone(stbi__png *z)
@@ -5072,7 +5072,7 @@ static int stbi__parse_png_file(stbi__png *z, int scan, int req_comp)
           if (!stbi__compute_transparency(z, tc, s->img_out_n)) return 0;
          }
       }
-      if (is_iphone && stbi__de_iphone_flag && s->img_out_n > 2)
+      if (is_iphone && stbi__de_iphone_unused_flag && s->img_out_n > 2)
          stbi__de_iphone(z);
       if (pal_img_n) {
          // pal_img_n == 3 or 4

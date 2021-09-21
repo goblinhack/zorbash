@@ -83,7 +83,7 @@ fpoint unit (const fpoint &p)
   return (fpoint(p.x / length, p.y / length));
 }
 
-#ifdef UNUSED
+#ifdef unused_flag
 uint8_t get_line_intersection (fpoint p0,
                  fpoint p1,
                  fpoint p2,

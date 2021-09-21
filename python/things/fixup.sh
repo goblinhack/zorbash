@@ -12,12 +12,8 @@ POST=$(mktemp) || exit 1
 OUT=$(mktemp) || exit 1
 
 for IN in \
-  skeleton.py \
   bat_lesser.py \
   chest1.py \
-  chest1.py \
-  cleaner.py \
-  cleaner.py \
   cleaner.py \
   enchantstone.py \
   food_apple1.py \
@@ -80,10 +76,8 @@ for IN in \
   gem_ruby.py \
   gem_sapphire.py \
   gem_topaz.py \
-  ghost_minion.py \
   ghost.py \
-  goblin.py \
-  goblin.py \
+  ghost_minion.py \
   goblin.py \
   gold1.py \
   gold2.py \
@@ -99,16 +93,11 @@ for IN in \
   potion_health.py \
   rat_giant.py \
   reaper.py \
+  skeleton.py \
   skeleton_fire.py \
   skeleton_giant.py \
-  skeleton_minion_fire.py \
   skeleton_minion.py \
-  skeleton.py \
-  skeleton.py \
-  skeleton.py \
-  skeleton.py \
-  skeleton.py \
-  skeleton.py \
+  skeleton_minion_fire.py \
   skillstone.py \
   spider_giant.py \
   tentacleye.py \
@@ -211,7 +200,7 @@ do
       set_is_critical_to_level \
       set_is_cursor \
       set_is_cursor_can_hover_over \
-      set_is_cursor_can_hover_over_2x_click \
+      set_is_cursor_can_hover_over_x2_click \
       set_is_cursor_path \
       set_is_dead_on_end_of_anim \
       set_is_dead_on_shove \

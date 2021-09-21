@@ -13,9 +13,9 @@
 #include "my_gl.h"
 
 void Thing::bounce (float bounce_height,
-          float bounce_fade,
-          ts_t ms,
-          int bounce_count)
+                    float bounce_fade,
+                    ts_t ms,
+                    int bounce_count)
 {
   auto t = set_ts_bounce_begin(time_get_time_ms_cached());
   set_ts_bounce_end(t + ms);

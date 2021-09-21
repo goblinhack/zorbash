@@ -799,8 +799,8 @@ std::vector<char> read_file (const std::string filename)
 }
 
 static std::vector<char> read_lzo_file (const std::string filename,
-                    lzo_uint *uncompressed_sz,
-                    uint32_t *cs)
+                                        lzo_uint *uncompressed_sz,
+                                        uint32_t *cs)
 {_
   std::ifstream ifs(filename,
             std::ios::in | std::ios::binary | std::ios::ate);

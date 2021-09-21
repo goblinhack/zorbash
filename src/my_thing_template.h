@@ -167,7 +167,7 @@ private:
   int _is_critical_to_level {};
   int _is_cursor {};
   int _is_cursor_can_hover_over {};
-  int _is_cursor_can_hover_over_2x_click {};
+  int _is_cursor_can_hover_over_x2_click {};
   int _is_cursor_path {};
   int _is_dead_on_end_of_anim {};
   int _is_dead_on_shove {};
@@ -637,7 +637,7 @@ public:
   int is_corpse_on_death(void) const;
   int is_corridor(void) const;
   int is_critical_to_level(void) const;
-  int is_cursor_can_hover_over_2x_click(void) const;
+  int is_cursor_can_hover_over_x2_click(void) const;
   int is_cursor_can_hover_over(void) const;
   int is_cursor_path(void) const;
   int is_cursor(void) const;
@@ -966,7 +966,7 @@ public:
   void set_is_corpse_on_death(int);
   void set_is_corridor(int);
   void set_is_critical_to_level(int);
-  void set_is_cursor_can_hover_over_2x_click(int);
+  void set_is_cursor_can_hover_over_x2_click(int);
   void set_is_cursor_can_hover_over(int);
   void set_is_cursor(int);
   void set_is_cursor_path(int);

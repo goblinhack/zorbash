@@ -318,7 +318,7 @@ void Dungeon::debug (const std::string s)
 // Make a dungeon from rooms
 //
 Dungeon::Dungeon (int map_width, int map_height,
-          int grid_width, int grid_height, int seed) :
+                  int grid_width, int grid_height, int seed) :
   map_width                  (map_width),
   map_height                 (map_height),
   grid_width                 (grid_width),
@@ -3804,9 +3804,9 @@ next:
 // Generate a cave!
 //
 void Dungeon::cave_gen (unsigned int map_fill_prob,
-            int map_r1,
-            int map_r2,
-            int map_generations)
+                        int map_r1,
+                        int map_r2,
+                        int map_generations)
 
 {
   map_save = {};
@@ -3884,9 +3884,9 @@ void Dungeon::cave_gen (unsigned int map_fill_prob,
 }
 
 void Dungeon::dirt_gen (unsigned int map_fill_prob,
-            int map_r1,
-            int map_r2,
-            int map_generations)
+                        int map_r1,
+                        int map_r2,
+                        int map_generations)
 
 {
   map_save = {};
@@ -3937,9 +3937,9 @@ void Dungeon::dirt_gen (unsigned int map_fill_prob,
 }
 
 void Dungeon::dry_grass_gen (unsigned int map_fill_prob,
-               int map_r1,
-               int map_r2,
-               int map_generations)
+                             int map_r1,
+                             int map_r2,
+                             int map_generations)
 
 {
   map_save = {};
@@ -4013,9 +4013,9 @@ next:
 }
 
 void Dungeon::foilage_gen (unsigned int map_fill_prob,
-               int map_r1,
-               int map_r2,
-               int map_generations)
+                           int map_r1,
+                           int map_r2,
+                           int map_generations)
 
 {
   map_save = {};
@@ -4087,9 +4087,9 @@ next:
 }
 
 void Dungeon::water_gen (unsigned int map_fill_prob,
-             int map_r1,
-             int map_r2,
-             int map_generations)
+                         int map_r1,
+                         int map_r2,
+                         int map_generations)
 {
   map_save = {};
   map_curr = {};

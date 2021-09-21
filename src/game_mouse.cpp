@@ -119,7 +119,7 @@ game_mouse_down (int32_t x, int32_t y, uint32_t button)
   if (!wid_mouse_two_clicks) {
     auto to = level->cursor->mid_at;
     FOR_ALL_THINGS(level, t, to.x, to.y) {
-      if (t->is_cursor_can_hover_over_2x_click()) {
+      if (t->is_cursor_can_hover_over_x2_click()) {
         player->log("Needs double click");
         TOPCON("Double click to move.");
         return true;

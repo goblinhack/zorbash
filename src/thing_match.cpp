@@ -90,7 +90,7 @@ bool Thing::matches (const std::string& what) const
   if (is_corpse()                         && (what == "is_corpse"))                         { return true; }
   if (is_corridor()                       && (what == "is_corridor"))                       { return true; }
   if (is_critical_to_level()              && (what == "is_critical_to_level"))              { return true; }
-  if (is_cursor_can_hover_over_2x_click() && (what == "is_cursor_can_hover_over_2x_click")) { return true; }
+  if (is_cursor_can_hover_over_x2_click() && (what == "is_cursor_can_hover_over_x2_click")) { return true; }
   if (is_cursor_can_hover_over()          && (what == "is_cursor_can_hover_over"))          { return true; }
   if (is_cursor_path()                    && (what == "is_cursor_path"))                    { return true; }
   if (is_cursor()                         && (what == "is_cursor"))                         { return true; }
@@ -352,7 +352,7 @@ std::function<int(Thingp)> Thing::matches_to_func (const std::string& what)
   if (what == "is_corpse")                                        { return &Thing::is_corpse; }
   if (what == "is_corridor")                                      { return &Thing::is_corridor; }
   if (what == "is_critical_to_level")                             { return &Thing::is_critical_to_level; }
-  if (what == "is_cursor_can_hover_over_2x_click")                { return &Thing::is_cursor_can_hover_over_2x_click; }
+  if (what == "is_cursor_can_hover_over_x2_click")                { return &Thing::is_cursor_can_hover_over_x2_click; }
   if (what == "is_cursor_can_hover_over")                         { return &Thing::is_cursor_can_hover_over; }
   if (what == "is_cursor_path")                                   { return &Thing::is_cursor_path; }
   if (what == "is_cursor")                                        { return &Thing::is_cursor; }

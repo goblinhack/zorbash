@@ -258,24 +258,24 @@ uint8_t sdl_init (void)
   return true;
 #endif
 
-  uint32_t video_flags;
+  uint32_t video_unused_flags;
 
   LOG("SDL: Set SDL_WINDOW_OPENGL");
-  video_flags = SDL_WINDOW_OPENGL;
+  video_unused_flags = SDL_WINDOW_OPENGL;
 
   if (game->config.gfx_borderless) {
     LOG("SDL: Set SDL_WINDOW_BORDERLESS");
-    video_flags |= SDL_WINDOW_BORDERLESS;
+    video_unused_flags |= SDL_WINDOW_BORDERLESS;
   }
 
   if (game->config.gfx_fullscreen) {
     LOG("SDL: Set SDL_WINDOW_FULLSCREEN");
-    video_flags |= SDL_WINDOW_FULLSCREEN;
+    video_unused_flags |= SDL_WINDOW_FULLSCREEN;
   }
 
   if (game->config.gfx_fullscreen_desktop) {
     LOG("SDL: Set SDL_WINDOW_FULLSCREEN_DESKTOP");
-    video_flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
+    video_unused_flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
   }
 
   if (game->config.gfx_allow_highdpi) {
@@ -286,7 +286,7 @@ uint8_t sdl_init (void)
     LOG("SDL: Calling SDL_GetDisplayDPI");
     float dpi;
     if (SDL_GetDisplayDPI(0, 0, &dpi, 0) == 0) {
-      video_flags |= SDL_WINDOW_ALLOW_HIGHDPI;
+      video_unused_flags |= SDL_WINDOW_ALLOW_HIGHDPI;
       LOG("SDL: SDL_WINDOW_ALLOW_HIGHDPI");
     } else {
       ERR("SDL: Cannot enable high DPI");
@@ -299,7 +299,7 @@ uint8_t sdl_init (void)
                 SDL_WINDOWPOS_CENTERED,
                 video_width,
                 video_height,
-                video_flags);
+                video_unused_flags);
   if (!window) {
     ERR("Couldn't set windowed display %ux%u: %s",
       video_width, video_height,
@@ -314,7 +314,7 @@ uint8_t sdl_init (void)
     return false;
   }
 
-  if (video_flags & SDL_WINDOW_ALLOW_HIGHDPI) {
+  if (video_unused_flags & SDL_WINDOW_ALLOW_HIGHDPI) {
     SDL_GL_GetDrawableSize(window,
                  &game->config.window_pix_width,
                  &game->config.window_pix_height);

@@ -413,7 +413,7 @@ _
 // Initialize basic visibility and things that are lit and can be seen
 //
 int Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy,
-                     int search_type)
+                                       int search_type)
 {_
   std::array< std::array<uint8_t, MAP_WIDTH>, MAP_HEIGHT> can_jump = {};
   point start((int)mid_at.x, (int)mid_at.y);
@@ -768,7 +768,7 @@ int Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy,
 // the thing to walk.
 //
 void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
-                       int minx, int miny, int maxx, int maxy)
+                                           int minx, int miny, int maxx, int maxy)
 {_
   auto dmap_can_see = get_dmap_can_see();
   auto age_map = get_age_map();
@@ -1125,7 +1125,7 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
 // and then create a path to that edge.
 //
 void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals,
-                      int search_type)
+                                          int search_type)
 {_
   point start((int)mid_at.x, (int)mid_at.y);
 

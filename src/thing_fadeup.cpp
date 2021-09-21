@@ -13,8 +13,8 @@
 #include "my_gl.h"
 
 void Thing::fadeup (float fadeup_height,
-          float fadeup_fade,
-          ts_t ms)
+                    float fadeup_fade,
+                    ts_t ms)
 {
   auto t = set_ts_fadeup_begin(time_get_time_ms_cached());
   set_ts_fadeup_end(t + ms);

@@ -145,8 +145,8 @@ _
 // Particle from the inventory to tp_id target
 //
 void Thing::inventory_particle (Thingp item,
-                uint32_t slot,
-                Thingp particle_target)
+                                uint32_t slot,
+                                Thingp particle_target)
 {_
   dbg("Create inventory particle %s with target %s",
     item->to_string().c_str(), particle_target->to_string().c_str());

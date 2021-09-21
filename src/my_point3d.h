@@ -98,7 +98,7 @@ public:
     return (!(a==b));
   }
 
-#ifdef UNUSED
+#ifdef unused_flag
   void unit (void)
   {
     T length = sqrt(x*x + y*y + z*z);

@@ -64,7 +64,7 @@ PyObject *level_is_corridor_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_critical_to_level_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_cursor_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_cursor_can_hover_over_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_cursor_can_hover_over_2x_click_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_cursor_can_hover_over_x2_click_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_cursor_path_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_dead_on_end_of_anim_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_dead_on_shove_at(PyObject *obj, PyObject *args, PyObject *keywds);

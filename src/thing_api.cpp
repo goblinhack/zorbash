@@ -139,7 +139,7 @@ int Thing::is_corpse_on_death(void) const                      {_ return (tp()->
 int Thing::is_corpse (void) const                              {_ return (is_dead && is_corpse_on_death()); }
 int Thing::is_corridor(void) const                             {_ return (tp()->is_corridor()); }
 int Thing::is_critical_to_level(void) const                    {_ return (tp()->is_critical_to_level()); }
-int Thing::is_cursor_can_hover_over_2x_click(void) const       {_ return (tp()->is_cursor_can_hover_over_2x_click()); }
+int Thing::is_cursor_can_hover_over_x2_click(void) const       {_ return (tp()->is_cursor_can_hover_over_x2_click()); }
 int Thing::is_cursor_can_hover_over(void) const                {_ return (tp()->is_cursor_can_hover_over()); }
 int Thing::is_cursor_path(void) const                          {_ return (tp()->is_cursor_path()); }
 int Thing::is_cursor(void) const                               {_ return (tp()->is_cursor()); }
@@ -3822,10 +3822,10 @@ const std::string& Thing::on_birth_do (void) const {_ return (tp()->on_birth_do(
 const std::string& Thing::on_bite_do (void) const {_ return (tp()->on_bite_do()); }
 const std::string& Thing::on_born_do (void) const {_ return (tp()->on_born_do()); }
 const std::string& Thing::on_death_do (void) const {_ return (tp()->on_death_do()); }
-const std::string& Thing::on_fall_do (void) const {_ return (tp()->on_fall_do()); }
 const std::string& Thing::on_enchant_do (void) const {_ return (tp()->on_enchant_do()); }
-const std::string& Thing::on_firing_at_something_do (void) const {_ return (tp()->on_firing_at_something_do()); }
+const std::string& Thing::on_fall_do (void) const {_ return (tp()->on_fall_do()); }
 const std::string& Thing::on_fire_do (void) const {_ return (tp()->on_fire_do()); }
+const std::string& Thing::on_firing_at_something_do (void) const {_ return (tp()->on_firing_at_something_do()); }
 const std::string& Thing::on_hit_do (void) const {_ return (tp()->on_hit_do()); }
 const std::string& Thing::on_lifespan_do (void) const {_ return (tp()->on_lifespan_do()); }
 const std::string& Thing::on_miss_do (void) const {_ return (tp()->on_miss_do()); }
@@ -3838,13 +3838,13 @@ const std::string& Thing::short_text_name (void) const {_ return (tp()->short_te
 const std::string& Thing::spawn_on_shoved (void) const {_ return (tp()->spawn_on_shoved()); }
 const std::string& Thing::str1 (void) const {_ return (tp()->str1()); }
 const std::string& Thing::str2 (void) const {_ return (tp()->str2()); }
-const std::string& Thing::text_enchant (void) const {_ return (tp()->text_enchant()); }
-const std::string& Thing::text_skill (void) const {_ return (tp()->text_skill()); }
 const std::string& Thing::str4 (void) const {_ return (tp()->str4()); }
 const std::string& Thing::str5 (void) const {_ return (tp()->str5()); }
 const std::string& Thing::text_description (void) const {_ return (tp()->text_description()); }
+const std::string& Thing::text_enchant (void) const {_ return (tp()->text_enchant()); }
 const std::string& Thing::text_hits (void) const {_ return (tp()->text_hits()); }
 const std::string& Thing::text_name (void) const {_ return (tp()->text_name()); }
+const std::string& Thing::text_skill (void) const {_ return (tp()->text_skill()); }
 const std::string& Thing::text_title (void) const {_ return (tp()->text_title()); }
 const std::string& Thing::text_unused (void) const {_ return (tp()->text_unused()); }
 const std::string& Thing::weapon_carry_anim (void) const {_ return (tp()->weapon_carry_anim()); }

@@ -338,9 +338,10 @@ bool dmap_can_i_move_diagonally (const Dmap *D, point a, point b, point c)
   return false;
 }
 
-static std::vector<point> dmap_solve_ (const Dmap *D, const point start,
-                     const std::vector<point> &all_deltas,
-                     bool allow_diagonals)
+static std::vector<point> dmap_solve_ (const Dmap *D, 
+                                       const point start,
+                                       const std::vector<point> &all_deltas,
+                                       bool allow_diagonals)
 {
   std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> walked = {};
   std::vector<point> out = { };

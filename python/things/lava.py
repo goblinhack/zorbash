@@ -14,7 +14,7 @@ def lava_init(name, text_name, tiles=[]):
     mytp.set_gfx_animated(True)
     mytp.set_gfx_glows(True)
     mytp.set_is_able_to_fall(True)
-    mytp.set_is_cursor_can_hover_over_2x_click(True)
+    mytp.set_is_cursor_can_hover_over_x2_click(True)
     mytp.set_is_described_when_hovering_over(True)
     mytp.set_is_extreme_hazard(True)
     mytp.set_is_hazard(True)

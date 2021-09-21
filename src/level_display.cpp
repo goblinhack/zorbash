@@ -146,8 +146,8 @@ void Level::display_map_bg_things (void)
 }
 
 void Level::display_map_things (int fbo,
-                const int16_t minx, const int16_t miny,
-                const int16_t maxx, const int16_t maxy)
+                                const int16_t minx, const int16_t miny,
+                                const int16_t maxx, const int16_t maxy)
 {_
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   glcolor(WHITE);
@@ -213,8 +213,8 @@ void Level::display_map_things (int fbo,
 // Things above the floor but behind the light
 //
 void Level::display_map_fg_things (int fbo,
-                   const int16_t minx, const int16_t miny,
-                   const int16_t maxx, const int16_t maxy)
+                                   const int16_t minx, const int16_t miny,
+                                   const int16_t maxx, const int16_t maxy)
 {_
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   glcolor(WHITE);
@@ -260,8 +260,8 @@ void Level::display_map_fg_things (int fbo,
 // Things above the light
 //
 void Level::display_map_fg2_things (int fbo,
-                   const int16_t minx, const int16_t miny,
-                   const int16_t maxx, const int16_t maxy)
+                                    const int16_t minx, const int16_t miny,
+                                    const int16_t maxx, const int16_t maxy)
 {_
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   glcolor(WHITE);

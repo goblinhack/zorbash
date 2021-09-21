@@ -104,8 +104,8 @@ void Thing::on_born (void)
 }
 
 void Thing::init (Levelp level,
-          const std::string& name,
-          const fpoint born, const fpoint jitter)
+                  const std::string& name,
+                  const fpoint born, const fpoint jitter)
 {
   verify(this);
 

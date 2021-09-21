@@ -26,11 +26,11 @@ WidPopup::~WidPopup()
 }
 
 WidPopup::WidPopup (const std::string name,
-          point tl, point br, Tilep title_tile,
-          const std::string background,
-          bool horiz_scroll,
-          bool vert_scoll,
-          int scroll_height) :
+                    point tl, point br, Tilep title_tile,
+                    const std::string background,
+                    bool horiz_scroll,
+                    bool vert_scoll,
+                    int scroll_height) :
   tl(tl), br(br),
   title_tile(title_tile),
   background(background)

@@ -110,7 +110,7 @@ PyObject *thing_is_corpse_on_death(PyObject *obj, PyObject *args, PyObject *keyw
 PyObject *thing_is_corpse(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_corridor(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_critical_to_level(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_cursor_can_hover_over_2x_click(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_cursor_can_hover_over_x2_click(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_cursor_can_hover_over(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_cursor_path(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_cursor(PyObject *obj, PyObject *args, PyObject *keywds);

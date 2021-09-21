@@ -19,8 +19,8 @@
 #include "my_ui.h"
 
 void Thing::blit_non_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
-                      const point &blit_tl,
-                      const point &blit_br)
+                                          const point &blit_tl,
+                                          const point &blit_br)
 {_
   IF_DEBUG3 {
     return;
@@ -205,8 +205,8 @@ void Thing::blit_non_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
 }
 
 void Thing::blit_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
-                    const point &blit_tl,
-                    const point &blit_br)
+                                      const point &blit_tl,
+                                      const point &blit_br)
 {_
   IF_DEBUG3 {
     return;
@@ -243,7 +243,7 @@ void Thing::blit_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
 }
 
 void Thing::blit_shadow (const Tpp &tpp, const Tilep &tile,
-             const point &blit_tl, const point &blit_br)
+                         const point &blit_tl, const point &blit_br)
 {_
   IF_DEBUG3 {
     return;
@@ -328,7 +328,7 @@ static int blit_msg_strlen (std::string const& text)
 }
 
 void Thing::blit_text (std::string const& text, color fg,
-             point oblit_tl, point oblit_br)
+                       point oblit_tl, point oblit_br)
 {_
   Tilep tile;
   auto text_iter = text.begin();
@@ -396,11 +396,11 @@ void Thing::blit_text (std::string const& text, color fg,
 }
 
 bool Thing::get_coords (point &blit_tl,
-            point &blit_br,
-            point &pre_effect_blit_tl,
-            point &pre_effect_blit_br,
-            Tilep &tile,
-            bool reflection)
+                        point &blit_br,
+                        point &pre_effect_blit_tl,
+                        point &pre_effect_blit_br,
+                        Tilep &tile,
+                        bool reflection)
 {_
   fpoint at = get_interpolated_mid_at();
 
@@ -677,7 +677,7 @@ bool Thing::get_coords (point &blit_tl,
 }
 
 bool Thing::get_map_offset_coords (point &blit_tl, point &blit_br,
-                   Tilep &tile, bool reflection)
+                                   Tilep &tile, bool reflection)
 {_
   point pre_effect_blit_tl;
   point pre_effect_blit_br;
@@ -771,11 +771,11 @@ void Thing::blit_end_reflection_submerged (uint8_t submerged) const
 }
 
 void Thing::blit_internal (int fbo,
-               point &blit_tl,
-               point &blit_br,
-               const Tilep tile,
-               color c,
-               bool reflection)
+                           point &blit_tl,
+                           point &blit_br,
+                           const Tilep tile,
+                           color c,
+                           bool reflection)
 {_
   auto tpp = tp();
 

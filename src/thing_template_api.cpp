@@ -206,7 +206,7 @@ int Tp::is_combustible(void) const                                   { return _i
 int Tp::is_corpse_on_death(void) const                               { return _is_corpse_on_death; }
 int Tp::is_corridor(void) const                                      { return _is_corridor; }
 int Tp::is_critical_to_level(void) const                             { return _is_critical_to_level; }
-int Tp::is_cursor_can_hover_over_2x_click(void) const  { return _is_cursor_can_hover_over_2x_click; }
+int Tp::is_cursor_can_hover_over_x2_click(void) const  { return _is_cursor_can_hover_over_x2_click; }
 int Tp::is_cursor_can_hover_over(void) const                         { return _is_cursor_can_hover_over; }
 int Tp::is_cursor_path(void) const                                   { return _is_cursor_path; }
 int Tp::is_cursor(void) const                                        { return _is_cursor; }
@@ -526,7 +526,7 @@ void Tp::set_is_combustible(int v)                                   { _is_combu
 void Tp::set_is_corpse_on_death(int v)                               { _is_corpse_on_death = v; }
 void Tp::set_is_corridor(int v)                                      { _is_corridor = v; }
 void Tp::set_is_critical_to_level(int v)                             { _is_critical_to_level = v; }
-void Tp::set_is_cursor_can_hover_over_2x_click(int v)  { _is_cursor_can_hover_over_2x_click = v; }
+void Tp::set_is_cursor_can_hover_over_x2_click(int v)  { _is_cursor_can_hover_over_x2_click = v; }
 void Tp::set_is_cursor_can_hover_over(int v)                         { _is_cursor_can_hover_over = v; }
 void Tp::set_is_cursor(int v)                                        { _is_cursor = v; }
 void Tp::set_is_cursor_path(int v)                                   { _is_cursor_path = v; }

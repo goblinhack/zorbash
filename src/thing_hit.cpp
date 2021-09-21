@@ -19,10 +19,10 @@
 // Python callback upon being hit
 //
 void Thing::on_hit (Thingp hitter,      // an arrow / monst /...
-          Thingp real_hitter, // who fired the arrow?
-          bool crit,
-          bool bite,
-          int damage)
+                    Thingp real_hitter, // who fired the arrow?
+                    bool crit,
+                    bool bite,
+                    int damage)
 {_
   auto on_hit = tp()->on_hit_do();
   if (std::empty(on_hit)) {
@@ -112,11 +112,11 @@ void Thing::on_bite (void)
 }
 
 int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
-              Thingp real_hitter, // who fired the arrow?
-              bool crit,
-              bool bite,
-              int poison,
-              int damage)
+                          Thingp real_hitter, // who fired the arrow?
+                          bool crit,
+                          bool bite,
+                          int poison,
+                          int damage)
 {_
   if (!hitter) {
     err("No hitter");

@@ -115,7 +115,7 @@ def tp_init(name, text_name):
     mytp.set_is_corpse_on_death(False)
     mytp.set_is_corridor(False)
     mytp.set_is_critical_to_level(False)
-    mytp.set_is_cursor_can_hover_over_2x_click(False)
+    mytp.set_is_cursor_can_hover_over_x2_click(False)
     mytp.set_is_cursor_can_hover_over(False)
     mytp.set_is_cursor(False)
     mytp.set_is_cursor_path(False)

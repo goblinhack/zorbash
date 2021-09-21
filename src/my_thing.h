@@ -723,7 +723,7 @@ public:
   int is_corpse(void) const;
   int is_corridor(void) const;
   int is_critical_to_level(void) const;
-  int is_cursor_can_hover_over_2x_click(void) const;
+  int is_cursor_can_hover_over_x2_click(void) const;
   int is_cursor_can_hover_over(void) const;
   int is_cursor_path(void) const;
   int is_cursor(void) const;
