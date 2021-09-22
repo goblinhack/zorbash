@@ -19,10 +19,10 @@
 #include "my_globals.h"
 #include "my_ptrcheck.h"
 #include "my_monst.h"
-#include "my_wid_popup.h"
 #include "my_wid_thing_info.h"
 #include "my_wid_inventory.h"
 #include "my_wid_actionbar.h"
+#include "my_wid_popup.h"
 #include "my_player.h"
 
 //
@@ -1608,16 +1608,14 @@ void Thing::robot_tick (void)
           level->to_string().c_str(),
           (int)mid_at.x, (int)mid_at.y,get_health(), get_health_max());
 
-        if (get_health() < get_health_max() / 2) {
-          if (can_eat_something()) {
-            CON("Robot: @(%s, %d,%d %d/%dh) Robot needs to rest, low on health",
-              level->to_string().c_str(),
-              (int)mid_at.x, (int)mid_at.y,get_health(), get_health_max());
-            BOTCON("Robot needs to rest, low on health");
-            game->tick_begin("Robot needs to rest, low on health");
-            robot_change_state(ROBOT_STATE_RESTING, "need to rest, low on health");
-            return;
-          }
+        if (get_enchantstone_count() && can_enchant_something()) {
+          CON("Robot: @(%s, %d,%d %d/%dh) Robot can enchant something",
+            level->to_string().c_str(),
+            (int)mid_at.x, (int)mid_at.y,get_health(), get_health_max());
+          BOTCON("Robot can enchant something");
+          game->tick_begin("Robot can enchant something");
+          robot_change_state(ROBOT_STATE_ENCHANTING, "can enchant something");
+          return;
         }
 
         if (get_stamina() < get_stamina_max() / 3) {
@@ -1698,7 +1696,7 @@ void Thing::robot_tick (void)
       // Check for interrupts
       //
       if (robot_ai_init_can_see_dmap(minx, miny, maxx, maxy,
-                       SEARCH_TYPE_LOCAL_JUMP_ALLOWED)) {
+                                     SEARCH_TYPE_LOCAL_JUMP_ALLOWED)) {
         CON("Robot: @(%s, %d,%d %d/%dh) Something interrupted me",
           level->to_string().c_str(),
           (int)mid_at.x, (int)mid_at.y,get_health(), get_health_max());
@@ -1787,6 +1785,18 @@ void Thing::robot_tick (void)
       robot_change_state(ROBOT_STATE_IDLE, "close inventory");
       game->tick_begin("Robot finished collecting");
     }
+    break;
+
+    case ROBOT_STATE_ENCHANTING:
+    {
+      //
+      // Enchant a random item.
+      //
+      enchant_random_item();
+      robot_change_state(ROBOT_STATE_IDLE, "enchanted");
+      game->tick_begin("Robot finished enchanting");
+    }
+    break;
   }
 
   log("Robot: Do something");
@@ -1816,6 +1826,9 @@ void Thing::robot_change_state (int new_state, const std::string &why)
     case ROBOT_STATE_OPEN_INVENTORY:
       to = "OPEN-INVENTORY";
       break;
+    case ROBOT_STATE_ENCHANTING:
+      to = "ENCHANTING";
+      break;
   }
   switch (monstp->robot_state) {
     case ROBOT_STATE_IDLE:
@@ -1829,6 +1842,12 @@ void Thing::robot_change_state (int new_state, const std::string &why)
       break;
     case ROBOT_STATE_OPEN_INVENTORY:
       from = "OPEN-INVENTORY";
+      wid_thing_info_fini();
+      wid_inventory_init();
+      break;
+    case ROBOT_STATE_ENCHANTING:
+      from = "ENCHANTING";
+      wid_enchant_destroy();
       wid_thing_info_fini();
       wid_inventory_init();
       break;
@@ -1856,6 +1875,10 @@ void Thing::robot_change_state (int new_state, const std::string &why)
       game->request_remake_inventory = true;
       game->wid_thing_info_create(game->level->player, false);
       BOTCON("Robot is looking in its inventory");
+      break;
+    case ROBOT_STATE_ENCHANTING:
+      BOTCON("Robot is enchanting something");
+      game->wid_enchant_an_item();
       break;
   }
 }

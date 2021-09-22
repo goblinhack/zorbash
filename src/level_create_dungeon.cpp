@@ -273,6 +273,10 @@ have_dungeon_start:
             auto w3 = thing_new("sword_short_wooden", fpoint(x, y));
             t->carry(w3);
 
+            {
+              auto f = thing_new("enchantstone", fpoint(x, y));
+              t->carry(f);
+            }
 #if 0
             auto w2 = thing_new("sword_short_basic", fpoint(x, y));
             t->carry(w2);
@@ -295,11 +299,6 @@ have_dungeon_start:
             {
               auto b = thing_new("chest1", fpoint(x, y));
               t->carry(b);
-            }
-
-            {
-              auto f = thing_new("enchantstone", fpoint(x, y));
-              t->carry(f);
             }
 
             {

@@ -228,9 +228,9 @@ void Game::wid_wield_create (void)
   wid_set_on_key_down(wid_wield->wid_popup_container, wid_wield_key_down);
 
   if (wield_items.size() == 1) {
-    wid_collect->log("Want to wield this?");
+    wid_wield->log("Want to wield this?");
   } else {
-    wid_collect->log("Choose something to wield");
+    wid_wield->log("Choose something to wield");
   }
 
   int y_at = 3;

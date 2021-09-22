@@ -90,3 +90,51 @@ void Thing::enchant_randomly (void)
     incr_enchant(1);
   }
 }
+
+int Thing::get_enchantstone_count (void)
+{_
+  int v = 0;
+  for (const auto& item : monstp->carrying) {
+    auto t = level->thing_find(item.id);
+    if (!t) {
+      continue;
+    }
+    if (!t->is_enchantstone()) {
+      continue;
+    }
+    log("Found an enchantstone: %s", t->to_string().c_str());
+    v++;
+  }
+  return v;
+}
+
+bool Thing::can_enchant_something (void)
+{_
+  for (const auto& item : monstp->carrying) {
+    auto t = level->thing_find(item.id);
+    if (!t) {
+      continue;
+    }
+    if (t->is_enchantable()) {
+      log("Found something we can enchant: %s", t->to_string().c_str());
+      return true;
+    }
+  }
+  return false;
+}
+
+bool Thing::enchant_random_item (void)
+{_
+  for (const auto& item : monstp->carrying) {
+    auto t = level->thing_find(item.id);
+    if (!t) {
+      continue;
+    }
+    if (!t->is_enchantable()) {
+      continue;
+    }
+    log("Enchant this randomly: %s", t->to_string().c_str());
+    return enchant(t);
+  }
+  return false;
+}

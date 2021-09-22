@@ -233,9 +233,9 @@ void Game::wid_enchant_an_item (void)
   wid_set_on_key_down(wid_enchant->wid_popup_container, wid_enchant_key_down);
 
   if (enchant_items.size() == 1) {
-    wid_collect->log("Want to enchant this?");
+    wid_enchant->log("Want to enchant this?");
   } else {
-    wid_collect->log("Choose something to enchant");
+    wid_enchant->log("Choose something to enchant");
   }
 
   int y_at = 3;
