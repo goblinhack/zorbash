@@ -75,22 +75,22 @@ void dmap_print(const Dmap *d) {
 }
 
 void dmap_process(Dmap *D, point tl, point br) {
-  uint8_t                                                       x;
-  uint8_t                                                       y;
-  uint8_t                                                       a;
-  uint8_t                                                       b;
-  uint8_t                                                       c;
-  uint8_t                                                       d;
-  uint8_t *                                                     e;
-  uint8_t                                                       f;
-  uint8_t                                                       g;
-  uint8_t                                                       h;
-  uint8_t                                                       i;
-  uint8_t                                                       lowest;
-  uint8_t                                                       changed;
-  static std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> orig;
-  static std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> orig_valid;
-  static std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> valid;
+  uint8_t                                                           x;
+  uint8_t                                                           y;
+  uint8_t                                                           a;
+  uint8_t                                                           b;
+  uint8_t                                                           c;
+  uint8_t                                                           d;
+  uint8_t *                                                         e;
+  uint8_t                                                           f;
+  uint8_t                                                           g;
+  uint8_t                                                           h;
+  uint8_t                                                           i;
+  uint8_t                                                           lowest;
+  uint8_t                                                           changed;
+  static std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > orig;
+  static std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > orig_valid;
+  static std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > valid;
 
   int minx, miny, maxx, maxy;
   if (tl.x < br.x) {
@@ -331,11 +331,11 @@ bool dmap_can_i_move_diagonally(const Dmap *D, point a, point b, point c) {
   return false;
 }
 
-static std::vector<point> dmap_solve_(const Dmap *D, const point start, const std::vector<point> &all_deltas,
-                                      bool allow_diagonals) {
-  std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> walked = {};
-  std::vector<point>                                  out    = {};
-  auto                                                at     = start;
+static std::vector< point > dmap_solve_(const Dmap *D, const point start, const std::vector< point > &all_deltas,
+                                        bool allow_diagonals) {
+  std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > walked = {};
+  std::vector< point >                                    out    = {};
+  auto                                                    at     = start;
 
   for (; /*ever*/;) {
     auto x = at.x;
@@ -417,15 +417,15 @@ static std::vector<point> dmap_solve_(const Dmap *D, const point start, const st
   return (out);
 }
 
-std::vector<point> dmap_solve_allow_diagonal(const Dmap *D, const point start) {
-  static const std::vector<point> all_deltas = {
+std::vector< point > dmap_solve_allow_diagonal(const Dmap *D, const point start) {
+  static const std::vector< point > all_deltas = {
       point(-1, -1), point(1, -1), point(-1, 1), point(1, 1), point(0, -1), point(-1, 0), point(1, 0), point(0, 1),
   };
   return (dmap_solve_(D, start, all_deltas, true));
 }
 
-std::vector<point> dmap_solve(const Dmap *D, const point start) {
-  static const std::vector<point> all_deltas = {
+std::vector< point > dmap_solve(const Dmap *D, const point start) {
+  static const std::vector< point > all_deltas = {
       point(0, -1),
       point(-1, 0),
       point(1, 0),

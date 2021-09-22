@@ -34,7 +34,7 @@ extern uint32_t csum(char *mem, uint32_t len);
     out << bits(magic);                                                                                                \
   }
 
-std::ostream &operator<<(std::ostream &out, Bits<Monstp &> const my) {
+std::ostream &operator<<(std::ostream &out, Bits< Monstp & > const my) {
   TRACE_AND_INDENT();
   /////////////////////////////////////////////////////////////////////////
   // Keep these sorted alphabetically to make it easier to see additions
@@ -137,12 +137,12 @@ std::ostream &operator<<(std::ostream &out, Bits<Monstp &> const my) {
   return (out);
 }
 
-std::ostream &operator<<(std::ostream &out, Bits<const Thingp &> const my) {
+std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my) {
   TRACE_AND_INDENT();
   auto start = out.tellp();
   WRITE_MAGIC(THING_MAGIC_BEGIN + (int) sizeof(Thing));
 
-  const std::string name(tp_id_map[my.t->tp_id - 1]->name());
+  const std::string name(tp_id_map[ my.t->tp_id - 1 ]->name());
   out << bits(name);
 
   bool monst = (my.t->monstp != nullptr);
@@ -387,7 +387,7 @@ std::ostream &operator<<(std::ostream &out, Bits<const Thingp &> const my) {
   return (out);
 }
 
-std::ostream &operator<<(std::ostream &out, Bits<Levelp &> const my) {
+std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my) {
   TRACE_AND_INDENT();
   IF_DEBUG4 { my.t->log("Save"); }
 
@@ -410,7 +410,7 @@ std::ostream &operator<<(std::ostream &out, Bits<Levelp &> const my) {
 
   uint32_t csum = 0;
   FOR_ALL_THING_GROUPS(group) {
-    for (auto p : my.t->all_things[group]) {
+    for (auto p : my.t->all_things[ group ]) {
       auto t = p.second;
       csum += t->mid_at.x + t->mid_at.y + t->id.id;
       // t->con("SAVE %f %f %d", t->mid_at.x, t->mid_at.y, t->id.id);
@@ -516,7 +516,7 @@ std::ostream &operator<<(std::ostream &out, Bits<Levelp &> const my) {
 #ifdef ENABLE_DEBUG_THING_SER
   LOG("DGN: Check things");
   FOR_ALL_THING_GROUPS(group) {
-    for (auto p : my.t->all_things[group]) {
+    for (auto p : my.t->all_things[ group ]) {
       auto t = p.second;
       my.t->check_thing(t);
     }
@@ -544,7 +544,7 @@ std::ostream &operator<<(std::ostream &out, Bits<Levelp &> const my) {
     for (auto x = 0; x < MAP_WIDTH; x++) {
       for (auto y = 0; y < MAP_HEIGHT; y++) {
         for (auto slot = 0; slot < MAP_SLOTS; slot++) {
-          auto id = get(my.t->all_things_id_at[group], x, y, slot);
+          auto id = get(my.t->all_things_id_at[ group ], x, y, slot);
           if (id.ok()) {
             const Thingp t = my.t->thing_find(id);
             if (! t) {
@@ -566,7 +566,7 @@ std::ostream &operator<<(std::ostream &out, Bits<Levelp &> const my) {
   return (out);
 }
 
-std::ostream &operator<<(std::ostream &out, Bits<const class World &> const my) {
+std::ostream &operator<<(std::ostream &out, Bits< const class World & > const my) {
   TRACE_AND_INDENT();
   for (auto x = 0; x < LEVELS_ACROSS; ++x) {
     for (auto y = 0; y < LEVELS_DOWN; ++y) {
@@ -594,7 +594,7 @@ std::ostream &operator<<(std::ostream &out, Bits<const class World &> const my) 
   return (out);
 }
 
-std::ostream &operator<<(std::ostream &out, Bits<const Config &> const my) {
+std::ostream &operator<<(std::ostream &out, Bits< const Config & > const my) {
   TRACE_AND_INDENT();
   uint32_t header_size = sizeof(Config);
   /* uint32_t           header_size                  */ out << bits(header_size);
@@ -682,7 +682,7 @@ std::ostream &operator<<(std::ostream &out, Bits<const Config &> const my) {
   return (out);
 }
 
-std::ostream &operator<<(std::ostream &out, Bits<const class Game &> const my) {
+std::ostream &operator<<(std::ostream &out, Bits< const class Game & > const my) {
   TRACE_AND_INDENT();
   uint32_t header_size = sizeof(Game);
   out << bits(my.t.version);

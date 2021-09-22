@@ -95,12 +95,12 @@ public:
   AsciiCell(void) {}
 };
 
-static std::vector<std::vector<AsciiCell>> cells;
+static std::vector< std::vector< AsciiCell > > cells;
 
 void ascii_init(void) {
   cells.resize(TERM_WIDTH_MAX);
   for (auto x = 0; x < TERM_WIDTH_MAX; x++) {
-    cells[x].resize(TERM_HEIGHT_MAX);
+    cells[ x ].resize(TERM_HEIGHT_MAX);
   }
 }
 
@@ -856,7 +856,7 @@ std::string ascii_strip(std::string const &text) {
 
 static void ascii_putf_(int x, int y, color fg, color bg, std::wstring const fmt, va_list args) {
   TRACE_AND_INDENT();
-  wchar_t buf[MAXLONGSTR];
+  wchar_t buf[ MAXLONGSTR ];
 
   auto wrote = vswprintf(buf, MAXLONGSTR, fmt.c_str(), args);
 
@@ -864,7 +864,7 @@ static void ascii_putf_(int x, int y, color fg, color bg, std::wstring const fmt
   // Only a single nul is written, but as we read 2 at a time...
   //
   if (wrote && (wrote < MAXLONGSTR - 1)) {
-    buf[wrote + 1] = '\0';
+    buf[ wrote + 1 ] = '\0';
   }
 
   auto b = std::wstring(buf);
@@ -874,7 +874,7 @@ static void ascii_putf_(int x, int y, color fg, color bg, std::wstring const fmt
 
 static void ascii_putf_(int x, int y, color fg, color bg, const wchar_t *fmt, va_list args) {
   TRACE_AND_INDENT();
-  wchar_t buf[MAXLONGSTR];
+  wchar_t buf[ MAXLONGSTR ];
 
   auto wrote = vswprintf(buf, MAXLONGSTR, fmt, args);
 
@@ -882,7 +882,7 @@ static void ascii_putf_(int x, int y, color fg, color bg, const wchar_t *fmt, va
   // Only a single nul is written, but as we read 2 at a time...
   //
   if (wrote && (wrote < MAXLONGSTR - 1)) {
-    buf[wrote + 1] = '\0';
+    buf[ wrote + 1 ] = '\0';
   }
 
   auto b = std::wstring(buf);
@@ -1289,7 +1289,7 @@ void ascii_clear_display(void) {
   TRACE_AND_INDENT();
   for (auto y = 0; y < TERM_HEIGHT; y++) {
     for (auto x = 0; x < TERM_WIDTH; x++) {
-      cells[x][y] = {};
+      cells[ x ][ y ] = {};
     }
   }
 }

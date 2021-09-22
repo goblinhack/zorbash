@@ -63,8 +63,8 @@ void Thing::kill(Thingp killer, const char *reason) {
     if (! std::empty(on_death)) {
       auto t = split_tokens(on_death, '.');
       if (t.size() == 2) {
-        auto        mod   = t[0];
-        auto        fn    = t[1];
+        auto        mod   = t[ 0 ];
+        auto        fn    = t[ 1 ];
         std::size_t found = fn.find("()");
         if (found != std::string::npos) {
           fn = fn.replace(found, 2, "");

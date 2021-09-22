@@ -32,8 +32,8 @@ HiScores::~HiScores(void) { TRACE_AND_INDENT(); }
 
 void HiScores::add_new_hiscore(Thingp player, const std::string &name, const std::string &killed_by) {
   TRACE_AND_INDENT();
-  std::vector<HiScore>::iterator h = hiscores.begin();
-  std::string                    hiscore_name;
+  std::vector< HiScore >::iterator h = hiscores.begin();
+  std::string                      hiscore_name;
 
   if (game->robot_mode) {
     hiscore_name = std::string("Robot ") + name;
@@ -58,7 +58,7 @@ void HiScores::add_new_hiscore(Thingp player, const std::string &name, const std
 
 bool HiScores::is_new_hiscore(Thingp player) {
   TRACE_AND_INDENT();
-  std::vector<HiScore>::iterator h = hiscores.begin();
+  std::vector< HiScore >::iterator h = hiscores.begin();
 
   if (! player->get_score()) {
     //
@@ -78,7 +78,7 @@ bool HiScores::is_new_hiscore(Thingp player) {
 }
 
 bool HiScores::is_new_highest_hiscore(Thingp player) {
-  std::vector<HiScore>::iterator h = hiscores.begin();
+  std::vector< HiScore >::iterator h = hiscores.begin();
 
   if (! player->get_score()) {
     //
@@ -97,7 +97,7 @@ bool HiScores::is_new_highest_hiscore(Thingp player) {
 }
 
 const char *HiScores::place_str(Thingp player) {
-  const char *which[HiScore::max_displayed] = {
+  const char *which[ HiScore::max_displayed ] = {
       "first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "nineth", "tenth",
       "11th",  "12th",   "13th",  "14th",   "15th",  "16th",  "17th",    "18th",   "19th",   "20th",
   };
@@ -109,18 +109,18 @@ const char *HiScores::place_str(Thingp player) {
     return ("");
   }
 
-  std::vector<HiScore>::iterator h = hiscores.begin();
+  std::vector< HiScore >::iterator h = hiscores.begin();
 
   while (h != hiscores.end()) {
     if (player->get_score() > h->score) {
-      return (which[h - hiscores.begin()]);
+      return (which[ h - hiscores.begin() ]);
     }
     h++;
   }
   return ("");
 }
 
-std::istream &operator>>(std::istream &in, Bits<HiScore &> my) {
+std::istream &operator>>(std::istream &in, Bits< HiScore & > my) {
   TRACE_AND_INDENT();
   in >> bits(my.t.name);
   in >> bits(my.t.when);
@@ -133,7 +133,7 @@ std::istream &operator>>(std::istream &in, Bits<HiScore &> my) {
   return in;
 }
 
-std::ostream &operator<<(std::ostream &out, Bits<const HiScore &> const my) {
+std::ostream &operator<<(std::ostream &out, Bits< const HiScore & > const my) {
   TRACE_AND_INDENT();
   out << bits(my.t.name);
   out << bits(my.t.when);
@@ -145,7 +145,7 @@ std::ostream &operator<<(std::ostream &out, Bits<const HiScore &> const my) {
   return (out);
 }
 
-std::ostream &operator<<(std::ostream &out, Bits<HiScore &> const my) {
+std::ostream &operator<<(std::ostream &out, Bits< HiScore & > const my) {
   TRACE_AND_INDENT();
   out << bits(my.t.name);
   out << bits(my.t.when);
@@ -157,7 +157,7 @@ std::ostream &operator<<(std::ostream &out, Bits<HiScore &> const my) {
   return (out);
 }
 
-std::istream &operator>>(std::istream &in, Bits<HiScores &> my) {
+std::istream &operator>>(std::istream &in, Bits< HiScores & > my) {
   TRACE_AND_INDENT();
   my.t.hiscores.resize(0);
   in >> bits(my.t.hiscores);
@@ -168,7 +168,7 @@ std::istream &operator>>(std::istream &in, Bits<HiScores &> my) {
   return in;
 }
 
-std::ostream &operator<<(std::ostream &out, Bits<const HiScores &> const my) {
+std::ostream &operator<<(std::ostream &out, Bits< const HiScores & > const my) {
   TRACE_AND_INDENT();
   out << bits(my.t.hiscores);
   return (out);

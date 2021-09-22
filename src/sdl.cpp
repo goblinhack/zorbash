@@ -46,7 +46,7 @@ int sdl_joy2_left;
 int sdl_joy2_down;
 int sdl_joy2_up;
 
-std::array<uint8_t, SDL_MAX_BUTTONS> sdl_joy_buttons;
+std::array< uint8_t, SDL_MAX_BUTTONS > sdl_joy_buttons;
 
 static SDL_Joystick *joy;
 static SDL_Haptic *  haptic;
@@ -562,12 +562,12 @@ static void sdl_event(SDL_Event *event) {
           sdl_joy_axes = (int *) myzalloc(sizeof(int) * joy_naxes, "joy axes");
         }
 
-        sdl_joy_axes[axis] = value;
+        sdl_joy_axes[ axis ] = value;
 
         sdl_left_fire  = false;
         sdl_right_fire = false;
 
-        if (sdl_joy_axes[2] > sdl_joy_deadzone) {
+        if (sdl_joy_axes[ 2 ] > sdl_joy_deadzone) {
           DBG("SDL: left fire");
           sdl_left_fire = true;
           set(sdl_joy_buttons, SDL_JOY_BUTTON_LEFT_FIRE, (uint8_t) 1);
@@ -575,7 +575,7 @@ static void sdl_event(SDL_Event *event) {
           set(sdl_joy_buttons, SDL_JOY_BUTTON_LEFT_FIRE, (uint8_t) 0);
         }
 
-        if (sdl_joy_axes[5] > sdl_joy_deadzone) {
+        if (sdl_joy_axes[ 5 ] > sdl_joy_deadzone) {
           DBG("SDL: right fire");
           sdl_right_fire = true;
           set(sdl_joy_buttons, SDL_JOY_BUTTON_RIGHT_FIRE, (uint8_t) 1);
@@ -771,7 +771,7 @@ static void sdl_tick(void) {
   //
   // Right stick
   //
-  if (sdl_joy_axes[3] > sdl_joy_deadzone) {
+  if (sdl_joy_axes[ 3 ] > sdl_joy_deadzone) {
     DBG("SDL: right stick, right");
     sdl_joy1_right = true;
 
@@ -780,7 +780,7 @@ static void sdl_tick(void) {
     decr(sdl_joy_buttons, SDL_JOY_BUTTON_RIGHT);
   }
 
-  if (sdl_joy_axes[3] < -sdl_joy_deadzone) {
+  if (sdl_joy_axes[ 3 ] < -sdl_joy_deadzone) {
     DBG("SDL: right stick, left");
     sdl_joy1_left = true;
 
@@ -789,7 +789,7 @@ static void sdl_tick(void) {
     decr(sdl_joy_buttons, SDL_JOY_BUTTON_LEFT);
   }
 
-  if (sdl_joy_axes[4] > sdl_joy_deadzone) {
+  if (sdl_joy_axes[ 4 ] > sdl_joy_deadzone) {
     DBG("SDL: right stick, down");
     sdl_joy1_down = true;
 
@@ -798,7 +798,7 @@ static void sdl_tick(void) {
     decr(sdl_joy_buttons, SDL_JOY_BUTTON_DOWN);
   }
 
-  if (sdl_joy_axes[4] < -sdl_joy_deadzone) {
+  if (sdl_joy_axes[ 4 ] < -sdl_joy_deadzone) {
     DBG("SDL: right stick, up");
     sdl_joy1_up = true;
 
@@ -813,25 +813,25 @@ static void sdl_tick(void) {
   int mx = 0;
   int my = 0;
 
-  if (sdl_joy_axes[0] > sdl_joy_deadzone) {
+  if (sdl_joy_axes[ 0 ] > sdl_joy_deadzone) {
     DBG("SDL: left stick, right");
     sdl_joy2_right = true;
     mx             = 1;
   }
 
-  if (sdl_joy_axes[0] < -sdl_joy_deadzone) {
+  if (sdl_joy_axes[ 0 ] < -sdl_joy_deadzone) {
     DBG("SDL: left stick, left");
     sdl_joy2_left = true;
     mx            = -1;
   }
 
-  if (sdl_joy_axes[1] > sdl_joy_deadzone) {
+  if (sdl_joy_axes[ 1 ] > sdl_joy_deadzone) {
     DBG("SDL: left stick, down");
     sdl_joy2_down = true;
     my            = 1;
   }
 
-  if (sdl_joy_axes[1] < -sdl_joy_deadzone) {
+  if (sdl_joy_axes[ 1 ] < -sdl_joy_deadzone) {
     DBG("SDL: left stick, up");
     sdl_joy2_up = true;
     my          = -1;
@@ -898,7 +898,7 @@ void sdl_exit(void) {
 //
 uint8_t config_fps_counter_set(tokens_t *tokens, void *context) {
   TRACE_AND_INDENT();
-  char *s = tokens->args[2];
+  char *s = tokens->args[ 2 ];
 
   if (! s || (*s == '\0')) {
     game->config.fps_counter = true;
@@ -934,7 +934,7 @@ void config_gfx_inverted_toggle(void) {
 //
 uint8_t config_gfx_inverted_set(tokens_t *tokens, void *context) {
   TRACE_AND_INDENT();
-  char *s = tokens->args[3];
+  char *s = tokens->args[ 3 ];
 
   if (! s || (*s == '\0')) {
     game->config.gfx_inverted = true;
@@ -971,7 +971,7 @@ void config_gfx_minimap_toggle(void) {
 //
 uint8_t config_gfx_minimap_set(tokens_t *tokens, void *context) {
   TRACE_AND_INDENT();
-  char *s = tokens->args[3];
+  char *s = tokens->args[ 3 ];
 
   if (! s || (*s == '\0')) {
     game->config.gfx_minimap = true;
@@ -1017,7 +1017,7 @@ void config_game_pix_zoom_out(void) {
 //
 uint8_t config_game_pix_zoom_set(tokens_t *tokens, void *context) {
   TRACE_AND_INDENT();
-  char *s = tokens->args[3];
+  char *s = tokens->args[ 3 ];
 
   if (! s || (*s == '\0')) {
     game->config.game_pix_zoom = GAME_DEFAULT_PIX_ZOOM;
@@ -1044,7 +1044,7 @@ uint8_t config_gfx_vsync_enable(tokens_t *tokens, void *context) {
     return true;
   }
 
-  char *s = tokens->args[2];
+  char *s = tokens->args[ 2 ];
 
   if (! s || (*s == '\0')) {
     game->config.gfx_vsync_enable = true;
@@ -1117,7 +1117,7 @@ uint8_t sdl_user_exit(tokens_t *tokens, void *context) {
 //
 void sdl_loop(void) {
   TRACE_AND_INDENT();
-  SDL_Event events[10];
+  SDL_Event events[ 10 ];
   int       found;
   int       i;
   int       frames = 0;
@@ -1281,7 +1281,7 @@ void sdl_loop(void) {
       found = SDL_PeepEvents(events, ARRAY_SIZE(events), SDL_GETEVENT, SDL_QUIT, SDL_LASTEVENT);
 
       for (i = 0; i < found; ++i) {
-        sdl_event(&events[i]);
+        sdl_event(&events[ i ]);
       }
 
       //

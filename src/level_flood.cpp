@@ -19,11 +19,11 @@
 #include "my_array_bounds_check.h"
 #include "my_ptrcheck.h"
 
-std::deque<point> Level::flood_fill(point p) const {
-  std::array<std::array<bool, MAP_WIDTH>, MAP_HEIGHT> walked = {};
-  std::array<std::array<bool, MAP_WIDTH>, MAP_HEIGHT> pushed = {};
-  std::deque<point>                                   in;
-  std::deque<point>                                   out;
+std::deque< point > Level::flood_fill(point p) const {
+  std::array< std::array< bool, MAP_WIDTH >, MAP_HEIGHT > walked = {};
+  std::array< std::array< bool, MAP_WIDTH >, MAP_HEIGHT > pushed = {};
+  std::deque< point >                                     in;
+  std::deque< point >                                     out;
 
   in.push_back(p);
   set(pushed, p.x, p.y, true);
@@ -75,11 +75,11 @@ std::deque<point> Level::flood_fill(point p) const {
   return out;
 }
 
-std::deque<point> Level::flood_fill_points(point p, std::function<int(Thingp)> filter) {
-  std::array<std::array<bool, MAP_WIDTH>, MAP_HEIGHT> walked = {};
-  std::array<std::array<bool, MAP_WIDTH>, MAP_HEIGHT> pushed = {};
-  std::deque<point>                                   in;
-  std::deque<point>                                   out;
+std::deque< point > Level::flood_fill_points(point p, std::function< int(Thingp) > filter) {
+  std::array< std::array< bool, MAP_WIDTH >, MAP_HEIGHT > walked = {};
+  std::array< std::array< bool, MAP_WIDTH >, MAP_HEIGHT > pushed = {};
+  std::deque< point >                                     in;
+  std::deque< point >                                     out;
 
   in.push_back(p);
   set(pushed, p.x, p.y, true);
@@ -144,11 +144,11 @@ std::deque<point> Level::flood_fill_points(point p, std::function<int(Thingp)> f
   return out;
 }
 
-std::deque<Thingp> Level::flood_fill_things(point p, std::function<int(Thingp)> filter) {
-  std::array<std::array<bool, MAP_WIDTH>, MAP_HEIGHT> walked = {};
-  std::array<std::array<bool, MAP_WIDTH>, MAP_HEIGHT> pushed = {};
-  std::deque<point>                                   in;
-  std::deque<Thingp>                                  out;
+std::deque< Thingp > Level::flood_fill_things(point p, std::function< int(Thingp) > filter) {
+  std::array< std::array< bool, MAP_WIDTH >, MAP_HEIGHT > walked = {};
+  std::array< std::array< bool, MAP_WIDTH >, MAP_HEIGHT > pushed = {};
+  std::deque< point >                                     in;
+  std::deque< Thingp >                                    out;
 
   in.push_back(p);
   set(pushed, p.x, p.y, true);

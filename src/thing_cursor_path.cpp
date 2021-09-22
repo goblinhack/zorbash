@@ -28,7 +28,7 @@ bool Thing::cursor_path_pop_next_and_move(void) {
       log("Move path: %s", s.c_str());
     }
 
-    auto to         = monstp->move_path[0];
+    auto to         = monstp->move_path[ 0 ];
     auto future_pos = point(to.x, to.y);
 
     FOR_ALL_CURSOR_PATH_THINGS(level, t, to.x, to.y) { t->dead("by end of life"); }
@@ -56,7 +56,7 @@ bool Thing::cursor_path_pop_next_and_move(void) {
         CON("Robot: Next position %d,%d is a hazard", (int) future_pos.x, (int) future_pos.y);
         TRACE_AND_INDENT();
         if (monstp->move_path.size()) {
-          auto jump_pos = monstp->move_path[0];
+          auto jump_pos = monstp->move_path[ 0 ];
           monstp->move_path.erase(monstp->move_path.begin());
 
           //
@@ -66,7 +66,7 @@ bool Thing::cursor_path_pop_next_and_move(void) {
           CON("Robot: Next-next position %d,%d is also a hazard", (int) jump_pos.x, (int) jump_pos.y);
           TRACE_AND_INDENT();
           if (will_avoid_hazard(jump_pos) && monstp->move_path.size()) {
-            auto jump_pos = monstp->move_path[0];
+            auto jump_pos = monstp->move_path[ 0 ];
             monstp->move_path.erase(monstp->move_path.begin());
 
             if (will_avoid_hazard(jump_pos)) {

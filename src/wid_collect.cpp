@@ -21,8 +21,8 @@
 #include "my_wid_topcon.h"
 #include "my_wid_actionbar.h"
 
-WidPopup *                 wid_collect;
-static std::vector<Thingp> collect_items;
+WidPopup *                   wid_collect;
+static std::vector< Thingp > collect_items;
 
 void wid_collect_destroy(void) {
   TRACE_AND_INDENT();
@@ -50,7 +50,7 @@ static void wid_collect_slot(int slot) {
     return;
   }
 
-  auto t = collect_items[slot];
+  auto t = collect_items[ slot ];
   if (t) {
     auto carrying_copy = t->monstp->carrying;
 
@@ -68,8 +68,8 @@ static void wid_collect_slot(int slot) {
       for (const auto &item : carrying_copy) {
         auto o = level->thing_find(item.id);
         for (auto slot = 0; slot < (int) collect_items.size(); slot++) {
-          if (collect_items[slot] == o) {
-            collect_items[slot] = nullptr;
+          if (collect_items[ slot ] == o) {
+            collect_items[ slot ] = nullptr;
           }
         }
       }
@@ -79,7 +79,7 @@ static void wid_collect_slot(int slot) {
   //
   // Null out this item so the key numbers do not change
   //
-  collect_items[slot] = nullptr;
+  collect_items[ slot ] = nullptr;
   wid_collect_destroy();
 
   //
@@ -102,7 +102,7 @@ static void wid_collect_slot(int slot) {
   }
 
   if (remaining_items) {
-    std::list<Thingp> empty_collect_items;
+    std::list< Thingp > empty_collect_items;
     game->wid_collect_create(empty_collect_items);
     return;
   }
@@ -245,14 +245,14 @@ static void wid_collect_mouse_over_b(Widp w, int32_t relx, int32_t rely, int32_t
     return;
   }
 
-  auto t = collect_items[slot];
+  auto t = collect_items[ slot ];
   if (t) {
     wid_thing_info_fini();
     game->wid_thing_info_create(t);
   }
 }
 
-void Game::wid_collect_create(const std::list<Thingp> items /* intentional copy */) {
+void Game::wid_collect_create(const std::list< Thingp > items /* intentional copy */) {
   TRACE_AND_INDENT();
   BOTCON("You lucky thing. Choose an item to collect.");
 
@@ -282,7 +282,7 @@ void Game::wid_collect_create(const std::list<Thingp> items /* intentional copy 
     }
 
     collect_items.clear();
-    std::map<Thingp, bool> found;
+    std::map< Thingp, bool > found;
     for (auto t : items) {
       if (! t) {
         collect_items.push_back(t);
@@ -295,7 +295,7 @@ void Game::wid_collect_create(const std::list<Thingp> items /* intentional copy 
       if (! t->is_collectable()) {
         continue;
       }
-      found[t] = true;
+      found[ t ] = true;
       collect_items.push_back(t);
 
       if (t->monstp) {
@@ -308,7 +308,7 @@ void Game::wid_collect_create(const std::list<Thingp> items /* intentional copy 
             if (! t->is_collectable()) {
               continue;
             }
-            found[t] = true;
+            found[ t ] = true;
             collect_items.push_back(t);
           }
         }
@@ -350,7 +350,7 @@ void Game::wid_collect_create(const std::list<Thingp> items /* intentional copy 
     wid_set_pos(w, tl, br);
     wid_set_shape_none(w);
 
-    auto t = collect_items[slot];
+    auto t = collect_items[ slot ];
 
     {
       auto wid_icon = wid_new_square_button(w, "item icon");

@@ -16,9 +16,9 @@
 #include "my_ptrcheck.h"
 
 Thingp Thing::most_dangerous_adjacent_thing_get(void) {
-  std::vector<std::pair<Thingp, int>> possible;
+  std::vector< std::pair< Thingp, int > > possible;
 
-  static const std::vector<point> all_deltas = {
+  static const std::vector< point > all_deltas = {
       point(-1, -1), point(1, -1), point(-1, 1), point(1, 1), point(0, -1),
       point(-1, 0),  point(1, 0),  point(0, 1),  point(0, 0), // For spiderwebs
   };
@@ -64,14 +64,15 @@ Thingp Thing::most_dangerous_adjacent_thing_get(void) {
     return nullptr;
   }
 
-  sort(possible.begin(), possible.end(),
-       [](const std::pair<Thingp, int> &a, const std::pair<Thingp, int> &b) -> bool { return a.second > b.second; });
+  sort(
+      possible.begin(), possible.end(),
+      [](const std::pair< Thingp, int > &a, const std::pair< Thingp, int > &b) -> bool { return a.second > b.second; });
 
-  return possible[0].first;
+  return possible[ 0 ].first;
 }
 
 Thingp Thing::most_dangerous_visible_thing_get(void) {
-  std::vector<std::pair<Thingp, int>> possible;
+  std::vector< std::pair< Thingp, int > > possible;
 
   int d = ai_avoid_distance();
 
@@ -114,8 +115,9 @@ Thingp Thing::most_dangerous_visible_thing_get(void) {
     return nullptr;
   }
 
-  sort(possible.begin(), possible.end(),
-       [](const std::pair<Thingp, int> &a, const std::pair<Thingp, int> &b) -> bool { return a.second > b.second; });
+  sort(
+      possible.begin(), possible.end(),
+      [](const std::pair< Thingp, int > &a, const std::pair< Thingp, int > &b) -> bool { return a.second > b.second; });
 
-  return possible[0].first;
+  return possible[ 0 ].first;
 }

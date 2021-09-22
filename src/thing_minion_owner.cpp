@@ -114,7 +114,7 @@ void Thing::kill_minions(Thingp killer) {
   // Slow, but not used too often
   //
   FOR_ALL_THING_GROUPS(group) {
-    for (auto p : level->all_things[group]) {
+    for (auto p : level->all_things[ group ]) {
       auto minion = p.second;
       auto o      = minion->get_immediate_minion_owner();
       if (o && (o == this)) {
@@ -143,7 +143,7 @@ void Thing::unleash_minions(void) {
   // Slow, but not used too often
   //
   FOR_ALL_THING_GROUPS(group) {
-    for (auto p : level->all_things[group]) {
+    for (auto p : level->all_things[ group ]) {
       auto minion = p.second;
       auto o      = minion->get_immediate_minion_owner();
       if (o && (o == this)) {

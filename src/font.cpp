@@ -14,7 +14,7 @@
 Fontp font_small;
 Fontp font_large;
 
-static std::map<std::string, Fontp> fonts;
+static std::map< std::string, Fontp > fonts;
 
 void font_fini(void) { TRACE_AND_INDENT(); }
 
@@ -109,7 +109,7 @@ Tilep Font::unicode_to_tile(int u) {
     return (tile);
   }
 
-  char tile_name[10];
+  char tile_name[ 10 ];
   snprintf(tile_name, sizeof(tile_name), "%d.%d", tile_index, index);
 
   tile = tile_find(tile_name);

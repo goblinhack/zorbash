@@ -15,7 +15,7 @@
 #include "my_file.h"
 #include "my_array_bounds_check.h"
 
-std::map<std::string, class sound *> all_sound;
+std::map< std::string, class sound * > all_sound;
 
 bool sound_init_done;
 

@@ -16,7 +16,7 @@
 #include "my_thing_ai.h"
 #include "my_array_bounds_check.h"
 
-std::array<std::array<char, MAP_HEIGHT>, MAP_WIDTH> astar_debug {};
+std::array< std::array< char, MAP_HEIGHT >, MAP_WIDTH > astar_debug {};
 
 class Nodecost {
 public:
@@ -50,21 +50,21 @@ public:
   point       at;
 };
 
-typedef std::map<Nodecost, Node *> Nodemap;
+typedef std::map< Nodecost, Node * > Nodemap;
 
 class Astar {
 public:
   Astar(point s, point g, const Dmap *d) : start(s), goal(g), dmap(d) {}
 
-  static const int                              width  = MAP_WIDTH;
-  static const int                              height = MAP_HEIGHT;
-  std::array<std::array<Node *, height>, width> open   = {};
-  std::array<std::array<Node *, height>, width> closed = {};
-  Nodemap                                       open_nodes;
-  Nodemap                                       closed_nodes;
-  point                                         start;
-  point                                         goal;
-  const Dmap *                                  dmap {};
+  static const int                                  width  = MAP_WIDTH;
+  static const int                                  height = MAP_HEIGHT;
+  std::array< std::array< Node *, height >, width > open   = {};
+  std::array< std::array< Node *, height >, width > closed = {};
+  Nodemap                                           open_nodes;
+  Nodemap                                           closed_nodes;
+  point                                             start;
+  point                                             goal;
+  const Dmap *                                      dmap {};
 
   void add_to_open(Node *n) {
     auto p = n->at;
@@ -127,7 +127,7 @@ public:
     }
 
     // If in the closed set already, ignore.
-    if (closed[next_hop.x][next_hop.y]) {
+    if (closed[ next_hop.x ][ next_hop.y ]) {
       return;
     }
 
@@ -157,19 +157,19 @@ public:
   void cleanup(void) {
     for (auto y = 0; y < height; y++) {
       for (auto x = 0; x < width; x++) {
-        if (open[x][y]) {
-          delete (open[x][y]);
+        if (open[ x ][ y ]) {
+          delete (open[ x ][ y ]);
         }
-        if (closed[x][y]) {
-          delete (closed[x][y]);
+        if (closed[ x ][ y ]) {
+          delete (closed[ x ][ y ]);
         }
       }
     }
   }
 
-  std::tuple<std::vector<point>, int> create_path(const Dmap *dmap, const Node *came_from) {
-    std::vector<point> l;
-    int                cost = came_from->cost.cost;
+  std::tuple< std::vector< point >, int > create_path(const Dmap *dmap, const Node *came_from) {
+    std::vector< point > l;
+    int                  cost = came_from->cost.cost;
 
     while (came_from) {
       if (came_from->came_from) {
@@ -187,7 +187,7 @@ public:
     auto neighbor             = new Node(start, ncost);
     add_to_open(neighbor);
     Path best;
-    best.cost = std::numeric_limits<int>::max();
+    best.cost = std::numeric_limits< int >::max();
 
     while (! open_nodes.empty()) {
       auto  c       = open_nodes.begin();
@@ -195,7 +195,7 @@ public:
 
       set(astar_debug, current->at.x, current->at.y, (char) ('?'));
       if (current->at == goal) {
-        auto [path, cost] = create_path(dmap, current);
+        auto [ path, cost ] = create_path(dmap, current);
 
         if (cost < best.cost) {
           if (goalp) {
@@ -278,7 +278,7 @@ void astar_dump(const Dmap *dmap, const point &at, const point &start, const poi
 
 #ifdef ENABLE_DEBUG_AI_ASTAR
       if (get(astar_debug, x, y)) {
-        buf[2] = get(astar_debug, x, y);
+        buf[ 2 ] = get(astar_debug, x, y);
       }
 #endif
       s += buf;

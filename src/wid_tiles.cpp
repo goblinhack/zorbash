@@ -12,8 +12,8 @@
 #include "my_array_bounds_check.h"
 #include "my_ptrcheck.h"
 
-static int                                                    wid_tiles_init_done;
-static std::map<std::string, std::shared_ptr<class WidTiles>> wid_tiles_all;
+static int                                                        wid_tiles_init_done;
+static std::map< std::string, std::shared_ptr< class WidTiles > > wid_tiles_all;
 
 uint8_t wid_tiles_init(void) {
   TRACE_AND_INDENT();
@@ -51,7 +51,7 @@ wid_tilesp wid_tiles_load(std::string name, double scale) {
     return (0);
   }
 
-  t = std::make_shared<class WidTiles>();
+  t = std::make_shared< class WidTiles >();
 
   auto result = wid_tiles_all.insert(std::make_pair(name, t));
 
@@ -59,7 +59,7 @@ wid_tilesp wid_tiles_load(std::string name, double scale) {
     DIE("Wid_tiles insert name [%s] failed", name.c_str());
   }
 
-  char tmp[32];
+  char tmp[ 32 ];
 
   snprintf(tmp, sizeof(tmp) - 1, "%s_tl", name.c_str());
   Tilep tile = tile_find(tmp);

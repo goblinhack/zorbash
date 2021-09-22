@@ -191,13 +191,13 @@ Dice::Dice(std::string s) {
         //
         // <module>.<func>()
         //
-        python_mod  = sp[0];
-        python_func = sp[1];
+        python_mod  = sp[ 0 ];
+        python_func = sp[ 1 ];
       } else {
         //
         // <func>()
         //
-        python_func = sp[0];
+        python_func = sp[ 0 ];
       }
     } else {
       //
@@ -206,10 +206,10 @@ Dice::Dice(std::string s) {
       for (auto x : split_tokens(d, '+')) {
         auto sp = split_tokens(x, 'd');
         if (sp.size() == 2) {
-          ndice = std::stoi(sp[0]);
-          sides = std::stoi(sp[1]);
+          ndice = std::stoi(sp[ 0 ]);
+          sides = std::stoi(sp[ 1 ]);
         } else {
-          stat += std::stoi(sp[0]);
+          stat += std::stoi(sp[ 0 ]);
         }
         // CON("new dice %dd%d+%d", ndice, sides, stat);
       }

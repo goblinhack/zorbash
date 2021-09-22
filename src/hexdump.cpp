@@ -25,9 +25,9 @@
 // 00000070  32 33 34 35 61 62 63 64  65 66 67 68 69 6A 6B 6C |2345abcdefghi
 //
 void hexdump(const unsigned char *addr, size_t len) {
-  int            skipping_blanks       = false;
-  unsigned char  empty[HEX_DUMP_WIDTH] = {0};
-  unsigned char  buf[HEX_DUMP_WIDTH + 1];
+  int            skipping_blanks         = false;
+  unsigned char  empty[ HEX_DUMP_WIDTH ] = {0};
+  unsigned char  buf[ HEX_DUMP_WIDTH + 1 ];
   unsigned char *pc = (__typeof__(pc)) addr;
   size_t         i;
   unsigned int   x;
@@ -52,7 +52,7 @@ void hexdump(const unsigned char *addr, size_t len) {
       if (! memcmp(pc + i, empty, sizeof(empty))) {
         i += HEX_DUMP_WIDTH - 1;
         skipping_blanks = true;
-        buf[0]          = '\0';
+        buf[ 0 ]        = '\0';
         continue;
       }
 
@@ -67,18 +67,18 @@ void hexdump(const unsigned char *addr, size_t len) {
 
     skipping_blanks = false;
 
-    std::cout << " " << std::setfill('0') << std::setw(2) << std::hex << (int) pc[i];
+    std::cout << " " << std::setfill('0') << std::setw(2) << std::hex << (int) pc[ i ];
 
-    if ((pc[i] < ' ') || (pc[i] > '~')) {
-      buf[i % HEX_DUMP_WIDTH] = '.';
+    if ((pc[ i ] < ' ') || (pc[ i ] > '~')) {
+      buf[ i % HEX_DUMP_WIDTH ] = '.';
     } else {
-      buf[i % HEX_DUMP_WIDTH] = pc[i];
+      buf[ i % HEX_DUMP_WIDTH ] = pc[ i ];
     }
 
-    buf[(i % HEX_DUMP_WIDTH) + 1] = '\0';
+    buf[ (i % HEX_DUMP_WIDTH) + 1 ] = '\0';
   }
 
-  if (! buf[0]) {
+  if (! buf[ 0 ]) {
     if (skipping_blanks) {
       std::cout << "  *\n";
     }
@@ -98,4 +98,4 @@ void hexdump(const unsigned char *addr, size_t len) {
   std::cout << " |" << std::setw(-HEX_DUMP_WIDTH) << buf << "|" << std::endl;
 }
 
-void hexdump(std::vector<unsigned char> &v) { hexdump(v.data(), v.size()); }
+void hexdump(std::vector< unsigned char > &v) { hexdump(v.data(), v.size()); }

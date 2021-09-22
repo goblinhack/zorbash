@@ -26,7 +26,7 @@ bool Thing::steal_treasure_from(Thingp it) {
     dbg("No, nothing to steal");
     return false;
   }
-  auto chosen = cands[pcg_random_range(0, cands.size())];
+  auto chosen = cands[ pcg_random_range(0, cands.size()) ];
 
   dbg("Steal treasure %s", chosen->to_string().c_str());
   if (! it->drop(chosen, this, true /* stolen */)) {
@@ -60,7 +60,7 @@ bool Thing::steal_item_from(Thingp it) {
     return false;
   }
 
-  auto chosen = cands[pcg_random_range(0, cands.size())];
+  auto chosen = cands[ pcg_random_range(0, cands.size()) ];
 
   dbg("Yes, steal: %s", chosen->to_string().c_str());
 

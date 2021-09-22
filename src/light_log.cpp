@@ -17,10 +17,10 @@
 
 void Light::log_(const char *fmt, va_list args) {
   verify(this);
-  char buf[MAXLONGSTR];
+  char buf[ MAXLONGSTR ];
   int  len;
 
-  buf[0] = '\0';
+  buf[ 0 ] = '\0';
   get_timestamp(buf, MAXLONGSTR);
   len = (int) strlen(buf);
   snprintf(buf + len, MAXLONGSTR - len, "light: ");
@@ -43,10 +43,10 @@ void Light::log(const char *fmt, ...) {
 
 void Light::die_(const char *fmt, va_list args) {
   verify(this);
-  char buf[MAXLONGSTR];
+  char buf[ MAXLONGSTR ];
   int  len;
 
-  buf[0] = '\0';
+  buf[ 0 ] = '\0';
   get_timestamp(buf, MAXLONGSTR);
   len = (int) strlen(buf);
   snprintf(buf + len, MAXLONGSTR - len, "light: ");
@@ -71,10 +71,10 @@ void Light::die(const char *fmt, ...) {
 
 void Light::con_(const char *fmt, va_list args) {
   verify(this);
-  char buf[MAXLONGSTR];
+  char buf[ MAXLONGSTR ];
   int  len;
 
-  buf[0] = '\0';
+  buf[ 0 ] = '\0';
   get_timestamp(buf, MAXLONGSTR);
   len = (int) strlen(buf);
   snprintf(buf + len, MAXLONGSTR - len, "light: ");
@@ -101,10 +101,10 @@ void Light::con(const char *fmt, ...) {
 
 void Light::err_(const char *fmt, va_list args) {
   verify(this);
-  char buf[MAXLONGSTR];
+  char buf[ MAXLONGSTR ];
   int  len;
 
-  buf[0] = '\0';
+  buf[ 0 ] = '\0';
   get_timestamp(buf, MAXLONGSTR);
   len = (int) strlen(buf);
   snprintf(buf + len, MAXLONGSTR - len, "ERROR: Light: ");

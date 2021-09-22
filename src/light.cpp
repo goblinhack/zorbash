@@ -42,12 +42,12 @@ void Light::draw_pixel(int16_t index, const point &p0, const point &p1) {
   RayPoint r;
   r.p        = p1;
   r.distance = DISTANCE(p0.x, p0.y, p1.x, p1.y);
-  points[index].push_back(r);
+  points[ index ].push_back(r);
 }
 
 // http://www.edepot.com/linee.html
 void Light::draw_line(int16_t index, const point &p0, const point &p1) {
-  points[index].resize(0);
+  points[ index ].resize(0);
 
   const point start = p0;
   auto        x     = p0.x;
@@ -264,8 +264,8 @@ bool Light::calculate(void) {
       for (int16_t i = 0; i < max_light_rays; i++) {
         auto          r             = &getref_no_check(ray, i);
         int16_t       step          = 0;
-        const int16_t end_of_points = static_cast<uint16_t>(points[i].size() - 1);
-        auto          rp            = points[i].begin();
+        const int16_t end_of_points = static_cast< uint16_t >(points[ i ].size() - 1);
+        auto          rp            = points[ i ].begin();
         last_x                      = -1;
         last_y                      = -1;
         for (;; step++) {
@@ -330,8 +330,8 @@ bool Light::calculate(void) {
       for (int16_t i = 0; i < max_light_rays; i++) {
         auto          r             = &getref_no_check(ray, i);
         int16_t       step          = 0;
-        const int16_t end_of_points = static_cast<uint16_t>(points[i].size() - 1);
-        auto          rp            = points[i].begin();
+        const int16_t end_of_points = static_cast< uint16_t >(points[ i ].size() - 1);
+        auto          rp            = points[ i ].begin();
         last_x                      = -1;
         last_y                      = -1;
         for (;; step++) {
@@ -385,8 +385,8 @@ bool Light::calculate(void) {
       for (int16_t i = 0; i < max_light_rays; i++) {
         auto          r             = &getref(ray, i);
         int16_t       step          = 0;
-        const int16_t end_of_points = static_cast<uint16_t>(points[i].size() - 1);
-        auto          rp            = points[i].begin();
+        const int16_t end_of_points = static_cast< uint16_t >(points[ i ].size() - 1);
+        auto          rp            = points[ i ].begin();
         last_x                      = -1;
         last_y                      = -1;
         for (;; step++) {
@@ -451,8 +451,8 @@ bool Light::calculate(void) {
       for (int16_t i = 0; i < max_light_rays; i++) {
         auto          r             = &getref(ray, i);
         int16_t       step          = 0;
-        const int16_t end_of_points = static_cast<uint16_t>(points[i].size() - 1);
-        auto          rp            = points[i].begin();
+        const int16_t end_of_points = static_cast< uint16_t >(points[ i ].size() - 1);
+        auto          rp            = points[ i ].begin();
         last_x                      = -1;
         last_y                      = -1;
         for (;; step++) {
@@ -572,7 +572,7 @@ void Light::render_triangle_fans(void) {
 
       for (i = 0; i < max_light_rays; i++) {
         auto    r   = &getref_no_check(ray, i);
-        point & p   = points[i][r->depth_furthest].p;
+        point & p   = points[ i ][ r->depth_furthest ].p;
         int16_t p1x = light_pos.x + p.x;
         int16_t p1y = light_pos.y + p.y;
         push_point(p1x, p1y);
@@ -584,7 +584,7 @@ void Light::render_triangle_fans(void) {
       i = 0;
       {
         auto    r   = &getref_no_check(ray, i);
-        point & p   = points[i][r->depth_furthest].p;
+        point & p   = points[ i ][ r->depth_furthest ].p;
         int16_t p1x = light_pos.x + p.x;
         int16_t p1y = light_pos.y + p.y;
         push_point(p1x, p1y);

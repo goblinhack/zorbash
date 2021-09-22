@@ -30,7 +30,7 @@ Widp wid_console_horiz_scroll {};
 Widp wid_console_input_line {};
 Widp wid_console_window {};
 
-static std::map<unsigned int, std::wstring> wid_console_lines;
+static std::map< unsigned int, std::wstring > wid_console_lines;
 
 void wid_console_fini(void) {
   TRACE_AND_INDENT();
@@ -263,10 +263,10 @@ static void wid_console_wid_create(void) {
   wid_update(wid_console_window);
 }
 
-std::vector<std::wstring> wid_console_serialize(void) {
+std::vector< std::wstring > wid_console_serialize(void) {
   TRACE_AND_INDENT();
-  std::vector<std::wstring> r;
-  auto                      tmp = wid_get_head(wid_console_input_line);
+  std::vector< std::wstring > r;
+  auto                        tmp = wid_get_head(wid_console_input_line);
   while (tmp) {
     auto s = wid_get_text(tmp);
     if (s.size()) {
@@ -278,7 +278,7 @@ std::vector<std::wstring> wid_console_serialize(void) {
   return (r);
 }
 
-void wid_console_deserialize(std::vector<std::wstring> r) {
+void wid_console_deserialize(std::vector< std::wstring > r) {
   TRACE_AND_INDENT();
   DBG3("Start of replaying old logs");
   DBG3("Vvvvvvvvvvvvvvvvvvvvvvvvvvv");

@@ -25,10 +25,10 @@ void Thing::dmap_modify_terrain_cost(point p, uint8_t *d) {
     pref++;
   }
 
-  std::vector<std::pair<Thingp, int>> possible;
+  std::vector< std::pair< Thingp, int > > possible;
 
   {
-    static const std::vector<point> all_deltas = {
+    static const std::vector< point > all_deltas = {
         point(-1, -1), point(1, -1), point(-1, 1), point(1, 1), point(0, 0),
         point(0, -1),  point(-1, 0), point(1, 0),  point(0, 1),
     };

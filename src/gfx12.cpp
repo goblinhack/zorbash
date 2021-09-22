@@ -9,7 +9,7 @@
 
 void gfx_init12(void) {
   {
-    std::initializer_list<std::string> tiles = {
+    std::initializer_list< std::string > tiles = {
         "ui12,0,0",  "ui12,1,0",  "ui12,2,0",   "ui12,3,0",   "ui12,4,0",   "ui12,5,0",   "ui12,6,0",   "ui12,7,0",
         "ui12,8,0",  "ui12,9,0",  "ui12,10,0",  "ui12,11,0",  "ui12,12,0",  "ui12,13,0",  "ui12,14,0",  "ui12,15,0",
         "ui12,0,1",  "ui12,1,1",  "ui12,2,1",   "ui12,3,1",   "ui12,4,1",   "ui12,5,1",   "ui12,6,1",   "ui12,7,1",
@@ -43,12 +43,12 @@ void gfx_init12(void) {
         "ui12,0,15", "ui12,1,15", "ui12,2,15",  "ui12,3,15",  "ui12,4,15",  "ui12,5,15",  "ui12,6,15",  "ui12,7,15",
         "ui12,8,15", "ui12,9,15", "ui12,10,15", "ui12,11,15", "ui12,12,15", "ui12,13,15", "ui12,14,15", "ui12,15,15",
     };
-    const std::vector<std::string> arr(tiles);
+    const std::vector< std::string > arr(tiles);
     tile_load_arr("data/gfx/ui_bag.tga", "ui_box12", 8, 8, arr);
   }
 
   {
-    std::initializer_list<std::string> tiles = {
+    std::initializer_list< std::string > tiles = {
         "ui13,0,0",  "ui13,1,0",  "ui13,2,0",   "ui13,3,0",   "ui13,4,0",   "ui13,5,0",   "ui13,6,0",   "ui13,7,0",
         "ui13,8,0",  "ui13,9,0",  "ui13,10,0",  "ui13,11,0",  "ui13,12,0",  "ui13,13,0",  "ui13,14,0",  "ui13,15,0",
         "ui13,0,1",  "ui13,1,1",  "ui13,2,1",   "ui13,3,1",   "ui13,4,1",   "ui13,5,1",   "ui13,6,1",   "ui13,7,1",
@@ -82,7 +82,7 @@ void gfx_init12(void) {
         "ui13,0,15", "ui13,1,15", "ui13,2,15",  "ui13,3,15",  "ui13,4,15",  "ui13,5,15",  "ui13,6,15",  "ui13,7,15",
         "ui13,8,15", "ui13,9,15", "ui13,10,15", "ui13,11,15", "ui13,12,15", "ui13,13,15", "ui13,14,15", "ui13,15,15",
     };
-    const std::vector<std::string> arr(tiles);
+    const std::vector< std::string > arr(tiles);
     tile_load_arr("data/gfx/ui_bag_highlighted.tga", "ui_box13", 8, 8, arr);
   }
 }

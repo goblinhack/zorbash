@@ -4875,7 +4875,7 @@ const std::string &Thing::weapon_carry_anim(void) const {
   return (tp()->weapon_carry_anim());
 }
 
-std::array<std::array<ThingId, MAX_BAG_WIDTH>, MAX_BAG_HEIGHT> *Thing::get_bag(void) {
+std::array< std::array< ThingId, MAX_BAG_WIDTH >, MAX_BAG_HEIGHT > *Thing::get_bag(void) {
   TRACE_AND_INDENT();
   if (monstp) {
     return (&monstp->bag);
@@ -4884,7 +4884,7 @@ std::array<std::array<ThingId, MAX_BAG_WIDTH>, MAX_BAG_HEIGHT> *Thing::get_bag(v
   }
 }
 
-const std::array<std::array<ThingId, MAX_BAG_WIDTH>, MAX_BAG_HEIGHT> *Thing::get_const_bag(void) const {
+const std::array< std::array< ThingId, MAX_BAG_WIDTH >, MAX_BAG_HEIGHT > *Thing::get_const_bag(void) const {
   TRACE_AND_INDENT();
   if (monstp) {
     return (&monstp->bag);

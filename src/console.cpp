@@ -20,7 +20,7 @@ static inline void term_puts_fg(unsigned char a) {
     ERR("Overflow");
   }
 
-  fputs(data[a], stdout);
+  fputs(data[ a ], stdout);
 }
 
 static void term_puts_fgbg(unsigned char fg, unsigned char bg) {
@@ -44,7 +44,7 @@ static void term_puts_fgbg(unsigned char fg, unsigned char bg) {
     return;
   }
 
-  fputs((char *) data[(bg & 7) * 8 + (fg & 7)], stdout);
+  fputs((char *) data[ (bg & 7) * 8 + (fg & 7) ], stdout);
 }
 
 static term_color term_color_string_to_index(const wchar_t **s) {

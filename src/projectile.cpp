@@ -117,7 +117,7 @@ void Level::display_projectiles(void) {
 
   blit_init();
   auto now = time_update_time_milli();
-  auto e   = std::remove_if(all_projectiles.begin(), all_projectiles.end(), [=, this](Projectile &p) {
+  auto e   = std::remove_if(all_projectiles.begin(), all_projectiles.end(), [ =, this ](Projectile &p) {
     float timestep = p.ts_stop - p.ts_start;
     float dt       = ((float) (now - p.ts_start)) / timestep;
 
@@ -186,7 +186,7 @@ bool Thing::projectile_anim_exists(void) {
 
 void Thing::delete_projectile(void) {
   TRACE_AND_INDENT();
-  auto e = std::remove_if(level->all_projectiles.begin(), level->all_projectiles.end(), [=, this](Projectile &p) {
+  auto e = std::remove_if(level->all_projectiles.begin(), level->all_projectiles.end(), [ =, this ](Projectile &p) {
     if (p.id == id) {
       log("Remove projectile");
       return true;

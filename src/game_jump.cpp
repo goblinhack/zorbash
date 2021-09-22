@@ -149,8 +149,8 @@ void Game::init_jump_paths() {
 
   jump_paths.clear();
 
-  std::string              tmp;
-  std::vector<std::string> cands;
+  std::string                tmp;
+  std::vector< std::string > cands;
 
   for (const auto &s : jump_data) {
     if (s.length() != JUMP_WIDTH * JUMP_WIDTH) {
@@ -160,12 +160,12 @@ void Game::init_jump_paths() {
     //
     // Read the jump data
     //
-    std::array<std::array<char, JUMP_WIDTH>, JUMP_WIDTH> tmp {};
+    std::array< std::array< char, JUMP_WIDTH >, JUMP_WIDTH > tmp {};
 
     int x = 0;
     int y = 0;
     for (int i = 0; i < JUMP_WIDTH * JUMP_WIDTH; i++) {
-      set(tmp, x, y, s[i]);
+      set(tmp, x, y, s[ i ]);
       if (++x >= JUMP_WIDTH) {
         x = 0;
         y++;
@@ -176,7 +176,7 @@ void Game::init_jump_paths() {
       //
       // Rotate
       //
-      std::array<std::array<char, JUMP_WIDTH>, JUMP_WIDTH> tmp2 {};
+      std::array< std::array< char, JUMP_WIDTH >, JUMP_WIDTH > tmp2 {};
       for (auto y = 0; y < JUMP_WIDTH; y++) {
         for (auto x = 0; x < JUMP_WIDTH; x++) {
           set(tmp2, JUMP_WIDTH - y - 1, x, get(tmp, x, y));
@@ -230,11 +230,11 @@ void Game::init_jump_paths() {
     // Copy the current jump path to an array we can walk to get
     // the jump offsets
     //
-    std::array<std::array<char, JUMP_WIDTH>, JUMP_WIDTH> tmp {};
-    int                                                  x = 0;
-    int                                                  y = 0;
+    std::array< std::array< char, JUMP_WIDTH >, JUMP_WIDTH > tmp {};
+    int                                                      x = 0;
+    int                                                      y = 0;
     for (int i = 0; i < JUMP_WIDTH * JUMP_WIDTH; i++) {
-      set(tmp, x, y, s[i]);
+      set(tmp, x, y, s[ i ]);
       if (++x >= JUMP_WIDTH) {
         x = 0;
         y++;
@@ -250,8 +250,8 @@ void Game::init_jump_paths() {
     //
     // Find each of the symbols in the path and build the jump path.
     //
-    Game::JumpPath    jp;
-    std::vector<char> cs = {'s', '1', '2', '3', 'e'};
+    Game::JumpPath      jp;
+    std::vector< char > cs = {'s', '1', '2', '3', 'e'};
 
     for (auto c : cs) {
       for (auto y = 0; y < JUMP_WIDTH; y++) {

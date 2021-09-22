@@ -142,15 +142,15 @@ static int32_t wid_lowest_priority  = -1;
 // History for all text widgets.
 //
 #define HISTORY_MAX 16
-std::array<std::wstring, HISTORY_MAX> history;
-uint32_t                              g_history_at;
-uint32_t                              g_history_walk;
+std::array< std::wstring, HISTORY_MAX > history;
+uint32_t                                g_history_at;
+uint32_t                                g_history_walk;
 
 //
 // A tile over the mouse pointer
 //
-Widp                                                          wid_mouse_template {};
-std::array<std::array<Widp, TERM_HEIGHT_MAX>, TERM_WIDTH_MAX> wid_on_screen_at {};
+Widp                                                              wid_mouse_template {};
+std::array< std::array< Widp, TERM_HEIGHT_MAX >, TERM_WIDTH_MAX > wid_on_screen_at {};
 
 static uint8_t wid_init_done;
 static uint8_t wid_exiting;
@@ -770,7 +770,8 @@ static uint8_t wid_m_over_b(Widp w, uint32_t x, uint32_t y, int32_t relx, int32_
   }
 
   if (! w->on_mouse_over_b && ! w->on_mouse_down) {
-    if (get(w->cfg, WID_MODE_OVER).color_set[WID_COLOR_BG] || get(w->cfg, WID_MODE_OVER).color_set[WID_COLOR_TEXT_FG]) {
+    if (get(w->cfg, WID_MODE_OVER).color_set[ WID_COLOR_BG ] ||
+        get(w->cfg, WID_MODE_OVER).color_set[ WID_COLOR_TEXT_FG ]) {
       //
       // Changes appearance on mouse over, so choose this wid even
       // if it has no over callback.
@@ -1441,22 +1442,22 @@ color wid_get_color(Widp w, wid_color which) {
   uint32_t mode = (__typeof__(mode)) wid_get_mode(w); // for c++, no enum walk
   wid_cfg *cfg  = &getref(w->cfg, mode);
 
-  if (cfg->color_set[which]) {
-    return (cfg->colors[which]);
+  if (cfg->color_set[ which ]) {
+    return (cfg->colors[ which ]);
   }
 
   if ((wid_focus == w) && (wid_over == w)) {
     mode = WID_MODE_OVER;
     cfg  = &getref(w->cfg, mode);
-    if (cfg->color_set[which]) {
-      return (cfg->colors[which]);
+    if (cfg->color_set[ which ]) {
+      return (cfg->colors[ which ]);
     }
   }
 
   mode = WID_MODE_NORMAL;
   cfg  = &getref(w->cfg, mode);
-  if (cfg->color_set[which]) {
-    return (cfg->colors[which]);
+  if (cfg->color_set[ which ]) {
+    return (cfg->colors[ which ]);
   }
 
   return (WHITE);
@@ -1467,8 +1468,8 @@ color wid_get_color(Widp w, wid_color which) {
 //
 void wid_set_color(Widp w, wid_color col, color val) {
   TRACE_AND_INDENT();
-  w->cfg[wid_get_mode(w)].colors[col]    = val;
-  w->cfg[wid_get_mode(w)].color_set[col] = true;
+  w->cfg[ wid_get_mode(w) ].colors[ col ]    = val;
+  w->cfg[ wid_get_mode(w) ].color_set[ col ] = true;
 }
 
 void wid_set_focus(Widp w) {
@@ -2049,7 +2050,7 @@ static void wid_destroy_immediate(Widp w) {
   for (auto x = 0; x < TERM_WIDTH; x++) {
     for (auto y = 0; y < TERM_HEIGHT; y++) {
       if (get(wid_on_screen_at, x, y) == w) {
-        set(wid_on_screen_at, x, y, static_cast<Widp>(0));
+        set(wid_on_screen_at, x, y, static_cast< Widp >(0));
       }
     }
   }
@@ -2562,7 +2563,7 @@ void wid_raise(Widp w_in) {
   //
   // If some widget wants to be on top, let it.
   //
-  std::vector<Widp> worklist;
+  std::vector< Widp > worklist;
   for (auto &iter : wid_top_level) {
     auto w = iter.second;
     worklist.push_back(w);
@@ -2929,7 +2930,7 @@ Widp wid_find(Widp w, const std::string &name) {
   return (nullptr);
 }
 
-static void wid_find_all_(Widp w, const std::string &name, std::list<Widp> &out) {
+static void wid_find_all_(Widp w, const std::string &name, std::list< Widp > &out) {
   TRACE_AND_INDENT();
   if (! strcasecmp(w->name.c_str(), name.c_str())) {
     out.push_back(w);
@@ -2941,13 +2942,13 @@ static void wid_find_all_(Widp w, const std::string &name, std::list<Widp> &out)
   }
 }
 
-std::list<Widp> wid_find_all(Widp w, const std::string &name) {
-  std::list<Widp> out;
+std::list< Widp > wid_find_all(Widp w, const std::string &name) {
+  std::list< Widp > out;
   wid_find_all_(w, name, out);
   return out;
 }
 
-static void wid_find_all_containing_(Widp w, const std::string &name, std::list<Widp> &out) {
+static void wid_find_all_containing_(Widp w, const std::string &name, std::list< Widp > &out) {
   TRACE_AND_INDENT();
   if (strstr(w->name.c_str(), name.c_str())) {
     out.push_back(w);
@@ -2959,8 +2960,8 @@ static void wid_find_all_containing_(Widp w, const std::string &name, std::list<
   }
 }
 
-std::list<Widp> wid_find_all_containing(Widp w, const std::string &name) {
-  std::list<Widp> out;
+std::list< Widp > wid_find_all_containing(Widp w, const std::string &name) {
+  std::list< Widp > out;
   wid_find_all_containing_(w, name, out);
   return out;
 }
@@ -2992,7 +2993,7 @@ void wid_visible(Widp w) {
   w->visible = true;
   w->hidden  = false;
 
-  std::vector<Widp> worklist;
+  std::vector< Widp > worklist;
   for (auto &iter : w->children_display_sorted) {
     auto child = iter.second;
     wid_visible(child);
@@ -3040,7 +3041,7 @@ void wid_hide(Widp w) {
     wid_find_top_focus();
   }
 
-  std::vector<Widp> worklist;
+  std::vector< Widp > worklist;
   for (auto &iter : w->children_display_sorted) {
     auto child = iter.second;
     wid_hide(child);
@@ -3052,7 +3053,7 @@ static uint8_t wid_scroll_trough_mouse_down(Widp w, int32_t x, int32_t y, uint32
   int32_t dx;
   int32_t dy;
 
-  std::vector<Widp> worklist;
+  std::vector< Widp > worklist;
   for (auto &iter : w->children_display_sorted) {
     auto child = iter.second;
     worklist.push_back(child);
@@ -3124,7 +3125,7 @@ static uint8_t wid_scroll_trough_mouse_motion(Widp w, int32_t x, int32_t y, int3
     return false;
   }
 
-  std::vector<Widp> worklist;
+  std::vector< Widp > worklist;
   for (auto &iter : w->children_display_sorted) {
     auto child = iter.second;
     worklist.push_back(child);
@@ -3384,7 +3385,7 @@ static void wid_update_internal(Widp w) {
   //
   // Clip all the children. Avoid this for speed for the main game window.
   //
-  std::vector<Widp> worklist;
+  std::vector< Widp > worklist;
   for (auto &iter : w->tree2_children_unsorted) {
     auto w = iter.second;
     worklist.push_back(w);
@@ -4271,7 +4272,7 @@ static void wid_move_delta_internal(Widp w, int32_t dx, int32_t dy) {
   w->key.br.y += dy;
   wid_tree_attach(w);
 
-  std::vector<Widp> worklist;
+  std::vector< Widp > worklist;
   for (auto &iter : w->tree2_children_unsorted) {
     auto w = iter.second;
     worklist.push_back(w);
@@ -4832,9 +4833,9 @@ void wid_joy_button(int32_t x, int32_t y) {
   //
   // Only if there is a change in status, send an event.
   //
-  static std::array<ts_t, SDL_MAX_BUTTONS> ts;
-  int                                      changed = false;
-  int                                      b;
+  static std::array< ts_t, SDL_MAX_BUTTONS > ts;
+  int                                        changed = false;
+  int                                        b;
 
   for (b = 0; b < SDL_MAX_BUTTONS; b++) {
     if (get(sdl_joy_buttons, b)) {
@@ -5696,20 +5697,20 @@ static void wid_display(Widp w, uint8_t disable_scissor, uint8_t *updated_scisso
   if (w == wid_over) {
     w_box_args.over = true;
 
-    if (w->cfg[WID_MODE_OVER].color_set[WID_COLOR_TEXT_FG]) {
-      w_box_args.col_text = get(w->cfg, WID_MODE_OVER).colors[WID_COLOR_TEXT_FG];
+    if (w->cfg[ WID_MODE_OVER ].color_set[ WID_COLOR_TEXT_FG ]) {
+      w_box_args.col_text = get(w->cfg, WID_MODE_OVER).colors[ WID_COLOR_TEXT_FG ];
     } else {
-      w_box_args.col_text = get(w->cfg, WID_MODE_NORMAL).colors[WID_COLOR_TEXT_FG];
+      w_box_args.col_text = get(w->cfg, WID_MODE_NORMAL).colors[ WID_COLOR_TEXT_FG ];
     }
 
-    if (w->cfg[WID_MODE_OVER].color_set[WID_COLOR_BG]) {
-      w_box_args.col_bg = get(w->cfg, WID_MODE_OVER).colors[WID_COLOR_BG];
+    if (w->cfg[ WID_MODE_OVER ].color_set[ WID_COLOR_BG ]) {
+      w_box_args.col_bg = get(w->cfg, WID_MODE_OVER).colors[ WID_COLOR_BG ];
     } else {
-      w_box_args.col_bg = get(w->cfg, WID_MODE_NORMAL).colors[WID_COLOR_BG];
+      w_box_args.col_bg = get(w->cfg, WID_MODE_NORMAL).colors[ WID_COLOR_BG ];
     }
   } else {
-    w_box_args.col_text = get(w->cfg, WID_MODE_NORMAL).colors[WID_COLOR_TEXT_FG];
-    w_box_args.col_bg   = get(w->cfg, WID_MODE_NORMAL).colors[WID_COLOR_BG];
+    w_box_args.col_text = get(w->cfg, WID_MODE_NORMAL).colors[ WID_COLOR_TEXT_FG ];
+    w_box_args.col_bg   = get(w->cfg, WID_MODE_NORMAL).colors[ WID_COLOR_BG ];
   }
 
   if (w->square) {
@@ -5780,7 +5781,7 @@ static void wid_display(Widp w, uint8_t disable_scissor, uint8_t *updated_scisso
       }
     }
 
-    if (w->cfg[mode].color_set[WID_COLOR_TEXT_BG]) {
+    if (w->cfg[ mode ].color_set[ WID_COLOR_TEXT_BG ]) {
       ascii_putf__(x, y, w_box_args.col_text, w_box_args.col_bg, text);
     } else {
       ascii_putf__(x, y, w_box_args.col_text, COLOR_NONE, text);
@@ -5816,17 +5817,17 @@ void wid_move_all(void) {
 
   uint32_t N = wid_top_level3.size();
   Widp     w {};
-  Widp     wids[N];
+  Widp     wids[ N ];
   uint32_t n = 0;
 
   for (auto &iter : wid_top_level3) {
-    auto w  = iter.second;
-    wids[n] = w;
+    auto w    = iter.second;
+    wids[ n ] = w;
     n++;
   }
 
   while (n--) {
-    w = wids[n];
+    w = wids[ n ];
 
     double x;
     double y;
@@ -5874,7 +5875,7 @@ static void wid_gc(Widp w) {
 //
 void wid_gc_all(void) {
   TRACE_AND_INDENT();
-  std::vector<Widp> to_gc;
+  std::vector< Widp > to_gc;
 
   for (;;) {
     if (! wid_top_level4.size()) {
@@ -5894,7 +5895,7 @@ void wid_tick_all(void) {
   TRACE_AND_INDENT();
   wid_time = time_get_time_ms_cached();
 
-  std::list<Widp> work;
+  std::list< Widp > work;
   for (auto &iter : wid_top_level5) {
     auto w = iter.second;
     work.push_back(w);

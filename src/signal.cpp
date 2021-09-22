@@ -28,14 +28,14 @@ void callstack_dump(void) {
   fprintf(MY_STDERR, "code trace\n");
   fprintf(MY_STDERR, "==========\n");
   for (auto depth = 0; depth < g_callframes_depth; depth++) {
-    auto iter = &callframes[depth];
+    auto iter = &callframes[ depth ];
     fprintf(MY_STDERR, "(stack) %d %s, line %u\n", depth, iter->func, iter->line);
   }
 
   CON("code trace");
   CON("==========");
   for (auto depth = 0; depth < g_callframes_depth; depth++) {
-    auto iter = &callframes[depth];
+    auto iter = &callframes[ depth ];
     CON("(stack) %d %s, line %u", depth, iter->func, iter->line);
   }
   done = false;
@@ -73,7 +73,7 @@ static void debug_crash_handler(int sig) {
   std::string pid(std::to_string(getpid()));
 
   const size_t max_path = PATH_MAX + 1;
-  char         prog_name[max_path];
+  char         prog_name[ max_path ];
 
 #if defined __APPLE__
   uint32_t bufsize = max_path;

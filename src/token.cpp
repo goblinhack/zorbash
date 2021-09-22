@@ -63,7 +63,7 @@ static tokens_t *tokens_parse(const char *input, tokens_t *tokens) {
      * Read whole strings.
      */
     if (i == '\"') {
-      tokens->args[tokens->cnt++] = out;
+      tokens->args[ tokens->cnt++ ] = out;
 
       for (; /*ever*/;) {
         i = *(in++);
@@ -105,7 +105,7 @@ static tokens_t *tokens_parse(const char *input, tokens_t *tokens) {
       return (tokens);
     }
 
-    tokens->args[tokens->cnt++] = out;
+    tokens->args[ tokens->cnt++ ] = out;
 
     for (; /*ever*/;) {
       switch (i) {
@@ -136,8 +136,8 @@ static void tokens_compile(tokens_t *tokens) {
   cnt = 0;
 
   while (cnt < tokens->cnt) {
-    if (! slre_compile(&tokens->regexp[cnt], tokens->args[cnt])) {
-      LOG("Failed to compile \"%s\"", tokens->args[cnt]);
+    if (! slre_compile(&tokens->regexp[ cnt ], tokens->args[ cnt ])) {
+      LOG("Failed to compile \"%s\"", tokens->args[ cnt ]);
       return;
     }
     cnt++;
@@ -152,7 +152,7 @@ void tokens_print(tokens_t *tokens) {
   cnt = 0;
 
   while (cnt < tokens->cnt) {
-    printf("[%s] ", tokens->args[cnt]);
+    printf("[%s] ", tokens->args[ cnt ]);
     cnt++;
   }
 
@@ -167,7 +167,7 @@ void tokens_print_to(tokens_t *tokens, char *output, int32_t output_size) {
   *output = '\0';
 
   while (cnt < tokens->cnt) {
-    strlcat_(output, tokens->args[cnt], output_size);
+    strlcat_(output, tokens->args[ cnt ], output_size);
     cnt++;
 
     if (cnt < tokens->cnt) {

@@ -9,7 +9,7 @@
 #include "my_ui.h"
 
 void gfx_init2(void) {
-  std::initializer_list<std::string> tiles = {
+  std::initializer_list< std::string > tiles = {
       "ui2,0,0",  "ui2,1,0",  "ui2,2,0",   "ui2,3,0",   "ui2,4,0",   "ui2,5,0",   "ui2,6,0",   "ui2,7,0",
       "ui2,8,0",  "ui2,9,0",  "ui2,10,0",  "ui2,11,0",  "ui2,12,0",  "ui2,13,0",  "ui2,14,0",  "ui2,15,0",
       "ui2,0,1",  "ui2,1,1",  "ui2,2,1",   "ui2,3,1",   "ui2,4,1",   "ui2,5,1",   "ui2,6,1",   "ui2,7,1",
@@ -43,6 +43,6 @@ void gfx_init2(void) {
       "ui2,0,15", "ui2,1,15", "ui2,2,15",  "ui2,3,15",  "ui2,4,15",  "ui2,5,15",  "ui2,6,15",  "ui2,7,15",
       "ui2,8,15", "ui2,9,15", "ui2,10,15", "ui2,11,15", "ui2,12,15", "ui2,13,15", "ui2,14,15", "ui2,15,15",
   };
-  const std::vector<std::string> arr(tiles);
+  const std::vector< std::string > arr(tiles);
   tile_load_arr("data/gfx/ui_box2.tga", "ui_box2", UI_TILE_LARGE_WIDTH, UI_TILE_LARGE_HEIGHT, arr);
 }

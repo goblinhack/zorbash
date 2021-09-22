@@ -19,8 +19,8 @@
 #include "my_monst.h"
 #include "my_array_bounds_check.h"
 
-static std::list<WidBag *> bags;
-static bool                bag_debug;
+static std::list< WidBag * > bags;
+static bool                  bag_debug;
 
 bool Thing::bag_contains(Thingp item) {
   auto bag = get_bag();
@@ -389,7 +389,7 @@ bool Thing::bag_remove(Thingp item) {
   return found;
 }
 
-int bag_estimate_volume(const std::list<Thingp> &items) {
+int bag_estimate_volume(const std::list< Thingp > &items) {
   TRACE_AND_INDENT();
   int volume = 0;
   for (auto t : items) {

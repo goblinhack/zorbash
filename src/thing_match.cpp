@@ -789,7 +789,7 @@ bool Thing::matches(const std::string &what) const {
   return (what == short_text_name());
 }
 
-std::function<int(Thingp)> Thing::matches_to_func(const std::string &what) {
+std::function< int(Thingp) > Thing::matches_to_func(const std::string &what) {
   if (what == "ai_avoid_distance") {
     return &Thing::ai_avoid_distance;
   }

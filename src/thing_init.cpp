@@ -71,8 +71,8 @@ void Thing::on_born(void) {
 
   auto t = split_tokens(on_born, '.');
   if (t.size() == 2) {
-    auto        mod   = t[0];
-    auto        fn    = t[1];
+    auto        mod   = t[ 0 ];
+    auto        fn    = t[ 1 ];
     std::size_t found = fn.find("()");
     if (found != std::string::npos) {
       fn = fn.replace(found, 2, "");
@@ -417,8 +417,8 @@ void Thing::init(Levelp level, const std::string &name, const fpoint born, const
   if (! std::empty(on_birth)) {
     auto t = split_tokens(on_birth, '.');
     if (t.size() == 2) {
-      auto        mod   = t[0];
-      auto        fn    = t[1];
+      auto        mod   = t[ 0 ];
+      auto        fn    = t[ 1 ];
       std::size_t found = fn.find("()");
       if (found != std::string::npos) {
         fn = fn.replace(found, 2, "");

@@ -16,7 +16,7 @@
 #include "my_ptrcheck.h"
 #include "my_dmap.h"
 
-void Level::debug_path_draw_line(const std::vector<point> &move_path) {
+void Level::debug_path_draw_line(const std::vector< point > &move_path) {
   TRACE_AND_INDENT();
   for (auto &c : move_path) {
     if (cursor && cursor->is_visible()) {
@@ -28,7 +28,7 @@ void Level::debug_path_draw_line(const std::vector<point> &move_path) {
   }
 }
 
-void Level::debug_path_draw(const std::vector<point> &move_path) {
+void Level::debug_path_draw(const std::vector< point > &move_path) {
   TRACE_AND_INDENT();
   if (! player) {
     return;
@@ -37,7 +37,7 @@ void Level::debug_path_draw(const std::vector<point> &move_path) {
   debug_path_draw_line(move_path);
 }
 
-void Level::debug_path_create(const std::vector<point> &move_path) {
+void Level::debug_path_create(const std::vector< point > &move_path) {
   TRACE_AND_INDENT();
   if (! cursor) {
     return;

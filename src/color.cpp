@@ -12,7 +12,7 @@
 #include "my_string.h"
 #include "my_main.h"
 
-typedef std::map<std::string, color> colors;
+typedef std::map< std::string, color > colors;
 
 colors      color_map;
 static bool color_init_done;
@@ -63,7 +63,7 @@ color gl_color_current(void) { return (gl_last_color); }
 
 color string2color(const char **s) {
   TRACE_AND_INDENT();
-  static char        tmp[MAXSHORTSTR];
+  static char        tmp[ MAXSHORTSTR ];
   static const char *eo_tmp = tmp + sizeof(tmp);
   const char *       c      = *s;
   char *             t      = tmp;
@@ -101,7 +101,7 @@ color string2color(const char **s) {
 
 color string2color(const wchar_t **s) {
   TRACE_AND_INDENT();
-  static wchar_t        tmp[MAXSHORTSTR];
+  static wchar_t        tmp[ MAXSHORTSTR ];
   static const wchar_t *eo_tmp = tmp + MAXSHORTSTR - 1;
   const wchar_t *       c      = *s;
   wchar_t *             t      = tmp;
@@ -213,7 +213,7 @@ color string2color(std::wstring &s, int *len) {
 
 const char *string2colorname(const char **s) {
   TRACE_AND_INDENT();
-  static char        tmp[MAXSHORTSTR];
+  static char        tmp[ MAXSHORTSTR ];
   static const char *eo_tmp = tmp + MAXSHORTSTR - 1;
   const char *       c      = *s;
   char *             t      = tmp;

@@ -19,8 +19,8 @@
 #include "my_thing.h"
 #include "my_monst.h"
 
-WidPopup *                 wid_enchant;
-static std::vector<Thingp> enchant_items;
+WidPopup *                   wid_enchant;
+static std::vector< Thingp > enchant_items;
 
 void wid_enchant_destroy(void) {
   TRACE_AND_INDENT();
@@ -38,7 +38,7 @@ static void wid_enchant_slot(int slot) {
 
   auto player = game->level->player;
   if (player) {
-    auto t = enchant_items[slot];
+    auto t = enchant_items[ slot ];
     player->enchant(t);
     game->tick_begin("enchant an item");
   }
@@ -180,7 +180,7 @@ void Game::wid_enchant_an_item(void) {
   wid_ignore_events_briefly();
 
   enchant_items.clear();
-  std::map<Tpp, bool> found;
+  std::map< Tpp, bool > found;
   for (auto id : player->monstp->carrying) {
     auto t = thing_find(id);
     if (t) {
@@ -196,7 +196,7 @@ void Game::wid_enchant_an_item(void) {
           continue;
         }
       }
-      found[tp] = true;
+      found[ tp ] = true;
       enchant_items.push_back(t);
     }
   }
@@ -216,7 +216,7 @@ void Game::wid_enchant_an_item(void) {
           continue;
         }
       }
-      found[tp] = true;
+      found[ tp ] = true;
       enchant_items.push_back(t);
     }
   }
@@ -247,7 +247,7 @@ void Game::wid_enchant_an_item(void) {
     wid_set_pos(w, tl, br);
     wid_set_shape_none(w);
 
-    auto t = enchant_items[slot];
+    auto t = enchant_items[ slot ];
 
     {
       auto wid_icon = wid_new_square_button(w, "item icon");

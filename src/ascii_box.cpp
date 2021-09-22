@@ -18,9 +18,9 @@ static void ascii_put_box__(int style, Tilep bg_tile, Tilep fg_tile, Tilep fg2_t
   int y;
 
   static bool      init;
-  static const int MAX_UI_SIZE                                                                       = 16;
-  static const int MAX_UI_BG_SIZE                                                                    = MAX_UI_SIZE - 2;
-  static std::array<std::array<std::array<Tilep, MAX_UI_SIZE>, MAX_UI_SIZE>, UI_WID_STYLE_MAX> tiles = {};
+  static const int MAX_UI_SIZE    = 16;
+  static const int MAX_UI_BG_SIZE = MAX_UI_SIZE - 2;
+  static std::array< std::array< std::array< Tilep, MAX_UI_SIZE >, MAX_UI_SIZE >, UI_WID_STYLE_MAX > tiles = {};
 
   if (style >= UI_WID_STYLE_MAX) {
     ERR("Unimplemented widget style %d", style);
@@ -80,13 +80,13 @@ static void ascii_put_box__(int style, Tilep bg_tile, Tilep fg_tile, Tilep fg2_t
     y = y1;
     for (x = x1; x <= x2; x++) {
       if (style >= 0) {
-        ascii_set_bg(x, y, tiles[style][(x % MAX_UI_BG_SIZE) + 1][0]);
+        ascii_set_bg(x, y, tiles[ style ][ (x % MAX_UI_BG_SIZE) + 1 ][ 0 ]);
       }
       ascii_set_bg(x, y, col_bg);
     }
     if (style >= 0) {
-      ascii_set_bg(x1, y, tiles[style][0][0]);
-      ascii_set_bg(x2, y, tiles[style][MAX_UI_SIZE - 1][0]);
+      ascii_set_bg(x1, y, tiles[ style ][ 0 ][ 0 ]);
+      ascii_set_bg(x2, y, tiles[ style ][ MAX_UI_SIZE - 1 ][ 0 ]);
     }
     return;
   } else if (unlikely(x1 == x2)) {
@@ -96,20 +96,20 @@ static void ascii_put_box__(int style, Tilep bg_tile, Tilep fg_tile, Tilep fg2_t
     x = x1;
     for (y = y1; y <= y2; y++) {
       if (style >= 0) {
-        ascii_set_bg(x, y, tiles[style][0][(y % MAX_UI_BG_SIZE) + 1]);
+        ascii_set_bg(x, y, tiles[ style ][ 0 ][ (y % MAX_UI_BG_SIZE) + 1 ]);
       }
       ascii_set_bg(x, y, col_bg);
     }
     if (style >= 0) {
-      ascii_set_bg(x, y1, tiles[style][0][0]);
-      ascii_set_bg(x, y2, tiles[style][0][MAX_UI_SIZE - 1]);
+      ascii_set_bg(x, y1, tiles[ style ][ 0 ][ 0 ]);
+      ascii_set_bg(x, y2, tiles[ style ][ 0 ][ MAX_UI_SIZE - 1 ]);
     }
     return;
   } else {
     for (y = y1; y <= y2; y++) {
       for (x = x1; x <= x2; x++) {
         if (style >= 0) {
-          ascii_set_bg(x, y, tiles[style][(x % MAX_UI_BG_SIZE) + 1][(y % MAX_UI_BG_SIZE) + 1]);
+          ascii_set_bg(x, y, tiles[ style ][ (x % MAX_UI_BG_SIZE) + 1 ][ (y % MAX_UI_BG_SIZE) + 1 ]);
         }
         ascii_set_bg(x, y, col_bg);
       }
@@ -118,12 +118,12 @@ static void ascii_put_box__(int style, Tilep bg_tile, Tilep fg_tile, Tilep fg2_t
     for (y = y1 + 1; y <= y2; y++) {
       for (x = x1 + 1; x <= x2; x++) {
         if (style >= 0) {
-          ascii_set_bg(x, y, tiles[style][(x % MAX_UI_BG_SIZE) + 1][(y % MAX_UI_BG_SIZE) + 1]);
+          ascii_set_bg(x, y, tiles[ style ][ (x % MAX_UI_BG_SIZE) + 1 ][ (y % MAX_UI_BG_SIZE) + 1 ]);
         }
         ascii_set_bg(x, y, col_bg);
       }
       if (style >= 0) {
-        ascii_set_bg(x1, y2, tiles[style][(x1 % MAX_UI_BG_SIZE) + 1][(y2 % MAX_UI_BG_SIZE) + 1]);
+        ascii_set_bg(x1, y2, tiles[ style ][ (x1 % MAX_UI_BG_SIZE) + 1 ][ (y2 % MAX_UI_BG_SIZE) + 1 ]);
       }
       ascii_set_bg(x1, y2, col_bg);
     }
@@ -131,7 +131,7 @@ static void ascii_put_box__(int style, Tilep bg_tile, Tilep fg_tile, Tilep fg2_t
     for (y = y1 + 1; y <= y2 - 1; y++) {
       for (x = x1 + 1; x <= x2 - 1; x++) {
         if (style >= 0) {
-          ascii_set_bg(x, y, tiles[style][(x % MAX_UI_BG_SIZE) + 1][(y % MAX_UI_BG_SIZE) + 1]);
+          ascii_set_bg(x, y, tiles[ style ][ (x % MAX_UI_BG_SIZE) + 1 ][ (y % MAX_UI_BG_SIZE) + 1 ]);
         }
         ascii_set_bg(x, y, col_bg);
       }
@@ -142,7 +142,7 @@ static void ascii_put_box__(int style, Tilep bg_tile, Tilep fg_tile, Tilep fg2_t
     for (y = y1; y <= y2; y++) {
       ascii_set_context(x, y, context);
       if (style >= 0) {
-        ascii_set_bg(x, y, tiles[style][(x % MAX_UI_BG_SIZE) + 1][(y % MAX_UI_BG_SIZE) + 1]);
+        ascii_set_bg(x, y, tiles[ style ][ (x % MAX_UI_BG_SIZE) + 1 ][ (y % MAX_UI_BG_SIZE) + 1 ]);
       }
       ascii_set_bg(x, y, col_bg);
     }
@@ -150,23 +150,23 @@ static void ascii_put_box__(int style, Tilep bg_tile, Tilep fg_tile, Tilep fg2_t
 
   for (x = x1 + 1; x <= x2 - 1; x++) {
     if (style >= 0) {
-      ascii_set_bg(x, y1, tiles[style][(x % MAX_UI_BG_SIZE) + 1][0]);
-      ascii_set_bg(x, y2, tiles[style][(x % MAX_UI_BG_SIZE) + 1][MAX_UI_SIZE - 1]);
+      ascii_set_bg(x, y1, tiles[ style ][ (x % MAX_UI_BG_SIZE) + 1 ][ 0 ]);
+      ascii_set_bg(x, y2, tiles[ style ][ (x % MAX_UI_BG_SIZE) + 1 ][ MAX_UI_SIZE - 1 ]);
     }
   }
 
   for (y = y1 + 1; y <= y2 - 1; y++) {
     if (style >= 0) {
-      ascii_set_bg(x1, y, tiles[style][0][(y % MAX_UI_BG_SIZE) + 1]);
-      ascii_set_bg(x2, y, tiles[style][MAX_UI_SIZE - 1][(y % MAX_UI_BG_SIZE) + 1]);
+      ascii_set_bg(x1, y, tiles[ style ][ 0 ][ (y % MAX_UI_BG_SIZE) + 1 ]);
+      ascii_set_bg(x2, y, tiles[ style ][ MAX_UI_SIZE - 1 ][ (y % MAX_UI_BG_SIZE) + 1 ]);
     }
   }
 
   if (style >= 0) {
-    ascii_set_bg(x1, y1, tiles[style][0][0]);
-    ascii_set_bg(x2, y2, tiles[style][MAX_UI_SIZE - 1][MAX_UI_SIZE - 1]);
-    ascii_set_bg(x2, y1, tiles[style][MAX_UI_SIZE - 1][0]);
-    ascii_set_bg(x1, y2, tiles[style][0][MAX_UI_SIZE - 1]);
+    ascii_set_bg(x1, y1, tiles[ style ][ 0 ][ 0 ]);
+    ascii_set_bg(x2, y2, tiles[ style ][ MAX_UI_SIZE - 1 ][ MAX_UI_SIZE - 1 ]);
+    ascii_set_bg(x2, y1, tiles[ style ][ MAX_UI_SIZE - 1 ][ 0 ]);
+    ascii_set_bg(x1, y2, tiles[ style ][ 0 ][ MAX_UI_SIZE - 1 ]);
   }
 }
 
@@ -177,14 +177,14 @@ static void ascii_put_box_(int style, Tilep bg_tile, Tilep fg_tile, Tilep fg2_ti
     ascii_put_box__(style, bg_tile, fg_tile, fg2_tile, fg3_tile, x, y, x + width - 1, y + height - 1, col_bg, col_text,
                     0 /* context */);
   } else {
-    wchar_t buf[MAXLONGSTR];
+    wchar_t buf[ MAXLONGSTR ];
     auto    wrote = vswprintf(buf, MAXLONGSTR, fmt, args);
 
     //
     // Only a single nul is written, but as we read 2 at a time...
     //
     if (wrote && (wrote < MAXLONGSTR - 1)) {
-      buf[wrote + 1] = '\0';
+      buf[ wrote + 1 ] = '\0';
     }
 
     auto b   = std::wstring(buf);

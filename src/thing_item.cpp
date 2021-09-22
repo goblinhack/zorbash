@@ -204,9 +204,9 @@ bool Thing::is_carrying_item(void) {
   return false;
 }
 
-std::vector<Thingp> Thing::get_item_list(void) {
+std::vector< Thingp > Thing::get_item_list(void) {
   TRACE_AND_INDENT();
-  std::vector<Thingp> tr;
+  std::vector< Thingp > tr;
   dbg("Carried items:");
   TRACE_AND_INDENT();
   if (! monstp) {

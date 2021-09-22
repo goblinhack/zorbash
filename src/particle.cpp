@@ -98,7 +98,7 @@ void Level::display_internal_particles(void) {
 
   blit_init();
   auto now = time_update_time_milli();
-  auto e   = std::remove_if(all_internal_particles.begin(), all_internal_particles.end(), [=, this](Particle &p) {
+  auto e   = std::remove_if(all_internal_particles.begin(), all_internal_particles.end(), [ =, this ](Particle &p) {
     if (p.removed) {
       return true;
     }
@@ -283,7 +283,7 @@ void Level::display_external_particles(void) {
 
   blit_init();
   auto now = time_update_time_milli();
-  auto e   = std::remove_if(all_external_particles.begin(), all_external_particles.end(), [=, this](Particle &p) {
+  auto e   = std::remove_if(all_external_particles.begin(), all_external_particles.end(), [ =, this ](Particle &p) {
     if (p.removed) {
       return true;
     }

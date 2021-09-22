@@ -50,10 +50,10 @@ void log_catchup_missing_indent_levels(void) {
 }
 
 static void log_(const char *fmt, va_list args) {
-  char buf[MAXLONGSTR];
+  char buf[ MAXLONGSTR ];
   int  len;
 
-  buf[0] = '\0';
+  buf[ 0 ] = '\0';
   get_timestamp(buf, MAXLONGSTR);
   len = (int) strlen(buf);
 
@@ -70,11 +70,11 @@ static void log_(const char *fmt, va_list args) {
 }
 
 static void log_missing_(const char *fmt, va_list args) {
-  char buf[MAXLONGSTR];
+  char buf[ MAXLONGSTR ];
 
   int len;
 
-  buf[0] = '\0';
+  buf[ 0 ] = '\0';
   get_timestamp(buf, MAXLONGSTR);
   len = (int) strlen(buf);
 
@@ -106,10 +106,10 @@ void LOG_MISSING(const char *fmt, ...) {
 }
 
 static void warn_(const char *fmt, va_list args) {
-  char buf[MAXLONGSTR];
+  char buf[ MAXLONGSTR ];
   int  len;
 
-  buf[0] = '\0';
+  buf[ 0 ] = '\0';
   get_timestamp(buf, MAXLONGSTR);
   len = (int) strlen(buf);
   vsnprintf(buf + len, MAXLONGSTR - len, fmt, args);
@@ -129,10 +129,10 @@ void WARN(const char *fmt, ...) {
 }
 
 static void con_(const char *fmt, va_list args) {
-  char buf[MAXLONGSTR];
+  char buf[ MAXLONGSTR ];
   int  len;
 
-  buf[0] = '\0';
+  buf[ 0 ] = '\0';
   get_timestamp(buf, MAXLONGSTR);
   len = (int) strlen(buf);
   vsnprintf(buf + len, MAXLONGSTR - len, fmt, args);
@@ -149,23 +149,23 @@ static void con_(const char *fmt, va_list args) {
 
 static void con_(const wchar_t *fmt, va_list args) {
   {
-    char buf[MAXLONGSTR];
+    char buf[ MAXLONGSTR ];
 
-    buf[0] = '\0';
+    buf[ 0 ] = '\0';
     get_timestamp(buf, MAXLONGSTR);
     fprintf(MY_STDOUT, "%s", buf);
     term_log(buf);
   }
 
   {
-    wchar_t buf[MAXLONGSTR];
+    wchar_t buf[ MAXLONGSTR ];
     auto    wrote = vswprintf(buf, MAXLONGSTR, fmt, args);
 
     //
     // Only a single nul is written, but as we read 2 at a time...
     //
     if (wrote && (wrote < MAXLONGSTR - 1)) {
-      buf[wrote + 1] = '\0';
+      buf[ wrote + 1 ] = '\0';
     } else {
       fprintf(stderr, "Failed to console log: [%S]\n", fmt);
     }
@@ -181,9 +181,9 @@ static void con_(const wchar_t *fmt, va_list args) {
 
 void con(const wchar_t *fmt) {
   {
-    char buf[MAXLONGSTR];
+    char buf[ MAXLONGSTR ];
 
-    buf[0] = '\0';
+    buf[ 0 ] = '\0';
     get_timestamp(buf, MAXLONGSTR);
     fprintf(MY_STDOUT, "%s", buf);
     term_log(buf);
@@ -200,11 +200,11 @@ void con(const wchar_t *fmt) {
 }
 
 static void topcon_(const char *fmt, va_list args) {
-  char buf[MAXLONGSTR];
-  char ts[MAXLONGSTR / 2];
+  char buf[ MAXLONGSTR ];
+  char ts[ MAXLONGSTR / 2 ];
   int  len;
 
-  buf[0] = '\0';
+  buf[ 0 ] = '\0';
   get_timestamp(ts, MAXLONGSTR);
   snprintf(buf, sizeof(buf) - 1, "%s", ts);
   len = (int) strlen(buf);
@@ -222,22 +222,22 @@ static void topcon_(const char *fmt, va_list args) {
 
 static void topcon_(const wchar_t *fmt, va_list args) {
   {
-    char ts[MAXLONGSTR];
-    ts[0] = '\0';
+    char ts[ MAXLONGSTR ];
+    ts[ 0 ] = '\0';
     get_timestamp(ts, MAXLONGSTR);
     fprintf(MY_STDOUT, "%s", ts);
     term_log(ts);
   }
 
   {
-    wchar_t buf[MAXLONGSTR];
+    wchar_t buf[ MAXLONGSTR ];
     auto    wrote = vswprintf(buf, MAXLONGSTR, fmt, args);
 
     //
     // Only a single nul is written, but as we read 2 at a time...
     //
     if (wrote && (wrote < MAXLONGSTR - 1)) {
-      buf[wrote + 1] = '\0';
+      buf[ wrote + 1 ] = '\0';
     } else {
       fprintf(stderr, "Failed to topcon log: [%S]\n", fmt);
     }
@@ -254,8 +254,8 @@ static void topcon_(const wchar_t *fmt, va_list args) {
 
 void topcon(const wchar_t *fmt) {
   {
-    char ts[MAXLONGSTR];
-    ts[0] = '\0';
+    char ts[ MAXLONGSTR ];
+    ts[ 0 ] = '\0';
     get_timestamp(ts, MAXLONGSTR);
     fprintf(MY_STDOUT, "%sPY TOPCON: ", ts);
     term_log(ts);
@@ -305,10 +305,10 @@ void TOPCON(const wchar_t *fmt, ...) {
 }
 
 static void dying_(const char *fmt, va_list args) {
-  char buf[MAXLONGSTR];
+  char buf[ MAXLONGSTR ];
   int  len;
 
-  buf[0] = '\0';
+  buf[ 0 ] = '\0';
   get_timestamp(buf, MAXLONGSTR);
   len = (int) strlen(buf);
 
@@ -330,10 +330,10 @@ static void err_(const char *fmt, va_list args) {
   }
   nested_error = true;
 
-  char buf[MAXLONGSTR];
+  char buf[ MAXLONGSTR ];
   int  len;
 
-  buf[0] = '\0';
+  buf[ 0 ] = '\0';
   get_timestamp(buf, MAXLONGSTR);
   len = (int) strlen(buf);
 
@@ -368,11 +368,11 @@ static void croak_(const char *fmt, va_list args) {
   }
   g_die_occurred = true;
 
-  char buf[MAXLONGSTR];
+  char buf[ MAXLONGSTR ];
   int  len;
   int  tslen;
 
-  buf[0] = '\0';
+  buf[ 0 ] = '\0';
   get_timestamp(buf, MAXLONGSTR);
   tslen = len = (int) strlen(buf);
 
@@ -466,10 +466,10 @@ void myerr(const char *fmt, ...) {
 }
 
 static void msgerr_(const char *fmt, va_list args) {
-  char buf[MAXLONGSTR];
+  char buf[ MAXLONGSTR ];
   int  len;
 
-  buf[0] = '\0';
+  buf[ 0 ] = '\0';
   get_timestamp(buf, MAXLONGSTR);
   len = (int) strlen(buf);
 
@@ -505,13 +505,13 @@ void GAME_UI_MSG_BOX(const char *fmt, ...) {
 }
 
 static void sdl_msgerr_(const char *fmt, va_list args) {
-  char buf[MAXLONGSTR];
+  char buf[ MAXLONGSTR ];
 #if SDL_MAJOR_VERSION >= 2
   int ts_len;
 #endif
   int len;
 
-  buf[0] = '\0';
+  buf[ 0 ] = '\0';
   get_timestamp(buf, MAXLONGSTR);
   len = (int) strlen(buf);
 
@@ -549,11 +549,11 @@ void SDL_MSG_BOX(const char *fmt, ...) {
 }
 
 static void botcon_(const char *fmt, va_list args) {
-  char buf[MAXLONGSTR];
-  char ts[MAXLONGSTR / 2];
+  char buf[ MAXLONGSTR ];
+  char ts[ MAXLONGSTR / 2 ];
   int  len;
 
-  buf[0] = '\0';
+  buf[ 0 ] = '\0';
   get_timestamp(ts, MAXLONGSTR);
   snprintf(buf, sizeof(buf) - 1, "%sBOTCON: ", ts);
   len = (int) strlen(buf);
@@ -570,22 +570,22 @@ static void botcon_(const char *fmt, va_list args) {
 
 static void botcon_(const wchar_t *fmt, va_list args) {
   {
-    char ts[MAXLONGSTR];
-    ts[0] = '\0';
+    char ts[ MAXLONGSTR ];
+    ts[ 0 ] = '\0';
     get_timestamp(ts, MAXLONGSTR);
     fprintf(MY_STDOUT, "%sBOTCON: ", ts);
     term_log(ts);
   }
 
   {
-    wchar_t buf[MAXLONGSTR];
+    wchar_t buf[ MAXLONGSTR ];
     auto    wrote = vswprintf(buf, MAXLONGSTR, fmt, args);
 
     //
     // Only a single nul is written, but as we read 2 at a time...
     //
     if (wrote && (wrote < MAXLONGSTR - 1)) {
-      buf[wrote + 1] = '\0';
+      buf[ wrote + 1 ] = '\0';
     } else {
       fprintf(stderr, "Failed to botcon log: [%S]\n", fmt);
     }

@@ -52,7 +52,7 @@ PyObject *tile_load_arr_(PyObject *obj, PyObject *args, PyObject *keywds) {
   }
 
   int         numLines = PyList_Size(e);
-  const char *arr[numLines + 1];
+  const char *arr[ numLines + 1 ];
   int         i;
 
   memset(arr, 0, sizeof(arr));
@@ -66,17 +66,17 @@ PyObject *tile_load_arr_(PyObject *obj, PyObject *args, PyObject *keywds) {
       continue;
     }
 
-    arr[i] = py_obj_to_str(strObj);
+    arr[ i ] = py_obj_to_str(strObj);
   }
 
   tile_load_arr(std::string(file ? file : ""), std::string(name ? name : ""), width, height, numLines, arr);
 
   for (i = 0; i < numLines; i++) {
-    if (! arr[i]) {
+    if (! arr[ i ]) {
       continue;
     }
 
-    myfree((char *) arr[i]);
+    myfree((char *) arr[ i ]);
   }
 
   Py_RETURN_TRUE;
@@ -123,7 +123,7 @@ PyObject *tile_load_arr_sprites_(PyObject *obj, PyObject *args, PyObject *keywds
   }
 
   int         numLines = PyList_Size(e);
-  const char *arr[numLines + 1];
+  const char *arr[ numLines + 1 ];
   int         i;
 
   memset(arr, 0, sizeof(arr));
@@ -137,18 +137,18 @@ PyObject *tile_load_arr_sprites_(PyObject *obj, PyObject *args, PyObject *keywds
       continue;
     }
 
-    arr[i] = py_obj_to_str(strObj);
-    PY_DBG("tile_load_arr:sprites(\"%s\")", arr[i]);
+    arr[ i ] = py_obj_to_str(strObj);
+    PY_DBG("tile_load_arr:sprites(\"%s\")", arr[ i ]);
   }
 
   tile_load_arr_sprites(std::string(file ? file : ""), std::string(name ? name : ""), width, height, numLines, arr);
 
   for (i = 0; i < numLines; i++) {
-    if (! arr[i]) {
+    if (! arr[ i ]) {
       continue;
     }
 
-    myfree((char *) arr[i]);
+    myfree((char *) arr[ i ]);
   }
 
   Py_RETURN_TRUE;

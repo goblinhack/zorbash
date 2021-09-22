@@ -101,11 +101,11 @@ void Game::hiscore_select(void) {
   wid_hiscore_window->log(" ");
   wid_hiscore_window->log(" ");
 
-  std::vector<HiScore>::iterator h     = game->config.hiscores.hiscores.begin();
-  bool                           first = true;
-  auto                           index = 0;
+  std::vector< HiScore >::iterator h     = game->config.hiscores.hiscores.begin();
+  bool                             first = true;
+  auto                             index = 0;
 
-  const char *colors[HiScore::max_displayed] = {
+  const char *colors[ HiScore::max_displayed ] = {
       "green", "yellow", "yellow", "yellow", "gold", "gold", "gold", "white", "white", "white",
       "gray",  "gray",   "gray",   "gray",   "gray", "gray", "gray", "gray",  "gray",  "gray",
   };
@@ -116,7 +116,7 @@ void Game::hiscore_select(void) {
       break;
     }
 
-    char tmp[200];
+    char tmp[ 200 ];
 
     int name_field_len      = 15;
     int when_field_len      = 25;
@@ -138,24 +138,24 @@ void Game::hiscore_select(void) {
 
     std::string name = h->name.c_str();
     if ((int) name.length() > name_field_len) {
-      name[name_field_len] = '\0';
+      name[ name_field_len ] = '\0';
     }
 
     std::string when = h->when.c_str();
     if ((int) when.length() > when_field_len) {
-      when[when_field_len] = '\0';
+      when[ when_field_len ] = '\0';
     }
 
     std::string killed_by = h->killed_by.c_str();
     if ((int) killed_by.length() > killed_by_field_len) {
-      killed_by[killed_by_field_len] = '\0';
+      killed_by[ killed_by_field_len ] = '\0';
     }
 
     if (killed_by.empty()) {
       killed_by = "-";
     }
 
-    auto color = colors[index++];
+    auto color = colors[ index++ ];
     snprintf(tmp, sizeof(tmp) - 1, "%%%%fg=%s$%07u  %-*s %-*s %-5u %*s", color, h->score, name_field_len, name.c_str(),
              when_field_len, when.c_str(), h->level_reached, killed_by_field_len, killed_by.c_str());
 

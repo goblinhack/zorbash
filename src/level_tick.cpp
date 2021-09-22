@@ -21,15 +21,15 @@
 #include "my_ptrcheck.h"
 
 void Level::handle_all_pending_things(int group) {
-  for (auto &i : all_animated_things_pending_remove[group]) {
-    all_animated_things[group].erase(i.first);
+  for (auto &i : all_animated_things_pending_remove[ group ]) {
+    all_animated_things[ group ].erase(i.first);
   }
-  all_animated_things_pending_remove[group] = {};
+  all_animated_things_pending_remove[ group ] = {};
 
-  for (auto &i : all_animated_things_pending_add[group]) {
-    all_animated_things[group].insert(i);
+  for (auto &i : all_animated_things_pending_add[ group ]) {
+    all_animated_things[ group ].insert(i);
   }
-  all_animated_things_pending_add[group] = {};
+  all_animated_things_pending_add[ group ] = {};
 }
 
 void Level::handle_all_pending_things(void) {
@@ -520,7 +520,7 @@ void Level::sanity_check(void) {
 void Level::update_all_ticks(void) {
   TRACE_AND_INDENT();
   FOR_ALL_THING_GROUPS(group) {
-    for (auto &i : all_things_of_interest[group]) {
+    for (auto &i : all_things_of_interest[ group ]) {
       auto t = i.second;
       t->update_tick();
     }

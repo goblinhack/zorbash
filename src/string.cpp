@@ -295,7 +295,7 @@ size_t strlcpy_(char *dst, const char *src, size_t maxlen) {
   if (maxlen > 0) {
     uint32_t len = std::min(srclen, maxlen - 1);
     memcpy(dst, src, len);
-    dst[len] = '\0';
+    dst[ len ] = '\0';
   }
   return (srclen);
 }
@@ -355,9 +355,9 @@ void strnoescape(char *uncompressed) {
 
 static const char *dynvprintf_(const char *fmt, va_list args) {
   TRACE_AND_INDENT();
-  static char buf[MAXSTR];
+  static char buf[ MAXSTR ];
 
-  buf[0] = '\0';
+  buf[ 0 ] = '\0';
   vsnprintf(buf, MAXSTR, fmt, args);
 
   return (buf);
@@ -381,9 +381,9 @@ char *dynprintf(const char *fmt, ...) {
 
 char *dynvprintf(const char *fmt, va_list args) {
   TRACE_AND_INDENT();
-  static char buf[MAXSTR];
+  static char buf[ MAXSTR ];
 
-  buf[0] = '\0';
+  buf[ 0 ] = '\0';
   vsnprintf(buf, MAXSTR, fmt, args);
 
   return (dupstr(buf, __FUNCTION__));
@@ -477,7 +477,7 @@ shared_vector_string split(const char *text, int max_line_len) {
     return (0);
   }
 
-  auto result = std::make_shared<std::vector<std::string>>();
+  auto result = std::make_shared< std::vector< std::string > >();
 
   for (; /*ever*/;) {
     line_len   = 0;
@@ -589,7 +589,7 @@ shared_vector_string split(const char *text, int max_line_len) {
     }
 
     line_len = (int) (line_end - line_start);
-    char tmp[line_len + 1];
+    char tmp[ line_len + 1 ];
     strlcpy_(tmp, line_start, line_len + 1);
 
     result->push_back(tmp);
@@ -629,7 +629,7 @@ shared_vector_string split(const std::string &text, int max_line_len) {
 
   // printf("SPLIT1 [%s] max_line_len %d\n", text.c_str(), max_line_len);
 
-  auto result = std::make_shared<std::vector<std::string>>();
+  auto result = std::make_shared< std::vector< std::string > >();
 
   for (; /*ever*/;) {
     line_len   = 0;
@@ -800,7 +800,7 @@ shared_vector_wstring split(const std::wstring &text, int max_line_len) {
   // printf("SPLIT2 [%s] max_line_len %d\n", wstring_to_string(text).c_str(),
   // max_line_len);
 
-  auto result = std::make_shared<std::vector<std::wstring>>();
+  auto result = std::make_shared< std::vector< std::wstring > >();
 
   for (; /*ever*/;) {
     line_len   = 0;
@@ -1121,7 +1121,7 @@ int length_without_format(const std::wstring &text) {
 
 Tpp string2tp(const char **s) {
   TRACE_AND_INDENT();
-  static char        tmp[MAXSHORTSTR];
+  static char        tmp[ MAXSHORTSTR ];
   static const char *eo_tmp = tmp + MAXSHORTSTR;
   const char *       c      = *s;
   char *             t      = tmp;
@@ -1231,7 +1231,7 @@ int32_t snprintf_realloc(char **str, int32_t *size, int32_t *used, const char *f
       return (-1);
     }
 
-    *str[0] = '\0';
+    *str[ 0 ] = '\0';
   }
 
   if (! used || ! *used) {
@@ -1240,11 +1240,11 @@ int32_t snprintf_realloc(char **str, int32_t *size, int32_t *used, const char *f
     usedspace = *used;
   }
 
-  char add[MAXSTR];
+  char add[ MAXSTR ];
   va_start(ap, fmt);
   vsnprintf(add, sizeof(add) - 1, fmt, ap);
   va_end(ap);
-  add[MAXSHORTSTR - 1] = '\0';
+  add[ MAXSHORTSTR - 1 ] = '\0';
 
   needspace = strlen(add);
 
@@ -1274,10 +1274,10 @@ int32_t snprintf_realloc(char **str, int32_t *size, int32_t *used, const char *f
   }
 }
 
-std::vector<std::string> split_tokens(const std::string &s, const char delimiter) {
-  std::string              token;
-  std::istringstream       s_stream(s);
-  std::vector<std::string> tokens;
+std::vector< std::string > split_tokens(const std::string &s, const char delimiter) {
+  std::string                token;
+  std::istringstream         s_stream(s);
+  std::vector< std::string > tokens;
   while (std::getline(s_stream, token, delimiter)) {
     tokens.push_back(token);
   }
@@ -1286,13 +1286,14 @@ std::vector<std::string> split_tokens(const std::string &s, const char delimiter
 
 // https://www.techiedelight.com/trim-string-cpp-remove-leading-trailing-spaces/
 std::string &ltrim(std::string &s) {
-  auto it = std::find_if(s.begin(), s.end(), [](char c) { return ! std::isspace<char>(c, std::locale::classic()); });
+  auto it = std::find_if(s.begin(), s.end(), [](char c) { return ! std::isspace< char >(c, std::locale::classic()); });
   s.erase(s.begin(), it);
   return s;
 }
 
 std::string &rtrim(std::string &s) {
-  auto it = std::find_if(s.rbegin(), s.rend(), [](char c) { return ! std::isspace<char>(c, std::locale::classic()); });
+  auto it =
+      std::find_if(s.rbegin(), s.rend(), [](char c) { return ! std::isspace< char >(c, std::locale::classic()); });
   s.erase(it.base(), s.end());
   return s;
 }
@@ -1314,13 +1315,14 @@ std::string rtrim_ws(const std::string &s) {
 std::string trim_ws(const std::string &s) { return rtrim_ws(ltrim_ws(s)); }
 
 std::wstring &ltrim(std::wstring &s) {
-  auto it = std::find_if(s.begin(), s.end(), [](char c) { return ! std::isspace<char>(c, std::locale::classic()); });
+  auto it = std::find_if(s.begin(), s.end(), [](char c) { return ! std::isspace< char >(c, std::locale::classic()); });
   s.erase(s.begin(), it);
   return s;
 }
 
 std::wstring &rtrim(std::wstring &s) {
-  auto it = std::find_if(s.rbegin(), s.rend(), [](char c) { return ! std::isspace<char>(c, std::locale::classic()); });
+  auto it =
+      std::find_if(s.rbegin(), s.rend(), [](char c) { return ! std::isspace< char >(c, std::locale::classic()); });
   s.erase(it.base(), s.end());
   return s;
 }
@@ -1365,8 +1367,8 @@ std::string &string_timestamp(void) {
 //
 std::string strerror_to_string(const int err) {
   static const auto MAX_ERRNO_BUF_SIZE = 1024U;
-  char              err_out[MAX_ERRNO_BUF_SIZE];
-  err_out[0] = '\0';
+  char              err_out[ MAX_ERRNO_BUF_SIZE ];
+  err_out[ 0 ] = '\0';
 
   //
   // Choose the correct strerror

@@ -1606,7 +1606,7 @@ bool Dungeon::solve(int x, int y, Grid *g) {
     return true;
   }
 
-  std::vector<Roomp> candidates;
+  std::vector< Roomp > candidates;
 
   if (! Room::all_rooms.size()) {
     DIE("Failed to load any rooms. Initialization error?");
@@ -2747,7 +2747,7 @@ bool Dungeon::rooms_move_closer_together(void) {
       // then we can keep going. If not, rollback the room to the
       // last that was solvable.
       //
-      std::vector<char> cells_ok;
+      std::vector< char > cells_ok;
       std::copy(mbegin(cells), mend(cells), mbegin(cells_ok));
 
       auto new_total_corridor_len = draw_corridors();
@@ -3462,7 +3462,7 @@ void Dungeon::water_fixup_shallows(void) {
 // Add deepwater and islands of safety.
 //
 void Dungeon::water_fixup(void) {
-  std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> cand {};
+  std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > cand {};
 
   for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
     for (auto x = 1; x < MAP_WIDTH - 1; x++) {

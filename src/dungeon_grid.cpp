@@ -318,11 +318,11 @@ redo:
 }
 
 void Nodes::dump(void) {
-  const auto                         step   = 5;
-  const auto                         center = 3;
-  const int                          h      = (MAP_GRID_HEIGHT + 1) * step;
-  const int                          w      = (MAP_GRID_WIDTH + 1) * step;
-  std::array<std::array<char, h>, w> out;
+  const auto                             step   = 5;
+  const auto                             center = 3;
+  const int                              h      = (MAP_GRID_HEIGHT + 1) * step;
+  const int                              w      = (MAP_GRID_WIDTH + 1) * step;
+  std::array< std::array< char, h >, w > out;
 
   for (auto y = 0; y < h; y++) {
     for (auto x = 0; x < w; x++) {
@@ -634,7 +634,7 @@ DungeonNode *Nodes::node_addr(const int x, const int y) {
     return (nullptr);
   }
 
-  return (&nodes[offset(x, y)]);
+  return (&nodes[ offset(x, y) ]);
 }
 
 void Nodes::putn(const int x, const int y, const DungeonNode n) {
@@ -700,7 +700,7 @@ void Nodes::random_dir(int *dx, int *dy) {
 void Nodes::init_nodes(void) {
   nodes.resize(grid_width * grid_height);
 
-  std::vector<std::pair<point, point>> s;
+  std::vector< std::pair< point, point > > s;
 
   for (auto x = 0; x < grid_width; x++) {
     for (auto y = 0; y < grid_height; y++) {
@@ -752,7 +752,7 @@ bool Nodes::node_is_free(DungeonNode *n) { return (n && ! n->depth); }
 bool Nodes::node_is_a_room(DungeonNode *n) { return (n && n->depth && (n->depth != depth_obstacle)); }
 
 int Nodes::snake_walk(int depth, int max_placed, int pass) {
-  std::list<point> s;
+  std::list< point > s;
 
   auto dx = 0;
   auto dy = 0;
@@ -1099,7 +1099,7 @@ void Nodes::join_nodes_of_same_depth(int depth, int pass) {
 // Connect up the nodes to the next depth. We need at least one.
 //
 void Nodes::join_depth_to_next_depth(int depth, int pass) {
-  std::vector<std::pair<point, point>> s;
+  std::vector< std::pair< point, point > > s;
 
   for (auto x = 0; x < grid_width; x++) {
     for (auto y = 0; y < grid_height; y++) {
@@ -1149,7 +1149,7 @@ void Nodes::join_depth_to_next_depth(int depth, int pass) {
 
   while (r--) {
     auto i = pcg_random_range(0, s.size());
-    auto p = s[i];
+    auto p = s[ i ];
     auto a = p.first;
     auto b = p.second;
 
@@ -1188,7 +1188,7 @@ void Nodes::join_depth_to_next_depth(int depth, int pass) {
 }
 
 void Nodes::join_depth_secret(int depth, int pass) {
-  std::vector<std::pair<point, point>> s;
+  std::vector< std::pair< point, point > > s;
 
   for (auto x = 0; x < grid_width; x++) {
     for (auto y = 0; y < grid_height; y++) {
@@ -1259,7 +1259,7 @@ void Nodes::join_depth_secret(int depth, int pass) {
 
   while (r--) {
     auto i = pcg_random_range(0, s.size());
-    auto p = s[i];
+    auto p = s[ i ];
     auto a = p.first;
     auto b = p.second;
 
@@ -1298,7 +1298,7 @@ void Nodes::join_depth_secret(int depth, int pass) {
 }
 
 bool Nodes::place_lock(int depth, int pass) {
-  std::vector<point> s;
+  std::vector< point > s;
 
   for (auto x = 0; x < grid_width; x++) {
     for (auto y = 0; y < grid_height; y++) {
@@ -1347,14 +1347,14 @@ bool Nodes::place_lock(int depth, int pass) {
   }
 
   auto i     = pcg_random_range(0, s.size());
-  auto p     = s[i];
+  auto p     = s[ i ];
   auto n     = getn(p.x, p.y);
   n->is_lock = true;
   return true;
 }
 
 void Nodes::hide_other_locks(int depth, int pass) {
-  std::vector<point> s;
+  std::vector< point > s;
 
   for (auto x = 0; x < grid_width; x++) {
     for (auto y = 0; y < grid_height; y++) {
@@ -1402,7 +1402,7 @@ void Nodes::hide_other_locks(int depth, int pass) {
 }
 
 bool Nodes::place_key(int depth, int pass) {
-  std::vector<point> s;
+  std::vector< point > s;
 
   for (auto x = 0; x < grid_width; x++) {
     for (auto y = 0; y < grid_height; y++) {
@@ -1439,14 +1439,14 @@ bool Nodes::place_key(int depth, int pass) {
   }
 
   auto i    = pcg_random_range(0, s.size());
-  auto p    = s[i];
+  auto p    = s[ i ];
   auto n    = getn(p.x, p.y);
   n->is_key = true;
   return true;
 }
 
 bool Nodes::place_entrance(void) {
-  std::vector<point> s;
+  std::vector< point > s;
 
   for (auto x = 0; x < grid_width; x++) {
     for (auto y = 0; y < grid_height; y++) {
@@ -1480,7 +1480,7 @@ bool Nodes::place_entrance(void) {
   }
 
   auto i               = pcg_random_range(0, s.size());
-  auto p               = s[i];
+  auto p               = s[ i ];
   auto n               = getn(p.x, p.y);
   n->is_ascend_dungeon = true;
 
@@ -1488,7 +1488,7 @@ bool Nodes::place_entrance(void) {
 }
 
 bool Nodes::place_exit(void) {
-  std::vector<point> s;
+  std::vector< point > s;
 
   for (auto x = 0; x < grid_width; x++) {
     for (auto y = 0; y < grid_height; y++) {
@@ -1521,7 +1521,7 @@ bool Nodes::place_exit(void) {
   }
 
   auto i                = pcg_random_range(0, s.size());
-  auto p                = s[i];
+  auto p                = s[ i ];
   auto n                = getn(p.x, p.y);
   n->is_descend_dungeon = true;
 
@@ -1529,7 +1529,7 @@ bool Nodes::place_exit(void) {
 }
 
 void Nodes::remove_stubs(void) {
-  std::vector<point> s;
+  std::vector< point > s;
 
   for (auto y = 0; y < grid_height; y++) {
     for (auto x = 0; x < grid_width; x++) {
@@ -1729,7 +1729,7 @@ bool Nodes::create_path_to_exit(int pass) {
       auto Y = y * 2 + 1;
 
       if (n && node_is_a_room(n)) {
-        if (get(d.val, X + 1, Y) < d.val[X][Y]) {
+        if (get(d.val, X + 1, Y) < d.val[ X ][ Y ]) {
           auto o = getn(x + 1, y);
           if (o && (o->pass == n->pass) && node_is_a_room(o)) {
             n->dir_up    = false;
@@ -1739,7 +1739,7 @@ bool Nodes::create_path_to_exit(int pass) {
             n->dir_right = true;
           }
         }
-        if (get(d.val, X - 1, Y) < d.val[X][Y]) {
+        if (get(d.val, X - 1, Y) < d.val[ X ][ Y ]) {
           auto o = getn(x - 1, y);
           if (o && (o->pass == n->pass) && node_is_a_room(o)) {
             n->dir_up    = false;
@@ -1749,7 +1749,7 @@ bool Nodes::create_path_to_exit(int pass) {
             n->dir_left  = true;
           }
         }
-        if (get(d.val, X, Y + 1) < d.val[X][Y]) {
+        if (get(d.val, X, Y + 1) < d.val[ X ][ Y ]) {
           auto o = getn(x, y + 1);
           if (o && (o->pass == n->pass) && node_is_a_room(o)) {
             n->dir_up    = false;
@@ -1759,7 +1759,7 @@ bool Nodes::create_path_to_exit(int pass) {
             n->dir_down  = true;
           }
         }
-        if (get(d.val, X, Y - 1) < d.val[X][Y]) {
+        if (get(d.val, X, Y - 1) < d.val[ X ][ Y ]) {
           auto o = getn(x, y - 1);
           if (o && (o->pass == n->pass) && node_is_a_room(o)) {
             n->dir_up    = false;
@@ -1864,28 +1864,28 @@ void Nodes::create_path_lock_to_key(int depth) {
         continue;
       }
       if (n && node_is_a_room(n)) {
-        if (get(d.val, X + 1, Y) < d.val[X][Y]) {
+        if (get(d.val, X + 1, Y) < d.val[ X ][ Y ]) {
           auto o = getn(x + 1, y);
           if (o && node_is_a_room(o)) {
             n->dir_right = true;
             o->dir_left  = true;
           }
         }
-        if (get(d.val, X - 1, Y) < d.val[X][Y]) {
+        if (get(d.val, X - 1, Y) < d.val[ X ][ Y ]) {
           auto o = getn(x - 1, y);
           if (o && node_is_a_room(o)) {
             n->dir_left  = true;
             o->dir_right = true;
           }
         }
-        if (get(d.val, X, Y + 1) < d.val[X][Y]) {
+        if (get(d.val, X, Y + 1) < d.val[ X ][ Y ]) {
           auto o = getn(x, y + 1);
           if (o && node_is_a_room(o)) {
             n->dir_down = true;
             o->dir_up   = true;
           }
         }
-        if (get(d.val, X, Y - 1) < d.val[X][Y]) {
+        if (get(d.val, X, Y - 1) < d.val[ X ][ Y ]) {
           auto o = getn(x, y - 1);
           if (o && node_is_a_room(o)) {
             n->dir_up   = true;
@@ -1975,7 +1975,7 @@ void Nodes::make_paths_off_critical_path_reachable(void) {
   dmap_process(&d, dmap_start, dmap_end);
   // dmap_print_walls(&d);
 
-  std::array<std::array<bool, MAP_GRID_HEIGHT>, MAP_GRID_WIDTH> on_critical_path = {};
+  std::array< std::array< bool, MAP_GRID_HEIGHT >, MAP_GRID_WIDTH > on_critical_path = {};
 
   auto p = dmap_solve(&d, start);
   for (auto c : p) {
@@ -2005,7 +2005,7 @@ void Nodes::make_paths_off_critical_path_reachable(void) {
     for (auto x = 0; x < grid_width; x++) {
       auto n = getn(x, y);
 
-      if (on_critical_path[x][y]) {
+      if (on_critical_path[ x ][ y ]) {
         continue;
       }
 
@@ -2046,9 +2046,9 @@ void Nodes::make_paths_off_critical_path_reachable(void) {
 }
 
 void Nodes::set_max_depth(void) {
-  std::vector<point> s;
-  auto               max_depth_  = 0;
-  auto               max_vdepth_ = 0;
+  std::vector< point > s;
+  auto                 max_depth_  = 0;
+  auto                 max_vdepth_ = 0;
 
   for (auto x = 0; x < grid_width; x++) {
     for (auto y = 0; y < grid_height; y++) {

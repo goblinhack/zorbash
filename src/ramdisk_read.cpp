@@ -12,7 +12,7 @@
 #include "my_ramdisk.h"
 #include "my_ptrcheck.h"
 
-std::map<std::string, ramdisk_t_> ramdisk_data;
+std::map< std::string, ramdisk_t_ > ramdisk_data;
 
 unsigned char *ramdisk_load(const char *filename, int *outlen) {
   TRACE_AND_INDENT();

@@ -181,9 +181,9 @@ bool Thing::try_to_carry(Thingp item) {
   return carry(item);
 }
 
-std::list<Thingp> Thing::anything_to_carry_at(fpoint at) {
+std::list< Thingp > Thing::anything_to_carry_at(fpoint at) {
   TRACE_AND_INDENT();
-  std::vector<std::pair<Thingp, int>> items;
+  std::vector< std::pair< Thingp, int > > items;
 
   dbg("Anything to carry at %d,%d", (int) at.x, (int) at.y);
   TRACE_AND_INDENT();
@@ -250,10 +250,11 @@ std::list<Thingp> Thing::anything_to_carry_at(fpoint at) {
   FOR_ALL_THINGS_END()
 
 end:
-  sort(items.begin(), items.end(),
-       [](const std::pair<Thingp, int> &a, const std::pair<Thingp, int> &b) -> bool { return a.second > b.second; });
+  sort(items.begin(), items.end(), [](const std::pair< Thingp, int > &a, const std::pair< Thingp, int > &b) -> bool {
+    return a.second > b.second;
+  });
 
-  std::list<Thingp> out;
+  std::list< Thingp > out;
   for (auto i : items) {
     out.push_back(i.first);
   }
@@ -261,7 +262,7 @@ end:
   return out;
 }
 
-std::list<Thingp> Thing::anything_to_carry(void) {
+std::list< Thingp > Thing::anything_to_carry(void) {
   TRACE_AND_INDENT();
   return anything_to_carry_at(mid_at);
 }
@@ -316,7 +317,7 @@ bool Thing::check_anything_to_carry(bool auto_collect_allowed) {
   return false;
 }
 
-void Thing::try_to_carry(const std::list<Thingp> &items) {
+void Thing::try_to_carry(const std::list< Thingp > &items) {
   for (auto item : items) {
     try_to_carry(item);
   }

@@ -23,8 +23,8 @@ bool Thing::spawn_next_to(const std::string &what) {
   TRACE_AND_INDENT();
   dbg("Spawn %s next to", what.c_str());
   TRACE_AND_INDENT();
-  std::vector<point>              possible;
-  static const std::vector<point> all_deltas = {
+  std::vector< point >              possible;
+  static const std::vector< point > all_deltas = {
       point(-1, -1), point(1, -1), point(-1, 1), point(1, 1), point(0, -1), point(-1, 0), point(1, 0), point(0, 1),
   };
 
@@ -77,7 +77,7 @@ bool Thing::spawn_next_to(const std::string &what) {
     return false;
   }
 
-  auto chosen = possible[pcg_random_range(0, cands)];
+  auto chosen = possible[ pcg_random_range(0, cands) ];
   auto c      = level->thing_new(what, chosen);
   c->inherit_from(this);
 
@@ -102,8 +102,8 @@ bool Thing::spawn_next_to_or_on_monst(const std::string &what) {
   TRACE_AND_INDENT();
   dbg("Spawn %s next to or on monst", what.c_str());
 
-  std::vector<point>              possible;
-  static const std::vector<point> all_deltas = {
+  std::vector< point >              possible;
+  static const std::vector< point > all_deltas = {
       point(-1, -1), point(1, -1), point(-1, 1), point(1, 1), point(0, -1), point(-1, 0), point(1, 0), point(0, 1),
   };
 
@@ -151,7 +151,7 @@ bool Thing::spawn_next_to_or_on_monst(const std::string &what) {
     return false;
   }
 
-  auto chosen = possible[pcg_random_range(0, cands)];
+  auto chosen = possible[ pcg_random_range(0, cands) ];
 
   auto c = level->thing_new(what, chosen);
   c->inherit_from(this);
@@ -244,8 +244,8 @@ bool Thing::spawn_fire(const std::string &what) {
   TRACE_AND_INDENT();
   dbg("Spawn fire: %s", what.c_str());
 
-  std::vector<point>              possible;
-  static const std::vector<point> all_deltas = {
+  std::vector< point >              possible;
+  static const std::vector< point > all_deltas = {
       point(-1, -1), point(1, -1), point(-1, 1), point(1, 1), point(0, -1), point(-1, 0), point(1, 0), point(0, 1),
   };
 
@@ -270,7 +270,7 @@ bool Thing::spawn_fire(const std::string &what) {
     return false;
   }
 
-  auto chosen = possible[pcg_random_range(0, cands)];
+  auto chosen = possible[ pcg_random_range(0, cands) ];
 
   auto c = level->thing_new(what, chosen);
   IF_DEBUG2 { c->log("Spawned"); }
@@ -293,10 +293,10 @@ bool Thing::spawn_at_if_possible(const std::string &what) {
   TRACE_AND_INDENT();
   dbg("Spawn under: %s", what.c_str());
 
-  std::vector<point> possible;
-  auto               x = mid_at.x;
-  auto               y = mid_at.y;
-  auto               p = point(x, y);
+  std::vector< point > possible;
+  auto                 x = mid_at.x;
+  auto                 y = mid_at.y;
+  auto                 p = point(x, y);
 
   if (level->is_hazard(x, y) || level->is_rock(x, y) || level->is_wall(x, y)) {
     return false;
@@ -309,7 +309,7 @@ bool Thing::spawn_at_if_possible(const std::string &what) {
     return false;
   }
 
-  auto chosen = possible[pcg_random_range(0, cands)];
+  auto chosen = possible[ pcg_random_range(0, cands) ];
 
   auto c = level->thing_new(what, chosen);
   c->inherit_from(this);
@@ -330,10 +330,10 @@ bool Thing::spawn_at(const std::string &what) {
   TRACE_AND_INDENT();
   dbg("Spawn under: %s", what.c_str());
 
-  std::vector<point> possible;
-  auto               x = mid_at.x;
-  auto               y = mid_at.y;
-  auto               p = point(x, y);
+  std::vector< point > possible;
+  auto                 x = mid_at.x;
+  auto                 y = mid_at.y;
+  auto                 p = point(x, y);
 
   possible.push_back(p);
 
@@ -342,7 +342,7 @@ bool Thing::spawn_at(const std::string &what) {
     return false;
   }
 
-  auto chosen = possible[pcg_random_range(0, cands)];
+  auto chosen = possible[ pcg_random_range(0, cands) ];
 
   auto c = level->thing_new(what, chosen);
   c->inherit_from(this);

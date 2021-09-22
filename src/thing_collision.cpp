@@ -29,8 +29,8 @@ public:
   uint16_t    priority {0};
 };
 
-static std::vector<class ThingColl> thing_colls;
-static const float                  thing_collision_tiles = 1;
+static std::vector< class ThingColl > thing_colls;
+static const float                    thing_collision_tiles = 1;
 
 static int circle_circle_collision(Thingp A, fpoint future_pos, Thingp B, fpoint B_at, fpoint *intersect) {
   // fpoint A0, A1, A2, A3;
@@ -411,7 +411,7 @@ bool Thing::collision_obstacle(fpoint p) {
   //
   // Avoid threats and treat them as obstacles
   //
-  for (const auto &it : get(level->all_things_ptr_at[THING_GROUP_ALL], p.x, p.y)) {
+  for (const auto &it : get(level->all_things_ptr_at[ THING_GROUP_ALL ], p.x, p.y)) {
     if (! it) {
       continue;
     }

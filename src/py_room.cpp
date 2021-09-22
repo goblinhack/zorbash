@@ -159,24 +159,24 @@ PyObject *map_load_room_(PyObject *obj, PyObject *args, PyObject *keywds) {
       }
 
       for (auto x = 0; x < MAP_ROOM_WIDTH; x++) {
-        set(r->data, x, y, MAP_DEPTH_FLOOR, floor_string[x]);
-        if (floor2_string[x] != ' ') {
-          set(r->data, x, y, MAP_DEPTH_FLOOR2, floor2_string[x]);
+        set(r->data, x, y, MAP_DEPTH_FLOOR, floor_string[ x ]);
+        if (floor2_string[ x ] != ' ') {
+          set(r->data, x, y, MAP_DEPTH_FLOOR2, floor2_string[ x ]);
         }
-        if (water_string[x] != ' ') {
-          set(r->data, x, y, MAP_DEPTH_WATER, water_string[x]);
+        if (water_string[ x ] != ' ') {
+          set(r->data, x, y, MAP_DEPTH_WATER, water_string[ x ]);
         }
-        if (lava_string[x] != ' ') {
-          set(r->data, x, y, MAP_DEPTH_LAVA, lava_string[x]);
+        if (lava_string[ x ] != ' ') {
+          set(r->data, x, y, MAP_DEPTH_LAVA, lava_string[ x ]);
         }
-        if (chasm_string[x] != ' ') {
-          set(r->data, x, y, MAP_DEPTH_CHASM, chasm_string[x]);
+        if (chasm_string[ x ] != ' ') {
+          set(r->data, x, y, MAP_DEPTH_CHASM, chasm_string[ x ]);
         }
-        if (walls_string[x] != ' ') {
-          set(r->data, x, y, MAP_DEPTH_OBJ, walls_string[x]);
+        if (walls_string[ x ] != ' ') {
+          set(r->data, x, y, MAP_DEPTH_OBJ, walls_string[ x ]);
         }
-        if (obj_strings[x] != ' ') {
-          set(r->data, x, y, MAP_DEPTH_OBJ, obj_strings[x]);
+        if (obj_strings[ x ] != ' ') {
+          set(r->data, x, y, MAP_DEPTH_OBJ, obj_strings[ x ]);
         }
       }
     }

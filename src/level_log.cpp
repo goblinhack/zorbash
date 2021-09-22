@@ -17,10 +17,10 @@
 void Level::log_(const char *fmt, va_list args) {
   verify(this);
   auto l = this;
-  char buf[MAXLONGSTR];
+  char buf[ MAXLONGSTR ];
   int  len;
 
-  buf[0] = '\0';
+  buf[ 0 ] = '\0';
   get_timestamp(buf, MAXLONGSTR);
   len = (int) strlen(buf);
 
@@ -45,10 +45,10 @@ void Level::log(const char *fmt, ...) {
 void Level::con_(const char *fmt, va_list args) {
   verify(this);
   auto l = this;
-  char buf[MAXLONGSTR];
+  char buf[ MAXLONGSTR ];
   int  len;
 
-  buf[0] = '\0';
+  buf[ 0 ] = '\0';
   get_timestamp(buf, MAXLONGSTR);
   len = (int) strlen(buf);
   snprintf(buf + len, MAXLONGSTR - len, "Level %s: ", l->to_string().c_str());
@@ -83,10 +83,10 @@ void Level::err_(const char *fmt, va_list args) {
 
   verify(this);
   auto l = this;
-  char buf[MAXLONGSTR];
+  char buf[ MAXLONGSTR ];
   int  len;
 
-  buf[0] = '\0';
+  buf[ 0 ] = '\0';
   get_timestamp(buf, MAXLONGSTR);
   len = (int) strlen(buf);
   snprintf(buf + len, MAXLONGSTR - len, "ERROR: Level %s: ", l->to_string().c_str());

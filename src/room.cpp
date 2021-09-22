@@ -12,7 +12,7 @@
 #include "my_vector_bounds_check.h"
 #include "my_ptrcheck.h"
 
-std::vector<Roomp> Room::all_rooms;
+std::vector< Roomp > Room::all_rooms;
 
 Room::Room(void) {
   this->roomno = all_rooms.size();
@@ -39,7 +39,7 @@ Roomp Room::room_new(void) {
 
 Roomp Room::create_w_flip(void) {
   TRACE_AND_INDENT();
-  std::vector<std::string> rot[MAP_DEPTH];
+  std::vector< std::string > rot[ MAP_DEPTH ];
 
   auto r = Room::room_new();
 
@@ -95,7 +95,7 @@ Roomp Room::create_w_flip(void) {
 
 Roomp Room::rotate_clockwise(void) {
   TRACE_AND_INDENT();
-  std::vector<std::string> rot[MAP_DEPTH];
+  std::vector< std::string > rot[ MAP_DEPTH ];
 
   auto r = Room::room_new();
 
@@ -156,8 +156,8 @@ Roomp Room::rotate_clockwise(void) {
 void Room::find_doors(void) {
   int z = MAP_DEPTH_OBJ;
 
-  for (auto x : range<int>(0, width)) {
-    for (auto y : range<int>(0, height)) {
+  for (auto x : range< int >(0, width)) {
+    for (auto y : range< int >(0, height)) {
       if (get(data, x, y, z) == Charmap::DOOR_UP) {
         has_door_up = true;
         doors_up.push_back(point(x, y));
@@ -190,7 +190,7 @@ void Room::finalize(void) {
 }
 
 void Room::dump(void) {
-  std::array<std::array<char, MAP_HEIGHT>, MAP_WIDTH> tmp {};
+  std::array< std::array< char, MAP_HEIGHT >, MAP_WIDTH > tmp {};
   for (auto y = 0; y < height; y++) {
     for (auto x = 0; x < width; x++) {
       set(tmp, x, y, ' ');
@@ -229,7 +229,7 @@ void Room::dump(void) {
 }
 
 void Room::con(void) {
-  std::array<std::array<char, MAP_HEIGHT>, MAP_WIDTH> tmp {};
+  std::array< std::array< char, MAP_HEIGHT >, MAP_WIDTH > tmp {};
   for (auto y = 0; y < height; y++) {
     for (auto x = 0; x < width; x++) {
       set(tmp, x, y, ' ');

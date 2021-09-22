@@ -72,7 +72,7 @@ std::string Thing::text_the(void) const {
 std::string Thing::text_The(void) const {
   TRACE_AND_INDENT();
   auto out = text_the();
-  out[0]   = toupper(out[0]);
+  out[ 0 ] = toupper(out[ 0 ]);
   return (out);
 }
 
@@ -132,7 +132,7 @@ std::string Thing::short_text_the(void) const {
 std::string Thing::short_text_The(void) const {
   TRACE_AND_INDENT();
   auto out = short_text_the();
-  out[0]   = toupper(out[0]);
+  out[ 0 ] = toupper(out[ 0 ]);
   return (out);
 }
 
@@ -266,7 +266,7 @@ void Thing::show_botcon_description(void) const {
   }
 
   if (text.size()) {
-    if ((text[text.size() - 1] == '.') || (text[text.size() - 1] == '!')) {
+    if ((text[ text.size() - 1 ] == '.') || (text[ text.size() - 1 ] == '!')) {
       BOTCON("%s", text.c_str());
     } else {
       BOTCON("%s.", text.c_str());

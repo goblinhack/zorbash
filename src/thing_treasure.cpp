@@ -42,9 +42,9 @@ bool Thing::is_carrying_treasure(void) {
   return false;
 }
 
-std::vector<Thingp> Thing::get_treasure_list(void) {
+std::vector< Thingp > Thing::get_treasure_list(void) {
   TRACE_AND_INDENT();
-  std::vector<Thingp> tr;
+  std::vector< Thingp > tr;
   dbg("Treasure:");
   TRACE_AND_INDENT();
   if (! monstp) {

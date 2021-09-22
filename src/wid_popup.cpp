@@ -97,7 +97,7 @@ void WidPopup::log(std::wstring s, bool lhs, bool rhs) {
 
 void wid_popup_test(void) {
   TRACE_AND_INDENT();
-  std::vector<std::string> items;
+  std::vector< std::string > items;
   items.push_back("text 1111111111111111");
   items.push_back("text 2222222222222222");
   items.push_back("text 3333333333333333");
@@ -144,7 +144,7 @@ void wid_popup_test(void) {
     }
 
     {
-      auto  item     = items[slot];
+      auto  item     = items[ slot ];
       auto  wid_item = wid_new_square_button(w, "item name");
       point tl       = make_point(3, 0);
       point br       = make_point(width - 2, 2);

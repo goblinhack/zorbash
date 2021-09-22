@@ -24,8 +24,8 @@ void Thing::on_use(Thingp what) {
 
   auto t = split_tokens(on_use, '.');
   if (t.size() == 2) {
-    auto        mod   = t[0];
-    auto        fn    = t[1];
+    auto        mod   = t[ 0 ];
+    auto        fn    = t[ 1 ];
     std::size_t found = fn.find("()");
     if (found != std::string::npos) {
       fn = fn.replace(found, 2, "");
@@ -44,8 +44,8 @@ void Thing::on_use(Thingp what, Thingp target) {
   if (! std::empty(on_use)) {
     auto t = split_tokens(on_use, '.');
     if (t.size() == 2) {
-      auto        mod   = t[0];
-      auto        fn    = t[1];
+      auto        mod   = t[ 0 ];
+      auto        fn    = t[ 1 ];
       std::size_t found = fn.find("()");
       if (found != std::string::npos) {
         fn = fn.replace(found, 2, "");

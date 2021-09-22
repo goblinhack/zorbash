@@ -72,7 +72,7 @@ public:
   Ptrcheck_history *allocated_by {};
   Ptrcheck_history *freed_by {};
 #ifdef ENABLE_PTRCHECK_HISTORY
-  std::array<Ptrcheck_history *, ENABLE_PTRCHECK_HISTORY> last_seen {};
+  std::array< Ptrcheck_history *, ENABLE_PTRCHECK_HISTORY > last_seen {};
 #endif
 
   //
@@ -172,11 +172,11 @@ static hash_t *hash;
 // How many old/freed pointers do we keep track of. We use this when we find
 // an unknown pointer to find when it last lived.
 //
-static const int                                    ringbuf_max_size = 2000000;
-static int                                          ringbuf_current_size;
-static std::array<class Ptrcheck, ringbuf_max_size> ringbuf;
-static Ptrcheck *                                   ringbuf_next;
-static Ptrcheck *                                   ringbuf_base;
+static const int                                      ringbuf_max_size = 2000000;
+static int                                            ringbuf_current_size;
+static std::array< class Ptrcheck, ringbuf_max_size > ringbuf;
+static Ptrcheck *                                     ringbuf_next;
+static Ptrcheck *                                     ringbuf_base;
 
 //
 // Wrapper for calloc.
@@ -203,7 +203,7 @@ static hash_elem_t **ptr2hash(hash_t *hash_table, void *ptr) {
   //
   slot = (int) ((((uintptr_t) (ptr)) >> 2) % hash_table->hash_size);
 
-  return (&hash_table->elements[slot]);
+  return (&hash_table->elements[ slot ]);
 }
 
 //
@@ -360,9 +360,9 @@ static Ptrcheck *ptrcheck_verify_pointer(const void *ptr, std::string &func, std
     // point in time.
     //
 #ifdef ENABLE_PTRCHECK_HISTORY
-    auto l = pc->last_seen[pc->last_seen_at];
+    auto l = pc->last_seen[ pc->last_seen_at ];
     if (! l) {
-      l = pc->last_seen[pc->last_seen_at] = new Ptrcheck_history();
+      l = pc->last_seen[ pc->last_seen_at ] = new Ptrcheck_history();
     }
     l->file = file;
     l->func = func;
@@ -399,7 +399,7 @@ static Ptrcheck *ptrcheck_verify_pointer(const void *ptr, std::string &func, std
   //
   // Check the ring buffer to see if we've seen this pointer before.
   //
-  pc = &ringbuf_next[0];
+  pc = &ringbuf_next[ 0 ];
   pc--;
 
   if (pc < ringbuf_base) {
@@ -455,7 +455,7 @@ static Ptrcheck *ptrcheck_verify_pointer(const void *ptr, std::string &func, std
           h = ENABLE_PTRCHECK_HISTORY - 1;
         }
 
-        auto H = pc->last_seen[h];
+        auto H = pc->last_seen[ h ];
         if (H) {
           std::cerr << string_sprintf("PTRCHECK: %p last seen at [%u] at %s:%s line %u at %s\n", ptr, i,
                                       H->file.c_str(), H->func.c_str(), H->line, H->ts.c_str());
@@ -522,8 +522,8 @@ void *ptrcheck_alloc(const void *ptr, std::string what, int size, std::string fu
     //
     // And a ring buffer to store old pointer into.
     //
-    ringbuf_next         = &ringbuf[0];
-    ringbuf_base         = &ringbuf[0];
+    ringbuf_next         = &ringbuf[ 0 ];
+    ringbuf_base         = &ringbuf[ 0 ];
     ringbuf_current_size = 0;
   }
 
@@ -656,7 +656,7 @@ void ptrcheck_leak_print(void) {
   }
 
   for (i = 0; i < hash->hash_size; i++) {
-    slot = &hash->elements[i];
+    slot = &hash->elements[ i ];
     elem = *slot;
 
     while (elem) {
@@ -683,7 +683,7 @@ void ptrcheck_leak_print(void) {
           h = ENABLE_PTRCHECK_HISTORY - 1;
         }
 
-        auto H = pc->last_seen[h];
+        auto H = pc->last_seen[ h ];
         if (H) {
           fprintf(stderr, "PTRCHECK: Last seen at [%u] at %s:%s line %u at %s\n", j, H->file.c_str(), H->func.c_str(),
                   H->line, H->ts.c_str());

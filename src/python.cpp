@@ -25,9 +25,9 @@
 #include "my_string.h"
 #include "my_sound.h"
 
-static std::map<std::string, PyObject *> py_mods;
-PyObject *                               zx_mod;
-PyMODINIT_FUNC                           python_mouse_y_module_create(void);
+static std::map< std::string, PyObject * > py_mods;
+PyObject *                                 zx_mod;
+PyMODINIT_FUNC                             python_mouse_y_module_create(void);
 
 void py_call_void(const char *name) {
   TRACE_AND_INDENT();
@@ -2934,7 +2934,7 @@ void python_init(char *argv[]) {
 
 PyObject *py_add_module(const char *mod) {
   auto name = std::string(mod);
-  auto pmod = py_mods[name];
+  auto pmod = py_mods[ name ];
   if (pmod != nullptr) {
     return pmod;
   }
@@ -2945,7 +2945,7 @@ PyObject *py_add_module(const char *mod) {
     ERR("Module init '%s' import failed", mod);
     return (nullptr);
   }
-  py_mods[name] = pmod;
+  py_mods[ name ] = pmod;
 
   return pmod;
 }

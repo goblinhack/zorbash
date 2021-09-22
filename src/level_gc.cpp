@@ -23,12 +23,12 @@ void Level::things_gc(bool force) {
   }
 
   FOR_ALL_THING_GROUPS(group) {
-    if (all_things_to_be_destroyed[group].empty()) {
+    if (all_things_to_be_destroyed[ group ].empty()) {
       continue;
     }
 
-    for (auto it = all_things_to_be_destroyed[group].cbegin(), next_it = it;
-         it != all_things_to_be_destroyed[group].cend(); it = next_it) {
+    for (auto it = all_things_to_be_destroyed[ group ].cbegin(), next_it = it;
+         it != all_things_to_be_destroyed[ group ].cend(); it = next_it) {
       ++next_it;
 
       auto id = it->first;
@@ -63,7 +63,7 @@ void Level::things_gc(bool force) {
         }
       }
 
-      all_things_to_be_destroyed[group].erase(it);
+      all_things_to_be_destroyed[ group ].erase(it);
 
       if (t->is_monst()) {
         monst_count--;
@@ -76,15 +76,15 @@ void Level::things_gc(bool force) {
   }
 
   FOR_ALL_THING_GROUPS(group) {
-    for (auto &i : all_things_of_interest_pending_remove[group]) {
-      all_things_of_interest[group].erase(i.first);
+    for (auto &i : all_things_of_interest_pending_remove[ group ]) {
+      all_things_of_interest[ group ].erase(i.first);
     }
-    all_things_of_interest_pending_remove[group] = {};
+    all_things_of_interest_pending_remove[ group ] = {};
 
-    for (auto &i : all_things_of_interest_pending_add[group]) {
-      all_things_of_interest[group].insert(i);
+    for (auto &i : all_things_of_interest_pending_add[ group ]) {
+      all_things_of_interest[ group ].insert(i);
     }
-    all_things_of_interest_pending_add[group] = {};
+    all_things_of_interest_pending_add[ group ] = {};
   }
 
   dbg("End thing garbage collection");

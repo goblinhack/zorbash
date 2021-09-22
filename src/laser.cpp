@@ -68,12 +68,12 @@ Laser_::Laser_(Levelp level, ThingId thing_id, point start, point stop, point pi
   tiles.resize(max_frames);
 
   for (int frame = 0; frame < max_frames; frame++) {
-    tiles[frame].push_back(tile_find_mand(name + "." + std::to_string(frame + 1) + ".start"));
+    tiles[ frame ].push_back(tile_find_mand(name + "." + std::to_string(frame + 1) + ".start"));
     for (int mid = 0; mid < max_frames - 2; mid++) {
-      tiles[frame].push_back(
+      tiles[ frame ].push_back(
           tile_find_mand(name + "." + std::to_string(frame + 1) + ".mid." + std::to_string(mid + 1)));
     }
-    tiles[frame].push_back(tile_find_mand(name + "." + std::to_string(frame + 1) + ".end"));
+    tiles[ frame ].push_back(tile_find_mand(name + "." + std::to_string(frame + 1) + ".end"));
   }
 }
 
@@ -124,7 +124,7 @@ void Level::display_lasers(void) {
 
   blit_init();
   auto now = time_update_time_milli();
-  auto e   = std::remove_if(all_lasers.begin(), all_lasers.end(), [=, this](Laser &p) {
+  auto e   = std::remove_if(all_lasers.begin(), all_lasers.end(), [ =, this ](Laser &p) {
     float timestep = p.ts_stop - p.ts_start;
     float dt       = ((float) (now - p.ts_start)) / timestep;
 
@@ -216,7 +216,7 @@ bool Thing::laser_anim_exists(void) {
 
 void Thing::delete_laser(void) {
   TRACE_AND_INDENT();
-  auto e = std::remove_if(level->all_lasers.begin(), level->all_lasers.end(), [=, this](Laser &p) {
+  auto e = std::remove_if(level->all_lasers.begin(), level->all_lasers.end(), [ =, this ](Laser &p) {
     if (p.id == id) {
       log("Remove laser");
       return true;

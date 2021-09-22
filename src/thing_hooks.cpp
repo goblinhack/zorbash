@@ -166,7 +166,7 @@ void Thing::remove_all_references() {
     // Slow, but not used too often
     //
     FOR_ALL_THING_GROUPS(group) {
-      for (auto p : level->all_things[group]) {
+      for (auto p : level->all_things[ group ]) {
         auto t = p.second;
         auto o = t->get_immediate_owner();
         if (o == this) {
@@ -183,7 +183,7 @@ void Thing::remove_all_references() {
     // Slow, but not used too often
     //
     FOR_ALL_THING_GROUPS(group) {
-      for (auto p : level->all_things[group]) {
+      for (auto p : level->all_things[ group ]) {
         auto t = p.second;
         auto o = t->get_immediate_minion_owner();
         if (o == this) {
@@ -200,7 +200,7 @@ void Thing::remove_all_references() {
     // Slow, but not used too often
     //
     FOR_ALL_THING_GROUPS(group) {
-      for (auto p : level->all_things[group]) {
+      for (auto p : level->all_things[ group ]) {
         auto t = p.second;
         auto o = t->get_immediate_spawned_owner();
         if (o == this) {
@@ -212,7 +212,7 @@ void Thing::remove_all_references() {
 
   IF_DEBUG4 {
     FOR_ALL_THING_GROUPS(group) {
-      for (auto p : level->all_things[group]) {
+      for (auto p : level->all_things[ group ]) {
         auto t = p.second;
         if (! t->monstp) {
           continue;
@@ -245,7 +245,7 @@ void Thing::remove_all_references() {
     }
 
     int group = get_group();
-    for (auto p : level->all_things_of_interest[group]) {
+    for (auto p : level->all_things_of_interest[ group ]) {
       auto t = p.second;
       if (! t->monstp) {
         continue;
@@ -276,7 +276,7 @@ void Thing::remove_all_references() {
       }
     }
 
-    for (auto p : level->all_animated_things[group]) {
+    for (auto p : level->all_animated_things[ group ]) {
       auto t = p.second;
       if (! t->monstp) {
         continue;

@@ -39,7 +39,7 @@ void Thing::animate(void) {
   if (unlikely(! tmap)) {
     return;
   }
-  std::vector<Tilep> *tiles = &((*tmap));
+  std::vector< Tilep > *tiles = &((*tmap));
   if (unlikely(! tiles || tiles->empty())) {
 #ifdef DEBUG_ANIM
     if (is_debug_type()) {

@@ -36,7 +36,7 @@ bool Thing::skillbox_id_insert(Thingp what) {
   int  free_slot      = -1;
   auto skillbox_items = player->monstp->skillbox_id.size();
   for (auto i = 0U; i < skillbox_items; i++) {
-    auto tp_id = monstp->skillbox_id[i];
+    auto tp_id = monstp->skillbox_id[ i ];
     if (! tp_id) {
       if (free_slot == -1) {
         free_slot = i;
@@ -67,8 +67,8 @@ bool Thing::skillbox_id_insert(Thingp what) {
 
   int item_slot = -1;
   if (free_slot != -1) {
-    monstp->skillbox_id[free_slot] = what->tp_id;
-    item_slot                      = free_slot;
+    monstp->skillbox_id[ free_slot ] = what->tp_id;
+    item_slot                        = free_slot;
   } else {
     if (skillbox_items >= UI_ACTIONBAR_MAX_ITEMS) {
       TOPCON("No space to carry %s which is not carried.", what->text_the().c_str());
@@ -114,7 +114,7 @@ bool Thing::skillbox_id_remove(Thingp what) {
 
   auto skillbox_items = player->monstp->skillbox_id.size();
   for (auto i = 0U; i < skillbox_items; i++) {
-    auto tp_id = monstp->skillbox_id[i];
+    auto tp_id = monstp->skillbox_id[ i ];
     if (! tp_id) {
       continue;
     }
@@ -127,7 +127,7 @@ bool Thing::skillbox_id_remove(Thingp what) {
       game->request_remake_skillbox = true;
 
       dbg("Remove slot");
-      monstp->skillbox_id[i] = 0;
+      monstp->skillbox_id[ i ] = 0;
 
       if (! monstp->skillbox_id.size()) {
         game->skillbox_highlight_slot = {};

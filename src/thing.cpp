@@ -19,7 +19,7 @@ const Tpp Thing::tp_or_update(void) {
   if (unlikely(tp_id == -1)) {
     return (nullptr);
   }
-  mytp = tp_id_map[tp_id - 1];
+  mytp = tp_id_map[ tp_id - 1 ];
   return (mytp);
 }
 
@@ -35,7 +35,7 @@ const Tpp Thing::tp(void) const {
   //
   // Means a missing call to tp_or_update
   //
-  if (tp_id_map[tp_id - 1]) {
+  if (tp_id_map[ tp_id - 1 ]) {
     ERR("no tp has been set yet for tp_id %d", tp_id);
   } else {
     DIE("no tp has been set for invalid tp_id %d", tp_id);

@@ -82,15 +82,15 @@ void Thing::add_enemy(Thingp attacker) {
     return;
   }
 
-  if (! monstp->enemies[attacker->id]) {
+  if (! monstp->enemies[ attacker->id ]) {
     if (is_player() && game->robot_mode) {
       CON("Robot: Add new enemy %s", attacker->to_string().c_str());
     } else {
       dbg("Add new enemy %s", attacker->to_string().c_str());
     }
-    monstp->enemies[attacker->id] = ai_enemy_memory();
+    monstp->enemies[ attacker->id ] = ai_enemy_memory();
   } else {
     dbg("Increment old enemy %s", attacker->to_string().c_str());
-    monstp->enemies[attacker->id] *= 2;
+    monstp->enemies[ attacker->id ] *= 2;
   }
 }

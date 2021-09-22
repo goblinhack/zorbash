@@ -20,7 +20,7 @@
 #include "my_string.h"
 #include "my_ui.h"
 
-std::list<WidPopup *> wid_thing_info_window;
+std::list< WidPopup * > wid_thing_info_window;
 
 void wid_thing_info_fini(void) {
   TRACE_AND_INDENT();
@@ -175,7 +175,7 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br) {
   return wid_popup_window;
 }
 
-WidPopup *Game::wid_thing_info_create_popup_compact(const std::vector<Thingp> &ts) {
+WidPopup *Game::wid_thing_info_create_popup_compact(const std::vector< Thingp > &ts) {
   TRACE_AND_INDENT();
   auto player = game->level->player;
   if (! player) {
@@ -190,7 +190,7 @@ WidPopup *Game::wid_thing_info_create_popup_compact(const std::vector<Thingp> &t
 
   wid_raise(wid_popup_window->wid_popup_container);
 
-  char tmp[MAXSHORTSTR];
+  char tmp[ MAXSHORTSTR ];
 
   for (auto t : ts) {
     auto name = t->short_text_capitalized();
@@ -405,7 +405,7 @@ void Game::wid_thing_info_create(Thingp t, bool when_hovering_over) {
   recursion = false;
 }
 
-void Game::wid_thing_info_create_list(const std::vector<Thingp> &ts) {
+void Game::wid_thing_info_create_list(const std::vector< Thingp > &ts) {
   TRACE_AND_INDENT();
   if (game->request_remake_inventory) {
     //
@@ -554,7 +554,7 @@ void Game::wid_thing_info_create_list(const std::vector<Thingp> &ts) {
 
 void Game::wid_thing_info_create_when_hovering_over(Thingp t) { wid_thing_info_create(t, true); }
 
-void Game::wid_thing_info_create_when_hovering_over_list(const std::vector<Thingp> &ts) {
+void Game::wid_thing_info_create_when_hovering_over_list(const std::vector< Thingp > &ts) {
   wid_thing_info_create_list(ts);
 }
 
@@ -604,8 +604,8 @@ void Game::wid_thing_info_add_monst_rarity(WidPopup *w, Thingp t) {
 
 void Game::wid_thing_info_add_gold_value(WidPopup *w, Thingp t) {
   TRACE_AND_INDENT();
-  char tmp[MAXSHORTSTR];
-  char tmp2[MAXSHORTSTR];
+  char tmp[ MAXSHORTSTR ];
+  char tmp2[ MAXSHORTSTR ];
 
   auto gold_value_dice = t->get_gold_value_dice();
   auto min_value       = gold_value_dice.min_roll();
@@ -623,8 +623,8 @@ void Game::wid_thing_info_add_gold_value(WidPopup *w, Thingp t) {
 
 void Game::wid_thing_info_add_nutrition(WidPopup *w, Thingp t) {
   TRACE_AND_INDENT();
-  char tmp[MAXSHORTSTR];
-  char tmp2[MAXSHORTSTR];
+  char tmp[ MAXSHORTSTR ];
+  char tmp2[ MAXSHORTSTR ];
 
   if (! game->level->player) {
     return;
@@ -648,8 +648,8 @@ void Game::wid_thing_info_add_nutrition(WidPopup *w, Thingp t) {
 
 void Game::wid_thing_info_add_health(WidPopup *w, Thingp t) {
   TRACE_AND_INDENT();
-  char tmp[MAXSHORTSTR];
-  char tmp2[MAXSHORTSTR];
+  char tmp[ MAXSHORTSTR ];
+  char tmp2[ MAXSHORTSTR ];
 
   if (t->is_alive_monst() || t->is_player()) {
     if (t->get_health() == t->get_health_max()) {
@@ -664,8 +664,8 @@ void Game::wid_thing_info_add_health(WidPopup *w, Thingp t) {
 
 void Game::wid_thing_info_add_melee_damage(WidPopup *w, Thingp t) {
   TRACE_AND_INDENT();
-  char tmp[MAXSHORTSTR];
-  char tmp2[MAXSHORTSTR];
+  char tmp[ MAXSHORTSTR ];
+  char tmp2[ MAXSHORTSTR ];
 
   if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_wand()) {
     auto attack_melee_dice = t->get_damage_melee_dice();
@@ -686,8 +686,8 @@ void Game::wid_thing_info_add_melee_damage(WidPopup *w, Thingp t) {
 
 void Game::wid_thing_info_add_poison_damage(WidPopup *w, Thingp t) {
   TRACE_AND_INDENT();
-  char tmp[MAXSHORTSTR];
-  char tmp2[MAXSHORTSTR];
+  char tmp[ MAXSHORTSTR ];
+  char tmp2[ MAXSHORTSTR ];
 
   if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_wand()) {
     auto attack_poison_dice = t->get_damage_poison_dice();
@@ -708,8 +708,8 @@ void Game::wid_thing_info_add_poison_damage(WidPopup *w, Thingp t) {
 
 void Game::wid_thing_info_add_bite_damage(WidPopup *w, Thingp t) {
   TRACE_AND_INDENT();
-  char tmp[MAXSHORTSTR];
-  char tmp2[MAXSHORTSTR];
+  char tmp[ MAXSHORTSTR ];
+  char tmp2[ MAXSHORTSTR ];
 
   if (t->is_alive_monst() || t->is_player()) {
     auto attack_bite_dice = t->get_damage_bite_dice();
@@ -730,8 +730,8 @@ void Game::wid_thing_info_add_bite_damage(WidPopup *w, Thingp t) {
 
 void Game::wid_thing_info_add_swallow_damage(WidPopup *w, Thingp t) {
   TRACE_AND_INDENT();
-  char tmp[MAXSHORTSTR];
-  char tmp2[MAXSHORTSTR];
+  char tmp[ MAXSHORTSTR ];
+  char tmp2[ MAXSHORTSTR ];
 
   if (t->is_alive_monst() || t->is_player()) {
     auto attack_swallow_dice = t->get_damage_swallow_dice();
@@ -752,7 +752,7 @@ void Game::wid_thing_info_add_swallow_damage(WidPopup *w, Thingp t) {
 
 void Game::wid_thing_info_add_attack(WidPopup *w, Thingp t) {
   TRACE_AND_INDENT();
-  char tmp[MAXSHORTSTR];
+  char tmp[ MAXSHORTSTR ];
 
   if (t->is_alive_monst() || t->is_player()) {
     auto stat = t->get_stat_attack();
@@ -769,7 +769,7 @@ void Game::wid_thing_info_add_attack(WidPopup *w, Thingp t) {
 
 void Game::wid_thing_info_add_defence(WidPopup *w, Thingp t) {
   TRACE_AND_INDENT();
-  char tmp[MAXSHORTSTR];
+  char tmp[ MAXSHORTSTR ];
 
   if (t->is_alive_monst() || t->is_player()) {
     auto stat = t->get_stat_defence();
@@ -786,7 +786,7 @@ void Game::wid_thing_info_add_defence(WidPopup *w, Thingp t) {
 
 void Game::wid_thing_info_add_strength(WidPopup *w, Thingp t) {
   TRACE_AND_INDENT();
-  char tmp[MAXSHORTSTR];
+  char tmp[ MAXSHORTSTR ];
 
   if (t->is_alive_monst() || t->is_player()) {
     auto stat = t->get_stat_strength();
@@ -803,7 +803,7 @@ void Game::wid_thing_info_add_strength(WidPopup *w, Thingp t) {
 
 void Game::wid_thing_info_add_constitution(WidPopup *w, Thingp t) {
   TRACE_AND_INDENT();
-  char tmp[MAXSHORTSTR];
+  char tmp[ MAXSHORTSTR ];
 
   if (t->is_alive_monst() || t->is_player()) {
     auto stat = t->get_stat_constitution();
@@ -948,8 +948,8 @@ void Game::wid_thing_info_add_carry_info(WidPopup *w, Thingp t) {
 
 void Game::wid_thing_info_add_charge_count(WidPopup *w, Thingp t) {
   TRACE_AND_INDENT();
-  char tmp[MAXSHORTSTR];
-  char tmp2[MAXSHORTSTR];
+  char tmp[ MAXSHORTSTR ];
+  char tmp2[ MAXSHORTSTR ];
 
   auto player = game->level->player;
   if (! player) {

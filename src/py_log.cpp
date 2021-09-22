@@ -14,10 +14,10 @@
 #include "my_globals.h"
 
 static void py_log_(const char *fmt, va_list args) {
-  char buf[MAXLONGSTR];
+  char buf[ MAXLONGSTR ];
   int  len;
 
-  buf[0] = '\0';
+  buf[ 0 ] = '\0';
   get_timestamp(buf, MAXLONGSTR);
   len = (int) strlen(buf);
   snprintf(buf + len, MAXLONGSTR - len, "PYC: ");

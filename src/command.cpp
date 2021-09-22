@@ -99,9 +99,9 @@ public:
   command_fn_t callback;
 };
 
-typedef std::shared_ptr<class command_t> commandp;
-typedef std::map<std::string, commandp>  commands;
-static commands                          commands_map;
+typedef std::shared_ptr< class command_t > commandp;
+typedef std::map< std::string, commandp >  commands;
+static commands                            commands_map;
 
 static uint8_t command_inited;
 
@@ -121,7 +121,7 @@ uint8_t command_init(void) {
 
 void command_add(command_fn_t callback, std::string input, std::string readable) {
   TRACE_AND_INDENT();
-  auto command = std::make_shared<class command_t>();
+  auto command = std::make_shared< class command_t >();
 
   auto result = commands_map.insert(std::make_pair(input, command));
 
@@ -143,13 +143,13 @@ void command_add(command_fn_t callback, std::string input, std::string readable)
 static int command_matches(const char *input, char *output, uint8_t show_ambiguous, uint8_t show_complete,
                            uint8_t execute_command, void *context) {
   TRACE_AND_INDENT();
-  char     cand_expand_to[MAXSTR];
+  char     cand_expand_to[ MAXSTR ];
   commandp matched_command = nullptr;
-  char     completes_to[MAXSTR];
-  char     expands_to[MAXSTR];
+  char     completes_to[ MAXSTR ];
+  char     expands_to[ MAXSTR ];
   tokens_t input_tokens;
-  char     match[MAXSTR];
-  char     match2[MAXSTR];
+  char     match[ MAXSTR ];
+  char     match2[ MAXSTR ];
   int      longest_match;
   int      common_len;
   int      matches;
@@ -172,9 +172,9 @@ static int command_matches(const char *input, char *output, uint8_t show_ambiguo
 
     for (t = 0; t < (int) std::min(command->tokens.cnt, input_tokens.cnt); t++) {
 
-      cnt = strncmp(command->tokens.args[t], input_tokens.args[t], strlen(input_tokens.args[t]));
+      cnt = strncmp(command->tokens.args[ t ], input_tokens.args[ t ], strlen(input_tokens.args[ t ]));
 
-      if (slre_match(&command->tokens.regexp[t], input_tokens.args[t], (int) strlen(input_tokens.args[t]),
+      if (slre_match(&command->tokens.regexp[ t ], input_tokens.args[ t ], (int) strlen(input_tokens.args[ t ]),
                      0 /* captures */)) {
         /*
          * Success
@@ -204,9 +204,9 @@ static int command_matches(const char *input, char *output, uint8_t show_ambiguo
 
     for (t = 0; t < (int) std::min(command->tokens.cnt, input_tokens.cnt); t++) {
 
-      cnt = strncmp(command->tokens.args[t], input_tokens.args[t], strlen(input_tokens.args[t]));
+      cnt = strncmp(command->tokens.args[ t ], input_tokens.args[ t ], strlen(input_tokens.args[ t ]));
 
-      if (slre_match(&command->tokens.regexp[t], input_tokens.args[t], (int) strlen(input_tokens.args[t]),
+      if (slre_match(&command->tokens.regexp[ t ], input_tokens.args[ t ], (int) strlen(input_tokens.args[ t ]),
                      0 /* captures */)) {
         /*
          * Success
@@ -227,10 +227,10 @@ static int command_matches(const char *input, char *output, uint8_t show_ambiguo
       matched_command = command;
 
       if (show_complete) {
-        completes_to[0] = '\0';
+        completes_to[ 0 ] = '\0';
 
         for (t = 0; t < longest_match; t++) {
-          strlcat_(completes_to, command->tokens.args[t], sizeof(completes_to));
+          strlcat_(completes_to, command->tokens.args[ t ], sizeof(completes_to));
           strlcat_(completes_to, " ", sizeof(completes_to));
         }
 
@@ -255,7 +255,7 @@ static int command_matches(const char *input, char *output, uint8_t show_ambiguo
    * Repeat and complete the command to any full matches.
    */
   {
-    expands_to[0] = '\0';
+    expands_to[ 0 ] = '\0';
 
     {
       for (auto iter : commands_map) {
@@ -263,9 +263,9 @@ static int command_matches(const char *input, char *output, uint8_t show_ambiguo
 
         for (t = 0; t < (int) std::min(command->tokens.cnt, input_tokens.cnt); t++) {
 
-          cnt = strncmp(command->tokens.args[t], input_tokens.args[t], strlen(input_tokens.args[t]));
+          cnt = strncmp(command->tokens.args[ t ], input_tokens.args[ t ], strlen(input_tokens.args[ t ]));
 
-          if (slre_match(&command->tokens.regexp[t], input_tokens.args[t], (int) strlen(input_tokens.args[t]),
+          if (slre_match(&command->tokens.regexp[ t ], input_tokens.args[ t ], (int) strlen(input_tokens.args[ t ]),
                          0 /* captures */)) {
             /*
              * Success
@@ -279,23 +279,23 @@ static int command_matches(const char *input, char *output, uint8_t show_ambiguo
         }
 
         if (t == longest_match) {
-          cand_expand_to[0] = '\0';
+          cand_expand_to[ 0 ] = '\0';
 
           for (t = 0; t < longest_match; t++) {
-            if (strisregexp(command->tokens.args[t])) {
-              strlcat_(cand_expand_to, input_tokens.args[t], sizeof(cand_expand_to));
+            if (strisregexp(command->tokens.args[ t ])) {
+              strlcat_(cand_expand_to, input_tokens.args[ t ], sizeof(cand_expand_to));
               strlcat_(cand_expand_to, " ", sizeof(cand_expand_to));
               continue;
             }
 
-            strlcat_(cand_expand_to, command->tokens.args[t], sizeof(cand_expand_to));
+            strlcat_(cand_expand_to, command->tokens.args[ t ], sizeof(cand_expand_to));
 
             strlcat_(cand_expand_to, " ", sizeof(cand_expand_to));
           }
 
-          if (expands_to[0] != '\0') {
-            common_len             = strcommon(expands_to, cand_expand_to);
-            expands_to[common_len] = '\0';
+          if (expands_to[ 0 ] != '\0') {
+            common_len               = strcommon(expands_to, cand_expand_to);
+            expands_to[ common_len ] = '\0';
           } else {
             strlcpy_(expands_to, cand_expand_to, sizeof(expands_to));
           }
@@ -339,7 +339,7 @@ uint8_t command_handle(const char *input, char *expandedtext, uint8_t show_ambig
     // return false;
     py_exec(input);
 
-    history[g_history_at] = string_to_wstring(std::string(input));
+    history[ g_history_at ] = string_to_wstring(std::string(input));
 
     g_history_at++;
     if (g_history_at >= HISTORY_MAX) {
@@ -387,11 +387,11 @@ uint8_t command_handle(const char *input, char *expandedtext, uint8_t show_ambig
 
 uint8_t command_handle(std::string input, std::string *expanded_text, uint8_t show_ambiguous, uint8_t show_complete,
                        uint8_t execute_command, void *context) {
-  char buf[MAXSTR];
+  char buf[ MAXSTR ];
 
-  buf[0] = '\0';
+  buf[ 0 ] = '\0';
 
-  uint8_t r = command_handle(input.c_str(), &buf[0], show_ambiguous, show_complete, execute_command, context);
+  uint8_t r = command_handle(input.c_str(), &buf[ 0 ], show_ambiguous, show_complete, execute_command, context);
 
   if (expanded_text) {
     *expanded_text = std::string(buf);
@@ -402,14 +402,14 @@ uint8_t command_handle(std::string input, std::string *expanded_text, uint8_t sh
 
 uint8_t command_handle(std::wstring input, std::wstring *expanded_text, uint8_t show_ambiguous, uint8_t show_complete,
                        uint8_t execute_command, void *context) {
-  char buf[MAXSTR];
+  char buf[ MAXSTR ];
 
-  buf[0] = '\0';
+  buf[ 0 ] = '\0';
 
   uint8_t r =
       command_handle(wstring_to_string(input).c_str(), buf, show_ambiguous, show_complete, execute_command, context);
 
-  if (expanded_text && buf[0]) {
+  if (expanded_text && buf[ 0 ]) {
     *expanded_text = string_to_wstring(std::string(buf));
   }
 

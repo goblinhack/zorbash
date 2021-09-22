@@ -17,7 +17,7 @@
 void Thing::gc(void) {
   TRACE_AND_INDENT();
   int  group  = get_group();
-  auto result = level->all_things_to_be_destroyed[group].insert(std::pair(id, this));
+  auto result = level->all_things_to_be_destroyed[ group ].insert(std::pair(id, this));
   if (result.second == false) {
     //
     // Is this a problem?

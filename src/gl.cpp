@@ -16,10 +16,10 @@ GLushort   glapi_last_right;
 GLushort   glapi_last_bottom;
 static int in_2d_mode;
 
-std::array<GLuint, MAX_FBO> render_buf_id = {};
-std::array<GLuint, MAX_FBO> fbo_id        = {};
-std::array<GLuint, MAX_FBO> fbo_tex_id    = {};
-std::array<isize, MAX_FBO>  fbo_size      = {};
+std::array< GLuint, MAX_FBO > render_buf_id = {};
+std::array< GLuint, MAX_FBO > fbo_id        = {};
+std::array< GLuint, MAX_FBO > fbo_tex_id    = {};
+std::array< isize, MAX_FBO >  fbo_size      = {};
 
 void gl_init_2d_mode(void) {
   TRACE_AND_INDENT();
@@ -397,13 +397,13 @@ void gl_init_fbo(void) {
     //
     // If no change in size (minimap, bg map) then do not reset the FBO
     //
-    if (fbo_size[i] == isize(tex_width, tex_height)) {
+    if (fbo_size[ i ] == isize(tex_width, tex_height)) {
       DBG4("GFX: skip init of FBO %d", i);
       continue;
     }
 
-    gl_init_fbo_(i, &render_buf_id[i], &fbo_id[i], &fbo_tex_id[i], tex_width, tex_height);
-    fbo_size[i] = isize(tex_width, tex_height);
+    gl_init_fbo_(i, &render_buf_id[ i ], &fbo_id[ i ], &fbo_tex_id[ i ], tex_width, tex_height);
+    fbo_size[ i ] = isize(tex_width, tex_height);
 
     gl_enter_2d_mode(tex_width, tex_height);
     blit_fbo_bind(i);
@@ -470,29 +470,29 @@ void blit_fbo(int fbo) {
   int tex_height;
   fbo_get_size(fbo, tex_width, tex_height);
   blit_init();
-  blit(fbo_tex_id[fbo], 0.0, 1.0, 1.0, 0.0, 0, 0, tex_width, tex_height);
+  blit(fbo_tex_id[ fbo ], 0.0, 1.0, 1.0, 0.0, 0, 0, tex_width, tex_height);
   blit_flush();
 }
 
 void blit_fbo_game_pix(int fbo) {
   blit_init();
-  blit(fbo_tex_id[fbo], 0.0, 1.0, 1.0, 0.0, 0, 0, game->config.game_pix_width, game->config.game_pix_height);
+  blit(fbo_tex_id[ fbo ], 0.0, 1.0, 1.0, 0.0, 0, 0, game->config.game_pix_width, game->config.game_pix_height);
   blit_flush();
 }
 
 void blit_fbo_ui_pix(int fbo) {
   blit_init();
-  blit(fbo_tex_id[fbo], 0.0, 1.0, 1.0, 0.0, 0, 0, game->config.ui_pix_width, game->config.ui_pix_height);
+  blit(fbo_tex_id[ fbo ], 0.0, 1.0, 1.0, 0.0, 0, 0, game->config.ui_pix_width, game->config.ui_pix_height);
   blit_flush();
 }
 
 void blit_fbo_window_pix(int fbo) {
   blit_init();
-  blit(fbo_tex_id[fbo], 0.0, 1.0, 1.0, 0.0, 0, 0, game->config.window_pix_width, game->config.window_pix_height);
+  blit(fbo_tex_id[ fbo ], 0.0, 1.0, 1.0, 0.0, 0, 0, game->config.window_pix_width, game->config.window_pix_height);
   blit_flush();
 }
 
-void blit_fbo_bind(int fbo) { glBindFramebuffer_EXT(GL_FRAMEBUFFER, fbo_id[fbo]); }
+void blit_fbo_bind(int fbo) { glBindFramebuffer_EXT(GL_FRAMEBUFFER, fbo_id[ fbo ]); }
 
 void blit_fbo_unbind(void) { glBindFramebuffer_EXT(GL_FRAMEBUFFER, 0); }
 
@@ -666,7 +666,7 @@ void blit_flush_triangle_fan(float *b, float *e) {
 }
 
 void gl_blitquad(GLushort left, GLushort top, GLushort right, GLushort bottom) {
-  GLushort  xy[4 * 2];
+  GLushort  xy[ 4 * 2 ];
   GLushort *xyp = xy;
 
   Vertex2(left, top);
@@ -684,7 +684,7 @@ void gl_blitquad(GLushort left, GLushort top, GLushort right, GLushort bottom) {
 }
 
 void gl_blitquad(const point &tl, const point &tr, const point &bl, const point &br) {
-  GLushort  xy[4 * 2];
+  GLushort  xy[ 4 * 2 ];
   GLushort *xyp = xy;
 
   Vertex2(tl.x, tl.y);
@@ -702,7 +702,7 @@ void gl_blitquad(const point &tl, const point &tr, const point &bl, const point 
 }
 
 void gl_blitsquare(GLushort left, GLushort top, GLushort right, GLushort bottom) {
-  GLushort  xy[4 * 2];
+  GLushort  xy[ 4 * 2 ];
   GLushort *xyp = xy;
 
   Vertex2(left, top);
@@ -720,7 +720,7 @@ void gl_blitsquare(GLushort left, GLushort top, GLushort right, GLushort bottom)
 }
 
 void gl_blitline(GLushort left, GLushort top, GLushort right, GLushort bottom) {
-  GLushort  xy[2 * 2];
+  GLushort  xy[ 2 * 2 ];
   GLushort *xyp = xy;
 
   Vertex2(left, top);
@@ -1092,10 +1092,10 @@ static void setupPalette(HDC hDC) {
     int i;
 
     for (i = 0; i < paletteSize; ++i) {
-      pPal->palPalEntry[i].peRed   = (((i >> pfd.cRedShift) & redMask) * 255) / redMask;
-      pPal->palPalEntry[i].peGreen = (((i >> pfd.cGreenShift) & greenMask) * 255) / greenMask;
-      pPal->palPalEntry[i].peBlue  = (((i >> pfd.cBlueShift) & blueMask) * 255) / blueMask;
-      pPal->palPalEntry[i].peFlags = 0;
+      pPal->palPalEntry[ i ].peRed   = (((i >> pfd.cRedShift) & redMask) * 255) / redMask;
+      pPal->palPalEntry[ i ].peGreen = (((i >> pfd.cGreenShift) & greenMask) * 255) / greenMask;
+      pPal->palPalEntry[ i ].peBlue  = (((i >> pfd.cBlueShift) & blueMask) * 255) / blueMask;
+      pPal->palPalEntry[ i ].peFlags = 0;
     }
   }
 

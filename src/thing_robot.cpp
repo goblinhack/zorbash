@@ -69,8 +69,8 @@ bool Thing::robot_ai_create_path_to_goal(int minx, int miny, int maxx, int maxy,
   //
   dbg("Choose goals (higher scores, lower costs are preferred):");
 
-  std::multiset<Goal> goals;
-  std::list<GoalMap>  goalmaps;
+  std::multiset< Goal > goals;
+  std::list< GoalMap >  goalmaps;
   robot_ai_init_can_see_dmap(minx, miny, maxx, maxy, search_type);
 
   switch (search_type) {
@@ -107,11 +107,11 @@ bool Thing::robot_ai_create_path_to_goal(int minx, int miny, int maxx, int maxy,
     // Find the highest/least preferred score so we can scale all the goals
     // later so they fit in one byte (makes it easier to debug).
     //
-    std::array<std::array<float, MAP_HEIGHT>, MAP_WIDTH> cell_totals         = {};
-    float                                                least_preferred     = 0;
-    float                                                most_preferred      = 0;
-    bool                                                 least_preferred_set = false;
-    bool                                                 most_preferred_set  = false;
+    std::array< std::array< float, MAP_HEIGHT >, MAP_WIDTH > cell_totals         = {};
+    float                                                    least_preferred     = 0;
+    float                                                    most_preferred      = 0;
+    bool                                                     least_preferred_set = false;
+    bool                                                     most_preferred_set  = false;
 
     for (int y = miny; y < maxy; y++) {
       for (int x = minx; x < maxx; x++) {
@@ -204,8 +204,8 @@ bool Thing::robot_ai_create_path_to_goal(int minx, int miny, int maxx, int maxy,
     // Modify the given goals with scores that indicate the cost of the
     // path to that goal. The result should be a sorted set of goals.
     //
-    std::multiset<Path> paths;
-    char                path_debug = '\0'; // astart path debug
+    std::multiset< Path > paths;
+    char                  path_debug = '\0'; // astart path debug
 
     for (auto &goal : g.goals) {
 #ifdef ENABLE_DEBUG_AI_ASTAR
@@ -216,7 +216,7 @@ bool Thing::robot_ai_create_path_to_goal(int minx, int miny, int maxx, int maxy,
       //
       // Unreachable?
       //
-      if (result.cost == std::numeric_limits<int>::max()) {
+      if (result.cost == std::numeric_limits< int >::max()) {
         dbg("Unreachable goal score %d @(%d,%d) %s", (int) goal.score, goal.at.x, goal.at.y, goal.msg.c_str());
 #ifdef ENABLE_DEBUG_AI_ASTAR
         auto start = point(minx, miny);
@@ -241,7 +241,7 @@ bool Thing::robot_ai_create_path_to_goal(int minx, int miny, int maxx, int maxy,
     }
 
     for (auto &result : paths) {
-      std::vector<point> new_move_path;
+      std::vector< point > new_move_path;
 
       for (point p : result.path) {
         if ((p.x == mid_at.x) && (p.y == mid_at.y)) {
@@ -263,7 +263,7 @@ bool Thing::robot_ai_create_path_to_goal(int minx, int miny, int maxx, int maxy,
 
       std::reverse(new_move_path.begin(), new_move_path.end());
 
-      auto p = new_move_path[new_move_path.size() - 1];
+      auto p = new_move_path[ new_move_path.size() - 1 ];
 
       std::string goal_path_str = "";
       for (auto p1 : new_move_path) {
@@ -377,13 +377,13 @@ bool Thing::robot_ai_create_path_to_goal(int minx, int miny, int maxx, int maxy,
 //
 int Thing::robot_ai_init_can_see_dmap(int minx, int miny, int maxx, int maxy, int search_type) {
   TRACE_AND_INDENT();
-  std::array<std::array<uint8_t, MAP_WIDTH>, MAP_HEIGHT> can_jump = {};
-  point                                                  start((int) mid_at.x, (int) mid_at.y);
-  auto                                                   dmap_can_see      = get_dmap_can_see();
-  auto                                                   seen_map          = get_seen_map();
-  point                                                  at                = make_point(mid_at);
-  bool                                                   jump_allowed      = false;
-  int                                                    something_changed = 0;
+  std::array< std::array< uint8_t, MAP_WIDTH >, MAP_HEIGHT > can_jump = {};
+  point                                                      start((int) mid_at.x, (int) mid_at.y);
+  auto                                                       dmap_can_see      = get_dmap_can_see();
+  auto                                                       seen_map          = get_seen_map();
+  point                                                      at                = make_point(mid_at);
+  bool                                                       jump_allowed      = false;
+  int                                                        something_changed = 0;
 
   switch (search_type) {
     case SEARCH_TYPE_LOCAL_JUMP_ALLOWED : jump_allowed = true; break;
@@ -533,7 +533,7 @@ int Thing::robot_ai_init_can_see_dmap(int minx, int miny, int maxx, int maxy, in
   //
   // Grow the search space beyond the light
   //
-  std::array<std::array<bool, MAP_WIDTH>, MAP_HEIGHT> walked = {};
+  std::array< std::array< bool, MAP_WIDTH >, MAP_HEIGHT > walked = {};
   if (is_player()) {
     for (int y = miny; y < maxy; y++) {
       for (int x = minx; x < maxx; x++) {
@@ -706,7 +706,7 @@ int Thing::robot_ai_init_can_see_dmap(int minx, int miny, int maxx, int maxy, in
 // have touched them) and choose the best goal. Create a path to that goal for
 // the thing to walk.
 //
-void Thing::robot_ai_choose_initial_goals(std::multiset<Goal> &goals, int minx, int miny, int maxx, int maxy) {
+void Thing::robot_ai_choose_initial_goals(std::multiset< Goal > &goals, int minx, int miny, int maxx, int maxy) {
   TRACE_AND_INDENT();
   auto dmap_can_see = get_dmap_can_see();
   auto age_map      = get_age_map();
@@ -1056,15 +1056,15 @@ void Thing::robot_ai_choose_initial_goals(std::multiset<Goal> &goals, int minx, 
 // what is currently visible and find the most interesting point at that edge
 // and then create a path to that edge.
 //
-void Thing::robot_ai_choose_search_goals(std::multiset<Goal> &goals, int search_type) {
+void Thing::robot_ai_choose_search_goals(std::multiset< Goal > &goals, int search_type) {
   TRACE_AND_INDENT();
   point start((int) mid_at.x, (int) mid_at.y);
 
-  std::array<std::array<bool, MAP_WIDTH>, MAP_HEIGHT> walked = {};
-  std::array<std::array<bool, MAP_WIDTH>, MAP_HEIGHT> pushed = {};
-  std::deque<point>                                   in;
-  std::deque<point>                                   can_reach_cands;
-  std::deque<Thingp>                                  out;
+  std::array< std::array< bool, MAP_WIDTH >, MAP_HEIGHT > walked = {};
+  std::array< std::array< bool, MAP_WIDTH >, MAP_HEIGHT > pushed = {};
+  std::deque< point >                                     in;
+  std::deque< point >                                     can_reach_cands;
+  std::deque< Thingp >                                    out;
   in.push_back(start);
   set(pushed, start.x, start.y, true);
 

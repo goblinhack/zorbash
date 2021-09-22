@@ -9,7 +9,7 @@
 #include "my_ui.h"
 
 static void gfx_init_font_small(void) {
-  std::initializer_list<std::string> tiles = {
+  std::initializer_list< std::string > tiles = {
       //////////////////////////////////////////////////////////////////
       // sp     !       "       #       $       %       &       '
       //////////////////////////////////////////////////////////////////
@@ -155,12 +155,12 @@ static void gfx_init_font_small(void) {
       "",
   };
 
-  const std::vector<std::string> arr(tiles);
+  const std::vector< std::string > arr(tiles);
   tile_load_arr_sprites("data/fonts/font-small.tga", "font_small", UI_FONT_SMALL_WIDTH, UI_FONT_SMALL_HEIGHT, arr);
 }
 
 static void gfx_init_font_large(void) {
-  std::initializer_list<std::string> tiles = {
+  std::initializer_list< std::string > tiles = {
       //////////////////////////////////////////////////////////////////
       // sp     !       "       #       $       %       &       '
       //////////////////////////////////////////////////////////////////
@@ -306,7 +306,7 @@ static void gfx_init_font_large(void) {
       "",
   };
 
-  const std::vector<std::string> arr(tiles);
+  const std::vector< std::string > arr(tiles);
   tile_load_arr_sprites("data/fonts/font-large.tga", "font_large", UI_FONT_LARGE_WIDTH, UI_FONT_LARGE_HEIGHT, arr);
 }
 

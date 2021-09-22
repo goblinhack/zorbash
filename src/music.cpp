@@ -28,7 +28,7 @@ public:
   uint32_t       rate = 44100;
 };
 
-static std::map<std::string, class music *> all_music;
+static std::map< std::string, class music * > all_music;
 
 static std::string music_current;
 

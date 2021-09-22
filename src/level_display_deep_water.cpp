@@ -34,8 +34,8 @@ void Level::display_deep_water(int fbo, int16_t minx, int16_t miny, int16_t maxx
 #define WATER_ACROSS 8
 #define WATER_DOWN   8
 
-  static std::array<std::array<Tilep, WATER_DOWN>, WATER_ACROSS> deep_water;
-  if (! deep_water[0][0]) {
+  static std::array< std::array< Tilep, WATER_DOWN >, WATER_ACROSS > deep_water;
+  if (! deep_water[ 0 ][ 0 ]) {
     set(deep_water, 0, 0, tile_find("deep_water1a"));
     set(deep_water, 1, 0, tile_find("deep_water2a"));
     set(deep_water, 2, 0, tile_find("deep_water3a"));

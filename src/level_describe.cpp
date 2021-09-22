@@ -50,7 +50,7 @@ void Level::describe(fpoint p) {
     return;
   }
 
-  std::vector<Thingp> hover_over_things;
+  std::vector< Thingp > hover_over_things;
   hover_over = nullptr;
 
   FOR_ALL_THINGS_THAT_DO_STUFF(this, t, p.x, p.y) {
@@ -378,7 +378,7 @@ void Level::describe(Thingp t) {
     return;
   }
 
-  std::vector<Thingp> hover_over_things;
+  std::vector< Thingp > hover_over_things;
   hover_over_things.push_back(t);
   game->wid_thing_info_create_when_hovering_over_list(hover_over_things);
 }

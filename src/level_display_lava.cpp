@@ -37,8 +37,8 @@ void Level::display_lava(int fbo, int16_t minx, int16_t miny, int16_t maxx, int1
 
 #define LAVA_ACROSS 8
 #define LAVA_DOWN   8
-  static std::array<std::array<Tilep, LAVA_DOWN>, LAVA_ACROSS> lava;
-  if (! lava[0][0]) {
+  static std::array< std::array< Tilep, LAVA_DOWN >, LAVA_ACROSS > lava;
+  if (! lava[ 0 ][ 0 ]) {
     set(lava, 0, 0, tile_find("lava1a"));
     set(lava, 1, 0, tile_find("lava2a"));
     set(lava, 2, 0, tile_find("lava3a"));

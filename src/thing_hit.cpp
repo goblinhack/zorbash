@@ -29,8 +29,8 @@ void Thing::on_hit(Thingp hitter,      // an arrow / monst /...
 
   auto t = split_tokens(on_hit, '.');
   if (t.size() == 2) {
-    auto        mod   = t[0];
-    auto        fn    = t[1];
+    auto        mod   = t[ 0 ];
+    auto        fn    = t[ 1 ];
     std::size_t found = fn.find("()");
     if (found != std::string::npos) {
       fn = fn.replace(found, 2, "");
@@ -58,8 +58,8 @@ void Thing::on_miss(Thingp hitter) {
 
   auto t = split_tokens(on_miss, '.');
   if (t.size() == 2) {
-    auto        mod   = t[0];
-    auto        fn    = t[1];
+    auto        mod   = t[ 0 ];
+    auto        fn    = t[ 1 ];
     std::size_t found = fn.find("()");
     if (found != std::string::npos) {
       fn = fn.replace(found, 2, "");
@@ -82,8 +82,8 @@ void Thing::on_bite(void) {
 
   auto t = split_tokens(on_bite, '.');
   if (t.size() == 2) {
-    auto        mod   = t[0];
-    auto        fn    = t[1];
+    auto        mod   = t[ 0 ];
+    auto        fn    = t[ 1 ];
     std::size_t found = fn.find("()");
     if (found != std::string::npos) {
       fn = fn.replace(found, 2, "");

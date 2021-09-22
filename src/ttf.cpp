@@ -64,8 +64,8 @@ Fontp ttf_new(std::string name, int pointSize, int style) {
     }
 #endif
 
-    f->u_to_c[c] = d;
-    f->valid[d]  = true;
+    f->u_to_c[ c ] = d;
+    f->valid[ d ]  = true;
     if (ttf) {
       ttf_create_tex_from_char(ttf, name.c_str(), f, c, d);
     }
@@ -97,10 +97,10 @@ static void ttf_set_color_key(SDL_Surface *glyph_surface, GLfloat *texcoord, uin
   *width  = glyph_surface->w;
   *height = glyph_surface->h;
 
-  texcoord[0] = 0;                                                            // Min X
-  texcoord[1] = 0;                                                            // Min Y
-  texcoord[2] = (GLfloat) (((double) glyph_surface->w) / ((double) *width));  // Max X
-  texcoord[3] = (GLfloat) (((double) glyph_surface->h) / ((double) *height)); // Max Y
+  texcoord[ 0 ] = 0;                                                            // Min X
+  texcoord[ 1 ] = 0;                                                            // Min Y
+  texcoord[ 2 ] = (GLfloat) (((double) glyph_surface->w) / ((double) *width));  // Max X
+  texcoord[ 3 ] = (GLfloat) (((double) glyph_surface->h) / ((double) *height)); // Max Y
 
   tmp = SDL_CreateRGBSurface(glyph_surface->flags, *width, *height, 32,
 #if SDL_BYTEORDER == SDL_BIG_ENDIAN
@@ -140,7 +140,7 @@ static void ttf_set_color_key(SDL_Surface *glyph_surface, GLfloat *texcoord, uin
 //
 static void ttf_create_tex_from_char(TTF_Font *ttf, const char *name, Font *f, uint16_t c, uint16_t d) {
   TRACE_AND_INDENT();
-  static uint16_t text[2];
+  static uint16_t text[ 2 ];
   int             e;
 
   //
@@ -164,8 +164,8 @@ static void ttf_create_tex_from_char(TTF_Font *ttf, const char *name, Font *f, u
   getref(f->glyphs, d).maxy    = maxy;
   getref(f->glyphs, d).advance = advance;
 
-  text[0] = c;
-  text[1] = '\0';
+  text[ 0 ] = c;
+  text[ 1 ] = '\0';
 
   TTF_SetFontHinting(ttf, TTF_HINTING_NORMAL);
   SDL_Surface *g1 = TTF_RenderUNICODE_Blended(ttf, text, f->foreground);
@@ -174,22 +174,22 @@ static void ttf_create_tex_from_char(TTF_Font *ttf, const char *name, Font *f, u
     return;
   }
 
-  GLfloat texcoord[4];
+  GLfloat texcoord[ 4 ];
 
-  f->tex[d].image = g1;
-  f->tex[d].tex   = 0;
+  f->tex[ d ].image = g1;
+  f->tex[ d ].tex   = 0;
 
   ttf_set_color_key(g1, texcoord, 0, 0, 0, &getref(f->glyphs, d).width, &getref(f->glyphs, d).height);
 
-  getref(f->glyphs, d).texMinX = texcoord[0];
-  getref(f->glyphs, d).texMinY = texcoord[1];
-  getref(f->glyphs, d).texMaxX = texcoord[2];
-  getref(f->glyphs, d).texMaxY = texcoord[3];
+  getref(f->glyphs, d).texMinX = texcoord[ 0 ];
+  getref(f->glyphs, d).texMinY = texcoord[ 1 ];
+  getref(f->glyphs, d).texMaxX = texcoord[ 2 ];
+  getref(f->glyphs, d).texMaxY = texcoord[ 3 ];
 }
 
 Fontp ttf_read_tga(Fontp f, const char *name, int pointsize) {
   TRACE_AND_INDENT();
-  char     filename[MAXSTR];
+  char     filename[ MAXSTR ];
   uint32_t c;
   Texp     tex;
 
@@ -213,11 +213,11 @@ Fontp ttf_write_tga(std::string name, int pointsize, int style) {
   TRACE_AND_INDENT();
   uint32_t     rmask, gmask, bmask, amask;
   int          glyph_per_row;
-  char         filename[200];
+  char         filename[ 200 ];
   SDL_Surface *dst;
   uint32_t     height;
   uint32_t     width;
-  double       max_line_height[TTF_GLYPH_MAX];
+  double       max_line_height[ TTF_GLYPH_MAX ];
   uint32_t     c;
   int          x;
   int          y;
@@ -256,9 +256,9 @@ Fontp ttf_write_tga(std::string name, int pointsize, int style) {
     double w = get(f->glyphs, c).maxx - get(f->glyphs, c).minx;
     double h = get(f->glyphs, c).maxy - get(f->glyphs, c).miny;
 
-    max_line_height[y] = fmax(max_line_height[y], h);
-    max_char_height    = fmax(max_char_height, max_line_height[y]);
-    max_char_width     = fmax(max_char_width, w);
+    max_line_height[ y ] = fmax(max_line_height[ y ], h);
+    max_char_height      = fmax(max_char_height, max_line_height[ y ]);
+    max_char_width       = fmax(max_char_width, w);
   }
   printf("%d total glyphs\n", tot);
 

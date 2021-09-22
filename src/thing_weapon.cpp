@@ -428,7 +428,7 @@ void Thing::use_weapon(void) {
   //
   // We didn't hit anything. See if there's something else to hit.
   //
-  static const std::vector<point> all_deltas = {
+  static const std::vector< point > all_deltas = {
       point(-1, -1), point(1, -1), point(-1, 1), point(1, 1), point(0, -1),
       point(-1, 0),  point(1, 0),  point(0, 1),  point(0, 0), // For spiderwebs
   };

@@ -29,8 +29,8 @@ void Thing::on_fire(void) {
 
   auto t = split_tokens(on_fire, '.');
   if (t.size() == 2) {
-    auto        mod   = t[0];
-    auto        fn    = t[1];
+    auto        mod   = t[ 0 ];
+    auto        fn    = t[ 1 ];
     std::size_t found = fn.find("()");
     if (found != std::string::npos) {
       fn = fn.replace(found, 2, "");
@@ -231,7 +231,7 @@ bool Thing::ai_on_fire_choose_target(point &nh) {
   auto attempts = 10;
   while (attempts--) {
     auto  tries   = 1000;
-    auto  closest = std::numeric_limits<int>::max();
+    auto  closest = std::numeric_limits< int >::max();
     point best;
     auto  got_one = false;
 

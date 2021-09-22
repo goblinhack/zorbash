@@ -11,7 +11,7 @@
 
 static int debug_enabled = false;
 
-std::vector<LevelStaticp> LevelStatic::all_static_levels;
+std::vector< LevelStaticp > LevelStatic::all_static_levels;
 
 LevelStatic::LevelStatic(void) {
   this->levelno = all_static_levels.size();
@@ -40,7 +40,7 @@ void LevelStatic::finalize(void) {
 }
 
 void LevelStatic::dump(void) {
-  std::array<std::array<char, MAP_HEIGHT>, MAP_WIDTH> tmp;
+  std::array< std::array< char, MAP_HEIGHT >, MAP_WIDTH > tmp;
   for (auto y = 0; y < height; y++) {
     for (auto x = 0; x < width; x++) {
       set(tmp, x, y, ' ');

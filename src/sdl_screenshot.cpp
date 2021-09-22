@@ -45,7 +45,7 @@ void sdl_screenshot_do(void) {
   GL_ERROR_CHECK();
 #endif
 
-  std::vector<uint8_t> pixels(3 * w * h);
+  std::vector< uint8_t > pixels(3 * w * h);
   glReadPixels(0, 0, w, h, GL_RGB, GL_UNSIGNED_BYTE, pixels.data());
   GL_ERROR_CHECK();
 
@@ -67,7 +67,7 @@ void sdl_screenshot_do(void) {
   count++;
 }
 
-std::vector<uint8_t> sdl_fbo_save(int fbo) {
+std::vector< uint8_t > sdl_fbo_save(int fbo) {
   TRACE_AND_INDENT();
   int w;
   int h;
@@ -80,7 +80,7 @@ std::vector<uint8_t> sdl_fbo_save(int fbo) {
   glPixelStorei(GL_PACK_ALIGNMENT, 1);
   GL_ERROR_CHECK();
 
-  std::vector<uint8_t> pixels;
+  std::vector< uint8_t > pixels;
   pixels.resize(4 * w * h);
 
   glReadPixels(0, 0, w, h, GL_RGBA, GL_UNSIGNED_BYTE, pixels.data());
@@ -92,7 +92,7 @@ std::vector<uint8_t> sdl_fbo_save(int fbo) {
   return pixels;
 }
 
-void sdl_fbo_load(int fbo, const std::vector<uint8_t> &pixels) {
+void sdl_fbo_load(int fbo, const std::vector< uint8_t > &pixels) {
   TRACE_AND_INDENT();
   if (pixels.empty()) {
     return;
@@ -129,7 +129,7 @@ void sdl_fbo_dump(int fbo, const std::string &name) {
   glPixelStorei(GL_PACK_ALIGNMENT, 1);
   GL_ERROR_CHECK();
 
-  std::vector<uint8_t> pixels;
+  std::vector< uint8_t > pixels;
   pixels.resize(4 * w * h);
 
   glReadPixels(0, 0, w, h, GL_RGBA, GL_UNSIGNED_BYTE, pixels.data());

@@ -20,7 +20,7 @@
 
 bool Thing::ai_blocked(void) {
   TRACE_AND_INDENT();
-  static const std::vector<point> move_deltas = {
+  static const std::vector< point > move_deltas = {
       point(0, -1),
       point(-1, 0),
       point(1, 0),
@@ -42,7 +42,7 @@ bool Thing::ai_blocked(void) {
 
 bool Thing::ai_blocked_completely(void) {
   TRACE_AND_INDENT();
-  static const std::vector<point> move_deltas = {
+  static const std::vector< point > move_deltas = {
       point(0, -1), point(-1, 0), point(1, 0), point(0, 1), point(0, 0),
   };
 

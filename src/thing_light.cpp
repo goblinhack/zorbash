@@ -19,13 +19,13 @@
 #include "my_monst.h"
 #include "my_ptrcheck.h"
 
-std::vector<Lightp> &Thing::get_light(void) {
+std::vector< Lightp > &Thing::get_light(void) {
   TRACE_AND_INDENT();
   if (monstp) {
     verify(monstp);
     return (monstp->light);
   } else {
-    static std::vector<Lightp> no_light;
+    static std::vector< Lightp > no_light;
     return no_light;
   }
 }

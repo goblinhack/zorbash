@@ -34,7 +34,7 @@ Widp wid_topcon_window {};
 static std::wstring last_msg;
 static int          last_msg_count;
 
-static std::map<unsigned int, std::wstring> wid_topcon_lines;
+static std::map< unsigned int, std::wstring > wid_topcon_lines;
 
 void wid_topcon_fini(void) {
   TRACE_AND_INDENT();
@@ -786,10 +786,10 @@ static void wid_topcon_wid_create(void) {
   wid_update(wid_topcon_window);
 }
 
-std::vector<std::wstring> wid_topcon_serialize(void) {
+std::vector< std::wstring > wid_topcon_serialize(void) {
   TRACE_AND_INDENT();
-  std::vector<std::wstring> r;
-  auto                      tmp = wid_get_head(wid_topcon_input_line);
+  std::vector< std::wstring > r;
+  auto                        tmp = wid_get_head(wid_topcon_input_line);
   while (tmp) {
     auto s = wid_get_text(tmp);
     if (s.size()) {
@@ -801,7 +801,7 @@ std::vector<std::wstring> wid_topcon_serialize(void) {
   return (r);
 }
 
-void wid_topcon_deserialize(std::vector<std::wstring> r) {
+void wid_topcon_deserialize(std::vector< std::wstring > r) {
   TRACE_AND_INDENT();
   for (const auto &s : r) {
     auto tmp = wstring_to_string(s);

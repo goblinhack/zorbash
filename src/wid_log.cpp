@@ -14,11 +14,11 @@
 #include "my_globals.h"
 
 static void wid_log_(Widp t, const char *fmt, va_list args) {
-  char buf[MAXLONGSTR];
+  char buf[ MAXLONGSTR ];
   int  len;
 
   verify(t);
-  buf[0] = '\0';
+  buf[ 0 ] = '\0';
   get_timestamp(buf, MAXLONGSTR);
   len = (int) strlen(buf);
   snprintf(buf + len, MAXLONGSTR - len, "WID [%s]: ", to_string(t).c_str());

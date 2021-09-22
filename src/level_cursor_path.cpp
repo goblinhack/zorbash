@@ -201,7 +201,7 @@ void Level::cursor_path_draw_line(point start, point end) {
   }
 }
 
-void Level::cursor_path_draw_line(const std::vector<point> &move_path) {
+void Level::cursor_path_draw_line(const std::vector< point > &move_path) {
   TRACE_AND_INDENT();
   game->cursor_move_path = move_path;
 
@@ -246,7 +246,7 @@ void Level::cursor_path_draw(point start, point end) {
   minimap_valid = false;
 }
 
-void Level::cursor_path_draw(const std::vector<point> &move_path) {
+void Level::cursor_path_draw(const std::vector< point > &move_path) {
   TRACE_AND_INDENT();
   if (! player) {
     return;
@@ -341,7 +341,7 @@ void Level::cursor_path_create(void) {
   }
 }
 
-void Level::cursor_path_create(const std::vector<point> &move_path) {
+void Level::cursor_path_create(const std::vector< point > &move_path) {
   TRACE_AND_INDENT();
   if (! cursor) {
     return;

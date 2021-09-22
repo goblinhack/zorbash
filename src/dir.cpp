@@ -47,7 +47,7 @@ uint8_t dir_exists(const char *indir) {
  */
 char *dir_dot(void) {
   TRACE_AND_INDENT();
-  static char buf[MAXPATHLEN];
+  static char buf[ MAXPATHLEN ];
 
   dospath2unix(getcwd(buf, sizeof(buf)));
 

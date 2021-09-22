@@ -21,8 +21,8 @@
 #include "my_ptrcheck.h"
 #include "my_array_bounds_check.h"
 
-std::map<std::string, class Tile *> all_tiles;
-std::vector<class Tile *>           all_tiles_array;
+std::map< std::string, class Tile * > all_tiles;
+std::vector< class Tile * >           all_tiles_array;
 
 static uint8_t tile_init_done;
 
@@ -36,7 +36,7 @@ Tilep tile_index_to_tile(uint16_t i) {
   if (unlikely(! i)) {
     return (nullptr);
   } else {
-    return all_tiles_array[i - 1];
+    return all_tiles_array[ i - 1 ];
   }
 }
 
@@ -159,7 +159,7 @@ void tile_load_arr(std::string file, std::string name, uint32_t width, uint32_t 
   pixel_size.h = height;
 
   while (nargs--) {
-    std::string name = arr[idx++];
+    std::string name = arr[ idx++ ];
 
     if (name != "") {
       if (tile_find(name)) {
@@ -286,7 +286,7 @@ void tile_load_arr(std::string file, std::string name, uint32_t width, uint32_t 
 }
 
 void tile_load_arr(std::string file, std::string name, uint32_t width, uint32_t height,
-                   const std::vector<std::string> &arr) {
+                   const std::vector< std::string > &arr) {
   TRACE_AND_INDENT();
   Texp tex = tex_load(file, name, GL_NEAREST);
 
@@ -459,7 +459,7 @@ void tile_load_arr_sprites(std::string file, std::string name, uint32_t width, u
   pixel_size.h = height;
 
   while (nargs--) {
-    std::string name = arr[idx++];
+    std::string name = arr[ idx++ ];
 
     if (name != "") {
       if (tile_find(name)) {
@@ -592,7 +592,7 @@ void tile_load_arr_sprites(std::string file, std::string name, uint32_t width, u
 }
 
 void tile_load_arr_sprites(std::string file, std::string name, uint32_t width, uint32_t height,
-                           const std::vector<std::string> &arr) {
+                           const std::vector< std::string > &arr) {
   TRACE_AND_INDENT();
   Texp tex;
   Texp tex_black_and_white;
@@ -796,7 +796,7 @@ void tile_get_coords(Tilep tile, float *x1, float *y1, float *x2, float *y2) {
 
 Tilep string2tile(const char **s) {
   TRACE_AND_INDENT();
-  static char        name[MAXSHORTSTR];
+  static char        name[ MAXSHORTSTR ];
   static const char *eo_name = name + MAXSHORTSTR;
   const char *       c       = *s;
   char *             t       = name;
@@ -961,11 +961,11 @@ Tilep tile_first(Tilemap *tmap) {
   if (unlikely(! tmap)) {
     return (0);
   }
-  std::vector<Tilep> *tiles = &((*tmap));
+  std::vector< Tilep > *tiles = &((*tmap));
   if (unlikely(tiles->empty())) {
     return (0);
   }
-  Tilep tile = (*tiles)[0];
+  Tilep tile = (*tiles)[ 0 ];
   return tile_index_to_tile(tile->global_index);
 }
 
@@ -973,11 +973,11 @@ Tilep tile_random(Tilemap *tmap) {
   if (unlikely(! tmap)) {
     return (0);
   }
-  std::vector<Tilep> *tiles = &((*tmap));
+  std::vector< Tilep > *tiles = &((*tmap));
   if (unlikely(tiles->empty())) {
     return (0);
   }
-  auto tile = ((*tiles)[non_pcg_rand() % tiles->size()]);
+  auto tile = ((*tiles)[ non_pcg_rand() % tiles->size() ]);
   return tile_index_to_tile(tile->global_index);
 }
 
@@ -985,11 +985,11 @@ Tilep tile_n(Tilemap *tmap, int n) {
   if (unlikely(! tmap)) {
     return (0);
   }
-  std::vector<Tilep> *tiles = &((*tmap));
+  std::vector< Tilep > *tiles = &((*tmap));
   if (unlikely(tiles->empty())) {
     return (0);
   }
-  auto tile = ((*tiles)[n % tiles->size()]);
+  auto tile = ((*tiles)[ n % tiles->size() ]);
   return tile_index_to_tile(tile->global_index);
 }
 
@@ -997,7 +997,7 @@ Tilep tile_next(Tilemap *tmap, Tilep in) {
   if (unlikely(! tmap)) {
     return (0);
   }
-  std::vector<Tilep> *tiles = &((*tmap));
+  std::vector< Tilep > *tiles = &((*tmap));
   if (unlikely(tiles->empty())) {
     return (0);
   }
@@ -1006,7 +1006,7 @@ Tilep tile_next(Tilemap *tmap, Tilep in) {
   if (cursor >= tiles->size()) {
     cursor = 0;
   }
-  auto tile = ((*tiles)[cursor]);
+  auto tile = ((*tiles)[ cursor ]);
   return tile_index_to_tile(tile->global_index);
 }
 

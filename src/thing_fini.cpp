@@ -68,10 +68,10 @@ void Thing::destroy(void) {
   delete_particle();
 
   FOR_ALL_THING_GROUPS(group) {
-    auto f = level->all_things_to_be_destroyed[group].find(id);
-    if (f != level->all_things_to_be_destroyed[group].end()) {
+    auto f = level->all_things_to_be_destroyed[ group ].find(id);
+    if (f != level->all_things_to_be_destroyed[ group ].end()) {
       dbg2("Remove from gc");
-      level->all_things_to_be_destroyed[group].erase(f);
+      level->all_things_to_be_destroyed[ group ].erase(f);
     }
   }
 

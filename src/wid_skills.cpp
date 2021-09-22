@@ -19,8 +19,8 @@
 #include "my_thing.h"
 #include "my_monst.h"
 
-WidPopup *              wid_skills;
-static std::vector<Tpp> skills;
+WidPopup *                wid_skills;
+static std::vector< Tpp > skills;
 
 void wid_skill_choose_destroy(void) {
   TRACE_AND_INDENT();
@@ -38,7 +38,7 @@ static void wid_skills_slot(int slot) {
 
   auto player = game->level->player;
   if (player) {
-    auto tpp = skills[slot];
+    auto tpp = skills[ slot ];
     player->add_skill(tpp);
     game->tick_begin("learned a skill");
   }
@@ -224,7 +224,7 @@ void Game::wid_skill_choose(void) {
     wid_set_pos(w, tl, br);
     wid_set_shape_none(w);
 
-    auto tpp = skills[slot];
+    auto tpp = skills[ slot ];
 
     {
       auto wid_icon = wid_new_square_button(w, "skill icon");

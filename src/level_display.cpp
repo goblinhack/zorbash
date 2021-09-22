@@ -402,14 +402,14 @@ void Level::display_map(void) {
     float bot   = (float) Y / h;
 
     blit_init();
-    blit(fbo_tex_id[FBO_FULLMAP], left, top, right, bot, 0, 0, game->config.game_pix_width,
+    blit(fbo_tex_id[ FBO_FULLMAP ], left, top, right, bot, 0, 0, game->config.game_pix_width,
          game->config.game_pix_height);
     blit_flush();
 
     glBlendFunc(GL_DST_COLOR, GL_SRC_ALPHA_SATURATE);
 
     blit_init();
-    blit(fbo_tex_id[FBO_FULLMAP_LIGHT], left, top, right, bot, 0, 0, game->config.game_pix_width,
+    blit(fbo_tex_id[ FBO_FULLMAP_LIGHT ], left, top, right, bot, 0, 0, game->config.game_pix_width,
          game->config.game_pix_height);
     blit_flush();
 

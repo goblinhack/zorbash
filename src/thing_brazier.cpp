@@ -23,7 +23,7 @@ void Thing::brazier_tick(void) {
     return;
   }
 
-  static const std::vector<fpoint> all_deltas = {
+  static const std::vector< fpoint > all_deltas = {
       fpoint(-1, -1), fpoint(1, -1), fpoint(-1, 1), fpoint(1, 1),
       fpoint(0, -1),  fpoint(-1, 0), fpoint(1, 0),  fpoint(0, 1),
   };

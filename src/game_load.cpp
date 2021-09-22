@@ -27,13 +27,13 @@
 WidPopup *wid_load;
 void      wid_load_destroy(void);
 
-static ts_t                         old_ts_dungeon_created;
-static ts_t                         new_ts_dungeon_created;
-static ts_t                         T;
-static std::string                  game_load_error;
-bool                                game_load_headers_only;
-extern int                          GAME_SAVE_MARKER_EOL;
-std::array<bool, UI_WID_SAVE_SLOTS> slot_valid;
+static ts_t                           old_ts_dungeon_created;
+static ts_t                           new_ts_dungeon_created;
+static ts_t                           T;
+static std::string                    game_load_error;
+bool                                  game_load_headers_only;
+extern int                            GAME_SAVE_MARKER_EOL;
+std::array< bool, UI_WID_SAVE_SLOTS > slot_valid;
 
 #define READ_MAGIC(what, m)                                                                                            \
   {                                                                                                                    \
@@ -56,7 +56,7 @@ static ts_t load(ts_t T) {
   return (T - old_ts_dungeon_created + new_ts_dungeon_created);
 }
 
-std::istream &operator>>(std::istream &in, Bits<Monstp &> my) {
+std::istream &operator>>(std::istream &in, Bits< Monstp & > my) {
   TRACE_AND_INDENT();
   /////////////////////////////////////////////////////////////////////////
   // Keep these sorted alphabetically to make it easier to see additions
@@ -169,7 +169,7 @@ std::istream &operator>>(std::istream &in, Bits<Monstp &> my) {
   return (in);
 }
 
-std::istream &operator>>(std::istream &in, Bits<Thingp &> my) {
+std::istream &operator>>(std::istream &in, Bits< Thingp & > my) {
   TRACE_AND_INDENT();
   auto start = in.tellg();
 
@@ -440,7 +440,7 @@ std::istream &operator>>(std::istream &in, Bits<Thingp &> my) {
   return (in);
 }
 
-std::istream &operator>>(std::istream &in, Bits<Level *&> my) {
+std::istream &operator>>(std::istream &in, Bits< Level *& > my) {
   TRACE_AND_INDENT();
   auto l = my.t;
 
@@ -581,7 +581,7 @@ std::istream &operator>>(std::istream &in, Bits<Level *&> my) {
   // Operate on a copy, not live data that might change as we add things
   //
   FOR_ALL_THING_GROUPS(group) {
-    auto ids = my.t->all_things_id_at[group];
+    auto ids = my.t->all_things_id_at[ group ];
 
     for (auto x = 0; x < MAP_WIDTH; x++) {
       for (auto y = 0; y < MAP_HEIGHT; y++) {
@@ -634,7 +634,7 @@ std::istream &operator>>(std::istream &in, Bits<Level *&> my) {
 
   uint32_t csum = 0;
   FOR_ALL_THING_GROUPS(group) {
-    for (auto p : l->all_things[group]) {
+    for (auto p : l->all_things[ group ]) {
       auto t = p.second;
       csum += t->mid_at.x + t->mid_at.y + t->id.id;
       // t->con("LOAD %f %f %d", t->mid_at.x, t->mid_at.y, t->id.id);
@@ -656,7 +656,7 @@ std::istream &operator>>(std::istream &in, Bits<Level *&> my) {
   return (in);
 }
 
-std::istream &operator>>(std::istream &in, Bits<class World &> my) {
+std::istream &operator>>(std::istream &in, Bits< class World & > my) {
   TRACE_AND_INDENT();
   my.t.levels         = {};
   my.t.all_thing_ptrs = {};
@@ -697,7 +697,7 @@ std::istream &operator>>(std::istream &in, Bits<class World &> my) {
   return (in);
 }
 
-std::istream &operator>>(std::istream &in, Bits<Config &> my) {
+std::istream &operator>>(std::istream &in, Bits< Config & > my) {
   TRACE_AND_INDENT();
   /* uint32_t           header_size                  */ in >> bits(my.t.header_size);
   if (my.t.header_size != sizeof(Config)) {
@@ -814,7 +814,7 @@ std::istream &operator>>(std::istream &in, Bits<Config &> my) {
   return (in);
 }
 
-std::istream &operator>>(std::istream &in, Bits<class Game &> my) {
+std::istream &operator>>(std::istream &in, Bits< class Game & > my) {
   TRACE_AND_INDENT();
   in >> bits(my.t.version);
   if (my.t.version != MYVER) {
@@ -860,7 +860,7 @@ std::istream &operator>>(std::istream &in, Bits<class Game &> my) {
   /* uint32_t           tick_current                 */ in >> bits(my.t.tick_current);
   /* uint16_t           frame_count                  */ in >> bits(my.t.frame_count);
 
-  std::vector<std::wstring> s;
+  std::vector< std::wstring > s;
   in >> bits(s);
   wid_topcon_deserialize(s);
   in >> bits(s);
@@ -872,7 +872,7 @@ std::istream &operator>>(std::istream &in, Bits<class Game &> my) {
 
 // binary mode is only for switching off newline translation
 // ios::ate, open at end
-std::vector<char> read_file(const std::string filename) {
+std::vector< char > read_file(const std::string filename) {
   TRACE_AND_INDENT();
   std::ifstream ifs(filename, std::ios::in | std::ios::binary | std::ios::ate);
   if (ifs.is_open()) {
@@ -881,23 +881,23 @@ std::vector<char> read_file(const std::string filename) {
     std::ifstream::pos_type sz = ifs.tellg();
     ifs.seekg(0, std::ios::beg);
 
-    std::vector<char> bytes(sz);
+    std::vector< char > bytes(sz);
     ifs.read(bytes.data(), sz);
     return bytes;
   } else {
-    std::vector<char> bytes;
+    std::vector< char > bytes;
     return bytes;
   }
 }
 
-static std::vector<char> read_lzo_file(const std::string filename, lzo_uint *uncompressed_sz, uint32_t *cs) {
+static std::vector< char > read_lzo_file(const std::string filename, lzo_uint *uncompressed_sz, uint32_t *cs) {
   TRACE_AND_INDENT();
   std::ifstream ifs(filename, std::ios::in | std::ios::binary | std::ios::ate);
   if (ifs.is_open()) {
     // tellg is not ideal, look into <filesystem> post mojave
     std::ifstream::pos_type sz = ifs.tellg();
     if (sz < 0) {
-      return (std::vector<char>());
+      return (std::vector< char >());
     }
 
     ifs.seekg(0, std::ios::beg);
@@ -907,11 +907,11 @@ static std::vector<char> read_lzo_file(const std::string filename, lzo_uint *unc
 
     sz -= (int) sizeof(*uncompressed_sz);
     sz -= (int) sizeof(*cs);
-    std::vector<char> bytes(sz);
+    std::vector< char > bytes(sz);
     ifs.read(bytes.data(), sz);
     return (bytes);
   } else {
-    std::vector<char> bytes;
+    std::vector< char > bytes;
     return (bytes);
   }
 }

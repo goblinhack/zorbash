@@ -22,7 +22,7 @@ typedef struct {
 } ThingPossibleHit;
 
 #define MAX_THING_POSSIBLE_HIT 128
-static ThingPossibleHit thing_possible_hits[MAX_THING_POSSIBLE_HIT];
+static ThingPossibleHit thing_possible_hits[ MAX_THING_POSSIBLE_HIT ];
 static int              thing_possible_hit_size;
 
 //
@@ -37,8 +37,8 @@ bool Thing::on_firing_at_something(Thingp hitter) {
 
   auto t = split_tokens(on_firing_at_something, '.');
   if (t.size() == 2) {
-    auto        mod   = t[0];
-    auto        fn    = t[1];
+    auto        mod   = t[ 0 ];
+    auto        fn    = t[ 1 ];
     std::size_t found = fn.find("()");
     if (found != std::string::npos) {
       fn = fn.replace(found, 2, "");
@@ -63,7 +63,7 @@ Thingp Thing::get_best_fire_at_target(void) {
   int               i;
 
   for (i = 0; i < thing_possible_hit_size; i++) {
-    ThingPossibleHit *cand = &thing_possible_hits[i];
+    ThingPossibleHit *cand = &thing_possible_hits[ i ];
 
     if (! best) {
       best = cand;
@@ -108,7 +108,7 @@ static void thing_possible_hit_add(Thingp me, Thingp target) {
     return;
   }
 
-  ThingPossibleHit *h = &thing_possible_hits[thing_possible_hit_size++];
+  ThingPossibleHit *h = &thing_possible_hits[ thing_possible_hit_size++ ];
   memset(h, 0, sizeof(*h));
   h->target   = target;
   h->priority = target->collision_hit_priority();

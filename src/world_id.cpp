@@ -42,8 +42,8 @@ void World::alloc_thing_id(Thingp t) {
       continue;
     }
 
-    t->id              = id;
-    all_thing_ptrs[id] = t;
+    t->id                = id;
+    all_thing_ptrs[ id ] = t;
     return;
   }
 }
@@ -56,8 +56,8 @@ void World::alloc_tmp_thing_id(Thingp t) {
       continue;
     }
 
-    t->id              = id;
-    all_thing_ptrs[id] = t;
+    t->id                = id;
+    all_thing_ptrs[ id ] = t;
     return;
   }
 }
@@ -81,5 +81,5 @@ void World::free_thing_id(Thingp t) {
 
 void World::realloc_thing_id(Thingp t) {
   TRACE_AND_INDENT();
-  all_thing_ptrs[t->id] = t;
+  all_thing_ptrs[ t->id ] = t;
 }

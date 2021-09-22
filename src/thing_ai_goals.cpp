@@ -61,7 +61,7 @@ int Thing::ai_choose_goal(void) {
   //
   // Find all the possible goals we can smell.
   //
-  std::multiset<Goal> goals;
+  std::multiset< Goal > goals;
 
   dbg("Choose goals (higher scores, lower costs are preferred):");
   TRACE_AND_INDENT();
@@ -303,11 +303,11 @@ int Thing::ai_choose_goal(void) {
   // Find the highest/least preferred score so we can scale all the goals
   // later so they fit in one byte (makes it easier to debug).
   //
-  std::array<std::array<float, MAP_HEIGHT>, MAP_WIDTH> cell_totals         = {};
-  float                                                least_preferred     = 0;
-  float                                                most_preferred      = 0;
-  bool                                                 least_preferred_set = false;
-  bool                                                 most_preferred_set  = false;
+  std::array< std::array< float, MAP_HEIGHT >, MAP_WIDTH > cell_totals         = {};
+  float                                                    least_preferred     = 0;
+  float                                                    most_preferred      = 0;
+  bool                                                     least_preferred_set = false;
+  bool                                                     most_preferred_set  = false;
 
   for (auto &goal : goals) {
     auto goal_target = goal.at;
@@ -388,8 +388,8 @@ int Thing::ai_choose_goal(void) {
   // Modify the given goals with scores that indicate the cost of the
   // path to that goal. The result should be a sorted set of goals.
   //
-  std::multiset<Path> paths;
-  char                path_debug = '\0'; // astart path debug
+  std::multiset< Path > paths;
+  char                  path_debug = '\0'; // astart path debug
 
   for (auto &goal : goals) {
 #ifdef ENABLE_DEBUG_AI_ASTAR
@@ -400,7 +400,7 @@ int Thing::ai_choose_goal(void) {
     //
     // Unreachable?
     //
-    if (result.cost == std::numeric_limits<int>::max()) {
+    if (result.cost == std::numeric_limits< int >::max()) {
       continue;
     }
 

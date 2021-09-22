@@ -103,10 +103,10 @@ bool Level::create_sewer_pipes(point3d at) {
     return false;
   }
 
-  std::array<std::array<bool, MAP_WIDTH>, MAP_HEIGHT> pipes_template = {};
-  std::array<std::array<bool, MAP_WIDTH>, MAP_HEIGHT> sewer_pipe     = {};
-  std::array<std::array<bool, MAP_WIDTH>, MAP_HEIGHT> final_pipes    = {};
-  std::array<std::array<bool, MAP_WIDTH>, MAP_HEIGHT> failed         = {};
+  std::array< std::array< bool, MAP_WIDTH >, MAP_HEIGHT > pipes_template = {};
+  std::array< std::array< bool, MAP_WIDTH >, MAP_HEIGHT > sewer_pipe     = {};
+  std::array< std::array< bool, MAP_WIDTH >, MAP_HEIGHT > final_pipes    = {};
+  std::array< std::array< bool, MAP_WIDTH >, MAP_HEIGHT > failed         = {};
 
   //
   // Draw some random pipes
@@ -130,8 +130,8 @@ bool Level::create_sewer_pipes(point3d at) {
   //
   // Place the sewers
   //
-  std::vector<point> sewers;
-  auto               got_count = 0;
+  std::vector< point > sewers;
+  auto                 got_count = 0;
 
   for (auto y = 0; y < MAP_HEIGHT; y++) {
     for (auto x = 0; x < MAP_HEIGHT; x++) {
@@ -157,7 +157,7 @@ bool Level::create_sewer_pipes(point3d at) {
   // Draw a line from the sewer to a nearby pipe
   //
   for (auto n = 0U; n < sewers.size(); n++) {
-    auto p  = sewers[n];
+    auto p  = sewers[ n ];
     int  dx = 0, dy = 0;
     switch (pcg_random_range_inclusive(0, 3)) {
       case 0 :
@@ -208,14 +208,14 @@ bool Level::create_sewer_pipes(point3d at) {
   // For each sewer, try to find another
   //
   for (auto n = 0U; n < sewers.size(); n++) {
-    auto a = sewers[n];
-    auto b = sewers[pcg_random_range(0, sewers.size())];
+    auto a = sewers[ n ];
+    auto b = sewers[ pcg_random_range(0, sewers.size()) ];
     while (a == b) {
-      b = sewers[pcg_random_range(0, sewers.size())];
+      b = sewers[ pcg_random_range(0, sewers.size()) ];
     }
 
-    std::array<std::array<bool, MAP_WIDTH>, MAP_HEIGHT> walked = {};
-    int                                                 tries  = 0;
+    std::array< std::array< bool, MAP_WIDTH >, MAP_HEIGHT > walked = {};
+    int                                                     tries  = 0;
     while (tries < 1000) {
       set(final_pipes, a.x, a.y, true);
       set(walked, a.x, a.y, true);

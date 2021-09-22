@@ -278,7 +278,7 @@ static bool wid_rightbar_create(void) {
     wid_set_pos(w, tl, br);
     wid_set_shape_none(w);
 
-    char tmp[UI_SIDEBAR_RIGHT_WIDTH + 1];
+    char tmp[ UI_SIDEBAR_RIGHT_WIDTH + 1 ];
     snprintf(tmp, sizeof(tmp) - 1, "   %2d   %2d   %2d", player->get_stat_attack(), player->get_stat_defence(),
              player->get_stat_strength());
     wid_set_text(w, tmp);
@@ -300,7 +300,7 @@ static bool wid_rightbar_create(void) {
     wid_set_pos(w, tl, br);
     wid_set_shape_none(w);
 
-    char tmp[UI_SIDEBAR_RIGHT_WIDTH + 1];
+    char tmp[ UI_SIDEBAR_RIGHT_WIDTH + 1 ];
     snprintf(tmp, sizeof(tmp) - 1, "   %2d   %2d   %2d", player->get_stat_constitution(), 0, 0);
     wid_set_text(w, tmp);
     wid_set_text_lhs(w, true);
@@ -311,8 +311,8 @@ static bool wid_rightbar_create(void) {
   // Inventory items
   //
   {
-    auto              monstp = player->monstp;
-    std::vector<Widp> wid_inventory_items;
+    auto                monstp = player->monstp;
+    std::vector< Widp > wid_inventory_items;
 
     uint8_t item = 0;
     for (auto i = 0U; i < UI_ACTIONBAR_MAX_ITEMS; i++) {
@@ -385,7 +385,7 @@ static bool wid_rightbar_create(void) {
         auto weapon = player->weapon_get();
         if (weapon) {
           auto weapon_tp_id = weapon->tp()->id;
-          auto tp_id        = monstp->inventory_id[i];
+          auto tp_id        = monstp->inventory_id[ i ];
           if (tp_id == weapon_tp_id) {
             static Tilep tile;
             if (! tile) {
@@ -439,8 +439,8 @@ static bool wid_rightbar_create(void) {
   //
   y_at += 8;
   {
-    auto              monstp = player->monstp;
-    std::vector<Widp> wid_skillbox_items;
+    auto                monstp = player->monstp;
+    std::vector< Widp > wid_skillbox_items;
 
     uint8_t item = 0;
     for (auto i = 0U; i < UI_ACTIONBAR_MAX_ITEMS; i++) {

@@ -48,9 +48,9 @@ public:
   SDL_Surface *surface            = {};
 };
 
-static std::map<std::string, Texp> textures;
-static std::map<std::string, Texp> textures_black_and_white;
-static std::map<std::string, Texp> textures_mask;
+static std::map< std::string, Texp > textures;
+static std::map< std::string, Texp > textures_black_and_white;
+static std::map< std::string, Texp > textures_mask;
 
 uint8_t tex_init(void) {
   TRACE_AND_INDENT();
@@ -283,7 +283,7 @@ Texp tex_load(std::string file, std::string name, int mode) {
 // 1 - black and white tile used in backgrounds
 // 2 - mask for sprites
 //
-static std::pair<Texp, Texp> tex_sprite(SDL_Surface *in, std::string file, std::string name, int mode) {
+static std::pair< Texp, Texp > tex_sprite(SDL_Surface *in, std::string file, std::string name, int mode) {
   auto n1 = name + "_black_and_white";
   auto n2 = name + "_mask";
   Texp t1 = new Tex(n1);
@@ -546,7 +546,7 @@ SDL_Surface *tex_get_surface(Texp tex) {
 
 Texp string2tex(const char **s) {
   TRACE_AND_INDENT();
-  static char        tmp[MAXSHORTSTR];
+  static char        tmp[ MAXSHORTSTR ];
   static std::string eo_tmp = tmp + MAXSHORTSTR;
   const char *       c      = *s;
   char *             t      = tmp;

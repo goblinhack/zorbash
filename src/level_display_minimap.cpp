@@ -35,7 +35,7 @@ void Level::display_minimap(void) {
   glcolor(WHITE);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   blit_init();
-  blit(fbo_tex_id[FBO_MINIMAP], 0.0, 1.0, 1.0, 0.0, tlx, bry, brx, tly);
+  blit(fbo_tex_id[ FBO_MINIMAP ], 0.0, 1.0, 1.0, 0.0, tlx, bry, brx, tly);
   blit_flush();
 
   //

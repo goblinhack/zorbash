@@ -21,8 +21,8 @@
 #include "my_wid_topcon.h"
 #include "my_wid_actionbar.h"
 
-WidPopup *                 wid_wield;
-static std::vector<Thingp> wield_items;
+WidPopup *                   wid_wield;
+static std::vector< Thingp > wield_items;
 
 void wid_wield_destroy(void) {
   TRACE_AND_INDENT();
@@ -51,7 +51,7 @@ static void wid_wield_slot(int slot) {
     return;
   }
 
-  auto t = wield_items[slot];
+  auto t = wield_items[ slot ];
   if (t) {
     player->wield(t);
     game->tick_begin("wield weapon");
@@ -180,7 +180,7 @@ static void wid_wield_mouse_over_b(Widp w, int32_t relx, int32_t rely, int32_t w
     return;
   }
 
-  auto t = wield_items[slot];
+  auto t = wield_items[ slot ];
   if (t) {
     wid_thing_info_fini();
     game->wid_thing_info_create(t);
@@ -241,7 +241,7 @@ void Game::wid_wield_create(void) {
     wid_set_pos(w, tl, br);
     wid_set_shape_none(w);
 
-    auto t = wield_items[slot];
+    auto t = wield_items[ slot ];
 
     {
       auto wid_icon = wid_new_square_button(w, "item icon");

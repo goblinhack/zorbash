@@ -11,7 +11,7 @@
 
 ts_t        time_now;
 ts_t        base_time_in_mill;
-static char buf_[MAXSHORTSTR];
+static char buf_[ MAXSHORTSTR ];
 
 ts_t time_get_time_ms(void) {
   time_update_time_milli();
@@ -36,7 +36,7 @@ const char *time2str(ts_t ms, char *buf, int len) {
     len = sizeof(buf_);
   }
 
-  buf[0] = '\0';
+  buf[ 0 ] = '\0';
   snprintf(buf, len, "%02d:%02d:%02d.%03d: ", log_hrs, log_mins, log_secs, log_msec);
 
   if (buf) {
@@ -61,7 +61,7 @@ const char *timestamp(char *buf, int len) {
     len = sizeof(buf_);
   }
 
-  buf[0] = '\0';
+  buf[ 0 ] = '\0';
   snprintf(buf, len, "%02d:%02d:%02d.%03d: ", log_hrs, log_mins, log_secs, log_msec);
 
   if (buf) {
@@ -133,7 +133,7 @@ ts_t time_get_elapsed_tenths(ts_t val, ts_t since) {
 
 void get_timestamp(char *buf, int32_t len) {
 #ifdef ENABLE_LOG_TIMESTAMPS
-  char tmp[MAXSTR];
+  char tmp[ MAXSTR ];
   string_timestamp(tmp, len);
   snprintf(buf, len, "%s %s", timestamp().c_str(), tmp);
 #else
@@ -188,7 +188,7 @@ ts_t time_update_time_milli(void) {
 std::string current_date(void) {
   struct tm *timeinfo;
   time_t     rawtime;
-  char       buffer[MAXSTR];
+  char       buffer[ MAXSTR ];
 
   time(&rawtime);
   timeinfo = localtime(&rawtime);
