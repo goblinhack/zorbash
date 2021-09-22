@@ -29,7 +29,7 @@ static int thing_possible_hit_size;
 // Python callback upon being fire_at
 //
 bool Thing::on_firing_at_something (Thingp hitter)
-{_
+{ TRACE_AND_INDENT();
   auto on_firing_at_something = tp()->on_firing_at_something_do();
   if (std::empty(on_firing_at_something)) {
     return false;
@@ -185,7 +185,7 @@ bool Thing::fire_at_target (void)
 }
 
 bool Thing::fire_at_and_choose_target (Thingp item)
-{_
+{ TRACE_AND_INDENT();
   if (item->laser_name().empty()) {
     return projectile_choose_target(item);
   } else {

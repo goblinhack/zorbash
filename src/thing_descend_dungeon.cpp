@@ -17,7 +17,7 @@
 #include "my_gl.h"
 
 bool Thing::descend_dungeon_tick (void)
-{_
+{ TRACE_AND_INDENT();
   if (!is_able_to_change_levels()) {
     return false;
   }
@@ -50,7 +50,7 @@ bool Thing::descend_dungeon_tick (void)
 }
 
 bool Thing::descend_dungeon (void)
-{_
+{ TRACE_AND_INDENT();
   dbg("Descend dungeon");
   if (is_changing_level ||
     is_hidden ||

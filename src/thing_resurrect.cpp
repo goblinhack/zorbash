@@ -12,7 +12,7 @@
 #include "my_sprintf.h"
 
 void Thing::resurrect_tick (void)
-{_
+{ TRACE_AND_INDENT();
   //
   // Rise at the apointed time
   //

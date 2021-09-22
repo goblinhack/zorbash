@@ -44,7 +44,7 @@ void Thing::on_lifespan (Thingp what)
 }
 
 void Thing::lifespan_tick (void)
-{_
+{ TRACE_AND_INDENT();
   //
   // Torches only tick when carried
   //

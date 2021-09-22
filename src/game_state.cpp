@@ -26,7 +26,7 @@ void Game::change_state (int new_state)
   if (game->state == new_state) {
     return;
   }
-_
+  TRACE_AND_INDENT();
   auto old_state = state;
 
   //

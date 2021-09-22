@@ -16,9 +16,9 @@
 #include "my_ptrcheck.h"
 
 bool Thing::skill_add (Thingp what)
-{_
+{ TRACE_AND_INDENT();
   dbg("Try to add skill %s", what->to_string().c_str());
-_
+  TRACE_AND_INDENT();
   if (!monstp) {
     dbg("No; not a monst");
     return false;
@@ -61,9 +61,9 @@ _
 }
 
 bool Thing::skill_remove (Thingp what)
-{_
+{ TRACE_AND_INDENT();
   dbg("Removing skill %s", what->to_string().c_str());
-_
+  TRACE_AND_INDENT();
   auto existing_owner = what->get_immediate_owner();
   if (existing_owner != this) {
     err("Attempt to remove skill %s which is not owned",
@@ -98,7 +98,7 @@ _
 }
 
 void Thing::skill_remove_all (void)
-{_
+{ TRACE_AND_INDENT();
   if (!monstp) {
     return;
   }
@@ -114,26 +114,26 @@ void Thing::skill_remove_all (void)
 }
 
 bool Thing::skill_use (Thingp what)
-{_
+{ TRACE_AND_INDENT();
   dbg("Try to use skill %s", what->to_string().c_str());
   used(what, this, false /* remove after use */);
   return true;
 }
 
 void Thing::skill_deactivate (Thingp what)
-{_
+{ TRACE_AND_INDENT();
   what->is_activated = false;
   game->request_remake_skillbox = true;
 }
 
 void Thing::skill_activate (Thingp what)
-{_
+{ TRACE_AND_INDENT();
   what->is_activated = true;
   game->request_remake_skillbox = true;
 }
 
 int Thing::skill_enchant_count (const uint32_t slot)
-{_
+{ TRACE_AND_INDENT();
   if (!monstp) {
     return 0;
   }
@@ -156,7 +156,7 @@ int Thing::skill_enchant_count (const uint32_t slot)
 }
 
 bool Thing::add_skill (Tpp what)
-{_
+{ TRACE_AND_INDENT();
   auto t = level->thing_new(what, mid_at);
   if (!t) {
     err("Cannot learn skill");

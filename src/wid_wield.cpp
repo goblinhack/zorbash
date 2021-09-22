@@ -25,7 +25,7 @@ WidPopup *wid_wield;
 static std::vector<Thingp> wield_items;
 
 void wid_wield_destroy (void)
-{_
+{ TRACE_AND_INDENT();
   delete wid_wield;
   wid_wield = nullptr;
   wield_items.clear();
@@ -33,9 +33,9 @@ void wid_wield_destroy (void)
 }
 
 static void wid_wield_slot (int slot)
-{_
+{ TRACE_AND_INDENT();
   DBG3("Wield slot %d", slot);
-_
+  TRACE_AND_INDENT();
   if (slot >= (int)wield_items.size()) {
     wid_wield_destroy();
     return;
@@ -61,7 +61,7 @@ _
 }
 
 static uint8_t wid_wield_key_up (Widp w, const struct SDL_Keysym *key)
-{_
+{ TRACE_AND_INDENT();
   auto level = game->level;
   if (!level) {
     return true;
@@ -101,7 +101,7 @@ static uint8_t wid_wield_key_up (Widp w, const struct SDL_Keysym *key)
           case '9':
             wid_wield_slot(c - '1');
             return true;
-          case SDLK_ESCAPE: {_
+          case SDLK_ESCAPE: { TRACE_AND_INDENT();
             CON("PLAYER: wield cancelled");
             wid_wield_destroy();
             return true;
@@ -115,7 +115,7 @@ static uint8_t wid_wield_key_up (Widp w, const struct SDL_Keysym *key)
 }
 
 static uint8_t wid_wield_key_down (Widp w, const struct SDL_Keysym *key)
-{_
+{ TRACE_AND_INDENT();
   auto level = game->level;
   if (!level) {
     return true;
@@ -139,7 +139,7 @@ static uint8_t wid_wield_key_down (Widp w, const struct SDL_Keysym *key)
 }
 
 static uint8_t wid_wield_mouse_up (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   auto level = game->level;
   if (!level) {
     return true;
@@ -160,11 +160,11 @@ static uint8_t wid_wield_mouse_up (Widp w, int32_t x, int32_t y, uint32_t button
 
 static void wid_wield_mouse_over_b (Widp w, int32_t relx, int32_t rely,
                     int32_t wheelx, int32_t wheely)
-{_
+{ TRACE_AND_INDENT();
   int slot = wid_get_int_context(w);
 
   DBG3("Describe wield slot %d", slot);
-_
+  TRACE_AND_INDENT();
   if (slot >= (int)wield_items.size()) {
     wid_wield_destroy();
     return;
@@ -188,7 +188,7 @@ _
 }
 
 void Game::wid_wield_create (void)
-{_
+{ TRACE_AND_INDENT();
   BOTCON("Choose a weapon to wield.");
 
   DBG3("Thing wield create");

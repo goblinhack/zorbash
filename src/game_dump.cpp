@@ -10,7 +10,7 @@
 #include "my_array_bounds_check.h"
 
 void Level::dump (std::string pfx, std::ostream &out)
-{_
+{ TRACE_AND_INDENT();
   out << pfx << "World {" << std::endl;
   auto old_pfx = pfx;
   pfx += "  ";
@@ -45,7 +45,7 @@ void Level::dump (std::string pfx, std::ostream &out)
 }
 
 void World::dump (std::string pfx, std::ostream &out)
-{_
+{ TRACE_AND_INDENT();
   out << pfx << "Level {" << std::endl;
   auto old_pfx = pfx;
   pfx += "  ";
@@ -67,7 +67,7 @@ void World::dump (std::string pfx, std::ostream &out)
 }
 
 void Config::dump (std::string pfx, std::ostream &out)
-{_
+{ TRACE_AND_INDENT();
   out << pfx << "Config {" << std::endl;
   auto old_pfx = pfx;
   pfx += "  ";
@@ -113,7 +113,7 @@ void Config::dump (std::string pfx, std::ostream &out)
 }
 
 void Game::dump (std::string pfx, std::ostream &out)
-{_
+{ TRACE_AND_INDENT();
   out << pfx << "Game {" << std::endl;
   auto old_pfx = pfx;
   pfx += "  ";

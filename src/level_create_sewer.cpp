@@ -15,7 +15,7 @@
 #include "my_thing_ai.h"
 
 bool Level::create_sewer (point3d at, int seed)
-{_
+{ TRACE_AND_INDENT();
   log("Create sewer at (%d,%d,%d)", at.x, at.y, at.z);
 
   is_level_type_sewer = true;
@@ -64,7 +64,7 @@ bool Level::create_sewer (point3d at, int seed)
 }
 
 bool Level::create_sewer_pipes (point3d at)
-{_
+{ TRACE_AND_INDENT();
   auto prev = get(game->world.levels, at.x, at.y, at.z - 1);
   if (!prev) {
     err("no previous level for sewer");
@@ -284,7 +284,7 @@ bool Level::create_sewer_pipes (point3d at)
 }
 
 void Level::create_sewer_place_walls (int variant, int block_width, int block_height, int tries)
-{_
+{ TRACE_AND_INDENT();
   auto tp = tp_random_sewer_wall();
   if (!tp) {
     ERR("Place walls failed");
@@ -367,7 +367,7 @@ void Level::create_sewer_place_walls (int variant, int block_width, int block_he
 }
 
 void Level::create_sewer_place_remaining_walls (const std::string &what)
-{_
+{ TRACE_AND_INDENT();
   for (auto x = 0; x < MAP_WIDTH; x++) {
     for (auto y = 0; y < MAP_HEIGHT; y++) {
 

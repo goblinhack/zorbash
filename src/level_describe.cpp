@@ -20,7 +20,7 @@
 #include "my_template.h"
 
 void Level::describe (fpoint p)
-{_
+{ TRACE_AND_INDENT();
   bool got_one_with_long_text = false;
 
   if (!player) {
@@ -40,7 +40,7 @@ void Level::describe (fpoint p)
   }
 
   dbg3("Describe %f,%f", p.x, p.y);
-_
+  TRACE_AND_INDENT();
   if ((game->state == Game::STATE_MOVING_ITEMS) ||
     (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
     (game->state == Game::STATE_COLLECTING_ITEMS) ||
@@ -63,8 +63,8 @@ _
     IF_DEBUG3 {
       t->log("Active thing cand for describe");
     }
-_
-    if (!is_lit_currently(x, y) && !is_lit_ever(x, y)) {_
+  TRACE_AND_INDENT();
+    if (!is_lit_currently(x, y) && !is_lit_ever(x, y)) { TRACE_AND_INDENT();
       IF_DEBUG3 {
         //
         // Allow snooping in debug mode
@@ -132,8 +132,8 @@ _
     IF_DEBUG3 {
       t->log("Interesting thing cand for describe");
     }
-_
-    if (!is_lit_currently(x, y) && !is_lit_ever(x, y)) {_
+  TRACE_AND_INDENT();
+    if (!is_lit_currently(x, y) && !is_lit_ever(x, y)) { TRACE_AND_INDENT();
       IF_DEBUG3 {
         //
         // Allow snooping in debug mode
@@ -200,8 +200,8 @@ _
     IF_DEBUG3 {
       t->log("All thing cand for describe");
     }
-_
-    if (!is_lit_currently(x, y) && !is_lit_ever(x, y)) {_
+  TRACE_AND_INDENT();
+    if (!is_lit_currently(x, y) && !is_lit_ever(x, y)) { TRACE_AND_INDENT();
       IF_DEBUG3 {
         //
         // Allow snooping in debug mode
@@ -351,7 +351,7 @@ _
 }
 
 void Level::describe (Thingp t)
-{_
+{ TRACE_AND_INDENT();
   if (!player) {
     return;
   }

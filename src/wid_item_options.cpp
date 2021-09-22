@@ -24,17 +24,17 @@ static Widp chosen_wid;
 static bool came_from_inventory;
 
 void wid_item_options_destroy (void)
-{_
+{ TRACE_AND_INDENT();
   DBG3("Item options destroy");
-_
+  TRACE_AND_INDENT();
   delete wid_item_options_window;
   wid_item_options_window = nullptr;
 }
 
 static uint8_t wid_item_options_use (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   DBG3("Item options use");
-_
+  TRACE_AND_INDENT();
   wid_item_options_destroy();
 
   auto player = game->level->player;
@@ -55,9 +55,9 @@ _
 }
 
 static uint8_t wid_item_options_eat (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   DBG3("Item options eat");
-_
+  TRACE_AND_INDENT();
   wid_item_options_destroy();
 
   auto player = game->level->player;
@@ -83,9 +83,9 @@ _
 }
 
 static uint8_t wid_item_options_throw (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   DBG3("Item options throw");
-_
+  TRACE_AND_INDENT();
   wid_item_options_destroy();
 
   auto player = game->level->player;
@@ -103,9 +103,9 @@ _
 }
 
 static uint8_t wid_item_options_drop (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   DBG3("Item options drop");
-_
+  TRACE_AND_INDENT();
   wid_item_options_destroy();
 
   auto player = game->level->player;
@@ -130,18 +130,18 @@ _
 }
 
 static uint8_t wid_item_options_move (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   DBG3("Item options move");
-_
+  TRACE_AND_INDENT();
   wid_item_options_destroy();
   game->wid_bag_move_item(chosen_wid, chosen_thing);
   return true;
 }
 
 static uint8_t wid_item_options_back (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   DBG3("Item options back");
-_
+  TRACE_AND_INDENT();
   wid_item_options_destroy();
 
   if (came_from_inventory) {
@@ -157,9 +157,9 @@ _
 }
 
 static uint8_t wid_item_options_key_up (Widp w, const struct SDL_Keysym *key)
-{_
+{ TRACE_AND_INDENT();
   DBG3("Item options key up");
-_
+  TRACE_AND_INDENT();
   if (sdl_shift_held) {
     if (key->scancode == (SDL_Scancode)game->config.key_console) {
       return false;
@@ -188,7 +188,7 @@ _
     case KMOD_RCTRL:
     default:
     switch (key->sym) {
-      default: {_
+      default: { TRACE_AND_INDENT();
         auto c = wid_event_to_char(key);
         switch (c) {
           case 'u':
@@ -219,9 +219,9 @@ _
 }
 
 static uint8_t wid_item_options_key_down (Widp w, const struct SDL_Keysym *key)
-{_
+{ TRACE_AND_INDENT();
   DBG3("Item options key down");
-_
+  TRACE_AND_INDENT();
   if (sdl_shift_held) {
     if (key->scancode == (SDL_Scancode)game->config.key_console) {
       return false;
@@ -232,9 +232,9 @@ _
 }
 
 void Game::wid_items_options_create (Widp w, Thingp t, bool source_came_from_inventory)
-{_
+{ TRACE_AND_INDENT();
   DBG3("Item options");
-_
+  TRACE_AND_INDENT();
   auto was_moving_items = (game->state == Game::STATE_MOVING_ITEMS);
 
   change_state(Game::STATE_OPTIONS_FOR_ITEM_MENU);
@@ -260,12 +260,12 @@ _
   }
 
   int options = 2;
-  if (chosen_thing->is_throwable()) {_
+  if (chosen_thing->is_throwable()) { TRACE_AND_INDENT();
     options++;
   }
-  if (player->can_eat(chosen_thing)) {_
+  if (player->can_eat(chosen_thing)) { TRACE_AND_INDENT();
     options++;
-  } else if (chosen_thing->is_usable()) {_
+  } else if (chosen_thing->is_usable()) { TRACE_AND_INDENT();
     options++;
   }
   if (was_moving_items) {
@@ -286,7 +286,7 @@ _
 
   wid_item_options_window = new WidPopup("Item option",
                       tl, br, nullptr, "nothing", false, false);
-  {_
+  { TRACE_AND_INDENT();
     Widp w = wid_item_options_window->wid_popup_container;
     wid_set_on_key_up(w, wid_item_options_key_up);
     wid_set_on_key_down(w, wid_item_options_key_down);
@@ -295,7 +295,7 @@ _
 
   int y_at = 0;
 
-  if (player->can_eat(chosen_thing)) {_
+  if (player->can_eat(chosen_thing)) { TRACE_AND_INDENT();
     auto p = wid_item_options_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "eat");
 
@@ -306,7 +306,7 @@ _
     wid_set_pos(w, tl, br);
     wid_set_text(w, "%%fg=white$E%%fg=reset$at");
     y_at += 3;
-  } else if (chosen_thing->is_usable()) {_
+  } else if (chosen_thing->is_usable()) { TRACE_AND_INDENT();
     auto p = wid_item_options_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "use");
 
@@ -326,7 +326,7 @@ _
     }
     y_at += 3;
   }
-  if (chosen_thing->is_throwable()) {_
+  if (chosen_thing->is_throwable()) { TRACE_AND_INDENT();
     auto p = wid_item_options_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "throw");
 
@@ -338,7 +338,7 @@ _
     wid_set_text(w, "%%fg=white$T%%fg=reset$hrow");
     y_at += 3;
   }
-  {_
+  { TRACE_AND_INDENT();
     auto p = wid_item_options_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "drop");
 
@@ -350,7 +350,7 @@ _
     wid_set_text(w, "%%fg=white$D%%fg=reset$rop");
   }
   y_at += 3;
-  if (was_moving_items) {_
+  if (was_moving_items) { TRACE_AND_INDENT();
     auto p = wid_item_options_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "move");
 
@@ -362,7 +362,7 @@ _
     wid_set_text(w, "%%fg=white$M%%fg=reset$ove");
     y_at += 3;
   }
-  {_
+  { TRACE_AND_INDENT();
     auto p = wid_item_options_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Back");
 

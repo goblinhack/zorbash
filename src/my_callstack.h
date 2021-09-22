@@ -13,14 +13,12 @@
 #define CAT(A, B) A ## B
 #define CAT2(A, B) CAT(A, B)
 
-#undef _
-
 #ifdef ENABLE_DEBUG_TRACE
-#define _                 tracer_t           CAT2(__my_trace__, __LINE__) (__PRETTY_FUNCTION__, __LINE__);
-#define _trace_no_indent_ tracer_no_indent_t CAT2(__my_trace__, __LINE__) (__PRETTY_FUNCTION__, __LINE__);
+#define TRACE_AND_INDENT() tracer_t           CAT2(__my_trace__, __LINE__) (__PRETTY_FUNCTION__, __LINE__);
+#define TRACE_NO_INDENT() tracer_no_indent_t CAT2(__my_trace__, __LINE__) (__PRETTY_FUNCTION__, __LINE__);
 #else
-#define _
-#define _trace_no_indent_
+#define TRACE_AND_INDENT()
+#define TRACE_NO_INDENT()
 #endif
 
 struct callframe {

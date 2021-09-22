@@ -24,18 +24,18 @@
 static WidPopup *game_main_menu_window;
 
 void game_main_menu_destroy (void)
-{_
+{ TRACE_AND_INDENT();
   delete game_main_menu_window;
   game_main_menu_window = nullptr;
 }
 
 void game_main_menu_hide (void)
-{_
+{ TRACE_AND_INDENT();
   wid_hide(game_main_menu_window->wid_text_area->wid_text_area);
 }
 
 static uint8_t game_menu_quick_start (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   LOG("Main menu new game chosen");
 
   game_main_menu_destroy();
@@ -91,60 +91,60 @@ static uint8_t game_menu_quick_start (Widp w, int32_t x, int32_t y, uint32_t but
 }
 
 static uint8_t game_main_menu_load_game (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   game->load_select();
   return false;
 }
 
 static uint8_t game_main_menu_config (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   game->config_top_select();
   game_main_menu_hide();
   return false;
 }
 
 static uint8_t game_menu_slow_start (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   game_menu_quick_start(nullptr, 0, 0, 0);
   return false;
 }
 
 static uint8_t game_main_menu_choose_seed (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   game->choose_seed_select();
   game_main_menu_destroy();
   return false;
 }
 
 static uint8_t game_main_menu_choose_player_name (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   game->choose_player_name_select();
   game_main_menu_destroy();
   return false;
 }
 
 static uint8_t game_main_menu_credits_game (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   game->credits_select();
   game_main_menu_destroy();
   return false;
 }
 
 static uint8_t game_main_menu_quit_game (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   game->quit_select();
   game_main_menu_destroy();
   return false;
 }
 
 static uint8_t game_main_menu_hiscores (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   game->hiscore_select();
   return false;
 }
 
 static uint8_t game_main_menu_key_up (Widp w, const struct SDL_Keysym *key)
-{_
+{ TRACE_AND_INDENT();
   if (sdl_shift_held) {
     if (key->scancode == (SDL_Scancode)game->config.key_console) {
       return false;
@@ -156,7 +156,7 @@ static uint8_t game_main_menu_key_up (Widp w, const struct SDL_Keysym *key)
     case KMOD_RCTRL:
     default:
     switch (key->sym) {
-      default: {_
+      default: { TRACE_AND_INDENT();
         auto c = wid_event_to_char(key);
         switch (c) {
           case 'n':
@@ -186,7 +186,7 @@ static uint8_t game_main_menu_key_up (Widp w, const struct SDL_Keysym *key)
 }
 
 static uint8_t game_main_menu_key_down (Widp w, const struct SDL_Keysym *key)
-{_
+{ TRACE_AND_INDENT();
   if (sdl_shift_held) {
     if (key->scancode == (SDL_Scancode)game->config.key_console) {
       return false;
@@ -197,7 +197,7 @@ static uint8_t game_main_menu_key_down (Widp w, const struct SDL_Keysym *key)
 }
 
 static void game_display_title_bg (void)
-{_
+{ TRACE_AND_INDENT();
   glcolor(WHITE);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -211,7 +211,7 @@ static void game_display_title_bg (void)
 }
 
 static void game_display_title_fg1 (void)
-{_
+{ TRACE_AND_INDENT();
   glcolor(WHITE);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -225,7 +225,7 @@ static void game_display_title_fg1 (void)
 }
 
 static void game_display_title_fg2 (void)
-{_
+{ TRACE_AND_INDENT();
   static color fg = WHITE;
   static int delta = 10;
   static int red = 255;
@@ -297,7 +297,7 @@ static color color_change_hue (const color &in, const float fHue)
 }
 
 static void game_display_title_fg3 (void)
-{_
+{ TRACE_AND_INDENT();
   static color fg = RED;
   static int hue = 0;
 
@@ -332,7 +332,7 @@ static void game_display_title_fg3 (void)
 }
 
 static void game_display_title_fg4 (void)
-{_
+{ TRACE_AND_INDENT();
   glcolor(WHITE);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -357,7 +357,7 @@ static void game_display_title_fg4 (void)
 }
 
 static void game_main_menu_tick (Widp w)
-{_
+{ TRACE_AND_INDENT();
   game_display_title_bg();
   game_display_flames();
   game_display_title_fg1();
@@ -383,7 +383,7 @@ static void game_main_menu_tick (Widp w)
 }
 
 void Game::main_menu_select (void)
-{_
+{ TRACE_AND_INDENT();
   CON("Main menu");
 
   music_play_intro();
@@ -405,7 +405,7 @@ void Game::main_menu_select (void)
 
   game_main_menu_window = new WidPopup("Main menu",
                      tl, br, nullptr, "nothing", false, false);
-  {_
+  { TRACE_AND_INDENT();
     Widp w = game_main_menu_window->wid_popup_container;
     wid_set_on_key_up(w, game_main_menu_key_up);
     wid_set_on_key_down(w, game_main_menu_key_down);
@@ -413,7 +413,7 @@ void Game::main_menu_select (void)
   }
 
   int y_at = 0;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_main_menu_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "New Game");
 
@@ -426,7 +426,7 @@ void Game::main_menu_select (void)
   }
 #if 0
   y_at += 3;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_main_menu_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Quick start");
 
@@ -439,7 +439,7 @@ void Game::main_menu_select (void)
   }
 #endif
   y_at += 3;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_main_menu_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Choose seed");
 
@@ -451,7 +451,7 @@ void Game::main_menu_select (void)
     wid_set_text(w, "%%fg=" UI_TEXT_COLOR_STR "$Choose seed");
   }
   y_at += 3;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_main_menu_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Choose player name");
 
@@ -463,7 +463,7 @@ void Game::main_menu_select (void)
     wid_set_text(w, "%%fg=" UI_TEXT_COLOR_STR "$Choose player name");
   }
   y_at += 3;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_main_menu_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Load Game");
 
@@ -475,7 +475,7 @@ void Game::main_menu_select (void)
     wid_set_text(w, "%%fg=white$L%%fg=reset$oad game");
   }
   y_at += 3;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_main_menu_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Options");
 
@@ -487,7 +487,7 @@ void Game::main_menu_select (void)
     wid_set_text(w, "%%fg=white$O%%fg=reset$ptions");
   }
   y_at += 3;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_main_menu_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Credits");
 
@@ -499,7 +499,7 @@ void Game::main_menu_select (void)
     wid_set_text(w, "%%fg=white$C%%fg=reset$redits");
   }
   y_at += 3;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_main_menu_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Hiscores");
 
@@ -511,7 +511,7 @@ void Game::main_menu_select (void)
     wid_set_text(w, "%%fg=" UI_TEXT_COLOR_STR "$Hiscores");
   }
   y_at += 3;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_main_menu_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Quit Game");
 
@@ -527,6 +527,6 @@ void Game::main_menu_select (void)
 }
 
 void Game::new_game (void)
-{_
+{ TRACE_AND_INDENT();
   game_menu_quick_start(nullptr, 0, 0, 0);
 }

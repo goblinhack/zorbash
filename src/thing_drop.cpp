@@ -16,7 +16,7 @@
 #include "my_sound.h"
 
 bool Thing::drop (Thingp what, Thingp target, bool stolen)
-{_
+{ TRACE_AND_INDENT();
   if (stolen) {
     if (target) {
       dbg("Drop (being stolen) %s at %s", what->to_string().c_str(),
@@ -32,7 +32,7 @@ bool Thing::drop (Thingp what, Thingp target, bool stolen)
       dbg("Drop %s", what->to_string().c_str());
     }
   }
-_
+  TRACE_AND_INDENT();
   if (game->in_transit_item) {
     //
     // Such items are not owned by anyone
@@ -140,9 +140,9 @@ _
 // An item in between bags
 //
 bool Thing::drop_into_ether (Thingp what)
-{_
+{ TRACE_AND_INDENT();
   dbg("Dropping %s into the ether", what->to_string().c_str());
-_
+  TRACE_AND_INDENT();
   auto existing_owner = what->get_immediate_owner();
   if (existing_owner != this) {
     if (existing_owner) {
@@ -194,11 +194,11 @@ _
 // An item in between bags
 //
 bool Thing::drop_from_ether (Thingp what)
-{_
+{ TRACE_AND_INDENT();
   auto player = game->level->player;
 
   dbg("Drop from ether %s", what->to_string().c_str());
-_
+  TRACE_AND_INDENT();
   what->hooks_remove();
   what->remove_owner();
   what->hide();
@@ -245,12 +245,12 @@ _
 }
 
 bool Thing::drop (Thingp what)
-{_
+{ TRACE_AND_INDENT();
   return drop(what, nullptr);
 }
 
 void Thing::drop_all (void)
-{_
+{ TRACE_AND_INDENT();
   if (!monstp) {
     return;
   }

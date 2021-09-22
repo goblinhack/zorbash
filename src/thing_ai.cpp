@@ -15,9 +15,9 @@
 #include "my_random.h"
 
 void Thing::ai_get_next_hop (void)
-{_
+{ TRACE_AND_INDENT();
   dbg("AI");
-_
+  TRACE_AND_INDENT();
   point start((int)mid_at.x, (int)mid_at.y);
 
   //

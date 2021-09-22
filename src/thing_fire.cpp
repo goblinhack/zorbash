@@ -15,7 +15,7 @@
 #include "my_thing_template.h"
 
 void Thing::fire_tick (void)
-{_
+{ TRACE_AND_INDENT();
   fpoint at = get_interpolated_mid_at();
   if (is_burnable() || is_combustible() || is_very_combustible()) {
     //

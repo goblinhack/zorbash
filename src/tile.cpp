@@ -49,14 +49,14 @@ Tilep tile_index_to_tile (uint16_t i)
 
 uint8_t tile_init(void);
 uint8_t tile_init (void)
-{_
+{ TRACE_AND_INDENT();
   tile_init_done = true;
 
   return true;
 }
 
 void tile_fini (void)
-{_
+{ TRACE_AND_INDENT();
   if (tile_init_done) {
     tile_init_done = false;
   }
@@ -150,7 +150,7 @@ Tile::Tile (const class Tile *tile)
 void tile_load_arr (std::string file, std::string name,
           uint32_t width, uint32_t height,
           uint32_t nargs, const char *arr[])
-{_
+{ TRACE_AND_INDENT();
   Texp tex = tex_load(file, name, GL_NEAREST);
 
   float fw = 1.0 / (((float)tex_get_width(tex)) / ((float)width));
@@ -312,7 +312,7 @@ void tile_load_arr (std::string file, std::string name,
 void tile_load_arr (std::string file, std::string name,
           uint32_t width, uint32_t height,
           const std::vector<std::string> &arr)
-{_
+{ TRACE_AND_INDENT();
   Texp tex = tex_load(file, name, GL_NEAREST);
 
   float fw = 1.0 / (((float)tex_get_width(tex)) / ((float)width));
@@ -476,7 +476,7 @@ void tile_load_arr_sprites (std::string file,
               uint32_t width, uint32_t height,
               uint32_t nargs,
               const char * arr[])
-{_
+{ TRACE_AND_INDENT();
   Texp tex;
   Texp tex_black_and_white;
   Texp tex_mask;
@@ -656,7 +656,7 @@ void tile_load_arr_sprites (std::string file,
               std::string name,
               uint32_t width, uint32_t height,
               const std::vector<std::string> &arr)
-{_
+{ TRACE_AND_INDENT();
   Texp tex;
   Texp tex_black_and_white;
   Texp tex_mask;
@@ -829,7 +829,7 @@ void tile_load_arr_sprites (std::string file,
 // Find an existing tile.
 //
 Tilep tile_find (std::string name)
-{_
+{ TRACE_AND_INDENT();
   if (name == "") {
     return (0);
   }
@@ -843,7 +843,7 @@ Tilep tile_find (std::string name)
 }
 
 Tilep tile_find_mand (std::string name)
-{_
+{ TRACE_AND_INDENT();
   if (name == "") {
     ERR("No tile name give");
     return (0);
@@ -892,7 +892,7 @@ void tile_get_coords (Tilep tile, float *x1, float *y1, float *x2, float *y2)
 }
 
 Tilep string2tile (const char **s)
-{_
+{ TRACE_AND_INDENT();
   static char name[MAXSHORTSTR];
   static const char * eo_name = name + MAXSHORTSTR;
   const char * c = *s;
@@ -923,7 +923,7 @@ Tilep string2tile (const char **s)
 }
 
 Tilep string2tile (std::string &s, int *len)
-{_
+{ TRACE_AND_INDENT();
   auto iter = s.begin();
   std::string name;
 
@@ -955,7 +955,7 @@ Tilep string2tile (std::string &s, int *len)
 }
 
 Tilep string2tile (std::wstring &s, int *len)
-{_
+{ TRACE_AND_INDENT();
   auto v = wstring_to_string(s);
   return (string2tile(v, len));
 }
@@ -1040,7 +1040,7 @@ void tile_blit_colored (Tilep tile,
 }
 
 std::string tile_name (Tilep t)
-{_
+{ TRACE_AND_INDENT();
   return (t->name);
 }
 

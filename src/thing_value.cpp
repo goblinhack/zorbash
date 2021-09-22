@@ -18,7 +18,7 @@
 // Return a score, higher is better for perceived value to you
 //
 int Thing::get_item_value (Thingp it)
-{_
+{ TRACE_AND_INDENT();
   int value = 0;
 
   if (it->is_treasure_type()) {

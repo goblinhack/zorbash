@@ -10,7 +10,7 @@
 #include "my_vector_bounds_check.h"
 
 PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
-{_
+{ TRACE_AND_INDENT();
   char *room_name = 0;
   int xxx = 0;
   int yyy = 0;

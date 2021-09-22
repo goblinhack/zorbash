@@ -17,11 +17,11 @@ Fontp font_large;
 static std::map<std::string, Fontp > fonts;
 
 void font_fini (void)
-{_
+{ TRACE_AND_INDENT();
 }
 
 static Fontp font_load (std::string name, std::string file, int size, int style)
-{_
+{ TRACE_AND_INDENT();
   auto f = font_find(name);
 
   if (f) {
@@ -50,7 +50,7 @@ static Fontp font_load (std::string name, std::string file, int size, int style)
 }
 
 Fontp font_find (std::string file)
-{_
+{ TRACE_AND_INDENT();
   if (file == "") {
     ERR("No filename given for font find %s", __FUNCTION__);
     return (0);
@@ -65,7 +65,7 @@ Fontp font_find (std::string file)
 }
 
 uint8_t font_init (void)
-{_
+{ TRACE_AND_INDENT();
 #ifdef ENABLE_GENERATE_TTF
   //
   // Generate bitmaps from TTF.

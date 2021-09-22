@@ -13,7 +13,7 @@
 #include "my_tile.h"
 
 bool Thing::projectile_choose_target (Thingp item)
-{_
+{ TRACE_AND_INDENT();
   dbg("Trying to target a projectile with: %s", item->to_string().c_str());
 
   if (!target_select(item)) {
@@ -26,7 +26,7 @@ bool Thing::projectile_choose_target (Thingp item)
 }
 
 Thingp Thing::projectile_fire_at (const std::string &projectile_name, Thingp target)
-{_
+{ TRACE_AND_INDENT();
   if (projectile_name == "") {
     die("No projectile name");
   }

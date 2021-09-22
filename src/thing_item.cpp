@@ -14,7 +14,7 @@
 #include "my_random.h"
 
 int Thing::item_count_including_charges (Tpp tp)
-{_
+{ TRACE_AND_INDENT();
   auto count = 0;
   for (auto oid : monstp->carrying) {
     auto o = level->thing_find(oid);
@@ -39,7 +39,7 @@ int Thing::item_count_including_charges (Tpp tp)
 }
 
 int Thing::item_count_excluding_charges (Tpp tp)
-{_
+{ TRACE_AND_INDENT();
   auto count = 0;
   for (auto oid : monstp->carrying) {
     auto o = level->thing_find(oid);
@@ -60,7 +60,7 @@ int Thing::item_count_excluding_charges (Tpp tp)
 }
 
 void Thing::move_carried_items (void)
-{_
+{ TRACE_AND_INDENT();
   //
   // Light source follows the thing.
   //
@@ -125,7 +125,7 @@ void Thing::move_carried_items (void)
   }
 
   auto on_fire_anim_id = get_on_fire_anim_id();
-  if (on_fire_anim_id.ok()) {_
+  if (on_fire_anim_id.ok()) { TRACE_AND_INDENT();
     auto w = level->thing_find(on_fire_anim_id);
     if (w) {
       w->move_to(mid_at);
@@ -135,7 +135,7 @@ void Thing::move_carried_items (void)
 }
 
 void Thing::move_carried_items_immediately (void)
-{_
+{ TRACE_AND_INDENT();
   //
   // Light source follows the thing.
   //
@@ -175,7 +175,7 @@ void Thing::move_carried_items_immediately (void)
   }
 
   auto on_fire_anim_id = get_on_fire_anim_id();
-  if (on_fire_anim_id.ok()) {_
+  if (on_fire_anim_id.ok()) { TRACE_AND_INDENT();
     auto w = level->thing_find(on_fire_anim_id);
     if (w) {
       w->move_to_immediately(mid_at);
@@ -185,7 +185,7 @@ void Thing::move_carried_items_immediately (void)
 }
 
 bool Thing::is_carrying_item (void)
-{_
+{ TRACE_AND_INDENT();
   if (!monstp) {
     return false;
   }
@@ -203,10 +203,10 @@ bool Thing::is_carrying_item (void)
 }
 
 std::vector<Thingp> Thing::get_item_list (void)
-{_
+{ TRACE_AND_INDENT();
   std::vector<Thingp> tr;
   dbg("Carried items:");
-_
+  TRACE_AND_INDENT();
   if (!monstp) {
     dbg("Not carrying");
     return tr;

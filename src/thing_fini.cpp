@@ -20,14 +20,14 @@
 #include "my_game.h"
 
 Thing::~Thing_ (void)
-{_
+{ TRACE_AND_INDENT();
   verify(this);
   destroy();
   oldptr(this);
 }
 
 void Thing::destroy (void)
-{_
+{ TRACE_AND_INDENT();
   verify(this);
 
   if (is_loggable_for_important_stuff()) {

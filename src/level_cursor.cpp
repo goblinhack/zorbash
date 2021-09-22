@@ -19,7 +19,7 @@
 //#include "my_traceback.h"
 
 void Level::cursor_check_if_scroll_needed (void)
-{_
+{ TRACE_AND_INDENT();
   //
   // Not sure why I have this and what it does :)
   //
@@ -39,7 +39,7 @@ void Level::cursor_check_if_scroll_needed (void)
 // Move the cursor to whatever thing it is now over
 //
 void Level::cursor_move (void)
-{_
+{ TRACE_AND_INDENT();
   if (game->robot_mode) {
     return;
   }
@@ -96,7 +96,7 @@ void Level::cursor_move (void)
     map_follow_player = true;
   }
 
-  if (cursor) {_
+  if (cursor) { TRACE_AND_INDENT();
     verify(cursor);
     if (cursor_at != cursor_old) {
       cursor_old = cursor_at;
@@ -119,7 +119,7 @@ void Level::cursor_move (void)
 }
 
 void Level::cursor_recreate (void)
-{_
+{ TRACE_AND_INDENT();
 //traceback_dump();
   //
   // Player might be on another level

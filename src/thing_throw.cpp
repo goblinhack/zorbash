@@ -14,7 +14,7 @@
 #include "my_thing.h"
 
 bool Thing::throw_item_choose_target (Thingp item)
-{_
+{ TRACE_AND_INDENT();
   dbg("Trying to throw: %s", item->to_string().c_str());
 
   if (!item->is_throwable()) {
@@ -35,7 +35,7 @@ bool Thing::throw_item_choose_target (Thingp item)
 }
 
 void Thing::throw_at (Thingp item, Thingp target)
-{_
+{ TRACE_AND_INDENT();
   if (!item) {
     item = game->request_to_throw_item;
   }

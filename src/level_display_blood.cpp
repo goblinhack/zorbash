@@ -12,7 +12,7 @@
 #include "my_thing.h"
 
 void Level::display_blood (void)
-{_
+{ TRACE_AND_INDENT();
   if (!player) {
     return;
   }

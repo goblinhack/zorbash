@@ -41,7 +41,7 @@ void Level::handle_all_pending_things (void)
 }
 
 bool Level::tick (void)
-{_
+{ TRACE_AND_INDENT();
   // LOG("Tick");
   // TOPCON("monsts %d.", monst_count);
   uint32_t tick_begin_ms = time_get_time_ms();
@@ -496,7 +496,7 @@ bool Level::tick (void)
 }
 
 void Level::sanity_check (void)
-{_
+{ TRACE_AND_INDENT();
   for (auto x = 0; x < MAP_WIDTH; x++) {
     for (auto y = 0; y < MAP_HEIGHT; y++) {
         auto monst_count = 0;
@@ -520,7 +520,7 @@ void Level::sanity_check (void)
 }
 
 void Level::update_all_ticks (void)
-{_
+{ TRACE_AND_INDENT();
   FOR_ALL_THING_GROUPS(group) {
     for (auto& i : all_things_of_interest[group]) {
       auto t = i.second;

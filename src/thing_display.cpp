@@ -21,7 +21,7 @@
 void Thing::blit_non_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
                                           const point &blit_tl,
                                           const point &blit_br)
-{_
+{ TRACE_AND_INDENT();
   IF_DEBUG3 {
     return;
   }
@@ -207,7 +207,7 @@ void Thing::blit_non_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
 void Thing::blit_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
                                       const point &blit_tl,
                                       const point &blit_br)
-{_
+{ TRACE_AND_INDENT();
   IF_DEBUG3 {
     return;
   }
@@ -244,7 +244,7 @@ void Thing::blit_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
 
 void Thing::blit_shadow (const Tpp &tpp, const Tilep &tile,
                          const point &blit_tl, const point &blit_br)
-{_
+{ TRACE_AND_INDENT();
   IF_DEBUG3 {
     return;
   }
@@ -266,7 +266,7 @@ void Thing::blit_shadow (const Tpp &tpp, const Tilep &tile,
 }
 
 static int blit_msg_strlen (std::string const& text)
-{_
+{ TRACE_AND_INDENT();
   auto text_iter = text.begin();
   int x = 0;
 
@@ -329,7 +329,7 @@ static int blit_msg_strlen (std::string const& text)
 
 void Thing::blit_text (std::string const& text, color fg,
                        point oblit_tl, point oblit_br)
-{_
+{ TRACE_AND_INDENT();
   Tilep tile;
   auto text_iter = text.begin();
   fg.a = alpha;
@@ -401,7 +401,7 @@ bool Thing::get_coords (point &blit_tl,
                         point &pre_effect_blit_br,
                         Tilep &tile,
                         bool reflection)
-{_
+{ TRACE_AND_INDENT();
   fpoint at = get_interpolated_mid_at();
 
   //
@@ -678,7 +678,7 @@ bool Thing::get_coords (point &blit_tl,
 
 bool Thing::get_map_offset_coords (point &blit_tl, point &blit_br,
                                    Tilep &tile, bool reflection)
-{_
+{ TRACE_AND_INDENT();
   point pre_effect_blit_tl;
   point pre_effect_blit_br;
 
@@ -707,7 +707,7 @@ bool Thing::get_map_offset_coords (point &blit_tl, point &blit_br,
 }
 
 uint8_t Thing::blit_begin_submerged (void) const
-{_
+{ TRACE_AND_INDENT();
   auto submerged = get_submerged_offset();
   if (submerged) {
     blit_flush();
@@ -730,7 +730,7 @@ uint8_t Thing::blit_begin_submerged (void) const
 }
 
 void Thing::blit_end_submerged (uint8_t submerged) const
-{_
+{ TRACE_AND_INDENT();
   blit_flush();
   glTranslatef(0, -submerged, 0);
   glDisable(GL_SCISSOR_TEST);
@@ -739,7 +739,7 @@ void Thing::blit_end_submerged (uint8_t submerged) const
 }
 
 uint8_t Thing::blit_begin_reflection_submerged (void) const
-{_
+{ TRACE_AND_INDENT();
   auto submerged = get_submerged_offset();
   if (submerged) {
     blit_flush();
@@ -763,7 +763,7 @@ uint8_t Thing::blit_begin_reflection_submerged (void) const
 }
 
 void Thing::blit_end_reflection_submerged (uint8_t submerged) const
-{_
+{ TRACE_AND_INDENT();
   blit_flush();
   glTranslatef(0, submerged, 0);
   glDisable(GL_SCISSOR_TEST);
@@ -776,7 +776,7 @@ void Thing::blit_internal (int fbo,
                            const Tilep tile,
                            color c,
                            bool reflection)
-{_
+{ TRACE_AND_INDENT();
   auto tpp = tp();
 
   //
@@ -957,7 +957,7 @@ void Thing::blit_internal (int fbo,
 }
 
 void Thing::blit (int fbo)
-{_
+{ TRACE_AND_INDENT();
   point blit_tl, blit_br;
   Tilep tile = {};
 
@@ -987,7 +987,7 @@ void Thing::blit (int fbo)
 }
 
 void Thing::blit_upside_down (int fbo)
-{_
+{ TRACE_AND_INDENT();
   point blit_tl, blit_br;
   Tilep tile = {};
   auto tpp = tp();

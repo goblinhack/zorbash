@@ -109,14 +109,14 @@ static commands commands_map;
 static uint8_t command_inited;
 
 void command_fini (void)
-{_
+{ TRACE_AND_INDENT();
   if (command_inited) {
     command_inited = false;
   }
 }
 
 uint8_t command_init (void)
-{_
+{ TRACE_AND_INDENT();
   command_inited = true;
 
   return true;
@@ -125,7 +125,7 @@ uint8_t command_init (void)
 void command_add (command_fn_t callback,
           std::string input,
           std::string readable)
-{_
+{ TRACE_AND_INDENT();
   auto command = std::make_shared< class command_t >();
 
   auto result = commands_map.insert(std::make_pair(input, command));
@@ -151,7 +151,7 @@ static int command_matches (const char *input,
               uint8_t show_complete,
               uint8_t execute_command,
               void *context)
-{_
+{ TRACE_AND_INDENT();
   char cand_expand_to[MAXSTR];
   commandp matched_command = nullptr;
   char completes_to[MAXSTR];
@@ -353,7 +353,7 @@ uint8_t command_handle (const char *input,
             uint8_t show_complete,
             uint8_t execute_command,
             void *context)
-{_
+{ TRACE_AND_INDENT();
   int matches;
 
   if (expandedtext) {

@@ -20,7 +20,7 @@
  * Does the requested dir exist?
  */
 uint8_t dir_exists (const char *indir)
-{_
+{ TRACE_AND_INDENT();
   struct stat buf;
   char *dir;
   uint8_t rc;
@@ -46,7 +46,7 @@ uint8_t dir_exists (const char *indir)
  * Given a directory, find out what ./ is.
  */
 char *dir_dot (void)
-{_
+{ TRACE_AND_INDENT();
   static char buf[MAXPATHLEN];
 
   dospath2unix(getcwd(buf, sizeof(buf)));
@@ -59,7 +59,7 @@ char *dir_dot (void)
  * Given a directory, find out what ../ is.
  */
 char *dir_dotdot (char *s)
-{_
+{ TRACE_AND_INDENT();
   uint32_t size;
   char *end;
 
@@ -85,7 +85,7 @@ char *dir_dotdot (char *s)
  * Remove \ and change to /
  */
 char *dospath2unix (char *in)
-{_
+{ TRACE_AND_INDENT();
   char *s = in;
 
   while (*s) {

@@ -16,7 +16,7 @@
 #include "my_array_bounds_check.h"
 
 bool Thing::ai_obstacle_for_me (const point &p)
-{_
+{ TRACE_AND_INDENT();
   //
   // Avoid threats and treat them as obstacles
   //

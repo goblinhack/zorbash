@@ -13,7 +13,7 @@
 #include "my_ptrcheck.h"
 
 Thingp Thing::weapon_get () const
-{_
+{ TRACE_AND_INDENT();
   auto id = get_weapon_id();
   if (id.ok()) {
     return (level->thing_find(id));
@@ -23,7 +23,7 @@ Thingp Thing::weapon_get () const
 }
 
 void Thing::weapon_set_carry_anim_id (ThingId weapon_carry_anim_id)
-{_
+{ TRACE_AND_INDENT();
   Thingp weapon_carry_anim;
 
   if (!weapon_carry_anim_id) {
@@ -40,7 +40,7 @@ void Thing::weapon_set_carry_anim_id (ThingId weapon_carry_anim_id)
 }
 
 void Thing::weapon_set_carry_anim (Thingp new_weapon_carry_anim)
-{_
+{ TRACE_AND_INDENT();
   if (new_weapon_carry_anim) {
     verify(new_weapon_carry_anim);
   }
@@ -77,7 +77,7 @@ void Thing::weapon_set_carry_anim (Thingp new_weapon_carry_anim)
 }
 
 void Thing::weapon_set_use_anim_id (ThingId gfx_anim_attack_id)
-{_
+{ TRACE_AND_INDENT();
   Thingp gfx_anim_attack;
 
   if (!gfx_anim_attack_id) {
@@ -94,7 +94,7 @@ void Thing::weapon_set_use_anim_id (ThingId gfx_anim_attack_id)
 }
 
 void Thing::weapon_set_use_anim (Thingp new_gfx_anim_attack)
-{_
+{ TRACE_AND_INDENT();
   if (new_gfx_anim_attack) {
     verify(new_gfx_anim_attack);
   }
@@ -132,7 +132,7 @@ void Thing::weapon_set_use_anim (Thingp new_gfx_anim_attack)
 }
 
 void Thing::weapon_get_use_offset (float *dx, float *dy) const
-{_
+{ TRACE_AND_INDENT();
   *dx = 0;
   *dy = 0;
 
@@ -198,7 +198,7 @@ void Thing::weapon_get_use_offset (float *dx, float *dy) const
 }
 
 Thingp Thing::weapon_get_carry_anim (void)
-{_
+{ TRACE_AND_INDENT();
   Thingp weapon_carry_anim = 0;
 
   auto id = get_weapon_id_carry_anim();
@@ -210,7 +210,7 @@ Thingp Thing::weapon_get_carry_anim (void)
 }
 
 Thingp Thing::weapon_get_use_anim (void) const
-{_
+{ TRACE_AND_INDENT();
   //
   // If this gfx_anim_attack has its own thing id for animations then
   // destroy that.
@@ -226,7 +226,7 @@ Thingp Thing::weapon_get_use_anim (void) const
 }
 
 void Thing::unwield (const char *why)
-{_
+{ TRACE_AND_INDENT();
   if (!get_weapon_id()) {
     return;
   }
@@ -245,14 +245,14 @@ void Thing::unwield (const char *why)
 }
 
 void Thing::sheath (void)
-{_
+{ TRACE_AND_INDENT();
   auto weapon = weapon_get();
   if (!weapon) {
     return;
   }
 
   dbg("Sheathing %s", weapon->tp()->name().c_str());
-_
+  TRACE_AND_INDENT();
   //
   // If this weapon has its own thing id for animations then destroy that.
   //
@@ -285,7 +285,7 @@ _
 // Returns true on weapon change
 //
 bool Thing::wield (Thingp weapon)
-{_
+{ TRACE_AND_INDENT();
   auto weapon_tp = weapon->tp();
 
   if (weapon_get() == weapon) {
@@ -327,9 +327,9 @@ bool Thing::wield (Thingp weapon)
 }
 
 void Thing::use_weapon (void)
-{_
+{ TRACE_AND_INDENT();
   dbg("Try to use weapon");
-_
+  TRACE_AND_INDENT();
   if (get_weapon_id_use_anim().ok()) {
     //
     // Still using.
@@ -413,7 +413,7 @@ _
   auto hit_at = mid_at + fpoint(dx, dy);
 
   dbg("Attack at %f,%f delta %f,%f",hit_at.x, hit_at.y, dx, dy);
-_
+  TRACE_AND_INDENT();
   //
   // Lunge at the target
   //

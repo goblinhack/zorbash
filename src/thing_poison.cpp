@@ -9,7 +9,7 @@
 #include "my_thing.h"
 
 void Thing::poison_tick (void)
-{_
+{ TRACE_AND_INDENT();
   auto old_poison = get_poison();
   if (old_poison) {
     is_hit_by(this, old_poison);

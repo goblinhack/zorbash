@@ -8,15 +8,15 @@
 #include "my_game.h"
 
 void Game::fini (void)
-{_
+{ TRACE_AND_INDENT();
   fps_value = 0;
   started = false;
   things_are_moving = false;
   tick_completed = 1;
   tick_current = 1;
-_
+  TRACE_AND_INDENT();
   config.fini();
-_
+  TRACE_AND_INDENT();
   world.fini();
-_
+  TRACE_AND_INDENT();
 }

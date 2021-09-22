@@ -15,13 +15,13 @@ static WidPopup *game_config_gfx_window;
 static bool local_g_need_restart = false;
 
 static void game_config_gfx_destroy (void)
-{_
+{ TRACE_AND_INDENT();
   delete game_config_gfx_window;
   game_config_gfx_window = nullptr;
 }
 
 static uint8_t game_config_gfx_cancel (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   CON("USR: Reload config");
   game->load_config();
   sdl_config_update_all();
@@ -31,7 +31,7 @@ static uint8_t game_config_gfx_cancel (Widp w, int32_t x, int32_t y, uint32_t bu
 }
 
 static uint8_t game_config_gfx_save (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   CON("USR: Save config");
   game->save_config();
   game_config_gfx_destroy();
@@ -43,14 +43,14 @@ static uint8_t game_config_gfx_save (Widp w, int32_t x, int32_t y, uint32_t butt
 }
 
 static uint8_t game_config_gfx_back (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   game_config_gfx_destroy();
   game->config_top_select();
   return true;
 }
 
 static uint8_t game_config_gfx_vsync_enable_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   CON("USR: Toggle vsync");
   game->config.gfx_vsync_enable = !game->config.gfx_vsync_enable;
   config_gfx_vsync_update();
@@ -59,7 +59,7 @@ static uint8_t game_config_gfx_vsync_enable_toggle (Widp w, int32_t x, int32_t y
 }
 
 static uint8_t game_config_gfx_fullscreen_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   CON("USR: Toggle gfx_fullscreen");
   game->config.gfx_fullscreen = !game->config.gfx_fullscreen;
   if (game->config.gfx_fullscreen) {
@@ -71,7 +71,7 @@ static uint8_t game_config_gfx_fullscreen_toggle (Widp w, int32_t x, int32_t y, 
 }
 
 static uint8_t game_config_gfx_fullscreen_desktop_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   CON("USR: Toggle gfx_fullscreen_desktop");
   game->config.gfx_fullscreen_desktop = !game->config.gfx_fullscreen_desktop;
   if (game->config.gfx_fullscreen_desktop) {
@@ -83,7 +83,7 @@ static uint8_t game_config_gfx_fullscreen_desktop_toggle (Widp w, int32_t x, int
 }
 
 static uint8_t game_config_gfx_allow_highdpi_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   CON("USR: Toggle gfx_allow_highdpi");
   game->config.gfx_allow_highdpi = !game->config.gfx_allow_highdpi;
   game->config_gfx_select();
@@ -92,7 +92,7 @@ static uint8_t game_config_gfx_allow_highdpi_toggle (Widp w, int32_t x, int32_t 
 }
 
 static uint8_t game_config_gfx_borderless_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   CON("USR: Toggle gfx_borderless");
   game->config.gfx_borderless = !game->config.gfx_borderless;
   game->config_gfx_select();
@@ -101,7 +101,7 @@ static uint8_t game_config_gfx_borderless_toggle (Widp w, int32_t x, int32_t y, 
 }
 
 static uint8_t game_config_gfx_inverted_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   CON("USR: Toggle inverted");
   game->config.gfx_inverted = !game->config.gfx_inverted;
   game->config_gfx_select();
@@ -109,7 +109,7 @@ static uint8_t game_config_gfx_inverted_toggle (Widp w, int32_t x, int32_t y, ui
 }
 
 static uint8_t game_config_other_fps_counter_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   CON("USR: Toggle fps_counter");
   game->config.fps_counter = !game->config.fps_counter;
   game->config_gfx_select();
@@ -117,7 +117,7 @@ static uint8_t game_config_other_fps_counter_toggle (Widp w, int32_t x, int32_t 
 }
 
 static uint8_t game_config_gfx_resolution_incr (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   CON("USR: Increment resolution");
   auto res = std::to_string(game->config.window_pix_width) + "x" +
          std::to_string(game->config.window_pix_height);
@@ -150,7 +150,7 @@ static uint8_t game_config_gfx_resolution_incr (Widp w, int32_t x, int32_t y, ui
 }
 
 static uint8_t game_config_gfx_resolution_decr (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   CON("USR: Decrement resolution");
   auto res = std::to_string(game->config.window_pix_width) + "x" +
          std::to_string(game->config.window_pix_height);
@@ -183,7 +183,7 @@ static uint8_t game_config_gfx_resolution_decr (Widp w, int32_t x, int32_t y, ui
 }
 
 static uint8_t game_config_gfx_key_up (Widp w, const struct SDL_Keysym *key)
-{_
+{ TRACE_AND_INDENT();
   if (sdl_shift_held) {
     if (key->scancode == (SDL_Scancode)game->config.key_console) {
       return false;
@@ -195,7 +195,7 @@ static uint8_t game_config_gfx_key_up (Widp w, const struct SDL_Keysym *key)
     case KMOD_RCTRL:
     default:
     switch (key->sym) {
-      default: {_
+      default: { TRACE_AND_INDENT();
         auto c = wid_event_to_char(key);
         switch (c) {
           case 'c':
@@ -217,7 +217,7 @@ static uint8_t game_config_gfx_key_up (Widp w, const struct SDL_Keysym *key)
 }
 
 static uint8_t game_config_gfx_key_down (Widp w, const struct SDL_Keysym *key)
-{_
+{ TRACE_AND_INDENT();
   if (sdl_shift_held) {
     if (key->scancode == (SDL_Scancode)game->config.key_console) {
       return false;
@@ -228,7 +228,7 @@ static uint8_t game_config_gfx_key_down (Widp w, const struct SDL_Keysym *key)
 }
 
 void Game::config_gfx_select (void)
-{_
+{ TRACE_AND_INDENT();
   if (game_config_gfx_window) {
     game_config_gfx_destroy();
   }
@@ -242,14 +242,14 @@ void Game::config_gfx_select (void)
 
   game_config_gfx_window = new WidPopup("Gfx select",
                       tl, br, nullptr, "", false, false);
-  {_
+  { TRACE_AND_INDENT();
     Widp w = game_config_gfx_window->wid_popup_container;
     wid_set_on_key_up(w, game_config_gfx_key_up);
     wid_set_on_key_down(w, game_config_gfx_key_down);
   }
 
   int y_at = 0;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_gfx_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "configuration");
 
@@ -261,7 +261,7 @@ void Game::config_gfx_select (void)
   }
 
   y_at = 3;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_gfx_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Back");
 
@@ -272,7 +272,7 @@ void Game::config_gfx_select (void)
     wid_set_pos(w, tl, br);
     wid_set_text(w, "%%fg=white$B%%fg=reset$ack");
   }
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_gfx_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Save");
 
@@ -283,7 +283,7 @@ void Game::config_gfx_select (void)
     wid_set_pos(w, tl, br);
     wid_set_text(w, "%%fg=white$S%%fg=reset$ave");
   }
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_gfx_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Cancel");
 
@@ -299,7 +299,7 @@ void Game::config_gfx_select (void)
   // resolution
   /////////////////////////////////////////////////////////////////////////
   y_at += 4;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_gfx_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Resolution");
 
@@ -310,7 +310,7 @@ void Game::config_gfx_select (void)
     wid_set_text_lhs(w, true);
     wid_set_text(w, "Resolution");
   }
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_gfx_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Resolution value");
 
@@ -323,7 +323,7 @@ void Game::config_gfx_select (void)
            std::to_string(game->config.window_pix_height);
     wid_set_text(w, res);
   }
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_gfx_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Resolution value +");
 
@@ -334,7 +334,7 @@ void Game::config_gfx_select (void)
     wid_set_on_mouse_up(w, game_config_gfx_resolution_incr);
     wid_set_text(w, "+");
   }
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_gfx_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Resolution value -");
 
@@ -350,7 +350,7 @@ void Game::config_gfx_select (void)
   // fullscreen
   /////////////////////////////////////////////////////////////////////////
   y_at += 2;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_gfx_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Fullscreen");
 
@@ -361,7 +361,7 @@ void Game::config_gfx_select (void)
     wid_set_text_lhs(w, true);
     wid_set_text(w, "Fullscreen video");
   }
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_gfx_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Fullscreen value");
 
@@ -382,7 +382,7 @@ void Game::config_gfx_select (void)
   // fullscreen desktop
   /////////////////////////////////////////////////////////////////////////
   y_at += 1;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_gfx_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Fullscreen desktop");
 
@@ -393,7 +393,7 @@ void Game::config_gfx_select (void)
     wid_set_text_lhs(w, true);
     wid_set_text(w, "Fullscreen desktop");
   }
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_gfx_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Fullscreen value");
 
@@ -414,7 +414,7 @@ void Game::config_gfx_select (void)
   // fullscreen desktop
   /////////////////////////////////////////////////////////////////////////
   y_at += 1;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_gfx_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "High DPI");
 
@@ -425,7 +425,7 @@ void Game::config_gfx_select (void)
     wid_set_text_lhs(w, true);
     wid_set_text(w, "High DPI");
   }
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_gfx_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "High DPI value");
 
@@ -446,7 +446,7 @@ void Game::config_gfx_select (void)
   // borderless
   /////////////////////////////////////////////////////////////////////////
   y_at += 1;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_gfx_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Borderless");
 
@@ -457,7 +457,7 @@ void Game::config_gfx_select (void)
     wid_set_text_lhs(w, true);
     wid_set_text(w, "Borderless window");
   }
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_gfx_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Borderless");
 
@@ -479,7 +479,7 @@ void Game::config_gfx_select (void)
     // vsync
     /////////////////////////////////////////////////////////////////////////
     y_at += 1;
-    {_
+    { TRACE_AND_INDENT();
       auto p = game_config_gfx_window->wid_text_area->wid_text_area;
       auto w = wid_new_square_button(p, "Vertical sync");
 
@@ -490,7 +490,7 @@ void Game::config_gfx_select (void)
       wid_set_text_lhs(w, true);
       wid_set_text(w, "Vertical sync");
     }
-    {_
+    { TRACE_AND_INDENT();
       auto p = game_config_gfx_window->wid_text_area->wid_text_area;
       auto w = wid_new_square_button(p, "Vertical sync value");
 
@@ -511,7 +511,7 @@ void Game::config_gfx_select (void)
     // vsync cannot be changed
     /////////////////////////////////////////////////////////////////////////
     y_at += 1;
-    {_
+    { TRACE_AND_INDENT();
       auto p = game_config_gfx_window->wid_text_area->wid_text_area;
       auto w = wid_new_square_button(p, "Vertical sync");
 
@@ -522,7 +522,7 @@ void Game::config_gfx_select (void)
       wid_set_text_lhs(w, true);
       wid_set_text(w, "Vertical sync");
     }
-    {_
+    { TRACE_AND_INDENT();
       auto p = game_config_gfx_window->wid_text_area->wid_text_area;
       auto w = wid_new_square_button(p, "Vertical sync value");
 
@@ -539,7 +539,7 @@ void Game::config_gfx_select (void)
   // Inverted graphics
   /////////////////////////////////////////////////////////////////////////
   y_at += 1;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_gfx_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Inverted graphics");
 
@@ -550,7 +550,7 @@ void Game::config_gfx_select (void)
     wid_set_text_lhs(w, true);
     wid_set_text(w, "Inverted graphics");
   }
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_gfx_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Inverted graphics value");
 
@@ -571,7 +571,7 @@ void Game::config_gfx_select (void)
   // fps
   //////////////////////////////////////////////////////////////////////
   y_at += 1;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_gfx_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "FPS counter");
 
@@ -582,7 +582,7 @@ void Game::config_gfx_select (void)
     wid_set_text_lhs(w, true);
     wid_set_text(w, "FPS counter");
   }
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_gfx_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "FPS counter value");
 

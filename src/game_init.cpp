@@ -14,7 +14,7 @@
 #include "my_globals.h"
 
 void Game::init (void)
-{_
+{ TRACE_AND_INDENT();
   LOG("Game init");
 
   if (g_opt_seed_name != "") {
@@ -41,7 +41,7 @@ void Game::init (void)
 }
 
 void Game::init_level (point3d p)
-{_
+{ TRACE_AND_INDENT();
   LOG("Game init level %d,%d,%d", p.x, p.y, p.z);
 
   auto level_seed = seed + p.x + p.y + p.z;
@@ -59,7 +59,7 @@ void Game::init_level (point3d p)
 }
 
 void Game::init_levels (void)
-{_
+{ TRACE_AND_INDENT();
   LOG("Game init levels");
 
   //

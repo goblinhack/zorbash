@@ -13,7 +13,7 @@
 #include "my_sdl.h"
 
 void Level::scroll_map_do (bool fast)
-{_
+{ TRACE_AND_INDENT();
   if (!fast) {
     //
     // Not sure why I have this :)
@@ -157,7 +157,7 @@ if (player) {
 }
 
 void Level::scroll_map (void)
-{_
+{ TRACE_AND_INDENT();
   if (wid_find_under_mouse_when_scrolling()) {
     return;
   }
@@ -166,7 +166,7 @@ void Level::scroll_map (void)
 }
 
 void Level::scroll_map_to_player (void)
-{_
+{ TRACE_AND_INDENT();
   if (!player) {
     return;
   }
@@ -183,7 +183,7 @@ void Level::scroll_map_to_player (void)
 }
 
 void Level::scroll_map_to_player_immediately (void)
-{_
+{ TRACE_AND_INDENT();
   if (!player) {
     return;
   }
@@ -215,7 +215,7 @@ void Level::scroll_map_to_player_immediately (void)
 // Make the map scroll to the cursor (or the player)
 //
 void Level::scroll_map_set_target (void)
-{_
+{ TRACE_AND_INDENT();
   fpoint follow;
   float sensitivity;
   float x_sensitivity;

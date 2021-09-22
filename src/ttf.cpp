@@ -31,7 +31,7 @@ static void ttf_create_tex_from_char(TTF_Font *ttf, const char *name,
 // Load a new font and create textures for each glyph
 //
 Fontp ttf_new (std::string name, int pointSize, int style)
-{_
+{ TRACE_AND_INDENT();
   TTF_Font *ttf;
 
   auto f = new Font();
@@ -96,7 +96,7 @@ ttf_set_color_key (SDL_Surface *glyph_surface,
            uint8_t ckb,
            double *width,
            double *height)
-{_
+{ TRACE_AND_INDENT();
   SDL_Surface *tmp;
   uint32_t colorkey;
 
@@ -161,7 +161,7 @@ static void
 ttf_create_tex_from_char (TTF_Font *ttf, const char *name, Font *f,
               uint16_t c,
               uint16_t d)
-{_
+{ TRACE_AND_INDENT();
   static uint16_t text[2];
   int e;
 
@@ -220,7 +220,7 @@ ttf_create_tex_from_char (TTF_Font *ttf, const char *name, Font *f,
 
 Fontp
 ttf_read_tga (Fontp f, const char *name, int pointsize)
-{_
+{ TRACE_AND_INDENT();
   char filename[MAXSTR];
   uint32_t c;
   Texp tex;
@@ -246,7 +246,7 @@ ttf_read_tga (Fontp f, const char *name, int pointsize)
 
 Fontp
 ttf_write_tga (std::string name, int pointsize, int style)
-{_
+{ TRACE_AND_INDENT();
   uint32_t rmask, gmask, bmask, amask;
   int glyph_per_row;
   char filename[200];

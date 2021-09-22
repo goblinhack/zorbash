@@ -12,7 +12,7 @@
 #include "my_thing.h"
 
 void Level::update_minimap (bool showing_two_levels, bool show_faded)
-{_
+{ TRACE_AND_INDENT();
   static int last_rendered;
   if (showing_two_levels) {
     if (show_faded) {

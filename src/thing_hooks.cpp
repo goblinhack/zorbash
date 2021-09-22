@@ -21,7 +21,7 @@
 // weapons it carries etc.
 //
 void Thing::hooks_remove ()
-{_
+{ TRACE_AND_INDENT();
   //
   // We are owned by something. i.e. we are a sword.
   //
@@ -73,7 +73,7 @@ void Thing::hooks_remove ()
       auto carry_anim = owner->weapon_get_carry_anim();
       if (carry_anim) {
         dbg("Make carry weapon visible %s", owner->to_string().c_str());
-_
+  TRACE_AND_INDENT();
         //
         // But only if the owner is visible.
         //
@@ -127,7 +127,7 @@ _
   //
   // We own things like a sword. i.e. we are a player.
   //
-  {_
+  { TRACE_AND_INDENT();
     auto item = weapon_get_carry_anim();
     if (item) {
       if (is_loggable_for_unimportant_stuff()) {
@@ -140,7 +140,7 @@ _
     }
   }
 
-  {_
+  { TRACE_AND_INDENT();
     auto item = weapon_get_use_anim();
     if (item) {
       if (is_loggable_for_unimportant_stuff()) {
@@ -155,7 +155,7 @@ _
 }
 
 void Thing::remove_all_references ()
-{_
+{ TRACE_AND_INDENT();
   //
   // Some things have lots of things they own
   //

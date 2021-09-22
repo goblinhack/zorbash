@@ -14,12 +14,12 @@
 #include "my_wid_actionbar.h"
 
 void Game::tick_begin (const std::string &why)
-{_
+{ TRACE_AND_INDENT();
   tick_requested = why;
   game->tick_dt = 0;
 
   auto level = game->level;
-  if (level) {_
+  if (level) { TRACE_AND_INDENT();
     auto player = level->player;
 
     if (player) {
@@ -37,7 +37,7 @@ void Game::tick_begin (const std::string &why)
 }
 
 void Game::tick_begin_now (void)
-{_
+{ TRACE_AND_INDENT();
   std::string why = tick_requested;
   tick_requested = "";
 
@@ -61,7 +61,7 @@ void Game::tick_begin_now (void)
   }
 
   auto level = game->level;
-  if (level) {_
+  if (level) { TRACE_AND_INDENT();
     auto player = level->player;
     if (player) {
       CON("Game (%s) tick %d begin (%s): %s",
@@ -90,7 +90,7 @@ void Game::tick_begin_now (void)
 }
 
 bool Game::tick_end (void)
-{_
+{ TRACE_AND_INDENT();
   //
   // Move when all things are done moving
   //
@@ -102,7 +102,7 @@ bool Game::tick_end (void)
   save_snapshot_check();
 
   auto level = game->level;
-  if (level) {_
+  if (level) { TRACE_AND_INDENT();
     auto player = level->player;
     if (player) {
       CON("Game (%s) tick %d end, duration %d ms: %s",
@@ -146,7 +146,7 @@ bool Game::tick_end (void)
 }
 
 void Game::tick_update (void)
-{_
+{ TRACE_AND_INDENT();
   //
   // Work out the current timestep in this move
   //

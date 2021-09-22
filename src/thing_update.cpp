@@ -14,7 +14,7 @@
 #include "my_light.h"
 
 void Thing::update_light (void)
-{_
+{ TRACE_AND_INDENT();
   if (!is_player()) {
     return;
   }

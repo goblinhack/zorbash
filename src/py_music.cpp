@@ -13,7 +13,7 @@
 #include "my_main.h"
 
 PyObject *music_load_ (PyObject *obj, PyObject *args, PyObject *keywds)
-{_
+{ TRACE_AND_INDENT();
   char *file = 0;
   char *name = 0;
   uint32_t rate = 44100;
@@ -46,7 +46,7 @@ PyObject *music_load_ (PyObject *obj, PyObject *args, PyObject *keywds)
 }
 
 PyObject *music_play_ (PyObject *obj, PyObject *args, PyObject *keywds)
-{_
+{ TRACE_AND_INDENT();
   char *name = 0;
 
   static char *kwlist[] = {(char*) "name", 0};

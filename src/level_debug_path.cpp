@@ -17,7 +17,7 @@
 #include "my_dmap.h"
 
 void Level::debug_path_draw_line (const std::vector<point> &move_path)
-{_
+{ TRACE_AND_INDENT();
   for (auto& c : move_path) {
     if (cursor && cursor->is_visible()) {
       if ((c.x == cursor_at.x) && (c.y == cursor_at.y)) {
@@ -29,7 +29,7 @@ void Level::debug_path_draw_line (const std::vector<point> &move_path)
 }
 
 void Level::debug_path_draw (const std::vector<point> &move_path)
-{_
+{ TRACE_AND_INDENT();
   if (!player) {
     return;
   }
@@ -38,7 +38,7 @@ void Level::debug_path_draw (const std::vector<point> &move_path)
 }
 
 void Level::debug_path_create (const std::vector<point> &move_path)
-{_
+{ TRACE_AND_INDENT();
   if (!cursor) {
     return;
   }
@@ -53,7 +53,7 @@ void Level::debug_path_create (const std::vector<point> &move_path)
 // path to follow.
 //
 void Level::debug_path_clear (void)
-{_
+{ TRACE_AND_INDENT();
   auto level = game->level;
   if (!level) {
     return;

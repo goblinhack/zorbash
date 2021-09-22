@@ -16,7 +16,7 @@
 #undef DEBUG_ANIM
 
 void Thing::animate (void)
-{_
+{ TRACE_AND_INDENT();
   Tilep tile;
   auto tpp = tp();
 
@@ -98,7 +98,7 @@ if (is_debug_type()) { con("Stay dead"); }
     if (is_player() && !is_dead && !is_moving) {
       Tilep new_tile;
 
-      {_
+      { TRACE_AND_INDENT();
         new_tile = tile_next(tmap, tile);
         if (!new_tile) {
           new_tile = tile_first(tmap);

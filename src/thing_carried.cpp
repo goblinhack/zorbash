@@ -14,7 +14,7 @@
 #include "my_ptrcheck.h"
 
 int Thing::get_carried_weapon_count (void)
-{_
+{ TRACE_AND_INDENT();
   int count = 0;
 
   if (!monstp) {
@@ -36,7 +36,7 @@ int Thing::get_carried_weapon_count (void)
 }
 
 int Thing::get_carried_wand_count (void)
-{_
+{ TRACE_AND_INDENT();
   int count = 0;
 
   if (!monstp) {
@@ -58,7 +58,7 @@ int Thing::get_carried_wand_count (void)
 }
 
 int Thing::get_carried_food_count (void)
-{_
+{ TRACE_AND_INDENT();
   int count = 0;
 
   if (!monstp) {
@@ -80,7 +80,7 @@ int Thing::get_carried_food_count (void)
 }
 
 int Thing::get_carried_weapon_least_value (Thingp *out)
-{_
+{ TRACE_AND_INDENT();
   int least_value = -1;
 
   *out = nullptr;
@@ -112,7 +112,7 @@ int Thing::get_carried_weapon_least_value (Thingp *out)
 }
 
 int Thing::get_carried_wand_least_value (Thingp *out)
-{_
+{ TRACE_AND_INDENT();
   int least_value = -1;
 
   *out = nullptr;
@@ -144,7 +144,7 @@ int Thing::get_carried_wand_least_value (Thingp *out)
 }
 
 int Thing::get_carried_food_least_value (Thingp *out)
-{_
+{ TRACE_AND_INDENT();
   int least_value = -1;
 
   *out = nullptr;
@@ -176,7 +176,7 @@ int Thing::get_carried_food_least_value (Thingp *out)
 }
 
 int Thing::get_carried_weapon_highest_value (Thingp *out)
-{_
+{ TRACE_AND_INDENT();
   int highest_value = -1;
 
   *out = nullptr;
@@ -208,7 +208,7 @@ int Thing::get_carried_weapon_highest_value (Thingp *out)
 }
 
 int Thing::get_carried_wand_highest_value (Thingp *out)
-{_
+{ TRACE_AND_INDENT();
   int highest_value = -1;
 
   *out = nullptr;
@@ -240,7 +240,7 @@ int Thing::get_carried_wand_highest_value (Thingp *out)
 }
 
 int Thing::get_carried_food_highest_value (Thingp *out)
-{_
+{ TRACE_AND_INDENT();
   int highest_value = -1;
 
   *out = nullptr;

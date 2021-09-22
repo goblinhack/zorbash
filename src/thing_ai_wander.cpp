@@ -19,7 +19,7 @@
 #include "my_vector_bounds_check.h"
 
 bool Thing::ai_blocked (void)
-{_
+{ TRACE_AND_INDENT();
   static const std::vector<point> move_deltas = {
     point(0, -1),
     point(-1, 0),
@@ -41,7 +41,7 @@ bool Thing::ai_blocked (void)
 }
 
 bool Thing::ai_blocked_completely (void)
-{_
+{ TRACE_AND_INDENT();
   static const std::vector<point> move_deltas = {
     point(0, -1),
     point(-1, 0),
@@ -64,7 +64,7 @@ bool Thing::ai_blocked_completely (void)
 }
 
 bool Thing::ai_create_path (point &nh, const point start, const point end)
-{_
+{ TRACE_AND_INDENT();
   if (end == point(-1, -1)) {
     return false;
   }
@@ -181,7 +181,7 @@ bool Thing::ai_create_path (point &nh, const point start, const point end)
 }
 
 bool Thing::ai_choose_wander (point& nh)
-{_
+{ TRACE_AND_INDENT();
   //
   // Reached the target? Choose a new one.
   //
@@ -225,7 +225,7 @@ bool Thing::ai_choose_wander (point& nh)
 }
 
 bool Thing::ai_wander (void)
-{_
+{ TRACE_AND_INDENT();
   if (ai_blocked_completely()) {
     dbg("Blocked on all sides, try escape");
     if (ai_escape()) {
@@ -277,7 +277,7 @@ bool Thing::ai_wander (void)
 }
 
 bool Thing::ai_escape (void)
-{_
+{ TRACE_AND_INDENT();
   if (ai_blocked_completely()) {
     dbg("AI escape blocked");
     return false;
@@ -298,7 +298,7 @@ bool Thing::ai_escape (void)
       monstp->wander_target = point(-1, -1);
     }
   }
-_
+  TRACE_AND_INDENT();
   dbg("No escape goal");
   return false;
 }

@@ -19,7 +19,7 @@
 
 void Level::cursor_find_on_visible_things (const int16_t minx, const int16_t miny,
                                            const int16_t maxx, const int16_t maxy)
-{_
+{ TRACE_AND_INDENT();
   if ((game->state == Game::STATE_MOVING_ITEMS) ||
     (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
     (game->state == Game::STATE_COLLECTING_ITEMS) ||
@@ -37,14 +37,14 @@ void Level::cursor_find_on_visible_things (const int16_t minx, const int16_t min
   }
 
   dbg4("Cursor find on visible things");
-_
+  TRACE_AND_INDENT();
   if ((game->minimap_over.x > 0) && (game->minimap_over.y > 0)) {
     //
     // Don't move onto lava unless double click
     //
     auto to = make_fpoint(game->minimap_over);
     if (!wid_mouse_two_clicks) {
-      if (cursor) {_
+      if (cursor) { TRACE_AND_INDENT();
         FOR_ALL_THINGS(this, t, to.x, to.y) {
           if (t->is_cursor_can_hover_over_x2_click()) {
             goto done;

@@ -20,9 +20,9 @@
 #include "my_ptrcheck.h"
 
 int Thing::ai_choose_goal (void)
-{_
+{ TRACE_AND_INDENT();
   dbg("Choose goal");
-_
+  TRACE_AND_INDENT();
   const float dx = (MAP_WIDTH / 6);
   const float dy = (MAP_HEIGHT / 6);
 
@@ -64,7 +64,7 @@ _
   std::multiset<Goal> goals;
 
   dbg("Choose goals (higher scores, lower costs are preferred):");
-_
+  TRACE_AND_INDENT();
   auto tpp = tp();
   for (auto y = miny; y < maxy; y++) { for (auto x = minx; x < maxx; x++) {
     point p(x, y);
@@ -118,7 +118,6 @@ _
           dbg2(" consider %s", it->to_string().c_str());
         }
       }
-      _
 
       //
       // Worse terrain, less preferred. Higher score, more preferred.

@@ -29,7 +29,7 @@ static point particle_to_grid (const Particlep p)
 #if 1
 static void blit_text (std::string const& text,
                        fpoint& blit_tl, fpoint& blit_br)
-{_
+{ TRACE_AND_INDENT();
     Tilep tile;
     auto text_iter = text.begin();
     color fg = WHITE;
@@ -366,7 +366,7 @@ int Level::particle_box_collision (Particlep C,
 }
 
 void Level::new_particle (const fpoint &at)
-{_
+{ TRACE_AND_INDENT();
     static uint32_t next_idx;
     uint32_t tries = PARTICLE_MAX;
     auto s = getptr(all_particles, next_idx);
@@ -406,7 +406,7 @@ void Level::new_particle (const fpoint &at)
 }
 
 void Level::free_particle (Particlep p)
-{_
+{ TRACE_AND_INDENT();
     auto idx = p - getptr(all_particles, 0);
     auto s = getptr(all_particles, idx);
     if (!s->in_use) {
@@ -416,7 +416,7 @@ void Level::free_particle (Particlep p)
 }
 
 void Level::attach_particle (Particlep p)
-{_
+{ TRACE_AND_INDENT();
     if (unlikely(is_oob(p->at))) {
         return;
     }
@@ -433,7 +433,7 @@ void Level::attach_particle (Particlep p)
 }
 
 void Level::detach_particle (Particlep p)
-{_
+{ TRACE_AND_INDENT();
     auto at = particle_to_grid(p);
     auto idx = p - getptr(all_particles, 0);
     for (auto slot = 0; slot < PARTICLE_SLOTS; slot++) {
@@ -446,7 +446,7 @@ void Level::detach_particle (Particlep p)
 }
 
 void Level::move_particle (Particlep p, fpoint to)
-{_
+{ TRACE_AND_INDENT();
     auto old_at = particle_to_grid(p);
     auto new_at = point_to_grid(to);
     if (old_at == new_at) {
@@ -468,7 +468,7 @@ void Level::move_particle (Particlep p, fpoint to)
 
 void Level::blit_particles (const int16_t minx, const int16_t miny,
                             const int16_t maxx, const int16_t maxy)
-{_
+{ TRACE_AND_INDENT();
     static auto ptex = tile_find_mand("particle");
 
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

@@ -15,7 +15,7 @@
 #include "my_time.h"
 
 HiScores::HiScores (void)
-{_
+{ TRACE_AND_INDENT();
   if ((int)hiscores.size() > HiScore::max) {
     hiscores.resize(HiScore::max);
   } else {
@@ -30,13 +30,13 @@ HiScores::HiScores (void)
 }
 
 HiScores::~HiScores (void)
-{_
+{ TRACE_AND_INDENT();
 }
 
 void HiScores::add_new_hiscore (Thingp player,
                 const std::string &name,
                 const std::string &killed_by)
-{_
+{ TRACE_AND_INDENT();
   std::vector<HiScore>::iterator h = hiscores.begin();
   std::string hiscore_name;
 
@@ -67,7 +67,7 @@ void HiScores::add_new_hiscore (Thingp player,
 }
 
 bool HiScores::is_new_hiscore (Thingp player)
-{_
+{ TRACE_AND_INDENT();
   std::vector<HiScore>::iterator h = hiscores.begin();
 
   if (!player->get_score()) {
@@ -151,7 +151,7 @@ const char *HiScores::place_str (Thingp player)
 }
 
 std::istream& operator>>(std::istream &in, Bits<HiScore &> my)
-{_
+{ TRACE_AND_INDENT();
   in >> bits(my.t.name);
   in >> bits(my.t.when);
   in >> bits(my.t.killed_by);
@@ -164,7 +164,7 @@ std::istream& operator>>(std::istream &in, Bits<HiScore &> my)
 }
 
 std::ostream& operator<<(std::ostream &out, Bits<const HiScore & > const my)
-{_
+{ TRACE_AND_INDENT();
   out << bits(my.t.name);
   out << bits(my.t.when);
   out << bits(my.t.killed_by);
@@ -176,7 +176,7 @@ std::ostream& operator<<(std::ostream &out, Bits<const HiScore & > const my)
 }
 
 std::ostream& operator<<(std::ostream &out, Bits<HiScore &> const my)
-{_
+{ TRACE_AND_INDENT();
   out << bits(my.t.name);
   out << bits(my.t.when);
   out << bits(my.t.killed_by);
@@ -188,7 +188,7 @@ std::ostream& operator<<(std::ostream &out, Bits<HiScore &> const my)
 }
 
 std::istream& operator>>(std::istream &in, Bits<HiScores &> my)
-{_
+{ TRACE_AND_INDENT();
   my.t.hiscores.resize(0);
   in >> bits(my.t.hiscores);
   for (auto h : my.t.hiscores) {
@@ -200,7 +200,7 @@ std::istream& operator>>(std::istream &in, Bits<HiScores &> my)
 }
 
 std::ostream& operator<<(std::ostream &out, Bits<const HiScores & > const my)
-{_
+{ TRACE_AND_INDENT();
   out << bits(my.t.hiscores);
   return (out);
 }

@@ -45,7 +45,7 @@ std::default_random_engine rng;
 static char **ARGV;
 
 void quit (void)
-{_
+{ TRACE_AND_INDENT();
   LOG("FINI: Quitting, start cleanup");
 
   if (g_quitting) {
@@ -174,7 +174,7 @@ void quit (void)
 }
 
 void restart (void)
-{_
+{ TRACE_AND_INDENT();
   char *args[] = { 0, 0 };
   char *executable = ARGV[0];
 
@@ -186,7 +186,7 @@ void restart (void)
 }
 
 void die (void)
-{_
+{ TRACE_AND_INDENT();
   quit();
 
   LOG("Bye, error exit");
@@ -199,7 +199,7 @@ void die (void)
 // Find the binary we are running.
 //
 static void find_executable (void)
-{_
+{ TRACE_AND_INDENT();
   char *parent_dir = 0;
   char *curr_dir = 0;
   std::string exec_name = "";
@@ -331,7 +331,7 @@ cleanup:
 // Find all installed file locations.
 //
 static void find_exec_dir (void)
-{_
+{ TRACE_AND_INDENT();
   find_executable();
 
   //
@@ -358,7 +358,7 @@ static void find_exec_dir (void)
 // Hunt down the data/ dir.
 //
 static void find_data_dir (void)
-{_
+{ TRACE_AND_INDENT();
   DATA_PATH = dynprintf("%sdata" DIR_SEP, EXEC_DIR);
   if (dir_exists(DATA_PATH)) {
     return;
@@ -373,7 +373,7 @@ static void find_data_dir (void)
 // Hunt down the python/ dir.
 //
 static void find_python_dir (void)
-{_
+{ TRACE_AND_INDENT();
   EXEC_PYTHONPATH = dynprintf("%spython%s" DIR_SEP, EXEC_DIR, PYVER);
 }
 
@@ -381,7 +381,7 @@ static void find_python_dir (void)
 // Hunt down the world/ dir.
 //
 static void find_world_dir (void)
-{_
+{ TRACE_AND_INDENT();
   WORLD_PATH = dynprintf("%sdata" DIR_SEP "world" DIR_SEP, EXEC_DIR);
   if (dir_exists(WORLD_PATH)) {
     return;
@@ -396,7 +396,7 @@ static void find_world_dir (void)
 // Hunt down the fonts/ dir.
 //
 static void find_ttf_dir (void)
-{_
+{ TRACE_AND_INDENT();
   TTF_PATH = dynprintf("%sdata" DIR_SEP "ttf" DIR_SEP, EXEC_DIR);
   if (dir_exists(TTF_PATH)) {
     return;
@@ -411,7 +411,7 @@ static void find_ttf_dir (void)
 // Hunt down the gfx/ dir.
 //
 static void find_gfx_dir (void)
-{_
+{ TRACE_AND_INDENT();
   GFX_PATH = dynprintf("%sdata" DIR_SEP "gfx" DIR_SEP, EXEC_DIR);
   if (dir_exists(GFX_PATH)) {
     return;
@@ -426,7 +426,7 @@ static void find_gfx_dir (void)
 // Find all installed file locations.
 //
 static void find_file_locations (void)
-{_
+{ TRACE_AND_INDENT();
   find_exec_dir();
   find_data_dir();
   find_python_dir();
@@ -439,7 +439,7 @@ static void find_file_locations (void)
 }
 
 static void usage (void)
-{_
+{ TRACE_AND_INDENT();
   static int whinged;
 
   if (whinged) {
@@ -463,7 +463,7 @@ static void usage (void)
 }
 
 static void parse_args (int32_t argc, char *argv[])
-{_
+{ TRACE_AND_INDENT();
   int32_t i;
 
   //
@@ -618,7 +618,7 @@ static std::string create_appdata_dir (void)
 }
 
 int32_t main (int32_t argc, char *argv[])
-{_
+{ TRACE_AND_INDENT();
   ARGV = argv;
 
   auto appdata = create_appdata_dir(); // Want this first so we get all logs

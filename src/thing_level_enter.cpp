@@ -16,9 +16,9 @@
 #include "my_ptrcheck.h"
 
 void Thing::level_enter (void)
-{_
+{ TRACE_AND_INDENT();
   dbg("Enter level");
-_
+  TRACE_AND_INDENT();
   int group = get_group();
   auto result = level->all_things[group].insert(std::pair(id, this));
   if (result.second == false) {

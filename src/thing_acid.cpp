@@ -16,7 +16,7 @@
 #include "my_ptrcheck.h"
 
 void Thing::acid_tick (void)
-{_
+{ TRACE_AND_INDENT();
   if (!hates_acid()) {
     return;
   }

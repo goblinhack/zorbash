@@ -17,7 +17,7 @@
 #include "my_thing.h"
 
 void tp_fixup (void)
-{_
+{ TRACE_AND_INDENT();
   for (auto& tp : tp_id_map) {
     if (tp->stamina()) {
       tp->set_is_stamina_check(true);

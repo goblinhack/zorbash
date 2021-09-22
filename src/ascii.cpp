@@ -606,7 +606,7 @@ void ascii_set_fg4 (int x, int y, const wchar_t c)
 }
 
 void ascii_putf__ (int x, int y, color fg, color bg, const std::wstring text)
-{_
+{ TRACE_AND_INDENT();
   Tilep tile;
   int bg_set = false;
   auto text_iter = text.begin();
@@ -742,7 +742,7 @@ void ascii_putf__ (int x, int y, color fg, color bg, const std::wstring text)
 }
 
 int ascii_strlen (std::wstring const& text)
-{_
+{ TRACE_AND_INDENT();
   auto text_iter = text.begin();
   int x = 0;
 
@@ -803,7 +803,7 @@ int ascii_strlen (std::wstring const& text)
 }
 
 int ascii_strlen (std::wstring const& text, std::wstring *col)
-{_
+{ TRACE_AND_INDENT();
   auto text_iter = text.begin();
   int x = 0;
 
@@ -868,7 +868,7 @@ int ascii_strlen (std::wstring const& text, std::wstring *col)
 }
 
 std::string ascii_strip (std::string const& text)
-{_
+{ TRACE_AND_INDENT();
   auto text_iter = text.begin();
   int x = 0;
   std::string out;
@@ -931,7 +931,7 @@ static void ascii_putf_ (int x, int y,
              color fg,
              color bg,
              std::wstring const fmt, va_list args)
-{_
+{ TRACE_AND_INDENT();
   wchar_t buf[MAXLONGSTR];
 
   auto wrote = vswprintf(buf, MAXLONGSTR, fmt.c_str(), args);
@@ -952,7 +952,7 @@ static void ascii_putf_ (int x, int y,
              color fg,
              color bg,
              const wchar_t *fmt, va_list args)
-{_
+{ TRACE_AND_INDENT();
   wchar_t buf[MAXLONGSTR];
 
   auto wrote = vswprintf(buf, MAXLONGSTR, fmt, args);
@@ -970,7 +970,7 @@ static void ascii_putf_ (int x, int y,
 }
 
 void ascii_putf (int x, int y, const wchar_t *fmt, ...)
-{_
+{ TRACE_AND_INDENT();
   va_list args;
 
   va_start(args, fmt);
@@ -979,7 +979,7 @@ void ascii_putf (int x, int y, const wchar_t *fmt, ...)
 }
 
 void ascii_putf (int x, int y, color fg, const wchar_t *fmt, ...)
-{_
+{ TRACE_AND_INDENT();
   va_list args;
 
   va_start(args, fmt);
@@ -988,7 +988,7 @@ void ascii_putf (int x, int y, color fg, const wchar_t *fmt, ...)
 }
 
 void ascii_putf (int x, int y, color fg, color bg, const wchar_t *fmt, ...)
-{_
+{ TRACE_AND_INDENT();
   va_list args;
 
   va_start(args, fmt);
@@ -997,7 +997,7 @@ void ascii_putf (int x, int y, color fg, color bg, const wchar_t *fmt, ...)
 }
 
 void ascii_putf (int x, int y, const std::wstring fmt, ...)
-{_
+{ TRACE_AND_INDENT();
   va_list args;
 
   va_start(args, fmt);
@@ -1006,7 +1006,7 @@ void ascii_putf (int x, int y, const std::wstring fmt, ...)
 }
 
 void ascii_putf (int x, int y, color fg, const std::wstring fmt, ...)
-{_
+{ TRACE_AND_INDENT();
   va_list args;
 
   va_start(args, fmt);
@@ -1015,7 +1015,7 @@ void ascii_putf (int x, int y, color fg, const std::wstring fmt, ...)
 }
 
 void ascii_putf (int x, int y, color fg, color bg, const std::wstring fmt, ...)
-{_
+{ TRACE_AND_INDENT();
   va_list args;
 
   va_start(args, fmt);
@@ -1027,7 +1027,7 @@ void ascii_putf (int x, int y, color fg, color bg, const std::wstring fmt, ...)
 static void ascii_display_mouse (point mouse_tile_tl,
                  point mouse_tile_br,
                  point mouse_at)
-{_
+{ TRACE_AND_INDENT();
   glcolor(GREEN);
 
   blit_init();
@@ -1044,7 +1044,7 @@ static void ascii_display_mouse (point mouse_tile_tl,
 
 void ascii_put_bg_square (int tlx, int tly, int brx, int bry,
               Tilep tile, color c)
-{_
+{ TRACE_AND_INDENT();
   int x;
   int y;
 
@@ -1058,26 +1058,26 @@ void ascii_put_bg_square (int tlx, int tly, int brx, int bry,
 
 void ascii_put_bg_square (int tlx, int tly, int brx, int bry,
               const char *tilename, color c)
-{_
+{ TRACE_AND_INDENT();
   ascii_put_bg_square(tlx, tly, brx, bry, tile_find(tilename), c);
 }
 
 void ascii_put_bg_square (int tlx, int tly, int brx, int bry,
               wchar_t what, color c)
-{_
+{ TRACE_AND_INDENT();
   ascii_put_bg_square(tlx, tly, brx, bry,
             font_large->unicode_to_tile(what), c);
 }
 
 static void ascii_map_thing_replace (int x, int y, Tilep tile, color c)
-{_
+{ TRACE_AND_INDENT();
   ascii_set_bg(x, y, tile);
   ascii_set_bg(x, y, c);
 }
 
 static void do_ascii_line (int x0_in, int y0_in, int x1_in, int y1_in,
                int flag, Tilep tile, color c)
-{_
+{ TRACE_AND_INDENT();
   float temp;
   float dx;
   float dy;
@@ -1146,7 +1146,7 @@ static void do_ascii_line (int x0_in, int y0_in, int x1_in, int y1_in,
 }
 
 void ascii_draw_line (int x0, int y0, int x1, int y1, Tilep tile, color c)
-{_
+{ TRACE_AND_INDENT();
   float slope = 100.0;
 
   if (x0 != x1) {
@@ -1165,13 +1165,13 @@ void ascii_draw_line (int x0, int y0, int x1, int y1, Tilep tile, color c)
 }
 
 void ascii_draw_line (int x0, int y0, int x1, int y1, wchar_t what, color c)
-{_
+{ TRACE_AND_INDENT();
   ascii_draw_line (x0, y0, x1, y1, font_large->unicode_to_tile(what), c);
 }
 
 void ascii_draw_line (int x0, int y0, int x1, int y1,
             const char *tilename, color c)
-{_
+{ TRACE_AND_INDENT();
   ascii_draw_line (x0, y0, x1, y1, tile_find(tilename), c);
 }
 
@@ -1179,7 +1179,7 @@ void ascii_draw_line (int x0, int y0, int x1, int y1,
 // Display one z layer of the ascii.
 //
 static void ascii_blit (void)
-{_
+{ TRACE_AND_INDENT();
   //
   // Get the mouse position to use. We use this to find the mouse tile that
   // we are over.
@@ -1410,7 +1410,7 @@ static void ascii_blit (void)
 // The big ascii renderer
 //
 void ascii_display (void)
-{_
+{ TRACE_AND_INDENT();
   mouse_found = false;
 
   gl_enter_2d_mode(game->config.ui_pix_width,
@@ -1427,7 +1427,7 @@ void ascii_display (void)
 }
 
 void ascii_clear_display (void)
-{_
+{ TRACE_AND_INDENT();
   for (auto y = 0; y < TERM_HEIGHT; y++) {
     for (auto x = 0; x < TERM_WIDTH; x++) {
       cells[x][y] = {};

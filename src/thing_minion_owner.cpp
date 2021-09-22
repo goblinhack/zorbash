@@ -14,7 +14,7 @@
 #include "my_ptrcheck.h"
 
 Thingp Thing::get_top_minion_owner (void) const
-{_
+{ TRACE_AND_INDENT();
   auto id = get_immediate_minion_owner_id();
   if (likely(id.ok())) {
     auto i = level->thing_find(id);
@@ -31,7 +31,7 @@ Thingp Thing::get_top_minion_owner (void) const
 }
 
 Thingp Thing::get_immediate_minion_owner (void) const
-{_
+{ TRACE_AND_INDENT();
   auto id = get_immediate_minion_owner_id();
   if (likely(id.ok())) {
     auto i = level->thing_find(id);
@@ -45,7 +45,7 @@ Thingp Thing::get_immediate_minion_owner (void) const
 }
 
 void Thing::set_minion_owner (Thingp minion_owner)
-{_
+{ TRACE_AND_INDENT();
   if (minion_owner) {
     verify(minion_owner);
   }
@@ -83,7 +83,7 @@ void Thing::set_minion_owner (Thingp minion_owner)
 }
 
 void Thing::remove_minion_owner (void)
-{_
+{ TRACE_AND_INDENT();
   auto old_minion_owner = get_immediate_minion_owner();
   if (!old_minion_owner) {
     err("No minion owner");
@@ -100,7 +100,7 @@ void Thing::remove_minion_owner (void)
 // Kill and detach all minions from their owner
 //
 void Thing::kill_minions (Thingp killer)
-{_
+{ TRACE_AND_INDENT();
   //
   // Warning killer can be nullptr - e.g. when a generator falls to
   // a new level
@@ -134,7 +134,7 @@ void Thing::kill_minions (Thingp killer)
 // Detach all minions from their owner
 //
 void Thing::unleash_minions (void)
-{_
+{ TRACE_AND_INDENT();
   if (!is_minion_generator()) {
     return;
   }

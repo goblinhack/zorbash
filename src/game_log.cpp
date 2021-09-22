@@ -10,7 +10,7 @@
 #include "my_array_bounds_check.h"
 
 void Level::dump (std::string pfx)
-{_
+{ TRACE_AND_INDENT();
   LOG("%s Level {", pfx.c_str());
   auto old_pfx = pfx;
   pfx += "  ";
@@ -45,7 +45,7 @@ void Level::dump (std::string pfx)
 }
 
 void World::dump (std::string pfx)
-{_
+{ TRACE_AND_INDENT();
   LOG("%s World {", pfx.c_str());
   auto old_pfx = pfx;
   pfx += "  ";
@@ -67,7 +67,7 @@ void World::dump (std::string pfx)
 }
 
 void Config::dump (std::string pfx)
-{_
+{ TRACE_AND_INDENT();
   LOG("%s Config {", pfx.c_str());
   auto old_pfx = pfx;
   pfx += "  ";
@@ -111,7 +111,7 @@ void Config::dump (std::string pfx)
 }
 
 void Game::dump (std::string pfx)
-{_
+{ TRACE_AND_INDENT();
   LOG("%s Game {", pfx.c_str());
   auto old_pfx = pfx;
   pfx += "  ";

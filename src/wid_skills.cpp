@@ -23,14 +23,14 @@ WidPopup *wid_skills;
 static std::vector<Tpp> skills;
 
 void wid_skill_choose_destroy (void)
-{_
+{ TRACE_AND_INDENT();
   delete wid_skills;
   wid_skills = nullptr;
   game->change_state(Game::STATE_NORMAL);
 }
 
 static void wid_skills_slot (int slot)
-{_
+{ TRACE_AND_INDENT();
   if (slot >= (int)skills.size()) {
     wid_skill_choose_destroy();
     return;
@@ -47,7 +47,7 @@ static void wid_skills_slot (int slot)
 }
 
 static uint8_t wid_skills_key_up (Widp w, const struct SDL_Keysym *key)
-{_
+{ TRACE_AND_INDENT();
   auto level = game->level;
   if (!level) {
     return true;
@@ -99,7 +99,7 @@ static uint8_t wid_skills_key_up (Widp w, const struct SDL_Keysym *key)
           case '9':
             wid_skills_slot(c - '1');
             return true;
-          case SDLK_ESCAPE: {_
+          case SDLK_ESCAPE: { TRACE_AND_INDENT();
             CON("PLAYER: Skill choose cancelled");
             wid_skill_choose_destroy();
             return true;
@@ -113,7 +113,7 @@ static uint8_t wid_skills_key_up (Widp w, const struct SDL_Keysym *key)
 }
 
 static uint8_t wid_skills_key_down (Widp w, const struct SDL_Keysym *key)
-{_
+{ TRACE_AND_INDENT();
   auto level = game->level;
   if (!level) {
     return true;
@@ -138,7 +138,7 @@ static uint8_t wid_skills_key_down (Widp w, const struct SDL_Keysym *key)
 }
 
 static uint8_t wid_skills_mouse_up (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   auto level = game->level;
   if (!level) {
     return true;
@@ -158,7 +158,7 @@ static uint8_t wid_skills_mouse_up (Widp w, int32_t x, int32_t y, uint32_t butto
 }
 
 void Game::wid_skill_choose (void)
-{_
+{ TRACE_AND_INDENT();
   BOTCON("You lucky thing. Time to learn some new skill.");
 
   DBG3("Thing skills create");

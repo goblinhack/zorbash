@@ -18,7 +18,7 @@
 #include "my_wid.h"
 
 void Level::cursor_path_draw_circle (void)
-{_
+{ TRACE_AND_INDENT();
   auto what = game->request_to_throw_item;
   if (!what) {
     what = game->request_to_fire_item;
@@ -80,7 +80,7 @@ void Level::cursor_path_draw_circle (void)
 // Create the cursor path, avoiding things like lava
 //
 void Level::cursor_path_draw_line (point start, point end)
-{_
+{ TRACE_AND_INDENT();
   Dmap d {};
   point dmap_start = start;
   point dmap_end = end;
@@ -204,7 +204,7 @@ void Level::cursor_path_draw_line (point start, point end)
 }
 
 void Level::cursor_path_draw_line (const std::vector<point> &move_path)
-{_
+{ TRACE_AND_INDENT();
   game->cursor_move_path = move_path;
 
   for (auto& c : move_path) {
@@ -221,7 +221,7 @@ void Level::cursor_path_draw_line (const std::vector<point> &move_path)
 // Create the cursor path, avoiding things like lava
 //
 void Level::cursor_path_draw (point start, point end)
-{_
+{ TRACE_AND_INDENT();
   if (!player) {
     return;
   }
@@ -249,7 +249,7 @@ void Level::cursor_path_draw (point start, point end)
 }
 
 void Level::cursor_path_draw (const std::vector<point> &move_path)
-{_
+{ TRACE_AND_INDENT();
   if (!player) {
     return;
   }
@@ -280,7 +280,7 @@ void Level::cursor_path_draw (const std::vector<point> &move_path)
 // Create the cursor path, avoiding things like lava
 //
 void Level::cursor_path_draw (void)
-{_
+{ TRACE_AND_INDENT();
   if (!player) {
     return;
   }
@@ -300,7 +300,7 @@ void Level::cursor_path_draw (void)
 // path to follow.
 //
 void Level::cursor_path_create (void)
-{_
+{ TRACE_AND_INDENT();
   if (!cursor) {
     return;
   }
@@ -350,7 +350,7 @@ void Level::cursor_path_create (void)
 }
 
 void Level::cursor_path_create (const std::vector<point> &move_path)
-{_
+{ TRACE_AND_INDENT();
   if (!cursor) {
     return;
   }
@@ -380,7 +380,7 @@ void Level::cursor_path_create (const std::vector<point> &move_path)
 // path to follow.
 //
 void Level::cursor_path_clear (void)
-{_
+{ TRACE_AND_INDENT();
   auto level = game->level;
   if (!level) {
     return;

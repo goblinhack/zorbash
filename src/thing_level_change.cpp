@@ -19,7 +19,7 @@
 // weapons it carries etc.
 //
 void Thing::level_change (Levelp l)
-{_
+{ TRACE_AND_INDENT();
   if (level == l) {
     dbg("Change level; no, same level");
     return;

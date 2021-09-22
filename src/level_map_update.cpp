@@ -192,7 +192,7 @@ void Level::update_deep_water (void)
 }
 
 void Level::update_map_things_to_stand_on (void)
-{_
+{ TRACE_AND_INDENT();
   _is_able_to_stand_on = {};
 
   for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {

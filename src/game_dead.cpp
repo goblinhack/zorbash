@@ -21,7 +21,7 @@
 static WidPopup *wid_dead_window;
 
 static void wid_dead_destroy (void)
-{_
+{ TRACE_AND_INDENT();
   delete wid_dead_window;
   wid_dead_window = nullptr;
   game->fini();
@@ -31,7 +31,7 @@ static void wid_dead_destroy (void)
 }
 
 static uint8_t wid_dead_key_up (Widp w, const struct SDL_Keysym *key)
-{_
+{ TRACE_AND_INDENT();
   if (sdl_shift_held) {
     if (key->scancode == (SDL_Scancode)game->config.key_console) {
       return false;
@@ -43,11 +43,11 @@ static uint8_t wid_dead_key_up (Widp w, const struct SDL_Keysym *key)
     case KMOD_RCTRL:
     default:
     switch (key->sym) {
-      default: {_
+      default: { TRACE_AND_INDENT();
         auto c = wid_event_to_char(key);
         switch (c) {
           case 'q':
-          case SDLK_ESCAPE: {_
+          case SDLK_ESCAPE: { TRACE_AND_INDENT();
             wid_dead_destroy();
             return true;
           }
@@ -60,7 +60,7 @@ static uint8_t wid_dead_key_up (Widp w, const struct SDL_Keysym *key)
 }
 
 static uint8_t wid_dead_key_down (Widp w, const struct SDL_Keysym *key)
-{_
+{ TRACE_AND_INDENT();
   if (sdl_shift_held) {
     if (key->scancode == (SDL_Scancode)game->config.key_console) {
       return false;
@@ -71,13 +71,13 @@ static uint8_t wid_dead_key_down (Widp w, const struct SDL_Keysym *key)
 }
 
 static uint8_t wid_dead_mouse_up (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   wid_dead_destroy();
   return true;
 }
 
 void Game::dead_select (const char *reason)
-{_
+{ TRACE_AND_INDENT();
   LOG("Open dead select: %s", reason);
 
   game->robot_mode = false;
@@ -143,7 +143,7 @@ void Game::dead_select (const char *reason)
   wid_dead_window->log(" ");
   wid_dead_window->log(reason);
 
-  {_
+  { TRACE_AND_INDENT();
     auto p = wid_dead_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "dead");
 
@@ -178,7 +178,7 @@ void Game::dead_select (const char *reason)
     }
   }
 
-  {_
+  { TRACE_AND_INDENT();
     auto p = wid_dead_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "dead");
 

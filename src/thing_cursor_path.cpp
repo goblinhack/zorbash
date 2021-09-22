@@ -18,7 +18,7 @@
 #include "my_ptrcheck.h"
 
 bool Thing::cursor_path_pop_next_and_move (void)
-{_
+{ TRACE_AND_INDENT();
   if (monstp && monstp->move_path.size()) {
     IF_DEBUG3 {
       std::string s = "";
@@ -56,7 +56,7 @@ bool Thing::cursor_path_pop_next_and_move (void)
       if (will_avoid_hazard(future_pos) || level->is_barrel(future_pos)) {
         CON("Robot: Next position %d,%d is a hazard",
           (int)future_pos.x, (int)future_pos.y);
-_
+  TRACE_AND_INDENT();
         if (monstp->move_path.size()) {
           auto jump_pos = monstp->move_path[0];
           monstp->move_path.erase(monstp->move_path.begin());
@@ -67,7 +67,7 @@ _
           //
           CON("Robot: Next-next position %d,%d is also a hazard",
             (int)jump_pos.x, (int)jump_pos.y);
-_
+  TRACE_AND_INDENT();
           if (will_avoid_hazard(jump_pos) && monstp->move_path.size()) {
             auto jump_pos = monstp->move_path[0];
             monstp->move_path.erase(monstp->move_path.begin());
@@ -205,7 +205,7 @@ _
 // true on having performed an action
 //
 bool Thing::cursor_path_pop_first_move (void)
-{_
+{ TRACE_AND_INDENT();
   auto cursor = level->cursor;
 
   if (game->cursor_move_path.size()) {

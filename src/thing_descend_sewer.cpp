@@ -17,7 +17,7 @@
 #include "my_gl.h"
 
 bool Thing::descend_sewer_tick (void)
-{_
+{ TRACE_AND_INDENT();
   if (!level->is_descend_sewer(mid_at.x, mid_at.y)) {
     return false;
   }
@@ -57,7 +57,7 @@ bool Thing::descend_sewer_tick (void)
 }
 
 bool Thing::descend_sewer (void)
-{_
+{ TRACE_AND_INDENT();
   dbg("Descend sewer");
   if (is_changing_level ||
     is_hidden ||

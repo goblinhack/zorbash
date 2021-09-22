@@ -20,11 +20,11 @@
 static WidPopup *game_config_top_window;
 
 void Config::fini (void)
-{_
+{ TRACE_AND_INDENT();
 }
 
 void Config::reset (void)
-{_
+{ TRACE_AND_INDENT();
   game_pix_scale_height        = {};
   game_pix_scale_width         = {};
   game_pix_zoom                = GAME_DEFAULT_PIX_ZOOM;
@@ -111,48 +111,48 @@ void Config::reset (void)
 }
 
 static void game_config_top_destroy (void)
-{_
+{ TRACE_AND_INDENT();
   delete game_config_top_window;
   game_config_top_window = nullptr;
 }
 
 static uint8_t game_config_top_graphics (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   game_config_top_destroy();
   game->config_gfx_select();
   return true;
 }
 
 static uint8_t game_config_top_keyboard (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   game_config_top_destroy();
   game->config_keyboard_select();
   return true;
 }
 
 static uint8_t game_config_top_sound (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   game_config_top_destroy();
   game->config_sound_select();
   return true;
 }
 
 static uint8_t game_config_top_other (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   game_config_top_destroy();
   game->config_other_select();
   return true;
 }
 
 static uint8_t game_config_top_back (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   game_config_top_destroy();
   game->main_menu_select();
   return true;
 }
 
 static uint8_t game_config_top_key_up (Widp w, const struct SDL_Keysym *key)
-{_
+{ TRACE_AND_INDENT();
   if (sdl_shift_held) {
     if (key->scancode == (SDL_Scancode)game->config.key_console) {
       return false;
@@ -164,7 +164,7 @@ static uint8_t game_config_top_key_up (Widp w, const struct SDL_Keysym *key)
     case KMOD_RCTRL:
     default:
     switch (key->sym) {
-      default: {_
+      default: { TRACE_AND_INDENT();
         auto c = wid_event_to_char(key);
         switch (c) {
           case 'g':
@@ -192,7 +192,7 @@ static uint8_t game_config_top_key_up (Widp w, const struct SDL_Keysym *key)
 }
 
 static uint8_t game_config_top_key_down (Widp w, const struct SDL_Keysym *key)
-{_
+{ TRACE_AND_INDENT();
   if (sdl_shift_held) {
     if (key->scancode == (SDL_Scancode)game->config.key_console) {
       return false;
@@ -203,7 +203,7 @@ static uint8_t game_config_top_key_down (Widp w, const struct SDL_Keysym *key)
 }
 
 void Game::config_top_select (void)
-{_
+{ TRACE_AND_INDENT();
   CON("Config menu");
 
   if (game_config_top_window) {
@@ -224,14 +224,14 @@ void Game::config_top_select (void)
 
   game_config_top_window = new WidPopup("Config menu",
                       tl, br, nullptr, "nothing", false, false);
-  {_
+  { TRACE_AND_INDENT();
     Widp w = game_config_top_window->wid_popup_container;
     wid_set_on_key_up(w, game_config_top_key_up);
     wid_set_on_key_down(w, game_config_top_key_down);
   }
 
   int y_at = 0;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_top_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "graphics");
 
@@ -243,7 +243,7 @@ void Game::config_top_select (void)
     wid_set_text(w, "%%fg=white$G%%fg=reset$raphics");
   }
   y_at += 3;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_top_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "sound");
 
@@ -255,7 +255,7 @@ void Game::config_top_select (void)
     wid_set_text(w, "%%fg=white$S%%fg=reset$ound and music");
   }
   y_at += 3;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_top_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "keyboard");
 
@@ -267,7 +267,7 @@ void Game::config_top_select (void)
     wid_set_text(w, "%%fg=white$K%%fg=reset$eyboard");
   }
   y_at += 3;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_top_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Other stuffs");
 
@@ -279,7 +279,7 @@ void Game::config_top_select (void)
     wid_set_text(w, "%%fg=white$O%%fg=reset$ther stuffs");
   }
   y_at += 3;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_top_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Back");
 

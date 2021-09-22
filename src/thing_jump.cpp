@@ -14,7 +14,7 @@
 #include "my_array_bounds_check.h"
 
 float Thing::how_far_i_can_jump (void)
-{_
+{ TRACE_AND_INDENT();
   auto d = (float) is_jumper_distance() +
         ceil(0.5 + (pcg_random_range(0, 100) / 100.0));
 
@@ -30,7 +30,7 @@ float Thing::how_far_i_can_jump (void)
 }
 
 bool Thing::try_to_jump (point to, bool be_careful)
-{_
+{ TRACE_AND_INDENT();
   if (is_changing_level ||
     is_hidden ||
     is_falling ||
@@ -59,7 +59,7 @@ bool Thing::try_to_jump (point to, bool be_careful)
     dbg("Try jump to %d,%d", x, y);
   }
 
-  if (level->is_oob(x, y)) {_
+  if (level->is_oob(x, y)) { TRACE_AND_INDENT();
     dbg("No, oob");
     if (is_player()) {
       TOPCON("You can't jump into the void.");
@@ -121,7 +121,7 @@ bool Thing::try_to_jump (point to, bool be_careful)
   // Don't jump too short a distance.
   //
   if (is_monst()) {
-    if (distance(mid_at, fpoint(x, y)) < 2) {_
+    if (distance(mid_at, fpoint(x, y)) < 2) { TRACE_AND_INDENT();
       dbg("No, too close");
       return false;
     }
@@ -131,7 +131,7 @@ bool Thing::try_to_jump (point to, bool be_careful)
   // No sneaky jumping onto doors to get passed them
   //
   if (level->is_obs_wall_or_door(x, y) ||
-    level->is_obs_destructable(x, y)) {_
+    level->is_obs_destructable(x, y)) { TRACE_AND_INDENT();
     dbg("No, jump failed, into obstacle");
     if (is_player()) {
       TOPCON("You can't jump into solid objects.");
@@ -140,11 +140,11 @@ bool Thing::try_to_jump (point to, bool be_careful)
   }
 
   if (be_careful) {
-    if (!level->is_able_to_stand_on(x, y)) {_
+    if (!level->is_able_to_stand_on(x, y)) { TRACE_AND_INDENT();
       return false;
     }
 
-    if (collision_obstacle(point(x, y))) {_
+    if (collision_obstacle(point(x, y))) { TRACE_AND_INDENT();
       return false;
     }
   }
@@ -253,7 +253,7 @@ bool Thing::try_to_jump (point to, bool be_careful)
   }
 
   auto on_fire_anim_id = get_on_fire_anim_id();
-  if (on_fire_anim_id.ok()) {_
+  if (on_fire_anim_id.ok()) { TRACE_AND_INDENT();
     auto id = on_fire_anim_id;
     auto w = level->thing_find(id);
     if (w) {
@@ -307,17 +307,17 @@ bool Thing::try_to_jump (point to, bool be_careful)
 }
 
 bool Thing::try_to_jump_carefully (point p)
-{_
+{ TRACE_AND_INDENT();
   return try_to_jump(p, true);
 }
 
 bool Thing::try_to_jump_carefree (point p)
-{_
+{ TRACE_AND_INDENT();
   return try_to_jump(p, false);
 }
 
 bool Thing::try_to_jump (void)
-{_
+{ TRACE_AND_INDENT();
   if (is_changing_level ||
     is_hidden ||
     is_falling ||
@@ -345,7 +345,7 @@ bool Thing::try_to_jump (void)
 }
 
 bool Thing::try_to_jump_towards_player (void)
-{_
+{ TRACE_AND_INDENT();
   if (is_changing_level ||
     is_hidden ||
     is_falling ||
@@ -389,7 +389,7 @@ bool Thing::try_to_jump_towards_player (void)
 }
 
 bool Thing::try_to_jump_away_from_player (void)
-{_
+{ TRACE_AND_INDENT();
   if (is_changing_level ||
     is_hidden ||
     is_falling ||
@@ -426,7 +426,7 @@ bool Thing::try_to_jump_away_from_player (void)
 }
 
 bool Thing::try_harder_to_jump (void)
-{_
+{ TRACE_AND_INDENT();
   if (is_changing_level ||
     is_hidden ||
     is_falling ||
@@ -454,7 +454,7 @@ bool Thing::try_harder_to_jump (void)
 }
 
 void Thing::jump_end (void)
-{_
+{ TRACE_AND_INDENT();
   if (!is_jumping) {
     return;
   }
@@ -493,7 +493,7 @@ void Thing::jump_end (void)
   }
 
   auto on_fire_anim_id = get_on_fire_anim_id();
-  if (on_fire_anim_id.ok()) {_
+  if (on_fire_anim_id.ok()) { TRACE_AND_INDENT();
     auto w = level->thing_find(on_fire_anim_id);
     if (w) {
       w->is_jumping = false;

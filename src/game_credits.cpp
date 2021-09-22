@@ -16,7 +16,7 @@
 static WidPopup *wid_credits_window;
 
 static void wid_credits_destroy (void)
-{_
+{ TRACE_AND_INDENT();
   delete wid_credits_window;
   wid_credits_window = nullptr;
   game->fini();
@@ -26,7 +26,7 @@ static void wid_credits_destroy (void)
 }
 
 static uint8_t wid_credits_key_up (Widp w, const struct SDL_Keysym *key)
-{_
+{ TRACE_AND_INDENT();
   if (sdl_shift_held) {
     if (key->scancode == (SDL_Scancode)game->config.key_console) {
       return false;
@@ -38,11 +38,11 @@ static uint8_t wid_credits_key_up (Widp w, const struct SDL_Keysym *key)
     case KMOD_RCTRL:
     default:
     switch (key->sym) {
-      default: {_
+      default: { TRACE_AND_INDENT();
         auto c = wid_event_to_char(key);
         switch (c) {
           case 'b':
-          case SDLK_ESCAPE: {_
+          case SDLK_ESCAPE: { TRACE_AND_INDENT();
             wid_credits_destroy();
             return true;
           }
@@ -55,7 +55,7 @@ static uint8_t wid_credits_key_up (Widp w, const struct SDL_Keysym *key)
 }
 
 static uint8_t wid_credits_key_down (Widp w, const struct SDL_Keysym *key)
-{_
+{ TRACE_AND_INDENT();
   if (sdl_shift_held) {
     if (key->scancode == (SDL_Scancode)game->config.key_console) {
       return false;
@@ -66,13 +66,13 @@ static uint8_t wid_credits_key_down (Widp w, const struct SDL_Keysym *key)
 }
 
 static uint8_t wid_credits_mouse_up (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   wid_credits_destroy();
   return true;
 }
 
 static void game_display_credits_bg (void)
-{_
+{ TRACE_AND_INDENT();
   glcolor(WHITE);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -86,7 +86,7 @@ static void game_display_credits_bg (void)
 }
 
 static void game_display_credits_fg (void)
-{_
+{ TRACE_AND_INDENT();
   glcolor(WHITE);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -100,14 +100,14 @@ static void game_display_credits_fg (void)
 }
 
 static void game_credits_tick (Widp w)
-{_
+{ TRACE_AND_INDENT();
   game_display_credits_bg();
   game_display_flames();
   game_display_credits_fg();
 }
 
 void Game::credits_select (void)
-{_
+{ TRACE_AND_INDENT();
   CON("Credits");
 
   if (wid_credits_window) {
@@ -176,7 +176,7 @@ void Game::credits_select (void)
   wid_credits_window->log("%%fg=white$Testers");
   wid_credits_window->log("Stuicy, Goblinhack");
 
-  {_
+  { TRACE_AND_INDENT();
     auto p = wid_credits_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "credits");
 

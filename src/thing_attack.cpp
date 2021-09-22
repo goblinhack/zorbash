@@ -18,7 +18,7 @@
 #include "my_ptrcheck.h"
 
 bool Thing::possible_to_attack (const Thingp it)
-{_
+{ TRACE_AND_INDENT();
   auto me = tp();
 
   auto owner = get_top_owner();
@@ -37,7 +37,7 @@ bool Thing::possible_to_attack (const Thingp it)
   }
 
   dbg("Is it possible to attack %s?", it->to_string().c_str());
-_
+  TRACE_AND_INDENT();
   //
   // Fire attacks via tick so it can get you when you fall or jump into it.
   //
@@ -325,9 +325,9 @@ bool Thing::attack (fpoint future_pos)
 }
 
 bool Thing::attack (Thingp it)
-{_
+{ TRACE_AND_INDENT();
   dbg("Attack %s", it->to_string().c_str());
-_
+  TRACE_AND_INDENT();
   //
   // Carry to eat later. Monsts attack their food.
   //

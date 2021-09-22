@@ -12,7 +12,7 @@
 #include "my_gl.h"
 
 void Thing::level_pop (void)
-{_
+{ TRACE_AND_INDENT();
   if (!is_attached) {
     return;
   }

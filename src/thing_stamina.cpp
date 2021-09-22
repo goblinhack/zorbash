@@ -11,7 +11,7 @@
 #include "my_thing.h"
 
 void Thing::stamina_boost (int v)
-{_
+{ TRACE_AND_INDENT();
   if (!v) {
     return;
   }

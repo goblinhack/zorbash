@@ -17,7 +17,7 @@
 #include "my_ptrcheck.h"
 
 ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
-{_
+{ TRACE_AND_INDENT();
   if (!attack_shove()) {
     return (THING_SHOVE_NEVER_TRIED);
   }

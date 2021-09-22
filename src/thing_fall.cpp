@@ -19,7 +19,7 @@
 // Python callback upon being fall
 //
 void Thing::on_fall (void)
-{_
+{ TRACE_AND_INDENT();
   auto on_fall = tp()->on_fall_do();
   if (std::empty(on_fall)) {
     return;
@@ -46,9 +46,9 @@ void Thing::on_fall (void)
 }
 
 void Thing::fall (float fall_height, ts_t ms)
-{_
+{ TRACE_AND_INDENT();
   dbg("Can fall?");
-_
+  TRACE_AND_INDENT();
   if (is_changing_level ||
     is_hidden ||
     is_falling ||
@@ -145,13 +145,13 @@ float Thing::get_fall (void)
 }
 
 bool Thing::fall_to_next_level (void)
-{_
+{ TRACE_AND_INDENT();
   if (!monstp) {
     return false;
   }
 
   dbg("Try to fall to next level");
-_
+  TRACE_AND_INDENT();
   //
   // Fall from a dungeon to the next dungeon, 2 levels down
   //

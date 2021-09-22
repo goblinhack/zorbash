@@ -12,7 +12,7 @@
 #include "my_globals.h"
 
 void Level::create (point3d at, int seed)
-{_
+{ TRACE_AND_INDENT();
   pcg_srand(game->seed + at.z);
 
   is_starting = true;
@@ -61,7 +61,7 @@ void Level::create (point3d at, int seed)
 }
 
 void Level::place_the_grid (void)
-{_
+{ TRACE_AND_INDENT();
   for (auto x = 0; x < MAP_WIDTH; x++) {
     for (auto y = 0; y < MAP_HEIGHT; y++) {
       (void) thing_new("the_grid", fpoint(x, y));

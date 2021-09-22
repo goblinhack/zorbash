@@ -56,11 +56,11 @@
 bool Thing::robot_ai_create_path_to_goal (int minx, int miny,
                                           int maxx, int maxy,
                                           int search_type)
-{_
+{ TRACE_AND_INDENT();
   point start((int)mid_at.x, (int)mid_at.y);
 
   dbg("Choose goal");
-_
+  TRACE_AND_INDENT();
   //
   // Find all the possible goals. Higher scores, lower costs are preferred
   //
@@ -410,7 +410,7 @@ _
 //
 int Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy,
                                        int search_type)
-{_
+{ TRACE_AND_INDENT();
   std::array< std::array<uint8_t, MAP_WIDTH>, MAP_HEIGHT> can_jump = {};
   point start((int)mid_at.x, (int)mid_at.y);
   auto dmap_can_see = get_dmap_can_see();
@@ -765,7 +765,7 @@ int Thing::robot_ai_init_can_see_dmap (int minx, int miny, int maxx, int maxy,
 //
 void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
                                            int minx, int miny, int maxx, int maxy)
-{_
+{ TRACE_AND_INDENT();
   auto dmap_can_see = get_dmap_can_see();
   auto age_map = get_age_map();
 
@@ -1122,7 +1122,7 @@ void Thing::robot_ai_choose_initial_goals (std::multiset<Goal> &goals,
 //
 void Thing::robot_ai_choose_search_goals (std::multiset<Goal> &goals,
                                           int search_type)
-{_
+{ TRACE_AND_INDENT();
   point start((int)mid_at.x, (int)mid_at.y);
 
   std::array< std::array<bool, MAP_WIDTH>, MAP_HEIGHT> walked = {};
@@ -1417,7 +1417,7 @@ next:
 }
 
 bool Thing::robot_ai_choose_nearby_goal (void)
-{_
+{ TRACE_AND_INDENT();
   bool left;
   bool right;
   bool up;
@@ -1488,7 +1488,7 @@ bool Thing::robot_ai_choose_nearby_goal (void)
 }
 
 void Thing::robot_tick (void)
-{_
+{ TRACE_AND_INDENT();
   //
   // For game smoothness we allow the player to run a bit ahead of the
   // monsters.
@@ -1806,7 +1806,7 @@ void Thing::robot_tick (void)
 }
 
 void Thing::robot_change_state (int new_state, const std::string &why)
-{_
+{ TRACE_AND_INDENT();
   if (monstp->robot_state == new_state) {
     return;
   }

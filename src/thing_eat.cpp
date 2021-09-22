@@ -15,7 +15,7 @@
 #include "my_sprintf.h"
 
 bool Thing::eat (Thingp it)
-{_
+{ TRACE_AND_INDENT();
   //
   // Does the attacker feast on success?
   //
@@ -63,7 +63,7 @@ bool Thing::eat (Thingp it)
 }
 
 bool Thing::worth_eating (Thingp it)
-{_
+{ TRACE_AND_INDENT();
   if (!can_eat(it)) {
     return false;
   }
@@ -72,7 +72,7 @@ bool Thing::worth_eating (Thingp it)
 }
 
 bool Thing::can_eat (const Thingp itp)
-{_
+{ TRACE_AND_INDENT();
   auto me = tp();
   auto it = itp->tp();
 
@@ -115,7 +115,7 @@ bool Thing::can_eat (const Thingp itp)
 }
 
 bool Thing::eat_something (void)
-{_
+{ TRACE_AND_INDENT();
   Thingp best = nullptr;
 
   //
@@ -165,7 +165,7 @@ bool Thing::eat_something (void)
 }
 
 bool Thing::can_eat_something (void)
-{_
+{ TRACE_AND_INDENT();
   //
   // Try for food first, ignoring potions
   //

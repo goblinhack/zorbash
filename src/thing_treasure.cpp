@@ -14,7 +14,7 @@
 #include "my_gl.h"
 
 bool Thing::is_carrying_treasure (void)
-{_
+{ TRACE_AND_INDENT();
   if (!monstp) {
     return false;
   }
@@ -43,10 +43,10 @@ bool Thing::is_carrying_treasure (void)
 }
 
 std::vector<Thingp> Thing::get_treasure_list (void)
-{_
+{ TRACE_AND_INDENT();
   std::vector<Thingp> tr;
   dbg("Treasure:");
-_
+  TRACE_AND_INDENT();
   if (!monstp) {
     dbg("Not carrying");
     return tr;

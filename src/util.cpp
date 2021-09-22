@@ -15,7 +15,7 @@ void *myzalloc_ (int size,
          std::string file,
          std::string func,
          int line)
-{_
+{ TRACE_AND_INDENT();
   void *ptr = calloc(1, size);
 
   if (!ptr) {
@@ -34,7 +34,7 @@ void *mymalloc_ (int size,
          std::string file,
          std::string func,
          int line)
-{_
+{ TRACE_AND_INDENT();
   void *ptr = malloc(size);
 
   if (!ptr) {
@@ -54,7 +54,7 @@ void *myrealloc_ (void *ptr,
           std::string file,
           std::string func,
           int line)
-{_
+{ TRACE_AND_INDENT();
   IF_DEBUG2 {
     ptrcheck_free(ptr, file, func, line);
   }
@@ -75,7 +75,7 @@ void myfree_ (void *ptr,
         std::string file,
         std::string func,
         int line)
-{_
+{ TRACE_AND_INDENT();
   IF_DEBUG2 {
     ptrcheck_free(ptr, file, func, line);
   }
@@ -88,7 +88,7 @@ char *dupstr_ (const char *in,
          std::string file,
          std::string func,
          int line)
-{_
+{ TRACE_AND_INDENT();
   if (!in) {
     ERR("No string to duplicate");
     return (0);

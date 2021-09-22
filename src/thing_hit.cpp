@@ -23,7 +23,7 @@ void Thing::on_hit (Thingp hitter,      // an arrow / monst /...
                     bool crit,
                     bool bite,
                     int damage)
-{_
+{ TRACE_AND_INDENT();
   auto on_hit = tp()->on_hit_do();
   if (std::empty(on_hit)) {
     return;
@@ -60,7 +60,7 @@ void Thing::on_hit (Thingp hitter,      // an arrow / monst /...
 // Python callback upon being miss
 //
 void Thing::on_miss (Thingp hitter)
-{_
+{ TRACE_AND_INDENT();
   auto on_miss = tp()->on_miss_do();
   if (std::empty(on_miss)) {
     return;
@@ -87,7 +87,7 @@ void Thing::on_miss (Thingp hitter)
 }
 
 void Thing::on_bite (void)
-{_
+{ TRACE_AND_INDENT();
   auto on_bite = tp()->on_bite_do();
   if (std::empty(on_bite)) {
     return;
@@ -117,7 +117,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
                           bool bite,
                           int poison,
                           int damage)
-{_
+{ TRACE_AND_INDENT();
   if (!hitter) {
     err("No hitter");
     return false;
@@ -592,11 +592,11 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
 // Returns true on the target being dead.
 //
 int Thing::is_hit_by (Thingp hitter, bool crit, bool bite, int poison, int damage)
-{_
+{ TRACE_AND_INDENT();
   IF_DEBUG2 {
     hitter->log("Possible hit %s for %u", to_string().c_str(), damage);
   }
-_
+  TRACE_AND_INDENT();
   //
   // If an arrow, who really fired it?
   //
@@ -727,12 +727,12 @@ _
 }
 
 int Thing::is_hit_by (Thingp hitter, int damage)
-{_
+{ TRACE_AND_INDENT();
   return (is_hit_by(hitter, false, false, 0, damage));
 }
 
 int Thing::is_hit_by (Thingp hitter)
-{_
+{ TRACE_AND_INDENT();
   return (is_hit_by(hitter, false, false,
                     hitter->get_damage_poison(),
                     hitter->get_damage_melee()));

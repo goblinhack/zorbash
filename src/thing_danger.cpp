@@ -12,7 +12,7 @@
 #include "my_thing_template.h"
 
 int Tp::get_danger_level (void)
-{_
+{ TRACE_AND_INDENT();
   int danger_level = 0;
 
   danger_level = get_health_initial() / 10;
@@ -71,7 +71,7 @@ int Tp::get_danger_level (void)
 }
 
 int Thing::get_danger_initial_level (void)
-{_
+{ TRACE_AND_INDENT();
   int danger_level = 0;
 
   danger_level = get_health_initial() / 10;
@@ -143,7 +143,7 @@ int Thing::get_danger_initial_level (void)
 }
 
 int Thing::get_danger_current_level (void)
-{_
+{ TRACE_AND_INDENT();
   int danger_level = 0;
 
   danger_level = get_health() / 10;

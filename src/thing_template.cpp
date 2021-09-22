@@ -31,7 +31,7 @@ Tp::~Tp (void) {
 }
 
 Tpp tp_find (const std::string &name)
-{_
+{ TRACE_AND_INDENT();
   auto result = tp_name_map.find(name);
 
   if (unlikely(result == tp_name_map.end())) {
@@ -42,7 +42,7 @@ Tpp tp_find (const std::string &name)
 }
 
 Tpp tp_find (uint32_t id)
-{_
+{ TRACE_AND_INDENT();
   auto result = get(tp_id_map, id - 1);
   if (!result) {
     ERR("Thing template %08" PRIx32 " not found", id);
@@ -52,7 +52,7 @@ Tpp tp_find (uint32_t id)
 }
 
 uint8_t tp_init (void)
-{_
+{ TRACE_AND_INDENT();
   tp_init_done = true;
 
   tp_random_init();
@@ -62,7 +62,7 @@ uint8_t tp_init (void)
 }
 
 void tp_fini (void)
-{_
+{ TRACE_AND_INDENT();
   if (tp_init_done) {
     tp_init_done = false;
   }
@@ -74,7 +74,7 @@ void tp_fini (void)
 Tpp tp_load (int id, std::string const& name,
        const std::string &text_name,
        const std::string &short_text_name)
-{_
+{ TRACE_AND_INDENT();
   if (tp_find(name)) {
     ERR("Thing template name [%s] already used", name.c_str());
   }
@@ -96,7 +96,7 @@ Tpp tp_load (int id, std::string const& name,
 }
 
 Tilep tp_first_tile (Tpp tp)
-{_
+{ TRACE_AND_INDENT();
   auto tiles = &tp->tiles;
 
   if (!tiles || tiles->empty()) {

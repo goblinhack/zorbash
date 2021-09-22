@@ -36,7 +36,7 @@ static void cancelled (Widp w, const std::wstring& text)
 }
 
 void Game::choose_player_name_select (void)
-{_
+{ TRACE_AND_INDENT();
   CON("Choose player name menu");
 
   wid_rightbar_fini();

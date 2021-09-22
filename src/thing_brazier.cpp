@@ -15,7 +15,7 @@
 #include "my_ptrcheck.h"
 
 void Thing::brazier_tick (void)
-{_
+{ TRACE_AND_INDENT();
   //
   // This is for if you land on a brazier
   //

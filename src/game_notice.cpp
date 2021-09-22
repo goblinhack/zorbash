@@ -15,25 +15,25 @@
 static WidPopup *game_notice_window;
 
 void game_notice_destroy (void)
-{_
+{ TRACE_AND_INDENT();
   delete game_notice_window;
   game_notice_window = nullptr;
 }
 
 static uint8_t game_notice_ok (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   game_notice_destroy();
   return false;
 }
 
 static uint8_t game_notice_key_up (Widp w, const struct SDL_Keysym *key)
-{_
+{ TRACE_AND_INDENT();
   game_notice_ok(nullptr, 0, 0, 0);
   return true;
 }
 
 static uint8_t game_notice_key_down (Widp w, const struct SDL_Keysym *key)
-{_
+{ TRACE_AND_INDENT();
   if (sdl_shift_held) {
     if (key->scancode == (SDL_Scancode)game->config.key_console) {
       return false;
@@ -44,7 +44,7 @@ static uint8_t game_notice_key_down (Widp w, const struct SDL_Keysym *key)
 }
 
 void game_notice (std::string s)
-{_
+{ TRACE_AND_INDENT();
   if (game_notice_window) {
     game_notice_destroy();
   }
@@ -57,14 +57,14 @@ void game_notice (std::string s)
   auto width = br.x - tl.x;
 
   game_notice_window = new WidPopup("Game notice", tl, br, nullptr, "", false, false);
-  {_
+  { TRACE_AND_INDENT();
     Widp w = game_notice_window->wid_popup_container;
     wid_set_on_key_up(w, game_notice_key_up);
     wid_set_on_key_down(w, game_notice_key_down);
   }
 
   int y_at = 0;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_notice_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "notice");
 
@@ -77,7 +77,7 @@ void game_notice (std::string s)
   }
 
   y_at = 3;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_notice_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "ok");
 

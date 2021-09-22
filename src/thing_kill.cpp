@@ -33,7 +33,7 @@ void Thing::kill (Thingp killer, const char *reason)
   is_dying = true;
 
   dbg("Kill");
-_
+  TRACE_AND_INDENT();
   ///////////////////////////////////////////////////////////////
   // WARNING: killer can be nullptr
   ///////////////////////////////////////////////////////////////
@@ -274,12 +274,12 @@ _
 }
 
 void Thing::kill (Thingp killer, const std::string &reason)
-{_
+{ TRACE_AND_INDENT();
   kill(killer, reason.c_str());
 }
 
 bool Thing::if_matches_then_kill (const std::string& what, const point &p)
-{_
+{ TRACE_AND_INDENT();
   //
   // Don't destroy the floor under critical items
   //

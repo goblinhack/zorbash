@@ -17,7 +17,7 @@
 #include "my_sdl.h"
 
 std::string Thing::text_a_or_an (void) const
-{_
+{ TRACE_AND_INDENT();
   auto tpp = tp();
   verify(this);
   verify(tpp);
@@ -46,7 +46,7 @@ std::string Thing::text_a_or_an (void) const
 }
 
 std::string Thing::text_the (void) const
-{_
+{ TRACE_AND_INDENT();
   auto tpp = tp();
   verify(this);
   verify(tpp);
@@ -70,14 +70,14 @@ std::string Thing::text_the (void) const
 }
 
 std::string Thing::text_The (void) const
-{_
+{ TRACE_AND_INDENT();
   auto out = text_the();
   out[0] = toupper(out[0]);
   return (out);
 }
 
 std::string Thing::short_text_a_or_an (void) const
-{_
+{ TRACE_AND_INDENT();
   auto tpp = tp();
   verify(this);
   verify(tpp);
@@ -106,7 +106,7 @@ std::string Thing::short_text_a_or_an (void) const
 }
 
 std::string Thing::short_text_the (void) const
-{_
+{ TRACE_AND_INDENT();
   auto tpp = tp();
   verify(this);
   verify(tpp);
@@ -130,7 +130,7 @@ std::string Thing::short_text_the (void) const
 }
 
 std::string Thing::short_text_The (void) const
-{_
+{ TRACE_AND_INDENT();
   auto out = short_text_the();
   out[0] = toupper(out[0]);
   return (out);
@@ -140,7 +140,7 @@ std::string Thing::short_text_The (void) const
 // foo bar -> Foo Bar
 //
 std::string Thing::short_text_capitalized (void) const
-{_
+{ TRACE_AND_INDENT();
   std::string out = tp()->text_name();
   char *b = (char*)out.c_str();
   char *e = b + out.size();
@@ -167,7 +167,7 @@ std::string Thing::short_text_capitalized (void) const
 }
 
 void Thing::show_botcon_description (void) const
-{_
+{ TRACE_AND_INDENT();
   auto text = text_description();
 
   bool skip_showing_keys_to_use = true;

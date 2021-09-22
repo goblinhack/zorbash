@@ -20,7 +20,7 @@
 #include "my_ptrcheck.h"
 
 PyObject *level_add_ (PyObject *obj, PyObject *args, PyObject *keywds)
-{_
+{ TRACE_AND_INDENT();
   char *level_name = 0;
   PyObject *py_level_data = 0;
 
@@ -272,7 +272,7 @@ PyObject *level_add_ (PyObject *obj, PyObject *args, PyObject *keywds)
 }
 
 PyObject *level_get_all (PyObject *obj, PyObject *args, PyObject *keywds)
-{_
+{ TRACE_AND_INDENT();
   uint32_t id = 0;
   int x = -1;
   int y = -1;
@@ -327,7 +327,7 @@ PyObject *level_get_all (PyObject *obj, PyObject *args, PyObject *keywds)
 }
 
 PyObject *level_flood_fill_get_all_things (PyObject *obj, PyObject *args, PyObject *keywds)
-{_
+{ TRACE_AND_INDENT();
   uint32_t id = 0;
   int x = -1;
   int y = -1;
@@ -374,7 +374,7 @@ PyObject *level_flood_fill_get_all_things (PyObject *obj, PyObject *args, PyObje
 
 #define LEVEL_BODY_GET_BOOL_AT(__func__, __api__)                                   \
 PyObject *__func__ (PyObject *obj, PyObject *args, PyObject *keywds)                \
-{_	                                                                                \
+{ TRACE_AND_INDENT();	                                                                                \
   uint32_t id = 0;	                                                                \
   int x = -1;                                                                       \
   int y = -1;                                                                       \

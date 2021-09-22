@@ -14,7 +14,7 @@
 #include "my_ptrcheck.h"
 
 PyObject *tp_load_ (PyObject *obj, PyObject *args, PyObject *keywds)
-{_
+{ TRACE_AND_INDENT();
   PyObject *py_class = 0;
 
   static char *kwlist[] = {(char*) "tp", 0};
@@ -640,80 +640,80 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
 }
 
 PyObject *tp_set_tile (PyObject *obj, PyObject *args, PyObject *keywds)
-{_
+{ TRACE_AND_INDENT();
   return (tp_set_tile_dir(obj, args, keywds, THING_DIR_NONE, 1));
 }
 PyObject *tp_set_top1_tile (PyObject *obj, PyObject *args, PyObject *keywds)
-{_
+{ TRACE_AND_INDENT();
   return (tp_set_tile_dir(obj, args, keywds, THING_DIR_UP, 1));
 }
 PyObject *tp_set_bot1_tile (PyObject *obj, PyObject *args, PyObject *keywds)
-{_
+{ TRACE_AND_INDENT();
   return (tp_set_tile_dir(obj, args, keywds, THING_DIR_DOWN, 1));
 }
 PyObject *tp_set_left1_tile (PyObject *obj, PyObject *args, PyObject *keywds)
-{_
+{ TRACE_AND_INDENT();
   return (tp_set_tile_dir(obj, args, keywds, THING_DIR_LEFT, 1));
 }
 PyObject *tp_set_right1_tile (PyObject *obj, PyObject *args, PyObject *keywds)
-{_
+{ TRACE_AND_INDENT();
   return (tp_set_tile_dir(obj, args, keywds, THING_DIR_RIGHT, 1));
 }
 PyObject *tp_set_tl1_tile (PyObject *obj, PyObject *args, PyObject *keywds)
-{_
+{ TRACE_AND_INDENT();
   return (tp_set_tile_dir(obj, args, keywds, THING_DIR_TL, 1));
 }
 PyObject *tp_set_tr1_tile (PyObject *obj, PyObject *args, PyObject *keywds)
-{_
+{ TRACE_AND_INDENT();
   return (tp_set_tile_dir(obj, args, keywds, THING_DIR_TR, 1));
 }
 PyObject *tp_set_bl1_tile (PyObject *obj, PyObject *args, PyObject *keywds)
-{_
+{ TRACE_AND_INDENT();
   return (tp_set_tile_dir(obj, args, keywds, THING_DIR_BL, 1));
 }
 PyObject *tp_set_br1_tile (PyObject *obj, PyObject *args, PyObject *keywds)
-{_
+{ TRACE_AND_INDENT();
   return (tp_set_tile_dir(obj, args, keywds, THING_DIR_BR, 1));
 }
 PyObject *tp_set_top2_tile (PyObject *obj, PyObject *args, PyObject *keywds)
-{_
+{ TRACE_AND_INDENT();
   return (tp_set_tile_dir(obj, args, keywds, THING_DIR_UP, 2));
 }
 PyObject *tp_set_bot2_tile (PyObject *obj, PyObject *args, PyObject *keywds)
-{_
+{ TRACE_AND_INDENT();
   return (tp_set_tile_dir(obj, args, keywds, THING_DIR_DOWN, 2));
 }
 PyObject *tp_set_bot3_tile (PyObject *obj, PyObject *args, PyObject *keywds)
-{_
+{ TRACE_AND_INDENT();
   return (tp_set_tile_dir(obj, args, keywds, THING_DIR_DOWN, 3));
 }
 PyObject *tp_set_left2_tile (PyObject *obj, PyObject *args, PyObject *keywds)
-{_
+{ TRACE_AND_INDENT();
   return (tp_set_tile_dir(obj, args, keywds, THING_DIR_LEFT, 2));
 }
 PyObject *tp_set_right2_tile (PyObject *obj, PyObject *args, PyObject *keywds)
-{_
+{ TRACE_AND_INDENT();
   return (tp_set_tile_dir(obj, args, keywds, THING_DIR_RIGHT, 2));
 }
 PyObject *tp_set_tl2_tile (PyObject *obj, PyObject *args, PyObject *keywds)
-{_
+{ TRACE_AND_INDENT();
   return (tp_set_tile_dir(obj, args, keywds, THING_DIR_TL, 2));
 }
 PyObject *tp_set_tr2_tile (PyObject *obj, PyObject *args, PyObject *keywds)
-{_
+{ TRACE_AND_INDENT();
   return (tp_set_tile_dir(obj, args, keywds, THING_DIR_TR, 2));
 }
 PyObject *tp_set_bl2_tile (PyObject *obj, PyObject *args, PyObject *keywds)
-{_
+{ TRACE_AND_INDENT();
   return (tp_set_tile_dir(obj, args, keywds, THING_DIR_BL, 2));
 }
 PyObject *tp_set_br2_tile (PyObject *obj, PyObject *args, PyObject *keywds)
-{_
+{ TRACE_AND_INDENT();
   return (tp_set_tile_dir(obj, args, keywds, THING_DIR_BR, 2));
 }
 
 PyObject *tp_update_ (PyObject *obj, PyObject *args, PyObject *keywds)
-{_
+{ TRACE_AND_INDENT();
   PyObject *py_class = 0;
   char *tp_name = 0;
   int value = 0;
@@ -755,7 +755,7 @@ done:
 }
 
 PyObject *level_spawn_next_to_ (PyObject *obj, PyObject *args, PyObject *keywds)
-{_
+{ TRACE_AND_INDENT();
   char *what = nullptr;
   uint32_t id = 0;
 
@@ -796,7 +796,7 @@ PyObject *level_spawn_next_to_ (PyObject *obj, PyObject *args, PyObject *keywds)
 }
 
 PyObject *level_spawn_next_to_or_on_monst_ (PyObject *obj, PyObject *args, PyObject *keywds)
-{_
+{ TRACE_AND_INDENT();
   char *what = nullptr;
   uint32_t id = 0;
 
@@ -837,7 +837,7 @@ PyObject *level_spawn_next_to_or_on_monst_ (PyObject *obj, PyObject *args, PyObj
 }
 
 PyObject *level_spawn_using_items_radius_range_ (PyObject *obj, PyObject *args, PyObject *keywds)
-{_
+{ TRACE_AND_INDENT();
   char *what = nullptr;
   uint32_t id = 0;
   uint32_t parent_id = 0;
@@ -913,7 +913,7 @@ PyObject *level_spawn_using_items_radius_range_ (PyObject *obj, PyObject *args, 
 }
 
 PyObject *level_spawn_fire_around_thing (PyObject *obj, PyObject *args, PyObject *keywds)
-{_
+{ TRACE_AND_INDENT();
   char *what = nullptr;
   uint32_t id = 0;
 
@@ -954,7 +954,7 @@ PyObject *level_spawn_fire_around_thing (PyObject *obj, PyObject *args, PyObject
 }
 
 PyObject *level_spawn_at_thing (PyObject *obj, PyObject *args, PyObject *keywds)
-{_
+{ TRACE_AND_INDENT();
   char *what = nullptr;
   uint32_t id = 0;
 
@@ -995,7 +995,7 @@ PyObject *level_spawn_at_thing (PyObject *obj, PyObject *args, PyObject *keywds)
 }
 
 PyObject *level_spawn_at_thing_if_possible (PyObject *obj, PyObject *args, PyObject *keywds)
-{_
+{ TRACE_AND_INDENT();
   char *what = nullptr;
   uint32_t id = 0;
 
@@ -1036,7 +1036,7 @@ PyObject *level_spawn_at_thing_if_possible (PyObject *obj, PyObject *args, PyObj
 }
 
 PyObject *if_matches_then_kill_ (PyObject *obj, PyObject *args, PyObject *keywds)
-{_
+{ TRACE_AND_INDENT();
   char *what = nullptr;
   uint32_t id = 0;
   int x = -1;
@@ -1089,7 +1089,7 @@ PyObject *if_matches_then_kill_ (PyObject *obj, PyObject *args, PyObject *keywds
 }
 
 PyObject *if_matches_ (PyObject *obj, PyObject *args, PyObject *keywds)
-{_
+{ TRACE_AND_INDENT();
   char *what = nullptr;
   uint32_t id = 0;
 
@@ -1130,7 +1130,7 @@ PyObject *if_matches_ (PyObject *obj, PyObject *args, PyObject *keywds)
 }
 
 PyObject *level_place_at (PyObject *obj, PyObject *args, PyObject *keywds)
-{_
+{ TRACE_AND_INDENT();
   char *what = nullptr;
   uint32_t id = 0;
   int x = -1;

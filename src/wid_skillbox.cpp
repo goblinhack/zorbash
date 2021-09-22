@@ -17,21 +17,21 @@
 #include "my_sdl.h"
 
 void wid_skillbox_fini (void)
-{_
+{ TRACE_AND_INDENT();
   DBG3("Skillbox: Fini");
 }
 
 uint8_t wid_skillbox_init (void)
-{_
+{ TRACE_AND_INDENT();
   return true;
 }
 
 void wid_skillbox_mouse_over_b (Widp w,
                 int32_t relx, int32_t rely,
                 int32_t wheelx, int32_t wheely)
-{_
+{ TRACE_AND_INDENT();
   DBG3("Skillbox: Begin over skillbox");
-_
+  TRACE_AND_INDENT();
   if ((game->state == Game::STATE_CHOOSING_TARGET) ||
     (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
     (game->state == Game::STATE_MOVING_ITEMS) ||
@@ -59,7 +59,7 @@ _
   auto slot = wid_get_int_context(w);
 
   DBG3("Skillbox: Begin over skillbox slot %d", slot);
-_
+  TRACE_AND_INDENT();
   if (!level->skillbox_over(slot)) {
     DBG3("Skillbox: Not over anything");
     return;
@@ -74,9 +74,9 @@ _
 }
 
 void wid_skillbox_mouse_over_e (Widp w)
-{_
+{ TRACE_AND_INDENT();
   DBG3("Skillbox: End over skillbox");
-_
+  TRACE_AND_INDENT();
   if ((game->state == Game::STATE_CHOOSING_TARGET) ||
     (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
     (game->state == Game::STATE_MOVING_ITEMS) ||
@@ -104,7 +104,7 @@ _
   auto slot = wid_get_int_context(w);
 
   DBG3("Skillbox: Over skillbox slot %d", slot);
-_
+  TRACE_AND_INDENT();
   if (!level->skillbox_over(slot)) {
     return;
   }
@@ -118,7 +118,7 @@ _
 
 uint8_t wid_skillbox_item_mouse_up (Widp w, int32_t x, int32_t y,
                   uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   auto slot = wid_get_int_context(w);
   DBG3("Skillbox: Mouse up on slot %d", slot);
 

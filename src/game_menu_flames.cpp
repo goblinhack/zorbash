@@ -18,7 +18,7 @@ color bg[TERM_WIDTH_MAX * 2][TERM_HEIGHT_MAX * 2];
 color bg2[TERM_WIDTH_MAX * 2][TERM_HEIGHT_MAX * 2];
 
 static void game_display_flames_tiles (int w, int h)
-{_
+{ TRACE_AND_INDENT();
   float bright = 2.5;
 
   blit_init();
@@ -75,7 +75,7 @@ static void game_display_flames_tiles (int w, int h)
 }
 
 static void game_display_flames_change (int w, int h)
-{_
+{ TRACE_AND_INDENT();
   int flames = 3;
   while (flames--)
   {
@@ -194,7 +194,7 @@ static void game_display_flames_change (int w, int h)
 }
 
 void game_display_flames (void)
-{_
+{ TRACE_AND_INDENT();
   auto w = TERM_WIDTH * 2;
   auto h = TERM_HEIGHT * 2;
   game_display_flames_tiles(w, h);

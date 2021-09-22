@@ -149,13 +149,13 @@ static void thing_possible_init (void)
 //
 bool Thing::collision_find_best_target (bool *target_attacked,
                                         bool *target_overlaps)
-{_
+{ TRACE_AND_INDENT();
   bool ret = false;
   auto me = this;
   ThingColl *best = nullptr;
 
   dbg("Collided with or can attack or eat something, find the best");
-_
+  TRACE_AND_INDENT();
   *target_attacked = false;
   *target_overlaps = false;
 
@@ -362,14 +362,14 @@ bool things_overlap_attack (const Thingp A, fpoint A_at, const Thingp B)
 //
 bool Thing::collision_add_candidates (Thingp it, fpoint future_pos,
                                       int x, int y, int dx, int dy)
-{_
+{ TRACE_AND_INDENT();
   auto me = this;
 
   Thingp owner_it = it->get_immediate_owner();
   Thingp owner_me = me->get_immediate_owner();
 
   dbg("Collision candidate? %s", it->to_string().c_str());
-_
+  TRACE_AND_INDENT();
   if ((owner_it == me) || (owner_me == it)) {
     //
     // If on fire, allow fire to burn its owner - you!
@@ -534,7 +534,7 @@ bool Thing::collision_check_only (Thingp it, fpoint future_pos, int x, int y)
       future_pos.x, future_pos.y, it->to_string().c_str());
   }
 
-_
+  TRACE_AND_INDENT();
   //
   // Allow cleaners to engulf/swallow attack
   //
@@ -711,11 +711,11 @@ bool Thing::collision_check_and_handle (fpoint future_pos,
                                         bool *target_attacked,
                                         bool *target_overlaps,
                                         float radius)
-{_
+{ TRACE_AND_INDENT();
   if (is_loggable_for_unimportant_stuff()) {
     dbg("Collision handle");
   }
-_
+  TRACE_AND_INDENT();
   //
   // Do not include hidden as we use the sword being carried here
   // and when swinging, it is hidden
@@ -815,7 +815,7 @@ bool Thing::collision_check_only (fpoint future_pos)
   if (is_loggable_for_unimportant_stuff()) {
     dbg("Collision check only");
   }
-_
+  TRACE_AND_INDENT();
   int minx = future_pos.x - thing_collision_tiles;
   if (minx < MAP_BORDER_ROCK) {
     minx = MAP_BORDER_ROCK;

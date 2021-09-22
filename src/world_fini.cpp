@@ -10,7 +10,7 @@
 #include "my_array_bounds_check.h"
 
 void World::fini (void)
-{_
+{ TRACE_AND_INDENT();
   LOG("World fini: Destroy all levels");
   for (auto x = 0; x < LEVELS_ACROSS; ++x) {
     for (auto y = 0; y < LEVELS_DOWN; ++y) {

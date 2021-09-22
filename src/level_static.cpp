@@ -26,12 +26,12 @@ LevelStatic::~LevelStatic (void)
 }
 
 void level_fini (void)
-{_
+{ TRACE_AND_INDENT();
   LevelStatic::all_static_levels.clear();
 }
 
 LevelStaticp LevelStatic::level_new (void)
-{_
+{ TRACE_AND_INDENT();
   auto r = new LevelStatic();
   LevelStatic::all_static_levels.push_back(r);
   return (r);

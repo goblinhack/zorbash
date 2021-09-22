@@ -17,7 +17,7 @@
 #include "my_ptrcheck.h"
 
 void Thing::grass_tick (void)
-{_
+{ TRACE_AND_INDENT();
   if (!level->is_dry_grass(mid_at.x, mid_at.y)) {
     return;
   }

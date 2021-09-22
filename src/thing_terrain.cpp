@@ -18,7 +18,7 @@
 #include "my_ptrcheck.h"
 
 void Thing::dmap_modify_terrain_cost (point p, uint8_t *d)
-{_
+{ TRACE_AND_INDENT();
   int pref = *d;
 
   if (collision_obstacle(p)) {
@@ -62,7 +62,7 @@ void Thing::dmap_modify_terrain_cost (point p, uint8_t *d)
 }
 
 uint8_t Thing::get_terrain_cost (point p)
-{_
+{ TRACE_AND_INDENT();
   uint8_t pref = 0;
 
   dmap_modify_terrain_cost(p, &pref);
@@ -71,7 +71,7 @@ uint8_t Thing::get_terrain_cost (point p)
 }
 
 bool Thing::will_prefer_terrain (const Thingp itp)
-{_
+{ TRACE_AND_INDENT();
   auto me = tp();
   auto it = itp->tp();
 

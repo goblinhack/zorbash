@@ -31,7 +31,7 @@ extern uint32_t csum(char *mem, uint32_t len);
 #define WRITE_MAGIC(m) { uint32_t magic = m; out << bits(magic); }
 
 std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
-{_
+{ TRACE_AND_INDENT();
   /////////////////////////////////////////////////////////////////////////
   // Keep these sorted alphabetically to make it easier to see additions
   // and always update game_load.cpp and game_save.cpp
@@ -134,7 +134,7 @@ std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
 }
 
 std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
-{_
+{ TRACE_AND_INDENT();
   auto start = out.tellp();
   WRITE_MAGIC(THING_MAGIC_BEGIN + (int) sizeof(Thing));
 
@@ -300,7 +300,7 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
 }
 
 std::ostream& operator<<(std::ostream &out, Bits<Levelp & > const my)
-{_
+{ TRACE_AND_INDENT();
   IF_DEBUG4 {
     my.t->log("Save");
   }
@@ -482,7 +482,7 @@ std::ostream& operator<<(std::ostream &out, Bits<Levelp & > const my)
 
 std::ostream& operator<<(std::ostream &out,
              Bits<const class World & > const my)
-{_
+{ TRACE_AND_INDENT();
   for (auto x = 0; x < LEVELS_ACROSS; ++x) {
     for (auto y = 0; y < LEVELS_DOWN; ++y) {
       for (auto z = 0; z < LEVELS_DEEP; ++z) {
@@ -510,7 +510,7 @@ std::ostream& operator<<(std::ostream &out,
 }
 
 std::ostream& operator<<(std::ostream &out, Bits<const Config & > const my)
-{_
+{ TRACE_AND_INDENT();
   uint32_t header_size = sizeof(Config);
   /* uint32_t           header_size                  */ out << bits(header_size                       );
 
@@ -599,7 +599,7 @@ std::ostream& operator<<(std::ostream &out, Bits<const Config & > const my)
 
 std::ostream& operator<<(std::ostream &out,
              Bits<const class Game & > const my)
-{_
+{ TRACE_AND_INDENT();
   uint32_t header_size = sizeof(Game);
   out << bits(my.t.version);
   out << bits(header_size);
@@ -635,7 +635,7 @@ std::ostream& operator<<(std::ostream &out,
 }
 
 bool Game::save (std::string file_to_save)
-{_
+{ TRACE_AND_INDENT();
   std::stringstream s(std::ios::in | std::ios::out | std::ios::binary);
 
   const class Game &c = *this;
@@ -731,7 +731,7 @@ bool Game::save (std::string file_to_save)
 
 void
 Game::save (void)
-{_
+{ TRACE_AND_INDENT();
   LOG("-");
   CON("DGN: Saving %s", save_file.c_str());
   LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
@@ -747,7 +747,7 @@ Game::save (void)
 
 void
 Game::save (int slot)
-{_
+{ TRACE_AND_INDENT();
   if (slot < 0) {
     return;
   }
@@ -787,7 +787,7 @@ Game::save (int slot)
 
 void
 Game::save_snapshot (void)
-{_
+{ TRACE_AND_INDENT();
   for (auto x = 0; x < LEVELS_ACROSS; ++x) {
     for (auto y = 0; y < LEVELS_DOWN; ++y) {
       for (auto z = 0; z < LEVELS_DEEP; ++z) {
@@ -819,7 +819,7 @@ Game::save_snapshot (void)
 
 void
 Game::save_config (void)
-{_
+{ TRACE_AND_INDENT();
   auto filename = saved_dir + "config";
   std::ofstream out(filename, std::ios::binary);
   const Config &c = game->config;
@@ -828,14 +828,14 @@ Game::save_config (void)
 }
 
 void wid_save_destroy (void)
-{_
+{ TRACE_AND_INDENT();
   delete wid_save;
   wid_save = nullptr;
   game->change_state(Game::STATE_NORMAL);
 }
 
 static uint8_t wid_save_key_up (Widp w, const struct SDL_Keysym *key)
-{_
+{ TRACE_AND_INDENT();
   if (sdl_shift_held) {
     if (key->scancode == (SDL_Scancode)game->config.key_console) {
       return false;
@@ -847,7 +847,7 @@ static uint8_t wid_save_key_up (Widp w, const struct SDL_Keysym *key)
     case KMOD_RCTRL:
     default:
     switch (key->sym) {
-      default: {_
+      default: { TRACE_AND_INDENT();
         auto c = wid_event_to_char(key);
         switch (c) {
           case '0':
@@ -859,14 +859,14 @@ static uint8_t wid_save_key_up (Widp w, const struct SDL_Keysym *key)
           case '6':
           case '7':
           case '8':
-          case '9': {_
+          case '9': { TRACE_AND_INDENT();
             int slot = c - '0';
             game->save(slot);
             wid_save_destroy();
             return true;
           }
           case 'b':
-          case SDLK_ESCAPE: {_
+          case SDLK_ESCAPE: { TRACE_AND_INDENT();
             CON("PLAYER: Save game cancelled");
             wid_save_destroy();
             return true;
@@ -880,7 +880,7 @@ static uint8_t wid_save_key_up (Widp w, const struct SDL_Keysym *key)
 }
 
 static uint8_t wid_save_key_down (Widp w, const struct SDL_Keysym *key)
-{_
+{ TRACE_AND_INDENT();
   if (sdl_shift_held) {
     if (key->scancode == (SDL_Scancode)game->config.key_console) {
       return false;
@@ -891,7 +891,7 @@ static uint8_t wid_save_key_down (Widp w, const struct SDL_Keysym *key)
 }
 
 static uint8_t wid_save_mouse_up (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   auto slot = wid_get_int_context(w);
   game->save(slot);
   wid_save_destroy();
@@ -899,7 +899,7 @@ static uint8_t wid_save_mouse_up (Widp w, int32_t x, int32_t y, uint32_t button)
 }
 
 void Game::save_select (void)
-{_
+{ TRACE_AND_INDENT();
   if (wid_save) {
     return;
   }

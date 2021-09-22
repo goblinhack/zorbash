@@ -17,7 +17,7 @@
 #include "my_ptrcheck.h"
 
 void Thing::barrel_tick (void)
-{_
+{ TRACE_AND_INDENT();
   if (is_floating()) {
     return;
   }

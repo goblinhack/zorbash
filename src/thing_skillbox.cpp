@@ -17,9 +17,9 @@
 #include "my_ui.h"
 
 bool Thing::skillbox_id_insert (Thingp what)
-{_
+{ TRACE_AND_INDENT();
   dbg("Skillbox insert %s", what->to_string().c_str());
-_
+  TRACE_AND_INDENT();
   auto player = level->player;
   if (!player) {
     return false;
@@ -96,9 +96,9 @@ _
 }
 
 bool Thing::skillbox_id_remove (Thingp what)
-{_
+{ TRACE_AND_INDENT();
   dbg("Skillbox remove %s", what->to_string().c_str());
-_
+  TRACE_AND_INDENT();
   auto player = level->player;
   if (!player) {
     return false;
@@ -158,9 +158,9 @@ _
 }
 
 Thingp Level::skillbox_get (const uint32_t slot)
-{_
+{ TRACE_AND_INDENT();
   dbg("Skillbox get slot %d", slot);
-_
+  TRACE_AND_INDENT();
   if (!player) {
     ERR("No player");
     return nullptr;
@@ -214,9 +214,9 @@ Thingp Level::skillbox_get (void)
 }
 
 bool Level::skillbox_over (const uint32_t slot)
-{_
+{ TRACE_AND_INDENT();
   LOG("Skillbox: Over skillbox slot %d", slot);
-_
+  TRACE_AND_INDENT();
   if (!player) {
     LOG("Skillbox: Ignore; no player");
     return false;
@@ -256,9 +256,9 @@ _
 }
 
 bool Level::skillbox_chosen (const uint32_t slot)
-{_
+{ TRACE_AND_INDENT();
   LOG("Skillbox: Chosen skillbox slot %d", slot);
-_
+  TRACE_AND_INDENT();
   if (!player) {
     return false;
   }
@@ -305,9 +305,9 @@ _
 }
 
 Thingp Level::skillbox_describe (const uint32_t slot)
-{_
+{ TRACE_AND_INDENT();
   LOG("Skillbox: Describe slot %d", slot);
-_
+  TRACE_AND_INDENT();
   auto what = skillbox_get(slot);
   if (what) {
     IF_DEBUG2 {

@@ -102,11 +102,11 @@ void Level::things_gc (bool force)
 }
 
 void Level::things_gc_force (void)
-{_
+{ TRACE_AND_INDENT();
   things_gc(true);
 }
 
 void Level::things_gc_if_possible (void)
-{_
+{ TRACE_AND_INDENT();
   things_gc(false);
 }

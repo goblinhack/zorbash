@@ -21,7 +21,7 @@
 static WidPopup *game_error_window;
 
 static void game_error_destroy (void)
-{_
+{ TRACE_AND_INDENT();
   delete game_error_window;
   game_error_window = nullptr;
 
@@ -37,7 +37,7 @@ static void game_error_destroy (void)
 }
 
 static uint8_t game_error_key_up (Widp w, const struct SDL_Keysym *key)
-{_
+{ TRACE_AND_INDENT();
   if (sdl_shift_held) {
     if (key->scancode == (SDL_Scancode)game->config.key_console) {
       return false;
@@ -49,11 +49,11 @@ static uint8_t game_error_key_up (Widp w, const struct SDL_Keysym *key)
     case KMOD_RCTRL:
     default:
     switch (key->sym) {
-      default: {_
+      default: { TRACE_AND_INDENT();
         auto c = wid_event_to_char(key);
         switch (c) {
           case '\n':
-          case SDLK_ESCAPE: {_
+          case SDLK_ESCAPE: { TRACE_AND_INDENT();
             game_error_destroy();
             return true;
           }
@@ -66,7 +66,7 @@ static uint8_t game_error_key_up (Widp w, const struct SDL_Keysym *key)
 }
 
 static uint8_t game_error_key_down (Widp w, const struct SDL_Keysym *key)
-{_
+{ TRACE_AND_INDENT();
   if (sdl_shift_held) {
     if (key->scancode == (SDL_Scancode)game->config.key_console) {
       return false;
@@ -77,13 +77,13 @@ static uint8_t game_error_key_down (Widp w, const struct SDL_Keysym *key)
 }
 
 static uint8_t game_error_mouse_up (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   game_error_destroy();
   return true;
 }
 
 void game_error (std::string error)
-{_
+{ TRACE_AND_INDENT();
   CON("ERROR: %s", error.c_str());
 
   if (game_error_window) {
@@ -112,14 +112,14 @@ void game_error (std::string error)
   game_error_window->log(" ");
   sdl_screenshot_do();
 
-  {_
+  { TRACE_AND_INDENT();
     auto tb = new Traceback();
     tb->init();
     auto s = tb->to_string();
     game_error_window->log(s, true, false);
   }
 
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_error_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "dismiss");
 

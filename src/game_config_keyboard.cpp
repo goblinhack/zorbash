@@ -21,7 +21,7 @@ WidPopup *game_config_keyboard_window;
 static_assert(sizeof(SDL_Scancode) <= sizeof(game->config.key_move_left));
 
 static void game_config_check_for_conflicts (SDL_Scancode code)
-{_
+{ TRACE_AND_INDENT();
   if (game->config.key_action0) {
     if (game->config.key_action0 == code) {
       TOPCON("%%fg=orange$Conflicting key, disabling key action0%%fg=reset$");
@@ -247,7 +247,7 @@ static void game_config_check_for_conflicts (SDL_Scancode code)
 }
 
 void game_config_keyboard_destroy (void)
-{_
+{ TRACE_AND_INDENT();
   if (!game_config_keyboard_window) {
     return;
   }
@@ -264,7 +264,7 @@ void game_config_keyboard_destroy (void)
 }
 
 static uint8_t game_config_keyboard_cancel (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   CON("USR: Reload config");
   game->load_config();
   game_config_keyboard_destroy();
@@ -280,7 +280,7 @@ static uint8_t game_config_keyboard_cancel (Widp w, int32_t x, int32_t y, uint32
 }
 
 static uint8_t game_config_keyboard_save (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   CON("USR: Save config");
   game->save_config();
   game_config_keyboard_destroy();
@@ -295,7 +295,7 @@ static uint8_t game_config_keyboard_save (Widp w, int32_t x, int32_t y, uint32_t
 }
 
 static uint8_t game_config_keyboard_back (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   game_config_keyboard_destroy();
   if (game->started) {
     //
@@ -308,7 +308,7 @@ static uint8_t game_config_keyboard_back (Widp w, int32_t x, int32_t y, uint32_t
 }
 
 static void game_config_key_move_left_set (SDL_Scancode code)
-{_
+{ TRACE_AND_INDENT();
   game->config.key_move_left = 0;
   game_config_check_for_conflicts(code);
   game->config.key_move_left = code;
@@ -316,7 +316,7 @@ static void game_config_key_move_left_set (SDL_Scancode code)
 }
 
 static void game_config_key_move_right_set (SDL_Scancode code)
-{_
+{ TRACE_AND_INDENT();
   game->config.key_move_right = 0;
   game_config_check_for_conflicts(code);
   game->config.key_move_right = code;
@@ -324,7 +324,7 @@ static void game_config_key_move_right_set (SDL_Scancode code)
 }
 
 static void game_config_key_move_up_set (SDL_Scancode code)
-{_
+{ TRACE_AND_INDENT();
   game->config.key_move_up = 0;
   game_config_check_for_conflicts(code);
   game->config.key_move_up = code;
@@ -332,7 +332,7 @@ static void game_config_key_move_up_set (SDL_Scancode code)
 }
 
 static void game_config_key_move_down_set (SDL_Scancode code)
-{_
+{ TRACE_AND_INDENT();
   game->config.key_move_down = 0;
   game_config_check_for_conflicts(code);
   game->config.key_move_down = code;
@@ -340,7 +340,7 @@ static void game_config_key_move_down_set (SDL_Scancode code)
 }
 
 static void game_config_key_map_left_set (SDL_Scancode code)
-{_
+{ TRACE_AND_INDENT();
   game->config.key_map_left = 0;
   game_config_check_for_conflicts(code);
   game->config.key_map_left = code;
@@ -348,7 +348,7 @@ static void game_config_key_map_left_set (SDL_Scancode code)
 }
 
 static void game_config_key_map_right_set (SDL_Scancode code)
-{_
+{ TRACE_AND_INDENT();
   game->config.key_map_right = 0;
   game_config_check_for_conflicts(code);
   game->config.key_map_right = code;
@@ -356,7 +356,7 @@ static void game_config_key_map_right_set (SDL_Scancode code)
 }
 
 static void game_config_key_map_up_set (SDL_Scancode code)
-{_
+{ TRACE_AND_INDENT();
   game->config.key_map_up = 0;
   game_config_check_for_conflicts(code);
   game->config.key_map_up = code;
@@ -364,7 +364,7 @@ static void game_config_key_map_up_set (SDL_Scancode code)
 }
 
 static void game_config_key_map_down_set (SDL_Scancode code)
-{_
+{ TRACE_AND_INDENT();
   game->config.key_map_down = 0;
   game_config_check_for_conflicts(code);
   game->config.key_map_down = code;
@@ -372,7 +372,7 @@ static void game_config_key_map_down_set (SDL_Scancode code)
 }
 
 static void game_config_key_attack_set (SDL_Scancode code)
-{_
+{ TRACE_AND_INDENT();
   game->config.key_attack = 0;
   game_config_check_for_conflicts(code);
   game->config.key_attack = code;
@@ -380,7 +380,7 @@ static void game_config_key_attack_set (SDL_Scancode code)
 }
 
 static void game_config_key_wait_or_collect_set (SDL_Scancode code)
-{_
+{ TRACE_AND_INDENT();
   game->config.key_wait_or_collect = 0;
   game_config_check_for_conflicts(code);
   game->config.key_wait_or_collect = code;
@@ -388,7 +388,7 @@ static void game_config_key_wait_or_collect_set (SDL_Scancode code)
 }
 
 static void game_config_key_jump_set (SDL_Scancode code)
-{_
+{ TRACE_AND_INDENT();
   game->config.key_jump = 0;
   game_config_check_for_conflicts(code);
   game->config.key_jump = code;
@@ -396,7 +396,7 @@ static void game_config_key_jump_set (SDL_Scancode code)
 }
 
 static void game_config_key_throw_set (SDL_Scancode code)
-{_
+{ TRACE_AND_INDENT();
   game->config.key_throw = 0;
   game_config_check_for_conflicts(code);
   game->config.key_throw = code;
@@ -404,7 +404,7 @@ static void game_config_key_throw_set (SDL_Scancode code)
 }
 
 static void game_config_key_inventory_set (SDL_Scancode code)
-{_
+{ TRACE_AND_INDENT();
   game->config.key_inventory = 0;
   game_config_check_for_conflicts(code);
   game->config.key_inventory = code;
@@ -412,7 +412,7 @@ static void game_config_key_inventory_set (SDL_Scancode code)
 }
 
 static void game_config_key_drop_set (SDL_Scancode code)
-{_
+{ TRACE_AND_INDENT();
   game->config.key_drop = 0;
   game_config_check_for_conflicts(code);
   game->config.key_drop = code;
@@ -420,7 +420,7 @@ static void game_config_key_drop_set (SDL_Scancode code)
 }
 
 static void game_config_key_use_set (SDL_Scancode code)
-{_
+{ TRACE_AND_INDENT();
   game->config.key_use = 0;
   game_config_check_for_conflicts(code);
   game->config.key_use = code;
@@ -428,7 +428,7 @@ static void game_config_key_use_set (SDL_Scancode code)
 }
 
 static void game_config_key_eat_set (SDL_Scancode code)
-{_
+{ TRACE_AND_INDENT();
   game->config.key_eat = 0;
   game_config_check_for_conflicts(code);
   game->config.key_eat = code;
@@ -436,7 +436,7 @@ static void game_config_key_eat_set (SDL_Scancode code)
 }
 
 static void game_config_key_action0_set (SDL_Scancode code)
-{_
+{ TRACE_AND_INDENT();
   game->config.key_action0 = 0;
   game_config_check_for_conflicts(code);
   game->config.key_action0 = code;
@@ -444,7 +444,7 @@ static void game_config_key_action0_set (SDL_Scancode code)
 }
 
 static void game_config_key_action1_set (SDL_Scancode code)
-{_
+{ TRACE_AND_INDENT();
   game->config.key_action1 = 0;
   game_config_check_for_conflicts(code);
   game->config.key_action1 = code;
@@ -452,7 +452,7 @@ static void game_config_key_action1_set (SDL_Scancode code)
 }
 
 static void game_config_key_action2_set (SDL_Scancode code)
-{_
+{ TRACE_AND_INDENT();
   game->config.key_action2 = 0;
   game_config_check_for_conflicts(code);
   game->config.key_action2 = code;
@@ -460,7 +460,7 @@ static void game_config_key_action2_set (SDL_Scancode code)
 }
 
 static void game_config_key_action3_set (SDL_Scancode code)
-{_
+{ TRACE_AND_INDENT();
   game->config.key_action3 = 0;
   game_config_check_for_conflicts(code);
   game->config.key_action3 = code;
@@ -468,7 +468,7 @@ static void game_config_key_action3_set (SDL_Scancode code)
 }
 
 static void game_config_key_action4_set (SDL_Scancode code)
-{_
+{ TRACE_AND_INDENT();
   game->config.key_action4 = 0;
   game_config_check_for_conflicts(code);
   game->config.key_action4 = code;
@@ -476,7 +476,7 @@ static void game_config_key_action4_set (SDL_Scancode code)
 }
 
 static void game_config_key_action5_set (SDL_Scancode code)
-{_
+{ TRACE_AND_INDENT();
   game->config.key_action5 = 0;
   game_config_check_for_conflicts(code);
   game->config.key_action5 = code;
@@ -484,7 +484,7 @@ static void game_config_key_action5_set (SDL_Scancode code)
 }
 
 static void game_config_key_action6_set (SDL_Scancode code)
-{_
+{ TRACE_AND_INDENT();
   game->config.key_action6 = 0;
   game_config_check_for_conflicts(code);
   game->config.key_action6 = code;
@@ -492,7 +492,7 @@ static void game_config_key_action6_set (SDL_Scancode code)
 }
 
 static void game_config_key_action7_set (SDL_Scancode code)
-{_
+{ TRACE_AND_INDENT();
   game->config.key_action7 = 0;
   game_config_check_for_conflicts(code);
   game->config.key_action7 = code;
@@ -500,7 +500,7 @@ static void game_config_key_action7_set (SDL_Scancode code)
 }
 
 static void game_config_key_action8_set (SDL_Scancode code)
-{_
+{ TRACE_AND_INDENT();
   game->config.key_action8 = 0;
   game_config_check_for_conflicts(code);
   game->config.key_action8 = code;
@@ -508,7 +508,7 @@ static void game_config_key_action8_set (SDL_Scancode code)
 }
 
 static void game_config_key_action9_set (SDL_Scancode code)
-{_
+{ TRACE_AND_INDENT();
   game->config.key_action9 = 0;
   game_config_check_for_conflicts(code);
   game->config.key_action9 = code;
@@ -516,7 +516,7 @@ static void game_config_key_action9_set (SDL_Scancode code)
 }
 
 static void game_config_key_save_set (SDL_Scancode code)
-{_
+{ TRACE_AND_INDENT();
   game->config.key_save = 0;
   game_config_check_for_conflicts(code);
   game->config.key_save = code;
@@ -524,7 +524,7 @@ static void game_config_key_save_set (SDL_Scancode code)
 }
 
 static void game_config_key_load_set (SDL_Scancode code)
-{_
+{ TRACE_AND_INDENT();
   game->config.key_load = 0;
   game_config_check_for_conflicts(code);
   game->config.key_load = code;
@@ -532,7 +532,7 @@ static void game_config_key_load_set (SDL_Scancode code)
 }
 
 static void game_config_key_robot_mode_set (SDL_Scancode code)
-{_
+{ TRACE_AND_INDENT();
   game->config.key_robot_mode = 0;
   game_config_check_for_conflicts(code);
   game->config.key_robot_mode = code;
@@ -540,7 +540,7 @@ static void game_config_key_robot_mode_set (SDL_Scancode code)
 }
 
 static void game_config_key_zoom_in_set (SDL_Scancode code)
-{_
+{ TRACE_AND_INDENT();
   game->config.key_zoom_in = 0;
   game_config_check_for_conflicts(code);
   game->config.key_zoom_in = code;
@@ -548,7 +548,7 @@ static void game_config_key_zoom_in_set (SDL_Scancode code)
 }
 
 static void game_config_key_zoom_out_set (SDL_Scancode code)
-{_
+{ TRACE_AND_INDENT();
   game->config.key_zoom_out = 0;
   game_config_check_for_conflicts(code);
   game->config.key_zoom_out = code;
@@ -556,7 +556,7 @@ static void game_config_key_zoom_out_set (SDL_Scancode code)
 }
 
 static void game_config_key_help_set (SDL_Scancode code)
-{_
+{ TRACE_AND_INDENT();
   game->config.key_help = 0;
   game_config_check_for_conflicts(code);
   game->config.key_help = code;
@@ -564,7 +564,7 @@ static void game_config_key_help_set (SDL_Scancode code)
 }
 
 static void game_config_key_console_set (SDL_Scancode code)
-{_
+{ TRACE_AND_INDENT();
   game->config.key_console = 0;
   game_config_check_for_conflicts(code);
   game->config.key_console = code;
@@ -572,7 +572,7 @@ static void game_config_key_console_set (SDL_Scancode code)
 }
 
 static void game_config_key_quit_set (SDL_Scancode code)
-{_
+{ TRACE_AND_INDENT();
   game->config.key_quit = 0;
   game_config_check_for_conflicts(code);
   game->config.key_quit = code;
@@ -580,7 +580,7 @@ static void game_config_key_quit_set (SDL_Scancode code)
 }
 
 static void game_config_key_screenshot_set (SDL_Scancode code)
-{_
+{ TRACE_AND_INDENT();
   game->config.key_screenshot = 0;
   game_config_check_for_conflicts(code);
   game->config.key_screenshot = code;
@@ -588,13 +588,13 @@ static void game_config_key_screenshot_set (SDL_Scancode code)
 }
 
 static void grab_key (const std::string which)
-{_
+{ TRACE_AND_INDENT();
   game_notice("Press a key for " + which);
   g_grab_next_key = true;
 }
 
 static uint8_t game_config_keyboard_profile_arrow_keys (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   game->config.key_move_up    = 0;
   game_config_check_for_conflicts(SDL_SCANCODE_UP);
   game->config.key_move_up    = SDL_SCANCODE_UP;
@@ -633,7 +633,7 @@ static uint8_t game_config_keyboard_profile_arrow_keys (Widp w, int32_t x, int32
 }
 
 static uint8_t game_config_keyboard_profile_wasd (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   game->config.key_move_up    = 0;
   game_config_check_for_conflicts(SDL_SCANCODE_W);
   game->config.key_move_up    = SDL_SCANCODE_W;
@@ -672,252 +672,252 @@ static uint8_t game_config_keyboard_profile_wasd (Widp w, int32_t x, int32_t y, 
 }
 
 static uint8_t game_config_key_move_left (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   grab_key("move left");
   on_sdl_key_grab = game_config_key_move_left_set;
   return true;
 }
 
 static uint8_t game_config_key_move_right (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   grab_key("move right");
   on_sdl_key_grab = game_config_key_move_right_set;
   return true;
 }
 
 static uint8_t game_config_key_move_up (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   grab_key("move up");
   on_sdl_key_grab = game_config_key_move_up_set;
   return true;
 }
 
 static uint8_t game_config_key_move_down (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   grab_key("move down");
   on_sdl_key_grab = game_config_key_move_down_set;
   return true;
 }
 
 static uint8_t game_config_key_map_left (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   grab_key("map left");
   on_sdl_key_grab = game_config_key_map_left_set;
   return true;
 }
 
 static uint8_t game_config_key_map_right (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   grab_key("map right");
   on_sdl_key_grab = game_config_key_map_right_set;
   return true;
 }
 
 static uint8_t game_config_key_map_up (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   grab_key("map up");
   on_sdl_key_grab = game_config_key_map_up_set;
   return true;
 }
 
 static uint8_t game_config_key_map_down (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   grab_key("map down");
   on_sdl_key_grab = game_config_key_map_down_set;
   return true;
 }
 
 static uint8_t game_config_key_attack (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   grab_key("attack");
   on_sdl_key_grab = game_config_key_attack_set;
   return true;
 }
 
 static uint8_t game_config_key_wait_or_collect (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   grab_key("wait or collect");
   on_sdl_key_grab = game_config_key_wait_or_collect_set;
   return true;
 }
 
 static uint8_t game_config_key_jump (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   grab_key("jump");
   on_sdl_key_grab = game_config_key_jump_set;
   return true;
 }
 
 static uint8_t game_config_key_throw (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   grab_key("item throw");
   on_sdl_key_grab = game_config_key_throw_set;
   return true;
 }
 
 static uint8_t game_config_key_inventory (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   grab_key("show inventory");
   on_sdl_key_grab = game_config_key_inventory_set;
   return true;
 }
 
 static uint8_t game_config_key_drop (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   grab_key("item drop");
   on_sdl_key_grab = game_config_key_drop_set;
   return true;
 }
 
 static uint8_t game_config_key_use (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   grab_key("item use");
   on_sdl_key_grab = game_config_key_use_set;
   return true;
 }
 
 static uint8_t game_config_key_eat (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   grab_key("item eat");
   on_sdl_key_grab = game_config_key_eat_set;
   return true;
 }
 
 static uint8_t game_config_key_action0 (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   grab_key("action 0");
   on_sdl_key_grab = game_config_key_action0_set;
   return true;
 }
 
 static uint8_t game_config_key_action1 (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   grab_key("action 1");
   on_sdl_key_grab = game_config_key_action1_set;
   return true;
 }
 
 static uint8_t game_config_key_action2 (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   grab_key("action 2");
   on_sdl_key_grab = game_config_key_action2_set;
   return true;
 }
 
 static uint8_t game_config_key_action3 (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   grab_key("action 3");
   on_sdl_key_grab = game_config_key_action3_set;
   return true;
 }
 
 static uint8_t game_config_key_action4 (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   grab_key("action 4");
   on_sdl_key_grab = game_config_key_action4_set;
   return true;
 }
 
 static uint8_t game_config_key_action5 (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   grab_key("action 5");
   on_sdl_key_grab = game_config_key_action5_set;
   return true;
 }
 
 static uint8_t game_config_key_action6 (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   grab_key("action 6");
   on_sdl_key_grab = game_config_key_action6_set;
   return true;
 }
 
 static uint8_t game_config_key_action7 (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   grab_key("action 7");
   on_sdl_key_grab = game_config_key_action7_set;
   return true;
 }
 
 static uint8_t game_config_key_action8 (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   grab_key("action 8");
   on_sdl_key_grab = game_config_key_action8_set;
   return true;
 }
 
 static uint8_t game_config_key_action9 (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   grab_key("action 9");
   on_sdl_key_grab = game_config_key_action9_set;
   return true;
 }
 
 static uint8_t game_config_key_save (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   grab_key("save game");
   on_sdl_key_grab = game_config_key_save_set;
   return true;
 }
 
 static uint8_t game_config_key_load (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   grab_key("load game");
   on_sdl_key_grab = game_config_key_load_set;
   return true;
 }
 
 static uint8_t game_config_key_robot_mode (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   grab_key("robot_mode game");
   on_sdl_key_grab = game_config_key_robot_mode_set;
   return true;
 }
 
 static uint8_t game_config_key_zoom_in (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   grab_key("zoom in");
   on_sdl_key_grab = game_config_key_zoom_in_set;
   return true;
 }
 
 static uint8_t game_config_key_zoom_out (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   grab_key("zoom out");
   on_sdl_key_grab = game_config_key_zoom_out_set;
   return true;
 }
 
 static uint8_t game_config_key_help (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   grab_key("help");
   on_sdl_key_grab = game_config_key_help_set;
   return true;
 }
 
 static uint8_t game_config_key_console (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   grab_key("toggle console");
   on_sdl_key_grab = game_config_key_console_set;
   return true;
 }
 
 static uint8_t game_config_key_quit (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   grab_key("quit");
   on_sdl_key_grab = game_config_key_quit_set;
   return true;
 }
 
 static uint8_t game_config_key_screenshot (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   grab_key("screenshot grab");
   on_sdl_key_grab = game_config_key_screenshot_set;
   return true;
 }
 
 static uint8_t game_config_keyboard_key_up (Widp w, const struct SDL_Keysym *key)
-{_
+{ TRACE_AND_INDENT();
   if (sdl_shift_held) {
     if (key->scancode == (SDL_Scancode)game->config.key_console) {
       return false;
@@ -929,7 +929,7 @@ static uint8_t game_config_keyboard_key_up (Widp w, const struct SDL_Keysym *key
     case KMOD_RCTRL:
     default:
     switch (key->sym) {
-      default: {_
+      default: { TRACE_AND_INDENT();
         auto c = wid_event_to_char(key);
         switch (c) {
           case 'b':
@@ -945,7 +945,7 @@ static uint8_t game_config_keyboard_key_up (Widp w, const struct SDL_Keysym *key
 }
 
 static uint8_t game_config_keyboard_key_down (Widp w, const struct SDL_Keysym *key)
-{_
+{ TRACE_AND_INDENT();
   if (sdl_shift_held) {
     if (key->scancode == (SDL_Scancode)game->config.key_console) {
       return false;
@@ -956,7 +956,7 @@ static uint8_t game_config_keyboard_key_down (Widp w, const struct SDL_Keysym *k
 }
 
 void Game::config_keyboard_select (void)
-{_
+{ TRACE_AND_INDENT();
   game_notice_destroy();
 
   if (game_config_keyboard_window) {
@@ -973,14 +973,14 @@ void Game::config_keyboard_select (void)
   game_config_keyboard_window =
           new WidPopup("Keyboard select",
                  tl, br, nullptr, "", false, true);
-  {_
+  { TRACE_AND_INDENT();
     Widp w = game_config_keyboard_window->wid_popup_container;
     wid_set_on_key_up(w, game_config_keyboard_key_up);
     wid_set_on_key_down(w, game_config_keyboard_key_down);
   }
 
   int y_at = 0;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Thine keys of mighty power");
 
@@ -992,7 +992,7 @@ void Game::config_keyboard_select (void)
   }
 
   y_at = 2;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Back");
 
@@ -1008,7 +1008,7 @@ void Game::config_keyboard_select (void)
       wid_set_text(w, "Back");
     }
   }
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Save");
 
@@ -1019,7 +1019,7 @@ void Game::config_keyboard_select (void)
     wid_set_pos(w, tl, br);
     wid_set_text(w, "Save");
   }
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Cancel");
 
@@ -1036,7 +1036,7 @@ void Game::config_keyboard_select (void)
   ///////////////////////////////////////////////////////////////////////
 
   y_at += 3;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "");
 
@@ -1048,7 +1048,7 @@ void Game::config_keyboard_select (void)
     wid_set_text(w, "Use W,A,S,D for moving, arrow keys for map");
   }
   y_at += 3;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "");
 
@@ -1061,7 +1061,7 @@ void Game::config_keyboard_select (void)
   }
 
   y_at += 3;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "");
 
@@ -1076,7 +1076,7 @@ void Game::config_keyboard_select (void)
   // Move up
   ///////////////////////////////////////////////////////////////////////
   y_at += 3;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Move up");
 
@@ -1088,7 +1088,7 @@ void Game::config_keyboard_select (void)
     wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
     wid_set_text(w, "Move up");
   }
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
@@ -1106,7 +1106,7 @@ void Game::config_keyboard_select (void)
   // Move left
   ///////////////////////////////////////////////////////////////////////
   y_at += 1;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Move left");
 
@@ -1117,7 +1117,7 @@ void Game::config_keyboard_select (void)
     wid_set_text_lhs(w, true);
     wid_set_text(w, "Move left");
   }
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
@@ -1133,7 +1133,7 @@ void Game::config_keyboard_select (void)
   // Move down
   ///////////////////////////////////////////////////////////////////////
   y_at += 1;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Move down");
 
@@ -1144,7 +1144,7 @@ void Game::config_keyboard_select (void)
     wid_set_text_lhs(w, true);
     wid_set_text(w, "Move down");
   }
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
@@ -1160,7 +1160,7 @@ void Game::config_keyboard_select (void)
   // Move right
   ///////////////////////////////////////////////////////////////////////
   y_at += 1;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Move right");
 
@@ -1171,7 +1171,7 @@ void Game::config_keyboard_select (void)
     wid_set_text_lhs(w, true);
     wid_set_text(w, "Move right");
   }
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
@@ -1192,7 +1192,7 @@ void Game::config_keyboard_select (void)
   // Map up
   ///////////////////////////////////////////////////////////////////////
   y_at += 1;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Map up");
 
@@ -1203,7 +1203,7 @@ void Game::config_keyboard_select (void)
     wid_set_text_lhs(w, true);
     wid_set_text(w, "Map up");
   }
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
@@ -1219,7 +1219,7 @@ void Game::config_keyboard_select (void)
   // Map left
   ///////////////////////////////////////////////////////////////////////
   y_at += 1;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Map left");
 
@@ -1230,7 +1230,7 @@ void Game::config_keyboard_select (void)
     wid_set_text_lhs(w, true);
     wid_set_text(w, "Map left");
   }
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
@@ -1246,7 +1246,7 @@ void Game::config_keyboard_select (void)
   // Map down
   ///////////////////////////////////////////////////////////////////////
   y_at += 1;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Map down");
 
@@ -1257,7 +1257,7 @@ void Game::config_keyboard_select (void)
     wid_set_text_lhs(w, true);
     wid_set_text(w, "Map down");
   }
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
@@ -1273,7 +1273,7 @@ void Game::config_keyboard_select (void)
   // Map right
   ///////////////////////////////////////////////////////////////////////
   y_at += 1;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Map right");
 
@@ -1284,7 +1284,7 @@ void Game::config_keyboard_select (void)
     wid_set_text_lhs(w, true);
     wid_set_text(w, "Map right");
   }
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
@@ -1305,7 +1305,7 @@ void Game::config_keyboard_select (void)
   // attack
   ///////////////////////////////////////////////////////////////////////
   y_at += 1;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Attack");
 
@@ -1316,7 +1316,7 @@ void Game::config_keyboard_select (void)
     wid_set_text_lhs(w, true);
     wid_set_text(w, "Attack");
   }
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
@@ -1332,7 +1332,7 @@ void Game::config_keyboard_select (void)
   // wait / collect
   ///////////////////////////////////////////////////////////////////////
   y_at += 1;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Wait / collect");
 
@@ -1343,7 +1343,7 @@ void Game::config_keyboard_select (void)
     wid_set_text_lhs(w, true);
     wid_set_text(w, "Wait / collect");
   }
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
@@ -1359,7 +1359,7 @@ void Game::config_keyboard_select (void)
   // jump
   ///////////////////////////////////////////////////////////////////////
   y_at += 1;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "jump");
 
@@ -1370,7 +1370,7 @@ void Game::config_keyboard_select (void)
     wid_set_text_lhs(w, true);
     wid_set_text(w, "Jump");
   }
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
@@ -1386,7 +1386,7 @@ void Game::config_keyboard_select (void)
   // throw
   ///////////////////////////////////////////////////////////////////////
   y_at += 1;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "throw");
 
@@ -1397,7 +1397,7 @@ void Game::config_keyboard_select (void)
     wid_set_text_lhs(w, true);
     wid_set_text(w, "Throw");
   }
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
@@ -1413,7 +1413,7 @@ void Game::config_keyboard_select (void)
   // drop
   ///////////////////////////////////////////////////////////////////////
   y_at += 1;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Drop");
 
@@ -1424,7 +1424,7 @@ void Game::config_keyboard_select (void)
     wid_set_text_lhs(w, true);
     wid_set_text(w, "Drop");
   }
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
@@ -1440,7 +1440,7 @@ void Game::config_keyboard_select (void)
   // use
   ///////////////////////////////////////////////////////////////////////
   y_at += 1;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Use");
 
@@ -1451,7 +1451,7 @@ void Game::config_keyboard_select (void)
     wid_set_text_lhs(w, true);
     wid_set_text(w, "Use");
   }
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
@@ -1467,7 +1467,7 @@ void Game::config_keyboard_select (void)
   // eat
   ///////////////////////////////////////////////////////////////////////
   y_at += 1;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Eat");
 
@@ -1478,7 +1478,7 @@ void Game::config_keyboard_select (void)
     wid_set_text_lhs(w, true);
     wid_set_text(w, "Eat");
   }
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
@@ -1494,7 +1494,7 @@ void Game::config_keyboard_select (void)
   // gfx_mode
   ///////////////////////////////////////////////////////////////////////
   y_at += 1;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "inventory mode");
 
@@ -1505,7 +1505,7 @@ void Game::config_keyboard_select (void)
     wid_set_text_lhs(w, true);
     wid_set_text(w, "Inventory");
   }
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
@@ -1521,7 +1521,7 @@ void Game::config_keyboard_select (void)
   // action0
   ///////////////////////////////////////////////////////////////////////
   y_at += 1;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Inventory action 0");
 
@@ -1532,7 +1532,7 @@ void Game::config_keyboard_select (void)
     wid_set_text_lhs(w, true);
     wid_set_text(w, "Inventory action 0");
   }
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
@@ -1548,7 +1548,7 @@ void Game::config_keyboard_select (void)
   // action1
   ///////////////////////////////////////////////////////////////////////
   y_at += 1;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Inventory action 1");
 
@@ -1559,7 +1559,7 @@ void Game::config_keyboard_select (void)
     wid_set_text_lhs(w, true);
     wid_set_text(w, "Inventory action 1");
   }
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
@@ -1575,7 +1575,7 @@ void Game::config_keyboard_select (void)
   // action2
   ///////////////////////////////////////////////////////////////////////
   y_at += 1;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Inventory action 2");
 
@@ -1586,7 +1586,7 @@ void Game::config_keyboard_select (void)
     wid_set_text_lhs(w, true);
     wid_set_text(w, "Inventory action 2");
   }
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
@@ -1602,7 +1602,7 @@ void Game::config_keyboard_select (void)
   // action3
   ///////////////////////////////////////////////////////////////////////
   y_at += 1;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Inventory action 3");
 
@@ -1613,7 +1613,7 @@ void Game::config_keyboard_select (void)
     wid_set_text_lhs(w, true);
     wid_set_text(w, "Inventory action 3");
   }
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
@@ -1629,7 +1629,7 @@ void Game::config_keyboard_select (void)
   // action4
   ///////////////////////////////////////////////////////////////////////
   y_at += 1;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Inventory action 4");
 
@@ -1640,7 +1640,7 @@ void Game::config_keyboard_select (void)
     wid_set_text_lhs(w, true);
     wid_set_text(w, "Inventory action 4");
   }
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
@@ -1656,7 +1656,7 @@ void Game::config_keyboard_select (void)
   // action5
   ///////////////////////////////////////////////////////////////////////
   y_at += 1;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Inventory action 5");
 
@@ -1667,7 +1667,7 @@ void Game::config_keyboard_select (void)
     wid_set_text_lhs(w, true);
     wid_set_text(w, "Inventory action 5");
   }
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
@@ -1683,7 +1683,7 @@ void Game::config_keyboard_select (void)
   // action6
   ///////////////////////////////////////////////////////////////////////
   y_at += 1;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Inventory action 6");
 
@@ -1694,7 +1694,7 @@ void Game::config_keyboard_select (void)
     wid_set_text_lhs(w, true);
     wid_set_text(w, "Inventory action 6");
   }
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
@@ -1710,7 +1710,7 @@ void Game::config_keyboard_select (void)
   // action7
   ///////////////////////////////////////////////////////////////////////
   y_at += 1;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Inventory action 7");
 
@@ -1721,7 +1721,7 @@ void Game::config_keyboard_select (void)
     wid_set_text_lhs(w, true);
     wid_set_text(w, "Inventory action 7");
   }
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
@@ -1737,7 +1737,7 @@ void Game::config_keyboard_select (void)
   // action8
   ///////////////////////////////////////////////////////////////////////
   y_at += 1;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Inventory action 8");
 
@@ -1748,7 +1748,7 @@ void Game::config_keyboard_select (void)
     wid_set_text_lhs(w, true);
     wid_set_text(w, "Inventory action 8");
   }
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
@@ -1764,7 +1764,7 @@ void Game::config_keyboard_select (void)
   // action9
   ///////////////////////////////////////////////////////////////////////
   y_at += 1;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Inventory action 9");
 
@@ -1775,7 +1775,7 @@ void Game::config_keyboard_select (void)
     wid_set_text_lhs(w, true);
     wid_set_text(w, "Inventory action 9");
   }
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
@@ -1796,7 +1796,7 @@ void Game::config_keyboard_select (void)
   // save
   ///////////////////////////////////////////////////////////////////////
   y_at += 1;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "save");
 
@@ -1807,7 +1807,7 @@ void Game::config_keyboard_select (void)
     wid_set_text_lhs(w, true);
     wid_set_text(w, "Save game");
   }
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
@@ -1823,7 +1823,7 @@ void Game::config_keyboard_select (void)
   // load
   ///////////////////////////////////////////////////////////////////////
   y_at += 1;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "load");
 
@@ -1834,7 +1834,7 @@ void Game::config_keyboard_select (void)
     wid_set_text_lhs(w, true);
     wid_set_text(w, "Load game");
   }
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
@@ -1850,7 +1850,7 @@ void Game::config_keyboard_select (void)
   // robot_mode
   ///////////////////////////////////////////////////////////////////////
   y_at += 1;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "robot_mode");
 
@@ -1861,7 +1861,7 @@ void Game::config_keyboard_select (void)
     wid_set_text_lhs(w, true);
     wid_set_text(w, "robot mode");
   }
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
@@ -1882,7 +1882,7 @@ void Game::config_keyboard_select (void)
   // zoom_in
   ///////////////////////////////////////////////////////////////////////
   y_at += 1;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "zoom_in");
 
@@ -1893,7 +1893,7 @@ void Game::config_keyboard_select (void)
     wid_set_text_lhs(w, true);
     wid_set_text(w, "Zoom in");
   }
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
@@ -1909,7 +1909,7 @@ void Game::config_keyboard_select (void)
   // zoom_out
   ///////////////////////////////////////////////////////////////////////
   y_at += 1;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "zoom_out");
 
@@ -1920,7 +1920,7 @@ void Game::config_keyboard_select (void)
     wid_set_text_lhs(w, true);
     wid_set_text(w, "Zoom out");
   }
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
@@ -1941,7 +1941,7 @@ void Game::config_keyboard_select (void)
   // screenshot
   ///////////////////////////////////////////////////////////////////////
   y_at += 1;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Take a screenshot");
 
@@ -1952,7 +1952,7 @@ void Game::config_keyboard_select (void)
     wid_set_text_lhs(w, true);
     wid_set_text(w, "Take a screenshot");
   }
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
@@ -1973,7 +1973,7 @@ void Game::config_keyboard_select (void)
   // quit
   ///////////////////////////////////////////////////////////////////////
   y_at += 1;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "quit");
 
@@ -1984,7 +1984,7 @@ void Game::config_keyboard_select (void)
     wid_set_text_lhs(w, true);
     wid_set_text(w, "Quit");
   }
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
@@ -2000,7 +2000,7 @@ void Game::config_keyboard_select (void)
   // console
   ///////////////////////////////////////////////////////////////////////
   y_at += 1;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "console");
 
@@ -2011,7 +2011,7 @@ void Game::config_keyboard_select (void)
     wid_set_text_lhs(w, true);
     wid_set_text(w, "Debug console (+shift)");
   }
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "console");
 
@@ -2027,7 +2027,7 @@ void Game::config_keyboard_select (void)
   // help
   ///////////////////////////////////////////////////////////////////////
   y_at += 1;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "help");
 
@@ -2038,7 +2038,7 @@ void Game::config_keyboard_select (void)
     wid_set_text_lhs(w, true);
     wid_set_text(w, "This useless help");
   }
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 

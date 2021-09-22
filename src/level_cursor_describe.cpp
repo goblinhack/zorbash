@@ -19,7 +19,7 @@
 #include "my_template.h"
 
 void Level::cursor_describe (void)
-{_
+{ TRACE_AND_INDENT();
   if (game->robot_mode) {
     return;
   }

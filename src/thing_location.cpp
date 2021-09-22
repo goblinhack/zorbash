@@ -22,7 +22,7 @@
 // like they caught on fire
 //
 void Thing::location_check_forced (void)
-{_
+{ TRACE_AND_INDENT();
   //
   // Prevent interactions that might generate things like smoke.
   //
@@ -145,7 +145,7 @@ void Thing::location_check_forced (void)
 }
 
 void Thing::location_check (void)
-{_
+{ TRACE_AND_INDENT();
   if (get_tick_last_location_check() == game->tick_current) {
     return;
   }
@@ -166,9 +166,9 @@ void Thing::location_check (void)
 // again initiated by being set on fire by lava.
 //
 void Thing::location_check_all_things_at (void)
-{_
+{ TRACE_AND_INDENT();
   dbg("Do location checks");
-  FOR_ALL_THINGS_THAT_INTERACT(level, t, mid_at.x, mid_at.y) {_
+  FOR_ALL_THINGS_THAT_INTERACT(level, t, mid_at.x, mid_at.y) { TRACE_AND_INDENT();
     IF_DEBUG2 {
       t->log("Do location check");
     }
@@ -180,9 +180,9 @@ void Thing::location_check_all_things_at (void)
 // Check all things at this location
 //
 void Thing::location_check_forced_all_things_at (void)
-{_
+{ TRACE_AND_INDENT();
   dbg("Do location checks");
-  FOR_ALL_THINGS_THAT_INTERACT(level, t, mid_at.x, mid_at.y) {_
+  FOR_ALL_THINGS_THAT_INTERACT(level, t, mid_at.x, mid_at.y) { TRACE_AND_INDENT();
     IF_DEBUG2 {
       t->log("Do location check");
     }

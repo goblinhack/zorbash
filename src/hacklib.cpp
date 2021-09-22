@@ -6,7 +6,7 @@
 #include "my_sys.h"
 
 static struct tm *getlt (void)
-{_
+{ TRACE_AND_INDENT();
     time_t date;
 
 #if defined(BSD) && !defined(POSIX_TYPES)
@@ -35,7 +35,7 @@ static struct tm *getlt (void)
  * + 11/22 for rounding
  */
 int phase_of_the_moon (void)            /* 0-7, with 0: new, 4: full */
-{_
+{ TRACE_AND_INDENT();
     struct tm *lt = getlt();
     int epact, diy, goldn;
 
@@ -49,61 +49,61 @@ int phase_of_the_moon (void)            /* 0-7, with 0: new, 4: full */
 }
 
 int friday_13th (void)
-{_
+{ TRACE_AND_INDENT();
     struct tm *lt = getlt();
 
     return((int)((lt->tm_wday == 5) /* friday */ && (lt->tm_mday == 13)));
 }
 
 int halloween (void)
-{_
+{ TRACE_AND_INDENT();
     struct tm *lt = getlt();
 
     return((int)((lt->tm_mday == 31) && (lt->tm_mon == 9)));
 }
 
 int night (void)
-{_
+{ TRACE_AND_INDENT();
     int hour = getlt()->tm_hour;
 
     return((hour < 6) || (hour > 21));
 }
 
 int december (void)
-{_
+{ TRACE_AND_INDENT();
     struct tm *lt = getlt();
 
     return((int)(lt->tm_mon == 11));
 }
 
 int xmas (void)
-{_
+{ TRACE_AND_INDENT();
     struct tm *lt = getlt();
 
     return((int)((lt->tm_mday == 25) && (lt->tm_mon == 11)));
 }
 
 int first_of_month (void)
-{_
+{ TRACE_AND_INDENT();
     struct tm *lt = getlt();
 
     return (int)((lt->tm_mday == 1));
 }
 
 int midnight (void)
-{_
+{ TRACE_AND_INDENT();
     return(getlt()->tm_hour == 0);
 }
 
 int midnight_close (void)
-{_
+{ TRACE_AND_INDENT();
     int hour = getlt()->tm_hour;
 
     return (hour > 23);
 }
 
 int getyear (void)
-{_
+{ TRACE_AND_INDENT();
     return(1900 + getlt()->tm_year);
 }
 

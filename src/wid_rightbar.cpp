@@ -24,20 +24,20 @@ Widp wid_item_popup {};
 Widp wid_rightbar {};
 
 void wid_rightbar_fini (void)
-{_
+{ TRACE_AND_INDENT();
   wid_destroy(&wid_item_popup);
   wid_destroy(&wid_rightbar);
 }
 
 bool wid_rightbar_init (void)
-{_
+{ TRACE_AND_INDENT();
   return wid_rightbar_create();
 }
 
 static void wid_rightbar_mouse_over_b (Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
-{_
+{ TRACE_AND_INDENT();
   DBG3("rightbar: Begin over rightbar");
-_
+  TRACE_AND_INDENT();
   if ((game->state == Game::STATE_CHOOSING_TARGET) ||
     (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
     (game->state == Game::STATE_MOVING_ITEMS) ||
@@ -68,9 +68,9 @@ _
 }
 
 static void wid_rightbar_mouse_over_e (Widp w)
-{_
+{ TRACE_AND_INDENT();
   DBG3("rightbar: End over rightbar");
-_
+  TRACE_AND_INDENT();
   if ((game->state == Game::STATE_CHOOSING_TARGET) ||
     (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
     (game->state == Game::STATE_MOVING_ITEMS) ||
@@ -106,7 +106,7 @@ _
 // Create the test
 //
 static bool wid_rightbar_create (void)
-{_
+{ TRACE_AND_INDENT();
   DBG3("Remake rightbar");
 
   auto level = game->level;
@@ -121,7 +121,7 @@ static bool wid_rightbar_create (void)
 
   wid_rightbar_fini();
 
-  {_
+  { TRACE_AND_INDENT();
     point tl = make_point(TERM_WIDTH - UI_SIDEBAR_RIGHT_WIDTH, 0);
     point br = make_point(TERM_WIDTH - 1, 63);
 
@@ -135,7 +135,7 @@ static bool wid_rightbar_create (void)
 
   int y_at = 6;
 
-  {_
+  { TRACE_AND_INDENT();
     auto w = wid_new_plain(wid_rightbar, "level no");
     wid_set_on_mouse_over_b(w, wid_rightbar_mouse_over_b);
     wid_set_on_mouse_over_e(w, wid_rightbar_mouse_over_e);
@@ -154,7 +154,7 @@ static bool wid_rightbar_create (void)
   }
 
   y_at += 1;
-  {_
+  { TRACE_AND_INDENT();
     auto w = wid_new_plain(wid_rightbar, "Seed");
     wid_set_on_mouse_over_b(w, wid_rightbar_mouse_over_b);
     wid_set_on_mouse_over_e(w, wid_rightbar_mouse_over_e);
@@ -169,7 +169,7 @@ static bool wid_rightbar_create (void)
   }
 
   y_at += 2;
-  {_
+  { TRACE_AND_INDENT();
     auto w = wid_new_plain(wid_rightbar, "title name");
     wid_set_on_mouse_over_b(w, wid_rightbar_mouse_over_b);
     wid_set_on_mouse_over_e(w, wid_rightbar_mouse_over_e);
@@ -183,7 +183,7 @@ static bool wid_rightbar_create (void)
 
   y_at += 3;
 
-  {_
+  { TRACE_AND_INDENT();
     auto w = wid_new_plain(wid_rightbar, "gold and keys"); // NOTE this same is referenced elsewhere for particles
     wid_set_on_mouse_over_b(w, wid_rightbar_mouse_over_b);
     wid_set_on_mouse_over_e(w, wid_rightbar_mouse_over_e);
@@ -203,7 +203,7 @@ static bool wid_rightbar_create (void)
   ///////////////////////////////////////////////////////////////////////////
   // Health
   ///////////////////////////////////////////////////////////////////////////
-  {_
+  { TRACE_AND_INDENT();
     auto w = wid_new_plain(wid_rightbar, "Health-bar");
     wid_set_on_mouse_over_b(w, wid_rightbar_mouse_over_b);
     wid_set_on_mouse_over_e(w, wid_rightbar_mouse_over_e);
@@ -219,7 +219,7 @@ static bool wid_rightbar_create (void)
     auto icon = "health_bar_" + std::to_string(i);
     wid_set_fg_tilename(w, icon);
   }
-  {_
+  { TRACE_AND_INDENT();
     auto w = wid_new_plain(wid_rightbar, "health-value");
     wid_set_on_mouse_over_b(w, wid_rightbar_mouse_over_b);
     wid_set_on_mouse_over_e(w, wid_rightbar_mouse_over_e);
@@ -239,7 +239,7 @@ static bool wid_rightbar_create (void)
   ///////////////////////////////////////////////////////////////////////////
   // stamina
   ///////////////////////////////////////////////////////////////////////////
-  {_
+  { TRACE_AND_INDENT();
     auto w = wid_new_plain(wid_rightbar, "stamina-bar");
     wid_set_on_mouse_over_b(w, wid_rightbar_mouse_over_b);
     wid_set_on_mouse_over_e(w, wid_rightbar_mouse_over_e);
@@ -255,7 +255,7 @@ static bool wid_rightbar_create (void)
     auto icon = "health_bar_" + std::to_string(i);
     wid_set_fg_tilename(w, icon);
   }
-  {_
+  { TRACE_AND_INDENT();
     auto w = wid_new_plain(wid_rightbar, "stamina-value");
     wid_set_on_mouse_over_b(w, wid_rightbar_mouse_over_b);
     wid_set_on_mouse_over_e(w, wid_rightbar_mouse_over_e);
@@ -275,7 +275,7 @@ static bool wid_rightbar_create (void)
   ///////////////////////////////////////////////////////////////////////////
   // ATT DEF STR
   ///////////////////////////////////////////////////////////////////////////
-  {_
+  { TRACE_AND_INDENT();
     auto w = wid_new_plain(wid_rightbar, "stats1-value");
     wid_set_on_mouse_over_b(w, wid_rightbar_mouse_over_b);
     wid_set_on_mouse_over_e(w, wid_rightbar_mouse_over_e);
@@ -299,7 +299,7 @@ static bool wid_rightbar_create (void)
   ///////////////////////////////////////////////////////////////////////////
   // CON
   ///////////////////////////////////////////////////////////////////////////
-  {_
+  { TRACE_AND_INDENT();
     auto w = wid_new_plain(wid_rightbar, "stats2-value");
     wid_set_on_mouse_over_b(w, wid_rightbar_mouse_over_b);
     wid_set_on_mouse_over_e(w, wid_rightbar_mouse_over_e);

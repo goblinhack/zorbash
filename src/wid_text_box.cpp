@@ -37,7 +37,7 @@ WidTextBox::WidTextBox (point tl, point br, Widp parent,
   scroll_height(scroll_height_in),
   tl(tl), br(br),
   wid_parent(parent)
-{_
+{ TRACE_AND_INDENT();
   int w = br.x - tl.x;
   int h = br.y - tl.y;
   width = w;
@@ -148,7 +148,7 @@ WidTextBox::WidTextBox (point tl, point br, Widp parent,
 // Get the wid on the bottom of the list/screen.
 //
 void WidTextBox::log_ (std::wstring str, bool lhs, bool rhs)
-{_
+{ TRACE_AND_INDENT();
   Widp tmp {};
   Widp text_wid {};
 
@@ -201,7 +201,7 @@ void WidTextBox::log_ (std::wstring str, bool lhs, bool rhs)
 // Log a message to the text_box
 //
 void WidTextBox::log (std::string s, bool lhs, bool rhs)
-{_
+{ TRACE_AND_INDENT();
   int chars_per_line = wid_get_width(wid_text_area);
 
   auto d = split(s, chars_per_line);
@@ -217,7 +217,7 @@ void WidTextBox::log (std::string s, bool lhs, bool rhs)
 // Log a message to the text_box
 //
 void WidTextBox::log (std::wstring s, bool lhs, bool rhs)
-{_
+{ TRACE_AND_INDENT();
   int chars_per_line = wid_get_width(wid_text_area);
 
   auto d = split(s, chars_per_line);

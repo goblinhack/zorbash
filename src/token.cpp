@@ -12,7 +12,7 @@
 #include "my_token.h"
 
 static tokens_t *tokens_parse (const char *input, tokens_t *tokens)
-{_
+{ TRACE_AND_INDENT();
   const char *in;
   char *out;
   char i;
@@ -148,7 +148,7 @@ static tokens_t *tokens_parse (const char *input, tokens_t *tokens)
 }
 
 static void tokens_compile (tokens_t *tokens)
-{_
+{ TRACE_AND_INDENT();
   uint32_t cnt;
 
   cnt = 0;
@@ -163,7 +163,7 @@ static void tokens_compile (tokens_t *tokens)
 }
 
 void tokens_print (tokens_t *tokens)
-{_
+{ TRACE_AND_INDENT();
   uint32_t cnt;
 
   printf("tokens %u: ", tokens->cnt);
@@ -178,7 +178,7 @@ void tokens_print (tokens_t *tokens)
 }
 
 void tokens_print_to (tokens_t *tokens, char *output, int32_t output_size)
-{_
+{ TRACE_AND_INDENT();
   uint32_t cnt;
 
   cnt = 0;
@@ -195,7 +195,7 @@ void tokens_print_to (tokens_t *tokens, char *output, int32_t output_size)
 }
 
 void tokens_test (void)
-{_
+{ TRACE_AND_INDENT();
   tokens_t tmp;
 
   tokens_print(tokens_tostring("s  ", &tmp));
@@ -204,7 +204,7 @@ void tokens_test (void)
 }
 
 tokens_t *tokens_tostring (const char *input, tokens_t *tokens)
-{_
+{ TRACE_AND_INDENT();
   tokens_t *t;
 
   t = tokens_parse(input, tokens);

@@ -19,7 +19,7 @@
 // Roll the dice and see if we do anything
 //
 bool Thing::idle_check (void)
-{_
+{ TRACE_AND_INDENT();
   if (!std::empty(get_on_idle_dice_str())) {
     auto roll = get_idle_tick();
     if (game->tick_current - get_tick_last_did_something() >= (unsigned int)roll) {

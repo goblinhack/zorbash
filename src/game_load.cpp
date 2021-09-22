@@ -50,7 +50,7 @@ std::array<bool, UI_WID_SAVE_SLOTS> slot_valid;
 // Save timestamps as a delta we can restore.
 //
 static ts_t load (ts_t T)
-{_
+{ TRACE_AND_INDENT();
   if (!T) {
     return (0);
   }
@@ -58,7 +58,7 @@ static ts_t load (ts_t T)
 }
 
 std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
-{_
+{ TRACE_AND_INDENT();
   /////////////////////////////////////////////////////////////////////////
   // Keep these sorted alphabetically to make it easier to see additions
   // and always update game_load.cpp and game_save.cpp
@@ -161,7 +161,7 @@ std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
 }
 
 std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
-{_
+{ TRACE_AND_INDENT();
   auto start = in.tellg();
 
   READ_MAGIC("thing begin", THING_MAGIC_BEGIN + (int) sizeof(Thing));
@@ -344,7 +344,7 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
 }
 
 std::istream& operator>>(std::istream &in, Bits<Level * &> my)
-{_
+{ TRACE_AND_INDENT();
   auto l = my.t;
 
   l->player = nullptr;
@@ -479,7 +479,7 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     }
   }
 #endif
-_
+  TRACE_AND_INDENT();
   //
   // Operate on a copy, not live data that might change as we add things
   //
@@ -563,7 +563,7 @@ _
 }
 
 std::istream& operator>>(std::istream &in, Bits<class World &> my)
-{_
+{ TRACE_AND_INDENT();
   my.t.levels = {};
   my.t.all_thing_ptrs = {};
 
@@ -607,7 +607,7 @@ std::istream& operator>>(std::istream &in, Bits<class World &> my)
 }
 
 std::istream& operator>>(std::istream &in, Bits<Config &> my)
-{_
+{ TRACE_AND_INDENT();
   /* uint32_t           header_size                  */ in >> bits(my.t.header_size                  );
   if (my.t.header_size != sizeof(Config)) {
     game_load_error = "bad save file header version";
@@ -724,7 +724,7 @@ std::istream& operator>>(std::istream &in, Bits<Config &> my)
 }
 
 std::istream& operator>>(std::istream &in, Bits<class Game &> my)
-{_
+{ TRACE_AND_INDENT();
   in >> bits(my.t.version);
   if (my.t.version != MYVER) {
     game_load_error =
@@ -781,7 +781,7 @@ std::istream& operator>>(std::istream &in, Bits<class Game &> my)
 // binary mode is only for switching off newline translation
 // ios::ate, open at end
 std::vector<char> read_file (const std::string filename)
-{_
+{ TRACE_AND_INDENT();
   std::ifstream ifs(filename, std::ios::in | std::ios::binary | std::ios::ate);
   if (ifs.is_open()) {
     ifs.unsetf(std::ios::skipws);
@@ -801,7 +801,7 @@ std::vector<char> read_file (const std::string filename)
 static std::vector<char> read_lzo_file (const std::string filename,
                                         lzo_uint *uncompressed_sz,
                                         uint32_t *cs)
-{_
+{ TRACE_AND_INDENT();
   std::ifstream ifs(filename,
             std::ios::in | std::ios::binary | std::ios::ate);
   if (ifs.is_open()) {
@@ -828,7 +828,7 @@ static std::vector<char> read_lzo_file (const std::string filename,
 }
 
 uint32_t csum (char *mem, uint32_t len)
-{_
+{ TRACE_AND_INDENT();
   uint32_t ret = 0;
   while (len--) {
     ret <<= 1;
@@ -840,7 +840,7 @@ uint32_t csum (char *mem, uint32_t len)
 
 bool
 Game::load (std::string file_to_load, class Game &target)
-{_
+{ TRACE_AND_INDENT();
   game_load_error = "";
 
   //
@@ -924,7 +924,7 @@ Game::load (std::string file_to_load, class Game &target)
 
 void
 Game::load_config (void)
-{_
+{ TRACE_AND_INDENT();
   auto filename = saved_dir + "config";
   std::ifstream in(filename);
   if (in.is_open()) {
@@ -935,7 +935,7 @@ Game::load_config (void)
 
 void
 Game::load (void)
-{_
+{ TRACE_AND_INDENT();
   LOG("-");
   CON("DGN: Loading %s", save_file.c_str());
   LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
@@ -955,7 +955,7 @@ Game::load (void)
 
 void
 Game::load (int slot)
-{_
+{ TRACE_AND_INDENT();
   if (slot < 0) {
     return;
   }
@@ -994,7 +994,7 @@ Game::load (int slot)
 
 void
 Game::load_snapshot (void)
-{_
+{ TRACE_AND_INDENT();
   game->fini();
 
   auto save_file = saved_dir + "saved-snapshot";
@@ -1019,14 +1019,14 @@ Game::load_snapshot (void)
 }
 
 void wid_load_destroy (void)
-{_
+{ TRACE_AND_INDENT();
   delete wid_load;
   wid_load = nullptr;
   game->change_state(Game::STATE_NORMAL);
 }
 
 static uint8_t wid_load_key_up (Widp w, const struct SDL_Keysym *key)
-{_
+{ TRACE_AND_INDENT();
   if (sdl_shift_held) {
     if (key->scancode == (SDL_Scancode)game->config.key_console) {
       return false;
@@ -1061,7 +1061,7 @@ static uint8_t wid_load_key_up (Widp w, const struct SDL_Keysym *key)
             return true;
           }
           case 'b':
-          case SDLK_ESCAPE: {_
+          case SDLK_ESCAPE: { TRACE_AND_INDENT();
             CON("PLAYER: Load game cancelled");
             wid_load_destroy();
             return true;
@@ -1075,7 +1075,7 @@ static uint8_t wid_load_key_up (Widp w, const struct SDL_Keysym *key)
 }
 
 static uint8_t wid_load_key_down (Widp w, const struct SDL_Keysym *key)
-{_
+{ TRACE_AND_INDENT();
   if (sdl_shift_held) {
     if (key->scancode == (SDL_Scancode)game->config.key_console) {
       return false;
@@ -1086,7 +1086,7 @@ static uint8_t wid_load_key_down (Widp w, const struct SDL_Keysym *key)
 }
 
 static uint8_t wid_load_mouse_up (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   auto slot = wid_get_int_context(w);
   game->load(slot);
   wid_load_destroy();
@@ -1094,14 +1094,14 @@ static uint8_t wid_load_mouse_up (Widp w, int32_t x, int32_t y, uint32_t button)
 }
 
 static uint8_t wid_load_saved_snapshot (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   game->load_snapshot();
   wid_load_destroy();
   return true;
 }
 
 void Game::load_select (void)
-{_
+{ TRACE_AND_INDENT();
   CON("USR: Loading a saved game, destroy old");
 
   if (wid_load) {

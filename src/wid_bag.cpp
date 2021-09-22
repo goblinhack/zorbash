@@ -37,7 +37,7 @@ static uint8_t wid_bag_item_key_down(Widp w, const struct SDL_Keysym *key);
 static void wid_bag_tick(Widp w);
 
 static void wid_bag_add_items (Widp wid_bag_container, Thingp bag)
-{_
+{ TRACE_AND_INDENT();
   bag->log("Empty bag");
   for (auto item : wid_find_all_containing(wid_bag_container, "wid_bag item")) {
     bag->log("+ destroy item %s", wid_get_name(item).c_str());
@@ -118,9 +118,9 @@ static void wid_bag_add_items (Widp wid_bag_container, Thingp bag)
 }
 
 uint8_t wid_in_transit_item_place (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   DBG3("Place in transit item");
-_
+  TRACE_AND_INDENT();
   auto level = game->level;
   if (!level) {
     return false;
@@ -225,9 +225,9 @@ _
 }
 
 uint8_t wid_in_transit_item_drop (void)
-{_
+{ TRACE_AND_INDENT();
   DBG3("Drop in transit item");
-_
+  TRACE_AND_INDENT();
   if (!game->in_transit_item) {
     DBG3("No in transit item");
     return false;
@@ -258,9 +258,9 @@ _
 }
 
 static uint8_t wid_bag_item_mouse_down (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   DBG3("Mouse down, pickup up an item and make it in transit");
-_
+  TRACE_AND_INDENT();
   if (game->in_transit_item) {
     return false;
   }
@@ -276,7 +276,7 @@ _
 }
 
 bool Game::wid_bag_move_item (Widp w, Thingp t)
-{_
+{ TRACE_AND_INDENT();
   DBG3("Chosen to move item");
 
   if (!t) {
@@ -303,7 +303,7 @@ bool Game::wid_bag_move_item (Widp w, Thingp t)
       }
     }
   }
-_
+  TRACE_AND_INDENT();
   for (auto b : game->bag_secondary) {
     for (auto w : wid_find_all_containing(b->wid_bag_container, "wid_bag item")) {
       t->log("+ current item %s", wid_get_name(w).c_str());
@@ -396,9 +396,9 @@ static void wid_bag_item_mouse_over_e (Widp w)
 }
 
 static uint8_t wid_bag_item_key_down (Widp w, const struct SDL_Keysym *key)
-{_
+{ TRACE_AND_INDENT();
   DBG3("Bag item key down");
-_
+  TRACE_AND_INDENT();
   if ((game->state == Game::STATE_CHOOSING_TARGET) ||
     (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
     (game->state == Game::STATE_COLLECTING_ITEMS) ||
@@ -430,7 +430,7 @@ _
   if (game->state == Game::STATE_COLLECTING_ITEMS) {
     if (key->scancode == SDL_SCANCODE_ESCAPE) {
       DBG3("Escape pressed, clear collecting items state");
-_
+  TRACE_AND_INDENT();
       game->change_state(Game::STATE_NORMAL);
       return true;
     }
@@ -538,7 +538,7 @@ _
 
   if (key->scancode == (SDL_Scancode)game->config.key_drop) {
     DBG3("Pressed drop key");
-_
+  TRACE_AND_INDENT();
     if (player->drop(what)) {
       game->tick_begin("drop");
     }
@@ -549,7 +549,7 @@ _
 
   if (key->scancode == (SDL_Scancode)game->config.key_eat) {
     DBG3("Pressed eat key");
-_
+  TRACE_AND_INDENT();
     player->use(what);
     if (game->state == Game::STATE_MOVING_ITEMS) {
       game->request_remake_inventory = true;
@@ -570,7 +570,7 @@ _
 
   if (key->scancode == (SDL_Scancode)game->config.key_throw) {
     DBG3("Pressed throw key");
-_
+  TRACE_AND_INDENT();
     game->change_state(Game::STATE_NORMAL);
     wid_thing_info_fini(); // To remove bag or other info
     player->throw_item_choose_target(what);
@@ -591,7 +591,7 @@ static void wid_bag_tick (Widp w)
 WidBag::~WidBag()
 {
   bag->log("Destroy bag");
-_
+  TRACE_AND_INDENT();
   wid_destroy(&wid_bag_container);
   wid_destroy(&wid_bag_title);
 
@@ -602,10 +602,10 @@ _
 }
 
 WidBag::WidBag (Thingp bag_, bool highlight, point tl, point br, const std::string &title) : tl(tl), br(br)
-{_
+{ TRACE_AND_INDENT();
   bag = bag_;
   bag->log("Create bag");
-_
+  TRACE_AND_INDENT();
 
   {
     wid_bag_container = wid_new_square_window("wid_bag " + title);

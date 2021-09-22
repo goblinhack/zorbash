@@ -14,14 +14,14 @@
 #include "my_ptrcheck.h"
 
 bool Thing::steal_treasure_from (Thingp it)
-{_
+{ TRACE_AND_INDENT();
   if ((int)pcg_random_range(0, 1000) >
       tp()->is_steal_item_chance_d1000()) {
     return false;
   }
 
   dbg("Steal treasure from %s", it->to_string().c_str());
-_
+  TRACE_AND_INDENT();
   auto cands = get_treasure_list();
   if (!cands.size()) {
     dbg("No, nothing to steal");
@@ -47,14 +47,14 @@ _
 }
 
 bool Thing::steal_item_from (Thingp it)
-{_
+{ TRACE_AND_INDENT();
   dbg("Try to steal item from %s?", it->to_string().c_str());
   if ((int)pcg_random_range(0, 1000) >
       tp()->is_steal_item_chance_d1000()) {
     dbg("No");
     return false;
   }
-_
+  TRACE_AND_INDENT();
   dbg("Yes, steal out of this list:");
   auto cands = it->get_item_list();
   if (!cands.size()) {

@@ -122,7 +122,7 @@ color GREENYELLOW;
 #endif
 
 void color_init2 (void)
-{_
+{ TRACE_AND_INDENT();
 #if 0
   color_set("gray10", &GRAY10, 26, 26, 26, 255);
   color_set("gray11", &GRAY11, 28, 28, 28, 255);

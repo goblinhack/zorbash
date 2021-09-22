@@ -20,7 +20,7 @@
 // Python callback upon being tick
 //
 bool Thing::on_tick (void)
-{_
+{ TRACE_AND_INDENT();
   auto on_tick = tp()->on_tick_do();
   if (std::empty(on_tick)) {
     return false;
@@ -54,7 +54,7 @@ void Thing::update_tick (void)
 }
 
 void Thing::achieve_goals_in_life (void)
-{_
+{ TRACE_AND_INDENT();
   if (is_changing_level ||
     is_falling ||
     is_waiting_to_ascend_dungeon ||
@@ -186,7 +186,7 @@ void Thing::achieve_goals_in_life (void)
 }
 
 void Thing::achieve_goals_in_death (void)
-{_
+{ TRACE_AND_INDENT();
   dbg("Achieve death goals at tick %u", game->tick_current);
 
   resurrect_tick();
@@ -198,7 +198,7 @@ void Thing::achieve_goals_in_death (void)
 // Returns true if we attacked something
 //
 bool Thing::collision_check_do (void)
-{_
+{ TRACE_AND_INDENT();
   if (!tp()->collision_check()) {
     return false;
   }
@@ -218,11 +218,11 @@ bool Thing::collision_check_do (void)
 }
 
 void Thing::tick (void)
-{_
+{ TRACE_AND_INDENT();
   IF_DEBUG4 {
     dbg("Tick");
   }
-_
+  TRACE_AND_INDENT();
   update_interpolated_position();
 
   if (unlikely(is_dead)) {

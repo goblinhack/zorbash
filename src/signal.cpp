@@ -15,7 +15,7 @@
 #include "my_traceback.h"
 
 void callstack_dump (void)
-{_
+{ TRACE_AND_INDENT();
   IF_NODEBUG2 {
     return;
   }
@@ -128,7 +128,7 @@ debug_crash_handler(int sig)
 }
 
 void segv_handler (int sig)
-{_
+{ TRACE_AND_INDENT();
   static int crashed;
 
   if (crashed) {
@@ -150,7 +150,7 @@ void segv_handler (int sig)
 }
 
 void ctrlc_handler (int sig)
-{_
+{ TRACE_AND_INDENT();
   fprintf(MY_STDERR, "Interrupted!!!");
   traceback_dump();
   DIE_CLEAN("Interrupted");

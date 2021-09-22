@@ -38,7 +38,7 @@ static std::string music_current;
 bool music_init_done;
 
 bool music_init (void)
-{_
+{ TRACE_AND_INDENT();
   //
   // MP3 is a pain to use, use OGG instead
   // int flags = MIX_INIT_OGG|MIX_INIT_MP3;
@@ -54,7 +54,7 @@ bool music_init (void)
 }
 
 void music_fini (void)
-{_
+{ TRACE_AND_INDENT();
   if (music_init_done) {
     music_init_done = false;
 
@@ -71,7 +71,7 @@ void music_fini (void)
 
 bool music_load (uint32_t rate, const std::string &file,
          const std::string &name_alias)
-{_
+{ TRACE_AND_INDENT();
   if (name_alias == "") {
     auto m = music_find(name_alias);
     if (m) {
@@ -119,19 +119,19 @@ bool music_load (uint32_t rate, const std::string &file,
  * Find an existing pice of music.
  */
 bool music_find (const std::string &name_alias)
-{_
+{ TRACE_AND_INDENT();
   auto result = all_music.find(name_alias);
   return result != all_music.end();
 }
 
 void music_update_volume (void)
-{_
+{ TRACE_AND_INDENT();
   Mix_VolumeMusic(game->config.music_volume);
   SDL_ClearError();
 }
 
 bool music_play (const std::string &name)
-{_
+{ TRACE_AND_INDENT();
   if (name == music_current) {
     return true;
   }
@@ -157,7 +157,7 @@ bool music_play (const std::string &name)
 
 #if 0
 void music_play_game (uint32_t level_no)
-{_
+{ TRACE_AND_INDENT();
   static std::string music[] = {
     "data/music/Faith.ogg",
   };
@@ -172,33 +172,33 @@ void music_play_game (uint32_t level_no)
 }
 
 void music_play_death (void)
-{_
+{ TRACE_AND_INDENT();
   music_play("data/music/Faith.ogg", "death", 44100 );
 }
 
 void music_play_demo (void)
-{_
+{ TRACE_AND_INDENT();
   music_play("data/music/Faith.ogg", "battle", 44100 );
 }
 
 void music_play_dead (void)
-{_
+{ TRACE_AND_INDENT();
   music_play("data/music/Faith.ogg", "dead", 44100 );
 }
 
 void music_play_game_over (void)
-{_
+{ TRACE_AND_INDENT();
   music_play("data/music/Faith.ogg", "game over", 44100 );
 }
 #endif
 
 void music_play_intro (void)
-{_
+{ TRACE_AND_INDENT();
   music_play("intro");
 }
 
 void music_halt (void)
-{_
+{ TRACE_AND_INDENT();
   music_current = "";
 
   Mix_FadeOutMusic(1500);

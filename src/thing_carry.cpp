@@ -14,7 +14,7 @@
 #include "my_ptrcheck.h"
 
 bool Thing::carry (Thingp item)
-{_
+{ TRACE_AND_INDENT();
   if (!item) {
     err("No thing to carry");
     return false;
@@ -182,17 +182,17 @@ bool Thing::carry (Thingp item)
 }
 
 bool Thing::try_to_carry (Thingp item)
-{_
+{ TRACE_AND_INDENT();
   dbg("Try to carry: %s", item->to_string().c_str());
   return carry(item);
 }
 
 std::list<Thingp> Thing::anything_to_carry_at (fpoint at)
-{_
+{ TRACE_AND_INDENT();
   std::vector<std::pair<Thingp, int>> items;
 
   dbg("Anything to carry at %d,%d", (int)at.x, (int)at.y);
-_
+  TRACE_AND_INDENT();
   //
   // Can't pick things up whilst being swallowed!
   //
@@ -273,7 +273,7 @@ end:
 }
 
 std::list<Thingp> Thing::anything_to_carry (void)
-{_
+{ TRACE_AND_INDENT();
   return anything_to_carry_at(mid_at);
 }
 
@@ -337,7 +337,7 @@ void Thing::try_to_carry (const std::list<Thingp> &items)
 // Returns true if we tried to collect or drop something to make space
 //
 bool Thing::try_to_carry_if_worthwhile_dropping_items_if_needed (Thingp item)
-{_
+{ TRACE_AND_INDENT();
   Thingp would_need_to_drop = nullptr;
 
   if (worth_collecting(item, &would_need_to_drop) < 0) {

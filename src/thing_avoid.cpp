@@ -18,7 +18,7 @@
 #include "my_vector_bounds_check.h"
 
 bool Tp::will_avoid_hazard (Levelp level, point p) const
-{_
+{ TRACE_AND_INDENT();
   if (level->is_shallow_water(p) || level->is_deep_water(p)) {
     if (hates_water()) {
       return true;
@@ -60,7 +60,7 @@ bool Tp::will_avoid_hazard (Levelp level, point p) const
 }
 
 bool Thing::will_avoid_hazard (const point &p)
-{_
+{ TRACE_AND_INDENT();
   if (level->is_shallow_water(p) || level->is_deep_water(p)) {
     if (hates_water()) {
       return true;
@@ -106,7 +106,7 @@ bool Thing::will_avoid_hazard (const point &p)
 }
 
 bool Thing::will_avoid_hazard (const Thingp itp)
-{_
+{ TRACE_AND_INDENT();
   auto me = tp();
   auto it = itp->tp();
 
@@ -203,7 +203,7 @@ bool Thing::will_avoid_hazard (const Thingp itp)
 }
 
 bool Thing::will_avoid_monst (const Thingp it)
-{_
+{ TRACE_AND_INDENT();
   auto me = tp();
 
   if (me->is_monst()) {
@@ -251,7 +251,7 @@ bool Thing::will_avoid_monst (const Thingp it)
 }
 
 bool Thing::will_avoid_monst (const point &p)
-{_
+{ TRACE_AND_INDENT();
   auto me = tp();
 
   FOR_ALL_THINGS_THAT_INTERACT(level, it, mid_at.x, mid_at.y) {

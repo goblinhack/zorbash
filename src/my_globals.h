@@ -61,31 +61,31 @@ extern int TILES_DOWN;
 #define NODEBUG4 (likely(!g_opt_debug4))
 #define NODEBUG5 (likely(!g_opt_debug5))
 
-#define IF_DEBUG1 _trace_no_indent_ if (DEBUG1)
-#define IF_DEBUG2 _trace_no_indent_ if (DEBUG2)
-#define IF_DEBUG3 _trace_no_indent_ if (DEBUG3)
-#define IF_DEBUG4 _trace_no_indent_ if (DEBUG4)
-#define IF_DEBUG5 _trace_no_indent_ if (DEBUG5)
+#define IF_DEBUG1 TRACE_NO_INDENT(); if (DEBUG1)
+#define IF_DEBUG2 TRACE_NO_INDENT(); if (DEBUG2)
+#define IF_DEBUG3 TRACE_NO_INDENT(); if (DEBUG3)
+#define IF_DEBUG4 TRACE_NO_INDENT(); if (DEBUG4)
+#define IF_DEBUG5 TRACE_NO_INDENT(); if (DEBUG5)
 
-#define IF_NODEBUG1 _trace_no_indent_ if (NODEBUG1)
-#define IF_NODEBUG2 _trace_no_indent_ if (NODEBUG2)
-#define IF_NODEBUG3 _trace_no_indent_ if (NODEBUG3)
-#define IF_NODEBUG4 _trace_no_indent_ if (NODEBUG4)
-#define IF_NODEBUG5 _trace_no_indent_ if (NODEBUG5)
+#define IF_NODEBUG1 TRACE_NO_INDENT(); if (NODEBUG1)
+#define IF_NODEBUG2 TRACE_NO_INDENT(); if (NODEBUG2)
+#define IF_NODEBUG3 TRACE_NO_INDENT(); if (NODEBUG3)
+#define IF_NODEBUG4 TRACE_NO_INDENT(); if (NODEBUG4)
+#define IF_NODEBUG5 TRACE_NO_INDENT(); if (NODEBUG5)
 
-#define ERR  _trace_no_indent_ myerr
+#define ERR  TRACE_NO_INDENT(); myerr
 
-#define dbg  _trace_no_indent_ if (DEBUG1) log
-#define dbg2 _trace_no_indent_ if (DEBUG2) log
-#define dbg3 _trace_no_indent_ if (DEBUG3) log
-#define dbg4 _trace_no_indent_ if (DEBUG4) log
-#define dbg5 _trace_no_indent_ if (DEBUG5) log
+#define dbg  TRACE_NO_INDENT(); if (DEBUG1) log
+#define dbg2 TRACE_NO_INDENT(); if (DEBUG2) log
+#define dbg3 TRACE_NO_INDENT(); if (DEBUG3) log
+#define dbg4 TRACE_NO_INDENT(); if (DEBUG4) log
+#define dbg5 TRACE_NO_INDENT(); if (DEBUG5) log
 
-#define DBG  _trace_no_indent_ if (DEBUG1) LOG
-#define DBG2 _trace_no_indent_ if (DEBUG2) LOG
-#define DBG3 _trace_no_indent_ if (DEBUG3) LOG
-#define DBG4 _trace_no_indent_ if (DEBUG4) LOG
-#define DBG5 _trace_no_indent_ if (DEBUG5) LOG
+#define DBG  TRACE_NO_INDENT(); if (DEBUG1) LOG
+#define DBG2 TRACE_NO_INDENT(); if (DEBUG2) LOG
+#define DBG3 TRACE_NO_INDENT(); if (DEBUG3) LOG
+#define DBG4 TRACE_NO_INDENT(); if (DEBUG4) LOG
+#define DBG5 TRACE_NO_INDENT(); if (DEBUG5) LOG
 
 //
 // Used to fill in gaps in log depth

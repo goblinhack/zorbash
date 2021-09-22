@@ -16,7 +16,7 @@
 #include "my_array_bounds_check.h"
 
 bool Thing::thing_sound_play (const std::string &alias)
-{_
+{ TRACE_AND_INDENT();
   //
   // No sound if in a locked room
   //
@@ -72,7 +72,7 @@ bool Thing::thing_sound_play (const std::string &alias)
 }
 
 bool Thing::thing_sound_play_channel (int channel, const std::string &alias)
-{_
+{ TRACE_AND_INDENT();
   auto level = game->level;
   if (!level) {
     return false;

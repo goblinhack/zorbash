@@ -20,7 +20,7 @@
 #include "my_ptrcheck.h"
 
 std::vector<Lightp> &Thing::get_light (void)
-{_
+{ TRACE_AND_INDENT();
   if (monstp) {
     verify(monstp);
     return (monstp->light);
@@ -31,7 +31,7 @@ std::vector<Lightp> &Thing::get_light (void)
 }
 
 void Thing::new_light (point offset, int strength, color col, int fbo)
-{_
+{ TRACE_AND_INDENT();
   new_monst();
   auto l = light_new(this, offset, strength, col, fbo);
   monstp->light.push_back(l);
@@ -40,7 +40,7 @@ void Thing::new_light (point offset, int strength, color col, int fbo)
 }
 
 void Thing::new_light (point offset, int strength)
-{_
+{ TRACE_AND_INDENT();
   new_monst();
   auto l = light_new(this, offset, strength);
   monstp->light.push_back(l);
@@ -48,7 +48,7 @@ void Thing::new_light (point offset, int strength)
 }
 
 void Thing::delete_lights (void)
-{_
+{ TRACE_AND_INDENT();
   if (monstp) {
     verify(monstp);
     for (auto& l : monstp->light) {
@@ -59,7 +59,7 @@ void Thing::delete_lights (void)
 }
 
 void Thing::init_lights (void)
-{_
+{ TRACE_AND_INDENT();
   if (unlikely(is_player())) {
     if (level->player && (level->player != this)) {
       DIE("Player exists in multiple places on map, %f, %f and %f, %f",
@@ -147,7 +147,7 @@ void Thing::init_lights (void)
 }
 
 void Thing::light_update_strength (void)
-{_
+{ TRACE_AND_INDENT();
   auto str = get_light_strength();
   for (auto l : get_light()) {
     if (l->ray_cast_only) {

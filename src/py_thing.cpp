@@ -17,7 +17,7 @@
 
 #define THING_BODY_SET_INT(__func__, __api__)                                                       \
 PyObject *__func__ (PyObject *obj, PyObject *args, PyObject *keywds)                                \
-{_	                                                                                                \
+{ TRACE_AND_INDENT();	                                                                                                \
   uint32_t id = 0;	                                                                                \
   uint32_t value = 0;	                                                                              \
   static char *kwlist[] = {(char*)"id", (char*)"value", 0};	                                        \
@@ -39,7 +39,7 @@ PyObject *__func__ (PyObject *obj, PyObject *args, PyObject *keywds)            
 
 #define THING_BODY_GET_INT(__func__, __api__)                                                       \
 PyObject *__func__ (PyObject *obj, PyObject *args, PyObject *keywds)                                \
-{_	                                                                                                \
+{ TRACE_AND_INDENT();	                                                                                                \
   uint32_t id = 0;	                                                                                \
   static char *kwlist[] = {(char*)"id", 0};	                                                        \
                                                                                                     \
@@ -60,7 +60,7 @@ PyObject *__func__ (PyObject *obj, PyObject *args, PyObject *keywds)            
 
 #define THING_BODY_GET_STRING(__func__, __api__)                                                    \
 PyObject *__func__ (PyObject *obj, PyObject *args, PyObject *keywds)                                \
-{_	                                                                                                \
+{ TRACE_AND_INDENT();	                                                                                                \
   uint32_t id = 0;	                                                                                \
   static char *kwlist[] = {(char*)"id", 0};	                                                        \
                                                                                                     \
@@ -81,7 +81,7 @@ PyObject *__func__ (PyObject *obj, PyObject *args, PyObject *keywds)            
 
 #define THING_BODY_SET_THING(__func__, __api__)                                                     \
 PyObject *__func__ (PyObject *obj, PyObject *args, PyObject *keywds)                                \
-{_	                                                                                                \
+{ TRACE_AND_INDENT();	                                                                                                \
   uint32_t id = 0;	                                                                                \
   uint32_t oid = 0;	                                                                                \
   static char *kwlist[] = {(char*)"id", (char*)"oid", 0};	                                          \
@@ -119,7 +119,7 @@ PyObject *__func__ (PyObject *obj, PyObject *args, PyObject *keywds)            
 
 #define THING_BODY_GET_THING(__func__, __api__)                                                     \
 PyObject *__func__ (PyObject *obj, PyObject *args, PyObject *keywds)                                \
-{_	                                                                                                \
+{ TRACE_AND_INDENT();	                                                                                                \
   uint32_t id = 0;	                                                                                \
   static char *kwlist[] = {(char*)"id", 0};	                                                        \
                                                                                                     \
@@ -145,7 +145,7 @@ PyObject *__func__ (PyObject *obj, PyObject *args, PyObject *keywds)            
 
 #define THING_BODY_GET_BOOL(__func__, __api__)                                                      \
 PyObject *__func__ (PyObject *obj, PyObject *args, PyObject *keywds)                                \
-{_	                                                                                                \
+{ TRACE_AND_INDENT();	                                                                                                \
   uint32_t id = 0;	                                                                                \
   static char *kwlist[] = {(char*)"id", 0};	                                                        \
                                                                                                     \
@@ -173,7 +173,7 @@ PyObject *__func__ (PyObject *obj, PyObject *args, PyObject *keywds)            
 }
 
 PyObject *thing_get_coords (PyObject *obj, PyObject *args, PyObject *keywds)
-{_	
+{ TRACE_AND_INDENT();	
   uint32_t id = 0;	
   static char *kwlist[] = {(char*)"id", 0};	
 
@@ -216,7 +216,7 @@ PyObject *thing_get_coords (PyObject *obj, PyObject *args, PyObject *keywds)
 }
 
 PyObject *thing_hit (PyObject *obj, PyObject *args, PyObject *keywds)
-{_	
+{ TRACE_AND_INDENT();	
   uint32_t hitter_id = 0;	
   uint32_t target_id = 0;	
   static char *kwlist[] = {(char*)"hitter", (char*)"target", 0};	
@@ -258,7 +258,7 @@ PyObject *thing_hit (PyObject *obj, PyObject *args, PyObject *keywds)
 }
 
 PyObject *thing_possible_to_attack (PyObject *obj, PyObject *args, PyObject *keywds)
-{_	
+{ TRACE_AND_INDENT();	
   uint32_t hitter_id = 0;	
   uint32_t target_id = 0;	
   static char *kwlist[] = {(char*)"hitter", (char*)"target", 0};	
@@ -305,7 +305,7 @@ PyObject *thing_possible_to_attack (PyObject *obj, PyObject *args, PyObject *key
 }
 
 PyObject *thing_fire_at (PyObject *obj, PyObject *args, PyObject *keywds)
-{_	
+{ TRACE_AND_INDENT();	
   uint32_t owner_id = 0;	
   char *item = nullptr;
   uint32_t target_id = 0;	
@@ -366,7 +366,7 @@ PyObject *thing_fire_at (PyObject *obj, PyObject *args, PyObject *keywds)
 }
 
 PyObject *thing_killed_by (PyObject *obj, PyObject *args, PyObject *keywds)
-{_	
+{ TRACE_AND_INDENT();	
   uint32_t owner_id = 0;	
   char *reason = nullptr;
   uint32_t killer_id = 0;	
@@ -411,7 +411,7 @@ PyObject *thing_killed_by (PyObject *obj, PyObject *args, PyObject *keywds)
 }
 
 PyObject *thing_killed (PyObject *obj, PyObject *args, PyObject *keywds)
-{_	
+{ TRACE_AND_INDENT();	
   uint32_t owner_id = 0;	
   char *reason = nullptr;
   static char *kwlist[] = {(char*)"owner", (char*)"reason", 0};	
@@ -443,7 +443,7 @@ PyObject *thing_killed (PyObject *obj, PyObject *args, PyObject *keywds)
 }
 
 PyObject *thing_msg (PyObject *obj, PyObject *args, PyObject *keywds)
-{_	
+{ TRACE_AND_INDENT();	
   uint32_t owner_id = 0;	
   char *msg = nullptr;
   static char *kwlist[] = {(char*)"owner", (char*)"msg", 0};	
@@ -480,7 +480,7 @@ PyObject *thing_msg (PyObject *obj, PyObject *args, PyObject *keywds)
 }
 
 PyObject *thing_sound_play_ (PyObject *obj, PyObject *args, PyObject *keywds)
-{_
+{ TRACE_AND_INDENT();
   char *name = 0;
   uint32_t owner_id = 0;	
 
@@ -518,7 +518,7 @@ PyObject *thing_sound_play_ (PyObject *obj, PyObject *args, PyObject *keywds)
 }
 
 PyObject *thing_sound_play_channel_ (PyObject *obj, PyObject *args, PyObject *keywds)
-{_
+{ TRACE_AND_INDENT();
   uint32_t owner_id = 0;	
   char *name = 0;
   int channel = 0;

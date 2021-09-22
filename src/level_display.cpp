@@ -20,7 +20,7 @@
 #include "my_sdl.h"
 
 void Level::display (void)
-{_
+{ TRACE_AND_INDENT();
   bool shake = screen_shake_begin();
   display_map();
   if (shake) {
@@ -75,7 +75,7 @@ void Level::display (void)
 }
 
 void Level::update (void)
-{_
+{ TRACE_AND_INDENT();
   if (map_changed) {
     map_changed = false;
     update_map();
@@ -88,7 +88,7 @@ void Level::update (void)
 }
 
 void Level::display_map_bg_things (void)
-{_
+{ TRACE_AND_INDENT();
   auto fbo = FBO_FULLMAP;
   gl_enter_2d_mode(MAP_WIDTH * TILE_WIDTH, MAP_HEIGHT * TILE_HEIGHT);
 
@@ -148,7 +148,7 @@ void Level::display_map_bg_things (void)
 void Level::display_map_things (int fbo,
                                 const int16_t minx, const int16_t miny,
                                 const int16_t maxx, const int16_t maxy)
-{_
+{ TRACE_AND_INDENT();
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   glcolor(WHITE);
 
@@ -215,7 +215,7 @@ void Level::display_map_things (int fbo,
 void Level::display_map_fg_things (int fbo,
                                    const int16_t minx, const int16_t miny,
                                    const int16_t maxx, const int16_t maxy)
-{_
+{ TRACE_AND_INDENT();
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   glcolor(WHITE);
 
@@ -262,7 +262,7 @@ void Level::display_map_fg_things (int fbo,
 void Level::display_map_fg2_things (int fbo,
                                     const int16_t minx, const int16_t miny,
                                     const int16_t maxx, const int16_t maxy)
-{_
+{ TRACE_AND_INDENT();
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   glcolor(WHITE);
 
@@ -291,7 +291,7 @@ void Level::display_map_fg2_things (int fbo,
 }
 
 void Level::display_map (void)
-{_
+{ TRACE_AND_INDENT();
   int light_minx;
   int light_maxx;
   int light_miny;
@@ -353,7 +353,7 @@ void Level::display_map (void)
 
   pixel_map_at = point(map_at.x * TILE_WIDTH, map_at.y * TILE_HEIGHT);
 
-  if (!frozen) {_
+  if (!frozen) { TRACE_AND_INDENT();
     //
     // Generate an FBO with all light sources merged together
     //
@@ -392,7 +392,7 @@ void Level::display_map (void)
             FBO_SMALL_POINT_LIGHTS);
   }
 
-  if (!frozen) {_
+  if (!frozen) { TRACE_AND_INDENT();
     //
     // Generate the non visited map with the light inverted on it
     // to hide visible areas
@@ -436,7 +436,7 @@ void Level::display_map (void)
 //sdl_fbo_dump(FBO_FULLMAP_LIGHT, "FULLMAP");
   }
 
-  if (!frozen) {_
+  if (!frozen) { TRACE_AND_INDENT();
     //
     // Generate the currently visible map
     //
@@ -470,7 +470,7 @@ void Level::display_map (void)
     display_target();
   }
 
-  {_
+  { TRACE_AND_INDENT();
     //
     // This is the final map output
     //

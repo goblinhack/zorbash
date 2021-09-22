@@ -14,7 +14,7 @@
 #include "my_ptrcheck.h"
 
 Thingp Thing::get_top_spawned_owner (void) const
-{_
+{ TRACE_AND_INDENT();
   auto id = get_immediate_spawned_owner_id();
   if (likely(id.ok())) {
     auto i = level->thing_find(id);
@@ -31,7 +31,7 @@ Thingp Thing::get_top_spawned_owner (void) const
 }
 
 Thingp Thing::get_immediate_spawned_owner (void) const
-{_
+{ TRACE_AND_INDENT();
   auto id = get_immediate_spawned_owner_id();
   if (likely(id.ok())) {
     auto i = level->thing_find(id);
@@ -45,7 +45,7 @@ Thingp Thing::get_immediate_spawned_owner (void) const
 }
 
 void Thing::set_spawned_owner (Thingp spawner_owner)
-{_
+{ TRACE_AND_INDENT();
   if (spawner_owner) {
     verify(spawner_owner);
   }
@@ -83,7 +83,7 @@ void Thing::set_spawned_owner (Thingp spawner_owner)
 }
 
 void Thing::remove_spawner_owner (void)
-{_
+{ TRACE_AND_INDENT();
   auto old_spawner_owner = get_immediate_spawned_owner();
   if (!old_spawner_owner) {
     err("No spawner owner");
@@ -100,7 +100,7 @@ void Thing::remove_spawner_owner (void)
 // Kill and detach all spawners from their owner
 //
 void Thing::kill_spawned (Thingp killer)
-{_
+{ TRACE_AND_INDENT();
   //
   // Warning killer can be nullptr - e.g. when a generator falls to
   // a new level
@@ -130,7 +130,7 @@ void Thing::kill_spawned (Thingp killer)
 }
 
 void Thing::unleash_spawners_things (void)
-{_
+{ TRACE_AND_INDENT();
   if (!is_spawner()) {
     return;
   }

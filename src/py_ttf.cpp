@@ -10,7 +10,7 @@
 #include "my_ascii.h"
 
 PyObject *text_size_ (PyObject *obj, PyObject *args, PyObject *keywds)
-{_
+{ TRACE_AND_INDENT();
   wchar_t *text = 0;
 
   static char *kwlist[] = {

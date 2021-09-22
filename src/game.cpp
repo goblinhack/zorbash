@@ -11,7 +11,7 @@
 #include "my_thing.h"
 
 Game::Game (std::string appdata)
-{_
+{ TRACE_AND_INDENT();
   config.reset();
 
   this->appdata = appdata;
@@ -25,7 +25,7 @@ Game::Game (std::string appdata)
 
 void
 Game::set_meta_data (Levelp l)
-{_
+{ TRACE_AND_INDENT();
   save_meta = "";
 
   if (l && l->player) {
@@ -42,6 +42,6 @@ Game::set_meta_data (Levelp l)
 }
 
 int Game::get_move_speed (void)
-{_
+{ TRACE_AND_INDENT();
   return current_move_speed;
 }

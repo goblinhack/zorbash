@@ -17,9 +17,9 @@
 #include "my_ui.h"
 
 void Thing::inventory_particle (Thingp item, uint32_t slot)
-{_
+{ TRACE_AND_INDENT();
   dbg("Create inventory particle? %s", item->to_string().c_str());
-_
+  TRACE_AND_INDENT();
   //
   // No animations at the start
   //
@@ -147,10 +147,10 @@ _
 void Thing::inventory_particle (Thingp item,
                                 uint32_t slot,
                                 Thingp particle_target)
-{_
+{ TRACE_AND_INDENT();
   dbg("Create inventory particle %s with target %s",
     item->to_string().c_str(), particle_target->to_string().c_str());
-_
+  TRACE_AND_INDENT();
   if (game->in_transit_item) {
     dbg("No; not while moving an item");
     return;
@@ -219,9 +219,9 @@ _
 }
 
 bool Thing::inventory_id_insert (Thingp item)
-{_
+{ TRACE_AND_INDENT();
   dbg("Inventory insert %s", item->to_string().c_str());
-_
+  TRACE_AND_INDENT();
   auto player = level->player;
   if (!player) {
     return false;
@@ -352,9 +352,9 @@ _
 }
 
 bool Thing::inventory_id_remove (Thingp item)
-{_
+{ TRACE_AND_INDENT();
   dbg("Inventory remove %s", item->to_string().c_str());
-_
+  TRACE_AND_INDENT();
   auto player = level->player;
   if (!player) {
     return false;
@@ -391,9 +391,9 @@ _
 
       auto cnt = item_slot_count(i);
       dbg("Remove slot %d, count %d", i, cnt);
-      if (cnt > 1) {_
+      if (cnt > 1) { TRACE_AND_INDENT();
         dbg("Decrement slot count");
-      } else {_
+      } else { TRACE_AND_INDENT();
         dbg("Remove slot");
         monstp->inventory_id[i] = 0;
 
@@ -422,10 +422,10 @@ _
 }
 
 bool Thing::inventory_id_remove (Thingp item, Thingp particle_target)
-{_
+{ TRACE_AND_INDENT();
   dbg("Inventory remove %s with target %s",
     item->to_string().c_str(), particle_target->to_string().c_str());
-_
+  TRACE_AND_INDENT();
   auto player = level->player;
   if (!player) {
     return false;
@@ -464,9 +464,9 @@ _
 
       auto cnt = item_slot_count(i);
       dbg("Remove slot %d, count %d", i, cnt);
-      if (cnt > 1) {_
+      if (cnt > 1) { TRACE_AND_INDENT();
         dbg("Decrement slot count");
-      } else {_
+      } else { TRACE_AND_INDENT();
         dbg("Remove slot");
         monstp->inventory_id.erase(monstp->inventory_id.begin() + i);
 
@@ -497,7 +497,7 @@ _
 }
 
 int Thing::item_slot_charge_count (const uint32_t slot)
-{_
+{ TRACE_AND_INDENT();
   if (!monstp) {
     return 0;
   }
@@ -516,7 +516,7 @@ int Thing::item_slot_charge_count (const uint32_t slot)
 }
 
 int Thing::item_enchant_count (const uint32_t slot)
-{_
+{ TRACE_AND_INDENT();
   if (!monstp) {
     return 0;
   }
@@ -541,7 +541,7 @@ int Thing::item_enchant_count (const uint32_t slot)
 }
 
 int Thing::item_slot_count (const uint32_t slot)
-{_
+{ TRACE_AND_INDENT();
   auto tp_id = get(monstp->inventory_id, slot);
   if (!tp_id) {
     return 0;
@@ -560,9 +560,9 @@ int Thing::item_slot_count (const uint32_t slot)
 }
 
 Thingp Level::inventory_get (const uint32_t slot)
-{_
+{ TRACE_AND_INDENT();
   dbg("Inventory get slot %d", slot);
-_
+  TRACE_AND_INDENT();
   if (!player) {
     ERR("No player");
     return nullptr;
@@ -638,9 +638,9 @@ Thingp Level::inventory_get (void)
 }
 
 bool Level::inventory_over (const uint32_t slot)
-{_
+{ TRACE_AND_INDENT();
   LOG("Inventory: Over inventory slot %d", slot);
-_
+  TRACE_AND_INDENT();
   if (!player) {
     LOG("Inventory: Ignore; no player");
     return false;
@@ -680,9 +680,9 @@ _
 }
 
 bool Level::inventory_chosen (const uint32_t slot)
-{_
+{ TRACE_AND_INDENT();
   LOG("Inventory: Chosen inventory slot %d", slot);
-_
+  TRACE_AND_INDENT();
   if (!player) {
     return false;
   }
@@ -724,9 +724,9 @@ _
 }
 
 bool Level::inventory_assign (const uint32_t slot, Thingp item)
-{_
+{ TRACE_AND_INDENT();
   LOG("Inventory: Assign inventory slot %d", slot);
-_
+  TRACE_AND_INDENT();
   if (!player) {
     return false;
   }
@@ -765,7 +765,7 @@ _
 }
 
 int Level::inventory_get_slot (Thingp item)
-{_
+{ TRACE_AND_INDENT();
   auto inventory_items = player->monstp->inventory_id.size();
   for (auto i = 0U; i < inventory_items; i++) {
     auto tp_id = player->monstp->inventory_id[i];
@@ -786,9 +786,9 @@ int Level::inventory_get_slot (Thingp item)
 }
 
 Thingp Level::inventory_describe (const uint32_t slot)
-{_
+{ TRACE_AND_INDENT();
   LOG("Inventory: Describe slot %d", slot);
-_
+  TRACE_AND_INDENT();
   auto item = inventory_get(slot);
   if (item) {
     IF_DEBUG2 {

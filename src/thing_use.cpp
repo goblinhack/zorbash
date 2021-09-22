@@ -74,7 +74,7 @@ void Thing::on_use (Thingp what, Thingp target)
 }
 
 void Thing::used (Thingp what, Thingp target, bool remove_after_use)
-{_
+{ TRACE_AND_INDENT();
   dbg("Attempt to use %s", what->to_string().c_str());
 
   on_use(what, target);
@@ -135,9 +135,9 @@ void Thing::used (Thingp what, Thingp target, bool remove_after_use)
 }
 
 bool Thing::use (Thingp what)
-{_
+{ TRACE_AND_INDENT();
   dbg("Trying to use: %s", what->to_string().c_str());
-_
+  TRACE_AND_INDENT();
   if (!is_player()) {
     return false;
   }

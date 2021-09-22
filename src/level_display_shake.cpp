@@ -32,17 +32,17 @@ float Level::update_wobble (void)
 }
 
 float Level::get_wobble (void) const
-{_
+{ TRACE_AND_INDENT();
   return (wobble);
 }
 
 void Level::set_wobble (float v)
-{_
+{ TRACE_AND_INDENT();
   wobble = v;
 }
 
 bool Level::screen_shake_begin (void)
-{_
+{ TRACE_AND_INDENT();
   if (!player || !player->is_bloodied()) {
     return false;
   }
@@ -61,6 +61,6 @@ bool Level::screen_shake_begin (void)
 }
 
 void Level::screen_shake_end (void)
-{_
+{ TRACE_AND_INDENT();
   glPopMatrix();
 }

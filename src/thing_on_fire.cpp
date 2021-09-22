@@ -21,7 +21,7 @@
 // Python callback upon being fire
 //
 void Thing::on_fire (void)
-{_
+{ TRACE_AND_INDENT();
   auto on_fire = tp()->on_fire_do();
   if (std::empty(on_fire)) {
     return;
@@ -48,7 +48,7 @@ void Thing::on_fire (void)
 }
 
 bool Thing::is_on_fire (void) const
-{_
+{ TRACE_AND_INDENT();
   auto id = get_on_fire_anim_id();
   if (!id) {
     return false;
@@ -58,7 +58,7 @@ bool Thing::is_on_fire (void) const
 }
 
 void Thing::unset_on_fire (void)
-{_
+{ TRACE_AND_INDENT();
   auto id = get_on_fire_anim_id();
   if (!id) {
     return;
@@ -73,7 +73,7 @@ void Thing::unset_on_fire (void)
 }
 
 bool Thing::set_on_fire (const std::string &why)
-{_
+{ TRACE_AND_INDENT();
   if (!is_burnable() && !is_combustible()) {
     return false;
   }
@@ -106,7 +106,7 @@ bool Thing::set_on_fire (const std::string &why)
 //
 bool Thing::ai_create_on_fire_path (point &nh,
                                     const point start, const point end)
-{_
+{ TRACE_AND_INDENT();
   Dmap dmap {};
   point dmap_start = start;
   point dmap_end = end;
@@ -204,7 +204,7 @@ bool Thing::ai_create_on_fire_path (point &nh,
 }
 
 bool Thing::ai_on_fire_choose_target (point& nh)
-{_
+{ TRACE_AND_INDENT();
   point start(mid_at.x, mid_at.y);
 
   //
@@ -264,7 +264,7 @@ bool Thing::ai_on_fire_choose_target (point& nh)
 }
 
 bool Thing::ai_on_fire (void)
-{_
+{ TRACE_AND_INDENT();
   dbg("Ai on fire");
   auto tries = 10;
   while (tries--) {

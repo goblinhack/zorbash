@@ -51,7 +51,7 @@ void Level::display_minimap (void)
         ((float)(mouse_y - tly) / (bry - tly)) * MAP_HEIGHT);
 
     fpoint to(game->minimap_over.x, game->minimap_over.y);
-    if (cursor) {_
+    if (cursor) { TRACE_AND_INDENT();
       verify(cursor);
       cursor_at = to;
       if (cursor_at != cursor_old) {

@@ -9,7 +9,7 @@
 #include "my_thing.h"
 
 point Thing::dir_to_direction (void) const
-{_
+{ TRACE_AND_INDENT();
   if (is_dir_tl()) {
     return point(-1, -1);
   }

@@ -174,14 +174,14 @@ Wid::~Wid (void)
 }
 
 uint8_t wid_init (void)
-{_
+{ TRACE_AND_INDENT();
   wid_init_done = true;
 
   return true;
 }
 
 void wid_fini (void)
-{_
+{ TRACE_AND_INDENT();
   wid_init_done = false;
   wid_exiting = true;
 
@@ -201,7 +201,7 @@ void wid_fini (void)
 }
 
 void wid_dump (Widp w, int depth)
-{_
+{ TRACE_AND_INDENT();
   if (!w) {
     return;
   }
@@ -230,7 +230,7 @@ void wid_dump (Widp w, int depth)
 }
 
 int wid_count (Widp w, int depth)
-{_
+{ TRACE_AND_INDENT();
   if (!w) {
     return 0;
   }
@@ -247,28 +247,28 @@ int wid_count (Widp w, int depth)
 }
 
 int32_t wid_get_tl_x (Widp w)
-{_
+{ TRACE_AND_INDENT();
   int32_t cx = (w->key.tl.x + w->key.br.x) / 2.0;
 
   return (cx - (cx - w->key.tl.x));
 }
 
 int32_t wid_get_tl_y (Widp w)
-{_
+{ TRACE_AND_INDENT();
   int32_t cy = (w->key.tl.y + w->key.br.y) / 2.0;
 
   return (cy - (cy - w->key.tl.y));
 }
 
 int32_t wid_get_br_x (Widp w)
-{_
+{ TRACE_AND_INDENT();
   int32_t cx = (w->key.tl.x + w->key.br.x) / 2.0;
 
   return (cx + (w->key.br.x - cx));
 }
 
 int32_t wid_get_br_y (Widp w)
-{_
+{ TRACE_AND_INDENT();
   int32_t cy = (w->key.tl.y + w->key.br.y) / 2.0;
 
   return (cy + (w->key.br.y - cy));
@@ -279,7 +279,7 @@ void wid_get_tl_x_tl_y_br_x_br_y (Widp w,
                   int32_t *tl_y,
                   int32_t *br_x,
                   int32_t *br_y)
-{_
+{ TRACE_AND_INDENT();
   const int32_t tlx = w->key.tl.x;
   const int32_t tly = w->key.tl.y;
   const int32_t brx = w->key.br.x;
@@ -298,7 +298,7 @@ void wid_get_tl_x_tl_y_br_x_br_y (Widp w,
 // Set the wid new co-ords. Returns true if there is a change.
 //
 void wid_set_pos (Widp w, point tl, point br)
-{_
+{ TRACE_AND_INDENT();
   Widp p {};
 
   wid_tree_detach(w);
@@ -329,7 +329,7 @@ void wid_set_pos (Widp w, point tl, point br)
 // Set the wid new co-ords. Returns true if there is a change.
 //
 void wid_set_pos_pct (Widp w, fpoint tl, fpoint br)
-{_
+{ TRACE_AND_INDENT();
   Widp p {};
 
   wid_tree_detach(w);
@@ -384,47 +384,47 @@ void wid_set_pos_pct (Widp w, fpoint tl, fpoint br)
 }
 
 void wid_set_int_context (Widp w, int int_context)
-{_
+{ TRACE_AND_INDENT();
   w->int_context = int_context;
 }
 
 int wid_get_int_context (Widp w)
-{_
+{ TRACE_AND_INDENT();
   return (w->int_context);
 }
 
 void wid_set_void_context (Widp w, void *void_context)
-{_
+{ TRACE_AND_INDENT();
   w->void_context = void_context;
 }
 
 void *wid_get_void_context (Widp w)
-{_
+{ TRACE_AND_INDENT();
   return (w->void_context);
 }
 
 void wid_set_thing_id_context (Widp w, ThingId thing_id_context)
-{_
+{ TRACE_AND_INDENT();
   w->thing_id_context = thing_id_context;
 }
 
 ThingId wid_get_thing_id_context (Widp w)
-{_
+{ TRACE_AND_INDENT();
   return (w->thing_id_context);
 }
 
 void wid_set_thing_id2_context (Widp w, ThingId thing_id_context)
-{_
+{ TRACE_AND_INDENT();
   w->thing_id2_context = thing_id_context;
 }
 
 ThingId wid_get_thing_id2_context (Widp w)
-{_
+{ TRACE_AND_INDENT();
   return (w->thing_id2_context);
 }
 
 void wid_set_prev (Widp w, Widp prev)
-{_
+{ TRACE_AND_INDENT();
   verify(w);
   if (prev) {
     verify(prev);
@@ -445,7 +445,7 @@ void wid_set_prev (Widp w, Widp prev)
 }
 
 Widp wid_get_prev (Widp w)
-{_
+{ TRACE_AND_INDENT();
   if (!w) {
     DIE("No wid");
   }
@@ -458,7 +458,7 @@ Widp wid_get_prev (Widp w)
 }
 
 Widp wid_get_next (Widp w)
-{_
+{ TRACE_AND_INDENT();
   if (!w) {
     DIE("No wid");
   }
@@ -471,7 +471,7 @@ Widp wid_get_next (Widp w)
 }
 
 Widp wid_get_head (Widp w)
-{_
+{ TRACE_AND_INDENT();
   Widp prev {};
 
   while (w) {
@@ -487,7 +487,7 @@ Widp wid_get_head (Widp w)
 }
 
 Widp wid_get_tail (Widp w)
-{_
+{ TRACE_AND_INDENT();
   Widp next {};
 
   while (w) {
@@ -503,7 +503,7 @@ Widp wid_get_tail (Widp w)
 }
 
 Widp wid_get_top_parent (Widp w)
-{_
+{ TRACE_AND_INDENT();
   if (!w) {
     return (w);
   }
@@ -522,37 +522,37 @@ Widp wid_get_top_parent (Widp w)
 }
 
 Widp wid_get_parent (Widp w)
-{_
+{ TRACE_AND_INDENT();
   return (w->parent);
 }
 
 Widp wid_get_scrollbar_vert (Widp w)
-{_
+{ TRACE_AND_INDENT();
   return (w->scrollbar_vert);
 }
 
 Widp wid_get_scrollbar_horiz (Widp w)
-{_
+{ TRACE_AND_INDENT();
   return (w->scrollbar_horiz);
 }
 
 static void wid_mouse_motion_end (void)
-{_
+{ TRACE_AND_INDENT();
   wid_moving = nullptr;
 }
 
 void wid_set_ignore_events (Widp w, uint8_t val)
-{_
+{ TRACE_AND_INDENT();
   w->ignore_events = val;
 }
 
 void wid_set_ignore_scroll_events (Widp w, uint8_t val)
-{_
+{ TRACE_AND_INDENT();
   w->ignore_scroll_events = val;
 }
 
 static void wid_set_scissors (int tlx, int tly, int brx, int bry)
-{_
+{ TRACE_AND_INDENT();
   ascii_set_scissors(point(tlx, tly), point(brx, bry));
 }
 
@@ -560,7 +560,7 @@ static void wid_set_scissors (int tlx, int tly, int brx, int bry)
 // Should this widget be ignored for events?
 //
 uint8_t wid_ignore_events (Widp w)
-{_
+{ TRACE_AND_INDENT();
   Widp top {};
 
   if (!w) {
@@ -583,7 +583,7 @@ uint8_t wid_ignore_events (Widp w)
 }
 
 uint8_t wid_ignore_events_only (Widp w)
-{_
+{ TRACE_AND_INDENT();
   Widp top {};
 
   if (!w) {
@@ -606,7 +606,7 @@ uint8_t wid_ignore_events_only (Widp w)
 }
 
 uint8_t wid_ignore_scroll_events (Widp w)
-{_
+{ TRACE_AND_INDENT();
   Widp top {};
 
   if (!w) {
@@ -629,7 +629,7 @@ uint8_t wid_ignore_scroll_events (Widp w)
 }
 
 uint8_t wid_ignore_for_focus (Widp w)
-{_
+{ TRACE_AND_INDENT();
   Widp top {};
 
   if (w->hidden ||
@@ -653,7 +653,7 @@ uint8_t wid_ignore_for_focus (Widp w)
 // Should this widget be ignored for events?
 //
 uint8_t wid_ignore_being_destroyed (Widp w)
-{_
+{ TRACE_AND_INDENT();
   Widp top {};
 
   if (w->being_destroyed) {
@@ -672,7 +672,7 @@ uint8_t wid_ignore_being_destroyed (Widp w)
 }
 
 static void wid_mouse_motion_begin (Widp w, int32_t x, int32_t y)
-{_
+{ TRACE_AND_INDENT();
   wid_mouse_motion_end();
 
   if (wid_ignore_being_destroyed(w)) {
@@ -685,7 +685,7 @@ static void wid_mouse_motion_begin (Widp w, int32_t x, int32_t y)
 }
 
 static void wid_mfocus_end (void)
-{_
+{ TRACE_AND_INDENT();
   Widp w {};
 
   w = wid_focus;
@@ -702,12 +702,12 @@ static void wid_mfocus_end (void)
 }
 
 Widp wid_get_current_focus (void)
-{_
+{ TRACE_AND_INDENT();
   return (wid_focus);
 }
 
 static void wid_mfocus_begin (Widp w)
-{_
+{ TRACE_AND_INDENT();
   Widp top {};
 
   if (!w) {
@@ -739,7 +739,7 @@ static void wid_mfocus_begin (Widp w)
 }
 
 static void wid_m_over_e (void)
-{_
+{ TRACE_AND_INDENT();
   Widp w {};
 
   if (!wid_mouse_visible) {
@@ -773,7 +773,7 @@ static void wid_m_over_e (void)
 static uint8_t wid_m_over_b (Widp w, uint32_t x, uint32_t y,
                int32_t relx, int32_t rely,
                int32_t wheelx, int32_t wheely)
-{_
+{ TRACE_AND_INDENT();
   if (!wid_mouse_visible) {
     return false;
   }
@@ -837,7 +837,7 @@ static uint8_t wid_m_over_b (Widp w, uint32_t x, uint32_t y,
 // Map an SDL key event to the char the user typed
 //
 char wid_event_to_char (const struct SDL_Keysym *evt)
-{_
+{ TRACE_AND_INDENT();
   if ((evt->mod & KMOD_LSHIFT) || (evt->mod & KMOD_RSHIFT)) {
     switch (evt->sym) {
       case SDLK_a: return ('A');
@@ -1036,7 +1036,7 @@ char wid_event_to_char (const struct SDL_Keysym *evt)
 // Widget mode, whether it is active, inactive etc...
 //
 void wid_set_mode (Widp w, wid_mode mode)
-{_
+{ TRACE_AND_INDENT();
   w->ts_last_mode_change = wid_time;
   w->mode = mode;
 }
@@ -1045,7 +1045,7 @@ void wid_set_mode (Widp w, wid_mode mode)
 // Widget mode, whether it is active, inactive etc...
 //
 wid_mode wid_get_mode (Widp w)
-{_
+{ TRACE_AND_INDENT();
   //
   // Allow focus to override less important modes.
   //
@@ -1059,27 +1059,27 @@ wid_mode wid_get_mode (Widp w)
 }
 
 std::string to_string (Widp w)
-{_
+{ TRACE_AND_INDENT();
   return (w->to_string);
 }
 
 std::string wid_name (Widp w)
-{_
+{ TRACE_AND_INDENT();
   return (w->name);
 }
 
 std::wstring wid_get_text (Widp w)
-{_
+{ TRACE_AND_INDENT();
   return (w->text);
 }
 
 std::string wid_get_name (Widp w)
-{_
+{ TRACE_AND_INDENT();
   return (w->name);
 }
 
 static std::wstring wid_get_text_with_cursor (Widp w)
-{_
+{ TRACE_AND_INDENT();
   if (!w->received_input) {
     w->cursor = (uint32_t)w->text.length();
   }
@@ -1092,7 +1092,7 @@ static std::wstring wid_get_text_with_cursor (Widp w)
 }
 
 void wid_set_name (Widp w, std::string name)
-{_
+{ TRACE_AND_INDENT();
   if (name != "") {
     oldptr(w);
     w->name = name;
@@ -1118,12 +1118,12 @@ void wid_set_name (Widp w, std::string name)
 }
 
 void wid_set_debug (Widp w, uint8_t val)
-{_
+{ TRACE_AND_INDENT();
   w->debug = val;
 }
 
 void wid_set_text (Widp w, std::wstring text)
-{_
+{ TRACE_AND_INDENT();
   if (text == L"") {
     w->text = L"";
   } else {
@@ -1141,87 +1141,87 @@ void wid_set_text (Widp w, std::wstring text)
 }
 
 void wid_set_text (Widp w, std::string text)
-{_
+{ TRACE_AND_INDENT();
   wid_set_text(w, string_to_wstring(text));
 }
 
 void wid_set_text (Widp w, int v)
-{_
+{ TRACE_AND_INDENT();
   wid_set_text(w, std::to_string(v));
 }
 
 uint8_t wid_get_received_input (Widp w)
-{_
+{ TRACE_AND_INDENT();
   return (w->received_input);
 }
 
 void wid_set_received_input (Widp w, uint8_t val)
-{_
+{ TRACE_AND_INDENT();
   w->received_input = val;
 }
 
 uint32_t wid_get_cursor (Widp w)
-{_
+{ TRACE_AND_INDENT();
   return (w->cursor);
 }
 
 void wid_set_cursor (Widp w, uint32_t val)
-{_
+{ TRACE_AND_INDENT();
   w->cursor = val;
 }
 
 int32_t wid_get_width (Widp w)
-{_
+{ TRACE_AND_INDENT();
   return (wid_get_br_x(w) - wid_get_tl_x(w)) + 1;
 }
 
 int32_t wid_get_height (Widp w)
-{_
+{ TRACE_AND_INDENT();
   return (wid_get_br_y(w) - wid_get_tl_y(w)) + 1;
 }
 
 uint8_t wid_get_focusable (Widp w)
-{_
+{ TRACE_AND_INDENT();
   return (w->focus_order);
 }
 
 void wid_set_focusable (Widp w, uint8_t val)
-{_
+{ TRACE_AND_INDENT();
   w->focus_order = val;
 }
 
 uint8_t wid_get_show_cursor (Widp w)
-{_
+{ TRACE_AND_INDENT();
   return (w->show_cursor);
 }
 
 void wid_set_show_cursor (Widp w, uint8_t val)
-{_
+{ TRACE_AND_INDENT();
   w->show_cursor = val;
 }
 
 uint8_t wid_get_do_not_raise (Widp w)
-{_
+{ TRACE_AND_INDENT();
   return (w->do_not_raise);
 }
 
 void wid_set_do_not_raise (Widp w, uint8_t val)
-{_
+{ TRACE_AND_INDENT();
   w->do_not_raise = val;
 }
 
 uint8_t wid_get_do_not_lower (Widp w)
-{_
+{ TRACE_AND_INDENT();
   return (w->do_not_lower);
 }
 
 void wid_set_do_not_lower (Widp w, uint8_t val)
-{_
+{ TRACE_AND_INDENT();
   w->do_not_lower = val;
 }
 
 uint8_t wid_get_moveable (Widp w)
-{_
+{ TRACE_AND_INDENT();
   if (w->moveable_set) {
     return (w->moveable);
   }
@@ -1230,7 +1230,7 @@ uint8_t wid_get_moveable (Widp w)
 }
 
 void wid_set_moveable (Widp w, uint8_t val)
-{_
+{ TRACE_AND_INDENT();
   w->moveable = val;
   w->moveable_set = true;
 
@@ -1239,7 +1239,7 @@ void wid_set_moveable (Widp w, uint8_t val)
 }
 
 uint8_t wid_get_moveable_horiz (Widp w)
-{_
+{ TRACE_AND_INDENT();
   if (w->moveable_horiz_set) {
     return (w->moveable_horiz);
   }
@@ -1248,13 +1248,13 @@ uint8_t wid_get_moveable_horiz (Widp w)
 }
 
 void wid_set_moveable_horiz (Widp w, uint8_t val)
-{_
+{ TRACE_AND_INDENT();
   w->moveable_horiz = val;
   w->moveable_horiz_set = true;
 }
 
 uint8_t wid_get_moveable_vert (Widp w)
-{_
+{ TRACE_AND_INDENT();
   if (w->moveable_vert_set) {
     return (w->moveable_vert);
   }
@@ -1263,13 +1263,13 @@ uint8_t wid_get_moveable_vert (Widp w)
 }
 
 void wid_set_moveable_vert (Widp w, uint8_t val)
-{_
+{ TRACE_AND_INDENT();
   w->moveable_vert = val;
   w->moveable_vert_set = true;
 }
 
 uint8_t wid_get_moveable_bounded (Widp w)
-{_
+{ TRACE_AND_INDENT();
   if (w->moveable_bounded_set) {
     return (w->moveable_bounded);
   }
@@ -1278,13 +1278,13 @@ uint8_t wid_get_moveable_bounded (Widp w)
 }
 
 void wid_set_moveable_bounded (Widp w, uint8_t val)
-{_
+{ TRACE_AND_INDENT();
   w->moveable_bounded = val;
   w->moveable_bounded_set = true;
 }
 
 uint8_t wid_get_moveable_no_user_scroll (Widp w)
-{_
+{ TRACE_AND_INDENT();
   if (w->moveable_no_user_scroll_set) {
     return (w->moveable_no_user_scroll);
   }
@@ -1293,73 +1293,73 @@ uint8_t wid_get_moveable_no_user_scroll (Widp w)
 }
 
 void wid_set_moveable_no_user_scroll (Widp w, uint8_t val)
-{_
+{ TRACE_AND_INDENT();
   w->moveable_no_user_scroll = val;
   w->moveable_no_user_scroll_set = true;
 }
 
 uint8_t wid_get_text_lhs (Widp w)
-{_
+{ TRACE_AND_INDENT();
   return (w->text_lhs);
 }
 
 void wid_set_text_lhs (Widp w, uint8_t val)
-{_
+{ TRACE_AND_INDENT();
   w->text_lhs = val;
 }
 
 uint8_t wid_get_text_rhs (Widp w)
-{_
+{ TRACE_AND_INDENT();
   return (w->text_rhs);
 }
 
 void wid_set_text_rhs (Widp w, uint8_t val)
-{_
+{ TRACE_AND_INDENT();
   w->text_rhs = true;
 }
 
 uint8_t wid_get_text_centerx (Widp w)
-{_
+{ TRACE_AND_INDENT();
   return (w->text_centerx);
 }
 
 void wid_set_text_centerx (Widp w, uint8_t val)
-{_
+{ TRACE_AND_INDENT();
   w->text_centerx = val;
 }
 
 uint8_t wid_get_text_top (Widp w)
-{_
+{ TRACE_AND_INDENT();
   return (w->text_top);
 }
 
 void wid_set_text_top (Widp w, uint8_t val)
-{_
+{ TRACE_AND_INDENT();
   w->text_top = val;
 }
 
 uint8_t wid_get_text_bot (Widp w)
-{_
+{ TRACE_AND_INDENT();
   return (w->text_bot);
 }
 
 void wid_set_text_bot (Widp w, uint8_t val)
-{_
+{ TRACE_AND_INDENT();
   w->text_bot = val;
 }
 
 uint8_t wid_get_text_centery (Widp w)
-{_
+{ TRACE_AND_INDENT();
   return (w->text_centery);
 }
 
 void wid_set_text_centery (Widp w, uint8_t val)
-{_
+{ TRACE_AND_INDENT();
   w->text_centery = val;
 }
 
 uint8_t wid_get_text_pos (Widp w, int32_t *x, int32_t *y)
-{_
+{ TRACE_AND_INDENT();
   if (w->text_pos_set) {
     *x = w->text_pos.x;
     *y = w->text_pos.y;
@@ -1371,29 +1371,29 @@ uint8_t wid_get_text_pos (Widp w, int32_t *x, int32_t *y)
 }
 
 void wid_set_text_pos (Widp w, uint8_t val, int32_t x, int32_t y)
-{_
+{ TRACE_AND_INDENT();
   w->text_pos.x = x;
   w->text_pos.y = y;
   w->text_pos_set = val;
 }
 
 static Tilep wid_get_bg_tile (Widp w)
-{_
+{ TRACE_AND_INDENT();
   return (w->bg_tile);
 }
 
 static Tilep wid_get_fg_tile (Widp w)
-{_
+{ TRACE_AND_INDENT();
   return (w->fg_tile);
 }
 
 static Tilep wid_get_fg2_tile (Widp w)
-{_
+{ TRACE_AND_INDENT();
   return (w->fg2_tile);
 }
 
 static Tilep wid_get_fg3_tile (Widp w)
-{_
+{ TRACE_AND_INDENT();
   return (w->fg3_tile);
 }
 
@@ -1418,7 +1418,7 @@ void wid_set_fg3_tile (Widp w, Tilep tile)
 }
 
 void wid_set_bg_tilename (Widp w, std::string name)
-{_
+{ TRACE_AND_INDENT();
   Tilep tile = tile_find(name);
   if (!tile) {
     ERR("Failed to find wid tile %s", name.c_str());
@@ -1432,7 +1432,7 @@ void wid_set_bg_tilename (Widp w, std::string name)
 }
 
 void wid_set_fg_tilename (Widp w, std::string name)
-{_
+{ TRACE_AND_INDENT();
   Tilep tile = tile_find(name);
   if (!tile) {
     ERR("Failed to find wid tile %s", name.c_str());
@@ -1446,7 +1446,7 @@ void wid_set_fg_tilename (Widp w, std::string name)
 }
 
 void wid_set_fg2_tilename (Widp w, std::string name)
-{_
+{ TRACE_AND_INDENT();
   Tilep tile = tile_find(name);
   if (!tile) {
     ERR("Failed to find wid tile %s", name.c_str());
@@ -1460,7 +1460,7 @@ void wid_set_fg2_tilename (Widp w, std::string name)
 }
 
 void wid_set_fg3_tilename (Widp w, std::string name)
-{_
+{ TRACE_AND_INDENT();
   Tilep tile = tile_find(name);
   if (!tile) {
     ERR("Failed to find wid tile %s", name.c_str());
@@ -1477,7 +1477,7 @@ void wid_set_fg3_tilename (Widp w, std::string name)
 // Look at all the wid modes and return the most relevent setting
 //
 color wid_get_color (Widp w, wid_color which)
-{_
+{ TRACE_AND_INDENT();
   uint32_t mode = (__typeof__(mode)) wid_get_mode(w); // for c++, no enum walk
   wid_cfg *cfg = &getref(w->cfg, mode);
 
@@ -1506,13 +1506,13 @@ color wid_get_color (Widp w, wid_color which)
 // Look at all the widset modes and return the most relevent setting
 //
 void wid_set_color (Widp w, wid_color col, color val)
-{_
+{ TRACE_AND_INDENT();
   w->cfg[wid_get_mode(w)].colors[col] = val;
   w->cfg[wid_get_mode(w)].color_set[col] = true;
 }
 
 void wid_set_focus (Widp w)
-{_
+{ TRACE_AND_INDENT();
   //
   // Don't allow focus override if hard focus is set.
   //
@@ -1532,7 +1532,7 @@ void wid_set_focus (Widp w)
 }
 
 void wid_unset_focus (void)
-{_
+{ TRACE_AND_INDENT();
   wid_mfocus_end();
 }
 
@@ -1547,12 +1547,12 @@ void wid_set_shape_none (Widp w)
 }
 
 void wid_set_active (Widp w)
-{_
+{ TRACE_AND_INDENT();
   wid_set_mode(w, WID_MODE_ACTIVE);
 }
 
 void wid_focus_lock (Widp w)
-{_
+{ TRACE_AND_INDENT();
   if (w) {
     WID_DBG(w, "focus locked");
   }
@@ -1561,77 +1561,77 @@ void wid_focus_lock (Widp w)
 }
 
 void wid_unset_focus_lock (void)
-{_
+{ TRACE_AND_INDENT();
   wid_focus_locked = nullptr;
 }
 
 void wid_set_on_key_down (Widp w, on_key_down_t fn)
-{_
+{ TRACE_AND_INDENT();
   w->on_key_down = fn;
 }
 
 void wid_set_on_key_up (Widp w, on_key_up_t fn)
-{_
+{ TRACE_AND_INDENT();
   w->on_key_up = fn;
 }
 
 void wid_set_on_joy_button (Widp w, on_joy_button_t fn)
-{_
+{ TRACE_AND_INDENT();
   w->on_joy_button = fn;
 }
 
 void wid_set_on_mouse_down (Widp w, on_mouse_down_t fn)
-{_
+{ TRACE_AND_INDENT();
   w->on_mouse_down = fn;
 }
 
 void wid_set_on_mouse_held_down (Widp w, on_mouse_down_t fn)
-{_
+{ TRACE_AND_INDENT();
   w->on_mouse_held_down = fn;
 }
 
 void wid_set_on_mouse_up (Widp w, on_mouse_up_t fn)
-{_
+{ TRACE_AND_INDENT();
   w->on_mouse_up = fn;
 }
 
 void wid_set_on_mouse_motion (Widp w, on_mouse_motion_t fn)
-{_
+{ TRACE_AND_INDENT();
   w->on_mouse_motion = fn;
 }
 
 void wid_set_on_mouse_focus_begin (Widp w, on_mouse_focus_begin_t fn)
-{_
+{ TRACE_AND_INDENT();
   w->on_mouse_focus_begin = fn;
 }
 
 void wid_set_on_mouse_focus_end (Widp w, on_mouse_focus_end_t fn)
-{_
+{ TRACE_AND_INDENT();
   w->on_mouse_focus_end = fn;
 }
 
 void wid_set_on_mouse_over_b (Widp w, on_mouse_over_b_t fn)
-{_
+{ TRACE_AND_INDENT();
   w->on_mouse_over_b = fn;
 }
 
 void wid_set_on_mouse_over_e (Widp w, on_mouse_over_e_t fn)
-{_
+{ TRACE_AND_INDENT();
   w->on_mouse_over_e = fn;
 }
 
 void wid_set_on_destroy (Widp w, on_destroy_t fn)
-{_
+{ TRACE_AND_INDENT();
   w->on_destroy = fn;
 }
 
 void wid_set_on_destroy_begin (Widp w, on_destroy_t fn)
-{_
+{ TRACE_AND_INDENT();
   w->on_destroy_begin = fn;
 }
 
 void wid_set_on_tick (Widp w, on_tick_t fn)
-{_
+{ TRACE_AND_INDENT();
   if (!fn) {
     ERR("No ticker function set");
   }
@@ -1645,7 +1645,7 @@ void wid_set_on_tick (Widp w, on_tick_t fn)
 // Remove this wid from any trees it is in.
 //
 static void wid_tree_detach (Widp w)
-{_
+{ TRACE_AND_INDENT();
   wid_tree_remove(w);
 }
 
@@ -1653,7 +1653,7 @@ static void wid_tree_detach (Widp w)
 // Add back to all trees.
 //
 static void wid_tree_attach (Widp w)
-{_
+{ TRACE_AND_INDENT();
   wid_key_map_location *root;
 
   if (w->in_tree_root) {
@@ -1679,7 +1679,7 @@ static void wid_tree_attach (Widp w)
 }
 
 static void wid_tree_insert (Widp w)
-{_
+{ TRACE_AND_INDENT();
   static uint64_t key;
 
   if (w->in_tree_root) {
@@ -1712,7 +1712,7 @@ static void wid_tree_insert (Widp w)
 }
 
 static void wid_tree_global_unsorted_insert (Widp w)
-{_
+{ TRACE_AND_INDENT();
   static WidKeyType key;
 
   if (w->in_tree_global_unsorted_root) {
@@ -1733,7 +1733,7 @@ static void wid_tree_global_unsorted_insert (Widp w)
 }
 
 static void wid_tree2_unsorted_insert (Widp w)
-{_
+{ TRACE_AND_INDENT();
   static uint64_t key;
 
   if (w->in_tree2_unsorted_root) {
@@ -1758,7 +1758,7 @@ static void wid_tree2_unsorted_insert (Widp w)
 }
 
 static void wid_tree3_moving_wids_insert (Widp w)
-{_
+{ TRACE_AND_INDENT();
   if (w->in_tree3_moving_wids) {
     return;
   }
@@ -1780,7 +1780,7 @@ static void wid_tree3_moving_wids_insert (Widp w)
 }
 
 static void wid_tree4_wids_being_destroyed_insert (Widp w)
-{_
+{ TRACE_AND_INDENT();
   if (w->in_tree4_wids_being_destroyed) {
     return;
   }
@@ -1805,7 +1805,7 @@ static void wid_tree4_wids_being_destroyed_insert (Widp w)
 }
 
 static void wid_tree5_ticking_wids_insert (Widp w)
-{_
+{ TRACE_AND_INDENT();
   if (w->in_tree5_ticking_wids) {
     return;
   }
@@ -1830,7 +1830,7 @@ static void wid_tree5_ticking_wids_insert (Widp w)
 }
 
 static void wid_tree_remove (Widp w)
-{_
+{ TRACE_AND_INDENT();
   wid_key_map_location *root;
 
   root = w->in_tree_root;
@@ -1849,7 +1849,7 @@ static void wid_tree_remove (Widp w)
 }
 
 static void wid_tree2_unsorted_remove (Widp w)
-{_
+{ TRACE_AND_INDENT();
   auto root = w->in_tree2_unsorted_root;
   if (!root) {
     return;
@@ -1865,7 +1865,7 @@ static void wid_tree2_unsorted_remove (Widp w)
 }
 
 static void wid_tree_global_unsorted_remove (Widp w)
-{_
+{ TRACE_AND_INDENT();
   auto root = w->in_tree_global_unsorted_root;
   if (!root) {
     return;
@@ -1881,7 +1881,7 @@ static void wid_tree_global_unsorted_remove (Widp w)
 }
 
 WidKeyType wid_unsorted_get_key (Widp w)
-{_
+{ TRACE_AND_INDENT();
   auto root = &wid_global;
 
   auto result = root->find(w->tree_global_key);
@@ -1895,7 +1895,7 @@ WidKeyType wid_unsorted_get_key (Widp w)
 }
 
 static void wid_tree3_moving_wids_remove (Widp w)
-{_
+{ TRACE_AND_INDENT();
   auto root = w->in_tree3_moving_wids;
   if (!root) {
     return;
@@ -1911,7 +1911,7 @@ static void wid_tree3_moving_wids_remove (Widp w)
 }
 
 static void wid_tree4_wids_being_destroyed_remove (Widp w)
-{_
+{ TRACE_AND_INDENT();
   auto root = w->in_tree4_wids_being_destroyed;
   if (!root) {
     return;
@@ -1927,7 +1927,7 @@ static void wid_tree4_wids_being_destroyed_remove (Widp w)
 }
 
 static void wid_tree5_ticking_wids_remove (Widp w)
-{_
+{ TRACE_AND_INDENT();
   auto root = w->in_tree5_ticking_wids;
   if (!root) {
     return;
@@ -1947,7 +1947,7 @@ static void wid_tree5_ticking_wids_remove (Widp w)
 // Initialize a wid with basic settings
 //
 static Widp wid_new (Widp parent)
-{_
+{ TRACE_AND_INDENT();
   auto w = new Wid ();
 
   w->parent = parent;
@@ -1969,7 +1969,7 @@ static Widp wid_new (Widp parent)
 }
 
 static Widp wid_new (void)
-{_
+{ TRACE_AND_INDENT();
   auto w = new Wid ();
 
   w->ts_created = wid_time;
@@ -1990,7 +1990,7 @@ static Widp wid_new (void)
 }
 
 static void wid_destroy_immediate_internal (Widp w)
-{_
+{ TRACE_AND_INDENT();
   wid_tree3_moving_wids_remove(w);
   wid_tree4_wids_being_destroyed_remove(w);
   wid_tree5_ticking_wids_remove(w);
@@ -2058,7 +2058,7 @@ static void wid_destroy_immediate_internal (Widp w)
 }
 
 static void wid_destroy_immediate (Widp w)
-{_
+{ TRACE_AND_INDENT();
   WID_DBG(w, "destroy immediate");
 
   //
@@ -2104,7 +2104,7 @@ static void wid_destroy_immediate (Widp w)
 }
 
 static void wid_destroy_delay (Widp *wp, int32_t delay)
-{_
+{ TRACE_AND_INDENT();
   int32_t tlx;
   int32_t tly;
   int32_t brx;
@@ -2169,17 +2169,17 @@ static void wid_destroy_delay (Widp *wp, int32_t delay)
 }
 
 void wid_destroy (Widp *wp)
-{_
+{ TRACE_AND_INDENT();
   wid_destroy_delay(wp, wid_destroy_delay_ms);
 }
 
 void wid_destroy_nodelay (Widp *wp)
-{_
+{ TRACE_AND_INDENT();
   wid_destroy_delay(wp, 0);
 }
 
 void wid_destroy_in (Widp w, uint32_t ms)
-{_
+{ TRACE_AND_INDENT();
   w->destroy_when = wid_time + ms;
 
   wid_tree4_wids_being_destroyed_insert(w);
@@ -2189,7 +2189,7 @@ void wid_destroy_in (Widp w, uint32_t ms)
 // Initialize a top level wid with basic settings
 //
 Widp wid_new_window (std::string name)
-{_
+{ TRACE_AND_INDENT();
   Widp w = wid_new();
 
   w->to_string = string_sprintf("%s[%p]", name.c_str(), w);
@@ -2216,7 +2216,7 @@ Widp wid_new_window (std::string name)
 // Initialize a top level wid with basic settings
 //
 Widp wid_new_container (Widp parent, std::string name)
-{_
+{ TRACE_AND_INDENT();
   Widp w = wid_new(parent);
 
 #ifdef ENABLE_DEBUG_UI
@@ -2251,7 +2251,7 @@ Widp wid_new_container (Widp parent, std::string name)
 // Initialize a top level wid with basic settings
 //
 Widp wid_new_square_window (std::string name)
-{_
+{ TRACE_AND_INDENT();
   Widp w = wid_new();
 
   w->to_string = string_sprintf("%s[%p]", name.c_str(), w);
@@ -2275,7 +2275,7 @@ Widp wid_new_square_window (std::string name)
 }
 
 Widp wid_new_square_button (Widp parent, std::string name)
-{_
+{ TRACE_AND_INDENT();
   if (!parent) {
     ERR("No parent");
   }
@@ -2315,7 +2315,7 @@ Widp wid_new_square_button (Widp parent, std::string name)
 }
 
 Widp wid_new_plain (Widp parent, std::string name)
-{_
+{ TRACE_AND_INDENT();
   if (!parent) {
     ERR("No parent");
   }
@@ -2356,7 +2356,7 @@ Widp wid_new_plain (Widp parent, std::string name)
 // Initialize a wid with basic settings
 //
 static Widp wid_new_scroll_trough (Widp parent)
-{_
+{ TRACE_AND_INDENT();
   if (!parent) {
     ERR("No parent");
   }
@@ -2398,7 +2398,7 @@ static Widp wid_new_scroll_bar (Widp parent,
                 std::string name,
                 Widp scrollbar_owner,
                 uint8_t vertical)
-{_
+{ TRACE_AND_INDENT();
   if (!parent) {
     ERR("No parent");
   }
@@ -2466,7 +2466,7 @@ static Widp wid_new_scroll_bar (Widp parent,
 Widp wid_new_vert_scroll_bar (Widp parent,
                 std::string name,
                 Widp scrollbar_owner)
-{_
+{ TRACE_AND_INDENT();
   if (!parent) {
     ERR("No parent");
   }
@@ -2521,7 +2521,7 @@ Widp wid_new_vert_scroll_bar (Widp parent,
 
 Widp wid_new_horiz_scroll_bar (Widp parent, std::string name,
                  Widp scrollbar_owner)
-{_
+{ TRACE_AND_INDENT();
   if (!parent) {
     ERR("No parent");
   }
@@ -2575,7 +2575,7 @@ Widp wid_new_horiz_scroll_bar (Widp parent, std::string name,
 }
 
 static void wid_raise_internal (Widp w)
-{_
+{ TRACE_AND_INDENT();
   if (w->do_not_raise) {
     return;
   }
@@ -2594,7 +2594,7 @@ static void wid_raise_internal (Widp w)
 }
 
 static void wid_raise_override (Widp parent)
-{_
+{ TRACE_AND_INDENT();
   //
   // If some widget wants to be on top, let it.
   //
@@ -2615,7 +2615,7 @@ static void wid_raise_override (Widp parent)
 }
 
 void wid_raise (Widp w_in)
-{_
+{ TRACE_AND_INDENT();
   if (!w_in) {
     return;
   }
@@ -2647,7 +2647,7 @@ void wid_raise (Widp w_in)
 }
 
 static void wid_lower_internal (Widp w)
-{_
+{ TRACE_AND_INDENT();
   if (w->do_not_lower) {
     return;
   }
@@ -2666,7 +2666,7 @@ static void wid_lower_internal (Widp w)
 }
 
 void wid_lower (Widp w_in)
-{_
+{ TRACE_AND_INDENT();
   if (!w_in) {
     return;
   }
@@ -2696,7 +2696,7 @@ void wid_lower (Widp w_in)
 }
 
 void wid_toggle_hidden (Widp w)
-{_
+{ TRACE_AND_INDENT();
   if (w->hidden) {
     wid_visible(w);
   } else {
@@ -2705,7 +2705,7 @@ void wid_toggle_hidden (Widp w)
 }
 
 static void wid_find_first_child_focus (Widp w, Widp *best)
-{_
+{ TRACE_AND_INDENT();
   if (w->focus_order) {
     if (!*best) {
       *best = w;
@@ -2722,7 +2722,7 @@ static void wid_find_first_child_focus (Widp w, Widp *best)
 }
 
 static void wid_find_first_focus (void)
-{_
+{ TRACE_AND_INDENT();
   Widp best {};
 
   for (auto iter = wid_top_level.rbegin();
@@ -2743,7 +2743,7 @@ static void wid_find_first_focus (void)
 
 static void wid_find_specific_child_focus (Widp w, Widp *best,
                        uint8_t focus_order)
-{_
+{ TRACE_AND_INDENT();
   if (w->focus_order) {
     if (w->focus_order == focus_order) {
       *best = w;
@@ -2759,7 +2759,7 @@ static void wid_find_specific_child_focus (Widp w, Widp *best,
 }
 
 static Widp wid_find_top_wid_focus (Widp w)
-{_
+{ TRACE_AND_INDENT();
   Widp best {};
 
   if (wid_ignore_for_focus(w)) {
@@ -2785,7 +2785,7 @@ static Widp wid_find_top_wid_focus (Widp w)
 }
 
 static void wid_find_top_focus (void)
-{_
+{ TRACE_AND_INDENT();
   Widp best {};
 
   for (auto iter = wid_top_level.rbegin();
@@ -2819,7 +2819,7 @@ static void wid_find_top_focus (void)
 }
 
 static void wid_find_last_child_focus (Widp w, Widp *best)
-{_
+{ TRACE_AND_INDENT();
   if (w->focus_order) {
     if (!*best) {
       *best = w;
@@ -2836,7 +2836,7 @@ static void wid_find_last_child_focus (Widp w, Widp *best)
 }
 
 Widp wid_get_focus (Widp w)
-{_
+{ TRACE_AND_INDENT();
   Widp best {};
 
   if (wid_focus) {
@@ -2858,7 +2858,7 @@ Widp wid_get_focus (Widp w)
 }
 
 static void wid_find_last_focus (void)
-{_
+{ TRACE_AND_INDENT();
   Widp best {};
 
   for (auto iter = wid_top_level.rbegin();
@@ -2878,7 +2878,7 @@ static void wid_find_last_focus (void)
 }
 
 static void wid_find_next_child_focus (Widp w, Widp *best)
-{_
+{ TRACE_AND_INDENT();
   if (w->focus_order) {
     if (*best) {
       if ((w->focus_order < (*best)->focus_order) &&
@@ -2898,7 +2898,7 @@ static void wid_find_next_child_focus (Widp w, Widp *best)
 }
 
 static void wid_find_next_focus (void)
-{_
+{ TRACE_AND_INDENT();
   Widp best {};
 
   if (!wid_focus) {
@@ -2930,7 +2930,7 @@ static void wid_find_next_focus (void)
 }
 
 static void wid_find_prev_child_focus (Widp w, Widp *best)
-{_
+{ TRACE_AND_INDENT();
   if (w->focus_order) {
     if (*best) {
       if ((w->focus_order > (*best)->focus_order) &&
@@ -2950,7 +2950,7 @@ static void wid_find_prev_child_focus (Widp w, Widp *best)
 }
 
 static void wid_find_prev_focus (void)
-{_
+{ TRACE_AND_INDENT();
   Widp best {};
 
   if (!wid_focus) {
@@ -2982,7 +2982,7 @@ static void wid_find_prev_focus (void)
 }
 
 Widp wid_find (Widp w, const std::string& name)
-{_
+{ TRACE_AND_INDENT();
   if (!strcasecmp(w->name.c_str(), name.c_str())) {
     return (w);
   }
@@ -3001,7 +3001,7 @@ Widp wid_find (Widp w, const std::string& name)
 }
 
 static void wid_find_all_ (Widp w, const std::string& name, std::list<Widp> &out)
-{_
+{ TRACE_AND_INDENT();
   if (!strcasecmp(w->name.c_str(), name.c_str())) {
     out.push_back(w);
   }
@@ -3020,7 +3020,7 @@ std::list<Widp> wid_find_all (Widp w, const std::string& name)
 }
 
 static void wid_find_all_containing_ (Widp w, const std::string& name, std::list<Widp> &out)
-{_
+{ TRACE_AND_INDENT();
   if (strstr(w->name.c_str(), name.c_str())) {
     out.push_back(w);
   }
@@ -3039,7 +3039,7 @@ std::list<Widp> wid_find_all_containing (Widp w, const std::string& name)
 }
 
 Widp wid_find (const std::string& name)
-{_
+{ TRACE_AND_INDENT();
   for (auto& iter : wid_top_level) {
     auto w = iter.second;
     auto r = wid_find(w, name);
@@ -3052,12 +3052,12 @@ Widp wid_find (const std::string& name)
 }
 
 void wid_always_hidden (Widp w, uint8_t value)
-{_
+{ TRACE_AND_INDENT();
   w->always_hidden = value;
 }
 
 void wid_visible (Widp w)
-{_
+{ TRACE_AND_INDENT();
   if (!w) {
     return;
   }
@@ -3075,7 +3075,7 @@ void wid_visible (Widp w)
 }
 
 void wid_this_visible (Widp w)
-{_
+{ TRACE_AND_INDENT();
   if (!w) {
     return;
   }
@@ -3085,7 +3085,7 @@ void wid_this_visible (Widp w)
 }
 
 void wid_hide (Widp w)
-{_
+{ TRACE_AND_INDENT();
   if (!w) {
     return;
   }
@@ -3124,7 +3124,7 @@ static uint8_t wid_scroll_trough_mouse_down (Widp w,
                        int32_t x,
                        int32_t y,
                        uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   int32_t dx;
   int32_t dy;
 
@@ -3176,7 +3176,7 @@ static uint8_t wid_scroll_trough_mouse_motion (Widp w,
                          int32_t x, int32_t y,
                          int32_t relx, int32_t rely,
                          int32_t wheelx, int32_t wheely)
-{_
+{ TRACE_AND_INDENT();
   int32_t dx;
   int32_t dy;
 
@@ -3229,7 +3229,7 @@ static uint8_t wid_scroll_trough_mouse_motion (Widp w,
 }
 
 static void wid_adjust_scrollbar (Widp scrollbar, Widp owner)
-{_
+{ TRACE_AND_INDENT();
   double height = wid_get_height(owner);
   double width = wid_get_width(owner);
   double child_height = 0;
@@ -3368,7 +3368,7 @@ static void wid_adjust_scrollbar (Widp scrollbar, Widp owner)
 }
 
 void wid_get_children_size (Widp owner, int32_t *w, int32_t *h)
-{_
+{ TRACE_AND_INDENT();
   double height = wid_get_height(owner);
   double width = wid_get_width(owner);
   double child_height = 0;
@@ -3441,7 +3441,7 @@ void wid_get_children_size (Widp owner, int32_t *w, int32_t *h)
 }
 
 static void wid_update_internal (Widp w)
-{_
+{ TRACE_AND_INDENT();
   int32_t tlx;
   int32_t tly;
   int32_t brx;
@@ -3504,7 +3504,7 @@ static void wid_update_internal (Widp w)
 }
 
 void wid_update (Widp w)
-{_
+{ TRACE_AND_INDENT();
   wid_update_internal(w);
 
   //
@@ -3517,7 +3517,7 @@ void wid_update (Widp w)
 }
 
 void wid_update_mouse (void)
-{_
+{ TRACE_AND_INDENT();
   //
   // So if we are now over a new widget that was created on top of the
   // mouse, we activate it.
@@ -3531,7 +3531,7 @@ void wid_update_mouse (void)
 }
 
 void wid_scroll_text (Widp w)
-{_
+{ TRACE_AND_INDENT();
   std::wstring s;
   Widp prev {};
   Widp tmp {};
@@ -3562,7 +3562,7 @@ void wid_scroll_text (Widp w)
 // line is the input line.
 //
 void wid_scroll_with_input (Widp w, std::wstring str)
-{_
+{ TRACE_AND_INDENT();
   Widp tmp {};
 
   wid_scroll_text(w);
@@ -3585,7 +3585,7 @@ void wid_scroll_with_input (Widp w, std::wstring str)
 }
 
 uint8_t wid_receive_input (Widp w, const SDL_Keysym *key)
-{_
+{ TRACE_AND_INDENT();
   std::wstring beforecursor;
   std::wstring aftercursor;
   std::wstring tmp;
@@ -3839,7 +3839,7 @@ uint8_t wid_receive_input (Widp w, const SDL_Keysym *key)
 // Handle keys no one grabbed.
 //
 static uint8_t wid_receive_unhandled_input (const SDL_Keysym *key)
-{_
+{ TRACE_AND_INDENT();
   Widp w {};
 
   w = wid_get_top_parent(wid_console_input_line);
@@ -3915,7 +3915,7 @@ static uint8_t wid_receive_unhandled_input (const SDL_Keysym *key)
 }
 
 Widp wid_find_at (int32_t x, int32_t y)
-{_
+{ TRACE_AND_INDENT();
   auto w = get(wid_on_screen_at, x, y);
   if (!w) {
     return nullptr;
@@ -3930,7 +3930,7 @@ Widp wid_find_at (int32_t x, int32_t y)
 }
 
 Widp wid_find_under_mouse (void)
-{_
+{ TRACE_AND_INDENT();
   if (ascii_is_empty(ascii_mouse_x, ascii_mouse_y)) {
     return nullptr;
   }
@@ -3949,7 +3949,7 @@ Widp wid_find_under_mouse (void)
 }
 
 Widp wid_find_under_mouse_when_scrolling (void)
-{_
+{ TRACE_AND_INDENT();
   if (ascii_is_empty(ascii_mouse_x, ascii_mouse_y)) {
     return nullptr;
   }
@@ -3969,7 +3969,7 @@ Widp wid_find_under_mouse_when_scrolling (void)
 
 static Widp wid_key_down_handler_at (Widp w, int32_t x, int32_t y,
                    uint8_t strict)
-{_
+{ TRACE_AND_INDENT();
   if (!w) {
     return nullptr;
   }
@@ -4054,7 +4054,7 @@ static Widp wid_key_down_handler_at (Widp w, int32_t x, int32_t y,
 
 static Widp wid_key_up_handler_at (Widp w, int32_t x, int32_t y,
                    uint8_t strict)
-{_
+{ TRACE_AND_INDENT();
   if (!w) {
     return nullptr;
   }
@@ -4129,7 +4129,7 @@ static Widp wid_key_up_handler_at (Widp w, int32_t x, int32_t y,
 
 static Widp wid_joy_button_handler_at (Widp w, int32_t x, int32_t y,
                      uint8_t strict)
-{_
+{ TRACE_AND_INDENT();
   if (!w) {
     return nullptr;
   }
@@ -4188,7 +4188,7 @@ static Widp wid_joy_button_handler_at (Widp w, int32_t x, int32_t y,
 
 static Widp wid_mouse_down_handler_at (Widp w, int32_t x, int32_t y,
                      uint8_t strict)
-{_
+{ TRACE_AND_INDENT();
   if (!w) {
     return nullptr;
   }
@@ -4273,7 +4273,7 @@ static Widp wid_mouse_down_handler_at (Widp w, int32_t x, int32_t y,
 }
 
 static Widp wid_mouse_up_handler_at (Widp w, int32_t x, int32_t y, uint8_t strict)
-{_
+{ TRACE_AND_INDENT();
   if (!w) {
     return nullptr;
   }
@@ -4354,7 +4354,7 @@ static Widp wid_mouse_up_handler_at (Widp w, int32_t x, int32_t y, uint8_t stric
 }
 
 static void wid_children_move_delta_internal (Widp w, int32_t dx, int32_t dy)
-{_
+{ TRACE_AND_INDENT();
   //
   // Make sure you can't move a wid outside the parents box.
   //
@@ -4394,7 +4394,7 @@ static void wid_children_move_delta_internal (Widp w, int32_t dx, int32_t dy)
 }
 
 static void wid_move_delta_internal (Widp w, int32_t dx, int32_t dy)
-{_
+{ TRACE_AND_INDENT();
   wid_tree_detach(w);
 
   //
@@ -4439,14 +4439,14 @@ static void wid_move_delta_internal (Widp w, int32_t dx, int32_t dy)
 }
 
 void wid_move_delta (Widp w, int32_t dx, int32_t dy)
-{_
+{ TRACE_AND_INDENT();
   wid_move_delta_internal(w, dx, dy);
 
   wid_update_internal(w);
 }
 
 void wid_resize (Widp w, int32_t width, int32_t height)
-{_
+{ TRACE_AND_INDENT();
   wid_tree_detach(w);
 
   if (width != -1) {
@@ -4460,7 +4460,7 @@ void wid_resize (Widp w, int32_t width, int32_t height)
 }
 
 void wid_move_delta_pct (Widp w, double dx, double dy)
-{_
+{ TRACE_AND_INDENT();
   if (!w->parent) {
     dx *= (double)TERM_WIDTH;
     dy *= (double)TERM_HEIGHT;
@@ -4475,7 +4475,7 @@ void wid_move_delta_pct (Widp w, double dx, double dy)
 }
 
 void wid_move_to_bottom (Widp w)
-{_
+{ TRACE_AND_INDENT();
   if (w->parent) {
     wid_move_delta(w, 0, wid_get_br_y(w->parent) - wid_get_br_y(w));
   } else {
@@ -4484,12 +4484,12 @@ void wid_move_to_bottom (Widp w)
 }
 
 void wid_move_to_y_off (Widp w, int32_t off)
-{_
+{ TRACE_AND_INDENT();
   wid_move_delta(w, 0, off);
 }
 
 void wid_move_to_left (Widp w)
-{_
+{ TRACE_AND_INDENT();
   if (w->parent) {
     wid_move_delta(w, wid_get_tl_x(w->parent) - wid_get_tl_x(w), 0);
   } else {
@@ -4498,7 +4498,7 @@ void wid_move_to_left (Widp w)
 }
 
 void wid_move_to_right (Widp w)
-{_
+{ TRACE_AND_INDENT();
   if (w->parent) {
     wid_move_delta(w, wid_get_br_x(w->parent) - wid_get_br_x(w), 0);
   } else {
@@ -4507,7 +4507,7 @@ void wid_move_to_right (Widp w)
 }
 
 void wid_move_to_vert_pct (Widp w, double pct)
-{_
+{ TRACE_AND_INDENT();
   double pheight = wid_get_br_y(w->parent) - wid_get_tl_y(w->parent);
   double at = (wid_get_tl_y(w) - wid_get_tl_y(w->parent)) / pheight;
   double delta = (pct - at) * pheight;
@@ -4516,7 +4516,7 @@ void wid_move_to_vert_pct (Widp w, double pct)
 }
 
 void wid_move_to_horiz_pct (Widp w, double pct)
-{_
+{ TRACE_AND_INDENT();
   double pwidth = wid_get_br_x(w->parent) - wid_get_tl_x(w->parent);
   double at = (wid_get_tl_x(w) - wid_get_tl_x(w->parent)) / pwidth;
   double delta = (pct - at) * pwidth;
@@ -4525,7 +4525,7 @@ void wid_move_to_horiz_pct (Widp w, double pct)
 }
 
 void wid_move_to_vert_pct_in (Widp w, double pct, double in)
-{_
+{ TRACE_AND_INDENT();
   if (pct < 0.0) {
     pct = 0.0;
   }
@@ -4542,7 +4542,7 @@ void wid_move_to_vert_pct_in (Widp w, double pct, double in)
 }
 
 void wid_move_to_horiz_pct_in (Widp w, double pct, double in)
-{_
+{ TRACE_AND_INDENT();
   if (pct < 0.0) {
     pct = 0.0;
   }
@@ -4559,7 +4559,7 @@ void wid_move_to_horiz_pct_in (Widp w, double pct, double in)
 }
 
 void wid_move_to_horiz_vert_pct_in (Widp w, double x, double y, double in)
-{_
+{ TRACE_AND_INDENT();
   if (x < 0.0) {
     x = 0.0;
   }
@@ -4588,7 +4588,7 @@ void wid_move_to_horiz_vert_pct_in (Widp w, double x, double y, double in)
 }
 
 void wid_move_to_top (Widp w)
-{_
+{ TRACE_AND_INDENT();
   if (w->parent) {
     wid_move_delta(w, 0, wid_get_tl_y(w->parent) - wid_get_tl_y(w));
   } else {
@@ -4597,7 +4597,7 @@ void wid_move_to_top (Widp w)
 }
 
 static Widp wid_joy_button_handler (int32_t x, int32_t y)
-{_
+{ TRACE_AND_INDENT();
   for (auto iter = wid_top_level.rbegin();
      iter != wid_top_level.rend(); ++iter) {
     auto w = iter->second;
@@ -4619,7 +4619,7 @@ static Widp wid_joy_button_handler (int32_t x, int32_t y)
 }
 
 static Widp wid_mouse_down_handler (int32_t x, int32_t y)
-{_
+{ TRACE_AND_INDENT();
   Widp w {};
 
   w = wid_mouse_down_handler_at(wid_focus, x, y, true /* strict */);
@@ -4670,7 +4670,7 @@ static Widp wid_mouse_down_handler (int32_t x, int32_t y)
 }
 
 static Widp wid_mouse_up_handler (int32_t x, int32_t y)
-{_
+{ TRACE_AND_INDENT();
   Widp w {};
 
   w = wid_mouse_up_handler_at(wid_focus, x, y, true /* strict */);
@@ -4723,7 +4723,7 @@ static Widp wid_mouse_up_handler (int32_t x, int32_t y)
 static Widp wid_mouse_motion_handler (int32_t x, int32_t y,
                     int32_t relx, int32_t rely,
                     int32_t wheelx, int32_t wheely)
-{_
+{ TRACE_AND_INDENT();
   Widp w {};
 
   w = get(wid_on_screen_at, x, y);
@@ -4746,7 +4746,7 @@ static int wid_mouse_motion_recursion;
 void wid_mouse_motion (int32_t x, int32_t y,
              int32_t relx, int32_t rely,
              int32_t wheelx, int32_t wheely)
-{_
+{ TRACE_AND_INDENT();
   int got_one = false;
 
   pixel_to_ascii(&x, &y);
@@ -4931,7 +4931,7 @@ void wid_mouse_motion (int32_t x, int32_t y,
 // If no handler for this button, fake a mouse event.
 //
 void wid_fake_joy_button (int32_t x, int32_t y)
-{_
+{ TRACE_AND_INDENT();
   if (get(sdl_joy_buttons, SDL_JOY_BUTTON_A)) {
     wid_mouse_down(SDL_BUTTON_LEFT, x, y);
     return;
@@ -4995,7 +4995,7 @@ void wid_fake_joy_button (int32_t x, int32_t y)
 }
 
 void wid_joy_button (int32_t x, int32_t y)
-{_
+{ TRACE_AND_INDENT();
   pixel_to_ascii(&x, &y);
   if (!ascii_ok(x, y)) {
     return;
@@ -5077,7 +5077,7 @@ void wid_joy_button (int32_t x, int32_t y)
 }
 
 void wid_mouse_down (uint32_t button, int32_t x, int32_t y)
-{_
+{ TRACE_AND_INDENT();
   Widp w {};
 
   pixel_to_ascii(&x, &y);
@@ -5135,7 +5135,7 @@ void wid_mouse_down (uint32_t button, int32_t x, int32_t y)
 }
 
 void wid_mouse_held_down (uint32_t button, int32_t x, int32_t y)
-{_
+{ TRACE_AND_INDENT();
   Widp w {};
 
   pixel_to_ascii(&x, &y);
@@ -5180,7 +5180,7 @@ void wid_mouse_held_down (uint32_t button, int32_t x, int32_t y)
 }
 
 void wid_mouse_up (uint32_t button, int32_t x, int32_t y)
-{_
+{ TRACE_AND_INDENT();
   Widp w {};
 
   pixel_to_ascii(&x, &y);
@@ -5211,7 +5211,7 @@ void wid_mouse_up (uint32_t button, int32_t x, int32_t y)
 }
 
 static Widp wid_key_down_handler (int32_t x, int32_t y)
-{_
+{ TRACE_AND_INDENT();
   Widp w {};
 
 //TOPCON("key down.");
@@ -5283,7 +5283,7 @@ static Widp wid_key_down_handler (int32_t x, int32_t y)
 }
 
 static Widp wid_key_up_handler (int32_t x, int32_t y)
-{_
+{ TRACE_AND_INDENT();
   Widp w {};
 
   w = wid_key_up_handler_at(wid_focus, x, y, true /* strict */);
@@ -5403,7 +5403,7 @@ int g_blend_b;
 #endif
 
 void wid_key_down (const struct SDL_Keysym *key, int32_t x, int32_t y)
-{_
+{ TRACE_AND_INDENT();
   Widp w {};
 
   pixel_to_ascii(&x, &y);
@@ -5507,7 +5507,7 @@ try_parent:
 }
 
 void wid_key_up (const struct SDL_Keysym *key, int32_t x, int32_t y)
-{_
+{ TRACE_AND_INDENT();
   Widp w {};
 
   pixel_to_ascii(&x, &y);
@@ -5585,7 +5585,7 @@ void wid_get_abs_coords (Widp w,
              int32_t *tly,
              int32_t *brx,
              int32_t *bry)
-{_
+{ TRACE_AND_INDENT();
   Widp p {};
 
   *tlx = wid_get_tl_x(w);
@@ -5639,7 +5639,7 @@ void wid_get_abs_coords (Widp w,
 // Get the onscreen co-ords of the widget, clipped to the parent.
 //
 void wid_get_abs (Widp w, int32_t *x, int32_t *y)
-{_
+{ TRACE_AND_INDENT();
   int32_t tlx;
   int32_t tly;
   int32_t brx;
@@ -5652,7 +5652,7 @@ void wid_get_abs (Widp w, int32_t *x, int32_t *y)
 }
 
 void wid_get_pct (Widp w, double *px, double *py)
-{_
+{ TRACE_AND_INDENT();
   int32_t x;
   int32_t y;
 
@@ -5666,7 +5666,7 @@ void wid_get_pct (Widp w, double *px, double *py)
 // Finish off a widgets move.
 //
 void wid_move_end (Widp w)
-{_
+{ TRACE_AND_INDENT();
   while (w->moving) {
     wid_move_dequeue(w);
   }
@@ -5680,7 +5680,7 @@ static void wid_display (Widp w,
              uint8_t disable_scissor,
              uint8_t *updated_scissors,
              int clip)
-{_
+{ TRACE_AND_INDENT();
   wid_total_count++;
   int32_t clip_height = 0;
   int32_t clip_width = 0;
@@ -6018,7 +6018,7 @@ static void wid_display (Widp w,
 // Do stuff for all widgets.
 //
 void wid_move_all (void)
-{_
+{ TRACE_AND_INDENT();
   if (wid_top_level3.empty()) {
     return;
   }
@@ -6069,7 +6069,7 @@ void wid_move_all (void)
 // Delayed destroy?
 //
 static void wid_gc (Widp w)
-{_
+{ TRACE_AND_INDENT();
   WID_DBG(w, "gc");
 
   if (w->being_destroyed) {
@@ -6086,7 +6086,7 @@ static void wid_gc (Widp w)
 // Do stuff for all widgets.
 //
 void wid_gc_all (void)
-{_
+{ TRACE_AND_INDENT();
   std::vector<Widp> to_gc;
 
   for (;;) {
@@ -6104,7 +6104,7 @@ void wid_gc_all (void)
 // Do stuff for all widgets.
 //
 void wid_tick_all (void)
-{_
+{ TRACE_AND_INDENT();
   wid_time = time_get_time_ms_cached();
 
   std::list<Widp> work;
@@ -6182,7 +6182,7 @@ static int saved_mouse_x;
 static int saved_mouse_y;
 
 void wid_mouse_hide (int value)
-{_
+{ TRACE_AND_INDENT();
   int visible = !value;
 
   if (visible != wid_mouse_visible) {
@@ -6197,7 +6197,7 @@ void wid_mouse_hide (int value)
 }
 
 void wid_mouse_warp (Widp w)
-{_
+{ TRACE_AND_INDENT();
   int32_t tlx, tly, brx, bry;
 
   wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
@@ -6209,7 +6209,7 @@ void wid_mouse_warp (Widp w)
 }
 
 void wid_mouse_move (Widp w)
-{_
+{ TRACE_AND_INDENT();
   int32_t tlx, tly, brx, bry;
 
   wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
@@ -6228,7 +6228,7 @@ void wid_mouse_move (Widp w)
 // Display all widgets
 //
 void wid_display_all (void)
-{_
+{ TRACE_AND_INDENT();
   ascii_clear_display();
 
   gl_leave_2d_mode();
@@ -6312,7 +6312,7 @@ printf("========================================= %d\n", wid_total_count);
 }
 
 uint8_t wid_is_hidden (Widp w)
-{_
+{ TRACE_AND_INDENT();
   if (!w) {
     return false;
   }
@@ -6333,7 +6333,7 @@ uint8_t wid_is_hidden (Widp w)
 }
 
 uint8_t wid_is_always_hidden (Widp w)
-{_
+{ TRACE_AND_INDENT();
   if (w->always_hidden) {
     return true;
   }
@@ -6342,7 +6342,7 @@ uint8_t wid_is_always_hidden (Widp w)
 }
 
 void wid_move_to_pct (Widp w, double x, double y)
-{_
+{ TRACE_AND_INDENT();
   if (!w->parent) {
     x *= (double)TERM_WIDTH;
     y *= (double)TERM_HEIGHT;
@@ -6358,7 +6358,7 @@ void wid_move_to_pct (Widp w, double x, double y)
 }
 
 void wid_move_to_abs (Widp w, int32_t x, int32_t y)
-{_
+{ TRACE_AND_INDENT();
   int32_t dx = x - wid_get_tl_x(w);
   int32_t dy = y - wid_get_tl_y(w);
 
@@ -6366,7 +6366,7 @@ void wid_move_to_abs (Widp w, int32_t x, int32_t y)
 }
 
 void wid_move_to_pct_centered (Widp w, double x, double y)
-{_
+{ TRACE_AND_INDENT();
   if (!w->parent) {
     x *= (double)TERM_WIDTH;
     y *= (double)TERM_HEIGHT;
@@ -6385,7 +6385,7 @@ void wid_move_to_pct_centered (Widp w, double x, double y)
 }
 
 void wid_move_to_abs_centered (Widp w, int32_t x, int32_t y)
-{_
+{ TRACE_AND_INDENT();
   int32_t dx = x - wid_get_tl_x(w);
   int32_t dy = y - wid_get_tl_y(w);
 
@@ -6401,7 +6401,7 @@ static void wid_move_enqueue (Widp w,
                 int32_t moving_end_x,
                 int32_t moving_end_y,
                 uint32_t ms)
-{_
+{ TRACE_AND_INDENT();
   w->moving_start.x = moving_start_x;
   w->moving_start.y = moving_start_y;
   w->moving_end.x = moving_end_x;
@@ -6415,7 +6415,7 @@ static void wid_move_enqueue (Widp w,
 }
 
 static void wid_move_dequeue (Widp w)
-{_
+{ TRACE_AND_INDENT();
   if (!w->moving) {
     return;
   }
@@ -6452,7 +6452,7 @@ static void wid_move_dequeue (Widp w)
 }
 
 void wid_move_to_pct_in (Widp w, double x, double y, uint32_t ms)
-{_
+{ TRACE_AND_INDENT();
   if (!w->parent) {
     x *= (double)TERM_WIDTH;
     y *= (double)TERM_HEIGHT;
@@ -6474,12 +6474,12 @@ void wid_move_to_pct_in (Widp w, double x, double y, uint32_t ms)
 }
 
 void wid_move_to_abs_in (Widp w, int32_t x, int32_t y, uint32_t ms)
-{_
+{ TRACE_AND_INDENT();
   wid_move_enqueue(w, wid_get_tl_x(w), wid_get_tl_y(w), x, y, ms);
 }
 
 void wid_move_delta_in (Widp w, int32_t dx, int32_t dy, uint32_t ms)
-{_
+{ TRACE_AND_INDENT();
   int32_t x = wid_get_tl_x(w);
   int32_t y = wid_get_tl_y(w);
 
@@ -6487,7 +6487,7 @@ void wid_move_delta_in (Widp w, int32_t dx, int32_t dy, uint32_t ms)
 }
 
 void wid_move_to_pct_centered_in (Widp w, double x, double y, uint32_t ms)
-{_
+{ TRACE_AND_INDENT();
   if (!w->parent) {
     x *= (double)TERM_WIDTH;
     y *= (double)TERM_HEIGHT;
@@ -6512,7 +6512,7 @@ void wid_move_to_pct_centered_in (Widp w, double x, double y, uint32_t ms)
 }
 
 void wid_move_to_abs_centered_in (Widp w, int32_t x, int32_t y, uint32_t ms)
-{_
+{ TRACE_AND_INDENT();
   x -= (wid_get_br_x(w) - wid_get_tl_x(w))/2;
   y -= (wid_get_br_y(w) - wid_get_tl_y(w))/2;
 
@@ -6520,7 +6520,7 @@ void wid_move_to_abs_centered_in (Widp w, int32_t x, int32_t y, uint32_t ms)
 }
 
 void wid_move_to_centered_in (Widp w, int32_t x, int32_t y, uint32_t ms)
-{_
+{ TRACE_AND_INDENT();
   wid_move_enqueue(w, wid_get_tl_x(w), wid_get_tl_y(w), x, y, ms);
 }
 

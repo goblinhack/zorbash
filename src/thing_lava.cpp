@@ -17,7 +17,7 @@
 #include "my_ptrcheck.h"
 
 void Thing::lava_tick (void)
-{_
+{ TRACE_AND_INDENT();
   if (!hates_fire()) {
     if (is_player()) {
       dbg("Lava tick: No, not a fire avoider");

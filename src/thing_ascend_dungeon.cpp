@@ -17,7 +17,7 @@
 #include "my_gl.h"
 
 bool Thing::ascend_dungeon_tick (void)
-{_
+{ TRACE_AND_INDENT();
   if (!level->is_ascend_dungeon(mid_at.x, mid_at.y)) {
     return false;
   }
@@ -60,7 +60,7 @@ bool Thing::ascend_dungeon_tick (void)
 }
 
 bool Thing::ascend_dungeon (void)
-{_
+{ TRACE_AND_INDENT();
   dbg("Ascend dungeon");
   if (is_changing_level ||
     is_hidden ||

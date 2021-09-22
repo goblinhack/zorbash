@@ -11,7 +11,7 @@
 #include "my_ptrcheck.h"
 
 bool Thing::place (const std::string& what, const point &p)
-{_
+{ TRACE_AND_INDENT();
   dbg("place");
 
   level->thing_new(what, fpoint(p.x, p.y));

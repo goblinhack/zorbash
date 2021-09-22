@@ -77,7 +77,7 @@ Thing::Thing_ (void)
 }
 
 void Thing::on_born (void)
-{_
+{ TRACE_AND_INDENT();
   auto on_born = tp()->on_born_do();
   if (std::empty(on_born)) {
     return;
@@ -196,7 +196,7 @@ void Thing::init (Levelp level,
 
   is_hungry = tpp->is_hunger_insatiable();
 
-  {_
+  { TRACE_AND_INDENT();
     auto v = tpp->get_health_initial();
     if (unlikely(v)) {
       set_health(v);
@@ -204,7 +204,7 @@ void Thing::init (Levelp level,
     }
   }
 
-  {_
+  { TRACE_AND_INDENT();
     auto v = tpp->stamina();
     if (unlikely(v)) {
       set_stamina(v);
@@ -212,7 +212,7 @@ void Thing::init (Levelp level,
     }
   }
 
-  {_
+  { TRACE_AND_INDENT();
     auto v = tpp->enchant_level();
     if (unlikely(v)) {
       set_enchant(v);
@@ -220,14 +220,14 @@ void Thing::init (Levelp level,
     }
   }
 
-  {_
+  { TRACE_AND_INDENT();
     auto v = tpp->enchant_max();
     if (unlikely(v)) {
       set_enchant_max(v);
     }
   }
 
-  {_
+  { TRACE_AND_INDENT();
     auto v = tpp->stat_defence();
     if (unlikely(v)) {
       set_stat_defence(v);
@@ -235,133 +235,133 @@ void Thing::init (Levelp level,
     }
   }
 
-  {_
+  { TRACE_AND_INDENT();
     auto v = tpp->lifespan();
     if (unlikely(v)) {
       set_lifespan(v);
     }
   }
 
-  {_
+  { TRACE_AND_INDENT();
     auto v = tpp->stats01();
     if (unlikely(v)) {
       set_stats01(v);
     }
   }
 
-  {_
+  { TRACE_AND_INDENT();
     auto v = tpp->stats02();
     if (unlikely(v)) {
       set_stats02(v);
     }
   }
 
-  {_
+  { TRACE_AND_INDENT();
     auto v = tpp->stats03();
     if (unlikely(v)) {
       set_stats03(v);
     }
   }
 
-  {_
+  { TRACE_AND_INDENT();
     auto v = tpp->stats04();
     if (unlikely(v)) {
       set_stats04(v);
     }
   }
 
-  {_
+  { TRACE_AND_INDENT();
     auto v = tpp->stats05();
     if (unlikely(v)) {
       set_stats05(v);
     }
   }
 
-  {_
+  { TRACE_AND_INDENT();
     auto v = tpp->stats06();
     if (unlikely(v)) {
       set_stats06(v);
     }
   }
 
-  {_
+  { TRACE_AND_INDENT();
     auto v = tpp->stats07();
     if (unlikely(v)) {
       set_stats07(v);
     }
   }
 
-  {_
+  { TRACE_AND_INDENT();
     auto v = tpp->stats08();
     if (unlikely(v)) {
       set_stats08(v);
     }
   }
 
-  {_
+  { TRACE_AND_INDENT();
     auto v = tpp->stats09();
     if (unlikely(v)) {
       set_stats09(v);
     }
   }
 
-  {_
+  { TRACE_AND_INDENT();
     auto v = tpp->stats10();
     if (unlikely(v)) {
       set_stats10(v);
     }
   }
 
-  {_
+  { TRACE_AND_INDENT();
     auto v = tpp->stats11();
     if (unlikely(v)) {
       set_stats11(v);
     }
   }
 
-  {_
+  { TRACE_AND_INDENT();
     auto v = tpp->stats12();
     if (unlikely(v)) {
       set_stats12(v);
     }
   }
 
-  {_
+  { TRACE_AND_INDENT();
     auto v = tpp->stat_constitution();
     if (unlikely(v)) {
       set_stat_constitution(v);
     }
   }
 
-  {_
+  { TRACE_AND_INDENT();
     auto v = tpp->stat_attack();
     if (unlikely(v)) {
       set_stat_attack(v);
     }
   }
 
-  {_
+  { TRACE_AND_INDENT();
     auto v = tpp->stat_constitution();
     if (unlikely(v)) {
       set_stat_constitution(v);
     }
   }
 
-  {_
+  { TRACE_AND_INDENT();
     auto v = tpp->stats17();
     if (unlikely(v)) {
       set_stats17(v);
     }
   }
 
-  {_
+  { TRACE_AND_INDENT();
     auto v = tpp->throw_distance();
     if (unlikely(v)) {
       set_throw_distance(v);
     }
   }
 
-  {_
+  { TRACE_AND_INDENT();
     auto v = tpp->stat_strength();
     if (unlikely(v)) {
       set_stat_strength(v);
@@ -512,7 +512,7 @@ void Thing::init (Levelp level,
 }
 
 void Thing::reinit (void)
-{_
+{ TRACE_AND_INDENT();
   verify(this);
   const auto tpp = tp_or_update();
   if (unlikely(!tpp)) {

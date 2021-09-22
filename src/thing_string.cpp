@@ -17,7 +17,7 @@
 #include "my_ptrcheck.h"
 
 std::string Thing::to_string (void) const
-{_
+{ TRACE_AND_INDENT();
   auto tpp = tp();
   verify(this);
 
@@ -35,7 +35,7 @@ std::string Thing::to_string (void) const
                  mid_at.x, mid_at.y));
   }
 
-  if (unlikely(!tpp)) {_
+  if (unlikely(!tpp)) { TRACE_AND_INDENT();
     return (string_sprintf("L%d,%d,%d %08" PRIx32 "(<no tp>%s%s%s%s%s%s%s%s @%g,%g)",
                  level->world_at.x,
                  level->world_at.y,
@@ -50,7 +50,7 @@ std::string Thing::to_string (void) const
                  is_moving                     ? "/moving" : "",
                  is_falling                    ? "/falling" : "",
                  mid_at.x, mid_at.y));
-  } else if (get_health_max() || is_tickable() || is_interesting()) {_
+  } else if (get_health_max() || is_tickable() || is_interesting()) { TRACE_AND_INDENT();
     return (string_sprintf("L%d,%d,%d %08" PRIx32 "(%s%s%s%s%s%s%s%s%s%s%s%s%s%s @%g,%g %d/%dh)",
                  level->world_at.x,
                  level->world_at.y,
@@ -71,7 +71,7 @@ std::string Thing::to_string (void) const
                  is_waiting_to_descend_sewer   ? "/descend-sewer" : "",
                  mid_at.x, mid_at.y,
                  get_health(), get_health_max()));
-  } else {_
+  } else { TRACE_AND_INDENT();
     return (string_sprintf("L%d,%d,%d %08" PRIx32 "(%s%s%s%s%s%s%s%s%s @%g,%g)",
                  level->world_at.x,
                  level->world_at.y,
@@ -90,7 +90,7 @@ std::string Thing::to_string (void) const
 }
 
 std::string Thing::to_short_string (void) const
-{_
+{ TRACE_AND_INDENT();
   auto tpp = tp();
   verify(this);
 
@@ -107,7 +107,7 @@ std::string Thing::to_short_string (void) const
                  mid_at.x, mid_at.y));
   }
 
-  if (unlikely(!tpp)) {_
+  if (unlikely(!tpp)) { TRACE_AND_INDENT();
     return (string_sprintf("L%d,%d,%d (<no tp>%s%s%s%s%s%s%s%s @%g,%g)",
                  level->world_at.x,
                  level->world_at.y,
@@ -169,7 +169,7 @@ std::string Thing::to_short_string (void) const
 }
 
 std::string Thing::to_dbg_string (void) const
-{_
+{ TRACE_AND_INDENT();
   verify(this);
 
   return (string_sprintf("L%d,%d,%d %08" PRIx32
@@ -276,7 +276,7 @@ std::string Thing::to_dbg_string (void) const
 // Like the above, but excludes temporary flags like particles
 //
 std::string Thing::to_dbg_saved_string (void) const
-{_
+{ TRACE_AND_INDENT();
   verify(this);
 
   return (string_sprintf("L%d,%d,%d %08" PRIx32

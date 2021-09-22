@@ -15,7 +15,7 @@
 #include "my_ptrcheck.h"
 
 Thingp Thing::get_top_owner (void) const
-{_
+{ TRACE_AND_INDENT();
   auto id = get_immediate_owner_id();
   if (likely(id.ok())) {
     auto i = level->thing_find(id);
@@ -32,7 +32,7 @@ Thingp Thing::get_top_owner (void) const
 }
 
 Thingp Thing::get_immediate_owner (void) const
-{_
+{ TRACE_AND_INDENT();
   auto id = get_immediate_owner_id();
   if (likely(id.ok())) {
     auto i = level->thing_find(id);
@@ -46,7 +46,7 @@ Thingp Thing::get_immediate_owner (void) const
 }
 
 void Thing::set_owner (Thingp owner)
-{_
+{ TRACE_AND_INDENT();
   if (owner) {
     verify(owner);
   }
@@ -81,7 +81,7 @@ void Thing::set_owner (Thingp owner)
 }
 
 void Thing::remove_owner (void)
-{_
+{ TRACE_AND_INDENT();
   auto old_owner = get_immediate_owner();
   if (!old_owner) {
     return;
@@ -100,7 +100,7 @@ void Thing::remove_owner (void)
 }
 
 bool Thing::change_owner (Thingp new_owner)
-{_
+{ TRACE_AND_INDENT();
   if (!new_owner) {
     err("No new owner");
   return true;

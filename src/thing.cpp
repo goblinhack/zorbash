@@ -61,7 +61,7 @@ std::size_t Thing::get_light_count (void) const
 }
 
 const ThingId& Thing::get_immediate_owner_id (void) const
-{_
+{ TRACE_AND_INDENT();
   if (likely(monstp != nullptr)) {
     verify(monstp);
     return (monstp->owner_id);
@@ -71,7 +71,7 @@ const ThingId& Thing::get_immediate_owner_id (void) const
 }
 
 const ThingId& Thing::get_top_owner_id (void) const
-{_
+{ TRACE_AND_INDENT();
   auto t = get_top_owner();
   if (t) {
     return t->id;
@@ -80,13 +80,13 @@ const ThingId& Thing::get_top_owner_id (void) const
 }
 
 const ThingId& Thing::set_owner_id (const ThingId &v)
-{_
+{ TRACE_AND_INDENT();
   new_monst();
   return (monstp->owner_id = v);
 }
 
 const ThingId& Thing::get_immediate_minion_owner_id (void) const
-{_
+{ TRACE_AND_INDENT();
   if (likely(monstp != nullptr)) {
     verify(monstp);
     return (monstp->minion_owner_id);
@@ -96,13 +96,13 @@ const ThingId& Thing::get_immediate_minion_owner_id (void) const
 }
 
 const ThingId& Thing::set_minion_owner_id (const ThingId &v)
-{_
+{ TRACE_AND_INDENT();
   new_monst();
   return (monstp->minion_owner_id = v);
 }
 
 const ThingId& Thing::get_immediate_spawned_owner_id (void) const
-{_
+{ TRACE_AND_INDENT();
   if (likely(monstp != nullptr)) {
     verify(monstp);
     return (monstp->spawner_owner_id);
@@ -112,17 +112,17 @@ const ThingId& Thing::get_immediate_spawned_owner_id (void) const
 }
 
 const ThingId& Thing::set_spawned_owner_id (const ThingId &v)
-{_
+{ TRACE_AND_INDENT();
   new_monst();
   return (monstp->spawner_owner_id = v);
 }
 
 const fpoint &Thing::get_interpolated_mid_at (void) const
-{_
+{ TRACE_AND_INDENT();
   return (interpolated_mid_at);
 }
 
 void Thing::set_interpolated_mid_at (fpoint v)
-{_
+{ TRACE_AND_INDENT();
   interpolated_mid_at = v;
 }

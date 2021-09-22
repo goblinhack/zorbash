@@ -181,7 +181,7 @@ void CROAK_CLEAN(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
 #ifdef ENABLE_ASSERT
 #undef ASSERT
 #define ASSERT(x) \
-  if (! (x)) {_ \
+  if (! (x)) { TRACE_AND_INDENT(); \
     std::stringstream ss; \
     ss << "Assert '" << #x << "' failed at line " \
        << __LINE__ << ", file " << __FILE__ \
@@ -196,7 +196,7 @@ void CROAK_CLEAN(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
 // https://stackoverflow.com/questions/2193544/how-to-print-additional-information-when-assert-fails
 #ifdef ENABLE_ASSERT
 #define ASSERT_EX(left, operator, right) \
-  if (!((left) operator (right))) {_ \
+  if (!((left) operator (right))) { TRACE_AND_INDENT(); \
     std::cerr << "ASSERT FAILED: " << #left << " " << #operator << " " << #right << " @ " << __FILE__ << ":" << __PRETTY_FUNCTION__ << " line " << __LINE__ << " " << #left << "=" << (left) << "; " << #right << "=" << (right) << std::endl; \
     ASSERT(left operator right); \
   }

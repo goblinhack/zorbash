@@ -13,7 +13,7 @@
 #include "my_ptrcheck.h"
 
 Level::~Level (void)
-{_
+{ TRACE_AND_INDENT();
   log("Delete level");
   if (game->level == this) {
     log("Delete current game level");
@@ -23,7 +23,7 @@ Level::~Level (void)
 }
 
 void Level::fini (void)
-{_
+{ TRACE_AND_INDENT();
   log("-");
   log("Destroying, seed %u", seed);
   log("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");

@@ -11,12 +11,12 @@
 #include "my_ptrcheck.h"
 
 Level::Level (void)
-{_
+{ TRACE_AND_INDENT();
   newptr(this, "level");
 }
 
 void Level::clear (void)
-{_
+{ TRACE_AND_INDENT();
   _fade_in_map = {};
   _gfx_water = {};
   _heatmap = {};

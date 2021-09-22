@@ -33,7 +33,7 @@ Laser_::Laser_(
   pixel_map_at(pixel_map_at),
   ts_start(ts_start),
   ts_stop(ts_stop)
-{_
+{ TRACE_AND_INDENT();
   auto t = level->thing_find(id);
   if (!t) {
     ERR("no laser");
@@ -90,7 +90,7 @@ Laser_::Laser_(
 }
 
 void Level::new_laser (ThingId id, point start, point stop, uint32_t dur)
-{_
+{ TRACE_AND_INDENT();
   if (id.ok()) {
     auto t = thing_find(id);
     if (t) {
@@ -108,7 +108,7 @@ void Level::new_laser (ThingId id, point start, point stop, uint32_t dur)
 }
 
 void Level::display_lasers (void)
-{_
+{ TRACE_AND_INDENT();
 #if 0
   CON("-");
   for (auto p : all_lasers) {
@@ -229,12 +229,12 @@ void Level::display_lasers (void)
 }
 
 bool Thing::laser_anim_exists (void)
-{_
+{ TRACE_AND_INDENT();
   return has_laser;
 }
 
 void Thing::delete_laser (void)
-{_
+{ TRACE_AND_INDENT();
   auto e = std::remove_if(level->all_lasers.begin(),
               level->all_lasers.end(),
     [=, this] (Laser &p) {

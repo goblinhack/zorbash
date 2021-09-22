@@ -71,7 +71,7 @@ color LIGHTSLATEGRAY;
 #endif
 
 void color_init3 (void)
-{_
+{ TRACE_AND_INDENT();
 #if 0
   color_set("hotpink1", &HOTPINK1, 255, 110, 180, 255);
   color_set("hotpink2", &HOTPINK2, 238, 106, 167, 255);

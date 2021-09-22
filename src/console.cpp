@@ -11,7 +11,7 @@
 #include "my_thing_template.h"
 
 static inline void term_puts_fg (unsigned char a)
-{_
+{ TRACE_AND_INDENT();
   static const char *data[] = {
     "[30m", "[31m", "[32m", "[33m",
     "[34m", "[35m", "[36m", "[37m",
@@ -26,7 +26,7 @@ static inline void term_puts_fg (unsigned char a)
 }
 
 static void term_puts_fgbg (unsigned char fg, unsigned char bg)
-{_
+{ TRACE_AND_INDENT();
   static const char *data[] = {
       "[40;30m", "[40;31m", "[40;32m", "[40;33m",
       "[40;34m", "[40;35m", "[40;36m", "[40;37m",
@@ -58,7 +58,7 @@ static void term_puts_fgbg (unsigned char fg, unsigned char bg)
 }
 
 static term_color term_color_string_to_index (const wchar_t **s)
-{_
+{ TRACE_AND_INDENT();
   if (!wcsncmp(*s, L"black$", sizeof("black$")-1)) {
     *s += sizeof("black$")-1;
     return (TERM_COLOR_BLACK);
@@ -102,7 +102,7 @@ static term_color term_color_string_to_index (const wchar_t **s)
 }
 
 static term_color term_color_string_to_index (const char **s)
-{_
+{ TRACE_AND_INDENT();
   if (!strncmp(*s, "black$", sizeof("black$")-1)) {
     *s += sizeof("black$")-1;
     return (TERM_COLOR_BLACK);
@@ -146,7 +146,7 @@ static term_color term_color_string_to_index (const char **s)
 }
 
 void term_log (const wchar_t *s)
-{_
+{ TRACE_AND_INDENT();
   wchar_t c;
 
   int fg = TERM_COLOR_WHITE;
@@ -175,7 +175,7 @@ void term_log (const wchar_t *s)
 }
 
 void term_log (const char *s)
-{_
+{ TRACE_AND_INDENT();
   char c;
 
   int fg = TERM_COLOR_WHITE;

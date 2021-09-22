@@ -36,7 +36,7 @@ static void cancelled (Widp w, const std::wstring& text)
 }
 
 void Game::choose_seed_select (void)
-{_
+{ TRACE_AND_INDENT();
   CON("Choose seed menu");
 
   wid_rightbar_fini();

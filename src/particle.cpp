@@ -25,9 +25,9 @@ void Level::new_internal_particle (ThingId id,
                                    const Tilep tile,
                                    bool hflip,
                                    bool make_visible_at_end)
-{_
+{ TRACE_AND_INDENT();
   log("Create new internal particle");
-_
+  TRACE_AND_INDENT();
   if (!tile) {
     err("No particle tile");
     return;
@@ -60,9 +60,9 @@ void Level::new_internal_particle (point start, point stop, isize sz, uint32_t d
                                    const Tilep tile,
                                    bool hflip,
                                    bool make_visible_at_end)
-{_
+{ TRACE_AND_INDENT();
   log("Create new internal particle");
-_
+  TRACE_AND_INDENT();
   if (!tile) {
     err("No particle tile");
     return;
@@ -75,7 +75,7 @@ _
 }
 
 void Level::display_internal_particles (void)
-{_
+{ TRACE_AND_INDENT();
 #if 0
   CON("-");
   for (auto p : all_internal_particles) {
@@ -213,9 +213,9 @@ void Level::new_external_particle (ThingId id,
                                    point start, point stop, isize sz, uint32_t dur,
                                    const Tilep tile, bool hflip,
                                    bool make_visible_at_end)
-{_
+{ TRACE_AND_INDENT();
   log("Create new external particle");
-_
+  TRACE_AND_INDENT();
   if (!tile) {
     err("No particle tile");
     return;
@@ -250,9 +250,9 @@ _
 void Level::new_external_particle (point start, point stop, isize sz, uint32_t dur,
                                    const Tilep tile, bool hflip,
                                    bool make_visible_at_end)
-{_
+{ TRACE_AND_INDENT();
   log("Create new external particle");
-_
+  TRACE_AND_INDENT();
   if (!tile) {
     err("No particle tile");
     return;
@@ -265,7 +265,7 @@ _
 }
 
 void Level::display_external_particles (void)
-{_
+{ TRACE_AND_INDENT();
 #if 0
   CON("-");
   for (auto p : all_external_particles) {
@@ -414,12 +414,12 @@ void Level::display_external_particles (void)
 }
 
 bool Thing::particle_anim_exists (void)
-{_
+{ TRACE_AND_INDENT();
   return has_internal_particle || has_external_particle;
 }
 
 void Thing::delete_particle (void)
-{_
+{ TRACE_AND_INDENT();
   //
   // Don't remove immediately in case we are walking the particles.
   //

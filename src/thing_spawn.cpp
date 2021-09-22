@@ -20,9 +20,9 @@
 #include "my_array_bounds_check.h"
 
 bool Thing::spawn_next_to (const std::string& what)
-{_
+{ TRACE_AND_INDENT();
   dbg("Spawn %s next to", what.c_str());
-_
+  TRACE_AND_INDENT();
   std::vector<point> possible;
   static const std::vector<point> all_deltas = {
     point(-1, -1),
@@ -106,7 +106,7 @@ _
 }
 
 bool Thing::spawn_next_to_or_on_monst (const std::string& what)
-{_
+{ TRACE_AND_INDENT();
   dbg("Spawn %s next to or on monst", what.c_str());
 
   std::vector<point> possible;
@@ -189,7 +189,7 @@ bool Thing::spawn_next_to_or_on_monst (const std::string& what)
 bool Thing::spawn_radius_range (Thingp item, Thingp target,
                 const std::string& what,
                 uint32_t radius_min, uint32_t radius_max)
-{_
+{ TRACE_AND_INDENT();
   auto tpp = tp_find(what);
   if (!tpp) {
     err("Cannot find %s to spawn", what.c_str());
@@ -262,7 +262,7 @@ bool Thing::spawn_radius_range (Thingp item, Thingp target,
 }
 
 bool Thing::spawn_fire (const std::string& what)
-{_
+{ TRACE_AND_INDENT();
   dbg("Spawn fire: %s", what.c_str());
 
   std::vector<point> possible;
@@ -322,7 +322,7 @@ bool Thing::spawn_fire (const std::string& what)
 }
 
 bool Thing::spawn_at_if_possible (const std::string& what)
-{_
+{ TRACE_AND_INDENT();
   dbg("Spawn under: %s", what.c_str());
 
   std::vector<point> possible;
@@ -361,7 +361,7 @@ bool Thing::spawn_at_if_possible (const std::string& what)
 }
 
 bool Thing::spawn_at (const std::string& what)
-{_
+{ TRACE_AND_INDENT();
   dbg("Spawn under: %s", what.c_str());
 
   std::vector<point> possible;

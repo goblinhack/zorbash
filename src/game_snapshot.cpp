@@ -14,7 +14,7 @@
 #include "my_wid_actionbar.h"
 
 void Game::save_snapshot_check (void)
-{_
+{ TRACE_AND_INDENT();
   //
   // Periodic snapshot saves
   //

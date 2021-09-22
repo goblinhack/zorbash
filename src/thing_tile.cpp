@@ -10,7 +10,7 @@
 #include "my_thing_template.h"
 
 void Thing::get_tiles ()
-{_
+{ TRACE_AND_INDENT();
   auto n = (uint32_t) id.id;
   auto tpp = tp();
   auto out = &tiles;
@@ -158,46 +158,46 @@ void Thing::get_tiles ()
 }
 
 uint8_t tile_is_dir_down (Tilep t)
-{_
+{ TRACE_AND_INDENT();
   return (t->dir == THING_DIR_DOWN);
 }
 
 uint8_t tile_is_dir_up (Tilep t)
-{_
+{ TRACE_AND_INDENT();
   return (t->dir == THING_DIR_UP);
 }
 
 uint8_t tile_is_dir_left (Tilep t)
-{_
+{ TRACE_AND_INDENT();
   return (t->dir == THING_DIR_LEFT);
 }
 
 uint8_t tile_is_dir_right (Tilep t)
-{_
+{ TRACE_AND_INDENT();
   return (t->dir == THING_DIR_RIGHT);
 }
 
 uint8_t tile_is_dir_none (Tilep t)
-{_
+{ TRACE_AND_INDENT();
   return (t->dir == THING_DIR_NONE);
 }
 
 uint8_t tile_is_dir_tl (Tilep t)
-{_
+{ TRACE_AND_INDENT();
   return (t->dir == THING_DIR_TL);
 }
 
 uint8_t tile_is_dir_bl (Tilep t)
-{_
+{ TRACE_AND_INDENT();
   return (t->dir == THING_DIR_BL);
 }
 
 uint8_t tile_is_dir_tr (Tilep t)
-{_
+{ TRACE_AND_INDENT();
   return (t->dir == THING_DIR_TR);
 }
 
 uint8_t tile_is_dir_br (Tilep t)
-{_
+{ TRACE_AND_INDENT();
   return (t->dir == THING_DIR_BR);
 }

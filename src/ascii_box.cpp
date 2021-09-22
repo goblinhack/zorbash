@@ -19,7 +19,7 @@ static void ascii_put_box__ (int style,
                int x1, int y1, int x2, int y2,
                color col_bg, color col_fg,
                void *context)
-{_
+{ TRACE_AND_INDENT();
   int x;
   int y;
 
@@ -196,7 +196,7 @@ static void ascii_put_box_ (int style,
               color col_text,
               const wchar_t *fmt,
               va_list args)
-{_
+{ TRACE_AND_INDENT();
   if (!*fmt) {
     ascii_put_box__(style,
             bg_tile,
@@ -239,7 +239,7 @@ void ascii_put_box (box_args b, int style,
           Tilep fg2_tile,
           Tilep fg3_tile,
           const wchar_t *fmt, ...)
-{_
+{ TRACE_AND_INDENT();
   va_list args;
 
   if (!b.width || !b.height) {

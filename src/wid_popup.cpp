@@ -34,7 +34,7 @@ WidPopup::WidPopup (const std::string name,
   tl(tl), br(br),
   title_tile(title_tile),
   background(background)
-{_
+{ TRACE_AND_INDENT();
   int outer_w = br.x - tl.x;
   int outer_h = br.y - tl.y;
   int width = outer_w;
@@ -95,7 +95,7 @@ WidPopup::WidPopup (const std::string name,
 // Log a message to the popup
 //
 void WidPopup::log (std::string s, bool lhs, bool rhs)
-{_
+{ TRACE_AND_INDENT();
   wid_text_area->log(s, lhs, rhs);
 }
 
@@ -103,12 +103,12 @@ void WidPopup::log (std::string s, bool lhs, bool rhs)
 // Log a message to the popup
 //
 void WidPopup::log (std::wstring s, bool lhs, bool rhs)
-{_
+{ TRACE_AND_INDENT();
   wid_text_area->log(s, lhs, rhs);
 }
 
 void wid_popup_test (void)
-{_
+{ TRACE_AND_INDENT();
   std::vector<std::string> items;
   items.push_back("text 1111111111111111");
   items.push_back("text 2222222222222222");

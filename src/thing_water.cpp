@@ -12,7 +12,7 @@
 #include "my_random.h"
 
 void Thing::water_tick (void)
-{_
+{ TRACE_AND_INDENT();
   if (!level->is_water(mid_at.x, mid_at.y)) {
     return;
   }

@@ -12,7 +12,7 @@
 #include "my_wid_popup.h"
 
 void Game::robot_mode_tick (void)
-{_
+{ TRACE_AND_INDENT();
   if (!game->robot_mode) {
     return;
   }

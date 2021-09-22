@@ -11,7 +11,7 @@
 #include "my_array_bounds_check.h"
 
 void Level::put_thing (int x, int y, ThingId id, int group)
-{_
+{ TRACE_AND_INDENT();
   auto t = thing_find(id);
   if (!t) {
     return;
@@ -114,12 +114,12 @@ do_retry:
 }
 
 void Level::put_thing (point p, ThingId id, int group)
-{_
+{ TRACE_AND_INDENT();
   put_thing(p.x, p.y, id, group);
 }
 
 void Level::remove_thing (int x, int y, ThingId id, int group)
-{_
+{ TRACE_AND_INDENT();
   auto t = thing_find(id);
   if (!t) {
     ERR("Oob at map (%d,%d) for remove of %08" PRIx32 "", x, y, id.id);
@@ -188,7 +188,7 @@ void Level::remove_thing (int x, int y, ThingId id, int group)
 }
 
 void Level::check_thing (Thingp t)
-{_
+{ TRACE_AND_INDENT();
   int group = t->get_group();
   int x = t->mid_at.x;
   int y = t->mid_at.y;
@@ -208,6 +208,6 @@ void Level::check_thing (Thingp t)
 }
 
 void Level::remove_thing (point p, ThingId id, int group)
-{_
+{ TRACE_AND_INDENT();
   remove_thing(p.x, p.y, id, group);
 }

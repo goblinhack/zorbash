@@ -9,7 +9,7 @@
 #include "my_sdl.h"
 
 Thingp Game::thing_find (const ThingId id)
-{_
+{ TRACE_AND_INDENT();
   //
   // All levels share the same thing ID namespace so we can find any
   // thing on any level just by its number
@@ -18,6 +18,6 @@ Thingp Game::thing_find (const ThingId id)
 }
 
 Thingp Game::thing_find_optional (const ThingId id)
-{_
+{ TRACE_AND_INDENT();
   return world.thing_find_optional(id);
 }

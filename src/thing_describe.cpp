@@ -13,13 +13,13 @@
 #include "my_sdl.h"
 
 bool Thing::describe_when_hovered_over_in_rightbar (void)
-{_
+{ TRACE_AND_INDENT();
   level->describe(this);
   return true;
 }
 
 bool Thing::describe_when_hovering_over (void)
-{_
+{ TRACE_AND_INDENT();
   level->describe(this);
   return true;
 }

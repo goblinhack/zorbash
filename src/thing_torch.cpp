@@ -19,7 +19,7 @@
 #include "my_monst.h"
 
 void Thing::get_light_strength_including_torch_effect (int &out_light_strength) const
-{_
+{ TRACE_AND_INDENT();
   auto light_strength = get_initial_light_strength();
 
   auto torch_count = 0;
@@ -50,7 +50,7 @@ void Thing::get_light_strength_including_torch_effect (int &out_light_strength) 
 }
 
 void Thing::update_light_strength_including_torch_effect (int &out_light_strength)
-{_
+{ TRACE_AND_INDENT();
   auto orig_light_strength = out_light_strength;
   int light_strength;
 

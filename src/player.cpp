@@ -16,7 +16,7 @@
 #include "my_ptrcheck.h"
 
 void player_tick (bool left, bool right, bool up, bool down, bool attack, bool wait, bool jump)
-{_
+{ TRACE_AND_INDENT();
   //
   // Trying to move when the console is visible.
   //
@@ -345,7 +345,6 @@ void player_tick (bool left, bool right, bool up, bool down, bool attack, bool w
     } else {
       player->log("Player move attempt");
     }
-    _
 
     //
     // If we move manually, clear the path as it visually gets

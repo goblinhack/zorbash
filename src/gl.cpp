@@ -22,7 +22,7 @@ std::array<GLuint, MAX_FBO> fbo_tex_id = {};
 std::array<isize, MAX_FBO> fbo_size = {};
 
 void gl_init_2d_mode (void)
-{_
+{ TRACE_AND_INDENT();
   GL_ERROR_CHECK();
 
   if (in_2d_mode) {
@@ -71,7 +71,7 @@ void gl_init_2d_mode (void)
 }
 
 void gl_enter_2d_mode (void)
-{_
+{ TRACE_AND_INDENT();
   if (in_2d_mode) {
     gl_leave_2d_mode();
   }
@@ -118,7 +118,7 @@ void gl_enter_2d_mode (void)
 }
 
 void gl_enter_2d_mode (int w, int h)
-{_
+{ TRACE_AND_INDENT();
   if (in_2d_mode) {
     gl_leave_2d_mode();
   }
@@ -169,7 +169,7 @@ void gl_enter_2d_mode (int w, int h)
 
 void
 gl_leave_2d_mode (void)
-{_
+{ TRACE_AND_INDENT();
   if (!in_2d_mode) {
     return;
   }
@@ -186,7 +186,7 @@ gl_leave_2d_mode (void)
 }
 
 void gl_enter_2_5d_mode (void)
-{_
+{ TRACE_AND_INDENT();
   glEnable(GL_DEPTH_TEST);
   glClear(GL_COLOR_BUFFER_BIT);
 
@@ -221,7 +221,7 @@ void gl_enter_2_5d_mode (void)
 
 void
 gl_leave_2_5d_mode (void)
-{_
+{ TRACE_AND_INDENT();
   glDisable(GL_DEPTH_TEST);
 
   glMatrixMode(GL_MODELVIEW);
@@ -237,7 +237,7 @@ static void gl_init_fbo_ (int fbo,
               GLuint *fbo_tex_id,
               GLuint tex_width,
               GLuint tex_height)
-{_
+{ TRACE_AND_INDENT();
   DBG4("GFX: create FBO, size %dx%d", tex_width, tex_height);
   GL_ERROR_CHECK();
 
@@ -572,7 +572,7 @@ GLfloat *bufp_end;
 int buf_tex;
 
 void blit_init (void)
-{_
+{ TRACE_AND_INDENT();
   buf_tex = 0;
 
   if (gl_array_buf) {
@@ -607,7 +607,7 @@ void blit_init (void)
 }
 
 void blit_fini (void)
-{_
+{ TRACE_AND_INDENT();
   if (gl_array_buf) {
     myfree(gl_array_buf);
     gl_array_buf = 0;
@@ -615,7 +615,7 @@ void blit_fini (void)
 }
 
 void blit_flush (void)
-{_
+{ TRACE_AND_INDENT();
   if (gl_array_buf == bufp) {
     return;
   }
@@ -668,17 +668,17 @@ void blit_flush (void)
 }
 
 void blit_flush_triangle_fan (void)
-{_
+{ TRACE_AND_INDENT();
   blit_flush_triangle_fan(gl_array_buf, bufp);
 }
 
 void blit_flush_colored_triangle_fan (void)
-{_
+{ TRACE_AND_INDENT();
   blit_flush_colored_triangle_fan(gl_array_buf, bufp);
 }
 
 void blit_flush_colored_triangle_fan (float *b, float *e)
-{_
+{ TRACE_AND_INDENT();
   glEnableClientState(GL_VERTEX_ARRAY);
   glEnableClientState(GL_COLOR_ARRAY);
 
@@ -716,7 +716,7 @@ void blit_flush_colored_triangle_fan (float *b, float *e)
 }
 
 void blit_flush_triangle_fan (float *b, float *e)
-{_
+{ TRACE_AND_INDENT();
   glEnableClientState(GL_VERTEX_ARRAY);
 
   static long nvertices;
@@ -860,7 +860,7 @@ PFNGLBUFFERDATAARBPROC glBufferDataARB_EXT;
 PFNGLDELETEBUFFERSARBPROC glDeleteBuffersARB_EXT;
 
 static void gl_ext_load (void)
-{_
+{ TRACE_AND_INDENT();
   glCreateProgram_EXT = (__typeof__(glCreateProgram_EXT))
     wglGetProcAddress("glCreateProgram");
   if (!glCreateProgram_EXT) {
@@ -1136,7 +1136,7 @@ static void gl_ext_load (void)
 
 static void
 setupPixelFormat(HDC hDC)
-{_
+{ TRACE_AND_INDENT();
   PIXELFORMATDESCRIPTOR pfd = {
     sizeof(PIXELFORMATDESCRIPTOR),  // size
     1,                              // version
@@ -1175,7 +1175,7 @@ setupPixelFormat(HDC hDC)
 
 static void
 setupPalette(HDC hDC)
-{_
+{ TRACE_AND_INDENT();
   int pixelFormat = GetPixelFormat(hDC);
   PIXELFORMATDESCRIPTOR pfd;
   LOGPALETTE* pPal;
@@ -1227,12 +1227,12 @@ WndProc(
   UINT message,
   WPARAM wParam,
   LPARAM lParam)
-{_
+{ TRACE_AND_INDENT();
   return DefWindowProc(hWnd, message, wParam, lParam);
 }
 
 void gl_ext_init (void)
-{_
+{ TRACE_AND_INDENT();
   WNDCLASSEX wc;
   HWND hwnd;
 
@@ -1302,7 +1302,7 @@ void gl_ext_init (void)
 }
 #else
 void gl_ext_init (void)
-{_
+{ TRACE_AND_INDENT();
 }
 #endif
 

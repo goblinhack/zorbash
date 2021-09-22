@@ -48,7 +48,7 @@ bool Thing::bag_contains (Thingp item)
 // Place the item somwhere in the bag
 //
 bool Thing::bag_add (Thingp item)
-{_
+{ TRACE_AND_INDENT();
   dbg3("Bag: Add %s", item->to_string().c_str());
 
   if (!item->is_bag_item()) {
@@ -118,7 +118,7 @@ bool Thing::bag_add (Thingp item)
 }
 
 bool Thing::bag_add_test (Thingp item)
-{_
+{ TRACE_AND_INDENT();
   dbg3("Bag: Add test %s", item->to_string().c_str());
 
   if (!item->is_bag_item()) {
@@ -176,7 +176,7 @@ bool Thing::bag_add_test (Thingp item)
 }
 
 bool Thing::bag_compress (void)
-{_
+{ TRACE_AND_INDENT();
   auto bag = get_bag();
   auto bw = capacity_width();
   auto bh = capacity_height();
@@ -233,7 +233,7 @@ bool Thing::bag_compress (void)
 }
 
 bool Thing::bag_remove_at (Thingp item, point pos)
-{_
+{ TRACE_AND_INDENT();
   verify(item);
 
   auto bag = get_bag();
@@ -256,7 +256,7 @@ bool Thing::bag_remove_at (Thingp item, point pos)
 }
 
 bool Thing::bag_can_place_at (Thingp item, point pos)
-{_
+{ TRACE_AND_INDENT();
   if (item == this) {
     TOPCON("Cannot place an item inside itself!");
     return false;
@@ -334,7 +334,7 @@ bool Thing::bag_can_place_at (Thingp item, point pos)
 }
 
 bool Thing::bag_place_at (Thingp item, point pos)
-{_
+{ TRACE_AND_INDENT();
   auto bag = get_bag();
   auto bw = capacity_width();
   auto bh = capacity_height();
@@ -364,7 +364,7 @@ bool Thing::bag_place_at (Thingp item, point pos)
 }
 
 bool Thing::bag_remove (Thingp item)
-{_
+{ TRACE_AND_INDENT();
   if (!item) {
     err("No item to remove");
     return false;
@@ -392,7 +392,7 @@ bool Thing::bag_remove (Thingp item)
 }
 
 int bag_estimate_volume (const std::list<Thingp> &items)
-{_
+{ TRACE_AND_INDENT();
   int volume = 0;
   for (auto t : items) {
     volume += t->item_width() * t->item_height();

@@ -12,7 +12,7 @@
 #include "my_thing_template.h"
 
 void Thing::hunger_clock (void)
-{_
+{ TRACE_AND_INDENT();
   // TODO
   return;
 

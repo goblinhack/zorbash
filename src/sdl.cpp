@@ -65,7 +65,7 @@ SDL_Scancode sdl_grabbed_scancode;
 on_sdl_key_grab_t on_sdl_key_grab;
 
 void sdl_fini (void)
-{_
+{ TRACE_AND_INDENT();
 #ifdef ENABLE_UI_ASCII_MOUSE
   SDL_ShowCursor(0);
   SDL_ShowCursor(1);
@@ -83,7 +83,7 @@ void sdl_fini (void)
 }
 
 static inline void sdl_list_video_size (void)
-{_
+{ TRACE_AND_INDENT();
   int i;
 
   for (i = 0; i < SDL_GetNumDisplayModes(0); ++i) {
@@ -96,7 +96,7 @@ static inline void sdl_list_video_size (void)
 }
 
 void sdl_joy_rumble (float strength, ts_t ms)
-{_
+{ TRACE_AND_INDENT();
   if (!haptic) {
     return;
   }
@@ -105,7 +105,7 @@ void sdl_joy_rumble (float strength, ts_t ms)
 }
 
 static void sdl_init_rumble (void)
-{_
+{ TRACE_AND_INDENT();
   LOG("SDL: init rumble:");
 
   if (!haptic) {
@@ -133,7 +133,7 @@ static void sdl_init_rumble (void)
 }
 
 static void sdl_init_joystick (void)
-{_
+{ TRACE_AND_INDENT();
   LOG("SDL: init input:");
 
   SDL_GameController *controller = NULL;
@@ -186,7 +186,7 @@ static void sdl_init_joystick (void)
 }
 
 uint8_t sdl_init (void)
-{_
+{ TRACE_AND_INDENT();
   gl_ext_init();
 
   int video_width;
@@ -409,7 +409,7 @@ uint8_t sdl_init (void)
 }
 
 static int sdl_filter_events (void *userdata, SDL_Event *event)
-{_
+{ TRACE_AND_INDENT();
   switch (event->type) {
     // This is important!  Queue it if we want to quit. */
     case SDL_QUIT:
@@ -440,7 +440,7 @@ static int sdl_filter_events (void *userdata, SDL_Event *event)
 }
 
 static void sdl_event (SDL_Event * event)
-{_
+{ TRACE_AND_INDENT();
   SDL_Keysym *key;
 
   wid_mouse_two_clicks = false;
@@ -724,7 +724,7 @@ static void sdl_event (SDL_Event * event)
 }
 
 static int sdl_get_mouse (void)
-{_
+{ TRACE_AND_INDENT();
   if (!wid_mouse_visible) {
     return (0);
   }
@@ -746,7 +746,7 @@ static int sdl_get_mouse (void)
 }
 
 void sdl_mouse_center (void)
-{_
+{ TRACE_AND_INDENT();
   int x, y;
 
   x = game->config.window_pix_width / 2;
@@ -756,7 +756,7 @@ void sdl_mouse_center (void)
 }
 
 void sdl_mouse_warp (int x, int y)
-{_
+{ TRACE_AND_INDENT();
   int border = 10;
 
   if (x <= 0) {
@@ -777,7 +777,7 @@ void sdl_mouse_warp (int x, int y)
 }
 
 static void sdl_tick (void)
-{_
+{ TRACE_AND_INDENT();
   sdl_left_fire = false;
   sdl_left_fire = true;
 
@@ -904,7 +904,7 @@ static void sdl_tick (void)
 }
 
 void sdl_exit (void)
-{_
+{ TRACE_AND_INDENT();
   if (!sdl_main_loop_running) {
     return;
   }
@@ -922,7 +922,7 @@ void sdl_exit (void)
 // User has entered a command, run it
 //
 uint8_t config_fps_counter_set (tokens_t *tokens, void *context)
-{_
+{ TRACE_AND_INDENT();
   char *s = tokens->args[2];
 
   if (!s || (*s == '\0')) {
@@ -944,7 +944,7 @@ uint8_t config_fps_counter_set (tokens_t *tokens, void *context)
 // User has entered a command, run it
 //
 void config_gfx_inverted_toggle (void)
-{_
+{ TRACE_AND_INDENT();
   if (!game->config.gfx_inverted) {
     game->config.gfx_inverted = true;
     CON("GFX inverted enabled");
@@ -958,7 +958,7 @@ void config_gfx_inverted_toggle (void)
 // User has entered a command, run it
 //
 uint8_t config_gfx_inverted_set (tokens_t *tokens, void *context)
-{_
+{ TRACE_AND_INDENT();
   char *s = tokens->args[3];
 
   if (!s || (*s == '\0')) {
@@ -981,7 +981,7 @@ uint8_t config_gfx_inverted_set (tokens_t *tokens, void *context)
 // User has entered a command, run it
 //
 void config_gfx_minimap_toggle (void)
-{_
+{ TRACE_AND_INDENT();
   if (!game->config.gfx_minimap) {
     game->config.gfx_minimap = true;
     CON("GFX map enabled");
@@ -995,7 +995,7 @@ void config_gfx_minimap_toggle (void)
 // User has entered a command, run it
 //
 uint8_t config_gfx_minimap_set (tokens_t *tokens, void *context)
-{_
+{ TRACE_AND_INDENT();
   char *s = tokens->args[3];
 
   if (!s || (*s == '\0')) {
@@ -1018,7 +1018,7 @@ uint8_t config_gfx_minimap_set (tokens_t *tokens, void *context)
 // User has entered a command, run it
 //
 void config_game_pix_zoom_in (void)
-{_
+{ TRACE_AND_INDENT();
   game->config.game_pix_zoom++;
   if (game->config.game_pix_zoom > GAME_MOST_ZOOMED_IN) {
     game->config.game_pix_zoom = GAME_MOST_ZOOMED_IN;
@@ -1028,7 +1028,7 @@ void config_game_pix_zoom_in (void)
 }
 
 void config_game_pix_zoom_out (void)
-{_
+{ TRACE_AND_INDENT();
   game->config.game_pix_zoom--;
   if (game->config.game_pix_zoom < GAME_MOST_ZOOMED_OUT) {
     game->config.game_pix_zoom = GAME_MOST_ZOOMED_OUT;
@@ -1041,7 +1041,7 @@ void config_game_pix_zoom_out (void)
 // User has entered a command, run it
 //
 uint8_t config_game_pix_zoom_set (tokens_t *tokens, void *context)
-{_
+{ TRACE_AND_INDENT();
   char *s = tokens->args[3];
 
   if (!s || (*s == '\0')) {
@@ -1064,7 +1064,7 @@ uint8_t config_game_pix_zoom_set (tokens_t *tokens, void *context)
 // User has entered a command, run it
 //
 uint8_t config_gfx_vsync_enable (tokens_t *tokens, void *context)
-{_
+{ TRACE_AND_INDENT();
   if (game->config.gfx_vsync_locked) {
     return true;
   }
@@ -1090,7 +1090,7 @@ uint8_t config_gfx_vsync_enable (tokens_t *tokens, void *context)
 }
 
 void config_gfx_vsync_update (void)
-{_
+{ TRACE_AND_INDENT();
   if (game->config.gfx_vsync_locked) {
     return;
   }
@@ -1107,7 +1107,7 @@ void config_gfx_vsync_update (void)
 // User has entered a command, run it
 //
 uint8_t config_errored (tokens_t *tokens, void *context)
-{_
+{ TRACE_AND_INDENT();
   g_errored = false;
   CON("USR: Errored mode cleared");
   wid_hide(wid_console_window);
@@ -1115,7 +1115,7 @@ uint8_t config_errored (tokens_t *tokens, void *context)
 }
 
 void sdl_config_update_all (void)
-{_
+{ TRACE_AND_INDENT();
   CON("SDL: OpenGL leave 2D mode");
   config_game_pix_zoom_update();
   config_gfx_vsync_update();
@@ -1131,7 +1131,7 @@ void sdl_config_update_all (void)
 // User has entered a command, run it
 //
 uint8_t sdl_user_exit (tokens_t *tokens, void *context)
-{_
+{ TRACE_AND_INDENT();
   sdl_exit();
 
   return true;
@@ -1141,7 +1141,7 @@ uint8_t sdl_user_exit (tokens_t *tokens, void *context)
 // Main loop
 //
 void sdl_loop (void)
-{_
+{ TRACE_AND_INDENT();
   SDL_Event events[10];
   int found;
   int i;
@@ -1431,7 +1431,7 @@ void sdl_loop (void)
 }
 
 void sdl_flush_display (void)
-{_
+{ TRACE_AND_INDENT();
   if (g_opt_fast_start) {
     return;
   }
@@ -1453,7 +1453,7 @@ void sdl_flush_display (void)
 }
 
 void config_game_pix_zoom_update (void)
-{_
+{ TRACE_AND_INDENT();
   game->config.tile_width = TILE_WIDTH_LORES;
   game->config.tile_height = TILE_HEIGHT_LORES;
 

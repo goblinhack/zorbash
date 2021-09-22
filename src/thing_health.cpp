@@ -11,7 +11,7 @@
 #include "my_thing.h"
 
 int Thing::health_boost (int v)
-{_
+{ TRACE_AND_INDENT();
   if (!v) {
     return false;
   }
@@ -37,7 +37,7 @@ int Thing::health_boost (int v)
 }
 
 bool Thing::health_boost_would_occur (int v)
-{_
+{ TRACE_AND_INDENT();
   if (!v) {
     return false;
   }
@@ -53,12 +53,12 @@ bool Thing::health_boost_would_occur (int v)
 }
 
 bool Thing::is_bloodied (void)
-{_
+{ TRACE_AND_INDENT();
   return get_health_pct() <= THING_HEALTH_BLOODIED_PCT1;
 }
 
 float Thing::get_health_pct (void)
-{_
+{ TRACE_AND_INDENT();
   float pct =
     ((float)get_health() / (float)get_health_max()) * 100;
   return pct;

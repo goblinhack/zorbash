@@ -18,14 +18,14 @@
 WidPopup *game_quit_window;
 
 void game_quit_destroy (void)
-{_
+{ TRACE_AND_INDENT();
   delete game_quit_window;
   game_quit_window = nullptr;
   game->change_state(Game::STATE_NORMAL);
 }
 
 static uint8_t game_quit_yes (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   if (game->started) {
     LOG("USR: Restart game");
 
@@ -75,7 +75,7 @@ static uint8_t game_quit_yes (Widp w, int32_t x, int32_t y, uint32_t button)
 }
 
 static uint8_t game_quit_no (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
+{ TRACE_AND_INDENT();
   game_quit_destroy();
   if (!game->level) {
     game->main_menu_select();
@@ -86,7 +86,7 @@ static uint8_t game_quit_no (Widp w, int32_t x, int32_t y, uint32_t button)
 }
 
 static uint8_t game_quit_key_up (Widp w, const struct SDL_Keysym *key)
-{_
+{ TRACE_AND_INDENT();
   if (sdl_shift_held) {
     if (key->scancode == (SDL_Scancode)game->config.key_console) {
       return false;
@@ -98,7 +98,7 @@ static uint8_t game_quit_key_up (Widp w, const struct SDL_Keysym *key)
     case KMOD_RCTRL:
     default:
     switch (key->sym) {
-      default: {_
+      default: { TRACE_AND_INDENT();
         auto c = wid_event_to_char(key);
         switch (c) {
           case 'y':
@@ -120,7 +120,7 @@ static uint8_t game_quit_key_up (Widp w, const struct SDL_Keysym *key)
 }
 
 static uint8_t game_quit_key_down (Widp w, const struct SDL_Keysym *key)
-{_
+{ TRACE_AND_INDENT();
   if (sdl_shift_held) {
     if (key->scancode == (SDL_Scancode)game->config.key_console) {
       return false;
@@ -131,7 +131,7 @@ static uint8_t game_quit_key_down (Widp w, const struct SDL_Keysym *key)
 }
 
 void Game::quit_select (void)
-{_
+{ TRACE_AND_INDENT();
   LOG("Quit select");
 
   if (level && level->player) {
@@ -152,14 +152,14 @@ void Game::quit_select (void)
   auto width = br.x - tl.x;
 
   game_quit_window = new WidPopup("Game quit", tl, br, nullptr, "", false, false);
-  {_
+  { TRACE_AND_INDENT();
     Widp w = game_quit_window->wid_popup_container;
     wid_set_on_key_up(w, game_quit_key_up);
     wid_set_on_key_down(w, game_quit_key_down);
   }
 
   int y_at = 0;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_quit_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Quit");
 
@@ -171,7 +171,7 @@ void Game::quit_select (void)
   }
 
   y_at = 2;
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_quit_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Yes");
 
@@ -183,7 +183,7 @@ void Game::quit_select (void)
     wid_set_text(w, "%%fg=white$Y%%fg=reset$es");
   }
 
-  {_
+  { TRACE_AND_INDENT();
     auto p = game_quit_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "No");
 

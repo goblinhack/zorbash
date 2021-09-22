@@ -12,7 +12,7 @@
 #include "my_thing.h"
 
 void Level::display_anim (void)
-{_
+{ TRACE_AND_INDENT();
   static uint32_t anim_speed;
   if (!anim_speed) {
     anim_speed = time_get_time_ms_cached();

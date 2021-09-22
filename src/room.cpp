@@ -26,25 +26,25 @@ Room::~Room (void)
 }
 
 void room_init (void)
-{_
+{ TRACE_AND_INDENT();
 }
 
 void room_fini (void)
-{_
+{ TRACE_AND_INDENT();
   for (auto& r : Room::all_rooms) {
     delete r;
   }
 }
 
 Roomp Room::room_new (void)
-{_
+{ TRACE_AND_INDENT();
   auto r = new Room();
   Room::all_rooms.push_back(r);
   return (r);
 }
 
 Roomp Room::create_w_flip (void)
-{_
+{ TRACE_AND_INDENT();
   std::vector<std::string> rot[MAP_DEPTH];
 
   auto r = Room::room_new();
@@ -99,7 +99,7 @@ Roomp Room::create_w_flip (void)
 }
 
 Roomp Room::rotate_clockwise (void)
-{_
+{ TRACE_AND_INDENT();
   std::vector<std::string> rot[MAP_DEPTH];
 
   auto r = Room::room_new();

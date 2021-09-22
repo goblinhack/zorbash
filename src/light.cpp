@@ -23,12 +23,12 @@ static Texp g_glow_overlay_tex;
 static int g_glow_overlay_texid;
 
 Light::Light (void)
-{_
+{ TRACE_AND_INDENT();
   newptr(this, "Light");
 }
 
 Light::~Light (void)
-{_
+{ TRACE_AND_INDENT();
   verify(this);
   if (is_being_destroyed) {
     die("Death recursion");
@@ -107,7 +107,7 @@ Lightp light_new (Thingp owner,
           int strength,
           color col,
           int fbo)
-{_
+{ TRACE_AND_INDENT();
   auto l = new Light(); // std::make_shared< class Light >();
 
   l->offset         = offset;
@@ -126,7 +126,7 @@ Lightp light_new (Thingp owner,
 Lightp light_new (Thingp owner,
           point offset,
           int strength)
-{_
+{ TRACE_AND_INDENT();
   auto l = new Light(); // std::make_shared< class Light >();
 
   l->offset         = offset;
@@ -143,7 +143,7 @@ Lightp light_new (Thingp owner,
 }
 
 void Light::update (int strength_in)
-{_
+{ TRACE_AND_INDENT();
   if (!strength_in) {
     DIE("no light strength set");
   }
@@ -155,7 +155,7 @@ void Light::update (int strength_in)
 }
 
 void Light::update (void)
-{_
+{ TRACE_AND_INDENT();
   if (!strength) {
     DIE("no light strength set");
   }
@@ -178,7 +178,7 @@ void Light::update (void)
 }
 
 void Light::destroy (void)
-{_
+{ TRACE_AND_INDENT();
 }
 
 void Light::reset (void)
@@ -605,7 +605,7 @@ void Light::render (int ray_cast_only)
 
 void Level::lights_render (int minx, int miny, int maxx, int maxy,
                int fbo)
-{_
+{ TRACE_AND_INDENT();
   if (player) {
     glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 
@@ -656,7 +656,7 @@ void Level::lights_render (int minx, int miny, int maxx, int maxy,
 //
 void Level::lights_render_small_lights (int minx, int miny, int maxx, int maxy,
                     int fbo, bool include_player_lights)
-{_
+{ TRACE_AND_INDENT();
   blit_init();
   for (auto y = miny; y < maxy; y++) {
     for (auto x = minx; x < maxx; x++) {
@@ -783,7 +783,7 @@ void Level::lights_render_small_lights (int minx, int miny, int maxx, int maxy,
 // Alow distant lights to fade
 //
 void Level::lights_fade (void)
-{_
+{ TRACE_AND_INDENT();
   for (auto y = 0; y < MAP_HEIGHT; y++) {
     for (auto x = 0; x < MAP_WIDTH; x++) {
       auto v = is_lit_currently_no_check(x, y);
@@ -798,7 +798,7 @@ void Level::lights_fade (void)
 // Refresh lights on a new level. Ignore blitted postion.
 //
 void Level::lights_update_new_level (void)
-{_
+{ TRACE_AND_INDENT();
   for (auto y = 0; y < MAP_HEIGHT; y++) {
     for (auto x = 0; x < MAP_WIDTH; x++) {
       FOR_ALL_LIGHTS_AT_DEPTH(this, t, x, y) {
@@ -819,7 +819,7 @@ void Level::lights_update_new_level (void)
 // Update lights on existing level e.g. torch goes out
 //
 void Level::lights_update_same_level (void)
-{_
+{ TRACE_AND_INDENT();
   for (auto y = 0; y < MAP_HEIGHT; y++) {
     for (auto x = 0; x < MAP_WIDTH; x++) {
       FOR_ALL_LIGHTS_AT_DEPTH(this, t, x, y) {
