@@ -66,14 +66,17 @@ _
 _
     if (!is_lit_currently(x, y) && !is_lit_ever(x, y)) {_
       IF_DEBUG3 {
-        t->log("Ignore for describe, not lit or visited");
+        //
+        // Allow snooping in debug mode
+        //
+      } else {
+        continue;
       }
-      continue;
     }
 
     if (t->is_cursor() ||
-      t->is_player() ||
-      t->is_cursor_path() ||
+        t->is_player() ||
+        t->is_cursor_path() ||
       t->is_the_grid) {
       IF_DEBUG3 {
         t->log("Ignore for describe, boring");
@@ -132,9 +135,12 @@ _
 _
     if (!is_lit_currently(x, y) && !is_lit_ever(x, y)) {_
       IF_DEBUG3 {
-        t->log("Ignore for describe, not lit or visited");
+        //
+        // Allow snooping in debug mode
+        //
+      } else {
+        continue;
       }
-      continue;
     }
 
     if (t->is_cursor() ||
@@ -197,9 +203,12 @@ _
 _
     if (!is_lit_currently(x, y) && !is_lit_ever(x, y)) {_
       IF_DEBUG3 {
-        t->log("Ignore for describe, not lit or visited");
+        //
+        // Allow snooping in debug mode
+        //
+      } else {
+        continue;
       }
-      continue;
     }
 
     if (t->get_immediate_owner() ||

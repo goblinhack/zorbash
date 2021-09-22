@@ -27,7 +27,7 @@ def tp_init(name, text_name):
     mytp.set_is_treasure_class_a(True)
     mytp.set_item_height(4)
     mytp.set_item_width(4)
-    mytp.set_long_text_description("A very small leathery brown bag.")
+    mytp.set_long_text_description("A small leathery brown bag.")
     mytp.set_normal_placement_rules(True)
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("A small brown bag.")
@@ -38,6 +38,6 @@ def tp_init(name, text_name):
     mytp.update()
 
 def init():
-    tp_init(name="bag_small", text_name="velvet bag")
+    tp_init(name="bag_small", text_name="small bag")
 
 init()

@@ -24,7 +24,6 @@ def tp_init(name, text_name):
     mytp.set_is_item_carrier(True)
     mytp.set_is_item(True)
     mytp.set_is_organic(True)
-    mytp.set_is_organic(True)
     mytp.set_is_moveable(True)
     mytp.set_is_treasure_class_a(True)
     mytp.set_item_height(8)
@@ -40,6 +39,6 @@ def tp_init(name, text_name):
     mytp.update()
 
 def init():
-    tp_init(name="bag_large", text_name="huge sack")
+    tp_init(name="bag_large", text_name="large bag")
 
 init()

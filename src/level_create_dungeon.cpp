@@ -902,7 +902,7 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules (Dungeonp d
         }
       }
 
-      dbg2("DGN: Creating %s", tp->name().c_str());
+      dbg("DGN: Creating %s", tp->name().c_str());
       auto t = thing_new(tp->name(), fpoint(x, y));
       if (t) {
         if (t->is_weapon()) {
@@ -915,6 +915,8 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules (Dungeonp d
             t->enchant_randomly();
           }
           con("DGN: Placed treasure '%s'", t->short_text_capitalized().c_str());
+        } else if (t->is_bag()) {
+          con("DGN: Placed '%s'", t->short_text_capitalized().c_str());
         } else if (t->is_monst()) {
           //
           // Already logged
@@ -1460,6 +1462,9 @@ void Level::place_random_treasure (Dungeonp d)
     auto y = pcg_random_range(MAP_BORDER_ROCK, MAP_HEIGHT - MAP_BORDER_ROCK);
 
     if (d->is_dirt(x, y) ||
+      d->is_treasure_class_a(x, y) ||
+      d->is_treasure_class_b(x, y) ||
+      d->is_treasure_class_c(x, y) ||
       d->is_deep_water(x, y) ||
       d->is_spiderweb(x, y) ||
       d->is_foilage(x, y)) {

@@ -22,8 +22,8 @@ bool Thing::carry (Thingp item)
 
   dbg("Try to carry %s", item->to_string().c_str());
 
-  if (!monstp) {
-    dbg("No; not a monst");
+  if (!monstp && !is_bag()) {
+    dbg("No; not a monst or bag");
     return false;
   }
 
