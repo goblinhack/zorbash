@@ -530,7 +530,9 @@ int Thing::item_enchant_count (const uint32_t slot)
     auto o = game->level->thing_find(oid);
     if (o) {
       if (o->tp()->id == tp_id) {
-        return o->get_enchant();
+        if (o->get_enchant()) {
+          return o->get_enchant();
+        }
       }
     }
   }
