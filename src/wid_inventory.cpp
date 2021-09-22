@@ -116,10 +116,7 @@ _
   //
 }
 
-uint8_t wid_inventory_item_mouse_up_on_bag (Widp w,
-                      int32_t x,
-                      int32_t y,
-                      uint32_t button)
+uint8_t wid_inventory_item_mouse_up_on_bag (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
   DBG3("Inventory: Mouse up over bag");
 _
@@ -159,10 +156,7 @@ _
   return true;
 }
 
-uint8_t wid_inventory_item_mouse_up (Widp w,
-                   int32_t x,
-                   int32_t y,
-                   uint32_t button)
+uint8_t wid_inventory_item_mouse_up (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
   if ((game->state == Game::STATE_CHOOSING_TARGET) ||
     (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||

@@ -467,60 +467,70 @@ _
         game->level->inventory_assign(9, what);
         game->request_remake_inventory = true;
         game->wid_thing_info_create(game->level->player, false);
+        TOPCON("Reassigned item to key.");
         return true;
       }
       if (key->scancode == (SDL_Scancode)game->config.key_action1) {
         game->level->inventory_assign(0, what);
         game->request_remake_inventory = true;
         game->wid_thing_info_create(game->level->player, false);
+        TOPCON("Reassigned item to key.");
         return true;
       }
       if (key->scancode == (SDL_Scancode)game->config.key_action2) {
         game->level->inventory_assign(1, what);
         game->request_remake_inventory = true;
         game->wid_thing_info_create(game->level->player, false);
+        TOPCON("Reassigned item to key.");
         return true;
       }
       if (key->scancode == (SDL_Scancode)game->config.key_action3) {
         game->level->inventory_assign(2, what);
         game->request_remake_inventory = true;
         game->wid_thing_info_create(game->level->player, false);
+        TOPCON("Reassigned item to key.");
         return true;
       }
       if (key->scancode == (SDL_Scancode)game->config.key_action4) {
         game->level->inventory_assign(3, what);
         game->request_remake_inventory = true;
         game->wid_thing_info_create(game->level->player, false);
+        TOPCON("Reassigned item to key.");
         return true;
       }
       if (key->scancode == (SDL_Scancode)game->config.key_action5) {
         game->level->inventory_assign(4, what);
         game->request_remake_inventory = true;
         game->wid_thing_info_create(game->level->player, false);
+        TOPCON("Reassigned item to key.");
         return true;
       }
       if (key->scancode == (SDL_Scancode)game->config.key_action6) {
         game->level->inventory_assign(5, what);
         game->request_remake_inventory = true;
         game->wid_thing_info_create(game->level->player, false);
+        TOPCON("Reassigned item to key.");
         return true;
       }
       if (key->scancode == (SDL_Scancode)game->config.key_action7) {
         game->level->inventory_assign(6, what);
         game->request_remake_inventory = true;
         game->wid_thing_info_create(game->level->player, false);
+        TOPCON("Reassigned item to key.");
         return true;
       }
       if (key->scancode == (SDL_Scancode)game->config.key_action8) {
         game->level->inventory_assign(7, what);
         game->request_remake_inventory = true;
         game->wid_thing_info_create(game->level->player, false);
+        TOPCON("Reassigned item to key.");
         return true;
       }
       if (key->scancode == (SDL_Scancode)game->config.key_action9) {
         game->level->inventory_assign(8, what);
         game->request_remake_inventory = true;
         game->wid_thing_info_create(game->level->player, false);
+        TOPCON("Reassigned item to key.");
         return true;
       }
       break;
