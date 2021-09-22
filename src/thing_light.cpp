@@ -19,8 +19,8 @@
 #include "my_monst.h"
 #include "my_ptrcheck.h"
 
-std::vector<Lightp> &Thing::get_light (void)
-{ TRACE_AND_INDENT();
+std::vector<Lightp> &Thing::get_light(void) {
+  TRACE_AND_INDENT();
   if (monstp) {
     verify(monstp);
     return (monstp->light);
@@ -30,41 +30,40 @@ std::vector<Lightp> &Thing::get_light (void)
   }
 }
 
-void Thing::new_light (point offset, int strength, color col, int fbo)
-{ TRACE_AND_INDENT();
+void Thing::new_light(point offset, int strength, color col, int fbo) {
+  TRACE_AND_INDENT();
   new_monst();
   auto l = light_new(this, offset, strength, col, fbo);
   monstp->light.push_back(l);
   monstp->light_strength = strength;
-  monstp->light_col = col;
+  monstp->light_col      = col;
 }
 
-void Thing::new_light (point offset, int strength)
-{ TRACE_AND_INDENT();
+void Thing::new_light(point offset, int strength) {
+  TRACE_AND_INDENT();
   new_monst();
   auto l = light_new(this, offset, strength);
   monstp->light.push_back(l);
   monstp->light_strength = strength;
 }
 
-void Thing::delete_lights (void)
-{ TRACE_AND_INDENT();
+void Thing::delete_lights(void) {
+  TRACE_AND_INDENT();
   if (monstp) {
     verify(monstp);
-    for (auto& l : monstp->light) {
+    for (auto &l : monstp->light) {
       delete l;
     }
     monstp->light.resize(0);
   }
 }
 
-void Thing::init_lights (void)
-{ TRACE_AND_INDENT();
+void Thing::init_lights(void) {
+  TRACE_AND_INDENT();
   if (unlikely(is_player())) {
     if (level->player && (level->player != this)) {
-      DIE("Player exists in multiple places on map, %f, %f and %f, %f",
-        level->player->mid_at.x, level->player->mid_at.y,
-        mid_at.x, mid_at.y);
+      DIE("Player exists in multiple places on map, %f, %f and %f, %f", level->player->mid_at.x,
+          level->player->mid_at.y, mid_at.x, mid_at.y);
       return;
     }
     level->player = this;
@@ -76,8 +75,8 @@ void Thing::init_lights (void)
     color col = WHITE;
 
     int strength = get_initial_light_strength();
-    int d1 = 1;
-    int d2 = 2;
+    int d1       = 1;
+    int d2       = 2;
 
     //
     // This is a raycast only light to mark things as visible
@@ -89,38 +88,38 @@ void Thing::init_lights (void)
     new_light(point(0, 0), 3, col, FBO_SMALL_POINT_LIGHTS);
 
     new_light(point(-d1, -d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-    new_light(point( d1, -d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-    new_light(point(-d1,  d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-    new_light(point( d1,  d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
+    new_light(point(d1, -d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
+    new_light(point(-d1, d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
+    new_light(point(d1, d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
 
     new_light(point(-d2, -d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-    new_light(point( d2, -d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-    new_light(point(-d2,  d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-    new_light(point( d2,  d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
+    new_light(point(d2, -d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
+    new_light(point(-d2, d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
+    new_light(point(d2, d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
 
     new_light(point(-d1, -d2), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-    new_light(point( d1, -d2), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-    new_light(point(-d1,  d2), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-    new_light(point( d1,  d2), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
+    new_light(point(d1, -d2), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
+    new_light(point(-d1, d2), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
+    new_light(point(d1, d2), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
 
     {
       d1 = 3;
       d2 = 5;
 
       new_light(point(-d1, -d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-      new_light(point( d1, -d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-      new_light(point(-d1,  d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-      new_light(point( d1,  d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
+      new_light(point(d1, -d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
+      new_light(point(-d1, d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
+      new_light(point(d1, d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
 
       new_light(point(-d2, -d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-      new_light(point( d2, -d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-      new_light(point(-d2,  d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-      new_light(point( d2,  d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
+      new_light(point(d2, -d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
+      new_light(point(-d2, d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
+      new_light(point(d2, d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
 
       new_light(point(-d1, -d2), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-      new_light(point( d1, -d2), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-      new_light(point(-d1,  d2), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-      new_light(point( d1,  d2), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
+      new_light(point(d1, -d2), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
+      new_light(point(-d1, d2), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
+      new_light(point(d1, d2), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
     }
 
     has_light = true;
@@ -133,9 +132,9 @@ void Thing::init_lights (void)
       }
       bool add_light = true;
       if (is_lava()) {
-//                if (random_range(0, 100) < 80) {
-          add_light = true;
-//                }
+        //                if (random_range(0, 100) < 80) {
+        add_light = true;
+        //                }
       }
       if (add_light) {
         color c = string2color(l);
@@ -146,8 +145,8 @@ void Thing::init_lights (void)
   }
 }
 
-void Thing::light_update_strength (void)
-{ TRACE_AND_INDENT();
+void Thing::light_update_strength(void) {
+  TRACE_AND_INDENT();
   auto str = get_light_strength();
   for (auto l : get_light()) {
     if (l->ray_cast_only) {

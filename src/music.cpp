@@ -14,21 +14,18 @@
 
 class music {
 public:
-  music (std::string name_alias) : name_alias(name_alias)
-  {
-  }
+  music(std::string name_alias) : name_alias(name_alias) {}
 
-  ~music (void)
-  {
+  ~music(void) {
     Mix_FreeMusic(m);
     myfree(data);
   }
 
-  std::string name_alias;
-  Mix_Music *m = {};
+  std::string    name_alias;
+  Mix_Music *    m    = {};
   unsigned char *data = {};
-  int32_t len = {};
-  uint32_t rate = 44100;
+  int32_t        len  = {};
+  uint32_t       rate = 44100;
 };
 
 static std::map<std::string, class music *> all_music;
@@ -37,13 +34,13 @@ static std::string music_current;
 
 bool music_init_done;
 
-bool music_init (void)
-{ TRACE_AND_INDENT();
+bool music_init(void) {
+  TRACE_AND_INDENT();
   //
   // MP3 is a pain to use, use OGG instead
   // int flags = MIX_INIT_OGG|MIX_INIT_MP3;
   //
-  int flags = MIX_INIT_OGG;
+  int flags   = MIX_INIT_OGG;
   int initted = Mix_Init(flags);
   if ((initted & flags) != flags) {
     ERR("Mix_Init: Failed to init required OGG support");
@@ -53,8 +50,8 @@ bool music_init (void)
   return true;
 }
 
-void music_fini (void)
-{ TRACE_AND_INDENT();
+void music_fini(void) {
+  TRACE_AND_INDENT();
   if (music_init_done) {
     music_init_done = false;
 
@@ -69,9 +66,8 @@ void music_fini (void)
   }
 }
 
-bool music_load (uint32_t rate, const std::string &file,
-         const std::string &name_alias)
-{ TRACE_AND_INDENT();
+bool music_load(uint32_t rate, const std::string &file, const std::string &name_alias) {
+  TRACE_AND_INDENT();
   if (name_alias == "") {
     auto m = music_find(name_alias);
     if (m) {
@@ -79,11 +75,11 @@ bool music_load (uint32_t rate, const std::string &file,
     }
   }
 
-  class music * m = new music(name_alias);
+  class music *m = new music(name_alias);
 
   m->rate = rate;
   m->data = file_load(file.c_str(), &m->len);
-  if (!m->data) {
+  if (! m->data) {
     ERR("Cannot load music %s", file.c_str());
     return false;
   }
@@ -91,14 +87,14 @@ bool music_load (uint32_t rate, const std::string &file,
   SDL_RWops *rw;
 
   rw = SDL_RWFromMem(m->data, m->len);
-  if (!rw) {
+  if (! rw) {
     ERR("SDL_RWFromMem fail %s: %s %s", file.c_str(), Mix_GetError(), SDL_GetError());
     SDL_ClearError();
     return false;
   }
 
   m->m = Mix_LoadMUS_RW(rw, false);
-  if (!m->m) {
+  if (! m->m) {
     ERR("Mix_LoadMUS_RW fail %s: %s %s", file.c_str(), Mix_GetError(), SDL_GetError());
     SDL_ClearError();
     return false;
@@ -118,20 +114,20 @@ bool music_load (uint32_t rate, const std::string &file,
 /*
  * Find an existing pice of music.
  */
-bool music_find (const std::string &name_alias)
-{ TRACE_AND_INDENT();
+bool music_find(const std::string &name_alias) {
+  TRACE_AND_INDENT();
   auto result = all_music.find(name_alias);
   return result != all_music.end();
 }
 
-void music_update_volume (void)
-{ TRACE_AND_INDENT();
+void music_update_volume(void) {
+  TRACE_AND_INDENT();
   Mix_VolumeMusic(game->config.music_volume);
   SDL_ClearError();
 }
 
-bool music_play (const std::string &name)
-{ TRACE_AND_INDENT();
+bool music_play(const std::string &name) {
+  TRACE_AND_INDENT();
   if (name == music_current) {
     return true;
   }
@@ -192,13 +188,13 @@ void music_play_game_over (void)
 }
 #endif
 
-void music_play_intro (void)
-{ TRACE_AND_INDENT();
+void music_play_intro(void) {
+  TRACE_AND_INDENT();
   music_play("intro");
 }
 
-void music_halt (void)
-{ TRACE_AND_INDENT();
+void music_halt(void) {
+  TRACE_AND_INDENT();
   music_current = "";
 
   Mix_FadeOutMusic(1500);

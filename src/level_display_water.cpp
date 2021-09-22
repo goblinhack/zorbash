@@ -16,10 +16,8 @@
 #include "my_array_bounds_check.h"
 #include "my_ptrcheck.h"
 
-void Level::display_water (int fbo,
-                           int16_t minx, int16_t miny,
-                           int16_t maxx, int16_t maxy)
-{ TRACE_AND_INDENT();
+void Level::display_water(int fbo, int16_t minx, int16_t miny, int16_t maxx, int16_t maxy) {
+  TRACE_AND_INDENT();
   int fbo_mask1;
   int fbo_mask2;
   int fbo_mask3;
@@ -46,7 +44,7 @@ void Level::display_water (int fbo,
     level_type = 1;
   }
 
-  if (!water[0][0][0]) {
+  if (! water[0][0][0]) {
     set(water[0], 0, 0, tile_find("water1a"));
     set(water[0], 1, 0, tile_find("water2a"));
     set(water[0], 2, 0, tile_find("water3a"));
@@ -191,16 +189,17 @@ void Level::display_water (int fbo,
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   for (auto y = miny; y < maxy; y++) {
     for (auto x = minx; x < maxx; x++) {
-      if (likely(!gfx_water(x, y))) {
+      if (likely(! gfx_water(x, y))) {
         continue;
       }
       FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) {
         auto tpp = t->tp();
-        if (!tpp->gfx_water()) {
+        if (! tpp->gfx_water()) {
           continue;
         }
         t->blit(fbo);
-      } FOR_ALL_THINGS_END()
+      }
+      FOR_ALL_THINGS_END()
     }
   }
   glEnable(GL_TEXTURE_2D);
@@ -214,13 +213,13 @@ void Level::display_water (int fbo,
   blit_fbo_bind(fbo_mask2);
   glBlendFunc(GL_ONE, GL_ZERO);
   auto tile_map = water_tile_map;
-  for (auto y = miny; y < maxy - 1; y+=2) {
-    for (auto x = minx; x < maxx - 1; x+=2) {
-      if (likely(!get_no_check(tile_map, x, y))) {
+  for (auto y = miny; y < maxy - 1; y += 2) {
+    for (auto x = minx; x < maxx - 1; x += 2) {
+      if (likely(! get_no_check(tile_map, x, y))) {
         continue;
       }
-      int tx = (x & ~1);
-      int ty = (y & ~1);
+      int tx  = (x & ~1);
+      int ty  = (y & ~1);
       int tlx = tx * TILE_WIDTH;
       int tly = ty * TILE_HEIGHT;
       int brx = tlx + (2 * TILE_WIDTH);
@@ -233,13 +232,11 @@ void Level::display_water (int fbo,
         bry -= pixel_map_at.y;
       }
 
-      auto tile = get_no_check(water[level_type],
-                   (x&~1) % WATER_ACROSS,
-                   (y&~1) % WATER_DOWN);
-      auto x1 = tile->x1;
-      auto x2 = tile->x2;
-      auto y1 = tile->y1;
-      auto y2 = tile->y2;
+      auto tile = get_no_check(water[level_type], (x & ~1) % WATER_ACROSS, (y & ~1) % WATER_DOWN);
+      auto x1   = tile->x1;
+      auto x2   = tile->x2;
+      auto y1   = tile->y1;
+      auto y2   = tile->y2;
 
       float one_pix = (1.0 / tex_get_height(tile->tex));
       y1 += one_pix * water_step2;
@@ -258,12 +255,11 @@ void Level::display_water (int fbo,
   for (auto z = MAP_DEPTH_LAST_FLOOR_TYPE + 1; z < MAP_DEPTH; z++) {
     for (auto y = miny; y < maxy - 1; y++) {
       for (auto x = minx; x < maxx - 1; x++) {
-        if (likely(!get_no_check(tile_map, x, y + 1))) {
+        if (likely(! get_no_check(tile_map, x, y + 1))) {
           continue;
         }
-        FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) {
-          t->blit_upside_down(fbo);
-        } FOR_ALL_THINGS_END()
+        FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) { t->blit_upside_down(fbo); }
+        FOR_ALL_THINGS_END()
       }
     }
   }
@@ -286,30 +282,62 @@ void Level::display_water (int fbo,
   glClear(GL_COLOR_BUFFER_BIT);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   color c = WHITE;
-  c.a = 100;
+  c.a     = 100;
   if (is_level_type_sewer) {
     c = DARKGREEN;
   }
   glcolor(c);
-  glTranslatef(-2, -2, 0); blit_fbo(fbo_mask1); glTranslatef( 2,  2, 0);
-  glTranslatef( 0, -2, 0); blit_fbo(fbo_mask1); glTranslatef( 0,  2, 0);
-  glTranslatef( 2, -2, 0); blit_fbo(fbo_mask1); glTranslatef(-2,  2, 0);
-  glTranslatef(-2,  0, 0); blit_fbo(fbo_mask1); glTranslatef( 2,  0, 0);
-  glTranslatef( 2,  0, 0); blit_fbo(fbo_mask1); glTranslatef(-2,  0, 0);
-  glTranslatef(-2,  2, 0); blit_fbo(fbo_mask1); glTranslatef( 2, -2, 0);
-  glTranslatef( 0,  2, 0); blit_fbo(fbo_mask1); glTranslatef( 0, -2, 0);
-  glTranslatef( 2,  2, 0); blit_fbo(fbo_mask1); glTranslatef(-2, -2, 0);
+  glTranslatef(-2, -2, 0);
+  blit_fbo(fbo_mask1);
+  glTranslatef(2, 2, 0);
+  glTranslatef(0, -2, 0);
+  blit_fbo(fbo_mask1);
+  glTranslatef(0, 2, 0);
+  glTranslatef(2, -2, 0);
+  blit_fbo(fbo_mask1);
+  glTranslatef(-2, 2, 0);
+  glTranslatef(-2, 0, 0);
+  blit_fbo(fbo_mask1);
+  glTranslatef(2, 0, 0);
+  glTranslatef(2, 0, 0);
+  blit_fbo(fbo_mask1);
+  glTranslatef(-2, 0, 0);
+  glTranslatef(-2, 2, 0);
+  blit_fbo(fbo_mask1);
+  glTranslatef(2, -2, 0);
+  glTranslatef(0, 2, 0);
+  blit_fbo(fbo_mask1);
+  glTranslatef(0, -2, 0);
+  glTranslatef(2, 2, 0);
+  blit_fbo(fbo_mask1);
+  glTranslatef(-2, -2, 0);
 
   c.a = 150;
   glcolor(c);
-  glTranslatef(-1, -1, 0); blit_fbo(fbo_mask1); glTranslatef( 1,  1, 0);
-  glTranslatef( 0, -1, 0); blit_fbo(fbo_mask1); glTranslatef( 0,  1, 0);
-  glTranslatef( 1, -1, 0); blit_fbo(fbo_mask1); glTranslatef(-1,  1, 0);
-  glTranslatef(-1,  0, 0); blit_fbo(fbo_mask1); glTranslatef( 1,  0, 0);
-  glTranslatef( 1,  0, 0); blit_fbo(fbo_mask1); glTranslatef(-1,  0, 0);
-  glTranslatef(-1,  1, 0); blit_fbo(fbo_mask1); glTranslatef( 1, -1, 0);
-  glTranslatef( 0,  1, 0); blit_fbo(fbo_mask1); glTranslatef( 0, -1, 0);
-  glTranslatef( 1,  1, 0); blit_fbo(fbo_mask1); glTranslatef(-1, -1, 0);
+  glTranslatef(-1, -1, 0);
+  blit_fbo(fbo_mask1);
+  glTranslatef(1, 1, 0);
+  glTranslatef(0, -1, 0);
+  blit_fbo(fbo_mask1);
+  glTranslatef(0, 1, 0);
+  glTranslatef(1, -1, 0);
+  blit_fbo(fbo_mask1);
+  glTranslatef(-1, 1, 0);
+  glTranslatef(-1, 0, 0);
+  blit_fbo(fbo_mask1);
+  glTranslatef(1, 0, 0);
+  glTranslatef(1, 0, 0);
+  blit_fbo(fbo_mask1);
+  glTranslatef(-1, 0, 0);
+  glTranslatef(-1, 1, 0);
+  blit_fbo(fbo_mask1);
+  glTranslatef(1, -1, 0);
+  glTranslatef(0, 1, 0);
+  blit_fbo(fbo_mask1);
+  glTranslatef(0, -1, 0);
+  glTranslatef(1, 1, 0);
+  blit_fbo(fbo_mask1);
+  glTranslatef(-1, -1, 0);
 
   /////////////////////////////////////////////////////////////////////
   // Create a hole in the middle of the outline mask

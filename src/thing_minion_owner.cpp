@@ -13,12 +13,12 @@
 #include "my_thing.h"
 #include "my_ptrcheck.h"
 
-Thingp Thing::get_top_minion_owner (void) const
-{ TRACE_AND_INDENT();
+Thingp Thing::get_top_minion_owner(void) const {
+  TRACE_AND_INDENT();
   auto id = get_immediate_minion_owner_id();
   if (likely(id.ok())) {
     auto i = level->thing_find(id);
-    if (unlikely(!i)) {
+    if (unlikely(! i)) {
       return nullptr;
     }
     if (unlikely(i->get_immediate_minion_owner_id().ok())) {
@@ -30,12 +30,12 @@ Thingp Thing::get_top_minion_owner (void) const
   }
 }
 
-Thingp Thing::get_immediate_minion_owner (void) const
-{ TRACE_AND_INDENT();
+Thingp Thing::get_immediate_minion_owner(void) const {
+  TRACE_AND_INDENT();
   auto id = get_immediate_minion_owner_id();
   if (likely(id.ok())) {
     auto i = level->thing_find(id);
-    if (unlikely(!i)) {
+    if (unlikely(! i)) {
       return nullptr;
     }
     return i;
@@ -44,8 +44,8 @@ Thingp Thing::get_immediate_minion_owner (void) const
   }
 }
 
-void Thing::set_minion_owner (Thingp minion_owner)
-{ TRACE_AND_INDENT();
+void Thing::set_minion_owner(Thingp minion_owner) {
+  TRACE_AND_INDENT();
   if (minion_owner) {
     verify(minion_owner);
   }
@@ -57,17 +57,13 @@ void Thing::set_minion_owner (Thingp minion_owner)
     }
 
     if (minion_owner) {
-      dbg("Will change minion owner %s->%s",
-        old_minion_owner->to_string().c_str(),
-        minion_owner->to_string().c_str());
+      dbg("Will change minion owner %s->%s", old_minion_owner->to_string().c_str(), minion_owner->to_string().c_str());
     } else {
-      dbg("Will remove minion owner %s",
-        old_minion_owner->to_string().c_str());
+      dbg("Will remove minion owner %s", old_minion_owner->to_string().c_str());
     }
   } else {
     if (minion_owner) {
-      dbg("Will set minion owner to %s",
-        minion_owner->to_string().c_str());
+      dbg("Will set minion owner to %s", minion_owner->to_string().c_str());
     }
   }
 
@@ -82,10 +78,10 @@ void Thing::set_minion_owner (Thingp minion_owner)
   }
 }
 
-void Thing::remove_minion_owner (void)
-{ TRACE_AND_INDENT();
+void Thing::remove_minion_owner(void) {
+  TRACE_AND_INDENT();
   auto old_minion_owner = get_immediate_minion_owner();
-  if (!old_minion_owner) {
+  if (! old_minion_owner) {
     err("No minion owner");
     return;
   }
@@ -99,18 +95,18 @@ void Thing::remove_minion_owner (void)
 //
 // Kill and detach all minions from their owner
 //
-void Thing::kill_minions (Thingp killer)
-{ TRACE_AND_INDENT();
+void Thing::kill_minions(Thingp killer) {
+  TRACE_AND_INDENT();
   //
   // Warning killer can be nullptr - e.g. when a generator falls to
   // a new level
   //
 
-  if (!is_minion_generator()) {
+  if (! is_minion_generator()) {
     return;
   }
 
-  if (!get_minion_count()) {
+  if (! get_minion_count()) {
     return;
   }
 
@@ -120,7 +116,7 @@ void Thing::kill_minions (Thingp killer)
   FOR_ALL_THING_GROUPS(group) {
     for (auto p : level->all_things[group]) {
       auto minion = p.second;
-      auto o = minion->get_immediate_minion_owner();
+      auto o      = minion->get_immediate_minion_owner();
       if (o && (o == this)) {
         minion->remove_minion_owner();
         minion->is_resurrection_blocked = true;
@@ -133,13 +129,13 @@ void Thing::kill_minions (Thingp killer)
 //
 // Detach all minions from their owner
 //
-void Thing::unleash_minions (void)
-{ TRACE_AND_INDENT();
-  if (!is_minion_generator()) {
+void Thing::unleash_minions(void) {
+  TRACE_AND_INDENT();
+  if (! is_minion_generator()) {
     return;
   }
 
-  if (!get_minion_count()) {
+  if (! get_minion_count()) {
     return;
   }
 
@@ -149,7 +145,7 @@ void Thing::unleash_minions (void)
   FOR_ALL_THING_GROUPS(group) {
     for (auto p : level->all_things[group]) {
       auto minion = p.second;
-      auto o = minion->get_immediate_minion_owner();
+      auto o      = minion->get_immediate_minion_owner();
       if (o && (o == this)) {
         minion->remove_minion_owner();
       }

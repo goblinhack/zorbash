@@ -13,24 +13,22 @@
 #include "my_ptrcheck.h"
 #include "my_globals.h"
 
-static void wid_log_ (Widp t, const char *fmt, va_list args)
-{
+static void wid_log_(Widp t, const char *fmt, va_list args) {
   char buf[MAXLONGSTR];
-  int len;
+  int  len;
 
   verify(t);
   buf[0] = '\0';
   get_timestamp(buf, MAXLONGSTR);
-  len = (int)strlen(buf);
+  len = (int) strlen(buf);
   snprintf(buf + len, MAXLONGSTR - len, "WID [%s]: ", to_string(t).c_str());
-  len = (int)strlen(buf);
+  len = (int) strlen(buf);
   vsnprintf(buf + len, MAXLONGSTR - len, fmt, args);
 
   putf(MY_STDOUT, buf);
 }
 
-void WID_LOG (Widp t, const char *fmt, ...)
-{
+void WID_LOG(Widp t, const char *fmt, ...) {
   va_list args;
 
   verify(t);
@@ -40,13 +38,10 @@ void WID_LOG (Widp t, const char *fmt, ...)
   va_end(args);
 }
 
-void WID_DBG (Widp t, const char *fmt, ...)
-{
+void WID_DBG(Widp t, const char *fmt, ...) {
   va_list args;
 
-  IF_NODEBUG4 {
-    return;
-  }
+  IF_NODEBUG4 { return; }
 
   verify(t);
 

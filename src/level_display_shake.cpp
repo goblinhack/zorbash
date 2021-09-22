@@ -12,8 +12,7 @@
 #include "my_gl.h"
 #include "my_thing.h"
 
-float Level::update_wobble (void)
-{
+float Level::update_wobble(void) {
   auto w = get_wobble();
   if (w == 0.0) {
     return 0.0;
@@ -31,36 +30,34 @@ float Level::update_wobble (void)
   return (w);
 }
 
-float Level::get_wobble (void) const
-{ TRACE_AND_INDENT();
+float Level::get_wobble(void) const {
+  TRACE_AND_INDENT();
   return (wobble);
 }
 
-void Level::set_wobble (float v)
-{ TRACE_AND_INDENT();
+void Level::set_wobble(float v) {
+  TRACE_AND_INDENT();
   wobble = v;
 }
 
-bool Level::screen_shake_begin (void)
-{ TRACE_AND_INDENT();
-  if (!player || !player->is_bloodied()) {
+bool Level::screen_shake_begin(void) {
+  TRACE_AND_INDENT();
+  if (! player || ! player->is_bloodied()) {
     return false;
   }
 
   auto wobble = update_wobble();
   if (wobble != 0.0) {
     glPushMatrix();
-    glTranslatef(-game->config.game_pix_width / 2,
-           -game->config.game_pix_height / 2, 0);
+    glTranslatef(-game->config.game_pix_width / 2, -game->config.game_pix_height / 2, 0);
     glRotatef(wobble * 5, 0.0f, 0.0f, 1.0f);
-    glTranslatef(game->config.game_pix_width / 2,
-           game->config.game_pix_height / 2, 0);
+    glTranslatef(game->config.game_pix_width / 2, game->config.game_pix_height / 2, 0);
     return true;
   }
   return false;
 }
 
-void Level::screen_shake_end (void)
-{ TRACE_AND_INDENT();
+void Level::screen_shake_end(void) {
+  TRACE_AND_INDENT();
   glPopMatrix();
 }

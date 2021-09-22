@@ -17,8 +17,8 @@
 #include "my_array_bounds_check.h"
 #include "my_ptrcheck.h"
 
-bool Thing::cursor_path_pop_next_and_move (void)
-{ TRACE_AND_INDENT();
+bool Thing::cursor_path_pop_next_and_move(void) {
+  TRACE_AND_INDENT();
   if (monstp && monstp->move_path.size()) {
     IF_DEBUG3 {
       std::string s = "";
@@ -28,18 +28,17 @@ bool Thing::cursor_path_pop_next_and_move (void)
       log("Move path: %s", s.c_str());
     }
 
-    auto to = monstp->move_path[0];
+    auto to         = monstp->move_path[0];
     auto future_pos = point(to.x, to.y);
 
-    FOR_ALL_CURSOR_PATH_THINGS(level, t, to.x, to.y) {
-      t->dead("by end of life");
-    } FOR_ALL_THINGS_END()
+    FOR_ALL_CURSOR_PATH_THINGS(level, t, to.x, to.y) { t->dead("by end of life"); }
+    FOR_ALL_THINGS_END()
 
-  //
-  // Just in case the cursor next hop ends up too far away
-  // for a single move, then reset it.
-  //
-    if (!game->robot_mode) {
+    //
+    // Just in case the cursor next hop ends up too far away
+    // for a single move, then reset it.
+    //
+    if (! game->robot_mode) {
       if ((fabs(to.x - mid_at.x) > 1) || (fabs(to.x - mid_at.x) > 1)) {
         clear_move_path("Cursor next-hop is too far away");
         return false;
@@ -54,9 +53,8 @@ bool Thing::cursor_path_pop_next_and_move (void)
     //
     if (is_player() && game->robot_mode) {
       if (will_avoid_hazard(future_pos) || level->is_barrel(future_pos)) {
-        CON("Robot: Next position %d,%d is a hazard",
-          (int)future_pos.x, (int)future_pos.y);
-  TRACE_AND_INDENT();
+        CON("Robot: Next position %d,%d is a hazard", (int) future_pos.x, (int) future_pos.y);
+        TRACE_AND_INDENT();
         if (monstp->move_path.size()) {
           auto jump_pos = monstp->move_path[0];
           monstp->move_path.erase(monstp->move_path.begin());
@@ -65,9 +63,8 @@ bool Thing::cursor_path_pop_next_and_move (void)
           // If the thing we are going to land on is also a hazard,
           // can we jump further?
           //
-          CON("Robot: Next-next position %d,%d is also a hazard",
-            (int)jump_pos.x, (int)jump_pos.y);
-  TRACE_AND_INDENT();
+          CON("Robot: Next-next position %d,%d is also a hazard", (int) jump_pos.x, (int) jump_pos.y);
+          TRACE_AND_INDENT();
           if (will_avoid_hazard(jump_pos) && monstp->move_path.size()) {
             auto jump_pos = monstp->move_path[0];
             monstp->move_path.erase(monstp->move_path.begin());
@@ -126,24 +123,24 @@ bool Thing::cursor_path_pop_next_and_move (void)
         //
         auto delta = mid_at - make_fpoint(future_pos);
         FOR_ALL_THINGS(level, t, future_pos.x, future_pos.y) {
-          if (!t->is_shovable()) {
+          if (! t->is_shovable()) {
             continue;
           }
           switch (try_to_shove_into_hazard(t, delta)) {
-            case THING_SHOVE_TRIED_AND_FAILED:
+            case THING_SHOVE_TRIED_AND_FAILED :
               CON("Robot: Try to shove monst at %s but failed", future_pos.to_string().c_str());
               game->tick_begin("robot tried to shove but failed");
               clear_move_path("robot tried to shove but failed");
               return false;
-            case THING_SHOVE_TRIED_AND_PASSED:
+            case THING_SHOVE_TRIED_AND_PASSED :
               CON("Robot: Shoved monst at %s", future_pos.to_string().c_str());
               game->tick_begin("robot tried to shove");
               clear_move_path("robot tried to shove");
               return true;
-            case THING_SHOVE_NEVER_TRIED:
-              break;
+            case THING_SHOVE_NEVER_TRIED : break;
           }
-        } FOR_ALL_THINGS_END()
+        }
+        FOR_ALL_THINGS_END()
 
         CON("Robot: Try to attack monst at %s", future_pos.to_string().c_str());
         if (move_no_shove_no_attack(future_pos)) {
@@ -153,7 +150,7 @@ bool Thing::cursor_path_pop_next_and_move (void)
         //
         // Did we try or attempt to try to do something?
         //
-        if (!game->tick_requested.empty()) {
+        if (! game->tick_requested.empty()) {
           return true;
         }
       }
@@ -167,8 +164,7 @@ bool Thing::cursor_path_pop_next_and_move (void)
         return false;
       }
 
-      CON("Robot: Try to move (shoving not allowed, attack allowed) to %s",
-        future_pos.to_string().c_str());
+      CON("Robot: Try to move (shoving not allowed, attack allowed) to %s", future_pos.to_string().c_str());
       if (move_no_shove_attack_allowed(future_pos)) {
         return true;
       }
@@ -176,12 +172,11 @@ bool Thing::cursor_path_pop_next_and_move (void)
       //
       // Did we try or attempt to try to do something?
       //
-      if (!game->tick_requested.empty()) {
+      if (! game->tick_requested.empty()) {
         return true;
       }
 
-      CON("Robot: Try to move (shoving and attacking allowed) to %s",
-        future_pos.to_string().c_str());
+      CON("Robot: Try to move (shoving and attacking allowed) to %s", future_pos.to_string().c_str());
       if (move(future_pos)) {
         return true;
       }
@@ -189,7 +184,7 @@ bool Thing::cursor_path_pop_next_and_move (void)
       //
       // Did we try or attempt to try to do something?
       //
-      if (!game->tick_requested.empty()) {
+      if (! game->tick_requested.empty()) {
         return true;
       }
     }
@@ -204,8 +199,8 @@ bool Thing::cursor_path_pop_next_and_move (void)
 //
 // true on having performed an action
 //
-bool Thing::cursor_path_pop_first_move (void)
-{ TRACE_AND_INDENT();
+bool Thing::cursor_path_pop_first_move(void) {
+  TRACE_AND_INDENT();
   auto cursor = level->cursor;
 
   if (game->cursor_move_path.size()) {
@@ -240,18 +235,15 @@ bool Thing::cursor_path_pop_first_move (void)
   //
   // A path to the target does not exist. Jump?
   //
-  point future_pos = make_point(cursor->mid_at.x,
-                  cursor->mid_at.y);
+  point future_pos = make_point(cursor->mid_at.x, cursor->mid_at.y);
 
   //
   // If adjacent, try to move there. There may be no path
   // because perhaps a monster just moved but now we can
   // step there.
   //
-  if ((fabs(future_pos.x - mid_at.x) <= 1) &&
-    (fabs(future_pos.y - mid_at.y) <= 1)) {
-    dbg("Target is adjacent, attack or move to %f,%F",
-      cursor->mid_at.x, cursor->mid_at.y);
+  if ((fabs(future_pos.x - mid_at.x) <= 1) && (fabs(future_pos.y - mid_at.y) <= 1)) {
+    dbg("Target is adjacent, attack or move to %f,%F", cursor->mid_at.x, cursor->mid_at.y);
     attack(cursor->mid_at);
     level->cursor_path_create();
     return true;

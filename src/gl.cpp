@@ -10,19 +10,19 @@
 #include "my_thing_template.h"
 #include "my_ptrcheck.h"
 
-float glapi_last_tex_right;
-float glapi_last_tex_bottom;
-GLushort glapi_last_right;
-GLushort glapi_last_bottom;
+float      glapi_last_tex_right;
+float      glapi_last_tex_bottom;
+GLushort   glapi_last_right;
+GLushort   glapi_last_bottom;
 static int in_2d_mode;
 
 std::array<GLuint, MAX_FBO> render_buf_id = {};
-std::array<GLuint, MAX_FBO> fbo_id = {};
-std::array<GLuint, MAX_FBO> fbo_tex_id = {};
-std::array<isize, MAX_FBO> fbo_size = {};
+std::array<GLuint, MAX_FBO> fbo_id        = {};
+std::array<GLuint, MAX_FBO> fbo_tex_id    = {};
+std::array<isize, MAX_FBO>  fbo_size      = {};
 
-void gl_init_2d_mode (void)
-{ TRACE_AND_INDENT();
+void gl_init_2d_mode(void) {
+  TRACE_AND_INDENT();
   GL_ERROR_CHECK();
 
   if (in_2d_mode) {
@@ -49,9 +49,7 @@ void gl_init_2d_mode (void)
   // Setup our viewport
   //
   CON("GFX: enable viewport");
-  glViewport(0, 0,
-         game->config.window_pix_width,
-         game->config.window_pix_height);
+  glViewport(0, 0, game->config.window_pix_width, game->config.window_pix_height);
   GL_ERROR_CHECK();
 
   //
@@ -70,8 +68,8 @@ void gl_init_2d_mode (void)
   GL_ERROR_CHECK();
 }
 
-void gl_enter_2d_mode (void)
-{ TRACE_AND_INDENT();
+void gl_enter_2d_mode(void) {
+  TRACE_AND_INDENT();
   if (in_2d_mode) {
     gl_leave_2d_mode();
   }
@@ -93,12 +91,11 @@ void gl_enter_2d_mode (void)
   //
   // 2D projection
   //
-  glOrtho(0, // left
-      game->config.game_pix_width, // right
-      game->config.game_pix_height, // bottom
-      0, //top
-      -1200.0,
-      1200.0);
+  glOrtho(0,                            // left
+          game->config.game_pix_width,  // right
+          game->config.game_pix_height, // bottom
+          0,                            // top
+          -1200.0, 1200.0);
   GL_ERROR_CHECK();
 
   //
@@ -117,8 +114,8 @@ void gl_enter_2d_mode (void)
   in_2d_mode = true;
 }
 
-void gl_enter_2d_mode (int w, int h)
-{ TRACE_AND_INDENT();
+void gl_enter_2d_mode(int w, int h) {
+  TRACE_AND_INDENT();
   if (in_2d_mode) {
     gl_leave_2d_mode();
   }
@@ -141,11 +138,10 @@ void gl_enter_2d_mode (int w, int h)
   // 2D projection
   //
   glOrtho(0, // left
-      w, // right
-      h, // bottom
-      0, //top
-      -1200.0,
-      1200.0);
+          w, // right
+          h, // bottom
+          0, // top
+          -1200.0, 1200.0);
   GL_ERROR_CHECK();
 
   glViewport(0, 0, w, h);
@@ -167,10 +163,9 @@ void gl_enter_2d_mode (int w, int h)
   in_2d_mode = true;
 }
 
-void
-gl_leave_2d_mode (void)
-{ TRACE_AND_INDENT();
-  if (!in_2d_mode) {
+void gl_leave_2d_mode(void) {
+  TRACE_AND_INDENT();
+  if (! in_2d_mode) {
     return;
   }
   glMatrixMode(GL_MODELVIEW);
@@ -185,8 +180,8 @@ gl_leave_2d_mode (void)
   in_2d_mode = false;
 }
 
-void gl_enter_2_5d_mode (void)
-{ TRACE_AND_INDENT();
+void gl_enter_2_5d_mode(void) {
+  TRACE_AND_INDENT();
   glEnable(GL_DEPTH_TEST);
   glClear(GL_COLOR_BUFFER_BIT);
 
@@ -196,12 +191,7 @@ void gl_enter_2_5d_mode (void)
   glLoadIdentity();
 
   double scale = 15;
-  glOrtho(-scale,
-      scale,
-      -scale * 0.7,
-      scale * 0.7,
-      -scale,
-      scale);
+  glOrtho(-scale, scale, -scale * 0.7, scale * 0.7, -scale, scale);
 
   glMatrixMode(GL_MODELVIEW);
   glPushMatrix();
@@ -213,15 +203,14 @@ void gl_enter_2_5d_mode (void)
 
 #ifdef WIREFRAME
   glPolygonMode(GL_FRONT, GL_LINE); // draw wireframe polygons
-  glPolygonMode(GL_BACK, GL_LINE); // draw wireframe polygons
+  glPolygonMode(GL_BACK, GL_LINE);  // draw wireframe polygons
 #endif
 
   glCullFace(GL_BACK); // don't draw back faces
 }
 
-void
-gl_leave_2_5d_mode (void)
-{ TRACE_AND_INDENT();
+void gl_leave_2_5d_mode(void) {
+  TRACE_AND_INDENT();
   glDisable(GL_DEPTH_TEST);
 
   glMatrixMode(GL_MODELVIEW);
@@ -231,13 +220,9 @@ gl_leave_2_5d_mode (void)
   glPopMatrix();
 }
 
-static void gl_init_fbo_ (int fbo,
-              GLuint *render_buf_id,
-              GLuint *fbo_id,
-              GLuint *fbo_tex_id,
-              GLuint tex_width,
-              GLuint tex_height)
-{ TRACE_AND_INDENT();
+static void gl_init_fbo_(int fbo, GLuint *render_buf_id, GLuint *fbo_id, GLuint *fbo_tex_id, GLuint tex_width,
+                         GLuint tex_height) {
+  TRACE_AND_INDENT();
   DBG4("GFX: create FBO, size %dx%d", tex_width, tex_height);
   GL_ERROR_CHECK();
 
@@ -274,9 +259,7 @@ static void gl_init_fbo_ (int fbo,
   GL_ERROR_CHECK();
 
   DBG4("OpenGl: - glTexImage2D");
-  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8,
-         tex_width, tex_height, 0,
-         GL_RGBA, GL_UNSIGNED_BYTE, 0);
+  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, tex_width, tex_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
   glBindTexture(GL_TEXTURE_2D, 0);
   GL_ERROR_CHECK();
 
@@ -284,7 +267,7 @@ static void gl_init_fbo_ (int fbo,
   // Create a render buffer object.
   //
 #ifdef _WIN32
-  if (!glFramebufferTexture2D_EXT) {
+  if (! glFramebufferTexture2D_EXT) {
     SDL_MSG_BOX("glGenRenderbuffers_EXT is not present; fatal");
     DIE("GlGenRenderbuffers_EXT is not present; fatal");
     return;
@@ -300,8 +283,7 @@ static void gl_init_fbo_ (int fbo,
   GL_ERROR_CHECK();
 
   DBG4("OpenGl: - glRenderbufferStorage_EXT");
-  glRenderbufferStorage_EXT(GL_RENDERBUFFER, GL_DEPTH_COMPONENT,
-                tex_width, tex_height);
+  glRenderbufferStorage_EXT(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, tex_width, tex_height);
   GL_ERROR_CHECK();
 
   DBG4("OpenGl: - glBindRenderbuffer_EXT");
@@ -323,11 +305,11 @@ static void gl_init_fbo_ (int fbo,
   // Attach the texture to FBO color attachment point
   //
   DBG4("OpenGl: - glFramebufferTexture2D_EXT");
-  glFramebufferTexture2D_EXT(GL_FRAMEBUFFER,        // 1. fbo target: GL_FRAMEBUFFER
-                 GL_COLOR_ATTACHMENT0,  // 2. attachment point
-                 GL_TEXTURE_2D,         // 3. tex target: GL_TEXTURE_2D
-                 *fbo_tex_id,           // 4. tex ID
-                 0);                    // 5. mipmap level: 0(base)
+  glFramebufferTexture2D_EXT(GL_FRAMEBUFFER,       // 1. fbo target: GL_FRAMEBUFFER
+                             GL_COLOR_ATTACHMENT0, // 2. attachment point
+                             GL_TEXTURE_2D,        // 3. tex target: GL_TEXTURE_2D
+                             *fbo_tex_id,          // 4. tex ID
+                             0);                   // 5. mipmap level: 0(base)
   GL_ERROR_CHECK();
 
   //
@@ -335,9 +317,9 @@ static void gl_init_fbo_ (int fbo,
   //
   DBG4("OpenGl: - glFramebufferRenderbuffer_EXT");
   glFramebufferRenderbuffer_EXT(GL_FRAMEBUFFER,      // 1. fbo target: GL_FRAMEBUFFER
-                  GL_DEPTH_ATTACHMENT, // 2. attachment point
-                  GL_RENDERBUFFER,     // 3. rbo target: GL_RENDERBUFFER
-                  *render_buf_id);     // 4. rbo ID
+                                GL_DEPTH_ATTACHMENT, // 2. attachment point
+                                GL_RENDERBUFFER,     // 3. rbo target: GL_RENDERBUFFER
+                                *render_buf_id);     // 4. rbo ID
   GL_ERROR_CHECK();
 
   //
@@ -388,7 +370,7 @@ static void gl_init_fbo_ (int fbo,
     }
 #endif
   }
-  if (!status) {
+  if (! status) {
     glGetError();
   }
   GL_ERROR_CHECK();
@@ -399,8 +381,7 @@ static void gl_init_fbo_ (int fbo,
   GL_ERROR_CHECK();
 }
 
-void gl_init_fbo (void)
-{
+void gl_init_fbo(void) {
   int i;
 
   CON("GFX: create FBOs");
@@ -421,8 +402,7 @@ void gl_init_fbo (void)
       continue;
     }
 
-    gl_init_fbo_(i, &render_buf_id[i], &fbo_id[i], &fbo_tex_id[i],
-           tex_width, tex_height);
+    gl_init_fbo_(i, &render_buf_id[i], &fbo_id[i], &fbo_tex_id[i], tex_width, tex_height);
     fbo_size[i] = isize(tex_width, tex_height);
 
     gl_enter_2d_mode(tex_width, tex_height);
@@ -436,111 +416,85 @@ void gl_init_fbo (void)
   GL_ERROR_CHECK();
 }
 
-void fbo_get_size (int fbo, int &w, int &h)
-{
+void fbo_get_size(int fbo, int &w, int &h) {
   w = game->config.game_pix_width;
   h = game->config.game_pix_height;
 
   switch (fbo) {
-    case FBO_MAP:
-    case FBO_MAP_HIDDEN:
-    case FBO_MAP_VISIBLE:
-    case FBO_PLAYER_VISIBLE_LIGHTING:
-    case FBO_SCREEN_FADE_IN_AND_OUT:
-    case FBO_SMALL_POINT_LIGHTS:
+    case FBO_MAP :
+    case FBO_MAP_HIDDEN :
+    case FBO_MAP_VISIBLE :
+    case FBO_PLAYER_VISIBLE_LIGHTING :
+    case FBO_SCREEN_FADE_IN_AND_OUT :
+    case FBO_SMALL_POINT_LIGHTS :
       w = game->config.game_pix_width;
       h = game->config.game_pix_height;
       break;
-    case FBO_MASK1:
-    case FBO_MASK2:
-    case FBO_MASK3:
-    case FBO_MASK4:
+    case FBO_MASK1 :
+    case FBO_MASK2 :
+    case FBO_MASK3 :
+    case FBO_MASK4 :
       w = game->config.game_pix_width;
       h = game->config.game_pix_height;
       break;
-    case FBO_MINIMAP:
+    case FBO_MINIMAP :
       w = MAP_WIDTH;
       h = MAP_HEIGHT;
       break;
-    case FBO_FULLMAP:
-    case FBO_FULLMAP_LIGHT:
-    case FBO_FULLMAP_VISITED:
+    case FBO_FULLMAP :
+    case FBO_FULLMAP_LIGHT :
+    case FBO_FULLMAP_VISITED :
       w = TILE_WIDTH * MAP_WIDTH;
       h = TILE_HEIGHT * MAP_HEIGHT;
       break;
-    case FBO_FULLMAP_MASK1:
-    case FBO_FULLMAP_MASK2:
-    case FBO_FULLMAP_MASK3:
-    case FBO_FULLMAP_MASK4:
+    case FBO_FULLMAP_MASK1 :
+    case FBO_FULLMAP_MASK2 :
+    case FBO_FULLMAP_MASK3 :
+    case FBO_FULLMAP_MASK4 :
       w = TILE_WIDTH * MAP_WIDTH;
       h = TILE_HEIGHT * MAP_HEIGHT;
       break;
-    case FBO_WID:
+    case FBO_WID :
       w = game->config.ui_pix_width;
       h = game->config.ui_pix_height;
       break;
-    case FBO_FINAL:
+    case FBO_FINAL :
       w = game->config.window_pix_width;
       h = game->config.window_pix_height;
       break;
   }
 }
 
-void blit_fbo (int fbo)
-{
+void blit_fbo(int fbo) {
   int tex_width;
   int tex_height;
   fbo_get_size(fbo, tex_width, tex_height);
   blit_init();
-  blit(fbo_tex_id[fbo],
-     0.0, 1.0, 1.0, 0.0,
-     0, 0,
-     tex_width, tex_height);
+  blit(fbo_tex_id[fbo], 0.0, 1.0, 1.0, 0.0, 0, 0, tex_width, tex_height);
   blit_flush();
 }
 
-void blit_fbo_game_pix (int fbo)
-{
+void blit_fbo_game_pix(int fbo) {
   blit_init();
-  blit(fbo_tex_id[fbo],
-     0.0, 1.0, 1.0, 0.0,
-     0, 0,
-     game->config.game_pix_width,
-     game->config.game_pix_height);
+  blit(fbo_tex_id[fbo], 0.0, 1.0, 1.0, 0.0, 0, 0, game->config.game_pix_width, game->config.game_pix_height);
   blit_flush();
 }
 
-void blit_fbo_ui_pix (int fbo)
-{
+void blit_fbo_ui_pix(int fbo) {
   blit_init();
-  blit(fbo_tex_id[fbo],
-     0.0, 1.0, 1.0, 0.0,
-     0, 0,
-     game->config.ui_pix_width,
-     game->config.ui_pix_height);
+  blit(fbo_tex_id[fbo], 0.0, 1.0, 1.0, 0.0, 0, 0, game->config.ui_pix_width, game->config.ui_pix_height);
   blit_flush();
 }
 
-void blit_fbo_window_pix (int fbo)
-{
+void blit_fbo_window_pix(int fbo) {
   blit_init();
-  blit(fbo_tex_id[fbo],
-     0.0, 1.0, 1.0, 0.0,
-     0, 0,
-     game->config.window_pix_width,
-     game->config.window_pix_height);
+  blit(fbo_tex_id[fbo], 0.0, 1.0, 1.0, 0.0, 0, 0, game->config.window_pix_width, game->config.window_pix_height);
   blit_flush();
 }
 
-void blit_fbo_bind (int fbo)
-{
-  glBindFramebuffer_EXT(GL_FRAMEBUFFER, fbo_id[fbo]);
-}
+void blit_fbo_bind(int fbo) { glBindFramebuffer_EXT(GL_FRAMEBUFFER, fbo_id[fbo]); }
 
-void blit_fbo_unbind (void)
-{
-  glBindFramebuffer_EXT(GL_FRAMEBUFFER, 0);
-}
+void blit_fbo_unbind(void) { glBindFramebuffer_EXT(GL_FRAMEBUFFER, 0); }
 
 //
 // x and y per element.
@@ -552,12 +506,9 @@ void blit_fbo_unbind (void)
 //
 #define NUMBER_COMPONENTS_PER_COLOR 4
 
-uint32_t NUMBER_BYTES_PER_VERTICE_2D = sizeof(GLfloat) *
-                     NUMBER_DIMENSIONS_PER_COORD_2D +
-                     sizeof(GLushort) *
-                     NUMBER_DIMENSIONS_PER_COORD_2D +
-                     sizeof(GLubyte) *
-                     NUMBER_COMPONENTS_PER_COLOR;
+uint32_t NUMBER_BYTES_PER_VERTICE_2D = sizeof(GLfloat) * NUMBER_DIMENSIONS_PER_COORD_2D +
+                                       sizeof(GLushort) * NUMBER_DIMENSIONS_PER_COORD_2D +
+                                       sizeof(GLubyte) * NUMBER_COMPONENTS_PER_COLOR;
 //
 // Two arrays, xy and uv.
 //
@@ -569,10 +520,10 @@ float *gl_array_buf_end;
 //
 GLfloat *bufp;
 GLfloat *bufp_end;
-int buf_tex;
+int      buf_tex;
 
-void blit_init (void)
-{ TRACE_AND_INDENT();
+void blit_init(void) {
+  TRACE_AND_INDENT();
   buf_tex = 0;
 
   if (gl_array_buf) {
@@ -591,31 +542,27 @@ void blit_init (void)
   //
   gl_array_size_required = 8 * 1024 * 1024;
 
-  gl_array_buf = (__typeof__(gl_array_buf))
-          myzalloc(gl_array_size_required, "GL xy buffer");
+  gl_array_buf = (__typeof__(gl_array_buf)) myzalloc(gl_array_size_required, "GL xy buffer");
 
   //
   // Make the end a bit smaller so we have plenty of headroom.
   //
-  gl_array_buf_end =
-      (__typeof__(gl_array_buf_end))
-        ((char *)gl_array_buf) +
-        ((gl_array_size_required * 2) / 3);
+  gl_array_buf_end = (__typeof__(gl_array_buf_end)) ((char *) gl_array_buf) + ((gl_array_size_required * 2) / 3);
 
-  bufp = gl_array_buf;
+  bufp     = gl_array_buf;
   bufp_end = gl_array_buf_end;
 }
 
-void blit_fini (void)
-{ TRACE_AND_INDENT();
+void blit_fini(void) {
+  TRACE_AND_INDENT();
   if (gl_array_buf) {
     myfree(gl_array_buf);
     gl_array_buf = 0;
   }
 }
 
-void blit_flush (void)
-{ TRACE_AND_INDENT();
+void blit_flush(void) {
+  TRACE_AND_INDENT();
   if (gl_array_buf == bufp) {
     return;
   }
@@ -626,34 +573,25 @@ void blit_flush (void)
 
   static long nvertices;
 
-  nvertices = ((char*)bufp - (char*)gl_array_buf) /
-          NUMBER_BYTES_PER_VERTICE_2D;
+  nvertices = ((char *) bufp - (char *) gl_array_buf) / NUMBER_BYTES_PER_VERTICE_2D;
 
   glBindTexture(GL_TEXTURE_2D, buf_tex);
 
-  glTexCoordPointer(
-    NUMBER_DIMENSIONS_PER_COORD_2D, // (u,v)
-    GL_FLOAT,
-    NUMBER_BYTES_PER_VERTICE_2D,
-    gl_array_buf);
+  glTexCoordPointer(NUMBER_DIMENSIONS_PER_COORD_2D, // (u,v)
+                    GL_FLOAT, NUMBER_BYTES_PER_VERTICE_2D, gl_array_buf);
 
-  glVertexPointer(
-    NUMBER_DIMENSIONS_PER_COORD_2D, // (x,y)
-    GL_SHORT,
-    NUMBER_BYTES_PER_VERTICE_2D,
-    ((char*)gl_array_buf) +
-      sizeof(GLfloat) *        // skip (u,v)
-      NUMBER_DIMENSIONS_PER_COORD_2D);
+  glVertexPointer(NUMBER_DIMENSIONS_PER_COORD_2D, // (x,y)
+                  GL_SHORT, NUMBER_BYTES_PER_VERTICE_2D,
+                  ((char *) gl_array_buf) + sizeof(GLfloat) * // skip (u,v)
+                                                NUMBER_DIMENSIONS_PER_COORD_2D);
 
-  glColorPointer(
-    NUMBER_COMPONENTS_PER_COLOR, // (r,g,b,a)
-    GL_UNSIGNED_BYTE,
-    NUMBER_BYTES_PER_VERTICE_2D,
-    ((char*)gl_array_buf) +
-      sizeof(GLushort) *       // skip (x,y)
-      NUMBER_DIMENSIONS_PER_COORD_2D +
-      sizeof(GLfloat) *        // skip (u,v)
-      NUMBER_DIMENSIONS_PER_COORD_2D);
+  glColorPointer(NUMBER_COMPONENTS_PER_COLOR, // (r,g,b,a)
+                 GL_UNSIGNED_BYTE, NUMBER_BYTES_PER_VERTICE_2D,
+                 ((char *) gl_array_buf) +
+                     sizeof(GLushort) * // skip (x,y)
+                         NUMBER_DIMENSIONS_PER_COORD_2D +
+                     sizeof(GLfloat) * // skip (u,v)
+                         NUMBER_DIMENSIONS_PER_COORD_2D);
 
   GL_ERROR_CHECK();
   glDrawArrays(GL_TRIANGLE_STRIP, 0, (GLsizei) nvertices);
@@ -667,44 +605,35 @@ void blit_flush (void)
   blit_init();
 }
 
-void blit_flush_triangle_fan (void)
-{ TRACE_AND_INDENT();
+void blit_flush_triangle_fan(void) {
+  TRACE_AND_INDENT();
   blit_flush_triangle_fan(gl_array_buf, bufp);
 }
 
-void blit_flush_colored_triangle_fan (void)
-{ TRACE_AND_INDENT();
+void blit_flush_colored_triangle_fan(void) {
+  TRACE_AND_INDENT();
   blit_flush_colored_triangle_fan(gl_array_buf, bufp);
 }
 
-void blit_flush_colored_triangle_fan (float *b, float *e)
-{ TRACE_AND_INDENT();
+void blit_flush_colored_triangle_fan(float *b, float *e) {
+  TRACE_AND_INDENT();
   glEnableClientState(GL_VERTEX_ARRAY);
   glEnableClientState(GL_COLOR_ARRAY);
 
   static long nvertices;
 
   static const GLsizei stride =
-            sizeof(GLushort) *
-            NUMBER_DIMENSIONS_PER_COORD_2D +
-            sizeof(GLubyte) *
-            NUMBER_COMPONENTS_PER_COLOR;
+      sizeof(GLushort) * NUMBER_DIMENSIONS_PER_COORD_2D + sizeof(GLubyte) * NUMBER_COMPONENTS_PER_COLOR;
 
-  nvertices = ((char*)e - (char*)b) / stride;
+  nvertices = ((char *) e - (char *) b) / stride;
 
-  glVertexPointer(
-    NUMBER_DIMENSIONS_PER_COORD_2D, // (x,y)
-    GL_SHORT,
-    stride,
-    b);
+  glVertexPointer(NUMBER_DIMENSIONS_PER_COORD_2D, // (x,y)
+                  GL_SHORT, stride, b);
 
-  glColorPointer(
-    NUMBER_COMPONENTS_PER_COLOR, // (r,g,b,a)
-    GL_UNSIGNED_BYTE,
-    stride,
-    ((char*)b) +
-      sizeof(GLushort) *        // skip (x,y)
-      NUMBER_DIMENSIONS_PER_COORD_2D);
+  glColorPointer(NUMBER_COMPONENTS_PER_COLOR, // (r,g,b,a)
+                 GL_UNSIGNED_BYTE, stride,
+                 ((char *) b) + sizeof(GLushort) * // skip (x,y)
+                                    NUMBER_DIMENSIONS_PER_COORD_2D);
 
   GL_ERROR_CHECK();
   glDrawArrays(GL_TRIANGLE_FAN, 0, (GLsizei) nvertices);
@@ -715,23 +644,18 @@ void blit_flush_colored_triangle_fan (float *b, float *e)
   blit_init();
 }
 
-void blit_flush_triangle_fan (float *b, float *e)
-{ TRACE_AND_INDENT();
+void blit_flush_triangle_fan(float *b, float *e) {
+  TRACE_AND_INDENT();
   glEnableClientState(GL_VERTEX_ARRAY);
 
   static long nvertices;
 
-  static const GLsizei stride =
-            sizeof(GLushort) *
-            NUMBER_DIMENSIONS_PER_COORD_2D;
+  static const GLsizei stride = sizeof(GLushort) * NUMBER_DIMENSIONS_PER_COORD_2D;
 
-  nvertices = ((char*)e - (char*)b) / stride;
+  nvertices = ((char *) e - (char *) b) / stride;
 
-  glVertexPointer(
-    NUMBER_DIMENSIONS_PER_COORD_2D, // (x,y)
-    GL_SHORT,
-    stride,
-    b);
+  glVertexPointer(NUMBER_DIMENSIONS_PER_COORD_2D, // (x,y)
+                  GL_SHORT, stride, b);
 
   GL_ERROR_CHECK();
   glDrawArrays(GL_TRIANGLE_FAN, 0, (GLsizei) nvertices);
@@ -741,9 +665,8 @@ void blit_flush_triangle_fan (float *b, float *e)
   blit_init();
 }
 
-void gl_blitquad (GLushort left, GLushort top, GLushort right, GLushort bottom)
-{
-  GLushort xy[4*2];
+void gl_blitquad(GLushort left, GLushort top, GLushort right, GLushort bottom) {
+  GLushort  xy[4 * 2];
   GLushort *xyp = xy;
 
   Vertex2(left, top);
@@ -760,10 +683,8 @@ void gl_blitquad (GLushort left, GLushort top, GLushort right, GLushort bottom)
   glDisableClientState(GL_VERTEX_ARRAY);
 }
 
-void gl_blitquad (const point &tl, const point &tr,
-          const point &bl, const point &br)
-{
-  GLushort xy[4*2];
+void gl_blitquad(const point &tl, const point &tr, const point &bl, const point &br) {
+  GLushort  xy[4 * 2];
   GLushort *xyp = xy;
 
   Vertex2(tl.x, tl.y);
@@ -780,9 +701,8 @@ void gl_blitquad (const point &tl, const point &tr,
   glDisableClientState(GL_VERTEX_ARRAY);
 }
 
-void gl_blitsquare (GLushort left, GLushort top, GLushort right, GLushort bottom)
-{
-  GLushort xy[4*2];
+void gl_blitsquare(GLushort left, GLushort top, GLushort right, GLushort bottom) {
+  GLushort  xy[4 * 2];
   GLushort *xyp = xy;
 
   Vertex2(left, top);
@@ -799,9 +719,8 @@ void gl_blitsquare (GLushort left, GLushort top, GLushort right, GLushort bottom
   glDisableClientState(GL_VERTEX_ARRAY);
 }
 
-void gl_blitline (GLushort left, GLushort top, GLushort right, GLushort bottom)
-{
-  GLushort xy[2*2];
+void gl_blitline(GLushort left, GLushort top, GLushort right, GLushort bottom) {
+  GLushort  xy[2 * 2];
   GLushort *xyp = xy;
 
   Vertex2(left, top);
@@ -818,368 +737,340 @@ void gl_blitline (GLushort left, GLushort top, GLushort right, GLushort bottom)
 
 #ifdef _WIN32
 
-HDC hDC;
-HGLRC hGLRC;
+HDC      hDC;
+HGLRC    hGLRC;
 HPALETTE hPalette;
 
 const char g_szClassName[] = "myWindowClass";
 
-PFNGLCREATEPROGRAMPROC glCreateProgram_EXT;
-PFNGLDELETEPROGRAMPROC glDeleteProgram_EXT;
-PFNGLISPROGRAMPROC glIsProgram_EXT;
-PFNGLCREATESHADERPROC glCreateShader_EXT;
-PFNGLDELETESHADERPROC glDeleteShader_EXT;
-PFNGLSHADERSOURCEPROC glShaderSource_EXT;
-PFNGLCOMPILESHADERPROC glCompileShader_EXT;
-PFNGLATTACHSHADERPROC glAttachShader_EXT;
-PFNGLDETACHSHADERPROC glDetachShader_EXT;
-PFNGLGETATTACHEDSHADERSPROC glGetAttachedShaders_EXT;
-PFNGLLINKPROGRAMPROC glLinkProgram_EXT;
-PFNGLUSEPROGRAMPROC glUseProgram_EXT;
-PFNGLGETSHADERINFOLOGPROC glGetShaderInfoLog_EXT;
-PFNGLGETPROGRAMINFOLOGPROC glGetProgramInfoLog_EXT;
-PFNGLGETUNIFORMLOCATIONPROC glGetUniformLocation_EXT;
-PFNGLUNIFORM1FPROC glUniform1f_EXT;
-PFNGLUNIFORM1IPROC glUniform1i_EXT;
-PFNGLUNIFORM2FVPROC glUniform2fv_EXT;
-PFNGLUNIFORM3FVPROC glUniform3fv_EXT;
-PFNGLGENERATEMIPMAPPROC glGenerateMipmap_EXT;
-PFNGLGENFRAMEBUFFERSPROC glGenFramebuffers_EXT;
-PFNGLDELETEFRAMEBUFFERSPROC glDeleteFramebuffers_EXT;
-PFNGLBINDFRAMEBUFFERPROC glBindFramebuffer_EXT;
-PFNGLGENRENDERBUFFERSPROC glGenRenderbuffers_EXT;
-PFNGLDELETERENDERBUFFERSPROC glDeleteRenderbuffers_EXT;
-PFNGLBINDRENDERBUFFERPROC glBindRenderbuffer_EXT;
-PFNGLRENDERBUFFERSTORAGEPROC glRenderbufferStorage_EXT;
+PFNGLCREATEPROGRAMPROC           glCreateProgram_EXT;
+PFNGLDELETEPROGRAMPROC           glDeleteProgram_EXT;
+PFNGLISPROGRAMPROC               glIsProgram_EXT;
+PFNGLCREATESHADERPROC            glCreateShader_EXT;
+PFNGLDELETESHADERPROC            glDeleteShader_EXT;
+PFNGLSHADERSOURCEPROC            glShaderSource_EXT;
+PFNGLCOMPILESHADERPROC           glCompileShader_EXT;
+PFNGLATTACHSHADERPROC            glAttachShader_EXT;
+PFNGLDETACHSHADERPROC            glDetachShader_EXT;
+PFNGLGETATTACHEDSHADERSPROC      glGetAttachedShaders_EXT;
+PFNGLLINKPROGRAMPROC             glLinkProgram_EXT;
+PFNGLUSEPROGRAMPROC              glUseProgram_EXT;
+PFNGLGETSHADERINFOLOGPROC        glGetShaderInfoLog_EXT;
+PFNGLGETPROGRAMINFOLOGPROC       glGetProgramInfoLog_EXT;
+PFNGLGETUNIFORMLOCATIONPROC      glGetUniformLocation_EXT;
+PFNGLUNIFORM1FPROC               glUniform1f_EXT;
+PFNGLUNIFORM1IPROC               glUniform1i_EXT;
+PFNGLUNIFORM2FVPROC              glUniform2fv_EXT;
+PFNGLUNIFORM3FVPROC              glUniform3fv_EXT;
+PFNGLGENERATEMIPMAPPROC          glGenerateMipmap_EXT;
+PFNGLGENFRAMEBUFFERSPROC         glGenFramebuffers_EXT;
+PFNGLDELETEFRAMEBUFFERSPROC      glDeleteFramebuffers_EXT;
+PFNGLBINDFRAMEBUFFERPROC         glBindFramebuffer_EXT;
+PFNGLGENRENDERBUFFERSPROC        glGenRenderbuffers_EXT;
+PFNGLDELETERENDERBUFFERSPROC     glDeleteRenderbuffers_EXT;
+PFNGLBINDRENDERBUFFERPROC        glBindRenderbuffer_EXT;
+PFNGLRENDERBUFFERSTORAGEPROC     glRenderbufferStorage_EXT;
 PFNGLFRAMEBUFFERRENDERBUFFERPROC glFramebufferRenderbuffer_EXT;
-PFNGLFRAMEBUFFERTEXTURE2DPROC glFramebufferTexture2D_EXT;
-PFNGLCHECKFRAMEBUFFERSTATUSPROC glCheckFramebufferStatus_EXT;
-PFNGLGENBUFFERSARBPROC glGenBuffersARB_EXT;
-PFNGLBINDBUFFERARBPROC glBindBufferARB_EXT;
-PFNGLBUFFERDATAARBPROC glBufferDataARB_EXT;
-PFNGLDELETEBUFFERSARBPROC glDeleteBuffersARB_EXT;
+PFNGLFRAMEBUFFERTEXTURE2DPROC    glFramebufferTexture2D_EXT;
+PFNGLCHECKFRAMEBUFFERSTATUSPROC  glCheckFramebufferStatus_EXT;
+PFNGLGENBUFFERSARBPROC           glGenBuffersARB_EXT;
+PFNGLBINDBUFFERARBPROC           glBindBufferARB_EXT;
+PFNGLBUFFERDATAARBPROC           glBufferDataARB_EXT;
+PFNGLDELETEBUFFERSARBPROC        glDeleteBuffersARB_EXT;
 
-static void gl_ext_load (void)
-{ TRACE_AND_INDENT();
-  glCreateProgram_EXT = (__typeof__(glCreateProgram_EXT))
-    wglGetProcAddress("glCreateProgram");
-  if (!glCreateProgram_EXT) {
+static void gl_ext_load(void) {
+  TRACE_AND_INDENT();
+  glCreateProgram_EXT = (__typeof__(glCreateProgram_EXT)) wglGetProcAddress("glCreateProgram");
+  if (! glCreateProgram_EXT) {
     CON("OpenGl: - glCreateProgram_EXT - NOT present");
   } else {
     CON("OpenGl: - glCreateProgram_EXT - present");
   }
 
-  glDeleteProgram_EXT =
-    (__typeof__(glDeleteProgram_EXT)) wglGetProcAddress("glDeleteProgram");
-  if (!glDeleteProgram_EXT) {
+  glDeleteProgram_EXT = (__typeof__(glDeleteProgram_EXT)) wglGetProcAddress("glDeleteProgram");
+  if (! glDeleteProgram_EXT) {
     CON("OpenGl: - glDeleteProgram_EXT - NOT present");
   } else {
     CON("OpenGl: - glDeleteProgram_EXT - present");
   }
 
-  glIsProgram_EXT =
-    (__typeof__(glIsProgram_EXT)) wglGetProcAddress("glIsProgram");
-  if (!glIsProgram_EXT) {
+  glIsProgram_EXT = (__typeof__(glIsProgram_EXT)) wglGetProcAddress("glIsProgram");
+  if (! glIsProgram_EXT) {
     CON("OpenGl: - glIsProgram_EXT - NOT present");
   } else {
     CON("OpenGl: - glIsProgram_EXT - present");
   }
 
-  glCreateShader_EXT =
-    (__typeof__(glCreateShader_EXT)) wglGetProcAddress("glCreateShader");
-  if (!glCreateShader_EXT) {
+  glCreateShader_EXT = (__typeof__(glCreateShader_EXT)) wglGetProcAddress("glCreateShader");
+  if (! glCreateShader_EXT) {
     CON("OpenGl: - glCreateShader_EXT - NOT present");
   } else {
     CON("OpenGl: - glCreateShader_EXT - present");
   }
 
-  glDeleteShader_EXT =
-    (__typeof__(glDeleteShader_EXT)) wglGetProcAddress("glDeleteShader");
-  if (!glDeleteShader_EXT) {
+  glDeleteShader_EXT = (__typeof__(glDeleteShader_EXT)) wglGetProcAddress("glDeleteShader");
+  if (! glDeleteShader_EXT) {
     CON("OpenGl: - glDeleteShader_EXT - NOT present");
   } else {
     CON("OpenGl: - glDeleteShader_EXT - present");
   }
 
-  glShaderSource_EXT =
-    (__typeof__(glShaderSource_EXT)) wglGetProcAddress("glShaderSource");
-  if (!glShaderSource_EXT) {
+  glShaderSource_EXT = (__typeof__(glShaderSource_EXT)) wglGetProcAddress("glShaderSource");
+  if (! glShaderSource_EXT) {
     CON("OpenGl: - glShaderSource_EXT - NOT present");
   } else {
     CON("OpenGl: - glShaderSource_EXT - present");
   }
 
-  glCompileShader_EXT =
-    (__typeof__(glCompileShader_EXT)) wglGetProcAddress("glCompileShader");
-  if (!glCompileShader_EXT) {
+  glCompileShader_EXT = (__typeof__(glCompileShader_EXT)) wglGetProcAddress("glCompileShader");
+  if (! glCompileShader_EXT) {
     CON("OpenGl: - glCompileShader_EXT - NOT present");
   } else {
     CON("OpenGl: - glCompileShader_EXT - present");
   }
 
-  glAttachShader_EXT =
-    (__typeof__(glAttachShader_EXT)) wglGetProcAddress("glAttachShader");
-  if (!glAttachShader_EXT) {
+  glAttachShader_EXT = (__typeof__(glAttachShader_EXT)) wglGetProcAddress("glAttachShader");
+  if (! glAttachShader_EXT) {
     CON("OpenGl: - glAttachShader_EXT - NOT present");
   } else {
     CON("OpenGl: - glAttachShader_EXT - present");
   }
 
-  glDetachShader_EXT =
-    (__typeof__(glDetachShader_EXT)) wglGetProcAddress("glDetachShader");
-  if (!glDetachShader_EXT) {
+  glDetachShader_EXT = (__typeof__(glDetachShader_EXT)) wglGetProcAddress("glDetachShader");
+  if (! glDetachShader_EXT) {
     CON("OpenGl: - glDetachShader_EXT - NOT present");
   } else {
     CON("OpenGl: - glDetachShader_EXT - present");
   }
 
-  glGetAttachedShaders_EXT =
-    (__typeof__(glGetAttachedShaders_EXT)) wglGetProcAddress("glGetAttachedShaders");
-  if (!glGetAttachedShaders_EXT) {
+  glGetAttachedShaders_EXT = (__typeof__(glGetAttachedShaders_EXT)) wglGetProcAddress("glGetAttachedShaders");
+  if (! glGetAttachedShaders_EXT) {
     CON("OpenGl: - glGetAttachedShaders_EXT - NOT present");
   } else {
     CON("OpenGl: - glGetAttachedShaders_EXT - present");
   }
 
-  glLinkProgram_EXT =
-    (__typeof__(glLinkProgram_EXT)) wglGetProcAddress("glLinkProgram");
-  if (!glLinkProgram_EXT) {
+  glLinkProgram_EXT = (__typeof__(glLinkProgram_EXT)) wglGetProcAddress("glLinkProgram");
+  if (! glLinkProgram_EXT) {
     CON("OpenGl: - glLinkProgram_EXT - NOT present");
   } else {
     CON("OpenGl: - glLinkProgram_EXT - present");
   }
 
-  glUseProgram_EXT =
-    (__typeof__(glUseProgram_EXT)) wglGetProcAddress("glUseProgram");
-  if (!glUseProgram_EXT) {
+  glUseProgram_EXT = (__typeof__(glUseProgram_EXT)) wglGetProcAddress("glUseProgram");
+  if (! glUseProgram_EXT) {
     CON("OpenGl: - glUseProgram_EXT - NOT present");
   } else {
     CON("OpenGl: - glUseProgram_EXT - present");
   }
 
-  glGetShaderInfoLog_EXT =
-    (__typeof__(glGetShaderInfoLog_EXT)) wglGetProcAddress("glGetShaderInfoLog");
-  if (!glGetShaderInfoLog_EXT) {
+  glGetShaderInfoLog_EXT = (__typeof__(glGetShaderInfoLog_EXT)) wglGetProcAddress("glGetShaderInfoLog");
+  if (! glGetShaderInfoLog_EXT) {
     CON("OpenGl: - glGetShaderInfoLog_EXT - NOT present");
   } else {
     CON("OpenGl: - glGetShaderInfoLog_EXT - present");
   }
 
-  glGetProgramInfoLog_EXT =
-    (__typeof__(glGetProgramInfoLog_EXT)) wglGetProcAddress("glGetProgramInfoLog");
-  if (!glGetProgramInfoLog_EXT) {
+  glGetProgramInfoLog_EXT = (__typeof__(glGetProgramInfoLog_EXT)) wglGetProcAddress("glGetProgramInfoLog");
+  if (! glGetProgramInfoLog_EXT) {
     CON("OpenGl: - glGetProgramInfoLog_EXT - NOT present");
   } else {
     CON("OpenGl: - glGetProgramInfoLog_EXT - present");
   }
 
-  glGetUniformLocation_EXT =
-    (__typeof__(glGetUniformLocation_EXT)) wglGetProcAddress("glGetUniformLocation");
-  if (!glGetUniformLocation_EXT) {
+  glGetUniformLocation_EXT = (__typeof__(glGetUniformLocation_EXT)) wglGetProcAddress("glGetUniformLocation");
+  if (! glGetUniformLocation_EXT) {
     CON("OpenGl: - glGetUniformLocation_EXT - NOT present");
   } else {
     CON("OpenGl: - glGetUniformLocation_EXT - present");
   }
 
-  glUniform1f_EXT =
-    (__typeof__(glUniform1f_EXT)) wglGetProcAddress("glUniform1f");
-  if (!glUniform1f_EXT) {
+  glUniform1f_EXT = (__typeof__(glUniform1f_EXT)) wglGetProcAddress("glUniform1f");
+  if (! glUniform1f_EXT) {
     CON("OpenGl: - glUniform1f_EXT - NOT present");
   } else {
     CON("OpenGl: - glUniform1f_EXT - present");
   }
 
-  glUniform1i_EXT =
-    (__typeof__(glUniform1i_EXT)) wglGetProcAddress("glUniform1i");
-  if (!glUniform1i_EXT) {
+  glUniform1i_EXT = (__typeof__(glUniform1i_EXT)) wglGetProcAddress("glUniform1i");
+  if (! glUniform1i_EXT) {
     CON("OpenGl: - glUniform1i_EXT - NOT present");
   } else {
     CON("OpenGl: - glUniform1i_EXT - present");
   }
 
-  glUniform2fv_EXT =
-    (__typeof__(glUniform2fv_EXT)) wglGetProcAddress("glUniform2fv");
-  if (!glUniform2fv_EXT) {
+  glUniform2fv_EXT = (__typeof__(glUniform2fv_EXT)) wglGetProcAddress("glUniform2fv");
+  if (! glUniform2fv_EXT) {
     CON("OpenGl: - glUniform2fv_EXT - NOT present");
   } else {
     CON("OpenGl: - glUniform2fv_EXT - present");
   }
 
-  glUniform3fv_EXT =
-    (__typeof__(glUniform3fv_EXT)) wglGetProcAddress("glUniform3fv");
-  if (!glUniform3fv_EXT) {
+  glUniform3fv_EXT = (__typeof__(glUniform3fv_EXT)) wglGetProcAddress("glUniform3fv");
+  if (! glUniform3fv_EXT) {
     CON("OpenGl: - glUniform3fv_EXT - NOT present");
   } else {
     CON("OpenGl: - glUniform3fv_EXT - present");
   }
 
-  glGenerateMipmap_EXT =
-    (__typeof__(glGenerateMipmap_EXT)) wglGetProcAddress("glGenerateMipmap");
-  if (!glGenerateMipmap_EXT) {
+  glGenerateMipmap_EXT = (__typeof__(glGenerateMipmap_EXT)) wglGetProcAddress("glGenerateMipmap");
+  if (! glGenerateMipmap_EXT) {
     CON("OpenGl: - glGenerateMipmap_EXT - NOT present");
   } else {
     CON("OpenGl: - glGenerateMipmap_EXT - present");
   }
 
-  glGenFramebuffers_EXT =
-    (__typeof__(glGenFramebuffers_EXT)) wglGetProcAddress("glGenFramebuffers");
-  if (!glGenFramebuffers_EXT) {
+  glGenFramebuffers_EXT = (__typeof__(glGenFramebuffers_EXT)) wglGetProcAddress("glGenFramebuffers");
+  if (! glGenFramebuffers_EXT) {
     CON("OpenGl: - glGenFramebuffers_EXT - NOT present");
   } else {
     CON("OpenGl: - glGenFramebuffers_EXT - present");
   }
 
-  glDeleteFramebuffers_EXT =
-    (__typeof__(glDeleteFramebuffers_EXT)) wglGetProcAddress("glDeleteFramebuffers");
-  if (!glDeleteFramebuffers_EXT) {
+  glDeleteFramebuffers_EXT = (__typeof__(glDeleteFramebuffers_EXT)) wglGetProcAddress("glDeleteFramebuffers");
+  if (! glDeleteFramebuffers_EXT) {
     CON("OpenGl: - glDeleteFramebuffers_EXT - NOT present");
   } else {
     CON("OpenGl: - glDeleteFramebuffers_EXT - present");
   }
 
-  glBindFramebuffer_EXT =
-    (__typeof__(glBindFramebuffer_EXT)) wglGetProcAddress("glBindFramebuffer");
-  if (!glBindFramebuffer_EXT) {
+  glBindFramebuffer_EXT = (__typeof__(glBindFramebuffer_EXT)) wglGetProcAddress("glBindFramebuffer");
+  if (! glBindFramebuffer_EXT) {
     CON("OpenGl: - glBindFramebuffer_EXT - NOT present");
   } else {
     CON("OpenGl: - glBindFramebuffer_EXT - present");
   }
 
-  glGenRenderbuffers_EXT =
-    (__typeof__(glGenRenderbuffers_EXT)) wglGetProcAddress("glGenRenderbuffers");
-  if (!glGenRenderbuffers_EXT) {
+  glGenRenderbuffers_EXT = (__typeof__(glGenRenderbuffers_EXT)) wglGetProcAddress("glGenRenderbuffers");
+  if (! glGenRenderbuffers_EXT) {
     CON("OpenGl: - glGenRenderbuffers_EXT - NOT present");
   } else {
     CON("OpenGl: - glGenRenderbuffers_EXT - present");
   }
 
-  glDeleteRenderbuffers_EXT =
-    (__typeof__(glDeleteRenderbuffers_EXT)) wglGetProcAddress("glDeleteRenderbuffers");
-  if (!glDeleteRenderbuffers_EXT) {
+  glDeleteRenderbuffers_EXT = (__typeof__(glDeleteRenderbuffers_EXT)) wglGetProcAddress("glDeleteRenderbuffers");
+  if (! glDeleteRenderbuffers_EXT) {
     CON("OpenGl: - glDeleteRenderbuffers_EXT - NOT present");
   } else {
     CON("OpenGl: - glDeleteRenderbuffers_EXT - present");
   }
 
-  glBindRenderbuffer_EXT =
-    (__typeof__(glBindRenderbuffer_EXT)) wglGetProcAddress("glBindRenderbuffer");
-  if (!glBindRenderbuffer_EXT) {
+  glBindRenderbuffer_EXT = (__typeof__(glBindRenderbuffer_EXT)) wglGetProcAddress("glBindRenderbuffer");
+  if (! glBindRenderbuffer_EXT) {
     CON("OpenGl: - glBindRenderbuffer_EXT - NOT present");
   } else {
     CON("OpenGl: - glBindRenderbuffer_EXT - present");
   }
 
-  glRenderbufferStorage_EXT =
-    (__typeof__(glRenderbufferStorage_EXT)) wglGetProcAddress("glRenderbufferStorage");
-  if (!glRenderbufferStorage_EXT) {
+  glRenderbufferStorage_EXT = (__typeof__(glRenderbufferStorage_EXT)) wglGetProcAddress("glRenderbufferStorage");
+  if (! glRenderbufferStorage_EXT) {
     CON("OpenGl: - glRenderbufferStorage_EXT - NOT present");
   } else {
     CON("OpenGl: - glRenderbufferStorage_EXT - present");
   }
 
   glFramebufferRenderbuffer_EXT =
-    (__typeof__(glFramebufferRenderbuffer_EXT)) wglGetProcAddress("glFramebufferRenderbuffer");
-  if (!glFramebufferRenderbuffer_EXT) {
+      (__typeof__(glFramebufferRenderbuffer_EXT)) wglGetProcAddress("glFramebufferRenderbuffer");
+  if (! glFramebufferRenderbuffer_EXT) {
     CON("OpenGl: - glFramebufferRenderbuffer_EXT - NOT present");
   } else {
     CON("OpenGl: - glFramebufferRenderbuffer_EXT - present");
   }
 
   glCheckFramebufferStatus_EXT =
-    (__typeof__(glCheckFramebufferStatus_EXT)) wglGetProcAddress("glFramebufferRenderbuffer");
-  if (!glCheckFramebufferStatus_EXT) {
+      (__typeof__(glCheckFramebufferStatus_EXT)) wglGetProcAddress("glFramebufferRenderbuffer");
+  if (! glCheckFramebufferStatus_EXT) {
     CON("OpenGl: - glCheckFramebufferStatus_EXT - NOT present");
   } else {
     CON("OpenGl: - glCheckFramebufferStatus_EXT - present");
   }
 
-  glFramebufferTexture2D_EXT =
-    (__typeof__(glFramebufferTexture2D_EXT)) wglGetProcAddress("glFramebufferTexture2D");
-  if (!glFramebufferTexture2D_EXT) {
+  glFramebufferTexture2D_EXT = (__typeof__(glFramebufferTexture2D_EXT)) wglGetProcAddress("glFramebufferTexture2D");
+  if (! glFramebufferTexture2D_EXT) {
     CON("OpenGl: - glFramebufferTexture2D_EXT - NOT present");
   } else {
     CON("OpenGl: - glFramebufferTexture2D_EXT - present");
   }
 
-  glGenBuffersARB_EXT =
-    (__typeof__(glGenBuffersARB_EXT)) wglGetProcAddress("glGenBuffersARB");
-  if (!glGenBuffersARB_EXT) {
+  glGenBuffersARB_EXT = (__typeof__(glGenBuffersARB_EXT)) wglGetProcAddress("glGenBuffersARB");
+  if (! glGenBuffersARB_EXT) {
     CON("OpenGl: - glGenBuffersARB_EXT - NOT present");
   } else {
     CON("OpenGl: - glGenBuffersARB_EXT - present");
   }
 
-  glBindBufferARB_EXT =
-    (__typeof__(glBindBufferARB_EXT)) wglGetProcAddress("glBindBufferARB");
-  if (!glBindBufferARB_EXT) {
+  glBindBufferARB_EXT = (__typeof__(glBindBufferARB_EXT)) wglGetProcAddress("glBindBufferARB");
+  if (! glBindBufferARB_EXT) {
     CON("OpenGl: - glBindBufferARB_EXT - NOT present");
   } else {
     CON("OpenGl: - glBindBufferARB_EXT - present");
   }
 
-  glDeleteBuffersARB_EXT =
-    (__typeof__(glDeleteBuffersARB_EXT)) wglGetProcAddress("glDeleteBuffersARB");
-  if (!glDeleteBuffersARB_EXT) {
+  glDeleteBuffersARB_EXT = (__typeof__(glDeleteBuffersARB_EXT)) wglGetProcAddress("glDeleteBuffersARB");
+  if (! glDeleteBuffersARB_EXT) {
     CON("OpenGl: - glDeleteBuffersARB_EXT - NOT present");
   } else {
     CON("OpenGl: - glDeleteBuffersARB_EXT - present");
   }
 
-  glDeleteBuffersARB_EXT =
-    (__typeof__(glDeleteBuffersARB_EXT)) wglGetProcAddress("glDeleteBuffersARB");
-  if (!glDeleteBuffersARB_EXT) {
+  glDeleteBuffersARB_EXT = (__typeof__(glDeleteBuffersARB_EXT)) wglGetProcAddress("glDeleteBuffersARB");
+  if (! glDeleteBuffersARB_EXT) {
     CON("OpenGl: - glDeleteBuffersARB_EXT - NOT present");
   } else {
     CON("OpenGl: - glDeleteBuffersARB_EXT - present");
   }
 }
 
-static void
-setupPixelFormat(HDC hDC)
-{ TRACE_AND_INDENT();
+static void setupPixelFormat(HDC hDC) {
+  TRACE_AND_INDENT();
   PIXELFORMATDESCRIPTOR pfd = {
-    sizeof(PIXELFORMATDESCRIPTOR),  // size
-    1,                              // version
-    PFD_SUPPORT_OPENGL |
-    PFD_DRAW_TO_WINDOW |
-    PFD_DOUBLEBUFFER,               // support double-buffering
-    PFD_TYPE_RGBA,                  // color type
-    16,                             // prefered color depth
-    0, 0, 0, 0, 0, 0,               // color bits (ignored)
-    0,                              // no alpha buffer
-    0,                              // alpha bits (ignored)
-    0,                              // no accumulation buffer
-    0, 0, 0, 0,                     // accum bits (ignored)
-    16,                             // depth buffer
-    0,                              // no stencil buffer
-    0,                              // no auxiliary buffers
-    PFD_MAIN_PLANE,                 // main layer
-    0,                              // reserved
-    0, 0, 0,                        // no layer, visible, damage masks
+      sizeof(PIXELFORMATDESCRIPTOR),                              // size
+      1,                                                          // version
+      PFD_SUPPORT_OPENGL | PFD_DRAW_TO_WINDOW | PFD_DOUBLEBUFFER, // support double-buffering
+      PFD_TYPE_RGBA,                                              // color type
+      16,                                                         // prefered color depth
+      0,
+      0,
+      0,
+      0,
+      0,
+      0, // color bits (ignored)
+      0, // no alpha buffer
+      0, // alpha bits (ignored)
+      0, // no accumulation buffer
+      0,
+      0,
+      0,
+      0,              // accum bits (ignored)
+      16,             // depth buffer
+      0,              // no stencil buffer
+      0,              // no auxiliary buffers
+      PFD_MAIN_PLANE, // main layer
+      0,              // reserved
+      0,
+      0,
+      0, // no layer, visible, damage masks
   };
   int pixelFormat;
 
   pixelFormat = ChoosePixelFormat(hDC, &pfd);
   if (pixelFormat == 0) {
-    MessageBox(WindowFromDC(hDC), "ChoosePixelFormat failed.", "Error",
-        MB_ICONERROR | MB_OK);
+    MessageBox(WindowFromDC(hDC), "ChoosePixelFormat failed.", "Error", MB_ICONERROR | MB_OK);
     exit(1);
   }
 
   if (SetPixelFormat(hDC, pixelFormat, &pfd) != TRUE) {
-    MessageBox(WindowFromDC(hDC), "SetPixelFormat failed.", "Error",
-        MB_ICONERROR | MB_OK);
+    MessageBox(WindowFromDC(hDC), "SetPixelFormat failed.", "Error", MB_ICONERROR | MB_OK);
     exit(1);
   }
 }
 
-static void
-setupPalette(HDC hDC)
-{ TRACE_AND_INDENT();
-  int pixelFormat = GetPixelFormat(hDC);
+static void setupPalette(HDC hDC) {
+  TRACE_AND_INDENT();
+  int                   pixelFormat = GetPixelFormat(hDC);
   PIXELFORMATDESCRIPTOR pfd;
-  LOGPALETTE* pPal;
-  int paletteSize;
+  LOGPALETTE *          pPal;
+  int                   paletteSize;
 
   DescribePixelFormat(hDC, pixelFormat, sizeof(PIXELFORMATDESCRIPTOR), &pfd);
 
@@ -1189,25 +1080,21 @@ setupPalette(HDC hDC)
     return;
   }
 
-  pPal = (LOGPALETTE*)
-    malloc(sizeof(LOGPALETTE) + paletteSize * sizeof(PALETTEENTRY));
-  pPal->palVersion = 0x300;
+  pPal                = (LOGPALETTE *) malloc(sizeof(LOGPALETTE) + paletteSize * sizeof(PALETTEENTRY));
+  pPal->palVersion    = 0x300;
   pPal->palNumEntries = paletteSize;
 
   // build a simple RGB color palette */
   {
-    int redMask = (1 << pfd.cRedBits) - 1;
+    int redMask   = (1 << pfd.cRedBits) - 1;
     int greenMask = (1 << pfd.cGreenBits) - 1;
-    int blueMask = (1 << pfd.cBlueBits) - 1;
+    int blueMask  = (1 << pfd.cBlueBits) - 1;
     int i;
 
-    for (i=0; i<paletteSize; ++i) {
-      pPal->palPalEntry[i].peRed =
-          (((i >> pfd.cRedShift) & redMask) * 255) / redMask;
-      pPal->palPalEntry[i].peGreen =
-          (((i >> pfd.cGreenShift) & greenMask) * 255) / greenMask;
-      pPal->palPalEntry[i].peBlue =
-          (((i >> pfd.cBlueShift) & blueMask) * 255) / blueMask;
+    for (i = 0; i < paletteSize; ++i) {
+      pPal->palPalEntry[i].peRed   = (((i >> pfd.cRedShift) & redMask) * 255) / redMask;
+      pPal->palPalEntry[i].peGreen = (((i >> pfd.cGreenShift) & greenMask) * 255) / greenMask;
+      pPal->palPalEntry[i].peBlue  = (((i >> pfd.cBlueShift) & blueMask) * 255) / blueMask;
       pPal->palPalEntry[i].peFlags = 0;
     }
   }
@@ -1221,20 +1108,15 @@ setupPalette(HDC hDC)
   }
 }
 
-static LRESULT APIENTRY
-WndProc(
-  HWND hWnd,
-  UINT message,
-  WPARAM wParam,
-  LPARAM lParam)
-{ TRACE_AND_INDENT();
+static LRESULT APIENTRY WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
+  TRACE_AND_INDENT();
   return DefWindowProc(hWnd, message, wParam, lParam);
 }
 
-void gl_ext_init (void)
-{ TRACE_AND_INDENT();
+void gl_ext_init(void) {
+  TRACE_AND_INDENT();
   WNDCLASSEX wc;
-  HWND hwnd;
+  HWND       hwnd;
 
   CON("GFX: extensions");
 
@@ -1249,29 +1131,23 @@ void gl_ext_init (void)
   wc.hInstance     = hInstance;
   wc.hIcon         = LoadIcon(NULL, IDI_APPLICATION);
   wc.hCursor       = LoadCursor(NULL, IDC_ARROW);
-  wc.hbrBackground = (HBRUSH)(COLOR_WINDOW+1);
+  wc.hbrBackground = (HBRUSH) (COLOR_WINDOW + 1);
   wc.lpszMenuName  = NULL;
   wc.lpszClassName = g_szClassName;
   wc.hIconSm       = LoadIcon(NULL, IDI_APPLICATION);
 
   CON("OpenGl: - RegisterClassEx");
-  if (!RegisterClassEx(&wc)) {
-    MessageBox(NULL, "Window Registration Failed!", "Error!",
-      MB_ICONEXCLAMATION | MB_OK);
+  if (! RegisterClassEx(&wc)) {
+    MessageBox(NULL, "Window Registration Failed!", "Error!", MB_ICONEXCLAMATION | MB_OK);
     return;
   }
 
   CON("OpenGl: - CreateWindowEx");
-  hwnd = CreateWindowEx(WS_EX_CLIENTEDGE,
-              g_szClassName,
-              "zorbash startup",
-              WS_OVERLAPPEDWINDOW,
-              CW_USEDEFAULT, CW_USEDEFAULT, 240, 120,
-              NULL, NULL, hInstance, NULL);
+  hwnd = CreateWindowEx(WS_EX_CLIENTEDGE, g_szClassName, "zorbash startup", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT,
+                        CW_USEDEFAULT, 240, 120, NULL, NULL, hInstance, NULL);
 
   if (hwnd == NULL) {
-    MessageBox(NULL, "Window Creation Failed!", "Error!",
-      MB_ICONEXCLAMATION | MB_OK);
+    MessageBox(NULL, "Window Creation Failed!", "Error!", MB_ICONEXCLAMATION | MB_OK);
     return;
   }
 
@@ -1301,13 +1177,10 @@ void gl_ext_init (void)
   ReleaseDC(hwnd, hDC);
 }
 #else
-void gl_ext_init (void)
-{ TRACE_AND_INDENT();
-}
+void gl_ext_init(void) { TRACE_AND_INDENT(); }
 #endif
 
-void gl_error (GLenum errCode)
-{
+void gl_error(GLenum errCode) {
   if (errCode == GL_INVALID_ENUM) {
     ERR("GFX: error, GL_INVALID_ENUM");
   } else if (errCode == GL_INVALID_VALUE) {
@@ -1328,8 +1201,7 @@ void gl_error (GLenum errCode)
 /*
  * Set the current GL color
  */
-void glcolor (color s)
-{
+void glcolor(color s) {
   gl_last_color = s;
 
   glColor4ub(s.r, s.g, s.b, s.a);
@@ -1338,31 +1210,15 @@ void glcolor (color s)
 /*
  * Set the internal GL color
  */
-void glcolorfast (color s)
-{
-  gl_last_color = s;
-}
+void glcolorfast(color s) { gl_last_color = s; }
 
 //
 // gl_push
 //
-void
-gl_push (float **P,
-     float *p_end,
-     uint8_t first,
-     float tex_left,
-     float tex_top,
-     float tex_right,
-     float tex_bottom,
-     point tl,
-     point tr,
-     point bl,
-     point br,
-     uint8_t r1, uint8_t g1, uint8_t b1, uint8_t a1,
-     uint8_t r2, uint8_t g2, uint8_t b2, uint8_t a2,
-     uint8_t r3, uint8_t g3, uint8_t b3, uint8_t a3,
-     uint8_t r4, uint8_t g4, uint8_t b4, uint8_t a4)
-{
+void gl_push(float **P, float *p_end, uint8_t first, float tex_left, float tex_top, float tex_right, float tex_bottom,
+             point tl, point tr, point bl, point br, uint8_t r1, uint8_t g1, uint8_t b1, uint8_t a1, uint8_t r2,
+             uint8_t g2, uint8_t b2, uint8_t a2, uint8_t r3, uint8_t g3, uint8_t b3, uint8_t a3, uint8_t r4, uint8_t g4,
+             uint8_t b4, uint8_t a4) {
   float *p = *P;
 
   if (unlikely(p >= p_end)) {
@@ -1370,7 +1226,7 @@ gl_push (float **P,
     return;
   }
 
-  if (likely(!first)) {
+  if (likely(! first)) {
     //
     // If there is a break in the triangle strip then make a degenerate
     // triangle.
@@ -1380,18 +1236,18 @@ gl_push (float **P,
       gl_push_vertex(p, glapi_last_right, glapi_last_bottom);
       gl_push_rgba(p, r4, g4, b4, a4);
 
-      gl_push_texcoord(p, tex_left,  tex_top);
-      gl_push_vertex(p, tl.x,  tl.y);
+      gl_push_texcoord(p, tex_left, tex_top);
+      gl_push_vertex(p, tl.x, tl.y);
       gl_push_rgba(p, r1, g1, b1, a1);
     }
   }
 
-  gl_push_texcoord(p, tex_left,  tex_top);
-  gl_push_vertex(p, tl.x,  tl.y);
+  gl_push_texcoord(p, tex_left, tex_top);
+  gl_push_vertex(p, tl.x, tl.y);
   gl_push_rgba(p, r1, g1, b1, a1);
 
-  gl_push_texcoord(p, tex_left,  tex_bottom);
-  gl_push_vertex(p, bl.x,  bl.y);
+  gl_push_texcoord(p, tex_left, tex_bottom);
+  gl_push_vertex(p, bl.x, bl.y);
   gl_push_rgba(p, r2, g2, b2, a2);
 
   gl_push_texcoord(p, tex_right, tex_top);
@@ -1402,63 +1258,34 @@ gl_push (float **P,
   gl_push_vertex(p, br.x, br.y);
   gl_push_rgba(p, r4, g4, b4, a4);
 
-  glapi_last_tex_right = tex_right;
+  glapi_last_tex_right  = tex_right;
   glapi_last_tex_bottom = tex_bottom;
-  glapi_last_right = br.x;
-  glapi_last_bottom = br.y;
-  *P = p;
+  glapi_last_right      = br.x;
+  glapi_last_bottom     = br.y;
+  *P                    = p;
 }
 
 //
 // gl_push
 //
-void
-gl_push (float **P,
-     float *p_end,
-     uint8_t first,
-     float tex_left,
-     float tex_top,
-     float tex_right,
-     float tex_bottom,
-     GLushort left,
-     GLushort top,
-     GLushort right,
-     GLushort bottom,
-     uint8_t r1, uint8_t g1, uint8_t b1, uint8_t a1,
-     uint8_t r2, uint8_t g2, uint8_t b2, uint8_t a2,
-     uint8_t r3, uint8_t g3, uint8_t b3, uint8_t a3,
-     uint8_t r4, uint8_t g4, uint8_t b4, uint8_t a4)
-{
+void gl_push(float **P, float *p_end, uint8_t first, float tex_left, float tex_top, float tex_right, float tex_bottom,
+             GLushort left, GLushort top, GLushort right, GLushort bottom, uint8_t r1, uint8_t g1, uint8_t b1,
+             uint8_t a1, uint8_t r2, uint8_t g2, uint8_t b2, uint8_t a2, uint8_t r3, uint8_t g3, uint8_t b3, uint8_t a3,
+             uint8_t r4, uint8_t g4, uint8_t b4, uint8_t a4) {
   point tl(left, top);
   point tr(right, top);
   point bl(left, bottom);
   point br(right, bottom);
 
-  gl_push(P, p_end, first,
-      tex_left,
-      tex_top,
-      tex_right,
-      tex_bottom,
-      tl, tr, bl, br,
-      r1, g1, b1, a1,
-      r2, g2, b2, a2,
-      r3, g3, b3, a3,
-      r4, g4, b4, a4);
+  gl_push(P, p_end, first, tex_left, tex_top, tex_right, tex_bottom, tl, tr, bl, br, r1, g1, b1, a1, r2, g2, b2, a2, r3,
+          g3, b3, a3, r4, g4, b4, a4);
 }
 
-void blit (int tex,
-       float texMinX,
-       float texMinY,
-       float texMaxX,
-       float texMaxY,
-       GLushort left,
-       GLushort top,
-       GLushort right,
-       GLushort bottom)
-{
+void blit(int tex, float texMinX, float texMinY, float texMaxX, float texMaxY, GLushort left, GLushort top,
+          GLushort right, GLushort bottom) {
   uint8_t first;
 
-  if (unlikely(!buf_tex)) {
+  if (unlikely(! buf_tex)) {
     blit_init();
     first = true;
   } else if (unlikely(buf_tex != tex)) {
@@ -1470,42 +1297,20 @@ void blit (int tex,
 
   buf_tex = tex;
 
-  color c = gl_color_current();
+  color   c = gl_color_current();
   uint8_t r = c.r;
   uint8_t g = c.g;
   uint8_t b = c.b;
   uint8_t a = c.a;
 
-  gl_push(&bufp,
-      bufp_end,
-      first,
-      texMinX,
-      texMinY,
-      texMaxX,
-      texMaxY,
-      left,
-      top,
-      right,
-      bottom,
-      r, g, b, a,
-      r, g, b, a,
-      r, g, b, a,
-      r, g, b, a);
+  gl_push(&bufp, bufp_end, first, texMinX, texMinY, texMaxX, texMaxY, left, top, right, bottom, r, g, b, a, r, g, b, a,
+          r, g, b, a, r, g, b, a);
 }
 
-void blit (int tex,
-       float texMinX,
-       float texMinY,
-       float texMaxX,
-       float texMaxY,
-       point tl,
-       point tr,
-       point bl,
-       point br)
-{
+void blit(int tex, float texMinX, float texMinY, float texMaxX, float texMaxY, point tl, point tr, point bl, point br) {
   uint8_t first;
 
-  if (unlikely(!buf_tex)) {
+  if (unlikely(! buf_tex)) {
     blit_init();
     first = true;
   } else if (unlikely(buf_tex != tex)) {
@@ -1517,47 +1322,21 @@ void blit (int tex,
 
   buf_tex = tex;
 
-  color c = gl_color_current();
+  color   c = gl_color_current();
   uint8_t r = c.r;
   uint8_t g = c.g;
   uint8_t b = c.b;
   uint8_t a = c.a;
 
-  gl_push(&bufp,
-      bufp_end,
-      first,
-      texMinX,
-      texMinY,
-      texMaxX,
-      texMaxY,
-      tl,
-      tr,
-      bl,
-      br,
-      r, g, b, a,
-      r, g, b, a,
-      r, g, b, a,
-      r, g, b, a);
+  gl_push(&bufp, bufp_end, first, texMinX, texMinY, texMaxX, texMaxY, tl, tr, bl, br, r, g, b, a, r, g, b, a, r, g, b,
+          a, r, g, b, a);
 }
 
-void blit_colored (int tex,
-           float texMinX,
-           float texMinY,
-           float texMaxX,
-           float texMaxY,
-           GLushort left,
-           GLushort top,
-           GLushort right,
-           GLushort bottom,
-           color color_bl,
-           color color_br,
-           color color_tl,
-           color color_tr
-           )
-{
+void blit_colored(int tex, float texMinX, float texMinY, float texMaxX, float texMaxY, GLushort left, GLushort top,
+                  GLushort right, GLushort bottom, color color_bl, color color_br, color color_tl, color color_tr) {
   uint8_t first;
 
-  if (unlikely(!buf_tex)) {
+  if (unlikely(! buf_tex)) {
     blit_init();
     first = true;
   } else if (unlikely(buf_tex != tex)) {
@@ -1569,53 +1348,18 @@ void blit_colored (int tex,
 
   buf_tex = tex;
 
-  gl_push(&bufp,
-      bufp_end,
-      first,
-      texMinX,
-      texMinY,
-      texMaxX,
-      texMaxY,
-      left,
-      top,
-      right,
-      bottom,
-      color_tl.r,
-      color_tl.g,
-      color_tl.b,
-      color_tl.a,
-      color_bl.r,
-      color_bl.g,
-      color_bl.b,
-      color_bl.a,
-      color_tr.r,
-      color_tr.g,
-      color_tr.b,
-      color_tr.a,
-      color_br.r,
-      color_br.g,
-      color_br.b,
-      color_br.a);
+  gl_push(&bufp, bufp_end, first, texMinX, texMinY, texMaxX, texMaxY, left, top, right, bottom, color_tl.r, color_tl.g,
+          color_tl.b, color_tl.a, color_bl.r, color_bl.g, color_bl.b, color_bl.a, color_tr.r, color_tr.g, color_tr.b,
+          color_tr.a, color_br.r, color_br.g, color_br.b, color_br.a);
 }
 
-void blit (int tex, GLushort left, GLushort top, GLushort right, GLushort bottom)
-{
+void blit(int tex, GLushort left, GLushort top, GLushort right, GLushort bottom) {
   blit(tex, 0, 0, 1, 1, left, top, right, bottom);
 }
 
-void blit (int tex, point tl, point tr, point bl, point br)
-{
-  blit(tex, 0, 0, 1, 1, tl, tr, bl, br);
-}
+void blit(int tex, point tl, point tr, point bl, point br) { blit(tex, 0, 0, 1, 1, tl, tr, bl, br); }
 
-void blit_colored (int tex,
-           GLushort left,
-           GLushort top,
-           GLushort right,
-           float bottom,
-           color color_bl, color color_br,
-           color color_tl, color color_tr)
-{
-  blit_colored(tex, 0, 0, 1, 1, left, top, right, bottom,
-         color_bl, color_br, color_tl, color_tr);
+void blit_colored(int tex, GLushort left, GLushort top, GLushort right, float bottom, color color_bl, color color_br,
+                  color color_tl, color color_tr) {
+  blit_colored(tex, 0, 0, 1, 1, left, top, right, bottom, color_bl, color_br, color_tl, color_tr);
 }

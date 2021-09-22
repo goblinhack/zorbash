@@ -15,11 +15,11 @@
 #include "my_gl.h"
 #include "my_ptrcheck.h"
 
-void Thing::level_enter (void)
-{ TRACE_AND_INDENT();
+void Thing::level_enter(void) {
+  TRACE_AND_INDENT();
   dbg("Enter level");
   TRACE_AND_INDENT();
-  int group = get_group();
+  int  group  = get_group();
   auto result = level->all_things[group].insert(std::pair(id, this));
   if (result.second == false) {
     err("Failed to insert into thing map");
@@ -94,11 +94,11 @@ void Thing::level_enter (void)
   //
   // Can be shown on screen again.
   //
-  is_waiting_to_ascend_dungeon = false;
-  is_waiting_to_descend_sewer = false;
+  is_waiting_to_ascend_dungeon  = false;
+  is_waiting_to_descend_sewer   = false;
   is_waiting_to_descend_dungeon = false;
-  is_waiting_to_ascend_sewer = false;
-  is_waiting_to_fall = false;
+  is_waiting_to_ascend_sewer    = false;
+  is_waiting_to_fall            = false;
 
   game->request_update_rightbar = true;
 

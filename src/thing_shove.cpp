@@ -16,13 +16,13 @@
 #include "my_array_bounds_check.h"
 #include "my_ptrcheck.h"
 
-ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
-{ TRACE_AND_INDENT();
-  if (!attack_shove()) {
+ThingShoved Thing::try_to_shove(Thingp it, fpoint delta) {
+  TRACE_AND_INDENT();
+  if (! attack_shove()) {
     return (THING_SHOVE_NEVER_TRIED);
   }
 
-  if (!it->is_shovable()) {
+  if (! it->is_shovable()) {
     return (THING_SHOVE_NEVER_TRIED);
   }
 
@@ -33,14 +33,13 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
     return (THING_SHOVE_NEVER_TRIED);
   }
 
-  if (!is_player()) {
-    if ((int)pcg_random_range(0, 1000) >
-        tp()->attack_shove_chance_d1000()) {
+  if (! is_player()) {
+    if ((int) pcg_random_range(0, 1000) > tp()->attack_shove_chance_d1000()) {
       return (THING_SHOVE_NEVER_TRIED);
     }
   }
 
-  dbg("Try to shove, delta %d,%d", (int)delta.x, (int)delta.y);
+  dbg("Try to shove, delta %d,%d", (int) delta.x, (int) delta.y);
 
   bool was_dead = it->is_dead;
 
@@ -59,7 +58,7 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
   }
 
   fpoint shove_delta = delta;
-  fpoint shove_pos = it->mid_at + shove_delta;
+  fpoint shove_pos   = it->mid_at + shove_delta;
 
   if (it->monst_size() - monst_size() > 1) {
     if (is_player()) {
@@ -70,7 +69,7 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
     return (THING_SHOVE_TRIED_AND_FAILED);
   }
 
-  if (!it->is_brazier() && !it->is_barrel()) {
+  if (! it->is_brazier() && ! it->is_barrel()) {
     if (it->collision_check_only(shove_pos)) {
       if (is_player()) {
         TOPCON("%s cannot be shoved!", it->text_The().c_str());
@@ -81,11 +80,10 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
     }
   }
 
-  if (!it->is_dead) {
-    dbg("Shove: It strength %d vs me %d",
-      it->get_stat_strength(), get_stat_strength());
+  if (! it->is_dead) {
+    dbg("Shove: It strength %d vs me %d", it->get_stat_strength(), get_stat_strength());
 
-    if (!d20roll(get_stat_strength(), it->get_stat_strength())) {
+    if (! d20roll(get_stat_strength(), it->get_stat_strength())) {
       if (is_player()) {
         if (it->is_monst()) {
           TOPCON("%s shoves you back!", it->text_The().c_str());
@@ -112,7 +110,7 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
     // This is a failure to shove
     //
     if (it->is_brazier()) {
-      if (!it->is_dead) {
+      if (! it->is_dead) {
         if (is_player()) {
           TOPCON("The brazier falls back on you!");
         }
@@ -149,7 +147,7 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
     it->move_to(shove_pos);
   }
 
-  if (!it->is_dead) {
+  if (! it->is_dead) {
     if (it->is_dead_on_shove()) {
       dbg("Shove and kill");
       it->dead("by being shoved");
@@ -173,7 +171,7 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
   //
   // If shoving something on fire! set yourself on fire!
   //
-  if (!was_dead) {
+  if (! was_dead) {
     if (it->is_fire()) {
       if (pcg_random_range(0, 100) < 5) {
         if (is_player()) {
@@ -192,38 +190,36 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
   return (THING_SHOVE_TRIED_AND_PASSED);
 }
 
-ThingShoved Thing::try_to_shove (fpoint future_pos)
-{
-  if (!attack_shove()) {
+ThingShoved Thing::try_to_shove(fpoint future_pos) {
+  if (! attack_shove()) {
     return (THING_SHOVE_NEVER_TRIED);
   }
 
-  auto x = future_pos.x;
-  auto y = future_pos.y;
-  auto delta = fpoint(x, y) - mid_at;
+  auto  x     = future_pos.x;
+  auto  y     = future_pos.y;
+  auto  delta = fpoint(x, y) - mid_at;
   point p(future_pos.x, future_pos.y);
   FOR_ALL_THINGS_THAT_INTERACT(level, it, p.x, p.y) {
     if (this == it) {
       continue;
     }
 
-    if (!it->is_shovable()) {
+    if (! it->is_shovable()) {
       continue;
     }
 
     fpoint shove_delta = delta;
     return (try_to_shove(it, shove_delta));
-  } FOR_ALL_THINGS_END()
+  }
+  FOR_ALL_THINGS_END()
 
   return (THING_SHOVE_NEVER_TRIED);
 }
 
-ThingShoved Thing::try_to_shove_into_hazard (Thingp it, fpoint delta)
-{
+ThingShoved Thing::try_to_shove_into_hazard(Thingp it, fpoint delta) {
   if (attack_shove()) {
     auto shoved_to_position = it->mid_at + delta;
-    if (level->is_hazard((int)shoved_to_position.x,
-               (int)shoved_to_position.y)) {
+    if (level->is_hazard((int) shoved_to_position.x, (int) shoved_to_position.y)) {
       return (try_to_shove(it, delta));
     }
   }

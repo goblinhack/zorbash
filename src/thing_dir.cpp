@@ -8,8 +8,8 @@
 #include "my_level.h"
 #include "my_thing.h"
 
-point Thing::dir_to_direction (void) const
-{ TRACE_AND_INDENT();
+point Thing::dir_to_direction(void) const {
+  TRACE_AND_INDENT();
   if (is_dir_tl()) {
     return point(-1, -1);
   }

@@ -5,7 +5,7 @@
 //
 
 #include <strings.h> // do not remove
-#include <string.h> // do not remove
+#include <string.h>  // do not remove
 #include "my_sys.h"
 #include "my_gl.h"
 #include "my_string.h"
@@ -190,8 +190,8 @@ color GOLD3;
 color GOLD4;
 #endif
 
-void color_init1 (void)
-{ TRACE_AND_INDENT();
+void color_init1(void) {
+  TRACE_AND_INDENT();
   color_set("brown1", &BROWN1, 255, 64, 64, 255);
   color_set("brown2", &BROWN2, 238, 59, 59, 255);
   color_set("brown3", &BROWN3, 205, 51, 51, 255);

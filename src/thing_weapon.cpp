@@ -12,8 +12,8 @@
 #include "my_array_bounds_check.h"
 #include "my_ptrcheck.h"
 
-Thingp Thing::weapon_get () const
-{ TRACE_AND_INDENT();
+Thingp Thing::weapon_get() const {
+  TRACE_AND_INDENT();
   auto id = get_weapon_id();
   if (id.ok()) {
     return (level->thing_find(id));
@@ -22,25 +22,25 @@ Thingp Thing::weapon_get () const
   return (nullptr);
 }
 
-void Thing::weapon_set_carry_anim_id (ThingId weapon_carry_anim_id)
-{ TRACE_AND_INDENT();
+void Thing::weapon_set_carry_anim_id(ThingId weapon_carry_anim_id) {
+  TRACE_AND_INDENT();
   Thingp weapon_carry_anim;
 
-  if (!weapon_carry_anim_id) {
+  if (! weapon_carry_anim_id) {
     weapon_set_carry_anim(nullptr);
     return;
   }
 
   weapon_carry_anim = level->thing_find(weapon_carry_anim_id);
-  if (!weapon_carry_anim) {
+  if (! weapon_carry_anim) {
     return;
   }
 
   weapon_set_carry_anim(weapon_carry_anim);
 }
 
-void Thing::weapon_set_carry_anim (Thingp new_weapon_carry_anim)
-{ TRACE_AND_INDENT();
+void Thing::weapon_set_carry_anim(Thingp new_weapon_carry_anim) {
+  TRACE_AND_INDENT();
   if (new_weapon_carry_anim) {
     verify(new_weapon_carry_anim);
   }
@@ -52,19 +52,16 @@ void Thing::weapon_set_carry_anim (Thingp new_weapon_carry_anim)
     }
 
     if (new_weapon_carry_anim) {
-      dbg("Change weapon carry_anim, %s->%s",
-        old_weapon_carry_anim->to_string().c_str(),
-        new_weapon_carry_anim->to_string().c_str());
+      dbg("Change weapon carry_anim, %s->%s", old_weapon_carry_anim->to_string().c_str(),
+          new_weapon_carry_anim->to_string().c_str());
       new_weapon_carry_anim->set_owner(this);
     } else {
-      dbg("Remove weapon carry_anim, %s",
-        old_weapon_carry_anim->to_string().c_str());
+      dbg("Remove weapon carry_anim, %s", old_weapon_carry_anim->to_string().c_str());
     }
     old_weapon_carry_anim->remove_owner();
   } else {
     if (new_weapon_carry_anim) {
-      dbg("Set weapon carry_anim, %s",
-        new_weapon_carry_anim->to_string().c_str());
+      dbg("Set weapon carry_anim, %s", new_weapon_carry_anim->to_string().c_str());
       new_weapon_carry_anim->set_owner(this);
     }
   }
@@ -76,25 +73,25 @@ void Thing::weapon_set_carry_anim (Thingp new_weapon_carry_anim)
   }
 }
 
-void Thing::weapon_set_use_anim_id (ThingId gfx_anim_attack_id)
-{ TRACE_AND_INDENT();
+void Thing::weapon_set_use_anim_id(ThingId gfx_anim_attack_id) {
+  TRACE_AND_INDENT();
   Thingp gfx_anim_attack;
 
-  if (!gfx_anim_attack_id) {
+  if (! gfx_anim_attack_id) {
     weapon_set_use_anim(nullptr);
     return;
   }
 
   gfx_anim_attack = level->thing_find(gfx_anim_attack_id);
-  if (!gfx_anim_attack) {
+  if (! gfx_anim_attack) {
     return;
   }
 
   weapon_set_use_anim(gfx_anim_attack);
 }
 
-void Thing::weapon_set_use_anim (Thingp new_gfx_anim_attack)
-{ TRACE_AND_INDENT();
+void Thing::weapon_set_use_anim(Thingp new_gfx_anim_attack) {
+  TRACE_AND_INDENT();
   if (new_gfx_anim_attack) {
     verify(new_gfx_anim_attack);
   }
@@ -107,19 +104,16 @@ void Thing::weapon_set_use_anim (Thingp new_gfx_anim_attack)
     }
 
     if (new_gfx_anim_attack) {
-      dbg("Change weapon use-anim %s->%s",
-        old_gfx_anim_attack->to_string().c_str(),
-        new_gfx_anim_attack->to_string().c_str());
+      dbg("Change weapon use-anim %s->%s", old_gfx_anim_attack->to_string().c_str(),
+          new_gfx_anim_attack->to_string().c_str());
       new_gfx_anim_attack->set_owner(this);
     } else {
-      dbg("Remove weapon use-anim %s",
-        old_gfx_anim_attack->to_string().c_str());
+      dbg("Remove weapon use-anim %s", old_gfx_anim_attack->to_string().c_str());
     }
     old_gfx_anim_attack->remove_owner();
   } else {
     if (new_gfx_anim_attack) {
-      dbg("Set weapon use-anim %s",
-        new_gfx_anim_attack->to_string().c_str());
+      dbg("Set weapon use-anim %s", new_gfx_anim_attack->to_string().c_str());
       new_gfx_anim_attack->set_owner(this);
     }
   }
@@ -131,13 +125,13 @@ void Thing::weapon_set_use_anim (Thingp new_gfx_anim_attack)
   }
 }
 
-void Thing::weapon_get_use_offset (float *dx, float *dy) const
-{ TRACE_AND_INDENT();
+void Thing::weapon_get_use_offset(float *dx, float *dy) const {
+  TRACE_AND_INDENT();
   *dx = 0;
   *dy = 0;
 
   auto weapon = weapon_get();
-  if (!weapon) {
+  if (! weapon) {
     return;
   }
 
@@ -197,8 +191,8 @@ void Thing::weapon_get_use_offset (float *dx, float *dy) const
   *dy = dist_from_wielder + 0.3;
 }
 
-Thingp Thing::weapon_get_carry_anim (void)
-{ TRACE_AND_INDENT();
+Thingp Thing::weapon_get_carry_anim(void) {
+  TRACE_AND_INDENT();
   Thingp weapon_carry_anim = 0;
 
   auto id = get_weapon_id_carry_anim();
@@ -209,8 +203,8 @@ Thingp Thing::weapon_get_carry_anim (void)
   return (weapon_carry_anim);
 }
 
-Thingp Thing::weapon_get_use_anim (void) const
-{ TRACE_AND_INDENT();
+Thingp Thing::weapon_get_use_anim(void) const {
+  TRACE_AND_INDENT();
   //
   // If this gfx_anim_attack has its own thing id for animations then
   // destroy that.
@@ -225,16 +219,16 @@ Thingp Thing::weapon_get_use_anim (void) const
   return (gfx_anim_attack);
 }
 
-void Thing::unwield (const char *why)
-{ TRACE_AND_INDENT();
-  if (!get_weapon_id()) {
+void Thing::unwield(const char *why) {
+  TRACE_AND_INDENT();
+  if (! get_weapon_id()) {
     return;
   }
 
   dbg("Unwielding %08" PRIx32 ", why: %s", get_weapon_id().id, why);
 
   auto weapon = weapon_get();
-  if (!weapon) {
+  if (! weapon) {
     dbg("Could not unwield %08" PRIx32 ", why: %s", get_weapon_id().id, why);
     return;
   }
@@ -244,10 +238,10 @@ void Thing::unwield (const char *why)
   sheath();
 }
 
-void Thing::sheath (void)
-{ TRACE_AND_INDENT();
+void Thing::sheath(void) {
+  TRACE_AND_INDENT();
   auto weapon = weapon_get();
-  if (!weapon) {
+  if (! weapon) {
     return;
   }
 
@@ -284,8 +278,8 @@ void Thing::sheath (void)
 //
 // Returns true on weapon change
 //
-bool Thing::wield (Thingp weapon)
-{ TRACE_AND_INDENT();
+bool Thing::wield(Thingp weapon) {
+  TRACE_AND_INDENT();
   auto weapon_tp = weapon->tp();
 
   if (weapon_get() == weapon) {
@@ -326,8 +320,8 @@ bool Thing::wield (Thingp weapon)
   return true;
 }
 
-void Thing::use_weapon (void)
-{ TRACE_AND_INDENT();
+void Thing::use_weapon(void) {
+  TRACE_AND_INDENT();
   dbg("Try to use weapon");
   TRACE_AND_INDENT();
   if (get_weapon_id_use_anim().ok()) {
@@ -339,7 +333,7 @@ void Thing::use_weapon (void)
   }
 
   if (is_stamina_check()) {
-    if (!get_stamina()) {
+    if (! get_stamina()) {
       if (is_player()) {
         TOPCON("You are too tired to attack. You need to rest.");
       }
@@ -350,7 +344,7 @@ void Thing::use_weapon (void)
   std::string swung_as;
 
   auto weapon = weapon_get();
-  if (!weapon) {
+  if (! weapon) {
     if (is_player()) {
       TOPCON("You attack with bare fists!");
 
@@ -365,13 +359,12 @@ void Thing::use_weapon (void)
 
     swung_as = weapon_tp->gfx_anim_attack();
     if (swung_as == "") {
-      die("Could not use %s/%08" PRIx32 " has no 'use' animation frame",
-        weapon_tp->name().c_str(), weapon->id.id);
+      die("Could not use %s/%08" PRIx32 " has no 'use' animation frame", weapon_tp->name().c_str(), weapon->id.id);
       return;
     }
 
     auto what = tp_find(swung_as);
-    if (!what) {
+    if (! what) {
       err("Could not find %s to wield", swung_as.c_str());
       return;
     }
@@ -400,19 +393,19 @@ void Thing::use_weapon (void)
   move_carried_items();
 
   float dx, dy;
-  if (!weapon) {
+  if (! weapon) {
     auto d = dir_to_direction();
-    dx = d.x;
-    dy = d.y;
+    dx     = d.x;
+    dy     = d.y;
   } else {
     weapon_get_use_offset(&dx, &dy);
   }
 
   bool target_attacked = false;
   bool target_overlaps = false;
-  auto hit_at = mid_at + fpoint(dx, dy);
+  auto hit_at          = mid_at + fpoint(dx, dy);
 
-  dbg("Attack at %f,%f delta %f,%f",hit_at.x, hit_at.y, dx, dy);
+  dbg("Attack at %f,%f delta %f,%f", hit_at.x, hit_at.y, dx, dy);
   TRACE_AND_INDENT();
   //
   // Lunge at the target
@@ -421,16 +414,12 @@ void Thing::use_weapon (void)
 
   if (weapon) {
     on_use(weapon);
-    if (weapon->collision_check_and_handle_at(hit_at,
-                          &target_attacked,
-                          &target_overlaps)) {
+    if (weapon->collision_check_and_handle_at(hit_at, &target_attacked, &target_overlaps)) {
       lunge(hit_at);
       return;
     }
   } else {
-    if (collision_check_and_handle_at(hit_at,
-                      &target_attacked,
-                      &target_overlaps)) {
+    if (collision_check_and_handle_at(hit_at, &target_attacked, &target_overlaps)) {
       lunge(hit_at);
       return;
     }
@@ -440,22 +429,15 @@ void Thing::use_weapon (void)
   // We didn't hit anything. See if there's something else to hit.
   //
   static const std::vector<point> all_deltas = {
-    point(-1, -1),
-    point( 1, -1),
-    point(-1,  1),
-    point( 1,  1),
-    point(0, -1),
-    point(-1, 0),
-    point(1, 0),
-    point(0, 1),
-    point(0, 0), // For spiderwebs
+      point(-1, -1), point(1, -1), point(-1, 1), point(1, 1), point(0, -1),
+      point(-1, 0),  point(1, 0),  point(0, 1),  point(0, 0), // For spiderwebs
   };
 
-  bool found_best {};
+  bool   found_best {};
   fpoint best_hit_at;
-  int best_priority = -999;
+  int    best_priority = -999;
 
-  for (const auto& d : all_deltas) {
+  for (const auto &d : all_deltas) {
     auto hit_at = mid_at + fpoint(d.x, d.y);
 
     //
@@ -473,12 +455,12 @@ void Thing::use_weapon (void)
         if (t->is_very_combustible()) {
           continue;
         }
-        if (!t->is_attackable_by_player()) {
+        if (! t->is_attackable_by_player()) {
           continue;
         }
       }
       if (is_monst()) {
-        if (!t->is_attackable_by_monst()) {
+        if (! t->is_attackable_by_monst()) {
           continue;
         }
       }
@@ -499,10 +481,11 @@ void Thing::use_weapon (void)
 
       if (prio > best_priority) {
         best_priority = prio;
-        best_hit_at = hit_at;
-        found_best = true;
+        best_hit_at   = hit_at;
+        found_best    = true;
       }
-    } FOR_ALL_THINGS_END();
+    }
+    FOR_ALL_THINGS_END();
   }
 
   if (found_best) {
@@ -510,16 +493,12 @@ void Thing::use_weapon (void)
     target_overlaps = false;
 
     if (weapon) {
-      if (weapon->collision_check_and_handle_at(best_hit_at,
-                            &target_attacked,
-                            &target_overlaps)) {
+      if (weapon->collision_check_and_handle_at(best_hit_at, &target_attacked, &target_overlaps)) {
         lunge(best_hit_at);
         return;
       }
     } else {
-      if (collision_check_and_handle_at(best_hit_at,
-                        &target_attacked,
-                        &target_overlaps)) {
+      if (collision_check_and_handle_at(best_hit_at, &target_attacked, &target_overlaps)) {
         lunge(best_hit_at);
         return;
       }
@@ -529,10 +508,10 @@ void Thing::use_weapon (void)
   //
   // Try again but include doors
   //
-  found_best = false;
+  found_best    = false;
   best_priority = -999;
 
-  for (const auto& d : all_deltas) {
+  for (const auto &d : all_deltas) {
     auto hit_at = mid_at + fpoint(d.x, d.y);
 
     //
@@ -550,12 +529,12 @@ void Thing::use_weapon (void)
         if (t->is_very_combustible()) {
           continue;
         }
-        if (!t->is_attackable_by_player()) {
+        if (! t->is_attackable_by_player()) {
           continue;
         }
       }
       if (is_monst()) {
-        if (!t->is_attackable_by_monst()) {
+        if (! t->is_attackable_by_monst()) {
           continue;
         }
       }
@@ -570,10 +549,11 @@ void Thing::use_weapon (void)
 
       if (prio > best_priority) {
         best_priority = prio;
-        best_hit_at = hit_at;
-        found_best = true;
+        best_hit_at   = hit_at;
+        found_best    = true;
       }
-    } FOR_ALL_THINGS_END();
+    }
+    FOR_ALL_THINGS_END();
   }
 
   if (found_best) {
@@ -581,16 +561,12 @@ void Thing::use_weapon (void)
     target_overlaps = false;
 
     if (weapon) {
-      if (weapon->collision_check_and_handle_at(best_hit_at,
-                            &target_attacked,
-                            &target_overlaps)) {
+      if (weapon->collision_check_and_handle_at(best_hit_at, &target_attacked, &target_overlaps)) {
         lunge(best_hit_at);
         return;
       }
     } else {
-      if (collision_check_and_handle_at(best_hit_at,
-                        &target_attacked,
-                        &target_overlaps)) {
+      if (collision_check_and_handle_at(best_hit_at, &target_attacked, &target_overlaps)) {
         lunge(best_hit_at);
         return;
       }
@@ -600,10 +576,10 @@ void Thing::use_weapon (void)
   //
   // Try again for anything we might want to hit.
   //
-  found_best = false;
+  found_best    = false;
   best_priority = -999;
 
-  for (const auto& d : all_deltas) {
+  for (const auto &d : all_deltas) {
     auto hit_at = mid_at + fpoint(d.x, d.y);
 
     //
@@ -621,12 +597,12 @@ void Thing::use_weapon (void)
         if (t->is_very_combustible()) {
           continue;
         }
-        if (!t->is_attackable_by_player()) {
+        if (! t->is_attackable_by_player()) {
           continue;
         }
       }
       if (is_monst()) {
-        if (!t->is_attackable_by_monst()) {
+        if (! t->is_attackable_by_monst()) {
           continue;
         }
       }
@@ -641,10 +617,11 @@ void Thing::use_weapon (void)
 
       if (prio > best_priority) {
         best_priority = prio;
-        best_hit_at = hit_at;
-        found_best = true;
+        best_hit_at   = hit_at;
+        found_best    = true;
       }
-    } FOR_ALL_THINGS_END();
+    }
+    FOR_ALL_THINGS_END();
   }
 
   if (found_best) {
@@ -652,16 +629,12 @@ void Thing::use_weapon (void)
     target_overlaps = false;
 
     if (weapon) {
-      if (weapon->collision_check_and_handle_at(best_hit_at,
-                            &target_attacked,
-                            &target_overlaps)) {
+      if (weapon->collision_check_and_handle_at(best_hit_at, &target_attacked, &target_overlaps)) {
         lunge(best_hit_at);
         return;
       }
     } else {
-      if (collision_check_and_handle_at(best_hit_at,
-                        &target_attacked,
-                        &target_overlaps)) {
+      if (collision_check_and_handle_at(best_hit_at, &target_attacked, &target_overlaps)) {
         lunge(best_hit_at);
         return;
       }

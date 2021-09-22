@@ -13,36 +13,36 @@
 #include "my_py_tp.h"
 #include "my_ptrcheck.h"
 
-PyObject *tp_load_ (PyObject *obj, PyObject *args, PyObject *keywds)
-{ TRACE_AND_INDENT();
+PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds) {
+  TRACE_AND_INDENT();
   PyObject *py_class = 0;
 
-  static char *kwlist[] = {(char*) "tp", 0};
+  static char *kwlist[] = {(char *) "tp", 0};
 
-  if (!PyArg_ParseTupleAndKeywords(args, keywds, "O", kwlist, &py_class)) {
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "O", kwlist, &py_class)) {
     ERR("tp_load: Bad args");
     Py_RETURN_FALSE;
   }
 
-  if (!py_class) {
+  if (! py_class) {
     ERR("tp_load: Missing name attr");
     Py_RETURN_FALSE;
   }
 
   char *tp_name = py_obj_attr_str(py_class, "name");
-  if (!tp_name) {
+  if (! tp_name) {
     ERR("tp_load: Missing tp name");
     Py_RETURN_FALSE;
   }
 
   char *tp_text_name = py_obj_attr_str(py_class, "text_name");
-  if (!tp_text_name) {
+  if (! tp_text_name) {
     ERR("tp_load: Missing tp text_name");
     Py_RETURN_FALSE;
   }
 
   char *tp_short_text_name = py_obj_attr_str(py_class, "short_text_name");
-  if (!tp_short_text_name) {
+  if (! tp_short_text_name) {
     ERR("tp_load: Missing tp short_text_name");
     Py_RETURN_FALSE;
   }
@@ -58,378 +58,329 @@ PyObject *tp_load_ (PyObject *obj, PyObject *args, PyObject *keywds)
   Py_RETURN_TRUE;
 }
 
-#define TP_BODY_SET_STRING(__field__)                                                               \
-PyObject *tp_set_ ## __field__ (PyObject *obj, PyObject *args, PyObject *keywds)                    \
-{                                                                                                   \
-  PyObject *py_class = 0;                                                                           \
-  char *tp_name = 0;                                                                                \
-  char *value = 0;                                                                                  \
-  Tpp tp;                                                                                           \
-                                                                                                    \
-  static char *kwlist[] = {(char*) "class", (char*) "value", 0};                                    \
-                                                                                                    \
-  if (!PyArg_ParseTupleAndKeywords(args, keywds, "O|s", kwlist, &py_class,                          \
-                   &value)) {                                                                       \
-    ERR("%s: Bad args", __FUNCTION__);                                                              \
-    return (0);                                                                                     \
-  }                                                                                                 \
-                                                                                                    \
-  if (!py_class) {                                                                                  \
-    ERR("%s: Missing class", __FUNCTION__);                                                         \
-    Py_RETURN_FALSE;                                                                                \
-  }                                                                                                 \
-                                                                                                    \
-  if (!value) {                                                                                     \
-    ERR("%s: Missing value", __FUNCTION__);                                                         \
-    Py_RETURN_FALSE;                                                                                \
-  }                                                                                                 \
-                                                                                                    \
-  tp_name = py_obj_attr_str(py_class, "name");                                                      \
-  if (!tp_name) {                                                                                   \
-    ERR("%s: Missing tp name", __FUNCTION__);                                                       \
-    goto done;                                                                                      \
-  }                                                                                                 \
-                                                                                                    \
-  PY_DBG("%s(%s -> \"%s\")", __FUNCTION__, tp_name, value);                                         \
-                                                                                                    \
-  tp = tp_find(tp_name);                                                                            \
-  if (!tp) {                                                                                        \
-    ERR("%s: Cannot find tp %s", __FUNCTION__, tp_name);                                            \
-    goto done;                                                                                      \
-  }                                                                                                 \
-                                                                                                    \
-  tp->set_ ## __field__(std::string(value ? value : ""));                                           \
-  value = 0;                                                                                        \
-                                                                                                    \
-done:                                                                                               \
-  if (tp_name) {                                                                                    \
-    myfree(tp_name);                                                                                \
-  }                                                                                                 \
-                                                                                                    \
-  Py_RETURN_TRUE;                                                                                   \
-}                                                                                                   \
+#define TP_BODY_SET_STRING(__field__)                                                                                  \
+  PyObject *tp_set_##__field__(PyObject *obj, PyObject *args, PyObject *keywds) {                                      \
+    PyObject *py_class = 0;                                                                                            \
+    char *    tp_name  = 0;                                                                                            \
+    char *    value    = 0;                                                                                            \
+    Tpp       tp;                                                                                                      \
+                                                                                                                       \
+    static char *kwlist[] = {(char *) "class", (char *) "value", 0};                                                   \
+                                                                                                                       \
+    if (! PyArg_ParseTupleAndKeywords(args, keywds, "O|s", kwlist, &py_class, &value)) {                               \
+      ERR("%s: Bad args", __FUNCTION__);                                                                               \
+      return (0);                                                                                                      \
+    }                                                                                                                  \
+                                                                                                                       \
+    if (! py_class) {                                                                                                  \
+      ERR("%s: Missing class", __FUNCTION__);                                                                          \
+      Py_RETURN_FALSE;                                                                                                 \
+    }                                                                                                                  \
+                                                                                                                       \
+    if (! value) {                                                                                                     \
+      ERR("%s: Missing value", __FUNCTION__);                                                                          \
+      Py_RETURN_FALSE;                                                                                                 \
+    }                                                                                                                  \
+                                                                                                                       \
+    tp_name = py_obj_attr_str(py_class, "name");                                                                       \
+    if (! tp_name) {                                                                                                   \
+      ERR("%s: Missing tp name", __FUNCTION__);                                                                        \
+      goto done;                                                                                                       \
+    }                                                                                                                  \
+                                                                                                                       \
+    PY_DBG("%s(%s -> \"%s\")", __FUNCTION__, tp_name, value);                                                          \
+                                                                                                                       \
+    tp = tp_find(tp_name);                                                                                             \
+    if (! tp) {                                                                                                        \
+      ERR("%s: Cannot find tp %s", __FUNCTION__, tp_name);                                                             \
+      goto done;                                                                                                       \
+    }                                                                                                                  \
+                                                                                                                       \
+    tp->set_##__field__(std::string(value ? value : ""));                                                              \
+    value = 0;                                                                                                         \
+                                                                                                                       \
+  done:                                                                                                                \
+    if (tp_name) {                                                                                                     \
+      myfree(tp_name);                                                                                                 \
+    }                                                                                                                  \
+                                                                                                                       \
+    Py_RETURN_TRUE;                                                                                                    \
+  }
 
-#define TP_BODY_SET_STRING_FN(__field__, __fn__)                                                    \
-PyObject *tp_set_ ## __field__ (PyObject *obj, PyObject *args, PyObject *keywds)                    \
-{                                                                                                   \
-  PyObject *py_class = 0;                                                                           \
-  char *tp_name = 0;                                                                                \
-  char *value = 0;                                                                                  \
-  Tpp tp;                                                                                           \
-                                                                                                    \
-  static char *kwlist[] = {(char*) "class", (char*) "value", 0};                                    \
-                                                                                                    \
-  if (!PyArg_ParseTupleAndKeywords(args, keywds, "O|s", kwlist, &py_class,                          \
-                   &value)) {                                                                       \
-    ERR("%s: Bad args", __FUNCTION__);                                                              \
-    return (0);                                                                                     \
-  }                                                                                                 \
-                                                                                                    \
-  if (!py_class) {                                                                                  \
-    ERR("%s: Missing class", __FUNCTION__);                                                         \
-    Py_RETURN_FALSE;                                                                                \
-  }                                                                                                 \
-                                                                                                    \
-  if (!value) {                                                                                     \
-    ERR("%s: Missing value", __FUNCTION__);                                                         \
-    Py_RETURN_FALSE;                                                                                \
-  }                                                                                                 \
-                                                                                                    \
-  tp_name = py_obj_attr_str(py_class, "name");                                                      \
-  if (!tp_name) {                                                                                   \
-    ERR("%s: Missing tp name", __FUNCTION__);                                                       \
-    goto done;                                                                                      \
-  }                                                                                                 \
-                                                                                                    \
-  PY_DBG("%s(%s -> \"%s\")", __FUNCTION__, tp_name, value);                                         \
-                                                                                                    \
-  tp = tp_find(tp_name);                                                                            \
-  if (!tp) {                                                                                        \
-    ERR("%s: Cannot find tp %s", __FUNCTION__, tp_name);                                            \
-    goto done;                                                                                      \
-  }                                                                                                 \
-                                                                                                    \
-  tp->set_ ## __field__(std::string(value ? value : ""));                                           \
-  value = 0;                                                                                        \
-  (__fn__)(tp);                                                                                     \
-                                                                                                    \
-done:                                                                                               \
-  if (tp_name) {                                                                                    \
-    myfree(tp_name);                                                                                \
-  }                                                                                                 \
-                                                                                                    \
-  Py_RETURN_TRUE;                                                                                   \
-}                                                                                                   \
+#define TP_BODY_SET_STRING_FN(__field__, __fn__)                                                                       \
+  PyObject *tp_set_##__field__(PyObject *obj, PyObject *args, PyObject *keywds) {                                      \
+    PyObject *py_class = 0;                                                                                            \
+    char *    tp_name  = 0;                                                                                            \
+    char *    value    = 0;                                                                                            \
+    Tpp       tp;                                                                                                      \
+                                                                                                                       \
+    static char *kwlist[] = {(char *) "class", (char *) "value", 0};                                                   \
+                                                                                                                       \
+    if (! PyArg_ParseTupleAndKeywords(args, keywds, "O|s", kwlist, &py_class, &value)) {                               \
+      ERR("%s: Bad args", __FUNCTION__);                                                                               \
+      return (0);                                                                                                      \
+    }                                                                                                                  \
+                                                                                                                       \
+    if (! py_class) {                                                                                                  \
+      ERR("%s: Missing class", __FUNCTION__);                                                                          \
+      Py_RETURN_FALSE;                                                                                                 \
+    }                                                                                                                  \
+                                                                                                                       \
+    if (! value) {                                                                                                     \
+      ERR("%s: Missing value", __FUNCTION__);                                                                          \
+      Py_RETURN_FALSE;                                                                                                 \
+    }                                                                                                                  \
+                                                                                                                       \
+    tp_name = py_obj_attr_str(py_class, "name");                                                                       \
+    if (! tp_name) {                                                                                                   \
+      ERR("%s: Missing tp name", __FUNCTION__);                                                                        \
+      goto done;                                                                                                       \
+    }                                                                                                                  \
+                                                                                                                       \
+    PY_DBG("%s(%s -> \"%s\")", __FUNCTION__, tp_name, value);                                                          \
+                                                                                                                       \
+    tp = tp_find(tp_name);                                                                                             \
+    if (! tp) {                                                                                                        \
+      ERR("%s: Cannot find tp %s", __FUNCTION__, tp_name);                                                             \
+      goto done;                                                                                                       \
+    }                                                                                                                  \
+                                                                                                                       \
+    tp->set_##__field__(std::string(value ? value : ""));                                                              \
+    value = 0;                                                                                                         \
+    (__fn__)(tp);                                                                                                      \
+                                                                                                                       \
+  done:                                                                                                                \
+    if (tp_name) {                                                                                                     \
+      myfree(tp_name);                                                                                                 \
+    }                                                                                                                  \
+                                                                                                                       \
+    Py_RETURN_TRUE;                                                                                                    \
+  }
 
-#define TP_BODY_SET_ENUM(__field__, __str2val__)                                                    \
-PyObject *tp_set_ ## __field__ (PyObject *obj, PyObject *args, PyObject *keywds)                    \
-{                                                                                                   \
-  PyObject *py_class = 0;                                                                           \
-  char *tp_name = 0;                                                                                \
-  char *value = 0;                                                                                  \
-  Tpp tp;                                                                                           \
-                                                                                                    \
-  static char *kwlist[] = {(char*) "class", (char*) "value", 0};                                    \
-                                                                                                    \
-  if (!PyArg_ParseTupleAndKeywords(args, keywds, "O|s", kwlist, &py_class,                          \
-                   &value)) {                                                                       \
-    ERR("%s: Bad args", __FUNCTION__);                                                              \
-    Py_RETURN_FALSE;                                                                                \
-  }                                                                                                 \
-                                                                                                    \
-  if (!py_class) {                                                                                  \
-    ERR("%s: Missing class", __FUNCTION__);                                                         \
-    Py_RETURN_FALSE;                                                                                \
-  }                                                                                                 \
-                                                                                                    \
-  if (!value) {                                                                                     \
-    ERR("%s: Missing value", __FUNCTION__);                                                         \
-    Py_RETURN_FALSE;                                                                                \
-  }                                                                                                 \
-                                                                                                    \
-  tp_name = py_obj_attr_str(py_class, "name");                                                      \
-  if (!tp_name) {                                                                                   \
-    ERR("%s: Missing tp name", __FUNCTION__);                                                       \
-    goto done;                                                                                      \
-  }                                                                                                 \
-                                                                                                    \
-  tp = tp_find(tp_name);                                                                            \
-  if (!tp) {                                                                                        \
-    ERR("%s: Cannot find tp %s", __FUNCTION__, tp_name);                                            \
-    goto done;                                                                                      \
-  }                                                                                                 \
-                                                                                                    \
-  tp->set_ ## __field__((__str2val__)(value));                                                      \
-  if (tp->__field__() == (int)(tp->__field__())-1) {                                                \
-    ERR("%s: Cannot find enum %s", __FUNCTION__, value);                                            \
-    goto done;                                                                                      \
-  }                                                                                                 \
-                                                                                                    \
-  PY_DBG("%s(%s -> \"%s\"[%d])", __FUNCTION__, tp_name, value,                                      \
-    tp->__field__());                                                                               \
-                                                                                                    \
-  value = 0;                                                                                        \
-                                                                                                    \
-done:                                                                                               \
-  if (tp_name) {                                                                                    \
-    myfree(tp_name);                                                                                \
-  }                                                                                                 \
-                                                                                                    \
-  Py_RETURN_TRUE;                                                                                   \
-}                                                                                                   \
+#define TP_BODY_SET_ENUM(__field__, __str2val__)                                                                       \
+  PyObject *tp_set_##__field__(PyObject *obj, PyObject *args, PyObject *keywds) {                                      \
+    PyObject *py_class = 0;                                                                                            \
+    char *    tp_name  = 0;                                                                                            \
+    char *    value    = 0;                                                                                            \
+    Tpp       tp;                                                                                                      \
+                                                                                                                       \
+    static char *kwlist[] = {(char *) "class", (char *) "value", 0};                                                   \
+                                                                                                                       \
+    if (! PyArg_ParseTupleAndKeywords(args, keywds, "O|s", kwlist, &py_class, &value)) {                               \
+      ERR("%s: Bad args", __FUNCTION__);                                                                               \
+      Py_RETURN_FALSE;                                                                                                 \
+    }                                                                                                                  \
+                                                                                                                       \
+    if (! py_class) {                                                                                                  \
+      ERR("%s: Missing class", __FUNCTION__);                                                                          \
+      Py_RETURN_FALSE;                                                                                                 \
+    }                                                                                                                  \
+                                                                                                                       \
+    if (! value) {                                                                                                     \
+      ERR("%s: Missing value", __FUNCTION__);                                                                          \
+      Py_RETURN_FALSE;                                                                                                 \
+    }                                                                                                                  \
+                                                                                                                       \
+    tp_name = py_obj_attr_str(py_class, "name");                                                                       \
+    if (! tp_name) {                                                                                                   \
+      ERR("%s: Missing tp name", __FUNCTION__);                                                                        \
+      goto done;                                                                                                       \
+    }                                                                                                                  \
+                                                                                                                       \
+    tp = tp_find(tp_name);                                                                                             \
+    if (! tp) {                                                                                                        \
+      ERR("%s: Cannot find tp %s", __FUNCTION__, tp_name);                                                             \
+      goto done;                                                                                                       \
+    }                                                                                                                  \
+                                                                                                                       \
+    tp->set_##__field__((__str2val__) (value));                                                                        \
+    if (tp->__field__() == (int) (tp->__field__()) - 1) {                                                              \
+      ERR("%s: Cannot find enum %s", __FUNCTION__, value);                                                             \
+      goto done;                                                                                                       \
+    }                                                                                                                  \
+                                                                                                                       \
+    PY_DBG("%s(%s -> \"%s\"[%d])", __FUNCTION__, tp_name, value, tp->__field__());                                     \
+                                                                                                                       \
+    value = 0;                                                                                                         \
+                                                                                                                       \
+  done:                                                                                                                \
+    if (tp_name) {                                                                                                     \
+      myfree(tp_name);                                                                                                 \
+    }                                                                                                                  \
+                                                                                                                       \
+    Py_RETURN_TRUE;                                                                                                    \
+  }
 
-#define TP_BODY_SET_INT(__field__)                                                                  \
-PyObject *tp_set_ ## __field__ (PyObject *obj, PyObject *args, PyObject *keywds)                    \
-{                                                                                                   \
-  PyObject *py_class = 0;                                                                           \
-  char *tp_name = 0;                                                                                \
-  int value = 0;                                                                                    \
-  Tpp tp;                                                                                           \
-                                                                                                    \
-  static char *kwlist[] = {(char*) "class", (char*) "value", 0};                                    \
-                                                                                                    \
-  if (!PyArg_ParseTupleAndKeywords(args, keywds, "O|i", kwlist, &py_class,                          \
-                   &value)) {                                                                       \
-    ERR("%s: Bad args", __FUNCTION__);                                                              \
-    Py_RETURN_FALSE;                                                                                \
-  }                                                                                                 \
-                                                                                                    \
-  if (!py_class) {                                                                                  \
-    ERR("%s: Missing class", __FUNCTION__);                                                         \
-    Py_RETURN_FALSE;                                                                                \
-  }                                                                                                 \
-                                                                                                    \
-  tp_name = py_obj_attr_str(py_class, "name");                                                      \
-  if (!tp_name) {                                                                                   \
-    ERR("%s: Missing tp name", __FUNCTION__);                                                       \
-    goto done;                                                                                      \
-  }                                                                                                 \
-                                                                                                    \
-  PY_DBG("%s(%s -> %d)", __FUNCTION__, tp_name, value);                                             \
-                                                                                                    \
-  tp = tp_find(tp_name);                                                                            \
-  if (!tp) {                                                                                        \
-    ERR("%s: Cannot find tp %s", __FUNCTION__, tp_name);                                            \
-    goto done;                                                                                      \
-  }                                                                                                 \
-                                                                                                    \
-  tp->set_ ## __field__(value);                                                                     \
-                                                                                                    \
-done:                                                                                               \
-  if (tp_name) {                                                                                    \
-    myfree(tp_name);                                                                                \
-  }                                                                                                 \
-                                                                                                    \
-  Py_RETURN_TRUE;                                                                                   \
-}                                                                                                   \
+#define TP_BODY_SET_INT(__field__)                                                                                     \
+  PyObject *tp_set_##__field__(PyObject *obj, PyObject *args, PyObject *keywds) {                                      \
+    PyObject *py_class = 0;                                                                                            \
+    char *    tp_name  = 0;                                                                                            \
+    int       value    = 0;                                                                                            \
+    Tpp       tp;                                                                                                      \
+                                                                                                                       \
+    static char *kwlist[] = {(char *) "class", (char *) "value", 0};                                                   \
+                                                                                                                       \
+    if (! PyArg_ParseTupleAndKeywords(args, keywds, "O|i", kwlist, &py_class, &value)) {                               \
+      ERR("%s: Bad args", __FUNCTION__);                                                                               \
+      Py_RETURN_FALSE;                                                                                                 \
+    }                                                                                                                  \
+                                                                                                                       \
+    if (! py_class) {                                                                                                  \
+      ERR("%s: Missing class", __FUNCTION__);                                                                          \
+      Py_RETURN_FALSE;                                                                                                 \
+    }                                                                                                                  \
+                                                                                                                       \
+    tp_name = py_obj_attr_str(py_class, "name");                                                                       \
+    if (! tp_name) {                                                                                                   \
+      ERR("%s: Missing tp name", __FUNCTION__);                                                                        \
+      goto done;                                                                                                       \
+    }                                                                                                                  \
+                                                                                                                       \
+    PY_DBG("%s(%s -> %d)", __FUNCTION__, tp_name, value);                                                              \
+                                                                                                                       \
+    tp = tp_find(tp_name);                                                                                             \
+    if (! tp) {                                                                                                        \
+      ERR("%s: Cannot find tp %s", __FUNCTION__, tp_name);                                                             \
+      goto done;                                                                                                       \
+    }                                                                                                                  \
+                                                                                                                       \
+    tp->set_##__field__(value);                                                                                        \
+                                                                                                                       \
+  done:                                                                                                                \
+    if (tp_name) {                                                                                                     \
+      myfree(tp_name);                                                                                                 \
+    }                                                                                                                  \
+                                                                                                                       \
+    Py_RETURN_TRUE;                                                                                                    \
+  }
 
-#define TP_BODY_SET_DOUBLE(__field__)                                                               \
-PyObject *tp_set_ ## __field__ (PyObject *obj, PyObject *args, PyObject *keywds)                    \
-{                                                                                                   \
-  PyObject *py_class = 0;                                                                           \
-  char *tp_name = 0;                                                                                \
-  double value = 0;                                                                                 \
-  Tpp tp;                                                                                           \
-                                                                                                    \
-  static char *kwlist[] = {(char*) "class", (char*) "value", 0};                                    \
-                                                                                                    \
-  if (!PyArg_ParseTupleAndKeywords(args, keywds, "O|d", kwlist, &py_class,                          \
-                   &value)) {                                                                       \
-    ERR("%s: Bad args", __FUNCTION__);                                                              \
-    Py_RETURN_FALSE;                                                                                \
-  }                                                                                                 \
-                                                                                                    \
-  if (!py_class) {                                                                                  \
-    ERR("%s: Missing class", __FUNCTION__);                                                         \
-    Py_RETURN_FALSE;                                                                                \
-  }                                                                                                 \
-                                                                                                    \
-  tp_name = py_obj_attr_str(py_class, (char*) "name");                                              \
-  if (!tp_name) {                                                                                   \
-    ERR("%s: Missing tp name", __FUNCTION__);                                                       \
-    goto done;                                                                                      \
-  }                                                                                                 \
-                                                                                                    \
-  PY_DBG("%s(%s -> %g)", __FUNCTION__, tp_name, value);                                             \
-                                                                                                    \
-  tp = tp_find(tp_name);                                                                            \
-  if (!tp) {                                                                                        \
-    ERR("%s: Cannot find tp %s", __FUNCTION__, tp_name);                                            \
-    goto done;                                                                                      \
-  }                                                                                                 \
-                                                                                                    \
-  tp->set_ ## __field__(value);                                                                     \
-                                                                                                    \
-done:                                                                                               \
-  if (tp_name) {                                                                                    \
-    myfree(tp_name);                                                                                \
-  }                                                                                                 \
-                                                                                                    \
-  Py_RETURN_TRUE;                                                                                   \
-}                                                                                                   \
+#define TP_BODY_SET_DOUBLE(__field__)                                                                                  \
+  PyObject *tp_set_##__field__(PyObject *obj, PyObject *args, PyObject *keywds) {                                      \
+    PyObject *py_class = 0;                                                                                            \
+    char *    tp_name  = 0;                                                                                            \
+    double    value    = 0;                                                                                            \
+    Tpp       tp;                                                                                                      \
+                                                                                                                       \
+    static char *kwlist[] = {(char *) "class", (char *) "value", 0};                                                   \
+                                                                                                                       \
+    if (! PyArg_ParseTupleAndKeywords(args, keywds, "O|d", kwlist, &py_class, &value)) {                               \
+      ERR("%s: Bad args", __FUNCTION__);                                                                               \
+      Py_RETURN_FALSE;                                                                                                 \
+    }                                                                                                                  \
+                                                                                                                       \
+    if (! py_class) {                                                                                                  \
+      ERR("%s: Missing class", __FUNCTION__);                                                                          \
+      Py_RETURN_FALSE;                                                                                                 \
+    }                                                                                                                  \
+                                                                                                                       \
+    tp_name = py_obj_attr_str(py_class, (char *) "name");                                                              \
+    if (! tp_name) {                                                                                                   \
+      ERR("%s: Missing tp name", __FUNCTION__);                                                                        \
+      goto done;                                                                                                       \
+    }                                                                                                                  \
+                                                                                                                       \
+    PY_DBG("%s(%s -> %g)", __FUNCTION__, tp_name, value);                                                              \
+                                                                                                                       \
+    tp = tp_find(tp_name);                                                                                             \
+    if (! tp) {                                                                                                        \
+      ERR("%s: Cannot find tp %s", __FUNCTION__, tp_name);                                                             \
+      goto done;                                                                                                       \
+    }                                                                                                                  \
+                                                                                                                       \
+    tp->set_##__field__(value);                                                                                        \
+                                                                                                                       \
+  done:                                                                                                                \
+    if (tp_name) {                                                                                                     \
+      myfree(tp_name);                                                                                                 \
+    }                                                                                                                  \
+                                                                                                                       \
+    Py_RETURN_TRUE;                                                                                                    \
+  }
 
-static PyObject *tp_set_tile_dir (PyObject *obj,
-                  PyObject *args,
-                  PyObject *keywds,
-                  int dir,
-                  int level)
-{
-  PyObject *py_class = 0;
-  char *tp_name = 0;
-  char *fg = 0;
-  char *bg = 0;
-  char *fg_color = 0;
-  char *bg_color = 0;
-  int delay_ms = 0;
-  int is_moving = 0;
-  int is_jumping = 0;
-  int begin_jump = 0;
-  int is_outline = 0;
-  int left = 0;
-  int right = 0;
-  int up = 0;
-  int down = 0;
-  int none = 0;
-  int is_yyy5 = 0;
-  int is_yyy6 = 0;
-  int is_yyy7 = 0;
-  int is_yyy8 = 0;
-  int is_yyy9 = 0;
-  int is_invisible = 0;
-  int is_hp_25_percent = 0;
-  int is_hp_50_percent = 0;
-  int is_hp_75_percent = 0;
-  int is_hp_100_percent = 0;
-  int is_in_water = 0;
-  int is_sleeping = 0;
-  int is_open = 0;
-  int is_dead = 0;
-  int is_end_of_anim = 0;
-  int is_dead_on_end_of_anim = 0;
-  int is_alive_on_end_of_anim = 0;
-  int is_resurrecting = 0;
-  char *py_tile_name = nullptr;
+static PyObject *tp_set_tile_dir(PyObject *obj, PyObject *args, PyObject *keywds, int dir, int level) {
+  PyObject *py_class                = 0;
+  char *    tp_name                 = 0;
+  char *    fg                      = 0;
+  char *    bg                      = 0;
+  char *    fg_color                = 0;
+  char *    bg_color                = 0;
+  int       delay_ms                = 0;
+  int       is_moving               = 0;
+  int       is_jumping              = 0;
+  int       begin_jump              = 0;
+  int       is_outline              = 0;
+  int       left                    = 0;
+  int       right                   = 0;
+  int       up                      = 0;
+  int       down                    = 0;
+  int       none                    = 0;
+  int       is_yyy5                 = 0;
+  int       is_yyy6                 = 0;
+  int       is_yyy7                 = 0;
+  int       is_yyy8                 = 0;
+  int       is_yyy9                 = 0;
+  int       is_invisible            = 0;
+  int       is_hp_25_percent        = 0;
+  int       is_hp_50_percent        = 0;
+  int       is_hp_75_percent        = 0;
+  int       is_hp_100_percent       = 0;
+  int       is_in_water             = 0;
+  int       is_sleeping             = 0;
+  int       is_open                 = 0;
+  int       is_dead                 = 0;
+  int       is_end_of_anim          = 0;
+  int       is_dead_on_end_of_anim  = 0;
+  int       is_alive_on_end_of_anim = 0;
+  int       is_resurrecting         = 0;
+  char *    py_tile_name            = nullptr;
 
-  static char *kwlist[] = {
-    (char*) "class",
-    (char*) "tile",
-    (char*) "fg",
-    (char*) "bg",
-    (char*) "fg_color",
-    (char*) "bg_color",
-    (char*) "delay_ms",
-    (char*) "is_moving",
-    (char*) "is_jumping",
-    (char*) "begin_jump",
-    (char*) "is_outline",
-    (char*) "is_dir_left",
-    (char*) "is_dir_right",
-    (char*) "is_dir_up",
-    (char*) "is_dir_down",
-    (char*) "is_dir_none",
-    (char*) "is_yyy5",
-    (char*) "is_yyy6",
-    (char*) "is_yyy7",
-    (char*) "is_yyy8",
-    (char*) "is_yyy9",
-    (char*) "is_invisible",
-    (char*) "is_hp_25_percent",
-    (char*) "is_hp_50_percent",
-    (char*) "is_hp_75_percent",
-    (char*) "is_hp_100_percent",
-    (char*) "is_in_water",
-    (char*) "is_sleeping",
-    (char*) "is_open",
-    (char*) "is_dead",
-    (char*) "is_end_of_anim",
-    (char*) "is_dead_on_end_of_anim",
-    (char*) "is_resurrecting",
-    (char*) "is_alive_on_end_of_anim",
-    0
-  };
+  static char *kwlist[] = {(char *) "class",
+                           (char *) "tile",
+                           (char *) "fg",
+                           (char *) "bg",
+                           (char *) "fg_color",
+                           (char *) "bg_color",
+                           (char *) "delay_ms",
+                           (char *) "is_moving",
+                           (char *) "is_jumping",
+                           (char *) "begin_jump",
+                           (char *) "is_outline",
+                           (char *) "is_dir_left",
+                           (char *) "is_dir_right",
+                           (char *) "is_dir_up",
+                           (char *) "is_dir_down",
+                           (char *) "is_dir_none",
+                           (char *) "is_yyy5",
+                           (char *) "is_yyy6",
+                           (char *) "is_yyy7",
+                           (char *) "is_yyy8",
+                           (char *) "is_yyy9",
+                           (char *) "is_invisible",
+                           (char *) "is_hp_25_percent",
+                           (char *) "is_hp_50_percent",
+                           (char *) "is_hp_75_percent",
+                           (char *) "is_hp_100_percent",
+                           (char *) "is_in_water",
+                           (char *) "is_sleeping",
+                           (char *) "is_open",
+                           (char *) "is_dead",
+                           (char *) "is_end_of_anim",
+                           (char *) "is_dead_on_end_of_anim",
+                           (char *) "is_resurrecting",
+                           (char *) "is_alive_on_end_of_anim",
+                           0};
 
-  if (!PyArg_ParseTupleAndKeywords(args, keywds,
-                   "O|sssssiiisiiiiiiiiiiiiiiiiiiiiiiii",
-                   kwlist, &py_class,
-                   &py_tile_name,
-                   &fg,
-                   &bg,
-                   &fg_color,
-                   &bg_color,
-                   &delay_ms,
-                   &is_moving,
-                   &is_jumping,
-                   &begin_jump,
-                   &is_outline,
-                   &left,
-                   &right,
-                   &up,
-                   &down,
-                   &none,
-                   &is_yyy5,
-                   &is_yyy6,
-                   &is_yyy7,
-                   &is_yyy8,
-                   &is_yyy9,
-                   &is_invisible,
-                   &is_hp_25_percent,
-                   &is_hp_50_percent,
-                   &is_hp_75_percent,
-                   &is_hp_100_percent,
-                   &is_in_water,
-                   &is_sleeping,
-                   &is_open,
-                   &is_dead,
-                   &is_end_of_anim,
-                   &is_dead_on_end_of_anim,
-                   &is_resurrecting,
-                   &is_alive_on_end_of_anim
-                   )) {
+  if (! PyArg_ParseTupleAndKeywords(
+          args, keywds, "O|sssssiiisiiiiiiiiiiiiiiiiiiiiiiii", kwlist, &py_class, &py_tile_name, &fg, &bg, &fg_color,
+          &bg_color, &delay_ms, &is_moving, &is_jumping, &begin_jump, &is_outline, &left, &right, &up, &down, &none,
+          &is_yyy5, &is_yyy6, &is_yyy7, &is_yyy8, &is_yyy9, &is_invisible, &is_hp_25_percent, &is_hp_50_percent,
+          &is_hp_75_percent, &is_hp_100_percent, &is_in_water, &is_sleeping, &is_open, &is_dead, &is_end_of_anim,
+          &is_dead_on_end_of_anim, &is_resurrecting, &is_alive_on_end_of_anim)) {
     ERR("%s: Bad args", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
-  if (!py_class) {
+  if (! py_class) {
     ERR("%s: Missing class", __FUNCTION__);
     Py_RETURN_FALSE;
   }
@@ -437,7 +388,7 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
   Tpp tp;
 
   tp_name = py_obj_attr_str(py_class, "name");
-  if (!tp_name) {
+  if (! tp_name) {
     ERR("%s: Missing tp name", __FUNCTION__);
     Py_RETURN_FALSE;
   }
@@ -445,93 +396,91 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
   PY_DBG("%s(%s -> \"%s\")", __FUNCTION__, tp_name, py_tile_name);
 
   tp = tp_find(tp_name);
-  if (!tp) {
+  if (! tp) {
     ERR("%s: Cannot find tp %s", __FUNCTION__, tp_name);
     Py_RETURN_FALSE;
   }
 
   Tilemap *tiles = nullptr;
   switch (dir) {
-  case THING_DIR_NONE:
-    tiles = &tp->tiles;
-    break;
-  case THING_DIR_DOWN:
-    if (level == 1) {
-      tiles = &tp->bot1_tiles;
-    } else if (level == 2) {
-      tiles = &tp->bot2_tiles;
-    } else if (level == 3) {
-      tiles = &tp->bot3_tiles;
-    } else {
-      DIE("Bug");
-    }
-    break;
-  case THING_DIR_UP:
-    if (level == 1) {
-      tiles = &tp->top1_tiles;
-    } else if (level == 2) {
-      tiles = &tp->top2_tiles;
-    } else {
-      DIE("Bug");
-    }
-    break;
-  case THING_DIR_LEFT:
-    if (level == 1) {
-      tiles = &tp->left1_tiles;
-    } else if (level == 2) {
-      tiles = &tp->left2_tiles;
-    } else {
-      DIE("Bug");
-    }
-    break;
-  case THING_DIR_RIGHT:
-    if (level == 1) {
-      tiles = &tp->right1_tiles;
-    } else if (level == 2) {
-      tiles = &tp->right2_tiles;
-    } else {
-      DIE("Bug");
-    }
-    break;
-  case THING_DIR_TL:
-    if (level == 1) {
-      tiles = &tp->tl1_tiles;
-    } else if (level == 2) {
-      tiles = &tp->tl2_tiles;
-    } else {
-      DIE("Bug");
-    }
-    break;
-  case THING_DIR_BL:
-    if (level == 1) {
-      tiles = &tp->bl1_tiles;
-    } else if (level == 2) {
-      tiles = &tp->bl2_tiles;
-    } else {
-      DIE("Bug");
-    }
-    break;
-  case THING_DIR_TR:
-    if (level == 1) {
-      tiles = &tp->tr1_tiles;
-    } else if (level == 2) {
-      tiles = &tp->tr2_tiles;
-    } else {
-      DIE("Bug");
-    }
-    break;
-  case THING_DIR_BR:
-    if (level == 1) {
-      tiles = &tp->br1_tiles;
-    } else if (level == 2) {
-      tiles = &tp->br2_tiles;
-    } else {
-      DIE("Bug");
-    }
-    break;
+    case THING_DIR_NONE : tiles = &tp->tiles; break;
+    case THING_DIR_DOWN :
+      if (level == 1) {
+        tiles = &tp->bot1_tiles;
+      } else if (level == 2) {
+        tiles = &tp->bot2_tiles;
+      } else if (level == 3) {
+        tiles = &tp->bot3_tiles;
+      } else {
+        DIE("Bug");
+      }
+      break;
+    case THING_DIR_UP :
+      if (level == 1) {
+        tiles = &tp->top1_tiles;
+      } else if (level == 2) {
+        tiles = &tp->top2_tiles;
+      } else {
+        DIE("Bug");
+      }
+      break;
+    case THING_DIR_LEFT :
+      if (level == 1) {
+        tiles = &tp->left1_tiles;
+      } else if (level == 2) {
+        tiles = &tp->left2_tiles;
+      } else {
+        DIE("Bug");
+      }
+      break;
+    case THING_DIR_RIGHT :
+      if (level == 1) {
+        tiles = &tp->right1_tiles;
+      } else if (level == 2) {
+        tiles = &tp->right2_tiles;
+      } else {
+        DIE("Bug");
+      }
+      break;
+    case THING_DIR_TL :
+      if (level == 1) {
+        tiles = &tp->tl1_tiles;
+      } else if (level == 2) {
+        tiles = &tp->tl2_tiles;
+      } else {
+        DIE("Bug");
+      }
+      break;
+    case THING_DIR_BL :
+      if (level == 1) {
+        tiles = &tp->bl1_tiles;
+      } else if (level == 2) {
+        tiles = &tp->bl2_tiles;
+      } else {
+        DIE("Bug");
+      }
+      break;
+    case THING_DIR_TR :
+      if (level == 1) {
+        tiles = &tp->tr1_tiles;
+      } else if (level == 2) {
+        tiles = &tp->tr2_tiles;
+      } else {
+        DIE("Bug");
+      }
+      break;
+    case THING_DIR_BR :
+      if (level == 1) {
+        tiles = &tp->br1_tiles;
+      } else if (level == 2) {
+        tiles = &tp->br2_tiles;
+      } else {
+        DIE("Bug");
+      }
+      break;
   }
 
-  if (!tiles) {
+  if (! tiles) {
     ERR("No tiles for [%s]", py_tile_name);
     Py_RETURN_FALSE;
   }
@@ -541,9 +490,8 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
       Tilep tile;
 
       tile = tile_find(std::string(py_tile_name));
-      if (!tile) {
-        ERR("%s: Cannot find tile '%s' for tp %s",
-          __FUNCTION__, py_tile_name, tp_name);
+      if (! tile) {
+        ERR("%s: Cannot find tile '%s' for tp %s", __FUNCTION__, py_tile_name, tp_name);
         Py_RETURN_FALSE;
       }
 
@@ -558,23 +506,23 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
       (*tiles).push_back(tile);
       tile->in_use = true;
 
-      tile->delay_ms = delay_ms;
+      tile->delay_ms  = delay_ms;
       tile->is_moving = is_moving;
 
-      tile->is_yyy5 = is_yyy5;
-      tile->is_yyy6 = is_yyy6;
-      tile->is_yyy7 = is_yyy7;
-      tile->is_yyy8 = is_yyy8;
-      tile->is_yyy9 = is_yyy9;
-      tile->is_invisible = is_invisible;
-      tile->is_hp_25_percent = is_hp_25_percent;
-      tile->is_hp_50_percent = is_hp_50_percent;
-      tile->is_hp_75_percent = is_hp_75_percent;
-      tile->is_hp_100_percent = is_hp_100_percent;
-      tile->is_sleeping = is_sleeping;
-      tile->is_open = is_open;
-      tile->is_dead = is_dead;
-      tile->is_end_of_anim = is_end_of_anim;
+      tile->is_yyy5                = is_yyy5;
+      tile->is_yyy6                = is_yyy6;
+      tile->is_yyy7                = is_yyy7;
+      tile->is_yyy8                = is_yyy8;
+      tile->is_yyy9                = is_yyy9;
+      tile->is_invisible           = is_invisible;
+      tile->is_hp_25_percent       = is_hp_25_percent;
+      tile->is_hp_50_percent       = is_hp_50_percent;
+      tile->is_hp_75_percent       = is_hp_75_percent;
+      tile->is_hp_100_percent      = is_hp_100_percent;
+      tile->is_sleeping            = is_sleeping;
+      tile->is_open                = is_open;
+      tile->is_dead                = is_dead;
+      tile->is_end_of_anim         = is_end_of_anim;
       tile->is_dead_on_end_of_anim = is_dead_on_end_of_anim;
       if (is_dead_on_end_of_anim) {
         tp->set_is_dead_on_end_of_anim(true);
@@ -585,40 +533,37 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
       }
       tile->is_resurrecting = is_resurrecting;
 
-      if (tile->is_hp_25_percent ||
-        tile->is_hp_50_percent ||
-        tile->is_hp_75_percent ||
-        tile->is_hp_100_percent ) {
+      if (tile->is_hp_25_percent || tile->is_hp_50_percent || tile->is_hp_75_percent || tile->is_hp_100_percent) {
         tp->set_internal_has_hp_anim(true);
       }
 
       if (up) {
         if (left) {
-          tile->dir = THING_DIR_TL;
+          tile->dir                   = THING_DIR_TL;
           tile->internal_has_dir_anim = true;
         } else if (right) {
-          tile->dir = THING_DIR_TR;
+          tile->dir                   = THING_DIR_TR;
           tile->internal_has_dir_anim = true;
         } else {
-          tile->dir = THING_DIR_UP;
+          tile->dir                   = THING_DIR_UP;
           tile->internal_has_dir_anim = true;
         }
       } else if (down) {
         if (left) {
-          tile->dir = THING_DIR_BL;
+          tile->dir                   = THING_DIR_BL;
           tile->internal_has_dir_anim = true;
         } else if (right) {
-          tile->dir = THING_DIR_BR;
+          tile->dir                   = THING_DIR_BR;
           tile->internal_has_dir_anim = true;
         } else {
-          tile->dir = THING_DIR_DOWN;
+          tile->dir                   = THING_DIR_DOWN;
           tile->internal_has_dir_anim = true;
         }
       } else if (left) {
-        tile->dir = THING_DIR_LEFT;
+        tile->dir                   = THING_DIR_LEFT;
         tile->internal_has_dir_anim = true;
       } else if (right) {
-        tile->dir = THING_DIR_RIGHT;
+        tile->dir                   = THING_DIR_RIGHT;
         tile->internal_has_dir_anim = true;
       } else if (none) {
         tile->dir = THING_DIR_NONE;
@@ -639,101 +584,100 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
   Py_RETURN_TRUE;
 }
 
-PyObject *tp_set_tile (PyObject *obj, PyObject *args, PyObject *keywds)
-{ TRACE_AND_INDENT();
+PyObject *tp_set_tile(PyObject *obj, PyObject *args, PyObject *keywds) {
+  TRACE_AND_INDENT();
   return (tp_set_tile_dir(obj, args, keywds, THING_DIR_NONE, 1));
 }
-PyObject *tp_set_top1_tile (PyObject *obj, PyObject *args, PyObject *keywds)
-{ TRACE_AND_INDENT();
+PyObject *tp_set_top1_tile(PyObject *obj, PyObject *args, PyObject *keywds) {
+  TRACE_AND_INDENT();
   return (tp_set_tile_dir(obj, args, keywds, THING_DIR_UP, 1));
 }
-PyObject *tp_set_bot1_tile (PyObject *obj, PyObject *args, PyObject *keywds)
-{ TRACE_AND_INDENT();
+PyObject *tp_set_bot1_tile(PyObject *obj, PyObject *args, PyObject *keywds) {
+  TRACE_AND_INDENT();
   return (tp_set_tile_dir(obj, args, keywds, THING_DIR_DOWN, 1));
 }
-PyObject *tp_set_left1_tile (PyObject *obj, PyObject *args, PyObject *keywds)
-{ TRACE_AND_INDENT();
+PyObject *tp_set_left1_tile(PyObject *obj, PyObject *args, PyObject *keywds) {
+  TRACE_AND_INDENT();
   return (tp_set_tile_dir(obj, args, keywds, THING_DIR_LEFT, 1));
 }
-PyObject *tp_set_right1_tile (PyObject *obj, PyObject *args, PyObject *keywds)
-{ TRACE_AND_INDENT();
+PyObject *tp_set_right1_tile(PyObject *obj, PyObject *args, PyObject *keywds) {
+  TRACE_AND_INDENT();
   return (tp_set_tile_dir(obj, args, keywds, THING_DIR_RIGHT, 1));
 }
-PyObject *tp_set_tl1_tile (PyObject *obj, PyObject *args, PyObject *keywds)
-{ TRACE_AND_INDENT();
+PyObject *tp_set_tl1_tile(PyObject *obj, PyObject *args, PyObject *keywds) {
+  TRACE_AND_INDENT();
   return (tp_set_tile_dir(obj, args, keywds, THING_DIR_TL, 1));
 }
-PyObject *tp_set_tr1_tile (PyObject *obj, PyObject *args, PyObject *keywds)
-{ TRACE_AND_INDENT();
+PyObject *tp_set_tr1_tile(PyObject *obj, PyObject *args, PyObject *keywds) {
+  TRACE_AND_INDENT();
   return (tp_set_tile_dir(obj, args, keywds, THING_DIR_TR, 1));
 }
-PyObject *tp_set_bl1_tile (PyObject *obj, PyObject *args, PyObject *keywds)
-{ TRACE_AND_INDENT();
+PyObject *tp_set_bl1_tile(PyObject *obj, PyObject *args, PyObject *keywds) {
+  TRACE_AND_INDENT();
   return (tp_set_tile_dir(obj, args, keywds, THING_DIR_BL, 1));
 }
-PyObject *tp_set_br1_tile (PyObject *obj, PyObject *args, PyObject *keywds)
-{ TRACE_AND_INDENT();
+PyObject *tp_set_br1_tile(PyObject *obj, PyObject *args, PyObject *keywds) {
+  TRACE_AND_INDENT();
   return (tp_set_tile_dir(obj, args, keywds, THING_DIR_BR, 1));
 }
-PyObject *tp_set_top2_tile (PyObject *obj, PyObject *args, PyObject *keywds)
-{ TRACE_AND_INDENT();
+PyObject *tp_set_top2_tile(PyObject *obj, PyObject *args, PyObject *keywds) {
+  TRACE_AND_INDENT();
   return (tp_set_tile_dir(obj, args, keywds, THING_DIR_UP, 2));
 }
-PyObject *tp_set_bot2_tile (PyObject *obj, PyObject *args, PyObject *keywds)
-{ TRACE_AND_INDENT();
+PyObject *tp_set_bot2_tile(PyObject *obj, PyObject *args, PyObject *keywds) {
+  TRACE_AND_INDENT();
   return (tp_set_tile_dir(obj, args, keywds, THING_DIR_DOWN, 2));
 }
-PyObject *tp_set_bot3_tile (PyObject *obj, PyObject *args, PyObject *keywds)
-{ TRACE_AND_INDENT();
+PyObject *tp_set_bot3_tile(PyObject *obj, PyObject *args, PyObject *keywds) {
+  TRACE_AND_INDENT();
   return (tp_set_tile_dir(obj, args, keywds, THING_DIR_DOWN, 3));
 }
-PyObject *tp_set_left2_tile (PyObject *obj, PyObject *args, PyObject *keywds)
-{ TRACE_AND_INDENT();
+PyObject *tp_set_left2_tile(PyObject *obj, PyObject *args, PyObject *keywds) {
+  TRACE_AND_INDENT();
   return (tp_set_tile_dir(obj, args, keywds, THING_DIR_LEFT, 2));
 }
-PyObject *tp_set_right2_tile (PyObject *obj, PyObject *args, PyObject *keywds)
-{ TRACE_AND_INDENT();
+PyObject *tp_set_right2_tile(PyObject *obj, PyObject *args, PyObject *keywds) {
+  TRACE_AND_INDENT();
   return (tp_set_tile_dir(obj, args, keywds, THING_DIR_RIGHT, 2));
 }
-PyObject *tp_set_tl2_tile (PyObject *obj, PyObject *args, PyObject *keywds)
-{ TRACE_AND_INDENT();
+PyObject *tp_set_tl2_tile(PyObject *obj, PyObject *args, PyObject *keywds) {
+  TRACE_AND_INDENT();
   return (tp_set_tile_dir(obj, args, keywds, THING_DIR_TL, 2));
 }
-PyObject *tp_set_tr2_tile (PyObject *obj, PyObject *args, PyObject *keywds)
-{ TRACE_AND_INDENT();
+PyObject *tp_set_tr2_tile(PyObject *obj, PyObject *args, PyObject *keywds) {
+  TRACE_AND_INDENT();
   return (tp_set_tile_dir(obj, args, keywds, THING_DIR_TR, 2));
 }
-PyObject *tp_set_bl2_tile (PyObject *obj, PyObject *args, PyObject *keywds)
-{ TRACE_AND_INDENT();
+PyObject *tp_set_bl2_tile(PyObject *obj, PyObject *args, PyObject *keywds) {
+  TRACE_AND_INDENT();
   return (tp_set_tile_dir(obj, args, keywds, THING_DIR_BL, 2));
 }
-PyObject *tp_set_br2_tile (PyObject *obj, PyObject *args, PyObject *keywds)
-{ TRACE_AND_INDENT();
+PyObject *tp_set_br2_tile(PyObject *obj, PyObject *args, PyObject *keywds) {
+  TRACE_AND_INDENT();
   return (tp_set_tile_dir(obj, args, keywds, THING_DIR_BR, 2));
 }
 
-PyObject *tp_update_ (PyObject *obj, PyObject *args, PyObject *keywds)
-{ TRACE_AND_INDENT();
+PyObject *tp_update_(PyObject *obj, PyObject *args, PyObject *keywds) {
+  TRACE_AND_INDENT();
   PyObject *py_class = 0;
-  char *tp_name = 0;
-  int value = 0;
-  Tpp tp;
+  char *    tp_name  = 0;
+  int       value    = 0;
+  Tpp       tp;
 
-  static char *kwlist[] = {(char*) "class", (char*) "value", 0};
+  static char *kwlist[] = {(char *) "class", (char *) "value", 0};
 
-  if (!PyArg_ParseTupleAndKeywords(args, keywds, "O|i", kwlist, &py_class,
-                   &value)) {
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "O|i", kwlist, &py_class, &value)) {
     ERR("%s: Bad args", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
-  if (!py_class) {
+  if (! py_class) {
     ERR("%s: Missing class", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   tp_name = py_obj_attr_str(py_class, "name");
-  if (!tp_name) {
+  if (! tp_name) {
     ERR("%s: Missing tp name", __FUNCTION__);
     goto done;
   }
@@ -741,7 +685,7 @@ PyObject *tp_update_ (PyObject *obj, PyObject *args, PyObject *keywds)
   PY_DBG("%s(%s -> %d)", __FUNCTION__, tp_name, value);
 
   tp = tp_find(tp_name);
-  if (!tp) {
+  if (! tp) {
     ERR("%s: Cannot find tp %s", __FUNCTION__, tp_name);
     goto done;
   }
@@ -754,24 +698,24 @@ done:
   Py_RETURN_TRUE;
 }
 
-PyObject *level_spawn_next_to_ (PyObject *obj, PyObject *args, PyObject *keywds)
-{ TRACE_AND_INDENT();
-  char *what = nullptr;
-  uint32_t id = 0;
+PyObject *level_spawn_next_to_(PyObject *obj, PyObject *args, PyObject *keywds) {
+  TRACE_AND_INDENT();
+  char *   what = nullptr;
+  uint32_t id   = 0;
 
-  static char *kwlist[] = {(char*) "id", (char*) "what", 0};
+  static char *kwlist[] = {(char *) "id", (char *) "what", 0};
 
-  if (!PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &id, &what)) {
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &id, &what)) {
     ERR("%s: Bad args", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
-  if (!id) {
+  if (! id) {
     ERR("%s: Missing 'id'", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
-  if (!what) {
+  if (! what) {
     ERR("%s: Missing 'what'", __FUNCTION__);
     Py_RETURN_FALSE;
   }
@@ -779,12 +723,12 @@ PyObject *level_spawn_next_to_ (PyObject *obj, PyObject *args, PyObject *keywds)
   PY_DBG("%s(%x, %s)", __FUNCTION__, id, what);
 
   auto level = game->level;
-  if (!level) {
+  if (! level) {
     Py_RETURN_FALSE;
   }
 
   auto t = level->thing_find(ThingId(id));
-  if (!t) {
+  if (! t) {
     ERR("%s: Cannot find thing %08" PRIx32 "", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
@@ -795,24 +739,24 @@ PyObject *level_spawn_next_to_ (PyObject *obj, PyObject *args, PyObject *keywds)
   Py_RETURN_FALSE;
 }
 
-PyObject *level_spawn_next_to_or_on_monst_ (PyObject *obj, PyObject *args, PyObject *keywds)
-{ TRACE_AND_INDENT();
-  char *what = nullptr;
-  uint32_t id = 0;
+PyObject *level_spawn_next_to_or_on_monst_(PyObject *obj, PyObject *args, PyObject *keywds) {
+  TRACE_AND_INDENT();
+  char *   what = nullptr;
+  uint32_t id   = 0;
 
-  static char *kwlist[] = {(char*) "id", (char*) "what", 0};
+  static char *kwlist[] = {(char *) "id", (char *) "what", 0};
 
-  if (!PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &id, &what)) {
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &id, &what)) {
     ERR("%s: Bad args", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
-  if (!id) {
+  if (! id) {
     ERR("%s: Missing 'id'", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
-  if (!what) {
+  if (! what) {
     ERR("%s: Missing 'what'", __FUNCTION__);
     Py_RETURN_FALSE;
   }
@@ -820,12 +764,12 @@ PyObject *level_spawn_next_to_or_on_monst_ (PyObject *obj, PyObject *args, PyObj
   PY_DBG("%s(%x, %s)", __FUNCTION__, id, what);
 
   auto level = game->level;
-  if (!level) {
+  if (! level) {
     Py_RETURN_FALSE;
   }
 
   auto t = level->thing_find(ThingId(id));
-  if (!t) {
+  if (! t) {
     ERR("%s: Cannot find thing %08" PRIx32 "", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
@@ -836,46 +780,40 @@ PyObject *level_spawn_next_to_or_on_monst_ (PyObject *obj, PyObject *args, PyObj
   Py_RETURN_FALSE;
 }
 
-PyObject *level_spawn_using_items_radius_range_ (PyObject *obj, PyObject *args, PyObject *keywds)
-{ TRACE_AND_INDENT();
-  char *what = nullptr;
-  uint32_t id = 0;
-  uint32_t parent_id = 0;
-  uint32_t target_id = 0;
+PyObject *level_spawn_using_items_radius_range_(PyObject *obj, PyObject *args, PyObject *keywds) {
+  TRACE_AND_INDENT();
+  char *   what       = nullptr;
+  uint32_t id         = 0;
+  uint32_t parent_id  = 0;
+  uint32_t target_id  = 0;
   uint32_t radius_min = 0;
   uint32_t radius_max = 0;
 
-  static char *kwlist[] = {(char*) "id",
-               (char*) "parent_id",
-               (char*) "target_id",
-               (char*) "what",
-               (char*) "min",
-               (char*) "max",
-               0};
+  static char *kwlist[] = {
+      (char *) "id", (char *) "parent_id", (char *) "target_id", (char *) "what", (char *) "min", (char *) "max", 0};
 
-  if (!PyArg_ParseTupleAndKeywords(args, keywds, "IIIs|ii", kwlist, &id,
-                   &parent_id, &target_id, &what,
-                   &radius_min, &radius_max)) {
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "IIIs|ii", kwlist, &id, &parent_id, &target_id, &what, &radius_min,
+                                    &radius_max)) {
     ERR("%s: Bad args", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
-  if (!id) {
+  if (! id) {
     ERR("%s: Missing 'id'", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
-  if (!parent_id) {
+  if (! parent_id) {
     ERR("%s: Missing 'parent_id'", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
-  if (!target_id) {
+  if (! target_id) {
     ERR("%s: Missing 'target_id'", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
-  if (!what) {
+  if (! what) {
     ERR("%s: Missing 'what'", __FUNCTION__);
     Py_RETURN_FALSE;
   }
@@ -883,53 +821,52 @@ PyObject *level_spawn_using_items_radius_range_ (PyObject *obj, PyObject *args, 
   PY_DBG("%s(%x, %s, %u, %u)", __FUNCTION__, id, what, radius_min, radius_max);
 
   auto level = game->level;
-  if (!level) {
+  if (! level) {
     Py_RETURN_FALSE;
   }
 
   auto t = level->thing_find(ThingId(id));
-  if (!t) {
+  if (! t) {
     ERR("%s: Cannot find 'me' thing %08" PRIx32 "", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
 
   auto parent = level->thing_find(ThingId(parent_id));
-  if (!parent) {
+  if (! parent) {
     ERR("%s: Cannot find parent thing %08" PRIx32 "", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
 
   auto target = level->thing_find(ThingId(target_id));
-  if (!target) {
+  if (! target) {
     ERR("%s: Cannot find target thing %08" PRIx32 "", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
 
-  if (t->spawn_radius_range(parent, target,
-                std::string(what), radius_min, radius_max)) {
+  if (t->spawn_radius_range(parent, target, std::string(what), radius_min, radius_max)) {
     Py_RETURN_TRUE;
   }
   Py_RETURN_FALSE;
 }
 
-PyObject *level_spawn_fire_around_thing (PyObject *obj, PyObject *args, PyObject *keywds)
-{ TRACE_AND_INDENT();
-  char *what = nullptr;
-  uint32_t id = 0;
+PyObject *level_spawn_fire_around_thing(PyObject *obj, PyObject *args, PyObject *keywds) {
+  TRACE_AND_INDENT();
+  char *   what = nullptr;
+  uint32_t id   = 0;
 
-  static char *kwlist[] = {(char*) "id", (char*) "what", 0};
+  static char *kwlist[] = {(char *) "id", (char *) "what", 0};
 
-  if (!PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &id, &what)) {
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &id, &what)) {
     ERR("%s: Bad args", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
-  if (!id) {
+  if (! id) {
     ERR("%s: Missing 'id'", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
-  if (!what) {
+  if (! what) {
     ERR("%s: Missing 'what'", __FUNCTION__);
     Py_RETURN_FALSE;
   }
@@ -937,12 +874,12 @@ PyObject *level_spawn_fire_around_thing (PyObject *obj, PyObject *args, PyObject
   PY_DBG("%s(%x, %s)", __FUNCTION__, id, what);
 
   auto level = game->level;
-  if (!level) {
+  if (! level) {
     Py_RETURN_FALSE;
   }
 
   auto t = level->thing_find(ThingId(id));
-  if (!t) {
+  if (! t) {
     ERR("%s: Cannot find thing %08" PRIx32 "", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
@@ -953,24 +890,24 @@ PyObject *level_spawn_fire_around_thing (PyObject *obj, PyObject *args, PyObject
   Py_RETURN_FALSE;
 }
 
-PyObject *level_spawn_at_thing (PyObject *obj, PyObject *args, PyObject *keywds)
-{ TRACE_AND_INDENT();
-  char *what = nullptr;
-  uint32_t id = 0;
+PyObject *level_spawn_at_thing(PyObject *obj, PyObject *args, PyObject *keywds) {
+  TRACE_AND_INDENT();
+  char *   what = nullptr;
+  uint32_t id   = 0;
 
-  static char *kwlist[] = {(char*) "id", (char*) "what", 0};
+  static char *kwlist[] = {(char *) "id", (char *) "what", 0};
 
-  if (!PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &id, &what)) {
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &id, &what)) {
     ERR("%s: Bad args", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
-  if (!id) {
+  if (! id) {
     ERR("%s: Missing 'id'", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
-  if (!what) {
+  if (! what) {
     ERR("%s: Missing 'what'", __FUNCTION__);
     Py_RETURN_FALSE;
   }
@@ -978,12 +915,12 @@ PyObject *level_spawn_at_thing (PyObject *obj, PyObject *args, PyObject *keywds)
   PY_DBG("%s(%x, %s)", __FUNCTION__, id, what);
 
   auto level = game->level;
-  if (!level) {
+  if (! level) {
     Py_RETURN_FALSE;
   }
 
   auto t = level->thing_find(ThingId(id));
-  if (!t) {
+  if (! t) {
     ERR("%s: Cannot find thing %08" PRIx32 "", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
@@ -994,24 +931,24 @@ PyObject *level_spawn_at_thing (PyObject *obj, PyObject *args, PyObject *keywds)
   Py_RETURN_FALSE;
 }
 
-PyObject *level_spawn_at_thing_if_possible (PyObject *obj, PyObject *args, PyObject *keywds)
-{ TRACE_AND_INDENT();
-  char *what = nullptr;
-  uint32_t id = 0;
+PyObject *level_spawn_at_thing_if_possible(PyObject *obj, PyObject *args, PyObject *keywds) {
+  TRACE_AND_INDENT();
+  char *   what = nullptr;
+  uint32_t id   = 0;
 
-  static char *kwlist[] = {(char*) "id", (char*) "what", 0};
+  static char *kwlist[] = {(char *) "id", (char *) "what", 0};
 
-  if (!PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &id, &what)) {
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &id, &what)) {
     ERR("%s: Bad args", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
-  if (!id) {
+  if (! id) {
     ERR("%s: Missing 'id'", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
-  if (!what) {
+  if (! what) {
     ERR("%s: Missing 'what'", __FUNCTION__);
     Py_RETURN_FALSE;
   }
@@ -1019,12 +956,12 @@ PyObject *level_spawn_at_thing_if_possible (PyObject *obj, PyObject *args, PyObj
   PY_DBG("%s(%x, %s)", __FUNCTION__, id, what);
 
   auto level = game->level;
-  if (!level) {
+  if (! level) {
     Py_RETURN_FALSE;
   }
 
   auto t = level->thing_find(ThingId(id));
-  if (!t) {
+  if (! t) {
     ERR("%s: Cannot find thing %08" PRIx32 "", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
@@ -1035,26 +972,26 @@ PyObject *level_spawn_at_thing_if_possible (PyObject *obj, PyObject *args, PyObj
   Py_RETURN_FALSE;
 }
 
-PyObject *if_matches_then_kill_ (PyObject *obj, PyObject *args, PyObject *keywds)
-{ TRACE_AND_INDENT();
-  char *what = nullptr;
-  uint32_t id = 0;
-  int x = -1;
-  int y = -1;
+PyObject *if_matches_then_kill_(PyObject *obj, PyObject *args, PyObject *keywds) {
+  TRACE_AND_INDENT();
+  char *   what = nullptr;
+  uint32_t id   = 0;
+  int      x    = -1;
+  int      y    = -1;
 
-  static char *kwlist[] = {(char*) "id", (char*) "what", (char*) "x", (char*) "y", 0};
+  static char *kwlist[] = {(char *) "id", (char *) "what", (char *) "x", (char *) "y", 0};
 
-  if (!PyArg_ParseTupleAndKeywords(args, keywds, "Isii", kwlist, &id, &what, &x, &y)) {
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "Isii", kwlist, &id, &what, &x, &y)) {
     ERR("%s: Bad args", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
-  if (!id) {
+  if (! id) {
     ERR("%s: Missing 'id'", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
-  if (!what) {
+  if (! what) {
     ERR("%s: Missing 'what'", __FUNCTION__);
     Py_RETURN_FALSE;
   }
@@ -1072,12 +1009,12 @@ PyObject *if_matches_then_kill_ (PyObject *obj, PyObject *args, PyObject *keywds
   PY_DBG("%s(%x, %s, %d, %d)", __FUNCTION__, id, what, x, y);
 
   auto level = game->level;
-  if (!level) {
+  if (! level) {
     Py_RETURN_FALSE;
   }
 
   auto t = level->thing_find(ThingId(id));
-  if (!t) {
+  if (! t) {
     ERR("%s: Cannot find thing %08" PRIx32 "", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
@@ -1088,24 +1025,24 @@ PyObject *if_matches_then_kill_ (PyObject *obj, PyObject *args, PyObject *keywds
   Py_RETURN_FALSE;
 }
 
-PyObject *if_matches_ (PyObject *obj, PyObject *args, PyObject *keywds)
-{ TRACE_AND_INDENT();
-  char *what = nullptr;
-  uint32_t id = 0;
+PyObject *if_matches_(PyObject *obj, PyObject *args, PyObject *keywds) {
+  TRACE_AND_INDENT();
+  char *   what = nullptr;
+  uint32_t id   = 0;
 
-  static char *kwlist[] = {(char*) "id", (char*) "what", 0};
+  static char *kwlist[] = {(char *) "id", (char *) "what", 0};
 
-  if (!PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &id, &what)) {
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &id, &what)) {
     ERR("%s: Bad args", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
-  if (!id) {
+  if (! id) {
     ERR("%s: Missing 'id'", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
-  if (!what) {
+  if (! what) {
     ERR("%s: Missing 'what'", __FUNCTION__);
     Py_RETURN_FALSE;
   }
@@ -1113,12 +1050,12 @@ PyObject *if_matches_ (PyObject *obj, PyObject *args, PyObject *keywds)
   PY_DBG("%s(%x, %s)", __FUNCTION__, id, what);
 
   auto level = game->level;
-  if (!level) {
+  if (! level) {
     Py_RETURN_FALSE;
   }
 
   auto t = level->thing_find(ThingId(id));
-  if (!t) {
+  if (! t) {
     ERR("%s: Cannot find thing %08" PRIx32 "", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
@@ -1129,26 +1066,26 @@ PyObject *if_matches_ (PyObject *obj, PyObject *args, PyObject *keywds)
   Py_RETURN_FALSE;
 }
 
-PyObject *level_place_at (PyObject *obj, PyObject *args, PyObject *keywds)
-{ TRACE_AND_INDENT();
-  char *what = nullptr;
-  uint32_t id = 0;
-  int x = -1;
-  int y = -1;
+PyObject *level_place_at(PyObject *obj, PyObject *args, PyObject *keywds) {
+  TRACE_AND_INDENT();
+  char *   what = nullptr;
+  uint32_t id   = 0;
+  int      x    = -1;
+  int      y    = -1;
 
-  static char *kwlist[] = {(char*) "id", (char*) "what", (char*) "x", (char*) "y", 0};
+  static char *kwlist[] = {(char *) "id", (char *) "what", (char *) "x", (char *) "y", 0};
 
-  if (!PyArg_ParseTupleAndKeywords(args, keywds, "Isii", kwlist, &id, &what, &x, &y)) {
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "Isii", kwlist, &id, &what, &x, &y)) {
     ERR("%s: Bad args", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
-  if (!id) {
+  if (! id) {
     ERR("%s: Missing 'id'", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
-  if (!what) {
+  if (! what) {
     ERR("%s: Missing 'what'", __FUNCTION__);
     Py_RETURN_FALSE;
   }
@@ -1166,12 +1103,12 @@ PyObject *level_place_at (PyObject *obj, PyObject *args, PyObject *keywds)
   PY_DBG("%s(%x, %s, %d, %d)", __FUNCTION__, id, what, x, y);
 
   auto level = game->level;
-  if (!level) {
+  if (! level) {
     Py_RETURN_FALSE;
   }
 
   auto t = level->thing_find(ThingId(id));
-  if (!t) {
+  if (! t) {
     ERR("%s: Cannot find thing %08" PRIx32 "", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }

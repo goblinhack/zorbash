@@ -13,12 +13,12 @@
 #include "my_thing.h"
 #include "my_ptrcheck.h"
 
-Thingp Thing::get_top_spawned_owner (void) const
-{ TRACE_AND_INDENT();
+Thingp Thing::get_top_spawned_owner(void) const {
+  TRACE_AND_INDENT();
   auto id = get_immediate_spawned_owner_id();
   if (likely(id.ok())) {
     auto i = level->thing_find(id);
-    if (unlikely(!i)) {
+    if (unlikely(! i)) {
       return nullptr;
     }
     if (unlikely(i->get_immediate_spawned_owner_id().ok())) {
@@ -30,12 +30,12 @@ Thingp Thing::get_top_spawned_owner (void) const
   }
 }
 
-Thingp Thing::get_immediate_spawned_owner (void) const
-{ TRACE_AND_INDENT();
+Thingp Thing::get_immediate_spawned_owner(void) const {
+  TRACE_AND_INDENT();
   auto id = get_immediate_spawned_owner_id();
   if (likely(id.ok())) {
     auto i = level->thing_find(id);
-    if (unlikely(!i)) {
+    if (unlikely(! i)) {
       return nullptr;
     }
     return i;
@@ -44,8 +44,8 @@ Thingp Thing::get_immediate_spawned_owner (void) const
   }
 }
 
-void Thing::set_spawned_owner (Thingp spawner_owner)
-{ TRACE_AND_INDENT();
+void Thing::set_spawned_owner(Thingp spawner_owner) {
+  TRACE_AND_INDENT();
   if (spawner_owner) {
     verify(spawner_owner);
   }
@@ -57,17 +57,14 @@ void Thing::set_spawned_owner (Thingp spawner_owner)
     }
 
     if (spawner_owner) {
-      dbg("Will change spawner owner %s->%s",
-        old_spawner_owner->to_string().c_str(),
-        spawner_owner->to_string().c_str());
+      dbg("Will change spawner owner %s->%s", old_spawner_owner->to_string().c_str(),
+          spawner_owner->to_string().c_str());
     } else {
-      dbg("Will remove spawner owner %s",
-        old_spawner_owner->to_string().c_str());
+      dbg("Will remove spawner owner %s", old_spawner_owner->to_string().c_str());
     }
   } else {
     if (spawner_owner) {
-      dbg("Will set spawner owner to %s",
-        spawner_owner->to_string().c_str());
+      dbg("Will set spawner owner to %s", spawner_owner->to_string().c_str());
     }
   }
 
@@ -82,10 +79,10 @@ void Thing::set_spawned_owner (Thingp spawner_owner)
   }
 }
 
-void Thing::remove_spawner_owner (void)
-{ TRACE_AND_INDENT();
+void Thing::remove_spawner_owner(void) {
+  TRACE_AND_INDENT();
   auto old_spawner_owner = get_immediate_spawned_owner();
-  if (!old_spawner_owner) {
+  if (! old_spawner_owner) {
     err("No spawner owner");
     return;
   }
@@ -99,18 +96,18 @@ void Thing::remove_spawner_owner (void)
 //
 // Kill and detach all spawners from their owner
 //
-void Thing::kill_spawned (Thingp killer)
-{ TRACE_AND_INDENT();
+void Thing::kill_spawned(Thingp killer) {
+  TRACE_AND_INDENT();
   //
   // Warning killer can be nullptr - e.g. when a generator falls to
   // a new level
   //
 
-  if (!is_spawner()) {
+  if (! is_spawner()) {
     return;
   }
 
-  if (!get_spawned_count()) {
+  if (! get_spawned_count()) {
     return;
   }
 
@@ -120,7 +117,7 @@ void Thing::kill_spawned (Thingp killer)
   FOR_ALL_THING_GROUPS(group) {
     for (auto p : level->all_things[group]) {
       auto spawner = p.second;
-      auto o = spawner->get_immediate_spawned_owner();
+      auto o       = spawner->get_immediate_spawned_owner();
       if (o && (o == this)) {
         spawner->remove_spawner_owner();
         spawner->dead(killer, "its spawner died");
@@ -129,13 +126,13 @@ void Thing::kill_spawned (Thingp killer)
   }
 }
 
-void Thing::unleash_spawners_things (void)
-{ TRACE_AND_INDENT();
-  if (!is_spawner()) {
+void Thing::unleash_spawners_things(void) {
+  TRACE_AND_INDENT();
+  if (! is_spawner()) {
     return;
   }
 
-  if (!get_spawned_count()) {
+  if (! get_spawned_count()) {
     return;
   }
 
@@ -145,7 +142,7 @@ void Thing::unleash_spawners_things (void)
   FOR_ALL_THING_GROUPS(group) {
     for (auto p : level->all_things[group]) {
       auto spawner = p.second;
-      auto o = spawner->get_immediate_spawned_owner();
+      auto o       = spawner->get_immediate_spawned_owner();
       if (o && (o == this)) {
         spawner->remove_spawner_owner();
       }

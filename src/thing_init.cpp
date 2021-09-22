@@ -20,64 +20,50 @@
 #include "my_string.h"
 #include "my_traceback.h"
 
-Thingp Level::thing_new (Tpp tp, const point at)
-{
-  if (!tp) {
+Thingp Level::thing_new(Tpp tp, const point at) {
+  if (! tp) {
     err("No tp provided for thing creation");
     return nullptr;
   }
   return thing_new(tp->name(), at);
 }
 
-Thingp Level::thing_new (Tpp tp, const fpoint at)
-{
-  if (!tp) {
+Thingp Level::thing_new(Tpp tp, const fpoint at) {
+  if (! tp) {
     err("No tp provided for thing creation");
     return nullptr;
   }
   return thing_new(tp->name(), at);
 }
 
-Thingp Level::thing_new (Tpp tp, const fpoint at, const fpoint jitter)
-{
-  if (!tp) {
+Thingp Level::thing_new(Tpp tp, const fpoint at, const fpoint jitter) {
+  if (! tp) {
     err("No tp provided for thing creation");
     return nullptr;
   }
   return thing_new(tp->name(), at, jitter);
 }
 
-Thingp Level::thing_new (const std::string& tp_name, Thingp owner)
-{
-  return thing_new(tp_name, owner->mid_at);
-}
+Thingp Level::thing_new(const std::string &tp_name, Thingp owner) { return thing_new(tp_name, owner->mid_at); }
 
 static const fpoint no_jitter(0, 0);
 
-Thingp Level::thing_new (const std::string& name, const point at)
-{
+Thingp Level::thing_new(const std::string &name, const point at) {
   return thing_new(name, fpoint(at.x, at.y), no_jitter);
 }
 
-Thingp Level::thing_new (const std::string& name, const fpoint at)
-{
-  return thing_new(name, at, no_jitter);
-}
+Thingp Level::thing_new(const std::string &name, const fpoint at) { return thing_new(name, at, no_jitter); }
 
-Thingp Level::thing_new (const std::string& name, const fpoint at, const fpoint jitter)
-{
+Thingp Level::thing_new(const std::string &name, const fpoint at, const fpoint jitter) {
   auto t = new struct Thing_();
   t->init(this, name, at, jitter);
   return (t);
 }
 
-Thing::Thing_ (void)
-{
-  newptr(this, "thing");
-}
+Thing::Thing_(void) { newptr(this, "thing"); }
 
-void Thing::on_born (void)
-{ TRACE_AND_INDENT();
+void Thing::on_born(void) {
+  TRACE_AND_INDENT();
   auto on_born = tp()->on_born_do();
   if (std::empty(on_born)) {
     return;
@@ -85,28 +71,22 @@ void Thing::on_born (void)
 
   auto t = split_tokens(on_born, '.');
   if (t.size() == 2) {
-    auto mod = t[0];
-    auto fn = t[1];
+    auto        mod   = t[0];
+    auto        fn    = t[1];
     std::size_t found = fn.find("()");
     if (found != std::string::npos) {
       fn = fn.replace(found, 2, "");
     }
 
-    dbg("Call %s.%s(%s, %d, %d)",
-      mod.c_str(), fn.c_str(), to_string().c_str(), (int)mid_at.x, (int)mid_at.y);
+    dbg("Call %s.%s(%s, %d, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), (int) mid_at.x, (int) mid_at.y);
 
-    py_call_void_fn(mod.c_str(), fn.c_str(), id.id,
-            (unsigned int)mid_at.x, (unsigned int)mid_at.y);
+    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) mid_at.x, (unsigned int) mid_at.y);
   } else {
-    ERR("Bad on_born call [%s] expected mod:function, got %d elems",
-      on_born.c_str(), (int)on_born.size());
+    ERR("Bad on_born call [%s] expected mod:function, got %d elems", on_born.c_str(), (int) on_born.size());
   }
 }
 
-void Thing::init (Levelp level,
-                  const std::string& name,
-                  const fpoint born, const fpoint jitter)
-{
+void Thing::init(Levelp level, const std::string &name, const fpoint born, const fpoint jitter) {
   verify(this);
 
   this->level = level;
@@ -119,7 +99,7 @@ void Thing::init (Levelp level,
   }
 
   const auto tpp = tp_find(name);
-  if (unlikely(!tpp)) {
+  if (unlikely(! tpp)) {
     ERR("Thing template [%s] not found", name.c_str());
     return;
   }
@@ -148,7 +128,7 @@ void Thing::init (Levelp level,
   // Must do this after TP assignment or logging will fail
   //
   if (game->robot_mode) {
-    if (!pcg_random_allowed) {
+    if (! pcg_random_allowed) {
       con("Error, trying to create a thing outside of game loop");
       traceback_dump();
     }
@@ -196,7 +176,8 @@ void Thing::init (Levelp level,
 
   is_hungry = tpp->is_hunger_insatiable();
 
-  { TRACE_AND_INDENT();
+  {
+    TRACE_AND_INDENT();
     auto v = tpp->get_health_initial();
     if (unlikely(v)) {
       set_health(v);
@@ -204,7 +185,8 @@ void Thing::init (Levelp level,
     }
   }
 
-  { TRACE_AND_INDENT();
+  {
+    TRACE_AND_INDENT();
     auto v = tpp->stamina();
     if (unlikely(v)) {
       set_stamina(v);
@@ -212,7 +194,8 @@ void Thing::init (Levelp level,
     }
   }
 
-  { TRACE_AND_INDENT();
+  {
+    TRACE_AND_INDENT();
     auto v = tpp->enchant_level();
     if (unlikely(v)) {
       set_enchant(v);
@@ -220,14 +203,16 @@ void Thing::init (Levelp level,
     }
   }
 
-  { TRACE_AND_INDENT();
+  {
+    TRACE_AND_INDENT();
     auto v = tpp->enchant_max();
     if (unlikely(v)) {
       set_enchant_max(v);
     }
   }
 
-  { TRACE_AND_INDENT();
+  {
+    TRACE_AND_INDENT();
     auto v = tpp->stat_defence();
     if (unlikely(v)) {
       set_stat_defence(v);
@@ -235,133 +220,152 @@ void Thing::init (Levelp level,
     }
   }
 
-  { TRACE_AND_INDENT();
+  {
+    TRACE_AND_INDENT();
     auto v = tpp->lifespan();
     if (unlikely(v)) {
       set_lifespan(v);
     }
   }
 
-  { TRACE_AND_INDENT();
+  {
+    TRACE_AND_INDENT();
     auto v = tpp->stats01();
     if (unlikely(v)) {
       set_stats01(v);
     }
   }
 
-  { TRACE_AND_INDENT();
+  {
+    TRACE_AND_INDENT();
     auto v = tpp->stats02();
     if (unlikely(v)) {
       set_stats02(v);
     }
   }
 
-  { TRACE_AND_INDENT();
+  {
+    TRACE_AND_INDENT();
     auto v = tpp->stats03();
     if (unlikely(v)) {
       set_stats03(v);
     }
   }
 
-  { TRACE_AND_INDENT();
+  {
+    TRACE_AND_INDENT();
     auto v = tpp->stats04();
     if (unlikely(v)) {
       set_stats04(v);
     }
   }
 
-  { TRACE_AND_INDENT();
+  {
+    TRACE_AND_INDENT();
     auto v = tpp->stats05();
     if (unlikely(v)) {
       set_stats05(v);
     }
   }
 
-  { TRACE_AND_INDENT();
+  {
+    TRACE_AND_INDENT();
     auto v = tpp->stats06();
     if (unlikely(v)) {
       set_stats06(v);
     }
   }
 
-  { TRACE_AND_INDENT();
+  {
+    TRACE_AND_INDENT();
     auto v = tpp->stats07();
     if (unlikely(v)) {
       set_stats07(v);
     }
   }
 
-  { TRACE_AND_INDENT();
+  {
+    TRACE_AND_INDENT();
     auto v = tpp->stats08();
     if (unlikely(v)) {
       set_stats08(v);
     }
   }
 
-  { TRACE_AND_INDENT();
+  {
+    TRACE_AND_INDENT();
     auto v = tpp->stats09();
     if (unlikely(v)) {
       set_stats09(v);
     }
   }
 
-  { TRACE_AND_INDENT();
+  {
+    TRACE_AND_INDENT();
     auto v = tpp->stats10();
     if (unlikely(v)) {
       set_stats10(v);
     }
   }
 
-  { TRACE_AND_INDENT();
+  {
+    TRACE_AND_INDENT();
     auto v = tpp->stats11();
     if (unlikely(v)) {
       set_stats11(v);
     }
   }
 
-  { TRACE_AND_INDENT();
+  {
+    TRACE_AND_INDENT();
     auto v = tpp->stats12();
     if (unlikely(v)) {
       set_stats12(v);
     }
   }
 
-  { TRACE_AND_INDENT();
+  {
+    TRACE_AND_INDENT();
     auto v = tpp->stat_constitution();
     if (unlikely(v)) {
       set_stat_constitution(v);
     }
   }
 
-  { TRACE_AND_INDENT();
+  {
+    TRACE_AND_INDENT();
     auto v = tpp->stat_attack();
     if (unlikely(v)) {
       set_stat_attack(v);
     }
   }
 
-  { TRACE_AND_INDENT();
+  {
+    TRACE_AND_INDENT();
     auto v = tpp->stat_constitution();
     if (unlikely(v)) {
       set_stat_constitution(v);
     }
   }
 
-  { TRACE_AND_INDENT();
+  {
+    TRACE_AND_INDENT();
     auto v = tpp->stats17();
     if (unlikely(v)) {
       set_stats17(v);
     }
   }
 
-  { TRACE_AND_INDENT();
+  {
+    TRACE_AND_INDENT();
     auto v = tpp->throw_distance();
     if (unlikely(v)) {
       set_throw_distance(v);
     }
   }
 
-  { TRACE_AND_INDENT();
+  {
+    TRACE_AND_INDENT();
     auto v = tpp->stat_strength();
     if (unlikely(v)) {
       set_stat_strength(v);
@@ -410,20 +414,18 @@ void Thing::init (Levelp level,
   init_lights();
 
   auto on_birth = on_birth_do();
-  if (!std::empty(on_birth)) {
+  if (! std::empty(on_birth)) {
     auto t = split_tokens(on_birth, '.');
     if (t.size() == 2) {
-      auto mod = t[0];
-      auto fn = t[1];
+      auto        mod   = t[0];
+      auto        fn    = t[1];
       std::size_t found = fn.find("()");
       if (found != std::string::npos) {
         fn = fn.replace(found, 2, "");
       }
-      py_call_void_fn(mod.c_str(), fn.c_str(),
-              id.id, (unsigned int)mid_at.x, (unsigned int)mid_at.y);
+      py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) mid_at.x, (unsigned int) mid_at.y);
     } else {
-      ERR("Bad on_birth call [%s] expected mod:function, got %d elems",
-        on_birth.c_str(), (int)on_birth.size());
+      ERR("Bad on_birth call [%s] expected mod:function, got %d elems", on_birth.c_str(), (int) on_birth.size());
     }
   }
 
@@ -511,11 +513,11 @@ void Thing::init (Levelp level,
   }
 }
 
-void Thing::reinit (void)
-{ TRACE_AND_INDENT();
+void Thing::reinit(void) {
+  TRACE_AND_INDENT();
   verify(this);
   const auto tpp = tp_or_update();
-  if (unlikely(!tpp)) {
+  if (unlikely(! tpp)) {
     ERR("No tp found for reinitialized thing ID %x tp_id %d", id.id, tp_id);
     return;
   }
@@ -529,15 +531,14 @@ void Thing::reinit (void)
 
   if (unlikely(is_player())) {
     if (level->player && (level->player != this)) {
-      DIE("Player exists in multiple places on map, %f, %f and %f, %f",
-        level->player->mid_at.x, level->player->mid_at.y,
-        mid_at.x, mid_at.y);
+      DIE("Player exists in multiple places on map, %f, %f and %f, %f", level->player->mid_at.x,
+          level->player->mid_at.y, mid_at.x, mid_at.y);
       return;
     }
     level->player = this;
   }
 
-  point new_at((int)mid_at.x, (int)mid_at.y);
+  point new_at((int) mid_at.x, (int) mid_at.y);
   if ((new_at.x >= MAP_WIDTH) || (new_at.y >= MAP_HEIGHT)) {
     DIE("New thing is oob at %d, %d", new_at.x, new_at.y);
     return;

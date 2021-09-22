@@ -10,20 +10,20 @@
 #include "my_tile.h"
 #include "my_thing.h"
 
-void Thing::stamina_boost (int v)
-{ TRACE_AND_INDENT();
-  if (!v) {
+void Thing::stamina_boost(int v) {
+  TRACE_AND_INDENT();
+  if (! v) {
     return;
   }
 
   auto max_stamina = get_stamina_max();
-  if (!max_stamina) {
+  if (! max_stamina) {
     return;
   }
 
   auto old_stamina = get_stamina();
   auto new_stamina = old_stamina + v;
-  new_stamina = std::min(new_stamina, max_stamina);
+  new_stamina      = std::min(new_stamina, max_stamina);
   set_stamina(new_stamina);
 
   if (new_stamina >= max_stamina) {

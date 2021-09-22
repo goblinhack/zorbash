@@ -15,19 +15,17 @@
 #include "my_array_bounds_check.h"
 #include "my_sound.h"
 
-bool Thing::drop (Thingp what, Thingp target, bool stolen)
-{ TRACE_AND_INDENT();
+bool Thing::drop(Thingp what, Thingp target, bool stolen) {
+  TRACE_AND_INDENT();
   if (stolen) {
     if (target) {
-      dbg("Drop (being stolen) %s at %s", what->to_string().c_str(),
-        target->to_string().c_str());
+      dbg("Drop (being stolen) %s at %s", what->to_string().c_str(), target->to_string().c_str());
     } else {
       dbg("Drop (being stolen) %s", what->to_string().c_str());
     }
   } else {
     if (target) {
-      dbg("Drop %s at %s", what->to_string().c_str(),
-        target->to_string().c_str());
+      dbg("Drop %s at %s", what->to_string().c_str(), target->to_string().c_str());
     } else {
       dbg("Drop %s", what->to_string().c_str());
     }
@@ -41,22 +39,16 @@ bool Thing::drop (Thingp what, Thingp target, bool stolen)
     //
     // Check we own it
     //
-    auto top_owner = what->get_top_owner();
+    auto top_owner      = what->get_top_owner();
     auto existing_owner = what->get_immediate_owner();
     if (top_owner != this) {
       if (existing_owner) {
-        log("Immediate owner of %s is %s",
-          what->to_string().c_str(),
-          top_owner->to_string().c_str());
-        log("Top owner of %s is %s",
-          what->to_string().c_str(),
-          what->get_top_owner()->to_string().c_str());
-        err("Attempt to drop %s which is not carried and owned by %s",
-          what->to_string().c_str(),
-          existing_owner->to_string().c_str());
+        log("Immediate owner of %s is %s", what->to_string().c_str(), top_owner->to_string().c_str());
+        log("Top owner of %s is %s", what->to_string().c_str(), what->get_top_owner()->to_string().c_str());
+        err("Attempt to drop %s which is not carried and owned by %s", what->to_string().c_str(),
+            existing_owner->to_string().c_str());
       } else {
-        err("Attempt to drop %s which is not carried and not owned",
-          what->to_string().c_str());
+        err("Attempt to drop %s which is not carried and not owned", what->to_string().c_str());
       }
       return false;
     }
@@ -79,15 +71,13 @@ bool Thing::drop (Thingp what, Thingp target, bool stolen)
       //
       // Hide as the particle drop will reveal it
       //
-      dbg("Defer making dropped player item visible: %s",
-        what->to_string().c_str());
+      dbg("Defer making dropped player item visible: %s", what->to_string().c_str());
       what->hide();
     } else {
       //
       // No particle?
       //
-      dbg("Make dropped player item visible: %s",
-        what->to_string().c_str());
+      dbg("Make dropped player item visible: %s", what->to_string().c_str());
       what->visible();
     }
   } else {
@@ -103,7 +93,7 @@ bool Thing::drop (Thingp what, Thingp target, bool stolen)
 
   monstp->carrying.remove(what->id);
 
-  if (!stolen) {
+  if (! stolen) {
     //
     // Prevent too soon re-carry
     //
@@ -113,7 +103,8 @@ bool Thing::drop (Thingp what, Thingp target, bool stolen)
   if (is_bag_item_container() || is_player()) {
     dbg("Update bag with drop of: %s", what->to_string().c_str());
     bag_remove(what);
-    while (bag_compress()) { }
+    while (bag_compress()) {
+    }
   }
 
   if (is_player()) {
@@ -139,19 +130,17 @@ bool Thing::drop (Thingp what, Thingp target, bool stolen)
 //
 // An item in between bags
 //
-bool Thing::drop_into_ether (Thingp what)
-{ TRACE_AND_INDENT();
+bool Thing::drop_into_ether(Thingp what) {
+  TRACE_AND_INDENT();
   dbg("Dropping %s into the ether", what->to_string().c_str());
   TRACE_AND_INDENT();
   auto existing_owner = what->get_immediate_owner();
   if (existing_owner != this) {
     if (existing_owner) {
-      err("Attempt to drop %s into the ether which is not carried and owned by %s",
-        what->to_string().c_str(),
-        existing_owner->to_string().c_str());
+      err("Attempt to drop %s into the ether which is not carried and owned by %s", what->to_string().c_str(),
+          existing_owner->to_string().c_str());
     } else {
-      err("Attempt to drop %s into the ether which is not carried and not owned",
-        what->to_string().c_str());
+      err("Attempt to drop %s into the ether which is not carried and not owned", what->to_string().c_str());
     }
     return false;
   }
@@ -179,7 +168,8 @@ bool Thing::drop_into_ether (Thingp what)
 
   dbg("Update bag with drop of: %s", what->to_string().c_str());
   bag_remove(what);
-  while (bag_compress()) { }
+  while (bag_compress()) {
+  }
 
   what->remove_owner();
   monstp->carrying.remove(what->id);
@@ -193,8 +183,8 @@ bool Thing::drop_into_ether (Thingp what)
 //
 // An item in between bags
 //
-bool Thing::drop_from_ether (Thingp what)
-{ TRACE_AND_INDENT();
+bool Thing::drop_from_ether(Thingp what) {
+  TRACE_AND_INDENT();
   auto player = game->level->player;
 
   dbg("Drop from ether %s", what->to_string().c_str());
@@ -216,23 +206,18 @@ bool Thing::drop_from_ether (Thingp what)
   point e = (player->last_blit_tl + player->last_blit_br) / 2;
 
   auto w = game->in_transit_item;
-  if (!w) {
+  if (! w) {
     ERR("No in transit item");
     return false;
   }
 
   auto s = (w->abs_tl + w->abs_br) / 2;
-  s.x = (int)(((float)game->config.game_pix_width / (float)TERM_WIDTH) * (float)s.x);
-  s.y = (int)(((float)game->config.game_pix_height / (float)TERM_HEIGHT) * (float)s.y);
+  s.x    = (int) (((float) game->config.game_pix_width / (float) TERM_WIDTH) * (float) s.x);
+  s.y    = (int) (((float) game->config.game_pix_height / (float) TERM_HEIGHT) * (float) s.y);
 
-  game->level->new_external_particle(
-        id,
-        s, e,
-        isize(TILE_WIDTH, TILE_HEIGHT),
-        PARTICLE_SPEED_MS,
-        tile_index_to_tile(what->tile_curr),
-        (is_dir_br() || is_dir_right() || is_dir_tr()),
-        true /* make_visible_at_end */);
+  game->level->new_external_particle(id, s, e, isize(TILE_WIDTH, TILE_HEIGHT), PARTICLE_SPEED_MS,
+                                     tile_index_to_tile(what->tile_curr),
+                                     (is_dir_br() || is_dir_right() || is_dir_tr()), true /* make_visible_at_end */);
 
   dbg("Dropped from ether %s", what->to_string().c_str());
 
@@ -244,21 +229,21 @@ bool Thing::drop_from_ether (Thingp what)
   return true;
 }
 
-bool Thing::drop (Thingp what)
-{ TRACE_AND_INDENT();
+bool Thing::drop(Thingp what) {
+  TRACE_AND_INDENT();
   return drop(what, nullptr);
 }
 
-void Thing::drop_all (void)
-{ TRACE_AND_INDENT();
-  if (!monstp) {
+void Thing::drop_all(void) {
+  TRACE_AND_INDENT();
+  if (! monstp) {
     return;
   }
 
-  while (!monstp->carrying.empty()) {
+  while (! monstp->carrying.empty()) {
     auto id = *monstp->carrying.begin();
-    auto t = level->thing_find(id);
-    if (!t) {
+    auto t  = level->thing_find(id);
+    if (! t) {
       return;
     }
     drop(t);

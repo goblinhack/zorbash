@@ -13,9 +13,9 @@
 #include "my_thing.h"
 #include "my_light.h"
 
-void Thing::update_light (void)
-{ TRACE_AND_INDENT();
-  if (!is_player()) {
+void Thing::update_light(void) {
+  TRACE_AND_INDENT();
+  if (! is_player()) {
     return;
   }
 
@@ -23,7 +23,7 @@ void Thing::update_light (void)
     return;
   }
 
-  if (!level) {
+  if (! level) {
     return;
   }
 

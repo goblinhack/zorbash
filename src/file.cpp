@@ -5,7 +5,7 @@
 //
 
 #include <stdio.h>
-#include <string.h> // do not remove
+#include <string.h>  // do not remove
 #include <strings.h> // do not remove
 #include <sys/stat.h>
 #include <unistd.h>
@@ -20,10 +20,10 @@
 static unsigned char *file_io_read_if_exists(const char *filename, int *out_len);
 static unsigned char *file_io_read(const char *filename, int *len);
 
-unsigned char *file_load (const char *filename, int *outlen)
-{ TRACE_AND_INDENT();
+unsigned char *file_load(const char *filename, int *outlen) {
+  TRACE_AND_INDENT();
   unsigned char *out;
-  char *alt_filename;
+  char *         alt_filename;
 
   alt_filename = 0;
 
@@ -33,8 +33,7 @@ unsigned char *file_load (const char *filename, int *outlen)
    */
   if (file_exists(filename)) {
     if (strstr(filename, "data/")) {
-      if (file_exists_and_is_newer_than(filename,
-                        EXEC_FULL_PATH_AND_NAME)) {
+      if (file_exists_and_is_newer_than(filename, EXEC_FULL_PATH_AND_NAME)) {
         out = file_io_read_if_exists(filename, outlen);
         if (out) {
           FILE_DBG("file %s (newer than exec)", filename);
@@ -70,8 +69,7 @@ unsigned char *file_load (const char *filename, int *outlen)
     alt_filename = strprepend(filename, EXEC_DIR);
 
     if (file_exists(alt_filename)) {
-      if (file_exists_and_is_newer_than(alt_filename,
-                        EXEC_FULL_PATH_AND_NAME)) {
+      if (file_exists_and_is_newer_than(alt_filename, EXEC_FULL_PATH_AND_NAME)) {
         out = file_io_read_if_exists(alt_filename, outlen);
         if (out) {
           FILE_DBG("file %s", filename);
@@ -82,8 +80,7 @@ unsigned char *file_load (const char *filename, int *outlen)
         }
       }
 
-      if (file_exists_and_is_newer_than(alt_filename,
-                      ".o/file.o")) {
+      if (file_exists_and_is_newer_than(alt_filename, ".o/file.o")) {
         out = file_io_read_if_exists(alt_filename, outlen);
         if (out) {
           FILE_DBG("file %s", filename);
@@ -94,8 +91,7 @@ unsigned char *file_load (const char *filename, int *outlen)
         }
       }
 
-      if (file_exists_and_is_newer_than(alt_filename,
-                      "src/.o/file.o")) {
+      if (file_exists_and_is_newer_than(alt_filename, "src/.o/file.o")) {
         out = file_io_read_if_exists(alt_filename, outlen);
         if (out) {
           FILE_DBG("file %s", filename);
@@ -110,8 +106,7 @@ unsigned char *file_load (const char *filename, int *outlen)
 
   auto r = ramdisk_load(filename, outlen);
   if (r) {
-    FILE_LOG("Read (ramdisk) %s, %dMb, %d bytes",
-         filename, *outlen / (1024 * 1024), *outlen);
+    FILE_LOG("Read (ramdisk) %s, %dMb, %d bytes", filename, *outlen / (1024 * 1024), *outlen);
     return r;
   }
 
@@ -177,16 +172,15 @@ unsigned char *file_load (const char *filename, int *outlen)
   return (0);
 }
 
-unsigned char *file_io_read (const char *filename, int *out_len)
-{ TRACE_AND_INDENT();
+unsigned char *file_io_read(const char *filename, int *out_len) {
+  TRACE_AND_INDENT();
   unsigned char *buffer;
-  FILE *file;
-  int len;
+  FILE *         file;
+  int            len;
 
   file = fopen(filename, "rb");
-  if (!file) {
-    fprintf(MY_STDERR, "Failed to open file \"%s\" for reading: %s\n",
-        filename, strerror(errno));
+  if (! file) {
+    fprintf(MY_STDERR, "Failed to open file \"%s\" for reading: %s\n", filename, strerror(errno));
     return (0);
   }
 
@@ -194,39 +188,33 @@ unsigned char *file_io_read (const char *filename, int *out_len)
    * Get the file size.
    */
   if (fseek(file, 0, SEEK_END)) {
-    fprintf(MY_STDERR, "Failed to seek end of file \"%s\": %s\n",
-        filename, strerror(errno));
+    fprintf(MY_STDERR, "Failed to seek end of file \"%s\": %s\n", filename, strerror(errno));
     fclose(file);
     return (0);
   }
 
-  len = (uint)ftell(file);
+  len = (uint) ftell(file);
   if (len == -1) {
-    fprintf(MY_STDERR, "Failed to get size of file \"%s\": %s\n",
-        filename, strerror(errno));
+    fprintf(MY_STDERR, "Failed to get size of file \"%s\": %s\n", filename, strerror(errno));
     fclose(file);
     return (0);
   }
 
   if (fseek(file, 0, SEEK_SET)) {
-    fprintf(MY_STDERR, "Failed to seek begin of file \"%s\": %s\n",
-        filename, strerror(errno));
+    fprintf(MY_STDERR, "Failed to seek begin of file \"%s\": %s\n", filename, strerror(errno));
     fclose(file);
     return (0);
   }
 
-  buffer = (unsigned char *)mymalloc(len + sizeof((char)'\0'),
-                     "file read");
-  if (!buffer) {
-    fprintf(MY_STDERR, "Failed to alloc mem for file \"%s\": %s\n",
-        filename, strerror(errno));
+  buffer = (unsigned char *) mymalloc(len + sizeof((char) '\0'), "file read");
+  if (! buffer) {
+    fprintf(MY_STDERR, "Failed to alloc mem for file \"%s\": %s\n", filename, strerror(errno));
     fclose(file);
     return (0);
   }
 
-  if (!fread(buffer, len, 1, file)) {
-    fprintf(MY_STDERR, "Failed to read file \"%s\": %s\n",
-        filename, strerror(errno));
+  if (! fread(buffer, len, 1, file)) {
+    fprintf(MY_STDERR, "Failed to read file \"%s\": %s\n", filename, strerror(errno));
     fclose(file);
     return (0);
   }
@@ -242,15 +230,14 @@ unsigned char *file_io_read (const char *filename, int *out_len)
   return (buffer);
 }
 
-int file_write (const char *filename, unsigned char *buffer, int len)
-{ TRACE_AND_INDENT();
-  FILE *file;
+int file_write(const char *filename, unsigned char *buffer, int len) {
+  TRACE_AND_INDENT();
+  FILE *  file;
   uint8_t rc;
 
   file = fopen(filename, "w");
-  if (!file) {
-    fprintf(MY_STDERR, "Failed to open file \"%s\" for writing: %s\n",
-        filename, strerror(errno));
+  if (! file) {
+    fprintf(MY_STDERR, "Failed to open file \"%s\" for writing: %s\n", filename, strerror(errno));
     return (-1);
   }
 
@@ -261,16 +248,14 @@ int file_write (const char *filename, unsigned char *buffer, int len)
   /*
    * Check written one object.
    */
-  if (!rc) {
-    fprintf(MY_STDERR, "Failed to write file \"%s\": %s\n",
-        filename, strerror(errno));
+  if (! rc) {
+    fprintf(MY_STDERR, "Failed to write file \"%s\": %s\n", filename, strerror(errno));
     fclose(file);
     return (-1);
   }
 
   if (ferror(file)) {
-    fprintf(MY_STDERR, "Error writing to write file \"%s\": %s\n",
-        filename, strerror(errno));
+    fprintf(MY_STDERR, "Error writing to write file \"%s\": %s\n", filename, strerror(errno));
     fclose(file);
     return (-1);
   }
@@ -282,12 +267,12 @@ int file_write (const char *filename, unsigned char *buffer, int len)
 /*
  * Does the requested file exist?
  */
-uint8_t file_exists (const char *filename)
-{ TRACE_AND_INDENT();
+uint8_t file_exists(const char *filename) {
+  TRACE_AND_INDENT();
   struct stat buf;
 
   if (stat(filename, &buf) >= 0) {
-    if (S_ISDIR(buf. st_mode)) {
+    if (S_ISDIR(buf.st_mode)) {
       return (0);
     }
 
@@ -296,8 +281,8 @@ uint8_t file_exists (const char *filename)
   return (0);
 }
 
-unsigned char *file_io_read_if_exists (const char *filename, int *out_len)
-{ TRACE_AND_INDENT();
+unsigned char *file_io_read_if_exists(const char *filename, int *out_len) {
+  TRACE_AND_INDENT();
 #if 0
   unsigned char *ret;
   char *mz_filename;
@@ -335,12 +320,12 @@ unsigned char *file_io_read_if_exists (const char *filename, int *out_len)
 /*
  * How large is the file?
  */
-int file_size (const char *filename)
-{ TRACE_AND_INDENT();
+int file_size(const char *filename) {
+  TRACE_AND_INDENT();
   struct stat buf;
 
   if (stat(filename, &buf) >= 0) {
-    return (int)(buf.st_size);
+    return (int) (buf.st_size);
   }
 
   return (-1);
@@ -349,13 +334,13 @@ int file_size (const char *filename)
 /*
  * Does the requested file exist?
  */
-uint8_t file_non_zero_size_exists (const char *filename)
-{ TRACE_AND_INDENT();
-  if (!file_exists(filename)) {
+uint8_t file_non_zero_size_exists(const char *filename) {
+  TRACE_AND_INDENT();
+  if (! file_exists(filename)) {
     return (0);
   }
 
-  if (!file_size(filename)) {
+  if (! file_size(filename)) {
     return (0);
   }
 
@@ -365,9 +350,9 @@ uint8_t file_non_zero_size_exists (const char *filename)
 /*
  * Remove the file if it exists.
  */
-uint8_t file_unlink (const char *filename)
-{ TRACE_AND_INDENT();
-  if (!file_exists(filename)) {
+uint8_t file_unlink(const char *filename) {
+  TRACE_AND_INDENT();
+  if (! file_exists(filename)) {
     return (0);
   }
 
@@ -379,8 +364,8 @@ uint8_t file_unlink (const char *filename)
 /*
  * Modification time.
  */
-double file_age (const char *filename)
-{ TRACE_AND_INDENT();
+double file_age(const char *filename) {
+  TRACE_AND_INDENT();
   struct stat buf;
 
   if (stat(filename, &buf) < 0) {
@@ -395,12 +380,11 @@ double file_age (const char *filename)
 /*
  * If the first filename newer than the second ?
  */
-uint8_t file_exists_and_is_newer_than (const char *filename1,
-                     const char *filename2)
-{ TRACE_AND_INDENT();
+uint8_t file_exists_and_is_newer_than(const char *filename1, const char *filename2) {
+  TRACE_AND_INDENT();
   struct stat buf1;
   struct stat buf2;
-  double delta;
+  double      delta;
 
   if (stat(filename1, &buf1) < 0) {
     return false;

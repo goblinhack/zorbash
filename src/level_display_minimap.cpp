@@ -14,9 +14,8 @@
 #include "my_sdl.h"
 #include "my_ptrcheck.h"
 
-void Level::display_minimap (void)
-{
-  if (unlikely(!game->config.gfx_minimap)) {
+void Level::display_minimap(void) {
+  if (unlikely(! game->config.gfx_minimap)) {
     return;
   }
 
@@ -43,15 +42,13 @@ void Level::display_minimap (void)
   // Over minimap?
   //
   auto old_minimap_over = game->minimap_over;
-  if ((mouse_x >= tlx) && (mouse_x <= brx) &&
-    (mouse_y >= tly) && (mouse_y <= bry)) {
-    game->minimap_over =
-      make_point(
-        ((float)(mouse_x - tlx) / (brx - tlx)) * MAP_WIDTH,
-        ((float)(mouse_y - tly) / (bry - tly)) * MAP_HEIGHT);
+  if ((mouse_x >= tlx) && (mouse_x <= brx) && (mouse_y >= tly) && (mouse_y <= bry)) {
+    game->minimap_over = make_point(((float) (mouse_x - tlx) / (brx - tlx)) * MAP_WIDTH,
+                                    ((float) (mouse_y - tly) / (bry - tly)) * MAP_HEIGHT);
 
     fpoint to(game->minimap_over.x, game->minimap_over.y);
-    if (cursor) { TRACE_AND_INDENT();
+    if (cursor) {
+      TRACE_AND_INDENT();
       verify(cursor);
       cursor_at = to;
       if (cursor_at != cursor_old) {

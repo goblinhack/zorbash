@@ -13,12 +13,12 @@
 #include "my_monst.h"
 #include "my_random.h"
 
-int Thing::item_count_including_charges (Tpp tp)
-{ TRACE_AND_INDENT();
+int Thing::item_count_including_charges(Tpp tp) {
+  TRACE_AND_INDENT();
   auto count = 0;
   for (auto oid : monstp->carrying) {
     auto o = level->thing_find(oid);
-    if (!o) {
+    if (! o) {
       continue;
     }
 
@@ -38,12 +38,12 @@ int Thing::item_count_including_charges (Tpp tp)
   return count;
 }
 
-int Thing::item_count_excluding_charges (Tpp tp)
-{ TRACE_AND_INDENT();
+int Thing::item_count_excluding_charges(Tpp tp) {
+  TRACE_AND_INDENT();
   auto count = 0;
   for (auto oid : monstp->carrying) {
     auto o = level->thing_find(oid);
-    if (!o) {
+    if (! o) {
       continue;
     }
 
@@ -59,8 +59,8 @@ int Thing::item_count_excluding_charges (Tpp tp)
   return count;
 }
 
-void Thing::move_carried_items (void)
-{ TRACE_AND_INDENT();
+void Thing::move_carried_items(void) {
+  TRACE_AND_INDENT();
   //
   // Light source follows the thing.
   //
@@ -103,9 +103,9 @@ void Thing::move_carried_items (void)
   // If something moves on the water, make a ripple
   //
   if (is_monst() || is_player()) {
-    if (!is_floating()) {
-      if (level->is_shallow_water((int)mid_at.x, (int)mid_at.y) &&
-        !level->is_ripple((int)mid_at.x, (int)mid_at.y)) {
+    if (! is_floating()) {
+      if (level->is_shallow_water((int) mid_at.x, (int) mid_at.y) &&
+          ! level->is_ripple((int) mid_at.x, (int) mid_at.y)) {
         fpoint at(mid_at.x, mid_at.y);
         dbg("Causes ripples");
         if (game->robot_mode) {
@@ -125,7 +125,8 @@ void Thing::move_carried_items (void)
   }
 
   auto on_fire_anim_id = get_on_fire_anim_id();
-  if (on_fire_anim_id.ok()) { TRACE_AND_INDENT();
+  if (on_fire_anim_id.ok()) {
+    TRACE_AND_INDENT();
     auto w = level->thing_find(on_fire_anim_id);
     if (w) {
       w->move_to(mid_at);
@@ -134,8 +135,8 @@ void Thing::move_carried_items (void)
   }
 }
 
-void Thing::move_carried_items_immediately (void)
-{ TRACE_AND_INDENT();
+void Thing::move_carried_items_immediately(void) {
+  TRACE_AND_INDENT();
   //
   // Light source follows the thing.
   //
@@ -175,7 +176,8 @@ void Thing::move_carried_items_immediately (void)
   }
 
   auto on_fire_anim_id = get_on_fire_anim_id();
-  if (on_fire_anim_id.ok()) { TRACE_AND_INDENT();
+  if (on_fire_anim_id.ok()) {
+    TRACE_AND_INDENT();
     auto w = level->thing_find(on_fire_anim_id);
     if (w) {
       w->move_to_immediately(mid_at);
@@ -184,13 +186,13 @@ void Thing::move_carried_items_immediately (void)
   }
 }
 
-bool Thing::is_carrying_item (void)
-{ TRACE_AND_INDENT();
-  if (!monstp) {
+bool Thing::is_carrying_item(void) {
+  TRACE_AND_INDENT();
+  if (! monstp) {
     return false;
   }
 
-  if (monstp->carrying.size()){
+  if (monstp->carrying.size()) {
     return true;
   }
 
@@ -202,19 +204,19 @@ bool Thing::is_carrying_item (void)
   return false;
 }
 
-std::vector<Thingp> Thing::get_item_list (void)
-{ TRACE_AND_INDENT();
+std::vector<Thingp> Thing::get_item_list(void) {
+  TRACE_AND_INDENT();
   std::vector<Thingp> tr;
   dbg("Carried items:");
   TRACE_AND_INDENT();
-  if (!monstp) {
+  if (! monstp) {
     dbg("Not carrying");
     return tr;
   }
 
-  for (const auto& item : monstp->carrying) {
+  for (const auto &item : monstp->carrying) {
     auto t = level->thing_find(item.id);
-    if (!t) {
+    if (! t) {
       continue;
     }
 

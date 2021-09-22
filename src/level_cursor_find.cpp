@@ -17,18 +17,14 @@
 #include "my_ptrcheck.h"
 #include "my_sdl.h"
 
-void Level::cursor_find_on_visible_things (const int16_t minx, const int16_t miny,
-                                           const int16_t maxx, const int16_t maxy)
-{ TRACE_AND_INDENT();
-  if ((game->state == Game::STATE_MOVING_ITEMS) ||
-    (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
-    (game->state == Game::STATE_COLLECTING_ITEMS) ||
-    (game->state == Game::STATE_WIELDING_ITEMS) ||
-    (game->state == Game::STATE_ENCHANTING_ITEMS) ||
-    (game->state == Game::STATE_SAVE_MENU) ||
-    (game->state == Game::STATE_LOAD_MENU) ||
-    (game->state == Game::STATE_QUIT_MENU) ||
-    (game->state == Game::STATE_CHOOSING_SKILLS)) {
+void Level::cursor_find_on_visible_things(const int16_t minx, const int16_t miny, const int16_t maxx,
+                                          const int16_t maxy) {
+  TRACE_AND_INDENT();
+  if ((game->state == Game::STATE_MOVING_ITEMS) || (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
+      (game->state == Game::STATE_COLLECTING_ITEMS) || (game->state == Game::STATE_WIELDING_ITEMS) ||
+      (game->state == Game::STATE_ENCHANTING_ITEMS) || (game->state == Game::STATE_SAVE_MENU) ||
+      (game->state == Game::STATE_LOAD_MENU) || (game->state == Game::STATE_QUIT_MENU) ||
+      (game->state == Game::STATE_CHOOSING_SKILLS)) {
     return;
   }
 
@@ -43,13 +39,15 @@ void Level::cursor_find_on_visible_things (const int16_t minx, const int16_t min
     // Don't move onto lava unless double click
     //
     auto to = make_fpoint(game->minimap_over);
-    if (!wid_mouse_two_clicks) {
-      if (cursor) { TRACE_AND_INDENT();
+    if (! wid_mouse_two_clicks) {
+      if (cursor) {
+        TRACE_AND_INDENT();
         FOR_ALL_THINGS(this, t, to.x, to.y) {
           if (t->is_cursor_can_hover_over_x2_click()) {
             goto done;
           }
-        } FOR_ALL_THINGS_END()
+        }
+        FOR_ALL_THINGS_END()
       }
     }
     cursor->mid_at = to;
@@ -57,7 +55,7 @@ void Level::cursor_find_on_visible_things (const int16_t minx, const int16_t min
     //
     // What tile are we over?
     //
-    auto old = cursor_found;
+    auto old     = cursor_found;
     cursor_found = false;
     for (auto y = miny; y < maxy; y++) {
       for (auto x = minx; x < maxx; x++) {
@@ -66,7 +64,8 @@ void Level::cursor_find_on_visible_things (const int16_t minx, const int16_t min
           if (cursor_found) {
             goto done;
           }
-        } FOR_ALL_THINGS_END();
+        }
+        FOR_ALL_THINGS_END();
       }
     }
     cursor_found = old;

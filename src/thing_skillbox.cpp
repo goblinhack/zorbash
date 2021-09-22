@@ -16,28 +16,28 @@
 #include "my_vector_bounds_check.h"
 #include "my_ui.h"
 
-bool Thing::skillbox_id_insert (Thingp what)
-{ TRACE_AND_INDENT();
+bool Thing::skillbox_id_insert(Thingp what) {
+  TRACE_AND_INDENT();
   dbg("Skillbox insert %s", what->to_string().c_str());
   TRACE_AND_INDENT();
   auto player = level->player;
-  if (!player) {
+  if (! player) {
     return false;
   }
 
-  if (!is_player()) {
+  if (! is_player()) {
     return false;
   }
 
-  if (!monstp) {
+  if (! monstp) {
     return false;
   }
 
-  int free_slot = -1;
+  int  free_slot      = -1;
   auto skillbox_items = player->monstp->skillbox_id.size();
   for (auto i = 0U; i < skillbox_items; i++) {
     auto tp_id = monstp->skillbox_id[i];
-    if (!tp_id) {
+    if (! tp_id) {
       if (free_slot == -1) {
         free_slot = i;
       }
@@ -45,7 +45,7 @@ bool Thing::skillbox_id_insert (Thingp what)
     }
 
     auto tpp = tp_find(tp_id);
-    if (!tpp) {
+    if (! tpp) {
       continue;
     }
 
@@ -56,10 +56,8 @@ bool Thing::skillbox_id_insert (Thingp what)
         //
       } else {
         wid_skillbox_init();
-        if ((game->state != Game::STATE_CHOOSING_TARGET) &&
-          (game->state != Game::STATE_MOVING_ITEMS) &&
-          (game->state != Game::STATE_WIELDING_ITEMS) &&
-          (game->state != Game::STATE_COLLECTING_ITEMS)) {
+        if ((game->state != Game::STATE_CHOOSING_TARGET) && (game->state != Game::STATE_MOVING_ITEMS) &&
+            (game->state != Game::STATE_WIELDING_ITEMS) && (game->state != Game::STATE_COLLECTING_ITEMS)) {
           wid_thing_info_fini();
         }
         return true;
@@ -70,11 +68,10 @@ bool Thing::skillbox_id_insert (Thingp what)
   int item_slot = -1;
   if (free_slot != -1) {
     monstp->skillbox_id[free_slot] = what->tp_id;
-    item_slot = free_slot;
+    item_slot                      = free_slot;
   } else {
     if (skillbox_items >= UI_ACTIONBAR_MAX_ITEMS) {
-      TOPCON("No space to carry %s which is not carried.",
-          what->text_the().c_str());
+      TOPCON("No space to carry %s which is not carried.", what->text_the().c_str());
       return false;
     }
 
@@ -85,30 +82,28 @@ bool Thing::skillbox_id_insert (Thingp what)
   game->previous_slot = item_slot;
 
   wid_skillbox_init();
-  if ((game->state != Game::STATE_CHOOSING_TARGET) &&
-    (game->state != Game::STATE_MOVING_ITEMS) &&
-    (game->state != Game::STATE_WIELDING_ITEMS) &&
-    (game->state != Game::STATE_COLLECTING_ITEMS)) {
+  if ((game->state != Game::STATE_CHOOSING_TARGET) && (game->state != Game::STATE_MOVING_ITEMS) &&
+      (game->state != Game::STATE_WIELDING_ITEMS) && (game->state != Game::STATE_COLLECTING_ITEMS)) {
     wid_thing_info_fini();
   }
   level->skillbox_describe(item_slot);
   return true;
 }
 
-bool Thing::skillbox_id_remove (Thingp what)
-{ TRACE_AND_INDENT();
+bool Thing::skillbox_id_remove(Thingp what) {
+  TRACE_AND_INDENT();
   dbg("Skillbox remove %s", what->to_string().c_str());
   TRACE_AND_INDENT();
   auto player = level->player;
-  if (!player) {
+  if (! player) {
     return false;
   }
 
-  if (!is_player()) {
+  if (! is_player()) {
     return false;
   }
 
-  if (!monstp) {
+  if (! monstp) {
     return false;
   }
 
@@ -120,11 +115,11 @@ bool Thing::skillbox_id_remove (Thingp what)
   auto skillbox_items = player->monstp->skillbox_id.size();
   for (auto i = 0U; i < skillbox_items; i++) {
     auto tp_id = monstp->skillbox_id[i];
-    if (!tp_id) {
+    if (! tp_id) {
       continue;
     }
     auto tpp = tp_find(tp_id);
-    if (!tpp) {
+    if (! tpp) {
       continue;
     }
 
@@ -134,21 +129,18 @@ bool Thing::skillbox_id_remove (Thingp what)
       dbg("Remove slot");
       monstp->skillbox_id[i] = 0;
 
-      if (!monstp->skillbox_id.size()) {
+      if (! monstp->skillbox_id.size()) {
         game->skillbox_highlight_slot = {};
       } else {
-        while (game->skillbox_highlight_slot >=
-          monstp->skillbox_id.size()) {
+        while (game->skillbox_highlight_slot >= monstp->skillbox_id.size()) {
           game->skillbox_highlight_slot--;
         }
       }
 
       level->skillbox_describe(game->skillbox_highlight_slot);
       wid_skillbox_init();
-      if ((game->state != Game::STATE_CHOOSING_TARGET) &&
-        (game->state != Game::STATE_MOVING_ITEMS) &&
-        (game->state != Game::STATE_WIELDING_ITEMS) &&
-        (game->state != Game::STATE_COLLECTING_ITEMS)) {
+      if ((game->state != Game::STATE_CHOOSING_TARGET) && (game->state != Game::STATE_MOVING_ITEMS) &&
+          (game->state != Game::STATE_WIELDING_ITEMS) && (game->state != Game::STATE_COLLECTING_ITEMS)) {
         wid_thing_info_fini();
       }
       return true;
@@ -157,34 +149,34 @@ bool Thing::skillbox_id_remove (Thingp what)
   return false;
 }
 
-Thingp Level::skillbox_get (const uint32_t slot)
-{ TRACE_AND_INDENT();
+Thingp Level::skillbox_get(const uint32_t slot) {
+  TRACE_AND_INDENT();
   dbg("Skillbox get slot %d", slot);
   TRACE_AND_INDENT();
-  if (!player) {
+  if (! player) {
     ERR("No player");
     return nullptr;
   }
 
   auto monstp = player->monstp;
-  if (!monstp) {
+  if (! monstp) {
     ERR("No monstp for player");
     return nullptr;
   }
 
   if (slot >= monstp->skillbox_id.size()) {
-    LOG("Slot %d out of range, max %d", slot, (int)monstp->skillbox_id.size());
+    LOG("Slot %d out of range, max %d", slot, (int) monstp->skillbox_id.size());
     return nullptr;
   }
 
   auto tp_id = get(monstp->skillbox_id, slot);
-  if (!tp_id) {
+  if (! tp_id) {
     LOG("Slot %d has no tp", slot);
     return nullptr;
   }
 
   auto tpp = tp_find(tp_id);
-  if (!tpp) {
+  if (! tpp) {
     LOG("Slot %d has no valid tp", slot);
     return nullptr;
   }
@@ -195,29 +187,23 @@ Thingp Level::skillbox_get (const uint32_t slot)
     auto o = thing_find(oid);
     if (o) {
       if (o->tp() == tpp) {
-        IF_DEBUG2 {
-          o->log("Got skillbox item %s", tpp->name().c_str());
-        }
+        IF_DEBUG2 { o->log("Got skillbox item %s", tpp->name().c_str()); }
         return o;
       }
     }
   }
 
-  LOG("Slot %d has skill tp %s that is not carried", slot,
-    tpp->name().c_str());
+  LOG("Slot %d has skill tp %s that is not carried", slot, tpp->name().c_str());
   return nullptr;
 }
 
-Thingp Level::skillbox_get (void)
-{
-  return skillbox_get(game->skillbox_highlight_slot);
-}
+Thingp Level::skillbox_get(void) { return skillbox_get(game->skillbox_highlight_slot); }
 
-bool Level::skillbox_over (const uint32_t slot)
-{ TRACE_AND_INDENT();
+bool Level::skillbox_over(const uint32_t slot) {
+  TRACE_AND_INDENT();
   LOG("Skillbox: Over skillbox slot %d", slot);
   TRACE_AND_INDENT();
-  if (!player) {
+  if (! player) {
     LOG("Skillbox: Ignore; no player");
     return false;
   }
@@ -228,7 +214,7 @@ bool Level::skillbox_over (const uint32_t slot)
   }
 
   auto oid = get(player->monstp->skillbox_id, slot);
-  if (!oid) {
+  if (! oid) {
     LOG("Skillbox: Ignore; nothing at that slot");
     return false;
   }
@@ -239,27 +225,25 @@ bool Level::skillbox_over (const uint32_t slot)
     LOG("Skillbox: Request to remake skillbox due to highlight");
     game->request_remake_skillbox = true;
     game->skillbox_highlight_slot = slot;
-    what = skillbox_describe(slot);
+    what                          = skillbox_describe(slot);
   } else {
     what = skillbox_describe(game->skillbox_highlight_slot);
   }
 
-  if (!what) {
+  if (! what) {
     LOG("Skillbox: No skill chosen");
     return false;
   }
 
-  IF_DEBUG2 {
-    what->log("Over skillbox item");
-  }
+  IF_DEBUG2 { what->log("Over skillbox item"); }
   return true;
 }
 
-bool Level::skillbox_chosen (const uint32_t slot)
-{ TRACE_AND_INDENT();
+bool Level::skillbox_chosen(const uint32_t slot) {
+  TRACE_AND_INDENT();
   LOG("Skillbox: Chosen skillbox slot %d", slot);
   TRACE_AND_INDENT();
-  if (!player) {
+  if (! player) {
     return false;
   }
 
@@ -272,7 +256,7 @@ bool Level::skillbox_chosen (const uint32_t slot)
   game->request_remake_skillbox = true;
 
   auto oid = get(player->monstp->skillbox_id, slot);
-  if (!oid) {
+  if (! oid) {
     LOG("Skillbox: No skill at slot %d", slot);
     return false;
   }
@@ -280,20 +264,18 @@ bool Level::skillbox_chosen (const uint32_t slot)
   Thingp what;
   if (slot != game->skillbox_highlight_slot) {
     game->skillbox_highlight_slot = slot;
-    what = skillbox_describe(slot);
+    what                          = skillbox_describe(slot);
   } else {
     what = skillbox_describe(game->skillbox_highlight_slot);
   }
 
-  if (!what) {
+  if (! what) {
     LOG("Skillbox: No thing at slot %d", slot);
     return false;
   }
 
-  what->is_activated = !what->is_activated;
-  IF_DEBUG2 {
-    what->log("Chosen skillbox item");
-  }
+  what->is_activated = ! what->is_activated;
+  IF_DEBUG2 { what->log("Chosen skillbox item"); }
 
   if (what->is_activated) {
     TOPCON("You activate %s skill.", what->text_the().c_str());
@@ -304,15 +286,13 @@ bool Level::skillbox_chosen (const uint32_t slot)
   return true;
 }
 
-Thingp Level::skillbox_describe (const uint32_t slot)
-{ TRACE_AND_INDENT();
+Thingp Level::skillbox_describe(const uint32_t slot) {
+  TRACE_AND_INDENT();
   LOG("Skillbox: Describe slot %d", slot);
   TRACE_AND_INDENT();
   auto what = skillbox_get(slot);
   if (what) {
-    IF_DEBUG2 {
-      what->log("Skillbox: Describe slot %d", slot);
-    }
+    IF_DEBUG2 { what->log("Skillbox: Describe slot %d", slot); }
     what->describe_when_hovered_over_in_rightbar();
   } else {
     LOG("Skillbox: Describe slot %d => nothing there", slot);

@@ -15,17 +15,19 @@
 #include "my_thing.h"
 #include "my_array_bounds_check.h"
 
-bool Thing::ai_obstacle_for_me (const point &p)
-{ TRACE_AND_INDENT();
+bool Thing::ai_obstacle_for_me(const point &p) {
+  TRACE_AND_INDENT();
   //
   // Avoid threats and treat them as obstacles
   //
-  for (auto& t : get(level->all_things_ptr_at[THING_GROUP_ALL], p.x, p.y)) {
-    if (!t) {
+  for (auto &t : get(level->all_things_ptr_at[THING_GROUP_ALL], p.x, p.y)) {
+    if (! t) {
       continue;
     }
 
-    if (t->is_the_grid) { continue; }
+    if (t->is_the_grid) {
+      continue;
+    }
 
     //
     // "true" on collision
@@ -41,8 +43,7 @@ bool Thing::ai_obstacle_for_me (const point &p)
 //
 // Return TRUE if this is something that should physically block
 //
-bool Thing::collision_obstacle (Thingp it)
-{
+bool Thing::collision_obstacle(Thingp it) {
   auto p = point(it->mid_at.x, it->mid_at.y);
 
   if (it == this) {
@@ -52,10 +53,7 @@ bool Thing::collision_obstacle (Thingp it)
   //
   // Skip things we cannot collide with
   //
-  if (it->is_hidden ||
-    it->is_falling ||
-    it->is_jumping ||
-    it->is_changing_level) {
+  if (it->is_hidden || it->is_falling || it->is_jumping || it->is_changing_level) {
     return false;
   }
 
@@ -85,13 +83,13 @@ bool Thing::collision_obstacle (Thingp it)
       return false;
     }
 
-    if (!it->is_open) {
+    if (! it->is_open) {
       return true;
     }
   }
 
   if (it->is_obs_destructable()) {
-    if (!it->is_open) {
+    if (! it->is_open) {
       return true;
     }
   }
@@ -110,20 +108,20 @@ bool Thing::collision_obstacle (Thingp it)
     // Allow cleaners to engulf/swallow attack
     //
     if (is_engulfer()) {
-      if (!it->is_engulfer()) {
+      if (! it->is_engulfer()) {
         return false;
       }
     }
 
     if (level->is_corpse(p)) {
       if (monst_count > 2) {
-    //
+        //
         // Too many monsts (including one corpse)
-    //
-    return true;
+        //
+        return true;
       }
       if (monst_count == 2) {
-        if (it->is_alive_monst() && !it->is_ethereal()) {
+        if (it->is_alive_monst() && ! it->is_ethereal()) {
           //
           // Cannot pass through
           //
@@ -132,13 +130,13 @@ bool Thing::collision_obstacle (Thingp it)
       }
     } else {
       if (monst_count > 1) {
-    //
+        //
         // Too many monsts (including one corpse)
-    //
-    return true;
+        //
+        return true;
       }
       if (monst_count == 1) {
-        if (it->is_alive_monst() && !it->is_ethereal()) {
+        if (it->is_alive_monst() && ! it->is_ethereal()) {
           //
           // Cannot pass through
           //
@@ -148,7 +146,7 @@ bool Thing::collision_obstacle (Thingp it)
     }
 
     if (it->is_chasm()) {
-      if (!is_floating()) {
+      if (! is_floating()) {
         return true;
       }
     }
@@ -175,8 +173,7 @@ bool Thing::collision_obstacle (Thingp it)
 //
 // Return TRUE if this is something that should block AI
 //
-bool Thing::ai_obstacle (Thingp it)
-{
+bool Thing::ai_obstacle(Thingp it) {
   if (it == this) {
     return false;
   }
@@ -184,10 +181,7 @@ bool Thing::ai_obstacle (Thingp it)
   //
   // Skip things we cannot collide with
   //
-  if (it->is_hidden ||
-    it->is_falling ||
-    it->is_jumping ||
-    it->is_changing_level) {
+  if (it->is_hidden || it->is_falling || it->is_jumping || it->is_changing_level) {
     return false;
   }
 
@@ -228,21 +222,19 @@ bool Thing::ai_obstacle (Thingp it)
   //
   // Allow movement through open doors only
   //
-  if (it->is_brazier() ||
-    it->is_barrel() ||
-    it->is_obs_wall_or_door()) {
+  if (it->is_brazier() || it->is_barrel() || it->is_obs_wall_or_door()) {
     if (is_able_to_walk_through_walls()) {
       return false;
     }
 
-    if (!it->is_open) {
+    if (! it->is_open) {
       return true;
     }
   }
 
   if (is_monst() || (is_player() && game->robot_mode)) {
     if (it->is_chasm()) {
-      if (!is_floating()) {
+      if (! is_floating()) {
         return true;
       }
     }

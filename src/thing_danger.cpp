@@ -11,8 +11,8 @@
 #include "my_thing.h"
 #include "my_thing_template.h"
 
-int Tp::get_danger_level (void)
-{ TRACE_AND_INDENT();
+int Tp::get_danger_level(void) {
+  TRACE_AND_INDENT();
   int danger_level = 0;
 
   danger_level = get_health_initial() / 10;
@@ -27,19 +27,19 @@ int Tp::get_danger_level (void)
     danger_level *= 2;
   }
   if (attack_shove()) {
-    danger_level ++;
+    danger_level++;
   }
   if (is_acid()) {
-    danger_level ++;
+    danger_level++;
   }
   if (is_hunger_insatiable()) {
-    danger_level ++;
+    danger_level++;
   }
   if (is_fire()) {
-    danger_level ++;
+    danger_level++;
   }
   if (is_lava()) {
-    danger_level ++;
+    danger_level++;
   }
   if (is_poison()) {
     danger_level += is_poison();
@@ -58,20 +58,19 @@ int Tp::get_danger_level (void)
   }
 
   danger_level += std::max(get_damage_melee_dice().max_roll(),
-            std::max(get_damage_poison_dice().max_roll(),
-            std::max(get_damage_swallow_dice().max_roll(),
-                 get_damage_bite_dice().max_roll())));
+                           std::max(get_damage_poison_dice().max_roll(),
+                                    std::max(get_damage_swallow_dice().max_roll(), get_damage_bite_dice().max_roll())));
 
   //
   // Don't include crush damage as it is non typical
   //
 
-  //CON("level %d", danger_level);
+  // CON("level %d", danger_level);
   return danger_level;
 }
 
-int Thing::get_danger_initial_level (void)
-{ TRACE_AND_INDENT();
+int Thing::get_danger_initial_level(void) {
+  TRACE_AND_INDENT();
   int danger_level = 0;
 
   danger_level = get_health_initial() / 10;
@@ -86,25 +85,25 @@ int Thing::get_danger_initial_level (void)
     danger_level *= 2;
   }
   if (attack_shove()) {
-    danger_level ++;
+    danger_level++;
   }
   if (is_carrying_item()) {
-    danger_level ++;
+    danger_level++;
   }
   if (is_acid()) {
-    danger_level ++;
+    danger_level++;
   }
   if (is_hunger_insatiable()) {
-    danger_level ++;
+    danger_level++;
   }
   if (is_poison()) {
-    danger_level ++;
+    danger_level++;
   }
   if (is_fire()) {
-    danger_level ++;
+    danger_level++;
   }
   if (is_lava()) {
-    danger_level ++;
+    danger_level++;
   }
   if (is_poison()) {
     danger_level += is_poison();
@@ -142,8 +141,8 @@ int Thing::get_danger_initial_level (void)
   return danger_level;
 }
 
-int Thing::get_danger_current_level (void)
-{ TRACE_AND_INDENT();
+int Thing::get_danger_current_level(void) {
+  TRACE_AND_INDENT();
   int danger_level = 0;
 
   danger_level = get_health() / 10;
@@ -158,25 +157,25 @@ int Thing::get_danger_current_level (void)
     danger_level *= 2;
   }
   if (attack_shove()) {
-    danger_level ++;
+    danger_level++;
   }
   if (is_carrying_item()) {
-    danger_level ++;
+    danger_level++;
   }
   if (is_acid()) {
-    danger_level ++;
+    danger_level++;
   }
   if (is_hunger_insatiable()) {
-    danger_level ++;
+    danger_level++;
   }
   if (is_poison()) {
-    danger_level ++;
+    danger_level++;
   }
   if (is_fire()) {
-    danger_level ++;
+    danger_level++;
   }
   if (is_lava()) {
-    danger_level ++;
+    danger_level++;
   }
   if (is_poison()) {
     danger_level += is_poison();
@@ -210,8 +209,7 @@ int Thing::get_danger_current_level (void)
   return danger_level;
 }
 
-int Thing::is_dangerous (Thingp it)
-{
+int Thing::is_dangerous(Thingp it) {
   if (is_fearless()) {
     return false;
   }
@@ -234,10 +232,9 @@ int Thing::is_dangerous (Thingp it)
   return b > a;
 }
 
-const std::string Thing::get_danger_level_str (Thingp it)
-{
-  auto a = get_danger_current_level();
-  auto b = it->get_danger_current_level();
+const std::string Thing::get_danger_level_str(Thingp it) {
+  auto a     = get_danger_current_level();
+  auto b     = it->get_danger_current_level();
   auto delta = b - a;
 
   if (delta > 20) {
@@ -257,15 +254,13 @@ const std::string Thing::get_danger_level_str (Thingp it)
   }
 }
 
-int Thing::get_danger_current_level (Thingp it)
-{
+int Thing::get_danger_current_level(Thingp it) {
   int a = get_danger_current_level();
   int b = it->get_danger_current_level();
   return b - a;
 }
 
-int Thing::get_danger_initial_level (Thingp it)
-{
+int Thing::get_danger_initial_level(Thingp it) {
   int a = get_danger_initial_level();
   int b = it->get_danger_initial_level();
   // con("danger level %d vs %s %d", a, it->to_string().c_str(), b);

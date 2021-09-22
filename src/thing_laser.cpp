@@ -12,11 +12,11 @@
 #include "my_thing.h"
 #include "my_tile.h"
 
-bool Thing::laser_choose_target (Thingp item)
-{ TRACE_AND_INDENT();
+bool Thing::laser_choose_target(Thingp item) {
+  TRACE_AND_INDENT();
   dbg("Trying to target a laser with: %s", item->to_string().c_str());
 
-  if (!target_select(item)) {
+  if (! target_select(item)) {
     return false;
   }
 
@@ -25,35 +25,34 @@ bool Thing::laser_choose_target (Thingp item)
   return target_select(item);
 }
 
-Thingp Thing::laser_fire_at (const std::string &laser_name, Thingp target)
-{ TRACE_AND_INDENT();
+Thingp Thing::laser_fire_at(const std::string &laser_name, Thingp target) {
+  TRACE_AND_INDENT();
   if (laser_name == "") {
     die("No laser name");
   }
 
   auto start = last_blit_at;
-  auto end = target->last_blit_at;
+  auto end   = target->last_blit_at;
 
-  if (!start.x && !start.y) {
+  if (! start.x && ! start.y) {
     return nullptr;
   }
 
-  if (!end.x && !end.y) {
+  if (! end.x && ! end.y) {
     return nullptr;
   }
 
   auto laser = level->thing_new(laser_name, mid_at);
-  if (!laser) {
+  if (! laser) {
     return nullptr;
   }
 
   laser->set_owner(this);
   laser->move_to_immediately(target->mid_at);
 
-  dbg("Firing named laser with: %s at %s", laser->to_string().c_str(),
-    target->to_string().c_str());
+  dbg("Firing named laser with: %s at %s", laser->to_string().c_str(), target->to_string().c_str());
 
-  if (!laser->is_laser()) {
+  if (! laser->is_laser()) {
     if (is_player()) {
       TOPCON("I don't know how to zap %s.", laser->text_the().c_str());
       game->tick_begin("player tried to use something they could not");

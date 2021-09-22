@@ -12,13 +12,11 @@
 #include "my_array_bounds_check.h"
 #include "my_main.h"
 
-void dmap_print (const Dmap *d, point at, point start, point end)
-{
+void dmap_print(const Dmap *d, point at, point start, point end) {
   uint8_t x;
   uint8_t y;
 
-  LOG("DMAP: start %d,%d end %d %d at %d,%d",
-    start.x, start.y, end.x, end.y, at.x, at.y);
+  LOG("DMAP: start %d,%d end %d %d at %d,%d", start.x, start.y, end.x, end.y, at.x, at.y);
 
   for (y = start.y; y < end.y; y++) {
     std::string debug;
@@ -47,8 +45,7 @@ void dmap_print (const Dmap *d, point at, point start, point end)
   }
 }
 
-void dmap_print (const Dmap *d)
-{
+void dmap_print(const Dmap *d) {
   uint8_t x;
   uint8_t y;
 
@@ -77,21 +74,20 @@ void dmap_print (const Dmap *d)
   }
 }
 
-void dmap_process (Dmap *D, point tl, point br)
-{
-  uint8_t x;
-  uint8_t y;
-  uint8_t a;
-  uint8_t b;
-  uint8_t c;
-  uint8_t d;
-  uint8_t *e;
-  uint8_t f;
-  uint8_t g;
-  uint8_t h;
-  uint8_t i;
-  uint8_t lowest;
-  uint8_t changed;
+void dmap_process(Dmap *D, point tl, point br) {
+  uint8_t                                                       x;
+  uint8_t                                                       y;
+  uint8_t                                                       a;
+  uint8_t                                                       b;
+  uint8_t                                                       c;
+  uint8_t                                                       d;
+  uint8_t *                                                     e;
+  uint8_t                                                       f;
+  uint8_t                                                       g;
+  uint8_t                                                       h;
+  uint8_t                                                       i;
+  uint8_t                                                       lowest;
+  uint8_t                                                       changed;
   static std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> orig;
   static std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> orig_valid;
   static std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> valid;
@@ -142,15 +138,15 @@ void dmap_process (Dmap *D, point tl, point br)
     for (x = minx + 1; x < maxx - 1; x++) {
       set(orig, x, y, get(D->val, x, y));
 
-      e = &getref(D->val, x , y);
+      e = &getref(D->val, x, y);
       if (*e != DMAP_IS_WALL) {
-        set(valid, x, y, (uint8_t)1);
-        set(orig_valid, x, y, (uint8_t)1);
+        set(valid, x, y, (uint8_t) 1);
+        set(orig_valid, x, y, (uint8_t) 1);
         continue;
       }
 
-      set(valid, x, y, (uint8_t)0);
-      set(orig_valid, x, y, (uint8_t)0);
+      set(valid, x, y, (uint8_t) 0);
+      set(orig_valid, x, y, (uint8_t) 0);
     }
   }
 
@@ -159,52 +155,48 @@ void dmap_process (Dmap *D, point tl, point br)
 
     for (y = miny + 1; y < maxy - 1; y++) {
       for (x = minx + 1; x < maxx - 1; x++) {
-        if (!get(orig_valid, x, y)) {
+        if (! get(orig_valid, x, y)) {
           continue;
         }
 
-        if (!get(valid, x, y)) {
+        if (! get(valid, x, y)) {
           continue;
         }
 
-        e = &getref(D->val, x  , y);
+        e = &getref(D->val, x, y);
 
         //
         // Avoid diagonal moves.
         //
-        if ((get(D->val, x-1, y) == DMAP_IS_WALL) ||
-          (get(D->val, x, y-1) == DMAP_IS_WALL)) {
+        if ((get(D->val, x - 1, y) == DMAP_IS_WALL) || (get(D->val, x, y - 1) == DMAP_IS_WALL)) {
           a = DMAP_IS_WALL;
         } else {
-          a = get(D->val, x-1, y-1);
+          a = get(D->val, x - 1, y - 1);
         }
 
-        b = get(D->val, x  , y-1);
+        b = get(D->val, x, y - 1);
 
-        if ((get(D->val, x+1, y) == DMAP_IS_WALL) ||
-          (get(D->val, x, y-1) == DMAP_IS_WALL)) {
+        if ((get(D->val, x + 1, y) == DMAP_IS_WALL) || (get(D->val, x, y - 1) == DMAP_IS_WALL)) {
           c = DMAP_IS_WALL;
         } else {
-          c = get(D->val, x+1, y-1);
+          c = get(D->val, x + 1, y - 1);
         }
 
-        d = get(D->val, x-1, y);
-        f = get(D->val, x+1, y);
+        d = get(D->val, x - 1, y);
+        f = get(D->val, x + 1, y);
 
-        if ((get(D->val, x-1, y) == DMAP_IS_WALL) ||
-          (get(D->val, x, y+1) == DMAP_IS_WALL)) {
+        if ((get(D->val, x - 1, y) == DMAP_IS_WALL) || (get(D->val, x, y + 1) == DMAP_IS_WALL)) {
           g = DMAP_IS_WALL;
         } else {
-          g = get(D->val, x-1, y+1);
+          g = get(D->val, x - 1, y + 1);
         }
 
-        h = get(D->val, x  , y+1);
+        h = get(D->val, x, y + 1);
 
-        if ((get(D->val, x+1, y) == DMAP_IS_WALL) ||
-          (get(D->val, x, y+1) == DMAP_IS_WALL)) {
+        if ((get(D->val, x + 1, y) == DMAP_IS_WALL) || (get(D->val, x, y + 1) == DMAP_IS_WALL)) {
           i = DMAP_IS_WALL;
         } else {
-          i = get(D->val, x+1, y+1);
+          i = get(D->val, x + 1, y + 1);
         }
 
         if (a < b) {
@@ -213,15 +205,27 @@ void dmap_process (Dmap *D, point tl, point br)
           lowest = b;
         }
 
-        if (c < lowest) { lowest = c; }
-        if (d < lowest) { lowest = d; }
-        if (f < lowest) { lowest = f; }
-        if (g < lowest) { lowest = g; }
-        if (h < lowest) { lowest = h; }
-        if (i < lowest) { lowest = i; }
+        if (c < lowest) {
+          lowest = c;
+        }
+        if (d < lowest) {
+          lowest = d;
+        }
+        if (f < lowest) {
+          lowest = f;
+        }
+        if (g < lowest) {
+          lowest = g;
+        }
+        if (h < lowest) {
+          lowest = h;
+        }
+        if (i < lowest) {
+          lowest = i;
+        }
 
         if (*e - lowest >= 2) {
-          *e = lowest + 1;
+          *e      = lowest + 1;
           changed = true;
         }
       }
@@ -236,7 +240,7 @@ void dmap_process (Dmap *D, point tl, point br)
       uint8_t o = get(orig, x, y);
       if (o != DMAP_IS_WALL) {
         if (o > DMAP_IS_PASSABLE) {
-          o = o - DMAP_IS_PASSABLE;
+          o         = o - DMAP_IS_PASSABLE;
           uint8_t n = get(D->val, x, y);
           if (o + n < DMAP_IS_PASSABLE) {
             incr(D->val, x, y, o);
@@ -247,8 +251,7 @@ void dmap_process (Dmap *D, point tl, point br)
   }
 }
 
-void dmap_process (Dmap *D)
-{
+void dmap_process(Dmap *D) {
 #if 0
   //
   // Sanity check the dmap does not take too much time
@@ -269,8 +272,7 @@ void dmap_process (Dmap *D)
 #endif
 }
 
-static bool is_obs_wall_or_door_at (const Dmap *D, int x, int y)
-{
+static bool is_obs_wall_or_door_at(const Dmap *D, int x, int y) {
   if ((x >= MAP_WIDTH) || (y >= MAP_HEIGHT) || (x < 0) || (y < 0)) {
     return true;
   }
@@ -285,8 +287,7 @@ static bool is_obs_wall_or_door_at (const Dmap *D, int x, int y)
 //
 // Given 3 points, can we do a shortcut diagonal move?
 //
-bool dmap_can_i_move_diagonally (const Dmap *D, point a, point b, point c)
-{
+bool dmap_can_i_move_diagonally(const Dmap *D, point a, point b, point c) {
   auto px = a.x;
   auto py = a.y;
 
@@ -296,76 +297,64 @@ bool dmap_can_i_move_diagonally (const Dmap *D, point a, point b, point c)
   auto mx = c.x;
   auto my = c.y;
 
-  if (px - 1 == mx && py + 1 == my && px == nx && py + 1 == ny &&
-    ! is_obs_wall_or_door_at(D, px - 1, py)) {
+  if (px - 1 == mx && py + 1 == my && px == nx && py + 1 == ny && ! is_obs_wall_or_door_at(D, px - 1, py)) {
     return true;
   }
 
-  if (px - 1 == mx && py + 1 == my && px - 1 == nx && py == ny &&
-    ! is_obs_wall_or_door_at(D, px, py + 1)) {
+  if (px - 1 == mx && py + 1 == my && px - 1 == nx && py == ny && ! is_obs_wall_or_door_at(D, px, py + 1)) {
     return true;
   }
 
-  if (px + 1 == mx && py + 1 == my && px == nx && py + 1 == ny &&
-    ! is_obs_wall_or_door_at(D, px + 1, py)) {
+  if (px + 1 == mx && py + 1 == my && px == nx && py + 1 == ny && ! is_obs_wall_or_door_at(D, px + 1, py)) {
     return true;
   }
 
-  if (px + 1 == mx && py + 1 == my && px + 1 == nx && py == ny &&
-    ! is_obs_wall_or_door_at(D, px, py + 1)) {
+  if (px + 1 == mx && py + 1 == my && px + 1 == nx && py == ny && ! is_obs_wall_or_door_at(D, px, py + 1)) {
     return true;
   }
 
-  if (px - 1 == mx && py - 1 == my && px == nx && py - 1 == ny &&
-    ! is_obs_wall_or_door_at(D, px - 1, py)) {
+  if (px - 1 == mx && py - 1 == my && px == nx && py - 1 == ny && ! is_obs_wall_or_door_at(D, px - 1, py)) {
     return true;
   }
 
-  if (px - 1 == mx && py - 1 == my && px - 1 == nx && py == ny &&
-    ! is_obs_wall_or_door_at(D, px, py - 1)) {
+  if (px - 1 == mx && py - 1 == my && px - 1 == nx && py == ny && ! is_obs_wall_or_door_at(D, px, py - 1)) {
     return true;
   }
 
-  if (px + 1 == mx && py - 1 == my && px == nx && py - 1 == ny &&
-    ! is_obs_wall_or_door_at(D, px + 1, py)) {
+  if (px + 1 == mx && py - 1 == my && px == nx && py - 1 == ny && ! is_obs_wall_or_door_at(D, px + 1, py)) {
     return true;
   }
 
-  if (px + 1 == mx && py - 1 == my && px + 1 == nx && py == ny && \
-    ! is_obs_wall_or_door_at(D, px, py - 1)) {
+  if (px + 1 == mx && py - 1 == my && px + 1 == nx && py == ny && ! is_obs_wall_or_door_at(D, px, py - 1)) {
     return true;
   }
   return false;
 }
 
-static std::vector<point> dmap_solve_ (const Dmap *D,
-                                       const point start,
-                                       const std::vector<point> &all_deltas,
-                                       bool allow_diagonals)
-{
+static std::vector<point> dmap_solve_(const Dmap *D, const point start, const std::vector<point> &all_deltas,
+                                      bool allow_diagonals) {
   std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> walked = {};
-  std::vector<point> out = { };
-  auto at = start;
+  std::vector<point>                                  out    = {};
+  auto                                                at     = start;
 
-  for (;/*ever*/;) {
+  for (; /*ever*/;) {
     auto x = at.x;
     auto y = at.y;
 
-    if (unlikely((x >= MAP_WIDTH - 1) || (y >= MAP_HEIGHT - 1) ||
-           (x < 1) || (y < 1))) {
+    if (unlikely((x >= MAP_WIDTH - 1) || (y >= MAP_HEIGHT - 1) || (x < 1) || (y < 1))) {
       return out;
     }
 
     uint8_t lowest = get(D->val, x, y);
-    bool got = false;
-    point best;
+    bool    got    = false;
+    point   best;
 
     if (get(D->val, x, y) == DMAP_IS_WALL) {
       return out;
     }
 
-    for (const auto& d : all_deltas) {
-      auto t = at + d;
+    for (const auto &d : all_deltas) {
+      auto t  = at + d;
       auto tx = t.x;
       auto ty = t.y;
 
@@ -388,25 +377,21 @@ static std::vector<point> dmap_solve_ (const Dmap *D,
       if (allow_diagonals) {
         if (d.x < 0) {
           if (d.y < 0) {
-            if ((get(D->val, at.x - 1, at.y) == DMAP_IS_WALL) ||
-              (get(D->val, at.x, at.y - 1) == DMAP_IS_WALL)) {
+            if ((get(D->val, at.x - 1, at.y) == DMAP_IS_WALL) || (get(D->val, at.x, at.y - 1) == DMAP_IS_WALL)) {
               continue;
             }
           } else if (d.y > 0) {
-            if ((get(D->val, at.x - 1, at.y) == DMAP_IS_WALL) ||
-              (get(D->val, at.x, at.y + 1) == DMAP_IS_WALL)) {
+            if ((get(D->val, at.x - 1, at.y) == DMAP_IS_WALL) || (get(D->val, at.x, at.y + 1) == DMAP_IS_WALL)) {
               continue;
             }
           }
         } else if (d.x > 0) {
           if (d.y < 0) {
-            if ((get(D->val, at.x + 1, at.y) == DMAP_IS_WALL) ||
-              (get(D->val, at.x, at.y - 1) == DMAP_IS_WALL)) {
+            if ((get(D->val, at.x + 1, at.y) == DMAP_IS_WALL) || (get(D->val, at.x, at.y - 1) == DMAP_IS_WALL)) {
               continue;
             }
           } else if (d.y > 0) {
-            if ((get(D->val, at.x + 1, at.y) == DMAP_IS_WALL) ||
-              (get(D->val, at.x, at.y + 1) == DMAP_IS_WALL)) {
+            if ((get(D->val, at.x + 1, at.y) == DMAP_IS_WALL) || (get(D->val, at.x, at.y + 1) == DMAP_IS_WALL)) {
               continue;
             }
           }
@@ -415,13 +400,13 @@ static std::vector<point> dmap_solve_ (const Dmap *D,
 
       int c = get(D->val, tx, ty);
       if (c <= lowest) {
-        got = true;
-        best = t;
+        got    = true;
+        best   = t;
         lowest = c;
       }
     }
 
-    if (!got) {
+    if (! got) {
       return (out);
     }
 
@@ -432,28 +417,19 @@ static std::vector<point> dmap_solve_ (const Dmap *D,
   return (out);
 }
 
-std::vector<point> dmap_solve_allow_diagonal (const Dmap *D, const point start)
-{
+std::vector<point> dmap_solve_allow_diagonal(const Dmap *D, const point start) {
   static const std::vector<point> all_deltas = {
-    point(-1, -1),
-    point( 1, -1),
-    point(-1,  1),
-    point( 1,  1),
-    point(0, -1),
-    point(-1, 0),
-    point(1, 0),
-    point(0, 1),
+      point(-1, -1), point(1, -1), point(-1, 1), point(1, 1), point(0, -1), point(-1, 0), point(1, 0), point(0, 1),
   };
   return (dmap_solve_(D, start, all_deltas, true));
 }
 
-std::vector<point> dmap_solve (const Dmap *D, const point start)
-{
+std::vector<point> dmap_solve(const Dmap *D, const point start) {
   static const std::vector<point> all_deltas = {
-    point(0, -1),
-    point(-1, 0),
-    point(1, 0),
-    point(0, 1),
+      point(0, -1),
+      point(-1, 0),
+      point(1, 0),
+      point(0, 1),
   };
   return (dmap_solve_(D, start, all_deltas, false));
 }

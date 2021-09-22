@@ -21,22 +21,20 @@
 
 static Widp wid_keyboard_choose_player_name;
 
-static void selected (Widp w, const std::wstring& text)
-{
+static void selected(Widp w, const std::wstring &text) {
   wid_destroy(&wid_keyboard_choose_player_name);
   g_opt_player_name = wstring_to_string(text);
   game->save_config();
   game->main_menu_select();
 }
 
-static void cancelled (Widp w, const std::wstring& text)
-{
+static void cancelled(Widp w, const std::wstring &text) {
   wid_destroy(&wid_keyboard_choose_player_name);
   game->main_menu_select();
 }
 
-void Game::choose_player_name_select (void)
-{ TRACE_AND_INDENT();
+void Game::choose_player_name_select(void) {
+  TRACE_AND_INDENT();
   CON("Choose player name menu");
 
   wid_rightbar_fini();
@@ -44,7 +42,6 @@ void Game::choose_player_name_select (void)
   wid_skillbox_fini();
   wid_thing_info_fini();
 
-  wid_keyboard_choose_player_name =
-    wid_keyboard(string_to_wstring(g_opt_player_name),
-           L"Choose a name for your hapless adventurer", selected, cancelled);
+  wid_keyboard_choose_player_name = wid_keyboard(string_to_wstring(g_opt_player_name),
+                                                 L"Choose a name for your hapless adventurer", selected, cancelled);
 }

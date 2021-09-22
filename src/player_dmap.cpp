@@ -15,10 +15,10 @@
 //
 // Return the dmap distance. DMAP_IS_WALL if not reachable.
 //
-int Thing::distance_to_player (void)
-{ TRACE_AND_INDENT();
+int Thing::distance_to_player(void) {
+  TRACE_AND_INDENT();
   auto player = game->level->player;
-  if (!player) {
+  if (! player) {
     return DMAP_IS_WALL;
   }
 
@@ -29,12 +29,12 @@ int Thing::distance_to_player (void)
     return DMAP_IS_WALL;
   }
 
-  return get(&game->level->dmap_to_player.val, (int)mid_at.x, (int)mid_at.y);
+  return get(&game->level->dmap_to_player.val, (int) mid_at.x, (int) mid_at.y);
 }
 
-void Level::dmap_to_player_update (void)
-{ TRACE_AND_INDENT();
-  if (!player) {
+void Level::dmap_to_player_update(void) {
+  TRACE_AND_INDENT();
+  if (! player) {
     return;
   }
 

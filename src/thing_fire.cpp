@@ -14,17 +14,15 @@
 #include "my_globals.h"
 #include "my_thing_template.h"
 
-void Thing::fire_tick (void)
-{ TRACE_AND_INDENT();
+void Thing::fire_tick(void) {
+  TRACE_AND_INDENT();
   fpoint at = get_interpolated_mid_at();
   if (is_burnable() || is_combustible() || is_very_combustible()) {
     //
     // Keep going
     //
-  } else if (!hates_fire()) {
-    IF_DEBUG4 {
-      log("No, is not fire avoider");
-    }
+  } else if (! hates_fire()) {
+    IF_DEBUG4 { log("No, is not fire avoider"); }
     return;
   }
 
@@ -34,16 +32,16 @@ void Thing::fire_tick (void)
     //
     // Give the player a chance
     //
-    if (!level->is_smoke(at.x, at.y)) {
-      hit = ((int)pcg_random_range(0, 100) < 90);
-      if (!hit) {
+    if (! level->is_smoke(at.x, at.y)) {
+      hit = ((int) pcg_random_range(0, 100) < 90);
+      if (! hit) {
         if (is_player()) {
           TOPCON("%%fg=green$You feel a brief cool breeze and reprieve from the flames!%%fg=reset$");
 
           //
           // Smoke ensures a reprieve.
           //
-          if (!level->is_smoke(at.x, at.y)) {
+          if (! level->is_smoke(at.x, at.y)) {
             auto smoke = level->thing_new("smoke", at);
             smoke->set_lifespan(pcg_random_range(1, 10));
           }
@@ -61,16 +59,16 @@ void Thing::fire_tick (void)
     //
     // Too close to the flames
     //
-    hit = ((int)pcg_random_range(0, 100) < 70);
+    hit = ((int) pcg_random_range(0, 100) < 70);
   } else if (level->is_fire(at.x, at.y)) {
     //
     // Give the player a chance
     //
-    if (!level->is_smoke(at.x, at.y)) {
+    if (! level->is_smoke(at.x, at.y)) {
       auto smoke = level->thing_new("smoke", at);
       smoke->set_lifespan(pcg_random_range(1, 10));
 
-      hit = ((int)pcg_random_range(0, 100) < 20);
+      hit = ((int) pcg_random_range(0, 100) < 20);
       if (hit) {
         if (is_player()) {
           TOPCON("%%fg=red$The flames wrap around you!%%fg=reset$");
@@ -86,11 +84,11 @@ void Thing::fire_tick (void)
   }
 
   if (hit) {
-    if (!is_on_fire()) {
+    if (! is_on_fire()) {
       set_on_fire("caught fire");
     }
 
-    auto fire = tp_find("fire");
+    auto fire   = tp_find("fire");
     auto damage = fire->get_damage_melee();
 
     if (hates_fire()) {
@@ -107,7 +105,7 @@ void Thing::fire_tick (void)
       dead("by burning");
     }
 
-    if (!level->is_smoke(at.x, at.y)) {
+    if (! level->is_smoke(at.x, at.y)) {
       auto smoke = level->thing_new("smoke", at);
       smoke->set_lifespan(pcg_random_range(1, 10));
     }

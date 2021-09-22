@@ -11,18 +11,18 @@
 #include "my_monst.h"
 #include "my_wid_popup.h"
 
-void Game::robot_mode_tick (void)
-{ TRACE_AND_INDENT();
-  if (!game->robot_mode) {
+void Game::robot_mode_tick(void) {
+  TRACE_AND_INDENT();
+  if (! game->robot_mode) {
     return;
   }
 
-  if (!level) {
+  if (! level) {
     return;
   }
 
   auto player = level->player;
-  if (!player) {
+  if (! player) {
     return;
   }
 

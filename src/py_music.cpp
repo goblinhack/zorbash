@@ -5,33 +5,32 @@
 //
 
 #include <strings.h> // do not remove
-#include <string.h> // do not remove
+#include <string.h>  // do not remove
 #include "my_sys.h"
 #include "my_gl.h"
 #include "my_python.h"
 #include "my_music.h"
 #include "my_main.h"
 
-PyObject *music_load_ (PyObject *obj, PyObject *args, PyObject *keywds)
-{ TRACE_AND_INDENT();
-  char *file = 0;
-  char *name = 0;
+PyObject *music_load_(PyObject *obj, PyObject *args, PyObject *keywds) {
+  TRACE_AND_INDENT();
+  char *   file = 0;
+  char *   name = 0;
   uint32_t rate = 44100;
 
-  static char *kwlist[] = {(char*)"rate", (char*) "file", (char*) "name", 0};
+  static char *kwlist[] = {(char *) "rate", (char *) "file", (char *) "name", 0};
 
-  if (!PyArg_ParseTupleAndKeywords(args, keywds, "Iss", kwlist,
-                   &rate, &file, &name)) {
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "Iss", kwlist, &rate, &file, &name)) {
     ERR("music_load: Bad arguments");
     Py_RETURN_FALSE;
   }
 
-  if (!file) {
+  if (! file) {
     ERR("music_load: Missing file attr");
     Py_RETURN_FALSE;
   }
 
-  if (!name) {
+  if (! name) {
     ERR("music_load: Missing name attr");
     Py_RETURN_FALSE;
   }
@@ -45,18 +44,18 @@ PyObject *music_load_ (PyObject *obj, PyObject *args, PyObject *keywds)
   Py_RETURN_TRUE;
 }
 
-PyObject *music_play_ (PyObject *obj, PyObject *args, PyObject *keywds)
-{ TRACE_AND_INDENT();
+PyObject *music_play_(PyObject *obj, PyObject *args, PyObject *keywds) {
+  TRACE_AND_INDENT();
   char *name = 0;
 
-  static char *kwlist[] = {(char*) "name", 0};
+  static char *kwlist[] = {(char *) "name", 0};
 
-  if (!PyArg_ParseTupleAndKeywords(args, keywds, "s", kwlist, &name)) {
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "s", kwlist, &name)) {
     ERR("music_play: Bad arguments");
     Py_RETURN_FALSE;
   }
 
-  if (!name) {
+  if (! name) {
     ERR("music_play: Missing name attr");
     Py_RETURN_FALSE;
   }
@@ -65,7 +64,7 @@ PyObject *music_play_ (PyObject *obj, PyObject *args, PyObject *keywds)
 
   std::string namearg = name;
 
-  if (!music_play(namearg)) {
+  if (! music_play(namearg)) {
     ERR("music_play: Failed");
     Py_RETURN_FALSE;
   }

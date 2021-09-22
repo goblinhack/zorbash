@@ -12,10 +12,7 @@
 #include "my_sprintf.h"
 #include "my_gl.h"
 
-void Thing::fadeup (float fadeup_height,
-                    float fadeup_fade,
-                    ts_t ms)
-{
+void Thing::fadeup(float fadeup_height, float fadeup_fade, ts_t ms) {
   auto t = set_ts_fadeup_begin(time_get_time_ms_cached());
   set_ts_fadeup_end(t + ms);
 
@@ -24,9 +21,8 @@ void Thing::fadeup (float fadeup_height,
   is_fadeup = true;
 }
 
-float Thing::get_fadeup (void)
-{
-  if (!is_fadeup) {
+float Thing::get_fadeup(void) {
+  if (! is_fadeup) {
     alpha = 255;
     return (0.0);
   }
@@ -39,13 +35,11 @@ float Thing::get_fadeup (void)
     return (-1);
   }
 
-  float time_step =
-    (float)(t - get_ts_fadeup_begin()) /
-    (float)(get_ts_fadeup_end() - get_ts_fadeup_begin());
+  float time_step = (float) (t - get_ts_fadeup_begin()) / (float) (get_ts_fadeup_end() - get_ts_fadeup_begin());
 
   float height = last_blit_br.y - last_blit_tl.y;
 
-  alpha = (uint8_t)(255.0 - (250.0 * time_step));
+  alpha = (uint8_t) (255.0 - (250.0 * time_step));
 
   height *= sin(time_step * RAD_90);
   height *= get_fadeup_height();

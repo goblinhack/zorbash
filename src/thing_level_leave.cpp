@@ -13,8 +13,8 @@
 #include "my_gl.h"
 #include "my_ptrcheck.h"
 
-void Thing::level_leave (void)
-{ TRACE_AND_INDENT();
+void Thing::level_leave(void) {
+  TRACE_AND_INDENT();
   dbg("Leave level");
   level_pop();
 

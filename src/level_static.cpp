@@ -13,39 +13,33 @@ static int debug_enabled = false;
 
 std::vector<LevelStaticp> LevelStatic::all_static_levels;
 
-LevelStatic::LevelStatic (void)
-{
+LevelStatic::LevelStatic(void) {
   this->levelno = all_static_levels.size();
 
   newptr(this, "level");
 }
 
-LevelStatic::~LevelStatic (void)
-{
-  oldptr(this);
-}
+LevelStatic::~LevelStatic(void) { oldptr(this); }
 
-void level_fini (void)
-{ TRACE_AND_INDENT();
+void level_fini(void) {
+  TRACE_AND_INDENT();
   LevelStatic::all_static_levels.clear();
 }
 
-LevelStaticp LevelStatic::level_new (void)
-{ TRACE_AND_INDENT();
+LevelStaticp LevelStatic::level_new(void) {
+  TRACE_AND_INDENT();
   auto r = new LevelStatic();
   LevelStatic::all_static_levels.push_back(r);
   return (r);
 }
 
-void LevelStatic::finalize (void)
-{
+void LevelStatic::finalize(void) {
   if (debug_enabled) {
     dump();
   }
 }
 
-void LevelStatic::dump (void)
-{
+void LevelStatic::dump(void) {
   std::array<std::array<char, MAP_HEIGHT>, MAP_WIDTH> tmp;
   for (auto y = 0; y < height; y++) {
     for (auto x = 0; x < width; x++) {
@@ -56,7 +50,7 @@ void LevelStatic::dump (void)
   for (auto y = 0; y < height; y++) {
     for (auto x = 0; x < width; x++) {
       auto c = get(data, x, y, MAP_DEPTH_OBJ);
-      if (!c || (c == ' ')) {
+      if (! c || (c == ' ')) {
         c = get(data, x, y, MAP_DEPTH_FLOOR);
       }
       set(tmp, x, y, c);

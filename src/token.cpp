@@ -11,11 +11,11 @@
 #include "slre.h"
 #include "my_token.h"
 
-static tokens_t *tokens_parse (const char *input, tokens_t *tokens)
-{ TRACE_AND_INDENT();
+static tokens_t *tokens_parse(const char *input, tokens_t *tokens) {
+  TRACE_AND_INDENT();
   const char *in;
-  char *out;
-  char i;
+  char *      out;
+  char        i;
 
   memset(tokens, 0, sizeof(*tokens));
 
@@ -23,11 +23,11 @@ static tokens_t *tokens_parse (const char *input, tokens_t *tokens)
     return (tokens);
   }
 
-  in = input;
-  out = tokens->data;
+  in   = input;
+  out  = tokens->data;
   *out = '\0';
 
-  for (;/*ever*/;) {
+  for (; /*ever*/;) {
     /*
      * Check we have token space.
      */
@@ -65,38 +65,27 @@ static tokens_t *tokens_parse (const char *input, tokens_t *tokens)
     if (i == '\"') {
       tokens->args[tokens->cnt++] = out;
 
-      for (;/*ever*/;) {
+      for (; /*ever*/;) {
         i = *(in++);
         switch (i) {
-        case '\\':
-          i = *(in++);
-          switch (i) {
-            case '\"':
-              i = '\"';
+          case '\\' :
+            i = *(in++);
+            switch (i) {
+              case '\"' : i = '\"'; break;
+              case '\n' : i = '\n'; break;
+              case '\r' : i = '\r'; break;
+              case '\t' : i = '\t'; break;
+              case '\\' : i = '\\'; break;
+              default : break;
+            }
             break;
-            case '\n':
-              i = '\n';
-              break;
-            case '\r':
-              i = '\r';
-              break;
-            case '\t':
-              i = '\t';
-              break;
-            case '\\':
-              i = '\\';
-              break;
-            default:
-              break;
-          }
-          break;
 
-        case '\"':
-          if (i == '\"') {
-            i = '\0';
+          case '\"' :
+            if (i == '\"') {
+              i = '\0';
+              break;
+            }
             break;
-          }
-          break;
         }
 
         *out++ = i;
@@ -118,22 +107,15 @@ static tokens_t *tokens_parse (const char *input, tokens_t *tokens)
 
     tokens->args[tokens->cnt++] = out;
 
-    for (;/*ever*/;) {
+    for (; /*ever*/;) {
       switch (i) {
-        case '\0':
-          *out++ = i;
-          return (tokens);
+        case '\0' : *out++ = i; return (tokens);
 
-        case ' ':
-          i = '\0';
-          break;
+        case ' ' : i = '\0'; break;
 
-        case '\t':
-          i = '\0';
-          break;
+        case '\t' : i = '\0'; break;
 
-        default:
-          break;
+        default : break;
       }
 
       *out++ = i;
@@ -147,14 +129,14 @@ static tokens_t *tokens_parse (const char *input, tokens_t *tokens)
   }
 }
 
-static void tokens_compile (tokens_t *tokens)
-{ TRACE_AND_INDENT();
+static void tokens_compile(tokens_t *tokens) {
+  TRACE_AND_INDENT();
   uint32_t cnt;
 
   cnt = 0;
 
   while (cnt < tokens->cnt) {
-    if (!slre_compile(&tokens->regexp[cnt], tokens->args[cnt])) {
+    if (! slre_compile(&tokens->regexp[cnt], tokens->args[cnt])) {
       LOG("Failed to compile \"%s\"", tokens->args[cnt]);
       return;
     }
@@ -162,8 +144,8 @@ static void tokens_compile (tokens_t *tokens)
   }
 }
 
-void tokens_print (tokens_t *tokens)
-{ TRACE_AND_INDENT();
+void tokens_print(tokens_t *tokens) {
+  TRACE_AND_INDENT();
   uint32_t cnt;
 
   printf("tokens %u: ", tokens->cnt);
@@ -177,11 +159,11 @@ void tokens_print (tokens_t *tokens)
   printf("\n");
 }
 
-void tokens_print_to (tokens_t *tokens, char *output, int32_t output_size)
-{ TRACE_AND_INDENT();
+void tokens_print_to(tokens_t *tokens, char *output, int32_t output_size) {
+  TRACE_AND_INDENT();
   uint32_t cnt;
 
-  cnt = 0;
+  cnt     = 0;
   *output = '\0';
 
   while (cnt < tokens->cnt) {
@@ -194,8 +176,8 @@ void tokens_print_to (tokens_t *tokens, char *output, int32_t output_size)
   }
 }
 
-void tokens_test (void)
-{ TRACE_AND_INDENT();
+void tokens_test(void) {
+  TRACE_AND_INDENT();
   tokens_t tmp;
 
   tokens_print(tokens_tostring("s  ", &tmp));
@@ -203,8 +185,8 @@ void tokens_test (void)
   tokens_print(tokens_tostring("set god \"mode on\"", &tmp));
 }
 
-tokens_t *tokens_tostring (const char *input, tokens_t *tokens)
-{ TRACE_AND_INDENT();
+tokens_t *tokens_tostring(const char *input, tokens_t *tokens) {
+  TRACE_AND_INDENT();
   tokens_t *t;
 
   t = tokens_parse(input, tokens);

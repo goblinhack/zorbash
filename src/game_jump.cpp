@@ -17,140 +17,139 @@
 //
 #define JUMP_WIDTH 5
 
-static std::string jump_data [] = {
+static std::string jump_data[] = {
 
-  // jump length 4
-  "s...."
-  ".1..."
-  "..2.."
-  "...3."
-  "....e",
+    // jump length 4
+    "s...."
+    ".1..."
+    "..2.."
+    "...3."
+    "....e",
 
-  ".s..."
-  ".1..."
-  "..2.."
-  "...3."
-  "...e.",
+    ".s..."
+    ".1..."
+    "..2.."
+    "...3."
+    "...e.",
 
-  "..s.."
-  "..1.."
-  "..2.."
-  "..3.."
-  "..e..",
+    "..s.."
+    "..1.."
+    "..2.."
+    "..3.."
+    "..e..",
 
-  "...s."
-  "...1."
-  "..2.."
-  ".3..."
-  ".e...",
+    "...s."
+    "...1."
+    "..2.."
+    ".3..."
+    ".e...",
 
-  "....s"
-  "...1."
-  "..2.."
-  ".3..."
-  "e....",
+    "....s"
+    "...1."
+    "..2.."
+    ".3..."
+    "e....",
 
-  // jump length 3
-  "....."
-  ".s..."
-  "..1.."
-  "...2."
-  "....e",
+    // jump length 3
+    "....."
+    ".s..."
+    "..1.."
+    "...2."
+    "....e",
 
-  "....."
-  ".s..."
-  "..1.."
-  "..2.."
-  "...e.",
+    "....."
+    ".s..."
+    "..1.."
+    "..2.."
+    "...e.",
 
-  "....."
-  "..s.."
-  "..1.."
-  "..2.."
-  "..e..",
+    "....."
+    "..s.."
+    "..1.."
+    "..2.."
+    "..e..",
 
-  "....."
-  "...s."
-  "..1.."
-  "..2.."
-  ".e...",
+    "....."
+    "...s."
+    "..1.."
+    "..2.."
+    ".e...",
 
-  "....."
-  "...s."
-  "..1.."
-  ".2..."
-  "e....",
+    "....."
+    "...s."
+    "..1.."
+    ".2..."
+    "e....",
 
-  // jump length 3
-  "s...."
-  ".1..."
-  "..2.."
-  "...e."
-  ".....",
+    // jump length 3
+    "s...."
+    ".1..."
+    "..2.."
+    "...e."
+    ".....",
 
-  ".s..."
-  "..1.."
-  "..2.."
-  "...e."
-  ".....",
+    ".s..."
+    "..1.."
+    "..2.."
+    "...e."
+    ".....",
 
-  "..s.."
-  "..1.."
-  "..2.."
-  "..e.."
-  ".....",
+    "..s.."
+    "..1.."
+    "..2.."
+    "..e.."
+    ".....",
 
-  "...s."
-  "..1.."
-  "..2.."
-  ".e..."
-  ".....",
+    "...s."
+    "..1.."
+    "..2.."
+    ".e..."
+    ".....",
 
-  "....s"
-  "...1."
-  "..2.."
-  ".e..."
-  ".....",
+    "....s"
+    "...1."
+    "..2.."
+    ".e..."
+    ".....",
 
-  // jump length 2
-  "....."
-  ".s..."
-  "..1.."
-  "...e."
-  ".....",
+    // jump length 2
+    "....."
+    ".s..."
+    "..1.."
+    "...e."
+    ".....",
 
-  "....."
-  ".s..."
-  "..1.."
-  "...e."
-  ".....",
+    "....."
+    ".s..."
+    "..1.."
+    "...e."
+    ".....",
 
-  "....."
-  "..s.."
-  "..1.."
-  "..e.."
-  ".....",
+    "....."
+    "..s.."
+    "..1.."
+    "..e.."
+    ".....",
 
-  "....."
-  "...s."
-  "..1.."
-  ".e..."
-  ".....",
+    "....."
+    "...s."
+    "..1.."
+    ".e..."
+    ".....",
 
-  "....."
-  "...s."
-  "..1.."
-  ".e..."
-  ".....",
+    "....."
+    "...s."
+    "..1.."
+    ".e..."
+    ".....",
 };
 
-void Game::init_jump_paths()
-{
+void Game::init_jump_paths() {
   bool debug = false;
 
   jump_paths.clear();
 
-  std::string tmp;
+  std::string              tmp;
   std::vector<std::string> cands;
 
   for (const auto &s : jump_data) {
@@ -161,7 +160,7 @@ void Game::init_jump_paths()
     //
     // Read the jump data
     //
-    std::array< std::array<char, JUMP_WIDTH>, JUMP_WIDTH> tmp {};
+    std::array<std::array<char, JUMP_WIDTH>, JUMP_WIDTH> tmp {};
 
     int x = 0;
     int y = 0;
@@ -177,7 +176,7 @@ void Game::init_jump_paths()
       //
       // Rotate
       //
-      std::array< std::array<char, JUMP_WIDTH>, JUMP_WIDTH> tmp2 {};
+      std::array<std::array<char, JUMP_WIDTH>, JUMP_WIDTH> tmp2 {};
       for (auto y = 0; y < JUMP_WIDTH; y++) {
         for (auto x = 0; x < JUMP_WIDTH; x++) {
           set(tmp2, JUMP_WIDTH - y - 1, x, get(tmp, x, y));
@@ -206,7 +205,8 @@ void Game::init_jump_paths()
   std::cout << std::endl;
   for (const auto &s : cands) {
     if (debug) {
-      std::cout << "[" << s <<  "]" << " ";
+      std::cout << "[" << s << "]"
+                << " ";
     }
 
     if (s.length() != JUMP_WIDTH * JUMP_WIDTH) {
@@ -230,9 +230,9 @@ void Game::init_jump_paths()
     // Copy the current jump path to an array we can walk to get
     // the jump offsets
     //
-    std::array< std::array<char, JUMP_WIDTH>, JUMP_WIDTH> tmp {};
-    int x = 0;
-    int y = 0;
+    std::array<std::array<char, JUMP_WIDTH>, JUMP_WIDTH> tmp {};
+    int                                                  x = 0;
+    int                                                  y = 0;
     for (int i = 0; i < JUMP_WIDTH * JUMP_WIDTH; i++) {
       set(tmp, x, y, s[i]);
       if (++x >= JUMP_WIDTH) {
@@ -250,8 +250,8 @@ void Game::init_jump_paths()
     //
     // Find each of the symbols in the path and build the jump path.
     //
-    Game::JumpPath jp;
-    std::vector<char> cs = { 's', '1', '2', '3', 'e' };
+    Game::JumpPath    jp;
+    std::vector<char> cs = {'s', '1', '2', '3', 'e'};
 
     for (auto c : cs) {
       for (auto y = 0; y < JUMP_WIDTH; y++) {
@@ -262,7 +262,8 @@ void Game::init_jump_paths()
           }
           point p(point(x - offset, y - offset));
           if (debug) {
-            std::cout << "(" << p.x << "," << p.y << ")" << " ";
+            std::cout << "(" << p.x << "," << p.y << ")"
+                      << " ";
           }
           if (ch == 's') {
             jp.begin = p;
@@ -274,7 +275,7 @@ void Game::init_jump_paths()
           goto next;
         }
       }
-next:
+    next:
       continue;
     }
 

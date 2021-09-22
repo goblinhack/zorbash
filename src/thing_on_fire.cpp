@@ -20,8 +20,8 @@
 //
 // Python callback upon being fire
 //
-void Thing::on_fire (void)
-{ TRACE_AND_INDENT();
+void Thing::on_fire(void) {
+  TRACE_AND_INDENT();
   auto on_fire = tp()->on_fire_do();
   if (std::empty(on_fire)) {
     return;
@@ -29,38 +29,35 @@ void Thing::on_fire (void)
 
   auto t = split_tokens(on_fire, '.');
   if (t.size() == 2) {
-    auto mod = t[0];
-    auto fn = t[1];
+    auto        mod   = t[0];
+    auto        fn    = t[1];
     std::size_t found = fn.find("()");
     if (found != std::string::npos) {
       fn = fn.replace(found, 2, "");
     }
 
-    dbg("Call %s.%s(%s)", mod.c_str(), fn.c_str(),
-      to_string().c_str());
+    dbg("Call %s.%s(%s)", mod.c_str(), fn.c_str(), to_string().c_str());
 
-    py_call_void_fn(mod.c_str(), fn.c_str(), id.id,
-            (unsigned int)mid_at.x, (unsigned int)mid_at.y);
+    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) mid_at.x, (unsigned int) mid_at.y);
   } else {
-    ERR("Bad on_fire call [%s] expected mod:function, got %d elems",
-      on_fire.c_str(), (int)on_fire.size());
+    ERR("Bad on_fire call [%s] expected mod:function, got %d elems", on_fire.c_str(), (int) on_fire.size());
   }
 }
 
-bool Thing::is_on_fire (void) const
-{ TRACE_AND_INDENT();
+bool Thing::is_on_fire(void) const {
+  TRACE_AND_INDENT();
   auto id = get_on_fire_anim_id();
-  if (!id) {
+  if (! id) {
     return false;
   }
 
   return id.ok();
 }
 
-void Thing::unset_on_fire (void)
-{ TRACE_AND_INDENT();
+void Thing::unset_on_fire(void) {
+  TRACE_AND_INDENT();
   auto id = get_on_fire_anim_id();
-  if (!id) {
+  if (! id) {
     return;
   }
 
@@ -72,9 +69,9 @@ void Thing::unset_on_fire (void)
   }
 }
 
-bool Thing::set_on_fire (const std::string &why)
-{ TRACE_AND_INDENT();
-  if (!is_burnable() && !is_combustible()) {
+bool Thing::set_on_fire(const std::string &why) {
+  TRACE_AND_INDENT();
+  if (! is_burnable() && ! is_combustible()) {
     return false;
   }
 
@@ -88,7 +85,7 @@ bool Thing::set_on_fire (const std::string &why)
   on_fire_anim->set_owner(this);
   move_carried_items();
 
-  if (!is_dead) {
+  if (! is_dead) {
     on_fire();
   }
 
@@ -104,12 +101,11 @@ bool Thing::set_on_fire (const std::string &why)
 //
 // When on fire, where to run to?
 //
-bool Thing::ai_create_on_fire_path (point &nh,
-                                    const point start, const point end)
-{ TRACE_AND_INDENT();
-  Dmap dmap {};
+bool Thing::ai_create_on_fire_path(point &nh, const point start, const point end) {
+  TRACE_AND_INDENT();
+  Dmap  dmap {};
   point dmap_start = start;
-  point dmap_end = end;
+  point dmap_end   = end;
 
   int minx, miny, maxx, maxy;
   if (dmap_start.x < dmap_end.x) {
@@ -161,7 +157,7 @@ bool Thing::ai_create_on_fire_path (point &nh,
   }
 
   dmap_start = point(minx, miny);
-  dmap_end = point(maxx, maxy);
+  dmap_end   = point(maxx, maxy);
 
   set(dmap.val, end.x, end.y, DMAP_IS_GOAL);
   set(dmap.val, start.x, start.y, DMAP_IS_PASSABLE);
@@ -174,7 +170,7 @@ bool Thing::ai_create_on_fire_path (point &nh,
   auto p = dmap_solve(&dmap, start);
 
   char path_debug = '\0'; // astart path debug
-  auto result = astar_solve(NULL, path_debug, start, end, &dmap);
+  auto result     = astar_solve(NULL, path_debug, start, end, &dmap);
 #if 0
   for (auto i : result.path) {
     set(dmap.val, i.x, i.y, (uint8_t)0);
@@ -182,7 +178,7 @@ bool Thing::ai_create_on_fire_path (point &nh,
   dmap_print(&dmap, start, dmap_start, dmap_end);
 #endif
 
-  auto hops = result.path;
+  auto hops     = result.path;
   auto hops_len = hops.size();
 
   if (hops_len >= 2) {
@@ -196,15 +192,15 @@ bool Thing::ai_create_on_fire_path (point &nh,
     return true;
   } else if (hops_len >= 1) {
     auto hop0 = get(hops, hops_len - 1);
-    nh = hop0;
+    nh        = hop0;
     return true;
   } else {
     return false;
   }
 }
 
-bool Thing::ai_on_fire_choose_target (point& nh)
-{ TRACE_AND_INDENT();
+bool Thing::ai_on_fire_choose_target(point &nh) {
+  TRACE_AND_INDENT();
   point start(mid_at.x, mid_at.y);
 
   //
@@ -213,7 +209,7 @@ bool Thing::ai_on_fire_choose_target (point& nh)
   auto target = monstp->wander_target;
 
   if (target != point(0, 0)) {
-    if (!level->is_shallow_water(target.x, target.y)) {
+    if (! level->is_shallow_water(target.x, target.y)) {
       //
       // Choose a new wander location
       //
@@ -234,16 +230,16 @@ bool Thing::ai_on_fire_choose_target (point& nh)
 
   auto attempts = 10;
   while (attempts--) {
-    auto tries = 1000;
-    auto closest = std::numeric_limits<int>::max();
+    auto  tries   = 1000;
+    auto  closest = std::numeric_limits<int>::max();
     point best;
-    auto got_one = false;
+    auto  got_one = false;
 
     while (tries--) {
       auto target = get_random_scent_target();
       if (level->is_shallow_water(target)) {
         if (distance(start, target) < closest) {
-          best = target;
+          best    = target;
           got_one = true;
         }
       }
@@ -263,8 +259,8 @@ bool Thing::ai_on_fire_choose_target (point& nh)
   return false;
 }
 
-bool Thing::ai_on_fire (void)
-{ TRACE_AND_INDENT();
+bool Thing::ai_on_fire(void) {
+  TRACE_AND_INDENT();
   dbg("Ai on fire");
   auto tries = 10;
   while (tries--) {

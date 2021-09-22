@@ -16,8 +16,7 @@
 #include "my_string.h"
 #include "my_monst.h"
 
-void Thing::on_use (Thingp what)
-{
+void Thing::on_use(Thingp what) {
   auto on_use = what->tp()->on_use_do();
   if (std::empty(on_use)) {
     return;
@@ -25,64 +24,53 @@ void Thing::on_use (Thingp what)
 
   auto t = split_tokens(on_use, '.');
   if (t.size() == 2) {
-    auto mod = t[0];
-    auto fn = t[1];
+    auto        mod   = t[0];
+    auto        fn    = t[1];
     std::size_t found = fn.find("()");
     if (found != std::string::npos) {
       fn = fn.replace(found, 2, "");
     }
 
-    dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(),
-      to_string().c_str(),
-      what->to_string().c_str());
+    dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_string().c_str(), what->to_string().c_str());
 
-    py_call_void_fn(mod.c_str(), fn.c_str(),
-            id.id, what->id.id, 0U,
-            (unsigned int)mid_at.x, (unsigned int)mid_at.y);
+    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, 0U, (unsigned int) mid_at.x, (unsigned int) mid_at.y);
   } else {
-    ERR("Bad on_use call [%s] expected mod:function, got %d elems",
-      on_use.c_str(), (int)on_use.size());
+    ERR("Bad on_use call [%s] expected mod:function, got %d elems", on_use.c_str(), (int) on_use.size());
   }
 }
 
-void Thing::on_use (Thingp what, Thingp target)
-{
+void Thing::on_use(Thingp what, Thingp target) {
   auto on_use = what->tp()->on_use_do();
-  if (!std::empty(on_use)) {
+  if (! std::empty(on_use)) {
     auto t = split_tokens(on_use, '.');
     if (t.size() == 2) {
-      auto mod = t[0];
-      auto fn = t[1];
+      auto        mod   = t[0];
+      auto        fn    = t[1];
       std::size_t found = fn.find("()");
       if (found != std::string::npos) {
         fn = fn.replace(found, 2, "");
       }
 
-      dbg("Call %s.%s(%s, %s, %s)", mod.c_str(), fn.c_str(),
-        to_string().c_str(),
-        what->to_string().c_str(),
-        target->to_string().c_str());
+      dbg("Call %s.%s(%s, %s, %s)", mod.c_str(), fn.c_str(), to_string().c_str(), what->to_string().c_str(),
+          target->to_string().c_str());
 
-      py_call_void_fn(mod.c_str(), fn.c_str(),
-              id.id, what->id.id, target->id.id,
-              (unsigned int)mid_at.x, (unsigned int)mid_at.y);
+      py_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, target->id.id, (unsigned int) mid_at.x,
+                      (unsigned int) mid_at.y);
     } else {
-      ERR("Bad on_use call [%s] expected mod:function, got %d elems",
-        on_use.c_str(), (int)on_use.size());
+      ERR("Bad on_use call [%s] expected mod:function, got %d elems", on_use.c_str(), (int) on_use.size());
     }
   }
 }
 
-void Thing::used (Thingp what, Thingp target, bool remove_after_use)
-{ TRACE_AND_INDENT();
+void Thing::used(Thingp what, Thingp target, bool remove_after_use) {
+  TRACE_AND_INDENT();
   dbg("Attempt to use %s", what->to_string().c_str());
 
   on_use(what, target);
 
   auto existing_owner = what->get_top_owner();
   if (existing_owner != this) {
-    err("Attempt to use %s which is not carried",
-      what->to_string().c_str());
+    err("Attempt to use %s which is not carried", what->to_string().c_str());
     return;
   }
 
@@ -92,8 +80,7 @@ void Thing::used (Thingp what, Thingp target, bool remove_after_use)
   if (what->get_charge_count()) {
     what->decr_charge_count();
     if (what->get_charge_count()) {
-      dbg("Used %s (has %d charges left)",
-        what->to_string().c_str(), what->get_charge_count());
+      dbg("Used %s (has %d charges left)", what->to_string().c_str(), what->get_charge_count());
       game->request_remake_inventory = true;
       return;
     }
@@ -134,11 +121,11 @@ void Thing::used (Thingp what, Thingp target, bool remove_after_use)
   }
 }
 
-bool Thing::use (Thingp what)
-{ TRACE_AND_INDENT();
+bool Thing::use(Thingp what) {
+  TRACE_AND_INDENT();
   dbg("Trying to use: %s", what->to_string().c_str());
   TRACE_AND_INDENT();
-  if (!is_player()) {
+  if (! is_player()) {
     return false;
   }
 
@@ -176,7 +163,7 @@ bool Thing::use (Thingp what)
     if (is_player()) {
       game->tick_begin("player drunk an item");
     }
-  } else if (!what->is_usable()) {
+  } else if (! what->is_usable()) {
     TOPCON("I don't know how to use %s.", what->text_the().c_str());
     game->tick_begin("player tried to use something they could not");
   }

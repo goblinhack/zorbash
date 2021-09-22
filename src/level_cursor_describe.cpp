@@ -18,14 +18,14 @@
 #include "my_sdl.h"
 #include "my_template.h"
 
-void Level::cursor_describe (void)
-{ TRACE_AND_INDENT();
+void Level::cursor_describe(void) {
+  TRACE_AND_INDENT();
   if (game->robot_mode) {
     return;
   }
 
   dbg("Cursor describe");
-  if (!cursor) {
+  if (! cursor) {
     return;
   }
 

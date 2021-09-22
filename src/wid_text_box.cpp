@@ -19,8 +19,7 @@
 #include "my_vector_bounds_check.h"
 #include "my_ui.h"
 
-WidTextBox::~WidTextBox()
-{
+WidTextBox::~WidTextBox() {
   if (wid_horiz_scroll) {
     wid_destroy(&wid_horiz_scroll);
   }
@@ -31,13 +30,9 @@ WidTextBox::~WidTextBox()
   wid_destroy(&wid_text_area);
 }
 
-WidTextBox::WidTextBox (point tl, point br, Widp parent,
-                        bool horiz_scroll, bool vert_scoll,
-                        int scroll_height_in) :
-  scroll_height(scroll_height_in),
-  tl(tl), br(br),
-  wid_parent(parent)
-{ TRACE_AND_INDENT();
+WidTextBox::WidTextBox(point tl, point br, Widp parent, bool horiz_scroll, bool vert_scoll, int scroll_height_in)
+    : scroll_height(scroll_height_in), tl(tl), br(br), wid_parent(parent) {
+  TRACE_AND_INDENT();
   int w = br.x - tl.x;
   int h = br.y - tl.y;
   width = w;
@@ -54,8 +49,7 @@ WidTextBox::WidTextBox (point tl, point br, Widp parent,
 
   {
     if (parent) {
-      wid_text_box_container = wid_new_square_button(parent,
-                               "wid text box");
+      wid_text_box_container = wid_new_square_button(parent, "wid text box");
       wid_set_shape_none(wid_text_box_container);
     } else {
       wid_text_box_container = wid_new_square_window("wid text box");
@@ -68,8 +62,7 @@ WidTextBox::WidTextBox (point tl, point br, Widp parent,
     point tl = make_point(1, 1);
     point br = make_point(w - 1, h - 1);
 
-    wid_text_area = wid_new_square_button(wid_text_box_container,
-                        "wid text inner area");
+    wid_text_area = wid_new_square_button(wid_text_box_container, "wid text inner area");
     wid_set_pos(wid_text_area, tl, br);
     wid_set_shape_none(wid_text_area);
     // wid_set_style(wid_text_area, UI_WID_STYLE_RED);
@@ -91,10 +84,10 @@ WidTextBox::WidTextBox (point tl, point br, Widp parent,
       lines_of_text = wid_get_height(wid_text_area);
     }
     int row_bottom = lines_of_text;
-    height = lines_of_text;
+    height         = lines_of_text;
 
     for (row = 0; row < lines_of_text; row++) {
-      row_bottom --;
+      row_bottom--;
       point tl = make_point(0, row_bottom);
       point br = make_point(w, row_bottom);
 
@@ -120,15 +113,11 @@ WidTextBox::WidTextBox (point tl, point br, Widp parent,
   }
 
   if (vert_scoll) {
-    wid_vert_scroll =
-      wid_new_vert_scroll_bar(wid_text_box_container,
-                  "text box vert scroll", wid_text_area);
+    wid_vert_scroll = wid_new_vert_scroll_bar(wid_text_box_container, "text box vert scroll", wid_text_area);
   }
 
   if (horiz_scroll) {
-    wid_horiz_scroll =
-      wid_new_horiz_scroll_bar(wid_text_box_container,
-                   "text box horiz scroll", wid_text_area);
+    wid_horiz_scroll = wid_new_horiz_scroll_bar(wid_text_box_container, "text box horiz scroll", wid_text_area);
   }
 
   wid_update(wid_text_box_container);
@@ -147,20 +136,19 @@ WidTextBox::WidTextBox (point tl, point br, Widp parent,
 //
 // Get the wid on the bottom of the list/screen.
 //
-void WidTextBox::log_ (std::wstring str, bool lhs, bool rhs)
-{ TRACE_AND_INDENT();
+void WidTextBox::log_(std::wstring str, bool lhs, bool rhs) {
+  TRACE_AND_INDENT();
   Widp tmp {};
   Widp text_wid {};
 
-  if (!wid_vert_scroll) {
+  if (! wid_vert_scroll) {
     if (line_count < height) {
       text_wid = get(children, height - line_count - 1);
       wid_set_text(text_wid, str);
       line_count++;
       wid_update(wid_text_box_container);
     } else {
-      ERR("Text box overflow on [%s] height %d line_count %d", wstring_to_string(str).c_str(),
-        height, line_count);
+      ERR("Text box overflow on [%s] height %d line_count %d", wstring_to_string(str).c_str(), height, line_count);
     }
   } else {
     if (line_count < scroll_height) {
@@ -192,22 +180,26 @@ void WidTextBox::log_ (std::wstring str, bool lhs, bool rhs)
   }
 
   if (text_wid) {
-    if (lhs) { wid_set_text_lhs(text_wid, true); }
-    if (rhs) { wid_set_text_rhs(text_wid, true); }
+    if (lhs) {
+      wid_set_text_lhs(text_wid, true);
+    }
+    if (rhs) {
+      wid_set_text_rhs(text_wid, true);
+    }
   }
 }
 
 //
 // Log a message to the text_box
 //
-void WidTextBox::log (std::string s, bool lhs, bool rhs)
-{ TRACE_AND_INDENT();
+void WidTextBox::log(std::string s, bool lhs, bool rhs) {
+  TRACE_AND_INDENT();
   int chars_per_line = wid_get_width(wid_text_area);
 
   auto d = split(s, chars_per_line);
 
   if (d) {
-    for (const auto& c : *d) {
+    for (const auto &c : *d) {
       log_(string_to_wstring(c), lhs, rhs);
     }
   }
@@ -216,14 +208,14 @@ void WidTextBox::log (std::string s, bool lhs, bool rhs)
 //
 // Log a message to the text_box
 //
-void WidTextBox::log (std::wstring s, bool lhs, bool rhs)
-{ TRACE_AND_INDENT();
+void WidTextBox::log(std::wstring s, bool lhs, bool rhs) {
+  TRACE_AND_INDENT();
   int chars_per_line = wid_get_width(wid_text_area);
 
   auto d = split(s, chars_per_line);
 
   if (d) {
-    for (const auto& c : *d) {
+    for (const auto &c : *d) {
       log_(c, lhs, rhs);
     }
   }

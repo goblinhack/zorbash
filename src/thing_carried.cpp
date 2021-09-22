@@ -13,20 +13,20 @@
 #include "my_array_bounds_check.h"
 #include "my_ptrcheck.h"
 
-int Thing::get_carried_weapon_count (void)
-{ TRACE_AND_INDENT();
+int Thing::get_carried_weapon_count(void) {
+  TRACE_AND_INDENT();
   int count = 0;
 
-  if (!monstp) {
+  if (! monstp) {
     return count;
   }
 
-  for (const auto& item : monstp->carrying) {
+  for (const auto &item : monstp->carrying) {
     auto t = level->thing_find(item.id);
-    if (!t) {
+    if (! t) {
       continue;
     }
-    if (!t->is_weapon()) {
+    if (! t->is_weapon()) {
       continue;
     }
 
@@ -35,20 +35,20 @@ int Thing::get_carried_weapon_count (void)
   return count;
 }
 
-int Thing::get_carried_wand_count (void)
-{ TRACE_AND_INDENT();
+int Thing::get_carried_wand_count(void) {
+  TRACE_AND_INDENT();
   int count = 0;
 
-  if (!monstp) {
+  if (! monstp) {
     return count;
   }
 
-  for (const auto& item : monstp->carrying) {
+  for (const auto &item : monstp->carrying) {
     auto t = level->thing_find(item.id);
-    if (!t) {
+    if (! t) {
       continue;
     }
-    if (!t->is_wand()) {
+    if (! t->is_wand()) {
       continue;
     }
 
@@ -57,20 +57,20 @@ int Thing::get_carried_wand_count (void)
   return count;
 }
 
-int Thing::get_carried_food_count (void)
-{ TRACE_AND_INDENT();
+int Thing::get_carried_food_count(void) {
+  TRACE_AND_INDENT();
   int count = 0;
 
-  if (!monstp) {
+  if (! monstp) {
     return count;
   }
 
-  for (const auto& item : monstp->carrying) {
+  for (const auto &item : monstp->carrying) {
     auto t = level->thing_find(item.id);
-    if (!t) {
+    if (! t) {
       continue;
     }
-    if (!t->is_food()) {
+    if (! t->is_food()) {
       continue;
     }
 
@@ -79,31 +79,31 @@ int Thing::get_carried_food_count (void)
   return count;
 }
 
-int Thing::get_carried_weapon_least_value (Thingp *out)
-{ TRACE_AND_INDENT();
+int Thing::get_carried_weapon_least_value(Thingp *out) {
+  TRACE_AND_INDENT();
   int least_value = -1;
 
   *out = nullptr;
-  if (!monstp) {
+  if (! monstp) {
     return least_value;
   }
 
-  for (const auto& item : monstp->carrying) {
+  for (const auto &item : monstp->carrying) {
     auto t = level->thing_find(item.id);
-    if (!t) {
+    if (! t) {
       continue;
     }
-    if (!t->is_weapon()) {
+    if (! t->is_weapon()) {
       continue;
     }
 
     auto v = get_item_value(t);
-    if (!*out) {
-      *out = t;
+    if (! *out) {
+      *out        = t;
       least_value = v;
     } else {
       if (v < least_value) {
-        *out = t;
+        *out        = t;
         least_value = v;
       }
     }
@@ -111,31 +111,31 @@ int Thing::get_carried_weapon_least_value (Thingp *out)
   return least_value;
 }
 
-int Thing::get_carried_wand_least_value (Thingp *out)
-{ TRACE_AND_INDENT();
+int Thing::get_carried_wand_least_value(Thingp *out) {
+  TRACE_AND_INDENT();
   int least_value = -1;
 
   *out = nullptr;
-  if (!monstp) {
+  if (! monstp) {
     return least_value;
   }
 
-  for (const auto& item : monstp->carrying) {
+  for (const auto &item : monstp->carrying) {
     auto t = level->thing_find(item.id);
-    if (!t) {
+    if (! t) {
       continue;
     }
-    if (!t->is_wand()) {
+    if (! t->is_wand()) {
       continue;
     }
 
     auto v = get_item_value(t);
-    if (!*out) {
-      *out = t;
+    if (! *out) {
+      *out        = t;
       least_value = v;
     } else {
       if (v < least_value) {
-        *out = t;
+        *out        = t;
         least_value = v;
       }
     }
@@ -143,31 +143,31 @@ int Thing::get_carried_wand_least_value (Thingp *out)
   return least_value;
 }
 
-int Thing::get_carried_food_least_value (Thingp *out)
-{ TRACE_AND_INDENT();
+int Thing::get_carried_food_least_value(Thingp *out) {
+  TRACE_AND_INDENT();
   int least_value = -1;
 
   *out = nullptr;
-  if (!monstp) {
+  if (! monstp) {
     return least_value;
   }
 
-  for (const auto& item : monstp->carrying) {
+  for (const auto &item : monstp->carrying) {
     auto t = level->thing_find(item.id);
-    if (!t) {
+    if (! t) {
       continue;
     }
-    if (!t->is_food()) {
+    if (! t->is_food()) {
       continue;
     }
 
     auto v = get_item_value(t);
-    if (!*out) {
-      *out = t;
+    if (! *out) {
+      *out        = t;
       least_value = v;
     } else {
       if (v < least_value) {
-        *out = t;
+        *out        = t;
         least_value = v;
       }
     }
@@ -175,31 +175,31 @@ int Thing::get_carried_food_least_value (Thingp *out)
   return least_value;
 }
 
-int Thing::get_carried_weapon_highest_value (Thingp *out)
-{ TRACE_AND_INDENT();
+int Thing::get_carried_weapon_highest_value(Thingp *out) {
+  TRACE_AND_INDENT();
   int highest_value = -1;
 
   *out = nullptr;
-  if (!monstp) {
+  if (! monstp) {
     return highest_value;
   }
 
-  for (const auto& item : monstp->carrying) {
+  for (const auto &item : monstp->carrying) {
     auto t = level->thing_find(item.id);
-    if (!t) {
+    if (! t) {
       continue;
     }
-    if (!t->is_weapon()) {
+    if (! t->is_weapon()) {
       continue;
     }
 
     auto v = get_item_value(t);
-    if (!*out) {
-      *out = t;
+    if (! *out) {
+      *out          = t;
       highest_value = v;
     } else {
       if (v > highest_value) {
-        *out = t;
+        *out          = t;
         highest_value = v;
       }
     }
@@ -207,31 +207,31 @@ int Thing::get_carried_weapon_highest_value (Thingp *out)
   return highest_value;
 }
 
-int Thing::get_carried_wand_highest_value (Thingp *out)
-{ TRACE_AND_INDENT();
+int Thing::get_carried_wand_highest_value(Thingp *out) {
+  TRACE_AND_INDENT();
   int highest_value = -1;
 
   *out = nullptr;
-  if (!monstp) {
+  if (! monstp) {
     return highest_value;
   }
 
-  for (const auto& item : monstp->carrying) {
+  for (const auto &item : monstp->carrying) {
     auto t = level->thing_find(item.id);
-    if (!t) {
+    if (! t) {
       continue;
     }
-    if (!t->is_wand()) {
+    if (! t->is_wand()) {
       continue;
     }
 
     auto v = get_item_value(t);
-    if (!*out) {
-      *out = t;
+    if (! *out) {
+      *out          = t;
       highest_value = v;
     } else {
       if (v > highest_value) {
-        *out = t;
+        *out          = t;
         highest_value = v;
       }
     }
@@ -239,31 +239,31 @@ int Thing::get_carried_wand_highest_value (Thingp *out)
   return highest_value;
 }
 
-int Thing::get_carried_food_highest_value (Thingp *out)
-{ TRACE_AND_INDENT();
+int Thing::get_carried_food_highest_value(Thingp *out) {
+  TRACE_AND_INDENT();
   int highest_value = -1;
 
   *out = nullptr;
-  if (!monstp) {
+  if (! monstp) {
     return highest_value;
   }
 
-  for (const auto& item : monstp->carrying) {
+  for (const auto &item : monstp->carrying) {
     auto t = level->thing_find(item.id);
-    if (!t) {
+    if (! t) {
       continue;
     }
-    if (!t->is_food()) {
+    if (! t->is_food()) {
       continue;
     }
 
     auto v = get_item_value(t);
-    if (!*out) {
-      *out = t;
+    if (! *out) {
+      *out          = t;
       highest_value = v;
     } else {
       if (v > highest_value) {
-        *out = t;
+        *out          = t;
         highest_value = v;
       }
     }

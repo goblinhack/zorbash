@@ -11,8 +11,8 @@
 #include "my_thing.h"
 #include "my_thing_template.h"
 
-void Thing::hunger_clock (void)
-{ TRACE_AND_INDENT();
+void Thing::hunger_clock(void) {
+  TRACE_AND_INDENT();
   // TODO
   return;
 
@@ -27,19 +27,15 @@ void Thing::hunger_clock (void)
     // dead("by starved to death");
   }
 
-  int hungry_at =
-    (int) ((double) get_health_max() *
-       ((double) tpp->health_hunger_pct() / 100.0));
+  int hungry_at = (int) ((double) get_health_max() * ((double) tpp->health_hunger_pct() / 100.0));
 
   auto old_is_hungry = is_hungry;
-  is_hungry = get_health() < hungry_at;
+  is_hungry          = get_health() < hungry_at;
 
-  int starving_at =
-    (int) ((double) get_health_max() *
-       ((double) tpp->health_starving_pct() / 100.0));
+  int starving_at = (int) ((double) get_health_max() * ((double) tpp->health_starving_pct() / 100.0));
 
   auto old_is_starving = is_starving;
-  is_starving = get_health() < starving_at;
+  is_starving          = get_health() < starving_at;
 
   if (old_is_starving != is_starving) {
     if (is_starving) {

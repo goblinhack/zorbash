@@ -12,8 +12,8 @@
 #include "my_array_bounds_check.h"
 #include "my_ptrcheck.h"
 
-Level::~Level (void)
-{ TRACE_AND_INDENT();
+Level::~Level(void) {
+  TRACE_AND_INDENT();
   log("Delete level");
   if (game->level == this) {
     log("Delete current game level");
@@ -22,8 +22,8 @@ Level::~Level (void)
   oldptr(this);
 }
 
-void Level::fini (void)
-{ TRACE_AND_INDENT();
+void Level::fini(void) {
+  TRACE_AND_INDENT();
   log("-");
   log("Destroying, seed %u", seed);
   log("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
@@ -42,16 +42,16 @@ void Level::fini (void)
         for (auto z = 0; z < MAP_SLOTS; ++z) {
           auto id = get(all_things_id_at[group], x, y, z);
           if (id.ok()) {
-  #ifdef ENABLE_THING_ID_LOGS
+#ifdef ENABLE_THING_ID_LOGS
             LOG("Clean thing %08" PRIx32 " at %d,%d", id.id, x, y);
-  #endif
+#endif
             auto t = thing_find(id);
-            if (!t) {
+            if (! t) {
               continue;
             }
-  #ifdef ENABLE_THING_ID_LOGS
+#ifdef ENABLE_THING_ID_LOGS
             t->log("Call delete");
-  #endif
+#endif
             delete t;
           }
         }
@@ -74,7 +74,7 @@ void Level::fini (void)
           if (id.ok()) {
             err("Level fini: Did not detach thing id %08" PRIx32 " at %d,%d,%d", id.id, x, y, z);
             auto t = thing_find(id);
-            if (!t) {
+            if (! t) {
               continue;
             }
             t->err("Level fini: Did not detach thing id from all_things_id_at");

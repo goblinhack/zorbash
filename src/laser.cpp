@@ -21,21 +21,12 @@
 #include "my_vector_bounds_check.h"
 #include "my_random.h"
 
-Laser_::Laser_(
-    Levelp level,
-    ThingId thing_id,
-    point start, point stop,
-    point pixel_map_at,
-    uint32_t ts_start, uint32_t ts_stop) :
-  id(thing_id),
-  start(start),
-  stop(stop),
-  pixel_map_at(pixel_map_at),
-  ts_start(ts_start),
-  ts_stop(ts_stop)
-{ TRACE_AND_INDENT();
+Laser_::Laser_(Levelp level, ThingId thing_id, point start, point stop, point pixel_map_at, uint32_t ts_start,
+               uint32_t ts_stop)
+    : id(thing_id), start(start), stop(stop), pixel_map_at(pixel_map_at), ts_start(ts_start), ts_stop(ts_stop) {
+  TRACE_AND_INDENT();
   auto t = level->thing_find(id);
-  if (!t) {
+  if (! t) {
     ERR("no laser");
     return;
   }
@@ -77,20 +68,17 @@ Laser_::Laser_(
   tiles.resize(max_frames);
 
   for (int frame = 0; frame < max_frames; frame++) {
-    tiles[frame].push_back(
-      tile_find_mand(name + "." + std::to_string(frame + 1) + ".start"));
+    tiles[frame].push_back(tile_find_mand(name + "." + std::to_string(frame + 1) + ".start"));
     for (int mid = 0; mid < max_frames - 2; mid++) {
       tiles[frame].push_back(
-        tile_find_mand(name + "." + std::to_string(frame + 1) +
-                 ".mid." + std::to_string(mid + 1)));
+          tile_find_mand(name + "." + std::to_string(frame + 1) + ".mid." + std::to_string(mid + 1)));
     }
-    tiles[frame].push_back(
-      tile_find_mand(name + "." + std::to_string(frame + 1) + ".end"));
+    tiles[frame].push_back(tile_find_mand(name + "." + std::to_string(frame + 1) + ".end"));
   }
 }
 
-void Level::new_laser (ThingId id, point start, point stop, uint32_t dur)
-{ TRACE_AND_INDENT();
+void Level::new_laser(ThingId id, point start, point stop, uint32_t dur) {
+  TRACE_AND_INDENT();
   if (id.ok()) {
     auto t = thing_find(id);
     if (t) {
@@ -103,12 +91,11 @@ void Level::new_laser (ThingId id, point start, point stop, uint32_t dur)
   }
 
   uint32_t now = time_update_time_milli();
-  new_lasers.push_back(Laser(this, id,
-                 start, stop, pixel_map_at, now, now + dur));
+  new_lasers.push_back(Laser(this, id, start, stop, pixel_map_at, now, now + dur));
 }
 
-void Level::display_lasers (void)
-{ TRACE_AND_INDENT();
+void Level::display_lasers(void) {
+  TRACE_AND_INDENT();
 #if 0
   CON("-");
   for (auto p : all_lasers) {
@@ -119,9 +106,7 @@ void Level::display_lasers (void)
   }
 #endif
 
-  all_lasers.insert(std::end(all_lasers),
-            std::begin(new_lasers),
-            std::end(new_lasers));
+  all_lasers.insert(std::end(all_lasers), std::begin(new_lasers), std::end(new_lasers));
   new_lasers.clear();
 
   if (all_lasers.empty()) {
@@ -139,113 +124,106 @@ void Level::display_lasers (void)
 
   blit_init();
   auto now = time_update_time_milli();
-  auto e = std::remove_if(all_lasers.begin(),
-              all_lasers.end(),
-    [=, this] (Laser &p) {
-      float timestep = p.ts_stop - p.ts_start;
-      float dt = ((float)(now - p.ts_start)) / timestep;
+  auto e   = std::remove_if(all_lasers.begin(), all_lasers.end(), [=, this](Laser &p) {
+    float timestep = p.ts_stop - p.ts_start;
+    float dt       = ((float) (now - p.ts_start)) / timestep;
 
-      Thingp t;
+    Thingp t;
 
-      t = thing_find(p.id);
-      if (!t) {
-        return true;
+    t = thing_find(p.id);
+    if (! t) {
+      return true;
+    }
+
+    if (dt > 1) {
+      if (t) {
+        //
+        // Cannot kill at this point as will be in the display loop and
+        // that will break repeatable randomness.
+        //
+        t->dead_scheduled("End of laser");
+        t->has_laser = false;
+      }
+      return true;
+    }
+
+    auto start = p.start - p.pixel_map_at;
+    auto stop  = p.stop - p.pixel_map_at;
+
+    auto   dist  = distance(start, stop);
+    auto   steps = (int) ceil(dist) / TILE_WIDTH;
+    fpoint diff(stop.x - start.x, stop.y - start.y);
+    fpoint step       = diff / steps;
+    float  ninety_deg = RAD_360 / 4;
+
+    fpoint perp = step;
+    perp        = rotate_radians(perp, ninety_deg);
+    perp /= 2;
+
+    point p1;
+    point p2;
+    point old_p1;
+    point old_p2;
+
+    int frame = (int) ((float) Laser::max_frames * dt);
+    if (frame >= Laser::max_frames) {
+      frame = Laser::max_frames - 1;
+    }
+
+    for (int animstep = 0; animstep <= steps; animstep++) {
+      fpoint mid(start.x + step.x * animstep, start.y + step.y * animstep);
+
+      old_p1 = p1;
+      old_p2 = p2;
+
+      p1.x = mid.x - perp.x;
+      p1.y = mid.y - perp.y;
+      p2.x = mid.x + perp.x;
+      p2.y = mid.y + perp.y;
+
+      if (animstep == 0) {
+        continue;
       }
 
-      if (dt > 1) {
-        if (t) {
-          //
-          // Cannot kill at this point as will be in the display loop and
-          // that will break repeatable randomness.
-          //
-          t->dead_scheduled("End of laser");
-          t->has_laser = false;
-        }
-        return true;
+      Tilep tile;
+
+      if (animstep == 1) {
+        tile = get(p.tiles, frame, 0);
+      } else if (animstep == steps) {
+        tile = get(p.tiles, frame, Laser::max_frames - 1);
+      } else {
+        tile = get(p.tiles, frame, animstep);
       }
 
-      auto start = p.start - p.pixel_map_at;
-      auto stop = p.stop - p.pixel_map_at;
-
-      auto dist = distance(start, stop);
-      auto steps = (int)ceil(dist) / TILE_WIDTH;
-      fpoint diff(stop.x - start.x, stop.y - start.y);
-      fpoint step = diff / steps;
-      float ninety_deg = RAD_360 / 4;
-
-      fpoint perp = step;
-      perp = rotate_radians(perp, ninety_deg);
-      perp /= 2;
-
-      point p1;
-      point p2;
-      point old_p1;
-      point old_p2;
-
-      int frame = (int)((float)Laser::max_frames * dt);
-      if (frame >= Laser::max_frames) {
-        frame = Laser::max_frames - 1;
+      if (! tile) {
+        t->err("No tile for laser, animstep %d, frame %d, steps %d", animstep, frame, steps);
+        break;
       }
+      tile_blit(tile, old_p1, p1, old_p2, p2);
+    }
 
-      for (int animstep = 0; animstep <= steps; animstep++) {
-        fpoint mid(start.x + step.x * animstep,
-               start.y + step.y * animstep);
-
-        old_p1 = p1;
-        old_p2 = p2;
-
-        p1.x = mid.x - perp.x;
-        p1.y = mid.y - perp.y;
-        p2.x = mid.x + perp.x;
-        p2.y = mid.y + perp.y;
-
-        if (animstep == 0) {
-          continue;
-        }
-
-        Tilep tile;
-
-        if (animstep == 1) {
-          tile = get(p.tiles, frame, 0);
-        } else if (animstep == steps) {
-          tile = get(p.tiles, frame, Laser::max_frames - 1);
-        } else {
-          tile = get(p.tiles, frame, animstep);
-        }
-
-        if (!tile) {
-          t->err("No tile for laser, animstep %d, frame %d, steps %d",
-               animstep, frame, steps);
-          break;
-        }
-        tile_blit(tile, old_p1, p1, old_p2, p2);
-      }
-
-      return false;
-    });
+    return false;
+  });
   all_lasers.erase(e, all_lasers.end());
 
   blit_flush();
 }
 
-bool Thing::laser_anim_exists (void)
-{ TRACE_AND_INDENT();
+bool Thing::laser_anim_exists(void) {
+  TRACE_AND_INDENT();
   return has_laser;
 }
 
-void Thing::delete_laser (void)
-{ TRACE_AND_INDENT();
-  auto e = std::remove_if(level->all_lasers.begin(),
-              level->all_lasers.end(),
-    [=, this] (Laser &p) {
-      if (p.id == id) {
-        log("Remove laser");
-        return true;
-      } else {
-        return false;
-      }
+void Thing::delete_laser(void) {
+  TRACE_AND_INDENT();
+  auto e = std::remove_if(level->all_lasers.begin(), level->all_lasers.end(), [=, this](Laser &p) {
+    if (p.id == id) {
+      log("Remove laser");
+      return true;
+    } else {
+      return false;
     }
-  );
+  });
 
   level->all_lasers.erase(e, level->all_lasers.end());
   has_laser = false;

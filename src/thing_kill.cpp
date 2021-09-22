@@ -22,8 +22,7 @@
 //
 // Lower level function than dead. Adds the thing to gc.
 //
-void Thing::kill (Thingp killer, const char *reason)
-{
+void Thing::kill(Thingp killer, const char *reason) {
   //
   // Check we're not in a death loop
   //
@@ -47,7 +46,7 @@ void Thing::kill (Thingp killer, const char *reason)
     // Unless it is already a corpse. In such a case, if a corpse is
     // eaten we want to remove it.
     //
-    if (!is_corpse_currently) {
+    if (! is_corpse_currently) {
       return;
     }
 
@@ -59,27 +58,23 @@ void Thing::kill (Thingp killer, const char *reason)
     }
   }
 
-
-  if (!level->is_being_destroyed) {
+  if (! level->is_being_destroyed) {
     auto on_death = on_death_do();
-    if (!std::empty(on_death)) {
+    if (! std::empty(on_death)) {
       auto t = split_tokens(on_death, '.');
       if (t.size() == 2) {
-        auto mod = t[0];
-        auto fn = t[1];
+        auto        mod   = t[0];
+        auto        fn    = t[1];
         std::size_t found = fn.find("()");
         if (found != std::string::npos) {
           fn = fn.replace(found, 2, "");
         }
 
-        dbg("Call %s.%s(%s)", mod.c_str(), fn.c_str(),
-          to_string().c_str());
+        dbg("Call %s.%s(%s)", mod.c_str(), fn.c_str(), to_string().c_str());
 
-        py_call_void_fn(mod.c_str(), fn.c_str(),
-                id.id, (unsigned int)mid_at.x, (unsigned int)mid_at.y);
+        py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) mid_at.x, (unsigned int) mid_at.y);
       } else {
-        ERR("Bad on_death call [%s] expected mod:function, got %d elems",
-          on_death.c_str(), (int)on_death.size());
+        ERR("Bad on_death call [%s] expected mod:function, got %d elems", on_death.c_str(), (int) on_death.size());
       }
     }
   }
@@ -112,12 +107,12 @@ void Thing::kill (Thingp killer, const char *reason)
   // Set is_dead after the log message or we print it as dead
   //
   auto The = text_The();
-  is_dead = true;
+  is_dead  = true;
 
   //
   // Resurrect unless say this was a minion and its master died
   //
-  if (!is_resurrection_blocked) {
+  if (! is_resurrection_blocked) {
     if (is_resurrectable()) {
       set_tick_resurrect_when(game->tick_current + get_resurrect());
     }
@@ -175,7 +170,7 @@ void Thing::kill (Thingp killer, const char *reason)
     for (int splatter = 0; splatter < splatters; splatter++) {
       auto tpp = tp_random_blood();
       (void) level->thing_new(tpp, mid_at, fpoint(0.25, 0.25));
-      if (!tpp) {
+      if (! tpp) {
         err("Could not place blood");
         break;
       }
@@ -189,18 +184,16 @@ void Thing::kill (Thingp killer, const char *reason)
     //
     // Poor player
     //
-    if (!get_score()) {
+    if (! get_score()) {
       incr_score(1);
     }
 
     if (game->config.hiscores.is_new_hiscore(this)) {
       if (game->robot_mode) {
-        TOPCON("%%fg=yellow$New robo high score, %s place!%%fg=reset$",
-             game->config.hiscores.place_str(this));
+        TOPCON("%%fg=yellow$New robo high score, %s place!%%fg=reset$", game->config.hiscores.place_str(this));
         TOPCON("RIP: Robot killed %s.", reason);
       } else {
-        TOPCON("%%fg=yellow$New high score, %s place!%%fg=reset$",
-             game->config.hiscores.place_str(this));
+        TOPCON("%%fg=yellow$New high score, %s place!%%fg=reset$", game->config.hiscores.place_str(this));
         TOPCON("RIP: Player killed %s.", reason);
       }
       game->config.hiscores.add_new_hiscore(this, title(), reason);
@@ -234,7 +227,7 @@ void Thing::kill (Thingp killer, const char *reason)
       dbg("Already a corpse, clean it up");
     }
     auto tpp = tp_random_bones();
-    if (!tpp) {
+    if (! tpp) {
       err("Could not place bones");
     }
     (void) level->thing_new(tpp, mid_at);
@@ -258,7 +251,7 @@ void Thing::kill (Thingp killer, const char *reason)
   //
   // If this was blocking the way to the player, update that now
   //
-  if (!level->is_being_destroyed) {
+  if (! level->is_being_destroyed) {
     if (is_obs_wall_or_door()) {
       level->dmap_to_player_update();
     }
@@ -273,13 +266,13 @@ void Thing::kill (Thingp killer, const char *reason)
   gc();
 }
 
-void Thing::kill (Thingp killer, const std::string &reason)
-{ TRACE_AND_INDENT();
+void Thing::kill(Thingp killer, const std::string &reason) {
+  TRACE_AND_INDENT();
   kill(killer, reason.c_str());
 }
 
-bool Thing::if_matches_then_kill (const std::string& what, const point &p)
-{ TRACE_AND_INDENT();
+bool Thing::if_matches_then_kill(const std::string &what, const point &p) {
+  TRACE_AND_INDENT();
   //
   // Don't destroy the floor under critical items
   //
@@ -288,7 +281,8 @@ bool Thing::if_matches_then_kill (const std::string& what, const point &p)
       if (t->is_critical_to_level()) {
         return true;
       }
-    } FOR_ALL_THINGS_END()
+    }
+    FOR_ALL_THINGS_END()
   }
 
   FOR_ALL_THINGS(level, t, p.x, p.y) {
@@ -305,7 +299,8 @@ bool Thing::if_matches_then_kill (const std::string& what, const point &p)
       //
       location_check_forced_all_things_at();
     }
-  } FOR_ALL_THINGS_END()
+  }
+  FOR_ALL_THINGS_END()
 
   return true;
 }

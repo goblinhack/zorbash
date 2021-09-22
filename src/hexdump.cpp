@@ -5,7 +5,7 @@
 //
 //
 #include <strings.h> // do not remove
-#include <string.h> // do not remove
+#include <string.h>  // do not remove
 #include <iostream>
 #include <iomanip>
 #include <vector>
@@ -24,24 +24,23 @@
 // 00000060  00 00 00 00 00 00 00 00  00 00 00 00 00 00 30 31 |..............01|
 // 00000070  32 33 34 35 61 62 63 64  65 66 67 68 69 6A 6B 6C |2345abcdefghi
 //
-void hexdump (const unsigned char *addr, size_t len)
-{
-  int skipping_blanks = false;
-  unsigned char empty[HEX_DUMP_WIDTH] = {0};
-  unsigned char buf[HEX_DUMP_WIDTH + 1];
+void hexdump(const unsigned char *addr, size_t len) {
+  int            skipping_blanks       = false;
+  unsigned char  empty[HEX_DUMP_WIDTH] = {0};
+  unsigned char  buf[HEX_DUMP_WIDTH + 1];
   unsigned char *pc = (__typeof__(pc)) addr;
-  size_t i;
-  unsigned int x;
+  size_t         i;
+  unsigned int   x;
 
   std::cout << std::dec << len << " bytes:" << std::endl;
 
-  if (!len) {
+  if (! len) {
     return;
   }
 
   for (i = 0, x = 0; i < len; i++, x++) {
     if ((i % HEX_DUMP_WIDTH) == 0) {
-      if (!skipping_blanks) {
+      if (! skipping_blanks) {
         if (i != 0) {
           std::cout << " |" << std::setw(HEX_DUMP_WIDTH) << buf << "|" << std::endl;
         }
@@ -50,10 +49,10 @@ void hexdump (const unsigned char *addr, size_t len)
       /*
        * Skip blank blocks.
        */
-      if (!memcmp(pc + i, empty, sizeof(empty))) {
+      if (! memcmp(pc + i, empty, sizeof(empty))) {
         i += HEX_DUMP_WIDTH - 1;
         skipping_blanks = true;
-        buf[0] = '\0';
+        buf[0]          = '\0';
         continue;
       }
 
@@ -62,7 +61,7 @@ void hexdump (const unsigned char *addr, size_t len)
       x = 0;
     }
 
-    if (x && (((i % (HEX_DUMP_WIDTH/2))) == 0)) {
+    if (x && (((i % (HEX_DUMP_WIDTH / 2))) == 0)) {
       std::cout << " ";
     }
 
@@ -79,7 +78,7 @@ void hexdump (const unsigned char *addr, size_t len)
     buf[(i % HEX_DUMP_WIDTH) + 1] = '\0';
   }
 
-  if (!buf[0]) {
+  if (! buf[0]) {
     if (skipping_blanks) {
       std::cout << "  *\n";
     }
@@ -89,7 +88,7 @@ void hexdump (const unsigned char *addr, size_t len)
 
   while ((i % HEX_DUMP_WIDTH) != 0) {
     std::cout << "   ";
-    if (i && (((i % (HEX_DUMP_WIDTH/2))) == 0)) {
+    if (i && (((i % (HEX_DUMP_WIDTH / 2))) == 0)) {
       std::cout << " ";
     }
 
@@ -99,7 +98,4 @@ void hexdump (const unsigned char *addr, size_t len)
   std::cout << " |" << std::setw(-HEX_DUMP_WIDTH) << buf << "|" << std::endl;
 }
 
-void hexdump (std::vector<unsigned char> &v)
-{
-  hexdump(v.data(), v.size());
-}
+void hexdump(std::vector<unsigned char> &v) { hexdump(v.data(), v.size()); }

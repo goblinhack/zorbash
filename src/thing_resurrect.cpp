@@ -11,14 +11,13 @@
 #include "my_thing.h"
 #include "my_sprintf.h"
 
-void Thing::resurrect_tick (void)
-{ TRACE_AND_INDENT();
+void Thing::resurrect_tick(void) {
+  TRACE_AND_INDENT();
   //
   // Rise at the apointed time
   //
   if (game->tick_current < get_tick_resurrect_when()) {
-    dbg("Too soon to rise from the grave, at %d wait for %d",
-      game->tick_current, get_tick_resurrect_when());
+    dbg("Too soon to rise from the grave, at %d wait for %d", game->tick_current, get_tick_resurrect_when());
     return;
   }
 
@@ -34,11 +33,11 @@ void Thing::resurrect_tick (void)
   //
   // Resurrect, but weaker
   //
-  if (!is_resurrecting) {
+  if (! is_resurrecting) {
     auto v = get_health_max() / 2;
     if (v > 0) {
       is_resurrecting = true;
-      tile_curr = 0;
+      tile_curr       = 0;
       animate();
 
       dbg("%%fg=orange$%s rises from the grave!%%fg=reset$", text_The().c_str());
@@ -51,7 +50,7 @@ void Thing::resurrect_tick (void)
       set_tick_last_did_something(game->tick_current);
       is_dead = false;
 
-      if (!i_set_is_monst) {
+      if (! i_set_is_monst) {
         i_set_is_monst = true;
         level->set_is_monst(mid_at.x, mid_at.y);
       }

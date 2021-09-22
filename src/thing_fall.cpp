@@ -18,8 +18,8 @@
 //
 // Python callback upon being fall
 //
-void Thing::on_fall (void)
-{ TRACE_AND_INDENT();
+void Thing::on_fall(void) {
+  TRACE_AND_INDENT();
   auto on_fall = tp()->on_fall_do();
   if (std::empty(on_fall)) {
     return;
@@ -27,37 +27,27 @@ void Thing::on_fall (void)
 
   auto t = split_tokens(on_fall, '.');
   if (t.size() == 2) {
-    auto mod = t[0];
-    auto fn = t[1];
+    auto        mod   = t[0];
+    auto        fn    = t[1];
     std::size_t found = fn.find("()");
     if (found != std::string::npos) {
       fn = fn.replace(found, 2, "");
     }
 
-    dbg("Call %s.%s(%ss)", mod.c_str(), fn.c_str(),
-      to_string().c_str());
+    dbg("Call %s.%s(%ss)", mod.c_str(), fn.c_str(), to_string().c_str());
 
-    py_call_void_fn(mod.c_str(), fn.c_str(), id.id,
-            (unsigned int)mid_at.x, (unsigned int)mid_at.y);
+    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) mid_at.x, (unsigned int) mid_at.y);
   } else {
-    ERR("Bad on_fall call [%s] expected mod:function, got %d elems",
-      on_fall.c_str(), (int)on_fall.size());
+    ERR("Bad on_fall call [%s] expected mod:function, got %d elems", on_fall.c_str(), (int) on_fall.size());
   }
 }
 
-void Thing::fall (float fall_height, ts_t ms)
-{ TRACE_AND_INDENT();
+void Thing::fall(float fall_height, ts_t ms) {
+  TRACE_AND_INDENT();
   dbg("Can fall?");
   TRACE_AND_INDENT();
-  if (is_changing_level ||
-    is_hidden ||
-    is_falling ||
-    is_waiting_to_ascend_dungeon ||
-    is_waiting_to_descend_sewer ||
-    is_waiting_to_descend_dungeon ||
-    is_waiting_to_ascend_sewer ||
-    is_waiting_to_fall ||
-    is_jumping) {
+  if (is_changing_level || is_hidden || is_falling || is_waiting_to_ascend_dungeon || is_waiting_to_descend_sewer ||
+      is_waiting_to_descend_dungeon || is_waiting_to_ascend_sewer || is_waiting_to_fall || is_jumping) {
     dbg("No");
     return;
   }
@@ -67,7 +57,7 @@ void Thing::fall (float fall_height, ts_t ms)
     return;
   }
 
-  if (!is_able_to_fall()) {
+  if (! is_able_to_fall()) {
     dbg("No, unable to fall");
     return;
   }
@@ -110,8 +100,7 @@ void Thing::fall (float fall_height, ts_t ms)
   }
 }
 
-float Thing::get_fall (void)
-{
+float Thing::get_fall(void) {
   auto t = time_get_time_ms_cached();
 
   if (t >= get_ts_fall_end()) {
@@ -122,9 +111,7 @@ float Thing::get_fall (void)
     return (0);
   }
 
-  float time_step =
-    (float)(t - get_ts_fall_begin()) /
-    (float)(get_ts_fall_end() - get_ts_fall_begin());
+  float time_step = (float) (t - get_ts_fall_begin()) / (float) (get_ts_fall_end() - get_ts_fall_begin());
 
   //
   // This hide things like the sword
@@ -135,7 +122,7 @@ float Thing::get_fall (void)
     if (is_player()) {
       dbg("Player is waiting to complete the fall");
       level->ts_fade_out_begin = time_get_time_ms_cached();
-      is_waiting_to_fall = true;
+      is_waiting_to_fall       = true;
     }
   }
 
@@ -144,9 +131,9 @@ float Thing::get_fall (void)
   return (height);
 }
 
-bool Thing::fall_to_next_level (void)
-{ TRACE_AND_INDENT();
-  if (!monstp) {
+bool Thing::fall_to_next_level(void) {
+  TRACE_AND_INDENT();
+  if (! monstp) {
     return false;
   }
 
@@ -169,7 +156,7 @@ bool Thing::fall_to_next_level (void)
   }
 
   auto next_level = get(game->world.levels, where_to.x, where_to.y, where_to.z);
-  if (!next_level) {
+  if (! next_level) {
     if (is_player()) {
       TOPCON("The chasm is permanently blocked!");
     }
@@ -212,36 +199,24 @@ bool Thing::fall_to_next_level (void)
     }
 
     dbg("Try to fall to %d,%d", x, y);
-    if (!next_level->is_able_to_stand_on(x, y)) {
+    if (! next_level->is_able_to_stand_on(x, y)) {
       continue;
     }
 
-    if (next_level->is_ascend_dungeon(x, y)   ||
-      next_level->is_monst(x, y)            ||
-      next_level->is_rock(x, y)             ||
-      next_level->is_door(x, y)             ||
-      next_level->is_secret_door(x, y)      ||
-      next_level->is_minion_generator(x, y) ||
-      next_level->is_chasm(x, y)            ||
-      next_level->is_wall(x, y)             ||
-      next_level->is_ascend_sewer(x, y)     ||
-      next_level->is_descend_sewer(x, y)    ||
-      next_level->is_descend_dungeon(x, y)) {
+    if (next_level->is_ascend_dungeon(x, y) || next_level->is_monst(x, y) || next_level->is_rock(x, y) ||
+        next_level->is_door(x, y) || next_level->is_secret_door(x, y) || next_level->is_minion_generator(x, y) ||
+        next_level->is_chasm(x, y) || next_level->is_wall(x, y) || next_level->is_ascend_sewer(x, y) ||
+        next_level->is_descend_sewer(x, y) || next_level->is_descend_dungeon(x, y)) {
       dbg("No, %d,%d is a special tile", x, y);
       continue;
     }
 
-    if (next_level->is_floor(x, y) ||
-      next_level->is_corridor(x, y) ||
-      next_level->is_bridge(x, y) ||
-      next_level->is_water(x, y) ||
-      next_level->is_fire(x, y) ||
-      next_level->is_lava(x, y)) {
+    if (next_level->is_floor(x, y) || next_level->is_corridor(x, y) || next_level->is_bridge(x, y) ||
+        next_level->is_water(x, y) || next_level->is_fire(x, y) || next_level->is_lava(x, y)) {
 
       IF_DEBUG1 {
-        FOR_ALL_THINGS(next_level, t, x, y) {
-          t->log("Landed under thing on new level");
-        } FOR_ALL_THINGS_END()
+        FOR_ALL_THINGS(next_level, t, x, y) { t->log("Landed under thing on new level"); }
+        FOR_ALL_THINGS_END()
       }
 
       if (is_player()) {
@@ -330,8 +305,7 @@ bool Thing::fall_to_next_level (void)
 
       if (is_monst() || is_player()) {
         bounce(2.0 /* height */, 0.5 /* fade */, 100, 3);
-        next_level->thing_new(tp_random_blood_splatter()->name(),
-                    new_pos);
+        next_level->thing_new(tp_random_blood_splatter()->name(), new_pos);
       }
 
       next_level->scroll_map_to_player();
@@ -342,7 +316,7 @@ bool Thing::fall_to_next_level (void)
       //
       dbg("End of falling to next level");
       level_pop();
-      is_falling = false;
+      is_falling        = false;
       is_changing_level = false;
       update_interpolated_position();
       level_push();
@@ -361,7 +335,7 @@ bool Thing::fall_to_next_level (void)
         }
       }
 
-      if (!is_dead) {
+      if (! is_dead) {
         on_fall();
       }
 

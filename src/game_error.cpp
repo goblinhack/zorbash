@@ -20,8 +20,8 @@
 
 static WidPopup *game_error_window;
 
-static void game_error_destroy (void)
-{ TRACE_AND_INDENT();
+static void game_error_destroy(void) {
+  TRACE_AND_INDENT();
   delete game_error_window;
   game_error_window = nullptr;
 
@@ -36,39 +36,43 @@ static void game_error_destroy (void)
   TOPCON("The dungeon went dark briefly. What happened?");
 }
 
-static uint8_t game_error_key_up (Widp w, const struct SDL_Keysym *key)
-{ TRACE_AND_INDENT();
+static uint8_t game_error_key_up(Widp w, const struct SDL_Keysym *key) {
+  TRACE_AND_INDENT();
   if (sdl_shift_held) {
-    if (key->scancode == (SDL_Scancode)game->config.key_console) {
+    if (key->scancode == (SDL_Scancode) game->config.key_console) {
       return false;
     }
   }
 
   switch (key->mod) {
-    case KMOD_LCTRL:
-    case KMOD_RCTRL:
-    default:
-    switch (key->sym) {
-      default: { TRACE_AND_INDENT();
-        auto c = wid_event_to_char(key);
-        switch (c) {
-          case '\n':
-          case SDLK_ESCAPE: { TRACE_AND_INDENT();
-            game_error_destroy();
-            return true;
+    case KMOD_LCTRL :
+    case KMOD_RCTRL :
+    default :
+      switch (key->sym) {
+        default :
+          {
+            TRACE_AND_INDENT();
+            auto c = wid_event_to_char(key);
+            switch (c) {
+              case '\n' :
+              case SDLK_ESCAPE :
+                {
+                  TRACE_AND_INDENT();
+                  game_error_destroy();
+                  return true;
+                }
+            }
           }
-        }
       }
-    }
   }
 
   return true;
 }
 
-static uint8_t game_error_key_down (Widp w, const struct SDL_Keysym *key)
-{ TRACE_AND_INDENT();
+static uint8_t game_error_key_down(Widp w, const struct SDL_Keysym *key) {
+  TRACE_AND_INDENT();
   if (sdl_shift_held) {
-    if (key->scancode == (SDL_Scancode)game->config.key_console) {
+    if (key->scancode == (SDL_Scancode) game->config.key_console) {
       return false;
     }
   }
@@ -76,30 +80,27 @@ static uint8_t game_error_key_down (Widp w, const struct SDL_Keysym *key)
   return true;
 }
 
-static uint8_t game_error_mouse_up (Widp w, int32_t x, int32_t y, uint32_t button)
-{ TRACE_AND_INDENT();
+static uint8_t game_error_mouse_up(Widp w, int32_t x, int32_t y, uint32_t button) {
+  TRACE_AND_INDENT();
   game_error_destroy();
   return true;
 }
 
-void game_error (std::string error)
-{ TRACE_AND_INDENT();
+void game_error(std::string error) {
+  TRACE_AND_INDENT();
   CON("ERROR: %s", error.c_str());
 
   if (game_error_window) {
     game_error_destroy();
   }
 
-  point tl = make_point(5, 5);
-  point br = make_point(TERM_WIDTH - 5, TERM_HEIGHT - 5);
-  auto width = br.x - tl.x;
+  point tl    = make_point(5, 5);
+  point br    = make_point(TERM_WIDTH - 5, TERM_HEIGHT - 5);
+  auto  width = br.x - tl.x;
 
-  game_error_window = new WidPopup("Game error", tl, br,
-                   tile_find_mand("bug"), "");
-  wid_set_on_key_up(
-    game_error_window->wid_popup_container, game_error_key_up);
-  wid_set_on_key_down(
-    game_error_window->wid_popup_container, game_error_key_down);
+  game_error_window = new WidPopup("Game error", tl, br, tile_find_mand("bug"), "");
+  wid_set_on_key_up(game_error_window->wid_popup_container, game_error_key_up);
+  wid_set_on_key_down(game_error_window->wid_popup_container, game_error_key_down);
 
   wid_set_do_not_lower(game_error_window->wid_popup_container, true);
 
@@ -112,14 +113,16 @@ void game_error (std::string error)
   game_error_window->log(" ");
   sdl_screenshot_do();
 
-  { TRACE_AND_INDENT();
+  {
+    TRACE_AND_INDENT();
     auto tb = new Traceback();
     tb->init();
     auto s = tb->to_string();
     game_error_window->log(s, true, false);
   }
 
-  { TRACE_AND_INDENT();
+  {
+    TRACE_AND_INDENT();
     auto p = game_error_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "dismiss");
 

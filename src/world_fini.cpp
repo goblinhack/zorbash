@@ -9,8 +9,8 @@
 #include "my_depth.h"
 #include "my_array_bounds_check.h"
 
-void World::fini (void)
-{ TRACE_AND_INDENT();
+void World::fini(void) {
+  TRACE_AND_INDENT();
   LOG("World fini: Destroy all levels");
   for (auto x = 0; x < LEVELS_ACROSS; ++x) {
     for (auto y = 0; y < LEVELS_DOWN; ++y) {
@@ -19,7 +19,7 @@ void World::fini (void)
         if (l) {
           l->fini();
           delete l;
-          set(levels, x, y, z, (Level*)nullptr);
+          set(levels, x, y, z, (Level *) nullptr);
         }
       }
     }

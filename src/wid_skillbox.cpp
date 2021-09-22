@@ -16,31 +16,25 @@
 #include "my_thing.h"
 #include "my_sdl.h"
 
-void wid_skillbox_fini (void)
-{ TRACE_AND_INDENT();
+void wid_skillbox_fini(void) {
+  TRACE_AND_INDENT();
   DBG3("Skillbox: Fini");
 }
 
-uint8_t wid_skillbox_init (void)
-{ TRACE_AND_INDENT();
+uint8_t wid_skillbox_init(void) {
+  TRACE_AND_INDENT();
   return true;
 }
 
-void wid_skillbox_mouse_over_b (Widp w,
-                int32_t relx, int32_t rely,
-                int32_t wheelx, int32_t wheely)
-{ TRACE_AND_INDENT();
+void wid_skillbox_mouse_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely) {
+  TRACE_AND_INDENT();
   DBG3("Skillbox: Begin over skillbox");
   TRACE_AND_INDENT();
-  if ((game->state == Game::STATE_CHOOSING_TARGET) ||
-    (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
-    (game->state == Game::STATE_MOVING_ITEMS) ||
-    (game->state == Game::STATE_COLLECTING_ITEMS) ||
-    (game->state == Game::STATE_WIELDING_ITEMS) ||
-    (game->state == Game::STATE_SAVE_MENU) ||
-    (game->state == Game::STATE_LOAD_MENU) ||
-    (game->state == Game::STATE_QUIT_MENU) ||
-    (game->state == Game::STATE_ENCHANTING_ITEMS)) {
+  if ((game->state == Game::STATE_CHOOSING_TARGET) || (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
+      (game->state == Game::STATE_MOVING_ITEMS) || (game->state == Game::STATE_COLLECTING_ITEMS) ||
+      (game->state == Game::STATE_WIELDING_ITEMS) || (game->state == Game::STATE_SAVE_MENU) ||
+      (game->state == Game::STATE_LOAD_MENU) || (game->state == Game::STATE_QUIT_MENU) ||
+      (game->state == Game::STATE_ENCHANTING_ITEMS)) {
     DBG3("Skillbox: Moving items; ignore");
     return;
   }
@@ -51,7 +45,7 @@ void wid_skillbox_mouse_over_b (Widp w,
   }
 
   auto level = game->level;
-  if (!level) {
+  if (! level) {
     DBG3("Skillbox: No level; ignore");
     return;
   }
@@ -60,7 +54,7 @@ void wid_skillbox_mouse_over_b (Widp w,
 
   DBG3("Skillbox: Begin over skillbox slot %d", slot);
   TRACE_AND_INDENT();
-  if (!level->skillbox_over(slot)) {
+  if (! level->skillbox_over(slot)) {
     DBG3("Skillbox: Not over anything");
     return;
   }
@@ -73,19 +67,15 @@ void wid_skillbox_mouse_over_b (Widp w,
   }
 }
 
-void wid_skillbox_mouse_over_e (Widp w)
-{ TRACE_AND_INDENT();
+void wid_skillbox_mouse_over_e(Widp w) {
+  TRACE_AND_INDENT();
   DBG3("Skillbox: End over skillbox");
   TRACE_AND_INDENT();
-  if ((game->state == Game::STATE_CHOOSING_TARGET) ||
-    (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
-    (game->state == Game::STATE_MOVING_ITEMS) ||
-    (game->state == Game::STATE_COLLECTING_ITEMS) ||
-    (game->state == Game::STATE_WIELDING_ITEMS) ||
-    (game->state == Game::STATE_SAVE_MENU) ||
-    (game->state == Game::STATE_LOAD_MENU) ||
-    (game->state == Game::STATE_QUIT_MENU) ||
-    (game->state == Game::STATE_ENCHANTING_ITEMS)) {
+  if ((game->state == Game::STATE_CHOOSING_TARGET) || (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
+      (game->state == Game::STATE_MOVING_ITEMS) || (game->state == Game::STATE_COLLECTING_ITEMS) ||
+      (game->state == Game::STATE_WIELDING_ITEMS) || (game->state == Game::STATE_SAVE_MENU) ||
+      (game->state == Game::STATE_LOAD_MENU) || (game->state == Game::STATE_QUIT_MENU) ||
+      (game->state == Game::STATE_ENCHANTING_ITEMS)) {
     DBG3("Skillbox: Moving items; ignore");
     return;
   }
@@ -96,7 +86,7 @@ void wid_skillbox_mouse_over_e (Widp w)
   }
 
   auto level = game->level;
-  if (!level) {
+  if (! level) {
     DBG3("Skillbox: No level; ignore");
     return;
   }
@@ -105,7 +95,7 @@ void wid_skillbox_mouse_over_e (Widp w)
 
   DBG3("Skillbox: Over skillbox slot %d", slot);
   TRACE_AND_INDENT();
-  if (!level->skillbox_over(slot)) {
+  if (! level->skillbox_over(slot)) {
     return;
   }
 
@@ -116,40 +106,35 @@ void wid_skillbox_mouse_over_e (Widp w)
   //
 }
 
-uint8_t wid_skillbox_item_mouse_up (Widp w, int32_t x, int32_t y,
-                  uint32_t button)
-{ TRACE_AND_INDENT();
+uint8_t wid_skillbox_item_mouse_up(Widp w, int32_t x, int32_t y, uint32_t button) {
+  TRACE_AND_INDENT();
   auto slot = wid_get_int_context(w);
   DBG3("Skillbox: Mouse up on slot %d", slot);
 
-  if ((game->state == Game::STATE_ENCHANTING_ITEMS) ||
-    (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
-    (game->state == Game::STATE_CHOOSING_SKILLS) ||
-    (game->state == Game::STATE_MOVING_ITEMS) ||
-    (game->state == Game::STATE_SAVE_MENU) ||
-    (game->state == Game::STATE_LOAD_MENU) ||
-    (game->state == Game::STATE_QUIT_MENU) ||
-    (game->state == Game::STATE_WIELDING_ITEMS) ||
-    (game->state == Game::STATE_COLLECTING_ITEMS)) {
+  if ((game->state == Game::STATE_ENCHANTING_ITEMS) || (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
+      (game->state == Game::STATE_CHOOSING_SKILLS) || (game->state == Game::STATE_MOVING_ITEMS) ||
+      (game->state == Game::STATE_SAVE_MENU) || (game->state == Game::STATE_LOAD_MENU) ||
+      (game->state == Game::STATE_QUIT_MENU) || (game->state == Game::STATE_WIELDING_ITEMS) ||
+      (game->state == Game::STATE_COLLECTING_ITEMS)) {
     wid_thing_info_fini();
     return false;
   }
 
   auto level = game->level;
-  if (!level) {
+  if (! level) {
     return true;
   }
 
   auto player = level->player;
-  if (!player){
+  if (! player) {
     return true;
   }
 
-  if (player->is_dead){
+  if (player->is_dead) {
     return true;
   }
 
-  if (!level->skillbox_chosen(slot)) {
+  if (! level->skillbox_chosen(slot)) {
     DBG3("Skillbox: Nothing on skill slot %d", slot);
     return true;
   }

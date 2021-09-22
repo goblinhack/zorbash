@@ -10,8 +10,8 @@
 #include "my_array_bounds_check.h"
 #include "my_ptrcheck.h"
 
-bool Thing::place (const std::string& what, const point &p)
-{ TRACE_AND_INDENT();
+bool Thing::place(const std::string &what, const point &p) {
+  TRACE_AND_INDENT();
   dbg("place");
 
   level->thing_new(what, fpoint(p.x, p.y));

@@ -18,18 +18,18 @@
 #include "my_thing_template.h"
 #include "my_monst.h"
 
-void Thing::get_light_strength_including_torch_effect (int &out_light_strength) const
-{ TRACE_AND_INDENT();
+void Thing::get_light_strength_including_torch_effect(int &out_light_strength) const {
+  TRACE_AND_INDENT();
   auto light_strength = get_initial_light_strength();
 
   auto torch_count = 0;
   for (auto oid : monstp->carrying) {
     auto o = level->thing_find(oid);
-    if (!o) {
+    if (! o) {
       continue;
     }
 
-    if (!o->is_torch()) {
+    if (! o->is_torch()) {
       continue;
     }
 
@@ -49,12 +49,12 @@ void Thing::get_light_strength_including_torch_effect (int &out_light_strength) 
   }
 }
 
-void Thing::update_light_strength_including_torch_effect (int &out_light_strength)
-{ TRACE_AND_INDENT();
+void Thing::update_light_strength_including_torch_effect(int &out_light_strength) {
+  TRACE_AND_INDENT();
   auto orig_light_strength = out_light_strength;
-  int light_strength;
+  int  light_strength;
 
-  get_light_strength_including_torch_effect (light_strength);
+  get_light_strength_including_torch_effect(light_strength);
 
   if (orig_light_strength) {
     if (light_strength != orig_light_strength) {

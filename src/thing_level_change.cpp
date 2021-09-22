@@ -18,8 +18,8 @@
 // Get rid of all the hooks to other things that this thing has. e.g. the
 // weapons it carries etc.
 //
-void Thing::level_change (Levelp l)
-{ TRACE_AND_INDENT();
+void Thing::level_change(Levelp l) {
+  TRACE_AND_INDENT();
   if (level == l) {
     dbg("Change level; no, same level");
     return;
@@ -45,7 +45,7 @@ void Thing::level_change (Levelp l)
 
   if (is_player()) {
     old_level->player = nullptr;
-    level->player = this;
+    level->player     = this;
   }
 
   {

@@ -5,7 +5,7 @@
 //
 
 #include <strings.h> // do not remove
-#include <string.h> // do not remove
+#include <string.h>  // do not remove
 #include <sys/param.h>
 #include <unistd.h>
 #include <sys/stat.h>
@@ -19,11 +19,11 @@
 /*
  * Does the requested dir exist?
  */
-uint8_t dir_exists (const char *indir)
-{ TRACE_AND_INDENT();
+uint8_t dir_exists(const char *indir) {
+  TRACE_AND_INDENT();
   struct stat buf;
-  char *dir;
-  uint8_t rc;
+  char *      dir;
+  uint8_t     rc;
 
   /*
    * msys is crap and unless you remove the / from the end of the name
@@ -45,8 +45,8 @@ uint8_t dir_exists (const char *indir)
 /*
  * Given a directory, find out what ./ is.
  */
-char *dir_dot (void)
-{ TRACE_AND_INDENT();
+char *dir_dot(void) {
+  TRACE_AND_INDENT();
   static char buf[MAXPATHLEN];
 
   dospath2unix(getcwd(buf, sizeof(buf)));
@@ -58,12 +58,12 @@ char *dir_dot (void)
  * Remove \ and change to /
  * Given a directory, find out what ../ is.
  */
-char *dir_dotdot (char *s)
-{ TRACE_AND_INDENT();
+char *dir_dotdot(char *s) {
+  TRACE_AND_INDENT();
   uint32_t size;
-  char *end;
+  char *   end;
 
-  size = (uint32_t)strlen(s);
+  size = (uint32_t) strlen(s);
   if (size <= 1) {
     return (s);
   }
@@ -84,8 +84,8 @@ char *dir_dotdot (char *s)
 /*
  * Remove \ and change to /
  */
-char *dospath2unix (char *in)
-{ TRACE_AND_INDENT();
+char *dospath2unix(char *in) {
+  TRACE_AND_INDENT();
   char *s = in;
 
   while (*s) {

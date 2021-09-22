@@ -17,18 +17,18 @@
 #include "my_random.h"
 
 static Texp g_light_overlay_tex;
-static int g_light_overlay_texid;
+static int  g_light_overlay_texid;
 
 static Texp g_glow_overlay_tex;
-static int g_glow_overlay_texid;
+static int  g_glow_overlay_texid;
 
-Light::Light (void)
-{ TRACE_AND_INDENT();
+Light::Light(void) {
+  TRACE_AND_INDENT();
   newptr(this, "Light");
 }
 
-Light::~Light (void)
-{ TRACE_AND_INDENT();
+Light::~Light(void) {
+  TRACE_AND_INDENT();
   verify(this);
   if (is_being_destroyed) {
     die("Death recursion");
@@ -38,133 +38,127 @@ Light::~Light (void)
   oldptr(this);
 }
 
-void Light::draw_pixel (int16_t index, const point &p0, const point &p1)
-{
+void Light::draw_pixel(int16_t index, const point &p0, const point &p1) {
   RayPoint r;
-  r.p = p1;
+  r.p        = p1;
   r.distance = DISTANCE(p0.x, p0.y, p1.x, p1.y);
   points[index].push_back(r);
 }
 
 // http://www.edepot.com/linee.html
-void Light::draw_line (int16_t index, const point &p0, const point &p1)
-{
+void Light::draw_line(int16_t index, const point &p0, const point &p1) {
   points[index].resize(0);
 
   const point start = p0;
-  auto x = p0.x;
-  auto y = p0.y;
-  auto x2 = p1.x;
-  auto y2 = p1.y;
+  auto        x     = p0.x;
+  auto        y     = p0.y;
+  auto        x2    = p1.x;
+  auto        y2    = p1.y;
 
-  bool yLonger=false;
-  int shortLen=y2-y;
-  int longLen=x2-x;
-  if (abs(shortLen)>abs(longLen)) {
-  int swap=shortLen;
-  shortLen=longLen;
-  longLen=swap;				
-  yLonger=true;
+  bool yLonger  = false;
+  int  shortLen = y2 - y;
+  int  longLen  = x2 - x;
+  if (abs(shortLen) > abs(longLen)) {
+    int swap = shortLen;
+    shortLen = longLen;
+    longLen  = swap;
+    yLonger  = true;
   }
   int decInc;
-  if (longLen==0) decInc=0;
-  else decInc = (shortLen << 16) / longLen;
+  if (longLen == 0)
+    decInc = 0;
+  else
+    decInc = (shortLen << 16) / longLen;
 
   if (yLonger) {
-  if (longLen>0) {
-    longLen+=y;
-    for (int j=0x8000+(x<<16);y<=longLen;++y) {
-    draw_pixel(index, start, point(j >> 16, y));	
-    j+=decInc;
+    if (longLen > 0) {
+      longLen += y;
+      for (int j = 0x8000 + (x << 16); y <= longLen; ++y) {
+        draw_pixel(index, start, point(j >> 16, y));
+        j += decInc;
+      }
+      return;
+    }
+    longLen += y;
+    for (int j = 0x8000 + (x << 16); y >= longLen; --y) {
+      draw_pixel(index, start, point(j >> 16, y));
+      j -= decInc;
     }
     return;
   }
-  longLen+=y;
-  for (int j=0x8000+(x<<16);y>=longLen;--y) {
-    draw_pixel(index, start, point(j >> 16, y));	
-    j-=decInc;
-  }
-  return;	
-  }
 
-  if (longLen>0) {
-  longLen+=x;
-  for (int j=0x8000+(y<<16);x<=longLen;++x) {
+  if (longLen > 0) {
+    longLen += x;
+    for (int j = 0x8000 + (y << 16); x <= longLen; ++x) {
+      draw_pixel(index, start, point(x, j >> 16));
+      j += decInc;
+    }
+    return;
+  }
+  longLen += x;
+  for (int j = 0x8000 + (y << 16); x >= longLen; --x) {
     draw_pixel(index, start, point(x, j >> 16));
-    j+=decInc;
-  }
-  return;
-  }
-  longLen+=x;
-  for (int j=0x8000+(y<<16);x>=longLen;--x) {
-  draw_pixel(index, start, point(x, j >> 16));
-  j-=decInc;
+    j -= decInc;
   }
 }
 
-Lightp light_new (Thingp owner,
-          point offset,
-          int strength,
-          color col,
-          int fbo)
-{ TRACE_AND_INDENT();
+Lightp light_new(Thingp owner, point offset, int strength, color col, int fbo) {
+  TRACE_AND_INDENT();
   auto l = new Light(); // std::make_shared< class Light >();
 
-  l->offset         = offset;
-  l->orig_strength  = strength;
-  l->prev_strength  = strength;
-  l->owner          = owner;
-  l->col            = col;
-  l->fbo            = fbo;
+  l->offset        = offset;
+  l->orig_strength = strength;
+  l->prev_strength = strength;
+  l->owner         = owner;
+  l->col           = col;
+  l->fbo           = fbo;
 
   l->update(strength);
 
-  //log("Created");
+  // log("Created");
   return (l);
 }
 
-Lightp light_new (Thingp owner,
-          point offset,
-          int strength)
-{ TRACE_AND_INDENT();
+Lightp light_new(Thingp owner, point offset, int strength) {
+  TRACE_AND_INDENT();
   auto l = new Light(); // std::make_shared< class Light >();
 
-  l->offset         = offset;
-  l->orig_strength  = strength;
-  l->prev_strength  = strength;
-  l->owner          = owner;
-  l->ray_cast_only  = true;
-  l->fbo            = -1;
+  l->offset        = offset;
+  l->orig_strength = strength;
+  l->prev_strength = strength;
+  l->owner         = owner;
+  l->ray_cast_only = true;
+  l->fbo           = -1;
 
   l->update(strength);
 
-  //log("Created");
+  // log("Created");
   return (l);
 }
 
-void Light::update (int strength_in)
-{ TRACE_AND_INDENT();
-  if (!strength_in) {
+void Light::update(int strength_in) {
+  TRACE_AND_INDENT();
+  if (! strength_in) {
     DIE("no light strength set");
   }
 
   prev_strength = strength_in;
-  strength = strength_in * TILE_WIDTH;
+  strength      = strength_in * TILE_WIDTH;
 
   update();
 }
 
-void Light::update (void)
-{ TRACE_AND_INDENT();
-  if (!strength) {
+void Light::update(void) {
+  TRACE_AND_INDENT();
+  if (! strength) {
     DIE("no light strength set");
   }
 
-  level = owner->level;
+  level          = owner->level;
   max_light_rays = LIGHT_MAX_RAYS;
 
   ray.resize(max_light_rays);
-  std::fill(ray.begin(), ray.end(), Ray{0});
+  std::fill(ray.begin(), ray.end(), Ray {0});
 
   //
   // First generate the right ray lengths.
@@ -177,36 +171,32 @@ void Light::update (void)
   }
 }
 
-void Light::destroy (void)
-{ TRACE_AND_INDENT();
-}
+void Light::destroy(void) { TRACE_AND_INDENT(); }
 
-void Light::reset (void)
-{
+void Light::reset(void) {
   cached_gl_cmds.clear();
   cached_pixel_map_at = point(-1, -1);
-  cached_light_pos = point(-1, -1);
+  cached_light_pos    = point(-1, -1);
 }
 
-bool Light::calculate (void)
-{
+bool Light::calculate(void) {
 #if 0
   std::array< std::array<bool, MAP_WIDTH>, MAP_HEIGHT> walked = {};
 #endif
 
   auto player = level->player;
-  if (!player) {
+  if (! player) {
     return false;
   }
 
-  if (!player->is_blitted) {
+  if (! player->is_blitted) {
     return false;
   }
 
   //
   // This stops lighting things up when moving to the player on a new level
   //
-  if (!player->is_jumping) {
+  if (! player->is_jumping) {
     if (player->is_hidden) {
       return false;
     }
@@ -222,7 +212,7 @@ bool Light::calculate (void)
 
   cached_gl_cmds.clear();
   cached_pixel_map_at = level->pixel_map_at;
-  cached_light_pos = light_pos;
+  cached_light_pos    = light_pos;
 
   //
   // Slighly insane optimization
@@ -230,29 +220,31 @@ bool Light::calculate (void)
   uint8_t last_x;
   uint8_t last_y;
 
-#define AVOID_LOOKING_AT_THE_SAME_TILE()           \
-  {                                                \
-    if (likely((x == last_x) && (y == last_y))) {  \
-      rp++;                                        \
-      continue;                                    \
-    }                                              \
-    last_x = x; last_y = y;                        \
+#define AVOID_LOOKING_AT_THE_SAME_TILE()                                                                               \
+  {                                                                                                                    \
+    if (likely((x == last_x) && (y == last_y))) {                                                                      \
+      rp++;                                                                                                            \
+      continue;                                                                                                        \
+    }                                                                                                                  \
+    last_x = x;                                                                                                        \
+    last_y = y;                                                                                                        \
   }
 
-#define AVOID_LOOKING_AT_THE_SAME_TILE2()         \
-  {                                               \
-    if (likely((x == last_x) && (y == last_y))) { \
-      rp++;                                       \
-      step2++;                                    \
-      continue;                                   \
-    }                                             \
-    last_x = x; last_y = y;                       \
+#define AVOID_LOOKING_AT_THE_SAME_TILE2()                                                                              \
+  {                                                                                                                    \
+    if (likely((x == last_x) && (y == last_y))) {                                                                      \
+      rp++;                                                                                                            \
+      step2++;                                                                                                         \
+      continue;                                                                                                        \
+    }                                                                                                                  \
+    last_x = x;                                                                                                        \
+    last_y = y;                                                                                                        \
   }
 
   //
   // Make sure the current tile is always marked visited.
   //
-  level->set_is_lit_ever((int)player->mid_at.x, (int)player->mid_at.y);
+  level->set_is_lit_ever((int) player->mid_at.x, (int) player->mid_at.y);
 
 #if 0
   set(walked, player->mid_at.x, player->mid_at.y, true);
@@ -263,34 +255,36 @@ bool Light::calculate (void)
   // the light leak a little.
   //
   auto d = (strength / TILE_WIDTH) + 1;
-  if (likely(((player->mid_at.x >= d) &&
-        (player->mid_at.x <= MAP_WIDTH - d) &&
-        (player->mid_at.y >= d) &&
-        (player->mid_at.y <= MAP_HEIGHT - d)))) {
+  if (likely(((player->mid_at.x >= d) && (player->mid_at.x <= MAP_WIDTH - d) && (player->mid_at.y >= d) &&
+              (player->mid_at.y <= MAP_HEIGHT - d)))) {
     //
     // If were casting rays, we're wanting to update what is lit currently.
     //
     if (ray_cast_only) {
       for (int16_t i = 0; i < max_light_rays; i++) {
-        auto r = &getref_no_check(ray, i);
-        int16_t step = 0;
+        auto          r             = &getref_no_check(ray, i);
+        int16_t       step          = 0;
         const int16_t end_of_points = static_cast<uint16_t>(points[i].size() - 1);
-        auto rp = points[i].begin();
-        last_x = -1;
-        last_y = -1;
-        for (; ; step++) {
-          if (unlikely(step >= end_of_points)) { break; }
-          if (unlikely(rp->distance > strength)) { break; }
+        auto          rp            = points[i].begin();
+        last_x                      = -1;
+        last_y                      = -1;
+        for (;; step++) {
+          if (unlikely(step >= end_of_points)) {
+            break;
+          }
+          if (unlikely(rp->distance > strength)) {
+            break;
+          }
           const int16_t p1x = light_pos.x + rp->p.x;
           const int16_t p1y = light_pos.y + rp->p.y;
-          const uint8_t x = p1x / TILE_WIDTH;
-          const uint8_t y = p1y / TILE_HEIGHT;
+          const uint8_t x   = p1x / TILE_WIDTH;
+          const uint8_t y   = p1y / TILE_HEIGHT;
 
           AVOID_LOOKING_AT_THE_SAME_TILE()
 #if 0
           set(walked, x, y, true);
 #endif
-          level->set_is_lit_ever_no_check(x, y); // for AI and jumping
+          level->set_is_lit_ever_no_check(x, y);      // for AI and jumping
           level->set_is_lit_currently_no_check(x, y); // allows lights to fade
           rp++;
 
@@ -309,14 +303,20 @@ bool Light::calculate (void)
             //
             int16_t step2 = step;
             for (;;) {
-              if (unlikely(step2 >= end_of_points)) { break; }
-              if (rp->distance > step + TILE_WIDTH + offset.x + offset.y) { break; }
+              if (unlikely(step2 >= end_of_points)) {
+                break;
+              }
+              if (rp->distance > step + TILE_WIDTH + offset.x + offset.y) {
+                break;
+              }
               const int16_t p1x = light_pos.x + rp->p.x;
               const int16_t p1y = light_pos.y + rp->p.y;
-              const uint8_t x = p1x / TILE_WIDTH;
-              const uint8_t y = p1y / TILE_HEIGHT;
+              const uint8_t x   = p1x / TILE_WIDTH;
+              const uint8_t y   = p1y / TILE_HEIGHT;
               AVOID_LOOKING_AT_THE_SAME_TILE2()
-              if (!level->is_light_blocker_no_check(x, y)) { break; }
+              if (! level->is_light_blocker_no_check(x, y)) {
+                break;
+              }
               rp++;
               step2++;
             }
@@ -328,19 +328,23 @@ bool Light::calculate (void)
       }
     } else {
       for (int16_t i = 0; i < max_light_rays; i++) {
-        auto r = &getref_no_check(ray, i);
-        int16_t step = 0;
+        auto          r             = &getref_no_check(ray, i);
+        int16_t       step          = 0;
         const int16_t end_of_points = static_cast<uint16_t>(points[i].size() - 1);
-        auto rp = points[i].begin();
-        last_x = -1;
-        last_y = -1;
-        for (; ; step++) {
-          if (unlikely(step >= end_of_points)) { break; }
-          if (unlikely(rp->distance > strength)) { break; }
+        auto          rp            = points[i].begin();
+        last_x                      = -1;
+        last_y                      = -1;
+        for (;; step++) {
+          if (unlikely(step >= end_of_points)) {
+            break;
+          }
+          if (unlikely(rp->distance > strength)) {
+            break;
+          }
           const int16_t p1x = light_pos.x + rp->p.x;
           const int16_t p1y = light_pos.y + rp->p.y;
-          const uint8_t x = p1x / TILE_WIDTH;
-          const uint8_t y = p1y / TILE_HEIGHT;
+          const uint8_t x   = p1x / TILE_WIDTH;
+          const uint8_t y   = p1y / TILE_HEIGHT;
 
           AVOID_LOOKING_AT_THE_SAME_TILE()
           rp++;
@@ -352,14 +356,20 @@ bool Light::calculate (void)
             //
             int16_t step2 = step;
             for (;;) {
-              if (unlikely(step2 >= end_of_points)) { break; }
-              if (rp->distance > step + TILE_WIDTH + offset.x + offset.y) { break; }
+              if (unlikely(step2 >= end_of_points)) {
+                break;
+              }
+              if (rp->distance > step + TILE_WIDTH + offset.x + offset.y) {
+                break;
+              }
               const int16_t p1x = light_pos.x + rp->p.x;
               const int16_t p1y = light_pos.y + rp->p.y;
-              const uint8_t x = p1x / TILE_WIDTH;
-              const uint8_t y = p1y / TILE_HEIGHT;
+              const uint8_t x   = p1x / TILE_WIDTH;
+              const uint8_t y   = p1y / TILE_HEIGHT;
               AVOID_LOOKING_AT_THE_SAME_TILE2()
-              if (!level->is_light_blocker_no_check(x, y)) { break; }
+              if (! level->is_light_blocker_no_check(x, y)) {
+                break;
+              }
               rp++;
               step2++;
             }
@@ -373,25 +383,29 @@ bool Light::calculate (void)
   } else {
     if (ray_cast_only) {
       for (int16_t i = 0; i < max_light_rays; i++) {
-        auto r = &getref(ray, i);
-        int16_t step = 0;
+        auto          r             = &getref(ray, i);
+        int16_t       step          = 0;
         const int16_t end_of_points = static_cast<uint16_t>(points[i].size() - 1);
-        auto rp = points[i].begin();
-        last_x = -1;
-        last_y = -1;
-        for (; ; step++) {
-          if (unlikely(step >= end_of_points)) { break; }
-          if (unlikely(rp->distance > strength)) { break; }
+        auto          rp            = points[i].begin();
+        last_x                      = -1;
+        last_y                      = -1;
+        for (;; step++) {
+          if (unlikely(step >= end_of_points)) {
+            break;
+          }
+          if (unlikely(rp->distance > strength)) {
+            break;
+          }
           const int16_t p1x = light_pos.x + rp->p.x;
           const int16_t p1y = light_pos.y + rp->p.y;
-          const uint8_t x = p1x / TILE_WIDTH;
-          const uint8_t y = p1y / TILE_HEIGHT;
+          const uint8_t x   = p1x / TILE_WIDTH;
+          const uint8_t y   = p1y / TILE_HEIGHT;
 
           AVOID_LOOKING_AT_THE_SAME_TILE()
 #if 0
           set(walked, x, y, true);
 #endif
-          level->set_is_lit_ever(x, y); // for AI and jumping
+          level->set_is_lit_ever(x, y);      // for AI and jumping
           level->set_is_lit_currently(x, y); // allows lights to fade
           rp++;
 
@@ -410,14 +424,20 @@ bool Light::calculate (void)
             //
             int16_t step2 = step;
             for (;;) {
-              if (unlikely(step2 >= end_of_points)) { break; }
-              if (rp->distance > step + TILE_WIDTH + offset.x + offset.y) { break; }
+              if (unlikely(step2 >= end_of_points)) {
+                break;
+              }
+              if (rp->distance > step + TILE_WIDTH + offset.x + offset.y) {
+                break;
+              }
               const int16_t p1x = light_pos.x + rp->p.x;
               const int16_t p1y = light_pos.y + rp->p.y;
-              const uint8_t x = p1x / TILE_WIDTH;
-              const uint8_t y = p1y / TILE_HEIGHT;
+              const uint8_t x   = p1x / TILE_WIDTH;
+              const uint8_t y   = p1y / TILE_HEIGHT;
               AVOID_LOOKING_AT_THE_SAME_TILE2()
-              if (!level->is_light_blocker(x, y)) { break; }
+              if (! level->is_light_blocker(x, y)) {
+                break;
+              }
               rp++;
               step2++;
             }
@@ -429,19 +449,23 @@ bool Light::calculate (void)
       }
     } else {
       for (int16_t i = 0; i < max_light_rays; i++) {
-        auto r = &getref(ray, i);
-        int16_t step = 0;
+        auto          r             = &getref(ray, i);
+        int16_t       step          = 0;
         const int16_t end_of_points = static_cast<uint16_t>(points[i].size() - 1);
-        auto rp = points[i].begin();
-        last_x = -1;
-        last_y = -1;
-        for (; ; step++) {
-          if (unlikely(step >= end_of_points)) { break; }
-          if (unlikely(rp->distance > strength)) { break; }
+        auto          rp            = points[i].begin();
+        last_x                      = -1;
+        last_y                      = -1;
+        for (;; step++) {
+          if (unlikely(step >= end_of_points)) {
+            break;
+          }
+          if (unlikely(rp->distance > strength)) {
+            break;
+          }
           const int16_t p1x = light_pos.x + rp->p.x;
           const int16_t p1y = light_pos.y + rp->p.y;
-          const uint8_t x = p1x / TILE_WIDTH;
-          const uint8_t y = p1y / TILE_HEIGHT;
+          const uint8_t x   = p1x / TILE_WIDTH;
+          const uint8_t y   = p1y / TILE_HEIGHT;
 
           AVOID_LOOKING_AT_THE_SAME_TILE()
           rp++;
@@ -453,14 +477,20 @@ bool Light::calculate (void)
             //
             int16_t step2 = step;
             for (;;) {
-              if (unlikely(step2 >= end_of_points)) { break; }
-              if (rp->distance > step + TILE_WIDTH + offset.x + offset.y) { break; }
+              if (unlikely(step2 >= end_of_points)) {
+                break;
+              }
+              if (rp->distance > step + TILE_WIDTH + offset.x + offset.y) {
+                break;
+              }
               const int16_t p1x = light_pos.x + rp->p.x;
               const int16_t p1y = light_pos.y + rp->p.y;
-              const uint8_t x = p1x / TILE_WIDTH;
-              const uint8_t y = p1y / TILE_HEIGHT;
+              const uint8_t x   = p1x / TILE_WIDTH;
+              const uint8_t y   = p1y / TILE_HEIGHT;
               AVOID_LOOKING_AT_THE_SAME_TILE2()
-              if (!level->is_light_blocker(x, y)) { break; }
+              if (! level->is_light_blocker(x, y)) {
+                break;
+              }
               rp++;
               step2++;
             }
@@ -511,15 +541,14 @@ bool Light::calculate (void)
   return true;
 }
 
-void Light::render_triangle_fans (void)
-{
+void Light::render_triangle_fans(void) {
   point light_pos = owner->last_blit_at;
 
   if (fbo == FBO_FULLMAP_LIGHT) {
     light_pos = cached_light_pos;
     gl_enter_2d_mode(MAP_WIDTH * TILE_WIDTH, MAP_HEIGHT * TILE_HEIGHT);
   } else if (fbo == FBO_PLAYER_VISIBLE_LIGHTING) {
-    light_pos -= level->pixel_map_at  - offset;
+    light_pos -= level->pixel_map_at - offset;
   } else {
     return;
   }
@@ -531,7 +560,7 @@ void Light::render_triangle_fans (void)
     glcolor(WHITE);
   }
 
-  if (!cached_gl_cmds.size()) {
+  if (! cached_gl_cmds.size()) {
     blit_init();
     {
       int i;
@@ -542,8 +571,8 @@ void Light::render_triangle_fans (void)
       push_point(light_pos.x, light_pos.y);
 
       for (i = 0; i < max_light_rays; i++) {
-        auto r = &getref_no_check(ray, i);
-        point &p = points[i][r->depth_furthest].p;
+        auto    r   = &getref_no_check(ray, i);
+        point & p   = points[i][r->depth_furthest].p;
         int16_t p1x = light_pos.x + p.x;
         int16_t p1y = light_pos.y + p.y;
         push_point(p1x, p1y);
@@ -552,9 +581,10 @@ void Light::render_triangle_fans (void)
       //
       // Complete the circle with the first point again.
       //
-      i = 0; {
-        auto r = &getref_no_check(ray, i);
-        point &p = points[i][r->depth_furthest].p;
+      i = 0;
+      {
+        auto    r   = &getref_no_check(ray, i);
+        point & p   = points[i][r->depth_furthest].p;
         int16_t p1x = light_pos.x + p.x;
         int16_t p1y = light_pos.y + p.y;
         push_point(p1x, p1y);
@@ -566,33 +596,31 @@ void Light::render_triangle_fans (void)
     std::copy(gl_array_buf, bufp, cached_gl_cmds.begin());
     blit_flush_triangle_fan();
   } else {
-    auto *b = &(*cached_gl_cmds.begin());
-    auto *e = &(*cached_gl_cmds.end());
-    auto light_offset = cached_pixel_map_at - level->pixel_map_at;
+    auto *b            = &(*cached_gl_cmds.begin());
+    auto *e            = &(*cached_gl_cmds.end());
+    auto  light_offset = cached_pixel_map_at - level->pixel_map_at;
     glTranslatef(light_offset.x, light_offset.y, 0);
     blit_flush_triangle_fan(b, e);
     glTranslatef(-light_offset.x, -light_offset.y, 0);
   }
 
   if (fbo == FBO_FULLMAP_LIGHT) {
-    gl_enter_2d_mode(game->config.game_pix_width,
-             game->config.game_pix_height);
+    gl_enter_2d_mode(game->config.game_pix_width, game->config.game_pix_height);
   }
 }
 
-void Light::render (int ray_cast_only)
-{
-  if (!g_light_overlay_tex) {
-    g_light_overlay_tex = tex_load("", "light", GL_NEAREST);
+void Light::render(int ray_cast_only) {
+  if (! g_light_overlay_tex) {
+    g_light_overlay_tex   = tex_load("", "light", GL_NEAREST);
     g_light_overlay_texid = tex_get_gl_binding(g_light_overlay_tex);
   }
 
-  if (!g_glow_overlay_tex) {
-    g_glow_overlay_tex = tex_load("", "glow", GL_NEAREST);
+  if (! g_glow_overlay_tex) {
+    g_glow_overlay_tex   = tex_load("", "glow", GL_NEAREST);
     g_glow_overlay_texid = tex_get_gl_binding(g_glow_overlay_tex);
   }
 
-  if (!calculate()) {
+  if (! calculate()) {
     return;
   }
 
@@ -603,9 +631,8 @@ void Light::render (int ray_cast_only)
   render_triangle_fans();
 }
 
-void Level::lights_render (int minx, int miny, int maxx, int maxy,
-               int fbo)
-{ TRACE_AND_INDENT();
+void Level::lights_render(int minx, int miny, int maxx, int maxy, int fbo) {
+  TRACE_AND_INDENT();
   if (player) {
     glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 
@@ -631,14 +658,13 @@ void Level::lights_render (int minx, int miny, int maxx, int maxy,
   //
   glClear(GL_COLOR_BUFFER_BIT);
   if (is_level_type_sewer) {
-    glColor4ub(0,0,0,220);
+    glColor4ub(0, 0, 0, 220);
   } else {
-    glColor4ub(0,0,0,180);
+    glColor4ub(0, 0, 0, 180);
   }
   glBlendFunc(GL_ONE, GL_ZERO);
   glDisable(GL_TEXTURE_2D);
-  gl_blitquad(0, 0,
-        game->config.game_pix_width, game->config.game_pix_height);
+  gl_blitquad(0, 0, game->config.game_pix_width, game->config.game_pix_height);
   glEnable(GL_TEXTURE_2D);
   glcolor(WHITE);
 
@@ -654,17 +680,16 @@ void Level::lights_render (int minx, int miny, int maxx, int maxy,
 //
 // Draw point source lights
 //
-void Level::lights_render_small_lights (int minx, int miny, int maxx, int maxy,
-                    int fbo, bool include_player_lights)
-{ TRACE_AND_INDENT();
+void Level::lights_render_small_lights(int minx, int miny, int maxx, int maxy, int fbo, bool include_player_lights) {
+  TRACE_AND_INDENT();
   blit_init();
   for (auto y = miny; y < maxy; y++) {
     for (auto x = minx; x < maxx; x++) {
       FOR_ALL_LIGHTS_AT_DEPTH(this, t, x, y) {
-        for (auto& l : t->get_light()) {
+        for (auto &l : t->get_light()) {
 
           if (player && (l->owner == player)) {
-            if (!include_player_lights) {
+            if (! include_player_lights) {
               continue;
             }
             if (l->ray_cast_only) {
@@ -682,29 +707,30 @@ void Level::lights_render_small_lights (int minx, int miny, int maxx, int maxy,
             continue;
           }
 
-          if (!is_lit_currently_no_check(t->mid_at.x, t->mid_at.y)) {
+          if (! is_lit_currently_no_check(t->mid_at.x, t->mid_at.y)) {
             continue;
           }
 
-          auto t = l->owner;
+          auto  t = l->owner;
           point blit_tl, blit_br;
           Tilep tile = {};
 
-          if (!t->get_map_offset_coords(blit_tl, blit_br, tile, false)) {
+          if (! t->get_map_offset_coords(blit_tl, blit_br, tile, false)) {
             continue;
           }
 
-          auto mid = (blit_br + blit_tl) / 2;
-          auto s = l->strength;
-          auto tlx = mid.x - s;
-          auto tly = mid.y - s;
-          auto brx = mid.x + s;
-          auto bry = mid.y + s;
-          color c = l->col;
+          auto  mid = (blit_br + blit_tl) / 2;
+          auto  s   = l->strength;
+          auto  tlx = mid.x - s;
+          auto  tly = mid.y - s;
+          auto  brx = mid.x + s;
+          auto  bry = mid.y + s;
+          color c   = l->col;
           glcolor(c);
           blit(g_light_overlay_texid, 0, 0, 1, 1, tlx, tly, brx, bry);
         }
-      } FOR_ALL_THINGS_END()
+      }
+      FOR_ALL_THINGS_END()
     }
   }
   blit_flush();
@@ -718,10 +744,10 @@ void Level::lights_render_small_lights (int minx, int miny, int maxx, int maxy,
   for (auto y = miny; y < maxy; y++) {
     for (auto x = minx; x < maxx; x++) {
       FOR_ALL_LIGHTS_AT_DEPTH(this, t, x, y) {
-        for (auto& l : t->get_light()) {
+        for (auto &l : t->get_light()) {
 
           if (player && (l->owner == player)) {
-            if (!include_player_lights) {
+            if (! include_player_lights) {
               continue;
             }
             if (l->ray_cast_only) {
@@ -732,7 +758,7 @@ void Level::lights_render_small_lights (int minx, int miny, int maxx, int maxy,
             }
           }
 
-          if (!t->gfx_glows()) {
+          if (! t->gfx_glows()) {
             continue;
           }
 
@@ -743,15 +769,15 @@ void Level::lights_render_small_lights (int minx, int miny, int maxx, int maxy,
             continue;
           }
 
-          if (!is_lit_currently_no_check(t->mid_at.x, t->mid_at.y)) {
+          if (! is_lit_currently_no_check(t->mid_at.x, t->mid_at.y)) {
             continue;
           }
 
-          auto t = l->owner;
+          auto  t = l->owner;
           point blit_tl, blit_br;
           Tilep tile = {};
 
-          if (!t->get_map_offset_coords(blit_tl, blit_br, tile, false)) {
+          if (! t->get_map_offset_coords(blit_tl, blit_br, tile, false)) {
             continue;
           }
 
@@ -761,17 +787,18 @@ void Level::lights_render_small_lights (int minx, int miny, int maxx, int maxy,
             }
           }
 
-          auto s = l->strength + l->flicker;
-          auto mid = (blit_br + blit_tl) / 2;
-          auto tlx = mid.x - s;
-          auto tly = mid.y - s;
-          auto brx = mid.x + s;
-          auto bry = mid.y + s;
-          color c = l->col;
+          auto  s   = l->strength + l->flicker;
+          auto  mid = (blit_br + blit_tl) / 2;
+          auto  tlx = mid.x - s;
+          auto  tly = mid.y - s;
+          auto  brx = mid.x + s;
+          auto  bry = mid.y + s;
+          color c   = l->col;
           glcolor(c);
           blit(g_glow_overlay_texid, 0, 0, 1, 1, tlx, tly, brx, bry);
         }
-      } FOR_ALL_THINGS_END()
+      }
+      FOR_ALL_THINGS_END()
     }
   }
   blit_flush();
@@ -782,8 +809,8 @@ void Level::lights_render_small_lights (int minx, int miny, int maxx, int maxy,
 //
 // Alow distant lights to fade
 //
-void Level::lights_fade (void)
-{ TRACE_AND_INDENT();
+void Level::lights_fade(void) {
+  TRACE_AND_INDENT();
   for (auto y = 0; y < MAP_HEIGHT; y++) {
     for (auto x = 0; x < MAP_WIDTH; x++) {
       auto v = is_lit_currently_no_check(x, y);
@@ -797,8 +824,8 @@ void Level::lights_fade (void)
 //
 // Refresh lights on a new level. Ignore blitted postion.
 //
-void Level::lights_update_new_level (void)
-{ TRACE_AND_INDENT();
+void Level::lights_update_new_level(void) {
+  TRACE_AND_INDENT();
   for (auto y = 0; y < MAP_HEIGHT; y++) {
     for (auto x = 0; x < MAP_WIDTH; x++) {
       FOR_ALL_LIGHTS_AT_DEPTH(this, t, x, y) {
@@ -806,11 +833,12 @@ void Level::lights_update_new_level (void)
         // Need to do this as light position depends on blitting
         //
         t->is_blitted = false;
-        for (auto& l : t->get_light()) {
+        for (auto &l : t->get_light()) {
           l->update();
           l->reset();
         }
-      } FOR_ALL_THINGS_END()
+      }
+      FOR_ALL_THINGS_END()
     }
   }
 }
@@ -818,16 +846,17 @@ void Level::lights_update_new_level (void)
 //
 // Update lights on existing level e.g. torch goes out
 //
-void Level::lights_update_same_level (void)
-{ TRACE_AND_INDENT();
+void Level::lights_update_same_level(void) {
+  TRACE_AND_INDENT();
   for (auto y = 0; y < MAP_HEIGHT; y++) {
     for (auto x = 0; x < MAP_WIDTH; x++) {
       FOR_ALL_LIGHTS_AT_DEPTH(this, t, x, y) {
-        for (auto& l : t->get_light()) {
+        for (auto &l : t->get_light()) {
           l->update();
           l->reset();
         }
-      } FOR_ALL_THINGS_END()
+      }
+      FOR_ALL_THINGS_END()
     }
   }
 }

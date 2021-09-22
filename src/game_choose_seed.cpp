@@ -21,22 +21,20 @@
 
 static Widp wid_keyboard_choose_seed;
 
-static void selected (Widp w, const std::wstring& text)
-{
+static void selected(Widp w, const std::wstring &text) {
   wid_destroy(&wid_keyboard_choose_seed);
   g_opt_seed_name = wstring_to_string(text);
   game->save_config();
   game->main_menu_select();
 }
 
-static void cancelled (Widp w, const std::wstring& text)
-{
+static void cancelled(Widp w, const std::wstring &text) {
   wid_destroy(&wid_keyboard_choose_seed);
   game->main_menu_select();
 }
 
-void Game::choose_seed_select (void)
-{ TRACE_AND_INDENT();
+void Game::choose_seed_select(void) {
+  TRACE_AND_INDENT();
   CON("Choose seed menu");
 
   wid_rightbar_fini();
@@ -44,7 +42,6 @@ void Game::choose_seed_select (void)
   wid_skillbox_fini();
   wid_thing_info_fini();
 
-  wid_keyboard_choose_seed =
-    wid_keyboard(string_to_wstring(g_opt_seed_name),
-           L"Enter a name or number for the dungeon seed", selected, cancelled);
+  wid_keyboard_choose_seed = wid_keyboard(string_to_wstring(g_opt_seed_name),
+                                          L"Enter a name or number for the dungeon seed", selected, cancelled);
 }

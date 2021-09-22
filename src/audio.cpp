@@ -14,19 +14,19 @@
 
 uint8_t audio_init_done;
 
-void audio_fini (void)
-{ TRACE_AND_INDENT();
+void audio_fini(void) {
+  TRACE_AND_INDENT();
   Mix_CloseAudio();
 }
 
-bool audio_init (void)
-{ TRACE_AND_INDENT();
+bool audio_init(void) {
+  TRACE_AND_INDENT();
   //
   // Output sampling frequency in samples per second (Hz).
   // you might use MIX_DEFAULT_FREQUENCY(22050) since that is a good value
   // for most games.
   //
-  int audio_freq = MIX_DEFAULT_FREQUENCY;
+  int audio_freq   = MIX_DEFAULT_FREQUENCY;
   int audio_format = MIX_DEFAULT_FORMAT;
 
   //
@@ -47,11 +47,8 @@ bool audio_init (void)
   // int chunksize = 4096;
   int chunksize = 1024; // less latency but might be choppy
 
-  if (!audio_init_done) {
-    if (Mix_OpenAudio(audio_freq,
-              audio_format,
-              channels,
-              chunksize) != 0) {
+  if (! audio_init_done) {
+    if (Mix_OpenAudio(audio_freq, audio_format, channels, chunksize) != 0) {
 
       ERR("Mix_OpenAudio fail: %s %s", Mix_GetError(), SDL_GetError());
       SDL_ClearError();

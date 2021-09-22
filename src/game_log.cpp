@@ -9,8 +9,8 @@
 #include "my_thing.h"
 #include "my_array_bounds_check.h"
 
-void Level::dump (std::string pfx)
-{ TRACE_AND_INDENT();
+void Level::dump(std::string pfx) {
+  TRACE_AND_INDENT();
   LOG("%s Level {", pfx.c_str());
   auto old_pfx = pfx;
   pfx += "  ";
@@ -30,7 +30,7 @@ void Level::dump (std::string pfx)
           auto id = get(all_things_id_at[group], x, y, z);
           if (id.ok()) {
             auto t = thing_find(id);
-            if (!t) {
+            if (! t) {
               continue;
             }
             t->log("dump");
@@ -44,8 +44,8 @@ void Level::dump (std::string pfx)
   LOG("%s }", pfx.c_str());
 }
 
-void World::dump (std::string pfx)
-{ TRACE_AND_INDENT();
+void World::dump(std::string pfx) {
+  TRACE_AND_INDENT();
   LOG("%s World {", pfx.c_str());
   auto old_pfx = pfx;
   pfx += "  ";
@@ -66,8 +66,8 @@ void World::dump (std::string pfx)
   LOG("%s }", pfx.c_str());
 }
 
-void Config::dump (std::string pfx)
-{ TRACE_AND_INDENT();
+void Config::dump(std::string pfx) {
+  TRACE_AND_INDENT();
   LOG("%s Config {", pfx.c_str());
   auto old_pfx = pfx;
   pfx += "  ";
@@ -110,8 +110,8 @@ void Config::dump (std::string pfx)
   LOG("%s }", pfx.c_str());
 }
 
-void Game::dump (std::string pfx)
-{ TRACE_AND_INDENT();
+void Game::dump(std::string pfx) {
+  TRACE_AND_INDENT();
   LOG("%s Game {", pfx.c_str());
   auto old_pfx = pfx;
   pfx += "  ";

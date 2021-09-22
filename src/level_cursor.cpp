@@ -18,8 +18,8 @@
 #include "my_sdl.h"
 //#include "my_traceback.h"
 
-void Level::cursor_check_if_scroll_needed (void)
-{ TRACE_AND_INDENT();
+void Level::cursor_check_if_scroll_needed(void) {
+  TRACE_AND_INDENT();
   //
   // Not sure why I have this and what it does :)
   //
@@ -38,8 +38,8 @@ void Level::cursor_check_if_scroll_needed (void)
 //
 // Move the cursor to whatever thing it is now over
 //
-void Level::cursor_move (void)
-{ TRACE_AND_INDENT();
+void Level::cursor_move(void) {
+  TRACE_AND_INDENT();
   if (game->robot_mode) {
     return;
   }
@@ -63,7 +63,7 @@ void Level::cursor_move (void)
     //
     // Move faster when more zoomed out.
     //
-    float z = GAME_MOST_ZOOMED_IN - game->config.game_pix_zoom;
+    float z     = GAME_MOST_ZOOMED_IN - game->config.game_pix_zoom;
     float scale = pow(z + 1, 1.2);
     dx *= scale;
     dy *= scale;
@@ -83,20 +83,20 @@ void Level::cursor_move (void)
   //
   // Dampen mouse moves at level start
   //
-  if (ts_dungeon_created &&
-    time_have_x_tenths_passed_since(2, ts_dungeon_created)) {
+  if (ts_dungeon_created && time_have_x_tenths_passed_since(2, ts_dungeon_created)) {
     mouse_at = mouse_tick;
     if (mouse_at > mouse_old) {
-      mouse_old = mouse_at;
+      mouse_old    = mouse_at;
       cursor_found = false;
     }
   } else {
-    mouse_at = mouse_tick;
-    mouse_old = mouse_at;
+    mouse_at          = mouse_tick;
+    mouse_old         = mouse_at;
     map_follow_player = true;
   }
 
-  if (cursor) { TRACE_AND_INDENT();
+  if (cursor) {
+    TRACE_AND_INDENT();
     verify(cursor);
     if (cursor_at != cursor_old) {
       cursor_old = cursor_at;
@@ -109,7 +109,7 @@ void Level::cursor_move (void)
       // and not just the level auto scrolling.
       //
       if (time_have_x_tenths_passed_since(10, ts_dungeon_created)) {
-        if (!time_have_x_tenths_passed_since(10, wid_last_mouse_motion)) {
+        if (! time_have_x_tenths_passed_since(10, wid_last_mouse_motion)) {
           wid_thing_info_fini();
           cursor_describe();
         }
@@ -118,13 +118,13 @@ void Level::cursor_move (void)
   }
 }
 
-void Level::cursor_recreate (void)
-{ TRACE_AND_INDENT();
-//traceback_dump();
+void Level::cursor_recreate(void) {
+  TRACE_AND_INDENT();
+  // traceback_dump();
   //
   // Player might be on another level
   //
-  if (!cursor) {
+  if (! cursor) {
     return;
   }
 
@@ -142,15 +142,14 @@ void Level::cursor_recreate (void)
   auto mid_at = cursor->mid_at;
 
   auto what = game->request_to_throw_item;
-  if (!what) {
+  if (! what) {
     what = game->request_to_fire_item;
   }
 
   cursor->dead("update");
   if (what && (game->state == Game::STATE_CHOOSING_TARGET)) {
     bool too_far = false;
-    auto dist = DISTANCE(player->mid_at.x, player->mid_at.y,
-               mid_at.x, mid_at.y);
+    auto dist    = DISTANCE(player->mid_at.x, player->mid_at.y, mid_at.x, mid_at.y);
     if (what->get_throw_distance()) {
       too_far = dist > player->get_throw_distance();
     } else if (what->range_max()) {
@@ -170,6 +169,6 @@ void Level::cursor_recreate (void)
   // Why hide it? When scrolling to a new position it's nice to see
   // the cursor pop up,
   //
-  //cursor->hide();
+  // cursor->hide();
   cursor_path_create();
 }

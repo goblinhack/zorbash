@@ -15,23 +15,15 @@
 #include "my_thing_template.h"
 #include "my_ptrcheck.h"
 
-Thingp Thing::most_dangerous_adjacent_thing_get (void)
-{
-  std::vector<std::pair<Thingp, int> > possible;
+Thingp Thing::most_dangerous_adjacent_thing_get(void) {
+  std::vector<std::pair<Thingp, int>> possible;
 
   static const std::vector<point> all_deltas = {
-    point(-1, -1),
-    point( 1, -1),
-    point(-1,  1),
-    point( 1,  1),
-    point(0, -1),
-    point(-1, 0),
-    point(1, 0),
-    point(0, 1),
-    point(0, 0), // For spiderwebs
+      point(-1, -1), point(1, -1), point(-1, 1), point(1, 1), point(0, -1),
+      point(-1, 0),  point(1, 0),  point(0, 1),  point(0, 0), // For spiderwebs
   };
 
-  for (const auto& d : all_deltas) {
+  for (const auto &d : all_deltas) {
     auto x = mid_at.x + d.x;
     auto y = mid_at.y + d.y;
 
@@ -54,7 +46,7 @@ Thingp Thing::most_dangerous_adjacent_thing_get (void)
         }
       }
 
-      if (!t->is_monst()) {
+      if (! t->is_monst()) {
         continue;
       }
 
@@ -64,33 +56,29 @@ Thingp Thing::most_dangerous_adjacent_thing_get (void)
       }
 
       possible.push_back(std::make_pair(t, score));
-    } FOR_ALL_THINGS_END()
+    }
+    FOR_ALL_THINGS_END()
   }
 
-  if (!possible.size()) {
+  if (! possible.size()) {
     return nullptr;
   }
 
-  sort(possible.begin(),
-     possible.end(),
-     [](const std::pair<Thingp, int> &a,
-      const std::pair<Thingp, int> &b) -> bool {
-       return a.second > b.second;
-     });
+  sort(possible.begin(), possible.end(),
+       [](const std::pair<Thingp, int> &a, const std::pair<Thingp, int> &b) -> bool { return a.second > b.second; });
 
   return possible[0].first;
 }
 
-Thingp Thing::most_dangerous_visible_thing_get (void)
-{
-  std::vector<std::pair<Thingp, int> > possible;
+Thingp Thing::most_dangerous_visible_thing_get(void) {
+  std::vector<std::pair<Thingp, int>> possible;
 
   int d = ai_avoid_distance();
 
   for (auto dx = -d; dx <= d; dx++) {
     for (auto dy = -d; dy <= d; dy++) {
       point o(mid_at.x + dx, mid_at.y + dy);
-      if (!dx && !dy) {
+      if (! dx && ! dy) {
         continue;
       }
 
@@ -103,11 +91,11 @@ Thingp Thing::most_dangerous_visible_thing_get (void)
           continue;
         }
 
-        if (!t->is_monst()) {
+        if (! t->is_monst()) {
           continue;
         }
 
-        if (!level->can_see((int)mid_at.x, (int)mid_at.y, o.x, o.y)) {
+        if (! level->can_see((int) mid_at.x, (int) mid_at.y, o.x, o.y)) {
           continue;
         }
 
@@ -117,20 +105,17 @@ Thingp Thing::most_dangerous_visible_thing_get (void)
         }
 
         possible.push_back(std::make_pair(t, score));
-      } FOR_ALL_THINGS_END()
+      }
+      FOR_ALL_THINGS_END()
     }
   }
 
-  if (!possible.size()) {
+  if (! possible.size()) {
     return nullptr;
   }
 
-  sort(possible.begin(),
-     possible.end(),
-     [](const std::pair<Thingp, int> &a,
-      const std::pair<Thingp, int> &b) -> bool {
-       return a.second > b.second;
-     });
+  sort(possible.begin(), possible.end(),
+       [](const std::pair<Thingp, int> &a, const std::pair<Thingp, int> &b) -> bool { return a.second > b.second; });
 
   return possible[0].first;
 }

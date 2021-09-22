@@ -14,51 +14,46 @@
 #include "my_string.h"
 #include "my_ptrcheck.h"
 
-void Level::log_ (const char *fmt, va_list args)
-{
+void Level::log_(const char *fmt, va_list args) {
   verify(this);
   auto l = this;
   char buf[MAXLONGSTR];
-  int len;
+  int  len;
 
   buf[0] = '\0';
   get_timestamp(buf, MAXLONGSTR);
-  len = (int)strlen(buf);
+  len = (int) strlen(buf);
 
-  snprintf(buf + len, MAXLONGSTR - len, "%60s: %*s",
-       l->to_string().c_str(),
-       g_callframes_depth, "");
+  snprintf(buf + len, MAXLONGSTR - len, "%60s: %*s", l->to_string().c_str(), g_callframes_depth, "");
 
-  len = (int)strlen(buf);
+  len = (int) strlen(buf);
   vsnprintf(buf + len, MAXLONGSTR - len, fmt, args);
 
   putf(MY_STDOUT, buf);
 }
 
-void Level::log (const char *fmt, ...)
-{
+void Level::log(const char *fmt, ...) {
   verify(this);
   log_catchup_missing_indent_levels();
-  auto l = this;
+  auto    l = this;
   va_list args;
   va_start(args, fmt);
   l->log_(fmt, args);
   va_end(args);
 }
 
-void Level::con_ (const char *fmt, va_list args)
-{
+void Level::con_(const char *fmt, va_list args) {
   verify(this);
   auto l = this;
   char buf[MAXLONGSTR];
-  int len;
+  int  len;
 
   buf[0] = '\0';
   get_timestamp(buf, MAXLONGSTR);
-  len = (int)strlen(buf);
+  len = (int) strlen(buf);
   snprintf(buf + len, MAXLONGSTR - len, "Level %s: ", l->to_string().c_str());
 
-  len = (int)strlen(buf);
+  len = (int) strlen(buf);
   vsnprintf(buf + len, MAXLONGSTR - len, fmt, args);
 
   putf(MY_STDOUT, buf);
@@ -69,10 +64,9 @@ void Level::con_ (const char *fmt, va_list args)
   FLUSH_THE_CONSOLE();
 }
 
-void Level::con (const char *fmt, ...)
-{
+void Level::con(const char *fmt, ...) {
   verify(this);
-  auto l = this;
+  auto    l = this;
   va_list args;
 
   va_start(args, fmt);
@@ -80,8 +74,7 @@ void Level::con (const char *fmt, ...)
   va_end(args);
 }
 
-void Level::err_ (const char *fmt, va_list args)
-{
+void Level::err_(const char *fmt, va_list args) {
   static bool nested_error;
   if (nested_error) {
     return;
@@ -91,15 +84,14 @@ void Level::err_ (const char *fmt, va_list args)
   verify(this);
   auto l = this;
   char buf[MAXLONGSTR];
-  int len;
+  int  len;
 
   buf[0] = '\0';
   get_timestamp(buf, MAXLONGSTR);
-  len = (int)strlen(buf);
-  snprintf(buf + len, MAXLONGSTR - len, "ERROR: Level %s: ",
-       l->to_string().c_str());
+  len = (int) strlen(buf);
+  snprintf(buf + len, MAXLONGSTR - len, "ERROR: Level %s: ", l->to_string().c_str());
 
-  len = (int)strlen(buf);
+  len = (int) strlen(buf);
   vsnprintf(buf + len, MAXLONGSTR - len, fmt, args);
 
   putf(MY_STDOUT, buf);
@@ -117,14 +109,13 @@ void Level::err_ (const char *fmt, va_list args)
   nested_error = false;
 }
 
-void Level::err (const char *fmt, ...)
-{
+void Level::err(const char *fmt, ...) {
   static bool nested_error;
   if (nested_error) {
     return;
   }
   bool old_nested_error = nested_error;
-  nested_error = true;
+  nested_error          = true;
 
   if (old_nested_error) {
     //

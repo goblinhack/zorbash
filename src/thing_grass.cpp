@@ -16,13 +16,13 @@
 #include "my_array_bounds_check.h"
 #include "my_ptrcheck.h"
 
-void Thing::grass_tick (void)
-{ TRACE_AND_INDENT();
-  if (!level->is_dry_grass(mid_at.x, mid_at.y)) {
+void Thing::grass_tick(void) {
+  TRACE_AND_INDENT();
+  if (! level->is_dry_grass(mid_at.x, mid_at.y)) {
     return;
   }
 
-  if (!is_alive_monst() && !is_player()) {
+  if (! is_alive_monst() && ! is_player()) {
     return;
   }
 
@@ -35,7 +35,7 @@ void Thing::grass_tick (void)
   }
 
   FOR_ALL_THINGS_AT_DEPTH(level, t, mid_at.x, mid_at.y, MAP_DEPTH_FLOOR2) {
-    if (!t->is_dry_grass()) {
+    if (! t->is_dry_grass()) {
       continue;
     }
 
@@ -45,6 +45,6 @@ void Thing::grass_tick (void)
 
     t->dead("trampled");
     level->thing_new("dry_grass_trampled", t->mid_at);
-
-  } FOR_ALL_THINGS_END()
+  }
+  FOR_ALL_THINGS_END()
 }

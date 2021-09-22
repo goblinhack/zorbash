@@ -12,11 +12,11 @@
 #include "my_thing.h"
 #include "my_tile.h"
 
-bool Thing::projectile_choose_target (Thingp item)
-{ TRACE_AND_INDENT();
+bool Thing::projectile_choose_target(Thingp item) {
+  TRACE_AND_INDENT();
   dbg("Trying to target a projectile with: %s", item->to_string().c_str());
 
-  if (!target_select(item)) {
+  if (! target_select(item)) {
     return false;
   }
 
@@ -25,35 +25,34 @@ bool Thing::projectile_choose_target (Thingp item)
   return target_select(item);
 }
 
-Thingp Thing::projectile_fire_at (const std::string &projectile_name, Thingp target)
-{ TRACE_AND_INDENT();
+Thingp Thing::projectile_fire_at(const std::string &projectile_name, Thingp target) {
+  TRACE_AND_INDENT();
   if (projectile_name == "") {
     die("No projectile name");
   }
 
   auto start = last_blit_at;
-  auto end = target->last_blit_at;
+  auto end   = target->last_blit_at;
 
-  if (!start.x && !start.y) {
+  if (! start.x && ! start.y) {
     return nullptr;
   }
 
-  if (!end.x && !end.y) {
+  if (! end.x && ! end.y) {
     return nullptr;
   }
 
   auto projectile = level->thing_new(projectile_name, mid_at);
-  if (!projectile) {
+  if (! projectile) {
     return nullptr;
   }
 
   projectile->set_owner(this);
   projectile->move_to_immediately(target->mid_at);
 
-  dbg("Firing named projectile with: %s at %s", projectile->to_string().c_str(),
-    target->to_string().c_str());
+  dbg("Firing named projectile with: %s at %s", projectile->to_string().c_str(), target->to_string().c_str());
 
-  if (!projectile->is_projectile()) {
+  if (! projectile->is_projectile()) {
     if (is_player()) {
       TOPCON("I don't know how to fire %s.", projectile->text_the().c_str());
       game->tick_begin("player tried to use something they could not");

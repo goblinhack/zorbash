@@ -18,12 +18,10 @@
 //
 // Python callback upon being hit
 //
-void Thing::on_hit (Thingp hitter,      // an arrow / monst /...
-                    Thingp real_hitter, // who fired the arrow?
-                    bool crit,
-                    bool bite,
-                    int damage)
-{ TRACE_AND_INDENT();
+void Thing::on_hit(Thingp hitter,      // an arrow / monst /...
+                   Thingp real_hitter, // who fired the arrow?
+                   bool crit, bool bite, int damage) {
+  TRACE_AND_INDENT();
   auto on_hit = tp()->on_hit_do();
   if (std::empty(on_hit)) {
     return;
@@ -31,36 +29,28 @@ void Thing::on_hit (Thingp hitter,      // an arrow / monst /...
 
   auto t = split_tokens(on_hit, '.');
   if (t.size() == 2) {
-    auto mod = t[0];
-    auto fn = t[1];
+    auto        mod   = t[0];
+    auto        fn    = t[1];
     std::size_t found = fn.find("()");
     if (found != std::string::npos) {
       fn = fn.replace(found, 2, "");
     }
 
-    dbg("Call %s.%s(%s, %s, %s, crit=%d, bite=%d, damage=%d)", mod.c_str(), fn.c_str(),
-      to_string().c_str(),
-      hitter->to_string().c_str(),
-      real_hitter->to_string().c_str(),
-      crit, bite, damage);
+    dbg("Call %s.%s(%s, %s, %s, crit=%d, bite=%d, damage=%d)", mod.c_str(), fn.c_str(), to_string().c_str(),
+        hitter->to_string().c_str(), real_hitter->to_string().c_str(), crit, bite, damage);
 
-    py_call_void_fn(mod.c_str(), fn.c_str(),
-            id.id, hitter->id.id, real_hitter->id.id,
-            (unsigned int)mid_at.x, (unsigned int)mid_at.y,
-            (unsigned int)crit,
-            (unsigned int)bite,
-            (unsigned int)damage);
+    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, real_hitter->id.id, (unsigned int) mid_at.x,
+                    (unsigned int) mid_at.y, (unsigned int) crit, (unsigned int) bite, (unsigned int) damage);
   } else {
-    ERR("Bad on_hit call [%s] expected mod:function, got %d elems",
-      on_hit.c_str(), (int)on_hit.size());
+    ERR("Bad on_hit call [%s] expected mod:function, got %d elems", on_hit.c_str(), (int) on_hit.size());
   }
 }
 
 //
 // Python callback upon being miss
 //
-void Thing::on_miss (Thingp hitter)
-{ TRACE_AND_INDENT();
+void Thing::on_miss(Thingp hitter) {
+  TRACE_AND_INDENT();
   auto on_miss = tp()->on_miss_do();
   if (std::empty(on_miss)) {
     return;
@@ -68,26 +58,23 @@ void Thing::on_miss (Thingp hitter)
 
   auto t = split_tokens(on_miss, '.');
   if (t.size() == 2) {
-    auto mod = t[0];
-    auto fn = t[1];
+    auto        mod   = t[0];
+    auto        fn    = t[1];
     std::size_t found = fn.find("()");
     if (found != std::string::npos) {
       fn = fn.replace(found, 2, "");
     }
 
-    dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(),
-      to_string().c_str(), hitter->to_string().c_str());
+    dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_string().c_str(), hitter->to_string().c_str());
 
-    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id,
-            (unsigned int)mid_at.x, (unsigned int)mid_at.y);
+    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, (unsigned int) mid_at.x, (unsigned int) mid_at.y);
   } else {
-    ERR("Bad on_miss call [%s] expected mod:function, got %d elems",
-      on_miss.c_str(), (int)on_miss.size());
+    ERR("Bad on_miss call [%s] expected mod:function, got %d elems", on_miss.c_str(), (int) on_miss.size());
   }
 }
 
-void Thing::on_bite (void)
-{ TRACE_AND_INDENT();
+void Thing::on_bite(void) {
+  TRACE_AND_INDENT();
   auto on_bite = tp()->on_bite_do();
   if (std::empty(on_bite)) {
     return;
@@ -95,8 +82,8 @@ void Thing::on_bite (void)
 
   auto t = split_tokens(on_bite, '.');
   if (t.size() == 2) {
-    auto mod = t[0];
-    auto fn = t[1];
+    auto        mod   = t[0];
+    auto        fn    = t[1];
     std::size_t found = fn.find("()");
     if (found != std::string::npos) {
       fn = fn.replace(found, 2, "");
@@ -104,38 +91,32 @@ void Thing::on_bite (void)
 
     dbg("Call %s.%s(%s)", mod.c_str(), fn.c_str(), to_string().c_str());
 
-    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int)mid_at.x, (unsigned int)mid_at.y);
+    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) mid_at.x, (unsigned int) mid_at.y);
   } else {
-    ERR("Bad on_bite call [%s] expected mod:function, got %d elems",
-      on_bite.c_str(), (int)on_bite.size());
+    ERR("Bad on_bite call [%s] expected mod:function, got %d elems", on_bite.c_str(), (int) on_bite.size());
   }
 }
 
-int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
-                          Thingp real_hitter, // who fired the arrow?
-                          bool crit,
-                          bool bite,
-                          int poison,
-                          int damage)
-{ TRACE_AND_INDENT();
-  if (!hitter) {
+int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
+                         Thingp real_hitter, // who fired the arrow?
+                         bool crit, bool bite, int poison, int damage) {
+  TRACE_AND_INDENT();
+  if (! hitter) {
     err("No hitter");
     return false;
   }
 
-  if (!real_hitter) {
+  if (! real_hitter) {
     err("No real hitter");
     return false;
   }
 
-  if (!real_hitter->monstp) {
+  if (! real_hitter->monstp) {
     real_hitter->err("Has no monstp");
     return false;
   }
 
-  IF_DEBUG2 {
-    hitter->log("Hit %s (health %d) for damage %d", text_the().c_str(), get_health(), damage);
-  }
+  IF_DEBUG2 { hitter->log("Hit %s (health %d) for damage %d", text_the().c_str(), get_health(), damage); }
 
   auto delta = mid_at - hitter->mid_at;
 
@@ -171,17 +152,15 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     } else if (poison) {
       incr_poison(poison);
       if (is_player()) {
-        TOPCON("%%fg=yellow$You are poisoned for %d damage!%%fg=reset$",
-             poison);
+        TOPCON("%%fg=yellow$You are poisoned for %d damage!%%fg=reset$", poison);
       } else if (real_hitter->is_player()) {
-        TOPCON("%%fg=yellow$You poison %s for %d damage!%%fg=reset$",
-             text_The().c_str(), poison);
+        TOPCON("%%fg=yellow$You poison %s for %d damage!%%fg=reset$", text_The().c_str(), poison);
       }
     }
   }
 
   if (real_hitter->is_stamina_check()) {
-    if (!real_hitter->get_stamina()) {
+    if (! real_hitter->get_stamina()) {
       if (real_hitter->is_player()) {
         TOPCON("You are too tired to attack. You need to rest.");
         return false;
@@ -195,21 +174,15 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
   //
   if (is_dead) {
     if (real_hitter->can_eat(this)) {
-      IF_DEBUG2 {
-        hitter->log("Hit bypass, eat it");
-      }
+      IF_DEBUG2 { hitter->log("Hit bypass, eat it"); }
       damage = 0;
     } else {
-      IF_DEBUG2 {
-        hitter->log("Hit fails, it's dead");
-      }
+      IF_DEBUG2 { hitter->log("Hit fails, it's dead"); }
       return false;
     }
   } else {
-    if (!damage) {
-      IF_DEBUG2 {
-        hitter->log("Hit fails, no damage");
-      }
+    if (! damage) {
+      IF_DEBUG2 { hitter->log("Hit fails, no damage"); }
       return false;
     }
   }
@@ -246,18 +219,14 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     //
   } else if (hitter->is_monst()) {
     switch (hitter->try_to_shove_into_hazard(this, delta)) {
-      case THING_SHOVE_TRIED_AND_FAILED:
-        return true;
-      case THING_SHOVE_TRIED_AND_PASSED:
-        return true;
-      case THING_SHOVE_NEVER_TRIED:
-        break;
+      case THING_SHOVE_TRIED_AND_FAILED : return true;
+      case THING_SHOVE_TRIED_AND_PASSED : return true;
+      case THING_SHOVE_NEVER_TRIED : break;
     }
   }
 
   if (hates_fire()) {
-    if (real_hitter->is_fire() ||
-      real_hitter->is_lava()) {
+    if (real_hitter->is_fire() || real_hitter->is_lava()) {
       if (damage_doubled_from_fire()) {
         damage *= 2;
         dbg("Double damage from fire");
@@ -334,21 +303,14 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
       level->set_wobble(damage / THING_DAMAGE_SHAKE_SCALE);
       if (real_hitter == this) {
         if (crit) {
-          TOPCON("%%fg=red$You CRIT yourselfd for %d damage!%%fg=reset$",
-               damage);
+          TOPCON("%%fg=red$You CRIT yourselfd for %d damage!%%fg=reset$", damage);
         } else {
           if (hitter->is_weapon()) {
-            TOPCON("%%fg=red$You hit yourself for %d damage with %s!%%fg=reset$",
-                 damage,
-                 hitter->text_the().c_str());
+            TOPCON("%%fg=red$You hit yourself for %d damage with %s!%%fg=reset$", damage, hitter->text_the().c_str());
           } else if (hitter->is_wand()) {
-            TOPCON("%%fg=red$You zap yourself for %d damage with %s!%%fg=reset$",
-                 damage,
-                 hitter->text_the().c_str());
+            TOPCON("%%fg=red$You zap yourself for %d damage with %s!%%fg=reset$", damage, hitter->text_the().c_str());
           } else {
-            TOPCON("%%fg=red$You hurt yourself for %d damage with %s!%%fg=reset$",
-                 damage,
-                 hitter->text_the().c_str());
+            TOPCON("%%fg=red$You hurt yourself for %d damage with %s!%%fg=reset$", damage, hitter->text_the().c_str());
           }
         }
 
@@ -357,37 +319,25 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         }
       } else {
         if (crit) {
-          TOPCON("%%fg=red$%s CRITS you for %d damage!%%fg=reset$",
-               real_hitter->text_The().c_str(),
-               damage);
+          TOPCON("%%fg=red$%s CRITS you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(), damage);
         } else {
           if (hitter->is_weapon()) {
-            TOPCON("%%fg=red$%s hits you for %d damage with %s!%%fg=reset$",
-                 real_hitter->text_The().c_str(),
-                 damage,
-                 hitter->text_the().c_str());
+            TOPCON("%%fg=red$%s hits you for %d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(), damage,
+                   hitter->text_the().c_str());
           } else if (hitter->is_wand()) {
-            TOPCON("%%fg=red$%s zaps you for %d damage with %s!%%fg=reset$",
-                 real_hitter->text_The().c_str(),
-                 damage,
-                 hitter->text_the().c_str());
-          } else if (hitter->is_projectile() ||
-                 hitter->is_laser()) {
-            TOPCON("%%fg=red$%s blastd you for %d damage with %s!%%fg=reset$",
-                 real_hitter->text_The().c_str(),
-                 damage,
-                 hitter->text_the().c_str());
+            TOPCON("%%fg=red$%s zaps you for %d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(), damage,
+                   hitter->text_the().c_str());
+          } else if (hitter->is_projectile() || hitter->is_laser()) {
+            TOPCON("%%fg=red$%s blastd you for %d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(), damage,
+                   hitter->text_the().c_str());
           } else {
-            TOPCON("%%fg=red$%s %s you for %d damage!%%fg=reset$",
-                 real_hitter->text_The().c_str(),
-                 real_hitter->text_hits().c_str(),
-                 damage);
+            TOPCON("%%fg=red$%s %s you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(),
+                   real_hitter->text_hits().c_str(), damage);
           }
         }
       }
 
-      if (real_hitter->is_fire() ||
-        real_hitter->is_lava()) {
+      if (real_hitter->is_fire() || real_hitter->is_lava()) {
         if (set_on_fire("hit by fire")) {
           TOPCON("%%fg=red$You are literally ON FIRE!%%fg=reset$");
         }
@@ -395,21 +345,17 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     } else {
       if (real_hitter == this) {
         if (bite) {
-          TOPCON("%%fg=yellow$You bite yourself for %d damage!%%fg=reset$",
-               damage);
+          TOPCON("%%fg=yellow$You bite yourself for %d damage!%%fg=reset$", damage);
         } else {
           if (hitter->is_weapon()) {
-            TOPCON("%%fg=yellow$You hit yourself for %d damage with %s!%%fg=reset$",
-                 damage,
-                 hitter->text_the().c_str());
+            TOPCON("%%fg=yellow$You hit yourself for %d damage with %s!%%fg=reset$", damage,
+                   hitter->text_the().c_str());
           } else if (hitter->is_wand()) {
-            TOPCON("%%fg=yellow$You zap yourself for %d damage with %s!%%fg=reset$",
-                 damage,
-                 hitter->text_the().c_str());
+            TOPCON("%%fg=yellow$You zap yourself for %d damage with %s!%%fg=reset$", damage,
+                   hitter->text_the().c_str());
           } else {
-            TOPCON("%%fg=yellow$You hurt yourself for %d damage with %s!%%fg=reset$",
-                 damage,
-                 hitter->text_the().c_str());
+            TOPCON("%%fg=yellow$You hurt yourself for %d damage with %s!%%fg=reset$", damage,
+                   hitter->text_the().c_str());
           }
         }
 
@@ -418,31 +364,20 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         }
       } else {
         if (bite) {
-          TOPCON("%%fg=yellow$%s bites you for %d damage!%%fg=reset$",
-               real_hitter->text_The().c_str(),
-               damage);
+          TOPCON("%%fg=yellow$%s bites you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(), damage);
         } else {
           if (hitter->is_weapon()) {
-            TOPCON("%%fg=yellow$%s hits you for %d damage with %s!%%fg=reset$",
-                 real_hitter->text_The().c_str(),
-                 damage,
-                 hitter->text_the().c_str());
+            TOPCON("%%fg=yellow$%s hits you for %d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(), damage,
+                   hitter->text_the().c_str());
           } else if (hitter->is_wand()) {
-            TOPCON("%%fg=yellow$%s zaps you for %d damage with %s!%%fg=reset$",
-                 real_hitter->text_The().c_str(),
-                 damage,
-                 hitter->text_the().c_str());
-          } else if (hitter->is_projectile() ||
-                 hitter->is_laser()) {
-            TOPCON("%%fg=yellow$%s blasts you for %d damage with %s!%%fg=reset$",
-                 real_hitter->text_The().c_str(),
-                 damage,
-                 hitter->text_the().c_str());
+            TOPCON("%%fg=yellow$%s zaps you for %d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(), damage,
+                   hitter->text_the().c_str());
+          } else if (hitter->is_projectile() || hitter->is_laser()) {
+            TOPCON("%%fg=yellow$%s blasts you for %d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(),
+                   damage, hitter->text_the().c_str());
           } else {
-            TOPCON("%%fg=yellow$%s %s you for %d damage!%%fg=reset$",
-                 real_hitter->text_The().c_str(),
-                 real_hitter->text_hits().c_str(),
-                 damage);
+            TOPCON("%%fg=yellow$%s %s you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(),
+                   real_hitter->text_hits().c_str(), damage);
           }
         }
       }
@@ -459,24 +394,19 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     if (real_hitter->is_player()) {
       if (is_alive_monst() || is_minion_generator()) {
         if (crit) {
-          TOPCON("%%fg=red$You CRIT hit %s for %d damage!%%fg=reset$",
-               text_the().c_str(), damage);
+          TOPCON("%%fg=red$You CRIT hit %s for %d damage!%%fg=reset$", text_the().c_str(), damage);
         } else {
           if (hitter && (hitter != real_hitter)) {
-            TOPCON("You hit %s for %d damage with %s.",
-                 text_the().c_str(), damage,
-                 hitter->text_the().c_str());
+            TOPCON("You hit %s for %d damage with %s.", text_the().c_str(), damage, hitter->text_the().c_str());
           } else {
-            TOPCON("You hit %s for %d damage.",
-                 text_the().c_str(), damage);
+            TOPCON("You hit %s for %d damage.", text_the().c_str(), damage);
           }
         }
       } else {
         TOPCON("You hit %s.", text_the().c_str());
       }
     }
-    if (real_hitter->is_fire() ||
-      real_hitter->is_lava()) {
+    if (real_hitter->is_fire() || real_hitter->is_lava()) {
       set_on_fire("hit by fire or lava");
     }
   }
@@ -515,8 +445,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     level->thing_new(tp_random_blood_splatter()->name(), mid_at);
   }
 
-  if (real_hitter->is_player() ||
-    real_hitter->is_monst()) {
+  if (real_hitter->is_player() || real_hitter->is_monst()) {
     wobble(90);
     bounce(0.5 /* height */, 0.1 /* fade */, 100, 1);
   }
@@ -524,7 +453,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
   //
   // Are we carrying a weapon? If not, see if we can do a claw attack
   //
-  if (bite || !real_hitter->get_weapon_id_carry_anim().ok()) {
+  if (bite || ! real_hitter->get_weapon_id_carry_anim().ok()) {
     auto claws = real_hitter->tp()->gfx_anim_attack();
     if (claws != "") {
       auto bite = level->thing_new(claws, mid_at);
@@ -545,15 +474,14 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     //
     // Record who dun it.
     //
-    dbg("Is killed by (%s) %u damage, health now %d",
-      real_hitter->to_string().c_str(), damage, h);
+    dbg("Is killed by (%s) %u damage, health now %d", real_hitter->to_string().c_str(), damage, h);
     std::string killer = real_hitter->text_a_or_an();
 
     //
     // If not a monst, e.g. a generator then don't include killed by
     //
     auto reason = "killed by " + killer;
-    if (!is_monst()) {
+    if (! is_monst()) {
       reason = "by " + killer;
     }
 
@@ -570,8 +498,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
       real_hitter->eat(this);
     }
   } else {
-    dbg("Is hit by (%s) %u damage, health now %d",
-      real_hitter->to_string().c_str(), damage, h);
+    dbg("Is hit by (%s) %u damage, health now %d", real_hitter->to_string().c_str(), damage, h);
   }
 
   if (is_player()) {
@@ -581,7 +508,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
   //
   // Python callback
   //
-  if (!is_dead) {
+  if (! is_dead) {
     on_hit(hitter, real_hitter, crit, bite, damage);
   }
 
@@ -591,11 +518,9 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
 //
 // Returns true on the target being dead.
 //
-int Thing::is_hit_by (Thingp hitter, bool crit, bool bite, int poison, int damage)
-{ TRACE_AND_INDENT();
-  IF_DEBUG2 {
-    hitter->log("Possible hit %s for %u", to_string().c_str(), damage);
-  }
+int Thing::is_hit_by(Thingp hitter, bool crit, bool bite, int poison, int damage) {
+  TRACE_AND_INDENT();
+  IF_DEBUG2 { hitter->log("Possible hit %s for %u", to_string().c_str(), damage); }
   TRACE_AND_INDENT();
   //
   // If an arrow, who really fired it?
@@ -617,7 +542,7 @@ int Thing::is_hit_by (Thingp hitter, bool crit, bool bite, int poison, int damag
       }
     }
 
-    if (!real_hitter) {
+    if (! real_hitter) {
       real_hitter = hitter;
     }
   }
@@ -628,28 +553,20 @@ int Thing::is_hit_by (Thingp hitter, bool crit, bool bite, int poison, int damag
   //
   if (is_dead) {
     if (real_hitter->can_eat(this)) {
-      IF_DEBUG2 {
-        hitter->log("Cannot hit dead thing, but can eat: %s", to_string().c_str());
-      }
+      IF_DEBUG2 { hitter->log("Cannot hit dead thing, but can eat: %s", to_string().c_str()); }
     } else {
-      IF_DEBUG2 {
-        hitter->log("Cannot hit: %s is dead", to_string().c_str());
-      }
+      IF_DEBUG2 { hitter->log("Cannot hit: %s is dead", to_string().c_str()); }
       return false;
     }
   }
 
   if (is_indestructible()) {
-    IF_DEBUG2 {
-      hitter->log("Cannot hit: %s is indestructible", to_string().c_str());
-    }
+    IF_DEBUG2 { hitter->log("Cannot hit: %s is indestructible", to_string().c_str()); }
     return false;
   }
 
   if (is_resurrecting) {
-    IF_DEBUG2 {
-      hitter->log("Cannot hit: %s is resurrecting", to_string().c_str());
-    }
+    IF_DEBUG2 { hitter->log("Cannot hit: %s is resurrecting", to_string().c_str()); }
     return false;
   }
 
@@ -659,9 +576,7 @@ int Thing::is_hit_by (Thingp hitter, bool crit, bool bite, int poison, int damag
     // damage. We don't want the player to keep absorbing hits when
     // already dead though.
     //
-    IF_DEBUG2 {
-      hitter->log("No, hitter %s is already dead", to_string().c_str());
-    }
+    IF_DEBUG2 { hitter->log("No, hitter %s is already dead", to_string().c_str()); }
     return false;
   }
 
@@ -675,50 +590,34 @@ int Thing::is_hit_by (Thingp hitter, bool crit, bool bite, int poison, int damag
     //
     auto hitter_tp = hitter->tp();
     if (is_door()) {
-      if (!hitter_tp->is_explosion()     &&
-        !hitter_tp->is_projectile()    &&
-        !hitter_tp->is_laser()         &&
-        !hitter_tp->is_weapon()        &&
-        !hitter_tp->is_wand()          &&
-        !hitter_tp->is_fire()          &&
-        !hitter_tp->is_lava()          &&
-        !hitter_tp->gfx_attack_anim()) {
+      if (! hitter_tp->is_explosion() && ! hitter_tp->is_projectile() && ! hitter_tp->is_laser() &&
+          ! hitter_tp->is_weapon() && ! hitter_tp->is_wand() && ! hitter_tp->is_fire() && ! hitter_tp->is_lava() &&
+          ! hitter_tp->gfx_attack_anim()) {
         //
         // Not something that typically damages walls.
         //
-        IF_DEBUG2 {
-          hitter->log("No, %s is immune (1)", to_string().c_str());
-        }
+        IF_DEBUG2 { hitter->log("No, %s is immune (1)", to_string().c_str()); }
         return false;
       }
     }
 
     if (is_wall() || is_rock()) {
-      if (!hitter_tp->is_explosion()     &&
-        !hitter_tp->is_projectile()    &&
-        !hitter_tp->is_laser()         &&
-        !hitter_tp->is_wand()          &&
-        !hitter_tp->gfx_attack_anim()) {
+      if (! hitter_tp->is_explosion() && ! hitter_tp->is_projectile() && ! hitter_tp->is_laser() &&
+          ! hitter_tp->is_wand() && ! hitter_tp->gfx_attack_anim()) {
         //
         // Not something that typically damages walls.
         //
-        IF_DEBUG2 {
-          hitter->log("No, %s is immune (2)", to_string().c_str());
-        }
+        IF_DEBUG2 { hitter->log("No, %s is immune (2)", to_string().c_str()); }
         return false;
       }
     }
 
     if (hitter->is_fire()) {
-      IF_DEBUG2 {
-        hitter->log("Fire attack");
-      }
+      IF_DEBUG2 { hitter->log("Fire attack"); }
     }
   }
 
-  IF_DEBUG2 {
-    hitter->log("Hit succeeds");
-  }
+  IF_DEBUG2 { hitter->log("Hit succeeds"); }
   int hit_and_killed;
 
   hit_and_killed = ai_hit_actual(hitter, real_hitter, crit, bite, poison, damage);
@@ -726,14 +625,12 @@ int Thing::is_hit_by (Thingp hitter, bool crit, bool bite, int poison, int damag
   return (hit_and_killed);
 }
 
-int Thing::is_hit_by (Thingp hitter, int damage)
-{ TRACE_AND_INDENT();
+int Thing::is_hit_by(Thingp hitter, int damage) {
+  TRACE_AND_INDENT();
   return (is_hit_by(hitter, false, false, 0, damage));
 }
 
-int Thing::is_hit_by (Thingp hitter)
-{ TRACE_AND_INDENT();
-  return (is_hit_by(hitter, false, false,
-                    hitter->get_damage_poison(),
-                    hitter->get_damage_melee()));
+int Thing::is_hit_by(Thingp hitter) {
+  TRACE_AND_INDENT();
+  return (is_hit_by(hitter, false, false, hitter->get_damage_poison(), hitter->get_damage_melee()));
 }

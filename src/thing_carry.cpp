@@ -13,16 +13,16 @@
 #include "my_array_bounds_check.h"
 #include "my_ptrcheck.h"
 
-bool Thing::carry (Thingp item)
-{ TRACE_AND_INDENT();
-  if (!item) {
+bool Thing::carry(Thingp item) {
+  TRACE_AND_INDENT();
+  if (! item) {
     err("No thing to carry");
     return false;
   }
 
   dbg("Try to carry %s", item->to_string().c_str());
 
-  if (!monstp && !is_bag()) {
+  if (! monstp && ! is_bag()) {
     dbg("No; not a monst or bag");
     return false;
   }
@@ -64,16 +64,14 @@ bool Thing::carry (Thingp item)
     //
     // Bag being carried
     //
-    dbg("Added bag to bag at %d,%d",
-      item->monstp->bag_position.x, item->monstp->bag_position.y);
-  } else if (!item->is_bag_item()) {
+    dbg("Added bag to bag at %d,%d", item->monstp->bag_position.x, item->monstp->bag_position.y);
+  } else if (! item->is_bag_item()) {
     //
     // A key for example, does not go in a bag
     //
     dbg("Non item not added to bag");
   } else if (bag_add(item)) {
-    dbg("Added to bag at %d,%d",
-      item->monstp->bag_position.x, item->monstp->bag_position.y);
+    dbg("Added to bag at %d,%d", item->monstp->bag_position.x, item->monstp->bag_position.y);
   } else {
     dbg("No; cannot store in a bag");
     set_where_i_failed_to_collect_last(make_point(item->mid_at));
@@ -99,7 +97,7 @@ bool Thing::carry (Thingp item)
     existing_owner->drop_into_ether(item);
   }
 
-  for (const auto& item2 : monstp->carrying) {
+  for (const auto &item2 : monstp->carrying) {
     if (item2 == item->id) {
       dbg("No; already carried");
       return false;
@@ -107,7 +105,7 @@ bool Thing::carry (Thingp item)
   }
 
   if (is_player()) {
-    if (!inventory_id_insert(item)) {
+    if (! inventory_id_insert(item)) {
       dbg("No; no space in inventory");
       return false;
     }
@@ -131,7 +129,7 @@ bool Thing::carry (Thingp item)
     //
   } else {
     if (is_player()) {
-      if (!level->is_starting) {
+      if (! level->is_starting) {
         TOPCON("You carry %s.", item->text_the().c_str());
       }
     }
@@ -141,7 +139,7 @@ bool Thing::carry (Thingp item)
   // If we have no weapon, wield it
   //
   if (is_weapon_wielder()) {
-    if (item->is_weapon() && !get_weapon_id()) {
+    if (item->is_weapon() && ! get_weapon_id()) {
       wield(item);
     }
   }
@@ -155,23 +153,19 @@ bool Thing::carry (Thingp item)
   //
   if (item->is_bag_item_container()) {
     auto carrying_copy = item->monstp->carrying;
-    for (const auto& item2 : carrying_copy) {
+    for (const auto &item2 : carrying_copy) {
       auto t = level->thing_find(item2.id);
       if (t) {
-        log("Carrying %s that contains: %s",
-          item->to_string().c_str(),
-          t->to_string().c_str());
+        log("Carrying %s that contains: %s", item->to_string().c_str(), t->to_string().c_str());
       }
     }
 
-    for (const auto& item2 : carrying_copy) {
+    for (const auto &item2 : carrying_copy) {
       auto t = level->thing_find(item2.id);
       if (t) {
-        if (!t->is_bag_item()) {
-          if (!carry(t)) {
-            err("Could not auto carry %s's non item: %s",
-              item->to_string().c_str(),
-              t->to_string().c_str());
+        if (! t->is_bag_item()) {
+          if (! carry(t)) {
+            err("Could not auto carry %s's non item: %s", item->to_string().c_str(), t->to_string().c_str());
           }
         }
       }
@@ -181,17 +175,17 @@ bool Thing::carry (Thingp item)
   return true;
 }
 
-bool Thing::try_to_carry (Thingp item)
-{ TRACE_AND_INDENT();
+bool Thing::try_to_carry(Thingp item) {
+  TRACE_AND_INDENT();
   dbg("Try to carry: %s", item->to_string().c_str());
   return carry(item);
 }
 
-std::list<Thingp> Thing::anything_to_carry_at (fpoint at)
-{ TRACE_AND_INDENT();
+std::list<Thingp> Thing::anything_to_carry_at(fpoint at) {
+  TRACE_AND_INDENT();
   std::vector<std::pair<Thingp, int>> items;
 
-  dbg("Anything to carry at %d,%d", (int)at.x, (int)at.y);
+  dbg("Anything to carry at %d,%d", (int) at.x, (int) at.y);
   TRACE_AND_INDENT();
   //
   // Can't pick things up whilst being swallowed!
@@ -209,32 +203,30 @@ std::list<Thingp> Thing::anything_to_carry_at (fpoint at)
       dbg("Nope, I'm being swallowed");
       goto end;
     }
-  } FOR_ALL_THINGS_END()
+  }
+  FOR_ALL_THINGS_END()
 
   FOR_ALL_THINGS(level, t, at.x, at.y) {
     if (t->is_hidden) {
       continue;
     }
 
-    if (!t->is_collectable()) {
+    if (! t->is_collectable()) {
       continue;
     }
 
     if (t->is_dead) {
-      dbg("Potential item to carry, no, is dead: %s",
-        t->to_string().c_str());
+      dbg("Potential item to carry, no, is dead: %s", t->to_string().c_str());
       continue;
     }
 
     if (t->get_immediate_owner()) {
-      dbg("Potential item to carry, no, has owner: %s",
-        t->to_string().c_str());
+      dbg("Potential item to carry, no, has owner: %s", t->to_string().c_str());
       continue;
     }
 
     if (worth_collecting(t) < 0) {
-      dbg("Potential item to carry, no, not worth it: %s",
-        t->to_string().c_str());
+      dbg("Potential item to carry, no, not worth it: %s", t->to_string().c_str());
       continue;
     }
 
@@ -247,22 +239,19 @@ std::list<Thingp> Thing::anything_to_carry_at (fpoint at)
       //
       open(t);
 
-      for (const auto& item : t->monstp->carrying) {
+      for (const auto &item : t->monstp->carrying) {
         auto t = level->thing_find(item.id);
         if (t) {
           items.push_back(std::make_pair(t, get_item_value(t)));
         }
       }
     }
-  } FOR_ALL_THINGS_END()
+  }
+  FOR_ALL_THINGS_END()
 
 end:
-  sort(items.begin(),
-     items.end(),
-     [](const std::pair<Thingp, int> &a,
-      const std::pair<Thingp, int> &b) -> bool {
-       return a.second > b.second;
-     });
+  sort(items.begin(), items.end(),
+       [](const std::pair<Thingp, int> &a, const std::pair<Thingp, int> &b) -> bool { return a.second > b.second; });
 
   std::list<Thingp> out;
   for (auto i : items) {
@@ -272,13 +261,12 @@ end:
   return out;
 }
 
-std::list<Thingp> Thing::anything_to_carry (void)
-{ TRACE_AND_INDENT();
+std::list<Thingp> Thing::anything_to_carry(void) {
+  TRACE_AND_INDENT();
   return anything_to_carry_at(mid_at);
 }
 
-bool Thing::check_anything_to_carry (bool auto_collect_allowed)
-{
+bool Thing::check_anything_to_carry(bool auto_collect_allowed) {
   //
   // Can't pick things up whilst being swallowed!
   //
@@ -294,7 +282,8 @@ bool Thing::check_anything_to_carry (bool auto_collect_allowed)
     if (t->is_engulfer()) {
       return false;
     }
-  } FOR_ALL_THINGS_END()
+  }
+  FOR_ALL_THINGS_END()
 
   FOR_ALL_THINGS(level, t, mid_at.x, mid_at.y) {
     if (t->is_dead) {
@@ -309,7 +298,7 @@ bool Thing::check_anything_to_carry (bool auto_collect_allowed)
       continue;
     }
 
-    if (!t->is_collectable()) {
+    if (! t->is_collectable()) {
       continue;
     }
 
@@ -321,13 +310,13 @@ bool Thing::check_anything_to_carry (bool auto_collect_allowed)
     }
 
     return true;
-  } FOR_ALL_THINGS_END()
+  }
+  FOR_ALL_THINGS_END()
 
   return false;
 }
 
-void Thing::try_to_carry (const std::list<Thingp> &items)
-{
+void Thing::try_to_carry(const std::list<Thingp> &items) {
   for (auto item : items) {
     try_to_carry(item);
   }
@@ -336,30 +325,24 @@ void Thing::try_to_carry (const std::list<Thingp> &items)
 //
 // Returns true if we tried to collect or drop something to make space
 //
-bool Thing::try_to_carry_if_worthwhile_dropping_items_if_needed (Thingp item)
-{ TRACE_AND_INDENT();
+bool Thing::try_to_carry_if_worthwhile_dropping_items_if_needed(Thingp item) {
+  TRACE_AND_INDENT();
   Thingp would_need_to_drop = nullptr;
 
   if (worth_collecting(item, &would_need_to_drop) < 0) {
-    log("Carry check: @(%s, %d,%d %d/%dh) is not worth collecting %s",
-      level->to_string().c_str(),
-      (int)mid_at.x, (int)mid_at.y, get_health(), get_health_max(),
-      item->to_string().c_str());
+    log("Carry check: @(%s, %d,%d %d/%dh) is not worth collecting %s", level->to_string().c_str(), (int) mid_at.x,
+        (int) mid_at.y, get_health(), get_health_max(), item->to_string().c_str());
     return false;
   }
 
   if (would_need_to_drop) {
-    log("Carry check: @(%s, %d,%d %d/%dh) try to carry %s by dropping %s",
-      level->to_string().c_str(),
-      (int)mid_at.x, (int)mid_at.y, get_health(), get_health_max(),
-      item->to_string().c_str(),
-      would_need_to_drop->to_string().c_str());
+    log("Carry check: @(%s, %d,%d %d/%dh) try to carry %s by dropping %s", level->to_string().c_str(), (int) mid_at.x,
+        (int) mid_at.y, get_health(), get_health_max(), item->to_string().c_str(),
+        would_need_to_drop->to_string().c_str());
 
     if (drop(would_need_to_drop)) {
-      log("Carry check: @(%s, %d,%d %d/%dh) dropped %s",
-        level->to_string().c_str(),
-        (int)mid_at.x, (int)mid_at.y, get_health(), get_health_max(),
-        would_need_to_drop->to_string().c_str());
+      log("Carry check: @(%s, %d,%d %d/%dh) dropped %s", level->to_string().c_str(), (int) mid_at.x, (int) mid_at.y,
+          get_health(), get_health_max(), would_need_to_drop->to_string().c_str());
 
       if (is_player() && game->robot_mode) {
         BOTCON("Robot dropped %s", would_need_to_drop->text_the().c_str());
@@ -369,10 +352,8 @@ bool Thing::try_to_carry_if_worthwhile_dropping_items_if_needed (Thingp item)
       return true;
     }
 
-    log("Carry check: @(%s, %d,%d %d/%dh) failed to drop %s",
-      level->to_string().c_str(),
-      (int)mid_at.x, (int)mid_at.y, get_health(), get_health_max(),
-      would_need_to_drop->to_string().c_str());
+    log("Carry check: @(%s, %d,%d %d/%dh) failed to drop %s", level->to_string().c_str(), (int) mid_at.x,
+        (int) mid_at.y, get_health(), get_health_max(), would_need_to_drop->to_string().c_str());
 
     if (is_player() && game->robot_mode) {
       BOTCON("Robot failed to drop %s", would_need_to_drop->text_the().c_str());
@@ -382,10 +363,8 @@ bool Thing::try_to_carry_if_worthwhile_dropping_items_if_needed (Thingp item)
   }
 
   if (try_to_carry(item)) {
-    log("Carry check: @(%s, %d,%d %d/%dh) collected %s",
-      level->to_string().c_str(),
-      (int)mid_at.x, (int)mid_at.y, get_health(), get_health_max(),
-      item->to_string().c_str());
+    log("Carry check: @(%s, %d,%d %d/%dh) collected %s", level->to_string().c_str(), (int) mid_at.x, (int) mid_at.y,
+        get_health(), get_health_max(), item->to_string().c_str());
 
     if (is_player() && game->robot_mode) {
       BOTCON("Robot collected %s", item->text_the().c_str());
@@ -395,10 +374,8 @@ bool Thing::try_to_carry_if_worthwhile_dropping_items_if_needed (Thingp item)
     return true;
   }
 
-  log("Carry check: @(%s, %d,%d %d/%dh) failed to collect %s",
-    level->to_string().c_str(),
-    (int)mid_at.x, (int)mid_at.y, get_health(), get_health_max(),
-    item->to_string().c_str());
+  log("Carry check: @(%s, %d,%d %d/%dh) failed to collect %s", level->to_string().c_str(), (int) mid_at.x,
+      (int) mid_at.y, get_health(), get_health_max(), item->to_string().c_str());
 
   if (is_player() && game->robot_mode) {
     BOTCON("Robot failed to collect %s", item->text_the().c_str());

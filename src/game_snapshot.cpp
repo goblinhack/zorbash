@@ -13,18 +13,18 @@
 #include "my_ptrcheck.h"
 #include "my_wid_actionbar.h"
 
-void Game::save_snapshot_check (void)
-{ TRACE_AND_INDENT();
+void Game::save_snapshot_check(void) {
+  TRACE_AND_INDENT();
   //
   // Periodic snapshot saves
   //
   static int move_count;
   if (game->request_snapshot || (move_count++ > ENABLE_SAVE_SNAPSHOT_FREQ)) {
-    move_count = 0;
+    move_count             = 0;
     game->request_snapshot = false;
-    game->saving_snapshot = true;
+    game->saving_snapshot  = true;
     game->save_snapshot();
     game->saving_snapshot = false;
-    g_saved_snapshot = true;
+    g_saved_snapshot      = true;
   }
 }

@@ -13,10 +13,9 @@
 #include "my_monst.h"
 #include "my_array_bounds_check.h"
 
-float Thing::how_far_i_can_jump (void)
-{ TRACE_AND_INDENT();
-  auto d = (float) is_jumper_distance() +
-        ceil(0.5 + (pcg_random_range(0, 100) / 100.0));
+float Thing::how_far_i_can_jump(void) {
+  TRACE_AND_INDENT();
+  auto d = (float) is_jumper_distance() + ceil(0.5 + (pcg_random_range(0, 100) / 100.0));
 
   if (get_stamina() < get_stamina_max() / 2) {
     d /= 2;
@@ -29,22 +28,15 @@ float Thing::how_far_i_can_jump (void)
   return d;
 }
 
-bool Thing::try_to_jump (point to, bool be_careful)
-{ TRACE_AND_INDENT();
-  if (is_changing_level ||
-    is_hidden ||
-    is_falling ||
-    is_waiting_to_ascend_dungeon ||
-    is_waiting_to_descend_sewer ||
-    is_waiting_to_descend_dungeon ||
-    is_waiting_to_ascend_sewer ||
-    is_waiting_to_fall ||
-    is_jumping) {
+bool Thing::try_to_jump(point to, bool be_careful) {
+  TRACE_AND_INDENT();
+  if (is_changing_level || is_hidden || is_falling || is_waiting_to_ascend_dungeon || is_waiting_to_descend_sewer ||
+      is_waiting_to_descend_dungeon || is_waiting_to_ascend_sewer || is_waiting_to_fall || is_jumping) {
     return false;
   }
 
   if (is_stamina_check()) {
-    if (!get_stamina()) {
+    if (! get_stamina()) {
       if (is_player()) {
         TOPCON("You are too tired to jump. You need to rest.");
       }
@@ -59,7 +51,8 @@ bool Thing::try_to_jump (point to, bool be_careful)
     dbg("Try jump to %d,%d", x, y);
   }
 
-  if (level->is_oob(x, y)) { TRACE_AND_INDENT();
+  if (level->is_oob(x, y)) {
+    TRACE_AND_INDENT();
     dbg("No, oob");
     if (is_player()) {
       TOPCON("You can't jump into the void.");
@@ -70,7 +63,7 @@ bool Thing::try_to_jump (point to, bool be_careful)
   //
   // Ensure cleaners do not get stuck in themselves!
   //
-  if (!is_sticky() && level->is_sticky(mid_at.x, mid_at.y)) {
+  if (! is_sticky() && level->is_sticky(mid_at.x, mid_at.y)) {
     if (is_player()) {
       TOPCON("You try to jump but are stuck fast.");
     }
@@ -81,10 +74,8 @@ bool Thing::try_to_jump (point to, bool be_careful)
   // Block jumping over doors
   //
   if (is_player()) {
-    if (!level->is_lit_ever(x, y)) {
-      IF_DEBUG2 {
-        log("No, is not lit or visited");
-      }
+    if (! level->is_lit_ever(x, y)) {
+      IF_DEBUG2 { log("No, is not lit or visited"); }
 
       if (is_player()) {
         TOPCON("You can't jump into the unknown.");
@@ -105,9 +96,9 @@ bool Thing::try_to_jump (point to, bool be_careful)
     u.unit();
     u *= d;
     fto = mid_at + u;
-    to = make_point(fto);
-    x = to.x;
-    y = to.y;
+    to  = make_point(fto);
+    x   = to.x;
+    y   = to.y;
 
     if (be_careful) {
       if (is_player() && game->robot_mode) {
@@ -121,7 +112,8 @@ bool Thing::try_to_jump (point to, bool be_careful)
   // Don't jump too short a distance.
   //
   if (is_monst()) {
-    if (distance(mid_at, fpoint(x, y)) < 2) { TRACE_AND_INDENT();
+    if (distance(mid_at, fpoint(x, y)) < 2) {
+      TRACE_AND_INDENT();
       dbg("No, too close");
       return false;
     }
@@ -130,8 +122,8 @@ bool Thing::try_to_jump (point to, bool be_careful)
   //
   // No sneaky jumping onto doors to get passed them
   //
-  if (level->is_obs_wall_or_door(x, y) ||
-    level->is_obs_destructable(x, y)) { TRACE_AND_INDENT();
+  if (level->is_obs_wall_or_door(x, y) || level->is_obs_destructable(x, y)) {
+    TRACE_AND_INDENT();
     dbg("No, jump failed, into obstacle");
     if (is_player()) {
       TOPCON("You can't jump into solid objects.");
@@ -140,33 +132,33 @@ bool Thing::try_to_jump (point to, bool be_careful)
   }
 
   if (be_careful) {
-    if (!level->is_able_to_stand_on(x, y)) { TRACE_AND_INDENT();
+    if (! level->is_able_to_stand_on(x, y)) {
+      TRACE_AND_INDENT();
       return false;
     }
 
-    if (collision_obstacle(point(x, y))) { TRACE_AND_INDENT();
+    if (collision_obstacle(point(x, y))) {
+      TRACE_AND_INDENT();
       return false;
     }
   }
 
-  auto src = (last_blit_tl + last_blit_br) / 2;
-  auto dx = x - mid_at.x;
-  auto dy = y - mid_at.y;
-  auto tw = TILE_WIDTH;
-  auto th = TILE_HEIGHT;
-  auto sz = isize(last_blit_br.x - last_blit_tl.x, last_blit_br.y - last_blit_tl.y);
-  auto delay = THING_JUMP_SPEED;
-  auto delay_shorter = delay - 10;
-  point dst(src.x + dx * tw , src.y + dy * th );
+  auto  src           = (last_blit_tl + last_blit_br) / 2;
+  auto  dx            = x - mid_at.x;
+  auto  dy            = y - mid_at.y;
+  auto  tw            = TILE_WIDTH;
+  auto  th            = TILE_HEIGHT;
+  auto  sz            = isize(last_blit_br.x - last_blit_tl.x, last_blit_br.y - last_blit_tl.y);
+  auto  delay         = THING_JUMP_SPEED;
+  auto  delay_shorter = delay - 10;
+  point dst(src.x + dx * tw, src.y + dy * th);
 
   if (is_player()) {
     //
     // So the player is visible above light
     //
-    level->new_external_particle(id, src, dst, sz, delay,
-                   tile_index_to_tile(tile_curr),
-                   false,
-                   true /* make_visible_at_end */);
+    level->new_external_particle(id, src, dst, sz, delay, tile_index_to_tile(tile_curr), false,
+                                 true /* make_visible_at_end */);
   } else {
     delay = MONST_JUMP_SPEED;
 
@@ -175,16 +167,14 @@ bool Thing::try_to_jump (point to, bool be_careful)
     // not have to wait so long/
     //
     if (game->robot_mode) {
-      if (!level->is_lit_currently(make_point(mid_at.x, mid_at.y)) &&
-        !level->is_lit_currently(make_point(to.x, to.y))) {
+      if (! level->is_lit_currently(make_point(mid_at.x, mid_at.y)) &&
+          ! level->is_lit_currently(make_point(to.x, to.y))) {
         delay = 0;
       }
     }
 
-    level->new_internal_particle(id, src, dst, sz, delay,
-                   tile_index_to_tile(tile_curr),
-                   false,
-                   true /* make_visible_at_end */);
+    level->new_internal_particle(id, src, dst, sz, delay, tile_index_to_tile(tile_curr), false,
+                                 true /* make_visible_at_end */);
   }
 
   is_jumping = true;
@@ -195,29 +185,25 @@ bool Thing::try_to_jump (point to, bool be_careful)
   //
   if (get_weapon_id_carry_anim().ok()) {
     auto id = get_weapon_id_carry_anim();
-    auto w = level->thing_find(id);
+    auto w  = level->thing_find(id);
     if (w) {
       w->move_to_immediately(mid_at);
       w->is_jumping = true;
       if (is_player()) {
-        level->new_external_particle(id, src, dst, sz, delay_shorter,
-                       tile_index_to_tile(w->tile_curr),
-                       (w->is_dir_br() || w->is_dir_right() ||
-                        w->is_dir_tr()),
-                       true /* make_visible_at_end */);
+        level->new_external_particle(id, src, dst, sz, delay_shorter, tile_index_to_tile(w->tile_curr),
+                                     (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()),
+                                     true /* make_visible_at_end */);
       } else {
-        level->new_internal_particle(id, src, dst, sz, delay_shorter,
-                       tile_index_to_tile(w->tile_curr),
-                       (w->is_dir_br() || w->is_dir_right() ||
-                        w->is_dir_tr()),
-                       true /* make_visible_at_end */);
+        level->new_internal_particle(id, src, dst, sz, delay_shorter, tile_index_to_tile(w->tile_curr),
+                                     (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()),
+                                     true /* make_visible_at_end */);
       }
     }
   }
 
   if (get_weapon_id_use_anim().ok()) {
     auto id = get_weapon_id_use_anim();
-    auto w = level->thing_find(get_weapon_id_use_anim());
+    auto w  = level->thing_find(get_weapon_id_use_anim());
     if (w) {
       w->move_to_immediately(mid_at);
       w->is_jumping = true;
@@ -225,17 +211,13 @@ bool Thing::try_to_jump (point to, bool be_careful)
       // No, the weapon is shown as carry anim
       //
       if (is_player()) {
-        level->new_external_particle(id, src, dst, sz, delay_shorter,
-                       tile_index_to_tile(w->tile_curr),
-                       (w->is_dir_br() || w->is_dir_right() ||
-                        w->is_dir_tr()),
-                       true /* make_visible_at_end */);
+        level->new_external_particle(id, src, dst, sz, delay_shorter, tile_index_to_tile(w->tile_curr),
+                                     (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()),
+                                     true /* make_visible_at_end */);
       } else {
-        level->new_internal_particle(id, src, dst, sz, delay_shorter,
-                       tile_index_to_tile(w->tile_curr),
-                       (w->is_dir_br() || w->is_dir_right() ||
-                        w->is_dir_tr()),
-                       true /* make_visible_at_end */);
+        level->new_internal_particle(id, src, dst, sz, delay_shorter, tile_index_to_tile(w->tile_curr),
+                                     (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()),
+                                     true /* make_visible_at_end */);
       }
     }
   }
@@ -253,24 +235,21 @@ bool Thing::try_to_jump (point to, bool be_careful)
   }
 
   auto on_fire_anim_id = get_on_fire_anim_id();
-  if (on_fire_anim_id.ok()) { TRACE_AND_INDENT();
+  if (on_fire_anim_id.ok()) {
+    TRACE_AND_INDENT();
     auto id = on_fire_anim_id;
-    auto w = level->thing_find(id);
+    auto w  = level->thing_find(id);
     if (w) {
       w->move_to_immediately(mid_at);
       w->is_jumping = true;
       if (is_player()) {
-        level->new_external_particle(id, src, dst, sz, delay_shorter,
-                       tile_index_to_tile(w->tile_curr),
-                       (w->is_dir_br() || w->is_dir_right() ||
-                        w->is_dir_tr()),
-                       false /* make_visible_at_end */);
+        level->new_external_particle(id, src, dst, sz, delay_shorter, tile_index_to_tile(w->tile_curr),
+                                     (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()),
+                                     false /* make_visible_at_end */);
       } else {
-        level->new_internal_particle(id, src, dst, sz, delay_shorter,
-                       tile_index_to_tile(w->tile_curr),
-                       (w->is_dir_br() || w->is_dir_right()
-                        || w->is_dir_tr()),
-                       false /* make_visible_at_end */);
+        level->new_internal_particle(id, src, dst, sz, delay_shorter, tile_index_to_tile(w->tile_curr),
+                                     (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()),
+                                     false /* make_visible_at_end */);
       }
     }
   }
@@ -279,8 +258,8 @@ bool Thing::try_to_jump (point to, bool be_careful)
   // If something moves on the water, make a ripple
   //
   if (is_monst() || is_player()) {
-    if (!is_floating()) {
-      if (level->is_shallow_water((int)mid_at.x, (int)mid_at.y)) {
+    if (! is_floating()) {
+      if (level->is_shallow_water((int) mid_at.x, (int) mid_at.y)) {
         fpoint at(mid_at.x, mid_at.y);
         dbg("Causes ripples");
         if (game->robot_mode) {
@@ -306,32 +285,25 @@ bool Thing::try_to_jump (point to, bool be_careful)
   return true;
 }
 
-bool Thing::try_to_jump_carefully (point p)
-{ TRACE_AND_INDENT();
+bool Thing::try_to_jump_carefully(point p) {
+  TRACE_AND_INDENT();
   return try_to_jump(p, true);
 }
 
-bool Thing::try_to_jump_carefree (point p)
-{ TRACE_AND_INDENT();
+bool Thing::try_to_jump_carefree(point p) {
+  TRACE_AND_INDENT();
   return try_to_jump(p, false);
 }
 
-bool Thing::try_to_jump (void)
-{ TRACE_AND_INDENT();
-  if (is_changing_level ||
-    is_hidden ||
-    is_falling ||
-    is_waiting_to_ascend_dungeon ||
-    is_waiting_to_descend_sewer ||
-    is_waiting_to_descend_dungeon ||
-    is_waiting_to_ascend_sewer ||
-    is_waiting_to_fall ||
-    is_jumping) {
+bool Thing::try_to_jump(void) {
+  TRACE_AND_INDENT();
+  if (is_changing_level || is_hidden || is_falling || is_waiting_to_ascend_dungeon || is_waiting_to_descend_sewer ||
+      is_waiting_to_descend_dungeon || is_waiting_to_ascend_sewer || is_waiting_to_fall || is_jumping) {
     return false;
   }
 
-  float d = how_far_i_can_jump();
-  int tries = d * d;
+  float d     = how_far_i_can_jump();
+  int   tries = d * d;
 
   while (tries-- > 0) {
     int x = pcg_random_range(mid_at.x - d, mid_at.x + d);
@@ -344,22 +316,15 @@ bool Thing::try_to_jump (void)
   return false;
 }
 
-bool Thing::try_to_jump_towards_player (void)
-{ TRACE_AND_INDENT();
-  if (is_changing_level ||
-    is_hidden ||
-    is_falling ||
-    is_waiting_to_ascend_dungeon ||
-    is_waiting_to_descend_sewer ||
-    is_waiting_to_descend_dungeon ||
-    is_waiting_to_ascend_sewer ||
-    is_waiting_to_fall ||
-    is_jumping) {
+bool Thing::try_to_jump_towards_player(void) {
+  TRACE_AND_INDENT();
+  if (is_changing_level || is_hidden || is_falling || is_waiting_to_ascend_dungeon || is_waiting_to_descend_sewer ||
+      is_waiting_to_descend_dungeon || is_waiting_to_ascend_sewer || is_waiting_to_fall || is_jumping) {
     return false;
   }
 
-  float d = how_far_i_can_jump();
-  int tries = d * d;
+  float d     = how_far_i_can_jump();
+  int   tries = d * d;
 
   auto player_at = level->player->mid_at;
   auto curr_dist = DISTANCE(mid_at.x, mid_at.y, player_at.x, player_at.y);
@@ -388,22 +353,15 @@ bool Thing::try_to_jump_towards_player (void)
   return false;
 }
 
-bool Thing::try_to_jump_away_from_player (void)
-{ TRACE_AND_INDENT();
-  if (is_changing_level ||
-    is_hidden ||
-    is_falling ||
-    is_waiting_to_ascend_dungeon ||
-    is_waiting_to_descend_sewer ||
-    is_waiting_to_descend_dungeon ||
-    is_waiting_to_ascend_sewer ||
-    is_waiting_to_fall ||
-    is_jumping) {
+bool Thing::try_to_jump_away_from_player(void) {
+  TRACE_AND_INDENT();
+  if (is_changing_level || is_hidden || is_falling || is_waiting_to_ascend_dungeon || is_waiting_to_descend_sewer ||
+      is_waiting_to_descend_dungeon || is_waiting_to_ascend_sewer || is_waiting_to_fall || is_jumping) {
     return false;
   }
 
-  float d = how_far_i_can_jump();
-  int tries = d * d;
+  float d     = how_far_i_can_jump();
+  int   tries = d * d;
 
   auto player_at = level->player->mid_at;
   auto curr_dist = DISTANCE(mid_at.x, mid_at.y, player_at.x, player_at.y);
@@ -425,22 +383,15 @@ bool Thing::try_to_jump_away_from_player (void)
   return false;
 }
 
-bool Thing::try_harder_to_jump (void)
-{ TRACE_AND_INDENT();
-  if (is_changing_level ||
-    is_hidden ||
-    is_falling ||
-    is_waiting_to_ascend_dungeon ||
-    is_waiting_to_descend_sewer ||
-    is_waiting_to_descend_dungeon ||
-    is_waiting_to_ascend_sewer ||
-    is_waiting_to_fall ||
-    is_jumping) {
+bool Thing::try_harder_to_jump(void) {
+  TRACE_AND_INDENT();
+  if (is_changing_level || is_hidden || is_falling || is_waiting_to_ascend_dungeon || is_waiting_to_descend_sewer ||
+      is_waiting_to_descend_dungeon || is_waiting_to_ascend_sewer || is_waiting_to_fall || is_jumping) {
     return false;
   }
 
-  float d = how_far_i_can_jump();
-  int tries = 100;
+  float d     = how_far_i_can_jump();
+  int   tries = 100;
 
   while (tries-- > 0) {
     int x = pcg_random_range(mid_at.x - d, mid_at.x + d);
@@ -453,9 +404,9 @@ bool Thing::try_harder_to_jump (void)
   return false;
 }
 
-void Thing::jump_end (void)
-{ TRACE_AND_INDENT();
-  if (!is_jumping) {
+void Thing::jump_end(void) {
+  TRACE_AND_INDENT();
+  if (! is_jumping) {
     return;
   }
 
@@ -493,7 +444,8 @@ void Thing::jump_end (void)
   }
 
   auto on_fire_anim_id = get_on_fire_anim_id();
-  if (on_fire_anim_id.ok()) { TRACE_AND_INDENT();
+  if (on_fire_anim_id.ok()) {
+    TRACE_AND_INDENT();
     auto w = level->thing_find(on_fire_anim_id);
     if (w) {
       w->is_jumping = false;

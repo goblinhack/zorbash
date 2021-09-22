@@ -19,24 +19,17 @@
 #include "my_ptrcheck.h"
 #include "my_array_bounds_check.h"
 
-bool Thing::spawn_next_to (const std::string& what)
-{ TRACE_AND_INDENT();
+bool Thing::spawn_next_to(const std::string &what) {
+  TRACE_AND_INDENT();
   dbg("Spawn %s next to", what.c_str());
   TRACE_AND_INDENT();
-  std::vector<point> possible;
+  std::vector<point>              possible;
   static const std::vector<point> all_deltas = {
-    point(-1, -1),
-    point( 1, -1),
-    point(-1,  1),
-    point( 1,  1),
-    point(0, -1),
-    point(-1, 0),
-    point(1, 0),
-    point(0, 1),
+      point(-1, -1), point(1, -1), point(-1, 1), point(1, 1), point(0, -1), point(-1, 0), point(1, 0), point(0, 1),
   };
 
   auto tpp = tp_find(what);
-  if (!tpp) {
+  if (! tpp) {
     err("Cannot find %s to spawn", what.c_str());
     return false;
   }
@@ -60,7 +53,7 @@ bool Thing::spawn_next_to (const std::string& what)
     }
   }
 
-  for (const auto& d : all_deltas) {
+  for (const auto &d : all_deltas) {
     auto x = mid_at.x + d.x;
     auto y = mid_at.y + d.y;
     auto p = point(x, y);
@@ -80,12 +73,12 @@ bool Thing::spawn_next_to (const std::string& what)
   }
 
   auto cands = possible.size();
-  if (!cands) {
+  if (! cands) {
     return false;
   }
 
   auto chosen = possible[pcg_random_range(0, cands)];
-  auto c = level->thing_new(what, chosen);
+  auto c      = level->thing_new(what, chosen);
   c->inherit_from(this);
 
   if (c->is_minion()) {
@@ -105,24 +98,17 @@ bool Thing::spawn_next_to (const std::string& what)
   return true;
 }
 
-bool Thing::spawn_next_to_or_on_monst (const std::string& what)
-{ TRACE_AND_INDENT();
+bool Thing::spawn_next_to_or_on_monst(const std::string &what) {
+  TRACE_AND_INDENT();
   dbg("Spawn %s next to or on monst", what.c_str());
 
-  std::vector<point> possible;
+  std::vector<point>              possible;
   static const std::vector<point> all_deltas = {
-    point(-1, -1),
-    point( 1, -1),
-    point(-1,  1),
-    point( 1,  1),
-    point(0, -1),
-    point(-1, 0),
-    point(1, 0),
-    point(0, 1),
+      point(-1, -1), point(1, -1), point(-1, 1), point(1, 1), point(0, -1), point(-1, 0), point(1, 0), point(0, 1),
   };
 
   auto tpp = tp_find(what);
-  if (!tpp) {
+  if (! tpp) {
     err("Cannot find %s to spawn", what.c_str());
     return false;
   }
@@ -136,17 +122,13 @@ bool Thing::spawn_next_to_or_on_monst (const std::string& what)
     }
   }
 
-  for (const auto& d : all_deltas) {
+  for (const auto &d : all_deltas) {
     auto x = mid_at.x + d.x;
     auto y = mid_at.y + d.y;
     auto p = point(x, y);
 
-    if (level->is_door(x,y)         ||
-      level->is_secret_door(x,y)  ||
-      level->is_minion_generator(x,y)    ||
-      level->is_hazard(x,y)       ||
-      level->is_rock(x, y)        ||
-      level->is_wall(x, y)) {
+    if (level->is_door(x, y) || level->is_secret_door(x, y) || level->is_minion_generator(x, y) ||
+        level->is_hazard(x, y) || level->is_rock(x, y) || level->is_wall(x, y)) {
       continue;
     }
 
@@ -165,7 +147,7 @@ bool Thing::spawn_next_to_or_on_monst (const std::string& what)
   }
 
   auto cands = possible.size();
-  if (!cands) {
+  if (! cands) {
     return false;
   }
 
@@ -186,33 +168,31 @@ bool Thing::spawn_next_to_or_on_monst (const std::string& what)
   return true;
 }
 
-bool Thing::spawn_radius_range (Thingp item, Thingp target,
-                const std::string& what,
-                uint32_t radius_min, uint32_t radius_max)
-{ TRACE_AND_INDENT();
+bool Thing::spawn_radius_range(Thingp item, Thingp target, const std::string &what, uint32_t radius_min,
+                               uint32_t radius_max) {
+  TRACE_AND_INDENT();
   auto tpp = tp_find(what);
-  if (!tpp) {
+  if (! tpp) {
     err("Cannot find %s to spawn", what.c_str());
     return false;
   }
 
-  if (!target) {
+  if (! target) {
     err("No target to spawn %s", what.c_str());
     return false;
   }
 
-  if (!item) {
+  if (! item) {
     err("No item to spawn %s", what.c_str());
     return false;
   }
 
-  if (!radius_min && !radius_max) {
+  if (! radius_min && ! radius_max) {
     radius_min = item->tp()->blast_min_radius();
     radius_max = item->tp()->blast_max_radius();
   }
 
-  dbg("Spawn %s in radius range %u to %u",
-    what.c_str(), radius_min, radius_max);
+  dbg("Spawn %s in radius range %u to %u", what.c_str(), radius_min, radius_max);
 
   //
   // Don't spawn too many monsts
@@ -237,8 +217,7 @@ bool Thing::spawn_radius_range (Thingp item, Thingp target,
         continue;
       }
 
-      if (level->is_rock(x, y) ||
-        level->is_wall(x, y)) {
+      if (level->is_rock(x, y) || level->is_wall(x, y)) {
         continue;
       }
 
@@ -261,30 +240,21 @@ bool Thing::spawn_radius_range (Thingp item, Thingp target,
   return true;
 }
 
-bool Thing::spawn_fire (const std::string& what)
-{ TRACE_AND_INDENT();
+bool Thing::spawn_fire(const std::string &what) {
+  TRACE_AND_INDENT();
   dbg("Spawn fire: %s", what.c_str());
 
-  std::vector<point> possible;
+  std::vector<point>              possible;
   static const std::vector<point> all_deltas = {
-    point(-1, -1),
-    point( 1, -1),
-    point(-1,  1),
-    point( 1,  1),
-    point(0, -1),
-    point(-1, 0),
-    point(1, 0),
-    point(0, 1),
+      point(-1, -1), point(1, -1), point(-1, 1), point(1, 1), point(0, -1), point(-1, 0), point(1, 0), point(0, 1),
   };
 
-  for (const auto& d : all_deltas) {
+  for (const auto &d : all_deltas) {
     auto x = mid_at.x + d.x;
     auto y = mid_at.y + d.y;
     auto p = point(x, y);
 
-    if (level->is_hazard(x,y)       ||
-      level->is_rock(x, y)        ||
-      level->is_wall(x, y)) {
+    if (level->is_hazard(x, y) || level->is_rock(x, y) || level->is_wall(x, y)) {
       continue;
     }
 
@@ -296,16 +266,14 @@ bool Thing::spawn_fire (const std::string& what)
   }
 
   auto cands = possible.size();
-  if (!cands) {
+  if (! cands) {
     return false;
   }
 
   auto chosen = possible[pcg_random_range(0, cands)];
 
   auto c = level->thing_new(what, chosen);
-  IF_DEBUG2 {
-    c->log("Spawned");
-  }
+  IF_DEBUG2 { c->log("Spawned"); }
   c->inherit_from(this);
 
   if (is_spawner()) {
@@ -321,25 +289,23 @@ bool Thing::spawn_fire (const std::string& what)
   return true;
 }
 
-bool Thing::spawn_at_if_possible (const std::string& what)
-{ TRACE_AND_INDENT();
+bool Thing::spawn_at_if_possible(const std::string &what) {
+  TRACE_AND_INDENT();
   dbg("Spawn under: %s", what.c_str());
 
   std::vector<point> possible;
-  auto x = mid_at.x;
-  auto y = mid_at.y;
-  auto p = point(x, y);
+  auto               x = mid_at.x;
+  auto               y = mid_at.y;
+  auto               p = point(x, y);
 
-  if (level->is_hazard(x,y)       ||
-    level->is_rock(x, y)        ||
-    level->is_wall(x, y)) {
+  if (level->is_hazard(x, y) || level->is_rock(x, y) || level->is_wall(x, y)) {
     return false;
   }
 
   possible.push_back(p);
 
   auto cands = possible.size();
-  if (!cands) {
+  if (! cands) {
     return false;
   }
 
@@ -360,19 +326,19 @@ bool Thing::spawn_at_if_possible (const std::string& what)
   return true;
 }
 
-bool Thing::spawn_at (const std::string& what)
-{ TRACE_AND_INDENT();
+bool Thing::spawn_at(const std::string &what) {
+  TRACE_AND_INDENT();
   dbg("Spawn under: %s", what.c_str());
 
   std::vector<point> possible;
-  auto x = mid_at.x;
-  auto y = mid_at.y;
-  auto p = point(x, y);
+  auto               x = mid_at.x;
+  auto               y = mid_at.y;
+  auto               p = point(x, y);
 
   possible.push_back(p);
 
   auto cands = possible.size();
-  if (!cands) {
+  if (! cands) {
     return false;
   }
 

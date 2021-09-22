@@ -22,7 +22,7 @@
 
 static int32_t wid_console_inited;
 static int32_t wid_console_exiting;
-static void wid_console_wid_create(void);
+static void    wid_console_wid_create(void);
 
 Widp wid_console_container {};
 Widp wid_console_vert_scroll {};
@@ -30,10 +30,10 @@ Widp wid_console_horiz_scroll {};
 Widp wid_console_input_line {};
 Widp wid_console_window {};
 
-static std::map< unsigned int, std::wstring > wid_console_lines;
+static std::map<unsigned int, std::wstring> wid_console_lines;
 
-void wid_console_fini (void)
-{ TRACE_AND_INDENT();
+void wid_console_fini(void) {
+  TRACE_AND_INDENT();
   wid_console_exiting = true;
 
   if (wid_console_inited) {
@@ -47,15 +47,15 @@ void wid_console_fini (void)
   wid_destroy(&wid_console_window);
 }
 
-uint8_t wid_console_init (void)
-{ TRACE_AND_INDENT();
+uint8_t wid_console_init(void) {
+  TRACE_AND_INDENT();
   wid_console_inited = true;
 
   command_add(config_fps_counter_set, "set fps [01]", "enable frames per sec counter");
   command_add(config_gfx_inverted_set, "set gfx inverted [01]", "enable reverse colors");
   command_add(config_gfx_minimap_set, "set gfx minimap [01]", "enable dungeon minimap");
   command_add(config_game_pix_zoom_set, "set gfx zoom [0123456789]", "map zoom");
-  if (!game->config.gfx_vsync_locked) {
+  if (! game->config.gfx_vsync_locked) {
     command_add(config_gfx_vsync_enable, "set vsync [01]", "enable vertical sync enable");
   }
   command_add(config_errored, "clear errored", "used to clear a previous error");
@@ -69,9 +69,9 @@ uint8_t wid_console_init (void)
 //
 // Scroll back to the bottom of the screen.
 //
-static void wid_console_reset_scroll (void)
-{ TRACE_AND_INDENT();
-  if (!wid_console_vert_scroll) {
+static void wid_console_reset_scroll(void) {
+  TRACE_AND_INDENT();
+  if (! wid_console_vert_scroll) {
     return;
   }
 
@@ -81,8 +81,8 @@ static void wid_console_reset_scroll (void)
 //
 // Log a message to the console
 //
-static void wid_console_log_ (std::wstring s)
-{ TRACE_AND_INDENT();
+static void wid_console_log_(std::wstring s) {
+  TRACE_AND_INDENT();
   static int32_t log_wid_console_buffered_lines;
 
   if (wid_console_exiting) {
@@ -94,9 +94,8 @@ static void wid_console_log_ (std::wstring s)
   //
   // Before the console is ready, we buffer the logs.
   //
-  if (!wid_console_input_line) {
-    auto result = wid_console_lines.insert(
-            std::make_pair(log_wid_console_buffered_lines++, s));
+  if (! wid_console_input_line) {
+    auto result = wid_console_lines.insert(std::make_pair(log_wid_console_buffered_lines++, s));
 
     if (result.second == false) {
       DIE("Wid console lines insert name [%s] failed", wstring_to_string(s).c_str());
@@ -121,8 +120,8 @@ static void wid_console_log_ (std::wstring s)
 //
 // Log a message to the console
 //
-void wid_console_log (std::string s)
-{ TRACE_AND_INDENT();
+void wid_console_log(std::string s) {
+  TRACE_AND_INDENT();
   int chars_per_line = UI_CONSOLE_WIDTH;
   if (chars_per_line <= 0) {
     chars_per_line = 80;
@@ -140,8 +139,8 @@ void wid_console_log (std::string s)
 //
 // Log a message to the console
 //
-void wid_console_log (std::wstring s)
-{ TRACE_AND_INDENT();
+void wid_console_log(std::wstring s) {
+  TRACE_AND_INDENT();
   int chars_per_line = UI_CONSOLE_WIDTH;
   if (chars_per_line <= 0) {
     chars_per_line = 80;
@@ -150,7 +149,7 @@ void wid_console_log (std::wstring s)
   auto d = split(s, chars_per_line);
 
   if (d) {
-    for (const auto& c : *d) {
+    for (const auto &c : *d) {
       wid_console_log_(c);
     }
   }
@@ -159,17 +158,17 @@ void wid_console_log (std::wstring s)
 //
 // Key down etc...
 //
-uint8_t wid_console_receive_input (Widp w, const SDL_Keysym *key)
-{ TRACE_AND_INDENT();
+uint8_t wid_console_receive_input(Widp w, const SDL_Keysym *key) {
+  TRACE_AND_INDENT();
   wid_console_reset_scroll();
 
   switch (key->sym) {
-    case SDLK_RETURN: {
-      break;
-    }
+    case SDLK_RETURN :
+      {
+        break;
+      }
 
-    default:
-      break;
+    default : break;
   }
 
   //
@@ -181,12 +180,12 @@ uint8_t wid_console_receive_input (Widp w, const SDL_Keysym *key)
 //
 // Create the console
 //
-static void wid_console_wid_create (void)
-{ TRACE_AND_INDENT();
+static void wid_console_wid_create(void) {
+  TRACE_AND_INDENT();
   point tl = make_point(0, 0);
   point br = make_point(TERM_WIDTH - 1, TERM_HEIGHT - 1);
-  int w = br.x - tl.x;
-  int h = br.y - tl.y;
+  int   w  = br.x - tl.x;
+  int   h  = br.y - tl.y;
 
   {
     wid_console_window = wid_new_square_window("wid console");
@@ -199,21 +198,20 @@ static void wid_console_wid_create (void)
     point tl = make_point(0, 0);
     point br = make_point(w - 1, h);
 
-    wid_console_container = wid_new_container(wid_console_window,
-                          "wid console inner area");
+    wid_console_container = wid_new_container(wid_console_window, "wid console inner area");
     wid_set_pos(wid_console_container, tl, br);
     wid_set_style(wid_console_container, UI_WID_STYLE_DARK);
   }
 
   {
     int32_t row;
-    int row_bottom = UI_CONSOLE_HEIGHT - 1;
+    int     row_bottom = UI_CONSOLE_HEIGHT - 1;
 
     Widp child {};
     Widp prev {};
 
     for (row = 0; row < UI_CONSOLE_HEIGHT; row++) {
-      row_bottom --;
+      row_bottom--;
 
       point tl = make_point(0, row_bottom);
       point br = make_point(UI_CONSOLE_WIDTH, row_bottom);
@@ -253,10 +251,8 @@ static void wid_console_wid_create (void)
     wid_raise(wid_console_input_line);
   }
 
-  wid_console_vert_scroll =
-    wid_new_vert_scroll_bar(wid_console_window, "", wid_console_container);
-  wid_console_horiz_scroll =
-    wid_new_horiz_scroll_bar(wid_console_window, "", wid_console_container);
+  wid_console_vert_scroll  = wid_new_vert_scroll_bar(wid_console_window, "", wid_console_container);
+  wid_console_horiz_scroll = wid_new_horiz_scroll_bar(wid_console_window, "", wid_console_container);
 
   wid_visible(wid_get_parent(wid_console_vert_scroll));
   wid_hide(wid_get_parent(wid_console_horiz_scroll));
@@ -267,10 +263,10 @@ static void wid_console_wid_create (void)
   wid_update(wid_console_window);
 }
 
-std::vector<std::wstring> wid_console_serialize (void)
-{ TRACE_AND_INDENT();
+std::vector<std::wstring> wid_console_serialize(void) {
+  TRACE_AND_INDENT();
   std::vector<std::wstring> r;
-  auto tmp = wid_get_head(wid_console_input_line);
+  auto                      tmp = wid_get_head(wid_console_input_line);
   while (tmp) {
     auto s = wid_get_text(tmp);
     if (s.size()) {
@@ -282,8 +278,8 @@ std::vector<std::wstring> wid_console_serialize (void)
   return (r);
 }
 
-void wid_console_deserialize(std::vector<std::wstring> r)
-{ TRACE_AND_INDENT();
+void wid_console_deserialize(std::vector<std::wstring> r) {
+  TRACE_AND_INDENT();
   DBG3("Start of replaying old logs");
   DBG3("Vvvvvvvvvvvvvvvvvvvvvvvvvvv");
   for (auto s : r) {

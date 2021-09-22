@@ -16,10 +16,8 @@
 #include "my_array_bounds_check.h"
 #include "my_ptrcheck.h"
 
-void Level::display_deep_water (int fbo,
-                                int16_t minx, int16_t miny,
-                                int16_t maxx, int16_t maxy)
-{ TRACE_AND_INDENT();
+void Level::display_deep_water(int fbo, int16_t minx, int16_t miny, int16_t maxx, int16_t maxy) {
+  TRACE_AND_INDENT();
   int fbo_mask1;
   int fbo_mask2;
   int fbo_mask3;
@@ -37,7 +35,7 @@ void Level::display_deep_water (int fbo,
 #define WATER_DOWN   8
 
   static std::array<std::array<Tilep, WATER_DOWN>, WATER_ACROSS> deep_water;
-  if (!deep_water[0][0]) {
+  if (! deep_water[0][0]) {
     set(deep_water, 0, 0, tile_find("deep_water1a"));
     set(deep_water, 1, 0, tile_find("deep_water2a"));
     set(deep_water, 2, 0, tile_find("deep_water3a"));
@@ -117,16 +115,17 @@ void Level::display_deep_water (int fbo,
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   for (auto y = miny; y < maxy; y++) {
     for (auto x = minx; x < maxx; x++) {
-      if (likely(!is_deep_water(x, y))) {
+      if (likely(! is_deep_water(x, y))) {
         continue;
       }
       FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) {
         auto tpp = t->tp();
-        if (!tpp->is_deep_water()) {
+        if (! tpp->is_deep_water()) {
           continue;
         }
         t->blit(fbo);
-      } FOR_ALL_THINGS_END()
+      }
+      FOR_ALL_THINGS_END()
     }
   }
   glEnable(GL_TEXTURE_2D);
@@ -140,13 +139,13 @@ void Level::display_deep_water (int fbo,
   blit_fbo_bind(fbo_mask2);
   glBlendFunc(GL_ONE, GL_ZERO);
   auto tile_map = deep_water_tile_map;
-  for (auto y = miny; y < maxy - 1; y+=2) {
-    for (auto x = minx; x < maxx - 1; x+=2) {
-      if (likely(!get_no_check(tile_map, x, y))) {
+  for (auto y = miny; y < maxy - 1; y += 2) {
+    for (auto x = minx; x < maxx - 1; x += 2) {
+      if (likely(! get_no_check(tile_map, x, y))) {
         continue;
       }
-      int tx = (x & ~1);
-      int ty = (y & ~1);
+      int tx  = (x & ~1);
+      int ty  = (y & ~1);
       int tlx = tx * TILE_WIDTH;
       int tly = ty * TILE_HEIGHT;
       int brx = tlx + (2 * TILE_WIDTH);
@@ -159,13 +158,11 @@ void Level::display_deep_water (int fbo,
         bry -= pixel_map_at.y;
       }
 
-      auto tile = get_no_check(deep_water,
-                   (x&~1) % WATER_ACROSS,
-                   (y&~1) % WATER_DOWN);
-      auto x1 = tile->x1;
-      auto x2 = tile->x2;
-      auto y1 = tile->y1;
-      auto y2 = tile->y2;
+      auto tile = get_no_check(deep_water, (x & ~1) % WATER_ACROSS, (y & ~1) % WATER_DOWN);
+      auto x1   = tile->x1;
+      auto x2   = tile->x2;
+      auto y1   = tile->y1;
+      auto y2   = tile->y2;
 
       float one_pix = (1.0 / tex_get_height(tile->tex));
       y1 += one_pix * deep_water_step2;

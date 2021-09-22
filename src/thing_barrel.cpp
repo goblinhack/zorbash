@@ -16,8 +16,8 @@
 #include "my_array_bounds_check.h"
 #include "my_ptrcheck.h"
 
-void Thing::barrel_tick (void)
-{ TRACE_AND_INDENT();
+void Thing::barrel_tick(void) {
+  TRACE_AND_INDENT();
   if (is_floating()) {
     return;
   }
@@ -26,22 +26,23 @@ void Thing::barrel_tick (void)
     return;
   }
 
-  if (!is_soft_body()) {
+  if (! is_soft_body()) {
     return;
   }
 
-  if (!level->is_barrel(mid_at.x, mid_at.y)) {
+  if (! level->is_barrel(mid_at.x, mid_at.y)) {
     return;
   }
 
   dbg("Crushed by a barrel");
 
   FOR_ALL_THINGS(level, t, mid_at.x, mid_at.y) {
-    if (!t->is_barrel()) {
+    if (! t->is_barrel()) {
       continue;
     }
 
     is_hit_by(t, t->get_damage_crush());
     break;
-  } FOR_ALL_THINGS_END()
+  }
+  FOR_ALL_THINGS_END()
 }

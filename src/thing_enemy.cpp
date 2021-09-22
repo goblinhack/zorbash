@@ -13,9 +13,9 @@
 #include "my_monst.h"
 #include "my_sprintf.h"
 
-bool Thing::is_enemy (Thingp attacker) const
-{ TRACE_AND_INDENT();
-  if (unlikely(!monstp)) {
+bool Thing::is_enemy(Thingp attacker) const {
+  TRACE_AND_INDENT();
+  if (unlikely(! monstp)) {
     return false;
   }
 
@@ -28,9 +28,9 @@ bool Thing::is_enemy (Thingp attacker) const
 //
 // Timeout enemies so we don't resent them forever.
 //
-void Thing::enemies_tick (void)
-{ TRACE_AND_INDENT();
-  if (!monstp) {
+void Thing::enemies_tick(void) {
+  TRACE_AND_INDENT();
+  if (! monstp) {
     return;
   }
 
@@ -57,17 +57,17 @@ void Thing::enemies_tick (void)
   }
 }
 
-void Thing::add_enemy (Thingp attacker)
-{ TRACE_AND_INDENT();
-  if (unlikely(!attacker->is_monst())) {
+void Thing::add_enemy(Thingp attacker) {
+  TRACE_AND_INDENT();
+  if (unlikely(! attacker->is_monst())) {
     return;
   }
 
-  if (unlikely(!monstp)) {
+  if (unlikely(! monstp)) {
     return;
   }
 
-  if (!ai_enemy_memory()) {
+  if (! ai_enemy_memory()) {
     return;
   }
 
@@ -75,14 +75,14 @@ void Thing::add_enemy (Thingp attacker)
     //
     // Allow the robot to make enemies
     //
-  } else if (unlikely(!is_monst())) {
+  } else if (unlikely(! is_monst())) {
     //
     // Only monsts make enemies
     //
     return;
   }
 
-  if (!monstp->enemies[attacker->id]) {
+  if (! monstp->enemies[attacker->id]) {
     if (is_player() && game->robot_mode) {
       CON("Robot: Add new enemy %s", attacker->to_string().c_str());
     } else {

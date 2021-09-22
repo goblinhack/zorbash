@@ -20,15 +20,12 @@
 #include "my_thing_template.h"
 #include "my_random.h"
 
-void Level::new_internal_particle (ThingId id,
-                                   point start, point stop, isize sz, uint32_t dur,
-                                   const Tilep tile,
-                                   bool hflip,
-                                   bool make_visible_at_end)
-{ TRACE_AND_INDENT();
+void Level::new_internal_particle(ThingId id, point start, point stop, isize sz, uint32_t dur, const Tilep tile,
+                                  bool hflip, bool make_visible_at_end) {
+  TRACE_AND_INDENT();
   log("Create new internal particle");
   TRACE_AND_INDENT();
-  if (!tile) {
+  if (! tile) {
     err("No particle tile");
     return;
   }
@@ -51,31 +48,27 @@ void Level::new_internal_particle (ThingId id,
   }
 
   uint32_t now = time_update_time_milli();
-  new_internal_particles.push_back(Particle(id, start, stop, pixel_map_at,
-                   sz, now, now + dur, tile, hflip,
-                   make_visible_at_end));
+  new_internal_particles.push_back(
+      Particle(id, start, stop, pixel_map_at, sz, now, now + dur, tile, hflip, make_visible_at_end));
 }
 
-void Level::new_internal_particle (point start, point stop, isize sz, uint32_t dur,
-                                   const Tilep tile,
-                                   bool hflip,
-                                   bool make_visible_at_end)
-{ TRACE_AND_INDENT();
+void Level::new_internal_particle(point start, point stop, isize sz, uint32_t dur, const Tilep tile, bool hflip,
+                                  bool make_visible_at_end) {
+  TRACE_AND_INDENT();
   log("Create new internal particle");
   TRACE_AND_INDENT();
-  if (!tile) {
+  if (! tile) {
     err("No particle tile");
     return;
   }
 
   uint32_t now = time_update_time_milli();
-  new_internal_particles.push_back(Particle(NoThingId, start, stop, pixel_map_at,
-                   sz, now, now + dur, tile, hflip,
-                   make_visible_at_end));
+  new_internal_particles.push_back(
+      Particle(NoThingId, start, stop, pixel_map_at, sz, now, now + dur, tile, hflip, make_visible_at_end));
 }
 
-void Level::display_internal_particles (void)
-{ TRACE_AND_INDENT();
+void Level::display_internal_particles(void) {
+  TRACE_AND_INDENT();
 #if 0
   CON("-");
   for (auto p : all_internal_particles) {
@@ -86,9 +79,8 @@ void Level::display_internal_particles (void)
   }
 #endif
 
-  all_internal_particles.insert(std::end(all_internal_particles),
-                  std::begin(new_internal_particles),
-                  std::end(new_internal_particles));
+  all_internal_particles.insert(std::end(all_internal_particles), std::begin(new_internal_particles),
+                                std::end(new_internal_particles));
   new_internal_particles.clear();
 
   if (all_internal_particles.empty()) {
@@ -106,63 +98,65 @@ void Level::display_internal_particles (void)
 
   blit_init();
   auto now = time_update_time_milli();
-  auto e = std::remove_if(all_internal_particles.begin(),
-              all_internal_particles.end(),
-    [=, this] (Particle &p) {
-      if (p.removed) {
-        return true;
-      }
+  auto e   = std::remove_if(all_internal_particles.begin(), all_internal_particles.end(), [=, this](Particle &p) {
+    if (p.removed) {
+      return true;
+    }
 
-      //
-      // Different curve height for each particle
-      //
-      if (!p.height) {
-        p.height = non_pcg_random_range(30, 50);
-      }
+    //
+    // Different curve height for each particle
+    //
+    if (! p.height) {
+      p.height = non_pcg_random_range(30, 50);
+    }
 
-      float t = p.ts_stop - p.ts_start;
-      float dt = ((float)(now - p.ts_start)) / t;
-      if (dt > 1) {
-        if (p.id.id) {
-          auto t = thing_find(p.id);
-          if (t) {
-            if (p.make_visible_at_end) {
-              t->visible();
-            }
-            t->log("End of jump particle");
-            t->is_scheduled_for_jump_end = true;
-            t->has_internal_particle = false;
-          }
-        }
-        return true;
-      }
-
-      auto d = p.stop - p.start;
-      point at((d.x * dt) + p.start.x, (d.y * dt) + p.start.y);
-
-      auto sz = p.sz;
-      if (sz.w < 0) { sz.w = -sz.w; }
-      if (sz.h < 0) { sz.h = -sz.h; }
-
-      point blit_tl(at.x - (sz.w / 2), at.y - (sz.h / 2));
-      point blit_br(at.x + (sz.w / 2), at.y + (sz.h / 2));
-
-      int oy = sin(RAD_180 * dt) * (float)p.height;
-
-      blit_tl.y -= oy;
-      blit_br.y -= oy;
-
-      Tpp tpp = {};
+    float t  = p.ts_stop - p.ts_start;
+    float dt = ((float) (now - p.ts_start)) / t;
+    if (dt > 1) {
       if (p.id.id) {
         auto t = thing_find(p.id);
         if (t) {
-          tpp = t->tp();
+          if (p.make_visible_at_end) {
+            t->visible();
+          }
+          t->log("End of jump particle");
+          t->is_scheduled_for_jump_end = true;
+          t->has_internal_particle     = false;
         }
       }
+      return true;
+    }
 
-      auto tile = p.tile;
-      float tile_pix_height = tile->pix_height;
-      float tileh = game->config.tile_pix_height;
+    auto  d = p.stop - p.start;
+    point at((d.x * dt) + p.start.x, (d.y * dt) + p.start.y);
+
+    auto sz = p.sz;
+    if (sz.w < 0) {
+      sz.w = -sz.w;
+    }
+    if (sz.h < 0) {
+      sz.h = -sz.h;
+    }
+
+    point blit_tl(at.x - (sz.w / 2), at.y - (sz.h / 2));
+    point blit_br(at.x + (sz.w / 2), at.y + (sz.h / 2));
+
+    int oy = sin(RAD_180 * dt) * (float) p.height;
+
+    blit_tl.y -= oy;
+    blit_br.y -= oy;
+
+    Tpp tpp = {};
+    if (p.id.id) {
+      auto t = thing_find(p.id);
+      if (t) {
+        tpp = t->tp();
+      }
+    }
+
+    auto  tile            = p.tile;
+    float tile_pix_height = tile->pix_height;
+    float tileh           = game->config.tile_pix_height;
 
 #if 0
       {
@@ -185,38 +179,34 @@ void Level::display_internal_particles (void)
       }
 #endif
 
-      if (unlikely(tpp &&
-             tpp->gfx_oversized_and_on_floor())) {
-        float y_offset =
-          (((tile_pix_height - TILE_HEIGHT) / TILE_HEIGHT) * tileh) / 2.0;
-        blit_tl.y -= y_offset;
-        blit_br.y -= y_offset;
-      }
+    if (unlikely(tpp && tpp->gfx_oversized_and_on_floor())) {
+      float y_offset = (((tile_pix_height - TILE_HEIGHT) / TILE_HEIGHT) * tileh) / 2.0;
+      blit_tl.y -= y_offset;
+      blit_br.y -= y_offset;
+    }
 
-      blit_tl -= pixel_map_at - p.pixel_map_at;
-      blit_br -= pixel_map_at - p.pixel_map_at;
+    blit_tl -= pixel_map_at - p.pixel_map_at;
+    blit_br -= pixel_map_at - p.pixel_map_at;
 
-      if (p.hflip) {
-        std::swap(blit_tl.x, blit_br.x);
-      }
+    if (p.hflip) {
+      std::swap(blit_tl.x, blit_br.x);
+    }
 
-      tile_blit_outline(tile, blit_tl, blit_br, WHITE);
+    tile_blit_outline(tile, blit_tl, blit_br, WHITE);
 
-      return false;
-    });
+    return false;
+  });
   all_internal_particles.erase(e, all_internal_particles.end());
 
   blit_flush();
 }
 
-void Level::new_external_particle (ThingId id,
-                                   point start, point stop, isize sz, uint32_t dur,
-                                   const Tilep tile, bool hflip,
-                                   bool make_visible_at_end)
-{ TRACE_AND_INDENT();
+void Level::new_external_particle(ThingId id, point start, point stop, isize sz, uint32_t dur, const Tilep tile,
+                                  bool hflip, bool make_visible_at_end) {
+  TRACE_AND_INDENT();
   log("Create new external particle");
   TRACE_AND_INDENT();
-  if (!tile) {
+  if (! tile) {
     err("No particle tile");
     return;
   }
@@ -242,30 +232,27 @@ void Level::new_external_particle (ThingId id,
   }
 
   uint32_t now = time_update_time_milli();
-  new_external_particles.push_back(Particle(id, start, stop, pixel_map_at,
-                   sz, now, now + dur, tile, hflip,
-                   make_visible_at_end));
+  new_external_particles.push_back(
+      Particle(id, start, stop, pixel_map_at, sz, now, now + dur, tile, hflip, make_visible_at_end));
 }
 
-void Level::new_external_particle (point start, point stop, isize sz, uint32_t dur,
-                                   const Tilep tile, bool hflip,
-                                   bool make_visible_at_end)
-{ TRACE_AND_INDENT();
+void Level::new_external_particle(point start, point stop, isize sz, uint32_t dur, const Tilep tile, bool hflip,
+                                  bool make_visible_at_end) {
+  TRACE_AND_INDENT();
   log("Create new external particle");
   TRACE_AND_INDENT();
-  if (!tile) {
+  if (! tile) {
     err("No particle tile");
     return;
   }
 
   uint32_t now = time_update_time_milli();
-  new_external_particles.push_back(Particle(NoThingId, start, stop, pixel_map_at,
-                   sz, now, now + dur, tile, hflip,
-                   make_visible_at_end));
+  new_external_particles.push_back(
+      Particle(NoThingId, start, stop, pixel_map_at, sz, now, now + dur, tile, hflip, make_visible_at_end));
 }
 
-void Level::display_external_particles (void)
-{ TRACE_AND_INDENT();
+void Level::display_external_particles(void) {
+  TRACE_AND_INDENT();
 #if 0
   CON("-");
   for (auto p : all_external_particles) {
@@ -276,9 +263,8 @@ void Level::display_external_particles (void)
   }
 #endif
 
-  all_external_particles.insert(std::end(all_external_particles),
-                  std::begin(new_external_particles),
-                  std::end(new_external_particles));
+  all_external_particles.insert(std::end(all_external_particles), std::begin(new_external_particles),
+                                std::end(new_external_particles));
   new_external_particles.clear();
 
   if (all_external_particles.empty()) {
@@ -297,111 +283,110 @@ void Level::display_external_particles (void)
 
   blit_init();
   auto now = time_update_time_milli();
-  auto e = std::remove_if(all_external_particles.begin(),
-              all_external_particles.end(),
-    [=, this] (Particle &p) {
-      if (p.removed) {
-        return true;
-      }
+  auto e   = std::remove_if(all_external_particles.begin(), all_external_particles.end(), [=, this](Particle &p) {
+    if (p.removed) {
+      return true;
+    }
+
+    //
+    // Different curve height for each particle
+    //
+    if (! p.height) {
+      p.height = non_pcg_random_range(30, 50);
 
       //
-      // Different curve height for each particle
+      // Make a thing and its items jump the same height.
       //
-      if (!p.height) {
-        p.height = non_pcg_random_range(30, 50);
-
-        //
-        // Make a thing and its items jump the same height.
-        //
-        if (p.id.id) {
-          auto t = thing_find(p.id);
-          if (t) {
-            auto owner = t->get_top_owner();
-            if (t->is_player() || (owner && owner->is_player())) {
-              p.height = 40;
-            }
-          }
-        }
-      }
-
-      float t = p.ts_stop - p.ts_start;
-      float dt = ((float)(now - p.ts_start)) / t;
-      if (dt > 1) {
-        if (p.id.id) {
-          auto t = thing_find(p.id);
-          if (t) {
-            t->log("Particle dt %f", dt);
-            if (p.make_visible_at_end) {
-              if (!t->get_immediate_owner_id().ok()) {
-                t->visible();
-              }
-            }
-            t->log("Particle end");
-            t->is_scheduled_for_jump_end = true;
-            t->has_external_particle = false;
-          }
-        }
-        return true;
-      }
-
-      auto d = p.stop - p.start;
-      point at((d.x * dt) + p.start.x, (d.y * dt) + p.start.y);
-
-      auto sz = p.sz;
-      if (sz.w < 0) { sz.w = -sz.w; }
-      if (sz.h < 0) { sz.h = -sz.h; }
-
-      point blit_tl(at.x - (sz.w / 2), at.y - (sz.h / 2));
-      point blit_br(at.x + (sz.w / 2), at.y + (sz.h / 2));
-
-      int oy = sin(RAD_180 * dt) * (float)p.height;
-
-      blit_tl.y -= oy;
-      blit_br.y -= oy;
-
-      Tpp tpp = {};
       if (p.id.id) {
         auto t = thing_find(p.id);
         if (t) {
-          tpp = t->tp();
+          auto owner = t->get_top_owner();
+          if (t->is_player() || (owner && owner->is_player())) {
+            p.height = 40;
+          }
         }
       }
+    }
 
-      auto tile = p.tile;
-      float tile_pix_width = tile->pix_width;
-      float tile_pix_height = tile->pix_height;
-      float tilew = game->config.tile_pix_width;
-      float tileh = game->config.tile_pix_height;
-      if (unlikely((tile_pix_width != TILE_WIDTH) ||
-             (tile_pix_height != TILE_HEIGHT))) {
-        auto xtiles = tile_pix_width / TILE_WIDTH;
-        blit_tl.x -= ((xtiles-1) * tilew) / 2;
-        blit_br.x += ((xtiles-1) * tilew) / 2;
-
-        auto ytiles = tile_pix_height / TILE_HEIGHT;
-        blit_tl.y -= ((ytiles-1) * tileh) / 2;
-        blit_br.y += ((ytiles-1) * tileh) / 2;
+    float t  = p.ts_stop - p.ts_start;
+    float dt = ((float) (now - p.ts_start)) / t;
+    if (dt > 1) {
+      if (p.id.id) {
+        auto t = thing_find(p.id);
+        if (t) {
+          t->log("Particle dt %f", dt);
+          if (p.make_visible_at_end) {
+            if (! t->get_immediate_owner_id().ok()) {
+              t->visible();
+            }
+          }
+          t->log("Particle end");
+          t->is_scheduled_for_jump_end = true;
+          t->has_external_particle     = false;
+        }
       }
+      return true;
+    }
 
-      if (unlikely(tpp &&
-             tpp->gfx_oversized_and_on_floor())) {
-        float y_offset =
-          (((tile_pix_height - TILE_HEIGHT) / TILE_HEIGHT) * tileh) / 2.0;
-        blit_tl.y -= y_offset;
-        blit_br.y -= y_offset;
+    auto  d = p.stop - p.start;
+    point at((d.x * dt) + p.start.x, (d.y * dt) + p.start.y);
+
+    auto sz = p.sz;
+    if (sz.w < 0) {
+      sz.w = -sz.w;
+    }
+    if (sz.h < 0) {
+      sz.h = -sz.h;
+    }
+
+    point blit_tl(at.x - (sz.w / 2), at.y - (sz.h / 2));
+    point blit_br(at.x + (sz.w / 2), at.y + (sz.h / 2));
+
+    int oy = sin(RAD_180 * dt) * (float) p.height;
+
+    blit_tl.y -= oy;
+    blit_br.y -= oy;
+
+    Tpp tpp = {};
+    if (p.id.id) {
+      auto t = thing_find(p.id);
+      if (t) {
+        tpp = t->tp();
       }
+    }
 
-      blit_tl -= pixel_map_at - p.pixel_map_at;
-      blit_br -= pixel_map_at - p.pixel_map_at;
+    auto  tile            = p.tile;
+    float tile_pix_width  = tile->pix_width;
+    float tile_pix_height = tile->pix_height;
+    float tilew           = game->config.tile_pix_width;
+    float tileh           = game->config.tile_pix_height;
+    if (unlikely((tile_pix_width != TILE_WIDTH) || (tile_pix_height != TILE_HEIGHT))) {
+      auto xtiles = tile_pix_width / TILE_WIDTH;
+      blit_tl.x -= ((xtiles - 1) * tilew) / 2;
+      blit_br.x += ((xtiles - 1) * tilew) / 2;
 
-      if (p.hflip) {
-        std::swap(blit_tl.x, blit_br.x);
-      }
+      auto ytiles = tile_pix_height / TILE_HEIGHT;
+      blit_tl.y -= ((ytiles - 1) * tileh) / 2;
+      blit_br.y += ((ytiles - 1) * tileh) / 2;
+    }
 
-      tile_blit_outline(tile, blit_tl, blit_br, WHITE);
+    if (unlikely(tpp && tpp->gfx_oversized_and_on_floor())) {
+      float y_offset = (((tile_pix_height - TILE_HEIGHT) / TILE_HEIGHT) * tileh) / 2.0;
+      blit_tl.y -= y_offset;
+      blit_br.y -= y_offset;
+    }
 
-      return false;
-    });
+    blit_tl -= pixel_map_at - p.pixel_map_at;
+    blit_br -= pixel_map_at - p.pixel_map_at;
+
+    if (p.hflip) {
+      std::swap(blit_tl.x, blit_br.x);
+    }
+
+    tile_blit_outline(tile, blit_tl, blit_br, WHITE);
+
+    return false;
+  });
   all_external_particles.erase(e, all_external_particles.end());
 
   blit_flush();
@@ -413,13 +398,13 @@ void Level::display_external_particles (void)
 #endif
 }
 
-bool Thing::particle_anim_exists (void)
-{ TRACE_AND_INDENT();
+bool Thing::particle_anim_exists(void) {
+  TRACE_AND_INDENT();
   return has_internal_particle || has_external_particle;
 }
 
-void Thing::delete_particle (void)
-{ TRACE_AND_INDENT();
+void Thing::delete_particle(void) {
+  TRACE_AND_INDENT();
   //
   // Don't remove immediately in case we are walking the particles.
   //
@@ -428,7 +413,7 @@ void Thing::delete_particle (void)
     for (auto &p : level->all_internal_particles) {
       if (p.id == id) {
         log("Remove particle");
-        p.id = NoThingId;
+        p.id      = NoThingId;
         p.removed = true;
         break;
       }
@@ -442,7 +427,7 @@ void Thing::delete_particle (void)
     for (auto &p : level->all_external_particles) {
       if (p.id == id) {
         log("Remove particle");
-        p.id = NoThingId;
+        p.id      = NoThingId;
         p.removed = true;
         break;
       }

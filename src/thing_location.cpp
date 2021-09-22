@@ -21,8 +21,8 @@
 // to handle things that do not move but something has happened to
 // like they caught on fire
 //
-void Thing::location_check_forced (void)
-{ TRACE_AND_INDENT();
+void Thing::location_check_forced(void) {
+  TRACE_AND_INDENT();
   //
   // Prevent interactions that might generate things like smoke.
   //
@@ -50,17 +50,9 @@ void Thing::location_check_forced (void)
   //
   // Put chasm checks first as you can still fall when dead!
   //
-  if (is_changing_level ||
-    is_the_grid ||
-    is_hidden ||
-    is_falling ||
-    is_waiting_to_ascend_dungeon ||
-    is_waiting_to_descend_sewer ||
-    is_waiting_to_descend_dungeon ||
-    is_waiting_to_ascend_sewer ||
-    is_waiting_to_fall ||
-    get_immediate_owner() ||
-    is_jumping) {
+  if (is_changing_level || is_the_grid || is_hidden || is_falling || is_waiting_to_ascend_dungeon ||
+      is_waiting_to_descend_sewer || is_waiting_to_descend_dungeon || is_waiting_to_ascend_sewer ||
+      is_waiting_to_fall || get_immediate_owner() || is_jumping) {
     //
     // Skip interactions
     //
@@ -108,7 +100,7 @@ void Thing::location_check_forced (void)
     return;
   }
 
-  if (!is_able_to_change_levels()) {
+  if (! is_able_to_change_levels()) {
     return;
   }
 
@@ -144,15 +136,14 @@ void Thing::location_check_forced (void)
   }
 }
 
-void Thing::location_check (void)
-{ TRACE_AND_INDENT();
+void Thing::location_check(void) {
+  TRACE_AND_INDENT();
   if (get_tick_last_location_check() == game->tick_current) {
     return;
   }
 
   if (is_player()) {
-    dbg("Do location check. Last check %d, game tick %d",
-      get_tick_last_location_check(), game->tick_current);
+    dbg("Do location check. Last check %d, game tick %d", get_tick_last_location_check(), game->tick_current);
   }
 
   set_tick_last_location_check(game->tick_current);
@@ -165,27 +156,27 @@ void Thing::location_check (void)
 // already performed, so we don't for example do a lava check
 // again initiated by being set on fire by lava.
 //
-void Thing::location_check_all_things_at (void)
-{ TRACE_AND_INDENT();
+void Thing::location_check_all_things_at(void) {
+  TRACE_AND_INDENT();
   dbg("Do location checks");
-  FOR_ALL_THINGS_THAT_INTERACT(level, t, mid_at.x, mid_at.y) { TRACE_AND_INDENT();
-    IF_DEBUG2 {
-      t->log("Do location check");
-    }
+  FOR_ALL_THINGS_THAT_INTERACT(level, t, mid_at.x, mid_at.y) {
+    TRACE_AND_INDENT();
+    IF_DEBUG2 { t->log("Do location check"); }
     t->location_check();
-  } FOR_ALL_THINGS_END()
+  }
+  FOR_ALL_THINGS_END()
 }
 
 //
 // Check all things at this location
 //
-void Thing::location_check_forced_all_things_at (void)
-{ TRACE_AND_INDENT();
+void Thing::location_check_forced_all_things_at(void) {
+  TRACE_AND_INDENT();
   dbg("Do location checks");
-  FOR_ALL_THINGS_THAT_INTERACT(level, t, mid_at.x, mid_at.y) { TRACE_AND_INDENT();
-    IF_DEBUG2 {
-      t->log("Do location check");
-    }
+  FOR_ALL_THINGS_THAT_INTERACT(level, t, mid_at.x, mid_at.y) {
+    TRACE_AND_INDENT();
+    IF_DEBUG2 { t->log("Do location check"); }
     t->location_check_forced();
-  } FOR_ALL_THINGS_END()
+  }
+  FOR_ALL_THINGS_END()
 }

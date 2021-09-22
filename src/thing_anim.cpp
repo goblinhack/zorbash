@@ -15,30 +15,36 @@
 
 #undef DEBUG_ANIM
 
-void Thing::animate (void)
-{ TRACE_AND_INDENT();
+void Thing::animate(void) {
+  TRACE_AND_INDENT();
   Tilep tile;
-  auto tpp = tp();
+  auto  tpp = tp();
 
   if (time_get_time_ms_cached() <= get_ts_anim_delay_end()) {
 #ifdef DEBUG_ANIM
-if (is_debug_type()) { con("Waiting on anim frame"); }
+    if (is_debug_type()) {
+      con("Waiting on anim frame");
+    }
 #endif
     return;
   }
 
 #ifdef DEBUG_ANIM
-if (is_debug_type()) { con("Animate"); }
+  if (is_debug_type()) {
+    con("Animate");
+  }
 #endif
 
   auto tmap = &tpp->tiles;
-  if (unlikely(!tmap)) {
+  if (unlikely(! tmap)) {
     return;
   }
   std::vector<Tilep> *tiles = &((*tmap));
-  if (unlikely(!tiles || tiles->empty())) {
+  if (unlikely(! tiles || tiles->empty())) {
 #ifdef DEBUG_ANIM
-if (is_debug_type()) { con("Has no tiles"); }
+    if (is_debug_type()) {
+      con("Has no tiles");
+    }
 #endif
     return;
   }
@@ -50,7 +56,9 @@ if (is_debug_type()) { con("Has no tiles"); }
     //
     if (ts_next_frame > time_get_time_ms_cached()) {
 #ifdef DEBUG_ANIM
-if (is_debug_type()) { con("Same frame"); }
+      if (is_debug_type()) {
+        con("Same frame");
+      }
 #endif
       return;
     }
@@ -61,25 +69,31 @@ if (is_debug_type()) { con("Same frame"); }
     if (tile_is_end_of_anim(tile)) {
       if (tile_is_dead_on_end_of_anim(tile)) {
 #ifdef DEBUG_ANIM
-if (is_debug_type()) { con("Mark as dead"); }
+        if (is_debug_type()) {
+          con("Mark as dead");
+        }
 #endif
         dead_scheduled("by end of anim");
       }
 
       if (tile_is_alive_on_end_of_anim(tile)) {
 #ifdef DEBUG_ANIM
-if (is_debug_type()) { con("Mark as alive"); }
+        if (is_debug_type()) {
+          con("Mark as alive");
+        }
 #endif
         is_resurrecting = false;
-        is_resurrected = true;
-        is_dead = false;
-        tile = tile_first(tmap);
+        is_resurrected  = true;
+        is_dead         = false;
+        tile            = tile_first(tmap);
       } else {
         //
         // Stay dead
         //
 #ifdef DEBUG_ANIM
-if (is_debug_type()) { con("Stay dead"); }
+        if (is_debug_type()) {
+          con("Stay dead");
+        }
 #endif
         return;
       }
@@ -95,12 +109,13 @@ if (is_debug_type()) { con("Stay dead"); }
     //
     // If walking and now we've stopped, choose the idle no dir tile.
     //
-    if (is_player() && !is_dead && !is_moving) {
+    if (is_player() && ! is_dead && ! is_moving) {
       Tilep new_tile;
 
-      { TRACE_AND_INDENT();
+      {
+        TRACE_AND_INDENT();
         new_tile = tile_next(tmap, tile);
-        if (!new_tile) {
+        if (! new_tile) {
           new_tile = tile_first(tmap);
         }
 
@@ -111,12 +126,12 @@ if (is_debug_type()) { con("Stay dead"); }
             //
           } else if (tile_is_dir_none(new_tile)) {
             chose_tile = true;
-            tile = new_tile;
+            tile       = new_tile;
             break;
           }
 
           auto otile = new_tile;
-          new_tile = tile_next(tmap, new_tile);
+          new_tile   = tile_next(tmap, new_tile);
           if (new_tile == otile) {
             ERR("Anim loop");
           }
@@ -132,254 +147,12 @@ if (is_debug_type()) { con("Stay dead"); }
   //
   // Find a tile that matches the things current mode.
   //
-  uint32_t size = tiles->size();
+  uint32_t size  = tiles->size();
   uint32_t tries = 0;
 
 #ifdef DEBUG_ANIM
-if (is_debug_type()) { con("Choose tiles hp %d "
-            "is_attached %d "
-            "is_being_destroyed %d "
-            "is_blitted %d "
-            "is_bouncing %d "
-            "is_dead %d "
-            "is_facing_left %d "
-            "is_fadeup %d "
-            "is_falling %d "
-            "is_hidden %d "
-            "is_hungry %d "
-            "is_in_lava %d "
-            "is_in_water %d "
-            "is_jumping %d "
-            "is_moving %d "
-            "is_open %d "
-            "is_resurrected %d "
-            "is_resurrecting %d "
-            "is_sleeping %d "
-            "is_starving %d ",
-            get_health(),
-            is_attached,
-            is_being_destroyed,
-            is_blitted,
-            is_bouncing,
-            is_dead,
-            is_facing_left,
-            is_fadeup,
-            is_falling,
-            is_hidden,
-            is_hungry,
-            is_in_lava,
-            is_in_water,
-            is_jumping,
-            is_moving,
-            is_open,
-            is_resurrected,
-            is_resurrecting,
-            is_sleeping,
-            is_starving); }
-#endif
-  if (!chose_tile) {
-    while (tries < size) {
-      tries++;
-
-      //
-      // Cater for wraps.
-      //
-      if (!tile) {
-        tile = tile_first(tmap);
-      }
-      verify(tile);
-#ifdef DEBUG_ANIM
-if (is_debug_type()) { con("Tile %s moving %d up %d down %d left %d right %d "
-                           "dir none %d tl %d bl %d tr %d br %d", tile_name(tile).c_str(),
-             tile_is_moving(tile),
-             tile_is_dir_up(tile),
-             tile_is_dir_down(tile),
-             tile_is_dir_left(tile),
-             tile_is_dir_right(tile),
-             tile_is_dir_none(tile),
-             tile_is_dir_tl(tile),
-             tile_is_dir_bl(tile),
-             tile_is_dir_tr(tile),
-             tile_is_dir_br(tile));
-          }
-#endif
-      if (!is_resurrecting) {
-        if (tile_is_resurrecting(tile)) {
-          tile = tile_next(tmap, tile);
-          continue;
-        }
-      }
-
-      if (!is_dead && !is_resurrecting) {
-        if (tile_is_dead(tile)) {
-          tile = tile_next(tmap, tile);
-          continue;
-        }
-
-        auto health_max = get_health_max();
-        auto health = get_health();
-
-        if (tpp->internal_has_hp_anim()) {
-          if (health < health_max / 4) {
-            if (!tile_is_hp_25_percent(tile)) {
-              tile = tile_next(tmap, tile);
-#ifdef DEBUG_ANIM
-if (is_debug_type()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
-#endif
-              continue;
-            }
-          } else if (health < health_max / 2) {
-            if (!tile_is_hp_50_percent(tile)) {
-              tile = tile_next(tmap, tile);
-#ifdef DEBUG_ANIM
-if (is_debug_type()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
-#endif
-              continue;
-            }
-          } else if (health < (health_max / 4) * 3) {
-            if (!tile_is_hp_75_percent(tile)) {
-              tile = tile_next(tmap, tile);
-#ifdef DEBUG_ANIM
-if (is_debug_type()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
-#endif
-              continue;
-            }
-          } else {
-            if (!tile_is_hp_100_percent(tile)) {
-#ifdef DEBUG_ANIM
-if (is_debug_type()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
-#endif
-              tile = tile_next(tmap, tile);
-              continue;
-            }
-          }
-        }
-
-        if (!is_moving) {
-          if (tile_is_moving(tile)) {
-            tile = tile_next(tmap, tile);
-#ifdef DEBUG_ANIM
-if (is_debug_type()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
-#endif
-            continue;
-          }
-        }
-      }
-
-      if (is_resurrecting) {
-        if (!tile_is_resurrecting(tile)) {
-          tile = tile_next(tmap, tile);
-#ifdef DEBUG_ANIM
-if (is_debug_type()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
-#endif
-          continue;
-        }
-      } else if (is_dead) {
-        if (!tile_is_dead(tile)) {
-          tile = tile_next(tmap, tile);
-#ifdef DEBUG_ANIM
-if (is_debug_type()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
-#endif
-          continue;
-        }
-      } else if (is_sleeping) {
-        if (!tile_is_sleeping(tile)) {
-          tile = tile_next(tmap, tile);
-#ifdef DEBUG_ANIM
-if (is_debug_type()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
-#endif
-          continue;
-        }
-      } else if (tpp->internal_has_dir_anim() && is_dir_up()) {
-        if (!tile_is_dir_up(tile)) {
-          tile = tile_next(tmap, tile);
-#ifdef DEBUG_ANIM
-if (is_debug_type()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
-#endif
-          continue;
-        }
-      } else if (tpp->internal_has_dir_anim() && is_dir_down()) {
-        if (!tile_is_dir_down(tile)) {
-          tile = tile_next(tmap, tile);
-#ifdef DEBUG_ANIM
-if (is_debug_type()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
-#endif
-          continue;
-        }
-      } else if (tpp->internal_has_dir_anim() && is_dir_left()) {
-        if (!tile_is_dir_left(tile)) {
-          tile = tile_next(tmap, tile);
-#ifdef DEBUG_ANIM
-if (is_debug_type()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
-#endif
-          continue;
-        }
-      } else if (tpp->internal_has_dir_anim() && is_dir_right()) {
-        if (!tile_is_dir_right(tile)) {
-          tile = tile_next(tmap, tile);
-#ifdef DEBUG_ANIM
-if (is_debug_type()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
-#endif
-          continue;
-        }
-      } else if (tpp->internal_has_dir_anim() && is_dir_none()) {
-        if (!tile_is_dir_none(tile)) {
-          tile = tile_next(tmap, tile);
-#ifdef DEBUG_ANIM
-if (is_debug_type()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
-#endif
-          continue;
-        }
-      } else if (is_open) {
-        if (!tile_is_open(tile)) {
-          tile = tile_next(tmap, tile);
-#ifdef DEBUG_ANIM
-if (is_debug_type()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
-#endif
-          continue;
-        }
-      } else {
-        if (tile_is_sleeping(tile)) {
-          tile = tile_next(tmap, tile);
-#ifdef DEBUG_ANIM
-if (is_debug_type()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
-#endif
-          continue;
-        }
-
-        if (tile_is_dead(tile)) {
-          tile = tile_next(tmap, tile);
-#ifdef DEBUG_ANIM
-if (is_debug_type()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
-#endif
-          continue;
-        }
-
-        if (tile_is_open(tile)) {
-          tile = tile_next(tmap, tile);
-#ifdef DEBUG_ANIM
-if (is_debug_type()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__); }
-#endif
-          continue;
-        }
-      }
-
-      chose_tile = true;
-      break;
-    }
-  }
-
-  //
-  // If we could not find a tile, warn but don't use the dead tile
-  //
-  if (!chose_tile) {
-    if (is_dead && !gfx_dead_anim()) {
-      //
-      // ignore
-      //
-    } else {
-      die("Could not find a good animation tile after %d tries; has %d tiles, have tile %s for "
-        "hp %d "
+  if (is_debug_type()) {
+    con("Choose tiles hp %d "
         "is_attached %d "
         "is_being_destroyed %d "
         "is_blitted %d "
@@ -399,39 +172,282 @@ if (is_debug_type()) { con(" skip %s line %d", tile_name(tile).c_str(), __LINE__
         "is_resurrecting %d "
         "is_sleeping %d "
         "is_starving %d ",
-        tries, size, tile_name(tile).c_str(),
-        get_health(),
-        (bool)is_attached,
-        (bool)is_being_destroyed,
-        (bool)is_blitted,
-        (bool)is_bouncing,
-        (bool)is_dead,
-        (bool)is_facing_left,
-        (bool)is_fadeup,
-        (bool)is_falling,
-        (bool)is_hidden,
-        (bool)is_hungry,
-        (bool)is_in_lava,
-        (bool)is_in_water,
-        (bool)is_jumping,
-        (bool)is_moving,
-        (bool)is_open,
-        (bool)is_resurrected,
-        (bool)is_resurrecting,
-        (bool)is_sleeping,
-        (bool)is_starving);
+        get_health(), is_attached, is_being_destroyed, is_blitted, is_bouncing, is_dead, is_facing_left, is_fadeup,
+        is_falling, is_hidden, is_hungry, is_in_lava, is_in_water, is_jumping, is_moving, is_open, is_resurrected,
+        is_resurrecting, is_sleeping, is_starving);
+  }
+#endif
+  if (! chose_tile) {
+    while (tries < size) {
+      tries++;
+
+      //
+      // Cater for wraps.
+      //
+      if (! tile) {
+        tile = tile_first(tmap);
+      }
+      verify(tile);
+#ifdef DEBUG_ANIM
+      if (is_debug_type()) {
+        con("Tile %s moving %d up %d down %d left %d right %d "
+            "dir none %d tl %d bl %d tr %d br %d",
+            tile_name(tile).c_str(), tile_is_moving(tile), tile_is_dir_up(tile), tile_is_dir_down(tile),
+            tile_is_dir_left(tile), tile_is_dir_right(tile), tile_is_dir_none(tile), tile_is_dir_tl(tile),
+            tile_is_dir_bl(tile), tile_is_dir_tr(tile), tile_is_dir_br(tile));
+      }
+#endif
+      if (! is_resurrecting) {
+        if (tile_is_resurrecting(tile)) {
+          tile = tile_next(tmap, tile);
+          continue;
+        }
+      }
+
+      if (! is_dead && ! is_resurrecting) {
+        if (tile_is_dead(tile)) {
+          tile = tile_next(tmap, tile);
+          continue;
+        }
+
+        auto health_max = get_health_max();
+        auto health     = get_health();
+
+        if (tpp->internal_has_hp_anim()) {
+          if (health < health_max / 4) {
+            if (! tile_is_hp_25_percent(tile)) {
+              tile = tile_next(tmap, tile);
+#ifdef DEBUG_ANIM
+              if (is_debug_type()) {
+                con(" skip %s line %d", tile_name(tile).c_str(), __LINE__);
+              }
+#endif
+              continue;
+            }
+          } else if (health < health_max / 2) {
+            if (! tile_is_hp_50_percent(tile)) {
+              tile = tile_next(tmap, tile);
+#ifdef DEBUG_ANIM
+              if (is_debug_type()) {
+                con(" skip %s line %d", tile_name(tile).c_str(), __LINE__);
+              }
+#endif
+              continue;
+            }
+          } else if (health < (health_max / 4) * 3) {
+            if (! tile_is_hp_75_percent(tile)) {
+              tile = tile_next(tmap, tile);
+#ifdef DEBUG_ANIM
+              if (is_debug_type()) {
+                con(" skip %s line %d", tile_name(tile).c_str(), __LINE__);
+              }
+#endif
+              continue;
+            }
+          } else {
+            if (! tile_is_hp_100_percent(tile)) {
+#ifdef DEBUG_ANIM
+              if (is_debug_type()) {
+                con(" skip %s line %d", tile_name(tile).c_str(), __LINE__);
+              }
+#endif
+              tile = tile_next(tmap, tile);
+              continue;
+            }
+          }
+        }
+
+        if (! is_moving) {
+          if (tile_is_moving(tile)) {
+            tile = tile_next(tmap, tile);
+#ifdef DEBUG_ANIM
+            if (is_debug_type()) {
+              con(" skip %s line %d", tile_name(tile).c_str(), __LINE__);
+            }
+#endif
+            continue;
+          }
+        }
+      }
+
+      if (is_resurrecting) {
+        if (! tile_is_resurrecting(tile)) {
+          tile = tile_next(tmap, tile);
+#ifdef DEBUG_ANIM
+          if (is_debug_type()) {
+            con(" skip %s line %d", tile_name(tile).c_str(), __LINE__);
+          }
+#endif
+          continue;
+        }
+      } else if (is_dead) {
+        if (! tile_is_dead(tile)) {
+          tile = tile_next(tmap, tile);
+#ifdef DEBUG_ANIM
+          if (is_debug_type()) {
+            con(" skip %s line %d", tile_name(tile).c_str(), __LINE__);
+          }
+#endif
+          continue;
+        }
+      } else if (is_sleeping) {
+        if (! tile_is_sleeping(tile)) {
+          tile = tile_next(tmap, tile);
+#ifdef DEBUG_ANIM
+          if (is_debug_type()) {
+            con(" skip %s line %d", tile_name(tile).c_str(), __LINE__);
+          }
+#endif
+          continue;
+        }
+      } else if (tpp->internal_has_dir_anim() && is_dir_up()) {
+        if (! tile_is_dir_up(tile)) {
+          tile = tile_next(tmap, tile);
+#ifdef DEBUG_ANIM
+          if (is_debug_type()) {
+            con(" skip %s line %d", tile_name(tile).c_str(), __LINE__);
+          }
+#endif
+          continue;
+        }
+      } else if (tpp->internal_has_dir_anim() && is_dir_down()) {
+        if (! tile_is_dir_down(tile)) {
+          tile = tile_next(tmap, tile);
+#ifdef DEBUG_ANIM
+          if (is_debug_type()) {
+            con(" skip %s line %d", tile_name(tile).c_str(), __LINE__);
+          }
+#endif
+          continue;
+        }
+      } else if (tpp->internal_has_dir_anim() && is_dir_left()) {
+        if (! tile_is_dir_left(tile)) {
+          tile = tile_next(tmap, tile);
+#ifdef DEBUG_ANIM
+          if (is_debug_type()) {
+            con(" skip %s line %d", tile_name(tile).c_str(), __LINE__);
+          }
+#endif
+          continue;
+        }
+      } else if (tpp->internal_has_dir_anim() && is_dir_right()) {
+        if (! tile_is_dir_right(tile)) {
+          tile = tile_next(tmap, tile);
+#ifdef DEBUG_ANIM
+          if (is_debug_type()) {
+            con(" skip %s line %d", tile_name(tile).c_str(), __LINE__);
+          }
+#endif
+          continue;
+        }
+      } else if (tpp->internal_has_dir_anim() && is_dir_none()) {
+        if (! tile_is_dir_none(tile)) {
+          tile = tile_next(tmap, tile);
+#ifdef DEBUG_ANIM
+          if (is_debug_type()) {
+            con(" skip %s line %d", tile_name(tile).c_str(), __LINE__);
+          }
+#endif
+          continue;
+        }
+      } else if (is_open) {
+        if (! tile_is_open(tile)) {
+          tile = tile_next(tmap, tile);
+#ifdef DEBUG_ANIM
+          if (is_debug_type()) {
+            con(" skip %s line %d", tile_name(tile).c_str(), __LINE__);
+          }
+#endif
+          continue;
+        }
+      } else {
+        if (tile_is_sleeping(tile)) {
+          tile = tile_next(tmap, tile);
+#ifdef DEBUG_ANIM
+          if (is_debug_type()) {
+            con(" skip %s line %d", tile_name(tile).c_str(), __LINE__);
+          }
+#endif
+          continue;
+        }
+
+        if (tile_is_dead(tile)) {
+          tile = tile_next(tmap, tile);
+#ifdef DEBUG_ANIM
+          if (is_debug_type()) {
+            con(" skip %s line %d", tile_name(tile).c_str(), __LINE__);
+          }
+#endif
+          continue;
+        }
+
+        if (tile_is_open(tile)) {
+          tile = tile_next(tmap, tile);
+#ifdef DEBUG_ANIM
+          if (is_debug_type()) {
+            con(" skip %s line %d", tile_name(tile).c_str(), __LINE__);
+          }
+#endif
+          continue;
+        }
+      }
+
+      chose_tile = true;
+      break;
     }
   }
 
-  if (!tile) {
+  //
+  // If we could not find a tile, warn but don't use the dead tile
+  //
+  if (! chose_tile) {
+    if (is_dead && ! gfx_dead_anim()) {
+      //
+      // ignore
+      //
+    } else {
+      die("Could not find a good animation tile after %d tries; has %d tiles, have tile %s for "
+          "hp %d "
+          "is_attached %d "
+          "is_being_destroyed %d "
+          "is_blitted %d "
+          "is_bouncing %d "
+          "is_dead %d "
+          "is_facing_left %d "
+          "is_fadeup %d "
+          "is_falling %d "
+          "is_hidden %d "
+          "is_hungry %d "
+          "is_in_lava %d "
+          "is_in_water %d "
+          "is_jumping %d "
+          "is_moving %d "
+          "is_open %d "
+          "is_resurrected %d "
+          "is_resurrecting %d "
+          "is_sleeping %d "
+          "is_starving %d ",
+          tries, size, tile_name(tile).c_str(), get_health(), (bool) is_attached, (bool) is_being_destroyed,
+          (bool) is_blitted, (bool) is_bouncing, (bool) is_dead, (bool) is_facing_left, (bool) is_fadeup,
+          (bool) is_falling, (bool) is_hidden, (bool) is_hungry, (bool) is_in_lava, (bool) is_in_water,
+          (bool) is_jumping, (bool) is_moving, (bool) is_open, (bool) is_resurrected, (bool) is_resurrecting,
+          (bool) is_sleeping, (bool) is_starving);
+    }
+  }
+
+  if (! tile) {
 #ifdef DEBUG_ANIM
-if (is_debug_type()) { con("No tile"); }
+    if (is_debug_type()) {
+      con("No tile");
+    }
 #endif
     return;
   }
 
 #ifdef DEBUG_ANIM
-  if (is_debug_type()) { con("Set %s", tile_name(tile).c_str()); }
+  if (is_debug_type()) {
+    con("Set %s", tile_name(tile).c_str());
+  }
 #endif
 
   tile_curr = tile->global_index;
@@ -445,7 +461,7 @@ if (is_debug_type()) { con("No tile"); }
   // Worried this might cause things to move to destinations at slightly
   // different times and break repeatability.
   //
-  if (!game->robot_mode) {
+  if (! game->robot_mode) {
     if (delay) {
       delay = delay + (non_pcg_rand() % delay) / 5;
     }

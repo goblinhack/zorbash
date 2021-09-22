@@ -84,49 +84,44 @@
 class command_t {
 
 public:
-  command_t (void)
-  {
+  command_t(void) {
     memset(&this->tokens, 0, sizeof(this->tokens));
     memset(&this->readable_tokens, 0, sizeof(this->readable_tokens));
     memset(&this->input_tokens, 0, sizeof(this->input_tokens));
     this->callback = 0;
   }
 
-  ~command_t (void)
-  {
-  }
+  ~command_t(void) {}
 
-  tokens_t tokens;
-  tokens_t readable_tokens;
-  tokens_t input_tokens;
+  tokens_t     tokens;
+  tokens_t     readable_tokens;
+  tokens_t     input_tokens;
   command_fn_t callback;
 };
 
-typedef std::shared_ptr< class command_t > commandp;
-typedef std::map< std::string, commandp > commands;
-static commands commands_map;
+typedef std::shared_ptr<class command_t> commandp;
+typedef std::map<std::string, commandp>  commands;
+static commands                          commands_map;
 
 static uint8_t command_inited;
 
-void command_fini (void)
-{ TRACE_AND_INDENT();
+void command_fini(void) {
+  TRACE_AND_INDENT();
   if (command_inited) {
     command_inited = false;
   }
 }
 
-uint8_t command_init (void)
-{ TRACE_AND_INDENT();
+uint8_t command_init(void) {
+  TRACE_AND_INDENT();
   command_inited = true;
 
   return true;
 }
 
-void command_add (command_fn_t callback,
-          std::string input,
-          std::string readable)
-{ TRACE_AND_INDENT();
-  auto command = std::make_shared< class command_t >();
+void command_add(command_fn_t callback, std::string input, std::string readable) {
+  TRACE_AND_INDENT();
+  auto command = std::make_shared<class command_t>();
 
   auto result = commands_map.insert(std::make_pair(input, command));
 
@@ -145,28 +140,24 @@ void command_add (command_fn_t callback,
   tokens_tostring(readable.c_str(), &command->readable_tokens);
 }
 
-static int command_matches (const char *input,
-              char *output,
-              uint8_t show_ambiguous,
-              uint8_t show_complete,
-              uint8_t execute_command,
-              void *context)
-{ TRACE_AND_INDENT();
-  char cand_expand_to[MAXSTR];
+static int command_matches(const char *input, char *output, uint8_t show_ambiguous, uint8_t show_complete,
+                           uint8_t execute_command, void *context) {
+  TRACE_AND_INDENT();
+  char     cand_expand_to[MAXSTR];
   commandp matched_command = nullptr;
-  char completes_to[MAXSTR];
-  char expands_to[MAXSTR];
+  char     completes_to[MAXSTR];
+  char     expands_to[MAXSTR];
   tokens_t input_tokens;
-  char match[MAXSTR];
-  char match2[MAXSTR];
-  int longest_match;
-  int common_len;
-  int matches;
-  int cnt;
-  int t;
+  char     match[MAXSTR];
+  char     match2[MAXSTR];
+  int      longest_match;
+  int      common_len;
+  int      matches;
+  int      cnt;
+  int      t;
 
   longest_match = -1;
-  matches = 0;
+  matches       = 0;
 
   /*
    * Convert the input into tokens for matching.
@@ -179,17 +170,12 @@ static int command_matches (const char *input,
   for (auto iter : commands_map) {
     auto command = iter.second;
 
-    for (t = 0; t < (int)std::min(command->tokens.cnt,
-                   input_tokens.cnt); t++) {
+    for (t = 0; t < (int) std::min(command->tokens.cnt, input_tokens.cnt); t++) {
 
-      cnt = strncmp(command->tokens.args[t],
-              input_tokens.args[t],
-              strlen(input_tokens.args[t]));
+      cnt = strncmp(command->tokens.args[t], input_tokens.args[t], strlen(input_tokens.args[t]));
 
-      if (slre_match(&command->tokens.regexp[t],
-               input_tokens.args[t],
-               (int) strlen(input_tokens.args[t]),
-               0 /* captures */)) {
+      if (slre_match(&command->tokens.regexp[t], input_tokens.args[t], (int) strlen(input_tokens.args[t]),
+                     0 /* captures */)) {
         /*
          * Success
          */
@@ -216,17 +202,12 @@ static int command_matches (const char *input,
   for (auto iter : commands_map) {
     auto command = iter.second;
 
-    for (t = 0; t < (int)std::min(command->tokens.cnt,
-                   input_tokens.cnt); t++) {
+    for (t = 0; t < (int) std::min(command->tokens.cnt, input_tokens.cnt); t++) {
 
-      cnt = strncmp(command->tokens.args[t],
-              input_tokens.args[t],
-              strlen(input_tokens.args[t]));
+      cnt = strncmp(command->tokens.args[t], input_tokens.args[t], strlen(input_tokens.args[t]));
 
-      if (slre_match(&command->tokens.regexp[t],
-               input_tokens.args[t],
-               (int) strlen(input_tokens.args[t]),
-               0 /* captures */)) {
+      if (slre_match(&command->tokens.regexp[t], input_tokens.args[t], (int) strlen(input_tokens.args[t]),
+                     0 /* captures */)) {
         /*
          * Success
          */
@@ -238,10 +219,10 @@ static int command_matches (const char *input,
       }
     }
 
-// tokens_print_to(&command->readable_tokens, match, sizeof(match));
+    // tokens_print_to(&command->readable_tokens, match, sizeof(match));
     if (t == longest_match) {
       matches++;
-// CON("  MATCH    \"%s\" [%d] longest %d", match,t,longest_match);
+      // CON("  MATCH    \"%s\" [%d] longest %d", match,t,longest_match);
 
       matched_command = command;
 
@@ -249,8 +230,7 @@ static int command_matches (const char *input,
         completes_to[0] = '\0';
 
         for (t = 0; t < longest_match; t++) {
-          strlcat_(completes_to, command->tokens.args[t],
-              sizeof(completes_to));
+          strlcat_(completes_to, command->tokens.args[t], sizeof(completes_to));
           strlcat_(completes_to, " ", sizeof(completes_to));
         }
 
@@ -267,7 +247,7 @@ static int command_matches (const char *input,
         CON("  %s -- %s", match, match2);
       }
     } else {
-// CON("  NO MATCH \"%s\" [%d] longest %d", match,t,longest_match);
+      // CON("  NO MATCH \"%s\" [%d] longest %d", match,t,longest_match);
     }
   }
 
@@ -281,18 +261,12 @@ static int command_matches (const char *input,
       for (auto iter : commands_map) {
         auto command = iter.second;
 
-        for (t = 0; t < (int)std::min(command->tokens.cnt,
-                          input_tokens.cnt);
-          t++) {
+        for (t = 0; t < (int) std::min(command->tokens.cnt, input_tokens.cnt); t++) {
 
-          cnt = strncmp(command->tokens.args[t],
-                  input_tokens.args[t],
-                  strlen(input_tokens.args[t]));
+          cnt = strncmp(command->tokens.args[t], input_tokens.args[t], strlen(input_tokens.args[t]));
 
-          if (slre_match(&command->tokens.regexp[t],
-                  input_tokens.args[t],
-                  (int) strlen(input_tokens.args[t]),
-                  0 /* captures */)) {
+          if (slre_match(&command->tokens.regexp[t], input_tokens.args[t], (int) strlen(input_tokens.args[t]),
+                         0 /* captures */)) {
             /*
              * Success
              */
@@ -309,24 +283,21 @@ static int command_matches (const char *input,
 
           for (t = 0; t < longest_match; t++) {
             if (strisregexp(command->tokens.args[t])) {
-              strlcat_(cand_expand_to, input_tokens.args[t],
-                   sizeof(cand_expand_to));
+              strlcat_(cand_expand_to, input_tokens.args[t], sizeof(cand_expand_to));
               strlcat_(cand_expand_to, " ", sizeof(cand_expand_to));
               continue;
             }
 
-            strlcat_(cand_expand_to, command->tokens.args[t],
-                sizeof(cand_expand_to));
+            strlcat_(cand_expand_to, command->tokens.args[t], sizeof(cand_expand_to));
 
             strlcat_(cand_expand_to, " ", sizeof(cand_expand_to));
           }
 
           if (expands_to[0] != '\0') {
-            common_len = strcommon(expands_to, cand_expand_to);
+            common_len             = strcommon(expands_to, cand_expand_to);
             expands_to[common_len] = '\0';
           } else {
-            strlcpy_(expands_to, cand_expand_to,
-                sizeof(expands_to));
+            strlcpy_(expands_to, cand_expand_to, sizeof(expands_to));
           }
         }
       }
@@ -347,13 +318,9 @@ static int command_matches (const char *input,
   return (matches);
 }
 
-uint8_t command_handle (const char *input,
-            char *expandedtext,
-            uint8_t show_ambiguous,
-            uint8_t show_complete,
-            uint8_t execute_command,
-            void *context)
-{ TRACE_AND_INDENT();
+uint8_t command_handle(const char *input, char *expandedtext, uint8_t show_ambiguous, uint8_t show_complete,
+                       uint8_t execute_command, void *context) {
+  TRACE_AND_INDENT();
   int matches;
 
   if (expandedtext) {
@@ -363,8 +330,7 @@ uint8_t command_handle (const char *input,
   /*
    * Check for ambiguous commands.
    */
-  matches = command_matches(input, expandedtext, false, false,
-                execute_command, context);
+  matches = command_matches(input, expandedtext, false, false, execute_command, context);
   if (matches == 0) {
     //
     // If unknown, run as python
@@ -393,53 +359,39 @@ uint8_t command_handle (const char *input,
       }
     }
 
-    command_matches(input, expandedtext, show_ambiguous, show_complete,
-            execute_command, context);
+    command_matches(input, expandedtext, show_ambiguous, show_complete, execute_command, context);
 
-    if (!show_ambiguous) {
+    if (! show_ambiguous) {
       if (expandedtext) {
-        if (!strcasecmp(input, expandedtext)) {
+        if (! strcasecmp(input, expandedtext)) {
           CON(">%%fg=red$Incomplete command, \"%s\"%%fg=reset$. Try:", input);
 
-          command_matches(input, expandedtext, true, show_complete,
-                  execute_command, context);
+          command_matches(input, expandedtext, true, show_complete, execute_command, context);
         }
       } else {
-        command_matches(input, expandedtext, true, show_complete,
-                execute_command, context);
+        command_matches(input, expandedtext, true, show_complete, execute_command, context);
       }
     }
 
     return false;
   }
 
-  if (!execute_command && (matches == 1)) {
+  if (! execute_command && (matches == 1)) {
     CON(">%%fg=red$Incomplete command, \"%s\"%%fg=reset$. Try:", input);
 
-    command_matches(input, expandedtext, true, show_complete,
-            execute_command, context);
+    command_matches(input, expandedtext, true, show_complete, execute_command, context);
   }
 
   return true;
 }
 
-uint8_t command_handle (std::string input,
-            std::string *expanded_text,
-            uint8_t show_ambiguous,
-            uint8_t show_complete,
-            uint8_t execute_command,
-            void *context)
-{
+uint8_t command_handle(std::string input, std::string *expanded_text, uint8_t show_ambiguous, uint8_t show_complete,
+                       uint8_t execute_command, void *context) {
   char buf[MAXSTR];
 
-  buf[0]= '\0';
+  buf[0] = '\0';
 
-  uint8_t r = command_handle(input.c_str(),
-                 &buf[0],
-                 show_ambiguous,
-                 show_complete,
-                 execute_command,
-                 context);
+  uint8_t r = command_handle(input.c_str(), &buf[0], show_ambiguous, show_complete, execute_command, context);
 
   if (expanded_text) {
     *expanded_text = std::string(buf);
@@ -448,23 +400,14 @@ uint8_t command_handle (std::string input,
   return (r);
 }
 
-uint8_t command_handle (std::wstring input,
-            std::wstring *expanded_text,
-            uint8_t show_ambiguous,
-            uint8_t show_complete,
-            uint8_t execute_command,
-            void *context)
-{
+uint8_t command_handle(std::wstring input, std::wstring *expanded_text, uint8_t show_ambiguous, uint8_t show_complete,
+                       uint8_t execute_command, void *context) {
   char buf[MAXSTR];
 
   buf[0] = '\0';
 
-  uint8_t r = command_handle(wstring_to_string(input).c_str(),
-                 buf,
-                 show_ambiguous,
-                 show_complete,
-                 execute_command,
-                 context);
+  uint8_t r =
+      command_handle(wstring_to_string(input).c_str(), buf, show_ambiguous, show_complete, execute_command, context);
 
   if (expanded_text && buf[0]) {
     *expanded_text = string_to_wstring(std::string(buf));

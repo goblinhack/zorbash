@@ -21,13 +21,8 @@
 class ThingColl {
 public:
   ThingColl(void) {}
-  ThingColl(Thingp      target,
-        std::string reason,
-        uint16_t    priority) :
-    target(target),
-    reason(reason),
-    priority(priority)
-  { }
+  ThingColl(Thingp target, std::string reason, uint16_t priority)
+      : target(target), reason(reason), priority(priority) {}
 
   Thingp      target {nullptr};
   std::string reason;
@@ -35,27 +30,22 @@ public:
 };
 
 static std::vector<class ThingColl> thing_colls;
-static const float thing_collision_tiles = 1;
+static const float                  thing_collision_tiles = 1;
 
-static int circle_circle_collision (Thingp A,
-                  fpoint future_pos,
-                  Thingp B,
-                  fpoint B_at,
-                  fpoint *intersect)
-{
-  //fpoint A0, A1, A2, A3;
-  //A->to_coords(&A0, &A1, &A2, &A3);
-  //float A_radius = fmin((A1.x - A0.x) / 2.0, (A2.y - A0.y) / 2.0);
+static int circle_circle_collision(Thingp A, fpoint future_pos, Thingp B, fpoint B_at, fpoint *intersect) {
+  // fpoint A0, A1, A2, A3;
+  // A->to_coords(&A0, &A1, &A2, &A3);
+  // float A_radius = fmin((A1.x - A0.x) / 2.0, (A2.y - A0.y) / 2.0);
   float A_radius = A->tp()->collision_radius();
   float B_radius = B->tp()->collision_radius();
 
-  //fpoint B0, B1, B2, B3;
-  //B->to_coords(&B0, &B1, &B2, &B3);
-  //float B_radius = fmin((B1.x - B0.x) / 2.0, (B2.y - B0.y) / 2.0);
+  // fpoint B0, B1, B2, B3;
+  // B->to_coords(&B0, &B1, &B2, &B3);
+  // float B_radius = fmin((B1.x - B0.x) / 2.0, (B2.y - B0.y) / 2.0);
 
-  fpoint n = B_at - future_pos;
-  float touching_dist = A_radius + B_radius;
-  float dist_squared = n.x*n.x + n.y*n.y;
+  fpoint n             = B_at - future_pos;
+  float  touching_dist = A_radius + B_radius;
+  float  dist_squared  = n.x * n.x + n.y * n.y;
 
   float diff = dist_squared - touching_dist * touching_dist;
   if (diff > 0.0) {
@@ -79,28 +69,23 @@ static int circle_circle_collision (Thingp A,
   return true;
 }
 
-static int circle_circle_collision_attack (Thingp A,
-                       fpoint future_pos,
-                       Thingp B,
-                       fpoint B_at,
-                       fpoint *intersect)
-{
-  //fpoint A0, A1, A2, A3;
-  //A->to_coords(&A0, &A1, &A2, &A3);
-  //float A_radius = fmin((A1.x - A0.x) / 2.0, (A2.y - A0.y) / 2.0);
+static int circle_circle_collision_attack(Thingp A, fpoint future_pos, Thingp B, fpoint B_at, fpoint *intersect) {
+  // fpoint A0, A1, A2, A3;
+  // A->to_coords(&A0, &A1, &A2, &A3);
+  // float A_radius = fmin((A1.x - A0.x) / 2.0, (A2.y - A0.y) / 2.0);
   float A_radius = A->tp()->collision_radius();
   float B_radius = B->tp()->collision_attack_radius();
-  if (!B_radius) {
+  if (! B_radius) {
     B_radius = B->tp()->collision_radius();
   }
 
-  //fpoint B0, B1, B2, B3;
-  //B->to_coords(&B0, &B1, &B2, &B3);
-  //float B_radius = fmin((B1.x - B0.x) / 2.0, (B2.y - B0.y) / 2.0);
+  // fpoint B0, B1, B2, B3;
+  // B->to_coords(&B0, &B1, &B2, &B3);
+  // float B_radius = fmin((B1.x - B0.x) / 2.0, (B2.y - B0.y) / 2.0);
 
-  fpoint n = B_at - future_pos;
-  float touching_dist = A_radius + B_radius;
-  float dist_squared = n.x*n.x + n.y*n.y;
+  fpoint n             = B_at - future_pos;
+  float  touching_dist = A_radius + B_radius;
+  float  dist_squared  = n.x * n.x + n.y * n.y;
 
   float diff = dist_squared - touching_dist * touching_dist;
   if (diff > 0.0) {
@@ -127,31 +112,22 @@ static int circle_circle_collision_attack (Thingp A,
 //
 // Add a thing to the list of things that could be hit on this attack.
 //
-static void
-thing_add_ai_possible_hit (Thingp target, std::string reason)
-{
-  thing_colls.push_back(
-    ThingColl(target,
-        reason,
-        target->tp()->collision_hit_priority()));
+static void thing_add_ai_possible_hit(Thingp target, std::string reason) {
+  thing_colls.push_back(ThingColl(target, reason, target->tp()->collision_hit_priority()));
 }
 
 //
 // Reset the list of things we can possibly hit.
 //
-static void thing_possible_init (void)
-{
-  thing_colls.resize(0);
-}
+static void thing_possible_init(void) { thing_colls.resize(0); }
 
 //
 // Find the thing with the highest priority to hit.
 //
-bool Thing::collision_find_best_target (bool *target_attacked,
-                                        bool *target_overlaps)
-{ TRACE_AND_INDENT();
-  bool ret = false;
-  auto me = this;
+bool Thing::collision_find_best_target(bool *target_attacked, bool *target_overlaps) {
+  TRACE_AND_INDENT();
+  bool       ret  = false;
+  auto       me   = this;
   ThingColl *best = nullptr;
 
   dbg("Collided with or can attack or eat something, find the best");
@@ -159,7 +135,7 @@ bool Thing::collision_find_best_target (bool *target_attacked,
   *target_attacked = false;
   *target_overlaps = false;
 
-  for (auto& cand : thing_colls) {
+  for (auto &cand : thing_colls) {
     //
     // Don't be silly and hit yourself.
     //
@@ -174,13 +150,12 @@ bool Thing::collision_find_best_target (bool *target_attacked,
     //
     if (cand.target->tp()->gfx_weapon_carry_anim()) {
       if (is_loggable_for_unimportant_stuff()) {
-        dbg("Ignore %s skip, not hittable",
-          cand.target->to_string().c_str());
+        dbg("Ignore %s skip, not hittable", cand.target->to_string().c_str());
       }
       continue;
     }
 
-    if (!best) {
+    if (! best) {
       best = &cand;
       continue;
     }
@@ -197,17 +172,11 @@ bool Thing::collision_find_best_target (bool *target_attacked,
       //
       // If this target is closer, prefer it.
       //
-      auto me_pos = mid_at;
+      auto me_pos   = mid_at;
       auto best_pos = best->target->mid_at;
 
-      float dist_best = DISTANCE(me_pos.x,
-                     me_pos.y,
-                     best_pos.x,
-                     best_pos.y);
-      float dist_cand = DISTANCE(me_pos.x,
-                     me_pos.y,
-                     best_pos.x,
-                     best_pos.y);
+      float dist_best = DISTANCE(me_pos.x, me_pos.y, best_pos.x, best_pos.y);
+      float dist_cand = DISTANCE(me_pos.x, me_pos.y, best_pos.x, best_pos.y);
 
       if (dist_cand < dist_best) {
         best = &cand;
@@ -235,16 +204,16 @@ bool Thing::collision_find_best_target (bool *target_attacked,
     // We hit this path if you click on a door and attack it.
     // However, try to open the door if you have a key.
     //
-    if (it->is_door() && !it->is_open) {
+    if (it->is_door() && ! it->is_open) {
       auto owner = get_immediate_owner();
       if (owner) {
         if (owner->open_door(it)) {
           *target_attacked = false;
-          ret = true;
+          ret              = true;
         }
       } else if (open_door(it)) {
         *target_attacked = false;
-        ret = true;
+        ret              = true;
       }
     }
 
@@ -252,11 +221,11 @@ bool Thing::collision_find_best_target (bool *target_attacked,
     // Cannot do this for players or we end up attacking when waiting whilst
     // being consumed by a cleaner
     //
-    if (!is_player()) {
-      if (!*target_attacked) {
+    if (! is_player()) {
+      if (! *target_attacked) {
         if (attack(it)) {
           *target_attacked = true;
-          ret = true;
+          ret              = true;
         } else {
           if (is_loggable_for_unimportant_stuff()) {
             dbg("Collision: Cannot hit %s", it->to_string().c_str());
@@ -270,18 +239,15 @@ bool Thing::collision_find_best_target (bool *target_attacked,
   return (ret);
 }
 
-bool things_overlap (const Thingp A, fpoint A_at, const Thingp B)
-{
+bool things_overlap(const Thingp A, fpoint A_at, const Thingp B) {
   //
   // FYI This path is used for monst attacks
   //
-  if (A->tp()->collision_circle() &&
-    B->tp()->collision_circle()) {
+  if (A->tp()->collision_circle() && B->tp()->collision_circle()) {
     if (circle_circle_collision(A, // circle
-                  A_at,
-                  B, // box
-                  B->mid_at,
-                  nullptr)) {
+                                A_at,
+                                B, // box
+                                B->mid_at, nullptr)) {
 #if 0
       LOG("%s %s (test4) overlaps", A->to_string().c_str(), B->to_string().c_str());
 #endif
@@ -292,10 +258,9 @@ bool things_overlap (const Thingp A, fpoint A_at, const Thingp B)
     // This is to allow hits when a thing is in transit
     //
     if (circle_circle_collision(A, // circle
-                  A_at,
-                  B, // box
-                  B->get_interpolated_mid_at(),
-                  nullptr)) {
+                                A_at,
+                                B, // box
+                                B->get_interpolated_mid_at(), nullptr)) {
 #if 0
       LOG("%s %s (test5) overlaps", A->to_string().c_str(), B->to_string().c_str());
 #endif
@@ -315,35 +280,30 @@ bool things_overlap (const Thingp A, fpoint A_at, const Thingp B)
   return false;
 }
 
-bool things_overlap_attack (const Thingp A, fpoint A_at, const Thingp B)
-{
-  if (A->tp()->collision_circle() &&
-    B->tp()->collision_circle()) {
+bool things_overlap_attack(const Thingp A, fpoint A_at, const Thingp B) {
+  if (A->tp()->collision_circle() && B->tp()->collision_circle()) {
     if (circle_circle_collision_attack(A, // circle
-                       A_at,
-                       B, // box
-                       B->mid_at,
-                       nullptr)) {
+                                       A_at,
+                                       B, // box
+                                       B->mid_at, nullptr)) {
 #if 0
       LOG("%s %s (test7) overlaps", A->to_string().c_str(), B->to_string().c_str());
 #endif
       return true;
     }
     if (circle_circle_collision_attack(A, // circle
-                       A_at,
-                       B, // box
-                       B->get_interpolated_mid_at(),
-                       nullptr)) {
+                                       A_at,
+                                       B, // box
+                                       B->get_interpolated_mid_at(), nullptr)) {
 #if 0
       LOG("%s %s (test8) overlaps", A->to_string().c_str(), B->to_string().c_str());
 #endif
       return true;
     }
     if (circle_circle_collision_attack(A, // circle
-                       A->get_interpolated_mid_at(),
-                       B, // box
-                       B->get_interpolated_mid_at(),
-                       nullptr)) {
+                                       A->get_interpolated_mid_at(),
+                                       B, // box
+                                       B->get_interpolated_mid_at(), nullptr)) {
 #if 0
       LOG("%s %s (test9) overlaps", A->to_string().c_str(), B->to_string().c_str());
 #endif
@@ -360,9 +320,8 @@ bool things_overlap_attack (const Thingp A, fpoint A_at, const Thingp B)
 //
 // If two things collide, return false to stop the walk
 //
-bool Thing::collision_add_candidates (Thingp it, fpoint future_pos,
-                                      int x, int y, int dx, int dy)
-{ TRACE_AND_INDENT();
+bool Thing::collision_add_candidates(Thingp it, fpoint future_pos, int x, int y, int dx, int dy) {
+  TRACE_AND_INDENT();
   auto me = this;
 
   Thingp owner_it = it->get_immediate_owner();
@@ -393,7 +352,7 @@ bool Thing::collision_add_candidates (Thingp it, fpoint future_pos,
 
   if (is_player() && it->is_collectable()) {
     dbg("No; allow items to be collected manually");
-  } else if (!it->is_dead && possible_to_attack(it)) {
+  } else if (! it->is_dead && possible_to_attack(it)) {
     if (things_overlap_attack(me, future_pos, it)) {
       dbg("Yes; candidate to attack");
       thing_add_ai_possible_hit(it, "battle");
@@ -418,9 +377,7 @@ bool Thing::collision_add_candidates (Thingp it, fpoint future_pos,
     // Continue walking by falling through to return true
     //
     dbg("No; ignore corpse");
-  } else if (is_fire() && (it->is_burnable() ||
-               it->is_very_combustible() ||
-               it->is_combustible())) {
+  } else if (is_fire() && (it->is_burnable() || it->is_very_combustible() || it->is_combustible())) {
     //
     // Fire attack?
     //
@@ -430,9 +387,7 @@ bool Thing::collision_add_candidates (Thingp it, fpoint future_pos,
     } else {
       dbg("No; cannot butn %s, no overlap", it->to_string().c_str());
     }
-  } else if (is_lava() && (it->is_burnable() ||
-               it->is_very_combustible() ||
-               it->is_combustible())) {
+  } else if (is_lava() && (it->is_burnable() || it->is_very_combustible() || it->is_combustible())) {
     //
     // Fire attack?
     //
@@ -452,17 +407,18 @@ bool Thing::collision_add_candidates (Thingp it, fpoint future_pos,
   return true;
 }
 
-bool Thing::collision_obstacle (fpoint p)
-{
+bool Thing::collision_obstacle(fpoint p) {
   //
   // Avoid threats and treat them as obstacles
   //
-  for (const auto& it : get(level->all_things_ptr_at[THING_GROUP_ALL], p.x, p.y)) {
-    if (!it) {
+  for (const auto &it : get(level->all_things_ptr_at[THING_GROUP_ALL], p.x, p.y)) {
+    if (! it) {
       continue;
     }
 
-    if (it->is_the_grid) { continue; }
+    if (it->is_the_grid) {
+      continue;
+    }
 
     //
     // "true" on collision
@@ -475,8 +431,7 @@ bool Thing::collision_obstacle (fpoint p)
   return false;
 }
 
-bool Thing::collision_obstacle (point p)
-{
+bool Thing::collision_obstacle(point p) {
   //
   // Avoid threats and treat them as obstacles
   //
@@ -493,8 +448,7 @@ bool Thing::collision_obstacle (point p)
   return false;
 }
 
-bool Thing::ai_obstacle (fpoint p)
-{
+bool Thing::ai_obstacle(fpoint p) {
   //
   // Avoid threats and treat them as obstacles
   //
@@ -514,9 +468,8 @@ bool Thing::ai_obstacle (fpoint p)
 //
 // "true" on collision
 //
-bool Thing::collision_check_only (Thingp it, fpoint future_pos, int x, int y)
-{
-  auto me = this;
+bool Thing::collision_check_only(Thingp it, fpoint future_pos, int x, int y) {
+  auto me    = this;
   auto it_tp = it->tp();
   auto me_tp = me->tp();
 
@@ -529,17 +482,14 @@ bool Thing::collision_check_only (Thingp it, fpoint future_pos, int x, int y)
     return false;
   }
 
-  IF_DEBUG2 {
-    dbg("Collision check only? @%f,%f with %s",
-      future_pos.x, future_pos.y, it->to_string().c_str());
-  }
+  IF_DEBUG2 { dbg("Collision check only? @%f,%f with %s", future_pos.x, future_pos.y, it->to_string().c_str()); }
 
   TRACE_AND_INDENT();
   //
   // Allow cleaners to engulf/swallow attack
   //
   if (is_engulfer() && can_eat(it) && (it->mid_at == future_pos)) {
-    if ((int)pcg_random_range(0, 1000) < me_tp->is_engulf_chance_d1000()) {
+    if ((int) pcg_random_range(0, 1000) < me_tp->is_engulf_chance_d1000()) {
       dbg("No; can engulf");
       return false;
     }
@@ -632,8 +582,8 @@ bool Thing::collision_check_only (Thingp it, fpoint future_pos, int x, int y)
         return true;
       }
     }
-  } else if (it->is_door() && !it->is_open) {
-    if (!it->is_dead) {
+  } else if (it->is_door() && ! it->is_open) {
+    if (! it->is_dead) {
       if (things_overlap(me, future_pos, it)) {
         dbg("Yes; overlaps and can open");
         if (open_door(it)) {
@@ -644,7 +594,7 @@ bool Thing::collision_check_only (Thingp it, fpoint future_pos, int x, int y)
         }
       }
     }
-  } else if (it->is_ethereal() && !is_player()) {
+  } else if (it->is_ethereal() && ! is_player()) {
     //
     // Ignore is_ethereal to make it easier to attack ghosts
     //
@@ -677,7 +627,7 @@ bool Thing::collision_check_only (Thingp it, fpoint future_pos, int x, int y)
   } else if (can_eat(it)) {
     if (get_where_i_failed_to_collect_last() == make_point(it->mid_at)) {
       dbg("No; tried to collect previously");
-    set_where_i_failed_to_collect_last(point(-1, -1));
+      set_where_i_failed_to_collect_last(point(-1, -1));
       return false;
     }
 
@@ -707,11 +657,8 @@ bool Thing::collision_check_only (Thingp it, fpoint future_pos, int x, int y)
   return false;
 }
 
-bool Thing::collision_check_and_handle (fpoint future_pos,
-                                        bool *target_attacked,
-                                        bool *target_overlaps,
-                                        float radius)
-{ TRACE_AND_INDENT();
+bool Thing::collision_check_and_handle(fpoint future_pos, bool *target_attacked, bool *target_overlaps, float radius) {
+  TRACE_AND_INDENT();
   if (is_loggable_for_unimportant_stuff()) {
     dbg("Collision handle");
   }
@@ -754,10 +701,7 @@ bool Thing::collision_check_and_handle (fpoint future_pos,
           continue;
         }
 
-        if (it->is_hidden ||
-          it->is_falling ||
-          it->is_jumping ||
-          it->is_changing_level) {
+        if (it->is_hidden || it->is_falling || it->is_jumping || it->is_changing_level) {
           dbg("Ignore as hidden/falling/jumping");
           continue;
         }
@@ -765,11 +709,12 @@ bool Thing::collision_check_and_handle (fpoint future_pos,
         //
         // false is used to abort the walk
         //
-        if (!collision_add_candidates(it, future_pos, x, y, dx, dy)) {
+        if (! collision_add_candidates(it, future_pos, x, y, dx, dy)) {
           dbg("Collision check, abort walk");
           return false;
         }
-      } FOR_ALL_THINGS_END()
+      }
+      FOR_ALL_THINGS_END()
     }
   }
 
@@ -785,33 +730,23 @@ bool Thing::collision_check_and_handle (fpoint future_pos,
 // Have we hit anything? True on having done something at this (future?)
 // position.
 //
-bool Thing::collision_check_and_handle_nearby (fpoint future_pos,
-                                               bool *target_attacked,
-                                               bool *target_overlaps)
-{
+bool Thing::collision_check_and_handle_nearby(fpoint future_pos, bool *target_attacked, bool *target_overlaps) {
   return (collision_check_and_handle(future_pos, target_attacked, target_overlaps, thing_collision_tiles));
 }
 
-bool Thing::collision_check_and_handle_at (fpoint future_pos,
-                                           bool *target_attacked,
-                                           bool *target_overlaps)
-{
+bool Thing::collision_check_and_handle_at(fpoint future_pos, bool *target_attacked, bool *target_overlaps) {
   return (collision_check_and_handle(future_pos, target_attacked, target_overlaps, 0.0));
 }
 
-bool Thing::collision_check_and_handle_at (bool *target_attacked,
-                                           bool *target_overlaps)
-{
+bool Thing::collision_check_and_handle_at(bool *target_attacked, bool *target_overlaps) {
   return (collision_check_and_handle_at(mid_at, target_attacked, target_overlaps));
 }
-
 
 //
 // "true" on overlap/collision at the specified position. This might be
 // a speculative move on behalf of the thing.
 //
-bool Thing::collision_check_only (fpoint future_pos)
-{
+bool Thing::collision_check_only(fpoint future_pos) {
   if (is_loggable_for_unimportant_stuff()) {
     dbg("Collision check only");
   }
@@ -844,28 +779,24 @@ bool Thing::collision_check_only (fpoint future_pos)
   auto diff = future_pos - mid_at;
   if (diff.x == -1) {
     if (diff.y == -1) {
-      if (level->is_door(mid_at.x, mid_at.y - 1) ||
-        level->is_door(mid_at.x - 1, mid_at.y)) {
+      if (level->is_door(mid_at.x, mid_at.y - 1) || level->is_door(mid_at.x - 1, mid_at.y)) {
         dbg("Cannot move diagonally");
         return true;
       }
     } else if (diff.y == 1) {
-      if (level->is_door(mid_at.x, mid_at.y + 1) ||
-        level->is_door(mid_at.x - 1, mid_at.y)) {
+      if (level->is_door(mid_at.x, mid_at.y + 1) || level->is_door(mid_at.x - 1, mid_at.y)) {
         dbg("Cannot move diagonally");
         return true;
       }
     }
   } else if (diff.x == 1) {
     if (diff.y == -1) {
-      if (level->is_door(mid_at.x, mid_at.y - 1) ||
-        level->is_door(mid_at.x + 1, mid_at.y)) {
+      if (level->is_door(mid_at.x, mid_at.y - 1) || level->is_door(mid_at.x + 1, mid_at.y)) {
         dbg("Cannot move diagonally");
         return true;
       }
     } else if (diff.y == 1) {
-      if (level->is_door(mid_at.x, mid_at.y + 1) ||
-        level->is_door(mid_at.x + 1, mid_at.y)) {
+      if (level->is_door(mid_at.x, mid_at.y + 1) || level->is_door(mid_at.x + 1, mid_at.y)) {
         dbg("Cannot move diagonally");
         return true;
       }
@@ -882,10 +813,7 @@ bool Thing::collision_check_only (fpoint future_pos)
         //
         // Skip things we cannot collide with
         //
-        if (it->is_hidden ||
-          it->is_falling ||
-          it->is_jumping ||
-          it->is_changing_level) {
+        if (it->is_hidden || it->is_falling || it->is_jumping || it->is_changing_level) {
           dbg("Ignore falling %s", it->to_string().c_str());
           continue;
         }
@@ -894,7 +822,8 @@ bool Thing::collision_check_only (fpoint future_pos)
           dbg("Cannot move");
           return true;
         }
-      } FOR_ALL_THINGS_END()
+      }
+      FOR_ALL_THINGS_END()
     }
   }
   return false;
@@ -903,7 +832,4 @@ bool Thing::collision_check_only (fpoint future_pos)
 //
 // "true" on overlap/collision at the current position
 //
-bool Thing::collision_check_only (void)
-{
-  return (collision_check_only(mid_at));
-}
+bool Thing::collision_check_only(void) { return (collision_check_only(mid_at)); }

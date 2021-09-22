@@ -14,8 +14,7 @@
 #include "my_string.h"
 #include "my_python.h"
 
-void Thing::on_lifespan (Thingp what)
-{
+void Thing::on_lifespan(Thingp what) {
   auto on_lifespan = what->tp()->on_lifespan_do();
   if (std::empty(on_lifespan)) {
     return;
@@ -23,37 +22,32 @@ void Thing::on_lifespan (Thingp what)
 
   auto t = split_tokens(on_lifespan, '.');
   if (t.size() == 2) {
-    auto mod = t[0];
-    auto fn = t[1];
+    auto        mod   = t[0];
+    auto        fn    = t[1];
     std::size_t found = fn.find("()");
     if (found != std::string::npos) {
       fn = fn.replace(found, 2, "");
     }
 
-    dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(),
-      to_string().c_str(),
-      what->to_string().c_str());
+    dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_string().c_str(), what->to_string().c_str());
 
-    py_call_void_fn(mod.c_str(), fn.c_str(),
-            id.id, what->id.id,
-            (unsigned int)mid_at.x, (unsigned int)mid_at.y);
+    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, (unsigned int) mid_at.x, (unsigned int) mid_at.y);
   } else {
-    ERR("Bad on_lifespan call [%s] expected mod:function, got %d elems",
-      on_lifespan.c_str(), (int)on_lifespan.size());
+    ERR("Bad on_lifespan call [%s] expected mod:function, got %d elems", on_lifespan.c_str(), (int) on_lifespan.size());
   }
 }
 
-void Thing::lifespan_tick (void)
-{ TRACE_AND_INDENT();
+void Thing::lifespan_tick(void) {
+  TRACE_AND_INDENT();
   //
   // Torches only tick when carried
   //
   auto owner = get_immediate_owner();
-  if (is_torch() && !owner) {
+  if (is_torch() && ! owner) {
     return;
   }
 
-  if (!get_lifespan()) {
+  if (! get_lifespan()) {
     return;
   }
 

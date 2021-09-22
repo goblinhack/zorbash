@@ -15,17 +15,17 @@
 #include "my_file.h"
 #include "my_array_bounds_check.h"
 
-bool Thing::thing_sound_play (const std::string &alias)
-{ TRACE_AND_INDENT();
+bool Thing::thing_sound_play(const std::string &alias) {
+  TRACE_AND_INDENT();
   //
   // No sound if in a locked room
   //
   auto level = game->level;
-  if (!level) {
+  if (! level) {
     return false;
   }
   auto player = level->player;
-  if (!player) {
+  if (! player) {
     return false;
   }
 
@@ -40,8 +40,7 @@ bool Thing::thing_sound_play (const std::string &alias)
     return false;
   }
 
-  float volume = sound->second->volume *
-    ((float) game->config.sound_volume / (float) MIX_MAX_VOLUME);
+  float volume = sound->second->volume * ((float) game->config.sound_volume / (float) MIX_MAX_VOLUME);
 
   volume *= MIX_MAX_VOLUME;
 
@@ -52,17 +51,13 @@ bool Thing::thing_sound_play (const std::string &alias)
 
   Mix_VolumeChunk(sound->second->chunk, volume);
 
-  if (Mix_PlayChannel(-1 /* first free channel */,
-            sound->second->chunk,
-            0 /* loops */) == -1) {
+  if (Mix_PlayChannel(-1 /* first free channel */, sound->second->chunk, 0 /* loops */) == -1) {
 
     LOG("Cannot play sound %s on any channel", alias.c_str());
     Mix_HaltChannel(0);
     SDL_ClearError();
 
-    if (Mix_PlayChannel(-1 /* first free channel */,
-              sound->second->chunk,
-              0 /* loops */) == -1) {
+    if (Mix_PlayChannel(-1 /* first free channel */, sound->second->chunk, 0 /* loops */) == -1) {
       ERR("Cannot play sound %s: %s", alias.c_str(), Mix_GetError());
       SDL_ClearError();
     }
@@ -71,14 +66,14 @@ bool Thing::thing_sound_play (const std::string &alias)
   return true;
 }
 
-bool Thing::thing_sound_play_channel (int channel, const std::string &alias)
-{ TRACE_AND_INDENT();
+bool Thing::thing_sound_play_channel(int channel, const std::string &alias) {
+  TRACE_AND_INDENT();
   auto level = game->level;
-  if (!level) {
+  if (! level) {
     return false;
   }
   auto player = level->player;
-  if (!player) {
+  if (! player) {
     return false;
   }
 
@@ -92,16 +87,11 @@ bool Thing::thing_sound_play_channel (int channel, const std::string &alias)
       //
       // Likely far away
       //
-      IF_DEBUG3 {
-        LOG("Cannot play sound %s on channel %d, cannot reach target",
-          alias.c_str(), channel);
-      }
+      IF_DEBUG3 { LOG("Cannot play sound %s on channel %d, cannot reach target", alias.c_str(), channel); }
       return true;
     }
   } else if (distance >= DMAP_IS_PASSABLE) {
-    IF_DEBUG3 {
-      LOG("Cannot play sound %s on channel %d, too far", alias.c_str(), channel);
-    }
+    IF_DEBUG3 { LOG("Cannot play sound %s on channel %d, too far", alias.c_str(), channel); }
     return true;
   }
 
@@ -111,8 +101,7 @@ bool Thing::thing_sound_play_channel (int channel, const std::string &alias)
     return false;
   }
 
-  float volume = sound->second->volume *
-    ((float) game->config.sound_volume / (float) MIX_MAX_VOLUME);
+  float volume = sound->second->volume * ((float) game->config.sound_volume / (float) MIX_MAX_VOLUME);
 
   volume *= MIX_MAX_VOLUME;
 
@@ -129,17 +118,12 @@ bool Thing::thing_sound_play_channel (int channel, const std::string &alias)
   Mix_VolumeChunk(sound->second->chunk, volume);
 
   if (Mix_Playing(channel)) {
-    if (Mix_PlayChannel(-1,
-              sound->second->chunk,
-              0 /* loops */) == -1) {
+    if (Mix_PlayChannel(-1, sound->second->chunk, 0 /* loops */) == -1) {
 
-      dbg2("Cannot play sound %s on channel %d, something else playing",
-         alias.c_str(), channel);
+      dbg2("Cannot play sound %s on channel %d, something else playing", alias.c_str(), channel);
       return false;
     }
-  } else if (Mix_PlayChannel(channel,
-                 sound->second->chunk,
-                 0 /* loops */) == -1) {
+  } else if (Mix_PlayChannel(channel, sound->second->chunk, 0 /* loops */) == -1) {
     dbg2("Cannot play sound %s on channel %d", alias.c_str(), channel);
     return false;
   }

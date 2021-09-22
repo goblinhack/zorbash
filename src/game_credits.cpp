@@ -15,8 +15,8 @@
 
 static WidPopup *wid_credits_window;
 
-static void wid_credits_destroy (void)
-{ TRACE_AND_INDENT();
+static void wid_credits_destroy(void) {
+  TRACE_AND_INDENT();
   delete wid_credits_window;
   wid_credits_window = nullptr;
   game->fini();
@@ -25,39 +25,43 @@ static void wid_credits_destroy (void)
   wid_hide(wid_botcon_window);
 }
 
-static uint8_t wid_credits_key_up (Widp w, const struct SDL_Keysym *key)
-{ TRACE_AND_INDENT();
+static uint8_t wid_credits_key_up(Widp w, const struct SDL_Keysym *key) {
+  TRACE_AND_INDENT();
   if (sdl_shift_held) {
-    if (key->scancode == (SDL_Scancode)game->config.key_console) {
+    if (key->scancode == (SDL_Scancode) game->config.key_console) {
       return false;
     }
   }
 
   switch (key->mod) {
-    case KMOD_LCTRL:
-    case KMOD_RCTRL:
-    default:
-    switch (key->sym) {
-      default: { TRACE_AND_INDENT();
-        auto c = wid_event_to_char(key);
-        switch (c) {
-          case 'b':
-          case SDLK_ESCAPE: { TRACE_AND_INDENT();
-            wid_credits_destroy();
-            return true;
+    case KMOD_LCTRL :
+    case KMOD_RCTRL :
+    default :
+      switch (key->sym) {
+        default :
+          {
+            TRACE_AND_INDENT();
+            auto c = wid_event_to_char(key);
+            switch (c) {
+              case 'b' :
+              case SDLK_ESCAPE :
+                {
+                  TRACE_AND_INDENT();
+                  wid_credits_destroy();
+                  return true;
+                }
+            }
           }
-        }
       }
-    }
   }
 
   return true;
 }
 
-static uint8_t wid_credits_key_down (Widp w, const struct SDL_Keysym *key)
-{ TRACE_AND_INDENT();
+static uint8_t wid_credits_key_down(Widp w, const struct SDL_Keysym *key) {
+  TRACE_AND_INDENT();
   if (sdl_shift_held) {
-    if (key->scancode == (SDL_Scancode)game->config.key_console) {
+    if (key->scancode == (SDL_Scancode) game->config.key_console) {
       return false;
     }
   }
@@ -65,64 +69,56 @@ static uint8_t wid_credits_key_down (Widp w, const struct SDL_Keysym *key)
   return true;
 }
 
-static uint8_t wid_credits_mouse_up (Widp w, int32_t x, int32_t y, uint32_t button)
-{ TRACE_AND_INDENT();
+static uint8_t wid_credits_mouse_up(Widp w, int32_t x, int32_t y, uint32_t button) {
+  TRACE_AND_INDENT();
   wid_credits_destroy();
   return true;
 }
 
-static void game_display_credits_bg (void)
-{ TRACE_AND_INDENT();
+static void game_display_credits_bg(void) {
+  TRACE_AND_INDENT();
   glcolor(WHITE);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
   std::string t = "ui_credits_bg";
   blit_init();
-  tile_blit(tile_find_mand(t.c_str()),
-        point(0,0),
-        point(game->config.ui_pix_width,
-          game->config.ui_pix_height));
+  tile_blit(tile_find_mand(t.c_str()), point(0, 0), point(game->config.ui_pix_width, game->config.ui_pix_height));
   blit_flush();
 }
 
-static void game_display_credits_fg (void)
-{ TRACE_AND_INDENT();
+static void game_display_credits_fg(void) {
+  TRACE_AND_INDENT();
   glcolor(WHITE);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
   std::string t = "ui_credits_fg";
   blit_init();
-  tile_blit(tile_find_mand(t.c_str()),
-        point(0,0),
-        point(game->config.ui_pix_width,
-          game->config.ui_pix_height));
+  tile_blit(tile_find_mand(t.c_str()), point(0, 0), point(game->config.ui_pix_width, game->config.ui_pix_height));
   blit_flush();
 }
 
-static void game_credits_tick (Widp w)
-{ TRACE_AND_INDENT();
+static void game_credits_tick(Widp w) {
+  TRACE_AND_INDENT();
   game_display_credits_bg();
   game_display_flames();
   game_display_credits_fg();
 }
 
-void Game::credits_select (void)
-{ TRACE_AND_INDENT();
+void Game::credits_select(void) {
+  TRACE_AND_INDENT();
   CON("Credits");
 
   if (wid_credits_window) {
     wid_credits_destroy();
   }
 
-  point tl = make_point(1, 0);
-  point br = make_point(TERM_WIDTH - 1, TERM_HEIGHT - 1);
-  auto width = br.x - tl.x;
+  point tl    = make_point(1, 0);
+  point br    = make_point(TERM_WIDTH - 1, TERM_HEIGHT - 1);
+  auto  width = br.x - tl.x;
 
   wid_credits_window = new WidPopup("Credits", tl, br, nullptr, "nothing", false, false);
-  wid_set_on_key_up(
-    wid_credits_window->wid_popup_container, wid_credits_key_up);
-  wid_set_on_key_down(
-    wid_credits_window->wid_popup_container, wid_credits_key_down);
+  wid_set_on_key_up(wid_credits_window->wid_popup_container, wid_credits_key_up);
+  wid_set_on_key_down(wid_credits_window->wid_popup_container, wid_credits_key_down);
 
   wid_credits_window->log(" ");
   wid_credits_window->log(" ");
@@ -176,7 +172,8 @@ void Game::credits_select (void)
   wid_credits_window->log("%%fg=white$Testers");
   wid_credits_window->log("Stuicy, Goblinhack");
 
-  { TRACE_AND_INDENT();
+  {
+    TRACE_AND_INDENT();
     auto p = wid_credits_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "credits");
 

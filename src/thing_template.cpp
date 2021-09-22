@@ -18,20 +18,16 @@
 #include "my_ptrcheck.h"
 
 Tpnamemap tp_name_map;
-Tpidmap tp_id_map;
+Tpidmap   tp_id_map;
 
 static uint8_t tp_init_done;
 
-Tp::Tp (void) {
-  newptr(this, "Tp");
-}
+Tp::Tp(void) { newptr(this, "Tp"); }
 
-Tp::~Tp (void) {
-  oldptr(this);
-}
+Tp::~Tp(void) { oldptr(this); }
 
-Tpp tp_find (const std::string &name)
-{ TRACE_AND_INDENT();
+Tpp tp_find(const std::string &name) {
+  TRACE_AND_INDENT();
   auto result = tp_name_map.find(name);
 
   if (unlikely(result == tp_name_map.end())) {
@@ -41,18 +37,18 @@ Tpp tp_find (const std::string &name)
   return (result->second);
 }
 
-Tpp tp_find (uint32_t id)
-{ TRACE_AND_INDENT();
+Tpp tp_find(uint32_t id) {
+  TRACE_AND_INDENT();
   auto result = get(tp_id_map, id - 1);
-  if (!result) {
+  if (! result) {
     ERR("Thing template %08" PRIx32 " not found", id);
   }
 
   return (result);
 }
 
-uint8_t tp_init (void)
-{ TRACE_AND_INDENT();
+uint8_t tp_init(void) {
+  TRACE_AND_INDENT();
   tp_init_done = true;
 
   tp_random_init();
@@ -61,20 +57,18 @@ uint8_t tp_init (void)
   return true;
 }
 
-void tp_fini (void)
-{ TRACE_AND_INDENT();
+void tp_fini(void) {
+  TRACE_AND_INDENT();
   if (tp_init_done) {
     tp_init_done = false;
   }
-  for (auto& tp : tp_name_map) {
+  for (auto &tp : tp_name_map) {
     delete tp.second;
   }
 }
 
-Tpp tp_load (int id, std::string const& name,
-       const std::string &text_name,
-       const std::string &short_text_name)
-{ TRACE_AND_INDENT();
+Tpp tp_load(int id, std::string const &name, const std::string &text_name, const std::string &short_text_name) {
+  TRACE_AND_INDENT();
   if (tp_find(name)) {
     ERR("Thing template name [%s] already used", name.c_str());
   }
@@ -95,11 +89,11 @@ Tpp tp_load (int id, std::string const& name,
   return (tp);
 }
 
-Tilep tp_first_tile (Tpp tp)
-{ TRACE_AND_INDENT();
+Tilep tp_first_tile(Tpp tp) {
+  TRACE_AND_INDENT();
   auto tiles = &tp->tiles;
 
-  if (!tiles || tiles->empty()) {
+  if (! tiles || tiles->empty()) {
     ERR("Tp %s has no tiles", tp->name().c_str());
   }
 

@@ -26,24 +26,24 @@ Widp wid_botcon_input_line {};
 Widp wid_botcon_window {};
 
 static std::wstring last_msg;
-static int last_msg_count;
+static int          last_msg_count;
 
-static std::map< unsigned int, std::wstring > wid_botcon_lines;
+static std::map<unsigned int, std::wstring> wid_botcon_lines;
 
-void wid_botcon_fini (void)
-{ TRACE_AND_INDENT();
+void wid_botcon_fini(void) {
+  TRACE_AND_INDENT();
   wid_destroy(&wid_botcon_container);
   wid_destroy(&wid_botcon_vert_scroll);
   wid_destroy(&wid_botcon_input_line);
   wid_destroy(&wid_botcon_window);
 }
 
-uint8_t wid_botcon_init (void)
-{ TRACE_AND_INDENT();
+uint8_t wid_botcon_init(void) {
+  TRACE_AND_INDENT();
   wid_botcon_wid_create();
   wid_hide(wid_botcon_window);
 
-  last_msg = L"";
+  last_msg       = L"";
   last_msg_count = 0;
 
   return true;
@@ -52,17 +52,17 @@ uint8_t wid_botcon_init (void)
 //
 // Scroll back to the bottom of the screen.
 //
-static void wid_botcon_reset_scroll (void)
-{ TRACE_AND_INDENT();
-  if (!wid_botcon_vert_scroll) {
+static void wid_botcon_reset_scroll(void) {
+  TRACE_AND_INDENT();
+  if (! wid_botcon_vert_scroll) {
     return;
   }
 
   wid_move_to_bottom(wid_botcon_vert_scroll);
 }
 
-static void wid_botcon_scroll (Widp w, std::wstring str)
-{ TRACE_AND_INDENT();
+static void wid_botcon_scroll(Widp w, std::wstring str) {
+  TRACE_AND_INDENT();
   Widp tmp {};
 
   wid_scroll_text(w);
@@ -76,8 +76,8 @@ static void wid_botcon_scroll (Widp w, std::wstring str)
   }
 }
 
-void wid_botcon_clear (void)
-{ TRACE_AND_INDENT();
+void wid_botcon_clear(void) {
+  TRACE_AND_INDENT();
   auto tmp = wid_get_head(wid_botcon_input_line);
   while (tmp) {
     wid_set_text(tmp, "");
@@ -89,8 +89,8 @@ void wid_botcon_clear (void)
 //
 // Log a message to the botcon
 //
-static void wid_botcon_log_ (std::wstring s)
-{ TRACE_AND_INDENT();
+static void wid_botcon_log_(std::wstring s) {
+  TRACE_AND_INDENT();
   static int32_t log_wid_botcon_buffered_lines;
 
   wid_botcon_reset_scroll();
@@ -98,13 +98,11 @@ static void wid_botcon_log_ (std::wstring s)
   //
   // Before the botcon is ready, we buffer the logs.
   //
-  if (!wid_botcon_input_line) {
-    auto result = wid_botcon_lines.insert(
-            std::make_pair(log_wid_botcon_buffered_lines++, s));
+  if (! wid_botcon_input_line) {
+    auto result = wid_botcon_lines.insert(std::make_pair(log_wid_botcon_buffered_lines++, s));
 
     if (result.second == false) {
-      DIE("Wid botcon lines insert name [%s] failed",
-        wstring_to_string(s).c_str());
+      DIE("Wid botcon lines insert name [%s] failed", wstring_to_string(s).c_str());
     }
 
     return;
@@ -116,14 +114,14 @@ static void wid_botcon_log_ (std::wstring s)
   wid_botcon_flush();
 
   if (last_msg != s) {
-    last_msg = s;
+    last_msg       = s;
     last_msg_count = 0;
     wid_botcon_scroll(wid_botcon_input_line, s);
   }
 }
 
-void wid_botcon_flush (void)
-{ TRACE_AND_INDENT();
+void wid_botcon_flush(void) {
+  TRACE_AND_INDENT();
   auto iter = wid_botcon_lines.begin();
 
   while (iter != wid_botcon_lines.end()) {
@@ -137,8 +135,8 @@ void wid_botcon_flush (void)
 //
 // Log a message to the botcon
 //
-void wid_botcon_log (std::string s)
-{ TRACE_AND_INDENT();
+void wid_botcon_log(std::string s) {
+  TRACE_AND_INDENT();
   DBG3("BOTCON: %s", s.c_str());
 
   int chars_per_line = UI_BOTCON_WIDTH;
@@ -146,7 +144,7 @@ void wid_botcon_log (std::string s)
   auto d = split(s, chars_per_line);
 
   if (d) {
-    for (const auto& c : *d) {
+    for (const auto &c : *d) {
       wid_botcon_log_(string_to_wstring(c));
     }
   }
@@ -155,14 +153,14 @@ void wid_botcon_log (std::string s)
 //
 // Log a message to the botcon
 //
-void wid_botcon_log (std::wstring s)
-{ TRACE_AND_INDENT();
+void wid_botcon_log(std::wstring s) {
+  TRACE_AND_INDENT();
   int chars_per_line = UI_BOTCON_WIDTH;
 
   auto d = split(s, chars_per_line);
 
   if (d) {
-    for (const auto& c : *d) {
+    for (const auto &c : *d) {
       wid_botcon_log_(c);
     }
   }
@@ -171,8 +169,8 @@ void wid_botcon_log (std::wstring s)
 //
 // Create the botcon
 //
-static void wid_botcon_wid_create (void)
-{ TRACE_AND_INDENT();
+static void wid_botcon_wid_create(void) {
+  TRACE_AND_INDENT();
   int h = UI_BOTCON_VIS_HEIGHT;
 
   {
@@ -192,21 +190,20 @@ static void wid_botcon_wid_create (void)
     point tl = make_point(0, 0);
     point br = make_point(UI_BOTCON_VIS_WIDTH - 1, h - 1);
 
-    wid_botcon_container = wid_new_container(wid_botcon_window,
-                         "wid botcon container");
+    wid_botcon_container = wid_new_container(wid_botcon_window, "wid botcon container");
     wid_set_pos(wid_botcon_container, tl, br);
     wid_set_shape_none(wid_botcon_container);
   }
 
   {
     int32_t row;
-    int row_bottom = h - 1;
+    int     row_bottom = h - 1;
 
     Widp child {};
     Widp prev {};
 
     for (row = 0; row < UI_BOTCON_HEIGHT; row++) {
-      row_bottom --;
+      row_bottom--;
       point tl = make_point(0, row_bottom);
       point br = make_point(UI_BOTCON_WIDTH, row_bottom);
 
@@ -231,18 +228,17 @@ static void wid_botcon_wid_create (void)
     wid_raise(wid_botcon_input_line);
   }
 
-  wid_botcon_vert_scroll =
-    wid_new_vert_scroll_bar(wid_botcon_window, "", wid_botcon_container);
+  wid_botcon_vert_scroll = wid_new_vert_scroll_bar(wid_botcon_window, "", wid_botcon_container);
 
   wid_hide(wid_get_parent(wid_botcon_vert_scroll));
 
   wid_update(wid_botcon_window);
 }
 
-std::vector<std::wstring> wid_botcon_serialize (void)
-{ TRACE_AND_INDENT();
+std::vector<std::wstring> wid_botcon_serialize(void) {
+  TRACE_AND_INDENT();
   std::vector<std::wstring> r;
-  auto tmp = wid_get_head(wid_botcon_input_line);
+  auto                      tmp = wid_get_head(wid_botcon_input_line);
   while (tmp) {
     auto s = wid_get_text(tmp);
     if (s.size()) {
@@ -254,9 +250,9 @@ std::vector<std::wstring> wid_botcon_serialize (void)
   return (r);
 }
 
-void wid_botcon_deserialize(std::vector<std::wstring> r)
-{ TRACE_AND_INDENT();
-  for (const auto& s : r) {
+void wid_botcon_deserialize(std::vector<std::wstring> r) {
+  TRACE_AND_INDENT();
+  for (const auto &s : r) {
     auto tmp = wstring_to_string(s);
     if (tmp.size()) {
       BOTCON("%s", tmp.c_str());

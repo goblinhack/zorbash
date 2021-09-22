@@ -21,18 +21,16 @@
 #include "my_ptrcheck.h"
 #include "my_sdl.h"
 
-std::wstring string_to_wstring(const std::string& s);
-std::string wstring_to_string(const std::wstring& s);
+std::wstring string_to_wstring(const std::string &s);
+std::string  wstring_to_string(const std::wstring &s);
 
-std::wstring string_to_wstring (const std::string& s)
-{
+std::wstring string_to_wstring(const std::string &s) {
   std::wstring temp(s.length(), L' ');
   std::copy(s.begin(), s.end(), temp.begin());
   return temp;
 }
 
-std::string wstring_to_string (const std::wstring& s)
-{
+std::string wstring_to_string(const std::wstring &s) {
   std::string temp(s.length(), ' ');
   std::copy(s.begin(), s.end(), temp.begin());
   return temp;
@@ -41,9 +39,8 @@ std::string wstring_to_string (const std::wstring& s)
 /*
  * Replace chars in replace_set with replace_with.
  */
-void
-strrepc (char *s, const char *replace_set, char replace_with)
-{ TRACE_AND_INDENT();
+void strrepc(char *s, const char *replace_set, char replace_with) {
+  TRACE_AND_INDENT();
   char *c;
 
   for (c = s; *c; c++) {
@@ -110,18 +107,16 @@ static char *substr (const char *in, int32_t pos, int32_t len)
 //
 // strsub("foo.zip", ".zip", ""); -> "foo"
 //
-char *strsub_ (const char *in,
-         const char *look_for,
-         const char *replace_with,
-         std::string what, std::string file, std::string func, int line)
-{ TRACE_AND_INDENT();
-  char *buf;
+char *strsub_(const char *in, const char *look_for, const char *replace_with, std::string what, std::string file,
+              std::string func, int line) {
+  TRACE_AND_INDENT();
+  char *      buf;
   const char *at;
-  int32_t newlen;
-  int32_t oldlen;
-  int32_t len;
+  int32_t     newlen;
+  int32_t     oldlen;
+  int32_t     len;
 
-  if (!in || !look_for || !replace_with) {
+  if (! in || ! look_for || ! replace_with) {
     return (0);
   }
 
@@ -129,18 +124,17 @@ char *strsub_ (const char *in,
   // printf("  look for %s\n", look_for);
   // printf("  replace  %s\n", replace_with);
   at = strstr(in, look_for);
-  if (!at) {
+  if (! at) {
     buf = dupstr(in, what);
     return (buf);
   }
 
-  oldlen = (uint32_t)strlen(look_for);
-  newlen = (uint32_t)strlen(replace_with);
+  oldlen = (uint32_t) strlen(look_for);
+  newlen = (uint32_t) strlen(replace_with);
 
-  len = (uint32_t)strlen(in) - oldlen + newlen;
-  buf = (__typeof__(buf))
-      myzalloc_(len + sizeof((char)'\0'), what, file, func, line);
-  if (!buf) {
+  len = (uint32_t) strlen(in) - oldlen + newlen;
+  buf = (__typeof__(buf)) myzalloc_(len + sizeof((char) '\0'), what, file, func, line);
+  if (! buf) {
     return (0);
   }
 
@@ -149,7 +143,7 @@ char *strsub_ (const char *in,
   strcat(buf, replace_with);
   strcat(buf, at + oldlen);
 
-  if (!strcmp(buf, in)) {
+  if (! strcmp(buf, in)) {
     return (buf);
   }
 
@@ -163,20 +157,20 @@ char *strsub_ (const char *in,
  *
  * strappend("foo", ".zip"); -> "foo.zip"
  */
-char *strappend (const char *in, const char *append)
-{ TRACE_AND_INDENT();
-  char *buf;
+char *strappend(const char *in, const char *append) {
+  TRACE_AND_INDENT();
+  char *  buf;
   int32_t newlen;
   int32_t len;
 
-  if (!in || !append) {
+  if (! in || ! append) {
     return (0);
   }
 
-  newlen = (uint32_t)strlen(append);
-  len = (uint32_t)strlen(in) + newlen;
-  buf = (__typeof__(buf)) myzalloc(len + sizeof((char)'\0'), "strappend");
-  if (!buf) {
+  newlen = (uint32_t) strlen(append);
+  len    = (uint32_t) strlen(in) + newlen;
+  buf    = (__typeof__(buf)) myzalloc(len + sizeof((char) '\0'), "strappend");
+  if (! buf) {
     return (0);
   }
 
@@ -191,20 +185,20 @@ char *strappend (const char *in, const char *append)
  *
  * strprepend("foo", "bar"); -> "barfoo"
  */
-char *strprepend (const char *in, const char *prepend)
-{ TRACE_AND_INDENT();
-  char *buf;
+char *strprepend(const char *in, const char *prepend) {
+  TRACE_AND_INDENT();
+  char *  buf;
   int32_t newlen;
   int32_t len;
 
-  if (!in || !prepend) {
+  if (! in || ! prepend) {
     return (0);
   }
 
-  newlen = (uint32_t)strlen(prepend);
-  len = (uint32_t)strlen(in) + newlen;
-  buf = (__typeof__(buf)) myzalloc(len + sizeof((char)'\0'), "strprepend");
-  if (!buf) {
+  newlen = (uint32_t) strlen(prepend);
+  len    = (uint32_t) strlen(in) + newlen;
+  buf    = (__typeof__(buf)) myzalloc(len + sizeof((char) '\0'), "strprepend");
+  if (! buf) {
     return (0);
   }
 
@@ -217,28 +211,30 @@ char *strprepend (const char *in, const char *prepend)
 /*
  * Return the common matching length of two strings.
  */
-uint32_t
-strcommon (const char *a, const char *b)
-{ TRACE_AND_INDENT();
+uint32_t strcommon(const char *a, const char *b) {
+  TRACE_AND_INDENT();
   const char *o;
 
   o = a;
 
-  while ((*a == *b) && *a) { a++; b++; }
+  while ((*a == *b) && *a) {
+    a++;
+    b++;
+  }
 
-  return (uint32_t)(a - o);
+  return (uint32_t) (a - o);
 }
 
 /*
  * Removes trailing whitespace.
  */
-void strchop (char *s)
-{ TRACE_AND_INDENT();
+void strchop(char *s) {
+  TRACE_AND_INDENT();
   uint32_t size;
-  char *end;
+  char *   end;
 
-  size = (uint32_t)strlen(s);
-  if (!size) {
+  size = (uint32_t) strlen(s);
+  if (! size) {
     return;
   }
 
@@ -253,13 +249,13 @@ void strchop (char *s)
 /*
  * Removes trailing characters.
  */
-void strchopc (char *s, char c)
-{ TRACE_AND_INDENT();
+void strchopc(char *s, char c) {
+  TRACE_AND_INDENT();
   uint32_t size;
-  char *end;
+  char *   end;
 
-  size = (uint32_t)strlen(s);
-  if (!size) {
+  size = (uint32_t) strlen(s);
+  if (! size) {
     return;
   }
 
@@ -271,57 +267,57 @@ void strchopc (char *s, char c)
   *(end + 1) = '\0';
 }
 
-int32_t strisregexp (const char *in)
-{ TRACE_AND_INDENT();
+int32_t strisregexp(const char *in) {
+  TRACE_AND_INDENT();
   const char *a = in;
-  char c;
+  char        c;
 
   while ((c = *a++)) {
     switch (c) {
-    case '[': return (1);
-    case ']': return (1);
-    case '{': return (1);
-    case '}': return (1);
-    case '+': return (1);
-    case '$': return (1);
-    case '^': return (1);
-    case '-': return (1);
-    case '*': return (1);
+      case '[' : return (1);
+      case ']' : return (1);
+      case '{' : return (1);
+      case '}' : return (1);
+      case '+' : return (1);
+      case '$' : return (1);
+      case '^' : return (1);
+      case '-' : return (1);
+      case '*' : return (1);
     }
   }
 
   return false;
 }
 
-size_t strlcpy_ (char *dst, const char *src, size_t maxlen)
-{ TRACE_AND_INDENT();
+size_t strlcpy_(char *dst, const char *src, size_t maxlen) {
+  TRACE_AND_INDENT();
   size_t srclen = strlen(src);
-  if ( maxlen > 0 ) {
-    uint32_t len = std::min(srclen, maxlen-1);
+  if (maxlen > 0) {
+    uint32_t len = std::min(srclen, maxlen - 1);
     memcpy(dst, src, len);
     dst[len] = '\0';
   }
   return (srclen);
 }
 
-size_t strlcat_ (char *dst, const char *src, size_t maxlen)
-{ TRACE_AND_INDENT();
+size_t strlcat_(char *dst, const char *src, size_t maxlen) {
+  TRACE_AND_INDENT();
   uint32_t dstlen = strlen(dst);
   uint32_t srclen = strlen(src);
-  if ( dstlen < maxlen ) {
-    strlcpy_(dst+dstlen, src, maxlen-dstlen);
+  if (dstlen < maxlen) {
+    strlcpy_(dst + dstlen, src, maxlen - dstlen);
   }
-  return (dstlen+srclen);
+  return (dstlen + srclen);
 }
 
 /*
  * Shrink a string by the space needed for its escape characters.
  */
-void strnoescape (char *uncompressed)
-{ TRACE_AND_INDENT();
-  char * t = uncompressed;
-  char * s = uncompressed;
-  char c;
+void strnoescape(char *uncompressed) {
+  TRACE_AND_INDENT();
+  char *t = uncompressed;
+  char *s = uncompressed;
+  char  c;
 
   while ((c = *s++)) {
     if (c != '\\') {
@@ -330,46 +326,35 @@ void strnoescape (char *uncompressed)
     }
 
     switch (*s++) {
-      case 'n':
-        *t++ = '\n';
-        break;
-      case 't':
-        *t++ = '\t';
-        break;
-      case '%':
-        *t++ = '%';
-        break;
-      case '#':
-        *t++ = '@';
-        break;
-      case '\"':
-        *t++ = '\"';
-        break;
-      case '\'':
-        *t++ = '\'';
-        break;
-      case '\\':
-        *t++ = '\\';
-        break;
-      default: {
-        char *o = s - 1;
-        char orig;
+      case 'n' : *t++ = '\n'; break;
+      case 't' : *t++ = '\t'; break;
+      case '%' : *t++ = '%'; break;
+      case '#' : *t++ = '@'; break;
+      case '\"' : *t++ = '\"'; break;
+      case '\'' : *t++ = '\''; break;
+      case '\\' : *t++ = '\\'; break;
+      default :
+        {
+          char *o = s - 1;
+          char  orig;
 
-        while (isdigit(*s)) { s++; }
+          while (isdigit(*s)) {
+            s++;
+          }
 
-        orig = *s;
-        *s = '\0';
-        *t++ = atoi(o);
-        *s = orig;
-        break;
-      }
+          orig = *s;
+          *s   = '\0';
+          *t++ = atoi(o);
+          *s   = orig;
+          break;
+        }
     }
   }
   *t = '\0';
 }
 
-static const char *dynvprintf_ (const char *fmt, va_list args)
-{ TRACE_AND_INDENT();
+static const char *dynvprintf_(const char *fmt, va_list args) {
+  TRACE_AND_INDENT();
   static char buf[MAXSTR];
 
   buf[0] = '\0';
@@ -382,10 +367,10 @@ static const char *dynvprintf_ (const char *fmt, va_list args)
  * dynamically allocate a printf formatted string. e.g.
  * dynprintf("%sbar", "foo"); => "foobar"
  */
-char *dynprintf (const char *fmt, ...)
-{ TRACE_AND_INDENT();
+char *dynprintf(const char *fmt, ...) {
+  TRACE_AND_INDENT();
   const char *ret;
-  va_list args;
+  va_list     args;
 
   va_start(args, fmt);
   ret = dynvprintf_(fmt, args);
@@ -394,8 +379,8 @@ char *dynprintf (const char *fmt, ...)
   return (dupstr(ret, __FUNCTION__));
 }
 
-char *dynvprintf (const char *fmt, va_list args)
-{ TRACE_AND_INDENT();
+char *dynvprintf(const char *fmt, va_list args) {
+  TRACE_AND_INDENT();
   static char buf[MAXSTR];
 
   buf[0] = '\0';
@@ -409,9 +394,9 @@ char *dynvprintf (const char *fmt, va_list args)
  *
  * A safe wrapper for basename to avoid modifications to the input string.
  */
-std::string mybasename (const char *in, const char *who)
-{ TRACE_AND_INDENT();
-  char *tmp = dupstr(in, who);
+std::string mybasename(const char *in, const char *who) {
+  TRACE_AND_INDENT();
+  char *      tmp = dupstr(in, who);
   std::string tmp2(basename(tmp));
   myfree(tmp);
 
@@ -457,46 +442,45 @@ std::string mybasename (const char *in, const char *who)
 /*
  * Find the first occurrence of find in s, ignore case.
  */
-char *
-strcasestr_ (const char *s, const char*find)
-{ TRACE_AND_INDENT();
-    char c, sc;
-    size_t len;
+char *strcasestr_(const char *s, const char *find) {
+  TRACE_AND_INDENT();
+  char   c, sc;
+  size_t len;
 
-    if ((c = *find++) != 0) {
-        c = tolower((unsigned char)c);
-        len = strlen(find);
-        do {
-            do {
-                if ((sc = *s++) == 0)
-                    return (NULL);
-            } while ((char)tolower((unsigned char)sc) != c);
-        } while (strncasecmp(s, find, len) != 0);
-        s--;
-    }
-    return ((char *)s);
+  if ((c = *find++) != 0) {
+    c   = tolower((unsigned char) c);
+    len = strlen(find);
+    do {
+      do {
+        if ((sc = *s++) == 0)
+          return (NULL);
+      } while ((char) tolower((unsigned char) sc) != c);
+    } while (strncasecmp(s, find, len) != 0);
+    s--;
+  }
+  return ((char *) s);
 }
 
 /*
  * Split a string "like\nthis" into "like" and "this".
  */
-shared_vector_string split (const char *text, int max_line_len)
-{ TRACE_AND_INDENT();
-  uint8_t found_format_string;
-  const char *line_start;
-  const char *line_end;
-  int line_len;
-  char c;
+shared_vector_string split(const char *text, int max_line_len) {
+  TRACE_AND_INDENT();
+  uint8_t           found_format_string;
+  const char *      line_start;
+  const char *      line_end;
+  int               line_len;
+  char              c;
   const char *const text_start = text;
 
-  if (!text) {
+  if (! text) {
     return (0);
   }
 
-  auto result = std::make_shared< std::vector< std::string > > ();
+  auto result = std::make_shared<std::vector<std::string>>();
 
-  for (;/*ever*/;) {
-    line_len = 0;
+  for (; /*ever*/;) {
+    line_len   = 0;
     line_start = text;
 
     /*
@@ -525,30 +509,30 @@ shared_vector_string split (const char *text, int max_line_len)
       }
       line_len++;
 
-      if (!found_format_string) {
+      if (! found_format_string) {
         if (c == '%') {
           found_format_string = true;
         }
       } else if (found_format_string) {
-        if (!strncmp(text, "fg=", 3)) {
+        if (! strncmp(text, "fg=", 3)) {
           text += 3;
           line_len -= 2; /* for the %% */
           (void) string2color(&text);
           found_format_string = false;
           continue;
-        } else if (!strncmp(text, "tp=", 3)) {
+        } else if (! strncmp(text, "tp=", 3)) {
           text += 3;
           line_len -= 2; /* for the %% */
           (void) string2tp(&text);
           found_format_string = false;
           continue;
-        } else if (!strncmp(text, "tex=", 4)) {
+        } else if (! strncmp(text, "tex=", 4)) {
           text += 4;
           line_len -= 2; /* for the %% */
           (void) string2tex(&text);
           found_format_string = false;
           continue;
-        } else if (!strncmp(text, "tile=", 5)) {
+        } else if (! strncmp(text, "tile=", 5)) {
           text += 5;
           line_len -= 2; /* for the %% */
           (void) string2tile(&text);
@@ -571,10 +555,7 @@ shared_vector_string split (const char *text, int max_line_len)
      * Step back looking for a word break.
      */
     if (line_len >= max_line_len) {
-      while ((line_end > line_start) &&
-          ((*line_end != ' ') &&
-          (*line_end != '\0') &&
-          (*line_end != '\n'))) {
+      while ((line_end > line_start) && ((*line_end != ' ') && (*line_end != '\0') && (*line_end != '\n'))) {
         line_end--;
       }
     }
@@ -607,14 +588,14 @@ shared_vector_string split (const char *text, int max_line_len)
       break;
     }
 
-    line_len = (int)(line_end - line_start);
+    line_len = (int) (line_end - line_start);
     char tmp[line_len + 1];
     strlcpy_(tmp, line_start, line_len + 1);
 
     result->push_back(tmp);
 
     text = line_end;
-    if (!*text) {
+    if (! *text) {
       break;
     }
 
@@ -628,30 +609,30 @@ shared_vector_string split (const char *text, int max_line_len)
   return (result);
 }
 
-shared_vector_string split (const std::string &text, int max_line_len)
-{ TRACE_AND_INDENT();
+shared_vector_string split(const std::string &text, int max_line_len) {
+  TRACE_AND_INDENT();
   uint8_t found_format_string;
-  int line_len;
-  char c;
-  auto text_start = text.begin();
-  auto text_iter = text_start;
-  auto line_start = text_start;
-  auto line_end = text_start;
+  int     line_len;
+  char    c;
+  auto    text_start = text.begin();
+  auto    text_iter  = text_start;
+  auto    line_start = text_start;
+  auto    line_end   = text_start;
 
   if (max_line_len < 0) {
     DIE("bad max line len");
   }
 
-  if (!text.length()) {
+  if (! text.length()) {
     return (0);
   }
 
-//printf("SPLIT1 [%s] max_line_len %d\n", text.c_str(), max_line_len);
+  // printf("SPLIT1 [%s] max_line_len %d\n", text.c_str(), max_line_len);
 
-  auto result = std::make_shared< std::vector< std::string > > ();
+  auto result = std::make_shared<std::vector<std::string>>();
 
-  for (;/*ever*/;) {
-    line_len = 0;
+  for (; /*ever*/;) {
+    line_len   = 0;
     line_start = text_iter;
 
     /*
@@ -680,7 +661,7 @@ shared_vector_string split (const std::string &text, int max_line_len)
       }
       line_len++;
 
-      if (!found_format_string) {
+      if (! found_format_string) {
         if (c == '%') {
           found_format_string = true;
         }
@@ -739,9 +720,9 @@ shared_vector_string split (const std::string &text, int max_line_len)
       }
 
       text_iter++;
-//printf("LEN %d [%c]\n", line_len, c);
+      // printf("LEN %d [%c]\n", line_len, c);
     }
-//printf("END line_len %d\n", line_len);
+    // printf("END line_len %d\n", line_len);
 
     line_end = text_iter;
 
@@ -749,10 +730,7 @@ shared_vector_string split (const std::string &text, int max_line_len)
      * Step back looking for a word break.
      */
     if (line_len >= max_line_len) {
-      while ((line_end > line_start) &&
-          ((*line_end != ' ') &&
-          (*line_end != '\0') &&
-          (*line_end != '\n'))) {
+      while ((line_end > line_start) && ((*line_end != ' ') && (*line_end != '\0') && (*line_end != '\n'))) {
         line_end--;
       }
     }
@@ -785,14 +763,14 @@ shared_vector_string split (const std::string &text, int max_line_len)
       break;
     }
 
-    line_len = (int)(line_end - line_start);
+    line_len = (int) (line_end - line_start);
     auto tmp = std::string(line_start, line_start + line_len);
 
-//printf("OUT [%s] max_line_len %d\n", tmp.c_str(), line_len);
+    // printf("OUT [%s] max_line_len %d\n", tmp.c_str(), line_len);
     result->push_back(tmp);
 
     text_iter = line_end;
-    if (!*text_iter) {
+    if (! *text_iter) {
       break;
     }
 
@@ -806,26 +784,26 @@ shared_vector_string split (const std::string &text, int max_line_len)
   return (result);
 }
 
-shared_vector_wstring split (const std::wstring &text, int max_line_len)
-{ TRACE_AND_INDENT();
+shared_vector_wstring split(const std::wstring &text, int max_line_len) {
+  TRACE_AND_INDENT();
   uint8_t found_format_string;
-  int line_len;
-  char c;
-  auto text_start = text.begin();
-  auto text_iter = text_start;
-  auto line_start = text_start;
-  auto line_end = text_start;
+  int     line_len;
+  char    c;
+  auto    text_start = text.begin();
+  auto    text_iter  = text_start;
+  auto    line_start = text_start;
+  auto    line_end   = text_start;
 
-  if (!text.length()) {
+  if (! text.length()) {
     return (0);
   }
-//printf("SPLIT2 [%s] max_line_len %d\n", wstring_to_string(text).c_str(),
-//max_line_len);
+  // printf("SPLIT2 [%s] max_line_len %d\n", wstring_to_string(text).c_str(),
+  // max_line_len);
 
-  auto result = std::make_shared< std::vector< std::wstring > > ();
+  auto result = std::make_shared<std::vector<std::wstring>>();
 
-  for (;/*ever*/;) {
-    line_len = 0;
+  for (; /*ever*/;) {
+    line_len   = 0;
     line_start = text_iter;
 
     /*
@@ -854,7 +832,7 @@ shared_vector_wstring split (const std::wstring &text, int max_line_len)
       }
       line_len++;
 
-      if (!found_format_string) {
+      if (! found_format_string) {
         if (c == '%') {
           found_format_string = true;
         }
@@ -920,10 +898,7 @@ shared_vector_wstring split (const std::wstring &text, int max_line_len)
      * Step back looking for a word break.
      */
     if (line_len >= max_line_len) {
-      while ((line_end > line_start) &&
-          ((*line_end != ' ') &&
-          (*line_end != '\0') &&
-          (*line_end != '\n'))) {
+      while ((line_end > line_start) && ((*line_end != ' ') && (*line_end != '\0') && (*line_end != '\n'))) {
         line_end--;
       }
     }
@@ -956,15 +931,15 @@ shared_vector_wstring split (const std::wstring &text, int max_line_len)
       break;
     }
 
-    line_len = (int)(line_end - line_start);
+    line_len = (int) (line_end - line_start);
     auto tmp = std::wstring(line_start, line_start + line_len);
 
-//printf("OUT [%s] max_line_len %d\n", wstring_to_string(tmp).c_str(),
-//line_len);
+    // printf("OUT [%s] max_line_len %d\n", wstring_to_string(tmp).c_str(),
+    // line_len);
     result->push_back(tmp);
 
     text_iter = line_end;
-    if (!*text_iter) {
+    if (! *text_iter) {
       break;
     }
 
@@ -978,24 +953,24 @@ shared_vector_wstring split (const std::wstring &text, int max_line_len)
   return (result);
 }
 
-int length_without_format (const std::string &text)
-{ TRACE_AND_INDENT();
+int length_without_format(const std::string &text) {
+  TRACE_AND_INDENT();
   uint8_t found_format_string;
-  char c;
-  auto text_start = text.begin();
-  auto text_iter = text_start;
-  int line_len = 0;
+  char    c;
+  auto    text_start = text.begin();
+  auto    text_iter  = text_start;
+  int     line_len   = 0;
 
   found_format_string = false;
 
   for (;;) {
     c = *text_iter;
-    if (!c) {
+    if (! c) {
       break;
     }
     line_len++;
 
-    if (!found_format_string) {
+    if (! found_format_string) {
       if (c == '%') {
         found_format_string = true;
       }
@@ -1054,31 +1029,31 @@ int length_without_format (const std::string &text)
     }
 
     text_iter++;
-//printf("LEN %d [%c]\n", line_len, c);
+    // printf("LEN %d [%c]\n", line_len, c);
   }
-//printf("END line_len %d\n", line_len);
+  // printf("END line_len %d\n", line_len);
 
   return line_len;
 }
 
-int length_without_format (const std::wstring &text)
-{ TRACE_AND_INDENT();
+int length_without_format(const std::wstring &text) {
+  TRACE_AND_INDENT();
   uint8_t found_format_string;
-  char c;
-  auto text_start = text.begin();
-  auto text_iter = text_start;
-  int line_len = 0;
+  char    c;
+  auto    text_start = text.begin();
+  auto    text_iter  = text_start;
+  int     line_len   = 0;
 
   found_format_string = false;
 
   for (;;) {
     c = *text_iter;
-    if (!c) {
+    if (! c) {
       break;
     }
     line_len++;
 
-    if (!found_format_string) {
+    if (! found_format_string) {
       if (c == '%') {
         found_format_string = true;
       }
@@ -1137,19 +1112,19 @@ int length_without_format (const std::wstring &text)
     }
 
     text_iter++;
-//printf("LEN %d [%c]\n", line_len, c);
+    // printf("LEN %d [%c]\n", line_len, c);
   }
-//printf("END line_len %d\n", line_len);
+  // printf("END line_len %d\n", line_len);
 
   return line_len;
 }
 
-Tpp string2tp (const char **s)
-{ TRACE_AND_INDENT();
-  static char tmp[MAXSHORTSTR];
+Tpp string2tp(const char **s) {
+  TRACE_AND_INDENT();
+  static char        tmp[MAXSHORTSTR];
   static const char *eo_tmp = tmp + MAXSHORTSTR;
-  const char *c = *s;
-  char *t = tmp;
+  const char *       c      = *s;
+  char *             t      = tmp;
 
   while (t < eo_tmp) {
     if ((*c == '\0') || (*c == '$')) {
@@ -1168,16 +1143,16 @@ Tpp string2tp (const char **s)
   *s += (t - tmp);
 
   Tpp tp = tp_find(tmp);
-  if (!tp) {
+  if (! tp) {
     ERR("Tp name [%s] not found", tmp);
   }
 
   return (tp);
 }
 
-Tpp string2tp (const std::string &s, int *len)
-{ TRACE_AND_INDENT();
-  auto iter = s.begin();
+Tpp string2tp(const std::string &s, int *len) {
+  TRACE_AND_INDENT();
+  auto        iter = s.begin();
   std::string out;
 
   while (iter != s.end()) {
@@ -1201,15 +1176,15 @@ Tpp string2tp (const std::string &s, int *len)
   }
 
   Tpp tp = tp_find(out);
-  if (!tp) {
+  if (! tp) {
     ERR("Tp name [%s] not found", out.c_str());
   }
 
   return (tp);
 }
 
-Tpp string2tp (const std::wstring &s, int *len)
-{ TRACE_AND_INDENT();
+Tpp string2tp(const std::wstring &s, int *len) {
+  TRACE_AND_INDENT();
   auto v = wstring_to_string(s);
   return (string2tp(v, len));
 }
@@ -1225,26 +1200,24 @@ Tpp string2tp (const std::wstring &s, int *len)
  *
  * returns 0 on success
  */
-int32_t snprintf_realloc (char **str,
-              int32_t *size, int32_t *used,
-              const char *fmt, ...)
-{ TRACE_AND_INDENT();
+int32_t snprintf_realloc(char **str, int32_t *size, int32_t *used, const char *fmt, ...) {
+  TRACE_AND_INDENT();
   int32_t freespace;
   int32_t needspace;
   int32_t usedspace;
   va_list ap;
-  char *tmp;
+  char *  tmp;
 
-  if (!str) {
+  if (! str) {
     return (-1);
   }
 
-  if (!size) {
+  if (! size) {
     return (-1);
   }
 
-  if (!*str) {
-    if (!*size) {
+  if (! *str) {
+    if (! *size) {
       *size = 128;
     }
 
@@ -1252,8 +1225,8 @@ int32_t snprintf_realloc (char **str,
       *used = 0;
     }
 
-    *str = (char*) mymalloc(*size, "sprintf alloc");
-    if (!*str) {
+    *str = (char *) mymalloc(*size, "sprintf alloc");
+    if (! *str) {
       *size = 0;
       return (-1);
     }
@@ -1261,8 +1234,8 @@ int32_t snprintf_realloc (char **str,
     *str[0] = '\0';
   }
 
-  if (!used || !*used) {
-    usedspace = (uint32_t)strlen(*str);
+  if (! used || ! *used) {
+    usedspace = (uint32_t) strlen(*str);
   } else {
     usedspace = *used;
   }
@@ -1271,11 +1244,11 @@ int32_t snprintf_realloc (char **str,
   va_start(ap, fmt);
   vsnprintf(add, sizeof(add) - 1, fmt, ap);
   va_end(ap);
-  add[MAXSHORTSTR-1] = '\0';
+  add[MAXSHORTSTR - 1] = '\0';
 
   needspace = strlen(add);
 
-  for (;/*ever*/;) {
+  for (; /*ever*/;) {
     freespace = *size - usedspace;
 
     if (needspace < freespace) {
@@ -1289,10 +1262,10 @@ int32_t snprintf_realloc (char **str,
 
     (*size) *= 2;
 
-    tmp = (char*) myrealloc(*str, *size, "sprintf realloc");
-    if (!tmp) {
-      free (*str);
-      *str = 0;
+    tmp = (char *) myrealloc(*str, *size, "sprintf realloc");
+    if (! tmp) {
+      free(*str);
+      *str  = 0;
       *size = 0;
       return (-1);
     }
@@ -1301,112 +1274,77 @@ int32_t snprintf_realloc (char **str,
   }
 }
 
-std::vector<std::string> split_tokens(const std::string &s,
-                    const char delimiter)
-{
-   std::string token;
-   std::istringstream s_stream(s);
-   std::vector<std::string> tokens;
-   while (std::getline(s_stream, token, delimiter)) {
-     tokens.push_back(token);
-   }
-   return tokens;
+std::vector<std::string> split_tokens(const std::string &s, const char delimiter) {
+  std::string              token;
+  std::istringstream       s_stream(s);
+  std::vector<std::string> tokens;
+  while (std::getline(s_stream, token, delimiter)) {
+    tokens.push_back(token);
+  }
+  return tokens;
 }
 
 // https://www.techiedelight.com/trim-string-cpp-remove-leading-trailing-spaces/
-std::string& ltrim(std::string& s)
-{
-  auto it = std::find_if(s.begin(), s.end(),
-    [](char c) {
-      return !std::isspace<char>(c, std::locale::classic());
-    });
+std::string &ltrim(std::string &s) {
+  auto it = std::find_if(s.begin(), s.end(), [](char c) { return ! std::isspace<char>(c, std::locale::classic()); });
   s.erase(s.begin(), it);
   return s;
 }
 
-std::string& rtrim(std::string& s)
-{
-  auto it = std::find_if(s.rbegin(), s.rend(),
-    [](char c) {
-      return !std::isspace<char>(c, std::locale::classic());
-    });
+std::string &rtrim(std::string &s) {
+  auto it = std::find_if(s.rbegin(), s.rend(), [](char c) { return ! std::isspace<char>(c, std::locale::classic()); });
   s.erase(it.base(), s.end());
   return s;
 }
 
-std::string& trim(std::string& s)
-{
-   return ltrim(rtrim(s));
-}
+std::string &trim(std::string &s) { return ltrim(rtrim(s)); }
 
 const std::string WHITESPACE = " \n\r\t\f\v";
 
-std::string ltrim_ws(const std::string& s)
-{
+std::string ltrim_ws(const std::string &s) {
   size_t start = s.find_first_not_of(WHITESPACE);
   return (start == std::string::npos) ? "" : s.substr(start);
 }
 
-std::string rtrim_ws(const std::string& s)
-{
+std::string rtrim_ws(const std::string &s) {
   size_t end = s.find_last_not_of(WHITESPACE);
   return (end == std::string::npos) ? "" : s.substr(0, end + 1);
 }
 
-std::string trim_ws(const std::string& s)
-{
-  return rtrim_ws(ltrim_ws(s));
-}
+std::string trim_ws(const std::string &s) { return rtrim_ws(ltrim_ws(s)); }
 
-std::wstring& ltrim(std::wstring& s)
-{
-  auto it = std::find_if(s.begin(), s.end(),
-    [](char c) {
-      return !std::isspace<char>(c, std::locale::classic());
-    });
+std::wstring &ltrim(std::wstring &s) {
+  auto it = std::find_if(s.begin(), s.end(), [](char c) { return ! std::isspace<char>(c, std::locale::classic()); });
   s.erase(s.begin(), it);
   return s;
 }
 
-std::wstring& rtrim(std::wstring& s)
-{
-  auto it = std::find_if(s.rbegin(), s.rend(),
-    [](char c) {
-      return !std::isspace<char>(c, std::locale::classic());
-    });
+std::wstring &rtrim(std::wstring &s) {
+  auto it = std::find_if(s.rbegin(), s.rend(), [](char c) { return ! std::isspace<char>(c, std::locale::classic()); });
   s.erase(it.base(), s.end());
   return s;
 }
 
-std::wstring& trim(std::wstring& s)
-{
-   return ltrim(rtrim(s));
-}
+std::wstring &trim(std::wstring &s) { return ltrim(rtrim(s)); }
 
 const std::wstring LWHITESPACE = L" \n\r\t\f\v";
 
-std::wstring ltrim_ws(const std::wstring& s)
-{
+std::wstring ltrim_ws(const std::wstring &s) {
   size_t start = s.find_first_not_of(LWHITESPACE);
   return (start == std::wstring::npos) ? L"" : s.substr(start);
 }
 
-std::wstring rtrim_ws(const std::wstring& s)
-{
+std::wstring rtrim_ws(const std::wstring &s) {
   size_t end = s.find_last_not_of(LWHITESPACE);
   return (end == std::wstring::npos) ? L"" : s.substr(0, end + 1);
 }
 
-std::wstring trim_ws(const std::wstring& s)
-{
-  return rtrim_ws(ltrim_ws(s));
-}
+std::wstring trim_ws(const std::wstring &s) { return rtrim_ws(ltrim_ws(s)); }
 
-std::string& string_timestamp (void)
-{
-  static ts_t time_last;
+std::string &string_timestamp(void) {
+  static ts_t        time_last;
   static std::string last_timestamp;
-  auto time_now = time_get_time_ms_cached();
+  auto               time_now = time_get_time_ms_cached();
 
   if (last_timestamp.length()) {
     if (time_now - time_last < 1000) {
@@ -1414,9 +1352,9 @@ std::string& string_timestamp (void)
     }
   }
 
-  time_last = time_now;
+  time_last          = time_now;
   std::time_t result = std::time(nullptr);
-  auto s = std::string(std::asctime(std::localtime(&result)));
+  auto        s      = std::string(std::asctime(std::localtime(&result)));
   s.pop_back();
   last_timestamp = s;
   return last_timestamp;
@@ -1425,10 +1363,9 @@ std::string& string_timestamp (void)
 //
 // Concert errno to a std::string
 //
-std::string strerror_to_string(const int err)
-{
+std::string strerror_to_string(const int err) {
   static const auto MAX_ERRNO_BUF_SIZE = 1024U;
-  char err_out[MAX_ERRNO_BUF_SIZE];
+  char              err_out[MAX_ERRNO_BUF_SIZE];
   err_out[0] = '\0';
 
   //
@@ -1438,7 +1375,7 @@ std::string strerror_to_string(const int err)
   //
   // GNU version returns a string pointer
   //
-  const char* str = strerror_r(errno, err_out, MAX_ERRNO_BUF_SIZE);
+  const char *str = strerror_r(errno, err_out, MAX_ERRNO_BUF_SIZE);
   if (str) {
     return std::string(str);
   }
@@ -1446,7 +1383,7 @@ std::string strerror_to_string(const int err)
   //
   // XSI version returns 0 on success
   //
-  if (!strerror_r(err, err_out, sizeof(err_out))) {
+  if (! strerror_r(err, err_out, sizeof(err_out))) {
     return std::string(err_out);
   }
 #endif

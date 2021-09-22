@@ -12,13 +12,9 @@
 #include "my_sprintf.h"
 #include "my_gl.h"
 
-void Thing::wobble (float wobble)
-{
-  set_wobble(wobble);
-}
+void Thing::wobble(float wobble) { set_wobble(wobble); }
 
-float Thing::update_wobble (void)
-{
+float Thing::update_wobble(void) {
   auto w = get_wobble();
   if (w == 0.0) {
     return 0.0;

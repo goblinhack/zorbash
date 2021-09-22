@@ -13,15 +13,15 @@
 #include "my_monst.h"
 #include "my_gl.h"
 
-bool Thing::is_carrying_treasure (void)
-{ TRACE_AND_INDENT();
-  if (!monstp) {
+bool Thing::is_carrying_treasure(void) {
+  TRACE_AND_INDENT();
+  if (! monstp) {
     return false;
   }
 
-  for (const auto& item : monstp->carrying) {
+  for (const auto &item : monstp->carrying) {
     auto t = level->thing_find(item.id);
-    if (!t) {
+    if (! t) {
       continue;
     }
     if (t->is_treasure_type()) {
@@ -42,19 +42,19 @@ bool Thing::is_carrying_treasure (void)
   return false;
 }
 
-std::vector<Thingp> Thing::get_treasure_list (void)
-{ TRACE_AND_INDENT();
+std::vector<Thingp> Thing::get_treasure_list(void) {
+  TRACE_AND_INDENT();
   std::vector<Thingp> tr;
   dbg("Treasure:");
   TRACE_AND_INDENT();
-  if (!monstp) {
+  if (! monstp) {
     dbg("Not carrying");
     return tr;
   }
 
-  for (const auto& item : monstp->carrying) {
+  for (const auto &item : monstp->carrying) {
     auto t = level->thing_find(item.id);
-    if (!t) {
+    if (! t) {
       continue;
     }
 

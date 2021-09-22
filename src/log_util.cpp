@@ -7,8 +7,7 @@
 #include "my_ascii.h"
 #include "my_log.h"
 
-void putf (FILE *fp, const char *s)
-{
+void putf(FILE *fp, const char *s) {
   auto sp = s;
   while (*sp) {
     if (*sp == '%') {

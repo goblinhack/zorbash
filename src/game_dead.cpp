@@ -20,8 +20,8 @@
 
 static WidPopup *wid_dead_window;
 
-static void wid_dead_destroy (void)
-{ TRACE_AND_INDENT();
+static void wid_dead_destroy(void) {
+  TRACE_AND_INDENT();
   delete wid_dead_window;
   wid_dead_window = nullptr;
   game->fini();
@@ -30,39 +30,43 @@ static void wid_dead_destroy (void)
   wid_hide(wid_botcon_window);
 }
 
-static uint8_t wid_dead_key_up (Widp w, const struct SDL_Keysym *key)
-{ TRACE_AND_INDENT();
+static uint8_t wid_dead_key_up(Widp w, const struct SDL_Keysym *key) {
+  TRACE_AND_INDENT();
   if (sdl_shift_held) {
-    if (key->scancode == (SDL_Scancode)game->config.key_console) {
+    if (key->scancode == (SDL_Scancode) game->config.key_console) {
       return false;
     }
   }
 
   switch (key->mod) {
-    case KMOD_LCTRL:
-    case KMOD_RCTRL:
-    default:
-    switch (key->sym) {
-      default: { TRACE_AND_INDENT();
-        auto c = wid_event_to_char(key);
-        switch (c) {
-          case 'q':
-          case SDLK_ESCAPE: { TRACE_AND_INDENT();
-            wid_dead_destroy();
-            return true;
+    case KMOD_LCTRL :
+    case KMOD_RCTRL :
+    default :
+      switch (key->sym) {
+        default :
+          {
+            TRACE_AND_INDENT();
+            auto c = wid_event_to_char(key);
+            switch (c) {
+              case 'q' :
+              case SDLK_ESCAPE :
+                {
+                  TRACE_AND_INDENT();
+                  wid_dead_destroy();
+                  return true;
+                }
+            }
           }
-        }
       }
-    }
   }
 
   return true;
 }
 
-static uint8_t wid_dead_key_down (Widp w, const struct SDL_Keysym *key)
-{ TRACE_AND_INDENT();
+static uint8_t wid_dead_key_down(Widp w, const struct SDL_Keysym *key) {
+  TRACE_AND_INDENT();
   if (sdl_shift_held) {
-    if (key->scancode == (SDL_Scancode)game->config.key_console) {
+    if (key->scancode == (SDL_Scancode) game->config.key_console) {
       return false;
     }
   }
@@ -70,17 +74,17 @@ static uint8_t wid_dead_key_down (Widp w, const struct SDL_Keysym *key)
   return true;
 }
 
-static uint8_t wid_dead_mouse_up (Widp w, int32_t x, int32_t y, uint32_t button)
-{ TRACE_AND_INDENT();
+static uint8_t wid_dead_mouse_up(Widp w, int32_t x, int32_t y, uint32_t button) {
+  TRACE_AND_INDENT();
   wid_dead_destroy();
   return true;
 }
 
-void Game::dead_select (const char *reason)
-{ TRACE_AND_INDENT();
+void Game::dead_select(const char *reason) {
+  TRACE_AND_INDENT();
   LOG("Open dead select: %s", reason);
 
-  game->robot_mode = false;
+  game->robot_mode           = false;
   game->robot_mode_requested = false;
 
   wid_actionbar_fini();
@@ -103,17 +107,14 @@ void Game::dead_select (const char *reason)
     }
   }
 
-  auto h = TERM_HEIGHT / 2;
-  point tl = make_point(0, h + 1);
-  point br = make_point(UI_WID_POPUP_WIDTH_WIDE - 1, TERM_HEIGHT - 1);
-  auto width = br.x - tl.x - 1;
+  auto  h     = TERM_HEIGHT / 2;
+  point tl    = make_point(0, h + 1);
+  point br    = make_point(UI_WID_POPUP_WIDTH_WIDE - 1, TERM_HEIGHT - 1);
+  auto  width = br.x - tl.x - 1;
 
-  wid_dead_window = new WidPopup("Game dead",
-                   tl, br, nullptr, "ui_dead", false, false);
-  wid_set_on_key_up(
-    wid_dead_window->wid_popup_container, wid_dead_key_up);
-  wid_set_on_key_down(
-    wid_dead_window->wid_popup_container, wid_dead_key_down);
+  wid_dead_window = new WidPopup("Game dead", tl, br, nullptr, "ui_dead", false, false);
+  wid_set_on_key_up(wid_dead_window->wid_popup_container, wid_dead_key_up);
+  wid_set_on_key_down(wid_dead_window->wid_popup_container, wid_dead_key_down);
   wid_raise(wid_dead_window->wid_popup_container);
 
   // Want console to be able to be on top
@@ -143,7 +144,8 @@ void Game::dead_select (const char *reason)
   wid_dead_window->log(" ");
   wid_dead_window->log(reason);
 
-  { TRACE_AND_INDENT();
+  {
+    TRACE_AND_INDENT();
     auto p = wid_dead_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "dead");
 
@@ -178,7 +180,8 @@ void Game::dead_select (const char *reason)
     }
   }
 
-  { TRACE_AND_INDENT();
+  {
+    TRACE_AND_INDENT();
     auto p = wid_dead_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "dead");
 

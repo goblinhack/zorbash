@@ -22,8 +22,8 @@
 //
 // Lower level function than dead. Adds the thing to gc.
 //
-void Thing::score_add (Thingp victim)
-{ TRACE_AND_INDENT();
+void Thing::score_add(Thingp victim) {
+  TRACE_AND_INDENT();
   if (victim->is_monst()) {
     auto score = get_danger_initial_level(victim);
     if (score > 0) {

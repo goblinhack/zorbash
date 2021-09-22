@@ -23,8 +23,8 @@
 #include "my_array_bounds_check.h"
 #include "my_random.h"
 
-void Thing::on_move (void)
-{ TRACE_AND_INDENT();
+void Thing::on_move(void) {
+  TRACE_AND_INDENT();
   if (is_player()) {
     //
     // Update reachability for the player
@@ -39,25 +39,24 @@ void Thing::on_move (void)
 
   auto t = split_tokens(on_move, '.');
   if (t.size() == 2) {
-    auto mod = t[0];
-    auto fn = t[1];
+    auto        mod   = t[0];
+    auto        fn    = t[1];
     std::size_t found = fn.find("()");
     if (found != std::string::npos) {
       fn = fn.replace(found, 2, "");
     }
 
-    dbg("Call %s.%s(%s, %d, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), (int)mid_at.x, (int)mid_at.y);
+    dbg("Call %s.%s(%s, %d, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), (int) mid_at.x, (int) mid_at.y);
 
-    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int)mid_at.x, (unsigned int)mid_at.y);
+    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) mid_at.x, (unsigned int) mid_at.y);
   } else {
-    ERR("Bad on_move call [%s] expected mod:function, got %d elems",
-      on_move.c_str(), (int)on_move.size());
+    ERR("Bad on_move call [%s] expected mod:function, got %d elems", on_move.c_str(), (int) on_move.size());
   }
 }
 
-void Thing::move_finish (void)
-{ TRACE_AND_INDENT();
-  if (!is_moving) {
+void Thing::move_finish(void) {
+  TRACE_AND_INDENT();
+  if (! is_moving) {
     return;
   }
   is_moving = false;
@@ -72,14 +71,13 @@ void Thing::move_finish (void)
   if (is_player()) {
     if (check_anything_to_carry(true)) {
       BOTCON("Press %%fg=yellow$%s%%fg=reset$ or click to collect.",
-           SDL_GetScancodeName(
-            (SDL_Scancode)game->config.key_wait_or_collect));
+             SDL_GetScancodeName((SDL_Scancode) game->config.key_wait_or_collect));
       level->describe(mid_at);
       wid_actionbar_init();
     }
   }
 
-  if (!is_hidden) {
+  if (! is_hidden) {
     dbg("Move to %f,%f finished", mid_at.x, mid_at.y);
   }
 
@@ -93,9 +91,9 @@ void Thing::move_finish (void)
   on_move();
 }
 
-bool Thing::move (fpoint future_pos)
-{ TRACE_AND_INDENT();
-  if (!is_hidden) {
+bool Thing::move(fpoint future_pos) {
+  TRACE_AND_INDENT();
+  if (! is_hidden) {
     dbg("Move to %f,%f", future_pos.x, future_pos.y);
   }
 
@@ -123,17 +121,15 @@ bool Thing::move (fpoint future_pos)
   bool attack_allowed  = true;
 
   verify(this);
-  return (move(future_pos, up, down, left, right, attack, wait_or_collect,
-         shove_allowed, attack_allowed));
+  return (move(future_pos, up, down, left, right, attack, wait_or_collect, shove_allowed, attack_allowed));
 }
 
-bool Thing::move (point future_pos)
-{ TRACE_AND_INDENT();
+bool Thing::move(point future_pos) {
+  TRACE_AND_INDENT();
   return move(make_fpoint(future_pos));
 }
 
-bool Thing::move_no_shove_no_attack (fpoint future_pos)
-{
+bool Thing::move_no_shove_no_attack(fpoint future_pos) {
   dbg("Move, without shoving to %f,%f", future_pos.x, future_pos.y);
   bool up              = future_pos.y < mid_at.y;
   bool down            = future_pos.y > mid_at.y;
@@ -145,12 +141,10 @@ bool Thing::move_no_shove_no_attack (fpoint future_pos)
   bool attack_allowed  = false;
 
   verify(this);
-  return (move(future_pos, up, down, left, right, attack, wait_or_collect,
-         shove_allowed, attack_allowed));
+  return (move(future_pos, up, down, left, right, attack, wait_or_collect, shove_allowed, attack_allowed));
 }
 
-bool Thing::move_no_shove_no_attack (point future_pos)
-{
+bool Thing::move_no_shove_no_attack(point future_pos) {
   dbg("Move, without shoving to %d,%d", future_pos.x, future_pos.y);
   bool up              = future_pos.y < mid_at.y;
   bool down            = future_pos.y > mid_at.y;
@@ -162,13 +156,10 @@ bool Thing::move_no_shove_no_attack (point future_pos)
   bool attack_allowed  = false;
 
   verify(this);
-  return (move(make_fpoint(future_pos),
-         up, down, left, right, attack, wait_or_collect,
-         shove_allowed, attack_allowed));
+  return (move(make_fpoint(future_pos), up, down, left, right, attack, wait_or_collect, shove_allowed, attack_allowed));
 }
 
-bool Thing::move_no_shove_attack_allowed (fpoint future_pos)
-{
+bool Thing::move_no_shove_attack_allowed(fpoint future_pos) {
   dbg("Move, without shoving to %f,%f", future_pos.x, future_pos.y);
   bool up              = future_pos.y < mid_at.y;
   bool down            = future_pos.y > mid_at.y;
@@ -180,12 +171,10 @@ bool Thing::move_no_shove_attack_allowed (fpoint future_pos)
   bool attack_allowed  = true;
 
   verify(this);
-  return (move(future_pos, up, down, left, right, attack, wait_or_collect,
-         shove_allowed, attack_allowed));
+  return (move(future_pos, up, down, left, right, attack, wait_or_collect, shove_allowed, attack_allowed));
 }
 
-bool Thing::move_no_shove_attack_allowed (point future_pos)
-{
+bool Thing::move_no_shove_attack_allowed(point future_pos) {
   dbg("Move, without shoving to %d,%d", future_pos.x, future_pos.y);
   bool up              = future_pos.y < mid_at.y;
   bool down            = future_pos.y > mid_at.y;
@@ -197,20 +186,12 @@ bool Thing::move_no_shove_attack_allowed (point future_pos)
   bool attack_allowed  = true;
 
   verify(this);
-  return (move(make_fpoint(future_pos), up, down, left, right, attack, wait_or_collect,
-         shove_allowed, attack_allowed));
+  return (move(make_fpoint(future_pos), up, down, left, right, attack, wait_or_collect, shove_allowed, attack_allowed));
 }
 
-bool Thing::move (fpoint future_pos,
-          uint8_t up,
-          uint8_t down,
-          uint8_t left,
-          uint8_t right,
-          uint8_t attack,
-          uint8_t wait_or_collect,
-          bool shove_allowed,
-          bool attack_allowed)
-{ TRACE_AND_INDENT();
+bool Thing::move(fpoint future_pos, uint8_t up, uint8_t down, uint8_t left, uint8_t right, uint8_t attack,
+                 uint8_t wait_or_collect, bool shove_allowed, bool attack_allowed) {
+  TRACE_AND_INDENT();
   dbg("Move");
 
   if (is_dead) {
@@ -238,19 +219,16 @@ bool Thing::move (fpoint future_pos,
   // Check for being stuck in webs or something else sticky
   //
   if (up || down || left || right) {
-    if (loves_spiderwebs() &&
-      level->is_spiderweb(mid_at.x, mid_at.y)) {
+    if (loves_spiderwebs() && level->is_spiderweb(mid_at.x, mid_at.y)) {
       //
       // No getting stuck in webs
       // Also no cleaners stuck in their own gel
       //
-    } else if (!is_sticky() && level->is_sticky(mid_at.x, mid_at.y)) {
+    } else if (! is_sticky() && level->is_sticky(mid_at.x, mid_at.y)) {
       //
       // Makes sure ghosts (or the cursor!) do not get stuck in webs.
       //
-      if (!is_ethereal() &&
-        !is_cursor() &&
-        !is_cursor_path()) {
+      if (! is_ethereal() && ! is_cursor() && ! is_cursor_path()) {
         if (is_player()) {
           if (level->is_spiderweb(mid_at.x, mid_at.y)) {
             TOPCON("You are trapped in a web!");
@@ -269,8 +247,8 @@ bool Thing::move (fpoint future_pos,
   //
   // No rest for the undead.
   //
-  if (!attack) {
-    if (!is_undead() && !is_ethereal()) {
+  if (! attack) {
+    if (! is_undead() && ! is_ethereal()) {
       rest();
     }
   }
@@ -285,10 +263,10 @@ bool Thing::move (fpoint future_pos,
       game->tick_begin("player idled");
     }
 
-    if (!game->robot_mode) {
+    if (! game->robot_mode) {
       dbg("Check if there is anything to carry here");
       auto items = anything_to_carry();
-      if (!items.empty()) {
+      if (! items.empty()) {
         //
         // In mouse mode, it really is better to open a window to allow
         // choosing
@@ -347,8 +325,8 @@ bool Thing::move (fpoint future_pos,
     return false;
   }
 
-  auto x = future_pos.x;
-  auto y = future_pos.y;
+  auto x     = future_pos.x;
+  auto y     = future_pos.y;
   auto delta = fpoint(x, y) - mid_at;
 
   if (tp()->gfx_bounce_on_move()) {
@@ -404,20 +382,18 @@ bool Thing::move (fpoint future_pos,
 
     set_where_i_failed_to_collect_last(point(-1, -1));
 
-    if (!level->map_follow_player) {
+    if (! level->map_follow_player) {
       level->map_follow_player = true;
     }
   }
 
   auto t = most_dangerous_adjacent_thing_get();
   if (is_monst() && t) {
-    auto free_attack =
-       (((t->mid_at.x >= mid_at.x) && left) ||
-        ((t->mid_at.x <= mid_at.x) && right) ||
-        ((t->mid_at.y >= mid_at.y) && up) ||
-        ((t->mid_at.y <= mid_at.y) && down));
+    auto free_attack = (((t->mid_at.x >= mid_at.x) && left) || ((t->mid_at.x <= mid_at.x) && right) ||
+                        ((t->mid_at.y >= mid_at.y) && up) || ((t->mid_at.y <= mid_at.y) && down));
 
-    if (free_attack) { TRACE_AND_INDENT();
+    if (free_attack) {
+      TRACE_AND_INDENT();
       dbg("Free attack by %s", t->to_string().c_str());
       if (t->attack(this)) {
         //
@@ -438,11 +414,11 @@ bool Thing::move (fpoint future_pos,
 
   if (tp()->gfx_animated_can_hflip()) {
     if (future_pos.x > mid_at.x) {
-      if (is_facing_left && !get_ts_flip_start()) {
+      if (is_facing_left && ! get_ts_flip_start()) {
         set_ts_flip_start(time_get_time_ms_cached());
       }
     } else if (future_pos.x < mid_at.x) {
-      if (!is_facing_left && !get_ts_flip_start()) {
+      if (! is_facing_left && ! get_ts_flip_start()) {
         set_ts_flip_start(time_get_time_ms_cached());
       }
     }
@@ -455,11 +431,11 @@ bool Thing::move (fpoint future_pos,
   return true;
 }
 
-void Thing::update_interpolated_position (void)
-{ TRACE_AND_INDENT();
+void Thing::update_interpolated_position(void) {
+  TRACE_AND_INDENT();
   fpoint new_pos = mid_at;
-  auto tpp = tp();
-  float step = game->tick_dt;
+  auto   tpp     = tp();
+  float  step    = game->tick_dt;
 
   auto p = get_top_owner();
   if ((p && p->is_falling) || is_falling) {
@@ -487,24 +463,22 @@ void Thing::update_interpolated_position (void)
 
     new_pos.x = last_mid_at.x + dx * step;
     new_pos.y = last_mid_at.y + dy * step;
-  } else if (!is_moving) {
+  } else if (! is_moving) {
     if (mid_at != last_mid_at) {
-      if (!is_hidden) {
-        dbg("Changed position (new %f, %f, old %f,%f)",
-          mid_at.x, mid_at.y, last_mid_at.x, last_mid_at.y);
+      if (! is_hidden) {
+        dbg("Changed position (new %f, %f, old %f,%f)", mid_at.x, mid_at.y, last_mid_at.x, last_mid_at.y);
       }
 
-      new_pos = mid_at;
+      new_pos     = mid_at;
       last_mid_at = mid_at;
     }
   } else if (game->tick_dt >= 1) {
     if (mid_at != last_mid_at) {
-      if (!is_hidden) {
-        dbg("End of move position (new %f, %f, old %f,%f)",
-          mid_at.x, mid_at.y, last_mid_at.x, last_mid_at.y);
+      if (! is_hidden) {
+        dbg("End of move position (new %f, %f, old %f,%f)", mid_at.x, mid_at.y, last_mid_at.x, last_mid_at.y);
       }
 
-      new_pos = mid_at;
+      new_pos     = mid_at;
       last_mid_at = mid_at;
 
       move_finish();
@@ -527,20 +501,20 @@ void Thing::update_interpolated_position (void)
   update_light();
 }
 
-void Thing::update_pos (fpoint to, bool immediately)
-{ TRACE_AND_INDENT();
-  if (!is_hidden) {
+void Thing::update_pos(fpoint to, bool immediately) {
+  TRACE_AND_INDENT();
+  if (! is_hidden) {
     dbg("Update pos to %f,%f", to.x, to.y);
   }
 
-  point new_at((int)to.x, (int)to.y);
+  point new_at((int) to.x, (int) to.y);
   if (level->is_oob(new_at)) {
     return;
   }
 
-  point old_at((int)mid_at.x, (int)mid_at.y);
+  point old_at((int) mid_at.x, (int) mid_at.y);
 
-  last_mid_at = mid_at;
+  last_mid_at    = mid_at;
   has_ever_moved = true;
 
   //
@@ -557,13 +531,12 @@ void Thing::update_pos (fpoint to, bool immediately)
     return;
   }
 
-  if (!is_hidden) {
+  if (! is_hidden) {
     dbg("Move to %f,%f", to.x, to.y);
   }
 
   if (is_player()) {
-    if (((int)old_at.x != (int)new_at.x) ||
-      ((int)old_at.y != (int)new_at.y)) {
+    if (((int) old_at.x != (int) new_at.x) || ((int) old_at.y != (int) new_at.y)) {
       level->minimap_valid = false;
     }
   }
@@ -572,15 +545,14 @@ void Thing::update_pos (fpoint to, bool immediately)
   mid_at = to;
   level_push();
 
-  if (!immediately) {
+  if (! immediately) {
     is_moving = true;
   }
 
   move_carried_items();
 }
 
-void Thing::move_set_dir_from_delta (fpoint delta)
-{
+void Thing::move_set_dir_from_delta(fpoint delta) {
   //
   // If not moving and this is the first move then break out of the
   // idle animation.
@@ -638,8 +610,8 @@ void Thing::move_set_dir_from_delta (fpoint delta)
   }
 }
 
-void Thing::move_to (fpoint to)
-{ TRACE_AND_INDENT();
+void Thing::move_to(fpoint to) {
+  TRACE_AND_INDENT();
   move_finish();
   auto delta = to - mid_at;
   move_set_dir_from_delta(delta);
@@ -647,8 +619,8 @@ void Thing::move_to (fpoint to)
   update_pos(to, false);
 }
 
-void Thing::move_delta (fpoint delta)
-{ TRACE_AND_INDENT();
+void Thing::move_delta(fpoint delta) {
+  TRACE_AND_INDENT();
   move_finish();
   move_set_dir_from_delta(delta);
 
@@ -656,22 +628,16 @@ void Thing::move_delta (fpoint delta)
   // If the move finish ended up doing something like moving into
   // a sewer, then we need to abort the delta move
   //
-  if (is_changing_level ||
-    is_hidden ||
-    is_falling ||
-    is_waiting_to_ascend_dungeon ||
-    is_waiting_to_descend_sewer ||
-    is_waiting_to_descend_dungeon ||
-    is_waiting_to_ascend_sewer ||
-    is_jumping) {
+  if (is_changing_level || is_hidden || is_falling || is_waiting_to_ascend_dungeon || is_waiting_to_descend_sewer ||
+      is_waiting_to_descend_dungeon || is_waiting_to_ascend_sewer || is_jumping) {
     return;
   }
 
   update_pos(mid_at + delta, false);
 }
 
-void Thing::move_to_immediately (fpoint to)
-{ TRACE_AND_INDENT();
+void Thing::move_to_immediately(fpoint to) {
+  TRACE_AND_INDENT();
   move_finish();
   auto delta = to - mid_at;
   move_set_dir_from_delta(delta);
@@ -683,14 +649,8 @@ void Thing::move_to_immediately (fpoint to)
   update_pos(to, true);
   move_finish();
 
-  if (is_changing_level ||
-    is_hidden ||
-    is_falling ||
-    is_waiting_to_ascend_dungeon ||
-    is_waiting_to_descend_sewer ||
-    is_waiting_to_descend_dungeon ||
-    is_waiting_to_ascend_sewer ||
-    is_jumping) {
+  if (is_changing_level || is_hidden || is_falling || is_waiting_to_ascend_dungeon || is_waiting_to_descend_sewer ||
+      is_waiting_to_descend_dungeon || is_waiting_to_ascend_sewer || is_jumping) {
     //
     // Things like changing level, don't look at the location until
     // the interpolated position is updated else we can look at the
@@ -702,7 +662,7 @@ void Thing::move_to_immediately (fpoint to)
   }
 
   if (is_player()) {
-    if (!level->map_follow_player) {
+    if (! level->map_follow_player) {
       level->map_follow_player = true;
     }
   }
@@ -710,8 +670,8 @@ void Thing::move_to_immediately (fpoint to)
   update_interpolated_position();
 }
 
-bool Thing::move_to_try (const point& nh, const bool escaping, bool check_only)
-{ TRACE_AND_INDENT();
+bool Thing::move_to_try(const point &nh, const bool escaping, bool check_only) {
+  TRACE_AND_INDENT();
   if (escaping) {
     dbg("Escape to attempt %d,%d", nh.x, nh.y);
   } else {
@@ -732,12 +692,10 @@ bool Thing::move_to_try (const point& nh, const bool escaping, bool check_only)
     // see if we can hit the thing that is in the way.
     //
     dbg("Cannot move to %d,%d will hit obstacle or monst", nh.x, nh.y);
-  TRACE_AND_INDENT();
+    TRACE_AND_INDENT();
     bool target_attacked = false;
     bool target_overlaps = false;
-    collision_check_and_handle_nearby(fnh,
-                      &target_attacked,
-                      &target_overlaps);
+    collision_check_and_handle_nearby(fnh, &target_attacked, &target_overlaps);
     if (target_attacked) {
       dbg("Cannot move to %d,%d, must attack", nh.x, nh.y);
       return true;
@@ -748,47 +706,47 @@ bool Thing::move_to_try (const point& nh, const bool escaping, bool check_only)
   } else {
     dbg("Move to %d,%d is ok", nh.x, nh.y);
 
-    if (!escaping) {
-      if (get_terrain_cost(nh) >= DMAP_LESS_PREFERRED_TERRAIN) { TRACE_AND_INDENT();
+    if (! escaping) {
+      if (get_terrain_cost(nh) >= DMAP_LESS_PREFERRED_TERRAIN) {
+        TRACE_AND_INDENT();
         dbg("But %d,%d is less preferred terrain, avoid", nh.x, nh.y);
         return false;
       }
     }
 
-    if (!check_only) {
+    if (! check_only) {
       move(fnh);
     }
     return true;
   }
 }
 
-bool Thing::move_to_or_attack (const point& nh)
-{ TRACE_AND_INDENT();
+bool Thing::move_to_or_attack(const point &nh) {
+  TRACE_AND_INDENT();
   dbg("Move to or attack");
   return move_to_try(nh, false, false);
 }
 
-bool Thing::move_to_or_escape (const point& nh)
-{ TRACE_AND_INDENT();
+bool Thing::move_to_or_escape(const point &nh) {
+  TRACE_AND_INDENT();
   dbg("Move to or escape");
   return move_to_try(nh, true, false);
 }
 
-bool Thing::move_to_or_attack_check_only (const point& nh)
-{ TRACE_AND_INDENT();
+bool Thing::move_to_or_attack_check_only(const point &nh) {
+  TRACE_AND_INDENT();
   dbg("Move to or attack");
   return move_to_try(nh, false, true);
 }
 
-bool Thing::move_to_or_escape_check_only (const point& nh)
-{ TRACE_AND_INDENT();
+bool Thing::move_to_or_escape_check_only(const point &nh) {
+  TRACE_AND_INDENT();
   dbg("Move to or escape");
   return move_to_try(nh, true, true);
 }
 
-void Thing::clear_move_path (const std::string &why)
-{
-  if (!monstp) {
+void Thing::clear_move_path(const std::string &why) {
+  if (! monstp) {
     return;
   }
 

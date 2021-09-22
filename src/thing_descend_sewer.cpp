@@ -16,9 +16,9 @@
 #include "my_sdl.h"
 #include "my_gl.h"
 
-bool Thing::descend_sewer_tick (void)
-{ TRACE_AND_INDENT();
-  if (!level->is_descend_sewer(mid_at.x, mid_at.y)) {
+bool Thing::descend_sewer_tick(void) {
+  TRACE_AND_INDENT();
+  if (! level->is_descend_sewer(mid_at.x, mid_at.y)) {
     return false;
   }
 
@@ -38,8 +38,8 @@ bool Thing::descend_sewer_tick (void)
   if (is_player()) {
     if (level->world_at.z & 1) {
       dbg("Descending sewer");
-      level->ts_fade_out_begin = time_get_time_ms_cached();
-      level->fbo_light = sdl_fbo_save(FBO_FULLMAP_LIGHT);
+      level->ts_fade_out_begin    = time_get_time_ms_cached();
+      level->fbo_light            = sdl_fbo_save(FBO_FULLMAP_LIGHT);
       is_waiting_to_descend_sewer = true;
       move_finish();
       return true;
@@ -56,21 +56,16 @@ bool Thing::descend_sewer_tick (void)
   return false;
 }
 
-bool Thing::descend_sewer (void)
-{ TRACE_AND_INDENT();
+bool Thing::descend_sewer(void) {
+  TRACE_AND_INDENT();
   dbg("Descend sewer");
-  if (is_changing_level ||
-    is_hidden ||
-    is_falling ||
-    is_waiting_to_fall ||
-    is_waiting_to_ascend_dungeon ||
-    is_waiting_to_ascend_sewer ||
-    is_jumping) {
+  if (is_changing_level || is_hidden || is_falling || is_waiting_to_fall || is_waiting_to_ascend_dungeon ||
+      is_waiting_to_ascend_sewer || is_jumping) {
     dbg("Descend sewer, no");
     return false;
   }
 
-  if (!monstp) {
+  if (! monstp) {
     return false;
   }
 
@@ -94,7 +89,7 @@ bool Thing::descend_sewer (void)
   dbg("Is trying to descend to the sewer");
 
   auto l = get(game->world.levels, next_level.x, next_level.y, next_level.z);
-  if (!l) {
+  if (! l) {
     if (is_player()) {
       TOPCON("The sewer is permanently blocked!");
     }

@@ -19,19 +19,19 @@
 #include "my_thing.h"
 #include "my_monst.h"
 
-WidPopup *wid_skills;
+WidPopup *              wid_skills;
 static std::vector<Tpp> skills;
 
-void wid_skill_choose_destroy (void)
-{ TRACE_AND_INDENT();
+void wid_skill_choose_destroy(void) {
+  TRACE_AND_INDENT();
   delete wid_skills;
   wid_skills = nullptr;
   game->change_state(Game::STATE_NORMAL);
 }
 
-static void wid_skills_slot (int slot)
-{ TRACE_AND_INDENT();
-  if (slot >= (int)skills.size()) {
+static void wid_skills_slot(int slot) {
+  TRACE_AND_INDENT();
+  if (slot >= (int) skills.size()) {
     wid_skill_choose_destroy();
     return;
   }
@@ -46,28 +46,28 @@ static void wid_skills_slot (int slot)
   wid_skill_choose_destroy();
 }
 
-static uint8_t wid_skills_key_up (Widp w, const struct SDL_Keysym *key)
-{ TRACE_AND_INDENT();
+static uint8_t wid_skills_key_up(Widp w, const struct SDL_Keysym *key) {
+  TRACE_AND_INDENT();
   auto level = game->level;
-  if (!level) {
+  if (! level) {
     return true;
   }
 
   auto player = level->player;
-  if (!player){
+  if (! player) {
     return true;
   }
 
-  if (player->is_dead){
+  if (player->is_dead) {
     return true;
   }
   if (sdl_shift_held) {
-    if (key->scancode == (SDL_Scancode)game->config.key_console) {
+    if (key->scancode == (SDL_Scancode) game->config.key_console) {
       return false;
     }
   }
 
-  if (key->scancode == (SDL_Scancode)game->config.key_drop) {
+  if (key->scancode == (SDL_Scancode) game->config.key_drop) {
     auto what = game->level->inventory_get();
     if (what) {
       if (game->level->player->drop(what)) {
@@ -81,55 +81,56 @@ static uint8_t wid_skills_key_up (Widp w, const struct SDL_Keysym *key)
   }
 
   switch (key->mod) {
-    case KMOD_LCTRL:
-    case KMOD_RCTRL:
-    default:
-    switch (key->sym) {
-      default: {
-        auto c = wid_event_to_char(key);
-        switch (c) {
-          case '1':
-          case '2':
-          case '3':
-          case '4':
-          case '5':
-          case '6':
-          case '7':
-          case '8':
-          case '9':
-            wid_skills_slot(c - '1');
-            return true;
-          case SDLK_ESCAPE: { TRACE_AND_INDENT();
-            CON("PLAYER: Skill choose cancelled");
-            wid_skill_choose_destroy();
-            return true;
+    case KMOD_LCTRL :
+    case KMOD_RCTRL :
+    default :
+      switch (key->sym) {
+        default :
+          {
+            auto c = wid_event_to_char(key);
+            switch (c) {
+              case '1' :
+              case '2' :
+              case '3' :
+              case '4' :
+              case '5' :
+              case '6' :
+              case '7' :
+              case '8' :
+              case '9' : wid_skills_slot(c - '1'); return true;
+              case SDLK_ESCAPE :
+                {
+                  TRACE_AND_INDENT();
+                  CON("PLAYER: Skill choose cancelled");
+                  wid_skill_choose_destroy();
+                  return true;
+                }
+            }
           }
-        }
       }
-    }
   }
 
   return true;
 }
 
-static uint8_t wid_skills_key_down (Widp w, const struct SDL_Keysym *key)
-{ TRACE_AND_INDENT();
+static uint8_t wid_skills_key_down(Widp w, const struct SDL_Keysym *key) {
+  TRACE_AND_INDENT();
   auto level = game->level;
-  if (!level) {
+  if (! level) {
     return true;
   }
 
   auto player = level->player;
-  if (!player){
+  if (! player) {
     return true;
   }
 
-  if (player->is_dead){
+  if (player->is_dead) {
     return true;
   }
 
   if (sdl_shift_held) {
-    if (key->scancode == (SDL_Scancode)game->config.key_console) {
+    if (key->scancode == (SDL_Scancode) game->config.key_console) {
       return false;
     }
   }
@@ -137,19 +138,19 @@ static uint8_t wid_skills_key_down (Widp w, const struct SDL_Keysym *key)
   return true;
 }
 
-static uint8_t wid_skills_mouse_up (Widp w, int32_t x, int32_t y, uint32_t button)
-{ TRACE_AND_INDENT();
+static uint8_t wid_skills_mouse_up(Widp w, int32_t x, int32_t y, uint32_t button) {
+  TRACE_AND_INDENT();
   auto level = game->level;
-  if (!level) {
+  if (! level) {
     return true;
   }
 
   auto player = level->player;
-  if (!player){
+  if (! player) {
     return true;
   }
 
-  if (player->is_dead){
+  if (player->is_dead) {
     return true;
   }
 
@@ -157,8 +158,8 @@ static uint8_t wid_skills_mouse_up (Widp w, int32_t x, int32_t y, uint32_t butto
   return true;
 }
 
-void Game::wid_skill_choose (void)
-{ TRACE_AND_INDENT();
+void Game::wid_skill_choose(void) {
+  TRACE_AND_INDENT();
   BOTCON("You lucky thing. Time to learn some new skill.");
 
   DBG3("Thing skills create");
@@ -166,7 +167,7 @@ void Game::wid_skill_choose (void)
   change_state(Game::STATE_CHOOSING_SKILLS);
 
   auto player = game->level->player;
-  if (!player){
+  if (! player) {
     change_state(Game::STATE_NORMAL);
     ERR("No player");
     return;
@@ -178,7 +179,7 @@ void Game::wid_skill_choose (void)
   wid_ignore_events_briefly();
 
   skills.clear();
-  for (auto tpp: tp_get_skills()) {
+  for (auto tpp : tp_get_skills()) {
 
     bool add = true;
     for (auto oid : player->monstp->skills) {
@@ -201,14 +202,12 @@ void Game::wid_skill_choose (void)
     return;
   }
 
-  auto m = TERM_WIDTH / 2;
-  point tl = make_point(m - 35, UI_TOPCON_VIS_HEIGHT + 10);
-  point br = make_point(m + 35, tl.y + 25);
-  auto width = br.x - tl.x;
+  auto  m     = TERM_WIDTH / 2;
+  point tl    = make_point(m - 35, UI_TOPCON_VIS_HEIGHT + 10);
+  point br    = make_point(m + 35, tl.y + 25);
+  auto  width = br.x - tl.x;
 
-  wid_skills = new WidPopup("skills", tl, br, nullptr, "",
-                false, true,
-                skills.size() * 3);
+  wid_skills = new WidPopup("skills", tl, br, nullptr, "", false, true, skills.size() * 3);
 
   wid_set_on_key_up(wid_skills->wid_popup_container, wid_skills_key_up);
   wid_set_on_key_down(wid_skills->wid_popup_container, wid_skills_key_down);
@@ -216,10 +215,10 @@ void Game::wid_skill_choose (void)
   wid_skills->log("Choose a skill");
 
   int y_at = 3;
-  for (auto slot = 0; slot < (int)skills.size(); slot++) {
-    Game tmp;
-    auto p = wid_skills->wid_text_area->wid_text_area;
-    auto w = wid_new_container(p, "item slot");
+  for (auto slot = 0; slot < (int) skills.size(); slot++) {
+    Game  tmp;
+    auto  p  = wid_skills->wid_text_area->wid_text_area;
+    auto  w  = wid_new_container(p, "item slot");
     point tl = make_point(0, y_at);
     point br = make_point(width - 3, y_at + 2);
     wid_set_pos(w, tl, br);
@@ -258,8 +257,7 @@ void Game::wid_skill_choose (void)
       wid_set_style(wid_skill, UI_WID_STYLE_DARK);
 
       if (slot < 9) {
-        wid_set_text(wid_skill, " " + std::to_string(slot + 1) + ". " +
-               tpp->text_name() + ", " + tpp->text_skill());
+        wid_set_text(wid_skill, " " + std::to_string(slot + 1) + ". " + tpp->text_name() + ", " + tpp->text_skill());
       } else {
         wid_set_text(wid_skill, tpp->text_name() + ", " + tpp->text_skill());
       }

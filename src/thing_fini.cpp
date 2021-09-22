@@ -19,15 +19,15 @@
 #include "my_wid_thing_info.h"
 #include "my_game.h"
 
-Thing::~Thing_ (void)
-{ TRACE_AND_INDENT();
+Thing::~Thing_(void) {
+  TRACE_AND_INDENT();
   verify(this);
   destroy();
   oldptr(this);
 }
 
-void Thing::destroy (void)
-{ TRACE_AND_INDENT();
+void Thing::destroy(void) {
+  TRACE_AND_INDENT();
   verify(this);
 
   if (is_loggable_for_important_stuff()) {
@@ -58,7 +58,7 @@ void Thing::destroy (void)
   //
   // Pop from the map
   //
-  point old_at((int)mid_at.x, (int)mid_at.y);
+  point old_at((int) mid_at.x, (int) mid_at.y);
 
   delete_dmap_can_see();
   delete_dmap_unused();

@@ -19,11 +19,11 @@
 #include "my_sdl.h"
 #include "my_template.h"
 
-void Level::describe (fpoint p)
-{ TRACE_AND_INDENT();
+void Level::describe(fpoint p) {
+  TRACE_AND_INDENT();
   bool got_one_with_long_text = false;
 
-  if (!player) {
+  if (! player) {
     return;
   }
 
@@ -41,15 +41,11 @@ void Level::describe (fpoint p)
 
   dbg3("Describe %f,%f", p.x, p.y);
   TRACE_AND_INDENT();
-  if ((game->state == Game::STATE_MOVING_ITEMS) ||
-    (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
-    (game->state == Game::STATE_COLLECTING_ITEMS) ||
-    (game->state == Game::STATE_WIELDING_ITEMS) ||
-    (game->state == Game::STATE_ENCHANTING_ITEMS) ||
-    (game->state == Game::STATE_SAVE_MENU) ||
-    (game->state == Game::STATE_LOAD_MENU) ||
-    (game->state == Game::STATE_QUIT_MENU) ||
-    (game->state == Game::STATE_CHOOSING_SKILLS)) {
+  if ((game->state == Game::STATE_MOVING_ITEMS) || (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
+      (game->state == Game::STATE_COLLECTING_ITEMS) || (game->state == Game::STATE_WIELDING_ITEMS) ||
+      (game->state == Game::STATE_ENCHANTING_ITEMS) || (game->state == Game::STATE_SAVE_MENU) ||
+      (game->state == Game::STATE_LOAD_MENU) || (game->state == Game::STATE_QUIT_MENU) ||
+      (game->state == Game::STATE_CHOOSING_SKILLS)) {
     dbg3("Describe %f,%f; no wrong state", p.x, p.y);
     return;
   }
@@ -60,27 +56,22 @@ void Level::describe (fpoint p)
   FOR_ALL_THINGS_THAT_DO_STUFF(this, t, p.x, p.y) {
     int x = p.x;
     int y = p.y;
-    IF_DEBUG3 {
-      t->log("Active thing cand for describe");
-    }
-  TRACE_AND_INDENT();
-    if (!is_lit_currently(x, y) && !is_lit_ever(x, y)) { TRACE_AND_INDENT();
+    IF_DEBUG3 { t->log("Active thing cand for describe"); }
+    TRACE_AND_INDENT();
+    if (! is_lit_currently(x, y) && ! is_lit_ever(x, y)) {
+      TRACE_AND_INDENT();
       IF_DEBUG3 {
         //
         // Allow snooping in debug mode
         //
-      } else {
+      }
+      else {
         continue;
       }
     }
 
-    if (t->is_cursor() ||
-        t->is_player() ||
-        t->is_cursor_path() ||
-      t->is_the_grid) {
-      IF_DEBUG3 {
-        t->log("Ignore for describe, boring");
-      }
+    if (t->is_cursor() || t->is_player() || t->is_cursor_path() || t->is_the_grid) {
+      IF_DEBUG3 { t->log("Ignore for describe, boring"); }
       continue;
     }
 
@@ -88,68 +79,53 @@ void Level::describe (fpoint p)
     // Dead monst clog up the screen
     //
     if (t->is_monst() && t->is_dead) {
-      IF_DEBUG3 {
-        t->log("Ignore for describe, monst or dead");
-      }
+      IF_DEBUG3 { t->log("Ignore for describe, monst or dead"); }
       continue;
     }
 
     if (t->get_immediate_owner()) {
-      IF_DEBUG3 {
-        t->log("Ignore for describe, has owner");
-      }
+      IF_DEBUG3 { t->log("Ignore for describe, has owner"); }
       continue;
     }
 
     if (t->is_described_when_hovering_over()) {
-      if (!t->text_description().empty() ||
-        !t->long_text_description().empty()) {
+      if (! t->text_description().empty() || ! t->long_text_description().empty()) {
 
-        IF_DEBUG3 {
-          t->log("Add to describe");
-        }
-        got_one_with_long_text |= !t->long_text_description().empty();
+        IF_DEBUG3 { t->log("Add to describe"); }
+        got_one_with_long_text |= ! t->long_text_description().empty();
         push_back_if_unique(hover_over_things, t);
       } else {
-        IF_DEBUG3 {
-          t->log("Ignore for describe, no text");
-        }
+        IF_DEBUG3 { t->log("Ignore for describe, no text"); }
       }
     } else {
-      IF_DEBUG3 {
-        t->log("Ignore for describe, not described");
-      }
+      IF_DEBUG3 { t->log("Ignore for describe, not described"); }
     }
 
-    if (!hover_over) {
+    if (! hover_over) {
       hover_over = t;
     }
-  } FOR_ALL_THINGS_END()
+  }
+  FOR_ALL_THINGS_END()
 
   FOR_ALL_THINGS_THAT_INTERACT(this, t, p.x, p.y) {
     int x = p.x;
     int y = p.y;
-    IF_DEBUG3 {
-      t->log("Interesting thing cand for describe");
-    }
-  TRACE_AND_INDENT();
-    if (!is_lit_currently(x, y) && !is_lit_ever(x, y)) { TRACE_AND_INDENT();
+    IF_DEBUG3 { t->log("Interesting thing cand for describe"); }
+    TRACE_AND_INDENT();
+    if (! is_lit_currently(x, y) && ! is_lit_ever(x, y)) {
+      TRACE_AND_INDENT();
       IF_DEBUG3 {
         //
         // Allow snooping in debug mode
         //
-      } else {
+      }
+      else {
         continue;
       }
     }
 
-    if (t->is_cursor() ||
-      t->is_player() ||
-      t->is_cursor_path() ||
-      t->is_the_grid) {
-      IF_DEBUG3 {
-        t->log("Ignore for describe, boring");
-      }
+    if (t->is_cursor() || t->is_player() || t->is_cursor_path() || t->is_the_grid) {
+      IF_DEBUG3 { t->log("Ignore for describe, boring"); }
       continue;
     }
 
@@ -157,68 +133,52 @@ void Level::describe (fpoint p)
     // Dead monst clog up the screen
     //
     if (t->is_monst() && t->is_dead) {
-      IF_DEBUG3 {
-        t->log("Ignore for describe, monst or dead");
-      }
+      IF_DEBUG3 { t->log("Ignore for describe, monst or dead"); }
       continue;
     }
 
     if (t->get_immediate_owner()) {
-      IF_DEBUG3 {
-        t->log("Ignore for describe, has owner");
-      }
+      IF_DEBUG3 { t->log("Ignore for describe, has owner"); }
       continue;
     }
 
     if (t->is_described_when_hovering_over()) {
-      if (!t->text_description().empty() ||
-        !t->long_text_description().empty()) {
-        IF_DEBUG3 {
-          t->log("Add to describe");
-        }
-        got_one_with_long_text |= !t->long_text_description().empty();
+      if (! t->text_description().empty() || ! t->long_text_description().empty()) {
+        IF_DEBUG3 { t->log("Add to describe"); }
+        got_one_with_long_text |= ! t->long_text_description().empty();
         push_back_if_unique(hover_over_things, t);
       } else {
-        IF_DEBUG3 {
-          t->log("Ignore for describe, no text");
-        }
+        IF_DEBUG3 { t->log("Ignore for describe, no text"); }
       }
     } else {
-      IF_DEBUG3 {
-        t->log("Ignore for describe, not described");
-      }
+      IF_DEBUG3 { t->log("Ignore for describe, not described"); }
     }
 
-    if (!hover_over) {
+    if (! hover_over) {
       hover_over = t;
     }
-  } FOR_ALL_THINGS_END()
+  }
+  FOR_ALL_THINGS_END()
 
   FOR_ALL_THINGS(this, t, p.x, p.y) {
     int x = p.x;
     int y = p.y;
-    IF_DEBUG3 {
-      t->log("All thing cand for describe");
-    }
-  TRACE_AND_INDENT();
-    if (!is_lit_currently(x, y) && !is_lit_ever(x, y)) { TRACE_AND_INDENT();
+    IF_DEBUG3 { t->log("All thing cand for describe"); }
+    TRACE_AND_INDENT();
+    if (! is_lit_currently(x, y) && ! is_lit_ever(x, y)) {
+      TRACE_AND_INDENT();
       IF_DEBUG3 {
         //
         // Allow snooping in debug mode
         //
-      } else {
+      }
+      else {
         continue;
       }
     }
 
-    if (t->get_immediate_owner() ||
-      t->is_player() ||
-      t->is_cursor() ||
-      t->is_cursor_path() ||
-      t->is_the_grid) {
-      IF_DEBUG3 {
-        t->log("Ignore for describe, boring");
-      }
+    if (t->get_immediate_owner() || t->is_player() || t->is_cursor() || t->is_cursor_path() || t->is_the_grid) {
+      IF_DEBUG3 { t->log("Ignore for describe, boring"); }
       continue;
     }
 
@@ -226,10 +186,8 @@ void Level::describe (fpoint p)
     // Only show the player as fallback if we have nothing else
     //
     if (hover_over_things.size()) {
-      if(t->is_player()) {
-        IF_DEBUG3 {
-          t->log("Ignore for describe, showing something better");
-        }
+      if (t->is_player()) {
+        IF_DEBUG3 { t->log("Ignore for describe, showing something better"); }
         continue;
       }
 
@@ -237,45 +195,36 @@ void Level::describe (fpoint p)
       // Dead monst clog up the screen. Unless we have nothing else.
       //
       if (t->is_monst() && t->is_dead) {
-        IF_DEBUG3 {
-          t->log("Ignore for describe, showing something better");
-        }
+        IF_DEBUG3 { t->log("Ignore for describe, showing something better"); }
         continue;
       }
     }
 
     if (t->is_described_when_hovering_over()) {
-      if (!t->text_description().empty() ||
-        !t->long_text_description().empty()) {
-        got_one_with_long_text |= !t->long_text_description().empty();
-        IF_DEBUG3 {
-          t->log("Add to describe");
-        }
+      if (! t->text_description().empty() || ! t->long_text_description().empty()) {
+        got_one_with_long_text |= ! t->long_text_description().empty();
+        IF_DEBUG3 { t->log("Add to describe"); }
         push_back_if_unique(hover_over_things, t);
       } else {
-        IF_DEBUG3 {
-          t->log("Ignore for describe, no text");
-        }
+        IF_DEBUG3 { t->log("Ignore for describe, no text"); }
       }
     } else {
-      IF_DEBUG3 {
-        t->log("Ignore for describe, not described");
-      }
+      IF_DEBUG3 { t->log("Ignore for describe, not described"); }
     }
 
-    if (!hover_over) {
+    if (! hover_over) {
       hover_over = t;
     }
-  } FOR_ALL_THINGS_END()
+  }
+  FOR_ALL_THINGS_END()
 
-  if (!got_one_with_long_text) {
+  if (! got_one_with_long_text) {
     dbg3("Describe %f,%f; found nothing with long text", p.x, p.y);
   }
 
-  dbg3("Describe %f,%f; found %d things", p.x, p.y,
-     (int)hover_over_things.size());
+  dbg3("Describe %f,%f; found %d things", p.x, p.y, (int) hover_over_things.size());
 
-  if (!got_one_with_long_text || !hover_over_things.size()) {
+  if (! got_one_with_long_text || ! hover_over_things.size()) {
     //
     // If we found nothing, then check to see if we are already showing
     // something of interest and if so, keep it.
@@ -284,8 +233,7 @@ void Level::describe (fpoint p)
     if (o) {
       dbg3("Currently describing %s", o->to_string().c_str());
       if (o->is_hidden) {
-        dbg3("Currently describing %s; prefer me over current1",
-          o->to_string().c_str());
+        dbg3("Currently describing %s; prefer me over current1", o->to_string().c_str());
       }
 
       //
@@ -321,9 +269,7 @@ void Level::describe (fpoint p)
     dbg3("Describe %f,%f; found %d things", p.x, p.y, (int) hover_over_things.size());
     game->wid_thing_info_create_when_hovering_over_list(hover_over_things);
     if (hover_over_things.size() > 1) {
-      auto k = std::string(
-        SDL_GetScancodeName(
-          (SDL_Scancode)game->config.key_wait_or_collect));
+      auto        k = std::string(SDL_GetScancodeName((SDL_Scancode) game->config.key_wait_or_collect));
       std::string text;
       if (k == ".") {
         text = "Multiple things here. Press %%fg=yellow$" + k + "%%fg=reset$ to collect.";
@@ -336,9 +282,7 @@ void Level::describe (fpoint p)
     dbg3("Describe %f,%f; found %d thing", p.x, p.y, (int) hover_over_things.size());
     game->wid_thing_info_create_when_hovering_over_list(hover_over_things);
     if (hover_over_things.size() > 1) {
-      auto k = std::string(
-        SDL_GetScancodeName(
-          (SDL_Scancode)game->config.key_wait_or_collect));
+      auto        k = std::string(SDL_GetScancodeName((SDL_Scancode) game->config.key_wait_or_collect));
       std::string text;
       if (k == ".") {
         text = "Something is here. Press %%fg=yellow$" + k + "%%fg=reset$ to collect.";
@@ -350,9 +294,9 @@ void Level::describe (fpoint p)
   }
 }
 
-void Level::describe (Thingp t)
-{ TRACE_AND_INDENT();
-  if (!player) {
+void Level::describe(Thingp t) {
+  TRACE_AND_INDENT();
+  if (! player) {
     return;
   }
 
@@ -368,26 +312,22 @@ void Level::describe (Thingp t)
     return;
   }
 
-  if (!t) {
+  if (! t) {
     err("Null thing");
     return;
   }
 
   dbg3("Describe %s", t->to_string().c_str());
 
-  if ((game->state == Game::STATE_MOVING_ITEMS) ||
-    (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
-    (game->state == Game::STATE_COLLECTING_ITEMS) ||
-    (game->state == Game::STATE_WIELDING_ITEMS) ||
-    (game->state == Game::STATE_SAVE_MENU) ||
-    (game->state == Game::STATE_LOAD_MENU) ||
-    (game->state == Game::STATE_QUIT_MENU) ||
-    (game->state == Game::STATE_ENCHANTING_ITEMS)) {
+  if ((game->state == Game::STATE_MOVING_ITEMS) || (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
+      (game->state == Game::STATE_COLLECTING_ITEMS) || (game->state == Game::STATE_WIELDING_ITEMS) ||
+      (game->state == Game::STATE_SAVE_MENU) || (game->state == Game::STATE_LOAD_MENU) ||
+      (game->state == Game::STATE_QUIT_MENU) || (game->state == Game::STATE_ENCHANTING_ITEMS)) {
     dbg3("Describe %s; no wrong state", t->to_string().c_str());
     return;
   }
 
-  if (!t->is_described_when_hovering_over()) {
+  if (! t->is_described_when_hovering_over()) {
     dbg3("Describe %s; no not described", t->to_string().c_str());
     return;
   }
@@ -401,8 +341,7 @@ void Level::describe (Thingp t)
   if (o) {
     dbg3("Currently Describe %s", o->to_string().c_str());
     if (o->is_hidden) {
-      dbg3("Currently Describe %s; prefer me over current5",
-        o->to_string().c_str());
+      dbg3("Currently Describe %s; prefer me over current5", o->to_string().c_str());
     }
 
     //

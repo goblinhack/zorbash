@@ -11,18 +11,18 @@
 #include "my_gl.h"
 #include "my_thing.h"
 
-void Level::update_minimap (bool showing_two_levels, bool show_faded)
-{ TRACE_AND_INDENT();
+void Level::update_minimap(bool showing_two_levels, bool show_faded) {
+  TRACE_AND_INDENT();
   static int last_rendered;
   if (showing_two_levels) {
     if (show_faded) {
-      if (!time_have_x_tenths_passed_since(1, last_rendered)) {
+      if (! time_have_x_tenths_passed_since(1, last_rendered)) {
         return;
       }
       last_rendered = time_get_time_ms_cached();
     }
   } else {
-    if (!time_have_x_tenths_passed_since(1, last_rendered)) {
+    if (! time_have_x_tenths_passed_since(1, last_rendered)) {
       return;
     }
     last_rendered = time_get_time_ms_cached();
@@ -52,9 +52,9 @@ void Level::update_minimap (bool showing_two_levels, bool show_faded)
   float dy = 1;
 
   static Texp solid_tex;
-  static int solid_tex_id;
-  if (!solid_tex) {
-    solid_tex = tex_load("", "solid", GL_LINEAR);
+  static int  solid_tex_id;
+  if (! solid_tex) {
+    solid_tex    = tex_load("", "solid", GL_LINEAR);
     solid_tex_id = tex_get_gl_binding(solid_tex);
   }
 
@@ -67,28 +67,25 @@ void Level::update_minimap (bool showing_two_levels, bool show_faded)
           c = RED;
         } else if (is_minion_generator(x, y)) {
           c = PINK;
-        } else if (player &&
-          (x == (int)player->mid_at.x) &&
-          (y == (int)player->mid_at.y)) {
+        } else if (player && (x == (int) player->mid_at.x) && (y == (int) player->mid_at.y)) {
           c = PINK;
         } else if (is_door(x, y)) {
           c = BROWN;
         } else if (is_lava(x, y)) {
           c = ORANGE;
         } else if (is_wall(x, y)) {
-             if (is_lit_ever(x, y)) {
+          if (is_lit_ever(x, y)) {
             c = GRAY80;
           } else {
             c = GRAY70;
           }
         } else if (is_rock(x, y)) {
-             if (is_lit_ever(x, y)) {
+          if (is_lit_ever(x, y)) {
             c = GRAY70;
           } else {
             c = GRAY60;
           }
-        } else if (is_floor(x, y) ||
-               is_corridor(x, y)) {
+        } else if (is_floor(x, y) || is_corridor(x, y)) {
           if (is_lit_ever(x, y)) {
             c = GRAY40;
           } else {
@@ -120,32 +117,31 @@ void Level::update_minimap (bool showing_two_levels, bool show_faded)
           c = BLACK;
         }
 
-        if (!is_lit_recently(x, y)) {
+        if (! is_lit_recently(x, y)) {
           c.r /= 2;
           c.g /= 2;
           c.b /= 2;
         }
 
-        if (!is_lit_ever(x, y)) {
+        if (! is_lit_ever(x, y)) {
           c.r /= 2;
           c.g /= 2;
           c.b /= 2;
         }
 
-        if (!x || !y) {
-          c = GRAY;
+        if (! x || ! y) {
+          c   = GRAY;
           c.a = 200;
         } else if ((x == MAP_WIDTH - 1) || (y == MAP_HEIGHT - 1)) {
-          c = DARKGRAY;
+          c   = DARKGRAY;
           c.a = 200;
         }
 
         if ((x > 0) && (y > 0) && (x < MAP_WIDTH) && (y < MAP_HEIGHT)) {
-          if ((game->minimap_over.x == x) &&
-            (game->minimap_over.y == y)) {
+          if ((game->minimap_over.x == x) && (game->minimap_over.y == y)) {
             c = YELLOW;
           }
-          if (!game->robot_mode) {
+          if (! game->robot_mode) {
             if ((cursor_at.x == x) && (cursor_at.y == y)) {
               c = YELLOW;
             }
@@ -170,8 +166,8 @@ void Level::update_minimap (bool showing_two_levels, bool show_faded)
 
         glcolor(c);
 
-        auto X = x;
-        auto Y = MAP_HEIGHT - y;
+        auto X   = x;
+        auto Y   = MAP_HEIGHT - y;
         auto tlx = X * dx;
         auto tly = Y * dy;
         auto brx = tlx + dx;
@@ -187,48 +183,43 @@ void Level::update_minimap (bool showing_two_levels, bool show_faded)
       for (auto x = 0; x < MAP_WIDTH; x++) {
         color c = WHITE;
 
-        bool edge_of_sceen =
-          ((y == miny) && (x >= minx) && (x <= maxx)) ||
-          ((y == maxy) && (x >= minx) && (x <= maxx)) ||
-          ((x == minx) && (y >= miny) && (y <= maxy)) ||
-          ((x == maxx) && (y >= miny) && (y <= maxy));
+        bool edge_of_sceen = ((y == miny) && (x >= minx) && (x <= maxx)) ||
+                             ((y == maxy) && (x >= minx) && (x <= maxx)) ||
+                             ((x == minx) && (y >= miny) && (y <= maxy)) || ((x == maxx) && (y >= miny) && (y <= maxy));
 
         edge_of_sceen = false; // Not sure I like seeing this
 
-        if (!is_lit_ever(x, y)) {
+        if (! is_lit_ever(x, y)) {
           if (edge_of_sceen) {
-            c = DARKRED;
+            c   = DARKRED;
             c.a = 100;
           } else {
-            c = BLACK;
+            c   = BLACK;
             c.a = 100;
           }
         } else if (is_monst(x, y)) {
           c = RED;
         } else if (is_minion_generator(x, y)) {
           c = PINK;
-        } else if (player &&
-          (x == (int)player->mid_at.x) &&
-          (y == (int)player->mid_at.y)) {
+        } else if (player && (x == (int) player->mid_at.x) && (y == (int) player->mid_at.y)) {
           c = WHITE;
         } else if (is_door(x, y)) {
           c = BROWN;
         } else if (is_lava(x, y)) {
           c = ORANGE;
         } else if (is_wall(x, y)) {
-             if (is_lit_ever(x, y)) {
+          if (is_lit_ever(x, y)) {
             c = GRAY50;
           } else {
             c = GRAY20;
           }
         } else if (is_rock(x, y)) {
-             if (is_lit_ever(x, y)) {
+          if (is_lit_ever(x, y)) {
             c = GRAY70;
           } else {
             c = GRAY60;
           }
-        } else if (is_floor(x, y) ||
-               is_corridor(x, y)) {
+        } else if (is_floor(x, y) || is_corridor(x, y)) {
           if (is_lit_ever(x, y)) {
             c = GRAY20;
           } else {
@@ -268,7 +259,7 @@ void Level::update_minimap (bool showing_two_levels, bool show_faded)
           }
         }
 
-        if (!is_lit_recently(x, y)) {
+        if (! is_lit_recently(x, y)) {
           c.r /= 2;
           c.g /= 2;
           c.b /= 2;
@@ -287,11 +278,10 @@ void Level::update_minimap (bool showing_two_levels, bool show_faded)
 #endif
 
         if ((x > 0) && (y > 0) && (x < MAP_WIDTH) && (y < MAP_HEIGHT)) {
-          if ((game->minimap_over.x == x) &&
-            (game->minimap_over.y == y)) {
+          if ((game->minimap_over.x == x) && (game->minimap_over.y == y)) {
             c = YELLOW;
           }
-          if (!game->robot_mode) {
+          if (! game->robot_mode) {
             if ((cursor_at.x == x) && (cursor_at.y == y)) {
               c = YELLOW;
             }
@@ -316,8 +306,8 @@ void Level::update_minimap (bool showing_two_levels, bool show_faded)
 
         glcolor(c);
 
-        auto X = x;
-        auto Y = MAP_HEIGHT - y;
+        auto X   = x;
+        auto Y   = MAP_HEIGHT - y;
         auto tlx = X * dx;
         auto tly = Y * dy;
         auto brx = tlx + dx;

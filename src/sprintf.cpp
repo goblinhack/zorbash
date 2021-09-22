@@ -5,15 +5,15 @@
 #include <stdarg.h>
 
 // https://stackoverflow.com/questions/40159892/using-asprintf-on-windows
-#include <stdio.h> /* needed for vsnprintf */
+#include <stdio.h>  /* needed for vsnprintf */
 #include <stdlib.h> /* needed for malloc-free */
 #include <stdarg.h> /* needed for va_list */
 
 #ifndef _vscprintf
 /* For some reason, MSVC fails to honour this #ifndef. */
 /* Hence function renamed to _vscprintf_so(). */
-static int _vscprintf_so(const char * format, va_list pargs) {
-  int retval;
+static int _vscprintf_so(const char *format, va_list pargs) {
+  int     retval;
   va_list argcopy;
   va_copy(argcopy, pargs);
   retval = vsnprintf(NULL, 0, format, argcopy);
@@ -25,11 +25,14 @@ static int _vscprintf_so(const char * format, va_list pargs) {
 #ifndef vasprintf
 int vasprintf(char **strp, const char *fmt, va_list ap) {
   int len = _vscprintf_so(fmt, ap);
-  if (len == -1) return -1;
-  char *str = (char*) malloc((size_t) len + 1);
-  if (!str) return -1;
+  if (len == -1)
+    return -1;
+  char *str = (char *) malloc((size_t) len + 1);
+  if (! str)
+    return -1;
   int r = vsnprintf(str, len + 1, fmt, ap); /* "secure" version of vsprintf */
-  if (r == -1) return free(str), -1;
+  if (r == -1)
+    return free(str), -1;
   *strp = str;
   return r;
 }
@@ -41,13 +44,13 @@ int asprintf(char *strp[], const char *fmt, ...) {
   va_start(ap, fmt);
   int r = vasprintf(strp, fmt, ap);
   va_end(ap);
-  return r;}
+  return r;
+}
 #endif // asprintf
 
-std::string string_sprintf (const char *format, ...)
-{
+std::string string_sprintf(const char *format, ...) {
   va_list args;
-  char *buf;
+  char *  buf;
 
   va_start(args, format);
 
@@ -63,8 +66,7 @@ std::string string_sprintf (const char *format, ...)
   return (ret);
 }
 
-std::string string_sprintf (const char *format, va_list args)
-{
+std::string string_sprintf(const char *format, va_list args) {
   char *buf;
 
   if (asprintf(&buf, format, args) == -1) {

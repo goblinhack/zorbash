@@ -14,12 +14,12 @@
 #include "my_monst.h"
 #include "my_ptrcheck.h"
 
-Thingp Thing::get_top_owner (void) const
-{ TRACE_AND_INDENT();
+Thingp Thing::get_top_owner(void) const {
+  TRACE_AND_INDENT();
   auto id = get_immediate_owner_id();
   if (likely(id.ok())) {
     auto i = level->thing_find(id);
-    if (unlikely(!i)) {
+    if (unlikely(! i)) {
       return nullptr;
     }
     if (unlikely(i->get_immediate_owner_id().ok())) {
@@ -31,12 +31,12 @@ Thingp Thing::get_top_owner (void) const
   }
 }
 
-Thingp Thing::get_immediate_owner (void) const
-{ TRACE_AND_INDENT();
+Thingp Thing::get_immediate_owner(void) const {
+  TRACE_AND_INDENT();
   auto id = get_immediate_owner_id();
   if (likely(id.ok())) {
     auto i = level->thing_find(id);
-    if (unlikely(!i)) {
+    if (unlikely(! i)) {
       return nullptr;
     }
     return i;
@@ -45,8 +45,8 @@ Thingp Thing::get_immediate_owner (void) const
   }
 }
 
-void Thing::set_owner (Thingp owner)
-{ TRACE_AND_INDENT();
+void Thing::set_owner(Thingp owner) {
+  TRACE_AND_INDENT();
   if (owner) {
     verify(owner);
   }
@@ -58,8 +58,7 @@ void Thing::set_owner (Thingp owner)
     }
 
     if (owner) {
-      dbg("Will change owner %s->%s", old_owner->to_string().c_str(),
-        owner->to_string().c_str());
+      dbg("Will change owner %s->%s", old_owner->to_string().c_str(), owner->to_string().c_str());
     } else {
       dbg("Will remove owner %s", old_owner->to_string().c_str());
     }
@@ -80,10 +79,10 @@ void Thing::set_owner (Thingp owner)
   }
 }
 
-void Thing::remove_owner (void)
-{ TRACE_AND_INDENT();
+void Thing::remove_owner(void) {
+  TRACE_AND_INDENT();
   auto old_owner = get_immediate_owner();
-  if (!old_owner) {
+  if (! old_owner) {
     return;
   }
 
@@ -99,37 +98,36 @@ void Thing::remove_owner (void)
   location_check();
 }
 
-bool Thing::change_owner (Thingp new_owner)
-{ TRACE_AND_INDENT();
-  if (!new_owner) {
+bool Thing::change_owner(Thingp new_owner) {
+  TRACE_AND_INDENT();
+  if (! new_owner) {
     err("No new owner");
-  return true;
+    return true;
   }
 
   auto old_owner = get_immediate_owner();
-  if (!old_owner) {
+  if (! old_owner) {
     return true;
   }
 
   if (new_owner == old_owner) {
-  return true;
+    return true;
   }
 
-  dbg("Change owner from %s to %s",
-  old_owner->to_string().c_str(), new_owner->to_string().c_str());
+  dbg("Change owner from %s to %s", old_owner->to_string().c_str(), new_owner->to_string().c_str());
 
   if (old_owner->is_player()) {
-  if (!old_owner->inventory_id_remove(this)) {
-    err("Failed to remove %s from inventory", to_string().c_str());
-    return false;
-  }
+    if (! old_owner->inventory_id_remove(this)) {
+      err("Failed to remove %s from inventory", to_string().c_str());
+      return false;
+    }
   }
 
   old_owner->monstp->carrying.remove(id);
 
   hooks_remove();
 
-  if (!new_owner->carry(this)) {
+  if (! new_owner->carry(this)) {
     err("New owner could not carry");
     return false;
   }
@@ -138,7 +136,7 @@ bool Thing::change_owner (Thingp new_owner)
   // Sanity check
   //
   auto changed_owner = get_immediate_owner();
-  if (!changed_owner) {
+  if (! changed_owner) {
     err("Owner change failed");
     return false;
   }

@@ -15,11 +15,11 @@
 #include "my_ui.h"
 #include "my_ptrcheck.h"
 
-bool Thing::skill_add (Thingp what)
-{ TRACE_AND_INDENT();
+bool Thing::skill_add(Thingp what) {
+  TRACE_AND_INDENT();
   dbg("Try to add skill %s", what->to_string().c_str());
   TRACE_AND_INDENT();
-  if (!monstp) {
+  if (! monstp) {
     dbg("No; not a monst");
     return false;
   }
@@ -33,7 +33,7 @@ bool Thing::skill_add (Thingp what)
     existing_owner->drop(what);
   }
 
-  for (const auto& item : monstp->skills) {
+  for (const auto &item : monstp->skills) {
     if (item == what->id) {
       dbg("No; already carried");
       return false;
@@ -41,7 +41,7 @@ bool Thing::skill_add (Thingp what)
   }
 
   if (is_player()) {
-    if (!skillbox_id_insert(what)) {
+    if (! skillbox_id_insert(what)) {
       dbg("No; no space in skillbox");
       return false;
     }
@@ -60,14 +60,13 @@ bool Thing::skill_add (Thingp what)
   return true;
 }
 
-bool Thing::skill_remove (Thingp what)
-{ TRACE_AND_INDENT();
+bool Thing::skill_remove(Thingp what) {
+  TRACE_AND_INDENT();
   dbg("Removing skill %s", what->to_string().c_str());
   TRACE_AND_INDENT();
   auto existing_owner = what->get_immediate_owner();
   if (existing_owner != this) {
-    err("Attempt to remove skill %s which is not owned",
-      what->to_string().c_str());
+    err("Attempt to remove skill %s which is not owned", what->to_string().c_str());
     return false;
   }
 
@@ -86,7 +85,8 @@ bool Thing::skill_remove (Thingp what)
 
   dbg("Update bag with drop of: %s", what->to_string().c_str());
   bag_remove(what);
-  while (bag_compress()) { }
+  while (bag_compress()) {
+  }
 
   what->remove_owner();
   monstp->skills.remove(what->id);
@@ -97,49 +97,49 @@ bool Thing::skill_remove (Thingp what)
   return true;
 }
 
-void Thing::skill_remove_all (void)
-{ TRACE_AND_INDENT();
-  if (!monstp) {
+void Thing::skill_remove_all(void) {
+  TRACE_AND_INDENT();
+  if (! monstp) {
     return;
   }
 
-  while (!monstp->skills.empty()) {
+  while (! monstp->skills.empty()) {
     auto id = *monstp->skills.begin();
-    auto t = level->thing_find(id);
-    if (!t) {
+    auto t  = level->thing_find(id);
+    if (! t) {
       return;
     }
     skill_remove(t);
   }
 }
 
-bool Thing::skill_use (Thingp what)
-{ TRACE_AND_INDENT();
+bool Thing::skill_use(Thingp what) {
+  TRACE_AND_INDENT();
   dbg("Try to use skill %s", what->to_string().c_str());
   used(what, this, false /* remove after use */);
   return true;
 }
 
-void Thing::skill_deactivate (Thingp what)
-{ TRACE_AND_INDENT();
-  what->is_activated = false;
+void Thing::skill_deactivate(Thingp what) {
+  TRACE_AND_INDENT();
+  what->is_activated            = false;
   game->request_remake_skillbox = true;
 }
 
-void Thing::skill_activate (Thingp what)
-{ TRACE_AND_INDENT();
-  what->is_activated = true;
+void Thing::skill_activate(Thingp what) {
+  TRACE_AND_INDENT();
+  what->is_activated            = true;
   game->request_remake_skillbox = true;
 }
 
-int Thing::skill_enchant_count (const uint32_t slot)
-{ TRACE_AND_INDENT();
-  if (!monstp) {
+int Thing::skill_enchant_count(const uint32_t slot) {
+  TRACE_AND_INDENT();
+  if (! monstp) {
     return 0;
   }
 
   auto tp_id = get(monstp->skillbox_id, slot);
-  if (!tp_id) {
+  if (! tp_id) {
     return 0;
   }
 
@@ -155,10 +155,10 @@ int Thing::skill_enchant_count (const uint32_t slot)
   return 0;
 }
 
-bool Thing::add_skill (Tpp what)
-{ TRACE_AND_INDENT();
+bool Thing::add_skill(Tpp what) {
+  TRACE_AND_INDENT();
   auto t = level->thing_new(what, mid_at);
-  if (!t) {
+  if (! t) {
     err("Cannot learn skill");
     return false;
   }
@@ -172,7 +172,7 @@ bool Thing::add_skill (Tpp what)
   auto found = false;
   for (auto id : monstp->carrying) {
     auto t = level->thing_find(id);
-    if (!t) {
+    if (! t) {
       continue;
     }
     if (t->is_skillstone()) {
@@ -181,7 +181,7 @@ bool Thing::add_skill (Tpp what)
       break;
     }
   }
-  if (!found) {
+  if (! found) {
     err("no skillstone found");
   }
 

@@ -7,12 +7,12 @@
 #define __MAIN__
 
 #include <strings.h> // do not remove
-#include <string.h> // do not remove
-#include <time.h> // do not remove
-#include <unistd.h> // do not remove
-#include <libgen.h> // dirname
-#include <signal.h> // dirname
-#include <random>  // std::default_random_engine
+#include <string.h>  // do not remove
+#include <time.h>    // do not remove
+#include <unistd.h>  // do not remove
+#include <libgen.h>  // dirname
+#include <signal.h>  // dirname
+#include <random>    // std::default_random_engine
 std::default_random_engine rng;
 
 #include "my_sys.h"
@@ -44,8 +44,8 @@ std::default_random_engine rng;
 
 static char **ARGV;
 
-void quit (void)
-{ TRACE_AND_INDENT();
+void quit(void) {
+  TRACE_AND_INDENT();
   LOG("FINI: Quitting, start cleanup");
 
   if (g_quitting) {
@@ -56,10 +56,10 @@ void quit (void)
   g_quitting = true;
 
 #ifdef ENABLE_CRASH_HANDLER
-  signal(SIGSEGV, 0);   // uninstall our handler
-  signal(SIGABRT, 0);   // uninstall our handler
-  signal(SIGINT, 0);    // uninstall our handler
-  signal(SIGPIPE, 0);   // uninstall our handler
+  signal(SIGSEGV, 0); // uninstall our handler
+  signal(SIGABRT, 0); // uninstall our handler
+  signal(SIGINT, 0);  // uninstall our handler
+  signal(SIGPIPE, 0); // uninstall our handler
 #endif
 
   if (game) {
@@ -159,7 +159,7 @@ void quit (void)
   }
 
 #ifdef ENABLE_DEBUG_MEM_LEAKS
-  if (!g_die_occurred) {
+  if (! g_die_occurred) {
     ptrcheck_leak_print();
   }
 #endif
@@ -173,9 +173,9 @@ void quit (void)
   python_fini();
 }
 
-void restart (void)
-{ TRACE_AND_INDENT();
-  char *args[] = { 0, 0 };
+void restart(void) {
+  TRACE_AND_INDENT();
+  char *args[]     = {0, 0};
   char *executable = ARGV[0];
 
   LOG("Run %s", executable);
@@ -185,8 +185,8 @@ void restart (void)
   execve(executable, (char *const *) args, 0);
 }
 
-void die (void)
-{ TRACE_AND_INDENT();
+void die(void) {
+  TRACE_AND_INDENT();
   quit();
 
   LOG("Bye, error exit");
@@ -198,14 +198,14 @@ void die (void)
 //
 // Find the binary we are running.
 //
-static void find_executable (void)
-{ TRACE_AND_INDENT();
-  char *parent_dir = 0;
-  char *curr_dir = 0;
-  std::string exec_name = "";
-  char *exec_expanded_name = 0;
-  char *path = 0;
-  char *tmp;
+static void find_executable(void) {
+  TRACE_AND_INDENT();
+  char *      parent_dir         = 0;
+  char *      curr_dir           = 0;
+  std::string exec_name          = "";
+  char *      exec_expanded_name = 0;
+  char *      path               = 0;
+  char *      tmp;
 
   exec_name = mybasename(ARGV[0], __FUNCTION__);
   CON("INI: Will use EXEC_NAME as '%s'", exec_name.c_str());
@@ -214,7 +214,7 @@ static void find_executable (void)
   // Get the current directory, ending in a single /
   //
   curr_dir = dynprintf("%s" DIR_SEP, dir_dot());
-  tmp = strsub(curr_dir, DIR_SEP DIR_SEP, DIR_SEP, "curr_dir");
+  tmp      = strsub(curr_dir, DIR_SEP DIR_SEP, DIR_SEP, "curr_dir");
   myfree(curr_dir);
   curr_dir = tmp;
 
@@ -222,7 +222,7 @@ static void find_executable (void)
   // Get the parent directory, ending in a single /
   //
   parent_dir = dynprintf("%s" DIR_SEP, dir_dotdot(dir_dot()));
-  tmp = strsub(parent_dir, DIR_SEP DIR_SEP, DIR_SEP, "parent_dir");
+  tmp        = strsub(parent_dir, DIR_SEP DIR_SEP, DIR_SEP, "parent_dir");
   myfree(parent_dir);
   parent_dir = tmp;
 
@@ -298,7 +298,7 @@ static void find_executable (void)
   }
 
   EXEC_FULL_PATH_AND_NAME = dupstr(exec_expanded_name, "full path");
-  EXEC_DIR = dupstr(dirname(exec_expanded_name), "exec dir");
+  EXEC_DIR                = dupstr(dirname(exec_expanded_name), "exec dir");
 
 cleanup:
   auto new_EXEC_DIR = strsub(EXEC_DIR, "/", DIR_SEP, "EXEC_DIR");
@@ -330,14 +330,14 @@ cleanup:
 //
 // Find all installed file locations.
 //
-static void find_exec_dir (void)
-{ TRACE_AND_INDENT();
+static void find_exec_dir(void) {
+  TRACE_AND_INDENT();
   find_executable();
 
   //
   // Make sure the exec dir ends in a /
   //
-  auto tmp = dynprintf("%s" DIR_SEP, EXEC_DIR);
+  auto tmp  = dynprintf("%s" DIR_SEP, EXEC_DIR);
   auto tmp2 = strsub(tmp, "//", DIR_SEP, "EXEC_DIR");
   auto tmp3 = strsub(tmp2, "\\\\", DIR_SEP, "EXEC_DIR");
   auto tmp4 = strsub(tmp3, "/", DIR_SEP, "EXEC_DIR");
@@ -357,8 +357,8 @@ static void find_exec_dir (void)
 //
 // Hunt down the data/ dir.
 //
-static void find_data_dir (void)
-{ TRACE_AND_INDENT();
+static void find_data_dir(void) {
+  TRACE_AND_INDENT();
   DATA_PATH = dynprintf("%sdata" DIR_SEP, EXEC_DIR);
   if (dir_exists(DATA_PATH)) {
     return;
@@ -372,16 +372,16 @@ static void find_data_dir (void)
 //
 // Hunt down the python/ dir.
 //
-static void find_python_dir (void)
-{ TRACE_AND_INDENT();
+static void find_python_dir(void) {
+  TRACE_AND_INDENT();
   EXEC_PYTHONPATH = dynprintf("%spython%s" DIR_SEP, EXEC_DIR, PYVER);
 }
 
 //
 // Hunt down the world/ dir.
 //
-static void find_world_dir (void)
-{ TRACE_AND_INDENT();
+static void find_world_dir(void) {
+  TRACE_AND_INDENT();
   WORLD_PATH = dynprintf("%sdata" DIR_SEP "world" DIR_SEP, EXEC_DIR);
   if (dir_exists(WORLD_PATH)) {
     return;
@@ -395,8 +395,8 @@ static void find_world_dir (void)
 //
 // Hunt down the fonts/ dir.
 //
-static void find_ttf_dir (void)
-{ TRACE_AND_INDENT();
+static void find_ttf_dir(void) {
+  TRACE_AND_INDENT();
   TTF_PATH = dynprintf("%sdata" DIR_SEP "ttf" DIR_SEP, EXEC_DIR);
   if (dir_exists(TTF_PATH)) {
     return;
@@ -410,8 +410,8 @@ static void find_ttf_dir (void)
 //
 // Hunt down the gfx/ dir.
 //
-static void find_gfx_dir (void)
-{ TRACE_AND_INDENT();
+static void find_gfx_dir(void) {
+  TRACE_AND_INDENT();
   GFX_PATH = dynprintf("%sdata" DIR_SEP "gfx" DIR_SEP, EXEC_DIR);
   if (dir_exists(GFX_PATH)) {
     return;
@@ -425,8 +425,8 @@ static void find_gfx_dir (void)
 //
 // Find all installed file locations.
 //
-static void find_file_locations (void)
-{ TRACE_AND_INDENT();
+static void find_file_locations(void) {
+  TRACE_AND_INDENT();
   find_exec_dir();
   find_data_dir();
   find_python_dir();
@@ -438,8 +438,8 @@ static void find_file_locations (void)
   DBG("Font path   : \"%s\"", TTF_PATH);
 }
 
-static void usage (void)
-{ TRACE_AND_INDENT();
+static void usage(void) {
+  TRACE_AND_INDENT();
   static int whinged;
 
   if (whinged) {
@@ -462,8 +462,8 @@ static void usage (void)
   CON("Written by goblinhack@gmail.com");
 }
 
-static void parse_args (int32_t argc, char *argv[])
-{ TRACE_AND_INDENT();
+static void parse_args(int32_t argc, char *argv[]) {
+  TRACE_AND_INDENT();
   int32_t i;
 
   //
@@ -479,87 +479,73 @@ static void parse_args (int32_t argc, char *argv[])
   }
 
   for (i = 1; i < argc; i++) {
-    if (!strcasecmp(argv[i], "--quick-start") ||
-      !strcasecmp(argv[i], "-quick-start") ||
-      !strcasecmp(argv[i], "--quickstart") ||
-      !strcasecmp(argv[i], "-quickstart")) {
+    if (! strcasecmp(argv[i], "--quick-start") || ! strcasecmp(argv[i], "-quick-start") ||
+        ! strcasecmp(argv[i], "--quickstart") || ! strcasecmp(argv[i], "-quickstart")) {
       g_opt_new_game = true;
       continue;
     }
 
-    if (!strcasecmp(argv[i], "--seed") ||
-      !strcasecmp(argv[i], "-seed") ||
-      !strcasecmp(argv[i], "-s")) {
+    if (! strcasecmp(argv[i], "--seed") || ! strcasecmp(argv[i], "-seed") || ! strcasecmp(argv[i], "-s")) {
       g_opt_seed_name = argv[i + 1];
       i++;
       continue;
     }
 
-    if (!strcasecmp(argv[i], "--player-name") ||
-      !strcasecmp(argv[i], "-player-name") ||
-      !strcasecmp(argv[i], "--playername") ||
-      !strcasecmp(argv[i], "-playername")) {
+    if (! strcasecmp(argv[i], "--player-name") || ! strcasecmp(argv[i], "-player-name") ||
+        ! strcasecmp(argv[i], "--playername") || ! strcasecmp(argv[i], "-playername")) {
       g_opt_player_name = argv[i + 1];
       i++;
       continue;
     }
 
-    if (!strcasecmp(argv[i], "--no-debug") ||
-      !strcasecmp(argv[i], "-no-debug") ||
-      !strcasecmp(argv[i], "--nodebug") ||
-      !strcasecmp(argv[i], "-nodebug")) {
-      g_opt_debug1 = false;
-      g_opt_debug2 = false;
-      g_opt_debug3 = false;
-      g_opt_debug4 = false;
-      g_opt_debug5 = false;
+    if (! strcasecmp(argv[i], "--no-debug") || ! strcasecmp(argv[i], "-no-debug") ||
+        ! strcasecmp(argv[i], "--nodebug") || ! strcasecmp(argv[i], "-nodebug")) {
+      g_opt_debug1               = false;
+      g_opt_debug2               = false;
+      g_opt_debug3               = false;
+      g_opt_debug4               = false;
+      g_opt_debug5               = false;
       g_opt_override_debug_level = true;
       continue;
     }
 
-    if (!strcasecmp(argv[i], "--debug")  ||
-      !strcasecmp(argv[i], "-debug")   ||
-      !strcasecmp(argv[i], "--debug1") ||
-      !strcasecmp(argv[i], "-debug1")) {
-      g_opt_debug1 = true;
+    if (! strcasecmp(argv[i], "--debug") || ! strcasecmp(argv[i], "-debug") || ! strcasecmp(argv[i], "--debug1") ||
+        ! strcasecmp(argv[i], "-debug1")) {
+      g_opt_debug1               = true;
       g_opt_override_debug_level = true;
       continue;
     }
 
-    if (!strcasecmp(argv[i], "--debug2") ||
-      !strcasecmp(argv[i], "-debug2")) {
-      g_opt_debug1 = true;
-      g_opt_debug2 = true;
+    if (! strcasecmp(argv[i], "--debug2") || ! strcasecmp(argv[i], "-debug2")) {
+      g_opt_debug1               = true;
+      g_opt_debug2               = true;
       g_opt_override_debug_level = true;
       continue;
     }
 
-    if (!strcasecmp(argv[i], "--debug3") ||
-      !strcasecmp(argv[i], "-debug3")) {
-      g_opt_debug1 = true;
-      g_opt_debug2 = true;
-      g_opt_debug3 = true;
+    if (! strcasecmp(argv[i], "--debug3") || ! strcasecmp(argv[i], "-debug3")) {
+      g_opt_debug1               = true;
+      g_opt_debug2               = true;
+      g_opt_debug3               = true;
       g_opt_override_debug_level = true;
       continue;
     }
 
-    if (!strcasecmp(argv[i], "--debug4") ||
-      !strcasecmp(argv[i], "-debug4")) {
-      g_opt_debug1 = true;
-      g_opt_debug2 = true;
-      g_opt_debug3 = true;
-      g_opt_debug4 = true;
+    if (! strcasecmp(argv[i], "--debug4") || ! strcasecmp(argv[i], "-debug4")) {
+      g_opt_debug1               = true;
+      g_opt_debug2               = true;
+      g_opt_debug3               = true;
+      g_opt_debug4               = true;
       g_opt_override_debug_level = true;
       continue;
     }
 
-    if (!strcasecmp(argv[i], "--debug5") ||
-      !strcasecmp(argv[i], "-debug5")) {
-      g_opt_debug1 = true;
-      g_opt_debug2 = true;
-      g_opt_debug3 = true;
-      g_opt_debug4 = true;
-      g_opt_debug5 = true;
+    if (! strcasecmp(argv[i], "--debug5") || ! strcasecmp(argv[i], "-debug5")) {
+      g_opt_debug1               = true;
+      g_opt_debug2               = true;
+      g_opt_debug3               = true;
+      g_opt_debug4               = true;
+      g_opt_debug5               = true;
       g_opt_override_debug_level = true;
       continue;
     }
@@ -580,11 +566,10 @@ static void parse_args (int32_t argc, char *argv[])
 //
 // Where all logs go
 //
-static std::string create_appdata_dir (void)
-{
+static std::string create_appdata_dir(void) {
   const char *appdata;
   appdata = getenv("APPDATA");
-  if (!appdata || !appdata[0]) {
+  if (! appdata || ! appdata[0]) {
     appdata = "appdata";
   }
 
@@ -602,10 +587,10 @@ static std::string create_appdata_dir (void)
 #endif
   myfree(dir);
 
-  char *out = dynprintf("%s%s%s%s%s", appdata, DIR_SEP, "zorbash", DIR_SEP, "stdout.txt");
+  char *out    = dynprintf("%s%s%s%s%s", appdata, DIR_SEP, "zorbash", DIR_SEP, "stdout.txt");
   g_log_stdout = fopen(out, "w+");
 
-  char *err = dynprintf("%s%s%s%s%s", appdata, DIR_SEP, "zorbash", DIR_SEP, "stderr.txt");
+  char *err    = dynprintf("%s%s%s%s%s", appdata, DIR_SEP, "zorbash", DIR_SEP, "stderr.txt");
   g_log_stderr = fopen(err, "w+");
 
   LOG("INI: Will use STDOUT as '%s'", out);
@@ -617,8 +602,8 @@ static std::string create_appdata_dir (void)
   return std::string(appdata);
 }
 
-int32_t main (int32_t argc, char *argv[])
-{ TRACE_AND_INDENT();
+int32_t main(int32_t argc, char *argv[]) {
+  TRACE_AND_INDENT();
   ARGV = argv;
 
   auto appdata = create_appdata_dir(); // Want this first so we get all logs
@@ -689,7 +674,7 @@ int32_t main (int32_t argc, char *argv[])
   }
 
   CON("INI: SDL create window");
-  if (!sdl_init()) {
+  if (! sdl_init()) {
     ERR("SDL init");
   }
 
@@ -714,11 +699,11 @@ int32_t main (int32_t argc, char *argv[])
   // Random number generators
   //
   CON("INI: Create random number generators");
-  double mean = 1.0;
-  double std = 0.5;
+  double                           mean = 1.0;
+  double                           std  = 0.5;
   std::normal_distribution<double> distribution;
   distribution.param(std::normal_distribution<double>(mean, std).param());
-  rng.seed(std::random_device{}());
+  rng.seed(std::random_device {}());
 
 #ifdef ENABLE_CRASH_HANDLER
   //
@@ -754,17 +739,17 @@ int32_t main (int32_t argc, char *argv[])
 #endif
 
   CON("INI: Create UI fonts");
-  if (!font_init()) {
+  if (! font_init()) {
     ERR("Font init");
   }
 
   CON("INI: Load UI widgets");
-  if (!wid_init()) {
+  if (! wid_init()) {
     ERR("Wid init");
   }
 
   CON("INI: Load UI console");
-  if (!wid_console_init()) {
+  if (! wid_console_init()) {
     ERR("Wid_console init");
   }
   wid_toggle_hidden(wid_console_window);
@@ -772,43 +757,43 @@ int32_t main (int32_t argc, char *argv[])
   ////////////////////////////////////////////////////////////////////////////////////////////////////
 
   CON("INI: Load UI tiles");
-  if (!wid_tiles_init()) {
+  if (! wid_tiles_init()) {
     ERR("Wid tiles init");
   }
   ////////////////////////////////////////////////////////////////////////////////////////////////////
 
   CON("INI: Load UI and gfx tiles");
-  if (!tile_init()) {
+  if (! tile_init()) {
     ERR("Tile init");
   }
   ////////////////////////////////////////////////////////////////////////////////////////////////////
 
   CON("INI: Load textures");
-  if (!tex_init()) {
+  if (! tex_init()) {
     ERR("Tex init");
   }
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////
   CON("INI: Init audio");
-  if (!audio_init()) {
+  if (! audio_init()) {
     ERR("Audio init");
   }
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////
   CON("INI: Load music");
-  if (!music_init()) {
+  if (! music_init()) {
     ERR("Music init");
   }
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////
   CON("INI: Load sound");
-  if (!sound_init()) {
+  if (! sound_init()) {
     ERR("Sound init");
   }
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////
   CON("INI: Load UI topcon");
-  if (!wid_topcon_init()) {
+  if (! wid_topcon_init()) {
     ERR("Wid_topcon init");
   }
 
@@ -819,7 +804,7 @@ int32_t main (int32_t argc, char *argv[])
   ////////////////////////////////////////////////////////////////////////////////////////////////////
   //
   CON("INI: Load UI botcon");
-  if (!wid_botcon_init()) {
+  if (! wid_botcon_init()) {
     ERR("Wid_botcon init");
   }
   ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -829,7 +814,7 @@ int32_t main (int32_t argc, char *argv[])
   ////////////////////////////////////////////////////////////////////////////////////////////////////
 
   CON("INI: Load UI commands");
-  if (!command_init()) {
+  if (! command_init()) {
     ERR("Command init");
   }
   ////////////////////////////////////////////////////////////////////////////////////////////////////

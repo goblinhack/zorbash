@@ -18,11 +18,11 @@
 #include "my_sprintf.h"
 #include "my_globals.h"
 
-void Traceback::init (void) {
+void Traceback::init(void) {
 #ifndef _WIN32
   size = backtrace(&tb[0], tb.size());
 #else
-  size = 0;
+  size                 = 0;
 #endif
 }
 
@@ -30,26 +30,23 @@ void Traceback::init (void) {
 // Inspired from https://github.com/nico/demumble/issues
 //
 #ifndef _WIN32
-static bool starts_with(const char* s, const char* prefix) {
-  return strncmp(s, prefix, strlen(prefix)) == 0;
-}
+static bool starts_with(const char *s, const char *prefix) { return strncmp(s, prefix, strlen(prefix)) == 0; }
 
 static bool is_mangle_char_posix(char c) {
-  return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') ||
-    (c >= '0' && c <= '9') || c == '_';
+  return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9') || c == '_';
 }
 
 static bool is_mangle_char_win(char c) {
-  return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') ||
-    (c >= '0' && c <= '9') || strchr("?_@$", c);
+  return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9') || strchr("?_@$", c);
 }
 
-static bool is_plausible_itanium_prefix(char* s) {
+static bool is_plausible_itanium_prefix(char *s) {
   // Itanium symbols start with 1-4 underscores followed by Z.
   // strnstr() is BSD, so use a small local buffer and strstr().
-  const int N = 5;  // == strlen("____Z")
-  char prefix[N + 1];
-  strncpy(prefix, s, N); prefix[N] = '\0';
+  const int N = 5; // == strlen("____Z")
+  char      prefix[N + 1];
+  strncpy(prefix, s, N);
+  prefix[N] = '\0';
   return strstr(prefix, "_Z");
 }
 #endif
@@ -63,22 +60,24 @@ static bool is_plausible_itanium_prefix(char* s) {
 // c++filt -n _ZNK3MapI10StringName3RefI8GDScriptE10ComparatorIS0_E16DefaultAllocatorE3hasERKS0_
 // Map<StringName, Ref<GDScript>, Comparator<StringName>, DefaultAllocator>::has(StringName const&) const
 //
-static auto cppDemangle (const char *abiName)
-{
+static auto cppDemangle(const char *abiName) {
   //
   // This function allocates and returns storage in ret
   //
-  int status;
+  int   status;
   char *ret = abi::__cxa_demangle(abiName, 0 /* output buffer */, 0 /* length */, &status);
 
-  auto deallocator = ( [](char *mem) { if (mem) free((void*)mem); } );
+  auto deallocator = ([](char *mem) {
+    if (mem)
+      free((void *) mem);
+  });
 
   if (status) {
     // 0: The demangling operation succeeded.
     // -1: A memory allocation failure occurred.
     // -2: mangled_name is not a valid name under the C++ ABI mangling rules.
     // -3: One of the arguments is invalid.
-    std::unique_ptr<char, decltype(deallocator) > retval(nullptr, deallocator);
+    std::unique_ptr<char, decltype(deallocator)> retval(nullptr, deallocator);
     return retval;
   }
 
@@ -86,35 +85,34 @@ static auto cppDemangle (const char *abiName)
   // Create a unique pointer to take ownership of the returned string so it
   // is freed when that pointers goes out of scope
   //
-  std::unique_ptr<char, decltype(deallocator) > retval(ret, deallocator);
+  std::unique_ptr<char, decltype(deallocator)> retval(ret, deallocator);
   return retval;
 }
 
-std::string Traceback::to_string (void)
-{
+std::string Traceback::to_string(void) {
 #ifdef _WIN32
   return ("");
 #else
-  auto addrlist = &tb[0];
-  std::string sout = "stack trace\n===========\n";
+  auto        addrlist = &tb[0];
+  std::string sout     = "stack trace\n===========\n";
 
   if (size == 0) {
-    sout +="  <empty, possibly corrupt>\n";
+    sout += "  <empty, possibly corrupt>\n";
     return (sout);
   }
 
   // resolve addresses into strings containing "filename(function+address)",
   // this array must be free()-ed
-  char **symbollist = backtrace_symbols(addrlist, size);
-  const char *prefix = " >";
+  char **     symbollist = backtrace_symbols(addrlist, size);
+  const char *prefix     = " >";
 
   // address of this function.
   for (int i = size - 1; i >= 0; i--) {
 
-    char *p = symbollist[i];
-    char *cur = p;
-    char *end = p + strlen(cur);
-    bool done = false;
+    char *p    = symbollist[i];
+    char *cur  = p;
+    char *end  = p + strlen(cur);
+    bool  done = false;
 
     while (cur < end) {
       size_t special = strcspn(cur, "_?");
@@ -138,7 +136,7 @@ std::string Traceback::to_string (void)
         continue;
       }
 
-      char tmp = cur[n_sym];
+      char tmp   = cur[n_sym];
       cur[n_sym] = '\0';
 
       if (starts_with(cur, "__Z")) {
@@ -156,7 +154,7 @@ std::string Traceback::to_string (void)
       cur += n_sym;
     }
 
-    if (!done) {
+    if (! done) {
       sout += string_sprintf("%s%s\n", prefix, p);
     }
   }
@@ -169,8 +167,7 @@ std::string Traceback::to_string (void)
 #endif
 }
 
-void Traceback::log (void)
-{
+void Traceback::log(void) {
 #ifdef _WIN32
   return ("");
 #else
@@ -186,16 +183,16 @@ void Traceback::log (void)
 
   // resolve addresses into strings containing "filename(function+address)",
   // this array must be free()-ed
-  char **symbollist = backtrace_symbols(addrlist, size);
-  const char *prefix = " >";
+  char **     symbollist = backtrace_symbols(addrlist, size);
+  const char *prefix     = " >";
 
   // address of this function.
   for (int i = 1; i < size; i++) {
 
-    char *p = symbollist[i];
-    char *cur = p;
-    char *end = p + strlen(cur);
-    bool done = false;
+    char *p    = symbollist[i];
+    char *cur  = p;
+    char *end  = p + strlen(cur);
+    bool  done = false;
 
     while (cur < end) {
       size_t special = strcspn(cur, "_?");
@@ -219,7 +216,7 @@ void Traceback::log (void)
         continue;
       }
 
-      char tmp = cur[n_sym];
+      char tmp   = cur[n_sym];
       cur[n_sym] = '\0';
 
       if (starts_with(cur, "__Z")) {
@@ -237,7 +234,7 @@ void Traceback::log (void)
       cur += n_sym;
     }
 
-    if (!done) {
+    if (! done) {
       LOG("%s%s", prefix, p);
     }
   }
@@ -248,8 +245,7 @@ void Traceback::log (void)
 #endif
 }
 
-void traceback_dump (void)
-{
+void traceback_dump(void) {
   auto tb = new Traceback();
   tb->init();
   auto s = tb->to_string();
@@ -273,8 +269,7 @@ void traceback_dump (void)
 
 #define MAX_SYMBOL_LEN 1024
 
-typedef struct CallstackEntry
-{
+typedef struct CallstackEntry {
   DWORD64 offset; // if 0, we have no valid entry
   CHAR    name[MAX_SYMBOL_LEN];
   CHAR    undName[MAX_SYMBOL_LEN];
@@ -290,21 +285,14 @@ typedef struct CallstackEntry
   CHAR    loadedImageName[MAX_SYMBOL_LEN];
 } CallstackEntry;
 
-typedef enum CallstackEntryType
-{
-  firstEntry,
-  nextEntry,
-  lastEntry
-} CallstackEntryType;
+typedef enum CallstackEntryType { firstEntry, nextEntry, lastEntry } CallstackEntryType;
 
-void _backtrace (void)
-{
+void _backtrace(void) {
   HANDLE process = ::GetCurrentProcess();
-  HANDLE thread = GetCurrentThread();
+  HANDLE thread  = GetCurrentThread();
 
-  if (!SymInitialize(process, 0, true)) {
-    wprintf(L"SymInitialize unable to find process!! Error: %d\r\n",
-        GetLastError());
+  if (! SymInitialize(process, 0, true)) {
+    wprintf(L"SymInitialize unable to find process!! Error: %d\r\n", GetLastError());
   }
 
   DWORD symOptions = SymGetOptions();
@@ -316,7 +304,7 @@ void _backtrace (void)
   SymGetSearchPath(process, szSearchPath, MAX_SYMBOL_LEN);
 
   char  szUserName[MAX_SYMBOL_LEN] = {0};
-  DWORD dwSize = MAX_SYMBOL_LEN;
+  DWORD dwSize                     = MAX_SYMBOL_LEN;
   GetUserNameA(szUserName, &dwSize);
 
   CHAR   search_path_debug[MAX_SYMBOL_LEN];
@@ -324,9 +312,8 @@ void _backtrace (void)
 #if _MSC_VER >= 1400
   maxLen = _TRUNCATE;
 #endif
-  _snprintf_s(search_path_debug, maxLen,
-        "SymInit: Symbol-SearchPath: '%s', symOptions: %d, UserName: '%s'\n",
-        szSearchPath, symOptions, szUserName);
+  _snprintf_s(search_path_debug, maxLen, "SymInit: Symbol-SearchPath: '%s', symOptions: %d, UserName: '%s'\n",
+              szSearchPath, symOptions, szUserName);
   search_path_debug[MAX_SYMBOL_LEN - 1] = 0;
   printf(search_path_debug);
 
@@ -339,12 +326,12 @@ void _backtrace (void)
   // Initalize a few things here and there
   STACKFRAME stack;
   memset(&stack, 0, sizeof(STACKFRAME));
-  stack.AddrPC.Offset       = context.Rip;
-  stack.AddrPC.Mode         = AddrModeFlat;
-  stack.AddrStack.Offset    = context.Rsp;
-  stack.AddrStack.Mode      = AddrModeFlat;
-  stack.AddrFrame.Offset    = context.Rbp;
-  stack.AddrFrame.Mode      = AddrModeFlat;
+  stack.AddrPC.Offset    = context.Rip;
+  stack.AddrPC.Mode      = AddrModeFlat;
+  stack.AddrStack.Offset = context.Rsp;
+  stack.AddrStack.Mode   = AddrModeFlat;
+  stack.AddrFrame.Offset = context.Rbp;
+  stack.AddrFrame.Mode   = AddrModeFlat;
 
 #ifdef _M_IX86
   auto machine = IMAGE_FILE_MACHINE_I386;
@@ -355,64 +342,47 @@ void _backtrace (void)
 #else
 #error "platform not supported!"
 #endif
-  for (ULONG frame = 0; ; frame++) {
-    BOOL result = StackWalk(machine,
-                process,
-                thread,
-                &stack,
-                &context,
-                0,
-                SymFunctionTableAccess,
-                SymGetModuleBase,
-                0);
+  for (ULONG frame = 0;; frame++) {
+    BOOL result = StackWalk(machine, process, thread, &stack, &context, 0, SymFunctionTableAccess, SymGetModuleBase, 0);
 
     CallstackEntry csEntry;
-    csEntry.offset = stack.AddrPC.Offset;
-    csEntry.name[0] = 0;
-    csEntry.undName[0] = 0;
-    csEntry.undFullName[0] = 0;
-    csEntry.offsetFromSmybol = 0;
-    csEntry.offsetFromLine = 0;
-    csEntry.lineFileName[0] = 0;
-    csEntry.lineNumber = 0;
+    csEntry.offset             = stack.AddrPC.Offset;
+    csEntry.name[0]            = 0;
+    csEntry.undName[0]         = 0;
+    csEntry.undFullName[0]     = 0;
+    csEntry.offsetFromSmybol   = 0;
+    csEntry.offsetFromLine     = 0;
+    csEntry.lineFileName[0]    = 0;
+    csEntry.lineNumber         = 0;
     csEntry.loadedImageName[0] = 0;
-    csEntry.moduleName[0] = 0;
+    csEntry.moduleName[0]      = 0;
 
     IMAGEHLP_SYMBOL64 symbol {};
-    symbol.SizeOfStruct = sizeof(IMAGEHLP_SYMBOL64);
+    symbol.SizeOfStruct  = sizeof(IMAGEHLP_SYMBOL64);
     symbol.MaxNameLength = MAX_SYMBOL_LEN;
 
     // Initalize more memory and clear it out
-    if (SymGetSymFromAddr64(process,
-                stack.AddrPC.Offset,
-                &csEntry.offsetFromSmybol,
-                &symbol)) {
+    if (SymGetSymFromAddr64(process, stack.AddrPC.Offset, &csEntry.offsetFromSmybol, &symbol)) {
     }
 
     IMAGEHLP_LINE64 line {};
     line.SizeOfStruct = sizeof(line);
 
-    if (SymGetLineFromAddr64(process,
-                 stack.AddrPC.Offset,
-                 &csEntry.offsetFromLine,
-                 &line)) {
+    if (SymGetLineFromAddr64(process, stack.AddrPC.Offset, &csEntry.offsetFromLine, &line)) {
     }
 
-    printf("Frame %lu:\n"
-         "    Symbol name:    %s\n"
-         "    PC address:     0x%08LX\n"
-         "    Stack address:  0x%08LX\n"
-         "    Frame address:  0x%08LX\n"
-         "\n",
-         frame,
-         symbol.Name,
-         (ULONG64)stack.AddrPC.Offset,
-         (ULONG64)stack.AddrStack.Offset,
-         (ULONG64)stack.AddrFrame.Offset
-       );
+    printf(
+        "Frame %lu:\n"
+        "    Symbol name:    %s\n"
+        "    PC address:     0x%08LX\n"
+        "    Stack address:  0x%08LX\n"
+        "    Frame address:  0x%08LX\n"
+        "\n",
+        frame, symbol.Name, (ULONG64) stack.AddrPC.Offset, (ULONG64) stack.AddrStack.Offset,
+        (ULONG64) stack.AddrFrame.Offset);
 
     // If nothing else to do break loop
-    if (!result) {
+    if (! result) {
       break;
     }
   }

@@ -19,19 +19,19 @@
 #include "my_thing.h"
 #include "my_monst.h"
 
-WidPopup *wid_enchant;
+WidPopup *                 wid_enchant;
 static std::vector<Thingp> enchant_items;
 
-void wid_enchant_destroy (void)
-{ TRACE_AND_INDENT();
+void wid_enchant_destroy(void) {
+  TRACE_AND_INDENT();
   delete wid_enchant;
   wid_enchant = nullptr;
   game->change_state(Game::STATE_NORMAL);
 }
 
-static void wid_enchant_slot (int slot)
-{ TRACE_AND_INDENT();
-  if (slot >= (int)enchant_items.size()) {
+static void wid_enchant_slot(int slot) {
+  TRACE_AND_INDENT();
+  if (slot >= (int) enchant_items.size()) {
     wid_enchant_destroy();
     return;
   }
@@ -46,29 +46,29 @@ static void wid_enchant_slot (int slot)
   wid_enchant_destroy();
 }
 
-static uint8_t wid_enchant_key_up (Widp w, const struct SDL_Keysym *key)
-{ TRACE_AND_INDENT();
+static uint8_t wid_enchant_key_up(Widp w, const struct SDL_Keysym *key) {
+  TRACE_AND_INDENT();
   auto level = game->level;
-  if (!level) {
+  if (! level) {
     return true;
   }
 
   auto player = level->player;
-  if (!player){
+  if (! player) {
     return true;
   }
 
-  if (player->is_dead){
+  if (player->is_dead) {
     return true;
   }
 
   if (sdl_shift_held) {
-    if (key->scancode == (SDL_Scancode)game->config.key_console) {
+    if (key->scancode == (SDL_Scancode) game->config.key_console) {
       return false;
     }
   }
 
-  if (key->scancode == (SDL_Scancode)game->config.key_drop) {
+  if (key->scancode == (SDL_Scancode) game->config.key_drop) {
     auto what = game->level->inventory_get();
     if (what) {
       if (game->level->player->drop(what)) {
@@ -82,55 +82,56 @@ static uint8_t wid_enchant_key_up (Widp w, const struct SDL_Keysym *key)
   }
 
   switch (key->mod) {
-    case KMOD_LCTRL:
-    case KMOD_RCTRL:
-    default:
-    switch (key->sym) {
-      default: {
-        auto c = wid_event_to_char(key);
-        switch (c) {
-          case '1':
-          case '2':
-          case '3':
-          case '4':
-          case '5':
-          case '6':
-          case '7':
-          case '8':
-          case '9':
-            wid_enchant_slot(c - '1');
-            return true;
-          case SDLK_ESCAPE: { TRACE_AND_INDENT();
-            CON("PLAYER: Enchant cancelled");
-            wid_enchant_destroy();
-            return true;
+    case KMOD_LCTRL :
+    case KMOD_RCTRL :
+    default :
+      switch (key->sym) {
+        default :
+          {
+            auto c = wid_event_to_char(key);
+            switch (c) {
+              case '1' :
+              case '2' :
+              case '3' :
+              case '4' :
+              case '5' :
+              case '6' :
+              case '7' :
+              case '8' :
+              case '9' : wid_enchant_slot(c - '1'); return true;
+              case SDLK_ESCAPE :
+                {
+                  TRACE_AND_INDENT();
+                  CON("PLAYER: Enchant cancelled");
+                  wid_enchant_destroy();
+                  return true;
+                }
+            }
           }
-        }
       }
-    }
   }
 
   return true;
 }
 
-static uint8_t wid_enchant_key_down (Widp w, const struct SDL_Keysym *key)
-{ TRACE_AND_INDENT();
+static uint8_t wid_enchant_key_down(Widp w, const struct SDL_Keysym *key) {
+  TRACE_AND_INDENT();
   auto level = game->level;
-  if (!level) {
+  if (! level) {
     return true;
   }
 
   auto player = level->player;
-  if (!player){
+  if (! player) {
     return true;
   }
 
-  if (player->is_dead){
+  if (player->is_dead) {
     return true;
   }
 
   if (sdl_shift_held) {
-    if (key->scancode == (SDL_Scancode)game->config.key_console) {
+    if (key->scancode == (SDL_Scancode) game->config.key_console) {
       return false;
     }
   }
@@ -138,19 +139,19 @@ static uint8_t wid_enchant_key_down (Widp w, const struct SDL_Keysym *key)
   return true;
 }
 
-static uint8_t wid_enchant_mouse_up (Widp w, int32_t x, int32_t y, uint32_t button)
-{ TRACE_AND_INDENT();
+static uint8_t wid_enchant_mouse_up(Widp w, int32_t x, int32_t y, uint32_t button) {
+  TRACE_AND_INDENT();
   auto level = game->level;
-  if (!level) {
+  if (! level) {
     return true;
   }
 
   auto player = level->player;
-  if (!player){
+  if (! player) {
     return true;
   }
 
-  if (player->is_dead){
+  if (player->is_dead) {
     return true;
   }
 
@@ -158,8 +159,8 @@ static uint8_t wid_enchant_mouse_up (Widp w, int32_t x, int32_t y, uint32_t butt
   return true;
 }
 
-void Game::wid_enchant_an_item (void)
-{ TRACE_AND_INDENT();
+void Game::wid_enchant_an_item(void) {
+  TRACE_AND_INDENT();
   BOTCON("You lucky thing. Choose an item to enchant.");
 
   DBG3("Thing enchant create");
@@ -167,7 +168,7 @@ void Game::wid_enchant_an_item (void)
   change_state(Game::STATE_ENCHANTING_ITEMS);
 
   auto player = game->level->player;
-  if (!player){
+  if (! player) {
     change_state(Game::STATE_NORMAL);
     ERR("No player");
     return;
@@ -187,7 +188,7 @@ void Game::wid_enchant_an_item (void)
       if (found.find(tp) != found.end()) {
         continue;
       }
-      if (!t->is_enchantable()) {
+      if (! t->is_enchantable()) {
         continue;
       }
       if (t->get_enchant_max()) {
@@ -207,7 +208,7 @@ void Game::wid_enchant_an_item (void)
       if (found.find(tp) != found.end()) {
         continue;
       }
-      if (!t->is_enchantable()) {
+      if (! t->is_enchantable()) {
         continue;
       }
       if (t->get_enchant_max()) {
@@ -220,14 +221,12 @@ void Game::wid_enchant_an_item (void)
     }
   }
 
-  auto m = TERM_WIDTH / 2;
-  point tl = make_point(m - 35, UI_TOPCON_VIS_HEIGHT + 10);
-  point br = make_point(m + 35, tl.y + 25);
-  auto width = br.x - tl.x;
+  auto  m     = TERM_WIDTH / 2;
+  point tl    = make_point(m - 35, UI_TOPCON_VIS_HEIGHT + 10);
+  point br    = make_point(m + 35, tl.y + 25);
+  auto  width = br.x - tl.x;
 
-  wid_enchant = new WidPopup("Enchant", tl, br, nullptr, "",
-                 false, true,
-                 enchant_items.size() * 3);
+  wid_enchant = new WidPopup("Enchant", tl, br, nullptr, "", false, true, enchant_items.size() * 3);
 
   wid_set_on_key_up(wid_enchant->wid_popup_container, wid_enchant_key_up);
   wid_set_on_key_down(wid_enchant->wid_popup_container, wid_enchant_key_down);
@@ -239,10 +238,10 @@ void Game::wid_enchant_an_item (void)
   }
 
   int y_at = 3;
-  for (auto slot = 0; slot < (int)enchant_items.size(); slot++) {
-    Game tmp;
-    auto p = wid_enchant->wid_text_area->wid_text_area;
-    auto w = wid_new_container(p, "item slot");
+  for (auto slot = 0; slot < (int) enchant_items.size(); slot++) {
+    Game  tmp;
+    auto  p  = wid_enchant->wid_text_area->wid_text_area;
+    auto  w  = wid_new_container(p, "item slot");
     point tl = make_point(0, y_at);
     point br = make_point(width - 3, y_at + 2);
     wid_set_pos(w, tl, br);
@@ -259,7 +258,7 @@ void Game::wid_enchant_an_item (void)
       point br = make_point(2, 2);
       wid_set_pos(wid_icon, tl, br);
 
-      auto tpp = t->tp();
+      auto tpp   = t->tp();
       auto tiles = &tpp->tiles;
       if (tiles) {
         auto tile = tile_first(tiles);
@@ -282,8 +281,7 @@ void Game::wid_enchant_an_item (void)
       wid_set_style(wid_item, UI_WID_STYLE_DARK);
 
       if (slot < 9) {
-        wid_set_text(wid_item, " " + std::to_string(slot + 1) + ". " +
-               t->text_name() + ", " + t->text_enchant());
+        wid_set_text(wid_item, " " + std::to_string(slot + 1) + ". " + t->text_name() + ", " + t->text_enchant());
       } else {
         wid_set_text(wid_item, t->text_name() + ", " + t->text_enchant());
       }

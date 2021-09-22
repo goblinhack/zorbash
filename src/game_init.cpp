@@ -13,8 +13,8 @@
 #include "my_array_bounds_check.h"
 #include "my_globals.h"
 
-void Game::init (void)
-{ TRACE_AND_INDENT();
+void Game::init(void) {
+  TRACE_AND_INDENT();
   LOG("Game init");
 
   if (g_opt_seed_name != "") {
@@ -26,40 +26,36 @@ void Game::init (void)
   CON("Creating level, name '%s', seed %u", seed_name.c_str(), seed);
 
   current_level = point3d(LEVELS_ACROSS / 2, LEVELS_DOWN / 2, 1);
-  level = nullptr;
+  level         = nullptr;
 
   world.clear();
   init_levels();
   init_jump_paths();
 
-  auto l = get(world.levels, current_level.x, current_level.y,
-         current_level.z);
-  if (!l) {
+  auto l = get(world.levels, current_level.x, current_level.y, current_level.z);
+  if (! l) {
     return;
   }
   level = l;
 }
 
-void Game::init_level (point3d p)
-{ TRACE_AND_INDENT();
+void Game::init_level(point3d p) {
+  TRACE_AND_INDENT();
   LOG("Game init level %d,%d,%d", p.x, p.y, p.z);
 
   auto level_seed = seed + p.x + p.y + p.z;
-  auto l = get(world.levels, p.x, p.y, p.z);
-  if (!l) {
+  auto l          = get(world.levels, p.x, p.y, p.z);
+  if (! l) {
     world.new_level_at(p, level_seed);
     l = get(world.levels, p.x, p.y, p.z);
-    if (!l) {
-      ERR("No level created at %d,%d,%d",
-        game->current_level.x,
-        game->current_level.y,
-        game->current_level.z);
+    if (! l) {
+      ERR("No level created at %d,%d,%d", game->current_level.x, game->current_level.y, game->current_level.z);
     }
   }
 }
 
-void Game::init_levels (void)
-{ TRACE_AND_INDENT();
+void Game::init_levels(void) {
+  TRACE_AND_INDENT();
   LOG("Game init levels");
 
   //

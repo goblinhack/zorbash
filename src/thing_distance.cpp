@@ -11,10 +11,9 @@
 #include "my_dmap.h"
 #include "my_monst.h"
 
-point Thing::get_random_scent_target (void)
-{
-  int16_t d = ai_scent_distance();
-  auto tries = 100;
+point Thing::get_random_scent_target(void) {
+  int16_t d     = ai_scent_distance();
+  auto    tries = 100;
 
   if (is_player()) {
     d = MAP_WIDTH / 2;
@@ -29,21 +28,17 @@ point Thing::get_random_scent_target (void)
   }
 
   while (tries--) {
-    point start(mid_at.x, mid_at.y);
+    point   start(mid_at.x, mid_at.y);
     int16_t dx = pcg_random_range(-d, d);
     int16_t dy = pcg_random_range(-d, d);
-    if (!dx && !dy) {
+    if (! dx && ! dy) {
       continue;
     }
 
-    auto x = std::min(
-         std::max(MAP_BORDER_ROCK, start.x + dx), MAP_WIDTH - MAP_BORDER_ROCK);
-    auto y = std::min(
-         std::max(MAP_BORDER_ROCK, start.y + dy), MAP_HEIGHT - MAP_BORDER_ROCK);
+    auto x = std::min(std::max(MAP_BORDER_ROCK, start.x + dx), MAP_WIDTH - MAP_BORDER_ROCK);
+    auto y = std::min(std::max(MAP_BORDER_ROCK, start.y + dy), MAP_HEIGHT - MAP_BORDER_ROCK);
 
-    if (level->is_hazard(x,y) ||
-      level->is_rock(x, y)  ||
-      level->is_wall(x, y)) {
+    if (level->is_hazard(x, y) || level->is_rock(x, y) || level->is_wall(x, y)) {
       continue;
     }
 
@@ -55,7 +50,7 @@ point Thing::get_random_scent_target (void)
         continue;
       } else {
         if (is_player()) {
-          if (!level->is_lit_currently(x, y)) {
+          if (! level->is_lit_currently(x, y)) {
             continue;
           }
         }
@@ -71,25 +66,21 @@ point Thing::get_random_scent_target (void)
   tries = 100;
 
   while (tries--) {
-    point start(mid_at.x, mid_at.y);
+    point   start(mid_at.x, mid_at.y);
     int16_t dx = pcg_random_range(-d, d);
     int16_t dy = pcg_random_range(-d, d);
-    if (!dx && !dy) {
+    if (! dx && ! dy) {
       continue;
     }
-    auto x = std::min(
-         std::max(MAP_BORDER_ROCK, start.x + dx), MAP_WIDTH - MAP_BORDER_ROCK);
-    auto y = std::min(
-         std::max(MAP_BORDER_ROCK, start.y + dy), MAP_HEIGHT - MAP_BORDER_ROCK);
+    auto x = std::min(std::max(MAP_BORDER_ROCK, start.x + dx), MAP_WIDTH - MAP_BORDER_ROCK);
+    auto y = std::min(std::max(MAP_BORDER_ROCK, start.y + dy), MAP_HEIGHT - MAP_BORDER_ROCK);
 
-    if (level->is_hazard(x,y) ||
-      level->is_rock(x, y)  ||
-      level->is_wall(x, y)) {
+    if (level->is_hazard(x, y) || level->is_rock(x, y) || level->is_wall(x, y)) {
       continue;
     }
 
     if (is_player()) {
-      if (!level->is_lit_currently(x, y)) {
+      if (! level->is_lit_currently(x, y)) {
         continue;
       }
     }
@@ -100,19 +91,17 @@ point Thing::get_random_scent_target (void)
   //
   // Any point will do
   //
-  point start(mid_at.x, mid_at.y);
+  point   start(mid_at.x, mid_at.y);
   int16_t dx = pcg_random_range(-d, d);
   int16_t dy = pcg_random_range(-d, d);
-  if (!dx && !dy) {
+  if (! dx && ! dy) {
     return start;
   }
-  auto x = std::min(
-        std::max(MAP_BORDER_ROCK, start.x + dx), MAP_WIDTH - MAP_BORDER_ROCK);
-  auto y = std::min(
-        std::max(MAP_BORDER_ROCK, start.y + dy), MAP_HEIGHT - MAP_BORDER_ROCK);
+  auto x = std::min(std::max(MAP_BORDER_ROCK, start.x + dx), MAP_WIDTH - MAP_BORDER_ROCK);
+  auto y = std::min(std::max(MAP_BORDER_ROCK, start.y + dy), MAP_HEIGHT - MAP_BORDER_ROCK);
 
   if (is_player()) {
-    if (!level->is_lit_currently(x, y)) {
+    if (! level->is_lit_currently(x, y)) {
       return point(x, y);
     }
   }

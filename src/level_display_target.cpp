@@ -12,29 +12,29 @@
 #include "my_thing.h"
 #include "my_thing_template.h"
 
-void Level::display_target (void)
-{ TRACE_AND_INDENT();
+void Level::display_target(void) {
+  TRACE_AND_INDENT();
   auto what = game->request_to_fire_item;
-  if (!what) {
+  if (! what) {
     return;
   }
 
-  if (!cursor) {
+  if (! cursor) {
     return;
   }
 
-  if (!player) {
+  if (! player) {
     return;
   }
 
   auto start = player->last_blit_at;
-  auto end = cursor->last_blit_at;
+  auto end   = cursor->last_blit_at;
 
-  if (!start.x && !start.y) {
+  if (! start.x && ! start.y) {
     return;
   }
 
-  if (!end.x && !end.y) {
+  if (! end.x && ! end.y) {
     return;
   }
 
@@ -49,10 +49,9 @@ void Level::display_target (void)
   blit_fbo_bind(FBO_MAP_VISIBLE);
   glLineWidth(1.0);
 
-  auto mid_at = cursor->mid_at;
+  auto mid_at  = cursor->mid_at;
   bool too_far = false;
-  if (DISTANCE(player->mid_at.x, player->mid_at.y, mid_at.x, mid_at.y) >
-    what->tp()->range_max()) {
+  if (DISTANCE(player->mid_at.x, player->mid_at.y, mid_at.x, mid_at.y) > what->tp()->range_max()) {
     too_far = true;
   }
 

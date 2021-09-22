@@ -13,33 +13,30 @@
 #include "my_ptrcheck.h"
 #include "my_wid_actionbar.h"
 
-void Game::tick_begin (const std::string &why)
-{ TRACE_AND_INDENT();
+void Game::tick_begin(const std::string &why) {
+  TRACE_AND_INDENT();
   tick_requested = why;
-  game->tick_dt = 0;
+  game->tick_dt  = 0;
 
   auto level = game->level;
-  if (level) { TRACE_AND_INDENT();
+  if (level) {
+    TRACE_AND_INDENT();
     auto player = level->player;
 
     if (player) {
-      CON("Game (%s) tick %d asked (%s): %s",
-        game->seed_name.c_str(),
-        game->tick_current, why.c_str(),
-        player->to_short_string().c_str());
+      CON("Game (%s) tick %d asked (%s): %s", game->seed_name.c_str(), game->tick_current, why.c_str(),
+          player->to_short_string().c_str());
     } else {
-      CON("Game (%s) tick %d asked (%s): %s",
-        game->seed_name.c_str(),
-        game->tick_current, why.c_str(),
-        level->to_string().c_str());
+      CON("Game (%s) tick %d asked (%s): %s", game->seed_name.c_str(), game->tick_current, why.c_str(),
+          level->to_string().c_str());
     }
   }
 }
 
-void Game::tick_begin_now (void)
-{ TRACE_AND_INDENT();
+void Game::tick_begin_now(void) {
+  TRACE_AND_INDENT();
   std::string why = tick_requested;
-  tick_requested = "";
+  tick_requested  = "";
 
   //
   // Move when all things are done moving
@@ -54,32 +51,25 @@ void Game::tick_begin_now (void)
 
   if (game->robot_mode) {
     game->current_move_speed = game->fast_move_speed;
-  } else if (!game->cursor_move_path.empty()) {
+  } else if (! game->cursor_move_path.empty()) {
     game->current_move_speed = game->fast_move_speed;
   } else {
     game->current_move_speed = game->slow_move_speed;
   }
 
   auto level = game->level;
-  if (level) { TRACE_AND_INDENT();
+  if (level) {
+    TRACE_AND_INDENT();
     auto player = level->player;
     if (player) {
-      CON("Game (%s) tick %d begin (%s): %s",
-        game->seed_name.c_str(),
-        game->tick_current,
-        why.c_str(),
-        player->to_short_string().c_str());
+      CON("Game (%s) tick %d begin (%s): %s", game->seed_name.c_str(), game->tick_current, why.c_str(),
+          player->to_short_string().c_str());
     } else {
-      CON("Game (%s) tick %d begin (%s): %s",
-        game->seed_name.c_str(),
-        game->tick_current,
-        why.c_str(),
-        level->to_string().c_str());
+      CON("Game (%s) tick %d begin (%s): %s", game->seed_name.c_str(), game->tick_current, why.c_str(),
+          level->to_string().c_str());
     }
   } else {
-    CON("Game (%s) tick %d begin (%s)",
-      game->seed_name.c_str(),
-      game->tick_current, why.c_str());
+    CON("Game (%s) tick %d begin (%s)", game->seed_name.c_str(), game->tick_current, why.c_str());
   }
 
   game->tick_begin_ms = time_get_time_ms();
@@ -89,8 +79,8 @@ void Game::tick_begin_now (void)
   }
 }
 
-bool Game::tick_end (void)
-{ TRACE_AND_INDENT();
+bool Game::tick_end(void) {
+  TRACE_AND_INDENT();
   //
   // Move when all things are done moving
   //
@@ -102,26 +92,19 @@ bool Game::tick_end (void)
   save_snapshot_check();
 
   auto level = game->level;
-  if (level) { TRACE_AND_INDENT();
+  if (level) {
+    TRACE_AND_INDENT();
     auto player = level->player;
     if (player) {
-      CON("Game (%s) tick %d end, duration %d ms: %s",
-        game->seed_name.c_str(),
-        game->tick_current,
-        time_get_time_ms() - game->tick_begin_ms,
-        player->to_short_string().c_str());
+      CON("Game (%s) tick %d end, duration %d ms: %s", game->seed_name.c_str(), game->tick_current,
+          time_get_time_ms() - game->tick_begin_ms, player->to_short_string().c_str());
     } else {
-      CON("Game (%s) tick %d end, duration %d ms: %s",
-        game->seed_name.c_str(),
-        game->tick_current,
-        time_get_time_ms() - game->tick_begin_ms,
-        level->to_string().c_str());
+      CON("Game (%s) tick %d end, duration %d ms: %s", game->seed_name.c_str(), game->tick_current,
+          time_get_time_ms() - game->tick_begin_ms, level->to_string().c_str());
     }
   } else {
-    CON("Game (%s) tick %d end, duration %d ms",
-      game->seed_name.c_str(),
-      game->tick_current,
-      time_get_time_ms() - game->tick_begin_ms);
+    CON("Game (%s) tick %d end, duration %d ms", game->seed_name.c_str(), game->tick_current,
+        time_get_time_ms() - game->tick_begin_ms);
   }
 
   CON("-");
@@ -145,15 +128,15 @@ bool Game::tick_end (void)
   return true;
 }
 
-void Game::tick_update (void)
-{ TRACE_AND_INDENT();
+void Game::tick_update(void) {
+  TRACE_AND_INDENT();
   //
   // Work out the current timestep in this move
   //
   if (game->tick_begin_ms) {
-    float move_at = time_get_time_ms() - game->tick_begin_ms;
+    float move_at       = time_get_time_ms() - game->tick_begin_ms;
     float move_duration = game->current_move_speed;
-    game->tick_dt = move_at / move_duration;
+    game->tick_dt       = move_at / move_duration;
     if (game->tick_dt > 1) {
       game->tick_dt = 1;
     }

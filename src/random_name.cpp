@@ -11,8 +11,7 @@
 #include <functional> // for std::hash
 #include <string>
 
-std::string random_name (int len)
-{
+std::string random_name(int len) {
   for (;;) {
     std::string d1(dict1_name());
     std::string d2(dict2_name());
@@ -24,9 +23,8 @@ std::string random_name (int len)
   }
 }
 
-uint32_t string_to_hash (const std::string &str)
-{
+uint32_t string_to_hash(const std::string &str) {
   std::hash<std::string> hasher;
-  uint32_t hashed = static_cast<uint32_t>(hasher(str) % 0xffffffff); // returns std::size_t
+  uint32_t               hashed = static_cast<uint32_t>(hasher(str) % 0xffffffff); // returns std::size_t
   return hashed;
 }

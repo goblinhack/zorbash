@@ -21,21 +21,12 @@
 #include "my_vector_bounds_check.h"
 #include "my_random.h"
 
-Projectile_::Projectile_(
-    Levelp level,
-    ThingId thing_id,
-    point start, point stop,
-    point pixel_map_at,
-    uint32_t ts_start, uint32_t ts_stop) :
-  id(thing_id),
-  start(start),
-  stop(stop),
-  pixel_map_at(pixel_map_at),
-  ts_start(ts_start),
-  ts_stop(ts_stop)
-{ TRACE_AND_INDENT();
+Projectile_::Projectile_(Levelp level, ThingId thing_id, point start, point stop, point pixel_map_at, uint32_t ts_start,
+                         uint32_t ts_stop)
+    : id(thing_id), start(start), stop(stop), pixel_map_at(pixel_map_at), ts_start(ts_start), ts_stop(ts_stop) {
+  TRACE_AND_INDENT();
   auto t = level->thing_find(id);
-  if (!t) {
+  if (! t) {
     ERR("no projectile");
     return;
   }
@@ -79,8 +70,8 @@ Projectile_::Projectile_(
   }
 }
 
-void Level::new_projectile (ThingId id, point start, point stop, uint32_t dur)
-{ TRACE_AND_INDENT();
+void Level::new_projectile(ThingId id, point start, point stop, uint32_t dur) {
+  TRACE_AND_INDENT();
   if (id.ok()) {
     auto t = thing_find(id);
     if (t) {
@@ -93,12 +84,11 @@ void Level::new_projectile (ThingId id, point start, point stop, uint32_t dur)
   }
 
   uint32_t now = time_update_time_milli();
-  new_projectiles.push_back(Projectile(this, id,
-                 start, stop, pixel_map_at, now, now + dur));
+  new_projectiles.push_back(Projectile(this, id, start, stop, pixel_map_at, now, now + dur));
 }
 
-void Level::display_projectiles (void)
-{ TRACE_AND_INDENT();
+void Level::display_projectiles(void) {
+  TRACE_AND_INDENT();
 #if 0
   CON("-");
   for (auto p : all_projectiles) {
@@ -109,9 +99,7 @@ void Level::display_projectiles (void)
   }
 #endif
 
-  all_projectiles.insert(std::end(all_projectiles),
-            std::begin(new_projectiles),
-            std::end(new_projectiles));
+  all_projectiles.insert(std::end(all_projectiles), std::begin(new_projectiles), std::end(new_projectiles));
   new_projectiles.clear();
 
   if (all_projectiles.empty()) {
@@ -129,54 +117,51 @@ void Level::display_projectiles (void)
 
   blit_init();
   auto now = time_update_time_milli();
-  auto e = std::remove_if(all_projectiles.begin(),
-              all_projectiles.end(),
-    [=, this] (Projectile &p) {
-      float timestep = p.ts_stop - p.ts_start;
-      float dt = ((float)(now - p.ts_start)) / timestep;
+  auto e   = std::remove_if(all_projectiles.begin(), all_projectiles.end(), [=, this](Projectile &p) {
+    float timestep = p.ts_stop - p.ts_start;
+    float dt       = ((float) (now - p.ts_start)) / timestep;
 
-      Thingp t;
+    Thingp t;
 
-      t = thing_find(p.id);
-      if (!t) {
-        return true;
+    t = thing_find(p.id);
+    if (! t) {
+      return true;
+    }
+
+    if (dt > 1) {
+      if (t) {
+        t->dead("End of projectile");
+        t->has_projectile = false;
       }
+      return true;
+    }
 
-      if (dt > 1) {
-        if (t) {
-          t->dead("End of projectile");
-          t->has_projectile = false;
-        }
-        return true;
-      }
+    auto start = p.start - p.pixel_map_at;
+    auto stop  = p.stop - p.pixel_map_at;
 
-      auto start = p.start - p.pixel_map_at;
-      auto stop = p.stop - p.pixel_map_at;
+    auto   dist  = distance(start, stop);
+    auto   steps = (int) ceil(dist) / TILE_WIDTH;
+    fpoint diff(stop.x - start.x, stop.y - start.y);
+    fpoint step       = diff / steps;
+    float  ninety_deg = RAD_360 / 4;
 
-      auto dist = distance(start, stop);
-      auto steps = (int)ceil(dist) / TILE_WIDTH;
-      fpoint diff(stop.x - start.x, stop.y - start.y);
-      fpoint step = diff / steps;
-      float ninety_deg = RAD_360 / 4;
+    fpoint perp = step;
+    perp        = rotate_radians(perp, ninety_deg);
+    perp /= 2;
 
-      fpoint perp = step;
-      perp = rotate_radians(perp, ninety_deg);
-      perp /= 2;
+    int frame = (int) ((float) Projectile::max_frames * dt);
+    if (frame >= Projectile::max_frames) {
+      frame = Projectile::max_frames - 1;
+    }
 
-      int frame = (int)((float)Projectile::max_frames * dt);
-      if (frame >= Projectile::max_frames) {
-        frame = Projectile::max_frames - 1;
-      }
+    fpoint mid(start.x + (diff.x * dt), start.y + (diff.y * dt));
 
-      fpoint mid(start.x + (diff.x * dt),
-             start.y + (diff.y * dt));
+    point tl = make_point(mid - perp - step / 2);
+    point tr = make_point(mid - perp + step / 2);
+    point bl = make_point(mid + perp - step / 2);
+    point br = make_point(mid + perp + step / 2);
 
-      point tl = make_point(mid - perp - step / 2);
-      point tr = make_point(mid - perp + step / 2);
-      point bl = make_point(mid + perp - step / 2);
-      point br = make_point(mid + perp + step / 2);
-
-      tile_blit(get(p.tiles, frame), tl, tr, bl, br);
+    tile_blit(get(p.tiles, frame), tl, tr, bl, br);
 #if 0
       //
       // Debug
@@ -187,31 +172,28 @@ void Level::display_projectiles (void)
       gl_blitline(bl.x, bl.y, tl.x, tl.y);
 #endif
 
-      return false;
-    });
+    return false;
+  });
   all_projectiles.erase(e, all_projectiles.end());
 
   blit_flush();
 }
 
-bool Thing::projectile_anim_exists (void)
-{ TRACE_AND_INDENT();
+bool Thing::projectile_anim_exists(void) {
+  TRACE_AND_INDENT();
   return has_projectile;
 }
 
-void Thing::delete_projectile (void)
-{ TRACE_AND_INDENT();
-  auto e = std::remove_if(level->all_projectiles.begin(),
-              level->all_projectiles.end(),
-    [=, this] (Projectile &p) {
-      if (p.id == id) {
-        log("Remove projectile");
-        return true;
-      } else {
-        return false;
-      }
+void Thing::delete_projectile(void) {
+  TRACE_AND_INDENT();
+  auto e = std::remove_if(level->all_projectiles.begin(), level->all_projectiles.end(), [=, this](Projectile &p) {
+    if (p.id == id) {
+      log("Remove projectile");
+      return true;
+    } else {
+      return false;
     }
-  );
+  });
 
   level->all_projectiles.erase(e, level->all_projectiles.end());
   has_projectile = false;

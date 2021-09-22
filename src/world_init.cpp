@@ -10,8 +10,8 @@
 #include "my_array_bounds_check.h"
 #include "my_ptrcheck.h"
 
-void World::clear (void)
-{ TRACE_AND_INDENT();
+void World::clear(void) {
+  TRACE_AND_INDENT();
   LOG("World init: Clear all levels");
   for (auto x = 0; x < LEVELS_ACROSS; ++x) {
     for (auto y = 0; y < LEVELS_DOWN; ++y) {
@@ -25,8 +25,8 @@ void World::clear (void)
   }
 }
 
-Levelp World::new_level_at (point3d at, int seed)
-{ TRACE_AND_INDENT();
+Levelp World::new_level_at(point3d at, int seed) {
+  TRACE_AND_INDENT();
   auto old_level = get(levels, at.x, at.y, at.z);
   delete old_level;
 

@@ -11,9 +11,9 @@
 #include "my_sprintf.h"
 #include "my_random.h"
 
-void Thing::water_tick (void)
-{ TRACE_AND_INDENT();
-  if (!level->is_water(mid_at.x, mid_at.y)) {
+void Thing::water_tick(void) {
+  TRACE_AND_INDENT();
+  if (! level->is_water(mid_at.x, mid_at.y)) {
     return;
   }
 
@@ -32,7 +32,7 @@ void Thing::water_tick (void)
     return;
   }
 
-  if (!hates_water()) {
+  if (! hates_water()) {
     return;
   }
 

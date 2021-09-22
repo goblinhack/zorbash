@@ -10,11 +10,10 @@
 #include "my_sprintf.h"
 #include "my_game.h"
 
-void Thing::msg (std::string const &m)
-{
-  static point last_at;
-  float dy;
-  float dx;
+void Thing::msg(std::string const &m) {
+  static point    last_at;
+  float           dy;
+  float           dx;
   static uint32_t last_tick;
 
   if (game->tick_current == last_tick) {

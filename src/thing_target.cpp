@@ -9,8 +9,8 @@
 #include "my_level.h"
 #include "my_thing.h"
 
-bool Thing::target_select (Thingp what)
-{ TRACE_AND_INDENT();
+bool Thing::target_select(Thingp what) {
+  TRACE_AND_INDENT();
   if (game->state != Game::STATE_CHOOSING_TARGET) {
     TOPCON("Choose a target to use %s at.", what->text_the().c_str());
   }

@@ -20,8 +20,7 @@
 // Whan a log appears, if some indent levels are missing, then pull them
 // out of the callstack - it's like a mini traceback
 //
-void log_catchup_missing_indent_levels (void)
-{
+void log_catchup_missing_indent_levels(void) {
   //
   // Seems to need more work - not reliable
   //
@@ -50,53 +49,48 @@ void log_catchup_missing_indent_levels (void)
 #endif
 }
 
-static void log_ (const char *fmt, va_list args)
-{
+static void log_(const char *fmt, va_list args) {
   char buf[MAXLONGSTR];
-  int len;
+  int  len;
 
   buf[0] = '\0';
   get_timestamp(buf, MAXLONGSTR);
-  len = (int)strlen(buf);
+  len = (int) strlen(buf);
 
-  if (!g_log_stdout) {
+  if (! g_log_stdout) {
     // No indent
   } else {
-    snprintf(buf + len, MAXLONGSTR - len, "%60s: %*s", "",
-         g_callframes_depth, "");
+    snprintf(buf + len, MAXLONGSTR - len, "%60s: %*s", "", g_callframes_depth, "");
   }
 
-  len = (int)strlen(buf);
+  len = (int) strlen(buf);
   vsnprintf(buf + len, MAXLONGSTR - len, fmt, args);
 
   putf(MY_STDOUT, buf);
 }
 
-static void log_missing_ (const char *fmt, va_list args)
-{
+static void log_missing_(const char *fmt, va_list args) {
   char buf[MAXLONGSTR];
 
   int len;
 
   buf[0] = '\0';
   get_timestamp(buf, MAXLONGSTR);
-  len = (int)strlen(buf);
+  len = (int) strlen(buf);
 
-  if (!g_log_stdout) {
+  if (! g_log_stdout) {
     // No indent
   } else {
-    snprintf(buf + len, MAXLONGSTR - len, "%60s: %*s", "",
-         g_last_logged_callframes_depth, "");
+    snprintf(buf + len, MAXLONGSTR - len, "%60s: %*s", "", g_last_logged_callframes_depth, "");
   }
 
-  len = (int)strlen(buf);
+  len = (int) strlen(buf);
   vsnprintf(buf + len, MAXLONGSTR - len, fmt, args);
 
   putf(MY_STDOUT, buf);
 }
 
-void LOG (const char *fmt, ...)
-{
+void LOG(const char *fmt, ...) {
   log_catchup_missing_indent_levels();
   va_list args;
   va_start(args, fmt);
@@ -104,22 +98,20 @@ void LOG (const char *fmt, ...)
   va_end(args);
 }
 
-void LOG_MISSING (const char *fmt, ...)
-{
+void LOG_MISSING(const char *fmt, ...) {
   va_list args;
   va_start(args, fmt);
   log_missing_(fmt, args);
   va_end(args);
 }
 
-static void warn_ (const char *fmt, va_list args)
-{
+static void warn_(const char *fmt, va_list args) {
   char buf[MAXLONGSTR];
-  int len;
+  int  len;
 
   buf[0] = '\0';
   get_timestamp(buf, MAXLONGSTR);
-  len = (int)strlen(buf);
+  len = (int) strlen(buf);
   vsnprintf(buf + len, MAXLONGSTR - len, fmt, args);
 
   putf(MY_STDOUT, buf);
@@ -128,8 +120,7 @@ static void warn_ (const char *fmt, va_list args)
   wid_console_log(buf);
 }
 
-void WARN (const char *fmt, ...)
-{
+void WARN(const char *fmt, ...) {
   va_list args;
 
   va_start(args, fmt);
@@ -137,14 +128,13 @@ void WARN (const char *fmt, ...)
   va_end(args);
 }
 
-static void con_ (const char *fmt, va_list args)
-{
+static void con_(const char *fmt, va_list args) {
   char buf[MAXLONGSTR];
-  int len;
+  int  len;
 
   buf[0] = '\0';
   get_timestamp(buf, MAXLONGSTR);
-  len = (int)strlen(buf);
+  len = (int) strlen(buf);
   vsnprintf(buf + len, MAXLONGSTR - len, fmt, args);
 
   putf(MY_STDOUT, buf);
@@ -157,8 +147,7 @@ static void con_ (const char *fmt, va_list args)
   FLUSH_THE_CONSOLE();
 }
 
-static void con_ (const wchar_t *fmt, va_list args)
-{
+static void con_(const wchar_t *fmt, va_list args) {
   {
     char buf[MAXLONGSTR];
 
@@ -170,13 +159,13 @@ static void con_ (const wchar_t *fmt, va_list args)
 
   {
     wchar_t buf[MAXLONGSTR];
-    auto wrote = vswprintf(buf, MAXLONGSTR, fmt, args);
+    auto    wrote = vswprintf(buf, MAXLONGSTR, fmt, args);
 
     //
     // Only a single nul is written, but as we read 2 at a time...
     //
     if (wrote && (wrote < MAXLONGSTR - 1)) {
-      buf[wrote+1] = '\0';
+      buf[wrote + 1] = '\0';
     } else {
       fprintf(stderr, "Failed to console log: [%S]\n", fmt);
     }
@@ -190,8 +179,7 @@ static void con_ (const wchar_t *fmt, va_list args)
   FLUSH_THE_CONSOLE();
 }
 
-void con (const wchar_t *fmt)
-{
+void con(const wchar_t *fmt) {
   {
     char buf[MAXLONGSTR];
 
@@ -211,16 +199,15 @@ void con (const wchar_t *fmt)
   FLUSH_THE_CONSOLE();
 }
 
-static void topcon_ (const char *fmt, va_list args)
-{
+static void topcon_(const char *fmt, va_list args) {
   char buf[MAXLONGSTR];
-  char ts[MAXLONGSTR/2];
-  int len;
+  char ts[MAXLONGSTR / 2];
+  int  len;
 
   buf[0] = '\0';
   get_timestamp(ts, MAXLONGSTR);
   snprintf(buf, sizeof(buf) - 1, "%s", ts);
-  len = (int)strlen(buf);
+  len = (int) strlen(buf);
   vsnprintf(buf + len, MAXLONGSTR - len, fmt, args);
 
   putf(MY_STDOUT, buf);
@@ -233,8 +220,7 @@ static void topcon_ (const char *fmt, va_list args)
   FLUSH_THE_CONSOLE();
 }
 
-static void topcon_ (const wchar_t *fmt, va_list args)
-{
+static void topcon_(const wchar_t *fmt, va_list args) {
   {
     char ts[MAXLONGSTR];
     ts[0] = '\0';
@@ -245,13 +231,13 @@ static void topcon_ (const wchar_t *fmt, va_list args)
 
   {
     wchar_t buf[MAXLONGSTR];
-    auto wrote = vswprintf(buf, MAXLONGSTR, fmt, args);
+    auto    wrote = vswprintf(buf, MAXLONGSTR, fmt, args);
 
     //
     // Only a single nul is written, but as we read 2 at a time...
     //
     if (wrote && (wrote < MAXLONGSTR - 1)) {
-      buf[wrote+1] = '\0';
+      buf[wrote + 1] = '\0';
     } else {
       fprintf(stderr, "Failed to topcon log: [%S]\n", fmt);
     }
@@ -259,15 +245,14 @@ static void topcon_ (const wchar_t *fmt, va_list args)
     fprintf(MY_STDOUT, "%s\n", wstring_to_string(buf).c_str());
     term_log(buf);
     wid_topcon_log(buf);
-    //wid_console_log(buf);
+    // wid_console_log(buf);
   }
 
   putchar('\n');
   FLUSH_THE_CONSOLE();
 }
 
-void topcon (const wchar_t *fmt)
-{
+void topcon(const wchar_t *fmt) {
   {
     char ts[MAXLONGSTR];
     ts[0] = '\0';
@@ -281,14 +266,13 @@ void topcon (const wchar_t *fmt)
     term_log(fmt);
     wid_topcon_log(fmt);
     wid_console_log(fmt);
-    //wid_console_log(fmt);
+    // wid_console_log(fmt);
   }
   putchar('\n');
   FLUSH_THE_CONSOLE();
 }
 
-void CON (const char *fmt, ...)
-{
+void CON(const char *fmt, ...) {
   log_catchup_missing_indent_levels();
   va_list args;
   va_start(args, fmt);
@@ -296,8 +280,7 @@ void CON (const char *fmt, ...)
   va_end(args);
 }
 
-void CON (const wchar_t *fmt, ...)
-{
+void CON(const wchar_t *fmt, ...) {
   va_list args;
 
   va_start(args, fmt);
@@ -305,8 +288,7 @@ void CON (const wchar_t *fmt, ...)
   va_end(args);
 }
 
-void TOPCON (const char *fmt, ...)
-{
+void TOPCON(const char *fmt, ...) {
   va_list args;
 
   va_start(args, fmt);
@@ -314,8 +296,7 @@ void TOPCON (const char *fmt, ...)
   va_end(args);
 }
 
-void TOPCON (const wchar_t *fmt, ...)
-{
+void TOPCON(const wchar_t *fmt, ...) {
   va_list args;
 
   va_start(args, fmt);
@@ -323,18 +304,17 @@ void TOPCON (const wchar_t *fmt, ...)
   va_end(args);
 }
 
-static void dying_ (const char *fmt, va_list args)
-{
+static void dying_(const char *fmt, va_list args) {
   char buf[MAXLONGSTR];
-  int len;
+  int  len;
 
   buf[0] = '\0';
   get_timestamp(buf, MAXLONGSTR);
-  len = (int)strlen(buf);
+  len = (int) strlen(buf);
 
   snprintf(buf + len, MAXLONGSTR - len, "DYING: ");
 
-  len = (int)strlen(buf);
+  len = (int) strlen(buf);
   vsnprintf(buf + len, MAXLONGSTR - len, fmt, args);
 
   fprintf(stderr, "%s\n", buf);
@@ -343,8 +323,7 @@ static void dying_ (const char *fmt, va_list args)
   FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS();
 }
 
-static void err_ (const char *fmt, va_list args)
-{
+static void err_(const char *fmt, va_list args) {
   static bool nested_error;
   if (nested_error) {
     return;
@@ -352,18 +331,18 @@ static void err_ (const char *fmt, va_list args)
   nested_error = true;
 
   char buf[MAXLONGSTR];
-  int len;
+  int  len;
 
   buf[0] = '\0';
   get_timestamp(buf, MAXLONGSTR);
-  len = (int)strlen(buf);
+  len = (int) strlen(buf);
 
   snprintf(buf + len, MAXLONGSTR - len, "ERROR: %%%%fg=red$");
 
-  len = (int)strlen(buf);
+  len = (int) strlen(buf);
   vsnprintf(buf + len, MAXLONGSTR - len, fmt, args);
 
-  len = (int)strlen(buf);
+  len = (int) strlen(buf);
   snprintf(buf + len, MAXLONGSTR - len, "%%%%fg=reset$");
 
   putf(MY_STDERR, buf);
@@ -382,25 +361,24 @@ static void err_ (const char *fmt, va_list args)
   nested_error = false;
 }
 
-static void croak_ (const char *fmt, va_list args)
-{
+static void croak_(const char *fmt, va_list args) {
   if (g_die_occurred) {
-    fprintf(stderr,"\nNESTED FATAL ERROR %s %s %d ",__FILE__,__FUNCTION__,__LINE__);
+    fprintf(stderr, "\nNESTED FATAL ERROR %s %s %d ", __FILE__, __FUNCTION__, __LINE__);
     exit(1);
   }
   g_die_occurred = true;
 
   char buf[MAXLONGSTR];
-  int len;
-  int tslen;
+  int  len;
+  int  tslen;
 
   buf[0] = '\0';
   get_timestamp(buf, MAXLONGSTR);
-  tslen = len = (int)strlen(buf);
+  tslen = len = (int) strlen(buf);
 
   snprintf(buf + len, MAXLONGSTR - len, "FATAL ERROR: ");
 
-  len = (int)strlen(buf);
+  len = (int) strlen(buf);
   vsnprintf(buf + len, MAXLONGSTR - len, fmt, args);
 
   fprintf(stderr, "%s\n", buf);
@@ -417,8 +395,7 @@ static void croak_ (const char *fmt, va_list args)
   die();
 }
 
-void CROAK (const char *fmt, ...)
-{
+void CROAK(const char *fmt, ...) {
   va_list args;
 
   va_start(args, fmt);
@@ -426,10 +403,9 @@ void CROAK (const char *fmt, ...)
   va_end(args);
 }
 
-static void croak_clean_ (const char *fmt, va_list args)
-{
+static void croak_clean_(const char *fmt, va_list args) {
   if (g_die_occurred) {
-    fprintf(stderr,"\nNESTED FATAL ERROR %s %s %d ",__FILE__,__FUNCTION__,__LINE__);
+    fprintf(stderr, "\nNESTED FATAL ERROR %s %s %d ", __FILE__, __FUNCTION__, __LINE__);
     exit(1);
   }
   g_die_occurred = true;
@@ -439,8 +415,7 @@ static void croak_clean_ (const char *fmt, va_list args)
   die();
 }
 
-void CROAK_CLEAN (const char *fmt, ...)
-{
+void CROAK_CLEAN(const char *fmt, ...) {
   va_list args;
 
   va_start(args, fmt);
@@ -448,8 +423,7 @@ void CROAK_CLEAN (const char *fmt, ...)
   va_end(args);
 }
 
-void DYING (const char *fmt, ...)
-{
+void DYING(const char *fmt, ...) {
   va_list args;
 
   va_start(args, fmt);
@@ -457,14 +431,13 @@ void DYING (const char *fmt, ...)
   va_end(args);
 }
 
-void myerr (const char *fmt, ...)
-{
+void myerr(const char *fmt, ...) {
   static bool nested_error;
   if (nested_error) {
     return;
   }
   bool old_nested_error = nested_error;
-  nested_error = true;
+  nested_error          = true;
 
   if (old_nested_error) {
     //
@@ -492,22 +465,21 @@ void myerr (const char *fmt, ...)
   }
 }
 
-static void msgerr_ (const char *fmt, va_list args)
-{
+static void msgerr_(const char *fmt, va_list args) {
   char buf[MAXLONGSTR];
-  int len;
+  int  len;
 
   buf[0] = '\0';
   get_timestamp(buf, MAXLONGSTR);
-  len = (int)strlen(buf);
+  len = (int) strlen(buf);
 
   snprintf(buf + len, MAXLONGSTR - len, "ERROR: %%%%fg=red$");
 
-  len = (int)strlen(buf);
+  len = (int) strlen(buf);
 
   vsnprintf(buf + len, MAXLONGSTR - len, fmt, args);
 
-  len = (int)strlen(buf);
+  len = (int) strlen(buf);
   snprintf(buf + len, MAXLONGSTR - len, "%%%%fg=reset$");
 
   putf(MY_STDERR, buf);
@@ -524,8 +496,7 @@ static void msgerr_ (const char *fmt, va_list args)
   FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS();
 }
 
-void GAME_UI_MSG_BOX (const char *fmt, ...)
-{
+void GAME_UI_MSG_BOX(const char *fmt, ...) {
   va_list args;
 
   va_start(args, fmt);
@@ -533,8 +504,7 @@ void GAME_UI_MSG_BOX (const char *fmt, ...)
   va_end(args);
 }
 
-static void sdl_msgerr_ (const char *fmt, va_list args)
-{
+static void sdl_msgerr_(const char *fmt, va_list args) {
   char buf[MAXLONGSTR];
 #if SDL_MAJOR_VERSION >= 2
   int ts_len;
@@ -543,11 +513,11 @@ static void sdl_msgerr_ (const char *fmt, va_list args)
 
   buf[0] = '\0';
   get_timestamp(buf, MAXLONGSTR);
-  len = (int)strlen(buf);
+  len = (int) strlen(buf);
 
   snprintf(buf + len, MAXLONGSTR - len, "ERROR: ");
 
-  len = (int)strlen(buf);
+  len = (int) strlen(buf);
 #if SDL_MAJOR_VERSION >= 2
   ts_len = len;
 #endif
@@ -555,8 +525,7 @@ static void sdl_msgerr_ (const char *fmt, va_list args)
   vsnprintf(buf + len, MAXLONGSTR - len, fmt, args);
 
 #if SDL_MAJOR_VERSION >= 2
-  SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR,
-    "zorbash", buf + ts_len, 0);
+  SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "zorbash", buf + ts_len, 0);
 #endif
 
   putf(MY_STDERR, buf);
@@ -571,8 +540,7 @@ static void sdl_msgerr_ (const char *fmt, va_list args)
   FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS();
 }
 
-void SDL_MSG_BOX (const char *fmt, ...)
-{
+void SDL_MSG_BOX(const char *fmt, ...) {
   va_list args;
 
   va_start(args, fmt);
@@ -580,29 +548,27 @@ void SDL_MSG_BOX (const char *fmt, ...)
   va_end(args);
 }
 
-static void botcon_ (const char *fmt, va_list args)
-{
+static void botcon_(const char *fmt, va_list args) {
   char buf[MAXLONGSTR];
-  char ts[MAXLONGSTR/2];
-  int len;
+  char ts[MAXLONGSTR / 2];
+  int  len;
 
   buf[0] = '\0';
   get_timestamp(ts, MAXLONGSTR);
   snprintf(buf, sizeof(buf) - 1, "%sBOTCON: ", ts);
-  len = (int)strlen(buf);
+  len = (int) strlen(buf);
   vsnprintf(buf + len, MAXLONGSTR - len, fmt, args);
 
-  //putf(MY_STDOUT, buf);
-  //term_log(buf);
-  //putchar('\n');
+  // putf(MY_STDOUT, buf);
+  // term_log(buf);
+  // putchar('\n');
 
   wid_botcon_log(buf + len);
-  //wid_console_log(buf + len);
-  //FLUSH_THE_CONSOLE();
+  // wid_console_log(buf + len);
+  // FLUSH_THE_CONSOLE();
 }
 
-static void botcon_ (const wchar_t *fmt, va_list args)
-{
+static void botcon_(const wchar_t *fmt, va_list args) {
   {
     char ts[MAXLONGSTR];
     ts[0] = '\0';
@@ -613,13 +579,13 @@ static void botcon_ (const wchar_t *fmt, va_list args)
 
   {
     wchar_t buf[MAXLONGSTR];
-    auto wrote = vswprintf(buf, MAXLONGSTR, fmt, args);
+    auto    wrote = vswprintf(buf, MAXLONGSTR, fmt, args);
 
     //
     // Only a single nul is written, but as we read 2 at a time...
     //
     if (wrote && (wrote < MAXLONGSTR - 1)) {
-      buf[wrote+1] = '\0';
+      buf[wrote + 1] = '\0';
     } else {
       fprintf(stderr, "Failed to botcon log: [%S]\n", fmt);
     }
@@ -627,28 +593,26 @@ static void botcon_ (const wchar_t *fmt, va_list args)
     // fwprintf(MY_STDOUT, L"%S\n", buf);
     // term_log(buf);
     wid_botcon_log(buf);
-    //wid_console_log(buf);
+    // wid_console_log(buf);
   }
 
-  //putchar('\n');
-  //FLUSH_THE_CONSOLE();
+  // putchar('\n');
+  // FLUSH_THE_CONSOLE();
 }
 
-void botcon (const wchar_t *fmt)
-{
+void botcon(const wchar_t *fmt) {
   {
     // fwprintf(MY_STDOUT, L"%S\n", fmt);
     // term_log(fmt);
     wid_botcon_log(fmt);
-    //wid_console_log(fmt);
+    // wid_console_log(fmt);
   }
 
-  //putchar('\n');
-  //FLUSH_THE_CONSOLE();
+  // putchar('\n');
+  // FLUSH_THE_CONSOLE();
 }
 
-void BOTCON (const char *fmt, ...)
-{
+void BOTCON(const char *fmt, ...) {
   va_list args;
 
   va_start(args, fmt);
@@ -656,8 +620,7 @@ void BOTCON (const char *fmt, ...)
   va_end(args);
 }
 
-void BOTCON (const wchar_t *fmt, ...)
-{
+void BOTCON(const wchar_t *fmt, ...) {
   va_list args;
 
   va_start(args, fmt);

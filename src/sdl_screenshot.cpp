@@ -14,13 +14,13 @@
 #include "my_string.h"
 #include "my_ptrcheck.h"
 
-void sdl_screenshot (void)
-{ TRACE_AND_INDENT();
+void sdl_screenshot(void) {
+  TRACE_AND_INDENT();
   g_do_screenshot = 1;
 }
 
-void sdl_screenshot_do (void)
-{ TRACE_AND_INDENT();
+void sdl_screenshot_do(void) {
+  TRACE_AND_INDENT();
   GL_ERROR_CHECK();
   int fbo = FBO_FINAL;
   int w;
@@ -49,10 +49,9 @@ void sdl_screenshot_do (void)
   glReadPixels(0, 0, w, h, GL_RGB, GL_UNSIGNED_BYTE, pixels.data());
   GL_ERROR_CHECK();
 
-  for(int line = 0; line != h/2; ++line) {
-    std::swap_ranges(pixels.begin() + 3 * w * line,
-             pixels.begin() + 3 * w * (line+1),
-             pixels.begin() + 3 * w * (h-line-1));
+  for (int line = 0; line != h / 2; ++line) {
+    std::swap_ranges(pixels.begin() + 3 * w * line, pixels.begin() + 3 * w * (line + 1),
+                     pixels.begin() + 3 * w * (h - line - 1));
   }
 
   int components = 3;
@@ -68,8 +67,8 @@ void sdl_screenshot_do (void)
   count++;
 }
 
-std::vector<uint8_t> sdl_fbo_save (int fbo)
-{ TRACE_AND_INDENT();
+std::vector<uint8_t> sdl_fbo_save(int fbo) {
+  TRACE_AND_INDENT();
   int w;
   int h;
   fbo_get_size(fbo, w, h);
@@ -93,8 +92,8 @@ std::vector<uint8_t> sdl_fbo_save (int fbo)
   return pixels;
 }
 
-void sdl_fbo_load (int fbo, const std::vector<uint8_t> &pixels)
-{ TRACE_AND_INDENT();
+void sdl_fbo_load(int fbo, const std::vector<uint8_t> &pixels) {
+  TRACE_AND_INDENT();
   if (pixels.empty()) {
     return;
   }
@@ -117,8 +116,8 @@ void sdl_fbo_load (int fbo, const std::vector<uint8_t> &pixels)
   GL_ERROR_CHECK();
 }
 
-void sdl_fbo_dump (int fbo, const std::string &name)
-{ TRACE_AND_INDENT();
+void sdl_fbo_dump(int fbo, const std::string &name) {
+  TRACE_AND_INDENT();
   int w;
   int h;
   fbo_get_size(fbo, w, h);
@@ -139,9 +138,9 @@ void sdl_fbo_dump (int fbo, const std::string &name)
   blit_fbo_unbind();
   GL_ERROR_CHECK();
 
-  static int count = 0;
-  int components = 4;
-  char *png = dynprintf("screenshot.%s.%03d.png", name.c_str(), count);
+  static int count      = 0;
+  int        components = 4;
+  char *     png        = dynprintf("screenshot.%s.%03d.png", name.c_str(), count);
   stbi_write_png(png, w, h, components, pixels.data(), 4 * w);
   BOTCON("Screenshot: %s", png);
   myfree(png);

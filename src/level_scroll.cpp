@@ -12,9 +12,9 @@
 #include "my_globals.h"
 #include "my_sdl.h"
 
-void Level::scroll_map_do (bool fast)
-{ TRACE_AND_INDENT();
-  if (!fast) {
+void Level::scroll_map_do(bool fast) {
+  TRACE_AND_INDENT();
+  if (! fast) {
     //
     // Not sure why I have this :)
     //
@@ -23,9 +23,9 @@ void Level::scroll_map_do (bool fast)
     }
   }
 
-  const float vbigstep = 1;
-  const float bigstep = 4;
-  const float medstep = 16;
+  const float vbigstep  = 1;
+  const float bigstep   = 4;
+  const float medstep   = 16;
   const float smallstep = 32;
 
   auto dx = map_at.x - map_wanted_at.x;
@@ -81,9 +81,9 @@ if (player) {
         // This used to be a thing when I did not have pixel
         // accurate map and rounded pixels were a thing.
         //
-        //dx *= TILE_WIDTH;
-        //dx = (int) ceil(dx);
-        //dx /= TILE_WIDTH;
+        // dx *= TILE_WIDTH;
+        // dx = (int) ceil(dx);
+        // dx /= TILE_WIDTH;
         map_at.x += dx;
       }
 
@@ -105,9 +105,9 @@ if (player) {
         // This used to be a thing when I did not have pixel
         // accurate map and rounded pixels were a thing.
         //
-        //dy *= TILE_HEIGHT;
-        //dy = (int) ceil(dy);
-        //dy /= TILE_HEIGHT;
+        // dy *= TILE_HEIGHT;
+        // dy = (int) ceil(dy);
+        // dy /= TILE_HEIGHT;
         map_at.y += dy;
       }
     }
@@ -136,10 +136,10 @@ if (player) {
   map_at.y /= TILE_HEIGHT;
 
 #ifdef LIMIT_SCROLLING_TO_MAP
-  map_at.x = std::max(map_at.x, (float)0.0);
-  map_at.y = std::max(map_at.y, (float)0.0);
-  map_at.x = std::min(map_at.x, (float)MAP_WIDTH - TILES_ACROSS);
-  map_at.y = std::min(map_at.y, (float)MAP_HEIGHT - TILES_DOWN);
+  map_at.x = std::max(map_at.x, (float) 0.0);
+  map_at.y = std::max(map_at.y, (float) 0.0);
+  map_at.x = std::min(map_at.x, (float) MAP_WIDTH - TILES_ACROSS);
+  map_at.y = std::min(map_at.y, (float) MAP_HEIGHT - TILES_DOWN);
 #endif
 
   {
@@ -156,8 +156,8 @@ if (player) {
   }
 }
 
-void Level::scroll_map (void)
-{ TRACE_AND_INDENT();
+void Level::scroll_map(void) {
+  TRACE_AND_INDENT();
   if (wid_find_under_mouse_when_scrolling()) {
     return;
   }
@@ -165,15 +165,15 @@ void Level::scroll_map (void)
   scroll_map_do(false);
 }
 
-void Level::scroll_map_to_player (void)
-{ TRACE_AND_INDENT();
-  if (!player) {
+void Level::scroll_map_to_player(void) {
+  TRACE_AND_INDENT();
+  if (! player) {
     return;
   }
 
-  mouse_at = -1;
-  mouse_old = -1;
-  ts_redraw_bg = time_get_time_ms_cached() + 500;
+  mouse_at          = -1;
+  mouse_old         = -1;
+  ts_redraw_bg      = time_get_time_ms_cached() + 500;
   map_follow_player = true;
 
   map_wanted_at = player->mid_at - fpoint(TILES_ACROSS / 2, TILES_DOWN / 2);
@@ -182,9 +182,9 @@ void Level::scroll_map_to_player (void)
   scroll_map_do(true);
 }
 
-void Level::scroll_map_to_player_immediately (void)
-{ TRACE_AND_INDENT();
-  if (!player) {
+void Level::scroll_map_to_player_immediately(void) {
+  TRACE_AND_INDENT();
+  if (! player) {
     return;
   }
   scroll_map_to_player();
@@ -214,30 +214,30 @@ void Level::scroll_map_to_player_immediately (void)
 //
 // Make the map scroll to the cursor (or the player)
 //
-void Level::scroll_map_set_target (void)
-{ TRACE_AND_INDENT();
+void Level::scroll_map_set_target(void) {
+  TRACE_AND_INDENT();
   fpoint follow;
-  float sensitivity;
-  float x_sensitivity;
-  float y_sensitivity;
+  float  sensitivity;
+  float  x_sensitivity;
+  float  y_sensitivity;
 
   if (wid_find_under_mouse_when_scrolling()) {
     return;
   }
 
   if (player && map_follow_player) {
-    follow = player->mid_at;
-    sensitivity = 0.5;
+    follow        = player->mid_at;
+    sensitivity   = 0.5;
     x_sensitivity = sensitivity * game->config.video_w_h_ratio;
     y_sensitivity = sensitivity;
 
     //
     // Auto scroll if we cross these limits
     //
-    float x1 = ((float)TILES_ACROSS / 2) - x_sensitivity;
-    float x2 = ((float)TILES_ACROSS / 2) + x_sensitivity;
-    float y1 = ((float)TILES_DOWN / 2) - y_sensitivity;
-    float y2 = ((float)TILES_DOWN / 2) + y_sensitivity;
+    float x1 = ((float) TILES_ACROSS / 2) - x_sensitivity;
+    float x2 = ((float) TILES_ACROSS / 2) + x_sensitivity;
+    float y1 = ((float) TILES_DOWN / 2) - y_sensitivity;
+    float y2 = ((float) TILES_DOWN / 2) + y_sensitivity;
 
     //
     // Auto scroll
@@ -257,7 +257,7 @@ void Level::scroll_map_set_target (void)
     if (dy < y1) {
       map_wanted_at.y--;
     }
-  } else if (cursor && !map_follow_player) {
+  } else if (cursor && ! map_follow_player) {
     //
     // Allow the player to scroll around the scene of carnage
     // once dead

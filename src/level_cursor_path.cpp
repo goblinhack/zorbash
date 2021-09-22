@@ -17,25 +17,25 @@
 #include "my_dmap.h"
 #include "my_wid.h"
 
-void Level::cursor_path_draw_circle (void)
-{ TRACE_AND_INDENT();
+void Level::cursor_path_draw_circle(void) {
+  TRACE_AND_INDENT();
   auto what = game->request_to_throw_item;
-  if (!what) {
+  if (! what) {
     what = game->request_to_fire_item;
-    if (!what) {
+    if (! what) {
       return;
     }
   }
 
   auto radius_min = what->tp()->blast_min_radius();
   auto radius_max = what->tp()->blast_max_radius();
-  auto mid_at = cursor->mid_at;
+  auto mid_at     = cursor->mid_at;
 
   //
   // Check not out of range
   //
   bool too_far = false;
-  auto dist = distance(player->mid_at, mid_at);
+  auto dist    = distance(player->mid_at, mid_at);
 
   if (game->request_to_throw_item) {
     if (dist > player->get_throw_distance()) {
@@ -79,11 +79,11 @@ void Level::cursor_path_draw_circle (void)
 //
 // Create the cursor path, avoiding things like lava
 //
-void Level::cursor_path_draw_line (point start, point end)
-{ TRACE_AND_INDENT();
-  Dmap d {};
+void Level::cursor_path_draw_line(point start, point end) {
+  TRACE_AND_INDENT();
+  Dmap  d {};
   point dmap_start = start;
-  point dmap_end = end;
+  point dmap_end   = end;
 
   int minx, miny, maxx, maxy;
   if (dmap_start.x < dmap_end.x) {
@@ -155,8 +155,7 @@ void Level::cursor_path_draw_line (point start, point end)
     //
     for (auto y = miny; y < maxy; y++) {
       for (auto x = minx; x < maxx; x++) {
-        if (is_extreme_hazard(x, y) ||
-          is_obs_wall_or_door(x, y)) {
+        if (is_extreme_hazard(x, y) || is_obs_wall_or_door(x, y)) {
           set(d.val, x, y, DMAP_IS_WALL);
         } else {
           set(d.val, x, y, DMAP_IS_PASSABLE);
@@ -169,9 +168,8 @@ void Level::cursor_path_draw_line (point start, point end)
     //
     for (auto y = miny; y < maxy; y++) {
       for (auto x = minx; x < maxx; x++) {
-        if (is_extreme_hazard(x, y) ||
-          player->ai_obstacle_for_me(make_point(x, y)) ||
-          player->collision_obstacle(point(x, y))) {
+        if (is_extreme_hazard(x, y) || player->ai_obstacle_for_me(make_point(x, y)) ||
+            player->collision_obstacle(point(x, y))) {
           set(d.val, x, y, DMAP_IS_WALL);
         } else {
           set(d.val, x, y, DMAP_IS_PASSABLE);
@@ -181,7 +179,7 @@ void Level::cursor_path_draw_line (point start, point end)
   }
 
   dmap_start = point(minx, miny);
-  dmap_end = point(maxx, maxy);
+  dmap_end   = point(maxx, maxy);
 
   set(d.val, end.x, end.y, DMAP_IS_GOAL);
   set(d.val, start.x, start.y, DMAP_IS_PASSABLE);
@@ -189,40 +187,40 @@ void Level::cursor_path_draw_line (point start, point end)
   dbg3("Make cursor path %d,%d to %d,%d", start.x, start.y, end.x, end.y);
 
   dmap_process(&d, dmap_start, dmap_end);
-  //dmap_print(&d, start, dmap_start, dmap_end);
-  auto p = dmap_solve_allow_diagonal(&d, start);
+  // dmap_print(&d, start, dmap_start, dmap_end);
+  auto p                 = dmap_solve_allow_diagonal(&d, start);
   game->cursor_move_path = p;
 
-  for (auto& c : p) {
+  for (auto &c : p) {
     if (cursor && cursor->is_visible()) {
       if ((c.x == cursor_at.x) && (c.y == cursor_at.y)) {
         continue;
       }
     }
-    thing_new("cursor_path", fpoint(c.x , c.y));
+    thing_new("cursor_path", fpoint(c.x, c.y));
   }
 }
 
-void Level::cursor_path_draw_line (const std::vector<point> &move_path)
-{ TRACE_AND_INDENT();
+void Level::cursor_path_draw_line(const std::vector<point> &move_path) {
+  TRACE_AND_INDENT();
   game->cursor_move_path = move_path;
 
-  for (auto& c : move_path) {
+  for (auto &c : move_path) {
     if (cursor && cursor->is_visible()) {
       if ((c.x == cursor_at.x) && (c.y == cursor_at.y)) {
         continue;
       }
     }
-    thing_new("cursor_path", fpoint(c.x , c.y));
+    thing_new("cursor_path", fpoint(c.x, c.y));
   }
 }
 
 //
 // Create the cursor path, avoiding things like lava
 //
-void Level::cursor_path_draw (point start, point end)
-{ TRACE_AND_INDENT();
-  if (!player) {
+void Level::cursor_path_draw(point start, point end) {
+  TRACE_AND_INDENT();
+  if (! player) {
     return;
   }
 
@@ -248,9 +246,9 @@ void Level::cursor_path_draw (point start, point end)
   minimap_valid = false;
 }
 
-void Level::cursor_path_draw (const std::vector<point> &move_path)
-{ TRACE_AND_INDENT();
-  if (!player) {
+void Level::cursor_path_draw(const std::vector<point> &move_path) {
+  TRACE_AND_INDENT();
+  if (! player) {
     return;
   }
 
@@ -279,9 +277,9 @@ void Level::cursor_path_draw (const std::vector<point> &move_path)
 //
 // Create the cursor path, avoiding things like lava
 //
-void Level::cursor_path_draw (void)
-{ TRACE_AND_INDENT();
-  if (!player) {
+void Level::cursor_path_draw(void) {
+  TRACE_AND_INDENT();
+  if (! player) {
     return;
   }
 
@@ -299,9 +297,9 @@ void Level::cursor_path_draw (void)
 // Using a dmap, solve the path to where the cursor is, creating a highlighted
 // path to follow.
 //
-void Level::cursor_path_create (void)
-{ TRACE_AND_INDENT();
-  if (!cursor) {
+void Level::cursor_path_create(void) {
+  TRACE_AND_INDENT();
+  if (! cursor) {
     return;
   }
 
@@ -318,14 +316,10 @@ void Level::cursor_path_create (void)
     return;
   }
 
-  if ((game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
-    (game->state == Game::STATE_MOVING_ITEMS) ||
-    (game->state == Game::STATE_COLLECTING_ITEMS) ||
-    (game->state == Game::STATE_WIELDING_ITEMS) ||
-    (game->state == Game::STATE_SAVE_MENU) ||
-    (game->state == Game::STATE_LOAD_MENU) ||
-    (game->state == Game::STATE_QUIT_MENU) ||
-    (game->state == Game::STATE_ENCHANTING_ITEMS)) {
+  if ((game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) || (game->state == Game::STATE_MOVING_ITEMS) ||
+      (game->state == Game::STATE_COLLECTING_ITEMS) || (game->state == Game::STATE_WIELDING_ITEMS) ||
+      (game->state == Game::STATE_SAVE_MENU) || (game->state == Game::STATE_LOAD_MENU) ||
+      (game->state == Game::STATE_QUIT_MENU) || (game->state == Game::STATE_ENCHANTING_ITEMS)) {
     return;
   }
 
@@ -334,7 +328,7 @@ void Level::cursor_path_create (void)
   // blast radius
   //
   if (game->request_to_fire_item) {
-    if (!game->request_to_fire_item->blast_max_radius()) {
+    if (! game->request_to_fire_item->blast_max_radius()) {
       return;
     }
   }
@@ -343,15 +337,13 @@ void Level::cursor_path_create (void)
   // If not following the player, draw the path
   //
   if (player) {
-    cursor_path_draw(
-      point(player->mid_at.x, player->mid_at.y),
-      point(cursor_at.x, cursor_at.y));
+    cursor_path_draw(point(player->mid_at.x, player->mid_at.y), point(cursor_at.x, cursor_at.y));
   }
 }
 
-void Level::cursor_path_create (const std::vector<point> &move_path)
-{ TRACE_AND_INDENT();
-  if (!cursor) {
+void Level::cursor_path_create(const std::vector<point> &move_path) {
+  TRACE_AND_INDENT();
+  if (! cursor) {
     return;
   }
 
@@ -362,7 +354,7 @@ void Level::cursor_path_create (const std::vector<point> &move_path)
   // blast radius
   //
   if (game->request_to_fire_item) {
-    if (!game->request_to_fire_item->blast_max_radius()) {
+    if (! game->request_to_fire_item->blast_max_radius()) {
       return;
     }
   }
@@ -379,10 +371,10 @@ void Level::cursor_path_create (const std::vector<point> &move_path)
 // Using a dmap, solve the path to where the cursor is, creating a highlighted
 // path to follow.
 //
-void Level::cursor_path_clear (void)
-{ TRACE_AND_INDENT();
+void Level::cursor_path_clear(void) {
+  TRACE_AND_INDENT();
   auto level = game->level;
-  if (!level) {
+  if (! level) {
     return;
   }
 
@@ -393,7 +385,8 @@ void Level::cursor_path_clear (void)
       FOR_ALL_CURSOR_PATH_THINGS(level, t, x, y) {
         t->hide();
         t->dead("by running out of life");
-      } FOR_ALL_THINGS_END()
+      }
+      FOR_ALL_THINGS_END()
     }
   }
 }

@@ -19,8 +19,8 @@
 //
 // Python callback upon being tick
 //
-bool Thing::on_tick (void)
-{ TRACE_AND_INDENT();
+bool Thing::on_tick(void) {
+  TRACE_AND_INDENT();
   auto on_tick = tp()->on_tick_do();
   if (std::empty(on_tick)) {
     return false;
@@ -28,42 +28,31 @@ bool Thing::on_tick (void)
 
   auto t = split_tokens(on_tick, '.');
   if (t.size() == 2) {
-    auto mod = t[0];
-    auto fn = t[1];
+    auto        mod   = t[0];
+    auto        fn    = t[1];
     std::size_t found = fn.find("()");
     if (found != std::string::npos) {
       fn = fn.replace(found, 2, "");
     }
 
-    dbg("Call %s.%s(%s)", mod.c_str(), fn.c_str(),
-      to_string().c_str());
+    dbg("Call %s.%s(%s)", mod.c_str(), fn.c_str(), to_string().c_str());
 
-    return py_call_bool_fn(mod.c_str(), fn.c_str(), id.id,
-                (unsigned int)mid_at.x, (unsigned int)mid_at.y);
+    return py_call_bool_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) mid_at.x, (unsigned int) mid_at.y);
   }
 
-  ERR("Bad on_tick call [%s] expected mod:function, got %d elems",
-    on_tick.c_str(), (int)on_tick.size());
+  ERR("Bad on_tick call [%s] expected mod:function, got %d elems", on_tick.c_str(), (int) on_tick.size());
   return false;
 }
 
-void Thing::update_tick (void)
-{
+void Thing::update_tick(void) {
   set_tick_last_did_something(game->tick_current);
   set_tick_last_location_check(game->tick_current);
 }
 
-void Thing::achieve_goals_in_life (void)
-{ TRACE_AND_INDENT();
-  if (is_changing_level ||
-    is_falling ||
-    is_waiting_to_ascend_dungeon ||
-    is_waiting_to_descend_sewer ||
-    is_waiting_to_descend_dungeon ||
-    is_waiting_to_ascend_sewer ||
-    is_waiting_to_fall ||
-    is_the_grid ||
-    is_jumping) {
+void Thing::achieve_goals_in_life(void) {
+  TRACE_AND_INDENT();
+  if (is_changing_level || is_falling || is_waiting_to_ascend_dungeon || is_waiting_to_descend_sewer ||
+      is_waiting_to_descend_dungeon || is_waiting_to_ascend_sewer || is_waiting_to_fall || is_the_grid || is_jumping) {
     dbg("Skip achieve goals in life");
     return;
   }
@@ -76,44 +65,55 @@ void Thing::achieve_goals_in_life (void)
   // Lifespan tick for carried torches must be before is_hidden check
   //
   lifespan_tick();
-  if (is_dead) { return; }
+  if (is_dead) {
+    return;
+  }
 
   hunger_clock();
-  if (is_dead) { return; }
+  if (is_dead) {
+    return;
+  }
 
   //
   // Timeout enemies
   //
   enemies_tick();
-  if (is_dead) { return; }
+  if (is_dead) {
+    return;
+  }
 
   //
   // Apply poison damage
   //
   poison_tick();
-  if (is_dead) { return; }
+  if (is_dead) {
+    return;
+  }
 
   if (collision_check_do()) {
     return;
   }
-  if (is_dead) { return; }
+  if (is_dead) {
+    return;
+  }
 
   //
   // Roll the dice and see if we do anything
   //
   idle_check();
-  if (is_dead) { return; }
+  if (is_dead) {
+    return;
+  }
 
   //
   // Roll the dice and see if we do anything
   //
-  if (!std::empty(get_on_idle_dice_str())) {
+  if (! std::empty(get_on_idle_dice_str())) {
     auto roll = get_idle_tick();
-    if (game->tick_current - get_tick_last_did_something() >= (unsigned int)roll) {
+    if (game->tick_current - get_tick_last_did_something() >= (unsigned int) roll) {
       auto d = get_on_idle_dice();
-      py_call_void_fn(d.python_mod.c_str(),
-              d.python_func.c_str(),
-              id.id, (unsigned int)mid_at.x, (unsigned int)mid_at.y);
+      py_call_void_fn(d.python_mod.c_str(), d.python_func.c_str(), id.id, (unsigned int) mid_at.x,
+                      (unsigned int) mid_at.y);
       set_tick_last_did_something(game->tick_current);
     }
   }
@@ -135,16 +135,16 @@ void Thing::achieve_goals_in_life (void)
     }
   }
 
-  if (!is_player()) {
+  if (! is_player()) {
     if (try_to_escape()) {
       dbg("Try to escape");
       return;
     }
 
     if (is_jumper()) {
-      if ((int)pcg_random_range(0, 1000) < tp()->is_jumper_chance_d1000()) {
+      if ((int) pcg_random_range(0, 1000) < tp()->is_jumper_chance_d1000()) {
         dbg("Try to randomly jump");
-        if (!collision_obstacle(level->player)) {
+        if (! collision_obstacle(level->player)) {
           if (try_to_jump_towards_player()) {
             return;
           }
@@ -185,8 +185,8 @@ void Thing::achieve_goals_in_life (void)
   }
 }
 
-void Thing::achieve_goals_in_death (void)
-{ TRACE_AND_INDENT();
+void Thing::achieve_goals_in_death(void) {
+  TRACE_AND_INDENT();
   dbg("Achieve death goals at tick %u", game->tick_current);
 
   resurrect_tick();
@@ -197,16 +197,15 @@ void Thing::achieve_goals_in_death (void)
 //
 // Returns true if we attacked something
 //
-bool Thing::collision_check_do (void)
-{ TRACE_AND_INDENT();
-  if (!tp()->collision_check()) {
+bool Thing::collision_check_do(void) {
+  TRACE_AND_INDENT();
+  if (! tp()->collision_check()) {
     return false;
   }
 
   bool target_attacked = false;
   bool target_overlaps = false;
-  if (collision_check_and_handle_at(&target_attacked,
-                    &target_overlaps)) {
+  if (collision_check_and_handle_at(&target_attacked, &target_overlaps)) {
     return target_attacked;
   }
 
@@ -217,11 +216,9 @@ bool Thing::collision_check_do (void)
   return target_attacked;
 }
 
-void Thing::tick (void)
-{ TRACE_AND_INDENT();
-  IF_DEBUG4 {
-    dbg("Tick");
-  }
+void Thing::tick(void) {
+  TRACE_AND_INDENT();
+  IF_DEBUG4 { dbg("Tick"); }
   TRACE_AND_INDENT();
   update_interpolated_position();
 
@@ -230,23 +227,19 @@ void Thing::tick (void)
     // Resurrect things unless that can do unless that has been
     // disabled e.g. via minion master death
     //
-    if (!is_resurrection_blocked && is_resurrectable()) {
+    if (! is_resurrection_blocked && is_resurrectable()) {
       //
       // Tick on player move/change of the current tick
       //
       achieve_goals_in_death();
     }
 
-    IF_DEBUG4 {
-      log("Tick; is dead");
-    }
+    IF_DEBUG4 { log("Tick; is dead"); }
     return;
   }
 
   if (unlikely(is_dead)) {
-    IF_DEBUG4 {
-      log("Tick; died");
-    }
+    IF_DEBUG4 { log("Tick; died"); }
     return;
   }
 

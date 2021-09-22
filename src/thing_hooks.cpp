@@ -20,8 +20,8 @@
 // Get rid of all the hooks to other things that this thing has. e.g. the
 // weapons it carries etc.
 //
-void Thing::hooks_remove ()
-{ TRACE_AND_INDENT();
+void Thing::hooks_remove() {
+  TRACE_AND_INDENT();
   //
   // We are owned by something. i.e. we are a sword.
   //
@@ -73,20 +73,18 @@ void Thing::hooks_remove ()
       auto carry_anim = owner->weapon_get_carry_anim();
       if (carry_anim) {
         dbg("Make carry weapon visible %s", owner->to_string().c_str());
-  TRACE_AND_INDENT();
+        TRACE_AND_INDENT();
         //
         // But only if the owner is visible.
         //
         if (owner->is_visible()) {
           if (is_loggable_for_unimportant_stuff()) {
-            dbg("Reapply carry-anim for owner %s",
-               owner->to_string().c_str());
+            dbg("Reapply carry-anim for owner %s", owner->to_string().c_str());
           }
           carry_anim->visible();
         } else {
           if (is_loggable_for_unimportant_stuff()) {
-            dbg("Do not reapply carry-anim for invisible owner %s",
-               owner->to_string().c_str());
+            dbg("Do not reapply carry-anim for invisible owner %s", owner->to_string().c_str());
           }
         }
       } else {
@@ -127,7 +125,8 @@ void Thing::hooks_remove ()
   //
   // We own things like a sword. i.e. we are a player.
   //
-  { TRACE_AND_INDENT();
+  {
+    TRACE_AND_INDENT();
     auto item = weapon_get_carry_anim();
     if (item) {
       if (is_loggable_for_unimportant_stuff()) {
@@ -140,7 +139,8 @@ void Thing::hooks_remove ()
     }
   }
 
-  { TRACE_AND_INDENT();
+  {
+    TRACE_AND_INDENT();
     auto item = weapon_get_use_anim();
     if (item) {
       if (is_loggable_for_unimportant_stuff()) {
@@ -154,8 +154,8 @@ void Thing::hooks_remove ()
   }
 }
 
-void Thing::remove_all_references ()
-{ TRACE_AND_INDENT();
+void Thing::remove_all_references() {
+  TRACE_AND_INDENT();
   //
   // Some things have lots of things they own
   //
@@ -214,7 +214,7 @@ void Thing::remove_all_references ()
     FOR_ALL_THING_GROUPS(group) {
       for (auto p : level->all_things[group]) {
         auto t = p.second;
-        if (!t->monstp) {
+        if (! t->monstp) {
           continue;
         }
         if (t == this) {
@@ -247,7 +247,7 @@ void Thing::remove_all_references ()
     int group = get_group();
     for (auto p : level->all_things_of_interest[group]) {
       auto t = p.second;
-      if (!t->monstp) {
+      if (! t->monstp) {
         continue;
       }
       if (t == this) {
@@ -278,7 +278,7 @@ void Thing::remove_all_references ()
 
     for (auto p : level->all_animated_things[group]) {
       auto t = p.second;
-      if (!t->monstp) {
+      if (! t->monstp) {
         continue;
       }
       if (t == this) {

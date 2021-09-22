@@ -17,12 +17,12 @@
 //
 // Return a score, higher is better for perceived value to you
 //
-int Thing::worth_collecting (Thingp it, Thingp *would_need_to_drop)
-{ TRACE_AND_INDENT();
+int Thing::worth_collecting(Thingp it, Thingp *would_need_to_drop) {
+  TRACE_AND_INDENT();
   //
   // Don't try to pick up goblins carrying gold
   //
-  if (!it->is_collectable()) {
+  if (! it->is_collectable()) {
     dbg("Worth collecting %s? no, not collectable", it->to_string().c_str());
     return -1;
   }
@@ -63,22 +63,21 @@ int Thing::worth_collecting (Thingp it, Thingp *would_need_to_drop)
   // Finally, if we have too many weapons, after adding, drop the worst.
   //
   if (it->is_weapon()) {
-    Thingp worst_weapon = nullptr;
-    auto worst_weapon_value = get_carried_weapon_least_value(&worst_weapon);
+    Thingp worst_weapon       = nullptr;
+    auto   worst_weapon_value = get_carried_weapon_least_value(&worst_weapon);
     //
     // If we have an existing weapon, we can be smarter on checks and decided if
     // we perhaps want to swap the worst weapon for this one.
     //
     if (worst_weapon) {
-      dbg("Worth collecting %s? compare against worst weapon %s",
-        it->to_string().c_str(),
-        worst_weapon->to_string().c_str());
+      dbg("Worth collecting %s? compare against worst weapon %s", it->to_string().c_str(),
+          worst_weapon->to_string().c_str());
 
       //
       // Can it fit in the bag?
       //
       if (it->is_bag_item()) {
-        if (!bag_add_test(it)) {
+        if (! bag_add_test(it)) {
           //
           // No. Can we drop something worse.
           //
@@ -87,18 +86,16 @@ int Thing::worth_collecting (Thingp it, Thingp *would_need_to_drop)
             // This is better than the worst weapon.
             //
             *would_need_to_drop = worst_weapon;
-            dbg("Worth collecting %s? no space, would need to drop %s",
-              it->to_string().c_str(),
-              worst_weapon->to_string().c_str());
+            dbg("Worth collecting %s? no space, would need to drop %s", it->to_string().c_str(),
+                worst_weapon->to_string().c_str());
             return value_to_me;
           }
 
           //
           // This is WORSE than the worst weapon.
           //
-          dbg("Worth collecting %s? no, cannot fit and is worse than the worst weapon %s",
-            it->to_string().c_str(),
-            worst_weapon->to_string().c_str());
+          dbg("Worth collecting %s? no, cannot fit and is worse than the worst weapon %s", it->to_string().c_str(),
+              worst_weapon->to_string().c_str());
           return -1;
         }
 
@@ -113,8 +110,7 @@ int Thing::worth_collecting (Thingp it, Thingp *would_need_to_drop)
           if (get_carried_weapon_count() > 1) {
             *would_need_to_drop = worst_weapon;
             dbg("Worth collecting %s? yes, but no space and too many weapons, would need to drop %s",
-              it->to_string().c_str(),
-              worst_weapon->to_string().c_str());
+                it->to_string().c_str(), worst_weapon->to_string().c_str());
             return value_to_me;
           }
 
@@ -122,9 +118,8 @@ int Thing::worth_collecting (Thingp it, Thingp *would_need_to_drop)
           // This is WORSE than the worst weapon. Only carry if we have little
           // else.
           //
-          dbg("Worth collecting? yes as %s is better than the worst weapon %s",
-            it->to_string().c_str(),
-            worst_weapon->to_string().c_str());
+          dbg("Worth collecting? yes as %s is better than the worst weapon %s", it->to_string().c_str(),
+              worst_weapon->to_string().c_str());
           return value_to_me;
         }
 
@@ -135,46 +130,43 @@ int Thing::worth_collecting (Thingp it, Thingp *would_need_to_drop)
         if (get_carried_weapon_count() > 1) {
           dbg("Worth collecting %s? no, it is worse than the worst weapon %s, "
               "and we already have enough weapons",
-            it->to_string().c_str(),
-            worst_weapon->to_string().c_str());
+              it->to_string().c_str(), worst_weapon->to_string().c_str());
           return -1;
         }
 
         dbg("Worth collecting %s? yes, it is worse than the worst weapon %s, "
             "but only collect as are low on weapons",
-          it->to_string().c_str(),
-          worst_weapon->to_string().c_str());
+            it->to_string().c_str(), worst_weapon->to_string().c_str());
         return value_to_me;
       }
     } else {
       if (it->is_bag_item()) {
-        if (!bag_add_test(it)) {
+        if (! bag_add_test(it)) {
           dbg("Worth collecting %s? no, no space", it->to_string().c_str());
           return -1;
         }
       }
-        dbg("Worth collecting %s? yes, have space", it->to_string().c_str());
-        return value_to_me;
+      dbg("Worth collecting %s? yes, have space", it->to_string().c_str());
+      return value_to_me;
     }
   }
 
   if (it->is_wand()) {
-    Thingp worst_wand = nullptr;
-    auto worst_wand_value = get_carried_wand_least_value(&worst_wand);
+    Thingp worst_wand       = nullptr;
+    auto   worst_wand_value = get_carried_wand_least_value(&worst_wand);
     //
     // If we have an existing wand, we can be smarter on checks and decided if
     // we perhaps want to swap the worst wand for this one.
     //
     if (worst_wand) {
-      dbg("Worth collecting %s? compare against worst wand %s",
-        it->to_string().c_str(),
-        worst_wand->to_string().c_str());
+      dbg("Worth collecting %s? compare against worst wand %s", it->to_string().c_str(),
+          worst_wand->to_string().c_str());
 
       //
       // Can it fit in the bag?
       //
       if (it->is_bag_item()) {
-        if (!bag_add_test(it)) {
+        if (! bag_add_test(it)) {
           //
           // No. Can we drop something worse.
           //
@@ -183,18 +175,16 @@ int Thing::worth_collecting (Thingp it, Thingp *would_need_to_drop)
             // This is better than the worst wand.
             //
             *would_need_to_drop = worst_wand;
-            dbg("Worth collecting %s? no space, would need to drop %s",
-              it->to_string().c_str(),
-              worst_wand->to_string().c_str());
+            dbg("Worth collecting %s? no space, would need to drop %s", it->to_string().c_str(),
+                worst_wand->to_string().c_str());
             return value_to_me;
           }
 
           //
           // This is WORSE than the worst wand.
           //
-          dbg("Worth collecting %s? no, cannot fit and is worse than the worst wand %s",
-            it->to_string().c_str(),
-            worst_wand->to_string().c_str());
+          dbg("Worth collecting %s? no, cannot fit and is worse than the worst wand %s", it->to_string().c_str(),
+              worst_wand->to_string().c_str());
           return -1;
         }
 
@@ -209,8 +199,7 @@ int Thing::worth_collecting (Thingp it, Thingp *would_need_to_drop)
           if (get_carried_wand_count() > 5) {
             *would_need_to_drop = worst_wand;
             dbg("Worth collecting %s? yes, but no space and too many wands, would need to drop %s",
-              it->to_string().c_str(),
-              worst_wand->to_string().c_str());
+                it->to_string().c_str(), worst_wand->to_string().c_str());
             return value_to_me;
           }
 
@@ -218,9 +207,8 @@ int Thing::worth_collecting (Thingp it, Thingp *would_need_to_drop)
           // This is WORSE than the worst wand. Only carry if we have little
           // else.
           //
-          dbg("Worth collecting? yes as %s is better than the worst wand %s",
-            it->to_string().c_str(),
-            worst_wand->to_string().c_str());
+          dbg("Worth collecting? yes as %s is better than the worst wand %s", it->to_string().c_str(),
+              worst_wand->to_string().c_str());
           return value_to_me;
         }
 
@@ -231,46 +219,43 @@ int Thing::worth_collecting (Thingp it, Thingp *would_need_to_drop)
         if (get_carried_wand_count() > 5) {
           dbg("Worth collecting %s? no, it is worse than the worst wand %s, "
               "and we already have enough wands",
-            it->to_string().c_str(),
-            worst_wand->to_string().c_str());
+              it->to_string().c_str(), worst_wand->to_string().c_str());
           return -1;
         }
 
         dbg("Worth collecting %s? yes, it is worse than the worst wand %s, "
             "but only collect as are low on wands",
-          it->to_string().c_str(),
-          worst_wand->to_string().c_str());
+            it->to_string().c_str(), worst_wand->to_string().c_str());
         return value_to_me;
       }
     } else {
       if (it->is_bag_item()) {
-        if (!bag_add_test(it)) {
+        if (! bag_add_test(it)) {
           dbg("Worth collecting %s? no, no space", it->to_string().c_str());
           return -1;
         }
       }
-        dbg("Worth collecting %s? yes, have space", it->to_string().c_str());
-        return value_to_me;
+      dbg("Worth collecting %s? yes, have space", it->to_string().c_str());
+      return value_to_me;
     }
   }
 
   if (it->is_food()) {
-    Thingp worst_food = nullptr;
-    auto worst_food_value = get_carried_food_least_value(&worst_food);
+    Thingp worst_food       = nullptr;
+    auto   worst_food_value = get_carried_food_least_value(&worst_food);
     //
     // If we have an existing food, we can be smarter on checks and decided if
     // we perhaps want to swap the worst food for this one.
     //
     if (worst_food) {
-      dbg("Worth collecting %s? compare against worst food %s",
-        it->to_string().c_str(),
-        worst_food->to_string().c_str());
+      dbg("Worth collecting %s? compare against worst food %s", it->to_string().c_str(),
+          worst_food->to_string().c_str());
 
       //
       // Can it fit in the bag?
       //
       if (it->is_bag_item()) {
-        if (!bag_add_test(it)) {
+        if (! bag_add_test(it)) {
           //
           // No. Can we drop something worse.
           //
@@ -279,18 +264,16 @@ int Thing::worth_collecting (Thingp it, Thingp *would_need_to_drop)
             // This is better than the worst food.
             //
             *would_need_to_drop = worst_food;
-            dbg("Worth collecting %s? no space, would need to drop %s",
-              it->to_string().c_str(),
-              worst_food->to_string().c_str());
+            dbg("Worth collecting %s? no space, would need to drop %s", it->to_string().c_str(),
+                worst_food->to_string().c_str());
             return value_to_me;
           }
 
           //
           // This is WORSE than the worst food.
           //
-          dbg("Worth collecting %s? no, cannot fit and is worse than the worst food %s",
-            it->to_string().c_str(),
-            worst_food->to_string().c_str());
+          dbg("Worth collecting %s? no, cannot fit and is worse than the worst food %s", it->to_string().c_str(),
+              worst_food->to_string().c_str());
           return -1;
         }
 
@@ -305,8 +288,7 @@ int Thing::worth_collecting (Thingp it, Thingp *would_need_to_drop)
           if (get_carried_food_count() > 5) {
             *would_need_to_drop = worst_food;
             dbg("Worth collecting %s? yes, but no space and too many foods, would need to drop %s",
-              it->to_string().c_str(),
-              worst_food->to_string().c_str());
+                it->to_string().c_str(), worst_food->to_string().c_str());
             return value_to_me;
           }
 
@@ -314,9 +296,8 @@ int Thing::worth_collecting (Thingp it, Thingp *would_need_to_drop)
           // This is WORSE than the worst food. Only carry if we have little
           // else.
           //
-          dbg("Worth collecting? yes as %s is better than the worst food %s",
-            it->to_string().c_str(),
-            worst_food->to_string().c_str());
+          dbg("Worth collecting? yes as %s is better than the worst food %s", it->to_string().c_str(),
+              worst_food->to_string().c_str());
           return value_to_me;
         }
 
@@ -327,31 +308,29 @@ int Thing::worth_collecting (Thingp it, Thingp *would_need_to_drop)
         if (get_carried_food_count() > 5) {
           dbg("Worth collecting %s? no, it is worse than the worst food %s, "
               "and we already have enough foods",
-            it->to_string().c_str(),
-            worst_food->to_string().c_str());
+              it->to_string().c_str(), worst_food->to_string().c_str());
           return -1;
         }
 
         dbg("Worth collecting %s? yes, it is worse than the worst food %s, "
             "but only collect as are low on foods",
-          it->to_string().c_str(),
-          worst_food->to_string().c_str());
+            it->to_string().c_str(), worst_food->to_string().c_str());
         return value_to_me;
       }
     } else {
       if (it->is_bag_item()) {
-        if (!bag_add_test(it)) {
+        if (! bag_add_test(it)) {
           dbg("Worth collecting %s? no, no space", it->to_string().c_str());
           return -1;
         }
       }
-        dbg("Worth collecting %s? yes, have space", it->to_string().c_str());
-        return value_to_me;
+      dbg("Worth collecting %s? yes, have space", it->to_string().c_str());
+      return value_to_me;
     }
   }
 
   if (it->is_bag_item()) {
-    if (!bag_add_test(it)) {
+    if (! bag_add_test(it)) {
       dbg("Worth collecting %s? no, no space", it->to_string().c_str());
       return -1;
     }
@@ -361,8 +340,8 @@ int Thing::worth_collecting (Thingp it, Thingp *would_need_to_drop)
   return value_to_me;
 }
 
-int Thing::worth_collecting (Thingp it)
-{ TRACE_AND_INDENT();
+int Thing::worth_collecting(Thingp it) {
+  TRACE_AND_INDENT();
   Thingp would_need_to_drop;
-  return worth_collecting (it, &would_need_to_drop);
+  return worth_collecting(it, &would_need_to_drop);
 }

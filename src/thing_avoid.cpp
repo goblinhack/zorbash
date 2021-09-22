@@ -17,8 +17,8 @@
 #include "my_array_bounds_check.h"
 #include "my_vector_bounds_check.h"
 
-bool Tp::will_avoid_hazard (Levelp level, point p) const
-{ TRACE_AND_INDENT();
+bool Tp::will_avoid_hazard(Levelp level, point p) const {
+  TRACE_AND_INDENT();
   if (level->is_shallow_water(p) || level->is_deep_water(p)) {
     if (hates_water()) {
       return true;
@@ -37,7 +37,7 @@ bool Tp::will_avoid_hazard (Levelp level, point p) const
     }
   }
 
-  if (!is_floating()) {
+  if (! is_floating()) {
     if (level->is_chasm(p)) {
       return true;
     }
@@ -59,8 +59,8 @@ bool Tp::will_avoid_hazard (Levelp level, point p) const
   return false;
 }
 
-bool Thing::will_avoid_hazard (const point &p)
-{ TRACE_AND_INDENT();
+bool Thing::will_avoid_hazard(const point &p) {
+  TRACE_AND_INDENT();
   if (level->is_shallow_water(p) || level->is_deep_water(p)) {
     if (hates_water()) {
       return true;
@@ -79,13 +79,13 @@ bool Thing::will_avoid_hazard (const point &p)
     }
   }
 
-  if (!is_floating()) {
+  if (! is_floating()) {
     if (level->is_chasm(p)) {
       return true;
     }
   }
 
-  if (!is_on_fire()) {
+  if (! is_on_fire()) {
     int heat = level->heatmap(p);
     if (damage_doubled_from_fire()) {
       if (heat > 0) {
@@ -105,8 +105,8 @@ bool Thing::will_avoid_hazard (const point &p)
   return false;
 }
 
-bool Thing::will_avoid_hazard (const Thingp itp)
-{ TRACE_AND_INDENT();
+bool Thing::will_avoid_hazard(const Thingp itp) {
+  TRACE_AND_INDENT();
   auto me = tp();
   auto it = itp->tp();
 
@@ -185,7 +185,7 @@ bool Thing::will_avoid_hazard (const Thingp itp)
     }
   }
 
-  if (!is_on_fire()) {
+  if (! is_on_fire()) {
     if (me->hates_fire()) {
       if (it->is_brazier()) {
         return false;
@@ -202,8 +202,8 @@ bool Thing::will_avoid_hazard (const Thingp itp)
   return false;
 }
 
-bool Thing::will_avoid_monst (const Thingp it)
-{ TRACE_AND_INDENT();
+bool Thing::will_avoid_monst(const Thingp it) {
+  TRACE_AND_INDENT();
   auto me = tp();
 
   if (me->is_monst()) {
@@ -250,12 +250,14 @@ bool Thing::will_avoid_monst (const Thingp it)
   return false;
 }
 
-bool Thing::will_avoid_monst (const point &p)
-{ TRACE_AND_INDENT();
+bool Thing::will_avoid_monst(const point &p) {
+  TRACE_AND_INDENT();
   auto me = tp();
 
   FOR_ALL_THINGS_THAT_INTERACT(level, it, mid_at.x, mid_at.y) {
-    if (it == this) { continue; }
+    if (it == this) {
+      continue;
+    }
     if (me->is_monst()) {
       if (it->is_player()) {
         if (is_dangerous(it)) {
@@ -300,7 +302,8 @@ bool Thing::will_avoid_monst (const point &p)
     if (is_dangerous(it)) {
       return true;
     }
-  } FOR_ALL_THINGS_END()
+  }
+  FOR_ALL_THINGS_END()
 
   return false;
 }

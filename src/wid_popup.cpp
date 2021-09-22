@@ -19,31 +19,24 @@
 #include "my_wid_actionbar.h"
 #include "my_ui.h"
 
-WidPopup::~WidPopup()
-{
+WidPopup::~WidPopup() {
   wid_destroy(&wid_popup_container);
   delete wid_text_area;
 }
 
-WidPopup::WidPopup (const std::string name,
-                    point tl, point br, Tilep title_tile,
-                    const std::string background,
-                    bool horiz_scroll,
-                    bool vert_scoll,
-                    int scroll_height) :
-  tl(tl), br(br),
-  title_tile(title_tile),
-  background(background)
-{ TRACE_AND_INDENT();
+WidPopup::WidPopup(const std::string name, point tl, point br, Tilep title_tile, const std::string background,
+                   bool horiz_scroll, bool vert_scoll, int scroll_height)
+    : tl(tl), br(br), title_tile(title_tile), background(background) {
+  TRACE_AND_INDENT();
   int outer_w = br.x - tl.x;
   int outer_h = br.y - tl.y;
-  int width = outer_w;
-  int height = outer_h;
+  int width   = outer_w;
+  int height  = outer_h;
 
   point inner_tl = point(0, 0);
   point inner_br = point(width, height);
-  int inner_w = inner_br.x - inner_tl.x;
-  int inner_h = inner_br.y - inner_tl.y;
+  int   inner_w  = inner_br.x - inner_tl.x;
+  int   inner_h  = inner_br.y - inner_tl.y;
 
   int tile_size;
   if (title_tile) {
@@ -69,23 +62,18 @@ WidPopup::WidPopup (const std::string name,
   }
 
   if (title_tile) {
-    auto w = wid_new_square_button(wid_popup_container,
-                     "wid title " + name);
-    wid_title = w;
+    auto w       = wid_new_square_button(wid_popup_container, "wid title " + name);
+    wid_title    = w;
     auto title_x = (outer_w - tile_size) / 2;
-    wid_set_pos(w,
-          point(title_x + 0, 1),
-          point(title_x + tile_size, tile_size));
+    wid_set_pos(w, point(title_x + 0, 1), point(title_x + tile_size, tile_size));
     wid_set_style(w, UI_WID_STYLE_DARK);
     wid_set_fg_tile(w, title_tile);
   }
 
   {
-    point tl = make_point(0, tile_size);
-    point br = make_point(inner_w, inner_h + tile_size);
-    wid_text_area = new WidTextBox(tl, br, wid_popup_container,
-                     horiz_scroll, vert_scoll,
-                     scroll_height);
+    point tl      = make_point(0, tile_size);
+    point br      = make_point(inner_w, inner_h + tile_size);
+    wid_text_area = new WidTextBox(tl, br, wid_popup_container, horiz_scroll, vert_scoll, scroll_height);
   }
 
   wid_update(wid_popup_container);
@@ -94,21 +82,21 @@ WidPopup::WidPopup (const std::string name,
 //
 // Log a message to the popup
 //
-void WidPopup::log (std::string s, bool lhs, bool rhs)
-{ TRACE_AND_INDENT();
+void WidPopup::log(std::string s, bool lhs, bool rhs) {
+  TRACE_AND_INDENT();
   wid_text_area->log(s, lhs, rhs);
 }
 
 //
 // Log a message to the popup
 //
-void WidPopup::log (std::wstring s, bool lhs, bool rhs)
-{ TRACE_AND_INDENT();
+void WidPopup::log(std::wstring s, bool lhs, bool rhs) {
+  TRACE_AND_INDENT();
   wid_text_area->log(s, lhs, rhs);
 }
 
-void wid_popup_test (void)
-{ TRACE_AND_INDENT();
+void wid_popup_test(void) {
+  TRACE_AND_INDENT();
   std::vector<std::string> items;
   items.push_back("text 1111111111111111");
   items.push_back("text 2222222222222222");
@@ -126,16 +114,16 @@ void wid_popup_test (void)
   items.push_back("text 4444444444444444");
   items.push_back("text 5555555555555555");
 
-  point tl = make_point(20, 20);
-  point br = make_point(50, 45);
-  auto width = br.x - tl.x;
+  point tl    = make_point(20, 20);
+  point br    = make_point(50, 45);
+  auto  width = br.x - tl.x;
 
   auto wid_enchant = new WidPopup("Top level", tl, br, nullptr, "", false, true);
 
   int y_at = 3;
-  for (auto slot = 0; slot < (int)items.size(); slot++) {
-    auto p = wid_enchant->wid_text_area->wid_text_area;
-    auto w = wid_new_container(p, "item slot");
+  for (auto slot = 0; slot < (int) items.size(); slot++) {
+    auto  p  = wid_enchant->wid_text_area->wid_text_area;
+    auto  w  = wid_new_container(p, "item slot");
     point tl = make_point(0, y_at);
     point br = make_point(width - 3, y_at + 2);
     wid_set_pos(w, tl, br);
@@ -143,9 +131,9 @@ void wid_popup_test (void)
     wid_set_text(w, "xxxxxxxxx");
 
     {
-      auto wid_icon = wid_new_square_button(w, "item icon");
-      point tl = make_point(0, 0);
-      point br = make_point(2, 2);
+      auto  wid_icon = wid_new_square_button(w, "item icon");
+      point tl       = make_point(0, 0);
+      point br       = make_point(2, 2);
       wid_set_pos(wid_icon, tl, br);
 
       auto tile = tile_find("player1.1");
@@ -156,10 +144,10 @@ void wid_popup_test (void)
     }
 
     {
-      auto item = items[slot];
-      auto wid_item = wid_new_square_button(w, "item name");
-      point tl = make_point(3, 0);
-      point br = make_point(width - 2, 2);
+      auto  item     = items[slot];
+      auto  wid_item = wid_new_square_button(w, "item name");
+      point tl       = make_point(3, 0);
+      point br       = make_point(width - 2, 2);
       wid_set_pos(wid_item, tl, br);
       wid_set_style(wid_item, UI_WID_STYLE_DARK);
       wid_set_int_context(w, slot);

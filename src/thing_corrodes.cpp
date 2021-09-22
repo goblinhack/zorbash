@@ -15,8 +15,8 @@
 #include "my_random.h"
 #include "my_globals.h"
 
-void Thing::corrode_tick (void)
-{ TRACE_AND_INDENT();
+void Thing::corrode_tick(void) {
+  TRACE_AND_INDENT();
   if (is_floating() || is_ethereal()) {
     return;
   }
@@ -53,7 +53,7 @@ void Thing::corrode_tick (void)
     }
 
     if (chance) {
-      if ((int)pcg_random_range(0, 1000) < chance) {
+      if ((int) pcg_random_range(0, 1000) < chance) {
         dead("Corroded in acid");
         return;
       }
@@ -84,7 +84,7 @@ void Thing::corrode_tick (void)
     }
 
     if (chance) {
-      if ((int)pcg_random_range(0, 1000) < chance) {
+      if ((int) pcg_random_range(0, 1000) < chance) {
         dead("Corroded in acid");
         return;
       }

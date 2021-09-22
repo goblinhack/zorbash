@@ -9,8 +9,8 @@
 #include "my_globals.h"
 #include "my_thing.h"
 
-void Thing::rest (void)
-{ TRACE_AND_INDENT();
+void Thing::rest(void) {
+  TRACE_AND_INDENT();
   dbg("Resting");
   stamina_boost(1);
 }

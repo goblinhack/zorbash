@@ -9,8 +9,7 @@
 #include "my_level.h"
 #include "my_thing.h"
 
-bool Level::can_see_obstacle (int x, int y)
-{
+bool Level::can_see_obstacle(int x, int y) {
   if (is_wall(x, y) || is_door(x, y) || is_rock(x, y)) {
     return true;
   }
@@ -18,8 +17,7 @@ bool Level::can_see_obstacle (int x, int y)
   return false;
 }
 
-bool Level::can_see_ (int x0_in, int y0_in, int x1_in, int y1_in, int flag)
-{
+bool Level::can_see_(int x0_in, int y0_in, int x1_in, int y1_in, int flag) {
   float temp;
   float dx;
   float dy;
@@ -37,18 +35,18 @@ bool Level::can_see_ (int x0_in, int y0_in, int x1_in, int y1_in, int flag)
 
   if (x0 > x1) {
     temp = x0;
-    x0 = x1;
-    x1 = temp;
+    x0   = x1;
+    x1   = temp;
 
     temp = y0;
-    y0 = y1;
-    y1 = temp;
+    y0   = y1;
+    y1   = temp;
   }
 
   dx = x1 - x0;
   dy = y1 - y0;
 
-  tdy = 2.0 * dy;
+  tdy  = 2.0 * dy;
   dydx = tdy - (2.0 * dx);
 
   p = tdy - dx;
@@ -56,24 +54,24 @@ bool Level::can_see_ (int x0_in, int y0_in, int x1_in, int y1_in, int flag)
   y = y0;
 
   if (flag == 0) {
-    if (can_see_obstacle((int)x, (int)y)) {
+    if (can_see_obstacle((int) x, (int) y)) {
       return true;
     }
   } else if (flag == 1) {
-    if (can_see_obstacle((int)y, (int)x)) {
+    if (can_see_obstacle((int) y, (int) x)) {
       return true;
     }
   } else if (flag == 2) {
-    if (can_see_obstacle((int)y, (int)-x)) {
+    if (can_see_obstacle((int) y, (int) -x)) {
       return true;
     }
   } else if (flag == 3) {
-    if (can_see_obstacle((int)x, (int)-y)) {
+    if (can_see_obstacle((int) x, (int) -y)) {
       return true;
     }
   }
 
-  for (i = 1; i <= dx; i++){
+  for (i = 1; i <= dx; i++) {
     x++;
 
     if (p < 0) {
@@ -84,19 +82,19 @@ bool Level::can_see_ (int x0_in, int y0_in, int x1_in, int y1_in, int flag)
     }
 
     if (flag == 0) {
-      if (can_see_obstacle((int)x, (int)y)) {
+      if (can_see_obstacle((int) x, (int) y)) {
         return true;
       }
     } else if (flag == 1) {
-      if (can_see_obstacle((int)y, (int)x)) {
+      if (can_see_obstacle((int) y, (int) x)) {
         return true;
       }
     } else if (flag == 2) {
-      if (can_see_obstacle((int)y, (int)-x)) {
+      if (can_see_obstacle((int) y, (int) -x)) {
         return true;
       }
     } else if (flag == 3) {
-      if (can_see_obstacle((int)x, (int)-y)) {
+      if (can_see_obstacle((int) x, (int) -y)) {
         return true;
       }
     }
@@ -108,8 +106,7 @@ bool Level::can_see_ (int x0_in, int y0_in, int x1_in, int y1_in, int flag)
 /*
  * Can A see B unimpeded?
  */
-bool Level::can_see (int x0, int y0, int x1, int y1)
-{
+bool Level::can_see(int x0, int y0, int x1, int y1) {
   float slope = 100.0;
 
   if (x0 != x1) {
@@ -128,5 +125,5 @@ bool Level::can_see (int x0, int y0, int x1, int y1)
     r = can_see_(-y0, x0, -y1, x1, 2);
   }
 
-  return (!r);
+  return (! r);
 }

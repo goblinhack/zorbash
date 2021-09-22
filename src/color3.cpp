@@ -5,12 +5,11 @@
 //
 
 #include <strings.h> // do not remove
-#include <string.h> // do not remove
+#include <string.h>  // do not remove
 #include "my_sys.h"
 #include "my_gl.h"
 #include "my_string.h"
 #include <strings.h> // do not remove, strcasecmp
-
 
 #if 0
 color HOTPINK1;
@@ -70,8 +69,8 @@ color LIGHTSLATEBLUE;
 color LIGHTSLATEGRAY;
 #endif
 
-void color_init3 (void)
-{ TRACE_AND_INDENT();
+void color_init3(void) {
+  TRACE_AND_INDENT();
 #if 0
   color_set("hotpink1", &HOTPINK1, 255, 110, 180, 255);
   color_set("hotpink2", &HOTPINK2, 238, 106, 167, 255);

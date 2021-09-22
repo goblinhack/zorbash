@@ -14,37 +14,31 @@
 
 std::vector<Roomp> Room::all_rooms;
 
-Room::Room (void)
-{
+Room::Room(void) {
   this->roomno = all_rooms.size();
   newptr(this, "room");
 }
 
-Room::~Room (void)
-{
-  oldptr(this);
-}
+Room::~Room(void) { oldptr(this); }
 
-void room_init (void)
-{ TRACE_AND_INDENT();
-}
+void room_init(void) { TRACE_AND_INDENT(); }
 
-void room_fini (void)
-{ TRACE_AND_INDENT();
-  for (auto& r : Room::all_rooms) {
+void room_fini(void) {
+  TRACE_AND_INDENT();
+  for (auto &r : Room::all_rooms) {
     delete r;
   }
 }
 
-Roomp Room::room_new (void)
-{ TRACE_AND_INDENT();
+Roomp Room::room_new(void) {
+  TRACE_AND_INDENT();
   auto r = new Room();
   Room::all_rooms.push_back(r);
   return (r);
 }
 
-Roomp Room::create_w_flip (void)
-{ TRACE_AND_INDENT();
+Roomp Room::create_w_flip(void) {
+  TRACE_AND_INDENT();
   std::vector<std::string> rot[MAP_DEPTH];
 
   auto r = Room::room_new();
@@ -64,26 +58,27 @@ Roomp Room::create_w_flip (void)
   /*
    * Flip the doors too
    */
-  auto z = MAP_DEPTH_OBJ; {
+  auto z = MAP_DEPTH_OBJ;
+  {
     for (auto y = 0; y < height; y++) {
       std::string s;
       for (auto x = 0; x < width; x++) {
         auto c = get(r->data, x, y, z);
         switch (c) {
-          case Charmap::DOOR_UP:    c = Charmap::DOOR_UP; break;
-          case Charmap::DOOR_DOWN:  c = Charmap::DOOR_DOWN; break;
-          case Charmap::DOOR_LEFT:  c = Charmap::DOOR_RIGHT; break;
-          case Charmap::DOOR_RIGHT: c = Charmap::DOOR_LEFT; break;
+          case Charmap::DOOR_UP : c = Charmap::DOOR_UP; break;
+          case Charmap::DOOR_DOWN : c = Charmap::DOOR_DOWN; break;
+          case Charmap::DOOR_LEFT : c = Charmap::DOOR_RIGHT; break;
+          case Charmap::DOOR_RIGHT : c = Charmap::DOOR_LEFT; break;
         }
         set(r->data, x, y, z, c);
       }
     }
   }
 
-  r->dir_up         = dir_up;
-  r->dir_down       = dir_down;
-  r->dir_left       = dir_right;
-  r->dir_right      = dir_left;
+  r->dir_up    = dir_up;
+  r->dir_down  = dir_down;
+  r->dir_left  = dir_right;
+  r->dir_right = dir_left;
 
   r->is_ascend_dungeon  = is_ascend_dungeon;
   r->is_lock            = is_lock;
@@ -91,15 +86,15 @@ Roomp Room::create_w_flip (void)
   r->is_secret          = is_secret;
   r->is_descend_dungeon = is_descend_dungeon;
 
-  r->depth          = depth;
+  r->depth = depth;
 
   r->finalize();
 
   return (r);
 }
 
-Roomp Room::rotate_clockwise (void)
-{ TRACE_AND_INDENT();
+Roomp Room::rotate_clockwise(void) {
+  TRACE_AND_INDENT();
   std::vector<std::string> rot[MAP_DEPTH];
 
   auto r = Room::room_new();
@@ -119,16 +114,17 @@ Roomp Room::rotate_clockwise (void)
   /*
    * Rotate the doors too
    */
-  auto z = MAP_DEPTH_OBJ; {
+  auto z = MAP_DEPTH_OBJ;
+  {
     for (auto y = 0; y < height; y++) {
       std::string s;
       for (auto x = 0; x < width; x++) {
         auto c = get(r->data, x, y, z);
         switch (c) {
-          case Charmap::DOOR_UP:    c = Charmap::DOOR_RIGHT; break;
-          case Charmap::DOOR_DOWN:  c = Charmap::DOOR_LEFT; break;
-          case Charmap::DOOR_LEFT:  c = Charmap::DOOR_UP; break;
-          case Charmap::DOOR_RIGHT: c = Charmap::DOOR_DOWN; break;
+          case Charmap::DOOR_UP : c = Charmap::DOOR_RIGHT; break;
+          case Charmap::DOOR_DOWN : c = Charmap::DOOR_LEFT; break;
+          case Charmap::DOOR_LEFT : c = Charmap::DOOR_UP; break;
+          case Charmap::DOOR_RIGHT : c = Charmap::DOOR_DOWN; break;
         }
 
         set(r->data, x, y, z, c);
@@ -136,10 +132,10 @@ Roomp Room::rotate_clockwise (void)
     }
   }
 
-  r->dir_up         = dir_left;
-  r->dir_down       = dir_right;
-  r->dir_left       = dir_down;
-  r->dir_right      = dir_up;
+  r->dir_up    = dir_left;
+  r->dir_down  = dir_right;
+  r->dir_left  = dir_down;
+  r->dir_right = dir_up;
 
   r->is_ascend_dungeon  = is_ascend_dungeon;
   r->is_lock            = is_lock;
@@ -147,7 +143,7 @@ Roomp Room::rotate_clockwise (void)
   r->is_secret          = is_secret;
   r->is_descend_dungeon = is_descend_dungeon;
 
-  r->depth          = depth;
+  r->depth = depth;
 
   r->finalize();
 
@@ -157,8 +153,7 @@ Roomp Room::rotate_clockwise (void)
 //
 // Find all doors from a room
 //
-void Room::find_doors (void)
-{
+void Room::find_doors(void) {
   int z = MAP_DEPTH_OBJ;
 
   for (auto x : range<int>(0, width)) {
@@ -182,26 +177,19 @@ void Room::find_doors (void)
     }
   }
 
-  if (!doors_up.size() &&
-    !doors_down.size() &&
-    !doors_left.size() &&
-    !doors_right.size()) {
+  if (! doors_up.size() && ! doors_down.size() && ! doors_left.size() && ! doors_right.size()) {
     dump();
     ERR("Room has no doors");
   }
 }
 
-void Room::finalize (void)
-{
+void Room::finalize(void) {
   find_doors();
 
-  IF_DEBUG4 {
-    dump();
-  }
+  IF_DEBUG4 { dump(); }
 }
 
-void Room::dump (void)
-{
+void Room::dump(void) {
   std::array<std::array<char, MAP_HEIGHT>, MAP_WIDTH> tmp {};
   for (auto y = 0; y < height; y++) {
     for (auto x = 0; x < width; x++) {
@@ -213,12 +201,12 @@ void Room::dump (void)
     for (auto x = 0; x < width; x++) {
       for (auto d = MAP_DEPTH - 1; d >= 0; d--) {
         auto m = get(data, x, y, d);
-        if (!m || (m == ' ')) {
+        if (! m || (m == ' ')) {
           continue;
         }
 
         auto cr = get(Charmap::all_charmaps, m);
-        auto c = cr.c;
+        auto c  = cr.c;
 
         set(tmp, x, y, c);
         break;
@@ -227,10 +215,9 @@ void Room::dump (void)
   }
 
   LOG("ROOM(%d): depth %d", roomno, depth);
-  LOG("ROOM(%d): direction: Up %d down %d left %d right %d",
-    roomno, dir_up, dir_down, dir_left, dir_right);
-  LOG("ROOM(%d): doors:     up %d down %d left %d right %d",
-    roomno, has_door_up, has_door_down, has_door_left, has_door_right);
+  LOG("ROOM(%d): direction: Up %d down %d left %d right %d", roomno, dir_up, dir_down, dir_left, dir_right);
+  LOG("ROOM(%d): doors:     up %d down %d left %d right %d", roomno, has_door_up, has_door_down, has_door_left,
+      has_door_right);
   for (auto y = 0; y < height; y++) {
     std::string s;
     for (auto x = 0; x < width; x++) {
@@ -241,8 +228,7 @@ void Room::dump (void)
   LOG("-");
 }
 
-void Room::con (void)
-{
+void Room::con(void) {
   std::array<std::array<char, MAP_HEIGHT>, MAP_WIDTH> tmp {};
   for (auto y = 0; y < height; y++) {
     for (auto x = 0; x < width; x++) {
@@ -254,12 +240,12 @@ void Room::con (void)
     for (auto x = 0; x < width; x++) {
       for (auto d = MAP_DEPTH - 1; d >= 0; d--) {
         auto m = get(data, x, y, d);
-        if (!m || (m == ' ')) {
+        if (! m || (m == ' ')) {
           continue;
         }
 
         auto cr = get(Charmap::all_charmaps, m);
-        auto c = cr.c;
+        auto c  = cr.c;
 
         set(tmp, x, y, c);
         break;
@@ -268,10 +254,9 @@ void Room::con (void)
   }
 
   CON("ROOM(%d): depth %d", roomno, depth);
-  CON("ROOM(%d): direction: Up %d down %d left %d right %d",
-    roomno, dir_up, dir_down, dir_left, dir_right);
-  CON("ROOM(%d): doors:     up %d down %d left %d right %d",
-    roomno, has_door_up, has_door_down, has_door_left, has_door_right);
+  CON("ROOM(%d): direction: Up %d down %d left %d right %d", roomno, dir_up, dir_down, dir_left, dir_right);
+  CON("ROOM(%d): doors:     up %d down %d left %d right %d", roomno, has_door_up, has_door_down, has_door_left,
+      has_door_right);
   for (auto y = 0; y < height; y++) {
     std::string s;
     for (auto x = 0; x < width; x++) {
@@ -282,8 +267,7 @@ void Room::con (void)
   CON("-");
 }
 
-bool Room::contains (int depth, char what)
-{
+bool Room::contains(int depth, char what) {
   for (auto y = 0; y < height; y++) {
     for (auto x = 0; x < width; x++) {
       auto m = get(data, x, y, depth);

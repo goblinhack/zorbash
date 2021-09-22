@@ -18,18 +18,18 @@
 #include "my_array_bounds_check.h"
 #include "my_vector_bounds_check.h"
 
-bool Thing::ai_blocked (void)
-{ TRACE_AND_INDENT();
+bool Thing::ai_blocked(void) {
+  TRACE_AND_INDENT();
   static const std::vector<point> move_deltas = {
-    point(0, -1),
-    point(-1, 0),
-    point(1, 0),
-    point(0, 1),
+      point(0, -1),
+      point(-1, 0),
+      point(1, 0),
+      point(0, 1),
   };
 
-  auto at = make_point(mid_at);
+  auto at    = make_point(mid_at);
   auto count = 0;
-  for (const auto& d : move_deltas) {
+  for (const auto &d : move_deltas) {
     auto t = at + d;
     auto x = t.x;
     auto y = t.y;
@@ -40,19 +40,15 @@ bool Thing::ai_blocked (void)
   return count >= 4;
 }
 
-bool Thing::ai_blocked_completely (void)
-{ TRACE_AND_INDENT();
+bool Thing::ai_blocked_completely(void) {
+  TRACE_AND_INDENT();
   static const std::vector<point> move_deltas = {
-    point(0, -1),
-    point(-1, 0),
-    point(1, 0),
-    point(0, 1),
-    point(0, 0),
+      point(0, -1), point(-1, 0), point(1, 0), point(0, 1), point(0, 0),
   };
 
-  auto at = make_point(mid_at);
+  auto at    = make_point(mid_at);
   auto count = 0;
-  for (const auto& d : move_deltas) {
+  for (const auto &d : move_deltas) {
     auto t = at + d;
     auto x = t.x;
     auto y = t.y;
@@ -63,15 +59,15 @@ bool Thing::ai_blocked_completely (void)
   return count >= 5;
 }
 
-bool Thing::ai_create_path (point &nh, const point start, const point end)
-{ TRACE_AND_INDENT();
+bool Thing::ai_create_path(point &nh, const point start, const point end) {
+  TRACE_AND_INDENT();
   if (end == point(-1, -1)) {
     return false;
   }
 
-  Dmap dmap {};
+  Dmap  dmap {};
   point dmap_start = start;
-  point dmap_end = end;
+  point dmap_end   = end;
 
   int minx, miny, maxx, maxy;
   if (dmap_start.x < dmap_end.x) {
@@ -127,7 +123,7 @@ bool Thing::ai_create_path (point &nh, const point start, const point end)
   }
 
   dmap_start = point(minx, miny);
-  dmap_end = point(maxx, maxy);
+  dmap_end   = point(maxx, maxy);
 
   set(dmap.val, end.x, end.y, DMAP_IS_GOAL);
 
@@ -146,7 +142,7 @@ bool Thing::ai_create_path (point &nh, const point start, const point end)
 #endif
 
   char path_debug = '\0'; // astart path debug
-  auto result = astar_solve(NULL, path_debug, start, end, &dmap);
+  auto result     = astar_solve(NULL, path_debug, start, end, &dmap);
 #if 0
   for (auto i : result.path) {
     set(dmap.val, i.x, i.y, (uint8_t)0);
@@ -155,11 +151,11 @@ bool Thing::ai_create_path (point &nh, const point start, const point end)
 #endif
 #ifdef ENABLE_DEBUG_AI_WANDER
   for (auto i : result.path) {
-    thing_new("ai_path1", fpoint(i.x , i.y));
+    thing_new("ai_path1", fpoint(i.x, i.y));
   }
 #endif
 
-  auto hops = result.path;
+  auto hops     = result.path;
   auto hops_len = hops.size();
 
   if (hops_len >= 2) {
@@ -173,15 +169,15 @@ bool Thing::ai_create_path (point &nh, const point start, const point end)
     return true;
   } else if (hops_len >= 1) {
     auto hop0 = get(hops, hops_len - 1);
-    nh = hop0;
+    nh        = hop0;
     return true;
   } else {
     return false;
   }
 }
 
-bool Thing::ai_choose_wander (point& nh)
-{ TRACE_AND_INDENT();
+bool Thing::ai_choose_wander(point &nh) {
+  TRACE_AND_INDENT();
   //
   // Reached the target? Choose a new one.
   //
@@ -206,7 +202,7 @@ bool Thing::ai_choose_wander (point& nh)
   monstp->wander_target = point(-1, -1);
 
   target = get_random_scent_target();
-  if (!ai_create_path(nh, make_point(mid_at), target)) {
+  if (! ai_create_path(nh, make_point(mid_at), target)) {
     dbg("Could not wander; could not create path to %d,%d", target.x, target.y);
     return false;
   }
@@ -218,18 +214,18 @@ bool Thing::ai_choose_wander (point& nh)
 
   monstp->wander_target = target;
 #ifdef ENABLE_DEBUG_AI_WANDER
-  thing_new("ai_path2", fpoint(target.x , target.y));
+  thing_new("ai_path2", fpoint(target.x, target.y));
 #endif
   dbg("Wander to %d,%d nh %d,%d", target.x, target.y, nh.x, nh.y);
   return true;
 }
 
-bool Thing::ai_wander (void)
-{ TRACE_AND_INDENT();
+bool Thing::ai_wander(void) {
+  TRACE_AND_INDENT();
   if (ai_blocked_completely()) {
     dbg("Blocked on all sides, try escape");
     if (ai_escape()) {
-      return true ;
+      return true;
     }
 
     if (is_jumper()) {
@@ -276,8 +272,8 @@ bool Thing::ai_wander (void)
   return false;
 }
 
-bool Thing::ai_escape (void)
-{ TRACE_AND_INDENT();
+bool Thing::ai_escape(void) {
+  TRACE_AND_INDENT();
   if (ai_blocked_completely()) {
     dbg("AI escape blocked");
     return false;

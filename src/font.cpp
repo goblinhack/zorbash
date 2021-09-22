@@ -14,14 +14,12 @@
 Fontp font_small;
 Fontp font_large;
 
-static std::map<std::string, Fontp > fonts;
+static std::map<std::string, Fontp> fonts;
 
-void font_fini (void)
-{ TRACE_AND_INDENT();
-}
+void font_fini(void) { TRACE_AND_INDENT(); }
 
-static Fontp font_load (std::string name, std::string file, int size, int style)
-{ TRACE_AND_INDENT();
+static Fontp font_load(std::string name, std::string file, int size, int style) {
+  TRACE_AND_INDENT();
   auto f = font_find(name);
 
   if (f) {
@@ -49,8 +47,8 @@ static Fontp font_load (std::string name, std::string file, int size, int style)
   return (f);
 }
 
-Fontp font_find (std::string file)
-{ TRACE_AND_INDENT();
+Fontp font_find(std::string file) {
+  TRACE_AND_INDENT();
   if (file == "") {
     ERR("No filename given for font find %s", __FUNCTION__);
     return (0);
@@ -64,8 +62,8 @@ Fontp font_find (std::string file)
   return (result->second);
 }
 
-uint8_t font_init (void)
-{ TRACE_AND_INDENT();
+uint8_t font_init(void) {
+  TRACE_AND_INDENT();
 #ifdef ENABLE_GENERATE_TTF
   //
   // Generate bitmaps from TTF.
@@ -76,19 +74,16 @@ uint8_t font_init (void)
   DIE("Generated fonts");
 #endif
 
-  font_small = font_load("font-small", (char*)UI_FONT_NAME,
-               UI_FONT_SMALL_WIDTH, TTF_STYLE_NORMAL);
+  font_small             = font_load("font-small", (char *) UI_FONT_NAME, UI_FONT_SMALL_WIDTH, TTF_STYLE_NORMAL);
   font_small->tile_index = 1;
 
-  font_large = font_load("font-large", (char*)UI_FONT_NAME,
-               UI_FONT_LARGE_WIDTH, TTF_STYLE_NORMAL);
+  font_large             = font_load("font-large", (char *) UI_FONT_NAME, UI_FONT_LARGE_WIDTH, TTF_STYLE_NORMAL);
   font_large->tile_index = 2;
 
   return true;
 }
 
-Tilep Font::unicode_to_tile(int u)
-{
+Tilep Font::unicode_to_tile(int u) {
   if ((u < 0) || (u >= TTF_GLYPH_MAX)) {
     if (u == L'?') {
       DIE("unicode char 0x%x/%d -> bad index", u, u);
@@ -118,7 +113,7 @@ Tilep Font::unicode_to_tile(int u)
   snprintf(tile_name, sizeof(tile_name), "%d.%d", tile_index, index);
 
   tile = tile_find(tile_name);
-  if (!tile) {
+  if (! tile) {
     if (u == L'?') {
       DIE("unicode char 0x%x/%d -> not found as tile %s", u, u, tile_name);
     } else {

@@ -26,12 +26,12 @@
 #include "my_sound.h"
 
 static std::map<std::string, PyObject *> py_mods;
-PyObject *zx_mod;
-PyMODINIT_FUNC python_mouse_y_module_create(void);
+PyObject *                               zx_mod;
+PyMODINIT_FUNC                           python_mouse_y_module_create(void);
 
-void py_call_void (const char *name)
-{ TRACE_AND_INDENT();
-  if (!zx_mod) {
+void py_call_void(const char *name) {
+  TRACE_AND_INDENT();
+  if (! zx_mod) {
     ERR("Python module not inited yet");
     return;
   }
@@ -49,16 +49,16 @@ void py_call_void (const char *name)
   py_err();
 }
 
-void py_call_void_fn (const char *module, const char *name, int val1)
-{ TRACE_AND_INDENT();
+void py_call_void_fn(const char *module, const char *name, int val1) {
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
-  if (!pmod) {
+  if (! pmod) {
     return;
   }
 
   PyObject *pFunc = PyObject_GetAttrString(pmod, name);
   if (PyCallable_Check(pFunc)) {
-    PyObject *pArgs = Py_BuildValue("(i)", val1);
+    PyObject *pArgs  = Py_BuildValue("(i)", val1);
     PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
     Py_DECREF(pArgs);
     if (pValue) {
@@ -71,16 +71,16 @@ void py_call_void_fn (const char *module, const char *name, int val1)
   py_err();
 }
 
-void py_call_void_fn (const char *module, const char *name, int val1, int val2)
-{ TRACE_AND_INDENT();
+void py_call_void_fn(const char *module, const char *name, int val1, int val2) {
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
-  if (!pmod) {
+  if (! pmod) {
     return;
   }
 
   PyObject *pFunc = PyObject_GetAttrString(pmod, name);
   if (PyCallable_Check(pFunc)) {
-    PyObject *pArgs = Py_BuildValue("(ii)", val1, val2);
+    PyObject *pArgs  = Py_BuildValue("(ii)", val1, val2);
     PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
     Py_DECREF(pArgs);
     if (pValue) {
@@ -93,16 +93,16 @@ void py_call_void_fn (const char *module, const char *name, int val1, int val2)
   py_err();
 }
 
-void py_call_void_fn (const char *module, const char *name, int val1, int val2, int val3)
-{ TRACE_AND_INDENT();
+void py_call_void_fn(const char *module, const char *name, int val1, int val2, int val3) {
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
-  if (!pmod) {
+  if (! pmod) {
     return;
   }
 
   PyObject *pFunc = PyObject_GetAttrString(pmod, name);
   if (PyCallable_Check(pFunc)) {
-    PyObject *pArgs = Py_BuildValue("(iii)", val1, val2, val3);
+    PyObject *pArgs  = Py_BuildValue("(iii)", val1, val2, val3);
     PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
     Py_DECREF(pArgs);
     if (pValue) {
@@ -115,16 +115,16 @@ void py_call_void_fn (const char *module, const char *name, int val1, int val2, 
   py_err();
 }
 
-void py_call_void_fn (const char *module, const char *name, int val1, int val2, int val3, int val4)
-{ TRACE_AND_INDENT();
+void py_call_void_fn(const char *module, const char *name, int val1, int val2, int val3, int val4) {
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
-  if (!pmod) {
+  if (! pmod) {
     return;
   }
 
   PyObject *pFunc = PyObject_GetAttrString(pmod, name);
   if (PyCallable_Check(pFunc)) {
-    PyObject *pArgs = Py_BuildValue("(iiii)", val1, val2, val3, val4);
+    PyObject *pArgs  = Py_BuildValue("(iiii)", val1, val2, val3, val4);
     PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
     Py_DECREF(pArgs);
     if (pValue) {
@@ -137,16 +137,16 @@ void py_call_void_fn (const char *module, const char *name, int val1, int val2, 
   py_err();
 }
 
-void py_call_void_fn (const char *module, const char *name, int val1, int val2, int val3, int val4, int val5)
-{ TRACE_AND_INDENT();
+void py_call_void_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5) {
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
-  if (!pmod) {
+  if (! pmod) {
     return;
   }
 
   PyObject *pFunc = PyObject_GetAttrString(pmod, name);
   if (PyCallable_Check(pFunc)) {
-    PyObject *pArgs = Py_BuildValue("(iiiii)", val1, val2, val3, val4, val5);
+    PyObject *pArgs  = Py_BuildValue("(iiiii)", val1, val2, val3, val4, val5);
     PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
     Py_DECREF(pArgs);
     if (pValue) {
@@ -159,17 +159,16 @@ void py_call_void_fn (const char *module, const char *name, int val1, int val2, 
   py_err();
 }
 
-void py_call_void_fn (const char *module, const char *name, int val1, int val2, int val3, int val4, int val5,
-            int val6)
-{ TRACE_AND_INDENT();
+void py_call_void_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5, int val6) {
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
-  if (!pmod) {
+  if (! pmod) {
     return;
   }
 
   PyObject *pFunc = PyObject_GetAttrString(pmod, name);
   if (PyCallable_Check(pFunc)) {
-    PyObject *pArgs = Py_BuildValue("(iiiiii)", val1, val2, val3, val4, val5, val6);
+    PyObject *pArgs  = Py_BuildValue("(iiiiii)", val1, val2, val3, val4, val5, val6);
     PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
     Py_DECREF(pArgs);
     if (pValue) {
@@ -182,17 +181,17 @@ void py_call_void_fn (const char *module, const char *name, int val1, int val2, 
   py_err();
 }
 
-void py_call_void_fn (const char *module, const char *name, int val1, int val2, int val3, int val4, int val5,
-            int val6, int val7)
-{ TRACE_AND_INDENT();
+void py_call_void_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5, int val6,
+                     int val7) {
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
-  if (!pmod) {
+  if (! pmod) {
     return;
   }
 
   PyObject *pFunc = PyObject_GetAttrString(pmod, name);
   if (PyCallable_Check(pFunc)) {
-    PyObject *pArgs = Py_BuildValue("(iiiiiii)", val1, val2, val3, val4, val5, val6, val7);
+    PyObject *pArgs  = Py_BuildValue("(iiiiiii)", val1, val2, val3, val4, val5, val6, val7);
     PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
     Py_DECREF(pArgs);
     if (pValue) {
@@ -205,17 +204,17 @@ void py_call_void_fn (const char *module, const char *name, int val1, int val2, 
   py_err();
 }
 
-void py_call_void_fn (const char *module, const char *name, int val1, int val2, int val3, int val4, int val5,
-            int val6, int val7, int val8)
-{ TRACE_AND_INDENT();
+void py_call_void_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5, int val6,
+                     int val7, int val8) {
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
-  if (!pmod) {
+  if (! pmod) {
     return;
   }
 
   PyObject *pFunc = PyObject_GetAttrString(pmod, name);
   if (PyCallable_Check(pFunc)) {
-    PyObject *pArgs = Py_BuildValue("(iiiiiiii)", val1, val2, val3, val4, val5, val6, val7, val8);
+    PyObject *pArgs  = Py_BuildValue("(iiiiiiii)", val1, val2, val3, val4, val5, val6, val7, val8);
     PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
     Py_DECREF(pArgs);
     if (pValue) {
@@ -228,16 +227,16 @@ void py_call_void_fn (const char *module, const char *name, int val1, int val2, 
   py_err();
 }
 
-void py_call_void_fn (const char *module, const char *name, unsigned int val1)
-{ TRACE_AND_INDENT();
+void py_call_void_fn(const char *module, const char *name, unsigned int val1) {
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
-  if (!pmod) {
+  if (! pmod) {
     return;
   }
 
   PyObject *pFunc = PyObject_GetAttrString(pmod, name);
   if (PyCallable_Check(pFunc)) {
-    PyObject *pArgs = Py_BuildValue("(I)", val1);
+    PyObject *pArgs  = Py_BuildValue("(I)", val1);
     PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
     Py_DECREF(pArgs);
     if (pValue) {
@@ -250,16 +249,16 @@ void py_call_void_fn (const char *module, const char *name, unsigned int val1)
   py_err();
 }
 
-void py_call_void_fn (const char *module, const char *name, unsigned int val1, unsigned int val2)
-{ TRACE_AND_INDENT();
+void py_call_void_fn(const char *module, const char *name, unsigned int val1, unsigned int val2) {
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
-  if (!pmod) {
+  if (! pmod) {
     return;
   }
 
   PyObject *pFunc = PyObject_GetAttrString(pmod, name);
   if (PyCallable_Check(pFunc)) {
-    PyObject *pArgs = Py_BuildValue("(II)", val1, val2);
+    PyObject *pArgs  = Py_BuildValue("(II)", val1, val2);
     PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
     Py_DECREF(pArgs);
     if (pValue) {
@@ -272,16 +271,16 @@ void py_call_void_fn (const char *module, const char *name, unsigned int val1, u
   py_err();
 }
 
-void py_call_void_fn (const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3)
-{ TRACE_AND_INDENT();
+void py_call_void_fn(const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3) {
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
-  if (!pmod) {
+  if (! pmod) {
     return;
   }
 
   PyObject *pFunc = PyObject_GetAttrString(pmod, name);
   if (PyCallable_Check(pFunc)) {
-    PyObject *pArgs = Py_BuildValue("(III)", val1, val2, val3);
+    PyObject *pArgs  = Py_BuildValue("(III)", val1, val2, val3);
     PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
     Py_DECREF(pArgs);
     if (pValue) {
@@ -294,21 +293,17 @@ void py_call_void_fn (const char *module, const char *name, unsigned int val1, u
   py_err();
 }
 
-void py_call_void_fn (const char *module,
-    const char *name,
-    unsigned int val1,
-    unsigned int val2,
-    unsigned int val3,
-    unsigned int val4)
-{ TRACE_AND_INDENT();
+void py_call_void_fn(const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3,
+                     unsigned int val4) {
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
-  if (!pmod) {
+  if (! pmod) {
     return;
   }
 
   PyObject *pFunc = PyObject_GetAttrString(pmod, name);
   if (PyCallable_Check(pFunc)) {
-    PyObject *pArgs = Py_BuildValue("(IIII)", val1, val2, val3, val4);
+    PyObject *pArgs  = Py_BuildValue("(IIII)", val1, val2, val3, val4);
     PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
     Py_DECREF(pArgs);
     if (pValue) {
@@ -321,22 +316,17 @@ void py_call_void_fn (const char *module,
   py_err();
 }
 
-void py_call_void_fn (const char *module,
-    const char *name,
-    unsigned int val1,
-    unsigned int val2,
-    unsigned int val3,
-    unsigned int val4,
-    unsigned int val5)
-{ TRACE_AND_INDENT();
+void py_call_void_fn(const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3,
+                     unsigned int val4, unsigned int val5) {
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
-  if (!pmod) {
+  if (! pmod) {
     return;
   }
 
   PyObject *pFunc = PyObject_GetAttrString(pmod, name);
   if (PyCallable_Check(pFunc)) {
-    PyObject *pArgs = Py_BuildValue("(IIIII)", val1, val2, val3, val4, val5);
+    PyObject *pArgs  = Py_BuildValue("(IIIII)", val1, val2, val3, val4, val5);
     PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
     Py_DECREF(pArgs);
     if (pValue) {
@@ -349,23 +339,17 @@ void py_call_void_fn (const char *module,
   py_err();
 }
 
-void py_call_void_fn (const char *module,
-    const char *name,
-    unsigned int val1,
-    unsigned int val2,
-    unsigned int val3,
-    unsigned int val4,
-    unsigned int val5,
-   unsigned int val6)
-{ TRACE_AND_INDENT();
+void py_call_void_fn(const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3,
+                     unsigned int val4, unsigned int val5, unsigned int val6) {
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
-  if (!pmod) {
+  if (! pmod) {
     return;
   }
 
   PyObject *pFunc = PyObject_GetAttrString(pmod, name);
   if (PyCallable_Check(pFunc)) {
-    PyObject *pArgs = Py_BuildValue("(IIIIII)", val1, val2, val3, val4, val5, val6);
+    PyObject *pArgs  = Py_BuildValue("(IIIIII)", val1, val2, val3, val4, val5, val6);
     PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
     Py_DECREF(pArgs);
     if (pValue) {
@@ -378,24 +362,17 @@ void py_call_void_fn (const char *module,
   py_err();
 }
 
-void py_call_void_fn (const char *module,
-    const char *name,
-    unsigned int val1,
-    unsigned int val2,
-    unsigned int val3,
-    unsigned int val4,
-    unsigned int val5,
-    unsigned int val6,
-    unsigned int val7)
-{ TRACE_AND_INDENT();
+void py_call_void_fn(const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3,
+                     unsigned int val4, unsigned int val5, unsigned int val6, unsigned int val7) {
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
-  if (!pmod) {
+  if (! pmod) {
     return;
   }
 
   PyObject *pFunc = PyObject_GetAttrString(pmod, name);
   if (PyCallable_Check(pFunc)) {
-    PyObject *pArgs = Py_BuildValue("(IIIIIII)", val1, val2, val3, val4, val5, val6, val7);
+    PyObject *pArgs  = Py_BuildValue("(IIIIIII)", val1, val2, val3, val4, val5, val6, val7);
     PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
     Py_DECREF(pArgs);
     if (pValue) {
@@ -408,25 +385,17 @@ void py_call_void_fn (const char *module,
   py_err();
 }
 
-void py_call_void_fn (const char *module,
-    const char *name,
-    unsigned int val1,
-    unsigned int val2,
-    unsigned int val3,
-    unsigned int val4,
-    unsigned int val5,
-    unsigned int val6,
-    unsigned int val7,
-    unsigned int val8)
-{ TRACE_AND_INDENT();
+void py_call_void_fn(const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3,
+                     unsigned int val4, unsigned int val5, unsigned int val6, unsigned int val7, unsigned int val8) {
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
-  if (!pmod) {
+  if (! pmod) {
     return;
   }
 
   PyObject *pFunc = PyObject_GetAttrString(pmod, name);
   if (PyCallable_Check(pFunc)) {
-    PyObject *pArgs = Py_BuildValue("(iiiiiiii)", val1, val2, val3, val4, val5, val6, val7, val8);
+    PyObject *pArgs  = Py_BuildValue("(iiiiiiii)", val1, val2, val3, val4, val5, val6, val7, val8);
     PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
     Py_DECREF(pArgs);
     if (pValue) {
@@ -439,9 +408,9 @@ void py_call_void_fn (const char *module,
   py_err();
 }
 
-bool py_call_bool (const char *name)
-{ TRACE_AND_INDENT();
-  if (!zx_mod) {
+bool py_call_bool(const char *name) {
+  TRACE_AND_INDENT();
+  if (! zx_mod) {
     ERR("Python module not inited yet");
     return false;
   }
@@ -449,7 +418,7 @@ bool py_call_bool (const char *name)
   PyObject *pFunc = PyObject_GetAttrString(zx_mod, name);
   if (PyCallable_Check(pFunc)) {
     PyObject *pValue = PyObject_CallObject(pFunc, 0);
-    bool out = false;
+    bool      out    = false;
     if (pValue) {
       out = py_obj_to_bool(pValue);
       Py_DECREF(pValue);
@@ -463,16 +432,16 @@ bool py_call_bool (const char *name)
   return false;
 }
 
-bool py_call_bool_fn (const char *module, const char *name, int val1)
-{ TRACE_AND_INDENT();
+bool py_call_bool_fn(const char *module, const char *name, int val1) {
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
-  if (!pmod) {
+  if (! pmod) {
     return false;
   }
 
   PyObject *pFunc = PyObject_GetAttrString(pmod, name);
   if (PyCallable_Check(pFunc)) {
-    PyObject *pArgs = Py_BuildValue("(i)", val1);
+    PyObject *pArgs  = Py_BuildValue("(i)", val1);
     PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
     Py_DECREF(pArgs);
     bool out = false;
@@ -489,16 +458,16 @@ bool py_call_bool_fn (const char *module, const char *name, int val1)
   return false;
 }
 
-bool py_call_bool_fn (const char *module, const char *name, int val1, int val2)
-{ TRACE_AND_INDENT();
+bool py_call_bool_fn(const char *module, const char *name, int val1, int val2) {
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
-  if (!pmod) {
+  if (! pmod) {
     return false;
   }
 
   PyObject *pFunc = PyObject_GetAttrString(pmod, name);
   if (PyCallable_Check(pFunc)) {
-    PyObject *pArgs = Py_BuildValue("(ii)", val1, val2);
+    PyObject *pArgs  = Py_BuildValue("(ii)", val1, val2);
     PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
     Py_DECREF(pArgs);
     bool out = false;
@@ -515,16 +484,16 @@ bool py_call_bool_fn (const char *module, const char *name, int val1, int val2)
   return false;
 }
 
-bool py_call_bool_fn (const char *module, const char *name, int val1, int val2, int val3)
-{ TRACE_AND_INDENT();
+bool py_call_bool_fn(const char *module, const char *name, int val1, int val2, int val3) {
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
-  if (!pmod) {
+  if (! pmod) {
     return false;
   }
 
   PyObject *pFunc = PyObject_GetAttrString(pmod, name);
   if (PyCallable_Check(pFunc)) {
-    PyObject *pArgs = Py_BuildValue("(iii)", val1, val2, val3);
+    PyObject *pArgs  = Py_BuildValue("(iii)", val1, val2, val3);
     PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
     Py_DECREF(pArgs);
     bool out = false;
@@ -541,16 +510,16 @@ bool py_call_bool_fn (const char *module, const char *name, int val1, int val2, 
   return false;
 }
 
-bool py_call_bool_fn (const char *module, const char *name, int val1, int val2, int val3, int val4)
-{ TRACE_AND_INDENT();
+bool py_call_bool_fn(const char *module, const char *name, int val1, int val2, int val3, int val4) {
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
-  if (!pmod) {
+  if (! pmod) {
     return false;
   }
 
   PyObject *pFunc = PyObject_GetAttrString(pmod, name);
   if (PyCallable_Check(pFunc)) {
-    PyObject *pArgs = Py_BuildValue("(iiii)", val1, val2, val3, val4);
+    PyObject *pArgs  = Py_BuildValue("(iiii)", val1, val2, val3, val4);
     PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
     Py_DECREF(pArgs);
     bool out = false;
@@ -567,16 +536,16 @@ bool py_call_bool_fn (const char *module, const char *name, int val1, int val2, 
   return false;
 }
 
-bool py_call_bool_fn (const char *module, const char *name, int val1, int val2, int val3, int val4, int val5)
-{ TRACE_AND_INDENT();
+bool py_call_bool_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5) {
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
-  if (!pmod) {
+  if (! pmod) {
     return false;
   }
 
   PyObject *pFunc = PyObject_GetAttrString(pmod, name);
   if (PyCallable_Check(pFunc)) {
-    PyObject *pArgs = Py_BuildValue("(iiiii)", val1, val2, val3, val4, val5);
+    PyObject *pArgs  = Py_BuildValue("(iiiii)", val1, val2, val3, val4, val5);
     PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
     Py_DECREF(pArgs);
     bool out = false;
@@ -593,17 +562,16 @@ bool py_call_bool_fn (const char *module, const char *name, int val1, int val2, 
   return false;
 }
 
-bool py_call_bool_fn (const char *module, const char *name, int val1, int val2, int val3, int val4, int val5,
-            int val6)
-{ TRACE_AND_INDENT();
+bool py_call_bool_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5, int val6) {
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
-  if (!pmod) {
+  if (! pmod) {
     return false;
   }
 
   PyObject *pFunc = PyObject_GetAttrString(pmod, name);
   if (PyCallable_Check(pFunc)) {
-    PyObject *pArgs = Py_BuildValue("(iiiiii)", val1, val2, val3, val4, val5, val6);
+    PyObject *pArgs  = Py_BuildValue("(iiiiii)", val1, val2, val3, val4, val5, val6);
     PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
     Py_DECREF(pArgs);
     bool out = false;
@@ -620,17 +588,17 @@ bool py_call_bool_fn (const char *module, const char *name, int val1, int val2, 
   return false;
 }
 
-bool py_call_bool_fn (const char *module, const char *name, int val1, int val2, int val3, int val4, int val5,
-            int val6, int val7)
-{ TRACE_AND_INDENT();
+bool py_call_bool_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5, int val6,
+                     int val7) {
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
-  if (!pmod) {
+  if (! pmod) {
     return false;
   }
 
   PyObject *pFunc = PyObject_GetAttrString(pmod, name);
   if (PyCallable_Check(pFunc)) {
-    PyObject *pArgs = Py_BuildValue("(iiiiiii)", val1, val2, val3, val4, val5, val6, val7);
+    PyObject *pArgs  = Py_BuildValue("(iiiiiii)", val1, val2, val3, val4, val5, val6, val7);
     PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
     Py_DECREF(pArgs);
     bool out = false;
@@ -647,17 +615,17 @@ bool py_call_bool_fn (const char *module, const char *name, int val1, int val2, 
   return false;
 }
 
-bool py_call_bool_fn (const char *module, const char *name, int val1, int val2, int val3, int val4, int val5,
-            int val6, int val7, int val8)
-{ TRACE_AND_INDENT();
+bool py_call_bool_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5, int val6,
+                     int val7, int val8) {
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
-  if (!pmod) {
+  if (! pmod) {
     return false;
   }
 
   PyObject *pFunc = PyObject_GetAttrString(pmod, name);
   if (PyCallable_Check(pFunc)) {
-    PyObject *pArgs = Py_BuildValue("(iiiiiiii)", val1, val2, val3, val4, val5, val6, val7, val8);
+    PyObject *pArgs  = Py_BuildValue("(iiiiiiii)", val1, val2, val3, val4, val5, val6, val7, val8);
     PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
     Py_DECREF(pArgs);
     bool out = false;
@@ -674,16 +642,16 @@ bool py_call_bool_fn (const char *module, const char *name, int val1, int val2, 
   return false;
 }
 
-bool py_call_bool_fn (const char *module, const char *name, unsigned int val1)
-{ TRACE_AND_INDENT();
+bool py_call_bool_fn(const char *module, const char *name, unsigned int val1) {
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
-  if (!pmod) {
+  if (! pmod) {
     return false;
   }
 
   PyObject *pFunc = PyObject_GetAttrString(pmod, name);
   if (PyCallable_Check(pFunc)) {
-    PyObject *pArgs = Py_BuildValue("(I)", val1);
+    PyObject *pArgs  = Py_BuildValue("(I)", val1);
     PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
     Py_DECREF(pArgs);
     bool out = false;
@@ -700,16 +668,16 @@ bool py_call_bool_fn (const char *module, const char *name, unsigned int val1)
   return false;
 }
 
-bool py_call_bool_fn (const char *module, const char *name, unsigned int val1, unsigned int val2)
-{ TRACE_AND_INDENT();
+bool py_call_bool_fn(const char *module, const char *name, unsigned int val1, unsigned int val2) {
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
-  if (!pmod) {
+  if (! pmod) {
     return false;
   }
 
   PyObject *pFunc = PyObject_GetAttrString(pmod, name);
   if (PyCallable_Check(pFunc)) {
-    PyObject *pArgs = Py_BuildValue("(II)", val1, val2);
+    PyObject *pArgs  = Py_BuildValue("(II)", val1, val2);
     PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
     Py_DECREF(pArgs);
     bool out = false;
@@ -726,16 +694,16 @@ bool py_call_bool_fn (const char *module, const char *name, unsigned int val1, u
   return false;
 }
 
-bool py_call_bool_fn (const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3)
-{ TRACE_AND_INDENT();
+bool py_call_bool_fn(const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3) {
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
-  if (!pmod) {
+  if (! pmod) {
     return false;
   }
 
   PyObject *pFunc = PyObject_GetAttrString(pmod, name);
   if (PyCallable_Check(pFunc)) {
-    PyObject *pArgs = Py_BuildValue("(III)", val1, val2, val3);
+    PyObject *pArgs  = Py_BuildValue("(III)", val1, val2, val3);
     PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
     Py_DECREF(pArgs);
     bool out = false;
@@ -752,21 +720,17 @@ bool py_call_bool_fn (const char *module, const char *name, unsigned int val1, u
   return false;
 }
 
-bool py_call_bool_fn (const char *module,
-    const char *name,
-    unsigned int val1,
-    unsigned int val2,
-    unsigned int val3,
-    unsigned int val4)
-{ TRACE_AND_INDENT();
+bool py_call_bool_fn(const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3,
+                     unsigned int val4) {
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
-  if (!pmod) {
+  if (! pmod) {
     return false;
   }
 
   PyObject *pFunc = PyObject_GetAttrString(pmod, name);
   if (PyCallable_Check(pFunc)) {
-    PyObject *pArgs = Py_BuildValue("(IIII)", val1, val2, val3, val4);
+    PyObject *pArgs  = Py_BuildValue("(IIII)", val1, val2, val3, val4);
     PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
     Py_DECREF(pArgs);
     bool out = false;
@@ -783,22 +747,17 @@ bool py_call_bool_fn (const char *module,
   return false;
 }
 
-bool py_call_bool_fn (const char *module,
-    const char *name,
-    unsigned int val1,
-    unsigned int val2,
-    unsigned int val3,
-    unsigned int val4,
-    unsigned int val5)
-{ TRACE_AND_INDENT();
+bool py_call_bool_fn(const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3,
+                     unsigned int val4, unsigned int val5) {
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
-  if (!pmod) {
+  if (! pmod) {
     return false;
   }
 
   PyObject *pFunc = PyObject_GetAttrString(pmod, name);
   if (PyCallable_Check(pFunc)) {
-    PyObject *pArgs = Py_BuildValue("(IIIII)", val1, val2, val3, val4, val5);
+    PyObject *pArgs  = Py_BuildValue("(IIIII)", val1, val2, val3, val4, val5);
     PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
     Py_DECREF(pArgs);
     bool out = false;
@@ -815,23 +774,17 @@ bool py_call_bool_fn (const char *module,
   return false;
 }
 
-bool py_call_bool_fn (const char *module,
-    const char *name,
-    unsigned int val1,
-    unsigned int val2,
-    unsigned int val3,
-    unsigned int val4,
-    unsigned int val5,
-    unsigned int val6)
-{ TRACE_AND_INDENT();
+bool py_call_bool_fn(const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3,
+                     unsigned int val4, unsigned int val5, unsigned int val6) {
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
-  if (!pmod) {
+  if (! pmod) {
     return false;
   }
 
   PyObject *pFunc = PyObject_GetAttrString(pmod, name);
   if (PyCallable_Check(pFunc)) {
-    PyObject *pArgs = Py_BuildValue("(IIIIII)", val1, val2, val3, val4, val5, val6);
+    PyObject *pArgs  = Py_BuildValue("(IIIIII)", val1, val2, val3, val4, val5, val6);
     PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
     Py_DECREF(pArgs);
     bool out = false;
@@ -848,24 +801,17 @@ bool py_call_bool_fn (const char *module,
   return false;
 }
 
-bool py_call_bool_fn (const char *module,
-    const char *name,
-    unsigned int val1,
-    unsigned int val2,
-    unsigned int val3,
-    unsigned int val4,
-    unsigned int val5,
-    unsigned int val6,
-    unsigned int val7)
-{ TRACE_AND_INDENT();
+bool py_call_bool_fn(const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3,
+                     unsigned int val4, unsigned int val5, unsigned int val6, unsigned int val7) {
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
-  if (!pmod) {
+  if (! pmod) {
     return false;
   }
 
   PyObject *pFunc = PyObject_GetAttrString(pmod, name);
   if (PyCallable_Check(pFunc)) {
-    PyObject *pArgs = Py_BuildValue("(IIIIIII)", val1, val2, val3, val4, val5, val6, val7);
+    PyObject *pArgs  = Py_BuildValue("(IIIIIII)", val1, val2, val3, val4, val5, val6, val7);
     PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
     Py_DECREF(pArgs);
     bool out = false;
@@ -882,25 +828,17 @@ bool py_call_bool_fn (const char *module,
   return false;
 }
 
-bool py_call_bool_fn (const char *module,
-    const char *name,
-    unsigned int val1,
-    unsigned int val2,
-    unsigned int val3,
-    unsigned int val4,
-    unsigned int val5,
-    unsigned int val6,
-    unsigned int val7,
-    unsigned int val8)
-{ TRACE_AND_INDENT();
+bool py_call_bool_fn(const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3,
+                     unsigned int val4, unsigned int val5, unsigned int val6, unsigned int val7, unsigned int val8) {
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
-  if (!pmod) {
+  if (! pmod) {
     return false;
   }
 
   PyObject *pFunc = PyObject_GetAttrString(pmod, name);
   if (PyCallable_Check(pFunc)) {
-    PyObject *pArgs = Py_BuildValue("(iiiiiiii)", val1, val2, val3, val4, val5, val6, val7, val8);
+    PyObject *pArgs  = Py_BuildValue("(iiiiiiii)", val1, val2, val3, val4, val5, val6, val7, val8);
     PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
     Py_DECREF(pArgs);
     bool out = false;
@@ -917,28 +855,27 @@ bool py_call_bool_fn (const char *module,
   return false;
 }
 
-char *py_obj_to_str (const PyObject *py_str)
-{ TRACE_AND_INDENT();
+char *py_obj_to_str(const PyObject *py_str) {
+  TRACE_AND_INDENT();
   PyObject *py_encstr;
-  char *outstr = 0;
-  char *str;
+  char *    outstr = 0;
+  char *    str;
 
   py_encstr = 0;
-  str = 0;
+  str       = 0;
 
-  if (!PyUnicode_Check((PyObject *)py_str)) {
-    ERR("Object is a %s, not a string object.",
-      Py_TYPE((PyObject *)py_str)->tp_name);
+  if (! PyUnicode_Check((PyObject *) py_str)) {
+    ERR("Object is a %s, not a string object.", Py_TYPE((PyObject *) py_str)->tp_name);
     goto err_out;
   }
 
-  py_encstr = PyUnicode_AsEncodedString((PyObject *)py_str, "utf-8", 0);
-  if (!py_encstr) {
+  py_encstr = PyUnicode_AsEncodedString((PyObject *) py_str, "utf-8", 0);
+  if (! py_encstr) {
     goto err_out;
   }
 
   str = PyBytes_AS_STRING(py_encstr);
-  if (!str) {
+  if (! str) {
     goto err_out;
   }
 
@@ -953,28 +890,27 @@ err_out:
   return (outstr);
 }
 
-std::string py_obj_to_string (const PyObject *py_str)
-{ TRACE_AND_INDENT();
-  PyObject *py_encstr;
+std::string py_obj_to_string(const PyObject *py_str) {
+  TRACE_AND_INDENT();
+  PyObject *  py_encstr;
   std::string outstr;
-  char *str;
+  char *      str;
 
   py_encstr = 0;
-  str = 0;
+  str       = 0;
 
-  if (!PyUnicode_Check((PyObject *)py_str)) {
-    ERR("Object is a %s, not a string object.",
-      Py_TYPE((PyObject *)py_str)->tp_name);
+  if (! PyUnicode_Check((PyObject *) py_str)) {
+    ERR("Object is a %s, not a string object.", Py_TYPE((PyObject *) py_str)->tp_name);
     goto err_out;
   }
 
-  py_encstr = PyUnicode_AsEncodedString((PyObject *)py_str, "utf-8", 0);
-  if (!py_encstr) {
+  py_encstr = PyUnicode_AsEncodedString((PyObject *) py_str, "utf-8", 0);
+  if (! py_encstr) {
     goto err_out;
   }
 
   str = PyBytes_AS_STRING(py_encstr);
-  if (!str) {
+  if (! str) {
     goto err_out;
   }
 
@@ -989,15 +925,14 @@ err_out:
   return (outstr);
 }
 
-int py_obj_to_int (PyObject *py_obj)
-{ TRACE_AND_INDENT();
+int py_obj_to_int(PyObject *py_obj) {
+  TRACE_AND_INDENT();
   int val;
 
   val = 0;
 
-  if (!PyLong_Check((PyObject *)py_obj)) {
-    ERR("Object is a %s, not a int object.",
-      Py_TYPE((PyObject *)py_obj)->tp_name);
+  if (! PyLong_Check((PyObject *) py_obj)) {
+    ERR("Object is a %s, not a int object.", Py_TYPE((PyObject *) py_obj)->tp_name);
     goto err_out;
   }
 
@@ -1011,15 +946,14 @@ err_out:
   return (val);
 }
 
-int py_obj_to_bool (PyObject *py_obj)
-{ TRACE_AND_INDENT();
+int py_obj_to_bool(PyObject *py_obj) {
+  TRACE_AND_INDENT();
   int val;
 
   val = 0;
 
-  if (!PyLong_Check((PyObject *)py_obj)) {
-    ERR("Object is a %s, not a int object.",
-      Py_TYPE((PyObject *)py_obj)->tp_name);
+  if (! PyLong_Check((PyObject *) py_obj)) {
+    ERR("Object is a %s, not a int object.", Py_TYPE((PyObject *) py_obj)->tp_name);
     goto err_out;
   }
 
@@ -1033,15 +967,14 @@ err_out:
   return (val == 0 ? false : true);
 }
 
-uint64_t py_obj_to_uint64 (PyObject *py_obj)
-{ TRACE_AND_INDENT();
+uint64_t py_obj_to_uint64(PyObject *py_obj) {
+  TRACE_AND_INDENT();
   uint64_t val;
 
   val = 0;
 
-  if (!PyLong_Check((PyObject *)py_obj)) {
-    ERR("Object is a %s, not a uint64 object.",
-      Py_TYPE((PyObject *)py_obj)->tp_name);
+  if (! PyLong_Check((PyObject *) py_obj)) {
+    ERR("Object is a %s, not a uint64 object.", Py_TYPE((PyObject *) py_obj)->tp_name);
     goto err_out;
   }
 
@@ -1056,19 +989,18 @@ err_out:
   return (val);
 }
 
-double py_obj_to_double (PyObject *py_obj)
-{ TRACE_AND_INDENT();
+double py_obj_to_double(PyObject *py_obj) {
+  TRACE_AND_INDENT();
   double val;
 
   val = 0;
 
-  if (PyLong_Check((PyObject *)py_obj)) {
+  if (PyLong_Check((PyObject *) py_obj)) {
     val = PyLong_AsDouble(py_obj);
-  } else if (PyFloat_Check((PyObject *)py_obj)) {
+  } else if (PyFloat_Check((PyObject *) py_obj)) {
     val = PyFloat_AsDouble(py_obj);
   } else {
-    ERR("Object is a %s, not a double object.",
-      Py_TYPE((PyObject *)py_obj)->tp_name);
+    ERR("Object is a %s, not a double object.", Py_TYPE((PyObject *) py_obj)->tp_name);
     goto err_out;
   }
 
@@ -1081,21 +1013,20 @@ err_out:
   return (val);
 }
 
-int py_obj_attr_int (const PyObject *py_obj, const char *attr)
-{ TRACE_AND_INDENT();
+int py_obj_attr_int(const PyObject *py_obj, const char *attr) {
+  TRACE_AND_INDENT();
   PyObject *py_encstr;
-  int i = 0;
+  int       i = 0;
 
   py_encstr = 0;
 
-  if (!PyObject_HasAttrString((PyObject *)py_obj, attr)) {
-    ERR("Object is a %s, not a string object.",
-      Py_TYPE((PyObject *)py_obj)->tp_name);
+  if (! PyObject_HasAttrString((PyObject *) py_obj, attr)) {
+    ERR("Object is a %s, not a string object.", Py_TYPE((PyObject *) py_obj)->tp_name);
     goto err_out;
   }
 
-  py_encstr = PyObject_GetAttrString((PyObject *)py_obj, attr);
-  if (!py_encstr) {
+  py_encstr = PyObject_GetAttrString((PyObject *) py_obj, attr);
+  if (! py_encstr) {
     goto err_out;
   }
 
@@ -1113,21 +1044,20 @@ err_out:
   return (i);
 }
 
-uint64_t py_obj_attr_uint64 (const PyObject *py_obj, const char *attr)
-{ TRACE_AND_INDENT();
+uint64_t py_obj_attr_uint64(const PyObject *py_obj, const char *attr) {
+  TRACE_AND_INDENT();
   PyObject *py_encstr;
-  uint64_t i = 0;
+  uint64_t  i = 0;
 
   py_encstr = 0;
 
-  if (!PyObject_HasAttrString((PyObject *)py_obj, attr)) {
-    ERR("Object is a %s, not a string object.",
-      Py_TYPE((PyObject *)py_obj)->tp_name);
+  if (! PyObject_HasAttrString((PyObject *) py_obj, attr)) {
+    ERR("Object is a %s, not a string object.", Py_TYPE((PyObject *) py_obj)->tp_name);
     goto err_out;
   }
 
-  py_encstr = PyObject_GetAttrString((PyObject *)py_obj, attr);
-  if (!py_encstr) {
+  py_encstr = PyObject_GetAttrString((PyObject *) py_obj, attr);
+  if (! py_encstr) {
     goto err_out;
   }
 
@@ -1145,21 +1075,20 @@ err_out:
   return (i);
 }
 
-double py_obj_attr_double (const PyObject *py_obj, const char *attr)
-{ TRACE_AND_INDENT();
+double py_obj_attr_double(const PyObject *py_obj, const char *attr) {
+  TRACE_AND_INDENT();
   PyObject *py_encstr;
-  double i = 0;
+  double    i = 0;
 
   py_encstr = 0;
 
-  if (!PyObject_HasAttrString((PyObject *)py_obj, attr)) {
-    ERR("Object is a %s, not a string object.",
-      Py_TYPE((PyObject *)py_obj)->tp_name);
+  if (! PyObject_HasAttrString((PyObject *) py_obj, attr)) {
+    ERR("Object is a %s, not a string object.", Py_TYPE((PyObject *) py_obj)->tp_name);
     goto err_out;
   }
 
-  py_encstr = PyObject_GetAttrString((PyObject *)py_obj, attr);
-  if (!py_encstr) {
+  py_encstr = PyObject_GetAttrString((PyObject *) py_obj, attr);
+  if (! py_encstr) {
     goto err_out;
   }
 
@@ -1177,28 +1106,27 @@ err_out:
   return (i);
 }
 
-char *py_obj_attr_str (const PyObject *py_obj, const char *attr)
-{ TRACE_AND_INDENT();
+char *py_obj_attr_str(const PyObject *py_obj, const char *attr) {
+  TRACE_AND_INDENT();
   PyObject *py_encstr;
-  char *outstr = 0;
-  char *str;
+  char *    outstr = 0;
+  char *    str;
 
   py_encstr = 0;
-  str = 0;
+  str       = 0;
 
-  if (!PyObject_HasAttrString((PyObject *)py_obj, attr)) {
-    ERR("Object is a %s, not a string object.",
-      Py_TYPE((PyObject *)py_obj)->tp_name);
+  if (! PyObject_HasAttrString((PyObject *) py_obj, attr)) {
+    ERR("Object is a %s, not a string object.", Py_TYPE((PyObject *) py_obj)->tp_name);
     goto err_out;
   }
 
-  py_encstr = PyObject_GetAttrString((PyObject *)py_obj, attr);
-  if (!py_encstr) {
+  py_encstr = PyObject_GetAttrString((PyObject *) py_obj, attr);
+  if (! py_encstr) {
     goto err_out;
   }
 
   str = py_obj_to_str(py_encstr);
-  if (!str) {
+  if (! str) {
     goto err_out;
   }
 
@@ -1213,20 +1141,19 @@ err_out:
   return (outstr);
 }
 
-PyObject *py_obj_attr (const PyObject *py_obj, const char *attr)
-{ TRACE_AND_INDENT();
+PyObject *py_obj_attr(const PyObject *py_obj, const char *attr) {
+  TRACE_AND_INDENT();
   PyObject *py_encstr;
 
   py_encstr = 0;
 
-  if (!PyObject_HasAttrString((PyObject *)py_obj, attr)) {
-    ERR("Object is a %s, not a string object.",
-      Py_TYPE((PyObject *)py_obj)->tp_name);
+  if (! PyObject_HasAttrString((PyObject *) py_obj, attr)) {
+    ERR("Object is a %s, not a string object.", Py_TYPE((PyObject *) py_obj)->tp_name);
     goto err_out;
   }
 
-  py_encstr = PyObject_GetAttrString((PyObject *)py_obj, attr);
-  if (!py_encstr) {
+  py_encstr = PyObject_GetAttrString((PyObject *) py_obj, attr);
+  if (! py_encstr) {
     goto err_out;
   }
 
@@ -1244,11 +1171,11 @@ err_out:
   Py_RETURN_NONE;
 }
 
-static PyObject *con_ (PyObject *obj, PyObject *args, PyObject *keywds)
-{ TRACE_AND_INDENT();
+static PyObject *con_(PyObject *obj, PyObject *args, PyObject *keywds) {
+  TRACE_AND_INDENT();
   wchar_t *a = 0;
 
-  if (!PyArg_ParseTuple(args, "u", &a)) {
+  if (! PyArg_ParseTuple(args, "u", &a)) {
     ERR("con: Bad args");
     Py_RETURN_FALSE;
   }
@@ -1260,11 +1187,11 @@ static PyObject *con_ (PyObject *obj, PyObject *args, PyObject *keywds)
   Py_RETURN_TRUE;
 }
 
-static PyObject *topcon_ (PyObject *obj, PyObject *args, PyObject *keywds)
-{ TRACE_AND_INDENT();
+static PyObject *topcon_(PyObject *obj, PyObject *args, PyObject *keywds) {
+  TRACE_AND_INDENT();
   wchar_t *a = 0;
 
-  if (!PyArg_ParseTuple(args, "u", &a)) {
+  if (! PyArg_ParseTuple(args, "u", &a)) {
     ERR("topcon: Bad args");
     Py_RETURN_FALSE;
   }
@@ -1276,11 +1203,11 @@ static PyObject *topcon_ (PyObject *obj, PyObject *args, PyObject *keywds)
   Py_RETURN_TRUE;
 }
 
-static PyObject *puts_ (PyObject *obj, PyObject *args, PyObject *keywds)
-{ TRACE_AND_INDENT();
+static PyObject *puts_(PyObject *obj, PyObject *args, PyObject *keywds) {
+  TRACE_AND_INDENT();
   char *a = 0;
 
-  if (!PyArg_ParseTuple(args, "s", &a)) {
+  if (! PyArg_ParseTuple(args, "s", &a)) {
     ERR("puts: Bad args");
     Py_RETURN_FALSE;
   }
@@ -1292,11 +1219,11 @@ static PyObject *puts_ (PyObject *obj, PyObject *args, PyObject *keywds)
   Py_RETURN_TRUE;
 }
 
-static PyObject *log_ (PyObject *obj, PyObject *args, PyObject *keywds)
-{ TRACE_AND_INDENT();
+static PyObject *log_(PyObject *obj, PyObject *args, PyObject *keywds) {
+  TRACE_AND_INDENT();
   char *a = 0;
 
-  if (!PyArg_ParseTuple(args, "s", &a)) {
+  if (! PyArg_ParseTuple(args, "s", &a)) {
     ERR("log: Bad args");
     Py_RETURN_FALSE;
   }
@@ -1308,11 +1235,11 @@ static PyObject *log_ (PyObject *obj, PyObject *args, PyObject *keywds)
   Py_RETURN_TRUE;
 }
 
-static PyObject *err_ (PyObject *obj, PyObject *args, PyObject *keywds)
-{ TRACE_AND_INDENT();
+static PyObject *err_(PyObject *obj, PyObject *args, PyObject *keywds) {
+  TRACE_AND_INDENT();
   char *a = 0;
 
-  if (!PyArg_ParseTuple(args, "s", &a)) {
+  if (! PyArg_ParseTuple(args, "s", &a)) {
     ERR("err: Bad args");
     Py_RETURN_FALSE;
   }
@@ -1324,11 +1251,11 @@ static PyObject *err_ (PyObject *obj, PyObject *args, PyObject *keywds)
   Py_RETURN_TRUE;
 }
 
-static PyObject *die_ (PyObject *obj, PyObject *args, PyObject *keywds)
-{ TRACE_AND_INDENT();
+static PyObject *die_(PyObject *obj, PyObject *args, PyObject *keywds) {
+  TRACE_AND_INDENT();
   char *a = 0;
 
-  if (!PyArg_ParseTuple(args, "s", &a)) {
+  if (! PyArg_ParseTuple(args, "s", &a)) {
     ERR("die: Bad args");
     Py_RETURN_FALSE;
   }
@@ -1341,1010 +1268,506 @@ static PyObject *die_ (PyObject *obj, PyObject *args, PyObject *keywds)
 }
 
 static PyMethodDef python_c_METHODS[] = {
-  /*
-   * The cast of the function is necessary since PyCFunction values
-   * only take two PyObject *parameters, and some take three.
-   */
+/*
+ * The cast of the function is necessary since PyCFunction values
+ * only take two PyObject *parameters, and some take three.
+ */
 
-  #define ZX_ADD_PYTHON_FUNCTION(__func__) \
-    { #__func__, (PyCFunction)__func__, METH_VARARGS | METH_KEYWORDS, #__func__ },
+#define ZX_ADD_PYTHON_FUNCTION(__func__) {#__func__, (PyCFunction) __func__, METH_VARARGS | METH_KEYWORDS, #__func__},
 
-  #define ZX_ADD_WRAPPED_PYTHON_FUNCTION(__func__) \
-    { #__func__, (PyCFunction)__func__ ## _, METH_VARARGS | METH_KEYWORDS, #__func__ },
+#define ZX_ADD_WRAPPED_PYTHON_FUNCTION(__func__)                                                                       \
+  {#__func__, (PyCFunction) __func__##_, METH_VARARGS | METH_KEYWORDS, #__func__},
 
-  ZX_ADD_PYTHON_FUNCTION(level_ai_enemy_memory_at)
-  ZX_ADD_PYTHON_FUNCTION(level_enchant_level_at)
-  ZX_ADD_PYTHON_FUNCTION(level_enchant_max_at)
-  ZX_ADD_PYTHON_FUNCTION(level_flood_fill_get_all_things)
-  ZX_ADD_PYTHON_FUNCTION(level_get_all)
-  ZX_ADD_PYTHON_FUNCTION(level_gfx_flickers_at)
-  ZX_ADD_PYTHON_FUNCTION(level_gfx_long_shadow_caster_at)
-  ZX_ADD_PYTHON_FUNCTION(level_gfx_solid_shadow_at)
-  ZX_ADD_PYTHON_FUNCTION(level_gfx_very_short_shadow_caster_at)
-  ZX_ADD_PYTHON_FUNCTION(level_gfx_water_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_able_to_change_levels_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_able_to_fall_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_able_to_fire_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_able_to_fire_at_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_able_to_see_through_doors_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_able_to_walk_through_walls_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_acid_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_acid_lover_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_ai_wanderer_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_alive_monst_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_alive_on_end_of_anim_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_always_hit_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_ascend_dungeon_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_ascend_sewer_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_attackable_by_monst_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_attackable_by_player_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_auto_collect_item_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_bag_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_bag_item_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_bag_item_container_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_bag_item_not_stackable_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_barrel_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_bleeder_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_blood_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_blood_splatter_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_bloodied_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_bones_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_brazier_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_bridge_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_burnable_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_carrier_of_treasure_class_a_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_carrier_of_treasure_class_b_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_carrier_of_treasure_class_c_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_carrying_item_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_carrying_treasure_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_chasm_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_collect_as_keys_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_collectable_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_collected_as_gold_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_combustible_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_corpse_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_corpse_on_death_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_corridor_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_critical_to_level_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_cursor_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_cursor_can_hover_over_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_cursor_path_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_dead_on_end_of_anim_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_dead_on_shove_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_debug_path_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_debug_type_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_deep_water_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_descend_dungeon_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_descend_sewer_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_described_when_hovering_over_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_dir_bl_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_dir_br_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_dir_down_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_dir_left_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_dir_none_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_dir_right_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_dir_tl_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_dir_tr_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_dir_up_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_dirt_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_door_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_droppable_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_dry_grass_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_enchantable_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_enchantstone_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_engulf_chance_d1000_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_engulfer_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_ethereal_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_ethereal_minion_generator_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_explosion_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_extreme_hazard_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_fearless_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_fire_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_floating_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_floor_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_floor_deco_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_foilage_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_food_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_food_eater_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_glass_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_gold_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_hazard_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_health_booster_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_hittable_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_humanoid_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_hunger_insatiable_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_indestructible_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_intelligent_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_interesting_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_item_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_item_carrier_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_item_collector_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_item_eater_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_item_organic_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_jelly_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_jelly_baby_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_jelly_baby_eater_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_jelly_eater_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_jelly_parent_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_jumper_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_jumper_chance_d1000_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_jumper_distance_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_jumper_on_low_hp_chance_d1000_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_key_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_key_collector_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_killed_on_hit_or_miss_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_killed_on_hitting_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_laser_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_lava_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_light_blocker_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_living_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_meat_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_meat_eater_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_metal_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_minion_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_minion_generator_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_monst_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_moveable_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_msg_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_no_tile_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_obs_destructable_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_obs_wall_or_door_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_on_firing_at_something)
-  ZX_ADD_PYTHON_FUNCTION(level_is_openable_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_organic_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_player_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_poison_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_potion_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_potion_eater_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_projectile_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_removeable_if_out_of_slots_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_resurrectable_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_ripple_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_rock_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_rusty_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_secret_door_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_sewer_wall_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_shallow_water_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_shovable_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_skill_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_skillstone_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_smoke_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_soft_body_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_spawner_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_spiderweb_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_stamina_check_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_steal_item_chance_d1000_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_sticky_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_stone_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_sword_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_throwable_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_tickable_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_tmp_thing_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_torch_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_treasure_class_a_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_treasure_class_b_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_treasure_class_c_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_treasure_type_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_treasure_type_chest_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_treasure_type_eater_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_undead_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_usable_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_used_when_thrown_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_very_combustible_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_visible_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_wall_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_wall_dungeon_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_wand_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_wand_eater_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_water_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_water_lover_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_weapon_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_weapon_wielder_at)
-  ZX_ADD_PYTHON_FUNCTION(level_is_wooden_at)
-  ZX_ADD_PYTHON_FUNCTION(level_loves_fire_at)
-  ZX_ADD_PYTHON_FUNCTION(level_loves_poison_at)
-  ZX_ADD_PYTHON_FUNCTION(level_loves_spiderwebs_at)
-  ZX_ADD_PYTHON_FUNCTION(level_place_at)
-  ZX_ADD_PYTHON_FUNCTION(level_spawn_at_thing)
-  ZX_ADD_PYTHON_FUNCTION(level_spawn_at_thing_if_possible)
-  ZX_ADD_PYTHON_FUNCTION(level_spawn_fire_around_thing)
-  ZX_ADD_PYTHON_FUNCTION(level_unused_flag10_at)
-  ZX_ADD_PYTHON_FUNCTION(level_unused_flag11_at)
-  ZX_ADD_PYTHON_FUNCTION(level_unused_flag12_at)
-  ZX_ADD_PYTHON_FUNCTION(level_unused_flag13_at)
-  ZX_ADD_PYTHON_FUNCTION(level_unused_flag14_at)
-  ZX_ADD_PYTHON_FUNCTION(level_unused_flag15_at)
-  ZX_ADD_PYTHON_FUNCTION(level_unused_flag16_at)
-  ZX_ADD_PYTHON_FUNCTION(level_unused_flag17_at)
-  ZX_ADD_PYTHON_FUNCTION(level_unused_flag18_at)
-  ZX_ADD_PYTHON_FUNCTION(level_unused_flag19_at)
-  ZX_ADD_PYTHON_FUNCTION(level_unused_flag1_at)
-  ZX_ADD_PYTHON_FUNCTION(level_unused_flag20_at)
-  ZX_ADD_PYTHON_FUNCTION(level_unused_flag21_at)
-  ZX_ADD_PYTHON_FUNCTION(level_unused_flag22_at)
-  ZX_ADD_PYTHON_FUNCTION(level_unused_flag23_at)
-  ZX_ADD_PYTHON_FUNCTION(level_unused_flag24_at)
-  ZX_ADD_PYTHON_FUNCTION(level_unused_flag25_at)
-  ZX_ADD_PYTHON_FUNCTION(level_unused_flag26_at)
-  ZX_ADD_PYTHON_FUNCTION(level_unused_flag27_at)
-  ZX_ADD_PYTHON_FUNCTION(level_unused_flag28_at)
-  ZX_ADD_PYTHON_FUNCTION(level_unused_flag29_at)
-  ZX_ADD_PYTHON_FUNCTION(level_unused_flag2_at)
-  ZX_ADD_PYTHON_FUNCTION(level_unused_flag30_at)
-  ZX_ADD_PYTHON_FUNCTION(level_unused_flag31_at)
-  ZX_ADD_PYTHON_FUNCTION(level_unused_flag32_at)
-  ZX_ADD_PYTHON_FUNCTION(level_unused_flag33_at)
-  ZX_ADD_PYTHON_FUNCTION(level_unused_flag34_at)
-  ZX_ADD_PYTHON_FUNCTION(level_unused_flag35_at)
-  ZX_ADD_PYTHON_FUNCTION(level_unused_flag36_at)
-  ZX_ADD_PYTHON_FUNCTION(level_unused_flag37_at)
-  ZX_ADD_PYTHON_FUNCTION(level_unused_flag38_at)
-  ZX_ADD_PYTHON_FUNCTION(level_unused_flag39_at)
-  ZX_ADD_PYTHON_FUNCTION(level_unused_flag3_at)
-  ZX_ADD_PYTHON_FUNCTION(level_unused_flag40_at)
-  ZX_ADD_PYTHON_FUNCTION(level_unused_flag41_at)
-  ZX_ADD_PYTHON_FUNCTION(level_unused_flag42_at)
-  ZX_ADD_PYTHON_FUNCTION(level_unused_flag43_at)
-  ZX_ADD_PYTHON_FUNCTION(level_unused_flag44_at)
-  ZX_ADD_PYTHON_FUNCTION(level_unused_flag45_at)
-  ZX_ADD_PYTHON_FUNCTION(level_unused_flag46_at)
-  ZX_ADD_PYTHON_FUNCTION(level_unused_flag47_at)
-  ZX_ADD_PYTHON_FUNCTION(level_unused_flag48_at)
-  ZX_ADD_PYTHON_FUNCTION(level_unused_flag4_at)
-  ZX_ADD_PYTHON_FUNCTION(level_unused_flag50_at)
-  ZX_ADD_PYTHON_FUNCTION(level_unused_flag51_at)
-  ZX_ADD_PYTHON_FUNCTION(level_unused_flag52_at)
-  ZX_ADD_PYTHON_FUNCTION(level_unused_flag5_at)
-  ZX_ADD_PYTHON_FUNCTION(level_unused_flag6_at)
-  ZX_ADD_PYTHON_FUNCTION(level_unused_flag7_at)
-  ZX_ADD_PYTHON_FUNCTION(level_unused_flag8_at)
-  ZX_ADD_PYTHON_FUNCTION(level_unused_flag9_at)
-  ZX_ADD_PYTHON_FUNCTION(non_pcg_randint)
-  ZX_ADD_PYTHON_FUNCTION(pcg_randint)
-  ZX_ADD_PYTHON_FUNCTION(thing_ai_enemy_memory)
-  ZX_ADD_PYTHON_FUNCTION(thing_decr_charge_count)
-  ZX_ADD_PYTHON_FUNCTION(thing_decr_current_damage)
-  ZX_ADD_PYTHON_FUNCTION(thing_decr_enchant)
-  ZX_ADD_PYTHON_FUNCTION(thing_decr_enchant_max)
-  ZX_ADD_PYTHON_FUNCTION(thing_decr_health)
-  ZX_ADD_PYTHON_FUNCTION(thing_decr_health_max)
-  ZX_ADD_PYTHON_FUNCTION(thing_decr_stamina)
-  ZX_ADD_PYTHON_FUNCTION(thing_decr_stamina_max)
-  ZX_ADD_PYTHON_FUNCTION(thing_enchant_level)
-  ZX_ADD_PYTHON_FUNCTION(thing_enchant_max)
-  ZX_ADD_PYTHON_FUNCTION(thing_fire_at)
-  ZX_ADD_PYTHON_FUNCTION(thing_get_charge_count)
-  ZX_ADD_PYTHON_FUNCTION(thing_get_coords)
-  ZX_ADD_PYTHON_FUNCTION(thing_get_current_damage)
-  ZX_ADD_PYTHON_FUNCTION(thing_get_damage_bite)
-  ZX_ADD_PYTHON_FUNCTION(thing_get_damage_crush)
-  ZX_ADD_PYTHON_FUNCTION(thing_get_damage_melee)
-  ZX_ADD_PYTHON_FUNCTION(thing_get_damage_swallow)
-  ZX_ADD_PYTHON_FUNCTION(thing_get_enchant)
-  ZX_ADD_PYTHON_FUNCTION(thing_get_enchant_max)
-  ZX_ADD_PYTHON_FUNCTION(thing_get_health)
-  ZX_ADD_PYTHON_FUNCTION(thing_get_health_max)
-  ZX_ADD_PYTHON_FUNCTION(thing_get_immediate_minion_owner_id)
-  ZX_ADD_PYTHON_FUNCTION(thing_get_immediate_owner_id)
-  ZX_ADD_PYTHON_FUNCTION(thing_get_immediate_spawned_owner_id)
-  ZX_ADD_PYTHON_FUNCTION(thing_get_initial_charge_count)
-  ZX_ADD_PYTHON_FUNCTION(thing_get_name)
-  ZX_ADD_PYTHON_FUNCTION(thing_get_stamina)
-  ZX_ADD_PYTHON_FUNCTION(thing_get_stamina_max)
-  ZX_ADD_PYTHON_FUNCTION(thing_get_top_owner_id)
-  ZX_ADD_PYTHON_FUNCTION(thing_gfx_flickers)
-  ZX_ADD_PYTHON_FUNCTION(thing_gfx_long_shadow_caster)
-  ZX_ADD_PYTHON_FUNCTION(thing_gfx_solid_shadow)
-  ZX_ADD_PYTHON_FUNCTION(thing_gfx_very_short_shadow_caster)
-  ZX_ADD_PYTHON_FUNCTION(thing_gfx_water)
-  ZX_ADD_PYTHON_FUNCTION(thing_hit)
-  ZX_ADD_PYTHON_FUNCTION(thing_incr_charge_count)
-  ZX_ADD_PYTHON_FUNCTION(thing_incr_current_damage)
-  ZX_ADD_PYTHON_FUNCTION(thing_incr_enchant)
-  ZX_ADD_PYTHON_FUNCTION(thing_incr_enchant_max)
-  ZX_ADD_PYTHON_FUNCTION(thing_incr_health)
-  ZX_ADD_PYTHON_FUNCTION(thing_incr_health_max)
-  ZX_ADD_PYTHON_FUNCTION(thing_incr_stamina)
-  ZX_ADD_PYTHON_FUNCTION(thing_incr_stamina_max)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_able_to_change_levels)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_able_to_fall)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_able_to_see_through_doors)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_able_to_walk_through_walls)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_acid)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_acid_lover)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_ai_wanderer)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_alive_monst)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_alive_on_end_of_anim)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_always_hit)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_ascend_dungeon)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_ascend_sewer)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_auto_collect_item)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_auto_throw)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_auto_use)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_bag)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_bag_item)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_bag_item_container)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_bag_item_not_stackable)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_barrel)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_bleeder)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_blood)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_blood_splatter)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_bloodied)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_bones)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_brazier)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_bridge)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_burnable)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_carrier_of_treasure_class_a)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_carrier_of_treasure_class_b)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_carrier_of_treasure_class_c)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_carrying_item)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_carrying_treasure)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_chasm)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_collect_as_keys)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_collectable)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_collected_as_gold)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_combustible)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_corpse)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_corpse_on_death)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_corridor)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_critical_to_level)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_cursor)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_cursor_can_hover_over)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_cursor_can_hover_over_x2_click)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_cursor_path)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_dead_on_end_of_anim)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_dead_or_dying)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_dead_or_dying_on_shove)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_debug_path)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_debug_type)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_deep_water)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_descend_dungeon)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_descend_sewer)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_described_when_hovering_over)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_dir_bl)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_dir_br)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_dir_down)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_dir_left)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_dir_none)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_dir_right)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_dir_tl)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_dir_tr)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_dir_up)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_dirt)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_door)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_droppable)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_dry_grass)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_enchantable)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_enchantstone)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_engulf_chance_d1000)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_engulfer)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_ethereal)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_ethereal_minion_generator)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_explosion)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_extreme_hazard)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_fearless)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_fire)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_floating)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_floor)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_floor_deco)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_foilage)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_food)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_food_eater)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_glass)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_gold)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_hazard)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_health_booster)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_hittable)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_humanoid)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_hunger_insatiable)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_indestructible)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_intelligent)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_interesting)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_item)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_item_carrier)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_item_collector)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_item_eater)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_item_organic)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_jelly)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_jelly_baby)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_jelly_baby_eater)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_jelly_eater)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_jelly_parent)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_jumper)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_jumper_chance_d1000)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_jumper_distance)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_jumper_on_low_hp_chance_d1000)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_key)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_key_collector)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_killed_on_hit_or_miss)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_killed_on_hitting)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_laser)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_lava)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_light_blocker)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_living)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_loggable_for_important_stuff)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_loggable_for_unimportant_stuff)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_meat)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_meat_eater)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_metal)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_minion)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_minion_generator)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_monst)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_moveable)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_msg)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_no_tile)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_obs_destructable)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_obs_wall_or_door)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_on_fire)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_openable)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_organic)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_player)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_poison)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_potion)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_potion_eater)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_projectile)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_removeable_if_out_of_slots)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_resurrectable)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_ripple)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_rock)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_rusty)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_secret_door)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_sewer_wall)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_shallow_water)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_shovable)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_skill)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_skillstone)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_smoke)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_soft_body)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_spawner)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_spiderweb)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_stamina_check)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_steal_item_chance_d1000)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_sticky)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_stone)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_sword)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_target_auto_select)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_throwable)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_tickable)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_tmp_thing)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_torch)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_treasure_class_a)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_treasure_class_b)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_treasure_class_c)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_treasure_type)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_treasure_type_chest)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_treasure_type_eater)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_undead)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_usable)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_used_when_thrown)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_very_combustible)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_visible)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_wall)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_wall_dungeon)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_wand)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_wand_eater)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_water)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_water_lover)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_weapon)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_weapon_wielder)
-  ZX_ADD_PYTHON_FUNCTION(thing_is_wooden)
-  ZX_ADD_PYTHON_FUNCTION(thing_killed)
-  ZX_ADD_PYTHON_FUNCTION(thing_killed_by)
-  ZX_ADD_PYTHON_FUNCTION(thing_loves_fire)
-  ZX_ADD_PYTHON_FUNCTION(thing_loves_poison)
-  ZX_ADD_PYTHON_FUNCTION(thing_loves_spiderwebs)
-  ZX_ADD_PYTHON_FUNCTION(thing_msg)
-  ZX_ADD_PYTHON_FUNCTION(thing_possible_to_attack)
-  ZX_ADD_PYTHON_FUNCTION(thing_set_current_damage)
-  ZX_ADD_PYTHON_FUNCTION(thing_set_enchant)
-  ZX_ADD_PYTHON_FUNCTION(thing_set_enchant_max)
-  ZX_ADD_PYTHON_FUNCTION(thing_set_health)
-  ZX_ADD_PYTHON_FUNCTION(thing_set_health_max)
-  ZX_ADD_PYTHON_FUNCTION(thing_set_stamina)
-  ZX_ADD_PYTHON_FUNCTION(thing_set_stamina_max)
-  ZX_ADD_PYTHON_FUNCTION(thing_skill_activate)
-  ZX_ADD_PYTHON_FUNCTION(thing_skill_deactivate)
-  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag1)
-  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag10)
-  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag11)
-  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag12)
-  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag13)
-  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag14)
-  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag15)
-  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag16)
-  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag17)
-  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag18)
-  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag19)
-  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag2)
-  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag20)
-  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag21)
-  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag22)
-  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag23)
-  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag24)
-  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag25)
-  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag26)
-  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag27)
-  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag28)
-  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag29)
-  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag3)
-  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag30)
-  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag31)
-  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag32)
-  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag33)
-  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag34)
-  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag35)
-  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag36)
-  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag37)
-  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag38)
-  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag39)
-  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag4)
-  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag40)
-  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag41)
-  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag42)
-  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag43)
-  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag44)
-  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag45)
-  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag46)
-  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag47)
-  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag48)
-  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag5)
-  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag50)
-  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag51)
-  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag52)
-  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag6)
-  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag7)
-  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag8)
-  ZX_ADD_PYTHON_FUNCTION(thing_unused_flag9)
-  ZX_ADD_PYTHON_TP_FUNCTION(ai_avoid_distance)
-  ZX_ADD_PYTHON_TP_FUNCTION(ai_enemy_memory)
-  ZX_ADD_PYTHON_TP_FUNCTION(ai_obstacle)
-  ZX_ADD_PYTHON_TP_FUNCTION(ai_scent_distance)
-  ZX_ADD_PYTHON_TP_FUNCTION(ai_vision_distance)
-  ZX_ADD_PYTHON_TP_FUNCTION(attack_eater)
-  ZX_ADD_PYTHON_TP_FUNCTION(attack_humanoid)
-  ZX_ADD_PYTHON_TP_FUNCTION(attack_living)
-  ZX_ADD_PYTHON_TP_FUNCTION(attack_lunge)
-  ZX_ADD_PYTHON_TP_FUNCTION(attack_meat)
-  ZX_ADD_PYTHON_TP_FUNCTION(attack_shove)
-  ZX_ADD_PYTHON_TP_FUNCTION(attack_shove_chance_d1000)
-  ZX_ADD_PYTHON_TP_FUNCTION(bl1_tile)
-  ZX_ADD_PYTHON_TP_FUNCTION(bl2_tile)
-  ZX_ADD_PYTHON_TP_FUNCTION(blast_max_radius)
-  ZX_ADD_PYTHON_TP_FUNCTION(blast_min_radius)
-  ZX_ADD_PYTHON_TP_FUNCTION(blit_bot_off)
-  ZX_ADD_PYTHON_TP_FUNCTION(blit_left_off)
-  ZX_ADD_PYTHON_TP_FUNCTION(blit_right_off)
-  ZX_ADD_PYTHON_TP_FUNCTION(blit_top_off)
-  ZX_ADD_PYTHON_TP_FUNCTION(bot1_tile)
-  ZX_ADD_PYTHON_TP_FUNCTION(bot2_tile)
-  ZX_ADD_PYTHON_TP_FUNCTION(bot3_tile)
-  ZX_ADD_PYTHON_TP_FUNCTION(br1_tile)
-  ZX_ADD_PYTHON_TP_FUNCTION(br2_tile)
-  ZX_ADD_PYTHON_TP_FUNCTION(capacity_height)
-  ZX_ADD_PYTHON_TP_FUNCTION(capacity_width)
-  ZX_ADD_PYTHON_TP_FUNCTION(charge_count)
-  ZX_ADD_PYTHON_TP_FUNCTION(collision_attack)
-  ZX_ADD_PYTHON_TP_FUNCTION(collision_attack_radius)
-  ZX_ADD_PYTHON_TP_FUNCTION(collision_box)
-  ZX_ADD_PYTHON_TP_FUNCTION(collision_check)
-  ZX_ADD_PYTHON_TP_FUNCTION(collision_circle)
-  ZX_ADD_PYTHON_TP_FUNCTION(collision_hit_priority)
-  ZX_ADD_PYTHON_TP_FUNCTION(collision_radius)
-  ZX_ADD_PYTHON_TP_FUNCTION(damage_bite_dice)
-  ZX_ADD_PYTHON_TP_FUNCTION(damage_crush_dice)
-  ZX_ADD_PYTHON_TP_FUNCTION(damage_doubled_from_acid)
-  ZX_ADD_PYTHON_TP_FUNCTION(damage_doubled_from_fire)
-  ZX_ADD_PYTHON_TP_FUNCTION(damage_doubled_from_poison)
-  ZX_ADD_PYTHON_TP_FUNCTION(damage_doubled_from_water)
-  ZX_ADD_PYTHON_TP_FUNCTION(damage_melee_dice)
-  ZX_ADD_PYTHON_TP_FUNCTION(damage_poison_dice)
-  ZX_ADD_PYTHON_TP_FUNCTION(damage_swallow_dice)
-  ZX_ADD_PYTHON_TP_FUNCTION(enchant_level)
-  ZX_ADD_PYTHON_TP_FUNCTION(enchant_max)
-  ZX_ADD_PYTHON_TP_FUNCTION(gfx_an_animation_only)
-  ZX_ADD_PYTHON_TP_FUNCTION(gfx_anim_attack)
-  ZX_ADD_PYTHON_TP_FUNCTION(gfx_animated)
-  ZX_ADD_PYTHON_TP_FUNCTION(gfx_animated_can_hflip)
-  ZX_ADD_PYTHON_TP_FUNCTION(gfx_animated_can_vflip)
-  ZX_ADD_PYTHON_TP_FUNCTION(gfx_animated_no_dir)
-  ZX_ADD_PYTHON_TP_FUNCTION(gfx_attack_anim)
-  ZX_ADD_PYTHON_TP_FUNCTION(gfx_bounce_always)
-  ZX_ADD_PYTHON_TP_FUNCTION(gfx_bounce_on_move)
-  ZX_ADD_PYTHON_TP_FUNCTION(gfx_dead_anim)
-  ZX_ADD_PYTHON_TP_FUNCTION(gfx_flickers)
-  ZX_ADD_PYTHON_TP_FUNCTION(gfx_glows)
-  ZX_ADD_PYTHON_TP_FUNCTION(gfx_health_bar_autohide)
-  ZX_ADD_PYTHON_TP_FUNCTION(gfx_health_bar_shown)
-  ZX_ADD_PYTHON_TP_FUNCTION(gfx_long_shadow_caster)
-  ZX_ADD_PYTHON_TP_FUNCTION(gfx_on_fire_anim)
-  ZX_ADD_PYTHON_TP_FUNCTION(gfx_oversized_and_on_floor)
-  ZX_ADD_PYTHON_TP_FUNCTION(gfx_short_shadow_caster)
-  ZX_ADD_PYTHON_TP_FUNCTION(gfx_show_outlined)
-  ZX_ADD_PYTHON_TP_FUNCTION(gfx_shown_in_bg)
-  ZX_ADD_PYTHON_TP_FUNCTION(gfx_solid_shadow)
-  ZX_ADD_PYTHON_TP_FUNCTION(gfx_very_short_shadow_caster)
-  ZX_ADD_PYTHON_TP_FUNCTION(gfx_water)
-  ZX_ADD_PYTHON_TP_FUNCTION(gfx_weapon_carry_anim)
-  ZX_ADD_PYTHON_TP_FUNCTION(gold_value_dice)
-  ZX_ADD_PYTHON_TP_FUNCTION(hates_acid)
-  ZX_ADD_PYTHON_TP_FUNCTION(hates_fire)
-  ZX_ADD_PYTHON_TP_FUNCTION(hates_poison)
-  ZX_ADD_PYTHON_TP_FUNCTION(hates_water)
-  ZX_ADD_PYTHON_TP_FUNCTION(health_hunger_pct)
-  ZX_ADD_PYTHON_TP_FUNCTION(health_initial_dice)
-  ZX_ADD_PYTHON_TP_FUNCTION(health_starving_pct)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_able_to_change_levels)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_able_to_fall)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_able_to_fire_at)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_able_to_see_through_doors)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_able_to_walk_through_walls)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_acid)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_acid_lover)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_ai_wanderer)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_alive_on_end_of_anim)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_always_hit)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_ascend_dungeon)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_ascend_sewer)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_attackable_by_monst)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_attackable_by_player)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_auto_collect_item)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_auto_throw)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_auto_use)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_bag)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_bag_item)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_bag_item_container)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_bag_item_not_stackable)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_barrel)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_bleeder)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_blood)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_blood_splatter)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_bones)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_brazier)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_bridge)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_burnable)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_carrier_of_treasure_class_a)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_carrier_of_treasure_class_b)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_carrier_of_treasure_class_c)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_chasm)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_collect_as_keys)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_collectable)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_collected_as_gold)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_combustible)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_corpse_on_death)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_corridor)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_critical_to_level)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_cursor)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_cursor_can_hover_over)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_cursor_can_hover_over_x2_click)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_cursor_path)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_dead_on_end_of_anim)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_dead_on_shove)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_debug_path)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_debug_type)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_deep_water)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_descend_dungeon)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_descend_sewer)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_described_when_hovering_over)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_dirt)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_door)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_droppable)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_dry_grass)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_enchantable)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_enchantstone)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_engulf_chance_d1000)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_engulfer)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_ethereal)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_ethereal_minion_generator)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_explosion)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_extreme_hazard)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_fearless)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_fire)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_floating)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_floor)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_floor_deco)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_foilage)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_food)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_food_eater)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_glass)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_gold)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_hazard)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_health_booster)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_hittable)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_humanoid)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_hunger_insatiable)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_indestructible)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_intelligent)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_interesting)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_item)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_item_carrier)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_item_collector)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_item_eater)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_item_organic)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_jelly)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_jelly_baby)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_jelly_baby_eater)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_jelly_eater)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_jelly_parent)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_jumper)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_jumper_chance_d1000)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_jumper_distance)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_jumper_on_low_hp_chance_d1000)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_key)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_key_collector)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_killed_on_hit_or_miss)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_killed_on_hitting)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_laser)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_lava)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_light_blocker)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_living)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_loggable_for_important_stuff)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_loggable_for_unimportant_stuff)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_meat)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_meat_eater)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_metal)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_minion)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_minion_generator)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_monst)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_moveable)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_msg)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_no_tile)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_obs_destructable)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_obs_wall_or_door)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_openable)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_organic)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_player)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_poison)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_potion)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_potion_eater)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_projectile)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_removeable_if_out_of_slots)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_resurrectable)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_ripple)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_rock)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_rusty)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_secret_door)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_sewer_wall)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_shallow_water)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_shovable)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_skill)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_skillstone)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_smoke)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_soft_body)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_spawner)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_spiderweb)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_stamina_check)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_steal_item_chance_d1000)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_sticky)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_stone)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_sword)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_target_auto_select)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_the_grid)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_throwable)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_tickable)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_tmp_thing)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_torch)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_treasure_class_a)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_treasure_class_b)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_treasure_class_c)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_treasure_type)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_treasure_type_chest)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_treasure_type_eater)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_undead)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_usable)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_used_when_thrown)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_very_combustible)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_wall)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_wall_dungeon)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_wand)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_wand_eater)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_water_lover)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_weapon)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_weapon_wielder)
-  ZX_ADD_PYTHON_TP_FUNCTION(is_wooden)
-  ZX_ADD_PYTHON_TP_FUNCTION(item_height)
-  ZX_ADD_PYTHON_TP_FUNCTION(item_width)
-  ZX_ADD_PYTHON_TP_FUNCTION(laser_name)
-  ZX_ADD_PYTHON_TP_FUNCTION(left1_tile)
-  ZX_ADD_PYTHON_TP_FUNCTION(left2_tile)
-  ZX_ADD_PYTHON_TP_FUNCTION(lifespan_dice)
-  ZX_ADD_PYTHON_TP_FUNCTION(light_color)
-  ZX_ADD_PYTHON_TP_FUNCTION(light_strength)
-  ZX_ADD_PYTHON_TP_FUNCTION(long_text_description)
-  ZX_ADD_PYTHON_TP_FUNCTION(loves_fire)
-  ZX_ADD_PYTHON_TP_FUNCTION(loves_poison)
-  ZX_ADD_PYTHON_TP_FUNCTION(loves_spiderwebs)
-  ZX_ADD_PYTHON_TP_FUNCTION(minion_leash_distance)
-  ZX_ADD_PYTHON_TP_FUNCTION(minion_limit)
-  ZX_ADD_PYTHON_TP_FUNCTION(monst_size)
-  ZX_ADD_PYTHON_TP_FUNCTION(name)
-  ZX_ADD_PYTHON_TP_FUNCTION(normal_placement_rules)
-  ZX_ADD_PYTHON_TP_FUNCTION(nutrition_dice)
-  ZX_ADD_PYTHON_TP_FUNCTION(on_birth_do)
-  ZX_ADD_PYTHON_TP_FUNCTION(on_bite_do)
-  ZX_ADD_PYTHON_TP_FUNCTION(on_born_do)
-  ZX_ADD_PYTHON_TP_FUNCTION(on_death_do)
-  ZX_ADD_PYTHON_TP_FUNCTION(on_death_drop_all_items)
-  ZX_ADD_PYTHON_TP_FUNCTION(on_death_is_open)
-  ZX_ADD_PYTHON_TP_FUNCTION(on_enchant_do)
-  ZX_ADD_PYTHON_TP_FUNCTION(on_fall_do)
-  ZX_ADD_PYTHON_TP_FUNCTION(on_fire_do)
-  ZX_ADD_PYTHON_TP_FUNCTION(on_firing_at_something_do)
-  ZX_ADD_PYTHON_TP_FUNCTION(on_hit_do)
-  ZX_ADD_PYTHON_TP_FUNCTION(on_idle_dice)
-  ZX_ADD_PYTHON_TP_FUNCTION(on_lifespan_do)
-  ZX_ADD_PYTHON_TP_FUNCTION(on_miss_do)
-  ZX_ADD_PYTHON_TP_FUNCTION(on_move_do)
-  ZX_ADD_PYTHON_TP_FUNCTION(on_open_do)
-  ZX_ADD_PYTHON_TP_FUNCTION(on_tick_do)
-  ZX_ADD_PYTHON_TP_FUNCTION(on_use_do)
-  ZX_ADD_PYTHON_TP_FUNCTION(projectile_name)
-  ZX_ADD_PYTHON_TP_FUNCTION(range_max)
-  ZX_ADD_PYTHON_TP_FUNCTION(rarity)
-  ZX_ADD_PYTHON_TP_FUNCTION(resurrect_dice)
-  ZX_ADD_PYTHON_TP_FUNCTION(right1_tile)
-  ZX_ADD_PYTHON_TP_FUNCTION(right2_tile)
-  ZX_ADD_PYTHON_TP_FUNCTION(spawn_on_shoved)
-  ZX_ADD_PYTHON_TP_FUNCTION(stamina)
-  ZX_ADD_PYTHON_TP_FUNCTION(stat_attack)
-  ZX_ADD_PYTHON_TP_FUNCTION(stat_constitution)
-  ZX_ADD_PYTHON_TP_FUNCTION(stat_defence)
-  ZX_ADD_PYTHON_TP_FUNCTION(stat_strength)
-  ZX_ADD_PYTHON_TP_FUNCTION(stats01)
-  ZX_ADD_PYTHON_TP_FUNCTION(stats02)
-  ZX_ADD_PYTHON_TP_FUNCTION(stats03)
-  ZX_ADD_PYTHON_TP_FUNCTION(stats04)
-  ZX_ADD_PYTHON_TP_FUNCTION(stats05)
-  ZX_ADD_PYTHON_TP_FUNCTION(stats06)
-  ZX_ADD_PYTHON_TP_FUNCTION(stats07)
-  ZX_ADD_PYTHON_TP_FUNCTION(stats08)
-  ZX_ADD_PYTHON_TP_FUNCTION(stats09)
-  ZX_ADD_PYTHON_TP_FUNCTION(stats10)
-  ZX_ADD_PYTHON_TP_FUNCTION(stats11)
-  ZX_ADD_PYTHON_TP_FUNCTION(stats12)
-  ZX_ADD_PYTHON_TP_FUNCTION(stats17)
-  ZX_ADD_PYTHON_TP_FUNCTION(str1)
-  ZX_ADD_PYTHON_TP_FUNCTION(str2)
-  ZX_ADD_PYTHON_TP_FUNCTION(str4)
-  ZX_ADD_PYTHON_TP_FUNCTION(str5)
-  ZX_ADD_PYTHON_TP_FUNCTION(text_a_or_an)
-  ZX_ADD_PYTHON_TP_FUNCTION(text_description)
-  ZX_ADD_PYTHON_TP_FUNCTION(text_enchant)
-  ZX_ADD_PYTHON_TP_FUNCTION(text_hits)
-  ZX_ADD_PYTHON_TP_FUNCTION(text_name)
-  ZX_ADD_PYTHON_TP_FUNCTION(text_skill)
-  ZX_ADD_PYTHON_TP_FUNCTION(text_title)
-  ZX_ADD_PYTHON_TP_FUNCTION(text_unused)
-  ZX_ADD_PYTHON_TP_FUNCTION(throw_distance)
-  ZX_ADD_PYTHON_TP_FUNCTION(tile)
-  ZX_ADD_PYTHON_TP_FUNCTION(tl1_tile)
-  ZX_ADD_PYTHON_TP_FUNCTION(tl2_tile)
-  ZX_ADD_PYTHON_TP_FUNCTION(top1_tile)
-  ZX_ADD_PYTHON_TP_FUNCTION(top2_tile)
-  ZX_ADD_PYTHON_TP_FUNCTION(tr1_tile)
-  ZX_ADD_PYTHON_TP_FUNCTION(tr2_tile)
-  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag1)
-  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag10)
-  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag11)
-  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag12)
-  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag13)
-  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag14)
-  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag15)
-  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag16)
-  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag17)
-  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag18)
-  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag19)
-  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag2)
-  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag20)
-  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag21)
-  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag22)
-  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag23)
-  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag24)
-  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag25)
-  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag26)
-  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag27)
-  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag28)
-  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag29)
-  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag3)
-  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag30)
-  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag31)
-  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag32)
-  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag33)
-  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag34)
-  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag35)
-  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag36)
-  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag37)
-  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag38)
-  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag39)
-  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag4)
-  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag40)
-  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag41)
-  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag42)
-  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag43)
-  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag44)
-  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag45)
-  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag46)
-  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag47)
-  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag48)
-  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag5)
-  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag50)
-  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag51)
-  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag52)
-  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag6)
-  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag7)
-  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag8)
-  ZX_ADD_PYTHON_TP_FUNCTION(unused_flag9)
-  ZX_ADD_PYTHON_TP_FUNCTION(weapon_carry_anim)
-  ZX_ADD_PYTHON_TP_FUNCTION(weapon_damage)
-  ZX_ADD_PYTHON_TP_FUNCTION(weapon_use_distance)
-  ZX_ADD_PYTHON_TP_FUNCTION(z_depth)
-  ZX_ADD_PYTHON_TP_FUNCTION(z_prio)
-  ZX_ADD_WRAPPED_PYTHON_FUNCTION(abs_to_pct)
-  ZX_ADD_WRAPPED_PYTHON_FUNCTION(con)
-  ZX_ADD_WRAPPED_PYTHON_FUNCTION(die)
-  ZX_ADD_WRAPPED_PYTHON_FUNCTION(err)
-  ZX_ADD_WRAPPED_PYTHON_FUNCTION(if_matches)
-  ZX_ADD_WRAPPED_PYTHON_FUNCTION(if_matches_then_kill)
-  ZX_ADD_WRAPPED_PYTHON_FUNCTION(level_add)
-  ZX_ADD_WRAPPED_PYTHON_FUNCTION(level_spawn_next_to)
-  ZX_ADD_WRAPPED_PYTHON_FUNCTION(level_spawn_next_to_or_on_monst)
-  ZX_ADD_WRAPPED_PYTHON_FUNCTION(level_spawn_using_items_radius_range)
-  ZX_ADD_WRAPPED_PYTHON_FUNCTION(log)
-  ZX_ADD_WRAPPED_PYTHON_FUNCTION(map_load_room)
-  ZX_ADD_WRAPPED_PYTHON_FUNCTION(music_load)
-  ZX_ADD_WRAPPED_PYTHON_FUNCTION(music_play)
-  ZX_ADD_WRAPPED_PYTHON_FUNCTION(pct_to_abs)
-  ZX_ADD_WRAPPED_PYTHON_FUNCTION(puts)
-  ZX_ADD_WRAPPED_PYTHON_FUNCTION(sound_load)
-  ZX_ADD_WRAPPED_PYTHON_FUNCTION(sound_play)
-  ZX_ADD_WRAPPED_PYTHON_FUNCTION(sound_play_channel)
-  ZX_ADD_WRAPPED_PYTHON_FUNCTION(tex_load)
-  ZX_ADD_WRAPPED_PYTHON_FUNCTION(text_size)
-  ZX_ADD_WRAPPED_PYTHON_FUNCTION(thing_sound_play)
-  ZX_ADD_WRAPPED_PYTHON_FUNCTION(thing_sound_play_channel)
-  ZX_ADD_WRAPPED_PYTHON_FUNCTION(tile_load_arr)
-  ZX_ADD_WRAPPED_PYTHON_FUNCTION(tile_load_arr_sprites)
-  ZX_ADD_WRAPPED_PYTHON_FUNCTION(topcon)
-  ZX_ADD_WRAPPED_PYTHON_FUNCTION(tp_load)
-  ZX_ADD_WRAPPED_PYTHON_FUNCTION(tp_update)
+    ZX_ADD_PYTHON_FUNCTION(level_ai_enemy_memory_at)
+        ZX_ADD_PYTHON_FUNCTION(level_enchant_level_at)
+            ZX_ADD_PYTHON_FUNCTION(level_enchant_max_at)
+                ZX_ADD_PYTHON_FUNCTION(level_flood_fill_get_all_things)
+                    ZX_ADD_PYTHON_FUNCTION(level_get_all)
+                        ZX_ADD_PYTHON_FUNCTION(level_gfx_flickers_at)
+                            ZX_ADD_PYTHON_FUNCTION(level_gfx_long_shadow_caster_at)
+                                ZX_ADD_PYTHON_FUNCTION(level_gfx_solid_shadow_at)
+                                    ZX_ADD_PYTHON_FUNCTION(level_gfx_very_short_shadow_caster_at)
+                                        ZX_ADD_PYTHON_FUNCTION(level_gfx_water_at)
+                                            ZX_ADD_PYTHON_FUNCTION(level_is_able_to_change_levels_at)
+                                                ZX_ADD_PYTHON_FUNCTION(level_is_able_to_fall_at)
+                                                    ZX_ADD_PYTHON_FUNCTION(level_is_able_to_fire_at)
+                                                        ZX_ADD_PYTHON_FUNCTION(level_is_able_to_fire_at_at)
+                                                            ZX_ADD_PYTHON_FUNCTION(
+                                                                level_is_able_to_see_through_doors_at)
+                                                                ZX_ADD_PYTHON_FUNCTION(
+                                                                    level_is_able_to_walk_through_walls_at)
+                                                                    ZX_ADD_PYTHON_FUNCTION(level_is_acid_at)
+                                                                        ZX_ADD_PYTHON_FUNCTION(level_is_acid_lover_at)
+                                                                            ZX_ADD_PYTHON_FUNCTION(
+                                                                                level_is_ai_wanderer_at)
+                                                                                ZX_ADD_PYTHON_FUNCTION(
+                                                                                    level_is_alive_monst_at)
+                                                                                    ZX_ADD_PYTHON_FUNCTION(
+                                                                                        level_is_alive_on_end_of_anim_at)
+                                                                                        ZX_ADD_PYTHON_FUNCTION(
+                                                                                            level_is_always_hit_at)
+                                                                                            ZX_ADD_PYTHON_FUNCTION(
+                                                                                                level_is_ascend_dungeon_at)
+                                                                                                ZX_ADD_PYTHON_FUNCTION(
+                                                                                                    level_is_ascend_sewer_at)
+                                                                                                    ZX_ADD_PYTHON_FUNCTION(
+                                                                                                        level_is_attackable_by_monst_at)
+                                                                                                        ZX_ADD_PYTHON_FUNCTION(
+                                                                                                            level_is_attackable_by_player_at)
+                                                                                                            ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                level_is_auto_collect_item_at)
+                                                                                                                ZX_ADD_PYTHON_FUNCTION(level_is_bag_at) ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                    level_is_bag_item_at)
+                                                                                                                    ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                        level_is_bag_item_container_at)
+                                                                                                                        ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                            level_is_bag_item_not_stackable_at)
+                                                                                                                            ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                level_is_barrel_at)
+                                                                                                                                ZX_ADD_PYTHON_FUNCTION(level_is_bleeder_at) ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                    level_is_blood_at)
+                                                                                                                                    ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                        level_is_blood_splatter_at)
+                                                                                                                                        ZX_ADD_PYTHON_FUNCTION(level_is_bloodied_at) ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                            level_is_bones_at)
+                                                                                                                                            ZX_ADD_PYTHON_FUNCTION(level_is_brazier_at) ZX_ADD_PYTHON_FUNCTION(level_is_bridge_at) ZX_ADD_PYTHON_FUNCTION(level_is_burnable_at) ZX_ADD_PYTHON_FUNCTION(level_is_carrier_of_treasure_class_a_at) ZX_ADD_PYTHON_FUNCTION(level_is_carrier_of_treasure_class_b_at) ZX_ADD_PYTHON_FUNCTION(level_is_carrier_of_treasure_class_c_at) ZX_ADD_PYTHON_FUNCTION(level_is_carrying_item_at) ZX_ADD_PYTHON_FUNCTION(level_is_carrying_treasure_at) ZX_ADD_PYTHON_FUNCTION(level_is_chasm_at) ZX_ADD_PYTHON_FUNCTION(level_is_collect_as_keys_at) ZX_ADD_PYTHON_FUNCTION(level_is_collectable_at) ZX_ADD_PYTHON_FUNCTION(level_is_collected_as_gold_at)
+                                                                                                                                                ZX_ADD_PYTHON_FUNCTION(level_is_combustible_at) ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                    level_is_corpse_at)
+                                                                                                                                                    ZX_ADD_PYTHON_FUNCTION(level_is_corpse_on_death_at) ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                        level_is_corridor_at)
+                                                                                                                                                        ZX_ADD_PYTHON_FUNCTION(level_is_critical_to_level_at) ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                            level_is_cursor_at) ZX_ADD_PYTHON_FUNCTION(level_is_cursor_can_hover_over_at) ZX_ADD_PYTHON_FUNCTION(level_is_cursor_path_at) ZX_ADD_PYTHON_FUNCTION(level_is_dead_on_end_of_anim_at) ZX_ADD_PYTHON_FUNCTION(level_is_dead_on_shove_at) ZX_ADD_PYTHON_FUNCTION(level_is_debug_path_at)
+                                                                                                                                                            ZX_ADD_PYTHON_FUNCTION(level_is_debug_type_at) ZX_ADD_PYTHON_FUNCTION(level_is_deep_water_at) ZX_ADD_PYTHON_FUNCTION(level_is_descend_dungeon_at) ZX_ADD_PYTHON_FUNCTION(level_is_descend_sewer_at)
+                                                                                                                                                                ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                    level_is_described_when_hovering_over_at)
+                                                                                                                                                                    ZX_ADD_PYTHON_FUNCTION(level_is_dir_bl_at) ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                        level_is_dir_br_at)
+                                                                                                                                                                        ZX_ADD_PYTHON_FUNCTION(level_is_dir_down_at) ZX_ADD_PYTHON_FUNCTION(level_is_dir_left_at) ZX_ADD_PYTHON_FUNCTION(level_is_dir_none_at) ZX_ADD_PYTHON_FUNCTION(level_is_dir_right_at) ZX_ADD_PYTHON_FUNCTION(level_is_dir_tl_at) ZX_ADD_PYTHON_FUNCTION(level_is_dir_tr_at) ZX_ADD_PYTHON_FUNCTION(level_is_dir_up_at) ZX_ADD_PYTHON_FUNCTION(level_is_dirt_at) ZX_ADD_PYTHON_FUNCTION(level_is_door_at) ZX_ADD_PYTHON_FUNCTION(level_is_droppable_at) ZX_ADD_PYTHON_FUNCTION(level_is_dry_grass_at) ZX_ADD_PYTHON_FUNCTION(level_is_enchantable_at) ZX_ADD_PYTHON_FUNCTION(level_is_enchantstone_at) ZX_ADD_PYTHON_FUNCTION(level_is_engulf_chance_d1000_at) ZX_ADD_PYTHON_FUNCTION(level_is_engulfer_at) ZX_ADD_PYTHON_FUNCTION(level_is_ethereal_at) ZX_ADD_PYTHON_FUNCTION(level_is_ethereal_minion_generator_at) ZX_ADD_PYTHON_FUNCTION(level_is_explosion_at) ZX_ADD_PYTHON_FUNCTION(level_is_extreme_hazard_at) ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                            level_is_fearless_at) ZX_ADD_PYTHON_FUNCTION(level_is_fire_at) ZX_ADD_PYTHON_FUNCTION(level_is_floating_at) ZX_ADD_PYTHON_FUNCTION(level_is_floor_at) ZX_ADD_PYTHON_FUNCTION(level_is_floor_deco_at)
+                                                                                                                                                                            ZX_ADD_PYTHON_FUNCTION(level_is_foilage_at) ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                level_is_food_at)
+                                                                                                                                                                                ZX_ADD_PYTHON_FUNCTION(level_is_food_eater_at) ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                    level_is_glass_at)
+                                                                                                                                                                                    ZX_ADD_PYTHON_FUNCTION(level_is_gold_at) ZX_ADD_PYTHON_FUNCTION(level_is_hazard_at) ZX_ADD_PYTHON_FUNCTION(level_is_health_booster_at) ZX_ADD_PYTHON_FUNCTION(level_is_hittable_at) ZX_ADD_PYTHON_FUNCTION(level_is_humanoid_at) ZX_ADD_PYTHON_FUNCTION(level_is_hunger_insatiable_at) ZX_ADD_PYTHON_FUNCTION(level_is_indestructible_at) ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                        level_is_intelligent_at) ZX_ADD_PYTHON_FUNCTION(level_is_interesting_at) ZX_ADD_PYTHON_FUNCTION(level_is_item_at) ZX_ADD_PYTHON_FUNCTION(level_is_item_carrier_at) ZX_ADD_PYTHON_FUNCTION(level_is_item_collector_at) ZX_ADD_PYTHON_FUNCTION(level_is_item_eater_at) ZX_ADD_PYTHON_FUNCTION(level_is_item_organic_at) ZX_ADD_PYTHON_FUNCTION(level_is_jelly_at) ZX_ADD_PYTHON_FUNCTION(level_is_jelly_baby_at)
+                                                                                                                                                                                        ZX_ADD_PYTHON_FUNCTION(level_is_jelly_baby_eater_at) ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                            level_is_jelly_eater_at)
+                                                                                                                                                                                            ZX_ADD_PYTHON_FUNCTION(level_is_jelly_parent_at) ZX_ADD_PYTHON_FUNCTION(level_is_jumper_at) ZX_ADD_PYTHON_FUNCTION(level_is_jumper_chance_d1000_at) ZX_ADD_PYTHON_FUNCTION(level_is_jumper_distance_at) ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                level_is_jumper_on_low_hp_chance_d1000_at)
+                                                                                                                                                                                                ZX_ADD_PYTHON_FUNCTION(level_is_key_at) ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                    level_is_key_collector_at)
+                                                                                                                                                                                                    ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                        level_is_killed_on_hit_or_miss_at) ZX_ADD_PYTHON_FUNCTION(level_is_killed_on_hitting_at) ZX_ADD_PYTHON_FUNCTION(level_is_laser_at) ZX_ADD_PYTHON_FUNCTION(level_is_lava_at)
+                                                                                                                                                                                                        ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                            level_is_light_blocker_at)
+                                                                                                                                                                                                            ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                level_is_living_at)
+                                                                                                                                                                                                                ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                    level_is_meat_at) ZX_ADD_PYTHON_FUNCTION(level_is_meat_eater_at) ZX_ADD_PYTHON_FUNCTION(level_is_metal_at) ZX_ADD_PYTHON_FUNCTION(level_is_minion_at) ZX_ADD_PYTHON_FUNCTION(level_is_minion_generator_at)
+                                                                                                                                                                                                                    ZX_ADD_PYTHON_FUNCTION(level_is_monst_at) ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                        level_is_moveable_at)
+                                                                                                                                                                                                                        ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                            level_is_msg_at)
+                                                                                                                                                                                                                            ZX_ADD_PYTHON_FUNCTION(level_is_no_tile_at) ZX_ADD_PYTHON_FUNCTION(level_is_obs_destructable_at) ZX_ADD_PYTHON_FUNCTION(level_is_obs_wall_or_door_at) ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                level_is_on_firing_at_something)
+                                                                                                                                                                                                                                ZX_ADD_PYTHON_FUNCTION(level_is_openable_at) ZX_ADD_PYTHON_FUNCTION(level_is_organic_at) ZX_ADD_PYTHON_FUNCTION(level_is_player_at) ZX_ADD_PYTHON_FUNCTION(level_is_poison_at) ZX_ADD_PYTHON_FUNCTION(level_is_potion_at) ZX_ADD_PYTHON_FUNCTION(level_is_potion_eater_at) ZX_ADD_PYTHON_FUNCTION(level_is_projectile_at) ZX_ADD_PYTHON_FUNCTION(level_is_removeable_if_out_of_slots_at) ZX_ADD_PYTHON_FUNCTION(level_is_resurrectable_at) ZX_ADD_PYTHON_FUNCTION(level_is_ripple_at) ZX_ADD_PYTHON_FUNCTION(level_is_rock_at) ZX_ADD_PYTHON_FUNCTION(level_is_rusty_at) ZX_ADD_PYTHON_FUNCTION(level_is_secret_door_at) ZX_ADD_PYTHON_FUNCTION(level_is_sewer_wall_at) ZX_ADD_PYTHON_FUNCTION(level_is_shallow_water_at) ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                    level_is_shovable_at)
+                                                                                                                                                                                                                                    ZX_ADD_PYTHON_FUNCTION(level_is_skill_at) ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                        level_is_skillstone_at)
+                                                                                                                                                                                                                                        ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                            level_is_smoke_at)
+                                                                                                                                                                                                                                            ZX_ADD_PYTHON_FUNCTION(level_is_soft_body_at) ZX_ADD_PYTHON_FUNCTION(level_is_spawner_at) ZX_ADD_PYTHON_FUNCTION(level_is_spiderweb_at)
+                                                                                                                                                                                                                                                ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                    level_is_stamina_check_at) ZX_ADD_PYTHON_FUNCTION(level_is_steal_item_chance_d1000_at) ZX_ADD_PYTHON_FUNCTION(level_is_sticky_at) ZX_ADD_PYTHON_FUNCTION(level_is_stone_at) ZX_ADD_PYTHON_FUNCTION(level_is_sword_at) ZX_ADD_PYTHON_FUNCTION(level_is_throwable_at) ZX_ADD_PYTHON_FUNCTION(level_is_tickable_at) ZX_ADD_PYTHON_FUNCTION(level_is_tmp_thing_at) ZX_ADD_PYTHON_FUNCTION(level_is_torch_at) ZX_ADD_PYTHON_FUNCTION(level_is_treasure_class_a_at)
+                                                                                                                                                                                                                                                    ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                        level_is_treasure_class_b_at)
+                                                                                                                                                                                                                                                        ZX_ADD_PYTHON_FUNCTION(level_is_treasure_class_c_at) ZX_ADD_PYTHON_FUNCTION(level_is_treasure_type_at) ZX_ADD_PYTHON_FUNCTION(level_is_treasure_type_chest_at)
+                                                                                                                                                                                                                                                            ZX_ADD_PYTHON_FUNCTION(level_is_treasure_type_eater_at) ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                level_is_undead_at)
+                                                                                                                                                                                                                                                                ZX_ADD_PYTHON_FUNCTION(level_is_usable_at) ZX_ADD_PYTHON_FUNCTION(level_is_used_when_thrown_at) ZX_ADD_PYTHON_FUNCTION(level_is_very_combustible_at) ZX_ADD_PYTHON_FUNCTION(level_is_visible_at) ZX_ADD_PYTHON_FUNCTION(level_is_wall_at) ZX_ADD_PYTHON_FUNCTION(level_is_wall_dungeon_at)
+                                                                                                                                                                                                                                                                    ZX_ADD_PYTHON_FUNCTION(level_is_wand_at) ZX_ADD_PYTHON_FUNCTION(level_is_wand_eater_at) ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                        level_is_water_at)
+                                                                                                                                                                                                                                                                        ZX_ADD_PYTHON_FUNCTION(level_is_water_lover_at) ZX_ADD_PYTHON_FUNCTION(level_is_weapon_at) ZX_ADD_PYTHON_FUNCTION(level_is_weapon_wielder_at) ZX_ADD_PYTHON_FUNCTION(level_is_wooden_at) ZX_ADD_PYTHON_FUNCTION(level_loves_fire_at) ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                            level_loves_poison_at)
+                                                                                                                                                                                                                                                                            ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                level_loves_spiderwebs_at)
+                                                                                                                                                                                                                                                                                ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                    level_place_at)
+                                                                                                                                                                                                                                                                                    ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                        level_spawn_at_thing)
+                                                                                                                                                                                                                                                                                        ZX_ADD_PYTHON_FUNCTION(level_spawn_at_thing_if_possible) ZX_ADD_PYTHON_FUNCTION(level_spawn_fire_around_thing)
+                                                                                                                                                                                                                                                                                            ZX_ADD_PYTHON_FUNCTION(level_unused_flag10_at) ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                level_unused_flag11_at)
+                                                                                                                                                                                                                                                                                                ZX_ADD_PYTHON_FUNCTION(level_unused_flag12_at) ZX_ADD_PYTHON_FUNCTION(level_unused_flag13_at) ZX_ADD_PYTHON_FUNCTION(level_unused_flag14_at)
+                                                                                                                                                                                                                                                                                                    ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                        level_unused_flag15_at)
+                                                                                                                                                                                                                                                                                                        ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                            level_unused_flag16_at) ZX_ADD_PYTHON_FUNCTION(level_unused_flag17_at) ZX_ADD_PYTHON_FUNCTION(level_unused_flag18_at) ZX_ADD_PYTHON_FUNCTION(level_unused_flag19_at)
+                                                                                                                                                                                                                                                                                                            ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                level_unused_flag1_at) ZX_ADD_PYTHON_FUNCTION(level_unused_flag20_at) ZX_ADD_PYTHON_FUNCTION(level_unused_flag21_at) ZX_ADD_PYTHON_FUNCTION(level_unused_flag22_at)
+                                                                                                                                                                                                                                                                                                                ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                    level_unused_flag23_at) ZX_ADD_PYTHON_FUNCTION(level_unused_flag24_at) ZX_ADD_PYTHON_FUNCTION(level_unused_flag25_at) ZX_ADD_PYTHON_FUNCTION(level_unused_flag26_at)
+                                                                                                                                                                                                                                                                                                                    ZX_ADD_PYTHON_FUNCTION(level_unused_flag27_at) ZX_ADD_PYTHON_FUNCTION(level_unused_flag28_at) ZX_ADD_PYTHON_FUNCTION(level_unused_flag29_at) ZX_ADD_PYTHON_FUNCTION(level_unused_flag2_at) ZX_ADD_PYTHON_FUNCTION(level_unused_flag30_at) ZX_ADD_PYTHON_FUNCTION(level_unused_flag31_at)
+                                                                                                                                                                                                                                                                                                                        ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                            level_unused_flag32_at)
+                                                                                                                                                                                                                                                                                                                            ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                level_unused_flag33_at) ZX_ADD_PYTHON_FUNCTION(level_unused_flag34_at) ZX_ADD_PYTHON_FUNCTION(level_unused_flag35_at)
+                                                                                                                                                                                                                                                                                                                                ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                    level_unused_flag36_at)
+                                                                                                                                                                                                                                                                                                                                    ZX_ADD_PYTHON_FUNCTION(level_unused_flag37_at) ZX_ADD_PYTHON_FUNCTION(level_unused_flag38_at) ZX_ADD_PYTHON_FUNCTION(level_unused_flag39_at)
+                                                                                                                                                                                                                                                                                                                                        ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                            level_unused_flag3_at) ZX_ADD_PYTHON_FUNCTION(level_unused_flag40_at) ZX_ADD_PYTHON_FUNCTION(level_unused_flag41_at) ZX_ADD_PYTHON_FUNCTION(level_unused_flag42_at)
+                                                                                                                                                                                                                                                                                                                                            ZX_ADD_PYTHON_FUNCTION(level_unused_flag43_at) ZX_ADD_PYTHON_FUNCTION(level_unused_flag44_at) ZX_ADD_PYTHON_FUNCTION(level_unused_flag45_at) ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                level_unused_flag46_at) ZX_ADD_PYTHON_FUNCTION(level_unused_flag47_at) ZX_ADD_PYTHON_FUNCTION(level_unused_flag48_at) ZX_ADD_PYTHON_FUNCTION(level_unused_flag4_at)
+                                                                                                                                                                                                                                                                                                                                                ZX_ADD_PYTHON_FUNCTION(level_unused_flag50_at) ZX_ADD_PYTHON_FUNCTION(level_unused_flag51_at) ZX_ADD_PYTHON_FUNCTION(level_unused_flag52_at) ZX_ADD_PYTHON_FUNCTION(level_unused_flag5_at) ZX_ADD_PYTHON_FUNCTION(level_unused_flag6_at) ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                    level_unused_flag7_at) ZX_ADD_PYTHON_FUNCTION(level_unused_flag8_at) ZX_ADD_PYTHON_FUNCTION(level_unused_flag9_at) ZX_ADD_PYTHON_FUNCTION(non_pcg_randint)
+                                                                                                                                                                                                                                                                                                                                                    ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                        pcg_randint)
+                                                                                                                                                                                                                                                                                                                                                        ZX_ADD_PYTHON_FUNCTION(thing_ai_enemy_memory) ZX_ADD_PYTHON_FUNCTION(thing_decr_charge_count) ZX_ADD_PYTHON_FUNCTION(thing_decr_current_damage)
+                                                                                                                                                                                                                                                                                                                                                            ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                thing_decr_enchant)
+                                                                                                                                                                                                                                                                                                                                                                ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                    thing_decr_enchant_max)
+                                                                                                                                                                                                                                                                                                                                                                    ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                        thing_decr_health) ZX_ADD_PYTHON_FUNCTION(thing_decr_health_max)
+                                                                                                                                                                                                                                                                                                                                                                        ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                            thing_decr_stamina) ZX_ADD_PYTHON_FUNCTION(thing_decr_stamina_max) ZX_ADD_PYTHON_FUNCTION(thing_enchant_level) ZX_ADD_PYTHON_FUNCTION(thing_enchant_max) ZX_ADD_PYTHON_FUNCTION(thing_fire_at)
+                                                                                                                                                                                                                                                                                                                                                                            ZX_ADD_PYTHON_FUNCTION(thing_get_charge_count) ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                thing_get_coords)
+                                                                                                                                                                                                                                                                                                                                                                                ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                    thing_get_current_damage)
+                                                                                                                                                                                                                                                                                                                                                                                    ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                        thing_get_damage_bite) ZX_ADD_PYTHON_FUNCTION(thing_get_damage_crush) ZX_ADD_PYTHON_FUNCTION(thing_get_damage_melee)
+                                                                                                                                                                                                                                                                                                                                                                                        ZX_ADD_PYTHON_FUNCTION(thing_get_damage_swallow) ZX_ADD_PYTHON_FUNCTION(thing_get_enchant) ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                            thing_get_enchant_max)
+                                                                                                                                                                                                                                                                                                                                                                                            ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                thing_get_health)
+                                                                                                                                                                                                                                                                                                                                                                                                ZX_ADD_PYTHON_FUNCTION(thing_get_health_max) ZX_ADD_PYTHON_FUNCTION(thing_get_immediate_minion_owner_id)
+                                                                                                                                                                                                                                                                                                                                                                                                    ZX_ADD_PYTHON_FUNCTION(thing_get_immediate_owner_id) ZX_ADD_PYTHON_FUNCTION(thing_get_immediate_spawned_owner_id) ZX_ADD_PYTHON_FUNCTION(thing_get_initial_charge_count) ZX_ADD_PYTHON_FUNCTION(thing_get_name) ZX_ADD_PYTHON_FUNCTION(thing_get_stamina)
+                                                                                                                                                                                                                                                                                                                                                                                                        ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                            thing_get_stamina_max)
+                                                                                                                                                                                                                                                                                                                                                                                                            ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                thing_get_top_owner_id)
+                                                                                                                                                                                                                                                                                                                                                                                                                ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                    thing_gfx_flickers) ZX_ADD_PYTHON_FUNCTION(thing_gfx_long_shadow_caster)
+                                                                                                                                                                                                                                                                                                                                                                                                                    ZX_ADD_PYTHON_FUNCTION(thing_gfx_solid_shadow) ZX_ADD_PYTHON_FUNCTION(thing_gfx_very_short_shadow_caster) ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                        thing_gfx_water) ZX_ADD_PYTHON_FUNCTION(thing_hit)
+                                                                                                                                                                                                                                                                                                                                                                                                                        ZX_ADD_PYTHON_FUNCTION(thing_incr_charge_count) ZX_ADD_PYTHON_FUNCTION(thing_incr_current_damage) ZX_ADD_PYTHON_FUNCTION(thing_incr_enchant) ZX_ADD_PYTHON_FUNCTION(thing_incr_enchant_max) ZX_ADD_PYTHON_FUNCTION(thing_incr_health) ZX_ADD_PYTHON_FUNCTION(thing_incr_health_max) ZX_ADD_PYTHON_FUNCTION(thing_incr_stamina) ZX_ADD_PYTHON_FUNCTION(thing_incr_stamina_max) ZX_ADD_PYTHON_FUNCTION(thing_is_able_to_change_levels) ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                            thing_is_able_to_fall) ZX_ADD_PYTHON_FUNCTION(thing_is_able_to_see_through_doors)
+                                                                                                                                                                                                                                                                                                                                                                                                                            ZX_ADD_PYTHON_FUNCTION(thing_is_able_to_walk_through_walls) ZX_ADD_PYTHON_FUNCTION(thing_is_acid) ZX_ADD_PYTHON_FUNCTION(thing_is_acid_lover) ZX_ADD_PYTHON_FUNCTION(thing_is_ai_wanderer) ZX_ADD_PYTHON_FUNCTION(thing_is_alive_monst) ZX_ADD_PYTHON_FUNCTION(thing_is_alive_on_end_of_anim) ZX_ADD_PYTHON_FUNCTION(thing_is_always_hit) ZX_ADD_PYTHON_FUNCTION(thing_is_ascend_dungeon) ZX_ADD_PYTHON_FUNCTION(thing_is_ascend_sewer) ZX_ADD_PYTHON_FUNCTION(thing_is_auto_collect_item) ZX_ADD_PYTHON_FUNCTION(thing_is_auto_throw) ZX_ADD_PYTHON_FUNCTION(thing_is_auto_use)
+                                                                                                                                                                                                                                                                                                                                                                                                                                ZX_ADD_PYTHON_FUNCTION(thing_is_bag) ZX_ADD_PYTHON_FUNCTION(thing_is_bag_item) ZX_ADD_PYTHON_FUNCTION(thing_is_bag_item_container) ZX_ADD_PYTHON_FUNCTION(thing_is_bag_item_not_stackable) ZX_ADD_PYTHON_FUNCTION(thing_is_barrel) ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                    thing_is_bleeder) ZX_ADD_PYTHON_FUNCTION(thing_is_blood) ZX_ADD_PYTHON_FUNCTION(thing_is_blood_splatter)
+                                                                                                                                                                                                                                                                                                                                                                                                                                    ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                        thing_is_bloodied) ZX_ADD_PYTHON_FUNCTION(thing_is_bones) ZX_ADD_PYTHON_FUNCTION(thing_is_brazier)
+                                                                                                                                                                                                                                                                                                                                                                                                                                        ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                            thing_is_bridge) ZX_ADD_PYTHON_FUNCTION(thing_is_burnable) ZX_ADD_PYTHON_FUNCTION(thing_is_carrier_of_treasure_class_a) ZX_ADD_PYTHON_FUNCTION(thing_is_carrier_of_treasure_class_b) ZX_ADD_PYTHON_FUNCTION(thing_is_carrier_of_treasure_class_c) ZX_ADD_PYTHON_FUNCTION(thing_is_carrying_item) ZX_ADD_PYTHON_FUNCTION(thing_is_carrying_treasure)
+                                                                                                                                                                                                                                                                                                                                                                                                                                            ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                thing_is_chasm) ZX_ADD_PYTHON_FUNCTION(thing_is_collect_as_keys) ZX_ADD_PYTHON_FUNCTION(thing_is_collectable)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                    thing_is_collected_as_gold)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                    ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        thing_is_combustible) ZX_ADD_PYTHON_FUNCTION(thing_is_corpse) ZX_ADD_PYTHON_FUNCTION(thing_is_corpse_on_death) ZX_ADD_PYTHON_FUNCTION(thing_is_corridor)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                            thing_is_critical_to_level)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                            ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                thing_is_cursor) ZX_ADD_PYTHON_FUNCTION(thing_is_cursor_can_hover_over)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                    thing_is_cursor_can_hover_over_x2_click) ZX_ADD_PYTHON_FUNCTION(thing_is_cursor_path) ZX_ADD_PYTHON_FUNCTION(thing_is_dead_on_end_of_anim)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                        thing_is_dead_or_dying)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ZX_ADD_PYTHON_FUNCTION(thing_is_dead_or_dying_on_shove) ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                            thing_is_debug_path)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ZX_ADD_PYTHON_FUNCTION(thing_is_debug_type) ZX_ADD_PYTHON_FUNCTION(thing_is_deep_water)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    thing_is_descend_dungeon)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ZX_ADD_PYTHON_FUNCTION(thing_is_descend_sewer) ZX_ADD_PYTHON_FUNCTION(thing_is_described_when_hovering_over)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            thing_is_dir_bl)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                thing_is_dir_br) ZX_ADD_PYTHON_FUNCTION(thing_is_dir_down)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    thing_is_dir_left)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        thing_is_dir_none) ZX_ADD_PYTHON_FUNCTION(thing_is_dir_right) ZX_ADD_PYTHON_FUNCTION(thing_is_dir_tl)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ZX_ADD_PYTHON_FUNCTION(thing_is_dir_tr) ZX_ADD_PYTHON_FUNCTION(thing_is_dir_up) ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            thing_is_dirt) ZX_ADD_PYTHON_FUNCTION(thing_is_door) ZX_ADD_PYTHON_FUNCTION(thing_is_droppable)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ZX_ADD_PYTHON_FUNCTION(thing_is_dry_grass) ZX_ADD_PYTHON_FUNCTION(thing_is_enchantable) ZX_ADD_PYTHON_FUNCTION(thing_is_enchantstone) ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                thing_is_engulf_chance_d1000)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ZX_ADD_PYTHON_FUNCTION(thing_is_engulfer) ZX_ADD_PYTHON_FUNCTION(thing_is_ethereal) ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    thing_is_ethereal_minion_generator)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ZX_ADD_PYTHON_FUNCTION(thing_is_explosion)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            thing_is_extreme_hazard)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ZX_ADD_PYTHON_FUNCTION(thing_is_fearless) ZX_ADD_PYTHON_FUNCTION(thing_is_fire)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    thing_is_floating)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ZX_ADD_PYTHON_FUNCTION(thing_is_floor) ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        thing_is_floor_deco)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            thing_is_foilage) ZX_ADD_PYTHON_FUNCTION(thing_is_food)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                thing_is_food_eater)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    thing_is_glass)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ZX_ADD_PYTHON_FUNCTION(thing_is_gold) ZX_ADD_PYTHON_FUNCTION(thing_is_hazard) ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        thing_is_health_booster) ZX_ADD_PYTHON_FUNCTION(thing_is_hittable) ZX_ADD_PYTHON_FUNCTION(thing_is_humanoid)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ZX_ADD_PYTHON_FUNCTION(thing_is_hunger_insatiable) ZX_ADD_PYTHON_FUNCTION(thing_is_indestructible)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                thing_is_intelligent) ZX_ADD_PYTHON_FUNCTION(thing_is_interesting) ZX_ADD_PYTHON_FUNCTION(thing_is_item)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    thing_is_item_carrier) ZX_ADD_PYTHON_FUNCTION(thing_is_item_collector)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ZX_ADD_PYTHON_FUNCTION(thing_is_item_eater) ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        thing_is_item_organic)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ZX_ADD_PYTHON_FUNCTION(thing_is_jelly) ZX_ADD_PYTHON_FUNCTION(thing_is_jelly_baby)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ZX_ADD_PYTHON_FUNCTION(thing_is_jelly_baby_eater) ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                thing_is_jelly_eater) ZX_ADD_PYTHON_FUNCTION(thing_is_jelly_parent)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    thing_is_jumper) ZX_ADD_PYTHON_FUNCTION(thing_is_jumper_chance_d1000) ZX_ADD_PYTHON_FUNCTION(thing_is_jumper_distance) ZX_ADD_PYTHON_FUNCTION(thing_is_jumper_on_low_hp_chance_d1000)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ZX_ADD_PYTHON_FUNCTION(thing_is_key) ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        thing_is_key_collector)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            thing_is_killed_on_hit_or_miss) ZX_ADD_PYTHON_FUNCTION(thing_is_killed_on_hitting) ZX_ADD_PYTHON_FUNCTION(thing_is_laser)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ZX_ADD_PYTHON_FUNCTION(thing_is_lava) ZX_ADD_PYTHON_FUNCTION(thing_is_light_blocker) ZX_ADD_PYTHON_FUNCTION(thing_is_living) ZX_ADD_PYTHON_FUNCTION(thing_is_loggable_for_important_stuff) ZX_ADD_PYTHON_FUNCTION(thing_is_loggable_for_unimportant_stuff) ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                thing_is_meat) ZX_ADD_PYTHON_FUNCTION(thing_is_meat_eater) ZX_ADD_PYTHON_FUNCTION(thing_is_metal) ZX_ADD_PYTHON_FUNCTION(thing_is_minion) ZX_ADD_PYTHON_FUNCTION(thing_is_minion_generator)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    thing_is_monst)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        thing_is_moveable) ZX_ADD_PYTHON_FUNCTION(thing_is_msg) ZX_ADD_PYTHON_FUNCTION(thing_is_no_tile)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ZX_ADD_PYTHON_FUNCTION(thing_is_obs_destructable) ZX_ADD_PYTHON_FUNCTION(thing_is_obs_wall_or_door) ZX_ADD_PYTHON_FUNCTION(thing_is_on_fire) ZX_ADD_PYTHON_FUNCTION(thing_is_openable) ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            thing_is_organic)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ZX_ADD_PYTHON_FUNCTION(thing_is_player) ZX_ADD_PYTHON_FUNCTION(thing_is_poison) ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                thing_is_potion) ZX_ADD_PYTHON_FUNCTION(thing_is_potion_eater) ZX_ADD_PYTHON_FUNCTION(thing_is_projectile)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ZX_ADD_PYTHON_FUNCTION(thing_is_removeable_if_out_of_slots) ZX_ADD_PYTHON_FUNCTION(thing_is_resurrectable) ZX_ADD_PYTHON_FUNCTION(thing_is_ripple) ZX_ADD_PYTHON_FUNCTION(thing_is_rock) ZX_ADD_PYTHON_FUNCTION(thing_is_rusty) ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    thing_is_secret_door)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ZX_ADD_PYTHON_FUNCTION(thing_is_sewer_wall)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ZX_ADD_PYTHON_FUNCTION(thing_is_shallow_water) ZX_ADD_PYTHON_FUNCTION(thing_is_shovable) ZX_ADD_PYTHON_FUNCTION(thing_is_skill) ZX_ADD_PYTHON_FUNCTION(thing_is_skillstone) ZX_ADD_PYTHON_FUNCTION(thing_is_smoke) ZX_ADD_PYTHON_FUNCTION(thing_is_soft_body) ZX_ADD_PYTHON_FUNCTION(thing_is_spawner) ZX_ADD_PYTHON_FUNCTION(thing_is_spiderweb) ZX_ADD_PYTHON_FUNCTION(thing_is_stamina_check) ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            thing_is_steal_item_chance_d1000) ZX_ADD_PYTHON_FUNCTION(thing_is_sticky) ZX_ADD_PYTHON_FUNCTION(thing_is_stone) ZX_ADD_PYTHON_FUNCTION(thing_is_sword) ZX_ADD_PYTHON_FUNCTION(thing_is_target_auto_select) ZX_ADD_PYTHON_FUNCTION(thing_is_throwable) ZX_ADD_PYTHON_FUNCTION(thing_is_tickable) ZX_ADD_PYTHON_FUNCTION(thing_is_tmp_thing) ZX_ADD_PYTHON_FUNCTION(thing_is_torch) ZX_ADD_PYTHON_FUNCTION(thing_is_treasure_class_a)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ZX_ADD_PYTHON_FUNCTION(thing_is_treasure_class_b) ZX_ADD_PYTHON_FUNCTION(thing_is_treasure_class_c) ZX_ADD_PYTHON_FUNCTION(thing_is_treasure_type) ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                thing_is_treasure_type_chest)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ZX_ADD_PYTHON_FUNCTION(thing_is_treasure_type_eater) ZX_ADD_PYTHON_FUNCTION(thing_is_undead) ZX_ADD_PYTHON_FUNCTION(thing_is_usable)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ZX_ADD_PYTHON_FUNCTION(thing_is_used_when_thrown) ZX_ADD_PYTHON_FUNCTION(thing_is_very_combustible)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            thing_is_visible)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ZX_ADD_PYTHON_FUNCTION(thing_is_wall) ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                thing_is_wall_dungeon)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ZX_ADD_PYTHON_FUNCTION(thing_is_wand) ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    thing_is_wand_eater) ZX_ADD_PYTHON_FUNCTION(thing_is_water) ZX_ADD_PYTHON_FUNCTION(thing_is_water_lover) ZX_ADD_PYTHON_FUNCTION(thing_is_weapon) ZX_ADD_PYTHON_FUNCTION(thing_is_weapon_wielder) ZX_ADD_PYTHON_FUNCTION(thing_is_wooden)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        thing_killed)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            thing_killed_by)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                thing_loves_fire)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    thing_loves_poison)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ZX_ADD_PYTHON_FUNCTION(thing_loves_spiderwebs) ZX_ADD_PYTHON_FUNCTION(thing_msg) ZX_ADD_PYTHON_FUNCTION(thing_possible_to_attack) ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        thing_set_current_damage) ZX_ADD_PYTHON_FUNCTION(thing_set_enchant) ZX_ADD_PYTHON_FUNCTION(thing_set_enchant_max) ZX_ADD_PYTHON_FUNCTION(thing_set_health) ZX_ADD_PYTHON_FUNCTION(thing_set_health_max) ZX_ADD_PYTHON_FUNCTION(thing_set_stamina) ZX_ADD_PYTHON_FUNCTION(thing_set_stamina_max) ZX_ADD_PYTHON_FUNCTION(thing_skill_activate) ZX_ADD_PYTHON_FUNCTION(thing_skill_deactivate)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            thing_unused_flag1) ZX_ADD_PYTHON_FUNCTION(thing_unused_flag10) ZX_ADD_PYTHON_FUNCTION(thing_unused_flag11) ZX_ADD_PYTHON_FUNCTION(thing_unused_flag12) ZX_ADD_PYTHON_FUNCTION(thing_unused_flag13)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ZX_ADD_PYTHON_FUNCTION(thing_unused_flag14) ZX_ADD_PYTHON_FUNCTION(thing_unused_flag15) ZX_ADD_PYTHON_FUNCTION(thing_unused_flag16) ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                thing_unused_flag17) ZX_ADD_PYTHON_FUNCTION(thing_unused_flag18) ZX_ADD_PYTHON_FUNCTION(thing_unused_flag19)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ZX_ADD_PYTHON_FUNCTION(thing_unused_flag2) ZX_ADD_PYTHON_FUNCTION(thing_unused_flag20) ZX_ADD_PYTHON_FUNCTION(thing_unused_flag21) ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    thing_unused_flag22) ZX_ADD_PYTHON_FUNCTION(thing_unused_flag23) ZX_ADD_PYTHON_FUNCTION(thing_unused_flag24) ZX_ADD_PYTHON_FUNCTION(thing_unused_flag25) ZX_ADD_PYTHON_FUNCTION(thing_unused_flag26) ZX_ADD_PYTHON_FUNCTION(thing_unused_flag27) ZX_ADD_PYTHON_FUNCTION(thing_unused_flag28) ZX_ADD_PYTHON_FUNCTION(thing_unused_flag29) ZX_ADD_PYTHON_FUNCTION(thing_unused_flag3)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ZX_ADD_PYTHON_FUNCTION(thing_unused_flag30) ZX_ADD_PYTHON_FUNCTION(thing_unused_flag31) ZX_ADD_PYTHON_FUNCTION(thing_unused_flag32) ZX_ADD_PYTHON_FUNCTION(thing_unused_flag33) ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        thing_unused_flag34) ZX_ADD_PYTHON_FUNCTION(thing_unused_flag35) ZX_ADD_PYTHON_FUNCTION(thing_unused_flag36)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ZX_ADD_PYTHON_FUNCTION(thing_unused_flag37) ZX_ADD_PYTHON_FUNCTION(thing_unused_flag38) ZX_ADD_PYTHON_FUNCTION(thing_unused_flag39) ZX_ADD_PYTHON_FUNCTION(thing_unused_flag4) ZX_ADD_PYTHON_FUNCTION(thing_unused_flag40) ZX_ADD_PYTHON_FUNCTION(thing_unused_flag41) ZX_ADD_PYTHON_FUNCTION(thing_unused_flag42) ZX_ADD_PYTHON_FUNCTION(thing_unused_flag43)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                thing_unused_flag44) ZX_ADD_PYTHON_FUNCTION(thing_unused_flag45) ZX_ADD_PYTHON_FUNCTION(thing_unused_flag46)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ZX_ADD_PYTHON_FUNCTION(thing_unused_flag47) ZX_ADD_PYTHON_FUNCTION(thing_unused_flag48) ZX_ADD_PYTHON_FUNCTION(thing_unused_flag5) ZX_ADD_PYTHON_FUNCTION(thing_unused_flag50) ZX_ADD_PYTHON_FUNCTION(thing_unused_flag51) ZX_ADD_PYTHON_FUNCTION(thing_unused_flag52) ZX_ADD_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    thing_unused_flag6) ZX_ADD_PYTHON_FUNCTION(thing_unused_flag7) ZX_ADD_PYTHON_FUNCTION(thing_unused_flag8)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ZX_ADD_PYTHON_FUNCTION(thing_unused_flag9)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ZX_ADD_PYTHON_TP_FUNCTION(ai_avoid_distance) ZX_ADD_PYTHON_TP_FUNCTION(ai_enemy_memory) ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ai_obstacle) ZX_ADD_PYTHON_TP_FUNCTION(ai_scent_distance)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ZX_ADD_PYTHON_TP_FUNCTION(ai_vision_distance) ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                attack_eater) ZX_ADD_PYTHON_TP_FUNCTION(attack_humanoid) ZX_ADD_PYTHON_TP_FUNCTION(attack_living)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    attack_lunge) ZX_ADD_PYTHON_TP_FUNCTION(attack_meat) ZX_ADD_PYTHON_TP_FUNCTION(attack_shove) ZX_ADD_PYTHON_TP_FUNCTION(attack_shove_chance_d1000) ZX_ADD_PYTHON_TP_FUNCTION(bl1_tile) ZX_ADD_PYTHON_TP_FUNCTION(bl2_tile) ZX_ADD_PYTHON_TP_FUNCTION(blast_max_radius) ZX_ADD_PYTHON_TP_FUNCTION(blast_min_radius) ZX_ADD_PYTHON_TP_FUNCTION(blit_bot_off) ZX_ADD_PYTHON_TP_FUNCTION(blit_left_off)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ZX_ADD_PYTHON_TP_FUNCTION(blit_right_off) ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        blit_top_off) ZX_ADD_PYTHON_TP_FUNCTION(bot1_tile)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            bot2_tile) ZX_ADD_PYTHON_TP_FUNCTION(bot3_tile) ZX_ADD_PYTHON_TP_FUNCTION(br1_tile) ZX_ADD_PYTHON_TP_FUNCTION(br2_tile) ZX_ADD_PYTHON_TP_FUNCTION(capacity_height) ZX_ADD_PYTHON_TP_FUNCTION(capacity_width) ZX_ADD_PYTHON_TP_FUNCTION(charge_count) ZX_ADD_PYTHON_TP_FUNCTION(collision_attack) ZX_ADD_PYTHON_TP_FUNCTION(collision_attack_radius) ZX_ADD_PYTHON_TP_FUNCTION(collision_box) ZX_ADD_PYTHON_TP_FUNCTION(collision_check)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                collision_circle)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    collision_hit_priority) ZX_ADD_PYTHON_TP_FUNCTION(collision_radius) ZX_ADD_PYTHON_TP_FUNCTION(damage_bite_dice) ZX_ADD_PYTHON_TP_FUNCTION(damage_crush_dice) ZX_ADD_PYTHON_TP_FUNCTION(damage_doubled_from_acid) ZX_ADD_PYTHON_TP_FUNCTION(damage_doubled_from_fire) ZX_ADD_PYTHON_TP_FUNCTION(damage_doubled_from_poison) ZX_ADD_PYTHON_TP_FUNCTION(damage_doubled_from_water)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        damage_melee_dice)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ZX_ADD_PYTHON_TP_FUNCTION(damage_poison_dice) ZX_ADD_PYTHON_TP_FUNCTION(damage_swallow_dice) ZX_ADD_PYTHON_TP_FUNCTION(enchant_level) ZX_ADD_PYTHON_TP_FUNCTION(enchant_max) ZX_ADD_PYTHON_TP_FUNCTION(gfx_an_animation_only) ZX_ADD_PYTHON_TP_FUNCTION(gfx_anim_attack) ZX_ADD_PYTHON_TP_FUNCTION(gfx_animated)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ZX_ADD_PYTHON_TP_FUNCTION(gfx_animated_can_hflip) ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                gfx_animated_can_vflip)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ZX_ADD_PYTHON_TP_FUNCTION(gfx_animated_no_dir) ZX_ADD_PYTHON_TP_FUNCTION(gfx_attack_anim) ZX_ADD_PYTHON_TP_FUNCTION(gfx_bounce_always) ZX_ADD_PYTHON_TP_FUNCTION(gfx_bounce_on_move) ZX_ADD_PYTHON_TP_FUNCTION(gfx_dead_anim) ZX_ADD_PYTHON_TP_FUNCTION(gfx_flickers) ZX_ADD_PYTHON_TP_FUNCTION(gfx_glows) ZX_ADD_PYTHON_TP_FUNCTION(gfx_health_bar_autohide) ZX_ADD_PYTHON_TP_FUNCTION(gfx_health_bar_shown) ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    gfx_long_shadow_caster)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        gfx_on_fire_anim)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ZX_ADD_PYTHON_TP_FUNCTION(gfx_oversized_and_on_floor) ZX_ADD_PYTHON_TP_FUNCTION(gfx_short_shadow_caster) ZX_ADD_PYTHON_TP_FUNCTION(gfx_show_outlined) ZX_ADD_PYTHON_TP_FUNCTION(gfx_shown_in_bg) ZX_ADD_PYTHON_TP_FUNCTION(gfx_solid_shadow) ZX_ADD_PYTHON_TP_FUNCTION(gfx_very_short_shadow_caster) ZX_ADD_PYTHON_TP_FUNCTION(gfx_water)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ZX_ADD_PYTHON_TP_FUNCTION(gfx_weapon_carry_anim) ZX_ADD_PYTHON_TP_FUNCTION(gold_value_dice)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    hates_acid)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ZX_ADD_PYTHON_TP_FUNCTION(hates_fire) ZX_ADD_PYTHON_TP_FUNCTION(hates_poison) ZX_ADD_PYTHON_TP_FUNCTION(hates_water) ZX_ADD_PYTHON_TP_FUNCTION(health_hunger_pct) ZX_ADD_PYTHON_TP_FUNCTION(health_initial_dice)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            health_starving_pct)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ZX_ADD_PYTHON_TP_FUNCTION(is_able_to_change_levels) ZX_ADD_PYTHON_TP_FUNCTION(is_able_to_fall) ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                is_able_to_fire_at) ZX_ADD_PYTHON_TP_FUNCTION(is_able_to_see_through_doors) ZX_ADD_PYTHON_TP_FUNCTION(is_able_to_walk_through_walls) ZX_ADD_PYTHON_TP_FUNCTION(is_acid) ZX_ADD_PYTHON_TP_FUNCTION(is_acid_lover) ZX_ADD_PYTHON_TP_FUNCTION(is_ai_wanderer) ZX_ADD_PYTHON_TP_FUNCTION(is_alive_on_end_of_anim)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ZX_ADD_PYTHON_TP_FUNCTION(is_always_hit) ZX_ADD_PYTHON_TP_FUNCTION(is_ascend_dungeon) ZX_ADD_PYTHON_TP_FUNCTION(is_ascend_sewer)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ZX_ADD_PYTHON_TP_FUNCTION(is_attackable_by_monst) ZX_ADD_PYTHON_TP_FUNCTION(is_attackable_by_player) ZX_ADD_PYTHON_TP_FUNCTION(is_auto_collect_item) ZX_ADD_PYTHON_TP_FUNCTION(is_auto_throw) ZX_ADD_PYTHON_TP_FUNCTION(is_auto_use) ZX_ADD_PYTHON_TP_FUNCTION(is_bag) ZX_ADD_PYTHON_TP_FUNCTION(is_bag_item) ZX_ADD_PYTHON_TP_FUNCTION(is_bag_item_container) ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        is_bag_item_not_stackable) ZX_ADD_PYTHON_TP_FUNCTION(is_barrel) ZX_ADD_PYTHON_TP_FUNCTION(is_bleeder) ZX_ADD_PYTHON_TP_FUNCTION(is_blood)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ZX_ADD_PYTHON_TP_FUNCTION(is_blood_splatter) ZX_ADD_PYTHON_TP_FUNCTION(is_bones) ZX_ADD_PYTHON_TP_FUNCTION(is_brazier) ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            is_bridge) ZX_ADD_PYTHON_TP_FUNCTION(is_burnable) ZX_ADD_PYTHON_TP_FUNCTION(is_carrier_of_treasure_class_a)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ZX_ADD_PYTHON_TP_FUNCTION(is_carrier_of_treasure_class_b) ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                is_carrier_of_treasure_class_c) ZX_ADD_PYTHON_TP_FUNCTION(is_chasm) ZX_ADD_PYTHON_TP_FUNCTION(is_collect_as_keys) ZX_ADD_PYTHON_TP_FUNCTION(is_collectable) ZX_ADD_PYTHON_TP_FUNCTION(is_collected_as_gold)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ZX_ADD_PYTHON_TP_FUNCTION(is_combustible) ZX_ADD_PYTHON_TP_FUNCTION(is_corpse_on_death) ZX_ADD_PYTHON_TP_FUNCTION(is_corridor) ZX_ADD_PYTHON_TP_FUNCTION(is_critical_to_level) ZX_ADD_PYTHON_TP_FUNCTION(is_cursor) ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    is_cursor_can_hover_over)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ZX_ADD_PYTHON_TP_FUNCTION(is_cursor_can_hover_over_x2_click) ZX_ADD_PYTHON_TP_FUNCTION(is_cursor_path) ZX_ADD_PYTHON_TP_FUNCTION(is_dead_on_end_of_anim) ZX_ADD_PYTHON_TP_FUNCTION(is_dead_on_shove) ZX_ADD_PYTHON_TP_FUNCTION(is_debug_path)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ZX_ADD_PYTHON_TP_FUNCTION(is_debug_type) ZX_ADD_PYTHON_TP_FUNCTION(is_deep_water) ZX_ADD_PYTHON_TP_FUNCTION(is_descend_dungeon) ZX_ADD_PYTHON_TP_FUNCTION(is_descend_sewer) ZX_ADD_PYTHON_TP_FUNCTION(is_described_when_hovering_over) ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            is_dirt) ZX_ADD_PYTHON_TP_FUNCTION(is_door)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ZX_ADD_PYTHON_TP_FUNCTION(is_droppable) ZX_ADD_PYTHON_TP_FUNCTION(is_dry_grass) ZX_ADD_PYTHON_TP_FUNCTION(is_enchantable) ZX_ADD_PYTHON_TP_FUNCTION(is_enchantstone) ZX_ADD_PYTHON_TP_FUNCTION(is_engulf_chance_d1000) ZX_ADD_PYTHON_TP_FUNCTION(is_engulfer) ZX_ADD_PYTHON_TP_FUNCTION(is_ethereal) ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                is_ethereal_minion_generator) ZX_ADD_PYTHON_TP_FUNCTION(is_explosion) ZX_ADD_PYTHON_TP_FUNCTION(is_extreme_hazard)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    is_fearless) ZX_ADD_PYTHON_TP_FUNCTION(is_fire) ZX_ADD_PYTHON_TP_FUNCTION(is_floating) ZX_ADD_PYTHON_TP_FUNCTION(is_floor) ZX_ADD_PYTHON_TP_FUNCTION(is_floor_deco) ZX_ADD_PYTHON_TP_FUNCTION(is_foilage) ZX_ADD_PYTHON_TP_FUNCTION(is_food)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ZX_ADD_PYTHON_TP_FUNCTION(is_food_eater) ZX_ADD_PYTHON_TP_FUNCTION(is_glass) ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        is_gold) ZX_ADD_PYTHON_TP_FUNCTION(is_hazard)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ZX_ADD_PYTHON_TP_FUNCTION(is_health_booster) ZX_ADD_PYTHON_TP_FUNCTION(is_hittable) ZX_ADD_PYTHON_TP_FUNCTION(is_humanoid) ZX_ADD_PYTHON_TP_FUNCTION(is_hunger_insatiable) ZX_ADD_PYTHON_TP_FUNCTION(is_indestructible) ZX_ADD_PYTHON_TP_FUNCTION(is_intelligent) ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            is_interesting) ZX_ADD_PYTHON_TP_FUNCTION(is_item)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ZX_ADD_PYTHON_TP_FUNCTION(is_item_carrier) ZX_ADD_PYTHON_TP_FUNCTION(is_item_collector) ZX_ADD_PYTHON_TP_FUNCTION(is_item_eater) ZX_ADD_PYTHON_TP_FUNCTION(is_item_organic) ZX_ADD_PYTHON_TP_FUNCTION(is_jelly) ZX_ADD_PYTHON_TP_FUNCTION(is_jelly_baby) ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                is_jelly_baby_eater) ZX_ADD_PYTHON_TP_FUNCTION(is_jelly_eater)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    is_jelly_parent) ZX_ADD_PYTHON_TP_FUNCTION(is_jumper)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ZX_ADD_PYTHON_TP_FUNCTION(is_jumper_chance_d1000) ZX_ADD_PYTHON_TP_FUNCTION(is_jumper_distance) ZX_ADD_PYTHON_TP_FUNCTION(is_jumper_on_low_hp_chance_d1000) ZX_ADD_PYTHON_TP_FUNCTION(is_key) ZX_ADD_PYTHON_TP_FUNCTION(is_key_collector) ZX_ADD_PYTHON_TP_FUNCTION(is_killed_on_hit_or_miss) ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        is_killed_on_hitting) ZX_ADD_PYTHON_TP_FUNCTION(is_laser)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            is_lava)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                is_light_blocker)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    is_living)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ZX_ADD_PYTHON_TP_FUNCTION(is_loggable_for_important_stuff) ZX_ADD_PYTHON_TP_FUNCTION(is_loggable_for_unimportant_stuff) ZX_ADD_PYTHON_TP_FUNCTION(is_meat) ZX_ADD_PYTHON_TP_FUNCTION(is_meat_eater) ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        is_metal) ZX_ADD_PYTHON_TP_FUNCTION(is_minion) ZX_ADD_PYTHON_TP_FUNCTION(is_minion_generator) ZX_ADD_PYTHON_TP_FUNCTION(is_monst) ZX_ADD_PYTHON_TP_FUNCTION(is_moveable) ZX_ADD_PYTHON_TP_FUNCTION(is_msg)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ZX_ADD_PYTHON_TP_FUNCTION(is_no_tile) ZX_ADD_PYTHON_TP_FUNCTION(is_obs_destructable) ZX_ADD_PYTHON_TP_FUNCTION(is_obs_wall_or_door)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ZX_ADD_PYTHON_TP_FUNCTION(is_openable) ZX_ADD_PYTHON_TP_FUNCTION(is_organic) ZX_ADD_PYTHON_TP_FUNCTION(is_player)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ZX_ADD_PYTHON_TP_FUNCTION(is_poison) ZX_ADD_PYTHON_TP_FUNCTION(is_potion) ZX_ADD_PYTHON_TP_FUNCTION(is_potion_eater) ZX_ADD_PYTHON_TP_FUNCTION(is_projectile)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        is_removeable_if_out_of_slots) ZX_ADD_PYTHON_TP_FUNCTION(is_resurrectable) ZX_ADD_PYTHON_TP_FUNCTION(is_ripple) ZX_ADD_PYTHON_TP_FUNCTION(is_rock) ZX_ADD_PYTHON_TP_FUNCTION(is_rusty)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            is_secret_door) ZX_ADD_PYTHON_TP_FUNCTION(is_sewer_wall) ZX_ADD_PYTHON_TP_FUNCTION(is_shallow_water)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ZX_ADD_PYTHON_TP_FUNCTION(is_shovable) ZX_ADD_PYTHON_TP_FUNCTION(is_skill) ZX_ADD_PYTHON_TP_FUNCTION(is_skillstone) ZX_ADD_PYTHON_TP_FUNCTION(is_smoke) ZX_ADD_PYTHON_TP_FUNCTION(is_soft_body) ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                is_spawner)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    is_spiderweb)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ZX_ADD_PYTHON_TP_FUNCTION(is_stamina_check) ZX_ADD_PYTHON_TP_FUNCTION(is_steal_item_chance_d1000)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            is_sticky) ZX_ADD_PYTHON_TP_FUNCTION(is_stone) ZX_ADD_PYTHON_TP_FUNCTION(is_sword) ZX_ADD_PYTHON_TP_FUNCTION(is_target_auto_select) ZX_ADD_PYTHON_TP_FUNCTION(is_the_grid) ZX_ADD_PYTHON_TP_FUNCTION(is_throwable) ZX_ADD_PYTHON_TP_FUNCTION(is_tickable)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                is_tmp_thing)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    is_torch) ZX_ADD_PYTHON_TP_FUNCTION(is_treasure_class_a) ZX_ADD_PYTHON_TP_FUNCTION(is_treasure_class_b) ZX_ADD_PYTHON_TP_FUNCTION(is_treasure_class_c) ZX_ADD_PYTHON_TP_FUNCTION(is_treasure_type)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ZX_ADD_PYTHON_TP_FUNCTION(is_treasure_type_chest) ZX_ADD_PYTHON_TP_FUNCTION(is_treasure_type_eater) ZX_ADD_PYTHON_TP_FUNCTION(is_undead) ZX_ADD_PYTHON_TP_FUNCTION(is_usable) ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        is_used_when_thrown) ZX_ADD_PYTHON_TP_FUNCTION(is_very_combustible) ZX_ADD_PYTHON_TP_FUNCTION(is_wall) ZX_ADD_PYTHON_TP_FUNCTION(is_wall_dungeon) ZX_ADD_PYTHON_TP_FUNCTION(is_wand)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ZX_ADD_PYTHON_TP_FUNCTION(is_wand_eater) ZX_ADD_PYTHON_TP_FUNCTION(is_water_lover)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                is_weapon)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    is_weapon_wielder) ZX_ADD_PYTHON_TP_FUNCTION(is_wooden) ZX_ADD_PYTHON_TP_FUNCTION(item_height) ZX_ADD_PYTHON_TP_FUNCTION(item_width) ZX_ADD_PYTHON_TP_FUNCTION(laser_name)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ZX_ADD_PYTHON_TP_FUNCTION(left1_tile) ZX_ADD_PYTHON_TP_FUNCTION(left2_tile) ZX_ADD_PYTHON_TP_FUNCTION(lifespan_dice) ZX_ADD_PYTHON_TP_FUNCTION(light_color) ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        light_strength) ZX_ADD_PYTHON_TP_FUNCTION(long_text_description) ZX_ADD_PYTHON_TP_FUNCTION(loves_fire) ZX_ADD_PYTHON_TP_FUNCTION(loves_poison) ZX_ADD_PYTHON_TP_FUNCTION(loves_spiderwebs) ZX_ADD_PYTHON_TP_FUNCTION(minion_leash_distance)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ZX_ADD_PYTHON_TP_FUNCTION(minion_limit) ZX_ADD_PYTHON_TP_FUNCTION(monst_size) ZX_ADD_PYTHON_TP_FUNCTION(name) ZX_ADD_PYTHON_TP_FUNCTION(normal_placement_rules) ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            nutrition_dice) ZX_ADD_PYTHON_TP_FUNCTION(on_birth_do) ZX_ADD_PYTHON_TP_FUNCTION(on_bite_do) ZX_ADD_PYTHON_TP_FUNCTION(on_born_do)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ZX_ADD_PYTHON_TP_FUNCTION(on_death_do) ZX_ADD_PYTHON_TP_FUNCTION(on_death_drop_all_items) ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                on_death_is_open) ZX_ADD_PYTHON_TP_FUNCTION(on_enchant_do) ZX_ADD_PYTHON_TP_FUNCTION(on_fall_do) ZX_ADD_PYTHON_TP_FUNCTION(on_fire_do)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ZX_ADD_PYTHON_TP_FUNCTION(on_firing_at_something_do) ZX_ADD_PYTHON_TP_FUNCTION(on_hit_do) ZX_ADD_PYTHON_TP_FUNCTION(on_idle_dice) ZX_ADD_PYTHON_TP_FUNCTION(on_lifespan_do) ZX_ADD_PYTHON_TP_FUNCTION(on_miss_do) ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    on_move_do) ZX_ADD_PYTHON_TP_FUNCTION(on_open_do) ZX_ADD_PYTHON_TP_FUNCTION(on_tick_do) ZX_ADD_PYTHON_TP_FUNCTION(on_use_do)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ZX_ADD_PYTHON_TP_FUNCTION(projectile_name) ZX_ADD_PYTHON_TP_FUNCTION(range_max) ZX_ADD_PYTHON_TP_FUNCTION(rarity) ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        resurrect_dice) ZX_ADD_PYTHON_TP_FUNCTION(right1_tile) ZX_ADD_PYTHON_TP_FUNCTION(right2_tile) ZX_ADD_PYTHON_TP_FUNCTION(spawn_on_shoved) ZX_ADD_PYTHON_TP_FUNCTION(stamina) ZX_ADD_PYTHON_TP_FUNCTION(stat_attack)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ZX_ADD_PYTHON_TP_FUNCTION(stat_constitution) ZX_ADD_PYTHON_TP_FUNCTION(stat_defence) ZX_ADD_PYTHON_TP_FUNCTION(stat_strength) ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            stats01) ZX_ADD_PYTHON_TP_FUNCTION(stats02) ZX_ADD_PYTHON_TP_FUNCTION(stats03)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ZX_ADD_PYTHON_TP_FUNCTION(stats04) ZX_ADD_PYTHON_TP_FUNCTION(stats05) ZX_ADD_PYTHON_TP_FUNCTION(stats06) ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                stats07) ZX_ADD_PYTHON_TP_FUNCTION(stats08) ZX_ADD_PYTHON_TP_FUNCTION(stats09) ZX_ADD_PYTHON_TP_FUNCTION(stats10)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ZX_ADD_PYTHON_TP_FUNCTION(stats11) ZX_ADD_PYTHON_TP_FUNCTION(stats12) ZX_ADD_PYTHON_TP_FUNCTION(stats17) ZX_ADD_PYTHON_TP_FUNCTION(str1) ZX_ADD_PYTHON_TP_FUNCTION(str2) ZX_ADD_PYTHON_TP_FUNCTION(str4) ZX_ADD_PYTHON_TP_FUNCTION(str5) ZX_ADD_PYTHON_TP_FUNCTION(text_a_or_an) ZX_ADD_PYTHON_TP_FUNCTION(text_description) ZX_ADD_PYTHON_TP_FUNCTION(text_enchant) ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    text_hits) ZX_ADD_PYTHON_TP_FUNCTION(text_name) ZX_ADD_PYTHON_TP_FUNCTION(text_skill)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ZX_ADD_PYTHON_TP_FUNCTION(text_title) ZX_ADD_PYTHON_TP_FUNCTION(text_unused) ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        throw_distance) ZX_ADD_PYTHON_TP_FUNCTION(tile) ZX_ADD_PYTHON_TP_FUNCTION(tl1_tile)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ZX_ADD_PYTHON_TP_FUNCTION(tl2_tile) ZX_ADD_PYTHON_TP_FUNCTION(top1_tile) ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            top2_tile) ZX_ADD_PYTHON_TP_FUNCTION(tr1_tile) ZX_ADD_PYTHON_TP_FUNCTION(tr2_tile)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ZX_ADD_PYTHON_TP_FUNCTION(unused_flag1) ZX_ADD_PYTHON_TP_FUNCTION(unused_flag10) ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                unused_flag11) ZX_ADD_PYTHON_TP_FUNCTION(unused_flag12) ZX_ADD_PYTHON_TP_FUNCTION(unused_flag13) ZX_ADD_PYTHON_TP_FUNCTION(unused_flag14) ZX_ADD_PYTHON_TP_FUNCTION(unused_flag15)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ZX_ADD_PYTHON_TP_FUNCTION(unused_flag16) ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    unused_flag17) ZX_ADD_PYTHON_TP_FUNCTION(unused_flag18) ZX_ADD_PYTHON_TP_FUNCTION(unused_flag19) ZX_ADD_PYTHON_TP_FUNCTION(unused_flag2) ZX_ADD_PYTHON_TP_FUNCTION(unused_flag20)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ZX_ADD_PYTHON_TP_FUNCTION(unused_flag21) ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        unused_flag22) ZX_ADD_PYTHON_TP_FUNCTION(unused_flag23)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ZX_ADD_PYTHON_TP_FUNCTION(unused_flag24) ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            unused_flag25) ZX_ADD_PYTHON_TP_FUNCTION(unused_flag26)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ZX_ADD_PYTHON_TP_FUNCTION(unused_flag27) ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                unused_flag28)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ZX_ADD_PYTHON_TP_FUNCTION(unused_flag29) ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    unused_flag3) ZX_ADD_PYTHON_TP_FUNCTION(unused_flag30) ZX_ADD_PYTHON_TP_FUNCTION(unused_flag31) ZX_ADD_PYTHON_TP_FUNCTION(unused_flag32)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        unused_flag33) ZX_ADD_PYTHON_TP_FUNCTION(unused_flag34)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            unused_flag35) ZX_ADD_PYTHON_TP_FUNCTION(unused_flag36)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ZX_ADD_PYTHON_TP_FUNCTION(unused_flag37) ZX_ADD_PYTHON_TP_FUNCTION(unused_flag38) ZX_ADD_PYTHON_TP_FUNCTION(unused_flag39) ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                unused_flag4) ZX_ADD_PYTHON_TP_FUNCTION(unused_flag40)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ZX_ADD_PYTHON_TP_FUNCTION(unused_flag41) ZX_ADD_PYTHON_TP_FUNCTION(unused_flag42) ZX_ADD_PYTHON_TP_FUNCTION(unused_flag43)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ZX_ADD_PYTHON_TP_FUNCTION(unused_flag44) ZX_ADD_PYTHON_TP_FUNCTION(unused_flag45) ZX_ADD_PYTHON_TP_FUNCTION(unused_flag46) ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        unused_flag47)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ZX_ADD_PYTHON_TP_FUNCTION(unused_flag48) ZX_ADD_PYTHON_TP_FUNCTION(unused_flag5) ZX_ADD_PYTHON_TP_FUNCTION(unused_flag50)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                unused_flag51)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    unused_flag52)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ZX_ADD_PYTHON_TP_FUNCTION(unused_flag6) ZX_ADD_PYTHON_TP_FUNCTION(unused_flag7) ZX_ADD_PYTHON_TP_FUNCTION(unused_flag8)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            unused_flag9)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ZX_ADD_PYTHON_TP_FUNCTION(weapon_carry_anim) ZX_ADD_PYTHON_TP_FUNCTION(weapon_damage)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ZX_ADD_PYTHON_TP_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    weapon_use_distance)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ZX_ADD_PYTHON_TP_FUNCTION(z_depth) ZX_ADD_PYTHON_TP_FUNCTION(z_prio) ZX_ADD_WRAPPED_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        abs_to_pct)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ZX_ADD_WRAPPED_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            con)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ZX_ADD_WRAPPED_PYTHON_FUNCTION(die) ZX_ADD_WRAPPED_PYTHON_FUNCTION(err)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ZX_ADD_WRAPPED_PYTHON_FUNCTION(if_matches) ZX_ADD_WRAPPED_PYTHON_FUNCTION(if_matches_then_kill) ZX_ADD_WRAPPED_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    level_add) ZX_ADD_WRAPPED_PYTHON_FUNCTION(level_spawn_next_to) ZX_ADD_WRAPPED_PYTHON_FUNCTION(level_spawn_next_to_or_on_monst) ZX_ADD_WRAPPED_PYTHON_FUNCTION(level_spawn_using_items_radius_range) ZX_ADD_WRAPPED_PYTHON_FUNCTION(log) ZX_ADD_WRAPPED_PYTHON_FUNCTION(map_load_room)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ZX_ADD_WRAPPED_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        music_load)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ZX_ADD_WRAPPED_PYTHON_FUNCTION(music_play) ZX_ADD_WRAPPED_PYTHON_FUNCTION(pct_to_abs)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ZX_ADD_WRAPPED_PYTHON_FUNCTION(puts) ZX_ADD_WRAPPED_PYTHON_FUNCTION(sound_load)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ZX_ADD_WRAPPED_PYTHON_FUNCTION(sound_play) ZX_ADD_WRAPPED_PYTHON_FUNCTION(sound_play_channel) ZX_ADD_WRAPPED_PYTHON_FUNCTION(tex_load) ZX_ADD_WRAPPED_PYTHON_FUNCTION(text_size) ZX_ADD_WRAPPED_PYTHON_FUNCTION(thing_sound_play) ZX_ADD_WRAPPED_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    thing_sound_play_channel) ZX_ADD_WRAPPED_PYTHON_FUNCTION(tile_load_arr)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ZX_ADD_WRAPPED_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        tile_load_arr_sprites) ZX_ADD_WRAPPED_PYTHON_FUNCTION(topcon)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ZX_ADD_WRAPPED_PYTHON_FUNCTION(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            tp_load) ZX_ADD_WRAPPED_PYTHON_FUNCTION(tp_update)
 
-  PYFUNC_REF(SDLGetKeyState),
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            PYFUNC_REF(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                SDLGetKeyState),
 
-  {0, 0, 0, 0}   /* sentinel */
+    {0, 0, 0, 0} /* sentinel */
 };
 
-static struct PyModuleDef python_c_MODULE = {
-  PyModuleDef_HEAD_INIT,
-  "zx",
-  0,
-  -1,
-  python_c_METHODS,
-  0, 0, 0, 0
-};
+static struct PyModuleDef python_c_MODULE = {PyModuleDef_HEAD_INIT, "zx", 0, -1, python_c_METHODS, 0, 0, 0, 0};
 
-PyMODINIT_FUNC
-python_mouse_y_module_create (void)
-{ TRACE_AND_INDENT();
-   PyObject *m = PyModule_Create(&python_c_MODULE);
-   if (! m) {
+PyMODINIT_FUNC python_mouse_y_module_create(void) {
+  TRACE_AND_INDENT();
+  PyObject *m = PyModule_Create(&python_c_MODULE);
+  if (! m) {
     PyErr_Print();
     ERR("Python init");
     return (0);
-   }
+  }
 
-   return (m);
+  return (m);
 }
 
-void py_err (void)
-{ TRACE_AND_INDENT();
+void py_err(void) {
+  TRACE_AND_INDENT();
   PyObject *err = PyErr_Occurred();
-  if (!err) {
+  if (! err) {
     return;
   }
 
   PyObject *ptype, *pvalue, *ptraceback, *pyobj_str;
   PyObject *ret, *list, *string;
   PyObject *mod;
-  char *py_str;
+  char *    py_str;
 
   PyErr_Fetch(&ptype, &pvalue, &ptraceback);
   PyErr_NormalizeException(&ptype, &pvalue, &ptraceback);
@@ -2352,15 +1775,15 @@ void py_err (void)
   PyTraceBack_Print(ptraceback, pvalue);
 
   pyobj_str = PyObject_Str(pvalue);
-  py_str = py_obj_to_str(pyobj_str);
+  py_str    = py_obj_to_str(pyobj_str);
   ERR("%s", py_str);
   myfree(py_str);
 
-  mod = PyImport_ImportModule("traceback");
+  mod  = PyImport_ImportModule("traceback");
   list = PyObject_CallMethod(mod, "format_exception", "OOO", ptype, pvalue, ptraceback);
   if (list) {
     string = PyUnicode_FromString("\n");
-    ret = PyUnicode_Join(string, list);
+    ret    = PyUnicode_Join(string, list);
     Py_DECREF(list);
     Py_DECREF(string);
 
@@ -2381,7 +1804,7 @@ void py_err (void)
     ERR("Python stack trace:\n");
 
     while (frame) {
-      int line = frame->f_lineno;
+      int   line     = frame->f_lineno;
       char *filename = py_obj_to_str(frame->f_code->co_filename);
       char *funcname = py_obj_to_str(frame->f_code->co_name);
       ERR("    %s(%d): %s\n", filename, line, funcname);
@@ -2393,8 +1816,8 @@ void py_err (void)
   ERR("Python error");
 }
 
-void py_trace (void)
-{ TRACE_AND_INDENT();
+void py_trace(void) {
+  TRACE_AND_INDENT();
   PyThreadState *tstate = PyThreadState_GET();
 
   if (tstate && tstate->frame) {
@@ -2405,7 +1828,7 @@ void py_trace (void)
     int cnt = 1;
 
     while (frame) {
-      int line = frame->f_lineno;
+      int   line     = frame->f_lineno;
       char *filename = py_obj_to_str(frame->f_code->co_filename);
       char *funcname = py_obj_to_str(frame->f_code->co_name);
       CON(">>> %d. %s, line %d, %s()", cnt++, filename, line, funcname);
@@ -2416,10 +1839,10 @@ void py_trace (void)
   }
 }
 
-void py_exec (const char *str)
-{ TRACE_AND_INDENT();
+void py_exec(const char *str) {
+  TRACE_AND_INDENT();
   char stdOutErr[] =
-"import sys\n\
+      "import sys\n\
 import zx\n\
 class CatchOutErr:\n\
   def __init__(self):\n\
@@ -2459,17 +1882,17 @@ sys.stderr = catchOutErr\n\
   }
 }
 
-static void py_add_to_path (const char *path)
-{ TRACE_AND_INDENT();
+static void py_add_to_path(const char *path) {
+  TRACE_AND_INDENT();
   PyObject *py_cur_path, *py_item;
-  char *new_path;
-  int wc_len, i;
-  wchar_t *wc_new_path;
-  char *item;
+  char *    new_path;
+  int       wc_len, i;
+  wchar_t * wc_new_path;
+  char *    item;
 
   DBG3("Current system python path: (adding %s)", path);
 
-  new_path = dupstr(path, __FUNCTION__);
+  new_path    = dupstr(path, __FUNCTION__);
   py_cur_path = PySys_GetObject("path");
 
   for (i = 0; i < PyList_Size(py_cur_path); i++) {
@@ -2479,12 +1902,12 @@ static void py_add_to_path (const char *path)
 
     py_item = PyList_GetItem(py_cur_path, i);
 
-    if (!PyUnicode_Check(py_item)) {
+    if (! PyUnicode_Check(py_item)) {
       continue;
     }
 
     item = py_obj_to_str(py_item);
-    if (!item) {
+    if (! item) {
       continue;
     }
 
@@ -2501,7 +1924,7 @@ static void py_add_to_path (const char *path)
   wc_len = sizeof(wchar_t) * (strlen(new_path) + 1);
 
   wc_new_path = (wchar_t *) myzalloc(wc_len, "wchar str");
-  if (!wc_new_path) {
+  if (! wc_new_path) {
     ERR("Path alloc fail");
   }
 
@@ -2513,17 +1936,14 @@ static void py_add_to_path (const char *path)
   myfree(wc_new_path);
 }
 
-PyObject *abs_to_pct_ (PyObject *obj, PyObject *args, PyObject *keywds)
-{ TRACE_AND_INDENT();
+PyObject *abs_to_pct_(PyObject *obj, PyObject *args, PyObject *keywds) {
+  TRACE_AND_INDENT();
   double x = 0;
   double y = 0;
 
-  static char *kwlist[] = {
-    (char*) "x",
-    (char*) "y",
-    0};
+  static char *kwlist[] = {(char *) "x", (char *) "y", 0};
 
-  if (!PyArg_ParseTupleAndKeywords(args, keywds, "dd", kwlist, &x, &y)) {
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "dd", kwlist, &x, &y)) {
     return (0);
   }
 
@@ -2533,17 +1953,14 @@ PyObject *abs_to_pct_ (PyObject *obj, PyObject *args, PyObject *keywds)
   return (Py_BuildValue("dd", x, y));
 }
 
-PyObject *pcg_randint (PyObject *obj, PyObject *args, PyObject *keywds)
-{ TRACE_AND_INDENT();
+PyObject *pcg_randint(PyObject *obj, PyObject *args, PyObject *keywds) {
+  TRACE_AND_INDENT();
   int x = 0;
   int y = 0;
 
-  static char *kwlist[] = {
-    (char*) "x",
-    (char*) "y",
-    0};
+  static char *kwlist[] = {(char *) "x", (char *) "y", 0};
 
-  if (!PyArg_ParseTupleAndKeywords(args, keywds, "ii", kwlist, &x, &y)) {
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "ii", kwlist, &x, &y)) {
     return (0);
   }
 
@@ -2554,17 +1971,14 @@ PyObject *pcg_randint (PyObject *obj, PyObject *args, PyObject *keywds)
   return (Py_BuildValue("i", pcg_random_range_inclusive(x, y)));
 }
 
-PyObject *non_pcg_randint (PyObject *obj, PyObject *args, PyObject *keywds)
-{ TRACE_AND_INDENT();
+PyObject *non_pcg_randint(PyObject *obj, PyObject *args, PyObject *keywds) {
+  TRACE_AND_INDENT();
   int x = 0;
   int y = 0;
 
-  static char *kwlist[] = {
-    (char*) "x",
-    (char*) "y",
-    0};
+  static char *kwlist[] = {(char *) "x", (char *) "y", 0};
 
-  if (!PyArg_ParseTupleAndKeywords(args, keywds, "ii", kwlist, &x, &y)) {
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "ii", kwlist, &x, &y)) {
     return (0);
   }
 
@@ -2575,17 +1989,14 @@ PyObject *non_pcg_randint (PyObject *obj, PyObject *args, PyObject *keywds)
   return (Py_BuildValue("i", non_pcg_random_range_inclusive(x, y)));
 }
 
-PyObject *pct_to_abs_ (PyObject *obj, PyObject *args, PyObject *keywds)
-{ TRACE_AND_INDENT();
+PyObject *pct_to_abs_(PyObject *obj, PyObject *args, PyObject *keywds) {
+  TRACE_AND_INDENT();
   double x = 0;
   double y = 0;
 
-  static char *kwlist[] = {
-    (char*) "x",
-    (char*) "y",
-    0};
+  static char *kwlist[] = {(char *) "x", (char *) "y", 0};
 
-  if (!PyArg_ParseTupleAndKeywords(args, keywds, "dd", kwlist, &x, &y)) {
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "dd", kwlist, &x, &y)) {
     return (0);
   }
 
@@ -2595,8 +2006,8 @@ PyObject *pct_to_abs_ (PyObject *obj, PyObject *args, PyObject *keywds)
   return (Py_BuildValue("dd", x, y));
 }
 
-static void python_add_consts (void)
-{ TRACE_AND_INDENT();
+static void python_add_consts(void) {
+  TRACE_AND_INDENT();
   PyModule_AddIntConstant(zx_mod, "TERM_HEIGHT", TERM_HEIGHT);
   PyModule_AddIntConstant(zx_mod, "TERM_WIDTH", TERM_WIDTH);
   PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_CHASM", MAP_DEPTH_CHASM);
@@ -2789,7 +2200,6 @@ static void python_add_consts (void)
   PyModule_AddIntConstant(zx_mod, "SDLK_MENU", SDLK_MENU);
   PyModule_AddIntConstant(zx_mod, "SDLK_POWER", SDLK_POWER);
   PyModule_AddIntConstant(zx_mod, "SDLK_UNDO", SDLK_UNDO);
-
 
 #if SDL_MAJOR_VERSION == 1 && SDL_MINOR_VERSION == 2 /* { */
   PyModule_AddIntConstant(zx_mod, "SDL_SCANCODE_0", SDLK_0);
@@ -3145,7 +2555,6 @@ static void python_add_consts (void)
   PyModule_AddIntConstant(zx_mod, "SDL_SCANCODE_Z", SDL_SCANCODE_Z);
 #endif /* } */
 
-
 #if SDL_MAJOR_VERSION == 1 /* { */
   PyModule_AddIntConstant(zx_mod, "SDL_SCANCODE_KP0", SDLk_KP0);
   PyModule_AddIntConstant(zx_mod, "SDL_SCANCODE_KP1", SDLK_KP1);
@@ -3433,18 +2842,17 @@ static void python_add_consts (void)
 #else
   PyModule_AddIntConstant(zx_mod, "SDL_SCANCODE_UNDO", SDL_SCANCODE_UNDO);
 #endif /* } */
-
 }
 
-static std::string get_env(const char* env)
-{
+static std::string get_env(const char *env) {
   auto t = std::getenv(env);
-  if (t) return t;
+  if (t)
+    return t;
   return "";
 }
 
-void python_init (char *argv[])
-{ TRACE_AND_INDENT();
+void python_init(char *argv[]) {
+  TRACE_AND_INDENT();
   CON("INI: PYVER %s", PYVER);
   sdl_flush_display();
   ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -3503,7 +2911,7 @@ void python_init (char *argv[])
   DBG3("INI: Calling PyImport_ImportModule for zx module");
 
   zx_mod = PyImport_ImportModule("zx");
-  if (!zx_mod) {
+  if (! zx_mod) {
     py_err();
     ERR("Module zx import failed");
     return;
@@ -3514,7 +2922,7 @@ void python_init (char *argv[])
   DBG3("INI: Calling PyImport_ImportModule for init module");
 
   zx_mod = PyImport_ImportModule("init");
-  if (!zx_mod) {
+  if (! zx_mod) {
     py_err();
     ERR("Module init import failed");
     return;
@@ -3524,8 +2932,7 @@ void python_init (char *argv[])
   ////////////////////////////////////////////////////////////////////////////////////////////////////
 }
 
-PyObject *py_add_module (const char *mod)
-{
+PyObject *py_add_module(const char *mod) {
   auto name = std::string(mod);
   auto pmod = py_mods[name];
   if (pmod != nullptr) {
@@ -3543,7 +2950,7 @@ PyObject *py_add_module (const char *mod)
   return pmod;
 }
 
-void python_fini (void)
-{ TRACE_AND_INDENT();
+void python_fini(void) {
+  TRACE_AND_INDENT();
   Py_Finalize();
 }

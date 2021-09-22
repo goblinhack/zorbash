@@ -21,17 +21,21 @@
 #include "my_gl.h"
 
 WidPopup *wid_save;
-void wid_save_destroy(void);
+void      wid_save_destroy(void);
 
-extern bool game_load_headers_only;
-bool game_save_config_only;
-int GAME_SAVE_MARKER_EOL = 123456;
+extern bool     game_load_headers_only;
+bool            game_save_config_only;
+int             GAME_SAVE_MARKER_EOL = 123456;
 extern uint32_t csum(char *mem, uint32_t len);
 
-#define WRITE_MAGIC(m) { uint32_t magic = m; out << bits(magic); }
+#define WRITE_MAGIC(m)                                                                                                 \
+  {                                                                                                                    \
+    uint32_t magic = m;                                                                                                \
+    out << bits(magic);                                                                                                \
+  }
 
-std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
-{ TRACE_AND_INDENT();
+std::ostream &operator<<(std::ostream &out, Bits<Monstp &> const my) {
+  TRACE_AND_INDENT();
   /////////////////////////////////////////////////////////////////////////
   // Keep these sorted alphabetically to make it easier to see additions
   // and always update game_load.cpp and game_save.cpp
@@ -133,8 +137,8 @@ std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
   return (out);
 }
 
-std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
-{ TRACE_AND_INDENT();
+std::ostream &operator<<(std::ostream &out, Bits<const Thingp &> const my) {
+  TRACE_AND_INDENT();
   auto start = out.tellp();
   WRITE_MAGIC(THING_MAGIC_BEGIN + (int) sizeof(Thing));
 
@@ -165,7 +169,8 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
   out << bits(my.t->tile_curr);
   out << bits(my.t->alpha);
   out << bits(my.t->z_depth);
-  uint8_t dir = my.t->dir; out << bits(dir);
+  uint8_t dir = my.t->dir;
+  out << bits(dir);
 
   /////////////////////////////////////////////////////////////////////////
   // Keep these sorted alphabetically to make it easier to see additions
@@ -175,106 +180,190 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
   // v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v
   /////////////////////////////////////////////////////////////////////////
   uint64_t bits64 = 0;
-  int shift = 0;
-  /* uint64_t */ bits64 |= (my.t->has_ever_moved               ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->has_laser                    ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->has_light                    ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->has_projectile               ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->is_activated                 ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->is_attached                  ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->is_being_destroyed           ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->is_bouncing                  ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->is_changing_level            ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->is_dead                      ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->is_dying                     ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->is_facing_left               ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->is_fadeup                    ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->is_falling                   ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->is_hidden                    ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->is_hungry                    ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->is_in_lava                   ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->is_in_water                  ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->is_jumping                   ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->is_moving                    ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->is_offscreen                 ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->is_open                      ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->is_resurrected               ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->is_resurrecting              ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->is_resurrection_blocked      ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->is_scheduled_for_death       ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->is_scheduled_for_jump_end    ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->is_sleeping                  ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->is_starving                  ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->is_the_grid                  ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->is_waiting_to_ascend_dungeon ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->is_waiting_to_ascend_sewer   ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->is_waiting_to_descend_dungeon? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->is_waiting_to_descend_sewer  ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->is_waiting_to_fall           ? 1LLU : 0LLU) << shift; shift++;
+  int      shift  = 0;
+  /* uint64_t */ bits64 |= (my.t->has_ever_moved ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->has_laser ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->has_light ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->has_projectile ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->is_activated ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->is_attached ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->is_being_destroyed ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->is_bouncing ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->is_changing_level ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->is_dead ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->is_dying ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->is_facing_left ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->is_fadeup ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->is_falling ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->is_hidden ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->is_hungry ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->is_in_lava ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->is_in_water ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->is_jumping ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->is_moving ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->is_offscreen ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->is_open ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->is_resurrected ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->is_resurrecting ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->is_resurrection_blocked ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->is_scheduled_for_death ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->is_scheduled_for_jump_end ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->is_sleeping ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->is_starving ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->is_the_grid ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->is_waiting_to_ascend_dungeon ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->is_waiting_to_ascend_sewer ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->is_waiting_to_descend_dungeon ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->is_waiting_to_descend_sewer ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->is_waiting_to_fall ? 1LLU : 0LLU) << shift;
+  shift++;
 
-  if (shift >= (int)(sizeof(bits64) * 8)) {
+  if (shift >= (int) (sizeof(bits64) * 8)) {
     ERR("Ran out of bits in serialization");
   }
   out << bits(bits64);
-//CON("SAVE %016LX ",bits64);
+  // CON("SAVE %016LX ",bits64);
 
   bits64 = 0;
-  shift = 0;
-  /* uint64_t */ bits64 |= (my.t->i_set_gfx_water                ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->i_set_is_acid                  ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->i_set_is_ascend_dungeon        ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->i_set_is_ascend_sewer          ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->i_set_is_barrel                ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->i_set_is_blood                 ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->i_set_is_brazier               ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->i_set_is_bridge                ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->i_set_is_chasm                 ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->i_set_is_corpse                ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->i_set_is_corridor              ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->i_set_is_deep_water            ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->i_set_is_descend_dungeon       ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->i_set_is_descend_sewer         ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->i_set_is_dirt                  ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->i_set_is_door                  ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->i_set_is_dry_grass             ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->i_set_is_enchantstone          ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->i_set_is_extreme_hazard        ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->i_set_is_fire                  ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->i_set_is_floor                 ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->i_set_is_foilage               ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->i_set_is_food                  ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->i_set_is_gold                  ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->i_set_is_hazard                ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->i_set_is_key                   ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->i_set_is_lava                  ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->i_set_is_light_blocker         ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->i_set_is_minion_generator      ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->i_set_is_monst                 ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->i_set_is_obs_wall_or_door      ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->i_set_is_obs_destructable      ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->i_set_is_poison                ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->i_set_is_potion                ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->i_set_is_ripple                ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->i_set_is_rock                  ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->i_set_is_secret_door           ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->i_set_is_shallow_water         ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->i_set_is_skillstone            ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->i_set_is_smoke                 ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->i_set_is_spiderweb             ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->i_set_is_sticky                ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->i_set_is_shovable              ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->i_set_is_treasure_class_a      ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->i_set_is_treasure_class_b      ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->i_set_is_treasure_class_c      ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->i_set_is_treasure_type         ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->i_set_is_wall                  ? 1LLU : 0LLU) << shift; shift++;
-  /* uint64_t */ bits64 |= (my.t->i_set_is_wand                  ? 1LLU : 0LLU) << shift; shift++;
+  shift  = 0;
+  /* uint64_t */ bits64 |= (my.t->i_set_gfx_water ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->i_set_is_acid ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->i_set_is_ascend_dungeon ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->i_set_is_ascend_sewer ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->i_set_is_barrel ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->i_set_is_blood ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->i_set_is_brazier ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->i_set_is_bridge ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->i_set_is_chasm ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->i_set_is_corpse ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->i_set_is_corridor ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->i_set_is_deep_water ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->i_set_is_descend_dungeon ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->i_set_is_descend_sewer ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->i_set_is_dirt ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->i_set_is_door ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->i_set_is_dry_grass ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->i_set_is_enchantstone ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->i_set_is_extreme_hazard ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->i_set_is_fire ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->i_set_is_floor ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->i_set_is_foilage ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->i_set_is_food ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->i_set_is_gold ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->i_set_is_hazard ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->i_set_is_key ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->i_set_is_lava ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->i_set_is_light_blocker ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->i_set_is_minion_generator ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->i_set_is_monst ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->i_set_is_obs_wall_or_door ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->i_set_is_obs_destructable ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->i_set_is_poison ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->i_set_is_potion ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->i_set_is_ripple ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->i_set_is_rock ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->i_set_is_secret_door ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->i_set_is_shallow_water ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->i_set_is_skillstone ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->i_set_is_smoke ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->i_set_is_spiderweb ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->i_set_is_sticky ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->i_set_is_shovable ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->i_set_is_treasure_class_a ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->i_set_is_treasure_class_b ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->i_set_is_treasure_class_c ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->i_set_is_treasure_type ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->i_set_is_wall ? 1LLU : 0LLU) << shift;
+  shift++;
+  /* uint64_t */ bits64 |= (my.t->i_set_is_wand ? 1LLU : 0LLU) << shift;
+  shift++;
 
-  if (shift >= (int)(sizeof(bits64) * 8)) {
+  if (shift >= (int) (sizeof(bits64) * 8)) {
     ERR("Ran out of bits in serialization");
   }
   out << bits(bits64);
-//CON("SAVE %016LX ",bits64);
+  // CON("SAVE %016LX ",bits64);
 
   /////////////////////////////////////////////////////////////////////////
   // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
@@ -292,18 +381,15 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
 
   IF_DEBUG4 {
     auto diff = out.tellp() - start;
-    LOG("SAVE %d bytes %s TP %d ID %x last_mid_at %f,%f monstp %p",
-      (int)diff, name.c_str(), my.t->tp_id, my.t->id.id,
-      my.t->last_mid_at.x, my.t->last_mid_at.y, my.t->monstp);
+    LOG("SAVE %d bytes %s TP %d ID %x last_mid_at %f,%f monstp %p", (int) diff, name.c_str(), my.t->tp_id, my.t->id.id,
+        my.t->last_mid_at.x, my.t->last_mid_at.y, my.t->monstp);
   }
   return (out);
 }
 
-std::ostream& operator<<(std::ostream &out, Bits<Levelp & > const my)
-{ TRACE_AND_INDENT();
-  IF_DEBUG4 {
-    my.t->log("Save");
-  }
+std::ostream &operator<<(std::ostream &out, Bits<Levelp &> const my) {
+  TRACE_AND_INDENT();
+  IF_DEBUG4 { my.t->log("Save"); }
 
   if (game->saving_snapshot) {
     /*
@@ -394,38 +480,38 @@ std::ostream& operator<<(std::ostream &out, Bits<Levelp & > const my)
   /* array<array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_wand {};             */ out << bits(my.t->_is_wand);
 
   LOG("DGN: - Save all_things_id_at");
-  /* all_things_id_at */      out << bits(my.t->all_things_id_at);
-  /* cursor_at */             out << bits(my.t->cursor_at);
-  /* cursor_old */            out << bits(my.t->cursor_old);
-  /* cursor_found */          out << bits(my.t->cursor_found);
+  /* all_things_id_at */ out << bits(my.t->all_things_id_at);
+  /* cursor_at */ out << bits(my.t->cursor_at);
+  /* cursor_old */ out << bits(my.t->cursor_old);
+  /* cursor_found */ out << bits(my.t->cursor_found);
   LOG("DGN: - Save lightmap data");
-  /* fbo_light */             out << bits(my.t->fbo_light);
+  /* fbo_light */ out << bits(my.t->fbo_light);
   LOG("DGN: - Save is_level_type_dungeon ");
-  /* is_level_type_dungeon */      out << bits(my.t->is_level_type_dungeon);
+  /* is_level_type_dungeon */ out << bits(my.t->is_level_type_dungeon);
   LOG("DGN: - Save is_heatmap_valid ");
-  /* is_heatmap_valid */      out << bits(my.t->is_heatmap_valid);
+  /* is_heatmap_valid */ out << bits(my.t->is_heatmap_valid);
   LOG("DGN: - Save is_level_type_sewer ");
-  /* is_level_type_sewer */        out << bits(my.t->is_level_type_sewer);
+  /* is_level_type_sewer */ out << bits(my.t->is_level_type_sewer);
   LOG("DGN: - Save is_starting ");
-  /* is_starting */           out << bits(my.t->is_starting);
-  /* map_at */                out << bits(my.t->map_at);
-  /* map_br */                out << bits(my.t->map_br);
-  /* map_changed */           out << bits(my.t->map_changed);
-  /* map_follow_player */     out << bits(my.t->map_follow_player);
-  /* map_tl */                out << bits(my.t->map_tl);
-  /* map_wanted_at */         out << bits(my.t->map_wanted_at);
-  /* maxx */                  out << bits(my.t->maxx);
-  /* maxy */                  out << bits(my.t->maxy);
+  /* is_starting */ out << bits(my.t->is_starting);
+  /* map_at */ out << bits(my.t->map_at);
+  /* map_br */ out << bits(my.t->map_br);
+  /* map_changed */ out << bits(my.t->map_changed);
+  /* map_follow_player */ out << bits(my.t->map_follow_player);
+  /* map_tl */ out << bits(my.t->map_tl);
+  /* map_wanted_at */ out << bits(my.t->map_wanted_at);
+  /* maxx */ out << bits(my.t->maxx);
+  /* maxy */ out << bits(my.t->maxy);
   LOG("DGN: - Save minimap_valid ");
-  /* minimap_valid */         out << bits(my.t->minimap_valid);
-  /* minx */                  out << bits(my.t->minx);
-  /* miny */                  out << bits(my.t->miny);
-  /* monst_count */           out << bits(my.t->monst_count);
-  /* mouse_at */              out << bits(my.t->mouse_at);
-  /* mouse_old */             out << bits(my.t->mouse_old);
-  /* pixel_map_at */          out << bits(my.t->pixel_map_at);
-  /* seed */                  out << bits(my.t->seed);
-  /* world_at */              out << bits(my.t->world_at);
+  /* minimap_valid */ out << bits(my.t->minimap_valid);
+  /* minx */ out << bits(my.t->minx);
+  /* miny */ out << bits(my.t->miny);
+  /* monst_count */ out << bits(my.t->monst_count);
+  /* mouse_at */ out << bits(my.t->mouse_at);
+  /* mouse_old */ out << bits(my.t->mouse_old);
+  /* pixel_map_at */ out << bits(my.t->pixel_map_at);
+  /* seed */ out << bits(my.t->seed);
+  /* world_at */ out << bits(my.t->world_at);
 
 #ifdef ENABLE_DEBUG_THING_SER
   LOG("DGN: Check things");
@@ -461,7 +547,7 @@ std::ostream& operator<<(std::ostream &out, Bits<Levelp & > const my)
           auto id = get(my.t->all_things_id_at[group], x, y, slot);
           if (id.ok()) {
             const Thingp t = my.t->thing_find(id);
-            if (!t) {
+            if (! t) {
               ERR("Found a thing I could not save %08" PRIx32, id.id);
               return out;
             }
@@ -480,15 +566,14 @@ std::ostream& operator<<(std::ostream &out, Bits<Levelp & > const my)
   return (out);
 }
 
-std::ostream& operator<<(std::ostream &out,
-             Bits<const class World & > const my)
-{ TRACE_AND_INDENT();
+std::ostream &operator<<(std::ostream &out, Bits<const class World &> const my) {
+  TRACE_AND_INDENT();
   for (auto x = 0; x < LEVELS_ACROSS; ++x) {
     for (auto y = 0; y < LEVELS_DOWN; ++y) {
       for (auto z = 0; z < LEVELS_DEEP; ++z) {
         point3d p(x, y, z);
-        bool exists;
-        auto l = get(my.t.levels, x, y, z);
+        bool    exists;
+        auto    l = get(my.t.levels, x, y, z);
         if (l) {
           exists = true;
           CON("DGN: Save level %d,%d,%d", p.x, p.y, p.z);
@@ -509,86 +594,86 @@ std::ostream& operator<<(std::ostream &out,
   return (out);
 }
 
-std::ostream& operator<<(std::ostream &out, Bits<const Config & > const my)
-{ TRACE_AND_INDENT();
+std::ostream &operator<<(std::ostream &out, Bits<const Config &> const my) {
+  TRACE_AND_INDENT();
   uint32_t header_size = sizeof(Config);
-  /* uint32_t           header_size                  */ out << bits(header_size                       );
+  /* uint32_t           header_size                  */ out << bits(header_size);
 
-  /* float              game_pix_scale_height        */ out << bits(my.t.game_pix_scale_height        );
-  /* float              game_pix_scale_width         */ out << bits(my.t.game_pix_scale_width         );
-  /* float              game_pix_zoom                */ out << bits(my.t.game_pix_zoom                );
-  /* float              one_pixel_height             */ out << bits(my.t.one_pixel_height             );
-  /* float              one_pixel_width              */ out << bits(my.t.one_pixel_width              );
-  /* float              tile_pix_height              */ out << bits(my.t.tile_pix_height              );
-  /* float              tile_pix_width               */ out << bits(my.t.tile_pix_width               );
-  /* float              tile_pixel_height            */ out << bits(my.t.tile_pixel_height            );
-  /* float              tile_pixel_width             */ out << bits(my.t.tile_pixel_width             );
-  /* float              ui_pix_scale_height          */ out << bits(my.t.ui_pix_scale_height          );
-  /* float              ui_pix_scale_width           */ out << bits(my.t.ui_pix_scale_width           );
-  /* float              ui_pix_zoom                  */ out << bits(my.t.ui_pix_zoom                  );
-  /* float              video_w_h_ratio              */ out << bits(my.t.video_w_h_ratio              );
-  /* int                debug_mode                   */ out << bits(my.t.debug_mode                   );
-  /* int                fps_counter                  */ out << bits(my.t.fps_counter                  );
-  /* int                gfx_allow_highdpi            */ out << bits(my.t.gfx_allow_highdpi            );
-  /* int                gfx_borderless               */ out << bits(my.t.gfx_borderless               );
-  /* int                gfx_fullscreen               */ out << bits(my.t.gfx_fullscreen               );
-  /* int                gfx_fullscreen_desktop       */ out << bits(my.t.gfx_fullscreen_desktop       );
-  /* int                gfx_inverted                 */ out << bits(my.t.gfx_inverted                 );
-  /* int                gfx_minimap                  */ out << bits(my.t.gfx_minimap                  );
-  /* int                gfx_show_hidden              */ out << bits(my.t.gfx_show_hidden              );
-  /* int                gfx_vsync_enable             */ out << bits(my.t.gfx_vsync_enable             );
-  /* int                tile_height                  */ out << bits(my.t.tile_height                  );
-  /* int                tile_width                   */ out << bits(my.t.tile_width                   );
-  /* int32_t            config_pix_height            */ out << bits(my.t.config_pix_height            );
-  /* int32_t            config_pix_width             */ out << bits(my.t.config_pix_width             );
-  /* int32_t            game_pix_height              */ out << bits(my.t.game_pix_height              );
-  /* int32_t            game_pix_width               */ out << bits(my.t.game_pix_width               );
-  /* int32_t            ui_pix_height                */ out << bits(my.t.ui_pix_height                );
-  /* int32_t            ui_pix_width                 */ out << bits(my.t.ui_pix_width                 );
-  /* int32_t            window_pix_height            */ out << bits(my.t.window_pix_height            );
-  /* int32_t            window_pix_width             */ out << bits(my.t.window_pix_width             );
-  /* uint16_y           ascii_gl_height              */ out << bits(my.t.ascii_gl_height              );
-  /* uint16_y           ascii_gl_width               */ out << bits(my.t.ascii_gl_width               );
-  /* uint32_t           key_action0                  */ out << bits(my.t.key_action0                  );
-  /* uint32_t           key_action1                  */ out << bits(my.t.key_action1                  );
-  /* uint32_t           key_action2                  */ out << bits(my.t.key_action2                  );
-  /* uint32_t           key_action3                  */ out << bits(my.t.key_action3                  );
-  /* uint32_t           key_action4                  */ out << bits(my.t.key_action4                  );
-  /* uint32_t           key_action5                  */ out << bits(my.t.key_action5                  );
-  /* uint32_t           key_action6                  */ out << bits(my.t.key_action6                  );
-  /* uint32_t           key_action7                  */ out << bits(my.t.key_action7                  );
-  /* uint32_t           key_action8                  */ out << bits(my.t.key_action8                  );
-  /* uint32_t           key_action9                  */ out << bits(my.t.key_action9                  );
-  /* uint32_t           key_attack                   */ out << bits(my.t.key_attack                   );
-  /* uint32_t           key_console                  */ out << bits(my.t.key_console                  );
-  /* uint32_t           key_drop                     */ out << bits(my.t.key_drop                     );
-  /* uint32_t           key_eat                      */ out << bits(my.t.key_eat                      );
-  /* uint32_t           key_help                     */ out << bits(my.t.key_help                     );
-  /* uint32_t           key_inventory                */ out << bits(my.t.key_inventory                );
-  /* uint32_t           key_jump                     */ out << bits(my.t.key_jump                     );
-  /* uint32_t           key_load                     */ out << bits(my.t.key_load                     );
-  /* uint32_t           key_map_down                 */ out << bits(my.t.key_map_down                 );
-  /* uint32_t           key_map_left                 */ out << bits(my.t.key_map_left                 );
-  /* uint32_t           key_map_right                */ out << bits(my.t.key_map_right                );
-  /* uint32_t           key_map_up                   */ out << bits(my.t.key_map_up                   );
-  /* uint32_t           key_move_down                */ out << bits(my.t.key_move_down                );
-  /* uint32_t           key_move_left                */ out << bits(my.t.key_move_left                );
-  /* uint32_t           key_move_right               */ out << bits(my.t.key_move_right               );
-  /* uint32_t           key_move_up                  */ out << bits(my.t.key_move_up                  );
-  /* uint32_t           key_quit                     */ out << bits(my.t.key_quit                     );
-  /* uint32_t           key_robot_mode               */ out << bits(my.t.key_robot_mode               );
-  /* uint32_t           key_save                     */ out << bits(my.t.key_save                     );
-  /* uint32_t           key_screenshot               */ out << bits(my.t.key_screenshot               );
-  /* uint32_t           key_throw                    */ out << bits(my.t.key_throw                    );
-  /* uint32_t           key_unused4                  */ out << bits(my.t.key_unused4                  );
-  /* uint32_t           key_unused5                  */ out << bits(my.t.key_unused5                  );
-  /* uint32_t           key_use                      */ out << bits(my.t.key_use                      );
-  /* uint32_t           key_wait_or_collect          */ out << bits(my.t.key_wait_or_collect          );
-  /* uint32_t           key_zoom_in                  */ out << bits(my.t.key_zoom_in                  );
-  /* uint32_t           key_zoom_out                 */ out << bits(my.t.key_zoom_out                 );
-  /* uint32_t           music_volume                 */ out << bits(my.t.music_volume                 );
-  /* uint32_t           sdl_delay                    */ out << bits(my.t.sdl_delay                    );
-  /* uint32_t           sound_volume                 */ out << bits(my.t.sound_volume                 );
+  /* float              game_pix_scale_height        */ out << bits(my.t.game_pix_scale_height);
+  /* float              game_pix_scale_width         */ out << bits(my.t.game_pix_scale_width);
+  /* float              game_pix_zoom                */ out << bits(my.t.game_pix_zoom);
+  /* float              one_pixel_height             */ out << bits(my.t.one_pixel_height);
+  /* float              one_pixel_width              */ out << bits(my.t.one_pixel_width);
+  /* float              tile_pix_height              */ out << bits(my.t.tile_pix_height);
+  /* float              tile_pix_width               */ out << bits(my.t.tile_pix_width);
+  /* float              tile_pixel_height            */ out << bits(my.t.tile_pixel_height);
+  /* float              tile_pixel_width             */ out << bits(my.t.tile_pixel_width);
+  /* float              ui_pix_scale_height          */ out << bits(my.t.ui_pix_scale_height);
+  /* float              ui_pix_scale_width           */ out << bits(my.t.ui_pix_scale_width);
+  /* float              ui_pix_zoom                  */ out << bits(my.t.ui_pix_zoom);
+  /* float              video_w_h_ratio              */ out << bits(my.t.video_w_h_ratio);
+  /* int                debug_mode                   */ out << bits(my.t.debug_mode);
+  /* int                fps_counter                  */ out << bits(my.t.fps_counter);
+  /* int                gfx_allow_highdpi            */ out << bits(my.t.gfx_allow_highdpi);
+  /* int                gfx_borderless               */ out << bits(my.t.gfx_borderless);
+  /* int                gfx_fullscreen               */ out << bits(my.t.gfx_fullscreen);
+  /* int                gfx_fullscreen_desktop       */ out << bits(my.t.gfx_fullscreen_desktop);
+  /* int                gfx_inverted                 */ out << bits(my.t.gfx_inverted);
+  /* int                gfx_minimap                  */ out << bits(my.t.gfx_minimap);
+  /* int                gfx_show_hidden              */ out << bits(my.t.gfx_show_hidden);
+  /* int                gfx_vsync_enable             */ out << bits(my.t.gfx_vsync_enable);
+  /* int                tile_height                  */ out << bits(my.t.tile_height);
+  /* int                tile_width                   */ out << bits(my.t.tile_width);
+  /* int32_t            config_pix_height            */ out << bits(my.t.config_pix_height);
+  /* int32_t            config_pix_width             */ out << bits(my.t.config_pix_width);
+  /* int32_t            game_pix_height              */ out << bits(my.t.game_pix_height);
+  /* int32_t            game_pix_width               */ out << bits(my.t.game_pix_width);
+  /* int32_t            ui_pix_height                */ out << bits(my.t.ui_pix_height);
+  /* int32_t            ui_pix_width                 */ out << bits(my.t.ui_pix_width);
+  /* int32_t            window_pix_height            */ out << bits(my.t.window_pix_height);
+  /* int32_t            window_pix_width             */ out << bits(my.t.window_pix_width);
+  /* uint16_y           ascii_gl_height              */ out << bits(my.t.ascii_gl_height);
+  /* uint16_y           ascii_gl_width               */ out << bits(my.t.ascii_gl_width);
+  /* uint32_t           key_action0                  */ out << bits(my.t.key_action0);
+  /* uint32_t           key_action1                  */ out << bits(my.t.key_action1);
+  /* uint32_t           key_action2                  */ out << bits(my.t.key_action2);
+  /* uint32_t           key_action3                  */ out << bits(my.t.key_action3);
+  /* uint32_t           key_action4                  */ out << bits(my.t.key_action4);
+  /* uint32_t           key_action5                  */ out << bits(my.t.key_action5);
+  /* uint32_t           key_action6                  */ out << bits(my.t.key_action6);
+  /* uint32_t           key_action7                  */ out << bits(my.t.key_action7);
+  /* uint32_t           key_action8                  */ out << bits(my.t.key_action8);
+  /* uint32_t           key_action9                  */ out << bits(my.t.key_action9);
+  /* uint32_t           key_attack                   */ out << bits(my.t.key_attack);
+  /* uint32_t           key_console                  */ out << bits(my.t.key_console);
+  /* uint32_t           key_drop                     */ out << bits(my.t.key_drop);
+  /* uint32_t           key_eat                      */ out << bits(my.t.key_eat);
+  /* uint32_t           key_help                     */ out << bits(my.t.key_help);
+  /* uint32_t           key_inventory                */ out << bits(my.t.key_inventory);
+  /* uint32_t           key_jump                     */ out << bits(my.t.key_jump);
+  /* uint32_t           key_load                     */ out << bits(my.t.key_load);
+  /* uint32_t           key_map_down                 */ out << bits(my.t.key_map_down);
+  /* uint32_t           key_map_left                 */ out << bits(my.t.key_map_left);
+  /* uint32_t           key_map_right                */ out << bits(my.t.key_map_right);
+  /* uint32_t           key_map_up                   */ out << bits(my.t.key_map_up);
+  /* uint32_t           key_move_down                */ out << bits(my.t.key_move_down);
+  /* uint32_t           key_move_left                */ out << bits(my.t.key_move_left);
+  /* uint32_t           key_move_right               */ out << bits(my.t.key_move_right);
+  /* uint32_t           key_move_up                  */ out << bits(my.t.key_move_up);
+  /* uint32_t           key_quit                     */ out << bits(my.t.key_quit);
+  /* uint32_t           key_robot_mode               */ out << bits(my.t.key_robot_mode);
+  /* uint32_t           key_save                     */ out << bits(my.t.key_save);
+  /* uint32_t           key_screenshot               */ out << bits(my.t.key_screenshot);
+  /* uint32_t           key_throw                    */ out << bits(my.t.key_throw);
+  /* uint32_t           key_unused4                  */ out << bits(my.t.key_unused4);
+  /* uint32_t           key_unused5                  */ out << bits(my.t.key_unused5);
+  /* uint32_t           key_use                      */ out << bits(my.t.key_use);
+  /* uint32_t           key_wait_or_collect          */ out << bits(my.t.key_wait_or_collect);
+  /* uint32_t           key_zoom_in                  */ out << bits(my.t.key_zoom_in);
+  /* uint32_t           key_zoom_out                 */ out << bits(my.t.key_zoom_out);
+  /* uint32_t           music_volume                 */ out << bits(my.t.music_volume);
+  /* uint32_t           sdl_delay                    */ out << bits(my.t.sdl_delay);
+  /* uint32_t           sound_volume                 */ out << bits(my.t.sound_volume);
   /* std::string        player name                  */ out << bits(g_opt_player_name);
   /* std::string        seed name                    */ out << bits(g_opt_seed_name);
 
@@ -597,9 +682,8 @@ std::ostream& operator<<(std::ostream &out, Bits<const Config & > const my)
   return (out);
 }
 
-std::ostream& operator<<(std::ostream &out,
-             Bits<const class Game & > const my)
-{ TRACE_AND_INDENT();
+std::ostream &operator<<(std::ostream &out, Bits<const class Game &> const my) {
+  TRACE_AND_INDENT();
   uint32_t header_size = sizeof(Game);
   out << bits(my.t.version);
   out << bits(header_size);
@@ -634,8 +718,8 @@ std::ostream& operator<<(std::ostream &out,
   return (out);
 }
 
-bool Game::save (std::string file_to_save)
-{ TRACE_AND_INDENT();
+bool Game::save(std::string file_to_save) {
+  TRACE_AND_INDENT();
   std::stringstream s(std::ios::in | std::ios::out | std::ios::binary);
 
   const class Game &c = *this;
@@ -667,13 +751,10 @@ bool Game::save (std::string file_to_save)
   HEAP_ALLOC(wrkmem, LZO1X_1_MEM_COMPRESS);
 
   lzo_uint compressed_len = 0;
-  int r = lzo1x_1_compress((lzo_bytep)uncompressed, uncompressed_len,
-               (lzo_bytep)compressed, &compressed_len, wrkmem);
+  int r = lzo1x_1_compress((lzo_bytep) uncompressed, uncompressed_len, (lzo_bytep) compressed, &compressed_len, wrkmem);
   if (r == LZO_E_OK) {
-    LOG("DGN: Saved as %s, compress %luMb -> %luMb",
-      file_to_save.c_str(),
-      (unsigned long) uncompressed_len / (1024 * 1024),
-      (unsigned long) compressed_len / (1024 * 1024));
+    LOG("DGN: Saved as %s, compress %luMb -> %luMb", file_to_save.c_str(),
+        (unsigned long) uncompressed_len / (1024 * 1024), (unsigned long) compressed_len / (1024 * 1024));
   } else {
     ERR("LZO internal error - compression failed: %d", r);
     return false;
@@ -688,8 +769,7 @@ bool Game::save (std::string file_to_save)
     memcpy(tmp_compressed, compressed, compressed_len);
 
     lzo_uint new_len = 0;
-    int r = lzo1x_decompress((lzo_bytep)tmp_compressed, compressed_len,
-                 (lzo_bytep)tmp_uncompressed, &new_len, NULL);
+    int r = lzo1x_decompress((lzo_bytep) tmp_compressed, compressed_len, (lzo_bytep) tmp_uncompressed, &new_len, NULL);
     if (r == LZO_E_OK && new_len == uncompressed_len) {
       if (memcmp(tmp_uncompressed, uncompressed, uncompressed_len)) {
         ERR("LZO compress-decompress failed");
@@ -714,11 +794,11 @@ bool Game::save (std::string file_to_save)
   //
   // Save the post compress buffer
   //
-  uint32_t cs = csum((char*)uncompressed, uncompressed_len);
+  uint32_t cs = csum((char *) uncompressed, uncompressed_len);
 
   auto ofile = fopen(file_to_save.c_str(), "wb");
-  fwrite((char*) &uncompressed_len, sizeof(uncompressed_len), 1, ofile);
-  fwrite((char*) &cs, sizeof(cs), 1, ofile);
+  fwrite((char *) &uncompressed_len, sizeof(uncompressed_len), 1, ofile);
+  fwrite((char *) &cs, sizeof(cs), 1, ofile);
   fwrite(compressed, compressed_len, 1, ofile);
   fclose(ofile);
 
@@ -729,9 +809,8 @@ bool Game::save (std::string file_to_save)
   return true;
 }
 
-void
-Game::save (void)
-{ TRACE_AND_INDENT();
+void Game::save(void) {
+  TRACE_AND_INDENT();
   LOG("-");
   CON("DGN: Saving %s", save_file.c_str());
   LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
@@ -745,9 +824,8 @@ Game::save (void)
   LOG("-");
 }
 
-void
-Game::save (int slot)
-{ TRACE_AND_INDENT();
+void Game::save(int slot) {
+  TRACE_AND_INDENT();
   if (slot < 0) {
     return;
   }
@@ -760,7 +838,7 @@ Game::save (int slot)
     for (auto y = 0; y < LEVELS_DOWN; ++y) {
       for (auto z = 0; z < LEVELS_DEEP; ++z) {
         point3d p(x, y, z);
-        auto l = get(game->world.levels, x, y, z);
+        auto    l = get(game->world.levels, x, y, z);
         if (l) {
           l->things_gc_force();
         }
@@ -785,14 +863,13 @@ Game::save (int slot)
   TOPCON("Saved the game to %s.", save_file.c_str());
 }
 
-void
-Game::save_snapshot (void)
-{ TRACE_AND_INDENT();
+void Game::save_snapshot(void) {
+  TRACE_AND_INDENT();
   for (auto x = 0; x < LEVELS_ACROSS; ++x) {
     for (auto y = 0; y < LEVELS_DOWN; ++y) {
       for (auto z = 0; z < LEVELS_DEEP; ++z) {
         point3d p(x, y, z);
-        auto l = get(game->world.levels, x, y, z);
+        auto    l = get(game->world.levels, x, y, z);
         if (l) {
           l->things_gc_force();
         }
@@ -817,72 +894,77 @@ Game::save_snapshot (void)
   TOPCON("Saved the game to %s.", save_file.c_str());
 }
 
-void
-Game::save_config (void)
-{ TRACE_AND_INDENT();
-  auto filename = saved_dir + "config";
+void Game::save_config(void) {
+  TRACE_AND_INDENT();
+  auto          filename = saved_dir + "config";
   std::ofstream out(filename, std::ios::binary);
   const Config &c = game->config;
   out << bits(c);
   game->config.dump("WROTE:");
 }
 
-void wid_save_destroy (void)
-{ TRACE_AND_INDENT();
+void wid_save_destroy(void) {
+  TRACE_AND_INDENT();
   delete wid_save;
   wid_save = nullptr;
   game->change_state(Game::STATE_NORMAL);
 }
 
-static uint8_t wid_save_key_up (Widp w, const struct SDL_Keysym *key)
-{ TRACE_AND_INDENT();
+static uint8_t wid_save_key_up(Widp w, const struct SDL_Keysym *key) {
+  TRACE_AND_INDENT();
   if (sdl_shift_held) {
-    if (key->scancode == (SDL_Scancode)game->config.key_console) {
+    if (key->scancode == (SDL_Scancode) game->config.key_console) {
       return false;
     }
   }
 
   switch (key->mod) {
-    case KMOD_LCTRL:
-    case KMOD_RCTRL:
-    default:
-    switch (key->sym) {
-      default: { TRACE_AND_INDENT();
-        auto c = wid_event_to_char(key);
-        switch (c) {
-          case '0':
-          case '1':
-          case '2':
-          case '3':
-          case '4':
-          case '5':
-          case '6':
-          case '7':
-          case '8':
-          case '9': { TRACE_AND_INDENT();
-            int slot = c - '0';
-            game->save(slot);
-            wid_save_destroy();
-            return true;
+    case KMOD_LCTRL :
+    case KMOD_RCTRL :
+    default :
+      switch (key->sym) {
+        default :
+          {
+            TRACE_AND_INDENT();
+            auto c = wid_event_to_char(key);
+            switch (c) {
+              case '0' :
+              case '1' :
+              case '2' :
+              case '3' :
+              case '4' :
+              case '5' :
+              case '6' :
+              case '7' :
+              case '8' :
+              case '9' :
+                {
+                  TRACE_AND_INDENT();
+                  int slot = c - '0';
+                  game->save(slot);
+                  wid_save_destroy();
+                  return true;
+                }
+              case 'b' :
+              case SDLK_ESCAPE :
+                {
+                  TRACE_AND_INDENT();
+                  CON("PLAYER: Save game cancelled");
+                  wid_save_destroy();
+                  return true;
+                }
+            }
           }
-          case 'b':
-          case SDLK_ESCAPE: { TRACE_AND_INDENT();
-            CON("PLAYER: Save game cancelled");
-            wid_save_destroy();
-            return true;
-          }
-        }
       }
-    }
   }
 
   return true;
 }
 
-static uint8_t wid_save_key_down (Widp w, const struct SDL_Keysym *key)
-{ TRACE_AND_INDENT();
+static uint8_t wid_save_key_down(Widp w, const struct SDL_Keysym *key) {
+  TRACE_AND_INDENT();
   if (sdl_shift_held) {
-    if (key->scancode == (SDL_Scancode)game->config.key_console) {
+    if (key->scancode == (SDL_Scancode) game->config.key_console) {
       return false;
     }
   }
@@ -890,28 +972,26 @@ static uint8_t wid_save_key_down (Widp w, const struct SDL_Keysym *key)
   return true;
 }
 
-static uint8_t wid_save_mouse_up (Widp w, int32_t x, int32_t y, uint32_t button)
-{ TRACE_AND_INDENT();
+static uint8_t wid_save_mouse_up(Widp w, int32_t x, int32_t y, uint32_t button) {
+  TRACE_AND_INDENT();
   auto slot = wid_get_int_context(w);
   game->save(slot);
   wid_save_destroy();
   return true;
 }
 
-void Game::save_select (void)
-{ TRACE_AND_INDENT();
+void Game::save_select(void) {
+  TRACE_AND_INDENT();
   if (wid_save) {
     return;
   }
 
-  auto m = TERM_WIDTH / 2;
-  point tl = make_point(m - 50, UI_TOPCON_VIS_HEIGHT + 2);
-  point br = make_point(m + 50, tl.y + 52);
-  auto width = br.x - tl.x;
+  auto  m     = TERM_WIDTH / 2;
+  point tl    = make_point(m - 50, UI_TOPCON_VIS_HEIGHT + 2);
+  point br    = make_point(m + 50, tl.y + 52);
+  auto  width = br.x - tl.x;
 
-  wid_save = new WidPopup("Game save", tl, br,
-              tile_find_mand("save"), "",
-              false, false);
+  wid_save = new WidPopup("Game save", tl, br, tile_find_mand("save"), "", false, false);
   wid_set_on_key_up(wid_save->wid_popup_container, wid_save_key_up);
   wid_set_on_key_down(wid_save->wid_popup_container, wid_save_key_down);
 
@@ -929,13 +1009,13 @@ void Game::save_select (void)
       tmp_file = saved_dir + "saved-snapshot";
     }
 
-    auto p = wid_save->wid_text_area->wid_text_area;
-    auto w = wid_new_square_button(p, "save slot");
+    auto  p  = wid_save->wid_text_area->wid_text_area;
+    auto  w  = wid_new_square_button(p, "save slot");
     point tl = make_point(0, y_at);
     point br = make_point(width - 2, y_at);
 
     std::string s = std::to_string(slot) + " ";
-    if (!load(tmp_file, tmp)) {
+    if (! load(tmp_file, tmp)) {
       if (slot == UI_WID_SAVE_SLOTS - 1) {
         s += "<no snapshot>";
       } else {

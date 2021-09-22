@@ -5,20 +5,18 @@
 //
 
 #include <strings.h> // do not remove
-#include <string.h> // do not remove
-#include <time.h> // do not remove
-#include <unistd.h> // do not remove
-#include <signal.h> // dirname
+#include <string.h>  // do not remove
+#include <time.h>    // do not remove
+#include <unistd.h>  // do not remove
+#include <signal.h>  // dirname
 #include "my_sys.h"
 #include "my_game.h"
 #include "my_globals.h"
 #include "my_traceback.h"
 
-void callstack_dump (void)
-{ TRACE_AND_INDENT();
-  IF_NODEBUG2 {
-    return;
-  }
+void callstack_dump(void) {
+  TRACE_AND_INDENT();
+  IF_NODEBUG2 { return; }
 
   static int done;
   if (done) {
@@ -69,15 +67,13 @@ void callstack_dump (void)
 //
 // Should work on linux only.
 //
-static void
-debug_crash_handler(int sig)
-{
+static void debug_crash_handler(int sig) {
   fprintf(stderr, "debug_crash_handler: Error: Signal %d:\n", sig);
 
   std::string pid(std::to_string(getpid()));
 
   const size_t max_path = PATH_MAX + 1;
-  char prog_name[max_path];
+  char         prog_name[max_path];
 
 #if defined __APPLE__
   uint32_t bufsize = max_path;
@@ -92,9 +88,9 @@ debug_crash_handler(int sig)
     return;
   }
 
-  if ((size_t)ret >= max_path) {
+  if ((size_t) ret >= max_path) {
     ERR("Debug_crash_handler: Symlink too long");
-  return;
+    return;
   }
 #else
   return;
@@ -108,15 +104,14 @@ debug_crash_handler(int sig)
 #endif
 
   auto child = fork();
-  if (!child) {
+  if (! child) {
     //
     // Start GDB
     //
 #ifdef __APPLE__
     execl("/usr/bin/lldb", "lldb", "-p", pid.c_str(), nullptr);
 #else
-    execl("/usr/bin/gdb", "gdb", "--batch", "-n",
-        "-ex", "thread apply all bt", prog_name, pid.c_str(), nullptr);
+    execl("/usr/bin/gdb", "gdb", "--batch", "-n", "-ex", "thread apply all bt", prog_name, pid.c_str(), nullptr);
 #endif
     assert(false && "Debugger failed to exec");
   } else {
@@ -127,8 +122,8 @@ debug_crash_handler(int sig)
   }
 }
 
-void segv_handler (int sig)
-{ TRACE_AND_INDENT();
+void segv_handler(int sig) {
+  TRACE_AND_INDENT();
   static int crashed;
 
   if (crashed) {
@@ -149,8 +144,8 @@ void segv_handler (int sig)
 #endif
 }
 
-void ctrlc_handler (int sig)
-{ TRACE_AND_INDENT();
+void ctrlc_handler(int sig) {
+  TRACE_AND_INDENT();
   fprintf(MY_STDERR, "Interrupted!!!");
   traceback_dump();
   DIE_CLEAN("Interrupted");

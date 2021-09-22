@@ -17,30 +17,23 @@
 #include "my_array_bounds_check.h"
 #include "my_ptrcheck.h"
 
-void Thing::dmap_modify_terrain_cost (point p, uint8_t *d)
-{ TRACE_AND_INDENT();
+void Thing::dmap_modify_terrain_cost(point p, uint8_t *d) {
+  TRACE_AND_INDENT();
   int pref = *d;
 
   if (collision_obstacle(p)) {
     pref++;
   }
 
-  std::vector<std::pair<Thingp, int> > possible;
+  std::vector<std::pair<Thingp, int>> possible;
 
   {
     static const std::vector<point> all_deltas = {
-      point(-1, -1),
-      point( 1, -1),
-      point(-1,  1),
-      point( 1,  1),
-      point(0, 0),
-      point(0, -1),
-      point(-1, 0),
-      point(1, 0),
-      point(0, 1),
+        point(-1, -1), point(1, -1), point(-1, 1), point(1, 1), point(0, 0),
+        point(0, -1),  point(-1, 0), point(1, 0),  point(0, 1),
     };
 
-    for (const auto& d : all_deltas) {
+    for (const auto &d : all_deltas) {
       auto x = p.x + d.x;
       auto y = p.y + d.y;
 
@@ -61,8 +54,8 @@ void Thing::dmap_modify_terrain_cost (point p, uint8_t *d)
   *d = (uint8_t) pref;
 }
 
-uint8_t Thing::get_terrain_cost (point p)
-{ TRACE_AND_INDENT();
+uint8_t Thing::get_terrain_cost(point p) {
+  TRACE_AND_INDENT();
   uint8_t pref = 0;
 
   dmap_modify_terrain_cost(p, &pref);
@@ -70,8 +63,8 @@ uint8_t Thing::get_terrain_cost (point p)
   return (uint8_t) pref;
 }
 
-bool Thing::will_prefer_terrain (const Thingp itp)
-{ TRACE_AND_INDENT();
+bool Thing::will_prefer_terrain(const Thingp itp) {
+  TRACE_AND_INDENT();
   auto me = tp();
   auto it = itp->tp();
 

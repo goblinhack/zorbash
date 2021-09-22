@@ -21,8 +21,8 @@
 //
 // Python callback upon being enchant
 //
-void Thing::on_enchant (void)
-{ TRACE_AND_INDENT();
+void Thing::on_enchant(void) {
+  TRACE_AND_INDENT();
   auto on_enchant = tp()->on_enchant_do();
   if (std::empty(on_enchant)) {
     return;
@@ -30,26 +30,23 @@ void Thing::on_enchant (void)
 
   auto t = split_tokens(on_enchant, '.');
   if (t.size() == 2) {
-    auto mod = t[0];
-    auto fn = t[1];
+    auto        mod   = t[0];
+    auto        fn    = t[1];
     std::size_t found = fn.find("()");
     if (found != std::string::npos) {
       fn = fn.replace(found, 2, "");
     }
 
-    dbg("Call %s.%s(%s)", mod.c_str(), fn.c_str(),
-      to_string().c_str());
+    dbg("Call %s.%s(%s)", mod.c_str(), fn.c_str(), to_string().c_str());
 
-    py_call_void_fn(mod.c_str(), fn.c_str(), id.id,
-            (unsigned int)mid_at.x, (unsigned int)mid_at.y);
+    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) mid_at.x, (unsigned int) mid_at.y);
   } else {
-    ERR("Bad on_enchant call [%s] expected mod:function, got %d elems",
-      on_enchant.c_str(), (int)on_enchant.size());
+    ERR("Bad on_enchant call [%s] expected mod:function, got %d elems", on_enchant.c_str(), (int) on_enchant.size());
   }
 }
 
-bool Thing::enchant (Thingp what)
-{ TRACE_AND_INDENT();
+bool Thing::enchant(Thingp what) {
+  TRACE_AND_INDENT();
   TOPCON("You enchant %s.", what->text_the().c_str());
   what->on_enchant();
   what->incr_enchant(1);
@@ -60,7 +57,7 @@ bool Thing::enchant (Thingp what)
   auto found = false;
   for (auto id : monstp->carrying) {
     auto t = level->thing_find(id);
-    if (!t) {
+    if (! t) {
       continue;
     }
     if (t->is_enchantstone()) {
@@ -69,16 +66,16 @@ bool Thing::enchant (Thingp what)
       break;
     }
   }
-  if (!found) {
+  if (! found) {
     err("no enchantstone found");
   }
 
   return true;
 }
 
-void Thing::enchant_randomly (void)
-{ TRACE_AND_INDENT();
-  if (!is_enchantable()) {
+void Thing::enchant_randomly(void) {
+  TRACE_AND_INDENT();
+  if (! is_enchantable()) {
     return;
   }
 
@@ -91,15 +88,15 @@ void Thing::enchant_randomly (void)
   }
 }
 
-int Thing::get_enchantstone_count (void)
-{ TRACE_AND_INDENT();
+int Thing::get_enchantstone_count(void) {
+  TRACE_AND_INDENT();
   int v = 0;
-  for (const auto& item : monstp->carrying) {
+  for (const auto &item : monstp->carrying) {
     auto t = level->thing_find(item.id);
-    if (!t) {
+    if (! t) {
       continue;
     }
-    if (!t->is_enchantstone()) {
+    if (! t->is_enchantstone()) {
       continue;
     }
     log("Found an enchantstone: %s", t->to_string().c_str());
@@ -108,11 +105,11 @@ int Thing::get_enchantstone_count (void)
   return v;
 }
 
-bool Thing::can_enchant_something (void)
-{ TRACE_AND_INDENT();
-  for (const auto& item : monstp->carrying) {
+bool Thing::can_enchant_something(void) {
+  TRACE_AND_INDENT();
+  for (const auto &item : monstp->carrying) {
     auto t = level->thing_find(item.id);
-    if (!t) {
+    if (! t) {
       continue;
     }
     if (t->is_enchantable()) {
@@ -123,14 +120,14 @@ bool Thing::can_enchant_something (void)
   return false;
 }
 
-bool Thing::enchant_random_item (void)
-{ TRACE_AND_INDENT();
-  for (const auto& item : monstp->carrying) {
+bool Thing::enchant_random_item(void) {
+  TRACE_AND_INDENT();
+  for (const auto &item : monstp->carrying) {
     auto t = level->thing_find(item.id);
-    if (!t) {
+    if (! t) {
       continue;
     }
-    if (!t->is_enchantable()) {
+    if (! t->is_enchantable()) {
       continue;
     }
     log("Enchant this randomly: %s", t->to_string().c_str());
