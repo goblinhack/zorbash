@@ -326,10 +326,6 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         wid_thing_info_fini(); // To remove bag or other info
         level->skillbox_chosen(9);
         wid_rightbar_init();
-        auto what = level->skillbox_get();
-        if (what) {
-          game->wid_items_options_create(w, what, true /* came from inventory */);
-        }
         return true;
       }
       if (key->scancode == (SDL_Scancode) game->config.key_action1) {
@@ -339,10 +335,6 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         wid_thing_info_fini(); // To remove bag or other info
         level->skillbox_chosen(0);
         wid_rightbar_init();
-        auto what = level->skillbox_get();
-        if (what) {
-          game->wid_items_options_create(w, what, true /* came from inventory */);
-        }
         return true;
       }
       if (key->scancode == (SDL_Scancode) game->config.key_action2) {
@@ -352,10 +344,6 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         wid_thing_info_fini(); // To remove bag or other info
         level->skillbox_chosen(1);
         wid_rightbar_init();
-        auto what = level->skillbox_get();
-        if (what) {
-          game->wid_items_options_create(w, what, true /* came from inventory */);
-        }
         return true;
       }
       if (key->scancode == (SDL_Scancode) game->config.key_action3) {
@@ -365,10 +353,6 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         wid_thing_info_fini(); // To remove bag or other info
         level->skillbox_chosen(2);
         wid_rightbar_init();
-        auto what = level->skillbox_get();
-        if (what) {
-          game->wid_items_options_create(w, what, true /* came from inventory */);
-        }
         return true;
       }
       if (key->scancode == (SDL_Scancode) game->config.key_action4) {
@@ -378,10 +362,6 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         wid_thing_info_fini(); // To remove bag or other info
         level->skillbox_chosen(3);
         wid_rightbar_init();
-        auto what = level->skillbox_get();
-        if (what) {
-          game->wid_items_options_create(w, what, true /* came from inventory */);
-        }
         return true;
       }
       if (key->scancode == (SDL_Scancode) game->config.key_action5) {
@@ -391,10 +371,6 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         wid_thing_info_fini(); // To remove bag or other info
         level->skillbox_chosen(4);
         wid_rightbar_init();
-        auto what = level->skillbox_get();
-        if (what) {
-          game->wid_items_options_create(w, what, true /* came from inventory */);
-        }
         return true;
       }
       if (key->scancode == (SDL_Scancode) game->config.key_action6) {
@@ -404,10 +380,6 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         wid_thing_info_fini(); // To remove bag or other info
         level->skillbox_chosen(5);
         wid_rightbar_init();
-        auto what = level->skillbox_get();
-        if (what) {
-          game->wid_items_options_create(w, what, true /* came from inventory */);
-        }
         return true;
       }
       if (key->scancode == (SDL_Scancode) game->config.key_action7) {
@@ -417,10 +389,6 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         wid_thing_info_fini(); // To remove bag or other info
         level->skillbox_chosen(6);
         wid_rightbar_init();
-        auto what = level->skillbox_get();
-        if (what) {
-          game->wid_items_options_create(w, what, true /* came from inventory */);
-        }
         return true;
       }
       if (key->scancode == (SDL_Scancode) game->config.key_action8) {
@@ -430,10 +398,6 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         wid_thing_info_fini(); // To remove bag or other info
         level->skillbox_chosen(7);
         wid_rightbar_init();
-        auto what = level->skillbox_get();
-        if (what) {
-          game->wid_items_options_create(w, what, true /* came from inventory */);
-        }
         return true;
       }
       if (key->scancode == (SDL_Scancode) game->config.key_action9) {
@@ -443,10 +407,6 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         wid_thing_info_fini(); // To remove bag or other info
         level->skillbox_chosen(8);
         wid_rightbar_init();
-        auto what = level->skillbox_get();
-        if (what) {
-          game->wid_items_options_create(w, what, true /* came from inventory */);
-        }
         return true;
       }
     } else {

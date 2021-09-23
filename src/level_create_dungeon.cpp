@@ -409,6 +409,12 @@ bool Level::create_dungeon(point3d at, int seed)
               auto f = thing_new("enchantstone", fpoint(x, y));
               t->carry(f);
             }
+
+            {
+              auto f = thing_new("skillstone", fpoint(x, y));
+              t->carry(f);
+            }
+
 #if 0
             auto w2 = thing_new("sword_short_basic", fpoint(x, y));
             t->carry(w2);
@@ -431,11 +437,6 @@ bool Level::create_dungeon(point3d at, int seed)
             {
               auto b = thing_new("chest1", fpoint(x, y));
               t->carry(b);
-            }
-
-            {
-              auto f = thing_new("skillstone", fpoint(x, y));
-              t->carry(f);
             }
 
             {
