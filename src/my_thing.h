@@ -284,6 +284,7 @@ public:
   bool eat_something(void);
   bool enchant(Thingp);
   bool enchant_random_item(void);
+  bool learn_random_skill(void);
   bool fall(void);
   bool fall_to_next_level(void);
   bool fire_at_and_choose_target(Thingp);
@@ -579,6 +580,8 @@ public:
   int get_enchant(void) const;
   int get_enchant_max(void) const;
   int get_enchantstone_count(void);
+  int get_skillstone_count(void);
+  bool can_learn_something(void);
   int get_gold(void) const;
   int get_gold_value(void) const;
   int get_group (void);

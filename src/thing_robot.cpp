@@ -1531,9 +1531,16 @@ void Thing::robot_tick(void)
               (int) mid_at.y, get_health(), get_health_max(), threat->to_string().c_str());
           BOTCON("Robot is facing a threat");
         } else {
+          //
+          // Not under threat, so we can think about doing some other
+          // housecleaning tasks.
+          //
           CON("Robot: @(%s, %d,%d %d/%dh) Is idle, look for something to do", level->to_string().c_str(),
               (int) mid_at.x, (int) mid_at.y, get_health(), get_health_max());
 
+          //
+          // Can we enchant something?
+          //
           if (get_enchantstone_count() && can_enchant_something()) {
             CON("Robot: @(%s, %d,%d %d/%dh) Robot can enchant something", level->to_string().c_str(), (int) mid_at.x,
                 (int) mid_at.y, get_health(), get_health_max());
@@ -1543,6 +1550,21 @@ void Thing::robot_tick(void)
             return;
           }
 
+          //
+          // Can we learn some skills?
+          //
+          if (get_skillstone_count() && can_learn_something()) {
+            CON("Robot: @(%s, %d,%d %d/%dh) Robot can learn something", level->to_string().c_str(), (int) mid_at.x,
+                (int) mid_at.y, get_health(), get_health_max());
+            BOTCON("Robot can learn something");
+            game->tick_begin("Robot can learn something");
+            robot_change_state(ROBOT_STATE_USING_SKILLSTONE, "can learn something");
+            return;
+          }
+
+          //
+          // Are we tired and need to rest?
+          //
           if (get_stamina() < get_stamina_max() / 3) {
             CON("Robot: @(%s, %d,%d %d/%dh) Robot needs to rest, low on stamina", level->to_string().c_str(),
                 (int) mid_at.x, (int) mid_at.y, get_health(), get_health_max());
@@ -1552,6 +1574,9 @@ void Thing::robot_tick(void)
             return;
           }
 
+          //
+          // Can we switch to a better weapon?
+          //
           Thingp best_weapon;
           get_carried_weapon_highest_value(&best_weapon);
           if (best_weapon && (best_weapon != weapon_get())) {
@@ -1566,6 +1591,9 @@ void Thing::robot_tick(void)
                 (int) mid_at.x, (int) mid_at.y, get_health(), get_health_max(), best_weapon->to_string().c_str());
           }
 
+          //
+          // Look around for something nearby to do; like collect an item.
+          //
           CON("Robot: @(%s, %d,%d %d/%dh) Is idle, look for nearby goal", level->to_string().c_str(), (int) mid_at.x,
               (int) mid_at.y, get_health(), get_health_max());
 
@@ -1574,6 +1602,10 @@ void Thing::robot_tick(void)
           }
         }
 
+        //
+        // Look for goals. Each search type expands the scope of what we look at
+        // until at the end, we end up looking for the exit.
+        //
         for (int search_type = 0; search_type < SEARCH_TYPE_MAX; search_type++) {
           if (search_type > 0) {
             CON("Robot: @(%s, %d,%d %d/%dh) Try to find goals, search-type %d", level->to_string().c_str(),
@@ -1590,10 +1622,19 @@ void Thing::robot_tick(void)
           }
         }
 
+        //
+        // If nothing to do, might as well rest. If there is a point.
+        //
         if ((get_health() >= (get_health_max() / 4) * 3) && (get_stamina() >= (get_stamina_max() / 4) * 3)) {
+          //
+          // What is the point of it all?
+          //
           BOTCON("Robot has nothing to do at all");
           wid_actionbar_robot_mode_off();
         } else {
+          //
+          // Rest.
+          //
           BOTCON("Robot has nothing to do, rest");
           game->tick_begin("nothing to do, rest");
           robot_change_state(ROBOT_STATE_RESTING, "nothing to do, rest");
@@ -1618,6 +1659,9 @@ void Thing::robot_tick(void)
           return;
         }
 
+        //
+        // Finished the move?
+        //
         if (monstp->move_path.empty()) {
           CON("Robot: @(%s, %d,%d %d/%dh) Robot: Move finished", level->to_string().c_str(), (int) mid_at.x,
               (int) mid_at.y, get_health(), get_health_max());
@@ -1626,18 +1670,23 @@ void Thing::robot_tick(void)
           robot_change_state(ROBOT_STATE_IDLE, "move finished");
           wid_actionbar_init();
           return;
-        } else {
-          CON("Robot: @(%s, %d,%d %d/%dh) Moving", level->to_string().c_str(), (int) mid_at.x, (int) mid_at.y,
-              get_health(), get_health_max());
-          game->tick_begin("Robot move");
-          return;
         }
+
+        //
+        // Keep on moving.
+        //
+        CON("Robot: @(%s, %d,%d %d/%dh) Moving", level->to_string().c_str(), (int) mid_at.x, (int) mid_at.y,
+            get_health(), get_health_max());
+        game->tick_begin("Robot move");
+        return;
       }
       break;
     case ROBOT_STATE_RESTING :
       {
+        //
+        // If resting, check if we are rested enough.
+        //
         if ((get_health() >= (get_health_max() / 4) * 3) && (get_stamina() >= (get_stamina_max() / 4) * 3)) {
-
           BOTCON("Robot has rested enough");
           game->tick_begin("Robot has rested enough");
           robot_change_state(ROBOT_STATE_IDLE, "rested enough");
@@ -1654,6 +1703,10 @@ void Thing::robot_tick(void)
           return;
         }
 
+        //
+        // If we are able to lift a sword and can see a threat, go back to
+        // fighting.
+        //
         if (get_stamina()) {
           if (threat && (is_dangerous(threat) || is_enemy(threat))) {
             BOTCON("Robot sees a nearby threat, stop resting");
@@ -1705,6 +1758,17 @@ void Thing::robot_tick(void)
         game->tick_begin("Robot finished enchanting");
       }
       break;
+
+    case ROBOT_STATE_USING_SKILLSTONE :
+      {
+        //
+        // Choose a skil
+        //
+        learn_random_skill();
+        robot_change_state(ROBOT_STATE_IDLE, "added skill");
+        game->tick_begin("Robot finished adding skills");
+      }
+      break;
   }
 
   log("Robot: Do something");
@@ -1727,7 +1791,8 @@ void Thing::robot_change_state(int new_state, const std::string &why)
     case ROBOT_STATE_MOVING : to = "MOVING"; break;
     case ROBOT_STATE_RESTING : to = "RESTING"; break;
     case ROBOT_STATE_OPEN_INVENTORY : to = "OPEN-INVENTORY"; break;
-    case ROBOT_STATE_USING_ENCHANTSTONE : to = "ENCHANTING"; break;
+    case ROBOT_STATE_USING_ENCHANTSTONE : to = "USING-ENCHANTSTONE"; break;
+    case ROBOT_STATE_USING_SKILLSTONE : to = "USING-SKILLSTONE"; break;
   }
   switch (monstp->robot_state) {
     case ROBOT_STATE_IDLE : from = "IDLE"; break;
@@ -1739,8 +1804,14 @@ void Thing::robot_change_state(int new_state, const std::string &why)
       wid_inventory_init();
       break;
     case ROBOT_STATE_USING_ENCHANTSTONE :
-      from = "ENCHANTING";
+      from = "USING-ENCHANTSTONE";
       wid_enchant_destroy();
+      wid_thing_info_fini();
+      wid_inventory_init();
+      break;
+    case ROBOT_STATE_USING_SKILLSTONE :
+      from = "USING-SKILLSTONE";
+      wid_skill_choose_destroy();
       wid_thing_info_fini();
       wid_inventory_init();
       break;
@@ -1766,6 +1837,10 @@ void Thing::robot_change_state(int new_state, const std::string &why)
     case ROBOT_STATE_USING_ENCHANTSTONE :
       BOTCON("Robot is enchanting something");
       game->wid_enchant_an_item();
+      break;
+    case ROBOT_STATE_USING_SKILLSTONE :
+      BOTCON("Robot is learning something");
+      game->wid_skill_choose();
       break;
   }
 }

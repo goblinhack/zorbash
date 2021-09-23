@@ -184,6 +184,15 @@ void Game::wid_skill_choose(void)
   //
   wid_ignore_events_briefly();
 
+  //
+  // Once skills are maxxed out, that's it
+  //
+  if (player->monstp->skills.size() >= UI_ACTIONBAR_MAX_ITEMS) {
+    TOPCON("%%fg=red$Your brain is full and cannot fit in any more skillsj%%fg=reset$");
+    change_state(Game::STATE_NORMAL);
+    return;
+  }
+
   skills.clear();
   for (auto tpp : tp_get_skills()) {
 
@@ -203,7 +212,7 @@ void Game::wid_skill_choose(void)
   }
 
   if (skills.empty()) {
-    TOPCON("You have nothing left to learn. You are now the master.");
+    TOPCON("%%fg=purple$You have nothing left to learn. You are now the master.%%fg=reset$");
     change_state(Game::STATE_NORMAL);
     return;
   }

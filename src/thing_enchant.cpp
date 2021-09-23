@@ -128,6 +128,7 @@ bool Thing::can_enchant_something(void)
 bool Thing::enchant_random_item(void)
 {
   TRACE_AND_INDENT();
+  std::vector< Thingp > cands;
   for (const auto &item : monstp->carrying) {
     auto t = level->thing_find(item.id);
     if (! t) {
@@ -136,8 +137,14 @@ bool Thing::enchant_random_item(void)
     if (! t->is_enchantable()) {
       continue;
     }
-    log("Enchant this randomly: %s", t->to_string().c_str());
-    return enchant(t);
+    cands.push_back(t);
   }
-  return false;
+
+  if (cands.empty()) {
+    return false;
+  }
+
+  auto chosen = cands[ pcg_random_range(0, cands.size()) ];
+  log("Enchant this randomly: %s", chosen->to_string().c_str());
+  return enchant(chosen);
 }

@@ -14,6 +14,7 @@
 #include "my_vector_bounds_check.h"
 #include "my_ui.h"
 #include "my_ptrcheck.h"
+#include "my_random.h"
 
 bool Thing::skill_add(Thingp what)
 {
@@ -194,4 +195,86 @@ bool Thing::add_skill(Tpp what)
   }
 
   return true;
+}
+
+int Thing::get_skillstone_count(void)
+{
+  TRACE_AND_INDENT();
+  int v = 0;
+  for (const auto &item : monstp->carrying) {
+    auto t = level->thing_find(item.id);
+    if (! t) {
+      continue;
+    }
+    if (! t->is_skillstone()) {
+      continue;
+    }
+    log("Found a skillstone: %s", t->to_string().c_str());
+    v++;
+  }
+  return v;
+}
+
+bool Thing::can_learn_something(void)
+{
+  TRACE_AND_INDENT();
+
+  //
+  // Once skills are maxxed out, that's it
+  //
+  if (monstp->skills.size() >= UI_ACTIONBAR_MAX_ITEMS) {
+    return false;
+  }
+
+  //
+  // Look at the list of skills this thing knows. If we find
+  // something that is not present, then we have something to learn.
+  //
+  for (auto tpp : tp_get_skills()) {
+    bool already_learned = false;
+    for (auto oid : monstp->skills) {
+      auto o = game->level->thing_find(oid);
+      if (o) {
+        if (o->tp() == tpp) {
+          already_learned = true;
+          break;
+        }
+      }
+    }
+    if (already_learned) {
+      continue;
+    }
+    return true;
+  }
+  return false;
+}
+
+bool Thing::learn_random_skill(void)
+{
+  TRACE_AND_INDENT();
+
+  std::vector< Tpp > cands;
+  for (auto tpp : tp_get_skills()) {
+    bool add = true;
+    for (auto oid : monstp->skills) {
+      auto o = game->level->thing_find(oid);
+      if (o) {
+        if (o->tp() == tpp) {
+          add = false;
+          break;
+        }
+      }
+    }
+    if (add) {
+      cands.push_back(tpp);
+    }
+  }
+
+  if (cands.empty()) {
+    return false;
+  }
+
+  auto chosen = cands[ pcg_random_range(0, cands.size()) ];
+  log("Add this skill: %s", chosen->name().c_str());
+  return add_skill(chosen);
 }
