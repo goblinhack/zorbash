@@ -313,7 +313,7 @@ GAME_OBJECTS=				    \
 # compile
 #
 $(OBJDIR)/%.o: %.cpp
-	$(shell grep -q goblin $< && echo clang-format -i $<)
+	@$(shell grep -q goblin $< && echo clang-format -i $<)
 	@echo $(CC) $(EXTRA_CFLAGS) $(CFLAGS) -c -o $@ $<
 	@$(CC) $(EXTRA_CFLAGS) $(CFLAGS) -c -o $@ $<
 
