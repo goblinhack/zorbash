@@ -14,7 +14,8 @@
 #include "my_monst.h"
 #include "my_random.h"
 
-void Thing::ai_get_next_hop(void) {
+void Thing::ai_get_next_hop(void)
+{
   TRACE_AND_INDENT();
   dbg("AI");
   TRACE_AND_INDENT();

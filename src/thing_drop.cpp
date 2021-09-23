@@ -15,7 +15,8 @@
 #include "my_array_bounds_check.h"
 #include "my_sound.h"
 
-bool Thing::drop(Thingp what, Thingp target, bool stolen) {
+bool Thing::drop(Thingp what, Thingp target, bool stolen)
+{
   TRACE_AND_INDENT();
   if (stolen) {
     if (target) {
@@ -130,7 +131,8 @@ bool Thing::drop(Thingp what, Thingp target, bool stolen) {
 //
 // An item in between bags
 //
-bool Thing::drop_into_ether(Thingp what) {
+bool Thing::drop_into_ether(Thingp what)
+{
   TRACE_AND_INDENT();
   dbg("Dropping %s into the ether", what->to_string().c_str());
   TRACE_AND_INDENT();
@@ -183,7 +185,8 @@ bool Thing::drop_into_ether(Thingp what) {
 //
 // An item in between bags
 //
-bool Thing::drop_from_ether(Thingp what) {
+bool Thing::drop_from_ether(Thingp what)
+{
   TRACE_AND_INDENT();
   auto player = game->level->player;
 
@@ -229,12 +232,14 @@ bool Thing::drop_from_ether(Thingp what) {
   return true;
 }
 
-bool Thing::drop(Thingp what) {
+bool Thing::drop(Thingp what)
+{
   TRACE_AND_INDENT();
   return drop(what, nullptr);
 }
 
-void Thing::drop_all(void) {
+void Thing::drop_all(void)
+{
   TRACE_AND_INDENT();
   if (! monstp) {
     return;

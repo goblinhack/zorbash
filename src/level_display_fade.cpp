@@ -12,7 +12,8 @@
 #include "my_gl.h"
 #include "my_thing.h"
 
-void Level::display_fade_out(void) {
+void Level::display_fade_out(void)
+{
   int   lines = 1000;
   float step  = RAD_360 / (float) lines;
   float ts    = (float) (time_get_time_ms_cached() - ts_fade_out_begin) / LEVEL_FADE_OUT_MS;
@@ -59,7 +60,8 @@ void Level::display_fade_out(void) {
   blit_fbo_unbind();
 }
 
-void Level::display_fade_in(void) {
+void Level::display_fade_in(void)
+{
   int   lines = 1000;
   float step  = RAD_360 / (float) lines;
   float ts    = (float) (time_get_time_ms_cached() - ts_fade_in_begin) / LEVEL_FADE_IN_MS;

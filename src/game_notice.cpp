@@ -14,25 +14,29 @@
 
 static WidPopup *game_notice_window;
 
-void game_notice_destroy(void) {
+void game_notice_destroy(void)
+{
   TRACE_AND_INDENT();
   delete game_notice_window;
   game_notice_window = nullptr;
 }
 
-static uint8_t game_notice_ok(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_notice_ok(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   game_notice_destroy();
   return false;
 }
 
-static uint8_t game_notice_key_up(Widp w, const struct SDL_Keysym *key) {
+static uint8_t game_notice_key_up(Widp w, const struct SDL_Keysym *key)
+{
   TRACE_AND_INDENT();
   game_notice_ok(nullptr, 0, 0, 0);
   return true;
 }
 
-static uint8_t game_notice_key_down(Widp w, const struct SDL_Keysym *key) {
+static uint8_t game_notice_key_down(Widp w, const struct SDL_Keysym *key)
+{
   TRACE_AND_INDENT();
   if (sdl_shift_held) {
     if (key->scancode == (SDL_Scancode) game->config.key_console) {
@@ -43,7 +47,8 @@ static uint8_t game_notice_key_down(Widp w, const struct SDL_Keysym *key) {
   return true;
 }
 
-void game_notice(std::string s) {
+void game_notice(std::string s)
+{
   TRACE_AND_INDENT();
   if (game_notice_window) {
     game_notice_destroy();

@@ -14,7 +14,8 @@
 #include "my_monst.h"
 #include "my_ptrcheck.h"
 
-Thingp Thing::get_top_owner(void) const {
+Thingp Thing::get_top_owner(void) const
+{
   TRACE_AND_INDENT();
   auto id = get_immediate_owner_id();
   if (likely(id.ok())) {
@@ -31,7 +32,8 @@ Thingp Thing::get_top_owner(void) const {
   }
 }
 
-Thingp Thing::get_immediate_owner(void) const {
+Thingp Thing::get_immediate_owner(void) const
+{
   TRACE_AND_INDENT();
   auto id = get_immediate_owner_id();
   if (likely(id.ok())) {
@@ -45,7 +47,8 @@ Thingp Thing::get_immediate_owner(void) const {
   }
 }
 
-void Thing::set_owner(Thingp owner) {
+void Thing::set_owner(Thingp owner)
+{
   TRACE_AND_INDENT();
   if (owner) {
     verify(owner);
@@ -79,7 +82,8 @@ void Thing::set_owner(Thingp owner) {
   }
 }
 
-void Thing::remove_owner(void) {
+void Thing::remove_owner(void)
+{
   TRACE_AND_INDENT();
   auto old_owner = get_immediate_owner();
   if (! old_owner) {
@@ -98,7 +102,8 @@ void Thing::remove_owner(void) {
   location_check();
 }
 
-bool Thing::change_owner(Thingp new_owner) {
+bool Thing::change_owner(Thingp new_owner)
+{
   TRACE_AND_INDENT();
   if (! new_owner) {
     err("No new owner");

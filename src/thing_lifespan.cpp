@@ -14,7 +14,8 @@
 #include "my_string.h"
 #include "my_python.h"
 
-void Thing::on_lifespan(Thingp what) {
+void Thing::on_lifespan(Thingp what)
+{
   auto on_lifespan = what->tp()->on_lifespan_do();
   if (std::empty(on_lifespan)) {
     return;
@@ -37,7 +38,8 @@ void Thing::on_lifespan(Thingp what) {
   }
 }
 
-void Thing::lifespan_tick(void) {
+void Thing::lifespan_tick(void)
+{
   TRACE_AND_INDENT();
   //
   // Torches only tick when carried

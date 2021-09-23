@@ -21,7 +21,8 @@ static WidPopup *game_config_top_window;
 
 void Config::fini(void) { TRACE_AND_INDENT(); }
 
-void Config::reset(void) {
+void Config::reset(void)
+{
   TRACE_AND_INDENT();
   game_pix_scale_height  = {};
   game_pix_scale_width   = {};
@@ -108,48 +109,55 @@ void Config::reset(void) {
   sound_volume        = {MIX_MAX_VOLUME / 2};
 }
 
-static void game_config_top_destroy(void) {
+static void game_config_top_destroy(void)
+{
   TRACE_AND_INDENT();
   delete game_config_top_window;
   game_config_top_window = nullptr;
 }
 
-static uint8_t game_config_top_graphics(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_config_top_graphics(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   game_config_top_destroy();
   game->config_gfx_select();
   return true;
 }
 
-static uint8_t game_config_top_keyboard(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_config_top_keyboard(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   game_config_top_destroy();
   game->config_keyboard_select();
   return true;
 }
 
-static uint8_t game_config_top_sound(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_config_top_sound(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   game_config_top_destroy();
   game->config_sound_select();
   return true;
 }
 
-static uint8_t game_config_top_other(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_config_top_other(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   game_config_top_destroy();
   game->config_other_select();
   return true;
 }
 
-static uint8_t game_config_top_back(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_config_top_back(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   game_config_top_destroy();
   game->main_menu_select();
   return true;
 }
 
-static uint8_t game_config_top_key_up(Widp w, const struct SDL_Keysym *key) {
+static uint8_t game_config_top_key_up(Widp w, const struct SDL_Keysym *key)
+{
   TRACE_AND_INDENT();
   if (sdl_shift_held) {
     if (key->scancode == (SDL_Scancode) game->config.key_console) {
@@ -181,7 +189,8 @@ static uint8_t game_config_top_key_up(Widp w, const struct SDL_Keysym *key) {
   return false;
 }
 
-static uint8_t game_config_top_key_down(Widp w, const struct SDL_Keysym *key) {
+static uint8_t game_config_top_key_down(Widp w, const struct SDL_Keysym *key)
+{
   TRACE_AND_INDENT();
   if (sdl_shift_held) {
     if (key->scancode == (SDL_Scancode) game->config.key_console) {
@@ -192,7 +201,8 @@ static uint8_t game_config_top_key_down(Widp w, const struct SDL_Keysym *key) {
   return true;
 }
 
-void Game::config_top_select(void) {
+void Game::config_top_select(void)
+{
   TRACE_AND_INDENT();
   CON("Config menu");
 

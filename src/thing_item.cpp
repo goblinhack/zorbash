@@ -13,7 +13,8 @@
 #include "my_monst.h"
 #include "my_random.h"
 
-int Thing::item_count_including_charges(Tpp tp) {
+int Thing::item_count_including_charges(Tpp tp)
+{
   TRACE_AND_INDENT();
   auto count = 0;
   for (auto oid : monstp->carrying) {
@@ -38,7 +39,8 @@ int Thing::item_count_including_charges(Tpp tp) {
   return count;
 }
 
-int Thing::item_count_excluding_charges(Tpp tp) {
+int Thing::item_count_excluding_charges(Tpp tp)
+{
   TRACE_AND_INDENT();
   auto count = 0;
   for (auto oid : monstp->carrying) {
@@ -59,7 +61,8 @@ int Thing::item_count_excluding_charges(Tpp tp) {
   return count;
 }
 
-void Thing::move_carried_items(void) {
+void Thing::move_carried_items(void)
+{
   TRACE_AND_INDENT();
   //
   // Light source follows the thing.
@@ -135,7 +138,8 @@ void Thing::move_carried_items(void) {
   }
 }
 
-void Thing::move_carried_items_immediately(void) {
+void Thing::move_carried_items_immediately(void)
+{
   TRACE_AND_INDENT();
   //
   // Light source follows the thing.
@@ -186,7 +190,8 @@ void Thing::move_carried_items_immediately(void) {
   }
 }
 
-bool Thing::is_carrying_item(void) {
+bool Thing::is_carrying_item(void)
+{
   TRACE_AND_INDENT();
   if (! monstp) {
     return false;
@@ -204,7 +209,8 @@ bool Thing::is_carrying_item(void) {
   return false;
 }
 
-std::vector< Thingp > Thing::get_item_list(void) {
+std::vector< Thingp > Thing::get_item_list(void)
+{
   TRACE_AND_INDENT();
   std::vector< Thingp > tr;
   dbg("Carried items:");

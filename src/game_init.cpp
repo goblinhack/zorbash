@@ -13,7 +13,8 @@
 #include "my_array_bounds_check.h"
 #include "my_globals.h"
 
-void Game::init(void) {
+void Game::init(void)
+{
   TRACE_AND_INDENT();
   LOG("Game init");
 
@@ -39,7 +40,8 @@ void Game::init(void) {
   level = l;
 }
 
-void Game::init_level(point3d p) {
+void Game::init_level(point3d p)
+{
   TRACE_AND_INDENT();
   LOG("Game init level %d,%d,%d", p.x, p.y, p.z);
 
@@ -54,7 +56,8 @@ void Game::init_level(point3d p) {
   }
 }
 
-void Game::init_levels(void) {
+void Game::init_levels(void)
+{
   TRACE_AND_INDENT();
   LOG("Game init levels");
 

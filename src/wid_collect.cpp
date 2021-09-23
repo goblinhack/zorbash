@@ -24,14 +24,16 @@
 WidPopup *                   wid_collect;
 static std::vector< Thingp > collect_items;
 
-void wid_collect_destroy(void) {
+void wid_collect_destroy(void)
+{
   TRACE_AND_INDENT();
   delete wid_collect;
   wid_collect = nullptr;
   game->change_state(Game::STATE_NORMAL);
 }
 
-static void wid_collect_slot(int slot) {
+static void wid_collect_slot(int slot)
+{
   TRACE_AND_INDENT();
   DBG3("Collect slot %d", slot);
   TRACE_AND_INDENT();
@@ -112,7 +114,8 @@ static void wid_collect_slot(int slot) {
   }
 }
 
-static uint8_t wid_collect_key_up(Widp w, const struct SDL_Keysym *key) {
+static uint8_t wid_collect_key_up(Widp w, const struct SDL_Keysym *key)
+{
   TRACE_AND_INDENT();
   auto level = game->level;
   if (! level) {
@@ -180,7 +183,8 @@ static uint8_t wid_collect_key_up(Widp w, const struct SDL_Keysym *key) {
   return true;
 }
 
-static uint8_t wid_collect_key_down(Widp w, const struct SDL_Keysym *key) {
+static uint8_t wid_collect_key_down(Widp w, const struct SDL_Keysym *key)
+{
   TRACE_AND_INDENT();
   auto level = game->level;
   if (! level) {
@@ -204,7 +208,8 @@ static uint8_t wid_collect_key_down(Widp w, const struct SDL_Keysym *key) {
   return true;
 }
 
-static uint8_t wid_collect_mouse_up(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t wid_collect_mouse_up(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   auto level = game->level;
   if (! level) {
@@ -224,7 +229,8 @@ static uint8_t wid_collect_mouse_up(Widp w, int32_t x, int32_t y, uint32_t butto
   return true;
 }
 
-static void wid_collect_mouse_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely) {
+static void wid_collect_mouse_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+{
   TRACE_AND_INDENT();
   int slot = wid_get_int_context(w);
 
@@ -252,7 +258,8 @@ static void wid_collect_mouse_over_b(Widp w, int32_t relx, int32_t rely, int32_t
   }
 }
 
-void Game::wid_collect_create(const std::list< Thingp > items /* intentional copy */) {
+void Game::wid_collect_create(const std::list< Thingp > items /* intentional copy */)
+{
   TRACE_AND_INDENT();
   BOTCON("You lucky thing. Choose an item to collect.");
 

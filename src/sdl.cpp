@@ -64,7 +64,8 @@ SDL_GLContext context; // Our opengl context handle
 SDL_Scancode      sdl_grabbed_scancode;
 on_sdl_key_grab_t on_sdl_key_grab;
 
-void sdl_fini(void) {
+void sdl_fini(void)
+{
   TRACE_AND_INDENT();
 #ifdef ENABLE_UI_ASCII_MOUSE
   SDL_ShowCursor(0);
@@ -82,7 +83,8 @@ void sdl_fini(void) {
   SDL_Quit();
 }
 
-static inline void sdl_list_video_size(void) {
+static inline void sdl_list_video_size(void)
+{
   TRACE_AND_INDENT();
   int i;
 
@@ -93,7 +95,8 @@ static inline void sdl_list_video_size(void) {
   }
 }
 
-void sdl_joy_rumble(float strength, ts_t ms) {
+void sdl_joy_rumble(float strength, ts_t ms)
+{
   TRACE_AND_INDENT();
   if (! haptic) {
     return;
@@ -102,7 +105,8 @@ void sdl_joy_rumble(float strength, ts_t ms) {
   SDL_HapticRumblePlay(haptic, strength, ms);
 }
 
-static void sdl_init_rumble(void) {
+static void sdl_init_rumble(void)
+{
   TRACE_AND_INDENT();
   LOG("SDL: init rumble:");
 
@@ -130,7 +134,8 @@ static void sdl_init_rumble(void) {
   LOG("- Opened Haptic for joy index %d", joy_index);
 }
 
-static void sdl_init_joystick(void) {
+static void sdl_init_joystick(void)
+{
   TRACE_AND_INDENT();
   LOG("SDL: init input:");
 
@@ -181,7 +186,8 @@ static void sdl_init_joystick(void) {
   }
 }
 
-uint8_t sdl_init(void) {
+uint8_t sdl_init(void)
+{
   TRACE_AND_INDENT();
   gl_ext_init();
 
@@ -381,7 +387,8 @@ uint8_t sdl_init(void) {
   return true;
 }
 
-static int sdl_filter_events(void *userdata, SDL_Event *event) {
+static int sdl_filter_events(void *userdata, SDL_Event *event)
+{
   TRACE_AND_INDENT();
   switch (event->type) {
     // This is important!  Queue it if we want to quit. */
@@ -410,7 +417,8 @@ static int sdl_filter_events(void *userdata, SDL_Event *event) {
   }
 }
 
-static void sdl_event(SDL_Event *event) {
+static void sdl_event(SDL_Event *event)
+{
   TRACE_AND_INDENT();
   SDL_Keysym *key;
 
@@ -698,7 +706,8 @@ static void sdl_event(SDL_Event *event) {
   }
 }
 
-static int sdl_get_mouse(void) {
+static int sdl_get_mouse(void)
+{
   TRACE_AND_INDENT();
   if (! wid_mouse_visible) {
     return (0);
@@ -720,7 +729,8 @@ static int sdl_get_mouse(void) {
   return (button);
 }
 
-void sdl_mouse_center(void) {
+void sdl_mouse_center(void)
+{
   TRACE_AND_INDENT();
   int x, y;
 
@@ -730,7 +740,8 @@ void sdl_mouse_center(void) {
   sdl_mouse_warp(x, y);
 }
 
-void sdl_mouse_warp(int x, int y) {
+void sdl_mouse_warp(int x, int y)
+{
   TRACE_AND_INDENT();
   int border = 10;
 
@@ -751,7 +762,8 @@ void sdl_mouse_warp(int x, int y) {
   mouse_y = y;
 }
 
-static void sdl_tick(void) {
+static void sdl_tick(void)
+{
   TRACE_AND_INDENT();
   sdl_left_fire = false;
   sdl_left_fire = true;
@@ -878,7 +890,8 @@ static void sdl_tick(void) {
   }
 }
 
-void sdl_exit(void) {
+void sdl_exit(void)
+{
   TRACE_AND_INDENT();
   if (! sdl_main_loop_running) {
     return;
@@ -896,7 +909,8 @@ void sdl_exit(void) {
 //
 // User has entered a command, run it
 //
-uint8_t config_fps_counter_set(tokens_t *tokens, void *context) {
+uint8_t config_fps_counter_set(tokens_t *tokens, void *context)
+{
   TRACE_AND_INDENT();
   char *s = tokens->args[ 2 ];
 
@@ -918,7 +932,8 @@ uint8_t config_fps_counter_set(tokens_t *tokens, void *context) {
 //
 // User has entered a command, run it
 //
-void config_gfx_inverted_toggle(void) {
+void config_gfx_inverted_toggle(void)
+{
   TRACE_AND_INDENT();
   if (! game->config.gfx_inverted) {
     game->config.gfx_inverted = true;
@@ -932,7 +947,8 @@ void config_gfx_inverted_toggle(void) {
 //
 // User has entered a command, run it
 //
-uint8_t config_gfx_inverted_set(tokens_t *tokens, void *context) {
+uint8_t config_gfx_inverted_set(tokens_t *tokens, void *context)
+{
   TRACE_AND_INDENT();
   char *s = tokens->args[ 3 ];
 
@@ -955,7 +971,8 @@ uint8_t config_gfx_inverted_set(tokens_t *tokens, void *context) {
 //
 // User has entered a command, run it
 //
-void config_gfx_minimap_toggle(void) {
+void config_gfx_minimap_toggle(void)
+{
   TRACE_AND_INDENT();
   if (! game->config.gfx_minimap) {
     game->config.gfx_minimap = true;
@@ -969,7 +986,8 @@ void config_gfx_minimap_toggle(void) {
 //
 // User has entered a command, run it
 //
-uint8_t config_gfx_minimap_set(tokens_t *tokens, void *context) {
+uint8_t config_gfx_minimap_set(tokens_t *tokens, void *context)
+{
   TRACE_AND_INDENT();
   char *s = tokens->args[ 3 ];
 
@@ -992,7 +1010,8 @@ uint8_t config_gfx_minimap_set(tokens_t *tokens, void *context) {
 //
 // User has entered a command, run it
 //
-void config_game_pix_zoom_in(void) {
+void config_game_pix_zoom_in(void)
+{
   TRACE_AND_INDENT();
   game->config.game_pix_zoom++;
   if (game->config.game_pix_zoom > GAME_MOST_ZOOMED_IN) {
@@ -1002,7 +1021,8 @@ void config_game_pix_zoom_in(void) {
   sdl_config_update_all();
 }
 
-void config_game_pix_zoom_out(void) {
+void config_game_pix_zoom_out(void)
+{
   TRACE_AND_INDENT();
   game->config.game_pix_zoom--;
   if (game->config.game_pix_zoom < GAME_MOST_ZOOMED_OUT) {
@@ -1015,7 +1035,8 @@ void config_game_pix_zoom_out(void) {
 //
 // User has entered a command, run it
 //
-uint8_t config_game_pix_zoom_set(tokens_t *tokens, void *context) {
+uint8_t config_game_pix_zoom_set(tokens_t *tokens, void *context)
+{
   TRACE_AND_INDENT();
   char *s = tokens->args[ 3 ];
 
@@ -1038,7 +1059,8 @@ uint8_t config_game_pix_zoom_set(tokens_t *tokens, void *context) {
 //
 // User has entered a command, run it
 //
-uint8_t config_gfx_vsync_enable(tokens_t *tokens, void *context) {
+uint8_t config_gfx_vsync_enable(tokens_t *tokens, void *context)
+{
   TRACE_AND_INDENT();
   if (game->config.gfx_vsync_locked) {
     return true;
@@ -1064,7 +1086,8 @@ uint8_t config_gfx_vsync_enable(tokens_t *tokens, void *context) {
   return true;
 }
 
-void config_gfx_vsync_update(void) {
+void config_gfx_vsync_update(void)
+{
   TRACE_AND_INDENT();
   if (game->config.gfx_vsync_locked) {
     return;
@@ -1081,7 +1104,8 @@ void config_gfx_vsync_update(void) {
 //
 // User has entered a command, run it
 //
-uint8_t config_errored(tokens_t *tokens, void *context) {
+uint8_t config_errored(tokens_t *tokens, void *context)
+{
   TRACE_AND_INDENT();
   g_errored = false;
   CON("USR: Errored mode cleared");
@@ -1089,7 +1113,8 @@ uint8_t config_errored(tokens_t *tokens, void *context) {
   return true;
 }
 
-void sdl_config_update_all(void) {
+void sdl_config_update_all(void)
+{
   TRACE_AND_INDENT();
   CON("SDL: OpenGL leave 2D mode");
   config_game_pix_zoom_update();
@@ -1105,7 +1130,8 @@ void sdl_config_update_all(void) {
 //
 // User has entered a command, run it
 //
-uint8_t sdl_user_exit(tokens_t *tokens, void *context) {
+uint8_t sdl_user_exit(tokens_t *tokens, void *context)
+{
   TRACE_AND_INDENT();
   sdl_exit();
 
@@ -1115,7 +1141,8 @@ uint8_t sdl_user_exit(tokens_t *tokens, void *context) {
 //
 // Main loop
 //
-void sdl_loop(void) {
+void sdl_loop(void)
+{
   TRACE_AND_INDENT();
   SDL_Event events[ 10 ];
   int       found;
@@ -1228,7 +1255,9 @@ void sdl_loop(void) {
       if (game) {
         if (wid_console_window && wid_console_window->visible) {
           pcg_random_allowed = false;
-          { wid_display_all(); }
+          {
+            wid_display_all();
+          }
           pcg_random_allowed = true;
         } else {
           pcg_random_allowed = false;
@@ -1267,7 +1296,9 @@ void sdl_loop(void) {
       // Clean up dead widgets.
       //
       pcg_random_allowed = false;
-      { wid_gc_all(); }
+      {
+        wid_gc_all();
+      }
       pcg_random_allowed = true;
 
       //
@@ -1398,7 +1429,8 @@ void sdl_loop(void) {
 #endif
 }
 
-void sdl_flush_display(void) {
+void sdl_flush_display(void)
+{
   TRACE_AND_INDENT();
   if (g_opt_fast_start) {
     return;
@@ -1420,7 +1452,8 @@ void sdl_flush_display(void) {
   GL_ERROR_CHECK();
 }
 
-void config_game_pix_zoom_update(void) {
+void config_game_pix_zoom_update(void)
+{
   TRACE_AND_INDENT();
   game->config.tile_width  = TILE_WIDTH_LORES;
   game->config.tile_height = TILE_HEIGHT_LORES;

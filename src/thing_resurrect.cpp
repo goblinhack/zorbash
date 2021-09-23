@@ -11,7 +11,8 @@
 #include "my_thing.h"
 #include "my_sprintf.h"
 
-void Thing::resurrect_tick(void) {
+void Thing::resurrect_tick(void)
+{
   TRACE_AND_INDENT();
   //
   // Rise at the apointed time

@@ -14,7 +14,8 @@
 #include "my_globals.h"
 #include "my_traceback.h"
 
-void callstack_dump(void) {
+void callstack_dump(void)
+{
   TRACE_AND_INDENT();
   IF_NODEBUG2 { return; }
 
@@ -67,7 +68,8 @@ void callstack_dump(void) {
 //
 // Should work on linux only.
 //
-static void debug_crash_handler(int sig) {
+static void debug_crash_handler(int sig)
+{
   fprintf(stderr, "debug_crash_handler: Error: Signal %d:\n", sig);
 
   std::string pid(std::to_string(getpid()));
@@ -122,7 +124,8 @@ static void debug_crash_handler(int sig) {
   }
 }
 
-void segv_handler(int sig) {
+void segv_handler(int sig)
+{
   TRACE_AND_INDENT();
   static int crashed;
 
@@ -144,7 +147,8 @@ void segv_handler(int sig) {
 #endif
 }
 
-void ctrlc_handler(int sig) {
+void ctrlc_handler(int sig)
+{
   TRACE_AND_INDENT();
   fprintf(MY_STDERR, "Interrupted!!!");
   traceback_dump();

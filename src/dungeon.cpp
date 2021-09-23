@@ -131,7 +131,8 @@
 //
 //
 
-void Dungeon::make_dungeon(void) {
+void Dungeon::make_dungeon(void)
+{
   TRACE_AND_INDENT();
   //
   // Create the high level blueprint of the level layout
@@ -287,7 +288,8 @@ void Dungeon::make_dungeon(void) {
   dump();
 }
 
-char *Dungeon::cell_addr(const int x, const int y, const int z) {
+char *Dungeon::cell_addr(const int x, const int y, const int z)
+{
   if (unlikely(is_oob(x, y, z))) {
     return (nullptr);
   }
@@ -297,15 +299,18 @@ char *Dungeon::cell_addr(const int x, const int y, const int z) {
 
 char *Dungeon::cell_addr_no_check(const int x, const int y, const int z) { return (&getref(cells, offset(x, y, z))); }
 
-bool Dungeon::is_oob(const int x, const int y, const int z) {
+bool Dungeon::is_oob(const int x, const int y, const int z)
+{
   return ((x < 0) || (x >= map_width) || (y < 0) || (y >= map_height) || (z < 0) || (z >= map_depth));
 }
 
 bool Dungeon::is_oob(const int x, const int y) { return ((x < 0) || (x >= map_width) || (y < 0) || (y >= map_height)); }
 
-void Dungeon::debug(const std::string s) {
+void Dungeon::debug(const std::string s)
+{
   TRACE_AND_INDENT();
-  IF_DEBUG2 {
+  IF_DEBUG2
+  {
     LOG("DUNGEON (%u) %s", seed, s.c_str());
     LOG("===========================================================");
     dump();
@@ -316,7 +321,8 @@ void Dungeon::debug(const std::string s) {
 // Make a dungeon from rooms
 //
 Dungeon::Dungeon(int map_width, int map_height, int grid_width, int grid_height, int seed)
-    : map_width(map_width), map_height(map_height), grid_width(grid_width), grid_height(grid_height), seed(seed) {
+    : map_width(map_width), map_height(map_height), grid_width(grid_width), grid_height(grid_height), seed(seed)
+{
   TRACE_AND_INDENT();
   make_dungeon();
 }
@@ -326,7 +332,8 @@ Dungeon::~Dungeon() { delete nodes; }
 //
 // Make a dungeon from a single level
 //
-Dungeon::Dungeon(int level) {
+Dungeon::Dungeon(int level)
+{
   TRACE_AND_INDENT();
   if (level >= (int) LevelStatic::all_static_levels.size()) {
     ERR("Out of range level %d", level);
@@ -341,7 +348,8 @@ Dungeon::Dungeon(int level) {
   dump();
 }
 
-int Dungeon::offset(const int x, const int y, const int z) {
+int Dungeon::offset(const int x, const int y, const int z)
+{
   auto offset = (map_width * map_height) * z;
   offset += (map_width) *y;
   offset += x;
@@ -349,7 +357,8 @@ int Dungeon::offset(const int x, const int y, const int z) {
   return (offset);
 }
 
-int Dungeon::offset(const int x, const int y) {
+int Dungeon::offset(const int x, const int y)
+{
   auto offset = (map_width) *y;
   offset += x;
 
@@ -359,7 +368,8 @@ int Dungeon::offset(const int x, const int y) {
 //
 // Puts a tile on the map
 //
-void Dungeon::putc(const int x, const int y, const int z, const char c) {
+void Dungeon::putc(const int x, const int y, const int z, const char c)
+{
   if (! c) {
     ERR("Putting nul char at %d,%d,%d", x, y, z);
   }
@@ -375,7 +385,8 @@ void Dungeon::putc(const int x, const int y, const int z, const char c) {
 //
 // Puts a tile on the map
 //
-void Dungeon::putc_no_check(const int x, const int y, const int z, const char c) {
+void Dungeon::putc_no_check(const int x, const int y, const int z, const char c)
+{
   auto p = cell_addr_no_check(x, y, z);
   if (p != nullptr) {
     *p = c;
@@ -385,7 +396,8 @@ void Dungeon::putc_no_check(const int x, const int y, const int z, const char c)
 //
 // Gets a tile of the map or None
 //
-char Dungeon::getc(const int x, const int y, const int z) {
+char Dungeon::getc(const int x, const int y, const int z)
+{
   if (is_oob(x, y)) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
@@ -399,7 +411,8 @@ char Dungeon::getc(const int x, const int y, const int z) {
 //
 // Gets a tile of the map or None
 //
-char Dungeon::getc_no_check(const int x, const int y, const int z) {
+char Dungeon::getc_no_check(const int x, const int y, const int z)
+{
   auto p = cell_addr_no_check(x, y, z);
   if (p != nullptr) {
     return (*p);
@@ -407,7 +420,8 @@ char Dungeon::getc_no_check(const int x, const int y, const int z) {
   return (Charmap::NONE);
 }
 
-Roomp *Dungeon::cell_rooms_addr(const int x, const int y) {
+Roomp *Dungeon::cell_rooms_addr(const int x, const int y)
+{
   if (is_oob(x, y)) {
     return (nullptr);
   }
@@ -417,14 +431,16 @@ Roomp *Dungeon::cell_rooms_addr(const int x, const int y) {
 
 Roomp *Dungeon::cell_rooms_addr_no_check(const int x, const int y) { return (&getref(cells_room, offset(x, y))); }
 
-void Dungeon::putr(const int x, const int y, Roomp r) {
+void Dungeon::putr(const int x, const int y, Roomp r)
+{
   auto p = cell_rooms_addr(x, y);
   if (p != nullptr) {
     *p = r;
   }
 }
 
-Roomp Dungeon::getr(const int x, const int y) {
+Roomp Dungeon::getr(const int x, const int y)
+{
   auto p = cell_rooms_addr(x, y);
   if (p != nullptr) {
     return (*p);
@@ -432,7 +448,8 @@ Roomp Dungeon::getr(const int x, const int y) {
   return (nullptr);
 }
 
-Roomp Dungeon::getr_no_check(const int x, const int y) {
+Roomp Dungeon::getr_no_check(const int x, const int y)
+{
   auto p = cell_rooms_addr_no_check(x, y);
   if (p != nullptr) {
     return (*p);
@@ -440,7 +457,8 @@ Roomp Dungeon::getr_no_check(const int x, const int y) {
   return (nullptr);
 }
 
-bool Dungeon::is_anything_at(const int x, const int y) {
+bool Dungeon::is_anything_at(const int x, const int y)
+{
   if (is_oob(x, y)) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
@@ -454,7 +472,8 @@ bool Dungeon::is_anything_at(const int x, const int y) {
   return false;
 }
 
-bool Dungeon::is_anything_at(const int x, const int y, const int z) {
+bool Dungeon::is_anything_at(const int x, const int y, const int z)
+{
   if (is_oob(x, y)) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
@@ -466,7 +485,8 @@ bool Dungeon::is_anything_at(const int x, const int y, const int z) {
   return false;
 }
 
-int Dungeon::get_grid_depth_at(const int x, const int y) {
+int Dungeon::get_grid_depth_at(const int x, const int y)
+{
   if (! nodes) {
     return (0);
   }
@@ -478,7 +498,8 @@ int Dungeon::get_grid_depth_at(const int x, const int y) {
   return (0);
 }
 
-bool Dungeon::is_floor(const int x, const int y) {
+bool Dungeon::is_floor(const int x, const int y)
+{
   if (is_oob(x, y)) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
@@ -494,7 +515,8 @@ bool Dungeon::is_floor(const int x, const int y) {
   return false;
 }
 
-bool Dungeon::is_corridor(const int x, const int y) {
+bool Dungeon::is_corridor(const int x, const int y)
+{
   if (is_oob(x, y)) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
@@ -510,7 +532,8 @@ bool Dungeon::is_corridor(const int x, const int y) {
   return false;
 }
 
-bool Dungeon::is_bridge(const int x, const int y) {
+bool Dungeon::is_bridge(const int x, const int y)
+{
   if (is_oob(x, y)) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
@@ -526,7 +549,8 @@ bool Dungeon::is_bridge(const int x, const int y) {
   return false;
 }
 
-bool Dungeon::is_corridor_no_check(const int x, const int y) {
+bool Dungeon::is_corridor_no_check(const int x, const int y)
+{
   if (is_oob(x, y)) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
@@ -542,7 +566,8 @@ bool Dungeon::is_corridor_no_check(const int x, const int y) {
   return false;
 }
 
-bool Dungeon::is_dirt(const int x, const int y) {
+bool Dungeon::is_dirt(const int x, const int y)
+{
   if (is_oob(x, y)) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
@@ -558,7 +583,8 @@ bool Dungeon::is_dirt(const int x, const int y) {
   return false;
 }
 
-bool Dungeon::is_dirt_no_check(const int x, const int y) {
+bool Dungeon::is_dirt_no_check(const int x, const int y)
+{
   if (is_oob(x, y)) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
@@ -574,7 +600,8 @@ bool Dungeon::is_dirt_no_check(const int x, const int y) {
   return false;
 }
 
-bool Dungeon::is_dry_grass(const int x, const int y) {
+bool Dungeon::is_dry_grass(const int x, const int y)
+{
   if (is_oob(x, y)) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
@@ -590,7 +617,8 @@ bool Dungeon::is_dry_grass(const int x, const int y) {
   return false;
 }
 
-bool Dungeon::is_enchantstone(const int x, const int y) {
+bool Dungeon::is_enchantstone(const int x, const int y)
+{
   if (is_oob(x, y)) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
@@ -606,7 +634,8 @@ bool Dungeon::is_enchantstone(const int x, const int y) {
   return false;
 }
 
-bool Dungeon::is_skillstone(const int x, const int y) {
+bool Dungeon::is_skillstone(const int x, const int y)
+{
   if (is_oob(x, y)) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
@@ -622,7 +651,8 @@ bool Dungeon::is_skillstone(const int x, const int y) {
   return false;
 }
 
-bool Dungeon::is_foilage(const int x, const int y) {
+bool Dungeon::is_foilage(const int x, const int y)
+{
   if (is_oob(x, y)) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
@@ -638,7 +668,8 @@ bool Dungeon::is_foilage(const int x, const int y) {
   return false;
 }
 
-bool Dungeon::is_spiderweb(const int x, const int y) {
+bool Dungeon::is_spiderweb(const int x, const int y)
+{
   if (is_oob(x, y)) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
@@ -654,7 +685,8 @@ bool Dungeon::is_spiderweb(const int x, const int y) {
   return false;
 }
 
-bool Dungeon::is_secret_corridor_at(const int x, const int y) {
+bool Dungeon::is_secret_corridor_at(const int x, const int y)
+{
   if (is_oob(x, y)) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
@@ -670,7 +702,8 @@ bool Dungeon::is_secret_corridor_at(const int x, const int y) {
   return false;
 }
 
-bool Dungeon::is_wall(const int x, const int y) {
+bool Dungeon::is_wall(const int x, const int y)
+{
   if (is_oob(x, y)) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
@@ -681,7 +714,8 @@ bool Dungeon::is_wall(const int x, const int y) {
   return (v.is_wall);
 }
 
-bool Dungeon::is_monst_easy(const int x, const int y) {
+bool Dungeon::is_monst_easy(const int x, const int y)
+{
   if (is_oob(x, y)) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
@@ -697,7 +731,8 @@ bool Dungeon::is_monst_easy(const int x, const int y) {
   return false;
 }
 
-bool Dungeon::is_monst_any(const int x, const int y) {
+bool Dungeon::is_monst_any(const int x, const int y)
+{
   if (is_oob(x, y)) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
@@ -719,7 +754,8 @@ bool Dungeon::is_monst_any(const int x, const int y) {
   return false;
 }
 
-bool Dungeon::is_monst_med(const int x, const int y) {
+bool Dungeon::is_monst_med(const int x, const int y)
+{
   if (is_oob(x, y)) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
@@ -735,7 +771,8 @@ bool Dungeon::is_monst_med(const int x, const int y) {
   return false;
 }
 
-bool Dungeon::is_monst_hard(const int x, const int y) {
+bool Dungeon::is_monst_hard(const int x, const int y)
+{
   if (is_oob(x, y)) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
@@ -751,7 +788,8 @@ bool Dungeon::is_monst_hard(const int x, const int y) {
   return false;
 }
 
-bool Dungeon::is_minion_generator_any(const int x, const int y) {
+bool Dungeon::is_minion_generator_any(const int x, const int y)
+{
   if (is_oob(x, y)) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
@@ -770,7 +808,8 @@ bool Dungeon::is_minion_generator_any(const int x, const int y) {
   return false;
 }
 
-bool Dungeon::is_minion_generator_easy(const int x, const int y) {
+bool Dungeon::is_minion_generator_easy(const int x, const int y)
+{
   if (is_oob(x, y)) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
@@ -786,7 +825,8 @@ bool Dungeon::is_minion_generator_easy(const int x, const int y) {
   return false;
 }
 
-bool Dungeon::is_minion_generator_hard(const int x, const int y) {
+bool Dungeon::is_minion_generator_hard(const int x, const int y)
+{
   if (is_oob(x, y)) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
@@ -802,7 +842,8 @@ bool Dungeon::is_minion_generator_hard(const int x, const int y) {
   return false;
 }
 
-bool Dungeon::is_food(const int x, const int y) {
+bool Dungeon::is_food(const int x, const int y)
+{
   if (is_oob(x, y)) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
@@ -818,7 +859,8 @@ bool Dungeon::is_food(const int x, const int y) {
   return false;
 }
 
-bool Dungeon::is_brazier(const int x, const int y) {
+bool Dungeon::is_brazier(const int x, const int y)
+{
   if (is_oob(x, y)) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
@@ -834,7 +876,8 @@ bool Dungeon::is_brazier(const int x, const int y) {
   return false;
 }
 
-bool Dungeon::is_barrel(const int x, const int y) {
+bool Dungeon::is_barrel(const int x, const int y)
+{
   if (is_oob(x, y)) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
@@ -850,7 +893,8 @@ bool Dungeon::is_barrel(const int x, const int y) {
   return false;
 }
 
-bool Dungeon::is_blood(const int x, const int y) {
+bool Dungeon::is_blood(const int x, const int y)
+{
   if (is_oob(x, y)) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
@@ -866,7 +910,8 @@ bool Dungeon::is_blood(const int x, const int y) {
   return false;
 }
 
-bool Dungeon::is_rock(const int x, const int y) {
+bool Dungeon::is_rock(const int x, const int y)
+{
   if (is_oob(x, y)) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
@@ -882,7 +927,8 @@ bool Dungeon::is_rock(const int x, const int y) {
   return false;
 }
 
-bool Dungeon::is_door(const int x, const int y) {
+bool Dungeon::is_door(const int x, const int y)
+{
   if (is_oob(x, y)) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
@@ -898,7 +944,8 @@ bool Dungeon::is_door(const int x, const int y) {
   return false;
 }
 
-bool Dungeon::is_secret_door(const int x, const int y) {
+bool Dungeon::is_secret_door(const int x, const int y)
+{
   if (is_oob(x, y)) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
@@ -914,7 +961,8 @@ bool Dungeon::is_secret_door(const int x, const int y) {
   return false;
 }
 
-bool Dungeon::is_ascend_dungeon(const int x, const int y) {
+bool Dungeon::is_ascend_dungeon(const int x, const int y)
+{
   if (is_oob(x, y)) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
@@ -930,7 +978,8 @@ bool Dungeon::is_ascend_dungeon(const int x, const int y) {
   return false;
 }
 
-bool Dungeon::is_floor_deco_at(const int x, const int y) {
+bool Dungeon::is_floor_deco_at(const int x, const int y)
+{
   if (is_oob(x, y)) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
@@ -946,7 +995,8 @@ bool Dungeon::is_floor_deco_at(const int x, const int y) {
   return false;
 }
 
-bool Dungeon::is_descend_sewer_at(const int x, const int y) {
+bool Dungeon::is_descend_sewer_at(const int x, const int y)
+{
   if (is_oob(x, y)) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
@@ -962,7 +1012,8 @@ bool Dungeon::is_descend_sewer_at(const int x, const int y) {
   return false;
 }
 
-bool Dungeon::is_descend_dungeon(const int x, const int y) {
+bool Dungeon::is_descend_dungeon(const int x, const int y)
+{
   if (is_oob(x, y)) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
@@ -978,7 +1029,8 @@ bool Dungeon::is_descend_dungeon(const int x, const int y) {
   return false;
 }
 
-bool Dungeon::is_descend_sewer(const int x, const int y) {
+bool Dungeon::is_descend_sewer(const int x, const int y)
+{
   if (is_oob(x, y)) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
@@ -994,7 +1046,8 @@ bool Dungeon::is_descend_sewer(const int x, const int y) {
   return false;
 }
 
-bool Dungeon::is_lava(const int x, const int y) {
+bool Dungeon::is_lava(const int x, const int y)
+{
   if (is_oob(x, y)) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
@@ -1010,7 +1063,8 @@ bool Dungeon::is_lava(const int x, const int y) {
   return false;
 }
 
-bool Dungeon::is_chasm(const int x, const int y) {
+bool Dungeon::is_chasm(const int x, const int y)
+{
   if (is_oob(x, y)) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
@@ -1026,7 +1080,8 @@ bool Dungeon::is_chasm(const int x, const int y) {
   return false;
 }
 
-bool Dungeon::is_shallow_water(const int x, const int y) {
+bool Dungeon::is_shallow_water(const int x, const int y)
+{
   if (is_oob(x, y)) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
@@ -1042,7 +1097,8 @@ bool Dungeon::is_shallow_water(const int x, const int y) {
   return false;
 }
 
-bool Dungeon::is_deep_water(const int x, const int y) {
+bool Dungeon::is_deep_water(const int x, const int y)
+{
   if (is_oob(x, y)) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
@@ -1058,7 +1114,8 @@ bool Dungeon::is_deep_water(const int x, const int y) {
   return false;
 }
 
-bool Dungeon::is_hazard(const int x, const int y) {
+bool Dungeon::is_hazard(const int x, const int y)
+{
   if (is_oob(x, y)) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
@@ -1083,7 +1140,8 @@ bool Dungeon::is_hazard(const int x, const int y) {
   return false;
 }
 
-bool Dungeon::is_treasure_type(const int x, const int y) {
+bool Dungeon::is_treasure_type(const int x, const int y)
+{
   if (is_oob(x, y)) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
@@ -1099,7 +1157,8 @@ bool Dungeon::is_treasure_type(const int x, const int y) {
   return false;
 }
 
-bool Dungeon::is_treasure_class_a(const int x, const int y) {
+bool Dungeon::is_treasure_class_a(const int x, const int y)
+{
   if (is_oob(x, y)) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
@@ -1115,7 +1174,8 @@ bool Dungeon::is_treasure_class_a(const int x, const int y) {
   return false;
 }
 
-bool Dungeon::is_treasure_class_b(const int x, const int y) {
+bool Dungeon::is_treasure_class_b(const int x, const int y)
+{
   if (is_oob(x, y)) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
@@ -1131,7 +1191,8 @@ bool Dungeon::is_treasure_class_b(const int x, const int y) {
   return false;
 }
 
-bool Dungeon::is_treasure_class_c(const int x, const int y) {
+bool Dungeon::is_treasure_class_c(const int x, const int y)
+{
   if (is_oob(x, y)) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
@@ -1147,7 +1208,8 @@ bool Dungeon::is_treasure_class_c(const int x, const int y) {
   return false;
 }
 
-bool Dungeon::is_gold(const int x, const int y) {
+bool Dungeon::is_gold(const int x, const int y)
+{
   if (is_oob(x, y)) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
@@ -1163,7 +1225,8 @@ bool Dungeon::is_gold(const int x, const int y) {
   return false;
 }
 
-bool Dungeon::is_key(const int x, const int y) {
+bool Dungeon::is_key(const int x, const int y)
+{
   if (is_oob(x, y)) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
@@ -1179,7 +1242,8 @@ bool Dungeon::is_key(const int x, const int y) {
   return false;
 }
 
-bool Dungeon::is_potion(const int x, const int y) {
+bool Dungeon::is_potion(const int x, const int y)
+{
   if (is_oob(x, y)) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
@@ -1195,7 +1259,8 @@ bool Dungeon::is_potion(const int x, const int y) {
   return false;
 }
 
-bool Dungeon::is_wand(const int x, const int y) {
+bool Dungeon::is_wand(const int x, const int y)
+{
   if (is_oob(x, y)) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
@@ -1211,7 +1276,8 @@ bool Dungeon::is_wand(const int x, const int y) {
   return false;
 }
 
-bool Dungeon::is_anything_at_no_check(const int x, const int y) {
+bool Dungeon::is_anything_at_no_check(const int x, const int y)
+{
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc_no_check(x, y, d);
     if ((c != Charmap::NONE) && (c != Charmap::SPACE)) {
@@ -1221,7 +1287,8 @@ bool Dungeon::is_anything_at_no_check(const int x, const int y) {
   return false;
 }
 
-bool Dungeon::is_anything_at_no_check(const int x, const int y, const int z) {
+bool Dungeon::is_anything_at_no_check(const int x, const int y, const int z)
+{
   auto c = getc_no_check(x, y, z);
   if ((c != Charmap::NONE) && (c != Charmap::SPACE)) {
     return true;
@@ -1229,7 +1296,8 @@ bool Dungeon::is_anything_at_no_check(const int x, const int y, const int z) {
   return false;
 }
 
-bool Dungeon::is_floor_no_check(const int x, const int y) {
+bool Dungeon::is_floor_no_check(const int x, const int y)
+{
   const auto d = MAP_DEPTH_FLOOR;
   auto       c = getc_no_check(x, y, d);
   auto       v = get(Charmap::all_charmaps, c);
@@ -1237,14 +1305,16 @@ bool Dungeon::is_floor_no_check(const int x, const int y) {
   return (v.is_floor);
 }
 
-bool Dungeon::is_wall_no_check(const int x, const int y) {
+bool Dungeon::is_wall_no_check(const int x, const int y)
+{
   auto d = MAP_DEPTH_OBJ;
   auto c = getc_no_check(x, y, d);
   auto v = get(Charmap::all_charmaps, c);
   return (v.is_wall);
 }
 
-bool Dungeon::is_chasm_no_check(const int x, const int y) {
+bool Dungeon::is_chasm_no_check(const int x, const int y)
+{
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc_no_check(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
@@ -1256,7 +1326,8 @@ bool Dungeon::is_chasm_no_check(const int x, const int y) {
   return false;
 }
 
-bool Dungeon::is_shallow_water_no_check(const int x, const int y) {
+bool Dungeon::is_shallow_water_no_check(const int x, const int y)
+{
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc_no_check(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
@@ -1268,7 +1339,8 @@ bool Dungeon::is_shallow_water_no_check(const int x, const int y) {
   return false;
 }
 
-bool Dungeon::is_deep_water_no_check(const int x, const int y) {
+bool Dungeon::is_deep_water_no_check(const int x, const int y)
+{
   for (auto d = 0; d < map_depth; d++) {
     auto c = getc_no_check(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
@@ -1280,7 +1352,8 @@ bool Dungeon::is_deep_water_no_check(const int x, const int y) {
   return false;
 }
 
-void Dungeon::create_node_map(void) {
+void Dungeon::create_node_map(void)
+{
   if (grid_width > MAP_GRID_WIDTH) {
     ERR("Nodes width overflow. got %d, max %d", grid_width, MAP_GRID_WIDTH);
   }
@@ -1292,9 +1365,11 @@ void Dungeon::create_node_map(void) {
   nodes = new Nodes(grid_width, grid_height);
 }
 
-void Dungeon::dump(void) {
+void Dungeon::dump(void)
+{
   TRACE_AND_INDENT();
-  IF_DEBUG2 {
+  IF_DEBUG2
+  {
     LOG("DGN: Seed %u (with room depth)", seed);
     for (auto y = 0; y < map_height; y++) {
       std::string s;
@@ -1384,7 +1459,8 @@ void Dungeon::dump(void) {
   }
 }
 
-void Dungeon::reset_possible_rooms(void) {
+void Dungeon::reset_possible_rooms(void)
+{
   cells.resize(map_width * map_height * MAP_DEPTH, Charmap::SPACE);
   cells_room.resize(map_width * map_height, nullptr);
 
@@ -1416,7 +1492,8 @@ void Dungeon::reset_possible_rooms(void) {
   }
 }
 
-void Dungeon::room_print_at(Roomp r, int x, int y) {
+void Dungeon::room_print_at(Roomp r, int x, int y)
+{
   TRACE_AND_INDENT();
   r->at.x = x;
   r->at.y = y;
@@ -1432,7 +1509,8 @@ void Dungeon::room_print_at(Roomp r, int x, int y) {
   }
 }
 
-void Dungeon::room_print_only_doors_at(Roomp r, int x, int y) {
+void Dungeon::room_print_only_doors_at(Roomp r, int x, int y)
+{
   TRACE_AND_INDENT();
   for (auto z = 0; z < MAP_DEPTH; z++) {
     for (auto dy = 0; dy < r->height; dy++) {
@@ -1446,7 +1524,8 @@ void Dungeon::room_print_only_doors_at(Roomp r, int x, int y) {
   }
 }
 
-void Dungeon::room_print_only_doors(Grid *g) {
+void Dungeon::room_print_only_doors(Grid *g)
+{
   TRACE_AND_INDENT();
   for (auto x = 0; x < grid_width; x++) {
     for (auto y = 0; y < grid_height; y++) {
@@ -1463,7 +1542,8 @@ void Dungeon::room_print_only_doors(Grid *g) {
   }
 }
 
-void Dungeon::rooms_print_all(Grid *g) {
+void Dungeon::rooms_print_all(Grid *g)
+{
   TRACE_AND_INDENT();
   std::fill(cells.begin(), cells.end(), Charmap::SPACE);
 
@@ -1485,7 +1565,8 @@ void Dungeon::rooms_print_all(Grid *g) {
   }
 }
 
-bool Dungeon::room_is_a_candidate(int x, int y, const DungeonNode *n, Roomp r) {
+bool Dungeon::room_is_a_candidate(int x, int y, const DungeonNode *n, Roomp r)
+{
   for (auto x = 0; x < nodes->grid_width; x++) {
     for (auto y = 0; y < nodes->grid_height; y++) {
       auto o = get(grid.node_rooms, x, y);
@@ -1540,7 +1621,8 @@ bool Dungeon::room_is_a_candidate(int x, int y, const DungeonNode *n, Roomp r) {
   return true;
 }
 
-bool Dungeon::room_is_a_candidate_less_restrictive(const DungeonNode *n, Roomp r) {
+bool Dungeon::room_is_a_candidate_less_restrictive(const DungeonNode *n, Roomp r)
+{
   for (auto x = 0; x < nodes->grid_width; x++) {
     for (auto y = 0; y < nodes->grid_height; y++) {
       auto o = get(grid.node_rooms, x, y);
@@ -1595,7 +1677,8 @@ bool Dungeon::room_is_a_candidate_less_restrictive(const DungeonNode *n, Roomp r
   return true;
 }
 
-bool Dungeon::solve(int x, int y, Grid *g) {
+bool Dungeon::solve(int x, int y, Grid *g)
+{
   auto n = nodes->getn(x, y);
 
   if (! nodes->node_is_a_room(n)) {
@@ -1674,7 +1757,8 @@ bool Dungeon::solve(int x, int y, Grid *g) {
   return true;
 }
 
-bool Dungeon::create_cyclic_rooms(Grid *g) {
+bool Dungeon::create_cyclic_rooms(Grid *g)
+{
   for (auto x = 0; x < grid_width; x++) {
     for (auto y = 0; y < grid_height; y++) {
       auto n = nodes->getn(x, y);
@@ -1704,7 +1788,8 @@ bool Dungeon::create_cyclic_rooms(Grid *g) {
   return true;
 }
 
-void Dungeon::add_border(void) {
+void Dungeon::add_border(void)
+{
   for (auto y = 0; y < MAP_HEIGHT; y++) {
     for (auto x = 0; x < MAP_BORDER_ROOM; x++) {
       if (! is_anything_at_no_check(x, y)) {
@@ -1740,7 +1825,8 @@ void Dungeon::add_border(void) {
   }
 }
 
-void Dungeon::add_corridor_walls(void) {
+void Dungeon::add_corridor_walls(void)
+{
   for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
     for (auto x = 1; x < MAP_WIDTH - 1; x++) {
       if (is_wall_no_check(x, y)) {
@@ -1778,7 +1864,8 @@ void Dungeon::add_corridor_walls(void) {
   }
 }
 
-void Dungeon::add_room_walls(void) {
+void Dungeon::add_room_walls(void)
+{
   for (auto y = 0; y < MAP_HEIGHT; y++) {
     for (auto x = 0; x < MAP_WIDTH; x++) {
       if (is_wall_no_check(x, y)) {
@@ -1819,7 +1906,8 @@ void Dungeon::add_room_walls(void) {
 //
 // Find which doors we want to use for a room
 //
-void Dungeon::choose_room_doors(void) {
+void Dungeon::choose_room_doors(void)
+{
   for (auto x = 0; x < nodes->grid_width; x++) {
     for (auto y = 0; y < nodes->grid_height; y++) {
       auto n = nodes->getn(x, y);
@@ -1947,7 +2035,8 @@ void Dungeon::choose_room_doors(void) {
   }
 }
 
-void Dungeon::save_level(void) {
+void Dungeon::save_level(void)
+{
   TRACE_AND_INDENT();
   std::copy(mbegin(cells), mend(cells), mbegin(cells_saved));
 
@@ -1959,7 +2048,8 @@ void Dungeon::save_level(void) {
   }
 }
 
-void Dungeon::restore_level(void) {
+void Dungeon::restore_level(void)
+{
   TRACE_AND_INDENT();
   std::copy(mbegin(cells_saved), mend(cells_saved), mbegin(cells));
 
@@ -1971,7 +2061,8 @@ void Dungeon::restore_level(void) {
   }
 }
 
-int Dungeon::draw_corridor(point start, point end, char w) {
+int Dungeon::draw_corridor(point start, point end, char w)
+{
   TRACE_AND_INDENT();
   Dmap d {};
 
@@ -2168,7 +2259,8 @@ int Dungeon::draw_corridor(point start, point end, char w) {
 //
 // Join the corridors of each room, return the total lenght of all corridors
 //
-int Dungeon::draw_corridors(void) {
+int Dungeon::draw_corridors(void)
+{
   TRACE_AND_INDENT();
 #if 0
   LOG("Draw corridors");
@@ -2297,7 +2389,8 @@ int Dungeon::draw_corridors(void) {
   return (total_len);
 }
 
-void Dungeon::center_room_layout(void) {
+void Dungeon::center_room_layout(void)
+{
   auto minx = map_width;
   auto miny = map_height;
   auto maxx = 0;
@@ -2357,7 +2450,8 @@ void Dungeon::center_room_layout(void) {
 //
 // Dump a room onto the level. No checks
 //
-void Dungeon::place_room(Roomp r, int x, int y) {
+void Dungeon::place_room(Roomp r, int x, int y)
+{
   //
   // Place the room tiles
   //
@@ -2415,7 +2509,8 @@ void Dungeon::place_room(Roomp r, int x, int y) {
   }
 }
 
-void Dungeon::place_level(LevelStaticp l) {
+void Dungeon::place_level(LevelStaticp l)
+{
   if ((l->width > MAP_WIDTH) || (l->height > MAP_HEIGHT)) {
     ERR("Level has bad size %d,%d", l->width, l->height);
   }
@@ -2436,7 +2531,8 @@ void Dungeon::place_level(LevelStaticp l) {
 // Dump a room onto the level along with its roomno. Done when we
 // have finalized positions of rooms.
 //
-void Dungeon::map_place_room_ptr(Roomp r, int x, int y) {
+void Dungeon::map_place_room_ptr(Roomp r, int x, int y)
+{
   if (! r) {
     ERR("No room to place");
   }
@@ -2456,7 +2552,8 @@ void Dungeon::map_place_room_ptr(Roomp r, int x, int y) {
 //
 // Check for room overlaps
 //
-bool Dungeon::can_place_room(Roomp r, int x, int y) {
+bool Dungeon::can_place_room(Roomp r, int x, int y)
+{
   if (x < MAP_BORDER_ROOM) {
     return false;
   }
@@ -2492,7 +2589,8 @@ bool Dungeon::can_place_room(Roomp r, int x, int y) {
   return true;
 }
 
-bool Dungeon::rooms_move_closer_together(void) {
+bool Dungeon::rooms_move_closer_together(void)
+{
 #if 0
   LOG("Rooms_move_closer_together");
   dump();
@@ -2794,7 +2892,8 @@ bool Dungeon::rooms_move_closer_together(void) {
   return (ret);
 }
 
-void Dungeon::assign_rooms_to_tiles(void) {
+void Dungeon::assign_rooms_to_tiles(void)
+{
   for (auto x = 0; x < nodes->grid_width; x++) {
     for (auto y = 0; y < nodes->grid_height; y++) {
       auto n = nodes->getn(x, y);
@@ -2810,7 +2909,8 @@ void Dungeon::assign_rooms_to_tiles(void) {
   }
 }
 
-void Dungeon::block_secret_doors(void) {
+void Dungeon::block_secret_doors(void)
+{
   for (auto x = 0; x < map_width; x++) {
     for (auto y = 0; y < map_height; y++) {
       if (getc(x, y, MAP_DEPTH_OBJ) == Charmap::DOOR) {
@@ -2828,7 +2928,8 @@ void Dungeon::block_secret_doors(void) {
   }
 }
 
-void Dungeon::remove_all_doors(void) {
+void Dungeon::remove_all_doors(void)
+{
   for (auto x = 0; x < map_width; x++) {
     for (auto y = 0; y < map_height; y++) {
       if (getc(x, y, MAP_DEPTH_OBJ) == Charmap::DOOR) {
@@ -2839,7 +2940,8 @@ void Dungeon::remove_all_doors(void) {
   }
 }
 
-void Dungeon::place_doors_between_depth_changes(void) {
+void Dungeon::place_doors_between_depth_changes(void)
+{
   for (auto x = 0; x < nodes->grid_width; x++) {
     for (auto y = 0; y < nodes->grid_height; y++) {
       auto n = nodes->getn(x, y);
@@ -2939,7 +3041,8 @@ void Dungeon::place_doors_between_depth_changes(void) {
   }
 }
 
-void Dungeon::dmap_set_is_walls(Dmap *d) {
+void Dungeon::dmap_set_is_walls(Dmap *d)
+{
   int x, y;
 
   for (x = 0; x < MAP_WIDTH; x++) {
@@ -3379,7 +3482,8 @@ regions is needed.
 //
 // Grow our cells
 //
-void Dungeon::cave_generation(void) {
+void Dungeon::cave_generation(void)
+{
   const int16_t maze_w = MAP_WIDTH - 2;
   const int16_t maze_h = MAP_HEIGHT - 2;
   int16_t       x, y;
@@ -3441,7 +3545,8 @@ void Dungeon::cave_generation(void) {
 //
 // Any water next to cave walls make it shallow
 //
-void Dungeon::water_fixup_shallows(void) {
+void Dungeon::water_fixup_shallows(void)
+{
   for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
     for (auto x = 1; x < MAP_WIDTH - 1; x++) {
       if (! is_deep_water_no_check(x, y)) {
@@ -3461,7 +3566,8 @@ void Dungeon::water_fixup_shallows(void) {
 //
 // Add deepwater and islands of safety.
 //
-void Dungeon::water_fixup(void) {
+void Dungeon::water_fixup(void)
+{
   std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > cand {};
 
   for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
@@ -3487,7 +3593,8 @@ void Dungeon::water_fixup(void) {
   }
 }
 
-void Dungeon::add_remaining(void) {
+void Dungeon::add_remaining(void)
+{
   for (auto y = 2; y < MAP_HEIGHT - 2; y++) {
     for (auto x = 2; x < MAP_WIDTH - 2; x++) {
       if (is_anything_at(x, y)) {
@@ -3520,7 +3627,8 @@ void Dungeon::add_remaining(void) {
   }
 }
 
-void Dungeon::add_foilage_around_water(void) {
+void Dungeon::add_foilage_around_water(void)
+{
   for (auto y = 2; y < MAP_HEIGHT - 2; y++) {
     for (auto x = 2; x < MAP_WIDTH - 2; x++) {
 
@@ -3566,7 +3674,8 @@ void Dungeon::add_foilage_around_water(void) {
   }
 }
 
-void Dungeon::add_spiderweb(void) {
+void Dungeon::add_spiderweb(void)
+{
   if (pcg_random_range(0, 10) > 1) {
     return;
   }
@@ -3887,7 +3996,8 @@ void Dungeon::foilage_gen(unsigned int map_fill_prob, int map_r1, int map_r2, in
   }
 }
 
-void Dungeon::water_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int map_generations) {
+void Dungeon::water_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int map_generations)
+{
   map_save = {};
   map_curr = {};
 
@@ -3935,7 +4045,8 @@ void Dungeon::water_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int 
   }
 }
 
-Dungeonp dungeon_test(void) {
+Dungeonp dungeon_test(void)
+{
 #if 0
   auto x = 1000 ;
   while (x--) {

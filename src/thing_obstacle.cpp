@@ -15,7 +15,8 @@
 #include "my_thing.h"
 #include "my_array_bounds_check.h"
 
-bool Thing::ai_obstacle_for_me(const point &p) {
+bool Thing::ai_obstacle_for_me(const point &p)
+{
   TRACE_AND_INDENT();
   //
   // Avoid threats and treat them as obstacles
@@ -43,7 +44,8 @@ bool Thing::ai_obstacle_for_me(const point &p) {
 //
 // Return TRUE if this is something that should physically block
 //
-bool Thing::collision_obstacle(Thingp it) {
+bool Thing::collision_obstacle(Thingp it)
+{
   auto p = point(it->mid_at.x, it->mid_at.y);
 
   if (it == this) {
@@ -173,7 +175,8 @@ bool Thing::collision_obstacle(Thingp it) {
 //
 // Return TRUE if this is something that should block AI
 //
-bool Thing::ai_obstacle(Thingp it) {
+bool Thing::ai_obstacle(Thingp it)
+{
   if (it == this) {
     return false;
   }

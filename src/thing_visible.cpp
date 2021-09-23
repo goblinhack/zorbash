@@ -14,7 +14,8 @@
 #include "my_sprintf.h"
 #include "my_thing.h"
 
-void Thing::visible(void) {
+void Thing::visible(void)
+{
   TRACE_AND_INDENT();
   if (! is_hidden) {
     return;
@@ -67,7 +68,8 @@ void Thing::visible(void) {
   move_finish();
 }
 
-uint8_t Thing::is_visible(void) const {
+uint8_t Thing::is_visible(void) const
+{
   TRACE_AND_INDENT();
   return (! is_hidden);
 }

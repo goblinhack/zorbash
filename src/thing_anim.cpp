@@ -15,7 +15,8 @@
 
 #undef DEBUG_ANIM
 
-void Thing::animate(void) {
+void Thing::animate(void)
+{
   TRACE_AND_INDENT();
   Tilep tile;
   auto  tpp = tp();

@@ -15,7 +15,8 @@
 #include "my_ui.h"
 #include "my_ptrcheck.h"
 
-bool Thing::skill_add(Thingp what) {
+bool Thing::skill_add(Thingp what)
+{
   TRACE_AND_INDENT();
   dbg("Try to add skill %s", what->to_string().c_str());
   TRACE_AND_INDENT();
@@ -60,7 +61,8 @@ bool Thing::skill_add(Thingp what) {
   return true;
 }
 
-bool Thing::skill_remove(Thingp what) {
+bool Thing::skill_remove(Thingp what)
+{
   TRACE_AND_INDENT();
   dbg("Removing skill %s", what->to_string().c_str());
   TRACE_AND_INDENT();
@@ -97,7 +99,8 @@ bool Thing::skill_remove(Thingp what) {
   return true;
 }
 
-void Thing::skill_remove_all(void) {
+void Thing::skill_remove_all(void)
+{
   TRACE_AND_INDENT();
   if (! monstp) {
     return;
@@ -113,26 +116,30 @@ void Thing::skill_remove_all(void) {
   }
 }
 
-bool Thing::skill_use(Thingp what) {
+bool Thing::skill_use(Thingp what)
+{
   TRACE_AND_INDENT();
   dbg("Try to use skill %s", what->to_string().c_str());
   used(what, this, false /* remove after use */);
   return true;
 }
 
-void Thing::skill_deactivate(Thingp what) {
+void Thing::skill_deactivate(Thingp what)
+{
   TRACE_AND_INDENT();
   what->is_activated            = false;
   game->request_remake_skillbox = true;
 }
 
-void Thing::skill_activate(Thingp what) {
+void Thing::skill_activate(Thingp what)
+{
   TRACE_AND_INDENT();
   what->is_activated            = true;
   game->request_remake_skillbox = true;
 }
 
-int Thing::skill_enchant_count(const uint32_t slot) {
+int Thing::skill_enchant_count(const uint32_t slot)
+{
   TRACE_AND_INDENT();
   if (! monstp) {
     return 0;
@@ -155,7 +162,8 @@ int Thing::skill_enchant_count(const uint32_t slot) {
   return 0;
 }
 
-bool Thing::add_skill(Tpp what) {
+bool Thing::add_skill(Tpp what)
+{
   TRACE_AND_INDENT();
   auto t = level->thing_new(what, mid_at);
   if (! t) {

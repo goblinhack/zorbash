@@ -16,17 +16,20 @@
 #include "my_thing.h"
 #include "my_sdl.h"
 
-void wid_skillbox_fini(void) {
+void wid_skillbox_fini(void)
+{
   TRACE_AND_INDENT();
   DBG3("Skillbox: Fini");
 }
 
-uint8_t wid_skillbox_init(void) {
+uint8_t wid_skillbox_init(void)
+{
   TRACE_AND_INDENT();
   return true;
 }
 
-void wid_skillbox_mouse_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely) {
+void wid_skillbox_mouse_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+{
   TRACE_AND_INDENT();
   DBG3("Skillbox: Begin over skillbox");
   TRACE_AND_INDENT();
@@ -67,7 +70,8 @@ void wid_skillbox_mouse_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheel
   }
 }
 
-void wid_skillbox_mouse_over_e(Widp w) {
+void wid_skillbox_mouse_over_e(Widp w)
+{
   TRACE_AND_INDENT();
   DBG3("Skillbox: End over skillbox");
   TRACE_AND_INDENT();
@@ -106,7 +110,8 @@ void wid_skillbox_mouse_over_e(Widp w) {
   //
 }
 
-uint8_t wid_skillbox_item_mouse_up(Widp w, int32_t x, int32_t y, uint32_t button) {
+uint8_t wid_skillbox_item_mouse_up(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   auto slot = wid_get_int_context(w);
   DBG3("Skillbox: Mouse up on slot %d", slot);

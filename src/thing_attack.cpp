@@ -17,7 +17,8 @@
 #include "my_array_bounds_check.h"
 #include "my_ptrcheck.h"
 
-bool Thing::possible_to_attack(const Thingp it) {
+bool Thing::possible_to_attack(const Thingp it)
+{
   TRACE_AND_INDENT();
   auto me = tp();
 
@@ -285,7 +286,8 @@ bool Thing::possible_to_attack(const Thingp it) {
   return false;
 }
 
-bool Thing::attack(fpoint future_pos) {
+bool Thing::attack(fpoint future_pos)
+{
   bool up     = future_pos.y < mid_at.y;
   bool down   = future_pos.y > mid_at.y;
   bool left   = future_pos.x < mid_at.x;
@@ -299,7 +301,8 @@ bool Thing::attack(fpoint future_pos) {
   return (move(future_pos, up, down, left, right, attack, idle, shove_allowed, attack_allowed));
 }
 
-bool Thing::attack(Thingp it) {
+bool Thing::attack(Thingp it)
+{
   TRACE_AND_INDENT();
   dbg("Attack %s", it->to_string().c_str());
   TRACE_AND_INDENT();

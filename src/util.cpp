@@ -10,7 +10,8 @@
 #include "my_ptrcheck.h"
 #include "stdlib.h"
 
-void *myzalloc_(int size, std::string what, std::string file, std::string func, int line) {
+void *myzalloc_(int size, std::string what, std::string file, std::string func, int line)
+{
   TRACE_AND_INDENT();
   void *ptr = calloc(1, size);
 
@@ -23,7 +24,8 @@ void *myzalloc_(int size, std::string what, std::string file, std::string func, 
   return (ptr);
 }
 
-void *mymalloc_(int size, std::string what, std::string file, std::string func, int line) {
+void *mymalloc_(int size, std::string what, std::string file, std::string func, int line)
+{
   TRACE_AND_INDENT();
   void *ptr = malloc(size);
 
@@ -36,7 +38,8 @@ void *mymalloc_(int size, std::string what, std::string file, std::string func, 
   return (ptr);
 }
 
-void *myrealloc_(void *ptr, int size, std::string what, std::string file, std::string func, int line) {
+void *myrealloc_(void *ptr, int size, std::string what, std::string file, std::string func, int line)
+{
   TRACE_AND_INDENT();
   IF_DEBUG2 { ptrcheck_free(ptr, file, func, line); }
 
@@ -50,14 +53,16 @@ void *myrealloc_(void *ptr, int size, std::string what, std::string file, std::s
   return (ptr);
 }
 
-void myfree_(void *ptr, std::string file, std::string func, int line) {
+void myfree_(void *ptr, std::string file, std::string func, int line)
+{
   TRACE_AND_INDENT();
   IF_DEBUG2 { ptrcheck_free(ptr, file, func, line); }
 
   free(ptr);
 }
 
-char *dupstr_(const char *in, std::string what, std::string file, std::string func, int line) {
+char *dupstr_(const char *in, std::string what, std::string file, std::string func, int line)
+{
   TRACE_AND_INDENT();
   if (! in) {
     ERR("No string to duplicate");

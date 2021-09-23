@@ -13,7 +13,8 @@
 #include "my_level.h"
 #include "my_thing.h"
 
-bool Thing::throw_item_choose_target(Thingp item) {
+bool Thing::throw_item_choose_target(Thingp item)
+{
   TRACE_AND_INDENT();
   dbg("Trying to throw: %s", item->to_string().c_str());
 
@@ -34,7 +35,8 @@ bool Thing::throw_item_choose_target(Thingp item) {
   return target_select(item);
 }
 
-void Thing::throw_at(Thingp item, Thingp target) {
+void Thing::throw_at(Thingp item, Thingp target)
+{
   TRACE_AND_INDENT();
   if (! item) {
     item = game->request_to_throw_item;

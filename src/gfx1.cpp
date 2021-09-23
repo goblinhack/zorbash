@@ -8,7 +8,8 @@
 #include "my_gfx.h"
 #include "my_ui.h"
 
-void gfx_init1(void) {
+void gfx_init1(void)
+{
   std::initializer_list< std::string > tiles = {
       "ui1,0,0",  "ui1,1,0",  "ui1,2,0",   "ui1,3,0",   "ui1,4,0",   "ui1,5,0",   "ui1,6,0",   "ui1,7,0",
       "ui1,8,0",  "ui1,9,0",  "ui1,10,0",  "ui1,11,0",  "ui1,12,0",  "ui1,13,0",  "ui1,14,0",  "ui1,15,0",

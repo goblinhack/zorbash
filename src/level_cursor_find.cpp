@@ -18,7 +18,8 @@
 #include "my_sdl.h"
 
 void Level::cursor_find_on_visible_things(const int16_t minx, const int16_t miny, const int16_t maxx,
-                                          const int16_t maxy) {
+                                          const int16_t maxy)
+{
   TRACE_AND_INDENT();
   if ((game->state == Game::STATE_MOVING_ITEMS) || (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
       (game->state == Game::STATE_COLLECTING_ITEMS) || (game->state == Game::STATE_WIELDING_ITEMS) ||
@@ -42,7 +43,8 @@ void Level::cursor_find_on_visible_things(const int16_t minx, const int16_t miny
     if (! wid_mouse_two_clicks) {
       if (cursor) {
         TRACE_AND_INDENT();
-        FOR_ALL_THINGS(this, t, to.x, to.y) {
+        FOR_ALL_THINGS(this, t, to.x, to.y)
+        {
           if (t->is_cursor_can_hover_over_x2_click()) {
             goto done;
           }
@@ -59,7 +61,8 @@ void Level::cursor_find_on_visible_things(const int16_t minx, const int16_t miny
     cursor_found = false;
     for (auto y = miny; y < maxy; y++) {
       for (auto x = minx; x < maxx; x++) {
-        FOR_ALL_GRID_THINGS(this, t, x, y) {
+        FOR_ALL_GRID_THINGS(this, t, x, y)
+        {
           t->cursor_hover_over_check();
           if (cursor_found) {
             goto done;

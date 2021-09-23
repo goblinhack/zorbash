@@ -16,7 +16,8 @@
 #include "my_vector_bounds_check.h"
 #include "my_ui.h"
 
-void Thing::inventory_particle(Thingp item, uint32_t slot) {
+void Thing::inventory_particle(Thingp item, uint32_t slot)
+{
   TRACE_AND_INDENT();
   dbg("Create inventory particle? %s", item->to_string().c_str());
   TRACE_AND_INDENT();
@@ -122,7 +123,8 @@ void Thing::inventory_particle(Thingp item, uint32_t slot) {
 //
 // Particle from the inventory to tp_id target
 //
-void Thing::inventory_particle(Thingp item, uint32_t slot, Thingp particle_target) {
+void Thing::inventory_particle(Thingp item, uint32_t slot, Thingp particle_target)
+{
   TRACE_AND_INDENT();
   dbg("Create inventory particle %s with target %s", item->to_string().c_str(), particle_target->to_string().c_str());
   TRACE_AND_INDENT();
@@ -184,7 +186,8 @@ void Thing::inventory_particle(Thingp item, uint32_t slot, Thingp particle_targe
                                true /* make_visible_at_end */);
 }
 
-bool Thing::inventory_id_insert(Thingp item) {
+bool Thing::inventory_id_insert(Thingp item)
+{
   TRACE_AND_INDENT();
   dbg("Inventory insert %s", item->to_string().c_str());
   TRACE_AND_INDENT();
@@ -311,7 +314,8 @@ bool Thing::inventory_id_insert(Thingp item) {
   return true;
 }
 
-bool Thing::inventory_id_remove(Thingp item) {
+bool Thing::inventory_id_remove(Thingp item)
+{
   TRACE_AND_INDENT();
   dbg("Inventory remove %s", item->to_string().c_str());
   TRACE_AND_INDENT();
@@ -380,7 +384,8 @@ bool Thing::inventory_id_remove(Thingp item) {
   return false;
 }
 
-bool Thing::inventory_id_remove(Thingp item, Thingp particle_target) {
+bool Thing::inventory_id_remove(Thingp item, Thingp particle_target)
+{
   TRACE_AND_INDENT();
   dbg("Inventory remove %s with target %s", item->to_string().c_str(), particle_target->to_string().c_str());
   TRACE_AND_INDENT();
@@ -453,7 +458,8 @@ bool Thing::inventory_id_remove(Thingp item, Thingp particle_target) {
   return false;
 }
 
-int Thing::item_slot_charge_count(const uint32_t slot) {
+int Thing::item_slot_charge_count(const uint32_t slot)
+{
   TRACE_AND_INDENT();
   if (! monstp) {
     return 0;
@@ -472,7 +478,8 @@ int Thing::item_slot_charge_count(const uint32_t slot) {
   return item_count_including_charges(tpp);
 }
 
-int Thing::item_enchant_count(const uint32_t slot) {
+int Thing::item_enchant_count(const uint32_t slot)
+{
   TRACE_AND_INDENT();
   if (! monstp) {
     return 0;
@@ -497,7 +504,8 @@ int Thing::item_enchant_count(const uint32_t slot) {
   return 0;
 }
 
-int Thing::item_slot_count(const uint32_t slot) {
+int Thing::item_slot_count(const uint32_t slot)
+{
   TRACE_AND_INDENT();
   auto tp_id = get(monstp->inventory_id, slot);
   if (! tp_id) {
@@ -516,7 +524,8 @@ int Thing::item_slot_count(const uint32_t slot) {
   return item_count_excluding_charges(tpp);
 }
 
-Thingp Level::inventory_get(const uint32_t slot) {
+Thingp Level::inventory_get(const uint32_t slot)
+{
   TRACE_AND_INDENT();
   dbg("Inventory get slot %d", slot);
   TRACE_AND_INDENT();
@@ -586,12 +595,14 @@ Thingp Level::inventory_get(const uint32_t slot) {
   return nullptr;
 }
 
-Thingp Level::inventory_get(void) {
+Thingp Level::inventory_get(void)
+{
   LOG("Inventory: Get highlight slot %d", game->inventory_highlight_slot);
   return inventory_get(game->inventory_highlight_slot);
 }
 
-bool Level::inventory_over(const uint32_t slot) {
+bool Level::inventory_over(const uint32_t slot)
+{
   TRACE_AND_INDENT();
   LOG("Inventory: Over inventory slot %d", slot);
   TRACE_AND_INDENT();
@@ -631,7 +642,8 @@ bool Level::inventory_over(const uint32_t slot) {
   return true;
 }
 
-bool Level::inventory_chosen(const uint32_t slot) {
+bool Level::inventory_chosen(const uint32_t slot)
+{
   TRACE_AND_INDENT();
   LOG("Inventory: Chosen inventory slot %d", slot);
   TRACE_AND_INDENT();
@@ -673,7 +685,8 @@ bool Level::inventory_chosen(const uint32_t slot) {
   return true;
 }
 
-bool Level::inventory_assign(const uint32_t slot, Thingp item) {
+bool Level::inventory_assign(const uint32_t slot, Thingp item)
+{
   TRACE_AND_INDENT();
   LOG("Inventory: Assign inventory slot %d", slot);
   TRACE_AND_INDENT();
@@ -714,7 +727,8 @@ bool Level::inventory_assign(const uint32_t slot, Thingp item) {
   return true;
 }
 
-int Level::inventory_get_slot(Thingp item) {
+int Level::inventory_get_slot(Thingp item)
+{
   TRACE_AND_INDENT();
   auto inventory_items = player->monstp->inventory_id.size();
   for (auto i = 0U; i < inventory_items; i++) {
@@ -735,7 +749,8 @@ int Level::inventory_get_slot(Thingp item) {
   return -1;
 }
 
-Thingp Level::inventory_describe(const uint32_t slot) {
+Thingp Level::inventory_describe(const uint32_t slot)
+{
   TRACE_AND_INDENT();
   LOG("Inventory: Describe slot %d", slot);
   TRACE_AND_INDENT();

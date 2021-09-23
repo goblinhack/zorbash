@@ -13,7 +13,8 @@
 #include "my_array_bounds_check.h"
 #include "my_ptrcheck.h"
 
-bool Thing::carry(Thingp item) {
+bool Thing::carry(Thingp item)
+{
   TRACE_AND_INDENT();
   if (! item) {
     err("No thing to carry");
@@ -175,13 +176,15 @@ bool Thing::carry(Thingp item) {
   return true;
 }
 
-bool Thing::try_to_carry(Thingp item) {
+bool Thing::try_to_carry(Thingp item)
+{
   TRACE_AND_INDENT();
   dbg("Try to carry: %s", item->to_string().c_str());
   return carry(item);
 }
 
-std::list< Thingp > Thing::anything_to_carry_at(fpoint at) {
+std::list< Thingp > Thing::anything_to_carry_at(fpoint at)
+{
   TRACE_AND_INDENT();
   std::vector< std::pair< Thingp, int > > items;
 
@@ -190,7 +193,8 @@ std::list< Thingp > Thing::anything_to_carry_at(fpoint at) {
   //
   // Can't pick things up whilst being swallowed!
   //
-  FOR_ALL_THINGS(level, t, mid_at.x, mid_at.y) {
+  FOR_ALL_THINGS(level, t, mid_at.x, mid_at.y)
+  {
     if (t->is_dead) {
       continue;
     }
@@ -206,7 +210,8 @@ std::list< Thingp > Thing::anything_to_carry_at(fpoint at) {
   }
   FOR_ALL_THINGS_END()
 
-  FOR_ALL_THINGS(level, t, at.x, at.y) {
+  FOR_ALL_THINGS(level, t, at.x, at.y)
+  {
     if (t->is_hidden) {
       continue;
     }
@@ -262,16 +267,19 @@ end:
   return out;
 }
 
-std::list< Thingp > Thing::anything_to_carry(void) {
+std::list< Thingp > Thing::anything_to_carry(void)
+{
   TRACE_AND_INDENT();
   return anything_to_carry_at(mid_at);
 }
 
-bool Thing::check_anything_to_carry(bool auto_collect_allowed) {
+bool Thing::check_anything_to_carry(bool auto_collect_allowed)
+{
   //
   // Can't pick things up whilst being swallowed!
   //
-  FOR_ALL_THINGS(level, t, mid_at.x, mid_at.y) {
+  FOR_ALL_THINGS(level, t, mid_at.x, mid_at.y)
+  {
     if (t->is_dead) {
       continue;
     }
@@ -286,7 +294,8 @@ bool Thing::check_anything_to_carry(bool auto_collect_allowed) {
   }
   FOR_ALL_THINGS_END()
 
-  FOR_ALL_THINGS(level, t, mid_at.x, mid_at.y) {
+  FOR_ALL_THINGS(level, t, mid_at.x, mid_at.y)
+  {
     if (t->is_dead) {
       continue;
     }
@@ -317,7 +326,8 @@ bool Thing::check_anything_to_carry(bool auto_collect_allowed) {
   return false;
 }
 
-void Thing::try_to_carry(const std::list< Thingp > &items) {
+void Thing::try_to_carry(const std::list< Thingp > &items)
+{
   for (auto item : items) {
     try_to_carry(item);
   }
@@ -326,7 +336,8 @@ void Thing::try_to_carry(const std::list< Thingp > &items) {
 //
 // Returns true if we tried to collect or drop something to make space
 //
-bool Thing::try_to_carry_if_worthwhile_dropping_items_if_needed(Thingp item) {
+bool Thing::try_to_carry_if_worthwhile_dropping_items_if_needed(Thingp item)
+{
   TRACE_AND_INDENT();
   Thingp would_need_to_drop = nullptr;
 

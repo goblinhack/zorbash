@@ -13,7 +13,8 @@
 #include "my_monst.h"
 #include "my_sprintf.h"
 
-bool Thing::is_enemy(Thingp attacker) const {
+bool Thing::is_enemy(Thingp attacker) const
+{
   TRACE_AND_INDENT();
   if (unlikely(! monstp)) {
     return false;
@@ -28,7 +29,8 @@ bool Thing::is_enemy(Thingp attacker) const {
 //
 // Timeout enemies so we don't resent them forever.
 //
-void Thing::enemies_tick(void) {
+void Thing::enemies_tick(void)
+{
   TRACE_AND_INDENT();
   if (! monstp) {
     return;
@@ -57,7 +59,8 @@ void Thing::enemies_tick(void) {
   }
 }
 
-void Thing::add_enemy(Thingp attacker) {
+void Thing::add_enemy(Thingp attacker)
+{
   TRACE_AND_INDENT();
   if (unlikely(! attacker->is_monst())) {
     return;

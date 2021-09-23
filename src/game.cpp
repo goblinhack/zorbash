@@ -10,7 +10,8 @@
 #include "my_level.h"
 #include "my_thing.h"
 
-Game::Game(std::string appdata) {
+Game::Game(std::string appdata)
+{
   TRACE_AND_INDENT();
   config.reset();
 
@@ -23,7 +24,8 @@ Game::Game(std::string appdata) {
   save_file = saved_dir + "saved-slot-" + std::to_string(save_slot);
 }
 
-void Game::set_meta_data(Levelp l) {
+void Game::set_meta_data(Levelp l)
+{
   TRACE_AND_INDENT();
   save_meta = "";
 
@@ -40,7 +42,8 @@ void Game::set_meta_data(Levelp l) {
   save_meta += string_timestamp();
 }
 
-int Game::get_move_speed(void) {
+int Game::get_move_speed(void)
+{
   TRACE_AND_INDENT();
   return current_move_speed;
 }

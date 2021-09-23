@@ -14,7 +14,8 @@
 #include "my_sound.h"
 #include "my_main.h"
 
-PyObject *sound_load_(PyObject *obj, PyObject *args, PyObject *keywds) {
+PyObject *sound_load_(PyObject *obj, PyObject *args, PyObject *keywds)
+{
   TRACE_AND_INDENT();
   char *file   = 0;
   char *name   = 0;
@@ -46,7 +47,8 @@ PyObject *sound_load_(PyObject *obj, PyObject *args, PyObject *keywds) {
   Py_RETURN_TRUE;
 }
 
-PyObject *sound_play_(PyObject *obj, PyObject *args, PyObject *keywds) {
+PyObject *sound_play_(PyObject *obj, PyObject *args, PyObject *keywds)
+{
   TRACE_AND_INDENT();
   char *name = 0;
 
@@ -72,7 +74,8 @@ PyObject *sound_play_(PyObject *obj, PyObject *args, PyObject *keywds) {
   Py_RETURN_TRUE;
 }
 
-PyObject *sound_play_channel_(PyObject *obj, PyObject *args, PyObject *keywds) {
+PyObject *sound_play_channel_(PyObject *obj, PyObject *args, PyObject *keywds)
+{
   TRACE_AND_INDENT();
   char *name    = 0;
   int   channel = 0;

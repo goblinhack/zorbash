@@ -28,7 +28,8 @@ static int              thing_possible_hit_size;
 //
 // Python callback upon being fire_at
 //
-bool Thing::on_firing_at_something(Thingp hitter) {
+bool Thing::on_firing_at_something(Thingp hitter)
+{
   TRACE_AND_INDENT();
   auto on_firing_at_something = tp()->on_firing_at_something_do();
   if (std::empty(on_firing_at_something)) {
@@ -58,7 +59,8 @@ bool Thing::on_firing_at_something(Thingp hitter) {
 /*
  * Find the thing with the highest priority to hit.
  */
-Thingp Thing::get_best_fire_at_target(void) {
+Thingp Thing::get_best_fire_at_target(void)
+{
   ThingPossibleHit *best = nullptr;
   int               i;
 
@@ -99,7 +101,8 @@ Thingp Thing::get_best_fire_at_target(void) {
 /*
  * Add a thing to the list of things that could be hit on this attack.
  */
-static void thing_possible_hit_add(Thingp me, Thingp target) {
+static void thing_possible_hit_add(Thingp me, Thingp target)
+{
   if (! game->level->can_see(me->mid_at.x, me->mid_at.y, target->mid_at.x, target->mid_at.y)) {
     return;
   }
@@ -117,7 +120,8 @@ static void thing_possible_hit_add(Thingp me, Thingp target) {
 //
 // Try to find something to fire at.
 //
-bool Thing::fire_at_target(void) {
+bool Thing::fire_at_target(void)
+{
   if (! is_able_to_fire_at()) {
     return false;
   }
@@ -146,7 +150,8 @@ bool Thing::fire_at_target(void) {
         continue;
       }
 
-      FOR_ALL_THINGS_THAT_INTERACT(level, it, x, y) {
+      FOR_ALL_THINGS_THAT_INTERACT(level, it, x, y)
+      {
         if (this == it) {
           continue;
         }
@@ -178,7 +183,8 @@ bool Thing::fire_at_target(void) {
   return on_firing_at_something(target);
 }
 
-bool Thing::fire_at_and_choose_target(Thingp item) {
+bool Thing::fire_at_and_choose_target(Thingp item)
+{
   TRACE_AND_INDENT();
   if (item->laser_name().empty()) {
     return projectile_choose_target(item);

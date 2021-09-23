@@ -16,7 +16,8 @@
 #include "my_vector_bounds_check.h"
 #include "my_ui.h"
 
-bool Thing::skillbox_id_insert(Thingp what) {
+bool Thing::skillbox_id_insert(Thingp what)
+{
   TRACE_AND_INDENT();
   dbg("Skillbox insert %s", what->to_string().c_str());
   TRACE_AND_INDENT();
@@ -90,7 +91,8 @@ bool Thing::skillbox_id_insert(Thingp what) {
   return true;
 }
 
-bool Thing::skillbox_id_remove(Thingp what) {
+bool Thing::skillbox_id_remove(Thingp what)
+{
   TRACE_AND_INDENT();
   dbg("Skillbox remove %s", what->to_string().c_str());
   TRACE_AND_INDENT();
@@ -149,7 +151,8 @@ bool Thing::skillbox_id_remove(Thingp what) {
   return false;
 }
 
-Thingp Level::skillbox_get(const uint32_t slot) {
+Thingp Level::skillbox_get(const uint32_t slot)
+{
   TRACE_AND_INDENT();
   dbg("Skillbox get slot %d", slot);
   TRACE_AND_INDENT();
@@ -199,7 +202,8 @@ Thingp Level::skillbox_get(const uint32_t slot) {
 
 Thingp Level::skillbox_get(void) { return skillbox_get(game->skillbox_highlight_slot); }
 
-bool Level::skillbox_over(const uint32_t slot) {
+bool Level::skillbox_over(const uint32_t slot)
+{
   TRACE_AND_INDENT();
   LOG("Skillbox: Over skillbox slot %d", slot);
   TRACE_AND_INDENT();
@@ -239,7 +243,8 @@ bool Level::skillbox_over(const uint32_t slot) {
   return true;
 }
 
-bool Level::skillbox_chosen(const uint32_t slot) {
+bool Level::skillbox_chosen(const uint32_t slot)
+{
   TRACE_AND_INDENT();
   LOG("Skillbox: Chosen skillbox slot %d", slot);
   TRACE_AND_INDENT();
@@ -286,7 +291,8 @@ bool Level::skillbox_chosen(const uint32_t slot) {
   return true;
 }
 
-Thingp Level::skillbox_describe(const uint32_t slot) {
+Thingp Level::skillbox_describe(const uint32_t slot)
+{
   TRACE_AND_INDENT();
   LOG("Skillbox: Describe slot %d", slot);
   TRACE_AND_INDENT();

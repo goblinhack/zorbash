@@ -12,7 +12,8 @@
 #include "my_music.h"
 #include "my_main.h"
 
-PyObject *music_load_(PyObject *obj, PyObject *args, PyObject *keywds) {
+PyObject *music_load_(PyObject *obj, PyObject *args, PyObject *keywds)
+{
   TRACE_AND_INDENT();
   char *   file = 0;
   char *   name = 0;
@@ -44,7 +45,8 @@ PyObject *music_load_(PyObject *obj, PyObject *args, PyObject *keywds) {
   Py_RETURN_TRUE;
 }
 
-PyObject *music_play_(PyObject *obj, PyObject *args, PyObject *keywds) {
+PyObject *music_play_(PyObject *obj, PyObject *args, PyObject *keywds)
+{
   TRACE_AND_INDENT();
   char *name = 0;
 

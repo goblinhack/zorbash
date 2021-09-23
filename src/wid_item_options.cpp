@@ -23,7 +23,8 @@ static Thingp chosen_thing;
 static Widp   chosen_wid;
 static bool   came_from_inventory;
 
-void wid_item_options_destroy(void) {
+void wid_item_options_destroy(void)
+{
   TRACE_AND_INDENT();
   DBG3("Item options destroy");
   TRACE_AND_INDENT();
@@ -31,7 +32,8 @@ void wid_item_options_destroy(void) {
   wid_item_options_window = nullptr;
 }
 
-static uint8_t wid_item_options_use(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t wid_item_options_use(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   DBG3("Item options use");
   TRACE_AND_INDENT();
@@ -54,7 +56,8 @@ static uint8_t wid_item_options_use(Widp w, int32_t x, int32_t y, uint32_t butto
   return true;
 }
 
-static uint8_t wid_item_options_eat(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t wid_item_options_eat(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   DBG3("Item options eat");
   TRACE_AND_INDENT();
@@ -82,7 +85,8 @@ static uint8_t wid_item_options_eat(Widp w, int32_t x, int32_t y, uint32_t butto
   return true;
 }
 
-static uint8_t wid_item_options_throw(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t wid_item_options_throw(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   DBG3("Item options throw");
   TRACE_AND_INDENT();
@@ -102,7 +106,8 @@ static uint8_t wid_item_options_throw(Widp w, int32_t x, int32_t y, uint32_t but
   return true;
 }
 
-static uint8_t wid_item_options_drop(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t wid_item_options_drop(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   DBG3("Item options drop");
   TRACE_AND_INDENT();
@@ -129,7 +134,8 @@ static uint8_t wid_item_options_drop(Widp w, int32_t x, int32_t y, uint32_t butt
   return true;
 }
 
-static uint8_t wid_item_options_move(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t wid_item_options_move(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   DBG3("Item options move");
   TRACE_AND_INDENT();
@@ -138,7 +144,8 @@ static uint8_t wid_item_options_move(Widp w, int32_t x, int32_t y, uint32_t butt
   return true;
 }
 
-static uint8_t wid_item_options_back(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t wid_item_options_back(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   DBG3("Item options back");
   TRACE_AND_INDENT();
@@ -156,7 +163,8 @@ static uint8_t wid_item_options_back(Widp w, int32_t x, int32_t y, uint32_t butt
   return true;
 }
 
-static uint8_t wid_item_options_key_up(Widp w, const struct SDL_Keysym *key) {
+static uint8_t wid_item_options_key_up(Widp w, const struct SDL_Keysym *key)
+{
   TRACE_AND_INDENT();
   DBG3("Item options key up");
   TRACE_AND_INDENT();
@@ -208,7 +216,8 @@ static uint8_t wid_item_options_key_up(Widp w, const struct SDL_Keysym *key) {
   return false;
 }
 
-static uint8_t wid_item_options_key_down(Widp w, const struct SDL_Keysym *key) {
+static uint8_t wid_item_options_key_down(Widp w, const struct SDL_Keysym *key)
+{
   TRACE_AND_INDENT();
   DBG3("Item options key down");
   TRACE_AND_INDENT();
@@ -221,7 +230,8 @@ static uint8_t wid_item_options_key_down(Widp w, const struct SDL_Keysym *key) {
   return true;
 }
 
-void Game::wid_items_options_create(Widp w, Thingp t, bool source_came_from_inventory) {
+void Game::wid_items_options_create(Widp w, Thingp t, bool source_came_from_inventory)
+{
   TRACE_AND_INDENT();
   DBG3("Item options");
   TRACE_AND_INDENT();

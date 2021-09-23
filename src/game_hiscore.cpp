@@ -18,14 +18,16 @@
 
 static WidPopup *wid_hiscore_window;
 
-static void wid_hiscore_destroy(void) {
+static void wid_hiscore_destroy(void)
+{
   TRACE_AND_INDENT();
   delete wid_hiscore_window;
   wid_hiscore_window = nullptr;
   game->main_menu_select();
 }
 
-static uint8_t wid_hiscore_key_up(Widp w, const struct SDL_Keysym *key) {
+static uint8_t wid_hiscore_key_up(Widp w, const struct SDL_Keysym *key)
+{
   TRACE_AND_INDENT();
   if (sdl_shift_held) {
     if (key->scancode == (SDL_Scancode) game->config.key_console) {
@@ -57,7 +59,8 @@ static uint8_t wid_hiscore_key_up(Widp w, const struct SDL_Keysym *key) {
   return true;
 }
 
-static uint8_t wid_hiscore_key_down(Widp w, const struct SDL_Keysym *key) {
+static uint8_t wid_hiscore_key_down(Widp w, const struct SDL_Keysym *key)
+{
   TRACE_AND_INDENT();
   if (sdl_shift_held) {
     if (key->scancode == (SDL_Scancode) game->config.key_console) {
@@ -68,13 +71,15 @@ static uint8_t wid_hiscore_key_down(Widp w, const struct SDL_Keysym *key) {
   return true;
 }
 
-static uint8_t wid_hiscore_mouse_up(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t wid_hiscore_mouse_up(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   wid_hiscore_destroy();
   return true;
 }
 
-void Game::hiscore_select(void) {
+void Game::hiscore_select(void)
+{
   TRACE_AND_INDENT();
   if (wid_hiscore_window) {
     wid_hiscore_destroy();

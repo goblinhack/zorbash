@@ -13,7 +13,8 @@ ts_t        time_now;
 ts_t        base_time_in_mill;
 static char buf_[ MAXSHORTSTR ];
 
-ts_t time_get_time_ms(void) {
+ts_t time_get_time_ms(void)
+{
   time_update_time_milli();
 
   return (time_now);
@@ -21,7 +22,8 @@ ts_t time_get_time_ms(void) {
 
 ts_t time_get_time_ms_cached(void) { return (time_now); }
 
-const char *time2str(ts_t ms, char *buf, int len) {
+const char *time2str(ts_t ms, char *buf, int len)
+{
   int log_msec = ms;
   int log_secs = log_msec / ONESEC;
   int log_mins = log_secs / 60;
@@ -46,7 +48,8 @@ const char *time2str(ts_t ms, char *buf, int len) {
   return (buf_);
 }
 
-const char *timestamp(char *buf, int len) {
+const char *timestamp(char *buf, int len)
+{
   int log_msec = time_get_time_ms();
   int log_secs = log_msec / ONESEC;
   int log_mins = log_secs / 60;
@@ -71,7 +74,8 @@ const char *timestamp(char *buf, int len) {
   return (buf_);
 }
 
-bool time_have_x_hundredths_passed_since(ts_t val, ts_t since) {
+bool time_have_x_hundredths_passed_since(ts_t val, ts_t since)
+{
   time_get_time_ms();
 
   //
@@ -82,7 +86,8 @@ bool time_have_x_hundredths_passed_since(ts_t val, ts_t since) {
   return ((ts_t) (delay / 10) > (ts_t) val);
 }
 
-bool time_have_x_ms_passed_since(ts_t val, ts_t since) {
+bool time_have_x_ms_passed_since(ts_t val, ts_t since)
+{
   time_get_time_ms();
 
   //
@@ -93,7 +98,8 @@ bool time_have_x_ms_passed_since(ts_t val, ts_t since) {
   return ((ts_t) (delay) >= (ts_t) val);
 }
 
-bool time_have_x_tenths_passed_since(ts_t val, ts_t since) {
+bool time_have_x_tenths_passed_since(ts_t val, ts_t since)
+{
   time_get_time_ms();
 
   //
@@ -104,7 +110,8 @@ bool time_have_x_tenths_passed_since(ts_t val, ts_t since) {
   return ((ts_t) (delay / 100) >= (ts_t) val);
 }
 
-bool time_have_x_secs_passed_since(ts_t val, ts_t since) {
+bool time_have_x_secs_passed_since(ts_t val, ts_t since)
+{
   time_get_time_ms();
 
   //
@@ -115,7 +122,8 @@ bool time_have_x_secs_passed_since(ts_t val, ts_t since) {
   return ((ts_t) (delay / ONESEC) >= (ts_t) val);
 }
 
-ts_t time_get_elapsed_secs(ts_t val, ts_t since) {
+ts_t time_get_elapsed_secs(ts_t val, ts_t since)
+{
   time_get_time_ms();
 
   ts_t delay = val - since;
@@ -123,7 +131,8 @@ ts_t time_get_elapsed_secs(ts_t val, ts_t since) {
   return ((ts_t) (delay / ONESEC));
 }
 
-ts_t time_get_elapsed_tenths(ts_t val, ts_t since) {
+ts_t time_get_elapsed_tenths(ts_t val, ts_t since)
+{
   time_get_time_ms();
 
   ts_t delay = val - since;
@@ -131,7 +140,8 @@ ts_t time_get_elapsed_tenths(ts_t val, ts_t since) {
   return ((ts_t) (delay / (ONESEC / 10)));
 }
 
-void get_timestamp(char *buf, int32_t len) {
+void get_timestamp(char *buf, int32_t len)
+{
 #ifdef ENABLE_LOG_TIMESTAMPS
   char tmp[ MAXSTR ];
   string_timestamp(tmp, len);
@@ -141,7 +151,8 @@ void get_timestamp(char *buf, int32_t len) {
 #endif
 }
 
-ts_t time_update_time_milli(void) {
+ts_t time_update_time_milli(void)
+{
 #ifdef NOT_NEEDED
   //
   // Some macos specific way of getting the time that looks like it could
@@ -185,7 +196,8 @@ ts_t time_update_time_milli(void) {
   return (time_now);
 }
 
-std::string current_date(void) {
+std::string current_date(void)
+{
   struct tm *timeinfo;
   time_t     rawtime;
   char       buffer[ MAXSTR ];

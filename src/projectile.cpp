@@ -23,7 +23,8 @@
 
 Projectile_::Projectile_(Levelp level, ThingId thing_id, point start, point stop, point pixel_map_at, uint32_t ts_start,
                          uint32_t ts_stop)
-    : id(thing_id), start(start), stop(stop), pixel_map_at(pixel_map_at), ts_start(ts_start), ts_stop(ts_stop) {
+    : id(thing_id), start(start), stop(stop), pixel_map_at(pixel_map_at), ts_start(ts_start), ts_stop(ts_stop)
+{
   TRACE_AND_INDENT();
   auto t = level->thing_find(id);
   if (! t) {
@@ -70,7 +71,8 @@ Projectile_::Projectile_(Levelp level, ThingId thing_id, point start, point stop
   }
 }
 
-void Level::new_projectile(ThingId id, point start, point stop, uint32_t dur) {
+void Level::new_projectile(ThingId id, point start, point stop, uint32_t dur)
+{
   TRACE_AND_INDENT();
   if (id.ok()) {
     auto t = thing_find(id);
@@ -87,7 +89,8 @@ void Level::new_projectile(ThingId id, point start, point stop, uint32_t dur) {
   new_projectiles.push_back(Projectile(this, id, start, stop, pixel_map_at, now, now + dur));
 }
 
-void Level::display_projectiles(void) {
+void Level::display_projectiles(void)
+{
   TRACE_AND_INDENT();
 #if 0
   CON("-");
@@ -179,12 +182,14 @@ void Level::display_projectiles(void) {
   blit_flush();
 }
 
-bool Thing::projectile_anim_exists(void) {
+bool Thing::projectile_anim_exists(void)
+{
   TRACE_AND_INDENT();
   return has_projectile;
 }
 
-void Thing::delete_projectile(void) {
+void Thing::delete_projectile(void)
+{
   TRACE_AND_INDENT();
   auto e = std::remove_if(level->all_projectiles.begin(), level->all_projectiles.end(), [ =, this ](Projectile &p) {
     if (p.id == id) {

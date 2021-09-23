@@ -15,7 +15,8 @@
 #include "my_thing_template.h"
 #include "my_python.h"
 
-bool Thing::open_door(Thingp it) {
+bool Thing::open_door(Thingp it)
+{
   TRACE_AND_INDENT();
   if (! is_monst() && ! is_player()) {
     return false;
@@ -70,7 +71,8 @@ bool Thing::open_door(Thingp it) {
   return false;
 }
 
-bool Thing::close_door(Thingp it) {
+bool Thing::close_door(Thingp it)
+{
   TRACE_AND_INDENT();
   if (is_on_fire()) {
     if (! it->is_on_fire()) {

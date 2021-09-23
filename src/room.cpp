@@ -14,7 +14,8 @@
 
 std::vector< Roomp > Room::all_rooms;
 
-Room::Room(void) {
+Room::Room(void)
+{
   this->roomno = all_rooms.size();
   newptr(this, "room");
 }
@@ -23,21 +24,24 @@ Room::~Room(void) { oldptr(this); }
 
 void room_init(void) { TRACE_AND_INDENT(); }
 
-void room_fini(void) {
+void room_fini(void)
+{
   TRACE_AND_INDENT();
   for (auto &r : Room::all_rooms) {
     delete r;
   }
 }
 
-Roomp Room::room_new(void) {
+Roomp Room::room_new(void)
+{
   TRACE_AND_INDENT();
   auto r = new Room();
   Room::all_rooms.push_back(r);
   return (r);
 }
 
-Roomp Room::create_w_flip(void) {
+Roomp Room::create_w_flip(void)
+{
   TRACE_AND_INDENT();
   std::vector< std::string > rot[ MAP_DEPTH ];
 
@@ -93,7 +97,8 @@ Roomp Room::create_w_flip(void) {
   return (r);
 }
 
-Roomp Room::rotate_clockwise(void) {
+Roomp Room::rotate_clockwise(void)
+{
   TRACE_AND_INDENT();
   std::vector< std::string > rot[ MAP_DEPTH ];
 
@@ -153,7 +158,8 @@ Roomp Room::rotate_clockwise(void) {
 //
 // Find all doors from a room
 //
-void Room::find_doors(void) {
+void Room::find_doors(void)
+{
   int z = MAP_DEPTH_OBJ;
 
   for (auto x : range< int >(0, width)) {
@@ -183,13 +189,15 @@ void Room::find_doors(void) {
   }
 }
 
-void Room::finalize(void) {
+void Room::finalize(void)
+{
   find_doors();
 
   IF_DEBUG4 { dump(); }
 }
 
-void Room::dump(void) {
+void Room::dump(void)
+{
   std::array< std::array< char, MAP_HEIGHT >, MAP_WIDTH > tmp {};
   for (auto y = 0; y < height; y++) {
     for (auto x = 0; x < width; x++) {
@@ -228,7 +236,8 @@ void Room::dump(void) {
   LOG("-");
 }
 
-void Room::con(void) {
+void Room::con(void)
+{
   std::array< std::array< char, MAP_HEIGHT >, MAP_WIDTH > tmp {};
   for (auto y = 0; y < height; y++) {
     for (auto x = 0; x < width; x++) {
@@ -267,7 +276,8 @@ void Room::con(void) {
   CON("-");
 }
 
-bool Room::contains(int depth, char what) {
+bool Room::contains(int depth, char what)
+{
   for (auto y = 0; y < height; y++) {
     for (auto x = 0; x < width; x++) {
       auto m = get(data, x, y, depth);

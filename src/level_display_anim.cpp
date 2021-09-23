@@ -11,7 +11,8 @@
 #include "my_gl.h"
 #include "my_thing.h"
 
-void Level::display_anim(void) {
+void Level::display_anim(void)
+{
   TRACE_AND_INDENT();
   static uint32_t anim_speed;
   if (! anim_speed) {

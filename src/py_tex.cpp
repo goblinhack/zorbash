@@ -12,7 +12,8 @@
 #include "my_tex.h"
 #include "my_main.h"
 
-PyObject *tex_load_(PyObject *obj, PyObject *args, PyObject *keywds) {
+PyObject *tex_load_(PyObject *obj, PyObject *args, PyObject *keywds)
+{
   TRACE_AND_INDENT();
   char *file = 0;
   char *name = 0;

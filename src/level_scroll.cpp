@@ -12,7 +12,8 @@
 #include "my_globals.h"
 #include "my_sdl.h"
 
-void Level::scroll_map_do(bool fast) {
+void Level::scroll_map_do(bool fast)
+{
   TRACE_AND_INDENT();
   if (! fast) {
     //
@@ -156,7 +157,8 @@ if (player) {
   }
 }
 
-void Level::scroll_map(void) {
+void Level::scroll_map(void)
+{
   TRACE_AND_INDENT();
   if (wid_find_under_mouse_when_scrolling()) {
     return;
@@ -165,7 +167,8 @@ void Level::scroll_map(void) {
   scroll_map_do(false);
 }
 
-void Level::scroll_map_to_player(void) {
+void Level::scroll_map_to_player(void)
+{
   TRACE_AND_INDENT();
   if (! player) {
     return;
@@ -182,7 +185,8 @@ void Level::scroll_map_to_player(void) {
   scroll_map_do(true);
 }
 
-void Level::scroll_map_to_player_immediately(void) {
+void Level::scroll_map_to_player_immediately(void)
+{
   TRACE_AND_INDENT();
   if (! player) {
     return;
@@ -214,7 +218,8 @@ void Level::scroll_map_to_player_immediately(void) {
 //
 // Make the map scroll to the cursor (or the player)
 //
-void Level::scroll_map_set_target(void) {
+void Level::scroll_map_set_target(void)
+{
   TRACE_AND_INDENT();
   fpoint follow;
   float  sensitivity;

@@ -14,7 +14,8 @@
 #include "my_ptrcheck.h"
 #include "my_thing_ai.h"
 
-bool Level::create_sewer(point3d at, int seed) {
+bool Level::create_sewer(point3d at, int seed)
+{
   TRACE_AND_INDENT();
   log("Create sewer at (%d,%d,%d)", at.x, at.y, at.z);
 
@@ -95,7 +96,8 @@ bool Level::create_sewer(point3d at, int seed) {
   return true;
 }
 
-bool Level::create_sewer_pipes(point3d at) {
+bool Level::create_sewer_pipes(point3d at)
+{
   TRACE_AND_INDENT();
   auto prev = get(game->world.levels, at.x, at.y, at.z - 1);
   if (! prev) {
@@ -135,7 +137,8 @@ bool Level::create_sewer_pipes(point3d at) {
 
   for (auto y = 0; y < MAP_HEIGHT; y++) {
     for (auto x = 0; x < MAP_HEIGHT; x++) {
-      FOR_ALL_THINGS(prev, t, x, y) {
+      FOR_ALL_THINGS(prev, t, x, y)
+      {
         if (t->is_descend_sewer()) {
           point p(x, y);
           sewers.push_back(p);
@@ -325,7 +328,8 @@ bool Level::create_sewer_pipes(point3d at) {
   return true;
 }
 
-void Level::create_sewer_place_walls(int variant, int block_width, int block_height, int tries) {
+void Level::create_sewer_place_walls(int variant, int block_width, int block_height, int tries)
+{
   TRACE_AND_INDENT();
   auto tp = tp_random_sewer_wall();
   if (! tp) {
@@ -405,7 +409,8 @@ void Level::create_sewer_place_walls(int variant, int block_width, int block_hei
   }
 }
 
-void Level::create_sewer_place_remaining_walls(const std::string &what) {
+void Level::create_sewer_place_remaining_walls(const std::string &what)
+{
   TRACE_AND_INDENT();
   for (auto x = 0; x < MAP_WIDTH; x++) {
     for (auto y = 0; y < MAP_HEIGHT; y++) {

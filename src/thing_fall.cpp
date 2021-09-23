@@ -18,7 +18,8 @@
 //
 // Python callback upon being fall
 //
-void Thing::on_fall(void) {
+void Thing::on_fall(void)
+{
   TRACE_AND_INDENT();
   auto on_fall = tp()->on_fall_do();
   if (std::empty(on_fall)) {
@@ -42,7 +43,8 @@ void Thing::on_fall(void) {
   }
 }
 
-void Thing::fall(float fall_height, ts_t ms) {
+void Thing::fall(float fall_height, ts_t ms)
+{
   TRACE_AND_INDENT();
   dbg("Can fall?");
   TRACE_AND_INDENT();
@@ -100,7 +102,8 @@ void Thing::fall(float fall_height, ts_t ms) {
   }
 }
 
-float Thing::get_fall(void) {
+float Thing::get_fall(void)
+{
   auto t = time_get_time_ms_cached();
 
   if (t >= get_ts_fall_end()) {
@@ -131,7 +134,8 @@ float Thing::get_fall(void) {
   return (height);
 }
 
-bool Thing::fall_to_next_level(void) {
+bool Thing::fall_to_next_level(void)
+{
   TRACE_AND_INDENT();
   if (! monstp) {
     return false;
@@ -214,7 +218,8 @@ bool Thing::fall_to_next_level(void) {
     if (next_level->is_floor(x, y) || next_level->is_corridor(x, y) || next_level->is_bridge(x, y) ||
         next_level->is_water(x, y) || next_level->is_fire(x, y) || next_level->is_lava(x, y)) {
 
-      IF_DEBUG1 {
+      IF_DEBUG1
+      {
         FOR_ALL_THINGS(next_level, t, x, y) { t->log("Landed under thing on new level"); }
         FOR_ALL_THINGS_END()
       }

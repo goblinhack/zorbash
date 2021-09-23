@@ -22,7 +22,8 @@
 
 std::list< WidPopup * > wid_thing_info_window;
 
-void wid_thing_info_fini(void) {
+void wid_thing_info_fini(void)
+{
   TRACE_AND_INDENT();
   DBG3("Destroy wid thing info");
   // traceback_dump();
@@ -46,12 +47,14 @@ void wid_thing_info_fini(void) {
   //
 }
 
-uint8_t wid_thing_info_init(void) {
+uint8_t wid_thing_info_init(void)
+{
   TRACE_AND_INDENT();
   return true;
 }
 
-void Game::wid_thing_info_destroy_immediate(void) {
+void Game::wid_thing_info_destroy_immediate(void)
+{
   TRACE_AND_INDENT();
   if (game->request_remake_inventory) {
     //
@@ -66,12 +69,14 @@ void Game::wid_thing_info_destroy_immediate(void) {
   wid_thing_info_fini();
 }
 
-void Game::wid_thing_info_destroy_deferred(void) {
+void Game::wid_thing_info_destroy_deferred(void)
+{
   TRACE_AND_INDENT();
   request_destroy_thing_info = time_get_time_ms_cached();
 }
 
-WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br) {
+WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
+{
   TRACE_AND_INDENT();
   auto player = game->level->player;
   if (! player) {
@@ -175,7 +180,8 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br) {
   return wid_popup_window;
 }
 
-WidPopup *Game::wid_thing_info_create_popup_compact(const std::vector< Thingp > &ts) {
+WidPopup *Game::wid_thing_info_create_popup_compact(const std::vector< Thingp > &ts)
+{
   TRACE_AND_INDENT();
   auto player = game->level->player;
   if (! player) {
@@ -229,7 +235,8 @@ WidPopup *Game::wid_thing_info_create_popup_compact(const std::vector< Thingp > 
   return wid_popup_window;
 }
 
-bool Game::wid_thing_info_push_popup(Thingp t) {
+bool Game::wid_thing_info_push_popup(Thingp t)
+{
   TRACE_AND_INDENT();
   if (t->long_text_description() == "") {
     IF_DEBUG1 { t->log("No; cannot push, no text"); }
@@ -275,7 +282,8 @@ bool Game::wid_thing_info_push_popup(Thingp t) {
   return true;
 }
 
-void Game::wid_thing_info_clear_popup(void) {
+void Game::wid_thing_info_clear_popup(void)
+{
   TRACE_AND_INDENT();
   if (wid_thing_info_window.empty()) {
     return;
@@ -289,7 +297,8 @@ void Game::wid_thing_info_clear_popup(void) {
   wid_thing_info_window.clear();
 }
 
-void Game::wid_thing_info_create(Thingp t, bool when_hovering_over) {
+void Game::wid_thing_info_create(Thingp t, bool when_hovering_over)
+{
   TRACE_AND_INDENT();
   DBG3("Create wid thing info for %s", t->to_string().c_str());
   TRACE_AND_INDENT();
@@ -405,7 +414,8 @@ void Game::wid_thing_info_create(Thingp t, bool when_hovering_over) {
   recursion = false;
 }
 
-void Game::wid_thing_info_create_list(const std::vector< Thingp > &ts) {
+void Game::wid_thing_info_create_list(const std::vector< Thingp > &ts)
+{
   TRACE_AND_INDENT();
   if (game->request_remake_inventory) {
     //
@@ -502,7 +512,8 @@ void Game::wid_thing_info_create_list(const std::vector< Thingp > &ts) {
     }
   }
   TRACE_AND_INDENT();
-  IF_DEBUG1 {
+  IF_DEBUG1
+  {
     for (auto t : ts) {
       t->log("- candidate");
     }
@@ -554,11 +565,13 @@ void Game::wid_thing_info_create_list(const std::vector< Thingp > &ts) {
 
 void Game::wid_thing_info_create_when_hovering_over(Thingp t) { wid_thing_info_create(t, true); }
 
-void Game::wid_thing_info_create_when_hovering_over_list(const std::vector< Thingp > &ts) {
+void Game::wid_thing_info_create_when_hovering_over_list(const std::vector< Thingp > &ts)
+{
   wid_thing_info_create_list(ts);
 }
 
-void Game::wid_thing_info_add_enchant(WidPopup *w, Thingp t) {
+void Game::wid_thing_info_add_enchant(WidPopup *w, Thingp t)
+{
   TRACE_AND_INDENT();
   if (t->get_enchant()) {
     if (t->is_skill()) {
@@ -570,7 +583,8 @@ void Game::wid_thing_info_add_enchant(WidPopup *w, Thingp t) {
   }
 }
 
-void Game::wid_thing_info_add_item_rarity(WidPopup *w, Thingp t) {
+void Game::wid_thing_info_add_item_rarity(WidPopup *w, Thingp t)
+{
   TRACE_AND_INDENT();
   auto tp = t->tp();
   if (t->is_collectable()) {
@@ -586,7 +600,8 @@ void Game::wid_thing_info_add_item_rarity(WidPopup *w, Thingp t) {
   }
 }
 
-void Game::wid_thing_info_add_monst_rarity(WidPopup *w, Thingp t) {
+void Game::wid_thing_info_add_monst_rarity(WidPopup *w, Thingp t)
+{
   TRACE_AND_INDENT();
   auto tp = t->tp();
   if (t->is_monst()) {
@@ -602,7 +617,8 @@ void Game::wid_thing_info_add_monst_rarity(WidPopup *w, Thingp t) {
   }
 }
 
-void Game::wid_thing_info_add_gold_value(WidPopup *w, Thingp t) {
+void Game::wid_thing_info_add_gold_value(WidPopup *w, Thingp t)
+{
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
   char tmp2[ MAXSHORTSTR ];
@@ -621,7 +637,8 @@ void Game::wid_thing_info_add_gold_value(WidPopup *w, Thingp t) {
   }
 }
 
-void Game::wid_thing_info_add_nutrition(WidPopup *w, Thingp t) {
+void Game::wid_thing_info_add_nutrition(WidPopup *w, Thingp t)
+{
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
   char tmp2[ MAXSHORTSTR ];
@@ -646,7 +663,8 @@ void Game::wid_thing_info_add_nutrition(WidPopup *w, Thingp t) {
   }
 }
 
-void Game::wid_thing_info_add_health(WidPopup *w, Thingp t) {
+void Game::wid_thing_info_add_health(WidPopup *w, Thingp t)
+{
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
   char tmp2[ MAXSHORTSTR ];
@@ -662,7 +680,8 @@ void Game::wid_thing_info_add_health(WidPopup *w, Thingp t) {
   }
 }
 
-void Game::wid_thing_info_add_melee_damage(WidPopup *w, Thingp t) {
+void Game::wid_thing_info_add_melee_damage(WidPopup *w, Thingp t)
+{
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
   char tmp2[ MAXSHORTSTR ];
@@ -684,7 +703,8 @@ void Game::wid_thing_info_add_melee_damage(WidPopup *w, Thingp t) {
   }
 }
 
-void Game::wid_thing_info_add_poison_damage(WidPopup *w, Thingp t) {
+void Game::wid_thing_info_add_poison_damage(WidPopup *w, Thingp t)
+{
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
   char tmp2[ MAXSHORTSTR ];
@@ -706,7 +726,8 @@ void Game::wid_thing_info_add_poison_damage(WidPopup *w, Thingp t) {
   }
 }
 
-void Game::wid_thing_info_add_bite_damage(WidPopup *w, Thingp t) {
+void Game::wid_thing_info_add_bite_damage(WidPopup *w, Thingp t)
+{
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
   char tmp2[ MAXSHORTSTR ];
@@ -728,7 +749,8 @@ void Game::wid_thing_info_add_bite_damage(WidPopup *w, Thingp t) {
   }
 }
 
-void Game::wid_thing_info_add_swallow_damage(WidPopup *w, Thingp t) {
+void Game::wid_thing_info_add_swallow_damage(WidPopup *w, Thingp t)
+{
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
   char tmp2[ MAXSHORTSTR ];
@@ -750,7 +772,8 @@ void Game::wid_thing_info_add_swallow_damage(WidPopup *w, Thingp t) {
   }
 }
 
-void Game::wid_thing_info_add_attack(WidPopup *w, Thingp t) {
+void Game::wid_thing_info_add_attack(WidPopup *w, Thingp t)
+{
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
 
@@ -767,7 +790,8 @@ void Game::wid_thing_info_add_attack(WidPopup *w, Thingp t) {
   }
 }
 
-void Game::wid_thing_info_add_defence(WidPopup *w, Thingp t) {
+void Game::wid_thing_info_add_defence(WidPopup *w, Thingp t)
+{
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
 
@@ -784,7 +808,8 @@ void Game::wid_thing_info_add_defence(WidPopup *w, Thingp t) {
   }
 }
 
-void Game::wid_thing_info_add_strength(WidPopup *w, Thingp t) {
+void Game::wid_thing_info_add_strength(WidPopup *w, Thingp t)
+{
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
 
@@ -801,7 +826,8 @@ void Game::wid_thing_info_add_strength(WidPopup *w, Thingp t) {
   }
 }
 
-void Game::wid_thing_info_add_constitution(WidPopup *w, Thingp t) {
+void Game::wid_thing_info_add_constitution(WidPopup *w, Thingp t)
+{
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
 
@@ -818,7 +844,8 @@ void Game::wid_thing_info_add_constitution(WidPopup *w, Thingp t) {
   }
 }
 
-void Game::wid_thing_info_add_danger_level(WidPopup *w, Thingp t) {
+void Game::wid_thing_info_add_danger_level(WidPopup *w, Thingp t)
+{
   TRACE_AND_INDENT();
   auto player = game->level->player;
   if (! player) {
@@ -889,7 +916,8 @@ void Game::wid_thing_info_add_danger_level(WidPopup *w, Thingp t) {
   }
 }
 
-void Game::wid_thing_info_add_carry_info(WidPopup *w, Thingp t) {
+void Game::wid_thing_info_add_carry_info(WidPopup *w, Thingp t)
+{
   TRACE_AND_INDENT();
   auto player = game->level->player;
   if (! player) {
@@ -946,7 +974,8 @@ void Game::wid_thing_info_add_carry_info(WidPopup *w, Thingp t) {
   }
 }
 
-void Game::wid_thing_info_add_charge_count(WidPopup *w, Thingp t) {
+void Game::wid_thing_info_add_charge_count(WidPopup *w, Thingp t)
+{
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
   char tmp2[ MAXSHORTSTR ];

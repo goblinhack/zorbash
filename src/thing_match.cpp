@@ -13,7 +13,8 @@
 #include "my_string.h"
 #include "slre.h"
 
-bool Thing::matches(const std::string &what) const {
+bool Thing::matches(const std::string &what) const
+{
   if (strisregexp(what.c_str())) {
     struct slre slre;
     if (slre_compile(&slre, what.c_str())) {
@@ -789,7 +790,8 @@ bool Thing::matches(const std::string &what) const {
   return (what == short_text_name());
 }
 
-std::function< int(Thingp) > Thing::matches_to_func(const std::string &what) {
+std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
+{
   if (what == "ai_avoid_distance") {
     return &Thing::ai_avoid_distance;
   }

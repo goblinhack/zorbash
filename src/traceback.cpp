@@ -18,7 +18,8 @@
 #include "my_sprintf.h"
 #include "my_globals.h"
 
-void Traceback::init(void) {
+void Traceback::init(void)
+{
 #ifndef _WIN32
   size = backtrace(&tb[ 0 ], tb.size());
 #else
@@ -32,15 +33,18 @@ void Traceback::init(void) {
 #ifndef _WIN32
 static bool starts_with(const char *s, const char *prefix) { return strncmp(s, prefix, strlen(prefix)) == 0; }
 
-static bool is_mangle_char_posix(char c) {
+static bool is_mangle_char_posix(char c)
+{
   return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9') || c == '_';
 }
 
-static bool is_mangle_char_win(char c) {
+static bool is_mangle_char_win(char c)
+{
   return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9') || strchr("?_@$", c);
 }
 
-static bool is_plausible_itanium_prefix(char *s) {
+static bool is_plausible_itanium_prefix(char *s)
+{
   // Itanium symbols start with 1-4 underscores followed by Z.
   // strnstr() is BSD, so use a small local buffer and strstr().
   const int N = 5; // == strlen("____Z")
@@ -60,7 +64,8 @@ static bool is_plausible_itanium_prefix(char *s) {
 // c++filt -n _ZNK3MapI10StringName3RefI8GDScriptE10ComparatorIS0_E16DefaultAllocatorE3hasERKS0_
 // Map<StringName, Ref<GDScript>, Comparator<StringName>, DefaultAllocator>::has(StringName const&) const
 //
-static auto cppDemangle(const char *abiName) {
+static auto cppDemangle(const char *abiName)
+{
   //
   // This function allocates and returns storage in ret
   //
@@ -89,7 +94,8 @@ static auto cppDemangle(const char *abiName) {
   return retval;
 }
 
-std::string Traceback::to_string(void) {
+std::string Traceback::to_string(void)
+{
 #ifdef _WIN32
   return ("");
 #else
@@ -167,7 +173,8 @@ std::string Traceback::to_string(void) {
 #endif
 }
 
-void Traceback::log(void) {
+void Traceback::log(void)
+{
 #ifdef _WIN32
   return ("");
 #else
@@ -245,7 +252,8 @@ void Traceback::log(void) {
 #endif
 }
 
-void traceback_dump(void) {
+void traceback_dump(void)
+{
   auto tb = new Traceback();
   tb->init();
   auto s = tb->to_string();
@@ -287,7 +295,8 @@ typedef struct CallstackEntry {
 
 typedef enum CallstackEntryType { firstEntry, nextEntry, lastEntry } CallstackEntryType;
 
-void _backtrace(void) {
+void _backtrace(void)
+{
   HANDLE process = ::GetCurrentProcess();
   HANDLE thread  = GetCurrentThread();
 

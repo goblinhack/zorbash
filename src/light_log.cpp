@@ -15,7 +15,8 @@
 #include "my_string.h"
 #include "my_ptrcheck.h"
 
-void Light::log_(const char *fmt, va_list args) {
+void Light::log_(const char *fmt, va_list args)
+{
   verify(this);
   char buf[ MAXLONGSTR ];
   int  len;
@@ -31,7 +32,8 @@ void Light::log_(const char *fmt, va_list args) {
   putf(MY_STDOUT, buf);
 }
 
-void Light::log(const char *fmt, ...) {
+void Light::log(const char *fmt, ...)
+{
   verify(this);
   auto    t = this;
   va_list args;
@@ -41,7 +43,8 @@ void Light::log(const char *fmt, ...) {
   va_end(args);
 }
 
-void Light::die_(const char *fmt, va_list args) {
+void Light::die_(const char *fmt, va_list args)
+{
   verify(this);
   char buf[ MAXLONGSTR ];
   int  len;
@@ -57,7 +60,8 @@ void Light::die_(const char *fmt, va_list args) {
   DIE("%s", buf);
 }
 
-void Light::die(const char *fmt, ...) {
+void Light::die(const char *fmt, ...)
+{
   g_errored = true;
 
   verify(this);
@@ -69,7 +73,8 @@ void Light::die(const char *fmt, ...) {
   va_end(args);
 }
 
-void Light::con_(const char *fmt, va_list args) {
+void Light::con_(const char *fmt, va_list args)
+{
   verify(this);
   char buf[ MAXLONGSTR ];
   int  len;
@@ -89,7 +94,8 @@ void Light::con_(const char *fmt, va_list args) {
   wid_console_log(buf);
 }
 
-void Light::con(const char *fmt, ...) {
+void Light::con(const char *fmt, ...)
+{
   verify(this);
   auto    t = this;
   va_list args;
@@ -99,7 +105,8 @@ void Light::con(const char *fmt, ...) {
   va_end(args);
 }
 
-void Light::err_(const char *fmt, va_list args) {
+void Light::err_(const char *fmt, va_list args)
+{
   verify(this);
   char buf[ MAXLONGSTR ];
   int  len;
@@ -125,7 +132,8 @@ void Light::err_(const char *fmt, va_list args) {
   FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS();
 }
 
-void Light::err(const char *fmt, ...) {
+void Light::err(const char *fmt, ...)
+{
   g_errored = true;
 
   verify(this);

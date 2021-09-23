@@ -13,7 +13,8 @@
 #include "my_thing.h"
 #include "my_ptrcheck.h"
 
-Thingp Thing::get_top_spawned_owner(void) const {
+Thingp Thing::get_top_spawned_owner(void) const
+{
   TRACE_AND_INDENT();
   auto id = get_immediate_spawned_owner_id();
   if (likely(id.ok())) {
@@ -30,7 +31,8 @@ Thingp Thing::get_top_spawned_owner(void) const {
   }
 }
 
-Thingp Thing::get_immediate_spawned_owner(void) const {
+Thingp Thing::get_immediate_spawned_owner(void) const
+{
   TRACE_AND_INDENT();
   auto id = get_immediate_spawned_owner_id();
   if (likely(id.ok())) {
@@ -44,7 +46,8 @@ Thingp Thing::get_immediate_spawned_owner(void) const {
   }
 }
 
-void Thing::set_spawned_owner(Thingp spawner_owner) {
+void Thing::set_spawned_owner(Thingp spawner_owner)
+{
   TRACE_AND_INDENT();
   if (spawner_owner) {
     verify(spawner_owner);
@@ -79,7 +82,8 @@ void Thing::set_spawned_owner(Thingp spawner_owner) {
   }
 }
 
-void Thing::remove_spawner_owner(void) {
+void Thing::remove_spawner_owner(void)
+{
   TRACE_AND_INDENT();
   auto old_spawner_owner = get_immediate_spawned_owner();
   if (! old_spawner_owner) {
@@ -96,7 +100,8 @@ void Thing::remove_spawner_owner(void) {
 //
 // Kill and detach all spawners from their owner
 //
-void Thing::kill_spawned(Thingp killer) {
+void Thing::kill_spawned(Thingp killer)
+{
   TRACE_AND_INDENT();
   //
   // Warning killer can be nullptr - e.g. when a generator falls to
@@ -114,7 +119,8 @@ void Thing::kill_spawned(Thingp killer) {
   //
   // Slow, but not used too often
   //
-  FOR_ALL_THING_GROUPS(group) {
+  FOR_ALL_THING_GROUPS(group)
+  {
     for (auto p : level->all_things[ group ]) {
       auto spawner = p.second;
       auto o       = spawner->get_immediate_spawned_owner();
@@ -126,7 +132,8 @@ void Thing::kill_spawned(Thingp killer) {
   }
 }
 
-void Thing::unleash_spawners_things(void) {
+void Thing::unleash_spawners_things(void)
+{
   TRACE_AND_INDENT();
   if (! is_spawner()) {
     return;
@@ -139,7 +146,8 @@ void Thing::unleash_spawners_things(void) {
   //
   // Slow, but not used too often
   //
-  FOR_ALL_THING_GROUPS(group) {
+  FOR_ALL_THING_GROUPS(group)
+  {
     for (auto p : level->all_things[ group ]) {
       auto spawner = p.second;
       auto o       = spawner->get_immediate_spawned_owner();

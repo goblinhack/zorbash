@@ -188,7 +188,8 @@ color YELLOW;
 color INK;
 #endif
 
-void color_init4(void) {
+void color_init4(void)
+{
   TRACE_AND_INDENT();
 #if 0
   color_set("lightsteelblue1", &LIGHTSTEELBLUE1, 202, 225, 255, 255);

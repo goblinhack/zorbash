@@ -14,12 +14,14 @@
 #include "my_string.h"
 #include "my_ptrcheck.h"
 
-void sdl_screenshot(void) {
+void sdl_screenshot(void)
+{
   TRACE_AND_INDENT();
   g_do_screenshot = 1;
 }
 
-void sdl_screenshot_do(void) {
+void sdl_screenshot_do(void)
+{
   TRACE_AND_INDENT();
   GL_ERROR_CHECK();
   int fbo = FBO_FINAL;
@@ -67,7 +69,8 @@ void sdl_screenshot_do(void) {
   count++;
 }
 
-std::vector< uint8_t > sdl_fbo_save(int fbo) {
+std::vector< uint8_t > sdl_fbo_save(int fbo)
+{
   TRACE_AND_INDENT();
   int w;
   int h;
@@ -92,7 +95,8 @@ std::vector< uint8_t > sdl_fbo_save(int fbo) {
   return pixels;
 }
 
-void sdl_fbo_load(int fbo, const std::vector< uint8_t > &pixels) {
+void sdl_fbo_load(int fbo, const std::vector< uint8_t > &pixels)
+{
   TRACE_AND_INDENT();
   if (pixels.empty()) {
     return;
@@ -116,7 +120,8 @@ void sdl_fbo_load(int fbo, const std::vector< uint8_t > &pixels) {
   GL_ERROR_CHECK();
 }
 
-void sdl_fbo_dump(int fbo, const std::string &name) {
+void sdl_fbo_dump(int fbo, const std::string &name)
+{
   TRACE_AND_INDENT();
   int w;
   int h;

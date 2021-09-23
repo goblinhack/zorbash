@@ -11,7 +11,8 @@
 #include "my_ptrcheck.h"
 #include "my_array_bounds_check.h"
 
-void Level::update_hazard_tile_map(void) {
+void Level::update_hazard_tile_map(void)
+{
   //
   // The water tiles are twice the size of normal tiles, so work out
   // where to draw them to avoid overlaps
@@ -53,14 +54,16 @@ void Level::update_hazard_tile_map(void) {
   }
 }
 
-void Level::update_water_next_to_lava(void) {
+void Level::update_water_next_to_lava(void)
+{
   for (auto y = 2; y < MAP_HEIGHT - 2; y++) {
     for (auto x = 2; x < MAP_WIDTH - 2; x++) {
       if (is_shallow_water(x, y) || is_deep_water(x, y)) {
         for (auto dx = -2; dx <= 2; dx++) {
           for (auto dy = -2; dy <= 2; dy++) {
             if (is_lava(x + dx, y + dy)) {
-              FOR_ALL_THINGS(this, t, x, y) {
+              FOR_ALL_THINGS(this, t, x, y)
+              {
                 if (t->is_shallow_water()) {
                   t->dead("by being too close to lava");
                   if (! is_starting) {
@@ -80,7 +83,8 @@ void Level::update_water_next_to_lava(void) {
   }
 }
 
-void Level::update_things_next_to_a_chasm(void) {
+void Level::update_things_next_to_a_chasm(void)
+{
   for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
     for (auto x = 1; x < MAP_WIDTH - 1; x++) {
       //
@@ -92,7 +96,8 @@ void Level::update_things_next_to_a_chasm(void) {
             if (is_chasm(x + dx, y + dy)) {
               bool create_dungeon_place_place_shallow_water = false;
 
-              FOR_ALL_THINGS(this, t, x, y) {
+              FOR_ALL_THINGS(this, t, x, y)
+              {
                 if (t->is_falling) {
                   continue;
                 }
@@ -123,7 +128,8 @@ void Level::update_things_next_to_a_chasm(void) {
   }
 }
 
-void Level::update_deep_water(void) {
+void Level::update_deep_water(void)
+{
   for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
     for (auto x = 1; x < MAP_WIDTH - 1; x++) {
       //
@@ -131,7 +137,8 @@ void Level::update_deep_water(void) {
       //
       if (is_deep_water(x, y)) {
         if (is_shallow_water(x, y)) {
-          FOR_ALL_THINGS(this, t, x, y) {
+          FOR_ALL_THINGS(this, t, x, y)
+          {
             if (t->is_shallow_water()) {
               t->dead("by being shallow");
             }
@@ -156,7 +163,8 @@ void Level::update_deep_water(void) {
 
         if (nebs < 9) {
           bool removed_deep_water = false;
-          FOR_ALL_THINGS(this, t, x, y) {
+          FOR_ALL_THINGS(this, t, x, y)
+          {
             if (t->is_deep_water()) {
               t->dead("by being too shallow");
               removed_deep_water = true;
@@ -171,9 +179,11 @@ void Level::update_deep_water(void) {
             thing_new("water1", fpoint(x, y));
           }
 
-          IF_DEBUG3 {
+          IF_DEBUG3
+          {
             if (is_deep_water(x, y)) {
-              FOR_ALL_THINGS(this, t, x, y) {
+              FOR_ALL_THINGS(this, t, x, y)
+              {
                 if (t->is_deep_water()) {
                   t->log("Still present; should be removed");
                 } else {
@@ -191,7 +201,8 @@ void Level::update_deep_water(void) {
   }
 }
 
-void Level::update_map_things_to_stand_on(void) {
+void Level::update_map_things_to_stand_on(void)
+{
   TRACE_AND_INDENT();
   _is_able_to_stand_on = {};
 
@@ -204,7 +215,8 @@ void Level::update_map_things_to_stand_on(void) {
   }
 }
 
-void Level::update_map(void) {
+void Level::update_map(void)
+{
   log("Update map start");
   update_hazard_tile_map();
   update_water_next_to_lava();

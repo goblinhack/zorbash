@@ -18,7 +18,8 @@ static std::map< std::string, Fontp > fonts;
 
 void font_fini(void) { TRACE_AND_INDENT(); }
 
-static Fontp font_load(std::string name, std::string file, int size, int style) {
+static Fontp font_load(std::string name, std::string file, int size, int style)
+{
   TRACE_AND_INDENT();
   auto f = font_find(name);
 
@@ -47,7 +48,8 @@ static Fontp font_load(std::string name, std::string file, int size, int style) 
   return (f);
 }
 
-Fontp font_find(std::string file) {
+Fontp font_find(std::string file)
+{
   TRACE_AND_INDENT();
   if (file == "") {
     ERR("No filename given for font find %s", __FUNCTION__);
@@ -62,7 +64,8 @@ Fontp font_find(std::string file) {
   return (result->second);
 }
 
-uint8_t font_init(void) {
+uint8_t font_init(void)
+{
   TRACE_AND_INDENT();
 #ifdef ENABLE_GENERATE_TTF
   //
@@ -83,7 +86,8 @@ uint8_t font_init(void) {
   return true;
 }
 
-Tilep Font::unicode_to_tile(int u) {
+Tilep Font::unicode_to_tile(int u)
+{
   if ((u < 0) || (u >= TTF_GLYPH_MAX)) {
     if (u == L'?') {
       DIE("unicode char 0x%x/%d -> bad index", u, u);

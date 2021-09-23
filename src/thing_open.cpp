@@ -15,7 +15,8 @@
 #include "my_thing_template.h"
 #include "my_python.h"
 
-void Thing::on_open(void) {
+void Thing::on_open(void)
+{
   auto on_open = tp()->on_open_do();
   if (std::empty(on_open)) {
     return;
@@ -35,7 +36,8 @@ void Thing::on_open(void) {
   }
 }
 
-bool Thing::open(Thingp it) {
+bool Thing::open(Thingp it)
+{
   TRACE_AND_INDENT();
   if (! is_monst() && ! is_player()) {
     return false;

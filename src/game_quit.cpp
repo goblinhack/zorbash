@@ -17,14 +17,16 @@
 
 WidPopup *game_quit_window;
 
-void game_quit_destroy(void) {
+void game_quit_destroy(void)
+{
   TRACE_AND_INDENT();
   delete game_quit_window;
   game_quit_window = nullptr;
   game->change_state(Game::STATE_NORMAL);
 }
 
-static uint8_t game_quit_yes(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_quit_yes(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   if (game->started) {
     LOG("USR: Restart game");
@@ -71,7 +73,8 @@ static uint8_t game_quit_yes(Widp w, int32_t x, int32_t y, uint32_t button) {
   return true;
 }
 
-static uint8_t game_quit_no(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_quit_no(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   game_quit_destroy();
   if (! game->level) {
@@ -82,7 +85,8 @@ static uint8_t game_quit_no(Widp w, int32_t x, int32_t y, uint32_t button) {
   return true;
 }
 
-static uint8_t game_quit_key_up(Widp w, const struct SDL_Keysym *key) {
+static uint8_t game_quit_key_up(Widp w, const struct SDL_Keysym *key)
+{
   TRACE_AND_INDENT();
   if (sdl_shift_held) {
     if (key->scancode == (SDL_Scancode) game->config.key_console) {
@@ -112,7 +116,8 @@ static uint8_t game_quit_key_up(Widp w, const struct SDL_Keysym *key) {
   return false;
 }
 
-static uint8_t game_quit_key_down(Widp w, const struct SDL_Keysym *key) {
+static uint8_t game_quit_key_down(Widp w, const struct SDL_Keysym *key)
+{
   TRACE_AND_INDENT();
   if (sdl_shift_held) {
     if (key->scancode == (SDL_Scancode) game->config.key_console) {
@@ -123,7 +128,8 @@ static uint8_t game_quit_key_down(Widp w, const struct SDL_Keysym *key) {
   return true;
 }
 
-void Game::quit_select(void) {
+void Game::quit_select(void)
+{
   TRACE_AND_INDENT();
   LOG("Quit select");
 

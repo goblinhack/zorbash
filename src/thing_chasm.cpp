@@ -14,7 +14,8 @@
 #include "my_thing.h"
 #include "my_globals.h"
 
-void Thing::chasm_tick(void) {
+void Thing::chasm_tick(void)
+{
   TRACE_AND_INDENT();
   if (is_floating() || is_ethereal()) {
     return;

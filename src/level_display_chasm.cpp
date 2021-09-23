@@ -17,7 +17,8 @@
 // NOTE: chasm tiles are not blitted explicitly. Instead a floor tile
 // will check for the presence of a chasm beneath it and blit the chasm
 //
-void Thing::blit_floor_chasm(point &tl, point &br, const ThingTiles *tiles) {
+void Thing::blit_floor_chasm(point &tl, point &br, const ThingTiles *tiles)
+{
   TRACE_AND_INDENT();
   float th = game->config.tile_pix_height;
 

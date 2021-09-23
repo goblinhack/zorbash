@@ -10,7 +10,8 @@
 #include "my_sprintf.h"
 #include "my_gl.h"
 
-void Thing::lunge(fpoint to) {
+void Thing::lunge(fpoint to)
+{
   auto t = set_ts_lunge_begin(time_get_time_ms_cached());
   auto p = to - mid_at;
   set_ts_lunge_end(t + 200);
@@ -18,7 +19,8 @@ void Thing::lunge(fpoint to) {
   move_set_dir_from_delta(p);
 }
 
-float Thing::get_lunge(void) {
+float Thing::get_lunge(void)
+{
   if (! get_ts_lunge_begin()) {
     return (0);
   }

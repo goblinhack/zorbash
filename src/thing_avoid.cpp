@@ -17,7 +17,8 @@
 #include "my_array_bounds_check.h"
 #include "my_vector_bounds_check.h"
 
-bool Tp::will_avoid_hazard(Levelp level, point p) const {
+bool Tp::will_avoid_hazard(Levelp level, point p) const
+{
   TRACE_AND_INDENT();
   if (level->is_shallow_water(p) || level->is_deep_water(p)) {
     if (hates_water()) {
@@ -59,7 +60,8 @@ bool Tp::will_avoid_hazard(Levelp level, point p) const {
   return false;
 }
 
-bool Thing::will_avoid_hazard(const point &p) {
+bool Thing::will_avoid_hazard(const point &p)
+{
   TRACE_AND_INDENT();
   if (level->is_shallow_water(p) || level->is_deep_water(p)) {
     if (hates_water()) {
@@ -105,7 +107,8 @@ bool Thing::will_avoid_hazard(const point &p) {
   return false;
 }
 
-bool Thing::will_avoid_hazard(const Thingp itp) {
+bool Thing::will_avoid_hazard(const Thingp itp)
+{
   TRACE_AND_INDENT();
   auto me = tp();
   auto it = itp->tp();
@@ -202,7 +205,8 @@ bool Thing::will_avoid_hazard(const Thingp itp) {
   return false;
 }
 
-bool Thing::will_avoid_monst(const Thingp it) {
+bool Thing::will_avoid_monst(const Thingp it)
+{
   TRACE_AND_INDENT();
   auto me = tp();
 
@@ -250,11 +254,13 @@ bool Thing::will_avoid_monst(const Thingp it) {
   return false;
 }
 
-bool Thing::will_avoid_monst(const point &p) {
+bool Thing::will_avoid_monst(const point &p)
+{
   TRACE_AND_INDENT();
   auto me = tp();
 
-  FOR_ALL_THINGS_THAT_INTERACT(level, it, mid_at.x, mid_at.y) {
+  FOR_ALL_THINGS_THAT_INTERACT(level, it, mid_at.x, mid_at.y)
+  {
     if (it == this) {
       continue;
     }

@@ -19,7 +19,8 @@
 #include "my_ptrcheck.h"
 #include "my_sdl.h"
 
-void Level::display(void) {
+void Level::display(void)
+{
   TRACE_AND_INDENT();
   bool shake = screen_shake_begin();
   display_map();
@@ -73,7 +74,8 @@ void Level::display(void) {
   }
 }
 
-void Level::update(void) {
+void Level::update(void)
+{
   TRACE_AND_INDENT();
   if (map_changed) {
     map_changed = false;
@@ -86,7 +88,8 @@ void Level::update(void) {
   }
 }
 
-void Level::display_map_bg_things(void) {
+void Level::display_map_bg_things(void)
+{
   TRACE_AND_INDENT();
   auto fbo = FBO_FULLMAP;
   gl_enter_2d_mode(MAP_WIDTH * TILE_WIDTH, MAP_HEIGHT * TILE_HEIGHT);
@@ -101,7 +104,8 @@ void Level::display_map_bg_things(void) {
     for (auto z = 0; z < MAP_DEPTH_LAST_FG_MAP_TYPE; z++) {
       for (auto y = 0; y < MAP_HEIGHT; y++) {
         for (auto x = 0; x < MAP_WIDTH; x++) {
-          FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) {
+          FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z)
+          {
             if (! t->gfx_shown_in_bg()) {
               continue;
             }
@@ -127,7 +131,8 @@ void Level::display_map_bg_things(void) {
     for (auto z = MAP_DEPTH_LAST_FLOOR_TYPE + 1; z < MAP_DEPTH_LAST_FG_MAP_TYPE; z++) {
       for (auto y = 0; y < MAP_HEIGHT; y++) {
         for (auto x = 0; x < MAP_WIDTH; x++) {
-          FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) {
+          FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z)
+          {
             if (! t->gfx_shown_in_bg()) {
               continue;
             }
@@ -144,8 +149,8 @@ void Level::display_map_bg_things(void) {
   gl_enter_2d_mode(game->config.game_pix_width, game->config.game_pix_height);
 }
 
-void Level::display_map_things(int fbo, const int16_t minx, const int16_t miny, const int16_t maxx,
-                               const int16_t maxy) {
+void Level::display_map_things(int fbo, const int16_t minx, const int16_t miny, const int16_t maxx, const int16_t maxy)
+{
   TRACE_AND_INDENT();
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   glcolor(WHITE);
@@ -158,7 +163,8 @@ void Level::display_map_things(int fbo, const int16_t minx, const int16_t miny, 
   for (auto z = 0; z < MAP_DEPTH_OBJ; z++) {
     for (auto y = miny; y < maxy; y++) {
       for (auto x = minx; x < maxx; x++) {
-        FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) {
+        FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z)
+        {
           if (z <= MAP_DEPTH_FLOOR2) {
             t->blit(fbo);
           }
@@ -209,7 +215,8 @@ void Level::display_map_things(int fbo, const int16_t minx, const int16_t miny, 
 // Things above the floor but behind the light
 //
 void Level::display_map_fg_things(int fbo, const int16_t minx, const int16_t miny, const int16_t maxx,
-                                  const int16_t maxy) {
+                                  const int16_t maxy)
+{
   TRACE_AND_INDENT();
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   glcolor(WHITE);
@@ -219,7 +226,8 @@ void Level::display_map_fg_things(int fbo, const int16_t minx, const int16_t min
   for (auto z = (int) MAP_DEPTH_OBJ; z <= MAP_DEPTH_LAST_FG_MAP_TYPE; z++) {
     for (auto y = miny; y < maxy; y++) {
       for (auto x = minx; x < maxx; x++) {
-        FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) {
+        FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z)
+        {
           t->blit(fbo);
 
           if (unlikely(game->robot_mode)) {
@@ -231,7 +239,8 @@ void Level::display_map_fg_things(int fbo, const int16_t minx, const int16_t min
           //
           // Sanity checks
           //
-          IF_DEBUG3 {
+          IF_DEBUG3
+          {
             if (! t->is_moving && ! t->is_jumping && ! t->is_falling) {
               if (t->mid_at != t->get_interpolated_mid_at()) {
                 t->die("Thing is not where its interpolated to be; is at %f,%f", t->get_interpolated_mid_at().x,
@@ -254,7 +263,8 @@ void Level::display_map_fg_things(int fbo, const int16_t minx, const int16_t min
 // Things above the light
 //
 void Level::display_map_fg2_things(int fbo, const int16_t minx, const int16_t miny, const int16_t maxx,
-                                   const int16_t maxy) {
+                                   const int16_t maxy)
+{
   TRACE_AND_INDENT();
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   glcolor(WHITE);
@@ -264,7 +274,8 @@ void Level::display_map_fg2_things(int fbo, const int16_t minx, const int16_t mi
   for (auto z = (int) MAP_DEPTH_LAST_FG_MAP_TYPE + 1; z < MAP_DEPTH; z++) {
     for (auto y = miny; y < maxy; y++) {
       for (auto x = minx; x < maxx; x++) {
-        FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) {
+        FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z)
+        {
           t->blit(fbo);
 
           if (unlikely(game->robot_mode)) {
@@ -283,7 +294,8 @@ void Level::display_map_fg2_things(int fbo, const int16_t minx, const int16_t mi
   blit_flush();
 }
 
-void Level::display_map(void) {
+void Level::display_map(void)
+{
   TRACE_AND_INDENT();
   int light_minx;
   int light_maxx;
@@ -441,7 +453,8 @@ void Level::display_map(void) {
     display_lasers();
     display_projectiles();
     display_map_fg_things(FBO_MAP_VISIBLE, minx, miny, maxx, maxy);
-    IF_NODEBUG3 {
+    IF_NODEBUG3
+    {
       glBlendFunc(GL_DST_COLOR, GL_SRC_ALPHA_SATURATE);
       blit_fbo_game_pix(FBO_PLAYER_VISIBLE_LIGHTING);
     }
@@ -472,7 +485,8 @@ void Level::display_map(void) {
     glcolor(WHITE);
     blit_fbo_game_pix(FBO_MAP_VISIBLE);
 
-    IF_NODEBUG3 {
+    IF_NODEBUG3
+    {
       if (fade_out) {
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         display_fade_out();

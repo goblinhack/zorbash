@@ -23,18 +23,21 @@ static bool wid_rightbar_create(void);
 Widp wid_item_popup {};
 Widp wid_rightbar {};
 
-void wid_rightbar_fini(void) {
+void wid_rightbar_fini(void)
+{
   TRACE_AND_INDENT();
   wid_destroy(&wid_item_popup);
   wid_destroy(&wid_rightbar);
 }
 
-bool wid_rightbar_init(void) {
+bool wid_rightbar_init(void)
+{
   TRACE_AND_INDENT();
   return wid_rightbar_create();
 }
 
-static void wid_rightbar_mouse_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely) {
+static void wid_rightbar_mouse_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+{
   TRACE_AND_INDENT();
   DBG3("rightbar: Begin over rightbar");
   TRACE_AND_INDENT();
@@ -63,7 +66,8 @@ static void wid_rightbar_mouse_over_b(Widp w, int32_t relx, int32_t rely, int32_
   }
 }
 
-static void wid_rightbar_mouse_over_e(Widp w) {
+static void wid_rightbar_mouse_over_e(Widp w)
+{
   TRACE_AND_INDENT();
   DBG3("rightbar: End over rightbar");
   TRACE_AND_INDENT();
@@ -97,7 +101,8 @@ static void wid_rightbar_mouse_over_e(Widp w) {
 //
 // Create the test
 //
-static bool wid_rightbar_create(void) {
+static bool wid_rightbar_create(void)
+{
   TRACE_AND_INDENT();
   DBG3("Remake rightbar");
 
@@ -559,7 +564,8 @@ static bool wid_rightbar_create(void) {
   return true;
 }
 
-bool is_mouse_over_rightbar(void) {
+bool is_mouse_over_rightbar(void)
+{
   if (! wid_rightbar) {
     return false;
   }

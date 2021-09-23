@@ -190,7 +190,8 @@ color GOLD3;
 color GOLD4;
 #endif
 
-void color_init1(void) {
+void color_init1(void)
+{
   TRACE_AND_INDENT();
   color_set("brown1", &BROWN1, 255, 64, 64, 255);
   color_set("brown2", &BROWN2, 238, 59, 59, 255);

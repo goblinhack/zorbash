@@ -13,7 +13,8 @@
 #include "my_ptrcheck.h"
 #include "my_wid_actionbar.h"
 
-void Game::tick_begin(const std::string &why) {
+void Game::tick_begin(const std::string &why)
+{
   TRACE_AND_INDENT();
   tick_requested = why;
   game->tick_dt  = 0;
@@ -33,7 +34,8 @@ void Game::tick_begin(const std::string &why) {
   }
 }
 
-void Game::tick_begin_now(void) {
+void Game::tick_begin_now(void)
+{
   TRACE_AND_INDENT();
   std::string why = tick_requested;
   tick_requested  = "";
@@ -79,7 +81,8 @@ void Game::tick_begin_now(void) {
   }
 }
 
-bool Game::tick_end(void) {
+bool Game::tick_end(void)
+{
   TRACE_AND_INDENT();
   //
   // Move when all things are done moving
@@ -128,7 +131,8 @@ bool Game::tick_end(void) {
   return true;
 }
 
-void Game::tick_update(void) {
+void Game::tick_update(void)
+{
   TRACE_AND_INDENT();
   //
   // Work out the current timestep in this move

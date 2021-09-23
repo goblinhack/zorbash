@@ -15,7 +15,8 @@
 #include "my_thing.h"
 #include "my_wid_bag.h"
 
-void Game::change_state(int new_state) {
+void Game::change_state(int new_state)
+{
   if (wid_over) {
     if (game->level) {
       game->level->cursor_path_clear();

@@ -148,7 +148,8 @@ static void    wid_keyboard_destroy(Widp w);
 static void    wid_keyboard_set_focus(wid_keyboard_ctx *ctx, int focusx, int focusy);
 static uint8_t wid_keyboard_text_input_key_event(Widp w, const SDL_Keysym *key);
 
-static void wid_keyboard_update_buttons(Widp w) {
+static void wid_keyboard_update_buttons(Widp w)
+{
   wid_keyboard_ctx *ctx = (wid_keyboard_ctx *) wid_get_void_context(w);
   verify(ctx);
 
@@ -196,7 +197,8 @@ static void wid_keyboard_update_buttons(Widp w) {
   wid_update(w);
 }
 
-static void wid_keyboard_event(Widp w, int focusx, int focusy, const SDL_Keysym *key) {
+static void wid_keyboard_event(Widp w, int focusx, int focusy, const SDL_Keysym *key)
+{
   wid_keyboard_ctx *ctx = (wid_keyboard_ctx *) wid_get_void_context(w);
   verify(ctx);
 
@@ -263,13 +265,15 @@ static void wid_keyboard_event(Widp w, int focusx, int focusy, const SDL_Keysym 
   }
 }
 
-static uint8_t wid_keyboard_mouse_event(Widp w, int focusx, int focusy) {
+static uint8_t wid_keyboard_mouse_event(Widp w, int focusx, int focusy)
+{
   wid_keyboard_event(w, focusx, focusy, 0 /* key */);
 
   return true;
 }
 
-static uint8_t wid_keyboard_button_mouse_event(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t wid_keyboard_button_mouse_event(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   int focus  = wid_get_int_context(w);
   int focusx = (focus & 0xff);
   int focusy = (focus & 0xff00) >> 8;
@@ -277,7 +281,8 @@ static uint8_t wid_keyboard_button_mouse_event(Widp w, int32_t x, int32_t y, uin
   return (wid_keyboard_mouse_event(w, focusx, focusy));
 }
 
-static void wid_keyboard_focus_right(wid_keyboard_ctx *ctx) {
+static void wid_keyboard_focus_right(wid_keyboard_ctx *ctx)
+{
   ctx->focusx++;
   if (ctx->focusx > WID_KEYBOARD_ACROSS - 1) {
     ctx->focusx = 0;
@@ -286,7 +291,8 @@ static void wid_keyboard_focus_right(wid_keyboard_ctx *ctx) {
   wid_keyboard_update_buttons(ctx->w);
 }
 
-static void wid_keyboard_focus_left(wid_keyboard_ctx *ctx) {
+static void wid_keyboard_focus_left(wid_keyboard_ctx *ctx)
+{
   ctx->focusx--;
   if (ctx->focusx < 0) {
     ctx->focusx = WID_KEYBOARD_ACROSS - 1;
@@ -295,7 +301,8 @@ static void wid_keyboard_focus_left(wid_keyboard_ctx *ctx) {
   wid_keyboard_update_buttons(ctx->w);
 }
 
-static void wid_keyboard_focus_down(wid_keyboard_ctx *ctx) {
+static void wid_keyboard_focus_down(wid_keyboard_ctx *ctx)
+{
   ctx->focusy++;
   if (ctx->focusy > WID_KEYBOARD_DOWN - 1) {
     ctx->focusy = 0;
@@ -304,7 +311,8 @@ static void wid_keyboard_focus_down(wid_keyboard_ctx *ctx) {
   wid_keyboard_update_buttons(ctx->w);
 }
 
-static void wid_keyboard_focus_up(wid_keyboard_ctx *ctx) {
+static void wid_keyboard_focus_up(wid_keyboard_ctx *ctx)
+{
   ctx->focusy--;
   if (ctx->focusy < 0) {
     ctx->focusy = WID_KEYBOARD_DOWN - 1;
@@ -313,28 +321,32 @@ static void wid_keyboard_focus_up(wid_keyboard_ctx *ctx) {
   wid_keyboard_update_buttons(ctx->w);
 }
 
-static void wid_keyboard_last_focus(wid_keyboard_ctx *ctx) {
+static void wid_keyboard_last_focus(wid_keyboard_ctx *ctx)
+{
   ctx->focusx = WID_KEYBOARD_ACROSS - 1;
   ctx->focusy = WID_KEYBOARD_DOWN - 1;
 
   wid_keyboard_update_buttons(ctx->w);
 }
 
-static void wid_keyboard_first_focus(wid_keyboard_ctx *ctx) {
+static void wid_keyboard_first_focus(wid_keyboard_ctx *ctx)
+{
   ctx->focusx = 0;
   ctx->focusy = 0;
 
   wid_keyboard_update_buttons(ctx->w);
 }
 
-static void wid_keyboard_set_focus(wid_keyboard_ctx *ctx, int focusx, int focusy) {
+static void wid_keyboard_set_focus(wid_keyboard_ctx *ctx, int focusx, int focusy)
+{
   ctx->focusx = focusx;
   ctx->focusy = focusy;
 
   wid_keyboard_update_buttons(ctx->w);
 }
 
-static uint8_t wid_keyboard_parent_key_down(Widp w, const SDL_Keysym *key) {
+static uint8_t wid_keyboard_parent_key_down(Widp w, const SDL_Keysym *key)
+{
   wid_keyboard_ctx *ctx = (wid_keyboard_ctx *) wid_get_void_context(w);
   verify(ctx);
 
@@ -375,7 +387,8 @@ static uint8_t wid_keyboard_parent_key_down(Widp w, const SDL_Keysym *key) {
   return true;
 }
 
-static uint8_t wid_keyboard_parent_joy_button(Widp w, int32_t x, int32_t y) {
+static uint8_t wid_keyboard_parent_joy_button(Widp w, int32_t x, int32_t y)
+{
   wid_keyboard_ctx *ctx = (wid_keyboard_ctx *) wid_get_void_context(w);
   verify(ctx);
   int ret = false;
@@ -455,7 +468,8 @@ static uint8_t wid_keyboard_parent_joy_button(Widp w, int32_t x, int32_t y) {
   return (ret);
 }
 
-static uint8_t wid_keyboard_button_key_event(Widp w, const SDL_Keysym *key) {
+static uint8_t wid_keyboard_button_key_event(Widp w, const SDL_Keysym *key)
+{
   wid_keyboard_ctx *ctx = (wid_keyboard_ctx *) wid_get_void_context(w);
   verify(ctx);
 
@@ -489,7 +503,8 @@ static uint8_t wid_keyboard_button_key_event(Widp w, const SDL_Keysym *key) {
   return false;
 }
 
-static uint8_t wid_keyboard_button_joy_button_event(Widp w, int32_t x, int32_t y) {
+static uint8_t wid_keyboard_button_joy_button_event(Widp w, int32_t x, int32_t y)
+{
   wid_keyboard_ctx *ctx = (wid_keyboard_ctx *) wid_get_void_context(w);
   verify(ctx);
   int ret = false;
@@ -573,7 +588,8 @@ static uint8_t wid_keyboard_button_joy_button_event(Widp w, int32_t x, int32_t y
   return (ret);
 }
 
-static uint8_t wid_keyboard_text_input_key_event(Widp w, const SDL_Keysym *key) {
+static uint8_t wid_keyboard_text_input_key_event(Widp w, const SDL_Keysym *key)
+{
   wid_keyboard_ctx *ctx = (wid_keyboard_ctx *) wid_get_void_context(w);
   verify(ctx);
 
@@ -605,7 +621,8 @@ static uint8_t wid_keyboard_text_input_key_event(Widp w, const SDL_Keysym *key) 
   return false;
 }
 
-static void wid_keyboard_mouse_over(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely) {
+static void wid_keyboard_mouse_over(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+{
   wid_keyboard_ctx *ctx = (wid_keyboard_ctx *) wid_get_void_context(w);
   verify(ctx);
 
@@ -629,7 +646,8 @@ static void wid_keyboard_mouse_over(Widp w, int32_t relx, int32_t rely, int32_t 
   wid_keyboard_set_focus(ctx, focusx, focusy);
 }
 
-static void wid_keyboard_destroy(Widp w) {
+static void wid_keyboard_destroy(Widp w)
+{
   wid_keyboard_ctx *ctx = (wid_keyboard_ctx *) wid_get_void_context(w);
   verify(ctx);
 
@@ -639,7 +657,8 @@ static void wid_keyboard_destroy(Widp w) {
   wid_keyboard_visible = false;
 }
 
-static void wid_keyboard_tick(Widp w) {
+static void wid_keyboard_tick(Widp w)
+{
   wid_keyboard_ctx *ctx = (wid_keyboard_ctx *) wid_get_void_context(w);
   verify(ctx);
 
@@ -688,7 +707,8 @@ static void wid_keyboard_tick(Widp w) {
   }
 }
 
-static void wid_keyboard_destroy_begin(Widp w) {
+static void wid_keyboard_destroy_begin(Widp w)
+{
   wid_keyboard_ctx *ctx = (wid_keyboard_ctx *) wid_get_void_context(w);
   verify(ctx);
 
@@ -714,7 +734,8 @@ static void wid_keyboard_destroy_begin(Widp w) {
 }
 
 Widp wid_keyboard(const std::wstring &text, const std::wstring &title, wid_keyboard_event_t selected,
-                  wid_keyboard_event_t cancelled) {
+                  wid_keyboard_event_t cancelled)
+{
   wid_keyboard_visible = true;
 
   /*

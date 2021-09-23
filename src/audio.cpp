@@ -14,12 +14,14 @@
 
 uint8_t audio_init_done;
 
-void audio_fini(void) {
+void audio_fini(void)
+{
   TRACE_AND_INDENT();
   Mix_CloseAudio();
 }
 
-bool audio_init(void) {
+bool audio_init(void)
+{
   TRACE_AND_INDENT();
   //
   // Output sampling frequency in samples per second (Hz).

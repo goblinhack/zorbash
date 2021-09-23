@@ -13,7 +13,8 @@
 #include "my_thing.h"
 #include "my_light.h"
 
-void Thing::update_light(void) {
+void Thing::update_light(void)
+{
   TRACE_AND_INDENT();
   if (! is_player()) {
     return;

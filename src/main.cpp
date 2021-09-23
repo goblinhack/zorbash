@@ -44,7 +44,8 @@ std::default_random_engine rng;
 
 static char **ARGV;
 
-void quit(void) {
+void quit(void)
+{
   TRACE_AND_INDENT();
   LOG("FINI: Quitting, start cleanup");
 
@@ -173,7 +174,8 @@ void quit(void) {
   python_fini();
 }
 
-void restart(void) {
+void restart(void)
+{
   TRACE_AND_INDENT();
   char *args[]     = {0, 0};
   char *executable = ARGV[ 0 ];
@@ -185,7 +187,8 @@ void restart(void) {
   execve(executable, (char *const *) args, 0);
 }
 
-void die(void) {
+void die(void)
+{
   TRACE_AND_INDENT();
   quit();
 
@@ -198,7 +201,8 @@ void die(void) {
 //
 // Find the binary we are running.
 //
-static void find_executable(void) {
+static void find_executable(void)
+{
   TRACE_AND_INDENT();
   char *      parent_dir         = 0;
   char *      curr_dir           = 0;
@@ -330,7 +334,8 @@ cleanup:
 //
 // Find all installed file locations.
 //
-static void find_exec_dir(void) {
+static void find_exec_dir(void)
+{
   TRACE_AND_INDENT();
   find_executable();
 
@@ -357,7 +362,8 @@ static void find_exec_dir(void) {
 //
 // Hunt down the data/ dir.
 //
-static void find_data_dir(void) {
+static void find_data_dir(void)
+{
   TRACE_AND_INDENT();
   DATA_PATH = dynprintf("%sdata" DIR_SEP, EXEC_DIR);
   if (dir_exists(DATA_PATH)) {
@@ -372,7 +378,8 @@ static void find_data_dir(void) {
 //
 // Hunt down the python/ dir.
 //
-static void find_python_dir(void) {
+static void find_python_dir(void)
+{
   TRACE_AND_INDENT();
   EXEC_PYTHONPATH = dynprintf("%spython%s" DIR_SEP, EXEC_DIR, PYVER);
 }
@@ -380,7 +387,8 @@ static void find_python_dir(void) {
 //
 // Hunt down the world/ dir.
 //
-static void find_world_dir(void) {
+static void find_world_dir(void)
+{
   TRACE_AND_INDENT();
   WORLD_PATH = dynprintf("%sdata" DIR_SEP "world" DIR_SEP, EXEC_DIR);
   if (dir_exists(WORLD_PATH)) {
@@ -395,7 +403,8 @@ static void find_world_dir(void) {
 //
 // Hunt down the fonts/ dir.
 //
-static void find_ttf_dir(void) {
+static void find_ttf_dir(void)
+{
   TRACE_AND_INDENT();
   TTF_PATH = dynprintf("%sdata" DIR_SEP "ttf" DIR_SEP, EXEC_DIR);
   if (dir_exists(TTF_PATH)) {
@@ -410,7 +419,8 @@ static void find_ttf_dir(void) {
 //
 // Hunt down the gfx/ dir.
 //
-static void find_gfx_dir(void) {
+static void find_gfx_dir(void)
+{
   TRACE_AND_INDENT();
   GFX_PATH = dynprintf("%sdata" DIR_SEP "gfx" DIR_SEP, EXEC_DIR);
   if (dir_exists(GFX_PATH)) {
@@ -425,7 +435,8 @@ static void find_gfx_dir(void) {
 //
 // Find all installed file locations.
 //
-static void find_file_locations(void) {
+static void find_file_locations(void)
+{
   TRACE_AND_INDENT();
   find_exec_dir();
   find_data_dir();
@@ -438,7 +449,8 @@ static void find_file_locations(void) {
   DBG("Font path   : \"%s\"", TTF_PATH);
 }
 
-static void usage(void) {
+static void usage(void)
+{
   TRACE_AND_INDENT();
   static int whinged;
 
@@ -462,7 +474,8 @@ static void usage(void) {
   CON("Written by goblinhack@gmail.com");
 }
 
-static void parse_args(int32_t argc, char *argv[]) {
+static void parse_args(int32_t argc, char *argv[])
+{
   TRACE_AND_INDENT();
   int32_t i;
 
@@ -566,7 +579,8 @@ static void parse_args(int32_t argc, char *argv[]) {
 //
 // Where all logs go
 //
-static std::string create_appdata_dir(void) {
+static std::string create_appdata_dir(void)
+{
   const char *appdata;
   appdata = getenv("APPDATA");
   if (! appdata || ! appdata[ 0 ]) {
@@ -602,7 +616,8 @@ static std::string create_appdata_dir(void) {
   return std::string(appdata);
 }
 
-int32_t main(int32_t argc, char *argv[]) {
+int32_t main(int32_t argc, char *argv[])
+{
   TRACE_AND_INDENT();
   ARGV = argv;
 
@@ -667,7 +682,8 @@ int32_t main(int32_t argc, char *argv[]) {
   }
 #endif
 
-  IF_DEBUG2 {
+  IF_DEBUG2
+  {
     if (game) {
       game->config.debug_mode = g_opt_debug2;
     }

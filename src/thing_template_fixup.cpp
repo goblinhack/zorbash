@@ -16,7 +16,8 @@
 #include "my_vector_bounds_check.h"
 #include "my_thing.h"
 
-void tp_fixup(void) {
+void tp_fixup(void)
+{
   TRACE_AND_INDENT();
   for (auto &tp : tp_id_map) {
     if (tp->stamina()) {

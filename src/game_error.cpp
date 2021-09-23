@@ -20,7 +20,8 @@
 
 static WidPopup *game_error_window;
 
-static void game_error_destroy(void) {
+static void game_error_destroy(void)
+{
   TRACE_AND_INDENT();
   delete game_error_window;
   game_error_window = nullptr;
@@ -36,7 +37,8 @@ static void game_error_destroy(void) {
   TOPCON("The dungeon went dark briefly. What happened?");
 }
 
-static uint8_t game_error_key_up(Widp w, const struct SDL_Keysym *key) {
+static uint8_t game_error_key_up(Widp w, const struct SDL_Keysym *key)
+{
   TRACE_AND_INDENT();
   if (sdl_shift_held) {
     if (key->scancode == (SDL_Scancode) game->config.key_console) {
@@ -69,7 +71,8 @@ static uint8_t game_error_key_up(Widp w, const struct SDL_Keysym *key) {
   return true;
 }
 
-static uint8_t game_error_key_down(Widp w, const struct SDL_Keysym *key) {
+static uint8_t game_error_key_down(Widp w, const struct SDL_Keysym *key)
+{
   TRACE_AND_INDENT();
   if (sdl_shift_held) {
     if (key->scancode == (SDL_Scancode) game->config.key_console) {
@@ -80,13 +83,15 @@ static uint8_t game_error_key_down(Widp w, const struct SDL_Keysym *key) {
   return true;
 }
 
-static uint8_t game_error_mouse_up(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_error_mouse_up(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   game_error_destroy();
   return true;
 }
 
-void game_error(std::string error) {
+void game_error(std::string error)
+{
   TRACE_AND_INDENT();
   CON("ERROR: %s", error.c_str());
 

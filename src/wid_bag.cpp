@@ -35,7 +35,8 @@ static void    wid_bag_item_mouse_over_e(Widp w);
 static uint8_t wid_bag_item_key_down(Widp w, const struct SDL_Keysym *key);
 static void    wid_bag_tick(Widp w);
 
-static void wid_bag_add_items(Widp wid_bag_container, Thingp bag) {
+static void wid_bag_add_items(Widp wid_bag_container, Thingp bag)
+{
   TRACE_AND_INDENT();
   bag->log("Empty bag");
   for (auto item : wid_find_all_containing(wid_bag_container, "wid_bag item")) {
@@ -114,7 +115,8 @@ static void wid_bag_add_items(Widp wid_bag_container, Thingp bag) {
   wid_update(wid_bag_container);
 }
 
-uint8_t wid_in_transit_item_place(Widp w, int32_t x, int32_t y, uint32_t button) {
+uint8_t wid_in_transit_item_place(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   DBG3("Place in transit item");
   TRACE_AND_INDENT();
@@ -222,7 +224,8 @@ uint8_t wid_in_transit_item_place(Widp w, int32_t x, int32_t y, uint32_t button)
   return true;
 }
 
-uint8_t wid_in_transit_item_drop(void) {
+uint8_t wid_in_transit_item_drop(void)
+{
   TRACE_AND_INDENT();
   DBG3("Drop in transit item");
   TRACE_AND_INDENT();
@@ -255,7 +258,8 @@ uint8_t wid_in_transit_item_drop(void) {
   return true;
 }
 
-static uint8_t wid_bag_item_mouse_down(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t wid_bag_item_mouse_down(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   DBG3("Mouse down, pickup up an item and make it in transit");
   TRACE_AND_INDENT();
@@ -273,7 +277,8 @@ static uint8_t wid_bag_item_mouse_down(Widp w, int32_t x, int32_t y, uint32_t bu
   return true;
 }
 
-bool Game::wid_bag_move_item(Widp w, Thingp t) {
+bool Game::wid_bag_move_item(Widp w, Thingp t)
+{
   TRACE_AND_INDENT();
   DBG3("Chosen to move item");
 
@@ -368,7 +373,8 @@ bool Game::wid_bag_move_item(Widp w, Thingp t) {
   return true;
 }
 
-static void wid_bag_item_mouse_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely) {
+static void wid_bag_item_mouse_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+{
   if (game->in_transit_item) {
     return;
   }
@@ -383,7 +389,8 @@ static void wid_bag_item_mouse_over_b(Widp w, int32_t relx, int32_t rely, int32_
   game->wid_thing_info_push_popup(t);
 }
 
-static void wid_bag_item_mouse_over_e(Widp w) {
+static void wid_bag_item_mouse_over_e(Widp w)
+{
   if (game->in_transit_item) {
     return;
   }
@@ -391,7 +398,8 @@ static void wid_bag_item_mouse_over_e(Widp w) {
   BOTCON(" ");
 }
 
-static uint8_t wid_bag_item_key_down(Widp w, const struct SDL_Keysym *key) {
+static uint8_t wid_bag_item_key_down(Widp w, const struct SDL_Keysym *key)
+{
   TRACE_AND_INDENT();
   DBG3("Bag item key down");
   TRACE_AND_INDENT();
@@ -573,13 +581,15 @@ static uint8_t wid_bag_item_key_down(Widp w, const struct SDL_Keysym *key) {
   return wid_topcon_input(w, key);
 }
 
-static void wid_bag_tick(Widp w) {
+static void wid_bag_tick(Widp w)
+{
   if (game->in_transit_item) {
     wid_move_to_abs(game->in_transit_item, ascii_mouse_x, ascii_mouse_y);
   }
 }
 
-WidBag::~WidBag() {
+WidBag::~WidBag()
+{
   bag->log("Destroy bag");
   TRACE_AND_INDENT();
   wid_destroy(&wid_bag_container);
@@ -591,7 +601,8 @@ WidBag::~WidBag() {
   }
 }
 
-WidBag::WidBag(Thingp bag_, bool highlight, point tl, point br, const std::string &title) : tl(tl), br(br) {
+WidBag::WidBag(Thingp bag_, bool highlight, point tl, point br, const std::string &title) : tl(tl), br(br)
+{
   TRACE_AND_INDENT();
   bag = bag_;
   bag->log("Create bag");
@@ -632,7 +643,8 @@ WidBag::WidBag(Thingp bag_, bool highlight, point tl, point br, const std::strin
   wid_actionbar_init();
 }
 
-Widp is_mouse_over_any_bag(void) {
+Widp is_mouse_over_any_bag(void)
+{
   for (auto b : game->bags) {
     auto w = b->wid_bag_container;
 

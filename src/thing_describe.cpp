@@ -12,13 +12,15 @@
 #include "my_thing_template.h"
 #include "my_sdl.h"
 
-bool Thing::describe_when_hovered_over_in_rightbar(void) {
+bool Thing::describe_when_hovered_over_in_rightbar(void)
+{
   TRACE_AND_INDENT();
   level->describe(this);
   return true;
 }
 
-bool Thing::describe_when_hovering_over(void) {
+bool Thing::describe_when_hovering_over(void)
+{
   TRACE_AND_INDENT();
   level->describe(this);
   return true;

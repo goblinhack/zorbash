@@ -19,7 +19,8 @@
 //
 // Python callback upon being tick
 //
-bool Thing::on_tick(void) {
+bool Thing::on_tick(void)
+{
   TRACE_AND_INDENT();
   auto on_tick = tp()->on_tick_do();
   if (std::empty(on_tick)) {
@@ -44,12 +45,14 @@ bool Thing::on_tick(void) {
   return false;
 }
 
-void Thing::update_tick(void) {
+void Thing::update_tick(void)
+{
   set_tick_last_did_something(game->tick_current);
   set_tick_last_location_check(game->tick_current);
 }
 
-void Thing::achieve_goals_in_life(void) {
+void Thing::achieve_goals_in_life(void)
+{
   TRACE_AND_INDENT();
   if (is_changing_level || is_falling || is_waiting_to_ascend_dungeon || is_waiting_to_descend_sewer ||
       is_waiting_to_descend_dungeon || is_waiting_to_ascend_sewer || is_waiting_to_fall || is_the_grid || is_jumping) {
@@ -185,7 +188,8 @@ void Thing::achieve_goals_in_life(void) {
   }
 }
 
-void Thing::achieve_goals_in_death(void) {
+void Thing::achieve_goals_in_death(void)
+{
   TRACE_AND_INDENT();
   dbg("Achieve death goals at tick %u", game->tick_current);
 
@@ -197,7 +201,8 @@ void Thing::achieve_goals_in_death(void) {
 //
 // Returns true if we attacked something
 //
-bool Thing::collision_check_do(void) {
+bool Thing::collision_check_do(void)
+{
   TRACE_AND_INDENT();
   if (! tp()->collision_check()) {
     return false;
@@ -216,7 +221,8 @@ bool Thing::collision_check_do(void) {
   return target_attacked;
 }
 
-void Thing::tick(void) {
+void Thing::tick(void)
+{
   TRACE_AND_INDENT();
   IF_DEBUG4 { dbg("Tick"); }
   TRACE_AND_INDENT();

@@ -9,7 +9,8 @@
 #include "my_thing.h"
 #include "my_array_bounds_check.h"
 
-void Level::dump(std::string pfx, std::ostream &out) {
+void Level::dump(std::string pfx, std::ostream &out)
+{
   TRACE_AND_INDENT();
   out << pfx << "World {" << std::endl;
   auto old_pfx = pfx;
@@ -23,7 +24,8 @@ void Level::dump(std::string pfx, std::ostream &out) {
   out << pfx << "ts_dungeon_created " << ts_dungeon_created << std::endl;
 
   out << pfx << "all_things" << std::endl;
-  FOR_ALL_THING_GROUPS(group) {
+  FOR_ALL_THING_GROUPS(group)
+  {
     for (auto x = 0; x < MAP_WIDTH; ++x) {
       for (auto y = 0; y < MAP_HEIGHT; ++y) {
         for (auto z = 0; z < MAP_SLOTS; ++z) {
@@ -44,7 +46,8 @@ void Level::dump(std::string pfx, std::ostream &out) {
   out << pfx << "}" << std::endl;
 }
 
-void World::dump(std::string pfx, std::ostream &out) {
+void World::dump(std::string pfx, std::ostream &out)
+{
   TRACE_AND_INDENT();
   out << pfx << "Level {" << std::endl;
   auto old_pfx = pfx;
@@ -66,7 +69,8 @@ void World::dump(std::string pfx, std::ostream &out) {
   out << pfx << "}" << std::endl;
 }
 
-void Config::dump(std::string pfx, std::ostream &out) {
+void Config::dump(std::string pfx, std::ostream &out)
+{
   TRACE_AND_INDENT();
   out << pfx << "Config {" << std::endl;
   auto old_pfx = pfx;
@@ -112,7 +116,8 @@ void Config::dump(std::string pfx, std::ostream &out) {
   out << pfx << "}" << std::endl;
 }
 
-void Game::dump(std::string pfx, std::ostream &out) {
+void Game::dump(std::string pfx, std::ostream &out)
+{
   TRACE_AND_INDENT();
   out << pfx << "Game {" << std::endl;
   auto old_pfx = pfx;

@@ -19,7 +19,8 @@
 #include "my_array_bounds_check.h"
 #include "my_ptrcheck.h"
 
-std::deque< point > Level::flood_fill(point p) const {
+std::deque< point > Level::flood_fill(point p) const
+{
   std::array< std::array< bool, MAP_WIDTH >, MAP_HEIGHT > walked = {};
   std::array< std::array< bool, MAP_WIDTH >, MAP_HEIGHT > pushed = {};
   std::deque< point >                                     in;
@@ -75,7 +76,8 @@ std::deque< point > Level::flood_fill(point p) const {
   return out;
 }
 
-std::deque< point > Level::flood_fill_points(point p, std::function< int(Thingp) > filter) {
+std::deque< point > Level::flood_fill_points(point p, std::function< int(Thingp) > filter)
+{
   std::array< std::array< bool, MAP_WIDTH >, MAP_HEIGHT > walked = {};
   std::array< std::array< bool, MAP_WIDTH >, MAP_HEIGHT > pushed = {};
   std::deque< point >                                     in;
@@ -98,7 +100,8 @@ std::deque< point > Level::flood_fill_points(point p, std::function< int(Thingp)
     }
 
     bool got_one = false;
-    FOR_ALL_THINGS(this, t, p.x, p.y) {
+    FOR_ALL_THINGS(this, t, p.x, p.y)
+    {
       if (filter(t)) {
         got_one = true;
         break;
@@ -144,7 +147,8 @@ std::deque< point > Level::flood_fill_points(point p, std::function< int(Thingp)
   return out;
 }
 
-std::deque< Thingp > Level::flood_fill_things(point p, std::function< int(Thingp) > filter) {
+std::deque< Thingp > Level::flood_fill_things(point p, std::function< int(Thingp) > filter)
+{
   std::array< std::array< bool, MAP_WIDTH >, MAP_HEIGHT > walked = {};
   std::array< std::array< bool, MAP_WIDTH >, MAP_HEIGHT > pushed = {};
   std::deque< point >                                     in;
@@ -167,7 +171,8 @@ std::deque< Thingp > Level::flood_fill_things(point p, std::function< int(Thingp
     }
 
     bool got_one = false;
-    FOR_ALL_THINGS(this, t, p.x, p.y) {
+    FOR_ALL_THINGS(this, t, p.x, p.y)
+    {
       if (filter(t)) {
         out.push_back(t);
         got_one = true;

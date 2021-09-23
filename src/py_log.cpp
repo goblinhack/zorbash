@@ -13,7 +13,8 @@
 #include "my_main.h"
 #include "my_globals.h"
 
-static void py_log_(const char *fmt, va_list args) {
+static void py_log_(const char *fmt, va_list args)
+{
   char buf[ MAXLONGSTR ];
   int  len;
 
@@ -27,7 +28,8 @@ static void py_log_(const char *fmt, va_list args) {
   putf(MY_STDOUT, buf);
 }
 
-void PY_LOG(const char *fmt, ...) {
+void PY_LOG(const char *fmt, ...)
+{
   va_list args;
 
   va_start(args, fmt);
@@ -35,7 +37,8 @@ void PY_LOG(const char *fmt, ...) {
   va_end(args);
 }
 
-void PY_DBG(const char *fmt, ...) {
+void PY_DBG(const char *fmt, ...)
+{
   va_list args;
 
   IF_NODEBUG4 { return; }

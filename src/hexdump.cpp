@@ -24,7 +24,8 @@
 // 00000060  00 00 00 00 00 00 00 00  00 00 00 00 00 00 30 31 |..............01|
 // 00000070  32 33 34 35 61 62 63 64  65 66 67 68 69 6A 6B 6C |2345abcdefghi
 //
-void hexdump(const unsigned char *addr, size_t len) {
+void hexdump(const unsigned char *addr, size_t len)
+{
   int            skipping_blanks         = false;
   unsigned char  empty[ HEX_DUMP_WIDTH ] = {0};
   unsigned char  buf[ HEX_DUMP_WIDTH + 1 ];

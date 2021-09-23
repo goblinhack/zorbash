@@ -14,7 +14,8 @@
 #include "my_thing_template.h"
 #include "my_sprintf.h"
 
-bool Thing::eat(Thingp it) {
+bool Thing::eat(Thingp it)
+{
   TRACE_AND_INDENT();
   //
   // Does the attacker feast on success?
@@ -57,7 +58,8 @@ bool Thing::eat(Thingp it) {
   return false;
 }
 
-bool Thing::worth_eating(Thingp it) {
+bool Thing::worth_eating(Thingp it)
+{
   TRACE_AND_INDENT();
   if (! can_eat(it)) {
     return false;
@@ -66,7 +68,8 @@ bool Thing::worth_eating(Thingp it) {
   return health_boost_would_occur(it->get_nutrition());
 }
 
-bool Thing::can_eat(const Thingp itp) {
+bool Thing::can_eat(const Thingp itp)
+{
   TRACE_AND_INDENT();
   auto me = tp();
   auto it = itp->tp();
@@ -109,7 +112,8 @@ bool Thing::can_eat(const Thingp itp) {
   return false;
 }
 
-bool Thing::eat_something(void) {
+bool Thing::eat_something(void)
+{
   TRACE_AND_INDENT();
   Thingp best = nullptr;
 
@@ -159,7 +163,8 @@ bool Thing::eat_something(void) {
   return false;
 }
 
-bool Thing::can_eat_something(void) {
+bool Thing::can_eat_something(void)
+{
   TRACE_AND_INDENT();
   //
   // Try for food first, ignoring potions

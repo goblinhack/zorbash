@@ -16,7 +16,8 @@
 #include "my_string.h"
 #include "my_monst.h"
 
-void Thing::on_use(Thingp what) {
+void Thing::on_use(Thingp what)
+{
   auto on_use = what->tp()->on_use_do();
   if (std::empty(on_use)) {
     return;
@@ -39,7 +40,8 @@ void Thing::on_use(Thingp what) {
   }
 }
 
-void Thing::on_use(Thingp what, Thingp target) {
+void Thing::on_use(Thingp what, Thingp target)
+{
   auto on_use = what->tp()->on_use_do();
   if (! std::empty(on_use)) {
     auto t = split_tokens(on_use, '.');
@@ -62,7 +64,8 @@ void Thing::on_use(Thingp what, Thingp target) {
   }
 }
 
-void Thing::used(Thingp what, Thingp target, bool remove_after_use) {
+void Thing::used(Thingp what, Thingp target, bool remove_after_use)
+{
   TRACE_AND_INDENT();
   dbg("Attempt to use %s", what->to_string().c_str());
 
@@ -121,7 +124,8 @@ void Thing::used(Thingp what, Thingp target, bool remove_after_use) {
   }
 }
 
-bool Thing::use(Thingp what) {
+bool Thing::use(Thingp what)
+{
   TRACE_AND_INDENT();
   dbg("Trying to use: %s", what->to_string().c_str());
   TRACE_AND_INDENT();

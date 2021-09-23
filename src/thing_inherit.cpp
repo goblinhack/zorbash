@@ -12,7 +12,8 @@
 #include "my_math.h"
 #include "my_thing.h"
 
-void Thing::inherit_from(Thingp it) {
+void Thing::inherit_from(Thingp it)
+{
   if (it->is_on_fire()) {
     set_on_fire("owner is on fire");
   }

@@ -11,7 +11,8 @@
 #include "my_thing.h"
 #include "my_thing_template.h"
 
-int Tp::get_danger_level(void) {
+int Tp::get_danger_level(void)
+{
   TRACE_AND_INDENT();
   int danger_level = 0;
 
@@ -69,7 +70,8 @@ int Tp::get_danger_level(void) {
   return danger_level;
 }
 
-int Thing::get_danger_initial_level(void) {
+int Thing::get_danger_initial_level(void)
+{
   TRACE_AND_INDENT();
   int danger_level = 0;
 
@@ -141,7 +143,8 @@ int Thing::get_danger_initial_level(void) {
   return danger_level;
 }
 
-int Thing::get_danger_current_level(void) {
+int Thing::get_danger_current_level(void)
+{
   TRACE_AND_INDENT();
   int danger_level = 0;
 
@@ -209,7 +212,8 @@ int Thing::get_danger_current_level(void) {
   return danger_level;
 }
 
-int Thing::is_dangerous(Thingp it) {
+int Thing::is_dangerous(Thingp it)
+{
   if (is_fearless()) {
     return false;
   }
@@ -232,7 +236,8 @@ int Thing::is_dangerous(Thingp it) {
   return b > a;
 }
 
-const std::string Thing::get_danger_level_str(Thingp it) {
+const std::string Thing::get_danger_level_str(Thingp it)
+{
   auto a     = get_danger_current_level();
   auto b     = it->get_danger_current_level();
   auto delta = b - a;
@@ -254,13 +259,15 @@ const std::string Thing::get_danger_level_str(Thingp it) {
   }
 }
 
-int Thing::get_danger_current_level(Thingp it) {
+int Thing::get_danger_current_level(Thingp it)
+{
   int a = get_danger_current_level();
   int b = it->get_danger_current_level();
   return b - a;
 }
 
-int Thing::get_danger_initial_level(Thingp it) {
+int Thing::get_danger_initial_level(Thingp it)
+{
   int a = get_danger_initial_level();
   int b = it->get_danger_initial_level();
   // con("danger level %d vs %s %d", a, it->to_string().c_str(), b);

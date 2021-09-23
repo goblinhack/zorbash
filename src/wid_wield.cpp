@@ -24,7 +24,8 @@
 WidPopup *                   wid_wield;
 static std::vector< Thingp > wield_items;
 
-void wid_wield_destroy(void) {
+void wid_wield_destroy(void)
+{
   TRACE_AND_INDENT();
   delete wid_wield;
   wid_wield = nullptr;
@@ -32,7 +33,8 @@ void wid_wield_destroy(void) {
   game->change_state(Game::STATE_NORMAL);
 }
 
-static void wid_wield_slot(int slot) {
+static void wid_wield_slot(int slot)
+{
   TRACE_AND_INDENT();
   DBG3("Wield slot %d", slot);
   TRACE_AND_INDENT();
@@ -60,7 +62,8 @@ static void wid_wield_slot(int slot) {
   wid_wield_destroy();
 }
 
-static uint8_t wid_wield_key_up(Widp w, const struct SDL_Keysym *key) {
+static uint8_t wid_wield_key_up(Widp w, const struct SDL_Keysym *key)
+{
   TRACE_AND_INDENT();
   auto level = game->level;
   if (! level) {
@@ -115,7 +118,8 @@ static uint8_t wid_wield_key_up(Widp w, const struct SDL_Keysym *key) {
   return true;
 }
 
-static uint8_t wid_wield_key_down(Widp w, const struct SDL_Keysym *key) {
+static uint8_t wid_wield_key_down(Widp w, const struct SDL_Keysym *key)
+{
   TRACE_AND_INDENT();
   auto level = game->level;
   if (! level) {
@@ -139,7 +143,8 @@ static uint8_t wid_wield_key_down(Widp w, const struct SDL_Keysym *key) {
   return true;
 }
 
-static uint8_t wid_wield_mouse_up(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t wid_wield_mouse_up(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   auto level = game->level;
   if (! level) {
@@ -159,7 +164,8 @@ static uint8_t wid_wield_mouse_up(Widp w, int32_t x, int32_t y, uint32_t button)
   return true;
 }
 
-static void wid_wield_mouse_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely) {
+static void wid_wield_mouse_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+{
   TRACE_AND_INDENT();
   int slot = wid_get_int_context(w);
 
@@ -187,7 +193,8 @@ static void wid_wield_mouse_over_b(Widp w, int32_t relx, int32_t rely, int32_t w
   }
 }
 
-void Game::wid_wield_create(void) {
+void Game::wid_wield_create(void)
+{
   TRACE_AND_INDENT();
   BOTCON("Choose a weapon to wield.");
 

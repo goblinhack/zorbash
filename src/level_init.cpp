@@ -10,12 +10,14 @@
 #include "my_thing.h"
 #include "my_ptrcheck.h"
 
-Level::Level(void) {
+Level::Level(void)
+{
   TRACE_AND_INDENT();
   newptr(this, "level");
 }
 
-void Level::clear(void) {
+void Level::clear(void)
+{
   TRACE_AND_INDENT();
   _fade_in_map         = {};
   _gfx_water           = {};

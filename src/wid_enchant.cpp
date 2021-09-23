@@ -22,14 +22,16 @@
 WidPopup *                   wid_enchant;
 static std::vector< Thingp > enchant_items;
 
-void wid_enchant_destroy(void) {
+void wid_enchant_destroy(void)
+{
   TRACE_AND_INDENT();
   delete wid_enchant;
   wid_enchant = nullptr;
   game->change_state(Game::STATE_NORMAL);
 }
 
-static void wid_enchant_slot(int slot) {
+static void wid_enchant_slot(int slot)
+{
   TRACE_AND_INDENT();
   if (slot >= (int) enchant_items.size()) {
     wid_enchant_destroy();
@@ -46,7 +48,8 @@ static void wid_enchant_slot(int slot) {
   wid_enchant_destroy();
 }
 
-static uint8_t wid_enchant_key_up(Widp w, const struct SDL_Keysym *key) {
+static uint8_t wid_enchant_key_up(Widp w, const struct SDL_Keysym *key)
+{
   TRACE_AND_INDENT();
   auto level = game->level;
   if (! level) {
@@ -114,7 +117,8 @@ static uint8_t wid_enchant_key_up(Widp w, const struct SDL_Keysym *key) {
   return true;
 }
 
-static uint8_t wid_enchant_key_down(Widp w, const struct SDL_Keysym *key) {
+static uint8_t wid_enchant_key_down(Widp w, const struct SDL_Keysym *key)
+{
   TRACE_AND_INDENT();
   auto level = game->level;
   if (! level) {
@@ -139,7 +143,8 @@ static uint8_t wid_enchant_key_down(Widp w, const struct SDL_Keysym *key) {
   return true;
 }
 
-static uint8_t wid_enchant_mouse_up(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t wid_enchant_mouse_up(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   auto level = game->level;
   if (! level) {
@@ -159,7 +164,8 @@ static uint8_t wid_enchant_mouse_up(Widp w, int32_t x, int32_t y, uint32_t butto
   return true;
 }
 
-void Game::wid_enchant_an_item(void) {
+void Game::wid_enchant_an_item(void)
+{
   TRACE_AND_INDENT();
   BOTCON("You lucky thing. Choose an item to enchant.");
 

@@ -19,14 +19,16 @@
 #include "my_wid_thing_info.h"
 #include "my_game.h"
 
-Thing::~Thing_(void) {
+Thing::~Thing_(void)
+{
   TRACE_AND_INDENT();
   verify(this);
   destroy();
   oldptr(this);
 }
 
-void Thing::destroy(void) {
+void Thing::destroy(void)
+{
   TRACE_AND_INDENT();
   verify(this);
 
@@ -67,7 +69,8 @@ void Thing::destroy(void) {
   delete_lights();
   delete_particle();
 
-  FOR_ALL_THING_GROUPS(group) {
+  FOR_ALL_THING_GROUPS(group)
+  {
     auto f = level->all_things_to_be_destroyed[ group ].find(id);
     if (f != level->all_things_to_be_destroyed[ group ].end()) {
       dbg2("Remove from gc");

@@ -16,7 +16,8 @@
 #include "my_array_bounds_check.h"
 #include "my_ptrcheck.h"
 
-void Level::display_deep_water(int fbo, int16_t minx, int16_t miny, int16_t maxx, int16_t maxy) {
+void Level::display_deep_water(int fbo, int16_t minx, int16_t miny, int16_t maxx, int16_t maxy)
+{
   TRACE_AND_INDENT();
   int fbo_mask1;
   int fbo_mask2;
@@ -118,7 +119,8 @@ void Level::display_deep_water(int fbo, int16_t minx, int16_t miny, int16_t maxx
       if (likely(! is_deep_water(x, y))) {
         continue;
       }
-      FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) {
+      FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z)
+      {
         auto tpp = t->tp();
         if (! tpp->is_deep_water()) {
           continue;

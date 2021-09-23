@@ -10,7 +10,8 @@
 #include "my_tile.h"
 #include "my_thing.h"
 
-void Thing::stamina_boost(int v) {
+void Thing::stamina_boost(int v)
+{
   TRACE_AND_INDENT();
   if (! v) {
     return;

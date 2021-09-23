@@ -14,7 +14,8 @@
 #include "my_globals.h"
 #include "my_ptrcheck.h"
 
-bool Level::create_dungeon(point3d at, int seed) {
+bool Level::create_dungeon(point3d at, int seed)
+{
   TRACE_AND_INDENT();
   log("DGN: Create dungeon at (%d,%d,%d)", at.x, at.y, at.z);
   TOPCON("Dungeon level %d is coming into being...", (at.z / 2) + 1);
@@ -593,7 +594,8 @@ bool Level::create_dungeon(point3d at, int seed) {
   return true;
 }
 
-void Level::create_dungeon_place_walls(Dungeonp d, Tpp tp, int variant, int block_width, int block_height, int tries) {
+void Level::create_dungeon_place_walls(Dungeonp d, Tpp tp, int variant, int block_width, int block_height, int tries)
+{
   TRACE_AND_INDENT();
   auto what = tp->name();
 
@@ -672,7 +674,8 @@ void Level::create_dungeon_place_walls(Dungeonp d, Tpp tp, int variant, int bloc
   }
 }
 
-void Level::create_dungeon_place_rocks(Dungeonp d, int variant, int block_width, int block_height, int tries) {
+void Level::create_dungeon_place_rocks(Dungeonp d, int variant, int block_width, int block_height, int tries)
+{
   TRACE_AND_INDENT();
   auto tp = tp_random_rock();
   if (! tp) {
@@ -756,7 +759,8 @@ void Level::create_dungeon_place_rocks(Dungeonp d, int variant, int block_width,
 }
 
 void Level::create_dungeon_place_floors(Dungeonp d, std::string what, int floor_type, int variant, int block_width,
-                                        int block_height, int tries) {
+                                        int block_height, int tries)
+{
   TRACE_AND_INDENT();
   while (tries--) {
     auto x = pcg_random_range(MAP_BORDER_ROCK, MAP_WIDTH - MAP_BORDER_ROCK - block_width + 1);
@@ -865,7 +869,8 @@ void Level::create_dungeon_place_floors(Dungeonp d, std::string what, int floor_
   }
 }
 
-void Level::create_dungeon_place_objects_with_normal_placement_rules(Dungeonp d) {
+void Level::create_dungeon_place_objects_with_normal_placement_rules(Dungeonp d)
+{
   TRACE_AND_INDENT();
   for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
     for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
@@ -1092,7 +1097,8 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules(Dungeonp d)
   }
 }
 
-void Level::create_dungeon_place_lava(Dungeonp d, const std::string &what) {
+void Level::create_dungeon_place_lava(Dungeonp d, const std::string &what)
+{
   TRACE_AND_INDENT();
   for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
     for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
@@ -1109,7 +1115,8 @@ void Level::create_dungeon_place_lava(Dungeonp d, const std::string &what) {
   }
 }
 
-void Level::create_dungeon_place_lava_smoke(Dungeonp d) {
+void Level::create_dungeon_place_lava_smoke(Dungeonp d)
+{
   TRACE_AND_INDENT();
   for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
     for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
@@ -1140,7 +1147,8 @@ void Level::create_dungeon_place_lava_smoke(Dungeonp d) {
   }
 }
 
-void Level::create_dungeon_place_chasm(Dungeonp d, const std::string &what) {
+void Level::create_dungeon_place_chasm(Dungeonp d, const std::string &what)
+{
   TRACE_AND_INDENT();
   for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
     for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
@@ -1157,7 +1165,8 @@ void Level::create_dungeon_place_chasm(Dungeonp d, const std::string &what) {
   }
 }
 
-void Level::create_dungeon_place_braziers(Dungeonp d, const std::string &what) {
+void Level::create_dungeon_place_braziers(Dungeonp d, const std::string &what)
+{
   TRACE_AND_INDENT();
   for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
     for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
@@ -1174,7 +1183,8 @@ void Level::create_dungeon_place_braziers(Dungeonp d, const std::string &what) {
   }
 }
 
-void Level::create_dungeon_place_random_blood(Dungeonp d) {
+void Level::create_dungeon_place_random_blood(Dungeonp d)
+{
   TRACE_AND_INDENT();
   for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
     for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
@@ -1204,7 +1214,8 @@ void Level::create_dungeon_place_random_blood(Dungeonp d) {
   }
 }
 
-void Level::create_dungeon_place_place_shallow_water(Dungeonp d, const std::string &what) {
+void Level::create_dungeon_place_place_shallow_water(Dungeonp d, const std::string &what)
+{
   TRACE_AND_INDENT();
   for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
     for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
@@ -1225,7 +1236,8 @@ void Level::create_dungeon_place_place_shallow_water(Dungeonp d, const std::stri
   }
 }
 
-void Level::create_dungeon_place_deep_water(Dungeonp d, const std::string &what) {
+void Level::create_dungeon_place_deep_water(Dungeonp d, const std::string &what)
+{
   TRACE_AND_INDENT();
   for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
     for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
@@ -1246,7 +1258,8 @@ void Level::create_dungeon_place_deep_water(Dungeonp d, const std::string &what)
   }
 }
 
-void Level::place_floor_deco(Dungeonp d) {
+void Level::place_floor_deco(Dungeonp d)
+{
   TRACE_AND_INDENT();
   for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
     for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
@@ -1283,7 +1296,8 @@ void Level::place_floor_deco(Dungeonp d) {
   }
 }
 
-void Level::create_dungeon_place_random_floor_deco(Dungeonp d) {
+void Level::create_dungeon_place_random_floor_deco(Dungeonp d)
+{
   TRACE_AND_INDENT();
   for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
     for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
@@ -1351,7 +1365,8 @@ void Level::create_dungeon_place_random_floor_deco(Dungeonp d) {
   }
 }
 
-void Level::create_dungeon_place_sewer_pipes(Dungeonp d) {
+void Level::create_dungeon_place_sewer_pipes(Dungeonp d)
+{
   TRACE_AND_INDENT();
   //
   // Sometimes we have sewer pipes
@@ -1441,7 +1456,8 @@ void Level::create_dungeon_place_sewer_pipes(Dungeonp d) {
   }
 }
 
-void Level::create_dungeon_place_remaining_floor(Dungeonp d, const std::string &what) {
+void Level::create_dungeon_place_remaining_floor(Dungeonp d, const std::string &what)
+{
   TRACE_AND_INDENT();
   for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
     for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
@@ -1485,7 +1501,8 @@ void Level::create_dungeon_place_remaining_floor(Dungeonp d, const std::string &
   }
 }
 
-void Level::create_dungeon_place_corridor(Dungeonp d, const std::string what, int floor_type) {
+void Level::create_dungeon_place_corridor(Dungeonp d, const std::string what, int floor_type)
+{
   TRACE_AND_INDENT();
   for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
     for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
@@ -1498,7 +1515,8 @@ void Level::create_dungeon_place_corridor(Dungeonp d, const std::string what, in
   }
 }
 
-void Level::create_dungeon_place_bridge(Dungeonp d) {
+void Level::create_dungeon_place_bridge(Dungeonp d)
+{
   TRACE_AND_INDENT();
   for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
     for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
@@ -1528,7 +1546,8 @@ void Level::create_dungeon_place_bridge(Dungeonp d) {
   }
 }
 
-void Level::place_dirt(Dungeonp d) {
+void Level::place_dirt(Dungeonp d)
+{
   TRACE_AND_INDENT();
   for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
     for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
@@ -1544,7 +1563,8 @@ void Level::place_dirt(Dungeonp d) {
   }
 }
 
-void Level::place_random_treasure(Dungeonp d) {
+void Level::place_random_treasure(Dungeonp d)
+{
   TRACE_AND_INDENT();
   int tries        = 1000;
   int treasure_max = pcg_random_range(1, 10);
@@ -1596,7 +1616,8 @@ void Level::place_random_treasure(Dungeonp d) {
   }
 }
 
-void Level::place_dry_grass(Dungeonp d) {
+void Level::place_dry_grass(Dungeonp d)
+{
   TRACE_AND_INDENT();
   for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
     for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
@@ -1616,7 +1637,8 @@ void Level::place_dry_grass(Dungeonp d) {
   }
 }
 
-void Level::place_foilage(Dungeonp d) {
+void Level::place_foilage(Dungeonp d)
+{
   TRACE_AND_INDENT();
   for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
     for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
@@ -1636,7 +1658,8 @@ void Level::place_foilage(Dungeonp d) {
   }
 }
 
-void Level::place_spiderweb(Dungeonp d) {
+void Level::place_spiderweb(Dungeonp d)
+{
   TRACE_AND_INDENT();
   for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
     for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
@@ -1656,7 +1679,8 @@ void Level::place_spiderweb(Dungeonp d) {
   }
 }
 
-void Level::create_dungeon_place_remaining_walls(Dungeonp d, const std::string &what) {
+void Level::create_dungeon_place_remaining_walls(Dungeonp d, const std::string &what)
+{
   TRACE_AND_INDENT();
   for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
     for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
@@ -1682,7 +1706,8 @@ void Level::create_dungeon_place_remaining_walls(Dungeonp d, const std::string &
   }
 }
 
-void Level::create_dungeon_place_remaining_rocks(Dungeonp d, const std::string &what) {
+void Level::create_dungeon_place_remaining_rocks(Dungeonp d, const std::string &what)
+{
   TRACE_AND_INDENT();
   for (auto x = 0; x < MAP_WIDTH; x++) {
     for (auto y = 0; y < MAP_HEIGHT; y++) {

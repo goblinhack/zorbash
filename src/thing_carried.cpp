@@ -13,7 +13,8 @@
 #include "my_array_bounds_check.h"
 #include "my_ptrcheck.h"
 
-int Thing::get_carried_weapon_count(void) {
+int Thing::get_carried_weapon_count(void)
+{
   TRACE_AND_INDENT();
   int count = 0;
 
@@ -35,7 +36,8 @@ int Thing::get_carried_weapon_count(void) {
   return count;
 }
 
-int Thing::get_carried_wand_count(void) {
+int Thing::get_carried_wand_count(void)
+{
   TRACE_AND_INDENT();
   int count = 0;
 
@@ -57,7 +59,8 @@ int Thing::get_carried_wand_count(void) {
   return count;
 }
 
-int Thing::get_carried_food_count(void) {
+int Thing::get_carried_food_count(void)
+{
   TRACE_AND_INDENT();
   int count = 0;
 
@@ -79,7 +82,8 @@ int Thing::get_carried_food_count(void) {
   return count;
 }
 
-int Thing::get_carried_weapon_least_value(Thingp *out) {
+int Thing::get_carried_weapon_least_value(Thingp *out)
+{
   TRACE_AND_INDENT();
   int least_value = -1;
 
@@ -111,7 +115,8 @@ int Thing::get_carried_weapon_least_value(Thingp *out) {
   return least_value;
 }
 
-int Thing::get_carried_wand_least_value(Thingp *out) {
+int Thing::get_carried_wand_least_value(Thingp *out)
+{
   TRACE_AND_INDENT();
   int least_value = -1;
 
@@ -143,7 +148,8 @@ int Thing::get_carried_wand_least_value(Thingp *out) {
   return least_value;
 }
 
-int Thing::get_carried_food_least_value(Thingp *out) {
+int Thing::get_carried_food_least_value(Thingp *out)
+{
   TRACE_AND_INDENT();
   int least_value = -1;
 
@@ -175,7 +181,8 @@ int Thing::get_carried_food_least_value(Thingp *out) {
   return least_value;
 }
 
-int Thing::get_carried_weapon_highest_value(Thingp *out) {
+int Thing::get_carried_weapon_highest_value(Thingp *out)
+{
   TRACE_AND_INDENT();
   int highest_value = -1;
 
@@ -207,7 +214,8 @@ int Thing::get_carried_weapon_highest_value(Thingp *out) {
   return highest_value;
 }
 
-int Thing::get_carried_wand_highest_value(Thingp *out) {
+int Thing::get_carried_wand_highest_value(Thingp *out)
+{
   TRACE_AND_INDENT();
   int highest_value = -1;
 
@@ -239,7 +247,8 @@ int Thing::get_carried_wand_highest_value(Thingp *out) {
   return highest_value;
 }
 
-int Thing::get_carried_food_highest_value(Thingp *out) {
+int Thing::get_carried_food_highest_value(Thingp *out)
+{
   TRACE_AND_INDENT();
   int highest_value = -1;
 

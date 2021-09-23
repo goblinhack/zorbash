@@ -81,10 +81,12 @@
  *  Completes to     : set debug on
  */
 
-class command_t {
+class command_t
+{
 
 public:
-  command_t(void) {
+  command_t(void)
+  {
     memset(&this->tokens, 0, sizeof(this->tokens));
     memset(&this->readable_tokens, 0, sizeof(this->readable_tokens));
     memset(&this->input_tokens, 0, sizeof(this->input_tokens));
@@ -105,21 +107,24 @@ static commands                            commands_map;
 
 static uint8_t command_inited;
 
-void command_fini(void) {
+void command_fini(void)
+{
   TRACE_AND_INDENT();
   if (command_inited) {
     command_inited = false;
   }
 }
 
-uint8_t command_init(void) {
+uint8_t command_init(void)
+{
   TRACE_AND_INDENT();
   command_inited = true;
 
   return true;
 }
 
-void command_add(command_fn_t callback, std::string input, std::string readable) {
+void command_add(command_fn_t callback, std::string input, std::string readable)
+{
   TRACE_AND_INDENT();
   auto command = std::make_shared< class command_t >();
 
@@ -141,7 +146,8 @@ void command_add(command_fn_t callback, std::string input, std::string readable)
 }
 
 static int command_matches(const char *input, char *output, uint8_t show_ambiguous, uint8_t show_complete,
-                           uint8_t execute_command, void *context) {
+                           uint8_t execute_command, void *context)
+{
   TRACE_AND_INDENT();
   char     cand_expand_to[ MAXSTR ];
   commandp matched_command = nullptr;
@@ -319,7 +325,8 @@ static int command_matches(const char *input, char *output, uint8_t show_ambiguo
 }
 
 uint8_t command_handle(const char *input, char *expandedtext, uint8_t show_ambiguous, uint8_t show_complete,
-                       uint8_t execute_command, void *context) {
+                       uint8_t execute_command, void *context)
+{
   TRACE_AND_INDENT();
   int matches;
 
@@ -386,7 +393,8 @@ uint8_t command_handle(const char *input, char *expandedtext, uint8_t show_ambig
 }
 
 uint8_t command_handle(std::string input, std::string *expanded_text, uint8_t show_ambiguous, uint8_t show_complete,
-                       uint8_t execute_command, void *context) {
+                       uint8_t execute_command, void *context)
+{
   char buf[ MAXSTR ];
 
   buf[ 0 ] = '\0';
@@ -401,7 +409,8 @@ uint8_t command_handle(std::string input, std::string *expanded_text, uint8_t sh
 }
 
 uint8_t command_handle(std::wstring input, std::wstring *expanded_text, uint8_t show_ambiguous, uint8_t show_complete,
-                       uint8_t execute_command, void *context) {
+                       uint8_t execute_command, void *context)
+{
   char buf[ MAXSTR ];
 
   buf[ 0 ] = '\0';

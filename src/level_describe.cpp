@@ -19,7 +19,8 @@
 #include "my_sdl.h"
 #include "my_template.h"
 
-void Level::describe(fpoint p) {
+void Level::describe(fpoint p)
+{
   TRACE_AND_INDENT();
   bool got_one_with_long_text = false;
 
@@ -53,21 +54,21 @@ void Level::describe(fpoint p) {
   std::vector< Thingp > hover_over_things;
   hover_over = nullptr;
 
-  FOR_ALL_THINGS_THAT_DO_STUFF(this, t, p.x, p.y) {
+  FOR_ALL_THINGS_THAT_DO_STUFF(this, t, p.x, p.y)
+  {
     int x = p.x;
     int y = p.y;
     IF_DEBUG3 { t->log("Active thing cand for describe"); }
     TRACE_AND_INDENT();
     if (! is_lit_currently(x, y) && ! is_lit_ever(x, y)) {
       TRACE_AND_INDENT();
-      IF_DEBUG3 {
+      IF_DEBUG3
+      {
         //
         // Allow snooping in debug mode
         //
       }
-      else {
-        continue;
-      }
+      else { continue; }
     }
 
     if (t->is_cursor() || t->is_player() || t->is_cursor_path() || t->is_the_grid) {
@@ -107,21 +108,21 @@ void Level::describe(fpoint p) {
   }
   FOR_ALL_THINGS_END()
 
-  FOR_ALL_THINGS_THAT_INTERACT(this, t, p.x, p.y) {
+  FOR_ALL_THINGS_THAT_INTERACT(this, t, p.x, p.y)
+  {
     int x = p.x;
     int y = p.y;
     IF_DEBUG3 { t->log("Interesting thing cand for describe"); }
     TRACE_AND_INDENT();
     if (! is_lit_currently(x, y) && ! is_lit_ever(x, y)) {
       TRACE_AND_INDENT();
-      IF_DEBUG3 {
+      IF_DEBUG3
+      {
         //
         // Allow snooping in debug mode
         //
       }
-      else {
-        continue;
-      }
+      else { continue; }
     }
 
     if (t->is_cursor() || t->is_player() || t->is_cursor_path() || t->is_the_grid) {
@@ -160,21 +161,21 @@ void Level::describe(fpoint p) {
   }
   FOR_ALL_THINGS_END()
 
-  FOR_ALL_THINGS(this, t, p.x, p.y) {
+  FOR_ALL_THINGS(this, t, p.x, p.y)
+  {
     int x = p.x;
     int y = p.y;
     IF_DEBUG3 { t->log("All thing cand for describe"); }
     TRACE_AND_INDENT();
     if (! is_lit_currently(x, y) && ! is_lit_ever(x, y)) {
       TRACE_AND_INDENT();
-      IF_DEBUG3 {
+      IF_DEBUG3
+      {
         //
         // Allow snooping in debug mode
         //
       }
-      else {
-        continue;
-      }
+      else { continue; }
     }
 
     if (t->get_immediate_owner() || t->is_player() || t->is_cursor() || t->is_cursor_path() || t->is_the_grid) {
@@ -294,7 +295,8 @@ void Level::describe(fpoint p) {
   }
 }
 
-void Level::describe(Thingp t) {
+void Level::describe(Thingp t)
+{
   TRACE_AND_INDENT();
   if (! player) {
     return;

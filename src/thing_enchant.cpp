@@ -21,7 +21,8 @@
 //
 // Python callback upon being enchant
 //
-void Thing::on_enchant(void) {
+void Thing::on_enchant(void)
+{
   TRACE_AND_INDENT();
   auto on_enchant = tp()->on_enchant_do();
   if (std::empty(on_enchant)) {
@@ -45,7 +46,8 @@ void Thing::on_enchant(void) {
   }
 }
 
-bool Thing::enchant(Thingp what) {
+bool Thing::enchant(Thingp what)
+{
   TRACE_AND_INDENT();
   TOPCON("You enchant %s.", what->text_the().c_str());
   what->on_enchant();
@@ -73,7 +75,8 @@ bool Thing::enchant(Thingp what) {
   return true;
 }
 
-void Thing::enchant_randomly(void) {
+void Thing::enchant_randomly(void)
+{
   TRACE_AND_INDENT();
   if (! is_enchantable()) {
     return;
@@ -88,7 +91,8 @@ void Thing::enchant_randomly(void) {
   }
 }
 
-int Thing::get_enchantstone_count(void) {
+int Thing::get_enchantstone_count(void)
+{
   TRACE_AND_INDENT();
   int v = 0;
   for (const auto &item : monstp->carrying) {
@@ -105,7 +109,8 @@ int Thing::get_enchantstone_count(void) {
   return v;
 }
 
-bool Thing::can_enchant_something(void) {
+bool Thing::can_enchant_something(void)
+{
   TRACE_AND_INDENT();
   for (const auto &item : monstp->carrying) {
     auto t = level->thing_find(item.id);
@@ -120,7 +125,8 @@ bool Thing::can_enchant_something(void) {
   return false;
 }
 
-bool Thing::enchant_random_item(void) {
+bool Thing::enchant_random_item(void)
+{
   TRACE_AND_INDENT();
   for (const auto &item : monstp->carrying) {
     auto t = level->thing_find(item.id);

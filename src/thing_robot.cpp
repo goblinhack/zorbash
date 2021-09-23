@@ -52,7 +52,8 @@
 // have touched them) and choose the best goal. Create a path to that goal for
 // the thing to walk.
 //
-bool Thing::robot_ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int search_type) {
+bool Thing::robot_ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int search_type)
+{
   TRACE_AND_INDENT();
   point start((int) mid_at.x, (int) mid_at.y);
 
@@ -181,7 +182,8 @@ bool Thing::robot_ai_create_path_to_goal(int minx, int miny, int maxx, int maxy,
     // Find the best next-hop to the best goal.
     //
 #ifdef ENABLE_DEBUG_AI_VERBOSE
-    IF_DEBUG4 {
+    IF_DEBUG4
+    {
       dbg("Goals:");
       dmap_print(g.dmap, point(min.x, min.y), point(start.x, start.y), point(max.x, max.y));
     }
@@ -271,7 +273,8 @@ bool Thing::robot_ai_create_path_to_goal(int minx, int miny, int maxx, int maxy,
       }
 
       bool logged_one = false;
-      FOR_ALL_THINGS_THAT_INTERACT(level, it, p.x, p.y) {
+      FOR_ALL_THINGS_THAT_INTERACT(level, it, p.x, p.y)
+      {
         if (it->is_changing_level || it->is_hidden || it->is_falling || it->is_jumping) {
           continue;
         }
@@ -299,7 +302,8 @@ bool Thing::robot_ai_create_path_to_goal(int minx, int miny, int maxx, int maxy,
       FOR_ALL_THINGS_END();
 
       if (! logged_one) {
-        FOR_ALL_THINGS(level, it, p.x, p.y) {
+        FOR_ALL_THINGS(level, it, p.x, p.y)
+        {
 
           if (it->is_changing_level || it->is_hidden || it->is_the_grid || it->is_tmp_thing() || it->is_falling ||
               it->is_jumping) {
@@ -375,7 +379,8 @@ bool Thing::robot_ai_create_path_to_goal(int minx, int miny, int maxx, int maxy,
 //
 // Initialize basic visibility and things that are lit and can be seen
 //
-int Thing::robot_ai_init_can_see_dmap(int minx, int miny, int maxx, int maxy, int search_type) {
+int Thing::robot_ai_init_can_see_dmap(int minx, int miny, int maxx, int maxy, int search_type)
+{
   TRACE_AND_INDENT();
   std::array< std::array< uint8_t, MAP_WIDTH >, MAP_HEIGHT > can_jump = {};
   point                                                      start((int) mid_at.x, (int) mid_at.y);
@@ -599,7 +604,8 @@ int Thing::robot_ai_init_can_see_dmap(int minx, int miny, int maxx, int maxy, in
             }
 
             if (! level->is_lit_currently(p.x, p.y)) {
-              FOR_ALL_THINGS_THAT_INTERACT(level, it, p.x, p.y) {
+              FOR_ALL_THINGS_THAT_INTERACT(level, it, p.x, p.y)
+              {
                 if (it->is_changing_level || it->is_hidden || it->is_falling || it->is_jumping) {
                   continue;
                 }
@@ -706,7 +712,8 @@ int Thing::robot_ai_init_can_see_dmap(int minx, int miny, int maxx, int maxy, in
 // have touched them) and choose the best goal. Create a path to that goal for
 // the thing to walk.
 //
-void Thing::robot_ai_choose_initial_goals(std::multiset< Goal > &goals, int minx, int miny, int maxx, int maxy) {
+void Thing::robot_ai_choose_initial_goals(std::multiset< Goal > &goals, int minx, int miny, int maxx, int maxy)
+{
   TRACE_AND_INDENT();
   auto dmap_can_see = get_dmap_can_see();
   auto age_map      = get_age_map();
@@ -726,7 +733,8 @@ void Thing::robot_ai_choose_initial_goals(std::multiset< Goal > &goals, int minx
 
       std::string last_msg;
 
-      FOR_ALL_THINGS_THAT_INTERACT(level, it, p.x, p.y) {
+      FOR_ALL_THINGS_THAT_INTERACT(level, it, p.x, p.y)
+      {
         last_msg = "";
 
         if (it->is_changing_level || it->is_hidden || it->is_falling || it->is_jumping) {
@@ -1056,7 +1064,8 @@ void Thing::robot_ai_choose_initial_goals(std::multiset< Goal > &goals, int minx
 // what is currently visible and find the most interesting point at that edge
 // and then create a path to that edge.
 //
-void Thing::robot_ai_choose_search_goals(std::multiset< Goal > &goals, int search_type) {
+void Thing::robot_ai_choose_search_goals(std::multiset< Goal > &goals, int search_type)
+{
   TRACE_AND_INDENT();
   point start((int) mid_at.x, (int) mid_at.y);
 
@@ -1069,7 +1078,8 @@ void Thing::robot_ai_choose_search_goals(std::multiset< Goal > &goals, int searc
   set(pushed, start.x, start.y, true);
 
   auto dmap_can_see = get_dmap_can_see();
-  IF_DEBUG3 {
+  IF_DEBUG3
+  {
     log("Dmap, can see:");
     dmap_print(dmap_can_see);
   }
@@ -1341,7 +1351,8 @@ next:
   }
 }
 
-bool Thing::robot_ai_choose_nearby_goal(void) {
+bool Thing::robot_ai_choose_nearby_goal(void)
+{
   TRACE_AND_INDENT();
   bool left;
   bool right;
@@ -1355,7 +1366,8 @@ bool Thing::robot_ai_choose_nearby_goal(void) {
     for (int dy = -1; dy <= 1; dy++) {
       fpoint at(mid_at.x + dx, mid_at.y + dy);
 
-      FOR_ALL_THINGS(level, it, at.x, at.y) {
+      FOR_ALL_THINGS(level, it, at.x, at.y)
+      {
         if (it->is_door() && ! it->is_open) {
           if (get_keys()) {
             if (open_door(it)) {
@@ -1411,7 +1423,8 @@ bool Thing::robot_ai_choose_nearby_goal(void) {
   return false;
 }
 
-void Thing::robot_tick(void) {
+void Thing::robot_tick(void)
+{
   TRACE_AND_INDENT();
   //
   // For game smoothness we allow the player to run a bit ahead of the
@@ -1700,7 +1713,8 @@ void Thing::robot_tick(void) {
   }
 }
 
-void Thing::robot_change_state(int new_state, const std::string &why) {
+void Thing::robot_change_state(int new_state, const std::string &why)
+{
   TRACE_AND_INDENT();
   if (monstp->robot_state == new_state) {
     return;

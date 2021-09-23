@@ -48,7 +48,8 @@ std::array< bool, UI_WID_SAVE_SLOTS > slot_valid;
 //
 // Save timestamps as a delta we can restore.
 //
-static ts_t load(ts_t T) {
+static ts_t load(ts_t T)
+{
   TRACE_AND_INDENT();
   if (! T) {
     return (0);
@@ -56,7 +57,8 @@ static ts_t load(ts_t T) {
   return (T - old_ts_dungeon_created + new_ts_dungeon_created);
 }
 
-std::istream &operator>>(std::istream &in, Bits< Monstp & > my) {
+std::istream &operator>>(std::istream &in, Bits< Monstp & > my)
+{
   TRACE_AND_INDENT();
   /////////////////////////////////////////////////////////////////////////
   // Keep these sorted alphabetically to make it easier to see additions
@@ -169,7 +171,8 @@ std::istream &operator>>(std::istream &in, Bits< Monstp & > my) {
   return (in);
 }
 
-std::istream &operator>>(std::istream &in, Bits< Thingp & > my) {
+std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
+{
   TRACE_AND_INDENT();
   auto start = in.tellg();
 
@@ -431,7 +434,8 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my) {
 
   READ_MAGIC("thing end", THING_MAGIC_END);
 
-  IF_DEBUG4 {
+  IF_DEBUG4
+  {
     auto diff = in.tellg() - start;
     LOG("LOAD %d bytes %s TP %d ID %x last_mid_at %f,%f monstp %p", (int) diff, name.c_str(), my.t->tp_id, my.t->id.id,
         my.t->last_mid_at.x, my.t->last_mid_at.y, my.t->monstp);
@@ -440,7 +444,8 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my) {
   return (in);
 }
 
-std::istream &operator>>(std::istream &in, Bits< Level *& > my) {
+std::istream &operator>>(std::istream &in, Bits< Level *& > my)
+{
   TRACE_AND_INDENT();
   auto l = my.t;
 
@@ -580,7 +585,8 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my) {
   //
   // Operate on a copy, not live data that might change as we add things
   //
-  FOR_ALL_THING_GROUPS(group) {
+  FOR_ALL_THING_GROUPS(group)
+  {
     auto ids = my.t->all_things_id_at[ group ];
 
     for (auto x = 0; x < MAP_WIDTH; x++) {
@@ -633,7 +639,8 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my) {
   }
 
   uint32_t csum = 0;
-  FOR_ALL_THING_GROUPS(group) {
+  FOR_ALL_THING_GROUPS(group)
+  {
     for (auto p : l->all_things[ group ]) {
       auto t = p.second;
       csum += t->mid_at.x + t->mid_at.y + t->id.id;
@@ -656,7 +663,8 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my) {
   return (in);
 }
 
-std::istream &operator>>(std::istream &in, Bits< class World & > my) {
+std::istream &operator>>(std::istream &in, Bits< class World & > my)
+{
   TRACE_AND_INDENT();
   my.t.levels         = {};
   my.t.all_thing_ptrs = {};
@@ -697,7 +705,8 @@ std::istream &operator>>(std::istream &in, Bits< class World & > my) {
   return (in);
 }
 
-std::istream &operator>>(std::istream &in, Bits< Config & > my) {
+std::istream &operator>>(std::istream &in, Bits< Config & > my)
+{
   TRACE_AND_INDENT();
   /* uint32_t           header_size                  */ in >> bits(my.t.header_size);
   if (my.t.header_size != sizeof(Config)) {
@@ -814,7 +823,8 @@ std::istream &operator>>(std::istream &in, Bits< Config & > my) {
   return (in);
 }
 
-std::istream &operator>>(std::istream &in, Bits< class Game & > my) {
+std::istream &operator>>(std::istream &in, Bits< class Game & > my)
+{
   TRACE_AND_INDENT();
   in >> bits(my.t.version);
   if (my.t.version != MYVER) {
@@ -872,7 +882,8 @@ std::istream &operator>>(std::istream &in, Bits< class Game & > my) {
 
 // binary mode is only for switching off newline translation
 // ios::ate, open at end
-std::vector< char > read_file(const std::string filename) {
+std::vector< char > read_file(const std::string filename)
+{
   TRACE_AND_INDENT();
   std::ifstream ifs(filename, std::ios::in | std::ios::binary | std::ios::ate);
   if (ifs.is_open()) {
@@ -890,7 +901,8 @@ std::vector< char > read_file(const std::string filename) {
   }
 }
 
-static std::vector< char > read_lzo_file(const std::string filename, lzo_uint *uncompressed_sz, uint32_t *cs) {
+static std::vector< char > read_lzo_file(const std::string filename, lzo_uint *uncompressed_sz, uint32_t *cs)
+{
   TRACE_AND_INDENT();
   std::ifstream ifs(filename, std::ios::in | std::ios::binary | std::ios::ate);
   if (ifs.is_open()) {
@@ -916,7 +928,8 @@ static std::vector< char > read_lzo_file(const std::string filename, lzo_uint *u
   }
 }
 
-uint32_t csum(char *mem, uint32_t len) {
+uint32_t csum(char *mem, uint32_t len)
+{
   TRACE_AND_INDENT();
   uint32_t ret = 0;
   while (len--) {
@@ -927,7 +940,8 @@ uint32_t csum(char *mem, uint32_t len) {
   return ret;
 }
 
-bool Game::load(std::string file_to_load, class Game &target) {
+bool Game::load(std::string file_to_load, class Game &target)
+{
   TRACE_AND_INDENT();
   game_load_error = "";
 
@@ -1007,7 +1021,8 @@ bool Game::load(std::string file_to_load, class Game &target) {
   return true;
 }
 
-void Game::load_config(void) {
+void Game::load_config(void)
+{
   TRACE_AND_INDENT();
   auto          filename = saved_dir + "config";
   std::ifstream in(filename);
@@ -1017,7 +1032,8 @@ void Game::load_config(void) {
   }
 }
 
-void Game::load(void) {
+void Game::load(void)
+{
   TRACE_AND_INDENT();
   LOG("-");
   CON("DGN: Loading %s", save_file.c_str());
@@ -1036,7 +1052,8 @@ void Game::load(void) {
   LOG("-");
 }
 
-void Game::load(int slot) {
+void Game::load(int slot)
+{
   TRACE_AND_INDENT();
   if (slot < 0) {
     return;
@@ -1074,7 +1091,8 @@ void Game::load(int slot) {
   TOPCON("Loaded the game from %s.", save_file.c_str());
 }
 
-void Game::load_snapshot(void) {
+void Game::load_snapshot(void)
+{
   TRACE_AND_INDENT();
   game->fini();
 
@@ -1099,14 +1117,16 @@ void Game::load_snapshot(void) {
   TOPCON("Loaded the game from %s.", save_file.c_str());
 }
 
-void wid_load_destroy(void) {
+void wid_load_destroy(void)
+{
   TRACE_AND_INDENT();
   delete wid_load;
   wid_load = nullptr;
   game->change_state(Game::STATE_NORMAL);
 }
 
-static uint8_t wid_load_key_up(Widp w, const struct SDL_Keysym *key) {
+static uint8_t wid_load_key_up(Widp w, const struct SDL_Keysym *key)
+{
   TRACE_AND_INDENT();
   if (sdl_shift_held) {
     if (key->scancode == (SDL_Scancode) game->config.key_console) {
@@ -1159,7 +1179,8 @@ static uint8_t wid_load_key_up(Widp w, const struct SDL_Keysym *key) {
   return true;
 }
 
-static uint8_t wid_load_key_down(Widp w, const struct SDL_Keysym *key) {
+static uint8_t wid_load_key_down(Widp w, const struct SDL_Keysym *key)
+{
   TRACE_AND_INDENT();
   if (sdl_shift_held) {
     if (key->scancode == (SDL_Scancode) game->config.key_console) {
@@ -1170,7 +1191,8 @@ static uint8_t wid_load_key_down(Widp w, const struct SDL_Keysym *key) {
   return true;
 }
 
-static uint8_t wid_load_mouse_up(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t wid_load_mouse_up(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   auto slot = wid_get_int_context(w);
   game->load(slot);
@@ -1178,14 +1200,16 @@ static uint8_t wid_load_mouse_up(Widp w, int32_t x, int32_t y, uint32_t button) 
   return true;
 }
 
-static uint8_t wid_load_saved_snapshot(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t wid_load_saved_snapshot(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   game->load_snapshot();
   wid_load_destroy();
   return true;
 }
 
-void Game::load_select(void) {
+void Game::load_select(void)
+{
   TRACE_AND_INDENT();
   CON("USR: Loading a saved game, destroy old");
 

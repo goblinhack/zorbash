@@ -22,7 +22,8 @@
 static std::list< WidBag * > bags;
 static bool                  bag_debug;
 
-bool Thing::bag_contains(Thingp item) {
+bool Thing::bag_contains(Thingp item)
+{
   auto bag = get_bag();
   auto bw  = capacity_width();
   auto bh  = capacity_height();
@@ -46,7 +47,8 @@ bool Thing::bag_contains(Thingp item) {
 //
 // Place the item somwhere in the bag
 //
-bool Thing::bag_add(Thingp item) {
+bool Thing::bag_add(Thingp item)
+{
   TRACE_AND_INDENT();
   dbg3("Bag: Add %s", item->to_string().c_str());
 
@@ -119,7 +121,8 @@ bool Thing::bag_add(Thingp item) {
   return false;
 }
 
-bool Thing::bag_add_test(Thingp item) {
+bool Thing::bag_add_test(Thingp item)
+{
   TRACE_AND_INDENT();
   dbg3("Bag: Add test %s", item->to_string().c_str());
 
@@ -177,7 +180,8 @@ bool Thing::bag_add_test(Thingp item) {
   return false;
 }
 
-bool Thing::bag_compress(void) {
+bool Thing::bag_compress(void)
+{
   TRACE_AND_INDENT();
   auto bag           = get_bag();
   auto bw            = capacity_width();
@@ -234,7 +238,8 @@ bool Thing::bag_compress(void) {
   return did_something;
 }
 
-bool Thing::bag_remove_at(Thingp item, point pos) {
+bool Thing::bag_remove_at(Thingp item, point pos)
+{
   TRACE_AND_INDENT();
   verify(item);
 
@@ -257,7 +262,8 @@ bool Thing::bag_remove_at(Thingp item, point pos) {
   return true;
 }
 
-bool Thing::bag_can_place_at(Thingp item, point pos) {
+bool Thing::bag_can_place_at(Thingp item, point pos)
+{
   TRACE_AND_INDENT();
   if (item == this) {
     TOPCON("Cannot place an item inside itself!");
@@ -331,7 +337,8 @@ bool Thing::bag_can_place_at(Thingp item, point pos) {
   return true;
 }
 
-bool Thing::bag_place_at(Thingp item, point pos) {
+bool Thing::bag_place_at(Thingp item, point pos)
+{
   TRACE_AND_INDENT();
   auto bag = get_bag();
   auto bw  = capacity_width();
@@ -361,7 +368,8 @@ bool Thing::bag_place_at(Thingp item, point pos) {
   return true;
 }
 
-bool Thing::bag_remove(Thingp item) {
+bool Thing::bag_remove(Thingp item)
+{
   TRACE_AND_INDENT();
   if (! item) {
     err("No item to remove");
@@ -389,7 +397,8 @@ bool Thing::bag_remove(Thingp item) {
   return found;
 }
 
-int bag_estimate_volume(const std::list< Thingp > &items) {
+int bag_estimate_volume(const std::list< Thingp > &items)
+{
   TRACE_AND_INDENT();
   int volume = 0;
   for (auto t : items) {

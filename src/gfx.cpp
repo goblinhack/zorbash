@@ -8,7 +8,8 @@
 #include "my_gfx.h"
 #include "my_ui.h"
 
-static void gfx_init_font_small(void) {
+static void gfx_init_font_small(void)
+{
   std::initializer_list< std::string > tiles = {
       //////////////////////////////////////////////////////////////////
       // sp     !       "       #       $       %       &       '
@@ -159,7 +160,8 @@ static void gfx_init_font_small(void) {
   tile_load_arr_sprites("data/fonts/font-small.tga", "font_small", UI_FONT_SMALL_WIDTH, UI_FONT_SMALL_HEIGHT, arr);
 }
 
-static void gfx_init_font_large(void) {
+static void gfx_init_font_large(void)
+{
   std::initializer_list< std::string > tiles = {
       //////////////////////////////////////////////////////////////////
       // sp     !       "       #       $       %       &       '
@@ -312,7 +314,8 @@ static void gfx_init_font_large(void) {
 
 static void gfx_init_ui(void) {}
 
-void gfx_init(void) {
+void gfx_init(void)
+{
   gfx_init_font_small();
   gfx_init_font_large();
   gfx_init_ui();

@@ -11,7 +11,8 @@
 #include "my_thing.h"
 #include "my_gl.h"
 
-void Thing::level_pop(void) {
+void Thing::level_pop(void)
+{
   TRACE_AND_INDENT();
   if (! is_attached) {
     return;

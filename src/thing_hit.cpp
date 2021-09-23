@@ -20,7 +20,8 @@
 //
 void Thing::on_hit(Thingp hitter,      // an arrow / monst /...
                    Thingp real_hitter, // who fired the arrow?
-                   bool crit, bool bite, int damage) {
+                   bool crit, bool bite, int damage)
+{
   TRACE_AND_INDENT();
   auto on_hit = tp()->on_hit_do();
   if (std::empty(on_hit)) {
@@ -49,7 +50,8 @@ void Thing::on_hit(Thingp hitter,      // an arrow / monst /...
 //
 // Python callback upon being miss
 //
-void Thing::on_miss(Thingp hitter) {
+void Thing::on_miss(Thingp hitter)
+{
   TRACE_AND_INDENT();
   auto on_miss = tp()->on_miss_do();
   if (std::empty(on_miss)) {
@@ -73,7 +75,8 @@ void Thing::on_miss(Thingp hitter) {
   }
 }
 
-void Thing::on_bite(void) {
+void Thing::on_bite(void)
+{
   TRACE_AND_INDENT();
   auto on_bite = tp()->on_bite_do();
   if (std::empty(on_bite)) {
@@ -99,7 +102,8 @@ void Thing::on_bite(void) {
 
 int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
                          Thingp real_hitter, // who fired the arrow?
-                         bool crit, bool bite, int poison, int damage) {
+                         bool crit, bool bite, int poison, int damage)
+{
   TRACE_AND_INDENT();
   if (! hitter) {
     err("No hitter");
@@ -518,7 +522,8 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
 //
 // Returns true on the target being dead.
 //
-int Thing::is_hit_by(Thingp hitter, bool crit, bool bite, int poison, int damage) {
+int Thing::is_hit_by(Thingp hitter, bool crit, bool bite, int poison, int damage)
+{
   TRACE_AND_INDENT();
   IF_DEBUG2 { hitter->log("Possible hit %s for %u", to_string().c_str(), damage); }
   TRACE_AND_INDENT();
@@ -625,12 +630,14 @@ int Thing::is_hit_by(Thingp hitter, bool crit, bool bite, int poison, int damage
   return (hit_and_killed);
 }
 
-int Thing::is_hit_by(Thingp hitter, int damage) {
+int Thing::is_hit_by(Thingp hitter, int damage)
+{
   TRACE_AND_INDENT();
   return (is_hit_by(hitter, false, false, 0, damage));
 }
 
-int Thing::is_hit_by(Thingp hitter) {
+int Thing::is_hit_by(Thingp hitter)
+{
   TRACE_AND_INDENT();
   return (is_hit_by(hitter, false, false, hitter->get_damage_poison(), hitter->get_damage_melee()));
 }

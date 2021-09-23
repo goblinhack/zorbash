@@ -19,7 +19,8 @@
 #include "my_monst.h"
 #include "my_ptrcheck.h"
 
-std::vector< Lightp > &Thing::get_light(void) {
+std::vector< Lightp > &Thing::get_light(void)
+{
   TRACE_AND_INDENT();
   if (monstp) {
     verify(monstp);
@@ -30,7 +31,8 @@ std::vector< Lightp > &Thing::get_light(void) {
   }
 }
 
-void Thing::new_light(point offset, int strength, color col, int fbo) {
+void Thing::new_light(point offset, int strength, color col, int fbo)
+{
   TRACE_AND_INDENT();
   new_monst();
   auto l = light_new(this, offset, strength, col, fbo);
@@ -39,7 +41,8 @@ void Thing::new_light(point offset, int strength, color col, int fbo) {
   monstp->light_col      = col;
 }
 
-void Thing::new_light(point offset, int strength) {
+void Thing::new_light(point offset, int strength)
+{
   TRACE_AND_INDENT();
   new_monst();
   auto l = light_new(this, offset, strength);
@@ -47,7 +50,8 @@ void Thing::new_light(point offset, int strength) {
   monstp->light_strength = strength;
 }
 
-void Thing::delete_lights(void) {
+void Thing::delete_lights(void)
+{
   TRACE_AND_INDENT();
   if (monstp) {
     verify(monstp);
@@ -58,7 +62,8 @@ void Thing::delete_lights(void) {
   }
 }
 
-void Thing::init_lights(void) {
+void Thing::init_lights(void)
+{
   TRACE_AND_INDENT();
   if (unlikely(is_player())) {
     if (level->player && (level->player != this)) {
@@ -145,7 +150,8 @@ void Thing::init_lights(void) {
   }
 }
 
-void Thing::light_update_strength(void) {
+void Thing::light_update_strength(void)
+{
   TRACE_AND_INDENT();
   auto str = get_light_strength();
   for (auto l : get_light()) {

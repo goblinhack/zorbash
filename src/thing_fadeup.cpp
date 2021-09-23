@@ -12,7 +12,8 @@
 #include "my_sprintf.h"
 #include "my_gl.h"
 
-void Thing::fadeup(float fadeup_height, float fadeup_fade, ts_t ms) {
+void Thing::fadeup(float fadeup_height, float fadeup_fade, ts_t ms)
+{
   auto t = set_ts_fadeup_begin(time_get_time_ms_cached());
   set_ts_fadeup_end(t + ms);
 
@@ -21,7 +22,8 @@ void Thing::fadeup(float fadeup_height, float fadeup_fade, ts_t ms) {
   is_fadeup = true;
 }
 
-float Thing::get_fadeup(void) {
+float Thing::get_fadeup(void)
+{
   if (! is_fadeup) {
     alpha = 255;
     return (0.0);

@@ -16,7 +16,8 @@
 #include "my_thing_template.h"
 #include "my_ptrcheck.h"
 
-void Thing::lava_tick(void) {
+void Thing::lava_tick(void)
+{
   TRACE_AND_INDENT();
   if (! hates_fire()) {
     if (is_player()) {
@@ -49,7 +50,8 @@ void Thing::lava_tick(void) {
   }
 
   if (hit) {
-    FOR_ALL_THINGS_AT_DEPTH(level, t, at.x, at.y, MAP_DEPTH_LAVA) {
+    FOR_ALL_THINGS_AT_DEPTH(level, t, at.x, at.y, MAP_DEPTH_LAVA)
+    {
       if (! t->is_lava()) {
         continue;
       }

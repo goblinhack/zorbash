@@ -9,7 +9,8 @@
 #include "my_callstack.h"
 #include "my_ascii.h"
 
-PyObject *text_size_(PyObject *obj, PyObject *args, PyObject *keywds) {
+PyObject *text_size_(PyObject *obj, PyObject *args, PyObject *keywds)
+{
   TRACE_AND_INDENT();
   wchar_t *text = 0;
 

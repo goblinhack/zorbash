@@ -16,7 +16,8 @@
 #include "my_array_bounds_check.h"
 #include "my_ptrcheck.h"
 
-void Thing::secret_door_tick(void) {
+void Thing::secret_door_tick(void)
+{
   TRACE_AND_INDENT();
   if (! is_player()) {
     return;
@@ -28,7 +29,8 @@ void Thing::secret_door_tick(void) {
 
   dbg("Opened a secret door");
 
-  FOR_ALL_THINGS(level, t, mid_at.x, mid_at.y) {
+  FOR_ALL_THINGS(level, t, mid_at.x, mid_at.y)
+  {
     if (! t->is_secret_door()) {
       continue;
     }

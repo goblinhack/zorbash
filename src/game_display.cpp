@@ -7,7 +7,8 @@
 #include "my_sys.h"
 #include "my_game.h"
 
-void Game::display(void) {
+void Game::display(void)
+{
   TRACE_AND_INDENT();
   if (! level) {
     return;

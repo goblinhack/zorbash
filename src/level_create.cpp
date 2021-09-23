@@ -11,7 +11,8 @@
 #include "my_random.h"
 #include "my_globals.h"
 
-void Level::create(point3d at, int seed) {
+void Level::create(point3d at, int seed)
+{
   TRACE_AND_INDENT();
   pcg_srand(game->seed + at.z);
 
@@ -60,7 +61,8 @@ void Level::create(point3d at, int seed) {
   }
 }
 
-void Level::place_the_grid(void) {
+void Level::place_the_grid(void)
+{
   TRACE_AND_INDENT();
   for (auto x = 0; x < MAP_WIDTH; x++) {
     for (auto y = 0; y < MAP_HEIGHT; y++) {

@@ -69,7 +69,8 @@ color LIGHTSLATEBLUE;
 color LIGHTSLATEGRAY;
 #endif
 
-void color_init3(void) {
+void color_init3(void)
+{
   TRACE_AND_INDENT();
 #if 0
   color_set("hotpink1", &HOTPINK1, 255, 110, 180, 255);

@@ -26,7 +26,8 @@ Tp::Tp(void) { newptr(this, "Tp"); }
 
 Tp::~Tp(void) { oldptr(this); }
 
-Tpp tp_find(const std::string &name) {
+Tpp tp_find(const std::string &name)
+{
   TRACE_AND_INDENT();
   auto result = tp_name_map.find(name);
 
@@ -37,7 +38,8 @@ Tpp tp_find(const std::string &name) {
   return (result->second);
 }
 
-Tpp tp_find(uint32_t id) {
+Tpp tp_find(uint32_t id)
+{
   TRACE_AND_INDENT();
   auto result = get(tp_id_map, id - 1);
   if (! result) {
@@ -47,7 +49,8 @@ Tpp tp_find(uint32_t id) {
   return (result);
 }
 
-uint8_t tp_init(void) {
+uint8_t tp_init(void)
+{
   TRACE_AND_INDENT();
   tp_init_done = true;
 
@@ -57,7 +60,8 @@ uint8_t tp_init(void) {
   return true;
 }
 
-void tp_fini(void) {
+void tp_fini(void)
+{
   TRACE_AND_INDENT();
   if (tp_init_done) {
     tp_init_done = false;
@@ -67,7 +71,8 @@ void tp_fini(void) {
   }
 }
 
-Tpp tp_load(int id, std::string const &name, const std::string &text_name, const std::string &short_text_name) {
+Tpp tp_load(int id, std::string const &name, const std::string &text_name, const std::string &short_text_name)
+{
   TRACE_AND_INDENT();
   if (tp_find(name)) {
     ERR("Thing template name [%s] already used", name.c_str());
@@ -89,7 +94,8 @@ Tpp tp_load(int id, std::string const &name, const std::string &text_name, const
   return (tp);
 }
 
-Tilep tp_first_tile(Tpp tp) {
+Tilep tp_first_tile(Tpp tp)
+{
   TRACE_AND_INDENT();
   auto tiles = &tp->tiles;
 

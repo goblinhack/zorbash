@@ -36,7 +36,8 @@ static int          last_msg_count;
 
 static std::map< unsigned int, std::wstring > wid_topcon_lines;
 
-void wid_topcon_fini(void) {
+void wid_topcon_fini(void)
+{
   TRACE_AND_INDENT();
   wid_destroy(&wid_topcon_container);
   wid_destroy(&wid_topcon_vert_scroll);
@@ -44,7 +45,8 @@ void wid_topcon_fini(void) {
   wid_destroy(&wid_topcon_window);
 }
 
-uint8_t wid_topcon_init(void) {
+uint8_t wid_topcon_init(void)
+{
   TRACE_AND_INDENT();
   wid_topcon_wid_create();
   wid_hide(wid_topcon_window);
@@ -58,7 +60,8 @@ uint8_t wid_topcon_init(void) {
 //
 // Key down etc...
 //
-uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key) {
+uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
+{
   TRACE_AND_INDENT();
   if (! game) {
     return false;
@@ -593,7 +596,8 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key) {
 //
 // Scroll back to the bottom of the screen.
 //
-static void wid_topcon_reset_scroll(void) {
+static void wid_topcon_reset_scroll(void)
+{
   TRACE_AND_INDENT();
   if (! wid_topcon_vert_scroll) {
     return;
@@ -602,7 +606,8 @@ static void wid_topcon_reset_scroll(void) {
   wid_move_to_bottom(wid_topcon_vert_scroll);
 }
 
-static void wid_topcon_scroll(Widp w, std::wstring str) {
+static void wid_topcon_scroll(Widp w, std::wstring str)
+{
   TRACE_AND_INDENT();
   Widp tmp {};
 
@@ -617,7 +622,8 @@ static void wid_topcon_scroll(Widp w, std::wstring str) {
   }
 }
 
-static void wid_topcon_replace(Widp w, std::wstring str) {
+static void wid_topcon_replace(Widp w, std::wstring str)
+{
   TRACE_AND_INDENT();
   Widp tmp {};
 
@@ -633,7 +639,8 @@ static void wid_topcon_replace(Widp w, std::wstring str) {
 //
 // Log a message to the topcon
 //
-static void wid_topcon_log_(std::wstring s) {
+static void wid_topcon_log_(std::wstring s)
+{
   TRACE_AND_INDENT();
   static int32_t log_wid_topcon_buffered_lines;
 
@@ -671,7 +678,8 @@ static void wid_topcon_log_(std::wstring s) {
   }
 }
 
-void wid_topcon_flush(void) {
+void wid_topcon_flush(void)
+{
   TRACE_AND_INDENT();
   auto iter = wid_topcon_lines.begin();
 
@@ -686,7 +694,8 @@ void wid_topcon_flush(void) {
 //
 // Log a message to the topcon
 //
-void wid_topcon_log(std::string s) {
+void wid_topcon_log(std::string s)
+{
   TRACE_AND_INDENT();
   int chars_per_line = UI_TOPCON_WIDTH;
 
@@ -702,7 +711,8 @@ void wid_topcon_log(std::string s) {
 //
 // Log a message to the topcon
 //
-void wid_topcon_log(std::wstring s) {
+void wid_topcon_log(std::wstring s)
+{
   TRACE_AND_INDENT();
   int chars_per_line = UI_TOPCON_WIDTH;
 
@@ -718,7 +728,8 @@ void wid_topcon_log(std::wstring s) {
 //
 // Create the topcon
 //
-static void wid_topcon_wid_create(void) {
+static void wid_topcon_wid_create(void)
+{
   TRACE_AND_INDENT();
   int h = UI_TOPCON_VIS_HEIGHT;
 
@@ -786,7 +797,8 @@ static void wid_topcon_wid_create(void) {
   wid_update(wid_topcon_window);
 }
 
-std::vector< std::wstring > wid_topcon_serialize(void) {
+std::vector< std::wstring > wid_topcon_serialize(void)
+{
   TRACE_AND_INDENT();
   std::vector< std::wstring > r;
   auto                        tmp = wid_get_head(wid_topcon_input_line);
@@ -801,7 +813,8 @@ std::vector< std::wstring > wid_topcon_serialize(void) {
   return (r);
 }
 
-void wid_topcon_deserialize(std::vector< std::wstring > r) {
+void wid_topcon_deserialize(std::vector< std::wstring > r)
+{
   TRACE_AND_INDENT();
   for (const auto &s : r) {
     auto tmp = wstring_to_string(s);

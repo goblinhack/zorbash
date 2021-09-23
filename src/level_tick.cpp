@@ -20,7 +20,8 @@
 #include "my_sdl.h"
 #include "my_ptrcheck.h"
 
-void Level::handle_all_pending_things(int group) {
+void Level::handle_all_pending_things(int group)
+{
   for (auto &i : all_animated_things_pending_remove[ group ]) {
     all_animated_things[ group ].erase(i.first);
   }
@@ -32,11 +33,13 @@ void Level::handle_all_pending_things(int group) {
   all_animated_things_pending_add[ group ] = {};
 }
 
-void Level::handle_all_pending_things(void) {
+void Level::handle_all_pending_things(void)
+{
   FOR_ALL_THING_GROUPS(group) { handle_all_pending_things(group); }
 }
 
-bool Level::tick(void) {
+bool Level::tick(void)
+{
   TRACE_AND_INDENT();
   // LOG("Tick");
   // TOPCON("monsts %d.", monst_count);
@@ -64,7 +67,8 @@ bool Level::tick(void) {
 
     uint32_t tick_begin_ms = time_get_time_ms();
 
-    FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL(this, t) {
+    FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL(this, t)
+    {
       uint32_t tick_begin_ms = time_get_time_ms();
       t->tick();
       if ((time_get_time_ms() - tick_begin_ms) > THING_TICK_DURATION_TOO_LONG) {
@@ -78,7 +82,8 @@ bool Level::tick(void) {
     }
   }
 
-  FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL(this, t) {
+  FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL(this, t)
+  {
     if (t->is_scheduled_for_jump_end) {
       t->is_scheduled_for_jump_end = false;
       t->jump_end();
@@ -133,7 +138,8 @@ bool Level::tick(void) {
 }
 FOR_ALL_ANIMATED_THINGS_LEVEL_END(this)
 
-FOR_ALL_ANIMATED_THINGS_LEVEL(this, group, t) {
+FOR_ALL_ANIMATED_THINGS_LEVEL(this, group, t)
+{
   if (t->is_scheduled_for_death) {
     t->is_scheduled_for_death = false;
     t->dead(t->get_dead_reason());
@@ -154,7 +160,8 @@ if ((wheel_x != 0) || (wheel_y != 0)) {
   cursor_move();
 }
 
-FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL(this, t) {
+FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL(this, t)
+{
   //
   // Wait for animation end. Only if the thing is onscreen
   //
@@ -408,7 +415,8 @@ if (game->robot_mode) {
 // location checks on the ends of moves, but this is a backup and will
 // also handle things that do not move, like a wand that is now on fire.
 //
-FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL(this, t) {
+FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL(this, t)
+{
   //
   // Need to do this even for dead things, so corpses don't hover over
   // chasms.
@@ -492,12 +500,14 @@ if (! game->tick_requested.empty()) {
 return false;
 }
 
-void Level::sanity_check(void) {
+void Level::sanity_check(void)
+{
   TRACE_AND_INDENT();
   for (auto x = 0; x < MAP_WIDTH; x++) {
     for (auto y = 0; y < MAP_HEIGHT; y++) {
       auto monst_count = 0;
-      FOR_ALL_THINGS(this, t, x, y) {
+      FOR_ALL_THINGS(this, t, x, y)
+      {
         if (t->is_monst()) {
           monst_count++;
         }
@@ -517,9 +527,11 @@ void Level::sanity_check(void) {
   }
 }
 
-void Level::update_all_ticks(void) {
+void Level::update_all_ticks(void)
+{
   TRACE_AND_INDENT();
-  FOR_ALL_THING_GROUPS(group) {
+  FOR_ALL_THING_GROUPS(group)
+  {
     for (auto &i : all_things_of_interest[ group ]) {
       auto t = i.second;
       t->update_tick();

@@ -9,7 +9,8 @@
 #include "my_thing.h"
 #include "my_array_bounds_check.h"
 
-void Level::dump(std::string pfx) {
+void Level::dump(std::string pfx)
+{
   TRACE_AND_INDENT();
   LOG("%s Level {", pfx.c_str());
   auto old_pfx = pfx;
@@ -23,7 +24,8 @@ void Level::dump(std::string pfx) {
   LOG("%s ts_dungeon_created %u", pfx.c_str(), ts_dungeon_created);
 
   LOG("%s all_things", pfx.c_str());
-  FOR_ALL_THING_GROUPS(group) {
+  FOR_ALL_THING_GROUPS(group)
+  {
     for (auto x = 0; x < MAP_WIDTH; ++x) {
       for (auto y = 0; y < MAP_HEIGHT; ++y) {
         for (auto z = 0; z < MAP_SLOTS; ++z) {
@@ -44,7 +46,8 @@ void Level::dump(std::string pfx) {
   LOG("%s }", pfx.c_str());
 }
 
-void World::dump(std::string pfx) {
+void World::dump(std::string pfx)
+{
   TRACE_AND_INDENT();
   LOG("%s World {", pfx.c_str());
   auto old_pfx = pfx;
@@ -66,7 +69,8 @@ void World::dump(std::string pfx) {
   LOG("%s }", pfx.c_str());
 }
 
-void Config::dump(std::string pfx) {
+void Config::dump(std::string pfx)
+{
   TRACE_AND_INDENT();
   LOG("%s Config {", pfx.c_str());
   auto old_pfx = pfx;
@@ -110,7 +114,8 @@ void Config::dump(std::string pfx) {
   LOG("%s }", pfx.c_str());
 }
 
-void Game::dump(std::string pfx) {
+void Game::dump(std::string pfx)
+{
   TRACE_AND_INDENT();
   LOG("%s Game {", pfx.c_str());
   auto old_pfx = pfx;

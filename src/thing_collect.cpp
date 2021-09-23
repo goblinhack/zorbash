@@ -17,7 +17,8 @@
 //
 // Return a score, higher is better for perceived value to you
 //
-int Thing::worth_collecting(Thingp it, Thingp *would_need_to_drop) {
+int Thing::worth_collecting(Thingp it, Thingp *would_need_to_drop)
+{
   TRACE_AND_INDENT();
   //
   // Don't try to pick up goblins carrying gold
@@ -340,7 +341,8 @@ int Thing::worth_collecting(Thingp it, Thingp *would_need_to_drop) {
   return value_to_me;
 }
 
-int Thing::worth_collecting(Thingp it) {
+int Thing::worth_collecting(Thingp it)
+{
   TRACE_AND_INDENT();
   Thingp would_need_to_drop;
   return worth_collecting(it, &would_need_to_drop);

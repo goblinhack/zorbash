@@ -144,7 +144,8 @@ static std::string jump_data[] = {
     ".....",
 };
 
-void Game::init_jump_paths() {
+void Game::init_jump_paths()
+{
   bool debug = false;
 
   jump_paths.clear();

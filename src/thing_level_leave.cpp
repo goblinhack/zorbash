@@ -13,7 +13,8 @@
 #include "my_gl.h"
 #include "my_ptrcheck.h"
 
-void Thing::level_leave(void) {
+void Thing::level_leave(void)
+{
   TRACE_AND_INDENT();
   dbg("Leave level");
   level_pop();
@@ -38,7 +39,8 @@ void Thing::level_leave(void) {
     }
   }
 
-  FOR_ALL_THING_GROUPS(group) {
+  FOR_ALL_THING_GROUPS(group)
+  {
     auto f = level->all_things[ group ].find(id);
     if (f != level->all_things[ group ].end()) {
       level->all_things[ group ].erase(f);

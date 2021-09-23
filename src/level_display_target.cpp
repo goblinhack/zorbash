@@ -12,7 +12,8 @@
 #include "my_thing.h"
 #include "my_thing_template.h"
 
-void Level::display_target(void) {
+void Level::display_target(void)
+{
   TRACE_AND_INDENT();
   auto what = game->request_to_fire_item;
   if (! what) {

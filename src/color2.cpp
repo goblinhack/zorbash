@@ -121,7 +121,8 @@ color GREEN_YELLOW;
 color GREENYELLOW;
 #endif
 
-void color_init2(void) {
+void color_init2(void)
+{
   TRACE_AND_INDENT();
 #if 0
   color_set("gray10", &GRAY10, 26, 26, 26, 255);

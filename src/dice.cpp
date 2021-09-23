@@ -10,7 +10,8 @@
 #include "my_dice.h"
 #include "my_random.h"
 
-int stat_to_bonus(int stat) {
+int stat_to_bonus(int stat)
+{
   switch (stat) {
     case 0 : return 0; // Acts like not set
     case 1 : return -5;
@@ -47,7 +48,8 @@ int stat_to_bonus(int stat) {
   }
 }
 
-const std::string stat_to_bonus_str(int stat) {
+const std::string stat_to_bonus_str(int stat)
+{
   switch (stat) {
     case 0 : return "0"; // Acts like not set
     case 1 : return "-5";
@@ -84,7 +86,8 @@ const std::string stat_to_bonus_str(int stat) {
   }
 }
 
-const std::string stat_to_bonus_slash_str(int stat) {
+const std::string stat_to_bonus_slash_str(int stat)
+{
   switch (stat) {
     case 0 : return "/na"; // Acts like not set
     case 1 : return "/-5";
@@ -124,7 +127,8 @@ const std::string stat_to_bonus_slash_str(int stat) {
 //
 // Roll "a" to see if it beats "b"
 //
-bool d20roll(int stat_a, int stat_b, bool &fumble, bool &critical) {
+bool d20roll(int stat_a, int stat_b, bool &fumble, bool &critical)
+{
   auto roll_a = pcg_random_range_inclusive(1, 20);
 
   critical = false;
@@ -149,7 +153,8 @@ bool d20roll(int stat_a, int stat_b, bool &fumble, bool &critical) {
 //
 // Roll "a" to see if it beats "b"
 //
-bool d20roll(int stat_a, int stat_b) {
+bool d20roll(int stat_a, int stat_b)
+{
   auto roll_a = pcg_random_range_inclusive(1, 20);
 
   if (roll_a == 20) {
@@ -173,7 +178,8 @@ Dice::Dice(void) {}
 
 std::string Dice::to_string(void) const { return (hd); }
 
-Dice::Dice(std::string s) {
+Dice::Dice(std::string s)
+{
   hd = s;
 
   //
@@ -217,7 +223,8 @@ Dice::Dice(std::string s) {
   }
 }
 
-int Dice::roll(void) const {
+int Dice::roll(void) const
+{
   int n   = ndice;
   int tot = 0;
   // LOG("roll %dd%d+%d => %d", ndice, sides, stat, tot);
@@ -232,12 +239,14 @@ int Dice::max_roll(void) const { return ndice * sides + stat; }
 
 int Dice::min_roll(void) const { return ndice * 1 + stat; }
 
-bool Dice::crit_roll(void) const {
+bool Dice::crit_roll(void) const
+{
   auto r = roll();
   return r >= (ndice * sides);
 }
 
-bool Dice::crit_roll_minus_stat(void) const {
+bool Dice::crit_roll_minus_stat(void) const
+{
   auto r = roll();
   return r - stat >= (ndice * sides);
 }

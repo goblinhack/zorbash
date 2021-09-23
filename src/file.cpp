@@ -20,7 +20,8 @@
 static unsigned char *file_io_read_if_exists(const char *filename, int *out_len);
 static unsigned char *file_io_read(const char *filename, int *len);
 
-unsigned char *file_load(const char *filename, int *outlen) {
+unsigned char *file_load(const char *filename, int *outlen)
+{
   TRACE_AND_INDENT();
   unsigned char *out;
   char *         alt_filename;
@@ -172,7 +173,8 @@ unsigned char *file_load(const char *filename, int *outlen) {
   return (0);
 }
 
-unsigned char *file_io_read(const char *filename, int *out_len) {
+unsigned char *file_io_read(const char *filename, int *out_len)
+{
   TRACE_AND_INDENT();
   unsigned char *buffer;
   FILE *         file;
@@ -230,7 +232,8 @@ unsigned char *file_io_read(const char *filename, int *out_len) {
   return (buffer);
 }
 
-int file_write(const char *filename, unsigned char *buffer, int len) {
+int file_write(const char *filename, unsigned char *buffer, int len)
+{
   TRACE_AND_INDENT();
   FILE *  file;
   uint8_t rc;
@@ -267,7 +270,8 @@ int file_write(const char *filename, unsigned char *buffer, int len) {
 /*
  * Does the requested file exist?
  */
-uint8_t file_exists(const char *filename) {
+uint8_t file_exists(const char *filename)
+{
   TRACE_AND_INDENT();
   struct stat buf;
 
@@ -281,7 +285,8 @@ uint8_t file_exists(const char *filename) {
   return (0);
 }
 
-unsigned char *file_io_read_if_exists(const char *filename, int *out_len) {
+unsigned char *file_io_read_if_exists(const char *filename, int *out_len)
+{
   TRACE_AND_INDENT();
 #if 0
   unsigned char *ret;
@@ -320,7 +325,8 @@ unsigned char *file_io_read_if_exists(const char *filename, int *out_len) {
 /*
  * How large is the file?
  */
-int file_size(const char *filename) {
+int file_size(const char *filename)
+{
   TRACE_AND_INDENT();
   struct stat buf;
 
@@ -334,7 +340,8 @@ int file_size(const char *filename) {
 /*
  * Does the requested file exist?
  */
-uint8_t file_non_zero_size_exists(const char *filename) {
+uint8_t file_non_zero_size_exists(const char *filename)
+{
   TRACE_AND_INDENT();
   if (! file_exists(filename)) {
     return (0);
@@ -350,7 +357,8 @@ uint8_t file_non_zero_size_exists(const char *filename) {
 /*
  * Remove the file if it exists.
  */
-uint8_t file_unlink(const char *filename) {
+uint8_t file_unlink(const char *filename)
+{
   TRACE_AND_INDENT();
   if (! file_exists(filename)) {
     return (0);
@@ -364,7 +372,8 @@ uint8_t file_unlink(const char *filename) {
 /*
  * Modification time.
  */
-double file_age(const char *filename) {
+double file_age(const char *filename)
+{
   TRACE_AND_INDENT();
   struct stat buf;
 
@@ -380,7 +389,8 @@ double file_age(const char *filename) {
 /*
  * If the first filename newer than the second ?
  */
-uint8_t file_exists_and_is_newer_than(const char *filename1, const char *filename2) {
+uint8_t file_exists_and_is_newer_than(const char *filename1, const char *filename2)
+{
   TRACE_AND_INDENT();
   struct stat buf1;
   struct stat buf2;

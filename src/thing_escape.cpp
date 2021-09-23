@@ -12,7 +12,8 @@
 #include "my_random.h"
 #include "my_thing_template.h"
 
-bool Thing::try_to_escape(void) {
+bool Thing::try_to_escape(void)
+{
   if (is_jumper()) {
     auto health_max = get_health_max();
     auto health     = get_health();

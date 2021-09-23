@@ -20,7 +20,8 @@ WidPopup * game_config_keyboard_window;
 //
 static_assert(sizeof(SDL_Scancode) <= sizeof(game->config.key_move_left));
 
-static void game_config_check_for_conflicts(SDL_Scancode code) {
+static void game_config_check_for_conflicts(SDL_Scancode code)
+{
   TRACE_AND_INDENT();
   if (game->config.key_action0) {
     if (game->config.key_action0 == code) {
@@ -246,7 +247,8 @@ static void game_config_check_for_conflicts(SDL_Scancode code) {
   }
 }
 
-void game_config_keyboard_destroy(void) {
+void game_config_keyboard_destroy(void)
+{
   TRACE_AND_INDENT();
   if (! game_config_keyboard_window) {
     return;
@@ -263,7 +265,8 @@ void game_config_keyboard_destroy(void) {
   }
 }
 
-static uint8_t game_config_keyboard_cancel(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_config_keyboard_cancel(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   CON("USR: Reload config");
   game->load_config();
@@ -279,7 +282,8 @@ static uint8_t game_config_keyboard_cancel(Widp w, int32_t x, int32_t y, uint32_
   return true;
 }
 
-static uint8_t game_config_keyboard_save(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_config_keyboard_save(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   CON("USR: Save config");
   game->save_config();
@@ -294,7 +298,8 @@ static uint8_t game_config_keyboard_save(Widp w, int32_t x, int32_t y, uint32_t 
   return true;
 }
 
-static uint8_t game_config_keyboard_back(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_config_keyboard_back(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   game_config_keyboard_destroy();
   if (game->started) {
@@ -307,7 +312,8 @@ static uint8_t game_config_keyboard_back(Widp w, int32_t x, int32_t y, uint32_t 
   return true;
 }
 
-static void game_config_key_move_left_set(SDL_Scancode code) {
+static void game_config_key_move_left_set(SDL_Scancode code)
+{
   TRACE_AND_INDENT();
   game->config.key_move_left = 0;
   game_config_check_for_conflicts(code);
@@ -315,7 +321,8 @@ static void game_config_key_move_left_set(SDL_Scancode code) {
   game->config_keyboard_select();
 }
 
-static void game_config_key_move_right_set(SDL_Scancode code) {
+static void game_config_key_move_right_set(SDL_Scancode code)
+{
   TRACE_AND_INDENT();
   game->config.key_move_right = 0;
   game_config_check_for_conflicts(code);
@@ -323,7 +330,8 @@ static void game_config_key_move_right_set(SDL_Scancode code) {
   game->config_keyboard_select();
 }
 
-static void game_config_key_move_up_set(SDL_Scancode code) {
+static void game_config_key_move_up_set(SDL_Scancode code)
+{
   TRACE_AND_INDENT();
   game->config.key_move_up = 0;
   game_config_check_for_conflicts(code);
@@ -331,7 +339,8 @@ static void game_config_key_move_up_set(SDL_Scancode code) {
   game->config_keyboard_select();
 }
 
-static void game_config_key_move_down_set(SDL_Scancode code) {
+static void game_config_key_move_down_set(SDL_Scancode code)
+{
   TRACE_AND_INDENT();
   game->config.key_move_down = 0;
   game_config_check_for_conflicts(code);
@@ -339,7 +348,8 @@ static void game_config_key_move_down_set(SDL_Scancode code) {
   game->config_keyboard_select();
 }
 
-static void game_config_key_map_left_set(SDL_Scancode code) {
+static void game_config_key_map_left_set(SDL_Scancode code)
+{
   TRACE_AND_INDENT();
   game->config.key_map_left = 0;
   game_config_check_for_conflicts(code);
@@ -347,7 +357,8 @@ static void game_config_key_map_left_set(SDL_Scancode code) {
   game->config_keyboard_select();
 }
 
-static void game_config_key_map_right_set(SDL_Scancode code) {
+static void game_config_key_map_right_set(SDL_Scancode code)
+{
   TRACE_AND_INDENT();
   game->config.key_map_right = 0;
   game_config_check_for_conflicts(code);
@@ -355,7 +366,8 @@ static void game_config_key_map_right_set(SDL_Scancode code) {
   game->config_keyboard_select();
 }
 
-static void game_config_key_map_up_set(SDL_Scancode code) {
+static void game_config_key_map_up_set(SDL_Scancode code)
+{
   TRACE_AND_INDENT();
   game->config.key_map_up = 0;
   game_config_check_for_conflicts(code);
@@ -363,7 +375,8 @@ static void game_config_key_map_up_set(SDL_Scancode code) {
   game->config_keyboard_select();
 }
 
-static void game_config_key_map_down_set(SDL_Scancode code) {
+static void game_config_key_map_down_set(SDL_Scancode code)
+{
   TRACE_AND_INDENT();
   game->config.key_map_down = 0;
   game_config_check_for_conflicts(code);
@@ -371,7 +384,8 @@ static void game_config_key_map_down_set(SDL_Scancode code) {
   game->config_keyboard_select();
 }
 
-static void game_config_key_attack_set(SDL_Scancode code) {
+static void game_config_key_attack_set(SDL_Scancode code)
+{
   TRACE_AND_INDENT();
   game->config.key_attack = 0;
   game_config_check_for_conflicts(code);
@@ -379,7 +393,8 @@ static void game_config_key_attack_set(SDL_Scancode code) {
   game->config_keyboard_select();
 }
 
-static void game_config_key_wait_or_collect_set(SDL_Scancode code) {
+static void game_config_key_wait_or_collect_set(SDL_Scancode code)
+{
   TRACE_AND_INDENT();
   game->config.key_wait_or_collect = 0;
   game_config_check_for_conflicts(code);
@@ -387,7 +402,8 @@ static void game_config_key_wait_or_collect_set(SDL_Scancode code) {
   game->config_keyboard_select();
 }
 
-static void game_config_key_jump_set(SDL_Scancode code) {
+static void game_config_key_jump_set(SDL_Scancode code)
+{
   TRACE_AND_INDENT();
   game->config.key_jump = 0;
   game_config_check_for_conflicts(code);
@@ -395,7 +411,8 @@ static void game_config_key_jump_set(SDL_Scancode code) {
   game->config_keyboard_select();
 }
 
-static void game_config_key_throw_set(SDL_Scancode code) {
+static void game_config_key_throw_set(SDL_Scancode code)
+{
   TRACE_AND_INDENT();
   game->config.key_throw = 0;
   game_config_check_for_conflicts(code);
@@ -403,7 +420,8 @@ static void game_config_key_throw_set(SDL_Scancode code) {
   game->config_keyboard_select();
 }
 
-static void game_config_key_inventory_set(SDL_Scancode code) {
+static void game_config_key_inventory_set(SDL_Scancode code)
+{
   TRACE_AND_INDENT();
   game->config.key_inventory = 0;
   game_config_check_for_conflicts(code);
@@ -411,7 +429,8 @@ static void game_config_key_inventory_set(SDL_Scancode code) {
   game->config_keyboard_select();
 }
 
-static void game_config_key_drop_set(SDL_Scancode code) {
+static void game_config_key_drop_set(SDL_Scancode code)
+{
   TRACE_AND_INDENT();
   game->config.key_drop = 0;
   game_config_check_for_conflicts(code);
@@ -419,7 +438,8 @@ static void game_config_key_drop_set(SDL_Scancode code) {
   game->config_keyboard_select();
 }
 
-static void game_config_key_use_set(SDL_Scancode code) {
+static void game_config_key_use_set(SDL_Scancode code)
+{
   TRACE_AND_INDENT();
   game->config.key_use = 0;
   game_config_check_for_conflicts(code);
@@ -427,7 +447,8 @@ static void game_config_key_use_set(SDL_Scancode code) {
   game->config_keyboard_select();
 }
 
-static void game_config_key_eat_set(SDL_Scancode code) {
+static void game_config_key_eat_set(SDL_Scancode code)
+{
   TRACE_AND_INDENT();
   game->config.key_eat = 0;
   game_config_check_for_conflicts(code);
@@ -435,7 +456,8 @@ static void game_config_key_eat_set(SDL_Scancode code) {
   game->config_keyboard_select();
 }
 
-static void game_config_key_action0_set(SDL_Scancode code) {
+static void game_config_key_action0_set(SDL_Scancode code)
+{
   TRACE_AND_INDENT();
   game->config.key_action0 = 0;
   game_config_check_for_conflicts(code);
@@ -443,7 +465,8 @@ static void game_config_key_action0_set(SDL_Scancode code) {
   game->config_keyboard_select();
 }
 
-static void game_config_key_action1_set(SDL_Scancode code) {
+static void game_config_key_action1_set(SDL_Scancode code)
+{
   TRACE_AND_INDENT();
   game->config.key_action1 = 0;
   game_config_check_for_conflicts(code);
@@ -451,7 +474,8 @@ static void game_config_key_action1_set(SDL_Scancode code) {
   game->config_keyboard_select();
 }
 
-static void game_config_key_action2_set(SDL_Scancode code) {
+static void game_config_key_action2_set(SDL_Scancode code)
+{
   TRACE_AND_INDENT();
   game->config.key_action2 = 0;
   game_config_check_for_conflicts(code);
@@ -459,7 +483,8 @@ static void game_config_key_action2_set(SDL_Scancode code) {
   game->config_keyboard_select();
 }
 
-static void game_config_key_action3_set(SDL_Scancode code) {
+static void game_config_key_action3_set(SDL_Scancode code)
+{
   TRACE_AND_INDENT();
   game->config.key_action3 = 0;
   game_config_check_for_conflicts(code);
@@ -467,7 +492,8 @@ static void game_config_key_action3_set(SDL_Scancode code) {
   game->config_keyboard_select();
 }
 
-static void game_config_key_action4_set(SDL_Scancode code) {
+static void game_config_key_action4_set(SDL_Scancode code)
+{
   TRACE_AND_INDENT();
   game->config.key_action4 = 0;
   game_config_check_for_conflicts(code);
@@ -475,7 +501,8 @@ static void game_config_key_action4_set(SDL_Scancode code) {
   game->config_keyboard_select();
 }
 
-static void game_config_key_action5_set(SDL_Scancode code) {
+static void game_config_key_action5_set(SDL_Scancode code)
+{
   TRACE_AND_INDENT();
   game->config.key_action5 = 0;
   game_config_check_for_conflicts(code);
@@ -483,7 +510,8 @@ static void game_config_key_action5_set(SDL_Scancode code) {
   game->config_keyboard_select();
 }
 
-static void game_config_key_action6_set(SDL_Scancode code) {
+static void game_config_key_action6_set(SDL_Scancode code)
+{
   TRACE_AND_INDENT();
   game->config.key_action6 = 0;
   game_config_check_for_conflicts(code);
@@ -491,7 +519,8 @@ static void game_config_key_action6_set(SDL_Scancode code) {
   game->config_keyboard_select();
 }
 
-static void game_config_key_action7_set(SDL_Scancode code) {
+static void game_config_key_action7_set(SDL_Scancode code)
+{
   TRACE_AND_INDENT();
   game->config.key_action7 = 0;
   game_config_check_for_conflicts(code);
@@ -499,7 +528,8 @@ static void game_config_key_action7_set(SDL_Scancode code) {
   game->config_keyboard_select();
 }
 
-static void game_config_key_action8_set(SDL_Scancode code) {
+static void game_config_key_action8_set(SDL_Scancode code)
+{
   TRACE_AND_INDENT();
   game->config.key_action8 = 0;
   game_config_check_for_conflicts(code);
@@ -507,7 +537,8 @@ static void game_config_key_action8_set(SDL_Scancode code) {
   game->config_keyboard_select();
 }
 
-static void game_config_key_action9_set(SDL_Scancode code) {
+static void game_config_key_action9_set(SDL_Scancode code)
+{
   TRACE_AND_INDENT();
   game->config.key_action9 = 0;
   game_config_check_for_conflicts(code);
@@ -515,7 +546,8 @@ static void game_config_key_action9_set(SDL_Scancode code) {
   game->config_keyboard_select();
 }
 
-static void game_config_key_save_set(SDL_Scancode code) {
+static void game_config_key_save_set(SDL_Scancode code)
+{
   TRACE_AND_INDENT();
   game->config.key_save = 0;
   game_config_check_for_conflicts(code);
@@ -523,7 +555,8 @@ static void game_config_key_save_set(SDL_Scancode code) {
   game->config_keyboard_select();
 }
 
-static void game_config_key_load_set(SDL_Scancode code) {
+static void game_config_key_load_set(SDL_Scancode code)
+{
   TRACE_AND_INDENT();
   game->config.key_load = 0;
   game_config_check_for_conflicts(code);
@@ -531,7 +564,8 @@ static void game_config_key_load_set(SDL_Scancode code) {
   game->config_keyboard_select();
 }
 
-static void game_config_key_robot_mode_set(SDL_Scancode code) {
+static void game_config_key_robot_mode_set(SDL_Scancode code)
+{
   TRACE_AND_INDENT();
   game->config.key_robot_mode = 0;
   game_config_check_for_conflicts(code);
@@ -539,7 +573,8 @@ static void game_config_key_robot_mode_set(SDL_Scancode code) {
   game->config_keyboard_select();
 }
 
-static void game_config_key_zoom_in_set(SDL_Scancode code) {
+static void game_config_key_zoom_in_set(SDL_Scancode code)
+{
   TRACE_AND_INDENT();
   game->config.key_zoom_in = 0;
   game_config_check_for_conflicts(code);
@@ -547,7 +582,8 @@ static void game_config_key_zoom_in_set(SDL_Scancode code) {
   game->config_keyboard_select();
 }
 
-static void game_config_key_zoom_out_set(SDL_Scancode code) {
+static void game_config_key_zoom_out_set(SDL_Scancode code)
+{
   TRACE_AND_INDENT();
   game->config.key_zoom_out = 0;
   game_config_check_for_conflicts(code);
@@ -555,7 +591,8 @@ static void game_config_key_zoom_out_set(SDL_Scancode code) {
   game->config_keyboard_select();
 }
 
-static void game_config_key_help_set(SDL_Scancode code) {
+static void game_config_key_help_set(SDL_Scancode code)
+{
   TRACE_AND_INDENT();
   game->config.key_help = 0;
   game_config_check_for_conflicts(code);
@@ -563,7 +600,8 @@ static void game_config_key_help_set(SDL_Scancode code) {
   game->config_keyboard_select();
 }
 
-static void game_config_key_console_set(SDL_Scancode code) {
+static void game_config_key_console_set(SDL_Scancode code)
+{
   TRACE_AND_INDENT();
   game->config.key_console = 0;
   game_config_check_for_conflicts(code);
@@ -571,7 +609,8 @@ static void game_config_key_console_set(SDL_Scancode code) {
   game->config_keyboard_select();
 }
 
-static void game_config_key_quit_set(SDL_Scancode code) {
+static void game_config_key_quit_set(SDL_Scancode code)
+{
   TRACE_AND_INDENT();
   game->config.key_quit = 0;
   game_config_check_for_conflicts(code);
@@ -579,7 +618,8 @@ static void game_config_key_quit_set(SDL_Scancode code) {
   game->config_keyboard_select();
 }
 
-static void game_config_key_screenshot_set(SDL_Scancode code) {
+static void game_config_key_screenshot_set(SDL_Scancode code)
+{
   TRACE_AND_INDENT();
   game->config.key_screenshot = 0;
   game_config_check_for_conflicts(code);
@@ -587,13 +627,15 @@ static void game_config_key_screenshot_set(SDL_Scancode code) {
   game->config_keyboard_select();
 }
 
-static void grab_key(const std::string which) {
+static void grab_key(const std::string which)
+{
   TRACE_AND_INDENT();
   game_notice("Press a key for " + which);
   g_grab_next_key = true;
 }
 
-static uint8_t game_config_keyboard_profile_arrow_keys(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_config_keyboard_profile_arrow_keys(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   game->config.key_move_up = 0;
   game_config_check_for_conflicts(SDL_SCANCODE_UP);
@@ -632,7 +674,8 @@ static uint8_t game_config_keyboard_profile_arrow_keys(Widp w, int32_t x, int32_
   return true;
 }
 
-static uint8_t game_config_keyboard_profile_wasd(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_config_keyboard_profile_wasd(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   game->config.key_move_up = 0;
   game_config_check_for_conflicts(SDL_SCANCODE_W);
@@ -671,252 +714,288 @@ static uint8_t game_config_keyboard_profile_wasd(Widp w, int32_t x, int32_t y, u
   return true;
 }
 
-static uint8_t game_config_key_move_left(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_config_key_move_left(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   grab_key("move left");
   on_sdl_key_grab = game_config_key_move_left_set;
   return true;
 }
 
-static uint8_t game_config_key_move_right(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_config_key_move_right(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   grab_key("move right");
   on_sdl_key_grab = game_config_key_move_right_set;
   return true;
 }
 
-static uint8_t game_config_key_move_up(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_config_key_move_up(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   grab_key("move up");
   on_sdl_key_grab = game_config_key_move_up_set;
   return true;
 }
 
-static uint8_t game_config_key_move_down(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_config_key_move_down(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   grab_key("move down");
   on_sdl_key_grab = game_config_key_move_down_set;
   return true;
 }
 
-static uint8_t game_config_key_map_left(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_config_key_map_left(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   grab_key("map left");
   on_sdl_key_grab = game_config_key_map_left_set;
   return true;
 }
 
-static uint8_t game_config_key_map_right(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_config_key_map_right(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   grab_key("map right");
   on_sdl_key_grab = game_config_key_map_right_set;
   return true;
 }
 
-static uint8_t game_config_key_map_up(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_config_key_map_up(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   grab_key("map up");
   on_sdl_key_grab = game_config_key_map_up_set;
   return true;
 }
 
-static uint8_t game_config_key_map_down(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_config_key_map_down(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   grab_key("map down");
   on_sdl_key_grab = game_config_key_map_down_set;
   return true;
 }
 
-static uint8_t game_config_key_attack(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_config_key_attack(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   grab_key("attack");
   on_sdl_key_grab = game_config_key_attack_set;
   return true;
 }
 
-static uint8_t game_config_key_wait_or_collect(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_config_key_wait_or_collect(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   grab_key("wait or collect");
   on_sdl_key_grab = game_config_key_wait_or_collect_set;
   return true;
 }
 
-static uint8_t game_config_key_jump(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_config_key_jump(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   grab_key("jump");
   on_sdl_key_grab = game_config_key_jump_set;
   return true;
 }
 
-static uint8_t game_config_key_throw(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_config_key_throw(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   grab_key("item throw");
   on_sdl_key_grab = game_config_key_throw_set;
   return true;
 }
 
-static uint8_t game_config_key_inventory(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_config_key_inventory(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   grab_key("show inventory");
   on_sdl_key_grab = game_config_key_inventory_set;
   return true;
 }
 
-static uint8_t game_config_key_drop(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_config_key_drop(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   grab_key("item drop");
   on_sdl_key_grab = game_config_key_drop_set;
   return true;
 }
 
-static uint8_t game_config_key_use(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_config_key_use(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   grab_key("item use");
   on_sdl_key_grab = game_config_key_use_set;
   return true;
 }
 
-static uint8_t game_config_key_eat(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_config_key_eat(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   grab_key("item eat");
   on_sdl_key_grab = game_config_key_eat_set;
   return true;
 }
 
-static uint8_t game_config_key_action0(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_config_key_action0(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   grab_key("action 0");
   on_sdl_key_grab = game_config_key_action0_set;
   return true;
 }
 
-static uint8_t game_config_key_action1(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_config_key_action1(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   grab_key("action 1");
   on_sdl_key_grab = game_config_key_action1_set;
   return true;
 }
 
-static uint8_t game_config_key_action2(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_config_key_action2(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   grab_key("action 2");
   on_sdl_key_grab = game_config_key_action2_set;
   return true;
 }
 
-static uint8_t game_config_key_action3(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_config_key_action3(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   grab_key("action 3");
   on_sdl_key_grab = game_config_key_action3_set;
   return true;
 }
 
-static uint8_t game_config_key_action4(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_config_key_action4(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   grab_key("action 4");
   on_sdl_key_grab = game_config_key_action4_set;
   return true;
 }
 
-static uint8_t game_config_key_action5(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_config_key_action5(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   grab_key("action 5");
   on_sdl_key_grab = game_config_key_action5_set;
   return true;
 }
 
-static uint8_t game_config_key_action6(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_config_key_action6(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   grab_key("action 6");
   on_sdl_key_grab = game_config_key_action6_set;
   return true;
 }
 
-static uint8_t game_config_key_action7(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_config_key_action7(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   grab_key("action 7");
   on_sdl_key_grab = game_config_key_action7_set;
   return true;
 }
 
-static uint8_t game_config_key_action8(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_config_key_action8(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   grab_key("action 8");
   on_sdl_key_grab = game_config_key_action8_set;
   return true;
 }
 
-static uint8_t game_config_key_action9(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_config_key_action9(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   grab_key("action 9");
   on_sdl_key_grab = game_config_key_action9_set;
   return true;
 }
 
-static uint8_t game_config_key_save(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_config_key_save(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   grab_key("save game");
   on_sdl_key_grab = game_config_key_save_set;
   return true;
 }
 
-static uint8_t game_config_key_load(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_config_key_load(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   grab_key("load game");
   on_sdl_key_grab = game_config_key_load_set;
   return true;
 }
 
-static uint8_t game_config_key_robot_mode(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_config_key_robot_mode(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   grab_key("robot_mode game");
   on_sdl_key_grab = game_config_key_robot_mode_set;
   return true;
 }
 
-static uint8_t game_config_key_zoom_in(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_config_key_zoom_in(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   grab_key("zoom in");
   on_sdl_key_grab = game_config_key_zoom_in_set;
   return true;
 }
 
-static uint8_t game_config_key_zoom_out(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_config_key_zoom_out(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   grab_key("zoom out");
   on_sdl_key_grab = game_config_key_zoom_out_set;
   return true;
 }
 
-static uint8_t game_config_key_help(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_config_key_help(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   grab_key("help");
   on_sdl_key_grab = game_config_key_help_set;
   return true;
 }
 
-static uint8_t game_config_key_console(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_config_key_console(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   grab_key("toggle console");
   on_sdl_key_grab = game_config_key_console_set;
   return true;
 }
 
-static uint8_t game_config_key_quit(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_config_key_quit(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   grab_key("quit");
   on_sdl_key_grab = game_config_key_quit_set;
   return true;
 }
 
-static uint8_t game_config_key_screenshot(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_config_key_screenshot(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   grab_key("screenshot grab");
   on_sdl_key_grab = game_config_key_screenshot_set;
   return true;
 }
 
-static uint8_t game_config_keyboard_key_up(Widp w, const struct SDL_Keysym *key) {
+static uint8_t game_config_keyboard_key_up(Widp w, const struct SDL_Keysym *key)
+{
   TRACE_AND_INDENT();
   if (sdl_shift_held) {
     if (key->scancode == (SDL_Scancode) game->config.key_console) {
@@ -944,7 +1023,8 @@ static uint8_t game_config_keyboard_key_up(Widp w, const struct SDL_Keysym *key)
   return false;
 }
 
-static uint8_t game_config_keyboard_key_down(Widp w, const struct SDL_Keysym *key) {
+static uint8_t game_config_keyboard_key_down(Widp w, const struct SDL_Keysym *key)
+{
   TRACE_AND_INDENT();
   if (sdl_shift_held) {
     if (key->scancode == (SDL_Scancode) game->config.key_console) {
@@ -955,7 +1035,8 @@ static uint8_t game_config_keyboard_key_down(Widp w, const struct SDL_Keysym *ke
   return true;
 }
 
-void Game::config_keyboard_select(void) {
+void Game::config_keyboard_select(void)
+{
   TRACE_AND_INDENT();
   game_notice_destroy();
 

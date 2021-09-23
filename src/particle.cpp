@@ -21,7 +21,8 @@
 #include "my_random.h"
 
 void Level::new_internal_particle(ThingId id, point start, point stop, isize sz, uint32_t dur, const Tilep tile,
-                                  bool hflip, bool make_visible_at_end) {
+                                  bool hflip, bool make_visible_at_end)
+{
   TRACE_AND_INDENT();
   log("Create new internal particle");
   TRACE_AND_INDENT();
@@ -53,7 +54,8 @@ void Level::new_internal_particle(ThingId id, point start, point stop, isize sz,
 }
 
 void Level::new_internal_particle(point start, point stop, isize sz, uint32_t dur, const Tilep tile, bool hflip,
-                                  bool make_visible_at_end) {
+                                  bool make_visible_at_end)
+{
   TRACE_AND_INDENT();
   log("Create new internal particle");
   TRACE_AND_INDENT();
@@ -67,7 +69,8 @@ void Level::new_internal_particle(point start, point stop, isize sz, uint32_t du
       Particle(NoThingId, start, stop, pixel_map_at, sz, now, now + dur, tile, hflip, make_visible_at_end));
 }
 
-void Level::display_internal_particles(void) {
+void Level::display_internal_particles(void)
+{
   TRACE_AND_INDENT();
 #if 0
   CON("-");
@@ -202,7 +205,8 @@ void Level::display_internal_particles(void) {
 }
 
 void Level::new_external_particle(ThingId id, point start, point stop, isize sz, uint32_t dur, const Tilep tile,
-                                  bool hflip, bool make_visible_at_end) {
+                                  bool hflip, bool make_visible_at_end)
+{
   TRACE_AND_INDENT();
   log("Create new external particle");
   TRACE_AND_INDENT();
@@ -237,7 +241,8 @@ void Level::new_external_particle(ThingId id, point start, point stop, isize sz,
 }
 
 void Level::new_external_particle(point start, point stop, isize sz, uint32_t dur, const Tilep tile, bool hflip,
-                                  bool make_visible_at_end) {
+                                  bool make_visible_at_end)
+{
   TRACE_AND_INDENT();
   log("Create new external particle");
   TRACE_AND_INDENT();
@@ -251,7 +256,8 @@ void Level::new_external_particle(point start, point stop, isize sz, uint32_t du
       Particle(NoThingId, start, stop, pixel_map_at, sz, now, now + dur, tile, hflip, make_visible_at_end));
 }
 
-void Level::display_external_particles(void) {
+void Level::display_external_particles(void)
+{
   TRACE_AND_INDENT();
 #if 0
   CON("-");
@@ -398,12 +404,14 @@ void Level::display_external_particles(void) {
 #endif
 }
 
-bool Thing::particle_anim_exists(void) {
+bool Thing::particle_anim_exists(void)
+{
   TRACE_AND_INDENT();
   return has_internal_particle || has_external_particle;
 }
 
-void Thing::delete_particle(void) {
+void Thing::delete_particle(void)
+{
   TRACE_AND_INDENT();
   //
   // Don't remove immediately in case we are walking the particles.

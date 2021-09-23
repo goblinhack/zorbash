@@ -15,14 +15,16 @@
 #include "my_traceback.h"
 #include "my_thing.h"
 
-void Level::things_gc(bool force) {
+void Level::things_gc(bool force)
+{
   if (force) {
     dbg("Begin forced thing garbage collection");
   } else {
     dbg("Begin thing garbage collection");
   }
 
-  FOR_ALL_THING_GROUPS(group) {
+  FOR_ALL_THING_GROUPS(group)
+  {
     if (all_things_to_be_destroyed[ group ].empty()) {
       continue;
     }
@@ -75,7 +77,8 @@ void Level::things_gc(bool force) {
     }
   }
 
-  FOR_ALL_THING_GROUPS(group) {
+  FOR_ALL_THING_GROUPS(group)
+  {
     for (auto &i : all_things_of_interest_pending_remove[ group ]) {
       all_things_of_interest[ group ].erase(i.first);
     }
@@ -90,12 +93,14 @@ void Level::things_gc(bool force) {
   dbg("End thing garbage collection");
 }
 
-void Level::things_gc_force(void) {
+void Level::things_gc_force(void)
+{
   TRACE_AND_INDENT();
   things_gc(true);
 }
 
-void Level::things_gc_if_possible(void) {
+void Level::things_gc_if_possible(void)
+{
   TRACE_AND_INDENT();
   things_gc(false);
 }

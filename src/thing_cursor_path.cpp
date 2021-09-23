@@ -17,10 +17,12 @@
 #include "my_array_bounds_check.h"
 #include "my_ptrcheck.h"
 
-bool Thing::cursor_path_pop_next_and_move(void) {
+bool Thing::cursor_path_pop_next_and_move(void)
+{
   TRACE_AND_INDENT();
   if (monstp && monstp->move_path.size()) {
-    IF_DEBUG3 {
+    IF_DEBUG3
+    {
       std::string s = "";
       for (auto p : monstp->move_path) {
         s += p.to_string() + " ";
@@ -122,7 +124,8 @@ bool Thing::cursor_path_pop_next_and_move(void) {
         // Can the robot shove it into a something bad?
         //
         auto delta = mid_at - make_fpoint(future_pos);
-        FOR_ALL_THINGS(level, t, future_pos.x, future_pos.y) {
+        FOR_ALL_THINGS(level, t, future_pos.x, future_pos.y)
+        {
           if (! t->is_shovable()) {
             continue;
           }
@@ -199,7 +202,8 @@ bool Thing::cursor_path_pop_next_and_move(void) {
 //
 // true on having performed an action
 //
-bool Thing::cursor_path_pop_first_move(void) {
+bool Thing::cursor_path_pop_first_move(void)
+{
   TRACE_AND_INDENT();
   auto cursor = level->cursor;
 

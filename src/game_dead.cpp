@@ -20,7 +20,8 @@
 
 static WidPopup *wid_dead_window;
 
-static void wid_dead_destroy(void) {
+static void wid_dead_destroy(void)
+{
   TRACE_AND_INDENT();
   delete wid_dead_window;
   wid_dead_window = nullptr;
@@ -30,7 +31,8 @@ static void wid_dead_destroy(void) {
   wid_hide(wid_botcon_window);
 }
 
-static uint8_t wid_dead_key_up(Widp w, const struct SDL_Keysym *key) {
+static uint8_t wid_dead_key_up(Widp w, const struct SDL_Keysym *key)
+{
   TRACE_AND_INDENT();
   if (sdl_shift_held) {
     if (key->scancode == (SDL_Scancode) game->config.key_console) {
@@ -63,7 +65,8 @@ static uint8_t wid_dead_key_up(Widp w, const struct SDL_Keysym *key) {
   return true;
 }
 
-static uint8_t wid_dead_key_down(Widp w, const struct SDL_Keysym *key) {
+static uint8_t wid_dead_key_down(Widp w, const struct SDL_Keysym *key)
+{
   TRACE_AND_INDENT();
   if (sdl_shift_held) {
     if (key->scancode == (SDL_Scancode) game->config.key_console) {
@@ -74,13 +77,15 @@ static uint8_t wid_dead_key_down(Widp w, const struct SDL_Keysym *key) {
   return true;
 }
 
-static uint8_t wid_dead_mouse_up(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t wid_dead_mouse_up(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   wid_dead_destroy();
   return true;
 }
 
-void Game::dead_select(const char *reason) {
+void Game::dead_select(const char *reason)
+{
   TRACE_AND_INDENT();
   LOG("Open dead select: %s", reason);
 

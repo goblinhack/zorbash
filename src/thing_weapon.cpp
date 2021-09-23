@@ -12,7 +12,8 @@
 #include "my_array_bounds_check.h"
 #include "my_ptrcheck.h"
 
-Thingp Thing::weapon_get() const {
+Thingp Thing::weapon_get() const
+{
   TRACE_AND_INDENT();
   auto id = get_weapon_id();
   if (id.ok()) {
@@ -22,7 +23,8 @@ Thingp Thing::weapon_get() const {
   return (nullptr);
 }
 
-void Thing::weapon_set_carry_anim_id(ThingId weapon_carry_anim_id) {
+void Thing::weapon_set_carry_anim_id(ThingId weapon_carry_anim_id)
+{
   TRACE_AND_INDENT();
   Thingp weapon_carry_anim;
 
@@ -39,7 +41,8 @@ void Thing::weapon_set_carry_anim_id(ThingId weapon_carry_anim_id) {
   weapon_set_carry_anim(weapon_carry_anim);
 }
 
-void Thing::weapon_set_carry_anim(Thingp new_weapon_carry_anim) {
+void Thing::weapon_set_carry_anim(Thingp new_weapon_carry_anim)
+{
   TRACE_AND_INDENT();
   if (new_weapon_carry_anim) {
     verify(new_weapon_carry_anim);
@@ -73,7 +76,8 @@ void Thing::weapon_set_carry_anim(Thingp new_weapon_carry_anim) {
   }
 }
 
-void Thing::weapon_set_use_anim_id(ThingId gfx_anim_attack_id) {
+void Thing::weapon_set_use_anim_id(ThingId gfx_anim_attack_id)
+{
   TRACE_AND_INDENT();
   Thingp gfx_anim_attack;
 
@@ -90,7 +94,8 @@ void Thing::weapon_set_use_anim_id(ThingId gfx_anim_attack_id) {
   weapon_set_use_anim(gfx_anim_attack);
 }
 
-void Thing::weapon_set_use_anim(Thingp new_gfx_anim_attack) {
+void Thing::weapon_set_use_anim(Thingp new_gfx_anim_attack)
+{
   TRACE_AND_INDENT();
   if (new_gfx_anim_attack) {
     verify(new_gfx_anim_attack);
@@ -125,7 +130,8 @@ void Thing::weapon_set_use_anim(Thingp new_gfx_anim_attack) {
   }
 }
 
-void Thing::weapon_get_use_offset(float *dx, float *dy) const {
+void Thing::weapon_get_use_offset(float *dx, float *dy) const
+{
   TRACE_AND_INDENT();
   *dx = 0;
   *dy = 0;
@@ -191,7 +197,8 @@ void Thing::weapon_get_use_offset(float *dx, float *dy) const {
   *dy = dist_from_wielder + 0.3;
 }
 
-Thingp Thing::weapon_get_carry_anim(void) {
+Thingp Thing::weapon_get_carry_anim(void)
+{
   TRACE_AND_INDENT();
   Thingp weapon_carry_anim = 0;
 
@@ -203,7 +210,8 @@ Thingp Thing::weapon_get_carry_anim(void) {
   return (weapon_carry_anim);
 }
 
-Thingp Thing::weapon_get_use_anim(void) const {
+Thingp Thing::weapon_get_use_anim(void) const
+{
   TRACE_AND_INDENT();
   //
   // If this gfx_anim_attack has its own thing id for animations then
@@ -219,7 +227,8 @@ Thingp Thing::weapon_get_use_anim(void) const {
   return (gfx_anim_attack);
 }
 
-void Thing::unwield(const char *why) {
+void Thing::unwield(const char *why)
+{
   TRACE_AND_INDENT();
   if (! get_weapon_id()) {
     return;
@@ -238,7 +247,8 @@ void Thing::unwield(const char *why) {
   sheath();
 }
 
-void Thing::sheath(void) {
+void Thing::sheath(void)
+{
   TRACE_AND_INDENT();
   auto weapon = weapon_get();
   if (! weapon) {
@@ -278,7 +288,8 @@ void Thing::sheath(void) {
 //
 // Returns true on weapon change
 //
-bool Thing::wield(Thingp weapon) {
+bool Thing::wield(Thingp weapon)
+{
   TRACE_AND_INDENT();
   auto weapon_tp = weapon->tp();
 
@@ -320,7 +331,8 @@ bool Thing::wield(Thingp weapon) {
   return true;
 }
 
-void Thing::use_weapon(void) {
+void Thing::use_weapon(void)
+{
   TRACE_AND_INDENT();
   dbg("Try to use weapon");
   TRACE_AND_INDENT();
@@ -443,7 +455,8 @@ void Thing::use_weapon(void) {
     //
     // Find the alternative best thing to hit
     //
-    FOR_ALL_COLLISION_THINGS(level, t, hit_at.x, hit_at.y) {
+    FOR_ALL_COLLISION_THINGS(level, t, hit_at.x, hit_at.y)
+    {
       int prio;
       //
       // Get the most important thing to hit.
@@ -517,7 +530,8 @@ void Thing::use_weapon(void) {
     //
     // Find the alternative best thing to hit
     //
-    FOR_ALL_COLLISION_THINGS(level, t, hit_at.x, hit_at.y) {
+    FOR_ALL_COLLISION_THINGS(level, t, hit_at.x, hit_at.y)
+    {
       int prio;
       //
       // Get the most important thing to hit.
@@ -585,7 +599,8 @@ void Thing::use_weapon(void) {
     //
     // Find the alternative best thing to hit
     //
-    FOR_ALL_COLLISION_THINGS(level, t, hit_at.x, hit_at.y) {
+    FOR_ALL_COLLISION_THINGS(level, t, hit_at.x, hit_at.y)
+    {
       int prio;
       //
       // Get the most important thing to hit.

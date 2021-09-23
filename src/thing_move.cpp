@@ -23,7 +23,8 @@
 #include "my_array_bounds_check.h"
 #include "my_random.h"
 
-void Thing::on_move(void) {
+void Thing::on_move(void)
+{
   TRACE_AND_INDENT();
   if (is_player()) {
     //
@@ -54,7 +55,8 @@ void Thing::on_move(void) {
   }
 }
 
-void Thing::move_finish(void) {
+void Thing::move_finish(void)
+{
   TRACE_AND_INDENT();
   if (! is_moving) {
     return;
@@ -91,7 +93,8 @@ void Thing::move_finish(void) {
   on_move();
 }
 
-bool Thing::move(fpoint future_pos) {
+bool Thing::move(fpoint future_pos)
+{
   TRACE_AND_INDENT();
   if (! is_hidden) {
     dbg("Move to %f,%f", future_pos.x, future_pos.y);
@@ -124,12 +127,14 @@ bool Thing::move(fpoint future_pos) {
   return (move(future_pos, up, down, left, right, attack, wait_or_collect, shove_allowed, attack_allowed));
 }
 
-bool Thing::move(point future_pos) {
+bool Thing::move(point future_pos)
+{
   TRACE_AND_INDENT();
   return move(make_fpoint(future_pos));
 }
 
-bool Thing::move_no_shove_no_attack(fpoint future_pos) {
+bool Thing::move_no_shove_no_attack(fpoint future_pos)
+{
   dbg("Move, without shoving to %f,%f", future_pos.x, future_pos.y);
   bool up              = future_pos.y < mid_at.y;
   bool down            = future_pos.y > mid_at.y;
@@ -144,7 +149,8 @@ bool Thing::move_no_shove_no_attack(fpoint future_pos) {
   return (move(future_pos, up, down, left, right, attack, wait_or_collect, shove_allowed, attack_allowed));
 }
 
-bool Thing::move_no_shove_no_attack(point future_pos) {
+bool Thing::move_no_shove_no_attack(point future_pos)
+{
   dbg("Move, without shoving to %d,%d", future_pos.x, future_pos.y);
   bool up              = future_pos.y < mid_at.y;
   bool down            = future_pos.y > mid_at.y;
@@ -159,7 +165,8 @@ bool Thing::move_no_shove_no_attack(point future_pos) {
   return (move(make_fpoint(future_pos), up, down, left, right, attack, wait_or_collect, shove_allowed, attack_allowed));
 }
 
-bool Thing::move_no_shove_attack_allowed(fpoint future_pos) {
+bool Thing::move_no_shove_attack_allowed(fpoint future_pos)
+{
   dbg("Move, without shoving to %f,%f", future_pos.x, future_pos.y);
   bool up              = future_pos.y < mid_at.y;
   bool down            = future_pos.y > mid_at.y;
@@ -174,7 +181,8 @@ bool Thing::move_no_shove_attack_allowed(fpoint future_pos) {
   return (move(future_pos, up, down, left, right, attack, wait_or_collect, shove_allowed, attack_allowed));
 }
 
-bool Thing::move_no_shove_attack_allowed(point future_pos) {
+bool Thing::move_no_shove_attack_allowed(point future_pos)
+{
   dbg("Move, without shoving to %d,%d", future_pos.x, future_pos.y);
   bool up              = future_pos.y < mid_at.y;
   bool down            = future_pos.y > mid_at.y;
@@ -190,7 +198,8 @@ bool Thing::move_no_shove_attack_allowed(point future_pos) {
 }
 
 bool Thing::move(fpoint future_pos, uint8_t up, uint8_t down, uint8_t left, uint8_t right, uint8_t attack,
-                 uint8_t wait_or_collect, bool shove_allowed, bool attack_allowed) {
+                 uint8_t wait_or_collect, bool shove_allowed, bool attack_allowed)
+{
   TRACE_AND_INDENT();
   dbg("Move");
 
@@ -431,7 +440,8 @@ bool Thing::move(fpoint future_pos, uint8_t up, uint8_t down, uint8_t left, uint
   return true;
 }
 
-void Thing::update_interpolated_position(void) {
+void Thing::update_interpolated_position(void)
+{
   TRACE_AND_INDENT();
   fpoint new_pos = mid_at;
   auto   tpp     = tp();
@@ -501,7 +511,8 @@ void Thing::update_interpolated_position(void) {
   update_light();
 }
 
-void Thing::update_pos(fpoint to, bool immediately) {
+void Thing::update_pos(fpoint to, bool immediately)
+{
   TRACE_AND_INDENT();
   if (! is_hidden) {
     dbg("Update pos to %f,%f", to.x, to.y);
@@ -552,7 +563,8 @@ void Thing::update_pos(fpoint to, bool immediately) {
   move_carried_items();
 }
 
-void Thing::move_set_dir_from_delta(fpoint delta) {
+void Thing::move_set_dir_from_delta(fpoint delta)
+{
   //
   // If not moving and this is the first move then break out of the
   // idle animation.
@@ -610,7 +622,8 @@ void Thing::move_set_dir_from_delta(fpoint delta) {
   }
 }
 
-void Thing::move_to(fpoint to) {
+void Thing::move_to(fpoint to)
+{
   TRACE_AND_INDENT();
   move_finish();
   auto delta = to - mid_at;
@@ -619,7 +632,8 @@ void Thing::move_to(fpoint to) {
   update_pos(to, false);
 }
 
-void Thing::move_delta(fpoint delta) {
+void Thing::move_delta(fpoint delta)
+{
   TRACE_AND_INDENT();
   move_finish();
   move_set_dir_from_delta(delta);
@@ -636,7 +650,8 @@ void Thing::move_delta(fpoint delta) {
   update_pos(mid_at + delta, false);
 }
 
-void Thing::move_to_immediately(fpoint to) {
+void Thing::move_to_immediately(fpoint to)
+{
   TRACE_AND_INDENT();
   move_finish();
   auto delta = to - mid_at;
@@ -670,7 +685,8 @@ void Thing::move_to_immediately(fpoint to) {
   update_interpolated_position();
 }
 
-bool Thing::move_to_try(const point &nh, const bool escaping, bool check_only) {
+bool Thing::move_to_try(const point &nh, const bool escaping, bool check_only)
+{
   TRACE_AND_INDENT();
   if (escaping) {
     dbg("Escape to attempt %d,%d", nh.x, nh.y);
@@ -721,31 +737,36 @@ bool Thing::move_to_try(const point &nh, const bool escaping, bool check_only) {
   }
 }
 
-bool Thing::move_to_or_attack(const point &nh) {
+bool Thing::move_to_or_attack(const point &nh)
+{
   TRACE_AND_INDENT();
   dbg("Move to or attack");
   return move_to_try(nh, false, false);
 }
 
-bool Thing::move_to_or_escape(const point &nh) {
+bool Thing::move_to_or_escape(const point &nh)
+{
   TRACE_AND_INDENT();
   dbg("Move to or escape");
   return move_to_try(nh, true, false);
 }
 
-bool Thing::move_to_or_attack_check_only(const point &nh) {
+bool Thing::move_to_or_attack_check_only(const point &nh)
+{
   TRACE_AND_INDENT();
   dbg("Move to or attack");
   return move_to_try(nh, false, true);
 }
 
-bool Thing::move_to_or_escape_check_only(const point &nh) {
+bool Thing::move_to_or_escape_check_only(const point &nh)
+{
   TRACE_AND_INDENT();
   dbg("Move to or escape");
   return move_to_try(nh, true, true);
 }
 
-void Thing::clear_move_path(const std::string &why) {
+void Thing::clear_move_path(const std::string &why)
+{
   if (! monstp) {
     return;
   }

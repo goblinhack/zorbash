@@ -9,7 +9,8 @@
 
 std::vector< Charmap > Charmap::all_charmaps;
 
-void Charmap::init_charmaps(void) {
+void Charmap::init_charmaps(void)
+{
   all_charmaps.resize(255);
 
   auto char_index = Charmap::SPACE;

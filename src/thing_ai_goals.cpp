@@ -19,7 +19,8 @@
 #include "my_globals.h"
 #include "my_ptrcheck.h"
 
-int Thing::ai_choose_goal(void) {
+int Thing::ai_choose_goal(void)
+{
   TRACE_AND_INDENT();
   dbg("Choose goal");
   TRACE_AND_INDENT();
@@ -98,13 +99,15 @@ int Thing::ai_choose_goal(void) {
 
       std::string last_msg;
 
-      FOR_ALL_THINGS_THAT_INTERACT(level, it, p.x, p.y) {
+      FOR_ALL_THINGS_THAT_INTERACT(level, it, p.x, p.y)
+      {
         if (it == this) {
           continue;
         }
 
         if (it->is_changing_level || it->is_hidden || it->is_falling || it->is_jumping) {
-          IF_DEBUG4 {
+          IF_DEBUG4
+          {
             if (it->is_loggable_for_unimportant_stuff()) {
               dbg2(" ignore %s", it->to_string().c_str());
             }
@@ -112,7 +115,8 @@ int Thing::ai_choose_goal(void) {
           continue;
         }
 
-        IF_DEBUG4 {
+        IF_DEBUG4
+        {
           if (it->is_loggable_for_unimportant_stuff()) {
             dbg2(" consider %s", it->to_string().c_str());
           }
@@ -366,7 +370,8 @@ int Thing::ai_choose_goal(void) {
   //
   // Find the best next-hop to the best goal.
   //
-  IF_DEBUG4 {
+  IF_DEBUG4
+  {
     dbg("Goals:");
     dmap_print(dmap_can_see, point(start.x - minx, start.y - miny), point(0, 0), point(maxx - minx, maxy - miny));
   }

@@ -7,7 +7,8 @@
 #include "my_sys.h"
 #include "my_game.h"
 
-void Game::fini(void) {
+void Game::fini(void)
+{
   TRACE_AND_INDENT();
   fps_value         = 0;
   started           = false;

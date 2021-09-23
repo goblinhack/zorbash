@@ -16,7 +16,8 @@
 #include "my_sdl.h"
 #include "my_gl.h"
 
-bool Thing::ascend_sewer_tick(void) {
+bool Thing::ascend_sewer_tick(void)
+{
   TRACE_AND_INDENT();
   if (! level->is_ascend_sewer(mid_at.x, mid_at.y)) {
     return false;
@@ -50,7 +51,8 @@ bool Thing::ascend_sewer_tick(void) {
   return false;
 }
 
-bool Thing::ascend_sewer(void) {
+bool Thing::ascend_sewer(void)
+{
   TRACE_AND_INDENT();
   dbg("Ascend sewer");
   if (is_changing_level || is_hidden || is_falling || is_waiting_to_descend_dungeon || is_waiting_to_descend_sewer ||

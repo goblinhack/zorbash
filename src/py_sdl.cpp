@@ -12,7 +12,8 @@
 /*
  * Borrowed from https://github.com/holtrop/pysdl2
  */
-PYFUNC(SDLGetKeyState, "get a snapshot of the current keyboard state") {
+PYFUNC(SDLGetKeyState, "get a snapshot of the current keyboard state")
+{
   TRACE_AND_INDENT();
   int            numkeys;
   const uint8_t *keys = SDL_GetKeyboardState(&numkeys);

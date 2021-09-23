@@ -11,7 +11,8 @@
 #include "my_thing.h"
 #include "my_thing_template.h"
 
-int Thing::is_hazardous_to_me(point p) {
+int Thing::is_hazardous_to_me(point p)
+{
   if (level->is_chasm(p)) {
     if (! is_floating()) {
       return true;

@@ -14,7 +14,8 @@
 //
 // New or loaded level
 //
-void Level::update_new_level(void) {
+void Level::update_new_level(void)
+{
   TRACE_AND_INDENT();
   minimap_valid    = false;
   is_heatmap_valid = false;
@@ -32,7 +33,8 @@ void Level::update_new_level(void) {
 //
 // Something changed on the level
 //
-void Level::update_same_level(void) {
+void Level::update_same_level(void)
+{
   TRACE_AND_INDENT();
   minimap_valid    = false;
   is_heatmap_valid = false;
@@ -44,7 +46,8 @@ void Level::update_same_level(void) {
 //
 // For example, a zoom change
 //
-void Level::update_same_level_immediately(void) {
+void Level::update_same_level_immediately(void)
+{
   TRACE_AND_INDENT();
   minimap_valid    = false;
   is_heatmap_valid = false;

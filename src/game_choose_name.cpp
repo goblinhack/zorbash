@@ -21,19 +21,22 @@
 
 static Widp wid_keyboard_choose_player_name;
 
-static void selected(Widp w, const std::wstring &text) {
+static void selected(Widp w, const std::wstring &text)
+{
   wid_destroy(&wid_keyboard_choose_player_name);
   g_opt_player_name = wstring_to_string(text);
   game->save_config();
   game->main_menu_select();
 }
 
-static void cancelled(Widp w, const std::wstring &text) {
+static void cancelled(Widp w, const std::wstring &text)
+{
   wid_destroy(&wid_keyboard_choose_player_name);
   game->main_menu_select();
 }
 
-void Game::choose_player_name_select(void) {
+void Game::choose_player_name_select(void)
+{
   TRACE_AND_INDENT();
   CON("Choose player name menu");
 

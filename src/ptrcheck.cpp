@@ -24,7 +24,8 @@ bool ptr_check_some_pointers_changed;
 //
 // A single event in the life of a pointer.
 //
-class Ptrcheck_history {
+class Ptrcheck_history
+{
 public:
   std::string file;
   std::string func;
@@ -33,7 +34,8 @@ public:
   Traceback * tb {};
 
   Ptrcheck_history() {}
-  Ptrcheck_history(const Ptrcheck_history &other) {
+  Ptrcheck_history(const Ptrcheck_history &other)
+  {
     file = other.file;
     func = other.func;
     line = other.line;
@@ -47,7 +49,8 @@ public:
 //
 // The life of a single pointer.
 //
-class Ptrcheck {
+class Ptrcheck
+{
 public:
   Ptrcheck(void) {}
 
@@ -82,7 +85,8 @@ public:
   int last_seen_size {};
 };
 
-static std::string &timestamp(void) {
+static std::string &timestamp(void)
+{
   static ts_t        time_last;
   static std::string last_timestamp;
   auto               time_now = time_get_time_ms_cached();
@@ -100,12 +104,14 @@ static std::string &timestamp(void) {
 }
 
 #ifndef DIE
-static void die(void) {
+static void die(void)
+{
   std::cerr << "exit(1) error" << std::endl;
   exit(1);
 }
 
-static void croak_(const char *fmt, va_list args) {
+static void croak_(const char *fmt, va_list args)
+{
   static int g_die_occurred;
   if (g_die_occurred) {
     std::cerr << string_sprintf("\nPTRCHECK: NESTED FATAL ERROR %s %s %d ", __FILE__, __FUNCTION__, __LINE__);
@@ -121,14 +127,16 @@ static void croak_(const char *fmt, va_list args) {
   die();
 }
 
-void CROAK(const char *fmt, ...) {
+void CROAK(const char *fmt, ...)
+{
   va_list args;
   va_start(args, fmt);
   croak_(fmt, args);
   va_end(args);
 }
 
-static void error_(const char *fmt, va_list args) {
+static void error_(const char *fmt, va_list args)
+{
   auto err = timestamp();
   err += ": PTRCHECK: ERROR: ";
   err += string_sprintf(fmt, args);
@@ -136,7 +144,8 @@ static void error_(const char *fmt, va_list args) {
 }
 
 void ERROR(const char *fmt, ...) __attribute__((format(printf, 1, 2)));
-void ERROR(const char *fmt, ...) {
+void ERROR(const char *fmt, ...)
+{
   va_list args;
   va_start(args, fmt);
   error_(fmt, args);
@@ -181,7 +190,8 @@ static Ptrcheck *                                     ringbuf_base;
 //
 // Wrapper for calloc.
 //
-static void *local_zalloc(int size) {
+static void *local_zalloc(int size)
+{
   void *p;
   p = calloc(1, size);
   return (p);
@@ -195,7 +205,8 @@ static void local_free(void *ptr) { free(ptr); }
 //
 // World a pointer to a hash slot.
 //
-static hash_elem_t **ptr2hash(hash_t *hash_table, void *ptr) {
+static hash_elem_t **ptr2hash(hash_t *hash_table, void *ptr)
+{
   int slot;
 
   //
@@ -209,7 +220,8 @@ static hash_elem_t **ptr2hash(hash_t *hash_table, void *ptr) {
 //
 // Create a hash table for all pointers.
 //
-static hash_t *hash_init(int hash_size) {
+static hash_t *hash_init(int hash_size)
+{
   hash_t *hash_table;
 
   hash_table = (__typeof__(hash_table)) local_zalloc(sizeof(hash_t));
@@ -224,7 +236,8 @@ static hash_t *hash_init(int hash_size) {
 //
 // Store a pointer in our hash.
 //
-static void hash_add(hash_t *hash_table, Ptrcheck *pc) {
+static void hash_add(hash_t *hash_table, Ptrcheck *pc)
+{
   hash_elem_t **slot;
   hash_elem_t * elem;
 
@@ -259,7 +272,8 @@ static void hash_add(hash_t *hash_table, Ptrcheck *pc) {
 //
 // Find a pointer in our hash.
 //
-static hash_elem_t *hash_find(hash_t *hash_table, void *ptr) {
+static hash_elem_t *hash_find(hash_t *hash_table, void *ptr)
+{
   hash_elem_t **slot;
   hash_elem_t * elem;
 
@@ -283,7 +297,8 @@ static hash_elem_t *hash_find(hash_t *hash_table, void *ptr) {
 //
 // Free a pointer from our hash.
 //
-static void hash_free(hash_t *hash_table, void *ptr) {
+static void hash_free(hash_t *hash_table, void *ptr)
+{
   hash_elem_t **slot;
   hash_elem_t * prev;
   hash_elem_t * elem;
@@ -325,7 +340,8 @@ static void hash_free(hash_t *hash_table, void *ptr) {
 // Check a pointer for validity.
 //
 static Ptrcheck *ptrcheck_verify_pointer(const void *ptr, std::string &func, std::string &file, int line,
-                                         int dont_store) {
+                                         int dont_store)
+{
   static const char *unknown_ptr_warning  = "** UNKNOWN POINTER ** ";
   static const char *null_pointer_warning = "** NULL POINTER ** ";
   int                ring_ptr_size;
@@ -493,7 +509,8 @@ static Ptrcheck *ptrcheck_verify_pointer(const void *ptr, std::string &func, std
 //
 // Record this pointer.
 //
-void *ptrcheck_alloc(const void *ptr, std::string what, int size, std::string func, std::string file, int line) {
+void *ptrcheck_alloc(const void *ptr, std::string what, int size, std::string func, std::string file, int line)
+{
   Ptrcheck *pc;
 
 #ifdef ENABLE_DEBUG_PTRCHECK
@@ -567,7 +584,8 @@ void *ptrcheck_alloc(const void *ptr, std::string what, int size, std::string fu
 // Check a pointer is valid and if so add it to the ring buffer. If not,
 // return false and avert the myfree(), just in case.
 //
-int ptrcheck_free(void *ptr, std::string func, std::string file, int line) {
+int ptrcheck_free(void *ptr, std::string func, std::string file, int line)
+{
   Ptrcheck *pc;
 
 #ifdef ENABLE_DEBUG_PTRCHECK
@@ -629,8 +647,10 @@ int ptrcheck_free(void *ptr, std::string func, std::string file, int line) {
 //
 // Check a pointer for validity with no recording of history.
 //
-int ptrcheck_verify(const void *ptr, std::string &func, std::string &file, int line) {
-  IF_NODEBUG5 {
+int ptrcheck_verify(const void *ptr, std::string &func, std::string &file, int line)
+{
+  IF_NODEBUG5
+  {
     if (! ptr_check_some_pointers_changed) {
       return true;
     }
@@ -642,7 +662,8 @@ int ptrcheck_verify(const void *ptr, std::string &func, std::string &file, int l
 //
 // Show any leaks
 //
-void ptrcheck_leak_print(void) {
+void ptrcheck_leak_print(void)
+{
   hash_elem_t **slot;
   hash_elem_t * elem;
   Ptrcheck *    pc;

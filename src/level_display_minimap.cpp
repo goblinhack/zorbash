@@ -14,7 +14,8 @@
 #include "my_sdl.h"
 #include "my_ptrcheck.h"
 
-void Level::display_minimap(void) {
+void Level::display_minimap(void)
+{
   if (unlikely(! game->config.gfx_minimap)) {
     return;
   }

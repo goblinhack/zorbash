@@ -11,7 +11,8 @@
 #include "my_dmap.h"
 #include "my_monst.h"
 
-point Thing::get_random_scent_target(void) {
+point Thing::get_random_scent_target(void)
+{
   int16_t d     = ai_scent_distance();
   auto    tries = 100;
 

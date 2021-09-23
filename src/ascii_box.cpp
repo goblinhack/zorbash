@@ -12,7 +12,8 @@
 #include "my_main.h"
 
 static void ascii_put_box__(int style, Tilep bg_tile, Tilep fg_tile, Tilep fg2_tile, Tilep fg3_tile, int x1, int y1,
-                            int x2, int y2, color col_bg, color col_fg, void *context) {
+                            int x2, int y2, color col_bg, color col_fg, void *context)
+{
   TRACE_AND_INDENT();
   int x;
   int y;
@@ -171,7 +172,8 @@ static void ascii_put_box__(int style, Tilep bg_tile, Tilep fg_tile, Tilep fg2_t
 }
 
 static void ascii_put_box_(int style, Tilep bg_tile, Tilep fg_tile, Tilep fg2_tile, Tilep fg3_tile, int x, int y,
-                           int width, int height, color col_bg, color col_text, const wchar_t *fmt, va_list args) {
+                           int width, int height, color col_bg, color col_text, const wchar_t *fmt, va_list args)
+{
   TRACE_AND_INDENT();
   if (! *fmt) {
     ascii_put_box__(style, bg_tile, fg_tile, fg2_tile, fg3_tile, x, y, x + width - 1, y + height - 1, col_bg, col_text,
@@ -198,7 +200,8 @@ static void ascii_put_box_(int style, Tilep bg_tile, Tilep fg_tile, Tilep fg2_ti
 }
 
 void ascii_put_box(box_args b, int style, Tilep bg_tile, Tilep fg_tile, Tilep fg2_tile, Tilep fg3_tile,
-                   const wchar_t *fmt, ...) {
+                   const wchar_t *fmt, ...)
+{
   TRACE_AND_INDENT();
   va_list args;
 

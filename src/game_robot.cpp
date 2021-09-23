@@ -11,7 +11,8 @@
 #include "my_monst.h"
 #include "my_wid_popup.h"
 
-void Game::robot_mode_tick(void) {
+void Game::robot_mode_tick(void)
+{
   TRACE_AND_INDENT();
   if (! game->robot_mode) {
     return;

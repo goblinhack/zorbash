@@ -15,7 +15,8 @@
 #include "my_thing_template.h"
 #include "my_ptrcheck.h"
 
-Thingp Thing::most_dangerous_adjacent_thing_get(void) {
+Thingp Thing::most_dangerous_adjacent_thing_get(void)
+{
   std::vector< std::pair< Thingp, int > > possible;
 
   static const std::vector< point > all_deltas = {
@@ -27,7 +28,8 @@ Thingp Thing::most_dangerous_adjacent_thing_get(void) {
     auto x = mid_at.x + d.x;
     auto y = mid_at.y + d.y;
 
-    FOR_ALL_THINGS(level, t, x, y) {
+    FOR_ALL_THINGS(level, t, x, y)
+    {
       if (t == this) {
         continue;
       }
@@ -71,7 +73,8 @@ Thingp Thing::most_dangerous_adjacent_thing_get(void) {
   return possible[ 0 ].first;
 }
 
-Thingp Thing::most_dangerous_visible_thing_get(void) {
+Thingp Thing::most_dangerous_visible_thing_get(void)
+{
   std::vector< std::pair< Thingp, int > > possible;
 
   int d = ai_avoid_distance();
@@ -87,7 +90,8 @@ Thingp Thing::most_dangerous_visible_thing_get(void) {
         continue;
       }
 
-      FOR_ALL_THINGS(level, t, o.x, o.y) {
+      FOR_ALL_THINGS(level, t, o.x, o.y)
+      {
         if (t->is_dead) {
           continue;
         }

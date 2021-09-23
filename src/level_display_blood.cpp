@@ -11,7 +11,8 @@
 #include "my_gl.h"
 #include "my_thing.h"
 
-void Level::display_blood(void) {
+void Level::display_blood(void)
+{
   TRACE_AND_INDENT();
   if (! player) {
     return;

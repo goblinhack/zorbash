@@ -17,7 +17,8 @@ typedef std::map< std::string, color > colors;
 colors      color_map;
 static bool color_init_done;
 
-void color_set(std::string name, color *c, uint8_t r, uint8_t g, uint8_t b, uint8_t a) {
+void color_set(std::string name, color *c, uint8_t r, uint8_t g, uint8_t b, uint8_t a)
+{
   TRACE_AND_INDENT();
   c->r = r;
   c->g = g;
@@ -30,7 +31,8 @@ void color_set(std::string name, color *c, uint8_t r, uint8_t g, uint8_t b, uint
   }
 }
 
-void color_init(void) {
+void color_init(void)
+{
   TRACE_AND_INDENT();
   color_init1();
   color_init2();
@@ -39,7 +41,8 @@ void color_init(void) {
   color_init_done = true;
 }
 
-void color_fini(void) {
+void color_fini(void)
+{
   TRACE_AND_INDENT();
   color_map.clear();
 }
@@ -47,12 +50,14 @@ void color_fini(void) {
 color gl_save_color(255, 255, 255, 255);
 color gl_last_color(255, 255, 255, 255);
 
-void glcolor_save(void) {
+void glcolor_save(void)
+{
   TRACE_AND_INDENT();
   gl_save_color = gl_last_color;
 }
 
-void glcolor_restore(void) {
+void glcolor_restore(void)
+{
   TRACE_AND_INDENT();
   color s = gl_last_color = gl_save_color;
 
@@ -61,7 +66,8 @@ void glcolor_restore(void) {
 
 color gl_color_current(void) { return (gl_last_color); }
 
-color string2color(const char **s) {
+color string2color(const char **s)
+{
   TRACE_AND_INDENT();
   static char        tmp[ MAXSHORTSTR ];
   static const char *eo_tmp = tmp + sizeof(tmp);
@@ -99,7 +105,8 @@ color string2color(const char **s) {
   return (result->second);
 }
 
-color string2color(const wchar_t **s) {
+color string2color(const wchar_t **s)
+{
   TRACE_AND_INDENT();
   static wchar_t        tmp[ MAXSHORTSTR ];
   static const wchar_t *eo_tmp = tmp + MAXSHORTSTR - 1;
@@ -138,7 +145,8 @@ color string2color(const wchar_t **s) {
   return (result->second);
 }
 
-color string2color(std::string &s, int *len) {
+color string2color(std::string &s, int *len)
+{
   TRACE_AND_INDENT();
   auto        iter = s.begin();
   std::string out;
@@ -174,7 +182,8 @@ color string2color(std::string &s, int *len) {
   return (result->second);
 }
 
-color string2color(std::string &s) {
+color string2color(std::string &s)
+{
   auto        iter = s.begin();
   std::string out;
 
@@ -205,13 +214,15 @@ color string2color(std::string &s) {
   return (result->second);
 }
 
-color string2color(std::wstring &s, int *len) {
+color string2color(std::wstring &s, int *len)
+{
   TRACE_AND_INDENT();
   auto v = wstring_to_string(s);
   return (string2color(v, len));
 }
 
-const char *string2colorname(const char **s) {
+const char *string2colorname(const char **s)
+{
   TRACE_AND_INDENT();
   static char        tmp[ MAXSHORTSTR ];
   static const char *eo_tmp = tmp + MAXSHORTSTR - 1;
@@ -249,7 +260,8 @@ const char *string2colorname(const char **s) {
   return (tmp);
 }
 
-std::string string2colorname(std::string &s) {
+std::string string2colorname(std::string &s)
+{
   TRACE_AND_INDENT();
   auto        iter = s.begin();
   std::string out;
@@ -285,7 +297,8 @@ std::string string2colorname(std::string &s) {
   return (out);
 }
 
-color color_find(const char *s) {
+color color_find(const char *s)
+{
   TRACE_AND_INDENT();
   if (! s) {
     return (WHITE);
@@ -307,7 +320,8 @@ color color_find(const char *s) {
   return (result->second);
 }
 
-color color_to_mono(color a) {
+color color_to_mono(color a)
+{
   TRACE_AND_INDENT();
   float avg = (a.r + a.g + a.b) / 3.0;
 

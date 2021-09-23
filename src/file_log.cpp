@@ -12,7 +12,8 @@
 #include "my_file.h"
 #include "my_globals.h"
 
-static void file_log_(const char *fmt, va_list args) {
+static void file_log_(const char *fmt, va_list args)
+{
   char buf[ MAXLONGSTR ];
   int  len;
 
@@ -26,7 +27,8 @@ static void file_log_(const char *fmt, va_list args) {
   putf(MY_STDOUT, buf);
 }
 
-void FILE_LOG(const char *fmt, ...) {
+void FILE_LOG(const char *fmt, ...)
+{
   va_list args;
 
   va_start(args, fmt);
@@ -34,7 +36,8 @@ void FILE_LOG(const char *fmt, ...) {
   va_end(args);
 }
 
-void FILE_DBG(const char *fmt, ...) {
+void FILE_DBG(const char *fmt, ...)
+{
   va_list args;
 
   IF_NODEBUG4 { return; }

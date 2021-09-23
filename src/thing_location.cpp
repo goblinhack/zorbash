@@ -21,7 +21,8 @@
 // to handle things that do not move but something has happened to
 // like they caught on fire
 //
-void Thing::location_check_forced(void) {
+void Thing::location_check_forced(void)
+{
   TRACE_AND_INDENT();
   //
   // Prevent interactions that might generate things like smoke.
@@ -136,7 +137,8 @@ void Thing::location_check_forced(void) {
   }
 }
 
-void Thing::location_check(void) {
+void Thing::location_check(void)
+{
   TRACE_AND_INDENT();
   if (get_tick_last_location_check() == game->tick_current) {
     return;
@@ -156,10 +158,12 @@ void Thing::location_check(void) {
 // already performed, so we don't for example do a lava check
 // again initiated by being set on fire by lava.
 //
-void Thing::location_check_all_things_at(void) {
+void Thing::location_check_all_things_at(void)
+{
   TRACE_AND_INDENT();
   dbg("Do location checks");
-  FOR_ALL_THINGS_THAT_INTERACT(level, t, mid_at.x, mid_at.y) {
+  FOR_ALL_THINGS_THAT_INTERACT(level, t, mid_at.x, mid_at.y)
+  {
     TRACE_AND_INDENT();
     IF_DEBUG2 { t->log("Do location check"); }
     t->location_check();
@@ -170,10 +174,12 @@ void Thing::location_check_all_things_at(void) {
 //
 // Check all things at this location
 //
-void Thing::location_check_forced_all_things_at(void) {
+void Thing::location_check_forced_all_things_at(void)
+{
   TRACE_AND_INDENT();
   dbg("Do location checks");
-  FOR_ALL_THINGS_THAT_INTERACT(level, t, mid_at.x, mid_at.y) {
+  FOR_ALL_THINGS_THAT_INTERACT(level, t, mid_at.x, mid_at.y)
+  {
     TRACE_AND_INDENT();
     IF_DEBUG2 { t->log("Do location check"); }
     t->location_check_forced();

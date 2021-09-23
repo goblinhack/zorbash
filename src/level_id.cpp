@@ -14,7 +14,8 @@
 //
 // Find an existing thing.
 //
-Thingp Level::thing_find(const ThingId id) {
+Thingp Level::thing_find(const ThingId id)
+{
   TRACE_AND_INDENT();
   //
   // All levels share the same thing ID namespace so we can find any
@@ -23,7 +24,8 @@ Thingp Level::thing_find(const ThingId id) {
   return game->world.thing_find(id);
 }
 
-Thingp Level::thing_find_optional(const ThingId id) {
+Thingp Level::thing_find_optional(const ThingId id)
+{
   TRACE_AND_INDENT();
   return game->world.thing_find_optional(id);
 }

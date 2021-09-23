@@ -19,7 +19,8 @@
 #include "my_vector_bounds_check.h"
 #include "my_ui.h"
 
-WidTextBox::~WidTextBox() {
+WidTextBox::~WidTextBox()
+{
   if (wid_horiz_scroll) {
     wid_destroy(&wid_horiz_scroll);
   }
@@ -31,7 +32,8 @@ WidTextBox::~WidTextBox() {
 }
 
 WidTextBox::WidTextBox(point tl, point br, Widp parent, bool horiz_scroll, bool vert_scoll, int scroll_height_in)
-    : scroll_height(scroll_height_in), tl(tl), br(br), wid_parent(parent) {
+    : scroll_height(scroll_height_in), tl(tl), br(br), wid_parent(parent)
+{
   TRACE_AND_INDENT();
   int w = br.x - tl.x;
   int h = br.y - tl.y;
@@ -136,7 +138,8 @@ WidTextBox::WidTextBox(point tl, point br, Widp parent, bool horiz_scroll, bool 
 //
 // Get the wid on the bottom of the list/screen.
 //
-void WidTextBox::log_(std::wstring str, bool lhs, bool rhs) {
+void WidTextBox::log_(std::wstring str, bool lhs, bool rhs)
+{
   TRACE_AND_INDENT();
   Widp tmp {};
   Widp text_wid {};
@@ -192,7 +195,8 @@ void WidTextBox::log_(std::wstring str, bool lhs, bool rhs) {
 //
 // Log a message to the text_box
 //
-void WidTextBox::log(std::string s, bool lhs, bool rhs) {
+void WidTextBox::log(std::string s, bool lhs, bool rhs)
+{
   TRACE_AND_INDENT();
   int chars_per_line = wid_get_width(wid_text_area);
 
@@ -208,7 +212,8 @@ void WidTextBox::log(std::string s, bool lhs, bool rhs) {
 //
 // Log a message to the text_box
 //
-void WidTextBox::log(std::wstring s, bool lhs, bool rhs) {
+void WidTextBox::log(std::wstring s, bool lhs, bool rhs)
+{
   TRACE_AND_INDENT();
   int chars_per_line = wid_get_width(wid_text_area);
 

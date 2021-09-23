@@ -13,7 +13,8 @@
 #include "my_ptrcheck.h"
 #include "my_globals.h"
 
-static void wid_log_(Widp t, const char *fmt, va_list args) {
+static void wid_log_(Widp t, const char *fmt, va_list args)
+{
   char buf[ MAXLONGSTR ];
   int  len;
 
@@ -28,7 +29,8 @@ static void wid_log_(Widp t, const char *fmt, va_list args) {
   putf(MY_STDOUT, buf);
 }
 
-void WID_LOG(Widp t, const char *fmt, ...) {
+void WID_LOG(Widp t, const char *fmt, ...)
+{
   va_list args;
 
   verify(t);
@@ -38,7 +40,8 @@ void WID_LOG(Widp t, const char *fmt, ...) {
   va_end(args);
 }
 
-void WID_DBG(Widp t, const char *fmt, ...) {
+void WID_DBG(Widp t, const char *fmt, ...)
+{
   va_list args;
 
   IF_NODEBUG4 { return; }

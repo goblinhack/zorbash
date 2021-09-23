@@ -20,7 +20,8 @@
 #include "my_string.h"
 #include "my_traceback.h"
 
-Thingp Level::thing_new(Tpp tp, const point at) {
+Thingp Level::thing_new(Tpp tp, const point at)
+{
   if (! tp) {
     err("No tp provided for thing creation");
     return nullptr;
@@ -28,7 +29,8 @@ Thingp Level::thing_new(Tpp tp, const point at) {
   return thing_new(tp->name(), at);
 }
 
-Thingp Level::thing_new(Tpp tp, const fpoint at) {
+Thingp Level::thing_new(Tpp tp, const fpoint at)
+{
   if (! tp) {
     err("No tp provided for thing creation");
     return nullptr;
@@ -36,7 +38,8 @@ Thingp Level::thing_new(Tpp tp, const fpoint at) {
   return thing_new(tp->name(), at);
 }
 
-Thingp Level::thing_new(Tpp tp, const fpoint at, const fpoint jitter) {
+Thingp Level::thing_new(Tpp tp, const fpoint at, const fpoint jitter)
+{
   if (! tp) {
     err("No tp provided for thing creation");
     return nullptr;
@@ -48,13 +51,15 @@ Thingp Level::thing_new(const std::string &tp_name, Thingp owner) { return thing
 
 static const fpoint no_jitter(0, 0);
 
-Thingp Level::thing_new(const std::string &name, const point at) {
+Thingp Level::thing_new(const std::string &name, const point at)
+{
   return thing_new(name, fpoint(at.x, at.y), no_jitter);
 }
 
 Thingp Level::thing_new(const std::string &name, const fpoint at) { return thing_new(name, at, no_jitter); }
 
-Thingp Level::thing_new(const std::string &name, const fpoint at, const fpoint jitter) {
+Thingp Level::thing_new(const std::string &name, const fpoint at, const fpoint jitter)
+{
   auto t = new struct Thing_();
   t->init(this, name, at, jitter);
   return (t);
@@ -62,7 +67,8 @@ Thingp Level::thing_new(const std::string &name, const fpoint at, const fpoint j
 
 Thing::Thing_(void) { newptr(this, "thing"); }
 
-void Thing::on_born(void) {
+void Thing::on_born(void)
+{
   TRACE_AND_INDENT();
   auto on_born = tp()->on_born_do();
   if (std::empty(on_born)) {
@@ -86,7 +92,8 @@ void Thing::on_born(void) {
   }
 }
 
-void Thing::init(Levelp level, const std::string &name, const fpoint born, const fpoint jitter) {
+void Thing::init(Levelp level, const std::string &name, const fpoint born, const fpoint jitter)
+{
   verify(this);
 
   this->level = level;
@@ -513,7 +520,8 @@ void Thing::init(Levelp level, const std::string &name, const fpoint born, const
   }
 }
 
-void Thing::reinit(void) {
+void Thing::reinit(void)
+{
   TRACE_AND_INDENT();
   verify(this);
   const auto tpp = tp_or_update();

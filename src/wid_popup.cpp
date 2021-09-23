@@ -19,14 +19,16 @@
 #include "my_wid_actionbar.h"
 #include "my_ui.h"
 
-WidPopup::~WidPopup() {
+WidPopup::~WidPopup()
+{
   wid_destroy(&wid_popup_container);
   delete wid_text_area;
 }
 
 WidPopup::WidPopup(const std::string name, point tl, point br, Tilep title_tile, const std::string background,
                    bool horiz_scroll, bool vert_scoll, int scroll_height)
-    : tl(tl), br(br), title_tile(title_tile), background(background) {
+    : tl(tl), br(br), title_tile(title_tile), background(background)
+{
   TRACE_AND_INDENT();
   int outer_w = br.x - tl.x;
   int outer_h = br.y - tl.y;
@@ -82,7 +84,8 @@ WidPopup::WidPopup(const std::string name, point tl, point br, Tilep title_tile,
 //
 // Log a message to the popup
 //
-void WidPopup::log(std::string s, bool lhs, bool rhs) {
+void WidPopup::log(std::string s, bool lhs, bool rhs)
+{
   TRACE_AND_INDENT();
   wid_text_area->log(s, lhs, rhs);
 }
@@ -90,12 +93,14 @@ void WidPopup::log(std::string s, bool lhs, bool rhs) {
 //
 // Log a message to the popup
 //
-void WidPopup::log(std::wstring s, bool lhs, bool rhs) {
+void WidPopup::log(std::wstring s, bool lhs, bool rhs)
+{
   TRACE_AND_INDENT();
   wid_text_area->log(s, lhs, rhs);
 }
 
-void wid_popup_test(void) {
+void wid_popup_test(void)
+{
   TRACE_AND_INDENT();
   std::vector< std::string > items;
   items.push_back("text 1111111111111111");

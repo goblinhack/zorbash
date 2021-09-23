@@ -27,7 +27,8 @@ static void ttf_create_tex_from_char(TTF_Font *ttf, const char *name, Font *f, u
 //
 // Load a new font and create textures for each glyph
 //
-Fontp ttf_new(std::string name, int pointSize, int style) {
+Fontp ttf_new(std::string name, int pointSize, int style)
+{
   TRACE_AND_INDENT();
   TTF_Font *ttf;
 
@@ -86,7 +87,8 @@ Fontp ttf_new(std::string name, int pointSize, int style) {
 // get an alpha of one. We use black for the color key.
 //
 static void ttf_set_color_key(SDL_Surface *glyph_surface, GLfloat *texcoord, uint8_t ckr, uint8_t ckg, uint8_t ckb,
-                              double *width, double *height) {
+                              double *width, double *height)
+{
   TRACE_AND_INDENT();
   SDL_Surface *tmp;
   uint32_t     colorkey;
@@ -138,7 +140,8 @@ static void ttf_set_color_key(SDL_Surface *glyph_surface, GLfloat *texcoord, uin
 //
 // Given a single character, make it into an opengl tex
 //
-static void ttf_create_tex_from_char(TTF_Font *ttf, const char *name, Font *f, uint16_t c, uint16_t d) {
+static void ttf_create_tex_from_char(TTF_Font *ttf, const char *name, Font *f, uint16_t c, uint16_t d)
+{
   TRACE_AND_INDENT();
   static uint16_t text[ 2 ];
   int             e;
@@ -187,7 +190,8 @@ static void ttf_create_tex_from_char(TTF_Font *ttf, const char *name, Font *f, u
   getref(f->glyphs, d).texMaxY = texcoord[ 3 ];
 }
 
-Fontp ttf_read_tga(Fontp f, const char *name, int pointsize) {
+Fontp ttf_read_tga(Fontp f, const char *name, int pointsize)
+{
   TRACE_AND_INDENT();
   char     filename[ MAXSTR ];
   uint32_t c;
@@ -209,7 +213,8 @@ Fontp ttf_read_tga(Fontp f, const char *name, int pointsize) {
   return (f);
 }
 
-Fontp ttf_write_tga(std::string name, int pointsize, int style) {
+Fontp ttf_write_tga(std::string name, int pointsize, int style)
+{
   TRACE_AND_INDENT();
   uint32_t     rmask, gmask, bmask, amask;
   int          glyph_per_row;

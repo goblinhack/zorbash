@@ -15,7 +15,8 @@
 #include "my_gl.h"
 #include "my_ptrcheck.h"
 
-void Thing::level_enter(void) {
+void Thing::level_enter(void)
+{
   TRACE_AND_INDENT();
   dbg("Enter level");
   TRACE_AND_INDENT();

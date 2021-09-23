@@ -14,7 +14,8 @@
 #include "my_sprintf.h"
 #include "my_thing.h"
 
-void Thing::gc(void) {
+void Thing::gc(void)
+{
   TRACE_AND_INDENT();
   int  group  = get_group();
   auto result = level->all_things_to_be_destroyed[ group ].insert(std::pair(id, this));

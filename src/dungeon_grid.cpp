@@ -119,7 +119,8 @@ static bool debug_enabled = false;
  *      2-2-* E
  */
 
-void Nodes::finish_constructor(void) {
+void Nodes::finish_constructor(void)
+{
 redo:
   init_nodes();
 
@@ -317,7 +318,8 @@ redo:
   LOG("Final map: ^^^^^^^^^^");
 }
 
-void Nodes::dump(void) {
+void Nodes::dump(void)
+{
   const auto                             step   = 5;
   const auto                             center = 3;
   const int                              h      = (MAP_GRID_HEIGHT + 1) * step;
@@ -611,7 +613,8 @@ void Nodes::dump(void) {
   }
 }
 
-void Nodes::debug(std::string msg) {
+void Nodes::debug(std::string msg)
+{
   if (! debug_enabled) {
     return;
   }
@@ -620,7 +623,8 @@ void Nodes::debug(std::string msg) {
   LOG("Node-grid: ^^^^^ %s ^^^^^", msg.c_str());
 }
 
-int Nodes::offset(const int x, const int y) {
+int Nodes::offset(const int x, const int y)
+{
   auto offset = grid_width * y;
   offset += x;
 
@@ -629,7 +633,8 @@ int Nodes::offset(const int x, const int y) {
 
 bool Nodes::is_oob(const int x, const int y) { return ((x < 0) || (x >= grid_width) || (y < 0) || (y >= grid_height)); }
 
-DungeonNode *Nodes::node_addr(const int x, const int y) {
+DungeonNode *Nodes::node_addr(const int x, const int y)
+{
   if (is_oob(x, y)) {
     return (nullptr);
   }
@@ -637,19 +642,22 @@ DungeonNode *Nodes::node_addr(const int x, const int y) {
   return (&nodes[ offset(x, y) ]);
 }
 
-void Nodes::putn(const int x, const int y, const DungeonNode n) {
+void Nodes::putn(const int x, const int y, const DungeonNode n)
+{
   auto p = node_addr(x, y);
   if (p != nullptr) {
     *p = n;
   }
 }
 
-DungeonNode *Nodes::getn(const int x, const int y) {
+DungeonNode *Nodes::getn(const int x, const int y)
+{
   auto p = node_addr(x, y);
   return (p);
 }
 
-point Nodes::random_dir(void) {
+point Nodes::random_dir(void)
+{
   auto dx = 0, dy = 0;
 
   switch (pcg_random_range(0, 4)) {
@@ -673,7 +681,8 @@ point Nodes::random_dir(void) {
   return (point(dx, dy));
 }
 
-void Nodes::random_dir(int *dx, int *dy) {
+void Nodes::random_dir(int *dx, int *dy)
+{
   switch (pcg_random_range(0, 4)) {
     case 0 :
       *dx = -1;
@@ -697,7 +706,8 @@ void Nodes::random_dir(int *dx, int *dy) {
 //
 // Set up nodes so they know their coords
 //
-void Nodes::init_nodes(void) {
+void Nodes::init_nodes(void)
+{
   nodes.resize(grid_width * grid_height);
 
   std::vector< std::pair< point, point > > s;
@@ -751,7 +761,8 @@ bool Nodes::node_is_free(DungeonNode *n) { return (n && ! n->depth); }
 
 bool Nodes::node_is_a_room(DungeonNode *n) { return (n && n->depth && (n->depth != depth_obstacle)); }
 
-int Nodes::snake_walk(int depth, int max_placed, int pass) {
+int Nodes::snake_walk(int depth, int max_placed, int pass)
+{
   std::list< point > s;
 
   auto dx = 0;
@@ -1041,7 +1052,8 @@ int Nodes::snake_walk(int depth, int max_placed, int pass) {
   return (placed);
 }
 
-void Nodes::join_nodes_of_same_depth(int depth, int pass) {
+void Nodes::join_nodes_of_same_depth(int depth, int pass)
+{
   //
   // Connect up the nodes on the same depth
   //
@@ -1098,7 +1110,8 @@ void Nodes::join_nodes_of_same_depth(int depth, int pass) {
 //
 // Connect up the nodes to the next depth. We need at least one.
 //
-void Nodes::join_depth_to_next_depth(int depth, int pass) {
+void Nodes::join_depth_to_next_depth(int depth, int pass)
+{
   std::vector< std::pair< point, point > > s;
 
   for (auto x = 0; x < grid_width; x++) {
@@ -1187,7 +1200,8 @@ void Nodes::join_depth_to_next_depth(int depth, int pass) {
   }
 }
 
-void Nodes::join_depth_secret(int depth, int pass) {
+void Nodes::join_depth_secret(int depth, int pass)
+{
   std::vector< std::pair< point, point > > s;
 
   for (auto x = 0; x < grid_width; x++) {
@@ -1297,7 +1311,8 @@ void Nodes::join_depth_secret(int depth, int pass) {
   }
 }
 
-bool Nodes::place_lock(int depth, int pass) {
+bool Nodes::place_lock(int depth, int pass)
+{
   std::vector< point > s;
 
   for (auto x = 0; x < grid_width; x++) {
@@ -1353,7 +1368,8 @@ bool Nodes::place_lock(int depth, int pass) {
   return true;
 }
 
-void Nodes::hide_other_locks(int depth, int pass) {
+void Nodes::hide_other_locks(int depth, int pass)
+{
   std::vector< point > s;
 
   for (auto x = 0; x < grid_width; x++) {
@@ -1401,7 +1417,8 @@ void Nodes::hide_other_locks(int depth, int pass) {
   }
 }
 
-bool Nodes::place_key(int depth, int pass) {
+bool Nodes::place_key(int depth, int pass)
+{
   std::vector< point > s;
 
   for (auto x = 0; x < grid_width; x++) {
@@ -1445,7 +1462,8 @@ bool Nodes::place_key(int depth, int pass) {
   return true;
 }
 
-bool Nodes::place_entrance(void) {
+bool Nodes::place_entrance(void)
+{
   std::vector< point > s;
 
   for (auto x = 0; x < grid_width; x++) {
@@ -1487,7 +1505,8 @@ bool Nodes::place_entrance(void) {
   return true;
 }
 
-bool Nodes::place_exit(void) {
+bool Nodes::place_exit(void)
+{
   std::vector< point > s;
 
   for (auto x = 0; x < grid_width; x++) {
@@ -1528,7 +1547,8 @@ bool Nodes::place_exit(void) {
   return true;
 }
 
-void Nodes::remove_stubs(void) {
+void Nodes::remove_stubs(void)
+{
   std::vector< point > s;
 
   for (auto y = 0; y < grid_height; y++) {
@@ -1587,7 +1607,8 @@ void Nodes::remove_stubs(void) {
   }
 }
 
-void Nodes::dmap_print_walls(Dmap *d) {
+void Nodes::dmap_print_walls(Dmap *d)
+{
   for (auto y = 0; y < grid_height * 2 + 1; y++) {
     for (auto x = 0; x < grid_width * 2 + 1; x++) {
       uint16_t e = get(d->val, x, y);
@@ -1611,7 +1632,8 @@ void Nodes::dmap_print_walls(Dmap *d) {
   printf("\n");
 }
 
-bool Nodes::create_path_to_exit(int pass) {
+bool Nodes::create_path_to_exit(int pass)
+{
   //
   // Choose start and end of the dmap
   //
@@ -1776,7 +1798,8 @@ bool Nodes::create_path_to_exit(int pass) {
   return true;
 }
 
-void Nodes::create_path_lock_to_key(int depth) {
+void Nodes::create_path_lock_to_key(int depth)
+{
   //
   // Choose start and end of the dmap
   //
@@ -1897,7 +1920,8 @@ void Nodes::create_path_lock_to_key(int depth) {
   }
 }
 
-void Nodes::make_paths_off_critical_path_reachable(void) {
+void Nodes::make_paths_off_critical_path_reachable(void)
+{
   //
   // Choose start and end of the dmap
   //
@@ -2045,7 +2069,8 @@ void Nodes::make_paths_off_critical_path_reachable(void) {
   }
 }
 
-void Nodes::set_max_depth(void) {
+void Nodes::set_max_depth(void)
+{
   std::vector< point > s;
   auto                 max_depth_  = 0;
   auto                 max_vdepth_ = 0;
@@ -2072,7 +2097,8 @@ void Nodes::set_max_depth(void) {
   max_vdepth = max_vdepth_;
 }
 
-void Nodes::remove_redundant_directions(void) {
+void Nodes::remove_redundant_directions(void)
+{
   for (auto x = 0; x < grid_width; x++) {
     for (auto y = 0; y < grid_height; y++) {
       auto node = getn(x, y);
@@ -2127,7 +2153,8 @@ void Nodes::remove_redundant_directions(void) {
   }
 }
 
-class Nodes *grid_test(void) {
+class Nodes *grid_test(void)
+{
   auto x = 1000;
   while (x--) {
     /* auto d = */ new Nodes(MAP_GRID_WIDTH, MAP_GRID_HEIGHT);

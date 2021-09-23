@@ -11,7 +11,8 @@
 #include "slre.h"
 #include "my_token.h"
 
-static tokens_t *tokens_parse(const char *input, tokens_t *tokens) {
+static tokens_t *tokens_parse(const char *input, tokens_t *tokens)
+{
   TRACE_AND_INDENT();
   const char *in;
   char *      out;
@@ -129,7 +130,8 @@ static tokens_t *tokens_parse(const char *input, tokens_t *tokens) {
   }
 }
 
-static void tokens_compile(tokens_t *tokens) {
+static void tokens_compile(tokens_t *tokens)
+{
   TRACE_AND_INDENT();
   uint32_t cnt;
 
@@ -144,7 +146,8 @@ static void tokens_compile(tokens_t *tokens) {
   }
 }
 
-void tokens_print(tokens_t *tokens) {
+void tokens_print(tokens_t *tokens)
+{
   TRACE_AND_INDENT();
   uint32_t cnt;
 
@@ -159,7 +162,8 @@ void tokens_print(tokens_t *tokens) {
   printf("\n");
 }
 
-void tokens_print_to(tokens_t *tokens, char *output, int32_t output_size) {
+void tokens_print_to(tokens_t *tokens, char *output, int32_t output_size)
+{
   TRACE_AND_INDENT();
   uint32_t cnt;
 
@@ -176,7 +180,8 @@ void tokens_print_to(tokens_t *tokens, char *output, int32_t output_size) {
   }
 }
 
-void tokens_test(void) {
+void tokens_test(void)
+{
   TRACE_AND_INDENT();
   tokens_t tmp;
 
@@ -185,7 +190,8 @@ void tokens_test(void) {
   tokens_print(tokens_tostring("set god \"mode on\"", &tmp));
 }
 
-tokens_t *tokens_tostring(const char *input, tokens_t *tokens) {
+tokens_t *tokens_tostring(const char *input, tokens_t *tokens)
+{
   TRACE_AND_INDENT();
   tokens_t *t;
 

@@ -16,7 +16,8 @@
 #include "my_sdl.h"
 #include "my_gl.h"
 
-bool Thing::descend_dungeon_tick(void) {
+bool Thing::descend_dungeon_tick(void)
+{
   TRACE_AND_INDENT();
   if (! is_able_to_change_levels()) {
     return false;
@@ -49,7 +50,8 @@ bool Thing::descend_dungeon_tick(void) {
   }
 }
 
-bool Thing::descend_dungeon(void) {
+bool Thing::descend_dungeon(void)
+{
   TRACE_AND_INDENT();
   dbg("Descend dungeon");
   if (is_changing_level || is_hidden || is_falling || is_waiting_to_ascend_dungeon || is_waiting_to_descend_sewer ||

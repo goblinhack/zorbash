@@ -10,7 +10,8 @@
 
 float distance(const fpoint &a, const fpoint &b) { return ((float) DISTANCE(a.x, a.y, b.x, b.y)); }
 
-float distance(const point &a, const point &b) {
+float distance(const point &a, const point &b)
+{
   return ((float) DISTANCE((float) a.x, (float) a.y, (float) b.x, (float) b.y));
 }
 
@@ -18,7 +19,8 @@ float distance(const point &a, const point &b) {
 // Yields an angle between 0 and 360 deg radians - essentially, how much
 // this point has been rotated about the origin.
 //
-float angle_radians(const fpoint &p) {
+float angle_radians(const fpoint &p)
+{
   float theta = asin(p.y / p.length());
 
   if (p.x > 0) {
@@ -32,7 +34,8 @@ float angle_radians(const fpoint &p) {
   }
 }
 
-fpoint rotate_radians(float angle, const fpoint &p, const fpoint &O) {
+fpoint rotate_radians(float angle, const fpoint &p, const fpoint &O)
+{
   float s;
   float c;
   sincosf(angle, &s, &c);
@@ -49,7 +52,8 @@ fpoint rotate_radians(float angle, const fpoint &p, const fpoint &O) {
   return (fpoint(xnew + O.x, ynew + O.y));
 }
 
-fpoint rotate_radians(const fpoint &p, float angle) {
+fpoint rotate_radians(const fpoint &p, float angle)
+{
   float s;
   float c;
   sincosf(angle, &s, &c);
@@ -64,18 +68,21 @@ fpoint rotate_radians(const fpoint &p, float angle) {
   return (fpoint(xnew, ynew));
 }
 
-fpoint normal(const fpoint &p) {
+fpoint normal(const fpoint &p)
+{
   float length = sqrt((p.x * p.x) + (p.y * p.y));
   return (fpoint(p.x / length, p.y / length));
 }
 
-fpoint unit(const fpoint &p) {
+fpoint unit(const fpoint &p)
+{
   float length = sqrt(p.x * p.x + p.y * p.y);
   return (fpoint(p.x / length, p.y / length));
 }
 
 #ifdef unused_flag
-uint8_t get_line_intersection(fpoint p0, fpoint p1, fpoint p2, fpoint p3, fpoint *intersect) {
+uint8_t get_line_intersection(fpoint p0, fpoint p1, fpoint p2, fpoint p3, fpoint *intersect)
+{
   double denominator = ((p3.y - p2.y) * (p1.x - p0.x)) - ((p3.x - p2.x) * (p1.y - p0.y));
 
   if (denominator == 0) {
@@ -104,7 +111,8 @@ uint8_t get_line_intersection(fpoint p0, fpoint p1, fpoint p2, fpoint p3, fpoint
   return false;
 }
 
-uint8_t get_line_intersection(fpoint p0, fpoint p1, fpoint p2, fpoint p3) {
+uint8_t get_line_intersection(fpoint p0, fpoint p1, fpoint p2, fpoint p3)
+{
   double denominator = ((p3.y - p2.y) * (p1.x - p0.x)) - ((p3.x - p2.x) * (p1.y - p0.y));
 
   if (denominator == 0) {
@@ -131,7 +139,8 @@ uint8_t get_line_intersection(fpoint p0, fpoint p1, fpoint p2, fpoint p3) {
 //
 // Two lines we already know intersect.
 //
-uint8_t get_line_known_intersection(fpoint p0, fpoint p1, fpoint p2, fpoint p3, fpoint *intersect) {
+uint8_t get_line_known_intersection(fpoint p0, fpoint p1, fpoint p2, fpoint p3, fpoint *intersect)
+{
   double denominator = ((p3.y - p2.y) * (p1.x - p0.x)) - ((p3.x - p2.x) * (p1.y - p0.y));
 
   if (denominator == 0) {
@@ -155,7 +164,8 @@ uint8_t get_line_known_intersection(fpoint p0, fpoint p1, fpoint p2, fpoint p3, 
   return true;
 }
 
-int distance_to_line(fpoint P0, fpoint L0, fpoint L1, float *dist, fpoint *intersect_out) {
+int distance_to_line(fpoint P0, fpoint L0, fpoint L1, float *dist, fpoint *intersect_out)
+{
   fpoint intersect;
   double mag;
   double U;

@@ -18,15 +18,18 @@
 
 std::array< std::array< char, MAP_HEIGHT >, MAP_WIDTH > astar_debug {};
 
-class Nodecost {
+class Nodecost
+{
 public:
   Nodecost(void) {}
-  Nodecost(int c) : cost(c) {
+  Nodecost(int c) : cost(c)
+  {
     static int tiebreak_;
     tiebreak = tiebreak_++;
   }
 
-  bool operator<(const Nodecost &rhs) const {
+  bool operator<(const Nodecost &rhs) const
+  {
     if (cost < rhs.cost) {
       return true;
     } else if (cost > rhs.cost) {
@@ -40,7 +43,8 @@ public:
   int tiebreak {};
 };
 
-class Node {
+class Node
+{
 public:
   Node(void) {}
   Node(point p, Nodecost c) : cost(c), at(p) {}
@@ -52,7 +56,8 @@ public:
 
 typedef std::map< Nodecost, Node * > Nodemap;
 
-class Astar {
+class Astar
+{
 public:
   Astar(point s, point g, const Dmap *d) : start(s), goal(g), dmap(d) {}
 
@@ -66,7 +71,8 @@ public:
   point                                             goal;
   const Dmap *                                      dmap {};
 
-  void add_to_open(Node *n) {
+  void add_to_open(Node *n)
+  {
     auto p = n->at;
     auto o = &getref(open, p.x, p.y);
     if (*o) {
@@ -81,7 +87,8 @@ public:
     }
   }
 
-  void add_to_closed(Node *n) {
+  void add_to_closed(Node *n)
+  {
     auto p = n->at;
     auto o = &getref(closed, p.x, p.y);
     if (*o) {
@@ -96,7 +103,8 @@ public:
     }
   }
 
-  void remove_from_open(Node *n) {
+  void remove_from_open(Node *n)
+  {
     auto p = n->at;
     auto o = &getref(open, p.x, p.y);
     if (! *o) {
@@ -108,13 +116,15 @@ public:
   }
 
   // Manhattan distance.
-  int heuristic(const point at) {
+  int heuristic(const point at)
+  {
     // return (abs(goal.x - at.x) + abs(goal.y - at.y));
     return 1;
   }
 
   // Evaluate a neighbor for adding to the open set
-  void eval_neighbor(Node *current, point delta) {
+  void eval_neighbor(Node *current, point delta)
+  {
     auto next_hop = current->at + delta;
 
     if ((next_hop.x < 0) || (next_hop.y < 0) || (next_hop.x > width - 1) || (next_hop.y > height - 1)) {
@@ -154,7 +164,8 @@ public:
     }
   }
 
-  void cleanup(void) {
+  void cleanup(void)
+  {
     for (auto y = 0; y < height; y++) {
       for (auto x = 0; x < width; x++) {
         if (open[ x ][ y ]) {
@@ -167,7 +178,8 @@ public:
     }
   }
 
-  std::tuple< std::vector< point >, int > create_path(const Dmap *dmap, const Node *came_from) {
+  std::tuple< std::vector< point >, int > create_path(const Dmap *dmap, const Node *came_from)
+  {
     std::vector< point > l;
     int                  cost = came_from->cost.cost;
 
@@ -181,7 +193,8 @@ public:
     return {l, cost};
   }
 
-  Path solve(const Goal *goalp, char *path_debug) {
+  Path solve(const Goal *goalp, char *path_debug)
+  {
     auto distance_to_next_hop = 0;
     auto ncost                = Nodecost(distance_to_next_hop + heuristic(start));
     auto neighbor             = new Node(start, ncost);
@@ -251,7 +264,8 @@ public:
   }
 };
 
-void astar_dump(const Dmap *dmap, const point &at, const point &start, const point &end) {
+void astar_dump(const Dmap *dmap, const point &at, const point &start, const point &end)
+{
   int x;
   int y;
 
@@ -287,7 +301,8 @@ void astar_dump(const Dmap *dmap, const point &at, const point &start, const poi
   }
 }
 
-Path astar_solve(const Goal *goal, char path_debug, point s, point g, const Dmap *d) {
+Path astar_solve(const Goal *goal, char path_debug, point s, point g, const Dmap *d)
+{
   char tmp = path_debug;
   auto a   = Astar(s, g, d);
   return (a.solve(goal, &tmp));

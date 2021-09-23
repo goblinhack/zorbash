@@ -19,7 +19,8 @@
 #include "my_ptrcheck.h"
 #include "my_array_bounds_check.h"
 
-bool Thing::spawn_next_to(const std::string &what) {
+bool Thing::spawn_next_to(const std::string &what)
+{
   TRACE_AND_INDENT();
   dbg("Spawn %s next to", what.c_str());
   TRACE_AND_INDENT();
@@ -98,7 +99,8 @@ bool Thing::spawn_next_to(const std::string &what) {
   return true;
 }
 
-bool Thing::spawn_next_to_or_on_monst(const std::string &what) {
+bool Thing::spawn_next_to_or_on_monst(const std::string &what)
+{
   TRACE_AND_INDENT();
   dbg("Spawn %s next to or on monst", what.c_str());
 
@@ -169,7 +171,8 @@ bool Thing::spawn_next_to_or_on_monst(const std::string &what) {
 }
 
 bool Thing::spawn_radius_range(Thingp item, Thingp target, const std::string &what, uint32_t radius_min,
-                               uint32_t radius_max) {
+                               uint32_t radius_max)
+{
   TRACE_AND_INDENT();
   auto tpp = tp_find(what);
   if (! tpp) {
@@ -240,7 +243,8 @@ bool Thing::spawn_radius_range(Thingp item, Thingp target, const std::string &wh
   return true;
 }
 
-bool Thing::spawn_fire(const std::string &what) {
+bool Thing::spawn_fire(const std::string &what)
+{
   TRACE_AND_INDENT();
   dbg("Spawn fire: %s", what.c_str());
 
@@ -289,7 +293,8 @@ bool Thing::spawn_fire(const std::string &what) {
   return true;
 }
 
-bool Thing::spawn_at_if_possible(const std::string &what) {
+bool Thing::spawn_at_if_possible(const std::string &what)
+{
   TRACE_AND_INDENT();
   dbg("Spawn under: %s", what.c_str());
 
@@ -326,7 +331,8 @@ bool Thing::spawn_at_if_possible(const std::string &what) {
   return true;
 }
 
-bool Thing::spawn_at(const std::string &what) {
+bool Thing::spawn_at(const std::string &what)
+{
   TRACE_AND_INDENT();
   dbg("Spawn under: %s", what.c_str());
 

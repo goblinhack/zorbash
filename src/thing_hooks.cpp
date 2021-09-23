@@ -20,7 +20,8 @@
 // Get rid of all the hooks to other things that this thing has. e.g. the
 // weapons it carries etc.
 //
-void Thing::hooks_remove() {
+void Thing::hooks_remove()
+{
   TRACE_AND_INDENT();
   //
   // We are owned by something. i.e. we are a sword.
@@ -154,7 +155,8 @@ void Thing::hooks_remove() {
   }
 }
 
-void Thing::remove_all_references() {
+void Thing::remove_all_references()
+{
   TRACE_AND_INDENT();
   //
   // Some things have lots of things they own
@@ -165,7 +167,8 @@ void Thing::remove_all_references() {
     //
     // Slow, but not used too often
     //
-    FOR_ALL_THING_GROUPS(group) {
+    FOR_ALL_THING_GROUPS(group)
+    {
       for (auto p : level->all_things[ group ]) {
         auto t = p.second;
         auto o = t->get_immediate_owner();
@@ -182,7 +185,8 @@ void Thing::remove_all_references() {
     //
     // Slow, but not used too often
     //
-    FOR_ALL_THING_GROUPS(group) {
+    FOR_ALL_THING_GROUPS(group)
+    {
       for (auto p : level->all_things[ group ]) {
         auto t = p.second;
         auto o = t->get_immediate_minion_owner();
@@ -199,7 +203,8 @@ void Thing::remove_all_references() {
     //
     // Slow, but not used too often
     //
-    FOR_ALL_THING_GROUPS(group) {
+    FOR_ALL_THING_GROUPS(group)
+    {
       for (auto p : level->all_things[ group ]) {
         auto t = p.second;
         auto o = t->get_immediate_spawned_owner();
@@ -210,8 +215,10 @@ void Thing::remove_all_references() {
     }
   }
 
-  IF_DEBUG4 {
-    FOR_ALL_THING_GROUPS(group) {
+  IF_DEBUG4
+  {
+    FOR_ALL_THING_GROUPS(group)
+    {
       for (auto p : level->all_things[ group ]) {
         auto t = p.second;
         if (! t->monstp) {

@@ -14,7 +14,8 @@
 
 std::map< std::string, ramdisk_t_ > ramdisk_data;
 
-unsigned char *ramdisk_load(const char *filename, int *outlen) {
+unsigned char *ramdisk_load(const char *filename, int *outlen)
+{
   TRACE_AND_INDENT();
   auto f = ramdisk_data.find(filename);
   if (f == ramdisk_data.end()) {

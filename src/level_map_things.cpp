@@ -10,7 +10,8 @@
 #include "my_ptrcheck.h"
 #include "my_array_bounds_check.h"
 
-void Level::put_thing(int x, int y, ThingId id, int group) {
+void Level::put_thing(int x, int y, ThingId id, int group)
+{
   TRACE_AND_INDENT();
   auto t = thing_find(id);
   if (! t) {
@@ -106,12 +107,14 @@ do_retry:
   t->err("Out of thing slots at map (%d,%d) for put of %08" PRIx32 "", x, y, id.id);
 }
 
-void Level::put_thing(point p, ThingId id, int group) {
+void Level::put_thing(point p, ThingId id, int group)
+{
   TRACE_AND_INDENT();
   put_thing(p.x, p.y, id, group);
 }
 
-void Level::remove_thing(int x, int y, ThingId id, int group) {
+void Level::remove_thing(int x, int y, ThingId id, int group)
+{
   TRACE_AND_INDENT();
   auto t = thing_find(id);
   if (! t) {
@@ -177,7 +180,8 @@ void Level::remove_thing(int x, int y, ThingId id, int group) {
   t->err("Did not find thing in any slot at map (%d,%d) for remove of %08" PRIx32 "", x, y, id.id);
 }
 
-void Level::check_thing(Thingp t) {
+void Level::check_thing(Thingp t)
+{
   TRACE_AND_INDENT();
   int group = t->get_group();
   int x     = t->mid_at.x;
@@ -197,7 +201,8 @@ void Level::check_thing(Thingp t) {
   t->err("Did not find thing in any slot");
 }
 
-void Level::remove_thing(point p, ThingId id, int group) {
+void Level::remove_thing(point p, ThingId id, int group)
+{
   TRACE_AND_INDENT();
   remove_thing(p.x, p.y, id, group);
 }

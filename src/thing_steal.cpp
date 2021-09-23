@@ -13,7 +13,8 @@
 #include "my_thing_template.h"
 #include "my_ptrcheck.h"
 
-bool Thing::steal_treasure_from(Thingp it) {
+bool Thing::steal_treasure_from(Thingp it)
+{
   TRACE_AND_INDENT();
   if ((int) pcg_random_range(0, 1000) > tp()->is_steal_item_chance_d1000()) {
     return false;
@@ -45,7 +46,8 @@ bool Thing::steal_treasure_from(Thingp it) {
   return true;
 }
 
-bool Thing::steal_item_from(Thingp it) {
+bool Thing::steal_item_from(Thingp it)
+{
   TRACE_AND_INDENT();
   dbg("Try to steal item from %s?", it->to_string().c_str());
   if ((int) pcg_random_range(0, 1000) > tp()->is_steal_item_chance_d1000()) {

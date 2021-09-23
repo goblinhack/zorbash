@@ -19,7 +19,8 @@
 #include "my_array_bounds_check.h"
 #include "my_ptrcheck.h"
 
-PyObject *level_add_(PyObject *obj, PyObject *args, PyObject *keywds) {
+PyObject *level_add_(PyObject *obj, PyObject *args, PyObject *keywds)
+{
   TRACE_AND_INDENT();
   char *    level_name    = 0;
   PyObject *py_level_data = 0;
@@ -203,7 +204,8 @@ PyObject *level_add_(PyObject *obj, PyObject *args, PyObject *keywds) {
   Py_RETURN_TRUE;
 }
 
-PyObject *level_get_all(PyObject *obj, PyObject *args, PyObject *keywds) {
+PyObject *level_get_all(PyObject *obj, PyObject *args, PyObject *keywds)
+{
   TRACE_AND_INDENT();
   uint32_t     id       = 0;
   int          x        = -1;
@@ -232,7 +234,8 @@ PyObject *level_get_all(PyObject *obj, PyObject *args, PyObject *keywds) {
   }
 
   auto items = 0;
-  FOR_ALL_THINGS(t->level, t, x, y) {
+  FOR_ALL_THINGS(t->level, t, x, y)
+  {
     //
     // Don't include carried things else lasers will destroy all items carried!
     //
@@ -245,7 +248,8 @@ PyObject *level_get_all(PyObject *obj, PyObject *args, PyObject *keywds) {
 
   PyObject *lst  = PyList_New(items);
   auto      item = 0;
-  FOR_ALL_THINGS(t->level, t, x, y) {
+  FOR_ALL_THINGS(t->level, t, x, y)
+  {
     //
     // Don't include carried things else lasers will destroy all items carried!
     //
@@ -260,7 +264,8 @@ PyObject *level_get_all(PyObject *obj, PyObject *args, PyObject *keywds) {
   return (lst);
 }
 
-PyObject *level_flood_fill_get_all_things(PyObject *obj, PyObject *args, PyObject *keywds) {
+PyObject *level_flood_fill_get_all_things(PyObject *obj, PyObject *args, PyObject *keywds)
+{
   TRACE_AND_INDENT();
   uint32_t     id       = 0;
   int          x        = -1;
@@ -307,7 +312,8 @@ PyObject *level_flood_fill_get_all_things(PyObject *obj, PyObject *args, PyObjec
 }
 
 #define LEVEL_BODY_GET_BOOL_AT(__func__, __api__)                                                                      \
-  PyObject *__func__(PyObject * obj, PyObject * args, PyObject * keywds) {                                             \
+  PyObject *__func__(PyObject * obj, PyObject * args, PyObject * keywds)                                               \
+  {                                                                                                                    \
     TRACE_AND_INDENT();                                                                                                \
     uint32_t     id       = 0;                                                                                         \
     int          x        = -1;                                                                                        \
@@ -334,7 +340,8 @@ PyObject *level_flood_fill_get_all_things(PyObject *obj, PyObject *args, PyObjec
       Py_RETURN_FALSE;                                                                                                 \
     }                                                                                                                  \
                                                                                                                        \
-    FOR_ALL_THINGS(t->level, t, x, y) {                                                                                \
+    FOR_ALL_THINGS(t->level, t, x, y)                                                                                  \
+    {                                                                                                                  \
       if (t->__api__()) {                                                                                              \
         Py_RETURN_TRUE;                                                                                                \
       }                                                                                                                \

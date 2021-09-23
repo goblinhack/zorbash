@@ -12,7 +12,8 @@
 #include "my_array_bounds_check.h"
 #include "my_main.h"
 
-void dmap_print(const Dmap *d, point at, point start, point end) {
+void dmap_print(const Dmap *d, point at, point start, point end)
+{
   uint8_t x;
   uint8_t y;
 
@@ -45,7 +46,8 @@ void dmap_print(const Dmap *d, point at, point start, point end) {
   }
 }
 
-void dmap_print(const Dmap *d) {
+void dmap_print(const Dmap *d)
+{
   uint8_t x;
   uint8_t y;
 
@@ -74,7 +76,8 @@ void dmap_print(const Dmap *d) {
   }
 }
 
-void dmap_process(Dmap *D, point tl, point br) {
+void dmap_process(Dmap *D, point tl, point br)
+{
   uint8_t                                                           x;
   uint8_t                                                           y;
   uint8_t                                                           a;
@@ -251,7 +254,8 @@ void dmap_process(Dmap *D, point tl, point br) {
   }
 }
 
-void dmap_process(Dmap *D) {
+void dmap_process(Dmap *D)
+{
 #if 0
   //
   // Sanity check the dmap does not take too much time
@@ -272,7 +276,8 @@ void dmap_process(Dmap *D) {
 #endif
 }
 
-static bool is_obs_wall_or_door_at(const Dmap *D, int x, int y) {
+static bool is_obs_wall_or_door_at(const Dmap *D, int x, int y)
+{
   if ((x >= MAP_WIDTH) || (y >= MAP_HEIGHT) || (x < 0) || (y < 0)) {
     return true;
   }
@@ -287,7 +292,8 @@ static bool is_obs_wall_or_door_at(const Dmap *D, int x, int y) {
 //
 // Given 3 points, can we do a shortcut diagonal move?
 //
-bool dmap_can_i_move_diagonally(const Dmap *D, point a, point b, point c) {
+bool dmap_can_i_move_diagonally(const Dmap *D, point a, point b, point c)
+{
   auto px = a.x;
   auto py = a.y;
 
@@ -332,7 +338,8 @@ bool dmap_can_i_move_diagonally(const Dmap *D, point a, point b, point c) {
 }
 
 static std::vector< point > dmap_solve_(const Dmap *D, const point start, const std::vector< point > &all_deltas,
-                                        bool allow_diagonals) {
+                                        bool allow_diagonals)
+{
   std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > walked = {};
   std::vector< point >                                    out    = {};
   auto                                                    at     = start;
@@ -417,14 +424,16 @@ static std::vector< point > dmap_solve_(const Dmap *D, const point start, const 
   return (out);
 }
 
-std::vector< point > dmap_solve_allow_diagonal(const Dmap *D, const point start) {
+std::vector< point > dmap_solve_allow_diagonal(const Dmap *D, const point start)
+{
   static const std::vector< point > all_deltas = {
       point(-1, -1), point(1, -1), point(-1, 1), point(1, 1), point(0, -1), point(-1, 0), point(1, 0), point(0, 1),
   };
   return (dmap_solve_(D, start, all_deltas, true));
 }
 
-std::vector< point > dmap_solve(const Dmap *D, const point start) {
+std::vector< point > dmap_solve(const Dmap *D, const point start)
+{
   static const std::vector< point > all_deltas = {
       point(0, -1),
       point(-1, 0),

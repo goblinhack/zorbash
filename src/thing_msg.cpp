@@ -10,7 +10,8 @@
 #include "my_sprintf.h"
 #include "my_game.h"
 
-void Thing::msg(std::string const &m) {
+void Thing::msg(std::string const &m)
+{
   static point    last_at;
   float           dy;
   float           dx;

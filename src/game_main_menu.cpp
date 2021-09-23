@@ -23,18 +23,21 @@
 
 static WidPopup *game_main_menu_window;
 
-void game_main_menu_destroy(void) {
+void game_main_menu_destroy(void)
+{
   TRACE_AND_INDENT();
   delete game_main_menu_window;
   game_main_menu_window = nullptr;
 }
 
-void game_main_menu_hide(void) {
+void game_main_menu_hide(void)
+{
   TRACE_AND_INDENT();
   wid_hide(game_main_menu_window->wid_text_area->wid_text_area);
 }
 
-static uint8_t game_menu_quick_start(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_menu_quick_start(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   LOG("Main menu new game chosen");
 
@@ -90,60 +93,69 @@ static uint8_t game_menu_quick_start(Widp w, int32_t x, int32_t y, uint32_t butt
   return false;
 }
 
-static uint8_t game_main_menu_load_game(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_main_menu_load_game(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   game->load_select();
   return false;
 }
 
-static uint8_t game_main_menu_config(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_main_menu_config(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   game->config_top_select();
   game_main_menu_hide();
   return false;
 }
 
-static uint8_t game_menu_slow_start(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_menu_slow_start(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   game_menu_quick_start(nullptr, 0, 0, 0);
   return false;
 }
 
-static uint8_t game_main_menu_choose_seed(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_main_menu_choose_seed(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   game->choose_seed_select();
   game_main_menu_destroy();
   return false;
 }
 
-static uint8_t game_main_menu_choose_player_name(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_main_menu_choose_player_name(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   game->choose_player_name_select();
   game_main_menu_destroy();
   return false;
 }
 
-static uint8_t game_main_menu_credits_game(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_main_menu_credits_game(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   game->credits_select();
   game_main_menu_destroy();
   return false;
 }
 
-static uint8_t game_main_menu_quit_game(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_main_menu_quit_game(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   game->quit_select();
   game_main_menu_destroy();
   return false;
 }
 
-static uint8_t game_main_menu_hiscores(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_main_menu_hiscores(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   game->hiscore_select();
   return false;
 }
 
-static uint8_t game_main_menu_key_up(Widp w, const struct SDL_Keysym *key) {
+static uint8_t game_main_menu_key_up(Widp w, const struct SDL_Keysym *key)
+{
   TRACE_AND_INDENT();
   if (sdl_shift_held) {
     if (key->scancode == (SDL_Scancode) game->config.key_console) {
@@ -175,7 +187,8 @@ static uint8_t game_main_menu_key_up(Widp w, const struct SDL_Keysym *key) {
   return false;
 }
 
-static uint8_t game_main_menu_key_down(Widp w, const struct SDL_Keysym *key) {
+static uint8_t game_main_menu_key_down(Widp w, const struct SDL_Keysym *key)
+{
   TRACE_AND_INDENT();
   if (sdl_shift_held) {
     if (key->scancode == (SDL_Scancode) game->config.key_console) {
@@ -186,7 +199,8 @@ static uint8_t game_main_menu_key_down(Widp w, const struct SDL_Keysym *key) {
   return true;
 }
 
-static void game_display_title_bg(void) {
+static void game_display_title_bg(void)
+{
   TRACE_AND_INDENT();
   glcolor(WHITE);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -197,7 +211,8 @@ static void game_display_title_bg(void) {
   blit_flush();
 }
 
-static void game_display_title_fg1(void) {
+static void game_display_title_fg1(void)
+{
   TRACE_AND_INDENT();
   glcolor(WHITE);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -208,7 +223,8 @@ static void game_display_title_fg1(void) {
   blit_flush();
 }
 
-static void game_display_title_fg2(void) {
+static void game_display_title_fg2(void)
+{
   TRACE_AND_INDENT();
   static color fg    = WHITE;
   static int   delta = 10;
@@ -247,7 +263,8 @@ static uint8_t clamp(float v) // define a function to bound and round the input 
 }
 
 // https://stackoverflow.com/questions/8507885/shift-hue-of-an-rgb-color#8509802
-static color color_change_hue(const color &in, const float fHue) {
+static color color_change_hue(const color &in, const float fHue)
+{
   color       out;
   const float cosA = cos(fHue * 3.14159265f / 180); // convert degrees to radians
   const float sinA = sin(fHue * 3.14159265f / 180); // convert degrees to radians
@@ -266,7 +283,8 @@ static color color_change_hue(const color &in, const float fHue) {
   return out;
 }
 
-static void game_display_title_fg3(void) {
+static void game_display_title_fg3(void)
+{
   TRACE_AND_INDENT();
   static color fg  = RED;
   static int   hue = 0;
@@ -310,7 +328,8 @@ static void game_display_title_fg3(void) {
   blit_flush();
 }
 
-static void game_display_title_fg4(void) {
+static void game_display_title_fg4(void)
+{
   TRACE_AND_INDENT();
   glcolor(WHITE);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -332,7 +351,8 @@ static void game_display_title_fg4(void) {
   blit_flush();
 }
 
-static void game_main_menu_tick(Widp w) {
+static void game_main_menu_tick(Widp w)
+{
   TRACE_AND_INDENT();
   game_display_title_bg();
   game_display_flames();
@@ -358,7 +378,8 @@ static void game_main_menu_tick(Widp w) {
   }
 }
 
-void Game::main_menu_select(void) {
+void Game::main_menu_select(void)
+{
   TRACE_AND_INDENT();
   CON("Main menu");
 
@@ -510,7 +531,8 @@ void Game::main_menu_select(void) {
   wid_update(game_main_menu_window->wid_text_area->wid_text_area);
 }
 
-void Game::new_game(void) {
+void Game::new_game(void)
+{
   TRACE_AND_INDENT();
   game_menu_quick_start(nullptr, 0, 0, 0);
 }

@@ -13,7 +13,8 @@
 #include "my_monst.h"
 #include "my_array_bounds_check.h"
 
-float Thing::how_far_i_can_jump(void) {
+float Thing::how_far_i_can_jump(void)
+{
   TRACE_AND_INDENT();
   auto d = (float) is_jumper_distance() + ceil(0.5 + (pcg_random_range(0, 100) / 100.0));
 
@@ -28,7 +29,8 @@ float Thing::how_far_i_can_jump(void) {
   return d;
 }
 
-bool Thing::try_to_jump(point to, bool be_careful) {
+bool Thing::try_to_jump(point to, bool be_careful)
+{
   TRACE_AND_INDENT();
   if (is_changing_level || is_hidden || is_falling || is_waiting_to_ascend_dungeon || is_waiting_to_descend_sewer ||
       is_waiting_to_descend_dungeon || is_waiting_to_ascend_sewer || is_waiting_to_fall || is_jumping) {
@@ -285,17 +287,20 @@ bool Thing::try_to_jump(point to, bool be_careful) {
   return true;
 }
 
-bool Thing::try_to_jump_carefully(point p) {
+bool Thing::try_to_jump_carefully(point p)
+{
   TRACE_AND_INDENT();
   return try_to_jump(p, true);
 }
 
-bool Thing::try_to_jump_carefree(point p) {
+bool Thing::try_to_jump_carefree(point p)
+{
   TRACE_AND_INDENT();
   return try_to_jump(p, false);
 }
 
-bool Thing::try_to_jump(void) {
+bool Thing::try_to_jump(void)
+{
   TRACE_AND_INDENT();
   if (is_changing_level || is_hidden || is_falling || is_waiting_to_ascend_dungeon || is_waiting_to_descend_sewer ||
       is_waiting_to_descend_dungeon || is_waiting_to_ascend_sewer || is_waiting_to_fall || is_jumping) {
@@ -316,7 +321,8 @@ bool Thing::try_to_jump(void) {
   return false;
 }
 
-bool Thing::try_to_jump_towards_player(void) {
+bool Thing::try_to_jump_towards_player(void)
+{
   TRACE_AND_INDENT();
   if (is_changing_level || is_hidden || is_falling || is_waiting_to_ascend_dungeon || is_waiting_to_descend_sewer ||
       is_waiting_to_descend_dungeon || is_waiting_to_ascend_sewer || is_waiting_to_fall || is_jumping) {
@@ -353,7 +359,8 @@ bool Thing::try_to_jump_towards_player(void) {
   return false;
 }
 
-bool Thing::try_to_jump_away_from_player(void) {
+bool Thing::try_to_jump_away_from_player(void)
+{
   TRACE_AND_INDENT();
   if (is_changing_level || is_hidden || is_falling || is_waiting_to_ascend_dungeon || is_waiting_to_descend_sewer ||
       is_waiting_to_descend_dungeon || is_waiting_to_ascend_sewer || is_waiting_to_fall || is_jumping) {
@@ -383,7 +390,8 @@ bool Thing::try_to_jump_away_from_player(void) {
   return false;
 }
 
-bool Thing::try_harder_to_jump(void) {
+bool Thing::try_harder_to_jump(void)
+{
   TRACE_AND_INDENT();
   if (is_changing_level || is_hidden || is_falling || is_waiting_to_ascend_dungeon || is_waiting_to_descend_sewer ||
       is_waiting_to_descend_dungeon || is_waiting_to_ascend_sewer || is_waiting_to_fall || is_jumping) {
@@ -404,7 +412,8 @@ bool Thing::try_harder_to_jump(void) {
   return false;
 }
 
-void Thing::jump_end(void) {
+void Thing::jump_end(void)
+{
   TRACE_AND_INDENT();
   if (! is_jumping) {
     return;

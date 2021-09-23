@@ -14,7 +14,8 @@
 #include "my_sprintf.h"
 #include "my_thing.h"
 
-void Thing::hide(void) {
+void Thing::hide(void)
+{
   TRACE_AND_INDENT();
   if (is_hidden) {
     return;

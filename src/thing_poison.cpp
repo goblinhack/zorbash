@@ -8,7 +8,8 @@
 #include "my_tile.h"
 #include "my_thing.h"
 
-void Thing::poison_tick(void) {
+void Thing::poison_tick(void)
+{
   TRACE_AND_INDENT();
   auto old_poison = get_poison();
   if (old_poison) {

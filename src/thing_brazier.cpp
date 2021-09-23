@@ -14,7 +14,8 @@
 #include "my_vector_bounds_check.h"
 #include "my_ptrcheck.h"
 
-void Thing::brazier_tick(void) {
+void Thing::brazier_tick(void)
+{
   TRACE_AND_INDENT();
   //
   // This is for if you land on a brazier
@@ -28,7 +29,8 @@ void Thing::brazier_tick(void) {
       fpoint(0, -1),  fpoint(-1, 0), fpoint(1, 0),  fpoint(0, 1),
   };
 
-  FOR_ALL_THINGS_AT_DEPTH(level, t, mid_at.x, mid_at.y, MAP_DEPTH_OBJ) {
+  FOR_ALL_THINGS_AT_DEPTH(level, t, mid_at.x, mid_at.y, MAP_DEPTH_OBJ)
+  {
     if (! t->is_brazier()) {
       continue;
     }

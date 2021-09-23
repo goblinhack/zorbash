@@ -14,7 +14,8 @@
 #include "my_string.h"
 #include "my_ptrcheck.h"
 
-void Level::log_(const char *fmt, va_list args) {
+void Level::log_(const char *fmt, va_list args)
+{
   verify(this);
   auto l = this;
   char buf[ MAXLONGSTR ];
@@ -32,7 +33,8 @@ void Level::log_(const char *fmt, va_list args) {
   putf(MY_STDOUT, buf);
 }
 
-void Level::log(const char *fmt, ...) {
+void Level::log(const char *fmt, ...)
+{
   verify(this);
   log_catchup_missing_indent_levels();
   auto    l = this;
@@ -42,7 +44,8 @@ void Level::log(const char *fmt, ...) {
   va_end(args);
 }
 
-void Level::con_(const char *fmt, va_list args) {
+void Level::con_(const char *fmt, va_list args)
+{
   verify(this);
   auto l = this;
   char buf[ MAXLONGSTR ];
@@ -64,7 +67,8 @@ void Level::con_(const char *fmt, va_list args) {
   FLUSH_THE_CONSOLE();
 }
 
-void Level::con(const char *fmt, ...) {
+void Level::con(const char *fmt, ...)
+{
   verify(this);
   auto    l = this;
   va_list args;
@@ -74,7 +78,8 @@ void Level::con(const char *fmt, ...) {
   va_end(args);
 }
 
-void Level::err_(const char *fmt, va_list args) {
+void Level::err_(const char *fmt, va_list args)
+{
   static bool nested_error;
   if (nested_error) {
     return;
@@ -109,7 +114,8 @@ void Level::err_(const char *fmt, va_list args) {
   nested_error = false;
 }
 
-void Level::err(const char *fmt, ...) {
+void Level::err(const char *fmt, ...)
+{
   static bool nested_error;
   if (nested_error) {
     return;

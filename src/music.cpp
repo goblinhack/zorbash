@@ -12,11 +12,13 @@
 #include "my_file.h"
 #include "my_game.h"
 
-class music {
+class music
+{
 public:
   music(std::string name_alias) : name_alias(name_alias) {}
 
-  ~music(void) {
+  ~music(void)
+  {
     Mix_FreeMusic(m);
     myfree(data);
   }
@@ -34,7 +36,8 @@ static std::string music_current;
 
 bool music_init_done;
 
-bool music_init(void) {
+bool music_init(void)
+{
   TRACE_AND_INDENT();
   //
   // MP3 is a pain to use, use OGG instead
@@ -50,7 +53,8 @@ bool music_init(void) {
   return true;
 }
 
-void music_fini(void) {
+void music_fini(void)
+{
   TRACE_AND_INDENT();
   if (music_init_done) {
     music_init_done = false;
@@ -66,7 +70,8 @@ void music_fini(void) {
   }
 }
 
-bool music_load(uint32_t rate, const std::string &file, const std::string &name_alias) {
+bool music_load(uint32_t rate, const std::string &file, const std::string &name_alias)
+{
   TRACE_AND_INDENT();
   if (name_alias == "") {
     auto m = music_find(name_alias);
@@ -114,19 +119,22 @@ bool music_load(uint32_t rate, const std::string &file, const std::string &name_
 /*
  * Find an existing pice of music.
  */
-bool music_find(const std::string &name_alias) {
+bool music_find(const std::string &name_alias)
+{
   TRACE_AND_INDENT();
   auto result = all_music.find(name_alias);
   return result != all_music.end();
 }
 
-void music_update_volume(void) {
+void music_update_volume(void)
+{
   TRACE_AND_INDENT();
   Mix_VolumeMusic(game->config.music_volume);
   SDL_ClearError();
 }
 
-bool music_play(const std::string &name) {
+bool music_play(const std::string &name)
+{
   TRACE_AND_INDENT();
   if (name == music_current) {
     return true;
@@ -188,12 +196,14 @@ void music_play_game_over (void)
 }
 #endif
 
-void music_play_intro(void) {
+void music_play_intro(void)
+{
   TRACE_AND_INDENT();
   music_play("intro");
 }
 
-void music_halt(void) {
+void music_halt(void)
+{
   TRACE_AND_INDENT();
   music_current = "";
 

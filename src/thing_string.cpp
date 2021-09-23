@@ -16,7 +16,8 @@
 #include "my_thing_template.h"
 #include "my_ptrcheck.h"
 
-std::string Thing::to_string(void) const {
+std::string Thing::to_string(void) const
+{
   TRACE_AND_INDENT();
   auto tpp = tp();
   verify(this);
@@ -55,7 +56,8 @@ std::string Thing::to_string(void) const {
   }
 }
 
-std::string Thing::to_short_string(void) const {
+std::string Thing::to_short_string(void) const
+{
   TRACE_AND_INDENT();
   auto tpp = tp();
   verify(this);
@@ -98,7 +100,8 @@ std::string Thing::to_short_string(void) const {
   }
 }
 
-std::string Thing::to_dbg_string(void) const {
+std::string Thing::to_dbg_string(void) const
+{
   TRACE_AND_INDENT();
   verify(this);
 
@@ -159,7 +162,8 @@ std::string Thing::to_dbg_string(void) const {
 //
 // Like the above, but excludes temporary flags like particles
 //
-std::string Thing::to_dbg_saved_string(void) const {
+std::string Thing::to_dbg_saved_string(void) const
+{
   TRACE_AND_INDENT();
   verify(this);
 

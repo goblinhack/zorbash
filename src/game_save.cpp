@@ -34,7 +34,8 @@ extern uint32_t csum(char *mem, uint32_t len);
     out << bits(magic);                                                                                                \
   }
 
-std::ostream &operator<<(std::ostream &out, Bits< Monstp & > const my) {
+std::ostream &operator<<(std::ostream &out, Bits< Monstp & > const my)
+{
   TRACE_AND_INDENT();
   /////////////////////////////////////////////////////////////////////////
   // Keep these sorted alphabetically to make it easier to see additions
@@ -137,7 +138,8 @@ std::ostream &operator<<(std::ostream &out, Bits< Monstp & > const my) {
   return (out);
 }
 
-std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my) {
+std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
+{
   TRACE_AND_INDENT();
   auto start = out.tellp();
   WRITE_MAGIC(THING_MAGIC_BEGIN + (int) sizeof(Thing));
@@ -379,7 +381,8 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my) {
 
   WRITE_MAGIC(THING_MAGIC_END);
 
-  IF_DEBUG4 {
+  IF_DEBUG4
+  {
     auto diff = out.tellp() - start;
     LOG("SAVE %d bytes %s TP %d ID %x last_mid_at %f,%f monstp %p", (int) diff, name.c_str(), my.t->tp_id, my.t->id.id,
         my.t->last_mid_at.x, my.t->last_mid_at.y, my.t->monstp);
@@ -387,7 +390,8 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my) {
   return (out);
 }
 
-std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my) {
+std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
+{
   TRACE_AND_INDENT();
   IF_DEBUG4 { my.t->log("Save"); }
 
@@ -409,7 +413,8 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my) {
   }
 
   uint32_t csum = 0;
-  FOR_ALL_THING_GROUPS(group) {
+  FOR_ALL_THING_GROUPS(group)
+  {
     for (auto p : my.t->all_things[ group ]) {
       auto t = p.second;
       csum += t->mid_at.x + t->mid_at.y + t->id.id;
@@ -515,7 +520,8 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my) {
 
 #ifdef ENABLE_DEBUG_THING_SER
   LOG("DGN: Check things");
-  FOR_ALL_THING_GROUPS(group) {
+  FOR_ALL_THING_GROUPS(group)
+  {
     for (auto p : my.t->all_things[ group ]) {
       auto t = p.second;
       my.t->check_thing(t);
@@ -540,7 +546,8 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my) {
 #endif
 
   LOG("DGN: Save things");
-  FOR_ALL_THING_GROUPS(group) {
+  FOR_ALL_THING_GROUPS(group)
+  {
     for (auto x = 0; x < MAP_WIDTH; x++) {
       for (auto y = 0; y < MAP_HEIGHT; y++) {
         for (auto slot = 0; slot < MAP_SLOTS; slot++) {
@@ -566,7 +573,8 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my) {
   return (out);
 }
 
-std::ostream &operator<<(std::ostream &out, Bits< const class World & > const my) {
+std::ostream &operator<<(std::ostream &out, Bits< const class World & > const my)
+{
   TRACE_AND_INDENT();
   for (auto x = 0; x < LEVELS_ACROSS; ++x) {
     for (auto y = 0; y < LEVELS_DOWN; ++y) {
@@ -594,7 +602,8 @@ std::ostream &operator<<(std::ostream &out, Bits< const class World & > const my
   return (out);
 }
 
-std::ostream &operator<<(std::ostream &out, Bits< const Config & > const my) {
+std::ostream &operator<<(std::ostream &out, Bits< const Config & > const my)
+{
   TRACE_AND_INDENT();
   uint32_t header_size = sizeof(Config);
   /* uint32_t           header_size                  */ out << bits(header_size);
@@ -682,7 +691,8 @@ std::ostream &operator<<(std::ostream &out, Bits< const Config & > const my) {
   return (out);
 }
 
-std::ostream &operator<<(std::ostream &out, Bits< const class Game & > const my) {
+std::ostream &operator<<(std::ostream &out, Bits< const class Game & > const my)
+{
   TRACE_AND_INDENT();
   uint32_t header_size = sizeof(Game);
   out << bits(my.t.version);
@@ -718,7 +728,8 @@ std::ostream &operator<<(std::ostream &out, Bits< const class Game & > const my)
   return (out);
 }
 
-bool Game::save(std::string file_to_save) {
+bool Game::save(std::string file_to_save)
+{
   TRACE_AND_INDENT();
   std::stringstream s(std::ios::in | std::ios::out | std::ios::binary);
 
@@ -763,7 +774,8 @@ bool Game::save(std::string file_to_save) {
   //
   // Uncompress and check the data matches
   //
-  IF_DEBUG4 {
+  IF_DEBUG4
+  {
     HEAP_ALLOC(tmp_compressed, compressed_len);
     HEAP_ALLOC(tmp_uncompressed, uncompressed_len);
     memcpy(tmp_compressed, compressed, compressed_len);
@@ -809,7 +821,8 @@ bool Game::save(std::string file_to_save) {
   return true;
 }
 
-void Game::save(void) {
+void Game::save(void)
+{
   TRACE_AND_INDENT();
   LOG("-");
   CON("DGN: Saving %s", save_file.c_str());
@@ -824,7 +837,8 @@ void Game::save(void) {
   LOG("-");
 }
 
-void Game::save(int slot) {
+void Game::save(int slot)
+{
   TRACE_AND_INDENT();
   if (slot < 0) {
     return;
@@ -863,7 +877,8 @@ void Game::save(int slot) {
   TOPCON("Saved the game to %s.", save_file.c_str());
 }
 
-void Game::save_snapshot(void) {
+void Game::save_snapshot(void)
+{
   TRACE_AND_INDENT();
   for (auto x = 0; x < LEVELS_ACROSS; ++x) {
     for (auto y = 0; y < LEVELS_DOWN; ++y) {
@@ -894,7 +909,8 @@ void Game::save_snapshot(void) {
   TOPCON("Saved the game to %s.", save_file.c_str());
 }
 
-void Game::save_config(void) {
+void Game::save_config(void)
+{
   TRACE_AND_INDENT();
   auto          filename = saved_dir + "config";
   std::ofstream out(filename, std::ios::binary);
@@ -903,14 +919,16 @@ void Game::save_config(void) {
   game->config.dump("WROTE:");
 }
 
-void wid_save_destroy(void) {
+void wid_save_destroy(void)
+{
   TRACE_AND_INDENT();
   delete wid_save;
   wid_save = nullptr;
   game->change_state(Game::STATE_NORMAL);
 }
 
-static uint8_t wid_save_key_up(Widp w, const struct SDL_Keysym *key) {
+static uint8_t wid_save_key_up(Widp w, const struct SDL_Keysym *key)
+{
   TRACE_AND_INDENT();
   if (sdl_shift_held) {
     if (key->scancode == (SDL_Scancode) game->config.key_console) {
@@ -961,7 +979,8 @@ static uint8_t wid_save_key_up(Widp w, const struct SDL_Keysym *key) {
   return true;
 }
 
-static uint8_t wid_save_key_down(Widp w, const struct SDL_Keysym *key) {
+static uint8_t wid_save_key_down(Widp w, const struct SDL_Keysym *key)
+{
   TRACE_AND_INDENT();
   if (sdl_shift_held) {
     if (key->scancode == (SDL_Scancode) game->config.key_console) {
@@ -972,7 +991,8 @@ static uint8_t wid_save_key_down(Widp w, const struct SDL_Keysym *key) {
   return true;
 }
 
-static uint8_t wid_save_mouse_up(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t wid_save_mouse_up(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   auto slot = wid_get_int_context(w);
   game->save(slot);
@@ -980,7 +1000,8 @@ static uint8_t wid_save_mouse_up(Widp w, int32_t x, int32_t y, uint32_t button) 
   return true;
 }
 
-void Game::save_select(void) {
+void Game::save_select(void)
+{
   TRACE_AND_INDENT();
   if (wid_save) {
     return;

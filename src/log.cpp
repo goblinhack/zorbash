@@ -20,7 +20,8 @@
 // Whan a log appears, if some indent levels are missing, then pull them
 // out of the callstack - it's like a mini traceback
 //
-void log_catchup_missing_indent_levels(void) {
+void log_catchup_missing_indent_levels(void)
+{
   //
   // Seems to need more work - not reliable
   //
@@ -49,7 +50,8 @@ void log_catchup_missing_indent_levels(void) {
 #endif
 }
 
-static void log_(const char *fmt, va_list args) {
+static void log_(const char *fmt, va_list args)
+{
   char buf[ MAXLONGSTR ];
   int  len;
 
@@ -69,7 +71,8 @@ static void log_(const char *fmt, va_list args) {
   putf(MY_STDOUT, buf);
 }
 
-static void log_missing_(const char *fmt, va_list args) {
+static void log_missing_(const char *fmt, va_list args)
+{
   char buf[ MAXLONGSTR ];
 
   int len;
@@ -90,7 +93,8 @@ static void log_missing_(const char *fmt, va_list args) {
   putf(MY_STDOUT, buf);
 }
 
-void LOG(const char *fmt, ...) {
+void LOG(const char *fmt, ...)
+{
   log_catchup_missing_indent_levels();
   va_list args;
   va_start(args, fmt);
@@ -98,14 +102,16 @@ void LOG(const char *fmt, ...) {
   va_end(args);
 }
 
-void LOG_MISSING(const char *fmt, ...) {
+void LOG_MISSING(const char *fmt, ...)
+{
   va_list args;
   va_start(args, fmt);
   log_missing_(fmt, args);
   va_end(args);
 }
 
-static void warn_(const char *fmt, va_list args) {
+static void warn_(const char *fmt, va_list args)
+{
   char buf[ MAXLONGSTR ];
   int  len;
 
@@ -120,7 +126,8 @@ static void warn_(const char *fmt, va_list args) {
   wid_console_log(buf);
 }
 
-void WARN(const char *fmt, ...) {
+void WARN(const char *fmt, ...)
+{
   va_list args;
 
   va_start(args, fmt);
@@ -128,7 +135,8 @@ void WARN(const char *fmt, ...) {
   va_end(args);
 }
 
-static void con_(const char *fmt, va_list args) {
+static void con_(const char *fmt, va_list args)
+{
   char buf[ MAXLONGSTR ];
   int  len;
 
@@ -147,7 +155,8 @@ static void con_(const char *fmt, va_list args) {
   FLUSH_THE_CONSOLE();
 }
 
-static void con_(const wchar_t *fmt, va_list args) {
+static void con_(const wchar_t *fmt, va_list args)
+{
   {
     char buf[ MAXLONGSTR ];
 
@@ -179,7 +188,8 @@ static void con_(const wchar_t *fmt, va_list args) {
   FLUSH_THE_CONSOLE();
 }
 
-void con(const wchar_t *fmt) {
+void con(const wchar_t *fmt)
+{
   {
     char buf[ MAXLONGSTR ];
 
@@ -199,7 +209,8 @@ void con(const wchar_t *fmt) {
   FLUSH_THE_CONSOLE();
 }
 
-static void topcon_(const char *fmt, va_list args) {
+static void topcon_(const char *fmt, va_list args)
+{
   char buf[ MAXLONGSTR ];
   char ts[ MAXLONGSTR / 2 ];
   int  len;
@@ -220,7 +231,8 @@ static void topcon_(const char *fmt, va_list args) {
   FLUSH_THE_CONSOLE();
 }
 
-static void topcon_(const wchar_t *fmt, va_list args) {
+static void topcon_(const wchar_t *fmt, va_list args)
+{
   {
     char ts[ MAXLONGSTR ];
     ts[ 0 ] = '\0';
@@ -252,7 +264,8 @@ static void topcon_(const wchar_t *fmt, va_list args) {
   FLUSH_THE_CONSOLE();
 }
 
-void topcon(const wchar_t *fmt) {
+void topcon(const wchar_t *fmt)
+{
   {
     char ts[ MAXLONGSTR ];
     ts[ 0 ] = '\0';
@@ -272,7 +285,8 @@ void topcon(const wchar_t *fmt) {
   FLUSH_THE_CONSOLE();
 }
 
-void CON(const char *fmt, ...) {
+void CON(const char *fmt, ...)
+{
   log_catchup_missing_indent_levels();
   va_list args;
   va_start(args, fmt);
@@ -280,7 +294,8 @@ void CON(const char *fmt, ...) {
   va_end(args);
 }
 
-void CON(const wchar_t *fmt, ...) {
+void CON(const wchar_t *fmt, ...)
+{
   va_list args;
 
   va_start(args, fmt);
@@ -288,7 +303,8 @@ void CON(const wchar_t *fmt, ...) {
   va_end(args);
 }
 
-void TOPCON(const char *fmt, ...) {
+void TOPCON(const char *fmt, ...)
+{
   va_list args;
 
   va_start(args, fmt);
@@ -296,7 +312,8 @@ void TOPCON(const char *fmt, ...) {
   va_end(args);
 }
 
-void TOPCON(const wchar_t *fmt, ...) {
+void TOPCON(const wchar_t *fmt, ...)
+{
   va_list args;
 
   va_start(args, fmt);
@@ -304,7 +321,8 @@ void TOPCON(const wchar_t *fmt, ...) {
   va_end(args);
 }
 
-static void dying_(const char *fmt, va_list args) {
+static void dying_(const char *fmt, va_list args)
+{
   char buf[ MAXLONGSTR ];
   int  len;
 
@@ -323,7 +341,8 @@ static void dying_(const char *fmt, va_list args) {
   FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS();
 }
 
-static void err_(const char *fmt, va_list args) {
+static void err_(const char *fmt, va_list args)
+{
   static bool nested_error;
   if (nested_error) {
     return;
@@ -361,7 +380,8 @@ static void err_(const char *fmt, va_list args) {
   nested_error = false;
 }
 
-static void croak_(const char *fmt, va_list args) {
+static void croak_(const char *fmt, va_list args)
+{
   if (g_die_occurred) {
     fprintf(stderr, "\nNESTED FATAL ERROR %s %s %d ", __FILE__, __FUNCTION__, __LINE__);
     exit(1);
@@ -395,7 +415,8 @@ static void croak_(const char *fmt, va_list args) {
   die();
 }
 
-void CROAK(const char *fmt, ...) {
+void CROAK(const char *fmt, ...)
+{
   va_list args;
 
   va_start(args, fmt);
@@ -403,7 +424,8 @@ void CROAK(const char *fmt, ...) {
   va_end(args);
 }
 
-static void croak_clean_(const char *fmt, va_list args) {
+static void croak_clean_(const char *fmt, va_list args)
+{
   if (g_die_occurred) {
     fprintf(stderr, "\nNESTED FATAL ERROR %s %s %d ", __FILE__, __FUNCTION__, __LINE__);
     exit(1);
@@ -415,7 +437,8 @@ static void croak_clean_(const char *fmt, va_list args) {
   die();
 }
 
-void CROAK_CLEAN(const char *fmt, ...) {
+void CROAK_CLEAN(const char *fmt, ...)
+{
   va_list args;
 
   va_start(args, fmt);
@@ -423,7 +446,8 @@ void CROAK_CLEAN(const char *fmt, ...) {
   va_end(args);
 }
 
-void DYING(const char *fmt, ...) {
+void DYING(const char *fmt, ...)
+{
   va_list args;
 
   va_start(args, fmt);
@@ -431,7 +455,8 @@ void DYING(const char *fmt, ...) {
   va_end(args);
 }
 
-void myerr(const char *fmt, ...) {
+void myerr(const char *fmt, ...)
+{
   static bool nested_error;
   if (nested_error) {
     return;
@@ -465,7 +490,8 @@ void myerr(const char *fmt, ...) {
   }
 }
 
-static void msgerr_(const char *fmt, va_list args) {
+static void msgerr_(const char *fmt, va_list args)
+{
   char buf[ MAXLONGSTR ];
   int  len;
 
@@ -496,7 +522,8 @@ static void msgerr_(const char *fmt, va_list args) {
   FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS();
 }
 
-void GAME_UI_MSG_BOX(const char *fmt, ...) {
+void GAME_UI_MSG_BOX(const char *fmt, ...)
+{
   va_list args;
 
   va_start(args, fmt);
@@ -504,7 +531,8 @@ void GAME_UI_MSG_BOX(const char *fmt, ...) {
   va_end(args);
 }
 
-static void sdl_msgerr_(const char *fmt, va_list args) {
+static void sdl_msgerr_(const char *fmt, va_list args)
+{
   char buf[ MAXLONGSTR ];
 #if SDL_MAJOR_VERSION >= 2
   int ts_len;
@@ -540,7 +568,8 @@ static void sdl_msgerr_(const char *fmt, va_list args) {
   FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS();
 }
 
-void SDL_MSG_BOX(const char *fmt, ...) {
+void SDL_MSG_BOX(const char *fmt, ...)
+{
   va_list args;
 
   va_start(args, fmt);
@@ -548,7 +577,8 @@ void SDL_MSG_BOX(const char *fmt, ...) {
   va_end(args);
 }
 
-static void botcon_(const char *fmt, va_list args) {
+static void botcon_(const char *fmt, va_list args)
+{
   char buf[ MAXLONGSTR ];
   char ts[ MAXLONGSTR / 2 ];
   int  len;
@@ -568,7 +598,8 @@ static void botcon_(const char *fmt, va_list args) {
   // FLUSH_THE_CONSOLE();
 }
 
-static void botcon_(const wchar_t *fmt, va_list args) {
+static void botcon_(const wchar_t *fmt, va_list args)
+{
   {
     char ts[ MAXLONGSTR ];
     ts[ 0 ] = '\0';
@@ -600,7 +631,8 @@ static void botcon_(const wchar_t *fmt, va_list args) {
   // FLUSH_THE_CONSOLE();
 }
 
-void botcon(const wchar_t *fmt) {
+void botcon(const wchar_t *fmt)
+{
   {
     // fwprintf(MY_STDOUT, L"%S\n", fmt);
     // term_log(fmt);
@@ -612,7 +644,8 @@ void botcon(const wchar_t *fmt) {
   // FLUSH_THE_CONSOLE();
 }
 
-void BOTCON(const char *fmt, ...) {
+void BOTCON(const char *fmt, ...)
+{
   va_list args;
 
   va_start(args, fmt);
@@ -620,7 +653,8 @@ void BOTCON(const char *fmt, ...) {
   va_end(args);
 }
 
-void BOTCON(const wchar_t *fmt, ...) {
+void BOTCON(const wchar_t *fmt, ...)
+{
   va_list args;
 
   va_start(args, fmt);

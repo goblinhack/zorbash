@@ -14,7 +14,8 @@
 //
 // push/pop are for things moving on the same level
 //
-void Thing::level_push(void) {
+void Thing::level_push(void)
+{
   TRACE_AND_INDENT();
   level_pop();
 

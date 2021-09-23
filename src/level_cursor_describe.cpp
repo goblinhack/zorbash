@@ -18,7 +18,8 @@
 #include "my_sdl.h"
 #include "my_template.h"
 
-void Level::cursor_describe(void) {
+void Level::cursor_describe(void)
+{
   TRACE_AND_INDENT();
   if (game->robot_mode) {
     return;

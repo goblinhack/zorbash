@@ -15,7 +15,8 @@
 #include "my_random.h"
 #include "my_globals.h"
 
-void Thing::corrode_tick(void) {
+void Thing::corrode_tick(void)
+{
   TRACE_AND_INDENT();
   if (is_floating() || is_ethereal()) {
     return;

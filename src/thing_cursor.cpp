@@ -17,7 +17,8 @@
 #include "my_wid_console.h"
 #include "my_wid_bag.h"
 
-void Thing::cursor_hover_over_check(void) {
+void Thing::cursor_hover_over_check(void)
+{
   if (! is_blitted) {
     return;
   }

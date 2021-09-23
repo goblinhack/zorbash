@@ -22,12 +22,14 @@ static int  g_light_overlay_texid;
 static Texp g_glow_overlay_tex;
 static int  g_glow_overlay_texid;
 
-Light::Light(void) {
+Light::Light(void)
+{
   TRACE_AND_INDENT();
   newptr(this, "Light");
 }
 
-Light::~Light(void) {
+Light::~Light(void)
+{
   TRACE_AND_INDENT();
   verify(this);
   if (is_being_destroyed) {
@@ -38,7 +40,8 @@ Light::~Light(void) {
   oldptr(this);
 }
 
-void Light::draw_pixel(int16_t index, const point &p0, const point &p1) {
+void Light::draw_pixel(int16_t index, const point &p0, const point &p1)
+{
   RayPoint r;
   r.p        = p1;
   r.distance = DISTANCE(p0.x, p0.y, p1.x, p1.y);
@@ -46,7 +49,8 @@ void Light::draw_pixel(int16_t index, const point &p0, const point &p1) {
 }
 
 // http://www.edepot.com/linee.html
-void Light::draw_line(int16_t index, const point &p0, const point &p1) {
+void Light::draw_line(int16_t index, const point &p0, const point &p1)
+{
   points[ index ].resize(0);
 
   const point start = p0;
@@ -102,7 +106,8 @@ void Light::draw_line(int16_t index, const point &p0, const point &p1) {
   }
 }
 
-Lightp light_new(Thingp owner, point offset, int strength, color col, int fbo) {
+Lightp light_new(Thingp owner, point offset, int strength, color col, int fbo)
+{
   TRACE_AND_INDENT();
   auto l = new Light(); // std::make_shared< class Light >();
 
@@ -119,7 +124,8 @@ Lightp light_new(Thingp owner, point offset, int strength, color col, int fbo) {
   return (l);
 }
 
-Lightp light_new(Thingp owner, point offset, int strength) {
+Lightp light_new(Thingp owner, point offset, int strength)
+{
   TRACE_AND_INDENT();
   auto l = new Light(); // std::make_shared< class Light >();
 
@@ -136,7 +142,8 @@ Lightp light_new(Thingp owner, point offset, int strength) {
   return (l);
 }
 
-void Light::update(int strength_in) {
+void Light::update(int strength_in)
+{
   TRACE_AND_INDENT();
   if (! strength_in) {
     DIE("no light strength set");
@@ -148,7 +155,8 @@ void Light::update(int strength_in) {
   update();
 }
 
-void Light::update(void) {
+void Light::update(void)
+{
   TRACE_AND_INDENT();
   if (! strength) {
     DIE("no light strength set");
@@ -173,13 +181,15 @@ void Light::update(void) {
 
 void Light::destroy(void) { TRACE_AND_INDENT(); }
 
-void Light::reset(void) {
+void Light::reset(void)
+{
   cached_gl_cmds.clear();
   cached_pixel_map_at = point(-1, -1);
   cached_light_pos    = point(-1, -1);
 }
 
-bool Light::calculate(void) {
+bool Light::calculate(void)
+{
 #if 0
   std::array< std::array<bool, MAP_WIDTH>, MAP_HEIGHT> walked = {};
 #endif
@@ -541,7 +551,8 @@ bool Light::calculate(void) {
   return true;
 }
 
-void Light::render_triangle_fans(void) {
+void Light::render_triangle_fans(void)
+{
   point light_pos = owner->last_blit_at;
 
   if (fbo == FBO_FULLMAP_LIGHT) {
@@ -609,7 +620,8 @@ void Light::render_triangle_fans(void) {
   }
 }
 
-void Light::render(int ray_cast_only) {
+void Light::render(int ray_cast_only)
+{
   if (! g_light_overlay_tex) {
     g_light_overlay_tex   = tex_load("", "light", GL_NEAREST);
     g_light_overlay_texid = tex_get_gl_binding(g_light_overlay_tex);
@@ -631,7 +643,8 @@ void Light::render(int ray_cast_only) {
   render_triangle_fans();
 }
 
-void Level::lights_render(int minx, int miny, int maxx, int maxy, int fbo) {
+void Level::lights_render(int minx, int miny, int maxx, int maxy, int fbo)
+{
   TRACE_AND_INDENT();
   if (player) {
     glBlendFunc(GL_SRC_ALPHA, GL_ONE);
@@ -680,12 +693,14 @@ void Level::lights_render(int minx, int miny, int maxx, int maxy, int fbo) {
 //
 // Draw point source lights
 //
-void Level::lights_render_small_lights(int minx, int miny, int maxx, int maxy, int fbo, bool include_player_lights) {
+void Level::lights_render_small_lights(int minx, int miny, int maxx, int maxy, int fbo, bool include_player_lights)
+{
   TRACE_AND_INDENT();
   blit_init();
   for (auto y = miny; y < maxy; y++) {
     for (auto x = minx; x < maxx; x++) {
-      FOR_ALL_LIGHTS_AT_DEPTH(this, t, x, y) {
+      FOR_ALL_LIGHTS_AT_DEPTH(this, t, x, y)
+      {
         for (auto &l : t->get_light()) {
 
           if (player && (l->owner == player)) {
@@ -743,7 +758,8 @@ void Level::lights_render_small_lights(int minx, int miny, int maxx, int maxy, i
 
   for (auto y = miny; y < maxy; y++) {
     for (auto x = minx; x < maxx; x++) {
-      FOR_ALL_LIGHTS_AT_DEPTH(this, t, x, y) {
+      FOR_ALL_LIGHTS_AT_DEPTH(this, t, x, y)
+      {
         for (auto &l : t->get_light()) {
 
           if (player && (l->owner == player)) {
@@ -809,7 +825,8 @@ void Level::lights_render_small_lights(int minx, int miny, int maxx, int maxy, i
 //
 // Alow distant lights to fade
 //
-void Level::lights_fade(void) {
+void Level::lights_fade(void)
+{
   TRACE_AND_INDENT();
   for (auto y = 0; y < MAP_HEIGHT; y++) {
     for (auto x = 0; x < MAP_WIDTH; x++) {
@@ -824,11 +841,13 @@ void Level::lights_fade(void) {
 //
 // Refresh lights on a new level. Ignore blitted postion.
 //
-void Level::lights_update_new_level(void) {
+void Level::lights_update_new_level(void)
+{
   TRACE_AND_INDENT();
   for (auto y = 0; y < MAP_HEIGHT; y++) {
     for (auto x = 0; x < MAP_WIDTH; x++) {
-      FOR_ALL_LIGHTS_AT_DEPTH(this, t, x, y) {
+      FOR_ALL_LIGHTS_AT_DEPTH(this, t, x, y)
+      {
         //
         // Need to do this as light position depends on blitting
         //
@@ -846,11 +865,13 @@ void Level::lights_update_new_level(void) {
 //
 // Update lights on existing level e.g. torch goes out
 //
-void Level::lights_update_same_level(void) {
+void Level::lights_update_same_level(void)
+{
   TRACE_AND_INDENT();
   for (auto y = 0; y < MAP_HEIGHT; y++) {
     for (auto x = 0; x < MAP_WIDTH; x++) {
-      FOR_ALL_LIGHTS_AT_DEPTH(this, t, x, y) {
+      FOR_ALL_LIGHTS_AT_DEPTH(this, t, x, y)
+      {
         for (auto &l : t->get_light()) {
           l->update();
           l->reset();

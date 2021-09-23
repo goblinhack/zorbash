@@ -22,7 +22,8 @@
 //
 // Lower level function than dead. Adds the thing to gc.
 //
-void Thing::kill(Thingp killer, const char *reason) {
+void Thing::kill(Thingp killer, const char *reason)
+{
   //
   // Check we're not in a death loop
   //
@@ -266,18 +267,21 @@ void Thing::kill(Thingp killer, const char *reason) {
   gc();
 }
 
-void Thing::kill(Thingp killer, const std::string &reason) {
+void Thing::kill(Thingp killer, const std::string &reason)
+{
   TRACE_AND_INDENT();
   kill(killer, reason.c_str());
 }
 
-bool Thing::if_matches_then_kill(const std::string &what, const point &p) {
+bool Thing::if_matches_then_kill(const std::string &what, const point &p)
+{
   TRACE_AND_INDENT();
   //
   // Don't destroy the floor under critical items
   //
   if ((what == "is_floor") || (what == "is_corridor")) {
-    FOR_ALL_THINGS(level, t, p.x, p.y) {
+    FOR_ALL_THINGS(level, t, p.x, p.y)
+    {
       if (t->is_critical_to_level()) {
         return true;
       }
@@ -285,7 +289,8 @@ bool Thing::if_matches_then_kill(const std::string &what, const point &p) {
     FOR_ALL_THINGS_END()
   }
 
-  FOR_ALL_THINGS(level, t, p.x, p.y) {
+  FOR_ALL_THINGS(level, t, p.x, p.y)
+  {
     if (t->is_indestructible()) {
       continue;
     }

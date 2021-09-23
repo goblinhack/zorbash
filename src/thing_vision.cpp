@@ -9,7 +9,8 @@
 #include "my_level.h"
 #include "my_thing.h"
 
-bool Level::can_see_obstacle(int x, int y) {
+bool Level::can_see_obstacle(int x, int y)
+{
   if (is_wall(x, y) || is_door(x, y) || is_rock(x, y)) {
     return true;
   }
@@ -17,7 +18,8 @@ bool Level::can_see_obstacle(int x, int y) {
   return false;
 }
 
-bool Level::can_see_(int x0_in, int y0_in, int x1_in, int y1_in, int flag) {
+bool Level::can_see_(int x0_in, int y0_in, int x1_in, int y1_in, int flag)
+{
   float temp;
   float dx;
   float dy;
@@ -106,7 +108,8 @@ bool Level::can_see_(int x0_in, int y0_in, int x1_in, int y1_in, int flag) {
 /*
  * Can A see B unimpeded?
  */
-bool Level::can_see(int x0, int y0, int x1, int y1) {
+bool Level::can_see(int x0, int y0, int x1, int y1)
+{
   float slope = 100.0;
 
   if (x0 != x1) {

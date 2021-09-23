@@ -21,19 +21,22 @@
 
 static Widp wid_keyboard_choose_seed;
 
-static void selected(Widp w, const std::wstring &text) {
+static void selected(Widp w, const std::wstring &text)
+{
   wid_destroy(&wid_keyboard_choose_seed);
   g_opt_seed_name = wstring_to_string(text);
   game->save_config();
   game->main_menu_select();
 }
 
-static void cancelled(Widp w, const std::wstring &text) {
+static void cancelled(Widp w, const std::wstring &text)
+{
   wid_destroy(&wid_keyboard_choose_seed);
   game->main_menu_select();
 }
 
-void Game::choose_seed_select(void) {
+void Game::choose_seed_select(void)
+{
   TRACE_AND_INDENT();
   CON("Choose seed menu");
 

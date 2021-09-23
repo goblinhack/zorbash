@@ -21,7 +21,8 @@ std::array< GLuint, MAX_FBO > fbo_id        = {};
 std::array< GLuint, MAX_FBO > fbo_tex_id    = {};
 std::array< isize, MAX_FBO >  fbo_size      = {};
 
-void gl_init_2d_mode(void) {
+void gl_init_2d_mode(void)
+{
   TRACE_AND_INDENT();
   GL_ERROR_CHECK();
 
@@ -68,7 +69,8 @@ void gl_init_2d_mode(void) {
   GL_ERROR_CHECK();
 }
 
-void gl_enter_2d_mode(void) {
+void gl_enter_2d_mode(void)
+{
   TRACE_AND_INDENT();
   if (in_2d_mode) {
     gl_leave_2d_mode();
@@ -114,7 +116,8 @@ void gl_enter_2d_mode(void) {
   in_2d_mode = true;
 }
 
-void gl_enter_2d_mode(int w, int h) {
+void gl_enter_2d_mode(int w, int h)
+{
   TRACE_AND_INDENT();
   if (in_2d_mode) {
     gl_leave_2d_mode();
@@ -163,7 +166,8 @@ void gl_enter_2d_mode(int w, int h) {
   in_2d_mode = true;
 }
 
-void gl_leave_2d_mode(void) {
+void gl_leave_2d_mode(void)
+{
   TRACE_AND_INDENT();
   if (! in_2d_mode) {
     return;
@@ -180,7 +184,8 @@ void gl_leave_2d_mode(void) {
   in_2d_mode = false;
 }
 
-void gl_enter_2_5d_mode(void) {
+void gl_enter_2_5d_mode(void)
+{
   TRACE_AND_INDENT();
   glEnable(GL_DEPTH_TEST);
   glClear(GL_COLOR_BUFFER_BIT);
@@ -209,7 +214,8 @@ void gl_enter_2_5d_mode(void) {
   glCullFace(GL_BACK); // don't draw back faces
 }
 
-void gl_leave_2_5d_mode(void) {
+void gl_leave_2_5d_mode(void)
+{
   TRACE_AND_INDENT();
   glDisable(GL_DEPTH_TEST);
 
@@ -221,7 +227,8 @@ void gl_leave_2_5d_mode(void) {
 }
 
 static void gl_init_fbo_(int fbo, GLuint *render_buf_id, GLuint *fbo_id, GLuint *fbo_tex_id, GLuint tex_width,
-                         GLuint tex_height) {
+                         GLuint tex_height)
+{
   TRACE_AND_INDENT();
   DBG4("GFX: create FBO, size %dx%d", tex_width, tex_height);
   GL_ERROR_CHECK();
@@ -381,7 +388,8 @@ static void gl_init_fbo_(int fbo, GLuint *render_buf_id, GLuint *fbo_id, GLuint 
   GL_ERROR_CHECK();
 }
 
-void gl_init_fbo(void) {
+void gl_init_fbo(void)
+{
   int i;
 
   CON("GFX: create FBOs");
@@ -416,7 +424,8 @@ void gl_init_fbo(void) {
   GL_ERROR_CHECK();
 }
 
-void fbo_get_size(int fbo, int &w, int &h) {
+void fbo_get_size(int fbo, int &w, int &h)
+{
   w = game->config.game_pix_width;
   h = game->config.game_pix_height;
 
@@ -465,7 +474,8 @@ void fbo_get_size(int fbo, int &w, int &h) {
   }
 }
 
-void blit_fbo(int fbo) {
+void blit_fbo(int fbo)
+{
   int tex_width;
   int tex_height;
   fbo_get_size(fbo, tex_width, tex_height);
@@ -474,19 +484,22 @@ void blit_fbo(int fbo) {
   blit_flush();
 }
 
-void blit_fbo_game_pix(int fbo) {
+void blit_fbo_game_pix(int fbo)
+{
   blit_init();
   blit(fbo_tex_id[ fbo ], 0.0, 1.0, 1.0, 0.0, 0, 0, game->config.game_pix_width, game->config.game_pix_height);
   blit_flush();
 }
 
-void blit_fbo_ui_pix(int fbo) {
+void blit_fbo_ui_pix(int fbo)
+{
   blit_init();
   blit(fbo_tex_id[ fbo ], 0.0, 1.0, 1.0, 0.0, 0, 0, game->config.ui_pix_width, game->config.ui_pix_height);
   blit_flush();
 }
 
-void blit_fbo_window_pix(int fbo) {
+void blit_fbo_window_pix(int fbo)
+{
   blit_init();
   blit(fbo_tex_id[ fbo ], 0.0, 1.0, 1.0, 0.0, 0, 0, game->config.window_pix_width, game->config.window_pix_height);
   blit_flush();
@@ -522,7 +535,8 @@ GLfloat *bufp;
 GLfloat *bufp_end;
 int      buf_tex;
 
-void blit_init(void) {
+void blit_init(void)
+{
   TRACE_AND_INDENT();
   buf_tex = 0;
 
@@ -553,7 +567,8 @@ void blit_init(void) {
   bufp_end = gl_array_buf_end;
 }
 
-void blit_fini(void) {
+void blit_fini(void)
+{
   TRACE_AND_INDENT();
   if (gl_array_buf) {
     myfree(gl_array_buf);
@@ -561,7 +576,8 @@ void blit_fini(void) {
   }
 }
 
-void blit_flush(void) {
+void blit_flush(void)
+{
   TRACE_AND_INDENT();
   if (gl_array_buf == bufp) {
     return;
@@ -605,17 +621,20 @@ void blit_flush(void) {
   blit_init();
 }
 
-void blit_flush_triangle_fan(void) {
+void blit_flush_triangle_fan(void)
+{
   TRACE_AND_INDENT();
   blit_flush_triangle_fan(gl_array_buf, bufp);
 }
 
-void blit_flush_colored_triangle_fan(void) {
+void blit_flush_colored_triangle_fan(void)
+{
   TRACE_AND_INDENT();
   blit_flush_colored_triangle_fan(gl_array_buf, bufp);
 }
 
-void blit_flush_colored_triangle_fan(float *b, float *e) {
+void blit_flush_colored_triangle_fan(float *b, float *e)
+{
   TRACE_AND_INDENT();
   glEnableClientState(GL_VERTEX_ARRAY);
   glEnableClientState(GL_COLOR_ARRAY);
@@ -644,7 +663,8 @@ void blit_flush_colored_triangle_fan(float *b, float *e) {
   blit_init();
 }
 
-void blit_flush_triangle_fan(float *b, float *e) {
+void blit_flush_triangle_fan(float *b, float *e)
+{
   TRACE_AND_INDENT();
   glEnableClientState(GL_VERTEX_ARRAY);
 
@@ -665,7 +685,8 @@ void blit_flush_triangle_fan(float *b, float *e) {
   blit_init();
 }
 
-void gl_blitquad(GLushort left, GLushort top, GLushort right, GLushort bottom) {
+void gl_blitquad(GLushort left, GLushort top, GLushort right, GLushort bottom)
+{
   GLushort  xy[ 4 * 2 ];
   GLushort *xyp = xy;
 
@@ -683,7 +704,8 @@ void gl_blitquad(GLushort left, GLushort top, GLushort right, GLushort bottom) {
   glDisableClientState(GL_VERTEX_ARRAY);
 }
 
-void gl_blitquad(const point &tl, const point &tr, const point &bl, const point &br) {
+void gl_blitquad(const point &tl, const point &tr, const point &bl, const point &br)
+{
   GLushort  xy[ 4 * 2 ];
   GLushort *xyp = xy;
 
@@ -701,7 +723,8 @@ void gl_blitquad(const point &tl, const point &tr, const point &bl, const point 
   glDisableClientState(GL_VERTEX_ARRAY);
 }
 
-void gl_blitsquare(GLushort left, GLushort top, GLushort right, GLushort bottom) {
+void gl_blitsquare(GLushort left, GLushort top, GLushort right, GLushort bottom)
+{
   GLushort  xy[ 4 * 2 ];
   GLushort *xyp = xy;
 
@@ -719,7 +742,8 @@ void gl_blitsquare(GLushort left, GLushort top, GLushort right, GLushort bottom)
   glDisableClientState(GL_VERTEX_ARRAY);
 }
 
-void gl_blitline(GLushort left, GLushort top, GLushort right, GLushort bottom) {
+void gl_blitline(GLushort left, GLushort top, GLushort right, GLushort bottom)
+{
   GLushort  xy[ 2 * 2 ];
   GLushort *xyp = xy;
 
@@ -778,7 +802,8 @@ PFNGLBINDBUFFERARBPROC           glBindBufferARB_EXT;
 PFNGLBUFFERDATAARBPROC           glBufferDataARB_EXT;
 PFNGLDELETEBUFFERSARBPROC        glDeleteBuffersARB_EXT;
 
-static void gl_ext_load(void) {
+static void gl_ext_load(void)
+{
   TRACE_AND_INDENT();
   glCreateProgram_EXT = (__typeof__(glCreateProgram_EXT)) wglGetProcAddress("glCreateProgram");
   if (! glCreateProgram_EXT) {
@@ -1021,7 +1046,8 @@ static void gl_ext_load(void) {
   }
 }
 
-static void setupPixelFormat(HDC hDC) {
+static void setupPixelFormat(HDC hDC)
+{
   TRACE_AND_INDENT();
   PIXELFORMATDESCRIPTOR pfd = {
       sizeof(PIXELFORMATDESCRIPTOR),                              // size
@@ -1065,7 +1091,8 @@ static void setupPixelFormat(HDC hDC) {
   }
 }
 
-static void setupPalette(HDC hDC) {
+static void setupPalette(HDC hDC)
+{
   TRACE_AND_INDENT();
   int                   pixelFormat = GetPixelFormat(hDC);
   PIXELFORMATDESCRIPTOR pfd;
@@ -1108,12 +1135,14 @@ static void setupPalette(HDC hDC) {
   }
 }
 
-static LRESULT APIENTRY WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
+static LRESULT APIENTRY WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+{
   TRACE_AND_INDENT();
   return DefWindowProc(hWnd, message, wParam, lParam);
 }
 
-void gl_ext_init(void) {
+void gl_ext_init(void)
+{
   TRACE_AND_INDENT();
   WNDCLASSEX wc;
   HWND       hwnd;
@@ -1180,7 +1209,8 @@ void gl_ext_init(void) {
 void gl_ext_init(void) { TRACE_AND_INDENT(); }
 #endif
 
-void gl_error(GLenum errCode) {
+void gl_error(GLenum errCode)
+{
   if (errCode == GL_INVALID_ENUM) {
     ERR("GFX: error, GL_INVALID_ENUM");
   } else if (errCode == GL_INVALID_VALUE) {
@@ -1201,7 +1231,8 @@ void gl_error(GLenum errCode) {
 /*
  * Set the current GL color
  */
-void glcolor(color s) {
+void glcolor(color s)
+{
   gl_last_color = s;
 
   glColor4ub(s.r, s.g, s.b, s.a);
@@ -1218,7 +1249,8 @@ void glcolorfast(color s) { gl_last_color = s; }
 void gl_push(float **P, float *p_end, uint8_t first, float tex_left, float tex_top, float tex_right, float tex_bottom,
              point tl, point tr, point bl, point br, uint8_t r1, uint8_t g1, uint8_t b1, uint8_t a1, uint8_t r2,
              uint8_t g2, uint8_t b2, uint8_t a2, uint8_t r3, uint8_t g3, uint8_t b3, uint8_t a3, uint8_t r4, uint8_t g4,
-             uint8_t b4, uint8_t a4) {
+             uint8_t b4, uint8_t a4)
+{
   float *p = *P;
 
   if (unlikely(p >= p_end)) {
@@ -1271,7 +1303,8 @@ void gl_push(float **P, float *p_end, uint8_t first, float tex_left, float tex_t
 void gl_push(float **P, float *p_end, uint8_t first, float tex_left, float tex_top, float tex_right, float tex_bottom,
              GLushort left, GLushort top, GLushort right, GLushort bottom, uint8_t r1, uint8_t g1, uint8_t b1,
              uint8_t a1, uint8_t r2, uint8_t g2, uint8_t b2, uint8_t a2, uint8_t r3, uint8_t g3, uint8_t b3, uint8_t a3,
-             uint8_t r4, uint8_t g4, uint8_t b4, uint8_t a4) {
+             uint8_t r4, uint8_t g4, uint8_t b4, uint8_t a4)
+{
   point tl(left, top);
   point tr(right, top);
   point bl(left, bottom);
@@ -1282,7 +1315,8 @@ void gl_push(float **P, float *p_end, uint8_t first, float tex_left, float tex_t
 }
 
 void blit(int tex, float texMinX, float texMinY, float texMaxX, float texMaxY, GLushort left, GLushort top,
-          GLushort right, GLushort bottom) {
+          GLushort right, GLushort bottom)
+{
   uint8_t first;
 
   if (unlikely(! buf_tex)) {
@@ -1307,7 +1341,8 @@ void blit(int tex, float texMinX, float texMinY, float texMaxX, float texMaxY, G
           r, g, b, a, r, g, b, a);
 }
 
-void blit(int tex, float texMinX, float texMinY, float texMaxX, float texMaxY, point tl, point tr, point bl, point br) {
+void blit(int tex, float texMinX, float texMinY, float texMaxX, float texMaxY, point tl, point tr, point bl, point br)
+{
   uint8_t first;
 
   if (unlikely(! buf_tex)) {
@@ -1333,7 +1368,8 @@ void blit(int tex, float texMinX, float texMinY, float texMaxX, float texMaxY, p
 }
 
 void blit_colored(int tex, float texMinX, float texMinY, float texMaxX, float texMaxY, GLushort left, GLushort top,
-                  GLushort right, GLushort bottom, color color_bl, color color_br, color color_tl, color color_tr) {
+                  GLushort right, GLushort bottom, color color_bl, color color_br, color color_tl, color color_tr)
+{
   uint8_t first;
 
   if (unlikely(! buf_tex)) {
@@ -1353,13 +1389,15 @@ void blit_colored(int tex, float texMinX, float texMinY, float texMaxX, float te
           color_tr.a, color_br.r, color_br.g, color_br.b, color_br.a);
 }
 
-void blit(int tex, GLushort left, GLushort top, GLushort right, GLushort bottom) {
+void blit(int tex, GLushort left, GLushort top, GLushort right, GLushort bottom)
+{
   blit(tex, 0, 0, 1, 1, left, top, right, bottom);
 }
 
 void blit(int tex, point tl, point tr, point bl, point br) { blit(tex, 0, 0, 1, 1, tl, tr, bl, br); }
 
 void blit_colored(int tex, GLushort left, GLushort top, GLushort right, float bottom, color color_bl, color color_br,
-                  color color_tl, color color_tr) {
+                  color color_tl, color color_tr)
+{
   blit_colored(tex, 0, 0, 1, 1, left, top, right, bottom, color_bl, color_br, color_tl, color_tr);
 }

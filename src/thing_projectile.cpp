@@ -12,7 +12,8 @@
 #include "my_thing.h"
 #include "my_tile.h"
 
-bool Thing::projectile_choose_target(Thingp item) {
+bool Thing::projectile_choose_target(Thingp item)
+{
   TRACE_AND_INDENT();
   dbg("Trying to target a projectile with: %s", item->to_string().c_str());
 
@@ -25,7 +26,8 @@ bool Thing::projectile_choose_target(Thingp item) {
   return target_select(item);
 }
 
-Thingp Thing::projectile_fire_at(const std::string &projectile_name, Thingp target) {
+Thingp Thing::projectile_fire_at(const std::string &projectile_name, Thingp target)
+{
   TRACE_AND_INDENT();
   if (projectile_name == "") {
     die("No projectile name");

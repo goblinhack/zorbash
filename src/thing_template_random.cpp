@@ -59,7 +59,8 @@ static Tpidmap tp_sewer_wall;
 static Tpidmap tp_ascend_sewer;
 static Tpidmap tp_descend_sewer;
 
-void tp_random_init(void) {
+void tp_random_init(void)
+{
   TRACE_AND_INDENT();
   for (auto &tp : tp_id_map) {
     if (tp->is_ascend_dungeon()) {
@@ -215,7 +216,8 @@ void tp_random_init(void) {
   }
 }
 
-static Tpp tp_get_with_rarity_filter(Tpidmap &m) {
+static Tpp tp_get_with_rarity_filter(Tpidmap &m)
+{
   TRACE_AND_INDENT();
   int tries = 10000;
   while (tries--) {
@@ -253,12 +255,14 @@ static Tpp tp_get_with_rarity_filter(Tpidmap &m) {
   return get(m, pcg_rand() % m.size());
 }
 
-static Tpp tp_get_with_no_rarity_filter(Tpidmap &m) {
+static Tpp tp_get_with_no_rarity_filter(Tpidmap &m)
+{
   TRACE_AND_INDENT();
   return get(m, pcg_rand() % m.size());
 }
 
-Tpp tp_random_monst(void) {
+Tpp tp_random_monst(void)
+{
   TRACE_AND_INDENT();
   if (unlikely(! tp_monst.size())) {
     ERR("No monsts found");
@@ -267,22 +271,26 @@ Tpp tp_random_monst(void) {
   return tp_get_with_rarity_filter(tp_monst);
 }
 
-Tpp tp_random_monst_easy(void) {
+Tpp tp_random_monst_easy(void)
+{
   TRACE_AND_INDENT();
   return tp_random_monst();
 }
 
-Tpp tp_random_monst_med(void) {
+Tpp tp_random_monst_med(void)
+{
   TRACE_AND_INDENT();
   return tp_random_monst();
 }
 
-Tpp tp_random_monst_hard(void) {
+Tpp tp_random_monst_hard(void)
+{
   TRACE_AND_INDENT();
   return tp_random_monst();
 }
 
-Tpp Level::tp_random_monst(const point &p) {
+Tpp Level::tp_random_monst(const point &p)
+{
   TRACE_AND_INDENT();
   auto tries = 0U;
   for (;;) {
@@ -298,7 +306,8 @@ Tpp Level::tp_random_monst(const point &p) {
   }
 }
 
-Tpp Level::tp_random_monst_easy(const point &p) {
+Tpp Level::tp_random_monst_easy(const point &p)
+{
   TRACE_AND_INDENT();
   Thingp current_player = player;
   if (! current_player) {
@@ -341,7 +350,8 @@ Tpp Level::tp_random_monst_easy(const point &p) {
   }
 }
 
-Tpp Level::tp_random_monst_med(const point &p) {
+Tpp Level::tp_random_monst_med(const point &p)
+{
   TRACE_AND_INDENT();
   Thingp current_player = player;
   if (! current_player) {
@@ -387,7 +397,8 @@ Tpp Level::tp_random_monst_med(const point &p) {
   }
 }
 
-Tpp Level::tp_random_monst_hard(const point &p) {
+Tpp Level::tp_random_monst_hard(const point &p)
+{
   TRACE_AND_INDENT();
   Thingp current_player = player;
   if (! current_player) {
@@ -433,7 +444,8 @@ Tpp Level::tp_random_monst_hard(const point &p) {
   }
 }
 
-Tpp tp_random_food(void) {
+Tpp tp_random_food(void)
+{
   TRACE_AND_INDENT();
   if (unlikely(! tp_food.size())) {
     ERR("No foods found");
@@ -442,7 +454,8 @@ Tpp tp_random_food(void) {
   return tp_get_with_rarity_filter(tp_food);
 }
 
-Tpp tp_random_gold(void) {
+Tpp tp_random_gold(void)
+{
   TRACE_AND_INDENT();
   if (unlikely(! tp_gold.size())) {
     ERR("No golds found");
@@ -451,7 +464,8 @@ Tpp tp_random_gold(void) {
   return tp_get_with_rarity_filter(tp_gold);
 }
 
-Tpp tp_random_treasure(void) {
+Tpp tp_random_treasure(void)
+{
   TRACE_AND_INDENT();
   if (unlikely(! tp_treasure.size())) {
     ERR("No treasures found");
@@ -460,7 +474,8 @@ Tpp tp_random_treasure(void) {
   return tp_get_with_rarity_filter(tp_treasure);
 }
 
-Tpp tp_random_item_class_a(void) {
+Tpp tp_random_item_class_a(void)
+{
   TRACE_AND_INDENT();
   if (unlikely(! tp_item_class_a.size())) {
     ERR("No item_class_a found");
@@ -469,7 +484,8 @@ Tpp tp_random_item_class_a(void) {
   return tp_get_with_rarity_filter(tp_item_class_a);
 }
 
-Tpp tp_random_item_class_b(void) {
+Tpp tp_random_item_class_b(void)
+{
   TRACE_AND_INDENT();
   if (unlikely(! tp_item_class_b.size())) {
     ERR("No item_class_b found");
@@ -478,7 +494,8 @@ Tpp tp_random_item_class_b(void) {
   return tp_get_with_rarity_filter(tp_item_class_b);
 }
 
-Tpp tp_random_item_class_c(void) {
+Tpp tp_random_item_class_c(void)
+{
   TRACE_AND_INDENT();
   if (unlikely(! tp_item_class_c.size())) {
     ERR("No item_class_c found");
@@ -487,7 +504,8 @@ Tpp tp_random_item_class_c(void) {
   return tp_get_with_rarity_filter(tp_item_class_c);
 }
 
-Tpp tp_random_item_not_a_container_class_a(void) {
+Tpp tp_random_item_not_a_container_class_a(void)
+{
   TRACE_AND_INDENT();
   if (unlikely(! tp_item_not_a_container_class_a.size())) {
     ERR("No item_not_a_container_class_a found");
@@ -496,7 +514,8 @@ Tpp tp_random_item_not_a_container_class_a(void) {
   return tp_get_with_rarity_filter(tp_item_not_a_container_class_a);
 }
 
-Tpp tp_random_item_not_a_container_class_b(void) {
+Tpp tp_random_item_not_a_container_class_b(void)
+{
   TRACE_AND_INDENT();
   if (unlikely(! tp_item_not_a_container_class_b.size())) {
     ERR("No item_not_a_container_class_b found");
@@ -505,7 +524,8 @@ Tpp tp_random_item_not_a_container_class_b(void) {
   return tp_get_with_rarity_filter(tp_item_not_a_container_class_b);
 }
 
-Tpp tp_random_item_not_a_container_class_c(void) {
+Tpp tp_random_item_not_a_container_class_c(void)
+{
   TRACE_AND_INDENT();
   if (unlikely(! tp_item_not_a_container_class_c.size())) {
     ERR("No item_not_a_container_class_c found");
@@ -514,7 +534,8 @@ Tpp tp_random_item_not_a_container_class_c(void) {
   return tp_get_with_rarity_filter(tp_item_not_a_container_class_c);
 }
 
-Tpp tp_random_weapon_class_a(void) {
+Tpp tp_random_weapon_class_a(void)
+{
   TRACE_AND_INDENT();
   if (unlikely(! tp_weapon_class_a.size())) {
     ERR("No weapon_class_a found");
@@ -523,7 +544,8 @@ Tpp tp_random_weapon_class_a(void) {
   return tp_get_with_rarity_filter(tp_weapon_class_a);
 }
 
-Tpp tp_random_weapon_class_b(void) {
+Tpp tp_random_weapon_class_b(void)
+{
   TRACE_AND_INDENT();
   if (unlikely(! tp_weapon_class_b.size())) {
     ERR("No weapon_class_b found");
@@ -532,7 +554,8 @@ Tpp tp_random_weapon_class_b(void) {
   return tp_get_with_rarity_filter(tp_weapon_class_b);
 }
 
-Tpp tp_random_weapon_class_c(void) {
+Tpp tp_random_weapon_class_c(void)
+{
   TRACE_AND_INDENT();
   if (unlikely(! tp_weapon_class_c.size())) {
     ERR("No weapon_class_c found");
@@ -541,7 +564,8 @@ Tpp tp_random_weapon_class_c(void) {
   return tp_get_with_rarity_filter(tp_weapon_class_c);
 }
 
-Tpp tp_random_dirt(void) {
+Tpp tp_random_dirt(void)
+{
   TRACE_AND_INDENT();
   if (unlikely(! tp_dirt.size())) {
     ERR("No dirts found");
@@ -550,7 +574,8 @@ Tpp tp_random_dirt(void) {
   return tp_get_with_no_rarity_filter(tp_dirt);
 }
 
-Tpp tp_random_dry_grass(void) {
+Tpp tp_random_dry_grass(void)
+{
   TRACE_AND_INDENT();
   if (unlikely(! tp_dry_grass.size())) {
     ERR("No dry_grasss found");
@@ -559,7 +584,8 @@ Tpp tp_random_dry_grass(void) {
   return tp_get_with_no_rarity_filter(tp_dry_grass);
 }
 
-Tpp tp_random_enchantstone(void) {
+Tpp tp_random_enchantstone(void)
+{
   TRACE_AND_INDENT();
   if (unlikely(! tp_enchantstone.size())) {
     ERR("No enchantstones found");
@@ -568,7 +594,8 @@ Tpp tp_random_enchantstone(void) {
   return tp_get_with_no_rarity_filter(tp_enchantstone);
 }
 
-Tpp tp_random_skillstone(void) {
+Tpp tp_random_skillstone(void)
+{
   TRACE_AND_INDENT();
   if (unlikely(! tp_skillstone.size())) {
     ERR("No skillstones found");
@@ -577,7 +604,8 @@ Tpp tp_random_skillstone(void) {
   return tp_get_with_no_rarity_filter(tp_skillstone);
 }
 
-Tpp tp_random_foilage(void) {
+Tpp tp_random_foilage(void)
+{
   TRACE_AND_INDENT();
   if (unlikely(! tp_foilage.size())) {
     ERR("No foilages found");
@@ -586,7 +614,8 @@ Tpp tp_random_foilage(void) {
   return tp_get_with_no_rarity_filter(tp_foilage);
 }
 
-Tpp tp_random_spiderweb(void) {
+Tpp tp_random_spiderweb(void)
+{
   TRACE_AND_INDENT();
   if (unlikely(! tp_spiderweb.size())) {
     ERR("No spiderwebs found");
@@ -595,7 +624,8 @@ Tpp tp_random_spiderweb(void) {
   return tp_get_with_no_rarity_filter(tp_spiderweb);
 }
 
-Tpp tp_random_ripple(void) {
+Tpp tp_random_ripple(void)
+{
   TRACE_AND_INDENT();
   if (unlikely(! tp_ripples.size())) {
     ERR("No ripples found");
@@ -604,7 +634,8 @@ Tpp tp_random_ripple(void) {
   return tp_get_with_no_rarity_filter(tp_ripples);
 }
 
-Tpp tp_random_blood_splatter(void) {
+Tpp tp_random_blood_splatter(void)
+{
   TRACE_AND_INDENT();
   if (unlikely(! tp_blood_splatter.size())) {
     ERR("No blood_splatter found");
@@ -613,7 +644,8 @@ Tpp tp_random_blood_splatter(void) {
   return tp_get_with_no_rarity_filter(tp_blood_splatter);
 }
 
-Tpp tp_random_key(void) {
+Tpp tp_random_key(void)
+{
   TRACE_AND_INDENT();
   if (unlikely(! tp_key.size())) {
     ERR("No key found");
@@ -622,7 +654,8 @@ Tpp tp_random_key(void) {
   return tp_get_with_no_rarity_filter(tp_key);
 }
 
-Tpp tp_random_potion(void) {
+Tpp tp_random_potion(void)
+{
   TRACE_AND_INDENT();
   if (unlikely(! tp_potion.size())) {
     ERR("No potion found");
@@ -631,7 +664,8 @@ Tpp tp_random_potion(void) {
   return tp_get_with_rarity_filter(tp_potion);
 }
 
-Tpp tp_random_wand(void) {
+Tpp tp_random_wand(void)
+{
   TRACE_AND_INDENT();
   if (unlikely(! tp_wand.size())) {
     ERR("No wand found");
@@ -640,7 +674,8 @@ Tpp tp_random_wand(void) {
   return tp_get_with_rarity_filter(tp_wand);
 }
 
-Tpp tp_random_ascend_dungeon(void) {
+Tpp tp_random_ascend_dungeon(void)
+{
   TRACE_AND_INDENT();
   if (unlikely(! tp_ascend_dungeon.size())) {
     ERR("No entrance found");
@@ -649,7 +684,8 @@ Tpp tp_random_ascend_dungeon(void) {
   return tp_get_with_no_rarity_filter(tp_ascend_dungeon);
 }
 
-Tpp tp_random_descend_dungeon(void) {
+Tpp tp_random_descend_dungeon(void)
+{
   TRACE_AND_INDENT();
   if (unlikely(! tp_descend_dungeon.size())) {
     ERR("No exit found");
@@ -658,7 +694,8 @@ Tpp tp_random_descend_dungeon(void) {
   return tp_get_with_no_rarity_filter(tp_descend_dungeon);
 }
 
-Tpp tp_random_brazier(void) {
+Tpp tp_random_brazier(void)
+{
   TRACE_AND_INDENT();
   if (unlikely(! tp_brazier.size())) {
     ERR("No brazier found");
@@ -667,7 +704,8 @@ Tpp tp_random_brazier(void) {
   return tp_get_with_no_rarity_filter(tp_brazier);
 }
 
-Tpp tp_random_barrel(void) {
+Tpp tp_random_barrel(void)
+{
   TRACE_AND_INDENT();
   if (unlikely(! tp_barrel.size())) {
     ERR("No barrel found");
@@ -676,7 +714,8 @@ Tpp tp_random_barrel(void) {
   return tp_get_with_no_rarity_filter(tp_barrel);
 }
 
-Tpp tp_random_door(void) {
+Tpp tp_random_door(void)
+{
   TRACE_AND_INDENT();
   if (unlikely(! tp_door.size())) {
     ERR("No door found");
@@ -685,7 +724,8 @@ Tpp tp_random_door(void) {
   return tp_get_with_no_rarity_filter(tp_door);
 }
 
-Tpp tp_random_secret_door(void) {
+Tpp tp_random_secret_door(void)
+{
   TRACE_AND_INDENT();
   if (unlikely(! tp_secret_door.size())) {
     ERR("No secret_door found");
@@ -694,7 +734,8 @@ Tpp tp_random_secret_door(void) {
   return tp_get_with_no_rarity_filter(tp_secret_door);
 }
 
-Tpp tp_random_minion_generator(void) {
+Tpp tp_random_minion_generator(void)
+{
   TRACE_AND_INDENT();
   if (unlikely(! tp_generator.size())) {
     ERR("No generator found");
@@ -703,7 +744,8 @@ Tpp tp_random_minion_generator(void) {
   return tp_get_with_rarity_filter(tp_generator);
 }
 
-Tpp tp_random_ethereal_minion_generator(void) {
+Tpp tp_random_ethereal_minion_generator(void)
+{
   TRACE_AND_INDENT();
   if (unlikely(! tp_ethereal_generator.size())) {
     ERR("No generator found");
@@ -716,7 +758,8 @@ Tpp tp_random_minion_generator_easy(void) { return tp_random_minion_generator();
 
 Tpp tp_random_minion_generator_hard(void) { return tp_random_minion_generator(); }
 
-Tpp Level::tp_random_minion_generator(const point &p) {
+Tpp Level::tp_random_minion_generator(const point &p)
+{
   TRACE_AND_INDENT();
   auto tries = 0U;
   for (;;) {
@@ -731,17 +774,20 @@ Tpp Level::tp_random_minion_generator(const point &p) {
   }
 }
 
-Tpp Level::tp_random_minion_generator_easy(const point &p) {
+Tpp Level::tp_random_minion_generator_easy(const point &p)
+{
   TRACE_AND_INDENT();
   return tp_random_minion_generator(p);
 }
 
-Tpp Level::tp_random_minion_generator_hard(const point &p) {
+Tpp Level::tp_random_minion_generator_hard(const point &p)
+{
   TRACE_AND_INDENT();
   return tp_random_minion_generator(p);
 }
 
-Tpp tp_random_blood(void) {
+Tpp tp_random_blood(void)
+{
   TRACE_AND_INDENT();
   if (unlikely(! tp_blood.size())) {
     ERR("No bloods found");
@@ -750,7 +796,8 @@ Tpp tp_random_blood(void) {
   return tp_get_with_no_rarity_filter(tp_blood);
 }
 
-Tpp tp_random_bones(void) {
+Tpp tp_random_bones(void)
+{
   TRACE_AND_INDENT();
   if (unlikely(! tp_bones.size())) {
     ERR("No boness found");
@@ -759,7 +806,8 @@ Tpp tp_random_bones(void) {
   return tp_get_with_no_rarity_filter(tp_bones);
 }
 
-Tpp tp_random_wall_dungeon(void) {
+Tpp tp_random_wall_dungeon(void)
+{
   TRACE_AND_INDENT();
   if (unlikely(! tp_wall_dungeon.size())) {
     ERR("No dungeon walls found");
@@ -768,7 +816,8 @@ Tpp tp_random_wall_dungeon(void) {
   return tp_get_with_no_rarity_filter(tp_wall_dungeon);
 }
 
-Tpp tp_random_sewer_wall(void) {
+Tpp tp_random_sewer_wall(void)
+{
   TRACE_AND_INDENT();
   if (unlikely(! tp_sewer_wall.size())) {
     ERR("No sewer walls found");
@@ -777,7 +826,8 @@ Tpp tp_random_sewer_wall(void) {
   return tp_get_with_no_rarity_filter(tp_sewer_wall);
 }
 
-Tpp tp_random_rock(void) {
+Tpp tp_random_rock(void)
+{
   TRACE_AND_INDENT();
   if (unlikely(! tp_rock.size())) {
     ERR("No rocks found");
@@ -786,7 +836,8 @@ Tpp tp_random_rock(void) {
   return tp_get_with_no_rarity_filter(tp_rock);
 }
 
-Tpp tp_random_floor(void) {
+Tpp tp_random_floor(void)
+{
   TRACE_AND_INDENT();
   if (unlikely(! tp_floor.size())) {
     ERR("No floors found");
@@ -795,7 +846,8 @@ Tpp tp_random_floor(void) {
   return tp_get_with_no_rarity_filter(tp_floor);
 }
 
-Tpp tp_random_deco(void) {
+Tpp tp_random_deco(void)
+{
   TRACE_AND_INDENT();
   if (unlikely(! tp_deco.size())) {
     ERR("No decos found");
@@ -804,7 +856,8 @@ Tpp tp_random_deco(void) {
   return tp_get_with_no_rarity_filter(tp_deco);
 }
 
-Tpp tp_random_ascend_sewer(void) {
+Tpp tp_random_ascend_sewer(void)
+{
   TRACE_AND_INDENT();
   if (unlikely(! tp_ascend_sewer.size())) {
     ERR("No sewer entrances found");
@@ -813,7 +866,8 @@ Tpp tp_random_ascend_sewer(void) {
   return tp_get_with_no_rarity_filter(tp_ascend_sewer);
 }
 
-Tpp tp_random_descend_sewer(void) {
+Tpp tp_random_descend_sewer(void)
+{
   TRACE_AND_INDENT();
   if (unlikely(! tp_descend_sewer.size())) {
     ERR("No sewer exits found");
@@ -822,7 +876,8 @@ Tpp tp_random_descend_sewer(void) {
   return tp_get_with_no_rarity_filter(tp_descend_sewer);
 }
 
-const Tpidmap &tp_get_skills(void) {
+const Tpidmap &tp_get_skills(void)
+{
   TRACE_AND_INDENT();
   return tp_skills;
 }

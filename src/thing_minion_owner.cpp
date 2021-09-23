@@ -13,7 +13,8 @@
 #include "my_thing.h"
 #include "my_ptrcheck.h"
 
-Thingp Thing::get_top_minion_owner(void) const {
+Thingp Thing::get_top_minion_owner(void) const
+{
   TRACE_AND_INDENT();
   auto id = get_immediate_minion_owner_id();
   if (likely(id.ok())) {
@@ -30,7 +31,8 @@ Thingp Thing::get_top_minion_owner(void) const {
   }
 }
 
-Thingp Thing::get_immediate_minion_owner(void) const {
+Thingp Thing::get_immediate_minion_owner(void) const
+{
   TRACE_AND_INDENT();
   auto id = get_immediate_minion_owner_id();
   if (likely(id.ok())) {
@@ -44,7 +46,8 @@ Thingp Thing::get_immediate_minion_owner(void) const {
   }
 }
 
-void Thing::set_minion_owner(Thingp minion_owner) {
+void Thing::set_minion_owner(Thingp minion_owner)
+{
   TRACE_AND_INDENT();
   if (minion_owner) {
     verify(minion_owner);
@@ -78,7 +81,8 @@ void Thing::set_minion_owner(Thingp minion_owner) {
   }
 }
 
-void Thing::remove_minion_owner(void) {
+void Thing::remove_minion_owner(void)
+{
   TRACE_AND_INDENT();
   auto old_minion_owner = get_immediate_minion_owner();
   if (! old_minion_owner) {
@@ -95,7 +99,8 @@ void Thing::remove_minion_owner(void) {
 //
 // Kill and detach all minions from their owner
 //
-void Thing::kill_minions(Thingp killer) {
+void Thing::kill_minions(Thingp killer)
+{
   TRACE_AND_INDENT();
   //
   // Warning killer can be nullptr - e.g. when a generator falls to
@@ -113,7 +118,8 @@ void Thing::kill_minions(Thingp killer) {
   //
   // Slow, but not used too often
   //
-  FOR_ALL_THING_GROUPS(group) {
+  FOR_ALL_THING_GROUPS(group)
+  {
     for (auto p : level->all_things[ group ]) {
       auto minion = p.second;
       auto o      = minion->get_immediate_minion_owner();
@@ -129,7 +135,8 @@ void Thing::kill_minions(Thingp killer) {
 //
 // Detach all minions from their owner
 //
-void Thing::unleash_minions(void) {
+void Thing::unleash_minions(void)
+{
   TRACE_AND_INDENT();
   if (! is_minion_generator()) {
     return;
@@ -142,7 +149,8 @@ void Thing::unleash_minions(void) {
   //
   // Slow, but not used too often
   //
-  FOR_ALL_THING_GROUPS(group) {
+  FOR_ALL_THING_GROUPS(group)
+  {
     for (auto p : level->all_things[ group ]) {
       auto minion = p.second;
       auto o      = minion->get_immediate_minion_owner();

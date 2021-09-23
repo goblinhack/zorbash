@@ -12,7 +12,8 @@
 #include "my_thing.h"
 #include "my_tile.h"
 
-bool Thing::laser_choose_target(Thingp item) {
+bool Thing::laser_choose_target(Thingp item)
+{
   TRACE_AND_INDENT();
   dbg("Trying to target a laser with: %s", item->to_string().c_str());
 
@@ -25,7 +26,8 @@ bool Thing::laser_choose_target(Thingp item) {
   return target_select(item);
 }
 
-Thingp Thing::laser_fire_at(const std::string &laser_name, Thingp target) {
+Thingp Thing::laser_fire_at(const std::string &laser_name, Thingp target)
+{
   TRACE_AND_INDENT();
   if (laser_name == "") {
     die("No laser name");

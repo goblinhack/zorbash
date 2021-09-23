@@ -8,7 +8,8 @@
 #include "my_sys.h"
 #include "my_random.h"
 
-double gaussrand(double mean, double stddev) {
+double gaussrand(double mean, double stddev)
+{
   static double V1, V2, S;
   static int    phase = 0;
   double        val;
@@ -39,7 +40,8 @@ double gaussrand(double mean, double stddev) {
   return (val);
 }
 
-double gauss(const double m, const double s) {
+double gauss(const double m, const double s)
+{
   static int    use_last = 0;
   static double y2;
   double        x1, x2, w, y1;

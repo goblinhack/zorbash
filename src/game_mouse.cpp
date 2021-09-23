@@ -13,7 +13,8 @@
 #include "my_ptrcheck.h"
 #include "my_sound.h"
 
-uint8_t game_mouse_down(int32_t x, int32_t y, uint32_t button) {
+uint8_t game_mouse_down(int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   if (! game || ! game->started) {
     return false;
@@ -92,7 +93,8 @@ uint8_t game_mouse_down(int32_t x, int32_t y, uint32_t button) {
         (std::abs(player->mid_at.y - level->cursor->mid_at.y) <= 1)) {
       int x = level->cursor->mid_at.x;
       int y = level->cursor->mid_at.y;
-      FOR_ALL_THINGS_THAT_INTERACT(level, t, x, y) {
+      FOR_ALL_THINGS_THAT_INTERACT(level, t, x, y)
+      {
         if (t == level->player) {
           continue;
         }
@@ -118,7 +120,8 @@ uint8_t game_mouse_down(int32_t x, int32_t y, uint32_t button) {
   //
   if (! wid_mouse_two_clicks) {
     auto to = level->cursor->mid_at;
-    FOR_ALL_THINGS(level, t, to.x, to.y) {
+    FOR_ALL_THINGS(level, t, to.x, to.y)
+    {
       if (t->is_cursor_can_hover_over_x2_click()) {
         player->log("Needs double click");
         TOPCON("Double click to move.");
@@ -164,7 +167,8 @@ uint8_t game_mouse_down(int32_t x, int32_t y, uint32_t button) {
 
 uint8_t game_mouse_up(int32_t x, int32_t y, uint32_t button) { return false; }
 
-uint8_t game_mouse_motion(int32_t x, int32_t y, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely) {
+uint8_t game_mouse_motion(int32_t x, int32_t y, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+{
   TRACE_AND_INDENT();
   auto level = game->level;
   if (! level) {

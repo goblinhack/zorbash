@@ -15,15 +15,18 @@
 #include "my_string.h"
 #include "my_ptrcheck.h"
 
-class Tex {
+class Tex
+{
 public:
-  Tex(std::string name) : name(name) {
+  Tex(std::string name) : name(name)
+  {
     surface            = 0;
     gl_surface_binding = 0;
     newptr(this, "Tex");
   }
 
-  ~Tex(void) {
+  ~Tex(void)
+  {
     oldptr(this);
 
     if (surface) {
@@ -52,12 +55,14 @@ static std::map< std::string, Texp > textures;
 static std::map< std::string, Texp > textures_black_and_white;
 static std::map< std::string, Texp > textures_mask;
 
-uint8_t tex_init(void) {
+uint8_t tex_init(void)
+{
   TRACE_AND_INDENT();
   return true;
 }
 
-void tex_fini(void) {
+void tex_fini(void)
+{
   TRACE_AND_INDENT();
   for (auto &t : textures) {
     delete t.second;
@@ -70,7 +75,8 @@ void tex_fini(void) {
   }
 }
 
-void tex_free(Texp tex) {
+void tex_free(Texp tex)
+{
   TRACE_AND_INDENT();
   textures.erase(tex->name);
   textures_black_and_white.erase(tex->name);
@@ -78,7 +84,8 @@ void tex_free(Texp tex) {
   delete (tex);
 }
 
-static unsigned char *load_raw_image(std::string filename, int32_t *x, int32_t *y, int32_t *comp) {
+static unsigned char *load_raw_image(std::string filename, int32_t *x, int32_t *y, int32_t *comp)
+{
   TRACE_AND_INDENT();
   unsigned char *file_data;
   unsigned char *image_data = 0;
@@ -101,12 +108,14 @@ static unsigned char *load_raw_image(std::string filename, int32_t *x, int32_t *
   return (image_data);
 }
 
-static void free_raw_image(unsigned char *image_data) {
+static void free_raw_image(unsigned char *image_data)
+{
   TRACE_AND_INDENT();
   stbi_image_free(image_data);
 }
 
-static SDL_Surface *load_image(std::string filename) {
+static SDL_Surface *load_image(std::string filename)
+{
   TRACE_AND_INDENT();
   uint32_t       rmask, gmask, bmask, amask;
   unsigned char *image_data;
@@ -162,7 +171,8 @@ static SDL_Surface *load_image(std::string filename) {
   return (surf);
 }
 
-static void load_images(SDL_Surface **surf1_out, SDL_Surface **surf2_out, std::string filename) {
+static void load_images(SDL_Surface **surf1_out, SDL_Surface **surf2_out, std::string filename)
+{
   TRACE_AND_INDENT();
   uint32_t       rmask, gmask, bmask, amask;
   unsigned char *image_data;
@@ -245,7 +255,8 @@ static void load_images(SDL_Surface **surf1_out, SDL_Surface **surf2_out, std::s
 //
 // Load a texture
 //
-Texp tex_load(std::string file, std::string name, int mode) {
+Texp tex_load(std::string file, std::string name, int mode)
+{
   TRACE_AND_INDENT();
   Texp t = tex_find(name);
 
@@ -283,7 +294,8 @@ Texp tex_load(std::string file, std::string name, int mode) {
 // 1 - black and white tile used in backgrounds
 // 2 - mask for sprites
 //
-static std::pair< Texp, Texp > tex_sprite(SDL_Surface *in, std::string file, std::string name, int mode) {
+static std::pair< Texp, Texp > tex_sprite(SDL_Surface *in, std::string file, std::string name, int mode)
+{
   auto n1 = name + "_black_and_white";
   auto n2 = name + "_mask";
   Texp t1 = new Tex(n1);
@@ -369,7 +381,8 @@ static std::pair< Texp, Texp > tex_sprite(SDL_Surface *in, std::string file, std
   return (std::make_pair(t1, t2));
 }
 
-void tex_load(Texp *tex, Texp *tex_black_and_white, Texp *tex_mask, std::string file, std::string name, int mode) {
+void tex_load(Texp *tex, Texp *tex_black_and_white, Texp *tex_mask, std::string file, std::string name, int mode)
+{
   TRACE_AND_INDENT();
   Texp t = tex_find(name);
   if (t) {
@@ -410,7 +423,8 @@ void tex_load(Texp *tex, Texp *tex_black_and_white, Texp *tex_mask, std::string 
 //
 // Find an existing tex.
 //
-Texp tex_find(std::string file) {
+Texp tex_find(std::string file)
+{
   TRACE_AND_INDENT();
   if (file == "") {
     ERR("No filename given for tex find");
@@ -427,7 +441,8 @@ Texp tex_find(std::string file) {
 //
 // Creae a texture from a surface
 //
-Texp tex_from_surface(SDL_Surface *surface, std::string file, std::string name, int mode) {
+Texp tex_from_surface(SDL_Surface *surface, std::string file, std::string name, int mode)
+{
   TRACE_AND_INDENT();
   if (! surface) {
     ERR("Could not make surface from file, '%s'", file.c_str());
@@ -516,12 +531,14 @@ Texp tex_from_surface(SDL_Surface *surface, std::string file, std::string name, 
   return (t);
 }
 
-int32_t tex_get_gl_binding(Texp tex) {
+int32_t tex_get_gl_binding(Texp tex)
+{
   TRACE_AND_INDENT();
   return (tex->gl_surface_binding);
 }
 
-uint32_t tex_get_width(Texp tex) {
+uint32_t tex_get_width(Texp tex)
+{
   TRACE_AND_INDENT();
   if (! tex) {
     ERR("No texture");
@@ -530,7 +547,8 @@ uint32_t tex_get_width(Texp tex) {
   return (tex->width);
 }
 
-uint32_t tex_get_height(Texp tex) {
+uint32_t tex_get_height(Texp tex)
+{
   TRACE_AND_INDENT();
   if (! tex) {
     ERR("No texture");
@@ -539,12 +557,14 @@ uint32_t tex_get_height(Texp tex) {
   return (tex->height);
 }
 
-SDL_Surface *tex_get_surface(Texp tex) {
+SDL_Surface *tex_get_surface(Texp tex)
+{
   TRACE_AND_INDENT();
   return (tex->surface);
 }
 
-Texp string2tex(const char **s) {
+Texp string2tex(const char **s)
+{
   TRACE_AND_INDENT();
   static char        tmp[ MAXSHORTSTR ];
   static std::string eo_tmp = tmp + MAXSHORTSTR;
@@ -574,7 +594,8 @@ Texp string2tex(const char **s) {
   return (result->second);
 }
 
-Texp string2tex(std::string &s, int *len) {
+Texp string2tex(std::string &s, int *len)
+{
   TRACE_AND_INDENT();
   auto        iter = s.begin();
   std::string out;
@@ -606,7 +627,8 @@ Texp string2tex(std::string &s, int *len) {
   return (result->second);
 }
 
-Texp string2tex(std::wstring &s, int *len) {
+Texp string2tex(std::wstring &s, int *len)
+{
   TRACE_AND_INDENT();
   auto v = wstring_to_string(s);
   return (string2tex(v, len));

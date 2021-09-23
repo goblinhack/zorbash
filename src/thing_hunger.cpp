@@ -11,7 +11,8 @@
 #include "my_thing.h"
 #include "my_thing_template.h"
 
-void Thing::hunger_clock(void) {
+void Thing::hunger_clock(void)
+{
   TRACE_AND_INDENT();
   // TODO
   return;

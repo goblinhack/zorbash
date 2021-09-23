@@ -13,7 +13,8 @@
 #include "my_thing.h"
 #include "my_random.h"
 
-Thingp World::thing_find_optional(ThingId id) {
+Thingp World::thing_find_optional(ThingId id)
+{
   TRACE_AND_INDENT();
   auto f = all_thing_ptrs.find(id);
   if (f == all_thing_ptrs.end()) {
@@ -23,7 +24,8 @@ Thingp World::thing_find_optional(ThingId id) {
   return (f->second);
 }
 
-Thingp World::thing_find(ThingId id) {
+Thingp World::thing_find(ThingId id)
+{
   TRACE_AND_INDENT();
   auto f = all_thing_ptrs.find(id);
   if (f == all_thing_ptrs.end()) {
@@ -34,7 +36,8 @@ Thingp World::thing_find(ThingId id) {
   return (f->second);
 }
 
-void World::alloc_thing_id(Thingp t) {
+void World::alloc_thing_id(Thingp t)
+{
   TRACE_AND_INDENT();
   for (;;) {
     auto id = pcg_rand() & 0x0ffffff;
@@ -48,7 +51,8 @@ void World::alloc_thing_id(Thingp t) {
   }
 }
 
-void World::alloc_tmp_thing_id(Thingp t) {
+void World::alloc_tmp_thing_id(Thingp t)
+{
   TRACE_AND_INDENT();
   for (;;) {
     auto id = pcg_rand() | 0x8000000;
@@ -62,7 +66,8 @@ void World::alloc_tmp_thing_id(Thingp t) {
   }
 }
 
-void World::free_thing_id(Thingp t) {
+void World::free_thing_id(Thingp t)
+{
   TRACE_AND_INDENT();
   auto f = all_thing_ptrs.find(t->id);
   if (f == all_thing_ptrs.end()) {
@@ -79,7 +84,8 @@ void World::free_thing_id(Thingp t) {
   all_thing_ptrs.erase(f);
 }
 
-void World::realloc_thing_id(Thingp t) {
+void World::realloc_thing_id(Thingp t)
+{
   TRACE_AND_INDENT();
   all_thing_ptrs[ t->id ] = t;
 }

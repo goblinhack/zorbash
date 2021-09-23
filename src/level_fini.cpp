@@ -12,7 +12,8 @@
 #include "my_array_bounds_check.h"
 #include "my_ptrcheck.h"
 
-Level::~Level(void) {
+Level::~Level(void)
+{
   TRACE_AND_INDENT();
   log("Delete level");
   if (game->level == this) {
@@ -22,7 +23,8 @@ Level::~Level(void) {
   oldptr(this);
 }
 
-void Level::fini(void) {
+void Level::fini(void)
+{
   TRACE_AND_INDENT();
   log("-");
   log("Destroying, seed %u", seed);
@@ -36,7 +38,8 @@ void Level::fini(void) {
   // are referred to.
   //
   log("Destroy all things");
-  FOR_ALL_THING_GROUPS(group) {
+  FOR_ALL_THING_GROUPS(group)
+  {
     for (auto x = 0; x < MAP_WIDTH; ++x) {
       for (auto y = 0; y < MAP_HEIGHT; ++y) {
         for (auto z = 0; z < MAP_SLOTS; ++z) {
@@ -66,7 +69,8 @@ void Level::fini(void) {
   // Check all things were fully detached
   //
   log("Check all things are detached");
-  FOR_ALL_THING_GROUPS(group) {
+  FOR_ALL_THING_GROUPS(group)
+  {
     for (auto x = 0; x < MAP_WIDTH; ++x) {
       for (auto y = 0; y < MAP_HEIGHT; ++y) {
         for (auto z = 0; z < MAP_SLOTS; ++z) {

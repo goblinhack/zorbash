@@ -15,13 +15,15 @@
 
 static WidPopup *game_config_sound_window;
 
-static void game_config_sound_destroy(void) {
+static void game_config_sound_destroy(void)
+{
   TRACE_AND_INDENT();
   delete game_config_sound_window;
   game_config_sound_window = nullptr;
 }
 
-static uint8_t game_config_sound_cancel(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_config_sound_cancel(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   CON("USR: Reload config");
   game->load_config();
@@ -30,7 +32,8 @@ static uint8_t game_config_sound_cancel(Widp w, int32_t x, int32_t y, uint32_t b
   return true;
 }
 
-static uint8_t game_config_sound_save(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_config_sound_save(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   CON("USR: Save config");
   game->save_config();
@@ -39,14 +42,16 @@ static uint8_t game_config_sound_save(Widp w, int32_t x, int32_t y, uint32_t but
   return true;
 }
 
-static uint8_t game_config_sound_back(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_config_sound_back(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   game_config_sound_destroy();
   game->config_top_select();
   return true;
 }
 
-static uint8_t game_config_sound_effects_volume_incr(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_config_sound_effects_volume_incr(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   CON("USR: Increment sound_volume");
   game->config.sound_volume++;
@@ -57,7 +62,8 @@ static uint8_t game_config_sound_effects_volume_incr(Widp w, int32_t x, int32_t 
   return true;
 }
 
-static uint8_t game_config_sound_effects_volume_decr(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_config_sound_effects_volume_decr(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   CON("USR: Decrement sound_volume");
   if (game->config.sound_volume > 0) {
@@ -69,7 +75,8 @@ static uint8_t game_config_sound_effects_volume_decr(Widp w, int32_t x, int32_t 
   return true;
 }
 
-static uint8_t game_config_sound_music_volume_incr(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_config_sound_music_volume_incr(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   CON("USR: Increment music_volume");
   game->config.music_volume++;
@@ -81,7 +88,8 @@ static uint8_t game_config_sound_music_volume_incr(Widp w, int32_t x, int32_t y,
   return true;
 }
 
-static uint8_t game_config_sound_music_volume_decr(Widp w, int32_t x, int32_t y, uint32_t button) {
+static uint8_t game_config_sound_music_volume_decr(Widp w, int32_t x, int32_t y, uint32_t button)
+{
   TRACE_AND_INDENT();
   CON("USR: Decrement music_volume");
   if (game->config.music_volume > 0) {
@@ -94,7 +102,8 @@ static uint8_t game_config_sound_music_volume_decr(Widp w, int32_t x, int32_t y,
   return true;
 }
 
-static uint8_t game_config_sound_key_up(Widp w, const struct SDL_Keysym *key) {
+static uint8_t game_config_sound_key_up(Widp w, const struct SDL_Keysym *key)
+{
   TRACE_AND_INDENT();
   if (sdl_shift_held) {
     if (key->scancode == (SDL_Scancode) game->config.key_console) {
@@ -124,7 +133,8 @@ static uint8_t game_config_sound_key_up(Widp w, const struct SDL_Keysym *key) {
   return false;
 }
 
-static uint8_t game_config_sound_key_down(Widp w, const struct SDL_Keysym *key) {
+static uint8_t game_config_sound_key_down(Widp w, const struct SDL_Keysym *key)
+{
   TRACE_AND_INDENT();
   if (sdl_shift_held) {
     if (key->scancode == (SDL_Scancode) game->config.key_console) {
@@ -135,7 +145,8 @@ static uint8_t game_config_sound_key_down(Widp w, const struct SDL_Keysym *key) 
   return true;
 }
 
-void Game::config_sound_select(void) {
+void Game::config_sound_select(void)
+{
   TRACE_AND_INDENT();
   if (game_config_sound_window) {
     game_config_sound_destroy();

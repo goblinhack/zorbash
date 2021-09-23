@@ -15,7 +15,8 @@
 static int                                                        wid_tiles_init_done;
 static std::map< std::string, std::shared_ptr< class WidTiles > > wid_tiles_all;
 
-uint8_t wid_tiles_init(void) {
+uint8_t wid_tiles_init(void)
+{
   TRACE_AND_INDENT();
   wid_tiles_init_done = true;
 
@@ -24,7 +25,8 @@ uint8_t wid_tiles_init(void) {
 
 static void wid_tiles_destroy(wid_tilesp w) { TRACE_AND_INDENT(); }
 
-void wid_tiles_fini(void) {
+void wid_tiles_fini(void)
+{
   TRACE_AND_INDENT();
   if (wid_tiles_init_done) {
     wid_tiles_init_done = false;
@@ -38,7 +40,8 @@ void wid_tiles_fini(void) {
   }
 }
 
-wid_tilesp wid_tiles_load(std::string name, double scale) {
+wid_tilesp wid_tiles_load(std::string name, double scale)
+{
   TRACE_AND_INDENT();
   auto t = wid_tiles_find(name);
 
@@ -191,7 +194,8 @@ wid_tilesp wid_tiles_load(std::string name, double scale) {
   return (t);
 }
 
-wid_tilesp wid_tiles_find(std::string file) {
+wid_tilesp wid_tiles_find(std::string file)
+{
   TRACE_AND_INDENT();
   if (file == "") {
     DIE("No filename given for wid_tiles find");
