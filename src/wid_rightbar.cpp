@@ -381,7 +381,7 @@ static bool wid_rightbar_create(void)
         if (i == game->inventory_highlight_slot) {
           wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
         } else {
-          wid_set_color(w, WID_COLOR_TEXT_FG, GRAY60);
+          wid_set_color(w, WID_COLOR_TEXT_FG, GRAY80);
         }
 
         //
@@ -395,6 +395,11 @@ static bool wid_rightbar_create(void)
             static Tilep tile;
             if (! tile) {
               tile = tile_find_mand("item_wielded");
+            }
+            if (i == game->inventory_highlight_slot) {
+              wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
+            } else {
+              wid_set_color(w, WID_COLOR_TEXT_FG, GRAY90);
             }
             wid_set_fg2_tile(w, tile);
           }

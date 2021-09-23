@@ -230,14 +230,6 @@ std::list< Thingp > Thing::anything_to_carry_at(fpoint at)
       continue;
     }
 
-    if (worth_collecting(t) < 0) {
-      dbg("Potential item to carry, no, not worth it: %s", t->to_string().c_str());
-      continue;
-    }
-
-    dbg("Potential item to carry: %s", t->to_string().c_str());
-    items.push_back(std::make_pair(t, get_item_value(t)));
-
     if (t->is_bag_item_container()) {
       //
       // Open chests etc...
@@ -251,6 +243,14 @@ std::list< Thingp > Thing::anything_to_carry_at(fpoint at)
         }
       }
     }
+
+    if (worth_collecting(t) < 0) {
+      dbg("Potential item to carry, no, not worth it: %s", t->to_string().c_str());
+      continue;
+    }
+
+    dbg("Potential item to carry: %s", t->to_string().c_str());
+    items.push_back(std::make_pair(t, get_item_value(t)));
   }
   FOR_ALL_THINGS_END()
 
