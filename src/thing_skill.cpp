@@ -176,7 +176,7 @@ bool Thing::add_skill(Tpp what)
   skill_add(t);
 
   //
-  // Drop an skillstone
+  // Drop a skillstone
   //
   auto found = false;
   for (auto id : monstp->carrying) {

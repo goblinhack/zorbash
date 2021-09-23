@@ -44,6 +44,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Monstp & > const my)
   // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
   // v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v
   /////////////////////////////////////////////////////////////////////////
+  // clang-format off
   /* ThingId      on_fire_id_anim           */ out << bits(my.t->on_fire_id_anim);
   /* ThingId      owner_id                  */ out << bits(my.t->owner_id);
   /* ThingId      minion_owner_id           */ out << bits(my.t->minion_owner_id);
@@ -112,21 +113,22 @@ std::ostream &operator<<(std::ostream &out, Bits< Monstp & > const my)
   /* std::vector<point>   move_path         */ out << bits(my.t->move_path);
   /* std::vector<uint16_t> inventory_id     */ out << bits(my.t->inventory_id);
   /* std::vector<uint16_t> skillbox_id      */ out << bits(my.t->skillbox_id);
-  /* ts_t  ts_bounce_begin    */ out << bits(my.t->ts_bounce_begin);
-  /* ts_t  ts_bounce_end      */ out << bits(my.t->ts_bounce_end);
-  /* ts_t  ts_fadeup_begin    */ out << bits(my.t->ts_fadeup_begin);
-  /* ts_t  ts_fadeup_end      */ out << bits(my.t->ts_fadeup_end);
-  /* ts_t  ts_fall_begin      */ out << bits(my.t->ts_fall_begin);
-  /* ts_t  ts_fall_end        */ out << bits(my.t->ts_fall_end);
-  /* ts_t  ts_flip_start      */ out << bits(my.t->ts_flip_start);
-  /* ts_t  ts_lunge_begin     */ out << bits(my.t->ts_lunge_begin);
-  /* ts_t  ts_lunge_end       */ out << bits(my.t->ts_lunge_end);
-  /* ts_t  ts_anim_delay_end  */ out << bits(my.t->ts_anim_delay_end);
+  /* ts_t  ts_bounce_begin                  */ out << bits(my.t->ts_bounce_begin);
+  /* ts_t  ts_bounce_end                    */ out << bits(my.t->ts_bounce_end);
+  /* ts_t  ts_fadeup_begin                  */ out << bits(my.t->ts_fadeup_begin);
+  /* ts_t  ts_fadeup_end                    */ out << bits(my.t->ts_fadeup_end);
+  /* ts_t  ts_fall_begin                    */ out << bits(my.t->ts_fall_begin);
+  /* ts_t  ts_fall_end                      */ out << bits(my.t->ts_fall_end);
+  /* ts_t  ts_flip_start                    */ out << bits(my.t->ts_flip_start);
+  /* ts_t  ts_lunge_begin                   */ out << bits(my.t->ts_lunge_begin);
+  /* ts_t  ts_lunge_end                     */ out << bits(my.t->ts_lunge_end);
+  /* ts_t  ts_anim_delay_end                */ out << bits(my.t->ts_anim_delay_end);
   /* uint32_t     tick_last_did_something   */ out << bits(my.t->tick_last_did_something);
   /* uint32_t     tick_last_dropped         */ out << bits(my.t->tick_last_dropped);
   /* uint32_t     tick_last_location_check  */ out << bits(my.t->tick_last_location_check);
   /* uint32_t     tick_last_escape          */ out << bits(my.t->tick_last_escape);
   /* uint32_t     tick_last_level_change    */ out << bits(my.t->tick_last_level_change);
+  // clang-format on
   /////////////////////////////////////////////////////////////////////////
   // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
   // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
