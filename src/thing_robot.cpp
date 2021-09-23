@@ -1539,7 +1539,7 @@ void Thing::robot_tick(void)
                 (int) mid_at.y, get_health(), get_health_max());
             BOTCON("Robot can enchant something");
             game->tick_begin("Robot can enchant something");
-            robot_change_state(ROBOT_STATE_ENCHANTING, "can enchant something");
+            robot_change_state(ROBOT_STATE_USING_ENCHANTSTONE, "can enchant something");
             return;
           }
 
@@ -1695,7 +1695,7 @@ void Thing::robot_tick(void)
       }
       break;
 
-    case ROBOT_STATE_ENCHANTING :
+    case ROBOT_STATE_USING_ENCHANTSTONE :
       {
         //
         // Enchant a random item.
@@ -1727,7 +1727,7 @@ void Thing::robot_change_state(int new_state, const std::string &why)
     case ROBOT_STATE_MOVING : to = "MOVING"; break;
     case ROBOT_STATE_RESTING : to = "RESTING"; break;
     case ROBOT_STATE_OPEN_INVENTORY : to = "OPEN-INVENTORY"; break;
-    case ROBOT_STATE_ENCHANTING : to = "ENCHANTING"; break;
+    case ROBOT_STATE_USING_ENCHANTSTONE : to = "ENCHANTING"; break;
   }
   switch (monstp->robot_state) {
     case ROBOT_STATE_IDLE : from = "IDLE"; break;
@@ -1738,7 +1738,7 @@ void Thing::robot_change_state(int new_state, const std::string &why)
       wid_thing_info_fini();
       wid_inventory_init();
       break;
-    case ROBOT_STATE_ENCHANTING :
+    case ROBOT_STATE_USING_ENCHANTSTONE :
       from = "ENCHANTING";
       wid_enchant_destroy();
       wid_thing_info_fini();
@@ -1763,7 +1763,7 @@ void Thing::robot_change_state(int new_state, const std::string &why)
       game->wid_thing_info_create(game->level->player, false);
       BOTCON("Robot is looking in its inventory");
       break;
-    case ROBOT_STATE_ENCHANTING :
+    case ROBOT_STATE_USING_ENCHANTSTONE :
       BOTCON("Robot is enchanting something");
       game->wid_enchant_an_item();
       break;
