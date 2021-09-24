@@ -9,40 +9,6 @@ Liberate the Orb of Zorb and defeat Zorbash to win.
 This is work in progress. It's sort of playable right now but probably way too tough.
 Comments and suggestions welcome at this early stage.
 
-Graphics
---------
-- Various items and monsters by Oryx, [found here](https://www.oryxdesignlab.com/)
-- Various items and food by Henry Software, [found here](https://henrysoftware.itch.io)
-<!-- Oryx: Order Number: #102084 (placed on January 16, 2016 03:14PM EST) -->
-
-Music
------
-- Main music by the amazing Markus Heichelbech (deceased senior technician): [found here](http://nosoapradio.us)
-<!-- and https://drive.google.com/drive/folders/0B_fD62tSeGaVRlBaZWJwS29JSnM -->
-
-Sound effects
--------------
-- 8 bit sounds by Oryx, [found here](https://www.oryxdesignlab.com/)
-- Door sounds by TiesWijnen, [found here](https://freesound.org/people/TiesWijnen/)
-- Door sounds by danielvj, [found here](https://freesound.org/people/danielvj/)
-- Impact sounds by Adam N, [found here](https://freesound.org/people/egomassive/)
-- Impact sounds by Deathscyp, [found here](https://freesound.org/people/Deathscyp/)
-- Impact sounds by Dersuperanton, [found here](https://freesound.org/people/dersuperanton/)
-- Impact sounds by RobinHood76, [found here](https://freesound.org/people/Robinhood76/)
-- Key sounds by uEffects, [found here](https://freesound.org/people/uEffects/)
-- Slime sounds by Konstati, [found here](https://freesound.org/people/konstati/)
-- Sword sounds by Danjocross, [found here](https://freesound.org/people/Danjocross/)
-- Sword sounds by XxChr0nosxX, [found here](https://freesound.org/people/XxChr0nosxX/)
-- Wood break sounds by Deathscyp, [found here](https://freesound.org/people/Deathscyp/)
-- Footstep sounds by Rico Casazza, [found here](https://freesound.org/people/Rico_Casazza/)
-- Rat growl sounds by qubodup, [found here](https://freesound.org/people/qubodup/)
-- Rat hiss sounds by qubodup, [found here](https://freesound.org/people/qubodup/)
-- Rat squeak sounds by tim.kahn, [found here](https://freesound.org/people/tim.kahn/)
-- Grunt squeak sounds by vmgraw, [found here](https://freesound.org/people/vmgraw/)
-- Monster death sounds by Michel88, [found here](https://freesound.org/people/Michel88/)
-- Water splash sounds by launemax, [found here](https://freesound.org/people/launemax/)
-- Bone sounds by ChrisReierson, [found here](https://freesound.org/people/ChrisReierson/)
-
 Screenshots
 -----------
 ![Alt text](pics/screenshot.1.png?raw=true "")
@@ -217,3 +183,37 @@ SDL2 and Python3 is needed.
 <!--                       To resort to the darkest extremes.                     -->
 <!--                       My weakness, my pity had provided                      -->
 <!--                       An excuse for our glorious team.                       -->
+
+Graphics
+--------
+- Various items and monsters by Oryx, [found here](https://www.oryxdesignlab.com/)
+- Various items and food by Henry Software, [found here](https://henrysoftware.itch.io)
+<!-- Oryx: Order Number: #102084 (placed on January 16, 2016 03:14PM EST) -->
+
+Music
+-----
+- Main music by the amazing Markus Heichelbech (deceased senior technician): [found here](http://nosoapradio.us)
+<!-- and https://drive.google.com/drive/folders/0B_fD62tSeGaVRlBaZWJwS29JSnM -->
+
+Sound effects
+-------------
+- 8 bit sounds by Oryx, [found here](https://www.oryxdesignlab.com/)
+- Door sounds by TiesWijnen, [found here](https://freesound.org/people/TiesWijnen/)
+- Door sounds by danielvj, [found here](https://freesound.org/people/danielvj/)
+- Impact sounds by Adam N, [found here](https://freesound.org/people/egomassive/)
+- Impact sounds by Deathscyp, [found here](https://freesound.org/people/Deathscyp/)
+- Impact sounds by Dersuperanton, [found here](https://freesound.org/people/dersuperanton/)
+- Impact sounds by RobinHood76, [found here](https://freesound.org/people/Robinhood76/)
+- Key sounds by uEffects, [found here](https://freesound.org/people/uEffects/)
+- Slime sounds by Konstati, [found here](https://freesound.org/people/konstati/)
+- Sword sounds by Danjocross, [found here](https://freesound.org/people/Danjocross/)
+- Sword sounds by XxChr0nosxX, [found here](https://freesound.org/people/XxChr0nosxX/)
+- Wood break sounds by Deathscyp, [found here](https://freesound.org/people/Deathscyp/)
+- Footstep sounds by Rico Casazza, [found here](https://freesound.org/people/Rico_Casazza/)
+- Rat growl sounds by qubodup, [found here](https://freesound.org/people/qubodup/)
+- Rat hiss sounds by qubodup, [found here](https://freesound.org/people/qubodup/)
+- Rat squeak sounds by tim.kahn, [found here](https://freesound.org/people/tim.kahn/)
+- Grunt squeak sounds by vmgraw, [found here](https://freesound.org/people/vmgraw/)
+- Monster death sounds by Michel88, [found here](https://freesound.org/people/Michel88/)
+- Water splash sounds by launemax, [found here](https://freesound.org/people/launemax/)
+- Bone sounds by ChrisReierson, [found here](https://freesound.org/people/ChrisReierson/)
