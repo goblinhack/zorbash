@@ -47,7 +47,7 @@ def tp_init(name, text_name):
     mytp.set_damage_doubled_from_fire(False)
     mytp.set_damage_doubled_from_poison(False)
     mytp.set_damage_doubled_from_water(True)
-    mytp.set_damage_melee_dice("1d4")
+    mytp.set_damage_melee_dice("1d3")
     mytp.set_enchant_level(False)
     mytp.set_enchant_max(False)
     mytp.set_gfx_an_animation_only(False)

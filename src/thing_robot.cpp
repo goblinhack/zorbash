@@ -821,8 +821,7 @@ void Thing::robot_ai_choose_initial_goals(std::multiset< Goal > &goals, int minx
         }
 
         //
-        // Need more work before monsts can collect keys
-        // as they will be auto collected.
+        // Need more work before monsts can collect keys as they will be auto collected.
         //
         if (is_key_collector()) {
           if (it->is_key()) {
@@ -1564,7 +1563,7 @@ void Thing::robot_tick(void)
           //
           // Are we tired and need to rest?
           //
-          if (get_stamina() < get_stamina_max() / 3) {
+          if (get_stamina() < get_stamina_max() / 2) {
             CON("Robot: @(%s, %d,%d %d/%dh) Robot needs to rest, low on stamina", level->to_string().c_str(),
                 (int) mid_at.x, (int) mid_at.y, get_health(), get_health_max());
             BOTCON("Robot needs to rest, low on stamina");

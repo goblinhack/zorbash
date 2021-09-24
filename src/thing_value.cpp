@@ -51,7 +51,7 @@ int Thing::get_item_value(Thingp it)
 
   value += it->get_gold_value();
 
-  value += 100 * it->get_enchant();
+  value += 1000 * it->get_enchant();
 
   value *= 1 + it->get_charge_count();
 

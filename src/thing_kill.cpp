@@ -207,14 +207,28 @@ void Thing::kill(Thingp killer, const char *reason)
     if (killer && (killer != this)) {
       if (killer->is_player()) {
         if (is_monst()) {
-          TOPCON("%s is dead, %s.", The.c_str(), reason);
+          if (is_undead()) {
+            TOPCON("%s is vanquished, %s.", The.c_str(), reason);
+          } else {
+            TOPCON("%s is dead, %s.", The.c_str(), reason);
+          }
         } else {
           TOPCON("%s is destroyed %s.", The.c_str(), reason);
         }
 
         killer->score_add(this);
       } else if (is_monst() && (distance_to_player() >= DMAP_IS_PASSABLE)) {
-        TOPCON("You hear a distant shriek!");
+        if (is_undead()) {
+          TOPCON("You hear a distant moan...");
+        } else if (is_jelly()) {
+          TOPCON("You hear a distant splat...");
+        } else if (is_humanoid()) {
+          TOPCON("You hear distant cursing...");
+        } else if (is_meat()) {
+          TOPCON("You hear the distant crunching of bones...");
+        } else {
+          TOPCON("You hear a distant shriek...");
+        }
       }
     }
   }

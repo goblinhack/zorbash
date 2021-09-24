@@ -387,7 +387,8 @@ do
         fi
     done
 
-    sort -o $PAYLOAD $PAYLOAD
+    sort $PAYLOAD | uniq > $PAYLOAD.tmp
+    mv $PAYLOAD.tmp $PAYLOAD
 
     cat $PRE $PAYLOAD $POST > $OUT
 

@@ -100,13 +100,23 @@ bool Thing::move(fpoint future_pos)
   }
 
   //
-  // Don't let minions wander too far
+  // Don't let minions wander too far from their master.
   //
   auto master = get_top_minion_owner();
   if (master) {
     if (minion_leash_distance()) {
-      if (distance(future_pos, master->mid_at) >= minion_leash_distance()) {
-        dbg("Minion cannot to %f,%f; it tugs at the leash", future_pos.x, future_pos.y);
+      auto new_distance  = distance(future_pos, master->mid_at);
+      auto curr_distance = distance(mid_at, master->mid_at);
+      if (new_distance <= curr_distance) {
+        //
+        // Always allow moves that end up closer to the base
+        //
+      } else if (new_distance >= minion_leash_distance()) {
+        //
+        // Too far.
+        //
+        dbg("Minion cannot to %f,%f (new-dist %f, curr-dist %f); it tugs at the leash at %f,%f", future_pos.x,
+            future_pos.y, new_distance, curr_distance, master->mid_at.x, master->mid_at.y);
         lunge(future_pos);
         return false;
       }
@@ -257,7 +267,15 @@ bool Thing::move(fpoint future_pos, uint8_t up, uint8_t down, uint8_t left, uint
   //
   if (! attack) {
     if (! is_undead() && ! is_ethereal()) {
-      rest();
+      if (up || down || left || right) {
+        if (pcg_random_range(0, 20) > get_stat_constitution()) {
+          if (pcg_random_range(0, 100) < 10) {
+            decr_stamina();
+          }
+        }
+      } else {
+        rest();
+      }
     }
   }
 

@@ -42,7 +42,7 @@ def tp_init(name, text_name):
     mytp.set_collision_circle(True)
     mytp.set_collision_hit_priority(10)
     mytp.set_collision_radius(0.40)
-    mytp.set_damage_bite_dice("1d4")
+    mytp.set_damage_bite_dice("1d3")
     mytp.set_damage_doubled_from_acid(False)
     mytp.set_damage_doubled_from_fire(False)
     mytp.set_damage_doubled_from_poison(False)

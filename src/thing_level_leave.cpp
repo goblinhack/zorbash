@@ -38,8 +38,7 @@ void Thing::level_leave(void)
     }
   }
 
-  FOR_ALL_THING_GROUPS(group)
-  {
+  for (auto group = THING_GROUP_ALL; group < MAX_THING_GROUPS; group++) {
     auto f = level->all_things[ group ].find(id);
     if (f != level->all_things[ group ].end()) {
       level->all_things[ group ].erase(f);

@@ -67,8 +67,7 @@ void Thing::destroy(void)
   delete_lights();
   delete_particle();
 
-  FOR_ALL_THING_GROUPS(group)
-  {
+  for (auto group = THING_GROUP_ALL; group < MAX_THING_GROUPS; group++) {
     auto f = level->all_things_to_be_destroyed[ group ].find(id);
     if (f != level->all_things_to_be_destroyed[ group ].end()) {
       dbg2("Remove from gc");

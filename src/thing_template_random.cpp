@@ -293,7 +293,7 @@ Tpp Level::tp_random_monst(const point &p)
   TRACE_AND_INDENT();
   auto tries = 0U;
   for (;;) {
-    if (tries++ > 1000) {
+    if (tries++ > 10000) {
       return nullptr;
     }
     auto tpp = ::tp_random_monst();
@@ -331,9 +331,9 @@ Tpp Level::tp_random_monst_easy(const point &p)
 
   auto tries = 0U;
   for (;;) {
-    if (tries++ > 1000) {
-      ERR("Cannot place easy monst");
-      return nullptr;
+    if (tries++ > 10000) {
+      CON("Cannot place easy monst at %d,%d", p.x, p.y);
+      return tp_random_monst(p);
     }
     auto tpp = ::tp_random_monst();
     if (tpp->will_avoid_hazard(this, p)) {
@@ -375,9 +375,9 @@ Tpp Level::tp_random_monst_med(const point &p)
 
   auto tries = 0U;
   for (;;) {
-    if (tries++ > 1000) {
-      ERR("Cannot place medium monst");
-      return nullptr;
+    if (tries++ > 10000) {
+      CON("Cannot place medium monst at %d,%d", p.x, p.y);
+      return tp_random_monst(p);
     }
     auto tpp = ::tp_random_monst();
     if (tpp->will_avoid_hazard(this, p)) {
@@ -422,9 +422,9 @@ Tpp Level::tp_random_monst_hard(const point &p)
 
   auto tries = 0U;
   for (;;) {
-    if (tries++ > 1000) {
-      ERR("Cannot place hard monst");
-      return nullptr;
+    if (tries++ > 10000) {
+      CON("Cannot place hard monst at %d,%d", p.x, p.y);
+      return tp_random_monst(p);
     }
     auto tpp = ::tp_random_monst();
     if (tpp->will_avoid_hazard(this, p)) {
@@ -762,7 +762,7 @@ Tpp Level::tp_random_minion_generator(const point &p)
   TRACE_AND_INDENT();
   auto tries = 0U;
   for (;;) {
-    if (tries++ > 1000) {
+    if (tries++ > 10000) {
       return nullptr;
     }
     auto tpp = ::tp_random_minion_generator();

@@ -1,25 +1,6 @@
 
 Todo
 ----
-00:00:17.304:                         L36,36,5 00a7535c(gold2 @14,45 0/0h):            Added to interesting things
-00:00:17.304:                     L36,36,5 00bfbe70(bag_small @14,45 0/0h):           Try to carry L36,36,5 00a7535c(gold2 @14,45 0/0h)
-00:00:17.304:                     L36,36,5 00bfbe70(bag_small @14,45 0/0h):           Non item not added to bag
-00:00:17.305: ERROR: Crashed
-00:00:17.305: code trace
-00:00:17.305: ==========
-00:00:17.305: (stack) 0 void sdl_loop(), line 1146
-00:00:17.305: (stack) 1 bool Level::tick(), line 43
-00:00:17.305: (stack) 2 bool Thing_::fall_to_next_level(), line 139
-00:00:17.305: (stack) 3 bool Thing_::fall_to_next_level(), line 145
-00:00:17.305: (stack) 4 void Game::init_level(point3d), line 45
-00:00:17.305: (stack) 5 Levelp World::new_level_at(point3d, int), line 31
-00:00:17.305: (stack) 6 void Level::create(point3d, int), line 16
-00:00:17.305: (stack) 7 bool Level::create_dungeon(point3d, int), line 19
-00:00:17.305: (stack) 8 void Level::create_dungeon_place_objects_with_normal_placement_rules(Dungeonp), line 879
-00:00:17.305: (stack) 9 bool Thing_::carry(Thingp), line 18
-00:00:17.305: (stack) 10 void segv_handler(int), line 129
-00:00:17.305: (stack) 11 void callstack_dump(), line 19
-
 - add poison debuff
 - robot got stuck in web
 - rusty sword has poisoning chance?

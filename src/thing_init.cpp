@@ -114,6 +114,13 @@ void Thing::init(Levelp level, const std::string &name, const fpoint born, const
   tp_or_update();
 
   //
+  // Make sure we have the ability to carry items.
+  //
+  if (is_monst() || is_bag()) {
+    new_monst();
+  }
+
+  //
   // Init the z depth
   //
   z_depth = tp()->z_depth;

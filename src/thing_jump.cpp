@@ -103,7 +103,7 @@ bool Thing::try_to_jump(point to, bool be_careful)
 
     if (be_careful) {
       if (is_player() && game->robot_mode) {
-        CON("Robot: cannot jump as far as it would like");
+        CON("Robot: Cannot jump as far as it would like");
       }
       return false;
     }

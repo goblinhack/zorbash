@@ -205,6 +205,21 @@ bool Thing::ai_choose_wander(point &nh)
   monstp->wander_target = point(-1, -1);
 
   target = get_random_scent_target();
+
+  //
+  // Minions are constrained
+  //
+  auto master = get_top_minion_owner();
+  if (master) {
+    if (minion_leash_distance()) {
+      auto new_distance = distance(make_fpoint(target), master->mid_at);
+      if (new_distance > minion_leash_distance()) {
+        dbg("Could not wander, too far off the leash; could not create path to %d,%d", target.x, target.y);
+        return false;
+      }
+    }
+  }
+
   if (! ai_create_path(nh, make_point(mid_at), target)) {
     dbg("Could not wander; could not create path to %d,%d", target.x, target.y);
     return false;

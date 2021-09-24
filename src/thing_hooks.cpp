@@ -166,8 +166,7 @@ void Thing::remove_all_references()
     //
     // Slow, but not used too often
     //
-    FOR_ALL_THING_GROUPS(group)
-    {
+    for (auto group = THING_GROUP_ALL; group < MAX_THING_GROUPS; group++) {
       for (auto p : level->all_things[ group ]) {
         auto t = p.second;
         auto o = t->get_immediate_owner();
@@ -184,8 +183,7 @@ void Thing::remove_all_references()
     //
     // Slow, but not used too often
     //
-    FOR_ALL_THING_GROUPS(group)
-    {
+    for (auto group = THING_GROUP_ALL; group < MAX_THING_GROUPS; group++) {
       for (auto p : level->all_things[ group ]) {
         auto t = p.second;
         auto o = t->get_immediate_minion_owner();
@@ -202,8 +200,7 @@ void Thing::remove_all_references()
     //
     // Slow, but not used too often
     //
-    FOR_ALL_THING_GROUPS(group)
-    {
+    for (auto group = THING_GROUP_ALL; group < MAX_THING_GROUPS; group++) {
       for (auto p : level->all_things[ group ]) {
         auto t = p.second;
         auto o = t->get_immediate_spawned_owner();
@@ -216,8 +213,7 @@ void Thing::remove_all_references()
 
   IF_DEBUG4
   {
-    FOR_ALL_THING_GROUPS(group)
-    {
+    for (auto group = THING_GROUP_ALL; group < MAX_THING_GROUPS; group++) {
       for (auto p : level->all_things[ group ]) {
         auto t = p.second;
         if (! t->monstp) {
