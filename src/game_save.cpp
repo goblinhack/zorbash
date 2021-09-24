@@ -107,12 +107,16 @@ std::ostream &operator<<(std::ostream &out, Bits< Monstp & > const my)
   /* std::array<std::array<ThingId > >      */ out << bits(my.t->bag);
   /* std::list<ThingId>   carrying          */ out << bits(my.t->carrying);
   /* std::list<ThingId>   skills            */ out << bits(my.t->skills);
+  /* std::list<ThingId>   buffs             */ out << bits(my.t->buffs);
+  /* std::list<ThingId>   debuffs           */ out << bits(my.t->debuffs);
   /* std::string          msg               */ out << bits(my.t->msg);
   /* std::string          dead_reason       */ out << bits(my.t->dead_reason);
   /* std::vector<ThingId> enemies           */ out << bits(my.t->enemies);
   /* std::vector<point>   move_path         */ out << bits(my.t->move_path);
   /* std::vector<uint16_t> inventory_id     */ out << bits(my.t->inventory_id);
   /* std::vector<uint16_t> skillbox_id      */ out << bits(my.t->skillbox_id);
+  /* std::vector<uint16_t> buffbox_id       */ out << bits(my.t->buffbox_id);
+  /* std::vector<uint16_t> debuffbox_id     */ out << bits(my.t->debuffbox_id);
   /* ts_t  ts_bounce_begin                  */ out << bits(my.t->ts_bounce_begin);
   /* ts_t  ts_bounce_end                    */ out << bits(my.t->ts_bounce_end);
   /* ts_t  ts_fadeup_begin                  */ out << bits(my.t->ts_fadeup_begin);

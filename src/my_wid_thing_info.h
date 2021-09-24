@@ -5,7 +5,7 @@
 //
 
 #pragma once
-void wid_thing_info_fini(void);
+void    wid_thing_info_fini(void);
 uint8_t wid_thing_info_init(void);
 
 #include "my_wid.h"
@@ -14,4 +14,4 @@ uint8_t wid_thing_info_init(void);
 //
 // Global widgets.
 //
-extern std::list<WidPopup *> wid_thing_info_window;
+extern std::list< WidPopup * > wid_thing_info_window;

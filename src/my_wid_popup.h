@@ -11,14 +11,15 @@
 #include "my_main.h"
 #include "my_wid_text_box.h"
 
-class WidPopup {
+class WidPopup
+{
 private:
   std::map< unsigned int, std::wstring > wid_popup_lines;
-  std::vector<Widp> children;
+  std::vector< Widp >                    children;
 
 public:
-  Widp wid_popup_container {};
-  Widp wid_title {};
+  Widp        wid_popup_container {};
+  Widp        wid_title {};
   WidTextBox *wid_text_area {};
 
   point       tl;
@@ -29,13 +30,8 @@ public:
 
 public:
   ~WidPopup();
-  WidPopup (const std::string name,
-        point tl, point br,
-        Tilep title_tile=nullptr,
-        const std::string background = "",
-        bool horiz_scroll=true,
-        bool vert_scoll=true,
-        int vert_scroll_size=-1);
+  WidPopup(const std::string name, point tl, point br, Tilep title_tile = nullptr, const std::string background = "",
+           bool horiz_scroll = true, bool vert_scoll = true, int vert_scroll_size = -1);
 
 public:
   void log(std::string s, bool lhs = false, bool rhs = false);

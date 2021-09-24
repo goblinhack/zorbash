@@ -16,9 +16,9 @@ extern Fontp font_large;
 #include "SDL_ttf.h"
 #include "my_tile.h"
 
-#define TTF_GLYPH_MAX              134
-#define TTF_GLYPH_MIN              ' '
-#define TTF_GLYPH_PER_ROW          60
+#define TTF_GLYPH_MAX     134
+#define TTF_GLYPH_MIN     ' '
+#define TTF_GLYPH_PER_ROW 60
 
 typedef struct {
   double width;
@@ -36,27 +36,28 @@ typedef struct {
 
 typedef struct glyphtex_ {
   SDL_Surface *image {};
-  uint32_t tex;
-  Texp tex_p = {};
+  uint32_t     tex;
+  Texp         tex_p = {};
 } glyphtex;
 
-void font_fini(void);
+void    font_fini(void);
 uint8_t font_init(void);
-Fontp font_find(std::string);
+Fontp   font_find(std::string);
 
-class Font {
+class Font
+{
 
 public:
-  Font (void) { }
-  ~Font (void) { }
-  std::array<glyph, TTF_GLYPH_MAX+1> glyphs {};
-  std::array<glyphtex, TTF_GLYPH_MAX+1> tex {};
-  SDL_Color foreground = {};
-  SDL_Color background = {};
-  std::array<int, TTF_GLYPH_MAX+1> u_to_c {};
-  std::array<int, TTF_GLYPH_MAX+1> valid {};
-  std::array<Tilep, TTF_GLYPH_MAX+1> cache {};
-  int tile_index;
-  Tilep unicode_to_tile(int u);
+  Font(void) {}
+  ~Font(void) {}
+  std::array< glyph, TTF_GLYPH_MAX + 1 >    glyphs {};
+  std::array< glyphtex, TTF_GLYPH_MAX + 1 > tex {};
+  SDL_Color                                 foreground = {};
+  SDL_Color                                 background = {};
+  std::array< int, TTF_GLYPH_MAX + 1 >      u_to_c {};
+  std::array< int, TTF_GLYPH_MAX + 1 >      valid {};
+  std::array< Tilep, TTF_GLYPH_MAX + 1 >    cache {};
+  int                                       tile_index;
+  Tilep                                     unicode_to_tile(int u);
 };
 #endif

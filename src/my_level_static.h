@@ -10,7 +10,7 @@
 #include "my_fwd.h"
 #include "my_thing_defs.h"
 
-typedef std::vector<LevelStaticp> LevelsStatic;
+typedef std::vector< LevelStaticp > LevelsStatic;
 
 class LevelStatic
 {
@@ -18,23 +18,21 @@ private:
 public:
   static LevelsStatic all_static_levels;
 
-  LevelStatic (void);
-  ~LevelStatic (void);
+  LevelStatic(void);
+  ~LevelStatic(void);
 
   //
   // Unique per level.
   //
-  uint32_t                levelno {0};
-  uint8_t                 width  {MAP_WIDTH};
-  uint8_t                 height {MAP_HEIGHT};
-  uint8_t                 depth  {0};
+  uint32_t levelno {0};
+  uint8_t  width {MAP_WIDTH};
+  uint8_t  height {MAP_HEIGHT};
+  uint8_t  depth {0};
 
-  std::array<
-    std::array<
-    std::array<char, MAP_DEPTH>, MAP_HEIGHT>, MAP_WIDTH> data {};
+  std::array< std::array< std::array< char, MAP_DEPTH >, MAP_HEIGHT >, MAP_WIDTH > data {};
 
   static LevelStaticp level_new(void);
-  void finalize(void);
-  void dump(void);
+  void                finalize(void);
+  void                dump(void);
 };
 void level_fini(void);

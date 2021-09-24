@@ -11,10 +11,10 @@
 
 typedef struct ramdisk_t_ {
   const unsigned char *data;
-  int len;
+  int                  len;
 } ramdisk_t;
 
-extern std::map<std::string, ramdisk_t_> ramdisk_data;
+extern std::map< std::string, ramdisk_t_ > ramdisk_data;
 
 extern unsigned char *ramdisk_load(const char *filename, int *outlen);
-extern void ramdisk_init(void);
+extern void           ramdisk_init(void);

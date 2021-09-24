@@ -10,6 +10,6 @@
 
 #include <string>
 
-std::string string_sprintf (const char *format, ...);
-std::string string_sprintf (const char *format, va_list args);
+std::string string_sprintf(const char *format, ...);
+std::string string_sprintf(const char *format, va_list args);
 #endif

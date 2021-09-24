@@ -13,20 +13,17 @@
 #include "my_thing_id.h"
 #include "my_tile.h"
 
-typedef class Projectile_ {
+typedef class Projectile_
+{
 public:
-  Projectile_(
-       Levelp level,
-       ThingId thing_id,
-       point start, point stop,
-       point pixel_map_at,
-       uint32_t ts_start, uint32_t ts_stop);
+  Projectile_(Levelp level, ThingId thing_id, point start, point stop, point pixel_map_at, uint32_t ts_start,
+              uint32_t ts_stop);
 
-  Levelp level {};
+  Levelp  level {};
   ThingId id {};
-  point start;
-  point stop;
-  point pixel_map_at;
+  point   start;
+  point   stop;
+  point   pixel_map_at;
 
   uint32_t ts_start {};
   uint32_t ts_stop {};
@@ -35,7 +32,7 @@ public:
   // Animation frames
   //
   std::vector< Tilep > tiles;
-  static const auto max_frames = 16;
+  static const auto    max_frames = 16;
 } Projectile;
 
 #endif // _MY_LASER_H_

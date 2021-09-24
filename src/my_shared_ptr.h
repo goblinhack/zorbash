@@ -5,19 +5,22 @@
 #include <string>
 #include <iostream>
 
-template <typename T> class SmartPointerWrapper {
+template < typename T > class SmartPointerWrapper
+{
 private:
-  std::shared_ptr<T> sptr;
-  std::string name {"nullptr"};
+  std::shared_ptr< T > sptr;
+  std::string          name {"nullptr"};
 
-  void debug (const std::string &what) {
+  void debug(const std::string &what)
+  {
 #ifdef DEBUG
     std::cout << what << " " << to_string() << std::endl;
 #endif
   }
 
-  std::string to_string (void) {
-    auto address = static_cast<const void*>(this);
+  std::string to_string(void)
+  {
+    auto              address = static_cast< const void * >(this);
     std::stringstream ss;
     ss << address;
     if (sptr) {
@@ -26,39 +29,39 @@ private:
       return "SmartPointerWrapper(" + ss.str() + ")";
     }
   }
+
 public:
   // explicit means constructor must match exactly
-  template <typename ...ARGS> explicit
-    SmartPointerWrapper(const std::string &name, ARGS... a) : name(name) {
-    sptr = std::make_shared<T>(a...);
+  template < typename... ARGS > explicit SmartPointerWrapper(const std::string &name, ARGS... a) : name(name)
+  {
+    sptr = std::make_shared< T >(a...);
     debug("make_shared");
   }
 
-  explicit SmartPointerWrapper(const std::string &name) : name(name) {
-    sptr = std::make_shared<T>();
+  explicit SmartPointerWrapper(const std::string &name) : name(name)
+  {
+    sptr = std::make_shared< T >();
     debug("make_shared");
   }
 
-  explicit SmartPointerWrapper(void) {
-    debug("init");
-  }
+  explicit SmartPointerWrapper(void) { debug("init"); }
 
-  ~SmartPointerWrapper() {
-    debug("delete");
-  }
+  ~SmartPointerWrapper() { debug("delete"); }
 
-  void rename(const std::string &name) {
+  void rename(const std::string &name)
+  {
     this->name = name;
     debug("rename");
   }
 
-  T* const operator->() { return sptr.operator->(); }
-  T* get() const { return sptr.get(); }
-  T& operator*() { return *sptr; }
-  const T& operator*() const { return *sptr; }
-  operator bool() const { return (bool)sptr; }
+  T *const operator->() { return sptr.operator->(); }
+  T *      get() const { return sptr.get(); }
+  T &      operator*() { return *sptr; }
+  const T &operator*() const { return *sptr; }
+           operator bool() const { return (bool) sptr; }
 
-  void reset() {
+  void reset()
+  {
     debug("reset");
     sptr.reset();
   }

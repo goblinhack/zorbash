@@ -18,24 +18,14 @@
 using ThingId = struct ThingId_ {
 public:
   uint32_t id {};
-  ThingId_ (uint32_t id) : id(id) {}
-  constexpr ThingId_ () {}
+  ThingId_(uint32_t id) : id(id) {}
+  constexpr ThingId_() {}
 
-  bool operator< (const ThingId_& rhs) const {
-    return (id < rhs.id);
-  }
-  bool operator! () const {
-    return id == 0;
-  }
-  bool operator== (const ThingId_& rhs) const {
-    return (id == rhs.id);
-  }
-  bool operator!= (const ThingId_& rhs) const {
-    return (id != rhs.id);
-  }
-  bool ok (void) const {
-    return id != 0;
-  }
+  bool operator<(const ThingId_ &rhs) const { return (id < rhs.id); }
+  bool operator!() const { return id == 0; }
+  bool operator==(const ThingId_ &rhs) const { return (id == rhs.id); }
+  bool operator!=(const ThingId_ &rhs) const { return (id != rhs.id); }
+  bool ok(void) const { return id != 0; }
 };
 
 constexpr auto NoThingId = ThingId_();

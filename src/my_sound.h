@@ -27,26 +27,25 @@ bool sound_play(const std::string &alias);
 bool sound_play_channel(int chan, const std::string &alias);
 void sound_halt(void);
 
-class sound {
+class sound
+{
 public:
-  sound (std::string alias) : alias(alias)
-  {
-  }
+  sound(std::string alias) : alias(alias) {}
 
-  ~sound (void)
+  ~sound(void)
   {
     Mix_FreeChunk(chunk);
     myfree(data);
   }
 
-  std::string alias;
-  Mix_Chunk *chunk = {};
-  unsigned char *data = {};
-  int32_t len = {};
-  float volume {};
+  std::string    alias;
+  Mix_Chunk *    chunk = {};
+  unsigned char *data  = {};
+  int32_t        len   = {};
+  float          volume {};
 };
 
-extern std::map<std::string, class sound *> all_sound;
+extern std::map< std::string, class sound * > all_sound;
 
 enum {
   CHANNEL_MISC,

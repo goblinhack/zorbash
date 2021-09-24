@@ -11,8 +11,8 @@
 #define _MY_TTF_H_
 
 Fontp ttf_new(std::string name, int pointSize, int style);
-void ttf_free(Fontp);
-void ttf2tga(void);
+void  ttf_free(Fontp);
+void  ttf2tga(void);
 Fontp ttf_read_tga(Fontp, const char *name, int pointsize);
 Fontp ttf_write_tga(std::string name, int pointsize, int style);
 #endif

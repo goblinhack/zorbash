@@ -38,11 +38,11 @@ typedef struct pcg_state_setseq_64 pcg32_random_t;
 
 extern bool pcg_random_allowed;
 
-extern uint32_t pcg32_random_r(pcg32_random_t* rng);
-extern void pcg32_srandom_r(pcg32_random_t* rng, uint64_t initstate, uint64_t initseq);
-extern void pcg32_srandom(uint64_t seed, uint64_t seq);
+extern uint32_t pcg32_random_r(pcg32_random_t *rng);
+extern void     pcg32_srandom_r(pcg32_random_t *rng, uint64_t initstate, uint64_t initseq);
+extern void     pcg32_srandom(uint64_t seed, uint64_t seq);
 extern uint32_t pcg32_random(void);
-extern uint32_t pcg32_boundedrand_r(pcg32_random_t* rng, uint32_t bound);
+extern uint32_t pcg32_boundedrand_r(pcg32_random_t *rng, uint32_t bound);
 extern uint32_t pcg32_boundedrand(uint32_t bound);
 
 #endif // PCG_BASIC_H_INCLUDED

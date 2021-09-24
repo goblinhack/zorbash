@@ -130,12 +130,16 @@ std::istream &operator>>(std::istream &in, Bits< Monstp & > my)
   /* std::array<std::array<ThingId > >      */ in >> bits(my.t->bag);
   /* std::list<ThingId>   carrying          */ in >> bits(my.t->carrying);
   /* std::list<ThingId>   skills            */ in >> bits(my.t->skills);
+  /* std::list<ThingId>   buffs             */ in >> bits(my.t->buffs);
+  /* std::list<ThingId>   debuffs           */ in >> bits(my.t->debuffs);
   /* std::string          msg               */ in >> bits(my.t->msg);
   /* std::string          dead_reason       */ in >> bits(my.t->dead_reason);
   /* std::vector<ThingId> enemies           */ in >> bits(my.t->enemies);
   /* std::vector<point>   move_path         */ in >> bits(my.t->move_path);
   /* std::vector<uint16_t> inventory_id     */ in >> bits(my.t->inventory_id);
   /* std::vector<uint16_t> skillbox_id      */ in >> bits(my.t->skillbox_id);
+  /* std::vector<uint16_t> buffbox_id       */ in >> bits(my.t->buffbox_id);
+  /* std::vector<uint16_t> debuffbox_id     */ in >> bits(my.t->debuffbox_id);
   /* ts_t  ts_bounce_begin                  */ in >> bits(T); my.t->ts_bounce_begin = load(T);
   /* ts_t  ts_bounce_end                    */ in >> bits(T); my.t->ts_bounce_end = load(T);
   /* ts_t  ts_fadeup_begin                  */ in >> bits(T); my.t->ts_fadeup_begin = load(T);

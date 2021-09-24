@@ -12,10 +12,10 @@
 
 void putf(FILE *fp, const char *s);
 
-#define FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS() \
-  fflush(stdout); \
-  fflush(stderr); \
-  fflush(MY_STDOUT); \
+#define FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS()                                                                          \
+  fflush(stdout);                                                                                                      \
+  fflush(stderr);                                                                                                      \
+  fflush(MY_STDOUT);                                                                                                   \
   fflush(MY_STDERR);
 
 #ifdef _WIN32
