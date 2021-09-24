@@ -48,7 +48,7 @@ Older Screenshots
 How to build
 ------------
 
-- On Linux: (last tried ubuntu 19.04 on Sat Feb 13 15:12:42 GMT 2021)
+- On Linux: (Ubuntu 21.04)
 <pre>
     sh ./RUNME
 </pre>
@@ -56,11 +56,11 @@ How to build
 <pre>
     sh ./RUNME.docker.ubuntu
 </pre>
-- On MacOS:
+- On MacOS (needs Mac Ports/Homebrew):
 <pre>
     sh ./RUNME
 </pre>
-- On Windows: (install msys2 first via https://www.msys2.org/)
+- On Windows (todo): (install msys2 first via https://www.msys2.org/)
 <pre>
     sh ./RUNME.windows.mingw64
 </pre>
