@@ -1,18 +1,17 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
-// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
-#include <algorithm>
-#include "my_globals.h"
-#include "my_sys.h"
-#include "my_level.h"
 #include "my_dmap.h"
+#include "my_globals.h"
+#include "my_level.h"
 #include "my_math.h"
-#include "my_thing.h"
 #include "my_monst.h"
 #include "my_random.h"
+#include "my_sys.h"
+#include "my_thing.h"
+#include <algorithm>
 
 void Thing::ai_get_next_hop(void)
 {

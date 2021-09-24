@@ -1,18 +1,17 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
-// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
-#include "my_sys.h"
+#include "my_console.h"
 #include "my_game.h"
 #include "my_globals.h"
-#include "my_traceback.h"
-#include "my_console.h"
-#include "my_wid_console.h"
 #include "my_log.h"
-#include "my_string.h"
 #include "my_ptrcheck.h"
+#include "my_string.h"
+#include "my_sys.h"
+#include "my_traceback.h"
+#include "my_wid_console.h"
 
 void Level::log_(const char *fmt, va_list args)
 {

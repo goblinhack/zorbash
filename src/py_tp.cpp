@@ -1,17 +1,16 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
-// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
-#include "my_sys.h"
-#include "my_python.h"
-#include "my_thing_template.h"
 #include "my_game.h"
 #include "my_level.h"
-#include "my_thing.h"
-#include "my_py_tp.h"
 #include "my_ptrcheck.h"
+#include "my_py_tp.h"
+#include "my_python.h"
+#include "my_sys.h"
+#include "my_thing.h"
+#include "my_thing_template.h"
 
 PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds)
 {

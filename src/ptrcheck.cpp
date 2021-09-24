@@ -2,6 +2,8 @@
 // Copyright goblinhack@gmail.com
 //
 
+#include <ctime>
+#include <iostream>
 #include <locale.h>  // do not remove
 #include <stdint.h>  // do not remove
 #include <stdio.h>   // do not remove
@@ -9,15 +11,13 @@
 #include <strings.h> // do not remove
 #include <time.h>    // do not remove
 #include <unistd.h>  // do not remove
-#include <iostream>
-#include <ctime>
 
-#include "my_main.h"
 #include "my_callstack.h"
-#include "my_traceback.h"
+#include "my_globals.h"
+#include "my_main.h"
 #include "my_sprintf.h"
 #include "my_time.h"
-#include "my_globals.h"
+#include "my_traceback.h"
 
 bool ptr_check_some_pointers_changed;
 

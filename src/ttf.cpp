@@ -1,26 +1,25 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
-// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
-#include "my_sys.h"
+#include "my_array_bounds_check.h"
+#include "my_bits.h"
+#include "my_font.h"
 #include "my_gl.h"
-#include "my_wid.h"
+#include "my_math.h"
+#include "my_pixel.h"
+#include "my_ptrcheck.h"
+#include "my_ramdisk.h"
+#include "my_sdl.h"
+#include "my_string.h"
+#include "my_sys.h"
 #include "my_tex.h"
 #include "my_tile.h"
 #include "my_ttf.h"
-#include "my_ramdisk.h"
-#include "my_string.h"
-#include "my_font.h"
-#include "my_bits.h"
-#include "my_math.h"
-#include "my_pixel.h"
-#include "my_sdl.h"
+#include "my_wid.h"
 #include "stb_image.h"
 #include "stb_image_write.h"
-#include "my_array_bounds_check.h"
-#include "my_ptrcheck.h"
 
 static void ttf_create_tex_from_char(TTF_Font *ttf, const char *name, Font *f, uint16_t c, uint16_t d);
 

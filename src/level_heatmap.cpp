@@ -1,11 +1,10 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
-// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
-#include "my_level.h"
 #include "my_array_bounds_check.h"
+#include "my_level.h"
 
 uint8_t Level::heatmap(const point &p)
 {

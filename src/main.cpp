@@ -1,46 +1,45 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
-// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #define __MAIN__
 
-#include <strings.h> // do not remove
+#include <libgen.h>  // dirname
+#include <random>    // std::default_random_engine
+#include <signal.h>  // dirname
 #include <string.h>  // do not remove
+#include <strings.h> // do not remove
 #include <time.h>    // do not remove
 #include <unistd.h>  // do not remove
-#include <libgen.h>  // dirname
-#include <signal.h>  // dirname
-#include <random>    // std::default_random_engine
 std::default_random_engine rng;
 
-#include "my_sys.h"
-#include "my_main.h"
-#include "my_game.h"
-#include "my_music.h"
 #include "my_audio.h"
-#include "my_sound.h"
-#include "my_thing_template.h"
-#include "my_python.h"
-#include "my_gl.h"
-#include "my_wid_console.h"
-#include "my_wid_topcon.h"
-#include "my_wid_botcon.h"
-#include "my_wid_actionbar.h"
-#include "my_font.h"
 #include "my_dir.h"
 #include "my_file.h"
-#include "my_room.h"
-#include "my_level_static.h"
+#include "my_font.h"
+#include "my_game.h"
 #include "my_gfx.h"
-#include "my_random_name.h"
-#include "my_random.h"
+#include "my_gl.h"
 #include "my_globals.h"
+#include "my_level_static.h"
+#include "my_main.h"
+#include "my_music.h"
 #include "my_ptrcheck.h"
-#include "my_string.h"
-#include "my_sdl.h"
+#include "my_python.h"
 #include "my_ramdisk.h"
+#include "my_random.h"
+#include "my_random_name.h"
+#include "my_room.h"
+#include "my_sdl.h"
+#include "my_sound.h"
+#include "my_string.h"
+#include "my_sys.h"
+#include "my_thing_template.h"
+#include "my_wid_actionbar.h"
+#include "my_wid_botcon.h"
+#include "my_wid_console.h"
+#include "my_wid_topcon.h"
 
 static char **ARGV;
 

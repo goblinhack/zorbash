@@ -1,16 +1,15 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
-// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
-#include <SDL_mixer.h>
-#include "my_sys.h"
+#include "my_file.h"
+#include "my_game.h"
 #include "my_main.h"
 #include "my_music.h"
 #include "my_ptrcheck.h"
-#include "my_file.h"
-#include "my_game.h"
+#include "my_sys.h"
+#include <SDL_mixer.h>
 
 class music
 {

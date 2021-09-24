@@ -1,12 +1,14 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
-// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #pragma once
 #ifndef _MY_GETPUT_PIXEL_MACROS_H_
 #define _MY_GETPUT_PIXEL_MACROS_H_
+
+#include "my_sys.h"
+#include "my_sdl.h"
 
 #define pixel_ANYw(s, y)             ((y) * (s->pitch / s->format->BytesPerPixel))
 #define pixel_32bpp(s, x, y)         ((uint32_t *) s->pixels + (x) + pixel_ANYw(s, y))

@@ -1,22 +1,21 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
-// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
-#include "my_sys.h"
-#include "my_main.h"
 #include "my_game.h"
-#include "my_wid_topcon.h"
-#include "my_wid_botcon.h"
-#include "my_wid_popup.h"
-#include "my_wid_actionbar.h"
-#include "my_wid_thing_info.h"
-#include "my_wid_rightbar.h"
+#include "my_main.h"
 #include "my_random.h"
+#include "my_sdl.h"
+#include "my_sys.h"
 #include "my_thing.h"
 #include "my_ui.h"
-#include "my_sdl.h"
+#include "my_wid_actionbar.h"
+#include "my_wid_botcon.h"
+#include "my_wid_popup.h"
+#include "my_wid_rightbar.h"
+#include "my_wid_thing_info.h"
+#include "my_wid_topcon.h"
 
 static WidPopup *wid_dead_window;
 

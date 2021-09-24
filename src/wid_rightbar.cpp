@@ -1,22 +1,21 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
-// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
-#include "my_sys.h"
 #include "my_game.h"
-#include "my_wid_rightbar.h"
-#include "my_traceback.h"
-#include "my_thing.h"
-#include "my_string.h"
-#include "my_ui.h"
 #include "my_monst.h"
-#include "my_wid_inventory.h"
-#include "my_wid_skillbox.h"
-#include "my_sdl.h"
 #include "my_ptrcheck.h"
+#include "my_sdl.h"
+#include "my_string.h"
+#include "my_sys.h"
+#include "my_thing.h"
+#include "my_traceback.h"
+#include "my_ui.h"
 #include "my_vector_bounds_check.h"
+#include "my_wid_inventory.h"
+#include "my_wid_rightbar.h"
+#include "my_wid_skillbox.h"
 
 static bool wid_rightbar_create(void);
 

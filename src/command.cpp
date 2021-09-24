@@ -1,15 +1,14 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
-// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
-#include <array>
-#include "my_sys.h"
-#include "my_main.h"
-#include "my_python.h"
 #include "my_command.h"
 #include "my_command_history.h"
+#include "my_main.h"
+#include "my_python.h"
+#include "my_sys.h"
+#include <array>
 
 /*
  * Simple console expanding code, takes a comand input and expands it as

@@ -1,15 +1,14 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
-// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
-#include <map>
+#include "my_array_bounds_check.h"
+#include "my_main.h"
 #include "my_sys.h"
 #include "my_ttf.h"
-#include "my_array_bounds_check.h"
 #include "my_ui.h"
-#include "my_main.h"
+#include <map>
 
 Fontp font_small;
 Fontp font_large;

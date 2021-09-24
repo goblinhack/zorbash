@@ -12,11 +12,11 @@
 #include <cxxabi.h>
 #include <memory>
 
-#include "my_sys.h"
-#include "my_main.h"
-#include "my_traceback.h"
-#include "my_sprintf.h"
 #include "my_globals.h"
+#include "my_main.h"
+#include "my_sprintf.h"
+#include "my_sys.h"
+#include "my_traceback.h"
 
 void Traceback::init(void)
 {
@@ -262,18 +262,17 @@ void traceback_dump(void)
 }
 
 #ifdef _WIN32
-#include <windows.h>
+#include <binutils/bfd.h>
+#include <dbghelp.h>
 #include <excpt.h>
 #include <imagehlp.h>
-#include <binutils/bfd.h>
 #include <psapi.h>
-#include <stdlib.h>
-#include <stdio.h>
 #include <stdarg.h>
-#include <string.h>
 #include <stdbool.h>
-#include <psapi.h>
-#include <dbghelp.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <windows.h>
 
 #define MAX_SYMBOL_LEN 1024
 

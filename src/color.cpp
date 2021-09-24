@@ -1,16 +1,15 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
-// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
-#include <strings.h> // do not remove, strcasecmp
-#include <string.h>  // do not remove
-#include "my_sys.h"
 #include "my_gl.h"
-#include "my_ui.h"
-#include "my_string.h"
 #include "my_main.h"
+#include "my_string.h"
+#include "my_sys.h"
+#include "my_ui.h"
+#include <string.h>  // do not remove
+#include <strings.h> // do not remove, strcasecmp
 
 typedef std::map< std::string, color > colors;
 

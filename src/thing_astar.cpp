@@ -1,20 +1,19 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
-// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
-#include <vector>
-#include <algorithm>
-#include "my_sys.h"
-#include "my_main.h"
+#include "my_array_bounds_check.h"
 #include "my_dmap.h"
+#include "my_main.h"
 #include "my_math.h"
 #include "my_sprintf.h"
+#include "my_sys.h"
 #include "my_thing.h"
-#include "my_thing_template.h"
 #include "my_thing_ai.h"
-#include "my_array_bounds_check.h"
+#include "my_thing_template.h"
+#include <algorithm>
+#include <vector>
 
 std::array< std::array< char, MAP_HEIGHT >, MAP_WIDTH > astar_debug {};
 

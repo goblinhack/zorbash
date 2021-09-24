@@ -1,17 +1,16 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
-// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
-#include "my_sys.h"
 #include "my_level.h"
-#include "my_thing.h"
-#include "my_sprintf.h"
-#include "my_wid_rightbar.h"
-#include "my_random.h"
-#include "my_thing_template.h"
 #include "my_ptrcheck.h"
+#include "my_random.h"
+#include "my_sprintf.h"
+#include "my_sys.h"
+#include "my_thing.h"
+#include "my_thing_template.h"
+#include "my_wid_rightbar.h"
 
 bool Thing::steal_treasure_from(Thingp it)
 {

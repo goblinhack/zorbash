@@ -1,17 +1,15 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
-// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
-#include <SDL_mixer.h>
-#include "my_sys.h"
 #include "my_game.h"
 #include "my_music.h"
-#include "my_wid_popup.h"
+#include "my_sdl.h"
+#include "my_sys.h"
 #include "my_ui.h"
-#include "my_sdl.h"
-#include "my_sdl.h"
+#include "my_wid_popup.h"
+#include <SDL_mixer.h>
 
 static WidPopup *game_config_sound_window;
 

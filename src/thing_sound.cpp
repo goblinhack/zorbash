@@ -1,19 +1,18 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
-// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
-#include <SDL_mixer.h>
-#include "my_sys.h"
-#include "my_main.h"
+#include "my_array_bounds_check.h"
+#include "my_file.h"
 #include "my_game.h"
 #include "my_level.h"
-#include "my_thing.h"
-#include "my_sound.h"
+#include "my_main.h"
 #include "my_ptrcheck.h"
-#include "my_file.h"
-#include "my_array_bounds_check.h"
+#include "my_sound.h"
+#include "my_sys.h"
+#include "my_thing.h"
+#include <SDL_mixer.h>
 
 bool Thing::thing_sound_play(const std::string &alias)
 {

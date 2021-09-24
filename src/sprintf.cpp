@@ -5,9 +5,9 @@
 #include <stdarg.h>
 
 // https://stackoverflow.com/questions/40159892/using-asprintf-on-windows
+#include <stdarg.h> /* needed for va_list */
 #include <stdio.h>  /* needed for vsnprintf */
 #include <stdlib.h> /* needed for malloc-free */
-#include <stdarg.h> /* needed for va_list */
 
 #ifndef _vscprintf
 /* For some reason, MSVC fails to honour this #ifndef. */

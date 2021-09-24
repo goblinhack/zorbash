@@ -1,7 +1,6 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
-// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #pragma once
@@ -9,6 +8,7 @@
 #define _MY_LIGHT_H
 
 #include "my_thing_template.h"
+#include "my_thing_defs.h"
 
 typedef struct {
   int16_t depth_furthest;

@@ -1,18 +1,17 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
-// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
-#include <strings.h> // do not remove
-#include <string.h>  // do not remove
-#include <time.h>    // do not remove
-#include <unistd.h>  // do not remove
-#include <signal.h>  // dirname
-#include "my_sys.h"
 #include "my_game.h"
 #include "my_globals.h"
+#include "my_sys.h"
 #include "my_traceback.h"
+#include <signal.h>  // dirname
+#include <string.h>  // do not remove
+#include <strings.h> // do not remove
+#include <time.h>    // do not remove
+#include <unistd.h>  // do not remove
 
 void callstack_dump(void)
 {
@@ -44,21 +43,21 @@ void callstack_dump(void)
 
 #ifdef ENABLE_CRASH_HANDLER
 
+#include <assert.h>
 #include <iostream>
 #include <stdio.h>
-#include <assert.h>
 #include <stdlib.h>
 #include <sys/wait.h>
 #include <unistd.h>
 
 #if defined(__linux__)
-#include <sys/prctl.h>
 #include <linux/limits.h>
+#include <sys/prctl.h>
 #endif
 
 #ifdef __APPLE__
-#include <sys/syslimits.h> // PATH_MAX
 #include <mach-o/dyld.h>
+#include <sys/syslimits.h> // PATH_MAX
 #endif
 
 #ifndef PATH_MAX

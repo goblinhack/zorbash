@@ -1,14 +1,13 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
-// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
-#include <string.h>
-#include "my_sys.h"
 #include "my_main.h"
 #include "my_ptrcheck.h"
+#include "my_sys.h"
 #include "stdlib.h"
+#include <string.h>
 
 void *myzalloc_(int size, std::string what, std::string file, std::string func, int line)
 {

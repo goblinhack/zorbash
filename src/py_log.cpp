@@ -1,17 +1,16 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
-// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
+#include "my_file.h"
+#include "my_globals.h"
+#include "my_log.h"
+#include "my_main.h"
+#include "my_python.h"
+#include "my_string.h"
 #include "my_sys.h"
 #include "my_time.h"
-#include "my_string.h"
-#include "my_file.h"
-#include "my_log.h"
-#include "my_python.h"
-#include "my_main.h"
-#include "my_globals.h"
 
 static void py_log_(const char *fmt, va_list args)
 {

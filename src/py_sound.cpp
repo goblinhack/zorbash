@@ -1,18 +1,16 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
-// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
-#include <strings.h> // do not remove
-#include <string.h>  // do not remove
-#include "my_main.h"
-#include "my_sys.h"
 #include "my_game.h"
-#include "my_thing.h"
+#include "my_main.h"
 #include "my_python.h"
 #include "my_sound.h"
-#include "my_main.h"
+#include "my_sys.h"
+#include "my_thing.h"
+#include <string.h>  // do not remove
+#include <strings.h> // do not remove
 
 PyObject *sound_load_(PyObject *obj, PyObject *args, PyObject *keywds)
 {

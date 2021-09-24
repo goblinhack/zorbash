@@ -1,25 +1,22 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
-// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
+#include <algorithm>
+#include <ctime>
+#include <iostream>
 #include <libgen.h>
-#include <string>
 #include <sstream>
 #include <string>
-#include <iostream>
-#include <string>
-#include <algorithm>
 #include <time.h>
-#include <ctime>
 
-#include "my_sys.h"
-#include "my_thing_template.h"
-#include "my_tex.h"
-#include "my_time.h"
 #include "my_ptrcheck.h"
 #include "my_sdl.h"
+#include "my_sys.h"
+#include "my_tex.h"
+#include "my_thing_template.h"
+#include "my_time.h"
 
 std::wstring string_to_wstring(const std::string &s);
 std::string  wstring_to_string(const std::wstring &s);

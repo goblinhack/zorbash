@@ -1,22 +1,21 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
-// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
-#include "my_sys.h"
-#include "my_game.h"
-#include "my_tile.h"
-#include "my_thing.h"
-#include "my_thing_template.h"
-#include "my_wid_thing_info.h"
-#include "my_wid_inventory.h"
-#include "my_wid_bag.h"
-#include "my_globals.h"
 #include "my_array_bounds_check.h"
+#include "my_game.h"
+#include "my_globals.h"
 #include "my_ptrcheck.h"
 #include "my_sdl.h"
+#include "my_sys.h"
 #include "my_template.h"
+#include "my_thing.h"
+#include "my_thing_template.h"
+#include "my_tile.h"
+#include "my_wid_bag.h"
+#include "my_wid_inventory.h"
+#include "my_wid_thing_info.h"
 
 void Level::cursor_describe(void)
 {

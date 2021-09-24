@@ -1,24 +1,23 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
-// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #include "minilzo.h"
-#include "my_sys.h"
-#include "my_game.h"
-#include "my_wid_topcon.h"
-#include "my_wid_console.h"
-#include "my_wid_popup.h"
-#include "my_wid_actionbar.h"
 #include "my_alloc.h"
 #include "my_array_bounds_check.h"
+#include "my_game.h"
+#include "my_gl.h"
 #include "my_monst.h"
+#include "my_sdl.h"
 #include "my_string.h"
+#include "my_sys.h"
 #include "my_thing.h"
 #include "my_ui.h"
-#include "my_sdl.h"
-#include "my_gl.h"
+#include "my_wid_actionbar.h"
+#include "my_wid_console.h"
+#include "my_wid_popup.h"
+#include "my_wid_topcon.h"
 
 WidPopup *wid_save;
 void      wid_save_destroy(void);

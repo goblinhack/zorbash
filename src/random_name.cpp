@@ -1,14 +1,13 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
-// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
-#include "my_sys.h"
 #include "my_random_name.h"
+#include "my_sys.h"
 
-#include <iostream>
 #include <functional> // for std::hash
+#include <iostream>
 #include <string>
 
 std::string random_name(int len)

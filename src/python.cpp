@@ -1,29 +1,28 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
-// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
-#include <map>
-#include "my_py_tp.h"
-#include "my_py_thing.h"
 #include "my_py_level.h"
+#include "my_py_thing.h"
+#include "my_py_tp.h"
 #include <frameobject.h>
+#include <map>
 
-#include "my_main.h"
-#include "my_random.h"
+#include "my_ascii.h"
 #include "my_callstack.h"
 #include "my_depth.h"
-#include "my_python.h"
-#include "my_py_sdl.h"
-#include "my_ascii.h"
-#include "my_thing_template.h"
-#include "my_thing.h"
+#include "my_main.h"
 #include "my_monst.h"
 #include "my_ptrcheck.h"
+#include "my_py_sdl.h"
+#include "my_python.h"
+#include "my_random.h"
 #include "my_sdl.h"
-#include "my_string.h"
 #include "my_sound.h"
+#include "my_string.h"
+#include "my_thing.h"
+#include "my_thing_template.h"
 
 static std::map< std::string, PyObject * > py_mods;
 PyObject *                                 zx_mod;

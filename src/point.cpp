@@ -1,12 +1,11 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
-// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
-#include <math.h>
-#include "my_point.h"
 #include "my_math.h"
+#include "my_point.h"
+#include <math.h>
 
 float distance(const fpoint &a, const fpoint &b) { return ((float) DISTANCE(a.x, a.y, b.x, b.y)); }
 

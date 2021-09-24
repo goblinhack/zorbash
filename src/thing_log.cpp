@@ -1,23 +1,22 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
-// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
-#include "my_sys.h"
-#include "my_main.h"
-#include "my_game.h"
-#include "my_traceback.h"
-#include "my_time.h"
-#include "my_level.h"
 #include "my_console.h"
+#include "my_game.h"
+#include "my_level.h"
+#include "my_log.h"
+#include "my_main.h"
+#include "my_ptrcheck.h"
+#include "my_string.h"
+#include "my_sys.h"
+#include "my_thing.h"
+#include "my_time.h"
+#include "my_traceback.h"
+#include "my_wid_botcon.h"
 #include "my_wid_console.h"
 #include "my_wid_topcon.h"
-#include "my_wid_botcon.h"
-#include "my_log.h"
-#include "my_thing.h"
-#include "my_string.h"
-#include "my_ptrcheck.h"
 
 void Thing::log_(const char *fmt, va_list args) const
 {

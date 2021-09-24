@@ -1,21 +1,20 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
-// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
-#include <stdio.h>
-#include <string.h>  // do not remove
-#include <strings.h> // do not remove
-#include <sys/stat.h>
-#include <unistd.h>
-#include "my_sys.h"
 #include "my_file.h"
 #include "my_globals.h"
 #include "my_main.h"
 #include "my_ptrcheck.h"
 #include "my_ramdisk.h"
 #include "my_string.h"
+#include "my_sys.h"
+#include <stdio.h>
+#include <string.h>  // do not remove
+#include <strings.h> // do not remove
+#include <sys/stat.h>
+#include <unistd.h>
 
 static unsigned char *file_io_read_if_exists(const char *filename, int *out_len);
 static unsigned char *file_io_read(const char *filename, int *len);

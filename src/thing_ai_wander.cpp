@@ -1,22 +1,21 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
-// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
-#include <algorithm>
-#include "my_main.h"
-#include "my_globals.h"
-#include "my_sys.h"
-#include "my_level.h"
-#include "my_dmap.h"
-#include "my_math.h"
-#include "my_thing.h"
-#include "my_monst.h"
-#include "my_thing_ai.h"
-#include "my_game.h"
 #include "my_array_bounds_check.h"
+#include "my_dmap.h"
+#include "my_game.h"
+#include "my_globals.h"
+#include "my_level.h"
+#include "my_main.h"
+#include "my_math.h"
+#include "my_monst.h"
+#include "my_sys.h"
+#include "my_thing.h"
+#include "my_thing_ai.h"
 #include "my_vector_bounds_check.h"
+#include <algorithm>
 
 bool Thing::ai_blocked(void)
 {

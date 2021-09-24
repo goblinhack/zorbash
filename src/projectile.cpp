@@ -1,25 +1,24 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
-// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #include <algorithm>
-#include <vector>
 #include <iterator>
 #include <math.h>
+#include <vector>
 
-#include "my_sys.h"
 #include "my_game.h"
-#include "my_projectile.h"
-#include "my_level.h"
-#include "my_tile.h"
-#include "my_point.h"
 #include "my_gl.h"
+#include "my_level.h"
+#include "my_point.h"
+#include "my_projectile.h"
+#include "my_random.h"
+#include "my_sys.h"
 #include "my_thing.h"
 #include "my_thing_template.h"
+#include "my_tile.h"
 #include "my_vector_bounds_check.h"
-#include "my_random.h"
 
 Projectile_::Projectile_(Levelp level, ThingId thing_id, point start, point stop, point pixel_map_at, uint32_t ts_start,
                          uint32_t ts_stop)

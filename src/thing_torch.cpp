@@ -1,22 +1,20 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
-// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
-#include "my_sys.h"
-#include "my_level.h"
-#include "my_depth.h"
 #include "my_color.h"
+#include "my_depth.h"
 #include "my_dmap.h"
-#include "my_sprintf.h"
-#include "my_thing.h"
-#include "my_sys.h"
 #include "my_game.h"
 #include "my_gl.h"
-#include "my_random.h"
-#include "my_thing_template.h"
+#include "my_level.h"
 #include "my_monst.h"
+#include "my_random.h"
+#include "my_sprintf.h"
+#include "my_sys.h"
+#include "my_thing.h"
+#include "my_thing_template.h"
 
 void Thing::get_light_strength_including_torch_effect(int &out_light_strength) const
 {

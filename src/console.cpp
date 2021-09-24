@@ -1,14 +1,13 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
-// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
-#include <string.h>
-#include "my_sys.h"
-#include "my_main.h"
 #include "my_console.h"
+#include "my_main.h"
+#include "my_sys.h"
 #include "my_thing_template.h"
+#include <string.h>
 
 static inline void term_puts_fg(unsigned char a)
 {

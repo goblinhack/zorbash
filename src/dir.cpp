@@ -1,20 +1,19 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
-// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
-#include <strings.h> // do not remove
 #include <string.h>  // do not remove
-#include <sys/param.h>
-#include <unistd.h>
-#include <sys/stat.h>
+#include <strings.h> // do not remove
 #include <strings.h> // do not remove, strlen
+#include <sys/param.h>
+#include <sys/stat.h>
+#include <unistd.h>
 
-#include "my_sys.h"
 #include "my_dir.h"
-#include "my_string.h"
 #include "my_ptrcheck.h"
+#include "my_string.h"
+#include "my_sys.h"
 
 /*
  * Does the requested dir exist?

@@ -1,12 +1,13 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
-// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
 #pragma once
 #ifndef _MY_COMMAND_H_
 #define _MY_COMMAND_H_
+
+#include <stdint.h>
 
 typedef struct tokens_t_ *tokenp;
 typedef struct tokens_t_ *tokensp;

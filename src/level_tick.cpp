@@ -1,24 +1,21 @@
 //
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
-// Please use spaces indent of 2, no tabs and column width of 120 to view.
 //
 
-#include "my_sys.h"
-#include "my_game.h"
-#include "my_depth.h"
-#include "my_sys.h"
-#include "my_wid_console.h"
-#include "my_random.h"
-#include "my_thing.h"
-#include "my_monst.h"
-#include "my_python.h"
-#include "my_player.h"
-#include "my_random.h"
 #include "my_array_bounds_check.h"
-#include "my_wid_actionbar.h"
-#include "my_sdl.h"
+#include "my_depth.h"
+#include "my_game.h"
+#include "my_monst.h"
+#include "my_player.h"
 #include "my_ptrcheck.h"
+#include "my_python.h"
+#include "my_random.h"
+#include "my_sdl.h"
+#include "my_sys.h"
+#include "my_thing.h"
+#include "my_wid_actionbar.h"
+#include "my_wid_console.h"
 
 void Level::handle_all_pending_things(int group)
 {
