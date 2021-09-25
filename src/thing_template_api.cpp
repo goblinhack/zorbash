@@ -303,7 +303,7 @@ int                Tp::random_jump_chance_d1000(void) const { return _random_jum
 int                Tp::is_able_to_jump_distance(void) const { return _is_able_to_jump_distance; }
 int  Tp::is_able_to_jump_on_low_hp_chance_d1000(void) const { return _is_able_to_jump_on_low_hp_chance_d1000; }
 int  Tp::is_able_to_jump(void) const { return _is_able_to_jump; }
-int  Tp::is_key_collector(void) const { return _is_key_collector; }
+int  Tp::is_ai_can_collect_keys(void) const { return _is_ai_can_collect_keys; }
 int  Tp::is_key(void) const { return _is_key; }
 int  Tp::is_killed_on_hit_or_miss(void) const { return _is_killed_on_hit_or_miss; }
 int  Tp::is_killed_on_hitting(void) const { return _is_killed_on_hitting; }
@@ -376,9 +376,9 @@ int  Tp::unused_flag47(void) const { return _unused_flag47; }
 int  Tp::unused_flag48(void) const { return _unused_flag48; }
 int  Tp::is_rusty(void) const { return _is_rusty; }
 int  Tp::unused_flag4(void) const { return _unused_flag4; }
-int  Tp::unused_flag50(void) const { return _unused_flag50; }
-int  Tp::unused_flag51(void) const { return _unused_flag51; }
-int  Tp::unused_flag52(void) const { return _unused_flag52; }
+int  Tp::ai_can_learn_skills(void) const { return _ai_can_learn_skills; }
+int  Tp::ai_can_enchant_weapons(void) const { return _ai_can_enchant_weapons; }
+int  Tp::ai_can_attack_generators(void) const { return _ai_can_attack_generators; }
 int  Tp::is_ai_wanderer(void) const { return _is_ai_wanderer; }
 int  Tp::is_organic(void) const { return _is_organic; }
 int  Tp::is_glass(void) const { return _is_glass; }
@@ -621,7 +621,7 @@ void Tp::set_random_jump_chance_d1000(int v) { _random_jump_chance_d1000 = v; }
 void Tp::set_is_able_to_jump_distance(int v) { _is_able_to_jump_distance = v; }
 void Tp::set_is_able_to_jump(int v) { _is_able_to_jump = v; }
 void Tp::set_is_able_to_jump_on_low_hp_chance_d1000(int v) { _is_able_to_jump_on_low_hp_chance_d1000 = v; }
-void Tp::set_is_key_collector(int v) { _is_key_collector = v; }
+void Tp::set_is_ai_can_collect_keys(int v) { _is_ai_can_collect_keys = v; }
 void Tp::set_is_key(int v) { _is_key = v; }
 void Tp::set_is_killed_on_hit_or_miss(int v) { _is_killed_on_hit_or_miss = v; }
 void Tp::set_is_killed_on_hitting(int v) { _is_killed_on_hitting = v; }
@@ -694,9 +694,9 @@ void Tp::set_unused_flag47(int v) { _unused_flag47 = v; }
 void Tp::set_unused_flag48(int v) { _unused_flag48 = v; }
 void Tp::set_is_rusty(int v) { _is_rusty = v; }
 void Tp::set_unused_flag4(int v) { _unused_flag4 = v; }
-void Tp::set_unused_flag50(int v) { _unused_flag50 = v; }
-void Tp::set_unused_flag51(int v) { _unused_flag51 = v; }
-void Tp::set_unused_flag52(int v) { _unused_flag52 = v; }
+void Tp::set_ai_can_learn_skills(int v) { _ai_can_learn_skills = v; }
+void Tp::set_ai_can_enchant_weapons(int v) { _ai_can_enchant_weapons = v; }
+void Tp::set_ai_can_attack_generators(int v) { _ai_can_attack_generators = v; }
 void Tp::set_is_ai_wanderer(int v) { _is_ai_wanderer = v; }
 void Tp::set_is_organic(int v) { _is_organic = v; }
 void Tp::set_is_glass(int v) { _is_glass = v; }

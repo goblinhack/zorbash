@@ -379,7 +379,7 @@ bool Thing::matches(const std::string &what) const
   if (is_able_to_jump() && (what == "is_able_to_jump")) {
     return true;
   }
-  if (is_key_collector() && (what == "is_key_collector")) {
+  if (is_ai_can_collect_keys() && (what == "is_ai_can_collect_keys")) {
     return true;
   }
   if (is_key() && (what == "is_key")) {
@@ -601,13 +601,13 @@ bool Thing::matches(const std::string &what) const
   if (unused_flag4() && (what == "unused_flag4")) {
     return true;
   }
-  if (unused_flag50() && (what == "unused_flag50")) {
+  if (ai_can_learn_skills() && (what == "ai_can_learn_skills")) {
     return true;
   }
-  if (unused_flag51() && (what == "unused_flag51")) {
+  if (ai_can_enchant_weapons() && (what == "ai_can_enchant_weapons")) {
     return true;
   }
-  if (unused_flag52() && (what == "unused_flag52")) {
+  if (ai_can_attack_generators() && (what == "ai_can_attack_generators")) {
     return true;
   }
   if (is_ai_wanderer() && (what == "is_ai_wanderer")) {
@@ -1145,8 +1145,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_able_to_jump") {
     return &Thing::is_able_to_jump;
   }
-  if (what == "is_key_collector") {
-    return &Thing::is_key_collector;
+  if (what == "is_ai_can_collect_keys") {
+    return &Thing::is_ai_can_collect_keys;
   }
   if (what == "is_key") {
     return &Thing::is_key;
@@ -1367,14 +1367,14 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag4") {
     return &Thing::unused_flag4;
   }
-  if (what == "unused_flag50") {
-    return &Thing::unused_flag50;
+  if (what == "ai_can_learn_skills") {
+    return &Thing::ai_can_learn_skills;
   }
-  if (what == "unused_flag51") {
-    return &Thing::unused_flag51;
+  if (what == "ai_can_enchant_weapons") {
+    return &Thing::ai_can_enchant_weapons;
   }
-  if (what == "unused_flag52") {
-    return &Thing::unused_flag52;
+  if (what == "ai_can_attack_generators") {
+    return &Thing::ai_can_attack_generators;
   }
   if (what == "is_ai_wanderer") {
     return &Thing::is_ai_wanderer;

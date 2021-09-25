@@ -833,7 +833,7 @@ public:
   int                is_able_to_jump_distance(void) const;
   int                is_able_to_jump_on_low_hp_chance_d1000(void) const;
   int                is_key(void) const;
-  int                is_key_collector(void) const;
+  int                is_ai_can_collect_keys(void) const;
   int                is_killed_on_hit_or_miss(void) const;
   int                is_killed_on_hitting(void) const;
   int                is_laser(void) const;
@@ -1003,9 +1003,9 @@ public:
   int                unused_flag47(void) const;
   int                unused_flag48(void) const;
   int                unused_flag5(void) const;
-  int                unused_flag50(void) const;
-  int                unused_flag51(void) const;
-  int                unused_flag52(void) const;
+  int                ai_can_learn_skills(void) const;
+  int                ai_can_enchant_weapons(void) const;
+  int                ai_can_attack_generators(void) const;
   int                unused_flag6(void) const;
   int                unused_flag7(void) const;
   int                unused_flag8(void) const;

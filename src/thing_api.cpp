@@ -845,10 +845,10 @@ int Thing::is_able_to_jump(void) const
   TRACE_AND_INDENT();
   return (tp()->is_able_to_jump());
 }
-int Thing::is_key_collector(void) const
+int Thing::is_ai_can_collect_keys(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->is_key_collector());
+  return (tp()->is_ai_can_collect_keys());
 }
 int Thing::is_key(void) const
 {
@@ -1210,20 +1210,20 @@ int Thing::unused_flag4(void) const
   TRACE_AND_INDENT();
   return (tp()->unused_flag4());
 }
-int Thing::unused_flag50(void) const
+int Thing::ai_can_learn_skills(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->unused_flag50());
+  return (tp()->ai_can_learn_skills());
 }
-int Thing::unused_flag51(void) const
+int Thing::ai_can_enchant_weapons(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->unused_flag51());
+  return (tp()->ai_can_enchant_weapons());
 }
-int Thing::unused_flag52(void) const
+int Thing::ai_can_attack_generators(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->unused_flag52());
+  return (tp()->ai_can_attack_generators());
 }
 int Thing::is_ai_wanderer(void) const
 {

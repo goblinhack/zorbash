@@ -379,14 +379,14 @@ class Tp:
     def set_is_rusty(self, value):
         zx.tp_set_is_rusty(self, value)
 
-    def set_unused_flag50(self, value):
-        zx.tp_set_unused_flag50(self, value)
+    def set_ai_can_learn_skills(self, value):
+        zx.tp_set_ai_can_learn_skills(self, value)
 
-    def set_unused_flag51(self, value):
-        zx.tp_set_unused_flag51(self, value)
+    def set_ai_can_enchant_weapons(self, value):
+        zx.tp_set_ai_can_enchant_weapons(self, value)
 
-    def set_unused_flag52(self, value):
-        zx.tp_set_unused_flag52(self, value)
+    def set_ai_can_attack_generators(self, value):
+        zx.tp_set_ai_can_attack_generators(self, value)
 
     def set_is_ai_wanderer(self, value):
         zx.tp_set_is_ai_wanderer(self, value)
@@ -436,8 +436,8 @@ class Tp:
     def set_is_debug_path(self, value):
         zx.tp_set_is_debug_path(self, value)
 
-    def set_is_key_collector(self, value):
-        zx.tp_set_is_key_collector(self, value)
+    def set_is_ai_can_collect_keys(self, value):
+        zx.tp_set_is_ai_can_collect_keys(self, value)
 
     def set_is_item_collector(self, value):
         zx.tp_set_is_item_collector(self, value)

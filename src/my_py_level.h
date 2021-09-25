@@ -121,7 +121,7 @@ PyObject *level_random_jump_chance_d1000_at(PyObject *obj, PyObject *args, PyObj
 PyObject *level_is_able_to_jump_distance_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_able_to_jump_on_low_hp_chance_d1000_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_key_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_key_collector_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_ai_can_collect_keys_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_killed_on_hit_or_miss_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_killed_on_hitting_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_laser_at(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -195,9 +195,9 @@ PyObject *level_unused_flag47_at(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *level_unused_flag48_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_rusty_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag4_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag50_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag51_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag52_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_ai_can_learn_skills_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_ai_can_enchant_weapons_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_ai_can_attack_generators_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_ai_wanderer_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_organic_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_glass_at(PyObject *obj, PyObject *args, PyObject *keywds);

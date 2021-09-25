@@ -251,7 +251,7 @@ do
       set_is_jelly_parent \
       set_is_able_to_jump \
       set_is_key \
-      set_is_key_collector \
+      set_is_ai_can_collect_keys \
       set_is_killed_on_hit_or_miss \
       set_is_killed_on_hitting \
       set_is_laser \
@@ -327,9 +327,9 @@ do
       set_unused_flag48 \
       set_is_rusty \
       set_unused_flag5 \
-      set_unused_flag50 \
-      set_unused_flag51 \
-      set_unused_flag52 \
+      set_ai_can_learn_skills \
+      set_ai_can_enchant_weapons \
+      set_ai_can_attack_generators \
       set_unused_flag6 \
       set_unused_flag7 \
       set_unused_flag8 \

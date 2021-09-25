@@ -218,7 +218,7 @@ private:
   int         _is_able_to_jump_distance {};
   int         _is_able_to_jump_on_low_hp_chance_d1000 {};
   int         _is_key {};
-  int         _is_key_collector {};
+  int         _is_ai_can_collect_keys {};
   int         _is_killed_on_hit_or_miss {};
   int         _is_killed_on_hitting {};
   int         _is_laser {};
@@ -291,9 +291,9 @@ private:
   int         _unused_flag48 {};
   int         _is_rusty {};
   int         _unused_flag5 {};
-  int         _unused_flag50 {};
-  int         _unused_flag51 {};
-  int         _unused_flag52 {};
+  int         _ai_can_learn_skills {};
+  int         _ai_can_enchant_weapons {};
+  int         _ai_can_attack_generators {};
   int         _is_ai_wanderer {};
   int         _is_organic {};
   int         _is_glass {};
@@ -688,7 +688,7 @@ public:
   int                is_able_to_jump_distance(void) const;
   int                is_able_to_jump_on_low_hp_chance_d1000(void) const;
   int                is_able_to_jump(void) const;
-  int                is_key_collector(void) const;
+  int                is_ai_can_collect_keys(void) const;
   int                is_key(void) const;
   int                is_killed_on_hit_or_miss(void) const;
   int                is_killed_on_hitting(void) const;
@@ -761,9 +761,9 @@ public:
   int                unused_flag48(void) const;
   int                is_rusty(void) const;
   int                unused_flag4(void) const;
-  int                unused_flag50(void) const;
-  int                unused_flag51(void) const;
-  int                unused_flag52(void) const;
+  int                ai_can_learn_skills(void) const;
+  int                ai_can_enchant_weapons(void) const;
+  int                ai_can_attack_generators(void) const;
   int                is_ai_wanderer(void) const;
   int                is_organic(void) const;
   int                is_glass(void) const;
@@ -1017,7 +1017,7 @@ public:
   void               set_is_able_to_jump_distance(int);
   void               set_is_able_to_jump(int);
   void               set_is_able_to_jump_on_low_hp_chance_d1000(int);
-  void               set_is_key_collector(int);
+  void               set_is_ai_can_collect_keys(int);
   void               set_is_key(int);
   void               set_is_killed_on_hit_or_miss(int);
   void               set_is_killed_on_hitting(int);
@@ -1090,9 +1090,9 @@ public:
   void               set_unused_flag48(int);
   void               set_is_rusty(int);
   void               set_unused_flag4(int);
-  void               set_unused_flag50(int);
-  void               set_unused_flag51(int);
-  void               set_unused_flag52(int);
+  void               set_ai_can_learn_skills(int);
+  void               set_ai_can_enchant_weapons(int);
+  void               set_ai_can_attack_generators(int);
   void               set_is_ai_wanderer(int);
   void               set_is_organic(int);
   void               set_is_glass(int);

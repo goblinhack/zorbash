@@ -822,7 +822,7 @@ void Thing::robot_ai_choose_initial_goals(std::multiset< Goal > &goals, int minx
         //
         // Need more work before monsts can collect keys as they will be auto collected.
         //
-        if (is_key_collector()) {
+        if (is_ai_can_collect_keys()) {
           if (it->is_key()) {
             SCORE_ADD(1000, "collect-key");
             got_one_this_tile = true;
@@ -871,7 +871,8 @@ void Thing::robot_ai_choose_initial_goals(std::multiset< Goal > &goals, int minx
               // Monsters we avoid are more serious threats
               //
               avoid = true;
-            } else if (! avoid && it->is_minion_generator()) {
+            } else if (! avoid && ai_can_attack_generators() && it->is_minion_generator() &&
+                       (get_top_minion_owner() != this)) {
               //
               // Very close, high priority attack
               //
@@ -1571,25 +1572,29 @@ bool Thing::ai_tick(void)
           //
           // Can we enchant something?
           //
-          if (get_enchantstone_count() && can_enchant_something()) {
-            ai_log("Try to enchant something");
-            if (is_player()) {
-              game->tick_begin("Robot can enchant something");
+          if (ai_can_enchant_weapons()) {
+            if (get_enchantstone_count() && can_enchant_something()) {
+              ai_log("Try to enchant something");
+              if (is_player()) {
+                game->tick_begin("Robot can enchant something");
+              }
+              robot_change_state(ROBOT_STATE_USING_ENCHANTSTONE, "can enchant something");
+              return true;
             }
-            robot_change_state(ROBOT_STATE_USING_ENCHANTSTONE, "can enchant something");
-            return true;
           }
 
           //
           // Can we learn some skills?
           //
-          if (get_skillstone_count() && can_learn_something()) {
-            ai_log("Try to use a skillstone");
-            if (is_player()) {
-              game->tick_begin("Robot can learn something");
+          if (ai_can_learn_skills()) {
+            if (get_skillstone_count() && can_learn_something()) {
+              ai_log("Try to use a skillstone");
+              if (is_player()) {
+                game->tick_begin("Robot can learn something");
+              }
+              robot_change_state(ROBOT_STATE_USING_SKILLSTONE, "can learn something");
+              return true;
             }
-            robot_change_state(ROBOT_STATE_USING_SKILLSTONE, "can learn something");
-            return true;
           }
 
           //
