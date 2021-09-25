@@ -303,6 +303,14 @@ bool Level::tick(void)
       }
       game->things_are_moving = true;
     }
+
+    //
+    // Make sure weapons keep yp
+    //
+    auto o = t->weapon_get_carry_anim();
+    if (o) {
+      o->update_interpolated_position();
+    }
   }
   FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL_END(this)
 
