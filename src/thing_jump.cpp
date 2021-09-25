@@ -15,7 +15,7 @@
 float Thing::how_far_i_can_jump(void)
 {
   TRACE_AND_INDENT();
-  auto d = (float) is_jumper_distance() + ceil(0.5 + (pcg_random_range(0, 100) / 100.0));
+  auto d = (float) is_able_to_jump_distance() + ceil(0.5 + (pcg_random_range(0, 100) / 100.0));
 
   if (get_stamina() < get_stamina_max() / 2) {
     d /= 2;
@@ -36,7 +36,7 @@ bool Thing::try_to_jump(point to, bool be_careful)
     return false;
   }
 
-  if (is_stamina_check()) {
+  if (is_able_to_tire()) {
     if (! get_stamina()) {
       if (is_player()) {
         TOPCON("You are too tired to jump. You need to rest.");
@@ -161,8 +161,6 @@ bool Thing::try_to_jump(point to, bool be_careful)
     level->new_external_particle(id, src, dst, sz, delay, tile_index_to_tile(tile_curr), false,
                                  true /* make_visible_at_end */);
   } else {
-    delay = MONST_JUMP_SPEED;
-
     //
     // If offscreen and in robot mode, then jump quicker, so the robot does
     // not have to wait so long/

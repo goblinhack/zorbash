@@ -20,7 +20,7 @@ void tp_fixup(void)
   TRACE_AND_INDENT();
   for (auto &tp : tp_id_map) {
     if (tp->stamina()) {
-      tp->set_is_stamina_check(true);
+      tp->set_is_able_to_tire(true);
     }
 
     if (tp->is_tickable()) {

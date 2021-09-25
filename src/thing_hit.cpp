@@ -162,7 +162,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     }
   }
 
-  if (real_hitter->is_stamina_check()) {
+  if (real_hitter->is_able_to_tire()) {
     if (! real_hitter->get_stamina()) {
       if (real_hitter->is_player()) {
         TOPCON("You are too tired to attack. You need to rest.");

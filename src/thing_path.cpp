@@ -11,12 +11,13 @@
 #include "my_monst.h"
 #include "my_ptrcheck.h"
 #include "my_sdl.h"
+#include "my_sprintf.h"
 #include "my_sys.h"
 #include "my_thing.h"
 #include "my_wid.h"
 #include "my_wid_console.h"
 
-bool Thing::cursor_path_pop_next_and_move(void)
+bool Thing::path_pop_next_move(void)
 {
   TRACE_AND_INDENT();
   if (monstp && monstp->move_path.size()) {
@@ -36,35 +37,44 @@ bool Thing::cursor_path_pop_next_and_move(void)
     FOR_ALL_THINGS_END()
 
     //
-    // Just in case the cursor next hop ends up too far away
-    // for a single move, then reset it.
+    // Just in case the cursor next hop ends up too far away for a single move, then reset it.
     //
-    if (! game->robot_mode) {
-      if ((fabs(to.x - mid_at.x) > 1) || (fabs(to.x - mid_at.x) > 1)) {
-        clear_move_path("Cursor next-hop is too far away");
-        return false;
+    if (is_player()) {
+      if (! game->robot_mode) {
+        if ((fabs(to.x - mid_at.x) > 1) || (fabs(to.x - mid_at.x) > 1)) {
+          clear_move_path("Cursor next-hop is too far away");
+          return false;
+        }
       }
     }
 
     monstp->move_path.erase(monstp->move_path.begin());
 
     //
-    // If in robot mode, or player mode? jump over obstacles if they
-    // appear in the path
+    // Jump over obstacles if they appear in the path
     //
-    if (is_player() && game->robot_mode) {
+    if (is_able_to_jump() && (is_monst() || (is_player() && game->robot_mode))) {
       if (will_avoid_hazard(future_pos) || level->is_barrel(future_pos)) {
-        CON("Robot: Next position %d,%d is a hazard", (int) future_pos.x, (int) future_pos.y);
+        IF_DEBUG3
+        {
+          auto s = string_sprintf("Next position %d,%d is a hazard", (int) future_pos.x, (int) future_pos.y);
+          ai_log("", s);
+        }
+
         TRACE_AND_INDENT();
         if (monstp->move_path.size()) {
           auto jump_pos = monstp->move_path[ 0 ];
           monstp->move_path.erase(monstp->move_path.begin());
 
           //
-          // If the thing we are going to land on is also a hazard,
-          // can we jump further?
+          // If the thing we are going to land on is also a hazard, can we jump further?
           //
-          CON("Robot: Next-next position %d,%d is also a hazard", (int) jump_pos.x, (int) jump_pos.y);
+          IF_DEBUG3
+          {
+            auto s = string_sprintf("Next-next position %d,%d is also a hazard", (int) jump_pos.x, (int) jump_pos.y);
+            ai_log("", s);
+          }
+
           TRACE_AND_INDENT();
           if (will_avoid_hazard(jump_pos) && monstp->move_path.size()) {
             auto jump_pos = monstp->move_path[ 0 ];
@@ -72,40 +82,39 @@ bool Thing::cursor_path_pop_next_and_move(void)
 
             if (will_avoid_hazard(jump_pos)) {
               //
-              // Give up
+              // Give up. Don't bump the tick. This allows the monst to try an alternative path.
               //
-              // Don't bump the tick. This allows the robot to try an
-              // alternative path.
-              //
-              CON("Robot: Cannot jump over hazards");
+              ai_log("Cannot jump over hazards");
               clear_move_path("Cannot jump over all hazards");
               return false;
             } else if (try_to_jump_carefully(jump_pos)) {
-              CON("Robot: Try a long jump");
-              game->tick_begin("robot tried a long jump");
-              clear_move_path("robot tried a long jump");
+              ai_log("Long jump");
+              if (is_player()) {
+                game->tick_begin("Tried a long jump");
+              }
+              clear_move_path("long jump");
               return true;
             } else {
               //
-              // Don't bump the tick. This allows the robot to try an
-              // alternative path.
+              // Don't bump the tick. This allows the monst to try an alternative path.
               //
-              CON("Robot: Failed to try a long jump");
-              clear_move_path("robot tried a jump but cannot pass");
+              ai_log("Failed to try a long jump");
+              clear_move_path("Failed to try a long jump");
               return false;
             }
           } else if (try_to_jump_carefully(jump_pos)) {
-            CON("Robot: Jumped carefully");
-            game->tick_begin("robot Jumped carefully");
-            clear_move_path("robot Jumped carefully");
+            ai_log("Jumped carefully");
+            if (is_player()) {
+              game->tick_begin("Jumped carefully");
+            }
+            clear_move_path("Jumped carefully");
             return true;
           } else {
             //
-            // Don't bump the tick. This allows the robot to try an
-            // alternative path.
+            // Don't bump the tick. This allows the monst to try an alternative path.
             //
-            CON("Robot: Failed to jump");
-            clear_move_path("robot cannot pass");
+            ai_log("Failed to jump");
+            clear_move_path("Failed to jump");
             return false;
           }
         } else {
@@ -120,7 +129,7 @@ bool Thing::cursor_path_pop_next_and_move(void)
       //
       if (level->is_shovable(future_pos)) {
         //
-        // Can the robot shove it into a something bad?
+        // Can the monst shove it into a something bad?
         //
         auto delta = mid_at - make_fpoint(future_pos);
         FOR_ALL_THINGS(level, t, future_pos.x, future_pos.y)
@@ -130,21 +139,42 @@ bool Thing::cursor_path_pop_next_and_move(void)
           }
           switch (try_to_shove_into_hazard(t, delta)) {
             case THING_SHOVE_TRIED_AND_FAILED :
-              CON("Robot: Try to shove monst at %s but failed", future_pos.to_string().c_str());
-              game->tick_begin("robot tried to shove but failed");
-              clear_move_path("robot tried to shove but failed");
-              return false;
+              {
+                IF_DEBUG3
+                {
+                  auto s = string_sprintf("Tried to shove monst at %s but failed", future_pos.to_string().c_str());
+                  ai_log("", s);
+                }
+                if (is_player()) {
+                  game->tick_begin("Tried to shove but failed");
+                }
+                clear_move_path("Tried to shove but failed");
+                return false;
+              }
             case THING_SHOVE_TRIED_AND_PASSED :
-              CON("Robot: Shoved monst at %s", future_pos.to_string().c_str());
-              game->tick_begin("robot tried to shove");
-              clear_move_path("robot tried to shove");
-              return true;
+              {
+                IF_DEBUG3
+                {
+                  auto s = string_sprintf("Shoved monst at %s", future_pos.to_string().c_str());
+                  ai_log("", s);
+                }
+                if (is_player()) {
+                  game->tick_begin("Tried to shove");
+                }
+                clear_move_path("Tried to shove");
+                return true;
+              }
             case THING_SHOVE_NEVER_TRIED : break;
           }
         }
         FOR_ALL_THINGS_END()
 
-        CON("Robot: Try to attack monst at %s", future_pos.to_string().c_str());
+        IF_DEBUG3
+        {
+          auto s = string_sprintf("Try to attack monst at %s", future_pos.to_string().c_str());
+          ai_log("", s);
+        }
+
         if (move_no_shove_no_attack(future_pos)) {
           return true;
         }
@@ -162,11 +192,21 @@ bool Thing::cursor_path_pop_next_and_move(void)
       // could be floating over lava or a chasm
       //
       if (will_avoid_hazard(future_pos)) {
-        CON("Robot: Cannot pass hazard at %s", future_pos.to_string().c_str());
+        IF_DEBUG3
+        {
+          auto s = string_sprintf("Cannot pass hazard at %s", future_pos.to_string().c_str());
+          ai_log("", s);
+        }
         return false;
       }
 
-      CON("Robot: Try to move (shoving not allowed, attack allowed) to %s", future_pos.to_string().c_str());
+      IF_DEBUG3
+      {
+        auto s =
+            string_sprintf("Try to move (shoving not allowed, attack allowed) to %s", future_pos.to_string().c_str());
+        ai_log("", s);
+      }
+
       if (move_no_shove_attack_allowed(future_pos)) {
         return true;
       }
@@ -178,7 +218,12 @@ bool Thing::cursor_path_pop_next_and_move(void)
         return true;
       }
 
-      CON("Robot: Try to move (shoving and attacking allowed) to %s", future_pos.to_string().c_str());
+      IF_DEBUG3
+      {
+        auto s = string_sprintf("Try to move (shoving and attacking allowed) to %s", future_pos.to_string().c_str());
+        ai_log("", s);
+      }
+
       if (move(future_pos)) {
         return true;
       }
@@ -216,7 +261,7 @@ bool Thing::cursor_path_pop_first_move(void)
     monstp->move_path = game->cursor_move_path;
     game->cursor_move_path.clear();
 
-    if (cursor_path_pop_next_and_move()) {
+    if (path_pop_next_move()) {
       dbg("Move to cursor next hop");
       if (game->cursor_move_path.empty()) {
         level->cursor_path_create();
@@ -255,7 +300,7 @@ bool Thing::cursor_path_pop_first_move(void)
   //
   // If not adjacent, try and jump.
   //
-  if (game->robot_mode) {
+  if (is_able_to_jump() && (is_monst() || (is_player() && game->robot_mode))) {
     if (try_to_jump_carefully(future_pos)) {
       game->tick_begin("player tried to jump");
       return true;

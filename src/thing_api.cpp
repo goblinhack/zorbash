@@ -825,25 +825,25 @@ int Thing::is_jelly(void) const
   TRACE_AND_INDENT();
   return (tp()->is_jelly());
 }
-int Thing::is_jumper_chance_d1000(void) const
+int Thing::random_jump_chance_d1000(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->is_jumper_chance_d1000());
+  return (tp()->random_jump_chance_d1000());
 }
-int Thing::is_jumper_distance(void) const
+int Thing::is_able_to_jump_distance(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->is_jumper_distance());
+  return (tp()->is_able_to_jump_distance());
 }
-int Thing::is_jumper_on_low_hp_chance_d1000(void) const
+int Thing::is_able_to_jump_on_low_hp_chance_d1000(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->is_jumper_on_low_hp_chance_d1000());
+  return (tp()->is_able_to_jump_on_low_hp_chance_d1000());
 }
-int Thing::is_jumper(void) const
+int Thing::is_able_to_jump(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->is_jumper());
+  return (tp()->is_able_to_jump());
 }
 int Thing::is_key_collector(void) const
 {
@@ -1345,10 +1345,10 @@ int Thing::is_spiderweb(void) const
   TRACE_AND_INDENT();
   return (tp()->is_spiderweb());
 }
-int Thing::is_stamina_check(void) const
+int Thing::is_able_to_tire(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->is_stamina_check());
+  return (tp()->is_able_to_tire());
 }
 int Thing::is_steal_item_chance_d1000(void) const
 {

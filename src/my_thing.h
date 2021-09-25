@@ -268,7 +268,7 @@ public:
   bool        collision_obstacle(fpoint);
   bool        collision_obstacle(point);
   bool        cursor_path_pop_first_move(void);
-  bool        cursor_path_pop_next_and_move(void);
+  bool        path_pop_next_move(void);
   bool        descend_dungeon(void);
   bool        descend_dungeon_tick();
   bool        descend_sewer(void);
@@ -828,10 +828,10 @@ public:
   int                is_jelly_baby_eater(void) const;
   int                is_jelly_eater(void) const;
   int                is_jelly_parent(void) const;
-  int                is_jumper(void) const;
-  int                is_jumper_chance_d1000(void) const;
-  int                is_jumper_distance(void) const;
-  int                is_jumper_on_low_hp_chance_d1000(void) const;
+  int                is_able_to_jump(void) const;
+  int                random_jump_chance_d1000(void) const;
+  int                is_able_to_jump_distance(void) const;
+  int                is_able_to_jump_on_low_hp_chance_d1000(void) const;
   int                is_key(void) const;
   int                is_key_collector(void) const;
   int                is_killed_on_hit_or_miss(void) const;
@@ -874,7 +874,7 @@ public:
   int                is_soft_body(void) const;
   int                is_spawner(void) const;
   int                is_spiderweb(void) const;
-  int                is_stamina_check(void) const;
+  int                is_able_to_tire(void) const;
   int                is_steal_item_chance_d1000(void) const;
   int                is_sticky(void) const;
   int                is_stone(void) const;

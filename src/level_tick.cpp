@@ -480,7 +480,7 @@ bool Level::tick(void)
         game->robot_mode_tick_requested = false;
         if (player) {
           if (player->monstp && player->monstp->move_path.size()) {
-            player->cursor_path_pop_next_and_move();
+            player->path_pop_next_move();
           }
         }
       }
@@ -490,7 +490,7 @@ bool Level::tick(void)
       }
     } else if (player) {
       if (player->monstp && player->monstp->move_path.size()) {
-        player->cursor_path_pop_next_and_move();
+        player->path_pop_next_move();
       }
     }
   }

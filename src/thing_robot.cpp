@@ -68,11 +68,9 @@ void Thing::ai_log(const std::string &short_msg, const std::string &long_msg, Th
     }
   } else {
     if (it) {
-      log("AI: @(%s, %d,%d %d/%dh) %s, %s", level->to_string().c_str(), (int) mid_at.x, (int) mid_at.y, get_health(),
-          get_health_max(), long_msg.c_str(), it->to_string().c_str());
+      log("%s, %s", long_msg.c_str(), it->to_string().c_str());
     } else {
-      log("AI: @(%s, %d,%d %d/%dh) %s", level->to_string().c_str(), (int) mid_at.x, (int) mid_at.y, get_health(),
-          get_health_max(), long_msg.c_str());
+      log("AI: %s", long_msg.c_str());
     }
   }
 }
@@ -421,14 +419,14 @@ int Thing::robot_ai_init_can_see_dmap(int minx, int miny, int maxx, int maxy, in
       //
       // Don't block on things like chasms so we can jump
       //
-      if (is_jumper()) {
+      if (is_able_to_jump()) {
         if (! ai_obstacle_for_me(p)) {
           set(dmap_can_see->val, x, y, DMAP_IS_PASSABLE);
           continue;
         }
       } else {
-        if (ai_obstacle_for_me(p)) {
-          set(dmap_can_see->val, x, y, DMAP_IS_WALL);
+        if (! ai_obstacle_for_me(p)) {
+          set(dmap_can_see->val, x, y, DMAP_IS_PASSABLE);
           continue;
         }
       }
@@ -463,7 +461,7 @@ int Thing::robot_ai_init_can_see_dmap(int minx, int miny, int maxx, int maxy, in
       //
       // Can jump but only if not tired.
       //
-      if (jump_allowed && is_jumper() && (get_stamina() > get_stamina_max() / 2)) {
+      if (jump_allowed && is_able_to_jump() && (get_stamina() > get_stamina_max() / 2)) {
         //
         // Trace all possible jump paths to see if we can jump over
         //
@@ -494,8 +492,10 @@ int Thing::robot_ai_init_can_see_dmap(int minx, int miny, int maxx, int maxy, in
             //
             // Must be able to see the begin/end.
             //
-            if (! level->is_lit_ever(jump_begin)) {
-              continue;
+            if (is_player()) {
+              if (! level->is_lit_ever(jump_begin)) {
+                continue;
+              }
             }
 
             //
@@ -566,13 +566,14 @@ int Thing::robot_ai_init_can_see_dmap(int minx, int miny, int maxx, int maxy, in
           continue;
         }
 
-        if (! level->is_lit_ever(p)) {
-          continue;
+        if (is_player()) {
+          if (! level->is_lit_ever(p)) {
+            continue;
+          }
         }
 
         //
-        // Can't see past walls. However we can see over chasms
-        // to expand the search space
+        // Can't see past walls. However we can see over chasms to expand the search space
         //
         if (level->is_door(p)) {
           //
@@ -580,8 +581,7 @@ int Thing::robot_ai_init_can_see_dmap(int minx, int miny, int maxx, int maxy, in
           //
         } else if (level->is_obs_wall_or_door(p)) {
           //
-          // But allow chasms and lava so we can see over. Just block
-          // on walls and pillars etc...
+          // But allow chasms and lava so we can see over. Just block on walls and pillars etc...
           //
           continue;
         }
@@ -606,8 +606,7 @@ int Thing::robot_ai_init_can_see_dmap(int minx, int miny, int maxx, int maxy, in
               //
             } else if (level->is_obs_wall_or_door(o)) {
               //
-              // But allow chasms and lava so we can see over. Just block
-              // on walls and pillars etc...
+              // But allow chasms and lava so we can see over. Just block on walls and pillars etc...
               //
               continue;
             }
@@ -1118,8 +1117,10 @@ void Thing::robot_ai_choose_search_goals(std::multiset< Goal > &goals, int searc
     //
     // If an unvisited tile is next to a visited one, consider that tile.
     //
-    if (! level->is_lit_ever(p.x, p.y)) {
-      continue;
+    if (is_player()) {
+      if (! level->is_lit_ever(p.x, p.y)) {
+        continue;
+      }
     }
 
     if (level->is_obs_wall_or_door(p.x, p.y)) {
@@ -1242,11 +1243,12 @@ void Thing::robot_ai_choose_search_goals(std::multiset< Goal > &goals, int searc
           }
         } else {
           //
-          // If lit then we can already see it, so not worth
-          // exploring.
+          // If lit then we can already see it, so not worth exploring.
           //
-          if (level->is_lit_ever(o)) {
-            continue;
+          if (is_player()) {
+            if (level->is_lit_ever(o)) {
+              continue;
+            }
           }
 
           if (level->is_obs_wall_or_door(o)) {
@@ -1450,6 +1452,9 @@ bool Thing::robot_ai_choose_nearby_goal(void)
 bool Thing::ai_tick(void)
 {
   TRACE_AND_INDENT();
+  log("AI tick");
+  TRACE_AND_INDENT();
+
   //
   // For game smoothness we allow the player to run a bit ahead of the
   // monsters.
@@ -1460,10 +1465,10 @@ bool Thing::ai_tick(void)
     if (game->things_are_moving) {
       return false;
     }
-  }
 
-  if (game->tick_completed != game->tick_current) {
-    return false;
+    if (game->tick_completed != game->tick_current) {
+      return false;
+    }
   }
 
   if (is_dead) {
@@ -1487,8 +1492,8 @@ bool Thing::ai_tick(void)
   // Set up the extent of the AI, choosing smaller areas for monsters for
   // speed.
   //
-  const float dx = (MAP_WIDTH / 6);
-  const float dy = (MAP_HEIGHT / 6);
+  const float dx = ai_scent_distance() / 2;
+  const float dy = dx;
 
   int minx = std::max(0, (int) (mid_at.x - dx));
   int maxx = std::min(MAP_WIDTH, (int) (mid_at.x + dx - 1));
@@ -1522,7 +1527,7 @@ bool Thing::ai_tick(void)
         //
         // If we're absolutely exhausted, we must rest, threat or no threat
         //
-        if (! get_stamina()) {
+        if (is_able_to_tire() && ! get_stamina()) {
           ai_log("Very low on stamina, forced to rest");
           if (is_player()) {
             game->tick_begin("Robot is forced to rest, very low on stamina");
@@ -1590,7 +1595,7 @@ bool Thing::ai_tick(void)
           //
           // Are we tired and need to rest?
           //
-          if (get_stamina() < get_stamina_max() / 2) {
+          if (is_able_to_tire() && (get_stamina() < get_stamina_max() / 2)) {
             ai_log("Must rest, low on stamina");
             if (is_player()) {
               game->tick_begin("Robot needs to rest, low on stamina");
@@ -1648,25 +1653,34 @@ bool Thing::ai_tick(void)
         //
         // If nothing to do, might as well rest. If there is a point.
         //
-        if ((get_health() >= (get_health_max() / 4) * 3) && (get_stamina() >= (get_stamina_max() / 4) * 3)) {
-          //
-          // What is the point of it all?
-          //
-          ai_log("Nothing to do at all.");
-          if (is_player()) {
-            wid_actionbar_robot_mode_off();
+        auto rest = true;
+        if ((get_health() >= (get_health_max() / 4) * 3)) {
+          if (is_able_to_tire()) {
+            if (get_stamina() >= (get_stamina_max() / 4) * 3) {
+              rest = false;
+            }
+          } else {
+            rest = false;
           }
-          return false;
-        } else {
-          //
-          // Rest.
-          //
+        }
+
+        if (rest) {
           ai_log("Nothing to do. Rest.");
           if (is_player()) {
             game->tick_begin("nothing to do, rest");
           }
           robot_change_state(ROBOT_STATE_RESTING, "nothing to do, rest");
+          return true;
         }
+
+        //
+        // What is the point of it all?
+        //
+        ai_log("Nothing to do at all.");
+        if (is_player()) {
+          wid_actionbar_robot_mode_off();
+        }
+        return false;
       }
       break;
 

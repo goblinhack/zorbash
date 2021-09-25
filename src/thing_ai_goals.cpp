@@ -20,6 +20,8 @@
 
 int Thing::ai_choose_goal(void)
 {
+  return ai_tick();
+#if 0
   TRACE_AND_INDENT();
   dbg("Choose goal");
   TRACE_AND_INDENT();
@@ -454,4 +456,5 @@ int Thing::ai_choose_goal(void)
   }
 
   return false;
+#endif
 }

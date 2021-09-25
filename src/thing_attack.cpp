@@ -397,7 +397,7 @@ bool Thing::attack(Thingp it)
     return false;
   }
 
-  if (is_stamina_check()) {
+  if (is_able_to_tire()) {
     if (! get_stamina()) {
       if (is_player()) {
         TOPCON("You are too tired to attack. You need to rest.");

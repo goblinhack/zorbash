@@ -688,8 +688,8 @@ class Tp:
     def set_rarity(self, value):
         zx.tp_set_rarity(self, value)
 
-    def set_is_stamina_check(self, value):
-        zx.tp_set_is_stamina_check(self, value)
+    def set_is_able_to_tire(self, value):
+        zx.tp_set_is_able_to_tire(self, value)
 
     def set_gfx_shown_in_bg(self, value):
         zx.tp_set_gfx_shown_in_bg(self, value)
@@ -817,11 +817,11 @@ class Tp:
     def set_attack_eater(self, value):
         zx.tp_set_attack_eater(self, value)
 
-    def set_is_jumper_distance(self, value):
-        zx.tp_set_is_jumper_distance(self, value)
+    def set_is_able_to_jump_distance(self, value):
+        zx.tp_set_is_able_to_jump_distance(self, value)
 
-    def set_is_jumper(self, value):
-        zx.tp_set_is_jumper(self, value)
+    def set_is_able_to_jump(self, value):
+        zx.tp_set_is_able_to_jump(self, value)
 
     def set_is_acid(self, value):
         zx.tp_set_is_acid(self, value)
@@ -898,11 +898,11 @@ class Tp:
     def set_attack_shove_chance_d1000(self, value):
         zx.tp_set_attack_shove_chance_d1000(self, value)
 
-    def set_is_jumper_chance_d1000(self, value):
-        zx.tp_set_is_jumper_chance_d1000(self, value)
+    def set_random_jump_chance_d1000(self, value):
+        zx.tp_set_random_jump_chance_d1000(self, value)
 
-    def set_is_jumper_on_low_hp_chance_d1000(self, value):
-        zx.tp_set_is_jumper_on_low_hp_chance_d1000(self, value)
+    def set_is_able_to_jump_on_low_hp_chance_d1000(self, value):
+        zx.tp_set_is_able_to_jump_on_low_hp_chance_d1000(self, value)
 
     def set_is_chasm(self, value):
         zx.tp_set_is_chasm(self, value)

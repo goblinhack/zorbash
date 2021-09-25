@@ -26,7 +26,6 @@
 #define MAP_WIDTH                          ((MAP_GRID_WIDTH * MAP_ROOM_WIDTH) + (MAP_BORDER_ROOM * 2))
 #define MAX_BAG_HEIGHT                     20
 #define MAX_BAG_WIDTH                      20
-#define MONST_JUMP_SPEED                   150
 #define PARTICLE_SPEED_MS                  450
 #define ROBOT_CAN_SEE_SECRET_DOOR_DISTANCE 3
 #define THING_AI_ESCAPE_ATTEMPTS           4    // Quite CPU heavy

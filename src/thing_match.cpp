@@ -367,16 +367,16 @@ bool Thing::matches(const std::string &what) const
   if (is_jelly() && (what == "is_jelly")) {
     return true;
   }
-  if (is_jumper_chance_d1000() && (what == "is_jumper_chance_d1000")) {
+  if (random_jump_chance_d1000() && (what == "random_jump_chance_d1000")) {
     return true;
   }
-  if (is_jumper_distance() && (what == "is_jumper_distance")) {
+  if (is_able_to_jump_distance() && (what == "is_able_to_jump_distance")) {
     return true;
   }
-  if (is_jumper_on_low_hp_chance_d1000() && (what == "is_jumper_on_low_hp_chance_d1000")) {
+  if (is_able_to_jump_on_low_hp_chance_d1000() && (what == "is_able_to_jump_on_low_hp_chance_d1000")) {
     return true;
   }
-  if (is_jumper() && (what == "is_jumper")) {
+  if (is_able_to_jump() && (what == "is_able_to_jump")) {
     return true;
   }
   if (is_key_collector() && (what == "is_key_collector")) {
@@ -676,7 +676,7 @@ bool Thing::matches(const std::string &what) const
   if (is_spiderweb() && (what == "is_spiderweb")) {
     return true;
   }
-  if (is_stamina_check() && (what == "is_stamina_check")) {
+  if (is_able_to_tire() && (what == "is_able_to_tire")) {
     return true;
   }
   if (is_steal_item_chance_d1000() && (what == "is_steal_item_chance_d1000")) {
@@ -1133,17 +1133,17 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_jelly") {
     return &Thing::is_jelly;
   }
-  if (what == "is_jumper_chance_d1000") {
-    return &Thing::is_jumper_chance_d1000;
+  if (what == "random_jump_chance_d1000") {
+    return &Thing::random_jump_chance_d1000;
   }
-  if (what == "is_jumper_distance") {
-    return &Thing::is_jumper_distance;
+  if (what == "is_able_to_jump_distance") {
+    return &Thing::is_able_to_jump_distance;
   }
-  if (what == "is_jumper_on_low_hp_chance_d1000") {
-    return &Thing::is_jumper_on_low_hp_chance_d1000;
+  if (what == "is_able_to_jump_on_low_hp_chance_d1000") {
+    return &Thing::is_able_to_jump_on_low_hp_chance_d1000;
   }
-  if (what == "is_jumper") {
-    return &Thing::is_jumper;
+  if (what == "is_able_to_jump") {
+    return &Thing::is_able_to_jump;
   }
   if (what == "is_key_collector") {
     return &Thing::is_key_collector;
@@ -1442,8 +1442,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_spiderweb") {
     return &Thing::is_spiderweb;
   }
-  if (what == "is_stamina_check") {
-    return &Thing::is_stamina_check;
+  if (what == "is_able_to_tire") {
+    return &Thing::is_able_to_tire;
   }
   if (what == "is_steal_item_chance_d1000") {
     return &Thing::is_steal_item_chance_d1000;

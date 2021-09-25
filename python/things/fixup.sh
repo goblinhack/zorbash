@@ -249,7 +249,7 @@ do
       set_is_jelly_baby_eater \
       set_is_jelly_eater \
       set_is_jelly_parent \
-      set_is_jumper \
+      set_is_able_to_jump \
       set_is_key \
       set_is_key_collector \
       set_is_killed_on_hit_or_miss \
@@ -344,7 +344,7 @@ do
       set_is_soft_body \
       set_is_spawner \
       set_is_spiderweb \
-      set_is_stamina_check \
+      set_is_able_to_tire \
       set_is_sticky \
       set_is_stone \
       set_is_sword \

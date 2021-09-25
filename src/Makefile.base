@@ -185,7 +185,7 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/thing_corrodes.o              \
     $(OBJDIR)/thing_collision.o             \
     $(OBJDIR)/thing_cursor.o                \
-    $(OBJDIR)/thing_cursor_path.o           \
+    $(OBJDIR)/thing_path.o                  \
     $(OBJDIR)/thing_damage.o                \
     $(OBJDIR)/thing_danger.o                \
     $(OBJDIR)/thing_dead.o                  \

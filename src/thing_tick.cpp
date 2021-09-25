@@ -131,7 +131,7 @@ void Thing::achieve_goals_in_life(void)
     //
     // Pop the next monst move.
     //
-    if (cursor_path_pop_next_and_move()) {
+    if (path_pop_next_move()) {
       dbg("Pop next move");
       return;
     }
@@ -143,8 +143,8 @@ void Thing::achieve_goals_in_life(void)
       return;
     }
 
-    if (is_jumper()) {
-      if ((int) pcg_random_range(0, 1000) < tp()->is_jumper_chance_d1000()) {
+    if (is_able_to_jump()) {
+      if ((int) pcg_random_range(0, 1000) < tp()->random_jump_chance_d1000()) {
         dbg("Try to randomly jump");
         if (! collision_obstacle(level->player)) {
           if (try_to_jump_towards_player()) {

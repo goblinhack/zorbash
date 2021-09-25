@@ -47,7 +47,7 @@ int Tp::get_danger_level(void)
   if (is_floating()) {
     danger_level += 2;
   }
-  if (is_jumper()) {
+  if (is_able_to_jump()) {
     danger_level += 5;
   }
   if (is_item_eater()) {
@@ -112,7 +112,7 @@ int Thing::get_danger_initial_level(void)
   if (is_floating()) {
     danger_level += 2;
   }
-  if (is_jumper()) {
+  if (is_able_to_jump()) {
     danger_level += 5;
   }
   if (is_item_eater()) {
@@ -185,7 +185,7 @@ int Thing::get_danger_current_level(void)
   if (is_floating()) {
     danger_level += 2;
   }
-  if (is_jumper()) {
+  if (is_able_to_jump()) {
     danger_level += 5;
   }
   if (is_item_eater()) {
