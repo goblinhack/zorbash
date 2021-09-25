@@ -758,6 +758,20 @@ void Thing::robot_ai_choose_initial_goals(std::multiset< Goal > &goals, int minx
         }
 
         //
+        // Don't attack your master
+        //
+        if (it->is_minion_generator() && (get_top_minion_owner() != this)) {
+          continue;
+        }
+
+        //
+        // Don't attack your fellow minion
+        //
+        if (it->is_minion() && (it->get_top_minion_owner() != get_top_minion_owner())) {
+          continue;
+        }
+
+        //
         // Worse terrain, less preferred. Higher score, more preferred.
         //
         auto my_health         = get_health();
@@ -871,14 +885,13 @@ void Thing::robot_ai_choose_initial_goals(std::multiset< Goal > &goals, int minx
               // Monsters we avoid are more serious threats
               //
               avoid = true;
-            } else if (! avoid && ai_can_attack_generators() && it->is_minion_generator() &&
-                       (get_top_minion_owner() != this)) {
+            } else if (! avoid && ai_can_attack_generators() && it->is_minion_generator()) {
               //
               // Very close, high priority attack
               //
               SCORE_ADD((int) (max_dist - dist) * 1000, "attack-nearby-generator");
               got_one_this_tile = true;
-            } else if (! avoid && it->is_monst() && ! will_avoid_hazard(it)) {
+            } else if (! avoid && possible_to_attack(it) && ! will_avoid_hazard(it)) {
               //
               // Hazard check above is for cleaners standing on their
               // pool of acid. Do we want to attack that without good
