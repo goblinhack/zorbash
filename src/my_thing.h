@@ -1298,7 +1298,11 @@ public:
   void robot_ai_choose_initial_goals(std::multiset< Goal > &goals, int minx, int miny, int maxx, int maxy);
   void robot_ai_choose_search_goals(std::multiset< Goal > &goals, int search_type);
   void robot_change_state(int new_state, const std::string &why);
-  void robot_tick(void);
+  bool ai_tick(void);
+  void ai_log(const std::string &short_msg, const std::string &long_msg, Thingp it);
+  void ai_log(const std::string &short_msg, const std::string &long_msg);
+  void ai_log(const std::string &short_msg, Thingp it);
+  void ai_log(const std::string &short_msg);
   void score_add(Thingp victim);
   void secret_door_tick();
   void set_bounce_count(int);

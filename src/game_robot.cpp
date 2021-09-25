@@ -26,5 +26,5 @@ void Game::robot_mode_tick(void)
     return;
   }
 
-  player->robot_tick();
+  player->ai_tick();
 }

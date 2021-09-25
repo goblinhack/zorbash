@@ -145,7 +145,7 @@ static void wid_actionbar_robot_over_e(Widp w)
   BOTCON(" ");
 }
 
-static void wid_actionbar_robot_tick(Widp w)
+static void wid_actionbar_ai_tick(Widp w)
 {
   TRACE_AND_INDENT();
   game->robot_mode_tick_requested = true;
@@ -713,7 +713,7 @@ void wid_actionbar_init(void)
     wid_set_on_mouse_over_e(w, wid_actionbar_robot_over_e);
     if (game->robot_mode) {
       wid_set_bg_tilename(w, "icon_robot_on");
-      wid_set_on_tick(w, wid_actionbar_robot_tick);
+      wid_set_on_tick(w, wid_actionbar_ai_tick);
     }
     wid_set_style(w, UI_WID_STYLE_RED);
     x_at += option_width;
