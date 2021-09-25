@@ -30,7 +30,7 @@ void Thing::destroy(void)
   TRACE_AND_INDENT();
   verify(this);
 
-  if (is_loggable_for_important_stuff()) {
+  if (is_loggable()) {
     dbg2("Is being destroyed");
   }
 

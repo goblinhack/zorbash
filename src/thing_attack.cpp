@@ -560,7 +560,7 @@ bool Thing::attack(Thingp it)
   // Missiles?
   //
   if (is_killed_on_hit_or_miss()) {
-    if (is_loggable_for_unimportant_stuff()) {
+    if (is_loggable()) {
       dbg("Attack missed %s", it->to_string().c_str());
     }
     if (attack_lunge()) {

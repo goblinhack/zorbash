@@ -153,7 +153,7 @@ bool Thing::collision_find_best_target(bool *target_attacked, bool *target_overl
     // Skip things that aren't really hitable.
     //
     if (cand.target->tp()->gfx_weapon_carry_anim()) {
-      if (is_loggable_for_unimportant_stuff()) {
+      if (is_loggable()) {
         dbg("Ignore %s skip, not hittable", cand.target->to_string().c_str());
       }
       continue;
@@ -169,7 +169,7 @@ bool Thing::collision_find_best_target(bool *target_attacked, bool *target_overl
       // If this target is higher prio, prefer it.
       //
       best = &cand;
-      if (is_loggable_for_unimportant_stuff()) {
+      if (is_loggable()) {
         dbg("Add %s", cand.target->to_string().c_str());
       }
     } else if (cand.priority == best->priority) {
@@ -184,12 +184,12 @@ bool Thing::collision_find_best_target(bool *target_attacked, bool *target_overl
 
       if (dist_cand < dist_best) {
         best = &cand;
-        if (is_loggable_for_unimportant_stuff()) {
+        if (is_loggable()) {
           dbg("Add %s", cand.target->to_string().c_str());
         }
       }
     } else {
-      if (is_loggable_for_unimportant_stuff()) {
+      if (is_loggable()) {
         dbg("Ignore %s", cand.target->to_string().c_str());
       }
     }
@@ -200,7 +200,7 @@ bool Thing::collision_find_best_target(bool *target_attacked, bool *target_overl
 
     auto it = best->target;
 
-    if (is_loggable_for_unimportant_stuff()) {
+    if (is_loggable()) {
       dbg("Best candidate %s", it->to_string().c_str());
     }
 
@@ -231,7 +231,7 @@ bool Thing::collision_find_best_target(bool *target_attacked, bool *target_overl
           *target_attacked = true;
           ret              = true;
         } else {
-          if (is_loggable_for_unimportant_stuff()) {
+          if (is_loggable()) {
             dbg("Collision: Cannot hit %s", it->to_string().c_str());
           }
         }
@@ -673,7 +673,7 @@ bool Thing::collision_check_only(Thingp it, fpoint future_pos, int x, int y)
 bool Thing::collision_check_and_handle(fpoint future_pos, bool *target_attacked, bool *target_overlaps, float radius)
 {
   TRACE_AND_INDENT();
-  if (is_loggable_for_unimportant_stuff()) {
+  if (is_loggable()) {
     dbg("Collision handle");
   }
   TRACE_AND_INDENT();
@@ -766,7 +766,7 @@ bool Thing::collision_check_and_handle_at(bool *target_attacked, bool *target_ov
 //
 bool Thing::collision_check_only(fpoint future_pos)
 {
-  if (is_loggable_for_unimportant_stuff()) {
+  if (is_loggable()) {
     dbg("Collision check only");
   }
   TRACE_AND_INDENT();

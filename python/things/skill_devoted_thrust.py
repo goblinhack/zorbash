@@ -26,8 +26,8 @@ def on_use(owner, skill, target, x, y):
 def skill_devoted_thrust_init(name, text_name):
     global mytp
     mytp = tp.Tp(name, text_name)
-    mytp.set_is_loggable_for_important_stuff(True)
-    mytp.set_is_loggable_for_unimportant_stuff(True)
+    mytp.set_is_loggable(True)
+    mytp.set_is_loggable(True)
     mytp.set_is_skill(True)
     mytp.set_is_enchantable(True)
     mytp.set_enchant_max(2)

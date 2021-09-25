@@ -841,8 +841,8 @@ class Tp:
     def set_is_gold(self, value):
         zx.tp_set_is_gold(self, value)
 
-    def set_is_loggable_for_important_stuff(self, value):
-        zx.tp_set_is_loggable_for_important_stuff(self, value)
+    def set_is_loggable(self, value):
+        zx.tp_set_is_loggable(self, value)
 
     def set_is_removeable_if_out_of_slots(self, value):
         zx.tp_set_is_removeable_if_out_of_slots(self, value)
@@ -874,8 +874,8 @@ class Tp:
     def set_is_dead_on_shove(self, value):
         zx.tp_set_is_dead_on_shove(self, value)
 
-    def set_is_loggable_for_unimportant_stuff(self, value):
-        zx.tp_set_is_loggable_for_unimportant_stuff(self, value)
+    def set_is_loggable(self, value):
+        zx.tp_set_is_loggable(self, value)
 
     def set_is_brazier(self, value):
         zx.tp_set_is_brazier(self, value)
@@ -1030,8 +1030,8 @@ class Tp:
     def set_gfx_bounce_on_move(self, value):
         zx.tp_set_gfx_bounce_on_move(self, value)
 
-    def set_is_loggable_for_unimportant_stuff(self, value):
-        zx.tp_set_is_loggable_for_unimportant_stuff(self, value)
+    def set_is_loggable(self, value):
+        zx.tp_set_is_loggable(self, value)
 
     def set_is_bleeder(self, value):
         zx.tp_set_is_bleeder(self, value)

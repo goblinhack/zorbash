@@ -311,8 +311,7 @@ int                Tp::is_laser(void) const { return _is_laser; }
 int                Tp::is_lava(void) const { return _is_lava; }
 int                Tp::is_light_blocker(void) const { return _is_light_blocker; }
 int                Tp::is_living(void) const { return _is_living; }
-int                Tp::is_loggable_for_important_stuff(void) const { return _is_loggable_for_important_stuff; }
-int                Tp::is_loggable_for_unimportant_stuff(void) const { return _is_loggable_for_unimportant_stuff; }
+int                Tp::is_loggable(void) const { return _is_loggable; }
 int                Tp::is_meat_eater(void) const { return _is_meat_eater; }
 int                Tp::is_meat(void) const { return _is_meat; }
 int                Tp::is_minion_generator(void) const { return _is_minion_generator; }
@@ -630,8 +629,7 @@ void               Tp::set_is_laser(int v) { _is_laser = v; }
 void               Tp::set_is_lava(int v) { _is_lava = v; }
 void               Tp::set_is_light_blocker(int v) { _is_light_blocker = v; }
 void               Tp::set_is_living(int v) { _is_living = v; }
-void               Tp::set_is_loggable_for_important_stuff(int v) { _is_loggable_for_important_stuff = v; }
-void               Tp::set_is_loggable_for_unimportant_stuff(int v) { _is_loggable_for_unimportant_stuff = v; }
+void               Tp::set_is_loggable(int v) { _is_loggable = v; }
 void               Tp::set_is_meat_eater(int v) { _is_meat_eater = v; }
 void               Tp::set_is_meat(int v) { _is_meat = v; }
 void               Tp::set_is_minion_generator(int v) { _is_minion_generator = v; }

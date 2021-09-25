@@ -258,8 +258,8 @@ do
       set_is_lava \
       set_is_light_blocker \
       set_is_living \
-      set_is_loggable_for_important_stuff \
-      set_is_loggable_for_unimportant_stuff \
+      set_is_loggable \
+      set_is_loggable \
       set_is_meat \
       set_is_meat_eater \
       set_is_metal \

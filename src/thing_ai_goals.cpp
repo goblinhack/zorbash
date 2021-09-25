@@ -107,7 +107,7 @@ int Thing::ai_choose_goal(void)
         if (it->is_changing_level || it->is_hidden || it->is_falling || it->is_jumping) {
           IF_DEBUG4
           {
-            if (it->is_loggable_for_unimportant_stuff()) {
+            if (it->is_loggable()) {
               dbg2(" ignore %s", it->to_string().c_str());
             }
           }
@@ -116,7 +116,7 @@ int Thing::ai_choose_goal(void)
 
         IF_DEBUG4
         {
-          if (it->is_loggable_for_unimportant_stuff()) {
+          if (it->is_loggable()) {
             dbg2(" consider %s", it->to_string().c_str());
           }
         }

@@ -840,8 +840,7 @@ public:
   int                is_lava(void) const;
   int                is_light_blocker(void) const;
   int                is_living(void) const;
-  int                is_loggable_for_important_stuff(void) const;
-  int                is_loggable_for_unimportant_stuff(void) const;
+  int                is_loggable(void) const;
   int                is_meat(void) const;
   int                is_meat_eater(void) const;
   int                is_metal(void) const;

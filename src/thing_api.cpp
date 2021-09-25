@@ -885,15 +885,10 @@ int Thing::is_living(void) const
   TRACE_AND_INDENT();
   return (tp()->is_living());
 }
-int Thing::is_loggable_for_important_stuff(void) const
+int Thing::is_loggable(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->is_loggable_for_important_stuff());
-}
-int Thing::is_loggable_for_unimportant_stuff(void) const
-{
-  TRACE_AND_INDENT();
-  return (tp()->is_loggable_for_unimportant_stuff());
+  return (tp()->is_loggable());
 }
 int Thing::is_meat_eater(void) const
 {

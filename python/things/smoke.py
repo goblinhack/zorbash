@@ -10,8 +10,8 @@ def tp_init(name):
     mytp.set_gfx_oversized_and_on_floor(True)
     mytp.set_gfx_short_shadow_caster(True)
     mytp.set_is_tickable(True) # for lifespan tick
-    mytp.set_is_loggable_for_important_stuff(True)
-    mytp.set_is_loggable_for_unimportant_stuff(True)
+    mytp.set_is_loggable(True)
+    mytp.set_is_loggable(True)
     mytp.set_is_removeable_if_out_of_slots(True)
     mytp.set_is_smoke(True)
     mytp.set_on_fall_do("smoke.on_fall()")

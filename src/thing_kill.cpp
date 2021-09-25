@@ -202,7 +202,7 @@ void Thing::kill(Thingp killer, const char *reason)
     TOPCON("%%fg=red$Congratulations, you are dead!%%fg=reset$");
     level->map_follow_player = false;
     game->dead_select(reason);
-  } else if (is_loggable_for_important_stuff()) {
+  } else if (is_loggable()) {
     dbg("%s is dead, %s", The.c_str(), reason);
     if (killer && (killer != this)) {
       if (killer->is_player()) {
@@ -237,7 +237,7 @@ void Thing::kill(Thingp killer, const char *reason)
     //
     // Already a corpse
     //
-    if (is_loggable_for_important_stuff()) {
+    if (is_loggable()) {
       dbg("Already a corpse, clean it up");
     }
     auto tpp = tp_random_bones();
@@ -249,7 +249,7 @@ void Thing::kill(Thingp killer, const char *reason)
     //
     // Leaves a corpse
     //
-    if (is_loggable_for_important_stuff()) {
+    if (is_loggable()) {
       dbg("Killed, leaves corpse");
     }
 
@@ -273,7 +273,7 @@ void Thing::kill(Thingp killer, const char *reason)
 
   level_pop();
 
-  if (is_loggable_for_important_stuff()) {
+  if (is_loggable()) {
     dbg("Killed, need to garbage collect");
   }
 

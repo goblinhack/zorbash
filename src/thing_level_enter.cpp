@@ -17,8 +17,9 @@
 void Thing::level_enter(void)
 {
   TRACE_AND_INDENT();
-  dbg("Enter level");
-  TRACE_AND_INDENT();
+  if (is_loggable()) {
+    dbg("Enter level");
+  }
   int  group  = get_group();
   auto result = level->all_things[ group ].insert(std::pair(id, this));
   if (result.second == false) {

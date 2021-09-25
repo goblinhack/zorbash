@@ -158,7 +158,7 @@ void Thing::init(Levelp level, const std::string &name, const fpoint born, const
     level_push();
   }
 
-  if (tpp->is_loggable_for_unimportant_stuff()) {
+  if (tpp->is_loggable()) {
     log("Creating");
   }
 
@@ -558,7 +558,7 @@ void Thing::reinit(void)
     return;
   }
 
-  if (is_loggable_for_unimportant_stuff()) {
+  if (is_loggable()) {
     dbg("Recreated");
   }
 

@@ -225,8 +225,7 @@ private:
   int         _is_lava {};
   int         _is_light_blocker {};
   int         _is_living {};
-  int         _is_loggable_for_important_stuff {};
-  int         _is_loggable_for_unimportant_stuff {};
+  int         _is_loggable {};
   int         _is_meat {};
   int         _is_meat_eater {};
   int         _is_minion {};
@@ -697,8 +696,7 @@ public:
   int                is_lava(void) const;
   int                is_light_blocker(void) const;
   int                is_living(void) const;
-  int                is_loggable_for_important_stuff(void) const;
-  int                is_loggable_for_unimportant_stuff(void) const;
+  int                is_loggable(void) const;
   int                is_meat_eater(void) const;
   int                is_meat(void) const;
   int                is_minion_generator(void) const;
@@ -1027,8 +1025,7 @@ public:
   void               set_is_lava(int);
   void               set_is_light_blocker(int);
   void               set_is_living(int);
-  void               set_is_loggable_for_important_stuff(int);
-  void               set_is_loggable_for_unimportant_stuff(int);
+  void               set_is_loggable(int);
   void               set_is_meat_eater(int);
   void               set_is_meat(int);
   void               set_is_minion_generator(int);

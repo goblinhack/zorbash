@@ -403,10 +403,10 @@ bool Thing::matches(const std::string &what) const
   if (is_living() && (what == "is_living")) {
     return true;
   }
-  if (is_loggable_for_important_stuff() && (what == "is_loggable_for_important_stuff")) {
+  if (is_loggable() && (what == "is_loggable")) {
     return true;
   }
-  if (is_loggable_for_unimportant_stuff() && (what == "is_loggable_for_unimportant_stuff")) {
+  if (is_loggable() && (what == "is_loggable")) {
     return true;
   }
   if (is_meat_eater() && (what == "is_meat_eater")) {
@@ -1169,11 +1169,11 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_living") {
     return &Thing::is_living;
   }
-  if (what == "is_loggable_for_important_stuff") {
-    return &Thing::is_loggable_for_important_stuff;
+  if (what == "is_loggable") {
+    return &Thing::is_loggable;
   }
-  if (what == "is_loggable_for_unimportant_stuff") {
-    return &Thing::is_loggable_for_unimportant_stuff;
+  if (what == "is_loggable") {
+    return &Thing::is_loggable;
   }
   if (what == "is_meat_eater") {
     return &Thing::is_meat_eater;
