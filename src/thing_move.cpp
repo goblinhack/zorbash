@@ -376,36 +376,42 @@ bool Thing::move(fpoint future_pos, uint8_t up, uint8_t down, uint8_t left, uint
     return false;
   }
 
-  if (is_player()) {
-    if (mid_at != future_pos) {
-      if (up) {
-        dbg("Try to move up; collision check");
-      } else if (down) {
-        dbg("Try to move down; collision check");
-      } else if (left) {
-        dbg("Try to move left; collision check");
-      } else if (right) {
-        dbg("Try to move right; collision check");
-      } else if (attack) {
-        dbg("Try to move (attack); collision check");
-      }
-
-      if (collision_check_only(future_pos)) {
-        if (shove_allowed) {
-          game->tick_begin("player tried to shove");
-          try_to_shove(future_pos);
-        } else if (attack_allowed) {
-          game->tick_begin("player tried to attack");
-          use_weapon();
-        }
-        lunge(future_pos);
-        clear_move_path("Move failed");
-        return false;
-      } else {
-        game->tick_begin("player moved");
-      }
+  if (mid_at != future_pos) {
+    if (up) {
+      dbg("Try to move up; collision check");
+    } else if (down) {
+      dbg("Try to move down; collision check");
+    } else if (left) {
+      dbg("Try to move left; collision check");
+    } else if (right) {
+      dbg("Try to move right; collision check");
+    } else if (attack) {
+      dbg("Try to move (attack); collision check");
     }
 
+    if (collision_check_only(future_pos)) {
+      if (shove_allowed) {
+        if (is_player()) {
+          game->tick_begin("player tried to shove");
+        }
+        try_to_shove(future_pos);
+      } else if (attack_allowed) {
+        if (is_player()) {
+          game->tick_begin("player tried to attack");
+        }
+        use_weapon();
+      }
+      lunge(future_pos);
+      clear_move_path("Move failed");
+      return false;
+    }
+
+    if (is_player()) {
+      game->tick_begin("player moved");
+    }
+  }
+
+  if (is_player()) {
     set_where_i_failed_to_collect_last(point(-1, -1));
 
     if (! level->map_follow_player) {
