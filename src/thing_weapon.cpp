@@ -330,7 +330,7 @@ bool Thing::wield(Thingp weapon)
   return true;
 }
 
-void Thing::use_weapon(void)
+bool Thing::use_weapon(void)
 {
   TRACE_AND_INDENT();
   dbg("Try to use weapon");
@@ -340,7 +340,7 @@ void Thing::use_weapon(void)
     // Still using.
     //
     dbg("Try to use weapon; no still using");
-    return;
+    return false;
   }
 
   if (is_able_to_tire()) {
@@ -348,7 +348,7 @@ void Thing::use_weapon(void)
       if (is_player()) {
         TOPCON("You are too tired to attack. You need to rest.");
       }
-      return;
+      return false;
     }
   }
 
@@ -371,13 +371,13 @@ void Thing::use_weapon(void)
     swung_as = weapon_tp->gfx_anim_attack();
     if (swung_as == "") {
       die("Could not use %s/%08" PRIx32 " has no 'use' animation frame", weapon_tp->name().c_str(), weapon->id.id);
-      return;
+      return false;
     }
 
     auto what = tp_find(swung_as);
     if (! what) {
       err("Could not find %s to wield", swung_as.c_str());
-      return;
+      return false;
     }
   }
 
@@ -427,12 +427,12 @@ void Thing::use_weapon(void)
     on_use(weapon);
     if (weapon->collision_check_and_handle_at(hit_at, &target_attacked, &target_overlaps)) {
       lunge(hit_at);
-      return;
+      return false;
     }
   } else {
     if (collision_check_and_handle_at(hit_at, &target_attacked, &target_overlaps)) {
       lunge(hit_at);
-      return;
+      return false;
     }
   }
 
@@ -507,12 +507,12 @@ void Thing::use_weapon(void)
     if (weapon) {
       if (weapon->collision_check_and_handle_at(best_hit_at, &target_attacked, &target_overlaps)) {
         lunge(best_hit_at);
-        return;
+        return true;
       }
     } else {
       if (collision_check_and_handle_at(best_hit_at, &target_attacked, &target_overlaps)) {
         lunge(best_hit_at);
-        return;
+        return true;
       }
     }
   }
@@ -576,12 +576,12 @@ void Thing::use_weapon(void)
     if (weapon) {
       if (weapon->collision_check_and_handle_at(best_hit_at, &target_attacked, &target_overlaps)) {
         lunge(best_hit_at);
-        return;
+        return true;
       }
     } else {
       if (collision_check_and_handle_at(best_hit_at, &target_attacked, &target_overlaps)) {
         lunge(best_hit_at);
-        return;
+        return true;
       }
     }
   }
@@ -645,13 +645,15 @@ void Thing::use_weapon(void)
     if (weapon) {
       if (weapon->collision_check_and_handle_at(best_hit_at, &target_attacked, &target_overlaps)) {
         lunge(best_hit_at);
-        return;
+        return true;
       }
     } else {
       if (collision_check_and_handle_at(best_hit_at, &target_attacked, &target_overlaps)) {
         lunge(best_hit_at);
-        return;
+        return true;
       }
     }
   }
+
+  return false;
 }

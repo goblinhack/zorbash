@@ -610,11 +610,11 @@ class Tp:
     def set_is_fearless(self, value):
         zx.tp_set_is_fearless(self, value)
 
-    def set_is_able_to_see_through_doors(self, value):
-        zx.tp_set_is_able_to_see_through_doors(self, value)
+    def set_ai_is_able_to_see_through_doors(self, value):
+        zx.tp_set_ai_is_able_to_see_through_doors(self, value)
 
-    def set_is_able_to_walk_through_walls(self, value):
-        zx.tp_set_is_able_to_walk_through_walls(self, value)
+    def set_ai_is_able_to_walk_through_walls(self, value):
+        zx.tp_set_ai_is_able_to_walk_through_walls(self, value)
 
     def set_is_humanoid(self, value):
         zx.tp_set_is_humanoid(self, value)
@@ -817,11 +817,11 @@ class Tp:
     def set_attack_eater(self, value):
         zx.tp_set_attack_eater(self, value)
 
-    def set_is_able_to_jump_distance(self, value):
-        zx.tp_set_is_able_to_jump_distance(self, value)
+    def set_ai_is_able_to_jump_distance(self, value):
+        zx.tp_set_ai_is_able_to_jump_distance(self, value)
 
-    def set_is_able_to_jump(self, value):
-        zx.tp_set_is_able_to_jump(self, value)
+    def set_ai_is_able_to_jump(self, value):
+        zx.tp_set_ai_is_able_to_jump(self, value)
 
     def set_is_acid(self, value):
         zx.tp_set_is_acid(self, value)
@@ -895,14 +895,14 @@ class Tp:
     def set_gfx_attack_anim(self, value):
         zx.tp_set_gfx_attack_anim(self, value)
 
-    def set_attack_shove_chance_d1000(self, value):
-        zx.tp_set_attack_shove_chance_d1000(self, value)
+    def set_ai_shove_chance_d1000(self, value):
+        zx.tp_set_ai_shove_chance_d1000(self, value)
 
     def set_random_jump_chance_d1000(self, value):
         zx.tp_set_random_jump_chance_d1000(self, value)
 
-    def set_is_able_to_jump_on_low_hp_chance_d1000(self, value):
-        zx.tp_set_is_able_to_jump_on_low_hp_chance_d1000(self, value)
+    def set_ai_is_able_to_jump_on_low_hp_chance_d1000(self, value):
+        zx.tp_set_ai_is_able_to_jump_on_low_hp_chance_d1000(self, value)
 
     def set_is_chasm(self, value):
         zx.tp_set_is_chasm(self, value)
@@ -910,8 +910,8 @@ class Tp:
     def set_is_hazard(self, value):
         zx.tp_set_is_hazard(self, value)
 
-    def set_attack_shove(self, value):
-        zx.tp_set_attack_shove(self, value)
+    def set_ai_is_able_to_shove(self, value):
+        zx.tp_set_ai_is_able_to_shove(self, value)
 
     def set_is_shovable(self, value):
         zx.tp_set_is_shovable(self, value)

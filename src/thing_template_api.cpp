@@ -159,8 +159,8 @@ int Tp::attack_humanoid(void) const { return _attack_humanoid; }
 int Tp::attack_living(void) const { return _attack_living; }
 int Tp::attack_lunge(void) const { return _attack_lunge; }
 int Tp::attack_meat(void) const { return _attack_meat; }
-int Tp::attack_shove_chance_d1000(void) const { return _attack_shove_chance_d1000; }
-int Tp::attack_shove(void) const { return _attack_shove; }
+int Tp::ai_shove_chance_d1000(void) const { return _ai_shove_chance_d1000; }
+int Tp::ai_is_able_to_shove(void) const { return _ai_is_able_to_shove; }
 int Tp::blast_max_radius(void) const { return _blast_max_radius; }
 int Tp::blast_min_radius(void) const { return _blast_min_radius; }
 int Tp::blit_bot_off(void) const { return _blit_bot_off; }
@@ -215,8 +215,8 @@ int Tp::internal_has_hp_anim(void) const { return _internal_has_hp_anim; }
 int Tp::is_able_to_change_levels(void) const { return _is_able_to_change_levels; }
 int Tp::is_able_to_fall(void) const { return _is_able_to_fall; }
 int Tp::is_able_to_fire_at(void) const { return _is_able_to_fire_at; }
-int Tp::is_able_to_see_through_doors(void) const { return _is_able_to_see_through_doors; }
-int Tp::is_able_to_walk_through_walls(void) const { return _is_able_to_walk_through_walls; }
+int Tp::ai_is_able_to_see_through_doors(void) const { return _ai_is_able_to_see_through_doors; }
+int Tp::ai_is_able_to_walk_through_walls(void) const { return _ai_is_able_to_walk_through_walls; }
 int Tp::is_acid_lover(void) const { return _is_acid_lover; }
 int Tp::is_acid(void) const { return _is_acid; }
 int Tp::is_alive_on_end_of_anim(void) const { return _is_alive_on_end_of_anim; }
@@ -300,9 +300,9 @@ int Tp::is_jelly_eater(void) const { return _is_jelly_eater; }
 int Tp::is_jelly_parent(void) const { return _is_jelly_parent; }
 int Tp::is_jelly(void) const { return _is_jelly; }
 int Tp::random_jump_chance_d1000(void) const { return _random_jump_chance_d1000; }
-int Tp::is_able_to_jump_distance(void) const { return _is_able_to_jump_distance; }
-int Tp::is_able_to_jump_on_low_hp_chance_d1000(void) const { return _is_able_to_jump_on_low_hp_chance_d1000; }
-int Tp::is_able_to_jump(void) const { return _is_able_to_jump; }
+int Tp::ai_is_able_to_jump_distance(void) const { return _ai_is_able_to_jump_distance; }
+int Tp::ai_is_able_to_jump_on_low_hp_chance_d1000(void) const { return _ai_is_able_to_jump_on_low_hp_chance_d1000; }
+int Tp::ai_is_able_to_jump(void) const { return _ai_is_able_to_jump; }
 int Tp::ai_is_able_to_collect_keys(void) const { return _ai_is_able_to_collect_keys; }
 int Tp::is_key(void) const { return _is_key; }
 int Tp::is_killed_on_hit_or_miss(void) const { return _is_killed_on_hit_or_miss; }
@@ -477,8 +477,8 @@ void Tp::set_attack_humanoid(int v) { _attack_humanoid = v; }
 void Tp::set_attack_living(int v) { _attack_living = v; }
 void Tp::set_attack_lunge(int v) { _attack_lunge = v; }
 void Tp::set_attack_meat(int v) { _attack_meat = v; }
-void Tp::set_attack_shove_chance_d1000(int v) { _attack_shove_chance_d1000 = v; }
-void Tp::set_attack_shove(int v) { _attack_shove = v; }
+void Tp::set_ai_shove_chance_d1000(int v) { _ai_shove_chance_d1000 = v; }
+void Tp::set_ai_is_able_to_shove(int v) { _ai_is_able_to_shove = v; }
 void Tp::set_blast_max_radius(int v) { _blast_max_radius = v; }
 void Tp::set_blast_min_radius(int v) { _blast_min_radius = v; }
 void Tp::set_blit_bot_off(int v) { _blit_bot_off = v; }
@@ -536,8 +536,8 @@ void Tp::set_internal_has_hp_anim(int v) { _internal_has_hp_anim = v; }
 void Tp::set_is_able_to_change_levels(int v) { _is_able_to_change_levels = v; }
 void Tp::set_is_able_to_fall(int v) { _is_able_to_fall = v; }
 void Tp::set_is_able_to_fire_at(int v) { _is_able_to_fire_at = v; }
-void Tp::set_is_able_to_see_through_doors(int v) { _is_able_to_see_through_doors = v; }
-void Tp::set_is_able_to_walk_through_walls(int v) { _is_able_to_walk_through_walls = v; }
+void Tp::set_ai_is_able_to_see_through_doors(int v) { _ai_is_able_to_see_through_doors = v; }
+void Tp::set_ai_is_able_to_walk_through_walls(int v) { _ai_is_able_to_walk_through_walls = v; }
 void Tp::set_is_acid(int v) { _is_acid = v; }
 void Tp::set_is_acid_lover(int v) { _is_acid_lover = v; }
 void Tp::set_is_alive_on_end_of_anim(int v) { _is_alive_on_end_of_anim = v; }
@@ -620,9 +620,9 @@ void Tp::set_is_jelly_eater(int v) { _is_jelly_eater = v; }
 void Tp::set_is_jelly(int v) { _is_jelly = v; }
 void Tp::set_is_jelly_parent(int v) { _is_jelly_parent = v; }
 void Tp::set_random_jump_chance_d1000(int v) { _random_jump_chance_d1000 = v; }
-void Tp::set_is_able_to_jump_distance(int v) { _is_able_to_jump_distance = v; }
-void Tp::set_is_able_to_jump(int v) { _is_able_to_jump = v; }
-void Tp::set_is_able_to_jump_on_low_hp_chance_d1000(int v) { _is_able_to_jump_on_low_hp_chance_d1000 = v; }
+void Tp::set_ai_is_able_to_jump_distance(int v) { _ai_is_able_to_jump_distance = v; }
+void Tp::set_ai_is_able_to_jump(int v) { _ai_is_able_to_jump = v; }
+void Tp::set_ai_is_able_to_jump_on_low_hp_chance_d1000(int v) { _ai_is_able_to_jump_on_low_hp_chance_d1000 = v; }
 void Tp::set_ai_is_able_to_collect_keys(int v) { _ai_is_able_to_collect_keys = v; }
 void Tp::set_is_key(int v) { _is_key = v; }
 void Tp::set_is_killed_on_hit_or_miss(int v) { _is_killed_on_hit_or_miss = v; }

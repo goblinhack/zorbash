@@ -419,16 +419,9 @@ int Thing::robot_ai_init_can_see_dmap(int minx, int miny, int maxx, int maxy, in
       //
       // Don't block on things like chasms so we can jump
       //
-      if (is_able_to_jump()) {
-        if (! ai_obstacle_for_me(p)) {
-          set(dmap_can_see->val, x, y, DMAP_IS_PASSABLE);
-          continue;
-        }
-      } else {
-        if (! ai_obstacle_for_me(p)) {
-          set(dmap_can_see->val, x, y, DMAP_IS_PASSABLE);
-          continue;
-        }
+      if (! ai_obstacle_for_me(p)) {
+        set(dmap_can_see->val, x, y, DMAP_IS_PASSABLE);
+        continue;
       }
 
       if (level->is_obs_wall_or_door(p)) {
@@ -461,7 +454,7 @@ int Thing::robot_ai_init_can_see_dmap(int minx, int miny, int maxx, int maxy, in
       //
       // Can jump but only if not tired.
       //
-      if (jump_allowed && is_able_to_jump() && (get_stamina() > get_stamina_max() / 2)) {
+      if (jump_allowed && ai_is_able_to_jump() && (get_stamina() > get_stamina_max() / 2)) {
         //
         // Trace all possible jump paths to see if we can jump over
         //
@@ -1686,7 +1679,7 @@ bool Thing::ai_tick(void)
         // until at the end, we end up looking for the exit.
         //
         int search_type_max;
-        if (is_able_to_jump()) {
+        if (ai_is_able_to_jump()) {
           if (ai_is_level_explorer()) {
             if (ai_is_exit_finder()) {
               search_type_max = SEARCH_TYPE_LAST_RESORTS_JUMP_ALLOWED;
@@ -1764,7 +1757,7 @@ bool Thing::ai_tick(void)
         // Check for interrupts
         //
         int search_type_max;
-        if (is_able_to_jump()) {
+        if (ai_is_able_to_jump()) {
           search_type_max = SEARCH_TYPE_LOCAL_JUMP_ALLOWED;
         } else {
           search_type_max = SEARCH_TYPE_LOCAL_NO_JUMP;

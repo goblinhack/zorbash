@@ -26,7 +26,7 @@ int Tp::get_danger_level(void)
   if (is_resurrectable()) {
     danger_level *= 2;
   }
-  if (attack_shove()) {
+  if (ai_is_able_to_shove()) {
     danger_level++;
   }
   if (is_acid()) {
@@ -47,7 +47,7 @@ int Tp::get_danger_level(void)
   if (is_floating()) {
     danger_level += 2;
   }
-  if (is_able_to_jump()) {
+  if (ai_is_able_to_jump()) {
     danger_level += 5;
   }
   if (is_item_eater()) {
@@ -85,7 +85,7 @@ int Thing::get_danger_initial_level(void)
   if (is_resurrectable()) {
     danger_level *= 2;
   }
-  if (attack_shove()) {
+  if (ai_is_able_to_shove()) {
     danger_level++;
   }
   if (is_carrying_item()) {
@@ -112,7 +112,7 @@ int Thing::get_danger_initial_level(void)
   if (is_floating()) {
     danger_level += 2;
   }
-  if (is_able_to_jump()) {
+  if (ai_is_able_to_jump()) {
     danger_level += 5;
   }
   if (is_item_eater()) {
@@ -158,7 +158,7 @@ int Thing::get_danger_current_level(void)
   if (is_resurrectable()) {
     danger_level *= 2;
   }
-  if (attack_shove()) {
+  if (ai_is_able_to_shove()) {
     danger_level++;
   }
   if (is_carrying_item()) {
@@ -185,7 +185,7 @@ int Thing::get_danger_current_level(void)
   if (is_floating()) {
     danger_level += 2;
   }
-  if (is_able_to_jump()) {
+  if (ai_is_able_to_jump()) {
     danger_level += 5;
   }
   if (is_item_eater()) {

@@ -9,7 +9,7 @@ def on_death(me, x, y):
 
 def tp_init(name, text_name):
     mytp = tp.Tp(name, text_name)
-    mytp.set_attack_shove_chance_d1000(200)
+    mytp.set_ai_shove_chance_d1000(200)
     mytp.set_collision_attack(True)
     mytp.set_collision_check(True)
     mytp.set_collision_circle(True)

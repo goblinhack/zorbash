@@ -37,7 +37,7 @@ void Thing::level_change(Levelp l)
     clear_age_map();
     clear_seen_map();
     clear_dmap_can_see();
-    if (is_able_to_jump()) {
+    if (ai_is_able_to_jump()) {
       clear_dmap_unused();
     }
     move_finish();

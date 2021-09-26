@@ -467,8 +467,8 @@ public:
   int                attack_living(void) const;
   int                attack_lunge(void) const;
   int                attack_meat(void) const;
-  int                attack_shove(void) const;
-  int                attack_shove_chance_d1000(void) const;
+  int                ai_is_able_to_shove(void) const;
+  int                ai_shove_chance_d1000(void) const;
   int                blast_max_radius(void) const;
   int                blast_min_radius(void) const;
   int                capacity_height(void);
@@ -731,8 +731,8 @@ public:
   int                is_able_to_change_levels(void) const;
   int                is_able_to_fall(void) const;
   int                is_able_to_fire_at(void) const;
-  int                is_able_to_see_through_doors(void) const;
-  int                is_able_to_walk_through_walls(void) const;
+  int                ai_is_able_to_see_through_doors(void) const;
+  int                ai_is_able_to_walk_through_walls(void) const;
   int                is_acid(void) const;
   int                is_acid_lover(void) const;
   int                ai_wanderer(void) const;
@@ -828,10 +828,10 @@ public:
   int                is_jelly_baby_eater(void) const;
   int                is_jelly_eater(void) const;
   int                is_jelly_parent(void) const;
-  int                is_able_to_jump(void) const;
+  int                ai_is_able_to_jump(void) const;
   int                random_jump_chance_d1000(void) const;
-  int                is_able_to_jump_distance(void) const;
-  int                is_able_to_jump_on_low_hp_chance_d1000(void) const;
+  int                ai_is_able_to_jump_distance(void) const;
+  int                ai_is_able_to_jump_on_low_hp_chance_d1000(void) const;
   int                is_key(void) const;
   int                ai_is_able_to_collect_keys(void) const;
   int                is_killed_on_hit_or_miss(void) const;
@@ -1341,7 +1341,7 @@ public:
   void update_light_strength_including_torch_effect(int &light_strength);
   void update_pos(fpoint, bool immediately);
   void update_tick(void);
-  void use_weapon(void);
+  bool use_weapon(void);
   void used(Thingp w, Thingp target, bool remove_after_use);
   void visible();
   void water_tick();

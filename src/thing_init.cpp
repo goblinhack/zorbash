@@ -167,7 +167,7 @@ void Thing::init(Levelp level, const std::string &name, const fpoint born, const
   //
   if (tpp->is_monst() || tpp->is_player()) {
     new_dmap_can_see();
-    if (tpp->is_able_to_jump()) {
+    if (tpp->ai_is_able_to_jump()) {
       new_dmap_unused();
     }
     new_age_map();
@@ -575,7 +575,7 @@ void Thing::reinit(void)
   //
   if (tpp->is_monst() || tpp->is_player()) {
     new_dmap_can_see();
-    if (tpp->is_able_to_jump()) {
+    if (tpp->ai_is_able_to_jump()) {
       new_dmap_unused();
     }
     new_age_map();

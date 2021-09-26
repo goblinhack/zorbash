@@ -49,10 +49,10 @@ bool Thing::matches(const std::string &what) const
   if (attack_meat() && (what == "attack_meat")) {
     return true;
   }
-  if (attack_shove_chance_d1000() && (what == "attack_shove_chance_d1000")) {
+  if (ai_shove_chance_d1000() && (what == "ai_shove_chance_d1000")) {
     return true;
   }
-  if (attack_shove() && (what == "attack_shove")) {
+  if (ai_is_able_to_shove() && (what == "ai_is_able_to_shove")) {
     return true;
   }
   if (blast_max_radius() && (what == "blast_max_radius")) {
@@ -112,10 +112,10 @@ bool Thing::matches(const std::string &what) const
   if (is_able_to_fire_at() && (what == "is_able_to_fire_at")) {
     return true;
   }
-  if (is_able_to_see_through_doors() && (what == "is_able_to_see_through_doors")) {
+  if (ai_is_able_to_see_through_doors() && (what == "ai_is_able_to_see_through_doors")) {
     return true;
   }
-  if (is_able_to_walk_through_walls() && (what == "is_able_to_walk_through_walls")) {
+  if (ai_is_able_to_walk_through_walls() && (what == "ai_is_able_to_walk_through_walls")) {
     return true;
   }
   if (is_acid_lover() && (what == "is_acid_lover")) {
@@ -370,13 +370,13 @@ bool Thing::matches(const std::string &what) const
   if (random_jump_chance_d1000() && (what == "random_jump_chance_d1000")) {
     return true;
   }
-  if (is_able_to_jump_distance() && (what == "is_able_to_jump_distance")) {
+  if (ai_is_able_to_jump_distance() && (what == "ai_is_able_to_jump_distance")) {
     return true;
   }
-  if (is_able_to_jump_on_low_hp_chance_d1000() && (what == "is_able_to_jump_on_low_hp_chance_d1000")) {
+  if (ai_is_able_to_jump_on_low_hp_chance_d1000() && (what == "ai_is_able_to_jump_on_low_hp_chance_d1000")) {
     return true;
   }
-  if (is_able_to_jump() && (what == "is_able_to_jump")) {
+  if (ai_is_able_to_jump() && (what == "ai_is_able_to_jump")) {
     return true;
   }
   if (ai_is_able_to_collect_keys() && (what == "ai_is_able_to_collect_keys")) {
@@ -815,11 +815,11 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "attack_meat") {
     return &Thing::attack_meat;
   }
-  if (what == "attack_shove_chance_d1000") {
-    return &Thing::attack_shove_chance_d1000;
+  if (what == "ai_shove_chance_d1000") {
+    return &Thing::ai_shove_chance_d1000;
   }
-  if (what == "attack_shove") {
-    return &Thing::attack_shove;
+  if (what == "ai_is_able_to_shove") {
+    return &Thing::ai_is_able_to_shove;
   }
   if (what == "blast_max_radius") {
     return &Thing::blast_max_radius;
@@ -878,11 +878,11 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_able_to_fire_at") {
     return &Thing::is_able_to_fire_at;
   }
-  if (what == "is_able_to_see_through_doors") {
-    return &Thing::is_able_to_see_through_doors;
+  if (what == "ai_is_able_to_see_through_doors") {
+    return &Thing::ai_is_able_to_see_through_doors;
   }
-  if (what == "is_able_to_walk_through_walls") {
-    return &Thing::is_able_to_walk_through_walls;
+  if (what == "ai_is_able_to_walk_through_walls") {
+    return &Thing::ai_is_able_to_walk_through_walls;
   }
   if (what == "is_acid_lover") {
     return &Thing::is_acid_lover;
@@ -1136,14 +1136,14 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "random_jump_chance_d1000") {
     return &Thing::random_jump_chance_d1000;
   }
-  if (what == "is_able_to_jump_distance") {
-    return &Thing::is_able_to_jump_distance;
+  if (what == "ai_is_able_to_jump_distance") {
+    return &Thing::ai_is_able_to_jump_distance;
   }
-  if (what == "is_able_to_jump_on_low_hp_chance_d1000") {
-    return &Thing::is_able_to_jump_on_low_hp_chance_d1000;
+  if (what == "ai_is_able_to_jump_on_low_hp_chance_d1000") {
+    return &Thing::ai_is_able_to_jump_on_low_hp_chance_d1000;
   }
-  if (what == "is_able_to_jump") {
-    return &Thing::is_able_to_jump;
+  if (what == "ai_is_able_to_jump") {
+    return &Thing::ai_is_able_to_jump;
   }
   if (what == "ai_is_able_to_collect_keys") {
     return &Thing::ai_is_able_to_collect_keys;

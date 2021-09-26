@@ -247,7 +247,7 @@ bool Thing::ai_wander(void)
       return true;
     }
 
-    if (is_able_to_jump()) {
+    if (ai_is_able_to_jump()) {
       dbg("Blocked on all sides, try jumping");
       if (try_harder_to_jump()) {
         return true;
@@ -259,7 +259,7 @@ bool Thing::ai_wander(void)
 
   if (ai_blocked()) {
     dbg("Blocked on all sides except current pos, try jumping");
-    if (is_able_to_jump()) {
+    if (ai_is_able_to_jump()) {
       if (try_harder_to_jump()) {
         return true;
       }

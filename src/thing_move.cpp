@@ -78,10 +78,6 @@ void Thing::move_finish(void)
     }
   }
 
-  if (! is_hidden) {
-    dbg("Move to %f,%f finished", mid_at.x, mid_at.y);
-  }
-
   //
   // Make sure that things that declare they are finished moving really
   // are where they should be.
@@ -144,7 +140,8 @@ bool Thing::move(point future_pos)
 
 bool Thing::move_no_shove_no_attack(fpoint future_pos)
 {
-  dbg("Move, without shoving to %f,%f", future_pos.x, future_pos.y);
+  TRACE_AND_INDENT();
+  dbg("Move, no shove, no attack to %s", future_pos.to_string().c_str());
   bool up              = future_pos.y < mid_at.y;
   bool down            = future_pos.y > mid_at.y;
   bool left            = future_pos.x < mid_at.x;
@@ -160,7 +157,8 @@ bool Thing::move_no_shove_no_attack(fpoint future_pos)
 
 bool Thing::move_no_shove_no_attack(point future_pos)
 {
-  dbg("Move, without shoving to %d,%d", future_pos.x, future_pos.y);
+  TRACE_AND_INDENT();
+  dbg("Move, no shove, no attack to %s", future_pos.to_string().c_str());
   bool up              = future_pos.y < mid_at.y;
   bool down            = future_pos.y > mid_at.y;
   bool left            = future_pos.x < mid_at.x;
@@ -176,7 +174,8 @@ bool Thing::move_no_shove_no_attack(point future_pos)
 
 bool Thing::move_no_shove_attack_allowed(fpoint future_pos)
 {
-  dbg("Move, without shoving to %f,%f", future_pos.x, future_pos.y);
+  TRACE_AND_INDENT();
+  dbg("Move, no shove, attack allowed to %s", future_pos.to_string().c_str());
   bool up              = future_pos.y < mid_at.y;
   bool down            = future_pos.y > mid_at.y;
   bool left            = future_pos.x < mid_at.x;
@@ -192,7 +191,8 @@ bool Thing::move_no_shove_attack_allowed(fpoint future_pos)
 
 bool Thing::move_no_shove_attack_allowed(point future_pos)
 {
-  dbg("Move, without shoving to %d,%d", future_pos.x, future_pos.y);
+  TRACE_AND_INDENT();
+  dbg("Move, no shove, attack allowed to %s", future_pos.to_string().c_str());
   bool up              = future_pos.y < mid_at.y;
   bool down            = future_pos.y > mid_at.y;
   bool left            = future_pos.x < mid_at.x;
@@ -206,7 +206,7 @@ bool Thing::move_no_shove_attack_allowed(point future_pos)
   return (move(make_fpoint(future_pos), up, down, left, right, attack, wait_or_collect, shove_allowed, attack_allowed));
 }
 
-bool Thing::move(fpoint future_pos, uint8_t up, uint8_t down, uint8_t left, uint8_t right, uint8_t attack,
+bool Thing::move(fpoint future_pos, uint8_t up, uint8_t down, uint8_t left, uint8_t right, uint8_t must_attack,
                  uint8_t wait_or_collect, bool shove_allowed, bool attack_allowed)
 {
   TRACE_AND_INDENT();
@@ -265,7 +265,7 @@ bool Thing::move(fpoint future_pos, uint8_t up, uint8_t down, uint8_t left, uint
   //
   // No rest for the undead.
   //
-  if (! attack) {
+  if (! must_attack) {
     if (! is_undead() && ! is_ethereal()) {
       if (up || down || left || right) {
         if (pcg_random_range(0, 20) > get_stat_constitution()) {
@@ -363,7 +363,7 @@ bool Thing::move(fpoint future_pos, uint8_t up, uint8_t down, uint8_t left, uint
 
   move_set_dir_from_delta(delta);
 
-  if (attack) {
+  if (must_attack) {
     if (is_player()) {
       game->tick_begin("player attacked");
     }
@@ -385,22 +385,27 @@ bool Thing::move(fpoint future_pos, uint8_t up, uint8_t down, uint8_t left, uint
       dbg("Try to move left; collision check");
     } else if (right) {
       dbg("Try to move right; collision check");
-    } else if (attack) {
+    } else if (must_attack) {
       dbg("Try to move (attack); collision check");
     }
 
     if (collision_check_only(future_pos)) {
+      dbg("Collided with something");
+
       if (shove_allowed) {
+        dbg("Try to shove");
         if (is_player()) {
           game->tick_begin("player tried to shove");
         }
         try_to_shove(future_pos);
       } else if (attack_allowed) {
+        dbg("Try to attack");
         if (is_player()) {
           game->tick_begin("player tried to attack");
         }
         use_weapon();
       }
+      dbg("Move failed");
       lunge(future_pos);
       clear_move_path("Move failed");
       return false;

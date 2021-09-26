@@ -165,15 +165,15 @@ int Thing::attack_meat(void) const
   TRACE_AND_INDENT();
   return (tp()->attack_meat());
 }
-int Thing::attack_shove_chance_d1000(void) const
+int Thing::ai_shove_chance_d1000(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->attack_shove_chance_d1000());
+  return (tp()->ai_shove_chance_d1000());
 }
-int Thing::attack_shove(void) const
+int Thing::ai_is_able_to_shove(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->attack_shove());
+  return (tp()->ai_is_able_to_shove());
 }
 int Thing::blast_max_radius(void) const
 {
@@ -410,15 +410,15 @@ int Thing::is_able_to_fire_at(void) const
   TRACE_AND_INDENT();
   return (tp()->is_able_to_fire_at());
 }
-int Thing::is_able_to_see_through_doors(void) const
+int Thing::ai_is_able_to_see_through_doors(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->is_able_to_see_through_doors());
+  return (tp()->ai_is_able_to_see_through_doors());
 }
-int Thing::is_able_to_walk_through_walls(void) const
+int Thing::ai_is_able_to_walk_through_walls(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->is_able_to_walk_through_walls());
+  return (tp()->ai_is_able_to_walk_through_walls());
 }
 int Thing::is_acid_lover(void) const
 {
@@ -830,20 +830,20 @@ int Thing::random_jump_chance_d1000(void) const
   TRACE_AND_INDENT();
   return (tp()->random_jump_chance_d1000());
 }
-int Thing::is_able_to_jump_distance(void) const
+int Thing::ai_is_able_to_jump_distance(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->is_able_to_jump_distance());
+  return (tp()->ai_is_able_to_jump_distance());
 }
-int Thing::is_able_to_jump_on_low_hp_chance_d1000(void) const
+int Thing::ai_is_able_to_jump_on_low_hp_chance_d1000(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->is_able_to_jump_on_low_hp_chance_d1000());
+  return (tp()->ai_is_able_to_jump_on_low_hp_chance_d1000());
 }
-int Thing::is_able_to_jump(void) const
+int Thing::ai_is_able_to_jump(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->is_able_to_jump());
+  return (tp()->ai_is_able_to_jump());
 }
 int Thing::ai_is_able_to_collect_keys(void) const
 {

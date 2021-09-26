@@ -18,7 +18,7 @@
 ThingShoved Thing::try_to_shove(Thingp it, fpoint delta)
 {
   TRACE_AND_INDENT();
-  if (! attack_shove()) {
+  if (! ai_is_able_to_shove()) {
     return (THING_SHOVE_NEVER_TRIED);
   }
 
@@ -34,7 +34,7 @@ ThingShoved Thing::try_to_shove(Thingp it, fpoint delta)
   }
 
   if (! is_player()) {
-    if ((int) pcg_random_range(0, 1000) > tp()->attack_shove_chance_d1000()) {
+    if ((int) pcg_random_range(0, 1000) > tp()->ai_shove_chance_d1000()) {
       return (THING_SHOVE_NEVER_TRIED);
     }
   }
@@ -192,7 +192,7 @@ ThingShoved Thing::try_to_shove(Thingp it, fpoint delta)
 
 ThingShoved Thing::try_to_shove(fpoint future_pos)
 {
-  if (! attack_shove()) {
+  if (! ai_is_able_to_shove()) {
     return (THING_SHOVE_NEVER_TRIED);
   }
 
@@ -220,7 +220,7 @@ ThingShoved Thing::try_to_shove(fpoint future_pos)
 
 ThingShoved Thing::try_to_shove_into_hazard(Thingp it, fpoint delta)
 {
-  if (attack_shove()) {
+  if (ai_is_able_to_shove()) {
     auto shoved_to_position = it->mid_at + delta;
     if (level->is_hazard((int) shoved_to_position.x, (int) shoved_to_position.y)) {
       return (try_to_shove(it, delta));

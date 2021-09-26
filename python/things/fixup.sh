@@ -122,7 +122,7 @@ do
       set_attack_living \
       set_attack_lunge \
       set_attack_meat \
-      set_attack_shove \
+      set_ai_is_able_to_shove \
       set_collision_attack \
       set_collision_box \
       set_collision_check \
@@ -163,8 +163,8 @@ do
       set_is_able_to_change_levels \
       set_is_able_to_fall \
       set_is_able_to_fire_at \
-      set_is_able_to_see_through_doors \
-      set_is_able_to_walk_through_walls \
+      set_ai_is_able_to_see_through_doors \
+      set_ai_is_able_to_walk_through_walls \
       set_is_acid \
       set_is_acid_lover \
       set_ai_wanderer \
@@ -249,7 +249,7 @@ do
       set_is_jelly_baby_eater \
       set_is_jelly_eater \
       set_is_jelly_parent \
-      set_is_able_to_jump \
+      set_ai_is_able_to_jump \
       set_is_key \
       set_ai_is_able_to_collect_keys \
       set_is_killed_on_hit_or_miss \

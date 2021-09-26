@@ -23,27 +23,23 @@
 void Thing::location_check_forced(void)
 {
   TRACE_AND_INDENT();
+  dbg("Location check");
+
   //
   // Prevent interactions that might generate things like smoke.
   //
   if (level->is_being_destroyed) {
-    if (is_player()) {
-      dbg("Location check, skip, level is being destroyed");
-    }
+    dbg("Location check, skip, level is being destroyed");
     return;
   }
 
   if (is_being_destroyed) {
-    if (is_player()) {
-      dbg("Location check, skip, being destroyed");
-    }
+    dbg("Location check, skip, being destroyed");
     return;
   }
 
   if (is_hidden) {
-    if (is_player()) {
-      dbg("Location check, skip, is hidden");
-    }
+    dbg("Location check, skip, is hidden");
     return;
   }
 
@@ -56,51 +52,63 @@ void Thing::location_check_forced(void)
     //
     // Skip interactions
     //
+    dbg("Location check, skip");
     return;
   }
 
   chasm_tick();
   if (is_dead) {
+    dbg("Location check, skip, dead");
     return;
   }
   corrode_tick();
   if (is_dead) {
+    dbg("Location check, skip, dead");
     return;
   }
   barrel_tick();
   if (is_dead) {
+    dbg("Location check, skip, dead");
     return;
   }
   secret_door_tick();
   if (is_dead) {
+    dbg("Location check, skip, dead");
     return;
   }
   brazier_tick();
   if (is_dead) {
+    dbg("Location check, skip, dead");
     return;
   }
   water_tick();
   if (is_dead) {
+    dbg("Location check, skip, dead");
     return;
   }
   lava_tick();
   if (is_dead) {
+    dbg("Location check, skip, dead");
     return;
   }
   acid_tick();
   if (is_dead) {
+    dbg("Location check, skip, dead");
     return;
   }
   fire_tick();
   if (is_dead) {
+    dbg("Location check, skip, dead");
     return;
   }
   grass_tick();
   if (is_dead) {
+    dbg("Location check, skip, dead");
     return;
   }
 
   if (! is_able_to_change_levels()) {
+    dbg("Location check, done");
     return;
   }
 
@@ -110,27 +118,19 @@ void Thing::location_check_forced(void)
   //
   if (monstp && monstp->move_path.size() <= 1) {
     if (descend_dungeon_tick()) {
-      if (is_player()) {
-        dbg("Location check, descending dungeon");
-      }
+      dbg("Location check, descending dungeon");
       return;
     }
     if (ascend_dungeon_tick()) {
-      if (is_player()) {
-        dbg("Location check, ascending dungeon");
-      }
+      dbg("Location check, ascending dungeon");
       return;
     }
     if (descend_sewer_tick()) {
-      if (is_player()) {
-        dbg("Location check, descending sewer");
-      }
+      dbg("Location check, descending sewer");
       return;
     }
     if (ascend_sewer_tick()) {
-      if (is_player()) {
-        dbg("Location check, ascending sewer");
-      }
+      dbg("Location check, ascending sewer");
       return;
     }
   }
@@ -143,10 +143,7 @@ void Thing::location_check(void)
     return;
   }
 
-  if (is_player()) {
-    dbg("Do location check. Last check %d, game tick %d", get_tick_last_location_check(), game->tick_current);
-  }
-
+  dbg("Do location check. Last %d, game tick %d", get_tick_last_location_check(), game->tick_current);
   set_tick_last_location_check(game->tick_current);
 
   location_check_forced();
@@ -161,6 +158,7 @@ void Thing::location_check_all_things_at(void)
 {
   TRACE_AND_INDENT();
   dbg("Do location checks");
+
   FOR_ALL_THINGS_THAT_INTERACT(level, t, mid_at.x, mid_at.y)
   {
     TRACE_AND_INDENT();
@@ -177,6 +175,7 @@ void Thing::location_check_forced_all_things_at(void)
 {
   TRACE_AND_INDENT();
   dbg("Do location checks");
+
   FOR_ALL_THINGS_THAT_INTERACT(level, t, mid_at.x, mid_at.y)
   {
     TRACE_AND_INDENT();
