@@ -48,7 +48,7 @@
   IF_DEBUG3                                                                                                            \
   {                                                                                                                    \
     auto s = string_sprintf("Add sub-goal score %d @(%d,%d) %s", score, p.x, p.y, msg);                                \
-    ai_log("", s, it);                                                                                                 \
+    AI_LOG("", s, it);                                                                                                 \
   }
 
 void Thing::ai_log(const std::string &short_msg, const std::string &long_msg, Thingp it)
@@ -91,7 +91,7 @@ bool Thing::robot_ai_create_path_to_goal(int minx, int miny, int maxx, int maxy,
   TRACE_AND_INDENT();
   point start((int) mid_at.x, (int) mid_at.y);
 
-  ai_log("", "Choose goal");
+  AI_LOG("", "Choose goal");
   TRACE_AND_INDENT();
   //
   // Find all the possible goals. Higher scores, lower costs are preferred
@@ -102,7 +102,7 @@ bool Thing::robot_ai_create_path_to_goal(int minx, int miny, int maxx, int maxy,
   //
   // Initialize basic visibility and things that are lit and can be seen
   //
-  ai_log("", "Choose goals (higher scores, lower costs are preferred):");
+  AI_LOG("", "Choose goals (higher scores, lower costs are preferred):");
 
   std::multiset< Goal > goals;
   std::list< GoalMap >  goalmaps;
@@ -130,7 +130,7 @@ bool Thing::robot_ai_create_path_to_goal(int minx, int miny, int maxx, int maxy,
   // No goals?
   //
   if (goalmaps.empty()) {
-    ai_log("", "No goals found");
+    AI_LOG("", "No goals found");
     return false;
   }
 
@@ -177,7 +177,7 @@ bool Thing::robot_ai_create_path_to_goal(int minx, int miny, int maxx, int maxy,
     IF_DEBUG3
     {
       auto s = string_sprintf("Sorted goals, %d (best) .. %d (worst)", (int) most_preferred, (int) least_preferred);
-      ai_log("", s);
+      AI_LOG("", s);
     }
 
     //
@@ -215,7 +215,7 @@ bool Thing::robot_ai_create_path_to_goal(int minx, int miny, int maxx, int maxy,
 #ifdef ENABLE_DEBUG_AI_VERBOSE
     IF_DEBUG4
     {
-      ai_log("", "Goals:");
+      AI_LOG("", "Goals:");
       dmap_print(g.dmap, point(min.x, min.y), point(start.x, start.y), point(max.x, max.y));
     }
 #endif
@@ -282,7 +282,7 @@ bool Thing::robot_ai_create_path_to_goal(int minx, int miny, int maxx, int maxy,
 
       if (new_move_path.empty()) {
         if (level->is_sticky(mid_at.x, mid_at.y)) {
-          ai_log("Stuck in something");
+          AI_LOG("Stuck in something");
           if (is_player()) {
             game->tick_begin("Try to break free");
           }
@@ -317,7 +317,7 @@ bool Thing::robot_ai_create_path_to_goal(int minx, int miny, int maxx, int maxy,
 
         logged_one = true;
 
-        ai_log("", "Found a goal", it);
+        AI_LOG("", "Found a goal", it);
       }
       FOR_ALL_THINGS_END();
 
@@ -339,13 +339,13 @@ bool Thing::robot_ai_create_path_to_goal(int minx, int miny, int maxx, int maxy,
           }
 
           logged_one = true;
-          ai_log("", "Found a non active-thing goal", it);
+          AI_LOG("", "Found a non active-thing goal", it);
         }
         FOR_ALL_THINGS_END();
       }
 
       if (! logged_one) {
-        ai_log("", "Found a non thing goal");
+        AI_LOG("", "Found a non thing goal");
       }
 
       if (is_player()) {
@@ -819,9 +819,9 @@ void Thing::robot_ai_choose_initial_goals(std::multiset< Goal > &goals, int minx
             if (score > 0) {
               SCORE_ADD(score, "collect");
               got_one_this_tile = true;
-              ai_log("", "Is considering collecting", it);
+              AI_LOG("", "Is considering collecting", it);
             } else {
-              ai_log("", "Is not considering collecting", it);
+              AI_LOG("", "Is not considering collecting", it);
             }
           }
         }
@@ -915,7 +915,7 @@ void Thing::robot_ai_choose_initial_goals(std::multiset< Goal > &goals, int minx
           }
 
           if (avoid) {
-            ai_log("Needs to avoid", it);
+            AI_LOG("Needs to avoid", it);
 
             bool got_avoid = false;
             auto d         = ai_avoid_distance();
@@ -949,7 +949,7 @@ void Thing::robot_ai_choose_initial_goals(std::multiset< Goal > &goals, int minx
                 IF_DEBUG3
                 {
                   auto s = string_sprintf("Avoid goal (score %d) @(%d,%d)", total_score, p.x, p.y);
-                  ai_log("", s);
+                  AI_LOG("", s);
                 }
                 got_avoid = true;
               }
@@ -977,7 +977,7 @@ void Thing::robot_ai_choose_initial_goals(std::multiset< Goal > &goals, int minx
                   IF_DEBUG3
                   {
                     auto s = string_sprintf("Avoid goal (2) (score %d) @(%d,%d)", total_score, p.x, p.y);
-                    ai_log("", s);
+                    AI_LOG("", s);
                   }
 
                   got_avoid = true;
@@ -1007,7 +1007,7 @@ void Thing::robot_ai_choose_initial_goals(std::multiset< Goal > &goals, int minx
                   IF_DEBUG3
                   {
                     auto s = string_sprintf("Avoid goal (3) (score %d) @(%d,%d)", total_score, p.x, p.y);
-                    ai_log("", s);
+                    AI_LOG("", s);
                   }
 
                   got_avoid = true;
@@ -1020,10 +1020,10 @@ void Thing::robot_ai_choose_initial_goals(std::multiset< Goal > &goals, int minx
             //
             if (got_avoid) {
               avoiding = true;
-              ai_log("", "Is avoiding");
+              AI_LOG("", "Is avoiding");
               break;
             } else {
-              ai_log("Could not avoid, so attack", it);
+              AI_LOG("Could not avoid, so attack", it);
             }
           }
 
@@ -1062,7 +1062,7 @@ void Thing::robot_ai_choose_initial_goals(std::multiset< Goal > &goals, int minx
         IF_DEBUG3
         {
           auto s = string_sprintf("Add goal (score %d) @(%d,%d) %s", total_score, p.x, p.y, last_msg.c_str());
-          ai_log("", s);
+          AI_LOG("", s);
         }
         set(dmap_can_see->val, x, y, DMAP_IS_GOAL);
       } else if (terrain_cost) {
@@ -1392,7 +1392,7 @@ next:
     IF_DEBUG3
     {
       auto s = string_sprintf("Add search cand (score %d) @(%d,%d)", total_score, p.x, p.y);
-      ai_log("", s);
+      AI_LOG("", s);
     }
     goals.insert(Goal(total_score, p, "search cand"));
   }
@@ -1421,7 +1421,7 @@ bool Thing::robot_ai_choose_nearby_goal(void)
         if (ai_is_able_to_open_doors()) {
           if (get_keys()) {
             if (open_door(it)) {
-              ai_log("Opened a door", it);
+              AI_LOG("Opened a door", it);
               if (is_player()) {
                 game->tick_begin("Robot opened a door");
               }
@@ -1441,7 +1441,7 @@ bool Thing::robot_ai_choose_nearby_goal(void)
           attack         = true;
           attack_allowed = true;
 
-          ai_log("Trying to break down a door", it);
+          AI_LOG("Trying to break down a door", it);
           if (is_player()) {
             player_tick(left, right, up, down, attack, wait, jump);
           } else {
@@ -1462,7 +1462,7 @@ bool Thing::robot_ai_choose_nearby_goal(void)
           down           = dy > 0;
           attack         = true;
           attack_allowed = true;
-          ai_log("Trying to break out of a web", "Trying to break out of a web", it);
+          AI_LOG("Trying to break out of a web", "Trying to break out of a web", it);
           if (is_player()) {
             player_tick(left, right, up, down, attack, wait, jump);
           } else {
@@ -1492,7 +1492,7 @@ bool Thing::robot_ai_choose_nearby_goal(void)
 bool Thing::ai_tick(void)
 {
   TRACE_AND_INDENT();
-  log("AI tick");
+  dbg3("AI tick");
   TRACE_AND_INDENT();
 
   //
@@ -1568,7 +1568,7 @@ bool Thing::ai_tick(void)
         // If we're absolutely exhausted, we must rest, threat or no threat
         //
         if (is_able_to_tire() && ! get_stamina()) {
-          ai_log("Very low on stamina, forced to rest");
+          AI_LOG("Very low on stamina, forced to rest");
           if (is_player()) {
             game->tick_begin("Robot is forced to rest, very low on stamina");
           }
@@ -1582,7 +1582,7 @@ bool Thing::ai_tick(void)
         //
         if (get_health() < get_health_max() / 3) {
           if (can_eat_something()) {
-            ai_log("Very low on health, forced to rest");
+            AI_LOG("Very low on health, forced to rest");
             if (is_player()) {
               game->tick_begin("Robot needs to rest, very low on health");
             }
@@ -1599,21 +1599,21 @@ bool Thing::ai_tick(void)
           // No resting when in danger
           //
           if (is_player()) {
-            ai_log("A threat is near", threat);
+            AI_LOG("A threat is near", threat);
           }
         } else {
           //
           // Not under threat, so we can think about doing some other
           // housecleaning tasks.
           //
-          ai_log("Idle, look for something to do");
+          AI_LOG("Idle, look for something to do");
 
           //
           // Can we enchant something?
           //
           if (ai_is_able_to_enchant_weapons()) {
             if (get_enchantstone_count() && can_enchant_something()) {
-              ai_log("Try to enchant something");
+              AI_LOG("Try to enchant something");
               if (is_player()) {
                 game->tick_begin("Robot can enchant something");
               }
@@ -1627,7 +1627,7 @@ bool Thing::ai_tick(void)
           //
           if (ai_is_able_to_learn_skills()) {
             if (get_skillstone_count() && can_learn_something()) {
-              ai_log("Try to use a skillstone");
+              AI_LOG("Try to use a skillstone");
               if (is_player()) {
                 game->tick_begin("Robot can learn something");
               }
@@ -1640,7 +1640,7 @@ bool Thing::ai_tick(void)
           // Are we tired and need to rest?
           //
           if (is_able_to_tire() && (get_stamina() < get_stamina_max() / 2)) {
-            ai_log("Must rest, low on stamina");
+            AI_LOG("Must rest, low on stamina");
             if (is_player()) {
               game->tick_begin("Robot needs to rest, low on stamina");
             }
@@ -1655,20 +1655,20 @@ bool Thing::ai_tick(void)
           get_carried_weapon_highest_value(&best_weapon);
           if (best_weapon && (best_weapon != weapon_get())) {
             if (wield(best_weapon)) {
-              ai_log("Change weapon", best_weapon);
+              AI_LOG("Change weapon", best_weapon);
               if (is_player()) {
                 game->tick_begin("Robot is changing weapon");
               }
               return true;
             }
 
-            ai_log("Failed to change weapon", best_weapon);
+            AI_LOG("Failed to change weapon", best_weapon);
           }
 
           //
           // Look around for something nearby to do; like collect an item.
           //
-          ai_log("Look around for some nearby goal");
+          AI_LOG("Look around for some nearby goal");
           if (robot_ai_choose_nearby_goal()) {
             return true;
           }
@@ -1706,7 +1706,7 @@ bool Thing::ai_tick(void)
             IF_DEBUG3
             {
               auto s = string_sprintf("Try to find goals, search-type %d", search_type);
-              ai_log("", s);
+              AI_LOG("", s);
             }
           }
           if (robot_ai_create_path_to_goal(minx, miny, maxx, maxy, search_type)) {
@@ -1732,7 +1732,7 @@ bool Thing::ai_tick(void)
         }
 
         if (rest) {
-          ai_log("Nothing to do. Rest.");
+          AI_LOG("Nothing to do. Rest.");
           if (is_player()) {
             game->tick_begin("nothing to do, rest");
           }
@@ -1743,7 +1743,7 @@ bool Thing::ai_tick(void)
         //
         // What is the point of it all?
         //
-        ai_log("Nothing to do at all.");
+        AI_LOG("Nothing to do at all.");
         if (is_player()) {
           wid_actionbar_robot_mode_off();
         }
@@ -1764,7 +1764,7 @@ bool Thing::ai_tick(void)
         }
 
         if (robot_ai_init_can_see_dmap(minx, miny, maxx, maxy, SEARCH_TYPE_LOCAL_JUMP_ALLOWED)) {
-          ai_log("Something interrupted me");
+          AI_LOG("Something interrupted me");
           if (is_player()) {
             game->tick_begin("Robot move interrupted by something");
           }
@@ -1779,7 +1779,7 @@ bool Thing::ai_tick(void)
         // Finished the move?
         //
         if (monstp->move_path.empty()) {
-          ai_log("Move finished.");
+          AI_LOG("Move finished.");
           if (is_player()) {
             game->tick_begin("Robot move finished");
           }
@@ -1793,7 +1793,7 @@ bool Thing::ai_tick(void)
         //
         // Keep on moving.
         //
-        ai_log("Keep on moving");
+        AI_LOG("Keep on moving");
         if (is_player()) {
           game->tick_begin("Robot move");
         }
@@ -1806,7 +1806,7 @@ bool Thing::ai_tick(void)
         // If resting, check if we are rested enough.
         //
         if ((get_health() >= (get_health_max() / 4) * 3) && (get_stamina() >= (get_stamina_max() / 4) * 3)) {
-          ai_log("Rested enough. Back to work.");
+          AI_LOG("Rested enough. Back to work.");
           if (is_player()) {
             game->tick_begin("Robot has rested enough");
           }
@@ -1818,7 +1818,7 @@ bool Thing::ai_tick(void)
         // Check for food first, before abandoning resting
         //
         if (eat_something()) {
-          ai_log("Ate an item.");
+          AI_LOG("Ate an item.");
           if (is_player()) {
             game->tick_begin("Robot ate an item");
           }
@@ -1832,7 +1832,7 @@ bool Thing::ai_tick(void)
         //
         if (get_stamina()) {
           if (threat && (is_dangerous(threat) || is_enemy(threat))) {
-            ai_log("Seen a threat. Stop resting.");
+            AI_LOG("Seen a threat. Stop resting.");
             if (is_player()) {
               game->tick_begin("Robot sees a nearby threat, stop resting");
             }
@@ -1842,7 +1842,7 @@ bool Thing::ai_tick(void)
         }
 
         if (get_stamina() >= (get_stamina_max() / 4) * 3) {
-          ai_log("Seen a threat. Stop resting.");
+          AI_LOG("Seen a threat. Stop resting.");
           if (is_player()) {
             game->tick_begin("Robot has recovered stamina");
           }
@@ -1850,7 +1850,7 @@ bool Thing::ai_tick(void)
           return true;
         }
 
-        ai_log("Wait and rest.");
+        AI_LOG("Wait and rest.");
         do_something = true;
         wait         = true;
         break;
@@ -1966,7 +1966,7 @@ void Thing::robot_change_state(int new_state, const std::string &why)
   IF_DEBUG3
   {
     auto s = string_sprintf("State change %s -> %s, reason: %s", from.c_str(), to.c_str(), why.c_str());
-    ai_log("", s);
+    AI_LOG("", s);
   }
 
   monstp->robot_state = new_state;

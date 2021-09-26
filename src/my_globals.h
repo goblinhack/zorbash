@@ -138,6 +138,11 @@ extern int TILES_DOWN;
   if (DEBUG5)                                                                                                          \
   LOG
 
+#define AI_LOG                                                                                                           \
+  TRACE_NO_INDENT();                                                                                                   \
+  if (DEBUG3)                                                                                                          \
+  ai_log
+
 //
 // Used to fill in gaps in log depth
 //

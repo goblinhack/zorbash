@@ -23,10 +23,10 @@ void Level::new_internal_particle(ThingId id, point start, point stop, isize sz,
                                   bool hflip, bool make_visible_at_end)
 {
   TRACE_AND_INDENT();
-  log("Create new internal particle");
-  TRACE_AND_INDENT();
+  DBG4("Create new internal particle");
+
   if (! tile) {
-    err("No particle tile");
+    err("No internal particle tile");
     return;
   }
 
@@ -34,6 +34,7 @@ void Level::new_internal_particle(ThingId id, point start, point stop, isize sz,
     auto t = thing_find(id);
     if (t) {
       if (t->is_being_destroyed) {
+        IF_DEBUG4
         t->log("Do not internal create particle, as being destroyed");
         return;
       }
@@ -42,6 +43,7 @@ void Level::new_internal_particle(ThingId id, point start, point stop, isize sz,
         return;
       }
 
+      IF_DEBUG4
       t->log("New internal particle");
       t->has_internal_particle = true;
     }
@@ -56,10 +58,10 @@ void Level::new_internal_particle(point start, point stop, isize sz, uint32_t du
                                   bool make_visible_at_end)
 {
   TRACE_AND_INDENT();
-  log("Create new internal particle");
-  TRACE_AND_INDENT();
+  DBG4("Create new internal particle");
+
   if (! tile) {
-    err("No particle tile");
+    err("No internal particle tile");
     return;
   }
 
@@ -121,6 +123,7 @@ void Level::display_internal_particles(void)
           if (p.make_visible_at_end) {
             t->visible();
           }
+          IF_DEBUG4
           t->log("End of jump particle");
           t->is_scheduled_for_jump_end = true;
           t->has_internal_particle     = false;
@@ -207,10 +210,10 @@ void Level::new_external_particle(ThingId id, point start, point stop, isize sz,
                                   bool hflip, bool make_visible_at_end)
 {
   TRACE_AND_INDENT();
-  log("Create new external particle");
-  TRACE_AND_INDENT();
+  DBG4("Create new external particle");
+
   if (! tile) {
-    err("No particle tile");
+    err("No external particle tile");
     return;
   }
 
@@ -221,6 +224,7 @@ void Level::new_external_particle(ThingId id, point start, point stop, isize sz,
     auto t = thing_find(id);
     if (t) {
       if (t->is_being_destroyed) {
+        IF_DEBUG4
         t->log("Do not create external particle, as being destroyed");
         return;
       }
@@ -229,6 +233,7 @@ void Level::new_external_particle(ThingId id, point start, point stop, isize sz,
         return;
       }
 
+      IF_DEBUG4
       t->log("New external particle");
       t->has_external_particle = true;
     }
@@ -243,10 +248,10 @@ void Level::new_external_particle(point start, point stop, isize sz, uint32_t du
                                   bool make_visible_at_end)
 {
   TRACE_AND_INDENT();
-  log("Create new external particle");
-  TRACE_AND_INDENT();
+  DBG4("Create new external particle");
+
   if (! tile) {
-    err("No particle tile");
+    err("No external particle tile");
     return;
   }
 
@@ -319,12 +324,14 @@ void Level::display_external_particles(void)
       if (p.id.id) {
         auto t = thing_find(p.id);
         if (t) {
+          IF_DEBUG4
           t->log("Particle dt %f", dt);
           if (p.make_visible_at_end) {
             if (! t->get_immediate_owner_id().ok()) {
               t->visible();
             }
           }
+          IF_DEBUG4
           t->log("Particle end");
           t->is_scheduled_for_jump_end = true;
           t->has_external_particle     = false;
@@ -403,23 +410,20 @@ void Level::display_external_particles(void)
 #endif
 }
 
-bool Thing::particle_anim_exists(void)
-{
-  TRACE_AND_INDENT();
-  return has_internal_particle || has_external_particle;
-}
+bool Thing::particle_anim_exists(void) { return has_internal_particle || has_external_particle; }
 
 void Thing::delete_particle(void)
 {
   TRACE_AND_INDENT();
+
   //
   // Don't remove immediately in case we are walking the particles.
   //
   if (has_internal_particle) {
-    log("Delete particle: Has internal particle");
+    dbg4("Delete particle: Has internal particle");
     for (auto &p : level->all_internal_particles) {
       if (p.id == id) {
-        log("Remove particle");
+        dbg4("Remove particle");
         p.id      = NoThingId;
         p.removed = true;
         break;
@@ -430,10 +434,10 @@ void Thing::delete_particle(void)
   }
 
   if (has_external_particle) {
-    log("Delete particle: Has external particle");
+    dbg4("Delete particle: Has external particle");
     for (auto &p : level->all_external_particles) {
       if (p.id == id) {
-        log("Remove particle");
+        dbg4("Remove particle");
         p.id      = NoThingId;
         p.removed = true;
         break;
