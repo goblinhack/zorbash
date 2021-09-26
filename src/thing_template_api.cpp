@@ -150,236 +150,238 @@ const std::string &Tp::weapon_carry_anim(void) const { return _weapon_carry_anim
 float              Tp::collision_attack_radius(void) const { return _collision_attack_radius; }
 float              Tp::collision_radius(void) const { return _collision_radius; }
 int                Tp::ai_avoid_distance(void) const { return _ai_avoid_distance; }
-int                Tp::ai_enemy_memory(void) const { return _ai_enemy_memory; }
-int                Tp::ai_obstacle(void) const { return _ai_obstacle; }
-int                Tp::ai_scent_distance(void) const { return _ai_scent_distance; }
-int                Tp::ai_vision_distance(void) const { return _ai_vision_distance; }
-int                Tp::attack_eater(void) const { return _attack_eater; }
-int                Tp::attack_humanoid(void) const { return _attack_humanoid; }
-int                Tp::attack_living(void) const { return _attack_living; }
-int                Tp::attack_lunge(void) const { return _attack_lunge; }
-int                Tp::attack_meat(void) const { return _attack_meat; }
-int                Tp::attack_shove_chance_d1000(void) const { return _attack_shove_chance_d1000; }
-int                Tp::attack_shove(void) const { return _attack_shove; }
-int                Tp::blast_max_radius(void) const { return _blast_max_radius; }
-int                Tp::blast_min_radius(void) const { return _blast_min_radius; }
-int                Tp::blit_bot_off(void) const { return _blit_bot_off; }
-int                Tp::blit_left_off(void) const { return _blit_left_off; }
-int                Tp::blit_right_off(void) const { return _blit_right_off; }
-int                Tp::blit_top_off(void) const { return _blit_top_off; }
-int                Tp::capacity_height(void) const { return _capacity_height; }
-int                Tp::capacity_width(void) const { return _capacity_width; }
-int                Tp::charge_count(void) const { return _charge_count; }
-int                Tp::collision_attack(void) const { return _collision_attack; }
-int                Tp::collision_box(void) const { return _collision_box; }
-int                Tp::collision_check(void) const { return _collision_check; }
-int                Tp::collision_circle(void) const { return _collision_circle; }
-int                Tp::collision_hit_priority(void) const { return _collision_hit_priority; }
-int                Tp::damage_doubled_from_acid(void) const { return _damage_doubled_from_acid; }
-int                Tp::damage_doubled_from_fire(void) const { return _damage_doubled_from_fire; }
-int                Tp::damage_doubled_from_poison(void) const { return _damage_doubled_from_poison; }
-int                Tp::damage_doubled_from_water(void) const { return _damage_doubled_from_water; }
-int                Tp::enchant_level(void) const { return _enchant_level; }
-int                Tp::enchant_max(void) const { return _enchant_max; }
-int                Tp::gfx_an_animation_only(void) const { return _gfx_an_animation_only; }
-int                Tp::gfx_animated_can_hflip(void) const { return _gfx_animated_can_hflip; }
-int                Tp::gfx_animated_can_vflip(void) const { return _gfx_animated_can_vflip; }
-int                Tp::gfx_animated_no_dir(void) const { return _gfx_animated_no_dir; }
-int                Tp::gfx_animated(void) const { return _gfx_animated; }
-int                Tp::gfx_attack_anim(void) const { return _gfx_attack_anim; }
-int                Tp::gfx_bounce_always(void) const { return _gfx_bounce_always; }
-int                Tp::gfx_bounce_on_move(void) const { return _gfx_bounce_on_move; }
-int                Tp::gfx_dead_anim(void) const { return _gfx_dead_anim; }
-int                Tp::gfx_flickers(void) const { return _gfx_flickers; }
-int                Tp::gfx_glows(void) const { return _gfx_glows; }
-int                Tp::gfx_health_bar_autohide(void) const { return _gfx_health_bar_autohide; }
-int                Tp::gfx_health_bar_shown(void) const { return _gfx_health_bar_shown; }
-int                Tp::gfx_long_shadow_caster(void) const { return _gfx_long_shadow_caster; }
-int                Tp::gfx_on_fire_anim(void) const { return _gfx_on_fire_anim; }
-int                Tp::gfx_oversized_and_on_floor(void) const { return _gfx_oversized_and_on_floor; }
-int                Tp::gfx_short_shadow_caster(void) const { return _gfx_short_shadow_caster; }
-int                Tp::gfx_shown_in_bg(void) const { return _gfx_shown_in_bg; }
-int                Tp::gfx_show_outlined(void) const { return _gfx_show_outlined; }
-int                Tp::gfx_solid_shadow(void) const { return _gfx_solid_shadow; }
-int                Tp::gfx_very_short_shadow_caster(void) const { return _gfx_very_short_shadow_caster; }
-int                Tp::gfx_water(void) const { return _gfx_water; }
-int                Tp::gfx_weapon_carry_anim(void) const { return _gfx_weapon_carry_anim; }
-int                Tp::hates_acid(void) const { return _hates_acid; }
-int                Tp::hates_fire(void) const { return _hates_fire; }
-int                Tp::hates_poison(void) const { return _hates_poison; }
-int                Tp::hates_water(void) const { return _hates_water; }
-int                Tp::health_hunger_pct(void) const { return _health_hunger_pct; }
-int                Tp::health_starving_pct(void) const { return _health_starving_pct; }
-int                Tp::internal_has_dir_anim(void) const { return _internal_has_dir_anim; }
-int                Tp::internal_has_hp_anim(void) const { return _internal_has_hp_anim; }
-int                Tp::is_able_to_change_levels(void) const { return _is_able_to_change_levels; }
-int                Tp::is_able_to_fall(void) const { return _is_able_to_fall; }
-int                Tp::is_able_to_fire_at(void) const { return _is_able_to_fire_at; }
-int                Tp::is_able_to_see_through_doors(void) const { return _is_able_to_see_through_doors; }
-int                Tp::is_able_to_walk_through_walls(void) const { return _is_able_to_walk_through_walls; }
-int                Tp::is_acid_lover(void) const { return _is_acid_lover; }
-int                Tp::is_acid(void) const { return _is_acid; }
-int                Tp::is_alive_on_end_of_anim(void) const { return _is_alive_on_end_of_anim; }
-int                Tp::is_always_hit(void) const { return _is_always_hit; }
-int                Tp::is_ascend_dungeon(void) const { return _is_ascend_dungeon; }
-int                Tp::is_ascend_sewer(void) const { return _is_ascend_sewer; }
-int                Tp::is_attackable_by_monst(void) const { return _is_attackable_by_monst; }
-int                Tp::is_attackable_by_player(void) const { return _is_attackable_by_player; }
-int                Tp::is_auto_collect_item(void) const { return _is_auto_collect_item; }
-int                Tp::is_bag_item_container(void) const { return _is_bag_item_container; }
-int                Tp::is_bag_item_not_stackable(void) const { return _is_bag_item_not_stackable; }
-int                Tp::is_bag_item(void) const { return _is_bag_item; }
-int                Tp::is_bag(void) const { return _is_bag; }
-int                Tp::is_barrel(void) const { return _is_barrel; }
-int                Tp::is_bleeder(void) const { return _is_bleeder; }
-int                Tp::is_blood_splatter(void) const { return _is_blood_splatter; }
-int                Tp::is_blood(void) const { return _is_blood; }
-int                Tp::is_bones(void) const { return _is_bones; }
-int                Tp::is_brazier(void) const { return _is_brazier; }
-int                Tp::is_bridge(void) const { return _is_bridge; }
-int                Tp::is_burnable(void) const { return _is_burnable; }
-int                Tp::is_carrier_of_treasure_class_a(void) const { return _is_carrier_of_treasure_class_a; }
-int                Tp::is_carrier_of_treasure_class_b(void) const { return _is_carrier_of_treasure_class_b; }
-int                Tp::is_carrier_of_treasure_class_c(void) const { return _is_carrier_of_treasure_class_c; }
-int                Tp::is_chasm(void) const { return _is_chasm; }
-int                Tp::is_collectable(void) const { return _is_collectable; }
-int                Tp::is_collect_as_keys(void) const { return _is_collect_as_keys; }
-int                Tp::is_collected_as_gold(void) const { return _is_collected_as_gold; }
-int                Tp::is_combustible(void) const { return _is_combustible; }
-int                Tp::is_corpse_on_death(void) const { return _is_corpse_on_death; }
-int                Tp::is_corridor(void) const { return _is_corridor; }
-int                Tp::is_critical_to_level(void) const { return _is_critical_to_level; }
-int                Tp::is_cursor_can_hover_over_x2_click(void) const { return _is_cursor_can_hover_over_x2_click; }
-int                Tp::is_cursor_can_hover_over(void) const { return _is_cursor_can_hover_over; }
-int                Tp::is_cursor_path(void) const { return _is_cursor_path; }
-int                Tp::is_cursor(void) const { return _is_cursor; }
-int                Tp::is_dead_on_end_of_anim(void) const { return _is_dead_on_end_of_anim; }
-int                Tp::is_dead_on_shove(void) const { return _is_dead_on_shove; }
-int                Tp::is_debug_path(void) const { return _is_debug_path; }
-int                Tp::is_debug_type(void) const { return _is_debug_type; }
-int                Tp::is_deep_water(void) const { return _is_deep_water; }
-int                Tp::is_descend_dungeon(void) const { return _is_descend_dungeon; }
-int                Tp::is_descend_sewer(void) const { return _is_descend_sewer; }
-int                Tp::is_described_when_hovering_over(void) const { return _is_described_when_hovering_over; }
-int                Tp::is_dirt(void) const { return _is_dirt; }
-int                Tp::is_door(void) const { return _is_door; }
-int                Tp::is_droppable(void) const { return _is_droppable; }
-int                Tp::is_dry_grass(void) const { return _is_dry_grass; }
-int                Tp::is_enchantable(void) const { return _is_enchantable; }
-int                Tp::is_enchantstone(void) const { return _is_enchantstone; }
-int                Tp::is_engulf_chance_d1000(void) const { return _is_engulf_chance_d1000; }
-int                Tp::is_engulfer(void) const { return _is_engulfer; }
-int                Tp::is_ethereal_minion_generator(void) const { return _is_ethereal_minion_generator; }
-int                Tp::is_ethereal(void) const { return _is_ethereal; }
-int                Tp::is_explosion(void) const { return _is_explosion; }
-int                Tp::is_extreme_hazard(void) const { return _is_extreme_hazard; }
-int                Tp::is_fearless(void) const { return _is_fearless; }
-int                Tp::is_fire(void) const { return _is_fire; }
-int                Tp::is_floating(void) const { return _is_floating; }
-int                Tp::is_floor_deco(void) const { return _is_floor_deco; }
-int                Tp::is_floor(void) const { return _is_floor; }
-int                Tp::is_foilage(void) const { return _is_foilage; }
-int                Tp::is_food_eater(void) const { return _is_food_eater; }
-int                Tp::is_food(void) const { return _is_food; }
-int                Tp::is_gold(void) const { return _is_gold; }
-int                Tp::is_hazard(void) const { return _is_hazard; }
-int                Tp::is_health_booster(void) const { return _is_health_booster; }
-int                Tp::is_hittable(void) const { return _is_hittable; }
-int                Tp::is_humanoid(void) const { return _is_humanoid; }
-int                Tp::is_hunger_insatiable(void) const { return _is_hunger_insatiable; }
-int                Tp::is_indestructible(void) const { return _is_indestructible; }
-int                Tp::is_intelligent(void) const { return _is_intelligent; }
-int                Tp::is_interesting(void) const { return _is_interesting; }
-int                Tp::is_item_carrier(void) const { return _is_item_carrier; }
-int                Tp::is_item_collector(void) const { return _is_item_collector; }
-int                Tp::is_item_eater(void) const { return _is_item_eater; }
-int                Tp::is_item(void) const { return _is_item; }
-int                Tp::is_jelly_baby_eater(void) const { return _is_jelly_baby_eater; }
-int                Tp::is_jelly_baby(void) const { return _is_jelly_baby; }
-int                Tp::is_jelly_eater(void) const { return _is_jelly_eater; }
-int                Tp::is_jelly_parent(void) const { return _is_jelly_parent; }
-int                Tp::is_jelly(void) const { return _is_jelly; }
-int                Tp::random_jump_chance_d1000(void) const { return _random_jump_chance_d1000; }
-int                Tp::is_able_to_jump_distance(void) const { return _is_able_to_jump_distance; }
-int  Tp::is_able_to_jump_on_low_hp_chance_d1000(void) const { return _is_able_to_jump_on_low_hp_chance_d1000; }
-int  Tp::is_able_to_jump(void) const { return _is_able_to_jump; }
-int  Tp::is_ai_can_collect_keys(void) const { return _is_ai_can_collect_keys; }
-int  Tp::is_key(void) const { return _is_key; }
-int  Tp::is_killed_on_hit_or_miss(void) const { return _is_killed_on_hit_or_miss; }
-int  Tp::is_killed_on_hitting(void) const { return _is_killed_on_hitting; }
-int  Tp::is_laser(void) const { return _is_laser; }
-int  Tp::is_lava(void) const { return _is_lava; }
-int  Tp::is_light_blocker(void) const { return _is_light_blocker; }
-int  Tp::is_living(void) const { return _is_living; }
-int  Tp::is_loggable(void) const { return _is_loggable; }
-int  Tp::is_meat_eater(void) const { return _is_meat_eater; }
-int  Tp::is_meat(void) const { return _is_meat; }
-int  Tp::is_minion_generator(void) const { return _is_minion_generator; }
-int  Tp::is_minion(void) const { return _is_minion; }
-int  Tp::is_monst(void) const { return _is_monst; }
-int  Tp::is_moveable(void) const { return _is_moveable; }
-int  Tp::is_obs_destructable(void) const { return _is_obs_destructable; }
-int  Tp::is_obs_wall_or_door(void) const { return _is_obs_wall_or_door; }
-int  Tp::is_msg(void) const { return _is_msg; }
-int  Tp::is_no_tile(void) const { return _is_no_tile; }
-int  Tp::is_openable(void) const { return _is_openable; }
-int  Tp::is_player(void) const { return _is_player; }
-int  Tp::is_poison(void) const { return _is_poison; }
-int  Tp::is_potion_eater(void) const { return _is_potion_eater; }
-int  Tp::is_potion(void) const { return _is_potion; }
-int  Tp::is_projectile(void) const { return _is_projectile; }
-int  Tp::is_removeable_if_out_of_slots(void) const { return _is_removeable_if_out_of_slots; }
-int  Tp::is_resurrectable(void) const { return _is_resurrectable; }
-int  Tp::is_ripple(void) const { return _is_ripple; }
-int  Tp::is_rock(void) const { return _is_rock; }
-int  Tp::unused_flag10(void) const { return _unused_flag10; }
-int  Tp::unused_flag11(void) const { return _unused_flag11; }
-int  Tp::unused_flag12(void) const { return _unused_flag12; }
-int  Tp::unused_flag13(void) const { return _unused_flag13; }
-int  Tp::unused_flag14(void) const { return _unused_flag14; }
-int  Tp::unused_flag15(void) const { return _unused_flag15; }
-int  Tp::unused_flag16(void) const { return _unused_flag16; }
-int  Tp::unused_flag17(void) const { return _unused_flag17; }
-int  Tp::unused_flag18(void) const { return _unused_flag18; }
-int  Tp::unused_flag19(void) const { return _unused_flag19; }
-int  Tp::unused_flag1(void) const { return _unused_flag1; }
-int  Tp::unused_flag20(void) const { return _unused_flag20; }
-int  Tp::unused_flag21(void) const { return _unused_flag21; }
-int  Tp::unused_flag22(void) const { return _unused_flag22; }
-int  Tp::unused_flag23(void) const { return _unused_flag23; }
-int  Tp::unused_flag24(void) const { return _unused_flag24; }
-int  Tp::unused_flag25(void) const { return _unused_flag25; }
-int  Tp::unused_flag26(void) const { return _unused_flag26; }
-int  Tp::unused_flag27(void) const { return _unused_flag27; }
-int  Tp::unused_flag28(void) const { return _unused_flag28; }
-int  Tp::unused_flag29(void) const { return _unused_flag29; }
-int  Tp::unused_flag2(void) const { return _unused_flag2; }
-int  Tp::unused_flag30(void) const { return _unused_flag30; }
-int  Tp::unused_flag31(void) const { return _unused_flag31; }
-int  Tp::unused_flag32(void) const { return _unused_flag32; }
-int  Tp::unused_flag33(void) const { return _unused_flag33; }
-int  Tp::unused_flag34(void) const { return _unused_flag34; }
-int  Tp::unused_flag35(void) const { return _unused_flag35; }
-int  Tp::unused_flag36(void) const { return _unused_flag36; }
-int  Tp::unused_flag37(void) const { return _unused_flag37; }
-int  Tp::unused_flag38(void) const { return _unused_flag38; }
-int  Tp::unused_flag39(void) const { return _unused_flag39; }
-int  Tp::unused_flag3(void) const { return _unused_flag3; }
-int  Tp::unused_flag40(void) const { return _unused_flag40; }
-int  Tp::unused_flag41(void) const { return _unused_flag41; }
-int  Tp::unused_flag42(void) const { return _unused_flag42; }
-int  Tp::unused_flag43(void) const { return _unused_flag43; }
-int  Tp::unused_flag44(void) const { return _unused_flag44; }
-int  Tp::unused_flag45(void) const { return _unused_flag45; }
-int  Tp::unused_flag46(void) const { return _unused_flag46; }
-int  Tp::unused_flag47(void) const { return _unused_flag47; }
-int  Tp::unused_flag48(void) const { return _unused_flag48; }
+int Tp::ai_is_able_to_remember_enemies_for_n_ticks(void) const { return _ai_is_able_to_remember_enemies_for_n_ticks; }
+int Tp::ai_obstacle(void) const { return _ai_obstacle; }
+int Tp::ai_scent_distance(void) const { return _ai_scent_distance; }
+int Tp::ai_vision_distance(void) const { return _ai_vision_distance; }
+int Tp::attack_eater(void) const { return _attack_eater; }
+int Tp::attack_humanoid(void) const { return _attack_humanoid; }
+int Tp::attack_living(void) const { return _attack_living; }
+int Tp::attack_lunge(void) const { return _attack_lunge; }
+int Tp::attack_meat(void) const { return _attack_meat; }
+int Tp::attack_shove_chance_d1000(void) const { return _attack_shove_chance_d1000; }
+int Tp::attack_shove(void) const { return _attack_shove; }
+int Tp::blast_max_radius(void) const { return _blast_max_radius; }
+int Tp::blast_min_radius(void) const { return _blast_min_radius; }
+int Tp::blit_bot_off(void) const { return _blit_bot_off; }
+int Tp::blit_left_off(void) const { return _blit_left_off; }
+int Tp::blit_right_off(void) const { return _blit_right_off; }
+int Tp::blit_top_off(void) const { return _blit_top_off; }
+int Tp::capacity_height(void) const { return _capacity_height; }
+int Tp::capacity_width(void) const { return _capacity_width; }
+int Tp::charge_count(void) const { return _charge_count; }
+int Tp::collision_attack(void) const { return _collision_attack; }
+int Tp::collision_box(void) const { return _collision_box; }
+int Tp::collision_check(void) const { return _collision_check; }
+int Tp::collision_circle(void) const { return _collision_circle; }
+int Tp::collision_hit_priority(void) const { return _collision_hit_priority; }
+int Tp::damage_doubled_from_acid(void) const { return _damage_doubled_from_acid; }
+int Tp::damage_doubled_from_fire(void) const { return _damage_doubled_from_fire; }
+int Tp::damage_doubled_from_poison(void) const { return _damage_doubled_from_poison; }
+int Tp::damage_doubled_from_water(void) const { return _damage_doubled_from_water; }
+int Tp::enchant_level(void) const { return _enchant_level; }
+int Tp::enchant_max(void) const { return _enchant_max; }
+int Tp::gfx_an_animation_only(void) const { return _gfx_an_animation_only; }
+int Tp::gfx_animated_can_hflip(void) const { return _gfx_animated_can_hflip; }
+int Tp::gfx_animated_can_vflip(void) const { return _gfx_animated_can_vflip; }
+int Tp::gfx_animated_no_dir(void) const { return _gfx_animated_no_dir; }
+int Tp::gfx_animated(void) const { return _gfx_animated; }
+int Tp::gfx_attack_anim(void) const { return _gfx_attack_anim; }
+int Tp::gfx_bounce_always(void) const { return _gfx_bounce_always; }
+int Tp::gfx_bounce_on_move(void) const { return _gfx_bounce_on_move; }
+int Tp::gfx_dead_anim(void) const { return _gfx_dead_anim; }
+int Tp::gfx_flickers(void) const { return _gfx_flickers; }
+int Tp::gfx_glows(void) const { return _gfx_glows; }
+int Tp::gfx_health_bar_autohide(void) const { return _gfx_health_bar_autohide; }
+int Tp::gfx_health_bar_shown(void) const { return _gfx_health_bar_shown; }
+int Tp::gfx_long_shadow_caster(void) const { return _gfx_long_shadow_caster; }
+int Tp::gfx_on_fire_anim(void) const { return _gfx_on_fire_anim; }
+int Tp::gfx_oversized_and_on_floor(void) const { return _gfx_oversized_and_on_floor; }
+int Tp::gfx_short_shadow_caster(void) const { return _gfx_short_shadow_caster; }
+int Tp::gfx_shown_in_bg(void) const { return _gfx_shown_in_bg; }
+int Tp::gfx_show_outlined(void) const { return _gfx_show_outlined; }
+int Tp::gfx_solid_shadow(void) const { return _gfx_solid_shadow; }
+int Tp::gfx_very_short_shadow_caster(void) const { return _gfx_very_short_shadow_caster; }
+int Tp::gfx_water(void) const { return _gfx_water; }
+int Tp::gfx_weapon_carry_anim(void) const { return _gfx_weapon_carry_anim; }
+int Tp::hates_acid(void) const { return _hates_acid; }
+int Tp::hates_fire(void) const { return _hates_fire; }
+int Tp::hates_poison(void) const { return _hates_poison; }
+int Tp::hates_water(void) const { return _hates_water; }
+int Tp::health_hunger_pct(void) const { return _health_hunger_pct; }
+int Tp::health_starving_pct(void) const { return _health_starving_pct; }
+int Tp::internal_has_dir_anim(void) const { return _internal_has_dir_anim; }
+int Tp::internal_has_hp_anim(void) const { return _internal_has_hp_anim; }
+int Tp::is_able_to_change_levels(void) const { return _is_able_to_change_levels; }
+int Tp::is_able_to_fall(void) const { return _is_able_to_fall; }
+int Tp::is_able_to_fire_at(void) const { return _is_able_to_fire_at; }
+int Tp::is_able_to_see_through_doors(void) const { return _is_able_to_see_through_doors; }
+int Tp::is_able_to_walk_through_walls(void) const { return _is_able_to_walk_through_walls; }
+int Tp::is_acid_lover(void) const { return _is_acid_lover; }
+int Tp::is_acid(void) const { return _is_acid; }
+int Tp::is_alive_on_end_of_anim(void) const { return _is_alive_on_end_of_anim; }
+int Tp::is_always_hit(void) const { return _is_always_hit; }
+int Tp::is_ascend_dungeon(void) const { return _is_ascend_dungeon; }
+int Tp::is_ascend_sewer(void) const { return _is_ascend_sewer; }
+int Tp::is_attackable_by_monst(void) const { return _is_attackable_by_monst; }
+int Tp::is_attackable_by_player(void) const { return _is_attackable_by_player; }
+int Tp::is_auto_collect_item(void) const { return _is_auto_collect_item; }
+int Tp::is_bag_item_container(void) const { return _is_bag_item_container; }
+int Tp::is_bag_item_not_stackable(void) const { return _is_bag_item_not_stackable; }
+int Tp::is_bag_item(void) const { return _is_bag_item; }
+int Tp::is_bag(void) const { return _is_bag; }
+int Tp::is_barrel(void) const { return _is_barrel; }
+int Tp::is_bleeder(void) const { return _is_bleeder; }
+int Tp::is_blood_splatter(void) const { return _is_blood_splatter; }
+int Tp::is_blood(void) const { return _is_blood; }
+int Tp::is_bones(void) const { return _is_bones; }
+int Tp::is_brazier(void) const { return _is_brazier; }
+int Tp::is_bridge(void) const { return _is_bridge; }
+int Tp::is_burnable(void) const { return _is_burnable; }
+int Tp::is_carrier_of_treasure_class_a(void) const { return _is_carrier_of_treasure_class_a; }
+int Tp::is_carrier_of_treasure_class_b(void) const { return _is_carrier_of_treasure_class_b; }
+int Tp::is_carrier_of_treasure_class_c(void) const { return _is_carrier_of_treasure_class_c; }
+int Tp::is_chasm(void) const { return _is_chasm; }
+int Tp::is_collectable(void) const { return _is_collectable; }
+int Tp::is_collect_as_keys(void) const { return _is_collect_as_keys; }
+int Tp::is_collected_as_gold(void) const { return _is_collected_as_gold; }
+int Tp::is_combustible(void) const { return _is_combustible; }
+int Tp::is_corpse_on_death(void) const { return _is_corpse_on_death; }
+int Tp::is_corridor(void) const { return _is_corridor; }
+int Tp::is_critical_to_level(void) const { return _is_critical_to_level; }
+int Tp::is_cursor_can_hover_over_x2_click(void) const { return _is_cursor_can_hover_over_x2_click; }
+int Tp::is_cursor_can_hover_over(void) const { return _is_cursor_can_hover_over; }
+int Tp::is_cursor_path(void) const { return _is_cursor_path; }
+int Tp::is_cursor(void) const { return _is_cursor; }
+int Tp::is_dead_on_end_of_anim(void) const { return _is_dead_on_end_of_anim; }
+int Tp::is_dead_on_shove(void) const { return _is_dead_on_shove; }
+int Tp::is_debug_path(void) const { return _is_debug_path; }
+int Tp::is_debug_type(void) const { return _is_debug_type; }
+int Tp::is_deep_water(void) const { return _is_deep_water; }
+int Tp::is_descend_dungeon(void) const { return _is_descend_dungeon; }
+int Tp::is_descend_sewer(void) const { return _is_descend_sewer; }
+int Tp::is_described_when_hovering_over(void) const { return _is_described_when_hovering_over; }
+int Tp::is_dirt(void) const { return _is_dirt; }
+int Tp::is_door(void) const { return _is_door; }
+int Tp::is_droppable(void) const { return _is_droppable; }
+int Tp::is_dry_grass(void) const { return _is_dry_grass; }
+int Tp::is_enchantable(void) const { return _is_enchantable; }
+int Tp::is_enchantstone(void) const { return _is_enchantstone; }
+int Tp::is_engulf_chance_d1000(void) const { return _is_engulf_chance_d1000; }
+int Tp::is_engulfer(void) const { return _is_engulfer; }
+int Tp::is_ethereal_minion_generator(void) const { return _is_ethereal_minion_generator; }
+int Tp::is_ethereal(void) const { return _is_ethereal; }
+int Tp::is_explosion(void) const { return _is_explosion; }
+int Tp::is_extreme_hazard(void) const { return _is_extreme_hazard; }
+int Tp::is_fearless(void) const { return _is_fearless; }
+int Tp::is_fire(void) const { return _is_fire; }
+int Tp::is_floating(void) const { return _is_floating; }
+int Tp::is_floor_deco(void) const { return _is_floor_deco; }
+int Tp::is_floor(void) const { return _is_floor; }
+int Tp::is_foilage(void) const { return _is_foilage; }
+int Tp::is_food_eater(void) const { return _is_food_eater; }
+int Tp::is_food(void) const { return _is_food; }
+int Tp::is_gold(void) const { return _is_gold; }
+int Tp::is_hazard(void) const { return _is_hazard; }
+int Tp::is_health_booster(void) const { return _is_health_booster; }
+int Tp::is_hittable(void) const { return _is_hittable; }
+int Tp::is_humanoid(void) const { return _is_humanoid; }
+int Tp::is_hunger_insatiable(void) const { return _is_hunger_insatiable; }
+int Tp::is_indestructible(void) const { return _is_indestructible; }
+int Tp::is_intelligent(void) const { return _is_intelligent; }
+int Tp::is_interesting(void) const { return _is_interesting; }
+int Tp::is_item_carrier(void) const { return _is_item_carrier; }
+int Tp::ai_is_item_collector(void) const { return _ai_is_item_collector; }
+int Tp::is_item_eater(void) const { return _is_item_eater; }
+int Tp::is_item(void) const { return _is_item; }
+int Tp::is_jelly_baby_eater(void) const { return _is_jelly_baby_eater; }
+int Tp::is_jelly_baby(void) const { return _is_jelly_baby; }
+int Tp::is_jelly_eater(void) const { return _is_jelly_eater; }
+int Tp::is_jelly_parent(void) const { return _is_jelly_parent; }
+int Tp::is_jelly(void) const { return _is_jelly; }
+int Tp::random_jump_chance_d1000(void) const { return _random_jump_chance_d1000; }
+int Tp::is_able_to_jump_distance(void) const { return _is_able_to_jump_distance; }
+int Tp::is_able_to_jump_on_low_hp_chance_d1000(void) const { return _is_able_to_jump_on_low_hp_chance_d1000; }
+int Tp::is_able_to_jump(void) const { return _is_able_to_jump; }
+int Tp::ai_is_able_to_collect_keys(void) const { return _ai_is_able_to_collect_keys; }
+int Tp::is_key(void) const { return _is_key; }
+int Tp::is_killed_on_hit_or_miss(void) const { return _is_killed_on_hit_or_miss; }
+int Tp::is_killed_on_hitting(void) const { return _is_killed_on_hitting; }
+int Tp::is_laser(void) const { return _is_laser; }
+int Tp::is_lava(void) const { return _is_lava; }
+int Tp::is_light_blocker(void) const { return _is_light_blocker; }
+int Tp::is_living(void) const { return _is_living; }
+int Tp::is_loggable(void) const { return _is_loggable; }
+int Tp::is_meat_eater(void) const { return _is_meat_eater; }
+int Tp::is_meat(void) const { return _is_meat; }
+int Tp::is_minion_generator(void) const { return _is_minion_generator; }
+int Tp::is_minion(void) const { return _is_minion; }
+int Tp::is_monst(void) const { return _is_monst; }
+int Tp::is_moveable(void) const { return _is_moveable; }
+int Tp::is_obs_destructable(void) const { return _is_obs_destructable; }
+int Tp::is_obs_wall_or_door(void) const { return _is_obs_wall_or_door; }
+int Tp::is_msg(void) const { return _is_msg; }
+int Tp::is_no_tile(void) const { return _is_no_tile; }
+int Tp::is_openable(void) const { return _is_openable; }
+int Tp::is_player(void) const { return _is_player; }
+int Tp::is_poison(void) const { return _is_poison; }
+int Tp::is_potion_eater(void) const { return _is_potion_eater; }
+int Tp::is_potion(void) const { return _is_potion; }
+int Tp::is_projectile(void) const { return _is_projectile; }
+int Tp::is_removeable_if_out_of_slots(void) const { return _is_removeable_if_out_of_slots; }
+int Tp::is_resurrectable(void) const { return _is_resurrectable; }
+int Tp::is_ripple(void) const { return _is_ripple; }
+int Tp::is_rock(void) const { return _is_rock; }
+int Tp::unused_flag10(void) const { return _unused_flag10; }
+int Tp::unused_flag11(void) const { return _unused_flag11; }
+int Tp::unused_flag12(void) const { return _unused_flag12; }
+int Tp::unused_flag13(void) const { return _unused_flag13; }
+int Tp::unused_flag14(void) const { return _unused_flag14; }
+int Tp::unused_flag15(void) const { return _unused_flag15; }
+int Tp::unused_flag16(void) const { return _unused_flag16; }
+int Tp::unused_flag17(void) const { return _unused_flag17; }
+int Tp::unused_flag18(void) const { return _unused_flag18; }
+int Tp::unused_flag19(void) const { return _unused_flag19; }
+int Tp::unused_flag1(void) const { return _unused_flag1; }
+int Tp::unused_flag20(void) const { return _unused_flag20; }
+int Tp::unused_flag21(void) const { return _unused_flag21; }
+int Tp::unused_flag22(void) const { return _unused_flag22; }
+int Tp::unused_flag23(void) const { return _unused_flag23; }
+int Tp::unused_flag24(void) const { return _unused_flag24; }
+int Tp::unused_flag25(void) const { return _unused_flag25; }
+int Tp::unused_flag26(void) const { return _unused_flag26; }
+int Tp::unused_flag27(void) const { return _unused_flag27; }
+int Tp::unused_flag28(void) const { return _unused_flag28; }
+int Tp::unused_flag29(void) const { return _unused_flag29; }
+int Tp::unused_flag2(void) const { return _unused_flag2; }
+int Tp::unused_flag30(void) const { return _unused_flag30; }
+int Tp::unused_flag31(void) const { return _unused_flag31; }
+int Tp::unused_flag32(void) const { return _unused_flag32; }
+int Tp::unused_flag33(void) const { return _unused_flag33; }
+int Tp::unused_flag34(void) const { return _unused_flag34; }
+int Tp::unused_flag35(void) const { return _unused_flag35; }
+int Tp::unused_flag36(void) const { return _unused_flag36; }
+int Tp::unused_flag37(void) const { return _unused_flag37; }
+int Tp::unused_flag38(void) const { return _unused_flag38; }
+int Tp::unused_flag39(void) const { return _unused_flag39; }
+int Tp::unused_flag3(void) const { return _unused_flag3; }
+int Tp::unused_flag40(void) const { return _unused_flag40; }
+int Tp::unused_flag41(void) const { return _unused_flag41; }
+int Tp::ai_is_able_to_detect_secret_doors_when_close(void) const
+{
+  return _ai_is_able_to_detect_secret_doors_when_close;
+}
+int  Tp::ai_is_able_to_break_down_doors(void) const { return _ai_is_able_to_break_down_doors; }
+int  Tp::ai_is_able_to_break_out_of_webs(void) const { return _ai_is_able_to_break_out_of_webs; }
+int  Tp::ai_is_able_to_open_doors(void) const { return _ai_is_able_to_open_doors; }
+int  Tp::ai_is_exit_finder(void) const { return _ai_is_exit_finder; }
+int  Tp::ai_is_level_explorer(void) const { return _ai_is_level_explorer; }
 int  Tp::is_rusty(void) const { return _is_rusty; }
 int  Tp::unused_flag4(void) const { return _unused_flag4; }
-int  Tp::ai_can_learn_skills(void) const { return _ai_can_learn_skills; }
-int  Tp::ai_can_enchant_weapons(void) const { return _ai_can_enchant_weapons; }
-int  Tp::ai_can_attack_generators(void) const { return _ai_can_attack_generators; }
-int  Tp::is_ai_wanderer(void) const { return _is_ai_wanderer; }
+int  Tp::ai_is_able_to_learn_skills(void) const { return _ai_is_able_to_learn_skills; }
+int  Tp::ai_is_able_to_enchant_weapons(void) const { return _ai_is_able_to_enchant_weapons; }
+int  Tp::ai_is_able_to_attack_generators(void) const { return _ai_is_able_to_attack_generators; }
+int  Tp::ai_wanderer(void) const { return _ai_wanderer; }
 int  Tp::is_organic(void) const { return _is_organic; }
 int  Tp::is_glass(void) const { return _is_glass; }
 int  Tp::is_stone(void) const { return _is_stone; }
@@ -466,7 +468,7 @@ int  Tp::throw_distance(void) const { return _throw_distance; }
 int  Tp::weapon_damage(void) const { return _weapon_damage; }
 int  Tp::weapon_use_distance(void) const { return _weapon_use_distance; }
 void Tp::set_ai_avoid_distance(int v) { _ai_avoid_distance = v; }
-void Tp::set_ai_enemy_memory(int v) { _ai_enemy_memory = v; }
+void Tp::set_ai_is_able_to_remember_enemies_for_n_ticks(int v) { _ai_is_able_to_remember_enemies_for_n_ticks = v; }
 void Tp::set_ai_obstacle(int v) { _ai_obstacle = v; }
 void Tp::set_ai_scent_distance(int v) { _ai_scent_distance = v; }
 void Tp::set_ai_vision_distance(int v) { _ai_vision_distance = v; }
@@ -609,7 +611,7 @@ void Tp::set_is_indestructible(int v) { _is_indestructible = v; }
 void Tp::set_is_intelligent(int v) { _is_intelligent = v; }
 void Tp::set_is_interesting(int v) { _is_interesting = v; }
 void Tp::set_is_item_carrier(int v) { _is_item_carrier = v; }
-void Tp::set_is_item_collector(int v) { _is_item_collector = v; }
+void Tp::set_ai_is_item_collector(int v) { _ai_is_item_collector = v; }
 void Tp::set_is_item_eater(int v) { _is_item_eater = v; }
 void Tp::set_is_item(int v) { _is_item = v; }
 void Tp::set_is_jelly_baby_eater(int v) { _is_jelly_baby_eater = v; }
@@ -621,7 +623,7 @@ void Tp::set_random_jump_chance_d1000(int v) { _random_jump_chance_d1000 = v; }
 void Tp::set_is_able_to_jump_distance(int v) { _is_able_to_jump_distance = v; }
 void Tp::set_is_able_to_jump(int v) { _is_able_to_jump = v; }
 void Tp::set_is_able_to_jump_on_low_hp_chance_d1000(int v) { _is_able_to_jump_on_low_hp_chance_d1000 = v; }
-void Tp::set_is_ai_can_collect_keys(int v) { _is_ai_can_collect_keys = v; }
+void Tp::set_ai_is_able_to_collect_keys(int v) { _ai_is_able_to_collect_keys = v; }
 void Tp::set_is_key(int v) { _is_key = v; }
 void Tp::set_is_killed_on_hit_or_miss(int v) { _is_killed_on_hit_or_miss = v; }
 void Tp::set_is_killed_on_hitting(int v) { _is_killed_on_hitting = v; }
@@ -685,19 +687,18 @@ void Tp::set_unused_flag39(int v) { _unused_flag39 = v; }
 void Tp::set_unused_flag3(int v) { _unused_flag3 = v; }
 void Tp::set_unused_flag40(int v) { _unused_flag40 = v; }
 void Tp::set_unused_flag41(int v) { _unused_flag41 = v; }
-void Tp::set_unused_flag42(int v) { _unused_flag42 = v; }
-void Tp::set_unused_flag43(int v) { _unused_flag43 = v; }
-void Tp::set_unused_flag44(int v) { _unused_flag44 = v; }
-void Tp::set_unused_flag45(int v) { _unused_flag45 = v; }
-void Tp::set_unused_flag46(int v) { _unused_flag46 = v; }
-void Tp::set_unused_flag47(int v) { _unused_flag47 = v; }
-void Tp::set_unused_flag48(int v) { _unused_flag48 = v; }
+void Tp::set_ai_is_able_to_detect_secret_doors_when_close(int v) { _ai_is_able_to_detect_secret_doors_when_close = v; }
+void Tp::set_ai_is_able_to_break_down_doors(int v) { _ai_is_able_to_break_down_doors = v; }
+void Tp::set_ai_is_able_to_break_out_of_webs(int v) { _ai_is_able_to_break_out_of_webs = v; }
+void Tp::set_ai_is_able_to_open_doors(int v) { _ai_is_able_to_open_doors = v; }
+void Tp::set_ai_is_exit_finder(int v) { _ai_is_exit_finder = v; }
+void Tp::set_ai_is_level_explorer(int v) { _ai_is_level_explorer = v; }
 void Tp::set_is_rusty(int v) { _is_rusty = v; }
 void Tp::set_unused_flag4(int v) { _unused_flag4 = v; }
-void Tp::set_ai_can_learn_skills(int v) { _ai_can_learn_skills = v; }
-void Tp::set_ai_can_enchant_weapons(int v) { _ai_can_enchant_weapons = v; }
-void Tp::set_ai_can_attack_generators(int v) { _ai_can_attack_generators = v; }
-void Tp::set_is_ai_wanderer(int v) { _is_ai_wanderer = v; }
+void Tp::set_ai_is_able_to_learn_skills(int v) { _ai_is_able_to_learn_skills = v; }
+void Tp::set_ai_is_able_to_enchant_weapons(int v) { _ai_is_able_to_enchant_weapons = v; }
+void Tp::set_ai_is_able_to_attack_generators(int v) { _ai_is_able_to_attack_generators = v; }
+void Tp::set_ai_wanderer(int v) { _ai_wanderer = v; }
 void Tp::set_is_organic(int v) { _is_organic = v; }
 void Tp::set_is_glass(int v) { _is_glass = v; }
 void Tp::set_is_stone(int v) { _is_stone = v; }

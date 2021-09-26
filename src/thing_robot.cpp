@@ -820,7 +820,7 @@ void Thing::robot_ai_choose_initial_goals(std::multiset< Goal > &goals, int minx
           }
         }
 
-        if (is_item_collector()) {
+        if (ai_is_item_collector()) {
           if (it->is_collectable()) {
             auto score = worth_collecting(it);
             if (score > 0) {
@@ -836,7 +836,7 @@ void Thing::robot_ai_choose_initial_goals(std::multiset< Goal > &goals, int minx
         //
         // Need more work before monsts can collect keys as they will be auto collected.
         //
-        if (is_ai_can_collect_keys()) {
+        if (ai_is_able_to_collect_keys()) {
           if (it->is_key()) {
             SCORE_ADD(1000, "collect-key");
             got_one_this_tile = true;
@@ -885,7 +885,7 @@ void Thing::robot_ai_choose_initial_goals(std::multiset< Goal > &goals, int minx
               // Monsters we avoid are more serious threats
               //
               avoid = true;
-            } else if (! avoid && ai_can_attack_generators() && it->is_minion_generator()) {
+            } else if (! avoid && ai_is_able_to_attack_generators() && it->is_minion_generator()) {
               //
               // Very close, high priority attack
               //
@@ -1211,7 +1211,13 @@ void Thing::robot_ai_choose_search_goals(std::multiset< Goal > &goals, int searc
           //
           // A locked door is worth investigating
           //
+          if (! ai_is_able_to_open_doors() && ! ai_is_able_to_break_down_doors()) {
+            continue;
+          }
         } else if (level->is_secret_door(o)) {
+          if (! ai_is_able_to_detect_secret_doors_when_close()) {
+            continue;
+          }
           if (dist > ROBOT_CAN_SEE_SECRET_DOOR_DISTANCE) {
             continue;
           }
@@ -1219,6 +1225,9 @@ void Thing::robot_ai_choose_search_goals(std::multiset< Goal > &goals, int searc
           //
           // Worth investigating unless over
           //
+          if (! ai_is_exit_finder()) {
+            continue;
+          }
           if ((o.x == mid_at.x) && (o.y == mid_at.y)) {
             continue;
           }
@@ -1229,6 +1238,12 @@ void Thing::robot_ai_choose_search_goals(std::multiset< Goal > &goals, int searc
           //
           // Worth investigating
           //
+          if (! ai_is_exit_finder()) {
+            continue;
+          }
+          if ((o.x == mid_at.x) && (o.y == mid_at.y)) {
+            continue;
+          }
           if ((o.x == mid_at.x) && (o.y == mid_at.y)) {
             continue;
           }
@@ -1239,6 +1254,9 @@ void Thing::robot_ai_choose_search_goals(std::multiset< Goal > &goals, int searc
           //
           // Worth investigating
           //
+          if (! ai_is_exit_finder()) {
+            continue;
+          }
           if ((o.x == mid_at.x) && (o.y == mid_at.y)) {
             continue;
           }
@@ -1249,6 +1267,9 @@ void Thing::robot_ai_choose_search_goals(std::multiset< Goal > &goals, int searc
           //
           // Worth investigating
           //
+          if (! ai_is_exit_finder()) {
+            continue;
+          }
           if ((o.x == mid_at.x) && (o.y == mid_at.y)) {
             continue;
           }
@@ -1344,31 +1365,35 @@ next:
     //
     // Choose doors etc... as a last resort when nothing else
     //
-    if (level->is_door(p.x, p.y)) {
-      total_score -= 1000;
+    if (ai_is_level_explorer()) {
+      if (level->is_door(p.x, p.y)) {
+        total_score -= 1000;
+      }
     }
 
-    if (level->is_descend_sewer(p.x, p.y)) {
-      total_score -= 5000;
-      //
-      // Prefer not to walk over if there is a way around
-      //
-      terrain_cost += 10;
-    }
+    if (ai_is_exit_finder()) {
+      if (level->is_descend_sewer(p.x, p.y)) {
+        total_score -= 5000;
+        //
+        // Prefer not to walk over if there is a way around
+        //
+        terrain_cost += 10;
+      }
 
-    if (level->is_ascend_sewer(p.x, p.y)) {
-      total_score -= 10000;
-      terrain_cost += 10;
-    }
+      if (level->is_ascend_sewer(p.x, p.y)) {
+        total_score -= 10000;
+        terrain_cost += 10;
+      }
 
-    if (level->is_descend_dungeon(p.x, p.y)) {
-      total_score -= 50000;
-      terrain_cost += 10;
-    }
+      if (level->is_descend_dungeon(p.x, p.y)) {
+        total_score -= 50000;
+        terrain_cost += 10;
+      }
 
-    if (level->is_ascend_dungeon(p.x, p.y)) {
-      total_score -= 100000;
-      terrain_cost += 10;
+      if (level->is_ascend_dungeon(p.x, p.y)) {
+        total_score -= 100000;
+        terrain_cost += 10;
+      }
     }
 
     IF_DEBUG3
@@ -1398,8 +1423,9 @@ bool Thing::robot_ai_choose_nearby_goal(void)
       fpoint at(mid_at.x + dx, mid_at.y + dy);
 
       FOR_ALL_THINGS(level, it, at.x, at.y)
-      {
-        if (it->is_door() && ! it->is_open) {
+      /* { */
+      if (it->is_door() && ! it->is_open) {
+        if (ai_is_able_to_open_doors()) {
           if (get_keys()) {
             if (open_door(it)) {
               ai_log("Opened a door", it);
@@ -1409,7 +1435,9 @@ bool Thing::robot_ai_choose_nearby_goal(void)
               return true;
             }
           }
+        }
 
+        if (ai_is_able_to_break_down_doors()) {
           //
           // Try hitting the door
           //
@@ -1428,7 +1456,9 @@ bool Thing::robot_ai_choose_nearby_goal(void)
           }
           return true;
         }
+      }
 
+      if (ai_is_able_to_break_out_of_webs()) {
         if (it->is_spiderweb() && (it->mid_at == mid_at)) {
           //
           // Try hitting the web
@@ -1448,13 +1478,16 @@ bool Thing::robot_ai_choose_nearby_goal(void)
           return true;
         }
       }
+      /* } */
       FOR_ALL_THINGS_END();
 
-      auto items = anything_to_carry_at(at);
-      if (items.size() >= 1) {
-        for (auto item : items) {
-          if (try_to_carry_if_worthwhile_dropping_items_if_needed(item)) {
-            return true;
+      if (ai_is_item_collector()) {
+        auto items = anything_to_carry_at(at);
+        if (items.size() >= 1) {
+          for (auto item : items) {
+            if (try_to_carry_if_worthwhile_dropping_items_if_needed(item)) {
+              return true;
+            }
           }
         }
       }
@@ -1585,7 +1618,7 @@ bool Thing::ai_tick(void)
           //
           // Can we enchant something?
           //
-          if (ai_can_enchant_weapons()) {
+          if (ai_is_able_to_enchant_weapons()) {
             if (get_enchantstone_count() && can_enchant_something()) {
               ai_log("Try to enchant something");
               if (is_player()) {
@@ -1599,7 +1632,7 @@ bool Thing::ai_tick(void)
           //
           // Can we learn some skills?
           //
-          if (ai_can_learn_skills()) {
+          if (ai_is_able_to_learn_skills()) {
             if (get_skillstone_count() && can_learn_something()) {
               ai_log("Try to use a skillstone");
               if (is_player()) {
@@ -1652,6 +1685,29 @@ bool Thing::ai_tick(void)
         // Look for goals. Each search type expands the scope of what we look at
         // until at the end, we end up looking for the exit.
         //
+        int search_type_max;
+        if (is_able_to_jump()) {
+          if (ai_is_level_explorer()) {
+            if (ai_is_exit_finder()) {
+              search_type_max = SEARCH_TYPE_LAST_RESORTS_JUMP_ALLOWED;
+            } else {
+              search_type_max = SEARCH_TYPE_GLOBAL_JUMP_ALLOWED;
+            }
+          } else {
+            search_type_max = SEARCH_TYPE_LOCAL_JUMP_ALLOWED;
+          }
+        } else {
+          if (ai_is_level_explorer()) {
+            if (ai_is_exit_finder()) {
+              search_type_max = SEARCH_TYPE_LAST_RESORTS_NO_JUMP;
+            } else {
+              search_type_max = SEARCH_TYPE_GLOBAL_NO_JUMP;
+            }
+          } else {
+            search_type_max = SEARCH_TYPE_LOCAL_NO_JUMP;
+          }
+        }
+
         for (int search_type = 0; search_type < SEARCH_TYPE_MAX; search_type++) {
           if (search_type > 0) {
             IF_DEBUG3
@@ -1707,6 +1763,13 @@ bool Thing::ai_tick(void)
         //
         // Check for interrupts
         //
+        int search_type_max;
+        if (is_able_to_jump()) {
+          search_type_max = SEARCH_TYPE_LOCAL_JUMP_ALLOWED;
+        } else {
+          search_type_max = SEARCH_TYPE_LOCAL_NO_JUMP;
+        }
+
         if (robot_ai_init_can_see_dmap(minx, miny, maxx, maxy, SEARCH_TYPE_LOCAL_JUMP_ALLOWED)) {
           ai_log("Something interrupted me");
           if (is_player()) {
@@ -1915,11 +1978,7 @@ void Thing::robot_change_state(int new_state, const std::string &why)
 
   monstp->robot_state = new_state;
   switch (new_state) {
-    case ROBOT_STATE_IDLE :
-      if (is_player()) {
-        clear_move_path("Robot is idle");
-      }
-      break;
+    case ROBOT_STATE_IDLE : clear_move_path("State is now idle"); break;
     case ROBOT_STATE_MOVING : break;
     case ROBOT_STATE_RESTING : break;
     case ROBOT_STATE_OPEN_INVENTORY :

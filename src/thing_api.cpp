@@ -120,10 +120,10 @@ int Thing::ai_avoid_distance(void) const
   TRACE_AND_INDENT();
   return (tp()->ai_avoid_distance());
 }
-int Thing::ai_enemy_memory(void) const
+int Thing::ai_is_able_to_remember_enemies_for_n_ticks(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->ai_enemy_memory());
+  return (tp()->ai_is_able_to_remember_enemies_for_n_ticks());
 }
 int Thing::ai_obstacle(void) const
 {
@@ -845,10 +845,10 @@ int Thing::is_able_to_jump(void) const
   TRACE_AND_INDENT();
   return (tp()->is_able_to_jump());
 }
-int Thing::is_ai_can_collect_keys(void) const
+int Thing::ai_is_able_to_collect_keys(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->is_ai_can_collect_keys());
+  return (tp()->ai_is_able_to_collect_keys());
 }
 int Thing::is_key(void) const
 {
@@ -1165,40 +1165,35 @@ int Thing::unused_flag41(void) const
   TRACE_AND_INDENT();
   return (tp()->unused_flag41());
 }
-int Thing::unused_flag42(void) const
+int Thing::ai_is_able_to_detect_secret_doors_when_close(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->unused_flag42());
+  return (tp()->ai_is_able_to_detect_secret_doors_when_close());
 }
-int Thing::unused_flag43(void) const
+int Thing::ai_is_able_to_break_down_doors(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->unused_flag43());
+  return (tp()->ai_is_able_to_break_down_doors());
 }
-int Thing::unused_flag44(void) const
+int Thing::ai_is_able_to_break_out_of_webs(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->unused_flag44());
+  return (tp()->ai_is_able_to_break_out_of_webs());
 }
-int Thing::unused_flag45(void) const
+int Thing::ai_is_able_to_open_doors(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->unused_flag45());
+  return (tp()->ai_is_able_to_open_doors());
 }
-int Thing::unused_flag46(void) const
+int Thing::ai_is_exit_finder(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->unused_flag46());
+  return (tp()->ai_is_exit_finder());
 }
-int Thing::unused_flag47(void) const
+int Thing::ai_is_level_explorer(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->unused_flag47());
-}
-int Thing::unused_flag48(void) const
-{
-  TRACE_AND_INDENT();
-  return (tp()->unused_flag48());
+  return (tp()->ai_is_level_explorer());
 }
 int Thing::is_rusty(void) const
 {
@@ -1210,25 +1205,25 @@ int Thing::unused_flag4(void) const
   TRACE_AND_INDENT();
   return (tp()->unused_flag4());
 }
-int Thing::ai_can_learn_skills(void) const
+int Thing::ai_is_able_to_learn_skills(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->ai_can_learn_skills());
+  return (tp()->ai_is_able_to_learn_skills());
 }
-int Thing::ai_can_enchant_weapons(void) const
+int Thing::ai_is_able_to_enchant_weapons(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->ai_can_enchant_weapons());
+  return (tp()->ai_is_able_to_enchant_weapons());
 }
-int Thing::ai_can_attack_generators(void) const
+int Thing::ai_is_able_to_attack_generators(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->ai_can_attack_generators());
+  return (tp()->ai_is_able_to_attack_generators());
 }
-int Thing::is_ai_wanderer(void) const
+int Thing::ai_wanderer(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->is_ai_wanderer());
+  return (tp()->ai_wanderer());
 }
 int Thing::is_organic(void) const
 {
@@ -1420,10 +1415,10 @@ int Thing::is_treasure_type_chest(void) const
   TRACE_AND_INDENT();
   return (tp()->is_treasure_type_chest());
 }
-int Thing::is_item_collector(void) const
+int Thing::ai_is_item_collector(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->is_item_collector());
+  return (tp()->ai_is_item_collector());
 }
 int Thing::is_treasure_type_eater(void) const
 {

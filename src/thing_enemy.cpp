@@ -69,7 +69,7 @@ void Thing::add_enemy(Thingp attacker)
     return;
   }
 
-  if (! ai_enemy_memory()) {
+  if (! ai_is_able_to_remember_enemies_for_n_ticks()) {
     return;
   }
 
@@ -90,7 +90,7 @@ void Thing::add_enemy(Thingp attacker)
     } else {
       dbg("Add new enemy %s", attacker->to_string().c_str());
     }
-    monstp->enemies[ attacker->id ] = ai_enemy_memory();
+    monstp->enemies[ attacker->id ] = ai_is_able_to_remember_enemies_for_n_ticks();
   } else {
     dbg("Increment old enemy %s", attacker->to_string().c_str());
     monstp->enemies[ attacker->id ] *= 2;

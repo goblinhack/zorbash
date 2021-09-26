@@ -28,7 +28,7 @@ bool Thing::matches(const std::string &what) const
   if (ai_avoid_distance() && (what == "ai_avoid_distance")) {
     return true;
   }
-  if (ai_enemy_memory() && (what == "ai_enemy_memory")) {
+  if (ai_is_able_to_remember_enemies_for_n_ticks() && (what == "ai_is_able_to_remember_enemies_for_n_ticks")) {
     return true;
   }
   if (ai_vision_distance() && (what == "ai_vision_distance")) {
@@ -343,7 +343,7 @@ bool Thing::matches(const std::string &what) const
   if (is_item_carrier() && (what == "is_item_carrier")) {
     return true;
   }
-  if (is_item_collector() && (what == "is_item_collector")) {
+  if (ai_is_item_collector() && (what == "ai_is_item_collector")) {
     return true;
   }
   if (is_item_eater() && (what == "is_item_eater")) {
@@ -379,7 +379,7 @@ bool Thing::matches(const std::string &what) const
   if (is_able_to_jump() && (what == "is_able_to_jump")) {
     return true;
   }
-  if (is_ai_can_collect_keys() && (what == "is_ai_can_collect_keys")) {
+  if (ai_is_able_to_collect_keys() && (what == "ai_is_able_to_collect_keys")) {
     return true;
   }
   if (is_key() && (what == "is_key")) {
@@ -574,25 +574,25 @@ bool Thing::matches(const std::string &what) const
   if (unused_flag41() && (what == "unused_flag41")) {
     return true;
   }
-  if (unused_flag42() && (what == "unused_flag42")) {
+  if (ai_is_able_to_detect_secret_doors_when_close() && (what == "ai_is_able_to_detect_secret_doors_when_close")) {
     return true;
   }
-  if (unused_flag43() && (what == "unused_flag43")) {
+  if (ai_is_able_to_break_down_doors() && (what == "ai_is_able_to_break_down_doors")) {
     return true;
   }
-  if (unused_flag44() && (what == "unused_flag44")) {
+  if (ai_is_able_to_break_out_of_webs() && (what == "ai_is_able_to_break_out_of_webs")) {
     return true;
   }
-  if (unused_flag45() && (what == "unused_flag45")) {
+  if (ai_is_able_to_break_out_of_webs() && (what == "ai_is_able_to_break_out_of_webs")) {
     return true;
   }
-  if (unused_flag46() && (what == "unused_flag46")) {
+  if (ai_is_able_to_open_doors() && (what == "ai_is_able_to_open_doors")) {
     return true;
   }
-  if (unused_flag47() && (what == "unused_flag47")) {
+  if (ai_is_exit_finder() && (what == "ai_is_exit_finder")) {
     return true;
   }
-  if (unused_flag48() && (what == "unused_flag48")) {
+  if (ai_is_level_explorer() && (what == "ai_is_level_explorer")) {
     return true;
   }
   if (is_rusty() && (what == "is_rusty")) {
@@ -601,16 +601,16 @@ bool Thing::matches(const std::string &what) const
   if (unused_flag4() && (what == "unused_flag4")) {
     return true;
   }
-  if (ai_can_learn_skills() && (what == "ai_can_learn_skills")) {
+  if (ai_is_able_to_learn_skills() && (what == "ai_is_able_to_learn_skills")) {
     return true;
   }
-  if (ai_can_enchant_weapons() && (what == "ai_can_enchant_weapons")) {
+  if (ai_is_able_to_enchant_weapons() && (what == "ai_is_able_to_enchant_weapons")) {
     return true;
   }
-  if (ai_can_attack_generators() && (what == "ai_can_attack_generators")) {
+  if (ai_is_able_to_attack_generators() && (what == "ai_is_able_to_attack_generators")) {
     return true;
   }
-  if (is_ai_wanderer() && (what == "is_ai_wanderer")) {
+  if (ai_wanderer() && (what == "ai_wanderer")) {
     return true;
   }
   if (is_organic() && (what == "is_organic")) {
@@ -794,8 +794,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "ai_avoid_distance") {
     return &Thing::ai_avoid_distance;
   }
-  if (what == "ai_enemy_memory") {
-    return &Thing::ai_enemy_memory;
+  if (what == "ai_is_able_to_remember_enemies_for_n_ticks") {
+    return &Thing::ai_is_able_to_remember_enemies_for_n_ticks;
   }
   if (what == "ai_vision_distance") {
     return &Thing::ai_vision_distance;
@@ -1109,8 +1109,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_item_carrier") {
     return &Thing::is_item_carrier;
   }
-  if (what == "is_item_collector") {
-    return &Thing::is_item_collector;
+  if (what == "ai_is_item_collector") {
+    return &Thing::ai_is_item_collector;
   }
   if (what == "is_item_eater") {
     return &Thing::is_item_eater;
@@ -1145,8 +1145,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_able_to_jump") {
     return &Thing::is_able_to_jump;
   }
-  if (what == "is_ai_can_collect_keys") {
-    return &Thing::is_ai_can_collect_keys;
+  if (what == "ai_is_able_to_collect_keys") {
+    return &Thing::ai_is_able_to_collect_keys;
   }
   if (what == "is_key") {
     return &Thing::is_key;
@@ -1340,26 +1340,26 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag41") {
     return &Thing::unused_flag41;
   }
-  if (what == "unused_flag42") {
-    return &Thing::unused_flag42;
+  if (what == "ai_is_able_to_detect_secret_doors_when_close") {
+    return &Thing::ai_is_able_to_detect_secret_doors_when_close;
   }
-  if (what == "unused_flag43") {
-    return &Thing::unused_flag43;
+  if (what == "ai_is_able_to_break_down_doors") {
+    return &Thing::ai_is_able_to_break_down_doors;
   }
-  if (what == "unused_flag44") {
-    return &Thing::unused_flag44;
+  if (what == "ai_is_able_to_break_out_of_webs") {
+    return &Thing::ai_is_able_to_break_out_of_webs;
   }
-  if (what == "unused_flag45") {
-    return &Thing::unused_flag45;
+  if (what == "ai_is_able_to_break_out_of_webs") {
+    return &Thing::ai_is_able_to_break_out_of_webs;
   }
-  if (what == "unused_flag46") {
-    return &Thing::unused_flag46;
+  if (what == "ai_is_able_to_open_doors") {
+    return &Thing::ai_is_able_to_open_doors;
   }
-  if (what == "unused_flag47") {
-    return &Thing::unused_flag47;
+  if (what == "ai_is_exit_finder") {
+    return &Thing::ai_is_exit_finder;
   }
-  if (what == "unused_flag48") {
-    return &Thing::unused_flag48;
+  if (what == "ai_is_level_explorer") {
+    return &Thing::ai_is_level_explorer;
   }
   if (what == "is_rusty") {
     return &Thing::is_rusty;
@@ -1367,17 +1367,17 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag4") {
     return &Thing::unused_flag4;
   }
-  if (what == "ai_can_learn_skills") {
-    return &Thing::ai_can_learn_skills;
+  if (what == "ai_is_able_to_learn_skills") {
+    return &Thing::ai_is_able_to_learn_skills;
   }
-  if (what == "ai_can_enchant_weapons") {
-    return &Thing::ai_can_enchant_weapons;
+  if (what == "ai_is_able_to_enchant_weapons") {
+    return &Thing::ai_is_able_to_enchant_weapons;
   }
-  if (what == "ai_can_attack_generators") {
-    return &Thing::ai_can_attack_generators;
+  if (what == "ai_is_able_to_attack_generators") {
+    return &Thing::ai_is_able_to_attack_generators;
   }
-  if (what == "is_ai_wanderer") {
-    return &Thing::is_ai_wanderer;
+  if (what == "ai_wanderer") {
+    return &Thing::ai_wanderer;
   }
   if (what == "is_organic") {
     return &Thing::is_organic;

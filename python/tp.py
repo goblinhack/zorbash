@@ -355,41 +355,41 @@ class Tp:
     def set_unused_flag41(self, value):
         zx.tp_set_unused_flag41(self, value)
 
-    def set_unused_flag42(self, value):
-        zx.tp_set_unused_flag42(self, value)
+    def set_ai_is_able_to_detect_secret_doors_when_close(self, value):
+        zx.tp_set_ai_is_able_to_detect_secret_doors_when_close(self, value)
 
-    def set_unused_flag43(self, value):
-        zx.tp_set_unused_flag43(self, value)
+    def set_ai_is_able_to_break_down_doors(self, value):
+        zx.tp_set_ai_is_able_to_break_down_doors(self, value)
 
-    def set_unused_flag44(self, value):
-        zx.tp_set_unused_flag44(self, value)
+    def set_ai_is_able_to_break_out_of_webs(self, value):
+        zx.tp_set_ai_is_able_to_break_out_of_webs(self, value)
 
-    def set_unused_flag45(self, value):
-        zx.tp_set_unused_flag45(self, value)
+    def set_ai_is_able_to_break_out_of_webs(self, value):
+        zx.tp_set_ai_is_able_to_break_out_of_webs(self, value)
 
-    def set_unused_flag46(self, value):
-        zx.tp_set_unused_flag46(self, value)
+    def set_ai_is_able_to_open_doors(self, value):
+        zx.tp_set_ai_is_able_to_open_doors(self, value)
 
-    def set_unused_flag47(self, value):
-        zx.tp_set_unused_flag47(self, value)
+    def set_ai_is_exit_finder(self, value):
+        zx.tp_set_ai_is_exit_finder(self, value)
 
-    def set_unused_flag48(self, value):
-        zx.tp_set_unused_flag48(self, value)
+    def set_ai_is_level_explorer(self, value):
+        zx.tp_set_ai_is_level_explorer(self, value)
 
     def set_is_rusty(self, value):
         zx.tp_set_is_rusty(self, value)
 
-    def set_ai_can_learn_skills(self, value):
-        zx.tp_set_ai_can_learn_skills(self, value)
+    def set_ai_is_able_to_learn_skills(self, value):
+        zx.tp_set_ai_is_able_to_learn_skills(self, value)
 
-    def set_ai_can_enchant_weapons(self, value):
-        zx.tp_set_ai_can_enchant_weapons(self, value)
+    def set_ai_is_able_to_enchant_weapons(self, value):
+        zx.tp_set_ai_is_able_to_enchant_weapons(self, value)
 
-    def set_ai_can_attack_generators(self, value):
-        zx.tp_set_ai_can_attack_generators(self, value)
+    def set_ai_is_able_to_attack_generators(self, value):
+        zx.tp_set_ai_is_able_to_attack_generators(self, value)
 
-    def set_is_ai_wanderer(self, value):
-        zx.tp_set_is_ai_wanderer(self, value)
+    def set_ai_wanderer(self, value):
+        zx.tp_set_ai_wanderer(self, value)
 
     def set_is_organic(self, value):
         zx.tp_set_is_organic(self, value)
@@ -430,17 +430,17 @@ class Tp:
     def set_is_dead_on_end_of_anim(self, value):
         zx.tp_set_is_dead_on_end_of_anim(self, value)
 
-    def set_ai_enemy_memory(self, value):
-        zx.tp_set_ai_enemy_memory(self, value)
+    def set_ai_is_able_to_remember_enemies_for_n_ticks(self, value):
+        zx.tp_set_ai_is_able_to_remember_enemies_for_n_ticks(self, value)
 
     def set_is_debug_path(self, value):
         zx.tp_set_is_debug_path(self, value)
 
-    def set_is_ai_can_collect_keys(self, value):
-        zx.tp_set_is_ai_can_collect_keys(self, value)
+    def set_ai_is_able_to_collect_keys(self, value):
+        zx.tp_set_ai_is_able_to_collect_keys(self, value)
 
-    def set_is_item_collector(self, value):
-        zx.tp_set_is_item_collector(self, value)
+    def set_ai_is_item_collector(self, value):
+        zx.tp_set_ai_is_item_collector(self, value)
 
     def set_is_item(self, value):
         zx.tp_set_is_item(self, value)

@@ -115,7 +115,7 @@ do
     sed '/mytp.set_z_prio(/,$!d' $IN | tail -n +2 - > $POST
 
     for arg in \
-      set_ai_enemy_memory \
+      set_ai_is_able_to_remember_enemies_for_n_ticks \
       set_ai_obstacle \
       set_attack_eater \
       set_attack_humanoid \
@@ -167,7 +167,7 @@ do
       set_is_able_to_walk_through_walls \
       set_is_acid \
       set_is_acid_lover \
-      set_is_ai_wanderer \
+      set_ai_wanderer \
       set_is_alive_on_end_of_anim \
       set_is_always_hit \
       set_is_ascend_dungeon \
@@ -241,7 +241,7 @@ do
       set_is_interesting \
       set_is_item \
       set_is_item_carrier \
-      set_is_item_collector \
+      set_ai_is_item_collector \
       set_is_item_eater \
       set_is_item_organic \
       set_is_jelly \
@@ -251,7 +251,7 @@ do
       set_is_jelly_parent \
       set_is_able_to_jump \
       set_is_key \
-      set_is_ai_can_collect_keys \
+      set_ai_is_able_to_collect_keys \
       set_is_killed_on_hit_or_miss \
       set_is_killed_on_hitting \
       set_is_laser \
@@ -318,18 +318,18 @@ do
       set_unused_flag4 \
       set_unused_flag40 \
       set_unused_flag41 \
-      set_unused_flag42 \
-      set_unused_flag43 \
-      set_unused_flag44 \
-      set_unused_flag45 \
-      set_unused_flag46 \
-      set_unused_flag47 \
-      set_unused_flag48 \
+      set_ai_is_able_to_detect_secret_doors_when_close \
+      set_ai_is_able_to_break_down_doors \
+      set_ai_is_able_to_break_out_of_webs \
+      set_ai_is_able_to_break_out_of_webs \
+      set_ai_is_able_to_open_doors \
+      set_ai_is_exit_finder \
+      set_ai_is_level_explorer \
       set_is_rusty \
       set_unused_flag5 \
-      set_ai_can_learn_skills \
-      set_ai_can_enchant_weapons \
-      set_ai_can_attack_generators \
+      set_ai_is_able_to_learn_skills \
+      set_ai_is_able_to_enchant_weapons \
+      set_ai_is_able_to_attack_generators \
       set_unused_flag6 \
       set_unused_flag7 \
       set_unused_flag8 \

@@ -717,7 +717,10 @@ bool Thing::collision_check_and_handle(fpoint future_pos, bool *target_attacked,
         }
 
         if (it->is_hidden || it->is_falling || it->is_jumping || it->is_changing_level) {
-          dbg("Ignore as hidden/falling/jumping");
+          continue;
+        }
+
+        if (it->get_top_owner()) {
           continue;
         }
 
