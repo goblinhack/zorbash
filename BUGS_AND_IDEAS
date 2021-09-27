@@ -1,9 +1,8 @@
 
 Todo
 ----
-- robo use wands
-- prefer weaoons with more damage
 - reimplement escape
+- weapon pick up loop on victimlake3
 - minion attack broken
 - add poison debuff
 - robot got stuck in web
@@ -12,6 +11,7 @@ Todo
 - add poison notify on screen from spider?
 - half damage from poison constitution save
 - antipoison potion
+- robo use wands
 
 Level
 -----
