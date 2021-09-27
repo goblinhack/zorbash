@@ -397,6 +397,12 @@ int Thing::robot_ai_init_can_see_dmap(int minx, int miny, int maxx, int maxy, in
   bool                                                       jump_allowed      = false;
   int                                                        something_changed = 0;
 
+  for (int y = miny; y < maxy; y++) {
+    for (int x = minx; x < maxx; x++) {
+      set(dmap_can_see->val, x, y, DMAP_IS_WALL);
+    }
+  }
+
   switch (search_type) {
     case SEARCH_TYPE_LOCAL_JUMP_ALLOWED : jump_allowed = true; break;
     case SEARCH_TYPE_LOCAL_NO_JUMP : jump_allowed = false; break;
@@ -411,7 +417,6 @@ int Thing::robot_ai_init_can_see_dmap(int minx, int miny, int maxx, int maxy, in
       point p(x, y);
       if (is_player()) {
         if (! level->is_lit_ever(p)) {
-          set(dmap_can_see->val, x, y, DMAP_IS_WALL);
           continue;
         }
       }
@@ -425,14 +430,12 @@ int Thing::robot_ai_init_can_see_dmap(int minx, int miny, int maxx, int maxy, in
       }
 
       if (level->is_obs_wall_or_door(p)) {
-        set(dmap_can_see->val, x, y, DMAP_IS_WALL);
         continue;
       }
 
       if (level->is_secret_door(p)) {
         auto dist = distance(p, at);
         if (dist > ROBOT_CAN_SEE_SECRET_DOOR_DISTANCE) {
-          set(dmap_can_see->val, x, y, DMAP_IS_WALL);
           continue;
         }
       }
@@ -442,7 +445,6 @@ int Thing::robot_ai_init_can_see_dmap(int minx, int miny, int maxx, int maxy, in
         case SEARCH_TYPE_GLOBAL_NO_JUMP :
         case SEARCH_TYPE_LAST_RESORTS_NO_JUMP :
           if (level->is_lava(p) || level->is_chasm(p)) {
-            set(dmap_can_see->val, x, y, DMAP_IS_WALL);
             continue;
           }
           break;
@@ -500,11 +502,9 @@ int Thing::robot_ai_init_can_see_dmap(int minx, int miny, int maxx, int maxy, in
             }
 
             //
-            // Check we really need to jump over all things in
-            // the path.
+            // Check we really need to jump over all things in the path.
             //
-            // Also check for walls. Is it fair to jump over
-            // walls?
+            // Also check for walls. Is it fair to jump over walls?
             //
             bool jump = true;
             for (const auto &jump_over : jp.path) {
@@ -532,7 +532,6 @@ int Thing::robot_ai_init_can_see_dmap(int minx, int miny, int maxx, int maxy, in
         }
       }
 
-      set(dmap_can_see->val, x, y, DMAP_IS_WALL);
       continue;
     }
   }
@@ -1532,13 +1531,13 @@ bool Thing::ai_tick(void)
   // Set up the extent of the AI, choosing smaller areas for monsters for
   // speed.
   //
-  const float dx = ai_scent_distance() / 2;
+  const float dx = ai_scent_distance();
   const float dy = dx;
 
   int minx = std::max(0, (int) (mid_at.x - dx));
-  int maxx = std::min(MAP_WIDTH, (int) (mid_at.x + dx - 1));
+  int maxx = std::min(MAP_WIDTH, (int) (mid_at.x + dx));
   int miny = std::max(0, (int) (mid_at.y - dy));
-  int maxy = std::min(MAP_HEIGHT, (int) (mid_at.y + dy - 1));
+  int maxy = std::min(MAP_HEIGHT, (int) (mid_at.y + dy));
 
   if (is_player()) {
     minx = 0;

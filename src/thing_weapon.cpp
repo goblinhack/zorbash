@@ -430,6 +430,7 @@ bool Thing::use_weapon(void)
       return false;
     }
   } else {
+    dbg("No weapon");
     if (collision_check_and_handle_at(hit_at, &target_attacked, &target_overlaps)) {
       lunge(hit_at);
       return false;
@@ -447,6 +448,7 @@ bool Thing::use_weapon(void)
   bool   found_best {};
   fpoint best_hit_at;
   int    best_priority = -999;
+  Thingp best          = nullptr;
 
   for (const auto &d : all_deltas) {
     auto hit_at = mid_at + fpoint(d.x, d.y);
@@ -457,24 +459,12 @@ bool Thing::use_weapon(void)
     FOR_ALL_COLLISION_THINGS(level, t, hit_at.x, hit_at.y)
     {
       int prio;
+
       //
       // Get the most important thing to hit.
       //
-      if (is_player() && game->robot_mode) {
-        //
-        // Don't be silly and hit things that can blow up
-        //
-        if (t->is_very_combustible()) {
-          continue;
-        }
-        if (! t->is_attackable_by_player()) {
-          continue;
-        }
-      }
-      if (is_monst()) {
-        if (! t->is_attackable_by_monst()) {
-          continue;
-        }
+      if (! possible_to_attack(t)) {
+        continue;
       }
 
       if (t->is_dead) {
@@ -494,6 +484,7 @@ bool Thing::use_weapon(void)
       if (prio > best_priority) {
         best_priority = prio;
         best_hit_at   = hit_at;
+        best          = t;
         found_best    = true;
       }
     }
@@ -504,6 +495,7 @@ bool Thing::use_weapon(void)
     target_attacked = false;
     target_overlaps = false;
 
+    dbg("Best target to hit is %s", best->to_string().c_str());
     if (weapon) {
       if (weapon->collision_check_and_handle_at(best_hit_at, &target_attacked, &target_overlaps)) {
         lunge(best_hit_at);
@@ -532,24 +524,12 @@ bool Thing::use_weapon(void)
     FOR_ALL_COLLISION_THINGS(level, t, hit_at.x, hit_at.y)
     {
       int prio;
+
       //
       // Get the most important thing to hit.
       //
-      if (is_player() && game->robot_mode) {
-        //
-        // Don't be silly and hit things that can blow up
-        //
-        if (t->is_very_combustible()) {
-          continue;
-        }
-        if (! t->is_attackable_by_player()) {
-          continue;
-        }
-      }
-      if (is_monst()) {
-        if (! t->is_attackable_by_monst()) {
-          continue;
-        }
+      if (! possible_to_attack(t)) {
+        continue;
       }
 
       if (t->is_dead) {
@@ -563,6 +543,7 @@ bool Thing::use_weapon(void)
       if (prio > best_priority) {
         best_priority = prio;
         best_hit_at   = hit_at;
+        best          = t;
         found_best    = true;
       }
     }
@@ -573,6 +554,7 @@ bool Thing::use_weapon(void)
     target_attacked = false;
     target_overlaps = false;
 
+    dbg("Best target (2nd try) to hit is %s", best->to_string().c_str());
     if (weapon) {
       if (weapon->collision_check_and_handle_at(best_hit_at, &target_attacked, &target_overlaps)) {
         lunge(best_hit_at);
@@ -601,24 +583,12 @@ bool Thing::use_weapon(void)
     FOR_ALL_COLLISION_THINGS(level, t, hit_at.x, hit_at.y)
     {
       int prio;
+
       //
       // Get the most important thing to hit.
       //
-      if (is_player() && game->robot_mode) {
-        //
-        // Don't be silly and hit things that can blow up
-        //
-        if (t->is_very_combustible()) {
-          continue;
-        }
-        if (! t->is_attackable_by_player()) {
-          continue;
-        }
-      }
-      if (is_monst()) {
-        if (! t->is_attackable_by_monst()) {
-          continue;
-        }
+      if (! possible_to_attack(t)) {
+        continue;
       }
 
       if (t->is_dead) {
@@ -632,6 +602,7 @@ bool Thing::use_weapon(void)
       if (prio > best_priority) {
         best_priority = prio;
         best_hit_at   = hit_at;
+        best          = t;
         found_best    = true;
       }
     }
@@ -642,6 +613,7 @@ bool Thing::use_weapon(void)
     target_attacked = false;
     target_overlaps = false;
 
+    dbg("Best target (3rd try) to hit is %s", best->to_string().c_str());
     if (weapon) {
       if (weapon->collision_check_and_handle_at(best_hit_at, &target_attacked, &target_overlaps)) {
         lunge(best_hit_at);

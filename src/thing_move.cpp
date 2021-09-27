@@ -265,16 +265,18 @@ bool Thing::move(fpoint future_pos, uint8_t up, uint8_t down, uint8_t left, uint
   //
   // No rest for the undead.
   //
-  if (! must_attack) {
-    if (! is_undead() && ! is_ethereal()) {
-      if (up || down || left || right) {
-        if (pcg_random_range(0, 20) > get_stat_constitution()) {
-          if (pcg_random_range(0, 100) < 10) {
-            decr_stamina();
+  if (is_monst() || is_player()) {
+    if (! must_attack) {
+      if (! is_undead() && ! is_ethereal()) {
+        if (up || down || left || right) {
+          if (pcg_random_range(0, 20) > get_stat_constitution()) {
+            if (pcg_random_range(0, 100) < 10) {
+              decr_stamina();
+            }
           }
+        } else {
+          rest();
         }
-      } else {
-        rest();
       }
     }
   }

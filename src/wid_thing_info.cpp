@@ -845,6 +845,7 @@ void Game::wid_thing_info_add_constitution(WidPopup *w, Thingp t)
 
 void Game::wid_thing_info_add_danger_level(WidPopup *w, Thingp t)
 {
+  t->topcon("DESC");
   TRACE_AND_INDENT();
   auto player = game->level->player;
   if (! player) {

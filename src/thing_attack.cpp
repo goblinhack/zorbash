@@ -21,7 +21,24 @@ bool Thing::possible_to_attack(const Thingp it)
   TRACE_AND_INDENT();
   auto me = tp();
 
+  if (it == this) {
+    return false;
+  }
+
   auto owner = get_top_owner();
+  if (owner && (owner == this)) {
+    return false;
+  }
+
+  auto minion_owner = get_top_minion_owner();
+  if (minion_owner && (minion_owner == this)) {
+    return false;
+  }
+
+  auto spawned_owner = get_top_spawned_owner();
+  if (spawned_owner && (spawned_owner == this)) {
+    return false;
+  }
 
   //
   // Allow wands to reflect and attack the owner. Weapons though, no.
@@ -571,4 +588,30 @@ bool Thing::attack(Thingp it)
   }
 
   return false;
+}
+
+bool Thing::possible_to_attack_at(point at)
+{
+  bool ret = false;
+
+  TRACE_AND_INDENT();
+  dbg("Possible to attack at %s", at.to_string().c_str());
+  TRACE_AND_INDENT();
+
+  FOR_ALL_COLLISION_THINGS(level, it, at.x, at.y)
+  {
+    if (! possible_to_attack(it)) {
+      continue;
+    }
+    dbg("Yes; %s", it->to_string().c_str());
+    ret = true;
+  }
+
+  if (! ret) {
+    dbg("No");
+  }
+
+  FOR_ALL_THINGS_END()
+
+  return ret;
 }

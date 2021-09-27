@@ -236,6 +236,7 @@ public:
   bool        ascend_sewer(void);
   bool        ascend_sewer_tick();
   bool        attack(Thingp it);
+  bool possible_to_attack_at(point at);
   bool        attack(fpoint future_pos);
   bool        bag_add(Thingp);
   bool        bag_add_test(Thingp);

@@ -60,6 +60,7 @@ void Thing::achieve_goals_in_life(void)
   }
 
   dbg("Achieve goals tick %u", game->tick_current);
+  TRACE_AND_INDENT();
 
   update_light_strength();
 
@@ -120,23 +121,6 @@ void Thing::achieve_goals_in_life(void)
     }
   }
 
-  //
-  // If there is a next hop to go to, do it.
-  //
-  if (is_player()) {
-    //
-    // Pop the next player move at the end of the game tick
-    //
-  } else {
-    //
-    // Pop the next monst move.
-    //
-    if (path_pop_next_move()) {
-      dbg("Pop next move");
-      return;
-    }
-  }
-
   if (! is_player()) {
     if (try_to_escape()) {
       dbg("Try to escape");
@@ -173,6 +157,23 @@ void Thing::achieve_goals_in_life(void)
   if (is_monst() && get_dmap_can_see()) {
     dbg("Get next hop");
     ai_get_next_hop();
+  }
+
+  //
+  // If there is a next hop to go to, do it.
+  //
+  if (is_player()) {
+    //
+    // Pop the next player move at the end of the game tick
+    //
+  } else {
+    //
+    // Pop the next monst move.
+    //
+    if (path_pop_next_move()) {
+      dbg("Popped next move");
+      return;
+    }
   }
 
   if (monstp && monstp->move_path.empty()) {

@@ -555,36 +555,6 @@ bool Thing::collision_check_only(Thingp it, fpoint future_pos, int x, int y)
     return false;
   }
 
-  //
-  // As we want to be able to shove the barrel, we need to check for
-  // collision. However if standing on the thing, allow movement away.
-  //
-  if (it->is_barrel()) {
-    if (it->mid_at == mid_at) {
-      //
-      // Allow movement away. This happens if you jump onto a barrel.
-      //
-    } else if (things_overlap_attack(me, future_pos, it)) {
-      dbg("Yes; overlaps barrel");
-      return true;
-    }
-  }
-
-  //
-  // As we want to be able to shove the brazier, we need to check for
-  // collision. However if standing on the thing, allow movement away.
-  //
-  if (it->is_brazier()) {
-    if (it->mid_at == mid_at) {
-      //
-      // Allow movement away. This happens if you jump onto a brazier.
-      //
-    } else if (things_overlap_attack(me, future_pos, it)) {
-      dbg("Yes; overlaps brazier");
-      return true;
-    }
-  }
-
   if (me_tp->gfx_attack_anim()) {
     if (it_tp->is_monst()) {
       //
@@ -595,7 +565,9 @@ bool Thing::collision_check_only(Thingp it, fpoint future_pos, int x, int y)
         return true;
       }
     }
-  } else if (it->is_door() && ! it->is_open) {
+  }
+
+  if (it->is_door() && ! it->is_open) {
     if (! it->is_dead) {
       if (things_overlap(me, future_pos, it)) {
         dbg("Yes; overlaps and can open");
@@ -606,38 +578,72 @@ bool Thing::collision_check_only(Thingp it, fpoint future_pos, int x, int y)
           return true;
         }
       }
+    } else {
+      return false;
     }
-  } else if (it->is_ethereal() && ! is_player()) {
-    //
-    // Ignore is_ethereal to make it easier to attack ghosts
-    //
-    dbg("No; can pass through");
-  } else if (it->is_descend_dungeon()) {
+  }
+
+  if (it->is_ethereal()) {
+    if (things_overlap(me, future_pos, it)) {
+      //
+      // Stop ghosts massing together
+      //
+      if (is_ethereal()) {
+        dbg("Yes; Stop ethereal things from piling up");
+        return true;
+      }
+
+      //
+      // This also allows the player to attack a ghost over lava without falling
+      // into the lava
+      //
+      if (is_monst() || is_player()) {
+        dbg("Yes; Stop monst moving on ethereal things");
+        return true;
+      }
+
+      dbg("No; can pass through ethereal thing");
+      return false;
+    }
+  }
+
+  if (it->is_descend_dungeon()) {
     if (things_overlap(me, future_pos, it)) {
       dbg("No; overlaps but can exit");
       return false;
     }
-  } else if (it->is_ascend_sewer()) {
+  }
+
+  if (it->is_ascend_sewer()) {
     if (things_overlap(me, future_pos, it)) {
       dbg("No; overlaps but can exit via sewer entrance");
       return false;
     }
-  } else if (it->is_descend_sewer()) {
+  }
+
+  if (it->is_descend_sewer()) {
     if (things_overlap(me, future_pos, it)) {
       dbg("No; overlaps but can exit via sewer exit");
       return false;
     }
-  } else if (is_player() && it->is_collectable()) {
+  }
+
+  if (is_player() && it->is_collectable()) {
     dbg("No; allow manual collect instead");
     return false;
-  } else if (possible_to_attack(it)) {
+  }
+
+  if (possible_to_attack(it)) {
     if (things_overlap(me, future_pos, it)) {
       dbg("Yes; overlaps and can attack");
       return true;
     } else {
       dbg("No; can attack but no overlap");
+      return false;
     }
-  } else if (can_eat(it)) {
+  }
+
+  if (can_eat(it)) {
     if (get_where_i_failed_to_collect_last() == make_point(it->mid_at)) {
       dbg("No; tried to collect previously");
       set_where_i_failed_to_collect_last(point(-1, -1));
@@ -654,16 +660,53 @@ bool Thing::collision_check_only(Thingp it, fpoint future_pos, int x, int y)
       return true;
     } else {
       dbg("Yes; can eat but no overlap");
+      return false;
     }
-  } else {
-    if (things_overlap(me, future_pos, it)) {
+  }
+
+  if (it->is_barrel()) {
+    //
+    // As we want to be able to shove the barrel, we need to check for
+    // collision. However if standing on the thing, allow movement away.
+    //
+    if (it->mid_at == mid_at) {
       //
-      // "true" on collision
+      // Allow movement away. This happens if you jump onto a barrel.
       //
-      if (collision_obstacle(it)) {
-        dbg("Yes; overlaps and is an obstacle");
-        return true;
-      }
+      return false;
+    }
+
+    if (things_overlap_attack(me, future_pos, it)) {
+      dbg("Yes; overlaps barrel");
+      return true;
+    }
+  }
+
+  if (it->is_brazier()) {
+    //
+    // As we want to be able to shove the brazier, we need to check for
+    // collision. However if standing on the thing, allow movement away.
+    //
+    if (it->mid_at == mid_at) {
+      //
+      // Allow movement away. This happens if you jump onto a brazier.
+      //
+      return false;
+    }
+
+    if (things_overlap_attack(me, future_pos, it)) {
+      dbg("Yes; overlaps brazier");
+      return true;
+    }
+  }
+
+  if (things_overlap(me, future_pos, it)) {
+    //
+    // "true" on collision
+    //
+    if (collision_obstacle(it)) {
+      dbg("Yes; overlaps and is an obstacle");
+      return true;
     }
   }
 
