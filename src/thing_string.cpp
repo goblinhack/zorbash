@@ -73,8 +73,8 @@ std::string Thing::to_short_string(void) const
     return (string_sprintf("L%d,%d,%d (<no tp>%s%s%s%s%s%s%s%s @%g,%g)", level->world_at.x, level->world_at.y,
                            level->world_at.z, is_dead ? "/dead" : "", is_resurrecting ? "/resurrecting" : "",
                            is_offscreen ? "/offscr" : "", is_on_fire() ? "/onfire" : "", is_hidden ? "/hidden" : "",
-                           is_jumping ? "/jumping" : "", is_moving ? "/mv" : "", is_falling ? "/fall" : "",
-                           mid_at.x, mid_at.y));
+                           is_jumping ? "/jumping" : "", is_moving ? "/mv" : "", is_falling ? "/fall" : "", mid_at.x,
+                           mid_at.y));
   } else {
     auto o = get_top_owner();
     if (o) {
@@ -128,8 +128,9 @@ std::string Thing::to_dbg_string(void) const
       is_waiting_to_ascend_sewer ? ", is_waiting_to_ascend_sewer" : "",
       is_waiting_to_descend_dungeon ? ", is_waiting_to_descend_dungeon" : "",
       is_waiting_to_descend_sewer ? ", is_waiting_to_descend_sewer" : "",
-      is_waiting_to_leave_level_has_completed_fall ? ", is_waiting_to_leave_level_has_completed_fall" : "", i_set_gfx_water ? ", i_set_gfx_water" : "",
-      i_set_is_acid ? ", i_set_is_acid" : "", i_set_is_ascend_dungeon ? ", i_set_is_ascend_dungeon" : "",
+      is_waiting_to_leave_level_has_completed_fall ? ", is_waiting_to_leave_level_has_completed_fall" : "",
+      i_set_gfx_water ? ", i_set_gfx_water" : "", i_set_is_acid ? ", i_set_is_acid" : "",
+      i_set_is_ascend_dungeon ? ", i_set_is_ascend_dungeon" : "",
       i_set_is_ascend_sewer ? ", i_set_is_ascend_sewer" : "", i_set_is_barrel ? ", i_set_is_barrel" : "",
       i_set_is_blood ? ", i_set_is_blood" : "", i_set_is_brazier ? ", i_set_is_brazier" : "",
       i_set_is_bridge ? ", i_set_is_bridge" : "", i_set_is_chasm ? ", i_set_is_chasm" : "",
@@ -189,8 +190,9 @@ std::string Thing::to_dbg_saved_string(void) const
       is_waiting_to_ascend_sewer ? ", is_waiting_to_ascend_sewer" : "",
       is_waiting_to_descend_dungeon ? ", is_waiting_to_descend_dungeon" : "",
       is_waiting_to_descend_sewer ? ", is_waiting_to_descend_sewer" : "",
-      is_waiting_to_leave_level_has_completed_fall ? ", is_waiting_to_leave_level_has_completed_fall" : "", i_set_gfx_water ? ", i_set_gfx_water" : "",
-      i_set_is_acid ? ", i_set_is_acid" : "", i_set_is_ascend_dungeon ? ", i_set_is_ascend_dungeon" : "",
+      is_waiting_to_leave_level_has_completed_fall ? ", is_waiting_to_leave_level_has_completed_fall" : "",
+      i_set_gfx_water ? ", i_set_gfx_water" : "", i_set_is_acid ? ", i_set_is_acid" : "",
+      i_set_is_ascend_dungeon ? ", i_set_is_ascend_dungeon" : "",
       i_set_is_ascend_sewer ? ", i_set_is_ascend_sewer" : "", i_set_is_barrel ? ", i_set_is_barrel" : "",
       i_set_is_blood ? ", i_set_is_blood" : "", i_set_is_brazier ? ", i_set_is_brazier" : "",
       i_set_is_bridge ? ", i_set_is_bridge" : "", i_set_is_chasm ? ", i_set_is_chasm" : "",

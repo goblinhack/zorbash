@@ -25,36 +25,27 @@ bool Thing::possible_to_attack(const Thingp it)
     return false;
   }
 
-  auto owner = get_top_owner();
-  if (owner && (owner == this)) {
+  auto my_owner  = get_top_owner();
+  auto its_owner = it->get_top_owner();
+  if (my_owner && (my_owner == its_owner)) {
     return false;
   }
 
-  auto minion_owner = get_top_minion_owner();
-  if (minion_owner && (minion_owner == this)) {
+  auto my_minion_owner  = get_top_minion_owner();
+  auto its_minion_owner = it->get_top_minion_owner();
+  if (my_minion_owner && (my_minion_owner == its_minion_owner)) {
     return false;
   }
 
-  auto spawned_owner = get_top_spawned_owner();
-  if (spawned_owner && (spawned_owner == this)) {
+  auto my_spawned_owner  = get_top_spawned_owner();
+  auto its_spawned_owner = it->get_top_spawned_owner();
+  if (my_spawned_owner && (my_spawned_owner == its_spawned_owner)) {
     return false;
-  }
-
-  //
-  // Allow wands to reflect and attack the owner. Weapons though, no.
-  //
-  if (is_weapon()) {
-    if (owner && owner->is_player()) {
-      if (it->is_attackable_by_player()) {
-        dbg("Owned by player");
-      } else {
-        dbg("Owned by player; not is_attackable by player");
-      }
-    }
   }
 
   dbg("Is it possible to attack %s?", it->to_string().c_str());
   TRACE_AND_INDENT();
+
   //
   // Fire attacks via tick so it can get you when you fall or jump into it.
   //

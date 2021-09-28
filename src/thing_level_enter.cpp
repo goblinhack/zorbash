@@ -95,11 +95,11 @@ void Thing::level_enter(void)
   //
   // Can be shown on screen again.
   //
-  is_waiting_to_ascend_dungeon  = false;
-  is_waiting_to_descend_sewer   = false;
-  is_waiting_to_descend_dungeon = false;
-  is_waiting_to_ascend_sewer    = false;
-  is_waiting_to_leave_level_has_completed_fall            = false;
+  is_waiting_to_ascend_dungeon                 = false;
+  is_waiting_to_descend_sewer                  = false;
+  is_waiting_to_descend_dungeon                = false;
+  is_waiting_to_ascend_sewer                   = false;
+  is_waiting_to_leave_level_has_completed_fall = false;
 
   game->request_update_rightbar = true;
 

@@ -338,7 +338,8 @@ bool Level::tick(void)
         player->err("Failed to descend sewer");
       }
       if ((wait_count > wait_count_max) && ! game->things_are_moving) {
-        player->con("Waiting on descending sewer player thing longer than expected: %s", player->to_dbg_string().c_str());
+        player->con("Waiting on descending sewer player thing longer than expected: %s",
+                    player->to_dbg_string().c_str());
       }
       game->things_are_moving = true;
     }
@@ -347,7 +348,8 @@ bool Level::tick(void)
         player->err("Failed to ascend sewer");
       }
       if ((wait_count > wait_count_max) && ! game->things_are_moving) {
-        player->con("Waiting on ascending sewer player thing longer than expected: %s", player->to_dbg_string().c_str());
+        player->con("Waiting on ascending sewer player thing longer than expected: %s",
+                    player->to_dbg_string().c_str());
       }
       game->things_are_moving = true;
     }
