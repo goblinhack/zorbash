@@ -7,8 +7,8 @@
 #ifndef _MY_THING_AI_H
 #define _MY_THING_AI_H
 
-#include <set>
 #include "my_dmap.h"
+#include <set>
 
 typedef struct AgeMap_ *AgeMapp;
 typedef struct Dmap_ *  Dmapp;

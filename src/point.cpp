@@ -195,10 +195,10 @@ int distance_to_line(fpoint P0, fpoint L0, fpoint L1, float *dist, fpoint *inter
   }
 
   if ((U < 0.0f) || (U > 1.0f)) {
-    return (0); // closest P0 does not fall within the line segment
+    return 0; // closest P0 does not fall within the line segment
   }
 
-  return (1);
+  return 1;
 }
 
 float dot (const my_apoint b

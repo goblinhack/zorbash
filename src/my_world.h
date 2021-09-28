@@ -7,8 +7,8 @@
 #ifndef _MY_WORLD_H_
 #define _MY_WORLD_H_
 
-#include "my_point.h"
 #include "my_level.h"
+#include "my_point.h"
 
 class World
 {

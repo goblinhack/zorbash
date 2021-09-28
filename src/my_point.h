@@ -7,9 +7,9 @@
 #ifndef _MY_POINT_H_
 #define _MY_POINT_H_
 
-#include <math.h>
-#include "my_math.h"
 #include "c_plus_plus_serializer.h"
+#include "my_math.h"
+#include <math.h>
 
 template < class T > class my_apoint
 {

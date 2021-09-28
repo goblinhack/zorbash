@@ -7,10 +7,10 @@
 #ifndef _MY_TILE_H_
 #define _MY_TILE_H_
 
-#include <array>
-#include "my_point.h"
 #include "my_color.h"
 #include "my_fwd.h"
+#include "my_point.h"
+#include <array>
 
 using Tilemap = std::vector< class Tile * >;
 

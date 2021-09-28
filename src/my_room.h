@@ -10,12 +10,12 @@
 #include <array>
 #include <vector>
 
-#include "my_thing_defs.h"
+#include "my_charmap.h"
+#include "my_depth.h"
+#include "my_fwd.h"
 #include "my_main.h"
 #include "my_point.h"
-#include "my_depth.h"
-#include "my_charmap.h"
-#include "my_fwd.h"
+#include "my_thing_defs.h"
 
 typedef std::vector< Roomp > Rooms;
 

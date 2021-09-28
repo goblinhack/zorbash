@@ -29,7 +29,7 @@ Tpp tp_find(const std::string &name)
   auto result = tp_name_map.find(name);
 
   if (unlikely(result == tp_name_map.end())) {
-    return (0);
+    return 0;
   }
 
   return (result->second);

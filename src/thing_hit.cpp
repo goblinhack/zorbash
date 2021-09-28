@@ -195,7 +195,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
   //
   if (is_player()) {
     if (game->robot_mode) {
-      if (monstp->robot_state == ROBOT_STATE_MOVING) {
+      if (monstp->monst_state == MONST_STATE_MOVING) {
         clear_move_path("robot was hit while moving");
       } else {
         //
@@ -318,7 +318,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
         }
 
         if (game->robot_mode) {
-          robot_change_state(ROBOT_STATE_IDLE, "robot CRIT attacked itself");
+          ai_change_state(MONST_STATE_IDLE, "robot CRIT attacked itself");
         }
       } else {
         if (crit) {
@@ -363,7 +363,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
         }
 
         if (game->robot_mode) {
-          robot_change_state(ROBOT_STATE_IDLE, "robot attacked itself");
+          ai_change_state(MONST_STATE_IDLE, "robot attacked itself");
         }
       } else {
         if (bite) {
@@ -391,7 +391,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     }
   } else {
     if (game->robot_mode) {
-      robot_change_state(ROBOT_STATE_IDLE, "robot attacked");
+      ai_change_state(MONST_STATE_IDLE, "robot attacked");
     }
 
     if (real_hitter->is_player()) {

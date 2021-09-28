@@ -7,8 +7,8 @@
 #ifndef _MY_GAME_H_
 #define _MY_GAME_H_
 
-#include "my_world.h"
 #include "my_hiscore.h"
+#include "my_world.h"
 #include <list>
 
 class WidBag;

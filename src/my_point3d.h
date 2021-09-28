@@ -7,8 +7,8 @@
 #ifndef _MY_POINT3D_H_
 #define _MY_POINT3D_H_
 
-#include "my_math.h"
 #include "c_plus_plus_serializer.h"
+#include "my_math.h"
 
 template < class T > class my_apoint3d
 {

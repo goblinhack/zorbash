@@ -7,10 +7,10 @@
 #ifndef _MY_ASCII_H_
 #define _MY_ASCII_H_
 
-#include <wchar.h>
-#include <array>
 #include "my_tex.h"
 #include "my_tile.h"
+#include <array>
+#include <wchar.h>
 
 #define TERM_HEIGHT_DEF 120
 #define TERM_HEIGHT_MAX TERM_HEIGHT_DEF

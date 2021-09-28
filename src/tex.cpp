@@ -150,7 +150,7 @@ static SDL_Surface *load_image(std::string filename)
   } else {
     ERR("Could not handle image with %d components", comp);
     free_raw_image(image_data);
-    return (0);
+    return 0;
   }
 
   memcpy(surf->pixels, image_data, comp * x * y);
@@ -267,10 +267,10 @@ Texp tex_load(std::string file, std::string name, int mode)
   if (file == "") {
     if (name == "") {
       ERR("No file for tex");
-      return (0);
+      return 0;
     } else {
       ERR("No file for tex loading '%s'", name.c_str());
-      return (0);
+      return 0;
     }
   }
 
@@ -431,7 +431,7 @@ Texp tex_find(std::string file)
 
   auto result = textures.find(file);
   if (result == textures.end()) {
-    return (0);
+    return 0;
   }
 
   return (result->second);
@@ -579,7 +579,7 @@ Texp string2tex(const char **s)
   }
 
   if (c == eo_tmp) {
-    return (0);
+    return 0;
   }
 
   *t++ = '\0';

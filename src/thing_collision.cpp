@@ -664,7 +664,7 @@ bool Thing::collision_check_only(Thingp it, fpoint future_pos, int x, int y)
     }
   }
 
-  if (it->is_barrel()) {
+  if (it->is_barrel() && ! is_ethereal()) {
     //
     // As we want to be able to shove the barrel, we need to check for
     // collision. However if standing on the thing, allow movement away.
@@ -682,7 +682,7 @@ bool Thing::collision_check_only(Thingp it, fpoint future_pos, int x, int y)
     }
   }
 
-  if (it->is_brazier()) {
+  if (it->is_brazier() && ! is_ethereal()) {
     //
     // As we want to be able to shove the brazier, we need to check for
     // collision. However if standing on the thing, allow movement away.
@@ -698,6 +698,22 @@ bool Thing::collision_check_only(Thingp it, fpoint future_pos, int x, int y)
       dbg("Yes; overlaps brazier");
       return true;
     }
+  }
+
+  if (is_ethereal()) {
+    //
+    // This lets you skip around generators to avoid ghosts
+    //
+    if (is_minion()) {
+      if (it->is_minion_generator()) {
+        if (it == get_top_minion_owner()) {
+          dbg("Yes; cannot pass through my master");
+          return true;
+        }
+      }
+    }
+    dbg("No; I am ethereal");
+    return false;
   }
 
   if (things_overlap(me, future_pos, it)) {
@@ -812,10 +828,15 @@ bool Thing::collision_check_and_handle_at(bool *target_attacked, bool *target_ov
 //
 bool Thing::collision_check_only(fpoint future_pos)
 {
+  if (is_cursor()) {
+    return false;
+  }
+
   if (is_loggable()) {
     dbg("Collision check only");
   }
   TRACE_AND_INDENT();
+
   int minx = future_pos.x - thing_collision_tiles;
   if (minx < MAP_BORDER_ROCK) {
     minx = MAP_BORDER_ROCK;
@@ -879,7 +900,7 @@ bool Thing::collision_check_only(fpoint future_pos)
         //
         // Skip things we cannot collide with
         //
-        if (it->is_hidden || it->is_falling || it->is_jumping || it->is_changing_level) {
+        if (it->is_falling || it->is_jumping || it->is_changing_level) {
           dbg("Ignore falling %s", it->to_string().c_str());
           continue;
         }

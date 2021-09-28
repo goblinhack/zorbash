@@ -4,14 +4,14 @@
 //
 
 #pragma once
-#include <vector>
+#include "my_callstack.h"
+#include "my_defs.h"
+#include "my_globals.h"
 #include <array>
 #include <assert.h>
 #include <iostream>
 #include <sstream>
-#include "my_callstack.h"
-#include "my_globals.h"
-#include "my_defs.h"
+#include <vector>
 
 //
 // Single dimension array check

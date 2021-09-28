@@ -50,7 +50,7 @@ wid_tilesp wid_tiles_load(std::string name, double scale)
 
   if (name == "") {
     DIE("No name for wid_tiles");
-    return (0);
+    return 0;
   }
 
   t = std::make_shared< class WidTiles >();

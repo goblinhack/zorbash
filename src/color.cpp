@@ -237,7 +237,7 @@ const char *string2colorname(const char **s)
   }
 
   if (c == eo_tmp) {
-    return (0);
+    return 0;
   }
 
   *t++ = '\0';

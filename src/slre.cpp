@@ -451,10 +451,10 @@ is_any_of(const unsigned char *p, int len, const char *s, int *ofs)
     for (i = 0; i < len; i++)
         if (p[i] == ch) {
             (*ofs)++;
-            return (1);
+            return 1;
         }
 
-    return (0);
+    return 0;
 }
 
 static int
@@ -466,10 +466,10 @@ is_any_but(const unsigned char *p, int len, const char *s, int *ofs)
 
     for (i = 0; i < len; i++)
         if (p[i] == ch)
-            return (0);
+            return 0;
 
     (*ofs)++;
-    return (1);
+    return 1;
 }
 
 static int
@@ -668,7 +668,7 @@ int main(int argc, char *argv[])
                   caps[i].len, caps[i].ptr);
     }
 
-    return (0);
+    return 0;
 }
 #endif /* TEST */
 

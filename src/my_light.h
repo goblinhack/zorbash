@@ -7,8 +7,8 @@
 #ifndef _MY_LIGHT_H
 #define _MY_LIGHT_H
 
-#include "my_thing_template.h"
 #include "my_thing_defs.h"
+#include "my_thing_template.h"
 
 typedef struct {
   int16_t depth_furthest;

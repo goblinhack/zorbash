@@ -358,7 +358,7 @@ bool Thing::try_to_carry_if_worthwhile_dropping_items_if_needed(Thingp item)
       if (is_player() && game->robot_mode) {
         BOTCON("Robot dropped %s", would_need_to_drop->text_the().c_str());
         game->tick_begin("Robot dropped an item");
-        robot_change_state(ROBOT_STATE_OPEN_INVENTORY, "dropped an item");
+        ai_change_state(MONST_STATE_OPEN_INVENTORY, "dropped an item");
       }
       return true;
     }
@@ -380,7 +380,7 @@ bool Thing::try_to_carry_if_worthwhile_dropping_items_if_needed(Thingp item)
     if (is_player() && game->robot_mode) {
       BOTCON("Robot collected %s", item->text_the().c_str());
       game->tick_begin("Robot collected an item");
-      robot_change_state(ROBOT_STATE_OPEN_INVENTORY, "collected an item");
+      ai_change_state(MONST_STATE_OPEN_INVENTORY, "collected an item");
     }
     return true;
   }

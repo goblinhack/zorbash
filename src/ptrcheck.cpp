@@ -278,11 +278,11 @@ static hash_elem_t *hash_find(hash_t *hash_table, void *ptr)
   hash_elem_t * elem;
 
   if (! hash_table) {
-    return (0);
+    return 0;
   }
 
   if (! ptr) {
-    return (0);
+    return 0;
   }
 
   slot = ptr2hash(hash_table, ptr);
@@ -349,7 +349,7 @@ static Ptrcheck *ptrcheck_verify_pointer(const void *ptr, std::string &func, std
   hash_elem_t *      e;
 
   if (! hash) {
-    return (0);
+    return 0;
   }
 
   if (! ptr) {

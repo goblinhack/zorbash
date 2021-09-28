@@ -6,8 +6,8 @@
 #ifndef _MY_CALLSTACK_H_
 #define _MY_CALLSTACK_H_
 
-#include "my_sys.h"
 #include "my_globals.h"
+#include "my_sys.h"
 
 #define CAT(A, B)  A##B
 #define CAT2(A, B) CAT(A, B)

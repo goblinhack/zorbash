@@ -28,7 +28,7 @@ static Fontp font_load(std::string name, std::string file, int size, int style)
 
   if (name == "") {
     ERR("No name for font %s", __FUNCTION__);
-    return (0);
+    return 0;
   }
 
   f = ttf_new(file, size, style);
@@ -52,12 +52,12 @@ Fontp font_find(std::string file)
   TRACE_AND_INDENT();
   if (file == "") {
     ERR("No filename given for font find %s", __FUNCTION__);
-    return (0);
+    return 0;
   }
 
   auto result = fonts.find(file);
   if (result == fonts.end()) {
-    return (0);
+    return 0;
   }
 
   return (result->second);

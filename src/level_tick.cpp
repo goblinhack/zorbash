@@ -42,7 +42,12 @@ bool Level::tick(void)
   TRACE_AND_INDENT();
   // LOG("Tick");
   // TOPCON("monsts %d.", monst_count);
-  uint32_t tick_begin_ms = time_get_time_ms();
+
+  static uint32_t tick_begin_ms;
+  if (! tick_begin_ms) {
+    tick_begin_ms = time_get_time_ms();
+  }
+
   if (! game->started) {
     return false;
   }
@@ -64,6 +69,8 @@ bool Level::tick(void)
   if (! game->tick_requested.empty()) {
     game->tick_begin_now();
 
+    tick_begin_ms = time_get_time_ms();
+
     uint32_t tick_begin_ms = time_get_time_ms();
 
     FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL(this, t)
@@ -71,13 +78,15 @@ bool Level::tick(void)
       uint32_t tick_begin_ms = time_get_time_ms();
       t->tick();
       if ((time_get_time_ms() - tick_begin_ms) > THING_TICK_DURATION_TOO_LONG) {
-        t->con("PERF: Thing tick duration %u ms", time_get_time_ms() - tick_begin_ms);
+        t->err("PERF: Thing took too long, tick duration %u ms, max %u ms", time_get_time_ms() - tick_begin_ms,
+            THING_TICK_DURATION_TOO_LONG);
       }
     }
     FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL_END(this)
 
     if ((time_get_time_ms() - tick_begin_ms) > LEVEL_TICK_DURATION_TOO_LONG) {
-      con("PERF: All things tick duration %u ms", time_get_time_ms() - tick_begin_ms);
+      err("PERF: All things tick took too long, duration %u ms, max %u ms", time_get_time_ms() - tick_begin_ms,
+          LEVEL_TICK_DURATION_TOO_LONG);
     }
   }
 
@@ -114,16 +123,13 @@ bool Level::tick(void)
     {
       t->animate();
       t->update_interpolated_position();
+      t->get_fall();
 
       //
       // We need to check all animated things are finished moving as they
       // may not intersect with all interactive things. i.e a carried
       // sword animation.
       //
-      if (t->is_cursor()) {
-        continue;
-      }
-
       if (t->is_moving) {
         if (game->robot_mode) {
           if ((wait_count > wait_count_max) && ! game->things_are_moving) {
@@ -174,6 +180,7 @@ bool Level::tick(void)
     }
 
     t->update_interpolated_position();
+    t->get_fall();
 
     //
     // Check if we finished moving above. If not, keep waiting.
@@ -310,6 +317,7 @@ bool Level::tick(void)
     auto o = t->weapon_get_carry_anim();
     if (o) {
       o->update_interpolated_position();
+      o->get_fall();
     }
   }
   FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL_END(this)
@@ -479,6 +487,7 @@ bool Level::tick(void)
   if (tick_done) {
     if (game->robot_mode) {
       if (game->robot_mode_tick_requested) {
+        CON("Robot: tick requested");
         game->robot_mode_tick_requested = false;
         if (player) {
           if (player->monstp && player->monstp->move_path.size()) {
@@ -488,7 +497,10 @@ bool Level::tick(void)
       }
 
       if (game->tick_requested.empty()) {
+        CON("Robot: no new tick was requested");
         game->robot_mode_tick();
+      } else {
+        CON("Robot: a new tick was requested");
       }
     } else if (player) {
       if (player->monstp && player->monstp->move_path.size()) {

@@ -9,8 +9,8 @@
 
 #include "my_defs.h"
 
-#include <stdint.h>
 #include <cinttypes> // PRIx32
+#include <stdint.h>
 
 #if __GNUC__ >= 8
 // warns about intentional truncation like % 10s!

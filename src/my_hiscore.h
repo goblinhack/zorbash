@@ -7,6 +7,9 @@
 #ifndef _MY_HISCORE_H_
 #define _MY_HISCORE_H_
 
+#include <string>
+#include "my_thing.h"
+
 class HiScore
 {
 public:

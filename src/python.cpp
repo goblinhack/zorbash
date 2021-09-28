@@ -2287,7 +2287,7 @@ PyMODINIT_FUNC python_mouse_y_module_create(void)
   if (! m) {
     PyErr_Print();
     ERR("Python init");
-    return (0);
+    return 0;
   }
 
   return (m);
@@ -2485,7 +2485,7 @@ PyObject *abs_to_pct_(PyObject *obj, PyObject *args, PyObject *keywds)
   static char *kwlist[] = {(char *) "x", (char *) "y", 0};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "dd", kwlist, &x, &y)) {
-    return (0);
+    return 0;
   }
 
   x /= (double) TERM_WIDTH;
@@ -2503,7 +2503,7 @@ PyObject *pcg_randint(PyObject *obj, PyObject *args, PyObject *keywds)
   static char *kwlist[] = {(char *) "x", (char *) "y", 0};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "ii", kwlist, &x, &y)) {
-    return (0);
+    return 0;
   }
 
   //
@@ -2522,7 +2522,7 @@ PyObject *non_pcg_randint(PyObject *obj, PyObject *args, PyObject *keywds)
   static char *kwlist[] = {(char *) "x", (char *) "y", 0};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "ii", kwlist, &x, &y)) {
-    return (0);
+    return 0;
   }
 
   //
@@ -2541,7 +2541,7 @@ PyObject *pct_to_abs_(PyObject *obj, PyObject *args, PyObject *keywds)
   static char *kwlist[] = {(char *) "x", (char *) "y", 0};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "dd", kwlist, &x, &y)) {
-    return (0);
+    return 0;
   }
 
   x *= (double) TERM_WIDTH;

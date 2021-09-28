@@ -7,9 +7,9 @@
 //
 // Implements layered cycles that can be used to then create a dungeon
 //
-#include <vector>
-#include "my_point.h"
 #include "my_fwd.h"
+#include "my_point.h"
+#include <vector>
 
 class DungeonNode
 {

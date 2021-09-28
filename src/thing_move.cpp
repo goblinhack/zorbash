@@ -86,6 +86,18 @@ void Thing::move_finish(void)
   update_interpolated_position();
 
   on_move();
+
+  if (monstp) {
+    std::string s = "";
+    for (auto p1 : monstp->move_path) {
+      s += p1.to_string() + " ";
+    }
+    log("End of move, moves left: %s", s.c_str());
+
+    if (! monstp->move_path.size() && (monstp->monst_state == MONST_STATE_MOVING)) {
+      ai_change_state(MONST_STATE_IDLE, "move finished");
+    }
+  }
 }
 
 bool Thing::move(fpoint future_pos)
@@ -808,7 +820,7 @@ void Thing::clear_move_path(const std::string &why)
     }
 
     if (game->robot_mode) {
-      robot_change_state(ROBOT_STATE_IDLE, why);
+      ai_change_state(MONST_STATE_IDLE, why);
     }
   }
 

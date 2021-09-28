@@ -757,12 +757,12 @@ Tilep tile_find(std::string name)
 {
   TRACE_AND_INDENT();
   if (name == "") {
-    return (0);
+    return 0;
   }
 
   auto result = all_tiles.find(name);
   if (result == all_tiles.end()) {
-    return (0);
+    return 0;
   }
 
   return (result->second);
@@ -773,13 +773,13 @@ Tilep tile_find_mand(std::string name)
   TRACE_AND_INDENT();
   if (name == "") {
     ERR("No tile name give");
-    return (0);
+    return 0;
   }
 
   auto result = all_tiles.find(name);
   if (result == all_tiles.end()) {
     ERR("Tile name %s not found", name.c_str());
-    return (0);
+    return 0;
   }
 
   return (result->second);
@@ -820,7 +820,7 @@ Tilep string2tile(const char **s)
   }
 
   if (c == eo_name) {
-    return (0);
+    return 0;
   }
 
   *t++ = '\0';
@@ -829,7 +829,7 @@ Tilep string2tile(const char **s)
   auto result = all_tiles.find(name);
   if (result == all_tiles.end()) {
     ERR("Unknown tile [%s]", name);
-    return (0);
+    return 0;
   }
 
   return (result->second);
@@ -976,11 +976,11 @@ uint8_t tile_is_resurrecting(Tilep t) { return (t->is_resurrecting); }
 Tilep tile_first(Tilemap *tmap)
 {
   if (unlikely(! tmap)) {
-    return (0);
+    return 0;
   }
   std::vector< Tilep > *tiles = &((*tmap));
   if (unlikely(tiles->empty())) {
-    return (0);
+    return 0;
   }
   Tilep tile = (*tiles)[ 0 ];
   return tile_index_to_tile(tile->global_index);
@@ -989,11 +989,11 @@ Tilep tile_first(Tilemap *tmap)
 Tilep tile_random(Tilemap *tmap)
 {
   if (unlikely(! tmap)) {
-    return (0);
+    return 0;
   }
   std::vector< Tilep > *tiles = &((*tmap));
   if (unlikely(tiles->empty())) {
-    return (0);
+    return 0;
   }
   auto tile = ((*tiles)[ non_pcg_rand() % tiles->size() ]);
   return tile_index_to_tile(tile->global_index);
@@ -1002,11 +1002,11 @@ Tilep tile_random(Tilemap *tmap)
 Tilep tile_n(Tilemap *tmap, int n)
 {
   if (unlikely(! tmap)) {
-    return (0);
+    return 0;
   }
   std::vector< Tilep > *tiles = &((*tmap));
   if (unlikely(tiles->empty())) {
-    return (0);
+    return 0;
   }
   auto tile = ((*tiles)[ n % tiles->size() ]);
   return tile_index_to_tile(tile->global_index);
@@ -1015,11 +1015,11 @@ Tilep tile_n(Tilemap *tmap, int n)
 Tilep tile_next(Tilemap *tmap, Tilep in)
 {
   if (unlikely(! tmap)) {
-    return (0);
+    return 0;
   }
   std::vector< Tilep > *tiles = &((*tmap));
   if (unlikely(tiles->empty())) {
-    return (0);
+    return 0;
   }
   auto cursor = in->index;
   cursor++;

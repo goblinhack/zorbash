@@ -488,14 +488,14 @@ bool Dungeon::is_anything_at(const int x, const int y, const int z)
 int Dungeon::get_grid_depth_at(const int x, const int y)
 {
   if (! nodes) {
-    return (0);
+    return 0;
   }
 
   auto r = getr(x, y);
   if (r) {
     return (r->depth);
   }
-  return (0);
+  return 0;
 }
 
 bool Dungeon::is_floor(const int x, const int y)
@@ -2212,7 +2212,7 @@ int Dungeon::draw_corridor(point start, point end, char w)
       putc(c.x, c.y, MAP_DEPTH_FLOOR, Charmap::DEBUG);
     }
     DBG("cannot create corridor, too long a corridor");
-    return (0);
+    return 0;
   }
 
   //
@@ -2238,7 +2238,7 @@ int Dungeon::draw_corridor(point start, point end, char w)
       start.x, start.y, end.x, end.y);
     dump();
 #endif
-    return (0);
+    return 0;
   }
 
   for (auto c : p) {
@@ -2313,7 +2313,7 @@ int Dungeon::draw_corridors(void)
 
         auto len = draw_corridor(start, end, Charmap::CORRIDOR);
         if (! len) {
-          return (0);
+          return 0;
         }
         total_len += len;
       }
@@ -2335,7 +2335,7 @@ int Dungeon::draw_corridors(void)
 
         auto len = draw_corridor(start, end, Charmap::CORRIDOR);
         if (! len) {
-          return (0);
+          return 0;
         }
         total_len += len;
       }
@@ -2357,7 +2357,7 @@ int Dungeon::draw_corridors(void)
 
         auto len = draw_corridor(start, end, Charmap::SECRET_CORRIDOR);
         if (! len) {
-          return (0);
+          return 0;
         }
         total_len += len;
       }
@@ -2379,7 +2379,7 @@ int Dungeon::draw_corridors(void)
 
         auto len = draw_corridor(start, end, Charmap::SECRET_CORRIDOR);
         if (! len) {
-          return (0);
+          return 0;
         }
         total_len += len;
       }

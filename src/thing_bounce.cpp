@@ -38,7 +38,7 @@ float Thing::get_bounce(void)
              (float) (get_ts_bounce_end() - get_ts_bounce_begin()) * get_bounce_fade(), get_bounce_count() - 1);
     }
 
-    return (0);
+    return 0;
   }
 
   float time_step = (float) (t - get_ts_bounce_begin()) / (float) (get_ts_bounce_end() - get_ts_bounce_begin());

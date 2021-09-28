@@ -10,12 +10,12 @@
 #include <list>
 #include <map>
 
-#include "my_fwd.h"
 #include "my_ascii.h"
-#include "my_wid_tiles.h"
+#include "my_fwd.h"
 #include "my_size.h"
 #include "my_thing_id.h"
 #include "my_time.h"
+#include "my_wid_tiles.h"
 
 void WID_LOG(Widp, const char *fmt, ...) __attribute__((format(printf, 2, 3)));
 void WID_DBG(Widp, const char *fmt, ...) __attribute__((format(printf, 2, 3)));

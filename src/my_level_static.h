@@ -4,10 +4,10 @@
 //
 
 #pragma once
-#include <memory> // do not remove
-#include <vector> // do not remove
 #include "my_fwd.h"
 #include "my_thing_defs.h"
+#include <memory> // do not remove
+#include <vector> // do not remove
 
 typedef std::vector< LevelStaticp > LevelsStatic;
 

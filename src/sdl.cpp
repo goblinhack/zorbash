@@ -391,7 +391,7 @@ static int sdl_filter_events(void *userdata, SDL_Event *event)
   TRACE_AND_INDENT();
   switch (event->type) {
     // This is important!  Queue it if we want to quit. */
-    case SDL_QUIT : return (1);
+    case SDL_QUIT : return 1;
 
     // Mouse and keyboard events go to threads */
     case SDL_MOUSEMOTION :
@@ -409,10 +409,10 @@ static int sdl_filter_events(void *userdata, SDL_Event *event)
     case SDL_JOYHATMOTION :  // Joystick hat position change
     case SDL_JOYBUTTONDOWN : // Joystick button pressed
     case SDL_JOYBUTTONUP :   // Joystick button released
-      return (1);
+      return 1;
 
     // Drop all other events
-    default : return (0);
+    default : return 0;
   }
 }
 
@@ -709,7 +709,7 @@ static int sdl_get_mouse(void)
 {
   TRACE_AND_INDENT();
   if (! wid_mouse_visible) {
-    return (0);
+    return 0;
   }
 
   int x, y;

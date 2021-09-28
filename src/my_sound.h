@@ -9,11 +9,11 @@
 #ifndef _MY_SOUND_H_
 #define _MY_SOUND_H_
 
-#include <SDL_mixer.h>
-#include <string>
-#include "my_sys.h"
 #include "my_main.h"
 #include "my_ptrcheck.h"
+#include "my_sys.h"
+#include <SDL_mixer.h>
+#include <string>
 
 class sound;
 using soundp = class sound *;

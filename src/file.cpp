@@ -169,7 +169,7 @@ unsigned char *file_load(const char *filename, int *outlen)
     alt_filename = 0;
   }
 
-  return (0);
+  return 0;
 }
 
 unsigned char *file_io_read(const char *filename, int *out_len)
@@ -182,7 +182,7 @@ unsigned char *file_io_read(const char *filename, int *out_len)
   file = fopen(filename, "rb");
   if (! file) {
     fprintf(MY_STDERR, "Failed to open file \"%s\" for reading: %s\n", filename, strerror(errno));
-    return (0);
+    return 0;
   }
 
   /*
@@ -191,33 +191,33 @@ unsigned char *file_io_read(const char *filename, int *out_len)
   if (fseek(file, 0, SEEK_END)) {
     fprintf(MY_STDERR, "Failed to seek end of file \"%s\": %s\n", filename, strerror(errno));
     fclose(file);
-    return (0);
+    return 0;
   }
 
   len = (uint) ftell(file);
   if (len == -1) {
     fprintf(MY_STDERR, "Failed to get size of file \"%s\": %s\n", filename, strerror(errno));
     fclose(file);
-    return (0);
+    return 0;
   }
 
   if (fseek(file, 0, SEEK_SET)) {
     fprintf(MY_STDERR, "Failed to seek begin of file \"%s\": %s\n", filename, strerror(errno));
     fclose(file);
-    return (0);
+    return 0;
   }
 
   buffer = (unsigned char *) mymalloc(len + sizeof((char) '\0'), "file read");
   if (! buffer) {
     fprintf(MY_STDERR, "Failed to alloc mem for file \"%s\": %s\n", filename, strerror(errno));
     fclose(file);
-    return (0);
+    return 0;
   }
 
   if (! fread(buffer, len, 1, file)) {
     fprintf(MY_STDERR, "Failed to read file \"%s\": %s\n", filename, strerror(errno));
     fclose(file);
-    return (0);
+    return 0;
   }
 
   if (out_len) {
@@ -263,7 +263,7 @@ int file_write(const char *filename, unsigned char *buffer, int len)
   }
 
   fclose(file);
-  return (0);
+  return 0;
 }
 
 /*
@@ -276,12 +276,12 @@ uint8_t file_exists(const char *filename)
 
   if (stat(filename, &buf) >= 0) {
     if (S_ISDIR(buf.st_mode)) {
-      return (0);
+      return 0;
     }
 
-    return (1);
+    return 1;
   }
-  return (0);
+  return 0;
 }
 
 unsigned char *file_io_read_if_exists(const char *filename, int *out_len)
@@ -292,7 +292,7 @@ unsigned char *file_io_read_if_exists(const char *filename, int *out_len)
   char *mz_filename;
 
   if (!filename) {
-    return (0);
+    return 0;
   }
 
   if (strstr(filename, ".mz")) {
@@ -302,7 +302,7 @@ unsigned char *file_io_read_if_exists(const char *filename, int *out_len)
 
   mz_filename = strappend(filename, ".mz");
   if (!mz_filename) {
-    return (0);
+    return 0;
   }
 
   if (file_exists(mz_filename)) {
@@ -318,7 +318,7 @@ unsigned char *file_io_read_if_exists(const char *filename, int *out_len)
     return (file_io_read(filename, out_len));
   }
 
-  return (0);
+  return 0;
 }
 
 /*
@@ -343,14 +343,14 @@ uint8_t file_non_zero_size_exists(const char *filename)
 {
   TRACE_AND_INDENT();
   if (! file_exists(filename)) {
-    return (0);
+    return 0;
   }
 
   if (! file_size(filename)) {
-    return (0);
+    return 0;
   }
 
-  return (1);
+  return 1;
 }
 
 /*
@@ -360,12 +360,12 @@ uint8_t file_unlink(const char *filename)
 {
   TRACE_AND_INDENT();
   if (! file_exists(filename)) {
-    return (0);
+    return 0;
   }
 
   unlink(filename);
 
-  return (1);
+  return 1;
 }
 
 /*

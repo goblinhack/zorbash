@@ -9,8 +9,8 @@
 
 #include <SDL.h>
 
-#include "my_main.h"
 #include "my_command.h"
+#include "my_main.h"
 #include "my_time.h"
 
 extern uint8_t sdl_init_video;

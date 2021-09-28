@@ -1582,7 +1582,7 @@ AgeMap *Thing::get_age_map(void)
     verify(monstp);
     return (monstp->_age_map);
   } else {
-    return (0);
+    return 0;
   }
 }
 
@@ -1640,7 +1640,7 @@ AgeMap *Thing::get_seen_map(void)
     verify(monstp);
     return (monstp->_seen_map);
   } else {
-    return (0);
+    return 0;
   }
 }
 
@@ -1698,7 +1698,7 @@ Dmap *Thing::get_dmap_can_see(void)
     verify(monstp);
     return (monstp->_dmap_can_see);
   } else {
-    return (0);
+    return 0;
   }
 }
 
@@ -1753,7 +1753,7 @@ Dmap *Thing::get_dmap_unused(void)
     verify(monstp);
     return (monstp->_dmap_unused);
   } else {
-    return (0);
+    return 0;
   }
 }
 
@@ -1873,7 +1873,7 @@ float Thing::get_bounce_height(void) const
     verify(monstp);
     return (monstp->bounce_height);
   } else {
-    return (0);
+    return 0;
   }
 }
 
@@ -1894,7 +1894,7 @@ float Thing::get_fall_height(void) const
     verify(monstp);
     return (monstp->fall_height);
   } else {
-    return (0);
+    return 0;
   }
 }
 
@@ -1915,7 +1915,7 @@ float Thing::get_bounce_fade(void) const
     verify(monstp);
     return (monstp->bounce_fade);
   } else {
-    return (0);
+    return 0;
   }
 }
 
@@ -1936,7 +1936,7 @@ int Thing::get_bounce_count(void) const
     verify(monstp);
     return (monstp->bounce_count);
   } else {
-    return (0);
+    return 0;
   }
 }
 
@@ -1957,7 +1957,7 @@ float Thing::get_fadeup_height(void) const
     verify(monstp);
     return (monstp->fadeup_height);
   } else {
-    return (0);
+    return 0;
   }
 }
 
@@ -1978,7 +1978,7 @@ float Thing::get_fadeup_fade(void) const
     verify(monstp);
     return (monstp->fadeup_fade);
   } else {
-    return (0);
+    return 0;
   }
 }
 
@@ -1999,7 +1999,7 @@ float Thing::get_wobble(void) const
     verify(monstp);
     return (monstp->wobble);
   } else {
-    return (0);
+    return 0;
   }
 }
 
@@ -2071,7 +2071,7 @@ int Thing::get_submerged_offset(void) const
 
     return (monstp->submerged_offset);
   } else {
-    return (0);
+    return 0;
   }
 }
 
@@ -2092,7 +2092,7 @@ int Thing::get_gold(void) const
     verify(monstp);
     return (monstp->gold);
   } else {
-    return (0);
+    return 0;
   }
 }
 
@@ -2167,7 +2167,7 @@ int Thing::get_score(void) const
     verify(monstp);
     return (monstp->score);
   } else {
-    return (0);
+    return 0;
   }
 }
 
@@ -2201,7 +2201,7 @@ int Thing::get_keys(void) const
     verify(monstp);
     return (monstp->keys);
   } else {
-    return (0);
+    return 0;
   }
 }
 
@@ -2350,7 +2350,7 @@ int Thing::get_health_max(void) const
     verify(monstp);
     return (monstp->health_max);
   } else {
-    return (0);
+    return 0;
   }
 }
 
@@ -2506,7 +2506,7 @@ int Thing::get_stats19(void) const
     verify(monstp);
     return (monstp->stats19);
   } else {
-    return (0);
+    return 0;
   }
 }
 
@@ -2575,7 +2575,7 @@ int Thing::get_stamina_max(void) const
     verify(monstp);
     return (monstp->stamina_max);
   } else {
-    return (0);
+    return 0;
   }
 }
 
@@ -2644,7 +2644,7 @@ int Thing::get_enchant_max(void) const
     verify(monstp);
     return (monstp->enchant_max);
   } else {
-    return (0);
+    return 0;
   }
 }
 
@@ -2713,7 +2713,7 @@ uint32_t Thing::get_tick_resurrect_when(void) const
     verify(monstp);
     return (monstp->tick_resurrect_when);
   } else {
-    return (0);
+    return 0;
   }
 }
 
@@ -2767,7 +2767,7 @@ int Thing::get_stats01(void) const
     verify(monstp);
     return (monstp->stats01);
   } else {
-    return (0);
+    return 0;
   }
 }
 
@@ -2836,7 +2836,7 @@ int Thing::get_stats02(void) const
     verify(monstp);
     return (monstp->stats02);
   } else {
-    return (0);
+    return 0;
   }
 }
 
@@ -2905,7 +2905,7 @@ int Thing::get_stats03(void) const
     verify(monstp);
     return (monstp->stats03);
   } else {
-    return (0);
+    return 0;
   }
 }
 
@@ -2974,7 +2974,7 @@ int Thing::get_stats04(void) const
     verify(monstp);
     return (monstp->stats04);
   } else {
-    return (0);
+    return 0;
   }
 }
 
@@ -3043,7 +3043,7 @@ int Thing::get_stats05(void) const
     verify(monstp);
     return (monstp->stats05);
   } else {
-    return (0);
+    return 0;
   }
 }
 
@@ -3112,7 +3112,7 @@ int Thing::get_stats06(void) const
     verify(monstp);
     return (monstp->stats06);
   } else {
-    return (0);
+    return 0;
   }
 }
 
@@ -3181,7 +3181,7 @@ int Thing::get_stats07(void) const
     verify(monstp);
     return (monstp->stats07);
   } else {
-    return (0);
+    return 0;
   }
 }
 
@@ -3250,7 +3250,7 @@ int Thing::get_stats08(void) const
     verify(monstp);
     return (monstp->stats08);
   } else {
-    return (0);
+    return 0;
   }
 }
 
@@ -3319,7 +3319,7 @@ int Thing::get_stats09(void) const
     verify(monstp);
     return (monstp->stats09);
   } else {
-    return (0);
+    return 0;
   }
 }
 
@@ -3388,7 +3388,7 @@ int Thing::get_stats10(void) const
     verify(monstp);
     return (monstp->stats10);
   } else {
-    return (0);
+    return 0;
   }
 }
 
@@ -3457,7 +3457,7 @@ int Thing::get_stats11(void) const
     verify(monstp);
     return (monstp->stats11);
   } else {
-    return (0);
+    return 0;
   }
 }
 
@@ -3526,7 +3526,7 @@ int Thing::get_stats12(void) const
     verify(monstp);
     return (monstp->stats12);
   } else {
-    return (0);
+    return 0;
   }
 }
 
@@ -3595,7 +3595,7 @@ int Thing::get_stat_constitution(void) const
     verify(monstp);
     return (monstp->stat_constitution);
   } else {
-    return (0);
+    return 0;
   }
 }
 
@@ -3664,7 +3664,7 @@ int Thing::get_stat_attack(void) const
     verify(monstp);
     return (monstp->stat_attack);
   } else {
-    return (0);
+    return 0;
   }
 }
 
@@ -3733,7 +3733,7 @@ int Thing::get_stats17(void) const
     verify(monstp);
     return (monstp->stats17);
   } else {
-    return (0);
+    return 0;
   }
 }
 
@@ -3802,7 +3802,7 @@ int Thing::get_throw_distance(void) const
     verify(monstp);
     return (monstp->throw_distance);
   } else {
-    return (0);
+    return 0;
   }
 }
 
@@ -4072,7 +4072,7 @@ int Thing::get_stat_strength(void) const
     verify(monstp);
     return (monstp->stat_strength);
   } else {
-    return (0);
+    return 0;
   }
 }
 
@@ -4141,7 +4141,7 @@ int Thing::get_owned_count(void) const
     verify(monstp);
     return (monstp->owned_count);
   } else {
-    return (0);
+    return 0;
   }
 }
 
@@ -4190,7 +4190,7 @@ int Thing::get_minion_count(void) const
     verify(monstp);
     return (monstp->minion_count);
   } else {
-    return (0);
+    return 0;
   }
 }
 
@@ -4239,7 +4239,7 @@ int Thing::get_spawned_count(void) const
     verify(monstp);
     return (monstp->spawned_count);
   } else {
-    return (0);
+    return 0;
   }
 }
 
@@ -4288,7 +4288,7 @@ int Thing::get_charge_count(void) const
     verify(monstp);
     return (monstp->charge_count);
   } else {
-    return (0);
+    return 0;
   }
 }
 
@@ -4337,7 +4337,7 @@ int Thing::get_lifespan(void) const
     verify(monstp);
     return (monstp->lifespan);
   } else {
-    return (0);
+    return 0;
   }
 }
 
@@ -4474,7 +4474,7 @@ uint32_t Thing::get_tick_last_did_something(void) const
     verify(monstp);
     return (monstp->tick_last_did_something);
   } else {
-    return (0);
+    return 0;
   }
 }
 
@@ -4523,7 +4523,7 @@ uint32_t Thing::get_tick_last_dropped(void) const
     verify(monstp);
     return (monstp->tick_last_dropped);
   } else {
-    return (0);
+    return 0;
   }
 }
 
@@ -4572,7 +4572,7 @@ uint32_t Thing::get_tick_last_location_check(void) const
     verify(monstp);
     return (monstp->tick_last_location_check);
   } else {
-    return (0);
+    return 0;
   }
 }
 
@@ -4621,7 +4621,7 @@ uint32_t Thing::get_tick_last_escape(void) const
     verify(monstp);
     return (monstp->tick_last_escape);
   } else {
-    return (0);
+    return 0;
   }
 }
 
@@ -4670,7 +4670,7 @@ uint32_t Thing::get_tick_last_level_change(void) const
     verify(monstp);
     return (monstp->tick_last_level_change);
   } else {
-    return (0);
+    return 0;
   }
 }
 
@@ -4761,7 +4761,7 @@ ts_t Thing::get_ts_lunge_begin(void) const
     verify(monstp);
     return (monstp->ts_lunge_begin);
   } else {
-    return (0);
+    return 0;
   }
 }
 
@@ -4810,7 +4810,7 @@ ts_t Thing::get_ts_lunge_end(void) const
     verify(monstp);
     return (monstp->ts_lunge_end);
   } else {
-    return (0);
+    return 0;
   }
 }
 
@@ -4859,7 +4859,7 @@ ts_t Thing::get_ts_bounce_begin(void) const
     verify(monstp);
     return (monstp->ts_bounce_begin);
   } else {
-    return (0);
+    return 0;
   }
 }
 
@@ -4908,7 +4908,7 @@ ts_t Thing::get_ts_bounce_end(void) const
     verify(monstp);
     return (monstp->ts_bounce_end);
   } else {
-    return (0);
+    return 0;
   }
 }
 
@@ -4957,7 +4957,7 @@ ts_t Thing::get_ts_fadeup_begin(void) const
     verify(monstp);
     return (monstp->ts_fadeup_begin);
   } else {
-    return (0);
+    return 0;
   }
 }
 
@@ -5006,7 +5006,7 @@ ts_t Thing::get_ts_fadeup_end(void) const
     verify(monstp);
     return (monstp->ts_fadeup_end);
   } else {
-    return (0);
+    return 0;
   }
 }
 
@@ -5055,7 +5055,7 @@ ts_t Thing::get_ts_flip_start(void) const
     verify(monstp);
     return (monstp->ts_flip_start);
   } else {
-    return (0);
+    return 0;
   }
 }
 
@@ -5104,7 +5104,7 @@ ts_t Thing::get_ts_anim_delay_end(void) const
     verify(monstp);
     return (monstp->ts_anim_delay_end);
   } else {
-    return (0);
+    return 0;
   }
 }
 
@@ -5153,7 +5153,7 @@ ts_t Thing::get_ts_fall_begin(void) const
     verify(monstp);
     return (monstp->ts_fall_begin);
   } else {
-    return (0);
+    return 0;
   }
 }
 
@@ -5202,7 +5202,7 @@ ts_t Thing::get_ts_fall_end(void) const
     verify(monstp);
     return (monstp->ts_fall_end);
   } else {
-    return (0);
+    return 0;
   }
 }
 
@@ -5250,7 +5250,7 @@ ThingId Thing::get_weapon_id_carry_anim(void) const
   if (monstp) {
     return (monstp->weapon_id_carry_anim);
   } else {
-    return (0);
+    return 0;
   }
 }
 
@@ -5270,7 +5270,7 @@ ThingId Thing::get_weapon_id_use_anim(void) const
   if (monstp) {
     return (monstp->weapon_id_use_anim);
   } else {
-    return (0);
+    return 0;
   }
 }
 
@@ -5292,7 +5292,7 @@ ThingId Thing::get_weapon_id(void) const
     return (monstp->weapon_id);
   } else {
     // con("get weapon id => none");
-    return (0);
+    return 0;
   }
 }
 
@@ -5313,7 +5313,7 @@ ThingId Thing::get_on_fire_anim_id(void) const
   if (monstp) {
     return (monstp->on_fire_id_anim);
   } else {
-    return (0);
+    return 0;
   }
 }
 

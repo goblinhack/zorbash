@@ -95,7 +95,7 @@ uint32_t pcg32_random()
 uint32_t pcg32_boundedrand_r(pcg32_random_t* rng, uint32_t bound)
 {
   if (!bound) {
-    return (0);
+    return 0;
   }
 
   // To avoid bias, we need to make the range of the RNG a multiple of

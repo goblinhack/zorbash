@@ -7,11 +7,11 @@
 #ifndef _MY_MONST_H_
 #define _MY_MONST_H_
 
-#include <list>
-#include "my_time.h"
 #include "my_light.h"
 #include "my_thing_ai.h"
 #include "my_thing_id.h"
+#include "my_time.h"
+#include <list>
 
 constexpr uint32_t THING_MAGIC_BEGIN = 11221122;
 constexpr uint32_t THING_MAGIC_END   = 22112211;
@@ -27,12 +27,12 @@ enum {
 };
 
 enum {
-  ROBOT_STATE_IDLE,
-  ROBOT_STATE_MOVING,
-  ROBOT_STATE_RESTING,
-  ROBOT_STATE_OPEN_INVENTORY,
-  ROBOT_STATE_USING_ENCHANTSTONE,
-  ROBOT_STATE_USING_SKILLSTONE,
+  MONST_STATE_IDLE,
+  MONST_STATE_MOVING,
+  MONST_STATE_RESTING,
+  MONST_STATE_OPEN_INVENTORY,
+  MONST_STATE_USING_ENCHANTSTONE,
+  MONST_STATE_USING_SKILLSTONE,
 };
 
 typedef struct Monst_ {
@@ -81,7 +81,7 @@ public:
   int                      minion_count = {}; // How many things this thing spawned.
   int                      owned_count  = {}; // How many things this thing owns.
   int                      poison       = {};
-  int                      robot_state {};
+  int                      monst_state {};
   int                      score               = {};
   int                      spawned_count       = {}; // How many things this thing owns.
   int                      stamina             = {};

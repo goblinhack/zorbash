@@ -75,7 +75,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Monstp & > const my)
   /* int          minion_count              */ out << bits(my.t->minion_count);
   /* int          owned_count               */ out << bits(my.t->owned_count);
   /* int          poison                    */ out << bits(my.t->poison);
-  /* int          robot_state               */ out << bits(my.t->robot_state);
+  /* int          monst_state               */ out << bits(my.t->monst_state);
   /* int          stamina                   */ out << bits(my.t->stamina);
   /* int          stamina                   */ out << bits(my.t->stamina_max);
   /* int          stat_attack               */ out << bits(my.t->stat_attack);

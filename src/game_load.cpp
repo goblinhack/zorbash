@@ -51,7 +51,7 @@ static ts_t load(ts_t T)
 {
   TRACE_AND_INDENT();
   if (! T) {
-    return (0);
+    return 0;
   }
   return (T - old_ts_dungeon_created + new_ts_dungeon_created);
 }
@@ -98,7 +98,7 @@ std::istream &operator>>(std::istream &in, Bits< Monstp & > my)
   /* int          minion_count              */ in >> bits(my.t->minion_count);
   /* int          owned_count               */ in >> bits(my.t->owned_count);
   /* int          poison                    */ in >> bits(my.t->poison);
-  /* int          robot_state               */ in >> bits(my.t->robot_state);
+  /* int          monst_state               */ in >> bits(my.t->monst_state);
   /* int          stamina                   */ in >> bits(my.t->stamina);
   /* int          stamina                   */ in >> bits(my.t->stamina_max);
   /* int          stat_attack               */ in >> bits(my.t->stat_attack);

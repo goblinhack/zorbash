@@ -8,8 +8,8 @@
 #define _MY_GLOBALS_H_
 
 #include <map>
-#include <vector> // linux
 #include <string>
+#include <vector> // linux
 
 extern std::map< std::string, class Tile * > all_tiles;
 extern std::vector< class Tile * >           all_tiles_array;
@@ -138,7 +138,7 @@ extern int TILES_DOWN;
   if (DEBUG5)                                                                                                          \
   LOG
 
-#define AI_LOG                                                                                                           \
+#define AI_LOG                                                                                                         \
   TRACE_NO_INDENT();                                                                                                   \
   if (DEBUG3)                                                                                                          \
   ai_log

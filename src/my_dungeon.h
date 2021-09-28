@@ -5,14 +5,14 @@
 
 #pragma once
 
-#include <vector>
 #include <array>
+#include <vector>
 
-#include "my_dungeon_grid.h"
-#include "my_thing_defs.h"
-#include "my_fwd.h"
 #include "my_depth.h"
+#include "my_dungeon_grid.h"
+#include "my_fwd.h"
 #include "my_point.h"
+#include "my_thing_defs.h"
 
 #define STRINGIFY(x) #x
 #define TOSTRING(x)  STRINGIFY(x)

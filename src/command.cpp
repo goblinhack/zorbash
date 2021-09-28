@@ -197,7 +197,7 @@ static int command_matches(const char *input, char *output, uint8_t show_ambiguo
   }
 
   if (longest_match == -1) {
-    return (0);
+    return 0;
   }
 
   /*

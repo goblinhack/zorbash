@@ -789,7 +789,7 @@ int Nodes::snake_walk(int depth, int max_placed, int pass)
       }
 
       if (tries < 0) {
-        return (0);
+        return 0;
       }
     } else {
       //
@@ -831,7 +831,7 @@ int Nodes::snake_walk(int depth, int max_placed, int pass)
       }
 
       if (tries < 0) {
-        return (0);
+        return 0;
       }
     }
   } else {
@@ -876,7 +876,7 @@ int Nodes::snake_walk(int depth, int max_placed, int pass)
       }
 
       if (tries < 0) {
-        return (0);
+        return 0;
       }
     } else {
       //
@@ -918,7 +918,7 @@ int Nodes::snake_walk(int depth, int max_placed, int pass)
       }
 
       if (tries < 0) {
-        return (0);
+        return 0;
       }
     }
   }

@@ -256,9 +256,16 @@ bool Thing::path_pop_next_move(void)
       return true;
     }
   } else {
-    AI_LOG("", "Try to move only");
+    AI_LOG("", "Try to move, no shove, no attack");
     if (move_no_shove_no_attack(future_pos)) {
       return true;
+    }
+
+    if (possible_to_attack_at(future_pos)) {
+      AI_LOG("", "Try to move, no shove, attack allowed");
+      if (move_no_shove_attack_allowed(future_pos)) {
+        return true;
+      }
     }
   }
 

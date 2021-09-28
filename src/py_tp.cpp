@@ -70,7 +70,7 @@ PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds)
                                                                                                                        \
     if (! PyArg_ParseTupleAndKeywords(args, keywds, "O|s", kwlist, &py_class, &value)) {                               \
       ERR("%s: Bad args", __FUNCTION__);                                                                               \
-      return (0);                                                                                                      \
+      return 0;                                                                                                        \
     }                                                                                                                  \
                                                                                                                        \
     if (! py_class) {                                                                                                  \
@@ -120,7 +120,7 @@ PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds)
                                                                                                                        \
     if (! PyArg_ParseTupleAndKeywords(args, keywds, "O|s", kwlist, &py_class, &value)) {                               \
       ERR("%s: Bad args", __FUNCTION__);                                                                               \
-      return (0);                                                                                                      \
+      return 0;                                                                                                        \
     }                                                                                                                  \
                                                                                                                        \
     if (! py_class) {                                                                                                  \

@@ -6,8 +6,8 @@
 #pragma once
 #include "my_main.h"
 #include "my_point.h"
-#include "my_size.h"
 #include "my_sdl.h"
+#include "my_size.h"
 
 void    wid_topcon_fini(void);
 uint8_t wid_topcon_init(void);

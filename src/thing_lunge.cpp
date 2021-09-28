@@ -21,13 +21,13 @@ void Thing::lunge(fpoint to)
 float Thing::get_lunge(void)
 {
   if (! get_ts_lunge_begin()) {
-    return (0);
+    return 0;
   }
 
   auto t = time_get_time_ms_cached();
 
   if (t >= get_ts_lunge_end()) {
-    return (0);
+    return 0;
   }
 
   float time_step = (float) (t - get_ts_lunge_begin()) / (float) (get_ts_lunge_end() - get_ts_lunge_begin());

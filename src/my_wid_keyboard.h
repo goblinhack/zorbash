@@ -5,8 +5,8 @@
 
 #pragma once
 
-#include "my_wid.h"
 #include "my_string.h"
+#include "my_wid.h"
 
 typedef void (*wid_keyboard_event_t)(Widp, const std::wstring &text);
 

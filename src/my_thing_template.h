@@ -7,12 +7,12 @@
 #ifndef _MY_THING_TEMPLATE_H
 #define _MY_THING_TEMPLATE_H
 
-#include <vector>
-#include <map>
 #include "my_dice.h"
-#include "my_tile.h"
-#include "my_size.h"
 #include "my_fwd.h"
+#include "my_size.h"
+#include "my_tile.h"
+#include <map>
+#include <vector>
 
 using Tpidmap   = std::vector< class Tp * >;
 using Tpnamemap = std::map< std::string, class Tp * >;

@@ -104,6 +104,10 @@ void Thing::fall(float fall_height, ts_t ms)
 
 float Thing::get_fall(void)
 {
+  if (! is_falling) {
+    return 0;
+  }
+
   auto t = time_get_time_ms_cached();
 
   if (t >= get_ts_fall_end()) {
@@ -111,7 +115,7 @@ float Thing::get_fall(void)
     dbg("End of falling timestamp");
     level_push();
     is_waiting_to_leave_level_has_completed_fall = true;
-    return (0);
+    return 0;
   }
 
   float time_step = (float) (t - get_ts_fall_begin()) / (float) (get_ts_fall_end() - get_ts_fall_begin());

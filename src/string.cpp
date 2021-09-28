@@ -62,7 +62,7 @@ static char *substr (const char *in, int32_t pos, int32_t len)
   char *out;
 
   if (!in) {
-    return (0);
+    return 0;
   }
 
   slen = (uint32_t)strlen(in);
@@ -92,7 +92,7 @@ static char *substr (const char *in, int32_t pos, int32_t len)
 
   out = (__typeof__(out)) mymalloc(len + sizeof((char)'\0'), "substr");
   if (!out) {
-    return (0);
+    return 0;
   }
 
   memcpy(out, &(in[pos]), len);
@@ -118,7 +118,7 @@ char *strsub_(const char *in, const char *look_for, const char *replace_with, st
   int32_t     len;
 
   if (! in || ! look_for || ! replace_with) {
-    return (0);
+    return 0;
   }
 
   // printf("in %s\n", in);
@@ -136,7 +136,7 @@ char *strsub_(const char *in, const char *look_for, const char *replace_with, st
   len = (uint32_t) strlen(in) - oldlen + newlen;
   buf = (__typeof__(buf)) myzalloc_(len + sizeof((char) '\0'), what, file, func, line);
   if (! buf) {
-    return (0);
+    return 0;
   }
 
   *buf = '\0';
@@ -166,14 +166,14 @@ char *strappend(const char *in, const char *append)
   int32_t len;
 
   if (! in || ! append) {
-    return (0);
+    return 0;
   }
 
   newlen = (uint32_t) strlen(append);
   len    = (uint32_t) strlen(in) + newlen;
   buf    = (__typeof__(buf)) myzalloc(len + sizeof((char) '\0'), "strappend");
   if (! buf) {
-    return (0);
+    return 0;
   }
 
   strcpy(buf, in);
@@ -195,14 +195,14 @@ char *strprepend(const char *in, const char *prepend)
   int32_t len;
 
   if (! in || ! prepend) {
-    return (0);
+    return 0;
   }
 
   newlen = (uint32_t) strlen(prepend);
   len    = (uint32_t) strlen(in) + newlen;
   buf    = (__typeof__(buf)) myzalloc(len + sizeof((char) '\0'), "strprepend");
   if (! buf) {
-    return (0);
+    return 0;
   }
 
   strcpy(buf, prepend);
@@ -281,15 +281,15 @@ int32_t strisregexp(const char *in)
 
   while ((c = *a++)) {
     switch (c) {
-      case '[' : return (1);
-      case ']' : return (1);
-      case '{' : return (1);
-      case '}' : return (1);
-      case '+' : return (1);
-      case '$' : return (1);
-      case '^' : return (1);
-      case '-' : return (1);
-      case '*' : return (1);
+      case '[' : return 1;
+      case ']' : return 1;
+      case '{' : return 1;
+      case '}' : return 1;
+      case '+' : return 1;
+      case '$' : return 1;
+      case '^' : return 1;
+      case '-' : return 1;
+      case '*' : return 1;
     }
   }
 
@@ -490,7 +490,7 @@ shared_vector_string split(const char *text, int max_line_len)
   const char *const text_start = text;
 
   if (! text) {
-    return (0);
+    return 0;
   }
 
   auto result = std::make_shared< std::vector< std::string > >();
@@ -641,7 +641,7 @@ shared_vector_string split(const std::string &text, int max_line_len)
   }
 
   if (! text.length()) {
-    return (0);
+    return 0;
   }
 
   // printf("SPLIT1 [%s] max_line_len %d\n", text.c_str(), max_line_len);
@@ -813,7 +813,7 @@ shared_vector_wstring split(const std::wstring &text, int max_line_len)
   auto    line_end   = text_start;
 
   if (! text.length()) {
-    return (0);
+    return 0;
   }
   // printf("SPLIT2 [%s] max_line_len %d\n", wstring_to_string(text).c_str(),
   // max_line_len);
@@ -1157,7 +1157,7 @@ Tpp string2tp(const char **s)
 
   if (c == eo_tmp) {
     ERR("Tp name %s is too long", tmp);
-    return (0);
+    return 0;
   }
 
   *t++ = '\0';
@@ -1194,7 +1194,7 @@ Tpp string2tp(const std::string &s, int *len)
 
   if (iter == s.end()) {
     ERR("Tp name %s is too long", out.c_str());
-    return (0);
+    return 0;
   }
 
   Tpp tp = tp_find(out);
@@ -1281,7 +1281,7 @@ int32_t snprintf_realloc(char **str, int32_t *size, int32_t *used, const char *f
       }
       strcat(*str, add);
 
-      return (0);
+      return 0;
     }
 
     (*size) *= 2;

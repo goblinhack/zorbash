@@ -7,19 +7,19 @@
 #ifndef _MY_LEVEL_H_
 #define _MY_LEVEL_H_
 
-#include <map>
 #include <deque>
 #include <functional>
+#include <map>
 
-#include "my_time.h"
-#include "my_thing_defs.h"
-#include "my_particle.h"
-#include "my_laser.h"
-#include "my_projectile.h"
+#include "my_dmap.h"
 #include "my_dungeon.h"
 #include "my_fwd.h"
-#include "my_dmap.h"
+#include "my_laser.h"
+#include "my_particle.h"
 #include "my_point3d.h"
+#include "my_projectile.h"
+#include "my_thing_defs.h"
+#include "my_time.h"
 
 class Level
 {

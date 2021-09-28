@@ -903,5 +903,5 @@ int32_t main(int32_t argc, char *argv[])
   }
 
   CON("FINI: Goodbye and take care until next time!");
-  return (0);
+  return 0;
 }

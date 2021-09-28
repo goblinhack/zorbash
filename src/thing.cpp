@@ -52,7 +52,7 @@ std::size_t Thing::get_light_count(void) const
     verify(monstp);
     return (monstp->light.size());
   } else {
-    return (0);
+    return 0;
   }
 }
 

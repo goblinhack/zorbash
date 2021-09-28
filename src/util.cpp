@@ -65,7 +65,7 @@ char *dupstr_(const char *in, std::string what, std::string file, std::string fu
   TRACE_AND_INDENT();
   if (! in) {
     ERR("No string to duplicate");
-    return (0);
+    return 0;
   }
 
   char *ptr = strdup(in);

@@ -348,7 +348,7 @@ void ascii_set_context(int x, int y, void *context)
 void *ascii_get_context(int x, int y)
 {
   if (! ascii_ok(x, y)) {
-    return (0);
+    return 0;
   }
 
   AsciiCell *cell = &getref_no_check(cells, x, y);
