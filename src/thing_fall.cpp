@@ -48,7 +48,7 @@ void Thing::fall(float fall_height, ts_t ms)
   dbg("Can fall?");
   TRACE_AND_INDENT();
   if (is_changing_level || is_hidden || is_falling || is_waiting_to_ascend_dungeon || is_waiting_to_descend_sewer ||
-      is_waiting_to_descend_dungeon || is_waiting_to_ascend_sewer || is_waiting_to_fall || is_jumping) {
+      is_waiting_to_descend_dungeon || is_waiting_to_ascend_sewer || is_waiting_to_leave_level_has_completed_fall || is_jumping) {
     dbg("No");
     return;
   }
@@ -109,11 +109,12 @@ float Thing::get_fall(void)
     is_falling = false;
     dbg("End of falling timestamp");
     level_push();
-    is_waiting_to_fall = true;
+    is_waiting_to_leave_level_has_completed_fall = true;
     return (0);
   }
 
   float time_step = (float) (t - get_ts_fall_begin()) / (float) (get_ts_fall_end() - get_ts_fall_begin());
+  dbg("Is currrently falling, dt %f", time_step);
 
   //
   // This hide things like the sword
@@ -124,8 +125,9 @@ float Thing::get_fall(void)
     if (is_player()) {
       dbg("Player is waiting to complete the fall");
       level->ts_fade_out_begin = time_get_time_ms_cached();
-      is_waiting_to_fall       = true;
     }
+
+    is_waiting_to_leave_level_has_completed_fall       = true;
   }
 
   float height = get_fall_height() * time_step;
@@ -142,6 +144,7 @@ bool Thing::fall_to_next_level(void)
 
   dbg("Try to fall to next level");
   TRACE_AND_INDENT();
+
   //
   // Fall from a dungeon to the next dungeon, 2 levels down
   //

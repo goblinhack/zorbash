@@ -23,25 +23,25 @@ std::string Thing::to_string(void) const
 
   if (unlikely(! level)) {
     return (string_sprintf("<not in level> %08" PRIx32 "(<no tp>%s%s%s%s%s%s%s%s @%g,%g)", id, is_dead ? "/dead" : "",
-                           is_resurrecting ? "/resurrecting" : "", is_offscreen ? "/offscreen" : "",
+                           is_resurrecting ? "/resurrecting" : "", is_offscreen ? "/offscr" : "",
                            is_on_fire() ? "/onfire" : "", is_hidden ? "/hidden" : "", is_jumping ? "/jumping" : "",
-                           is_moving ? "/moving" : "", is_falling ? "/falling" : "", mid_at.x, mid_at.y));
+                           is_moving ? "/mv" : "", is_falling ? "/fall" : "", mid_at.x, mid_at.y));
   }
 
   if (unlikely(! tpp)) {
     TRACE_AND_INDENT();
     return (string_sprintf("L%d,%d,%d %08" PRIx32 "(<no tp>%s%s%s%s%s%s%s%s @%g,%g)", level->world_at.x,
                            level->world_at.y, level->world_at.z, id, is_dead ? "/dead" : "",
-                           is_resurrecting ? "/resurrecting" : "", is_offscreen ? "/offscreen" : "",
+                           is_resurrecting ? "/resurrecting" : "", is_offscreen ? "/offscr" : "",
                            is_on_fire() ? "/onfire" : "", is_hidden ? "/hidden" : "", is_jumping ? "/jumping" : "",
-                           is_moving ? "/moving" : "", is_falling ? "/falling" : "", mid_at.x, mid_at.y));
+                           is_moving ? "/mv" : "", is_falling ? "/fall" : "", mid_at.x, mid_at.y));
   } else if (get_health_max() || is_tickable() || is_interesting()) {
     TRACE_AND_INDENT();
     return (string_sprintf(
         "L%d,%d,%d %08" PRIx32 "(%s%s%s%s%s%s%s%s%s%s%s%s%s%s @%g,%g %d/%dh)", level->world_at.x, level->world_at.y,
         level->world_at.z, id, tpp->name().c_str(), is_dead ? "/dead" : "", is_resurrecting ? "/resurrecting" : "",
-        is_offscreen ? "/offscreen" : "", is_on_fire() ? "/onfire" : "", is_hidden ? "/hidden" : "",
-        is_jumping ? "/jumping" : "", is_moving ? "/moving" : "", is_falling ? "/falling" : "",
+        is_offscreen ? "/offscr" : "", is_on_fire() ? "/onfire" : "", is_hidden ? "/hidden" : "",
+        is_jumping ? "/jumping" : "", is_moving ? "/mv" : "", is_falling ? "/fall" : "",
         is_changing_level ? "/chg-level" : "", is_waiting_to_ascend_dungeon ? "/ascend-dungeon" : "",
         is_waiting_to_descend_dungeon ? "/descend-dungeon" : "", is_waiting_to_ascend_sewer ? "/ascend-sewer" : "",
         is_waiting_to_descend_sewer ? "/descend-sewer" : "", mid_at.x, mid_at.y, get_health(), get_health_max()));
@@ -49,9 +49,9 @@ std::string Thing::to_string(void) const
     TRACE_AND_INDENT();
     return (string_sprintf("L%d,%d,%d %08" PRIx32 "(%s%s%s%s%s%s%s%s%s @%g,%g)", level->world_at.x, level->world_at.y,
                            level->world_at.z, id, tpp->name().c_str(), is_dead ? "/dead" : "",
-                           is_resurrecting ? "/resurrecting" : "", is_offscreen ? "/offscreen" : "",
+                           is_resurrecting ? "/resurrecting" : "", is_offscreen ? "/offscr" : "",
                            is_on_fire() ? "/onfire" : "", is_hidden ? "/hidden" : "", is_jumping ? "/jumping" : "",
-                           is_moving ? "/moving" : "", is_falling ? "/falling" : "", mid_at.x, mid_at.y));
+                           is_moving ? "/mv" : "", is_falling ? "/fall" : "", mid_at.x, mid_at.y));
   }
 }
 
@@ -63,17 +63,17 @@ std::string Thing::to_short_string(void) const
 
   if (unlikely(! level)) {
     return (string_sprintf("<not in level> (<no tp>%s%s%s%s%s%s%s%s @%g,%g)", is_dead ? "/dead" : "",
-                           is_resurrecting ? "/resurrecting" : "", is_offscreen ? "/offscreen" : "",
+                           is_resurrecting ? "/resurrecting" : "", is_offscreen ? "/offscr" : "",
                            is_on_fire() ? "/onfire" : "", is_hidden ? "/hidden" : "", is_jumping ? "/jumping" : "",
-                           is_moving ? "/moving" : "", is_falling ? "/falling" : "", mid_at.x, mid_at.y));
+                           is_moving ? "/mv" : "", is_falling ? "/fall" : "", mid_at.x, mid_at.y));
   }
 
   if (unlikely(! tpp)) {
     TRACE_AND_INDENT();
     return (string_sprintf("L%d,%d,%d (<no tp>%s%s%s%s%s%s%s%s @%g,%g)", level->world_at.x, level->world_at.y,
                            level->world_at.z, is_dead ? "/dead" : "", is_resurrecting ? "/resurrecting" : "",
-                           is_offscreen ? "/offscreen" : "", is_on_fire() ? "/onfire" : "", is_hidden ? "/hidden" : "",
-                           is_jumping ? "/jumping" : "", is_moving ? "/moving" : "", is_falling ? "/falling" : "",
+                           is_offscreen ? "/offscr" : "", is_on_fire() ? "/onfire" : "", is_hidden ? "/hidden" : "",
+                           is_jumping ? "/jumping" : "", is_moving ? "/mv" : "", is_falling ? "/fall" : "",
                            mid_at.x, mid_at.y));
   } else {
     auto o = get_top_owner();
@@ -81,8 +81,8 @@ std::string Thing::to_short_string(void) const
       return (string_sprintf(
           "L%d,%d,%d (%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s @%g,%g owner:%s)", level->world_at.x, level->world_at.y,
           level->world_at.z, tpp->name().c_str(), is_dead ? "/dead" : "", is_resurrecting ? "/resurrecting" : "",
-          is_offscreen ? "/offscreen" : "", is_on_fire() ? "/onfire" : "", is_hidden ? "/hidden" : "",
-          is_jumping ? "/jumping" : "", is_moving ? "/moving" : "", is_falling ? "/falling" : "",
+          is_offscreen ? "/offscr" : "", is_on_fire() ? "/onfire" : "", is_hidden ? "/hidden" : "",
+          is_jumping ? "/jumping" : "", is_moving ? "/mv" : "", is_falling ? "/fall" : "",
           is_changing_level ? "/chg-level" : "", is_waiting_to_ascend_dungeon ? "/asc-dung" : "",
           is_waiting_to_descend_dungeon ? "/des-dung" : "", is_waiting_to_descend_sewer ? "/des-sewer" : "",
           is_waiting_to_ascend_sewer ? "/asc-sewer" : "", mid_at.x, mid_at.y, o->to_string().c_str()));
@@ -90,8 +90,8 @@ std::string Thing::to_short_string(void) const
       return (string_sprintf(
           "L%d,%d,%d (%s%s%s%s%s%s%s%s%s%s%s%s%s%s @%g,%g)", level->world_at.x, level->world_at.y, level->world_at.z,
           tpp->name().c_str(), is_dead ? "/dead" : "", is_resurrecting ? "/resurrecting" : "",
-          is_offscreen ? "/offscreen" : "", is_on_fire() ? "/onfire" : "", is_hidden ? "/hidden" : "",
-          is_jumping ? "/jumping" : "", is_moving ? "/moving" : "", is_falling ? "/falling" : "",
+          is_offscreen ? "/offscr" : "", is_on_fire() ? "/onfire" : "", is_hidden ? "/hidden" : "",
+          is_jumping ? "/jumping" : "", is_moving ? "/mv" : "", is_falling ? "/fall" : "",
           is_changing_level ? "/chg-level" : "", is_waiting_to_ascend_dungeon ? "/asc-dung" : "",
           is_waiting_to_descend_dungeon ? "/des-dung" : "", is_waiting_to_descend_sewer ? "/des-sewer" : "",
           is_waiting_to_ascend_sewer ? "/asc-sewer" : "", mid_at.x, mid_at.y));
@@ -128,7 +128,7 @@ std::string Thing::to_dbg_string(void) const
       is_waiting_to_ascend_sewer ? ", is_waiting_to_ascend_sewer" : "",
       is_waiting_to_descend_dungeon ? ", is_waiting_to_descend_dungeon" : "",
       is_waiting_to_descend_sewer ? ", is_waiting_to_descend_sewer" : "",
-      is_waiting_to_fall ? ", is_waiting_to_fall" : "", i_set_gfx_water ? ", i_set_gfx_water" : "",
+      is_waiting_to_leave_level_has_completed_fall ? ", is_waiting_to_leave_level_has_completed_fall" : "", i_set_gfx_water ? ", i_set_gfx_water" : "",
       i_set_is_acid ? ", i_set_is_acid" : "", i_set_is_ascend_dungeon ? ", i_set_is_ascend_dungeon" : "",
       i_set_is_ascend_sewer ? ", i_set_is_ascend_sewer" : "", i_set_is_barrel ? ", i_set_is_barrel" : "",
       i_set_is_blood ? ", i_set_is_blood" : "", i_set_is_brazier ? ", i_set_is_brazier" : "",
@@ -189,7 +189,7 @@ std::string Thing::to_dbg_saved_string(void) const
       is_waiting_to_ascend_sewer ? ", is_waiting_to_ascend_sewer" : "",
       is_waiting_to_descend_dungeon ? ", is_waiting_to_descend_dungeon" : "",
       is_waiting_to_descend_sewer ? ", is_waiting_to_descend_sewer" : "",
-      is_waiting_to_fall ? ", is_waiting_to_fall" : "", i_set_gfx_water ? ", i_set_gfx_water" : "",
+      is_waiting_to_leave_level_has_completed_fall ? ", is_waiting_to_leave_level_has_completed_fall" : "", i_set_gfx_water ? ", i_set_gfx_water" : "",
       i_set_is_acid ? ", i_set_is_acid" : "", i_set_is_ascend_dungeon ? ", i_set_is_ascend_dungeon" : "",
       i_set_is_ascend_sewer ? ", i_set_is_ascend_sewer" : "", i_set_is_barrel ? ", i_set_is_barrel" : "",
       i_set_is_blood ? ", i_set_is_blood" : "", i_set_is_brazier ? ", i_set_is_brazier" : "",

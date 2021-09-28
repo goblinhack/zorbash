@@ -127,12 +127,12 @@ bool Level::tick(void)
       if (t->is_moving) {
         if (game->robot_mode) {
           if ((wait_count > wait_count_max) && ! game->things_are_moving) {
-            t->con("Waiting on animated moving thing longer than expected");
+            t->con("Waiting on animated moving thing longer than expected: %s", t->to_dbg_string().c_str());
           }
           game->things_are_moving = true;
         } else if (! t->is_offscreen) {
           if ((wait_count > wait_count_max) && ! game->things_are_moving) {
-            t->con("Waiting on animated moving thing longer than expected");
+            t->con("Waiting on animated moving thing longer than expected: %s", t->to_dbg_string().c_str());
           }
           game->things_are_moving = true;
         }
@@ -181,12 +181,12 @@ bool Level::tick(void)
     if (t->is_moving) {
       if (game->robot_mode) {
         if ((wait_count > wait_count_max) && ! game->things_are_moving) {
-          t->con("Waiting on moving thing longer than expected");
+          t->con("Waiting on moving thing longer than expected: %s", t->to_dbg_string().c_str());
         }
         game->things_are_moving = true;
       } else if (! t->is_offscreen) {
         if ((wait_count > wait_count_max) && ! game->things_are_moving) {
-          t->con("Waiting on moving thing longer than expected");
+          t->con("Waiting on moving thing longer than expected: %s", t->to_dbg_string().c_str());
         }
         game->things_are_moving = true;
       }
@@ -198,12 +198,12 @@ bool Level::tick(void)
     if (t->is_jumping) {
       if (game->robot_mode) {
         if ((wait_count > wait_count_max) && ! game->things_are_moving) {
-          t->con("Waiting on jumping thing longer than expected");
+          t->con("Waiting on jumping thing longer than expected: %s", t->to_dbg_string().c_str());
         }
         game->things_are_moving = true;
       } else if (! t->is_offscreen) {
         if ((wait_count > wait_count_max) && ! game->things_are_moving) {
-          t->con("Waiting on jumping thing longer than expected");
+          t->con("Waiting on jumping thing longer than expected: %s", t->to_dbg_string().c_str());
         }
         game->things_are_moving = true;
       }
@@ -215,12 +215,12 @@ bool Level::tick(void)
     if (t->is_falling) {
       if (game->robot_mode) {
         if ((wait_count > wait_count_max) && ! game->things_are_moving) {
-          t->con("Waiting on falling thing longer than expected");
+          t->con("Waiting on falling thing longer than expected: %s", t->to_dbg_string().c_str());
         }
         game->things_are_moving = true;
       } else if (! t->is_offscreen) {
         if ((wait_count > wait_count_max) && ! game->things_are_moving) {
-          t->con("Waiting on falling thing longer than expected");
+          t->con("Waiting on falling thing longer than expected: %s", t->to_dbg_string().c_str());
         }
         game->things_are_moving = true;
       }
@@ -232,12 +232,12 @@ bool Level::tick(void)
     if ((t->is_dead_on_end_of_anim() && ! t->is_dead)) {
       if (game->robot_mode) {
         if ((wait_count > wait_count_max) && ! game->things_are_moving) {
-          t->con("Waiting on dying thing longer than expected");
+          t->con("Waiting on dying thing longer than expected: %s", t->to_dbg_string().c_str());
         }
         game->things_are_moving = true;
       } else if (! t->is_offscreen) {
         if ((wait_count > wait_count_max) && ! game->things_are_moving) {
-          t->con("Waiting on dying thing longer than expected");
+          t->con("Waiting on dying thing longer than expected: %s", t->to_dbg_string().c_str());
         }
         game->things_are_moving = true;
       }
@@ -249,12 +249,12 @@ bool Level::tick(void)
     if (t->is_alive_on_end_of_anim() && t->is_resurrecting) {
       if (game->robot_mode) {
         if ((wait_count > wait_count_max) && ! game->things_are_moving) {
-          t->con("Waiting on resurrecting thing longer than expected");
+          t->con("Waiting on resurrecting thing longer than expected: %s", t->to_dbg_string().c_str());
         }
         game->things_are_moving = true;
       } else if (! t->is_offscreen) {
         if ((wait_count > wait_count_max) && ! game->things_are_moving) {
-          t->con("Waiting on resurrecting thing longer than expected");
+          t->con("Waiting on resurrecting thing longer than expected: %s", t->to_dbg_string().c_str());
         }
         game->things_are_moving = true;
       }
@@ -265,8 +265,8 @@ bool Level::tick(void)
       auto w = thing_find(weapon_id);
       if (w && ! w->is_dead) {
         if ((wait_count > wait_count_max) && ! game->things_are_moving) {
-          w->con("Waiting on weapon thing owner longer than expected");
-          t->con("Waiting on weapon thing longer than expected");
+          w->con("Waiting on weapon thing owner longer than expected: %s", w->to_dbg_string().c_str());
+          t->con("Waiting on weapon thing longer than expected: %s", t->to_dbg_string().c_str());
         }
         game->things_are_moving = true;
       }
@@ -275,7 +275,7 @@ bool Level::tick(void)
     if (t->get_ts_flip_start() && ! t->is_dead) {
       if (game->robot_mode) {
         if ((wait_count > wait_count_max) && ! game->things_are_moving) {
-          t->con("Waiting on flipping thing longer than expected");
+          t->con("Waiting on flipping thing longer than expected: %s", t->to_dbg_string().c_str());
         }
 
         game->things_are_moving = true;
@@ -289,17 +289,17 @@ bool Level::tick(void)
       }
     }
 
-    if (t->is_waiting_to_fall) {
+    if (t->is_waiting_to_leave_level_has_completed_fall) {
       t->fall_to_next_level();
       if ((wait_count > wait_count_max) && ! game->things_are_moving) {
-        t->con("Waiting on waiting to fall thing longer than expected");
+        t->con("Waiting on waiting to fall thing longer than expected: %s", t->to_dbg_string().c_str());
       }
       game->things_are_moving = true;
     }
 
     if (t->is_scheduled_for_death) {
       if ((wait_count > wait_count_max) && ! game->things_are_moving) {
-        t->con("Waiting on scheduled for death thing longer than expected");
+        t->con("Waiting on scheduled for death thing longer than expected: %s", t->to_dbg_string().c_str());
       }
       game->things_are_moving = true;
     }
@@ -320,7 +320,7 @@ bool Level::tick(void)
         player->err("Failed to descend dungeon");
       }
       if ((wait_count > wait_count_max) && ! game->things_are_moving) {
-        player->con("Waiting on descending player thing longer than expected");
+        player->con("Waiting on descending player thing longer than expected: %s", player->to_dbg_string().c_str());
       }
       game->things_are_moving = true;
     }
@@ -329,7 +329,7 @@ bool Level::tick(void)
         player->err("Failed to ascend dungeon");
       }
       if ((wait_count > wait_count_max) && ! game->things_are_moving) {
-        player->con("Waiting on ascending player thing longer than expected");
+        player->con("Waiting on ascending player thing longer than expected: %s", player->to_dbg_string().c_str());
       }
       game->things_are_moving = true;
     }
@@ -338,7 +338,7 @@ bool Level::tick(void)
         player->err("Failed to descend sewer");
       }
       if ((wait_count > wait_count_max) && ! game->things_are_moving) {
-        player->con("Waiting on descending sewer player thing longer than expected");
+        player->con("Waiting on descending sewer player thing longer than expected: %s", player->to_dbg_string().c_str());
       }
       game->things_are_moving = true;
     }
@@ -347,11 +347,11 @@ bool Level::tick(void)
         player->err("Failed to ascend sewer");
       }
       if ((wait_count > wait_count_max) && ! game->things_are_moving) {
-        player->con("Waiting on ascending sewer player thing longer than expected");
+        player->con("Waiting on ascending sewer player thing longer than expected: %s", player->to_dbg_string().c_str());
       }
       game->things_are_moving = true;
     }
-    if (player && player->is_waiting_to_fall) {
+    if (player && player->is_waiting_to_leave_level_has_completed_fall) {
       player->fall_to_next_level();
       game->things_are_moving = true;
     }

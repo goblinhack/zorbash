@@ -55,7 +55,7 @@ bool Thing::ascend_sewer(void)
   TRACE_AND_INDENT();
   dbg("Ascend sewer");
   if (is_changing_level || is_hidden || is_falling || is_waiting_to_descend_dungeon || is_waiting_to_descend_sewer ||
-      is_waiting_to_fall || is_jumping) {
+      is_waiting_to_leave_level_has_completed_fall || is_jumping) {
     dbg("Ascend sewer; no");
     return false;
   }

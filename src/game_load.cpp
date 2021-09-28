@@ -309,7 +309,7 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
   shift++;
   /* uint64_t */ my.t->is_waiting_to_descend_sewer = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU;
   shift++;
-  /* uint64_t */ my.t->is_waiting_to_fall = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU;
+  /* uint64_t */ my.t->is_waiting_to_leave_level_has_completed_fall = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU;
   shift++;
 
   in >> bits(bits64);

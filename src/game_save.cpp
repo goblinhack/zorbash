@@ -256,7 +256,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   shift++;
   /* uint64_t */ bits64 |= (my.t->is_waiting_to_descend_sewer ? 1LLU : 0LLU) << shift;
   shift++;
-  /* uint64_t */ bits64 |= (my.t->is_waiting_to_fall ? 1LLU : 0LLU) << shift;
+  /* uint64_t */ bits64 |= (my.t->is_waiting_to_leave_level_has_completed_fall ? 1LLU : 0LLU) << shift;
   shift++;
 
   if (shift >= (int) (sizeof(bits64) * 8)) {

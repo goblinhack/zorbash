@@ -111,7 +111,7 @@ public:
   uint64_t is_waiting_to_ascend_sewer    : 1 {};
   uint64_t is_waiting_to_descend_dungeon : 1 {};
   uint64_t is_waiting_to_descend_sewer   : 1 {};
-  uint64_t is_waiting_to_fall            : 1 {};
+  uint64_t is_waiting_to_leave_level_has_completed_fall            : 1 {};
 
   //
   // These are flags used to make sure we set or unset flags onto

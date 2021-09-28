@@ -99,7 +99,7 @@ void Thing::level_enter(void)
   is_waiting_to_descend_sewer   = false;
   is_waiting_to_descend_dungeon = false;
   is_waiting_to_ascend_sewer    = false;
-  is_waiting_to_fall            = false;
+  is_waiting_to_leave_level_has_completed_fall            = false;
 
   game->request_update_rightbar = true;
 
