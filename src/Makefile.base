@@ -75,6 +75,7 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/hiscore.o                     \
     $(OBJDIR)/laser.o                       \
     $(OBJDIR)/level_create_dungeon.o        \
+    $(OBJDIR)/level_shadow_casting.o        \
     $(OBJDIR)/level_create.o                \
     $(OBJDIR)/level_create_sewer.o          \
     $(OBJDIR)/level_cursor_describe.o       \

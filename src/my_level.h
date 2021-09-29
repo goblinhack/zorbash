@@ -907,6 +907,20 @@ public:
   std::deque< point >  flood_fill(point) const;
   std::deque< point >  flood_fill_points(point, std::function< int(Thingp) > filter);
   std::deque< Thingp > flood_fill_things(point, std::function< int(Thingp) > filter);
+
+  void scan(
+      struct FovMap_* fov,
+      int pov_x,
+      int pov_y,
+      int distance,  // Polar distance from POV.
+      float view_slope_high,
+      float view_slope_low,
+      int max_radius,
+      int octant,
+      bool light_walls);
+
+  bool fov_calculete(
+      struct FovMap_* fov, int pov_x, int pov_y, int max_radius, bool light_walls);
 };
 
 #endif
