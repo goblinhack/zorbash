@@ -120,8 +120,8 @@ void Thing::destroy(void)
 
   game->world.free_thing_id(this);
 
-  if (monstp) {
-    oldptr(monstp);
-    delete monstp;
+  if (monst_infop) {
+    oldptr(monst_infop);
+    delete monst_infop;
   }
 }

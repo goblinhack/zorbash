@@ -315,7 +315,7 @@ static bool wid_rightbar_create(void)
   // Inventory items
   //
   {
-    auto                monstp = player->monstp;
+    auto                monst_infop = player->monst_infop;
     std::vector< Widp > wid_inventory_items;
 
     uint8_t item = 0;
@@ -351,8 +351,8 @@ static bool wid_rightbar_create(void)
       wid_set_pos(w, tl, br);
       wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
 
-      if (item < monstp->inventory_id.size()) {
-        auto tp_id = get(monstp->inventory_id, item);
+      if (item < monst_infop->inventory_id.size()) {
+        auto tp_id = get(monst_infop->inventory_id, item);
         if (! tp_id) {
           item++;
           continue;
@@ -389,7 +389,7 @@ static bool wid_rightbar_create(void)
         auto weapon = player->weapon_get();
         if (weapon) {
           auto weapon_tp_id = weapon->tp()->id;
-          auto tp_id        = monstp->inventory_id[ i ];
+          auto tp_id        = monst_infop->inventory_id[ i ];
           if (tp_id == weapon_tp_id) {
             static Tilep tile;
             if (! tile) {
@@ -448,7 +448,7 @@ static bool wid_rightbar_create(void)
   //
   y_at += 8;
   {
-    auto                monstp = player->monstp;
+    auto                monst_infop = player->monst_infop;
     std::vector< Widp > wid_skillbox_items;
 
     uint8_t item = 0;
@@ -471,8 +471,8 @@ static bool wid_rightbar_create(void)
       wid_set_pos(w, tl, br);
       wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
 
-      if (item < monstp->skillbox_id.size()) {
-        auto tp_id = get(monstp->skillbox_id, item);
+      if (item < monst_infop->skillbox_id.size()) {
+        auto tp_id = get(monst_infop->skillbox_id, item);
         if (! tp_id) {
           item++;
           continue;
@@ -481,7 +481,7 @@ static bool wid_rightbar_create(void)
         auto tpp       = tp_find(tp_id);
         bool activated = false;
 
-        for (auto id : monstp->skills) {
+        for (auto id : monst_infop->skills) {
           auto t = level->thing_find(id);
           if (t) {
             if (t->tp() == tpp) {

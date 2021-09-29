@@ -61,9 +61,9 @@ bool Thing::bag_add(Thingp item)
   //
   item->new_monst();
 
-  if (item->monstp->preferred_bag_position != point(-1, -1)) {
+  if (item->monst_infop->preferred_bag_position != point(-1, -1)) {
     dbg3("Bag: Add %s at preferred position", item->to_string().c_str());
-    auto at = item->monstp->preferred_bag_position;
+    auto at = item->monst_infop->preferred_bag_position;
     if (bag_can_place_at(item, at)) {
       if (bag_place_at(item, at)) {
         while (bag_compress()) {
@@ -135,9 +135,9 @@ bool Thing::bag_add_test(Thingp item)
   //
   item->new_monst();
 
-  if (item->monstp->preferred_bag_position != point(-1, -1)) {
+  if (item->monst_infop->preferred_bag_position != point(-1, -1)) {
     dbg3("Bag: Add test %s at preferred position", item->to_string().c_str());
-    auto at = item->monstp->preferred_bag_position;
+    auto at = item->monst_infop->preferred_bag_position;
     if (bag_can_place_at(item, at)) {
       return true;
     }
@@ -203,15 +203,15 @@ bool Thing::bag_compress(void)
         continue;
       }
 
-      if (bag_remove_at(t, t->monstp->bag_position)) {
-        if (bag_can_place_at(t, t->monstp->bag_position + point(0, 1))) {
-          if (bag_place_at(t, t->monstp->bag_position + point(0, 1))) {
+      if (bag_remove_at(t, t->monst_infop->bag_position)) {
+        if (bag_can_place_at(t, t->monst_infop->bag_position + point(0, 1))) {
+          if (bag_place_at(t, t->monst_infop->bag_position + point(0, 1))) {
             did_something = true;
           } else {
-            bag_place_at(t, t->monstp->bag_position);
+            bag_place_at(t, t->monst_infop->bag_position);
           }
         } else {
-          bag_place_at(t, t->monstp->bag_position);
+          bag_place_at(t, t->monst_infop->bag_position);
         }
       }
     }
@@ -363,7 +363,7 @@ bool Thing::bag_place_at(Thingp item, point pos)
       set(bag, x, y, item->id);
     }
   }
-  item->monstp->bag_position = pos;
+  item->monst_infop->bag_position = pos;
   return true;
 }
 

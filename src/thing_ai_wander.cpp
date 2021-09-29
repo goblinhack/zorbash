@@ -184,7 +184,7 @@ bool Thing::ai_choose_wander(point &nh)
   //
   // Reached the target? Choose a new one.
   //
-  auto target = monstp->wander_target;
+  auto target = monst_infop->wander_target;
   if ((mid_at.x == target.x) && (mid_at.y == target.y)) {
     dbg("Reached target");
     target = point(-1, -1);
@@ -202,7 +202,7 @@ bool Thing::ai_choose_wander(point &nh)
   //
   // Choose a new wander location
   //
-  monstp->wander_target = point(-1, -1);
+  monst_infop->wander_target = point(-1, -1);
 
   target = get_random_scent_target();
 
@@ -230,7 +230,7 @@ bool Thing::ai_choose_wander(point &nh)
     return false;
   }
 
-  monstp->wander_target = target;
+  monst_infop->wander_target = target;
 #ifdef ENABLE_DEBUG_AI_WANDER
   thing_new("ai_path2", fpoint(target.x, target.y));
 #endif
@@ -283,7 +283,7 @@ bool Thing::ai_wander(void)
       //
       // Set this so next time we will choose another target
       //
-      monstp->wander_target = point(-1, -1);
+      monst_infop->wander_target = point(-1, -1);
     }
   }
 
@@ -311,7 +311,7 @@ bool Thing::ai_escape(void)
       //
       // Set this so next time we will choose another target
       //
-      monstp->wander_target = point(-1, -1);
+      monst_infop->wander_target = point(-1, -1);
     }
   }
   TRACE_AND_INDENT();

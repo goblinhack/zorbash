@@ -20,9 +20,9 @@
 std::vector< Lightp > &Thing::get_light(void)
 {
   TRACE_AND_INDENT();
-  if (monstp) {
-    verify(monstp);
-    return (monstp->light);
+  if (monst_infop) {
+    verify(monst_infop);
+    return (monst_infop->light);
   } else {
     static std::vector< Lightp > no_light;
     return no_light;
@@ -34,9 +34,9 @@ void Thing::new_light(point offset, int strength, color col, int fbo)
   TRACE_AND_INDENT();
   new_monst();
   auto l = light_new(this, offset, strength, col, fbo);
-  monstp->light.push_back(l);
-  monstp->light_strength = strength;
-  monstp->light_col      = col;
+  monst_infop->light.push_back(l);
+  monst_infop->light_strength = strength;
+  monst_infop->light_col      = col;
 }
 
 void Thing::new_light(point offset, int strength)
@@ -44,19 +44,19 @@ void Thing::new_light(point offset, int strength)
   TRACE_AND_INDENT();
   new_monst();
   auto l = light_new(this, offset, strength);
-  monstp->light.push_back(l);
-  monstp->light_strength = strength;
+  monst_infop->light.push_back(l);
+  monst_infop->light_strength = strength;
 }
 
 void Thing::delete_lights(void)
 {
   TRACE_AND_INDENT();
-  if (monstp) {
-    verify(monstp);
-    for (auto &l : monstp->light) {
+  if (monst_infop) {
+    verify(monst_infop);
+    for (auto &l : monst_infop->light) {
       delete l;
     }
-    monstp->light.resize(0);
+    monst_infop->light.resize(0);
   }
 }
 

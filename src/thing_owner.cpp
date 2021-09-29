@@ -127,7 +127,7 @@ bool Thing::change_owner(Thingp new_owner)
     }
   }
 
-  old_owner->monstp->carrying.remove(id);
+  old_owner->monst_infop->carrying.remove(id);
 
   hooks_remove();
 

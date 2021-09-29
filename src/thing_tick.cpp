@@ -177,12 +177,12 @@ void Thing::achieve_goals_in_life(void)
     }
   }
 
-  if (monstp && monstp->move_path.empty()) {
+  if (monst_infop && monst_infop->move_path.empty()) {
     if (is_player()) {
       //
       // If resting, keep resting
       //
-      if (monstp->monst_state == MONST_STATE_MOVING) {
+      if (monst_infop->monst_state == MONST_STATE_MOVING) {
         ai_change_state(MONST_STATE_IDLE, "move path is empty");
       }
     }

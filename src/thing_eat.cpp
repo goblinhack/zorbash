@@ -119,7 +119,7 @@ bool Thing::eat_something(void)
   //
   // Try for food first, ignoring potions
   //
-  for (const auto &item : monstp->carrying) {
+  for (const auto &item : monst_infop->carrying) {
     auto t = level->thing_find(item.id);
     if (! t) {
       continue;
@@ -147,7 +147,7 @@ bool Thing::eat_something(void)
   //
   // Try again but include potions
   //
-  for (const auto &item : monstp->carrying) {
+  for (const auto &item : monst_infop->carrying) {
     auto t = level->thing_find(item.id);
     if (! t) {
       continue;
@@ -168,7 +168,7 @@ bool Thing::can_eat_something(void)
   //
   // Try for food first, ignoring potions
   //
-  for (const auto &item : monstp->carrying) {
+  for (const auto &item : monst_infop->carrying) {
     auto t = level->thing_find(item.id);
     if (! t) {
       continue;
@@ -185,7 +185,7 @@ bool Thing::can_eat_something(void)
   //
   // Try again but include potions
   //
-  for (const auto &item : monstp->carrying) {
+  for (const auto &item : monst_infop->carrying) {
     auto t = level->thing_find(item.id);
     if (! t) {
       continue;

@@ -20,7 +20,7 @@ bool Thing::skill_add(Thingp what)
   TRACE_AND_INDENT();
   dbg("Try to add skill %s", what->to_string().c_str());
   TRACE_AND_INDENT();
-  if (! monstp) {
+  if (! monst_infop) {
     dbg("No; not a monst");
     return false;
   }
@@ -34,7 +34,7 @@ bool Thing::skill_add(Thingp what)
     existing_owner->drop(what);
   }
 
-  for (const auto &item : monstp->skills) {
+  for (const auto &item : monst_infop->skills) {
     if (item == what->id) {
       dbg("No; already carried");
       return false;
@@ -48,7 +48,7 @@ bool Thing::skill_add(Thingp what)
     }
   }
 
-  monstp->skills.push_front(what->id);
+  monst_infop->skills.push_front(what->id);
   what->set_owner(this);
   what->hide();
 
@@ -91,7 +91,7 @@ bool Thing::skill_remove(Thingp what)
   }
 
   what->remove_owner();
-  monstp->skills.remove(what->id);
+  monst_infop->skills.remove(what->id);
   game->request_remake_skillbox = true;
 
   dbg("Dropped %s into the ether", what->to_string().c_str());
@@ -102,12 +102,12 @@ bool Thing::skill_remove(Thingp what)
 void Thing::skill_remove_all(void)
 {
   TRACE_AND_INDENT();
-  if (! monstp) {
+  if (! monst_infop) {
     return;
   }
 
-  while (! monstp->skills.empty()) {
-    auto id = *monstp->skills.begin();
+  while (! monst_infop->skills.empty()) {
+    auto id = *monst_infop->skills.begin();
     auto t  = level->thing_find(id);
     if (! t) {
       return;
@@ -141,16 +141,16 @@ void Thing::skill_activate(Thingp what)
 int Thing::skill_enchant_count(const uint32_t slot)
 {
   TRACE_AND_INDENT();
-  if (! monstp) {
+  if (! monst_infop) {
     return 0;
   }
 
-  auto tp_id = get(monstp->skillbox_id, slot);
+  auto tp_id = get(monst_infop->skillbox_id, slot);
   if (! tp_id) {
     return 0;
   }
 
-  for (auto oid : monstp->skills) {
+  for (auto oid : monst_infop->skills) {
     auto o = game->level->thing_find(oid);
     if (o) {
       if (o->tp()->id == tp_id) {
@@ -178,7 +178,7 @@ bool Thing::add_skill(Tpp what)
   // Drop a skillstone
   //
   auto found = false;
-  for (auto id : monstp->carrying) {
+  for (auto id : monst_infop->carrying) {
     auto t = level->thing_find(id);
     if (! t) {
       continue;
@@ -200,7 +200,7 @@ int Thing::get_skillstone_count(void)
 {
   TRACE_AND_INDENT();
   int v = 0;
-  for (const auto &item : monstp->carrying) {
+  for (const auto &item : monst_infop->carrying) {
     auto t = level->thing_find(item.id);
     if (! t) {
       continue;
@@ -221,7 +221,7 @@ bool Thing::can_learn_something(void)
   //
   // Once skills are maxxed out, that's it
   //
-  if (monstp->skills.size() >= UI_ACTIONBAR_MAX_ITEMS) {
+  if (monst_infop->skills.size() >= UI_ACTIONBAR_MAX_ITEMS) {
     return false;
   }
 
@@ -231,7 +231,7 @@ bool Thing::can_learn_something(void)
   //
   for (auto tpp : tp_get_skills()) {
     bool already_learned = false;
-    for (auto oid : monstp->skills) {
+    for (auto oid : monst_infop->skills) {
       auto o = game->level->thing_find(oid);
       if (o) {
         if (o->tp() == tpp) {
@@ -255,7 +255,7 @@ bool Thing::learn_random_skill(void)
   std::vector< Tpp > cands;
   for (auto tpp : tp_get_skills()) {
     bool add = true;
-    for (auto oid : monstp->skills) {
+    for (auto oid : monst_infop->skills) {
       auto o = game->level->thing_find(oid);
       if (o) {
         if (o->tp() == tpp) {

@@ -22,7 +22,7 @@ void Thing::get_light_strength_including_torch_effect(int &out_light_strength) c
   auto light_strength = get_initial_light_strength();
 
   auto torch_count = 0;
-  for (auto oid : monstp->carrying) {
+  for (auto oid : monst_infop->carrying) {
     auto o = level->thing_find(oid);
     if (! o) {
       continue;

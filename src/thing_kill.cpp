@@ -118,7 +118,7 @@ void Thing::kill(Thingp killer, const char *reason)
     }
   }
 
-  if (monstp) {
+  if (monst_infop) {
     //
     // So that slimes don't keep moving when dead
     //

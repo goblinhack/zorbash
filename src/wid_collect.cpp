@@ -53,7 +53,7 @@ static void wid_collect_slot(int slot)
 
   auto t = collect_items[ slot ];
   if (t) {
-    auto carrying_copy = t->monstp->carrying;
+    auto carrying_copy = t->monst_infop->carrying;
 
     if (! player->try_to_carry(t)) {
       DBG3("Failed to collect slot %d", slot);
@@ -304,8 +304,8 @@ void Game::wid_collect_create(const std::list< Thingp > items /* intentional cop
       found[ t ] = true;
       collect_items.push_back(t);
 
-      if (t->monstp) {
-        for (auto id : t->monstp->carrying) {
+      if (t->monst_infop) {
+        for (auto id : t->monst_infop->carrying) {
           auto t = thing_find(id);
           if (t) {
             if (found.find(t) != found.end()) {

@@ -56,7 +56,7 @@ bool Thing::enchant(Thingp what)
   // Drop an enchantstone
   //
   auto found = false;
-  for (auto id : monstp->carrying) {
+  for (auto id : monst_infop->carrying) {
     auto t = level->thing_find(id);
     if (! t) {
       continue;
@@ -94,7 +94,7 @@ int Thing::get_enchantstone_count(void)
 {
   TRACE_AND_INDENT();
   int v = 0;
-  for (const auto &item : monstp->carrying) {
+  for (const auto &item : monst_infop->carrying) {
     auto t = level->thing_find(item.id);
     if (! t) {
       continue;
@@ -111,7 +111,7 @@ int Thing::get_enchantstone_count(void)
 bool Thing::can_enchant_something(void)
 {
   TRACE_AND_INDENT();
-  for (const auto &item : monstp->carrying) {
+  for (const auto &item : monst_infop->carrying) {
     auto t = level->thing_find(item.id);
     if (! t) {
       continue;
@@ -128,7 +128,7 @@ bool Thing::enchant_random_item(void)
 {
   TRACE_AND_INDENT();
   std::vector< Thingp > cands;
-  for (const auto &item : monstp->carrying) {
+  for (const auto &item : monst_infop->carrying) {
     auto t = level->thing_find(item.id);
     if (! t) {
       continue;

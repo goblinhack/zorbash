@@ -226,7 +226,7 @@ bool Thing::try_to_jump(point to, bool be_careful)
   // Move carried items too as when we attack, we will use say the
   // carried sword and so it had better be in the same location.
   //
-  for (auto oid : monstp->carrying) {
+  for (auto oid : monst_infop->carrying) {
     auto w = level->thing_find(oid);
     if (w) {
       w->move_to_immediately(mid_at);
@@ -447,7 +447,7 @@ void Thing::jump_end(void)
   // Move carried items too as when we attack, we will use say the
   // carried sword and so it had better be in the same location.
   //
-  for (auto oid : monstp->carrying) {
+  for (auto oid : monst_infop->carrying) {
     auto o = level->thing_find(oid);
     if (o) {
       o->is_jumping = false;

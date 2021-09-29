@@ -35,7 +35,7 @@ enum {
   MONST_STATE_USING_SKILLSTONE,
 };
 
-typedef struct Monst_ {
+typedef struct MonstInfo_ {
 public:
   AgeMap *              _age_map      = {}; // How old a cell is
   AgeMap *              _seen_map     = {}; // If we've ever seen this tile and when
@@ -167,8 +167,8 @@ public:
   //
   point preferred_bag_position {-1, -1};
   int   current_damage {}; // Current damage; so it can be modified by python
-} Monst;
-std::ostream &operator<<(std::ostream &out, Bits< const Monstp & > const my);
-std::istream &operator>>(std::istream &in, Bits< Monstp & > my);
+} MonstInfo;
+std::ostream &operator<<(std::ostream &out, Bits< const MonstInfop & > const my);
+std::istream &operator>>(std::istream &in, Bits< MonstInfop & > my);
 
 #endif // _MY_THING_H_

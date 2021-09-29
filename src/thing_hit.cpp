@@ -114,8 +114,8 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     return false;
   }
 
-  if (! real_hitter->monstp) {
-    real_hitter->err("Has no monstp");
+  if (! real_hitter->monst_infop) {
+    real_hitter->err("Has no monst_infop");
     return false;
   }
 
@@ -195,7 +195,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
   //
   if (is_player()) {
     if (game->robot_mode) {
-      if (monstp->monst_state == MONST_STATE_MOVING) {
+      if (monst_infop->monst_state == MONST_STATE_MOVING) {
         clear_move_path("robot was hit while moving");
       } else {
         //
@@ -289,7 +289,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     }
   }
 
-  for (auto oid : real_hitter->monstp->skills) {
+  for (auto oid : real_hitter->monst_infop->skills) {
     auto skill = level->thing_find(oid);
     if (skill && skill->is_activated) {
       //
@@ -429,11 +429,11 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     msg(string_sprintf("%%fg=red$-%d", damage));
   } else if (is_monst()) {
     //
-    // Monst being hit
+    // MonstInfo being hit
     //
     if (hitter->is_player() || real_hitter->is_player()) {
       //
-      // Monst being hit by player
+      // MonstInfo being hit by player
       //
       msg(string_sprintf("%%fg=white$-%d", damage));
     }

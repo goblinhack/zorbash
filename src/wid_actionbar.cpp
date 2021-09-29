@@ -402,7 +402,7 @@ static uint8_t wid_actionbar_wield(Widp w, int32_t x, int32_t y, uint32_t button
     return true;
   }
 
-  for (const auto &item : player->monstp->carrying) {
+  for (const auto &item : player->monst_infop->carrying) {
     auto t = game->level->thing_find(item.id);
     if (t->is_weapon()) {
       game->wid_wield_create();

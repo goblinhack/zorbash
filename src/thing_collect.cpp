@@ -31,7 +31,7 @@ int Thing::worth_collecting(Thingp item, Thingp *would_need_to_drop)
   // Look in the bag.
   //
   if (item->is_bag()) {
-    for (const auto &item2 : item->monstp->carrying) {
+    for (const auto &item2 : item->monst_infop->carrying) {
       auto bag_item = level->thing_find(item2.id);
       if (bag_item) {
         auto value = worth_collecting(bag_item, would_need_to_drop);

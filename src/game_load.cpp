@@ -56,7 +56,7 @@ static ts_t load(ts_t T)
   return (T - old_ts_dungeon_created + new_ts_dungeon_created);
 }
 
-std::istream &operator>>(std::istream &in, Bits< Monstp & > my)
+std::istream &operator>>(std::istream &in, Bits< MonstInfop & > my)
 {
   TRACE_AND_INDENT();
   /////////////////////////////////////////////////////////////////////////
@@ -184,11 +184,11 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
   my.t->id = tpp->id;
 
   uint64_t bits64 = 0;
-  bool     monst  = (my.t->monstp != nullptr);
+  bool     monst  = (my.t->monst_infop != nullptr);
   in >> bits(monst);
   if (monst) {
     my.t->new_monst();
-    in >> bits(my.t->monstp);
+    in >> bits(my.t->monst_infop);
   }
 
   /////////////////////////////////////////////////////////////////////////
@@ -432,8 +432,8 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
   IF_DEBUG4
   {
     auto diff = in.tellg() - start;
-    LOG("LOAD %d bytes %s TP %d ID %x last_mid_at %f,%f monstp %p", (int) diff, name.c_str(), my.t->tp_id, my.t->id.id,
-        my.t->last_mid_at.x, my.t->last_mid_at.y, my.t->monstp);
+    LOG("LOAD %d bytes %s TP %d ID %x last_mid_at %f,%f monst_infop %p", (int) diff, name.c_str(), my.t->tp_id,
+        my.t->id.id, my.t->last_mid_at.x, my.t->last_mid_at.y, my.t->monst_infop);
   }
 
   return (in);

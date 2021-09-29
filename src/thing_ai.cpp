@@ -371,7 +371,7 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
           return true;
         }
       } else {
-        monstp->move_path = new_move_path;
+        monst_infop->move_path = new_move_path;
         return true;
       }
 
@@ -875,7 +875,7 @@ void Thing::ai_choose_initial_goals(std::multiset< Goal > &goals, int minx, int 
               }
             } else if (! avoid && (dist < ai_avoid_distance()) && will_avoid_monst(it)) {
               //
-              // Monsters we avoid are more serious threats
+              // MonstInfoers we avoid are more serious threats
               //
               avoid = true;
             } else if (! avoid && ai_is_able_to_attack_generators() && it->is_minion_generator()) {
@@ -1032,7 +1032,7 @@ void Thing::ai_choose_initial_goals(std::multiset< Goal > &goals, int minx, int 
             // No hunting monsters we cannot see just because we
             // have visited that area before.
             //
-            // Well this is true for the player. Monsters, we're
+            // Well this is true for the player. MonstInfoers, we're
             // lenient.
             //
             if (lit_recently) {
@@ -1562,7 +1562,7 @@ bool Thing::ai_tick(void)
   //
   auto threat = most_dangerous_visible_thing_get();
 
-  switch (monstp->monst_state) {
+  switch (monst_infop->monst_state) {
     case MONST_STATE_IDLE :
       {
         //
@@ -1711,7 +1711,7 @@ bool Thing::ai_tick(void)
             }
           }
           if (ai_create_path_to_goal(minx, miny, maxx, maxy, search_type)) {
-            if (monstp->move_path.size()) {
+            if (monst_infop->move_path.size()) {
               ai_change_state(MONST_STATE_MOVING, "found a new goal");
             }
             return true;
@@ -1784,7 +1784,7 @@ bool Thing::ai_tick(void)
         //
         // Finished the move?
         //
-        if (monstp->move_path.empty()) {
+        if (monst_infop->move_path.empty()) {
           AI_LOG("Move finished.");
           if (is_player()) {
             game->tick_begin("Robot move finished");
@@ -1925,7 +1925,7 @@ bool Thing::ai_tick(void)
 void Thing::ai_change_state(int new_state, const std::string &why)
 {
   TRACE_AND_INDENT();
-  if (monstp->monst_state == new_state) {
+  if (monst_infop->monst_state == new_state) {
     return;
   }
 
@@ -1940,7 +1940,7 @@ void Thing::ai_change_state(int new_state, const std::string &why)
     case MONST_STATE_USING_SKILLSTONE : to = "USING-SKILLSTONE"; break;
   }
 
-  switch (monstp->monst_state) {
+  switch (monst_infop->monst_state) {
     case MONST_STATE_IDLE : from = "IDLE"; break;
     case MONST_STATE_MOVING : from = "MOVING"; break;
     case MONST_STATE_RESTING : from = "RESTING"; break;
@@ -1975,7 +1975,7 @@ void Thing::ai_change_state(int new_state, const std::string &why)
     AI_LOG("", s);
   }
 
-  monstp->monst_state = new_state;
+  monst_infop->monst_state = new_state;
   switch (new_state) {
     case MONST_STATE_IDLE : clear_move_path("State is now idle"); break;
     case MONST_STATE_MOVING : break;
@@ -2027,7 +2027,7 @@ void Thing::ai_get_next_hop(void)
       return;
     }
 
-    monstp->wander_target = point(0, 0);
+    monst_infop->wander_target = point(0, 0);
     dbg("Cannot escape, try to wander");
     if (ai_wander()) {
       return;
@@ -2037,7 +2037,7 @@ void Thing::ai_get_next_hop(void)
   //
   // If going somewhere, continue
   //
-  if (monstp->wander_target != point(0, 0)) {
+  if (monst_infop->wander_target != point(0, 0)) {
     if (pcg_random_range(0, 100) < 50) {
       dbg("Try to continue wander");
       if (ai_wander()) {
@@ -2050,7 +2050,7 @@ void Thing::ai_get_next_hop(void)
   // Find the best goal to go to
   //
   if (ai_choose_goal()) {
-    monstp->wander_target = point(0, 0);
+    monst_infop->wander_target = point(0, 0);
     return;
   }
 
@@ -2228,7 +2228,7 @@ int Thing::ai_choose_goal(void)
           }
 
           //
-          // Monsters we avoid are more serious threats
+          // MonstInfoers we avoid are more serious threats
           //
           if (will_avoid_monst(it)) {
             if (distance(mid_at, it->mid_at) < ai_avoid_distance()) {

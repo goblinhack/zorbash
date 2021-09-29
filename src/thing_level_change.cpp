@@ -32,8 +32,8 @@ void Thing::level_change(Levelp l)
   level = l;
   level_enter();
 
-  if (monstp) {
-    monstp->move_path = {};
+  if (monst_infop) {
+    monst_infop->move_path = {};
     clear_age_map();
     clear_seen_map();
     clear_dmap_can_see();
@@ -86,8 +86,8 @@ void Thing::level_change(Levelp l)
     }
   }
 
-  if (monstp) {
-    for (auto id : monstp->carrying) {
+  if (monst_infop) {
+    for (auto id : monst_infop->carrying) {
       auto it = level->thing_find(id);
       if (it) {
         it->level_change(l);

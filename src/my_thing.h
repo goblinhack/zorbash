@@ -51,7 +51,7 @@ typedef struct Thing_ {
 public:
   Thing_(void);
   ~Thing_(void);
-  Monstp     monstp {};
+  MonstInfop     monst_infop {};
   Levelp     level {};
   int16_t    tp_id {-1}; // Common settings
   uint16_t   frame_count {};

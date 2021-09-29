@@ -29,14 +29,14 @@ bool Thing::skillbox_id_insert(Thingp what)
     return false;
   }
 
-  if (! monstp) {
+  if (! monst_infop) {
     return false;
   }
 
   int  free_slot      = -1;
-  auto skillbox_items = player->monstp->skillbox_id.size();
+  auto skillbox_items = player->monst_infop->skillbox_id.size();
   for (auto i = 0U; i < skillbox_items; i++) {
-    auto tp_id = monstp->skillbox_id[ i ];
+    auto tp_id = monst_infop->skillbox_id[ i ];
     if (! tp_id) {
       if (free_slot == -1) {
         free_slot = i;
@@ -67,16 +67,16 @@ bool Thing::skillbox_id_insert(Thingp what)
 
   int item_slot = -1;
   if (free_slot != -1) {
-    monstp->skillbox_id[ free_slot ] = what->tp_id;
-    item_slot                        = free_slot;
+    monst_infop->skillbox_id[ free_slot ] = what->tp_id;
+    item_slot                             = free_slot;
   } else {
     if (skillbox_items >= UI_ACTIONBAR_MAX_ITEMS) {
       TOPCON("No space to carry %s which is not carried.", what->text_the().c_str());
       return false;
     }
 
-    monstp->skillbox_id.push_back(what->tp_id);
-    item_slot = monstp->skillbox_id.size() - 1;
+    monst_infop->skillbox_id.push_back(what->tp_id);
+    item_slot = monst_infop->skillbox_id.size() - 1;
   }
 
   game->previous_slot = item_slot;
@@ -104,7 +104,7 @@ bool Thing::skillbox_id_remove(Thingp what)
     return false;
   }
 
-  if (! monstp) {
+  if (! monst_infop) {
     return false;
   }
 
@@ -113,9 +113,9 @@ bool Thing::skillbox_id_remove(Thingp what)
     immediate_owner->bag_remove(what);
   }
 
-  auto skillbox_items = player->monstp->skillbox_id.size();
+  auto skillbox_items = player->monst_infop->skillbox_id.size();
   for (auto i = 0U; i < skillbox_items; i++) {
-    auto tp_id = monstp->skillbox_id[ i ];
+    auto tp_id = monst_infop->skillbox_id[ i ];
     if (! tp_id) {
       continue;
     }
@@ -128,12 +128,12 @@ bool Thing::skillbox_id_remove(Thingp what)
       game->request_remake_skillbox = true;
 
       dbg("Remove slot");
-      monstp->skillbox_id[ i ] = 0;
+      monst_infop->skillbox_id[ i ] = 0;
 
-      if (! monstp->skillbox_id.size()) {
+      if (! monst_infop->skillbox_id.size()) {
         game->skillbox_highlight_slot = {};
       } else {
-        while (game->skillbox_highlight_slot >= monstp->skillbox_id.size()) {
+        while (game->skillbox_highlight_slot >= monst_infop->skillbox_id.size()) {
           game->skillbox_highlight_slot--;
         }
       }
@@ -160,18 +160,18 @@ Thingp Level::skillbox_get(const uint32_t slot)
     return nullptr;
   }
 
-  auto monstp = player->monstp;
-  if (! monstp) {
-    ERR("No monstp for player");
+  auto monst_infop = player->monst_infop;
+  if (! monst_infop) {
+    ERR("No monst_infop for player");
     return nullptr;
   }
 
-  if (slot >= monstp->skillbox_id.size()) {
-    LOG("Slot %d out of range, max %d", slot, (int) monstp->skillbox_id.size());
+  if (slot >= monst_infop->skillbox_id.size()) {
+    LOG("Slot %d out of range, max %d", slot, (int) monst_infop->skillbox_id.size());
     return nullptr;
   }
 
-  auto tp_id = get(monstp->skillbox_id, slot);
+  auto tp_id = get(monst_infop->skillbox_id, slot);
   if (! tp_id) {
     LOG("Slot %d has no tp", slot);
     return nullptr;
@@ -185,7 +185,7 @@ Thingp Level::skillbox_get(const uint32_t slot)
 
   LOG("Slot %d has %s", slot, tpp->name().c_str());
 
-  for (auto oid : monstp->skills) {
+  for (auto oid : monst_infop->skills) {
     auto o = thing_find(oid);
     if (o) {
       if (o->tp() == tpp) {
@@ -211,12 +211,12 @@ bool Level::skillbox_over(const uint32_t slot)
     return false;
   }
 
-  if (slot >= player->monstp->skillbox_id.size()) {
+  if (slot >= player->monst_infop->skillbox_id.size()) {
     LOG("Skillbox: Ignore; slot out of range");
     return false;
   }
 
-  auto oid = get(player->monstp->skillbox_id, slot);
+  auto oid = get(player->monst_infop->skillbox_id, slot);
   if (! oid) {
     LOG("Skillbox: Ignore; nothing at that slot");
     return false;
@@ -251,7 +251,7 @@ bool Level::skillbox_chosen(const uint32_t slot)
     return false;
   }
 
-  if (slot >= player->monstp->skillbox_id.size()) {
+  if (slot >= player->monst_infop->skillbox_id.size()) {
     LOG("Skillbox: Nothing in slot %d", slot);
     return false;
   }
@@ -259,7 +259,7 @@ bool Level::skillbox_chosen(const uint32_t slot)
   LOG("Skillbox: Request to remake skillbox");
   game->request_remake_skillbox = true;
 
-  auto oid = get(player->monstp->skillbox_id, slot);
+  auto oid = get(player->monst_infop->skillbox_id, slot);
   if (! oid) {
     LOG("Skillbox: No skill at slot %d", slot);
     return false;

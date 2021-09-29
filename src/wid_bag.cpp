@@ -44,17 +44,17 @@ static void wid_bag_add_items(Widp wid_bag_container, Thingp bag)
 
   bag->log("Populate the bag");
 
-  for (const auto &item : bag->monstp->carrying) {
+  for (const auto &item : bag->monst_infop->carrying) {
     auto t = game->thing_find(item.id);
     if (! t) {
       continue;
     }
 
-    auto tl = t->monstp->bag_position + point(1, 1);
+    auto tl = t->monst_infop->bag_position + point(1, 1);
 
-    if (t->monstp->bag_position == point(-1, -1)) {
-      bag->log("+ item %s at %d,%d (not carried in bag)", t->to_string().c_str(), t->monstp->bag_position.x,
-               t->monstp->bag_position.y);
+    if (t->monst_infop->bag_position == point(-1, -1)) {
+      bag->log("+ item %s at %d,%d (not carried in bag)", t->to_string().c_str(), t->monst_infop->bag_position.x,
+               t->monst_infop->bag_position.y);
       continue;
     }
 
@@ -65,11 +65,12 @@ static void wid_bag_add_items(Widp wid_bag_container, Thingp bag)
     wid_set_style(w, UI_WID_STYLE_DARK);
 
     if (t == game->level->player->weapon_get()) {
-      bag->log("+ item %s at %d,%d (wielded)", t->to_string().c_str(), t->monstp->bag_position.x,
-               t->monstp->bag_position.y);
+      bag->log("+ item %s at %d,%d (wielded)", t->to_string().c_str(), t->monst_infop->bag_position.x,
+               t->monst_infop->bag_position.y);
       wid_set_style(w, UI_WID_STYLE_RED);
     } else {
-      bag->log("+ item %s at %d,%d", t->to_string().c_str(), t->monstp->bag_position.x, t->monstp->bag_position.y);
+      bag->log("+ item %s at %d,%d", t->to_string().c_str(), t->monst_infop->bag_position.x,
+               t->monst_infop->bag_position.y);
     }
 
     wid_set_on_mouse_over_b(w, wid_bag_item_mouse_over_b);
@@ -86,8 +87,8 @@ static void wid_bag_add_items(Widp wid_bag_container, Thingp bag)
     if (tile) {
       wid_set_fg_tile(w, tile);
     } else {
-      bag->err("+ no tile item %s at %d,%d", t->to_string().c_str(), t->monstp->bag_position.x,
-               t->monstp->bag_position.y);
+      bag->err("+ no tile item %s at %d,%d", t->to_string().c_str(), t->monst_infop->bag_position.x,
+               t->monst_infop->bag_position.y);
     }
 
     //
@@ -189,9 +190,9 @@ uint8_t wid_in_transit_item_place(Widp w, int32_t x, int32_t y, uint32_t button)
 
     wid_destroy(&game->in_transit_item);
 
-    t->monstp->preferred_bag_position = at;
+    t->monst_infop->preferred_bag_position = at;
     bag->carry(t);
-    t->monstp->preferred_bag_position = point(-1, -1);
+    t->monst_infop->preferred_bag_position = point(-1, -1);
 
     if (t->is_bag_item_container()) {
       game->inventory_highlight_slot = game->previous_slot;

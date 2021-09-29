@@ -16,7 +16,7 @@ int Thing::item_count_including_charges(Tpp tp)
 {
   TRACE_AND_INDENT();
   auto count = 0;
-  for (auto oid : monstp->carrying) {
+  for (auto oid : monst_infop->carrying) {
     auto o = level->thing_find(oid);
     if (! o) {
       continue;
@@ -42,7 +42,7 @@ int Thing::item_count_excluding_charges(Tpp tp)
 {
   TRACE_AND_INDENT();
   auto count = 0;
-  for (auto oid : monstp->carrying) {
+  for (auto oid : monst_infop->carrying) {
     auto o = level->thing_find(oid);
     if (! o) {
       continue;
@@ -91,8 +91,8 @@ void Thing::move_carried_items(void)
   // Move carried items too as when we attack, we will use say the
   // carried sword and so it had better be in the same location.
   //
-  if (monstp) {
-    for (auto oid : monstp->carrying) {
+  if (monst_infop) {
+    for (auto oid : monst_infop->carrying) {
       auto o = level->thing_find(oid);
       if (o) {
         o->move_to(mid_at);
@@ -168,8 +168,8 @@ void Thing::move_carried_items_immediately(void)
   // Move carried items too as when we attack, we will use say the
   // carried sword and so it had better be in the same location.
   //
-  if (monstp) {
-    for (auto oid : monstp->carrying) {
+  if (monst_infop) {
+    for (auto oid : monst_infop->carrying) {
       auto o = level->thing_find(oid);
       if (o) {
         o->move_to_immediately(mid_at);
@@ -192,11 +192,11 @@ void Thing::move_carried_items_immediately(void)
 bool Thing::is_carrying_item(void)
 {
   TRACE_AND_INDENT();
-  if (! monstp) {
+  if (! monst_infop) {
     return false;
   }
 
-  if (monstp->carrying.size()) {
+  if (monst_infop->carrying.size()) {
     return true;
   }
 
@@ -214,19 +214,19 @@ std::vector< Thingp > Thing::get_item_list(void)
   std::vector< Thingp > tr;
   dbg("Carried items:");
   TRACE_AND_INDENT();
-  if (! monstp) {
+  if (! monst_infop) {
     dbg("Not carrying");
     return tr;
   }
 
-  for (const auto &item : monstp->carrying) {
+  for (const auto &item : monst_infop->carrying) {
     auto t = level->thing_find(item.id);
     if (! t) {
       continue;
     }
 
     dbg("Item %s", t->to_string().c_str());
-    if (t->monstp && t->monstp->carrying.size()) {
+    if (t->monst_infop && t->monst_infop->carrying.size()) {
       auto tr2 = t->get_item_list();
       std::move(tr2.begin(), tr2.end(), std::back_inserter(tr));
     }

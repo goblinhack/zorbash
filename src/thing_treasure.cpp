@@ -15,11 +15,11 @@
 bool Thing::is_carrying_treasure(void)
 {
   TRACE_AND_INDENT();
-  if (! monstp) {
+  if (! monst_infop) {
     return false;
   }
 
-  for (const auto &item : monstp->carrying) {
+  for (const auto &item : monst_infop->carrying) {
     auto t = level->thing_find(item.id);
     if (! t) {
       continue;
@@ -27,7 +27,7 @@ bool Thing::is_carrying_treasure(void)
     if (t->is_treasure_type()) {
       return true;
     }
-    if (t->monstp && t->monstp->carrying.size()) {
+    if (t->monst_infop && t->monst_infop->carrying.size()) {
       if (t->is_carrying_treasure()) {
         return true;
       }
@@ -48,12 +48,12 @@ std::vector< Thingp > Thing::get_treasure_list(void)
   std::vector< Thingp > tr;
   dbg("Treasure:");
   TRACE_AND_INDENT();
-  if (! monstp) {
+  if (! monst_infop) {
     dbg("Not carrying");
     return tr;
   }
 
-  for (const auto &item : monstp->carrying) {
+  for (const auto &item : monst_infop->carrying) {
     auto t = level->thing_find(item.id);
     if (! t) {
       continue;
@@ -61,7 +61,7 @@ std::vector< Thingp > Thing::get_treasure_list(void)
 
     dbg("Treasure %s", t->to_string().c_str());
 
-    if (t->monstp && t->monstp->carrying.size()) {
+    if (t->monst_infop && t->monst_infop->carrying.size()) {
       auto tr2 = t->get_treasure_list();
       std::move(tr2.begin(), tr2.end(), std::back_inserter(tr));
     }

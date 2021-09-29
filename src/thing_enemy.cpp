@@ -15,11 +15,11 @@
 bool Thing::is_enemy(Thingp attacker) const
 {
   TRACE_AND_INDENT();
-  if (unlikely(! monstp)) {
+  if (unlikely(! monst_infop)) {
     return false;
   }
 
-  if (monstp->enemies.find(attacker->id) != monstp->enemies.end()) {
+  if (monst_infop->enemies.find(attacker->id) != monst_infop->enemies.end()) {
     return true;
   }
   return false;
@@ -31,11 +31,11 @@ bool Thing::is_enemy(Thingp attacker) const
 void Thing::enemies_tick(void)
 {
   TRACE_AND_INDENT();
-  if (! monstp) {
+  if (! monst_infop) {
     return;
   }
 
-  for (auto &p : monstp->enemies) {
+  for (auto &p : monst_infop->enemies) {
     if (--p.second > 0) {
       continue;
     }
@@ -49,10 +49,10 @@ void Thing::enemies_tick(void)
         if (is_player() && game->robot_mode) {
           CON("Robot: Remove enemy: %s", attacker->to_string().c_str());
         }
-        monstp->enemies.erase(p.first);
+        monst_infop->enemies.erase(p.first);
       }
     } else {
-      monstp->enemies.erase(p.first);
+      monst_infop->enemies.erase(p.first);
     }
     return;
   }
@@ -65,7 +65,7 @@ void Thing::add_enemy(Thingp attacker)
     return;
   }
 
-  if (unlikely(! monstp)) {
+  if (unlikely(! monst_infop)) {
     return;
   }
 
@@ -84,15 +84,15 @@ void Thing::add_enemy(Thingp attacker)
     return;
   }
 
-  if (! monstp->enemies[ attacker->id ]) {
+  if (! monst_infop->enemies[ attacker->id ]) {
     if (is_player() && game->robot_mode) {
       CON("Robot: Add new enemy %s", attacker->to_string().c_str());
     } else {
       dbg("Add new enemy %s", attacker->to_string().c_str());
     }
-    monstp->enemies[ attacker->id ] = ai_is_able_to_remember_enemies_for_n_ticks();
+    monst_infop->enemies[ attacker->id ] = ai_is_able_to_remember_enemies_for_n_ticks();
   } else {
     dbg("Increment old enemy %s", attacker->to_string().c_str());
-    monstp->enemies[ attacker->id ] *= 2;
+    monst_infop->enemies[ attacker->id ] *= 2;
   }
 }

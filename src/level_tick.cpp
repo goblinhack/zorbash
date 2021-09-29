@@ -43,11 +43,6 @@ bool Level::tick(void)
   // LOG("Tick");
   // TOPCON("monsts %d.", monst_count);
 
-  static uint32_t tick_begin_ms;
-  if (! tick_begin_ms) {
-    tick_begin_ms = time_get_time_ms();
-  }
-
   if (! game->started) {
     return false;
   }
@@ -69,10 +64,6 @@ bool Level::tick(void)
   if (! game->tick_requested.empty()) {
     game->tick_begin_now();
 
-    tick_begin_ms = time_get_time_ms();
-
-    uint32_t tick_begin_ms = time_get_time_ms();
-
     FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL(this, t)
     {
       uint32_t tick_begin_ms = time_get_time_ms();
@@ -83,11 +74,6 @@ bool Level::tick(void)
       }
     }
     FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL_END(this)
-
-    if ((time_get_time_ms() - tick_begin_ms) > LEVEL_TICK_DURATION_TOO_LONG) {
-      err("PERF: All things tick took too long, duration %u ms, max %u ms", time_get_time_ms() - tick_begin_ms,
-          LEVEL_TICK_DURATION_TOO_LONG);
-    }
   }
 
   FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL(this, t)
@@ -111,7 +97,7 @@ bool Level::tick(void)
   //
   game->things_are_moving = false;
 
-  static const int wait_count_max = LEVEL_TICK_DURATION_TOO_LONG;
+  static const int wait_count_max = THING_TICK_WAIT_TOO_LONG;
   static int       wait_count;
   wait_count++;
 
@@ -368,9 +354,6 @@ bool Level::tick(void)
   }
 
   if (game->things_are_moving) {
-    if ((time_get_time_ms() - tick_begin_ms) > LEVEL_TICK_DURATION_TOO_LONG) {
-      con("PERF: Level completed (waiting on moving things) tick duration %u ms", time_get_time_ms() - tick_begin_ms);
-    }
     return false;
   }
 
@@ -490,7 +473,7 @@ bool Level::tick(void)
         CON("Robot: tick requested");
         game->robot_mode_tick_requested = false;
         if (player) {
-          if (player->monstp && player->monstp->move_path.size()) {
+          if (player->monst_infop && player->monst_infop->move_path.size()) {
             player->path_pop_next_move();
           }
         }
@@ -503,14 +486,10 @@ bool Level::tick(void)
         CON("Robot: a new tick was requested");
       }
     } else if (player) {
-      if (player->monstp && player->monstp->move_path.size()) {
+      if (player->monst_infop && player->monst_infop->move_path.size()) {
         player->path_pop_next_move();
       }
     }
-  }
-
-  if ((time_get_time_ms() - tick_begin_ms) > LEVEL_TICK_DURATION_TOO_LONG) {
-    con("PERF: Level completed tick duration %u ms", time_get_time_ms() - tick_begin_ms);
   }
 
   //

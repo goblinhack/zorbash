@@ -186,7 +186,7 @@ void Game::wid_enchant_an_item(void)
 
   enchant_items.clear();
   std::map< Tpp, bool > found;
-  for (auto id : player->monstp->carrying) {
+  for (auto id : player->monst_infop->carrying) {
     auto t = thing_find(id);
     if (t) {
       auto tp = t->tp();
@@ -206,7 +206,7 @@ void Game::wid_enchant_an_item(void)
     }
   }
 
-  for (auto id : player->monstp->skills) {
+  for (auto id : player->monst_infop->skills) {
     auto t = thing_find(id);
     if (t) {
       auto tp = t->tp();

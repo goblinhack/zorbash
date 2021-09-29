@@ -22,7 +22,7 @@ bool Thing::carry(Thingp item)
 
   dbg("Try to carry %s", item->to_string().c_str());
 
-  if (! monstp && ! is_bag()) {
+  if (! monst_infop && ! is_bag()) {
     dbg("No; not a monst or bag");
     return false;
   }
@@ -64,14 +64,14 @@ bool Thing::carry(Thingp item)
     //
     // Bag being carried
     //
-    dbg("Added bag to bag at %d,%d", item->monstp->bag_position.x, item->monstp->bag_position.y);
+    dbg("Added bag to bag at %d,%d", item->monst_infop->bag_position.x, item->monst_infop->bag_position.y);
   } else if (! item->is_bag_item()) {
     //
     // A key for example, does not go in a bag
     //
     dbg("Non item not added to bag");
   } else if (bag_add(item)) {
-    dbg("Added to bag at %d,%d", item->monstp->bag_position.x, item->monstp->bag_position.y);
+    dbg("Added to bag at %d,%d", item->monst_infop->bag_position.x, item->monst_infop->bag_position.y);
   } else {
     dbg("No; cannot store in a bag");
     set_where_i_failed_to_collect_last(make_point(item->mid_at));
@@ -97,7 +97,7 @@ bool Thing::carry(Thingp item)
     existing_owner->drop_into_ether(item);
   }
 
-  for (const auto &item2 : monstp->carrying) {
+  for (const auto &item2 : monst_infop->carrying) {
     if (item2 == item->id) {
       dbg("No; already carried");
       return false;
@@ -119,7 +119,7 @@ bool Thing::carry(Thingp item)
     }
   }
 
-  monstp->carrying.push_front(item->id);
+  monst_infop->carrying.push_front(item->id);
   item->set_owner(this);
   item->hide();
 
@@ -152,7 +152,7 @@ bool Thing::carry(Thingp item)
   // Auto carry items in the bag? like keys?
   //
   if (item->is_bag_item_container()) {
-    auto carrying_copy = item->monstp->carrying;
+    auto carrying_copy = item->monst_infop->carrying;
     for (const auto &item2 : carrying_copy) {
       auto t = level->thing_find(item2.id);
       if (t) {
@@ -235,7 +235,7 @@ std::list< Thingp > Thing::anything_to_carry_at(fpoint at)
       //
       open(t);
 
-      for (const auto &item : t->monstp->carrying) {
+      for (const auto &item : t->monst_infop->carrying) {
         auto t = level->thing_find(item.id);
         if (t) {
           items.push_back(std::make_pair(t, get_item_value(t)));

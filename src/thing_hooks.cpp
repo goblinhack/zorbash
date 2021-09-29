@@ -216,31 +216,31 @@ void Thing::remove_all_references()
     for (auto group = THING_GROUP_ALL; group < MAX_THING_GROUPS; group++) {
       for (auto p : level->all_things[ group ]) {
         auto t = p.second;
-        if (! t->monstp) {
+        if (! t->monst_infop) {
           continue;
         }
         if (t == this) {
           continue;
         }
-        if (id == t->monstp->on_fire_id_anim) {
+        if (id == t->monst_infop->on_fire_id_anim) {
           err("thing is still attached to (on fire) %s", t->to_string().c_str());
         }
-        if (id == t->monstp->owner_id) {
+        if (id == t->monst_infop->owner_id) {
           err("thing is still attached to (owner) %s", t->to_string().c_str());
         }
-        if (id == t->monstp->minion_owner_id) {
+        if (id == t->monst_infop->minion_owner_id) {
           err("thing is still attached to (minion owner) %s", t->to_string().c_str());
         }
-        if (id == t->monstp->spawner_owner_id) {
+        if (id == t->monst_infop->spawner_owner_id) {
           err("thing is still attached to (spawner owner) %s", t->to_string().c_str());
         }
-        if (id == t->monstp->weapon_id) {
+        if (id == t->monst_infop->weapon_id) {
           err("thing is still attached to (weapon) %s", t->to_string().c_str());
         }
-        if (id == t->monstp->weapon_id_carry_anim) {
+        if (id == t->monst_infop->weapon_id_carry_anim) {
           err("thing is still attached to (weapon carry) %s", t->to_string().c_str());
         }
-        if (id == t->monstp->weapon_id_use_anim) {
+        if (id == t->monst_infop->weapon_id_use_anim) {
           err("thing is still attached to (weapon use) %s", t->to_string().c_str());
         }
       }
@@ -249,62 +249,62 @@ void Thing::remove_all_references()
     int group = get_group();
     for (auto p : level->all_things_of_interest[ group ]) {
       auto t = p.second;
-      if (! t->monstp) {
+      if (! t->monst_infop) {
         continue;
       }
       if (t == this) {
         continue;
       }
-      if (id == t->monstp->on_fire_id_anim) {
+      if (id == t->monst_infop->on_fire_id_anim) {
         err("interesting thing is still attached to (on fire) %s", t->to_string().c_str());
       }
-      if (id == t->monstp->owner_id) {
+      if (id == t->monst_infop->owner_id) {
         err("interesting thing is still attached to (owner) %s", t->to_string().c_str());
       }
-      if (id == t->monstp->minion_owner_id) {
+      if (id == t->monst_infop->minion_owner_id) {
         err("interesting thing is still attached to (minion owner) %s", t->to_string().c_str());
       }
-      if (id == t->monstp->spawner_owner_id) {
+      if (id == t->monst_infop->spawner_owner_id) {
         err("interesting thing is still attached to (spawner owner) %s", t->to_string().c_str());
       }
-      if (id == t->monstp->weapon_id) {
+      if (id == t->monst_infop->weapon_id) {
         err("interesting thing is still attached to (weapon) %s", t->to_string().c_str());
       }
-      if (id == t->monstp->weapon_id_carry_anim) {
+      if (id == t->monst_infop->weapon_id_carry_anim) {
         err("interesting thing is still attached to (weapon carry) %s", t->to_string().c_str());
       }
-      if (id == t->monstp->weapon_id_use_anim) {
+      if (id == t->monst_infop->weapon_id_use_anim) {
         err("interesting thing is still attached to (weapon use) %s", t->to_string().c_str());
       }
     }
 
     for (auto p : level->all_animated_things[ group ]) {
       auto t = p.second;
-      if (! t->monstp) {
+      if (! t->monst_infop) {
         continue;
       }
       if (t == this) {
         continue;
       }
-      if (id == t->monstp->on_fire_id_anim) {
+      if (id == t->monst_infop->on_fire_id_anim) {
         err("interesting thing is still attached to (on fire) %s", t->to_string().c_str());
       }
-      if (id == t->monstp->owner_id) {
+      if (id == t->monst_infop->owner_id) {
         err("interesting thing is still attached to (owner) %s", t->to_string().c_str());
       }
-      if (id == t->monstp->minion_owner_id) {
+      if (id == t->monst_infop->minion_owner_id) {
         err("interesting thing is still attached to (minion owner) %s", t->to_string().c_str());
       }
-      if (id == t->monstp->spawner_owner_id) {
+      if (id == t->monst_infop->spawner_owner_id) {
         err("interesting thing is still attached to (spawner owner) %s", t->to_string().c_str());
       }
-      if (id == t->monstp->weapon_id) {
+      if (id == t->monst_infop->weapon_id) {
         err("interesting thing is still attached to (weapon) %s", t->to_string().c_str());
       }
-      if (id == t->monstp->weapon_id_carry_anim) {
+      if (id == t->monst_infop->weapon_id_carry_anim) {
         err("interesting thing is still attached to (weapon carry) %s", t->to_string().c_str());
       }
-      if (id == t->monstp->weapon_id_use_anim) {
+      if (id == t->monst_infop->weapon_id_use_anim) {
         err("interesting thing is still attached to (weapon use) %s", t->to_string().c_str());
       }
     }

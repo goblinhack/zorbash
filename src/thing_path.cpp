@@ -20,18 +20,18 @@
 bool Thing::path_pop_next_move(void)
 {
   TRACE_AND_INDENT();
-  if (! monstp->move_path.size()) {
+  if (! monst_infop->move_path.size()) {
     return false;
   }
 
   std::string s = "";
   IF_DEBUG3
   {
-    for (auto p : monstp->move_path) {
+    for (auto p : monst_infop->move_path) {
       s += p.to_string() + " ";
     }
   }
-  auto to         = monstp->move_path[ 0 ];
+  auto to         = monst_infop->move_path[ 0 ];
   auto future_pos = point(to.x, to.y);
   dbg("Path pop next move %s, path: %s", future_pos.to_string().c_str(), s.c_str());
 
@@ -56,7 +56,7 @@ bool Thing::path_pop_next_move(void)
   //
   // Remove the first element
   //
-  monstp->move_path.erase(monstp->move_path.begin());
+  monst_infop->move_path.erase(monst_infop->move_path.begin());
 
   //
   // Jump over obstacles if they appear in the path
@@ -70,9 +70,9 @@ bool Thing::path_pop_next_move(void)
       }
 
       TRACE_AND_INDENT();
-      if (monstp->move_path.size()) {
-        auto jump_pos = monstp->move_path[ 0 ];
-        monstp->move_path.erase(monstp->move_path.begin());
+      if (monst_infop->move_path.size()) {
+        auto jump_pos = monst_infop->move_path[ 0 ];
+        monst_infop->move_path.erase(monst_infop->move_path.begin());
 
         //
         // If the thing we are going to land on is also a hazard, can we jump further?
@@ -84,9 +84,9 @@ bool Thing::path_pop_next_move(void)
         }
 
         TRACE_AND_INDENT();
-        if (will_avoid_hazard(jump_pos) && monstp->move_path.size()) {
-          auto jump_pos = monstp->move_path[ 0 ];
-          monstp->move_path.erase(monstp->move_path.begin());
+        if (will_avoid_hazard(jump_pos) && monst_infop->move_path.size()) {
+          auto jump_pos = monst_infop->move_path[ 0 ];
+          monst_infop->move_path.erase(monst_infop->move_path.begin());
 
           if (will_avoid_hazard(jump_pos)) {
             //
@@ -287,7 +287,7 @@ bool Thing::cursor_path_pop_first_move(void)
     // A path to the target exists.
     //
     new_monst();
-    monstp->move_path = game->cursor_move_path;
+    monst_infop->move_path = game->cursor_move_path;
     game->cursor_move_path.clear();
 
     if (path_pop_next_move()) {

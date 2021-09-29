@@ -33,7 +33,7 @@ extern uint32_t csum(char *mem, uint32_t len);
     out << bits(magic);                                                                                                \
   }
 
-std::ostream &operator<<(std::ostream &out, Bits< Monstp & > const my)
+std::ostream &operator<<(std::ostream &out, Bits< MonstInfop & > const my)
 {
   TRACE_AND_INDENT();
   /////////////////////////////////////////////////////////////////////////
@@ -152,10 +152,10 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   const std::string name(tp_id_map[ my.t->tp_id - 1 ]->name());
   out << bits(name);
 
-  bool monst = (my.t->monstp != nullptr);
+  bool monst = (my.t->monst_infop != nullptr);
   out << bits(monst);
   if (monst) {
-    out << bits(my.t->monstp);
+    out << bits(my.t->monst_infop);
   }
 
   out << bits(my.t->tp_id);
@@ -389,8 +389,8 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   IF_DEBUG4
   {
     auto diff = out.tellp() - start;
-    LOG("SAVE %d bytes %s TP %d ID %x last_mid_at %f,%f monstp %p", (int) diff, name.c_str(), my.t->tp_id, my.t->id.id,
-        my.t->last_mid_at.x, my.t->last_mid_at.y, my.t->monstp);
+    LOG("SAVE %d bytes %s TP %d ID %x last_mid_at %f,%f monst_infop %p", (int) diff, name.c_str(), my.t->tp_id,
+        my.t->id.id, my.t->last_mid_at.x, my.t->last_mid_at.y, my.t->monst_infop);
   }
   return (out);
 }

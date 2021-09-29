@@ -209,7 +209,7 @@ void Game::wid_wield_create(void)
 
   wield_items.clear();
 
-  for (const auto &item : player->monstp->carrying) {
+  for (const auto &item : player->monst_infop->carrying) {
     auto t = level->thing_find(item.id);
     if (t->is_weapon()) {
       wield_items.push_back(t);

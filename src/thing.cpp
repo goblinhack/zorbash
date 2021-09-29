@@ -48,9 +48,9 @@ uint8_t Thing::z_prio(void) const { return (tp()->z_prio); }
 
 std::size_t Thing::get_light_count(void) const
 {
-  if (likely(monstp != nullptr)) {
-    verify(monstp);
-    return (monstp->light.size());
+  if (likely(monst_infop != nullptr)) {
+    verify(monst_infop);
+    return (monst_infop->light.size());
   } else {
     return 0;
   }
@@ -59,9 +59,9 @@ std::size_t Thing::get_light_count(void) const
 const ThingId &Thing::get_immediate_owner_id(void) const
 {
   TRACE_AND_INDENT();
-  if (likely(monstp != nullptr)) {
-    verify(monstp);
-    return (monstp->owner_id);
+  if (likely(monst_infop != nullptr)) {
+    verify(monst_infop);
+    return (monst_infop->owner_id);
   } else {
     return (NoThingId);
   }
@@ -81,15 +81,15 @@ const ThingId &Thing::set_owner_id(const ThingId &v)
 {
   TRACE_AND_INDENT();
   new_monst();
-  return (monstp->owner_id = v);
+  return (monst_infop->owner_id = v);
 }
 
 const ThingId &Thing::get_immediate_minion_owner_id(void) const
 {
   TRACE_AND_INDENT();
-  if (likely(monstp != nullptr)) {
-    verify(monstp);
-    return (monstp->minion_owner_id);
+  if (likely(monst_infop != nullptr)) {
+    verify(monst_infop);
+    return (monst_infop->minion_owner_id);
   } else {
     return (NoThingId);
   }
@@ -99,15 +99,15 @@ const ThingId &Thing::set_minion_owner_id(const ThingId &v)
 {
   TRACE_AND_INDENT();
   new_monst();
-  return (monstp->minion_owner_id = v);
+  return (monst_infop->minion_owner_id = v);
 }
 
 const ThingId &Thing::get_immediate_spawned_owner_id(void) const
 {
   TRACE_AND_INDENT();
-  if (likely(monstp != nullptr)) {
-    verify(monstp);
-    return (monstp->spawner_owner_id);
+  if (likely(monst_infop != nullptr)) {
+    verify(monst_infop);
+    return (monst_infop->spawner_owner_id);
   } else {
     return (NoThingId);
   }
@@ -117,7 +117,7 @@ const ThingId &Thing::set_spawned_owner_id(const ThingId &v)
 {
   TRACE_AND_INDENT();
   new_monst();
-  return (monstp->spawner_owner_id = v);
+  return (monst_infop->spawner_owner_id = v);
 }
 
 const fpoint &Thing::get_interpolated_mid_at(void) const

@@ -385,7 +385,7 @@ void Game::wid_thing_info_create(Thingp t, bool when_hovering_over)
   if (t->is_player() || t->is_bag_item_container()) {
     int existing_bags_height = 0;
 
-    for (const auto &item : player->monstp->carrying) {
+    for (const auto &item : player->monst_infop->carrying) {
       auto b = game->thing_find(item.id);
       if (! b) {
         continue;
@@ -926,11 +926,11 @@ void Game::wid_thing_info_add_carry_info(WidPopup *w, Thingp t)
     return;
   }
 
-  if (! t->monstp) {
+  if (! t->monst_infop) {
     return;
   }
 
-  auto items = t->monstp->carrying.size();
+  auto items = t->monst_infop->carrying.size();
 
   if (t->is_open) {
     w->log(" ");
