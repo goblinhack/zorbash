@@ -166,12 +166,9 @@ void Thing::init(Levelp level, const std::string &name, const fpoint born, const
   // Add AI ability
   //
   if (tpp->is_monst() || tpp->is_player()) {
-    new_dmap_can_see();
-    if (tpp->ai_is_able_to_jump()) {
-      new_dmap_unused();
-    }
-    new_age_map();
-    new_seen_map();
+    clear_dmap_can_see();
+    clear_age_map();
+    clear_seen_map();
   }
 
   if (tpp->is_player()) {
@@ -568,18 +565,6 @@ void Thing::reinit(void)
   if (is_attached) {
     level_enter();
     level_push();
-  }
-
-  //
-  // Add AI ability
-  //
-  if (tpp->is_monst() || tpp->is_player()) {
-    new_dmap_can_see();
-    if (tpp->ai_is_able_to_jump()) {
-      new_dmap_unused();
-    }
-    new_age_map();
-    new_seen_map();
   }
 
 #if 0

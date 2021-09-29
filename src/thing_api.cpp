@@ -1578,54 +1578,18 @@ void Thing::new_monst(void)
 AgeMap *Thing::get_age_map(void)
 {
   TRACE_AND_INDENT();
-  if (monst_infop) {
-    verify(monst_infop);
-    return (monst_infop->_age_map);
-  } else {
-    return 0;
-  }
-}
-
-void Thing::new_age_map(void)
-{
-  TRACE_AND_INDENT();
   new_monst();
-  if (! monst_infop->_age_map) {
-    monst_infop->_age_map = new AgeMap();
-    newptr(monst_infop->_age_map, "age map");
-
-    //
-    // Setup random ages
-    //
-    auto _age_map = monst_infop->_age_map->val;
-    for (auto y = 0; y < MAP_HEIGHT; y++) {
-      for (auto x = 0; x < MAP_WIDTH; x++) {
-        set(_age_map, x, y, 0U);
-      }
-    }
-  }
-}
-
-void Thing::delete_age_map(void)
-{
-  TRACE_AND_INDENT();
-  if (monst_infop) {
-    verify(monst_infop);
-    if (monst_infop->_age_map) {
-      oldptr(monst_infop->_age_map);
-      delete monst_infop->_age_map;
-      monst_infop->_age_map = 0;
-    }
-  }
+  return (&monst_infop->age_map);
 }
 
 void Thing::clear_age_map(void)
 {
   TRACE_AND_INDENT();
-  if (monst_infop) {
-    verify(monst_infop);
-    if (monst_infop->_age_map) {
-      *monst_infop->_age_map = {};
+  new_monst();
+
+  for (auto y = 0; y < MAP_HEIGHT; y++) {
+    for (auto x = 0; x < MAP_WIDTH; x++) {
+      set(monst_infop->age_map.val, x, y, 0U);
     }
   }
 }
@@ -1636,54 +1600,18 @@ void Thing::clear_age_map(void)
 AgeMap *Thing::get_seen_map(void)
 {
   TRACE_AND_INDENT();
-  if (monst_infop) {
-    verify(monst_infop);
-    return (monst_infop->_seen_map);
-  } else {
-    return 0;
-  }
-}
-
-void Thing::new_seen_map(void)
-{
-  TRACE_AND_INDENT();
   new_monst();
-  if (! monst_infop->_seen_map) {
-    monst_infop->_seen_map = new AgeMap();
-    newptr(monst_infop->_seen_map, "age map");
-
-    //
-    // Setup random ages
-    //
-    auto _seen_map = monst_infop->_seen_map->val;
-    for (auto y = 0; y < MAP_HEIGHT; y++) {
-      for (auto x = 0; x < MAP_WIDTH; x++) {
-        set(_seen_map, x, y, 0U);
-      }
-    }
-  }
-}
-
-void Thing::delete_seen_map(void)
-{
-  TRACE_AND_INDENT();
-  if (monst_infop) {
-    verify(monst_infop);
-    if (monst_infop->_seen_map) {
-      oldptr(monst_infop->_seen_map);
-      delete monst_infop->_seen_map;
-      monst_infop->_seen_map = 0;
-    }
-  }
+  return (&monst_infop->seen_map);
 }
 
 void Thing::clear_seen_map(void)
 {
   TRACE_AND_INDENT();
-  if (monst_infop) {
-    verify(monst_infop);
-    if (monst_infop->_seen_map) {
-      *monst_infop->_seen_map = {};
+  new_monst();
+
+  for (auto y = 0; y < MAP_HEIGHT; y++) {
+    for (auto x = 0; x < MAP_WIDTH; x++) {
+      set(monst_infop->seen_map.val, x, y, 0U);
     }
   }
 }
@@ -1694,106 +1622,18 @@ void Thing::clear_seen_map(void)
 Dmap *Thing::get_dmap_can_see(void)
 {
   TRACE_AND_INDENT();
-  if (monst_infop) {
-    verify(monst_infop);
-    return (monst_infop->_dmap_can_see);
-  } else {
-    return 0;
-  }
-}
-
-void Thing::new_dmap_can_see(void)
-{
-  TRACE_AND_INDENT();
   new_monst();
-  if (! monst_infop->_dmap_can_see) {
-    monst_infop->_dmap_can_see = new Dmap();
-    newptr(monst_infop->_dmap_can_see, "AgeMap");
-
-    auto dmap = monst_infop->_dmap_can_see->val;
-    for (auto y = 0; y < MAP_HEIGHT; y++) {
-      for (auto x = 0; x < MAP_WIDTH; x++) {
-        set(dmap, x, y, DMAP_IS_WALL);
-      }
-    }
-  }
-}
-
-void Thing::delete_dmap_can_see(void)
-{
-  TRACE_AND_INDENT();
-  if (monst_infop) {
-    verify(monst_infop);
-    if (monst_infop->_dmap_can_see) {
-      oldptr(monst_infop->_dmap_can_see);
-      delete monst_infop->_dmap_can_see;
-      monst_infop->_dmap_can_see = 0;
-    }
-  }
+  return (&monst_infop->dmap_can_see);
 }
 
 void Thing::clear_dmap_can_see(void)
 {
   TRACE_AND_INDENT();
-  if (monst_infop) {
-    verify(monst_infop);
-    if (monst_infop->_dmap_can_see) {
-      *monst_infop->_dmap_can_see = {};
-    }
-  }
-}
-
-////////////////////////////////////////////////////////////////////////////
-// _dmap_unused
-////////////////////////////////////////////////////////////////////////////
-Dmap *Thing::get_dmap_unused(void)
-{
-  TRACE_AND_INDENT();
-  if (monst_infop) {
-    verify(monst_infop);
-    return (monst_infop->_dmap_unused);
-  } else {
-    return 0;
-  }
-}
-
-void Thing::new_dmap_unused(void)
-{
-  TRACE_AND_INDENT();
   new_monst();
-  if (! monst_infop->_dmap_unused) {
-    monst_infop->_dmap_unused = new Dmap();
-    newptr(monst_infop->_dmap_unused, "AgeMap");
 
-    auto dmap = monst_infop->_dmap_unused->val;
-    for (auto y = 0; y < MAP_HEIGHT; y++) {
-      for (auto x = 0; x < MAP_WIDTH; x++) {
-        set(dmap, x, y, DMAP_IS_WALL);
-      }
-    }
-  }
-}
-
-void Thing::delete_dmap_unused(void)
-{
-  TRACE_AND_INDENT();
-  if (monst_infop) {
-    verify(monst_infop);
-    if (monst_infop->_dmap_unused) {
-      oldptr(monst_infop->_dmap_unused);
-      delete monst_infop->_dmap_unused;
-      monst_infop->_dmap_unused = 0;
-    }
-  }
-}
-
-void Thing::clear_dmap_unused(void)
-{
-  TRACE_AND_INDENT();
-  if (monst_infop) {
-    verify(monst_infop);
-    if (monst_infop->_dmap_unused) {
-      *monst_infop->_dmap_unused = {};
+  for (auto y = 0; y < MAP_HEIGHT; y++) {
+    for (auto x = 0; x < MAP_WIDTH; x++) {
+      set(monst_infop->dmap_can_see.val, x, y, DMAP_IS_WALL);
     }
   }
 }

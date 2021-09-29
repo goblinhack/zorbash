@@ -1039,7 +1039,6 @@ public:
   struct AgeMap_ *       get_age_map(void);
   struct AgeMap_ *       get_seen_map(void);
   struct Dmap_ *         get_dmap_can_see(void);
-  struct Dmap_ *         get_dmap_unused(void);
   ts_t                   decr_ts_anim_delay_end(ts_t);
   ts_t                   decr_ts_anim_delay_end(void);
   ts_t                   decr_ts_bounce_begin(ts_t);
@@ -1183,7 +1182,6 @@ public:
   void chasm_tick();
   void clear_age_map(void);
   void clear_dmap_can_see(void);
-  void clear_dmap_unused(void);
   void clear_move_path(const std::string &why);
   void clear_seen_map(void);
   void con(const char *fmt, ...) const __attribute__((format(printf, 2, 3)));
@@ -1199,14 +1197,10 @@ public:
   void dead_scheduled(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
   void dead_scheduled(const std::string &);
   void dead_scheduled_(const char *fmt, va_list args); // compile error without
-  void delete_age_map(void);
-  void delete_dmap_can_see(void);
-  void delete_dmap_unused(void);
   void delete_laser();
   void delete_lights(void);
   void delete_particle();
   void delete_projectile();
-  void delete_seen_map(void);
   void destroy();
   void destroyed(void);
   void die(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
@@ -1271,13 +1265,9 @@ public:
   void move_to(fpoint to);
   void move_to_immediately(fpoint to);
   void msg(const std::string &);
-  void new_age_map(void);
-  void new_dmap_can_see(void);
-  void new_dmap_unused(void);
   void new_light(point offset, int strength);
   void new_light(point offset, int strength, color col, int fbo);
   void new_monst(void);
-  void new_seen_map(void);
   void on_bite(void);
   void on_born(void);
   void on_enchant(void);
