@@ -1597,12 +1597,7 @@ void Thing::clear_age_map(void)
 {
   TRACE_AND_INDENT();
   new_monst_ai();
-
-  for (auto y = 0; y < MAP_HEIGHT; y++) {
-    for (auto x = 0; x < MAP_WIDTH; x++) {
-      set(monst_aip->age_map.val, x, y, 0U);
-    }
-  }
+  monst_aip->age_map.val = {};
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -1619,12 +1614,7 @@ void Thing::clear_seen_map(void)
 {
   TRACE_AND_INDENT();
   new_monst_ai();
-
-  for (auto y = 0; y < MAP_HEIGHT; y++) {
-    for (auto x = 0; x < MAP_WIDTH; x++) {
-      set(monst_aip->seen_map.val, x, y, 0U);
-    }
-  }
+  monst_aip->seen_map.val = {};
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -1647,6 +1637,40 @@ void Thing::clear_dmap_can_see(void)
       set(monst_aip->dmap_can_see.val, x, y, DMAP_IS_WALL);
     }
   }
+}
+
+////////////////////////////////////////////////////////////////////////////
+// can_see_currently
+////////////////////////////////////////////////////////////////////////////
+FovMap *Thing::get_can_see_currently(void)
+{
+  TRACE_AND_INDENT();
+  new_monst_ai();
+  return (&monst_aip->can_see_currently);
+}
+
+void Thing::clear_can_see_currently(void)
+{
+  TRACE_AND_INDENT();
+  new_monst_ai();
+  monst_aip->can_see_currently.can_see = {};
+}
+
+////////////////////////////////////////////////////////////////////////////
+// can_see_ever
+////////////////////////////////////////////////////////////////////////////
+FovMap *Thing::get_can_see_ever(void)
+{
+  TRACE_AND_INDENT();
+  new_monst_ai();
+  return (&monst_aip->can_see_ever);
+}
+
+void Thing::clear_can_see_ever(void)
+{
+  TRACE_AND_INDENT();
+  new_monst_ai();
+  monst_aip->can_see_ever.can_see = {};
 }
 
 int Thing::item_height(void) const

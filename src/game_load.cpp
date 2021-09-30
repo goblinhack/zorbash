@@ -170,6 +170,8 @@ std::istream &operator>>(std::istream &in, Bits< MonstAip & > my)
   in >> bits(my.t->age_map.val);
   in >> bits(my.t->seen_map.val);
   in >> bits(my.t->dmap_can_see.val);
+  in >> bits(my.t->can_see_currently.can_see);
+  in >> bits(my.t->can_see_ever.can_see);
   in >> bits(my.t->enemies);
   in >> bits(my.t->move_path);
   return (in);

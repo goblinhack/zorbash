@@ -11,6 +11,7 @@
 #include "my_thing_ai.h"
 #include "my_thing_id.h"
 #include "my_time.h"
+#include "my_level_shadow_casting.h"
 #include <list>
 
 constexpr uint32_t THING_MAGIC_BEGIN = 11221122;
@@ -167,9 +168,11 @@ std::istream &operator>>(std::istream &in, Bits< MonstInfop & > my);
 
 typedef struct MonstAi_ {
 public:
-  AgeMap                   age_map      = {}; // How old a cell is
-  AgeMap                   seen_map     = {}; // If we've ever seen this tile and when
-  Dmap                     dmap_can_see = {}; // What the monster can reach during AI
+  AgeMap                   age_map;           // How old a cell is
+  AgeMap                   seen_map;          // If we've ever seen this tile and when
+  Dmap                     dmap_can_see;      // What the monster can reach during AI
+  FovMap                   can_see_currently; // Shadowcasting of what can be seen currently
+  FovMap                   can_see_ever;      // Shadowcasting of what can be seen ever on this level
   std::map< ThingId, int > enemies {};        // List of things that wronged us
   std::vector< point >     move_path;
 } MonstAi;

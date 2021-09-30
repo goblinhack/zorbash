@@ -33,6 +33,7 @@ bool Thing::path_pop_next_move(void)
   {
     for (auto p : monst_aip->move_path) {
       s += p.to_string() + " ";
+      (void) level->thing_new("ai_path1", fpoint(p.x, p.y));
     }
   }
   auto to         = monst_aip->move_path[ 0 ];

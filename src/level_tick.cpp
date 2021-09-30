@@ -500,6 +500,8 @@ bool Level::tick(void)
     return true;
   }
 
+  debug_path_clear();
+
   return false;
 }
 

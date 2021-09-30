@@ -1040,6 +1040,8 @@ public:
   struct AgeMap_ *       get_age_map(void);
   struct AgeMap_ *       get_seen_map(void);
   struct Dmap_ *         get_dmap_can_see(void);
+  struct FovMap_ *       get_can_see_currently(void);
+  struct FovMap_ *       get_can_see_ever(void);
   ts_t                   decr_ts_anim_delay_end(ts_t);
   ts_t                   decr_ts_anim_delay_end(void);
   ts_t                   decr_ts_bounce_begin(ts_t);
@@ -1182,6 +1184,8 @@ public:
   void brazier_tick();
   void chasm_tick();
   void clear_age_map(void);
+  void clear_can_see_currently(void);
+  void clear_can_see_ever(void);
   void clear_dmap_can_see(void);
   void clear_move_path(const std::string &why);
   void clear_seen_map(void);

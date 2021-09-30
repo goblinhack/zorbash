@@ -81,7 +81,7 @@ void Level::scan(
     return;  // Distance is out-of-range.
   }
 
-  if (!is_oob(pov_x + distance * xy, pov_y + distance * yy)) {
+  if (is_oob(pov_x + distance * xy, pov_y + distance * yy)) {
     return;  // Distance is out-of-bounds.
   }
 
@@ -102,7 +102,7 @@ void Level::scan(
     const int map_x = pov_x + angle * xx + distance * xy;
     const int map_y = pov_y + angle * yx + distance * yy;
 
-    if (!is_oob(map_x, map_y)) {
+    if (is_oob(map_x, map_y)) {
       continue;  // Angle is out-of-bounds.
     }
 
@@ -131,7 +131,7 @@ void Level::scan(
 
 bool Level::fov_calculete(FovMap* fov, int pov_x, int pov_y, int max_radius, bool light_walls) 
 {
-  if (!is_oob(pov_x, pov_y)) {
+  if (is_oob(pov_x, pov_y)) {
     err("Point of view {%i, %i} is out of bounds.", pov_x, pov_y);
     return false;
   }

@@ -147,6 +147,8 @@ std::ostream &operator<<(std::ostream &out, Bits< MonstAip & > const my)
   out << bits(my.t->age_map.val);
   out << bits(my.t->seen_map.val);
   out << bits(my.t->dmap_can_see.val);
+  out << bits(my.t->can_see_currently.can_see);
+  out << bits(my.t->can_see_ever.can_see);
   out << bits(my.t->enemies);
   out << bits(my.t->move_path);
   return (out);

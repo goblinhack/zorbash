@@ -404,6 +404,20 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
     }
   }
 
+  bool light_walls = false;
+  level->fov_calculete(&monst_aip->can_see_currently, mid_at.x, mid_at.y, ai_vision_distance(), light_walls);
+
+  if (search_type == 0) {
+    for (int y = miny; y < maxy; y++) {
+      for (int x = minx; x < maxx; x++) {
+        if (monst_aip->can_see_currently.can_see[ x ][ y ]) {
+          (void) level->thing_new("ai_path2", fpoint(x, y));
+          set(monst_aip->can_see_ever.can_see, x, y, true);
+        }
+      }
+    }
+  }
+
   switch (search_type) {
     case SEARCH_TYPE_LOCAL_JUMP_ALLOWED : jump_allowed = true; break;
     case SEARCH_TYPE_LOCAL_NO_JUMP : jump_allowed = false; break;
@@ -416,10 +430,8 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
   for (int y = miny; y < maxy; y++) {
     for (int x = minx; x < maxx; x++) {
       point p(x, y);
-      if (is_player()) {
-        if (! level->is_lit_ever(p)) {
-          continue;
-        }
+      if (! get(monst_aip->can_see_ever.can_see, x, y)) {
+        continue;
       }
 
       //
@@ -488,10 +500,8 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
             //
             // Must be able to see the begin/end.
             //
-            if (is_player()) {
-              if (! level->is_lit_ever(jump_begin)) {
-                continue;
-              }
+            if (! get(monst_aip->can_see_ever.can_see, jump_begin.x, jump_begin.y)) {
+              continue;
             }
 
             //
@@ -559,10 +569,8 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
           continue;
         }
 
-        if (is_player()) {
-          if (! level->is_lit_ever(p)) {
-            continue;
-          }
+        if (! get(monst_aip->can_see_ever.can_see, p.x, p.y)) {
+          continue;
         }
 
         //
@@ -604,7 +612,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
               continue;
             }
 
-            if (! level->is_lit_currently(p.x, p.y)) {
+            if (! get(monst_aip->can_see_currently.can_see, p.x, p.y)) {
               FOR_ALL_THINGS_THAT_INTERACT(level, it, p.x, p.y)
               {
                 if (it->is_changing_level || it->is_hidden || it->is_falling || it->is_jumping) {
@@ -776,14 +784,7 @@ void Thing::ai_choose_initial_goals(std::multiset< Goal > &goals, int minx, int 
         // Don't allow of attacking monsts from memory if the player or
         // robot
         //
-        auto lit_recently = level->is_lit_recently(it->mid_at.x, it->mid_at.y);
-        if (is_player()) {
-          if (it->is_offscreen) {
-            lit_recently = false;
-          }
-        } else {
-          lit_recently = true;
-        }
+        auto lit_recently = get(monst_aip->can_see_currently.can_see, it->mid_at.x, it->mid_at.y);
 
         if (is_starving) {
           if (worth_eating(it)) {
@@ -1124,10 +1125,8 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
     //
     // If an unvisited tile is next to a visited one, consider that tile.
     //
-    if (is_player()) {
-      if (! level->is_lit_ever(p.x, p.y)) {
-        continue;
-      }
+    if (! get(monst_aip->can_see_ever.can_see, p.x, p.y)) {
+      continue;
     }
 
     if (level->is_obs_wall_or_door(p.x, p.y)) {
@@ -1273,10 +1272,8 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
           //
           // If lit then we can already see it, so not worth exploring.
           //
-          if (is_player()) {
-            if (level->is_lit_ever(o)) {
-              continue;
-            }
+          if (! get(monst_aip->can_see_ever.can_see, o.x, o.y)) {
+            continue;
           }
 
           if (level->is_obs_wall_or_door(o)) {

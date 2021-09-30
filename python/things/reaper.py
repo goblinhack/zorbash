@@ -21,6 +21,7 @@ def tp_init(name, text_name):
     mytp.set_ai_is_level_explorer(False)
     mytp.set_ai_obstacle(False)
     mytp.set_ai_scent_distance(40)
+    mytp.set_ai_vision_distance(7)
     mytp.set_ai_wanderer(True)
     mytp.set_attack_eater(False)
     mytp.set_attack_humanoid(True)

@@ -5,9 +5,9 @@ import tp
 def tp_init(name):
     mytp = tp.Tp(name, name)
     mytp.set_gfx_animated(True)
-    mytp.set_gfx_show_outlined(True)
+    mytp.set_gfx_show_outlined(False)
     mytp.set_is_able_to_fall(False)
-    mytp.set_is_cursor_path(True)
+    mytp.set_is_debug_path(True)
     mytp.set_is_tmp_thing(True)
     mytp.set_is_moveable(True)
     mytp.set_is_removeable_if_out_of_slots(True)
