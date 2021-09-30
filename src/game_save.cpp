@@ -110,8 +110,6 @@ std::ostream &operator<<(std::ostream &out, Bits< MonstInfop & > const my)
   /* std::list<ThingId>   debuffs           */ out << bits(my.t->debuffs);
   /* std::string          msg               */ out << bits(my.t->msg);
   /* std::string          dead_reason       */ out << bits(my.t->dead_reason);
-  /* std::vector<ThingId> enemies           */ out << bits(my.t->enemies);
-  /* std::vector<point>   move_path         */ out << bits(my.t->move_path);
   /* std::vector<uint16_t> inventory_id     */ out << bits(my.t->inventory_id);
   /* std::vector<uint16_t> skillbox_id      */ out << bits(my.t->skillbox_id);
   /* std::vector<uint16_t> buffbox_id       */ out << bits(my.t->buffbox_id);
@@ -143,6 +141,17 @@ std::ostream &operator<<(std::ostream &out, Bits< MonstInfop & > const my)
   return (out);
 }
 
+std::ostream &operator<<(std::ostream &out, Bits< MonstAip & > const my)
+{
+  TRACE_AND_INDENT();
+  out << bits(my.t->age_map.val);
+  out << bits(my.t->seen_map.val);
+  out << bits(my.t->dmap_can_see.val);
+  out << bits(my.t->enemies);
+  out << bits(my.t->move_path);
+  return (out);
+}
+
 std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
 {
   TRACE_AND_INDENT();
@@ -152,10 +161,16 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   const std::string name(tp_id_map[ my.t->tp_id - 1 ]->name());
   out << bits(name);
 
-  bool monst = (my.t->monst_infop != nullptr);
-  out << bits(monst);
-  if (monst) {
+  bool monst_info_present = (my.t->monst_infop != nullptr);
+  out << bits(monst_info_present);
+  if (monst_info_present) {
     out << bits(my.t->monst_infop);
+  }
+
+  bool monst_ai_present = (my.t->monst_aip != nullptr);
+  out << bits(monst_ai_present);
+  if (monst_ai_present) {
+    out << bits(my.t->monst_aip);
   }
 
   out << bits(my.t->tp_id);

@@ -371,7 +371,7 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
           return true;
         }
       } else {
-        monst_infop->move_path = new_move_path;
+        monst_aip->move_path = new_move_path;
         return true;
       }
 
@@ -1711,7 +1711,7 @@ bool Thing::ai_tick(void)
             }
           }
           if (ai_create_path_to_goal(minx, miny, maxx, maxy, search_type)) {
-            if (monst_infop->move_path.size()) {
+            if (monst_aip->move_path.size()) {
               ai_change_state(MONST_STATE_MOVING, "found a new goal");
             }
             return true;
@@ -1784,7 +1784,7 @@ bool Thing::ai_tick(void)
         //
         // Finished the move?
         //
-        if (monst_infop->move_path.empty()) {
+        if (monst_aip->move_path.empty()) {
           AI_LOG("Move finished.");
           if (is_player()) {
             game->tick_begin("Robot move finished");

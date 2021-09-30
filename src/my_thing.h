@@ -51,7 +51,8 @@ typedef struct Thing_ {
 public:
   Thing_(void);
   ~Thing_(void);
-  MonstInfop     monst_infop {};
+  MonstInfop monst_infop {};
+  MonstAip   monst_aip {};
   Levelp     level {};
   int16_t    tp_id {-1}; // Common settings
   uint16_t   frame_count {};
@@ -1267,7 +1268,8 @@ public:
   void msg(const std::string &);
   void new_light(point offset, int strength);
   void new_light(point offset, int strength, color col, int fbo);
-  void new_monst(void);
+  void new_monst_info(void);
+  void new_monst_ai(void);
   void on_bite(void);
   void on_born(void);
   void on_enchant(void);

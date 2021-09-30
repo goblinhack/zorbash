@@ -32,13 +32,14 @@ void Thing::level_change(Levelp l)
   level = l;
   level_enter();
 
-  if (monst_infop) {
-    monst_infop->move_path = {};
+  if (monst_aip) {
+    monst_aip->move_path = {};
     clear_age_map();
     clear_seen_map();
     clear_dmap_can_see();
-    move_finish();
   }
+
+  move_finish();
 
   if (is_player()) {
     old_level->player = nullptr;

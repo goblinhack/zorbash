@@ -59,7 +59,7 @@ bool Thing::bag_add(Thingp item)
   //
   // Food might not have a monst pointer
   //
-  item->new_monst();
+  item->new_monst_info();
 
   if (item->monst_infop->preferred_bag_position != point(-1, -1)) {
     dbg3("Bag: Add %s at preferred position", item->to_string().c_str());
@@ -133,7 +133,7 @@ bool Thing::bag_add_test(Thingp item)
   //
   // Food might not have a monst pointer
   //
-  item->new_monst();
+  item->new_monst_info();
 
   if (item->monst_infop->preferred_bag_position != point(-1, -1)) {
     dbg3("Bag: Add test %s at preferred position", item->to_string().c_str());

@@ -473,7 +473,7 @@ bool Level::tick(void)
         CON("Robot: tick requested");
         game->robot_mode_tick_requested = false;
         if (player) {
-          if (player->monst_infop && player->monst_infop->move_path.size()) {
+          if (player->monst_aip && player->monst_aip->move_path.size()) {
             player->path_pop_next_move();
           }
         }
@@ -486,7 +486,7 @@ bool Level::tick(void)
         CON("Robot: a new tick was requested");
       }
     } else if (player) {
-      if (player->monst_infop && player->monst_infop->move_path.size()) {
+      if (player->monst_aip && player->monst_aip->move_path.size()) {
         player->path_pop_next_move();
       }
     }

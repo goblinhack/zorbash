@@ -27,8 +27,8 @@
 #undef ENABLE_DEBUG_UI           // User interface logs
 #undef ENABLE_DEBUG_UI2          // User interface logs with inheritance
 #undef ENABLE_DEBUG_UI_FOCUS     // Which windows we are over
-#undef ENABLE_DEBUG_MEM_LEAKS
-#undef ENABLE_DEBUG_THING_SER // Extra debugging in thing save/load
+#undef ENABLE_DEBUG_MEM_LEAKS    // Check for leaks at exit
+#undef ENABLE_DEBUG_THING_SER    // Extra debugging in thing save/load
 
 #define ENABLE_PTRCHECK_HISTORY 2 // Per pointer history
 #undef ENABLE_LOG_TIMESTAMPS      // Full timestamps with date in logs

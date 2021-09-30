@@ -87,14 +87,14 @@ void Thing::move_finish(void)
 
   on_move();
 
-  if (monst_infop) {
+  if (monst_aip) {
     std::string s = "";
-    for (auto p1 : monst_infop->move_path) {
+    for (auto p1 : monst_aip->move_path) {
       s += p1.to_string() + " ";
     }
     log("End of move, moves left: %s", s.c_str());
 
-    if (! monst_infop->move_path.size() && (monst_infop->monst_state == MONST_STATE_MOVING)) {
+    if (! monst_aip->move_path.size() && (monst_infop->monst_state == MONST_STATE_MOVING)) {
       ai_change_state(MONST_STATE_IDLE, "move finished");
     }
   }
@@ -824,5 +824,9 @@ void Thing::clear_move_path(const std::string &why)
     }
   }
 
-  monst_infop->move_path.clear();
+  if (! monst_aip) {
+    die("No monst AI");
+  }
+
+  monst_aip->move_path.clear();
 }

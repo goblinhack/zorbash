@@ -22,6 +22,7 @@ struct AgeMap_;
 struct Dmap_;
 struct FovMap_;
 struct MonstInfo_;
+struct MonstAi_;
 struct SDL_Surface;
 struct Thing_;
 struct ascii_;
@@ -31,13 +32,15 @@ using Fontp        = class Font *;
 using LevelStaticp = class LevelStatic *;
 using Levelp       = class Level *;
 using Lightp       = class Light *;
-using MonstInfop       = struct MonstInfo_ *;
-using Roomp        = class Room *;
-using Texp         = class Tex *;
-using Thingp       = struct Thing_ *;
-using Tilep        = class Tile *;
-using Tpp          = class Tp *;
-using Widp         = class Wid *;
-using Worldp       = class World *;
+using MonstInfop   = struct MonstInfo_ *;
+using MonstAip     = struct MonstAi_ *;
+
+using Roomp  = class Room *;
+using Texp   = class Tex *;
+using Thingp = struct Thing_ *;
+using Tilep  = class Tile *;
+using Tpp    = class Tp *;
+using Widp   = class Wid *;
+using Worldp = class World *;
 
 #endif

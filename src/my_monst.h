@@ -37,10 +37,7 @@ enum {
 
 typedef struct MonstInfo_ {
 public:
-  AgeMap                age_map      = {}; // How old a cell is
-  AgeMap                seen_map     = {}; // If we've ever seen this tile and when
-  Dmap                  dmap_can_see = {}; // What the monster can reach during AI
-  std::vector< Lightp > light         = {}; // Has light sources?
+  std::vector< Lightp > light = {}; // Has light sources?
 
   /////////////////////////////////////////////////////////////////////////
   // Keep these sorted alphabetically to make it easier to see additions
@@ -49,79 +46,77 @@ public:
   // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
   // v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v
   /////////////////////////////////////////////////////////////////////////
-  ThingId                  on_fire_id_anim {};
-  ThingId                  owner_id {};         // Who carries this thing?
-  ThingId                  minion_owner_id {};  // Who generated this thing?
-  ThingId                  spawner_owner_id {}; // Who spawned this thing?
-  ThingId                  weapon_id {};        // Current weapon
-  ThingId                  weapon_id_carry_anim {};
-  ThingId                  weapon_id_use_anim {};
-  color                    light_col {};
-  float                    bounce_fade   = {}; // 0.1; rapid, 0.9 slow
-  float                    bounce_height = {}; // Percentage of tile height.
-  float                    fadeup_fade   = {}; // 0.1; rapid, 0.9 slow
-  float                    fadeup_height = {}; // Percentage of tile height.
-  float                    fall_height   = {}; // y offset for falling
-  float                    wobble        = {}; // Fades when set
-  fpoint                   lunge_to;           // When a monst attacks something
-  int                      bounce_count = {};
-  int                      capacity_height {};
-  int                      capacity_width {};
-  int                      charge_count = {}; // How many things this thing spawned.
-  int                      enchant      = {};
-  int                      enchant_max  = {};
-  int                      gold         = {};
-  int                      health       = {};
-  int                      health_max   = {};
-  int                      keys         = {};
-  int                      lifespan     = {}; // How many things this thing owns.
-  int                      light_quality {};
-  int                      light_strength {}; // Current strength, including torches
-  int                      minion_count = {}; // How many things this thing spawned.
-  int                      owned_count  = {}; // How many things this thing owns.
-  int                      poison       = {};
-  int                      monst_state {};
-  int                      score               = {};
-  int                      spawned_count       = {}; // How many things this thing owns.
-  int                      stamina             = {};
-  int                      stamina_max         = {};
-  int                      stat_attack         = {};
-  int                      stat_constitution   = {};
-  int                      stat_defence        = {};
-  int                      stats01             = {};
-  int                      stats02             = {};
-  int                      stats03             = {};
-  int                      stats04             = {};
-  int                      stats05             = {};
-  int                      stats06             = {};
-  int                      stats07             = {};
-  int                      stats08             = {};
-  int                      stats09             = {};
-  int                      stats10             = {};
-  int                      stats11             = {};
-  int                      stats12             = {};
-  int                      stats17             = {};
-  int                      stats19             = {};
-  int                      stat_strength       = {};
-  int                      submerged_offset    = {}; // Pixels
-  int                      throw_distance      = {};
-  int                      tick_resurrect_when = {};
-  point                    bag_position {-1, -1};
-  point                    wander_target {-1, -1};
-  point                    where_i_dropped_an_item_last {-1, -1};
-  point                    where_i_failed_to_collect_last {-1, -1};
-  std::list< ThingId >     carrying;
-  std::list< ThingId >     skills;
-  std::list< ThingId >     buffs;
-  std::list< ThingId >     debuffs;
-  std::string              msg;         // Text that floats on screen
-  std::string              dead_reason; // What killed me
-  std::map< ThingId, int > enemies {};  // List of things that wronged us
-  std::vector< point >     move_path;
-  std::vector< uint16_t >  inventory_id; // Which items are in which slot
-  std::vector< uint16_t >  skillbox_id;  // Which skills are in which slot
-  std::vector< uint16_t >  buffbox_id;   // Which buffs are in which slot
-  std::vector< uint16_t >  debuffbox_id; // Which debuffs are in which slot
+  ThingId                 on_fire_id_anim {};
+  ThingId                 owner_id {};         // Who carries this thing?
+  ThingId                 minion_owner_id {};  // Who generated this thing?
+  ThingId                 spawner_owner_id {}; // Who spawned this thing?
+  ThingId                 weapon_id {};        // Current weapon
+  ThingId                 weapon_id_carry_anim {};
+  ThingId                 weapon_id_use_anim {};
+  color                   light_col {};
+  float                   bounce_fade   = {}; // 0.1; rapid, 0.9 slow
+  float                   bounce_height = {}; // Percentage of tile height.
+  float                   fadeup_fade   = {}; // 0.1; rapid, 0.9 slow
+  float                   fadeup_height = {}; // Percentage of tile height.
+  float                   fall_height   = {}; // y offset for falling
+  float                   wobble        = {}; // Fades when set
+  fpoint                  lunge_to;           // When a monst attacks something
+  int                     bounce_count = {};
+  int                     capacity_height {};
+  int                     capacity_width {};
+  int                     charge_count = {}; // How many things this thing spawned.
+  int                     enchant      = {};
+  int                     enchant_max  = {};
+  int                     gold         = {};
+  int                     health       = {};
+  int                     health_max   = {};
+  int                     keys         = {};
+  int                     lifespan     = {}; // How many things this thing owns.
+  int                     light_quality {};
+  int                     light_strength {}; // Current strength, including torches
+  int                     minion_count = {}; // How many things this thing spawned.
+  int                     owned_count  = {}; // How many things this thing owns.
+  int                     poison       = {};
+  int                     monst_state {};
+  int                     score               = {};
+  int                     spawned_count       = {}; // How many things this thing owns.
+  int                     stamina             = {};
+  int                     stamina_max         = {};
+  int                     stat_attack         = {};
+  int                     stat_constitution   = {};
+  int                     stat_defence        = {};
+  int                     stats01             = {};
+  int                     stats02             = {};
+  int                     stats03             = {};
+  int                     stats04             = {};
+  int                     stats05             = {};
+  int                     stats06             = {};
+  int                     stats07             = {};
+  int                     stats08             = {};
+  int                     stats09             = {};
+  int                     stats10             = {};
+  int                     stats11             = {};
+  int                     stats12             = {};
+  int                     stats17             = {};
+  int                     stats19             = {};
+  int                     stat_strength       = {};
+  int                     submerged_offset    = {}; // Pixels
+  int                     throw_distance      = {};
+  int                     tick_resurrect_when = {};
+  point                   bag_position {-1, -1};
+  point                   wander_target {-1, -1};
+  point                   where_i_dropped_an_item_last {-1, -1};
+  point                   where_i_failed_to_collect_last {-1, -1};
+  std::list< ThingId >    carrying;
+  std::list< ThingId >    skills;
+  std::list< ThingId >    buffs;
+  std::list< ThingId >    debuffs;
+  std::string             msg;          // Text that floats on screen
+  std::string             dead_reason;  // What killed me
+  std::vector< uint16_t > inventory_id; // Which items are in which slot
+  std::vector< uint16_t > skillbox_id;  // Which skills are in which slot
+  std::vector< uint16_t > buffbox_id;   // Which buffs are in which slot
+  std::vector< uint16_t > debuffbox_id; // Which debuffs are in which slot
   std::array< std::array< ThingId, MAX_BAG_WIDTH >, MAX_BAG_HEIGHT > bag {};
   ts_t                                                               ts_bounce_begin {};
   ts_t                                                               ts_bounce_end {};
@@ -169,5 +164,16 @@ public:
 } MonstInfo;
 std::ostream &operator<<(std::ostream &out, Bits< const MonstInfop & > const my);
 std::istream &operator>>(std::istream &in, Bits< MonstInfop & > my);
+
+typedef struct MonstAi_ {
+public:
+  AgeMap                   age_map      = {}; // How old a cell is
+  AgeMap                   seen_map     = {}; // If we've ever seen this tile and when
+  Dmap                     dmap_can_see = {}; // What the monster can reach during AI
+  std::map< ThingId, int > enemies {};        // List of things that wronged us
+  std::vector< point >     move_path;
+} MonstAi;
+std::ostream &operator<<(std::ostream &out, Bits< const MonstAip & > const my);
+std::istream &operator>>(std::istream &in, Bits< MonstAip & > my);
 
 #endif // _MY_THING_H_

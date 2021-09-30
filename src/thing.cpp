@@ -80,7 +80,7 @@ const ThingId &Thing::get_top_owner_id(void) const
 const ThingId &Thing::set_owner_id(const ThingId &v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->owner_id = v);
 }
 
@@ -98,7 +98,7 @@ const ThingId &Thing::get_immediate_minion_owner_id(void) const
 const ThingId &Thing::set_minion_owner_id(const ThingId &v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->minion_owner_id = v);
 }
 
@@ -116,7 +116,7 @@ const ThingId &Thing::get_immediate_spawned_owner_id(void) const
 const ThingId &Thing::set_spawned_owner_id(const ThingId &v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->spawner_owner_id = v);
 }
 

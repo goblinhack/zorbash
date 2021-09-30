@@ -133,8 +133,6 @@ std::istream &operator>>(std::istream &in, Bits< MonstInfop & > my)
   /* std::list<ThingId>   debuffs           */ in >> bits(my.t->debuffs);
   /* std::string          msg               */ in >> bits(my.t->msg);
   /* std::string          dead_reason       */ in >> bits(my.t->dead_reason);
-  /* std::vector<ThingId> enemies           */ in >> bits(my.t->enemies);
-  /* std::vector<point>   move_path         */ in >> bits(my.t->move_path);
   /* std::vector<uint16_t> inventory_id     */ in >> bits(my.t->inventory_id);
   /* std::vector<uint16_t> skillbox_id      */ in >> bits(my.t->skillbox_id);
   /* std::vector<uint16_t> buffbox_id       */ in >> bits(my.t->buffbox_id);
@@ -166,6 +164,17 @@ std::istream &operator>>(std::istream &in, Bits< MonstInfop & > my)
   return (in);
 }
 
+std::istream &operator>>(std::istream &in, Bits< MonstAip & > my)
+{
+  TRACE_AND_INDENT();
+  in >> bits(my.t->age_map.val);
+  in >> bits(my.t->seen_map.val);
+  in >> bits(my.t->dmap_can_see.val);
+  in >> bits(my.t->enemies);
+  in >> bits(my.t->move_path);
+  return (in);
+}
+
 std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
 {
   TRACE_AND_INDENT();
@@ -184,11 +193,19 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
   my.t->id = tpp->id;
 
   uint64_t bits64 = 0;
-  bool     monst  = (my.t->monst_infop != nullptr);
-  in >> bits(monst);
-  if (monst) {
-    my.t->new_monst();
+
+  bool monst_info_present = false;
+  in >> bits(monst_info_present);
+  if (monst_info_present) {
+    my.t->new_monst_info();
     in >> bits(my.t->monst_infop);
+  }
+
+  bool monst_ai_present = false;
+  in >> bits(monst_ai_present);
+  if (monst_ai_present) {
+    my.t->new_monst_ai();
+    in >> bits(my.t->monst_aip);
   }
 
   /////////////////////////////////////////////////////////////////////////
@@ -432,8 +449,8 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
   IF_DEBUG4
   {
     auto diff = in.tellg() - start;
-    LOG("LOAD %d bytes %s TP %d ID %x last_mid_at %f,%f monst_infop %p", (int) diff, name.c_str(), my.t->tp_id,
-        my.t->id.id, my.t->last_mid_at.x, my.t->last_mid_at.y, my.t->monst_infop);
+    LOG("LOAD %d bytes %s TP %d ID %x last_mid_at %f,%f", (int) diff, name.c_str(), my.t->tp_id, my.t->id.id,
+        my.t->last_mid_at.x, my.t->last_mid_at.y);
   }
 
   return (in);

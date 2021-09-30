@@ -1552,13 +1552,13 @@ int Thing::is_water(void) const
   return (tp()->is_shallow_water() || tp()->is_deep_water());
 }
 
-void Thing::new_monst(void)
+void Thing::new_monst_info(void)
 {
   TRACE_AND_INDENT();
   if (unlikely(! monst_infop)) {
     monst_infop = new MonstInfo();
     // uncomment to see who allocates things
-    // err("New monst");
+    // err("New monst info");
     newptr(monst_infop, "MonstInfo");
 
     if (tp_id != -1) {
@@ -1566,9 +1566,20 @@ void Thing::new_monst(void)
       // Walls and rock can be destroyed, hence no checks
       //
       if (is_dirt() || is_the_grid || is_floor()) {
-        die("Unexpectedly needs monst struct");
+        die("Unexpectedly needs info monst struct");
       }
     }
+  }
+}
+
+void Thing::new_monst_ai(void)
+{
+  TRACE_AND_INDENT();
+  if (unlikely(! monst_aip)) {
+    monst_aip = new MonstAi();
+    // uncomment to see who allocates things
+    // err("New monst ai");
+    newptr(monst_aip, "MonstAi");
   }
 }
 
@@ -1578,18 +1589,18 @@ void Thing::new_monst(void)
 AgeMap *Thing::get_age_map(void)
 {
   TRACE_AND_INDENT();
-  new_monst();
-  return (&monst_infop->age_map);
+  new_monst_ai();
+  return (&monst_aip->age_map);
 }
 
 void Thing::clear_age_map(void)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_ai();
 
   for (auto y = 0; y < MAP_HEIGHT; y++) {
     for (auto x = 0; x < MAP_WIDTH; x++) {
-      set(monst_infop->age_map.val, x, y, 0U);
+      set(monst_aip->age_map.val, x, y, 0U);
     }
   }
 }
@@ -1600,18 +1611,18 @@ void Thing::clear_age_map(void)
 AgeMap *Thing::get_seen_map(void)
 {
   TRACE_AND_INDENT();
-  new_monst();
-  return (&monst_infop->seen_map);
+  new_monst_ai();
+  return (&monst_aip->seen_map);
 }
 
 void Thing::clear_seen_map(void)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_ai();
 
   for (auto y = 0; y < MAP_HEIGHT; y++) {
     for (auto x = 0; x < MAP_WIDTH; x++) {
-      set(monst_infop->seen_map.val, x, y, 0U);
+      set(monst_aip->seen_map.val, x, y, 0U);
     }
   }
 }
@@ -1622,18 +1633,18 @@ void Thing::clear_seen_map(void)
 Dmap *Thing::get_dmap_can_see(void)
 {
   TRACE_AND_INDENT();
-  new_monst();
-  return (&monst_infop->dmap_can_see);
+  new_monst_ai();
+  return (&monst_aip->dmap_can_see);
 }
 
 void Thing::clear_dmap_can_see(void)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_ai();
 
   for (auto y = 0; y < MAP_HEIGHT; y++) {
     for (auto x = 0; x < MAP_WIDTH; x++) {
-      set(monst_infop->dmap_can_see.val, x, y, DMAP_IS_WALL);
+      set(monst_aip->dmap_can_see.val, x, y, DMAP_IS_WALL);
     }
   }
 }
@@ -1653,7 +1664,7 @@ int Thing::item_width(void) const
 int Thing::capacity_height(void)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   if (monst_infop->capacity_height) {
     return monst_infop->capacity_height;
   }
@@ -1663,7 +1674,7 @@ int Thing::capacity_height(void)
 int Thing::capacity_width(void)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   if (monst_infop->capacity_width) {
     return monst_infop->capacity_width;
   }
@@ -1699,7 +1710,7 @@ fpoint Thing::get_lunge_to(void) const
 void Thing::set_lunge_to(fpoint v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   monst_infop->lunge_to = v;
 }
 
@@ -1720,7 +1731,7 @@ float Thing::get_bounce_height(void) const
 void Thing::set_bounce_height(float v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   monst_infop->bounce_height = v;
 }
 
@@ -1741,7 +1752,7 @@ float Thing::get_fall_height(void) const
 void Thing::set_fall_height(float v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   monst_infop->fall_height = v;
 }
 
@@ -1762,7 +1773,7 @@ float Thing::get_bounce_fade(void) const
 void Thing::set_bounce_fade(float v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   monst_infop->bounce_fade = v;
 }
 
@@ -1783,7 +1794,7 @@ int Thing::get_bounce_count(void) const
 void Thing::set_bounce_count(int v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   monst_infop->bounce_count = v;
 }
 
@@ -1804,7 +1815,7 @@ float Thing::get_fadeup_height(void) const
 void Thing::set_fadeup_height(float v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   monst_infop->fadeup_height = v;
 }
 
@@ -1825,7 +1836,7 @@ float Thing::get_fadeup_fade(void) const
 void Thing::set_fadeup_fade(float v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   monst_infop->fadeup_fade = v;
 }
 
@@ -1846,7 +1857,7 @@ float Thing::get_wobble(void) const
 void Thing::set_wobble(float v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   monst_infop->wobble = v;
 }
 
@@ -1868,7 +1879,7 @@ const std::string &Thing::get_msg(void) const
 void Thing::set_msg(const std::string &v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   monst_infop->msg = v;
 }
 
@@ -1890,7 +1901,7 @@ const std::string &Thing::get_dead_reason(void) const
 void Thing::set_dead_reason(const std::string &v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   monst_infop->dead_reason = v;
 }
 
@@ -1918,7 +1929,7 @@ int Thing::get_submerged_offset(void) const
 void Thing::set_submerged_offset(int v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   monst_infop->submerged_offset = v;
 }
 
@@ -1942,7 +1953,7 @@ int Thing::set_gold(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->gold = v);
   return (n);
 }
@@ -1953,7 +1964,7 @@ int Thing::decr_gold(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->gold -= v);
   if (monst_infop->gold < 0) {
     monst_infop->gold = 0;
@@ -1967,7 +1978,7 @@ int Thing::incr_gold(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->gold += v);
   return (n);
 }
@@ -1978,7 +1989,7 @@ int Thing::decr_gold(void)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->gold--);
   if (monst_infop->gold < 0) {
     monst_infop->gold = 0;
@@ -1992,7 +2003,7 @@ int Thing::incr_gold(void)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->gold++);
   return (n);
 }
@@ -2017,7 +2028,7 @@ void Thing::set_score(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   monst_infop->score = v;
 }
 
@@ -2027,7 +2038,7 @@ void Thing::incr_score(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   monst_infop->score += v;
 }
 
@@ -2051,7 +2062,7 @@ int Thing::set_keys(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->keys = v);
   return (n);
 }
@@ -2062,7 +2073,7 @@ int Thing::decr_keys(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->keys -= v);
   if (monst_infop->keys < 0) {
     monst_infop->keys = 0;
@@ -2076,7 +2087,7 @@ int Thing::incr_keys(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->keys += v);
   return (n);
 }
@@ -2087,7 +2098,7 @@ int Thing::decr_keys(void)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->keys--);
   if (monst_infop->keys < 0) {
     monst_infop->keys = 0;
@@ -2101,7 +2112,7 @@ int Thing::incr_keys(void)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->keys++);
   return (n);
 }
@@ -2131,7 +2142,7 @@ int Thing::set_health(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->health = v);
   return (n);
 }
@@ -2142,7 +2153,7 @@ int Thing::decr_health(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->health -= v);
   return (n);
 }
@@ -2153,7 +2164,7 @@ int Thing::incr_health(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->health += v);
   return (n);
 }
@@ -2164,7 +2175,7 @@ int Thing::decr_health(void)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->health--);
   return (n);
 }
@@ -2175,7 +2186,7 @@ int Thing::incr_health(void)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->health++);
   return (n);
 }
@@ -2200,7 +2211,7 @@ int Thing::set_health_max(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->health_max = v);
   return (n);
 }
@@ -2211,7 +2222,7 @@ int Thing::decr_health_max(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->health_max -= v);
   return (n);
 }
@@ -2222,7 +2233,7 @@ int Thing::incr_health_max(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->health_max += v);
   return (n);
 }
@@ -2233,7 +2244,7 @@ int Thing::decr_health_max(void)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->health_max--);
   return (n);
 }
@@ -2244,7 +2255,7 @@ int Thing::incr_health_max(void)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->health_max++);
   return (n);
 }
@@ -2281,7 +2292,7 @@ int Thing::set_stat_defence(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stat_defence = v);
   return (n);
 }
@@ -2292,7 +2303,7 @@ int Thing::decr_stat_defence(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stat_defence -= v);
   if (monst_infop->stat_defence < 0) {
     monst_infop->stat_defence = 0;
@@ -2306,7 +2317,7 @@ int Thing::incr_stat_defence(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stat_defence += v);
   return (n);
 }
@@ -2317,7 +2328,7 @@ int Thing::decr_stat_defence(void)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stat_defence--);
   if (monst_infop->stat_defence < 0) {
     monst_infop->stat_defence = 0;
@@ -2331,7 +2342,7 @@ int Thing::incr_stat_defence(void)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stat_defence++);
   return (n);
 }
@@ -2356,7 +2367,7 @@ int Thing::set_stats19(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats19 = v);
   return (n);
 }
@@ -2367,7 +2378,7 @@ int Thing::decr_stats19(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats19 -= v);
   return (n);
 }
@@ -2378,7 +2389,7 @@ int Thing::incr_stats19(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats19 += v);
   return (n);
 }
@@ -2389,7 +2400,7 @@ int Thing::decr_stats19(void)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats19--);
   return (n);
 }
@@ -2400,7 +2411,7 @@ int Thing::incr_stats19(void)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats19++);
   return (n);
 }
@@ -2425,7 +2436,7 @@ int Thing::set_stamina_max(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stamina_max = v);
   return (n);
 }
@@ -2436,7 +2447,7 @@ int Thing::decr_stamina_max(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stamina_max -= v);
   return (n);
 }
@@ -2447,7 +2458,7 @@ int Thing::incr_stamina_max(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stamina_max += v);
   return (n);
 }
@@ -2458,7 +2469,7 @@ int Thing::decr_stamina_max(void)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stamina_max--);
   return (n);
 }
@@ -2469,7 +2480,7 @@ int Thing::incr_stamina_max(void)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stamina_max++);
   return (n);
 }
@@ -2494,7 +2505,7 @@ int Thing::set_enchant_max(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->enchant_max = v);
   return (n);
 }
@@ -2505,7 +2516,7 @@ int Thing::decr_enchant_max(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->enchant_max -= v);
   return (n);
 }
@@ -2516,7 +2527,7 @@ int Thing::incr_enchant_max(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->enchant_max += v);
   return (n);
 }
@@ -2527,7 +2538,7 @@ int Thing::decr_enchant_max(void)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->enchant_max--);
   return (n);
 }
@@ -2538,7 +2549,7 @@ int Thing::incr_enchant_max(void)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->enchant_max++);
   return (n);
 }
@@ -2560,7 +2571,7 @@ uint32_t Thing::get_tick_resurrect_when(void) const
 uint32_t Thing::set_tick_resurrect_when(int v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->tick_resurrect_when = v);
   return (n);
 }
@@ -2568,7 +2579,7 @@ uint32_t Thing::set_tick_resurrect_when(int v)
 uint32_t Thing::decr_tick_resurrect_when(int v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->tick_resurrect_when -= v);
   return (n);
 }
@@ -2576,7 +2587,7 @@ uint32_t Thing::decr_tick_resurrect_when(int v)
 uint32_t Thing::incr_tick_resurrect_when(int v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->tick_resurrect_when += v);
   return (n);
 }
@@ -2584,7 +2595,7 @@ uint32_t Thing::incr_tick_resurrect_when(int v)
 uint32_t Thing::decr_tick_resurrect_when(void)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->tick_resurrect_when--);
   return (n);
 }
@@ -2592,7 +2603,7 @@ uint32_t Thing::decr_tick_resurrect_when(void)
 uint32_t Thing::incr_tick_resurrect_when(void)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->tick_resurrect_when++);
   return (n);
 }
@@ -2617,7 +2628,7 @@ int Thing::set_stats01(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats01 = v);
   return (n);
 }
@@ -2628,7 +2639,7 @@ int Thing::decr_stats01(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats01 -= v);
   return (n);
 }
@@ -2639,7 +2650,7 @@ int Thing::incr_stats01(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats01 += v);
   return (n);
 }
@@ -2650,7 +2661,7 @@ int Thing::decr_stats01(void)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats01--);
   return (n);
 }
@@ -2661,7 +2672,7 @@ int Thing::incr_stats01(void)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats01++);
   return (n);
 }
@@ -2686,7 +2697,7 @@ int Thing::set_stats02(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats02 = v);
   return (n);
 }
@@ -2697,7 +2708,7 @@ int Thing::decr_stats02(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats02 -= v);
   return (n);
 }
@@ -2708,7 +2719,7 @@ int Thing::incr_stats02(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats02 += v);
   return (n);
 }
@@ -2719,7 +2730,7 @@ int Thing::decr_stats02(void)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats02--);
   return (n);
 }
@@ -2730,7 +2741,7 @@ int Thing::incr_stats02(void)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats02++);
   return (n);
 }
@@ -2755,7 +2766,7 @@ int Thing::set_stats03(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats03 = v);
   return (n);
 }
@@ -2766,7 +2777,7 @@ int Thing::decr_stats03(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats03 -= v);
   return (n);
 }
@@ -2777,7 +2788,7 @@ int Thing::incr_stats03(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats03 += v);
   return (n);
 }
@@ -2788,7 +2799,7 @@ int Thing::decr_stats03(void)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats03--);
   return (n);
 }
@@ -2799,7 +2810,7 @@ int Thing::incr_stats03(void)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats03++);
   return (n);
 }
@@ -2824,7 +2835,7 @@ int Thing::set_stats04(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats04 = v);
   return (n);
 }
@@ -2835,7 +2846,7 @@ int Thing::decr_stats04(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats04 -= v);
   return (n);
 }
@@ -2846,7 +2857,7 @@ int Thing::incr_stats04(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats04 += v);
   return (n);
 }
@@ -2857,7 +2868,7 @@ int Thing::decr_stats04(void)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats04--);
   return (n);
 }
@@ -2868,7 +2879,7 @@ int Thing::incr_stats04(void)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats04++);
   return (n);
 }
@@ -2893,7 +2904,7 @@ int Thing::set_stats05(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats05 = v);
   return (n);
 }
@@ -2904,7 +2915,7 @@ int Thing::decr_stats05(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats05 -= v);
   return (n);
 }
@@ -2915,7 +2926,7 @@ int Thing::incr_stats05(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats05 += v);
   return (n);
 }
@@ -2926,7 +2937,7 @@ int Thing::decr_stats05(void)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats05--);
   return (n);
 }
@@ -2937,7 +2948,7 @@ int Thing::incr_stats05(void)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats05++);
   return (n);
 }
@@ -2962,7 +2973,7 @@ int Thing::set_stats06(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats06 = v);
   return (n);
 }
@@ -2973,7 +2984,7 @@ int Thing::decr_stats06(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats06 -= v);
   return (n);
 }
@@ -2984,7 +2995,7 @@ int Thing::incr_stats06(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats06 += v);
   return (n);
 }
@@ -2995,7 +3006,7 @@ int Thing::decr_stats06(void)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats06--);
   return (n);
 }
@@ -3006,7 +3017,7 @@ int Thing::incr_stats06(void)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats06++);
   return (n);
 }
@@ -3031,7 +3042,7 @@ int Thing::set_stats07(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats07 = v);
   return (n);
 }
@@ -3042,7 +3053,7 @@ int Thing::decr_stats07(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats07 -= v);
   return (n);
 }
@@ -3053,7 +3064,7 @@ int Thing::incr_stats07(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats07 += v);
   return (n);
 }
@@ -3064,7 +3075,7 @@ int Thing::decr_stats07(void)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats07--);
   return (n);
 }
@@ -3075,7 +3086,7 @@ int Thing::incr_stats07(void)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats07++);
   return (n);
 }
@@ -3100,7 +3111,7 @@ int Thing::set_stats08(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats08 = v);
   return (n);
 }
@@ -3111,7 +3122,7 @@ int Thing::decr_stats08(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats08 -= v);
   return (n);
 }
@@ -3122,7 +3133,7 @@ int Thing::incr_stats08(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats08 += v);
   return (n);
 }
@@ -3133,7 +3144,7 @@ int Thing::decr_stats08(void)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats08--);
   return (n);
 }
@@ -3144,7 +3155,7 @@ int Thing::incr_stats08(void)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats08++);
   return (n);
 }
@@ -3169,7 +3180,7 @@ int Thing::set_stats09(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats09 = v);
   return (n);
 }
@@ -3180,7 +3191,7 @@ int Thing::decr_stats09(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats09 -= v);
   return (n);
 }
@@ -3191,7 +3202,7 @@ int Thing::incr_stats09(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats09 += v);
   return (n);
 }
@@ -3202,7 +3213,7 @@ int Thing::decr_stats09(void)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats09--);
   return (n);
 }
@@ -3213,7 +3224,7 @@ int Thing::incr_stats09(void)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats09++);
   return (n);
 }
@@ -3238,7 +3249,7 @@ int Thing::set_stats10(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats10 = v);
   return (n);
 }
@@ -3249,7 +3260,7 @@ int Thing::decr_stats10(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats10 -= v);
   return (n);
 }
@@ -3260,7 +3271,7 @@ int Thing::incr_stats10(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats10 += v);
   return (n);
 }
@@ -3271,7 +3282,7 @@ int Thing::decr_stats10(void)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats10--);
   return (n);
 }
@@ -3282,7 +3293,7 @@ int Thing::incr_stats10(void)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats10++);
   return (n);
 }
@@ -3307,7 +3318,7 @@ int Thing::set_stats11(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats11 = v);
   return (n);
 }
@@ -3318,7 +3329,7 @@ int Thing::decr_stats11(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats11 -= v);
   return (n);
 }
@@ -3329,7 +3340,7 @@ int Thing::incr_stats11(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats11 += v);
   return (n);
 }
@@ -3340,7 +3351,7 @@ int Thing::decr_stats11(void)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats11--);
   return (n);
 }
@@ -3351,7 +3362,7 @@ int Thing::incr_stats11(void)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats11++);
   return (n);
 }
@@ -3376,7 +3387,7 @@ int Thing::set_stats12(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats12 = v);
   return (n);
 }
@@ -3387,7 +3398,7 @@ int Thing::decr_stats12(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats12 -= v);
   return (n);
 }
@@ -3398,7 +3409,7 @@ int Thing::incr_stats12(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats12 += v);
   return (n);
 }
@@ -3409,7 +3420,7 @@ int Thing::decr_stats12(void)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats12--);
   return (n);
 }
@@ -3420,7 +3431,7 @@ int Thing::incr_stats12(void)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats12++);
   return (n);
 }
@@ -3445,7 +3456,7 @@ int Thing::set_stat_constitution(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stat_constitution = v);
   return (n);
 }
@@ -3456,7 +3467,7 @@ int Thing::decr_stat_constitution(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stat_constitution -= v);
   return (n);
 }
@@ -3467,7 +3478,7 @@ int Thing::incr_stat_constitution(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stat_constitution += v);
   return (n);
 }
@@ -3478,7 +3489,7 @@ int Thing::decr_stat_constitution(void)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stat_constitution--);
   return (n);
 }
@@ -3489,7 +3500,7 @@ int Thing::incr_stat_constitution(void)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stat_constitution++);
   return (n);
 }
@@ -3514,7 +3525,7 @@ int Thing::set_stat_attack(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stat_attack = v);
   return (n);
 }
@@ -3525,7 +3536,7 @@ int Thing::decr_stat_attack(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stat_attack -= v);
   return (n);
 }
@@ -3536,7 +3547,7 @@ int Thing::incr_stat_attack(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stat_attack += v);
   return (n);
 }
@@ -3547,7 +3558,7 @@ int Thing::decr_stat_attack(void)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stat_attack--);
   return (n);
 }
@@ -3558,7 +3569,7 @@ int Thing::incr_stat_attack(void)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stat_attack++);
   return (n);
 }
@@ -3583,7 +3594,7 @@ int Thing::set_stats17(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats17 = v);
   return (n);
 }
@@ -3594,7 +3605,7 @@ int Thing::decr_stats17(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats17 -= v);
   return (n);
 }
@@ -3605,7 +3616,7 @@ int Thing::incr_stats17(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats17 += v);
   return (n);
 }
@@ -3616,7 +3627,7 @@ int Thing::decr_stats17(void)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats17--);
   return (n);
 }
@@ -3627,7 +3638,7 @@ int Thing::incr_stats17(void)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stats17++);
   return (n);
 }
@@ -3649,7 +3660,7 @@ int Thing::get_throw_distance(void) const
 int Thing::set_throw_distance(int v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->throw_distance = v);
   return (n);
 }
@@ -3657,7 +3668,7 @@ int Thing::set_throw_distance(int v)
 int Thing::decr_throw_distance(int v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->throw_distance -= v);
   return (n);
 }
@@ -3665,7 +3676,7 @@ int Thing::decr_throw_distance(int v)
 int Thing::incr_throw_distance(int v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->throw_distance += v);
   return (n);
 }
@@ -3673,7 +3684,7 @@ int Thing::incr_throw_distance(int v)
 int Thing::decr_throw_distance(void)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->throw_distance--);
   return (n);
 }
@@ -3681,7 +3692,7 @@ int Thing::decr_throw_distance(void)
 int Thing::incr_throw_distance(void)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->throw_distance++);
   return (n);
 }
@@ -3715,7 +3726,7 @@ int Thing::get_stamina(void) const
 int Thing::set_stamina(int v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stamina = v);
   return (n);
 }
@@ -3723,7 +3734,7 @@ int Thing::set_stamina(int v)
 int Thing::decr_stamina(int v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stamina -= v);
   if (monst_infop->stamina < 0) {
     monst_infop->stamina = 0;
@@ -3734,7 +3745,7 @@ int Thing::decr_stamina(int v)
 int Thing::incr_stamina(int v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stamina += v);
   return (n);
 }
@@ -3742,7 +3753,7 @@ int Thing::incr_stamina(int v)
 int Thing::decr_stamina(void)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stamina--);
   if (monst_infop->stamina < 0) {
     monst_infop->stamina = 0;
@@ -3753,7 +3764,7 @@ int Thing::decr_stamina(void)
 int Thing::incr_stamina(void)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stamina++);
   return (n);
 }
@@ -3787,7 +3798,7 @@ int Thing::get_enchant(void) const
 int Thing::set_enchant(int v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->enchant = v);
   return (n);
 }
@@ -3795,7 +3806,7 @@ int Thing::set_enchant(int v)
 int Thing::decr_enchant(int v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->enchant -= v);
   if (monst_infop->enchant < 0) {
     monst_infop->enchant = 0;
@@ -3806,7 +3817,7 @@ int Thing::decr_enchant(int v)
 int Thing::incr_enchant(int v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->enchant += v);
   return (n);
 }
@@ -3814,7 +3825,7 @@ int Thing::incr_enchant(int v)
 int Thing::decr_enchant(void)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->enchant--);
   if (monst_infop->enchant < 0) {
     monst_infop->enchant = 0;
@@ -3825,7 +3836,7 @@ int Thing::decr_enchant(void)
 int Thing::incr_enchant(void)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->enchant++);
   return (n);
 }
@@ -3859,7 +3870,7 @@ int Thing::get_poison(void) const
 int Thing::set_poison(int v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->poison = v);
   return (n);
 }
@@ -3867,7 +3878,7 @@ int Thing::set_poison(int v)
 int Thing::decr_poison(int v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->poison -= v);
   if (monst_infop->poison < 0) {
     monst_infop->poison = 0;
@@ -3878,7 +3889,7 @@ int Thing::decr_poison(int v)
 int Thing::incr_poison(int v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->poison += v);
   return (n);
 }
@@ -3886,7 +3897,7 @@ int Thing::incr_poison(int v)
 int Thing::decr_poison(void)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->poison--);
   if (monst_infop->poison < 0) {
     monst_infop->poison = 0;
@@ -3897,7 +3908,7 @@ int Thing::decr_poison(void)
 int Thing::incr_poison(void)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->poison++);
   return (n);
 }
@@ -3922,7 +3933,7 @@ int Thing::set_stat_strength(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stat_strength = v);
   return (n);
 }
@@ -3933,7 +3944,7 @@ int Thing::decr_stat_strength(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stat_strength -= v);
   return (n);
 }
@@ -3944,7 +3955,7 @@ int Thing::incr_stat_strength(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stat_strength += v);
   return (n);
 }
@@ -3955,7 +3966,7 @@ int Thing::decr_stat_strength(void)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stat_strength--);
   return (n);
 }
@@ -3966,7 +3977,7 @@ int Thing::incr_stat_strength(void)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->stat_strength++);
   return (n);
 }
@@ -3988,35 +3999,35 @@ int Thing::get_owned_count(void) const
 int Thing::set_owned_count(int v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->owned_count = v);
 }
 
 int Thing::decr_owned_count(int v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->owned_count -= v);
 }
 
 int Thing::incr_owned_count(int v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->owned_count += v);
 }
 
 int Thing::decr_owned_count(void)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->owned_count--);
 }
 
 int Thing::incr_owned_count(void)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->owned_count++);
 }
 
@@ -4037,35 +4048,35 @@ int Thing::get_minion_count(void) const
 int Thing::set_minion_count(int v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->minion_count = v);
 }
 
 int Thing::decr_minion_count(int v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->minion_count -= v);
 }
 
 int Thing::incr_minion_count(int v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->minion_count += v);
 }
 
 int Thing::decr_minion_count(void)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->minion_count--);
 }
 
 int Thing::incr_minion_count(void)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->minion_count++);
 }
 
@@ -4086,35 +4097,35 @@ int Thing::get_spawned_count(void) const
 int Thing::set_spawned_count(int v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->spawned_count = v);
 }
 
 int Thing::decr_spawned_count(int v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->spawned_count -= v);
 }
 
 int Thing::incr_spawned_count(int v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->spawned_count += v);
 }
 
 int Thing::decr_spawned_count(void)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->spawned_count--);
 }
 
 int Thing::incr_spawned_count(void)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->spawned_count++);
 }
 
@@ -4135,35 +4146,35 @@ int Thing::get_charge_count(void) const
 int Thing::set_charge_count(int v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->charge_count = v);
 }
 
 int Thing::decr_charge_count(int v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->charge_count -= v);
 }
 
 int Thing::incr_charge_count(int v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->charge_count += v);
 }
 
 int Thing::decr_charge_count(void)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->charge_count--);
 }
 
 int Thing::incr_charge_count(void)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->charge_count++);
 }
 
@@ -4184,35 +4195,35 @@ int Thing::get_lifespan(void) const
 int Thing::set_lifespan(int v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->lifespan = v);
 }
 
 int Thing::decr_lifespan(int v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->lifespan -= v);
 }
 
 int Thing::incr_lifespan(int v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->lifespan += v);
 }
 
 int Thing::decr_lifespan(void)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->lifespan--);
 }
 
 int Thing::incr_lifespan(void)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->lifespan++);
 }
 
@@ -4272,35 +4283,35 @@ int Thing::update_light_strength(void)
 int Thing::set_light_strength(int v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->light_strength = v);
 }
 
 int Thing::decr_light_strength(int v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->light_strength -= v);
 }
 
 int Thing::incr_light_strength(int v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->light_strength += v);
 }
 
 int Thing::decr_light_strength(void)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->light_strength--);
 }
 
 int Thing::incr_light_strength(void)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->light_strength++);
 }
 
@@ -4321,35 +4332,35 @@ uint32_t Thing::get_tick_last_did_something(void) const
 uint32_t Thing::set_tick_last_did_something(uint32_t v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->tick_last_did_something = v);
 }
 
 uint32_t Thing::decr_tick_last_did_something(uint32_t v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->tick_last_did_something -= v);
 }
 
 uint32_t Thing::incr_tick_last_did_something(uint32_t v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->tick_last_did_something += v);
 }
 
 uint32_t Thing::decr_tick_last_did_something(void)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->tick_last_did_something--);
 }
 
 uint32_t Thing::incr_tick_last_did_something(void)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->tick_last_did_something++);
 }
 
@@ -4370,35 +4381,35 @@ uint32_t Thing::get_tick_last_dropped(void) const
 uint32_t Thing::set_tick_last_dropped(uint32_t v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->tick_last_dropped = v);
 }
 
 uint32_t Thing::decr_tick_last_dropped(uint32_t v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->tick_last_dropped -= v);
 }
 
 uint32_t Thing::incr_tick_last_dropped(uint32_t v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->tick_last_dropped += v);
 }
 
 uint32_t Thing::decr_tick_last_dropped(void)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->tick_last_dropped--);
 }
 
 uint32_t Thing::incr_tick_last_dropped(void)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->tick_last_dropped++);
 }
 
@@ -4419,35 +4430,35 @@ uint32_t Thing::get_tick_last_location_check(void) const
 uint32_t Thing::set_tick_last_location_check(uint32_t v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->tick_last_location_check = v);
 }
 
 uint32_t Thing::decr_tick_last_location_check(uint32_t v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->tick_last_location_check -= v);
 }
 
 uint32_t Thing::incr_tick_last_location_check(uint32_t v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->tick_last_location_check += v);
 }
 
 uint32_t Thing::decr_tick_last_location_check(void)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->tick_last_location_check--);
 }
 
 uint32_t Thing::incr_tick_last_location_check(void)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->tick_last_location_check++);
 }
 
@@ -4468,35 +4479,35 @@ uint32_t Thing::get_tick_last_escape(void) const
 uint32_t Thing::set_tick_last_escape(uint32_t v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->tick_last_escape = v);
 }
 
 uint32_t Thing::decr_tick_last_escape(uint32_t v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->tick_last_escape -= v);
 }
 
 uint32_t Thing::incr_tick_last_escape(uint32_t v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->tick_last_escape += v);
 }
 
 uint32_t Thing::decr_tick_last_escape(void)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->tick_last_escape--);
 }
 
 uint32_t Thing::incr_tick_last_escape(void)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->tick_last_escape++);
 }
 
@@ -4517,35 +4528,35 @@ uint32_t Thing::get_tick_last_level_change(void) const
 uint32_t Thing::set_tick_last_level_change(uint32_t v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->tick_last_level_change = v);
 }
 
 uint32_t Thing::decr_tick_last_level_change(uint32_t v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->tick_last_level_change -= v);
 }
 
 uint32_t Thing::incr_tick_last_level_change(uint32_t v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->tick_last_level_change += v);
 }
 
 uint32_t Thing::decr_tick_last_level_change(void)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->tick_last_level_change--);
 }
 
 uint32_t Thing::incr_tick_last_level_change(void)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->tick_last_level_change++);
 }
 
@@ -4566,7 +4577,7 @@ point Thing::get_where_i_dropped_an_item_last(void) const
 point Thing::set_where_i_dropped_an_item_last(point v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->where_i_dropped_an_item_last = v);
 }
 
@@ -4587,7 +4598,7 @@ point Thing::get_where_i_failed_to_collect_last(void) const
 point Thing::set_where_i_failed_to_collect_last(point v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->where_i_failed_to_collect_last = v);
 }
 
@@ -4608,35 +4619,35 @@ ts_t Thing::get_ts_lunge_begin(void) const
 ts_t Thing::set_ts_lunge_begin(ts_t v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->ts_lunge_begin = v);
 }
 
 ts_t Thing::decr_ts_lunge_begin(ts_t v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->ts_lunge_begin -= v);
 }
 
 ts_t Thing::incr_ts_lunge_begin(ts_t v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->ts_lunge_begin += v);
 }
 
 ts_t Thing::decr_ts_lunge_begin(void)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->ts_lunge_begin--);
 }
 
 ts_t Thing::incr_ts_lunge_begin(void)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->ts_lunge_begin++);
 }
 
@@ -4657,35 +4668,35 @@ ts_t Thing::get_ts_lunge_end(void) const
 ts_t Thing::set_ts_lunge_end(ts_t v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->ts_lunge_end = v);
 }
 
 ts_t Thing::decr_ts_lunge_end(ts_t v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->ts_lunge_end -= v);
 }
 
 ts_t Thing::incr_ts_lunge_end(ts_t v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->ts_lunge_end += v);
 }
 
 ts_t Thing::decr_ts_lunge_end(void)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->ts_lunge_end--);
 }
 
 ts_t Thing::incr_ts_lunge_end(void)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->ts_lunge_end++);
 }
 
@@ -4706,35 +4717,35 @@ ts_t Thing::get_ts_bounce_begin(void) const
 ts_t Thing::set_ts_bounce_begin(ts_t v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->ts_bounce_begin = v);
 }
 
 ts_t Thing::decr_ts_bounce_begin(ts_t v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->ts_bounce_begin -= v);
 }
 
 ts_t Thing::incr_ts_bounce_begin(ts_t v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->ts_bounce_begin += v);
 }
 
 ts_t Thing::decr_ts_bounce_begin(void)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->ts_bounce_begin--);
 }
 
 ts_t Thing::incr_ts_bounce_begin(void)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->ts_bounce_begin++);
 }
 
@@ -4755,35 +4766,35 @@ ts_t Thing::get_ts_bounce_end(void) const
 ts_t Thing::set_ts_bounce_end(ts_t v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->ts_bounce_end = v);
 }
 
 ts_t Thing::decr_ts_bounce_end(ts_t v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->ts_bounce_end -= v);
 }
 
 ts_t Thing::incr_ts_bounce_end(ts_t v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->ts_bounce_end += v);
 }
 
 ts_t Thing::decr_ts_bounce_end(void)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->ts_bounce_end--);
 }
 
 ts_t Thing::incr_ts_bounce_end(void)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->ts_bounce_end++);
 }
 
@@ -4804,35 +4815,35 @@ ts_t Thing::get_ts_fadeup_begin(void) const
 ts_t Thing::set_ts_fadeup_begin(ts_t v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->ts_fadeup_begin = v);
 }
 
 ts_t Thing::decr_ts_fadeup_begin(ts_t v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->ts_fadeup_begin -= v);
 }
 
 ts_t Thing::incr_ts_fadeup_begin(ts_t v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->ts_fadeup_begin += v);
 }
 
 ts_t Thing::decr_ts_fadeup_begin(void)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->ts_fadeup_begin--);
 }
 
 ts_t Thing::incr_ts_fadeup_begin(void)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->ts_fadeup_begin++);
 }
 
@@ -4853,35 +4864,35 @@ ts_t Thing::get_ts_fadeup_end(void) const
 ts_t Thing::set_ts_fadeup_end(ts_t v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->ts_fadeup_end = v);
 }
 
 ts_t Thing::decr_ts_fadeup_end(ts_t v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->ts_fadeup_end -= v);
 }
 
 ts_t Thing::incr_ts_fadeup_end(ts_t v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->ts_fadeup_end += v);
 }
 
 ts_t Thing::decr_ts_fadeup_end(void)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->ts_fadeup_end--);
 }
 
 ts_t Thing::incr_ts_fadeup_end(void)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->ts_fadeup_end++);
 }
 
@@ -4902,35 +4913,35 @@ ts_t Thing::get_ts_flip_start(void) const
 ts_t Thing::set_ts_flip_start(ts_t v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->ts_flip_start = v);
 }
 
 ts_t Thing::decr_ts_flip_start(ts_t v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->ts_flip_start -= v);
 }
 
 ts_t Thing::incr_ts_flip_start(ts_t v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->ts_flip_start += v);
 }
 
 ts_t Thing::decr_ts_flip_start(void)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->ts_flip_start--);
 }
 
 ts_t Thing::incr_ts_flip_start(void)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->ts_flip_start++);
 }
 
@@ -4951,35 +4962,35 @@ ts_t Thing::get_ts_anim_delay_end(void) const
 ts_t Thing::set_ts_anim_delay_end(ts_t v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->ts_anim_delay_end = v);
 }
 
 ts_t Thing::decr_ts_anim_delay_end(ts_t v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->ts_anim_delay_end -= v);
 }
 
 ts_t Thing::incr_ts_anim_delay_end(ts_t v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->ts_anim_delay_end += v);
 }
 
 ts_t Thing::decr_ts_anim_delay_end(void)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->ts_anim_delay_end--);
 }
 
 ts_t Thing::incr_ts_anim_delay_end(void)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->ts_anim_delay_end++);
 }
 
@@ -5000,35 +5011,35 @@ ts_t Thing::get_ts_fall_begin(void) const
 ts_t Thing::set_ts_fall_begin(ts_t v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->ts_fall_begin = v);
 }
 
 ts_t Thing::decr_ts_fall_begin(ts_t v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->ts_fall_begin -= v);
 }
 
 ts_t Thing::incr_ts_fall_begin(ts_t v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->ts_fall_begin += v);
 }
 
 ts_t Thing::decr_ts_fall_begin(void)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->ts_fall_begin--);
 }
 
 ts_t Thing::incr_ts_fall_begin(void)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->ts_fall_begin++);
 }
 
@@ -5049,35 +5060,35 @@ ts_t Thing::get_ts_fall_end(void) const
 ts_t Thing::set_ts_fall_end(ts_t v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->ts_fall_end = v);
 }
 
 ts_t Thing::decr_ts_fall_end(ts_t v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->ts_fall_end -= v);
 }
 
 ts_t Thing::incr_ts_fall_end(ts_t v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->ts_fall_end += v);
 }
 
 ts_t Thing::decr_ts_fall_end(void)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->ts_fall_end--);
 }
 
 ts_t Thing::incr_ts_fall_end(void)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->ts_fall_end++);
 }
 
@@ -5097,7 +5108,7 @@ ThingId Thing::get_weapon_id_carry_anim(void) const
 ThingId Thing::set_weapon_id_carry_anim(ThingId v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->weapon_id_carry_anim = v);
 }
 
@@ -5117,7 +5128,7 @@ ThingId Thing::get_weapon_id_use_anim(void) const
 ThingId Thing::set_weapon_id_use_anim(ThingId v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->weapon_id_use_anim = v);
 }
 
@@ -5139,7 +5150,7 @@ ThingId Thing::get_weapon_id(void) const
 ThingId Thing::set_weapon_id(ThingId v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   // con("set weapon %08" PRIx32 "", v);
   return (monst_infop->weapon_id = v);
 }
@@ -5160,7 +5171,7 @@ ThingId Thing::get_on_fire_anim_id(void) const
 ThingId Thing::set_on_fire_anim_id(ThingId v)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   return (monst_infop->on_fire_id_anim = v);
 }
 
@@ -5189,7 +5200,7 @@ int Thing::set_current_damage(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->current_damage = v);
   return (n);
 }
@@ -5200,7 +5211,7 @@ int Thing::decr_current_damage(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->current_damage -= v);
   return (n);
 }
@@ -5211,7 +5222,7 @@ int Thing::incr_current_damage(int v)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->current_damage += v);
   return (n);
 }
@@ -5222,7 +5233,7 @@ int Thing::decr_current_damage(void)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->current_damage--);
   return (n);
 }
@@ -5233,7 +5244,7 @@ int Thing::incr_current_damage(void)
   if (is_player()) {
     game->request_update_rightbar = true;
   }
-  new_monst();
+  new_monst_info();
   auto n = (monst_infop->current_damage++);
   return (n);
 }

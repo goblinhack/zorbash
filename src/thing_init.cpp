@@ -116,8 +116,12 @@ void Thing::init(Levelp level, const std::string &name, const fpoint born, const
   //
   // Make sure we have the ability to carry items.
   //
-  if (is_monst() || is_bag()) {
-    new_monst();
+  if (is_player() || is_cursor() || is_monst() || is_bag()) {
+    new_monst_info();
+  }
+
+  if (is_player() || is_cursor() || is_monst()) {
+    new_monst_ai();
   }
 
   //

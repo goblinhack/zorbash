@@ -177,7 +177,7 @@ void Thing::achieve_goals_in_life(void)
     }
   }
 
-  if (monst_infop && monst_infop->move_path.empty()) {
+  if (monst_aip && monst_aip->move_path.empty()) {
     if (is_player()) {
       //
       // If resting, keep resting

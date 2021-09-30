@@ -32,7 +32,7 @@ std::vector< Lightp > &Thing::get_light(void)
 void Thing::new_light(point offset, int strength, color col, int fbo)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   auto l = light_new(this, offset, strength, col, fbo);
   monst_infop->light.push_back(l);
   monst_infop->light_strength = strength;
@@ -42,7 +42,7 @@ void Thing::new_light(point offset, int strength, color col, int fbo)
 void Thing::new_light(point offset, int strength)
 {
   TRACE_AND_INDENT();
-  new_monst();
+  new_monst_info();
   auto l = light_new(this, offset, strength);
   monst_infop->light.push_back(l);
   monst_infop->light_strength = strength;
