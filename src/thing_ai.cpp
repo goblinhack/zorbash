@@ -731,6 +731,10 @@ void Thing::ai_choose_initial_goals(std::multiset< Goal > &goals, int minx, int 
     for (int x = minx; x < maxx; x++) {
       point p(x, y);
 
+      if (! get(monst_aip->can_see_currently.can_see, p.x, p.y)) {
+        continue;
+      }
+
       if (get(dmap_can_see->val, x, y) == DMAP_IS_WALL) {
         continue;
       }
@@ -1129,6 +1133,9 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
       continue;
     }
 
+    auto  dist     = distance(make_fpoint(p), mid_at);
+    float max_dist = ai_scent_distance();
+
     if (level->is_obs_wall_or_door(p.x, p.y)) {
       continue;
     }
@@ -1159,21 +1166,17 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
     auto  dist     = distance(make_fpoint(p), mid_at);
     float max_dist = ai_scent_distance();
 
+    if (! is_player()) {
+      if (dist >= max_dist) {
+        continue;
+      }
+    }
+
     int jump_distance;
 
     switch (search_type) {
-      case SEARCH_TYPE_LOCAL_JUMP_ALLOWED :
-        if (dist >= max_dist) {
-          continue;
-        }
-        jump_distance = how_far_i_can_jump();
-        break;
-      case SEARCH_TYPE_LOCAL_NO_JUMP :
-        if (dist >= max_dist) {
-          continue;
-        }
-        jump_distance = 0;
-        break;
+      case SEARCH_TYPE_LOCAL_JUMP_ALLOWED : jump_distance = how_far_i_can_jump(); break;
+      case SEARCH_TYPE_LOCAL_NO_JUMP : jump_distance = 0; break;
       case SEARCH_TYPE_GLOBAL_JUMP_ALLOWED : jump_distance = how_far_i_can_jump(); break;
       case SEARCH_TYPE_GLOBAL_NO_JUMP : jump_distance = 0; break;
       case SEARCH_TYPE_LAST_RESORTS_JUMP_ALLOWED : jump_distance = how_far_i_can_jump(); break;
