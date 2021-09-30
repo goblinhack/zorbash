@@ -59,35 +59,4 @@ void Thing::corrode_tick(void)
       }
     }
   }
-
-  if (level->is_water(mid_at.x, mid_at.y) || (owner && owner->is_water())) {
-    int chance = 0;
-
-    if (is_organic()) {
-      chance = 20;
-    }
-    if (is_wooden()) {
-      chance = 10;
-    }
-    if (is_metal()) {
-      chance = 2;
-    }
-    if (is_glass()) {
-      chance = 0;
-    }
-    if (is_stone()) {
-      chance = 0;
-    }
-
-    if (get_enchant()) {
-      chance /= get_enchant();
-    }
-
-    if (chance) {
-      if ((int) pcg_random_range(0, 1000) < chance) {
-        dead("Corroded in acid");
-        return;
-      }
-    }
-  }
 }

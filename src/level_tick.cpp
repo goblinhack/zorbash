@@ -258,8 +258,8 @@ bool Level::tick(void)
       auto w = thing_find(weapon_id);
       if (w && ! w->is_dead) {
         if ((wait_count > wait_count_max) && ! game->things_are_moving) {
-          w->con("Waiting on weapon thing owner longer than expected: %s", w->to_dbg_string().c_str());
-          t->con("Waiting on weapon thing longer than expected: %s", t->to_dbg_string().c_str());
+          w->con("Waiting on this");
+          t->con("This is the owner");
         }
         game->things_are_moving = true;
       }
