@@ -903,7 +903,7 @@ public:
   void update_things_next_to_a_chasm(void);
   void update(void);
   void update_water_next_to_lava(void);
-  bool can_see(int x0, int y0, int x1, int y1);
+  bool can_see_unimpeded(int x0, int y0, int x1, int y1);
   std::deque< point >  flood_fill(point) const;
   std::deque< point >  flood_fill_points(point, std::function< int(Thingp) > filter);
   std::deque< Thingp > flood_fill_things(point, std::function< int(Thingp) > filter);

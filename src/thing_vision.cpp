@@ -107,7 +107,7 @@ bool Level::can_see_(int x0_in, int y0_in, int x1_in, int y1_in, int flag)
 /*
  * Can A see B unimpeded?
  */
-bool Level::can_see(int x0, int y0, int x1, int y1)
+bool Level::can_see_unimpeded(int x0, int y0, int x1, int y1)
 {
   float slope = 100.0;
 

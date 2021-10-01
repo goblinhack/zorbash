@@ -1136,6 +1136,15 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
     auto  dist     = distance(make_fpoint(p), mid_at);
     float max_dist = ai_scent_distance();
 
+    //
+    // Look as far as our memory and lighting permits
+    //
+    if (! is_player()) {
+      if (dist >= max_dist) {
+        continue;
+      }
+    }
+
     if (level->is_obs_wall_or_door(p.x, p.y)) {
       continue;
     }
@@ -1158,18 +1167,6 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
     if (! get(pushed, p.x, p.y - 1)) {
       set(pushed, p.x, p.y - 1, true);
       in.push_back(point(p.x, p.y - 1));
-    }
-
-    //
-    // Look as far as our memory and lighting permits
-    //
-    auto  dist     = distance(make_fpoint(p), mid_at);
-    float max_dist = ai_scent_distance();
-
-    if (! is_player()) {
-      if (dist >= max_dist) {
-        continue;
-      }
     }
 
     int jump_distance;

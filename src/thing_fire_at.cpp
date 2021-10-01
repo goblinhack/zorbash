@@ -8,6 +8,7 @@
 #include "my_level.h"
 #include "my_main.h"
 #include "my_math.h"
+#include "my_monst.h"
 #include "my_ptrcheck.h"
 #include "my_python.h"
 #include "my_string.h"
@@ -102,7 +103,7 @@ Thingp Thing::get_best_fire_at_target(void)
  */
 static void thing_possible_hit_add(Thingp me, Thingp target)
 {
-  if (! game->level->can_see(me->mid_at.x, me->mid_at.y, target->mid_at.x, target->mid_at.y)) {
+  if (! get(me->monst_aip->can_see_currently.can_see, (int) target->mid_at.x, (int) target->mid_at.y)) {
     return;
   }
 

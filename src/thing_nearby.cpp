@@ -7,6 +7,7 @@
 #include "my_dmap.h"
 #include "my_level.h"
 #include "my_math.h"
+#include "my_monst.h"
 #include "my_ptrcheck.h"
 #include "my_sys.h"
 #include "my_thing.h"
@@ -99,7 +100,7 @@ Thingp Thing::most_dangerous_visible_thing_get(void)
           continue;
         }
 
-        if (! level->can_see((int) mid_at.x, (int) mid_at.y, o.x, o.y)) {
+        if (! get(monst_aip->can_see_currently.can_see, (int) mid_at.x, (int) mid_at.y)) {
           continue;
         }
 
