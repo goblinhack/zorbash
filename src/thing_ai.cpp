@@ -1272,7 +1272,7 @@ void Thing::ai_choose_distant_goals(std::multiset< Goal > &goals, int search_typ
           //
           // If lit then we can already see it, so not worth exploring.
           //
-          if (! get(monst_aip->can_see_ever.can_see, o.x, o.y)) {
+          if (get(monst_aip->can_see_ever.can_see, o.x, o.y)) {
             continue;
           }
 
