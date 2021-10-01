@@ -7,11 +7,11 @@
 #ifndef _MY_MONST_H_
 #define _MY_MONST_H_
 
+#include "my_level_shadow_casting.h"
 #include "my_light.h"
 #include "my_thing_ai.h"
 #include "my_thing_id.h"
 #include "my_time.h"
-#include "my_level_shadow_casting.h"
 #include <list>
 
 constexpr uint32_t THING_MAGIC_BEGIN = 11221122;

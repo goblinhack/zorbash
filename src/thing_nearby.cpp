@@ -28,6 +28,15 @@ Thingp Thing::most_dangerous_adjacent_thing_get(void)
     auto x = mid_at.x + d.x;
     auto y = mid_at.y + d.y;
 
+    point o(x, y);
+    if (level->is_oob(o)) {
+      continue;
+    }
+
+    if (! get(monst_aip->can_see_currently.can_see, o.x, o.y)) {
+      continue;
+    }
+
     FOR_ALL_THINGS(level, t, x, y)
     {
       if (t == this) {
@@ -90,6 +99,14 @@ Thingp Thing::most_dangerous_visible_thing_get(void)
         continue;
       }
 
+      if (! level->is_monst(o)) {
+        continue;
+      }
+
+      if (! get(monst_aip->can_see_currently.can_see, o.x, o.y)) {
+        continue;
+      }
+
       FOR_ALL_THINGS(level, t, o.x, o.y)
       {
         if (t->is_dead) {
@@ -97,10 +114,6 @@ Thingp Thing::most_dangerous_visible_thing_get(void)
         }
 
         if (! t->is_monst()) {
-          continue;
-        }
-
-        if (! get(monst_aip->can_see_currently.can_see, (int) mid_at.x, (int) mid_at.y)) {
           continue;
         }
 
@@ -124,4 +137,77 @@ Thingp Thing::most_dangerous_visible_thing_get(void)
       [](const std::pair< Thingp, int > &a, const std::pair< Thingp, int > &b) -> bool { return a.second > b.second; });
 
   return possible[ 0 ].first;
+}
+
+bool Thing::any_unfriendly_monst_visible(void)
+{
+  int d = ai_avoid_distance();
+
+  for (auto dx = -d; dx <= d; dx++) {
+    for (auto dy = -d; dy <= d; dy++) {
+      point o(mid_at.x + dx, mid_at.y + dy);
+      if (! dx && ! dy) {
+        continue;
+      }
+
+      if (level->is_oob(o)) {
+        continue;
+      }
+
+      if (! level->is_monst(o)) {
+        continue;
+      }
+
+      if (! get(monst_aip->can_see_currently.can_see, o.x, o.y)) {
+        continue;
+      }
+
+      FOR_ALL_THINGS(level, t, o.x, o.y)
+      {
+        if (t->is_dead) {
+          continue;
+        }
+
+        if (! t->is_monst()) {
+          continue;
+        }
+
+        if (t->possible_to_attack(this)) {
+          return true;
+        }
+      }
+      FOR_ALL_THINGS_END()
+    }
+  }
+  return false;
+}
+
+bool Thing::any_monst_visible(void)
+{
+  std::vector< std::pair< Thingp, int > > possible;
+
+  int d = ai_avoid_distance();
+
+  for (auto dx = -d; dx <= d; dx++) {
+    for (auto dy = -d; dy <= d; dy++) {
+      point o(mid_at.x + dx, mid_at.y + dy);
+      if (! dx && ! dy) {
+        continue;
+      }
+
+      if (level->is_oob(o)) {
+        continue;
+      }
+
+      if (level->is_monst(o)) {
+        return true;
+      }
+
+      if (! get(monst_aip->can_see_currently.can_see, o.x, o.y)) {
+        continue;
+      }
+    }
+  }
+
+  return false;
 }

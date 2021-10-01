@@ -182,18 +182,12 @@ bool Thing::possible_to_attack(const Thingp it)
   }
 
   if (is_player()) {
-    //
-    // If player is attacking with bare fists, allow an attack
-    // Else if it is a weapon, the weapon will attack
-    //
-    if (! weapon_get()) {
-      if (! it->is_attackable_by_player()) {
-        dbg("No, cannot attack %s, not is_attackable", it->to_string().c_str());
-        return false;
-      }
+    if (it->is_attackable_by_player()) {
       dbg("Can attack %s", it->to_string().c_str());
       return true;
     }
+    dbg("No, cannot attack %s, not is_attackable", it->to_string().c_str());
+    return false;
   }
 
   if (is_weapon()) {

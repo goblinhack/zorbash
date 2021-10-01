@@ -212,6 +212,8 @@ public:
   Thingp      get_top_spawned_owner() const;
   Thingp      laser_fire_at(const std::string &item, Thingp target);
   Thingp      most_dangerous_adjacent_thing_get(void);
+  bool        any_monst_visible(void);
+  bool        any_unfriendly_monst_visible(void);
   Thingp      most_dangerous_visible_thing_get(void);
   Thingp      projectile_fire_at(const std::string &item, Thingp target);
   Thingp      weapon_get() const;
@@ -292,7 +294,7 @@ public:
   bool        learn_random_skill(void);
   bool        path_pop_next_move(void);
   bool        possible_to_attack_at(point at);
-  bool        ai_choose_nearby_goal(void);
+  bool        ai_choose_immediately_adjacent_goal(void);
   bool        ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int search_type = 0);
   bool        ai_tick(void);
   bool get_coords(point &blit_tl, point &blit_br, point &pre_blit_tl, point &pre_blit_br, Tilep &tile, bool refl);
@@ -1165,7 +1167,7 @@ public:
   void                   blit_floor_chasm(point &tl, point &br, const ThingTiles *tiles);
   void                   ai_change_state(int new_state, const std::string &why);
   void                   ai_choose_initial_goals(std::multiset< Goal > &goals, int minx, int miny, int maxx, int maxy);
-  void                   ai_choose_search_goals(std::multiset< Goal > &goals, int search_type);
+  void                   ai_choose_distant_goals(std::multiset< Goal > &goals, int search_type);
   void                   ai_log(const std::string &short_msg);
   void                   ai_log(const std::string &short_msg, Thingp it);
   void                   ai_log(const std::string &short_msg, const std::string &long_msg);

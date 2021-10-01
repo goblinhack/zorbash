@@ -117,12 +117,12 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
       break;
     case SEARCH_TYPE_GLOBAL_JUMP_ALLOWED :
     case SEARCH_TYPE_GLOBAL_NO_JUMP :
-      ai_choose_search_goals(goals, search_type);
+      ai_choose_distant_goals(goals, search_type);
       goalmaps.push_back(GoalMap {goals, dmap_can_see});
       break;
     case SEARCH_TYPE_LAST_RESORTS_NO_JUMP :
     case SEARCH_TYPE_LAST_RESORTS_JUMP_ALLOWED :
-      ai_choose_search_goals(goals, search_type);
+      ai_choose_distant_goals(goals, search_type);
       goalmaps.push_back(GoalMap {goals, dmap_can_see});
       break;
   }
@@ -880,7 +880,7 @@ void Thing::ai_choose_initial_goals(std::multiset< Goal > &goals, int minx, int 
               }
             } else if (! avoid && (dist < ai_avoid_distance()) && will_avoid_monst(it)) {
               //
-              // MonstInfoers we avoid are more serious threats
+              // Monss we avoid are more serious threats
               //
               avoid = true;
             } else if (! avoid && ai_is_able_to_attack_generators() && it->is_minion_generator()) {
@@ -1084,7 +1084,7 @@ void Thing::ai_choose_initial_goals(std::multiset< Goal > &goals, int minx, int 
 // what is currently visible and find the most interesting point at that edge
 // and then create a path to that edge.
 //
-void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type)
+void Thing::ai_choose_distant_goals(std::multiset< Goal > &goals, int search_type)
 {
   TRACE_AND_INDENT();
   point start((int) mid_at.x, (int) mid_at.y);
@@ -1395,7 +1395,7 @@ next:
   }
 }
 
-bool Thing::ai_choose_nearby_goal(void)
+bool Thing::ai_choose_immediately_adjacent_goal(void)
 {
   TRACE_AND_INDENT();
   bool left;
@@ -1607,30 +1607,37 @@ bool Thing::ai_tick(void)
           AI_LOG("Idle, look for something to do");
 
           //
-          // Can we enchant something?
+          // Be a bit more careful if there is somethjing that might want to
+          // attack us, even if it is not a threat. i.e. a harmless goblin
+          // could push us off of a cliff while we're doing other stuff.
           //
-          if (ai_is_able_to_enchant_weapons()) {
-            if (get_enchantstone_count() && can_enchant_something()) {
-              AI_LOG("Try to enchant something");
-              if (is_player()) {
-                game->tick_begin("Robot can enchant something");
+          if (! any_unfriendly_monst_visible()) {
+            //
+            // Can we enchant something?
+            //
+            if (ai_is_able_to_enchant_weapons()) {
+              if (get_enchantstone_count() && can_enchant_something()) {
+                AI_LOG("Try to enchant something");
+                if (is_player()) {
+                  game->tick_begin("Robot can enchant something");
+                }
+                ai_change_state(MONST_STATE_USING_ENCHANTSTONE, "can enchant something");
+                return true;
               }
-              ai_change_state(MONST_STATE_USING_ENCHANTSTONE, "can enchant something");
-              return true;
             }
-          }
 
-          //
-          // Can we learn some skills?
-          //
-          if (ai_is_able_to_learn_skills()) {
-            if (get_skillstone_count() && can_learn_something()) {
-              AI_LOG("Try to use a skillstone");
-              if (is_player()) {
-                game->tick_begin("Robot can learn something");
+            //
+            // Can we learn some skills?
+            //
+            if (ai_is_able_to_learn_skills()) {
+              if (get_skillstone_count() && can_learn_something()) {
+                AI_LOG("Try to use a skillstone");
+                if (is_player()) {
+                  game->tick_begin("Robot can learn something");
+                }
+                ai_change_state(MONST_STATE_USING_SKILLSTONE, "can learn something");
+                return true;
               }
-              ai_change_state(MONST_STATE_USING_SKILLSTONE, "can learn something");
-              return true;
             }
           }
 
@@ -1667,7 +1674,7 @@ bool Thing::ai_tick(void)
           // Look around for something nearby to do; like collect an item.
           //
           AI_LOG("Look around for some nearby goal");
-          if (ai_choose_nearby_goal()) {
+          if (ai_choose_immediately_adjacent_goal()) {
             return true;
           }
         }
