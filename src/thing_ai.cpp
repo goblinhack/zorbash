@@ -393,7 +393,6 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
   std::array< std::array< uint8_t, MAP_WIDTH >, MAP_HEIGHT > can_jump = {};
   point                                                      start((int) mid_at.x, (int) mid_at.y);
   auto                                                       dmap_can_see      = get_dmap_can_see();
-  auto                                                       seen_map          = get_seen_map();
   point                                                      at                = make_point(mid_at);
   bool                                                       jump_allowed      = false;
   int                                                        something_changed = 0;
@@ -451,9 +450,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
     for (int y = miny; y < maxy; y++) {
       for (int x = minx; x < maxx; x++) {
         if (monst_aip->can_see_currently.can_see[ x ][ y ]) {
-          IF_DEBUG3 {
-            (void) level->thing_new("ai_path2", fpoint(x, y));
-          }
+          IF_DEBUG3 { (void) level->thing_new("ai_path2", fpoint(x, y)); }
           set(monst_aip->can_see_ever.can_see, x, y, true);
         }
       }
@@ -654,8 +651,8 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
               continue;
             }
 
-            if (! get(monst_aip->can_see_currently.can_see, p.x, p.y)) {
-              FOR_ALL_THINGS_THAT_INTERACT(level, it, p.x, p.y)
+            if (! get(monst_aip->can_see_ever.can_see, o.x, o.y)) {
+              FOR_ALL_THINGS_THAT_INTERACT(level, it, o.x, o.y)
               {
                 if (it->is_changing_level || it->is_hidden || it->is_falling || it->is_jumping) {
                   continue;
@@ -709,6 +706,10 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
   }
 #endif
 
+  //
+  // Not sure what this really does
+  //
+  auto seen_map = get_seen_map();
   for (int y = miny; y < maxy; y++) {
     for (int x = minx; x < maxx; x++) {
 
