@@ -887,7 +887,11 @@ void Thing::ai_choose_initial_goals(std::multiset< Goal > &goals, int minx, int 
 
         if (it->is_door() && ! it->is_open) {
           if (ai_is_able_to_open_doors() || ai_is_able_to_break_down_doors()) {
-            SCORE_ADD(100, "open-door");
+            if (get_keys()) {
+              SCORE_ADD(1000, "open-door-with-key");
+            } else {
+              SCORE_ADD(100, "open-door");
+            }
             got_one_this_tile = true;
           }
         }

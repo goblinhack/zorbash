@@ -7,6 +7,7 @@
 #include "my_globals.h"
 #include "my_main.h"
 #include "my_monst.h"
+#include "my_random.h"
 #include "my_sprintf.h"
 #include "my_sys.h"
 #include "my_thing.h"
@@ -36,25 +37,37 @@ void Thing::enemies_tick(void)
   }
 
   for (auto &p : monst_aip->enemies) {
+    auto attacker = level->thing_find_optional(p.first);
+    if (! attacker) {
+      monst_aip->enemies.erase(p.first);
+      return;
+    }
+
     if (--p.second > 0) {
+      if (is_player() && game->robot_mode) {
+        CON("Robot: Enemy: %s (%d timeout)", attacker->to_string().c_str(), p.second);
+      }
       continue;
     }
 
-    auto attacker = level->thing_find_optional(p.first);
-    if (attacker) {
-      //
-      // If far enough away start to forget this enemy
-      //
-      if (distance(attacker->mid_at, mid_at) > ai_scent_distance()) {
-        if (is_player() && game->robot_mode) {
-          CON("Robot: Remove enemy: %s", attacker->to_string().c_str());
-        }
-        monst_aip->enemies.erase(p.first);
+    //
+    // If far enough away start to forget this enemy
+    //
+    if (distance(attacker->mid_at, mid_at) > ai_avoid_distance()) {
+      if (is_player() && game->robot_mode) {
+        CON("Robot: Remove enemy: %s", attacker->to_string().c_str());
       }
-    } else {
       monst_aip->enemies.erase(p.first);
+      return;
     }
-    return;
+
+    //
+    // Be resentful a bit longer
+    //
+    if (is_player() && game->robot_mode) {
+      CON("Robot: Resent enemy a bit longer: %s", attacker->to_string().c_str());
+    }
+    p.second = pcg_random_range(0, 10);
   }
 }
 
