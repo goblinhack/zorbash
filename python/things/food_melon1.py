@@ -99,7 +99,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_collect_as_keys(False)
     mytp.set_is_collectable(True)
     mytp.set_is_collected_as_gold(False)
-    mytp.set_is_combustible(True)
+    mytp.set_is_combustible(False)
     mytp.set_is_corpse_on_death(False)
     mytp.set_is_corridor(False)
     mytp.set_is_critical_to_level(False)

@@ -153,11 +153,12 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
         return false;
       }
     } else if (poison) {
-      incr_poison(poison);
       if (is_player()) {
+        incr_poison(poison);
         TOPCON("%%fg=yellow$You are poisoned for %d damage!%%fg=reset$", poison);
-      } else if (real_hitter->is_player()) {
-        TOPCON("%%fg=yellow$You poison %s for %d damage!%%fg=reset$", text_The().c_str(), poison);
+      } else if (is_alive_monst() && real_hitter->is_player()) {
+        incr_poison(poison);
+        TOPCON("%%fg=yellow$You poison %s for %d damage!%%fg=reset$", text_the().c_str(), poison);
       }
     }
   }

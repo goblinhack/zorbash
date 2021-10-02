@@ -55,11 +55,11 @@ void Thing::level_leave(void)
     if (level->all_things_of_interest_walk_in_progress) {
       level->all_things_of_interest_pending_add[ group ].erase(id);
       level->all_things_of_interest_pending_remove[ group ].insert(std::pair(id, this));
-      dbg("Pending remove from interesting things");
+      dbg4("Pending remove from interesting things");
     } else {
       level->all_things_of_interest[ group ].erase(id);
       level->all_things_of_interest_pending_add[ group ].erase(id);
-      dbg("Removed from interesting things");
+      dbg4("Removed from interesting things");
     }
   }
 
@@ -71,11 +71,11 @@ void Thing::level_leave(void)
     if (level->all_animated_things_walk_in_progress) {
       level->all_animated_things_pending_add[ group ].erase(id);
       level->all_animated_things_pending_remove[ group ].insert(std::pair(id, this));
-      dbg("Pending remove from animated things");
+      dbg4("Pending remove from animated things");
     } else {
       level->all_animated_things[ group ].erase(id);
       level->all_animated_things_pending_add[ group ].erase(id);
-      dbg("Removed from animated things");
+      dbg4("Removed from animated things");
     }
   }
 

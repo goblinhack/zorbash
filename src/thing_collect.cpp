@@ -18,12 +18,10 @@
 //
 int Thing::worth_collecting(Thingp item, Thingp *would_need_to_drop)
 {
-  TRACE_AND_INDENT();
   //
   // Don't try to pick up goblins carrying gold
   //
   if (! item->is_collectable()) {
-    dbg("Worth collecting %s? no, not collectable", item->to_string().c_str());
     return -1;
   }
 

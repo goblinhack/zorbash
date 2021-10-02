@@ -5,6 +5,7 @@
 
 #include "my_array_bounds_check.h"
 #include "my_dmap.h"
+#include "my_game.h"
 #include "my_level.h"
 #include "my_math.h"
 #include "my_monst.h"
@@ -183,6 +184,16 @@ bool Thing::possible_to_attack(const Thingp it)
 
   if (is_player()) {
     if (it->is_attackable_by_player()) {
+      if (game->robot_mode) {
+        if (it->is_barrel()) {
+          dbg("No, do not attack %s, is explosive barrel", it->to_string().c_str());
+          return false;
+        }
+      }
+      if (it->is_foilage()) {
+        dbg("No, do not attack %s", it->to_string().c_str());
+        return false;
+      }
       dbg("Can attack %s", it->to_string().c_str());
       return true;
     }

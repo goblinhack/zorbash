@@ -495,9 +495,9 @@ bool Thing::collision_check_only(Thingp it, fpoint future_pos, int x, int y)
     return false;
   }
 
-  IF_DEBUG2 { dbg("Collision check only? @%f,%f with %s", future_pos.x, future_pos.y, it->to_string().c_str()); }
-
+  dbg("Collision check only? @%f,%f with %s)", future_pos.x, future_pos.y, it->to_string().c_str());
   TRACE_AND_INDENT();
+
   //
   // Allow cleaners to engulf/swallow attack
   //
@@ -832,9 +832,7 @@ bool Thing::collision_check_only(fpoint future_pos)
     return false;
   }
 
-  if (is_loggable()) {
-    dbg("Collision check only");
-  }
+  dbg("Collision check only");
   TRACE_AND_INDENT();
 
   int minx = future_pos.x - thing_collision_tiles;

@@ -40,6 +40,7 @@ ThingShoved Thing::try_to_shove(Thingp it, fpoint delta)
   }
 
   dbg("Try to shove, delta %d,%d", (int) delta.x, (int) delta.y);
+  TRACE_AND_INDENT();
 
   bool was_dead = it->is_dead;
 
@@ -105,6 +106,9 @@ ThingShoved Thing::try_to_shove(Thingp it, fpoint delta)
   // If pushed into a chasm, move the thing first and then
   // let it spawn dead things
   //
+  dbg("Shove it");
+  TRACE_AND_INDENT();
+
   if (it->collision_check_only(shove_pos)) {
     //
     // This is a failure to shove
