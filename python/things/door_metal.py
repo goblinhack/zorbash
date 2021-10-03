@@ -22,6 +22,7 @@ def tp_init(name):
     mytp.set_gfx_health_bar_autohide(True)
     mytp.set_gfx_oversized_and_on_floor(True)
     mytp.set_gfx_short_shadow_caster(True)
+    mytp.set_is_interesting(True)
     mytp.set_gfx_shown_in_bg(True)
     mytp.set_health_initial_dice("10d20")
     mytp.set_is_able_to_fall(False)

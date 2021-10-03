@@ -29,13 +29,14 @@
 //
 // Search priorities in order
 //
-#define SEARCH_TYPE_MAX                       6
-#define SEARCH_TYPE_LOCAL_NO_JUMP             0
-#define SEARCH_TYPE_LOCAL_JUMP_ALLOWED        1
-#define SEARCH_TYPE_GLOBAL_NO_JUMP            2
-#define SEARCH_TYPE_GLOBAL_JUMP_ALLOWED       3
-#define SEARCH_TYPE_LAST_RESORTS_NO_JUMP      4
-#define SEARCH_TYPE_LAST_RESORTS_JUMP_ALLOWED 5
+#define SEARCH_TYPE_MAX                       7
+#define SEARCH_TYPE_LOCAL_CAN_SEE             0
+#define SEARCH_TYPE_LOCAL_NO_JUMP             1
+#define SEARCH_TYPE_LOCAL_JUMP_ALLOWED        2
+#define SEARCH_TYPE_GLOBAL_NO_JUMP            3
+#define SEARCH_TYPE_GLOBAL_JUMP_ALLOWED       4
+#define SEARCH_TYPE_LAST_RESORTS_NO_JUMP      5
+#define SEARCH_TYPE_LAST_RESORTS_JUMP_ALLOWED 6
 
 #define SCORE_ADD(score, msg)                                                                                          \
   total_score += (score);                                                                                              \
@@ -112,19 +113,17 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
   ai_dmap_can_see_init(minx, miny, maxx, maxy, search_type);
 
   switch (search_type) {
+    case SEARCH_TYPE_LOCAL_CAN_SEE :
+      ai_choose_can_see_goals(goals, minx, miny, maxx, maxy);
+      goalmaps.push_back(GoalMap {goals, dmap_can_see});
+      break;
     case SEARCH_TYPE_LOCAL_JUMP_ALLOWED :
     case SEARCH_TYPE_LOCAL_NO_JUMP :
-      ai_choose_initial_goals(goals, minx, miny, maxx, maxy);
-      goalmaps.push_back(GoalMap {goals, dmap_can_see});
-      break;
     case SEARCH_TYPE_GLOBAL_JUMP_ALLOWED :
     case SEARCH_TYPE_GLOBAL_NO_JUMP :
-      ai_choose_distant_goals(goals, search_type);
-      goalmaps.push_back(GoalMap {goals, dmap_can_see});
-      break;
     case SEARCH_TYPE_LAST_RESORTS_NO_JUMP :
     case SEARCH_TYPE_LAST_RESORTS_JUMP_ALLOWED :
-      ai_choose_distant_goals(goals, search_type);
+      ai_choose_search_goals(goals, search_type);
       goalmaps.push_back(GoalMap {goals, dmap_can_see});
       break;
   }
@@ -137,6 +136,7 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
     return false;
   }
 
+  AI_LOG("", "Found some goals. Choose the best.");
   for (auto &g : goalmaps) {
     //
     // Find the highest/least preferred score so we can scale all the goals
@@ -398,6 +398,8 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
   bool                                                       jump_allowed      = false;
   int                                                        something_changed = 0;
 
+  AI_LOG("", "Init dmap");
+
   for (int y = miny; y < maxy; y++) {
     for (int x = minx; x < maxx; x++) {
       set(dmap_can_see->val, x, y, DMAP_IS_WALL);
@@ -405,6 +407,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
   }
 
   switch (search_type) {
+    case SEARCH_TYPE_LOCAL_CAN_SEE : jump_allowed = false; break;
     case SEARCH_TYPE_LOCAL_JUMP_ALLOWED : jump_allowed = true; break;
     case SEARCH_TYPE_LOCAL_NO_JUMP : jump_allowed = false; break;
     case SEARCH_TYPE_GLOBAL_JUMP_ALLOWED : jump_allowed = true; break;
@@ -433,6 +436,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
       }
 
       switch (search_type) {
+        case SEARCH_TYPE_LOCAL_CAN_SEE :
         case SEARCH_TYPE_LOCAL_NO_JUMP :
         case SEARCH_TYPE_GLOBAL_NO_JUMP :
         case SEARCH_TYPE_LAST_RESORTS_NO_JUMP :
@@ -688,7 +692,6 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
   // We want to find how far everything is from us.
   //
   set(dmap_can_see->val, start.x, start.y, DMAP_IS_GOAL);
-  IF_DEBUG4 { dmap_print(dmap_can_see); }
 
   dmap_process(dmap_can_see, point(minx, miny), point(maxx, maxy));
 
@@ -696,6 +699,14 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
   if (threat) {
     if (threat && (is_dangerous(threat) || is_enemy(threat))) {
       something_changed = true;
+    }
+  }
+
+  IF_DEBUG3
+  {
+    if (is_player()) {
+      log("Dmap can see:");
+      dmap_print(dmap_can_see);
     }
   }
 
@@ -707,7 +718,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
 // have touched them) and choose the best goal. Create a path to that goal for
 // the thing to walk.
 //
-void Thing::ai_choose_initial_goals(std::multiset< Goal > &goals, int minx, int miny, int maxx, int maxy)
+void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int miny, int maxx, int maxy)
 {
   TRACE_AND_INDENT();
   auto dmap_can_see = get_dmap_can_see();
@@ -762,6 +773,9 @@ void Thing::ai_choose_initial_goals(std::multiset< Goal > &goals, int minx, int 
           continue;
         }
 
+        if (is_player()) {
+          it->con("seen");
+        }
         //
         // Worse terrain, less preferred. Higher score, more preferred.
         //
@@ -1079,7 +1093,7 @@ void Thing::ai_choose_initial_goals(std::multiset< Goal > &goals, int minx, int 
 // what is currently visible and find the most interesting point at that edge
 // and then create a path to that edge.
 //
-void Thing::ai_choose_distant_goals(std::multiset< Goal > &goals, int search_type)
+void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type)
 {
   TRACE_AND_INDENT();
   point start((int) mid_at.x, (int) mid_at.y);
@@ -1093,12 +1107,6 @@ void Thing::ai_choose_distant_goals(std::multiset< Goal > &goals, int search_typ
   set(pushed, start.x, start.y, true);
 
   auto dmap_can_see = get_dmap_can_see();
-  IF_DEBUG3
-  {
-    log("Dmap, can see:");
-    dmap_print(dmap_can_see);
-  }
-
   while (! in.empty()) {
     auto p = in.front();
     in.pop_front();
@@ -1290,15 +1298,15 @@ void Thing::ai_choose_distant_goals(std::multiset< Goal > &goals, int search_typ
       for (int x = 0; x < MAP_WIDTH; x++) {
         if ((x == (int) mid_at.x) && (y == (int) mid_at.y)) {
           if (level->is_lit_ever(x, y)) {
-            printf("*");
+            printf("* ");
           } else {
-            printf("o");
+            printf("o ");
           }
           continue;
         }
         for (auto p : can_reach_cands) {
           if ((x == p.x) && (y == p.y)) {
-            printf("c");
+            printf("c ");
             goto next;
           }
         }
@@ -1310,35 +1318,30 @@ void Thing::ai_choose_distant_goals(std::multiset< Goal > &goals, int search_typ
               printf("X");
             }
           } else {
-            if (get(monst_aip->can_see_ever.can_see, x, y)) {
-              printf("!");
-            } else {
-              printf("?");
-            }
+            printf("_");
           }
         } else {
-          if (get(monst_aip->can_see_ever.can_see, x, y)) {
+          if (level->is_obs_wall_or_door(x, y)) {
             if (level->is_door(x, y)) {
               printf("d");
-            } else if (level->is_obs_wall_or_door(x, y)) {
-              printf("x");
             } else {
-              printf(".");
+              printf("x");
             }
           } else {
-            if (level->is_door(x, y)) {
-              printf("_");
-            } else if (level->is_obs_wall_or_door(x, y)) {
-              printf("/");
-            } else {
-              printf(" ");
-            }
+            printf(" ");
           }
+        }
+        if (get(monst_aip->can_see_currently.can_see, x, y)) {
+          printf(".");
+        } else if (get(monst_aip->can_see_ever.can_see, x, y)) {
+          printf(",");
+        } else {
+          printf(" ");
         }
       next:
         continue;
       }
-      con(" ");
+      printf("\n");
     }
   }
 #endif
@@ -1573,16 +1576,16 @@ bool Thing::ai_tick(bool recursing)
   bool light_walls = true;
   level->fov_calculete(&monst_aip->can_see_currently, mid_at.x, mid_at.y, ai_vision_distance(), light_walls);
 
-  if (! recursing) {
-    for (int y = miny; y < maxy; y++) {
-      for (int x = minx; x < maxx; x++) {
-        if (monst_aip->can_see_currently.can_see[ x ][ y ]) {
-          // IF_DEBUG3 { (void) level->thing_new("ai_path2", fpoint(x, y)); }
-          set(monst_aip->can_see_ever.can_see, x, y, true);
-        }
+  //  if (! recursing) {
+  for (int y = miny; y < maxy; y++) {
+    for (int x = minx; x < maxx; x++) {
+      if (monst_aip->can_see_currently.can_see[ x ][ y ]) {
+        // IF_DEBUG3 { (void) level->thing_new("ai_path2", fpoint(x, y)); }
+        set(monst_aip->can_see_ever.can_see, x, y, true);
       }
     }
   }
+  //  }
 
 #if 1
   if (is_player()) {
@@ -1825,6 +1828,7 @@ bool Thing::ai_tick(bool recursing)
           search_type_max = SEARCH_TYPE_LOCAL_NO_JUMP;
         }
 
+        AI_LOG("", "Check for interruptions");
         if (ai_dmap_can_see_init(minx, miny, maxx, maxy, SEARCH_TYPE_LOCAL_JUMP_ALLOWED)) {
           AI_LOG("Something interrupted me");
           if (is_player()) {

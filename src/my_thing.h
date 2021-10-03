@@ -1167,8 +1167,8 @@ public:
   void                   blit_end_submerged(uint8_t submerged) const;
   void                   blit_floor_chasm(point &tl, point &br, const ThingTiles *tiles);
   void                   ai_change_state(int new_state, const std::string &why);
-  void                   ai_choose_initial_goals(std::multiset< Goal > &goals, int minx, int miny, int maxx, int maxy);
-  void                   ai_choose_distant_goals(std::multiset< Goal > &goals, int search_type);
+  void                   ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int miny, int maxx, int maxy);
+  void                   ai_choose_search_goals(std::multiset< Goal > &goals, int search_type);
   void                   ai_log(const std::string &short_msg);
   void                   ai_log(const std::string &short_msg, Thingp it);
   void                   ai_log(const std::string &short_msg, const std::string &long_msg);

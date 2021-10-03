@@ -19,6 +19,7 @@ def tp_init(name):
     mytp.set_collision_hit_priority(9)
     mytp.set_collision_radius(0.40)
     mytp.set_damage_doubled_from_fire(True)
+    mytp.set_is_interesting(True)
     mytp.set_gfx_animated(True)
     mytp.set_gfx_health_bar_autohide(True)
     mytp.set_gfx_oversized_and_on_floor(True)
