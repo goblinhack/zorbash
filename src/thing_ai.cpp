@@ -29,14 +29,15 @@
 //
 // Search priorities in order
 //
-#define SEARCH_TYPE_MAX                       7
-#define SEARCH_TYPE_LOCAL_CAN_SEE             0
-#define SEARCH_TYPE_LOCAL_NO_JUMP             1
-#define SEARCH_TYPE_LOCAL_JUMP_ALLOWED        2
-#define SEARCH_TYPE_GLOBAL_NO_JUMP            3
-#define SEARCH_TYPE_GLOBAL_JUMP_ALLOWED       4
-#define SEARCH_TYPE_LAST_RESORTS_NO_JUMP      5
-#define SEARCH_TYPE_LAST_RESORTS_JUMP_ALLOWED 6
+#define SEARCH_TYPE_MAX                       8
+#define SEARCH_TYPE_CAN_SEE_NO_JUMP           0
+#define SEARCH_TYPE_CAN_SEE_JUMP_ALLOWED      1
+#define SEARCH_TYPE_LOCAL_NO_JUMP             2
+#define SEARCH_TYPE_LOCAL_JUMP_ALLOWED        3
+#define SEARCH_TYPE_GLOBAL_NO_JUMP            4
+#define SEARCH_TYPE_GLOBAL_JUMP_ALLOWED       5
+#define SEARCH_TYPE_LAST_RESORTS_NO_JUMP      6
+#define SEARCH_TYPE_LAST_RESORTS_JUMP_ALLOWED 7
 
 #define SCORE_ADD(score, msg)                                                                                          \
   total_score += (score);                                                                                              \
@@ -113,16 +114,17 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
   ai_dmap_can_see_init(minx, miny, maxx, maxy, search_type);
 
   switch (search_type) {
-    case SEARCH_TYPE_LOCAL_CAN_SEE :
+    case SEARCH_TYPE_CAN_SEE_NO_JUMP :
+    case SEARCH_TYPE_CAN_SEE_JUMP_ALLOWED :
       ai_choose_can_see_goals(goals, minx, miny, maxx, maxy);
       goalmaps.push_back(GoalMap {goals, dmap_can_see});
       break;
-    case SEARCH_TYPE_LOCAL_JUMP_ALLOWED :
     case SEARCH_TYPE_LOCAL_NO_JUMP :
-    case SEARCH_TYPE_GLOBAL_JUMP_ALLOWED :
+    case SEARCH_TYPE_LOCAL_JUMP_ALLOWED :
     case SEARCH_TYPE_GLOBAL_NO_JUMP :
-    case SEARCH_TYPE_LAST_RESORTS_NO_JUMP :
+    case SEARCH_TYPE_GLOBAL_JUMP_ALLOWED :
     case SEARCH_TYPE_LAST_RESORTS_JUMP_ALLOWED :
+    case SEARCH_TYPE_LAST_RESORTS_NO_JUMP :
       ai_choose_search_goals(goals, search_type);
       goalmaps.push_back(GoalMap {goals, dmap_can_see});
       break;
@@ -407,13 +409,14 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
   }
 
   switch (search_type) {
-    case SEARCH_TYPE_LOCAL_CAN_SEE : jump_allowed = false; break;
-    case SEARCH_TYPE_LOCAL_JUMP_ALLOWED : jump_allowed = true; break;
+    case SEARCH_TYPE_CAN_SEE_NO_JUMP : jump_allowed = false; break;
+    case SEARCH_TYPE_CAN_SEE_JUMP_ALLOWED : jump_allowed = true; break;
     case SEARCH_TYPE_LOCAL_NO_JUMP : jump_allowed = false; break;
-    case SEARCH_TYPE_GLOBAL_JUMP_ALLOWED : jump_allowed = true; break;
+    case SEARCH_TYPE_LOCAL_JUMP_ALLOWED : jump_allowed = true; break;
     case SEARCH_TYPE_GLOBAL_NO_JUMP : jump_allowed = false; break;
-    case SEARCH_TYPE_LAST_RESORTS_NO_JUMP : jump_allowed = false; break;
+    case SEARCH_TYPE_GLOBAL_JUMP_ALLOWED : jump_allowed = true; break;
     case SEARCH_TYPE_LAST_RESORTS_JUMP_ALLOWED : jump_allowed = true; break;
+    case SEARCH_TYPE_LAST_RESORTS_NO_JUMP : jump_allowed = false; break;
   }
 
   for (int y = miny; y < maxy; y++) {
@@ -436,7 +439,8 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
       }
 
       switch (search_type) {
-        case SEARCH_TYPE_LOCAL_CAN_SEE :
+        case SEARCH_TYPE_CAN_SEE_NO_JUMP :
+        case SEARCH_TYPE_CAN_SEE_JUMP_ALLOWED :
         case SEARCH_TYPE_LOCAL_NO_JUMP :
         case SEARCH_TYPE_GLOBAL_NO_JUMP :
         case SEARCH_TYPE_LAST_RESORTS_NO_JUMP :
@@ -1821,15 +1825,8 @@ bool Thing::ai_tick(bool recursing)
         //
         // Check for interrupts
         //
-        int search_type_max;
-        if (ai_is_able_to_jump()) {
-          search_type_max = SEARCH_TYPE_LOCAL_JUMP_ALLOWED;
-        } else {
-          search_type_max = SEARCH_TYPE_LOCAL_NO_JUMP;
-        }
-
         AI_LOG("", "Check for interruptions");
-        if (ai_dmap_can_see_init(minx, miny, maxx, maxy, SEARCH_TYPE_LOCAL_JUMP_ALLOWED)) {
+        if (ai_dmap_can_see_init(minx, miny, maxx, maxy, SEARCH_TYPE_CAN_SEE_JUMP_ALLOWED)) {
           AI_LOG("Something interrupted me");
           if (is_player()) {
             game->tick_begin("Robot move interrupted by something");
@@ -1867,6 +1864,7 @@ bool Thing::ai_tick(bool recursing)
         AI_LOG("Keep on moving");
         if (is_player()) {
           game->tick_begin("Robot move");
+          path_pop_next_move();
         }
         return true;
       }
