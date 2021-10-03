@@ -296,7 +296,7 @@ public:
   bool        possible_to_attack_at(point at);
   bool        ai_choose_immediately_adjacent_goal(void);
   bool        ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int search_type = 0);
-  bool        ai_tick(void);
+  bool        ai_tick(bool recursing = false);
   bool get_coords(point &blit_tl, point &blit_br, point &pre_blit_tl, point &pre_blit_br, Tilep &tile, bool refl);
   bool get_map_offset_coords(point &blit_tl, point &blit_br, Tilep &tile, bool reflection);
   bool health_boost_would_occur(int v);
@@ -1041,6 +1041,7 @@ public:
   std::vector< Thingp >  get_treasure_list(void);
   struct AgeMap_ *       get_age_map(void);
   struct AgeMap_ *       get_seen_map(void);
+  struct AgeMap_ *       get_interrupt_map(void);
   struct Dmap_ *         get_dmap_can_see(void);
   struct FovMap_ *       get_can_see_currently(void);
   struct FovMap_ *       get_can_see_ever(void);
@@ -1191,6 +1192,7 @@ public:
   void clear_dmap_can_see(void);
   void clear_move_path(const std::string &why);
   void clear_seen_map(void);
+  void clear_interrupt_map(void);
   void con(const char *fmt, ...) const __attribute__((format(printf, 2, 3)));
   void con_(const char *fmt, va_list args) const; // compile error without
   void corrode_tick();

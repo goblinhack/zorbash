@@ -59,6 +59,14 @@ bool Level::tick(void)
   things_gc_if_possible();
 
   //
+  // Update the player map if needed. It is quite slow.
+  //
+  if (request_dmap_to_player_update) {
+    request_dmap_to_player_update = false;
+    dmap_to_player_update();
+  }
+
+  //
   // A new game event has occurred?
   //
   if (! game->tick_requested.empty()) {
@@ -473,7 +481,11 @@ bool Level::tick(void)
         CON("Robot: tick requested");
         game->robot_mode_tick_requested = false;
         if (player) {
-          player->ai_tick();
+          if (game->robot_mode) {
+            player->ai_tick();
+          } else if (player->monst_aip->move_path.size()) {
+            player->path_pop_next_move();
+          }
         }
       }
 
@@ -484,7 +496,11 @@ bool Level::tick(void)
         CON("Robot: a new tick was requested");
       }
     } else if (player) {
-      player->ai_tick();
+      if (game->robot_mode) {
+        player->ai_tick();
+      } else if (player->monst_aip->move_path.size()) {
+        player->path_pop_next_move();
+      }
     }
   }
 

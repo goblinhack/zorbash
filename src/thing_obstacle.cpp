@@ -236,8 +236,26 @@ bool Thing::ai_obstacle(Thingp it)
     }
 
     if (! it->is_open) {
+      if (it->is_door()) {
+        if (ai_is_able_to_open_doors()) {
+          if (get_keys()) {
+            return false;
+          }
+        }
+        if (ai_is_able_to_break_down_doors()) {
+          return false;
+        }
+      }
       return true;
     }
+  }
+
+  if (it->is_secret_door()) {
+    auto dist = distance(it->mid_at, mid_at);
+    if (dist > ROBOT_CAN_SEE_SECRET_DOOR_DISTANCE) {
+      return true;
+    }
+    return false;
   }
 
   if (is_monst() || (is_player() && game->robot_mode)) {

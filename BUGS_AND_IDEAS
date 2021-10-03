@@ -1,7 +1,7 @@
 
 Todo
 ----
-- player attacked barrel
+- still not lookign at doors
 - change THING_TICK_DURATION_TOO_LONG back to 10
 - reimplement escape
 - weapon pick up loop on victimlake3

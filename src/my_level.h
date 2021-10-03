@@ -205,6 +205,7 @@ public:
   bool is_being_destroyed {};
   bool cursor_update_needed {};
   bool fade_out_finished {};
+  bool request_dmap_to_player_update;
 
   //
   // Animation loop counters for surface effects

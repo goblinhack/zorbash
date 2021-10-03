@@ -6177,6 +6177,13 @@ void wid_tick_all(void)
       }
     }
     wid_actionbar_init();
+    game->request_remake_actionbar = false;
+  }
+
+  if (game->request_remake_actionbar) {
+    DBG3("Handle request to remake actionhar");
+    wid_actionbar_init();
+    game->request_remake_actionbar = false;
   }
 
   //

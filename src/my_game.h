@@ -278,6 +278,7 @@ public:
   // Temporary. Global requests
   //
   bool     request_remake_inventory {};
+  bool     request_remake_actionbar {};
   bool     request_remake_skillbox {};
   bool     request_destroy_bags {}; // Finished emptying temporary bag
   bool     request_update_rightbar {};

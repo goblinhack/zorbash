@@ -146,6 +146,7 @@ std::ostream &operator<<(std::ostream &out, Bits< MonstAip & > const my)
   TRACE_AND_INDENT();
   out << bits(my.t->age_map.val);
   out << bits(my.t->seen_map.val);
+  out << bits(my.t->interrupt_map.val);
   out << bits(my.t->dmap_can_see.val);
   out << bits(my.t->can_see_currently.can_see);
   out << bits(my.t->can_see_ever.can_see);

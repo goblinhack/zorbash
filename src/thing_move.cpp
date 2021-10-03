@@ -29,7 +29,7 @@ void Thing::on_move(void)
     //
     // Update reachability for the player
     //
-    level->dmap_to_player_update();
+    level->request_dmap_to_player_update = true;
   }
 
   auto on_move = tp()->on_move_do();
@@ -63,6 +63,7 @@ void Thing::move_finish(void)
   is_moving = false;
 
   dbg("Move finish");
+  TRACE_AND_INDENT();
 
   //
   // Set this so that we can pick up items again at the last location.
@@ -70,11 +71,12 @@ void Thing::move_finish(void)
   set_where_i_dropped_an_item_last(point(-1, -1));
 
   if (is_player()) {
+    dbg("Check if anything to carry");
     if (check_anything_to_carry(true)) {
       BOTCON("Press %%fg=yellow$%s%%fg=reset$ or click to collect.",
              SDL_GetScancodeName((SDL_Scancode) game->config.key_wait_or_collect));
       level->describe(mid_at);
-      wid_actionbar_init();
+      game->request_remake_actionbar = true;
     }
   }
 
@@ -82,9 +84,13 @@ void Thing::move_finish(void)
   // Make sure that things that declare they are finished moving really
   // are where they should be.
   //
+  dbg("Move finish update pos");
   update_pos(mid_at, true);
+
+  dbg("Move finish update interp pos");
   update_interpolated_position();
 
+  dbg("Move finish call on move");
   on_move();
 
   if (monst_aip) {

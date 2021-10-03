@@ -172,6 +172,7 @@ void Thing::init(Levelp level, const std::string &name, const fpoint born, const
   if (tpp->is_monst() || tpp->is_player()) {
     clear_age_map();
     clear_seen_map();
+    clear_interrupt_map();
     clear_dmap_can_see();
     clear_can_see_currently();
     clear_can_see_ever();

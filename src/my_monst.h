@@ -170,6 +170,7 @@ typedef struct MonstAi_ {
 public:
   AgeMap                   age_map;           // How old a cell is
   AgeMap                   seen_map;          // If we've ever seen this tile and when
+  AgeMap                   interrupt_map;     // If we've ever interrupt this tile and when
   Dmap                     dmap_can_see;      // What the monster can reach during AI
   FovMap                   can_see_currently; // Shadowcasting of what can be seen currently
   FovMap                   can_see_ever;      // Shadowcasting of what can be seen ever on this level

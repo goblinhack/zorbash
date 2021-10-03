@@ -92,18 +92,20 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
   TRACE_AND_INDENT();
   point start((int) mid_at.x, (int) mid_at.y);
 
-  AI_LOG("", "Choose goal");
+  //
+  // Choose goals (higher scores, lower costs are preferred)
+  //
+  std::string s = "Choose goal";
+  IF_DEBUG3 { s = string_sprintf("Try to find goals, search-type %d", search_type); }
+
+  AI_LOG("", s);
   TRACE_AND_INDENT();
+
   //
   // Find all the possible goals. Higher scores, lower costs are preferred
   //
   auto dmap_can_see = get_dmap_can_see();
   auto age_map      = get_age_map();
-
-  //
-  // Initialize basic visibility and things that are lit and can be seen
-  //
-  AI_LOG("", "Choose goals (higher scores, lower costs are preferred):");
 
   std::multiset< Goal > goals;
   std::list< GoalMap >  goalmaps;
@@ -393,67 +395,12 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
   std::array< std::array< uint8_t, MAP_WIDTH >, MAP_HEIGHT > can_jump = {};
   point                                                      start((int) mid_at.x, (int) mid_at.y);
   auto                                                       dmap_can_see      = get_dmap_can_see();
-  point                                                      at                = make_point(mid_at);
   bool                                                       jump_allowed      = false;
   int                                                        something_changed = 0;
 
   for (int y = miny; y < maxy; y++) {
     for (int x = minx; x < maxx; x++) {
       set(dmap_can_see->val, x, y, DMAP_IS_WALL);
-    }
-  }
-
-  bool light_walls = true;
-  level->fov_calculete(&monst_aip->can_see_currently, mid_at.x, mid_at.y, ai_vision_distance(), light_walls);
-
-#if 1
-  if (is_player()) {
-    con("Can see fov:");
-    for (int y = 0; y < MAP_HEIGHT; y++) {
-      for (int x = 0; x < MAP_WIDTH; x++) {
-        if ((x == (int) mid_at.x) && (y == (int) mid_at.y)) {
-          printf("*");
-        } else {
-          if (get(monst_aip->can_see_currently.can_see, x, y)) {
-            if (level->is_door(x, y)) {
-              printf("D");
-            } else if (level->is_obs_wall_or_door(x, y)) {
-              printf("X");
-            } else {
-              printf(".");
-            }
-          } else if (get(monst_aip->can_see_ever.can_see, x, y)) {
-            if (level->is_door(x, y)) {
-              printf("D");
-            } else if (level->is_obs_wall_or_door(x, y)) {
-              printf("X");
-            } else {
-              printf(",");
-            }
-          } else {
-            if (level->is_door(x, y)) {
-              printf("d");
-            } else if (level->is_obs_wall_or_door(x, y)) {
-              printf("x");
-            } else {
-              printf(" ");
-            }
-          }
-        }
-      }
-      printf("\n");
-    }
-  }
-#endif
-
-  if (search_type == 0) {
-    for (int y = miny; y < maxy; y++) {
-      for (int x = minx; x < maxx; x++) {
-        if (monst_aip->can_see_currently.can_see[ x ][ y ]) {
-          IF_DEBUG3 { (void) level->thing_new("ai_path2", fpoint(x, y)); }
-          set(monst_aip->can_see_ever.can_see, x, y, true);
-        }
-      }
     }
   }
 
@@ -481,15 +428,8 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
         continue;
       }
 
-      if (level->is_obs_wall_or_door(p)) {
+      if (level->is_wall(p)) {
         continue;
-      }
-
-      if (level->is_secret_door(p)) {
-        auto dist = distance(p, at);
-        if (dist > ROBOT_CAN_SEE_SECRET_DOOR_DISTANCE) {
-          continue;
-        }
       }
 
       switch (search_type) {
@@ -651,7 +591,8 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
               continue;
             }
 
-            if (! get(monst_aip->can_see_ever.can_see, o.x, o.y)) {
+            if (! get(monst_aip->can_see_ever.can_see, o.x, o.y) && ! get(monst_aip->interrupt_map.val, o.x, o.y)) {
+
               FOR_ALL_THINGS_THAT_INTERACT(level, it, o.x, o.y)
               {
                 if (it->is_changing_level || it->is_hidden || it->is_falling || it->is_jumping) {
@@ -659,6 +600,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
                 }
 
                 if (worth_collecting(it) || worth_eating(it) || is_dangerous(it)) {
+                  set(monst_aip->interrupt_map.val, o.x, o.y, game->tick_current);
                   something_changed++;
                 }
               }
@@ -1558,7 +1500,7 @@ bool Thing::ai_choose_immediately_adjacent_goal(void)
   return false;
 }
 
-bool Thing::ai_tick(void)
+bool Thing::ai_tick(bool recursing)
 {
   TRACE_AND_INDENT();
   dbg3("AI tick");
@@ -1625,6 +1567,62 @@ bool Thing::ai_tick(void)
   //
   auto threat = most_dangerous_visible_thing_get();
 
+  //
+  // Update what we can see
+  //
+  bool light_walls = true;
+  level->fov_calculete(&monst_aip->can_see_currently, mid_at.x, mid_at.y, ai_vision_distance(), light_walls);
+
+  if (! recursing) {
+    for (int y = miny; y < maxy; y++) {
+      for (int x = minx; x < maxx; x++) {
+        if (monst_aip->can_see_currently.can_see[ x ][ y ]) {
+          // IF_DEBUG3 { (void) level->thing_new("ai_path2", fpoint(x, y)); }
+          set(monst_aip->can_see_ever.can_see, x, y, true);
+        }
+      }
+    }
+  }
+
+#if 1
+  if (is_player()) {
+    con("Can see fov:");
+    for (int y = 0; y < MAP_HEIGHT; y++) {
+      for (int x = 0; x < MAP_WIDTH; x++) {
+        if ((x == (int) mid_at.x) && (y == (int) mid_at.y)) {
+          printf("*");
+        } else {
+          if (get(monst_aip->can_see_currently.can_see, x, y)) {
+            if (level->is_door(x, y)) {
+              printf("D");
+            } else if (level->is_obs_wall_or_door(x, y)) {
+              printf("X");
+            } else {
+              printf(".");
+            }
+          } else if (get(monst_aip->can_see_ever.can_see, x, y)) {
+            if (level->is_door(x, y)) {
+              printf("D");
+            } else if (level->is_obs_wall_or_door(x, y)) {
+              printf("X");
+            } else {
+              printf(",");
+            }
+          } else {
+            if (level->is_door(x, y)) {
+              printf("d");
+            } else if (level->is_obs_wall_or_door(x, y)) {
+              printf("x");
+            } else {
+              printf(" ");
+            }
+          }
+        }
+      }
+      printf("\n");
+    }
+  }
+#endif
   switch (monst_infop->monst_state) {
     case MONST_STATE_IDLE :
       {
@@ -1773,13 +1771,6 @@ bool Thing::ai_tick(void)
         }
 
         for (int search_type = 0; search_type < search_type_max; search_type++) {
-          if (search_type > 0) {
-            IF_DEBUG3
-            {
-              auto s = string_sprintf("Try to find goals, search-type %d", search_type);
-              AI_LOG("", s);
-            }
-          }
           if (ai_create_path_to_goal(minx, miny, maxx, maxy, search_type)) {
             if (monst_aip->move_path.size()) {
               ai_change_state(MONST_STATE_MOVING, "found a new goal");
@@ -1842,13 +1833,13 @@ bool Thing::ai_tick(void)
 
           ai_change_state(MONST_STATE_IDLE, "move interrupted by a change");
           if (is_player()) {
-            wid_actionbar_init();
+            game->request_remake_actionbar = true;
           }
 
           //
           // Allow another go; this stops monster's moves stuttering
           //
-          return ai_tick();
+          return ai_tick(true);
         }
 
         //
@@ -1861,7 +1852,7 @@ bool Thing::ai_tick(void)
           }
           ai_change_state(MONST_STATE_IDLE, "move finished");
           if (is_player()) {
-            wid_actionbar_init();
+            game->request_remake_actionbar = true;
           }
           return true;
         }

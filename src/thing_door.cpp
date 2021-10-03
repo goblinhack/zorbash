@@ -55,7 +55,7 @@ bool Thing::open_door(Thingp it)
 
     it->on_open();
     update_light();
-    level->dmap_to_player_update();
+    level->request_dmap_to_player_update = true;
     return true;
   }
 
@@ -104,6 +104,6 @@ bool Thing::close_door(Thingp it)
   }
 
   update_light();
-  level->dmap_to_player_update();
+  level->request_dmap_to_player_update = true;
   return true;
 }

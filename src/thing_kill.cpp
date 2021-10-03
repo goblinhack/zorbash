@@ -267,7 +267,7 @@ void Thing::kill(Thingp killer, const char *reason)
   //
   if (! level->is_being_destroyed) {
     if (is_obs_wall_or_door()) {
-      level->dmap_to_player_update();
+      level->request_dmap_to_player_update = true;
     }
   }
 

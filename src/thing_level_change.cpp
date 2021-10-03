@@ -36,6 +36,7 @@ void Thing::level_change(Levelp l)
     monst_aip->move_path = {};
     clear_age_map();
     clear_seen_map();
+    clear_interrupt_map();
     clear_dmap_can_see();
     clear_can_see_currently();
     clear_can_see_ever();
