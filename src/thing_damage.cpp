@@ -34,7 +34,11 @@ const std::string &Thing::get_damage_melee_dice_str(void) const
 int Thing::get_damage_melee(void) const
 {
   TRACE_AND_INDENT();
-  return get_enchant() + (tp()->get_damage_melee_dice().roll());
+  auto roll = tp()->get_damage_melee_dice().roll();
+  if (roll) {
+    return roll + get_enchant();
+  }
+  return roll;
 }
 
 ///////////////////////////////////////////////////////////////////////////
@@ -55,7 +59,11 @@ const std::string &Thing::get_damage_poison_dice_str(void) const
 int Thing::get_damage_poison(void) const
 {
   TRACE_AND_INDENT();
-  return get_enchant() + (tp()->get_damage_poison_dice().roll());
+  auto roll = tp()->get_damage_poison_dice().roll();
+  if (roll) {
+    return roll + get_enchant();
+  }
+  return roll;
 }
 
 ///////////////////////////////////////////////////////////////////////////
@@ -76,7 +84,11 @@ const std::string &Thing::get_damage_crush_dice_str(void) const
 int Thing::get_damage_crush(void) const
 {
   TRACE_AND_INDENT();
-  return get_enchant() + (tp()->get_damage_crush_dice().roll());
+  auto roll = tp()->get_damage_crush_dice().roll();
+  if (roll) {
+    return roll + get_enchant();
+  }
+  return roll;
 }
 
 ///////////////////////////////////////////////////////////////////////////
@@ -97,7 +109,11 @@ const std::string &Thing::get_damage_bite_dice_str(void) const
 int Thing::get_damage_bite(void) const
 {
   TRACE_AND_INDENT();
-  return get_enchant() + (tp()->get_damage_bite_dice().roll());
+  auto roll = tp()->get_damage_bite_dice().roll();
+  if (roll) {
+    return roll + get_enchant();
+  }
+  return roll;
 }
 
 ///////////////////////////////////////////////////////////////////////////
@@ -118,7 +134,11 @@ const std::string &Thing::get_damage_swallow_dice_str(void) const
 int Thing::get_damage_swallow(void) const
 {
   TRACE_AND_INDENT();
-  return get_enchant() + (tp()->get_damage_swallow_dice().roll());
+  auto roll = tp()->get_damage_swallow_dice().roll();
+  if (roll) {
+    return roll + get_enchant();
+  }
+  return roll;
 }
 
 ///////////////////////////////////////////////////////////////////////////
