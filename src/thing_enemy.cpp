@@ -108,4 +108,8 @@ void Thing::add_enemy(Thingp attacker)
     dbg("Increment old enemy %s", attacker->to_string().c_str());
     monst_aip->enemies[ attacker->id ] *= 2;
   }
+
+  if (monst_aip->enemies[ attacker->id ] > 100) {
+    monst_aip->enemies[ attacker->id ] = 100;
+  }
 }
