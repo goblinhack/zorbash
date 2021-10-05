@@ -864,24 +864,24 @@ void Game::wid_thing_info_add_danger_level(WidPopup *w, Thingp t)
 
   auto monst_max_damage = t->get_damage_max();
   if (monst_max_damage != 0) {
-    auto monst_kill_count = player->get_health() / monst_max_damage;
+    auto monst_defeat_count = player->get_health() / monst_max_damage;
 
     //
     // Oh dear. You my friend are toast.
     //
-    if (monst_kill_count == 0) {
-      monst_kill_count = 1;
+    if (monst_defeat_count == 0) {
+      monst_defeat_count = 1;
     }
 
-    if (monst_kill_count == 1) {
+    if (monst_defeat_count == 1) {
       w->log(" ");
-      w->log("%%fg=red$Could defeat you in " + std::to_string(monst_kill_count) + " hit!");
-    } else if (monst_kill_count <= 2) {
+      w->log("%%fg=red$Could defeat you in " + std::to_string(monst_defeat_count) + " hit!");
+    } else if (monst_defeat_count <= 2) {
       w->log(" ");
-      w->log("%%fg=red$Could defeat you in " + std::to_string(monst_kill_count) + " hits");
-    } else if (monst_kill_count <= 10) {
+      w->log("%%fg=red$Could defeat you in " + std::to_string(monst_defeat_count) + " hits");
+    } else if (monst_defeat_count <= 10) {
       w->log(" ");
-      w->log("%%fg=orange$Could defeat you in " + std::to_string(monst_kill_count) + " hits");
+      w->log("%%fg=orange$Could defeat you in " + std::to_string(monst_defeat_count) + " hits");
     } else {
       w->log(" ");
       w->log("Could defeat you eventually...");
@@ -890,27 +890,27 @@ void Game::wid_thing_info_add_danger_level(WidPopup *w, Thingp t)
 
   auto player_max_damage = t->get_damage_max();
   if (player_max_damage != 0) {
-    auto player_kill_count = t->get_health() / player->get_damage_max();
+    auto player_defeat_count = t->get_health() / player->get_damage_max();
 
     //
     // Oh dear. The monst is toast.
     //
-    if (player_kill_count == 0) {
-      player_kill_count = 1;
+    if (player_defeat_count == 0) {
+      player_defeat_count = 1;
     }
 
-    if (player_kill_count == 1) {
+    if (player_defeat_count == 1) {
       w->log(" ");
-      w->log("You could defeat it in " + std::to_string(player_kill_count) + " hit.");
-      w->log("More likely, " + std::to_string(player_kill_count * 2) + " hits");
-    } else if (player_kill_count <= 2) {
+      w->log("You could defeat it in " + std::to_string(player_defeat_count) + " hit.");
+      w->log("More likely, " + std::to_string(player_defeat_count * 2) + " hits");
+    } else if (player_defeat_count <= 2) {
       w->log(" ");
-      w->log("You could defeat it in " + std::to_string(player_kill_count) + " hits.");
-      w->log("More likely, " + std::to_string(player_kill_count * 2) + " hits.");
-    } else if (player_kill_count <= 10) {
+      w->log("You could defeat it in " + std::to_string(player_defeat_count) + " hits.");
+      w->log("More likely, " + std::to_string(player_defeat_count * 2) + " hits.");
+    } else if (player_defeat_count <= 10) {
       w->log(" ");
-      w->log("You could defeat it in " + std::to_string(player_kill_count) + " hits.");
-      w->log("More likely, " + std::to_string(player_kill_count * 2) + " hits.");
+      w->log("You could defeat it in " + std::to_string(player_defeat_count) + " hits.");
+      w->log("More likely, " + std::to_string(player_defeat_count * 2) + " hits.");
     } else {
       w->log(" ");
       w->log("%%fg=red$It will take many hits to defeat...");

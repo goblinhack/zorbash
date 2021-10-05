@@ -99,7 +99,7 @@ void Thing::remove_spawner_owner(void)
 //
 // Kill and detach all spawners from their owner
 //
-void Thing::kill_spawned(Thingp defeater)
+void Thing::destroy_spawned(Thingp defeater)
 {
   TRACE_AND_INDENT();
   //

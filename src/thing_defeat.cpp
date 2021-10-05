@@ -21,7 +21,7 @@
 //
 // Lower level function than dead. Adds the thing to gc.
 //
-void Thing::kill(Thingp defeater, const char *reason)
+void Thing::defeat(Thingp defeater, const char *reason)
 {
   //
   // Check we're not in a death loop
@@ -31,7 +31,7 @@ void Thing::kill(Thingp defeater, const char *reason)
   }
   is_dying = true;
 
-  dbg("Kill");
+  dbg("Destroy");
   TRACE_AND_INDENT();
   ///////////////////////////////////////////////////////////////
   // WARNING: defeater can be nullptr
@@ -96,11 +96,11 @@ void Thing::kill(Thingp defeater, const char *reason)
   // If a minion generator dies, kill all minions
   //
   if (defeater && is_minion_generator()) {
-    kill_minions(defeater);
+    destroy_minions(defeater);
   }
 
   if (defeater && is_spawner()) {
-    kill_spawned(defeater);
+    destroy_spawned(defeater);
   }
 
   //
@@ -280,10 +280,10 @@ void Thing::kill(Thingp defeater, const char *reason)
   gc();
 }
 
-void Thing::kill(Thingp defeater, const std::string &reason)
+void Thing::defeat(Thingp defeater, const std::string &reason)
 {
   TRACE_AND_INDENT();
-  kill(defeater, reason.c_str());
+  defeat(defeater, reason.c_str());
 }
 
 bool Thing::if_matches_then_kill(const std::string &what, const point &p)

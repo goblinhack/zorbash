@@ -22,8 +22,7 @@ bool Thing::try_to_escape(void)
     }
 
     //
-    // Don't try and escape too often else the player can never kill the
-    // monst!
+    // Don't try and escape too often else the player can never kill the monst!
     //
     if (game->tick_current - get_tick_last_escape() < 20) {
       return false;

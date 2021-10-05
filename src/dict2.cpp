@@ -27,7 +27,7 @@ static const char *dict2_names[] = {
     "goal",  "goals", "god",   "gods",  "gold",  "gorge", "gouge", "gown",  "gowns", "grasp", "greed",   "grid",
     "grief", "grime", "grind", "grove", "grunt", "guard", "gulag", "hair",  "hairs", "haste", "haunt",   "haven",
     "havoc", "hero",  "hill",  "hippo", "hope",  "hour",  "hugs",  "humor", "hydra", "hymn",  "hype",    "ice",
-    "iest",  "ilk",   "ill",   "ills",  "ire",   "itch",  "ize",   "karma", "kid",   "kiddo", "kids",    "kill",
+    "iest",  "ilk",   "ill",   "ills",  "ire",   "itch",  "ize",   "karma", "cod",   "klang", "kudos",   "kill",
     "kills", "kiss",  "knock", "knoll", "lair",  "lake",  "land",  "lands", "lang",  "law",   "life",    "lifer",
     "light", "like",  "liked", "likes", "limbo", "limbs", "lime",  "limo",  "limp",  "llama", "lord",    "lords",
     "lore",  "love",  "loved", "lover", "loves", "luck",  "lunch", "lure",  "lured", "lures", "lurk",    "lurks",

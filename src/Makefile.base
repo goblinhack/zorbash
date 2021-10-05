@@ -218,7 +218,7 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/thing_inventory.o             \
     $(OBJDIR)/thing_item.o                  \
     $(OBJDIR)/thing_jump.o                  \
-    $(OBJDIR)/thing_kill.o                  \
+    $(OBJDIR)/thing_defeat.o                \
     $(OBJDIR)/thing_laser.o                 \
     $(OBJDIR)/thing_lava.o                  \
     $(OBJDIR)/thing_level_change.o          \

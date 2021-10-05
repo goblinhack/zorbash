@@ -83,11 +83,11 @@ void Thing::fall(float fall_height, ts_t ms)
   // If a generator falls, the connection to the minions is severed
   //
   if (is_minion_generator()) {
-    kill_minions(nullptr);
+    destroy_minions(nullptr);
   }
 
   if (is_spawner()) {
-    kill_spawned(nullptr);
+    destroy_spawned(nullptr);
   }
 
   if (is_on_fire()) {

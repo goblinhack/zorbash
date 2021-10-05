@@ -96,9 +96,9 @@ void Thing::remove_minion_owner(void)
 }
 
 //
-// Kill and detach all minions from their owner
+// Defeat and detach all minions from their owner
 //
-void Thing::kill_minions(Thingp defeater)
+void Thing::destroy_minions(Thingp defeater)
 {
   TRACE_AND_INDENT();
   //

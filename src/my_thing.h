@@ -220,7 +220,6 @@ public:
   Thingp      weapon_get_carry_anim(void);
   Thingp      weapon_get_use_anim(void) const;
   bool        can_learn_something(void);
-  bool        add_kill(Thingp it);
   bool        add_skill(Tpp what);
   bool        ai_blocked(void);
   bool        ai_blocked_completely(void);
@@ -1258,10 +1257,10 @@ public:
   void inventory_particle(Thingp what, uint32_t slot);
   void inventory_particle(Thingp what, uint32_t slot, Thingp particle_target);
   void jump_end(void);
-  void kill(Thingp defeater, const char *reason);
-  void kill(Thingp defeater, const std::string &reason);
-  void kill_minions(Thingp defeater);
-  void kill_spawned(Thingp defeater);
+  void defeat(Thingp defeater, const char *reason);
+  void defeat(Thingp defeater, const std::string &reason);
+  void destroy_minions(Thingp defeater);
+  void destroy_spawned(Thingp defeater);
   void lava_tick();
   void level_change(Levelp);
   void level_enter(void);

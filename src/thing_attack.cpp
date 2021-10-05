@@ -345,7 +345,7 @@ bool Thing::attack(Thingp it)
       if (it->is_dead) {
         if (owner->eat(it)) {
           //
-          // Can't kill it twice, so hide it
+          // Can't defeat it twice, so hide it
           //
           IF_DEBUG1 { owner->log("Eat corpse %s", it->to_string().c_str()); }
           it->hide();
@@ -380,7 +380,7 @@ bool Thing::attack(Thingp it)
       if (is_monst() && it->is_dead && ! it->is_player() && eat(it)) {
         //
         // Can only eat once alive things when dead... But the player is gone once dead.
-        // Can't kill it twice, so hide it
+        // Can't defeat it twice, so hide it
         //
         dbg("Eat corpse %s", it->to_string().c_str());
         it->hide();
