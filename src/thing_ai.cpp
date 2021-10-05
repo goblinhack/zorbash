@@ -763,7 +763,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
         }
 
         //
-        // Don't attack your master
+        // Don't attack your manifestor
         //
         if (it->is_minion_generator() && (get_top_minion_owner() == this)) {
           continue;

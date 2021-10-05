@@ -114,13 +114,13 @@ bool Thing::move(fpoint future_pos)
   }
 
   //
-  // Don't let minions wander too far from their master.
+  // Don't let minions wander too far from their manifestor.
   //
-  auto master = get_top_minion_owner();
-  if (master) {
+  auto manifestor = get_top_minion_owner();
+  if (manifestor) {
     if (minion_leash_distance()) {
-      auto new_distance  = distance(future_pos, master->mid_at);
-      auto curr_distance = distance(mid_at, master->mid_at);
+      auto new_distance  = distance(future_pos, manifestor->mid_at);
+      auto curr_distance = distance(mid_at, manifestor->mid_at);
       if (new_distance <= curr_distance) {
         //
         // Always allow moves that end up closer to the base
@@ -130,7 +130,7 @@ bool Thing::move(fpoint future_pos)
         // Too far.
         //
         dbg("Minion cannot to %f,%f (new-dist %f, curr-dist %f); it tugs at the leash at %f,%f", future_pos.x,
-            future_pos.y, new_distance, curr_distance, master->mid_at.x, master->mid_at.y);
+            future_pos.y, new_distance, curr_distance, manifestor->mid_at.x, manifestor->mid_at.y);
         lunge(future_pos);
         return false;
       }

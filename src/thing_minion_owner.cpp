@@ -124,7 +124,7 @@ void Thing::kill_minions(Thingp defeater)
       if (o && (o == this)) {
         minion->remove_minion_owner();
         minion->is_resurrection_blocked = true;
-        minion->dead(defeater, "its master died");
+        minion->dead(defeater, "its manifestor died");
       }
     }
   }

@@ -209,10 +209,10 @@ bool Thing::ai_choose_wander(point &nh)
   //
   // Minions are constrained
   //
-  auto master = get_top_minion_owner();
-  if (master) {
+  auto manifestor = get_top_minion_owner();
+  if (manifestor) {
     if (minion_leash_distance()) {
-      auto new_distance = distance(make_fpoint(target), master->mid_at);
+      auto new_distance = distance(make_fpoint(target), manifestor->mid_at);
       if (new_distance > minion_leash_distance()) {
         dbg("Could not wander, too far off the leash; could not create path to %d,%d", target.x, target.y);
         return false;

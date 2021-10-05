@@ -238,8 +238,7 @@ void Thing::tick(void)
 
   if (unlikely(is_dead)) {
     //
-    // Resurrect things unless that can do unless that has been
-    // disabled e.g. via minion master death
+    // Resurrect things unless that can do unless that has been disabled e.g. via minion manifestor death
     //
     if (! is_resurrection_blocked && is_resurrectable()) {
       //

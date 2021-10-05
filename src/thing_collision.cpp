@@ -708,7 +708,7 @@ bool Thing::collision_check_only(Thingp it, fpoint future_pos, int x, int y)
       if (it->is_minion_generator()) {
         if (it == get_top_minion_owner()) {
           if (things_overlap_attack(me, future_pos, it)) {
-            dbg("Yes; cannot pass through my master");
+            dbg("Yes; cannot pass through my manifestor");
             return true;
           }
         }

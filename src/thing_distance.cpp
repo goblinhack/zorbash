@@ -22,8 +22,8 @@ point Thing::get_random_scent_target(void)
   //
   // Minions cannot wander too far
   //
-  auto master = get_top_minion_owner();
-  if (master) {
+  auto manifestor = get_top_minion_owner();
+  if (manifestor) {
     d = minion_leash_distance();
   }
 

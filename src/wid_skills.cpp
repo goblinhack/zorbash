@@ -211,7 +211,7 @@ void Game::wid_skill_choose(void)
   }
 
   if (skills.empty()) {
-    TOPCON("%%fg=purple$You have nothing left to learn. You are now the master.%%fg=reset$");
+    TOPCON("%%fg=purple$You have nothing left to learn. You are now the manifestor.%%fg=reset$");
     change_state(Game::STATE_NORMAL);
     return;
   }
