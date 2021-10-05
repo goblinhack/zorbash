@@ -328,7 +328,7 @@ bool Thing::move(fpoint future_pos, uint8_t up, uint8_t down, uint8_t left, uint
 #endif
       }
     } else {
-      TOPCON("You wait...");
+      TOPCON("You rest...");
 
       rest();
     }

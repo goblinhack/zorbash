@@ -191,10 +191,10 @@ void Thing::kill(Thingp defeater, const char *reason)
     if (game->config.hiscores.is_new_hiscore(this)) {
       if (game->robot_mode) {
         TOPCON("%%fg=yellow$New robo high score, %s place!%%fg=reset$", game->config.hiscores.place_str(this));
-        TOPCON("RIP: Robot defeated  %s.", reason);
+        TOPCON("RIP: Robot is defeated %s.", reason);
       } else {
         TOPCON("%%fg=yellow$New high score, %s place!%%fg=reset$", game->config.hiscores.place_str(this));
-        TOPCON("RIP: Player defeated  %s.", reason);
+        TOPCON("RIP: You are defeated %s.", reason);
       }
       game->config.hiscores.add_new_hiscore(this, title(), reason);
     }
@@ -203,14 +203,14 @@ void Thing::kill(Thingp defeater, const char *reason)
     level->map_follow_player = false;
     game->dead_select(reason);
   } else if (is_loggable()) {
-    dbg("%s is dead, %s", The.c_str(), reason);
+    dbg("%s defeated dead, %s", The.c_str(), reason);
     if (defeater && (defeater != this)) {
       if (defeater->is_player()) {
         if (is_monst()) {
           if (is_undead()) {
-            TOPCON("%s is vanquished, %s.", The.c_str(), reason);
+            TOPCON("%%fg=white$%s is vanquished, %s.%%fg=reset$", The.c_str(), reason);
           } else {
-            TOPCON("%s is dead, %s.", The.c_str(), reason);
+            TOPCON("%%fg=white$%s is defeated, %s.%%fg=reset$", The.c_str(), reason);
           }
         } else {
           TOPCON("%s is destroyed %s.", The.c_str(), reason);
