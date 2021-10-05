@@ -442,7 +442,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
       //
       // Can jump but only if not tired.
       //
-      if (jump_allowed && ai_is_able_to_jump() && (get_stamina() > get_stamina_max() / 2)) {
+      if (jump_allowed && (get_stamina() > get_stamina_max() / 2)) {
         //
         // Trace all possible jump paths to see if we can jump over
         //
@@ -569,12 +569,11 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
             if (! dx && ! dy) {
               continue;
             }
+
             if (level->is_oob(o)) {
               continue;
             }
-            if (! level->is_able_to_stand_on(o)) {
-              continue;
-            }
+
             if (level->is_door(o)) {
               //
               // Allow us to see doors so we can search them
