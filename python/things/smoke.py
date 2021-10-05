@@ -2,7 +2,7 @@ import zx
 import tp
 
 def on_fall(me, x, y):
-    zx.thing_killed(me, "dissipated")
+    zx.thing_defeated(me, "dissipated")
 
 def tp_init(name):
     mytp = tp.Tp(name)

@@ -559,7 +559,7 @@ bool Thing::attack(Thingp it)
     if (attack_eater()) {
       health_boost(it->get_nutrition());
     }
-    if (is_killed_on_hitting() || is_killed_on_hit_or_miss()) {
+    if (is_destroyed_on_hitting() || is_destroyed_on_hit_or_miss()) {
       dead("by foolishness");
     }
 
@@ -572,7 +572,7 @@ bool Thing::attack(Thingp it)
   //
   // Missiles?
   //
-  if (is_killed_on_hit_or_miss()) {
+  if (is_destroyed_on_hit_or_miss()) {
     if (is_loggable()) {
       dbg("Attack missed %s", it->to_string().c_str());
     }

@@ -14,13 +14,13 @@ class HiScore
 {
 public:
   HiScore(void) {}
-  HiScore(std::string name, std::string when, int score, int level_reached, std::string killed_by)
+  HiScore(std::string name, std::string when, int score, int level_reached, std::string defeated_by)
   {
     this->name          = name;
     this->when          = when;
     this->score         = score;
     this->level_reached = level_reached;
-    this->killed_by     = killed_by;
+    this->defeated_by   = defeated_by;
   }
 
   ~HiScore(void) {}
@@ -30,7 +30,7 @@ public:
   //
   std::string name;
   std::string when;
-  std::string killed_by;
+  std::string defeated_by;
   int         score;
   int         level_reached;
 
@@ -54,7 +54,7 @@ public:
   //
   std::vector< HiScore > hiscores;
 
-  void        add_new_hiscore(Thingp player, const std::string &name, const std::string &killed_by);
+  void        add_new_hiscore(Thingp player, const std::string &name, const std::string &defeated_by);
   bool        is_new_hiscore(Thingp player);
   bool        is_new_highest_hiscore(Thingp player);
   const char *place_str(Thingp player);

@@ -430,8 +430,8 @@ class Tp:
     def set_is_dead_on_end_of_anim(self, value):
         zx.tp_set_is_dead_on_end_of_anim(self, value)
 
-    def set_ai_is_able_to_remember_enemies_for_n_ticks(self, value):
-        zx.tp_set_ai_is_able_to_remember_enemies_for_n_ticks(self, value)
+    def set_ai_resent_count(self, value):
+        zx.tp_set_ai_resent_count(self, value)
 
     def set_is_debug_path(self, value):
         zx.tp_set_is_debug_path(self, value)
@@ -739,11 +739,11 @@ class Tp:
     def set_on_death_is_open(self, value):
         zx.tp_set_on_death_is_open(self, value)
 
-    def set_is_killed_on_hit_or_miss(self, value):
-        zx.tp_set_is_killed_on_hit_or_miss(self, value)
+    def set_is_destroyed_on_hit_or_miss(self, value):
+        zx.tp_set_is_destroyed_on_hit_or_miss(self, value)
 
-    def set_is_killed_on_hitting(self, value):
-        zx.tp_set_is_killed_on_hitting(self, value)
+    def set_is_destroyed_on_hitting(self, value):
+        zx.tp_set_is_destroyed_on_hitting(self, value)
 
     def set_is_collect_as_keys(self, value):
         zx.tp_set_is_collect_as_keys(self, value)
@@ -898,8 +898,11 @@ class Tp:
     def set_ai_shove_chance_d1000(self, value):
         zx.tp_set_ai_shove_chance_d1000(self, value)
 
-    def set_random_jump_chance_d1000(self, value):
-        zx.tp_set_random_jump_chance_d1000(self, value)
+    def set_ai_unprovoked_attack_chance_d1000(self, value):
+        zx.tp_set_ai_unprovoked_attack_chance_d1000(self, value)
+
+    def set_ai_random_jump_chance_d1000(self, value):
+        zx.tp_set_ai_random_jump_chance_d1000(self, value)
 
     def set_ai_is_able_to_jump_on_low_hp_chance_d1000(self, value):
         zx.tp_set_ai_is_able_to_jump_on_low_hp_chance_d1000(self, value)

@@ -50,6 +50,14 @@ void Thing::enemies_tick(void)
       continue;
     }
 
+    if (attacker->is_dead) {
+      if (is_player() && game->robot_mode) {
+        CON("Robot: Remove enemy, is dead: %s", attacker->to_string().c_str());
+      }
+      monst_aip->enemies.erase(p.first);
+      return;
+    }
+
     //
     // If far enough away start to forget this enemy
     //
@@ -74,26 +82,14 @@ void Thing::enemies_tick(void)
 void Thing::add_enemy(Thingp attacker)
 {
   TRACE_AND_INDENT();
-  if (unlikely(! attacker->is_monst())) {
+  if (unlikely(! attacker->is_monst() && ! attacker->is_player())) {
+    return;
+  }
+  if (unlikely(! is_monst() && ! is_player())) {
     return;
   }
 
-  if (unlikely(! monst_aip)) {
-    return;
-  }
-
-  if (! ai_is_able_to_remember_enemies_for_n_ticks()) {
-    return;
-  }
-
-  if (unlikely(is_player())) {
-    //
-    // Allow the robot to make enemies
-    //
-  } else if (unlikely(! is_monst())) {
-    //
-    // Only monsts make enemies
-    //
+  if (! ai_resent_count()) {
     return;
   }
 
@@ -103,13 +99,13 @@ void Thing::add_enemy(Thingp attacker)
     } else {
       dbg("Add new enemy %s", attacker->to_string().c_str());
     }
-    monst_aip->enemies[ attacker->id ] = ai_is_able_to_remember_enemies_for_n_ticks();
+    monst_aip->enemies[ attacker->id ] = ai_resent_count();
   } else {
     dbg("Increment old enemy %s", attacker->to_string().c_str());
     monst_aip->enemies[ attacker->id ] *= 2;
-  }
 
-  if (monst_aip->enemies[ attacker->id ] > 100) {
-    monst_aip->enemies[ attacker->id ] = 100;
+    if (monst_aip->enemies[ attacker->id ] > THING_MAX_ENEMY_COUNT) {
+      monst_aip->enemies[ attacker->id ] = THING_MAX_ENEMY_COUNT;
+    }
   }
 }

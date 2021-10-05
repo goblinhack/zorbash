@@ -15,22 +15,22 @@
 #include "my_sys.h"
 #include "my_thing.h"
 
-void Thing::dead_(Thingp killer, const char *fmt, va_list args)
+void Thing::dead_(Thingp defeater, const char *fmt, va_list args)
 {
   verify(this);
   char reason[ MAXSTR ];
   vsnprintf(reason, MAXSTR, fmt, args);
-  kill(killer, reason);
+  kill(defeater, reason);
 }
 
-void Thing::dead(Thingp killer, const char *fmt, ...)
+void Thing::dead(Thingp defeater, const char *fmt, ...)
 {
   verify(this);
   auto    t = this;
   va_list args;
 
   va_start(args, fmt);
-  t->dead_(killer, fmt, args);
+  t->dead_(defeater, fmt, args);
   va_end(args);
 }
 
@@ -42,10 +42,10 @@ void Thing::dead_(const char *fmt, va_list args)
   kill(nullptr, reason);
 }
 
-void Thing::dead(Thingp killer, std::string &reason)
+void Thing::dead(Thingp defeater, std::string &reason)
 {
   verify(this);
-  kill(killer, reason);
+  kill(defeater, reason);
 }
 
 void Thing::dead(const std::string &reason)

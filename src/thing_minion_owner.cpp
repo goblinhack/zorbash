@@ -98,11 +98,11 @@ void Thing::remove_minion_owner(void)
 //
 // Kill and detach all minions from their owner
 //
-void Thing::kill_minions(Thingp killer)
+void Thing::kill_minions(Thingp defeater)
 {
   TRACE_AND_INDENT();
   //
-  // Warning killer can be nullptr - e.g. when a generator falls to
+  // Warning defeater can be nullptr - e.g. when a generator falls to
   // a new level
   //
 
@@ -124,7 +124,7 @@ void Thing::kill_minions(Thingp killer)
       if (o && (o == this)) {
         minion->remove_minion_owner();
         minion->is_resurrection_blocked = true;
-        minion->dead(killer, "its master died");
+        minion->dead(defeater, "its master died");
       }
     }
   }

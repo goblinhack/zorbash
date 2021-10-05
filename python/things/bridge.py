@@ -9,7 +9,7 @@ def on_death(me, x, y):
     for bridge in zx.level_flood_fill_get_all_things(me, x, y, "is_bridge"):
         if bridge != me:
             if not zx.thing_is_dead_or_dying(bridge):
-                zx.thing_killed(bridge, "dead")
+                zx.thing_defeated(bridge, "dead")
 
 def tp_init(name, tiles=[], bot3_tiles=[]):
     mytp = tp.Tp(name, "bridge")

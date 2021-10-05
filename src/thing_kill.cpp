@@ -21,7 +21,7 @@
 //
 // Lower level function than dead. Adds the thing to gc.
 //
-void Thing::kill(Thingp killer, const char *reason)
+void Thing::kill(Thingp defeater, const char *reason)
 {
   //
   // Check we're not in a death loop
@@ -34,7 +34,7 @@ void Thing::kill(Thingp killer, const char *reason)
   dbg("Kill");
   TRACE_AND_INDENT();
   ///////////////////////////////////////////////////////////////
-  // WARNING: killer can be nullptr
+  // WARNING: defeater can be nullptr
   ///////////////////////////////////////////////////////////////
   auto is_corpse_currently = is_corpse();
 
@@ -95,12 +95,12 @@ void Thing::kill(Thingp killer, const char *reason)
   //
   // If a minion generator dies, kill all minions
   //
-  if (killer && is_minion_generator()) {
-    kill_minions(killer);
+  if (defeater && is_minion_generator()) {
+    kill_minions(defeater);
   }
 
-  if (killer && is_spawner()) {
-    kill_spawned(killer);
+  if (defeater && is_spawner()) {
+    kill_spawned(defeater);
   }
 
   //
@@ -137,14 +137,14 @@ void Thing::kill(Thingp killer, const char *reason)
   }
 
   if (on_death_is_open()) {
-    dbg("Killed, now open");
+    dbg("Defeated, now open");
     level_pop();
     is_open = true;
     level_push();
     auto p = level->player;
     if (p) {
       int distance = distance_to_player();
-      if (killer && killer->is_fire()) {
+      if (defeater && defeater->is_fire()) {
         if ((distance < 5) || (distance == DMAP_IS_WALL)) {
           TOPCON("The door burns through.");
         } else if (distance < DMAP_IS_PASSABLE) {
@@ -191,10 +191,10 @@ void Thing::kill(Thingp killer, const char *reason)
     if (game->config.hiscores.is_new_hiscore(this)) {
       if (game->robot_mode) {
         TOPCON("%%fg=yellow$New robo high score, %s place!%%fg=reset$", game->config.hiscores.place_str(this));
-        TOPCON("RIP: Robot killed %s.", reason);
+        TOPCON("RIP: Robot defeated  %s.", reason);
       } else {
         TOPCON("%%fg=yellow$New high score, %s place!%%fg=reset$", game->config.hiscores.place_str(this));
-        TOPCON("RIP: Player killed %s.", reason);
+        TOPCON("RIP: Player defeated  %s.", reason);
       }
       game->config.hiscores.add_new_hiscore(this, title(), reason);
     }
@@ -204,8 +204,8 @@ void Thing::kill(Thingp killer, const char *reason)
     game->dead_select(reason);
   } else if (is_loggable()) {
     dbg("%s is dead, %s", The.c_str(), reason);
-    if (killer && (killer != this)) {
-      if (killer->is_player()) {
+    if (defeater && (defeater != this)) {
+      if (defeater->is_player()) {
         if (is_monst()) {
           if (is_undead()) {
             TOPCON("%s is vanquished, %s.", The.c_str(), reason);
@@ -216,7 +216,7 @@ void Thing::kill(Thingp killer, const char *reason)
           TOPCON("%s is destroyed %s.", The.c_str(), reason);
         }
 
-        killer->score_add(this);
+        defeater->score_add(this);
       } else if (is_monst() && (distance_to_player() >= DMAP_IS_PASSABLE)) {
         if (is_undead()) {
           TOPCON("You hear a distant moan...");
@@ -250,7 +250,7 @@ void Thing::kill(Thingp killer, const char *reason)
     // Leaves a corpse
     //
     if (is_loggable()) {
-      dbg("Killed, leaves corpse");
+      dbg("Defeated, leaves corpse");
     }
 
     level->set_is_corpse(mid_at.x, mid_at.y);
@@ -274,16 +274,16 @@ void Thing::kill(Thingp killer, const char *reason)
   level_pop();
 
   if (is_loggable()) {
-    dbg("Killed, need to garbage collect");
+    dbg("Defeated, need to garbage collect");
   }
 
   gc();
 }
 
-void Thing::kill(Thingp killer, const std::string &reason)
+void Thing::kill(Thingp defeater, const std::string &reason)
 {
   TRACE_AND_INDENT();
-  kill(killer, reason.c_str());
+  kill(defeater, reason.c_str());
 }
 
 bool Thing::if_matches_then_kill(const std::string &what, const point &p)
@@ -309,7 +309,7 @@ bool Thing::if_matches_then_kill(const std::string &what, const point &p)
     }
 
     if (t->matches(what)) {
-      t->dead(this, "killed");
+      t->dead(this, "defeated ");
 
       //
       // Check if we are newly spawned over a chasm

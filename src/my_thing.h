@@ -310,6 +310,8 @@ public:
   bool is_carrying_item(void);
   bool is_carrying_treasure(void);
   bool is_enemy(Thingp attacker) const;
+  bool is_to_be_avoided(Thingp attacker) const;
+  bool cannot_avoid(Thingp attacker) const;
   bool is_on_fire(void) const;
   bool laser_anim_exists(void);
   bool laser_choose_target(Thingp item);
@@ -475,7 +477,7 @@ public:
   int                    ai_is_able_to_jump_on_low_hp_chance_d1000(void) const;
   int                    ai_is_able_to_learn_skills(void) const;
   int                    ai_is_able_to_open_doors(void) const;
-  int                    ai_is_able_to_remember_enemies_for_n_ticks(void) const;
+  int                    ai_resent_count(void) const;
   int                    ai_is_able_to_see_through_doors(void) const;
   int                    ai_is_able_to_shove(void) const;
   int                    ai_is_able_to_walk_through_walls(void) const;
@@ -485,6 +487,7 @@ public:
   int                    ai_obstacle(void) const;
   int                    ai_scent_distance(void) const;
   int                    ai_shove_chance_d1000(void) const;
+  int                    ai_unprovoked_attack_chance_d1000(void) const;
   int                    ai_vision_distance(void) const;
   int                    ai_wanderer(void) const;
   int                    attack(void) const;
@@ -849,8 +852,8 @@ public:
   int                    is_jelly_eater(void) const;
   int                    is_jelly_parent(void) const;
   int                    is_key(void) const;
-  int                    is_killed_on_hit_or_miss(void) const;
-  int                    is_killed_on_hitting(void) const;
+  int                    is_destroyed_on_hit_or_miss(void) const;
+  int                    is_destroyed_on_hitting(void) const;
   int                    is_laser(void) const;
   int                    is_lava(void) const;
   int                    is_light_blocker(void) const;
@@ -934,7 +937,7 @@ public:
   int                    normal_placement_rules(void) const;
   int                    on_death_drop_all_items(void) const;
   int                    on_death_is_open(void) const;
-  int                    random_jump_chance_d1000(void) const;
+  int                    ai_random_jump_chance_d1000(void) const;
   int                    range_max(void) const;
   int                    rarity(void) const;
   int                    set_charge_count(int);
@@ -1162,6 +1165,7 @@ public:
   void                   achieve_goals_in_life();
   void                   acid_tick();
   void                   add_enemy(Thingp attacker);
+  void                   add_avoid(Thingp attacker);
   void                   ai_get_next_hop(void);
   void                   animate();
   void                   barrel_tick();
@@ -1200,12 +1204,12 @@ public:
   void con_(const char *fmt, va_list args) const; // compile error without
   void corrode_tick();
   void cursor_hover_over_check(void);
-  void dead(Thingp killer, const char *fmt, ...) __attribute__((format(printf, 3, 4)));
-  void dead(Thingp killer, std::string &);
+  void dead(Thingp defeater, const char *fmt, ...) __attribute__((format(printf, 3, 4)));
+  void dead(Thingp defeater, std::string &);
   void dead(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
   void dead(const std::string &);
-  void dead_(Thingp killer, const char *fmt, va_list args); // compile error without
-  void dead_(const char *fmt, va_list args);                // compile error without
+  void dead_(Thingp defeater, const char *fmt, va_list args); // compile error without
+  void dead_(const char *fmt, va_list args);                  // compile error without
   void dead_scheduled(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
   void dead_scheduled(const std::string &);
   void dead_scheduled_(const char *fmt, va_list args); // compile error without
@@ -1231,6 +1235,7 @@ public:
   void dump(std::string prefix, std::ostream &out);
   void enchant_randomly(void);
   void enemies_tick(void);
+  void avoid_tick(void);
   void err(const char *fmt, ...) const __attribute__((format(printf, 2, 3)));
   void err_(const char *fmt, va_list args) const; // compile error without
   void fadeup(float fadeup_height, float fadeup_fade, ts_t ms);
@@ -1250,10 +1255,10 @@ public:
   void inventory_particle(Thingp what, uint32_t slot);
   void inventory_particle(Thingp what, uint32_t slot, Thingp particle_target);
   void jump_end(void);
-  void kill(Thingp killer, const char *reason);
-  void kill(Thingp killer, const std::string &reason);
-  void kill_minions(Thingp killer);
-  void kill_spawned(Thingp killer);
+  void kill(Thingp defeater, const char *reason);
+  void kill(Thingp defeater, const std::string &reason);
+  void kill_minions(Thingp defeater);
+  void kill_spawned(Thingp defeater);
   void lava_tick();
   void level_change(Levelp);
   void level_enter(void);

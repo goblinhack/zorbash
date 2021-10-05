@@ -9,7 +9,7 @@
 #include <Python.h>
 
 PyObject *level_add_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_ai_is_able_to_remember_enemies_for_n_ticks_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_ai_resent_count_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_enchant_level_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_enchant_max_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_flood_fill_get_all_things(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -117,13 +117,13 @@ PyObject *level_is_jelly_baby_eater_at(PyObject *obj, PyObject *args, PyObject *
 PyObject *level_is_jelly_eater_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_jelly_parent_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_ai_is_able_to_jump_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_random_jump_chance_d1000_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_ai_random_jump_chance_d1000_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_ai_is_able_to_jump_distance_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_ai_is_able_to_jump_on_low_hp_chance_d1000_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_key_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_ai_is_able_to_collect_keys_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_killed_on_hit_or_miss_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_killed_on_hitting_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_destroyed_on_hit_or_miss_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_destroyed_on_hitting_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_laser_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_lava_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_light_blocker_at(PyObject *obj, PyObject *args, PyObject *keywds);

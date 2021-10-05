@@ -371,15 +371,15 @@ PyObject *thing_fire_at(PyObject *obj, PyObject *args, PyObject *keywds)
   }
 }
 
-PyObject *thing_killed_by(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *thing_defeated_by(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
-  uint32_t     owner_id  = 0;
-  char *       reason    = nullptr;
-  uint32_t     killer_id = 0;
-  static char *kwlist[]  = {(char *) "owner", (char *) "reason", (char *) "killer", 0};
+  uint32_t     owner_id    = 0;
+  char *       reason      = nullptr;
+  uint32_t     defeater_id = 0;
+  static char *kwlist[]    = {(char *) "owner", (char *) "reason", (char *) "defeater", 0};
 
-  if (! PyArg_ParseTupleAndKeywords(args, keywds, "IsI", kwlist, &owner_id, &reason, &killer_id)) {
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "IsI", kwlist, &owner_id, &reason, &defeater_id)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);
     Py_RETURN_NONE;
   }
@@ -400,24 +400,24 @@ PyObject *thing_killed_by(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_NONE;
   }
 
-  if (! killer_id) {
-    ERR("%s: No killer thing ID set", __FUNCTION__);
+  if (! defeater_id) {
+    ERR("%s: No defeater thing ID set", __FUNCTION__);
     Py_RETURN_NONE;
   }
 
-  Thingp killer = game->thing_find(killer_id);
-  if (! killer) {
-    ERR("%s: Cannot find killer thing ID %u", __FUNCTION__, killer_id);
+  Thingp defeater = game->thing_find(defeater_id);
+  if (! defeater) {
+    ERR("%s: Cannot find defeater thing ID %u", __FUNCTION__, defeater_id);
     Py_RETURN_NONE;
   }
 
-  owner->log("Killed by %s, reason %s", killer->to_string().c_str(), reason);
-  owner->dead(killer, "%s", reason);
+  owner->log("Defeated by %s, reason %s", defeater->to_string().c_str(), reason);
+  owner->dead(defeater, "%s", reason);
 
   Py_RETURN_NONE;
 }
 
-PyObject *thing_killed(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *thing_defeated(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
   uint32_t     owner_id = 0;
@@ -445,7 +445,7 @@ PyObject *thing_killed(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_NONE;
   }
 
-  owner->log("Killed: Reason %s", reason);
+  owner->log("Defeated: Reason %s", reason);
   owner->dead("%s", reason);
   Py_RETURN_NONE;
 }
@@ -655,12 +655,12 @@ THING_BODY_GET_BOOL(thing_is_jelly_baby_eater, is_jelly_baby_eater)
 THING_BODY_GET_BOOL(thing_is_jelly_eater, is_jelly_eater)
 THING_BODY_GET_BOOL(thing_is_jelly_parent, is_jelly_parent)
 THING_BODY_GET_BOOL(thing_ai_is_able_to_jump, ai_is_able_to_jump)
-THING_BODY_GET_BOOL(thing_random_jump_chance_d1000, random_jump_chance_d1000)
+THING_BODY_GET_BOOL(thing_ai_random_jump_chance_d1000, ai_random_jump_chance_d1000)
 THING_BODY_GET_BOOL(thing_ai_is_able_to_jump_distance, ai_is_able_to_jump_distance)
 THING_BODY_GET_BOOL(thing_ai_is_able_to_jump_on_low_hp_chance_d1000, ai_is_able_to_jump_on_low_hp_chance_d1000)
 THING_BODY_GET_BOOL(thing_is_key, is_key)
-THING_BODY_GET_BOOL(thing_is_killed_on_hit_or_miss, is_killed_on_hit_or_miss)
-THING_BODY_GET_BOOL(thing_is_killed_on_hitting, is_killed_on_hitting)
+THING_BODY_GET_BOOL(thing_is_destroyed_on_hit_or_miss, is_destroyed_on_hit_or_miss)
+THING_BODY_GET_BOOL(thing_is_destroyed_on_hitting, is_destroyed_on_hitting)
 THING_BODY_GET_BOOL(thing_is_laser, is_laser)
 THING_BODY_GET_BOOL(thing_is_lava, is_lava)
 THING_BODY_GET_BOOL(thing_is_light_blocker, is_light_blocker)
@@ -748,7 +748,7 @@ THING_BODY_GET_BOOL(thing_is_debug_type, is_debug_type)
 THING_BODY_GET_BOOL(thing_is_hittable, is_hittable)
 THING_BODY_GET_BOOL(thing_is_alive_on_end_of_anim, is_alive_on_end_of_anim)
 THING_BODY_GET_BOOL(thing_is_dead_on_end_of_anim, is_dead_on_end_of_anim)
-THING_BODY_GET_BOOL(thing_ai_is_able_to_remember_enemies_for_n_ticks, ai_is_able_to_remember_enemies_for_n_ticks)
+THING_BODY_GET_BOOL(thing_ai_resent_count, ai_resent_count)
 THING_BODY_GET_BOOL(thing_is_debug_path, is_debug_path)
 THING_BODY_GET_BOOL(thing_ai_is_able_to_collect_keys, ai_is_able_to_collect_keys)
 THING_BODY_GET_BOOL(thing_unused_flag7, unused_flag7)

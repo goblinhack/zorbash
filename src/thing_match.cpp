@@ -28,7 +28,7 @@ bool Thing::matches(const std::string &what) const
   if (ai_avoid_distance() && (what == "ai_avoid_distance")) {
     return true;
   }
-  if (ai_is_able_to_remember_enemies_for_n_ticks() && (what == "ai_is_able_to_remember_enemies_for_n_ticks")) {
+  if (ai_resent_count() && (what == "ai_resent_count")) {
     return true;
   }
   if (ai_vision_distance() && (what == "ai_vision_distance")) {
@@ -50,6 +50,9 @@ bool Thing::matches(const std::string &what) const
     return true;
   }
   if (ai_shove_chance_d1000() && (what == "ai_shove_chance_d1000")) {
+    return true;
+  }
+  if (ai_unprovoked_attack_chance_d1000() && (what == "ai_unprovoked_attack_chance_d1000")) {
     return true;
   }
   if (ai_is_able_to_shove() && (what == "ai_is_able_to_shove")) {
@@ -367,7 +370,7 @@ bool Thing::matches(const std::string &what) const
   if (is_jelly() && (what == "is_jelly")) {
     return true;
   }
-  if (random_jump_chance_d1000() && (what == "random_jump_chance_d1000")) {
+  if (ai_random_jump_chance_d1000() && (what == "ai_random_jump_chance_d1000")) {
     return true;
   }
   if (ai_is_able_to_jump_distance() && (what == "ai_is_able_to_jump_distance")) {
@@ -385,10 +388,10 @@ bool Thing::matches(const std::string &what) const
   if (is_key() && (what == "is_key")) {
     return true;
   }
-  if (is_killed_on_hit_or_miss() && (what == "is_killed_on_hit_or_miss")) {
+  if (is_destroyed_on_hit_or_miss() && (what == "is_defeated _on_hit_or_miss")) {
     return true;
   }
-  if (is_killed_on_hitting() && (what == "is_killed_on_hitting")) {
+  if (is_destroyed_on_hitting() && (what == "is_defeated _on_hitting")) {
     return true;
   }
   if (is_laser() && (what == "is_laser")) {
@@ -794,8 +797,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "ai_avoid_distance") {
     return &Thing::ai_avoid_distance;
   }
-  if (what == "ai_is_able_to_remember_enemies_for_n_ticks") {
-    return &Thing::ai_is_able_to_remember_enemies_for_n_ticks;
+  if (what == "ai_resent_count") {
+    return &Thing::ai_resent_count;
   }
   if (what == "ai_vision_distance") {
     return &Thing::ai_vision_distance;
@@ -817,6 +820,9 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   }
   if (what == "ai_shove_chance_d1000") {
     return &Thing::ai_shove_chance_d1000;
+  }
+  if (what == "ai_unprovoked_attack_chance_d1000") {
+    return &Thing::ai_unprovoked_attack_chance_d1000;
   }
   if (what == "ai_is_able_to_shove") {
     return &Thing::ai_is_able_to_shove;
@@ -1133,8 +1139,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_jelly") {
     return &Thing::is_jelly;
   }
-  if (what == "random_jump_chance_d1000") {
-    return &Thing::random_jump_chance_d1000;
+  if (what == "ai_random_jump_chance_d1000") {
+    return &Thing::ai_random_jump_chance_d1000;
   }
   if (what == "ai_is_able_to_jump_distance") {
     return &Thing::ai_is_able_to_jump_distance;
@@ -1151,11 +1157,11 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_key") {
     return &Thing::is_key;
   }
-  if (what == "is_killed_on_hit_or_miss") {
-    return &Thing::is_killed_on_hit_or_miss;
+  if (what == "is_defeated _on_hit_or_miss") {
+    return &Thing::is_destroyed_on_hit_or_miss;
   }
-  if (what == "is_killed_on_hitting") {
-    return &Thing::is_killed_on_hitting;
+  if (what == "is_defeated _on_hitting") {
+    return &Thing::is_destroyed_on_hitting;
   }
   if (what == "is_laser") {
     return &Thing::is_laser;

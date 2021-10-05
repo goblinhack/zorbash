@@ -174,6 +174,7 @@ std::istream &operator>>(std::istream &in, Bits< MonstAip & > my)
   in >> bits(my.t->can_see_currently.can_see);
   in >> bits(my.t->can_see_ever.can_see);
   in >> bits(my.t->enemies);
+  in >> bits(my.t->avoid);
   in >> bits(my.t->move_path);
   return (in);
 }

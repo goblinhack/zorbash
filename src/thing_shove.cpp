@@ -33,13 +33,7 @@ ThingShoved Thing::try_to_shove(Thingp it, fpoint delta)
     return (THING_SHOVE_NEVER_TRIED);
   }
 
-  if (! is_player()) {
-    if ((int) pcg_random_range(0, 1000) > tp()->ai_shove_chance_d1000()) {
-      return (THING_SHOVE_NEVER_TRIED);
-    }
-  }
-
-  dbg("Try to shove, delta %d,%d", (int) delta.x, (int) delta.y);
+  dbg("Try to shove, %s delta %d,%d", it->to_string().c_str(), (int) delta.x, (int) delta.y);
   TRACE_AND_INDENT();
 
   bool was_dead = it->is_dead;
@@ -153,7 +147,7 @@ ThingShoved Thing::try_to_shove(Thingp it, fpoint delta)
 
   if (! it->is_dead) {
     if (it->is_dead_on_shove()) {
-      dbg("Shove and kill");
+      dbg("Shove and defeat");
       it->dead("by being shoved");
       auto spawn_what = it->spawn_on_shoved();
       if (spawn_what != "") {

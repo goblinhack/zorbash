@@ -7,7 +7,7 @@ def explode(me, x, y):
     zx.level_spawn_at_thing(me, "explosion_major")
     zx.level_spawn_fire_around_thing(me, "fire")
     zx.level_spawn_at_thing(me, "fire")
-    zx.thing_killed(me, "exploded")
+    zx.thing_defeated(me, "exploded")
 
 def on_hit(me, hitter, real_hitter, x, y, crit, bite, damage):
     explode(me, x, y)
@@ -47,7 +47,7 @@ def tp_init(name, text_name):
     mytp.set_is_described_when_hovering_over(True)
     mytp.set_is_floor_deco(False) # Else it can be placed next to lava and starts a firestorm
     mytp.set_is_hittable(True)
-    mytp.set_is_shovable(True)
+    mytp.set_is_shovable(False)
     mytp.set_is_very_combustible(True)
     mytp.set_normal_placement_rules(True)
     mytp.set_on_death_do("barrel.on_death()")

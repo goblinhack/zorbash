@@ -99,11 +99,11 @@ void Thing::remove_spawner_owner(void)
 //
 // Kill and detach all spawners from their owner
 //
-void Thing::kill_spawned(Thingp killer)
+void Thing::kill_spawned(Thingp defeater)
 {
   TRACE_AND_INDENT();
   //
-  // Warning killer can be nullptr - e.g. when a generator falls to
+  // Warning defeater can be nullptr - e.g. when a generator falls to
   // a new level
   //
 
@@ -124,7 +124,7 @@ void Thing::kill_spawned(Thingp killer)
       auto o       = spawner->get_immediate_spawned_owner();
       if (o && (o == this)) {
         spawner->remove_spawner_owner();
-        spawner->dead(killer, "its spawner died");
+        spawner->dead(defeater, "its spawner died");
       }
     }
   }

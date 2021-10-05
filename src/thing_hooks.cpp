@@ -135,7 +135,7 @@ void Thing::hooks_remove()
       weapon_set_carry_anim(nullptr);
       verify(item);
       item->remove_owner();
-      item->dead("weapon carry-anim owner killed");
+      item->dead("weapon carry-anim owner defeated ");
     }
   }
 
@@ -149,7 +149,7 @@ void Thing::hooks_remove()
       weapon_set_use_anim(nullptr);
       verify(item);
       item->remove_owner();
-      item->dead("weapon use-anim owner killed");
+      item->dead("weapon use-anim owner defeated ");
     }
   }
 }

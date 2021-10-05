@@ -120,10 +120,10 @@ int Thing::ai_avoid_distance(void) const
   TRACE_AND_INDENT();
   return (tp()->ai_avoid_distance());
 }
-int Thing::ai_is_able_to_remember_enemies_for_n_ticks(void) const
+int Thing::ai_resent_count(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->ai_is_able_to_remember_enemies_for_n_ticks());
+  return (tp()->ai_resent_count());
 }
 int Thing::ai_obstacle(void) const
 {
@@ -169,6 +169,11 @@ int Thing::ai_shove_chance_d1000(void) const
 {
   TRACE_AND_INDENT();
   return (tp()->ai_shove_chance_d1000());
+}
+int Thing::ai_unprovoked_attack_chance_d1000(void) const
+{
+  TRACE_AND_INDENT();
+  return (tp()->ai_unprovoked_attack_chance_d1000());
 }
 int Thing::ai_is_able_to_shove(void) const
 {
@@ -825,10 +830,10 @@ int Thing::is_jelly(void) const
   TRACE_AND_INDENT();
   return (tp()->is_jelly());
 }
-int Thing::random_jump_chance_d1000(void) const
+int Thing::ai_random_jump_chance_d1000(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->random_jump_chance_d1000());
+  return (tp()->ai_random_jump_chance_d1000());
 }
 int Thing::ai_is_able_to_jump_distance(void) const
 {
@@ -855,15 +860,15 @@ int Thing::is_key(void) const
   TRACE_AND_INDENT();
   return (tp()->is_key());
 }
-int Thing::is_killed_on_hit_or_miss(void) const
+int Thing::is_destroyed_on_hit_or_miss(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->is_killed_on_hit_or_miss());
+  return (tp()->is_destroyed_on_hit_or_miss());
 }
-int Thing::is_killed_on_hitting(void) const
+int Thing::is_destroyed_on_hitting(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->is_killed_on_hitting());
+  return (tp()->is_destroyed_on_hitting());
 }
 int Thing::is_laser(void) const
 {

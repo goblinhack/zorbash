@@ -10,6 +10,7 @@
 #include "my_game.h"
 #include "my_monst.h"
 #include "my_ptrcheck.h"
+#include "my_random.h"
 #include "my_sdl.h"
 #include "my_sprintf.h"
 #include "my_sys.h"
@@ -151,12 +152,12 @@ bool Thing::path_pop_next_move(void)
     //
     // Someone in our way?
     //
-    if (level->is_shovable(future_pos)) {
+    if (level->is_shovable(future_pos) && (int) pcg_random_range(0, 1000) < tp()->ai_shove_chance_d1000()) {
       //
       // Can the monst shove it into a something bad?
       //
       AI_LOG("", "Something is in our way that can be shoved");
-      auto delta = mid_at - make_fpoint(future_pos);
+      auto delta = make_fpoint(future_pos) - mid_at;
       FOR_ALL_THINGS(level, t, future_pos.x, future_pos.y)
       {
         if (! t->is_shovable()) {
@@ -167,7 +168,8 @@ bool Thing::path_pop_next_move(void)
             {
               IF_DEBUG3
               {
-                auto s = string_sprintf("Tried to shove monst at %s but failed", future_pos.to_string().c_str());
+                auto s =
+                    string_sprintf("Tried to shove monst into hazard at %s but failed", future_pos.to_string().c_str());
                 AI_LOG("", s);
               }
               if (is_player()) {

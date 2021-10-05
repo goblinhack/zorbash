@@ -365,6 +365,8 @@ bool Level::tick(void)
     return false;
   }
 
+  debug_path_clear();
+
   wait_count = 0;
 
   if (! game->robot_mode) {
@@ -511,8 +513,6 @@ bool Level::tick(void)
   if (! game->tick_requested.empty()) {
     return true;
   }
-
-  debug_path_clear();
 
   return false;
 }

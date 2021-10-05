@@ -115,7 +115,7 @@ do
     sed '/mytp.set_z_prio(/,$!d' $IN | tail -n +2 - > $POST
 
     for arg in \
-      set_ai_is_able_to_remember_enemies_for_n_ticks \
+      set_ai_resent_count \
       set_ai_obstacle \
       set_attack_eater \
       set_attack_humanoid \
@@ -252,8 +252,8 @@ do
       set_ai_is_able_to_jump \
       set_is_key \
       set_ai_is_able_to_collect_keys \
-      set_is_killed_on_hit_or_miss \
-      set_is_killed_on_hitting \
+      set_is_destroyed_on_hit_or_miss \
+      set_is_destroyed_on_hitting \
       set_is_laser \
       set_is_lava \
       set_is_light_blocker \

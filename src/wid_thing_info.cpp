@@ -875,16 +875,16 @@ void Game::wid_thing_info_add_danger_level(WidPopup *w, Thingp t)
 
     if (monst_kill_count == 1) {
       w->log(" ");
-      w->log("%%fg=red$Could kill you in " + std::to_string(monst_kill_count) + " hit!");
+      w->log("%%fg=red$Could defeat you in " + std::to_string(monst_kill_count) + " hit!");
     } else if (monst_kill_count <= 2) {
       w->log(" ");
-      w->log("%%fg=red$Could kill you in " + std::to_string(monst_kill_count) + " hits");
+      w->log("%%fg=red$Could defeat you in " + std::to_string(monst_kill_count) + " hits");
     } else if (monst_kill_count <= 10) {
       w->log(" ");
-      w->log("%%fg=orange$Could kill you in " + std::to_string(monst_kill_count) + " hits");
+      w->log("%%fg=orange$Could defeat you in " + std::to_string(monst_kill_count) + " hits");
     } else {
       w->log(" ");
-      w->log("Could kill you eventually...");
+      w->log("Could defeat you eventually...");
     }
   }
 
@@ -901,19 +901,19 @@ void Game::wid_thing_info_add_danger_level(WidPopup *w, Thingp t)
 
     if (player_kill_count == 1) {
       w->log(" ");
-      w->log("You could kill it in " + std::to_string(player_kill_count) + " hit.");
+      w->log("You could defeat it in " + std::to_string(player_kill_count) + " hit.");
       w->log("More likely, " + std::to_string(player_kill_count * 2) + " hits");
     } else if (player_kill_count <= 2) {
       w->log(" ");
-      w->log("You could kill it in " + std::to_string(player_kill_count) + " hits.");
+      w->log("You could defeat it in " + std::to_string(player_kill_count) + " hits.");
       w->log("More likely, " + std::to_string(player_kill_count * 2) + " hits.");
     } else if (player_kill_count <= 10) {
       w->log(" ");
-      w->log("You could kill it in " + std::to_string(player_kill_count) + " hits.");
+      w->log("You could defeat it in " + std::to_string(player_kill_count) + " hits.");
       w->log("More likely, " + std::to_string(player_kill_count * 2) + " hits.");
     } else {
       w->log(" ");
-      w->log("%%fg=red$It will take many hits to kill...");
+      w->log("%%fg=red$It will take many hits to defeat...");
     }
   }
 }

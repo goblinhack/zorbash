@@ -144,7 +144,7 @@ void Game::dead_select(const char *reason)
   wid_dead_window->log(" ");
   wid_dead_window->log(" ");
   wid_dead_window->log(" ");
-  wid_dead_window->log("Killed...");
+  wid_dead_window->log("Defeated...");
   wid_dead_window->log(" ");
   wid_dead_window->log(reason);
 

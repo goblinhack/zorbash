@@ -122,20 +122,20 @@ void Game::hiscore_select(void)
 
     char tmp[ 200 ];
 
-    int name_field_len      = 15;
-    int when_field_len      = 25;
-    int killed_by_field_len = 40;
+    int name_field_len        = 15;
+    int when_field_len        = 25;
+    int defeated_by_field_len = 40;
 
     if (first) {
       first = false;
 
-      auto killed_by = "Reason Of Unfair Demise";
-      auto color     = "red";
-      auto name      = "Noble Dungeoneer";
-      auto when      = "When";
+      auto defeated_by = "Reason Of Unfair Demise";
+      auto color       = "red";
+      auto name        = "Noble Dungeoneer";
+      auto when        = "When";
 
       snprintf(tmp, sizeof(tmp) - 1, "%%%%fg=%s$%7s  %-*s %-*s %-5s %*s", color, "Score", name_field_len, name,
-               when_field_len, when, "Level", killed_by_field_len, killed_by);
+               when_field_len, when, "Level", defeated_by_field_len, defeated_by);
 
       wid_hiscore_window->log(tmp);
     }
@@ -150,18 +150,18 @@ void Game::hiscore_select(void)
       when[ when_field_len ] = '\0';
     }
 
-    std::string killed_by = h->killed_by.c_str();
-    if ((int) killed_by.length() > killed_by_field_len) {
-      killed_by[ killed_by_field_len ] = '\0';
+    std::string defeated_by = h->defeated_by.c_str();
+    if ((int) defeated_by.length() > defeated_by_field_len) {
+      defeated_by[ defeated_by_field_len ] = '\0';
     }
 
-    if (killed_by.empty()) {
-      killed_by = "-";
+    if (defeated_by.empty()) {
+      defeated_by = "-";
     }
 
     auto color = colors[ index++ ];
     snprintf(tmp, sizeof(tmp) - 1, "%%%%fg=%s$%07u  %-*s %-*s %-5u %*s", color, h->score, name_field_len, name.c_str(),
-             when_field_len, when.c_str(), h->level_reached, killed_by_field_len, killed_by.c_str());
+             when_field_len, when.c_str(), h->level_reached, defeated_by_field_len, defeated_by.c_str());
 
     wid_hiscore_window->log(" ");
     wid_hiscore_window->log(tmp);

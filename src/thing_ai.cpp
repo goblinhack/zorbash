@@ -565,12 +565,13 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
 
         for (auto dx = -1; dx <= 1; dx++) {
           for (auto dy = -1; dy <= 1; dy++) {
+
             point o(p.x + dx, p.y + dy);
-            if (! dx && ! dy) {
+            if (level->is_oob(o)) {
               continue;
             }
 
-            if (level->is_oob(o)) {
+            if (! dx && ! dy) {
               continue;
             }
 
@@ -701,7 +702,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
 
   auto threat = most_dangerous_visible_thing_get();
   if (threat) {
-    if (threat && (is_dangerous(threat) || is_enemy(threat))) {
+    if (threat && (is_dangerous(threat) || is_enemy(threat) || is_to_be_avoided(threat))) {
       something_changed = true;
     }
   }
@@ -877,12 +878,17 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
           //
           if (lit_recently) {
             if (is_enemy(it) && (dist < max_dist)) {
-              if (is_dangerous(it) && (get_health() < get_health_max() / 2)) {
+              if ((is_to_be_avoided(it) || is_dangerous(it)) && (get_health() < get_health_max() / 2)) {
                 //
                 // Low on health. Best to avoid this enemy.
                 //
-                avoid = true;
-                SCORE_ADD(-(int) ((max_dist - dist) + it_health) * 200, "avoid-enemy");
+                if (cannot_avoid(it)) {
+                  SCORE_ADD((int) (max_dist - dist) * 200, "attack-enemy-i-cannot-avoid");
+                  AI_LOG("Cannot avoid enemy", it);
+                } else {
+                  avoid = true;
+                  SCORE_ADD(-(int) ((max_dist - dist) + it_health) * 200, "avoid-enemy");
+                }
                 got_one_this_tile = true;
               } else {
                 //
@@ -895,9 +901,15 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
               }
             } else if (! avoid && (dist < ai_avoid_distance()) && will_avoid_monst(it)) {
               //
-              // Monss we avoid are more serious threats
+              // Monsts we avoid are more serious threats
               //
-              avoid = true;
+              if (cannot_avoid(it)) {
+                SCORE_ADD((int) (max_dist - dist) * 100, "attack-monst-i-cannot-avoid");
+                AI_LOG("Cannot avoid monst", it);
+              } else {
+                avoid = true;
+                SCORE_ADD(-(int) ((max_dist - dist) + it_health) * 200, "avoid-monst");
+              }
             } else if (! avoid && ai_is_able_to_attack_generators() && it->is_minion_generator()) {
               //
               // Very close, high priority attack
@@ -920,8 +932,14 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
                 //
                 // Further away close, lower priority attack
                 //
-                SCORE_ADD((int) (max_dist - dist) * 10, "attack-maybe-monst");
-                got_one_this_tile = true;
+                if (will_avoid_monst(it)) {
+                  //
+                  // Nope
+                  //
+                } else {
+                  SCORE_ADD((int) (max_dist - dist) * 10, "attack-maybe-monst");
+                  got_one_this_tile = true;
+                }
               }
             }
           }
@@ -936,6 +954,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
 
           if (avoid) {
             AI_LOG("Needs to avoid", it);
+            add_avoid(it);
 
             bool got_avoid = false;
             auto d         = ai_avoid_distance();
@@ -946,6 +965,11 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
             for (auto dx = -d; dx <= d; dx++) {
               for (auto dy = -d; dy <= d; dy++) {
 
+                point p(mid_at.x + dx, mid_at.y + dy);
+                if (level->is_oob(p)) {
+                  continue;
+                }
+
                 if (! dx && ! dy) {
                   continue;
                 }
@@ -955,7 +979,6 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
                   continue;
                 }
 
-                point p(mid_at.x + dx, mid_at.y + dy);
                 if (ai_obstacle_for_me(p)) {
                   continue;
                 }
@@ -982,14 +1005,18 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
               for (auto dx = -d; dx <= d; dx++) {
                 for (auto dy = -d; dy <= d; dy++) {
 
-                  float dist = distance(mid_at + fpoint(dx, dy), it->mid_at);
                   point p(mid_at.x + dx, mid_at.y + dy);
+                  if (level->is_oob(p)) {
+                    continue;
+                  }
+
                   if (ai_obstacle_for_me(p)) {
                     continue;
                   }
 
-                  int terrain_cost = get_terrain_cost(p);
-                  int total_score  = -(int) terrain_cost;
+                  float dist         = distance(mid_at + fpoint(dx, dy), it->mid_at);
+                  int   terrain_cost = get_terrain_cost(p);
+                  int   total_score  = -(int) terrain_cost;
                   total_score += dist * 100;
                   total_score += 1000;
                   goals.insert(Goal(total_score, p, last_msg));
@@ -1012,14 +1039,18 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
               for (auto dx = -d; dx <= d; dx++) {
                 for (auto dy = -d; dy <= d; dy++) {
 
-                  float dist = distance(mid_at + fpoint(dx, dy), it->mid_at);
                   point p(mid_at.x + dx, mid_at.y + dy);
+                  if (level->is_oob(p)) {
+                    continue;
+                  }
+
                   if (level->is_obs_wall_or_door(p)) {
                     continue;
                   }
 
-                  int terrain_cost = get_terrain_cost(p);
-                  int total_score  = -(int) terrain_cost;
+                  float dist         = distance(mid_at + fpoint(dx, dy), it->mid_at);
+                  int   terrain_cost = get_terrain_cost(p);
+                  int   total_score  = -(int) terrain_cost;
                   total_score += dist * 100;
                   total_score += 1000;
                   goals.insert(Goal(total_score, p, last_msg));
@@ -1051,11 +1082,16 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
             //
             // No hunting monsters we cannot see just because we have visited that area before.
             //
-            // Well this is true for the player. MonstInfoers, we're lenient.
+            // Well this is true for the player. Monsters, we're lenient.
             //
             if (lit_recently) {
-              if (possible_to_attack(it)) {
-                SCORE_ADD(-health_diff, "can-attack-monst");
+              //
+              // How aggressive are we?
+              //
+              if ((int) pcg_random_range(0, 1000) < tp()->ai_unprovoked_attack_chance_d1000()) {
+                if (possible_to_attack(it)) {
+                  SCORE_ADD(-health_diff, "can-attack-monst");
+                }
               }
             }
           }
@@ -1191,11 +1227,13 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
 
     for (int dx = -jump_distance; dx <= jump_distance; dx++) {
       for (int dy = -jump_distance; dy <= jump_distance; dy++) {
-        if (! dx && ! dy) {
-          continue;
-        }
+
         point o(p.x + dx, p.y + dy);
         if (level->is_oob(o)) {
+          continue;
+        }
+
+        if (! dx && ! dy) {
           continue;
         }
 
@@ -1438,7 +1476,11 @@ bool Thing::ai_choose_immediately_adjacent_goal(void)
 
   for (int dx = -1; dx <= 1; dx++) {
     for (int dy = -1; dy <= 1; dy++) {
+
       fpoint at(mid_at.x + dx, mid_at.y + dy);
+      if (level->is_oob(at)) {
+        continue;
+      }
 
       FOR_ALL_THINGS(level, it, at.x, at.y)
       /* { */
@@ -1670,7 +1712,7 @@ bool Thing::ai_tick(bool recursing)
         //
         // Look for doors or things to collect, if not being attacked.
         //
-        if (threat && (is_dangerous(threat) || is_enemy(threat))) {
+        if (threat && (is_dangerous(threat) || is_enemy(threat) || is_to_be_avoided(threat))) {
           //
           // No resting when in danger
           //
@@ -1907,7 +1949,7 @@ bool Thing::ai_tick(bool recursing)
         // fighting.
         //
         if (get_stamina()) {
-          if (threat && (is_dangerous(threat) || is_enemy(threat))) {
+          if (threat && (is_dangerous(threat) || is_enemy(threat) || is_to_be_avoided(threat))) {
             AI_LOG("Seen a threat. Stop resting.");
             if (is_player()) {
               game->tick_begin("Robot sees a nearby threat, stop resting");

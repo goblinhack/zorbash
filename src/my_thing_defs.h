@@ -38,7 +38,9 @@
 #define THING_HEALTH_BLOODIED_PCT4         5  // Lots of blood on screen
 #define THING_JUMP_SPEED                   450
 #define THING_SLOW_MOVE_SPEED_MS           125
-#define THING_TICK_DURATION_TOO_LONG       20 // How many ms per thing tick we expect not to exceed
-#define THING_TICK_WAIT_TOO_LONG           50 // How many ticks we wait for things to stop moving
+#define THING_TICK_DURATION_TOO_LONG       20  // How many ms per thing tick we expect not to exceed
+#define THING_TICK_WAIT_TOO_LONG           50  // How many ticks we wait for things to stop moving
+#define THING_MAX_AVOID_COUNT              10  // Count to keep track of avoid attempts
+#define THING_MAX_ENEMY_COUNT              100 // Count to keep track of resentfulness
 
 #endif

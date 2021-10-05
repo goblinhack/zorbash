@@ -478,19 +478,19 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     //
     // Record who dun it.
     //
-    dbg("Is killed by (%s) %u damage, health now %d", real_hitter->to_string().c_str(), damage, h);
-    std::string killer = real_hitter->text_a_or_an();
+    dbg("Is defeated  by (%s) %u damage, health now %d", real_hitter->to_string().c_str(), damage, h);
+    std::string defeater = real_hitter->text_a_or_an();
 
     //
-    // If not a monst, e.g. a generator then don't include killed by
+    // If not a monst, e.g. a generator then don't include defeated by
     //
-    auto reason = "killed by " + killer;
+    auto reason = "defeated  by " + defeater;
     if (! is_monst()) {
-      reason = "by " + killer;
+      reason = "by " + defeater;
     }
 
     if ((real_hitter->mid_at == mid_at) && real_hitter->is_engulfer()) {
-      reason = "in the bowels of " + killer;
+      reason = "in the bowels of " + defeater;
     }
 
     dead(real_hitter, reason);
@@ -623,11 +623,11 @@ int Thing::is_hit_by(Thingp hitter, bool crit, bool bite, int poison, int damage
   }
 
   IF_DEBUG2 { hitter->log("Hit succeeds"); }
-  int hit_and_killed;
+  int hit_and_destroyed;
 
-  hit_and_killed = ai_hit_actual(hitter, real_hitter, crit, bite, poison, damage);
+  hit_and_destroyed = ai_hit_actual(hitter, real_hitter, crit, bite, poison, damage);
 
-  return (hit_and_killed);
+  return (hit_and_destroyed);
 }
 
 int Thing::is_hit_by(Thingp hitter, int damage)

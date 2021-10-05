@@ -151,6 +151,7 @@ std::ostream &operator<<(std::ostream &out, Bits< MonstAip & > const my)
   out << bits(my.t->can_see_currently.can_see);
   out << bits(my.t->can_see_ever.can_see);
   out << bits(my.t->enemies);
+  out << bits(my.t->avoid);
   out << bits(my.t->move_path);
   return (out);
 }
@@ -926,7 +927,7 @@ void Game::save_snapshot(void)
   CON("DGN: Saved %s, seed %u", save_file.c_str(), seed);
   LOG("-");
 
-  TOPCON("Saved the game to %s.", save_file.c_str());
+  TOPCON("%%fg=green$Autosaved.%%fg=reset$");
 }
 
 void Game::save_config(void)

@@ -187,6 +187,17 @@ bool Thing::ai_obstacle(Thingp it)
     return false;
   }
 
+  if (is_hidden || is_falling || is_jumping || is_changing_level) {
+    return false;
+  }
+
+  //
+  // Allow cleaners to engulf/swallow attack
+  //
+  if (is_engulfer() && can_eat(it)) {
+    return false;
+  }
+
   //
   // Lava, acid etc...
   //
@@ -256,6 +267,19 @@ bool Thing::ai_obstacle(Thingp it)
       return true;
     }
     return false;
+  }
+
+  if (is_ethereal()) {
+    //
+    // This lets you skip around generators to avoid ghosts
+    //
+    if (is_minion()) {
+      if (it->is_minion_generator()) {
+        if (it == get_top_minion_owner()) {
+          return true;
+        }
+      }
+    }
   }
 
   if (is_monst() || (is_player() && game->robot_mode)) {

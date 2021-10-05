@@ -113,7 +113,7 @@ public:
   std::list< ThingId >    buffs;
   std::list< ThingId >    debuffs;
   std::string             msg;          // Text that floats on screen
-  std::string             dead_reason;  // What killed me
+  std::string             dead_reason;  // What defeated me
   std::vector< uint16_t > inventory_id; // Which items are in which slot
   std::vector< uint16_t > skillbox_id;  // Which skills are in which slot
   std::vector< uint16_t > buffbox_id;   // Which buffs are in which slot
@@ -175,6 +175,7 @@ public:
   FovMap                   can_see_currently; // Shadowcasting of what can be seen currently
   FovMap                   can_see_ever;      // Shadowcasting of what can be seen ever on this level
   std::map< ThingId, int > enemies {};        // List of things that wronged us
+  std::map< ThingId, int > avoid {};          // List of things that wronged us and need to be avoided
   std::vector< point >     move_path;
 } MonstAi;
 std::ostream &operator<<(std::ostream &out, Bits< const MonstAip & > const my);
