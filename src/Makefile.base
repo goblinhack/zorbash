@@ -197,6 +197,7 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/thing_eat.o                   \
     $(OBJDIR)/thing_enchant.o               \
     $(OBJDIR)/thing_enemy.o                 \
+    $(OBJDIR)/thing_goal_penalty.o          \
     $(OBJDIR)/thing_escape.o                \
     $(OBJDIR)/thing_fadeup.o                \
     $(OBJDIR)/thing_fall.o                  \

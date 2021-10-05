@@ -42,5 +42,6 @@
 #define THING_TICK_WAIT_TOO_LONG           50  // How many ticks we wait for things to stop moving
 #define THING_MAX_AVOID_COUNT              10  // Count to keep track of avoid attempts
 #define THING_MAX_ENEMY_COUNT              100 // Count to keep track of resentfulness
+#define THING_MAX_GOAL_PENALTY             100 // Helps to avoid goal oscillation
 
 #endif

@@ -407,23 +407,18 @@ void Thing::avoid_tick(void)
 void Thing::add_avoid(Thingp attacker)
 {
   TRACE_AND_INDENT();
-  dbg("Ask avoid %s %d", attacker->to_string().c_str(), __LINE__);
+
   if (unlikely(! attacker->is_monst() && ! attacker->is_player())) {
     return;
   }
-  dbg("Ask avoid %s %d", attacker->to_string().c_str(), __LINE__);
   if (unlikely(! is_monst() && ! is_player())) {
     return;
   }
-  dbg("Ask avoid %s %d", attacker->to_string().c_str(), __LINE__);
-
   if (! ai_avoid_distance()) {
     return;
   }
-  dbg("Ask avoid %s %d", attacker->to_string().c_str(), __LINE__);
 
   if (! monst_aip->avoid[ attacker->id ]) {
-    dbg("Ask avoid %s %d", attacker->to_string().c_str(), __LINE__);
     if (is_player() && game->robot_mode) {
       CON("Robot: Add new avoid %s", attacker->to_string().c_str());
     } else {
@@ -431,7 +426,6 @@ void Thing::add_avoid(Thingp attacker)
     }
     monst_aip->avoid[ attacker->id ] += 2;
   } else {
-    dbg("Ask avoid %s %d", attacker->to_string().c_str(), __LINE__);
     dbg("Increment old avoid %s", attacker->to_string().c_str());
     monst_aip->avoid[ attacker->id ] += 2;
 

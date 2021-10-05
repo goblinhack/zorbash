@@ -82,13 +82,13 @@ void Thing::enemies_tick(void)
 void Thing::add_enemy(Thingp attacker)
 {
   TRACE_AND_INDENT();
+
   if (unlikely(! attacker->is_monst() && ! attacker->is_player())) {
     return;
   }
   if (unlikely(! is_monst() && ! is_player())) {
     return;
   }
-
   if (! ai_resent_count()) {
     return;
   }

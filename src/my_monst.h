@@ -176,6 +176,7 @@ public:
   FovMap                   can_see_ever;      // Shadowcasting of what can be seen ever on this level
   std::map< ThingId, int > enemies {};        // List of things that wronged us
   std::map< ThingId, int > avoid {};          // List of things that wronged us and need to be avoided
+  std::map< ThingId, int > goal_penalty {};   // Helps to avoid goal oscillation
   std::vector< point >     move_path;
 } MonstAi;
 std::ostream &operator<<(std::ostream &out, Bits< const MonstAip & > const my);

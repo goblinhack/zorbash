@@ -151,6 +151,7 @@ std::ostream &operator<<(std::ostream &out, Bits< MonstAip & > const my)
   out << bits(my.t->can_see_currently.can_see);
   out << bits(my.t->can_see_ever.can_see);
   out << bits(my.t->enemies);
+  out << bits(my.t->goal_penalty);
   out << bits(my.t->avoid);
   out << bits(my.t->move_path);
   return (out);

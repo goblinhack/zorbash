@@ -82,17 +82,16 @@ void Thing::achieve_goals_in_life(void)
   // Timeout enemies
   //
   enemies_tick();
-  if (is_dead) {
-    return;
-  }
+
+  //
+  // Timeout goals
+  //
+  goal_penalty_tick();
 
   //
   // Timeout enemies to avoid
   //
   avoid_tick();
-  if (is_dead) {
-    return;
-  }
 
   //
   // Apply poison damage

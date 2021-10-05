@@ -312,6 +312,7 @@ public:
   bool is_enemy(Thingp attacker) const;
   bool is_to_be_avoided(Thingp attacker) const;
   bool cannot_avoid(Thingp attacker) const;
+  int get_goal_penalty(Thingp attacker) const;
   bool is_on_fire(void) const;
   bool laser_anim_exists(void);
   bool laser_choose_target(Thingp item);
@@ -1165,6 +1166,7 @@ public:
   void                   achieve_goals_in_life();
   void                   acid_tick();
   void                   add_enemy(Thingp attacker);
+  void                   add_goal_penalty(Thingp attacker);
   void                   add_avoid(Thingp attacker);
   void                   ai_get_next_hop(void);
   void                   animate();
@@ -1236,6 +1238,7 @@ public:
   void enchant_randomly(void);
   void enemies_tick(void);
   void avoid_tick(void);
+  void goal_penalty_tick(void);
   void err(const char *fmt, ...) const __attribute__((format(printf, 2, 3)));
   void err_(const char *fmt, va_list args) const; // compile error without
   void fadeup(float fadeup_height, float fadeup_fade, ts_t ms);

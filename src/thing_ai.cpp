@@ -320,7 +320,6 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
         }
 
         logged_one = true;
-
         AI_LOG("", "Found a goal", it);
       }
       FOR_ALL_THINGS_END();
@@ -328,7 +327,6 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
       if (! logged_one) {
         FOR_ALL_THINGS(level, it, p.x, p.y)
         {
-
           if (it->is_changing_level || it->is_hidden || it->is_the_grid || it->is_tmp_thing() || it->is_falling ||
               it->is_jumping) {
             continue;
@@ -349,7 +347,7 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
       }
 
       if (! logged_one) {
-        AI_LOG("", "Found a non thing goal");
+        AI_LOG("", "Found a non-thing goal");
       }
 
       if (is_player()) {
@@ -778,9 +776,12 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
           continue;
         }
 
+        auto goal_penalty = get_goal_penalty(it);
+
         if (is_player()) {
           it->con("seen");
         }
+
         //
         // Worse terrain, less preferred. Higher score, more preferred.
         //
@@ -800,7 +801,8 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
             //
             // If starving, prefer the thing with most health
             //
-            SCORE_ADD(it_health, "eat-it");
+            SCORE_ADD(it_health - goal_penalty, "eat-it");
+            add_goal_penalty(it);
             got_one_this_tile = true;
           }
         } else if (is_hungry) {
@@ -811,13 +813,16 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
             // go for the easier kill in preference.
             //
             if (it->is_player()) {
-              SCORE_ADD(it_health / 2, "eat-player");
+              SCORE_ADD(it_health / 2 - goal_penalty, "eat-player");
+              add_goal_penalty(it);
               got_one_this_tile = true;
             } else if (it->is_alive_monst()) {
-              SCORE_ADD(it_health / 2, "eat-monst");
+              SCORE_ADD(it_health / 2 - goal_penalty, "eat-monst");
+              add_goal_penalty(it);
               got_one_this_tile = true;
             } else {
-              SCORE_ADD(it_health / 2, "eat-food");
+              SCORE_ADD(it_health / 2 - goal_penalty, "eat-food");
+              add_goal_penalty(it);
               got_one_this_tile = true;
             }
           }
@@ -827,7 +832,8 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
           if (it->is_collectable()) {
             auto score = worth_collecting(it);
             if (score > 0) {
-              SCORE_ADD(score, "collect");
+              SCORE_ADD(score - goal_penalty, "collect");
+              add_goal_penalty(it);
               got_one_this_tile = true;
               AI_LOG("", "Is considering collecting", it);
             } else {
@@ -841,7 +847,8 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
         //
         if (it->is_key()) {
           if (ai_is_able_to_collect_keys()) {
-            SCORE_ADD(1000, "collect-key");
+            SCORE_ADD(1000 - goal_penalty, "collect-key");
+            add_goal_penalty(it);
             got_one_this_tile = true;
           }
         }
@@ -849,9 +856,11 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
         if (it->is_door() && ! it->is_open) {
           if (ai_is_able_to_open_doors() || ai_is_able_to_break_down_doors()) {
             if (get_keys()) {
-              SCORE_ADD(1000, "open-door-with-key");
+              SCORE_ADD(1000 - goal_penalty, "open-door-with-key");
+              add_goal_penalty(it);
             } else {
-              SCORE_ADD(100, "open-door");
+              SCORE_ADD(100 - goal_penalty, "open-door");
+              add_goal_penalty(it);
             }
             got_one_this_tile = true;
           }
@@ -883,11 +892,13 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
                 // Low on health. Best to avoid this enemy.
                 //
                 if (cannot_avoid(it)) {
-                  SCORE_ADD((int) (max_dist - dist) * 200, "attack-enemy-i-cannot-avoid");
+                  SCORE_ADD((int) (max_dist - dist) * 200 - goal_penalty, "attack-enemy-i-cannot-avoid");
+                  add_goal_penalty(it);
                   AI_LOG("Cannot avoid enemy", it);
                 } else {
                   avoid = true;
-                  SCORE_ADD(-(int) ((max_dist - dist) + it_health) * 200, "avoid-enemy");
+                  SCORE_ADD(-(int) ((max_dist - dist) + it_health) * 200 - goal_penalty, "avoid-enemy");
+                  add_goal_penalty(it);
                 }
                 got_one_this_tile = true;
               } else {
@@ -896,7 +907,8 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
                 // higher the score
                 //
                 avoid = false;
-                SCORE_ADD((int) (max_dist - dist) * 200, "attack-enemy");
+                SCORE_ADD((int) (max_dist - dist) * 200 - goal_penalty, "attack-enemy");
+                add_goal_penalty(it);
                 got_one_this_tile = true;
               }
             } else if (! avoid && (dist < ai_avoid_distance()) && will_avoid_monst(it)) {
@@ -904,17 +916,20 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
               // Monsts we avoid are more serious threats
               //
               if (cannot_avoid(it)) {
-                SCORE_ADD((int) (max_dist - dist) * 100, "attack-monst-i-cannot-avoid");
+                SCORE_ADD((int) (max_dist - dist) * 100 - goal_penalty, "attack-monst-i-cannot-avoid");
+                add_goal_penalty(it);
                 AI_LOG("Cannot avoid monst", it);
               } else {
                 avoid = true;
-                SCORE_ADD(-(int) ((max_dist - dist) + it_health) * 200, "avoid-monst");
+                SCORE_ADD(-(int) ((max_dist - dist) + it_health) * 200 - goal_penalty, "avoid-monst");
+                add_goal_penalty(it);
               }
             } else if (! avoid && ai_is_able_to_attack_generators() && it->is_minion_generator()) {
               //
               // Very close, high priority attack
               //
-              SCORE_ADD((int) (max_dist - dist) * 1000, "attack-nearby-generator");
+              SCORE_ADD((int) (max_dist - dist) * 1000 - goal_penalty, "attack-nearby-generator");
+              add_goal_penalty(it);
               got_one_this_tile = true;
             } else if (! avoid && possible_to_attack(it) && ! will_avoid_hazard(it)) {
               //
@@ -926,7 +941,8 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
                 //
                 // Very close, high priority attack
                 //
-                SCORE_ADD((int) (max_dist - dist) * 100, "attack-nearby-monst");
+                SCORE_ADD((int) (max_dist - dist) * 100 - goal_penalty, "attack-nearby-monst");
+                add_goal_penalty(it);
                 got_one_this_tile = true;
               } else if (dist < max_dist) {
                 //
@@ -937,7 +953,8 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
                   // Nope
                   //
                 } else {
-                  SCORE_ADD((int) (max_dist - dist) * 10, "attack-maybe-monst");
+                  SCORE_ADD((int) (max_dist - dist) * 10 - goal_penalty, "attack-maybe-monst");
+                  add_goal_penalty(it);
                   got_one_this_tile = true;
                 }
               }
@@ -949,6 +966,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
             // Very close, high priority attack
             //
             SCORE_ADD(666, "get-out-of-web");
+            add_goal_penalty(it);
             got_one_this_tile = true;
           }
 
@@ -1090,7 +1108,8 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
               //
               if ((int) pcg_random_range(0, 1000) < tp()->ai_unprovoked_attack_chance_d1000()) {
                 if (possible_to_attack(it)) {
-                  SCORE_ADD(-health_diff, "can-attack-monst");
+                  SCORE_ADD(-health_diff - goal_penalty, "can-attack-monst");
+                  add_goal_penalty(it);
                 }
               }
             }
