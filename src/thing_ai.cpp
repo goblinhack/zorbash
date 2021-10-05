@@ -29,15 +29,14 @@
 //
 // Search priorities in order
 //
-#define SEARCH_TYPE_MAX                       8
-#define SEARCH_TYPE_CAN_SEE_NO_JUMP           0
-#define SEARCH_TYPE_CAN_SEE_JUMP_ALLOWED      1
-#define SEARCH_TYPE_LOCAL_NO_JUMP             2
-#define SEARCH_TYPE_LOCAL_JUMP_ALLOWED        3
-#define SEARCH_TYPE_GLOBAL_NO_JUMP            4
-#define SEARCH_TYPE_GLOBAL_JUMP_ALLOWED       5
-#define SEARCH_TYPE_LAST_RESORTS_NO_JUMP      6
-#define SEARCH_TYPE_LAST_RESORTS_JUMP_ALLOWED 7
+#define SEARCH_TYPE_MAX                       7
+#define SEARCH_TYPE_CAN_SEE_JUMP_ALLOWED      0
+#define SEARCH_TYPE_LOCAL_NO_JUMP             1
+#define SEARCH_TYPE_LOCAL_JUMP_ALLOWED        2
+#define SEARCH_TYPE_GLOBAL_NO_JUMP            3
+#define SEARCH_TYPE_GLOBAL_JUMP_ALLOWED       4
+#define SEARCH_TYPE_LAST_RESORTS_NO_JUMP      5
+#define SEARCH_TYPE_LAST_RESORTS_JUMP_ALLOWED 6
 
 #define SCORE_ADD(score, msg)                                                                                          \
   total_score += (score);                                                                                              \
@@ -111,10 +110,9 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
 
   std::multiset< Goal > goals;
   std::list< GoalMap >  goalmaps;
-  ai_dmap_can_see_init(minx, miny, maxx, maxy, search_type);
+  ai_dmap_can_see_init(minx, miny, maxx, maxy, search_type, false);
 
   switch (search_type) {
-    case SEARCH_TYPE_CAN_SEE_NO_JUMP :
     case SEARCH_TYPE_CAN_SEE_JUMP_ALLOWED :
       ai_choose_can_see_goals(goals, minx, miny, maxx, maxy);
       goalmaps.push_back(GoalMap {goals, dmap_can_see});
@@ -218,7 +216,7 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
     // Find the best next-hop to the best goal.
     //
 #ifdef ENABLE_DEBUG_AI_VERBOSE
-    IF_DEBUG4
+    IF_DEBUG3
     {
       AI_LOG("", "Goals:");
       dmap_print(g.dmap, point(min.x, min.y), point(start.x, start.y), point(max.x, max.y));
@@ -251,6 +249,7 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
 #endif
       auto astar_end = goal.at;
       auto result    = astar_solve(&goal, path_debug, astar_start, astar_end, g.dmap);
+
       //
       // Unreachable?
       //
@@ -391,7 +390,7 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
 //
 // Initialize basic visibility and things that are lit and can be seen
 //
-int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int search_type)
+int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int search_type, bool check_for_interrupts)
 {
   TRACE_AND_INDENT();
   std::array< std::array< uint8_t, MAP_WIDTH >, MAP_HEIGHT > can_jump = {};
@@ -409,7 +408,6 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
   }
 
   switch (search_type) {
-    case SEARCH_TYPE_CAN_SEE_NO_JUMP : jump_allowed = false; break;
     case SEARCH_TYPE_CAN_SEE_JUMP_ALLOWED : jump_allowed = true; break;
     case SEARCH_TYPE_LOCAL_NO_JUMP : jump_allowed = false; break;
     case SEARCH_TYPE_LOCAL_JUMP_ALLOWED : jump_allowed = true; break;
@@ -419,6 +417,10 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
     case SEARCH_TYPE_LAST_RESORTS_NO_JUMP : jump_allowed = false; break;
   }
 
+  if (! ai_is_able_to_jump()) {
+    jump_allowed = false;
+  }
+
   for (int y = miny; y < maxy; y++) {
     for (int x = minx; x < maxx; x++) {
       point p(x, y);
@@ -426,31 +428,15 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
         continue;
       }
 
-      //
-      // Don't block on things like chasms so we can jump
-      //
       if (! ai_obstacle_for_me(p)) {
         set(dmap_can_see->val, x, y, DMAP_IS_PASSABLE);
         continue;
       }
 
-      if (level->is_wall(p)) {
-        continue;
-      }
-
-      switch (search_type) {
-        case SEARCH_TYPE_CAN_SEE_NO_JUMP :
-        case SEARCH_TYPE_CAN_SEE_JUMP_ALLOWED :
-        case SEARCH_TYPE_LOCAL_NO_JUMP :
-        case SEARCH_TYPE_GLOBAL_NO_JUMP :
-        case SEARCH_TYPE_LAST_RESORTS_NO_JUMP :
-          if (level->is_lava(p) || level->is_chasm(p)) {
-            continue;
-          }
-          break;
-        case SEARCH_TYPE_GLOBAL_JUMP_ALLOWED :
-        case SEARCH_TYPE_LOCAL_JUMP_ALLOWED :
-        case SEARCH_TYPE_LAST_RESORTS_JUMP_ALLOWED : break;
+      if (jump_allowed) {
+        if (is_hazardous_to_me(p)) {
+          set(dmap_can_see->val, x, y, DMAP_IS_PASSABLE);
+        }
       }
 
       //
@@ -461,7 +447,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
         // Trace all possible jump paths to see if we can jump over
         //
         if (is_hazardous_to_me(p) || ai_obstacle_for_me(p)) {
-          auto jump_dist = how_far_i_can_jump();
+          auto jump_dist = how_far_i_can_jump_max();
           for (const auto &jp : game->jump_paths) {
             point jump_begin(p.x + jp.begin.x, p.y + jp.begin.y);
             point jump_end(p.x + jp.end.x, p.y + jp.end.y);
@@ -480,6 +466,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
             if (is_hazardous_to_me(jump_begin) || ai_obstacle_for_me(jump_begin)) {
               continue;
             }
+
             if (is_hazardous_to_me(jump_end) || ai_obstacle_for_me(jump_end)) {
               continue;
             }
@@ -609,7 +596,9 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
 
                 if (worth_collecting(it) || worth_eating(it) || is_dangerous(it)) {
                   set(monst_aip->interrupt_map.val, o.x, o.y, game->tick_current);
-                  something_changed++;
+                  if (check_for_interrupts) {
+                    something_changed++;
+                  }
                 }
               }
               FOR_ALL_THINGS_END();
@@ -659,35 +648,47 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
   //
   // Not sure what this really does
   //
-  auto seen_map = get_seen_map();
-  for (int y = miny; y < maxy; y++) {
-    for (int x = minx; x < maxx; x++) {
+  if (check_for_interrupts) {
+    auto seen_map = get_seen_map();
+    for (int y = miny; y < maxy; y++) {
+      for (int x = minx; x < maxx; x++) {
 
-      if (get(can_jump, x, y)) {
-        set(dmap_can_see->val, x, y, DMAP_IS_PASSABLE);
-      }
+        if (get(can_jump, x, y)) {
+          set(dmap_can_see->val, x, y, DMAP_IS_PASSABLE);
+          continue;
+        }
 
-      //
-      // Did anything of interest change worthy of interrupting a walk?
-      //
-      auto dmap_score = get(dmap_can_see->val, x, y);
-      auto seen_when  = get(seen_map->val, x, y);
-      if (dmap_score == DMAP_IS_PASSABLE) {
         //
-        // Is now seen; did something open?
+        // Ignore interruptions too far away
         //
-        if (! seen_when) {
-          something_changed++;
+        auto  dist     = distance(mid_at, fpoint(x, y));
+        float max_dist = ai_scent_distance();
+        if (dist > max_dist) {
+          continue;
         }
-        set(seen_map->val, x, y, game->tick_current);
-      } else if (dmap_score == DMAP_IS_WALL) {
+
         //
-        // Was seen but now cannot see; did something close?
+        // Did anything of interest change worthy of interrupting a walk?
         //
-        if (seen_when) {
-          something_changed++;
+        auto dmap_score = get(dmap_can_see->val, x, y);
+        auto seen_when  = get(seen_map->val, x, y);
+        if (dmap_score == DMAP_IS_PASSABLE) {
+          //
+          // Is now seen; did something open?
+          //
+          if (! seen_when) {
+            something_changed++;
+            set(seen_map->val, x, y, game->tick_current);
+          }
+        } else if (dmap_score == DMAP_IS_WALL) {
+          //
+          // Was seen but now cannot see; did something close?
+          //
+          if (seen_when) {
+            something_changed++;
+            set(seen_map->val, x, y, 0U);
+          }
         }
-        set(seen_map->val, x, y, 0U);
       }
     }
   }
@@ -1180,11 +1181,11 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
     int jump_distance;
 
     switch (search_type) {
-      case SEARCH_TYPE_LOCAL_JUMP_ALLOWED : jump_distance = how_far_i_can_jump(); break;
+      case SEARCH_TYPE_LOCAL_JUMP_ALLOWED : jump_distance = how_far_i_can_jump_max(); break;
       case SEARCH_TYPE_LOCAL_NO_JUMP : jump_distance = 0; break;
-      case SEARCH_TYPE_GLOBAL_JUMP_ALLOWED : jump_distance = how_far_i_can_jump(); break;
+      case SEARCH_TYPE_GLOBAL_JUMP_ALLOWED : jump_distance = how_far_i_can_jump_max(); break;
       case SEARCH_TYPE_GLOBAL_NO_JUMP : jump_distance = 0; break;
-      case SEARCH_TYPE_LAST_RESORTS_JUMP_ALLOWED : jump_distance = how_far_i_can_jump(); break;
+      case SEARCH_TYPE_LAST_RESORTS_JUMP_ALLOWED : jump_distance = how_far_i_can_jump_max(); break;
       case SEARCH_TYPE_LAST_RESORTS_NO_JUMP : jump_distance = 0; break;
       default : DIE("unexpected search-type case"); break;
     }
@@ -1358,6 +1359,13 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
     // Avoid sewer descend/ascend loop
     //
     if ((p.x == mid_at.x) && (p.y == mid_at.y)) {
+      continue;
+    }
+
+    //
+    // No search destinations that are, for example, a chasm
+    //
+    if (is_hazardous_to_me(p)) {
       continue;
     }
 
@@ -1715,8 +1723,8 @@ bool Thing::ai_tick(bool recursing)
           //
           // Are we tired and need to rest?
           //
-          if (is_able_to_tire() && (get_stamina() < get_stamina_max() / 2)) {
-            AI_LOG("Must rest, low on stamina");
+          if (is_able_to_tire() && (get_stamina() < get_stamina_max() / 10)) {
+            AI_LOG("Needs to rest, low on stamina");
             if (is_player()) {
               game->tick_begin("Robot needs to rest, low on stamina");
             }
@@ -1826,7 +1834,7 @@ bool Thing::ai_tick(bool recursing)
         // Check for interrupts
         //
         AI_LOG("", "Check for interruptions");
-        if (ai_dmap_can_see_init(minx, miny, maxx, maxy, SEARCH_TYPE_CAN_SEE_JUMP_ALLOWED)) {
+        if (ai_dmap_can_see_init(minx, miny, maxx, maxy, SEARCH_TYPE_CAN_SEE_JUMP_ALLOWED, true)) {
           AI_LOG("Something interrupted me");
           if (is_player()) {
             game->tick_begin("Robot move interrupted by something");
@@ -2135,443 +2143,4 @@ void Thing::ai_get_next_hop(void)
   location_check();
 }
 
-int Thing::ai_choose_goal(void)
-{
-  return ai_tick();
-#if 0
-  TRACE_AND_INDENT();
-  dbg("Choose goal");
-  TRACE_AND_INDENT();
-  const float dx = (MAP_WIDTH / 6);
-  const float dy = (MAP_HEIGHT / 6);
-
-  const int minx = std::max(0, (int) (mid_at.x - dx));
-  const int maxx = std::min(MAP_WIDTH, (int) (mid_at.x + dx - 1));
-
-  const int miny = std::max(0, (int) (mid_at.y - dy));
-  const int maxy = std::min(MAP_HEIGHT, (int) (mid_at.y + dy - 1));
-
-  point start((int) mid_at.x, (int) mid_at.y);
-
-  auto dmap_can_see = get_dmap_can_see();
-  auto age_map      = get_age_map();
-
-  for (auto y = miny; y < maxy; y++) {
-    for (auto x = minx; x < maxx; x++) {
-      point p(x, y);
-      auto  X = x - minx;
-      auto  Y = y - miny;
-
-      if (ai_obstacle_for_me(p)) {
-        set(dmap_can_see->val, X, Y, DMAP_IS_WALL);
-      } else {
-        set(dmap_can_see->val, X, Y, DMAP_IS_PASSABLE);
-      }
-    }
-  }
-
-  //
-  // We want to find how far everything is from us.
-  //
-  set(dmap_can_see->val, start.x - minx, start.y - miny, DMAP_IS_GOAL);
-
-  dmap_process(dmap_can_see, point(0, 0), point(maxx - minx, maxy - miny));
-
-  //
-  // Find all the possible goals we can smell.
-  //
-  std::multiset< Goal > goals;
-
-  dbg("Choose goals (higher scores, lower costs are preferred):");
-  TRACE_AND_INDENT();
-  auto tpp = tp();
-  for (auto y = miny; y < maxy; y++) {
-    for (auto x = minx; x < maxx; x++) {
-      point p(x, y);
-      auto  X = x - minx;
-      auto  Y = y - miny;
-
-      //
-      // Too far away to sense?
-      //
-      if (get(dmap_can_see->val, X, Y) > tpp->ai_scent_distance()) {
-        set(dmap_can_see->val, X, Y, DMAP_IS_WALL);
-        continue;
-      }
-
-      bool got_a_goal    = false;
-      bool avoiding      = false;
-      int  terrain_score = get_terrain_cost(p);
-      int  total_score   = -(int) terrain_score;
-
-#define GOAL_ADD(score, msg)                                                                                           \
-  total_score += (score);                                                                                              \
-  got_a_goal = true;                                                                                                   \
-  if (last_msg.empty()) {                                                                                              \
-    last_msg = msg;                                                                                                    \
-  } else {                                                                                                             \
-    last_msg += ", ";                                                                                                  \
-    last_msg += msg;                                                                                                   \
-  }                                                                                                                    \
-  dbg2(" add goal (%d,%d) score %d %s, %s", p.x + minx, p.y + miny, score, msg, it->to_string().c_str());
-
-      std::string last_msg;
-
-      FOR_ALL_THINGS_THAT_INTERACT(level, it, p.x, p.y)
-      {
-        if (it == this) {
-          continue;
-        }
-
-        if (it->is_changing_level || it->is_hidden || it->is_falling || it->is_jumping) {
-          IF_DEBUG4
-          {
-            if (it->is_loggable()) {
-              dbg2(" ignore %s", it->to_string().c_str());
-            }
-          }
-          continue;
-        }
-
-        IF_DEBUG4
-        {
-          if (it->is_loggable()) {
-            dbg2(" consider %s", it->to_string().c_str());
-          }
-        }
-
-        //
-        // Worse terrain, less preferred. Higher score, more preferred.
-        //
-        auto my_health         = get_health();
-        auto it_health         = it->get_health();
-        auto health_diff       = it_health - my_health;
-        bool got_one_this_tile = false;
-
-        if (is_starving) {
-          if (worth_eating(it)) {
-            //
-            // If starving, prefer the thing with most health
-            //
-            GOAL_ADD(it_health, "eat-it");
-            got_one_this_tile = true;
-          }
-        } else if (is_hungry) {
-          if (worth_eating(it) && ! is_dangerous(it)) {
-            //
-            // Prefer easy food over attacking the player and prefer
-            // the player over a monster. Factor in health so we will
-            // go for the easier kill in preference.
-            //
-            if (it->is_player()) {
-              GOAL_ADD(it_health / 2, "eat-player");
-              got_one_this_tile = true;
-            } else if (it->is_alive_monst()) {
-              GOAL_ADD(it_health / 2, "eat-monst");
-              got_one_this_tile = true;
-            } else {
-              GOAL_ADD(it_health / 2, "eat-food");
-              got_one_this_tile = true;
-            }
-          }
-        }
-
-        if (! it->is_dead) {
-          bool avoid = false;
-
-          //
-          // If this is something we really want to avoid, like
-          // fire, then stay away from it
-          //
-          if (will_avoid_hazard(it)) {
-            if (distance(mid_at, it->mid_at) < 2) {
-              dbg2("Need to avoid hazard %s", it->to_string().c_str());
-              avoid = true;
-            }
-          }
-
-          //
-          // MonstInfoers we avoid are more serious threats
-          //
-          if (will_avoid_monst(it)) {
-            if (distance(mid_at, it->mid_at) < ai_avoid_distance()) {
-              dbg2("Need to avoid monst %s", it->to_string().c_str());
-              avoid = true;
-            }
-          }
-
-          if (is_enemy(it)) {
-            //
-            // The closer an enemy is (something that attacked us), the
-            // higher the score
-            //
-            float dist     = distance(it->mid_at, mid_at);
-            float max_dist = ai_scent_distance();
-
-            if (dist < max_dist) {
-              GOAL_ADD((int) (max_dist - dist) * 10, "attack-enemy");
-            }
-          }
-
-          if (avoid) {
-            dbg2("Need to avoid %s", it->to_string().c_str());
-
-            bool got_avoid = false;
-
-            auto d = ai_avoid_distance();
-            for (auto dx = -d; dx <= d; dx++) {
-              for (auto dy = -d; dy <= d; dy++) {
-
-                auto dist = distance(mid_at + fpoint(dx, dy), it->mid_at);
-                if (dist < ai_avoid_distance()) {
-                  continue;
-                }
-
-                point p(mid_at.x + dx, mid_at.y + dy);
-                if (ai_obstacle_for_me(p)) {
-                  continue;
-                }
-
-                int terrain_score = get_terrain_cost(p);
-                int total_score   = -(int) terrain_score;
-                total_score += dist * dist;
-                goals.insert(Goal(total_score, point(X + dx, Y + dy), last_msg));
-                set(dmap_can_see->val, X + dx, Y + dy, DMAP_IS_GOAL);
-                dbg2("Add avoid location offset %d,%d score %d", dx, dy, total_score);
-
-                got_avoid = true;
-              }
-            }
-
-            if (! got_avoid) {
-              for (auto dx = -d; dx <= d; dx++) {
-                for (auto dy = -d; dy <= d; dy++) {
-
-                  auto  dist = distance(mid_at + fpoint(dx, dy), it->mid_at);
-                  point p(mid_at.x + dx, mid_at.y + dy);
-                  if (ai_obstacle_for_me(p)) {
-                    continue;
-                  }
-
-                  int terrain_score = get_terrain_cost(p);
-                  int total_score   = -(int) terrain_score;
-                  total_score += dist * dist;
-                  goals.insert(Goal(total_score, point(X + dx, Y + dy), last_msg));
-                  set(dmap_can_see->val, X + dx, Y + dy, DMAP_IS_GOAL);
-                  dbg2("Add avoid location offset %d,%d score %d", dx, dy, total_score);
-
-                  got_avoid = true;
-                }
-              }
-            }
-
-            //
-            // This is an anti goal
-            //
-            if (got_avoid) {
-              avoiding = true;
-              break;
-            } else {
-              dbg2("Could not avoid the monst!");
-            }
-          }
-        }
-
-        if (! got_one_this_tile) {
-          if (possible_to_attack(it)) {
-            GOAL_ADD(-health_diff, "can-attack-monst");
-          }
-        }
-
-        if (will_prefer_terrain(it)) {
-          //
-          // Prefer certain terrains over others. i.e. I prefer water.
-          //
-          auto age = get(age_map->val, p.x, p.y);
-          if (age - game->tick_current < 10) {
-            GOAL_ADD(1, "preferred-terrain");
-          }
-        }
-      }
-      FOR_ALL_THINGS_END();
-
-      if (avoiding) {
-        set(dmap_can_see->val, X, Y, DMAP_IS_WALL);
-      } else if (got_a_goal) {
-        goals.insert(Goal(total_score, point(X, Y), last_msg));
-        set(dmap_can_see->val, X, Y, DMAP_IS_GOAL);
-      } else if (terrain_score) {
-        set(dmap_can_see->val, X, Y, (uint8_t) terrain_score);
-      } else {
-        set(dmap_can_see->val, X, Y, DMAP_IS_PASSABLE);
-      }
-    }
-  }
-
-  //
-  // No goals?
-  //
-  if (goals.empty()) {
-    dbg2("No goals found");
-    return false;
-  }
-
-#ifdef ENABLE_DEBUG_AI_VERBOSE
-  dbg2("Initial goal map derived:");
-  dmap_print(dmap_can_see, point(start.x - minx, start.y - miny), point(0, 0), point(maxx - minx, maxy - miny));
-#endif
-
-  //
-  // Find the highest/least preferred score so we can scale all the goals
-  // later so they fit in one byte (makes it easier to debug).
-  //
-  std::array< std::array< float, MAP_HEIGHT >, MAP_WIDTH > cell_totals         = {};
-  float                                                    least_preferred     = 0;
-  float                                                    most_preferred      = 0;
-  bool                                                     least_preferred_set = false;
-  bool                                                     most_preferred_set  = false;
-
-  for (auto &goal : goals) {
-    auto goal_target = goal.at;
-    incr(cell_totals, goal_target.x, goal_target.y, goal.score);
-    auto score = get(cell_totals, goal_target.x, goal_target.y);
-
-    if (least_preferred_set) {
-      least_preferred = std::min(least_preferred, score);
-    } else {
-      least_preferred     = score;
-      least_preferred_set = true;
-    }
-    if (most_preferred_set) {
-      most_preferred = std::max(most_preferred, score);
-    } else {
-      most_preferred     = score;
-      most_preferred_set = true;
-    }
-  }
-
-  dbg4("Sorted goals, %d (best) .. %d (worst)", (int) most_preferred, (int) least_preferred);
-
-  //
-  // Scale the goals so they will fit in the dmap.
-  //
-  for (auto &goal : goals) {
-    auto  goal_target = goal.at;
-    float score       = get(cell_totals, goal_target.x, goal_target.y);
-    auto  orig_score  = score;
-
-    if (most_preferred == least_preferred) {
-      score = 1;
-    } else {
-      if (least_preferred < 0) {
-        score /= most_preferred - least_preferred;
-      } else {
-        score /= most_preferred;
-      }
-      score *= DMAP_LESS_PREFERRED_TERRAIN - 2;
-      score++;
-    }
-
-    assert(score <= DMAP_LESS_PREFERRED_TERRAIN);
-    uint8_t score8 = DMAP_LESS_PREFERRED_TERRAIN - (int) score;
-    set(dmap_can_see->val, goal_target.x, goal_target.y, score8);
-
-    dbg2(" scale goal (%d,%d) %d to %d", (int) minx + goal.at.x, (int) miny + goal.at.y, (int) orig_score,
-         (int) score8);
-  }
-
-  //
-  // Record we've been here.
-  //
-  set(age_map->val, start.x, start.y, game->tick_current);
-
-  //
-  // Find the best next-hop to the best goal.
-  //
-  IF_DEBUG4
-  {
-    dbg("Goals:");
-    dmap_print(dmap_can_see, point(start.x - minx, start.y - miny), point(0, 0), point(maxx - minx, maxy - miny));
-  }
-
-  //
-  // Make sure we do not want to stay in the same position by making
-  // our current cell passable but the very least preferred it can be.
-  //
-  if (get(dmap_can_see->val, start.x - minx, start.y - miny) > 0) {
-    set(dmap_can_see->val, start.x - minx, start.y - miny, DMAP_IS_PASSABLE);
-  }
-
-  //
-  // Move diagonally if not blocked by walls
-  //
-  point astar_start(start.x - minx, start.y - miny);
-
-  //
-  // Modify the given goals with scores that indicate the cost of the
-  // path to that goal. The result should be a sorted set of goals.
-  //
-  std::multiset< Path > paths;
-  char                  path_debug = '\0'; // astart path debug
-
-  for (auto &goal : goals) {
-#ifdef ENABLE_DEBUG_AI_ASTAR
-    astar_debug = {};
-#endif
-    auto astar_end = goal.at;
-    auto result    = astar_solve(&goal, path_debug, astar_start, astar_end, dmap_can_see);
-    //
-    // Unreachable?
-    //
-    if (result.cost == std::numeric_limits< int >::max()) {
-      continue;
-    }
-
-    paths.insert(result);
-    dbg2(" goal (%d,%d) score %d -> cost %d", goal.at.x + minx, goal.at.y + miny, (int) goal.score, (int) result.cost);
-
-#ifdef ENABLE_DEBUG_AI_ASTAR
-    for (auto &p : result.path) {
-      set(astar_debug, p.x, p.y, '*');
-    }
-    auto start = point(0, 0);
-    auto end   = point(maxx - minx, maxy - miny);
-    astar_dump(dmap_can_see, goal.at, start, end);
-#endif
-  }
-
-  for (auto &result : paths) {
-    auto  hops     = result.path;
-    auto  hops_len = hops.size();
-    point best;
-
-    if (hops_len >= 2) {
-      auto hop0 = get(hops, hops_len - 1);
-      auto hop1 = get(hops, hops_len - 2);
-      if (dmap_can_i_move_diagonally(dmap_can_see, astar_start, hop0, hop1)) {
-        best = hop1;
-      } else {
-        best = hop0;
-      }
-      dbg2("Best is %d,%d with cost %d, %d hops away", best.x + minx, best.y + miny, result.cost, (int) hops_len);
-    } else if (hops_len >= 1) {
-      auto hop0 = get(hops, hops_len - 1);
-      best      = hop0;
-      dbg2("Best is %d,%d with cost %d, %d hops away", best.x + minx, best.y + miny, result.cost, (int) hops_len);
-    } else {
-      dbg2("Best is where we are, cost %d, %d hops away", result.cost, (int) hops_len);
-      best = point(mid_at.x - minx, mid_at.y - miny);
-      return false;
-    }
-
-    auto nh = point(best.x + minx, best.y + miny);
-
-    if (move_to_or_attack(nh)) {
-      dbg2("We can move to or attack or eat this next-hop");
-      return true;
-    }
-  }
-
-  return false;
-#endif
-}
+int Thing::ai_choose_goal(void) { return ai_tick(); }

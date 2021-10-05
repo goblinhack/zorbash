@@ -19,6 +19,8 @@
 
 bool Thing::path_pop_next_move(void)
 {
+  bool too_far = false;
+
   if (! monst_aip) {
     return false;
   }
@@ -115,7 +117,7 @@ bool Thing::path_pop_next_move(void)
             clear_move_path("Failed to try a long jump");
             return false;
           }
-        } else if (try_to_jump_carefully(jump_pos)) {
+        } else if (try_to_jump_carefully(jump_pos, &too_far)) {
           AI_LOG("Jumped carefully");
           if (is_player()) {
             game->tick_begin("Jumped carefully");
@@ -128,6 +130,13 @@ bool Thing::path_pop_next_move(void)
           //
           AI_LOG("Failed to jump");
           clear_move_path("Failed to jump");
+          if (is_player() && game->robot_mode) {
+            if (too_far) {
+              ai_change_state(MONST_STATE_RESTING, "need to rest, failed to jump");
+              game->tick_begin("Failed to jump");
+              return false;
+            }
+          }
           return false;
         }
       } else {

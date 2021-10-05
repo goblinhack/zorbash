@@ -28,7 +28,14 @@ float Thing::how_far_i_can_jump(void)
   return d;
 }
 
-bool Thing::try_to_jump(point to, bool be_careful)
+float Thing::how_far_i_can_jump_max(void)
+{
+  TRACE_AND_INDENT();
+  auto d = (float) ai_is_able_to_jump_distance() + 1;
+  return d;
+}
+
+bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
 {
   TRACE_AND_INDENT();
   if (is_changing_level || is_hidden || is_falling || is_waiting_to_ascend_dungeon || is_waiting_to_descend_sewer ||
@@ -105,6 +112,9 @@ bool Thing::try_to_jump(point to, bool be_careful)
     if (be_careful) {
       if (is_player() && game->robot_mode) {
         CON("Robot: Cannot jump as far as it would like");
+      }
+      if (too_far) {
+        *too_far = true;
       }
       return false;
     }
@@ -285,16 +295,28 @@ bool Thing::try_to_jump(point to, bool be_careful)
   return true;
 }
 
+bool Thing::try_to_jump_carefully(point p, bool *too_far)
+{
+  TRACE_AND_INDENT();
+  return try_to_jump(p, true, too_far);
+}
+
+bool Thing::try_to_jump_carefree(point p, bool *too_far)
+{
+  TRACE_AND_INDENT();
+  return try_to_jump(p, false, too_far);
+}
+
 bool Thing::try_to_jump_carefully(point p)
 {
   TRACE_AND_INDENT();
-  return try_to_jump(p, true);
+  return try_to_jump(p, true, nullptr);
 }
 
 bool Thing::try_to_jump_carefree(point p)
 {
   TRACE_AND_INDENT();
-  return try_to_jump(p, false);
+  return try_to_jump(p, false, nullptr);
 }
 
 bool Thing::try_to_jump(void)

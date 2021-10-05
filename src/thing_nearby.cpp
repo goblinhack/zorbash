@@ -91,10 +91,6 @@ Thingp Thing::most_dangerous_visible_thing_get(void)
   for (auto dx = -d; dx <= d; dx++) {
     for (auto dy = -d; dy <= d; dy++) {
       point o(mid_at.x + dx, mid_at.y + dy);
-      if (! dx && ! dy) {
-        continue;
-      }
-
       if (level->is_oob(o)) {
         continue;
       }
@@ -118,6 +114,14 @@ Thingp Thing::most_dangerous_visible_thing_get(void)
         }
 
         auto score = t->get_health();
+
+        //
+        // If we're being engulfed, this is a serious threat!
+        //
+        if (t->mid_at == mid_at) {
+          score += 100;
+        }
+
         if (will_avoid_monst(o)) {
           score += t->get_health_max();
         }
