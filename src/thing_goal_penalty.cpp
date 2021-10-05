@@ -26,8 +26,8 @@ int Thing::get_goal_penalty(Thingp attacker) const
     return 0;
   }
 
-  auto f = monst_aip->avoid.find(attacker->id);
-  if (f == monst_aip->avoid.end()) {
+  auto f = monst_aip->goal_penalty.find(attacker->id);
+  if (f == monst_aip->goal_penalty.end()) {
     return 0;
   }
 
@@ -85,10 +85,10 @@ void Thing::add_goal_penalty(Thingp attacker)
     } else {
       dbg("Add new goal penalty %s", attacker->to_string().c_str());
     }
-    monst_aip->goal_penalty[ attacker->id ] += 2;
+    monst_aip->goal_penalty[ attacker->id ] += 1;
   } else {
     dbg("Increment old goal penalty %s", attacker->to_string().c_str());
-    monst_aip->goal_penalty[ attacker->id ] += 2;
+    monst_aip->goal_penalty[ attacker->id ] += 1;
 
     if (monst_aip->goal_penalty[ attacker->id ] > THING_MAX_GOAL_PENALTY) {
       monst_aip->goal_penalty[ attacker->id ] = THING_MAX_GOAL_PENALTY;

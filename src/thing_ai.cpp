@@ -892,22 +892,21 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
                 // Low on health. Best to avoid this enemy.
                 //
                 if (cannot_avoid(it)) {
-                  SCORE_ADD((int) (max_dist - dist) * 200 - goal_penalty, "attack-enemy-i-cannot-avoid");
+                  SCORE_ADD((int) (max_dist - dist) * 20 - goal_penalty, "attack-enemy-i-cannot-avoid");
                   add_goal_penalty(it);
                   AI_LOG("Cannot avoid enemy", it);
                 } else {
                   avoid = true;
-                  SCORE_ADD(-(int) ((max_dist - dist) + it_health) * 200 - goal_penalty, "avoid-enemy");
+                  SCORE_ADD(-(int) ((max_dist - dist) + it_health) * 20 - goal_penalty, "avoid-enemy");
                   add_goal_penalty(it);
                 }
                 got_one_this_tile = true;
               } else {
                 //
-                // The closer an enemy is (something that attacked us), the
-                // higher the score
+                // The closer an enemy is (something that attacked us), the higher the score
                 //
                 avoid = false;
-                SCORE_ADD((int) (max_dist - dist) * 200 - goal_penalty, "attack-enemy");
+                SCORE_ADD((int) (max_dist - dist) * 20 - goal_penalty, "attack-enemy");
                 add_goal_penalty(it);
                 got_one_this_tile = true;
               }
@@ -916,19 +915,19 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
               // Monsts we avoid are more serious threats
               //
               if (cannot_avoid(it)) {
-                SCORE_ADD((int) (max_dist - dist) * 100 - goal_penalty, "attack-monst-i-cannot-avoid");
+                SCORE_ADD((int) (max_dist - dist) * 10 - goal_penalty, "attack-monst-i-cannot-avoid");
                 add_goal_penalty(it);
                 AI_LOG("Cannot avoid monst", it);
               } else {
                 avoid = true;
-                SCORE_ADD(-(int) ((max_dist - dist) + it_health) * 200 - goal_penalty, "avoid-monst");
+                SCORE_ADD(-(int) ((max_dist - dist) + it_health) * 20 - goal_penalty, "avoid-monst");
                 add_goal_penalty(it);
               }
             } else if (! avoid && ai_is_able_to_attack_generators() && it->is_minion_generator()) {
               //
               // Very close, high priority attack
               //
-              SCORE_ADD((int) (max_dist - dist) * 1000 - goal_penalty, "attack-nearby-generator");
+              SCORE_ADD((int) (max_dist - dist) * 10 - goal_penalty, "attack-nearby-generator");
               add_goal_penalty(it);
               got_one_this_tile = true;
             } else if (! avoid && possible_to_attack(it) && ! will_avoid_hazard(it)) {
@@ -941,7 +940,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
                 //
                 // Very close, high priority attack
                 //
-                SCORE_ADD((int) (max_dist - dist) * 100 - goal_penalty, "attack-nearby-monst");
+                SCORE_ADD((int) (max_dist - dist) * 10 - goal_penalty, "attack-nearby-monst");
                 add_goal_penalty(it);
                 got_one_this_tile = true;
               } else if (dist < max_dist) {
