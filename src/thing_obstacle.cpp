@@ -152,7 +152,10 @@ bool Thing::collision_obstacle(Thingp it)
       }
     }
 
-    if (is_hated_by_me(it)) {
+    //
+    // So we wont walk into fire for example
+    //
+    if (is_disliked_by_me(it)) {
       return true;
     }
 
@@ -201,7 +204,7 @@ bool Thing::ai_obstacle(Thingp it)
   //
   // Lava, acid etc...
   //
-  if (is_hated_by_me(make_point(it->mid_at))) {
+  if (is_disliked_by_me(make_point(it->mid_at))) {
     return true;
   }
 

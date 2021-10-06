@@ -432,7 +432,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
       }
 
       if (jump_allowed) {
-        if (is_hated_by_me(p)) {
+        if (is_disliked_by_me(p)) {
           set(dmap_can_see->val, x, y, DMAP_IS_PASSABLE);
         }
       }
@@ -444,7 +444,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
         //
         // Trace all possible jump paths to see if we can jump over
         //
-        if (is_hated_by_me(p) || ai_obstacle_for_me(p)) {
+        if (is_disliked_by_me(p) || ai_obstacle_for_me(p)) {
           auto jump_dist = how_far_i_can_jump_max();
           for (const auto &jp : game->jump_paths) {
             point jump_begin(p.x + jp.begin.x, p.y + jp.begin.y);
@@ -461,11 +461,11 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
             //
             // No jump begin/end from a chasm or barrel for example
             //
-            if (is_hated_by_me(jump_begin) || ai_obstacle_for_me(jump_begin)) {
+            if (is_disliked_by_me(jump_begin) || ai_obstacle_for_me(jump_begin)) {
               continue;
             }
 
-            if (is_hated_by_me(jump_end) || ai_obstacle_for_me(jump_end)) {
+            if (is_disliked_by_me(jump_end) || ai_obstacle_for_me(jump_end)) {
               continue;
             }
 

@@ -70,7 +70,7 @@ bool Thing::path_pop_next_move(void)
   // Jump over obstacles if they appear in the path
   //
   if (ai_is_able_to_jump() && (is_monst() || (is_player() && game->robot_mode))) {
-    if (is_hated_by_me(future_pos) || level->is_barrel(future_pos)) {
+    if (is_disliked_by_me(future_pos) || level->is_barrel(future_pos)) {
       IF_DEBUG3
       {
         auto s = string_sprintf("Next position %d,%d is a hazard", (int) future_pos.x, (int) future_pos.y);
@@ -92,11 +92,11 @@ bool Thing::path_pop_next_move(void)
         }
 
         TRACE_AND_INDENT();
-        if (is_hated_by_me(jump_pos) && monst_aip->move_path.size()) {
+        if (is_disliked_by_me(jump_pos) && monst_aip->move_path.size()) {
           auto jump_pos = monst_aip->move_path[ 0 ];
           monst_aip->move_path.erase(monst_aip->move_path.begin());
 
-          if (is_hated_by_me(jump_pos)) {
+          if (is_disliked_by_me(jump_pos)) {
             //
             // Give up. Don't bump the tick. This allows the monst to try an alternative path.
             //
@@ -219,7 +219,7 @@ bool Thing::path_pop_next_move(void)
     // Make sure and check for hazard after the monst, as the monst
     // could be floating over lava or a chasm
     //
-    if (is_hated_by_me(future_pos)) {
+    if (is_disliked_by_me(future_pos)) {
       IF_DEBUG3
       {
         auto s = string_sprintf("Cannot pass hazard at %s", future_pos.to_string().c_str());
