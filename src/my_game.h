@@ -224,14 +224,14 @@ public:
   std::string tick_requested {}; // Something has requested a game tick
   std::string seed_name {};      // Human readable version of the above
   point3d     current_level;     // Where we are in the world.
+  uint16_t    frame_count {0}; // Used to know if things have been displayed
   uint32_t    fps_value = {};    // Current framerate
-  uint32_t    inventory_highlight_slot {};
-  uint32_t    previous_slot {};
-  uint32_t    robot_mode {};
-  uint32_t    skillbox_highlight_slot {};
   uint32_t    tick_completed {1};
   uint32_t    tick_current {1};
-  uint16_t    frame_count {0}; // Used to know if things have been displayed
+  uint8_t     inventory_highlight_slot {};
+  uint8_t     previous_slot {};
+  uint8_t     robot_mode {};
+  uint8_t     skillbox_highlight_slot {};
 
   /////////////////////////////////////////////////////////////////////////
   // not worth saving

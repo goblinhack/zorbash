@@ -40,6 +40,7 @@ extern bool        g_opt_debug5;               // As above but include out of bo
 extern bool        g_opt_override_debug_level; // Temporary, used to disable existing debugs
 extern bool        g_opt_fast_start;           // Do not flush after each console log at start
 extern bool        g_opt_new_game;             // Start in the game imediately
+extern bool        g_opt_resume;               // Load last snapshot
 extern bool        g_quitting;                 // Exitting the game
 extern bool        g_render_black_and_white;   // Rendering map in black and white
 extern std::string g_opt_seed_name;

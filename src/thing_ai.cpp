@@ -596,6 +596,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
                   set(monst_aip->interrupt_map.val, o.x, o.y, game->tick_current);
                   if (check_for_interrupts) {
                     something_changed++;
+                    // con("INTERRUPT %s", it->to_string().c_str());
                   }
                 }
               }
@@ -677,6 +678,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
           if (! seen_when) {
             something_changed++;
             set(seen_map->val, x, y, game->tick_current);
+            // con("INTERRUPT1 %d,%d", x, y);
           }
         } else if (dmap_score == DMAP_IS_WALL) {
           //
@@ -684,6 +686,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
           //
           if (seen_when) {
             something_changed++;
+            // con("INTERRUPT2 %d,%d", x, y);
             set(seen_map->val, x, y, 0U);
           }
         }
@@ -698,10 +701,14 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
 
   dmap_process(dmap_can_see, point(minx, miny), point(maxx, maxy));
 
-  auto threat = most_dangerous_visible_thing_get();
-  if (threat) {
-    if (threat && (is_dangerous(threat) || is_enemy(threat) || is_to_be_avoided(threat))) {
-      something_changed = true;
+  if (check_for_interrupts) {
+    auto threat = most_dangerous_visible_thing_get();
+    if (threat) {
+      if (threat && (is_dangerous(threat) || is_enemy(threat) || is_to_be_avoided(threat))) {
+        if (! get_goal_penalty(threat)) {
+          something_changed = true;
+        }
+      }
     }
   }
 
@@ -872,8 +879,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
           float max_dist = ai_scent_distance();
 
           //
-          // If this is something we really want to avoid, like
-          // fire, then stay away from it
+          // If this is something we really want to avoid, like fire, then stay away from it
           //
           if (will_avoid_hazard(it)) {
             if (dist == 1) {

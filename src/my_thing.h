@@ -312,6 +312,7 @@ public:
   bool is_to_be_avoided(Thingp attacker) const;
   bool cannot_avoid(Thingp attacker) const;
   int get_goal_penalty(Thingp attacker) const;
+  void reset_goal_penalty(Thingp attacker) const;
   bool is_on_fire(void) const;
   bool laser_anim_exists(void);
   bool laser_choose_target(Thingp item);

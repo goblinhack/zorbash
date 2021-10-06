@@ -735,14 +735,14 @@ std::ostream &operator<<(std::ostream &out, Bits< const class Game & > const my)
   /* std::string        seed_name                    */ out << bits(my.t.seed_name);
   /* std::string        tick_requested               */ out << bits(my.t.tick_requested);
   /* point3d            current_level                */ out << bits(my.t.current_level);
+  /* uint16_t           frame_count                  */ out << bits(my.t.frame_count);
   /* uint32_t           fps_value                    */ out << bits(my.t.fps_value);
-  /* uint32_t           inventory_highlight_slot     */ out << bits(my.t.inventory_highlight_slot);
-  /* uint32_t           previous_slot                */ out << bits(my.t.previous_slot);
-  /* uint32_t           robot_mode                   */ out << bits(my.t.robot_mode);
-  /* uint32_t           skillbox_highlight_slot      */ out << bits(my.t.skillbox_highlight_slot);
   /* uint32_t           tick_completed               */ out << bits(my.t.tick_completed);
   /* uint32_t           tick_current                 */ out << bits(my.t.tick_current);
-  /* uint16_t           frame_count                  */ out << bits(my.t.frame_count);
+  /* uint8_t            inventory_highlight_slot     */ out << bits(my.t.inventory_highlight_slot);
+  /* uint8_t            previous_slot                */ out << bits(my.t.previous_slot);
+  /* uint8_t            robot_mode                   */ out << bits(false);
+  /* uint8_t            skillbox_highlight_slot      */ out << bits(my.t.skillbox_highlight_slot);
 
   out << bits(wid_topcon_serialize());
   out << bits(wid_console_serialize());

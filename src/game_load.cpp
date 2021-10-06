@@ -876,14 +876,14 @@ std::istream &operator>>(std::istream &in, Bits< class Game & > my)
   /* std::string        seed_name                    */ in >> bits(my.t.seed_name);
   /* std::string        tick_requested               */ in >> bits(my.t.tick_requested);
   /* point3d            current_level                */ in >> bits(my.t.current_level);
+  /* uint16_t           frame_count                  */ in >> bits(my.t.frame_count);
   /* uint32_t           fps_value                    */ in >> bits(my.t.fps_value);
-  /* uint32_t           inventory_highlight_slot     */ in >> bits(my.t.inventory_highlight_slot);
-  /* uint32_t           previous_slot                */ in >> bits(my.t.previous_slot);
-  /* uint32_t           robot_mode                   */ in >> bits(my.t.robot_mode);
-  /* uint32_t           skillbox_highlight_slot      */ in >> bits(my.t.skillbox_highlight_slot);
   /* uint32_t           tick_completed               */ in >> bits(my.t.tick_completed);
   /* uint32_t           tick_current                 */ in >> bits(my.t.tick_current);
-  /* uint16_t           frame_count                  */ in >> bits(my.t.frame_count);
+  /* uint8_t            inventory_highlight_slot     */ in >> bits(my.t.inventory_highlight_slot);
+  /* uint8_t            previous_slot                */ in >> bits(my.t.previous_slot);
+  /* uint8_t            robot_mode                   */ in >> bits(my.t.robot_mode);
+  /* uint8_t            skillbox_highlight_slot      */ in >> bits(my.t.skillbox_highlight_slot);
 
   std::vector< std::wstring > s;
   in >> bits(s);

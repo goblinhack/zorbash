@@ -460,15 +460,16 @@ static void usage(void)
 
   CON("zorbash, options:");
   CON(" ");
-  CON(" --quick-start");
-  CON(" --player-name 'disco bob'");
-  CON(" --debug                     // basic debug");
-  CON(" --debug2                    // as above but includes log indentation and more detailed debugs");
-  CON(" --debug3                    // as above but show the entire level");
-  CON(" --debug4                    // as above but include memory checks");
-  CON(" --debug5                    // as above but include out of bounds checks");
-  CON(" --no-debug                  // disable debug");
-  CON(" --seed <name/number>");
+  CON(" --player-name 'disco bob'   // Set your name");
+  CON(" --quick-start               // Skip menus, start the game");
+  CON(" --resume                    // Load last snapshot");
+  CON(" --debug                     // Basic debug");
+  CON(" --debug2                    // As above but includes log indentation and more detailed debugs");
+  CON(" --debug3                    // As above but show the entire level");
+  CON(" --debug4                    // As above but include memory checks");
+  CON(" --debug5                    // As above but include out of bounds checks");
+  CON(" --no-debug                  // Disable debug");
+  CON(" --seed <name/number>        // Set the random dungeon seed");
   CON(" ");
   CON("Written by goblinhack@gmail.com");
 }
@@ -494,6 +495,11 @@ static void parse_args(int32_t argc, char *argv[])
     if (! strcasecmp(argv[ i ], "--quick-start") || ! strcasecmp(argv[ i ], "-quick-start") ||
         ! strcasecmp(argv[ i ], "--quickstart") || ! strcasecmp(argv[ i ], "-quickstart")) {
       g_opt_new_game = true;
+      continue;
+    }
+
+    if (! strcasecmp(argv[ i ], "--resume") || ! strcasecmp(argv[ i ], "-resume")) {
+      g_opt_resume = true;
       continue;
     }
 
@@ -877,6 +883,11 @@ int32_t main(int32_t argc, char *argv[])
   } else {
     CON("INI: Game menu");
     game->main_menu_select();
+  }
+
+  if (g_opt_resume) {
+    CON("INI: Load last snapshot");
+    game->load_snapshot();
   }
 
   sdl_flush_display();

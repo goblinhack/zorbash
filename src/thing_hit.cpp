@@ -302,6 +302,8 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     }
   }
 
+  real_hitter->reset_goal_penalty(this);
+
   if (is_player()) {
     if (damage > THING_DAMAGE_SHAKE_ABOVE) {
       level->set_wobble(damage / THING_DAMAGE_SHAKE_SCALE);

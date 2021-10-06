@@ -378,7 +378,7 @@ void Thing::avoid_tick(void)
 
     if (--p.second > 0) {
       if (is_player() && game->robot_mode) {
-        CON("Robot: Avoid: %s (%d timeout)", attacker->to_string().c_str(), p.second);
+        CON("Robot: Avoid: %s (%d count)", attacker->to_string().c_str(), p.second);
       }
       continue;
     }
@@ -394,13 +394,8 @@ void Thing::avoid_tick(void)
       return;
     }
 
-    //
-    // Avoid bit longer
-    //
-    if (is_player() && game->robot_mode) {
-      CON("Robot: Avoid a bit longer: %s", attacker->to_string().c_str());
-    }
-    p.second = pcg_random_range(0, 10);
+    monst_aip->avoid.erase(p.first);
+    return;
   }
 }
 

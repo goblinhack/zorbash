@@ -34,6 +34,21 @@ int Thing::get_goal_penalty(Thingp attacker) const
   return f->second * 10;
 }
 
+void Thing::reset_goal_penalty(Thingp attacker) const
+{
+  TRACE_AND_INDENT();
+  if (unlikely(! monst_aip)) {
+    return;
+  }
+
+  auto f = monst_aip->goal_penalty.find(attacker->id);
+  if (f == monst_aip->goal_penalty.end()) {
+    return;
+  }
+
+  f->second = 0;
+}
+
 //
 // Timeout goal penalty so we don't resent them forever.
 //
