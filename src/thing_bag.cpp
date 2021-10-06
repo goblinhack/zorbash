@@ -188,7 +188,6 @@ bool Thing::bag_compress(void)
   auto did_something = false;
 
   dbg3("Bag: Try to compress");
-
   bag_debug = false;
 
   for (auto x = 0; x < bw; x++) {

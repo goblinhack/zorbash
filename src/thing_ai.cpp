@@ -1883,6 +1883,21 @@ bool Thing::ai_tick(bool recursing)
         }
 
         //
+        // Compress the bag?
+        //
+        if (is_player()) {
+          if (bag_compress()) {
+            while (bag_compress()) {
+            }
+            AI_LOG("Repack inventory.");
+            if (is_player()) {
+              game->tick_begin("repacked bag");
+              return true;
+            }
+          }
+        }
+
+        //
         // What is the point of it all?
         //
         AI_LOG("Nothing to do at all.");
@@ -2013,9 +2028,11 @@ bool Thing::ai_tick(bool recursing)
         //
         // Then close it. This is really just visual feedback.
         //
-        ai_change_state(MONST_STATE_IDLE, "close inventory");
         if (is_player()) {
+          ai_change_state(MONST_STATE_REPACK_INVENTORY, "close inventory");
           game->tick_begin("Robot finished collecting");
+        } else {
+          ai_change_state(MONST_STATE_IDLE, "close inventory");
         }
       }
       break;
@@ -2026,9 +2043,11 @@ bool Thing::ai_tick(bool recursing)
         // Enchant a random item.
         //
         enchant_random_item();
-        ai_change_state(MONST_STATE_IDLE, "enchanted");
         if (is_player()) {
+          ai_change_state(MONST_STATE_REPACK_INVENTORY, "enchanted");
           game->tick_begin("Robot finished enchanting");
+        } else {
+          ai_change_state(MONST_STATE_IDLE, "enchanted");
         }
       }
       break;
@@ -2039,10 +2058,32 @@ bool Thing::ai_tick(bool recursing)
         // Choose a skill
         //
         learn_random_skill();
-        ai_change_state(MONST_STATE_IDLE, "added skill");
         if (is_player()) {
+          ai_change_state(MONST_STATE_REPACK_INVENTORY, "added skill");
           game->tick_begin("Robot finished adding skills");
+        } else {
+          ai_change_state(MONST_STATE_IDLE, "added skill");
         }
+      }
+      break;
+
+    case MONST_STATE_REPACK_INVENTORY :
+      {
+        //
+        // Compress the bag?
+        //
+        if (is_player()) {
+          if (bag_compress()) {
+            while (bag_compress()) {
+            }
+            AI_LOG("Repacked inventory.");
+            if (is_player()) {
+              game->tick_begin("repacked bag");
+              return true;
+            }
+          }
+        }
+        ai_change_state(MONST_STATE_IDLE, "finished repacking");
       }
       break;
   }
@@ -2074,12 +2115,14 @@ void Thing::ai_change_state(int new_state, const std::string &why)
     case MONST_STATE_OPEN_INVENTORY : to = "OPEN-INVENTORY"; break;
     case MONST_STATE_USING_ENCHANTSTONE : to = "USING-ENCHANTSTONE"; break;
     case MONST_STATE_USING_SKILLSTONE : to = "USING-SKILLSTONE"; break;
+    case MONST_STATE_REPACK_INVENTORY : to = "REPACK"; break;
   }
 
   switch (monst_infop->monst_state) {
     case MONST_STATE_IDLE : from = "IDLE"; break;
     case MONST_STATE_MOVING : from = "MOVING"; break;
     case MONST_STATE_RESTING : from = "RESTING"; break;
+    case MONST_STATE_REPACK_INVENTORY : from = "REPACK"; break;
     case MONST_STATE_OPEN_INVENTORY :
       from = "OPEN-INVENTORY";
       if (is_player()) {
@@ -2116,6 +2159,7 @@ void Thing::ai_change_state(int new_state, const std::string &why)
     case MONST_STATE_IDLE : clear_move_path("State is now idle"); break;
     case MONST_STATE_MOVING : break;
     case MONST_STATE_RESTING : break;
+    case MONST_STATE_REPACK_INVENTORY : break;
     case MONST_STATE_OPEN_INVENTORY :
       if (is_player()) {
         game->change_state(Game::STATE_MOVING_ITEMS);
