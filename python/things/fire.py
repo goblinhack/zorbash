@@ -18,7 +18,7 @@ def tp_init(name, text_name):
     mytp.set_gfx_oversized_and_on_floor(True)
     mytp.set_gfx_short_shadow_caster(True)
     mytp.set_gfx_show_outlined(True)
-    mytp.set_hates_water(100)
+    mytp.set_environ_dislikes_water(100)
     mytp.set_health_initial_dice("10")
     mytp.set_is_able_to_fall(True)
     mytp.set_is_tickable(True)

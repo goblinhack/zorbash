@@ -38,7 +38,7 @@ point Thing::get_random_scent_target(void)
     auto x = std::min(std::max(MAP_BORDER_ROCK, start.x + dx), MAP_WIDTH - MAP_BORDER_ROCK);
     auto y = std::min(std::max(MAP_BORDER_ROCK, start.y + dy), MAP_HEIGHT - MAP_BORDER_ROCK);
 
-    if (level->is_hazard(x, y) || level->is_rock(x, y) || level->is_wall(x, y)) {
+    if (level->is_rock(x, y) || level->is_wall(x, y)) {
       continue;
     }
 
@@ -75,7 +75,7 @@ point Thing::get_random_scent_target(void)
     auto x = std::min(std::max(MAP_BORDER_ROCK, start.x + dx), MAP_WIDTH - MAP_BORDER_ROCK);
     auto y = std::min(std::max(MAP_BORDER_ROCK, start.y + dy), MAP_HEIGHT - MAP_BORDER_ROCK);
 
-    if (level->is_hazard(x, y) || level->is_rock(x, y) || level->is_wall(x, y)) {
+    if (level->is_rock(x, y) || level->is_wall(x, y)) {
       continue;
     }
 

@@ -31,6 +31,22 @@ void tp_fixup(void)
       tp->set_is_combustible(true);
     }
 
+    if (tp->environ_hates_fire()) {
+      tp->set_environ_dislikes_fire(true);
+    }
+
+    if (tp->environ_hates_water()) {
+      tp->set_environ_dislikes_water(true);
+    }
+
+    if (tp->environ_hates_poison()) {
+      tp->set_environ_dislikes_poison(true);
+    }
+
+    if (tp->environ_hates_acid()) {
+      tp->set_environ_dislikes_acid(true);
+    }
+
     if (tp->is_able_to_fire_at()) {
       if (! tp->ai_vision_distance()) {
         DIE("Tp %s needs vision distance if it is able to fire at things", tp->name().c_str());

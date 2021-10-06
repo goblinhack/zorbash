@@ -124,7 +124,7 @@ void Level::cursor_path_draw_line(point start, point end)
   //
   // Set up obstacles for the search
   //
-  if (is_extreme_hazard(player->mid_at.x, player->mid_at.y)) {
+  if (is_cursor_path_hazard_for_player(player->mid_at.x, player->mid_at.y)) {
     //
     // Just map the shortest path outta here
     //
@@ -137,7 +137,7 @@ void Level::cursor_path_draw_line(point start, point end)
         }
       }
     }
-  } else if (cursor && is_extreme_hazard(cursor->mid_at.x, cursor->mid_at.y)) {
+  } else if (cursor && is_cursor_path_hazard_for_player(cursor->mid_at.x, cursor->mid_at.y)) {
     //
     // If the cursor is on a hazard we can plot a course via hazards.
     //
@@ -156,7 +156,7 @@ void Level::cursor_path_draw_line(point start, point end)
     //
     for (auto y = miny; y < maxy; y++) {
       for (auto x = minx; x < maxx; x++) {
-        if (is_extreme_hazard(x, y) || is_obs_wall_or_door(x, y)) {
+        if (is_cursor_path_hazard_for_player(x, y) || is_obs_wall_or_door(x, y)) {
           set(d.val, x, y, DMAP_IS_WALL);
         } else {
           set(d.val, x, y, DMAP_IS_PASSABLE);
@@ -169,7 +169,7 @@ void Level::cursor_path_draw_line(point start, point end)
     //
     for (auto y = miny; y < maxy; y++) {
       for (auto x = minx; x < maxx; x++) {
-        if (is_extreme_hazard(x, y) || player->ai_obstacle_for_me(make_point(x, y)) ||
+        if (is_cursor_path_hazard_for_player(x, y) || player->ai_obstacle_for_me(make_point(x, y)) ||
             player->collision_obstacle(point(x, y))) {
           set(d.val, x, y, DMAP_IS_WALL);
         } else {

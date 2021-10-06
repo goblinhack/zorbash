@@ -16,7 +16,7 @@ def lava_init(name, text_name, tiles=[]):
     mytp.set_is_able_to_fall(True)
     mytp.set_is_cursor_can_hover_over_x2_click(True)
     mytp.set_is_described_when_hovering_over(True)
-    mytp.set_is_extreme_hazard(True)
+    mytp.set_is_cursor_path_hazard_for_player(True)
     mytp.set_is_hazard(True)
     mytp.set_is_lava(True)
     mytp.set_is_loggable(False)

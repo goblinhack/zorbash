@@ -323,7 +323,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   shift++;
   /* uint64_t */ bits64 |= (my.t->i_set_is_enchantstone ? 1LLU : 0LLU) << shift;
   shift++;
-  /* uint64_t */ bits64 |= (my.t->i_set_is_extreme_hazard ? 1LLU : 0LLU) << shift;
+  /* uint64_t */ bits64 |= (my.t->i_set_is_cursor_path_hazard_for_player ? 1LLU : 0LLU) << shift;
   shift++;
   /* uint64_t */ bits64 |= (my.t->i_set_is_fire ? 1LLU : 0LLU) << shift;
   shift++;
@@ -478,7 +478,8 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   /* array<array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_door {};             */ out << bits(my.t->_is_door);
   /* array<array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_dry_grass {};        */ out << bits(my.t->_is_dry_grass);
   /* array<array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_enchantstone {};     */ out << bits(my.t->_is_enchantstone);
-  /* array<array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_extreme_hazard {};   */ out << bits(my.t->_is_extreme_hazard);
+  /* array<array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_cursor_path_hazard_for_player {};   */ out
+      << bits(my.t->_is_cursor_path_hazard_for_player);
   /* array<array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_fire {};             */ out << bits(my.t->_is_fire);
   /* array<array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_floor {};            */ out << bits(my.t->_is_floor);
   /* array<array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_foilage {};          */ out << bits(my.t->_is_foilage);

@@ -52,7 +52,7 @@ public:
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_door {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_dry_grass {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_enchantstone {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_extreme_hazard {};
+  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_cursor_path_hazard_for_player {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_fire {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_floor {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_foilage {};
@@ -589,8 +589,8 @@ public:
   uint8_t              is_dry_grass(const point &p);
   uint8_t              is_enchantstone(const int x, const int y);
   uint8_t              is_enchantstone(const point &p);
-  uint8_t              is_extreme_hazard(const int x, const int y);
-  uint8_t              is_extreme_hazard(const point &p);
+  uint8_t              is_cursor_path_hazard_for_player(const int x, const int y);
+  uint8_t              is_cursor_path_hazard_for_player(const point &p);
   uint8_t              is_fire(const int x, const int y);
   uint8_t              is_fire(const point &p);
   uint8_t              is_floor(const int x, const int y);
@@ -786,7 +786,7 @@ public:
   void set_is_door(const int x, const int y);
   void set_is_dry_grass(const int x, const int y);
   void set_is_enchantstone(const int x, const int y);
-  void set_is_extreme_hazard(const int x, const int y);
+  void set_is_cursor_path_hazard_for_player(const int x, const int y);
   void set_is_fire(const int x, const int y);
   void set_is_floor(const int x, const int y);
   void set_is_foilage(const int x, const int y);
@@ -853,7 +853,7 @@ public:
   void unset_is_door(const int x, const int y);
   void unset_is_dry_grass(const int x, const int y);
   void unset_is_enchantstone(const int x, const int y);
-  void unset_is_extreme_hazard(const int x, const int y);
+  void unset_is_cursor_path_hazard_for_player(const int x, const int y);
   void unset_is_fire(const int x, const int y);
   void unset_is_floor(const int x, const int y);
   void unset_is_foilage(const int x, const int y);

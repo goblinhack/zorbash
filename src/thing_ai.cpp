@@ -432,7 +432,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
       }
 
       if (jump_allowed) {
-        if (is_hazardous_to_me(p)) {
+        if (is_hated_by_me(p)) {
           set(dmap_can_see->val, x, y, DMAP_IS_PASSABLE);
         }
       }
@@ -444,7 +444,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
         //
         // Trace all possible jump paths to see if we can jump over
         //
-        if (is_hazardous_to_me(p) || ai_obstacle_for_me(p)) {
+        if (is_hated_by_me(p) || ai_obstacle_for_me(p)) {
           auto jump_dist = how_far_i_can_jump_max();
           for (const auto &jp : game->jump_paths) {
             point jump_begin(p.x + jp.begin.x, p.y + jp.begin.y);
@@ -461,11 +461,11 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
             //
             // No jump begin/end from a chasm or barrel for example
             //
-            if (is_hazardous_to_me(jump_begin) || ai_obstacle_for_me(jump_begin)) {
+            if (is_hated_by_me(jump_begin) || ai_obstacle_for_me(jump_begin)) {
               continue;
             }
 
-            if (is_hazardous_to_me(jump_end) || ai_obstacle_for_me(jump_end)) {
+            if (is_hated_by_me(jump_end) || ai_obstacle_for_me(jump_end)) {
               continue;
             }
 
@@ -792,10 +792,10 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
         //
         // Worse terrain, less preferred. Higher score, more preferred.
         //
-        auto my_health         = get_health();
-        auto it_health         = it->get_health();
-        auto health_diff       = it_health - my_health;
-        bool got_one_this_tile = false;
+        auto my_health        = get_health();
+        auto it_health        = it->get_health();
+        auto health_diff      = it_health - my_health;
+        bool found_a_sub_goal = false;
 
         //
         // Don't allow of attacking monsts from memory if the player or
@@ -810,7 +810,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
             //
             SCORE_ADD(it_health - goal_penalty, "eat-it");
             add_goal_penalty(it);
-            got_one_this_tile = true;
+            found_a_sub_goal = true;
           }
         } else if (is_hungry) {
           if (worth_eating(it) && ! is_dangerous(it)) {
@@ -822,15 +822,15 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
             if (it->is_player()) {
               SCORE_ADD(it_health / 2 - goal_penalty, "eat-player");
               add_goal_penalty(it);
-              got_one_this_tile = true;
+              found_a_sub_goal = true;
             } else if (it->is_alive_monst()) {
               SCORE_ADD(it_health / 2 - goal_penalty, "eat-monst");
               add_goal_penalty(it);
-              got_one_this_tile = true;
+              found_a_sub_goal = true;
             } else {
               SCORE_ADD(it_health / 2 - goal_penalty, "eat-food");
               add_goal_penalty(it);
-              got_one_this_tile = true;
+              found_a_sub_goal = true;
             }
           }
         }
@@ -841,7 +841,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
             if (score > 0) {
               SCORE_ADD(score - goal_penalty, "collect");
               add_goal_penalty(it);
-              got_one_this_tile = true;
+              found_a_sub_goal = true;
               AI_LOG("", "Is considering collecting", it);
             } else {
               AI_LOG("", "Is not considering collecting", it);
@@ -856,7 +856,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
           if (ai_is_able_to_collect_keys()) {
             SCORE_ADD(1000 - goal_penalty, "collect-key");
             add_goal_penalty(it);
-            got_one_this_tile = true;
+            found_a_sub_goal = true;
           }
         }
 
@@ -869,7 +869,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
               SCORE_ADD(100 - goal_penalty, "open-door");
               add_goal_penalty(it);
             }
-            got_one_this_tile = true;
+            found_a_sub_goal = true;
           }
         }
 
@@ -877,15 +877,6 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
           bool  avoid    = false;
           auto  dist     = distance(mid_at, it->mid_at);
           float max_dist = ai_scent_distance();
-
-          //
-          // If this is something we really want to avoid, like fire, then stay away from it
-          //
-          if (will_avoid_hazard(it)) {
-            if (dist == 1) {
-              avoid = true;
-            }
-          }
 
           //
           // If we can see an enemy, get them! If the monster is not lit
@@ -906,7 +897,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
                   SCORE_ADD(-(int) ((max_dist - dist) + it_health) * 20 - goal_penalty, "avoid-enemy");
                   add_goal_penalty(it);
                 }
-                got_one_this_tile = true;
+                found_a_sub_goal = true;
               } else {
                 //
                 // The closer an enemy is (something that attacked us), the higher the score
@@ -914,9 +905,9 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
                 avoid = false;
                 SCORE_ADD((int) (max_dist - dist) * 20 - goal_penalty, "attack-enemy");
                 add_goal_penalty(it);
-                got_one_this_tile = true;
+                found_a_sub_goal = true;
               }
-            } else if (! avoid && (dist < ai_avoid_distance()) && will_avoid_monst(it)) {
+            } else if ((dist < ai_avoid_distance()) && will_avoid_monst(it)) {
               //
               // Monsts we avoid are more serious threats
               //
@@ -929,18 +920,17 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
                 SCORE_ADD(-(int) ((max_dist - dist) + it_health) * 20 - goal_penalty, "avoid-monst");
                 add_goal_penalty(it);
               }
-            } else if (! avoid && ai_is_able_to_attack_generators() && it->is_minion_generator()) {
+            } else if (ai_is_able_to_attack_generators() && it->is_minion_generator()) {
               //
               // Very close, high priority attack
               //
               SCORE_ADD((int) (max_dist - dist) * 10 - goal_penalty, "attack-nearby-generator");
               add_goal_penalty(it);
-              got_one_this_tile = true;
-            } else if (! avoid && possible_to_attack(it) && ! will_avoid_hazard(it)) {
+              found_a_sub_goal = true;
+            } else if (possible_to_attack(it) && ! is_disliked_by_me(it)) {
               //
-              // Hazard check above is for cleaners standing on their
-              // pool of acid. Do we want to attack that without good
-              // reason?
+              // Hazard check above is for cleaners standing on their pool of acid. Do we want to attack that without
+              // good reason?
               //
               if (dist < 2) {
                 //
@@ -948,7 +938,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
                 //
                 SCORE_ADD((int) (max_dist - dist) * 10 - goal_penalty, "attack-nearby-monst");
                 add_goal_penalty(it);
-                got_one_this_tile = true;
+                found_a_sub_goal = true;
               } else if (dist < max_dist) {
                 //
                 // Further away close, lower priority attack
@@ -960,19 +950,43 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
                 } else {
                   SCORE_ADD((int) (max_dist - dist) * 10 - goal_penalty, "attack-maybe-monst");
                   add_goal_penalty(it);
-                  got_one_this_tile = true;
+                  found_a_sub_goal = true;
                 }
               }
             }
           }
 
-          if (! avoid && it->is_spiderweb() && ! dist) {
+          if (it->is_spiderweb() && ! dist) {
             //
             // Very close, high priority attack
             //
             SCORE_ADD(666, "get-out-of-web");
             add_goal_penalty(it);
-            got_one_this_tile = true;
+            found_a_sub_goal = true;
+          }
+
+          //
+          // If this is something we really want to avoid, like fire, then stay away from it
+          // Try to handle cases, like a monster sitting on acid. We want to attack the monster,
+          // but is the acid that bad?
+          //
+          if (found_a_sub_goal) {
+            //
+            // We already have a goal. Only avoid if this is really bad.
+            //
+            if (is_hated_by_me(it)) {
+              if (dist <= 1) {
+                avoid = true;
+              }
+            }
+          } else {
+            if (is_disliked_by_me(it)) {
+              if (dist <= 1) {
+                if ((int) pcg_random_range(0, 1000) < 500) {
+                  avoid = true;
+                }
+              }
+            }
           }
 
           if (avoid) {
@@ -1101,7 +1115,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
             }
           }
 
-          if (! got_one_this_tile) {
+          if (! found_a_sub_goal) {
             //
             // No hunting monsters we cannot see just because we have visited that area before.
             //
@@ -1426,7 +1440,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
     //
     // No search destinations that are, for example, a chasm
     //
-    if (is_hazardous_to_me(p)) {
+    if (is_hated_by_me(p)) {
       continue;
     }
 
@@ -2072,18 +2086,16 @@ bool Thing::ai_tick(bool recursing)
         //
         // Compress the bag?
         //
-        if (is_player()) {
-          if (bag_compress()) {
-            while (bag_compress()) {
-            }
-            AI_LOG("Repacked inventory.");
-            if (is_player()) {
-              game->tick_begin("repacked bag");
-              return true;
-            }
+        if (bag_compress()) {
+          while (bag_compress()) {
           }
+          AI_LOG("Repacked inventory.");
+        }
+        if (is_player()) {
+          game->tick_begin("repacked bag");
         }
         ai_change_state(MONST_STATE_IDLE, "finished repacking");
+        return true;
       }
       break;
   }
@@ -2190,7 +2202,7 @@ void Thing::ai_get_next_hop(void)
   //
   // If on fire, try and put it out!
   //
-  if (is_on_fire() && hates_fire()) {
+  if (is_on_fire() && environ_dislikes_fire()) {
     if (is_intelligent()) {
       if (ai_on_fire()) {
         return;

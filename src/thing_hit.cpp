@@ -130,7 +130,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
   //
   // Check for immunity
   //
-  if (loves_fire()) {
+  if (environ_loves_fire()) {
     if (hitter->is_fire() || real_hitter->is_fire()) {
       if (is_player()) {
         TOPCON("You bask in the fire!");
@@ -142,7 +142,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
   }
 
   if (bite || poison) {
-    if (loves_poison()) {
+    if (environ_loves_poison()) {
       if (hitter->is_poison() || real_hitter->is_poison()) {
         if (is_player()) {
           TOPCON("You drink in the poison!");
@@ -229,36 +229,36 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     }
   }
 
-  if (hates_fire()) {
+  if (environ_dislikes_fire()) {
     if (real_hitter->is_fire() || real_hitter->is_lava()) {
-      if (damage_doubled_from_fire()) {
+      if (environ_damage_doubled_from_fire()) {
         damage *= 2;
         dbg("Double damage from fire");
       }
     }
   }
 
-  if (hates_acid()) {
+  if (environ_dislikes_acid()) {
     if (real_hitter->is_acid()) {
-      if (damage_doubled_from_acid()) {
+      if (environ_damage_doubled_from_acid()) {
         damage *= 2;
         dbg("Double damage from acid");
       }
     }
   }
 
-  if (hates_poison()) {
+  if (environ_dislikes_poison()) {
     if (real_hitter->is_poison()) {
-      if (damage_doubled_from_poison()) {
+      if (environ_damage_doubled_from_poison()) {
         damage *= 2;
         dbg("Double damage from poison");
       }
     }
   }
 
-  if (hates_water()) {
+  if (environ_dislikes_water()) {
     if (real_hitter->is_shallow_water() || real_hitter->is_deep_water()) {
-      if (damage_doubled_from_water()) {
+      if (environ_damage_doubled_from_water()) {
         damage *= 2;
         dbg("Double damage from water");
       }
@@ -310,6 +310,8 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       if (real_hitter == this) {
         if (crit) {
           TOPCON("%%fg=red$You CRIT yourselfd for %d damage!%%fg=reset$", damage);
+        } else if (poison) {
+          TOPCON("%%fg=yellow$Poison courses through your veins for %d damage!%%fg=reset$", damage);
         } else {
           if (hitter->is_weapon()) {
             TOPCON("%%fg=red$You hit yourself for %d damage with %s!%%fg=reset$", damage, hitter->text_the().c_str());
@@ -527,7 +529,15 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
 int Thing::is_hit_by(Thingp hitter, bool crit, bool bite, int poison, int damage)
 {
   TRACE_AND_INDENT();
-  IF_DEBUG2 { hitter->log("Possible hit %s for %u", to_string().c_str(), damage); }
+  if (poison) {
+    IF_DEBUG2 { hitter->log("Possible hit %s for %d bite damage", to_string().c_str(), bite); }
+  }
+  if (poison) {
+    IF_DEBUG2 { hitter->log("Possible hit %s for %d poison damage", to_string().c_str(), poison); }
+  }
+  if (damage) {
+    IF_DEBUG2 { hitter->log("Possible hit %s for %d damage", to_string().c_str(), damage); }
+  }
   TRACE_AND_INDENT();
   //
   // If an arrow, who really fired it?

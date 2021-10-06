@@ -43,8 +43,10 @@ void Thing::dmap_modify_terrain_cost(point p, uint8_t *d)
     }
   }
 
-  if (is_hazardous_to_me(p)) {
+  if (is_hated_by_me(p)) {
     pref += DMAP_LESS_PREFERRED_TERRAIN;
+  } else if (is_disliked_by_me(p)) {
+    pref += DMAP_LESS_PREFERRED_TERRAIN / 2;
   }
 
   if (pref > DMAP_MAX_LESS_PREFERRED_TERRAIN) {
@@ -70,13 +72,13 @@ bool Thing::will_prefer_terrain(const Thingp itp)
   auto me = tp();
   auto it = itp->tp();
 
-  if (me->is_water_lover()) {
+  if (me->environ_loves_water()) {
     if (it->is_shallow_water() || it->is_deep_water()) {
       return true;
     }
   }
 
-  if (me->is_acid_lover()) {
+  if (me->environ_loves_acid()) {
     if (it->is_acid()) {
       return true;
     }

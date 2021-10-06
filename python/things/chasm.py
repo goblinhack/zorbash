@@ -12,7 +12,7 @@ def chasm_init(name, text_name, tiles=[]):
     mytp.set_is_chasm(True)
     mytp.set_is_cursor_can_hover_over_x2_click(True)
     mytp.set_is_described_when_hovering_over(True)
-    mytp.set_is_extreme_hazard(True)
+    mytp.set_is_cursor_path_hazard_for_player(True)
     mytp.set_is_hazard(True)
     mytp.set_is_loggable(False)
     mytp.set_is_loggable(False)

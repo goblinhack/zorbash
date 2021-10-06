@@ -215,25 +215,25 @@ int Thing::collision_hit_priority(void) const
   TRACE_AND_INDENT();
   return (tp()->collision_hit_priority());
 }
-int Thing::damage_doubled_from_acid(void) const
+int Thing::environ_damage_doubled_from_acid(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->damage_doubled_from_acid());
+  return (tp()->environ_damage_doubled_from_acid());
 }
-int Thing::damage_doubled_from_fire(void) const
+int Thing::environ_damage_doubled_from_fire(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->damage_doubled_from_fire());
+  return (tp()->environ_damage_doubled_from_fire());
 }
-int Thing::damage_doubled_from_poison(void) const
+int Thing::environ_damage_doubled_from_poison(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->damage_doubled_from_poison());
+  return (tp()->environ_damage_doubled_from_poison());
 }
-int Thing::damage_doubled_from_water(void) const
+int Thing::environ_damage_doubled_from_water(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->damage_doubled_from_water());
+  return (tp()->environ_damage_doubled_from_water());
 }
 int Thing::defence(void) const
 {
@@ -370,25 +370,25 @@ int Thing::gfx_weapon_carry_anim(void) const
   TRACE_AND_INDENT();
   return (tp()->gfx_weapon_carry_anim());
 }
-int Thing::hates_acid(void) const
+int Thing::environ_dislikes_acid(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->hates_acid());
+  return (tp()->environ_dislikes_acid());
 }
-int Thing::hates_fire(void) const
+int Thing::environ_dislikes_fire(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->hates_fire());
+  return (tp()->environ_dislikes_fire());
 }
-int Thing::hates_poison(void) const
+int Thing::environ_dislikes_poison(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->hates_poison());
+  return (tp()->environ_dislikes_poison());
 }
-int Thing::hates_water(void) const
+int Thing::environ_dislikes_water(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->hates_water());
+  return (tp()->environ_dislikes_water());
 }
 int Thing::health_hunger_pct(void) const
 {
@@ -425,10 +425,10 @@ int Thing::ai_is_able_to_walk_through_walls(void) const
   TRACE_AND_INDENT();
   return (tp()->ai_is_able_to_walk_through_walls());
 }
-int Thing::is_acid_lover(void) const
+int Thing::environ_loves_acid(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->is_acid_lover());
+  return (tp()->environ_loves_acid());
 }
 int Thing::is_acid(void) const
 {
@@ -705,10 +705,10 @@ int Thing::is_explosion(void) const
   TRACE_AND_INDENT();
   return (tp()->is_explosion());
 }
-int Thing::is_extreme_hazard(void) const
+int Thing::is_cursor_path_hazard_for_player(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->is_extreme_hazard());
+  return (tp()->is_cursor_path_hazard_for_player());
 }
 int Thing::is_fearless(void) const
 {
@@ -1145,30 +1145,30 @@ int Thing::unused_flag37(void) const
   TRACE_AND_INDENT();
   return (tp()->unused_flag37());
 }
-int Thing::unused_flag38(void) const
+int Thing::environ_hates_poison(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->unused_flag38());
+  return (tp()->environ_hates_poison());
 }
-int Thing::unused_flag39(void) const
+int Thing::environ_hates_fire(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->unused_flag39());
+  return (tp()->environ_hates_fire());
 }
 int Thing::unused_flag3(void) const
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag3());
 }
-int Thing::unused_flag40(void) const
+int Thing::environ_hates_water(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->unused_flag40());
+  return (tp()->environ_hates_water());
 }
-int Thing::unused_flag41(void) const
+int Thing::environ_hates_acid(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->unused_flag41());
+  return (tp()->environ_hates_acid());
 }
 int Thing::ai_is_able_to_detect_secret_doors_when_close(void) const
 {
@@ -1480,10 +1480,10 @@ int Thing::is_wand(void) const
   TRACE_AND_INDENT();
   return (tp()->is_wand());
 }
-int Thing::is_water_lover(void) const
+int Thing::environ_loves_water(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->is_water_lover());
+  return (tp()->environ_loves_water());
 }
 int Thing::is_weapon(void) const
 {
@@ -1495,20 +1495,20 @@ int Thing::is_weapon_wielder(void) const
   TRACE_AND_INDENT();
   return (tp()->is_weapon_wielder());
 }
-int Thing::loves_fire(void) const
+int Thing::environ_loves_fire(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->loves_fire());
+  return (tp()->environ_loves_fire());
 }
-int Thing::loves_poison(void) const
+int Thing::environ_loves_poison(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->loves_poison());
+  return (tp()->environ_loves_poison());
 }
-int Thing::loves_spiderwebs(void) const
+int Thing::environ_loves_spiderwebs(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->loves_spiderwebs());
+  return (tp()->environ_loves_spiderwebs());
 }
 int Thing::minion_leash_distance(void) const
 {

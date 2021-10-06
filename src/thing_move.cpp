@@ -255,7 +255,7 @@ bool Thing::move(fpoint future_pos, uint8_t up, uint8_t down, uint8_t left, uint
   // Check for being stuck in webs or something else sticky
   //
   if (up || down || left || right) {
-    if (loves_spiderwebs() && level->is_spiderweb(mid_at.x, mid_at.y)) {
+    if (environ_loves_spiderwebs() && level->is_spiderweb(mid_at.x, mid_at.y)) {
       //
       // No getting stuck in webs
       // Also no cleaners stuck in their own gel

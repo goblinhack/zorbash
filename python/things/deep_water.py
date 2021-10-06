@@ -8,7 +8,7 @@ def tp_init(name, text_name, tiles=[]):
     mytp.set_gfx_animated(True)
     mytp.set_gfx_shown_in_bg(True)
     mytp.set_gfx_water(True)
-    mytp.set_hates_fire(True)
+    mytp.set_environ_dislikes_fire(True)
     mytp.set_is_able_to_fall(True)
     mytp.set_is_deep_water(True)
     mytp.set_is_described_when_hovering_over(True)

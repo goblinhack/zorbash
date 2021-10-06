@@ -343,17 +343,17 @@ class Tp:
     def set_unused_flag37(self, value):
         zx.tp_set_unused_flag37(self, value)
 
-    def set_unused_flag38(self, value):
-        zx.tp_set_unused_flag38(self, value)
+    def set_environ_hates_poison(self, value):
+        zx.tp_set_environ_hates_poison(self, value)
 
-    def set_unused_flag39(self, value):
-        zx.tp_set_unused_flag39(self, value)
+    def set_environ_hates_fire(self, value):
+        zx.tp_set_environ_hates_fire(self, value)
 
-    def set_unused_flag40(self, value):
-        zx.tp_set_unused_flag40(self, value)
+    def set_environ_hates_water(self, value):
+        zx.tp_set_environ_hates_water(self, value)
 
-    def set_unused_flag41(self, value):
-        zx.tp_set_unused_flag41(self, value)
+    def set_environ_hates_acid(self, value):
+        zx.tp_set_environ_hates_acid(self, value)
 
     def set_ai_is_able_to_detect_secret_doors_when_close(self, value):
         zx.tp_set_ai_is_able_to_detect_secret_doors_when_close(self, value)
@@ -514,8 +514,8 @@ class Tp:
     def set_is_wand_eater(self, value):
         zx.tp_set_is_wand_eater(self, value)
 
-    def set_loves_fire(self, value):
-        zx.tp_set_loves_fire(self, value)
+    def set_environ_loves_fire(self, value):
+        zx.tp_set_environ_loves_fire(self, value)
 
     def set_is_projectile(self, value):
         zx.tp_set_is_projectile(self, value)
@@ -583,8 +583,8 @@ class Tp:
     def set_is_descend_sewer(self, value):
         zx.tp_set_is_descend_sewer(self, value)
 
-    def set_loves_spiderwebs(self, value):
-        zx.tp_set_loves_spiderwebs(self, value)
+    def set_environ_loves_spiderwebs(self, value):
+        zx.tp_set_environ_loves_spiderwebs(self, value)
 
     def set_is_shallow_water(self, value):
         zx.tp_set_is_shallow_water(self, value)
@@ -619,14 +619,14 @@ class Tp:
     def set_is_humanoid(self, value):
         zx.tp_set_is_humanoid(self, value)
 
-    def set_loves_poison(self, value):
-        zx.tp_set_loves_poison(self, value)
+    def set_environ_loves_poison(self, value):
+        zx.tp_set_environ_loves_poison(self, value)
 
-    def set_damage_doubled_from_poison(self, value):
-        zx.tp_set_damage_doubled_from_poison(self, value)
+    def set_environ_damage_doubled_from_poison(self, value):
+        zx.tp_set_environ_damage_doubled_from_poison(self, value)
 
-    def set_hates_poison(self, value):
-        zx.tp_set_hates_poison(self, value)
+    def set_environ_dislikes_poison(self, value):
+        zx.tp_set_environ_dislikes_poison(self, value)
 
     def set_attack_humanoid(self, value):
         zx.tp_set_attack_humanoid(self, value)
@@ -643,8 +643,8 @@ class Tp:
     def set_is_auto_throw(self, value):
         zx.tp_set_is_auto_throw(self, value)
 
-    def set_is_extreme_hazard(self, value):
-        zx.tp_set_is_extreme_hazard(self, value)
+    def set_is_cursor_path_hazard_for_player(self, value):
+        zx.tp_set_is_cursor_path_hazard_for_player(self, value)
 
     def set_is_auto_collect_item(self, value):
         zx.tp_set_is_auto_collect_item(self, value)
@@ -784,11 +784,11 @@ class Tp:
     def set_is_floating(self, value):
         zx.tp_set_is_floating(self, value)
 
-    def set_damage_doubled_from_acid(self, value):
-        zx.tp_set_damage_doubled_from_acid(self, value)
+    def set_environ_damage_doubled_from_acid(self, value):
+        zx.tp_set_environ_damage_doubled_from_acid(self, value)
 
-    def set_damage_doubled_from_water(self, value):
-        zx.tp_set_damage_doubled_from_water(self, value)
+    def set_environ_damage_doubled_from_water(self, value):
+        zx.tp_set_environ_damage_doubled_from_water(self, value)
 
     def set_is_minion_generator(self, value):
         zx.tp_set_is_minion_generator(self, value)
@@ -796,14 +796,14 @@ class Tp:
     def set_is_treasure_type_eater(self, value):
         zx.tp_set_is_treasure_type_eater(self, value)
 
-    def set_damage_doubled_from_acid(self, value):
-        zx.tp_set_damage_doubled_from_acid(self, value)
+    def set_environ_damage_doubled_from_acid(self, value):
+        zx.tp_set_environ_damage_doubled_from_acid(self, value)
 
-    def set_is_acid_lover(self, value):
-        zx.tp_set_is_acid_lover(self, value)
+    def set_environ_loves_acid(self, value):
+        zx.tp_set_environ_loves_acid(self, value)
 
-    def set_hates_acid(self, value):
-        zx.tp_set_hates_acid(self, value)
+    def set_environ_dislikes_acid(self, value):
+        zx.tp_set_environ_dislikes_acid(self, value)
 
     def set_is_jelly_parent(self, value):
         zx.tp_set_is_jelly_parent(self, value)
@@ -850,8 +850,8 @@ class Tp:
     def set_is_smoke(self, value):
         zx.tp_set_is_smoke(self, value)
 
-    def set_hates_fire(self, value):
-        zx.tp_set_hates_fire(self, value)
+    def set_environ_dislikes_fire(self, value):
+        zx.tp_set_environ_dislikes_fire(self, value)
 
     def set_is_treasure_type(self, value):
         zx.tp_set_is_treasure_type(self, value)
@@ -865,8 +865,8 @@ class Tp:
     def set_is_intelligent(self, value):
         zx.tp_set_is_intelligent(self, value)
 
-    def set_damage_doubled_from_fire(self, value):
-        zx.tp_set_damage_doubled_from_fire(self, value)
+    def set_environ_damage_doubled_from_fire(self, value):
+        zx.tp_set_environ_damage_doubled_from_fire(self, value)
 
     def set_is_fire(self, value):
         zx.tp_set_is_fire(self, value)
@@ -976,8 +976,8 @@ class Tp:
     def set_is_food(self, value):
         zx.tp_set_is_food(self, value)
 
-    def set_hates_water(self, value):
-        zx.tp_set_hates_water(self, value)
+    def set_environ_dislikes_water(self, value):
+        zx.tp_set_environ_dislikes_water(self, value)
 
     def set_is_hunger_insatiable(self, value):
         zx.tp_set_is_hunger_insatiable(self, value)
@@ -1018,8 +1018,8 @@ class Tp:
     def set_collision_attack(self, value):
         zx.tp_set_collision_attack(self, value)
 
-    def set_is_water_lover(self, value):
-        zx.tp_set_is_water_lover(self, value)
+    def set_environ_loves_water(self, value):
+        zx.tp_set_environ_loves_water(self, value)
 
     def set_collision_hit_priority(self, value):
         zx.tp_set_collision_hit_priority(self, value)

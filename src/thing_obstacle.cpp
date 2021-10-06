@@ -152,7 +152,7 @@ bool Thing::collision_obstacle(Thingp it)
       }
     }
 
-    if (will_avoid_hazard(it)) {
+    if (is_hated_by_me(it)) {
       return true;
     }
 
@@ -201,7 +201,7 @@ bool Thing::ai_obstacle(Thingp it)
   //
   // Lava, acid etc...
   //
-  if (is_hazardous_to_me(make_point(it->mid_at))) {
+  if (is_hated_by_me(make_point(it->mid_at))) {
     return true;
   }
 

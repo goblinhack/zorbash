@@ -64,16 +64,16 @@ bool Thing::matches(const std::string &what) const
   if (blast_min_radius() && (what == "blast_min_radius")) {
     return true;
   }
-  if (damage_doubled_from_acid() && (what == "damage_doubled_from_acid")) {
+  if (environ_damage_doubled_from_acid() && (what == "environ_damage_doubled_from_acid")) {
     return true;
   }
-  if (damage_doubled_from_fire() && (what == "damage_doubled_from_fire")) {
+  if (environ_damage_doubled_from_fire() && (what == "environ_damage_doubled_from_fire")) {
     return true;
   }
-  if (damage_doubled_from_poison() && (what == "damage_doubled_from_poison")) {
+  if (environ_damage_doubled_from_poison() && (what == "environ_damage_doubled_from_poison")) {
     return true;
   }
-  if (damage_doubled_from_water() && (what == "damage_doubled_from_water")) {
+  if (environ_damage_doubled_from_water() && (what == "environ_damage_doubled_from_water")) {
     return true;
   }
   if (enchant_level() && (what == "enchant_level")) {
@@ -94,16 +94,16 @@ bool Thing::matches(const std::string &what) const
   if (gfx_very_short_shadow_caster() && (what == "gfx_very_short_shadow_caster")) {
     return true;
   }
-  if (hates_acid() && (what == "hates_acid")) {
+  if (environ_dislikes_acid() && (what == "environ_dislikes_acid")) {
     return true;
   }
-  if (hates_fire() && (what == "hates_fire")) {
+  if (environ_dislikes_fire() && (what == "environ_dislikes_fire")) {
     return true;
   }
-  if (hates_poison() && (what == "hates_poison")) {
+  if (environ_dislikes_poison() && (what == "environ_dislikes_poison")) {
     return true;
   }
-  if (hates_water() && (what == "hates_water")) {
+  if (environ_dislikes_water() && (what == "environ_dislikes_water")) {
     return true;
   }
   if (is_able_to_change_levels() && (what == "is_able_to_change_levels")) {
@@ -121,7 +121,7 @@ bool Thing::matches(const std::string &what) const
   if (ai_is_able_to_walk_through_walls() && (what == "ai_is_able_to_walk_through_walls")) {
     return true;
   }
-  if (is_acid_lover() && (what == "is_acid_lover")) {
+  if (environ_loves_acid() && (what == "environ_loves_acid")) {
     return true;
   }
   if (is_acid() && (what == "is_acid")) {
@@ -289,7 +289,7 @@ bool Thing::matches(const std::string &what) const
   if (is_explosion() && (what == "is_explosion")) {
     return true;
   }
-  if (is_extreme_hazard() && (what == "is_extreme_hazard")) {
+  if (is_cursor_path_hazard_for_player() && (what == "is_cursor_path_hazard_for_player")) {
     return true;
   }
   if (is_fearless() && (what == "is_fearless")) {
@@ -562,19 +562,19 @@ bool Thing::matches(const std::string &what) const
   if (unused_flag37() && (what == "unused_flag37")) {
     return true;
   }
-  if (unused_flag38() && (what == "unused_flag38")) {
+  if (environ_hates_poison() && (what == "environ_hates_poison")) {
     return true;
   }
-  if (unused_flag39() && (what == "unused_flag39")) {
+  if (environ_hates_fire() && (what == "environ_hates_fire")) {
     return true;
   }
   if (unused_flag3() && (what == "unused_flag3")) {
     return true;
   }
-  if (unused_flag40() && (what == "unused_flag40")) {
+  if (environ_hates_water() && (what == "environ_hates_water")) {
     return true;
   }
-  if (unused_flag41() && (what == "unused_flag41")) {
+  if (environ_hates_acid() && (what == "environ_hates_acid")) {
     return true;
   }
   if (ai_is_able_to_detect_secret_doors_when_close() && (what == "ai_is_able_to_detect_secret_doors_when_close")) {
@@ -754,7 +754,7 @@ bool Thing::matches(const std::string &what) const
   if (is_wand() && (what == "is_wand")) {
     return true;
   }
-  if (is_water_lover() && (what == "is_water_lover")) {
+  if (environ_loves_water() && (what == "environ_loves_water")) {
     return true;
   }
   if (is_weapon() && (what == "is_weapon")) {
@@ -763,13 +763,13 @@ bool Thing::matches(const std::string &what) const
   if (is_weapon_wielder() && (what == "is_weapon_wielder")) {
     return true;
   }
-  if (loves_fire() && (what == "loves_fire")) {
+  if (environ_loves_fire() && (what == "environ_loves_fire")) {
     return true;
   }
-  if (loves_poison() && (what == "loves_poison")) {
+  if (environ_loves_poison() && (what == "environ_loves_poison")) {
     return true;
   }
-  if (loves_spiderwebs() && (what == "loves_spiderwebs")) {
+  if (environ_loves_spiderwebs() && (what == "environ_loves_spiderwebs")) {
     return true;
   }
   if (minion_leash_distance() && (what == "minion_leash_distance")) {
@@ -833,17 +833,17 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "blast_min_radius") {
     return &Thing::blast_min_radius;
   }
-  if (what == "damage_doubled_from_acid") {
-    return &Thing::damage_doubled_from_acid;
+  if (what == "environ_damage_doubled_from_acid") {
+    return &Thing::environ_damage_doubled_from_acid;
   }
-  if (what == "damage_doubled_from_fire") {
-    return &Thing::damage_doubled_from_fire;
+  if (what == "environ_damage_doubled_from_fire") {
+    return &Thing::environ_damage_doubled_from_fire;
   }
-  if (what == "damage_doubled_from_poison") {
-    return &Thing::damage_doubled_from_poison;
+  if (what == "environ_damage_doubled_from_poison") {
+    return &Thing::environ_damage_doubled_from_poison;
   }
-  if (what == "damage_doubled_from_water") {
-    return &Thing::damage_doubled_from_water;
+  if (what == "environ_damage_doubled_from_water") {
+    return &Thing::environ_damage_doubled_from_water;
   }
   if (what == "enchant_level") {
     return &Thing::enchant_level;
@@ -863,17 +863,17 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "gfx_very_short_shadow_caster") {
     return &Thing::gfx_very_short_shadow_caster;
   }
-  if (what == "hates_acid") {
-    return &Thing::hates_acid;
+  if (what == "environ_dislikes_acid") {
+    return &Thing::environ_dislikes_acid;
   }
-  if (what == "hates_fire") {
-    return &Thing::hates_fire;
+  if (what == "environ_dislikes_fire") {
+    return &Thing::environ_dislikes_fire;
   }
-  if (what == "hates_poison") {
-    return &Thing::hates_poison;
+  if (what == "environ_dislikes_poison") {
+    return &Thing::environ_dislikes_poison;
   }
-  if (what == "hates_water") {
-    return &Thing::hates_water;
+  if (what == "environ_dislikes_water") {
+    return &Thing::environ_dislikes_water;
   }
   if (what == "is_able_to_change_levels") {
     return &Thing::is_able_to_change_levels;
@@ -890,8 +890,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "ai_is_able_to_walk_through_walls") {
     return &Thing::ai_is_able_to_walk_through_walls;
   }
-  if (what == "is_acid_lover") {
-    return &Thing::is_acid_lover;
+  if (what == "environ_loves_acid") {
+    return &Thing::environ_loves_acid;
   }
   if (what == "is_acid") {
     return &Thing::is_acid;
@@ -1058,8 +1058,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_explosion") {
     return &Thing::is_explosion;
   }
-  if (what == "is_extreme_hazard") {
-    return &Thing::is_extreme_hazard;
+  if (what == "is_cursor_path_hazard_for_player") {
+    return &Thing::is_cursor_path_hazard_for_player;
   }
   if (what == "is_fearless") {
     return &Thing::is_fearless;
@@ -1331,20 +1331,20 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag37") {
     return &Thing::unused_flag37;
   }
-  if (what == "unused_flag38") {
-    return &Thing::unused_flag38;
+  if (what == "environ_hates_poison") {
+    return &Thing::environ_hates_poison;
   }
-  if (what == "unused_flag39") {
-    return &Thing::unused_flag39;
+  if (what == "environ_hates_fire") {
+    return &Thing::environ_hates_fire;
   }
   if (what == "unused_flag3") {
     return &Thing::unused_flag3;
   }
-  if (what == "unused_flag40") {
-    return &Thing::unused_flag40;
+  if (what == "environ_hates_water") {
+    return &Thing::environ_hates_water;
   }
-  if (what == "unused_flag41") {
-    return &Thing::unused_flag41;
+  if (what == "environ_hates_acid") {
+    return &Thing::environ_hates_acid;
   }
   if (what == "ai_is_able_to_detect_secret_doors_when_close") {
     return &Thing::ai_is_able_to_detect_secret_doors_when_close;
@@ -1523,8 +1523,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_wand") {
     return &Thing::is_wand;
   }
-  if (what == "is_water_lover") {
-    return &Thing::is_water_lover;
+  if (what == "environ_loves_water") {
+    return &Thing::environ_loves_water;
   }
   if (what == "is_water") {
     return &Thing::is_water;
@@ -1535,14 +1535,14 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_weapon_wielder") {
     return &Thing::is_weapon_wielder;
   }
-  if (what == "loves_fire") {
-    return &Thing::loves_fire;
+  if (what == "environ_loves_fire") {
+    return &Thing::environ_loves_fire;
   }
-  if (what == "loves_poison") {
-    return &Thing::loves_poison;
+  if (what == "environ_loves_poison") {
+    return &Thing::environ_loves_poison;
   }
-  if (what == "loves_spiderwebs") {
-    return &Thing::loves_spiderwebs;
+  if (what == "environ_loves_spiderwebs") {
+    return &Thing::environ_loves_spiderwebs;
   }
   if (what == "minion_leash_distance") {
     return &Thing::minion_leash_distance;

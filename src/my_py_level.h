@@ -25,7 +25,7 @@ PyObject *level_is_able_to_fire_at_at(PyObject *obj, PyObject *args, PyObject *k
 PyObject *level_ai_is_able_to_see_through_doors_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_ai_is_able_to_walk_through_walls_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_acid_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_acid_lover_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_environ_loves_acid_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_alive_monst_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_alive_on_end_of_anim_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_always_hit_at(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -91,7 +91,7 @@ PyObject *level_is_enchantstone_at(PyObject *obj, PyObject *args, PyObject *keyw
 PyObject *level_is_ethereal_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_ethereal_minion_generator_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_explosion_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_extreme_hazard_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_cursor_path_hazard_for_player_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_fearless_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_fire_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_floating_at(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -181,11 +181,11 @@ PyObject *level_unused_flag34_at(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *level_unused_flag35_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag36_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag37_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag38_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag39_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_environ_hates_poison_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_environ_hates_fire_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag3_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag40_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag41_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_environ_hates_water_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_environ_hates_acid_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_ai_is_able_to_detect_secret_doors_when_close_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_ai_is_able_to_break_down_doors_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_ai_is_able_to_break_out_of_webs_at(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -252,10 +252,10 @@ PyObject *level_is_wall_dungeon_at(PyObject *obj, PyObject *args, PyObject *keyw
 PyObject *level_is_wand_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_wand_eater_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_water_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_water_lover_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_environ_loves_water_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_weapon_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_weapon_wielder_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_loves_fire_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_loves_poison_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_loves_spiderwebs_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_environ_loves_fire_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_environ_loves_poison_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_environ_loves_spiderwebs_at(PyObject *obj, PyObject *args, PyObject *keywds);
 #endif

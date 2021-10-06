@@ -176,10 +176,10 @@ int                Tp::collision_box(void) const { return _collision_box; }
 int                Tp::collision_check(void) const { return _collision_check; }
 int                Tp::collision_circle(void) const { return _collision_circle; }
 int                Tp::collision_hit_priority(void) const { return _collision_hit_priority; }
-int                Tp::damage_doubled_from_acid(void) const { return _damage_doubled_from_acid; }
-int                Tp::damage_doubled_from_fire(void) const { return _damage_doubled_from_fire; }
-int                Tp::damage_doubled_from_poison(void) const { return _damage_doubled_from_poison; }
-int                Tp::damage_doubled_from_water(void) const { return _damage_doubled_from_water; }
+int                Tp::environ_damage_doubled_from_acid(void) const { return _environ_damage_doubled_from_acid; }
+int                Tp::environ_damage_doubled_from_fire(void) const { return _environ_damage_doubled_from_fire; }
+int                Tp::environ_damage_doubled_from_poison(void) const { return _environ_damage_doubled_from_poison; }
+int                Tp::environ_damage_doubled_from_water(void) const { return _environ_damage_doubled_from_water; }
 int                Tp::enchant_level(void) const { return _enchant_level; }
 int                Tp::enchant_max(void) const { return _enchant_max; }
 int                Tp::gfx_an_animation_only(void) const { return _gfx_an_animation_only; }
@@ -205,10 +205,10 @@ int                Tp::gfx_solid_shadow(void) const { return _gfx_solid_shadow; 
 int                Tp::gfx_very_short_shadow_caster(void) const { return _gfx_very_short_shadow_caster; }
 int                Tp::gfx_water(void) const { return _gfx_water; }
 int                Tp::gfx_weapon_carry_anim(void) const { return _gfx_weapon_carry_anim; }
-int                Tp::hates_acid(void) const { return _hates_acid; }
-int                Tp::hates_fire(void) const { return _hates_fire; }
-int                Tp::hates_poison(void) const { return _hates_poison; }
-int                Tp::hates_water(void) const { return _hates_water; }
+int                Tp::environ_dislikes_acid(void) const { return _environ_dislikes_acid; }
+int                Tp::environ_dislikes_fire(void) const { return _environ_dislikes_fire; }
+int                Tp::environ_dislikes_poison(void) const { return _environ_dislikes_poison; }
+int                Tp::environ_dislikes_water(void) const { return _environ_dislikes_water; }
 int                Tp::health_hunger_pct(void) const { return _health_hunger_pct; }
 int                Tp::health_starving_pct(void) const { return _health_starving_pct; }
 int                Tp::internal_has_dir_anim(void) const { return _internal_has_dir_anim; }
@@ -218,7 +218,7 @@ int                Tp::is_able_to_fall(void) const { return _is_able_to_fall; }
 int                Tp::is_able_to_fire_at(void) const { return _is_able_to_fire_at; }
 int                Tp::ai_is_able_to_see_through_doors(void) const { return _ai_is_able_to_see_through_doors; }
 int                Tp::ai_is_able_to_walk_through_walls(void) const { return _ai_is_able_to_walk_through_walls; }
-int                Tp::is_acid_lover(void) const { return _is_acid_lover; }
+int                Tp::environ_loves_acid(void) const { return _environ_loves_acid; }
 int                Tp::is_acid(void) const { return _is_acid; }
 int                Tp::is_alive_on_end_of_anim(void) const { return _is_alive_on_end_of_anim; }
 int                Tp::is_always_hit(void) const { return _is_always_hit; }
@@ -273,7 +273,7 @@ int                Tp::is_engulfer(void) const { return _is_engulfer; }
 int                Tp::is_ethereal_minion_generator(void) const { return _is_ethereal_minion_generator; }
 int                Tp::is_ethereal(void) const { return _is_ethereal; }
 int                Tp::is_explosion(void) const { return _is_explosion; }
-int                Tp::is_extreme_hazard(void) const { return _is_extreme_hazard; }
+int                Tp::is_cursor_path_hazard_for_player(void) const { return _is_cursor_path_hazard_for_player; }
 int                Tp::is_fearless(void) const { return _is_fearless; }
 int                Tp::is_fire(void) const { return _is_fire; }
 int                Tp::is_floating(void) const { return _is_floating; }
@@ -363,11 +363,11 @@ int Tp::unused_flag34(void) const { return _unused_flag34; }
 int Tp::unused_flag35(void) const { return _unused_flag35; }
 int Tp::unused_flag36(void) const { return _unused_flag36; }
 int Tp::unused_flag37(void) const { return _unused_flag37; }
-int Tp::unused_flag38(void) const { return _unused_flag38; }
-int Tp::unused_flag39(void) const { return _unused_flag39; }
+int Tp::environ_hates_poison(void) const { return _environ_hates_poison; }
+int Tp::environ_hates_fire(void) const { return _environ_hates_fire; }
 int Tp::unused_flag3(void) const { return _unused_flag3; }
-int Tp::unused_flag40(void) const { return _unused_flag40; }
-int Tp::unused_flag41(void) const { return _unused_flag41; }
+int Tp::environ_hates_water(void) const { return _environ_hates_water; }
+int Tp::environ_hates_acid(void) const { return _environ_hates_acid; }
 int Tp::ai_is_able_to_detect_secret_doors_when_close(void) const
 {
   return _ai_is_able_to_detect_secret_doors_when_close;
@@ -430,15 +430,15 @@ int  Tp::is_wall_dungeon(void) const { return _is_wall_dungeon; }
 int  Tp::is_wall(void) const { return _is_wall; }
 int  Tp::is_wand_eater(void) const { return _is_wand_eater; }
 int  Tp::is_wand(void) const { return _is_wand; }
-int  Tp::is_water_lover(void) const { return _is_water_lover; }
+int  Tp::environ_loves_water(void) const { return _environ_loves_water; }
 int  Tp::is_weapon(void) const { return _is_weapon; }
 int  Tp::is_weapon_wielder(void) const { return _is_weapon_wielder; }
 int  Tp::item_height(void) const { return _item_height ? _item_height : 1; }
 int  Tp::item_width(void) const { return _item_width ? _item_width : 1; }
 int  Tp::light_strength(void) const { return _light_strength; }
-int  Tp::loves_fire(void) const { return _loves_fire; }
-int  Tp::loves_poison(void) const { return _loves_poison; }
-int  Tp::loves_spiderwebs(void) const { return _loves_spiderwebs; }
+int  Tp::environ_loves_fire(void) const { return _environ_loves_fire; }
+int  Tp::environ_loves_poison(void) const { return _environ_loves_poison; }
+int  Tp::environ_loves_spiderwebs(void) const { return _environ_loves_spiderwebs; }
 int  Tp::minion_leash_distance(void) const { return _minion_leash_distance; }
 int  Tp::minion_limit(void) const { return _minion_limit; }
 int  Tp::monst_size(void) const { return _monst_size; }
@@ -497,10 +497,10 @@ void Tp::set_collision_check(int v) { _collision_check = v; }
 void Tp::set_collision_circle(int v) { _collision_circle = v; }
 void Tp::set_collision_hit_priority(int v) { _collision_hit_priority = v; }
 void Tp::set_collision_radius(float v) { _collision_radius = v; }
-void Tp::set_damage_doubled_from_acid(int v) { _damage_doubled_from_acid = v; }
-void Tp::set_damage_doubled_from_fire(int v) { _damage_doubled_from_fire = v; }
-void Tp::set_damage_doubled_from_poison(int v) { _damage_doubled_from_poison = v; }
-void Tp::set_damage_doubled_from_water(int v) { _damage_doubled_from_water = v; }
+void Tp::set_environ_damage_doubled_from_acid(int v) { _environ_damage_doubled_from_acid = v; }
+void Tp::set_environ_damage_doubled_from_fire(int v) { _environ_damage_doubled_from_fire = v; }
+void Tp::set_environ_damage_doubled_from_poison(int v) { _environ_damage_doubled_from_poison = v; }
+void Tp::set_environ_damage_doubled_from_water(int v) { _environ_damage_doubled_from_water = v; }
 void Tp::set_enchant_level(int v) { _enchant_level = v; }
 void Tp::set_enchant_max(int v) { _enchant_max = v; }
 void Tp::set_gfx_an_animation_only(int v) { _gfx_an_animation_only = v; }
@@ -527,10 +527,10 @@ void Tp::set_gfx_solid_shadow(int v) { _gfx_solid_shadow = v; }
 void Tp::set_gfx_very_short_shadow_caster(int v) { _gfx_very_short_shadow_caster = v; }
 void Tp::set_gfx_water(int v) { _gfx_water = v; }
 void Tp::set_gfx_weapon_carry_anim(int v) { _gfx_weapon_carry_anim = v; }
-void Tp::set_hates_acid(int v) { _hates_acid = v; }
-void Tp::set_hates_fire(int v) { _hates_fire = v; }
-void Tp::set_hates_poison(int v) { _hates_poison = v; }
-void Tp::set_hates_water(int v) { _hates_water = v; }
+void Tp::set_environ_dislikes_acid(int v) { _environ_dislikes_acid = v; }
+void Tp::set_environ_dislikes_fire(int v) { _environ_dislikes_fire = v; }
+void Tp::set_environ_dislikes_poison(int v) { _environ_dislikes_poison = v; }
+void Tp::set_environ_dislikes_water(int v) { _environ_dislikes_water = v; }
 void Tp::set_health_hunger_pct(int v) { _health_hunger_pct = v; }
 void Tp::set_health_starving_pct(int v) { _health_starving_pct = v; }
 void Tp::set_internal_has_dir_anim(int v) { _internal_has_dir_anim = v; }
@@ -541,7 +541,7 @@ void Tp::set_is_able_to_fire_at(int v) { _is_able_to_fire_at = v; }
 void Tp::set_ai_is_able_to_see_through_doors(int v) { _ai_is_able_to_see_through_doors = v; }
 void Tp::set_ai_is_able_to_walk_through_walls(int v) { _ai_is_able_to_walk_through_walls = v; }
 void Tp::set_is_acid(int v) { _is_acid = v; }
-void Tp::set_is_acid_lover(int v) { _is_acid_lover = v; }
+void Tp::set_environ_loves_acid(int v) { _environ_loves_acid = v; }
 void Tp::set_is_alive_on_end_of_anim(int v) { _is_alive_on_end_of_anim = v; }
 void Tp::set_is_always_hit(int v) { _is_always_hit = v; }
 void Tp::set_is_ascend_dungeon(int v) { _is_ascend_dungeon = v; }
@@ -594,7 +594,7 @@ void Tp::set_is_engulfer(int v) { _is_engulfer = v; }
 void Tp::set_is_ethereal(int v) { _is_ethereal = v; }
 void Tp::set_is_ethereal_minion_generator(int v) { _is_ethereal_minion_generator = v; }
 void Tp::set_is_explosion(int v) { _is_explosion = v; }
-void Tp::set_is_extreme_hazard(int v) { _is_extreme_hazard = v; }
+void Tp::set_is_cursor_path_hazard_for_player(int v) { _is_cursor_path_hazard_for_player = v; }
 void Tp::set_is_fearless(int v) { _is_fearless = v; }
 void Tp::set_is_fire(int v) { _is_fire = v; }
 void Tp::set_is_floating(int v) { _is_floating = v; }
@@ -684,11 +684,11 @@ void Tp::set_unused_flag34(int v) { _unused_flag34 = v; }
 void Tp::set_unused_flag35(int v) { _unused_flag35 = v; }
 void Tp::set_unused_flag36(int v) { _unused_flag36 = v; }
 void Tp::set_unused_flag37(int v) { _unused_flag37 = v; }
-void Tp::set_unused_flag38(int v) { _unused_flag38 = v; }
-void Tp::set_unused_flag39(int v) { _unused_flag39 = v; }
+void Tp::set_environ_hates_poison(int v) { _environ_hates_poison = v; }
+void Tp::set_environ_hates_fire(int v) { _environ_hates_fire = v; }
 void Tp::set_unused_flag3(int v) { _unused_flag3 = v; }
-void Tp::set_unused_flag40(int v) { _unused_flag40 = v; }
-void Tp::set_unused_flag41(int v) { _unused_flag41 = v; }
+void Tp::set_environ_hates_water(int v) { _environ_hates_water = v; }
+void Tp::set_environ_hates_acid(int v) { _environ_hates_acid = v; }
 void Tp::set_ai_is_able_to_detect_secret_doors_when_close(int v) { _ai_is_able_to_detect_secret_doors_when_close = v; }
 void Tp::set_ai_is_able_to_break_down_doors(int v) { _ai_is_able_to_break_down_doors = v; }
 void Tp::set_ai_is_able_to_break_out_of_webs(int v) { _ai_is_able_to_break_out_of_webs = v; }
@@ -749,7 +749,7 @@ void Tp::set_is_wall_dungeon(int v) { _is_wall_dungeon = v; }
 void Tp::set_is_wall(int v) { _is_wall = v; }
 void Tp::set_is_wand_eater(int v) { _is_wand_eater = v; }
 void Tp::set_is_wand(int v) { _is_wand = v; }
-void Tp::set_is_water_lover(int v) { _is_water_lover = v; }
+void Tp::set_environ_loves_water(int v) { _environ_loves_water = v; }
 void Tp::set_is_weapon(int v) { _is_weapon = v; }
 void Tp::set_is_weapon_wielder(int v) { _is_weapon_wielder = v; }
 void Tp::set_item_height(int v) { _item_height = v; }
@@ -758,9 +758,9 @@ void Tp::set_laser_name(const std::string &v) { _laser_name = v; }
 void Tp::set_light_color(const std::string &v) { _light_color = v; }
 void Tp::set_light_strength(int v) { _light_strength = v; }
 void Tp::set_long_text_description(const std::string &v) { _long_text_description = v; }
-void Tp::set_loves_fire(int v) { _loves_fire = v; }
-void Tp::set_loves_poison(int v) { _loves_poison = v; }
-void Tp::set_loves_spiderwebs(int v) { _loves_spiderwebs = v; }
+void Tp::set_environ_loves_fire(int v) { _environ_loves_fire = v; }
+void Tp::set_environ_loves_poison(int v) { _environ_loves_poison = v; }
+void Tp::set_environ_loves_spiderwebs(int v) { _environ_loves_spiderwebs = v; }
 void Tp::set_minion_leash_distance(int v) { _minion_leash_distance = v; }
 void Tp::set_minion_limit(int v) { _minion_limit = v; }
 void Tp::set_monst_size(int v) { _monst_size = v; }

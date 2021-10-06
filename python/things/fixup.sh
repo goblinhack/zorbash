@@ -128,10 +128,10 @@ do
       set_collision_check \
       set_collision_circle \
       set_collision_hit_priority \
-      set_damage_doubled_from_acid \
-      set_damage_doubled_from_fire \
-      set_damage_doubled_from_poison \
-      set_damage_doubled_from_water \
+      set_environ_damage_doubled_from_acid \
+      set_environ_damage_doubled_from_fire \
+      set_environ_damage_doubled_from_poison \
+      set_environ_damage_doubled_from_water \
       set_enchant_level \
       set_enchant_max \
       set_gfx_an_animation_only \
@@ -156,17 +156,17 @@ do
       set_gfx_very_short_shadow_caster \
       set_gfx_water \
       set_gfx_weapon_carry_anim \
-      set_hates_acid \
-      set_hates_fire \
-      set_hates_poison \
-      set_hates_water \
+      set_environ_dislikes_acid \
+      set_environ_dislikes_fire \
+      set_environ_dislikes_poison \
+      set_environ_dislikes_water \
       set_is_able_to_change_levels \
       set_is_able_to_fall \
       set_is_able_to_fire_at \
       set_ai_is_able_to_see_through_doors \
       set_ai_is_able_to_walk_through_walls \
       set_is_acid \
-      set_is_acid_lover \
+      set_environ_loves_acid \
       set_ai_wanderer \
       set_is_alive_on_end_of_anim \
       set_is_always_hit \
@@ -220,7 +220,7 @@ do
       set_is_ethereal \
       set_is_ethereal_minion_generator \
       set_is_explosion \
-      set_is_extreme_hazard \
+      set_is_cursor_path_hazard_for_player \
       set_is_fearless \
       set_is_fire \
       set_is_floating \
@@ -313,11 +313,11 @@ do
       set_unused_flag35 \
       set_unused_flag36 \
       set_unused_flag37 \
-      set_unused_flag38 \
-      set_unused_flag39 \
+      set_environ_hates_poison \
+      set_environ_hates_fire \
       set_unused_flag4 \
-      set_unused_flag40 \
-      set_unused_flag41 \
+      set_environ_hates_water \
+      set_environ_hates_acid \
       set_ai_is_able_to_detect_secret_doors_when_close \
       set_ai_is_able_to_break_down_doors \
       set_ai_is_able_to_break_out_of_webs \
@@ -370,13 +370,13 @@ do
       set_is_wall_dungeon \
       set_is_wand \
       set_is_wand_eater \
-      set_is_water_lover \
+      set_environ_loves_water \
       set_is_weapon \
       set_is_weapon_wielder \
       set_is_wooden \
-      set_loves_fire \
-      set_loves_poison \
-      set_loves_spiderwebs \
+      set_environ_loves_fire \
+      set_environ_loves_poison \
+      set_environ_loves_spiderwebs \
       set_normal_placement_rules \
       set_on_death_drop_all_items \
       set_on_death_is_open

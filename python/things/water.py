@@ -7,7 +7,7 @@ def tp_init(name, text_name, tiles=[]):
     mytp.set_ai_obstacle(True)
     mytp.set_gfx_animated(True)
     mytp.set_gfx_water(True)
-    mytp.set_hates_fire(True)
+    mytp.set_environ_dislikes_fire(True)
     mytp.set_is_able_to_fall(True)
     mytp.set_is_described_when_hovering_over(True)
     mytp.set_is_hazard(True)
