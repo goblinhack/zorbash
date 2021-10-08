@@ -213,6 +213,10 @@ int Thing::get_danger_current_level(void)
 
 int Thing::is_dangerous(Thingp it)
 {
+  if (! it->is_monst() && ! it->is_player()) {
+    return false;
+  }
+
   if (is_fearless()) {
     return false;
   }

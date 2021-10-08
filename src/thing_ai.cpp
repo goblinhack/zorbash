@@ -38,20 +38,21 @@
 #define SEARCH_TYPE_LAST_RESORTS_NO_JUMP      5
 #define SEARCH_TYPE_LAST_RESORTS_JUMP_ALLOWED 6
 
-#define SCORE_ADD(score, msg)                                                                                          \
-  total_score += (score);                                                                                              \
-  got_a_goal = true;                                                                                                   \
-  if (last_msg.empty()) {                                                                                              \
-    last_msg = msg;                                                                                                    \
-  } else {                                                                                                             \
-    last_msg += ", ";                                                                                                  \
-    last_msg += msg;                                                                                                   \
-  }                                                                                                                    \
+#define GOAL_ADD(score, msg, it)                                                                                       \
   IF_DEBUG3                                                                                                            \
   {                                                                                                                    \
-    auto s = string_sprintf("Add sub-goal score %d @(%d,%d) %s", score, p.x, p.y, msg);                                \
+    auto s = string_sprintf("Add goal score %d @(%d,%d) %s", score, p.x, p.y, msg);                                    \
     AI_LOG("", s, it);                                                                                                 \
-  }
+  }                                                                                                                    \
+  goals.insert(Goal(score, p, msg));
+
+#define GOAL_AVOID_ADD(score, msg, it)                                                                                 \
+  IF_DEBUG3                                                                                                            \
+  {                                                                                                                    \
+    auto s = string_sprintf("Add goal (avoid) score %d @(%d,%d) %s", score, p.x, p.y, msg);                            \
+    AI_LOG("", s, it);                                                                                                 \
+  }                                                                                                                    \
+  goals.insert(Goal(score, p, msg));
 
 void Thing::ai_log(const std::string &short_msg, const std::string &long_msg, Thingp it)
 {
@@ -70,7 +71,7 @@ void Thing::ai_log(const std::string &short_msg, const std::string &long_msg, Th
     }
   } else {
     if (it) {
-      log("%s, %s", long_msg.c_str(), it->to_string().c_str());
+      log("AI: %s, %s", long_msg.c_str(), it->to_string().c_str());
     } else {
       log("AI: %s", long_msg.c_str());
     }
@@ -106,7 +107,6 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
   // Find all the possible goals. Higher scores, lower costs are preferred
   //
   auto dmap_can_see = get_dmap_can_see();
-  auto age_map      = get_age_map();
 
   std::multiset< Goal > goals;
   std::list< GoalMap >  goalmaps;
@@ -136,18 +136,10 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
     return false;
   }
 
-  AI_LOG("", "Found some goals. Choose the best.");
   for (auto &g : goalmaps) {
     //
-    // Find the highest/least preferred score so we can scale all the goals
-    // later so they fit in one byte (makes it easier to debug).
+    // Modify the dmap for terrain.
     //
-    std::array< std::array< float, MAP_HEIGHT >, MAP_WIDTH > cell_totals         = {};
-    float                                                    least_preferred     = 0;
-    float                                                    most_preferred      = 0;
-    bool                                                     least_preferred_set = false;
-    bool                                                     most_preferred_set  = false;
-
     for (int y = miny; y < maxy; y++) {
       for (int x = minx; x < maxx; x++) {
         point p(x, y);
@@ -158,230 +150,194 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
       }
     }
 
-    for (auto &goal : g.goals) {
-      auto goal_target = goal.at;
-      incr(cell_totals, goal_target.x, goal_target.y, goal.score);
-      auto score = get(cell_totals, goal_target.x, goal_target.y);
-
-      if (least_preferred_set) {
-        least_preferred = std::min(least_preferred, score);
-      } else {
-        least_preferred     = score;
-        least_preferred_set = true;
-      }
-      if (most_preferred_set) {
-        most_preferred = std::max(most_preferred, score);
-      } else {
-        most_preferred     = score;
-        most_preferred_set = true;
-      }
-    }
-
-    IF_DEBUG3
-    {
-      auto s = string_sprintf("Sorted goals, %d (best) .. %d (worst)", (int) most_preferred, (int) least_preferred);
-      AI_LOG("", s);
-    }
-
-    //
-    // Scale the goals so they will fit in the dmap.
-    //
-    for (auto &goal : g.goals) {
-      auto  goal_target = goal.at;
-      float score       = get(cell_totals, goal_target.x, goal_target.y);
-
-      if (most_preferred == least_preferred) {
-        score = 1;
-      } else {
-        if (least_preferred < 0) {
-          score /= most_preferred - least_preferred;
-        } else {
-          score /= most_preferred;
-        }
-        score *= DMAP_LESS_PREFERRED_TERRAIN - 2;
-        score++;
-      }
-
-      assert(score <= DMAP_LESS_PREFERRED_TERRAIN);
-      uint8_t score8 = DMAP_LESS_PREFERRED_TERRAIN - (int) score;
-      set(g.dmap->val, goal_target.x, goal_target.y, score8);
-    }
-
-    //
-    // Record we've been here.
-    //
-    set(age_map->val, start.x, start.y, game->tick_current);
-
-    //
-    // Find the best next-hop to the best goal.
-    //
-#ifdef ENABLE_DEBUG_AI_VERBOSE
-    IF_DEBUG3
-    {
-      AI_LOG("", "Goals:");
-      dmap_print(g.dmap, point(min.x, min.y), point(start.x, start.y), point(max.x, max.y));
-    }
-#endif
-
-    //
-    // Make sure we do not want to stay in the same position by making
-    // our current cell passable but the very least preferred it can be.
-    //
-    if (get(g.dmap->val, start.x, start.y) > 0) {
-      set(g.dmap->val, start.x, start.y, DMAP_IS_PASSABLE);
-    }
-
-    //
-    // Move diagonally if not blocked by walls
-    //
-    point astar_start(start.x, start.y);
-
-    //
-    // Modify the given goals with scores that indicate the cost of the
-    // path to that goal. The result should be a sorted set of goals.
-    //
-    std::multiset< Path > paths;
-    char                  path_debug = '\0'; // astart path debug
-
-    for (auto &goal : g.goals) {
-#ifdef ENABLE_DEBUG_AI_ASTAR
-      astar_debug = {};
-#endif
-      auto astar_end = goal.at;
-      auto result    = astar_solve(&goal, path_debug, astar_start, astar_end, g.dmap);
-
-      //
-      // Unreachable?
-      //
-      if (result.cost == std::numeric_limits< int >::max()) {
-#ifdef ENABLE_DEBUG_AI_ASTAR
-        auto start = point(minx, miny);
-        auto end   = point(maxx, maxy);
-        astar_dump(g.dmap, goal.at, start, end);
-#endif
-        continue;
-      }
-
-      paths.insert(result);
-
-#ifdef ENABLE_DEBUG_AI_ASTAR
-      for (auto &p : result.path) {
-        set(astar_debug, p.x, p.y, '*');
-      }
-      auto start = point(minx, miny);
-      auto end   = point(maxx, maxy);
-      astar_dump(g.dmap, goal.at, start, end);
-#endif
-    }
-
-    for (auto &result : paths) {
-      std::vector< point > new_move_path;
-
-      for (point p : result.path) {
-        if ((p.x == mid_at.x) && (p.y == mid_at.y)) {
-          continue;
-        }
-        new_move_path.push_back(p);
-      }
-
-      if (new_move_path.empty()) {
-        if (level->is_sticky(mid_at.x, mid_at.y)) {
-          AI_LOG("Stuck in something");
-          if (is_player()) {
-            game->tick_begin("Try to break free");
+    const Dmap saved_dmap = *g.dmap;
+    for (const auto &goal : g.goals) {
+      if (goal.avoid) {
+        std::multiset< Goal > avoid;
+        if (ai_choose_avoid_goals(avoid, goal)) {
+          for (const auto &goal : avoid) {
+            if (ai_create_path_to_single_goal(minx, miny, maxx, maxy, goal, &saved_dmap)) {
+              IF_DEBUG3
+              {
+                auto s = string_sprintf("Accept goal score %d @(%d,%d) %s", (int) goal.score, (int) goal.at.x,
+                                        (int) goal.at.y, goal.msg.c_str());
+                AI_LOG("", s);
+              }
+              return true;
+            }
           }
-          return true;
         }
         continue;
       }
-
-      std::reverse(new_move_path.begin(), new_move_path.end());
-
-      auto p = new_move_path[ new_move_path.size() - 1 ];
-
-      std::string goal_path_str = "";
-      for (auto p1 : new_move_path) {
-        goal_path_str += p1.to_string() + " ";
-      }
-
-      bool logged_one = false;
-      FOR_ALL_THINGS_THAT_INTERACT(level, it, p.x, p.y)
-      {
-        if (it->is_changing_level || it->is_hidden || it->is_falling || it->is_jumping) {
-          continue;
-        }
-
-        if (it == this) {
-          continue;
-        }
-
-        if (it->get_immediate_spawned_owner_id().ok()) {
-          continue;
-        }
-
-        logged_one = true;
-        AI_LOG("", "Found a goal", it);
-      }
-      FOR_ALL_THINGS_END();
-
-      if (! logged_one) {
-        FOR_ALL_THINGS(level, it, p.x, p.y)
+      if (ai_create_path_to_single_goal(minx, miny, maxx, maxy, goal, &saved_dmap)) {
+        IF_DEBUG3
         {
-          if (it->is_changing_level || it->is_hidden || it->is_the_grid || it->is_tmp_thing() || it->is_falling ||
-              it->is_jumping) {
-            continue;
-          }
-
-          if (it == this) {
-            continue;
-          }
-
-          if (it->get_immediate_spawned_owner_id().ok()) {
-            continue;
-          }
-
-          logged_one = true;
-          AI_LOG("", "Found a non active-thing goal", it);
+          auto s = string_sprintf("Accept goal score %d @(%d,%d) %s", (int) goal.score, (int) goal.at.x,
+                                  (int) goal.at.y, goal.msg.c_str());
+          AI_LOG("", s);
         }
-        FOR_ALL_THINGS_END();
-      }
-
-      if (! logged_one) {
-        AI_LOG("", "Found a non-thing goal");
-      }
-
-      if (is_player()) {
-        level->cursor_path_create(new_move_path);
-        level->debug_path_create(new_move_path);
-
-        //
-        // Try to move. It might not work and we end up attacking.
-        //
-        if (cursor_path_pop_first_move()) {
-          return true;
-        }
-
-        //
-        // Did we try or attempt to try to do something?
-        //
-        if (is_player()) {
-          if (! game->tick_requested.empty()) {
-            return true;
-          }
-        } else {
-          return true;
-        }
-      } else {
-        monst_aip->move_path = new_move_path;
         return true;
-      }
-
-      if (is_player()) {
-        log("Robot: Failed to move to goal");
       }
     }
   }
 
+  return false;
+}
+
+bool Thing::ai_create_path_to_single_goal(int minx, int miny, int maxx, int maxy, const Goal &goal,
+                                          const Dmap *saved_dmap)
+{
+  TRACE_AND_INDENT();
+  IF_DEBUG3
+  {
+    auto s = string_sprintf("Process goal score %d @(%d,%d) %s", (int) goal.score, (int) goal.at.x, (int) goal.at.y,
+                            goal.msg.c_str());
+    AI_LOG("", s);
+  }
+
+  //
+  // Copy the dmap so we start with a fresh map per goal.
+  //
+  Dmap dmap = *saved_dmap;
+
+  point start((int) mid_at.x, (int) mid_at.y);
+
+  //
+  // Check we can get to this goal
+  //
+  uint8_t *c = getptr(dmap.val, goal.at.x, goal.at.y);
+  if (*c == DMAP_IS_WALL) {
+    AI_LOG("", "Goal is not reachable");
+    return false;
+  }
+
+  if (*c == DMAP_MAX_LESS_PREFERRED_TERRAIN) {
+    AI_LOG("", "Goal is on bad terrain");
+    return false;
+  }
+
+  //
+  // Mark the goal in the dmap
+  //
+  set(dmap.val, goal.at.x, goal.at.y, DMAP_IS_GOAL);
+
+  //
+  // Make sure we do not want to stay in the same position by making
+  // our current cell passable but the very least preferred it can be.
+  //
+  if (get(dmap.val, start.x, start.y) > 0) {
+    set(dmap.val, start.x, start.y, DMAP_IS_PASSABLE);
+  }
+
+  IF_DEBUG3 { dmap_print(&dmap, point(minx, miny), point(start.x, start.y), point(maxx, maxy)); }
+
+  //
+  // Record we've been here.
+  //
+  auto age_map = get_age_map();
+  set(age_map->val, start.x, start.y, game->tick_current);
+
+  //
+  // Modify the given goals with scores that indicate the cost of the
+  // path to that goal. The result should be a sorted set of goals.
+  //
+  std::multiset< Path > paths;
+  char                  path_debug = '\0'; // astart path debug
+
+#ifdef ENABLE_DEBUG_AI_ASTAR
+  astar_debug = {};
+#endif
+  point astar_start(start.x, start.y);
+  auto  astar_end = goal.at;
+  auto  result    = astar_solve(&goal, path_debug, astar_start, astar_end, &dmap);
+
+  //
+  // Unreachable?
+  //
+  if (result.cost == std::numeric_limits< int >::max()) {
+#ifdef ENABLE_DEBUG_AI_ASTAR
+    auto start = point(minx, miny);
+    auto end   = point(maxx, maxy);
+    astar_dump(&dmap, goal.at, start, end);
+#endif
+    AI_LOG("", "Goal is astar unreachable");
+    return false;
+  }
+
+  paths.insert(result);
+
+#ifdef ENABLE_DEBUG_AI_ASTAR
+  for (auto &p : result.path) {
+    set(astar_debug, p.x, p.y, '*');
+  }
+  auto start = point(minx, miny);
+  auto end   = point(maxx, maxy);
+  astar_dump(&dmap, goal.at, start, end);
+#endif
+
+  for (auto &result : paths) {
+    std::vector< point > new_move_path;
+
+    for (point p : result.path) {
+      if ((p.x == mid_at.x) && (p.y == mid_at.y)) {
+        continue;
+      }
+      new_move_path.push_back(p);
+    }
+
+    if (new_move_path.empty()) {
+      if (level->is_sticky(mid_at.x, mid_at.y)) {
+        AI_LOG("Stuck in something");
+        if (is_player()) {
+          game->tick_begin("Try to break free");
+        }
+        return true;
+      }
+      AI_LOG("", "Goal has no path");
+      return false;
+    }
+
+    std::reverse(new_move_path.begin(), new_move_path.end());
+
+    auto p = new_move_path[ new_move_path.size() - 1 ];
+
+    std::string goal_path_str = "";
+    for (auto p1 : new_move_path) {
+      goal_path_str += p1.to_string() + " ";
+    }
+
+    if (is_player()) {
+      level->cursor_path_create(new_move_path);
+      level->debug_path_create(new_move_path);
+
+      //
+      // Try to move. It might not work and we end up attacking.
+      //
+      if (cursor_path_pop_first_move()) {
+        return true;
+      }
+
+      //
+      // Did we try or attempt to try to do something?
+      //
+      if (is_player()) {
+        if (! game->tick_requested.empty()) {
+          return true;
+        }
+      } else {
+        return true;
+      }
+    } else {
+      monst_aip->move_path = new_move_path;
+      return true;
+    }
+
+    if (is_player()) {
+      log("Robot: Failed to move to goal");
+    }
+  }
+
+  AI_LOG("", "Goal had no reachable paths");
   return false;
 }
 
@@ -396,8 +352,6 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
   auto                                                       dmap_can_see      = get_dmap_can_see();
   bool                                                       jump_allowed      = false;
   int                                                        something_changed = 0;
-
-  AI_LOG("", "Init dmap");
 
   for (int y = miny; y < maxy; y++) {
     for (int x = minx; x < maxx; x++) {
@@ -746,17 +700,8 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
         continue;
       }
 
-      bool got_a_goal   = false;
-      bool avoiding     = false;
-      int  terrain_cost = get_terrain_cost(p);
-      int  total_score  = -(int) terrain_cost;
-
-      std::string last_msg;
-
       FOR_ALL_THINGS_THAT_INTERACT(level, it, p.x, p.y)
       {
-        last_msg = "";
-
         if (it->is_changing_level || it->is_hidden || it->is_falling || it->is_jumping) {
           continue;
         }
@@ -783,19 +728,16 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
           continue;
         }
 
-        auto goal_penalty = get_goal_penalty(it);
+        AI_LOG("", "Can see", it);
 
-        if (is_player()) {
-          it->con("seen");
-        }
+        auto goal_penalty = get_goal_penalty(it);
 
         //
         // Worse terrain, less preferred. Higher score, more preferred.
         //
-        auto my_health        = get_health();
-        auto it_health        = it->get_health();
-        auto health_diff      = it_health - my_health;
-        bool found_a_sub_goal = false;
+        auto my_health   = get_health();
+        auto it_health   = it->get_health();
+        auto health_diff = my_health - it_health;
 
         //
         // Don't allow of attacking monsts from memory if the player or
@@ -808,9 +750,8 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
             //
             // If starving, prefer the thing with most health
             //
-            SCORE_ADD(it_health - goal_penalty, "eat-it");
+            GOAL_ADD(it_health - goal_penalty, "eat-it", it);
             add_goal_penalty(it);
-            found_a_sub_goal = true;
           }
         } else if (is_hungry) {
           if (worth_eating(it) && ! is_dangerous(it)) {
@@ -820,17 +761,14 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
             // go for the easier kill in preference.
             //
             if (it->is_player()) {
-              SCORE_ADD(it_health / 2 - goal_penalty, "eat-player");
+              GOAL_ADD(it_health / 2 - goal_penalty, "eat-player", it);
               add_goal_penalty(it);
-              found_a_sub_goal = true;
             } else if (it->is_alive_monst()) {
-              SCORE_ADD(it_health / 2 - goal_penalty, "eat-monst");
+              GOAL_ADD(it_health / 2 - goal_penalty, "eat-monst", it);
               add_goal_penalty(it);
-              found_a_sub_goal = true;
             } else {
-              SCORE_ADD(it_health / 2 - goal_penalty, "eat-food");
+              GOAL_ADD(it_health / 2 - goal_penalty, "eat-food", it);
               add_goal_penalty(it);
-              found_a_sub_goal = true;
             }
           }
         }
@@ -839,12 +777,8 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
           if (it->is_collectable()) {
             auto score = worth_collecting(it);
             if (score > 0) {
-              SCORE_ADD(score - goal_penalty, "collect");
+              GOAL_ADD(score - goal_penalty, "collect", it);
               add_goal_penalty(it);
-              found_a_sub_goal = true;
-              AI_LOG("", "Is considering collecting", it);
-            } else {
-              AI_LOG("", "Is not considering collecting", it);
             }
           }
         }
@@ -854,27 +788,24 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
         //
         if (it->is_key()) {
           if (ai_is_able_to_collect_keys()) {
-            SCORE_ADD(1000 - goal_penalty, "collect-key");
+            GOAL_ADD(1000 - goal_penalty, "collect-key", it);
             add_goal_penalty(it);
-            found_a_sub_goal = true;
           }
         }
 
         if (it->is_door() && ! it->is_open) {
           if (ai_is_able_to_open_doors() || ai_is_able_to_break_down_doors()) {
             if (get_keys()) {
-              SCORE_ADD(1000 - goal_penalty, "open-door-with-key");
+              GOAL_ADD(1000 - goal_penalty, "open-door-with-key", it);
               add_goal_penalty(it);
             } else {
-              SCORE_ADD(100 - goal_penalty, "open-door");
+              GOAL_ADD(100 - goal_penalty, "open-door", it);
               add_goal_penalty(it);
             }
-            found_a_sub_goal = true;
           }
         }
 
         if (! it->is_dead) {
-          bool  avoid    = false;
           auto  dist     = distance(mid_at, it->mid_at);
           float max_dist = ai_scent_distance();
 
@@ -889,45 +820,44 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
                 // Low on health. Best to avoid this enemy.
                 //
                 if (cannot_avoid(it)) {
-                  SCORE_ADD((int) (max_dist - dist) * 20 - goal_penalty, "attack-enemy-i-cannot-avoid");
+                  GOAL_ADD((int) (max_dist - dist) * health_diff - goal_penalty, "attack-enemy-i-cannot-avoid", it);
                   add_goal_penalty(it);
                   AI_LOG("Cannot avoid enemy", it);
                 } else {
-                  avoid = true;
-                  SCORE_ADD(-(int) ((max_dist - dist) + it_health) * 20 - goal_penalty, "avoid-enemy");
+                  int avoid_score = ((max_dist - dist) * health_diff) - goal_penalty;
+                  GOAL_ADD(avoid_score, "avoid-monst", it);
                   add_goal_penalty(it);
                 }
-                found_a_sub_goal = true;
               } else {
                 //
                 // The closer an enemy is (something that attacked us), the higher the score
                 //
-                avoid = false;
-                SCORE_ADD((int) (max_dist - dist) * 20 - goal_penalty, "attack-enemy");
+                GOAL_AVOID_ADD((int) (max_dist - dist) * health_diff - goal_penalty, "attack-enemy", it);
                 add_goal_penalty(it);
-                found_a_sub_goal = true;
               }
             } else if ((dist < ai_avoid_distance()) && will_avoid_monst(it)) {
               //
               // Monsts we avoid are more serious threats
               //
               if (cannot_avoid(it)) {
-                SCORE_ADD((int) (max_dist - dist) * 10 - goal_penalty, "attack-monst-i-cannot-avoid");
+                GOAL_ADD((int) (max_dist - dist) * health_diff, "attack-monst-i-cannot-avoid", it);
                 add_goal_penalty(it);
                 AI_LOG("Cannot avoid monst", it);
               } else {
-                avoid = true;
-                SCORE_ADD(-(int) ((max_dist - dist) + it_health) * 20 - goal_penalty, "avoid-monst");
+                //
+                // Higher score the closer you are.
+                //
+                int avoid_score = ((max_dist - dist) * health_diff);
+                GOAL_AVOID_ADD(avoid_score, "avoid-monst", it);
                 add_goal_penalty(it);
               }
             } else if (ai_is_able_to_attack_generators() && it->is_minion_generator()) {
               //
               // Very close, high priority attack
               //
-              SCORE_ADD((int) (max_dist - dist) * 10 - goal_penalty, "attack-nearby-generator");
+              GOAL_ADD((int) (max_dist - dist) * health_diff - goal_penalty, "attack-nearby-generator", it);
               add_goal_penalty(it);
-              found_a_sub_goal = true;
-            } else if (possible_to_attack(it) && ! is_disliked_by_me(it)) {
+            } else if (possible_to_attack(it)) {
               //
               // Hazard check above is for cleaners standing on their pool of acid. Do we want to attack that without
               // good reason?
@@ -936,21 +866,18 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
                 //
                 // Very close, high priority attack
                 //
-                SCORE_ADD((int) (max_dist - dist) * 10 - goal_penalty, "attack-nearby-monst");
+                GOAL_ADD((int) (max_dist - dist) * health_diff - goal_penalty, "attack-nearby-monst", it);
                 add_goal_penalty(it);
-                found_a_sub_goal = true;
               } else if (dist < max_dist) {
                 //
-                // Further away close, lower priority attack
+                // No hunting monsters we cannot see just because we have visited that area before.
+                // How aggressive are we?
                 //
-                if (will_avoid_monst(it)) {
-                  //
-                  // Nope
-                  //
-                } else {
-                  SCORE_ADD((int) (max_dist - dist) * 10 - goal_penalty, "attack-maybe-monst");
-                  add_goal_penalty(it);
-                  found_a_sub_goal = true;
+                if ((int) pcg_random_range(0, 1000) < tp()->ai_unprovoked_attack_chance_d1000()) {
+                  if (possible_to_attack(it)) {
+                    GOAL_ADD(-health_diff - goal_penalty, "can-attack-monst-unprovoked", it);
+                    add_goal_penalty(it);
+                  }
                 }
               }
             }
@@ -960,178 +887,8 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
             //
             // Very close, high priority attack
             //
-            SCORE_ADD(666, "get-out-of-web");
+            GOAL_ADD(666, "get-out-of-web", it);
             add_goal_penalty(it);
-            found_a_sub_goal = true;
-          }
-
-          //
-          // If this is something we really want to avoid, like fire, then stay away from it
-          // Try to handle cases, like a monster sitting on acid. We want to attack the monster,
-          // but is the acid that bad?
-          //
-          if (found_a_sub_goal) {
-            //
-            // We already have a goal. Only avoid if this is really bad.
-            //
-            if (is_hated_by_me(it)) {
-              if (dist <= 1) {
-                avoid = true;
-              }
-            }
-          } else {
-            if (is_disliked_by_me(it)) {
-              if (dist <= 1) {
-                if ((int) pcg_random_range(0, 1000) < 500) {
-                  avoid = true;
-                }
-              }
-            }
-          }
-
-          if (avoid) {
-            AI_LOG("Needs to avoid", it);
-            add_avoid(it);
-
-            bool got_avoid = false;
-            auto d         = ai_avoid_distance();
-            if (! d) {
-              d = 2;
-            }
-
-            for (auto dx = -d; dx <= d; dx++) {
-              for (auto dy = -d; dy <= d; dy++) {
-
-                point p(mid_at.x + dx, mid_at.y + dy);
-                if (level->is_oob(p)) {
-                  continue;
-                }
-
-                if (! dx && ! dy) {
-                  continue;
-                }
-
-                float dist = distance(mid_at + fpoint(dx, dy), it->mid_at);
-                if (dist < ai_avoid_distance()) {
-                  continue;
-                }
-
-                if (ai_obstacle_for_me(p)) {
-                  continue;
-                }
-
-                int terrain_cost = get_terrain_cost(p);
-                int total_score  = -(int) terrain_cost;
-                total_score += dist * 100;
-                total_score += 1000;
-                goals.insert(Goal(total_score, p, last_msg));
-                set(dmap_can_see->val, p.x, p.y, DMAP_IS_GOAL);
-                IF_DEBUG3
-                {
-                  auto s = string_sprintf("Avoid goal (score %d) @(%d,%d)", total_score, p.x, p.y);
-                  AI_LOG("", s);
-                }
-                got_avoid = true;
-              }
-            }
-
-            //
-            // Try again with more lenient checks
-            //
-            if (! got_avoid) {
-              for (auto dx = -d; dx <= d; dx++) {
-                for (auto dy = -d; dy <= d; dy++) {
-
-                  point p(mid_at.x + dx, mid_at.y + dy);
-                  if (level->is_oob(p)) {
-                    continue;
-                  }
-
-                  if (ai_obstacle_for_me(p)) {
-                    continue;
-                  }
-
-                  float dist         = distance(mid_at + fpoint(dx, dy), it->mid_at);
-                  int   terrain_cost = get_terrain_cost(p);
-                  int   total_score  = -(int) terrain_cost;
-                  total_score += dist * 100;
-                  total_score += 1000;
-                  goals.insert(Goal(total_score, p, last_msg));
-                  set(dmap_can_see->val, p.x, p.y, DMAP_IS_GOAL);
-                  IF_DEBUG3
-                  {
-                    auto s = string_sprintf("Avoid goal (2) (score %d) @(%d,%d)", total_score, p.x, p.y);
-                    AI_LOG("", s);
-                  }
-
-                  got_avoid = true;
-                }
-              }
-            }
-
-            //
-            // Try again with even more lenient checks
-            //
-            if (! got_avoid) {
-              for (auto dx = -d; dx <= d; dx++) {
-                for (auto dy = -d; dy <= d; dy++) {
-
-                  point p(mid_at.x + dx, mid_at.y + dy);
-                  if (level->is_oob(p)) {
-                    continue;
-                  }
-
-                  if (level->is_obs_wall_or_door(p)) {
-                    continue;
-                  }
-
-                  float dist         = distance(mid_at + fpoint(dx, dy), it->mid_at);
-                  int   terrain_cost = get_terrain_cost(p);
-                  int   total_score  = -(int) terrain_cost;
-                  total_score += dist * 100;
-                  total_score += 1000;
-                  goals.insert(Goal(total_score, p, last_msg));
-                  set(dmap_can_see->val, p.x, p.y, DMAP_IS_GOAL);
-                  IF_DEBUG3
-                  {
-                    auto s = string_sprintf("Avoid goal (3) (score %d) @(%d,%d)", total_score, p.x, p.y);
-                    AI_LOG("", s);
-                  }
-
-                  got_avoid = true;
-                }
-              }
-            }
-
-            //
-            // This is an anti goal
-            //
-            if (got_avoid) {
-              avoiding = true;
-              AI_LOG("", "Is avoiding");
-              break;
-            } else {
-              AI_LOG("Could not avoid, so attack", it);
-            }
-          }
-
-          if (! found_a_sub_goal) {
-            //
-            // No hunting monsters we cannot see just because we have visited that area before.
-            //
-            // Well this is true for the player. Monsters, we're lenient.
-            //
-            if (lit_recently) {
-              //
-              // How aggressive are we?
-              //
-              if ((int) pcg_random_range(0, 1000) < tp()->ai_unprovoked_attack_chance_d1000()) {
-                if (possible_to_attack(it)) {
-                  SCORE_ADD(-health_diff - goal_penalty, "can-attack-monst");
-                  add_goal_penalty(it);
-                }
-              }
-            }
           }
         }
 
@@ -1141,27 +898,11 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
           //
           auto age = get(age_map->val, p.x, p.y);
           if (age - game->tick_current < 10) {
-            SCORE_ADD(1, "preferred-terrain");
+            GOAL_ADD(1, "preferred-terrain", it);
           }
         }
       }
       FOR_ALL_THINGS_END();
-
-      if (avoiding) {
-        set(dmap_can_see->val, x, y, DMAP_IS_WALL);
-      } else if (got_a_goal) {
-        goals.insert(Goal(total_score, p, last_msg));
-        IF_DEBUG3
-        {
-          auto s = string_sprintf("Add goal (score %d) @(%d,%d) %s", total_score, p.x, p.y, last_msg.c_str());
-          AI_LOG("", s);
-        }
-        set(dmap_can_see->val, x, y, DMAP_IS_GOAL);
-      } else if (terrain_cost) {
-        set(dmap_can_see->val, x, y, (uint8_t) terrain_cost);
-      } else {
-        set(dmap_can_see->val, x, y, DMAP_IS_PASSABLE);
-      }
     }
   }
 }
@@ -2265,3 +2006,98 @@ void Thing::ai_get_next_hop(void)
 }
 
 int Thing::ai_choose_goal(void) { return ai_tick(); }
+
+bool Thing::ai_choose_avoid_goals(std::multiset< Goal > &goals, const Goal &goal)
+{
+  Thingp it    = goal.what;
+  int    score = goal.score;
+
+  AI_LOG("Needs to avoid", it);
+
+  auto d = ai_avoid_distance();
+  if (! d) {
+    d = 2;
+  }
+
+  for (auto dx = -d; dx <= d; dx++) {
+    for (auto dy = -d; dy <= d; dy++) {
+
+      point p(mid_at.x + dx, mid_at.y + dy);
+      if (level->is_oob(p)) {
+        continue;
+      }
+
+      if (! dx && ! dy) {
+        continue;
+      }
+
+      float dist = distance(mid_at + fpoint(dx, dy), it->mid_at);
+      if (dist < ai_avoid_distance()) {
+        continue;
+      }
+
+      if (ai_obstacle_for_me(p)) {
+        continue;
+      }
+
+      int terrain_cost = get_terrain_cost(p);
+      score -= (int) terrain_cost;
+      score += dist * 10;
+      GOAL_ADD(score, "avoid", it);
+      return true;
+    }
+  }
+
+  //
+  // Try again with more lenient checks
+  //
+  for (auto dx = -d; dx <= d; dx++) {
+    for (auto dy = -d; dy <= d; dy++) {
+
+      point p(mid_at.x + dx, mid_at.y + dy);
+      if (level->is_oob(p)) {
+        continue;
+      }
+
+      if (ai_obstacle_for_me(p)) {
+        continue;
+      }
+
+      float dist         = distance(mid_at + fpoint(dx, dy), it->mid_at);
+      int   terrain_cost = get_terrain_cost(p);
+      int   score        = -(int) terrain_cost;
+      score += dist * 100;
+      score += 1000;
+      GOAL_ADD(score, "avoid", it);
+      return true;
+    }
+  }
+
+  //
+  // Try again with even more lenient checks
+  //
+  for (auto dx = -d; dx <= d; dx++) {
+    for (auto dy = -d; dy <= d; dy++) {
+
+      point p(mid_at.x + dx, mid_at.y + dy);
+      if (level->is_oob(p)) {
+        continue;
+      }
+
+      if (level->is_obs_wall_or_door(p)) {
+        continue;
+      }
+
+      float dist         = distance(mid_at + fpoint(dx, dy), it->mid_at);
+      int   terrain_cost = get_terrain_cost(p);
+      int   score        = -(int) terrain_cost;
+      score += dist * 100;
+      score += 1000;
+      GOAL_ADD(score, "avoid", it);
+      return true;
+    }
+  }
+
+  AI_LOG("", "Could not avoid", it);
+  return false;
+}

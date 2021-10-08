@@ -22,9 +22,17 @@ public:
   float       score = {0};
   point       at;
   std::string msg;
+  Thingp      what {};
+  bool        avoid {};
 
   Goal() {}
   Goal(float score, point at, const std::string &msg) : score(score), at(at), msg(msg) {}
+  Goal(float score, point at, const std::string &msg, bool avoid) : score(score), at(at), msg(msg), avoid(avoid) {}
+  Goal(float score, point at, const std::string &msg, Thingp what) : score(score), at(at), msg(msg), what(what) {}
+  Goal(float score, point at, const std::string &msg, Thingp what, bool avoid)
+      : score(score), at(at), msg(msg), what(what), avoid(avoid)
+  {
+  }
 
   friend bool operator<(const class Goal &lhs, const class Goal &rhs)
   {

@@ -80,6 +80,13 @@ void Thing::goal_penalty_tick(void)
       }
       continue;
     }
+
+    if (is_player() && game->robot_mode) {
+      CON("Robot: Remove goal penalty: %s (%d timeout)", attacker->to_string().c_str(), p.second);
+    }
+
+    monst_aip->goal_penalty.erase(p.first);
+    return;
   }
 }
 
@@ -94,19 +101,26 @@ void Thing::add_goal_penalty(Thingp attacker)
     return;
   }
 
-  if (! monst_aip->goal_penalty[ attacker->id ]) {
-    if (is_player() && game->robot_mode) {
-      CON("Robot: Add new goal penalty %s", attacker->to_string().c_str());
-    } else {
-      dbg("Add new goal penalty %s", attacker->to_string().c_str());
-    }
-    monst_aip->goal_penalty[ attacker->id ] += 1;
-  } else {
-    dbg("Increment old goal penalty %s", attacker->to_string().c_str());
-    monst_aip->goal_penalty[ attacker->id ] += 1;
+  auto penalty = monst_aip->goal_penalty[ attacker->id ];
 
-    if (monst_aip->goal_penalty[ attacker->id ] > THING_MAX_GOAL_PENALTY) {
-      monst_aip->goal_penalty[ attacker->id ] = THING_MAX_GOAL_PENALTY;
+  if (! penalty) {
+    penalty = 10;
+    if (is_player() && game->robot_mode) {
+      CON("Robot: Set new goal penalty %s to %d", attacker->to_string().c_str(), penalty);
+    } else {
+      dbg("Set new goal penalty %s to %d", attacker->to_string().c_str(), penalty);
+    }
+  } else {
+    if (is_player() && game->robot_mode) {
+      CON("Robot: Increment new goal penalty %s to %d", attacker->to_string().c_str(), penalty);
+    } else {
+      dbg("Increment new goal penalty %s to %d", attacker->to_string().c_str(), penalty);
+    }
+    penalty += 2;
+
+    if (penalty > THING_MAX_GOAL_PENALTY) {
+      penalty = THING_MAX_GOAL_PENALTY;
     }
   }
+  monst_aip->goal_penalty[ attacker->id ] = penalty;
 }

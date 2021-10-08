@@ -24,12 +24,8 @@ bool Thing::will_avoid_monst(const Thingp it)
   TRACE_AND_INDENT();
   auto me = tp();
 
-  if (me->is_monst()) {
-    if (it->is_player()) {
-      if (is_dangerous(it)) {
-        return true;
-      }
-    }
+  if (is_dangerous(it)) {
+    return true;
   }
 
   if (me->is_meat()) {

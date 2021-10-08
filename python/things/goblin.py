@@ -122,6 +122,8 @@ def tp_init(name, text_name):
     mytp.set_is_bag_item(False)
     mytp.set_is_bag_item_container(False)
     mytp.set_is_bag_item_not_stackable(False)
+    mytp.set_capacity_height(10)
+    mytp.set_capacity_width(10)
     mytp.set_is_barrel(False)
     mytp.set_is_bleeder(False)
     mytp.set_is_blood(False)
