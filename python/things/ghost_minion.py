@@ -92,7 +92,7 @@ def tp_init(name, text_name):
     mytp.set_is_always_hit(False)
     mytp.set_is_ascend_dungeon(False)
     mytp.set_is_ascend_sewer(False)
-    mytp.set_is_attackable_by_monst(False)
+    mytp.set_is_attackable_by_monst(True)
     mytp.set_is_attackable_by_player(True)
     mytp.set_is_auto_collect_item(False)
     mytp.set_is_auto_throw(False)

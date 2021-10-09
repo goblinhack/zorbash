@@ -13,6 +13,7 @@ def tp_init(name, tiles=[]):
     mytp.set_health_initial_dice("1d20")
     mytp.set_is_able_to_fall(True)
     mytp.set_is_attackable_by_player(True)
+    mytp.set_is_attackable_by_monst(True)
     mytp.set_is_burnable(True)
     mytp.set_is_combustible(True)
     mytp.set_is_cursor_can_hover_over(True)

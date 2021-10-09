@@ -28,6 +28,7 @@ def tp_init(name):
     mytp.set_is_able_to_fall(False)
     mytp.set_is_always_hit(True)
     mytp.set_is_attackable_by_player(True)
+    mytp.set_is_attackable_by_monst(True)
     mytp.set_is_corpse_on_death(True)
     mytp.set_is_cursor_can_hover_over(True)
     mytp.set_is_described_when_hovering_over(True)
