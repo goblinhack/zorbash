@@ -187,8 +187,6 @@ std::list< Thingp > Thing::anything_to_carry_at(fpoint at)
   TRACE_AND_INDENT();
   std::vector< std::pair< Thingp, int > > items;
 
-  dbg("Anything to carry at %d,%d", (int) at.x, (int) at.y);
-  TRACE_AND_INDENT();
   //
   // Can't pick things up whilst being swallowed!
   //

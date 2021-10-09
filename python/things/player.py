@@ -92,6 +92,7 @@ def tp_init(name, text_name, short_text_name, title):
     mytp.set_environ_hates_water(False)
     mytp.set_environ_loves_acid(False)
     mytp.set_environ_loves_fire(False)
+    mytp.set_environ_loves_poison(False)
     mytp.set_environ_loves_spiderwebs(False)
     mytp.set_environ_loves_water(False)
     mytp.set_gfx_an_animation_only(False)

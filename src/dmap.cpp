@@ -11,17 +11,91 @@
 #include "my_sys.h"
 #include "my_thing_defs.h"
 
-void dmap_print(const Dmap *d, point at, point start, point end)
+void dmap_print(const Dmap *D, point at, point tl, point br)
 {
   uint8_t x;
   uint8_t y;
 
-  LOG("DMAP: start %d,%d end %d %d at %d,%d", start.x, start.y, end.x, end.y, at.x, at.y);
+  int minx, miny, maxx, maxy;
+  if (tl.x < br.x) {
+    minx = tl.x;
+    maxx = br.x;
+  } else {
+    minx = br.x;
+    maxx = tl.x;
+  }
+  if (tl.y < br.y) {
+    miny = tl.y;
+    maxy = br.y;
+  } else {
+    miny = br.y;
+    maxy = tl.y;
+  }
 
-  for (y = start.y; y < end.y; y++) {
+  if (minx < 0) {
+    minx = 0;
+  }
+  if (miny < 0) {
+    miny = 0;
+  }
+  if (maxx >= MAP_WIDTH) {
+    maxx = MAP_WIDTH - 1;
+  }
+  if (maxy >= MAP_HEIGHT) {
+    maxy = MAP_HEIGHT - 1;
+  }
+
+  bool all_walls;
+
+  //
+  // Try to minimize the DMAP area if it is mostly walls at the edges, for speed.
+  //
+  all_walls = true;
+  for (x = minx; (x < maxx) && all_walls; x++) {
+    for (y = miny; (y < maxy) && all_walls; y++) {
+      all_walls = get(D->val, x, y) == DMAP_IS_WALL;
+    }
+    if (all_walls) {
+      minx = x;
+    }
+  }
+
+  all_walls = true;
+  for (x = maxx; (x > minx) && all_walls; x--) {
+    for (y = miny; (y < maxy) && all_walls; y++) {
+      all_walls = get(D->val, x, y) == DMAP_IS_WALL;
+    }
+    if (all_walls) {
+      maxx = x;
+    }
+  }
+
+  all_walls = true;
+  for (y = miny; (y < maxy) && all_walls; y++) {
+    for (x = minx; (x < maxx) && all_walls; x++) {
+      all_walls = get(D->val, x, y) == DMAP_IS_WALL;
+    }
+    if (all_walls) {
+      miny = y;
+    }
+  }
+
+  all_walls = true;
+  for (y = maxy; (y > miny) && all_walls; y--) {
+    for (x = minx; (x < maxx) && all_walls; x++) {
+      all_walls = get(D->val, x, y) == DMAP_IS_WALL;
+    }
+    if (all_walls) {
+      maxy = y;
+    }
+  }
+
+  LOG("DMAP: tl %d,%d br %d %d at %d,%d", minx, miny, maxx, maxy, at.x, at.y);
+
+  for (y = miny; y < maxy; y++) {
     std::string debug;
-    for (x = start.x; x < end.x; x++) {
-      uint8_t e = get(d->val, x, y);
+    for (x = minx; x < maxx; x++) {
+      uint8_t e = get(D->val, x, y);
       if (point(x, y) == at) {
         debug += (" @ ");
         continue;
@@ -45,7 +119,7 @@ void dmap_print(const Dmap *d, point at, point start, point end)
   }
 }
 
-void dmap_print(const Dmap *d)
+void dmap_print(const Dmap *D)
 {
   uint8_t x;
   uint8_t y;
@@ -55,7 +129,7 @@ void dmap_print(const Dmap *d)
   for (y = 0; y < MAP_HEIGHT; y++) {
     std::string debug;
     for (x = 0; x < MAP_WIDTH; x++) {
-      uint8_t e = get(d->val, x, y);
+      uint8_t e = get(D->val, x, y);
       if (e == DMAP_IS_WALL) {
         debug += ("## ");
         continue;
@@ -124,16 +198,60 @@ void dmap_process(Dmap *D, point tl, point br)
   }
 
   //
-  // Need a wall around the dmap or the search will sort of
-  // trickle off the map
+  // Need a wall around the dmap or the search will sort of trickle off the map
   //
-  for (y = miny; y < MAP_HEIGHT; y++) {
+  for (y = miny; y < maxy; y++) {
     set(D->val, minx, y, DMAP_IS_WALL);
     set(D->val, maxx - 1, y, DMAP_IS_WALL);
   }
-  for (x = minx; x < MAP_WIDTH; x++) {
+  for (x = minx; x < maxx; x++) {
     set(D->val, x, miny, DMAP_IS_WALL);
     set(D->val, x, maxy - 1, DMAP_IS_WALL);
+  }
+
+  bool all_walls;
+
+  //
+  // Try to minimize the DMAP area if it is mostly walls at the edges, for speed.
+  //
+  all_walls = true;
+  for (x = minx; (x < maxx) && all_walls; x++) {
+    for (y = miny; (y < maxy) && all_walls; y++) {
+      all_walls = get(D->val, x, y) == DMAP_IS_WALL;
+    }
+    if (all_walls) {
+      minx = x;
+    }
+  }
+
+  all_walls = true;
+  for (x = maxx; (x > minx) && all_walls; x--) {
+    for (y = miny; (y < maxy) && all_walls; y++) {
+      all_walls = get(D->val, x, y) == DMAP_IS_WALL;
+    }
+    if (all_walls) {
+      maxx = x;
+    }
+  }
+
+  all_walls = true;
+  for (y = miny; (y < maxy) && all_walls; y++) {
+    for (x = minx; (x < maxx) && all_walls; x++) {
+      all_walls = get(D->val, x, y) == DMAP_IS_WALL;
+    }
+    if (all_walls) {
+      miny = y;
+    }
+  }
+
+  all_walls = true;
+  for (y = maxy; (y > miny) && all_walls; y--) {
+    for (x = minx; (x < maxx) && all_walls; x++) {
+      all_walls = get(D->val, x, y) == DMAP_IS_WALL;
+    }
+    if (all_walls) {
+      maxy = y;
+    }
   }
 
   for (y = miny + 1; y < maxy - 1; y++) {

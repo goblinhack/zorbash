@@ -137,6 +137,8 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
   }
 
   for (auto &g : goalmaps) {
+    IF_DEBUG3 { dmap_print(g.dmap, point(start.x, start.y), point(minx, miny), point(maxx, maxy)); }
+
     //
     // Modify the dmap for terrain.
     //
@@ -206,11 +208,6 @@ bool Thing::ai_create_path_to_single_goal(int minx, int miny, int maxx, int maxy
   // Check we can get to this goal
   //
   uint8_t *c = getptr(dmap.val, goal.at.x, goal.at.y);
-  if (*c == DMAP_IS_WALL) {
-    AI_LOG("", "Goal is not reachable");
-    return false;
-  }
-
   if (*c == DMAP_MAX_LESS_PREFERRED_TERRAIN) {
     AI_LOG("", "Goal is on bad terrain");
     return false;
@@ -229,7 +226,7 @@ bool Thing::ai_create_path_to_single_goal(int minx, int miny, int maxx, int maxy
     set(dmap.val, start.x, start.y, DMAP_IS_PASSABLE);
   }
 
-  IF_DEBUG3 { dmap_print(&dmap, point(minx, miny), point(start.x, start.y), point(maxx, maxy)); }
+  IF_DEBUG3 { dmap_print(&dmap, point(start.x, start.y), point(minx, miny), point(maxx, maxy)); }
 
   //
   // Record we've been here.
@@ -948,18 +945,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
       continue;
     }
 
-    auto  dist     = distance(make_fpoint(p), mid_at);
-    float max_dist = ai_scent_distance();
-
-    //
-    // Look as far as our memory and lighting permits
-    //
-    if (! is_player()) {
-      if (dist >= max_dist) {
-        continue;
-      }
-    }
-
+    auto dist = distance(make_fpoint(p), mid_at);
     if (level->is_obs_wall_or_door(p.x, p.y)) {
       continue;
     }
