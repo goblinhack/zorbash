@@ -113,30 +113,6 @@ bool Thing::move(fpoint future_pos)
     dbg("Move to %f,%f", future_pos.x, future_pos.y);
   }
 
-  //
-  // Don't let minions wander too far from their manifestor.
-  //
-  auto manifestor = get_top_minion_owner();
-  if (manifestor) {
-    if (minion_leash_distance()) {
-      auto new_distance  = distance(future_pos, manifestor->mid_at);
-      auto curr_distance = distance(mid_at, manifestor->mid_at);
-      if (new_distance <= curr_distance) {
-        //
-        // Always allow moves that end up closer to the base
-        //
-      } else if (new_distance >= minion_leash_distance()) {
-        //
-        // Too far.
-        //
-        dbg("Minion cannot to %f,%f (new-dist %f, curr-dist %f); it tugs at the leash at %f,%f", future_pos.x,
-            future_pos.y, new_distance, curr_distance, manifestor->mid_at.x, manifestor->mid_at.y);
-        lunge(future_pos);
-        return false;
-      }
-    }
-  }
-
   bool up              = future_pos.y < mid_at.y;
   bool down            = future_pos.y > mid_at.y;
   bool left            = future_pos.x < mid_at.x;
@@ -249,6 +225,30 @@ bool Thing::move(fpoint future_pos, uint8_t up, uint8_t down, uint8_t left, uint
   if (is_jumping) {
     dbg("Move; no, is jumping");
     return false;
+  }
+
+  //
+  // Don't let minions wander too far from their manifestor.
+  //
+  auto manifestor = get_top_minion_owner();
+  if (manifestor) {
+    if (minion_leash_distance()) {
+      auto new_distance  = distance(future_pos, manifestor->mid_at);
+      auto curr_distance = distance(mid_at, manifestor->mid_at);
+      if (new_distance <= curr_distance) {
+        //
+        // Always allow moves that end up closer to the base
+        //
+      } else if (new_distance >= minion_leash_distance()) {
+        //
+        // Too far.
+        //
+        dbg("Minion cannot move to %f,%f (new-dist %f, curr-dist %f); it tugs at the leash at %f,%f", future_pos.x,
+            future_pos.y, new_distance, curr_distance, manifestor->mid_at.x, manifestor->mid_at.y);
+        lunge(future_pos);
+        return false;
+      }
+    }
   }
 
   //

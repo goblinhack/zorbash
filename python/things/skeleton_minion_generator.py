@@ -5,6 +5,9 @@ def on_idle_dice(me, x, y):
     if zx.pcg_randint(1, 100) < 10:
         if zx.level_spawn_next_to(me, "skeleton_minion_fire"):
             zx.thing_sound_play_channel(me, zx.CHANNEL_MONST_BIRTH, "bones1")
+    elif zx.pcg_randint(1, 100) < 10:
+        if zx.level_spawn_next_to(me, "skeleton_minion_long_leash"):
+            zx.thing_sound_play_channel(me, zx.CHANNEL_MONST_BIRTH, "bones1")
     else:
         if zx.level_spawn_next_to(me, "skeleton_minion"):
             zx.thing_sound_play_channel(me, zx.CHANNEL_MONST_BIRTH, "bones2")

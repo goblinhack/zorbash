@@ -210,8 +210,10 @@ bool Thing::path_pop_next_move(void)
       //
       // Did we try or attempt to try to do something?
       //
-      if (! game->tick_requested.empty()) {
-        return true;
+      if (is_player()) {
+        if (! game->tick_requested.empty()) {
+          return true;
+        }
       }
     }
 
@@ -261,8 +263,10 @@ bool Thing::path_pop_next_move(void)
     //
     // Did we try or attempt to try to do something?
     //
-    if (! game->tick_requested.empty()) {
-      return true;
+    if (is_player()) {
+      if (! game->tick_requested.empty()) {
+        return true;
+      }
     }
   }
 
@@ -285,6 +289,11 @@ bool Thing::path_pop_next_move(void)
     }
   }
 
+  //
+  // Need this else monsts will keep on trying to continue along a long path
+  // and end up lunging crazy distances.
+  //
+  clear_move_path("Could not move");
   return false;
 }
 
