@@ -234,6 +234,17 @@ int Thing::is_dangerous(Thingp it)
   int b = it->get_danger_current_level();
 
   //
+  // If it's really close, then it's more dangerous
+  //
+  if (distance(mid_at, it->mid_at) < 2) {
+    b *= 2;
+  }
+
+  if (distance(mid_at, it->mid_at) == 0) {
+    b *= 2;
+  }
+
+  //
   // If I'm low on health then consider it more dangereous
   //
   if (get_health() < get_health_max() / 5) {
