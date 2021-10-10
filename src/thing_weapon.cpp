@@ -330,80 +330,13 @@ bool Thing::wield(Thingp weapon)
   return true;
 }
 
-bool Thing::use_weapon(void)
+bool Thing::use_weapon_try(void)
 {
   TRACE_AND_INDENT();
   dbg("Try to use weapon");
-  TRACE_AND_INDENT();
-  if (get_weapon_id_use_anim().ok()) {
-    //
-    // Still using.
-    //
-    dbg("Try to use weapon; no still using");
-    return false;
-  }
-
-  if (is_able_to_tire()) {
-    if (! get_stamina()) {
-      if (is_player()) {
-        TOPCON("You are too tired to attack. You need to rest.");
-      }
-      return false;
-    }
-  }
-
-  std::string swung_as;
-
-  auto weapon = weapon_get();
-  if (! weapon) {
-    if (is_player()) {
-      TOPCON("You attack with bare fists!");
-
-      //
-      // Python callback
-      //
-      on_bite();
-    }
-    swung_as = gfx_anim_attack();
-  } else {
-    auto weapon_tp = weapon->tp();
-
-    swung_as = weapon_tp->gfx_anim_attack();
-    if (swung_as == "") {
-      die("Could not use %s/%08" PRIx32 " has no 'use' animation frame", weapon_tp->name().c_str(), weapon->id.id);
-      return false;
-    }
-
-    auto what = tp_find(swung_as);
-    if (! what) {
-      err("Could not find %s to wield", swung_as.c_str());
-      return false;
-    }
-  }
-
-  //
-  // Save the thing id so the client wid can keep track of the weapon.
-  //
-  auto use_anim = level->thing_new(swung_as, this);
-
-  //
-  // Attach to the parent thing.
-  //
-  use_anim->set_owner(this);
-
-  weapon_set_use_anim(use_anim);
-
-  //
-  // Hide the carry_anim while using.
-  //
-  auto c = weapon_get_carry_anim();
-  if (c) {
-    c->hide();
-  }
-
-  move_carried_items();
 
   float dx, dy;
+  auto  weapon = weapon_get();
   if (! weapon) {
     auto d = dir_to_direction();
     dx     = d.x;
@@ -418,6 +351,7 @@ bool Thing::use_weapon(void)
 
   dbg("Attack at %f,%f delta %f,%f", hit_at.x, hit_at.y, dx, dy);
   TRACE_AND_INDENT();
+
   //
   // Lunge at the target
   //
@@ -427,12 +361,18 @@ bool Thing::use_weapon(void)
     on_use(weapon);
     if (weapon->collision_check_and_handle_at(hit_at, &target_attacked, &target_overlaps)) {
       lunge(hit_at);
+      if (target_attacked) {
+        return true;
+      }
       return false;
     }
   } else {
     dbg("No weapon");
     if (collision_check_and_handle_at(hit_at, &target_attacked, &target_overlaps)) {
       lunge(hit_at);
+      if (target_attacked) {
+        return true;
+      }
       return false;
     }
   }
@@ -628,4 +568,91 @@ bool Thing::use_weapon(void)
   }
 
   return false;
+}
+
+bool Thing::use_weapon(void)
+{
+  TRACE_AND_INDENT();
+  dbg("Try to use weapon");
+  TRACE_AND_INDENT();
+  if (get_weapon_id_use_anim().ok()) {
+    //
+    // Still using.
+    //
+    dbg("Try to use weapon; no still using");
+    return false;
+  }
+
+  if (is_able_to_tire()) {
+    if (! get_stamina()) {
+      if (is_player()) {
+        TOPCON("You are too tired to attack. You need to rest.");
+      }
+      return false;
+    }
+  }
+
+  bool attacked = use_weapon_try();
+  if (! attacked) {
+    if (is_player()) {
+      //
+      // Swing anyway else it looks odd
+      //
+    } else {
+      return false;
+    }
+  }
+
+  std::string swung_as;
+
+  auto weapon = weapon_get();
+  if (! weapon) {
+    if (is_player()) {
+      TOPCON("You attack with bare fists!");
+
+      //
+      // Python callback
+      //
+      on_bite();
+    }
+    swung_as = gfx_anim_attack();
+  } else {
+    auto weapon_tp = weapon->tp();
+
+    swung_as = weapon_tp->gfx_anim_attack();
+    if (swung_as == "") {
+      die("Could not use %s/%08" PRIx32 " has no 'use' animation frame", weapon_tp->name().c_str(), weapon->id.id);
+      return false;
+    }
+
+    auto what = tp_find(swung_as);
+    if (! what) {
+      err("Could not find %s to wield", swung_as.c_str());
+      return false;
+    }
+  }
+
+  //
+  // Save the thing id so the client wid can keep track of the weapon.
+  //
+  auto use_anim = level->thing_new(swung_as, this);
+
+  //
+  // Attach to the parent thing.
+  //
+  use_anim->set_owner(this);
+
+  weapon_set_use_anim(use_anim);
+
+  //
+  // Hide the carry_anim while using.
+  //
+  auto c = weapon_get_carry_anim();
+  if (c) {
+    c->hide();
+  }
+
+  move_carried_items();
+
+  return true;
 }
