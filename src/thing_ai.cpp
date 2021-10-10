@@ -1408,7 +1408,7 @@ bool Thing::ai_tick(bool recursing)
   for (int y = miny; y < maxy; y++) {
     for (int x = minx; x < maxx; x++) {
       if (monst_aip->can_see_currently.can_see[ x ][ y ]) {
-        IF_DEBUG3 { (void) level->thing_new("ai_path2", fpoint(x, y)); }
+        //IF_DEBUG3 { (void) level->thing_new("ai_path2", fpoint(x, y)); }
         set(monst_aip->can_see_ever.can_see, x, y, true);
       }
     }
