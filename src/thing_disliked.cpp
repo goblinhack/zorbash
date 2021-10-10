@@ -132,6 +132,14 @@ bool Thing::is_disliked_by_me(const Thingp itp)
     }
   }
 
+  if (me->is_blood()) {
+    if (it->is_blood_eater() || it->attack_blood()) {
+      if (is_dangerous(itp)) {
+        return true;
+      }
+    }
+  }
+
   if (me->is_humanoid()) {
     if (it->attack_humanoid()) {
       if (is_dangerous(itp)) {

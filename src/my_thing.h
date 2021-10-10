@@ -1010,8 +1010,8 @@ public:
   int                    unused_flag33(void) const;
   int                    unused_flag34(void) const;
   int                    unused_flag35(void) const;
-  int                    unused_flag36(void) const;
-  int                    unused_flag37(void) const;
+  int                    is_blood_eater(void) const;
+  int                    attack_blood(void) const;
   int                    environ_hates_poison(void) const;
   int                    environ_hates_fire(void) const;
   int                    unused_flag4(void) const;

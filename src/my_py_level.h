@@ -179,8 +179,8 @@ PyObject *level_unused_flag32_at(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *level_unused_flag33_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag34_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag35_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag36_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag37_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_blood_eater_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_attack_blood_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_environ_hates_poison_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_environ_hates_fire_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag3_at(PyObject *obj, PyObject *args, PyObject *keywds);

@@ -1135,15 +1135,15 @@ int Thing::unused_flag35(void) const
   TRACE_AND_INDENT();
   return (tp()->unused_flag35());
 }
-int Thing::unused_flag36(void) const
+int Thing::is_blood_eater(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->unused_flag36());
+  return (tp()->is_blood_eater());
 }
-int Thing::unused_flag37(void) const
+int Thing::attack_blood(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->unused_flag37());
+  return (tp()->attack_blood());
 }
 int Thing::environ_hates_poison(void) const
 {

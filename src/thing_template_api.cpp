@@ -361,8 +361,8 @@ int Tp::unused_flag32(void) const { return _unused_flag32; }
 int Tp::unused_flag33(void) const { return _unused_flag33; }
 int Tp::unused_flag34(void) const { return _unused_flag34; }
 int Tp::unused_flag35(void) const { return _unused_flag35; }
-int Tp::unused_flag36(void) const { return _unused_flag36; }
-int Tp::unused_flag37(void) const { return _unused_flag37; }
+int Tp::is_blood_eater(void) const { return _is_blood_eater; }
+int Tp::attack_blood(void) const { return _attack_blood; }
 int Tp::environ_hates_poison(void) const { return _environ_hates_poison; }
 int Tp::environ_hates_fire(void) const { return _environ_hates_fire; }
 int Tp::unused_flag3(void) const { return _unused_flag3; }
@@ -682,8 +682,8 @@ void Tp::set_unused_flag32(int v) { _unused_flag32 = v; }
 void Tp::set_unused_flag33(int v) { _unused_flag33 = v; }
 void Tp::set_unused_flag34(int v) { _unused_flag34 = v; }
 void Tp::set_unused_flag35(int v) { _unused_flag35 = v; }
-void Tp::set_unused_flag36(int v) { _unused_flag36 = v; }
-void Tp::set_unused_flag37(int v) { _unused_flag37 = v; }
+void Tp::set_is_blood_eater(int v) { _is_blood_eater = v; }
+void Tp::set_attack_blood(int v) { _attack_blood = v; }
 void Tp::set_environ_hates_poison(int v) { _environ_hates_poison = v; }
 void Tp::set_environ_hates_fire(int v) { _environ_hates_fire = v; }
 void Tp::set_unused_flag3(int v) { _unused_flag3 = v; }

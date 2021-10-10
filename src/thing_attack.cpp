@@ -118,7 +118,7 @@ bool Thing::possible_to_attack(const Thingp it)
         return false;
       }
 
-      if (it->is_meat() || it->is_blood()) {
+      if (it->is_meat()) {
         //
         // Doesn't matter if dead, if it can eat you...
         //
@@ -137,17 +137,41 @@ bool Thing::possible_to_attack(const Thingp it)
     //
     if (me->attack_meat()) {
       if (! it->is_attackable_by_monst()) {
-        dbg("No, cannot attack %s, not is_attackable by meat eating monst", it->to_string().c_str());
+        dbg("no, cannot attack %s, not is_attackable by meat eating monst", it->to_string().c_str());
         return false;
       }
 
-      if (it->is_meat() || it->is_blood()) {
+      if (it->is_meat()) {
+        if (it->is_dead) {
+          dbg("Can not attack dead meat: %s", it->to_string().c_str());
+          return false;
+        }
         if (it->is_dead) {
           dbg("Can not attack dead meat: %s", it->to_string().c_str());
           return false;
         }
 
         dbg("Can attack living meat: %s", it->to_string().c_str());
+        return true;
+      }
+    }
+
+    if (me->is_blood_eater()) {
+      if (! it->is_attackable_by_monst()) {
+        dbg("No, cannot attack %s, not is_attackable by blood eating monst", it->to_string().c_str());
+        return false;
+      }
+
+      if (it->is_blood()) {
+        //
+        // Doesn't matter if dead, if it can eat you...
+        //
+        if (it->is_dead) {
+          dbg("Can eat dead blood: %s", it->to_string().c_str());
+          return true;
+        }
+
+        dbg("Can attack blood or blood: %s", it->to_string().c_str());
         return true;
       }
     }
@@ -390,7 +414,7 @@ bool Thing::attack(Thingp it)
 
       if (is_monst() && it->is_food() &&
           ((is_jelly_eater() && it->is_jelly()) || (is_meat_eater() && it->is_meat()) ||
-           (is_food_eater() && it->is_food())) &&
+           (is_blood_eater() && it->is_blood()) || (is_food_eater() && it->is_food())) &&
           eat(it)) {
         return true;
       }

@@ -311,8 +311,8 @@ do
       set_unused_flag33 \
       set_unused_flag34 \
       set_unused_flag35 \
-      set_unused_flag36 \
-      set_unused_flag37 \
+      set_is_blood_eater \
+      set_attack_blood \
       set_environ_hates_poison \
       set_environ_hates_fire \
       set_unused_flag4 \

@@ -337,11 +337,11 @@ class Tp:
     def set_unused_flag35(self, value):
         zx.tp_set_unused_flag35(self, value)
 
-    def set_unused_flag36(self, value):
-        zx.tp_set_unused_flag36(self, value)
+    def set_is_blood_eater(self, value):
+        zx.tp_set_is_blood_eater(self, value)
 
-    def set_unused_flag37(self, value):
-        zx.tp_set_unused_flag37(self, value)
+    def set_attack_blood(self, value):
+        zx.tp_set_attack_blood(self, value)
 
     def set_environ_hates_poison(self, value):
         zx.tp_set_environ_hates_poison(self, value)

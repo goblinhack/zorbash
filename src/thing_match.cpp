@@ -556,10 +556,10 @@ bool Thing::matches(const std::string &what) const
   if (unused_flag35() && (what == "unused_flag35")) {
     return true;
   }
-  if (unused_flag36() && (what == "unused_flag36")) {
+  if (is_blood_eater() && (what == "is_blood_eater")) {
     return true;
   }
-  if (unused_flag37() && (what == "unused_flag37")) {
+  if (attack_blood() && (what == "attack_blood")) {
     return true;
   }
   if (environ_hates_poison() && (what == "environ_hates_poison")) {
@@ -1325,11 +1325,11 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag35") {
     return &Thing::unused_flag35;
   }
-  if (what == "unused_flag36") {
-    return &Thing::unused_flag36;
+  if (what == "is_blood_eater") {
+    return &Thing::is_blood_eater;
   }
-  if (what == "unused_flag37") {
-    return &Thing::unused_flag37;
+  if (what == "attack_blood") {
+    return &Thing::attack_blood;
   }
   if (what == "environ_hates_poison") {
     return &Thing::environ_hates_poison;

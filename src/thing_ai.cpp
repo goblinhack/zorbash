@@ -848,13 +848,13 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
                 GOAL_AVOID_ADD(avoid_score, "avoid-monst", it);
                 add_goal_penalty(it);
               }
-            } else if (ai_is_able_to_attack_generators() && it->is_minion_generator()) {
+            } else if (it->is_minion_generator() && ai_is_able_to_attack_generators()) {
               //
               // Very close, high priority attack
               //
               GOAL_ADD((int) (max_dist - dist) * health_diff - goal_penalty, "attack-nearby-generator", it);
               add_goal_penalty(it);
-            } else if (possible_to_attack(it)) {
+            } else if (it->is_monst() && possible_to_attack(it)) {
               //
               // Hazard check above is for cleaners standing on their pool of acid. Do we want to attack that without
               // good reason?
@@ -1100,7 +1100,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
 
 #if 1
   if (is_monst()) {
-    con("Search type %d", search_type);
+    log("Search type %d", search_type);
     for (int y = 0; y < MAP_HEIGHT; y++) {
       std::string s;
       for (int x = 0; x < MAP_WIDTH; x++) {
@@ -1149,7 +1149,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
       next:
         continue;
       }
-      con("%s", s.c_str());
+      log("%s", s.c_str());
     }
   }
 #endif
@@ -1406,7 +1406,7 @@ bool Thing::ai_tick(bool recursing)
   }
   //  }
 
-#if 1
+#if 0
   if (is_player()) {
     con("Can see fov:");
     for (int y = 0; y < MAP_HEIGHT; y++) {
