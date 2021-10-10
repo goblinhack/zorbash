@@ -121,6 +121,9 @@ uint8_t game_mouse_down(int32_t x, int32_t y, uint32_t button)
     auto to = level->cursor->mid_at;
     FOR_ALL_THINGS(level, t, to.x, to.y)
     {
+      if (t->is_hidden) {
+        continue;
+      }
       if (t->is_cursor_can_hover_over_x2_click()) {
         player->log("Needs double click");
         TOPCON("Double click to move.");

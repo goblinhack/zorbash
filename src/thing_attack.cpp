@@ -194,6 +194,15 @@ bool Thing::possible_to_attack(const Thingp it)
       }
     }
 
+    if (me->attack_undead()) {
+      if (it->is_undead()) {
+        if (! it->is_dead) {
+          dbg("Can attack undead: %s", it->to_string().c_str());
+          return true;
+        }
+      }
+    }
+
     if (me->is_food_eater()) {
       if (! it->is_attackable_by_monst()) {
         dbg("No, cannot attack %s, not is_attackable by food eating monst", it->to_string().c_str());

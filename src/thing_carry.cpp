@@ -277,6 +277,10 @@ bool Thing::check_anything_to_carry(bool auto_collect_allowed)
   //
   FOR_ALL_THINGS(level, t, mid_at.x, mid_at.y)
   {
+    if (t->is_hidden) {
+      continue;
+    }
+
     if (t->is_dead) {
       continue;
     }
@@ -293,11 +297,11 @@ bool Thing::check_anything_to_carry(bool auto_collect_allowed)
 
   FOR_ALL_THINGS(level, t, mid_at.x, mid_at.y)
   {
-    if (t->is_dead) {
+    if (t->is_hidden) {
       continue;
     }
 
-    if (t->is_hidden) {
+    if (t->is_dead) {
       continue;
     }
 

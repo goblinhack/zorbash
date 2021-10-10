@@ -30,6 +30,10 @@ void Thing::secret_door_tick(void)
 
   FOR_ALL_THINGS(level, t, mid_at.x, mid_at.y)
   {
+    if (t->is_hidden) {
+      continue;
+    }
+
     if (! t->is_secret_door()) {
       continue;
     }

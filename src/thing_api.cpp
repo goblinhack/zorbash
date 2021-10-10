@@ -1130,10 +1130,10 @@ int Thing::unused_flag34(void) const
   TRACE_AND_INDENT();
   return (tp()->unused_flag34());
 }
-int Thing::unused_flag35(void) const
+int Thing::attack_undead(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->unused_flag35());
+  return (tp()->attack_undead());
 }
 int Thing::is_blood_eater(void) const
 {

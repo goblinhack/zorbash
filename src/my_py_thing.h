@@ -227,7 +227,7 @@ PyObject *thing_unused_flag31(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag32(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag33(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag34(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag35(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_attack_undead(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_blood_eater(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_attack_blood(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_environ_hates_poison(PyObject *obj, PyObject *args, PyObject *keywds);

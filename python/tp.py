@@ -334,8 +334,8 @@ class Tp:
     def set_unused_flag34(self, value):
         zx.tp_set_unused_flag34(self, value)
 
-    def set_unused_flag35(self, value):
-        zx.tp_set_unused_flag35(self, value)
+    def set_attack_undead(self, value):
+        zx.tp_set_attack_undead(self, value)
 
     def set_is_blood_eater(self, value):
         zx.tp_set_is_blood_eater(self, value)

@@ -288,7 +288,7 @@ def tp_init(name, text_name):
     mytp.set_unused_flag32(False)
     mytp.set_unused_flag33(False)
     mytp.set_unused_flag34(False)
-    mytp.set_unused_flag35(False)
+    mytp.set_attack_undead(False)
     mytp.set_is_blood_eater(False)
     mytp.set_attack_blood(False)
     mytp.set_environ_hates_poison(False)

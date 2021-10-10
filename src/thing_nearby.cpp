@@ -37,7 +37,7 @@ Thingp Thing::most_dangerous_adjacent_thing_get(void)
       continue;
     }
 
-    FOR_ALL_THINGS(level, t, x, y)
+    FOR_ALL_THINGS_THAT_INTERACT(level, t, x, y)
     {
       if (t == this) {
         continue;
@@ -103,8 +103,13 @@ Thingp Thing::most_dangerous_visible_thing_get(void)
         continue;
       }
 
-      FOR_ALL_THINGS(level, t, o.x, o.y)
+      FOR_ALL_THINGS_THAT_INTERACT(level, t, o.x, o.y)
       {
+        if (t == this) {
+          continue;
+        }
+        log("Potential cand: %s", t->to_string().c_str());
+
         if (t->is_dead) {
           continue;
         }
@@ -127,6 +132,7 @@ Thingp Thing::most_dangerous_visible_thing_get(void)
         }
 
         possible.push_back(std::make_pair(t, score));
+        log("Potential danger: %s", t->to_string().c_str());
       }
       FOR_ALL_THINGS_END()
     }
@@ -166,8 +172,12 @@ bool Thing::any_unfriendly_monst_visible(void)
         continue;
       }
 
-      FOR_ALL_THINGS(level, t, o.x, o.y)
+      FOR_ALL_THINGS_THAT_INTERACT(level, t, o.x, o.y)
       {
+        if (t == this) {
+          continue;
+        }
+
         if (t->is_dead) {
           continue;
         }

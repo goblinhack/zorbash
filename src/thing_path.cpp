@@ -160,6 +160,10 @@ bool Thing::path_pop_next_move(void)
       auto delta = make_fpoint(future_pos) - mid_at;
       FOR_ALL_THINGS(level, t, future_pos.x, future_pos.y)
       {
+        if (t->is_hidden) {
+          continue;
+        }
+
         if (! t->is_shovable()) {
           continue;
         }

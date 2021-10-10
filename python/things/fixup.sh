@@ -310,7 +310,7 @@ do
       set_unused_flag32 \
       set_unused_flag33 \
       set_unused_flag34 \
-      set_unused_flag35 \
+      set_attack_undead \
       set_is_blood_eater \
       set_attack_blood \
       set_environ_hates_poison \

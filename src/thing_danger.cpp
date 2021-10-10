@@ -17,6 +17,9 @@ int Tp::get_danger_level(void)
 
   danger_level = get_health_initial() / 10;
 
+  if (is_undead()) {
+    danger_level += 1;
+  }
   if (is_sticky()) {
     danger_level += 1;
   }
@@ -76,6 +79,9 @@ int Thing::get_danger_initial_level(void)
 
   danger_level = get_health_initial() / 10;
 
+  if (is_undead()) {
+    danger_level += 1;
+  }
   if (is_sticky()) {
     danger_level += 1;
   }
@@ -149,6 +155,9 @@ int Thing::get_danger_current_level(void)
 
   danger_level = get_health() / 10;
 
+  if (is_undead()) {
+    danger_level += 1;
+  }
   if (is_sticky()) {
     danger_level += 1;
   }

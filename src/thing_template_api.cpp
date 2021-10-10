@@ -360,7 +360,7 @@ int Tp::unused_flag31(void) const { return _unused_flag31; }
 int Tp::unused_flag32(void) const { return _unused_flag32; }
 int Tp::unused_flag33(void) const { return _unused_flag33; }
 int Tp::unused_flag34(void) const { return _unused_flag34; }
-int Tp::unused_flag35(void) const { return _unused_flag35; }
+int Tp::attack_undead(void) const { return _attack_undead; }
 int Tp::is_blood_eater(void) const { return _is_blood_eater; }
 int Tp::attack_blood(void) const { return _attack_blood; }
 int Tp::environ_hates_poison(void) const { return _environ_hates_poison; }
@@ -681,7 +681,7 @@ void Tp::set_unused_flag31(int v) { _unused_flag31 = v; }
 void Tp::set_unused_flag32(int v) { _unused_flag32 = v; }
 void Tp::set_unused_flag33(int v) { _unused_flag33 = v; }
 void Tp::set_unused_flag34(int v) { _unused_flag34 = v; }
-void Tp::set_unused_flag35(int v) { _unused_flag35 = v; }
+void Tp::set_attack_undead(int v) { _attack_undead = v; }
 void Tp::set_is_blood_eater(int v) { _is_blood_eater = v; }
 void Tp::set_attack_blood(int v) { _attack_blood = v; }
 void Tp::set_environ_hates_poison(int v) { _environ_hates_poison = v; }

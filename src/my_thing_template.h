@@ -275,7 +275,7 @@ private:
   int         _unused_flag32 {};
   int         _unused_flag33 {};
   int         _unused_flag34 {};
-  int         _unused_flag35 {};
+  int         _attack_undead {};
   int         _is_blood_eater {};
   int         _attack_blood {};
   int         _environ_hates_poison {};
@@ -746,7 +746,7 @@ public:
   int                unused_flag32(void) const;
   int                unused_flag33(void) const;
   int                unused_flag34(void) const;
-  int                unused_flag35(void) const;
+  int                attack_undead(void) const;
   int                is_blood_eater(void) const;
   int                attack_blood(void) const;
   int                environ_hates_poison(void) const;
@@ -1075,7 +1075,7 @@ public:
   void               set_unused_flag32(int);
   void               set_unused_flag33(int);
   void               set_unused_flag34(int);
-  void               set_unused_flag35(int);
+  void               set_attack_undead(int);
   void               set_is_blood_eater(int);
   void               set_attack_blood(int);
   void               set_environ_hates_poison(int);

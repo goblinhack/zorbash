@@ -1169,6 +1169,11 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
     // No search destinations that are, for example, a chasm
     //
     if (is_hated_by_me(p)) {
+      IF_DEBUG3
+      {
+        auto s = string_sprintf("Search cand is hated @(%d,%d)", p.x, p.y);
+        AI_LOG("", s);
+      }
       continue;
     }
 
@@ -1249,62 +1254,66 @@ bool Thing::ai_choose_immediately_adjacent_goal(void)
       }
 
       FOR_ALL_THINGS(level, it, at.x, at.y)
-      /* { */
-      if (it->is_door() && ! it->is_open) {
-        if (ai_is_able_to_open_doors()) {
-          if (get_keys()) {
-            if (open_door(it)) {
-              AI_LOG("Opened a door", it);
-              if (is_player()) {
-                game->tick_begin("Robot opened a door");
+      {
+        if (it->is_hidden) {
+          continue;
+        }
+
+        if (it->is_door() && ! it->is_open) {
+          if (ai_is_able_to_open_doors()) {
+            if (get_keys()) {
+              if (open_door(it)) {
+                AI_LOG("Opened a door", it);
+                if (is_player()) {
+                  game->tick_begin("Robot opened a door");
+                }
+                return true;
               }
-              return true;
             }
           }
+
+          if (ai_is_able_to_break_down_doors()) {
+            //
+            // Try hitting the door
+            //
+            left           = dx < 0;
+            right          = dx > 0;
+            up             = dy < 0;
+            down           = dy > 0;
+            attack         = true;
+            attack_allowed = true;
+
+            AI_LOG("Trying to break down a door", it);
+            if (is_player()) {
+              player_tick(left, right, up, down, attack, wait, jump);
+            } else {
+              move(mid_at, up, down, left, right, attack, wait, shove_allowed, attack_allowed);
+            }
+            return true;
+          }
         }
 
-        if (ai_is_able_to_break_down_doors()) {
-          //
-          // Try hitting the door
-          //
-          left           = dx < 0;
-          right          = dx > 0;
-          up             = dy < 0;
-          down           = dy > 0;
-          attack         = true;
-          attack_allowed = true;
-
-          AI_LOG("Trying to break down a door", it);
-          if (is_player()) {
-            player_tick(left, right, up, down, attack, wait, jump);
-          } else {
-            move(mid_at, up, down, left, right, attack, wait, shove_allowed, attack_allowed);
+        if (ai_is_able_to_break_out_of_webs()) {
+          if (it->is_spiderweb() && (it->mid_at == mid_at)) {
+            //
+            // Try hitting the web
+            //
+            left           = dx < 0;
+            right          = dx > 0;
+            up             = dy < 0;
+            down           = dy > 0;
+            attack         = true;
+            attack_allowed = true;
+            AI_LOG("Trying to break out of a web", "Trying to break out of a web", it);
+            if (is_player()) {
+              player_tick(left, right, up, down, attack, wait, jump);
+            } else {
+              move(mid_at, up, down, left, right, attack, wait, shove_allowed, attack_allowed);
+            }
+            return true;
           }
-          return true;
         }
       }
-
-      if (ai_is_able_to_break_out_of_webs()) {
-        if (it->is_spiderweb() && (it->mid_at == mid_at)) {
-          //
-          // Try hitting the web
-          //
-          left           = dx < 0;
-          right          = dx > 0;
-          up             = dy < 0;
-          down           = dy > 0;
-          attack         = true;
-          attack_allowed = true;
-          AI_LOG("Trying to break out of a web", "Trying to break out of a web", it);
-          if (is_player()) {
-            player_tick(left, right, up, down, attack, wait, jump);
-          } else {
-            move(mid_at, up, down, left, right, attack, wait, shove_allowed, attack_allowed);
-          }
-          return true;
-        }
-      }
-      /* } */
       FOR_ALL_THINGS_END();
 
       if (ai_is_item_collector()) {
@@ -1399,15 +1408,15 @@ bool Thing::ai_tick(bool recursing)
   for (int y = miny; y < maxy; y++) {
     for (int x = minx; x < maxx; x++) {
       if (monst_aip->can_see_currently.can_see[ x ][ y ]) {
-        // IF_DEBUG3 { (void) level->thing_new("ai_path2", fpoint(x, y)); }
+        IF_DEBUG3 { (void) level->thing_new("ai_path2", fpoint(x, y)); }
         set(monst_aip->can_see_ever.can_see, x, y, true);
       }
     }
   }
   //  }
 
-#if 0
-  if (is_player()) {
+#if 1
+  if (is_monst()) {
     con("Can see fov:");
     for (int y = 0; y < MAP_HEIGHT; y++) {
       for (int x = 0; x < MAP_WIDTH; x++) {

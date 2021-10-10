@@ -33,6 +33,7 @@ def tp_init(name, text_name):
     mytp.set_attack_living(False) # No, else it attacks spiders
     mytp.set_attack_lunge(True)
     mytp.set_attack_meat(False)
+    mytp.set_attack_undead(False)
     mytp.set_collision_attack(True)
     mytp.set_collision_box(False)
     mytp.set_collision_check(True)
@@ -284,7 +285,6 @@ def tp_init(name, text_name):
     mytp.set_unused_flag32(False)
     mytp.set_unused_flag33(False)
     mytp.set_unused_flag34(False)
-    mytp.set_unused_flag35(False)
     mytp.set_unused_flag4(False)
     mytp.set_unused_flag5(False)
     mytp.set_unused_flag6(False)
