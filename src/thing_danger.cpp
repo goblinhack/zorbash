@@ -237,11 +237,11 @@ int Thing::is_dangerous(Thingp it)
   // If it's really close, then it's more dangerous
   //
   if (distance(mid_at, it->mid_at) < 2) {
-    b *= 2;
+    b += 10;
   }
 
   if (distance(mid_at, it->mid_at) == 0) {
-    b *= 2;
+    b += 20;
   }
 
   //

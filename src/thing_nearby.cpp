@@ -108,7 +108,6 @@ Thingp Thing::most_dangerous_visible_thing_get(void)
         if (t == this) {
           continue;
         }
-        log("Potential danger cand: %s", t->to_string().c_str());
 
         if (t->is_dead) {
           continue;

@@ -1098,7 +1098,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
     }
   }
 
-#if 1
+#if 0
   if (is_monst()) {
     log("Search type %d", search_type);
     for (int y = 0; y < MAP_HEIGHT; y++) {
@@ -1415,7 +1415,7 @@ bool Thing::ai_tick(bool recursing)
   }
   //  }
 
-#if 1
+#if 0
   if (is_monst()) {
     con("Can see fov:");
     for (int y = 0; y < MAP_HEIGHT; y++) {
@@ -1491,9 +1491,7 @@ bool Thing::ai_tick(bool recursing)
           //
           // No resting when in danger
           //
-          if (is_player()) {
-            AI_LOG("A threat is near", threat);
-          }
+          AI_LOG("A threat is near", threat);
         } else {
           //
           // Not under threat, so we can think about doing some other
