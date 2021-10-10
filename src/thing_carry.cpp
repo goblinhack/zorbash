@@ -190,7 +190,7 @@ std::list< Thingp > Thing::anything_to_carry_at(fpoint at)
   //
   // Can't pick things up whilst being swallowed!
   //
-  FOR_ALL_THINGS(level, t, mid_at.x, mid_at.y)
+  FOR_ALL_THINGS(level, t, mid_at.x, mid_at.y) // mid_at is correct
   {
     if (t->is_dead) {
       continue;

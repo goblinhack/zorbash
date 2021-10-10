@@ -63,6 +63,9 @@ bool Thing::ai_blocked_completely(void)
 bool Thing::ai_create_path(point &nh, const point start, const point end)
 {
   TRACE_AND_INDENT();
+  log("AI create path");
+  TRACE_AND_INDENT();
+
   if (end == point(-1, -1)) {
     return false;
   }
@@ -241,6 +244,9 @@ bool Thing::ai_choose_wander(point &nh)
 bool Thing::ai_wander(void)
 {
   TRACE_AND_INDENT();
+  dbg("AI wander");
+  TRACE_AND_INDENT();
+
   if (ai_blocked_completely()) {
     dbg("Blocked on all sides, try escape");
     if (ai_escape()) {

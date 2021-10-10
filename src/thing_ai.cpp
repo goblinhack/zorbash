@@ -1484,6 +1484,18 @@ bool Thing::ai_tick(bool recursing)
           }
         }
 
+        if (threat) {
+          if (is_dangerous(threat)) {
+            AI_LOG("A dangerous threat is near", threat);
+          } else if (is_enemy(threat)) {
+            AI_LOG("An enemy threat is near", threat);
+          } else if (is_to_be_avoided(threat)) {
+            AI_LOG("An avoid threat is near", threat);
+          } else {
+            AI_LOG("A threat is near", threat);
+          }
+        }
+
         //
         // Look for doors or things to collect, if not being attacked.
         //
@@ -1491,7 +1503,6 @@ bool Thing::ai_tick(bool recursing)
           //
           // No resting when in danger
           //
-          AI_LOG("A threat is near", threat);
         } else {
           //
           // Not under threat, so we can think about doing some other
