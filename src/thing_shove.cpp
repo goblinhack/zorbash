@@ -26,6 +26,24 @@ ThingShoved Thing::try_to_shove(Thingp it, fpoint delta)
     return (THING_SHOVE_NEVER_TRIED);
   }
 
+  auto my_owner  = get_top_owner();
+  auto its_owner = it->get_top_owner();
+  if (my_owner && (my_owner == its_owner)) {
+    return (THING_SHOVE_NEVER_TRIED);
+  }
+
+  auto my_minion_owner  = get_top_minion_owner();
+  auto its_minion_owner = it->get_top_minion_owner();
+  if (my_minion_owner && (my_minion_owner == its_minion_owner)) {
+    return (THING_SHOVE_NEVER_TRIED);
+  }
+
+  auto my_spawned_owner  = get_top_spawned_owner();
+  auto its_spawned_owner = it->get_top_spawned_owner();
+  if (my_spawned_owner && (my_spawned_owner == its_spawned_owner)) {
+    return (THING_SHOVE_NEVER_TRIED);
+  }
+
   //
   // Sanity check we cannot shove more than one tile
   //
