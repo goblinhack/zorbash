@@ -4,7 +4,6 @@ Todo
 - did not pick up enchantstone due to space
 - if you see a potion of health, drop food in preference?
 - change THING_TICK_DURATION_TOO_LONG back to 10
-- reimplement escape
 - weapon pick up loop on victimlake3
 - add poison debuff
 - robot got stuck in web
@@ -85,8 +84,8 @@ Potions
 
 Weapons
 -------
-- darts / poison darts
 - axe hits all monsts around you ?
+- darts / poison darts
 - three damage types, blunt(club warhammer) pierce(arrow javelin) or cut(axe scythe swwrd)
 - blessed items resist explosion
 - warhammer should kill parent jelly in one go

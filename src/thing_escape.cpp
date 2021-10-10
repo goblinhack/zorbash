@@ -5,6 +5,7 @@
 
 #include "my_game.h"
 #include "my_gl.h"
+#include "my_monst.h"
 #include "my_random.h"
 #include "my_sprintf.h"
 #include "my_sys.h"
@@ -36,5 +37,33 @@ bool Thing::try_to_escape(void)
     }
   }
 
+  return false;
+}
+
+bool Thing::ai_escape(void)
+{
+  TRACE_AND_INDENT();
+  if (ai_blocked_completely()) {
+    dbg("AI escape blocked");
+    return false;
+  }
+
+  dbg("AI escape");
+  auto tries = THING_AI_ESCAPE_ATTEMPTS;
+  while (tries--) {
+    point nh;
+    if (ai_choose_wander(nh)) {
+      if (move_to_or_attack(nh)) {
+        return true;
+      }
+
+      //
+      // Set this so next time we will choose another target
+      //
+      monst_infop->wander_target = point(-1, -1);
+    }
+  }
+  TRACE_AND_INDENT();
+  dbg("No escape goal");
   return false;
 }

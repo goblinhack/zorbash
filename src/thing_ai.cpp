@@ -1099,56 +1099,57 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
   }
 
 #if 1
-  if (is_player()) {
+  if (is_monst()) {
     con("Search type %d", search_type);
     for (int y = 0; y < MAP_HEIGHT; y++) {
+      std::string s;
       for (int x = 0; x < MAP_WIDTH; x++) {
         if ((x == (int) mid_at.x) && (y == (int) mid_at.y)) {
           if (level->is_lit_ever(x, y)) {
-            printf("* ");
+            s += "* ";
           } else {
-            printf("o ");
+            s += "o ";
           }
           continue;
         }
         for (auto p : can_reach_cands) {
           if ((x == p.x) && (y == p.y)) {
-            printf("c ");
+            s += "c ";
             goto next;
           }
         }
         if (get(walked, x, y)) {
           if (level->is_obs_wall_or_door(x, y)) {
             if (level->is_door(x, y)) {
-              printf("D");
+              s += "D";
             } else {
-              printf("X");
+              s += "X";
             }
           } else {
-            printf("_");
+            s += "_";
           }
         } else {
           if (level->is_obs_wall_or_door(x, y)) {
             if (level->is_door(x, y)) {
-              printf("d");
+              s += "d";
             } else {
-              printf("x");
+              s += "x";
             }
           } else {
-            printf(" ");
+            s += " ";
           }
         }
         if (get(monst_aip->can_see_currently.can_see, x, y)) {
-          printf(".");
+          s += ".";
         } else if (get(monst_aip->can_see_ever.can_see, x, y)) {
-          printf(",");
+          s += ",";
         } else {
-          printf(" ");
+          s += " ";
         }
       next:
         continue;
       }
-      printf("\n");
+      con("%s", s.c_str());
     }
   }
 #endif
@@ -1645,6 +1646,8 @@ bool Thing::ai_tick(bool recursing)
         if (is_player()) {
           wid_actionbar_robot_mode_off();
         }
+
+        ai_wander();
         return false;
       }
       break;
@@ -2080,6 +2083,15 @@ bool Thing::ai_choose_avoid_goals(std::multiset< Goal > &goals, const Goal &goal
       score += dist * 100;
       score += 1000;
       GOAL_ADD(score, "avoid", it);
+      return true;
+    }
+  }
+
+  //
+  // Last resorts
+  //
+  if (is_monst()) {
+    if (ai_escape()) {
       return true;
     }
   }

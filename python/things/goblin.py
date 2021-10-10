@@ -36,7 +36,7 @@ def tp_init(name, text_name):
     mytp.set_ai_is_able_to_see_through_doors(False)
     mytp.set_ai_is_able_to_shove(True)
     mytp.set_ai_is_able_to_walk_through_walls(False)
-    mytp.set_ai_is_exit_finder(True)
+    mytp.set_ai_is_exit_finder(False)
     mytp.set_ai_is_item_collector(True)
     mytp.set_ai_is_level_explorer(True)
     mytp.set_ai_obstacle(False)
