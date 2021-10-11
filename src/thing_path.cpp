@@ -70,7 +70,7 @@ bool Thing::path_pop_next_move(void)
   // Jump over obstacles if they appear in the path
   //
   if (ai_is_able_to_jump() && (is_monst() || (is_player() && game->robot_mode))) {
-    if (is_disliked_by_me(future_pos) || level->is_barrel(future_pos)) {
+    if (is_disliked_by_me(future_pos) || level->is_barrel(future_pos) || level->is_brazier(future_pos)) {
       IF_DEBUG3
       {
         auto s = string_sprintf("Next position %d,%d is a hazard", (int) future_pos.x, (int) future_pos.y);
