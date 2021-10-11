@@ -811,8 +811,12 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
           // then it's not really fair to use that knowledge.
           //
           if (lit_recently) {
+            dbg("AI: Consider attacking %s%s%s%s", it->to_string().c_str(), is_enemy(it) ? ", is enemy" : "",
+                is_dangerous(it) ? ", is dangerous" : "", is_to_be_avoided(it) ? ", is to be avoided" : "");
+
             if (is_enemy(it) && (dist < max_dist)) {
-              if ((is_to_be_avoided(it) || is_dangerous(it)) && (get_health() < get_health_max() / 2)) {
+              if (! is_fearless() && (is_to_be_avoided(it) || is_dangerous(it)) &&
+                  (get_health() < get_health_max() / 2)) {
                 //
                 // Low on health. Best to avoid this enemy.
                 //
@@ -832,7 +836,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
                 GOAL_AVOID_ADD((int) (max_dist - dist) * health_diff - goal_penalty, "attack-enemy", it);
                 add_goal_penalty(it);
               }
-            } else if ((dist < ai_avoid_distance()) && will_avoid_monst(it)) {
+            } else if (! is_fearless() && (dist < ai_avoid_distance()) && will_avoid_monst(it)) {
               //
               // Monsts we avoid are more serious threats
               //
@@ -854,11 +858,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
               //
               GOAL_ADD((int) (max_dist - dist) * health_diff - goal_penalty, "attack-nearby-generator", it);
               add_goal_penalty(it);
-            } else if (it->is_monst() && possible_to_attack(it)) {
-              //
-              // Hazard check above is for cleaners standing on their pool of acid. Do we want to attack that without
-              // good reason?
-              //
+            } else if (possible_to_attack(it)) {
               if (dist < 2) {
                 //
                 // Very close, high priority attack
