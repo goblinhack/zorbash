@@ -57,7 +57,7 @@ Thingp Thing::most_dangerous_adjacent_thing_get(void)
         }
       }
 
-      if (! t->is_monst()) {
+      if (! t->is_monst() && ! t->is_player()) {
         continue;
       }
 
@@ -95,10 +95,6 @@ Thingp Thing::most_dangerous_visible_thing_get(void)
         continue;
       }
 
-      if (! level->is_monst(o)) {
-        continue;
-      }
-
       if (! get(monst_aip->can_see_currently.can_see, o.x, o.y)) {
         continue;
       }
@@ -113,7 +109,7 @@ Thingp Thing::most_dangerous_visible_thing_get(void)
           continue;
         }
 
-        if (! t->is_monst()) {
+        if (! t->is_monst() && ! t->is_player()) {
           continue;
         }
 
@@ -163,10 +159,6 @@ bool Thing::any_unfriendly_monst_visible(void)
         continue;
       }
 
-      if (! level->is_monst(o)) {
-        continue;
-      }
-
       if (! get(monst_aip->can_see_currently.can_see, o.x, o.y)) {
         continue;
       }
@@ -181,7 +173,7 @@ bool Thing::any_unfriendly_monst_visible(void)
           continue;
         }
 
-        if (! t->is_monst()) {
+        if (! t->is_monst() && ! t->is_player()) {
           continue;
         }
 
@@ -195,31 +187,43 @@ bool Thing::any_unfriendly_monst_visible(void)
   return false;
 }
 
-bool Thing::any_monst_visible(void)
+bool Thing::any_adjacent_monst(void)
 {
   std::vector< std::pair< Thingp, int > > possible;
 
-  int d = ai_avoid_distance();
+  static const std::vector< point > all_deltas = {
+      point(-1, -1), point(1, -1), point(-1, 1), point(1, 1), point(0, -1),
+      point(-1, 0),  point(1, 0),  point(0, 1),  point(0, 0), // For spiderwebs
+  };
 
-  for (auto dx = -d; dx <= d; dx++) {
-    for (auto dy = -d; dy <= d; dy++) {
-      point o(mid_at.x + dx, mid_at.y + dy);
-      if (! dx && ! dy) {
+  for (const auto &d : all_deltas) {
+    auto x = mid_at.x + d.x;
+    auto y = mid_at.y + d.y;
+
+    point o(x, y);
+    if (level->is_oob(o)) {
+      continue;
+    }
+
+    if (! get(monst_aip->can_see_currently.can_see, o.x, o.y)) {
+      continue;
+    }
+
+    FOR_ALL_THINGS_THAT_INTERACT(level, t, x, y)
+    {
+      if (t == this) {
         continue;
       }
 
-      if (level->is_oob(o)) {
+      if (t->is_dead) {
         continue;
       }
 
-      if (level->is_monst(o)) {
+      if (t->is_monst() || t->is_player()) {
         return true;
       }
-
-      if (! get(monst_aip->can_see_currently.can_see, o.x, o.y)) {
-        continue;
-      }
     }
+    FOR_ALL_THINGS_END()
   }
 
   return false;

@@ -126,17 +126,19 @@ bool Thing::path_pop_next_move(void)
           clear_move_path("Jumped carefully");
           return true;
         } else {
-          //
-          // Don't bump the tick. This allows the monst to try an alternative path.
-          //
           AI_LOG("Failed to jump");
           clear_move_path("Failed to jump");
-          if (is_player() && game->robot_mode) {
-            if (too_far) {
+
+          if (too_far) {
+            if (any_unfriendly_monst_visible()) {
+              ai_change_state(MONST_STATE_IDLE, "too far, failed to jump");
+            } else {
               ai_change_state(MONST_STATE_RESTING, "need to rest, failed to jump");
-              game->tick_begin("Failed to jump");
-              return false;
             }
+          }
+
+          if (is_player() && game->robot_mode) {
+            game->tick_begin("Failed to jump");
           }
           return false;
         }

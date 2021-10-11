@@ -212,7 +212,6 @@ public:
   Thingp      get_top_spawned_owner() const;
   Thingp      laser_fire_at(const std::string &item, Thingp target);
   Thingp      most_dangerous_adjacent_thing_get(void);
-  bool        any_monst_visible(void);
   bool        any_unfriendly_monst_visible(void);
   Thingp      most_dangerous_visible_thing_get(void);
   Thingp      projectile_fire_at(const std::string &item, Thingp target);
@@ -264,6 +263,7 @@ public:
   bool        collision_check_and_handle_at(bool *, bool *);
   bool        collision_check_and_handle_at(fpoint, bool *, bool *);
   bool        collision_check_and_handle_nearby(fpoint, bool *, bool *);
+  bool any_adjacent_monst(void);
   bool        collision_check_do();
   bool        collision_check_only(Thingp it, fpoint future_pos, int x, int y);
   bool        collision_check_only(Thingp it, int x, int y, int dx, int dy);
