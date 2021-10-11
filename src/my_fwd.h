@@ -18,13 +18,13 @@ class Tile;
 class Tp;
 class Wid;
 class World;
+class Thing_;
 struct AgeMap_;
 struct Dmap_;
 struct FovMap_;
 struct MonstInfo_;
 struct MonstAi_;
 struct SDL_Surface;
-struct Thing_;
 struct ascii_;
 
 using Dmapp        = struct Dmap_ *;
@@ -37,7 +37,7 @@ using MonstAip     = struct MonstAi_ *;
 
 using Roomp  = class Room *;
 using Texp   = class Tex *;
-using Thingp = struct Thing_ *;
+using Thingp = class Thing_ *;
 using Tilep  = class Tile *;
 using Tpp    = class Tp *;
 using Widp   = class Wid *;

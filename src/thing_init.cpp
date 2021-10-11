@@ -59,7 +59,7 @@ Thingp Level::thing_new(const std::string &name, const fpoint at) { return thing
 
 Thingp Level::thing_new(const std::string &name, const fpoint at, const fpoint jitter)
 {
-  auto t = new struct Thing_();
+  auto t = new class Thing_();
   t->init(this, name, at, jitter);
   return (t);
 }

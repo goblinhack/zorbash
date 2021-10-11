@@ -189,8 +189,6 @@ bool Thing::any_unfriendly_monst_visible(void)
 
 bool Thing::any_adjacent_monst(void)
 {
-  std::vector< std::pair< Thingp, int > > possible;
-
   static const std::vector< point > all_deltas = {
       point(-1, -1), point(1, -1), point(-1, 1), point(1, 1), point(0, -1),
       point(-1, 0),  point(1, 0),  point(0, 1),  point(0, 0), // For spiderwebs

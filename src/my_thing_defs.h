@@ -43,5 +43,6 @@
 #define THING_MAX_AVOID_COUNT              10  // Count to keep track of avoid attempts
 #define THING_MAX_ENEMY_COUNT              100 // Count to keep track of resentfulness
 #define THING_MAX_GOAL_PENALTY             100 // Helps to avoid goal oscillation
+#define THING_MAX_AVOID_ATTEMPT_LOCATIONS  4   // How many places to look at per attempt to avoid something
 
 #endif

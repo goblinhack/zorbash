@@ -7,7 +7,7 @@
 #ifndef _MY_HISCORE_H_
 #define _MY_HISCORE_H_
 
-#include "my_thing.h"
+#include "c_plus_plus_serializer.h"
 #include <string>
 
 class HiScore
@@ -54,10 +54,10 @@ public:
   //
   std::vector< HiScore > hiscores;
 
-  void        add_new_hiscore(Thingp player, const std::string &name, const std::string &defeated_by);
-  bool        is_new_hiscore(Thingp player);
-  bool        is_new_highest_hiscore(Thingp player);
-  const char *place_str(Thingp player);
+  void        add_new_hiscore(class Thing_ *player, const std::string &name, const std::string &defeated_by);
+  bool        is_new_hiscore(class Thing_ *player);
+  bool        is_new_highest_hiscore(class Thing_ *player);
+  const char *place_str(class Thing_ *player);
 };
 std::ostream &operator<<(std::ostream &out, Bits< const HiScores & > const my); // save
 std::istream &operator>>(std::istream &in, Bits< HiScores & > my);              // load

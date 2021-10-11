@@ -85,14 +85,14 @@ bool Thing::path_pop_next_move(void)
         //
         // If the thing we are going to land on is also a hazard, can we jump further?
         //
-        IF_DEBUG3
-        {
-          auto s = string_sprintf("Next-next position %d,%d is also a hazard", (int) jump_pos.x, (int) jump_pos.y);
-          AI_LOG("", s);
-        }
-
         TRACE_AND_INDENT();
         if (is_disliked_by_me(jump_pos) && monst_aip->move_path.size()) {
+          IF_DEBUG3
+          {
+            auto s = string_sprintf("Next-next position %d,%d is also a hazard", (int) jump_pos.x, (int) jump_pos.y);
+            AI_LOG("", s);
+          }
+
           auto jump_pos = monst_aip->move_path[ 0 ];
           monst_aip->move_path.erase(monst_aip->move_path.begin());
 
@@ -126,12 +126,18 @@ bool Thing::path_pop_next_move(void)
           clear_move_path("Jumped carefully");
           return true;
         } else {
-          AI_LOG("Failed to jump");
-          clear_move_path("Failed to jump");
+          AI_LOG("Failed to jump carefully");
+          clear_move_path("Failed to jump carefully");
 
           if (too_far) {
             if (any_unfriendly_monst_visible()) {
-              ai_change_state(MONST_STATE_IDLE, "too far, failed to jump");
+              ai_change_state(MONST_STATE_IDLE, "too far, need to rest but threat nearby, failed to jump");
+            } else {
+              ai_change_state(MONST_STATE_RESTING, "too far, need to rest, failed to jump");
+            }
+          } else {
+            if (any_unfriendly_monst_visible()) {
+              ai_change_state(MONST_STATE_IDLE, "need to rest but threat nearby, failed to jump");
             } else {
               ai_change_state(MONST_STATE_RESTING, "need to rest, failed to jump");
             }

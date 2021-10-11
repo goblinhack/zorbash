@@ -47,7 +47,8 @@ typedef struct {
   uint16_t tr2_tile;
 } ThingTiles;
 
-typedef struct Thing_ {
+typedef class Thing_
+{
 public:
   Thing_(void);
   ~Thing_(void);
@@ -263,7 +264,7 @@ public:
   bool        collision_check_and_handle_at(bool *, bool *);
   bool        collision_check_and_handle_at(fpoint, bool *, bool *);
   bool        collision_check_and_handle_nearby(fpoint, bool *, bool *);
-  bool any_adjacent_monst(void);
+  bool        any_adjacent_monst(void);
   bool        collision_check_do();
   bool        collision_check_only(Thingp it, fpoint future_pos, int x, int y);
   bool        collision_check_only(Thingp it, int x, int y, int dx, int dy);
