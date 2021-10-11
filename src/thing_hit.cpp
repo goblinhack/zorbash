@@ -488,10 +488,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     //
     // If not a monst, e.g. a generator then don't include defeated by
     //
-    auto reason = "defeated by " + defeater;
-    if (! is_monst()) {
-      reason = "by " + defeater;
-    }
+    auto reason = "by " + defeater;
 
     if ((real_hitter->mid_at == mid_at) && real_hitter->is_engulfer()) {
       reason = "in the bowels of " + defeater;
