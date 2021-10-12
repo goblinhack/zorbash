@@ -81,7 +81,8 @@ std::istream &operator>>(std::istream &in, Bits< MonstInfop & > my)
   /* float        fadeup_height             */ in >> bits(my.t->fadeup_height);
   /* float        fall_height               */ in >> bits(my.t->fall_height);
   /* float        wobble                    */ in >> bits(my.t->wobble);
-  /* fpoint       lunge_to                  */ in >> bits(my.t->lunge_to);
+  /* point        lunge_to                  */ in >> bits(my.t->lunge_to);
+  /* point        last_failed_jump_at       */ in >> bits(my.t->last_failed_jump_at);
   /* int          bounce_count              */ in >> bits(my.t->bounce_count);
   /* int          capacity_height           */ in >> bits(my.t->capacity_height);
   /* int          capacity_width            */ in >> bits(my.t->capacity_width);
@@ -454,7 +455,7 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
   IF_DEBUG4
   {
     auto diff = in.tellg() - start;
-    LOG("LOAD %d bytes %s TP %d ID %x last_mid_at %f,%f", (int) diff, name.c_str(), my.t->tp_id, my.t->id.id,
+    LOG("LOAD %d bytes %s TP %d ID %x last_mid_at %d,%d", (int) diff, name.c_str(), my.t->tp_id, my.t->id.id,
         my.t->last_mid_at.x, my.t->last_mid_at.y);
   }
 
@@ -871,7 +872,6 @@ std::istream &operator>>(std::istream &in, Bits< class Game & > my)
 
   /* bool               started                      */ in >> bits(my.t.started);
   /* bool               things_are_moving            */ in >> bits(my.t.things_are_moving);
-  /* fpoint             mouse_over                   */ in >> bits(my.t.mouse_over);
   /* point              minimap_over                 */ in >> bits(my.t.minimap_over);
   /* int                seed                         */ in >> bits(my.t.seed);
   /* std::string        seed_name                    */ in >> bits(my.t.seed_name);

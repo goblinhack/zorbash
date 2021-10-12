@@ -331,7 +331,7 @@ bool Thing::possible_to_attack(const Thingp it)
   return false;
 }
 
-bool Thing::attack(fpoint future_pos)
+bool Thing::attack(point future_pos)
 {
   bool up     = future_pos.y < mid_at.y;
   bool down   = future_pos.y > mid_at.y;
@@ -550,7 +550,7 @@ bool Thing::attack(Thingp it)
         }
 
         if (attack_lunge()) {
-          lunge(it->get_interpolated_mid_at());
+          lunge(it->mid_at);
         }
 
         //
@@ -587,7 +587,7 @@ bool Thing::attack(Thingp it)
     dbg("The attack succeeded (dmg %d att, def %d) on %s", att_mod, def_mod, it->to_string().c_str());
 
     if (attack_lunge()) {
-      lunge(it->get_interpolated_mid_at());
+      lunge(it->mid_at);
     }
     if (attack_eater()) {
       health_boost(it->get_nutrition());
@@ -610,7 +610,7 @@ bool Thing::attack(Thingp it)
       dbg("Attack missed %s", it->to_string().c_str());
     }
     if (attack_lunge()) {
-      lunge(it->get_interpolated_mid_at());
+      lunge(it->mid_at);
     }
     dead("by foolishness");
     return true;

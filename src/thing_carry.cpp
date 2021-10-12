@@ -74,7 +74,7 @@ bool Thing::carry(Thingp item)
     dbg("Added to bag at %d,%d", item->monst_infop->bag_position.x, item->monst_infop->bag_position.y);
   } else {
     dbg("No; cannot store in a bag");
-    set_where_i_failed_to_collect_last(make_point(item->mid_at));
+    set_where_i_failed_to_collect_last(item->mid_at);
 
     if (is_player()) {
       TOPCON("%%fg=red$No space to carry %s.%%fg=reset$", item->text_the().c_str());
@@ -182,7 +182,7 @@ bool Thing::try_to_carry(Thingp item)
   return carry(item);
 }
 
-std::list< Thingp > Thing::anything_to_carry_at(fpoint at)
+std::list< Thingp > Thing::anything_to_carry_at(point at)
 {
   TRACE_AND_INDENT();
   std::vector< std::pair< Thingp, int > > items;

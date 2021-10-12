@@ -322,7 +322,7 @@ void player_tick (bool left, bool right, bool up, bool down, bool attack, bool w
                  player->mid_at.y + player_move_delta.y);
       if (level->is_obs_wall_or_door(p.x, p.y) ||
         level->is_obs_destructable(p.x, p.y)) {
-        player->try_to_jump_carefree(make_point(player->mid_at));
+        player->try_to_jump_carefree(player->mid_at);
       } else {
         player->try_to_jump_carefree(p);
       }
@@ -331,7 +331,7 @@ void player_tick (bool left, bool right, bool up, bool down, bool attack, bool w
                  level->cursor->mid_at.y);
       if (level->is_obs_wall_or_door(p.x, p.y) ||
         level->is_obs_destructable(p.x, p.y)) {
-        player->try_to_jump_carefree(make_point(player->mid_at));
+        player->try_to_jump_carefree(player->mid_at);
       } else {
         player->try_to_jump_carefree(p);
       }
@@ -366,7 +366,7 @@ void player_tick (bool left, bool right, bool up, bool down, bool attack, bool w
     //
     bool moving = player->is_moving;
 
-    fpoint future_pos = player->mid_at + fpoint(dx, dy);
+    auto future_pos = player->mid_at + point(dx, dy);
     bool shove_allowed = true;
     bool attack_allowed = true;
     if (wait) {

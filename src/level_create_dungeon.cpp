@@ -385,119 +385,119 @@ bool Level::create_dungeon(point3d at, int seed)
       for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
         for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
           if (dungeon->is_ascend_dungeon(x, y)) {
-            auto t = thing_new("player2", fpoint(x, y));
+            auto t = thing_new("player2", point(x, y));
 
 #if 0
-            auto w = thing_new("scythe", fpoint(x, y));
+            auto w = thing_new("scythe", point(x, y));
             t->carry(w);
 
             {
-              auto p = thing_new("potion_health", fpoint(x, y));
+              auto p = thing_new("potion_health", point(x, y));
               t->carry(p);
             }
 #endif
             {
-              auto b = thing_new("food_frog", fpoint(x, y));
+              auto b = thing_new("food_frog", point(x, y));
               t->carry(b);
             }
 
-            auto w3 = thing_new("sword_short_wooden", fpoint(x, y));
+            auto w3 = thing_new("sword_short_wooden", point(x, y));
             t->carry(w3);
 
             {
-              auto f = thing_new("enchantstone", fpoint(x, y));
+              auto f = thing_new("enchantstone", point(x, y));
               t->carry(f);
             }
 
             {
-              auto f = thing_new("skillstone", fpoint(x, y));
+              auto f = thing_new("skillstone", point(x, y));
               t->carry(f);
             }
             {
-              auto f = thing_new("skillstone", fpoint(x, y));
+              auto f = thing_new("skillstone", point(x, y));
               t->carry(f);
             }
 
 #if 0
-            auto w2 = thing_new("sword_short_basic", fpoint(x, y));
+            auto w2 = thing_new("sword_short_basic", point(x, y));
             t->carry(w2);
-            auto w2 = thing_new("sword_rusty_basic", fpoint(x, y));
+            auto w2 = thing_new("sword_rusty_basic", point(x, y));
             t->carry(w2);
 
-            auto b = thing_new("bag_small", fpoint(x, y));
+            auto b = thing_new("bag_small", point(x, y));
             t->carry(b);
 
             {
-              auto b = thing_new("bag_small", fpoint(x, y));
+              auto b = thing_new("bag_small", point(x, y));
               t->carry(b);
             }
 
             {
-              auto b = thing_new("food_frog", fpoint(x, y));
+              auto b = thing_new("food_frog", point(x, y));
               t->carry(b);
             }
 
             {
-              auto b = thing_new("chest1", fpoint(x, y));
+              auto b = thing_new("chest1", point(x, y));
               t->carry(b);
             }
 
             {
-              auto f = thing_new("skillstone", fpoint(x, y));
+              auto f = thing_new("skillstone", point(x, y));
               t->carry(f);
             }
 
             {
-              auto p = thing_new("potion_health", fpoint(x, y));
+              auto p = thing_new("potion_health", point(x, y));
               t->carry(p);
             }
 
             {
-              auto W = thing_new("wand_energy", fpoint(x, y));
+              auto W = thing_new("wand_energy", point(x, y));
               t->carry(W);
             }
             {
-              auto W = thing_new("wand_descent", fpoint(x, y));
-              t->carry(W);
-            }
-
-            {
-              auto W = thing_new("wand_lightning", fpoint(x, y));
+              auto W = thing_new("wand_descent", point(x, y));
               t->carry(W);
             }
 
             {
-              auto W = thing_new("wand_fire", fpoint(x, y));
+              auto W = thing_new("wand_lightning", point(x, y));
               t->carry(W);
             }
 
             {
-              auto W = thing_new("key", fpoint(x, y));
+              auto W = thing_new("wand_fire", point(x, y));
+              t->carry(W);
+            }
+
+            {
+              auto W = thing_new("key", point(x, y));
               t->carry(W);
             }
 #endif
 
             {
-              auto W = thing_new("key", fpoint(x, y));
+              auto W = thing_new("key", point(x, y));
               t->carry(W);
             }
 
             {
-              auto W = thing_new("torch", fpoint(x, y));
+              auto W = thing_new("torch", point(x, y));
               t->carry(W);
             }
 
             {
-              auto W = thing_new("torch", fpoint(x, y));
+              auto W = thing_new("torch", point(x, y));
               t->carry(W);
             }
 
 #if 0
-            auto s = thing_new("skill_devoted_thrust", fpoint(x, y));
+            auto s = thing_new("skill_devoted_thrust", point(x, y));
             t->skill_add(s);
 
             {
-              auto i = thing_new("thunderstone", fpoint(x, y));
+              auto i = thing_new("thunderstone", point(x, y));
               t->carry(i);
             }
 #endif
@@ -660,7 +660,7 @@ void Level::create_dungeon_place_walls(Dungeonp d, Tpp tp, int variant, int bloc
           cnt++;
         }
 
-        auto t    = thing_new(what, fpoint(X, Y));
+        auto t    = thing_new(what, point(X, Y));
         auto tile = tile_find(tilename);
         if (! tile) {
           ERR("Wall tile %s not found", tilename.c_str());
@@ -672,7 +672,7 @@ void Level::create_dungeon_place_walls(Dungeonp d, Tpp tp, int variant, int bloc
         //
         // Need this so we can display chasms under walls
         //
-        (void) thing_new("wall_floor1", fpoint(X, Y));
+        (void) thing_new("wall_floor1", point(X, Y));
       }
     }
   }
@@ -745,7 +745,7 @@ void Level::create_dungeon_place_rocks(Dungeonp d, int variant, int block_width,
           cnt++;
         }
 
-        auto t    = thing_new(what, fpoint(X, Y));
+        auto t    = thing_new(what, point(X, Y));
         auto tile = tile_find(tilename);
         if (! tile) {
           ERR("Rock tile %s not found", tilename.c_str());
@@ -756,7 +756,7 @@ void Level::create_dungeon_place_rocks(Dungeonp d, int variant, int block_width,
         //
         // Need this so we can display chasms under walls
         //
-        (void) thing_new("wall_floor1", fpoint(X, Y));
+        (void) thing_new("wall_floor1", point(X, Y));
       }
     }
   }
@@ -824,17 +824,17 @@ void Level::create_dungeon_place_floors(Dungeonp d, std::string what, int floor_
     if (bridge_count > 1) {
       if ((block_width == 1) && (block_height == 1)) {
         if (bridge_count > 2) {
-          (void) thing_new("bridge_x", fpoint(x, y));
+          (void) thing_new("bridge_x", point(x, y));
           continue;
         }
 
         if (d->is_bridge(x, y - 1) || d->is_bridge(x, y + 1)) {
-          (void) thing_new("bridge_ud", fpoint(x, y));
+          (void) thing_new("bridge_ud", point(x, y));
           continue;
         }
 
         if (d->is_bridge(x - 1, y) || d->is_bridge(x + 1, y)) {
-          (void) thing_new("bridge_lr", fpoint(x, y));
+          (void) thing_new("bridge_lr", point(x, y));
           continue;
         }
       }
@@ -861,7 +861,7 @@ void Level::create_dungeon_place_floors(Dungeonp d, std::string what, int floor_
           cnt++;
         }
 
-        auto t    = thing_new(new_thing, fpoint(X, Y));
+        auto t    = thing_new(new_thing, point(X, Y));
         auto tile = tile_find(tilename);
         if (! tile) {
           ERR("Floor tile %s not found", tilename.c_str());
@@ -1072,7 +1072,7 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules(Dungeonp d)
       }
 
       dbg("DGN: Creating %s", tp->name().c_str());
-      auto t = thing_new(tp->name(), fpoint(x, y));
+      auto t = thing_new(tp->name(), point(x, y));
       if (t) {
         if (t->is_weapon()) {
           if (r && r->is_secret) {
@@ -1114,7 +1114,7 @@ void Level::create_dungeon_place_lava(Dungeonp d, const std::string &what)
         continue;
       }
 
-      (void) thing_new(what, fpoint(x, y));
+      (void) thing_new(what, point(x, y));
     }
   }
 }
@@ -1143,7 +1143,7 @@ void Level::create_dungeon_place_lava_smoke(Dungeonp d)
             }
           }
         }
-        thing_new("smoke", fpoint(x, y));
+        thing_new("smoke", point(x, y));
       }
     next:
       continue;
@@ -1164,7 +1164,7 @@ void Level::create_dungeon_place_chasm(Dungeonp d, const std::string &what)
         continue;
       }
 
-      (void) thing_new(what, fpoint(x, y));
+      (void) thing_new(what, point(x, y));
     }
   }
 }
@@ -1182,7 +1182,7 @@ void Level::create_dungeon_place_braziers(Dungeonp d, const std::string &what)
         continue;
       }
 
-      (void) thing_new(what, fpoint(x, y));
+      (void) thing_new(what, point(x, y));
     }
   }
 }
@@ -1213,7 +1213,7 @@ void Level::create_dungeon_place_random_blood(Dungeonp d)
       }
 
       auto tp = tp_random_blood();
-      (void) thing_new(tp->name(), fpoint(x, y));
+      (void) thing_new(tp->name(), point(x, y));
     }
   }
 }
@@ -1231,10 +1231,10 @@ void Level::create_dungeon_place_place_shallow_water(Dungeonp d, const std::stri
         continue;
       }
 
-      (void) thing_new(what, fpoint(x, y));
+      (void) thing_new(what, point(x, y));
 
       if (! d->is_floor(x, y)) {
-        (void) thing_new("dirt2", fpoint(x, y));
+        (void) thing_new("dirt2", point(x, y));
       }
     }
   }
@@ -1253,10 +1253,10 @@ void Level::create_dungeon_place_deep_water(Dungeonp d, const std::string &what)
         continue;
       }
 
-      (void) thing_new(what, fpoint(x, y));
+      (void) thing_new(what, point(x, y));
 
       if (! d->is_floor(x, y)) {
-        (void) thing_new("dirt3", fpoint(x, y));
+        (void) thing_new("dirt3", point(x, y));
       }
     }
   }
@@ -1295,7 +1295,7 @@ void Level::place_floor_deco(Dungeonp d)
         return;
       }
 
-      thing_new(tp->name(), fpoint(x, y));
+      thing_new(tp->name(), point(x, y));
     }
   }
 }
@@ -1364,7 +1364,7 @@ void Level::create_dungeon_place_random_floor_deco(Dungeonp d)
         }
       }
 
-      thing_new(tp->name(), fpoint(x, y));
+      thing_new(tp->name(), point(x, y));
     }
   }
 }
@@ -1455,7 +1455,7 @@ void Level::create_dungeon_place_sewer_pipes(Dungeonp d)
       return;
     }
 
-    thing_new(tp->name(), fpoint(x, y));
+    thing_new(tp->name(), point(x, y));
     sewer_count++;
   }
 }
@@ -1485,22 +1485,22 @@ void Level::create_dungeon_place_remaining_floor(Dungeonp d, const std::string &
 
       if (bridge_count > 1) {
         if (bridge_count > 2) {
-          (void) thing_new("bridge_x", fpoint(x, y));
+          (void) thing_new("bridge_x", point(x, y));
           continue;
         }
 
         if (d->is_bridge(x, y - 1) || d->is_bridge(x, y + 1)) {
-          (void) thing_new("bridge_ud", fpoint(x, y));
+          (void) thing_new("bridge_ud", point(x, y));
           continue;
         }
 
         if (d->is_bridge(x - 1, y) || d->is_bridge(x + 1, y)) {
-          (void) thing_new("bridge_lr", fpoint(x, y));
+          (void) thing_new("bridge_lr", point(x, y));
           continue;
         }
       }
 
-      thing_new(what, fpoint(x, y));
+      thing_new(what, point(x, y));
     }
   }
 }
@@ -1514,7 +1514,7 @@ void Level::create_dungeon_place_corridor(Dungeonp d, const std::string what, in
         continue;
       }
 
-      (void) thing_new(what, fpoint(x, y));
+      (void) thing_new(what, point(x, y));
     }
   }
 }
@@ -1532,17 +1532,17 @@ void Level::create_dungeon_place_bridge(Dungeonp d)
         bridge_count += d->is_bridge(x, y + 1);
 
         if (bridge_count > 2) {
-          (void) thing_new("bridge_x", fpoint(x, y));
+          (void) thing_new("bridge_x", point(x, y));
           continue;
         }
 
         if (d->is_bridge(x, y - 1) || d->is_bridge(x, y + 1)) {
-          (void) thing_new("bridge_ud", fpoint(x, y));
+          (void) thing_new("bridge_ud", point(x, y));
           continue;
         }
 
         if (d->is_bridge(x - 1, y) || d->is_bridge(x + 1, y)) {
-          (void) thing_new("bridge_lr", fpoint(x, y));
+          (void) thing_new("bridge_lr", point(x, y));
           continue;
         }
       }
@@ -1561,7 +1561,7 @@ void Level::place_dirt(Dungeonp d)
           return;
         }
 
-        (void) thing_new(tp->name(), fpoint(x, y));
+        (void) thing_new(tp->name(), point(x, y));
       }
     }
   }
@@ -1593,7 +1593,7 @@ void Level::place_random_treasure(Dungeonp d)
       //
       // Be nice and enchant this lost treasure.
       //
-      auto t = thing_new(tp->name(), fpoint(x, y));
+      auto t = thing_new(tp->name(), point(x, y));
       if (pcg_random_range(0, 100) < 20) {
         t->enchant_randomly();
       }
@@ -1635,7 +1635,7 @@ void Level::place_dry_grass(Dungeonp d)
           continue;
         }
 
-        (void) thing_new(tp->name(), fpoint(x, y));
+        (void) thing_new(tp->name(), point(x, y));
       }
     }
   }
@@ -1656,7 +1656,7 @@ void Level::place_foilage(Dungeonp d)
           continue;
         }
 
-        (void) thing_new(tp->name(), fpoint(x, y));
+        (void) thing_new(tp->name(), point(x, y));
       }
     }
   }
@@ -1677,7 +1677,7 @@ void Level::place_spiderweb(Dungeonp d)
           continue;
         }
 
-        (void) thing_new(tp->name(), fpoint(x, y));
+        (void) thing_new(tp->name(), point(x, y));
       }
     }
   }
@@ -1700,12 +1700,12 @@ void Level::create_dungeon_place_remaining_walls(Dungeonp d, const std::string &
         continue;
       }
 
-      (void) thing_new(what, fpoint(x, y));
+      (void) thing_new(what, point(x, y));
 
       //
       // Need this so we can display chasms under walls
       //
-      (void) thing_new("wall_floor1", fpoint(x, y));
+      (void) thing_new("wall_floor1", point(x, y));
     }
   }
 }
@@ -1723,12 +1723,12 @@ void Level::create_dungeon_place_remaining_rocks(Dungeonp d, const std::string &
         continue;
       }
 
-      (void) thing_new(what, fpoint(x, y));
+      (void) thing_new(what, point(x, y));
 
       //
       // Need this so we can display chasms under walls
       //
-      (void) thing_new("wall_floor1", fpoint(x, y));
+      (void) thing_new("wall_floor1", point(x, y));
     }
   }
 }

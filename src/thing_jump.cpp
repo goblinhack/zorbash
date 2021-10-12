@@ -43,6 +43,10 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
     return false;
   }
 
+  if (! monst_aip) {
+    return false;
+  }
+
   TRACE_AND_INDENT();
   if (be_careful) {
     log("Try to jump to %d,%d", to.x, to.y);
@@ -99,21 +103,18 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
     }
   }
 
-  auto fto = make_fpoint(to);
-
   //
   // Add some random delta for fun and some for diagonals
   //
   float d = how_far_i_can_jump();
 
-  if (distance(mid_at, fto) > d) {
-    auto u = (fto - mid_at);
+  if (distance(mid_at, to) > d) {
+    auto u = (to - mid_at);
     u.unit();
     u *= d;
-    fto = mid_at + u;
-    to  = make_point(fto);
-    x   = to.x;
-    y   = to.y;
+    to = mid_at + u;
+    x  = to.x;
+    y  = to.y;
 
     if (be_careful) {
       if (is_player() && game->robot_mode) {
@@ -130,7 +131,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   // Don't jump too short a distance.
   //
   if (is_monst()) {
-    if (distance(mid_at, fpoint(x, y)) < 2) {
+    if (distance(mid_at, point(x, y)) < 2) {
       TRACE_AND_INDENT();
       dbg("No, too close");
       return false;
@@ -194,7 +195,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   }
 
   is_jumping = true;
-  move_to_immediately(fpoint(x, y));
+  move_to_immediately(point(x, y));
 
   //
   // Weapons follow also.
@@ -276,7 +277,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   if (is_monst() || is_player()) {
     if (! is_floating()) {
       if (level->is_shallow_water((int) mid_at.x, (int) mid_at.y)) {
-        fpoint at(mid_at.x, mid_at.y);
+        point at(mid_at.x, mid_at.y);
         dbg("Causes ripples");
         if (game->robot_mode) {
           //
@@ -516,4 +517,6 @@ void Thing::jump_end(void)
   // To allow landing on items and collecting in one go
   //
   collision_check_do();
+
+  monst_infop->last_failed_jump_at = point(-1, -1);
 }

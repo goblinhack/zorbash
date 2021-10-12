@@ -9,7 +9,7 @@
 #include "my_sys.h"
 #include "my_thing.h"
 
-void Thing::lunge(fpoint to)
+void Thing::lunge(point to)
 {
   auto t = set_ts_lunge_begin(time_get_time_ms_cached());
   auto p = to - mid_at;

@@ -67,7 +67,7 @@ void Level::update_water_next_to_lava(void)
                   t->dead("by being too close to lava");
                   if (! is_starting) {
                     if (! is_smoke(x, y)) {
-                      auto smoke = thing_new("smoke", fpoint(x, y));
+                      auto smoke = thing_new("smoke", point(x, y));
                       smoke->set_lifespan(pcg_random_range(1, 10));
                     }
                   }
@@ -117,7 +117,7 @@ void Level::update_things_next_to_a_chasm(void)
               FOR_ALL_THINGS_END()
 
               if (create_dungeon_place_place_shallow_water) {
-                thing_new("water1", fpoint(x, y));
+                thing_new("water1", point(x, y));
               }
             }
           }
@@ -175,7 +175,7 @@ void Level::update_deep_water(void)
           // Replace with shallow water
           //
           if (removed_deep_water) {
-            thing_new("water1", fpoint(x, y));
+            thing_new("water1", point(x, y));
           }
 
           IF_DEBUG3

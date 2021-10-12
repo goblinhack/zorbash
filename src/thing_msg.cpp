@@ -41,7 +41,7 @@ void Thing::msg(std::string const &m)
   last_at.x = mid_at.x - dx;
   last_at.y = mid_at.y - dy;
 
-  auto msg = level->thing_new("msg", mid_at - fpoint(dx, dy));
+  auto msg = level->thing_new("msg", mid_at - point(dx, dy));
   msg->set_msg(m);
   msg->fadeup(6.0, 0.05, 3000);
 }

@@ -96,7 +96,7 @@ bool Thing::drop(Thingp what, Thingp target, bool stolen)
     //
     // Prevent too soon re-carry
     //
-    set_where_i_dropped_an_item_last(make_point(mid_at));
+    set_where_i_dropped_an_item_last(mid_at);
   }
 
   if (is_bag_item_container() || is_player()) {
@@ -199,7 +199,7 @@ bool Thing::drop_from_ether(Thingp what)
   //
   // Prevent too soon re-carry
   //
-  set_where_i_dropped_an_item_last(make_point(player->mid_at));
+  set_where_i_dropped_an_item_last(player->mid_at);
 
   wid_inventory_init();
   wid_thing_info_fini();

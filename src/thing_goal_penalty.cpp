@@ -94,13 +94,6 @@ void Thing::add_goal_penalty(Thingp attacker)
 {
   TRACE_AND_INDENT();
 
-  if (unlikely(! attacker->is_monst() && ! attacker->is_player())) {
-    return;
-  }
-  if (unlikely(! is_monst() && ! is_player())) {
-    return;
-  }
-
   auto penalty = monst_aip->goal_penalty[ attacker->id ];
 
   if (! penalty) {

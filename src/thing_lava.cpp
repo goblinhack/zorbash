@@ -25,7 +25,7 @@ void Thing::lava_tick(void)
     return;
   }
 
-  fpoint at = get_interpolated_mid_at();
+  point at = mid_at;
   if (! level->is_lava(at.x, at.y)) {
     if (is_player()) {
       dbg("Lava tick: No, no lava");

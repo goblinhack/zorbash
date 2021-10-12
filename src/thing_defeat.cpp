@@ -169,7 +169,7 @@ void Thing::defeat(Thingp defeater, const char *reason)
     int splatters = pcg_random_range(2, 10);
     for (int splatter = 0; splatter < splatters; splatter++) {
       auto tpp = tp_random_blood();
-      (void) level->thing_new(tpp, mid_at, fpoint(0.25, 0.25));
+      (void) level->thing_new(tpp, mid_at);
       if (! tpp) {
         err("Could not place blood");
         break;

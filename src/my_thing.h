@@ -60,8 +60,8 @@ public:
   ThingId    id {}; // Unique per thing.
   ThingTiles tiles {};
   fpoint     interpolated_mid_at;
-  fpoint     last_mid_at; // Previous hop where we were.
-  fpoint     mid_at;      // Grid coordinates.
+  point      last_mid_at; // Previous hop where we were.
+  point      mid_at;      // Grid coordinates.
   point      last_attached;
   point      last_blit_br; // Last blit coords
   point      last_blit_tl; // Offset from top left of map
@@ -201,9 +201,9 @@ public:
   ThingId     set_weapon_id(ThingId);
   ThingId     set_weapon_id_carry_anim(ThingId);
   ThingId     set_weapon_id_use_anim(ThingId);
-  ThingShoved try_to_shove(Thingp it, fpoint fdelta);
-  ThingShoved try_to_shove(fpoint future_pos);
-  ThingShoved try_to_shove_into_hazard(Thingp it, fpoint fdelta);
+  ThingShoved try_to_shove(Thingp it, point delta);
+  ThingShoved try_to_shove(point future_pos);
+  ThingShoved try_to_shove_into_hazard(Thingp it, point delta);
   Thingp      get_best_fire_at_target(void);
   Thingp      get_immediate_minion_owner() const;
   Thingp      get_immediate_owner() const;
@@ -242,7 +242,7 @@ public:
   bool        ascend_sewer(void);
   bool        ascend_sewer_tick();
   bool        attack(Thingp it);
-  bool        attack(fpoint future_pos);
+  bool        attack(point future_pos);
   bool        bag_add(Thingp);
   bool        bag_add_test(Thingp);
   bool        bag_can_place_at(Thingp item, point pos);
@@ -258,21 +258,20 @@ public:
   bool        change_owner(Thingp new_owner);
   bool        check_anything_to_carry(bool auto_collect_allowed);
   bool        close_door(Thingp door);
-  bool        collision_add_candidates(Thingp it, fpoint future_pos, int x, int y, int dx, int dy);
-  bool        collision_check_and_handle(Thingp it, fpoint future_pos, int x, int y, int dx, int dy);
-  bool        collision_check_and_handle(fpoint, bool *, bool *, float radius);
+  bool        collision_add_candidates(Thingp it, point future_pos, int x, int y, int dx, int dy);
+  bool        collision_check_and_handle(Thingp it, point future_pos, int x, int y, int dx, int dy);
+  bool        collision_check_and_handle(point future_pos, bool *, bool *, float radius);
   bool        collision_check_and_handle_at(bool *, bool *);
-  bool        collision_check_and_handle_at(fpoint, bool *, bool *);
-  bool        collision_check_and_handle_nearby(fpoint, bool *, bool *);
+  bool        collision_check_and_handle_at(point future_pos, bool *, bool *);
+  bool        collision_check_and_handle_nearby(point future_pos, bool *, bool *);
   bool        any_adjacent_monst(void);
   bool        collision_check_do();
-  bool        collision_check_only(Thingp it, fpoint future_pos, int x, int y);
+  bool        collision_check_only(Thingp it, point future_pos, int x, int y);
   bool        collision_check_only(Thingp it, int x, int y, int dx, int dy);
-  bool        collision_check_only(fpoint);
+  bool        collision_check_only(point future_pos);
   bool        collision_check_only(void);
   bool        collision_find_best_target(bool *, bool *);
   bool        collision_obstacle(Thingp);
-  bool        collision_obstacle(fpoint);
   bool        collision_obstacle(point);
   bool        cursor_path_pop_first_move(void);
   bool        descend_dungeon(void);
@@ -321,12 +320,9 @@ public:
   bool laser_anim_exists(void);
   bool laser_choose_target(Thingp item);
   bool matches(const std::string &what) const;
-  bool move(fpoint to);
-  bool move(fpoint to, uint8_t u, uint8_t d, uint8_t l, uint8_t r, uint8_t att, uint8_t idl, bool shoveok, bool attok);
-  bool move(point future_pos);
-  bool move_no_shove_attack_allowed(fpoint future_pos);
+  bool move(point to);
+  bool move(point to, uint8_t u, uint8_t d, uint8_t l, uint8_t r, uint8_t att, uint8_t idl, bool shoveok, bool attok);
   bool move_no_shove_attack_allowed(point future_pos);
-  bool move_no_shove_no_attack(fpoint future_pos);
   bool move_no_shove_no_attack(point future_pos);
   bool move_to_or_attack(const point &);
   bool move_to_or_attack_check_only(const point &nh);
@@ -469,7 +465,7 @@ public:
   float                  how_far_i_can_jump(void);
   float                  how_far_i_can_jump_max(void);
   float                  update_wobble(void);
-  fpoint                 get_lunge_to(void) const;
+  point                  get_lunge_to(void) const;
   int                    ai_avoid_distance(void) const;
   int                    ai_choose_goal(void);
   int                    ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int type, bool check);
@@ -1036,7 +1032,7 @@ public:
   point                  set_where_i_dropped_an_item_last(point);
   point                  set_where_i_failed_to_collect_last(point);
   std::list< Thingp >    anything_to_carry(void);
-  std::list< Thingp >    anything_to_carry_at(fpoint);
+  std::list< Thingp >    anything_to_carry_at(point);
   std::size_t            get_light_count(void) const;
   std::string            short_text_The(void) const;
   std::string            short_text_a_or_an(void) const;
@@ -1259,7 +1255,7 @@ public:
   void hunger_clock();
   void incr_score(int);
   void inherit_from(Thingp it);
-  void init(Levelp, const std::string &name, fpoint at, fpoint jitter);
+  void init(Levelp, const std::string &name, point at);
   void init_lights(void);
   void inventory_particle(Thingp what, uint32_t slot);
   void inventory_particle(Thingp what, uint32_t slot, Thingp particle_target);
@@ -1282,14 +1278,14 @@ public:
   void location_check_forced_all_things_at();
   void log(const char *fmt, ...) const __attribute__((format(printf, 2, 3)));
   void log_(const char *fmt, va_list args) const; // compile error without
-  void lunge(fpoint tt);
+  void lunge(point tt);
   void move_carried_items(void);
   void move_carried_items_immediately(void);
-  void move_delta(fpoint);
+  void move_delta(point);
   void move_finish(void);
-  void move_set_dir_from_delta(fpoint);
-  void move_to(fpoint to);
-  void move_to_immediately(fpoint to);
+  void move_set_dir_from_delta(point);
+  void move_to(point to);
+  void move_to_immediately(point to);
   void msg(const std::string &);
   void new_light(point offset, int strength);
   void new_light(point offset, int strength, color col, int fbo);
@@ -1325,7 +1321,7 @@ public:
   void set_fadeup_height(float);
   void set_fall_height(float);
   void set_interpolated_mid_at(fpoint v);
-  void set_lunge_to(fpoint);
+  void set_lunge_to(point);
   void set_minion_owner(Thingp minion_owner);
   void set_msg(const std::string &);
   void set_owner(Thingp owner);
@@ -1352,12 +1348,12 @@ public:
   void update_interpolated_position(void);
   void update_light(void);
   void update_light_strength_including_torch_effect(int &light_strength);
-  void update_pos(fpoint, bool immediately);
+  void update_pos(point, bool immediately);
   void update_tick(void);
   void used(Thingp w, Thingp target, bool remove_after_use);
   void visible();
   void water_tick();
-  void weapon_get_use_offset(float *dx, float *dy) const;
+  void weapon_get_use_offset(int *dx, int *dy) const;
   void weapon_set_carry_anim(Thingp weapon_carry_anim);
   void weapon_set_carry_anim_id(ThingId weapon_carry_anim_id);
   void weapon_set_placement(void);

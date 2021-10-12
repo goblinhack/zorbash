@@ -58,7 +58,8 @@ std::ostream &operator<<(std::ostream &out, Bits< MonstInfop & > const my)
   /* float        fadeup_height             */ out << bits(my.t->fadeup_height);
   /* float        fall_height               */ out << bits(my.t->fall_height);
   /* float        wobble                    */ out << bits(my.t->wobble);
-  /* fpoint       lunge_to                  */ out << bits(my.t->lunge_to);
+  /* point        lunge_to                  */ out << bits(my.t->lunge_to);
+  /* point        last_failed_jump_at       */ out << bits(my.t->last_failed_jump_at);
   /* int          bounce_count              */ out << bits(my.t->bounce_count);
   /* int          capacity_height           */ out << bits(my.t->capacity_height);
   /* int          capacity_width            */ out << bits(my.t->capacity_width);
@@ -409,7 +410,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   IF_DEBUG4
   {
     auto diff = out.tellp() - start;
-    LOG("SAVE %d bytes %s TP %d ID %x last_mid_at %f,%f monst_infop %p", (int) diff, name.c_str(), my.t->tp_id,
+    LOG("SAVE %d bytes %s TP %d ID %x last_mid_at %d,%d monst_infop %p", (int) diff, name.c_str(), my.t->tp_id,
         my.t->id.id, my.t->last_mid_at.x, my.t->last_mid_at.y, my.t->monst_infop);
   }
   return (out);
@@ -730,7 +731,6 @@ std::ostream &operator<<(std::ostream &out, Bits< const class Game & > const my)
 
   /* bool               started                      */ out << bits(my.t.started);
   /* bool               things_are_moving            */ out << bits(my.t.things_are_moving);
-  /* fpoint             mouse_over                   */ out << bits(my.t.mouse_over);
   /* point              minimap_over                 */ out << bits(my.t.minimap_over);
   /* int                seed                         */ out << bits(my.t.seed);
   /* std::string        seed_name                    */ out << bits(my.t.seed_name);

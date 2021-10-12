@@ -178,7 +178,7 @@ void Level::scroll_map_to_player(void)
   ts_redraw_bg      = time_get_time_ms_cached() + 500;
   map_follow_player = true;
 
-  map_wanted_at = player->mid_at - fpoint(TILES_ACROSS / 2, TILES_DOWN / 2);
+  map_wanted_at = make_fpoint(player->mid_at) - fpoint(TILES_ACROSS / 2, TILES_DOWN / 2);
 
   scroll_map_set_target();
   scroll_map_do(true);
@@ -230,7 +230,7 @@ void Level::scroll_map_set_target(void)
   }
 
   if (player && map_follow_player) {
-    follow        = player->mid_at;
+    follow        = make_fpoint(player->mid_at);
     sensitivity   = 0.5;
     x_sensitivity = sensitivity * game->config.video_w_h_ratio;
     y_sensitivity = sensitivity;

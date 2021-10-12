@@ -15,7 +15,7 @@
 #include "my_thing.h"
 #include "my_thing_template.h"
 
-ThingShoved Thing::try_to_shove(Thingp it, fpoint delta)
+ThingShoved Thing::try_to_shove(Thingp it, point delta)
 {
   TRACE_AND_INDENT();
   if (! ai_is_able_to_shove()) {
@@ -70,8 +70,8 @@ ThingShoved Thing::try_to_shove(Thingp it, fpoint delta)
     it->add_enemy(this);
   }
 
-  fpoint shove_delta = delta;
-  fpoint shove_pos   = it->mid_at + shove_delta;
+  point shove_delta = delta;
+  point shove_pos   = it->mid_at + shove_delta;
 
   if (it->monst_size() - monst_size() > 1) {
     if (is_player()) {
@@ -206,7 +206,7 @@ ThingShoved Thing::try_to_shove(Thingp it, fpoint delta)
   return (THING_SHOVE_TRIED_AND_PASSED);
 }
 
-ThingShoved Thing::try_to_shove(fpoint future_pos)
+ThingShoved Thing::try_to_shove(point future_pos)
 {
   if (! ai_is_able_to_shove()) {
     return (THING_SHOVE_NEVER_TRIED);
@@ -214,7 +214,7 @@ ThingShoved Thing::try_to_shove(fpoint future_pos)
 
   auto  x     = future_pos.x;
   auto  y     = future_pos.y;
-  auto  delta = fpoint(x, y) - mid_at;
+  auto  delta = point(x, y) - mid_at;
   point p(future_pos.x, future_pos.y);
   FOR_ALL_THINGS_THAT_INTERACT(level, it, p.x, p.y)
   {
@@ -226,7 +226,7 @@ ThingShoved Thing::try_to_shove(fpoint future_pos)
       continue;
     }
 
-    fpoint shove_delta = delta;
+    point shove_delta = delta;
     return (try_to_shove(it, shove_delta));
   }
   FOR_ALL_THINGS_END()
@@ -234,7 +234,7 @@ ThingShoved Thing::try_to_shove(fpoint future_pos)
   return (THING_SHOVE_NEVER_TRIED);
 }
 
-ThingShoved Thing::try_to_shove_into_hazard(Thingp it, fpoint delta)
+ThingShoved Thing::try_to_shove_into_hazard(Thingp it, point delta)
 {
   if (ai_is_able_to_shove()) {
     auto shoved_to_position = it->mid_at + delta;

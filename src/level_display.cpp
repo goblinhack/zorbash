@@ -240,7 +240,7 @@ void Level::display_map_fg_things(int fbo, const int16_t minx, const int16_t min
           IF_DEBUG3
           {
             if (! t->is_moving && ! t->is_jumping && ! t->is_falling) {
-              if (t->mid_at != t->get_interpolated_mid_at()) {
+              if (t->mid_at != make_point(t->get_interpolated_mid_at())) {
                 t->die("Thing is not where its interpolated to be; is at %f,%f", t->get_interpolated_mid_at().x,
                        t->get_interpolated_mid_at().y);
               }

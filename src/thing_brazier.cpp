@@ -23,9 +23,8 @@ void Thing::brazier_tick(void)
     return;
   }
 
-  static const std::vector< fpoint > all_deltas = {
-      fpoint(-1, -1), fpoint(1, -1), fpoint(-1, 1), fpoint(1, 1),
-      fpoint(0, -1),  fpoint(-1, 0), fpoint(1, 0),  fpoint(0, 1),
+  static const std::vector< point > all_deltas = {
+      point(-1, -1), point(1, -1), point(-1, 1), point(1, 1), point(0, -1), point(-1, 0), point(1, 0), point(0, 1),
   };
 
   FOR_ALL_THINGS_AT_DEPTH(level, t, mid_at.x, mid_at.y, MAP_DEPTH_OBJ)

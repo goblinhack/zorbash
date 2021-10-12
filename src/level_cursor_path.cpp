@@ -68,9 +68,9 @@ void Level::cursor_path_draw_circle(void)
       }
 
       if (too_far) {
-        thing_new("cursor_select_fail_path", fpoint(x, y));
+        thing_new("cursor_select_fail_path", point(x, y));
       } else {
-        thing_new("cursor_select_path", fpoint(x, y));
+        thing_new("cursor_select_path", point(x, y));
       }
     }
   }
@@ -198,7 +198,7 @@ void Level::cursor_path_draw_line(point start, point end)
         continue;
       }
     }
-    thing_new("cursor_path", fpoint(c.x, c.y));
+    thing_new("cursor_path", point(c.x, c.y));
   }
 }
 
@@ -213,7 +213,7 @@ void Level::cursor_path_draw_line(const std::vector< point > &move_path)
         continue;
       }
     }
-    thing_new("cursor_path", fpoint(c.x, c.y));
+    thing_new("cursor_path", point(c.x, c.y));
   }
 }
 

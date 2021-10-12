@@ -165,8 +165,12 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
         TRACE_AND_INDENT();
         std::multiset< Goal > avoid;
         if (ai_choose_avoid_goals(avoid, goal)) {
-          for (const auto &goal : avoid) {
-            if (ai_create_path_to_single_goal(minx, miny, maxx, maxy, goal, &saved_dmap)) {
+          for (const auto &inner_goal : avoid) {
+            if (ai_create_path_to_single_goal(minx, miny, maxx, maxy, inner_goal, &saved_dmap)) {
+              if (goal.what) {
+                add_goal_penalty(goal.what);
+              }
+
               IF_DEBUG3
               {
                 auto s = string_sprintf("Accept goal score %d @(%d,%d) %s", (int) goal.score, (int) goal.at.x,
@@ -182,6 +186,10 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
       if (ai_create_path_to_single_goal(minx, miny, maxx, maxy, goal, &saved_dmap)) {
         IF_DEBUG3
         {
+          if (goal.what) {
+            add_goal_penalty(goal.what);
+          }
+
           auto s = string_sprintf("Accept goal score %d @(%d,%d) %s", (int) goal.score, (int) goal.at.x,
                                   (int) goal.at.y, goal.msg.c_str());
           AI_LOG("", s);
@@ -620,7 +628,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
         //
         // Ignore interruptions too far away
         //
-        auto  dist     = distance(mid_at, fpoint(x, y));
+        auto  dist     = distance(mid_at, point(x, y));
         float max_dist = ai_scent_distance();
         if (dist > max_dist) {
           continue;
@@ -757,7 +765,6 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
             // If starving, prefer the thing with most health
             //
             GOAL_ADD(GOAL_PRIO_LOW, it_health - goal_penalty, "eat-it", it);
-            add_goal_penalty(it);
           }
         } else if (is_hungry) {
           if (worth_eating(it) && ! is_dangerous(it)) {
@@ -768,13 +775,10 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
             //
             if (it->is_player()) {
               GOAL_ADD(GOAL_PRIO_LOW, it_health / 2 - goal_penalty, "eat-player", it);
-              add_goal_penalty(it);
             } else if (it->is_alive_monst()) {
               GOAL_ADD(GOAL_PRIO_LOW, it_health / 2 - goal_penalty, "eat-monst", it);
-              add_goal_penalty(it);
             } else {
               GOAL_ADD(GOAL_PRIO_LOW, it_health / 2 - goal_penalty, "eat-food", it);
-              add_goal_penalty(it);
             }
           }
         }
@@ -784,7 +788,6 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
             auto score = worth_collecting(it);
             if (score > 0) {
               GOAL_ADD(GOAL_PRIO_LOW, score - goal_penalty, "collect", it);
-              add_goal_penalty(it);
             }
           }
         }
@@ -795,7 +798,6 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
         if (it->is_key()) {
           if (ai_is_able_to_collect_keys()) {
             GOAL_ADD(GOAL_PRIO_LOW, -goal_penalty, "collect-key", it);
-            add_goal_penalty(it);
           }
         }
 
@@ -803,10 +805,8 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
           if (ai_is_able_to_open_doors() || ai_is_able_to_break_down_doors()) {
             if (get_keys()) {
               GOAL_ADD(GOAL_PRIO_LOW, -goal_penalty, "open-door-with-key", it);
-              add_goal_penalty(it);
             } else {
               GOAL_ADD(GOAL_PRIO_LOW, 100 - goal_penalty, "open-door", it);
-              add_goal_penalty(it);
             }
           }
         }
@@ -832,12 +832,10 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
                 if (cannot_avoid(it)) {
                   GOAL_ADD(GOAL_PRIO_HIGH, (int) (max_dist - dist) * health_diff - goal_penalty,
                            "attack-enemy-i-cannot-avoid", it);
-                  add_goal_penalty(it);
                   AI_LOG("Cannot avoid enemy", it);
                 } else {
                   int avoid_score = ((max_dist - dist) * health_diff) - goal_penalty;
                   GOAL_AVOID_ADD(GOAL_PRIO_VERY_HIGH, avoid_score, "avoid-monst", it);
-                  add_goal_penalty(it);
                 }
               } else {
                 //
@@ -845,7 +843,6 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
                 //
                 GOAL_AVOID_ADD(GOAL_PRIO_VERY_HIGH, (int) (max_dist - dist) * health_diff - goal_penalty,
                                "attack-enemy", it);
-                add_goal_penalty(it);
               }
             } else if (! is_fearless() && (dist < ai_avoid_distance()) && will_avoid_monst(it)) {
               //
@@ -853,7 +850,6 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
               //
               if (cannot_avoid(it)) {
                 GOAL_ADD(GOAL_PRIO_HIGH, (int) (max_dist - dist) * health_diff, "attack-monst-i-cannot-avoid", it);
-                add_goal_penalty(it);
                 AI_LOG("Cannot avoid monst", it);
               } else {
                 //
@@ -861,7 +857,6 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
                 //
                 int avoid_score = ((max_dist - dist) * health_diff);
                 GOAL_AVOID_ADD(GOAL_PRIO_VERY_HIGH, avoid_score, "avoid-monst", it);
-                add_goal_penalty(it);
               }
             } else if (it->is_minion_generator() && ai_is_able_to_attack_generators()) {
               //
@@ -869,7 +864,6 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
               //
               GOAL_ADD(GOAL_PRIO_HIGH, (int) (max_dist - dist) * health_diff - goal_penalty, "attack-nearby-generator",
                        it);
-              add_goal_penalty(it);
             } else if (possible_to_attack(it)) {
               if (dist < 2) {
                 //
@@ -877,7 +871,6 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
                 //
                 GOAL_ADD(GOAL_PRIO_HIGH, (int) (max_dist - dist) * health_diff - goal_penalty, "attack-nearby-monst",
                          it);
-                add_goal_penalty(it);
               } else if (dist < max_dist) {
                 //
                 // No hunting monsters we cannot see just because we have visited that area before.
@@ -886,7 +879,6 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
                 if ((int) pcg_random_range(0, 1000) < tp()->ai_unprovoked_attack_chance_d1000()) {
                   if (possible_to_attack(it)) {
                     GOAL_ADD(GOAL_PRIO_MED, -health_diff - goal_penalty, "can-attack-monst-unprovoked", it);
-                    add_goal_penalty(it);
                   }
                 }
               }
@@ -898,7 +890,6 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
             // Very close, high priority attack
             //
             GOAL_ADD(GOAL_PRIO_VERY_HIGH, 666, "get-out-of-web", it);
-            add_goal_penalty(it);
           }
         }
 
@@ -958,7 +949,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
       continue;
     }
 
-    auto dist = distance(make_fpoint(p), mid_at);
+    auto dist = distance(p, mid_at);
     if (level->is_obs_wall_or_door(p.x, p.y)) {
       continue;
     }
@@ -1257,7 +1248,7 @@ bool Thing::ai_choose_immediately_adjacent_goal(void)
   for (int dx = -1; dx <= 1; dx++) {
     for (int dy = -1; dy <= 1; dy++) {
 
-      fpoint at(mid_at.x + dx, mid_at.y + dy);
+      point at(mid_at.x + dx, mid_at.y + dy);
       if (level->is_oob(at)) {
         continue;
       }
@@ -2050,7 +2041,7 @@ bool Thing::ai_choose_avoid_goals(std::multiset< Goal > &goals, const Goal &goal
         continue;
       }
 
-      float dist = distance(mid_at + fpoint(dx, dy), it->mid_at);
+      float dist = distance(mid_at + point(dx, dy), it->mid_at);
       if (dist < ai_avoid_distance()) {
         continue;
       }
@@ -2091,7 +2082,7 @@ bool Thing::ai_choose_avoid_goals(std::multiset< Goal > &goals, const Goal &goal
         continue;
       }
 
-      float dist         = distance(mid_at + fpoint(dx, dy), it->mid_at);
+      float dist         = distance(mid_at + point(dx, dy), it->mid_at);
       int   terrain_cost = get_terrain_cost(p);
       int   score        = -(int) terrain_cost;
       score += dist * 100;
@@ -2126,7 +2117,7 @@ bool Thing::ai_choose_avoid_goals(std::multiset< Goal > &goals, const Goal &goal
         continue;
       }
 
-      float dist         = distance(mid_at + fpoint(dx, dy), it->mid_at);
+      float dist         = distance(mid_at + point(dx, dy), it->mid_at);
       int   terrain_cost = get_terrain_cost(p);
       int   score        = -(int) terrain_cost;
       score += dist * 100;

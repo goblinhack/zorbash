@@ -105,7 +105,7 @@ bool Thing::descend_dungeon(void)
         set_tick_last_level_change(game->tick_current);
 
         dbg("Level change move to destination");
-        move_to_immediately(fpoint(x, y));
+        move_to_immediately(point(x, y));
 
         dbg("Level change move carried items");
         move_carried_items_immediately();
@@ -126,7 +126,7 @@ bool Thing::descend_dungeon(void)
         move_finish();
 
         dbg("Level change update interpolated position");
-        set_interpolated_mid_at(mid_at);
+        set_interpolated_mid_at(make_fpoint(mid_at));
         update_interpolated_position();
 
         dbg("Level change location check");

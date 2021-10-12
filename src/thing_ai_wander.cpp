@@ -27,7 +27,7 @@ bool Thing::ai_blocked(void)
       point(0, 1),
   };
 
-  auto at    = make_point(mid_at);
+  auto at    = mid_at;
   auto count = 0;
   for (const auto &d : move_deltas) {
     auto t = at + d;
@@ -47,7 +47,7 @@ bool Thing::ai_blocked_completely(void)
       point(0, -1), point(-1, 0), point(1, 0), point(0, 1), point(0, 0),
   };
 
-  auto at    = make_point(mid_at);
+  auto at    = mid_at;
   auto count = 0;
   for (const auto &d : move_deltas) {
     auto t = at + d;
@@ -197,7 +197,7 @@ bool Thing::ai_choose_wander(point &nh)
   // Try to use the same location.
   //
   if (target != point(-1, -1)) {
-    if (ai_create_path(nh, make_point(mid_at), target)) {
+    if (ai_create_path(nh, mid_at, target)) {
       return true;
     }
   }
@@ -215,7 +215,7 @@ bool Thing::ai_choose_wander(point &nh)
   auto manifestor = get_top_minion_owner();
   if (manifestor) {
     if (minion_leash_distance()) {
-      auto new_distance = distance(make_fpoint(target), manifestor->mid_at);
+      auto new_distance = distance(target, manifestor->mid_at);
       if (new_distance > minion_leash_distance()) {
         dbg("Could not wander, too far off the leash; could not create path to %d,%d", target.x, target.y);
         return false;
@@ -223,12 +223,12 @@ bool Thing::ai_choose_wander(point &nh)
     }
   }
 
-  if (! ai_create_path(nh, make_point(mid_at), target)) {
+  if (! ai_create_path(nh, mid_at, target)) {
     dbg("Could not wander; could not create path to %d,%d", target.x, target.y);
     return false;
   }
 
-  if (target == make_point(mid_at)) {
+  if (target == mid_at) {
     dbg("Could not wander; at target");
     return false;
   }

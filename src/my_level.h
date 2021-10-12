@@ -113,8 +113,8 @@ public:
   bool   minimap_valid {};
   bool   is_level_type_sewer {};
   bool   is_level_type_dungeon {};
-  fpoint cursor_at;
-  fpoint cursor_old;
+  point  cursor_at;
+  point  cursor_old;
   fpoint map_at;        // map tile location
   fpoint map_wanted_at; // map scroll desired at
   float  wobble = {};   // Fades when set
@@ -529,13 +529,9 @@ public:
   Thingp               inventory_describe(const uint32_t slot);
   Thingp               skillbox_describe(const uint32_t slot);
   Thingp               thing_find_optional(const ThingId id);
-  Thingp               thing_new(const std::string &tp_name, const fpoint at);
-  Thingp               thing_new(const std::string &tp_name, const fpoint at, const fpoint jitter);
-  Thingp               thing_new(const std::string &tp_name, const point at);
-  Thingp               thing_new(const std::string &tp_name, Thingp owner);
-  Thingp               thing_new(Tpp, const fpoint at);
-  Thingp               thing_new(Tpp, const fpoint at, const fpoint jitter);
   Thingp               thing_new(Tpp, const point at);
+  Thingp               thing_new(const std::string &tp_name, Thingp owner);
+  Thingp               thing_new(const std::string &tp_name, const point at);
   Tpp                  tp_random_minion_generator(const point &p);
   Tpp                  tp_random_minion_generator_easy(const point &p);
   Tpp                  tp_random_minion_generator_hard(const point &p);
@@ -699,7 +695,7 @@ public:
   void debug_path_create(const std::vector< point > &move_path);
   void debug_path_draw(const std::vector< point > &move_path);
   void debug_path_draw_line(const std::vector< point > &move_path);
-  void describe(fpoint at);
+  void describe(point at);
   void describe(Thingp);
   void display_anim(void);
   void display_blood(void);

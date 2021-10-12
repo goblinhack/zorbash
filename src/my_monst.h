@@ -56,13 +56,14 @@ public:
   ThingId                 weapon_id_carry_anim {};
   ThingId                 weapon_id_use_anim {};
   color                   light_col {};
-  float                   bounce_fade   = {}; // 0.1; rapid, 0.9 slow
-  float                   bounce_height = {}; // Percentage of tile height.
-  float                   fadeup_fade   = {}; // 0.1; rapid, 0.9 slow
-  float                   fadeup_height = {}; // Percentage of tile height.
-  float                   fall_height   = {}; // y offset for falling
-  float                   wobble        = {}; // Fades when set
-  fpoint                  lunge_to;           // When a monst attacks something
+  float                   bounce_fade   = {};  // 0.1; rapid, 0.9 slow
+  float                   bounce_height = {};  // Percentage of tile height.
+  float                   fadeup_fade   = {};  // 0.1; rapid, 0.9 slow
+  float                   fadeup_height = {};  // Percentage of tile height.
+  float                   fall_height   = {};  // y offset for falling
+  float                   wobble        = {};  // Fades when set
+  point                   lunge_to;            // When a monst attacks something
+  point                   last_failed_jump_at; // Previous jump attempt
   int                     bounce_count = {};
   int                     capacity_height {};
   int                     capacity_width {};

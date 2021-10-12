@@ -28,39 +28,12 @@ Thingp Level::thing_new(Tpp tp, const point at)
   return thing_new(tp->name(), at);
 }
 
-Thingp Level::thing_new(Tpp tp, const fpoint at)
-{
-  if (! tp) {
-    err("No tp provided for thing creation");
-    return nullptr;
-  }
-  return thing_new(tp->name(), at);
-}
-
-Thingp Level::thing_new(Tpp tp, const fpoint at, const fpoint jitter)
-{
-  if (! tp) {
-    err("No tp provided for thing creation");
-    return nullptr;
-  }
-  return thing_new(tp->name(), at, jitter);
-}
-
 Thingp Level::thing_new(const std::string &tp_name, Thingp owner) { return thing_new(tp_name, owner->mid_at); }
-
-static const fpoint no_jitter(0, 0);
 
 Thingp Level::thing_new(const std::string &name, const point at)
 {
-  return thing_new(name, fpoint(at.x, at.y), no_jitter);
-}
-
-Thingp Level::thing_new(const std::string &name, const fpoint at) { return thing_new(name, at, no_jitter); }
-
-Thingp Level::thing_new(const std::string &name, const fpoint at, const fpoint jitter)
-{
   auto t = new class Thing_();
-  t->init(this, name, at, jitter);
+  t->init(this, name, at);
   return (t);
 }
 
@@ -91,7 +64,7 @@ void Thing::on_born(void)
   }
 }
 
-void Thing::init(Levelp level, const std::string &name, const fpoint born, const fpoint jitter)
+void Thing::init(Levelp level, const std::string &name, const point born)
 {
   verify(this);
 
@@ -157,7 +130,7 @@ void Thing::init(Levelp level, const std::string &name, const fpoint born, const
   } else {
     game->world.alloc_thing_id(this);
   }
-  if (mid_at != fpoint(-1, -1)) {
+  if (mid_at != point(-1, -1)) {
     level_enter();
     level_push();
   }
@@ -419,8 +392,8 @@ void Thing::init(Levelp level, const std::string &name, const fpoint born, const
   //
   // Set position prior to attach
   //
-  if (mid_at != fpoint(-1, -1)) {
-    set_interpolated_mid_at(mid_at);
+  if (mid_at != point(-1, -1)) {
+    set_interpolated_mid_at(make_fpoint(mid_at));
     update_interpolated_position();
   }
 
@@ -549,8 +522,8 @@ void Thing::reinit(void)
 
   if (unlikely(is_player())) {
     if (level->player && (level->player != this)) {
-      DIE("Player exists in multiple places on map, %f, %f and %f, %f", level->player->mid_at.x,
-          level->player->mid_at.y, mid_at.x, mid_at.y);
+      DIE("Player exists in multiple places on map, %d,%d and %d,%d", level->player->mid_at.x, level->player->mid_at.y,
+          mid_at.x, mid_at.y);
       return;
     }
     level->player = this;

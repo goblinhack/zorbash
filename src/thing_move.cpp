@@ -106,11 +106,11 @@ void Thing::move_finish(void)
   }
 }
 
-bool Thing::move(fpoint future_pos)
+bool Thing::move(point future_pos)
 {
   TRACE_AND_INDENT();
   if (! is_hidden) {
-    dbg("Move to %f,%f", future_pos.x, future_pos.y);
+    dbg("Move to %d,%d", future_pos.x, future_pos.y);
   }
 
   bool up              = future_pos.y < mid_at.y;
@@ -121,29 +121,6 @@ bool Thing::move(fpoint future_pos)
   bool wait_or_collect = false;
   bool shove_allowed   = true;
   bool attack_allowed  = true;
-
-  verify(this);
-  return (move(future_pos, up, down, left, right, attack, wait_or_collect, shove_allowed, attack_allowed));
-}
-
-bool Thing::move(point future_pos)
-{
-  TRACE_AND_INDENT();
-  return move(make_fpoint(future_pos));
-}
-
-bool Thing::move_no_shove_no_attack(fpoint future_pos)
-{
-  TRACE_AND_INDENT();
-  dbg("Move, no shove, no attack to %s", future_pos.to_string().c_str());
-  bool up              = future_pos.y < mid_at.y;
-  bool down            = future_pos.y > mid_at.y;
-  bool left            = future_pos.x < mid_at.x;
-  bool right           = future_pos.x > mid_at.x;
-  bool attack          = false;
-  bool wait_or_collect = false;
-  bool shove_allowed   = false;
-  bool attack_allowed  = false;
 
   verify(this);
   return (move(future_pos, up, down, left, right, attack, wait_or_collect, shove_allowed, attack_allowed));
@@ -163,23 +140,6 @@ bool Thing::move_no_shove_no_attack(point future_pos)
   bool attack_allowed  = false;
 
   verify(this);
-  return (move(make_fpoint(future_pos), up, down, left, right, attack, wait_or_collect, shove_allowed, attack_allowed));
-}
-
-bool Thing::move_no_shove_attack_allowed(fpoint future_pos)
-{
-  TRACE_AND_INDENT();
-  dbg("Move, no shove, attack allowed to %s", future_pos.to_string().c_str());
-  bool up              = future_pos.y < mid_at.y;
-  bool down            = future_pos.y > mid_at.y;
-  bool left            = future_pos.x < mid_at.x;
-  bool right           = future_pos.x > mid_at.x;
-  bool attack          = false;
-  bool wait_or_collect = false;
-  bool shove_allowed   = false;
-  bool attack_allowed  = true;
-
-  verify(this);
   return (move(future_pos, up, down, left, right, attack, wait_or_collect, shove_allowed, attack_allowed));
 }
 
@@ -197,10 +157,10 @@ bool Thing::move_no_shove_attack_allowed(point future_pos)
   bool attack_allowed  = true;
 
   verify(this);
-  return (move(make_fpoint(future_pos), up, down, left, right, attack, wait_or_collect, shove_allowed, attack_allowed));
+  return (move(future_pos, up, down, left, right, attack, wait_or_collect, shove_allowed, attack_allowed));
 }
 
-bool Thing::move(fpoint future_pos, uint8_t up, uint8_t down, uint8_t left, uint8_t right, uint8_t must_attack,
+bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8_t right, uint8_t must_attack,
                  uint8_t wait_or_collect, bool shove_allowed, bool attack_allowed)
 {
   TRACE_AND_INDENT();
@@ -243,7 +203,7 @@ bool Thing::move(fpoint future_pos, uint8_t up, uint8_t down, uint8_t left, uint
         //
         // Too far.
         //
-        dbg("Minion cannot move to %f,%f (new-dist %f, curr-dist %f); it tugs at the leash at %f,%f", future_pos.x,
+        dbg("Minion cannot move to %d,%d (new-dist %f, curr-dist %f); it tugs at the leash at %d,%d", future_pos.x,
             future_pos.y, new_distance, curr_distance, manifestor->mid_at.x, manifestor->mid_at.y);
         lunge(future_pos);
         return false;
@@ -373,7 +333,7 @@ bool Thing::move(fpoint future_pos, uint8_t up, uint8_t down, uint8_t left, uint
 
   auto x     = future_pos.x;
   auto y     = future_pos.y;
-  auto delta = fpoint(x, y) - mid_at;
+  auto delta = point(x, y) - mid_at;
 
   if (tp()->gfx_bounce_on_move()) {
     if (get_bounce() == 0) {
@@ -491,7 +451,7 @@ bool Thing::move(fpoint future_pos, uint8_t up, uint8_t down, uint8_t left, uint
 void Thing::update_interpolated_position(void)
 {
   TRACE_AND_INDENT();
-  fpoint new_pos = mid_at;
+  fpoint new_pos = make_fpoint(mid_at);
   auto   tpp     = tp();
   float  step    = game->tick_dt;
 
@@ -524,19 +484,19 @@ void Thing::update_interpolated_position(void)
   } else if (! is_moving) {
     if (mid_at != last_mid_at) {
       if (! is_hidden) {
-        dbg("Changed position (new %f, %f, old %f,%f)", mid_at.x, mid_at.y, last_mid_at.x, last_mid_at.y);
+        dbg("Changed position (new %d,%d, old %d,%d)", mid_at.x, mid_at.y, last_mid_at.x, last_mid_at.y);
       }
 
-      new_pos     = mid_at;
+      new_pos     = make_fpoint(mid_at);
       last_mid_at = mid_at;
     }
   } else if (game->tick_dt >= 1) {
     if (mid_at != last_mid_at) {
       if (! is_hidden) {
-        dbg("End of move position (new %f, %f, old %f,%f)", mid_at.x, mid_at.y, last_mid_at.x, last_mid_at.y);
+        dbg("End of move position (new %d,%d, old %d,%d)", mid_at.x, mid_at.y, last_mid_at.x, last_mid_at.y);
       }
 
-      new_pos     = mid_at;
+      new_pos     = make_fpoint(mid_at);
       last_mid_at = mid_at;
 
       move_finish();
@@ -559,11 +519,11 @@ void Thing::update_interpolated_position(void)
   update_light();
 }
 
-void Thing::update_pos(fpoint to, bool immediately)
+void Thing::update_pos(point to, bool immediately)
 {
   TRACE_AND_INDENT();
   if (! is_hidden) {
-    dbg("Update pos to %f,%f", to.x, to.y);
+    dbg("Update pos to %d,%d", to.x, to.y);
   }
 
   point new_at((int) to.x, (int) to.y);
@@ -591,7 +551,7 @@ void Thing::update_pos(fpoint to, bool immediately)
   }
 
   if (! is_hidden) {
-    dbg("Move to %f,%f", to.x, to.y);
+    dbg("Move to %d,%d", to.x, to.y);
   }
 
   if (is_player()) {
@@ -611,7 +571,7 @@ void Thing::update_pos(fpoint to, bool immediately)
   move_carried_items();
 }
 
-void Thing::move_set_dir_from_delta(fpoint delta)
+void Thing::move_set_dir_from_delta(point delta)
 {
   //
   // If not moving and this is the first move then break out of the
@@ -670,7 +630,7 @@ void Thing::move_set_dir_from_delta(fpoint delta)
   }
 }
 
-void Thing::move_to(fpoint to)
+void Thing::move_to(point to)
 {
   TRACE_AND_INDENT();
   move_finish();
@@ -680,7 +640,7 @@ void Thing::move_to(fpoint to)
   update_pos(to, false);
 }
 
-void Thing::move_delta(fpoint delta)
+void Thing::move_delta(point delta)
 {
   TRACE_AND_INDENT();
   move_finish();
@@ -698,7 +658,7 @@ void Thing::move_delta(fpoint delta)
   update_pos(mid_at + delta, false);
 }
 
-void Thing::move_to_immediately(fpoint to)
+void Thing::move_to_immediately(point to)
 {
   TRACE_AND_INDENT();
   move_finish();
@@ -749,8 +709,7 @@ bool Thing::move_to_try(const point &nh, const bool escaping, bool check_only)
   // be vacant, but also to the future if a thing is moving to that
   // spot; in which case we get an attack of opportunity.
   //
-  auto fnh = fpoint(nh.x, nh.y);
-  if (collision_check_only(fnh)) {
+  if (collision_check_only(nh)) {
     //
     // We would hit something and cannot do this move. However,
     // see if we can hit the thing that is in the way.
@@ -759,7 +718,7 @@ bool Thing::move_to_try(const point &nh, const bool escaping, bool check_only)
     TRACE_AND_INDENT();
     bool target_attacked = false;
     bool target_overlaps = false;
-    collision_check_and_handle_nearby(fnh, &target_attacked, &target_overlaps);
+    collision_check_and_handle_nearby(nh, &target_attacked, &target_overlaps);
     if (target_attacked) {
       dbg("Cannot move to %d,%d, must attack", nh.x, nh.y);
       return true;
@@ -779,7 +738,7 @@ bool Thing::move_to_try(const point &nh, const bool escaping, bool check_only)
     }
 
     if (! check_only) {
-      move(fnh);
+      move(nh);
     }
     return true;
   }

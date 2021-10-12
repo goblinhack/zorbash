@@ -129,7 +129,7 @@ void Thing::weapon_set_use_anim(Thingp new_gfx_anim_attack)
   }
 }
 
-void Thing::weapon_get_use_offset(float *dx, float *dy) const
+void Thing::weapon_get_use_offset(int *dx, int *dy) const
 {
   TRACE_AND_INDENT();
   *dx = 0;
@@ -140,7 +140,7 @@ void Thing::weapon_get_use_offset(float *dx, float *dy) const
     return;
   }
 
-  float dist_from_wielder = weapon->tp()->weapon_use_distance();
+  int dist_from_wielder = weapon->tp()->weapon_use_distance();
 
   //
   // Try current direction.
@@ -335,8 +335,8 @@ bool Thing::use_weapon_try(void)
   TRACE_AND_INDENT();
   dbg("Try to use weapon");
 
-  float dx, dy;
-  auto  weapon = weapon_get();
+  int  dx, dy;
+  auto weapon = weapon_get();
   if (! weapon) {
     auto d = dir_to_direction();
     dx     = d.x;
@@ -347,9 +347,9 @@ bool Thing::use_weapon_try(void)
 
   bool target_attacked = false;
   bool target_overlaps = false;
-  auto hit_at          = mid_at + fpoint(dx, dy);
+  auto hit_at          = mid_at + point(dx, dy);
 
-  dbg("Attack at %f,%f delta %f,%f", hit_at.x, hit_at.y, dx, dy);
+  dbg("Attack at %d,%d delta %d,%d", hit_at.x, hit_at.y, dx, dy);
   TRACE_AND_INDENT();
 
   //
@@ -386,12 +386,12 @@ bool Thing::use_weapon_try(void)
   };
 
   bool   found_best {};
-  fpoint best_hit_at;
+  point  best_hit_at;
   int    best_priority = -999;
   Thingp best          = nullptr;
 
   for (const auto &d : all_deltas) {
-    auto hit_at = mid_at + fpoint(d.x, d.y);
+    auto hit_at = mid_at + point(d.x, d.y);
 
     //
     // Find the alternative best thing to hit
@@ -456,7 +456,7 @@ bool Thing::use_weapon_try(void)
   best_priority = -999;
 
   for (const auto &d : all_deltas) {
-    auto hit_at = mid_at + fpoint(d.x, d.y);
+    auto hit_at = mid_at + point(d.x, d.y);
 
     //
     // Find the alternative best thing to hit
@@ -515,7 +515,7 @@ bool Thing::use_weapon_try(void)
   best_priority = -999;
 
   for (const auto &d : all_deltas) {
-    auto hit_at = mid_at + fpoint(d.x, d.y);
+    auto hit_at = mid_at + point(d.x, d.y);
 
     //
     // Find the alternative best thing to hit

@@ -1742,18 +1742,18 @@ int Thing::rarity(void) const
 ////////////////////////////////////////////////////////////////////////////
 // lunge_to
 ////////////////////////////////////////////////////////////////////////////
-fpoint Thing::get_lunge_to(void) const
+point Thing::get_lunge_to(void) const
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
     verify(monst_infop);
     return (monst_infop->lunge_to);
   } else {
-    return (fpoint(0, 0));
+    return (point(0, 0));
   }
 }
 
-void Thing::set_lunge_to(fpoint v)
+void Thing::set_lunge_to(point v)
 {
   TRACE_AND_INDENT();
   new_monst_info();

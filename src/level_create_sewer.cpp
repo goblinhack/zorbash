@@ -391,7 +391,7 @@ void Level::create_sewer_place_walls(int variant, int block_width, int block_hei
           cnt++;
         }
 
-        auto t    = thing_new(what, fpoint(X, Y));
+        auto t    = thing_new(what, point(X, Y));
         auto tile = tile_find(tilename);
         if (! tile) {
           ERR("wall tile %s not found", tilename.c_str());
@@ -402,7 +402,7 @@ void Level::create_sewer_place_walls(int variant, int block_width, int block_hei
         //
         // Need this so we can display chasms under walls
         //
-        (void) thing_new("wall_floor1", fpoint(X, Y));
+        (void) thing_new("wall_floor1", point(X, Y));
       }
     }
   }
@@ -423,12 +423,12 @@ void Level::create_sewer_place_remaining_walls(const std::string &what)
         continue;
       }
 
-      (void) thing_new(what, fpoint(x, y));
+      (void) thing_new(what, point(x, y));
 
       //
       // Need this so we can display chasms under walls
       //
-      (void) thing_new("wall_floor1", fpoint(x, y));
+      (void) thing_new("wall_floor1", point(x, y));
     }
   }
 }

@@ -24,7 +24,7 @@ void Level::debug_path_draw_line(const std::vector< point > &move_path)
         continue;
       }
     }
-    thing_new("debug_path", fpoint(c.x, c.y));
+    thing_new("debug_path", point(c.x, c.y));
   }
 }
 

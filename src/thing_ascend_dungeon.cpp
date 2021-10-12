@@ -101,7 +101,7 @@ bool Thing::ascend_dungeon(void)
 
         level_change(l);
         set_tick_last_level_change(game->tick_current);
-        move_to_immediately(fpoint(x, y));
+        move_to_immediately(point(x, y));
         move_carried_items_immediately();
         if (is_player()) {
           l->player = this;
@@ -115,7 +115,7 @@ bool Thing::ascend_dungeon(void)
         }
 
         move_finish();
-        set_interpolated_mid_at(mid_at);
+        set_interpolated_mid_at(make_fpoint(mid_at));
         update_interpolated_position();
         location_check();
         update_light();

@@ -204,7 +204,7 @@ bool Thing::ai_obstacle(Thingp it)
   //
   // Lava, acid etc...
   //
-  if (is_disliked_by_me(make_point(it->mid_at))) {
+  if (is_disliked_by_me(it->mid_at)) {
     return true;
   }
 

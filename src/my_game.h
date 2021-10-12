@@ -216,9 +216,9 @@ public:
   //
   // Keep all in order:
   //
-  bool        started {}; // Game is afoot
-  bool        things_are_moving {};
-  fpoint      mouse_over;        // Mouse cursor
+  bool started {}; // Game is afoot
+  bool things_are_moving {};
+  // fpoint      mouse_over;        // Mouse cursor
   point       minimap_over;      // Which tile in the minimap
   int         seed {};           // All randomness jumps off of this
   std::string tick_requested {}; // Something has requested a game tick

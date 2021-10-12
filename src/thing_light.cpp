@@ -65,8 +65,8 @@ void Thing::init_lights(void)
   TRACE_AND_INDENT();
   if (unlikely(is_player())) {
     if (level->player && (level->player != this)) {
-      DIE("Player exists in multiple places on map, %f, %f and %f, %f", level->player->mid_at.x,
-          level->player->mid_at.y, mid_at.x, mid_at.y);
+      DIE("Player exists in multiple places on map, %d,%d and %d,%d", level->player->mid_at.x, level->player->mid_at.y,
+          mid_at.x, mid_at.y);
       return;
     }
     level->player = this;

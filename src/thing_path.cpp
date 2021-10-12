@@ -36,7 +36,7 @@ bool Thing::path_pop_next_move(void)
   {
     for (auto p : monst_aip->move_path) {
       s += p.to_string() + " ";
-      (void) level->thing_new("ai_path1", fpoint(p.x, p.y));
+      (void) level->thing_new("ai_path1", point(p.x, p.y));
     }
   }
   auto to         = monst_aip->move_path[ 0 ];
@@ -69,7 +69,8 @@ bool Thing::path_pop_next_move(void)
   //
   // Jump over obstacles if they appear in the path
   //
-  if (ai_is_able_to_jump() && (is_monst() || (is_player() && game->robot_mode))) {
+  if ((mid_at != monst_infop->last_failed_jump_at) && ai_is_able_to_jump() &&
+      (is_monst() || (is_player() && game->robot_mode))) {
     if (is_disliked_by_me(future_pos) || level->is_barrel(future_pos) || level->is_brazier(future_pos)) {
       IF_DEBUG3
       {
@@ -100,8 +101,9 @@ bool Thing::path_pop_next_move(void)
             //
             // Give up. Don't bump the tick. This allows the monst to try an alternative path.
             //
-            AI_LOG("Cannot jump over hazards");
-            clear_move_path("Cannot jump over all hazards");
+            AI_LOG("Failed to jump cannot jump over hazards");
+            clear_move_path("Failed to jump cannot jump over all hazards");
+            monst_infop->last_failed_jump_at = mid_at;
             return false;
           } else if (try_to_jump_carefully(jump_pos)) {
             AI_LOG("Long jump");
@@ -116,6 +118,7 @@ bool Thing::path_pop_next_move(void)
             //
             AI_LOG("Failed to try a long jump");
             clear_move_path("Failed to try a long jump");
+            monst_infop->last_failed_jump_at = mid_at;
             return false;
           }
         } else if (try_to_jump_carefully(jump_pos, &too_far)) {
@@ -128,6 +131,7 @@ bool Thing::path_pop_next_move(void)
         } else {
           AI_LOG("Failed to jump carefully");
           clear_move_path("Failed to jump carefully");
+          monst_infop->last_failed_jump_at = mid_at;
 
           if (too_far) {
             if (any_unfriendly_monst_visible()) {
@@ -165,7 +169,7 @@ bool Thing::path_pop_next_move(void)
       // Can the monst shove it into a something bad?
       //
       AI_LOG("", "Something is in our way that can be shoved");
-      auto delta = make_fpoint(future_pos) - mid_at;
+      auto delta = future_pos - mid_at;
       FOR_ALL_THINGS(level, t, future_pos.x, future_pos.y)
       {
         if (t->is_hidden) {
@@ -357,7 +361,7 @@ bool Thing::cursor_path_pop_first_move(void)
   // step there.
   //
   if ((fabs(future_pos.x - mid_at.x) <= 1) && (fabs(future_pos.y - mid_at.y) <= 1)) {
-    dbg("Target is adjacent, attack or move to %f,%F", cursor->mid_at.x, cursor->mid_at.y);
+    dbg("Target is adjacent, attack or move to %d,%d", cursor->mid_at.x, cursor->mid_at.y);
     attack(cursor->mid_at);
     level->cursor_path_create();
     return true;

@@ -108,7 +108,7 @@ void Thing::move_carried_items(void)
     if (! is_floating()) {
       if (level->is_shallow_water((int) mid_at.x, (int) mid_at.y) &&
           ! level->is_ripple((int) mid_at.x, (int) mid_at.y)) {
-        fpoint at(mid_at.x, mid_at.y);
+        point at(mid_at.x, mid_at.y);
         dbg("Causes ripples");
         if (game->robot_mode) {
           //

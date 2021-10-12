@@ -18,7 +18,7 @@
 #include "my_wid_inventory.h"
 #include "my_wid_thing_info.h"
 
-void Level::describe(fpoint p)
+void Level::describe(point p)
 {
   TRACE_AND_INDENT();
   bool got_one_with_long_text = false;
@@ -39,14 +39,14 @@ void Level::describe(fpoint p)
     return;
   }
 
-  dbg3("Describe %f,%f", p.x, p.y);
+  dbg3("Describe @%d,%d", p.x, p.y);
   TRACE_AND_INDENT();
   if ((game->state == Game::STATE_MOVING_ITEMS) || (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
       (game->state == Game::STATE_COLLECTING_ITEMS) || (game->state == Game::STATE_WIELDING_ITEMS) ||
       (game->state == Game::STATE_ENCHANTING_ITEMS) || (game->state == Game::STATE_SAVE_MENU) ||
       (game->state == Game::STATE_LOAD_MENU) || (game->state == Game::STATE_QUIT_MENU) ||
       (game->state == Game::STATE_CHOOSING_SKILLS)) {
-    dbg3("Describe %f,%f; no wrong state", p.x, p.y);
+    dbg3("Describe @%d,%d; no wrong state", p.x, p.y);
     return;
   }
 
@@ -219,10 +219,10 @@ void Level::describe(fpoint p)
   FOR_ALL_THINGS_END()
 
   if (! got_one_with_long_text) {
-    dbg3("Describe %f,%f; found nothing with long text", p.x, p.y);
+    dbg3("Describe @%d,%d; found nothing with long text", p.x, p.y);
   }
 
-  dbg3("Describe %f,%f; found %d things", p.x, p.y, (int) hover_over_things.size());
+  dbg3("Describe @%d,%d; found %d things", p.x, p.y, (int) hover_over_things.size());
 
   if (! got_one_with_long_text || ! hover_over_things.size()) {
     //
@@ -266,7 +266,7 @@ void Level::describe(fpoint p)
   }
 
   if (hover_over_things.size() > 1) {
-    dbg3("Describe %f,%f; found %d things", p.x, p.y, (int) hover_over_things.size());
+    dbg3("Describe @%d,%d; found %d things", p.x, p.y, (int) hover_over_things.size());
     game->wid_thing_info_create_when_hovering_over_list(hover_over_things);
     if (hover_over_things.size() > 1) {
       auto        k = std::string(SDL_GetScancodeName((SDL_Scancode) game->config.key_wait_or_collect));
@@ -279,7 +279,7 @@ void Level::describe(fpoint p)
       BOTCON("%s", text.c_str());
     }
   } else if (hover_over_things.size()) {
-    dbg3("Describe %f,%f; found %d thing", p.x, p.y, (int) hover_over_things.size());
+    dbg3("Describe @%d,%d; found %d thing", p.x, p.y, (int) hover_over_things.size());
     game->wid_thing_info_create_when_hovering_over_list(hover_over_things);
     if (hover_over_things.size() > 1) {
       auto        k = std::string(SDL_GetScancodeName((SDL_Scancode) game->config.key_wait_or_collect));

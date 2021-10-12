@@ -243,16 +243,16 @@ bool Thing::collision_find_best_target(bool *target_attacked, bool *target_overl
   return (ret);
 }
 
-bool things_overlap(const Thingp A, fpoint A_at, const Thingp B)
+bool things_overlap(const Thingp A, point A_at, const Thingp B)
 {
   //
   // FYI This path is used for monst attacks
   //
   if (A->tp()->collision_circle() && B->tp()->collision_circle()) {
     if (circle_circle_collision(A, // circle
-                                A_at,
+                                make_fpoint(A_at),
                                 B, // box
-                                B->mid_at, nullptr)) {
+                                make_fpoint(B->mid_at), nullptr)) {
 #if 0
       LOG("%s %s (test4) overlaps", A->to_string().c_str(), B->to_string().c_str());
 #endif
@@ -263,7 +263,7 @@ bool things_overlap(const Thingp A, fpoint A_at, const Thingp B)
     // This is to allow hits when a thing is in transit
     //
     if (circle_circle_collision(A, // circle
-                                A_at,
+                                make_fpoint(A_at),
                                 B, // box
                                 B->get_interpolated_mid_at(), nullptr)) {
 #if 0
@@ -285,20 +285,20 @@ bool things_overlap(const Thingp A, fpoint A_at, const Thingp B)
   return false;
 }
 
-bool things_overlap_attack(const Thingp A, fpoint A_at, const Thingp B)
+bool things_overlap_attack(const Thingp A, point A_at, const Thingp B)
 {
   if (A->tp()->collision_circle() && B->tp()->collision_circle()) {
     if (circle_circle_collision_attack(A, // circle
-                                       A_at,
+                                       make_fpoint(A_at),
                                        B, // box
-                                       B->mid_at, nullptr)) {
+                                       make_fpoint(B->mid_at), nullptr)) {
 #if 0
       LOG("%s %s (test7) overlaps", A->to_string().c_str(), B->to_string().c_str());
 #endif
       return true;
     }
     if (circle_circle_collision_attack(A, // circle
-                                       A_at,
+                                       make_fpoint(A_at),
                                        B, // box
                                        B->get_interpolated_mid_at(), nullptr)) {
 #if 0
@@ -326,7 +326,7 @@ bool things_overlap_attack(const Thingp A, fpoint A_at, const Thingp B)
 //
 // If two things collide, return false to stop the walk
 //
-bool Thing::collision_add_candidates(Thingp it, fpoint future_pos, int x, int y, int dx, int dy)
+bool Thing::collision_add_candidates(Thingp it, point future_pos, int x, int y, int dx, int dy)
 {
   TRACE_AND_INDENT();
   auto me = this;
@@ -414,31 +414,6 @@ bool Thing::collision_add_candidates(Thingp it, fpoint future_pos, int x, int y,
   return true;
 }
 
-bool Thing::collision_obstacle(fpoint p)
-{
-  //
-  // Avoid threats and treat them as obstacles
-  //
-  for (const auto &it : get(level->all_things_ptr_at[ THING_GROUP_ALL ], p.x, p.y)) {
-    if (! it) {
-      continue;
-    }
-
-    if (it->is_the_grid) {
-      continue;
-    }
-
-    //
-    // "true" on collision
-    //
-    if (collision_obstacle(it)) {
-      return true;
-    }
-  }
-
-  return false;
-}
-
 bool Thing::collision_obstacle(point p)
 {
   //
@@ -480,7 +455,7 @@ bool Thing::ai_obstacle(fpoint p)
 //
 // "true" on collision
 //
-bool Thing::collision_check_only(Thingp it, fpoint future_pos, int x, int y)
+bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
 {
   auto me    = this;
   auto it_tp = it->tp();
@@ -495,7 +470,7 @@ bool Thing::collision_check_only(Thingp it, fpoint future_pos, int x, int y)
     return false;
   }
 
-  dbg("Collision check only? @%f,%f with %s)", future_pos.x, future_pos.y, it->to_string().c_str());
+  dbg("Collision check only? @%d,%d with %s)", future_pos.x, future_pos.y, it->to_string().c_str());
   TRACE_AND_INDENT();
 
   //
@@ -644,7 +619,7 @@ bool Thing::collision_check_only(Thingp it, fpoint future_pos, int x, int y)
   }
 
   if (can_eat(it)) {
-    if (get_where_i_failed_to_collect_last() == make_point(it->mid_at)) {
+    if (get_where_i_failed_to_collect_last() == it->mid_at) {
       dbg("No; tried to collect previously");
       set_where_i_failed_to_collect_last(point(-1, -1));
       return false;
@@ -731,7 +706,7 @@ bool Thing::collision_check_only(Thingp it, fpoint future_pos, int x, int y)
   return false;
 }
 
-bool Thing::collision_check_and_handle(fpoint future_pos, bool *target_attacked, bool *target_overlaps, float radius)
+bool Thing::collision_check_and_handle(point future_pos, bool *target_attacked, bool *target_overlaps, float radius)
 {
   TRACE_AND_INDENT();
   if (is_loggable()) {
@@ -806,29 +781,10 @@ bool Thing::collision_check_and_handle(fpoint future_pos, bool *target_attacked,
 }
 
 //
-// Have we hit anything? True on having done something at this (future?)
-// position.
-//
-bool Thing::collision_check_and_handle_nearby(fpoint future_pos, bool *target_attacked, bool *target_overlaps)
-{
-  return (collision_check_and_handle(future_pos, target_attacked, target_overlaps, thing_collision_tiles));
-}
-
-bool Thing::collision_check_and_handle_at(fpoint future_pos, bool *target_attacked, bool *target_overlaps)
-{
-  return (collision_check_and_handle(future_pos, target_attacked, target_overlaps, 0.0));
-}
-
-bool Thing::collision_check_and_handle_at(bool *target_attacked, bool *target_overlaps)
-{
-  return (collision_check_and_handle_at(mid_at, target_attacked, target_overlaps));
-}
-
-//
 // "true" on overlap/collision at the specified position. This might be
 // a speculative move on behalf of the thing.
 //
-bool Thing::collision_check_only(fpoint future_pos)
+bool Thing::collision_check_only(point future_pos)
 {
   if (is_cursor()) {
     return false;
@@ -920,3 +876,22 @@ bool Thing::collision_check_only(fpoint future_pos)
 // "true" on overlap/collision at the current position
 //
 bool Thing::collision_check_only(void) { return (collision_check_only(mid_at)); }
+
+//
+// Have we hit anything? True on having done something at this (future?)
+// position.
+//
+bool Thing::collision_check_and_handle_nearby(point future_pos, bool *target_attacked, bool *target_overlaps)
+{
+  return (collision_check_and_handle(future_pos, target_attacked, target_overlaps, thing_collision_tiles));
+}
+
+bool Thing::collision_check_and_handle_at(point future_pos, bool *target_attacked, bool *target_overlaps)
+{
+  return (collision_check_and_handle(future_pos, target_attacked, target_overlaps, 0.0));
+}
+
+bool Thing::collision_check_and_handle_at(bool *target_attacked, bool *target_overlaps)
+{
+  return (collision_check_and_handle_at(mid_at, target_attacked, target_overlaps));
+}

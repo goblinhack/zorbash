@@ -222,7 +222,7 @@ bool Thing::spawn_radius_range(Thingp item, Thingp target, const std::string &wh
         continue;
       }
 
-      auto c = level->thing_new(what, fpoint(x, y));
+      auto c = level->thing_new(what, point(x, y));
       c->inherit_from(this);
       c->set_ts_anim_delay_end(time_get_time_ms_cached() + dist * 100);
 

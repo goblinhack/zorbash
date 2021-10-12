@@ -570,11 +570,11 @@ bool Thing::get_coords(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
     lunge = get_lunge();
   }
   if (unlikely(lunge > 0.0)) {
-    fpoint delta;
+    point delta;
     if (owner) {
-      delta = owner->get_lunge_to() - owner->get_interpolated_mid_at();
+      delta = owner->get_lunge_to() - owner->mid_at;
     } else {
-      delta = get_lunge_to() - get_interpolated_mid_at();
+      delta = get_lunge_to() - mid_at;
     }
     float dx = -delta.x * lunge;
     float dy = -delta.y * lunge;
@@ -616,7 +616,7 @@ bool Thing::get_coords(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
     //
     // Render the weapon and player on the same tile rules
     //
-    auto map_loc = at;
+    auto map_loc = make_point(at);
     if (owner) {
       map_loc = owner->mid_at;
     }
