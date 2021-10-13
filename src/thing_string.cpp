@@ -22,7 +22,7 @@ std::string Thing::to_string(void) const
   verify(this);
 
   if (unlikely(! level)) {
-    return (string_sprintf("<not in level> %08" PRIx32 "(<no tp>%s%s%s%s%s%s%s%s @%g,%g)", id, is_dead ? "/dead" : "",
+    return (string_sprintf("<not in level> %08" PRIx32 "(<no tp>%s%s%s%s%s%s%s%s @%d,%d)", id, is_dead ? "/dead" : "",
                            is_resurrecting ? "/resurrecting" : "", is_offscreen ? "/offscr" : "",
                            is_on_fire() ? "/onfire" : "", is_hidden ? "/hidden" : "", is_jumping ? "/jumping" : "",
                            is_moving ? "/mv" : "", is_falling ? "/fall" : "", mid_at.x, mid_at.y));
@@ -30,7 +30,7 @@ std::string Thing::to_string(void) const
 
   if (unlikely(! tpp)) {
     TRACE_AND_INDENT();
-    return (string_sprintf("L%d,%d,%d %08" PRIx32 "(<no tp>%s%s%s%s%s%s%s%s @%g,%g)", level->world_at.x,
+    return (string_sprintf("L%d,%d,%d %08" PRIx32 "(<no tp>%s%s%s%s%s%s%s%s @%d,%d)", level->world_at.x,
                            level->world_at.y, level->world_at.z, id, is_dead ? "/dead" : "",
                            is_resurrecting ? "/resurrecting" : "", is_offscreen ? "/offscr" : "",
                            is_on_fire() ? "/onfire" : "", is_hidden ? "/hidden" : "", is_jumping ? "/jumping" : "",
@@ -38,7 +38,7 @@ std::string Thing::to_string(void) const
   } else if (get_health_max() || is_tickable() || is_interesting()) {
     TRACE_AND_INDENT();
     return (string_sprintf(
-        "L%d,%d,%d %08" PRIx32 "(%s%s%s%s%s%s%s%s%s%s%s%s%s%s @%g,%g %d/%dh)", level->world_at.x, level->world_at.y,
+        "L%d,%d,%d %08" PRIx32 "(%s%s%s%s%s%s%s%s%s%s%s%s%s%s @%d,%d %d/%dh)", level->world_at.x, level->world_at.y,
         level->world_at.z, id, tpp->name().c_str(), is_dead ? "/dead" : "", is_resurrecting ? "/resurrecting" : "",
         is_offscreen ? "/offscr" : "", is_on_fire() ? "/onfire" : "", is_hidden ? "/hidden" : "",
         is_jumping ? "/jumping" : "", is_moving ? "/mv" : "", is_falling ? "/fall" : "",
@@ -47,7 +47,7 @@ std::string Thing::to_string(void) const
         is_waiting_to_descend_sewer ? "/descend-sewer" : "", mid_at.x, mid_at.y, get_health(), get_health_max()));
   } else {
     TRACE_AND_INDENT();
-    return (string_sprintf("L%d,%d,%d %08" PRIx32 "(%s%s%s%s%s%s%s%s%s @%g,%g)", level->world_at.x, level->world_at.y,
+    return (string_sprintf("L%d,%d,%d %08" PRIx32 "(%s%s%s%s%s%s%s%s%s @%d,%d)", level->world_at.x, level->world_at.y,
                            level->world_at.z, id, tpp->name().c_str(), is_dead ? "/dead" : "",
                            is_resurrecting ? "/resurrecting" : "", is_offscreen ? "/offscr" : "",
                            is_on_fire() ? "/onfire" : "", is_hidden ? "/hidden" : "", is_jumping ? "/jumping" : "",
@@ -62,7 +62,7 @@ std::string Thing::to_short_string(void) const
   verify(this);
 
   if (unlikely(! level)) {
-    return (string_sprintf("<not in level> (<no tp>%s%s%s%s%s%s%s%s @%g,%g)", is_dead ? "/dead" : "",
+    return (string_sprintf("<not in level> (<no tp>%s%s%s%s%s%s%s%s @%d,%d)", is_dead ? "/dead" : "",
                            is_resurrecting ? "/resurrecting" : "", is_offscreen ? "/offscr" : "",
                            is_on_fire() ? "/onfire" : "", is_hidden ? "/hidden" : "", is_jumping ? "/jumping" : "",
                            is_moving ? "/mv" : "", is_falling ? "/fall" : "", mid_at.x, mid_at.y));
@@ -70,7 +70,7 @@ std::string Thing::to_short_string(void) const
 
   if (unlikely(! tpp)) {
     TRACE_AND_INDENT();
-    return (string_sprintf("L%d,%d,%d (<no tp>%s%s%s%s%s%s%s%s @%g,%g)", level->world_at.x, level->world_at.y,
+    return (string_sprintf("L%d,%d,%d (<no tp>%s%s%s%s%s%s%s%s @%d,%d)", level->world_at.x, level->world_at.y,
                            level->world_at.z, is_dead ? "/dead" : "", is_resurrecting ? "/resurrecting" : "",
                            is_offscreen ? "/offscr" : "", is_on_fire() ? "/onfire" : "", is_hidden ? "/hidden" : "",
                            is_jumping ? "/jumping" : "", is_moving ? "/mv" : "", is_falling ? "/fall" : "", mid_at.x,
@@ -79,7 +79,7 @@ std::string Thing::to_short_string(void) const
     auto o = get_top_owner();
     if (o) {
       return (string_sprintf(
-          "L%d,%d,%d (%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s @%g,%g owner:%s)", level->world_at.x, level->world_at.y,
+          "L%d,%d,%d (%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s @%d,%d owner:%s)", level->world_at.x, level->world_at.y,
           level->world_at.z, tpp->name().c_str(), is_dead ? "/dead" : "", is_resurrecting ? "/resurrecting" : "",
           is_offscreen ? "/offscr" : "", is_on_fire() ? "/onfire" : "", is_hidden ? "/hidden" : "",
           is_jumping ? "/jumping" : "", is_moving ? "/mv" : "", is_falling ? "/fall" : "",
@@ -88,7 +88,7 @@ std::string Thing::to_short_string(void) const
           is_waiting_to_ascend_sewer ? "/asc-sewer" : "", mid_at.x, mid_at.y, o->to_string().c_str()));
     } else {
       return (string_sprintf(
-          "L%d,%d,%d (%s%s%s%s%s%s%s%s%s%s%s%s%s%s @%g,%g)", level->world_at.x, level->world_at.y, level->world_at.z,
+          "L%d,%d,%d (%s%s%s%s%s%s%s%s%s%s%s%s%s%s @%d,%d)", level->world_at.x, level->world_at.y, level->world_at.z,
           tpp->name().c_str(), is_dead ? "/dead" : "", is_resurrecting ? "/resurrecting" : "",
           is_offscreen ? "/offscr" : "", is_on_fire() ? "/onfire" : "", is_hidden ? "/hidden" : "",
           is_jumping ? "/jumping" : "", is_moving ? "/mv" : "", is_falling ? "/fall" : "",
@@ -106,7 +106,7 @@ std::string Thing::to_dbg_string(void) const
 
   return (string_sprintf(
       "L%d,%d,%d %08" PRIx32
-      " %s (@%g,%g)%s%s%s%s%s%s%s%s%s%s%s%s"
+      " %s (@%d,%d)%s%s%s%s%s%s%s%s%s%s%s%s"
       "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s"
       "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s"
       "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s"
@@ -170,7 +170,7 @@ std::string Thing::to_dbg_saved_string(void) const
 
   return (string_sprintf(
       "L%d,%d,%d %08" PRIx32
-      " %s (@%g,%g)%s%s%s%s%s%s%s%s%s%s%s%s%s"
+      " %s (@%d,%d)%s%s%s%s%s%s%s%s%s%s%s%s%s"
       "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s"
       "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s"
       "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s"
