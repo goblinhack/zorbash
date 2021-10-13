@@ -490,7 +490,7 @@ bool Thing::attack(Thingp it)
     if (weapon_get()) {
       auto delta = it->mid_at - mid_at;
       move_set_dir_from_delta(delta);
-      use_weapon();
+      use_weapon_may_attack();
       return true;
     }
   } else if (is_monst()) {
@@ -501,7 +501,7 @@ bool Thing::attack(Thingp it)
       if (weapon_get()) {
         auto delta = it->mid_at - mid_at;
         move_set_dir_from_delta(delta);
-        use_weapon();
+        use_weapon_may_attack();
         return true;
       }
     } else if (is_monst()) {

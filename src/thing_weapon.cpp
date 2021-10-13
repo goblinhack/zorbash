@@ -570,7 +570,7 @@ bool Thing::use_weapon_try(void)
   return false;
 }
 
-bool Thing::use_weapon(void)
+bool Thing::use_weapon(bool forced)
 {
   TRACE_AND_INDENT();
   dbg("Try to use weapon");
@@ -594,7 +594,7 @@ bool Thing::use_weapon(void)
 
   bool attacked = use_weapon_try();
   if (! attacked) {
-    if (is_player()) {
+    if (is_player() && forced) {
       //
       // Swing anyway else it looks odd
       //
@@ -656,3 +656,7 @@ bool Thing::use_weapon(void)
 
   return true;
 }
+
+bool Thing::use_weapon_may_attack(void) { return use_weapon(false); }
+
+bool Thing::use_weapon_must_attack(void) { return use_weapon(true); }

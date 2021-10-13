@@ -1730,6 +1730,8 @@ bool Thing::ai_tick(bool recursing)
             game->tick_begin("Robot has rested enough");
           }
           ai_change_state(MONST_STATE_IDLE, "rested enough");
+          monst_infop->last_failed_jump_at = point(0, 0);
+          ;
           return true;
         }
 

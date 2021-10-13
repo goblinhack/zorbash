@@ -369,7 +369,9 @@ public:
   bool try_to_jump_carefully(point to, bool *too_far);
   bool try_to_jump_towards_player(void);
   bool use(Thingp w);
-  bool use_weapon(void);
+  bool use_weapon(bool forced);
+  bool use_weapon_must_attack(void);
+  bool use_weapon_may_attack(void);
   bool use_weapon_try(void);
   bool wield(Thingp w);
   bool is_hated_by_me(const Thingp it);
