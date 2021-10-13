@@ -774,7 +774,10 @@ bool Thing::move_to_or_escape_check_only(const point &nh)
 
 void Thing::clear_move_path(const std::string &why)
 {
-  if (! monst_infop) {
+  if (! monst_aip) {
+    //
+    // Fire can hit this path
+    //
     return;
   }
 
@@ -787,10 +790,6 @@ void Thing::clear_move_path(const std::string &why)
     if (game->robot_mode) {
       ai_change_state(MONST_STATE_IDLE, why);
     }
-  }
-
-  if (! monst_aip) {
-    die("No monst AI");
   }
 
   monst_aip->move_path.clear();

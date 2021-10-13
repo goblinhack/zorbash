@@ -45,14 +45,14 @@ void Thing::enemies_tick(void)
 
     if (--p.second > 0) {
       if (is_player() && game->robot_mode) {
-        CON("Robot: Enemy: %s (%d timeout)", attacker->to_string().c_str(), p.second);
+        CON("Robot: enemy timeout %s (%d timeout)", attacker->to_string().c_str(), p.second);
       }
       continue;
     }
 
     if (attacker->is_dead) {
       if (is_player() && game->robot_mode) {
-        CON("Robot: Remove enemy, is dead: %s", attacker->to_string().c_str());
+        CON("Robot: enemy remove as is dead: %s", attacker->to_string().c_str());
       }
       monst_aip->enemies.erase(p.first);
       return;
@@ -63,7 +63,7 @@ void Thing::enemies_tick(void)
     //
     if (distance(attacker->mid_at, mid_at) > ai_avoid_distance()) {
       if (is_player() && game->robot_mode) {
-        CON("Robot: Remove enemy: %s", attacker->to_string().c_str());
+        CON("Robot: enemy remove as is far away: %s", attacker->to_string().c_str());
       }
       monst_aip->enemies.erase(p.first);
       return;
@@ -73,7 +73,7 @@ void Thing::enemies_tick(void)
     // Be resentful a bit longer
     //
     if (is_player() && game->robot_mode) {
-      CON("Robot: Resent enemy a bit longer: %s", attacker->to_string().c_str());
+      CON("Robot: enemy persists a bit longer: %s", attacker->to_string().c_str());
     }
     p.second = pcg_random_range(0, 10);
   }
@@ -95,7 +95,7 @@ void Thing::add_enemy(Thingp attacker)
 
   if (! monst_aip->enemies[ attacker->id ]) {
     if (is_player() && game->robot_mode) {
-      CON("Robot: Add new enemy %s", attacker->to_string().c_str());
+      CON("Robot: enemy add %s", attacker->to_string().c_str());
     } else {
       dbg("Add new enemy %s", attacker->to_string().c_str());
     }

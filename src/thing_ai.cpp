@@ -842,8 +842,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
                 //
                 // The closer an enemy is (something that attacked us), the higher the score
                 //
-                GOAL_AVOID_ADD(GOAL_PRIO_VERY_HIGH, (int) (max_dist - dist) * health_diff - goal_penalty,
-                               "attack-enemy", it);
+                GOAL_ADD(GOAL_PRIO_VERY_HIGH, (int) (max_dist - dist) * health_diff - goal_penalty, "attack-enemy", it);
               }
             } else if (! is_fearless() && (dist < ai_avoid_distance()) && will_avoid_monst(it)) {
               //
@@ -1228,7 +1227,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
       }
     }
 
-    auto msg = string_sprintf("Add search cand @(%d,%d)", p.x, p.y);
+    auto msg = string_sprintf("search cand @(%d,%d)", p.x, p.y);
     GOAL_ADD(GOAL_PRIO_VERY_LOW, total_score, msg.c_str(), nullptr);
   }
 }

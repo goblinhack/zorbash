@@ -68,9 +68,7 @@ Doors
 
 AI
 --
-- hunger clock disabled
-- rats steal keys ? shown visibly ?
-- throw treasure to distract cleaner
+- add monst states, like hunting, worshipping, sleeping
 
 Wands
 -----
