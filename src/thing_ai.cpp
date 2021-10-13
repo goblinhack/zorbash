@@ -1457,33 +1457,6 @@ bool Thing::ai_tick(bool recursing)
   switch (monst_infop->monst_state) {
     case MONST_STATE_IDLE :
       {
-        //
-        // If we're absolutely exhausted, we must rest, threat or no threat
-        //
-        if (is_able_to_tire() && ! get_stamina()) {
-          AI_LOG("Very low on stamina, forced to rest");
-          if (is_player()) {
-            game->tick_begin("Robot is forced to rest, very low on stamina");
-          }
-          ai_change_state(MONST_STATE_RESTING, "need to rest, very low on stamina");
-          return true;
-        }
-
-        //
-        // If really low on health and we have something we can eat, try
-        // that.
-        //
-        if (get_health() < get_health_max() / 3) {
-          if (can_eat_something()) {
-            AI_LOG("Very low on health, forced to rest");
-            if (is_player()) {
-              game->tick_begin("Robot needs to rest, very low on health");
-            }
-            ai_change_state(MONST_STATE_RESTING, "need to rest, very low on health");
-            return true;
-          }
-        }
-
         if (threat) {
           if (is_dangerous(threat)) {
             AI_LOG("A dangerous threat is near", threat);
@@ -1501,14 +1474,66 @@ bool Thing::ai_tick(bool recursing)
         //
         if (threat && (is_dangerous(threat) || is_enemy(threat) || is_to_be_avoided(threat))) {
           //
-          // No resting when in danger
+          // No resting when in danger unless in dire straits
           //
+          // If we're absolutely exhausted, we must rest, threat or no threat
+          //
+          if (is_able_to_tire() && (get_stamina() < get_stamina_max() / 10)) {
+            AI_LOG("Very low on stamina, forced to rest");
+            if (is_player()) {
+              game->tick_begin("Robot is forced to rest, very low on stamina");
+            }
+            ai_change_state(MONST_STATE_RESTING, "need to rest, very low on stamina");
+            return true;
+          }
+
+          //
+          // If really low on health and we have something we can eat, try
+          // that.
+          //
+          if (get_health() < get_health_max() / 10) {
+            if (can_eat_something()) {
+              AI_LOG("Very low on health, forced to rest");
+              if (is_player()) {
+                game->tick_begin("Robot needs to rest, very low on health");
+              }
+              ai_change_state(MONST_STATE_RESTING, "need to rest, very low on health");
+              return true;
+            }
+          }
         } else {
           //
           // Not under threat, so we can think about doing some other
           // housecleaning tasks.
           //
           AI_LOG("Idle, look for something to do");
+
+          //
+          // If we're absolutely exhausted, we must rest, threat or no threat
+          //
+          if (is_able_to_tire() && (get_stamina() < get_stamina_max() / 3)) {
+            AI_LOG("Low on stamina, rest");
+            if (is_player()) {
+              game->tick_begin("Robot is low on stamina");
+            }
+            ai_change_state(MONST_STATE_RESTING, "need to rest, low on stamina");
+            return true;
+          }
+
+          //
+          // If really low on health and we have something we can eat, try
+          // that.
+          //
+          if (get_health() < get_health_max() / 3) {
+            if (can_eat_something()) {
+              AI_LOG("Low on health, rest");
+              if (is_player()) {
+                game->tick_begin("Robot is low on health");
+              }
+              ai_change_state(MONST_STATE_RESTING, "need to rest, low on health");
+              return true;
+            }
+          }
 
           //
           // Be a bit more careful if there is somethjing that might want to
@@ -1543,18 +1568,6 @@ bool Thing::ai_tick(bool recursing)
                 return true;
               }
             }
-          }
-
-          //
-          // Are we tired and need to rest?
-          //
-          if (is_able_to_tire() && (get_stamina() < get_stamina_max() / 10)) {
-            AI_LOG("Needs to rest, low on stamina");
-            if (is_player()) {
-              game->tick_begin("Robot needs to rest, low on stamina");
-            }
-            ai_change_state(MONST_STATE_RESTING, "need to rest, low on stamina");
-            return true;
           }
 
           //
@@ -1722,6 +1735,8 @@ bool Thing::ai_tick(bool recursing)
     case MONST_STATE_RESTING :
       {
         //
+        // If attacked, we should be kicked out of resting
+        //
         // If resting, check if we are rested enough.
         //
         if ((get_health() >= (get_health_max() / 4) * 3) && (get_stamina() >= (get_stamina_max() / 4) * 3)) {
@@ -1731,7 +1746,6 @@ bool Thing::ai_tick(bool recursing)
           }
           ai_change_state(MONST_STATE_IDLE, "rested enough");
           monst_infop->last_failed_jump_at = point(0, 0);
-          ;
           return true;
         }
 
@@ -1744,30 +1758,6 @@ bool Thing::ai_tick(bool recursing)
             game->tick_begin("Robot ate an item");
           }
           ai_change_state(MONST_STATE_OPEN_INVENTORY, "eat something");
-          return true;
-        }
-
-        //
-        // If we are able to lift a sword and can see a threat, go back to
-        // fighting.
-        //
-        if (get_stamina()) {
-          if (threat && (is_dangerous(threat) || is_enemy(threat) || is_to_be_avoided(threat))) {
-            AI_LOG("Seen a threat. Stop resting.");
-            if (is_player()) {
-              game->tick_begin("Robot sees a nearby threat, stop resting");
-            }
-            ai_change_state(MONST_STATE_IDLE, "threat nearby, stop resting");
-            return true;
-          }
-        }
-
-        if (get_stamina() >= (get_stamina_max() / 4) * 3) {
-          AI_LOG("Seen a threat. Stop resting.");
-          if (is_player()) {
-            game->tick_begin("Robot has recovered stamina");
-          }
-          ai_change_state(MONST_STATE_IDLE, "threat nearby, stop resting");
           return true;
         }
 

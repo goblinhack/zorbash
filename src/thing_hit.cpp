@@ -317,13 +317,11 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
             TOPCON("%%fg=red$You hit yourself for %d damage with %s!%%fg=reset$", damage, hitter->text_the().c_str());
           } else if (hitter->is_wand()) {
             TOPCON("%%fg=red$You zap yourself for %d damage with %s!%%fg=reset$", damage, hitter->text_the().c_str());
+          } else if (poison) {
+            TOPCON("%%fg=red$You feel sick for %d damage with %s!%%fg=reset$", damage, hitter->text_the().c_str());
           } else {
             TOPCON("%%fg=red$You hurt yourself for %d damage with %s!%%fg=reset$", damage, hitter->text_the().c_str());
           }
-        }
-
-        if (game->robot_mode) {
-          ai_change_state(MONST_STATE_IDLE, "robot CRIT attacked itself");
         }
       } else {
         if (crit) {
@@ -336,7 +334,10 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
             TOPCON("%%fg=red$%s zaps you for %d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(), damage,
                    hitter->text_the().c_str());
           } else if (hitter->is_projectile() || hitter->is_laser()) {
-            TOPCON("%%fg=red$%s blastd you for %d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(), damage,
+            TOPCON("%%fg=red$%s blasted you for %d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(), damage,
+                   hitter->text_the().c_str());
+          } else if (poison) {
+            TOPCON("%%fg=red$%s poisons you for %d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(), damage,
                    hitter->text_the().c_str());
           } else {
             TOPCON("%%fg=red$%s %s you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(),
@@ -366,10 +367,6 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
                    hitter->text_the().c_str());
           }
         }
-
-        if (game->robot_mode) {
-          ai_change_state(MONST_STATE_IDLE, "robot attacked itself");
-        }
       } else {
         if (bite) {
           TOPCON("%%fg=yellow$%s bites you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(), damage);
@@ -394,11 +391,11 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     if (is_bloodied()) {
       level->set_wobble(damage / THING_DAMAGE_SHAKE_SCALE);
     }
-  } else {
-    if (game->robot_mode) {
-      ai_change_state(MONST_STATE_IDLE, "robot attacked");
-    }
 
+    if (game->robot_mode) {
+      ai_change_state(MONST_STATE_IDLE, "robot was attacked");
+    }
+  } else {
     if (real_hitter->is_player()) {
       if (is_alive_monst() || is_minion_generator()) {
         if (crit) {
@@ -414,9 +411,12 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
         TOPCON("You hit %s.", text_the().c_str());
       }
     }
+
     if (real_hitter->is_fire() || real_hitter->is_lava()) {
       set_on_fire("hit by fire or lava");
     }
+
+    ai_change_state(MONST_STATE_IDLE, "monst was attacked");
   }
 
   //
@@ -526,7 +526,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
 int Thing::is_hit_by(Thingp hitter, bool crit, bool bite, int poison, int damage)
 {
   TRACE_AND_INDENT();
-  if (poison) {
+  if (bite) {
     IF_DEBUG2 { hitter->log("Possible hit %s for %d bite damage", to_string().c_str(), bite); }
   }
   if (poison) {

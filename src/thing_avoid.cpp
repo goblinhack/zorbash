@@ -219,6 +219,9 @@ void Thing::add_avoid(Thingp attacker)
 {
   TRACE_AND_INDENT();
 
+  if (attacker == this) {
+    return;
+  }
   if (unlikely(! attacker->is_monst() && ! attacker->is_player())) {
     return;
   }

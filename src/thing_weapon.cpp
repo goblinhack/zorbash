@@ -334,6 +334,7 @@ bool Thing::use_weapon_try(void)
 {
   TRACE_AND_INDENT();
   dbg("Try to use weapon");
+  TRACE_AND_INDENT();
 
   int  dx, dy;
   auto weapon = weapon_get();
@@ -358,19 +359,24 @@ bool Thing::use_weapon_try(void)
   decr_stamina();
 
   if (weapon) {
+    dbg("Have weapon %s", weapon->to_string().c_str());
+    TRACE_AND_INDENT();
     on_use(weapon);
     if (weapon->collision_check_and_handle_at(hit_at, &target_attacked, &target_overlaps)) {
       lunge(hit_at);
       if (target_attacked) {
+        dbg("Attacked with weapon");
         return true;
       }
       return false;
     }
   } else {
     dbg("No weapon");
+    TRACE_AND_INDENT();
     if (collision_check_and_handle_at(hit_at, &target_attacked, &target_overlaps)) {
       lunge(hit_at);
       if (target_attacked) {
+        dbg("No weapon but attacked");
         return true;
       }
       return false;
@@ -390,6 +396,7 @@ bool Thing::use_weapon_try(void)
   int    best_priority = -999;
   Thingp best          = nullptr;
 
+  dbg("Try to find something to attack, attempt 1");
   for (const auto &d : all_deltas) {
     auto hit_at = mid_at + point(d.x, d.y);
 
@@ -455,6 +462,7 @@ bool Thing::use_weapon_try(void)
   found_best    = false;
   best_priority = -999;
 
+  dbg("Try to find something to attack, attempt 2");
   for (const auto &d : all_deltas) {
     auto hit_at = mid_at + point(d.x, d.y);
 
@@ -514,6 +522,7 @@ bool Thing::use_weapon_try(void)
   found_best    = false;
   best_priority = -999;
 
+  dbg("Try to find something to attack, attempt 3");
   for (const auto &d : all_deltas) {
     auto hit_at = mid_at + point(d.x, d.y);
 
@@ -573,8 +582,9 @@ bool Thing::use_weapon_try(void)
 bool Thing::use_weapon(bool forced)
 {
   TRACE_AND_INDENT();
-  dbg("Try to use weapon");
+  dbg("Try to attack weapon");
   TRACE_AND_INDENT();
+
   if (get_weapon_id_use_anim().ok()) {
     //
     // Still using.
