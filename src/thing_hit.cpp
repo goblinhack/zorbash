@@ -617,7 +617,8 @@ int Thing::is_hit_by(Thingp hitter, bool crit, bool bite, int poison, int damage
 
     if (is_wall() || is_rock()) {
       if (! hitter_tp->is_explosion() && ! hitter_tp->is_projectile() && ! hitter_tp->is_laser() &&
-          ! hitter_tp->is_wand() && ! hitter_tp->gfx_attack_anim()) {
+          ! hitter_tp->is_weapon() && ! hitter_tp->is_wand() && ! hitter_tp->is_fire() && ! hitter_tp->is_lava() &&
+          ! hitter_tp->gfx_attack_anim()) {
         //
         // Not something that typically damages walls.
         //
