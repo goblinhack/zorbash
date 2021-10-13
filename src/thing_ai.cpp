@@ -2018,6 +2018,13 @@ bool Thing::ai_choose_avoid_goals(std::multiset< Goal > &goals, const Goal &goal
 {
   Thingp it    = goal.what;
   int    score = goal.score;
+  int    max_avoid;
+
+  if (is_player()) {
+    max_avoid = -1;
+  } else {
+    max_avoid = THING_MAX_AVOID_ATTEMPT_LOCATIONS;
+  }
 
   AI_LOG("Needs to avoid", it);
   TRACE_NO_INDENT();
@@ -2058,11 +2065,13 @@ bool Thing::ai_choose_avoid_goals(std::multiset< Goal > &goals, const Goal &goal
   }
 
   if (goals.size()) {
-    if (goals.size() > THING_MAX_AVOID_ATTEMPT_LOCATIONS) {
-      auto b = goals.begin();
-      auto e = goals.end();
-      std::advance(b, THING_MAX_AVOID_ATTEMPT_LOCATIONS - 1);
-      goals.erase(b, e);
+    if (max_avoid > -1) {
+      if (goals.size() > max_avoid) {
+        auto b = goals.begin();
+        auto e = goals.end();
+        std::advance(b, max_avoid - 1);
+        goals.erase(b, e);
+      }
     }
     return true;
   }
@@ -2093,11 +2102,13 @@ bool Thing::ai_choose_avoid_goals(std::multiset< Goal > &goals, const Goal &goal
   }
 
   if (goals.size()) {
-    if (goals.size() > THING_MAX_AVOID_ATTEMPT_LOCATIONS) {
-      auto b = goals.begin();
-      auto e = goals.end();
-      std::advance(b, THING_MAX_AVOID_ATTEMPT_LOCATIONS - 1);
-      goals.erase(b, e);
+    if (max_avoid > -1) {
+      if (goals.size() > max_avoid) {
+        auto b = goals.begin();
+        auto e = goals.end();
+        std::advance(b, max_avoid - 1);
+        goals.erase(b, e);
+      }
     }
     return true;
   }
@@ -2128,11 +2139,13 @@ bool Thing::ai_choose_avoid_goals(std::multiset< Goal > &goals, const Goal &goal
   }
 
   if (goals.size()) {
-    if (goals.size() > THING_MAX_AVOID_ATTEMPT_LOCATIONS) {
-      auto b = goals.begin();
-      auto e = goals.end();
-      std::advance(b, THING_MAX_AVOID_ATTEMPT_LOCATIONS - 1);
-      goals.erase(b, e);
+    if (max_avoid > -1) {
+      if (goals.size() > max_avoid) {
+        auto b = goals.begin();
+        auto e = goals.end();
+        std::advance(b, max_avoid - 1);
+        goals.erase(b, e);
+      }
     }
     return true;
   }
