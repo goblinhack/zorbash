@@ -315,10 +315,11 @@ bool Thing::ai_create_path_to_single_goal(int minx, int miny, int maxx, int maxy
 
     auto p = new_move_path[ new_move_path.size() - 1 ];
 
-    std::string goal_path_str = "";
+    std::string goal_path_str = "Goal path: ";
     for (auto p1 : new_move_path) {
       goal_path_str += p1.to_string() + " ";
     }
+    AI_LOG("", goal_path_str);
 
     if (is_player()) {
       level->cursor_path_create(new_move_path);
@@ -742,7 +743,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
           continue;
         }
 
-        AI_LOG("", "Can see", it);
+        // AI_LOG("", "Can see", it);
 
         auto goal_penalty = get_goal_penalty(it);
 
