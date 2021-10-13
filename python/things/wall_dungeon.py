@@ -38,6 +38,7 @@ def tp_init(name,
     mytp.set_is_obs_wall_or_door(True)
     mytp.set_is_wall_dungeon(True)
     mytp.set_is_wall(True)
+    mytp.set_is_hittable(True)
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("A moss covered wall.")
     mytp.set_z_depth(zx.MAP_DEPTH_OBJ)

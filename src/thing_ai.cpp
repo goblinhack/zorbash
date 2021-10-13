@@ -1188,6 +1188,12 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
     int total_score  = -(int) terrain_cost;
 
     //
+    // Prefer newer tiles
+    //
+    auto age_map = get_age_map();
+    total_score -= get(age_map->val, p.x, p.y);
+
+    //
     // Prefer closer
     //
     float dist = distance(start, p);

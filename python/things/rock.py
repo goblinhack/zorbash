@@ -39,6 +39,7 @@ def tp_init(name,
     mytp.set_is_obs_wall_or_door(True)
     mytp.set_is_rock(True)
     mytp.set_is_wall(True)
+    mytp.set_is_hittable(True)
     mytp.set_text_a_or_an("the")
     mytp.set_text_description("Rocky the indestructible rock.")
     mytp.set_z_depth(zx.MAP_DEPTH_OBJ)
