@@ -26,7 +26,7 @@ def tp_init(name,
     mytp.set_collision_circle(True)
     mytp.set_collision_radius(0.40)
     mytp.set_gfx_shown_in_bg(True)
-    mytp.set_health_initial_dice("15d10")
+    mytp.set_health_initial_dice("25d10")
     mytp.set_is_able_to_fall(False)
     mytp.set_is_attackable_by_monst(True)
     mytp.set_is_attackable_by_player(True)

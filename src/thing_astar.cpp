@@ -46,11 +46,12 @@ class Node
 {
 public:
   Node(void) {}
-  Node(point p, Nodecost c) : cost(c), at(p) {}
+  Node(Thingp me, point p, Nodecost c) : cost(c), at(p) { is_disliked = me->is_disliked_by_me(p); }
 
   class Node *came_from {};
   Nodecost    cost;
   point       at;
+  bool        is_disliked;
 };
 
 typedef std::map< Nodecost, Node * > Nodemap;
@@ -122,7 +123,7 @@ public:
   }
 
   // Evaluate a neighbor for adding to the open set
-  void eval_neighbor(Node *current, point delta)
+  void eval_neighbor(Thingp me, Node *current, point delta)
   {
     auto next_hop = current->at + delta;
 
@@ -149,7 +150,7 @@ public:
     auto neighbor = get(open, next_hop.x, next_hop.y);
     if (! neighbor) {
       auto ncost          = Nodecost(cost + heuristic(next_hop));
-      neighbor            = new Node(next_hop, ncost);
+      neighbor            = new Node(me, next_hop, ncost);
       neighbor->came_from = current;
       add_to_open(neighbor);
       return;
@@ -180,11 +181,26 @@ public:
   std::tuple< std::vector< point >, int > create_path(const Dmap *dmap, const Node *came_from)
   {
     std::vector< point > l;
-    int                  cost = came_from->cost.cost;
+    int                  cost               = came_from->cost.cost;
+    int                  consecutive_hazard = 0;
 
     while (came_from) {
       if (came_from->came_from) {
         l.push_back(came_from->at);
+
+        //
+        // If we pass over too many consecutive things we do not like, like chasms
+        // then we cannot use this path.
+        //
+        if (came_from->is_disliked) {
+          consecutive_hazard++;
+          if (consecutive_hazard > 2) {
+            l.clear();
+            return {l, std::numeric_limits< int >::max()};
+          }
+        } else {
+          consecutive_hazard = 0;
+        }
       }
       came_from = came_from->came_from;
     }
@@ -192,11 +208,11 @@ public:
     return {l, cost};
   }
 
-  Path solve(const Goal *goalp, char *path_debug)
+  Path solve(Thingp me, const Goal *goalp, char *path_debug)
   {
     auto distance_to_next_hop = 0;
     auto ncost                = Nodecost(distance_to_next_hop + heuristic(start));
-    auto neighbor             = new Node(start, ncost);
+    auto neighbor             = new Node(me, start, ncost);
     add_to_open(neighbor);
     Path best;
     best.cost = std::numeric_limits< int >::max();
@@ -237,10 +253,10 @@ public:
       remove_from_open(current);
       add_to_closed(current);
 
-      eval_neighbor(current, point(-1, 0));
-      eval_neighbor(current, point(1, 0));
-      eval_neighbor(current, point(0, -1));
-      eval_neighbor(current, point(0, 1));
+      eval_neighbor(me, current, point(-1, 0));
+      eval_neighbor(me, current, point(1, 0));
+      eval_neighbor(me, current, point(0, -1));
+      eval_neighbor(me, current, point(0, 1));
 
       //
       // This leads to the robot taking diagonals across lava which looks
@@ -250,10 +266,10 @@ public:
       // optimized.
       //
 #if 0
-      eval_neighbor(current, point(-1, -1));
-      eval_neighbor(current, point(-1,  1));
-      eval_neighbor(current, point( 1, -1));
-      eval_neighbor(current, point( 1,  1));
+      eval_neighbor(me, current, point(-1, -1));
+      eval_neighbor(me, current, point(-1,  1));
+      eval_neighbor(me, current, point( 1, -1));
+      eval_neighbor(me, current, point( 1,  1));
 #endif
     }
 
@@ -300,9 +316,9 @@ void astar_dump(const Dmap *dmap, const point &at, const point &start, const poi
   }
 }
 
-Path astar_solve(const Goal *goal, char path_debug, point s, point g, const Dmap *d)
+Path astar_solve(Thingp me, const Goal *goal, char path_debug, point s, point g, const Dmap *d)
 {
   char tmp = path_debug;
   auto a   = Astar(s, g, d);
-  return (a.solve(goal, &tmp));
+  return (a.solve(me, goal, &tmp));
 }

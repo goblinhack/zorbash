@@ -263,7 +263,7 @@ bool Thing::ai_create_path_to_single_goal(int minx, int miny, int maxx, int maxy
 #endif
   point astar_start(start.x, start.y);
   auto  astar_end = goal.at;
-  auto  result    = astar_solve(&goal, path_debug, astar_start, astar_end, &dmap);
+  auto  result    = astar_solve(this, &goal, path_debug, astar_start, astar_end, &dmap);
 
   //
   // Unreachable?

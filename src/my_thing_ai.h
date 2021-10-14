@@ -7,6 +7,7 @@
 #ifndef _MY_THING_AI_H
 #define _MY_THING_AI_H
 
+#include "my_fwd.h"
 #include "my_dmap.h"
 #include <set>
 
@@ -90,7 +91,7 @@ public:
   }
 };
 
-extern Path astar_solve(const class Goal *goal, char path_debug, point s, point g, const Dmap *d);
+extern Path astar_solve(class Thing_ *, const class Goal *goal, char path_debug, point s, point g, const Dmap *d);
 
 extern void astar_dump(const Dmap *dmap, const point &at, const point &start, const point &end);
 
