@@ -3731,7 +3731,6 @@ void Dungeon::add_spiderweb(void)
 // Generate a cave!
 //
 void Dungeon::cave_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int map_generations)
-
 {
   map_save = {};
   map_curr = {};
@@ -3808,7 +3807,6 @@ void Dungeon::cave_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int m
 }
 
 void Dungeon::dirt_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int map_generations)
-
 {
   map_save = {};
   map_curr = {};
