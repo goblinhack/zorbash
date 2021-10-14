@@ -578,43 +578,53 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
       }
     }
   }
-#if 0
-  printf("\nrobot search grown:\n");
-  for (int y = 0; y < MAP_HEIGHT; y++) {
-    for (int x = 0; x < MAP_WIDTH; x++) {
-      if ((x == (int)mid_at.x) && (y == (int)mid_at.y)) {
-        if (level->is_lit_ever(x, y)) {
-          printf("*");
+#if 1
+  if (is_player()) {
+    printf("\nrobot search grown:\n");
+    for (int y = 0; y < MAP_HEIGHT; y++) {
+      for (int x = 0; x < MAP_WIDTH; x++) {
+        if ((x == (int) mid_at.x) && (y == (int) mid_at.y)) {
+          if (get(monst_aip->can_see_ever.can_see, x, y)) {
+            printf("*");
+          } else {
+            printf("o");
+          }
+          continue;
+        }
+        if (get(walked, x, y)) {
+          if (level->is_obs_wall_or_door(x, y)) {
+            if (get(monst_aip->can_see_ever.can_see, x, y)) {
+              printf("X");
+            } else {
+              printf("x");
+            }
+          } else {
+            if (get(monst_aip->can_see_ever.can_see, x, y)) {
+              printf("?");
+            } else {
+              printf(",");
+            }
+          }
         } else {
-          printf("o");
+          if (level->is_obs_wall_or_door(x, y)) {
+            printf("+");
+          } else {
+            if (get(monst_aip->can_see_currently.can_see, x, y)) {
+              printf("l");
+            } else {
+              printf(" ");
+            }
+          }
         }
         continue;
       }
-      if (get(walked, x, y)) {
-        if (level->is_obs_wall_or_door(x, y)) {
-          printf("X");
-        } else {
-          printf("?");
-        }
-      } else {
-        if (level->is_obs_wall_or_door(x, y)) {
-          printf("x");
-        } else {
-          if (level->is_lit_currently(x, y)) {
-            printf("l");
-          } else {
-            printf(" ");
-          }
-        }
-      }
-      continue;
+      printf("\n");
     }
-    printf("\n");
   }
 #endif
 
   //
-  // Not sure what this really does
+  // Check for changes in the dmap worthy of note
   //
   if (check_for_interrupts) {
     auto seen_map = get_seen_map();
@@ -949,7 +959,6 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
       continue;
     }
 
-    auto dist = distance(p, mid_at);
     if (level->is_obs_wall_or_door(p.x, p.y)) {
       continue;
     }
@@ -994,6 +1003,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
       default : DIE("unexpected search-type case"); break;
     }
 
+    auto dist = distance(p, mid_at);
     for (int dx = -jump_distance; dx <= jump_distance; dx++) {
       for (int dy = -jump_distance; dy <= jump_distance; dy++) {
 
@@ -1102,14 +1112,14 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
     }
   }
 
-#if 0
-  if (is_monst()) {
+#if 1
+  if (is_player()) {
     log("Search type %d", search_type);
     for (int y = 0; y < MAP_HEIGHT; y++) {
       std::string s;
       for (int x = 0; x < MAP_WIDTH; x++) {
         if ((x == (int) mid_at.x) && (y == (int) mid_at.y)) {
-          if (level->is_lit_ever(x, y)) {
+          if (get(monst_aip->can_see_ever.can_see, x, y)) {
             s += "* ";
           } else {
             s += "o ";
@@ -1414,15 +1424,15 @@ bool Thing::ai_tick(bool recursing)
   for (int y = miny; y < maxy; y++) {
     for (int x = minx; x < maxx; x++) {
       if (monst_aip->can_see_currently.can_see[ x ][ y ]) {
-        // IF_DEBUG3 { (void) level->thing_new("ai_path2", fpoint(x, y)); }
+        IF_DEBUG3 { (void) level->thing_new("ai_path2", point(x, y)); }
         set(monst_aip->can_see_ever.can_see, x, y, true);
       }
     }
   }
   //  }
 
-#if 0
-  if (is_monst()) {
+#if 1
+  if (is_player()) {
     con("Can see fov:");
     for (int y = 0; y < MAP_HEIGHT; y++) {
       for (int x = 0; x < MAP_WIDTH; x++) {
@@ -1840,7 +1850,12 @@ bool Thing::ai_tick(bool recursing)
         if (is_player()) {
           game->tick_begin("repacked bag");
         }
-        ai_change_state(MONST_STATE_IDLE, "finished repacking");
+
+        //
+        // Need to go back to reseting, as this resets failed jumps once fully rested
+        // and we may have came here due to eating food when resting.
+        //
+        ai_change_state(MONST_STATE_RESTING, "finished repacking");
         return true;
       }
       break;

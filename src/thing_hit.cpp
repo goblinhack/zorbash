@@ -517,6 +517,8 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     on_hit(hitter, real_hitter, crit, bite, damage);
   }
 
+  monst_aip->recently_hit_by[ real_hitter->id ] = true;
+
   return true;
 }
 
@@ -558,6 +560,17 @@ int Thing::is_hit_by(Thingp hitter, bool crit, bool bite, int poison, int damage
 
     if (! real_hitter) {
       real_hitter = hitter;
+    }
+  }
+
+  //
+  // If we are pushed into lava and then catch fire, the spawn of fire causes another location check.
+  // Avoid the lava hitting twice.
+  //
+  if (monst_aip) {
+    if (monst_aip->recently_hit_by.find(real_hitter->id) != monst_aip->recently_hit_by.end()) {
+      IF_DEBUG2 { hitter->log("No, I've already hit %s", to_string().c_str()); }
+      return false;
     }
   }
 

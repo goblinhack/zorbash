@@ -40,6 +40,7 @@ def on_move(me, x, y):
 def tp_init(name, text_name, short_text_name, title):
     mytp = tp.Tp(name, text_name, short_text_name)
     mytp.set_ai_avoid_distance(4)
+    mytp.set_ai_vision_distance(10)
     mytp.set_ai_is_able_to_attack_generators(True)
     mytp.set_ai_is_able_to_break_down_doors(True)
     mytp.set_ai_is_able_to_break_out_of_webs(True)

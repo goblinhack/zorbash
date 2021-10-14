@@ -6172,7 +6172,7 @@ void wid_tick_all(void)
       //
       if (game->robot_mode) {
         if (game->tick_requested.empty()) {
-          game->robot_mode_tick();
+          game->tick_begin("close inventory");
         }
       }
     }

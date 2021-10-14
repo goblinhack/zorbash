@@ -63,6 +63,13 @@ void Thing::achieve_goals_in_life(void)
   dbg("Achieve goals tick %u", game->tick_current);
   TRACE_AND_INDENT();
 
+  //
+  // Allow the same thing to hit us again
+  //
+  if (monst_aip) {
+    monst_aip->recently_hit_by.clear();
+  }
+
   update_light_strength();
 
   //

@@ -180,6 +180,10 @@ public:
   std::map< ThingId, int > avoid {};          // List of things that wronged us and need to be avoided
   std::map< ThingId, int > goal_penalty {};   // Helps to avoid goal oscillation
   std::vector< point >     move_path;
+  //
+  // Not worth saving as is cleared each tick
+  //
+  std::map< ThingId, bool > recently_hit_by {};
 } MonstAi;
 std::ostream &operator<<(std::ostream &out, Bits< const MonstAip & > const my);
 std::istream &operator>>(std::istream &in, Bits< MonstAip & > my);
