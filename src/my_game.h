@@ -280,6 +280,8 @@ public:
   bool     request_remake_inventory {};
   bool     request_remake_actionbar {};
   bool     request_remake_skillbox {};
+  bool     request_remake_debuffbox {};
+  bool     request_remake_buffbox {};
   bool     request_destroy_bags {}; // Finished emptying temporary bag
   bool     request_update_rightbar {};
   bool     request_update_same_level {};

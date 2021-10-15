@@ -252,7 +252,11 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/thing_secret_door.o           \
     $(OBJDIR)/thing_shove.o                 \
     $(OBJDIR)/thing_skill.o                 \
+    $(OBJDIR)/thing_debuff.o                \
+    $(OBJDIR)/thing_buff.o                  \
     $(OBJDIR)/thing_skillbox.o              \
+    $(OBJDIR)/thing_debuffbox.o             \
+    $(OBJDIR)/thing_buffbox.o               \
     $(OBJDIR)/thing_sound.o                 \
     $(OBJDIR)/thing_spawn.o                 \
     $(OBJDIR)/thing_spawned_owner.o         \
@@ -299,6 +303,8 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/wid_popup.o                   \
     $(OBJDIR)/wid_rightbar.o                \
     $(OBJDIR)/wid_skillbox.o                \
+    $(OBJDIR)/wid_debuffbox.o               \
+    $(OBJDIR)/wid_buffbox.o                 \
     $(OBJDIR)/wid_skills.o                  \
     $(OBJDIR)/wid_text_box.o                \
     $(OBJDIR)/wid_thing_info.o              \

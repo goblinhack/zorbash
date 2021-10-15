@@ -144,6 +144,8 @@ const std::string &Tp::text_enchant(void) const { return _text_enchant; }
 const std::string &Tp::text_hits(void) const { return _text_hits; }
 const std::string &Tp::text_name(void) const { return _text_name; }
 const std::string &Tp::text_skill(void) const { return _text_skill; }
+const std::string &Tp::text_debuff(void) const { return _text_debuff; }
+const std::string &Tp::text_buff(void) const { return _text_buff; }
 const std::string &Tp::text_title(void) const { return _text_title; }
 const std::string &Tp::text_unused(void) const { return _text_unused; }
 const std::string &Tp::weapon_carry_anim(void) const { return _weapon_carry_anim; }
@@ -358,8 +360,8 @@ int Tp::unused_flag2(void) const { return _unused_flag2; }
 int Tp::unused_flag30(void) const { return _unused_flag30; }
 int Tp::unused_flag31(void) const { return _unused_flag31; }
 int Tp::unused_flag32(void) const { return _unused_flag32; }
-int Tp::unused_flag33(void) const { return _unused_flag33; }
-int Tp::unused_flag34(void) const { return _unused_flag34; }
+int Tp::is_buff(void) const { return _is_buff; }
+int Tp::is_debuff(void) const { return _is_debuff; }
 int Tp::attack_undead(void) const { return _attack_undead; }
 int Tp::is_blood_eater(void) const { return _is_blood_eater; }
 int Tp::attack_blood(void) const { return _attack_blood; }
@@ -679,8 +681,8 @@ void Tp::set_unused_flag2(int v) { _unused_flag2 = v; }
 void Tp::set_unused_flag30(int v) { _unused_flag30 = v; }
 void Tp::set_unused_flag31(int v) { _unused_flag31 = v; }
 void Tp::set_unused_flag32(int v) { _unused_flag32 = v; }
-void Tp::set_unused_flag33(int v) { _unused_flag33 = v; }
-void Tp::set_unused_flag34(int v) { _unused_flag34 = v; }
+void Tp::set_is_buff(int v) { _is_buff = v; }
+void Tp::set_is_debuff(int v) { _is_debuff = v; }
 void Tp::set_attack_undead(int v) { _attack_undead = v; }
 void Tp::set_is_blood_eater(int v) { _is_blood_eater = v; }
 void Tp::set_attack_blood(int v) { _attack_blood = v; }
@@ -816,6 +818,8 @@ void Tp::set_text_enchant(const std::string &v) { _text_enchant = v; }
 void Tp::set_text_hits(const std::string &v) { _text_hits = v; }
 void Tp::set_text_name(const std::string &v) { _text_name = v; }
 void Tp::set_text_skill(const std::string &v) { _text_skill = v; }
+void Tp::set_text_debuff(const std::string &v) { _text_debuff = v; }
+void Tp::set_text_buff(const std::string &v) { _text_buff = v; }
 void Tp::set_text_title(const std::string &v) { _text_title = v; }
 void Tp::set_text_unused(const std::string &v) { _text_unused = v; }
 void Tp::set_throw_distance(int v) { _throw_distance = v; }

@@ -136,6 +136,12 @@ class Tp:
     def set_text_skill(self, value):
         zx.tp_set_text_skill(self, value)
 
+    def set_text_debuff(self, value):
+        zx.tp_set_text_debuff(self, value)
+
+    def set_text_buff(self, value):
+        zx.tp_set_text_buff(self, value)
+
     def set_str_str4(self, value):
         zx.tp_set_str_str4(self, value)
 
@@ -328,11 +334,11 @@ class Tp:
     def set_unused_flag32(self, value):
         zx.tp_set_unused_flag32(self, value)
 
-    def set_unused_flag33(self, value):
-        zx.tp_set_unused_flag33(self, value)
+    def set_is_buff(self, value):
+        zx.tp_set_is_buff(self, value)
 
-    def set_unused_flag34(self, value):
-        zx.tp_set_unused_flag34(self, value)
+    def set_is_debuff(self, value):
+        zx.tp_set_is_debuff(self, value)
 
     def set_attack_undead(self, value):
         zx.tp_set_attack_undead(self, value)

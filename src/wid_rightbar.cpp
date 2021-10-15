@@ -13,6 +13,8 @@
 #include "my_traceback.h"
 #include "my_ui.h"
 #include "my_vector_bounds_check.h"
+#include "my_wid_buffbox.h"
+#include "my_wid_debuffbox.h"
 #include "my_wid_inventory.h"
 #include "my_wid_rightbar.h"
 #include "my_wid_skillbox.h"
@@ -532,6 +534,158 @@ static bool wid_rightbar_create(void)
           auto tile = tile_find_mand("item_enchant_" + std::to_string(enchant_count));
           wid_set_fg3_tile(w, tile);
         }
+      }
+      item++;
+    }
+  }
+
+  //
+  // Buffs
+  //
+  y_at += 8;
+  {
+    auto                monst_infop = player->monst_infop;
+    std::vector< Widp > wid_buffbox_items;
+
+    uint8_t item = 0;
+    for (auto i = 0U; i < UI_ACTIONBAR_MAX_ITEMS / 2; i++) {
+      //
+      // slot number
+      //
+      auto slot(std::to_string(i));
+
+      //
+      // Always create the slot even if empty as we use this for particles
+      //
+      auto  s  = "buff slot" + std::to_string(i);
+      auto  w  = wid_new_plain(wid_rightbar, s);
+      auto  x  = (i % 5) * 3 + 1;
+      auto  y  = (i / 5) * 3 + 1 + y_at;
+      point tl = make_point(x, y);
+      point br = make_point(x + 1, y + 1);
+
+      wid_set_pos(w, tl, br);
+      wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
+
+      if (item < monst_infop->buffbox_id.size()) {
+        auto tp_id = get(monst_infop->buffbox_id, item);
+        if (! tp_id) {
+          item++;
+          continue;
+        }
+
+        auto tpp       = tp_find(tp_id);
+        bool activated = false;
+
+        for (auto id : monst_infop->buffs) {
+          auto t = level->thing_find(id);
+          if (t) {
+            if (t->tp() == tpp) {
+              activated = t->is_activated;
+            }
+          }
+        }
+
+        auto tiles = &tpp->tiles;
+
+        if (! tiles) {
+          item++;
+          continue;
+        }
+
+        auto tile = tile_n(tiles, activated ? 2 : 1);
+        if (! tile) {
+          item++;
+          continue;
+        }
+
+        wid_set_fg_tile(w, tile);
+
+        //
+        // If choosing a target, highlight the item
+        //
+        wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
+
+        wid_set_on_mouse_over_b(w, wid_buffbox_mouse_over_b);
+        wid_set_on_mouse_over_e(w, wid_buffbox_mouse_over_e);
+
+        wid_set_int_context(w, i);
+      }
+      item++;
+    }
+  }
+
+  //
+  // Debuffs
+  //
+  y_at += 5;
+  {
+    auto                monst_infop = player->monst_infop;
+    std::vector< Widp > wid_debuffbox_items;
+
+    uint8_t item = 0;
+    for (auto i = 0U; i < UI_ACTIONBAR_MAX_ITEMS / 2; i++) {
+      //
+      // slot number
+      //
+      auto slot(std::to_string(i));
+
+      //
+      // Always create the slot even if empty as we use this for particles
+      //
+      auto  s  = "debuff slot" + std::to_string(i);
+      auto  w  = wid_new_plain(wid_rightbar, s);
+      auto  x  = (i % 5) * 3 + 1;
+      auto  y  = (i / 5) * 3 + 1 + y_at;
+      point tl = make_point(x, y);
+      point br = make_point(x + 1, y + 1);
+
+      wid_set_pos(w, tl, br);
+      wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
+
+      if (item < monst_infop->debuffbox_id.size()) {
+        auto tp_id = get(monst_infop->debuffbox_id, item);
+        if (! tp_id) {
+          item++;
+          continue;
+        }
+
+        auto tpp       = tp_find(tp_id);
+        bool activated = false;
+
+        for (auto id : monst_infop->debuffs) {
+          auto t = level->thing_find(id);
+          if (t) {
+            if (t->tp() == tpp) {
+              activated = t->is_activated;
+            }
+          }
+        }
+
+        auto tiles = &tpp->tiles;
+
+        if (! tiles) {
+          item++;
+          continue;
+        }
+
+        auto tile = tile_n(tiles, activated ? 2 : 1);
+        if (! tile) {
+          item++;
+          continue;
+        }
+
+        wid_set_fg_tile(w, tile);
+
+        //
+        // If choosing a target, highlight the item
+        //
+        wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
+
+        wid_set_on_mouse_over_b(w, wid_debuffbox_mouse_over_b);
+        wid_set_on_mouse_over_e(w, wid_debuffbox_mouse_over_e);
+
+        wid_set_int_context(w, i);
       }
       item++;
     }

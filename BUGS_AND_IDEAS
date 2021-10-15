@@ -1,18 +1,15 @@
 
 Todo
 ----
-- did not pick up enchantstone due to space
-- if you see a potion of health, drop food in preference?
 - change THING_TICK_DURATION_TOO_LONG back to 10
-- weapon pick up loop on victimlake3
-- add poison debuff
-- robot got stuck in web
-- rusty sword has poisoning chance?
+- add poison debuff / rusty sword has poisoning chance?
 - holy water
-- add poison notify on screen from spider?
+- add poisoned notify on screen from spider?
 - half damage from poison constitution save
 - antipoison potion
-- robo use wands
+- AI if you see a potion of health, drop food in preference?
+- AI did not pick up enchantstone due to space
+- AI wand use
 
 Level
 -----

@@ -273,8 +273,8 @@ private:
   int         _unused_flag30 {};
   int         _unused_flag31 {};
   int         _unused_flag32 {};
-  int         _unused_flag33 {};
-  int         _unused_flag34 {};
+  int         _is_buff {};
+  int         _is_debuff {};
   int         _attack_undead {};
   int         _is_blood_eater {};
   int         _attack_blood {};
@@ -427,6 +427,8 @@ private:
   std::string _text_hits;
   std::string _text_name;
   std::string _text_skill;
+  std::string _text_debuff;
+  std::string _text_buff;
   std::string _text_title;
   std::string _text_unused;
   std::string _weapon_carry_anim;
@@ -502,6 +504,8 @@ public:
   const std::string &text_hits(void) const;
   const std::string &text_name(void) const;
   const std::string &text_skill(void) const;
+  const std::string &text_debuff(void) const;
+  const std::string &text_buff(void) const;
   const std::string &text_title(void) const;
   const std::string &text_unused(void) const;
   const std::string &weapon_carry_anim(void) const;
@@ -744,8 +748,8 @@ public:
   int                unused_flag30(void) const;
   int                unused_flag31(void) const;
   int                unused_flag32(void) const;
-  int                unused_flag33(void) const;
-  int                unused_flag34(void) const;
+  int                is_buff(void) const;
+  int                is_debuff(void) const;
   int                attack_undead(void) const;
   int                is_blood_eater(void) const;
   int                attack_blood(void) const;
@@ -1073,8 +1077,8 @@ public:
   void               set_unused_flag30(int);
   void               set_unused_flag31(int);
   void               set_unused_flag32(int);
-  void               set_unused_flag33(int);
-  void               set_unused_flag34(int);
+  void               set_is_buff(int);
+  void               set_is_debuff(int);
   void               set_attack_undead(int);
   void               set_is_blood_eater(int);
   void               set_attack_blood(int);
@@ -1217,6 +1221,8 @@ public:
   void               set_text_hits(const std::string &);
   void               set_text_name(const std::string &);
   void               set_text_skill(const std::string &);
+  void               set_text_debuff(const std::string &);
+  void               set_text_buff(const std::string &);
   void               set_text_title(const std::string &);
   void               set_text_unused(const std::string &);
   void               set_throw_distance(int);

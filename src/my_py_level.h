@@ -176,8 +176,8 @@ PyObject *level_unused_flag2_at(PyObject *obj, PyObject *args, PyObject *keywds)
 PyObject *level_unused_flag30_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag31_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag32_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag33_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag34_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_buff_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_debuff_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_attack_undead_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_blood_eater_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_attack_blood_at(PyObject *obj, PyObject *args, PyObject *keywds);

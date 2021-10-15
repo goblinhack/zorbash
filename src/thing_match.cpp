@@ -547,10 +547,10 @@ bool Thing::matches(const std::string &what) const
   if (unused_flag32() && (what == "unused_flag32")) {
     return true;
   }
-  if (unused_flag33() && (what == "unused_flag33")) {
+  if (is_buff() && (what == "is_buff")) {
     return true;
   }
-  if (unused_flag34() && (what == "unused_flag34")) {
+  if (is_debuff() && (what == "is_debuff")) {
     return true;
   }
   if (attack_undead() && (what == "attack_undead")) {
@@ -1316,11 +1316,11 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag32") {
     return &Thing::unused_flag32;
   }
-  if (what == "unused_flag33") {
-    return &Thing::unused_flag33;
+  if (what == "is_buff") {
+    return &Thing::is_buff;
   }
-  if (what == "unused_flag34") {
-    return &Thing::unused_flag34;
+  if (what == "is_debuff") {
+    return &Thing::is_debuff;
   }
   if (what == "attack_undead") {
     return &Thing::attack_undead;

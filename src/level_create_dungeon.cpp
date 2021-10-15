@@ -492,6 +492,15 @@ bool Level::create_dungeon(point3d at, int seed)
               t->carry(W);
             }
 
+            {
+              auto s = thing_new("debuff_poisoned", point(x, y));
+              t->debuff_add(s);
+            }
+
+            {
+              auto s = thing_new("buff_poison_resistant", point(x, y));
+              t->buff_add(s);
+            }
 #if 0
             auto s = thing_new("skill_devoted_thrust", point(x, y));
             t->skill_add(s);

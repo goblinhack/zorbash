@@ -221,6 +221,8 @@ public:
   Thingp      weapon_get_use_anim(void) const;
   bool        can_learn_something(void);
   bool        add_skill(Tpp what);
+  bool        add_debuff(Tpp what);
+  bool        add_buff(Tpp what);
   bool        ai_blocked(void);
   bool        ai_blocked_completely(void);
   bool        ai_choose_wander(point &nh);
@@ -344,6 +346,16 @@ public:
   bool skill_use(Thingp it);
   bool skillbox_id_insert(Thingp what);
   bool skillbox_id_remove(Thingp what);
+  bool debuff_add(Thingp it);
+  bool debuff_remove(Thingp it);
+  bool debuff_use(Thingp it);
+  bool debuffbox_id_insert(Thingp what);
+  bool debuffbox_id_remove(Thingp what);
+  bool buff_add(Thingp it);
+  bool buff_remove(Thingp it);
+  bool buff_use(Thingp it);
+  bool buffbox_id_insert(Thingp what);
+  bool buffbox_id_remove(Thingp what);
   bool spawn_at(const std::string &what);
   bool spawn_at_if_possible(const std::string &what);
   bool spawn_fire(const std::string &what);
@@ -449,6 +461,8 @@ public:
   const std::string &    text_hits(void) const;
   const std::string &    text_name(void) const;
   const std::string &    text_skill(void) const;
+  const std::string &    text_debuff(void) const;
+  const std::string &    text_buff(void) const;
   const std::string &    text_title(void) const;
   const std::string &    text_unused(void) const;
   const std::string &    title(void) const;
@@ -1007,8 +1021,8 @@ public:
   int                    unused_flag30(void) const;
   int                    unused_flag31(void) const;
   int                    unused_flag32(void) const;
-  int                    unused_flag33(void) const;
-  int                    unused_flag34(void) const;
+  int                    is_buff(void) const;
+  int                    is_debuff(void) const;
   int                    attack_undead(void) const;
   int                    is_blood_eater(void) const;
   int                    attack_blood(void) const;
@@ -1336,6 +1350,12 @@ public:
   void skill_activate(Thingp what);
   void skill_deactivate(Thingp what);
   void skill_remove_all(void);
+  void debuff_activate(Thingp what);
+  void debuff_deactivate(Thingp what);
+  void debuff_remove_all(void);
+  void buff_activate(Thingp what);
+  void buff_deactivate(Thingp what);
+  void buff_remove_all(void);
   void stamina_boost(int v);
   void throw_at(Thingp w, Thingp target);
   void tick();

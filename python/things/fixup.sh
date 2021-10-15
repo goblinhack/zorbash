@@ -308,8 +308,8 @@ do
       set_unused_flag30 \
       set_unused_flag31 \
       set_unused_flag32 \
-      set_unused_flag33 \
-      set_unused_flag34 \
+      set_is_buff \
+      set_is_debuff \
       set_attack_undead \
       set_is_blood_eater \
       set_attack_blood \

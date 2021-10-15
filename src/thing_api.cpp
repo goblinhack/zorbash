@@ -1120,15 +1120,15 @@ int Thing::unused_flag32(void) const
   TRACE_AND_INDENT();
   return (tp()->unused_flag32());
 }
-int Thing::unused_flag33(void) const
+int Thing::is_buff(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->unused_flag33());
+  return (tp()->is_buff());
 }
-int Thing::unused_flag34(void) const
+int Thing::is_debuff(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->unused_flag34());
+  return (tp()->is_debuff());
 }
 int Thing::attack_undead(void) const
 {
@@ -5454,6 +5454,16 @@ const std::string &Thing::text_skill(void) const
 {
   TRACE_AND_INDENT();
   return (tp()->text_skill());
+}
+const std::string &Thing::text_debuff(void) const
+{
+  TRACE_AND_INDENT();
+  return (tp()->text_debuff());
+}
+const std::string &Thing::text_buff(void) const
+{
+  TRACE_AND_INDENT();
+  return (tp()->text_buff());
 }
 const std::string &Thing::text_title(void) const
 {
