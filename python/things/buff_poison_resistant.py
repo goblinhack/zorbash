@@ -14,12 +14,11 @@ def buff_poison_resistant_init(name, text_name):
     mytp.set_text_buff("You are poison resistant");
     mytp.set_long_text_description("Poison cannot harm you.")
     mytp.set_on_use_do("buff_poison_resistant.on_use()")
-    mytp.set_text_description("poison_resistant buff.")
-    #mytp.set_tile(tile="buff_poison_resistant")
-    mytp.set_tile(tile="debuff_poisoned")
+    mytp.set_text_description("Poison resistant buff.")
+    mytp.set_tile(tile="buff_poison_resistant")
     mytp.update()
 
 def init():
-    buff_poison_resistant_init(name="buff_poison_resistant", text_name="poison_resistant")
+    buff_poison_resistant_init(name="buff_poison_resistant", text_name="poison resistant")
 
 init()
