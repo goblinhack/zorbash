@@ -493,12 +493,12 @@ bool Level::create_dungeon(point3d at, int seed)
             }
 
             {
-              auto s = thing_new("debuff_poisoned", point(x, y));
-              t->debuff_add(s);
+              auto s = thing_new("buff_poison_resistant", point(x, y));
+              t->buff_add(s);
             }
 
             {
-              auto s = thing_new("buff_poison_resistant", point(x, y));
+              auto s = thing_new("debuff_poisoned", point(x, y));
               t->buff_add(s);
             }
 #if 0

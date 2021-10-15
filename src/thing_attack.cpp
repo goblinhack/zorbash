@@ -44,6 +44,15 @@ bool Thing::possible_to_attack(const Thingp it)
     return false;
   }
 
+  //
+  // Weapons can't attack all by themselves. That would be nuts.
+  //
+  if (is_weapon() || is_wand()) {
+    if (! my_owner) {
+      return false;
+    }
+  }
+
   dbg("Is it possible to attack %s?", it->to_string().c_str());
   TRACE_AND_INDENT();
 

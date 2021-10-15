@@ -20,7 +20,6 @@
 //
 bool Thing::on_tick(void)
 {
-  TRACE_AND_INDENT();
   auto on_tick = tp()->on_tick_do();
   if (std::empty(on_tick)) {
     return false;
@@ -35,9 +34,15 @@ bool Thing::on_tick(void)
       fn = fn.replace(found, 2, "");
     }
 
-    dbg("Call %s.%s(%s)", mod.c_str(), fn.c_str(), to_string().c_str());
-
-    return py_call_bool_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) mid_at.x, (unsigned int) mid_at.y);
+    auto owner = get_top_owner();
+    if (owner) {
+      dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), owner->to_string().c_str(), to_string().c_str());
+      return py_call_bool_fn(mod.c_str(), fn.c_str(), owner->id.id, id.id, (unsigned int) mid_at.x,
+                             (unsigned int) mid_at.y);
+    } else {
+      dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_string().c_str());
+      return py_call_bool_fn(mod.c_str(), fn.c_str(), 0U, (unsigned int) mid_at.x, (unsigned int) mid_at.y);
+    }
   }
 
   ERR("Bad on_tick call [%s] expected mod:function, got %d elems", on_tick.c_str(), (int) on_tick.size());
