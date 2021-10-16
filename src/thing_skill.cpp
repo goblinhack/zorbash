@@ -85,17 +85,11 @@ bool Thing::skill_remove(Thingp what)
     }
   }
 
-  dbg("Update bag with drop of: %s", what->to_string().c_str());
-  bag_remove(what);
-  while (bag_compress()) {
-  }
-
   what->remove_owner();
   monst_infop->skills.remove(what->id);
   game->request_remake_skillbox = true;
 
-  dbg("Dropped %s into the ether", what->to_string().c_str());
-
+  dbg("Removed %s", what->to_string().c_str());
   return true;
 }
 
@@ -162,7 +156,7 @@ int Thing::skill_enchant_count(const uint32_t slot)
   return 0;
 }
 
-bool Thing::add_skill(Tpp what)
+bool Thing::skill_add(Tpp what)
 {
   TRACE_AND_INDENT();
   auto t = level->thing_new(what, mid_at);
@@ -275,5 +269,5 @@ bool Thing::learn_random_skill(void)
 
   auto chosen = cands[ pcg_random_range(0, cands.size()) ];
   log("Add this skill: %s", chosen->name().c_str());
-  return add_skill(chosen);
+  return skill_add(chosen);
 }

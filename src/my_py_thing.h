@@ -18,6 +18,11 @@ PyObject *thing_incr_health_max(PyObject *obj, PyObject *args, PyObject *keywds)
 PyObject *thing_decr_health_max(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_get_health_max(PyObject *obj, PyObject *args, PyObject *keywds);
 
+PyObject *thing_set_poison(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_incr_poison(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_decr_poison(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_get_poison(PyObject *obj, PyObject *args, PyObject *keywds);
+
 PyObject *thing_set_stamina(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_incr_stamina(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_decr_stamina(PyObject *obj, PyObject *args, PyObject *keywds);

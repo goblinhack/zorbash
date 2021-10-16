@@ -36,11 +36,13 @@ bool Thing::on_tick(void)
 
     auto owner = get_top_owner();
     if (owner) {
-      dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), owner->to_string().c_str(), to_string().c_str());
+      dbg("Call %s.%s(owner=%s, item=%s, %d, %d)", mod.c_str(), fn.c_str(), owner->to_string().c_str(),
+          to_string().c_str(), (unsigned int) mid_at.x, (unsigned int) mid_at.y);
       return py_call_bool_fn(mod.c_str(), fn.c_str(), owner->id.id, id.id, (unsigned int) mid_at.x,
                              (unsigned int) mid_at.y);
     } else {
-      dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_string().c_str());
+      dbg("Call %s.%s(item=%s, %d, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), (unsigned int) mid_at.x,
+          (unsigned int) mid_at.y);
       return py_call_bool_fn(mod.c_str(), fn.c_str(), 0U, (unsigned int) mid_at.x, (unsigned int) mid_at.y);
     }
   }
@@ -104,6 +106,16 @@ void Thing::achieve_goals_in_life(void)
   // Timeout enemies to avoid
   //
   avoid_tick();
+
+  buff_tick();
+  if (is_dead) {
+    return;
+  }
+
+  debuff_tick();
+  if (is_dead) {
+    return;
+  }
 
   //
   // Apply poison damage

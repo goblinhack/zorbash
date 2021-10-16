@@ -134,6 +134,8 @@ void Thing::defeat(Thingp defeater, const char *reason)
     }
 
     skill_remove_all();
+    buff_remove_all();
+    debuff_remove_all();
   }
 
   if (on_death_is_open()) {

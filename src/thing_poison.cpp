@@ -5,6 +5,7 @@
 
 #include "my_sys.h"
 #include "my_thing.h"
+#include "my_thing_template.h"
 #include "my_tile.h"
 
 void Thing::poison_tick(void)
@@ -21,6 +22,8 @@ void Thing::poison_tick(void)
   TRACE_AND_INDENT();
   dbg("Poison tick");
   TRACE_AND_INDENT();
+
+  debuff_add(tp_find("debuff_poisoned"));
 
   is_hit_by(this, old_poison);
   Thingp hitter = this;

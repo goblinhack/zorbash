@@ -36,6 +36,18 @@ void Thing::hooks_remove()
       dbg("Detach %08" PRIx32 " from owner %s", id.id, owner->to_string().c_str());
     }
 
+    if (is_skill()) {
+      owner->skill_remove(this);
+    }
+
+    if (is_buff()) {
+      owner->buff_remove(this);
+    }
+
+    if (is_debuff()) {
+      owner->debuff_remove(this);
+    }
+
     if (id == owner->get_on_fire_anim_id()) {
       if (is_loggable()) {
         dbg("Detach on_fire_anim_id from owner %s", owner->to_string().c_str());
@@ -157,6 +169,9 @@ void Thing::hooks_remove()
 void Thing::remove_all_references()
 {
   TRACE_AND_INDENT();
+  dbg("Remove all references");
+  TRACE_AND_INDENT();
+
   //
   // Some things have lots of things they own
   //

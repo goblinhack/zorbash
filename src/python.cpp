@@ -440,6 +440,7 @@ bool py_call_bool(const char *name)
       out = py_obj_to_bool(pValue);
       Py_DECREF(pValue);
     }
+    py_err();
     return out;
   } else {
     ERR("Cannot call python function %s", name);
@@ -467,6 +468,7 @@ bool py_call_bool_fn(const char *module, const char *name, int val1)
       out = py_obj_to_bool(pValue);
       Py_DECREF(pValue);
     }
+    py_err();
     return out;
   } else {
     ERR("Cannot call python function %s(%d)", name, val1);
@@ -494,6 +496,7 @@ bool py_call_bool_fn(const char *module, const char *name, int val1, int val2)
       out = py_obj_to_bool(pValue);
       Py_DECREF(pValue);
     }
+    py_err();
     return out;
   } else {
     ERR("Cannot call python function %s(%d)", name, val1);
@@ -521,6 +524,7 @@ bool py_call_bool_fn(const char *module, const char *name, int val1, int val2, i
       out = py_obj_to_bool(pValue);
       Py_DECREF(pValue);
     }
+    py_err();
     return out;
   } else {
     ERR("Cannot call python function %s(%d)", name, val1);
@@ -548,6 +552,7 @@ bool py_call_bool_fn(const char *module, const char *name, int val1, int val2, i
       out = py_obj_to_bool(pValue);
       Py_DECREF(pValue);
     }
+    py_err();
     return out;
   } else {
     ERR("Cannot call python function %s(%d)", name, val1);
@@ -575,6 +580,7 @@ bool py_call_bool_fn(const char *module, const char *name, int val1, int val2, i
       out = py_obj_to_bool(pValue);
       Py_DECREF(pValue);
     }
+    py_err();
     return out;
   } else {
     ERR("Cannot call python function %s(%d)", name, val1);
@@ -602,6 +608,7 @@ bool py_call_bool_fn(const char *module, const char *name, int val1, int val2, i
       out = py_obj_to_bool(pValue);
       Py_DECREF(pValue);
     }
+    py_err();
     return out;
   } else {
     ERR("Cannot call python function %s(%d)", name, val1);
@@ -630,6 +637,7 @@ bool py_call_bool_fn(const char *module, const char *name, int val1, int val2, i
       out = py_obj_to_bool(pValue);
       Py_DECREF(pValue);
     }
+    py_err();
     return out;
   } else {
     ERR("Cannot call python function %s(%d)", name, val1);
@@ -658,6 +666,7 @@ bool py_call_bool_fn(const char *module, const char *name, int val1, int val2, i
       out = py_obj_to_bool(pValue);
       Py_DECREF(pValue);
     }
+    py_err();
     return out;
   } else {
     ERR("Cannot call python function %s(%d)", name, val1);
@@ -685,6 +694,7 @@ bool py_call_bool_fn(const char *module, const char *name, unsigned int val1)
       out = py_obj_to_bool(pValue);
       Py_DECREF(pValue);
     }
+    py_err();
     return out;
   } else {
     ERR("Cannot call python function %s(%d)", name, val1);
@@ -712,6 +722,7 @@ bool py_call_bool_fn(const char *module, const char *name, unsigned int val1, un
       out = py_obj_to_bool(pValue);
       Py_DECREF(pValue);
     }
+    py_err();
     return out;
   } else {
     ERR("Cannot call python function %s(%d)", name, val1);
@@ -739,6 +750,7 @@ bool py_call_bool_fn(const char *module, const char *name, unsigned int val1, un
       out = py_obj_to_bool(pValue);
       Py_DECREF(pValue);
     }
+    py_err();
     return out;
   } else {
     ERR("Cannot call python function %s(%d)", name, val1);
@@ -767,6 +779,7 @@ bool py_call_bool_fn(const char *module, const char *name, unsigned int val1, un
       out = py_obj_to_bool(pValue);
       Py_DECREF(pValue);
     }
+    py_err();
     return out;
   } else {
     ERR("Cannot call python function %s(%d)", name, val1);
@@ -795,6 +808,7 @@ bool py_call_bool_fn(const char *module, const char *name, unsigned int val1, un
       out = py_obj_to_bool(pValue);
       Py_DECREF(pValue);
     }
+    py_err();
     return out;
   } else {
     ERR("Cannot call python function %s(%d)", name, val1);
@@ -823,6 +837,7 @@ bool py_call_bool_fn(const char *module, const char *name, unsigned int val1, un
       out = py_obj_to_bool(pValue);
       Py_DECREF(pValue);
     }
+    py_err();
     return out;
   } else {
     ERR("Cannot call python function %s(%d)", name, val1);
@@ -851,6 +866,7 @@ bool py_call_bool_fn(const char *module, const char *name, unsigned int val1, un
       out = py_obj_to_bool(pValue);
       Py_DECREF(pValue);
     }
+    py_err();
     return out;
   } else {
     ERR("Cannot call python function %s(%d)", name, val1);
@@ -879,6 +895,7 @@ bool py_call_bool_fn(const char *module, const char *name, unsigned int val1, un
       out = py_obj_to_bool(pValue);
       Py_DECREF(pValue);
     }
+    py_err();
     return out;
   } else {
     ERR("Cannot call python function %s(%d)", name, val1);
@@ -1330,13 +1347,39 @@ static PyMethodDef python_c_METHODS[] = {
     ZX_ADD_PYTHON_FUNCTION(level_gfx_water_at),
     ZX_ADD_PYTHON_FUNCTION(level_is_able_to_change_levels_at),
     ZX_ADD_PYTHON_FUNCTION(level_is_able_to_fall_at),
-    ZX_ADD_PYTHON_FUNCTION(level_is_able_to_fire_at),
-    ZX_ADD_PYTHON_FUNCTION(level_is_able_to_fire_at_at),
+    ZX_ADD_PYTHON_FUNCTION(level_ai_is_able_to_attack_generators_at),
+    ZX_ADD_PYTHON_FUNCTION(level_ai_is_able_to_break_down_doors_at),
+    ZX_ADD_PYTHON_FUNCTION(level_ai_is_able_to_break_out_of_webs_at),
+    ZX_ADD_PYTHON_FUNCTION(level_ai_is_able_to_collect_keys_at),
+    ZX_ADD_PYTHON_FUNCTION(level_ai_is_able_to_detect_secret_doors_when_close_at),
+    ZX_ADD_PYTHON_FUNCTION(level_ai_is_able_to_enchant_weapons_at),
+    ZX_ADD_PYTHON_FUNCTION(level_ai_is_able_to_jump_at),
+    ZX_ADD_PYTHON_FUNCTION(level_ai_is_able_to_jump_distance_at),
+    ZX_ADD_PYTHON_FUNCTION(level_ai_is_able_to_jump_on_low_hp_chance_d1000_at),
+    ZX_ADD_PYTHON_FUNCTION(level_ai_is_able_to_learn_skills_at),
+    ZX_ADD_PYTHON_FUNCTION(level_ai_is_able_to_open_doors_at),
     ZX_ADD_PYTHON_FUNCTION(level_ai_is_able_to_see_through_doors_at),
     ZX_ADD_PYTHON_FUNCTION(level_ai_is_able_to_walk_through_walls_at),
-    ZX_ADD_PYTHON_FUNCTION(level_is_acid_at),
-    ZX_ADD_PYTHON_FUNCTION(level_environ_loves_acid_at),
+    ZX_ADD_PYTHON_FUNCTION(level_ai_is_exit_finder_at),
+    ZX_ADD_PYTHON_FUNCTION(level_ai_is_item_collector_at),
+    ZX_ADD_PYTHON_FUNCTION(level_ai_is_level_explorer_at),
+    ZX_ADD_PYTHON_FUNCTION(level_ai_random_jump_chance_d1000_at),
     ZX_ADD_PYTHON_FUNCTION(level_ai_wanderer_at),
+    ZX_ADD_PYTHON_FUNCTION(level_attack_blood_at),
+    ZX_ADD_PYTHON_FUNCTION(level_attack_undead_at),
+    ZX_ADD_PYTHON_FUNCTION(level_environ_hates_acid_at),
+    ZX_ADD_PYTHON_FUNCTION(level_environ_hates_fire_at),
+    ZX_ADD_PYTHON_FUNCTION(level_environ_hates_poison_at),
+    ZX_ADD_PYTHON_FUNCTION(level_environ_hates_water_at),
+    ZX_ADD_PYTHON_FUNCTION(level_environ_loves_acid_at),
+    ZX_ADD_PYTHON_FUNCTION(level_environ_loves_fire_at),
+    ZX_ADD_PYTHON_FUNCTION(level_environ_loves_poison_at),
+    ZX_ADD_PYTHON_FUNCTION(level_environ_loves_spiderwebs_at),
+    ZX_ADD_PYTHON_FUNCTION(level_environ_loves_water_at),
+    ZX_ADD_PYTHON_FUNCTION(level_is_able_to_fire_at),
+    ZX_ADD_PYTHON_FUNCTION(level_is_able_to_fire_at_at),
+    ZX_ADD_PYTHON_FUNCTION(level_is_able_to_tire_at),
+    ZX_ADD_PYTHON_FUNCTION(level_is_acid_at),
     ZX_ADD_PYTHON_FUNCTION(level_is_alive_monst_at),
     ZX_ADD_PYTHON_FUNCTION(level_is_alive_on_end_of_anim_at),
     ZX_ADD_PYTHON_FUNCTION(level_is_always_hit_at),
@@ -1352,11 +1395,13 @@ static PyMethodDef python_c_METHODS[] = {
     ZX_ADD_PYTHON_FUNCTION(level_is_barrel_at),
     ZX_ADD_PYTHON_FUNCTION(level_is_bleeder_at),
     ZX_ADD_PYTHON_FUNCTION(level_is_blood_at),
+    ZX_ADD_PYTHON_FUNCTION(level_is_blood_eater_at),
     ZX_ADD_PYTHON_FUNCTION(level_is_blood_splatter_at),
     ZX_ADD_PYTHON_FUNCTION(level_is_bloodied_at),
     ZX_ADD_PYTHON_FUNCTION(level_is_bones_at),
     ZX_ADD_PYTHON_FUNCTION(level_is_brazier_at),
     ZX_ADD_PYTHON_FUNCTION(level_is_bridge_at),
+    ZX_ADD_PYTHON_FUNCTION(level_is_buff_at),
     ZX_ADD_PYTHON_FUNCTION(level_is_burnable_at),
     ZX_ADD_PYTHON_FUNCTION(level_is_carrier_of_treasure_class_a_at),
     ZX_ADD_PYTHON_FUNCTION(level_is_carrier_of_treasure_class_b_at),
@@ -1375,14 +1420,18 @@ static PyMethodDef python_c_METHODS[] = {
     ZX_ADD_PYTHON_FUNCTION(level_is_cursor_at),
     ZX_ADD_PYTHON_FUNCTION(level_is_cursor_can_hover_over_at),
     ZX_ADD_PYTHON_FUNCTION(level_is_cursor_path_at),
+    ZX_ADD_PYTHON_FUNCTION(level_is_cursor_path_hazard_for_player_at),
     ZX_ADD_PYTHON_FUNCTION(level_is_dead_on_end_of_anim_at),
     ZX_ADD_PYTHON_FUNCTION(level_is_dead_on_shove_at),
+    ZX_ADD_PYTHON_FUNCTION(level_is_debuff_at),
     ZX_ADD_PYTHON_FUNCTION(level_is_debug_path_at),
     ZX_ADD_PYTHON_FUNCTION(level_is_debug_type_at),
     ZX_ADD_PYTHON_FUNCTION(level_is_deep_water_at),
     ZX_ADD_PYTHON_FUNCTION(level_is_descend_dungeon_at),
     ZX_ADD_PYTHON_FUNCTION(level_is_descend_sewer_at),
     ZX_ADD_PYTHON_FUNCTION(level_is_described_when_hovering_over_at),
+    ZX_ADD_PYTHON_FUNCTION(level_is_destroyed_on_hit_or_miss_at),
+    ZX_ADD_PYTHON_FUNCTION(level_is_destroyed_on_hitting_at),
     ZX_ADD_PYTHON_FUNCTION(level_is_dir_bl_at),
     ZX_ADD_PYTHON_FUNCTION(level_is_dir_br_at),
     ZX_ADD_PYTHON_FUNCTION(level_is_dir_down_at),
@@ -1403,7 +1452,6 @@ static PyMethodDef python_c_METHODS[] = {
     ZX_ADD_PYTHON_FUNCTION(level_is_ethereal_at),
     ZX_ADD_PYTHON_FUNCTION(level_is_ethereal_minion_generator_at),
     ZX_ADD_PYTHON_FUNCTION(level_is_explosion_at),
-    ZX_ADD_PYTHON_FUNCTION(level_is_cursor_path_hazard_for_player_at),
     ZX_ADD_PYTHON_FUNCTION(level_is_fearless_at),
     ZX_ADD_PYTHON_FUNCTION(level_is_fire_at),
     ZX_ADD_PYTHON_FUNCTION(level_is_floating_at),
@@ -1424,7 +1472,6 @@ static PyMethodDef python_c_METHODS[] = {
     ZX_ADD_PYTHON_FUNCTION(level_is_interesting_at),
     ZX_ADD_PYTHON_FUNCTION(level_is_item_at),
     ZX_ADD_PYTHON_FUNCTION(level_is_item_carrier_at),
-    ZX_ADD_PYTHON_FUNCTION(level_ai_is_item_collector_at),
     ZX_ADD_PYTHON_FUNCTION(level_is_item_eater_at),
     ZX_ADD_PYTHON_FUNCTION(level_is_item_organic_at),
     ZX_ADD_PYTHON_FUNCTION(level_is_jelly_at),
@@ -1432,14 +1479,7 @@ static PyMethodDef python_c_METHODS[] = {
     ZX_ADD_PYTHON_FUNCTION(level_is_jelly_baby_eater_at),
     ZX_ADD_PYTHON_FUNCTION(level_is_jelly_eater_at),
     ZX_ADD_PYTHON_FUNCTION(level_is_jelly_parent_at),
-    ZX_ADD_PYTHON_FUNCTION(level_ai_is_able_to_jump_at),
-    ZX_ADD_PYTHON_FUNCTION(level_ai_random_jump_chance_d1000_at),
-    ZX_ADD_PYTHON_FUNCTION(level_ai_is_able_to_jump_distance_at),
-    ZX_ADD_PYTHON_FUNCTION(level_ai_is_able_to_jump_on_low_hp_chance_d1000_at),
     ZX_ADD_PYTHON_FUNCTION(level_is_key_at),
-    ZX_ADD_PYTHON_FUNCTION(level_ai_is_able_to_collect_keys_at),
-    ZX_ADD_PYTHON_FUNCTION(level_is_destroyed_on_hit_or_miss_at),
-    ZX_ADD_PYTHON_FUNCTION(level_is_destroyed_on_hitting_at),
     ZX_ADD_PYTHON_FUNCTION(level_is_laser_at),
     ZX_ADD_PYTHON_FUNCTION(level_is_lava_at),
     ZX_ADD_PYTHON_FUNCTION(level_is_light_blocker_at),
@@ -1478,7 +1518,6 @@ static PyMethodDef python_c_METHODS[] = {
     ZX_ADD_PYTHON_FUNCTION(level_is_soft_body_at),
     ZX_ADD_PYTHON_FUNCTION(level_is_spawner_at),
     ZX_ADD_PYTHON_FUNCTION(level_is_spiderweb_at),
-    ZX_ADD_PYTHON_FUNCTION(level_is_able_to_tire_at),
     ZX_ADD_PYTHON_FUNCTION(level_is_steal_item_chance_d1000_at),
     ZX_ADD_PYTHON_FUNCTION(level_is_sticky_at),
     ZX_ADD_PYTHON_FUNCTION(level_is_stone_at),
@@ -1503,13 +1542,9 @@ static PyMethodDef python_c_METHODS[] = {
     ZX_ADD_PYTHON_FUNCTION(level_is_wand_at),
     ZX_ADD_PYTHON_FUNCTION(level_is_wand_eater_at),
     ZX_ADD_PYTHON_FUNCTION(level_is_water_at),
-    ZX_ADD_PYTHON_FUNCTION(level_environ_loves_water_at),
     ZX_ADD_PYTHON_FUNCTION(level_is_weapon_at),
     ZX_ADD_PYTHON_FUNCTION(level_is_weapon_wielder_at),
     ZX_ADD_PYTHON_FUNCTION(level_is_wooden_at),
-    ZX_ADD_PYTHON_FUNCTION(level_environ_loves_fire_at),
-    ZX_ADD_PYTHON_FUNCTION(level_environ_loves_poison_at),
-    ZX_ADD_PYTHON_FUNCTION(level_environ_loves_spiderwebs_at),
     ZX_ADD_PYTHON_FUNCTION(level_place_at),
     ZX_ADD_PYTHON_FUNCTION(level_spawn_at_thing),
     ZX_ADD_PYTHON_FUNCTION(level_spawn_at_thing_if_possible),
@@ -1539,27 +1574,8 @@ static PyMethodDef python_c_METHODS[] = {
     ZX_ADD_PYTHON_FUNCTION(level_unused_flag30_at),
     ZX_ADD_PYTHON_FUNCTION(level_unused_flag31_at),
     ZX_ADD_PYTHON_FUNCTION(level_unused_flag32_at),
-    ZX_ADD_PYTHON_FUNCTION(level_is_buff_at),
-    ZX_ADD_PYTHON_FUNCTION(level_is_debuff_at),
-    ZX_ADD_PYTHON_FUNCTION(level_attack_undead_at),
-    ZX_ADD_PYTHON_FUNCTION(level_is_blood_eater_at),
-    ZX_ADD_PYTHON_FUNCTION(level_attack_blood_at),
-    ZX_ADD_PYTHON_FUNCTION(level_environ_hates_poison_at),
-    ZX_ADD_PYTHON_FUNCTION(level_environ_hates_fire_at),
     ZX_ADD_PYTHON_FUNCTION(level_unused_flag3_at),
-    ZX_ADD_PYTHON_FUNCTION(level_environ_hates_water_at),
-    ZX_ADD_PYTHON_FUNCTION(level_environ_hates_acid_at),
-    ZX_ADD_PYTHON_FUNCTION(level_ai_is_able_to_detect_secret_doors_when_close_at),
-    ZX_ADD_PYTHON_FUNCTION(level_ai_is_able_to_break_down_doors_at),
-    ZX_ADD_PYTHON_FUNCTION(level_ai_is_able_to_break_out_of_webs_at),
-    ZX_ADD_PYTHON_FUNCTION(level_ai_is_able_to_break_out_of_webs_at),
-    ZX_ADD_PYTHON_FUNCTION(level_ai_is_able_to_open_doors_at),
-    ZX_ADD_PYTHON_FUNCTION(level_ai_is_exit_finder_at),
-    ZX_ADD_PYTHON_FUNCTION(level_ai_is_level_explorer_at),
     ZX_ADD_PYTHON_FUNCTION(level_unused_flag4_at),
-    ZX_ADD_PYTHON_FUNCTION(level_ai_is_able_to_learn_skills_at),
-    ZX_ADD_PYTHON_FUNCTION(level_ai_is_able_to_enchant_weapons_at),
-    ZX_ADD_PYTHON_FUNCTION(level_ai_is_able_to_attack_generators_at),
     ZX_ADD_PYTHON_FUNCTION(level_unused_flag5_at),
     ZX_ADD_PYTHON_FUNCTION(level_unused_flag6_at),
     ZX_ADD_PYTHON_FUNCTION(level_unused_flag7_at),
@@ -1567,17 +1583,49 @@ static PyMethodDef python_c_METHODS[] = {
     ZX_ADD_PYTHON_FUNCTION(level_unused_flag9_at),
     ZX_ADD_PYTHON_FUNCTION(non_pcg_randint),
     ZX_ADD_PYTHON_FUNCTION(pcg_randint),
+    ZX_ADD_PYTHON_FUNCTION(thing_ai_is_able_to_attack_generators),
+    ZX_ADD_PYTHON_FUNCTION(thing_ai_is_able_to_break_down_doors),
+    ZX_ADD_PYTHON_FUNCTION(thing_ai_is_able_to_break_out_of_webs),
+    ZX_ADD_PYTHON_FUNCTION(thing_ai_is_able_to_collect_keys),
+    ZX_ADD_PYTHON_FUNCTION(thing_ai_is_able_to_detect_secret_doors_when_close),
+    ZX_ADD_PYTHON_FUNCTION(thing_ai_is_able_to_enchant_weapons),
+    ZX_ADD_PYTHON_FUNCTION(thing_ai_is_able_to_jump),
+    ZX_ADD_PYTHON_FUNCTION(thing_ai_is_able_to_jump_distance),
+    ZX_ADD_PYTHON_FUNCTION(thing_ai_is_able_to_jump_on_low_hp_chance_d1000),
+    ZX_ADD_PYTHON_FUNCTION(thing_ai_is_able_to_learn_skills),
+    ZX_ADD_PYTHON_FUNCTION(thing_ai_is_able_to_open_doors),
+    ZX_ADD_PYTHON_FUNCTION(thing_ai_is_able_to_see_through_doors),
+    ZX_ADD_PYTHON_FUNCTION(thing_ai_is_able_to_walk_through_walls),
+    ZX_ADD_PYTHON_FUNCTION(thing_ai_is_exit_finder),
+    ZX_ADD_PYTHON_FUNCTION(thing_ai_is_item_collector),
+    ZX_ADD_PYTHON_FUNCTION(thing_ai_is_level_explorer),
+    ZX_ADD_PYTHON_FUNCTION(thing_ai_random_jump_chance_d1000),
     ZX_ADD_PYTHON_FUNCTION(thing_ai_resent_count),
+    ZX_ADD_PYTHON_FUNCTION(thing_ai_wanderer),
+    ZX_ADD_PYTHON_FUNCTION(thing_attack_blood),
+    ZX_ADD_PYTHON_FUNCTION(thing_attack_undead),
     ZX_ADD_PYTHON_FUNCTION(thing_decr_charge_count),
     ZX_ADD_PYTHON_FUNCTION(thing_decr_current_damage),
     ZX_ADD_PYTHON_FUNCTION(thing_decr_enchant),
     ZX_ADD_PYTHON_FUNCTION(thing_decr_enchant_max),
     ZX_ADD_PYTHON_FUNCTION(thing_decr_health),
     ZX_ADD_PYTHON_FUNCTION(thing_decr_health_max),
+    ZX_ADD_PYTHON_FUNCTION(thing_decr_poison),
     ZX_ADD_PYTHON_FUNCTION(thing_decr_stamina),
     ZX_ADD_PYTHON_FUNCTION(thing_decr_stamina_max),
+    ZX_ADD_PYTHON_FUNCTION(thing_defeated),
+    ZX_ADD_PYTHON_FUNCTION(thing_defeated_by),
     ZX_ADD_PYTHON_FUNCTION(thing_enchant_level),
     ZX_ADD_PYTHON_FUNCTION(thing_enchant_max),
+    ZX_ADD_PYTHON_FUNCTION(thing_environ_hates_acid),
+    ZX_ADD_PYTHON_FUNCTION(thing_environ_hates_fire),
+    ZX_ADD_PYTHON_FUNCTION(thing_environ_hates_poison),
+    ZX_ADD_PYTHON_FUNCTION(thing_environ_hates_water),
+    ZX_ADD_PYTHON_FUNCTION(thing_environ_loves_acid),
+    ZX_ADD_PYTHON_FUNCTION(thing_environ_loves_fire),
+    ZX_ADD_PYTHON_FUNCTION(thing_environ_loves_poison),
+    ZX_ADD_PYTHON_FUNCTION(thing_environ_loves_spiderwebs),
+    ZX_ADD_PYTHON_FUNCTION(thing_environ_loves_water),
     ZX_ADD_PYTHON_FUNCTION(thing_fire_at),
     ZX_ADD_PYTHON_FUNCTION(thing_get_charge_count),
     ZX_ADD_PYTHON_FUNCTION(thing_get_coords),
@@ -1595,6 +1643,7 @@ static PyMethodDef python_c_METHODS[] = {
     ZX_ADD_PYTHON_FUNCTION(thing_get_immediate_spawned_owner_id),
     ZX_ADD_PYTHON_FUNCTION(thing_get_initial_charge_count),
     ZX_ADD_PYTHON_FUNCTION(thing_get_name),
+    ZX_ADD_PYTHON_FUNCTION(thing_get_poison),
     ZX_ADD_PYTHON_FUNCTION(thing_get_stamina),
     ZX_ADD_PYTHON_FUNCTION(thing_get_stamina_max),
     ZX_ADD_PYTHON_FUNCTION(thing_get_top_owner_id),
@@ -1610,15 +1659,13 @@ static PyMethodDef python_c_METHODS[] = {
     ZX_ADD_PYTHON_FUNCTION(thing_incr_enchant_max),
     ZX_ADD_PYTHON_FUNCTION(thing_incr_health),
     ZX_ADD_PYTHON_FUNCTION(thing_incr_health_max),
+    ZX_ADD_PYTHON_FUNCTION(thing_incr_poison),
     ZX_ADD_PYTHON_FUNCTION(thing_incr_stamina),
     ZX_ADD_PYTHON_FUNCTION(thing_incr_stamina_max),
     ZX_ADD_PYTHON_FUNCTION(thing_is_able_to_change_levels),
     ZX_ADD_PYTHON_FUNCTION(thing_is_able_to_fall),
-    ZX_ADD_PYTHON_FUNCTION(thing_ai_is_able_to_see_through_doors),
-    ZX_ADD_PYTHON_FUNCTION(thing_ai_is_able_to_walk_through_walls),
+    ZX_ADD_PYTHON_FUNCTION(thing_is_able_to_tire),
     ZX_ADD_PYTHON_FUNCTION(thing_is_acid),
-    ZX_ADD_PYTHON_FUNCTION(thing_environ_loves_acid),
-    ZX_ADD_PYTHON_FUNCTION(thing_ai_wanderer),
     ZX_ADD_PYTHON_FUNCTION(thing_is_alive_monst),
     ZX_ADD_PYTHON_FUNCTION(thing_is_alive_on_end_of_anim),
     ZX_ADD_PYTHON_FUNCTION(thing_is_always_hit),
@@ -1634,11 +1681,13 @@ static PyMethodDef python_c_METHODS[] = {
     ZX_ADD_PYTHON_FUNCTION(thing_is_barrel),
     ZX_ADD_PYTHON_FUNCTION(thing_is_bleeder),
     ZX_ADD_PYTHON_FUNCTION(thing_is_blood),
+    ZX_ADD_PYTHON_FUNCTION(thing_is_blood_eater),
     ZX_ADD_PYTHON_FUNCTION(thing_is_blood_splatter),
     ZX_ADD_PYTHON_FUNCTION(thing_is_bloodied),
     ZX_ADD_PYTHON_FUNCTION(thing_is_bones),
     ZX_ADD_PYTHON_FUNCTION(thing_is_brazier),
     ZX_ADD_PYTHON_FUNCTION(thing_is_bridge),
+    ZX_ADD_PYTHON_FUNCTION(thing_is_buff),
     ZX_ADD_PYTHON_FUNCTION(thing_is_burnable),
     ZX_ADD_PYTHON_FUNCTION(thing_is_carrier_of_treasure_class_a),
     ZX_ADD_PYTHON_FUNCTION(thing_is_carrier_of_treasure_class_b),
@@ -1658,15 +1707,19 @@ static PyMethodDef python_c_METHODS[] = {
     ZX_ADD_PYTHON_FUNCTION(thing_is_cursor_can_hover_over),
     ZX_ADD_PYTHON_FUNCTION(thing_is_cursor_can_hover_over_x2_click),
     ZX_ADD_PYTHON_FUNCTION(thing_is_cursor_path),
+    ZX_ADD_PYTHON_FUNCTION(thing_is_cursor_path_hazard_for_player),
     ZX_ADD_PYTHON_FUNCTION(thing_is_dead_on_end_of_anim),
     ZX_ADD_PYTHON_FUNCTION(thing_is_dead_or_dying),
     ZX_ADD_PYTHON_FUNCTION(thing_is_dead_or_dying_on_shove),
+    ZX_ADD_PYTHON_FUNCTION(thing_is_debuff),
     ZX_ADD_PYTHON_FUNCTION(thing_is_debug_path),
     ZX_ADD_PYTHON_FUNCTION(thing_is_debug_type),
     ZX_ADD_PYTHON_FUNCTION(thing_is_deep_water),
     ZX_ADD_PYTHON_FUNCTION(thing_is_descend_dungeon),
     ZX_ADD_PYTHON_FUNCTION(thing_is_descend_sewer),
     ZX_ADD_PYTHON_FUNCTION(thing_is_described_when_hovering_over),
+    ZX_ADD_PYTHON_FUNCTION(thing_is_destroyed_on_hit_or_miss),
+    ZX_ADD_PYTHON_FUNCTION(thing_is_destroyed_on_hitting),
     ZX_ADD_PYTHON_FUNCTION(thing_is_dir_bl),
     ZX_ADD_PYTHON_FUNCTION(thing_is_dir_br),
     ZX_ADD_PYTHON_FUNCTION(thing_is_dir_down),
@@ -1687,7 +1740,6 @@ static PyMethodDef python_c_METHODS[] = {
     ZX_ADD_PYTHON_FUNCTION(thing_is_ethereal),
     ZX_ADD_PYTHON_FUNCTION(thing_is_ethereal_minion_generator),
     ZX_ADD_PYTHON_FUNCTION(thing_is_explosion),
-    ZX_ADD_PYTHON_FUNCTION(thing_is_cursor_path_hazard_for_player),
     ZX_ADD_PYTHON_FUNCTION(thing_is_fearless),
     ZX_ADD_PYTHON_FUNCTION(thing_is_fire),
     ZX_ADD_PYTHON_FUNCTION(thing_is_floating),
@@ -1708,7 +1760,6 @@ static PyMethodDef python_c_METHODS[] = {
     ZX_ADD_PYTHON_FUNCTION(thing_is_interesting),
     ZX_ADD_PYTHON_FUNCTION(thing_is_item),
     ZX_ADD_PYTHON_FUNCTION(thing_is_item_carrier),
-    ZX_ADD_PYTHON_FUNCTION(thing_ai_is_item_collector),
     ZX_ADD_PYTHON_FUNCTION(thing_is_item_eater),
     ZX_ADD_PYTHON_FUNCTION(thing_is_item_organic),
     ZX_ADD_PYTHON_FUNCTION(thing_is_jelly),
@@ -1716,19 +1767,11 @@ static PyMethodDef python_c_METHODS[] = {
     ZX_ADD_PYTHON_FUNCTION(thing_is_jelly_baby_eater),
     ZX_ADD_PYTHON_FUNCTION(thing_is_jelly_eater),
     ZX_ADD_PYTHON_FUNCTION(thing_is_jelly_parent),
-    ZX_ADD_PYTHON_FUNCTION(thing_ai_is_able_to_jump),
-    ZX_ADD_PYTHON_FUNCTION(thing_ai_random_jump_chance_d1000),
-    ZX_ADD_PYTHON_FUNCTION(thing_ai_is_able_to_jump_distance),
-    ZX_ADD_PYTHON_FUNCTION(thing_ai_is_able_to_jump_on_low_hp_chance_d1000),
     ZX_ADD_PYTHON_FUNCTION(thing_is_key),
-    ZX_ADD_PYTHON_FUNCTION(thing_ai_is_able_to_collect_keys),
-    ZX_ADD_PYTHON_FUNCTION(thing_is_destroyed_on_hit_or_miss),
-    ZX_ADD_PYTHON_FUNCTION(thing_is_destroyed_on_hitting),
     ZX_ADD_PYTHON_FUNCTION(thing_is_laser),
     ZX_ADD_PYTHON_FUNCTION(thing_is_lava),
     ZX_ADD_PYTHON_FUNCTION(thing_is_light_blocker),
     ZX_ADD_PYTHON_FUNCTION(thing_is_living),
-    ZX_ADD_PYTHON_FUNCTION(thing_is_loggable),
     ZX_ADD_PYTHON_FUNCTION(thing_is_loggable),
     ZX_ADD_PYTHON_FUNCTION(thing_is_meat),
     ZX_ADD_PYTHON_FUNCTION(thing_is_meat_eater),
@@ -1764,7 +1807,6 @@ static PyMethodDef python_c_METHODS[] = {
     ZX_ADD_PYTHON_FUNCTION(thing_is_soft_body),
     ZX_ADD_PYTHON_FUNCTION(thing_is_spawner),
     ZX_ADD_PYTHON_FUNCTION(thing_is_spiderweb),
-    ZX_ADD_PYTHON_FUNCTION(thing_is_able_to_tire),
     ZX_ADD_PYTHON_FUNCTION(thing_is_steal_item_chance_d1000),
     ZX_ADD_PYTHON_FUNCTION(thing_is_sticky),
     ZX_ADD_PYTHON_FUNCTION(thing_is_stone),
@@ -1790,15 +1832,9 @@ static PyMethodDef python_c_METHODS[] = {
     ZX_ADD_PYTHON_FUNCTION(thing_is_wand),
     ZX_ADD_PYTHON_FUNCTION(thing_is_wand_eater),
     ZX_ADD_PYTHON_FUNCTION(thing_is_water),
-    ZX_ADD_PYTHON_FUNCTION(thing_environ_loves_water),
     ZX_ADD_PYTHON_FUNCTION(thing_is_weapon),
     ZX_ADD_PYTHON_FUNCTION(thing_is_weapon_wielder),
     ZX_ADD_PYTHON_FUNCTION(thing_is_wooden),
-    ZX_ADD_PYTHON_FUNCTION(thing_defeated),
-    ZX_ADD_PYTHON_FUNCTION(thing_defeated_by),
-    ZX_ADD_PYTHON_FUNCTION(thing_environ_loves_fire),
-    ZX_ADD_PYTHON_FUNCTION(thing_environ_loves_poison),
-    ZX_ADD_PYTHON_FUNCTION(thing_environ_loves_spiderwebs),
     ZX_ADD_PYTHON_FUNCTION(thing_msg),
     ZX_ADD_PYTHON_FUNCTION(thing_possible_to_attack),
     ZX_ADD_PYTHON_FUNCTION(thing_set_current_damage),
@@ -1806,6 +1842,7 @@ static PyMethodDef python_c_METHODS[] = {
     ZX_ADD_PYTHON_FUNCTION(thing_set_enchant_max),
     ZX_ADD_PYTHON_FUNCTION(thing_set_health),
     ZX_ADD_PYTHON_FUNCTION(thing_set_health_max),
+    ZX_ADD_PYTHON_FUNCTION(thing_set_poison),
     ZX_ADD_PYTHON_FUNCTION(thing_set_stamina),
     ZX_ADD_PYTHON_FUNCTION(thing_set_stamina_max),
     ZX_ADD_PYTHON_FUNCTION(thing_skill_activate),
@@ -1836,44 +1873,29 @@ static PyMethodDef python_c_METHODS[] = {
     ZX_ADD_PYTHON_FUNCTION(thing_unused_flag30),
     ZX_ADD_PYTHON_FUNCTION(thing_unused_flag31),
     ZX_ADD_PYTHON_FUNCTION(thing_unused_flag32),
-    ZX_ADD_PYTHON_FUNCTION(thing_is_buff),
-    ZX_ADD_PYTHON_FUNCTION(thing_is_debuff),
-    ZX_ADD_PYTHON_FUNCTION(thing_attack_undead),
-    ZX_ADD_PYTHON_FUNCTION(thing_is_blood_eater),
-    ZX_ADD_PYTHON_FUNCTION(thing_attack_blood),
-    ZX_ADD_PYTHON_FUNCTION(thing_environ_hates_poison),
-    ZX_ADD_PYTHON_FUNCTION(thing_environ_hates_fire),
     ZX_ADD_PYTHON_FUNCTION(thing_unused_flag4),
-    ZX_ADD_PYTHON_FUNCTION(thing_environ_hates_water),
-    ZX_ADD_PYTHON_FUNCTION(thing_environ_hates_acid),
-    ZX_ADD_PYTHON_FUNCTION(thing_ai_is_able_to_detect_secret_doors_when_close),
-    ZX_ADD_PYTHON_FUNCTION(thing_ai_is_able_to_break_down_doors),
-    ZX_ADD_PYTHON_FUNCTION(thing_ai_is_able_to_break_out_of_webs),
-    ZX_ADD_PYTHON_FUNCTION(thing_ai_is_able_to_break_out_of_webs),
-    ZX_ADD_PYTHON_FUNCTION(thing_ai_is_able_to_open_doors),
-    ZX_ADD_PYTHON_FUNCTION(thing_ai_is_exit_finder),
-    ZX_ADD_PYTHON_FUNCTION(thing_ai_is_level_explorer),
     ZX_ADD_PYTHON_FUNCTION(thing_unused_flag5),
-    ZX_ADD_PYTHON_FUNCTION(thing_ai_is_able_to_learn_skills),
-    ZX_ADD_PYTHON_FUNCTION(thing_ai_is_able_to_enchant_weapons),
-    ZX_ADD_PYTHON_FUNCTION(thing_ai_is_able_to_attack_generators),
     ZX_ADD_PYTHON_FUNCTION(thing_unused_flag6),
     ZX_ADD_PYTHON_FUNCTION(thing_unused_flag7),
     ZX_ADD_PYTHON_FUNCTION(thing_unused_flag8),
     ZX_ADD_PYTHON_FUNCTION(thing_unused_flag9),
     ZX_ADD_PYTHON_TP_FUNCTION(ai_avoid_distance),
-    ZX_ADD_PYTHON_TP_FUNCTION(ai_resent_count),
+    ZX_ADD_PYTHON_TP_FUNCTION(ai_is_able_to_see_through_doors),
+    ZX_ADD_PYTHON_TP_FUNCTION(ai_is_able_to_shove),
+    ZX_ADD_PYTHON_TP_FUNCTION(ai_is_able_to_walk_through_walls),
+    ZX_ADD_PYTHON_TP_FUNCTION(ai_is_item_collector),
     ZX_ADD_PYTHON_TP_FUNCTION(ai_obstacle),
+    ZX_ADD_PYTHON_TP_FUNCTION(ai_resent_count),
     ZX_ADD_PYTHON_TP_FUNCTION(ai_scent_distance),
+    ZX_ADD_PYTHON_TP_FUNCTION(ai_shove_chance_d1000),
+    ZX_ADD_PYTHON_TP_FUNCTION(ai_unprovoked_attack_chance_d1000),
     ZX_ADD_PYTHON_TP_FUNCTION(ai_vision_distance),
+    ZX_ADD_PYTHON_TP_FUNCTION(ai_wanderer),
     ZX_ADD_PYTHON_TP_FUNCTION(attack_eater),
     ZX_ADD_PYTHON_TP_FUNCTION(attack_humanoid),
     ZX_ADD_PYTHON_TP_FUNCTION(attack_living),
     ZX_ADD_PYTHON_TP_FUNCTION(attack_lunge),
     ZX_ADD_PYTHON_TP_FUNCTION(attack_meat),
-    ZX_ADD_PYTHON_TP_FUNCTION(ai_is_able_to_shove),
-    ZX_ADD_PYTHON_TP_FUNCTION(ai_shove_chance_d1000),
-    ZX_ADD_PYTHON_TP_FUNCTION(ai_unprovoked_attack_chance_d1000),
     ZX_ADD_PYTHON_TP_FUNCTION(bl1_tile),
     ZX_ADD_PYTHON_TP_FUNCTION(bl2_tile),
     ZX_ADD_PYTHON_TP_FUNCTION(blast_max_radius),
@@ -1899,15 +1921,20 @@ static PyMethodDef python_c_METHODS[] = {
     ZX_ADD_PYTHON_TP_FUNCTION(collision_radius),
     ZX_ADD_PYTHON_TP_FUNCTION(damage_bite_dice),
     ZX_ADD_PYTHON_TP_FUNCTION(damage_crush_dice),
-    ZX_ADD_PYTHON_TP_FUNCTION(environ_damage_doubled_from_acid),
-    ZX_ADD_PYTHON_TP_FUNCTION(environ_damage_doubled_from_fire),
-    ZX_ADD_PYTHON_TP_FUNCTION(environ_damage_doubled_from_poison),
-    ZX_ADD_PYTHON_TP_FUNCTION(environ_damage_doubled_from_water),
     ZX_ADD_PYTHON_TP_FUNCTION(damage_melee_dice),
     ZX_ADD_PYTHON_TP_FUNCTION(damage_poison_dice),
     ZX_ADD_PYTHON_TP_FUNCTION(damage_swallow_dice),
     ZX_ADD_PYTHON_TP_FUNCTION(enchant_level),
     ZX_ADD_PYTHON_TP_FUNCTION(enchant_max),
+    ZX_ADD_PYTHON_TP_FUNCTION(environ_damage_doubled_from_acid),
+    ZX_ADD_PYTHON_TP_FUNCTION(environ_damage_doubled_from_fire),
+    ZX_ADD_PYTHON_TP_FUNCTION(environ_damage_doubled_from_poison),
+    ZX_ADD_PYTHON_TP_FUNCTION(environ_damage_doubled_from_water),
+    ZX_ADD_PYTHON_TP_FUNCTION(environ_dislikes_acid),
+    ZX_ADD_PYTHON_TP_FUNCTION(environ_dislikes_fire),
+    ZX_ADD_PYTHON_TP_FUNCTION(environ_dislikes_poison),
+    ZX_ADD_PYTHON_TP_FUNCTION(environ_dislikes_water),
+    ZX_ADD_PYTHON_TP_FUNCTION(environ_loves_acid),
     ZX_ADD_PYTHON_TP_FUNCTION(gfx_an_animation_only),
     ZX_ADD_PYTHON_TP_FUNCTION(gfx_anim_attack),
     ZX_ADD_PYTHON_TP_FUNCTION(gfx_animated),
@@ -1933,21 +1960,13 @@ static PyMethodDef python_c_METHODS[] = {
     ZX_ADD_PYTHON_TP_FUNCTION(gfx_water),
     ZX_ADD_PYTHON_TP_FUNCTION(gfx_weapon_carry_anim),
     ZX_ADD_PYTHON_TP_FUNCTION(gold_value_dice),
-    ZX_ADD_PYTHON_TP_FUNCTION(environ_dislikes_acid),
-    ZX_ADD_PYTHON_TP_FUNCTION(environ_dislikes_fire),
-    ZX_ADD_PYTHON_TP_FUNCTION(environ_dislikes_poison),
-    ZX_ADD_PYTHON_TP_FUNCTION(environ_dislikes_water),
     ZX_ADD_PYTHON_TP_FUNCTION(health_hunger_pct),
     ZX_ADD_PYTHON_TP_FUNCTION(health_initial_dice),
     ZX_ADD_PYTHON_TP_FUNCTION(health_starving_pct),
     ZX_ADD_PYTHON_TP_FUNCTION(is_able_to_change_levels),
     ZX_ADD_PYTHON_TP_FUNCTION(is_able_to_fall),
     ZX_ADD_PYTHON_TP_FUNCTION(is_able_to_fire_at),
-    ZX_ADD_PYTHON_TP_FUNCTION(ai_is_able_to_see_through_doors),
-    ZX_ADD_PYTHON_TP_FUNCTION(ai_is_able_to_walk_through_walls),
     ZX_ADD_PYTHON_TP_FUNCTION(is_acid),
-    ZX_ADD_PYTHON_TP_FUNCTION(environ_loves_acid),
-    ZX_ADD_PYTHON_TP_FUNCTION(ai_wanderer),
     ZX_ADD_PYTHON_TP_FUNCTION(is_alive_on_end_of_anim),
     ZX_ADD_PYTHON_TP_FUNCTION(is_always_hit),
     ZX_ADD_PYTHON_TP_FUNCTION(is_ascend_dungeon),
@@ -1984,6 +2003,7 @@ static PyMethodDef python_c_METHODS[] = {
     ZX_ADD_PYTHON_TP_FUNCTION(is_cursor_can_hover_over),
     ZX_ADD_PYTHON_TP_FUNCTION(is_cursor_can_hover_over_x2_click),
     ZX_ADD_PYTHON_TP_FUNCTION(is_cursor_path),
+    ZX_ADD_PYTHON_TP_FUNCTION(is_cursor_path_hazard_for_player),
     ZX_ADD_PYTHON_TP_FUNCTION(is_dead_on_end_of_anim),
     ZX_ADD_PYTHON_TP_FUNCTION(is_dead_on_shove),
     ZX_ADD_PYTHON_TP_FUNCTION(is_debug_path),
@@ -2003,7 +2023,6 @@ static PyMethodDef python_c_METHODS[] = {
     ZX_ADD_PYTHON_TP_FUNCTION(is_ethereal),
     ZX_ADD_PYTHON_TP_FUNCTION(is_ethereal_minion_generator),
     ZX_ADD_PYTHON_TP_FUNCTION(is_explosion),
-    ZX_ADD_PYTHON_TP_FUNCTION(is_cursor_path_hazard_for_player),
     ZX_ADD_PYTHON_TP_FUNCTION(is_fearless),
     ZX_ADD_PYTHON_TP_FUNCTION(is_fire),
     ZX_ADD_PYTHON_TP_FUNCTION(is_floating),
@@ -2024,7 +2043,6 @@ static PyMethodDef python_c_METHODS[] = {
     ZX_ADD_PYTHON_TP_FUNCTION(is_interesting),
     ZX_ADD_PYTHON_TP_FUNCTION(is_item),
     ZX_ADD_PYTHON_TP_FUNCTION(is_item_carrier),
-    ZX_ADD_PYTHON_TP_FUNCTION(ai_is_item_collector),
     ZX_ADD_PYTHON_TP_FUNCTION(is_item_eater),
     ZX_ADD_PYTHON_TP_FUNCTION(is_item_organic),
     ZX_ADD_PYTHON_TP_FUNCTION(is_jelly),

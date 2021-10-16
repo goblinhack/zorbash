@@ -85,16 +85,11 @@ bool Thing::debuff_remove(Thingp what)
     }
   }
 
-  dbg("Update bag with drop of: %s", what->to_string().c_str());
-  bag_remove(what);
-  while (bag_compress()) {
-  }
-
   what->remove_owner();
   monst_infop->debuffs.remove(what->id);
   game->request_remake_debuffbox = true;
 
-  dbg("Dropped %s into the ether", what->to_string().c_str());
+  dbg("Removed %s", what->to_string().c_str());
 
   return true;
 }
@@ -124,16 +119,54 @@ bool Thing::debuff_use(Thingp what)
   return true;
 }
 
-bool Thing::add_debuff(Tpp what)
+bool Thing::debuff_add(Tpp what)
 {
-  TRACE_AND_INDENT();
+  if (! monst_infop) {
+    return false;
+  }
+  for (const auto &item : monst_infop->debuffs) {
+    auto t = level->thing_find(item.id);
+    if (t && (t->tp() == what)) {
+      return true;
+    }
+  }
+
   auto t = level->thing_new(what, mid_at);
   if (! t) {
     return false;
   }
 
-  TOPCON("%s", t->text_debuff().c_str());
+  TRACE_AND_INDENT();
+  dbg("Add debuff: %s", t->to_string().c_str());
+  TRACE_AND_INDENT();
   debuff_add(t);
 
   return true;
+}
+
+void Thing::debuff_tick(void)
+{
+  if (! monst_infop) {
+    return;
+  }
+  if (monst_infop->debuffs.empty()) {
+    return;
+  }
+
+  TRACE_AND_INDENT();
+  dbg("Debuff tick");
+  TRACE_AND_INDENT();
+
+  for (const auto &item : monst_infop->debuffs) {
+    auto t = level->thing_find(item.id);
+    if (t) {
+      dbg("Debuff (%s)", t->to_string().c_str());
+      if (! t->on_tick()) {
+        return;
+      }
+      if (is_dead) {
+        return;
+      }
+    }
+  }
 }

@@ -40,7 +40,7 @@ static void wid_skills_slot(int slot)
   auto player = game->level->player;
   if (player) {
     auto tpp = skills[ slot ];
-    player->add_skill(tpp);
+    player->skill_add(tpp);
     game->tick_begin("learned a skill");
   }
 
