@@ -23,6 +23,10 @@ def on_use(owner, item, target, x, y):
         did_something = True
         zx.thing_set_stamina(owner, new_stamina)
 
+    if zx.thing_get_poison(owner) != 0:
+        did_something = True
+        zx.thing_set_poison(owner, 0)
+
     if did_something:
         zx.level_spawn_using_items_radius_range(owner, item, target, "potion_health_effect")
         if zx.if_matches(owner, "is_player"):

@@ -493,7 +493,8 @@ bool Level::create_dungeon(point3d at, int seed)
               t->carry(W);
             }
 
-            if (0) {
+            if (0)
+            {
               auto s = thing_new("buff_poison_resistant", point(x, y));
               t->buff_add(s);
             }
