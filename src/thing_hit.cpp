@@ -517,7 +517,12 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     on_hit(hitter, real_hitter, crit, bite, damage);
   }
 
-  monst_aip->recently_hit_by[ real_hitter->id ] = true;
+  //
+  // Keep track of who hit me to avoid multiple hits per tick
+  //
+  if (monst_aip) {
+    monst_aip->recently_hit_by[ real_hitter->id ] = true;
+  }
 
   return true;
 }
