@@ -1,8 +1,12 @@
 
-Todo
+Bugs
 ----
-- change THING_TICK_DURATION_TOO_LONG back to 10
-- add poison debuff / rusty sword has poisoning chance?
+- click on bag does not always work
+- need right click text for options / equip
+- click on item and its shortcut vanishes
+
+Next todo
+---------
 - add poisoned notify on screen from spider?
 - antipoison potion
 - chocolote frog cures poison?
