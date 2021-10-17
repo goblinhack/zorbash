@@ -311,6 +311,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
       game->request_remake_inventory = true;
       DBG3("Pressed inventory key; change state");
       game->change_state(Game::STATE_MOVING_ITEMS);
+      BOTCON("Left click to move items. Right click to equip.");
       return true;
     }
 

@@ -383,6 +383,9 @@ static void wid_bag_item_mouse_over_b(Widp w, int32_t relx, int32_t rely, int32_
   }
 
   game->wid_thing_info_clear_popup();
+  if (game->level) {
+    game->wid_thing_info_push_popup(game->level->player);
+  }
   game->wid_thing_info_push_popup(t);
 }
 

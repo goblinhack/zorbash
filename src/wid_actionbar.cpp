@@ -312,7 +312,12 @@ static uint8_t wid_actionbar_inventory(Widp w, int32_t x, int32_t y, uint32_t bu
 static void wid_actionbar_inventory_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {
   TRACE_AND_INDENT();
-  BOTCON("Select this to see what you are carrying.");
+
+  if (game->state == Game::STATE_MOVING_ITEMS) {
+    BOTCON("Left click to move items. Right click to equip.");
+  } else {
+    BOTCON("Select this to see what you are carrying.");
+  }
 }
 
 static void wid_actionbar_inventory_over_e(Widp w)
