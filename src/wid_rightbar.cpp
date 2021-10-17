@@ -268,7 +268,7 @@ static bool wid_rightbar_create(void)
     wid_set_text(w, s);
     wid_set_text_rhs(w, true);
   }
-  y_at += 3;
+  y_at += 2;
 
   ///////////////////////////////////////////////////////////////////////////
   // ATT DEF STR
@@ -311,7 +311,7 @@ static bool wid_rightbar_create(void)
     wid_set_text(w, tmp);
     wid_set_text_lhs(w, true);
   }
-  y_at += 4;
+  y_at += 3;
 
   //
   // Inventory items
