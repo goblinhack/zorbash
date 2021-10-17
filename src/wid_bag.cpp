@@ -96,18 +96,12 @@ static void wid_bag_add_items(Widp wid_bag_container, Thingp bag)
     //
     auto slot = game->level->inventory_get_slot(t);
     if (slot != -1) {
-      auto w = wid_new_square_button(wid_bag_container, "wid_bag button" + t->to_string());
-      wid_set_pos(w, tl, tl);
-      wid_set_on_mouse_over_b(w, wid_bag_item_mouse_over_b);
-      wid_set_on_mouse_over_e(w, wid_bag_item_mouse_over_e);
-      wid_set_on_key_down(w, wid_bag_item_key_down);
-      wid_set_thing_id_context(w, item.id);
-      wid_set_thing_id2_context(w, bag->id);
-      wid_set_on_mouse_down(w, wid_bag_item_mouse_down);
+      Widp c = wid_new_square_button(w, "wid_bag button" + t->to_string());
+      wid_set_pos(c, point(0, 0), point(0, 0));
 
-      wid_set_fg_tilename(w, "key_" + std::to_string(slot + 1));
-      wid_set_text_lhs(w, true);
-      wid_set_text_top(w, true);
+      wid_set_fg_tilename(c, "key_" + std::to_string(slot + 1));
+      wid_set_text_lhs(c, true);
+      wid_set_text_top(c, true);
     }
   }
 
@@ -260,7 +254,7 @@ uint8_t wid_in_transit_item_drop(void)
 static uint8_t wid_bag_item_mouse_down(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
-  DBG3("Mouse down, pickup up an item and make it in transit");
+  DBG3("Mouse down, item select");
   TRACE_AND_INDENT();
   if (game->in_transit_item) {
     return false;
@@ -375,6 +369,10 @@ bool Game::wid_bag_move_item(Widp w, Thingp t)
 static void wid_bag_item_mouse_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {
   if (game->in_transit_item) {
+    return;
+  }
+
+  if (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) {
     return;
   }
 
