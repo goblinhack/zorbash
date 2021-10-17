@@ -319,7 +319,8 @@ private:
   int         _is_spiderweb {};
   int         _is_able_to_tire {};
   int         _is_steal_item_chance_d1000 {};
-  int         _is_engulf_chance_d1000 {};
+  int         _attack_engulf_chance_d1000 {};
+  int         _attack_poison_chance_d1000 {};
   int         _is_sticky {};
   int         _is_sword {};
   int         _is_target_auto_select {};
@@ -795,7 +796,8 @@ public:
   int                is_spiderweb(void) const;
   int                is_able_to_tire(void) const;
   int                is_steal_item_chance_d1000(void) const;
-  int                is_engulf_chance_d1000(void) const;
+  int                attack_engulf_chance_d1000(void) const;
+  int                attack_poison_chance_d1000(void) const;
   int                is_sticky(void) const;
   int                is_sword(void) const;
   int                is_target_auto_select(void) const;
@@ -1124,7 +1126,8 @@ public:
   void               set_is_spiderweb(int);
   void               set_is_able_to_tire(int);
   void               set_is_steal_item_chance_d1000(int);
-  void               set_is_engulf_chance_d1000(int);
+  void               set_attack_engulf_chance_d1000(int);
+  void               set_attack_poison_chance_d1000(int);
   void               set_is_sticky(int);
   void               set_is_sword(int);
   void               set_is_target_auto_select(int);

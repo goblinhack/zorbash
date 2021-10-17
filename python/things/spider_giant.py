@@ -52,6 +52,7 @@ def tp_init(name, text_name):
     mytp.set_attack_living(False)
     mytp.set_attack_lunge(True)
     mytp.set_attack_meat(False)
+    mytp.set_attack_poison_chance_d1000(900)
     mytp.set_attack_undead(False)
     mytp.set_collision_attack(True)
     mytp.set_collision_box(False)

@@ -274,7 +274,10 @@ bool Thing::matches(const std::string &what) const
   if (is_enchantstone() && (what == "is_enchantstone")) {
     return true;
   }
-  if (is_engulf_chance_d1000() && (what == "is_engulf_chance_d1000")) {
+  if (attack_engulf_chance_d1000() && (what == "attack_engulf_chance_d1000")) {
+    return true;
+  }
+  if (attack_poison_chance_d1000() && (what == "attack_poison_chance_d1000")) {
     return true;
   }
   if (is_engulfer() && (what == "is_engulfer")) {
@@ -1043,8 +1046,11 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_enchantstone") {
     return &Thing::is_enchantstone;
   }
-  if (what == "is_engulf_chance_d1000") {
-    return &Thing::is_engulf_chance_d1000;
+  if (what == "attack_engulf_chance_d1000") {
+    return &Thing::attack_engulf_chance_d1000;
+  }
+  if (what == "attack_poison_chance_d1000") {
+    return &Thing::attack_poison_chance_d1000;
   }
   if (what == "is_engulfer") {
     return &Thing::is_engulfer;

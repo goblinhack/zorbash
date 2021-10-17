@@ -270,7 +270,8 @@ int                Tp::is_droppable(void) const { return _is_droppable; }
 int                Tp::is_dry_grass(void) const { return _is_dry_grass; }
 int                Tp::is_enchantable(void) const { return _is_enchantable; }
 int                Tp::is_enchantstone(void) const { return _is_enchantstone; }
-int                Tp::is_engulf_chance_d1000(void) const { return _is_engulf_chance_d1000; }
+int                Tp::attack_engulf_chance_d1000(void) const { return _attack_engulf_chance_d1000; }
+int                Tp::attack_poison_chance_d1000(void) const { return _attack_poison_chance_d1000; }
 int                Tp::is_engulfer(void) const { return _is_engulfer; }
 int                Tp::is_ethereal_minion_generator(void) const { return _is_ethereal_minion_generator; }
 int                Tp::is_ethereal(void) const { return _is_ethereal; }
@@ -726,7 +727,8 @@ void Tp::set_is_spawner(int v) { _is_spawner = v; }
 void Tp::set_is_spiderweb(int v) { _is_spiderweb = v; }
 void Tp::set_is_able_to_tire(int v) { _is_able_to_tire = v; }
 void Tp::set_is_steal_item_chance_d1000(int v) { _is_steal_item_chance_d1000 = v; }
-void Tp::set_is_engulf_chance_d1000(int v) { _is_engulf_chance_d1000 = v; }
+void Tp::set_attack_engulf_chance_d1000(int v) { _attack_engulf_chance_d1000 = v; }
+void Tp::set_attack_poison_chance_d1000(int v) { _attack_poison_chance_d1000 = v; }
 void Tp::set_is_sticky(int v) { _is_sticky = v; }
 void Tp::set_is_sword(int v) { _is_sword = v; }
 void Tp::set_is_target_auto_select(int v) { _is_target_auto_select = v; }

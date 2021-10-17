@@ -863,7 +863,8 @@ public:
   int is_dry_grass(void) const;
   int is_enchantable(void) const;
   int is_enchantstone(void) const;
-  int is_engulf_chance_d1000(void) const;
+  int attack_engulf_chance_d1000(void) const;
+  int attack_poison_chance_d1000(void) const;
   int is_engulfer(void) const;
   int is_ethereal(void) const;
   int is_ethereal_minion_generator(void) const;

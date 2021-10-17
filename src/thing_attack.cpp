@@ -476,8 +476,16 @@ bool Thing::attack(Thingp it)
   //
   // We hit. See how much damage.
   //
-  auto damage       = get_damage_melee();
-  auto poison       = get_damage_poison();
+  auto damage = get_damage_melee();
+
+  //
+  // Chance of poison damage?
+  //
+  int poison;
+  if ((int) pcg_random_range(0, 1000) < attack_poison_chance_d1000()) {
+    poison = get_damage_poison();
+  }
+
   auto total_damage = damage + att_mod;
 
   //

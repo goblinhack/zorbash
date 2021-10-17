@@ -1355,10 +1355,15 @@ int Thing::is_steal_item_chance_d1000(void) const
   TRACE_AND_INDENT();
   return (tp()->is_steal_item_chance_d1000());
 }
-int Thing::is_engulf_chance_d1000(void) const
+int Thing::attack_engulf_chance_d1000(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->is_engulf_chance_d1000());
+  return (tp()->attack_engulf_chance_d1000());
+}
+int Thing::attack_poison_chance_d1000(void) const
+{
+  TRACE_AND_INDENT();
+  return (tp()->attack_poison_chance_d1000());
 }
 int Thing::is_sticky(void) const
 {

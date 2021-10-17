@@ -97,6 +97,7 @@ def init_weapon(name, text_name, short_text_name):
     mytp.set_collision_radius(0.40)
     mytp.set_damage_melee_dice("1d6+1")
     mytp.set_damage_poison_dice("1d2+1")
+    mytp.set_attack_poison_chance_d1000(100)
     mytp.set_gfx_animated_can_hflip(True)
     mytp.set_gfx_animated(True)
     mytp.set_gfx_anim_attack("sword_short_rusty_swing")

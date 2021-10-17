@@ -477,7 +477,7 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
   // Allow cleaners to engulf/swallow attack
   //
   if (is_engulfer() && can_eat(it) && (it->mid_at == future_pos)) {
-    if ((int) pcg_random_range(0, 1000) < me_tp->is_engulf_chance_d1000()) {
+    if ((int) pcg_random_range(0, 1000) < me_tp->attack_engulf_chance_d1000()) {
       dbg("No; can engulf");
       return false;
     }
