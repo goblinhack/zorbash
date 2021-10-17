@@ -9,6 +9,7 @@
 #include "my_sdl.h"
 #include "my_sys.h"
 #include "my_thing.h"
+#include "my_traceback.h"
 #include "my_ui.h"
 #include "my_vector_bounds_check.h"
 #include "my_wid_bag.h"

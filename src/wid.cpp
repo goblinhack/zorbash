@@ -6186,16 +6186,6 @@ void wid_tick_all(void)
     game->request_remake_actionbar = false;
   }
 
-  //
-  // Just in case the window cannot be remade, clean up
-  //
-  if (game->state == Game::STATE_MOVING_ITEMS) {
-    if (! game->bag_primary && game->bag_secondary.empty()) {
-      DBG3("Handle end of moving items");
-      game->change_state(Game::STATE_NORMAL);
-    }
-  }
-
   if (game->request_destroy_bags) {
     DBG3("Handle destroy bags request");
     game->request_destroy_bags = false;

@@ -53,6 +53,10 @@ void Level::cursor_move(void)
     return;
   }
 
+  if ((game->state != Game::STATE_NORMAL) && (game->state != Game::STATE_CHOOSING_TARGET)) {
+    return;
+  }
+
   if ((wheel_x != 0) || (wheel_y != 0)) {
     if (wid_find_under_mouse_when_scrolling()) {
       return;
