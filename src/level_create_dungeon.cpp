@@ -387,7 +387,9 @@ bool Level::create_dungeon(point3d at, int seed)
           if (dungeon->is_ascend_dungeon(x, y)) {
             auto t = thing_new("player2", point(x, y));
 
-            t->incr_poison(10);
+            if (0) {
+              t->incr_poison(10);
+            }
 #if 0
             auto w = thing_new("scythe", point(x, y));
             t->carry(w);
