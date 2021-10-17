@@ -3,10 +3,13 @@
 // See the README.md file for license info.
 //
 
+#include "my_random.h"
 #include "my_sys.h"
 #include "my_thing.h"
 #include "my_thing_template.h"
 #include "my_tile.h"
+#include "my_ui.h"
+#include "my_wid_topcon.h"
 
 void Thing::poison_tick(void)
 {
@@ -30,6 +33,19 @@ void Thing::poison_tick(void)
   bool   bite   = false;
   int    poison = old_poison;
   int    damage = 0;
-  is_hit_by(hitter, crit, bite, poison, damage);
+
+  if (poison) {
+    if (pcg_random_range(0, 20) < get_stat_constitution()) {
+      if (is_player()) {
+        TOPCON("You take half damage fron poison due to your sturdy constitution.");
+      }
+      poison /= 2;
+    }
+
+    if (poison) {
+      is_hit_by(hitter, crit, bite, poison, damage);
+    }
+  }
+
   set_poison(old_poison / 2);
 }
