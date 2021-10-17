@@ -623,7 +623,7 @@ bool Thing::use_weapon(bool forced)
       //
       // Python callback
       //
-      on_bite();
+      on_you_bite_attack();
     }
     swung_as = gfx_anim_attack();
   } else {

@@ -25,7 +25,6 @@ void Thing::poison_tick(void)
 
   debuff_add(tp_find("debuff_poisoned"));
 
-  is_hit_by(this, old_poison);
   Thingp hitter = this;
   bool   crit   = false;
   bool   bite   = false;

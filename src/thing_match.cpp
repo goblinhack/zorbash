@@ -388,10 +388,10 @@ bool Thing::matches(const std::string &what) const
   if (is_key() && (what == "is_key")) {
     return true;
   }
-  if (is_destroyed_on_hit_or_miss() && (what == "is_defeated _on_hit_or_miss")) {
+  if (is_destroyed_on_hit_or_miss() && (what == "is_defeated _on_you_are_hit_or_miss")) {
     return true;
   }
-  if (is_destroyed_on_hitting() && (what == "is_defeated _on_hitting")) {
+  if (is_destroyed_on_hitting() && (what == "is_defeated _on_you_are_hitting")) {
     return true;
   }
   if (is_laser() && (what == "is_laser")) {
@@ -1157,10 +1157,10 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_key") {
     return &Thing::is_key;
   }
-  if (what == "is_defeated _on_hit_or_miss") {
+  if (what == "is_defeated _on_you_are_hit_or_miss") {
     return &Thing::is_destroyed_on_hit_or_miss;
   }
-  if (what == "is_defeated _on_hitting") {
+  if (what == "is_defeated _on_you_are_hitting") {
     return &Thing::is_destroyed_on_hitting;
   }
   if (what == "is_laser") {

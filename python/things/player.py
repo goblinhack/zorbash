@@ -4,14 +4,14 @@ import tp
 
 # hitter: arrow / monst
 # real_hitter: who fired the arrow
-def on_hit(me, hitter, real_hitter, x, y, crit, bite, damage):
+def on_you_are_hit(me, hitter, real_hitter, x, y, crit, bite, poison, damage):
     # zx.topcon("player hit damage {}".format(damage))
     if damage <= 5:
         zx.thing_sound_play_channel(me, zx.CHANNEL_IMPACT, "player_hit{}".format(zx.non_pcg_randint(1, 4)))
     else:
         zx.thing_sound_play_channel(me, zx.CHANNEL_IMPACT, "player_hit5")
 
-def on_bite(me, x, y):
+def on_you_bite_attack(me, x, y):
     zx.sound_play("player_punch")
 
 def on_born(me, x, y):
@@ -284,11 +284,11 @@ def tp_init(name, text_name, short_text_name, title):
     mytp.set_long_text_description("Our most noble adventurer or no particular race or gender. Devoid of fear and stout of heart. Likes kittens.")
     mytp.set_monst_size(zx.MONST_SIZE_NORMAL)
     mytp.set_normal_placement_rules(False)
-    mytp.set_on_bite_do("player.on_bite()")
+    mytp.set_on_you_bite_attack_do("player.on_you_bite_attack()")
     mytp.set_on_born_do("player.on_born()")
     mytp.set_on_death_drop_all_items(False)
     mytp.set_on_death_is_open(False)
-    mytp.set_on_hit_do("player.on_hit()")
+    mytp.set_on_you_are_hit_do("player.on_you_are_hit()")
     mytp.set_on_move_do("player.on_move()")
     mytp.set_stamina(100)
     mytp.set_stat_attack(10) # 10, means no bonus

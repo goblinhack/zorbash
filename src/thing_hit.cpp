@@ -17,17 +17,17 @@
 //
 // Python callback upon being hit
 //
-void Thing::on_hit(Thingp hitter,      // an arrow / monst /...
-                   Thingp real_hitter, // who fired the arrow?
-                   bool crit, bool bite, int damage)
+void Thing::on_you_are_hit(Thingp hitter,      // an arrow / monst /...
+                           Thingp real_hitter, // who fired the arrow?
+                           bool crit, bool bite, bool poison, int damage)
 {
   TRACE_AND_INDENT();
-  auto on_hit = tp()->on_hit_do();
-  if (std::empty(on_hit)) {
+  auto on_you_are_hit = tp()->on_you_are_hit_do();
+  if (std::empty(on_you_are_hit)) {
     return;
   }
 
-  auto t = split_tokens(on_hit, '.');
+  auto t = split_tokens(on_you_are_hit, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -36,28 +36,33 @@ void Thing::on_hit(Thingp hitter,      // an arrow / monst /...
       fn = fn.replace(found, 2, "");
     }
 
-    dbg("Call %s.%s(%s, %s, %s, crit=%d, bite=%d, damage=%d)", mod.c_str(), fn.c_str(), to_string().c_str(),
-        hitter->to_string().c_str(), real_hitter->to_string().c_str(), crit, bite, damage);
+    dbg("Call %s.%s(%s, %s, %s, crit=%d, bite=%d, poison=%d damage=%d)", mod.c_str(), fn.c_str(), to_string().c_str(),
+        hitter->to_string().c_str(), real_hitter->to_string().c_str(), crit, bite, poison, damage);
 
+    //
+    // Warning cannot handle negative values here for damage
+    //
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, real_hitter->id.id, (unsigned int) mid_at.x,
-                    (unsigned int) mid_at.y, (unsigned int) crit, (unsigned int) bite, (unsigned int) damage);
+                    (unsigned int) mid_at.y, (unsigned int) crit, (unsigned int) bite, (unsigned int) poison,
+                    (unsigned int) damage);
   } else {
-    ERR("Bad on_hit call [%s] expected mod:function, got %d elems", on_hit.c_str(), (int) on_hit.size());
+    ERR("Bad on_you_are_hit call [%s] expected mod:function, got %d elems", on_you_are_hit.c_str(),
+        (int) on_you_are_hit.size());
   }
 }
 
 //
 // Python callback upon being miss
 //
-void Thing::on_miss(Thingp hitter)
+void Thing::on_you_miss_do(Thingp hitter)
 {
   TRACE_AND_INDENT();
-  auto on_miss = tp()->on_miss_do();
-  if (std::empty(on_miss)) {
+  auto on_you_miss_do = tp()->on_you_miss_do_do();
+  if (std::empty(on_you_miss_do)) {
     return;
   }
 
-  auto t = split_tokens(on_miss, '.');
+  auto t = split_tokens(on_you_miss_do, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -70,19 +75,20 @@ void Thing::on_miss(Thingp hitter)
 
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, (unsigned int) mid_at.x, (unsigned int) mid_at.y);
   } else {
-    ERR("Bad on_miss call [%s] expected mod:function, got %d elems", on_miss.c_str(), (int) on_miss.size());
+    ERR("Bad on_you_miss_do call [%s] expected mod:function, got %d elems", on_you_miss_do.c_str(),
+        (int) on_you_miss_do.size());
   }
 }
 
-void Thing::on_bite(void)
+void Thing::on_you_bite_attack(void)
 {
   TRACE_AND_INDENT();
-  auto on_bite = tp()->on_bite_do();
-  if (std::empty(on_bite)) {
+  auto on_you_bite_attack = tp()->on_you_bite_attack_do();
+  if (std::empty(on_you_bite_attack)) {
     return;
   }
 
-  auto t = split_tokens(on_bite, '.');
+  auto t = split_tokens(on_you_bite_attack, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -95,7 +101,8 @@ void Thing::on_bite(void)
 
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) mid_at.x, (unsigned int) mid_at.y);
   } else {
-    ERR("Bad on_bite call [%s] expected mod:function, got %d elems", on_bite.c_str(), (int) on_bite.size());
+    ERR("Bad on_you_bite_attack call [%s] expected mod:function, got %d elems", on_you_bite_attack.c_str(),
+        (int) on_you_bite_attack.size());
   }
 }
 
@@ -318,7 +325,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
           } else if (hitter->is_wand()) {
             TOPCON("%%fg=red$You zap yourself for %d damage with %s!%%fg=reset$", damage, hitter->text_the().c_str());
           } else if (poison) {
-            TOPCON("%%fg=red$You feel sick for %d damage with %s!%%fg=reset$", damage, hitter->text_the().c_str());
+            TOPCON("%%fg=red$You feel sick for %d damage with %s!%%fg=reset$", poison, hitter->text_the().c_str());
           } else {
             TOPCON("%%fg=red$You hurt yourself for %d damage with %s!%%fg=reset$", damage, hitter->text_the().c_str());
           }
@@ -362,6 +369,8 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
           } else if (hitter->is_wand()) {
             TOPCON("%%fg=yellow$You zap yourself for %d damage with %s!%%fg=reset$", damage,
                    hitter->text_the().c_str());
+          } else if (poison) {
+            TOPCON("%%fg=yellow$You feel sick for %d damage with %s!%%fg=reset$", poison, hitter->text_the().c_str());
           } else {
             TOPCON("%%fg=yellow$You hurt yourself for %d damage with %s!%%fg=reset$", damage,
                    hitter->text_the().c_str());
@@ -471,7 +480,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       //
       // Python callback
       //
-      real_hitter->on_bite();
+      real_hitter->on_you_bite_attack();
     }
   }
 
@@ -514,7 +523,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
   // Python callback
   //
   if (! is_dead) {
-    on_hit(hitter, real_hitter, crit, bite, damage);
+    on_you_are_hit(hitter, real_hitter, crit, bite, poison, damage);
   }
 
   //

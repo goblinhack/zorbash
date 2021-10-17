@@ -2,7 +2,7 @@ import zx
 import tp
 
 
-def on_hit(me, hitter, real_hitter, x, y, crit, bite, damage):
+def on_you_are_hit(me, hitter, real_hitter, x, y, crit, bite, poison, damage):
     zx.sound_play("door_hit{}".format(zx.non_pcg_randint(1, 2)))
 
 def on_death(me, x, y):
@@ -43,7 +43,7 @@ def tp_init(name):
     mytp.set_normal_placement_rules(True)
     mytp.set_on_death_do("door_wood.on_death()")
     mytp.set_on_death_is_open(True)
-    mytp.set_on_hit_do("door_wood.on_hit()")
+    mytp.set_on_you_are_hit_do("door_wood.on_you_are_hit()")
     mytp.set_on_open_do("door_wood.on_open()")
     mytp.set_stat_attack(10) # 10, means no bonus
     mytp.set_stat_constitution(0)

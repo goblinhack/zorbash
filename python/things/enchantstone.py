@@ -8,7 +8,7 @@ def explode(me, x, y):
     zx.level_spawn_at_thing(me, "fire")
     zx.thing_defeated(me, "exploded")
 
-def on_hit(me, hitter, real_hitter, x, y, crit, bite, damage):
+def on_you_are_hit(me, hitter, real_hitter, x, y, crit, bite, poison, damage):
     explode(me, x, y)
 
 def on_fire(me, x, y):
@@ -255,8 +255,8 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_on_death_drop_all_items(False)
     mytp.set_on_death_is_open(False)
     mytp.set_on_fall_do("enchantstone.on_fall()")
-    mytp.set_on_fire_do("enchantstone.on_fire()")
-    mytp.set_on_hit_do("enchantstone.on_hit()")
+    mytp.set_on_you_are_hit_do("enchantstone.on_you_are_hit()")
+    mytp.set_on_you_are_on_fire_do("enchantstone.on_fire()")
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("A glowing enchantstone")
     mytp.set_unused_flag1(False)

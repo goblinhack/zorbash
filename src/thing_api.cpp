@@ -5325,10 +5325,10 @@ const std::string &Thing::on_birth_do(void) const
   TRACE_AND_INDENT();
   return (tp()->on_birth_do());
 }
-const std::string &Thing::on_bite_do(void) const
+const std::string &Thing::on_you_bite_attack_do(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->on_bite_do());
+  return (tp()->on_you_bite_attack_do());
 }
 const std::string &Thing::on_born_do(void) const
 {
@@ -5350,30 +5350,30 @@ const std::string &Thing::on_fall_do(void) const
   TRACE_AND_INDENT();
   return (tp()->on_fall_do());
 }
-const std::string &Thing::on_fire_do(void) const
+const std::string &Thing::on_you_are_on_fire_do(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->on_fire_do());
+  return (tp()->on_you_are_on_fire_do());
 }
 const std::string &Thing::on_firing_at_something_do(void) const
 {
   TRACE_AND_INDENT();
   return (tp()->on_firing_at_something_do());
 }
-const std::string &Thing::on_hit_do(void) const
+const std::string &Thing::on_you_are_hit_do(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->on_hit_do());
+  return (tp()->on_you_are_hit_do());
 }
 const std::string &Thing::on_lifespan_do(void) const
 {
   TRACE_AND_INDENT();
   return (tp()->on_lifespan_do());
 }
-const std::string &Thing::on_miss_do(void) const
+const std::string &Thing::on_you_miss_do_do(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->on_miss_do());
+  return (tp()->on_you_miss_do_do());
 }
 const std::string &Thing::on_move_do(void) const
 {

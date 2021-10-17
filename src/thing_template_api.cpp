@@ -118,16 +118,16 @@ const std::string &Tp::light_color(void) const { return _light_color; }
 const std::string &Tp::long_text_description(void) const { return _long_text_description; }
 const std::string &Tp::name(void) const { return _name; }
 const std::string &Tp::on_birth_do(void) const { return _on_birth_do; }
-const std::string &Tp::on_bite_do(void) const { return _on_bite_do; }
+const std::string &Tp::on_you_bite_attack_do(void) const { return _on_you_bite_attack_do; }
 const std::string &Tp::on_born_do(void) const { return _on_born_do; }
 const std::string &Tp::on_death_do(void) const { return _on_death_do; }
 const std::string &Tp::on_enchant_do(void) const { return _on_enchant_do; }
 const std::string &Tp::on_fall_do(void) const { return _on_fall_do; }
-const std::string &Tp::on_fire_do(void) const { return _on_fire_do; }
+const std::string &Tp::on_you_are_on_fire_do(void) const { return _on_you_are_on_fire_do; }
 const std::string &Tp::on_firing_at_something_do(void) const { return _on_firing_at_something_do; }
-const std::string &Tp::on_hit_do(void) const { return _on_hit_do; }
+const std::string &Tp::on_you_are_hit_do(void) const { return _on_you_are_hit_do; }
 const std::string &Tp::on_lifespan_do(void) const { return _on_lifespan_do; }
-const std::string &Tp::on_miss_do(void) const { return _on_miss_do; }
+const std::string &Tp::on_you_miss_do_do(void) const { return _on_you_miss_do_do; }
 const std::string &Tp::on_move_do(void) const { return _on_move_do; }
 const std::string &Tp::on_open_do(void) const { return _on_open_do; }
 const std::string &Tp::on_tick_do(void) const { return _on_tick_do; }
@@ -769,18 +769,18 @@ void Tp::set_monst_size(int v) { _monst_size = v; }
 void Tp::set_name(const std::string &v) { _name = v; }
 void Tp::set_normal_placement_rules(int v) { _normal_placement_rules = v; }
 void Tp::set_on_birth_do(const std::string &v) { _on_birth_do = v; }
-void Tp::set_on_bite_do(const std::string &v) { _on_bite_do = v; }
+void Tp::set_on_you_bite_attack_do(const std::string &v) { _on_you_bite_attack_do = v; }
 void Tp::set_on_born_do(const std::string &v) { _on_born_do = v; }
 void Tp::set_on_death_do(const std::string &v) { _on_death_do = v; }
 void Tp::set_on_death_drop_all_items(int v) { _on_death_drop_all_items = v; }
 void Tp::set_on_death_is_open(int v) { _on_death_is_open = v; }
 void Tp::set_on_enchant_do(const std::string &v) { _on_enchant_do = v; }
 void Tp::set_on_fall_do(const std::string &v) { _on_fall_do = v; }
-void Tp::set_on_fire_do(const std::string &v) { _on_fire_do = v; }
+void Tp::set_on_you_are_on_fire_do(const std::string &v) { _on_you_are_on_fire_do = v; }
 void Tp::set_on_firing_at_something_do(const std::string &v) { _on_firing_at_something_do = v; }
-void Tp::set_on_hit_do(const std::string &v) { _on_hit_do = v; }
+void Tp::set_on_you_are_hit_do(const std::string &v) { _on_you_are_hit_do = v; }
 void Tp::set_on_lifespan_do(const std::string &v) { _on_lifespan_do = v; }
-void Tp::set_on_miss_do(const std::string &v) { _on_miss_do = v; }
+void Tp::set_on_you_miss_do_do(const std::string &v) { _on_you_miss_do_do = v; }
 void Tp::set_on_move_do(const std::string &v) { _on_move_do = v; }
 void Tp::set_on_open_do(const std::string &v) { _on_open_do = v; }
 void Tp::set_on_tick_do(const std::string &v) { _on_tick_do = v; }

@@ -9,7 +9,7 @@ def explode(me, x, y):
     zx.level_spawn_at_thing(me, "fire")
     zx.thing_defeated(me, "exploded")
 
-def on_hit(me, hitter, real_hitter, x, y, crit, bite, damage):
+def on_you_are_hit(me, hitter, real_hitter, x, y, crit, bite, poison, damage):
     explode(me, x, y)
 
 def on_fire(me, x, y):
@@ -52,8 +52,8 @@ def tp_init(name, text_name):
     mytp.set_normal_placement_rules(True)
     mytp.set_on_death_do("barrel.on_death()")
     mytp.set_on_fall_do("barrel.on_fall()")
-    mytp.set_on_fire_do("barrel.on_fire()")
-    mytp.set_on_hit_do("barrel.on_hit()")
+    mytp.set_on_you_are_on_fire_do("barrel.on_fire()")
+    mytp.set_on_you_are_hit_do("barrel.on_you_are_hit()")
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("A barrel of oil. Why? Don't ask.")
     mytp.set_z_depth(zx.MAP_DEPTH_OBJ)

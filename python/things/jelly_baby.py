@@ -1,7 +1,7 @@
 import zx
 import tp
 
-def on_hit(me, hitter, real_hitter, x, y, crit, bite, damage):
+def on_you_are_hit(me, hitter, real_hitter, x, y, crit, bite, poison, damage):
     if not zx.thing_sound_play_channel(me, zx.CHANNEL_MONST, "squelch"):
         zx.thing_sound_play_channel(me, zx.CHANNEL_MONST_DEATH, "squelch")
 
@@ -258,7 +258,7 @@ def tp_init(name, text_name):
     mytp.set_on_death_do("jelly_baby.on_death()")
     mytp.set_on_death_drop_all_items(False)
     mytp.set_on_death_is_open(False)
-    mytp.set_on_hit_do("jelly_baby.on_hit()")
+    mytp.set_on_you_are_hit_do("jelly_baby.on_you_are_hit()")
     mytp.set_rarity(zx.RARITY_COMMON)
     mytp.set_stat_attack(10) # 10, means no bonus
     mytp.set_stat_constitution(10)

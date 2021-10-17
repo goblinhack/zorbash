@@ -22,7 +22,7 @@
 void Thing::on_fire(void)
 {
   TRACE_AND_INDENT();
-  auto on_fire = tp()->on_fire_do();
+  auto on_fire = tp()->on_you_are_on_fire_do();
   if (std::empty(on_fire)) {
     return;
   }

@@ -172,11 +172,11 @@ class Tp:
     def set_on_use_do(self, value):
         zx.tp_set_on_use_do(self, value)
 
-    def set_on_hit_do(self, value):
-        zx.tp_set_on_hit_do(self, value)
+    def set_on_you_are_hit_do(self, value):
+        zx.tp_set_on_you_are_hit_do(self, value)
 
-    def set_on_miss_do(self, value):
-        zx.tp_set_on_miss_do(self, value)
+    def set_on_you_miss_do_do(self, value):
+        zx.tp_set_on_you_miss_do_do(self, value)
 
     def set_on_fall_do(self, value):
         zx.tp_set_on_fall_do(self, value)
@@ -184,8 +184,8 @@ class Tp:
     def set_on_enchant_do(self, value):
         zx.tp_set_on_enchant_do(self, value)
 
-    def set_on_fire_do(self, value):
-        zx.tp_set_on_fire_do(self, value)
+    def set_on_you_are_on_fire_do(self, value):
+        zx.tp_set_on_you_are_on_fire_do(self, value)
 
     def set_on_firing_at_something_do(self, value):
         zx.tp_set_on_firing_at_something_do(self, value)
@@ -196,8 +196,8 @@ class Tp:
     def set_on_lifespan_do(self, value):
         zx.tp_set_on_lifespan_do(self, value)
 
-    def set_on_bite_do(self, value):
-        zx.tp_set_on_bite_do(self, value)
+    def set_on_you_bite_attack_do(self, value):
+        zx.tp_set_on_you_bite_attack_do(self, value)
 
     def set_on_death_do(self, value):
         zx.tp_set_on_death_do(self, value)

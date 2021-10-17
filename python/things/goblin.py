@@ -1,17 +1,17 @@
 import zx
 import tp
 
-def on_bite(me, x, y):
+def on_you_bite_attack(me, x, y):
     sound = "growl{}".format(zx.non_pcg_randint(1, 10))
     if not zx.thing_sound_play_channel(me, zx.CHANNEL_MONST, sound):
         zx.thing_sound_play_channel(me, zx.CHANNEL_MONST_DEATH, sound)
 
-def on_hit(me, hitter, real_hitter, x, y, crit, bite, damage):
+def on_you_are_hit(me, hitter, real_hitter, x, y, crit, bite, poison, damage):
     sound = "hiss{}".format(zx.non_pcg_randint(1, 10))
     if not zx.thing_sound_play_channel(me, zx.CHANNEL_MONST, sound):
         zx.thing_sound_play_channel(me, zx.CHANNEL_MONST_DEATH, sound)
 
-def on_miss(me, hitter, x, y):
+def on_you_miss_do(me, hitter, x, y):
     sound = "hiss{}".format(zx.non_pcg_randint(1, 10))
     if not zx.thing_sound_play_channel(me, zx.CHANNEL_MONST, sound):
         zx.thing_sound_play_channel(me, zx.CHANNEL_MONST_DEATH, sound)
@@ -267,12 +267,12 @@ def tp_init(name, text_name):
     mytp.set_long_text_description("Goblins are small, green skinned beings that lair in caves, abandoned mines, despoiled dungeons and other dismal settings, otherwise known as their homes. They spend their time defending their natural habitat from invading marauders like you. However, they usually carry some meagre amounts of gold, dug out from the depths with their bare, shaking hands. Best to find out...")
     mytp.set_monst_size(zx.MONST_SIZE_NORMAL)
     mytp.set_normal_placement_rules(True)
-    mytp.set_on_bite_do("goblin.on_bite()")
+    mytp.set_on_you_bite_attack_do("goblin.on_you_bite_attack()")
     mytp.set_on_death_do("goblin.on_death()")
     mytp.set_on_death_drop_all_items(True)
     mytp.set_on_death_is_open(False)
-    mytp.set_on_hit_do("goblin.on_hit()")
-    mytp.set_on_miss_do("goblin.on_miss()")
+    mytp.set_on_you_are_hit_do("goblin.on_you_are_hit()")
+    mytp.set_on_you_miss_do_do("goblin.on_you_miss_do()")
     mytp.set_rarity(zx.RARITY_COMMON)
     mytp.set_stamina(100)
     mytp.set_stat_attack(10) # 10, means no bonus

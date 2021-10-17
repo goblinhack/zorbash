@@ -235,6 +235,30 @@ void py_call_void_fn(const char *module, const char *name, int val1, int val2, i
   py_err();
 }
 
+void py_call_void_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5, int val6,
+                     int val7, int val8, int val9)
+{
+  TRACE_AND_INDENT();
+  auto pmod = py_add_module(module);
+  if (! pmod) {
+    return;
+  }
+
+  PyObject *pFunc = PyObject_GetAttrString(pmod, name);
+  if (PyCallable_Check(pFunc)) {
+    PyObject *pArgs  = Py_BuildValue("(iiiiiiiii)", val1, val2, val3, val4, val5, val6, val7, val8, val9);
+    PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
+    Py_DECREF(pArgs);
+    if (pValue) {
+      Py_DECREF(pValue);
+    }
+  } else {
+    ERR("Cannot call python function %s(%d)", name, val1);
+  }
+
+  py_err();
+}
+
 void py_call_void_fn(const char *module, const char *name, unsigned int val1)
 {
   TRACE_AND_INDENT();
@@ -411,7 +435,32 @@ void py_call_void_fn(const char *module, const char *name, unsigned int val1, un
 
   PyObject *pFunc = PyObject_GetAttrString(pmod, name);
   if (PyCallable_Check(pFunc)) {
-    PyObject *pArgs  = Py_BuildValue("(iiiiiiii)", val1, val2, val3, val4, val5, val6, val7, val8);
+    PyObject *pArgs  = Py_BuildValue("(IIIIIIII)", val1, val2, val3, val4, val5, val6, val7, val8);
+    PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
+    Py_DECREF(pArgs);
+    if (pValue) {
+      Py_DECREF(pValue);
+    }
+  } else {
+    ERR("Cannot call python function %s(%d)", name, val1);
+  }
+
+  py_err();
+}
+
+void py_call_void_fn(const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3,
+                     unsigned int val4, unsigned int val5, unsigned int val6, unsigned int val7, unsigned int val8,
+                     unsigned int val9)
+{
+  TRACE_AND_INDENT();
+  auto pmod = py_add_module(module);
+  if (! pmod) {
+    return;
+  }
+
+  PyObject *pFunc = PyObject_GetAttrString(pmod, name);
+  if (PyCallable_Check(pFunc)) {
+    PyObject *pArgs  = Py_BuildValue("(IIIIIIIII)", val1, val2, val3, val4, val5, val6, val7, val8, val9);
     PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
     Py_DECREF(pArgs);
     if (pValue) {
@@ -2145,19 +2194,19 @@ static PyMethodDef python_c_METHODS[] = {
     ZX_ADD_PYTHON_TP_FUNCTION(normal_placement_rules),
     ZX_ADD_PYTHON_TP_FUNCTION(nutrition_dice),
     ZX_ADD_PYTHON_TP_FUNCTION(on_birth_do),
-    ZX_ADD_PYTHON_TP_FUNCTION(on_bite_do),
+    ZX_ADD_PYTHON_TP_FUNCTION(on_you_bite_attack_do),
     ZX_ADD_PYTHON_TP_FUNCTION(on_born_do),
     ZX_ADD_PYTHON_TP_FUNCTION(on_death_do),
     ZX_ADD_PYTHON_TP_FUNCTION(on_death_drop_all_items),
     ZX_ADD_PYTHON_TP_FUNCTION(on_death_is_open),
     ZX_ADD_PYTHON_TP_FUNCTION(on_enchant_do),
     ZX_ADD_PYTHON_TP_FUNCTION(on_fall_do),
-    ZX_ADD_PYTHON_TP_FUNCTION(on_fire_do),
+    ZX_ADD_PYTHON_TP_FUNCTION(on_you_are_on_fire_do),
     ZX_ADD_PYTHON_TP_FUNCTION(on_firing_at_something_do),
-    ZX_ADD_PYTHON_TP_FUNCTION(on_hit_do),
+    ZX_ADD_PYTHON_TP_FUNCTION(on_you_are_hit_do),
     ZX_ADD_PYTHON_TP_FUNCTION(on_idle_dice),
     ZX_ADD_PYTHON_TP_FUNCTION(on_lifespan_do),
-    ZX_ADD_PYTHON_TP_FUNCTION(on_miss_do),
+    ZX_ADD_PYTHON_TP_FUNCTION(on_you_miss_do_do),
     ZX_ADD_PYTHON_TP_FUNCTION(on_move_do),
     ZX_ADD_PYTHON_TP_FUNCTION(on_open_do),
     ZX_ADD_PYTHON_TP_FUNCTION(on_tick_do),

@@ -609,7 +609,7 @@ bool Thing::attack(Thingp it)
     return true;
   }
 
-  it->on_miss(this);
+  it->on_you_miss_do(this);
 
   //
   // Missiles?
