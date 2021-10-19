@@ -49,9 +49,7 @@ static uint8_t game_menu_quick_start(Widp w, int32_t x, int32_t y, uint32_t butt
   wid_topcon_init();
 
   wid_thing_info_fini();
-
   wid_inventory_fini();
-  wid_inventory_init();
 
   wid_skillbox_fini();
   wid_skillbox_init();

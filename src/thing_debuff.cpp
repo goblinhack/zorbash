@@ -90,7 +90,6 @@ bool Thing::debuff_remove(Thingp what)
   game->request_remake_debuffbox = true;
 
   dbg("Removed %s", what->to_string().c_str());
-
   return true;
 }
 

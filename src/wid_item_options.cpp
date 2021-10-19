@@ -76,11 +76,9 @@ static uint8_t wid_item_options_eat(Widp w, int32_t x, int32_t y, uint32_t butto
     return true;
   }
 
-  if (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) {
-    game->change_state(Game::STATE_MOVING_ITEMS);
-    game->request_remake_inventory = true;
-    game->wid_thing_info_create(game->level->player, false);
-  }
+  wid_inventory_init();
+  game->request_remake_rightbar = true;
+
   return true;
 }
 
@@ -126,9 +124,8 @@ static uint8_t wid_item_options_drop(Widp w, int32_t x, int32_t y, uint32_t butt
     return true;
   }
 
-  game->change_state(Game::STATE_MOVING_ITEMS);
-  game->request_remake_inventory = true;
-  game->wid_thing_info_create(game->level->player, false);
+  wid_inventory_init();
+  game->request_remake_rightbar = true;
 
   return true;
 }
@@ -156,9 +153,9 @@ static uint8_t wid_item_options_back(Widp w, int32_t x, int32_t y, uint32_t butt
     return true;
   }
 
-  game->change_state(Game::STATE_MOVING_ITEMS);
-  game->request_remake_inventory = true;
-  game->wid_thing_info_create(game->level->player, false);
+  wid_inventory_init();
+  game->request_remake_rightbar = true;
+
   return true;
 }
 
@@ -234,7 +231,6 @@ void Game::wid_items_options_create(Widp w, Thingp t, bool source_came_from_inve
   TRACE_AND_INDENT();
   DBG3("Item options");
   TRACE_AND_INDENT();
-  auto was_moving_items = (game->state == Game::STATE_MOVING_ITEMS);
 
   change_state(Game::STATE_OPTIONS_FOR_ITEM_MENU);
 
@@ -268,9 +264,6 @@ void Game::wid_items_options_create(Widp w, Thingp t, bool source_came_from_inve
     options++;
   } else if (chosen_thing->is_usable()) {
     TRACE_AND_INDENT();
-    options++;
-  }
-  if (was_moving_items) {
     options++;
   }
 
@@ -352,19 +345,6 @@ void Game::wid_items_options_create(Widp w, Thingp t, bool source_came_from_inve
     wid_set_text(w, "%%fg=white$D%%fg=reset$rop");
   }
   y_at += 3;
-  if (was_moving_items) {
-    TRACE_AND_INDENT();
-    auto p = wid_item_options_window->wid_text_area->wid_text_area;
-    auto w = wid_new_square_button(p, "move");
-
-    point tl = make_point(0, y_at);
-    point br = make_point(width, y_at + 2);
-    wid_set_style(w, UI_WID_STYLE_NORMAL);
-    wid_set_on_mouse_up(w, wid_item_options_move);
-    wid_set_pos(w, tl, br);
-    wid_set_text(w, "%%fg=white$M%%fg=reset$ove");
-    y_at += 3;
-  }
   {
     TRACE_AND_INDENT();
     auto p = wid_item_options_window->wid_text_area->wid_text_area;

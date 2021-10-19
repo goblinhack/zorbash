@@ -43,7 +43,7 @@ static void wid_rightbar_mouse_over_b(Widp w, int32_t relx, int32_t rely, int32_
   DBG3("rightbar: Begin over rightbar");
   TRACE_AND_INDENT();
   if ((game->state == Game::STATE_CHOOSING_TARGET) || (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
-      (game->state == Game::STATE_MOVING_ITEMS) || (game->state == Game::STATE_COLLECTING_ITEMS) ||
+      (game->state == Game::STATE_INVENTORY) || (game->state == Game::STATE_COLLECTING_ITEMS) ||
       (game->state == Game::STATE_WIELDING_ITEMS) || (game->state == Game::STATE_SAVE_MENU) ||
       (game->state == Game::STATE_LOAD_MENU) || (game->state == Game::STATE_QUIT_MENU) ||
       (game->state == Game::STATE_ENCHANTING_ITEMS)) {
@@ -62,9 +62,12 @@ static void wid_rightbar_mouse_over_b(Widp w, int32_t relx, int32_t rely, int32_
     return;
   }
 
+#if 0
   if (level->player) {
     game->wid_thing_info_create(level->player);
   }
+#endif
+  wid_inventory_init();
 }
 
 static void wid_rightbar_mouse_over_e(Widp w)
@@ -73,7 +76,7 @@ static void wid_rightbar_mouse_over_e(Widp w)
   DBG3("rightbar: End over rightbar");
   TRACE_AND_INDENT();
   if ((game->state == Game::STATE_CHOOSING_TARGET) || (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
-      (game->state == Game::STATE_MOVING_ITEMS) || (game->state == Game::STATE_COLLECTING_ITEMS) ||
+      (game->state == Game::STATE_INVENTORY) || (game->state == Game::STATE_COLLECTING_ITEMS) ||
       (game->state == Game::STATE_WIELDING_ITEMS) || (game->state == Game::STATE_SAVE_MENU) ||
       (game->state == Game::STATE_LOAD_MENU) || (game->state == Game::STATE_QUIT_MENU) ||
       (game->state == Game::STATE_ENCHANTING_ITEMS)) {
@@ -89,6 +92,92 @@ static void wid_rightbar_mouse_over_e(Widp w)
   auto level = game->level;
   if (! level) {
     DBG3("rightbar: No level; ignore");
+    return;
+  }
+
+#if 0
+  game->wid_thing_info_destroy_deferred();
+#endif
+
+  wid_inventory_fini();
+
+  //
+  // Do not create new wids in here
+  //
+}
+
+static void wid_rightbar_inventory_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+{
+  TRACE_AND_INDENT();
+  DBG3("Inventory: Begin over inventory");
+  TRACE_AND_INDENT();
+  if ((game->state == Game::STATE_CHOOSING_TARGET) || (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
+      (game->state == Game::STATE_COLLECTING_ITEMS) || (game->state == Game::STATE_WIELDING_ITEMS) ||
+      (game->state == Game::STATE_INVENTORY) || (game->state == Game::STATE_CHOOSING_SKILLS) ||
+      (game->state == Game::STATE_SAVE_MENU) || (game->state == Game::STATE_LOAD_MENU) ||
+      (game->state == Game::STATE_QUIT_MENU) || (game->state == Game::STATE_ENCHANTING_ITEMS)) {
+    DBG3("Inventory: Moving items; ignore");
+    return;
+  }
+
+  if (game->in_transit_item) {
+    DBG3("Inventory: In transit item; ignore");
+    return;
+  }
+
+  auto level = game->level;
+  if (! level) {
+    DBG3("Inventory: No level; ignore");
+    return;
+  }
+
+  auto slot = wid_get_int_context(w);
+
+  DBG3("Inventory: Begin over inventory slot %d", slot);
+  TRACE_AND_INDENT();
+  if (! level->inventory_over(slot)) {
+    DBG3("Inventory: Not over anything");
+    return;
+  }
+
+  level->inventory_describe(slot);
+
+  auto t = level->inventory_get(slot);
+  if (t) {
+    game->wid_thing_info_create(t);
+  }
+}
+
+static void wid_rightbar_inventory_over_e(Widp w)
+{
+  TRACE_AND_INDENT();
+  DBG3("Inventory: End over inventory");
+  TRACE_AND_INDENT();
+  if ((game->state == Game::STATE_CHOOSING_TARGET) || (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
+      (game->state == Game::STATE_COLLECTING_ITEMS) || (game->state == Game::STATE_WIELDING_ITEMS) ||
+      (game->state == Game::STATE_INVENTORY) || (game->state == Game::STATE_CHOOSING_SKILLS) ||
+      (game->state == Game::STATE_SAVE_MENU) || (game->state == Game::STATE_LOAD_MENU) ||
+      (game->state == Game::STATE_QUIT_MENU) || (game->state == Game::STATE_ENCHANTING_ITEMS)) {
+    DBG3("Inventory: Moving items; ignore");
+    return;
+  }
+
+  if (game->in_transit_item) {
+    DBG3("Inventory: In transit item; ignore");
+    return;
+  }
+
+  auto level = game->level;
+  if (! level) {
+    DBG3("Inventory: No level; ignore");
+    return;
+  }
+
+  auto slot = wid_get_int_context(w);
+
+  DBG3("Inventory: Over inventory slot %d", slot);
+  TRACE_AND_INDENT();
+  if (! level->inventory_over(slot)) {
     return;
   }
 
@@ -278,7 +367,7 @@ static bool wid_rightbar_create(void)
     auto w = wid_new_plain(wid_rightbar, "stats1-value");
     wid_set_on_mouse_over_b(w, wid_rightbar_mouse_over_b);
     wid_set_on_mouse_over_e(w, wid_rightbar_mouse_over_e);
-    wid_set_on_mouse_up(w, wid_inventory_item_mouse_up_on_bag);
+    wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(0, y_at + 1);
     point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH, tl.y);
     wid_set_pos(w, tl, br);
@@ -300,7 +389,7 @@ static bool wid_rightbar_create(void)
     auto w = wid_new_plain(wid_rightbar, "stats2-value");
     wid_set_on_mouse_over_b(w, wid_rightbar_mouse_over_b);
     wid_set_on_mouse_over_e(w, wid_rightbar_mouse_over_e);
-    wid_set_on_mouse_up(w, wid_inventory_item_mouse_up_on_bag);
+    wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(0, y_at + 1);
     point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH, tl.y);
     wid_set_pos(w, tl, br);
@@ -341,8 +430,8 @@ static bool wid_rightbar_create(void)
         wid_set_shape_none(w);
         wid_set_pos(w, tl, br);
         wid_set_int_context(w, i);
-        wid_set_on_mouse_over_b(w, wid_inventory_mouse_over_b);
-        wid_set_on_mouse_over_e(w, wid_inventory_mouse_over_e);
+        wid_set_on_mouse_over_b(w, wid_rightbar_inventory_over_b);
+        wid_set_on_mouse_over_e(w, wid_rightbar_inventory_over_e);
       }
 
       auto  s  = "inventory slot" + std::to_string(i);
@@ -431,14 +520,9 @@ static bool wid_rightbar_create(void)
           wid_set_fg3_tile(w, tile);
         }
 
-        wid_set_on_mouse_over_b(w, wid_inventory_mouse_over_b);
-        wid_set_on_mouse_over_e(w, wid_inventory_mouse_over_e);
-        if (tpp->is_bag_item_container()) {
-          wid_set_on_mouse_up(w, wid_inventory_item_mouse_up_on_bag);
-        } else {
-          wid_set_on_mouse_up(w, wid_inventory_item_mouse_up);
-        }
-
+        wid_set_on_mouse_over_b(w, wid_rightbar_inventory_over_b);
+        wid_set_on_mouse_over_e(w, wid_rightbar_inventory_over_e);
+        wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
         wid_set_int_context(w, i);
       }
       item++;
@@ -519,7 +603,6 @@ static bool wid_rightbar_create(void)
         wid_set_on_mouse_over_b(w, wid_skillbox_mouse_over_b);
         wid_set_on_mouse_over_e(w, wid_skillbox_mouse_over_e);
         wid_set_on_mouse_up(w, wid_skillbox_item_mouse_up);
-
         wid_set_int_context(w, i);
 
         //

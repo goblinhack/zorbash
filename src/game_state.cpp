@@ -43,12 +43,13 @@ void Game::change_state(int new_state)
       wid_item_options_destroy();
       wid_load_destroy();
       wid_save_destroy();
+      wid_inventory_fini();
       game_quit_destroy();
       LOG("State changed to STATE_NORMAL");
       break;
     case STATE_OPTIONS_FOR_ITEM_MENU : LOG("State changed to STATE_OPTIONS_FOR_ITEM_MENU"); break;
-    case STATE_MOVING_ITEMS : // Currently managing inventory
-      LOG("State changed to STATE_MOVING_ITEMS");
+    case STATE_INVENTORY : // Currently managing inventory
+      LOG("State changed to STATE_INVENTORY");
       break;
     case STATE_COLLECTING_ITEMS : // Collecting en masse from the level
       LOG("State changing to STATE_COLLECTING_ITEMS");
@@ -100,7 +101,7 @@ void Game::change_state(int new_state)
 
   switch (old_state) {
     case STATE_NORMAL :
-    case STATE_MOVING_ITEMS :     // Currently managing inventory
+    case STATE_INVENTORY :        // Currently managing inventory
     case STATE_COLLECTING_ITEMS : // Collecting en masse from the level
     case STATE_WIELDING_ITEMS :
     case STATE_ENCHANTING_ITEMS :
@@ -123,6 +124,4 @@ void Game::change_state(int new_state)
       }
       break;
   }
-
-  wid_inventory_init();
 }

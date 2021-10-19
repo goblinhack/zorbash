@@ -37,6 +37,7 @@ void wid_actionbar_close_all_popups(void)
   wid_item_options_destroy();
   wid_load_destroy();
   wid_save_destroy();
+  wid_inventory_fini();
   game_quit_destroy();
   game_config_keyboard_destroy();
   TRACE_AND_INDENT();
@@ -293,19 +294,13 @@ static uint8_t wid_actionbar_inventory(Widp w, int32_t x, int32_t y, uint32_t bu
     return true;
   }
 
-  if (game->state == Game::STATE_MOVING_ITEMS) {
+  if (game->state == Game::STATE_INVENTORY) {
     wid_actionbar_close_all_popups();
     wid_actionbar_init();
     return true;
   }
 
   wid_actionbar_close_all_popups();
-
-  LOG("Actionbar inventory create");
-  game->change_state(Game::STATE_MOVING_ITEMS);
-  game->request_remake_inventory = true;
-  game->wid_thing_info_create(player, false);
-
   return true;
 }
 
@@ -313,7 +308,7 @@ static void wid_actionbar_inventory_over_b(Widp w, int32_t relx, int32_t rely, i
 {
   TRACE_AND_INDENT();
 
-  if (game->state == Game::STATE_MOVING_ITEMS) {
+  if (game->state == Game::STATE_INVENTORY) {
     BOTCON("Left click to move items. Right click to equip.");
   } else {
     BOTCON("Select this to see what you are carrying.");
@@ -637,7 +632,7 @@ void wid_actionbar_init(void)
   TRACE_AND_INDENT();
   bool icon_close = false;
   if (game->bags.size() || wid_collect || wid_wield || wid_skills || wid_item_options_window || wid_enchant ||
-      wid_load || wid_save || game_config_keyboard_window || game_quit_window) {
+      wid_load || wid_save || game_config_keyboard_window || game_quit_window || wid_inventory_window) {
     icon_close = true;
   }
 

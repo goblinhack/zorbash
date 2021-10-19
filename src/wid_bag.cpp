@@ -21,6 +21,7 @@
 #include "my_wid.h"
 #include "my_wid_actionbar.h"
 #include "my_wid_bag.h"
+#include "my_wid_inventory.h"
 #include "my_wid_popup.h"
 #include "my_wid_rightbar.h"
 #include "my_wid_thing_info.h"
@@ -151,7 +152,7 @@ uint8_t wid_in_transit_item_place(Widp w, int32_t x, int32_t y, uint32_t button)
       t->log("Placed in inventory");
       wid_destroy(&game->in_transit_item);
       t->log("Placed item: Request to remake inventory");
-      game->request_remake_inventory = true;
+      game->request_remake_rightbar = true;
     }
     return true;
   }
@@ -195,7 +196,7 @@ uint8_t wid_in_transit_item_place(Widp w, int32_t x, int32_t y, uint32_t button)
     t->log("Compress bag and request to remake inventory");
     while (bag->bag_compress()) {
     }
-    game->request_remake_inventory = true;
+    game->request_remake_rightbar = true;
 
     t->log("In transit item place completed");
     wid_bag_add_items(wid_bag_container, bag);
@@ -204,10 +205,9 @@ uint8_t wid_in_transit_item_place(Widp w, int32_t x, int32_t y, uint32_t button)
     TOPCON("Could not fit that item. You can always drop the item if needed.");
   }
 
-  game->wid_thing_info_create(game->level->player, false);
-  game->request_remake_inventory = true;
   DBG3("Pressed in transit item; change state");
-  game->change_state(Game::STATE_MOVING_ITEMS);
+  wid_inventory_init();
+  game->request_remake_rightbar = true;
 
   //
   // Moving things around your bag has a cost...
@@ -238,10 +238,9 @@ uint8_t wid_in_transit_item_drop(void)
   game->level->player->drop_from_ether(t);
   wid_destroy(&game->in_transit_item);
 
-  game->wid_thing_info_create(game->level->player, false);
-  game->request_remake_inventory = true;
   DBG3("Pressed in transit item; change state");
-  game->change_state(Game::STATE_MOVING_ITEMS);
+  wid_inventory_init();
+  game->request_remake_rightbar = true;
 
   //
   // Moving things around your bag has a cost...
@@ -281,8 +280,8 @@ bool Game::wid_bag_move_item(Widp w, Thingp t)
   }
 
   verify(t);
-
-  game->change_state(Game::STATE_MOVING_ITEMS);
+  wid_inventory_init();
+  game->request_remake_rightbar = true;
 
   Widp    wid_bag_container;
   ThingId bag_id;
@@ -358,10 +357,8 @@ bool Game::wid_bag_move_item(Widp w, Thingp t)
   wid_update(game->in_transit_item);
 
   DBG3("Remake the bag without the transit item");
-  game->request_remake_inventory = true;
-  game->wid_thing_info_create(game->level->player, false);
-  DBG3("Recreate inventory");
-  game->change_state(Game::STATE_MOVING_ITEMS);
+  wid_inventory_init();
+  game->request_remake_rightbar = true;
 
   return true;
 }
@@ -454,7 +451,7 @@ static uint8_t wid_bag_item_key_down(Widp w, const struct SDL_Keysym *key)
       game->tick_begin("drop");
     }
 
-    game->request_remake_inventory = true;
+    game->request_remake_rightbar = true;
     game->wid_thing_info_create(game->level->player, false);
     return true;
   }
@@ -465,70 +462,70 @@ static uint8_t wid_bag_item_key_down(Widp w, const struct SDL_Keysym *key)
     default :
       if (key->scancode == (SDL_Scancode) game->config.key_action0) {
         game->level->inventory_assign(9, what);
-        game->request_remake_inventory = true;
+        game->request_remake_rightbar = true;
         game->wid_thing_info_create(game->level->player, false);
         TOPCON("Reassigned item to key.");
         return true;
       }
       if (key->scancode == (SDL_Scancode) game->config.key_action1) {
         game->level->inventory_assign(0, what);
-        game->request_remake_inventory = true;
+        game->request_remake_rightbar = true;
         game->wid_thing_info_create(game->level->player, false);
         TOPCON("Reassigned item to key.");
         return true;
       }
       if (key->scancode == (SDL_Scancode) game->config.key_action2) {
         game->level->inventory_assign(1, what);
-        game->request_remake_inventory = true;
+        game->request_remake_rightbar = true;
         game->wid_thing_info_create(game->level->player, false);
         TOPCON("Reassigned item to key.");
         return true;
       }
       if (key->scancode == (SDL_Scancode) game->config.key_action3) {
         game->level->inventory_assign(2, what);
-        game->request_remake_inventory = true;
+        game->request_remake_rightbar = true;
         game->wid_thing_info_create(game->level->player, false);
         TOPCON("Reassigned item to key.");
         return true;
       }
       if (key->scancode == (SDL_Scancode) game->config.key_action4) {
         game->level->inventory_assign(3, what);
-        game->request_remake_inventory = true;
+        game->request_remake_rightbar = true;
         game->wid_thing_info_create(game->level->player, false);
         TOPCON("Reassigned item to key.");
         return true;
       }
       if (key->scancode == (SDL_Scancode) game->config.key_action5) {
         game->level->inventory_assign(4, what);
-        game->request_remake_inventory = true;
+        game->request_remake_rightbar = true;
         game->wid_thing_info_create(game->level->player, false);
         TOPCON("Reassigned item to key.");
         return true;
       }
       if (key->scancode == (SDL_Scancode) game->config.key_action6) {
         game->level->inventory_assign(5, what);
-        game->request_remake_inventory = true;
+        game->request_remake_rightbar = true;
         game->wid_thing_info_create(game->level->player, false);
         TOPCON("Reassigned item to key.");
         return true;
       }
       if (key->scancode == (SDL_Scancode) game->config.key_action7) {
         game->level->inventory_assign(6, what);
-        game->request_remake_inventory = true;
+        game->request_remake_rightbar = true;
         game->wid_thing_info_create(game->level->player, false);
         TOPCON("Reassigned item to key.");
         return true;
       }
       if (key->scancode == (SDL_Scancode) game->config.key_action8) {
         game->level->inventory_assign(7, what);
-        game->request_remake_inventory = true;
+        game->request_remake_rightbar = true;
         game->wid_thing_info_create(game->level->player, false);
         TOPCON("Reassigned item to key.");
         return true;
       }
       if (key->scancode == (SDL_Scancode) game->config.key_action9) {
         game->level->inventory_assign(8, what);
-        game->request_remake_inventory = true;
+        game->request_remake_rightbar = true;
         game->wid_thing_info_create(game->level->player, false);
         TOPCON("Reassigned item to key.");
         return true;
@@ -542,7 +539,7 @@ static uint8_t wid_bag_item_key_down(Widp w, const struct SDL_Keysym *key)
     if (player->drop(what)) {
       game->tick_begin("drop");
     }
-    game->request_remake_inventory = true;
+    game->request_remake_rightbar = true;
     game->wid_thing_info_create(game->level->player, false);
     return true;
   }
@@ -551,9 +548,9 @@ static uint8_t wid_bag_item_key_down(Widp w, const struct SDL_Keysym *key)
     DBG3("Pressed eat key");
     TRACE_AND_INDENT();
     player->use(what);
-    if (game->state == Game::STATE_MOVING_ITEMS) {
-      game->request_remake_inventory = true;
-      game->wid_thing_info_create(game->level->player, false);
+    if (game->state == Game::STATE_INVENTORY) {
+      wid_inventory_init();
+      game->request_remake_rightbar = true;
     }
     return true;
   }
@@ -561,9 +558,9 @@ static uint8_t wid_bag_item_key_down(Widp w, const struct SDL_Keysym *key)
   if (key->scancode == (SDL_Scancode) game->config.key_use) {
     DBG3("Pressed use key");
     player->use(what);
-    if (game->state == Game::STATE_MOVING_ITEMS) {
-      game->request_remake_inventory = true;
-      game->wid_thing_info_create(game->level->player, false);
+    if (game->state == Game::STATE_INVENTORY) {
+      wid_inventory_init();
+      game->request_remake_rightbar = true;
     }
     return true;
   }

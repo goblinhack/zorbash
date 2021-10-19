@@ -41,7 +41,7 @@ void Level::describe(point p)
 
   dbg3("Describe @%d,%d", p.x, p.y);
   TRACE_AND_INDENT();
-  if ((game->state == Game::STATE_MOVING_ITEMS) || (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
+  if ((game->state == Game::STATE_INVENTORY) || (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
       (game->state == Game::STATE_COLLECTING_ITEMS) || (game->state == Game::STATE_WIELDING_ITEMS) ||
       (game->state == Game::STATE_ENCHANTING_ITEMS) || (game->state == Game::STATE_SAVE_MENU) ||
       (game->state == Game::STATE_LOAD_MENU) || (game->state == Game::STATE_QUIT_MENU) ||
@@ -318,9 +318,13 @@ void Level::describe(Thingp t)
     return;
   }
 
+  if (t->is_hidden) {
+    return;
+  }
+
   dbg3("Describe %s", t->to_string().c_str());
 
-  if ((game->state == Game::STATE_MOVING_ITEMS) || (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
+  if ((game->state == Game::STATE_INVENTORY) || (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
       (game->state == Game::STATE_COLLECTING_ITEMS) || (game->state == Game::STATE_WIELDING_ITEMS) ||
       (game->state == Game::STATE_SAVE_MENU) || (game->state == Game::STATE_LOAD_MENU) ||
       (game->state == Game::STATE_QUIT_MENU) || (game->state == Game::STATE_ENCHANTING_ITEMS)) {

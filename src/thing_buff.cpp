@@ -90,7 +90,6 @@ bool Thing::buff_remove(Thingp what)
   game->request_remake_buffbox = true;
 
   dbg("Removed %s", what->to_string().c_str());
-
   return true;
 }
 

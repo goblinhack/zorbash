@@ -28,7 +28,7 @@ void Level::cursor_check_if_scroll_needed(void)
       if (player) {
         auto d = distance(player->mid_at, cursor->mid_at);
         if (d > std::min(TILES_ACROSS, TILES_DOWN)) {
-          cursor->move(player->mid_at);
+          cursor->move_to_immediately(player->mid_at);
         }
       }
     }
@@ -105,7 +105,7 @@ void Level::cursor_move(void)
     verify(cursor);
     if (cursor_at != cursor_old) {
       cursor_old = cursor_at;
-      cursor->move(cursor_at);
+      cursor->move_to_immediately(cursor_at);
       cursor_recreate();
 
       //

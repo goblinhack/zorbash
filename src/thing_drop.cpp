@@ -106,10 +106,8 @@ bool Thing::drop(Thingp what, Thingp target, bool stolen)
     }
   }
 
-  if (is_player()) {
-    wid_inventory_init();
-    wid_thing_info_fini();
-  }
+  wid_inventory_fini();
+  wid_thing_info_fini();
 
   if (stolen) {
     dbg("Dropped (being stolen) %s", what->to_string().c_str());
@@ -173,7 +171,7 @@ bool Thing::drop_into_ether(Thingp what)
 
   what->remove_owner();
   monst_infop->carrying.remove(what->id);
-  game->request_remake_inventory = true;
+  game->request_remake_rightbar = true;
 
   dbg("Dropped %s into the ether", what->to_string().c_str());
 
@@ -201,7 +199,7 @@ bool Thing::drop_from_ether(Thingp what)
   //
   set_where_i_dropped_an_item_last(player->mid_at);
 
-  wid_inventory_init();
+  wid_inventory_fini();
   wid_thing_info_fini();
 
   point e = (player->last_blit_tl + player->last_blit_br) / 2;

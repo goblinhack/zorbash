@@ -1424,7 +1424,7 @@ bool Thing::ai_tick(bool recursing)
   for (int y = miny; y < maxy; y++) {
     for (int x = minx; x < maxx; x++) {
       if (monst_aip->can_see_currently.can_see[ x ][ y ]) {
-        IF_DEBUG3 { (void) level->thing_new("ai_path2", point(x, y)); }
+        IF_DEBUG4 { (void) level->thing_new("ai_path2", point(x, y)); }
         set(monst_aip->can_see_ever.can_see, x, y, true);
       }
     }
@@ -1790,7 +1790,7 @@ bool Thing::ai_tick(bool recursing)
         // Wait for the inventory to be remade
         //
         if (is_player()) {
-          if (game->request_remake_inventory) {
+          if (game->request_remake_rightbar) {
             return true;
           }
         }
@@ -1891,32 +1891,29 @@ void Thing::ai_change_state(int new_state, const std::string &why)
     case MONST_STATE_REPACK_INVENTORY : to = "REPACK"; break;
   }
 
+  if (is_player()) {
+    wid_inventory_fini();
+  }
+
+  //
+  // Current state
+  //
   switch (monst_infop->monst_state) {
     case MONST_STATE_IDLE : from = "IDLE"; break;
     case MONST_STATE_MOVING : from = "MOVING"; break;
     case MONST_STATE_RESTING : from = "RESTING"; break;
     case MONST_STATE_REPACK_INVENTORY : from = "REPACK"; break;
-    case MONST_STATE_OPEN_INVENTORY :
-      from = "OPEN-INVENTORY";
-      if (is_player()) {
-        wid_thing_info_fini();
-        wid_inventory_init();
-      }
-      break;
+    case MONST_STATE_OPEN_INVENTORY : from = "OPEN-INVENTORY"; break;
     case MONST_STATE_USING_ENCHANTSTONE :
       from = "USING-ENCHANTSTONE";
       if (is_player()) {
         wid_enchant_destroy();
-        wid_thing_info_fini();
-        wid_inventory_init();
       }
       break;
     case MONST_STATE_USING_SKILLSTONE :
       from = "USING-SKILLSTONE";
       if (is_player()) {
         wid_skill_choose_destroy();
-        wid_thing_info_fini();
-        wid_inventory_init();
       }
       break;
   }
@@ -1935,9 +1932,8 @@ void Thing::ai_change_state(int new_state, const std::string &why)
     case MONST_STATE_REPACK_INVENTORY : break;
     case MONST_STATE_OPEN_INVENTORY :
       if (is_player()) {
-        game->change_state(Game::STATE_MOVING_ITEMS);
-        game->request_remake_inventory = true;
-        game->wid_thing_info_create(game->level->player, false);
+        wid_inventory_init();
+        game->request_remake_rightbar = true;
       }
       break;
     case MONST_STATE_USING_ENCHANTSTONE :

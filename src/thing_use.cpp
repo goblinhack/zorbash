@@ -82,7 +82,7 @@ void Thing::used(Thingp what, Thingp target, bool remove_after_use)
     what->decr_charge_count();
     if (what->get_charge_count()) {
       dbg("Used %s (has %d charges left)", what->to_string().c_str(), what->get_charge_count());
-      game->request_remake_inventory = true;
+      game->request_remake_rightbar = true;
       return;
     }
   }

@@ -137,7 +137,7 @@ void Thing::inventory_particle(Thingp item, uint32_t slot, Thingp particle_targe
     // Always show
     //
   } else {
-    if ((game->state == Game::STATE_MOVING_ITEMS) || (game->state == Game::STATE_WIELDING_ITEMS) ||
+    if ((game->state == Game::STATE_INVENTORY) || (game->state == Game::STATE_WIELDING_ITEMS) ||
         (game->state == Game::STATE_COLLECTING_ITEMS)) {
       //
       // No animations when moving stuff around
@@ -204,7 +204,6 @@ bool Thing::inventory_id_insert(Thingp item)
   }
 
   if (item->is_collected_as_gold()) {
-    wid_inventory_init();
     wid_thing_info_fini();
     inventory_particle(item, monst_infop->inventory_id.size() - 1);
     item->dead("by being collected");
@@ -223,7 +222,6 @@ bool Thing::inventory_id_insert(Thingp item)
   }
 
   if (item->is_collect_as_keys()) {
-    wid_inventory_init();
     wid_thing_info_fini();
     incr_keys(1);
     inventory_particle(item, monst_infop->inventory_id.size() - 1);
@@ -264,14 +262,13 @@ bool Thing::inventory_id_insert(Thingp item)
         // Needs its own slot
         //
       } else {
-        wid_inventory_init();
-        if ((game->state != Game::STATE_CHOOSING_TARGET) && (game->state != Game::STATE_MOVING_ITEMS) &&
+        if ((game->state != Game::STATE_CHOOSING_TARGET) && (game->state != Game::STATE_INVENTORY) &&
             (game->state != Game::STATE_WIELDING_ITEMS) && (game->state != Game::STATE_COLLECTING_ITEMS)) {
           wid_thing_info_fini();
         }
         if (game->robot_mode) {
           inventory_particle(item, i);
-        } else if (game->state != Game::STATE_CHOOSING_TARGET && game->state != Game::STATE_MOVING_ITEMS) {
+        } else if (game->state != Game::STATE_CHOOSING_TARGET && game->state != Game::STATE_INVENTORY) {
           inventory_particle(item, i);
         } else {
           // no particle, too noisy
@@ -294,15 +291,14 @@ bool Thing::inventory_id_insert(Thingp item)
     }
   }
 
-  wid_inventory_init();
-  if ((game->state != Game::STATE_CHOOSING_TARGET) && (game->state != Game::STATE_MOVING_ITEMS) &&
+  if ((game->state != Game::STATE_CHOOSING_TARGET) && (game->state != Game::STATE_INVENTORY) &&
       (game->state != Game::STATE_WIELDING_ITEMS) && (game->state != Game::STATE_COLLECTING_ITEMS)) {
     wid_thing_info_fini();
   }
 
   if (game->robot_mode) {
     inventory_particle(item, item_slot);
-  } else if (game->state != Game::STATE_CHOOSING_TARGET && game->state != Game::STATE_MOVING_ITEMS) {
+  } else if (game->state != Game::STATE_CHOOSING_TARGET && game->state != Game::STATE_INVENTORY) {
     inventory_particle(item, item_slot);
   } else {
     // no particle, too noisy
@@ -348,7 +344,7 @@ bool Thing::inventory_id_remove(Thingp item)
     }
 
     if (item->tp() == tpp) {
-      game->request_remake_inventory = true;
+      game->request_remake_rightbar = true;
 
       inventory_particle(item, i, this);
 
@@ -372,8 +368,7 @@ bool Thing::inventory_id_remove(Thingp item)
       }
 
       level->inventory_describe(game->inventory_highlight_slot);
-      wid_inventory_init();
-      if ((game->state != Game::STATE_CHOOSING_TARGET) && (game->state != Game::STATE_MOVING_ITEMS) &&
+      if ((game->state != Game::STATE_CHOOSING_TARGET) && (game->state != Game::STATE_INVENTORY) &&
           (game->state != Game::STATE_WIELDING_ITEMS) && (game->state != Game::STATE_COLLECTING_ITEMS)) {
         wid_thing_info_fini();
       }
@@ -418,7 +413,7 @@ bool Thing::inventory_id_remove(Thingp item, Thingp particle_target)
     }
 
     if (item->tp() == tpp) {
-      game->request_remake_inventory = true;
+      game->request_remake_rightbar = true;
 
       if (particle_target) {
         inventory_particle(item, i, particle_target);
@@ -445,8 +440,7 @@ bool Thing::inventory_id_remove(Thingp item, Thingp particle_target)
         }
       }
 
-      wid_inventory_init();
-      if ((game->state != Game::STATE_CHOOSING_TARGET) && (game->state != Game::STATE_MOVING_ITEMS) &&
+      if ((game->state != Game::STATE_CHOOSING_TARGET) && (game->state != Game::STATE_INVENTORY) &&
           (game->state != Game::STATE_WIELDING_ITEMS) && (game->state != Game::STATE_COLLECTING_ITEMS)) {
         wid_thing_info_fini();
       }
@@ -625,7 +619,7 @@ bool Level::inventory_over(const uint32_t slot)
 
   if (slot != game->inventory_highlight_slot) {
     LOG("Inventory: Request to remake inventory");
-    game->request_remake_inventory = true;
+    game->request_remake_rightbar  = true;
     game->inventory_highlight_slot = slot;
     LOG("Inventory: Highlight slot %d", slot);
     item = inventory_describe(slot);
@@ -655,7 +649,7 @@ bool Level::inventory_chosen(const uint32_t slot)
   }
 
   LOG("Inventory: Request to remake inventory");
-  game->request_remake_inventory = true;
+  game->request_remake_rightbar = true;
 
   auto oid = get(player->monst_infop->inventory_id, slot);
   if (! oid) {
@@ -698,7 +692,7 @@ bool Level::inventory_assign(const uint32_t slot, Thingp item)
   }
 
   LOG("Inventory: Request to remake inventory");
-  game->request_remake_inventory = true;
+  game->request_remake_rightbar = true;
 
   auto inventory_items = player->monst_infop->inventory_id.size();
   for (auto i = 0U; i < inventory_items; i++) {
@@ -721,7 +715,7 @@ bool Level::inventory_assign(const uint32_t slot, Thingp item)
   }
 
   player->monst_infop->inventory_id[ slot ] = item->tp_id;
-  game->request_remake_inventory            = true;
+  game->request_remake_rightbar             = true;
 
   return true;
 }

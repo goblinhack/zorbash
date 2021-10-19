@@ -15,6 +15,7 @@
 #include "my_wid_bag.h"
 #include "my_wid_botcon.h"
 #include "my_wid_console.h"
+#include "my_wid_inventory.h"
 #include "my_wid_popup.h"
 #include "my_wid_thing_info.h"
 #include "my_wid_topcon.h"
@@ -55,13 +56,13 @@ uint8_t wid_thing_info_init(void)
 void Game::wid_thing_info_destroy_immediate(void)
 {
   TRACE_AND_INDENT();
-  if (game->request_remake_inventory) {
+  if (game->request_remake_rightbar) {
     //
     // Continue
     //
   } else if (game->state == Game::STATE_COLLECTING_ITEMS) {
     return;
-  } else if (game->state == Game::STATE_MOVING_ITEMS) {
+  } else if (game->state == Game::STATE_INVENTORY) {
     return;
   }
 
@@ -301,18 +302,25 @@ void Game::wid_thing_info_create(Thingp t, bool when_hovering_over)
   TRACE_AND_INDENT();
   DBG3("Create wid thing info for %s", t->to_string().c_str());
   TRACE_AND_INDENT();
-  if (game->request_remake_inventory) {
+
+  if (game->request_remake_rightbar) {
     //
     // Continue
     //
     IF_DEBUG1 { t->log("Remake thing info"); }
-  } else if (game->state == Game::STATE_MOVING_ITEMS) {
+  } else if (game->state == Game::STATE_INVENTORY) {
     IF_DEBUG1 { t->log("Ignore, already moving items"); }
     return;
   }
+
   TRACE_AND_INDENT();
   if (wid_console_window && wid_console_window->visible) {
     IF_DEBUG1 { t->log("No; console visible"); }
+    return;
+  }
+
+  if (wid_inventory_window) {
+    IF_DEBUG1 { t->log("No; inventory visible"); }
     return;
   }
 
@@ -416,7 +424,8 @@ void Game::wid_thing_info_create(Thingp t, bool when_hovering_over)
 void Game::wid_thing_info_create_list(const std::vector< Thingp > &ts)
 {
   TRACE_AND_INDENT();
-  if (game->request_remake_inventory) {
+
+  if (game->request_remake_rightbar) {
     //
     // Continue
     //
@@ -424,13 +433,19 @@ void Game::wid_thing_info_create_list(const std::vector< Thingp > &ts)
   } else if (game->state == Game::STATE_COLLECTING_ITEMS) {
     ERR("Ignore, already collecting items");
     return;
-  } else if (game->state == Game::STATE_MOVING_ITEMS) {
+  } else if (game->state == Game::STATE_INVENTORY) {
     DBG3("Ignore, already moving items");
     return;
   }
+
   TRACE_AND_INDENT();
   if (wid_console_window && wid_console_window->visible) {
     DBG3("No; console visible");
+    return;
+  }
+
+  if (wid_inventory_window) {
+    DBG3("Ignore, inventory is open");
     return;
   }
 

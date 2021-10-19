@@ -31,7 +31,7 @@ bool Thing::carry(Thingp item)
     //
     // Avoid carry checks
     //
-  } else if (game->state == Game::STATE_MOVING_ITEMS) {
+  } else if (game->state == Game::STATE_INVENTORY) {
     //
     // Avoid carry checks
     //
@@ -123,7 +123,7 @@ bool Thing::carry(Thingp item)
   item->set_owner(this);
   item->hide();
 
-  if (game->state == Game::STATE_MOVING_ITEMS) {
+  if (game->state == Game::STATE_INVENTORY) {
     //
     // Avoid dup message
     //
@@ -142,10 +142,6 @@ bool Thing::carry(Thingp item)
     if (item->is_weapon() && ! get_weapon_id()) {
       wield(item);
     }
-  }
-
-  if (is_player()) {
-    wid_inventory_init();
   }
 
   //

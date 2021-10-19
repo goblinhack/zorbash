@@ -58,7 +58,8 @@ void      py_call_void_fn(const char *module, const char *name, unsigned int v1,
 void      py_call_void_fn(const char *module, const char *name, unsigned int v1, unsigned int v2, unsigned int v3,
                           unsigned int v4, unsigned int v5, unsigned int v6, unsigned int v7, unsigned int v8);
 void      py_call_void_fn(const char *module, const char *name, unsigned int v1, unsigned int v2, unsigned int v3,
-                          unsigned int v4, unsigned int v5, unsigned int v6, unsigned int v7, unsigned int v8, unsigned int v9);
+                          unsigned int v4, unsigned int v5, unsigned int v6, unsigned int v7, unsigned int v8,
+                          unsigned int v9);
 bool      py_call_bool(const char *name);
 bool      py_call_bool_fn(const char *module, const char *name, int v1);
 bool      py_call_bool_fn(const char *module, const char *name, int v1, int v2);

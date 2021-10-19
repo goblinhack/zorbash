@@ -252,7 +252,7 @@ public:
   enum {
     STATE_NORMAL,
     STATE_OPTIONS_FOR_ITEM_MENU, // Drop, throw etc and item
-    STATE_MOVING_ITEMS,          // Currently managing inventory
+    STATE_INVENTORY,             // Currently managing inventory
     STATE_COLLECTING_ITEMS,      // Collecting en masse from the level
     STATE_WIELDING_ITEMS,        // Selecting a weapon
     STATE_ENCHANTING_ITEMS,      // Upgrading items
@@ -277,12 +277,11 @@ public:
   //
   // Temporary. Global requests
   //
-  bool     request_remake_inventory {};
+  bool     request_remake_rightbar {};
   bool     request_remake_actionbar {};
   bool     request_remake_skillbox {};
   bool     request_remake_debuffbox {};
   bool     request_remake_buffbox {};
-  bool     request_destroy_bags {}; // Finished emptying temporary bag
   bool     request_update_rightbar {};
   bool     request_update_same_level {};
   bool     request_snapshot {}; // Something has requested a game snapshot

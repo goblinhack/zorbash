@@ -6161,11 +6161,11 @@ void wid_tick_all(void)
   //
   // If we need to remake the inventory, do so
   //
-  if (game->request_remake_inventory || game->request_remake_skillbox) {
+  if (game->request_remake_rightbar || game->request_remake_skillbox) {
     DBG3("Handle request to remake inventory");
     if (wid_rightbar_init()) {
-      game->request_remake_inventory = false;
-      game->request_remake_skillbox  = false;
+      game->request_remake_rightbar = false;
+      game->request_remake_skillbox = false;
 
       //
       // Drive closure of the inventory if we're waiting on it.
@@ -6184,13 +6184,6 @@ void wid_tick_all(void)
     DBG3("Handle request to remake actionhar");
     wid_actionbar_init();
     game->request_remake_actionbar = false;
-  }
-
-  if (game->request_destroy_bags) {
-    DBG3("Handle destroy bags request");
-    game->request_destroy_bags = false;
-    wid_thing_info_fini();
-    wid_inventory_init();
   }
 
   if (wid_over) {

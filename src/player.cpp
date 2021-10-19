@@ -48,7 +48,7 @@ void player_tick (bool left, bool right, bool up, bool down, bool attack, bool w
         }
       }
       return;
-    case Game::STATE_MOVING_ITEMS:     // Currently managing inventory
+    case Game::STATE_INVENTORY:     // Currently managing inventory
       {
         IF_DEBUG3 {
           LOG("Ignore player action when moving items");

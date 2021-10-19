@@ -134,7 +134,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     }
   }
 
-  if (game->state == Game::STATE_MOVING_ITEMS) {
+  if (game->state == Game::STATE_INVENTORY) {
     if (key->scancode == SDL_SCANCODE_ESCAPE) {
       DBG3("Escape pressed, clear moving items state");
       game->change_state(Game::STATE_NORMAL);
@@ -145,6 +145,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
   if (key->scancode == (SDL_Scancode) game->config.key_drop) {
     DBG3("Pressed drop key");
     TRACE_AND_INDENT();
+
     //
     // If we are moving an item, prefer to drop that.
     // Else drop whatever we have highlighted in the inventory
@@ -160,11 +161,8 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         }
       } else {
         TOPCON("Nothing to drop.");
-        if (player) {
-          game->wid_thing_info_create(player, false);
-        }
-        game->request_remake_inventory = true;
-        game->change_state(Game::STATE_MOVING_ITEMS);
+        wid_inventory_init();
+        game->request_remake_rightbar = true;
         return true;
       }
     }
@@ -211,7 +209,13 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     }
     auto what = level->inventory_get();
     if (what) {
-      player->use(what);
+      if (player->can_eat(what)) {
+        player->use(what);
+      } else {
+        TOPCON("Nothing to eat.");
+        wid_inventory_init();
+        game->request_remake_rightbar = true;
+      }
     }
     wid_rightbar_init();
     return true;
@@ -288,6 +292,10 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
       auto what = level->inventory_get();
       if (what) {
         player->use(what);
+      } else {
+        TOPCON("Nothing to use.");
+        wid_inventory_init();
+        game->request_remake_rightbar = true;
       }
       return true;
     }
@@ -305,12 +313,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     }
     if (key->scancode == (SDL_Scancode) game->config.key_inventory) {
       CON("Pressed inventory key");
-      if (player) {
-        game->wid_thing_info_create(player, false);
-      }
-      game->request_remake_inventory = true;
-      DBG3("Pressed inventory key; change state");
-      game->change_state(Game::STATE_MOVING_ITEMS);
+      wid_inventory_init();
       BOTCON("Left click to move items. Right click to equip.");
       return true;
     }
