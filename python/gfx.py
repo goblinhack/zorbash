@@ -85,6 +85,15 @@ def init_ui_status_bar():
         name="ui_status_bar", width=128, height=512, arr=tiles)
 
 @timeme
+def init_ui_inventory():
+    tiles = [
+      "ui_inventory",
+    ]
+    zx.tile_load_arr(
+        file="data/gfx/ui_inventory.tga",
+        name="ui_inventory", width=528, height=312, arr=tiles)
+
+@timeme
 def init_ui_blood():
     tiles = [
       "blood_0",
@@ -10502,6 +10511,7 @@ init_title_fg4()
 init_title_bg()
 init_light()
 init_ui_status_bar()
+init_ui_inventory()
 init_ui_health_bar()
 init_ui_dead()
 init_ui_credits_bg()
