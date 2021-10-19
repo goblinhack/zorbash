@@ -33,6 +33,21 @@ void ramdisk_init (void)
     }
 
     {
+        extern unsigned char *data_ui_inventory_tga_start_
+           asm("data_ui_inventory_tga_start_");
+        extern unsigned char *data_ui_inventory_tga_end_
+           asm("data_ui_inventory_tga_end_");
+        static const unsigned char *const start =
+           (const unsigned char *const) (char*)&data_ui_inventory_tga_start_;
+        static const unsigned char *const end   =
+           (const unsigned char *const) (char*)&data_ui_inventory_tga_end_;
+        ramdisk_t r;
+        r.data = start;
+        r.len = end - start;
+        ramdisk_data["data/gfx/ui_inventory.tga"] = r;
+    }
+
+    {
         extern unsigned char *data_laser_descent_tga_start_
            asm("data_laser_descent_tga_start_");
         extern unsigned char *data_laser_descent_tga_end_
