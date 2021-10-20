@@ -571,8 +571,8 @@ void wid_actionbar_init(void)
   }
   TRACE_AND_INDENT();
   bool icon_close = false;
-  if (game->bags.size() || wid_collect || wid_skills || wid_item_options_window || wid_enchant || wid_load ||
-      wid_save || game_config_keyboard_window || game_quit_window || wid_inventory_window) {
+
+  if (wid_popup_exists()) {
     icon_close = true;
   }
 

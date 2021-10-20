@@ -17,6 +17,12 @@
 #include "my_wid_text_box.h"
 #include "slre.h"
 
+bool wid_popup_exists(void)
+{
+  return (wid_collect || wid_skills || wid_item_options_window || wid_enchant || wid_load || wid_save ||
+          game_config_keyboard_window || game_quit_window || wid_inventory_window);
+}
+
 WidPopup::~WidPopup()
 {
   wid_destroy(&wid_popup_container);

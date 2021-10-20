@@ -73,6 +73,15 @@ uint8_t wid_right_bar_inventory_open(Widp w, int32_t x, int32_t y, uint32_t butt
   return true;
 }
 
+static uint8_t wid_right_bar_inventory_close(Widp w, int32_t x, int32_t y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  DBG3("Inventory: close");
+  TRACE_AND_INDENT();
+  wid_inventory_fini();
+  return true;
+}
+
 #if 0
 uint8_t wid_inventory_item_mouse_up(Widp w, int32_t x, int32_t y, uint32_t button)
 {
@@ -238,6 +247,16 @@ bool wid_inventory_create(void)
   }
 
   wid_update(wid_inventory_window);
+
+  {
+    auto  w = wid_new_square_button(wid_inventory_window, "wid inventory window close");
+    point ctl(inventory_width - 4, 0);
+    point cbr(inventory_width - 1, 3);
+    wid_set_pos(w, ctl, cbr);
+    wid_set_bg_tilename(w, "icon_close");
+    wid_set_on_mouse_up(w, wid_right_bar_inventory_close);
+  }
+
   game->change_state(Game::STATE_INVENTORY);
 
   DBG3("Created inventory");

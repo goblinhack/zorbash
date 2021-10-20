@@ -2180,4 +2180,18 @@ void Game::config_keyboard_select(void)
   if (game->level) {
     wid_actionbar_init();
   }
+
+  //
+  // Not sure I like this
+  //
+  if (0) {
+    auto  w     = game_config_keyboard_window->wid_popup_container;
+    auto  c     = wid_new_square_button(w, "wid inventory window close");
+    int   width = wid_get_width(w);
+    point ctl(width - 4, 0);
+    point cbr(width - 1, 3);
+    wid_set_pos(c, ctl, cbr);
+    wid_set_bg_tilename(c, "icon_close");
+    // wid_set_on_mouse_up(c, wid_right_bar_inventory_close);
+  }
 }

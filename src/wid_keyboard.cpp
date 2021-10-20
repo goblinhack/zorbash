@@ -758,9 +758,14 @@ Widp wid_keyboard(const std::wstring &text, const std::wstring &title, wid_keybo
   const auto width  = WID_KEYBOARD_ACROSS * 7 + 1;
   const auto height = WID_KEYBOARD_DOWN * 5 + 8;
 
+  int left_half  = width / 2;
+  int right_half = width - left_half;
+  int top_half   = height / 2;
+  int bot_half   = height - top_half;
+
   {
-    point tl = {10, 10};
-    point br = {10 + width, 10 + height};
+    point tl = make_point(TERM_WIDTH / 2 - left_half, TERM_HEIGHT / 2 - top_half);
+    point br = make_point(TERM_WIDTH / 2 + right_half, TERM_HEIGHT / 2 + bot_half);
 
     wid_set_pos(window, tl, br);
     wid_set_style(window, UI_WID_STYLE_NORMAL);

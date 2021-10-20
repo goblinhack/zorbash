@@ -57,6 +57,10 @@ void Level::cursor_move(void)
     return;
   }
 
+  if (wid_popup_exists()) {
+    return;
+  }
+
   if ((wheel_x != 0) || (wheel_y != 0)) {
     if (wid_find_under_mouse_when_scrolling()) {
       return;
