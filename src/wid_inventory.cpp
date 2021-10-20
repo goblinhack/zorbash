@@ -22,7 +22,10 @@ Widp wid_inventory_window {};
 void wid_inventory_fini(void)
 {
   TRACE_AND_INDENT();
-  wid_destroy(&wid_inventory_window);
+  if (wid_inventory_window) {
+    wid_destroy(&wid_inventory_window);
+    game->change_state(Game::STATE_NORMAL);
+  }
 }
 
 bool wid_inventory_init(void)

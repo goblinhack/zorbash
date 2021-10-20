@@ -37,73 +37,6 @@ bool wid_rightbar_init(void)
   return wid_rightbar_create();
 }
 
-static void wid_rightbar_mouse_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
-{
-  TRACE_AND_INDENT();
-  DBG3("rightbar: Begin over rightbar");
-  TRACE_AND_INDENT();
-  if ((game->state == Game::STATE_CHOOSING_TARGET) || (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
-      (game->state == Game::STATE_INVENTORY) || (game->state == Game::STATE_COLLECTING_ITEMS) ||
-      (game->state == Game::STATE_SAVE_MENU) || (game->state == Game::STATE_LOAD_MENU) ||
-      (game->state == Game::STATE_QUIT_MENU) || (game->state == Game::STATE_ENCHANTING_ITEMS)) {
-    DBG3("rightbar: Moving items; ignore");
-    return;
-  }
-
-  if (game->in_transit_item) {
-    DBG3("rightbar: In transit item; ignore");
-    return;
-  }
-
-  auto level = game->level;
-  if (! level) {
-    DBG3("rightbar: No level; ignore");
-    return;
-  }
-
-#if 0
-  if (level->player) {
-    game->wid_thing_info_create(level->player);
-  }
-#endif
-  wid_inventory_init();
-}
-
-static void wid_rightbar_mouse_over_e(Widp w)
-{
-  TRACE_AND_INDENT();
-  DBG3("rightbar: End over rightbar");
-  TRACE_AND_INDENT();
-  if ((game->state == Game::STATE_CHOOSING_TARGET) || (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
-      (game->state == Game::STATE_INVENTORY) || (game->state == Game::STATE_COLLECTING_ITEMS) ||
-      (game->state == Game::STATE_SAVE_MENU) || (game->state == Game::STATE_LOAD_MENU) ||
-      (game->state == Game::STATE_QUIT_MENU) || (game->state == Game::STATE_ENCHANTING_ITEMS)) {
-    DBG3("rightbar: Moving items; ignore");
-    return;
-  }
-
-  if (game->in_transit_item) {
-    DBG3("rightbar: In transit item; ignore");
-    return;
-  }
-
-  auto level = game->level;
-  if (! level) {
-    DBG3("rightbar: No level; ignore");
-    return;
-  }
-
-#if 0
-  game->wid_thing_info_destroy_deferred();
-#endif
-
-  wid_inventory_fini();
-
-  //
-  // Do not create new wids in here
-  //
-}
-
 static void wid_rightbar_inventory_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {
   TRACE_AND_INDENT();
@@ -181,6 +114,8 @@ static void wid_rightbar_inventory_over_e(Widp w)
 
   game->wid_thing_info_destroy_deferred();
 
+  wid_inventory_fini();
+
   //
   // Do not create new wids in here
   //
@@ -224,8 +159,7 @@ static bool wid_rightbar_create(void)
   {
     TRACE_AND_INDENT();
     auto w = wid_new_plain(wid_rightbar, "level no");
-    wid_set_on_mouse_over_b(w, wid_rightbar_mouse_over_b);
-    wid_set_on_mouse_over_e(w, wid_rightbar_mouse_over_e);
+    wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(0, y_at - 1);
 
     //
@@ -244,8 +178,7 @@ static bool wid_rightbar_create(void)
   {
     TRACE_AND_INDENT();
     auto w = wid_new_plain(wid_rightbar, "Seed");
-    wid_set_on_mouse_over_b(w, wid_rightbar_mouse_over_b);
-    wid_set_on_mouse_over_e(w, wid_rightbar_mouse_over_e);
+    wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(0, y_at - 1);
     point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at + 1);
 
@@ -260,8 +193,7 @@ static bool wid_rightbar_create(void)
   {
     TRACE_AND_INDENT();
     auto w = wid_new_plain(wid_rightbar, "title name");
-    wid_set_on_mouse_over_b(w, wid_rightbar_mouse_over_b);
-    wid_set_on_mouse_over_e(w, wid_rightbar_mouse_over_e);
+    wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(0, y_at - 1);
     point br = make_point(UI_SIDEBAR_RIGHT_WIDTH, y_at + 1);
 
@@ -275,8 +207,7 @@ static bool wid_rightbar_create(void)
   {
     TRACE_AND_INDENT();
     auto w = wid_new_plain(wid_rightbar, "gold and keys"); // NOTE this same is referenced elsewhere for particles
-    wid_set_on_mouse_over_b(w, wid_rightbar_mouse_over_b);
-    wid_set_on_mouse_over_e(w, wid_rightbar_mouse_over_e);
+    wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(1, y_at - 2);
     point br = make_point(UI_SIDEBAR_RIGHT_WIDTH, y_at - 2);
 
@@ -295,8 +226,7 @@ static bool wid_rightbar_create(void)
   {
     TRACE_AND_INDENT();
     auto w = wid_new_plain(wid_rightbar, "Health-bar");
-    wid_set_on_mouse_over_b(w, wid_rightbar_mouse_over_b);
-    wid_set_on_mouse_over_e(w, wid_rightbar_mouse_over_e);
+    wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(0, y_at);
     point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH - 1, tl.y);
     wid_set_pos(w, tl, br);
@@ -310,8 +240,7 @@ static bool wid_rightbar_create(void)
   {
     TRACE_AND_INDENT();
     auto w = wid_new_plain(wid_rightbar, "health-value");
-    wid_set_on_mouse_over_b(w, wid_rightbar_mouse_over_b);
-    wid_set_on_mouse_over_e(w, wid_rightbar_mouse_over_e);
+    wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(3, y_at + 1);
     point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH - 4, tl.y);
     wid_set_pos(w, tl, br);
@@ -329,8 +258,7 @@ static bool wid_rightbar_create(void)
   {
     TRACE_AND_INDENT();
     auto w = wid_new_plain(wid_rightbar, "stamina-bar");
-    wid_set_on_mouse_over_b(w, wid_rightbar_mouse_over_b);
-    wid_set_on_mouse_over_e(w, wid_rightbar_mouse_over_e);
+    wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(0, y_at);
     point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH - 1, tl.y);
     wid_set_pos(w, tl, br);
@@ -344,8 +272,7 @@ static bool wid_rightbar_create(void)
   {
     TRACE_AND_INDENT();
     auto w = wid_new_plain(wid_rightbar, "stamina-value");
-    wid_set_on_mouse_over_b(w, wid_rightbar_mouse_over_b);
-    wid_set_on_mouse_over_e(w, wid_rightbar_mouse_over_e);
+    wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(3, y_at + 1);
     point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH - 4, tl.y);
     wid_set_pos(w, tl, br);
@@ -363,8 +290,6 @@ static bool wid_rightbar_create(void)
   {
     TRACE_AND_INDENT();
     auto w = wid_new_plain(wid_rightbar, "stats1-value");
-    wid_set_on_mouse_over_b(w, wid_rightbar_mouse_over_b);
-    wid_set_on_mouse_over_e(w, wid_rightbar_mouse_over_e);
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(0, y_at + 1);
     point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH, tl.y);
@@ -385,8 +310,6 @@ static bool wid_rightbar_create(void)
   {
     TRACE_AND_INDENT();
     auto w = wid_new_plain(wid_rightbar, "stats2-value");
-    wid_set_on_mouse_over_b(w, wid_rightbar_mouse_over_b);
-    wid_set_on_mouse_over_e(w, wid_rightbar_mouse_over_e);
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(0, y_at + 1);
     point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH, tl.y);
