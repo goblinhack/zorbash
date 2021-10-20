@@ -13,6 +13,7 @@
 #include "my_ui.h"
 #include "my_wid.h"
 #include "my_wid_actionbar.h"
+#include "my_wid_inventory.h"
 #include "my_wid_popup.h"
 #include "my_wid_text_box.h"
 #include "slre.h"
