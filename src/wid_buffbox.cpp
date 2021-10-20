@@ -34,9 +34,8 @@ void wid_buffbox_mouse_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx
   TRACE_AND_INDENT();
   if ((game->state == Game::STATE_CHOOSING_TARGET) || (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
       (game->state == Game::STATE_INVENTORY) || (game->state == Game::STATE_COLLECTING_ITEMS) ||
-      (game->state == Game::STATE_WIELDING_ITEMS) || (game->state == Game::STATE_SAVE_MENU) ||
-      (game->state == Game::STATE_LOAD_MENU) || (game->state == Game::STATE_QUIT_MENU) ||
-      (game->state == Game::STATE_ENCHANTING_ITEMS)) {
+      (game->state == Game::STATE_SAVE_MENU) || (game->state == Game::STATE_LOAD_MENU) ||
+      (game->state == Game::STATE_QUIT_MENU) || (game->state == Game::STATE_ENCHANTING_ITEMS)) {
     DBG3("buffbox: Moving items; ignore");
     return;
   }
@@ -76,9 +75,8 @@ void wid_buffbox_mouse_over_e(Widp w)
   TRACE_AND_INDENT();
   if ((game->state == Game::STATE_CHOOSING_TARGET) || (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
       (game->state == Game::STATE_INVENTORY) || (game->state == Game::STATE_COLLECTING_ITEMS) ||
-      (game->state == Game::STATE_WIELDING_ITEMS) || (game->state == Game::STATE_SAVE_MENU) ||
-      (game->state == Game::STATE_LOAD_MENU) || (game->state == Game::STATE_QUIT_MENU) ||
-      (game->state == Game::STATE_ENCHANTING_ITEMS)) {
+      (game->state == Game::STATE_SAVE_MENU) || (game->state == Game::STATE_LOAD_MENU) ||
+      (game->state == Game::STATE_QUIT_MENU) || (game->state == Game::STATE_ENCHANTING_ITEMS)) {
     DBG3("buffbox: Moving items; ignore");
     return;
   }

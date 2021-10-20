@@ -170,15 +170,6 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     return true;
   }
 
-  if (game->state == Game::STATE_WIELDING_ITEMS) {
-    if (key->scancode == SDL_SCANCODE_ESCAPE) {
-      DBG3("Escape pressed, clear wielding items state");
-      TRACE_AND_INDENT();
-      game->change_state(Game::STATE_NORMAL);
-      return true;
-    }
-  }
-
   if (game->state == Game::STATE_COLLECTING_ITEMS) {
     if (key->scancode == SDL_SCANCODE_ESCAPE) {
       DBG3("Escape pressed, clear collecting items state");

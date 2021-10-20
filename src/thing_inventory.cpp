@@ -137,8 +137,7 @@ void Thing::inventory_particle(Thingp item, uint32_t slot, Thingp particle_targe
     // Always show
     //
   } else {
-    if ((game->state == Game::STATE_INVENTORY) || (game->state == Game::STATE_WIELDING_ITEMS) ||
-        (game->state == Game::STATE_COLLECTING_ITEMS)) {
+    if ((game->state == Game::STATE_INVENTORY) || (game->state == Game::STATE_COLLECTING_ITEMS)) {
       //
       // No animations when moving stuff around
       //
@@ -263,7 +262,7 @@ bool Thing::inventory_id_insert(Thingp item)
         //
       } else {
         if ((game->state != Game::STATE_CHOOSING_TARGET) && (game->state != Game::STATE_INVENTORY) &&
-            (game->state != Game::STATE_WIELDING_ITEMS) && (game->state != Game::STATE_COLLECTING_ITEMS)) {
+            (game->state != Game::STATE_COLLECTING_ITEMS)) {
           wid_thing_info_fini();
         }
         if (game->robot_mode) {
@@ -292,7 +291,7 @@ bool Thing::inventory_id_insert(Thingp item)
   }
 
   if ((game->state != Game::STATE_CHOOSING_TARGET) && (game->state != Game::STATE_INVENTORY) &&
-      (game->state != Game::STATE_WIELDING_ITEMS) && (game->state != Game::STATE_COLLECTING_ITEMS)) {
+      (game->state != Game::STATE_COLLECTING_ITEMS)) {
     wid_thing_info_fini();
   }
 
@@ -369,7 +368,7 @@ bool Thing::inventory_id_remove(Thingp item)
 
       level->inventory_describe(game->inventory_highlight_slot);
       if ((game->state != Game::STATE_CHOOSING_TARGET) && (game->state != Game::STATE_INVENTORY) &&
-          (game->state != Game::STATE_WIELDING_ITEMS) && (game->state != Game::STATE_COLLECTING_ITEMS)) {
+          (game->state != Game::STATE_COLLECTING_ITEMS)) {
         wid_thing_info_fini();
       }
       return true;
@@ -441,7 +440,7 @@ bool Thing::inventory_id_remove(Thingp item, Thingp particle_target)
       }
 
       if ((game->state != Game::STATE_CHOOSING_TARGET) && (game->state != Game::STATE_INVENTORY) &&
-          (game->state != Game::STATE_WIELDING_ITEMS) && (game->state != Game::STATE_COLLECTING_ITEMS)) {
+          (game->state != Game::STATE_COLLECTING_ITEMS)) {
         wid_thing_info_fini();
       }
       return true;

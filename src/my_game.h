@@ -169,7 +169,6 @@ public:
   void      save_snapshot_check();
   void      robot_mode_tick();
   void      wid_collect_create(const std::list< Thingp > items);
-  void      wid_wield_create(void);
   void      wid_items_options_create(Widp w, Thingp chosen, bool came_from_inventory);
   bool      wid_bag_move_item(Widp w, Thingp t);
   void      wid_enchant_an_item(void);
@@ -254,7 +253,6 @@ public:
     STATE_OPTIONS_FOR_ITEM_MENU, // Drop, throw etc and item
     STATE_INVENTORY,             // Currently managing inventory
     STATE_COLLECTING_ITEMS,      // Collecting en masse from the level
-    STATE_WIELDING_ITEMS,        // Selecting a weapon
     STATE_ENCHANTING_ITEMS,      // Upgrading items
     STATE_CHOOSING_SKILLS,       // Choosing skills
     STATE_CHOOSING_TARGET,       // Looking to somewhere to throw at

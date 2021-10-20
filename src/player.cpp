@@ -55,13 +55,6 @@ void player_tick (bool left, bool right, bool up, bool down, bool attack, bool w
         }
       }
       return;
-    case Game::STATE_WIELDING_ITEMS:
-      {
-        IF_DEBUG3 {
-          LOG("Ignore player action when wielding items");
-        }
-      }
-      return;
     case Game::STATE_COLLECTING_ITEMS: // Collecting en masse from the level
       {
         IF_DEBUG3 {

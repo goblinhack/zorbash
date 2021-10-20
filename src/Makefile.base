@@ -310,7 +310,6 @@ GAME_OBJECTS=				    \
     $(OBJDIR)/wid_thing_info.o              \
     $(OBJDIR)/wid_tiles.o                   \
     $(OBJDIR)/wid_topcon.o                  \
-    $(OBJDIR)/wid_wield.o                   \
     $(OBJDIR)/world_fini.o                  \
     $(OBJDIR)/world_id.o                    \
     $(OBJDIR)/world_init.o                  \

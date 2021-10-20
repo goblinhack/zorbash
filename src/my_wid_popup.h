@@ -40,7 +40,6 @@ public:
 extern void wid_popup_test(void);
 
 extern void wid_collect_destroy(void);
-extern void wid_wield_destroy(void);
 extern void wid_enchant_destroy(void);
 extern void wid_skill_choose_destroy(void);
 extern void wid_item_options_destroy(void);
@@ -50,7 +49,6 @@ extern void game_quit_destroy(void);
 extern void game_config_keyboard_destroy(void);
 
 extern WidPopup *wid_collect;
-extern WidPopup *wid_wield;
 extern WidPopup *wid_skills;
 extern WidPopup *wid_enchant;
 extern WidPopup *wid_item_options_window;

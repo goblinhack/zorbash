@@ -31,7 +31,6 @@ void wid_actionbar_close_all_popups(void)
   TRACE_AND_INDENT();
   wid_thing_info_fini();
   wid_collect_destroy();
-  wid_wield_destroy();
   wid_enchant_destroy();
   wid_skill_choose_destroy();
   wid_item_options_destroy();
@@ -58,13 +57,13 @@ static uint8_t wid_actionbar_quit(Widp w, int32_t x, int32_t y, uint32_t button)
   TRACE_AND_INDENT();
   DBG3("Actionbar quit");
   TRACE_AND_INDENT();
+
+  wid_actionbar_close_all_popups();
   if (game_quit_window) {
-    wid_actionbar_close_all_popups();
     wid_actionbar_init();
     return true;
   }
 
-  wid_actionbar_close_all_popups();
   game->quit_select();
   return true;
 }
@@ -205,13 +204,12 @@ static uint8_t wid_actionbar_load(Widp w, int32_t x, int32_t y, uint32_t button)
     return true;
   }
 
+  wid_actionbar_close_all_popups();
   if (wid_load) {
-    wid_actionbar_close_all_popups();
     wid_actionbar_init();
     return true;
   }
 
-  wid_actionbar_close_all_popups();
   game->load_select();
   wid_actionbar_init();
   return true;
@@ -247,8 +245,8 @@ static uint8_t wid_actionbar_save(Widp w, int32_t x, int32_t y, uint32_t button)
     return true;
   }
 
+  wid_actionbar_close_all_popups();
   if (wid_save) {
-    wid_actionbar_close_all_popups();
     wid_actionbar_init();
     return true;
   }
@@ -294,13 +292,14 @@ static uint8_t wid_actionbar_inventory(Widp w, int32_t x, int32_t y, uint32_t bu
     return true;
   }
 
+  wid_actionbar_close_all_popups();
   if (game->state == Game::STATE_INVENTORY) {
-    wid_actionbar_close_all_popups();
     wid_actionbar_init();
     return true;
   }
 
-  wid_actionbar_close_all_popups();
+  wid_inventory_init();
+  wid_actionbar_init();
   return true;
 }
 
@@ -343,13 +342,11 @@ static uint8_t wid_actionbar_collect(Widp w, int32_t x, int32_t y, uint32_t butt
     return true;
   }
 
+  wid_actionbar_close_all_popups();
   if (wid_collect) {
-    wid_actionbar_close_all_popups();
     wid_actionbar_init();
     return true;
   }
-
-  wid_actionbar_close_all_popups();
 
   auto items = player->anything_to_carry();
   if (items.empty()) {
@@ -367,60 +364,6 @@ static void wid_actionbar_collect_over_b(Widp w, int32_t relx, int32_t rely, int
 }
 
 static void wid_actionbar_collect_over_e(Widp w)
-{
-  TRACE_AND_INDENT();
-  BOTCON(" ");
-}
-
-static uint8_t wid_actionbar_wield(Widp w, int32_t x, int32_t y, uint32_t button)
-{
-  TRACE_AND_INDENT();
-  DBG3("Actionbar wield");
-  TRACE_AND_INDENT();
-  if (! game->level) {
-    return true;
-  }
-
-  auto player = game->level->player;
-  if (! player) {
-    return true;
-  }
-
-  if (player->is_dead) {
-    return true;
-  }
-
-  if (game->in_transit_item) {
-    return true;
-  }
-
-  wid_actionbar_close_all_popups();
-
-  if (wid_wield) {
-    wid_actionbar_close_all_popups();
-    wid_actionbar_init();
-    return true;
-  }
-
-  for (const auto &item : player->monst_infop->carrying) {
-    auto t = game->level->thing_find(item.id);
-    if (t->is_weapon()) {
-      game->wid_wield_create();
-      return true;
-    }
-  }
-
-  TOPCON("You have no weapon to wield!");
-  return true;
-}
-
-static void wid_actionbar_wield_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
-{
-  TRACE_AND_INDENT();
-  BOTCON("Select this to wield a new weapon.");
-}
-
-static void wid_actionbar_wield_over_e(Widp w)
 {
   TRACE_AND_INDENT();
   BOTCON(" ");
@@ -451,7 +394,6 @@ static uint8_t wid_actionbar_wait(Widp w, int32_t x, int32_t y, uint32_t button)
   wid_last_wait = time_get_time_ms_cached();
 
   wid_actionbar_close_all_popups();
-
   TOPCON("You pass the time...");
   game->tick_begin("wait");
 
@@ -491,7 +433,6 @@ static uint8_t wid_actionbar_repeat_wait(Widp w, int32_t x, int32_t y, uint32_t 
   wid_last_wait_repeat = time_get_time_ms_cached();
 
   wid_actionbar_close_all_popups();
-
   TOPCON("You continue to pass the time...");
   game->tick_begin("wait");
 
@@ -571,13 +512,12 @@ static uint8_t wid_actionbar_configure(Widp w, int32_t x, int32_t y, uint32_t bu
     return true;
   }
 
+  wid_actionbar_close_all_popups();
   if (game_config_keyboard_window) {
-    wid_actionbar_close_all_popups();
     wid_actionbar_init();
     return true;
   }
 
-  wid_actionbar_close_all_popups();
   game->change_state(Game::STATE_NORMAL);
   wid_thing_info_fini(); // To remove bag or other info
   game->config_keyboard_select();
@@ -631,12 +571,12 @@ void wid_actionbar_init(void)
   }
   TRACE_AND_INDENT();
   bool icon_close = false;
-  if (game->bags.size() || wid_collect || wid_wield || wid_skills || wid_item_options_window || wid_enchant ||
-      wid_load || wid_save || game_config_keyboard_window || game_quit_window || wid_inventory_window) {
+  if (game->bags.size() || wid_collect || wid_skills || wid_item_options_window || wid_enchant || wid_load ||
+      wid_save || game_config_keyboard_window || game_quit_window || wid_inventory_window) {
     icon_close = true;
   }
 
-  int options = 10;
+  int options = 9;
 
   if (icon_collect) {
     options++;
@@ -764,31 +704,6 @@ void wid_actionbar_init(void)
     wid_set_on_mouse_up(w, wid_actionbar_zoom_out);
     wid_set_on_mouse_over_b(w, wid_actionbar_zoom_out_over_b);
     wid_set_on_mouse_over_e(w, wid_actionbar_zoom_out_over_e);
-    x_at += option_width;
-  }
-
-  {
-    auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar wield");
-    point tl = make_point(x_at, 0);
-    point br = make_point(x_at + option_width - 1, option_width - 1);
-    wid_set_pos(w, tl, br);
-    wid_set_bg_tilename(w, "icon_wield");
-
-    auto weapon = player->weapon_get();
-    if (weapon) {
-      auto tpp   = weapon->tp();
-      auto tiles = &tpp->tiles;
-      if (tiles) {
-        auto tile = tile_first(tiles);
-        if (tile) {
-          wid_set_bg_tilename(w, "icon_none");
-          wid_set_fg_tile(w, tile);
-        }
-      }
-    }
-    wid_set_on_mouse_up(w, wid_actionbar_wield);
-    wid_set_on_mouse_over_b(w, wid_actionbar_wield_over_b);
-    wid_set_on_mouse_over_e(w, wid_actionbar_wield_over_e);
     x_at += option_width;
   }
 

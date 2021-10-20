@@ -57,7 +57,7 @@ bool Thing::skillbox_id_insert(Thingp what)
       } else {
         wid_skillbox_init();
         if ((game->state != Game::STATE_CHOOSING_TARGET) && (game->state != Game::STATE_INVENTORY) &&
-            (game->state != Game::STATE_WIELDING_ITEMS) && (game->state != Game::STATE_COLLECTING_ITEMS)) {
+            (game->state != Game::STATE_COLLECTING_ITEMS)) {
           wid_thing_info_fini();
         }
         return true;
@@ -83,7 +83,7 @@ bool Thing::skillbox_id_insert(Thingp what)
 
   wid_skillbox_init();
   if ((game->state != Game::STATE_CHOOSING_TARGET) && (game->state != Game::STATE_INVENTORY) &&
-      (game->state != Game::STATE_WIELDING_ITEMS) && (game->state != Game::STATE_COLLECTING_ITEMS)) {
+      (game->state != Game::STATE_COLLECTING_ITEMS)) {
     wid_thing_info_fini();
   }
   level->skillbox_describe(item_slot);
@@ -141,7 +141,7 @@ bool Thing::skillbox_id_remove(Thingp what)
       level->skillbox_describe(game->skillbox_highlight_slot);
       wid_skillbox_init();
       if ((game->state != Game::STATE_CHOOSING_TARGET) && (game->state != Game::STATE_INVENTORY) &&
-          (game->state != Game::STATE_WIELDING_ITEMS) && (game->state != Game::STATE_COLLECTING_ITEMS)) {
+          (game->state != Game::STATE_COLLECTING_ITEMS)) {
         wid_thing_info_fini();
       }
       return true;

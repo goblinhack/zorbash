@@ -37,7 +37,6 @@ void Game::change_state(int new_state)
       LOG("State changing to STATE_NORMAL");
       wid_thing_info_fini();
       wid_collect_destroy();
-      wid_wield_destroy();
       wid_enchant_destroy();
       wid_skill_choose_destroy();
       wid_item_options_destroy();
@@ -56,12 +55,6 @@ void Game::change_state(int new_state)
       wid_thing_info_fini();
       wid_collect_destroy();
       LOG("State changed to STATE_COLLECTING_ITEMS");
-      break;
-    case STATE_WIELDING_ITEMS :
-      LOG("State changing to STATE_WIELDING_ITEMS");
-      wid_thing_info_fini();
-      wid_wield_destroy();
-      LOG("State changed to STATE_WIELDING_ITEMS");
       break;
     case STATE_ENCHANTING_ITEMS :
       LOG("State changing to STATE_ENCHANTING_ITEMS");
@@ -103,7 +96,6 @@ void Game::change_state(int new_state)
     case STATE_NORMAL :
     case STATE_INVENTORY :        // Currently managing inventory
     case STATE_COLLECTING_ITEMS : // Collecting en masse from the level
-    case STATE_WIELDING_ITEMS :
     case STATE_ENCHANTING_ITEMS :
     case STATE_CHOOSING_SKILLS :
       if (level) {

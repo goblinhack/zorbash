@@ -57,7 +57,7 @@ bool Thing::buffbox_id_insert(Thingp what)
       } else {
         wid_buffbox_init();
         if ((game->state != Game::STATE_CHOOSING_TARGET) && (game->state != Game::STATE_INVENTORY) &&
-            (game->state != Game::STATE_WIELDING_ITEMS) && (game->state != Game::STATE_COLLECTING_ITEMS)) {
+            (game->state != Game::STATE_COLLECTING_ITEMS)) {
           wid_thing_info_fini();
         }
         return true;
@@ -83,7 +83,7 @@ bool Thing::buffbox_id_insert(Thingp what)
 
   wid_buffbox_init();
   if ((game->state != Game::STATE_CHOOSING_TARGET) && (game->state != Game::STATE_INVENTORY) &&
-      (game->state != Game::STATE_WIELDING_ITEMS) && (game->state != Game::STATE_COLLECTING_ITEMS)) {
+      (game->state != Game::STATE_COLLECTING_ITEMS)) {
     wid_thing_info_fini();
   }
   level->buffbox_describe(item_slot);
@@ -132,7 +132,7 @@ bool Thing::buffbox_id_remove(Thingp what)
 
       wid_buffbox_init();
       if ((game->state != Game::STATE_CHOOSING_TARGET) && (game->state != Game::STATE_INVENTORY) &&
-          (game->state != Game::STATE_WIELDING_ITEMS) && (game->state != Game::STATE_COLLECTING_ITEMS)) {
+          (game->state != Game::STATE_COLLECTING_ITEMS)) {
         wid_thing_info_fini();
       }
       return true;
