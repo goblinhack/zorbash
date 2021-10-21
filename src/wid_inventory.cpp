@@ -19,13 +19,31 @@
 
 Widp      wid_inventory_window;
 WidPopup *wid_inventory_thing_info;
+WidBag *  wid_inventory_bag;
+
+enum {
+  WID_INVENTORY_TAB_BAG1,
+  WID_INVENTORY_TAB_BAG2,
+  WID_INVENTORY_TAB_SLOT,
+};
+
+static int wid_inventory_tab = WID_INVENTORY_TAB_BAG1;
 
 void wid_inventory_fini(void)
 {
   TRACE_AND_INDENT();
-  if (wid_inventory_window) {
+
+  if (wid_inventory_thing_info) {
     delete wid_inventory_thing_info;
     wid_inventory_thing_info = nullptr;
+  }
+
+  if (wid_inventory_bag) {
+    delete wid_inventory_bag;
+    wid_inventory_bag = nullptr;
+  }
+
+  if (wid_inventory_window) {
     wid_destroy(&wid_inventory_window);
     game->change_state(Game::STATE_NORMAL);
   }
@@ -252,26 +270,63 @@ bool wid_inventory_create(void)
 
   {
     auto  w = wid_new_square_button(wid_inventory_window, "wid inventory window close");
-    point ctl(inventory_width - 4, 0);
-    point cbr(inventory_width - 1, 3);
-    wid_set_pos(w, ctl, cbr);
-    wid_set_bg_tilename(w, "icon_close");
+    point tl(inventory_width - 4, 0);
+    point br(inventory_width - 1, 3);
+    wid_set_pos(w, tl, br);
+    wid_set_bg_tilename(w, "ui_icon_close");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_close);
   }
 
   {
-    point tl = point(22, 5);
-    point br = tl + point(player->capacity_width() + 1, player->capacity_height() + 1);
-    new WidBag(wid_inventory_window, player, true, tl, br, "player-bag");
+    auto  w  = wid_new_square_button(wid_inventory_window, "wid inventory tab bag1");
+    point tl = point(23, 4);
+    point br = point(25, 4);
+    wid_set_pos(w, tl, br);
+    if (wid_inventory_tab == WID_INVENTORY_TAB_BAG1) {
+      wid_set_fg_tilename(w, "ui_tab_bag1");
+    } else {
+      wid_set_fg_tilename(w, "ui_tab_bag1_dark");
+    }
+    wid_set_on_mouse_up(w, wid_right_bar_inventory_close);
   }
 
-  game->change_state(Game::STATE_INVENTORY);
+  {
+    auto  w  = wid_new_square_button(wid_inventory_window, "wid inventory tab bag1");
+    point tl = point(26, 4);
+    point br = point(28, 4);
+    wid_set_pos(w, tl, br);
+    if (wid_inventory_tab == WID_INVENTORY_TAB_BAG2) {
+      wid_set_fg_tilename(w, "ui_tab_bag2");
+    } else {
+      wid_set_fg_tilename(w, "ui_tab_bag2_dark");
+    }
+    wid_set_on_mouse_up(w, wid_right_bar_inventory_close);
+  }
+
+  {
+    auto  w  = wid_new_square_button(wid_inventory_window, "wid inventory tab bag1");
+    point tl = point(29, 4);
+    point br = point(31, 4);
+    wid_set_pos(w, tl, br);
+    if (wid_inventory_tab == WID_INVENTORY_TAB_SLOT) {
+      wid_set_fg_tilename(w, "ui_tab_slots");
+    } else {
+      wid_set_fg_tilename(w, "ui_tab_slots_dark");
+    }
+    wid_set_on_mouse_up(w, wid_right_bar_inventory_close);
+  }
+
+  {
+    point tl          = point(22, 5);
+    point br          = tl + point(player->capacity_width() + 1, player->capacity_height() + 1);
+    wid_inventory_bag = new WidBag(wid_inventory_window, player, true, tl, br, "player-bag");
+  }
 
   {
     //
     // Create the wid info over the inventory
     //
-    static int tlx, tly, brx, bry;
+    int tlx, tly, brx, bry;
     wid_get_tl_x_tl_y_br_x_br_y(wid_inventory_window, &tlx, &tly, &brx, &bry);
     tlx += 45;
     tly += 5;
@@ -281,6 +336,8 @@ bool wid_inventory_create(void)
     delete wid_inventory_thing_info;
     wid_inventory_thing_info = game->wid_thing_info_create_popup(player, point(tlx, tly), point(brx, bry));
   }
+
+  game->change_state(Game::STATE_INVENTORY);
 
   return true;
 }

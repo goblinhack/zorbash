@@ -2191,7 +2191,7 @@ void Game::config_keyboard_select(void)
     point ctl(width - 4, 0);
     point cbr(width - 1, 3);
     wid_set_pos(c, ctl, cbr);
-    wid_set_bg_tilename(c, "icon_close");
+    wid_set_bg_tilename(c, "ui_icon_close");
     // wid_set_on_mouse_up(c, wid_right_bar_inventory_close);
   }
 }

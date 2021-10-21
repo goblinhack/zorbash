@@ -20,6 +20,7 @@ class Wid;
 class World;
 class Thing_;
 class WidPopup;
+class WidBag;
 struct AgeMap_;
 struct Dmap_;
 struct FovMap_;

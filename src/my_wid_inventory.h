@@ -4,14 +4,15 @@
 //
 
 #pragma once
-#include "my_sys.h"
 #include "my_fwd.h"
+#include "my_sys.h"
 
 void wid_inventory_fini(void);
 bool wid_inventory_init(void);
 bool wid_inventory_create(void);
 
-extern class Wid *wid_inventory_window;
+extern class Wid *     wid_inventory_window;
+extern class WidBag *  wid_inventory_bag;
 extern class WidPopup *wid_inventory_thing_info;
 
 //

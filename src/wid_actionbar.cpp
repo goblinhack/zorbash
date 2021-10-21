@@ -565,24 +565,24 @@ void wid_actionbar_init(void)
   }
   TRACE_AND_INDENT();
   LOG("Actionbar init create");
-  bool icon_collect = false;
+  bool ui_icon_collect = false;
   if (player->check_anything_to_carry(false)) {
-    icon_collect = true;
+    ui_icon_collect = true;
   }
   TRACE_AND_INDENT();
-  bool icon_close = false;
+  bool ui_icon_close = false;
 
   if (wid_popup_exists()) {
-    icon_close = true;
+    ui_icon_close = true;
   }
 
   int options = 9;
 
-  if (icon_collect) {
+  if (ui_icon_collect) {
     options++;
   }
 
-  if (icon_close) {
+  if (ui_icon_close) {
     options++;
     options++;
   }
@@ -606,12 +606,12 @@ void wid_actionbar_init(void)
 
   int x_at = 0;
 
-  if (icon_close) {
+  if (ui_icon_close) {
     auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar close");
     point tl = make_point(x_at, 0);
     point br = make_point(x_at + option_width - 1, option_width - 1);
     wid_set_pos(w, tl, br);
-    wid_set_bg_tilename(w, "icon_close");
+    wid_set_bg_tilename(w, "ui_icon_close");
     wid_set_on_mouse_up(w, wid_actionbar_close);
     wid_set_on_mouse_over_b(w, wid_actionbar_close_over_b);
     wid_set_on_mouse_over_e(w, wid_actionbar_close_over_e);
@@ -623,7 +623,7 @@ void wid_actionbar_init(void)
     point tl = make_point(x_at, 0);
     point br = make_point(x_at + option_width - 1, option_width - 1);
     wid_set_pos(w, tl, br);
-    wid_set_bg_tilename(w, "icon_quit");
+    wid_set_bg_tilename(w, "ui_icon_quit");
     wid_set_on_mouse_up(w, wid_actionbar_quit);
     wid_set_on_mouse_over_b(w, wid_actionbar_quit_over_b);
     wid_set_on_mouse_over_e(w, wid_actionbar_quit_over_e);
@@ -635,7 +635,7 @@ void wid_actionbar_init(void)
     point tl = make_point(x_at, 0);
     point br = make_point(x_at + option_width - 1, option_width - 1);
     wid_set_pos(w, tl, br);
-    wid_set_bg_tilename(w, "icon_config");
+    wid_set_bg_tilename(w, "ui_icon_config");
     wid_set_on_mouse_up(w, wid_actionbar_configure);
     wid_set_on_mouse_over_b(w, wid_actionbar_configure_over_b);
     wid_set_on_mouse_over_e(w, wid_actionbar_configure_over_e);
@@ -647,12 +647,12 @@ void wid_actionbar_init(void)
     point tl = make_point(x_at, 0);
     point br = make_point(x_at + option_width - 1, option_width - 1);
     wid_set_pos(w, tl, br);
-    wid_set_bg_tilename(w, "icon_robot");
+    wid_set_bg_tilename(w, "ui_icon_robot");
     wid_set_on_mouse_up(w, wid_actionbar_robot);
     wid_set_on_mouse_over_b(w, wid_actionbar_robot_over_b);
     wid_set_on_mouse_over_e(w, wid_actionbar_robot_over_e);
     if (game->robot_mode) {
-      wid_set_bg_tilename(w, "icon_robot_on");
+      wid_set_bg_tilename(w, "ui_icon_robot_on");
       wid_set_on_tick(w, wid_actionbar_ai_tick);
     }
     wid_set_style(w, UI_WID_STYLE_RED);
@@ -664,7 +664,7 @@ void wid_actionbar_init(void)
     point tl = make_point(x_at, 0);
     point br = make_point(x_at + option_width - 1, option_width - 1);
     wid_set_pos(w, tl, br);
-    wid_set_bg_tilename(w, "icon_save");
+    wid_set_bg_tilename(w, "ui_icon_save");
     wid_set_on_mouse_up(w, wid_actionbar_save);
     wid_set_on_mouse_over_b(w, wid_actionbar_save_over_b);
     wid_set_on_mouse_over_e(w, wid_actionbar_save_over_e);
@@ -676,7 +676,7 @@ void wid_actionbar_init(void)
     point tl = make_point(x_at, 0);
     point br = make_point(x_at + option_width - 1, option_width - 1);
     wid_set_pos(w, tl, br);
-    wid_set_bg_tilename(w, "icon_load");
+    wid_set_bg_tilename(w, "ui_icon_load");
     wid_set_on_mouse_up(w, wid_actionbar_load);
     wid_set_on_mouse_over_b(w, wid_actionbar_load_over_b);
     wid_set_on_mouse_over_e(w, wid_actionbar_load_over_e);
@@ -688,7 +688,7 @@ void wid_actionbar_init(void)
     point tl = make_point(x_at, 0);
     point br = make_point(x_at + option_width - 1, option_width - 1);
     wid_set_pos(w, tl, br);
-    wid_set_bg_tilename(w, "icon_zoom_in");
+    wid_set_bg_tilename(w, "ui_icon_zoom_in");
     wid_set_on_mouse_up(w, wid_actionbar_zoom_in);
     wid_set_on_mouse_over_b(w, wid_actionbar_zoom_in_over_b);
     wid_set_on_mouse_over_e(w, wid_actionbar_zoom_in_over_e);
@@ -700,7 +700,7 @@ void wid_actionbar_init(void)
     point tl = make_point(x_at, 0);
     point br = make_point(x_at + option_width - 1, option_width - 1);
     wid_set_pos(w, tl, br);
-    wid_set_bg_tilename(w, "icon_zoom_out");
+    wid_set_bg_tilename(w, "ui_icon_zoom_out");
     wid_set_on_mouse_up(w, wid_actionbar_zoom_out);
     wid_set_on_mouse_over_b(w, wid_actionbar_zoom_out_over_b);
     wid_set_on_mouse_over_e(w, wid_actionbar_zoom_out_over_e);
@@ -712,7 +712,7 @@ void wid_actionbar_init(void)
     point tl = make_point(x_at, 0);
     point br = make_point(x_at + option_width - 1, option_width - 1);
     wid_set_pos(w, tl, br);
-    wid_set_bg_tilename(w, "icon_inventory");
+    wid_set_bg_tilename(w, "ui_icon_inventory");
     wid_set_on_mouse_up(w, wid_actionbar_inventory);
     wid_set_on_mouse_over_b(w, wid_actionbar_inventory_over_b);
     wid_set_on_mouse_over_e(w, wid_actionbar_inventory_over_e);
@@ -724,7 +724,7 @@ void wid_actionbar_init(void)
     point tl = make_point(x_at, 0);
     point br = make_point(x_at + option_width - 1, option_width - 1);
     wid_set_pos(w, tl, br);
-    wid_set_bg_tilename(w, "icon_wait");
+    wid_set_bg_tilename(w, "ui_icon_wait");
     wid_set_on_mouse_down(w, wid_actionbar_wait);
     wid_set_on_mouse_held_down(w, wid_actionbar_repeat_wait);
     wid_set_on_mouse_over_b(w, wid_actionbar_wait_over_b);
@@ -732,24 +732,24 @@ void wid_actionbar_init(void)
     x_at += option_width;
   }
 
-  if (icon_collect) {
+  if (ui_icon_collect) {
     auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar collect");
     point tl = make_point(x_at, 0);
     point br = make_point(x_at + option_width - 1, option_width - 1);
     wid_set_pos(w, tl, br);
-    wid_set_bg_tilename(w, "icon_collect");
+    wid_set_bg_tilename(w, "ui_icon_collect");
     wid_set_on_mouse_up(w, wid_actionbar_collect);
     wid_set_on_mouse_over_b(w, wid_actionbar_collect_over_b);
     wid_set_on_mouse_over_e(w, wid_actionbar_collect_over_e);
     x_at += option_width;
   }
 
-  if (icon_close) {
+  if (ui_icon_close) {
     auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar close");
     point tl = make_point(x_at, 0);
     point br = make_point(x_at + option_width - 1, option_width - 1);
     wid_set_pos(w, tl, br);
-    wid_set_bg_tilename(w, "icon_close");
+    wid_set_bg_tilename(w, "ui_icon_close");
     wid_set_on_mouse_up(w, wid_actionbar_close);
     wid_set_on_mouse_over_b(w, wid_actionbar_close_over_b);
     wid_set_on_mouse_over_e(w, wid_actionbar_close_over_e);

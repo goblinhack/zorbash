@@ -83,8 +83,6 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
 
   wid_popup_window->t = t;
 
-  wid_raise(wid_popup_window->wid_popup_container);
-
   {
     TRACE_AND_INDENT();
     auto  w  = wid_new_plain(wid_popup_window->wid_popup_container, "ui-circle");
@@ -99,7 +97,7 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
 
   {
     TRACE_AND_INDENT();
-    auto  w  = wid_new_plain(wid_popup_window->wid_popup_container, "ui-circle");
+    auto  w  = wid_new_plain(wid_popup_window->wid_popup_container, "ui-circle-bg");
     point tl = make_point(11 + 2, 2);
     point br = make_point(11 + 5, 5);
     wid_set_ignore_events(w, true);
@@ -109,6 +107,9 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
     wid_set_color(w, WID_COLOR_BG, WHITE);
     wid_set_style(w, UI_WID_STYLE_SPARSE_NONE);
   }
+
+  wid_update(wid_popup_window->wid_popup_container);
+  wid_raise(wid_popup_window->wid_popup_container);
 
   wid_popup_window->log(" ");
   wid_popup_window->log(" ");

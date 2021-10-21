@@ -33,21 +33,34 @@ def init_light():
 @timeme
 def init_ui_circle():
     tiles = [
-        "ui_circle"
+        "ui_circle",
     ]
     zx.tile_load_arr(
         file="data/gfx/ui_circle.tga",
         name="ui_circle", width=256, height=256, arr=tiles)
 
 @timeme
+def init_ui_tabs():
+    tiles = [
+        "ui_tab_bag1",
+        "ui_tab_bag2",
+        "ui_tab_slots",
+        "ui_tab_bag1_dark",
+        "ui_tab_bag2_dark",
+        "ui_tab_slots_dark",
+    ]
+    zx.tile_load_arr(
+        file="data/gfx/ui_tabs.tga",
+        name="ui_tabs", width=24, height=8, arr=tiles)
+
+@timeme
 def init_ui_tile_bg():
     tiles = [
-        "ui_tile_bg"
+        "ui_tile_bg",
     ]
     zx.tile_load_arr(
         file="data/gfx/ui_tile_bg.tga",
         name="ui_tile_bg", width=128, height=128, arr=tiles)
-
 
 @timeme
 def init_ui_health_bar():
@@ -6636,25 +6649,25 @@ def init_tiles1_monsts_and_items():
       "",
       "",
       #########################################################################
-      "icon_none",
-      "icon_quit",
-      "icon_config",
-      "icon_save",
-      "icon_load",
-      "icon_zoom_in",
-      "icon_zoom_out",
-      "icon_wield",
-      "icon_inventory",
-      "icon_wait",
-      "icon_collect",
-      "icon_close",
-      "icon_robot",
-      "icon_robot_on",
-      "icon_5",
-      "icon_6",
-      "icon_7",
-      "icon_8",
-      "icon_9",
+      "ui_icon_none",
+      "ui_icon_quit",
+      "ui_icon_config",
+      "ui_icon_save",
+      "ui_icon_load",
+      "ui_icon_zoom_in",
+      "ui_icon_zoom_out",
+      "ui_icon_wield",
+      "ui_icon_inventory",
+      "ui_icon_wait",
+      "ui_icon_collect",
+      "ui_icon_close",
+      "ui_icon_robot",
+      "ui_icon_robot_on",
+      "ui_icon_5",
+      "ui_icon_6",
+      "ui_icon_7",
+      "ui_icon_8",
+      "ui_icon_9",
       #########################################################################
       "ghost.1",
       "ghost.2",
@@ -10500,40 +10513,39 @@ def init_projectile_fire_tiles():
         file="data/gfx/projectile_fire.tga",
         name="projectile_fire", width=32, height=32, arr=tiles)
 
-
+init_chasm()
+init_claws_tiles()
+init_explosions()
+init_laser_descent_tiles()
+init_laser_energy_tiles()
+init_laser_lightning_secondary_tiles()
+init_laser_lightning_tiles()
+init_light()
+init_projectile_fire_tiles()
 init_solid()
-init_ui_circle()
-init_ui_tile_bg()
+init_tiles1_floor()
+init_tiles1_monsts_and_items()
+init_tiles1_walls()
+init_tiles2()
+init_tiles3()
+init_tiles3_deep_water()
+init_tiles3_lava()
+init_tiles3_sewer_water()
+init_tiles3_surface_effects()
+init_tiles3_water()
+init_title_bg()
 init_title_fg1()
 init_title_fg2()
 init_title_fg3()
 init_title_fg4()
-init_title_bg()
-init_light()
-init_ui_status_bar()
-init_ui_inventory()
-init_ui_health_bar()
-init_ui_dead()
+init_ui_blood()
+init_ui_circle()
 init_ui_credits_bg()
 init_ui_credits_fg()
-init_tiles1_walls()
-init_tiles1_floor()
-init_tiles1_monsts_and_items()
-init_tiles2()
-init_tiles3()
-init_tiles3_water()
-init_tiles3_sewer_water()
-init_tiles3_lava()
-init_chasm()
-init_tiles3_deep_water()
-init_tiles3_surface_effects()
+init_ui_dead()
+init_ui_health_bar()
+init_ui_inventory()
+init_ui_status_bar()
+init_ui_tabs()
+init_ui_tile_bg()
 init_weapons_tiles()
-init_claws_tiles()
-init_ui_blood()
-init_laser_descent_tiles()
-init_laser_energy_tiles()
-init_laser_lightning_tiles()
-init_laser_lightning_secondary_tiles()
-init_projectile_fire_tiles()
-init_explosions()
-
