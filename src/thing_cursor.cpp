@@ -36,10 +36,6 @@ void Thing::cursor_hover_over_check(void)
         return;
       }
 
-      if (is_mouse_over_any_bag()) {
-        return;
-      }
-
       if (level->cursor_at != mid_at) {
         level->cursor_at = mid_at;
         level->cursor_describe();

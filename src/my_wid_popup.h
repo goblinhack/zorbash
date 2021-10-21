@@ -47,7 +47,7 @@ extern void wid_load_destroy(void);
 extern void wid_save_destroy(void);
 extern void game_quit_destroy(void);
 extern void game_config_keyboard_destroy(void);
-extern bool wid_popup_exists (void);
+extern bool wid_popup_exists(void);
 
 extern WidPopup *wid_collect;
 extern WidPopup *wid_skills;

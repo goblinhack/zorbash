@@ -292,11 +292,9 @@ public:
   class Wid *in_transit_item {};
 
   //
-  // Temporary. Tied to bag moving, so not saved
+  // All bags open.
   //
-  std::list< class WidBag * > bags;             // The below bags
-  class WidBag *              bag_primary {};   // The players inventory
-  std::list< class WidBag * > bag_secondary {}; // Bags other than the inventory
+  std::list< class WidBag * > bags;
 
   //
   // Temporary. Last cursor path shown.

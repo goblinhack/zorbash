@@ -421,19 +421,21 @@ bool Level::create_dungeon(point3d at, int seed)
               t->carry(f);
             }
 
-#if 0
-            auto w2 = thing_new("sword_short_basic", point(x, y));
-            t->carry(w2);
-            auto w2 = thing_new("sword_rusty_basic", point(x, y));
-            t->carry(w2);
-
-            auto b = thing_new("bag_small", point(x, y));
-            t->carry(b);
+            {
+              auto b = thing_new("bag_small", point(x, y));
+              t->carry(b);
+              auto w2 = thing_new("sword_short_basic", point(x, y));
+              b->carry(w2);
+            }
 
             {
               auto b = thing_new("bag_small", point(x, y));
               t->carry(b);
             }
+#if 0
+            auto w2 = thing_new("sword_rusty_basic", point(x, y));
+            t->carry(w2);
+
 
             {
               auto b = thing_new("food_frog", point(x, y));

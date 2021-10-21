@@ -273,6 +273,7 @@ bool Game::wid_bag_move_item(Widp w, Thingp t)
 {
   TRACE_AND_INDENT();
   DBG3("Chosen to move item");
+  TRACE_AND_INDENT();
 
   if (! t) {
     ERR("No thing to move");
@@ -287,19 +288,7 @@ bool Game::wid_bag_move_item(Widp w, Thingp t)
   ThingId bag_id;
   Thingp  bag = nullptr;
 
-  if (game->bag_primary) {
-    auto b = game->bag_primary;
-    for (auto w : wid_find_all_containing(b->wid_bag_container, "wid_bag item")) {
-      t->log("+ current item %s", wid_get_name(w).c_str());
-      if (wid_get_thing_id_context(w).id == t->id) {
-        wid_bag_container = wid_get_parent(w);
-        bag_id            = wid_get_thing_id_context(wid_bag_container);
-        bag               = game->thing_find(bag_id);
-      }
-    }
-  }
-  TRACE_AND_INDENT();
-  for (auto b : game->bag_secondary) {
+  for (auto b : game->bags) {
     for (auto w : wid_find_all_containing(b->wid_bag_container, "wid_bag item")) {
       t->log("+ current item %s", wid_get_name(w).c_str());
       if (wid_get_thing_id_context(w).id == t->id) {

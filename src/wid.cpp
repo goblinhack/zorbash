@@ -3142,6 +3142,20 @@ std::list< Widp > wid_find_all_containing(Widp w, const std::string &name)
   return out;
 }
 
+std::list< Widp > wid_find_all_containing(const std::string &name)
+{
+  std::list< Widp > out;
+  TRACE_AND_INDENT();
+  for (auto &iter : wid_top_level) {
+    auto w = iter.second;
+    auto r = wid_find(w, name);
+    if (r) {
+      wid_find_all_containing_(r, name, out);
+    }
+  }
+  return out;
+}
+
 Widp wid_find(const std::string &name)
 {
   TRACE_AND_INDENT();

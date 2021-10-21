@@ -28,18 +28,8 @@ void wid_thing_info_fini(void)
   DBG3("Destroy wid thing info");
   // traceback_dump();
   TRACE_AND_INDENT();
-  if (game->bag_primary) {
-    delete game->bag_primary;
-    game->bag_primary = nullptr;
-  }
-
-  for (auto b : game->bag_secondary) {
-    delete b;
-  }
-  game->bag_secondary.clear();
 
   game->wid_thing_info_clear_popup();
-
   game->current_wid_thing_info = nullptr;
 
   //
@@ -164,6 +154,7 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
   wid_thing_info_add_carry_info(wid_popup_window, t);
   t->show_botcon_description();
 
+#if 0
   for (auto b : game->bag_secondary) {
     auto w = b->wid_bag_container;
     wid_set_style(w, UI_WID_STYLE_BAG);
@@ -176,6 +167,7 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
       }
     }
   }
+#endif
 
   return wid_popup_window;
 }
@@ -370,6 +362,7 @@ void Game::wid_thing_info_create(Thingp t, bool when_hovering_over)
 
   point mid(TERM_WIDTH / 2, TERM_HEIGHT - 5);
 
+#if 0
   if (t->is_player() || t->is_bag_item_container()) {
     IF_DEBUG1 { t->log("Thing info create bags"); }
 
@@ -417,6 +410,7 @@ void Game::wid_thing_info_create(Thingp t, bool when_hovering_over)
       }
     }
   }
+#endif
 
   recursion = false;
 }
@@ -460,50 +454,6 @@ void Game::wid_thing_info_create_list(const std::vector< Thingp > &ts)
     game->change_state(Game::STATE_NORMAL);
     ERR("No player");
     return;
-  }
-
-  //
-  // If we're trying to show the player, then don't do that
-  // if we're showing something more interesting.
-  //
-  if (ts.size() == 1) {
-    auto o = game->current_wid_thing_info;
-    if (o) {
-      DBG3("Currently describing %s", o->to_string().c_str());
-      if (o->is_hidden) {
-        DBG3("Currently describing %s; keep it over player", o->to_string().c_str());
-        return;
-      }
-
-      //
-      // If showing something under the player, then prefer
-      // to keep showing that if nothing else.
-      //
-      if (level->player) {
-        if (o->mid_at == level->player->mid_at) {
-          DBG3("Describing %s; keep it", o->to_string().c_str());
-          return;
-        }
-      }
-    }
-
-    if (wid_thing_info_window.size()) {
-      auto o = wid_thing_info_window.front()->t;
-      if (o) {
-        DBG3("Describing %s", o->to_string().c_str());
-        if (o->is_hidden) {
-          DBG3("Describing %s; keep it over player", o->to_string().c_str());
-          return;
-        }
-
-        if (level->player) {
-          if (o->mid_at == level->player->mid_at) {
-            DBG3("Describing %s; keep it", o->to_string().c_str());
-            return;
-          }
-        }
-      }
-    }
   }
 
   //
