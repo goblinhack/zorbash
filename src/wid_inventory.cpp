@@ -103,6 +103,39 @@ static uint8_t wid_right_bar_inventory_close(Widp w, int32_t x, int32_t y, uint3
   return true;
 }
 
+static uint8_t wid_inventory_mouse_up_tab_bag1(Widp w, int32_t x, int32_t y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  DBG3("Inventory: bag1");
+  TRACE_AND_INDENT();
+  wid_inventory_fini();
+  wid_inventory_tab = WID_INVENTORY_TAB_BAG1;
+  wid_inventory_init();
+  return true;
+}
+
+static uint8_t wid_inventory_mouse_up_tab_bag2(Widp w, int32_t x, int32_t y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  DBG3("Inventory: bag2");
+  TRACE_AND_INDENT();
+  wid_inventory_fini();
+  wid_inventory_tab = WID_INVENTORY_TAB_BAG2;
+  wid_inventory_init();
+  return true;
+}
+
+static uint8_t wid_inventory_mouse_up_tab_slot(Widp w, int32_t x, int32_t y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  DBG3("Inventory: tab");
+  TRACE_AND_INDENT();
+  wid_inventory_fini();
+  wid_inventory_tab = WID_INVENTORY_TAB_SLOT;
+  wid_inventory_init();
+  return true;
+}
+
 #if 0
 uint8_t wid_inventory_item_mouse_up(Widp w, int32_t x, int32_t y, uint32_t button)
 {
@@ -266,8 +299,6 @@ bool wid_inventory_create(void)
     wid_raise(wid_inventory_window);
   }
 
-  wid_update(wid_inventory_window);
-
   {
     auto  w = wid_new_square_button(wid_inventory_window, "wid inventory window close");
     point tl(inventory_width - 4, 0);
@@ -287,7 +318,7 @@ bool wid_inventory_create(void)
     } else {
       wid_set_fg_tilename(w, "ui_tab_bag1_dark");
     }
-    wid_set_on_mouse_up(w, wid_right_bar_inventory_close);
+    wid_set_on_mouse_up(w, wid_inventory_mouse_up_tab_bag1);
   }
 
   {
@@ -300,7 +331,7 @@ bool wid_inventory_create(void)
     } else {
       wid_set_fg_tilename(w, "ui_tab_bag2_dark");
     }
-    wid_set_on_mouse_up(w, wid_right_bar_inventory_close);
+    wid_set_on_mouse_up(w, wid_inventory_mouse_up_tab_bag2);
   }
 
   {
@@ -313,13 +344,37 @@ bool wid_inventory_create(void)
     } else {
       wid_set_fg_tilename(w, "ui_tab_slots_dark");
     }
-    wid_set_on_mouse_up(w, wid_right_bar_inventory_close);
+    wid_set_on_mouse_up(w, wid_inventory_mouse_up_tab_slot);
   }
 
-  {
+  //
+  // Bag1
+  //
+  if (wid_inventory_tab == WID_INVENTORY_TAB_BAG1) {
     point tl          = point(22, 5);
     point br          = tl + point(player->capacity_width() + 1, player->capacity_height() + 1);
-    wid_inventory_bag = new WidBag(wid_inventory_window, player, true, tl, br, "player-bag");
+    wid_inventory_bag = new WidBag(wid_inventory_window, player, true, tl, br, "bag1");
+  }
+
+  //
+  // Bag2
+  //
+  if (wid_inventory_tab == WID_INVENTORY_TAB_BAG2) {
+    Thingp bag = nullptr;
+    for (const auto &item : player->monst_infop->carrying) {
+      auto t = level->thing_find(item.id);
+      if (t) {
+        if (t->is_bag()) {
+          bag = t;
+          break;
+        }
+      }
+    }
+    if (bag) {
+      point tl          = point(22, 5);
+      point br          = tl + point(bag->capacity_width() + 1, bag->capacity_height() + 1);
+      wid_inventory_bag = new WidBag(wid_inventory_window, bag, true, tl, br, "bag2");
+    }
   }
 
   {
@@ -337,6 +392,7 @@ bool wid_inventory_create(void)
     wid_inventory_thing_info = game->wid_thing_info_create_popup(player, point(tlx, tly), point(brx, bry));
   }
 
+  wid_update(wid_inventory_window);
   game->change_state(Game::STATE_INVENTORY);
 
   return true;
