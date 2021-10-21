@@ -364,15 +364,29 @@ static void wid_bag_item_mouse_over_b(Widp w, int32_t relx, int32_t rely, int32_
 
   auto id = wid_get_thing_id_context(w);
   auto t  = game->thing_find(id);
-  if (t) {
-    t->describe_when_hovered_over_in_rightbar();
+  if (! t) {
+    ERR("Could not find thing ID context");
+    return;
   }
 
-  game->wid_thing_info_clear_popup();
-  if (game->level) {
-    game->wid_thing_info_push_popup(game->level->player);
+  auto bag_id = wid_get_thing_id2_context(w);
+  auto bag    = game->thing_find(bag_id);
+  if (! bag) {
+    t->log("Bag containing me not found");
+    return;
   }
-  game->wid_thing_info_push_popup(t);
+
+  //
+  // Create the wid info over the inventory
+  //
+  static int tlx, tly, brx, bry;
+  wid_get_tl_x_tl_y_br_x_br_y(wid_get_top_parent(w), &tlx, &tly, &brx, &bry);
+  tlx += 45;
+  tly += 5;
+  brx -= 1;
+  bry -= 2;
+  delete wid_inventory_thing_info;
+  wid_inventory_thing_info = game->wid_thing_info_create_popup(t, point(tlx, tly), point(brx, bry));
 }
 
 static void wid_bag_item_mouse_over_e(Widp w)
@@ -579,7 +593,6 @@ WidBag::~WidBag()
   bag->log("Destroy bag");
   TRACE_AND_INDENT();
   wid_destroy(&wid_bag_container);
-  wid_destroy(&wid_bag_title);
 
   auto b = std::find(game->bags.begin(), game->bags.end(), this);
   if (b != game->bags.end()) {
@@ -587,7 +600,7 @@ WidBag::~WidBag()
   }
 }
 
-WidBag::WidBag(Thingp bag_, bool highlight, point tl, point br, const std::string &title) : tl(tl), br(br)
+WidBag::WidBag(Widp parent, Thingp bag_, bool highlight, point tl, point br, const std::string &title) : tl(tl), br(br)
 {
   TRACE_AND_INDENT();
   bag = bag_;
@@ -595,7 +608,11 @@ WidBag::WidBag(Thingp bag_, bool highlight, point tl, point br, const std::strin
   TRACE_AND_INDENT();
 
   {
-    wid_bag_container = wid_new_square_window("wid_bag " + title);
+    if (parent) {
+      wid_bag_container = wid_new_container(parent, "wid_bag " + title);
+    } else {
+      wid_bag_container = wid_new_square_window("wid_bag " + title);
+    }
     wid_set_ignore_scroll_events(wid_bag_container, true);
     wid_set_pos(wid_bag_container, tl, br);
 
@@ -611,18 +628,9 @@ WidBag::WidBag(Thingp bag_, bool highlight, point tl, point br, const std::strin
     wid_set_thing_id_context(wid_bag_container, bag->id);
   }
 
-  {
-    wid_bag_title = wid_new_square_window("wid_bag_title " + title);
-    wid_set_ignore_scroll_events(wid_bag_title, true);
-    wid_set_pos(wid_bag_title, point(tl.x, tl.y - 1), point(br.x, tl.y - 1));
-    wid_set_style(wid_bag_title, UI_WID_STYLE_SPARSE_NONE);
-    wid_set_text(wid_bag_title, title);
-  }
-
   wid_bag_add_items(wid_bag_container, bag);
 
   wid_update(wid_bag_container);
-  wid_update(wid_bag_title);
 
   game->bags.push_back(this);
 

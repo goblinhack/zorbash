@@ -4,14 +4,17 @@
 //
 
 #pragma once
+#include "my_sys.h"
+#include "my_fwd.h"
+
 void wid_inventory_fini(void);
 bool wid_inventory_init(void);
 bool wid_inventory_create(void);
 
-#include "my_wid.h"
-extern Widp wid_inventory_window;
+extern class Wid *wid_inventory_window;
+extern class WidPopup *wid_inventory_thing_info;
 
 //
 // Global widgets.
 //
-uint8_t wid_right_bar_inventory_open(Widp w, int32_t x, int32_t y, uint32_t button);
+uint8_t wid_right_bar_inventory_open(class Wid *w, int32_t x, int32_t y, uint32_t button);

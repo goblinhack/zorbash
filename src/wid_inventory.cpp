@@ -17,12 +17,15 @@
 #include "my_wid_inventory.h"
 #include "my_wid_thing_info.h"
 
-Widp wid_inventory_window {};
+Widp      wid_inventory_window;
+WidPopup *wid_inventory_thing_info;
 
 void wid_inventory_fini(void)
 {
   TRACE_AND_INDENT();
   if (wid_inventory_window) {
+    delete wid_inventory_thing_info;
+    wid_inventory_thing_info = nullptr;
     wid_destroy(&wid_inventory_window);
     game->change_state(Game::STATE_NORMAL);
   }
@@ -223,10 +226,9 @@ bool wid_inventory_create(void)
     return false;
   }
 
-  wid_thing_info_fini();
   wid_inventory_fini();
 
-  static int inventory_width  = 72;
+  static int inventory_width  = 76;
   static int inventory_height = 40;
 
   int left_half  = inventory_width / 2;
@@ -234,7 +236,7 @@ bool wid_inventory_create(void)
 
   {
     TRACE_AND_INDENT();
-    point tl = make_point(TERM_WIDTH / 2 - left_half, TERM_HEIGHT - 6 - (inventory_height + 1));
+    point tl = make_point(TERM_WIDTH / 2 - left_half, TERM_HEIGHT - 6 - (inventory_height - 1));
     point br = make_point(TERM_WIDTH / 2 + right_half - 1, TERM_HEIGHT - 6);
 
     wid_inventory_window = wid_new_square_window("wid inventory");
@@ -257,8 +259,28 @@ bool wid_inventory_create(void)
     wid_set_on_mouse_up(w, wid_right_bar_inventory_close);
   }
 
+  {
+    point tl = point(22, 5);
+    point br = tl + point(player->capacity_width() + 1, player->capacity_height() + 1);
+    new WidBag(wid_inventory_window, player, true, tl, br, "player-bag");
+  }
+
   game->change_state(Game::STATE_INVENTORY);
 
-  DBG3("Created inventory");
+  {
+    //
+    // Create the wid info over the inventory
+    //
+    static int tlx, tly, brx, bry;
+    wid_get_tl_x_tl_y_br_x_br_y(wid_inventory_window, &tlx, &tly, &brx, &bry);
+    tlx += 45;
+    tly += 5;
+    brx -= 1;
+    bry -= 2;
+    game->wid_thing_info_clear_popup();
+    delete wid_inventory_thing_info;
+    wid_inventory_thing_info = game->wid_thing_info_create_popup(player, point(tlx, tly), point(brx, bry));
+  }
+
   return true;
 }

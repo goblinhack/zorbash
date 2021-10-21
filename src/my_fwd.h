@@ -19,6 +19,7 @@ class Tp;
 class Wid;
 class World;
 class Thing_;
+class WidPopup;
 struct AgeMap_;
 struct Dmap_;
 struct FovMap_;

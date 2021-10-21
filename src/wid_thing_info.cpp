@@ -25,7 +25,7 @@ std::list< WidPopup * > wid_thing_info_window;
 void wid_thing_info_fini(void)
 {
   TRACE_AND_INDENT();
-  DBG3("Destroy wid thing info");
+  LOG("Destroy wid thing info");
   // traceback_dump();
   TRACE_AND_INDENT();
 
@@ -46,16 +46,6 @@ uint8_t wid_thing_info_init(void)
 void Game::wid_thing_info_destroy_immediate(void)
 {
   TRACE_AND_INDENT();
-  if (game->request_remake_rightbar) {
-    //
-    // Continue
-    //
-  } else if (game->state == Game::STATE_COLLECTING_ITEMS) {
-    return;
-  } else if (game->state == Game::STATE_INVENTORY) {
-    return;
-  }
-
   wid_thing_info_fini();
 }
 
@@ -153,21 +143,6 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
   wid_thing_info_add_danger_level(wid_popup_window, t);
   wid_thing_info_add_carry_info(wid_popup_window, t);
   t->show_botcon_description();
-
-#if 0
-  for (auto b : game->bag_secondary) {
-    auto w = b->wid_bag_container;
-    wid_set_style(w, UI_WID_STYLE_BAG);
-  }
-  if (t->is_bag_item_container()) {
-    for (auto b : game->bag_secondary) {
-      auto w = b->wid_bag_container;
-      if (wid_get_thing_id_context(w).id == t->id) {
-        wid_set_style(w, UI_WID_STYLE_BAG_HIGHLIGHT);
-      }
-    }
-  }
-#endif
 
   return wid_popup_window;
 }
@@ -300,8 +275,6 @@ void Game::wid_thing_info_create(Thingp t, bool when_hovering_over)
     // Continue
     //
     IF_DEBUG1 { t->log("Remake thing info"); }
-  } else if (game->state == Game::STATE_INVENTORY) {
-    IF_DEBUG1 { t->log("Ignore, already moving items"); }
     return;
   }
 
@@ -332,7 +305,6 @@ void Game::wid_thing_info_create(Thingp t, bool when_hovering_over)
 
   auto player = game->level->player;
   if (! player) {
-    game->change_state(Game::STATE_NORMAL);
     ERR("No player");
     return;
   }

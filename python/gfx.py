@@ -37,7 +37,7 @@ def init_ui_circle():
     ]
     zx.tile_load_arr(
         file="data/gfx/ui_circle.tga",
-        name="ui_circle", width=32, height=32, arr=tiles)
+        name="ui_circle", width=256, height=256, arr=tiles)
 
 @timeme
 def init_ui_tile_bg():
@@ -91,7 +91,7 @@ def init_ui_inventory():
     ]
     zx.tile_load_arr(
         file="data/gfx/ui_inventory.tga",
-        name="ui_inventory", width=576, height=320, arr=tiles)
+        name="ui_inventory", width=608, height=320, arr=tiles)
 
 @timeme
 def init_ui_blood():
