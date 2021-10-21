@@ -22,9 +22,27 @@ bool Thing::carry(Thingp item)
 
   dbg("Try to carry %s", item->to_string().c_str());
 
+  //
+  // Only player/monsts or bags can carry items
+  //
   if (! monst_infop && ! is_bag()) {
     dbg("No; not a monst or bag");
     return false;
+  }
+
+  //
+  // Limit is 1 bag per the inventory UI
+  //
+  if (item->is_bag()) {
+    for (const auto &item : monst_infop->carrying) {
+      auto t = level->thing_find(item.id);
+      if (t) {
+        if (t->is_bag()) {
+          dbg("No; only one bag can be carried");
+          return false;
+        }
+      }
+    }
   }
 
   if (game->state == Game::STATE_COLLECTING_ITEMS) {
