@@ -16,6 +16,7 @@
 #include "my_wid_bag.h"
 #include "my_wid_inventory.h"
 #include "my_wid_thing_info.h"
+#include "my_monst.h"
 
 Widp      wid_inventory_window;
 WidPopup *wid_inventory_thing_info;
@@ -377,10 +378,79 @@ bool wid_inventory_create(void)
     }
   }
 
-  {
-    //
-    // Create the wid info over the inventory
-    //
+  if (wid_inventory_tab == WID_INVENTORY_TAB_SLOT) {
+    int width = 54;
+    int x_off = 22;
+    int y_at = 5;
+    for (auto slot = 0; slot < (int) UI_INVENTORY_QUICK_ITEMS_MAX; slot++) {
+      Tpp tpp = nullptr;
+
+      if (slot < player->monst_infop->inventory_id.size()) {
+        auto tp_id = get(player->monst_infop->inventory_id, slot);
+        tpp   = tp_find(tp_id);
+      }
+
+      auto  wid_slot  = wid_new_container(wid_inventory_window, "item slot");
+      point tl = make_point(x_off, y_at);
+      point br = make_point(x_off + width - 3, y_at + 2);
+      wid_set_pos(wid_slot, tl, br);
+      wid_set_shape_none(wid_slot);
+
+      {
+        auto wid_icon = wid_new_square_button(wid_slot, "item icon");
+        wid_set_int_context(wid_icon, slot);
+        //wid_set_on_mouse_up(wid_icon, wid_collect_mouse_up);
+        //wid_set_on_mouse_over_b(wid_icon, wid_collect_mouse_over_b);
+
+        point tl = make_point(0, 0);
+        point br = make_point(2, 2);
+        wid_set_pos(wid_icon, tl, br);
+
+        if (tpp) {
+          auto tiles = &tpp->tiles;
+          if (tiles) {
+            auto tile = tile_first(tiles);
+            if (tile) {
+              wid_set_style(wid_icon, UI_WID_STYLE_DARK);
+              wid_set_fg_tile(wid_icon, tile);
+            }
+          }
+        } else {
+          wid_set_style(wid_icon, UI_WID_STYLE_DARK);
+        }
+
+        wid_update(wid_icon);
+      }
+
+      {
+        auto wid_item = wid_new_square_button(wid_slot, "item name");
+        wid_set_int_context(wid_item, slot);
+        //wid_set_on_mouse_up(wid_item, wid_collect_mouse_up);
+        //wid_set_on_mouse_over_b(wid_item, wid_collect_mouse_over_b);
+
+        point tl = make_point(3, 0);
+        point br = make_point(width - 3, 2);
+        wid_set_pos(wid_item, tl, br);
+        wid_set_style(wid_item, UI_WID_STYLE_DARK);
+
+        if (tpp) {
+          wid_set_text(wid_item, " " + std::to_string(slot + 1) + ". " + tpp->short_text_name());
+        } else {
+          wid_set_text(wid_item, " " + std::to_string(slot + 1) + ". <empty>");
+        }
+
+        wid_set_text_lhs(wid_item, true);
+        wid_update(wid_item);
+      }
+
+      y_at += 3;
+    }
+  }
+
+  //
+  // Create the wid info over the inventory
+  //
+  if (wid_inventory_tab != WID_INVENTORY_TAB_SLOT) {
     int tlx, tly, brx, bry;
     wid_get_tl_x_tl_y_br_x_br_y(wid_inventory_window, &tlx, &tly, &brx, &bry);
     tlx += 45;

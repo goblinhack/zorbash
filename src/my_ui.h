@@ -11,7 +11,7 @@
 #define UI_ACTIONBAR_BR_Y          (TERM_HEIGHT - 2)
 #define UI_ACTIONBAR_ITEM_HEIGHT   3
 #define UI_ACTIONBAR_ITEM_WIDTH    3
-#define UI_ACTIONBAR_MAX_ITEMS     10
+#define UI_INVENTORY_QUICK_ITEMS_MAX     10
 #define UI_ACTIONBAR_TL_Y          (TERM_HEIGHT - 5)
 #define UI_BOTCON_HEIGHT           1 // Scrollbar limit
 #define UI_BOTCON_TEXT_COLOR       UI_TEXT_COLOR

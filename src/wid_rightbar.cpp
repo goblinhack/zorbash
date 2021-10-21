@@ -331,7 +331,7 @@ static bool wid_rightbar_create(void)
     std::vector< Widp > wid_inventory_items;
 
     uint8_t item = 0;
-    for (auto i = 0U; i < UI_ACTIONBAR_MAX_ITEMS; i++) {
+    for (auto i = 0U; i < UI_INVENTORY_QUICK_ITEMS_MAX; i++) {
       //
       // slot number
       //
@@ -459,7 +459,7 @@ static bool wid_rightbar_create(void)
     std::vector< Widp > wid_skillbox_items;
 
     uint8_t item = 0;
-    for (auto i = 0U; i < UI_ACTIONBAR_MAX_ITEMS; i++) {
+    for (auto i = 0U; i < UI_INVENTORY_QUICK_ITEMS_MAX; i++) {
       //
       // slot number
       //
@@ -552,7 +552,7 @@ static bool wid_rightbar_create(void)
     std::vector< Widp > wid_buffbox_items;
 
     uint8_t item = 0;
-    for (auto i = 0U; i < UI_ACTIONBAR_MAX_ITEMS / 2; i++) {
+    for (auto i = 0U; i < UI_INVENTORY_QUICK_ITEMS_MAX / 2; i++) {
       //
       // slot number
       //
@@ -628,7 +628,7 @@ static bool wid_rightbar_create(void)
     std::vector< Widp > wid_debuffbox_items;
 
     uint8_t item = 0;
-    for (auto i = 0U; i < UI_ACTIONBAR_MAX_ITEMS / 2; i++) {
+    for (auto i = 0U; i < UI_INVENTORY_QUICK_ITEMS_MAX / 2; i++) {
       //
       // slot number
       //

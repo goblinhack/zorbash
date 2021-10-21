@@ -283,7 +283,7 @@ bool Thing::inventory_id_insert(Thingp item)
     item_slot                              = free_slot;
     game->previous_slot                    = item_slot;
   } else {
-    if (inventory_items < UI_ACTIONBAR_MAX_ITEMS) {
+    if (inventory_items < UI_INVENTORY_QUICK_ITEMS_MAX) {
       monst_infop->inventory_id.push_back(item->tp_id);
       item_slot           = monst_infop->inventory_id.size() - 1;
       game->previous_slot = item_slot;

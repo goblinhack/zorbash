@@ -70,7 +70,7 @@ bool Thing::debuffbox_id_insert(Thingp what)
     monst_infop->debuffbox_id[ free_slot ] = what->tp_id;
     item_slot                              = free_slot;
   } else {
-    if (debuffbox_items >= UI_ACTIONBAR_MAX_ITEMS) {
+    if (debuffbox_items >= UI_INVENTORY_QUICK_ITEMS_MAX) {
       TOPCON("No space to carry %s which is not carried.", what->text_the().c_str());
       return false;
     }

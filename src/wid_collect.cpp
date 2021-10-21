@@ -348,7 +348,6 @@ void Game::wid_collect_create(const std::list< Thingp > items /* intentional cop
 
   int y_at = 3;
   for (auto slot = 0; slot < (int) collect_items.size(); slot++) {
-    Game  tmp;
     auto  p  = wid_collect->wid_text_area->wid_text_area;
     auto  w  = wid_new_container(p, "item slot");
     point tl = make_point(0, y_at);

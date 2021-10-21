@@ -215,7 +215,7 @@ bool Thing::can_learn_something(void)
   //
   // Once skills are maxxed out, that's it
   //
-  if (monst_infop->skills.size() >= UI_ACTIONBAR_MAX_ITEMS) {
+  if (monst_infop->skills.size() >= UI_INVENTORY_QUICK_ITEMS_MAX) {
     return false;
   }
 
