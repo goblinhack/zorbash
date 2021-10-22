@@ -28,9 +28,10 @@
 #include "my_wid_topcon.h"
 #include "slre.h"
 
-static uint8_t wid_bag_item_mouse_down(Widp w, int32_t x, int32_t y, uint32_t button);
-static void    wid_bag_item_mouse_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely);
-static void    wid_bag_item_mouse_over_e(Widp w);
+static uint8_t wid_bag_item_mouse_up(Widp w, int32_t x, int32_t y, uint32_t button);
+static uint8_t wid_bag_item_mouse_held(Widp w, int32_t x, int32_t y, uint32_t button);
+static void    wid_bag_item_mouse_over_begin(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely);
+static void    wid_bag_item_mouse_over_end(Widp w);
 static uint8_t wid_bag_item_key_down(Widp w, const struct SDL_Keysym *key);
 static void    wid_bag_tick(Widp w);
 
@@ -72,12 +73,13 @@ static void wid_bag_add_items(Widp wid_bag_container, Thingp bag)
     bag->log("+ item %s at %d,%d", t->to_string().c_str(), t->monst_infop->bag_position.x,
              t->monst_infop->bag_position.y);
 
-    wid_set_on_mouse_over_b(w, wid_bag_item_mouse_over_b);
-    wid_set_on_mouse_over_e(w, wid_bag_item_mouse_over_e);
+    wid_set_on_mouse_over_begin(w, wid_bag_item_mouse_over_begin);
+    wid_set_on_mouse_over_end(w, wid_bag_item_mouse_over_end);
     wid_set_on_key_down(w, wid_bag_item_key_down);
     wid_set_thing_id_context(w, item.id);
     wid_set_thing_id2_context(w, bag->id);
-    wid_set_on_mouse_down(w, wid_bag_item_mouse_down);
+    wid_set_on_mouse_up(w, wid_bag_item_mouse_up);
+    wid_set_on_mouse_held(w, wid_bag_item_mouse_held);
 
     auto tpp   = t->tp();
     auto tiles = &tpp->tiles;
@@ -145,14 +147,16 @@ uint8_t wid_in_transit_item_place(Widp w, int32_t x, int32_t y, uint32_t button)
   auto wid_bag_container = is_mouse_over_any_bag();
   if (! wid_bag_container) {
     t->log("Is not over any bag");
-    player->drop(t);
+    wid_in_transit_item_drop();
+    game->request_remake_inventory = true;
     return false;
   }
 
   auto bag_id = wid_get_thing_id_context(wid_bag_container);
   auto bag    = game->thing_find(bag_id);
   if (! bag) {
-    t->log("Bag containing me not found");
+    wid_in_transit_item_drop();
+    game->request_remake_inventory = true;
     return false;
   }
 
@@ -235,7 +239,7 @@ uint8_t wid_in_transit_item_drop(void)
   return true;
 }
 
-static uint8_t wid_bag_item_mouse_down(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_bag_item_mouse_up(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
   DBG3("Mouse down, item select");
@@ -258,7 +262,27 @@ static uint8_t wid_bag_item_mouse_down(Widp w, int32_t x, int32_t y, uint32_t bu
   return true;
 }
 
-bool Game::wid_bag_move_item(Widp w, Thingp t)
+static uint8_t wid_bag_item_mouse_held(Widp w, int32_t x, int32_t y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  DBG3("Mouse held down, item select");
+  TRACE_AND_INDENT();
+  if (game->in_transit_item) {
+    return false;
+  }
+
+  auto id = wid_get_thing_id_context(w);
+  auto t  = game->thing_find(id);
+  if (! t) {
+    return false;
+  }
+
+  game->wid_bag_move_item(t);
+
+  return true;
+}
+
+bool Game::wid_bag_move_item(Thingp t)
 {
   TRACE_AND_INDENT();
   DBG3("Chosen to move item");
@@ -270,6 +294,8 @@ bool Game::wid_bag_move_item(Widp w, Thingp t)
   }
 
   verify(t);
+  t->log("Chosen to move me");
+
   wid_inventory_init();
   game->request_remake_rightbar = true;
 
@@ -341,7 +367,7 @@ bool Game::wid_bag_move_item(Widp w, Thingp t)
   return true;
 }
 
-static void wid_bag_item_mouse_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+static void wid_bag_item_mouse_over_begin(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {
   if (game->in_transit_item) {
     return;
@@ -377,7 +403,7 @@ static void wid_bag_item_mouse_over_b(Widp w, int32_t relx, int32_t rely, int32_
   wid_inventory_over_requested(t);
 }
 
-static void wid_bag_item_mouse_over_e(Widp w)
+static void wid_bag_item_mouse_over_end(Widp w)
 {
   if (game->in_transit_item) {
     return;

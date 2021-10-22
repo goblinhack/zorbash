@@ -170,7 +170,7 @@ public:
   void      robot_mode_tick();
   void      wid_collect_create(const std::list< Thingp > items);
   void      wid_items_options_create(Widp w, Thingp chosen, bool came_from_inventory);
-  bool      wid_bag_move_item(Widp w, Thingp t);
+  bool      wid_bag_move_item(Thingp t);
   void      wid_enchant_an_item(void);
   void      wid_skill_choose(void);
   void      wid_thing_info_add_attack(WidPopup *w, Thingp t);
@@ -276,6 +276,7 @@ public:
   // Temporary. Global requests
   //
   bool     request_remake_rightbar {};
+  bool     request_remake_inventory {};
   bool     request_remake_actionbar {};
   bool     request_remake_skillbox {};
   bool     request_remake_debuffbox {};

@@ -82,13 +82,6 @@ void Game::change_state(int new_state)
   state = new_state;
   wid_actionbar_init();
 
-  if (game->in_transit_item) {
-    if (wid_in_transit_item_drop()) {
-      game->tick_begin("drop in transit item");
-    }
-    wid_destroy(&game->in_transit_item);
-  }
-
   request_to_throw_item = nullptr;
   request_to_fire_item  = nullptr;
 

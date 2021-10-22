@@ -1321,7 +1321,7 @@ void sdl_loop(void)
         auto mouse_down = sdl_get_mouse();
         if (mouse_down) {
           DBG("SDL: Mouse DOWN held: Button %d", mouse_down);
-          wid_mouse_held_down(mouse_down, mouse_x, mouse_y);
+          wid_mouse_held(mouse_down, mouse_x, mouse_y);
         }
       }
 

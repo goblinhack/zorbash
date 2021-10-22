@@ -228,7 +228,7 @@ static uint8_t wid_collect_mouse_up(Widp w, int32_t x, int32_t y, uint32_t butto
   return true;
 }
 
-static void wid_collect_mouse_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+static void wid_collect_mouse_over_begin(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {
   TRACE_AND_INDENT();
   int slot = wid_get_int_context(w);
@@ -361,7 +361,7 @@ void Game::wid_collect_create(const std::list< Thingp > items /* intentional cop
       auto wid_icon = wid_new_square_button(w, "item icon");
       wid_set_int_context(wid_icon, slot);
       wid_set_on_mouse_up(wid_icon, wid_collect_mouse_up);
-      wid_set_on_mouse_over_b(wid_icon, wid_collect_mouse_over_b);
+      wid_set_on_mouse_over_begin(wid_icon, wid_collect_mouse_over_begin);
 
       point tl = make_point(0, 0);
       point br = make_point(2, 2);
@@ -388,7 +388,7 @@ void Game::wid_collect_create(const std::list< Thingp > items /* intentional cop
       auto wid_item = wid_new_square_button(w, "item name");
       wid_set_int_context(wid_item, slot);
       wid_set_on_mouse_up(wid_item, wid_collect_mouse_up);
-      wid_set_on_mouse_over_b(wid_item, wid_collect_mouse_over_b);
+      wid_set_on_mouse_over_begin(wid_item, wid_collect_mouse_over_begin);
 
       point tl = make_point(3, 0);
       point br = make_point(width - 3, 2);

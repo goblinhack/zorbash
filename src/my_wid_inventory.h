@@ -18,8 +18,8 @@ void wid_inventory_select_requested(Thingp selected);
 extern class Wid *     wid_inventory_window;
 extern class WidBag *  wid_inventory_bag;
 extern class WidPopup *wid_inventory_thing_info;
-extern Thingp wid_inventory_thing_selected;
-extern Thingp wid_inventory_thing_over;
+extern Thingp          wid_inventory_thing_selected;
+extern Thingp          wid_inventory_thing_over;
 
 //
 // Global widgets.

@@ -79,7 +79,7 @@ bool Level::tick(void)
       IF_DEBUG3
       {
         if ((time_get_time_ms() - tick_begin_ms) > THING_TICK_DURATION_TOO_LONG * 3) {
-          t->err("PERF: Thing took too long, tick duration %u ms, max %u ms", time_get_time_ms() - tick_begin_ms,
+          t->log("PERF: Thing took too long, tick duration %u ms, max %u ms", time_get_time_ms() - tick_begin_ms,
                  THING_TICK_DURATION_TOO_LONG);
         }
       }

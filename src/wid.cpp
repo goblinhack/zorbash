@@ -784,8 +784,8 @@ static void wid_m_over_e(void)
     return;
   }
 
-  if (w->on_mouse_over_e) {
-    w->on_mouse_over_e(w);
+  if (w->on_mouse_over_end) {
+    w->on_mouse_over_end(w);
   }
 }
 
@@ -810,7 +810,7 @@ static uint8_t wid_m_over_b(Widp w, uint32_t x, uint32_t y, int32_t relx, int32_
     }
   }
 
-  if (! w->on_mouse_over_b && ! w->on_mouse_down) {
+  if (! w->on_mouse_over_begin && ! w->on_mouse_down) {
     if (get(w->cfg, WID_MODE_OVER).color_set[ WID_COLOR_BG ] ||
         get(w->cfg, WID_MODE_OVER).color_set[ WID_COLOR_TEXT_FG ]) {
       //
@@ -844,8 +844,8 @@ static uint8_t wid_m_over_b(Widp w, uint32_t x, uint32_t y, int32_t relx, int32_
 
   wid_set_mode(w, WID_MODE_OVER);
 
-  if (w->on_mouse_over_b) {
-    (w->on_mouse_over_b)(w, relx, rely, wheelx, wheely);
+  if (w->on_mouse_over_begin) {
+    (w->on_mouse_over_begin)(w, relx, rely, wheelx, wheely);
   }
 
   return true;
@@ -1651,10 +1651,10 @@ void wid_set_on_mouse_down(Widp w, on_mouse_down_t fn)
   w->on_mouse_down = fn;
 }
 
-void wid_set_on_mouse_held_down(Widp w, on_mouse_down_t fn)
+void wid_set_on_mouse_held(Widp w, on_mouse_down_t fn)
 {
   TRACE_AND_INDENT();
-  w->on_mouse_held_down = fn;
+  w->on_mouse_held = fn;
 }
 
 void wid_set_on_mouse_up(Widp w, on_mouse_up_t fn)
@@ -1681,16 +1681,16 @@ void wid_set_on_mouse_focus_end(Widp w, on_mouse_focus_end_t fn)
   w->on_mouse_focus_end = fn;
 }
 
-void wid_set_on_mouse_over_b(Widp w, on_mouse_over_b_t fn)
+void wid_set_on_mouse_over_begin(Widp w, on_mouse_over_begin_t fn)
 {
   TRACE_AND_INDENT();
-  w->on_mouse_over_b = fn;
+  w->on_mouse_over_begin = fn;
 }
 
-void wid_set_on_mouse_over_e(Widp w, on_mouse_over_e_t fn)
+void wid_set_on_mouse_over_end(Widp w, on_mouse_over_end_t fn)
 {
   TRACE_AND_INDENT();
-  w->on_mouse_over_e = fn;
+  w->on_mouse_over_end = fn;
 }
 
 void wid_set_on_destroy(Widp w, on_destroy_t fn)
@@ -4338,6 +4338,80 @@ static Widp wid_mouse_down_handler_at(Widp w, int32_t x, int32_t y, uint8_t stri
   return nullptr;
 }
 
+static Widp wid_mouse_held_handler_at(Widp w, int32_t x, int32_t y, uint8_t strict)
+{
+  TRACE_AND_INDENT();
+  if (! w) {
+    return nullptr;
+  }
+
+  if (! w->visible) {
+    return nullptr;
+  }
+
+  if (wid_ignore_events(w)) {
+    return nullptr;
+  }
+
+  //
+  // Prevent newly created widgets grabbing events too soon; like
+  // for example a scancode causes a widget to be created but the
+  // same keypress is taken by the widget.
+  //
+  if (! time_have_x_tenths_passed_since(1, wid_ignore_events_briefly_ts)) {
+    return nullptr;
+  }
+
+  if (strict) {
+    if ((x < w->abs_tl.x) || (y < w->abs_tl.y) || (x > w->abs_br.x) || (y > w->abs_br.y)) {
+      return nullptr;
+    }
+  }
+
+  for (auto &iter : w->children_display_sorted) {
+    auto child = iter.second;
+
+    if (wid_focus_locked && (wid_get_top_parent(child) != wid_get_top_parent(wid_focus_locked))) {
+      continue;
+    }
+
+    Widp closer_match = wid_mouse_held_handler_at(child, x, y, true /* strict */);
+    if (closer_match) {
+      return (closer_match);
+    }
+  }
+
+  if (w->on_mouse_held) {
+    if (wid_focus_locked && (wid_get_top_parent(w) != wid_get_top_parent(wid_focus_locked))) {
+      return nullptr;
+    }
+
+    return (w);
+  }
+
+  if (wid_get_moveable(w)) {
+    if (wid_focus_locked && (wid_get_top_parent(w) != wid_get_top_parent(wid_focus_locked))) {
+      return nullptr;
+    }
+
+    return (w);
+  }
+
+  //
+  // Prevent mouse events that occur in the bounds of one window, leaking
+  // into lower levels.
+  //
+  if (! w->parent) {
+    if (wid_focus_locked && (wid_get_top_parent(w) != wid_get_top_parent(wid_focus_locked))) {
+      return nullptr;
+    }
+
+    return (w);
+  }
+
+  return nullptr;
+}
+
 static Widp wid_mouse_up_handler_at(Widp w, int32_t x, int32_t y, uint8_t strict)
 {
   TRACE_AND_INDENT();
@@ -4729,6 +4803,54 @@ static Widp wid_mouse_down_handler(int32_t x, int32_t y)
     }
 
     w = wid_mouse_down_handler_at(w, x, y, false /* strict */);
+    if (! w) {
+      continue;
+    }
+
+    return (w);
+  }
+
+  return nullptr;
+}
+
+static Widp wid_mouse_held_handler(int32_t x, int32_t y)
+{
+  TRACE_AND_INDENT();
+  Widp w {};
+
+  w = wid_mouse_held_handler_at(wid_focus, x, y, true /* strict */);
+  if (w) {
+    return (w);
+  }
+
+  w = wid_mouse_held_handler_at(wid_over, x, y, true /* strict */);
+  if (w) {
+    return (w);
+  }
+
+  for (auto iter = wid_top_level.rbegin(); iter != wid_top_level.rend(); ++iter) {
+    auto w = iter->second;
+
+    if (wid_focus_locked && (wid_get_top_parent(w) != wid_get_top_parent(wid_focus_locked))) {
+      continue;
+    }
+
+    w = wid_mouse_held_handler_at(w, x, y, true /* strict */);
+    if (! w) {
+      continue;
+    }
+
+    return (w);
+  }
+
+  for (auto iter = wid_top_level.rbegin(); iter != wid_top_level.rend(); ++iter) {
+    auto w = iter->second;
+
+    if (wid_focus_locked && (wid_get_top_parent(w) != wid_get_top_parent(wid_focus_locked))) {
+      continue;
+    }
+
+    w = wid_mouse_held_handler_at(w, x, y, false /* strict */);
     if (! w) {
       continue;
     }
@@ -5196,7 +5318,7 @@ void wid_mouse_down(uint32_t button, int32_t x, int32_t y)
   }
 }
 
-void wid_mouse_held_down(uint32_t button, int32_t x, int32_t y)
+void wid_mouse_held(uint32_t button, int32_t x, int32_t y)
 {
   TRACE_AND_INDENT();
   Widp w {};
@@ -5208,7 +5330,7 @@ void wid_mouse_held_down(uint32_t button, int32_t x, int32_t y)
   ascii_mouse_x = x;
   ascii_mouse_y = y;
 
-  w = wid_mouse_down_handler(x, y);
+  w = wid_mouse_held_handler(x, y);
   if (! w) {
     return;
   }
@@ -5216,7 +5338,7 @@ void wid_mouse_held_down(uint32_t button, int32_t x, int32_t y)
   //
   // Raise on mouse.
   //
-  if ((w->on_mouse_held_down && (w->on_mouse_held_down)(w, x, y, button)) || wid_get_moveable(w)) {
+  if ((w->on_mouse_held && (w->on_mouse_held)(w, x, y, button)) || wid_get_moveable(w)) {
 
     wid_set_focus(w);
     wid_set_mode(w, WID_MODE_ACTIVE);
@@ -6219,6 +6341,11 @@ void wid_tick_all(void)
     wid_inventory_select(game->request_inventory_thing_selected);
     game->request_inventory_thing_selected    = nullptr;
     game->request_inventory_thing_selected_do = false;
+  }
+
+  if (game->request_remake_inventory) {
+    wid_inventory_init();
+    game->request_remake_inventory = false;
   }
 
   if (wid_over) {

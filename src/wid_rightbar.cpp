@@ -351,8 +351,8 @@ static bool wid_rightbar_create(void)
         wid_set_shape_none(w);
         wid_set_pos(w, tl, br);
         wid_set_int_context(w, i);
-        wid_set_on_mouse_over_b(w, wid_rightbar_inventory_over_b);
-        wid_set_on_mouse_over_e(w, wid_rightbar_inventory_over_e);
+        wid_set_on_mouse_over_begin(w, wid_rightbar_inventory_over_b);
+        wid_set_on_mouse_over_end(w, wid_rightbar_inventory_over_e);
       }
 
       auto  s  = "inventory slot" + std::to_string(i);
@@ -441,8 +441,8 @@ static bool wid_rightbar_create(void)
           wid_set_fg3_tile(w, tile);
         }
 
-        wid_set_on_mouse_over_b(w, wid_rightbar_inventory_over_b);
-        wid_set_on_mouse_over_e(w, wid_rightbar_inventory_over_e);
+        wid_set_on_mouse_over_begin(w, wid_rightbar_inventory_over_b);
+        wid_set_on_mouse_over_end(w, wid_rightbar_inventory_over_e);
         wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
         wid_set_int_context(w, i);
       }
@@ -521,8 +521,8 @@ static bool wid_rightbar_create(void)
           wid_set_color(w, WID_COLOR_TEXT_FG, GRAY60);
         }
 
-        wid_set_on_mouse_over_b(w, wid_skillbox_mouse_over_b);
-        wid_set_on_mouse_over_e(w, wid_skillbox_mouse_over_e);
+        wid_set_on_mouse_over_begin(w, wid_skillbox_mouse_over_begin);
+        wid_set_on_mouse_over_end(w, wid_skillbox_mouse_over_end);
         wid_set_on_mouse_up(w, wid_skillbox_item_mouse_up);
         wid_set_int_context(w, i);
 
@@ -610,8 +610,8 @@ static bool wid_rightbar_create(void)
         //
         wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
 
-        wid_set_on_mouse_over_b(w, wid_buffbox_mouse_over_b);
-        wid_set_on_mouse_over_e(w, wid_buffbox_mouse_over_e);
+        wid_set_on_mouse_over_begin(w, wid_buffbox_mouse_over_begin);
+        wid_set_on_mouse_over_end(w, wid_buffbox_mouse_over_end);
 
         wid_set_int_context(w, i);
       }
@@ -686,8 +686,8 @@ static bool wid_rightbar_create(void)
         //
         wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
 
-        wid_set_on_mouse_over_b(w, wid_debuffbox_mouse_over_b);
-        wid_set_on_mouse_over_e(w, wid_debuffbox_mouse_over_e);
+        wid_set_on_mouse_over_begin(w, wid_debuffbox_mouse_over_begin);
+        wid_set_on_mouse_over_end(w, wid_debuffbox_mouse_over_end);
 
         wid_set_int_context(w, i);
       }

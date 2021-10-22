@@ -846,7 +846,7 @@ Widp wid_keyboard(const std::wstring &text, const std::wstring &title, wid_keybo
 
         wid_set_text(b, keys[ y ][ x ]);
 
-        wid_set_on_mouse_over_b(b, wid_keyboard_mouse_over);
+        wid_set_on_mouse_over_begin(b, wid_keyboard_mouse_over);
         wid_set_on_key_down(b, wid_keyboard_button_key_event);
         wid_set_on_joy_button(b, wid_keyboard_button_joy_button_event);
         wid_set_on_mouse_down(b, wid_keyboard_button_mouse_event);

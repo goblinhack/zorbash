@@ -613,8 +613,8 @@ void wid_actionbar_init(void)
     wid_set_pos(w, tl, br);
     wid_set_bg_tilename(w, "ui_icon_close");
     wid_set_on_mouse_up(w, wid_actionbar_close);
-    wid_set_on_mouse_over_b(w, wid_actionbar_close_over_b);
-    wid_set_on_mouse_over_e(w, wid_actionbar_close_over_e);
+    wid_set_on_mouse_over_begin(w, wid_actionbar_close_over_b);
+    wid_set_on_mouse_over_end(w, wid_actionbar_close_over_e);
     x_at += option_width;
   }
 
@@ -625,8 +625,8 @@ void wid_actionbar_init(void)
     wid_set_pos(w, tl, br);
     wid_set_bg_tilename(w, "ui_icon_quit");
     wid_set_on_mouse_up(w, wid_actionbar_quit);
-    wid_set_on_mouse_over_b(w, wid_actionbar_quit_over_b);
-    wid_set_on_mouse_over_e(w, wid_actionbar_quit_over_e);
+    wid_set_on_mouse_over_begin(w, wid_actionbar_quit_over_b);
+    wid_set_on_mouse_over_end(w, wid_actionbar_quit_over_e);
     x_at += option_width;
   }
 
@@ -637,8 +637,8 @@ void wid_actionbar_init(void)
     wid_set_pos(w, tl, br);
     wid_set_bg_tilename(w, "ui_icon_config");
     wid_set_on_mouse_up(w, wid_actionbar_configure);
-    wid_set_on_mouse_over_b(w, wid_actionbar_configure_over_b);
-    wid_set_on_mouse_over_e(w, wid_actionbar_configure_over_e);
+    wid_set_on_mouse_over_begin(w, wid_actionbar_configure_over_b);
+    wid_set_on_mouse_over_end(w, wid_actionbar_configure_over_e);
     x_at += option_width;
   }
 
@@ -649,8 +649,8 @@ void wid_actionbar_init(void)
     wid_set_pos(w, tl, br);
     wid_set_bg_tilename(w, "ui_icon_robot");
     wid_set_on_mouse_up(w, wid_actionbar_robot);
-    wid_set_on_mouse_over_b(w, wid_actionbar_robot_over_b);
-    wid_set_on_mouse_over_e(w, wid_actionbar_robot_over_e);
+    wid_set_on_mouse_over_begin(w, wid_actionbar_robot_over_b);
+    wid_set_on_mouse_over_end(w, wid_actionbar_robot_over_e);
     if (game->robot_mode) {
       wid_set_bg_tilename(w, "ui_icon_robot_on");
       wid_set_on_tick(w, wid_actionbar_ai_tick);
@@ -666,8 +666,8 @@ void wid_actionbar_init(void)
     wid_set_pos(w, tl, br);
     wid_set_bg_tilename(w, "ui_icon_save");
     wid_set_on_mouse_up(w, wid_actionbar_save);
-    wid_set_on_mouse_over_b(w, wid_actionbar_save_over_b);
-    wid_set_on_mouse_over_e(w, wid_actionbar_save_over_e);
+    wid_set_on_mouse_over_begin(w, wid_actionbar_save_over_b);
+    wid_set_on_mouse_over_end(w, wid_actionbar_save_over_e);
     x_at += option_width;
   }
 
@@ -678,8 +678,8 @@ void wid_actionbar_init(void)
     wid_set_pos(w, tl, br);
     wid_set_bg_tilename(w, "ui_icon_load");
     wid_set_on_mouse_up(w, wid_actionbar_load);
-    wid_set_on_mouse_over_b(w, wid_actionbar_load_over_b);
-    wid_set_on_mouse_over_e(w, wid_actionbar_load_over_e);
+    wid_set_on_mouse_over_begin(w, wid_actionbar_load_over_b);
+    wid_set_on_mouse_over_end(w, wid_actionbar_load_over_e);
     x_at += option_width;
   }
 
@@ -690,8 +690,8 @@ void wid_actionbar_init(void)
     wid_set_pos(w, tl, br);
     wid_set_bg_tilename(w, "ui_icon_zoom_in");
     wid_set_on_mouse_up(w, wid_actionbar_zoom_in);
-    wid_set_on_mouse_over_b(w, wid_actionbar_zoom_in_over_b);
-    wid_set_on_mouse_over_e(w, wid_actionbar_zoom_in_over_e);
+    wid_set_on_mouse_over_begin(w, wid_actionbar_zoom_in_over_b);
+    wid_set_on_mouse_over_end(w, wid_actionbar_zoom_in_over_e);
     x_at += option_width;
   }
 
@@ -702,8 +702,8 @@ void wid_actionbar_init(void)
     wid_set_pos(w, tl, br);
     wid_set_bg_tilename(w, "ui_icon_zoom_out");
     wid_set_on_mouse_up(w, wid_actionbar_zoom_out);
-    wid_set_on_mouse_over_b(w, wid_actionbar_zoom_out_over_b);
-    wid_set_on_mouse_over_e(w, wid_actionbar_zoom_out_over_e);
+    wid_set_on_mouse_over_begin(w, wid_actionbar_zoom_out_over_b);
+    wid_set_on_mouse_over_end(w, wid_actionbar_zoom_out_over_e);
     x_at += option_width;
   }
 
@@ -714,8 +714,8 @@ void wid_actionbar_init(void)
     wid_set_pos(w, tl, br);
     wid_set_bg_tilename(w, "ui_icon_inventory");
     wid_set_on_mouse_up(w, wid_actionbar_inventory);
-    wid_set_on_mouse_over_b(w, wid_actionbar_inventory_over_b);
-    wid_set_on_mouse_over_e(w, wid_actionbar_inventory_over_e);
+    wid_set_on_mouse_over_begin(w, wid_actionbar_inventory_over_b);
+    wid_set_on_mouse_over_end(w, wid_actionbar_inventory_over_e);
     x_at += option_width;
   }
 
@@ -726,9 +726,9 @@ void wid_actionbar_init(void)
     wid_set_pos(w, tl, br);
     wid_set_bg_tilename(w, "ui_icon_wait");
     wid_set_on_mouse_down(w, wid_actionbar_wait);
-    wid_set_on_mouse_held_down(w, wid_actionbar_repeat_wait);
-    wid_set_on_mouse_over_b(w, wid_actionbar_wait_over_b);
-    wid_set_on_mouse_over_e(w, wid_actionbar_wait_over_e);
+    wid_set_on_mouse_held(w, wid_actionbar_repeat_wait);
+    wid_set_on_mouse_over_begin(w, wid_actionbar_wait_over_b);
+    wid_set_on_mouse_over_end(w, wid_actionbar_wait_over_e);
     x_at += option_width;
   }
 
@@ -739,8 +739,8 @@ void wid_actionbar_init(void)
     wid_set_pos(w, tl, br);
     wid_set_bg_tilename(w, "ui_icon_collect");
     wid_set_on_mouse_up(w, wid_actionbar_collect);
-    wid_set_on_mouse_over_b(w, wid_actionbar_collect_over_b);
-    wid_set_on_mouse_over_e(w, wid_actionbar_collect_over_e);
+    wid_set_on_mouse_over_begin(w, wid_actionbar_collect_over_b);
+    wid_set_on_mouse_over_end(w, wid_actionbar_collect_over_e);
     x_at += option_width;
   }
 
@@ -751,8 +751,8 @@ void wid_actionbar_init(void)
     wid_set_pos(w, tl, br);
     wid_set_bg_tilename(w, "ui_icon_close");
     wid_set_on_mouse_up(w, wid_actionbar_close);
-    wid_set_on_mouse_over_b(w, wid_actionbar_close_over_b);
-    wid_set_on_mouse_over_e(w, wid_actionbar_close_over_e);
+    wid_set_on_mouse_over_begin(w, wid_actionbar_close_over_b);
+    wid_set_on_mouse_over_end(w, wid_actionbar_close_over_e);
     x_at += option_width;
   }
   TRACE_AND_INDENT();

@@ -136,7 +136,7 @@ static uint8_t wid_item_options_move(Widp w, int32_t x, int32_t y, uint32_t butt
   DBG3("Item options move");
   TRACE_AND_INDENT();
   wid_item_options_destroy();
-  game->wid_bag_move_item(chosen_wid, chosen_thing);
+  // game->wid_bag_move_item(chosen_wid, chosen_thing);
   return true;
 }
 

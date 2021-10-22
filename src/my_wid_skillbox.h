@@ -12,6 +12,6 @@ uint8_t wid_skillbox_init(void);
 //
 // Global widgets.
 //
-extern void wid_skillbox_mouse_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely);
-void        wid_skillbox_mouse_over_e(Widp w);
+extern void wid_skillbox_mouse_over_begin(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely);
+void        wid_skillbox_mouse_over_end(Widp w);
 uint8_t     wid_skillbox_item_mouse_up(Widp w, int32_t x, int32_t y, uint32_t button);

@@ -248,7 +248,7 @@ void Game::config_sound_select(void)
     wid_set_style(w, UI_WID_STYLE_DARK);
     wid_set_pos(w, tl, br);
     wid_set_on_mouse_down(w, game_config_sound_effects_volume_incr);
-    wid_set_on_mouse_held_down(w, game_config_sound_effects_volume_incr);
+    wid_set_on_mouse_held(w, game_config_sound_effects_volume_incr);
     wid_set_text(w, "+");
   }
   {
@@ -261,7 +261,7 @@ void Game::config_sound_select(void)
     wid_set_style(w, UI_WID_STYLE_DARK);
     wid_set_pos(w, tl, br);
     wid_set_on_mouse_down(w, game_config_sound_effects_volume_decr);
-    wid_set_on_mouse_held_down(w, game_config_sound_effects_volume_decr);
+    wid_set_on_mouse_held(w, game_config_sound_effects_volume_decr);
     wid_set_text(w, "-");
   }
 
@@ -299,7 +299,7 @@ void Game::config_sound_select(void)
     wid_set_style(w, UI_WID_STYLE_DARK);
     wid_set_pos(w, tl, br);
     wid_set_on_mouse_down(w, game_config_sound_music_volume_incr);
-    wid_set_on_mouse_held_down(w, game_config_sound_music_volume_incr);
+    wid_set_on_mouse_held(w, game_config_sound_music_volume_incr);
     wid_set_text(w, "+");
   }
   {
@@ -312,7 +312,7 @@ void Game::config_sound_select(void)
     wid_set_style(w, UI_WID_STYLE_DARK);
     wid_set_pos(w, tl, br);
     wid_set_on_mouse_down(w, game_config_sound_music_volume_decr);
-    wid_set_on_mouse_held_down(w, game_config_sound_music_volume_decr);
+    wid_set_on_mouse_held(w, game_config_sound_music_volume_decr);
     wid_set_text(w, "-");
   }
 

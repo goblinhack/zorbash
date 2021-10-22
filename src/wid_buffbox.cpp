@@ -27,7 +27,7 @@ uint8_t wid_buffbox_init(void)
   return true;
 }
 
-void wid_buffbox_mouse_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+void wid_buffbox_mouse_over_begin(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {
   TRACE_AND_INDENT();
   DBG3("buffbox: Begin over buffbox");
@@ -68,7 +68,7 @@ void wid_buffbox_mouse_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx
   }
 }
 
-void wid_buffbox_mouse_over_e(Widp w)
+void wid_buffbox_mouse_over_end(Widp w)
 {
   TRACE_AND_INDENT();
   DBG3("buffbox: End over buffbox");
