@@ -23,7 +23,7 @@ static void game_config_sound_destroy(void)
 static uint8_t game_config_sound_cancel(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
-  CON("USR: Reload config");
+  CON("PLAYER: Reload config");
   game->load_config();
   game_config_sound_destroy();
   game->config_top_select();
@@ -33,7 +33,7 @@ static uint8_t game_config_sound_cancel(Widp w, int32_t x, int32_t y, uint32_t b
 static uint8_t game_config_sound_save(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
-  CON("USR: Save config");
+  CON("PLAYER: Save config");
   game->save_config();
   game_config_sound_destroy();
   game->config_top_select();
@@ -51,7 +51,7 @@ static uint8_t game_config_sound_back(Widp w, int32_t x, int32_t y, uint32_t but
 static uint8_t game_config_sound_effects_volume_incr(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
-  CON("USR: Increment sound_volume");
+  CON("PLAYER: Increment sound_volume");
   game->config.sound_volume++;
   if (game->config.sound_volume > MIX_MAX_VOLUME) {
     game->config.sound_volume = MIX_MAX_VOLUME;
@@ -63,7 +63,7 @@ static uint8_t game_config_sound_effects_volume_incr(Widp w, int32_t x, int32_t 
 static uint8_t game_config_sound_effects_volume_decr(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
-  CON("USR: Decrement sound_volume");
+  CON("PLAYER: Decrement sound_volume");
   if (game->config.sound_volume > 0) {
     game->config.sound_volume--;
   } else {
@@ -76,7 +76,7 @@ static uint8_t game_config_sound_effects_volume_decr(Widp w, int32_t x, int32_t 
 static uint8_t game_config_sound_music_volume_incr(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
-  CON("USR: Increment music_volume");
+  CON("PLAYER: Increment music_volume");
   game->config.music_volume++;
   if (game->config.music_volume > MIX_MAX_VOLUME) {
     game->config.music_volume = MIX_MAX_VOLUME;
@@ -89,7 +89,7 @@ static uint8_t game_config_sound_music_volume_incr(Widp w, int32_t x, int32_t y,
 static uint8_t game_config_sound_music_volume_decr(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
-  CON("USR: Decrement music_volume");
+  CON("PLAYER: Decrement music_volume");
   if (game->config.music_volume > 0) {
     game->config.music_volume--;
   } else {

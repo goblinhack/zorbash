@@ -9,12 +9,17 @@
 
 void wid_inventory_fini(void);
 bool wid_inventory_init(void);
-bool wid_inventory_create(Thingp);
+bool wid_inventory_over(Thingp);
+bool wid_inventory_select(Thingp);
+bool wid_inventory_create(Thingp, Thingp);
+void wid_inventory_over_requested(Thingp over);
+void wid_inventory_select_requested(Thingp selected);
 
 extern class Wid *     wid_inventory_window;
 extern class WidBag *  wid_inventory_bag;
 extern class WidPopup *wid_inventory_thing_info;
 extern Thingp wid_inventory_thing_selected;
+extern Thingp wid_inventory_thing_over;
 
 //
 // Global widgets.

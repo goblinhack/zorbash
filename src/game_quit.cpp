@@ -28,7 +28,7 @@ static uint8_t game_quit_yes(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
   if (game->started) {
-    LOG("USR: Restart game");
+    LOG("PLAYER: Restart game");
 
     auto level = game->level;
     if (level) {
@@ -67,7 +67,7 @@ static uint8_t game_quit_yes(Widp w, int32_t x, int32_t y, uint32_t button)
     game->main_menu_select();
   } else {
     game_quit_destroy();
-    DIE_CLEAN("USR: Quit");
+    DIE_CLEAN("PLAYER: Quit");
   }
   return true;
 }

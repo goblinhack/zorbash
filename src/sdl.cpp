@@ -1074,10 +1074,10 @@ uint8_t config_gfx_vsync_enable(tokens_t *tokens, void *context)
   }
 
   if (game->config.gfx_vsync_enable) {
-    CON("USR: Vsync enabled");
+    CON("PLAYER: Vsync enabled");
     SDL_GL_SetSwapInterval(1);
   } else {
-    CON("USR: Vsync disabled");
+    CON("PLAYER: Vsync disabled");
     SDL_GL_SetSwapInterval(0);
   }
   GL_ERROR_CHECK();
@@ -1107,7 +1107,7 @@ uint8_t config_errored(tokens_t *tokens, void *context)
 {
   TRACE_AND_INDENT();
   g_errored = false;
-  CON("USR: Errored mode cleared");
+  CON("PLAYER: Errored mode cleared");
   wid_hide(wid_console_window);
   return true;
 }

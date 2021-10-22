@@ -65,14 +65,12 @@ static void wid_bag_add_items(Widp wid_bag_container, Thingp bag)
     wid_set_pos(w, tl, br);
     wid_set_style(w, UI_WID_STYLE_DARK);
 
-    if (t == game->level->player->weapon_get()) {
-      bag->log("+ item %s at %d,%d (wielded)", t->to_string().c_str(), t->monst_infop->bag_position.x,
-               t->monst_infop->bag_position.y);
+    if (t == wid_inventory_thing_selected) {
       wid_set_style(w, UI_WID_STYLE_RED);
-    } else {
-      bag->log("+ item %s at %d,%d", t->to_string().c_str(), t->monst_infop->bag_position.x,
-               t->monst_infop->bag_position.y);
     }
+
+    bag->log("+ item %s at %d,%d", t->to_string().c_str(), t->monst_infop->bag_position.x,
+             t->monst_infop->bag_position.y);
 
     wid_set_on_mouse_over_b(w, wid_bag_item_mouse_over_b);
     wid_set_on_mouse_over_e(w, wid_bag_item_mouse_over_e);
@@ -90,19 +88,6 @@ static void wid_bag_add_items(Widp wid_bag_container, Thingp bag)
     } else {
       bag->err("+ no tile item %s at %d,%d", t->to_string().c_str(), t->monst_infop->bag_position.x,
                t->monst_infop->bag_position.y);
-    }
-
-    //
-    // Show a small visible button key
-    //
-    auto slot = game->level->inventory_get_slot(t);
-    if (slot != -1) {
-      Widp c = wid_new_square_button(w, "wid_bag button" + t->to_string());
-      wid_set_pos(c, point(0, 0), point(0, 0));
-
-      wid_set_fg_tilename(c, "key_" + std::to_string(slot + 1));
-      wid_set_text_lhs(c, true);
-      wid_set_text_top(c, true);
     }
   }
 
@@ -265,7 +250,11 @@ static uint8_t wid_bag_item_mouse_down(Widp w, int32_t x, int32_t y, uint32_t bu
     return false;
   }
 
-  game->wid_items_options_create(w, t, false /* came from inventory */);
+  if (wid_inventory_thing_selected == t) {
+    wid_inventory_select_requested(nullptr);
+  } else {
+    wid_inventory_select_requested(t);
+  }
   return true;
 }
 
@@ -385,7 +374,7 @@ static void wid_bag_item_mouse_over_b(Widp w, int32_t relx, int32_t rely, int32_
   tly += 5;
   brx -= 1;
   bry -= 2;
-  wid_inventory_create(t);
+  wid_inventory_over_requested(t);
 }
 
 static void wid_bag_item_mouse_over_e(Widp w)
@@ -394,7 +383,7 @@ static void wid_bag_item_mouse_over_e(Widp w)
     return;
   }
 
-  wid_inventory_init();
+  wid_inventory_over_requested(nullptr);
   BOTCON(" ");
 }
 

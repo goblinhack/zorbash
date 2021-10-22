@@ -14,6 +14,7 @@
 #include "my_sprintf.h"
 #include "my_sys.h"
 #include "my_thing.h"
+#include "my_wid_inventory.h"
 #include "my_wid_thing_info.h"
 #include "my_world.h"
 
@@ -97,6 +98,21 @@ void Thing::destroy(void)
 
   if (game->current_wid_thing_info == this) {
     game->current_wid_thing_info = nullptr;
+  }
+
+  if (game->request_inventory_thing_over == this) {
+    game->request_inventory_thing_over = nullptr;
+  }
+
+  if (game->request_inventory_thing_selected == this) {
+    game->request_inventory_thing_selected = nullptr;
+  }
+
+  if (wid_inventory_thing_over == this) {
+    wid_inventory_thing_over = nullptr;
+  }
+  if (wid_inventory_thing_selected == this) {
+    wid_inventory_thing_selected = nullptr;
   }
 
   for (const auto w : wid_thing_info_window) {

@@ -104,7 +104,7 @@ def init_ui_inventory():
     ]
     zx.tile_load_arr(
         file="data/gfx/ui_inventory.tga",
-        name="ui_inventory", width=608, height=320, arr=tiles)
+        name="ui_inventory", width=672, height=320, arr=tiles)
 
 @timeme
 def init_ui_blood():

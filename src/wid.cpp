@@ -3963,7 +3963,7 @@ static uint8_t wid_receive_unhandled_input(const SDL_Keysym *key)
   if (key->scancode == (SDL_Scancode) game->config.key_screenshot) {
     sdl_screenshot();
     TOPCON("Screenshot taken.");
-    CON("USR: Screenshot taken");
+    CON("PLAYER: Screenshot taken");
     return true;
   }
 
@@ -6173,7 +6173,7 @@ void wid_tick_all(void)
   }
 
   //
-  // If we need to remake the inventory, do so
+  // If we need to remake the rightbar, do so
   //
   if (game->request_remake_rightbar || game->request_remake_skillbox) {
     DBG3("Handle request to remake inventory");
@@ -6194,10 +6194,31 @@ void wid_tick_all(void)
     game->request_remake_actionbar = false;
   }
 
+  //
+  // Update the actionbar
+  //
   if (game->request_remake_actionbar) {
     DBG3("Handle request to remake actionhar");
     wid_actionbar_init();
     game->request_remake_actionbar = false;
+  }
+
+  //
+  // Update the inventory if needed
+  //
+  if (game->request_inventory_thing_over_do) {
+    wid_inventory_over(game->request_inventory_thing_over);
+    game->request_inventory_thing_over    = nullptr;
+    game->request_inventory_thing_over_do = false;
+  }
+
+  //
+  // Update the inventory if needed
+  //
+  if (game->request_inventory_thing_selected_do) {
+    wid_inventory_select(game->request_inventory_thing_selected);
+    game->request_inventory_thing_selected    = nullptr;
+    game->request_inventory_thing_selected_do = false;
   }
 
   if (wid_over) {

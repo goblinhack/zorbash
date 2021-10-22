@@ -285,6 +285,10 @@ public:
   bool     request_snapshot {}; // Something has requested a game snapshot
   bool     saving_snapshot {};
   uint32_t request_destroy_thing_info {}; // Timestamp
+  Thingp   request_inventory_thing_over {};
+  bool     request_inventory_thing_over_do {};
+  Thingp   request_inventory_thing_selected {};
+  bool     request_inventory_thing_selected_do {};
 
   //
   // An item being moved between bags
