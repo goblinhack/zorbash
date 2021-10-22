@@ -14,6 +14,7 @@ bool wid_inventory_create(void);
 extern class Wid *     wid_inventory_window;
 extern class WidBag *  wid_inventory_bag;
 extern class WidPopup *wid_inventory_thing_info;
+extern Thingp wid_inventory_thing_selected;
 
 //
 // Global widgets.
