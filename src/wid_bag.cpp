@@ -385,8 +385,7 @@ static void wid_bag_item_mouse_over_b(Widp w, int32_t relx, int32_t rely, int32_
   tly += 5;
   brx -= 1;
   bry -= 2;
-  delete wid_inventory_thing_info;
-  wid_inventory_thing_info = game->wid_thing_info_create_popup(t, point(tlx, tly), point(brx, bry));
+  wid_inventory_create(t);
 }
 
 static void wid_bag_item_mouse_over_e(Widp w)
@@ -395,6 +394,7 @@ static void wid_bag_item_mouse_over_e(Widp w)
     return;
   }
 
+  wid_inventory_init();
   BOTCON(" ");
 }
 

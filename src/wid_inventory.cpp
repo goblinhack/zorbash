@@ -44,6 +44,8 @@ void wid_inventory_fini(void)
     wid_inventory_bag = nullptr;
   }
 
+  wid_inventory_thing_selected = nullptr;
+
   if (wid_inventory_window) {
     wid_destroy(&wid_inventory_window);
     game->change_state(Game::STATE_NORMAL);
@@ -53,7 +55,7 @@ void wid_inventory_fini(void)
 bool wid_inventory_init(void)
 {
   TRACE_AND_INDENT();
-  return wid_inventory_create();
+  return wid_inventory_create(nullptr);
 }
 
 uint8_t wid_right_bar_inventory_open(Widp w, int32_t x, int32_t y, uint32_t button)
@@ -252,7 +254,7 @@ static uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
   return true;
 }
 
-bool wid_inventory_create(void)
+bool wid_inventory_create(Thingp t)
 {
   TRACE_AND_INDENT();
   DBG3("Create inventory");
@@ -268,6 +270,7 @@ bool wid_inventory_create(void)
   }
 
   wid_inventory_fini();
+  wid_inventory_thing_selected = t;
 
   static int inventory_width  = 76;
   static int inventory_height = 40;
@@ -354,7 +357,7 @@ bool wid_inventory_create(void)
     }
   }
 
-  {
+  if (0) {
     int width = 30;
     int x_off = 46;
     int y_at  = 5;
@@ -426,7 +429,7 @@ bool wid_inventory_create(void)
   //
   // Create the wid info over the inventory
   //
-  if (0) {
+  {
     int tlx, tly, brx, bry;
     wid_get_tl_x_tl_y_br_x_br_y(wid_inventory_window, &tlx, &tly, &brx, &bry);
     tlx += 45;
@@ -434,8 +437,77 @@ bool wid_inventory_create(void)
     brx -= 1;
     bry -= 2;
     game->wid_thing_info_clear_popup();
-    delete wid_inventory_thing_info;
-    wid_inventory_thing_info = game->wid_thing_info_create_popup(player, point(tlx, tly), point(brx, bry));
+    if (wid_inventory_thing_selected) {
+      wid_inventory_thing_info =
+          game->wid_thing_info_create_popup(wid_inventory_thing_selected, point(tlx, tly), point(brx, bry));
+    } else {
+      wid_inventory_thing_info = game->wid_thing_info_create_popup(player, point(tlx, tly), point(brx, bry));
+    }
+  }
+
+  if (wid_inventory_thing_selected) {
+    int y_at  = 28;
+    int x_off = 22;
+    int width = 21;
+
+    if (player->can_eat(wid_inventory_thing_selected)) {
+      TRACE_AND_INDENT();
+      auto p = wid_inventory_window;
+      auto w = wid_new_square_button(p, "eat");
+
+      point tl = make_point(x_off, y_at);
+      point br = make_point(x_off + width, y_at + 2);
+      wid_set_style(w, UI_WID_STYLE_NORMAL);
+      // wid_set_on_mouse_up(w, wid_item_options_eat);
+      wid_set_pos(w, tl, br);
+      wid_set_text(w, "Eat");
+      y_at += 3;
+    } else if (wid_inventory_thing_selected->is_usable()) {
+      TRACE_AND_INDENT();
+      auto p = wid_inventory_window;
+      auto w = wid_new_square_button(p, "use");
+
+      point tl = make_point(x_off, y_at);
+      point br = make_point(x_off + width, y_at + 2);
+      wid_set_style(w, UI_WID_STYLE_NORMAL);
+      // wid_set_on_mouse_up(w, wid_item_options_use);
+      wid_set_pos(w, tl, br);
+      if (wid_inventory_thing_selected->is_weapon()) {
+        wid_set_text(w, "Wield");
+      } else if (wid_inventory_thing_selected->is_potion()) {
+        wid_set_text(w, "Drink");
+      } else if (wid_inventory_thing_selected->is_wand()) {
+        wid_set_text(w, "Fire");
+      } else {
+        wid_set_text(w, "Use");
+      }
+      y_at += 3;
+    }
+    if (wid_inventory_thing_selected->is_throwable()) {
+      TRACE_AND_INDENT();
+      auto p = wid_inventory_window;
+      auto w = wid_new_square_button(p, "throw");
+
+      point tl = make_point(x_off, y_at);
+      point br = make_point(x_off + width, y_at + 2);
+      wid_set_style(w, UI_WID_STYLE_NORMAL);
+      // wid_set_on_mouse_up(w, wid_item_options_throw);
+      wid_set_pos(w, tl, br);
+      wid_set_text(w, "Throw");
+      y_at += 3;
+    }
+    {
+      TRACE_AND_INDENT();
+      auto p = wid_inventory_window;
+      auto w = wid_new_square_button(p, "drop");
+
+      point tl = make_point(x_off, y_at);
+      point br = make_point(x_off + width, y_at + 2);
+      wid_set_style(w, UI_WID_STYLE_NORMAL);
+      // wid_set_on_mouse_up(w, wid_item_options_drop);
+      wid_set_pos(w, tl, br);
+      wid_set_text(w, "Drop");
+    }
   }
 
   wid_update(wid_inventory_window);

@@ -9,7 +9,7 @@
 
 void wid_inventory_fini(void);
 bool wid_inventory_init(void);
-bool wid_inventory_create(void);
+bool wid_inventory_create(Thingp);
 
 extern class Wid *     wid_inventory_window;
 extern class WidBag *  wid_inventory_bag;
