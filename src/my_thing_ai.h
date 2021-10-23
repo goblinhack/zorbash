@@ -12,7 +12,7 @@
 #include <set>
 
 typedef struct AgeMap_ *AgeMapp;
-typedef struct Dmap_ *  Dmapp;
+typedef struct Dmap_   *Dmapp;
 
 //
 // Higher scores are better. Score is how desirable something is.
@@ -99,7 +99,7 @@ class GoalMap
 {
 public:
   std::multiset< class Goal > goals;
-  Dmap *                      dmap;
+  Dmap                       *dmap;
 };
 
 typedef struct AgeMap_ {

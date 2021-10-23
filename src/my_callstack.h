@@ -21,7 +21,7 @@
 #endif
 
 struct callframe {
-  const char *   func;
+  const char    *func;
   unsigned short line;
 };
 

@@ -51,7 +51,7 @@ private:
     iter(T at) : at(at) {}
     bool     operator!=(iter const &other) const { return at != other.at; }
     T const &operator*() const { return at; }
-    iter &   operator++()
+    iter    &operator++()
     {
       ++at;
       return *this;

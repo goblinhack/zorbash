@@ -12,7 +12,7 @@
 
 typedef struct tokens_t_ {
   struct slre regexp[ MAXSHORTSTR ];
-  char *      args[ MAXSHORTSTR ];
+  char       *args[ MAXSHORTSTR ];
   char        data[ MAXSHORTSTR ];
   uint32_t    cnt;
 } tokens_t;

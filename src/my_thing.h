@@ -1412,7 +1412,7 @@ public:
   void wobble(float wobble);
 
   const std::array< std::array< ThingId, MAX_BAG_WIDTH >, MAX_BAG_HEIGHT > *get_const_bag(void) const;
-  std::array< std::array< ThingId, MAX_BAG_WIDTH >, MAX_BAG_HEIGHT > *      get_bag(void);
+  std::array< std::array< ThingId, MAX_BAG_WIDTH >, MAX_BAG_HEIGHT >       *get_bag(void);
   static std::function< int(Thingp) >                                       matches_to_func(const std::string &what);
 } Thing;
 

@@ -153,7 +153,7 @@ Tilep       tile_index_to_tile(uint16_t i);
 Tilep       tile_n(Tilemap *root, int n);
 Tilep       tile_next(Tilemap *root, Tilep in);
 Tilep       tile_random(Tilemap *root);
-class Tex * tile_get_tex(Tilep);
+class Tex  *tile_get_tex(Tilep);
 int32_t     tile_get_height(Tilep);
 int32_t     tile_get_width(Tilep);
 std::string tile_get_name(Tilep);

@@ -258,12 +258,12 @@ extern PFNGLDELETEBUFFERSARBPROC        glDeleteBuffersARB_EXT;
 #define MAX_FBO                     20
 
 extern uint32_t                      NUMBER_BYTES_PER_VERTICE_2D;
-extern GLfloat *                     bufp;
-extern GLfloat *                     bufp_end;
+extern GLfloat                      *bufp;
+extern GLfloat                      *bufp_end;
 extern GLushort                      glapi_last_bottom;
 extern GLushort                      glapi_last_right;
-extern float *                       gl_array_buf;
-extern float *                       gl_array_buf_end;
+extern float                        *gl_array_buf;
+extern float                        *gl_array_buf_end;
 extern float                         glapi_last_tex_bottom;
 extern float                         glapi_last_tex_right;
 extern int                           buf_tex;

@@ -118,7 +118,7 @@ uint8_t  wid_is_always_hidden(Widp w);
 uint8_t  wid_is_hidden(Widp w);
 uint8_t  wid_receive_input(Widp, const SDL_Keysym *key);
 int      wid_get_int_context(Widp);
-void *   wid_get_void_context(Widp);
+void    *wid_get_void_context(Widp);
 ThingId  wid_get_thing_id_context(Widp);
 ThingId  wid_get_thing_id2_context(Widp);
 void     wid_always_hidden(Widp, uint8_t value);
@@ -350,11 +350,11 @@ public:
   WidKeyType   tree5_key {};
 
   wid_key_map_location *in_tree_root {};
-  wid_key_map_int *     in_tree2_unsorted_root {};
-  wid_key_map_int *     in_tree3_moving_wids {};
-  wid_key_map_int *     in_tree4_wids_being_destroyed {};
-  wid_key_map_int *     in_tree5_ticking_wids {};
-  wid_key_map_int *     in_tree_global_unsorted_root {};
+  wid_key_map_int      *in_tree2_unsorted_root {};
+  wid_key_map_int      *in_tree3_moving_wids {};
+  wid_key_map_int      *in_tree4_wids_being_destroyed {};
+  wid_key_map_int      *in_tree5_ticking_wids {};
+  wid_key_map_int      *in_tree_global_unsorted_root {};
 
   //
   // Sorted for display onto the screen.
@@ -471,7 +471,7 @@ public:
   // Client context
   //
   int     int_context {-1};
-  void *  void_context {};
+  void   *void_context {};
   ThingId thing_id_context {NoThingId};
   ThingId thing_id2_context {NoThingId};
 

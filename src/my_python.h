@@ -28,8 +28,8 @@ PyObject *tex_load_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *text_size_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *tile_load_arr_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *tile_load_arr_sprites_(PyObject *obj, PyObject *args, PyObject *keywds);
-char *    py_obj_attr_str(const PyObject *py_obj, const char *attr);
-char *    py_obj_to_str(const PyObject *py_str);
+char     *py_obj_attr_str(const PyObject *py_obj, const char *attr);
+char     *py_obj_to_str(const PyObject *py_str);
 double    py_obj_attr_double(const PyObject *py_obj, const char *attr);
 double    py_obj_to_double(PyObject *py_obj);
 void      py_call_void(const char *name);
@@ -207,11 +207,11 @@ void        python_init(char *argv[]);
 //
 #define PYFUNC(name, desc)                                                                                             \
   const char name##_doc[] = desc;                                                                                      \
-  PyObject * pysdl_##name(PyObject *self, PyObject *args)
+  PyObject  *pysdl_##name(PyObject *self, PyObject *args)
 
 #define PYDECL(name)                                                                                                   \
   extern const char name##_doc[];                                                                                      \
-  extern PyObject * pysdl_##name(PyObject *self, PyObject *args);
+  extern PyObject  *pysdl_##name(PyObject *self, PyObject *args);
 
 #define PYFUNC_REF(name)                                                                                               \
   {                                                                                                                    \
