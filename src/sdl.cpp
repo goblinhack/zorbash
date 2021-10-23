@@ -1317,14 +1317,28 @@ void sdl_loop(void)
       //
       // Mouse held?
       //
+      static uint32_t last_mouse_held_down = time_get_time_ms_cached();
       if (unlikely(! found)) {
         auto mouse_down = sdl_get_mouse();
         if (mouse_down) {
-          DBG("SDL: Mouse DOWN held: Button %d", mouse_down);
-          wid_mouse_held(mouse_down, mouse_x, mouse_y);
+          if (last_mouse_held_down) {
+            if (time_have_x_hundredths_passed_since(5, last_mouse_held_down)) {
+              LOG("SDL: Mouse DOWN held: Button %d", mouse_down);
+              wid_mouse_held(mouse_down, mouse_x, mouse_y);
+            }
+          } else {
+            last_mouse_held_down = time_get_time_ms_cached();
+          }
+        } else {
+          last_mouse_held_down = 0;
         }
+      } else {
+        last_mouse_held_down = 0;
       }
 
+      //
+      // Screenshot?
+      //
       if (unlikely(! g_do_screenshot)) {
         if (unlikely(! sdl_main_loop_running)) {
           LOG("Exit main loop");
