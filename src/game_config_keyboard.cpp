@@ -12,7 +12,7 @@
 #include "my_wid_popup.h"
 
 static int last_vert_scroll_offset = -1;
-WidPopup * game_config_keyboard_window;
+WidPopup  *game_config_keyboard_window;
 
 //
 // Check for saving keys to config can fit

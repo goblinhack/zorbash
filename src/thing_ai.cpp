@@ -313,8 +313,6 @@ bool Thing::ai_create_path_to_single_goal(int minx, int miny, int maxx, int maxy
 
     std::reverse(new_move_path.begin(), new_move_path.end());
 
-    auto p = new_move_path[ new_move_path.size() - 1 ];
-
     std::string goal_path_str = "Goal path: ";
     for (auto p1 : new_move_path) {
       goal_path_str += p1.to_string() + " ";
@@ -2075,7 +2073,7 @@ bool Thing::ai_choose_avoid_goals(std::multiset< Goal > &goals, const Goal &goal
 
   if (goals.size()) {
     if (max_avoid > -1) {
-      if (goals.size() > max_avoid) {
+      if ((int) goals.size() > max_avoid) {
         auto b = goals.begin();
         auto e = goals.end();
         std::advance(b, max_avoid - 1);
@@ -2112,7 +2110,7 @@ bool Thing::ai_choose_avoid_goals(std::multiset< Goal > &goals, const Goal &goal
 
   if (goals.size()) {
     if (max_avoid > -1) {
-      if (goals.size() > max_avoid) {
+      if ((int) goals.size() > max_avoid) {
         auto b = goals.begin();
         auto e = goals.end();
         std::advance(b, max_avoid - 1);
@@ -2149,7 +2147,7 @@ bool Thing::ai_choose_avoid_goals(std::multiset< Goal > &goals, const Goal &goal
 
   if (goals.size()) {
     if (max_avoid > -1) {
-      if (goals.size() > max_avoid) {
+      if ((int) goals.size() > max_avoid) {
         auto b = goals.begin();
         auto e = goals.end();
         std::advance(b, max_avoid - 1);

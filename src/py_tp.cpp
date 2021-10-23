@@ -62,8 +62,8 @@ PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds)
   PyObject *tp_set_##__field__(PyObject *obj, PyObject *args, PyObject *keywds)                                        \
   {                                                                                                                    \
     PyObject *py_class = 0;                                                                                            \
-    char *    tp_name  = 0;                                                                                            \
-    char *    value    = 0;                                                                                            \
+    char     *tp_name  = 0;                                                                                            \
+    char     *value    = 0;                                                                                            \
     Tpp       tp;                                                                                                      \
                                                                                                                        \
     static char *kwlist[] = {(char *) "class", (char *) "value", 0};                                                   \
@@ -112,8 +112,8 @@ PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds)
   PyObject *tp_set_##__field__(PyObject *obj, PyObject *args, PyObject *keywds)                                        \
   {                                                                                                                    \
     PyObject *py_class = 0;                                                                                            \
-    char *    tp_name  = 0;                                                                                            \
-    char *    value    = 0;                                                                                            \
+    char     *tp_name  = 0;                                                                                            \
+    char     *value    = 0;                                                                                            \
     Tpp       tp;                                                                                                      \
                                                                                                                        \
     static char *kwlist[] = {(char *) "class", (char *) "value", 0};                                                   \
@@ -163,8 +163,8 @@ PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds)
   PyObject *tp_set_##__field__(PyObject *obj, PyObject *args, PyObject *keywds)                                        \
   {                                                                                                                    \
     PyObject *py_class = 0;                                                                                            \
-    char *    tp_name  = 0;                                                                                            \
-    char *    value    = 0;                                                                                            \
+    char     *tp_name  = 0;                                                                                            \
+    char     *value    = 0;                                                                                            \
     Tpp       tp;                                                                                                      \
                                                                                                                        \
     static char *kwlist[] = {(char *) "class", (char *) "value", 0};                                                   \
@@ -218,7 +218,7 @@ PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds)
   PyObject *tp_set_##__field__(PyObject *obj, PyObject *args, PyObject *keywds)                                        \
   {                                                                                                                    \
     PyObject *py_class = 0;                                                                                            \
-    char *    tp_name  = 0;                                                                                            \
+    char     *tp_name  = 0;                                                                                            \
     int       value    = 0;                                                                                            \
     Tpp       tp;                                                                                                      \
                                                                                                                        \
@@ -262,7 +262,7 @@ PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds)
   PyObject *tp_set_##__field__(PyObject *obj, PyObject *args, PyObject *keywds)                                        \
   {                                                                                                                    \
     PyObject *py_class = 0;                                                                                            \
-    char *    tp_name  = 0;                                                                                            \
+    char     *tp_name  = 0;                                                                                            \
     double    value    = 0;                                                                                            \
     Tpp       tp;                                                                                                      \
                                                                                                                        \
@@ -305,11 +305,11 @@ PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds)
 static PyObject *tp_set_tile_dir(PyObject *obj, PyObject *args, PyObject *keywds, int dir, int level)
 {
   PyObject *py_class                = 0;
-  char *    tp_name                 = 0;
-  char *    fg                      = 0;
-  char *    bg                      = 0;
-  char *    fg_color                = 0;
-  char *    bg_color                = 0;
+  char     *tp_name                 = 0;
+  char     *fg                      = 0;
+  char     *bg                      = 0;
+  char     *fg_color                = 0;
+  char     *bg_color                = 0;
   int       delay_ms                = 0;
   int       is_moving               = 0;
   int       is_jumping              = 0;
@@ -338,7 +338,7 @@ static PyObject *tp_set_tile_dir(PyObject *obj, PyObject *args, PyObject *keywds
   int       is_dead_on_end_of_anim  = 0;
   int       is_alive_on_end_of_anim = 0;
   int       is_resurrecting         = 0;
-  char *    py_tile_name            = nullptr;
+  char     *py_tile_name            = nullptr;
 
   static char *kwlist[] = {(char *) "class",
                            (char *) "tile",
@@ -685,7 +685,7 @@ PyObject *tp_update_(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
   PyObject *py_class = 0;
-  char *    tp_name  = 0;
+  char     *tp_name  = 0;
   int       value    = 0;
   Tpp       tp;
 
@@ -726,7 +726,7 @@ done:
 PyObject *level_spawn_next_to_(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
-  char *   what = nullptr;
+  char    *what = nullptr;
   uint32_t id   = 0;
 
   static char *kwlist[] = {(char *) "id", (char *) "what", 0};
@@ -768,7 +768,7 @@ PyObject *level_spawn_next_to_(PyObject *obj, PyObject *args, PyObject *keywds)
 PyObject *level_spawn_next_to_or_on_monst_(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
-  char *   what = nullptr;
+  char    *what = nullptr;
   uint32_t id   = 0;
 
   static char *kwlist[] = {(char *) "id", (char *) "what", 0};
@@ -810,7 +810,7 @@ PyObject *level_spawn_next_to_or_on_monst_(PyObject *obj, PyObject *args, PyObje
 PyObject *level_spawn_using_items_radius_range_(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
-  char *   what       = nullptr;
+  char    *what       = nullptr;
   uint32_t id         = 0;
   uint32_t parent_id  = 0;
   uint32_t target_id  = 0;
@@ -880,7 +880,7 @@ PyObject *level_spawn_using_items_radius_range_(PyObject *obj, PyObject *args, P
 PyObject *level_spawn_fire_around_thing(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
-  char *   what = nullptr;
+  char    *what = nullptr;
   uint32_t id   = 0;
 
   static char *kwlist[] = {(char *) "id", (char *) "what", 0};
@@ -922,7 +922,7 @@ PyObject *level_spawn_fire_around_thing(PyObject *obj, PyObject *args, PyObject 
 PyObject *level_spawn_at_thing(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
-  char *   what = nullptr;
+  char    *what = nullptr;
   uint32_t id   = 0;
 
   static char *kwlist[] = {(char *) "id", (char *) "what", 0};
@@ -964,7 +964,7 @@ PyObject *level_spawn_at_thing(PyObject *obj, PyObject *args, PyObject *keywds)
 PyObject *level_spawn_at_thing_if_possible(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
-  char *   what = nullptr;
+  char    *what = nullptr;
   uint32_t id   = 0;
 
   static char *kwlist[] = {(char *) "id", (char *) "what", 0};
@@ -1006,7 +1006,7 @@ PyObject *level_spawn_at_thing_if_possible(PyObject *obj, PyObject *args, PyObje
 PyObject *if_matches_then_kill_(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
-  char *   what = nullptr;
+  char    *what = nullptr;
   uint32_t id   = 0;
   int      x    = -1;
   int      y    = -1;
@@ -1060,7 +1060,7 @@ PyObject *if_matches_then_kill_(PyObject *obj, PyObject *args, PyObject *keywds)
 PyObject *if_matches_(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
-  char *   what = nullptr;
+  char    *what = nullptr;
   uint32_t id   = 0;
 
   static char *kwlist[] = {(char *) "id", (char *) "what", 0};
@@ -1102,7 +1102,7 @@ PyObject *if_matches_(PyObject *obj, PyObject *args, PyObject *keywds)
 PyObject *level_place_at(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
-  char *   what = nullptr;
+  char    *what = nullptr;
   uint32_t id   = 0;
   int      x    = -1;
   int      y    = -1;

@@ -313,7 +313,7 @@ PyObject *thing_fire_at(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
   uint32_t     owner_id  = 0;
-  char *       item      = nullptr;
+  char        *item      = nullptr;
   uint32_t     target_id = 0;
   static char *kwlist[]  = {(char *) "owner", (char *) "item", (char *) "target", 0};
 
@@ -375,7 +375,7 @@ PyObject *thing_defeated_by(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
   uint32_t     owner_id    = 0;
-  char *       reason      = nullptr;
+  char        *reason      = nullptr;
   uint32_t     defeater_id = 0;
   static char *kwlist[]    = {(char *) "owner", (char *) "reason", (char *) "defeater", 0};
 
@@ -421,7 +421,7 @@ PyObject *thing_defeated(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
   uint32_t     owner_id = 0;
-  char *       reason   = nullptr;
+  char        *reason   = nullptr;
   static char *kwlist[] = {(char *) "owner", (char *) "reason", 0};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &owner_id, &reason)) {
@@ -454,7 +454,7 @@ PyObject *thing_msg(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
   uint32_t     owner_id = 0;
-  char *       msg      = nullptr;
+  char        *msg      = nullptr;
   static char *kwlist[] = {(char *) "owner", (char *) "msg", 0};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &owner_id, &msg)) {
@@ -491,7 +491,7 @@ PyObject *thing_msg(PyObject *obj, PyObject *args, PyObject *keywds)
 PyObject *thing_sound_play_(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
-  char *   name     = 0;
+  char    *name     = 0;
   uint32_t owner_id = 0;
 
   static char *kwlist[] = {(char *) "owner", (char *) "name", 0};
@@ -531,7 +531,7 @@ PyObject *thing_sound_play_channel_(PyObject *obj, PyObject *args, PyObject *key
 {
   TRACE_AND_INDENT();
   uint32_t owner_id = 0;
-  char *   name     = 0;
+  char    *name     = 0;
   int      channel  = 0;
 
   static char *kwlist[] = {(char *) "owner", (char *) "channel", (char *) "name", 0};

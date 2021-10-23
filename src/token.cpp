@@ -14,7 +14,7 @@ static tokens_t *tokens_parse(const char *input, tokens_t *tokens)
 {
   TRACE_AND_INDENT();
   const char *in;
-  char *      out;
+  char       *out;
   char        i;
 
   memset(tokens, 0, sizeof(*tokens));

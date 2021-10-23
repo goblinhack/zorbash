@@ -11,7 +11,7 @@
 PyObject *map_load_room_(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
-  char *    room_name          = 0;
+  char     *room_name          = 0;
   int       xxx                = 0;
   int       yyy                = 0;
   PyObject *py_room_data       = 0;

@@ -25,7 +25,7 @@
 #include "my_thing_template.h"
 
 static std::map< std::string, PyObject * > py_mods;
-PyObject *                                 zx_mod;
+PyObject                                  *zx_mod;
 PyMODINIT_FUNC                             python_mouse_y_module_create(void);
 
 void py_call_void(const char *name)
@@ -958,8 +958,8 @@ char *py_obj_to_str(const PyObject *py_str)
 {
   TRACE_AND_INDENT();
   PyObject *py_encstr;
-  char *    outstr = 0;
-  char *    str;
+  char     *outstr = 0;
+  char     *str;
 
   py_encstr = 0;
   str       = 0;
@@ -993,9 +993,9 @@ err_out:
 std::string py_obj_to_string(const PyObject *py_str)
 {
   TRACE_AND_INDENT();
-  PyObject *  py_encstr;
+  PyObject   *py_encstr;
   std::string outstr;
-  char *      str;
+  char       *str;
 
   py_encstr = 0;
   str       = 0;
@@ -1218,8 +1218,8 @@ char *py_obj_attr_str(const PyObject *py_obj, const char *attr)
 {
   TRACE_AND_INDENT();
   PyObject *py_encstr;
-  char *    outstr = 0;
-  char *    str;
+  char     *outstr = 0;
+  char     *str;
 
   py_encstr = 0;
   str       = 0;
@@ -2377,7 +2377,7 @@ void py_err(void)
   PyObject *ptype, *pvalue, *ptraceback, *pyobj_str;
   PyObject *ret, *list, *string;
   PyObject *mod;
-  char *    py_str;
+  char     *py_str;
 
   PyErr_Fetch(&ptype, &pvalue, &ptraceback);
   PyErr_NormalizeException(&ptype, &pvalue, &ptraceback);
@@ -2498,10 +2498,10 @@ static void py_add_to_path(const char *path)
 {
   TRACE_AND_INDENT();
   PyObject *py_cur_path, *py_item;
-  char *    new_path;
+  char     *new_path;
   int       wc_len, i;
-  wchar_t * wc_new_path;
-  char *    item;
+  wchar_t  *wc_new_path;
+  char     *item;
 
   DBG3("Current system python path: (adding %s)", path);
 

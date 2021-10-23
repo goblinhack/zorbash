@@ -69,7 +69,7 @@ public:
   Nodemap                                           closed_nodes;
   point                                             start;
   point                                             goal;
-  const Dmap *                                      dmap {};
+  const Dmap                                       *dmap {};
 
   void add_to_open(Node *n)
   {

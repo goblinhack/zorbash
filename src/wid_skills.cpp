@@ -18,7 +18,7 @@
 #include "my_wid_popup.h"
 #include "my_wid_thing_info.h"
 
-WidPopup *                wid_skills;
+WidPopup                 *wid_skills;
 static std::vector< Tpp > skills;
 
 void wid_skill_choose_destroy(void)

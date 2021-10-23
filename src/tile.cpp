@@ -808,8 +808,8 @@ Tilep string2tile(const char **s)
   TRACE_AND_INDENT();
   static char        name[ MAXSHORTSTR ];
   static const char *eo_name = name + MAXSHORTSTR;
-  const char *       c       = *s;
-  char *             t       = name;
+  const char        *c       = *s;
+  char              *t       = name;
 
   while (t < eo_name) {
     if ((*c == '\0') || (*c == '$')) {

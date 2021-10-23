@@ -148,9 +148,9 @@ std::string Thing::short_text_capitalized(void) const
 {
   TRACE_AND_INDENT();
   std::string out        = tp()->text_name();
-  char *      b          = (char *) out.c_str();
-  char *      e          = b + out.size();
-  char *      c          = b;
+  char       *b          = (char *) out.c_str();
+  char       *e          = b + out.size();
+  char       *c          = b;
   bool        word_start = true;
   while (c < e) {
     if (word_start) {

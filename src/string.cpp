@@ -111,7 +111,7 @@ char *strsub_(const char *in, const char *look_for, const char *replace_with, st
               std::string func, int line)
 {
   TRACE_AND_INDENT();
-  char *      buf;
+  char       *buf;
   const char *at;
   int32_t     newlen;
   int32_t     oldlen;
@@ -161,7 +161,7 @@ char *strsub_(const char *in, const char *look_for, const char *replace_with, st
 char *strappend(const char *in, const char *append)
 {
   TRACE_AND_INDENT();
-  char *  buf;
+  char   *buf;
   int32_t newlen;
   int32_t len;
 
@@ -190,7 +190,7 @@ char *strappend(const char *in, const char *append)
 char *strprepend(const char *in, const char *prepend)
 {
   TRACE_AND_INDENT();
-  char *  buf;
+  char   *buf;
   int32_t newlen;
   int32_t len;
 
@@ -236,7 +236,7 @@ void strchop(char *s)
 {
   TRACE_AND_INDENT();
   uint32_t size;
-  char *   end;
+  char    *end;
 
   size = (uint32_t) strlen(s);
   if (! size) {
@@ -258,7 +258,7 @@ void strchopc(char *s, char c)
 {
   TRACE_AND_INDENT();
   uint32_t size;
-  char *   end;
+  char    *end;
 
   size = (uint32_t) strlen(s);
   if (! size) {
@@ -410,7 +410,7 @@ char *dynvprintf(const char *fmt, va_list args)
 std::string mybasename(const char *in, const char *who)
 {
   TRACE_AND_INDENT();
-  char *      tmp = dupstr(in, who);
+  char       *tmp = dupstr(in, who);
   std::string tmp2(basename(tmp));
   myfree(tmp);
 
@@ -483,8 +483,8 @@ shared_vector_string split(const char *text, int max_line_len)
 {
   TRACE_AND_INDENT();
   uint8_t           found_format_string;
-  const char *      line_start;
-  const char *      line_end;
+  const char       *line_start;
+  const char       *line_end;
   int               line_len;
   char              c;
   const char *const text_start = text;
@@ -1144,8 +1144,8 @@ Tpp string2tp(const char **s)
   TRACE_AND_INDENT();
   static char        tmp[ MAXSHORTSTR ];
   static const char *eo_tmp = tmp + MAXSHORTSTR;
-  const char *       c      = *s;
-  char *             t      = tmp;
+  const char        *c      = *s;
+  char              *t      = tmp;
 
   while (t < eo_tmp) {
     if ((*c == '\0') || (*c == '$')) {
@@ -1230,7 +1230,7 @@ int32_t snprintf_realloc(char **str, int32_t *size, int32_t *used, const char *f
   int32_t needspace;
   int32_t usedspace;
   va_list ap;
-  char *  tmp;
+  char   *tmp;
 
   if (! str) {
     return (-1);

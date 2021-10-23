@@ -35,7 +35,7 @@ void Thing::poison_tick(void)
   int    damage = 0;
 
   if (poison) {
-    if (pcg_random_range(0, 20) < get_stat_constitution()) {
+    if ((int) pcg_random_range(0, 20) < get_stat_constitution()) {
       if (is_player()) {
         TOPCON("You take half damage fron poison due to your sturdy constitution.");
       }

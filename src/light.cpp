@@ -582,7 +582,7 @@ void Light::render_triangle_fans(void)
 
       for (i = 0; i < max_light_rays; i++) {
         auto    r   = &getref_no_check(ray, i);
-        point & p   = points[ i ][ r->depth_furthest ].p;
+        point  &p   = points[ i ][ r->depth_furthest ].p;
         int16_t p1x = light_pos.x + p.x;
         int16_t p1y = light_pos.y + p.y;
         push_point(p1x, p1y);
@@ -594,7 +594,7 @@ void Light::render_triangle_fans(void)
       i = 0;
       {
         auto    r   = &getref_no_check(ray, i);
-        point & p   = points[ i ][ r->depth_furthest ].p;
+        point  &p   = points[ i ][ r->depth_furthest ].p;
         int16_t p1x = light_pos.x + p.x;
         int16_t p1y = light_pos.y + p.y;
         push_point(p1x, p1y);

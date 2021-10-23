@@ -48,7 +48,7 @@ int sdl_joy2_up;
 std::array< uint8_t, SDL_MAX_BUTTONS > sdl_joy_buttons;
 
 static SDL_Joystick *joy;
-static SDL_Haptic *  haptic;
+static SDL_Haptic   *haptic;
 
 int *sdl_joy_axes;
 int  sdl_joy_deadzone = 8000;
@@ -57,7 +57,7 @@ int  joy_naxes;
 int  joy_buttons;
 int  joy_balls;
 
-SDL_Window *  window;  // Our window handle
+SDL_Window   *window;  // Our window handle
 SDL_GLContext context; // Our opengl context handle
 
 SDL_Scancode      sdl_grabbed_scancode;

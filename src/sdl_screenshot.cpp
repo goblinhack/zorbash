@@ -144,7 +144,7 @@ void sdl_fbo_dump(int fbo, const std::string &name)
 
   static int count      = 0;
   int        components = 4;
-  char *     png        = dynprintf("screenshot.%s.%03d.png", name.c_str(), count);
+  char      *png        = dynprintf("screenshot.%s.%03d.png", name.c_str(), count);
   stbi_write_png(png, w, h, components, pixels.data(), 4 * w);
   BOTCON("Screenshot: %s", png);
   myfree(png);

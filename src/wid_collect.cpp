@@ -20,7 +20,7 @@
 #include "my_wid_thing_info.h"
 #include "my_wid_topcon.h"
 
-WidPopup *                   wid_collect;
+WidPopup                    *wid_collect;
 static std::vector< Thingp > collect_items;
 
 void wid_collect_destroy(void)

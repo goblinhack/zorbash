@@ -13,8 +13,8 @@
 PyObject *tile_load_arr_(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
-  char *    file   = 0;
-  char *    name   = 0;
+  char     *file   = 0;
+  char     *name   = 0;
   int       width  = 0;
   int       height = 0;
   PyObject *e      = 0;
@@ -85,8 +85,8 @@ PyObject *tile_load_arr_(PyObject *obj, PyObject *args, PyObject *keywds)
 PyObject *tile_load_arr_sprites_(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
-  char *    file   = 0;
-  char *    name   = 0;
+  char     *file   = 0;
+  char     *name   = 0;
   int       width  = 0;
   int       height = 0;
   PyObject *e      = 0;

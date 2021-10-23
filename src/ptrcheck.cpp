@@ -31,7 +31,7 @@ public:
   std::string func;
   int         line {};
   std::string ts;
-  Traceback * tb {};
+  Traceback  *tb {};
 
   Ptrcheck_history() {}
   Ptrcheck_history(const Ptrcheck_history &other)
@@ -167,7 +167,7 @@ void ERROR(const char *fmt, ...)
 //
 typedef struct hash_elem_t_ {
   struct hash_elem_t_ *next;
-  Ptrcheck *           pc;
+  Ptrcheck            *pc;
 } hash_elem_t;
 
 typedef struct hash_t_ {
@@ -184,8 +184,8 @@ static hash_t *hash;
 static const int                                      ringbuf_max_size = 2000000;
 static int                                            ringbuf_current_size;
 static std::array< class Ptrcheck, ringbuf_max_size > ringbuf;
-static Ptrcheck *                                     ringbuf_next;
-static Ptrcheck *                                     ringbuf_base;
+static Ptrcheck                                      *ringbuf_next;
+static Ptrcheck                                      *ringbuf_base;
 
 //
 // Wrapper for calloc.
@@ -239,7 +239,7 @@ static hash_t *hash_init(int hash_size)
 static void hash_add(hash_t *hash_table, Ptrcheck *pc)
 {
   hash_elem_t **slot;
-  hash_elem_t * elem;
+  hash_elem_t  *elem;
 
   if (! pc) {
     return;
@@ -275,7 +275,7 @@ static void hash_add(hash_t *hash_table, Ptrcheck *pc)
 static hash_elem_t *hash_find(hash_t *hash_table, void *ptr)
 {
   hash_elem_t **slot;
-  hash_elem_t * elem;
+  hash_elem_t  *elem;
 
   if (! hash_table) {
     return 0;
@@ -300,8 +300,8 @@ static hash_elem_t *hash_find(hash_t *hash_table, void *ptr)
 static void hash_free(hash_t *hash_table, void *ptr)
 {
   hash_elem_t **slot;
-  hash_elem_t * prev;
-  hash_elem_t * elem;
+  hash_elem_t  *prev;
+  hash_elem_t  *elem;
 
   if (! hash_table) {
     return;
@@ -345,8 +345,8 @@ static Ptrcheck *ptrcheck_verify_pointer(const void *ptr, std::string &func, std
   static const char *unknown_ptr_warning  = "** UNKNOWN POINTER ** ";
   static const char *null_pointer_warning = "** NULL POINTER ** ";
   int                ring_ptr_size;
-  Ptrcheck *         pc;
-  hash_elem_t *      e;
+  Ptrcheck          *pc;
+  hash_elem_t       *e;
 
   if (! hash) {
     return 0;
@@ -665,8 +665,8 @@ int ptrcheck_verify(const void *ptr, std::string &func, std::string &file, int l
 void ptrcheck_leak_print(void)
 {
   hash_elem_t **slot;
-  hash_elem_t * elem;
-  Ptrcheck *    pc;
+  hash_elem_t  *elem;
+  Ptrcheck     *pc;
   int           i;
   int           leak;
 

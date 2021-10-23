@@ -20,7 +20,7 @@
 PyObject *level_add_(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
-  char *    level_name    = 0;
+  char     *level_name    = 0;
   PyObject *py_level_data = 0;
 
   static char *kwlist[] = {(char *) "level_data", (char *) "level_name", 0};
@@ -269,7 +269,7 @@ PyObject *level_flood_fill_get_all_things(PyObject *obj, PyObject *args, PyObjec
   int          x        = -1;
   int          y        = -1;
   static char *kwlist[] = {(char *) "id", (char *) "x", (char *) "y", (char *) "filter", 0};
-  char *       filter   = nullptr;
+  char        *filter   = nullptr;
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Iiis", kwlist, &id, &x, &y, &filter)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);

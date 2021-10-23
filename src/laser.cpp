@@ -205,7 +205,7 @@ void Level::display_lasers(void)
     }
 
     return false;
-  });
+    });
   all_lasers.erase(e, all_lasers.end());
 
   blit_flush();

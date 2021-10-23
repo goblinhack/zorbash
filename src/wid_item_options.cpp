@@ -17,7 +17,7 @@
 #include "my_wid_thing_info.h"
 #include <SDL_mixer.h>
 
-WidPopup *    wid_item_options_window;
+WidPopup     *wid_item_options_window;
 static Thingp chosen_thing;
 static Widp   chosen_wid;
 static bool   came_from_inventory;

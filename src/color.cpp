@@ -70,8 +70,8 @@ color string2color(const char **s)
   TRACE_AND_INDENT();
   static char        tmp[ MAXSHORTSTR ];
   static const char *eo_tmp = tmp + sizeof(tmp);
-  const char *       c      = *s;
-  char *             t      = tmp;
+  const char        *c      = *s;
+  char              *t      = tmp;
 
   while (t < eo_tmp) {
     if ((*c == '\0') || (*c == '$')) {
@@ -109,8 +109,8 @@ color string2color(const wchar_t **s)
   TRACE_AND_INDENT();
   static wchar_t        tmp[ MAXSHORTSTR ];
   static const wchar_t *eo_tmp = tmp + MAXSHORTSTR - 1;
-  const wchar_t *       c      = *s;
-  wchar_t *             t      = tmp;
+  const wchar_t        *c      = *s;
+  wchar_t              *t      = tmp;
 
   while (t < eo_tmp) {
     if ((*c == '\0') || (*c == '$')) {
@@ -225,8 +225,8 @@ const char *string2colorname(const char **s)
   TRACE_AND_INDENT();
   static char        tmp[ MAXSHORTSTR ];
   static const char *eo_tmp = tmp + MAXSHORTSTR - 1;
-  const char *       c      = *s;
-  char *             t      = tmp;
+  const char        *c      = *s;
+  char              *t      = tmp;
 
   while (t < eo_tmp) {
     if ((*c == '\0') || (*c == '$')) {

@@ -109,7 +109,7 @@ std::string Traceback::to_string(void)
 
   // resolve addresses into strings containing "filename(function+address)",
   // this array must be free()-ed
-  char **     symbollist = backtrace_symbols(addrlist, size);
+  char      **symbollist = backtrace_symbols(addrlist, size);
   const char *prefix     = " >";
 
   // address of this function.
@@ -190,7 +190,7 @@ void Traceback::log(void)
 
   // resolve addresses into strings containing "filename(function+address)",
   // this array must be free()-ed
-  char **     symbollist = backtrace_symbols(addrlist, size);
+  char      **symbollist = backtrace_symbols(addrlist, size);
   const char *prefix     = " >";
 
   // address of this function.

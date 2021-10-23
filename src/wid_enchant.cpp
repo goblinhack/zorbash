@@ -18,7 +18,7 @@
 #include "my_wid_popup.h"
 #include "my_wid_thing_info.h"
 
-WidPopup *                   wid_enchant;
+WidPopup                    *wid_enchant;
 static std::vector< Thingp > enchant_items;
 
 void wid_enchant_destroy(void)

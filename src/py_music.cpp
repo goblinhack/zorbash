@@ -14,8 +14,8 @@
 PyObject *music_load_(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
-  char *   file = 0;
-  char *   name = 0;
+  char    *file = 0;
+  char    *name = 0;
   uint32_t rate = 44100;
 
   static char *kwlist[] = {(char *) "rate", (char *) "file", (char *) "name", 0};

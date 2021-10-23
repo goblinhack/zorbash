@@ -23,7 +23,7 @@ unsigned char *file_load(const char *filename, int *outlen)
 {
   TRACE_AND_INDENT();
   unsigned char *out;
-  char *         alt_filename;
+  char          *alt_filename;
 
   alt_filename = 0;
 
@@ -176,7 +176,7 @@ unsigned char *file_io_read(const char *filename, int *out_len)
 {
   TRACE_AND_INDENT();
   unsigned char *buffer;
-  FILE *         file;
+  FILE          *file;
   int            len;
 
   file = fopen(filename, "rb");
@@ -234,7 +234,7 @@ unsigned char *file_io_read(const char *filename, int *out_len)
 int file_write(const char *filename, unsigned char *buffer, int len)
 {
   TRACE_AND_INDENT();
-  FILE *  file;
+  FILE   *file;
   uint8_t rc;
 
   file = fopen(filename, "w");

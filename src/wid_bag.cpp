@@ -134,13 +134,6 @@ uint8_t wid_in_transit_item_place(Widp w, int32_t x, int32_t y, uint32_t button)
     DBG3("Ignore input; player is dead");
     return false;
   }
-  //
-  // Allow click to move and then click to drop / or drag and drop
-  //
-  if (! time_have_x_tenths_passed_since(2, game->last_mouse_down)) {
-    DBG3("Mouse up too soon; ignore");
-    return true;
-  }
 
   if (! game->in_transit_item) {
     DBG3("No in transit item");
@@ -156,6 +149,9 @@ uint8_t wid_in_transit_item_place(Widp w, int32_t x, int32_t y, uint32_t button)
 
   t->log("In transit item place");
 
+  //
+  // Pver the rightbar?
+  //
   if (is_mouse_over_rightbar()) {
     t->log("Is over inventory");
     if (game->level->player->carry(t)) {
@@ -167,7 +163,22 @@ uint8_t wid_in_transit_item_place(Widp w, int32_t x, int32_t y, uint32_t button)
     return true;
   }
 
+  //
+  // Over a slot?
+  //
+  auto over              = wid_find_at(x, y);
   auto wid_bag_container = is_mouse_over_any_bag();
+  if (over) {
+    TOPCON("over a wid %s", over->name.c_str());
+    if (over->name == "item slot") {
+      auto slot = wid_get_int_context(over);
+      TOPCON("over slot %d", slot);
+      game->level->inventory_assign(slot, t);
+      game->request_remake_rightbar = true;
+      wid_bag_container             = wid_inventory_bag->wid_bag_container;
+    }
+  }
+
   if (! wid_bag_container) {
     t->log("Is not over any bag");
     wid_in_transit_item_drop();

@@ -118,7 +118,7 @@ static SDL_Surface *load_image(std::string filename)
   TRACE_AND_INDENT();
   uint32_t       rmask, gmask, bmask, amask;
   unsigned char *image_data;
-  SDL_Surface *  surf;
+  SDL_Surface   *surf;
   int32_t        x, y, comp;
 
   image_data = load_raw_image(filename, &x, &y, &comp);
@@ -175,8 +175,8 @@ static void load_images(SDL_Surface **surf1_out, SDL_Surface **surf2_out, std::s
   TRACE_AND_INDENT();
   uint32_t       rmask, gmask, bmask, amask;
   unsigned char *image_data;
-  SDL_Surface *  surf1 = 0;
-  SDL_Surface *  surf2 = 0;
+  SDL_Surface   *surf1 = 0;
+  SDL_Surface   *surf2 = 0;
   int32_t        x, y, comp;
 
   image_data = load_raw_image(filename, &x, &y, &comp);
@@ -567,8 +567,8 @@ Texp string2tex(const char **s)
   TRACE_AND_INDENT();
   static char        tmp[ MAXSHORTSTR ];
   static std::string eo_tmp = tmp + MAXSHORTSTR;
-  const char *       c      = *s;
-  char *             t      = tmp;
+  const char        *c      = *s;
+  char              *t      = tmp;
 
   while (t < eo_tmp) {
     if ((*c == '\0') || (*c == '$')) {

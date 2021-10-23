@@ -1095,7 +1095,7 @@ static void setupPalette(HDC hDC)
   TRACE_AND_INDENT();
   int                   pixelFormat = GetPixelFormat(hDC);
   PIXELFORMATDESCRIPTOR pfd;
-  LOGPALETTE *          pPal;
+  LOGPALETTE           *pPal;
   int                   paletteSize;
 
   DescribePixelFormat(hDC, pixelFormat, sizeof(PIXELFORMATDESCRIPTOR), &pfd);

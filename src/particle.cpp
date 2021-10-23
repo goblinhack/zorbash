@@ -398,7 +398,7 @@ void Level::display_external_particles(void)
     tile_blit_outline(tile, blit_tl, blit_br, WHITE);
 
     return false;
-  });
+    });
   all_external_particles.erase(e, all_external_particles.end());
 
   blit_flush();
