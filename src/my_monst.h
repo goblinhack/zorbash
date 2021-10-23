@@ -107,6 +107,7 @@ public:
   int                     throw_distance      = {};
   int                     tick_resurrect_when = {};
   point                   bag_position {-1, -1};
+  point                   last_bag_position {-1, -1};
   point                   wander_target {-1, -1};
   point                   where_i_dropped_an_item_last {-1, -1};
   point                   where_i_failed_to_collect_last {-1, -1};

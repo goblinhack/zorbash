@@ -265,10 +265,16 @@ static uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
               case SDLK_ESCAPE :
                 {
                   TRACE_AND_INDENT();
-                  CON("PLAYER: inventory cancelled");
+                  LOG("PLAYER: inventory cancelled");
 
                   if (game->in_transit_item) {
                     wid_in_transit_item_drop();
+                    return true;
+                  }
+
+                  if (wid_inventory_thing_selected) {
+                    wid_inventory_select_requested(nullptr);
+                    return true;
                   }
 
                   wid_inventory_fini();
@@ -424,7 +430,7 @@ bool wid_inventory_create(Thingp selected, Thingp over)
     wid_set_on_mouse_over_begin(w, wid_inventory_mouse_over_tab_bag2);
   }
 
-  {
+  if (wid_inventory_thing_selected) {
     int width = 9;
     int x_off = 45;
     int y_at  = 5;
@@ -493,27 +499,27 @@ bool wid_inventory_create(Thingp selected, Thingp over)
 
       y_at += 3;
     }
-  }
-
-  //
-  // Create the wid info over the inventory
-  //
-  {
-    int tlx, tly, brx, bry;
-    wid_get_tl_x_tl_y_br_x_br_y(wid_inventory_window, &tlx, &tly, &brx, &bry);
-    tlx += 53;
-    tly += 5;
-    brx -= 1;
-    bry -= 2;
-    game->wid_thing_info_clear_popup();
-    if (wid_inventory_thing_selected) {
-      wid_inventory_thing_info =
-          game->wid_thing_info_create_popup(wid_inventory_thing_selected, point(tlx, tly), point(brx, bry));
-    } else if (wid_inventory_thing_over) {
-      wid_inventory_thing_info =
-          game->wid_thing_info_create_popup(wid_inventory_thing_over, point(tlx, tly), point(brx, bry));
-    } else {
-      wid_inventory_thing_info = game->wid_thing_info_create_popup(player, point(tlx, tly), point(brx, bry));
+  } else {
+    //
+    // Create the wid info over the inventory
+    //
+    {
+      int tlx, tly, brx, bry;
+      wid_get_tl_x_tl_y_br_x_br_y(wid_inventory_window, &tlx, &tly, &brx, &bry);
+      tlx += 53;
+      tly += 5;
+      brx -= 1;
+      bry -= 2;
+      game->wid_thing_info_clear_popup();
+      if (wid_inventory_thing_selected) {
+        wid_inventory_thing_info =
+            game->wid_thing_info_create_popup(wid_inventory_thing_selected, point(tlx, tly), point(brx, bry));
+      } else if (wid_inventory_thing_over) {
+        wid_inventory_thing_info =
+            game->wid_thing_info_create_popup(wid_inventory_thing_over, point(tlx, tly), point(brx, bry));
+      } else {
+        wid_inventory_thing_info = game->wid_thing_info_create_popup(player, point(tlx, tly), point(brx, bry));
+      }
     }
   }
 

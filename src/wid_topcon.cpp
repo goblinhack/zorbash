@@ -136,7 +136,18 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
 
   if (game->state == Game::STATE_INVENTORY) {
     if (key->scancode == SDL_SCANCODE_ESCAPE) {
-      CON("PLAYER: Escape pressed, clear moving items state");
+      LOG("PLAYER: Escape pressed when in inventory");
+
+      if (game->in_transit_item) {
+        wid_in_transit_item_drop();
+        return true;
+      }
+
+      if (wid_inventory_thing_selected) {
+        wid_inventory_select_requested(nullptr);
+        return true;
+      }
+
       game->change_state(Game::STATE_NORMAL);
       return true;
     }

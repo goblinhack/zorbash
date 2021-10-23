@@ -96,6 +96,29 @@ static void wid_bag_add_items(Widp wid_bag_container, Thingp bag)
   wid_update(wid_bag_container);
 }
 
+static void wid_in_transit_item_place_in_bag(Widp wid_bag_container, Thingp bag, Thingp t, point at)
+{
+  t->log("Can place at %d,%d", at.x, at.y);
+
+  wid_destroy(&game->in_transit_item);
+
+  t->monst_infop->preferred_bag_position = at;
+  bag->carry(t);
+  t->monst_infop->preferred_bag_position = point(-1, -1);
+
+  if (t->is_bag_item_container()) {
+    game->inventory_highlight_slot = game->previous_slot;
+  }
+
+  t->log("Compress bag and request to remake inventory");
+  while (bag->bag_compress()) {
+  }
+  game->request_remake_rightbar = true;
+
+  t->log("In transit item place completed");
+  wid_bag_add_items(wid_bag_container, bag);
+}
+
 uint8_t wid_in_transit_item_place(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
@@ -168,27 +191,17 @@ uint8_t wid_in_transit_item_place(Widp w, int32_t x, int32_t y, uint32_t button)
   at.x -= 1;
   at.y -= 1;
 
+  //
+  // Try to place the item at the chosen location, or the last place thie
+  // iteam was at, or last resort, anywhere.
+  // /
   bag->log("Try to place %s at %d,%d", t->to_string().c_str(), at.x, at.y);
   if (bag->bag_can_place_at(t, at)) {
-    t->log("Can place at %d,%d", at.x, at.y);
-
-    wid_destroy(&game->in_transit_item);
-
-    t->monst_infop->preferred_bag_position = at;
-    bag->carry(t);
-    t->monst_infop->preferred_bag_position = point(-1, -1);
-
-    if (t->is_bag_item_container()) {
-      game->inventory_highlight_slot = game->previous_slot;
-    }
-
-    t->log("Compress bag and request to remake inventory");
-    while (bag->bag_compress()) {
-    }
-    game->request_remake_rightbar = true;
-
-    t->log("In transit item place completed");
-    wid_bag_add_items(wid_bag_container, bag);
+    wid_in_transit_item_place_in_bag(wid_bag_container, bag, t, at);
+  } else if (t->monst_infop && bag->bag_can_place_at(t, t->monst_infop->last_bag_position)) {
+    wid_in_transit_item_place_in_bag(wid_bag_container, bag, t, t->monst_infop->last_bag_position);
+  } else if (bag->bag_can_place_at(t, point(-1, -1))) {
+    wid_in_transit_item_place_in_bag(wid_bag_container, bag, t, point(-1, -1));
   } else {
     t->log("In transit item place failed");
     TOPCON("Could not fit that item. You can always drop the item if needed.");

@@ -101,6 +101,7 @@ std::ostream &operator<<(std::ostream &out, Bits< MonstInfop & > const my)
   /* int          throw_distance            */ out << bits(my.t->throw_distance);
   /* int          tick_resurrect_when       */ out << bits(my.t->tick_resurrect_when);
   /* point        bag_position              */ out << bits(my.t->bag_position);
+  /* point        last_bag_position         */ out << bits(my.t->last_bag_position);
   /* point        wander_target             */ out << bits(my.t->wander_target);
   /* point     where_i_dropped_an_item_last */ out << bits(my.t->where_i_dropped_an_item_last);
   /* point   where_i_failed_to_collect_last */ out << bits(my.t->where_i_failed_to_collect_last);

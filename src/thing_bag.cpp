@@ -362,7 +362,8 @@ bool Thing::bag_place_at(Thingp item, point pos)
       set(bag, x, y, item->id);
     }
   }
-  item->monst_infop->bag_position = pos;
+  item->monst_infop->bag_position      = pos;
+  item->monst_infop->last_bag_position = pos;
   return true;
 }
 

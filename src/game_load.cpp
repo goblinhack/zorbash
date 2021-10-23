@@ -124,6 +124,7 @@ std::istream &operator>>(std::istream &in, Bits< MonstInfop & > my)
   /* int          throw_distance            */ in >> bits(my.t->throw_distance);
   /* int          tick_resurrect_when       */ in >> bits(my.t->tick_resurrect_when);
   /* point        bag_position              */ in >> bits(my.t->bag_position);
+  /* point        last_bag_position         */ in >> bits(my.t->last_bag_position);
   /* point        wander_target             */ in >> bits(my.t->wander_target);
   /* point     where_i_dropped_an_item_last */ in >> bits(my.t->where_i_dropped_an_item_last);
   /* point   where_i_failed_to_collect_last */ in >> bits(my.t->where_i_failed_to_collect_last);
