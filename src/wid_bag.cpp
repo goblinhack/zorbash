@@ -444,7 +444,7 @@ static void wid_bag_item_mouse_over_end(Widp w)
 static uint8_t wid_bag_item_key_down(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_AND_INDENT();
-  TOPCON("Bag item key down");
+  DBG3("Bag item key down");
   TRACE_AND_INDENT();
   if ((game->state == Game::STATE_CHOOSING_TARGET) || (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
       (game->state == Game::STATE_COLLECTING_ITEMS) || (game->state == Game::STATE_SAVE_MENU) ||
@@ -492,7 +492,6 @@ static uint8_t wid_bag_item_key_down(Widp w, const struct SDL_Keysym *key)
     return false;
   }
 
-  what->topcon("over");
   if (key->scancode == (SDL_Scancode) game->config.key_drop) {
     if (game->level->player->drop(what)) {
       game->tick_begin("drop");
@@ -511,70 +510,70 @@ static uint8_t wid_bag_item_key_down(Widp w, const struct SDL_Keysym *key)
         game->level->inventory_assign(9, what);
         wid_inventory_select(what);
         game->request_remake_rightbar = true;
-        TOPCON("Reassigned item to key.");
+        CON("PLAYER: Reassigned item to key.");
         return true;
       }
       if (key->scancode == (SDL_Scancode) game->config.key_action1) {
         game->level->inventory_assign(0, what);
         game->request_remake_rightbar = true;
         wid_inventory_select(what);
-        TOPCON("Reassigned item to key.");
+        CON("PLAYER: Reassigned item to key.");
         return true;
       }
       if (key->scancode == (SDL_Scancode) game->config.key_action2) {
         game->level->inventory_assign(1, what);
         game->request_remake_rightbar = true;
         wid_inventory_select(what);
-        TOPCON("Reassigned item to key.");
+        CON("PLAYER: Reassigned item to key.");
         return true;
       }
       if (key->scancode == (SDL_Scancode) game->config.key_action3) {
         game->level->inventory_assign(2, what);
         game->request_remake_rightbar = true;
         wid_inventory_select(what);
-        TOPCON("Reassigned item to key.");
+        CON("PLAYER: Reassigned item to key.");
         return true;
       }
       if (key->scancode == (SDL_Scancode) game->config.key_action4) {
         game->level->inventory_assign(3, what);
         game->request_remake_rightbar = true;
         wid_inventory_select(what);
-        TOPCON("Reassigned item to key.");
+        CON("PLAYER: Reassigned item to key.");
         return true;
       }
       if (key->scancode == (SDL_Scancode) game->config.key_action5) {
         game->level->inventory_assign(4, what);
         game->request_remake_rightbar = true;
         wid_inventory_select(what);
-        TOPCON("Reassigned item to key.");
+        CON("PLAYER: Reassigned item to key.");
         return true;
       }
       if (key->scancode == (SDL_Scancode) game->config.key_action6) {
         game->level->inventory_assign(5, what);
         game->request_remake_rightbar = true;
         wid_inventory_select(what);
-        TOPCON("Reassigned item to key.");
+        CON("PLAYER: Reassigned item to key.");
         return true;
       }
       if (key->scancode == (SDL_Scancode) game->config.key_action7) {
         game->level->inventory_assign(6, what);
         game->request_remake_rightbar = true;
         wid_inventory_select(what);
-        TOPCON("Reassigned item to key.");
+        CON("PLAYER: Reassigned item to key.");
         return true;
       }
       if (key->scancode == (SDL_Scancode) game->config.key_action8) {
         game->level->inventory_assign(7, what);
         game->request_remake_rightbar = true;
         wid_inventory_select(what);
-        TOPCON("Reassigned item to key.");
+        CON("PLAYER: Reassigned item to key.");
         return true;
       }
       if (key->scancode == (SDL_Scancode) game->config.key_action9) {
         game->level->inventory_assign(8, what);
         game->request_remake_rightbar = true;
         wid_inventory_select(what);
-        TOPCON("Reassigned item to key.");
+        CON("PLAYER: Reassigned item to key.");
         return true;
       }
       break;

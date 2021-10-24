@@ -3923,6 +3923,9 @@ int Thing::set_poison(int v)
   TRACE_AND_INDENT();
   new_monst_info();
   auto n = (monst_infop->poison = v);
+  if (monst_infop->poison < 0) {
+    monst_infop->poison = 0;
+  }
   return (n);
 }
 
@@ -3942,6 +3945,9 @@ int Thing::incr_poison(int v)
   TRACE_AND_INDENT();
   new_monst_info();
   auto n = (monst_infop->poison += v);
+  if (monst_infop->poison < 0) {
+    monst_infop->poison = 0;
+  }
   return (n);
 }
 

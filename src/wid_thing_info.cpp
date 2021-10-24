@@ -157,8 +157,8 @@ WidPopup *Game::wid_thing_info_create_popup_compact(const std::vector< Thingp > 
   }
 
   auto  height = TERM_HEIGHT - UI_TOPCON_VIS_HEIGHT;
-  point tl     = make_point(0, TERM_HEIGHT - 1 - height);
-  point br     = make_point(29, TERM_HEIGHT - 1);
+  point tl     = make_point(0, TERM_HEIGHT - 2 - height);
+  point br     = make_point(29, TERM_HEIGHT - 2);
 
   auto wid_popup_window = new WidPopup("Thing info", tl, br, nullptr, "", false, false /* vert */);
 
