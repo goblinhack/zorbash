@@ -427,7 +427,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         wid_rightbar_init();
         auto what = level->inventory_get();
         if (what) {
-          game->wid_items_options_create(w, what, true /* came from inventory */);
+          wid_inventory_select_requested(what);
         }
         return true;
       }
@@ -440,7 +440,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         wid_rightbar_init();
         auto what = level->inventory_get();
         if (what) {
-          game->wid_items_options_create(w, what, true /* came from inventory */);
+          wid_inventory_select_requested(what);
         }
         return true;
       }
@@ -453,7 +453,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         wid_rightbar_init();
         auto what = level->inventory_get();
         if (what) {
-          game->wid_items_options_create(w, what, true /* came from inventory */);
+          wid_inventory_select_requested(what);
         }
         return true;
       }
@@ -466,7 +466,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         wid_rightbar_init();
         auto what = level->inventory_get();
         if (what) {
-          game->wid_items_options_create(w, what, true /* came from inventory */);
+          wid_inventory_select_requested(what);
         }
         return true;
       }
@@ -479,7 +479,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         wid_rightbar_init();
         auto what = level->inventory_get();
         if (what) {
-          game->wid_items_options_create(w, what, true /* came from inventory */);
+          wid_inventory_select_requested(what);
         }
         return true;
       }
@@ -492,7 +492,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         wid_rightbar_init();
         auto what = level->inventory_get();
         if (what) {
-          game->wid_items_options_create(w, what, true /* came from inventory */);
+          wid_inventory_select_requested(what);
         }
         return true;
       }
@@ -505,7 +505,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         wid_rightbar_init();
         auto what = level->inventory_get();
         if (what) {
-          game->wid_items_options_create(w, what, true /* came from inventory */);
+          wid_inventory_select_requested(what);
         }
         return true;
       }
@@ -518,7 +518,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         wid_rightbar_init();
         auto what = level->inventory_get();
         if (what) {
-          game->wid_items_options_create(w, what, true /* came from inventory */);
+          wid_inventory_select_requested(what);
         }
         return true;
       }
@@ -531,7 +531,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         wid_rightbar_init();
         auto what = level->inventory_get();
         if (what) {
-          game->wid_items_options_create(w, what, true /* came from inventory */);
+          wid_inventory_select_requested(what);
         }
         return true;
       }
@@ -544,7 +544,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         wid_rightbar_init();
         auto what = level->inventory_get();
         if (what) {
-          game->wid_items_options_create(w, what, true /* came from inventory */);
+          wid_inventory_select_requested(what);
         }
         return true;
       }

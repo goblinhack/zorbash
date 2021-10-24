@@ -15,6 +15,7 @@
 #include "my_wid_actionbar.h"
 #include "my_wid_bag.h"
 #include "my_wid_inventory.h"
+#include "my_wid_rightbar.h"
 #include "my_wid_thing_info.h"
 
 Widp      wid_inventory_window;
@@ -253,6 +254,140 @@ static uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
     }
   }
 
+  //
+  // If shift is not held, select inventory
+  //
+  if (key->scancode == (SDL_Scancode) game->config.key_action0) {
+    CON("PLAYER: Pressed action key");
+    TRACE_AND_INDENT();
+    game->change_state(Game::STATE_NORMAL);
+    wid_thing_info_fini(); // To remove bag or other info
+    level->inventory_chosen(9);
+    wid_rightbar_init();
+    auto what = level->inventory_get();
+    if (what) {
+      wid_inventory_select_requested(what);
+    }
+    return true;
+  }
+  if (key->scancode == (SDL_Scancode) game->config.key_action1) {
+    CON("PLAYER: Pressed action key");
+    TRACE_AND_INDENT();
+    game->change_state(Game::STATE_NORMAL);
+    wid_thing_info_fini(); // To remove bag or other info
+    level->inventory_chosen(0);
+    wid_rightbar_init();
+    auto what = level->inventory_get();
+    if (what) {
+      wid_inventory_select_requested(what);
+    }
+    return true;
+  }
+  if (key->scancode == (SDL_Scancode) game->config.key_action2) {
+    CON("PLAYER: Pressed action key");
+    TRACE_AND_INDENT();
+    game->change_state(Game::STATE_NORMAL);
+    wid_thing_info_fini(); // To remove bag or other info
+    level->inventory_chosen(1);
+    wid_rightbar_init();
+    auto what = level->inventory_get();
+    if (what) {
+      wid_inventory_select_requested(what);
+    }
+    return true;
+  }
+  if (key->scancode == (SDL_Scancode) game->config.key_action3) {
+    CON("PLAYER: Pressed action key");
+    TRACE_AND_INDENT();
+    game->change_state(Game::STATE_NORMAL);
+    wid_thing_info_fini(); // To remove bag or other info
+    level->inventory_chosen(2);
+    wid_rightbar_init();
+    auto what = level->inventory_get();
+    if (what) {
+      wid_inventory_select_requested(what);
+    }
+    return true;
+  }
+  if (key->scancode == (SDL_Scancode) game->config.key_action4) {
+    CON("PLAYER: Pressed action key");
+    TRACE_AND_INDENT();
+    game->change_state(Game::STATE_NORMAL);
+    wid_thing_info_fini(); // To remove bag or other info
+    level->inventory_chosen(3);
+    wid_rightbar_init();
+    auto what = level->inventory_get();
+    if (what) {
+      wid_inventory_select_requested(what);
+    }
+    return true;
+  }
+  if (key->scancode == (SDL_Scancode) game->config.key_action5) {
+    CON("PLAYER: Pressed action key");
+    TRACE_AND_INDENT();
+    game->change_state(Game::STATE_NORMAL);
+    wid_thing_info_fini(); // To remove bag or other info
+    level->inventory_chosen(4);
+    wid_rightbar_init();
+    auto what = level->inventory_get();
+    if (what) {
+      wid_inventory_select_requested(what);
+    }
+    return true;
+  }
+  if (key->scancode == (SDL_Scancode) game->config.key_action6) {
+    CON("PLAYER: Pressed action key");
+    TRACE_AND_INDENT();
+    game->change_state(Game::STATE_NORMAL);
+    wid_thing_info_fini(); // To remove bag or other info
+    level->inventory_chosen(5);
+    wid_rightbar_init();
+    auto what = level->inventory_get();
+    if (what) {
+      wid_inventory_select_requested(what);
+    }
+    return true;
+  }
+  if (key->scancode == (SDL_Scancode) game->config.key_action7) {
+    CON("PLAYER: Pressed action key");
+    TRACE_AND_INDENT();
+    game->change_state(Game::STATE_NORMAL);
+    wid_thing_info_fini(); // To remove bag or other info
+    level->inventory_chosen(6);
+    wid_rightbar_init();
+    auto what = level->inventory_get();
+    if (what) {
+      wid_inventory_select_requested(what);
+    }
+    return true;
+  }
+  if (key->scancode == (SDL_Scancode) game->config.key_action8) {
+    CON("PLAYER: Pressed action key");
+    TRACE_AND_INDENT();
+    game->change_state(Game::STATE_NORMAL);
+    wid_thing_info_fini(); // To remove bag or other info
+    level->inventory_chosen(7);
+    wid_rightbar_init();
+    auto what = level->inventory_get();
+    if (what) {
+      wid_inventory_select_requested(what);
+    }
+    return true;
+  }
+  if (key->scancode == (SDL_Scancode) game->config.key_action9) {
+    CON("PLAYER: Pressed action key");
+    TRACE_AND_INDENT();
+    game->change_state(Game::STATE_NORMAL);
+    wid_thing_info_fini(); // To remove bag or other info
+    level->inventory_chosen(8);
+    wid_rightbar_init();
+    auto what = level->inventory_get();
+    if (what) {
+      wid_inventory_select_requested(what);
+    }
+    return true;
+  }
+
   switch (key->mod) {
     case KMOD_LCTRL :
     case KMOD_RCTRL :
@@ -323,6 +458,67 @@ bool wid_inventory_select(Thingp selected)
   return wid_inventory_create(selected, wid_inventory_thing_over);
 }
 
+static void wid_slot_item_mouse_over_begin(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+{
+  if (game->in_transit_item) {
+    return;
+  }
+
+  if (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) {
+    return;
+  }
+
+  int  slot = wid_get_int_context(w);
+  auto t    = game->level->inventory_get(slot);
+  if (! t) {
+    return;
+  }
+
+  //
+  // Create the wid info over the inventory
+  //
+  static int tlx, tly, brx, bry;
+  wid_get_tl_x_tl_y_br_x_br_y(wid_get_top_parent(w), &tlx, &tly, &brx, &bry);
+  tlx += 45;
+  tly += 5;
+  brx -= 1;
+  bry -= 2;
+  wid_inventory_over_requested(t);
+}
+
+static void wid_slot_item_mouse_over_end(Widp w)
+{
+  if (game->in_transit_item) {
+    return;
+  }
+
+  wid_inventory_over_requested(nullptr);
+  BOTCON(" ");
+}
+
+static uint8_t wid_slot_item_mouse_up(Widp w, int32_t x, int32_t y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  DBG3("Mouse down, item select");
+  TRACE_AND_INDENT();
+  if (game->in_transit_item) {
+    return false;
+  }
+
+  int  slot = wid_get_int_context(w);
+  auto t    = game->level->inventory_get(slot);
+  if (! t) {
+    return true;
+  }
+
+  if (wid_inventory_thing_selected == t) {
+    wid_inventory_select_requested(nullptr);
+  } else {
+    wid_inventory_select_requested(t);
+  }
+  return true;
+}
+
 bool wid_inventory_create(Thingp selected, Thingp over)
 {
   TRACE_AND_INDENT();
@@ -342,7 +538,7 @@ bool wid_inventory_create(Thingp selected, Thingp over)
   wid_inventory_thing_over     = over;
   wid_inventory_thing_selected = selected;
 
-  static int inventory_width  = 76;
+  static int inventory_width  = 108;
   static int inventory_height = 40;
 
   int left_half  = inventory_width / 2;
@@ -430,7 +626,10 @@ bool wid_inventory_create(Thingp selected, Thingp over)
     wid_set_on_mouse_over_begin(w, wid_inventory_mouse_over_tab_bag2);
   }
 
-  if (wid_inventory_thing_selected || game->in_transit_item) {
+  {
+    //
+    // Display the slots
+    //
     int width = 32;
     int x_off = 45;
     int y_at  = 5;
@@ -457,6 +656,9 @@ bool wid_inventory_create(Thingp selected, Thingp over)
         point br       = make_point(2, 2);
         wid_set_pos(wid_icon, tl, br);
         wid_set_int_context(wid_icon, slot);
+        wid_set_on_mouse_over_begin(wid_icon, wid_slot_item_mouse_over_begin);
+        wid_set_on_mouse_over_end(wid_icon, wid_slot_item_mouse_over_end);
+        wid_set_on_mouse_up(wid_icon, wid_slot_item_mouse_up);
 
         if (tpp) {
           auto tiles = &tpp->tiles;
@@ -471,6 +673,12 @@ bool wid_inventory_create(Thingp selected, Thingp over)
           wid_set_style(wid_icon, UI_WID_STYLE_DARK);
         }
 
+        if (wid_inventory_thing_selected) {
+          if (wid_inventory_thing_selected->tp() == tpp) {
+            wid_set_style(wid_icon, UI_WID_STYLE_RED);
+          }
+        }
+
         wid_update(wid_icon);
       }
 
@@ -482,6 +690,9 @@ bool wid_inventory_create(Thingp selected, Thingp over)
         wid_set_pos(wid_item, tl, br);
         wid_set_style(wid_item, UI_WID_STYLE_DARK);
         wid_set_int_context(wid_item, slot);
+        wid_set_on_mouse_over_begin(wid_item, wid_slot_item_mouse_over_begin);
+        wid_set_on_mouse_over_end(wid_item, wid_slot_item_mouse_over_end);
+        wid_set_on_mouse_up(wid_item, wid_slot_item_mouse_up);
 
         if (tpp) {
           wid_set_text(wid_item, " " + std::to_string(slot + 1) + ". " + tpp->short_text_name());
@@ -489,18 +700,27 @@ bool wid_inventory_create(Thingp selected, Thingp over)
           wid_set_text(wid_item, " " + std::to_string(slot + 1) + ". empty, drag items here");
         }
         wid_set_text_lhs(wid_item, true);
+
+        if (wid_inventory_thing_selected) {
+          if (wid_inventory_thing_selected->tp() == tpp) {
+            wid_set_style(wid_item, UI_WID_STYLE_RED);
+          }
+        }
+
         wid_update(wid_item);
       }
 
       y_at += 3;
     }
-  } else {
+  }
+
+  {
     //
     // Create the wid info over the inventory
     //
     int tlx, tly, brx, bry;
     wid_get_tl_x_tl_y_br_x_br_y(wid_inventory_window, &tlx, &tly, &brx, &bry);
-    tlx += 45;
+    tlx += 77;
     tly += 5;
     brx -= 1;
     bry -= 2;

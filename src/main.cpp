@@ -105,9 +105,6 @@ void quit(void)
   LOG("FINI: tile_fini");
   tile_fini();
 
-  LOG("FINI: sdl_fini");
-  sdl_fini();
-
   LOG("FINI: blit_fini");
   blit_fini();
 
@@ -122,6 +119,9 @@ void quit(void)
 
   LOG("FINI: sound_fini");
   sound_fini();
+
+  LOG("FINI: sdl_fini");
+  sdl_fini();
 
   if (EXEC_FULL_PATH_AND_NAME) {
     myfree(EXEC_FULL_PATH_AND_NAME);

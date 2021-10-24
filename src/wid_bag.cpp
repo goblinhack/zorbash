@@ -419,13 +419,6 @@ static void wid_bag_item_mouse_over_begin(Widp w, int32_t relx, int32_t rely, in
     return;
   }
 
-  auto bag_id = wid_get_thing_id2_context(w);
-  auto bag    = game->thing_find(bag_id);
-  if (! bag) {
-    t->log("Bag containing me not found");
-    return;
-  }
-
   //
   // Create the wid info over the inventory
   //

@@ -72,14 +72,21 @@ void sdl_fini(void)
 #endif
 
   if (sdl_init_video) {
+    CON("SDL video quit");
     sdl_init_video = 0;
     SDL_VideoQuit();
   }
 
+  CON("SDL delete GL context");
   SDL_GL_DeleteContext(context);
+
+  CON("SDL destroy window");
   SDL_DestroyWindow(window);
 
+  CON("SDL quit");
   SDL_Quit();
+
+  CON("SDL fini done");
 }
 
 static inline void sdl_list_video_size(void)
@@ -483,7 +490,7 @@ static void sdl_event(SDL_Event *event)
       }
     case SDL_KEYUP :
       {
-        key_repeat_count = 0;
+        key_repeat_count  = 0;
         last_time_for_key = 0;
         last_time_for_key = 0;
         memset(&last_key_pressed, 0, sizeof(*key));

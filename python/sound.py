@@ -1,5 +1,6 @@
 import zx
 
+zx.sound_load(volume=1.0, file="data/sounds/misc/clack.wav",                                                name="bonk")
 zx.sound_load(volume=1.0, file="data/sounds/impacts/explosion_a.wav",                                       name="explosion_a")
 zx.sound_load(volume=1.0, file="data/sounds/impacts/explosion_b.wav",                                       name="explosion_b")
 zx.sound_load(volume=1.0, file="data/sounds/impacts/explosion_c.wav",                                       name="explosion_c")

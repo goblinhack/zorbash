@@ -8,6 +8,7 @@
 #include "my_level.h"
 #include "my_monst.h"
 #include "my_random.h"
+#include "my_sound.h"
 #include "my_sys.h"
 #include "my_thing.h"
 #include "my_ui.h"
@@ -644,6 +645,7 @@ bool Level::inventory_chosen(const uint32_t slot)
   }
 
   if (slot >= player->monst_infop->inventory_id.size()) {
+    sound_play("bonk");
     return false;
   }
 
@@ -652,6 +654,7 @@ bool Level::inventory_chosen(const uint32_t slot)
 
   auto oid = get(player->monst_infop->inventory_id, slot);
   if (! oid) {
+    sound_play("bonk");
     return false;
   }
 
@@ -667,6 +670,7 @@ bool Level::inventory_chosen(const uint32_t slot)
   }
 
   if (! item) {
+    sound_play("bonk");
     return false;
   }
 

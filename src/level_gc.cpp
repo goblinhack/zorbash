@@ -32,7 +32,9 @@ void Level::things_gc(bool force)
       ++next_it;
 
       auto id = it->first;
-      auto t  = thing_find(id);
+      LOG("Thing %08" PRIx32 " garbage collect", id.id);
+
+      auto t = thing_find(id);
       if (! t) {
         ERR("Thing %08" PRIx32 " not found to garbage collect", id.id);
         continue;
