@@ -3170,6 +3170,37 @@ Widp wid_find(const std::string &name)
   return (nullptr);
 }
 
+static void wid_find_all_at(Widp w, std::list< Widp > &out, const point &p)
+{
+  TRACE_AND_INDENT();
+
+  for (auto &iter : w->children_display_sorted) {
+    auto c = iter.second;
+    wid_find_all_at(c, out, p);
+    if ((p.x < c->abs_tl.x) || (p.y < c->abs_tl.y) || (p.x > c->abs_br.x) || (p.y > c->abs_br.y)) {
+      continue;
+    }
+    out.push_back(c);
+  }
+}
+
+std::list< Widp > wid_find_all_at(const point &p)
+{
+  std::list< Widp > out;
+
+  TRACE_AND_INDENT();
+  for (auto &iter : wid_top_level) {
+    auto w = iter.second;
+    if ((p.x < w->abs_tl.x) || (p.y < w->abs_tl.y) || (p.x > w->abs_br.x) || (p.y > w->abs_br.y)) {
+      continue;
+    }
+
+    wid_find_all_at(w, out, p);
+    out.push_back(w);
+  }
+  return out;
+}
+
 void wid_always_hidden(Widp w, uint8_t value)
 {
   TRACE_AND_INDENT();

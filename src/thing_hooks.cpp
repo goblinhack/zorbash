@@ -169,7 +169,9 @@ void Thing::hooks_remove()
 void Thing::remove_all_references()
 {
   TRACE_AND_INDENT();
-  dbg("Remove all references");
+  if (is_loggable()) {
+    dbg("Remove all references");
+  }
   TRACE_AND_INDENT();
 
   //
@@ -323,5 +325,8 @@ void Thing::remove_all_references()
         err("interesting thing is still attached to (weapon use) %s", t->to_string().c_str());
       }
     }
+  }
+  if (is_loggable()) {
+    dbg("Removed all references");
   }
 }

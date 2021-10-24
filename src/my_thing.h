@@ -254,6 +254,7 @@ public:
   bool bag_add(Thingp);
   bool bag_add_test(Thingp);
   bool bag_can_place_at(Thingp item, point pos);
+  bool bag_can_place_anywhere(Thingp item, point &pos);
   bool bag_compress(void);
   bool bag_contains(Thingp item);
   bool bag_place_at(Thingp item, point pos);

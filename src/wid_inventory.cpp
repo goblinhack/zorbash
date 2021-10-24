@@ -445,17 +445,16 @@ bool wid_inventory_create(Thingp selected, Thingp over)
         }
       }
 
-      auto  wid_slot = wid_new_container(wid_inventory_window, "item slot");
+      auto  wid_slot = wid_new_container(wid_inventory_window, "item slot parent");
       point tl       = make_point(x_off, y_at);
       point br       = make_point(x_off + width - 3, y_at + 2);
       wid_set_pos(wid_slot, tl, br);
       wid_set_shape_none(wid_slot);
-      wid_set_int_context(wid_slot, slot);
 
       {
         auto  wid_icon = wid_new_square_button(wid_slot, "item slot");
-        point tl       = make_point(4, 0);
-        point br       = make_point(7, 2);
+        point tl       = make_point(0, 0);
+        point br       = make_point(2, 2);
         wid_set_pos(wid_icon, tl, br);
         wid_set_int_context(wid_icon, slot);
 
@@ -478,7 +477,7 @@ bool wid_inventory_create(Thingp selected, Thingp over)
       {
         auto wid_item = wid_new_square_button(wid_slot, "item slot");
 
-        point tl = make_point(0, 0);
+        point tl = make_point(3, 0);
         point br = make_point(width - 1, 2);
         wid_set_pos(wid_item, tl, br);
         wid_set_style(wid_item, UI_WID_STYLE_DARK);

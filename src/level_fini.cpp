@@ -59,6 +59,7 @@ void Level::fini(void)
       }
     }
   }
+  log("Destroyed all things");
 
   log("Garbage collection of things still on the map:");
   things_gc_force();

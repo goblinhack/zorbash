@@ -423,6 +423,10 @@ static void sdl_event(SDL_Event *event)
 
   wid_mouse_two_clicks = false;
 
+  static struct SDL_Keysym last_key_pressed;
+  static ts_t              last_time_for_key;
+  static int               key_repeat_count;
+
   switch (event->type) {
     case SDL_KEYDOWN :
       {
@@ -444,19 +448,32 @@ static void sdl_event(SDL_Event *event)
             SDL_GetKeyName(event->key.keysym.sym), key->mod);
 
         {
-          static struct SDL_Keysym last;
-          static ts_t              last_time_for_key;
 
           //
           // SDL2 has no auto repeat.
           //
-          if (! memcmp(&last, key, sizeof(*key))) {
-            if (! time_have_x_hundredths_passed_since(5, last_time_for_key)) {
-              return;
+          if (! memcmp(&last_key_pressed, key, sizeof(*key))) {
+            //
+            // Pressing the same key
+            //
+            key_repeat_count++;
+            if (key_repeat_count > 1) {
+              if (! time_have_x_hundredths_passed_since(5, last_time_for_key)) {
+                return;
+              }
+            } else {
+              if (! time_have_x_hundredths_passed_since(10000, last_time_for_key)) {
+                return;
+              }
             }
             last_time_for_key = time_get_time_ms_cached();
+          } else {
+            //
+            // Pressing a different key
+            //
+            key_repeat_count = 0;
           }
-          last = *key;
+          last_key_pressed = *key;
         }
 
         wid_key_down(key, mouse_x, mouse_y);
@@ -466,6 +483,11 @@ static void sdl_event(SDL_Event *event)
       }
     case SDL_KEYUP :
       {
+        key_repeat_count = 0;
+        last_time_for_key = 0;
+        last_time_for_key = 0;
+        memset(&last_key_pressed, 0, sizeof(*key));
+
         DBG("SDL: Keyboard: Key released keycode 0x%08" PRIx32 " = %s", event->key.keysym.sym,
             SDL_GetKeyName(event->key.keysym.sym));
 

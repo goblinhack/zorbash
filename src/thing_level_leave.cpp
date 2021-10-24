@@ -16,7 +16,7 @@ void Thing::level_leave(void)
 {
   TRACE_AND_INDENT();
   if (is_loggable()) {
-    dbg("Enter level");
+    dbg("Leave level");
   }
   level_pop();
 

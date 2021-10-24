@@ -335,6 +335,49 @@ bool Thing::bag_can_place_at(Thingp item, point pos)
   return true;
 }
 
+bool Thing::bag_can_place_anywhere(Thingp item, point &pos)
+{
+  TRACE_AND_INDENT();
+  if (item == this) {
+    TOPCON("Cannot place an item inside itself!");
+    return false;
+  }
+
+  auto bw = capacity_width();
+  auto bh = capacity_height();
+  auto w  = item->item_width();
+  auto h  = item->item_height();
+  dbg3("Bag: Capacity %dx%d item %dx%d", bw, bh, w, h);
+
+  if ((w < bw) && (h < bh)) {
+    int tries = 0;
+
+    dbg3("Bag: Try to add %s randomly", item->to_string().c_str());
+    while (tries < bw * bh) {
+      tries++;
+      auto  x = pcg_random_range(0, bw - w);
+      auto  y = pcg_random_range(0, bh - h);
+      point at(x, y);
+      if (bag_can_place_at(item, at)) {
+        pos = at;
+        return true;
+      }
+    }
+  }
+
+  dbg3("Bag: Add %s last chance", item->to_string().c_str());
+  for (auto x = 0; x <= bw - w; x++) {
+    for (auto y = 0; y <= bh - h; y++) {
+      point at(x, y);
+      if (bag_can_place_at(item, at)) {
+        pos = at;
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
 bool Thing::bag_place_at(Thingp item, point pos)
 {
   TRACE_AND_INDENT();
