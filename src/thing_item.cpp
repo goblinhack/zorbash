@@ -16,12 +16,7 @@ int Thing::item_count_including_charges(Tpp tp)
 {
   TRACE_AND_INDENT();
   auto count = 0;
-  for (auto oid : monst_infop->carrying) {
-    auto o = level->thing_find(oid);
-    if (! o) {
-      continue;
-    }
-
+  for (const auto o : get_item_vector()) {
     if (o->tp() == tp) {
       if (o->is_bag_item_not_stackable()) {
         count = 1;
@@ -42,12 +37,7 @@ int Thing::item_count_excluding_charges(Tpp tp)
 {
   TRACE_AND_INDENT();
   auto count = 0;
-  for (auto oid : monst_infop->carrying) {
-    auto o = level->thing_find(oid);
-    if (! o) {
-      continue;
-    }
-
+  for (const auto o : get_item_vector()) {
     if (o->tp() == tp) {
       if (o->is_bag_item_not_stackable()) {
         count = 1;
@@ -92,12 +82,9 @@ void Thing::move_carried_items(void)
   // carried sword and so it had better be in the same location.
   //
   if (monst_infop) {
-    for (auto oid : monst_infop->carrying) {
-      auto o = level->thing_find(oid);
-      if (o) {
-        o->move_to(mid_at);
-        o->dir = dir;
-      }
+    for (const auto o : get_item_vector()) {
+      o->move_to(mid_at);
+      o->dir = dir;
     }
   }
 
@@ -169,12 +156,9 @@ void Thing::move_carried_items_immediately(void)
   // carried sword and so it had better be in the same location.
   //
   if (monst_infop) {
-    for (auto oid : monst_infop->carrying) {
-      auto o = level->thing_find(oid);
-      if (o) {
-        o->move_to_immediately(mid_at);
-        o->dir = dir;
-      }
+    for (const auto o : get_item_vector()) {
+      o->move_to_immediately(mid_at);
+      o->dir = dir;
     }
   }
 
@@ -206,41 +190,4 @@ bool Thing::is_carrying_item(void)
   }
 
   return false;
-}
-
-std::vector< Thingp > Thing::get_item_list(void)
-{
-  TRACE_AND_INDENT();
-  std::vector< Thingp > tr;
-  dbg("Carried items:");
-  TRACE_AND_INDENT();
-  if (! monst_infop) {
-    dbg("Not carrying");
-    return tr;
-  }
-
-  for (const auto &item : monst_infop->carrying) {
-    auto t = level->thing_find(item.id);
-    if (! t) {
-      continue;
-    }
-
-    dbg("Item %s", t->to_string().c_str());
-    if (t->monst_infop && t->monst_infop->carrying.size()) {
-      auto tr2 = t->get_item_list();
-      std::move(tr2.begin(), tr2.end(), std::back_inserter(tr));
-    }
-
-    if (t->is_bag_item()) {
-      tr.push_back(t);
-    }
-  }
-
-  auto owner = get_immediate_owner();
-  if (owner) {
-    auto tr2 = owner->get_item_list();
-    std::move(tr2.begin(), tr2.end(), std::back_inserter(tr));
-  }
-
-  return tr;
 }

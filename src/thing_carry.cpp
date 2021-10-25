@@ -34,13 +34,10 @@ bool Thing::carry(Thingp item)
   // Limit is 1 bag per the inventory UI
   //
   if (item->is_bag()) {
-    for (const auto &item : monst_infop->carrying) {
-      auto t = level->thing_find(item.id);
-      if (t) {
-        if (t->is_bag()) {
-          dbg("No; only one bag can be carried");
-          return false;
-        }
+    for (const auto t : item->get_item_vector()) {
+      if (t->is_bag()) {
+        dbg("No; only one bag can be carried");
+        return false;
       }
     }
   }
@@ -115,8 +112,8 @@ bool Thing::carry(Thingp item)
     existing_owner->drop_into_ether(item);
   }
 
-  for (const auto &item2 : monst_infop->carrying) {
-    if (item2 == item->id) {
+  for (const auto t : get_item_vector()) {
+    if (t == item) {
       dbg("No; already carried");
       return false;
     }
@@ -166,21 +163,10 @@ bool Thing::carry(Thingp item)
   // Auto carry items in the bag? like keys?
   //
   if (item->is_bag_item_container()) {
-    auto carrying_copy = item->monst_infop->carrying;
-    for (const auto &item2 : carrying_copy) {
-      auto t = level->thing_find(item2.id);
-      if (t) {
-        log("Carrying %s that contains: %s", item->to_string().c_str(), t->to_string().c_str());
-      }
-    }
-
-    for (const auto &item2 : carrying_copy) {
-      auto t = level->thing_find(item2.id);
-      if (t) {
-        if (! t->is_bag_item()) {
-          if (! carry(t)) {
-            err("Could not auto carry %s's non item: %s", item->to_string().c_str(), t->to_string().c_str());
-          }
+    for (const auto t : item->get_item_vector()) {
+      if (! t->is_bag_item()) {
+        if (! carry(t)) {
+          err("Could not auto carry %s's non item: %s", item->to_string().c_str(), t->to_string().c_str());
         }
       }
     }
@@ -247,11 +233,8 @@ std::list< Thingp > Thing::anything_to_carry_at(point at)
       //
       open(t);
 
-      for (const auto &item : t->monst_infop->carrying) {
-        auto t = level->thing_find(item.id);
-        if (t) {
-          items.push_back(std::make_pair(t, get_item_value(t)));
-        }
+      for (const auto t : t->get_item_vector()) {
+        items.push_back(std::make_pair(t, get_item_value(t)));
       }
     }
 

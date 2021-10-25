@@ -88,11 +88,8 @@ void Thing::level_change(Levelp l)
   }
 
   if (monst_infop) {
-    for (auto id : monst_infop->carrying) {
-      auto it = level->thing_find(id);
-      if (it) {
-        it->level_change(l);
-      }
+    for (const auto it : get_item_vector()) {
+      it->level_change(l);
     }
   }
 

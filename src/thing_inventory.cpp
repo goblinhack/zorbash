@@ -483,13 +483,10 @@ int Thing::item_enchant_count(const uint32_t slot)
     return 0;
   }
 
-  for (auto oid : monst_infop->carrying) {
-    auto o = game->level->thing_find(oid);
-    if (o) {
-      if (o->tp()->id == tp_id) {
-        if (o->get_enchant()) {
-          return o->get_enchant();
-        }
+  for (const auto o : get_item_vector()) {
+    if (o->tp()->id == tp_id) {
+      if (o->get_enchant()) {
+        return o->get_enchant();
       }
     }
   }
@@ -569,18 +566,15 @@ Thingp Level::inventory_get(const uint32_t slot)
     }
   }
 
-  for (auto oid : monst_infop->carrying) {
-    auto o = thing_find(oid);
-    if (o) {
-      if (o->tp() == tpp) {
-        IF_DEBUG2 { o->log("Got inventory item %s", tpp->name().c_str()); }
+  for (const auto o : player->get_item_vector()) {
+    if (o->tp() == tpp) {
+      IF_DEBUG2 { o->log("Got inventory item %s", tpp->name().c_str()); }
 
-        if (nth) {
-          nth--;
-          continue;
-        }
-        return o;
+      if (nth) {
+        nth--;
+        continue;
       }
+      return o;
     }
   }
 
@@ -611,7 +605,8 @@ bool Level::inventory_over(const uint32_t slot)
 
   auto oid = get(player->monst_infop->inventory_id, slot);
   if (! oid) {
-    LOG("Inventory: Ignore; nothing at that slot");
+    LOG("Inventory: Ignore; nothing at that slot %d", slot + 1);
+    inventory_dump();
     return false;
   }
 
@@ -645,6 +640,8 @@ bool Level::inventory_chosen(const uint32_t slot)
   }
 
   if (slot >= player->monst_infop->inventory_id.size()) {
+    TOPCON("Nothing at slot %d.", slot + 1);
+    inventory_dump();
     sound_play("bonk");
     return false;
   }
@@ -654,6 +651,7 @@ bool Level::inventory_chosen(const uint32_t slot)
 
   auto oid = get(player->monst_infop->inventory_id, slot);
   if (! oid) {
+    TOPCON("Nothing item at that slot %d.", slot + 1);
     sound_play("bonk");
     return false;
   }
@@ -665,13 +663,20 @@ bool Level::inventory_chosen(const uint32_t slot)
     LOG("Inventory: Highlight slot %d", slot);
 
     item = inventory_describe(slot);
+    if (! item) {
+      TOPCON("No item found at slot %d.", slot + 1);
+      inventory_dump();
+      sound_play("bonk");
+      return false;
+    }
   } else {
     item = inventory_describe(game->inventory_highlight_slot);
-  }
-
-  if (! item) {
-    sound_play("bonk");
-    return false;
+    if (! item) {
+      TOPCON("No item found at highlight slot %d.", game->inventory_highlight_slot);
+      inventory_dump();
+      sound_play("bonk");
+      return false;
+    }
   }
 
   IF_DEBUG2 { item->log("Chosen inventory item"); }
@@ -719,8 +724,33 @@ bool Level::inventory_assign(const uint32_t slot, Thingp item)
 
   player->monst_infop->inventory_id[ slot ] = item->tp_id;
   game->request_remake_rightbar             = true;
+  inventory_dump();
 
   return true;
+}
+
+void Level::inventory_dump(void)
+{
+  if (! player) {
+    return;
+  }
+
+  TRACE_AND_INDENT();
+  con("Inventory: slots:");
+  TRACE_AND_INDENT();
+
+  for (auto i = 0U; i < player->monst_infop->inventory_id.size(); i++) {
+    auto tp_id = player->monst_infop->inventory_id[ i ];
+    if (! tp_id) {
+      continue;
+    }
+    auto tpp = tp_find(tp_id);
+    if (! tpp) {
+      continue;
+    }
+
+    con("Inventory: slot: %d -> %s", i + 1, tpp->short_text_name().c_str());
+  }
 }
 
 int Level::inventory_get_slot(Thingp item)

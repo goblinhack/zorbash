@@ -243,12 +243,9 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   // Move carried items too as when we attack, we will use say the
   // carried sword and so it had better be in the same location.
   //
-  for (auto oid : monst_infop->carrying) {
-    auto w = level->thing_find(oid);
-    if (w) {
-      w->move_to_immediately(mid_at);
-      w->is_jumping = true;
-    }
+  for (const auto w : get_item_vector()) {
+    w->move_to_immediately(mid_at);
+    w->is_jumping = true;
   }
 
   auto on_fire_anim_id = get_on_fire_anim_id();
@@ -476,11 +473,8 @@ void Thing::jump_end(void)
   // Move carried items too as when we attack, we will use say the
   // carried sword and so it had better be in the same location.
   //
-  for (auto oid : monst_infop->carrying) {
-    auto o = level->thing_find(oid);
-    if (o) {
-      o->is_jumping = false;
-    }
+  for (const auto o : get_item_vector()) {
+    o->is_jumping = false;
   }
 
   auto on_fire_anim_id = get_on_fire_anim_id();

@@ -186,24 +186,21 @@ void Game::wid_enchant_an_item(void)
 
   enchant_items.clear();
   std::map< Tpp, bool > found;
-  for (auto id : player->monst_infop->carrying) {
-    auto t = thing_find(id);
-    if (t) {
-      auto tp = t->tp();
-      if (found.find(tp) != found.end()) {
-        continue;
-      }
-      if (! t->is_enchantable()) {
-        continue;
-      }
-      if (t->get_enchant_max()) {
-        if (t->get_enchant() >= t->get_enchant_max()) {
-          continue;
-        }
-      }
-      found[ tp ] = true;
-      enchant_items.push_back(t);
+  for (const auto t : player->get_item_vector()) {
+    auto tp = t->tp();
+    if (found.find(tp) != found.end()) {
+      continue;
     }
+    if (! t->is_enchantable()) {
+      continue;
+    }
+    if (t->get_enchant_max()) {
+      if (t->get_enchant() >= t->get_enchant_max()) {
+        continue;
+      }
+    }
+    found[ tp ] = true;
+    enchant_items.push_back(t);
   }
 
   for (auto id : player->monst_infop->skills) {

@@ -172,11 +172,7 @@ bool Thing::skill_add(Tpp what)
   // Drop a skillstone
   //
   auto found = false;
-  for (auto id : monst_infop->carrying) {
-    auto t = level->thing_find(id);
-    if (! t) {
-      continue;
-    }
+  for (const auto t : get_item_vector()) {
     if (t->is_skillstone()) {
       t->dead("used");
       found = true;
@@ -194,11 +190,7 @@ int Thing::get_skillstone_count(void)
 {
   TRACE_AND_INDENT();
   int v = 0;
-  for (const auto &item : monst_infop->carrying) {
-    auto t = level->thing_find(item.id);
-    if (! t) {
-      continue;
-    }
+  for (const auto t : get_item_vector()) {
     if (! t->is_skillstone()) {
       continue;
     }

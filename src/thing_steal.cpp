@@ -21,7 +21,7 @@ bool Thing::steal_treasure_from(Thingp it)
 
   dbg("Steal treasure from %s", it->to_string().c_str());
   TRACE_AND_INDENT();
-  auto cands = get_treasure_list();
+  auto cands = get_treasure_vector();
   if (! cands.size()) {
     dbg("No, nothing to steal");
     return false;
@@ -55,7 +55,7 @@ bool Thing::steal_item_from(Thingp it)
   }
   TRACE_AND_INDENT();
   dbg("Yes, steal out of this list:");
-  auto cands = it->get_item_list();
+  auto cands = it->get_item_vector();
   if (! cands.size()) {
     dbg("No, nothing to steal");
     return false;
@@ -70,9 +70,6 @@ bool Thing::steal_item_from(Thingp it)
     carry(chosen);
   }
   chosen->hide();
-
-  IF_DEBUG2 { it->log("New carried list:"); }
-  it->get_item_list();
 
   if (it->is_player()) {
     it->msg(string_sprintf("                        %%fg=white$Where's my stuff?!"));

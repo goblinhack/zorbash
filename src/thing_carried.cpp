@@ -12,6 +12,492 @@
 #include "my_thing.h"
 #include "my_wid_inventory.h"
 
+//
+// Including items in bags
+//
+std::list< Thingp > Thing::get_item_list(void)
+{
+  std::list< Thingp > out;
+
+  TRACE_AND_INDENT();
+  if (! monst_infop) {
+    static std::list< Thingp > empty;
+    return empty;
+  }
+
+  for (const auto &item : monst_infop->carrying) {
+    auto t = level->thing_find(item.id);
+    if (! t) {
+      continue;
+    }
+    if (t->is_bag()) {
+      for (const auto &item : t->monst_infop->carrying) {
+        auto t = level->thing_find(item.id);
+        if (! t) {
+          continue;
+        }
+        out.push_back(t);
+      }
+    }
+    out.push_back(t);
+  }
+  return out;
+}
+
+std::list< Thingp > Thing::get_treasure_list(void)
+{
+  std::list< Thingp > out;
+
+  TRACE_AND_INDENT();
+  if (! monst_infop) {
+    static std::list< Thingp > empty;
+    return empty;
+  }
+
+  for (const auto &item : monst_infop->carrying) {
+    auto t = level->thing_find(item.id);
+    if (! t) {
+      continue;
+    }
+    if (t->is_bag()) {
+      for (const auto &item : t->monst_infop->carrying) {
+        auto t = level->thing_find(item.id);
+        if (! t) {
+          continue;
+        }
+        if (t->is_treasure_type()) {
+          out.push_back(t);
+        }
+      }
+    }
+    if (t->is_treasure_type()) {
+      out.push_back(t);
+    }
+  }
+  return out;
+}
+
+std::list< Thingp > Thing::get_food_list(void)
+{
+  std::list< Thingp > out;
+
+  TRACE_AND_INDENT();
+  if (! monst_infop) {
+    static std::list< Thingp > empty;
+    return empty;
+  }
+
+  for (const auto &item : monst_infop->carrying) {
+    auto t = level->thing_find(item.id);
+    if (! t) {
+      continue;
+    }
+    if (t->is_bag()) {
+      for (const auto &item : t->monst_infop->carrying) {
+        auto t = level->thing_find(item.id);
+        if (! t) {
+          continue;
+        }
+        if (t->is_food()) {
+          out.push_back(t);
+        }
+      }
+    }
+    if (t->is_food()) {
+      out.push_back(t);
+    }
+  }
+  return out;
+}
+
+std::list< Thingp > Thing::get_wand_list(void)
+{
+  std::list< Thingp > out;
+
+  TRACE_AND_INDENT();
+  if (! monst_infop) {
+    static std::list< Thingp > empty;
+    return empty;
+  }
+
+  for (const auto &item : monst_infop->carrying) {
+    auto t = level->thing_find(item.id);
+    if (! t) {
+      continue;
+    }
+    if (t->is_bag()) {
+      for (const auto &item : t->monst_infop->carrying) {
+        auto t = level->thing_find(item.id);
+        if (! t) {
+          continue;
+        }
+        if (t->is_wand()) {
+          out.push_back(t);
+        }
+      }
+    }
+    if (t->is_wand()) {
+      out.push_back(t);
+    }
+  }
+  return out;
+}
+
+std::list< Thingp > Thing::get_weapon_list(void)
+{
+  std::list< Thingp > out;
+
+  TRACE_AND_INDENT();
+  if (! monst_infop) {
+    static std::list< Thingp > empty;
+    return empty;
+  }
+
+  for (const auto &item : monst_infop->carrying) {
+    auto t = level->thing_find(item.id);
+    if (! t) {
+      continue;
+    }
+    if (t->is_bag()) {
+      for (const auto &item : t->monst_infop->carrying) {
+        auto t = level->thing_find(item.id);
+        if (! t) {
+          continue;
+        }
+        if (t->is_weapon()) {
+          out.push_back(t);
+        }
+      }
+    }
+    if (t->is_weapon()) {
+      out.push_back(t);
+    }
+  }
+  return out;
+}
+
+std::vector< Thingp > Thing::get_item_vector(void)
+{
+  std::vector< Thingp > out;
+
+  TRACE_AND_INDENT();
+  if (! monst_infop) {
+    static std::vector< Thingp > empty;
+    return empty;
+  }
+
+  for (const auto &item : monst_infop->carrying) {
+    auto t = level->thing_find(item.id);
+    if (! t) {
+      continue;
+    }
+    if (t->is_bag()) {
+      for (const auto &item : t->monst_infop->carrying) {
+        auto t = level->thing_find(item.id);
+        if (! t) {
+          continue;
+        }
+        out.push_back(t);
+      }
+    }
+    out.push_back(t);
+  }
+  return out;
+}
+
+std::vector< Thingp > Thing::get_treasure_vector(void)
+{
+  std::vector< Thingp > out;
+
+  TRACE_AND_INDENT();
+  if (! monst_infop) {
+    static std::vector< Thingp > empty;
+    return empty;
+  }
+
+  for (const auto &item : monst_infop->carrying) {
+    auto t = level->thing_find(item.id);
+    if (! t) {
+      continue;
+    }
+    if (t->is_bag()) {
+      for (const auto &item : t->monst_infop->carrying) {
+        auto t = level->thing_find(item.id);
+        if (! t) {
+          continue;
+        }
+        if (t->is_treasure_type()) {
+          out.push_back(t);
+        }
+      }
+    }
+    if (t->is_treasure_type()) {
+      out.push_back(t);
+    }
+  }
+  return out;
+}
+
+std::vector< Thingp > Thing::get_food_vector(void)
+{
+  std::vector< Thingp > out;
+
+  TRACE_AND_INDENT();
+  if (! monst_infop) {
+    static std::vector< Thingp > empty;
+    return empty;
+  }
+
+  for (const auto &item : monst_infop->carrying) {
+    auto t = level->thing_find(item.id);
+    if (! t) {
+      continue;
+    }
+    if (t->is_bag()) {
+      for (const auto &item : t->monst_infop->carrying) {
+        auto t = level->thing_find(item.id);
+        if (! t) {
+          continue;
+        }
+        if (t->is_food()) {
+          out.push_back(t);
+        }
+      }
+    }
+    if (t->is_food()) {
+      out.push_back(t);
+    }
+  }
+  return out;
+}
+
+std::vector< Thingp > Thing::get_wand_vector(void)
+{
+  std::vector< Thingp > out;
+
+  TRACE_AND_INDENT();
+  if (! monst_infop) {
+    static std::vector< Thingp > empty;
+    return empty;
+  }
+
+  for (const auto &item : monst_infop->carrying) {
+    auto t = level->thing_find(item.id);
+    if (! t) {
+      continue;
+    }
+    if (t->is_bag()) {
+      for (const auto &item : t->monst_infop->carrying) {
+        auto t = level->thing_find(item.id);
+        if (! t) {
+          continue;
+        }
+        if (t->is_wand()) {
+          out.push_back(t);
+        }
+      }
+    }
+    if (t->is_wand()) {
+      out.push_back(t);
+    }
+  }
+  return out;
+}
+
+std::vector< Thingp > Thing::get_weapon_vector(void)
+{
+  std::vector< Thingp > out;
+
+  TRACE_AND_INDENT();
+  if (! monst_infop) {
+    static std::vector< Thingp > empty;
+    return empty;
+  }
+
+  for (const auto &item : monst_infop->carrying) {
+    auto t = level->thing_find(item.id);
+    if (! t) {
+      continue;
+    }
+    if (t->is_bag()) {
+      for (const auto &item : t->monst_infop->carrying) {
+        auto t = level->thing_find(item.id);
+        if (! t) {
+          continue;
+        }
+        if (t->is_weapon()) {
+          out.push_back(t);
+        }
+      }
+    }
+    if (t->is_weapon()) {
+      out.push_back(t);
+    }
+  }
+  return out;
+}
+
+std::vector< Thingp > Thing::get_item_const_vector(void) const
+{
+  std::vector< Thingp > out;
+
+  TRACE_AND_INDENT();
+  if (! monst_infop) {
+    static std::vector< Thingp > empty;
+    return empty;
+  }
+
+  for (const auto &item : monst_infop->carrying) {
+    auto t = level->thing_find(item.id);
+    if (! t) {
+      continue;
+    }
+    if (t->is_bag()) {
+      for (const auto &item : t->monst_infop->carrying) {
+        auto t = level->thing_find(item.id);
+        if (! t) {
+          continue;
+        }
+        out.push_back(t);
+      }
+    }
+    out.push_back(t);
+  }
+  return out;
+}
+
+std::vector< Thingp > Thing::get_treasure_const_vector(void) const
+{
+  std::vector< Thingp > out;
+
+  TRACE_AND_INDENT();
+  if (! monst_infop) {
+    static std::vector< Thingp > empty;
+    return empty;
+  }
+
+  for (const auto &item : monst_infop->carrying) {
+    auto t = level->thing_find(item.id);
+    if (! t) {
+      continue;
+    }
+    if (t->is_bag()) {
+      for (const auto &item : t->monst_infop->carrying) {
+        auto t = level->thing_find(item.id);
+        if (! t) {
+          continue;
+        }
+        if (t->is_treasure_type()) {
+          out.push_back(t);
+        }
+      }
+    }
+    if (t->is_treasure_type()) {
+      out.push_back(t);
+    }
+  }
+  return out;
+}
+
+std::vector< Thingp > Thing::get_food_const_vector(void) const
+{
+  std::vector< Thingp > out;
+
+  TRACE_AND_INDENT();
+  if (! monst_infop) {
+    static std::vector< Thingp > empty;
+    return empty;
+  }
+
+  for (const auto &item : monst_infop->carrying) {
+    auto t = level->thing_find(item.id);
+    if (! t) {
+      continue;
+    }
+    if (t->is_bag()) {
+      for (const auto &item : t->monst_infop->carrying) {
+        auto t = level->thing_find(item.id);
+        if (! t) {
+          continue;
+        }
+        if (t->is_food()) {
+          out.push_back(t);
+        }
+      }
+    }
+    if (t->is_food()) {
+      out.push_back(t);
+    }
+  }
+  return out;
+}
+
+std::vector< Thingp > Thing::get_wand_const_vector(void) const
+{
+  std::vector< Thingp > out;
+
+  TRACE_AND_INDENT();
+  if (! monst_infop) {
+    static std::vector< Thingp > empty;
+    return empty;
+  }
+
+  for (const auto &item : monst_infop->carrying) {
+    auto t = level->thing_find(item.id);
+    if (! t) {
+      continue;
+    }
+    if (t->is_bag()) {
+      for (const auto &item : t->monst_infop->carrying) {
+        auto t = level->thing_find(item.id);
+        if (! t) {
+          continue;
+        }
+        if (t->is_wand()) {
+          out.push_back(t);
+        }
+      }
+    }
+    if (t->is_wand()) {
+      out.push_back(t);
+    }
+  }
+  return out;
+}
+
+std::vector< Thingp > Thing::get_weapon_const_vector(void) const
+{
+  std::vector< Thingp > out;
+
+  TRACE_AND_INDENT();
+  if (! monst_infop) {
+    static std::vector< Thingp > empty;
+    return empty;
+  }
+
+  for (const auto &item : monst_infop->carrying) {
+    auto t = level->thing_find(item.id);
+    if (! t) {
+      continue;
+    }
+    if (t->is_bag()) {
+      for (const auto &item : t->monst_infop->carrying) {
+        auto t = level->thing_find(item.id);
+        if (! t) {
+          continue;
+        }
+        if (t->is_weapon()) {
+          out.push_back(t);
+        }
+      }
+    }
+    if (t->is_weapon()) {
+      out.push_back(t);
+    }
+  }
+  return out;
+}
+
 int Thing::get_carried_weapon_count(void)
 {
   TRACE_AND_INDENT();
@@ -21,16 +507,10 @@ int Thing::get_carried_weapon_count(void)
     return count;
   }
 
-  for (const auto &item : monst_infop->carrying) {
-    auto t = level->thing_find(item.id);
-    if (! t) {
-      continue;
+  for (const auto t : get_weapon_list()) {
+    if (t->is_weapon()) {
+      count++;
     }
-    if (! t->is_weapon()) {
-      continue;
-    }
-
-    count++;
   }
   return count;
 }
@@ -44,16 +524,10 @@ int Thing::get_carried_wand_count(void)
     return count;
   }
 
-  for (const auto &item : monst_infop->carrying) {
-    auto t = level->thing_find(item.id);
-    if (! t) {
-      continue;
+  for (const auto t : get_wand_list()) {
+    if (t->is_wand()) {
+      count++;
     }
-    if (! t->is_wand()) {
-      continue;
-    }
-
-    count++;
   }
   return count;
 }
@@ -67,16 +541,10 @@ int Thing::get_carried_food_count(void)
     return count;
   }
 
-  for (const auto &item : monst_infop->carrying) {
-    auto t = level->thing_find(item.id);
-    if (! t) {
-      continue;
+  for (const auto t : get_food_list()) {
+    if (t->is_food()) {
+      count++;
     }
-    if (! t->is_food()) {
-      continue;
-    }
-
-    count++;
   }
   return count;
 }
@@ -91,11 +559,7 @@ int Thing::get_carried_weapon_least_value(Thingp *out)
     return least_value;
   }
 
-  for (const auto &item : monst_infop->carrying) {
-    auto t = level->thing_find(item.id);
-    if (! t) {
-      continue;
-    }
+  for (const auto t : get_weapon_list()) {
     if (! t->is_weapon()) {
       continue;
     }
@@ -124,11 +588,7 @@ int Thing::get_carried_wand_least_value(Thingp *out)
     return least_value;
   }
 
-  for (const auto &item : monst_infop->carrying) {
-    auto t = level->thing_find(item.id);
-    if (! t) {
-      continue;
-    }
+  for (const auto t : get_wand_list()) {
     if (! t->is_wand()) {
       continue;
     }
@@ -157,11 +617,7 @@ int Thing::get_carried_food_least_value(Thingp *out)
     return least_value;
   }
 
-  for (const auto &item : monst_infop->carrying) {
-    auto t = level->thing_find(item.id);
-    if (! t) {
-      continue;
-    }
+  for (const auto t : get_food_list()) {
     if (! t->is_food()) {
       continue;
     }
@@ -190,11 +646,7 @@ int Thing::get_carried_weapon_highest_value(Thingp *out)
     return highest_value;
   }
 
-  for (const auto &item : monst_infop->carrying) {
-    auto t = level->thing_find(item.id);
-    if (! t) {
-      continue;
-    }
+  for (const auto t : get_weapon_list()) {
     if (! t->is_weapon()) {
       continue;
     }
@@ -223,11 +675,7 @@ int Thing::get_carried_wand_highest_value(Thingp *out)
     return highest_value;
   }
 
-  for (const auto &item : monst_infop->carrying) {
-    auto t = level->thing_find(item.id);
-    if (! t) {
-      continue;
-    }
+  for (const auto t : get_wand_list()) {
     if (! t->is_wand()) {
       continue;
     }
@@ -256,11 +704,7 @@ int Thing::get_carried_food_highest_value(Thingp *out)
     return highest_value;
   }
 
-  for (const auto &item : monst_infop->carrying) {
-    auto t = level->thing_find(item.id);
-    if (! t) {
-      continue;
-    }
+  for (const auto t : get_food_list()) {
     if (! t->is_food()) {
       continue;
     }

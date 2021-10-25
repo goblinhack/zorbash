@@ -193,6 +193,27 @@ private:
   Tpp mytp {};
 
 public:
+  //
+  // Walk all items and bags to get the items
+  //
+  std::list< Thingp > get_item_list(void);
+  std::list< Thingp > get_treasure_list(void);
+  std::list< Thingp > get_wand_list(void);
+  std::list< Thingp > get_food_list(void);
+  std::list< Thingp > get_weapon_list(void);
+
+  std::vector< Thingp > get_item_vector(void);
+  std::vector< Thingp > get_treasure_vector(void);
+  std::vector< Thingp > get_wand_vector(void);
+  std::vector< Thingp > get_food_vector(void);
+  std::vector< Thingp > get_weapon_vector(void);
+
+  std::vector< Thingp > get_item_const_vector(void) const;
+  std::vector< Thingp > get_treasure_const_vector(void) const;
+  std::vector< Thingp > get_wand_const_vector(void) const;
+  std::vector< Thingp > get_food_const_vector(void) const;
+  std::vector< Thingp > get_weapon_const_vector(void) const;
+
   ThingShoved try_to_shove(Thingp it, point delta);
   ThingShoved try_to_shove(point future_pos);
   ThingShoved try_to_shove_into_hazard(Thingp it, point delta);
@@ -1083,8 +1104,6 @@ public:
   std::string to_string(void) const;
 
   std::vector< Lightp > &get_light(void);
-  std::vector< Thingp >  get_item_list(void);
-  std::vector< Thingp >  get_treasure_list(void);
 
   struct AgeMap_ *get_age_map(void);
   struct AgeMap_ *get_seen_map(void);

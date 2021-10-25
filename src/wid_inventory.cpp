@@ -7,6 +7,7 @@
 #include "my_game.h"
 #include "my_monst.h"
 #include "my_sdl.h"
+#include "my_sound.h"
 #include "my_sys.h"
 #include "my_thing.h"
 #include "my_traceback.h"
@@ -52,9 +53,8 @@ void wid_inventory_fini(void)
   if (wid_inventory_window) {
     wid_destroy(&wid_inventory_window);
     game->change_state(Game::STATE_NORMAL);
+    game->request_remake_rightbar = true;
   }
-
-  game->request_remake_rightbar = true;
 }
 
 bool wid_inventory_init(void)
@@ -209,9 +209,13 @@ static uint8_t wid_inventory_item_option_eat(Widp w, int32_t x, int32_t y, uint3
 
   if (wid_inventory_thing_selected) {
     auto what = wid_inventory_thing_selected;
+    if (! player->can_eat(what)) {
+      sound_play("bonk");
+      return true;
+    }
     wid_inventory_fini();
     player->log("Eat %s", what->to_string().c_str());
-    player->use(wid_inventory_thing_selected);
+    player->use(what);
   }
 
   return true;
@@ -239,6 +243,10 @@ static uint8_t wid_inventory_item_option_throw(Widp w, int32_t x, int32_t y, uin
 
   if (wid_inventory_thing_selected) {
     auto what = wid_inventory_thing_selected;
+    if (! what->is_throwable()) {
+      sound_play("bonk");
+      return true;
+    }
     wid_inventory_fini();
     player->log("Throw %s", what->to_string().c_str());
     player->throw_item_choose_target(what);
@@ -464,6 +472,7 @@ static uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
               case 'u' : wid_inventory_item_option_use(nullptr, 0, 0, 0); return true;
               case 't' : wid_inventory_item_option_throw(nullptr, 0, 0, 0); return true;
               case 'e' : wid_inventory_item_option_eat(nullptr, 0, 0, 0); return true;
+              case SDLK_DELETE :
               case 'd' : wid_inventory_item_option_drop(nullptr, 0, 0, 0); return true;
               case 'b' :
               case SDLK_ESCAPE :
@@ -482,7 +491,6 @@ static uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
                   }
 
                   wid_inventory_fini();
-                  wid_actionbar_init();
                   return true;
                 }
             }
@@ -667,13 +675,10 @@ bool wid_inventory_create(Thingp selected, Thingp over)
   //
   Thingp bag = nullptr;
   {
-    for (const auto &item : player->monst_infop->carrying) {
-      auto t = level->thing_find(item.id);
-      if (t) {
-        if (t->is_bag()) {
-          bag = t;
-          break;
-        }
+    for (const auto t : player->get_item_vector()) {
+      if (t->is_bag()) {
+        bag = t;
+        break;
       }
     }
   }
@@ -703,7 +708,7 @@ bool wid_inventory_create(Thingp selected, Thingp over)
     //
     // Display the slots
     //
-    int width = 32;
+    int width = 33;
     int x_off = 45;
     int y_at  = 5;
 
@@ -824,7 +829,7 @@ bool wid_inventory_create(Thingp selected, Thingp over)
       wid_set_style(w, UI_WID_STYLE_NORMAL);
       wid_set_on_mouse_up(w, wid_inventory_item_option_eat);
       wid_set_pos(w, tl, br);
-      wid_set_text(w, "Eat");
+      wid_set_text(w, "%%fg=white$E%%fg=reset$at");
       y_at += 3;
     } else if (wid_inventory_thing_selected->is_usable()) {
       TRACE_AND_INDENT();
@@ -837,13 +842,13 @@ bool wid_inventory_create(Thingp selected, Thingp over)
       wid_set_on_mouse_up(w, wid_inventory_item_option_use);
       wid_set_pos(w, tl, br);
       if (wid_inventory_thing_selected->is_weapon()) {
-        wid_set_text(w, "Wield");
+        wid_set_text(w, "%%fg=white$U%%fg=reset$se (wield it)");
       } else if (wid_inventory_thing_selected->is_potion()) {
-        wid_set_text(w, "Drink");
+        wid_set_text(w, "%%fg=white$U%%fg=reset$se (drink it)");
       } else if (wid_inventory_thing_selected->is_wand()) {
-        wid_set_text(w, "Fire");
+        wid_set_text(w, "%%fg=white$U%%fg=reset$se (fire it)");
       } else {
-        wid_set_text(w, "Use");
+        wid_set_text(w, "%%fg=white$U%%fg=reset$se");
       }
       y_at += 3;
     }
@@ -857,7 +862,7 @@ bool wid_inventory_create(Thingp selected, Thingp over)
       wid_set_style(w, UI_WID_STYLE_NORMAL);
       wid_set_on_mouse_up(w, wid_inventory_item_option_throw);
       wid_set_pos(w, tl, br);
-      wid_set_text(w, "Throw");
+      wid_set_text(w, "%%fg=white$T%%fg=reset$hrow");
       y_at += 3;
     }
     {
@@ -870,7 +875,7 @@ bool wid_inventory_create(Thingp selected, Thingp over)
       wid_set_style(w, UI_WID_STYLE_NORMAL);
       wid_set_on_mouse_up(w, wid_inventory_item_option_drop);
       wid_set_pos(w, tl, br);
-      wid_set_text(w, "Drop");
+      wid_set_text(w, "%%fg=white$D%%fg=reset$rop");
     }
   }
 

@@ -53,26 +53,29 @@ static void wid_collect_slot(int slot)
 
   auto t = collect_items[ slot ];
   if (t) {
-    auto carrying_copy = t->monst_infop->carrying;
-
-    if (! player->try_to_carry(t)) {
-      DBG3("Failed to collect slot %d", slot);
-      return;
-    }
-
     //
-    // If we just picked up a bag, then we just also
-    // pick up all the items in the bag, so remove them
+    // If we just picked up a bag, then we also pick up all the items in the bag, so remove them
     // from the choice.
     //
     if (t->is_bag_item_container()) {
-      for (const auto &item : carrying_copy) {
-        auto o = level->thing_find(item.id);
+      auto bag_items = t->get_item_vector();
+
+      if (! player->try_to_carry(t)) {
+        DBG3("Failed to collect slot %d", slot);
+        return;
+      }
+
+      for (const auto o : bag_items) {
         for (auto slot = 0; slot < (int) collect_items.size(); slot++) {
           if (collect_items[ slot ] == o) {
             collect_items[ slot ] = nullptr;
           }
         }
+      }
+    } else {
+      if (! player->try_to_carry(t)) {
+        DBG3("Failed to collect slot %d", slot);
+        return;
       }
     }
   }
@@ -305,18 +308,15 @@ void Game::wid_collect_create(const std::list< Thingp > items /* intentional cop
       collect_items.push_back(t);
 
       if (t->monst_infop) {
-        for (auto id : t->monst_infop->carrying) {
-          auto t = thing_find(id);
-          if (t) {
-            if (found.find(t) != found.end()) {
-              continue;
-            }
-            if (! t->is_collectable()) {
-              continue;
-            }
-            found[ t ] = true;
-            collect_items.push_back(t);
+        for (const auto t : t->get_item_vector()) {
+          if (found.find(t) != found.end()) {
+            continue;
           }
+          if (! t->is_collectable()) {
+            continue;
+          }
+          found[ t ] = true;
+          collect_items.push_back(t);
         }
       }
     }

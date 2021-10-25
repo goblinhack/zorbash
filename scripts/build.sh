@@ -549,7 +549,8 @@ case `uname` in
         LDFLAGS+='-rdynamic '
         LDLIBS+="-lGL "
         if [[ $OPT_DEV2 != "" ]]; then
-            C_FLAGS+=" -fsanitize=address -fno-omit-frame-pointer"
+            ASAN_OPTIONS=fast_unwind_on_malloc
+            C_FLAGS+=" -fsanitize=address -fno-omit-frame-pointer -fno-common"
             LDFLAGS+=" -fsanitize=address"
         fi
         ;;
