@@ -879,6 +879,17 @@ bool wid_inventory_create(Thingp selected, Thingp over)
     }
   }
 
+  {
+    auto  w  = wid_new_square_button(wid_inventory_window, "equip helmet");
+    point tl = point(8, 7);
+    point br = point(12, 11);
+    wid_set_pos(w, tl, br);
+    wid_set_fg2_tilename(w, "bag_large");
+    wid_set_style(w, UI_WID_STYLE_GRAY);
+    wid_set_do_not_lower(w, true);
+    // wid_set_on_mouse_over_begin(w, wid_inventory_mouse_over_tab_bag2);
+  }
+
   wid_update(wid_inventory_window);
   game->change_state(Game::STATE_INVENTORY);
 
