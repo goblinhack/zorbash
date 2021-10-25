@@ -53,6 +53,8 @@ void wid_inventory_fini(void)
     wid_destroy(&wid_inventory_window);
     game->change_state(Game::STATE_NORMAL);
   }
+
+  game->request_remake_rightbar = true;
 }
 
 bool wid_inventory_init(void)
@@ -72,29 +74,6 @@ uint8_t wid_right_bar_inventory_open(Widp w, int32_t x, int32_t y, uint32_t butt
       (game->state == Game::STATE_QUIT_MENU) || (game->state == Game::STATE_ENCHANTING_ITEMS)) {
     return true;
   }
-
-#if 0
-  if (game->in_transit_item) {
-    return wid_in_transit_item_place(w, x, y, button);
-  }
-
-  game->change_state(Game::STATE_INVENTORY);
-
-  auto level = game->level;
-  if (! level) {
-    return true;
-  }
-
-  auto slot = wid_get_int_context(w);
-  if (! level->inventory_chosen(slot)) {
-    return true;
-  }
-
-  auto t = level->inventory_get(slot);
-  if (t) {
-    game->wid_thing_info_create(t);
-  }
-#endif
 
   wid_inventory_init();
   return true;
@@ -153,59 +132,6 @@ static void wid_inventory_mouse_over_tab_bag2(Widp w, int32_t x, int32_t y, int3
   wid_inventory_init();
 }
 
-#if 0
-uint8_t wid_inventory_item_mouse_up(Widp w, int32_t x, int32_t y, uint32_t button)
-{
-  TRACE_AND_INDENT();
-  if ((game->state == Game::STATE_CHOOSING_TARGET) || (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
-      (game->state == Game::STATE_COLLECTING_ITEMS) ||
-      (game->state == Game::STATE_CHOOSING_SKILLS) || (game->state == Game::STATE_SAVE_MENU) ||
-      (game->state == Game::STATE_LOAD_MENU) || (game->state == Game::STATE_QUIT_MENU) ||
-      (game->state == Game::STATE_ENCHANTING_ITEMS)) {
-    DBG3("Inventory: Moving items; ignore");
-    return true;
-  }
-
-  if (game->state == Game::STATE_INVENTORY) {
-    wid_thing_info_fini();
-  }
-
-  if (game->in_transit_item) {
-    return wid_in_transit_item_place(w, x, y, button);
-  }
-
-  auto level = game->level;
-  if (! level) {
-    return true;
-  }
-
-  auto slot = wid_get_int_context(w);
-  if (! level->inventory_chosen(slot)) {
-    return true;
-  }
-
-  wid_inventory_create();
-
-#if 0
-  if (game->state == Game::STATE_INVENTORY) {
-    level->inventory_describe(slot);
-    auto t = level->inventory_get(slot);
-    if (t) {
-      game->wid_thing_info_create(t);
-      game->wid_items_options_create(w, t, true /* came from inventory */);
-    }
-  } else {
-    auto t = level->inventory_get(slot);
-    if (t) {
-      game->wid_items_options_create(w, t, true /* came from inventory */);
-    }
-  }
-#endif
-
-  return true;
-}
-#endif
-
 static uint8_t wid_inventory_key_down(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_AND_INDENT();
@@ -226,6 +152,126 @@ static uint8_t wid_inventory_key_down(Widp w, const struct SDL_Keysym *key)
     if (key->scancode == (SDL_Scancode) game->config.key_console) {
       return false;
     }
+  }
+
+  return true;
+}
+
+static uint8_t wid_inventory_item_option_use(Widp w, int32_t x, int32_t y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  DBG3("Item options use");
+  TRACE_AND_INDENT();
+
+  auto level = game->level;
+  if (! level) {
+    return true;
+  }
+
+  auto player = level->player;
+  if (! player) {
+    return true;
+  }
+
+  if (player->is_dead) {
+    return true;
+  }
+
+  if (wid_inventory_thing_selected) {
+    auto what = wid_inventory_thing_selected;
+    wid_inventory_fini();
+    player->log("Use %s", what->to_string().c_str());
+    player->use(what);
+  }
+
+  return true;
+}
+
+static uint8_t wid_inventory_item_option_eat(Widp w, int32_t x, int32_t y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  DBG3("Item options eat");
+  TRACE_AND_INDENT();
+
+  auto level = game->level;
+  if (! level) {
+    return true;
+  }
+
+  auto player = level->player;
+  if (! player) {
+    return true;
+  }
+
+  if (player->is_dead) {
+    return true;
+  }
+
+  if (wid_inventory_thing_selected) {
+    auto what = wid_inventory_thing_selected;
+    wid_inventory_fini();
+    player->log("Eat %s", what->to_string().c_str());
+    player->use(wid_inventory_thing_selected);
+  }
+
+  return true;
+}
+
+static uint8_t wid_inventory_item_option_throw(Widp w, int32_t x, int32_t y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  DBG3("Item options throw");
+  TRACE_AND_INDENT();
+
+  auto level = game->level;
+  if (! level) {
+    return true;
+  }
+
+  auto player = level->player;
+  if (! player) {
+    return true;
+  }
+
+  if (player->is_dead) {
+    return true;
+  }
+
+  if (wid_inventory_thing_selected) {
+    auto what = wid_inventory_thing_selected;
+    wid_inventory_fini();
+    player->log("Throw %s", what->to_string().c_str());
+    player->throw_item_choose_target(what);
+  }
+
+  return true;
+}
+
+static uint8_t wid_inventory_item_option_drop(Widp w, int32_t x, int32_t y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  DBG3("Item options drop");
+  TRACE_AND_INDENT();
+
+  auto level = game->level;
+  if (! level) {
+    return true;
+  }
+
+  auto player = level->player;
+  if (! player) {
+    return true;
+  }
+
+  if (player->is_dead) {
+    return true;
+  }
+
+  if (wid_inventory_thing_selected) {
+    auto what = wid_inventory_thing_selected;
+    wid_inventory_fini();
+    player->log("Drop %s", what->to_string().c_str());
+    player->drop(what);
   }
 
   return true;
@@ -388,6 +434,23 @@ static uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
     return true;
   }
 
+  if (key->scancode == (SDL_Scancode) game->config.key_use) {
+    wid_inventory_item_option_use(nullptr, 0, 0, 0);
+    return true;
+  }
+  if (key->scancode == (SDL_Scancode) game->config.key_throw) {
+    wid_inventory_item_option_throw(nullptr, 0, 0, 0);
+    return true;
+  }
+  if (key->scancode == (SDL_Scancode) game->config.key_eat) {
+    wid_inventory_item_option_eat(nullptr, 0, 0, 0);
+    return true;
+  }
+  if (key->scancode == (SDL_Scancode) game->config.key_drop) {
+    wid_inventory_item_option_drop(nullptr, 0, 0, 0);
+    return true;
+  }
+
   switch (key->mod) {
     case KMOD_LCTRL :
     case KMOD_RCTRL :
@@ -395,8 +458,14 @@ static uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
       switch (key->sym) {
         default :
           {
+            TRACE_AND_INDENT();
             auto c = wid_event_to_char(key);
             switch (c) {
+              case 'u' : wid_inventory_item_option_use(nullptr, 0, 0, 0); return true;
+              case 't' : wid_inventory_item_option_throw(nullptr, 0, 0, 0); return true;
+              case 'e' : wid_inventory_item_option_eat(nullptr, 0, 0, 0); return true;
+              case 'd' : wid_inventory_item_option_drop(nullptr, 0, 0, 0); return true;
+              case 'b' :
               case SDLK_ESCAPE :
                 {
                   TRACE_AND_INDENT();
@@ -531,6 +600,10 @@ bool wid_inventory_create(Thingp selected, Thingp over)
 
   auto player = level->player;
   if (! player) {
+    return false;
+  }
+
+  if (player->is_dead) {
     return false;
   }
 
@@ -749,7 +822,7 @@ bool wid_inventory_create(Thingp selected, Thingp over)
       point tl = make_point(x_off, y_at);
       point br = make_point(x_off + width, y_at + 2);
       wid_set_style(w, UI_WID_STYLE_NORMAL);
-      // wid_set_on_mouse_up(w, wid_item_options_eat);
+      wid_set_on_mouse_up(w, wid_inventory_item_option_eat);
       wid_set_pos(w, tl, br);
       wid_set_text(w, "Eat");
       y_at += 3;
@@ -761,7 +834,7 @@ bool wid_inventory_create(Thingp selected, Thingp over)
       point tl = make_point(x_off, y_at);
       point br = make_point(x_off + width, y_at + 2);
       wid_set_style(w, UI_WID_STYLE_NORMAL);
-      // wid_set_on_mouse_up(w, wid_item_options_use);
+      wid_set_on_mouse_up(w, wid_inventory_item_option_use);
       wid_set_pos(w, tl, br);
       if (wid_inventory_thing_selected->is_weapon()) {
         wid_set_text(w, "Wield");
@@ -782,7 +855,7 @@ bool wid_inventory_create(Thingp selected, Thingp over)
       point tl = make_point(x_off, y_at);
       point br = make_point(x_off + width, y_at + 2);
       wid_set_style(w, UI_WID_STYLE_NORMAL);
-      // wid_set_on_mouse_up(w, wid_item_options_throw);
+      wid_set_on_mouse_up(w, wid_inventory_item_option_throw);
       wid_set_pos(w, tl, br);
       wid_set_text(w, "Throw");
       y_at += 3;
@@ -795,7 +868,7 @@ bool wid_inventory_create(Thingp selected, Thingp over)
       point tl = make_point(x_off, y_at);
       point br = make_point(x_off + width, y_at + 2);
       wid_set_style(w, UI_WID_STYLE_NORMAL);
-      // wid_set_on_mouse_up(w, wid_item_options_drop);
+      wid_set_on_mouse_up(w, wid_inventory_item_option_drop);
       wid_set_pos(w, tl, br);
       wid_set_text(w, "Drop");
     }

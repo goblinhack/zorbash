@@ -8,6 +8,7 @@
 #include "my_level.h"
 #include "my_main.h"
 #include "my_monst.h"
+#include "my_ptrcheck.h"
 #include "my_python.h"
 #include "my_string.h"
 #include "my_sys.h"
@@ -16,6 +17,12 @@
 
 void Thing::on_use(Thingp what)
 {
+  verify(what);
+  if (! what) {
+    err("Cannot use null thing");
+    return;
+  }
+
   auto on_use = what->tp()->on_use_do();
   if (std::empty(on_use)) {
     return;
@@ -40,6 +47,18 @@ void Thing::on_use(Thingp what)
 
 void Thing::on_use(Thingp what, Thingp target)
 {
+  verify(what);
+  if (! what) {
+    err("Cannot on_use null thing");
+    return;
+  }
+
+  verify(target);
+  if (! what) {
+    err("Cannot on_use null target");
+    return;
+  }
+
   auto on_use = what->tp()->on_use_do();
   if (! std::empty(on_use)) {
     auto t = split_tokens(on_use, '.');
@@ -64,10 +83,20 @@ void Thing::on_use(Thingp what, Thingp target)
 
 void Thing::used(Thingp what, Thingp target, bool remove_after_use)
 {
+  verify(what);
+  if (! what) {
+    err("Cannot used null thing");
+    return;
+  }
+
   TRACE_AND_INDENT();
   dbg("Attempt to use %s", what->to_string().c_str());
 
-  on_use(what, target);
+  if (target) {
+    on_use(what, target);
+  } else {
+    on_use(what);
+  }
 
   auto existing_owner = what->get_top_owner();
   if (existing_owner != this) {
@@ -124,6 +153,12 @@ void Thing::used(Thingp what, Thingp target, bool remove_after_use)
 
 bool Thing::use(Thingp what)
 {
+  verify(what);
+  if (! what) {
+    err("Cannot use null thing");
+    return false;
+  }
+
   TRACE_AND_INDENT();
   dbg("Trying to use: %s", what->to_string().c_str());
   TRACE_AND_INDENT();

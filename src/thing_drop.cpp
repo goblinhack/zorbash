@@ -15,6 +15,12 @@
 
 bool Thing::drop(Thingp what, Thingp target, bool stolen)
 {
+  verify(what);
+  if (! what) {
+    err("Cannot drop null thing");
+    return false;
+  }
+
   TRACE_AND_INDENT();
   if (stolen) {
     if (target) {
@@ -129,6 +135,12 @@ bool Thing::drop(Thingp what, Thingp target, bool stolen)
 //
 bool Thing::drop_into_ether(Thingp what)
 {
+  verify(what);
+  if (! what) {
+    err("Cannot drop into ether null thing");
+    return false;
+  }
+
   TRACE_AND_INDENT();
   dbg("Dropping %s into the ether", what->to_string().c_str());
   TRACE_AND_INDENT();
@@ -183,6 +195,12 @@ bool Thing::drop_into_ether(Thingp what)
 //
 bool Thing::drop_from_ether(Thingp what)
 {
+  verify(what);
+  if (! what) {
+    err("Cannot drop from ether null thing");
+    return false;
+  }
+
   TRACE_AND_INDENT();
   auto player = game->level->player;
 

@@ -9,73 +9,87 @@
 #include "my_globals.h"
 #include "my_level.h"
 #include "my_main.h"
+#include "my_ptrcheck.h"
 #include "my_sys.h"
 #include "my_thing.h"
 
-bool Thing::throw_item_choose_target(Thingp item)
+bool Thing::throw_item_choose_target(Thingp what)
 {
-  TRACE_AND_INDENT();
-  dbg("Trying to throw: %s", item->to_string().c_str());
+  verify(what);
+  if (! what) {
+    err("Cannot throw null thing");
+    return false;
+  }
 
-  if (! item->is_throwable()) {
+  TRACE_AND_INDENT();
+  dbg("Trying to throw: %s", what->to_string().c_str());
+
+  if (! what->is_throwable()) {
     if (is_player()) {
-      TOPCON("I don't know how to throw %s.", item->text_the().c_str());
+      TOPCON("I don't know how to throw %s.", what->text_the().c_str());
       game->tick_begin("player tried to throw something they could not");
     }
     return false;
   }
 
-  if (! target_select(item)) {
+  if (! target_select(what)) {
     return false;
   }
 
-  game->request_to_throw_item = item;
+  game->request_to_throw_item = what;
 
-  return target_select(item);
+  return target_select(what);
 }
 
-void Thing::throw_at(Thingp item, Thingp target)
+void Thing::throw_at(Thingp what, Thingp target)
 {
   TRACE_AND_INDENT();
-  if (! item) {
-    item = game->request_to_throw_item;
+  if (! what) {
+    what = game->request_to_throw_item;
   }
 
-  if (! item) {
+  verify(what);
+  if (! what) {
+    err("Cannot throw null thing");
+    return;
+  }
+
+  verify(what);
+  if (! what) {
+    err("Cannot throw at null target");
     return;
   }
 
   if (DISTANCE(mid_at.x, mid_at.y, target->mid_at.x, target->mid_at.y) > get_throw_distance()) {
-
     if (is_player()) {
-      TOPCON("You cannot throw %s that far.", item->text_the().c_str());
+      TOPCON("You cannot throw %s that far.", what->text_the().c_str());
     }
     return;
   }
 
   if (is_player()) {
-    TOPCON("You throw %s.", item->text_the().c_str());
+    TOPCON("You throw %s.", what->text_the().c_str());
   }
 
-  dbg("Thrown %s", item->to_string().c_str());
-  item->move_to_immediately(target->mid_at);
+  dbg("Thrown %s", what->to_string().c_str());
+  what->move_to_immediately(target->mid_at);
 
   //
   // Potions for example are used when thrown. Chocolate frogs, no.
   //
   if (level->is_lava(target->mid_at.x, target->mid_at.y) || level->is_chasm(target->mid_at.x, target->mid_at.y)) {
-    drop(item, target);
+    drop(what, target);
 
-    item->location_check_forced();
+    what->location_check_forced();
   } else {
-    if (item->is_used_when_thrown()) {
-      used(item, target, true /* remove_after_use */);
+    if (what->is_used_when_thrown()) {
+      used(what, target, true /* remove_after_use */);
     } else {
-      drop(item, target);
+      drop(what, target);
     }
   }
 
-  item->hide();
+  what->hide();
 
   {
     auto src   = (last_blit_tl + last_blit_br) / 2;
@@ -87,10 +101,10 @@ void Thing::throw_at(Thingp item, Thingp target)
       //
       // So the player is visible above light
       //
-      level->new_external_particle(item->id, src, dst, sz, delay, tile_index_to_tile(item->tile_curr), false,
+      level->new_external_particle(what->id, src, dst, sz, delay, tile_index_to_tile(what->tile_curr), false,
                                    true /* make_visible_at_end */);
     } else {
-      level->new_internal_particle(item->id, src, dst, sz, delay, tile_index_to_tile(item->tile_curr), false,
+      level->new_internal_particle(what->id, src, dst, sz, delay, tile_index_to_tile(what->tile_curr), false,
                                    true /* make_visible_at_end */);
     }
   }
