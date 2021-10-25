@@ -879,12 +879,159 @@ bool wid_inventory_create(Thingp selected, Thingp over)
     }
   }
 
+  int y_at = 8;
+
+  //
+  // helmet
+  //
   {
     auto  w  = wid_new_square_button(wid_inventory_window, "equip helmet");
-    point tl = point(8, 7);
-    point br = point(12, 11);
+    point tl = point(9, y_at);
+    point br = point(12, y_at + 3);
     wid_set_pos(w, tl, br);
-    wid_set_fg2_tilename(w, "bag_large");
+    wid_set_bg_tilename(w, "equip_helmet");
+    // wid_set_fg_tilename(w, "bag_large");
+    wid_set_style(w, UI_WID_STYLE_GRAY);
+    wid_set_do_not_lower(w, true);
+    // wid_set_on_mouse_over_begin(w, wid_inventory_mouse_over_tab_bag2);
+  }
+
+  y_at += 7;
+
+  //
+  // gauntlet
+  //
+  {
+    auto  w  = wid_new_square_button(wid_inventory_window, "equip gauntlet");
+    point tl = point(3, y_at);
+    point br = point(6, y_at + 3);
+    wid_set_pos(w, tl, br);
+    wid_set_bg_tilename(w, "equip_gauntlet");
+    // wid_set_fg_tilename(w, "bag_large");
+    wid_set_style(w, UI_WID_STYLE_GRAY);
+    wid_set_do_not_lower(w, true);
+    // wid_set_on_mouse_over_begin(w, wid_inventory_mouse_over_tab_bag2);
+  }
+
+  //
+  // amulet
+  //
+  {
+    auto  w  = wid_new_square_button(wid_inventory_window, "equip amulet");
+    point tl = point(9, y_at);
+    point br = point(12, y_at + 3);
+    wid_set_pos(w, tl, br);
+    wid_set_bg_tilename(w, "equip_amulet");
+    // wid_set_fg_tilename(w, "bag_large");
+    wid_set_style(w, UI_WID_STYLE_GRAY);
+    wid_set_do_not_lower(w, true);
+    // wid_set_on_mouse_over_begin(w, wid_inventory_mouse_over_tab_bag2);
+  }
+
+  //
+  // cloak
+  //
+  {
+    auto  w  = wid_new_square_button(wid_inventory_window, "equip cloak");
+    point tl = point(15, y_at);
+    point br = point(18, y_at + 3);
+    wid_set_pos(w, tl, br);
+    wid_set_bg_tilename(w, "equip_cloak");
+    // wid_set_fg_tilename(w, "bag_large");
+    wid_set_style(w, UI_WID_STYLE_GRAY);
+    wid_set_do_not_lower(w, true);
+    // wid_set_on_mouse_over_begin(w, wid_inventory_mouse_over_tab_bag2);
+  }
+
+  y_at += 7;
+
+  //
+  // shield
+  //
+  {
+    auto  w  = wid_new_square_button(wid_inventory_window, "equip shield");
+    point tl = point(3, y_at);
+    point br = point(6, y_at + 3);
+    wid_set_pos(w, tl, br);
+    wid_set_bg_tilename(w, "equip_shield");
+    // wid_set_fg_tilename(w, "bag_large");
+    wid_set_style(w, UI_WID_STYLE_GRAY);
+    wid_set_do_not_lower(w, true);
+    // wid_set_on_mouse_over_begin(w, wid_inventory_mouse_over_tab_bag2);
+  }
+
+  //
+  // armor
+  //
+  {
+    auto  w  = wid_new_square_button(wid_inventory_window, "equip armor");
+    point tl = point(9, y_at);
+    point br = point(12, y_at + 3);
+    wid_set_pos(w, tl, br);
+    wid_set_bg_tilename(w, "equip_armor");
+    // wid_set_fg_tilename(w, "bag_large");
+    wid_set_style(w, UI_WID_STYLE_GRAY);
+    wid_set_do_not_lower(w, true);
+    // wid_set_on_mouse_over_begin(w, wid_inventory_mouse_over_tab_bag2);
+  }
+
+  //
+  // weapon
+  //
+  {
+    auto  w  = wid_new_square_button(wid_inventory_window, "equip weapon");
+    point tl = point(15, y_at);
+    point br = point(18, y_at + 3);
+    wid_set_pos(w, tl, br);
+    wid_set_bg_tilename(w, "equip_weapon");
+    // wid_set_fg_tilename(w, "bag_large");
+    wid_set_style(w, UI_WID_STYLE_GRAY);
+    wid_set_do_not_lower(w, true);
+    // wid_set_on_mouse_over_begin(w, wid_inventory_mouse_over_tab_bag2);
+  }
+
+  y_at += 7;
+
+  //
+  // ring1
+  //
+  {
+    auto  w  = wid_new_square_button(wid_inventory_window, "equip ring1");
+    point tl = point(3, y_at);
+    point br = point(6, y_at + 3);
+    wid_set_pos(w, tl, br);
+    wid_set_bg_tilename(w, "equip_ring");
+    // wid_set_fg_tilename(w, "bag_large");
+    wid_set_style(w, UI_WID_STYLE_GRAY);
+    wid_set_do_not_lower(w, true);
+    // wid_set_on_mouse_over_begin(w, wid_inventory_mouse_over_tab_bag2);
+  }
+
+  //
+  // boots
+  //
+  {
+    auto  w  = wid_new_square_button(wid_inventory_window, "equip boots");
+    point tl = point(9, y_at);
+    point br = point(12, y_at + 3);
+    wid_set_pos(w, tl, br);
+    wid_set_bg_tilename(w, "equip_boots");
+    // wid_set_fg_tilename(w, "bag_large");
+    wid_set_style(w, UI_WID_STYLE_GRAY);
+    wid_set_do_not_lower(w, true);
+    // wid_set_on_mouse_over_begin(w, wid_inventory_mouse_over_tab_bag2);
+  }
+
+  //
+  // ring2
+  //
+  {
+    auto  w  = wid_new_square_button(wid_inventory_window, "equip ring2");
+    point tl = point(15, y_at);
+    point br = point(18, y_at + 3);
+    wid_set_pos(w, tl, br);
+    wid_set_bg_tilename(w, "equip_ring");
+    // wid_set_fg_tilename(w, "bag_large");
     wid_set_style(w, UI_WID_STYLE_GRAY);
     wid_set_do_not_lower(w, true);
     // wid_set_on_mouse_over_begin(w, wid_inventory_mouse_over_tab_bag2);
