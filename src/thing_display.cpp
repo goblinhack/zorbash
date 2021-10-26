@@ -404,7 +404,7 @@ bool Thing::get_coords(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
     blit = false;
   } else if (unlikely(is_hidden)) {
     blit = false;
-  } else if (unlikely(tpp->gfx_attack_anim() || tpp->gfx_weapon_carry_anim())) {
+  } else if (unlikely(tpp->gfx_attack_anim() || tpp->gfx_equip_carry_anim())) {
     //
     // Hide weapons that have swung
     //
@@ -611,7 +611,7 @@ bool Thing::get_coords(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
   }
 
   if (unlikely(is_in_water || is_monst() || is_item() || is_treasure_type() || is_skillstone() || is_player() ||
-               tpp->gfx_attack_anim() || tpp->gfx_on_fire_anim() || tpp->gfx_weapon_carry_anim())) {
+               tpp->gfx_attack_anim() || tpp->gfx_on_fire_anim() || tpp->gfx_equip_carry_anim())) {
 
     //
     // Render the weapon and player on the same tile rules

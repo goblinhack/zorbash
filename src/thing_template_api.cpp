@@ -112,7 +112,7 @@ void               Tp::set_resurrect_dice(const std::string &v)
   _resurrect_dice_str = v;
 }
 
-const std::string &Tp::gfx_anim_attack(void) const { return _gfx_anim_attack; }
+const std::string &Tp::gfx_anim_use(void) const { return _gfx_anim_use; }
 const std::string &Tp::laser_name(void) const { return _laser_name; }
 const std::string &Tp::light_color(void) const { return _light_color; }
 const std::string &Tp::long_text_description(void) const { return _long_text_description; }
@@ -148,7 +148,7 @@ const std::string &Tp::text_debuff(void) const { return _text_debuff; }
 const std::string &Tp::text_buff(void) const { return _text_buff; }
 const std::string &Tp::text_title(void) const { return _text_title; }
 const std::string &Tp::text_unused(void) const { return _text_unused; }
-const std::string &Tp::weapon_carry_anim(void) const { return _weapon_carry_anim; }
+const std::string &Tp::equip_carry_anim(void) const { return _equip_carry_anim; }
 float              Tp::collision_attack_radius(void) const { return _collision_attack_radius; }
 float              Tp::collision_radius(void) const { return _collision_radius; }
 int                Tp::ai_avoid_distance(void) const { return _ai_avoid_distance; }
@@ -206,7 +206,7 @@ int                Tp::gfx_show_outlined(void) const { return _gfx_show_outlined
 int                Tp::gfx_solid_shadow(void) const { return _gfx_solid_shadow; }
 int                Tp::gfx_very_short_shadow_caster(void) const { return _gfx_very_short_shadow_caster; }
 int                Tp::gfx_water(void) const { return _gfx_water; }
-int                Tp::gfx_weapon_carry_anim(void) const { return _gfx_weapon_carry_anim; }
+int                Tp::gfx_equip_carry_anim(void) const { return _gfx_equip_carry_anim; }
 int                Tp::environ_dislikes_acid(void) const { return _environ_dislikes_acid; }
 int                Tp::environ_dislikes_fire(void) const { return _environ_dislikes_fire; }
 int                Tp::environ_dislikes_poison(void) const { return _environ_dislikes_poison; }
@@ -435,7 +435,7 @@ int  Tp::is_wand_eater(void) const { return _is_wand_eater; }
 int  Tp::is_wand(void) const { return _is_wand; }
 int  Tp::environ_loves_water(void) const { return _environ_loves_water; }
 int  Tp::is_weapon(void) const { return _is_weapon; }
-int  Tp::is_weapon_wielder(void) const { return _is_weapon_wielder; }
+int  Tp::is_weapon_equiper(void) const { return _is_weapon_equiper; }
 int  Tp::item_height(void) const { return _item_height ? _item_height : 1; }
 int  Tp::item_width(void) const { return _item_width ? _item_width : 1; }
 int  Tp::light_strength(void) const { return _light_strength; }
@@ -470,7 +470,6 @@ int  Tp::stats17(void) const { return _stats17; }
 int  Tp::stat_strength(void) const { return _stat_strength; }
 int  Tp::throw_distance(void) const { return _throw_distance; }
 int  Tp::weapon_damage(void) const { return _weapon_damage; }
-int  Tp::weapon_use_distance(void) const { return _weapon_use_distance; }
 void Tp::set_ai_avoid_distance(int v) { _ai_avoid_distance = v; }
 void Tp::set_ai_resent_count(int v) { _ai_resent_count = v; }
 void Tp::set_ai_obstacle(int v) { _ai_obstacle = v; }
@@ -511,7 +510,7 @@ void Tp::set_gfx_animated_can_hflip(int v) { _gfx_animated_can_hflip = v; }
 void Tp::set_gfx_animated_can_vflip(int v) { _gfx_animated_can_vflip = v; }
 void Tp::set_gfx_animated(int v) { _gfx_animated = v; }
 void Tp::set_gfx_animated_no_dir(int v) { _gfx_animated_no_dir = v; }
-void Tp::set_gfx_anim_attack(const std::string &v) { _gfx_anim_attack = v; }
+void Tp::set_gfx_anim_use(const std::string &v) { _gfx_anim_use = v; }
 void Tp::set_gfx_attack_anim(int v) { _gfx_attack_anim = v; }
 void Tp::set_gfx_bounce_always(int v) { _gfx_bounce_always = v; }
 void Tp::set_gfx_bounce_on_move(int v) { _gfx_bounce_on_move = v; }
@@ -529,7 +528,7 @@ void Tp::set_gfx_show_outlined(int v) { _gfx_show_outlined = v; }
 void Tp::set_gfx_solid_shadow(int v) { _gfx_solid_shadow = v; }
 void Tp::set_gfx_very_short_shadow_caster(int v) { _gfx_very_short_shadow_caster = v; }
 void Tp::set_gfx_water(int v) { _gfx_water = v; }
-void Tp::set_gfx_weapon_carry_anim(int v) { _gfx_weapon_carry_anim = v; }
+void Tp::set_gfx_equip_carry_anim(int v) { _gfx_equip_carry_anim = v; }
 void Tp::set_environ_dislikes_acid(int v) { _environ_dislikes_acid = v; }
 void Tp::set_environ_dislikes_fire(int v) { _environ_dislikes_fire = v; }
 void Tp::set_environ_dislikes_poison(int v) { _environ_dislikes_poison = v; }
@@ -755,7 +754,7 @@ void Tp::set_is_wand_eater(int v) { _is_wand_eater = v; }
 void Tp::set_is_wand(int v) { _is_wand = v; }
 void Tp::set_environ_loves_water(int v) { _environ_loves_water = v; }
 void Tp::set_is_weapon(int v) { _is_weapon = v; }
-void Tp::set_is_weapon_wielder(int v) { _is_weapon_wielder = v; }
+void Tp::set_is_weapon_equiper(int v) { _is_weapon_equiper = v; }
 void Tp::set_item_height(int v) { _item_height = v; }
 void Tp::set_item_width(int v) { _item_width = v; }
 void Tp::set_laser_name(const std::string &v) { _laser_name = v; }
@@ -825,7 +824,7 @@ void Tp::set_text_buff(const std::string &v) { _text_buff = v; }
 void Tp::set_text_title(const std::string &v) { _text_title = v; }
 void Tp::set_text_unused(const std::string &v) { _text_unused = v; }
 void Tp::set_throw_distance(int v) { _throw_distance = v; }
-void Tp::set_weapon_carry_anim(const std::string &v) { _weapon_carry_anim = v; }
+void Tp::set_equip_carry_anim(const std::string &v) { _equip_carry_anim = v; }
 void Tp::set_weapon_damage(int v) { _weapon_damage = v; }
 void Tp::set_weapon_use_distance(int v) { _weapon_use_distance = v; }
 void Tp::set_z_depth(int v) { z_depth = v; }

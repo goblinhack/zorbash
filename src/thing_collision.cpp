@@ -152,7 +152,7 @@ bool Thing::collision_find_best_target(bool *target_attacked, bool *target_overl
     //
     // Skip things that aren't really hitable.
     //
-    if (cand.target->tp()->gfx_weapon_carry_anim()) {
+    if (cand.target->tp()->gfx_equip_carry_anim()) {
       if (is_loggable()) {
         dbg("Ignore %s skip, not hittable", cand.target->to_string().c_str());
       }

@@ -71,9 +71,9 @@ std::istream &operator>>(std::istream &in, Bits< MonstInfop & > my)
   /* ThingId      owner_id                  */ in >> bits(my.t->owner_id);
   /* ThingId      minion_owner_id           */ in >> bits(my.t->minion_owner_id);
   /* ThingId      spawner_owner_id          */ in >> bits(my.t->spawner_owner_id);
-  /* ThingId      weapon_id                 */ in >> bits(my.t->weapon_id);
-  /* ThingId      weapon_id_carry_anim      */ in >> bits(my.t->weapon_id_carry_anim);
-  /* ThingId      weapon_id_use_anim        */ in >> bits(my.t->weapon_id_use_anim);
+  /* ThingId      equip_id                  */ in >> bits(my.t->equip_id);
+  /* ThingId      equip_id_carry_anim       */ in >> bits(my.t->equip_id_carry_anim);
+  /* ThingId      equip_id_use_anim         */ in >> bits(my.t->equip_id_use_anim);
   /* color        light_col                 */ in >> bits(my.t->light_col);
   /* float        bounce_fade               */ in >> bits(my.t->bounce_fade);
   /* float        bounce_height             */ in >> bits(my.t->bounce_height);

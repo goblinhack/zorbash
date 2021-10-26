@@ -61,19 +61,22 @@ void Thing::move_carried_items(void)
   //
   // Weapons follow also.
   //
-  if (get_weapon_id_carry_anim().ok()) {
-    auto w = level->thing_find(get_weapon_id_carry_anim());
-    if (w) {
-      w->move_to(mid_at);
-      w->dir = dir;
+  FOR_ALL_EQUIP(e)
+  {
+    if (get_equip_id_carry_anim(e).ok()) {
+      auto w = level->thing_find(get_equip_id_carry_anim(e));
+      if (w) {
+        w->move_to(mid_at);
+        w->dir = dir;
+      }
     }
-  }
 
-  if (get_weapon_id_use_anim().ok()) {
-    auto w = level->thing_find(get_weapon_id_use_anim());
-    if (w) {
-      w->move_to(mid_at);
-      w->dir = dir;
+    if (get_equip_id_use_anim(e).ok()) {
+      auto w = level->thing_find(get_equip_id_use_anim(e));
+      if (w) {
+        w->move_to(mid_at);
+        w->dir = dir;
+      }
     }
   }
 
@@ -135,19 +138,22 @@ void Thing::move_carried_items_immediately(void)
   //
   // Weapons follow also.
   //
-  if (get_weapon_id_carry_anim().ok()) {
-    auto w = level->thing_find(get_weapon_id_carry_anim());
-    if (w) {
-      w->move_to_immediately(mid_at);
-      w->dir = dir;
+  FOR_ALL_EQUIP(e)
+  {
+    if (get_equip_id_carry_anim(e).ok()) {
+      auto w = level->thing_find(get_equip_id_carry_anim(e));
+      if (w) {
+        w->move_to_immediately(mid_at);
+        w->dir = dir;
+      }
     }
-  }
 
-  if (get_weapon_id_use_anim().ok()) {
-    auto w = level->thing_find(get_weapon_id_use_anim());
-    if (w) {
-      w->move_to_immediately(mid_at);
-      w->dir = dir;
+    if (get_equip_id_use_anim(e).ok()) {
+      auto w = level->thing_find(get_equip_id_use_anim(e));
+      if (w) {
+        w->move_to_immediately(mid_at);
+        w->dir = dir;
+      }
     }
   }
 

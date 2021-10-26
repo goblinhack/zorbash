@@ -163,8 +163,11 @@ bool Thing::drop_into_ether(Thingp what)
   }
 
   if (top_owner) {
-    if (what == top_owner->weapon_get()) {
-      top_owner->unwield("moved into ether");
+    FOR_ALL_EQUIP(e)
+    {
+      if (what == top_owner->equip_get(e)) {
+        top_owner->unequip("moved into ether", e);
+      }
     }
 
     if (top_owner->is_player()) {

@@ -44,10 +44,10 @@ void Thing::destroy(void)
   level_pop();
   level_leave();
 
-  unwield("owner is destroyed");
+  FOR_ALL_EQUIP(e) { unequip("owner is destroyed", e); }
 
   //
-  // hooks remove must be after unwield
+  // hooks remove must be after unequip
   //
   hooks_remove();
 

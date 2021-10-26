@@ -232,11 +232,11 @@ class Tp:
     def set_light_color(self, value):
         zx.tp_set_light_color(self, value)
 
-    def set_weapon_carry_anim(self, value):
-        zx.tp_set_weapon_carry_anim(self, value)
+    def set_equip_carry_anim(self, value):
+        zx.tp_set_equip_carry_anim(self, value)
 
-    def set_gfx_anim_attack(self, value):
-        zx.tp_set_gfx_anim_attack(self, value)
+    def set_gfx_anim_use(self, value):
+        zx.tp_set_gfx_anim_use(self, value)
 
     def set_unused_flag1(self, value):
         zx.tp_set_unused_flag1(self, value)
@@ -712,8 +712,8 @@ class Tp:
     def set_attack_poison_chance_d1000(self, value):
         zx.tp_set_attack_poison_chance_d1000(self, value)
 
-    def set_is_weapon_wielder(self, value):
-        zx.tp_set_is_weapon_wielder(self, value)
+    def set_is_weapon_equiper(self, value):
+        zx.tp_set_is_weapon_equiper(self, value)
 
     def set_is_bag_item(self, value):
         zx.tp_set_is_bag_item(self, value)
@@ -1132,8 +1132,8 @@ class Tp:
     def set_weapon_use_distance(self, value):
         zx.tp_set_weapon_use_distance(self, value)
 
-    def set_gfx_weapon_carry_anim(self, value):
-        zx.tp_set_gfx_weapon_carry_anim(self, value)
+    def set_gfx_equip_carry_anim(self, value):
+        zx.tp_set_gfx_equip_carry_anim(self, value)
 
     def set_gfx_attack_anim(self, value):
         zx.tp_set_gfx_attack_anim(self, value)

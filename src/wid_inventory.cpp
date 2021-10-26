@@ -842,9 +842,9 @@ bool wid_inventory_create(Thingp selected, Thingp over)
       wid_set_on_mouse_up(w, wid_inventory_item_option_use);
       wid_set_pos(w, tl, br);
       if (wid_inventory_thing_selected->is_weapon()) {
-        wid_set_text(w, "%%fg=white$U%%fg=reset$se (wield it)");
+        wid_set_text(w, "%%fg=white$U%%fg=reset$se (equip)");
       } else if (wid_inventory_thing_selected->is_potion()) {
-        wid_set_text(w, "%%fg=white$U%%fg=reset$se (drink it)");
+        wid_set_text(w, "%%fg=white$U%%fg=reset$se (drink)");
       } else if (wid_inventory_thing_selected->is_wand()) {
         wid_set_text(w, "%%fg=white$U%%fg=reset$se (fire it)");
       } else {

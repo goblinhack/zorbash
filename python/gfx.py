@@ -6229,7 +6229,7 @@ def init_tiles1_monsts_and_items():
       "",
       "",
       #########################################################################
-      "item_wielded",
+      "item_equiped",
       "item_count_1",
       "item_count_2",
       "item_count_3",
@@ -6656,7 +6656,7 @@ def init_tiles1_monsts_and_items():
       "ui_icon_load",
       "ui_icon_zoom_in",
       "ui_icon_zoom_out",
-      "ui_icon_wield",
+      "ui_icon_equip",
       "ui_icon_inventory",
       "ui_icon_wait",
       "ui_icon_collect",

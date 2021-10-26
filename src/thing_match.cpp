@@ -763,7 +763,7 @@ bool Thing::matches(const std::string &what) const
   if (is_weapon() && (what == "is_weapon")) {
     return true;
   }
-  if (is_weapon_wielder() && (what == "is_weapon_wielder")) {
+  if (is_weapon_equiper() && (what == "is_weapon_equiper")) {
     return true;
   }
   if (environ_loves_fire() && (what == "environ_loves_fire")) {
@@ -1538,8 +1538,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_weapon") {
     return &Thing::is_weapon;
   }
-  if (what == "is_weapon_wielder") {
-    return &Thing::is_weapon_wielder;
+  if (what == "is_weapon_equiper") {
+    return &Thing::is_weapon_equiper;
   }
   if (what == "environ_loves_fire") {
     return &Thing::environ_loves_fire;

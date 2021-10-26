@@ -48,9 +48,9 @@ std::ostream &operator<<(std::ostream &out, Bits< MonstInfop & > const my)
   /* ThingId      owner_id                  */ out << bits(my.t->owner_id);
   /* ThingId      minion_owner_id           */ out << bits(my.t->minion_owner_id);
   /* ThingId      spawner_owner_id          */ out << bits(my.t->spawner_owner_id);
-  /* ThingId      weapon_id                 */ out << bits(my.t->weapon_id);
-  /* ThingId      weapon_id_carry_anim      */ out << bits(my.t->weapon_id_carry_anim);
-  /* ThingId      weapon_id_use_anim        */ out << bits(my.t->weapon_id_use_anim);
+  /* ThingId      equip_id                 */ out << bits(my.t->equip_id);
+  /* ThingId      equip_id_carry_anim      */ out << bits(my.t->equip_id_carry_anim);
+  /* ThingId      equip_id_use_anim        */ out << bits(my.t->equip_id_use_anim);
   /* color        light_col                 */ out << bits(my.t->light_col);
   /* float        bounce_fade               */ out << bits(my.t->bounce_fade);
   /* float        bounce_height             */ out << bits(my.t->bounce_height);

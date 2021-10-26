@@ -9,6 +9,7 @@
 #include "my_globals.h"
 #include "my_level.h"
 #include "my_main.h"
+#include "my_monst.h"
 #include "my_sprintf.h"
 #include "my_sys.h"
 #include "my_thing.h"
@@ -25,8 +26,8 @@ void Thing::visible(void)
   //
   auto owner = get_top_owner();
   if (owner) {
-    if (this == owner->weapon_get_carry_anim()) {
-      if (owner->weapon_get_use_anim()) {
+    if (this == owner->equip_get_carry_anim(MONST_EQUIP_WEAPON)) {
+      if (owner->equip_get_use_anim(MONST_EQUIP_WEAPON)) {
         //
         // Stay hidden until the weapon use is done.
         //
@@ -41,17 +42,20 @@ void Thing::visible(void)
   //
   // Reveal the weapon again too.
   //
-  if (get_weapon_id_carry_anim().ok()) {
-    auto w = level->thing_find(get_weapon_id_carry_anim());
-    if (w) {
-      w->visible();
+  FOR_ALL_EQUIP(e)
+  {
+    if (get_equip_id_carry_anim(e).ok()) {
+      auto w = level->thing_find(get_equip_id_carry_anim(e));
+      if (w) {
+        w->visible();
+      }
     }
-  }
 
-  if (get_weapon_id_use_anim().ok()) {
-    auto w = level->thing_find(get_weapon_id_use_anim());
-    if (w) {
-      w->visible();
+    if (get_equip_id_use_anim(e).ok()) {
+      auto w = level->thing_find(get_equip_id_use_anim(e));
+      if (w) {
+        w->visible();
+      }
     }
   }
 

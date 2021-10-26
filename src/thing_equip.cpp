@@ -6,15 +6,16 @@
 #include "my_array_bounds_check.h"
 #include "my_game.h"
 #include "my_level.h"
+#include "my_monst.h"
 #include "my_ptrcheck.h"
 #include "my_sys.h"
 #include "my_thing.h"
 #include "my_thing_template.h"
 
-Thingp Thing::weapon_get() const
+Thingp Thing::equip_get(int equip) const
 {
   TRACE_AND_INDENT();
-  auto id = get_weapon_id();
+  auto id = get_equip_id(equip);
   if (id.ok()) {
     return (level->thing_find(id));
   }
@@ -22,132 +23,131 @@ Thingp Thing::weapon_get() const
   return (nullptr);
 }
 
-void Thing::weapon_set_carry_anim_id(ThingId weapon_carry_anim_id)
+void Thing::equip_set_carry_anim_id(ThingId equip_carry_anim_id, int equip)
 {
   TRACE_AND_INDENT();
-  Thingp weapon_carry_anim;
+  Thingp equip_carry_anim;
 
-  if (! weapon_carry_anim_id) {
-    weapon_set_carry_anim(nullptr);
+  if (! equip_carry_anim_id) {
+    equip_set_carry_anim(nullptr, equip);
     return;
   }
 
-  weapon_carry_anim = level->thing_find(weapon_carry_anim_id);
-  if (! weapon_carry_anim) {
+  equip_carry_anim = level->thing_find(equip_carry_anim_id);
+  if (! equip_carry_anim) {
     return;
   }
 
-  weapon_set_carry_anim(weapon_carry_anim);
+  equip_set_carry_anim(equip_carry_anim, equip);
 }
 
-void Thing::weapon_set_carry_anim(Thingp new_weapon_carry_anim)
+void Thing::equip_set_carry_anim(Thingp new_equip_carry_anim, int equip)
 {
   TRACE_AND_INDENT();
-  if (new_weapon_carry_anim) {
-    verify(new_weapon_carry_anim);
+  if (new_equip_carry_anim) {
+    verify(new_equip_carry_anim);
   }
 
-  auto old_weapon_carry_anim = weapon_get_carry_anim();
-  if (old_weapon_carry_anim) {
-    if (old_weapon_carry_anim == new_weapon_carry_anim) {
+  auto old_equip_carry_anim = equip_get_carry_anim(equip);
+  if (old_equip_carry_anim) {
+    if (old_equip_carry_anim == new_equip_carry_anim) {
       return;
     }
 
-    if (new_weapon_carry_anim) {
-      dbg("Change weapon carry_anim, %s->%s", old_weapon_carry_anim->to_string().c_str(),
-          new_weapon_carry_anim->to_string().c_str());
-      new_weapon_carry_anim->set_owner(this);
+    if (new_equip_carry_anim) {
+      dbg("Change equip carry_anim, %s->%s", old_equip_carry_anim->to_string().c_str(),
+          new_equip_carry_anim->to_string().c_str());
+      new_equip_carry_anim->set_owner(this);
     } else {
-      dbg("Remove weapon carry_anim, %s", old_weapon_carry_anim->to_string().c_str());
+      dbg("Remove equip carry_anim, %s", old_equip_carry_anim->to_string().c_str());
     }
-    old_weapon_carry_anim->remove_owner();
+    old_equip_carry_anim->remove_owner();
   } else {
-    if (new_weapon_carry_anim) {
-      dbg("Set weapon carry_anim, %s", new_weapon_carry_anim->to_string().c_str());
-      new_weapon_carry_anim->set_owner(this);
+    if (new_equip_carry_anim) {
+      dbg("Set equip carry_anim, %s", new_equip_carry_anim->to_string().c_str());
+      new_equip_carry_anim->set_owner(this);
     }
   }
 
-  if (new_weapon_carry_anim) {
-    set_weapon_id_carry_anim(new_weapon_carry_anim->id);
+  if (new_equip_carry_anim) {
+    set_equip_id_carry_anim(new_equip_carry_anim->id, equip);
   } else {
-    set_weapon_id_carry_anim(0);
+    set_equip_id_carry_anim(NoThingId.id, equip);
   }
 }
 
-void Thing::weapon_set_use_anim_id(ThingId gfx_anim_attack_id)
+void Thing::equip_set_use_anim_id(ThingId gfx_anim_use_id, int equip)
 {
   TRACE_AND_INDENT();
-  Thingp gfx_anim_attack;
+  Thingp gfx_anim_use;
 
-  if (! gfx_anim_attack_id) {
-    weapon_set_use_anim(nullptr);
+  if (! gfx_anim_use_id) {
+    equip_set_use_anim(nullptr, equip);
     return;
   }
 
-  gfx_anim_attack = level->thing_find(gfx_anim_attack_id);
-  if (! gfx_anim_attack) {
+  gfx_anim_use = level->thing_find(gfx_anim_use_id);
+  if (! gfx_anim_use) {
     return;
   }
 
-  weapon_set_use_anim(gfx_anim_attack);
+  equip_set_use_anim(gfx_anim_use, equip);
 }
 
-void Thing::weapon_set_use_anim(Thingp new_gfx_anim_attack)
+void Thing::equip_set_use_anim(Thingp new_gfx_anim_use, int equip)
 {
   TRACE_AND_INDENT();
-  if (new_gfx_anim_attack) {
-    verify(new_gfx_anim_attack);
+  if (new_gfx_anim_use) {
+    verify(new_gfx_anim_use);
   }
 
-  auto old_gfx_anim_attack = weapon_get_use_anim();
+  auto old_gfx_anim_use = equip_get_use_anim(equip);
 
-  if (old_gfx_anim_attack) {
-    if (old_gfx_anim_attack == new_gfx_anim_attack) {
+  if (old_gfx_anim_use) {
+    if (old_gfx_anim_use == new_gfx_anim_use) {
       return;
     }
 
-    if (new_gfx_anim_attack) {
-      dbg("Change weapon use-anim %s->%s", old_gfx_anim_attack->to_string().c_str(),
-          new_gfx_anim_attack->to_string().c_str());
-      new_gfx_anim_attack->set_owner(this);
+    if (new_gfx_anim_use) {
+      dbg("Change equip use-anim %s->%s", old_gfx_anim_use->to_string().c_str(), new_gfx_anim_use->to_string().c_str());
+      new_gfx_anim_use->set_owner(this);
     } else {
-      dbg("Remove weapon use-anim %s", old_gfx_anim_attack->to_string().c_str());
+      dbg("Remove equip use-anim %s", old_gfx_anim_use->to_string().c_str());
     }
-    old_gfx_anim_attack->remove_owner();
+    old_gfx_anim_use->remove_owner();
   } else {
-    if (new_gfx_anim_attack) {
-      dbg("Set weapon use-anim %s", new_gfx_anim_attack->to_string().c_str());
-      new_gfx_anim_attack->set_owner(this);
+    if (new_gfx_anim_use) {
+      dbg("Set equip use-anim %s", new_gfx_anim_use->to_string().c_str());
+      new_gfx_anim_use->set_owner(this);
     }
   }
 
-  if (new_gfx_anim_attack) {
-    set_weapon_id_use_anim(new_gfx_anim_attack->id);
+  if (new_gfx_anim_use) {
+    set_equip_id_use_anim(new_gfx_anim_use->id, equip);
   } else {
-    set_weapon_id_use_anim(0);
+    set_equip_id_use_anim(NoThingId.id, equip);
   }
 }
 
-void Thing::weapon_get_use_offset(int *dx, int *dy) const
+void Thing::equip_get_use_offset(int *dx, int *dy, int equip) const
 {
   TRACE_AND_INDENT();
   *dx = 0;
   *dy = 0;
 
-  auto weapon = weapon_get();
-  if (! weapon) {
+  auto equip_thing = equip_get(equip);
+  if (! equip_thing) {
     return;
   }
 
-  int dist_from_wielder = weapon->tp()->weapon_use_distance();
+  int dist_from_equiper = 1;
 
   //
   // Try current direction.
   //
   if (is_dir_tl()) {
-    *dx = -dist_from_wielder;
-    *dy = -dist_from_wielder;
+    *dx = -dist_from_equiper;
+    *dy = -dist_from_equiper;
     return;
   }
 
@@ -156,123 +156,122 @@ void Thing::weapon_get_use_offset(int *dx, int *dy) const
   //
 
   if (is_dir_tr()) {
-    *dx = dist_from_wielder;
-    *dy = -dist_from_wielder;
+    *dx = dist_from_equiper;
+    *dy = -dist_from_equiper;
     return;
   }
 
   if (is_dir_bl()) {
-    *dx = -dist_from_wielder;
-    *dy = dist_from_wielder;
+    *dx = -dist_from_equiper;
+    *dy = dist_from_equiper;
     return;
   }
 
   if (is_dir_br()) {
-    *dx = dist_from_wielder;
-    *dy = dist_from_wielder;
+    *dx = dist_from_equiper;
+    *dy = dist_from_equiper;
     return;
   }
 
   if (is_dir_down()) {
-    *dy = dist_from_wielder;
+    *dy = dist_from_equiper;
     return;
   }
 
   if (is_dir_up()) {
-    *dy = -dist_from_wielder;
+    *dy = -dist_from_equiper;
     return;
   }
 
   if (is_dir_right()) {
-    *dx = dist_from_wielder;
+    *dx = dist_from_equiper;
     return;
   }
 
   if (is_dir_left()) {
-    *dx = -dist_from_wielder;
+    *dx = -dist_from_equiper;
     return;
   }
-
-  *dy = dist_from_wielder + 0.3;
 }
 
-Thingp Thing::weapon_get_carry_anim(void)
+Thingp Thing::equip_get_carry_anim(int equip)
 {
   TRACE_AND_INDENT();
-  Thingp weapon_carry_anim = 0;
+  Thingp equip_carry_anim = 0;
 
-  auto id = get_weapon_id_carry_anim();
+  auto id = get_equip_id_carry_anim(equip);
   if (id.ok()) {
-    weapon_carry_anim = level->thing_find(id);
+    equip_carry_anim = level->thing_find(id);
   }
 
-  return (weapon_carry_anim);
+  return (equip_carry_anim);
 }
 
-Thingp Thing::weapon_get_use_anim(void) const
+Thingp Thing::equip_get_use_anim(int equip) const
 {
   TRACE_AND_INDENT();
   //
-  // If this gfx_anim_attack has its own thing id for animations then
+  // If this gfx_anim_use has its own thing id for animations then
   // destroy that.
   //
-  Thingp gfx_anim_attack = 0;
+  Thingp gfx_anim_use = 0;
 
-  auto id = get_weapon_id_use_anim();
+  auto id = get_equip_id_use_anim(equip);
   if (id.ok()) {
-    gfx_anim_attack = level->thing_find(id);
+    gfx_anim_use = level->thing_find(id);
   }
 
-  return (gfx_anim_attack);
+  return (gfx_anim_use);
 }
 
-void Thing::unwield(const char *why)
+void Thing::unequip(const char *why, int equip)
 {
   TRACE_AND_INDENT();
-  if (! get_weapon_id()) {
+  if (! get_equip_id(equip)) {
     return;
   }
 
-  dbg("Unwielding %08" PRIx32 ", why: %s", get_weapon_id().id, why);
+  dbg("Unequiping %08" PRIx32 ", why: %s", get_equip_id(equip).id, why);
 
-  auto weapon = weapon_get();
-  if (! weapon) {
-    dbg("Could not unwield %08" PRIx32 ", why: %s", get_weapon_id().id, why);
+  auto equip_thing = equip_get(equip);
+  if (! equip_thing) {
+    dbg("Could not unequip %08" PRIx32 ", why: %s", get_equip_id(equip).id, why);
     return;
   }
 
-  dbg("Unwielding current weapon %s, why: %s", weapon->tp()->name().c_str(), why);
+  dbg("Unequiping current %s, why: %s", equip_thing->tp()->name().c_str(), why);
 
-  sheath();
+  equip_remove_anim(equip);
 }
 
-void Thing::sheath(void)
+void Thing::equip_remove_anim(int equip)
 {
   TRACE_AND_INDENT();
-  auto weapon = weapon_get();
-  if (! weapon) {
+  auto equip_thing = equip_get(equip);
+  if (! equip_thing) {
     return;
   }
 
-  dbg("Sheathing %s", weapon->tp()->name().c_str());
+  dbg("Remove anims %s", equip_thing->tp()->name().c_str());
   TRACE_AND_INDENT();
+
   //
-  // If this weapon has its own thing id for animations then destroy that.
+  // If this thing has its own thing id for animations then destroy that.
   //
-  auto weapon_carry_anim = weapon_get_carry_anim();
-  if (weapon_carry_anim) {
-    dbg("Sheath; remove carry-anim");
-    weapon_carry_anim->dead("by owner sheathed weapon, remove carry-anim");
-    weapon_set_carry_anim(nullptr);
+  auto equip_carry_anim = equip_get_carry_anim(equip);
+  if (equip_carry_anim) {
+    dbg("Remove carry-anim");
+    equip_carry_anim->dead("by owner sheathed weapon, remove carry-anim");
+    equip_set_carry_anim(nullptr, equip);
   } else {
     dbg("Weapon had no carry-anim");
   }
 
-  auto gfx_anim_attack = weapon_get_use_anim();
-  if (gfx_anim_attack) {
-    dbg("Sheath; remove use-anim");
-    gfx_anim_attack->dead("by owner sheathed weapon, remove use-anim");
-    weapon_set_use_anim(nullptr);
+  auto gfx_anim_use = equip_get_use_anim(equip);
+  if (gfx_anim_use) {
+    dbg("Remove use-anim");
+    gfx_anim_use->dead("by owner sheathed weapon, remove use-anim");
+    equip_set_use_anim(nullptr, equip);
   } else {
     dbg("Weapon had no use/attack anim");
   }
@@ -281,46 +280,46 @@ void Thing::sheath(void)
   // No do not clear this. We need to keep the weapon around so we can swing
   // it
   //
-  set_weapon_id(0);
+  set_equip_id(NoThingId.id, equip);
 }
 
 //
 // Returns true on weapon change
 //
-bool Thing::wield(Thingp weapon)
+bool Thing::equip(Thingp equip_thing, int equip)
 {
   TRACE_AND_INDENT();
-  auto weapon_tp = weapon->tp();
+  auto equip_tp = equip_thing->tp();
 
-  if (weapon_get() == weapon) {
-    dbg("Re-wielding: %s", weapon_tp->name().c_str());
+  if (equip_get(equip) == equip_thing) {
+    dbg("Re-equiping: %s", equip_tp->name().c_str());
     //
     // Do not return here. We need to set the carry-anim post swing
     //
-    sheath();
+    equip_remove_anim(equip);
     return false;
   }
 
-  dbg("Is wielding: %s", weapon_tp->name().c_str());
-  unwield("wield new weapon");
+  dbg("Is equiping: %s", equip_tp->name().c_str());
+  unequip("equip new", equip);
 
-  auto carry_anim_as = weapon_tp->weapon_carry_anim();
+  auto carry_anim_as = equip_tp->equip_carry_anim();
   if (carry_anim_as == "") {
-    err("Could not wield weapon %s", weapon_tp->name().c_str());
+    err("Could not equip %s", equip_tp->name().c_str());
     return false;
   }
 
   auto carry_anim = level->thing_new(carry_anim_as, this);
 
   //
-  // Set the weapon so we can use it later
+  // Set the id so we can use it later
   //
-  set_weapon_id(weapon->id);
+  set_equip_id(equip_thing->id, equip);
 
   //
-  // Save the thing id so the client wid can keep track of the weapon.
+  // Save the thing id so the client wid can keep track of the thing.
   //
-  weapon_set_carry_anim(carry_anim);
+  equip_set_carry_anim(carry_anim, equip);
 
   //
   // Attach to the thing.
@@ -330,20 +329,20 @@ bool Thing::wield(Thingp weapon)
   return true;
 }
 
-bool Thing::use_weapon_try(void)
+bool Thing::equip_use_try(int equip)
 {
   TRACE_AND_INDENT();
-  dbg("Try to use weapon");
+  dbg("Try to equip item");
   TRACE_AND_INDENT();
 
   int  dx, dy;
-  auto weapon = weapon_get();
-  if (! weapon) {
+  auto equip_thing = equip_get(equip);
+  if (! equip_thing) {
     auto d = dir_to_direction();
     dx     = d.x;
     dy     = d.y;
   } else {
-    weapon_get_use_offset(&dx, &dy);
+    equip_get_use_offset(&dx, &dy, equip);
   }
 
   bool target_attacked = false;
@@ -358,25 +357,25 @@ bool Thing::use_weapon_try(void)
   //
   decr_stamina();
 
-  if (weapon) {
-    dbg("Have weapon %s", weapon->to_string().c_str());
+  if (equip_thing) {
+    dbg("Have equip item %s", equip_thing->to_string().c_str());
     TRACE_AND_INDENT();
-    on_use(weapon);
-    if (weapon->collision_check_and_handle_at(hit_at, &target_attacked, &target_overlaps)) {
+    on_use(equip_thing);
+    if (equip_thing->collision_check_and_handle_at(hit_at, &target_attacked, &target_overlaps)) {
       lunge(hit_at);
       if (target_attacked) {
-        dbg("Attacked with weapon");
+        dbg("Attacked with equip item");
         return true;
       }
       return false;
     }
   } else {
-    dbg("No weapon");
+    dbg("No equip item");
     TRACE_AND_INDENT();
     if (collision_check_and_handle_at(hit_at, &target_attacked, &target_overlaps)) {
       lunge(hit_at);
       if (target_attacked) {
-        dbg("No weapon but attacked");
+        dbg("No equip item but attacked");
         return true;
       }
       return false;
@@ -443,8 +442,8 @@ bool Thing::use_weapon_try(void)
     target_overlaps = false;
 
     dbg("Best target to hit is %s", best->to_string().c_str());
-    if (weapon) {
-      if (weapon->collision_check_and_handle_at(best_hit_at, &target_attacked, &target_overlaps)) {
+    if (equip_thing) {
+      if (equip_thing->collision_check_and_handle_at(best_hit_at, &target_attacked, &target_overlaps)) {
         lunge(best_hit_at);
         return true;
       }
@@ -503,8 +502,8 @@ bool Thing::use_weapon_try(void)
     target_overlaps = false;
 
     dbg("Best target (2nd try) to hit is %s", best->to_string().c_str());
-    if (weapon) {
-      if (weapon->collision_check_and_handle_at(best_hit_at, &target_attacked, &target_overlaps)) {
+    if (equip_thing) {
+      if (equip_thing->collision_check_and_handle_at(best_hit_at, &target_attacked, &target_overlaps)) {
         lunge(best_hit_at);
         return true;
       }
@@ -563,8 +562,8 @@ bool Thing::use_weapon_try(void)
     target_overlaps = false;
 
     dbg("Best target (3rd try) to hit is %s", best->to_string().c_str());
-    if (weapon) {
-      if (weapon->collision_check_and_handle_at(best_hit_at, &target_attacked, &target_overlaps)) {
+    if (equip_thing) {
+      if (equip_thing->collision_check_and_handle_at(best_hit_at, &target_attacked, &target_overlaps)) {
         lunge(best_hit_at);
         return true;
       }
@@ -579,17 +578,18 @@ bool Thing::use_weapon_try(void)
   return false;
 }
 
-bool Thing::use_weapon(bool forced)
+bool Thing::equip_use(bool forced, int equip)
 {
   TRACE_AND_INDENT();
-  dbg("Try to attack weapon");
+
+  dbg("Try to use equipped item");
   TRACE_AND_INDENT();
 
-  if (get_weapon_id_use_anim().ok()) {
+  if (get_equip_id_use_anim(equip).ok()) {
     //
     // Still using.
     //
-    dbg("Try to use weapon; no still using");
+    dbg("Try to use equipped item; no still using");
     return false;
   }
 
@@ -602,7 +602,7 @@ bool Thing::use_weapon(bool forced)
     }
   }
 
-  bool attacked = use_weapon_try();
+  bool attacked = equip_use_try(equip);
   if (! attacked) {
     if (is_player() && forced) {
       //
@@ -613,31 +613,33 @@ bool Thing::use_weapon(bool forced)
     }
   }
 
-  std::string swung_as;
+  std::string used_as;
 
-  auto weapon = weapon_get();
-  if (! weapon) {
-    if (is_player()) {
-      TOPCON("You attack with bare fists!");
+  auto equip_thing = equip_get(equip);
+  if (! equip_thing) {
+    if (equip == MONST_EQUIP_WEAPON) {
+      if (is_player()) {
+        TOPCON("You attack with bare fists!");
 
-      //
-      // Python callback
-      //
-      on_you_bite_attack();
+        //
+        // Python callback
+        //
+        on_you_bite_attack();
+      }
     }
-    swung_as = gfx_anim_attack();
+    used_as = gfx_anim_use();
   } else {
-    auto weapon_tp = weapon->tp();
+    auto equip_tp = equip_thing->tp();
 
-    swung_as = weapon_tp->gfx_anim_attack();
-    if (swung_as == "") {
-      die("Could not use %s/%08" PRIx32 " has no 'use' animation frame", weapon_tp->name().c_str(), weapon->id.id);
+    used_as = equip_tp->gfx_anim_use();
+    if (used_as == "") {
+      die("Could not use %s/%08" PRIx32 " has no 'use' animation frame", equip_tp->name().c_str(), equip_thing->id.id);
       return false;
     }
 
-    auto what = tp_find(swung_as);
+    auto what = tp_find(used_as);
     if (! what) {
-      err("Could not find %s to wield", swung_as.c_str());
+      err("Could not find %s to equip", used_as.c_str());
       return false;
     }
   }
@@ -645,19 +647,19 @@ bool Thing::use_weapon(bool forced)
   //
   // Save the thing id so the client wid can keep track of the weapon.
   //
-  auto use_anim = level->thing_new(swung_as, this);
+  auto use_anim = level->thing_new(used_as, this);
 
   //
   // Attach to the parent thing.
   //
   use_anim->set_owner(this);
 
-  weapon_set_use_anim(use_anim);
+  equip_set_use_anim(use_anim, equip);
 
   //
   // Hide the carry_anim while using.
   //
-  auto c = weapon_get_carry_anim();
+  auto c = equip_get_carry_anim(equip);
   if (c) {
     c->hide();
   }
@@ -667,6 +669,6 @@ bool Thing::use_weapon(bool forced)
   return true;
 }
 
-bool Thing::use_weapon_may_attack(void) { return use_weapon(false); }
+bool Thing::equip_use_may_attack(int equip) { return equip_use(false, equip); }
 
-bool Thing::use_weapon_must_attack(void) { return use_weapon(true); }
+bool Thing::equip_use_must_attack(int equip) { return equip_use(true, equip); }

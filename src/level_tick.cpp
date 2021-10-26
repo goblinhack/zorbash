@@ -271,15 +271,18 @@ bool Level::tick(void)
       }
     }
 
-    auto weapon_id = t->get_weapon_id_use_anim();
-    if (weapon_id.ok()) {
-      auto w = thing_find(weapon_id);
-      if (w && ! w->is_dead) {
-        if ((wait_count > wait_count_max) && ! game->things_are_moving) {
-          w->con("Waiting on this");
-          t->con("This is the owner");
+    FOR_ALL_EQUIP(e)
+    {
+      auto equip_id = t->get_equip_id_use_anim(e);
+      if (equip_id.ok()) {
+        auto w = thing_find(equip_id);
+        if (w && ! w->is_dead) {
+          if ((wait_count > wait_count_max) && ! game->things_are_moving) {
+            w->con("Waiting on this");
+            t->con("This is the owner");
+          }
+          game->things_are_moving = true;
         }
-        game->things_are_moving = true;
       }
     }
 
@@ -316,12 +319,15 @@ bool Level::tick(void)
     }
 
     //
-    // Make sure weapons keep yp
+    // Make sure weapons keep up
     //
-    auto o = t->weapon_get_carry_anim();
-    if (o) {
-      o->update_interpolated_position();
-      o->get_fall();
+    FOR_ALL_EQUIP(e)
+    {
+      auto o = t->equip_get_carry_anim(e);
+      if (o) {
+        o->update_interpolated_position();
+        o->get_fall();
+      }
     }
   }
   FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL_END(this)

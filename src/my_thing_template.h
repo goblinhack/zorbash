@@ -121,7 +121,7 @@ private:
   int         _gfx_solid_shadow {};
   int         _gfx_very_short_shadow_caster {};
   int         _gfx_water {};
-  int         _gfx_weapon_carry_anim {};
+  int         _gfx_equip_carry_anim {};
   int         _environ_dislikes_acid {};
   int         _environ_dislikes_fire {};
   int         _environ_dislikes_poison {};
@@ -348,7 +348,7 @@ private:
   int         _is_wand_eater {};
   int         _environ_loves_water {};
   int         _is_weapon {};
-  int         _is_weapon_wielder {};
+  int         _is_weapon_equiper {};
   int         _item_height {};
   int         _item_width {};
   int         _light_strength {};
@@ -389,7 +389,7 @@ private:
   std::string _damage_crush_dice_str;
   std::string _damage_melee_dice_str;
   std::string _damage_poison_dice_str;
-  std::string _gfx_anim_attack;
+  std::string _gfx_anim_use;
   std::string _gold_value_dice_str;
   std::string _health_initial_dice_str;
   std::string _laser_name;
@@ -432,7 +432,7 @@ private:
   std::string _text_buff;
   std::string _text_title;
   std::string _text_unused;
-  std::string _weapon_carry_anim;
+  std::string _equip_carry_anim;
 
 public:
   Tp(void);
@@ -468,7 +468,7 @@ public:
   const std::string &get_damage_melee_dice_str(void) const;
   const std::string &get_damage_poison_dice_str(void) const;
   const std::string &get_health_initial_dice_str(void) const;
-  const std::string &gfx_anim_attack(void) const;
+  const std::string &gfx_anim_use(void) const;
   const std::string &gold_value_dice_str(void) const;
   const std::string &laser_name(void) const;
   const std::string &lifespan_dice_str(void) const;
@@ -509,7 +509,7 @@ public:
   const std::string &text_buff(void) const;
   const std::string &text_title(void) const;
   const std::string &text_unused(void) const;
-  const std::string &weapon_carry_anim(void) const;
+  const std::string &equip_carry_anim(void) const;
   const Tilemap     *tp_bl1_tiles(void) const;
   const Tilemap     *tp_bl2_tiles(void) const;
   const Tilemap     *tp_bot1_tiles(void) const;
@@ -599,7 +599,7 @@ public:
   int                gfx_solid_shadow(void) const;
   int                gfx_very_short_shadow_caster(void) const;
   int                gfx_water(void) const;
-  int                gfx_weapon_carry_anim(void) const;
+  int                gfx_equip_carry_anim(void) const;
   int                environ_dislikes_acid(void) const;
   int                environ_dislikes_fire(void) const;
   int                environ_dislikes_poison(void) const;
@@ -825,7 +825,7 @@ public:
   int                is_wand(void) const;
   int                environ_loves_water(void) const;
   int                is_weapon(void) const;
-  int                is_weapon_wielder(void) const;
+  int                is_weapon_equiper(void) const;
   int                item_height(void) const;
   int                item_width(void) const;
   int                light_strength(void) const;
@@ -860,7 +860,6 @@ public:
   int                stat_strength(void) const;
   int                throw_distance(void) const;
   int                weapon_damage(void) const;
-  int                weapon_use_distance(void) const;
   std::string        short_text_capitalized(void) const;
   std::string        text_a_or_an(void) const;
   void               set_ai_avoid_distance(int);
@@ -908,7 +907,7 @@ public:
   void               set_gfx_animated_can_vflip(int);
   void               set_gfx_animated(int);
   void               set_gfx_animated_no_dir(int);
-  void               set_gfx_anim_attack(const std::string &);
+  void               set_gfx_anim_use(const std::string &);
   void               set_gfx_attack_anim(int);
   void               set_gfx_bounce_always(int);
   void               set_gfx_bounce_on_move(int);
@@ -926,7 +925,7 @@ public:
   void               set_gfx_solid_shadow(int);
   void               set_gfx_very_short_shadow_caster(int);
   void               set_gfx_water(int);
-  void               set_gfx_weapon_carry_anim(int);
+  void               set_gfx_equip_carry_anim(int);
   void               set_gold_value_dice(const std::string &);
   void               set_environ_dislikes_acid(int);
   void               set_environ_dislikes_fire(int);
@@ -1155,7 +1154,7 @@ public:
   void               set_is_wand(int);
   void               set_environ_loves_water(int);
   void               set_is_weapon(int);
-  void               set_is_weapon_wielder(int);
+  void               set_is_weapon_equiper(int);
   void               set_item_height(int);
   void               set_item_width(int);
   void               set_laser_name(const std::string &);
@@ -1229,7 +1228,7 @@ public:
   void               set_text_title(const std::string &);
   void               set_text_unused(const std::string &);
   void               set_throw_distance(int);
-  void               set_weapon_carry_anim(const std::string &);
+  void               set_equip_carry_anim(const std::string &);
   void               set_weapon_damage(int);
   void               set_weapon_use_distance(int);
   void               set_z_depth(int);

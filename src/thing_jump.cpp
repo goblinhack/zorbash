@@ -200,41 +200,44 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   //
   // Weapons follow also.
   //
-  if (get_weapon_id_carry_anim().ok()) {
-    auto id = get_weapon_id_carry_anim();
-    auto w  = level->thing_find(id);
-    if (w) {
-      w->move_to_immediately(mid_at);
-      w->is_jumping = true;
-      if (is_player()) {
-        level->new_external_particle(id, src, dst, sz, delay_shorter, tile_index_to_tile(w->tile_curr),
-                                     (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()),
-                                     true /* make_visible_at_end */);
-      } else {
-        level->new_internal_particle(id, src, dst, sz, delay_shorter, tile_index_to_tile(w->tile_curr),
-                                     (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()),
-                                     true /* make_visible_at_end */);
+  FOR_ALL_EQUIP(e)
+  {
+    if (get_equip_id_carry_anim(e).ok()) {
+      auto id = get_equip_id_carry_anim(e);
+      auto w  = level->thing_find(id);
+      if (w) {
+        w->move_to_immediately(mid_at);
+        w->is_jumping = true;
+        if (is_player()) {
+          level->new_external_particle(id, src, dst, sz, delay_shorter, tile_index_to_tile(w->tile_curr),
+                                       (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()),
+                                       true /* make_visible_at_end */);
+        } else {
+          level->new_internal_particle(id, src, dst, sz, delay_shorter, tile_index_to_tile(w->tile_curr),
+                                       (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()),
+                                       true /* make_visible_at_end */);
+        }
       }
     }
-  }
 
-  if (get_weapon_id_use_anim().ok()) {
-    auto id = get_weapon_id_use_anim();
-    auto w  = level->thing_find(get_weapon_id_use_anim());
-    if (w) {
-      w->move_to_immediately(mid_at);
-      w->is_jumping = true;
-      //
-      // No, the weapon is shown as carry anim
-      //
-      if (is_player()) {
-        level->new_external_particle(id, src, dst, sz, delay_shorter, tile_index_to_tile(w->tile_curr),
-                                     (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()),
-                                     true /* make_visible_at_end */);
-      } else {
-        level->new_internal_particle(id, src, dst, sz, delay_shorter, tile_index_to_tile(w->tile_curr),
-                                     (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()),
-                                     true /* make_visible_at_end */);
+    if (get_equip_id_use_anim(e).ok()) {
+      auto id = get_equip_id_use_anim(e);
+      auto w  = level->thing_find(get_equip_id_use_anim(e));
+      if (w) {
+        w->move_to_immediately(mid_at);
+        w->is_jumping = true;
+        //
+        // No, the weapon is shown as carry anim
+        //
+        if (is_player()) {
+          level->new_external_particle(id, src, dst, sz, delay_shorter, tile_index_to_tile(w->tile_curr),
+                                       (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()),
+                                       true /* make_visible_at_end */);
+        } else {
+          level->new_internal_particle(id, src, dst, sz, delay_shorter, tile_index_to_tile(w->tile_curr),
+                                       (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()),
+                                       true /* make_visible_at_end */);
+        }
       }
     }
   }
@@ -455,17 +458,20 @@ void Thing::jump_end(void)
   //
   // Weapons follow also.
   //
-  if (get_weapon_id_carry_anim().ok()) {
-    auto w = level->thing_find(get_weapon_id_carry_anim());
-    if (w) {
-      w->is_jumping = false;
+  FOR_ALL_EQUIP(e)
+  {
+    if (get_equip_id_carry_anim(e).ok()) {
+      auto w = level->thing_find(get_equip_id_carry_anim(e));
+      if (w) {
+        w->is_jumping = false;
+      }
     }
-  }
 
-  if (get_weapon_id_use_anim().ok()) {
-    auto w = level->thing_find(get_weapon_id_use_anim());
-    if (w) {
-      w->is_jumping = false;
+    if (get_equip_id_use_anim(e).ok()) {
+      auto w = level->thing_find(get_equip_id_use_anim(e));
+      if (w) {
+        w->is_jumping = false;
+      }
     }
   }
 

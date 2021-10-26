@@ -219,13 +219,15 @@ public:
   ThingShoved try_to_shove_into_hazard(Thingp it, point delta);
 
   ThingId get_on_fire_anim_id(void) const;
-  ThingId get_weapon_id(void) const;
-  ThingId get_weapon_id_carry_anim(void) const;
-  ThingId get_weapon_id_use_anim(void) const;
   ThingId set_on_fire_anim_id(ThingId);
-  ThingId set_weapon_id(ThingId);
-  ThingId set_weapon_id_carry_anim(ThingId);
-  ThingId set_weapon_id_use_anim(ThingId);
+
+  ThingId get_equip_id(int equip) const;
+  ThingId get_equip_id_carry_anim(int equip) const;
+  ThingId get_equip_id_use_anim(int equip) const;
+
+  ThingId set_equip_id(ThingId, int equip);
+  ThingId set_equip_id_carry_anim(ThingId, int equip);
+  ThingId set_equip_id_use_anim(ThingId, int equip);
 
   Thingp get_best_fire_at_target(void);
   Thingp get_immediate_minion_owner() const;
@@ -239,9 +241,9 @@ public:
 
   Thingp most_dangerous_visible_thing_get(void);
   Thingp projectile_fire_at(const std::string &item, Thingp target);
-  Thingp weapon_get() const;
-  Thingp weapon_get_carry_anim(void);
-  Thingp weapon_get_use_anim(void) const;
+  Thingp equip_get(int equip) const;
+  Thingp equip_get_carry_anim(int equip);
+  Thingp equip_get_use_anim(int equip) const;
 
   bool buff_add(Tpp what);
   bool debuff_add(Tpp what);
@@ -408,11 +410,11 @@ public:
   bool try_to_jump_carefully(point to, bool *too_far);
   bool try_to_jump_towards_player(void);
   bool use(Thingp w);
-  bool use_weapon(bool forced);
-  bool use_weapon_may_attack(void);
-  bool use_weapon_must_attack(void);
-  bool use_weapon_try(void);
-  bool wield(Thingp w);
+  bool equip_use(bool forced, int equip);
+  bool equip_use_may_attack(int equip);
+  bool equip_use_must_attack(int equip);
+  bool equip_use_try(int equip);
+  bool equip(Thingp w, int equip);
   bool will_avoid_monst(const Thingp it);
   bool will_avoid_monst(const point &p);
   bool will_prefer_terrain(const Thingp it);
@@ -461,7 +463,7 @@ public:
   const std::string &get_nutrition_dice_str(void) const;
   const std::string &get_on_idle_dice_str(void) const;
   const std::string &get_resurrect_dice_str(void) const;
-  const std::string &gfx_anim_attack(void) const;
+  const std::string &gfx_anim_use(void) const;
   const std::string &laser_name(void) const;
   const std::string &light_color(void) const;
   const std::string &long_text_description(void) const;
@@ -498,7 +500,7 @@ public:
   const std::string &text_title(void) const;
   const std::string &text_unused(void) const;
   const std::string &title(void) const;
-  const std::string &weapon_carry_anim(void) const;
+  const std::string &equip_carry_anim(void) const;
 
   float get_bounce(void);
   float get_bounce_fade(void) const;
@@ -746,7 +748,7 @@ public:
   int gfx_solid_shadow(void) const;
   int gfx_very_short_shadow_caster(void) const;
   int gfx_water(void) const;
-  int gfx_weapon_carry_anim(void) const;
+  int gfx_equip_carry_anim(void) const;
   int health_boost(int v);
   int health_hunger_pct(void) const;
   int health_starving_pct(void) const;
@@ -985,7 +987,7 @@ public:
   int is_wand_eater(void) const;
   int is_water(void) const;
   int is_weapon(void) const;
-  int is_weapon_wielder(void) const;
+  int is_weapon_equiper(void) const;
   int is_wooden(void) const;
   int item_count_excluding_charges(Tpp item);
   int item_count_including_charges(Tpp item);
@@ -1073,7 +1075,6 @@ public:
   int unused_flag9(void) const;
   int update_light_strength(void);
   int weapon_damage(void) const;
-  int weapon_use_distance(void) const;
   int worth_collecting(const Thingp it);
   int worth_collecting(const Thingp it, Thingp *would_need_to_drop);
 
@@ -1392,7 +1393,7 @@ public:
   void set_spawned_owner(Thingp spawner_owner);
   void set_submerged_offset(int);
   void set_wobble(float);
-  void sheath(void);
+  void equip_remove_anim(int equip);
   void show_botcon_description(void) const;
   void skill_activate(Thingp what);
   void skill_deactivate(Thingp what);
@@ -1412,7 +1413,7 @@ public:
   void unleash_minions(void);
   void unleash_spawners_things(void);
   void unset_on_fire(void);
-  void unwield(const char *why);
+  void unequip(const char *why, int equip);
   void update_all(void);
   void update_interpolated_position(void);
   void update_light(void);
@@ -1422,12 +1423,11 @@ public:
   void used(Thingp w, Thingp target, bool remove_after_use);
   void visible();
   void water_tick();
-  void weapon_get_use_offset(int *dx, int *dy) const;
-  void weapon_set_carry_anim(Thingp weapon_carry_anim);
-  void weapon_set_carry_anim_id(ThingId weapon_carry_anim_id);
-  void weapon_set_placement(void);
-  void weapon_set_use_anim(Thingp gfx_anim_attack);
-  void weapon_set_use_anim_id(ThingId gfx_anim_attack_id);
+  void equip_get_use_offset(int *dx, int *dy, int equip) const;
+  void equip_set_carry_anim(Thingp equip_carry_anim, int equip);
+  void equip_set_carry_anim_id(ThingId equip_carry_anim_id, int equip);
+  void equip_set_use_anim(Thingp gfx_anim_use, int equip);
+  void equip_set_use_anim_id(ThingId gfx_anim_use_id, int equip);
   void weapon_sheath(void);
   void wobble(float wobble);
 

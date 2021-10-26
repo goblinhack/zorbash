@@ -398,14 +398,14 @@ static bool wid_rightbar_create(void)
         //
         // Print highlighted weapon
         //
-        auto weapon = player->weapon_get();
+        auto weapon = player->equip_get(MONST_EQUIP_WEAPON);
         if (weapon) {
-          auto weapon_tp_id = weapon->tp()->id;
-          auto tp_id        = monst_infop->inventory_id[ i ];
-          if (tp_id == weapon_tp_id) {
+          auto equip_tp_id = weapon->tp()->id;
+          auto tp_id       = monst_infop->inventory_id[ i ];
+          if (tp_id == equip_tp_id) {
             static Tilep tile;
             if (! tile) {
-              tile = tile_find_mand("item_wielded");
+              tile = tile_find_mand("item_equiped");
             }
             if (i == game->inventory_highlight_slot) {
               wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);

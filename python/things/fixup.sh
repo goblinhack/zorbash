@@ -155,7 +155,7 @@ do
       set_gfx_solid_shadow \
       set_gfx_very_short_shadow_caster \
       set_gfx_water \
-      set_gfx_weapon_carry_anim \
+      set_gfx_equip_carry_anim \
       set_environ_dislikes_acid \
       set_environ_dislikes_fire \
       set_environ_dislikes_poison \
@@ -372,7 +372,7 @@ do
       set_is_wand_eater \
       set_environ_loves_water \
       set_is_weapon \
-      set_is_weapon_wielder \
+      set_is_weapon_equiper \
       set_is_wooden \
       set_environ_loves_fire \
       set_environ_loves_poison \

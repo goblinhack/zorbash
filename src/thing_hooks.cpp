@@ -52,70 +52,73 @@ void Thing::hooks_remove()
       if (is_loggable()) {
         dbg("Detach on_fire_anim_id from owner %s", owner->to_string().c_str());
       }
-      owner->set_on_fire_anim_id(0);
+      owner->set_on_fire_anim_id(NoThingId.id);
     }
 
-    if (id == owner->get_weapon_id()) {
-      owner->unwield("remove hooks for weapon id");
+    FOR_ALL_EQUIP(e)
+    {
+      if (id == owner->get_equip_id(e)) {
+        owner->unequip("remove hooks for equip id", e);
 
-      if (is_loggable()) {
-        dbg("Detach weapon_id from owner %s", owner->to_string().c_str());
+        if (is_loggable()) {
+          dbg("Detach equip_id from owner %s", owner->to_string().c_str());
+        }
+        owner->set_equip_id(NoThingId.id, e);
       }
-      owner->set_weapon_id(0);
-    }
 
-    if (id == owner->get_weapon_id_carry_anim()) {
-      owner->unwield("remove hooks for carry-anim");
+      if (id == owner->get_equip_id_carry_anim(e)) {
+        owner->unequip("remove hooks for carry-anim", e);
 
-      if (is_loggable()) {
-        dbg("Detach carry-anim from owner %s", owner->to_string().c_str());
+        if (is_loggable()) {
+          dbg("Detach carry-anim from owner %s", owner->to_string().c_str());
+        }
+        owner->equip_set_carry_anim_id(NoThingId.id, e);
       }
-      owner->weapon_set_carry_anim_id(0);
-    }
 
-    if (id == owner->get_weapon_id_use_anim()) {
-      if (is_loggable()) {
-        dbg("Detach use_anim from owner %s", owner->to_string().c_str());
-      }
-      owner->weapon_set_use_anim_id(0);
+      if (id == owner->get_equip_id_use_anim(e)) {
+        if (is_loggable()) {
+          dbg("Detach use_anim from owner %s", owner->to_string().c_str());
+        }
+        owner->equip_set_use_anim_id(NoThingId.id, e);
 
-      //
-      // End of the use-animation, make the sword visible again.
-      //
-      auto carry_anim = owner->weapon_get_carry_anim();
-      if (carry_anim) {
-        dbg("Make carry weapon visible %s", owner->to_string().c_str());
-        TRACE_AND_INDENT();
         //
-        // But only if the owner is visible.
+        // End of the use-animation, make the sword visible again.
         //
-        if (owner->is_visible()) {
-          if (is_loggable()) {
-            dbg("Reapply carry-anim for owner %s", owner->to_string().c_str());
+        auto carry_anim = owner->equip_get_carry_anim(e);
+        if (carry_anim) {
+          dbg("Make carry weapon visible %s", owner->to_string().c_str());
+          TRACE_AND_INDENT();
+          //
+          // But only if the owner is visible.
+          //
+          if (owner->is_visible()) {
+            if (is_loggable()) {
+              dbg("Reapply carry-anim for owner %s", owner->to_string().c_str());
+            }
+            carry_anim->visible();
+          } else {
+            if (is_loggable()) {
+              dbg("Do not reapply carry-anim for invisible owner %s", owner->to_string().c_str());
+            }
           }
-          carry_anim->visible();
         } else {
           if (is_loggable()) {
-            dbg("Do not reapply carry-anim for invisible owner %s", owner->to_string().c_str());
+            dbg("No carry-anim for owner %s", owner->to_string().c_str());
+          }
+          auto id = owner->get_equip_id(e);
+          if (id.ok()) {
+            owner->equip(owner->equip_get(e), e);
           }
         }
-      } else {
-        if (is_loggable()) {
-          dbg("No carry-anim for owner %s", owner->to_string().c_str());
-        }
-        auto id = owner->get_weapon_id();
-        if (id.ok()) {
-          owner->wield(owner->weapon_get());
-        }
       }
-    }
 
-    if (id == owner->get_weapon_id_use_anim()) {
-      err("Weapon use anim is still attached");
-    }
+      if (id == owner->get_equip_id_use_anim(e)) {
+        err("Weapon use anim is still attached");
+      }
 
-    if (id == owner->get_weapon_id_carry_anim()) {
-      err("Weapon carry anim is still attached");
+      if (id == owner->get_equip_id_carry_anim(e)) {
+        err("Weapon carry anim is still attached");
+      }
     }
   }
 
@@ -137,28 +140,30 @@ void Thing::hooks_remove()
   //
   // We own things like a sword. i.e. we are a player.
   //
+  FOR_ALL_EQUIP(e)
   {
     TRACE_AND_INDENT();
-    auto item = weapon_get_carry_anim();
+    auto item = equip_get_carry_anim(e);
     if (item) {
       if (is_loggable()) {
         dbg("Hooks remove carry-anim");
       }
-      weapon_set_carry_anim(nullptr);
+      equip_set_carry_anim(nullptr, e);
       verify(item);
       item->remove_owner();
       item->dead("weapon carry-anim owner defeated ");
     }
   }
 
+  FOR_ALL_EQUIP(e)
   {
     TRACE_AND_INDENT();
-    auto item = weapon_get_use_anim();
+    auto item = equip_get_use_anim(e);
     if (item) {
       if (is_loggable()) {
         dbg("Hooks remove use-anim");
       }
-      weapon_set_use_anim(nullptr);
+      equip_set_use_anim(nullptr, e);
       verify(item);
       item->remove_owner();
       item->dead("weapon use-anim owner defeated ");
@@ -251,14 +256,17 @@ void Thing::remove_all_references()
         if (id == t->monst_infop->spawner_owner_id) {
           err("thing is still attached to (spawner owner) %s", t->to_string().c_str());
         }
-        if (id == t->monst_infop->weapon_id) {
-          err("thing is still attached to (weapon) %s", t->to_string().c_str());
-        }
-        if (id == t->monst_infop->weapon_id_carry_anim) {
-          err("thing is still attached to (weapon carry) %s", t->to_string().c_str());
-        }
-        if (id == t->monst_infop->weapon_id_use_anim) {
-          err("thing is still attached to (weapon use) %s", t->to_string().c_str());
+        FOR_ALL_EQUIP(e)
+        {
+          if (id == t->monst_infop->equip_id[ e ]) {
+            err("thing is still attached to (equip) %s", t->to_string().c_str());
+          }
+          if (id == t->monst_infop->equip_id_carry_anim[ e ]) {
+            err("thing is still attached to (equip carry) %s", t->to_string().c_str());
+          }
+          if (id == t->monst_infop->equip_id_use_anim[ e ]) {
+            err("thing is still attached to (equip use) %s", t->to_string().c_str());
+          }
         }
       }
     }
@@ -284,14 +292,17 @@ void Thing::remove_all_references()
       if (id == t->monst_infop->spawner_owner_id) {
         err("interesting thing is still attached to (spawner owner) %s", t->to_string().c_str());
       }
-      if (id == t->monst_infop->weapon_id) {
-        err("interesting thing is still attached to (weapon) %s", t->to_string().c_str());
-      }
-      if (id == t->monst_infop->weapon_id_carry_anim) {
-        err("interesting thing is still attached to (weapon carry) %s", t->to_string().c_str());
-      }
-      if (id == t->monst_infop->weapon_id_use_anim) {
-        err("interesting thing is still attached to (weapon use) %s", t->to_string().c_str());
+      FOR_ALL_EQUIP(e)
+      {
+        if (id == t->monst_infop->equip_id[ e ]) {
+          err("interesting thing is still attached to (equip) %s", t->to_string().c_str());
+        }
+        if (id == t->monst_infop->equip_id_carry_anim[ e ]) {
+          err("interesting thing is still attached to (equip carry) %s", t->to_string().c_str());
+        }
+        if (id == t->monst_infop->equip_id_use_anim[ e ]) {
+          err("interesting thing is still attached to (equip use) %s", t->to_string().c_str());
+        }
       }
     }
 
@@ -315,14 +326,17 @@ void Thing::remove_all_references()
       if (id == t->monst_infop->spawner_owner_id) {
         err("interesting thing is still attached to (spawner owner) %s", t->to_string().c_str());
       }
-      if (id == t->monst_infop->weapon_id) {
-        err("interesting thing is still attached to (weapon) %s", t->to_string().c_str());
-      }
-      if (id == t->monst_infop->weapon_id_carry_anim) {
-        err("interesting thing is still attached to (weapon carry) %s", t->to_string().c_str());
-      }
-      if (id == t->monst_infop->weapon_id_use_anim) {
-        err("interesting thing is still attached to (weapon use) %s", t->to_string().c_str());
+      FOR_ALL_EQUIP(e)
+      {
+        if (id == t->monst_infop->equip_id[ e ]) {
+          err("interesting thing is still attached to (equip) %s", t->to_string().c_str());
+        }
+        if (id == t->monst_infop->equip_id_carry_anim[ e ]) {
+          err("interesting thing is still attached to (equip carry) %s", t->to_string().c_str());
+        }
+        if (id == t->monst_infop->equip_id_use_anim[ e ]) {
+          err("interesting thing is still attached to (equip use) %s", t->to_string().c_str());
+        }
       }
     }
   }

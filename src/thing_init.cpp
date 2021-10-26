@@ -428,7 +428,7 @@ void Thing::init(Levelp level, const std::string &name, const point born)
   //
   // Auto carry of weapons?
   //
-  if (is_weapon_wielder()) {
+  if (is_weapon_equiper()) {
     if (is_carrier_of_treasure_class_a()) {
       auto W = level->thing_new(tp_random_weapon_class_a(), mid_at);
       if (W) {

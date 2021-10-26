@@ -151,11 +151,11 @@ bool Thing::carry(Thingp item)
   }
 
   //
-  // If we have no weapon, wield it
+  // If we have no weapon yet, equip it
   //
-  if (is_weapon_wielder()) {
-    if (item->is_weapon() && ! get_weapon_id()) {
-      wield(item);
+  if (is_weapon_equiper()) {
+    if (item->is_weapon() && ! get_equip_id(MONST_EQUIP_WEAPON)) {
+      equip(item, MONST_EQUIP_WEAPON);
     }
   }
 

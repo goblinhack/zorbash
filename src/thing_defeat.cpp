@@ -9,6 +9,7 @@
 #include "my_dmap.h"
 #include "my_game.h"
 #include "my_log.h"
+#include "my_monst.h"
 #include "my_ptrcheck.h"
 #include "my_python.h"
 #include "my_random.h"
@@ -80,9 +81,9 @@ void Thing::defeat(Thingp defeater, const char *reason)
   }
 
   //
-  // Unwield weapons
+  // Unequip weapons
   //
-  unwield("owner is dead");
+  FOR_ALL_EQUIP(e) { unequip("owner is dead", e); }
 
   //
   // If in a bag, get out of there!

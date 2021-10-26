@@ -1589,8 +1589,8 @@ bool Thing::ai_tick(bool recursing)
           //
           Thingp best_weapon;
           get_carried_weapon_highest_value(&best_weapon);
-          if (best_weapon && (best_weapon != weapon_get())) {
-            if (wield(best_weapon)) {
+          if (best_weapon && (best_weapon != equip_get(MONST_EQUIP_WEAPON))) {
+            if (equip(best_weapon, MONST_EQUIP_WEAPON)) {
               AI_LOG("Change weapon", best_weapon);
               if (is_player()) {
                 game->tick_begin("Robot is changing weapon");

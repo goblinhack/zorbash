@@ -316,7 +316,6 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     if (key->scancode == (SDL_Scancode) game->config.key_inventory) {
       CON("PLAYER: Pressed inventory key");
       wid_inventory_init();
-      BOTCON("Left click to move items. Right click to equip.");
       return true;
     }
 

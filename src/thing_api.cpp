@@ -365,10 +365,10 @@ int Thing::gfx_water(void) const
   TRACE_AND_INDENT();
   return (tp()->gfx_water());
 }
-int Thing::gfx_weapon_carry_anim(void) const
+int Thing::gfx_equip_carry_anim(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->gfx_weapon_carry_anim());
+  return (tp()->gfx_equip_carry_anim());
 }
 int Thing::environ_dislikes_acid(void) const
 {
@@ -1495,10 +1495,10 @@ int Thing::is_weapon(void) const
   TRACE_AND_INDENT();
   return (tp()->is_weapon());
 }
-int Thing::is_weapon_wielder(void) const
+int Thing::is_weapon_equiper(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->is_weapon_wielder());
+  return (tp()->is_weapon_equiper());
 }
 int Thing::environ_loves_fire(void) const
 {
@@ -1549,11 +1549,6 @@ int Thing::weapon_damage(void) const
 {
   TRACE_AND_INDENT();
   return (tp()->weapon_damage());
-}
-int Thing::weapon_use_distance(void) const
-{
-  TRACE_AND_INDENT();
-  return (tp()->weapon_use_distance());
 }
 
 int Thing::is_water(void) const
@@ -5150,66 +5145,66 @@ ts_t Thing::incr_ts_fall_end(void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// weapon_id_carry_anim
+// equip_id_carry_anim
 ////////////////////////////////////////////////////////////////////////////
-ThingId Thing::get_weapon_id_carry_anim(void) const
+ThingId Thing::get_equip_id_carry_anim(int equip) const
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
-    return (monst_infop->weapon_id_carry_anim);
+    return (monst_infop->equip_id_carry_anim[ equip ]);
   } else {
     return 0;
   }
 }
 
-ThingId Thing::set_weapon_id_carry_anim(ThingId v)
+ThingId Thing::set_equip_id_carry_anim(ThingId v, int equip)
 {
   TRACE_AND_INDENT();
   new_monst_info();
-  return (monst_infop->weapon_id_carry_anim = v);
+  return (monst_infop->equip_id_carry_anim[ equip ] = v);
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// weapon_id_use_anim
+// equip_id_use_anim
 ////////////////////////////////////////////////////////////////////////////
-ThingId Thing::get_weapon_id_use_anim(void) const
+ThingId Thing::get_equip_id_use_anim(int equip) const
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
-    return (monst_infop->weapon_id_use_anim);
+    return (monst_infop->equip_id_use_anim[ equip ]);
   } else {
     return 0;
   }
 }
 
-ThingId Thing::set_weapon_id_use_anim(ThingId v)
+ThingId Thing::set_equip_id_use_anim(ThingId v, int equip)
 {
   TRACE_AND_INDENT();
   new_monst_info();
-  return (monst_infop->weapon_id_use_anim = v);
+  return (monst_infop->equip_id_use_anim[ equip ] = v);
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// weapon_tp_id
+// equip_tp_id
 ////////////////////////////////////////////////////////////////////////////
-ThingId Thing::get_weapon_id(void) const
+ThingId Thing::get_equip_id(int equip) const
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
-    // con("get weapon %08" PRIx32 "", monst_infop->weapon_id);
-    return (monst_infop->weapon_id);
+    // con("get weapon %08" PRIx32 "", monst_infop->equip_id);
+    return (monst_infop->equip_id[ equip ]);
   } else {
-    // con("get weapon id => none");
+    // con("get equip id => none");
     return 0;
   }
 }
 
-ThingId Thing::set_weapon_id(ThingId v)
+ThingId Thing::set_equip_id(ThingId v, int equip)
 {
   TRACE_AND_INDENT();
   new_monst_info();
   // con("set weapon %08" PRIx32 "", v);
-  return (monst_infop->weapon_id = v);
+  return (monst_infop->equip_id[ equip ] = v);
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -5306,10 +5301,10 @@ int Thing::incr_current_damage(void)
   return (n);
 }
 
-const std::string &Thing::gfx_anim_attack(void) const
+const std::string &Thing::gfx_anim_use(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->gfx_anim_attack());
+  return (tp()->gfx_anim_use());
 }
 const std::string &Thing::laser_name(void) const
 {
@@ -5486,10 +5481,10 @@ const std::string &Thing::text_unused(void) const
   TRACE_AND_INDENT();
   return (tp()->text_unused());
 }
-const std::string &Thing::weapon_carry_anim(void) const
+const std::string &Thing::equip_carry_anim(void) const
 {
   TRACE_AND_INDENT();
-  return (tp()->weapon_carry_anim());
+  return (tp()->equip_carry_anim());
 }
 
 std::array< std::array< ThingId, MAX_BAG_WIDTH >, MAX_BAG_HEIGHT > *Thing::get_bag(void)

@@ -308,7 +308,7 @@ PyObject *thing_is_wand(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_environ_loves_water(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_water(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_weapon(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_weapon_wielder(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_weapon_equiper(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_defeated_by(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_defeated(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_environ_loves_fire(PyObject *obj, PyObject *args, PyObject *keywds);

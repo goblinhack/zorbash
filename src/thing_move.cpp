@@ -348,7 +348,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
       game->tick_begin("player attacked");
     }
 
-    use_weapon(must_attack);
+    equip_use(must_attack, MONST_EQUIP_WEAPON);
     return false;
   }
 
@@ -383,7 +383,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
         if (is_player()) {
           game->tick_begin("player tried to attack");
         }
-        use_weapon(must_attack);
+        equip_use(must_attack, MONST_EQUIP_WEAPON);
       }
       dbg("Move failed");
       lunge(future_pos);

@@ -255,7 +255,7 @@ PyObject *level_is_wand_eater_at(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *level_is_water_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_environ_loves_water_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_weapon_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_weapon_wielder_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_weapon_equiper_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_environ_loves_fire_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_environ_loves_poison_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_environ_loves_spiderwebs_at(PyObject *obj, PyObject *args, PyObject *keywds);
