@@ -289,7 +289,7 @@ public:
   bool can_enchant_something(void);
   bool can_learn_something(void);
   bool cannot_avoid(Thingp attacker);
-  bool carry(Thingp w);
+  bool carry(Thingp w, bool can_equip = true);
   bool change_owner(Thingp new_owner);
   bool check_anything_to_carry(bool auto_collect_allowed);
   bool close_door(Thingp door);

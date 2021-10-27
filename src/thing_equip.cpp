@@ -66,16 +66,16 @@ void Thing::set_equip_carry_anim(Thingp new_equip_carry_anim, int equip)
     }
 
     if (new_equip_carry_anim) {
-      dbg("Change equip carry_anim, %s->%s", old_equip_carry_anim->to_string().c_str(),
+      dbg("Change equip carry-anim, %s->%s", old_equip_carry_anim->to_string().c_str(),
           new_equip_carry_anim->to_string().c_str());
       new_equip_carry_anim->set_owner(this);
     } else {
-      dbg("Remove equip carry_anim, %s", old_equip_carry_anim->to_string().c_str());
+      dbg("Remove equip carry-anim, %s", old_equip_carry_anim->to_string().c_str());
     }
     old_equip_carry_anim->remove_owner();
   } else {
     if (new_equip_carry_anim) {
-      dbg("Set equip carry_anim, %s", new_equip_carry_anim->to_string().c_str());
+      dbg("Set equip carry-anim, %s", new_equip_carry_anim->to_string().c_str());
       new_equip_carry_anim->set_owner(this);
     }
   }
@@ -242,17 +242,24 @@ void Thing::unequip(const char *why, int equip)
     return;
   }
 
-  dbg("Unequiping %08" PRIx32 ", why: %s", get_equip_id(equip).id, why);
-
   auto equip_thing = get_equip(equip);
   if (! equip_thing) {
     dbg("Could not unequip %08" PRIx32 ", why: %s", get_equip_id(equip).id, why);
     return;
   }
 
-  dbg("Unequiping current %s, why: %s", equip_thing->tp()->name().c_str(), why);
+  dbg("Unequiping current %s, why: %s", equip_thing->to_string().c_str(), why);
 
   equip_remove_anim(equip);
+
+  //
+  // Put it back in the bag
+  //
+  if (! is_being_destroyed) {
+    if (! carry(equip_thing, false /* can_equip */)) {
+      drop(equip_thing);
+    }
+  }
 }
 
 void Thing::equip_remove_anim(int equip)
@@ -263,7 +270,7 @@ void Thing::equip_remove_anim(int equip)
     return;
   }
 
-  dbg("Remove anims %s", equip_thing->tp()->name().c_str());
+  dbg("Remove equip animations %s", equip_thing->to_string().c_str());
   TRACE_AND_INDENT();
 
   //
@@ -303,7 +310,7 @@ bool Thing::equip(Thingp equip_thing, int equip)
   auto equip_tp = equip_thing->tp();
 
   if (get_equip(equip) == equip_thing) {
-    dbg("Re-equiping: %s", equip_tp->name().c_str());
+    dbg("Re-equiping: %s", equip_thing->to_string().c_str());
     //
     // Do not return here. We need to set the carry-anim post swing
     //
@@ -311,12 +318,18 @@ bool Thing::equip(Thingp equip_thing, int equip)
     return false;
   }
 
-  dbg("Is equiping: %s", equip_tp->name().c_str());
+  dbg("Is equiping: %s", equip_thing->to_string().c_str());
+
+  //
+  // Remove from the bag first so we can swap the current equipped thing.
+  //
+  bag_remove(equip_thing);
+
   unequip("equip new", equip);
 
   auto carry_anim_as = equip_tp->equip_carry_anim();
   if (carry_anim_as == "") {
-    err("Could not equip %s", equip_tp->name().c_str());
+    err("Could not equip %s", equip_thing->to_string().c_str());
     return false;
   }
 
@@ -644,7 +657,8 @@ bool Thing::equip_use(bool forced, int equip)
 
     used_as = equip_tp->gfx_anim_use();
     if (used_as == "") {
-      die("Could not use %s/%08" PRIx32 " has no 'use' animation frame", equip_tp->name().c_str(), equip_thing->id.id);
+      die("Could not use %s/%08" PRIx32 " has no 'use' animation frame", equip_thing->to_string().c_str(),
+          equip_thing->id.id);
       return false;
     }
 

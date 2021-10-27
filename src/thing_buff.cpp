@@ -20,6 +20,7 @@ bool Thing::buff_add(Thingp what)
   TRACE_AND_INDENT();
   dbg("Try to add buff %s", what->to_string().c_str());
   TRACE_AND_INDENT();
+
   if (! monst_infop) {
     dbg("No; not a monst");
     return false;
@@ -29,7 +30,7 @@ bool Thing::buff_add(Thingp what)
   if (existing_owner) {
     if (existing_owner == this) {
       dbg("No; same owner");
-      return false;
+      return true;
     }
     existing_owner->drop(what);
   }
@@ -37,7 +38,7 @@ bool Thing::buff_add(Thingp what)
   for (const auto &item : monst_infop->buffs) {
     if (item == what->id) {
       dbg("No; already carried");
-      return false;
+      return true;
     }
   }
 

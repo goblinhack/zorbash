@@ -12,11 +12,16 @@
 #include "my_thing.h"
 #include "my_wid_inventory.h"
 
-bool Thing::carry(Thingp item)
+bool Thing::carry(Thingp item, bool can_equip)
 {
   TRACE_AND_INDENT();
   if (! item) {
     err("No thing to carry");
+    return false;
+  }
+
+  if (is_being_destroyed) {
+    err("No thing is being destroyed");
     return false;
   }
 
@@ -73,18 +78,24 @@ bool Thing::carry(Thingp item)
   //
   // If we have no weapon yet, equip it
   //
-  if (is_weapon_equiper() && item->is_auto_equipped() && item->is_weapon() && ! get_equip_id(MONST_EQUIP_WEAPON)) {
+  bool equipped = false;
+  if (can_equip && is_weapon_equiper() && item->is_auto_equipped() && item->is_weapon() &&
+      ! get_equip_id(MONST_EQUIP_WEAPON)) {
     if (equip(item, MONST_EQUIP_WEAPON)) {
       if (is_player()) {
         if (! level->is_starting) {
           TOPCON("You equip %s.", item->text_the().c_str());
         }
       }
-      return true;
+      equipped = true;
     }
   }
 
-  if (is_monst()) {
+  if (equipped) {
+    //
+    // Continue
+    //
+  } else if (is_monst()) {
     //
     // Always carry
     //
@@ -100,7 +111,8 @@ bool Thing::carry(Thingp item)
     //
     dbg("Non item not added to bag");
   } else if (bag_add(item)) {
-    dbg("Added to bag at %d,%d", item->monst_infop->bag_position.x, item->monst_infop->bag_position.y);
+    dbg("Added %s to bag at %d,%d", item->to_string().c_str(), item->monst_infop->bag_position.x,
+        item->monst_infop->bag_position.y);
   } else {
     dbg("No; cannot store in a bag");
     set_where_i_failed_to_collect_last(item->mid_at);

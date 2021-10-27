@@ -251,7 +251,7 @@ bool Thing::bag_remove_at(Thingp item, point pos)
       if (! logged && bag_debug) {
         if (get(bag, x, y) == item->id) {
           logged = true;
-          dbg3("Bag: Remove %s at %d,%d", item->to_string().c_str(), x, y);
+          dbg3("Bag: remove %s at %d,%d", item->to_string().c_str(), x, y);
         }
       }
       set(bag, x, y, NoThingId);
@@ -419,7 +419,7 @@ bool Thing::bag_remove(Thingp item)
   }
 
   if (bag_debug) {
-    dbg3("Bag: Remove %s", item->to_string().c_str());
+    dbg3("Bag: remove %s", item->to_string().c_str());
   }
 
   bool found = false;
@@ -434,6 +434,12 @@ bool Thing::bag_remove(Thingp item)
         found = true;
       }
     }
+  }
+
+  if (found && bag_debug) {
+    dbg3("Bag: removed %s", item->to_string().c_str());
+  } else {
+    dbg3("Bag: failed to remove %s", item->to_string().c_str());
   }
 
   return found;

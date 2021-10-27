@@ -19,6 +19,15 @@
 int Thing::worth_collecting(Thingp item, Thingp *would_need_to_drop)
 {
   //
+  // If not the robot then we always give the option to collect.
+  //
+  if (is_player()) {
+    if (! game->robot_mode) {
+      return 1;
+    }
+  }
+
+  //
   // Don't try to pick up goblins carrying gold
   //
   if (! item->is_collectable()) {

@@ -198,9 +198,17 @@ uint8_t wid_in_transit_item_place(Widp w, int32_t x, int32_t y, uint32_t button)
       if (! what->is_weapon()) {
         TOPCON("Cannot equip %s as a weapon.", what->text_the().c_str());
       }
+
+      //
+      // Equip the new item
+      //
       player->log("Use %s", what->to_string().c_str());
       player->use(what);
-      break;
+
+      wid_destroy(&game->in_transit_item);
+      wid_inventory_init();
+      game->request_remake_rightbar = true;
+      return true;
     }
   }
 
