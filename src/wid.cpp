@@ -6361,6 +6361,13 @@ void wid_tick_all(void)
   }
 
   //
+  // If the console is visible, don't create any new windows
+  //
+  if (wid_console_window && wid_console_window->visible) {
+    return;
+  }
+
+  //
   // If we need to destroy the thing indo, do so
   //
   if (game->request_destroy_thing_info) {

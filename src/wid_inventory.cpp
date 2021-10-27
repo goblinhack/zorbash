@@ -599,7 +599,8 @@ static uint8_t wid_slot_item_mouse_up(Widp w, int32_t x, int32_t y, uint32_t but
 bool wid_inventory_create(Thingp selected, Thingp over)
 {
   TRACE_AND_INDENT();
-  DBG3("Create inventory");
+  TOPCON("Create inventory");
+  traceback_dump();
 
   auto level = game->level;
   if (! level) {
@@ -892,7 +893,6 @@ bool wid_inventory_create(Thingp selected, Thingp over)
     wid_set_bg_tilename(w, "equip_helmet");
     // wid_set_fg_tilename(w, "bag_large");
     wid_set_style(w, UI_WID_STYLE_GRAY);
-    wid_set_do_not_lower(w, true);
     // wid_set_on_mouse_over_begin(w, wid_inventory_mouse_over_tab_bag2);
   }
 
@@ -909,7 +909,6 @@ bool wid_inventory_create(Thingp selected, Thingp over)
     wid_set_bg_tilename(w, "equip_gauntlet");
     // wid_set_fg_tilename(w, "bag_large");
     wid_set_style(w, UI_WID_STYLE_GRAY);
-    wid_set_do_not_lower(w, true);
     // wid_set_on_mouse_over_begin(w, wid_inventory_mouse_over_tab_bag2);
   }
 
@@ -924,7 +923,6 @@ bool wid_inventory_create(Thingp selected, Thingp over)
     wid_set_bg_tilename(w, "equip_amulet");
     // wid_set_fg_tilename(w, "bag_large");
     wid_set_style(w, UI_WID_STYLE_GRAY);
-    wid_set_do_not_lower(w, true);
     // wid_set_on_mouse_over_begin(w, wid_inventory_mouse_over_tab_bag2);
   }
 
@@ -939,7 +937,6 @@ bool wid_inventory_create(Thingp selected, Thingp over)
     wid_set_bg_tilename(w, "equip_cloak");
     // wid_set_fg_tilename(w, "bag_large");
     wid_set_style(w, UI_WID_STYLE_GRAY);
-    wid_set_do_not_lower(w, true);
     // wid_set_on_mouse_over_begin(w, wid_inventory_mouse_over_tab_bag2);
   }
 
@@ -956,7 +953,6 @@ bool wid_inventory_create(Thingp selected, Thingp over)
     wid_set_bg_tilename(w, "equip_shield");
     // wid_set_fg_tilename(w, "bag_large");
     wid_set_style(w, UI_WID_STYLE_GRAY);
-    wid_set_do_not_lower(w, true);
     // wid_set_on_mouse_over_begin(w, wid_inventory_mouse_over_tab_bag2);
   }
 
@@ -971,7 +967,6 @@ bool wid_inventory_create(Thingp selected, Thingp over)
     wid_set_bg_tilename(w, "equip_armor");
     // wid_set_fg_tilename(w, "bag_large");
     wid_set_style(w, UI_WID_STYLE_GRAY);
-    wid_set_do_not_lower(w, true);
     // wid_set_on_mouse_over_begin(w, wid_inventory_mouse_over_tab_bag2);
   }
 
@@ -985,14 +980,15 @@ bool wid_inventory_create(Thingp selected, Thingp over)
     wid_set_pos(w, tl, br);
     auto t = player->equip_get(MONST_EQUIP_WEAPON);
     if (t) {
+      wid_set_thing_id_context(w, t->id);
       wid_set_bg_tile(w, t);
       wid_set_style(w, UI_WID_STYLE_HIGHLIGHTED);
+      wid_set_on_mouse_over_begin(w, wid_bag_item_mouse_over_begin);
+      wid_set_on_mouse_over_end(w, wid_bag_item_mouse_over_end);
     } else {
       wid_set_bg_tilename(w, "equip_weapon");
       wid_set_style(w, UI_WID_STYLE_DARK);
     }
-    wid_set_do_not_lower(w, true);
-    // wid_set_on_mouse_over_begin(w, wid_inventory_mouse_over_tab_bag2);
   }
 
   y_at += 7;
@@ -1008,7 +1004,6 @@ bool wid_inventory_create(Thingp selected, Thingp over)
     wid_set_bg_tilename(w, "equip_ring");
     // wid_set_fg_tilename(w, "bag_large");
     wid_set_style(w, UI_WID_STYLE_GRAY);
-    wid_set_do_not_lower(w, true);
     // wid_set_on_mouse_over_begin(w, wid_inventory_mouse_over_tab_bag2);
   }
 
@@ -1023,7 +1018,6 @@ bool wid_inventory_create(Thingp selected, Thingp over)
     wid_set_bg_tilename(w, "equip_boots");
     // wid_set_fg_tilename(w, "bag_large");
     wid_set_style(w, UI_WID_STYLE_GRAY);
-    wid_set_do_not_lower(w, true);
     // wid_set_on_mouse_over_begin(w, wid_inventory_mouse_over_tab_bag2);
   }
 
@@ -1038,7 +1032,6 @@ bool wid_inventory_create(Thingp selected, Thingp over)
     wid_set_bg_tilename(w, "equip_ring");
     // wid_set_fg_tilename(w, "bag_large");
     wid_set_style(w, UI_WID_STYLE_GRAY);
-    wid_set_do_not_lower(w, true);
     // wid_set_on_mouse_over_begin(w, wid_inventory_mouse_over_tab_bag2);
   }
 

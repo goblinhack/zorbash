@@ -30,8 +30,6 @@
 
 static uint8_t wid_bag_item_mouse_up(Widp w, int32_t x, int32_t y, uint32_t button);
 static uint8_t wid_bag_item_mouse_held(Widp w, int32_t x, int32_t y, uint32_t button);
-static void    wid_bag_item_mouse_over_begin(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely);
-static void    wid_bag_item_mouse_over_end(Widp w);
 static uint8_t wid_bag_item_key_down(Widp w, const struct SDL_Keysym *key);
 static void    wid_bag_tick(Widp w);
 
@@ -417,7 +415,7 @@ bool Game::wid_bag_move_item(Thingp t)
   return true;
 }
 
-static void wid_bag_item_mouse_over_begin(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+void wid_bag_item_mouse_over_begin(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {
   if (game->in_transit_item) {
     return;
@@ -446,7 +444,7 @@ static void wid_bag_item_mouse_over_begin(Widp w, int32_t relx, int32_t rely, in
   wid_inventory_over_requested(t);
 }
 
-static void wid_bag_item_mouse_over_end(Widp w)
+void wid_bag_item_mouse_over_end(Widp w)
 {
   if (game->in_transit_item) {
     return;
