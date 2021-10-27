@@ -19,19 +19,19 @@
 ///////////////////////////////////////////////////////////////////////////
 // melee
 ///////////////////////////////////////////////////////////////////////////
-const Dice &Thing::get_damage_melee_dice(void) const
+const Dice &Thing::get_damage_melee_dice(void)
 {
   TRACE_AND_INDENT();
   return (tp()->get_damage_melee_dice());
 }
 
-const std::string &Thing::get_damage_melee_dice_str(void) const
+const std::string &Thing::get_damage_melee_dice_str(void)
 {
   TRACE_AND_INDENT();
   return (tp()->get_damage_melee_dice_str());
 }
 
-int Thing::get_damage_melee(void) const
+int Thing::get_damage_melee(void)
 {
   TRACE_AND_INDENT();
   auto roll = tp()->get_damage_melee_dice().roll();
@@ -44,19 +44,19 @@ int Thing::get_damage_melee(void) const
 ///////////////////////////////////////////////////////////////////////////
 // poison
 ///////////////////////////////////////////////////////////////////////////
-const Dice &Thing::get_damage_poison_dice(void) const
+const Dice &Thing::get_damage_poison_dice(void)
 {
   TRACE_AND_INDENT();
   return (tp()->get_damage_poison_dice());
 }
 
-const std::string &Thing::get_damage_poison_dice_str(void) const
+const std::string &Thing::get_damage_poison_dice_str(void)
 {
   TRACE_AND_INDENT();
   return (tp()->get_damage_poison_dice_str());
 }
 
-int Thing::get_damage_poison(void) const
+int Thing::get_damage_poison(void)
 {
   TRACE_AND_INDENT();
   auto roll = tp()->get_damage_poison_dice().roll();
@@ -69,19 +69,19 @@ int Thing::get_damage_poison(void) const
 ///////////////////////////////////////////////////////////////////////////
 // crush
 ///////////////////////////////////////////////////////////////////////////
-const Dice &Thing::get_damage_crush_dice(void) const
+const Dice &Thing::get_damage_crush_dice(void)
 {
   TRACE_AND_INDENT();
   return (tp()->get_damage_crush_dice());
 }
 
-const std::string &Thing::get_damage_crush_dice_str(void) const
+const std::string &Thing::get_damage_crush_dice_str(void)
 {
   TRACE_AND_INDENT();
   return (tp()->get_damage_crush_dice_str());
 }
 
-int Thing::get_damage_crush(void) const
+int Thing::get_damage_crush(void)
 {
   TRACE_AND_INDENT();
   auto roll = tp()->get_damage_crush_dice().roll();
@@ -94,19 +94,19 @@ int Thing::get_damage_crush(void) const
 ///////////////////////////////////////////////////////////////////////////
 // bite
 ///////////////////////////////////////////////////////////////////////////
-const Dice &Thing::get_damage_bite_dice(void) const
+const Dice &Thing::get_damage_bite_dice(void)
 {
   TRACE_AND_INDENT();
   return (tp()->get_damage_bite_dice());
 }
 
-const std::string &Thing::get_damage_bite_dice_str(void) const
+const std::string &Thing::get_damage_bite_dice_str(void)
 {
   TRACE_AND_INDENT();
   return (tp()->get_damage_bite_dice_str());
 }
 
-int Thing::get_damage_bite(void) const
+int Thing::get_damage_bite(void)
 {
   TRACE_AND_INDENT();
   auto roll = tp()->get_damage_bite_dice().roll();
@@ -119,19 +119,19 @@ int Thing::get_damage_bite(void) const
 ///////////////////////////////////////////////////////////////////////////
 // swallow
 ///////////////////////////////////////////////////////////////////////////
-const Dice &Thing::get_damage_swallow_dice(void) const
+const Dice &Thing::get_damage_swallow_dice(void)
 {
   TRACE_AND_INDENT();
   return (tp()->get_damage_swallow_dice());
 }
 
-const std::string &Thing::get_damage_swallow_dice_str(void) const
+const std::string &Thing::get_damage_swallow_dice_str(void)
 {
   TRACE_AND_INDENT();
   return (tp()->get_damage_swallow_dice_str());
 }
 
-int Thing::get_damage_swallow(void) const
+int Thing::get_damage_swallow(void)
 {
   TRACE_AND_INDENT();
   auto roll = tp()->get_damage_swallow_dice().roll();

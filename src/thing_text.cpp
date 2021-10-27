@@ -15,7 +15,7 @@
 #include "my_thing.h"
 #include "my_thing_template.h"
 
-std::string Thing::text_a_or_an(void) const
+std::string Thing::text_a_or_an(void)
 {
   TRACE_AND_INDENT();
   auto tpp = tp();
@@ -45,7 +45,7 @@ std::string Thing::text_a_or_an(void) const
   return (out);
 }
 
-std::string Thing::text_the(void) const
+std::string Thing::text_the(void)
 {
   TRACE_AND_INDENT();
   auto tpp = tp();
@@ -70,7 +70,7 @@ std::string Thing::text_the(void) const
   return (out);
 }
 
-std::string Thing::text_The(void) const
+std::string Thing::text_The(void)
 {
   TRACE_AND_INDENT();
   auto out = text_the();
@@ -78,7 +78,7 @@ std::string Thing::text_The(void) const
   return (out);
 }
 
-std::string Thing::short_text_a_or_an(void) const
+std::string Thing::short_text_a_or_an(void)
 {
   TRACE_AND_INDENT();
   auto tpp = tp();
@@ -108,7 +108,7 @@ std::string Thing::short_text_a_or_an(void) const
   return (out);
 }
 
-std::string Thing::short_text_the(void) const
+std::string Thing::short_text_the(void)
 {
   TRACE_AND_INDENT();
   auto tpp = tp();
@@ -133,7 +133,7 @@ std::string Thing::short_text_the(void) const
   return (out);
 }
 
-std::string Thing::short_text_The(void) const
+std::string Thing::short_text_The(void)
 {
   TRACE_AND_INDENT();
   auto out = short_text_the();
@@ -144,7 +144,7 @@ std::string Thing::short_text_The(void) const
 //
 // foo bar -> Foo Bar
 //
-std::string Thing::short_text_capitalized(void) const
+std::string Thing::short_text_capitalized(void)
 {
   TRACE_AND_INDENT();
   std::string out        = tp()->text_name();
@@ -172,7 +172,7 @@ std::string Thing::short_text_capitalized(void) const
   return out;
 }
 
-void Thing::show_botcon_description(void) const
+void Thing::show_botcon_description(void)
 {
   TRACE_AND_INDENT();
   auto text = text_description();

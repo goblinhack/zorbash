@@ -26,7 +26,7 @@ void Thing::dir_set_none(void)
   }
 }
 
-uint8_t Thing::is_dir_none(void) const
+uint8_t Thing::is_dir_none(void)
 {
   TRACE_AND_INDENT();
   return (dir == THING_DIR_NONE);
@@ -45,7 +45,7 @@ void Thing::dir_set_down(void)
   }
 }
 
-uint8_t Thing::is_dir_down(void) const
+uint8_t Thing::is_dir_down(void)
 {
   TRACE_AND_INDENT();
   return (dir == THING_DIR_DOWN);
@@ -64,7 +64,7 @@ void Thing::dir_set_up(void)
   }
 }
 
-uint8_t Thing::is_dir_up(void) const
+uint8_t Thing::is_dir_up(void)
 {
   TRACE_AND_INDENT();
   return (dir == THING_DIR_UP);
@@ -83,7 +83,7 @@ void Thing::dir_set_left(void)
   }
 }
 
-uint8_t Thing::is_dir_left(void) const
+uint8_t Thing::is_dir_left(void)
 {
   TRACE_AND_INDENT();
   return (dir == THING_DIR_LEFT);
@@ -102,7 +102,7 @@ void Thing::dir_set_right(void)
   }
 }
 
-uint8_t Thing::is_dir_right(void) const
+uint8_t Thing::is_dir_right(void)
 {
   TRACE_AND_INDENT();
   return (dir == THING_DIR_RIGHT);
@@ -121,7 +121,7 @@ void Thing::dir_set_tl(void)
   }
 }
 
-uint8_t Thing::is_dir_tl(void) const
+uint8_t Thing::is_dir_tl(void)
 {
   TRACE_AND_INDENT();
   return (dir == THING_DIR_TL);
@@ -140,7 +140,7 @@ void Thing::dir_set_bl(void)
   }
 }
 
-uint8_t Thing::is_dir_bl(void) const
+uint8_t Thing::is_dir_bl(void)
 {
   TRACE_AND_INDENT();
   return (dir == THING_DIR_BL);
@@ -159,7 +159,7 @@ void Thing::dir_set_tr(void)
   }
 }
 
-uint8_t Thing::is_dir_tr(void) const
+uint8_t Thing::is_dir_tr(void)
 {
   TRACE_AND_INDENT();
   return (dir == THING_DIR_TR);
@@ -178,7 +178,7 @@ void Thing::dir_set_br(void)
   }
 }
 
-uint8_t Thing::is_dir_br(void) const
+uint8_t Thing::is_dir_br(void)
 {
   TRACE_AND_INDENT();
   return (dir == THING_DIR_BR);

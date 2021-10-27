@@ -155,17 +155,11 @@ bool Thing::drop_into_ether(Thingp what)
     return false;
   }
 
-  Thingp top_owner;
-  if (is_player()) {
-    top_owner = this;
-  } else {
-    top_owner = get_top_owner();
-  }
-
+  Thingp top_owner = get_top_owner();
   if (top_owner) {
     FOR_ALL_EQUIP(e)
     {
-      if (what == top_owner->equip_get(e)) {
+      if (what == top_owner->get_equip(e)) {
         top_owner->unequip("moved into ether", e);
       }
     }

@@ -175,7 +175,7 @@ PyObject *level_unused_flag29_at(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *level_unused_flag2_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag30_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag31_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag32_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_auto_equipped_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_buff_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_debuff_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_attack_undead_at(PyObject *obj, PyObject *args, PyObject *keywds);

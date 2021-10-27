@@ -307,7 +307,7 @@ do
       set_unused_flag3 \
       set_unused_flag30 \
       set_unused_flag31 \
-      set_unused_flag32 \
+      set_is_auto_equipped \
       set_is_buff \
       set_is_debuff \
       set_attack_undead \

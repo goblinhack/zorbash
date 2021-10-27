@@ -12,7 +12,7 @@
 #include "my_sys.h"
 #include "my_thing.h"
 
-Thingp Thing::get_top_spawned_owner(void) const
+Thingp Thing::get_top_spawned_owner(void)
 {
   TRACE_AND_INDENT();
   auto id = get_immediate_spawned_owner_id();
@@ -30,7 +30,7 @@ Thingp Thing::get_top_spawned_owner(void) const
   }
 }
 
-Thingp Thing::get_immediate_spawned_owner(void) const
+Thingp Thing::get_immediate_spawned_owner(void)
 {
   TRACE_AND_INDENT();
   auto id = get_immediate_spawned_owner_id();

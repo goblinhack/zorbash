@@ -504,7 +504,7 @@ bool Thing::attack(Thingp it)
     //
     // Player always uses their weapon
     //
-    if (equip_get(MONST_EQUIP_WEAPON)) {
+    if (get_equip(MONST_EQUIP_WEAPON)) {
       auto delta = it->mid_at - mid_at;
       move_set_dir_from_delta(delta);
       equip_use_may_attack(MONST_EQUIP_WEAPON);
@@ -515,7 +515,7 @@ bool Thing::attack(Thingp it)
     // Don't swing weapons at pools of blood.
     //
     if (it->is_alive_monst() || it->is_door() || it->is_player() || it->is_minion_generator()) {
-      if (equip_get(MONST_EQUIP_WEAPON)) {
+      if (get_equip(MONST_EQUIP_WEAPON)) {
         auto delta = it->mid_at - mid_at;
         move_set_dir_from_delta(delta);
         equip_use_may_attack(MONST_EQUIP_WEAPON);

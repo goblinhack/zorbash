@@ -13,9 +13,17 @@
 #include "my_sys.h"
 #include "my_thing.h"
 
-Thingp Thing::get_top_owner(void) const
+Thingp Thing::get_top_owner(void)
 {
   TRACE_AND_INDENT();
+
+  //
+  // Things own themselves
+  //
+  if (is_player() || is_monst()) {
+    return nullptr;
+  }
+
   auto id = get_immediate_owner_id();
   if (likely(id.ok())) {
     auto i = level->thing_find(id);
@@ -31,9 +39,17 @@ Thingp Thing::get_top_owner(void) const
   }
 }
 
-Thingp Thing::get_immediate_owner(void) const
+Thingp Thing::get_immediate_owner(void)
 {
   TRACE_AND_INDENT();
+
+  //
+  // Things own themselves
+  //
+  if (is_player() || is_monst()) {
+    return nullptr;
+  }
+
   auto id = get_immediate_owner_id();
   if (likely(id.ok())) {
     auto i = level->thing_find(id);

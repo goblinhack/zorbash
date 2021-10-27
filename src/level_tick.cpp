@@ -323,7 +323,7 @@ bool Level::tick(void)
     //
     FOR_ALL_EQUIP(e)
     {
-      auto o = t->equip_get_carry_anim(e);
+      auto o = t->get_equip_carry_anim(e);
       if (o) {
         o->update_interpolated_position();
         o->get_fall();

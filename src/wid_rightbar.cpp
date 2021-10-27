@@ -398,7 +398,7 @@ static bool wid_rightbar_create(void)
         //
         // Print highlighted weapon
         //
-        auto weapon = player->equip_get(MONST_EQUIP_WEAPON);
+        auto weapon = player->get_equip(MONST_EQUIP_WEAPON);
         if (weapon) {
           auto equip_tp_id = weapon->tp()->id;
           auto tp_id       = monst_infop->inventory_id[ i ];

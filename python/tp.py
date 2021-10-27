@@ -331,8 +331,8 @@ class Tp:
     def set_unused_flag31(self, value):
         zx.tp_set_unused_flag31(self, value)
 
-    def set_unused_flag32(self, value):
-        zx.tp_set_unused_flag32(self, value)
+    def set_is_auto_equipped(self, value):
+        zx.tp_set_is_auto_equipped(self, value)
 
     def set_is_buff(self, value):
         zx.tp_set_is_buff(self, value)

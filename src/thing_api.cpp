@@ -19,1539 +19,1539 @@
 //
 // Dice
 //
-const Dice &Thing::get_on_idle_dice(void) const
+const Dice &Thing::get_on_idle_dice(void)
 {
   TRACE_AND_INDENT();
   return (tp()->on_idle_dice());
 }
-const std::string &Thing::get_on_idle_dice_str(void) const
+const std::string &Thing::get_on_idle_dice_str(void)
 {
   TRACE_AND_INDENT();
   return (tp()->on_idle_dice_str());
 }
-int Thing::get_idle_tick(void) const
+int Thing::get_idle_tick(void)
 {
   TRACE_AND_INDENT();
   return (tp()->on_idle_dice().roll());
 }
 
-const Dice &Thing::get_nutrition_dice(void) const
+const Dice &Thing::get_nutrition_dice(void)
 {
   TRACE_AND_INDENT();
   return (tp()->nutrition_dice());
 }
-const std::string &Thing::get_nutrition_dice_str(void) const
+const std::string &Thing::get_nutrition_dice_str(void)
 {
   TRACE_AND_INDENT();
   return (tp()->nutrition_dice_str());
 }
-int Thing::get_nutrition(void) const
+int Thing::get_nutrition(void)
 {
   TRACE_AND_INDENT();
   return (tp()->nutrition_dice().roll());
 }
 
-const Dice &Thing::get_health_initial_dice(void) const
+const Dice &Thing::get_health_initial_dice(void)
 {
   TRACE_AND_INDENT();
   return (tp()->get_health_initial_dice());
 }
-const std::string &Thing::get_health_initial_dice_str(void) const
+const std::string &Thing::get_health_initial_dice_str(void)
 {
   TRACE_AND_INDENT();
   return (tp()->get_health_initial_dice_str());
 }
-int Thing::get_health_initial(void) const
+int Thing::get_health_initial(void)
 {
   TRACE_AND_INDENT();
   return (tp()->get_health_initial_dice().roll());
 }
 
-const Dice &Thing::get_gold_value_dice(void) const
+const Dice &Thing::get_gold_value_dice(void)
 {
   TRACE_AND_INDENT();
   return (tp()->gold_value_dice());
 }
-const std::string &Thing::get_gold_value_dice_str(void) const
+const std::string &Thing::get_gold_value_dice_str(void)
 {
   TRACE_AND_INDENT();
   return (tp()->gold_value_dice_str());
 }
-int Thing::get_gold_value(void) const
+int Thing::get_gold_value(void)
 {
   TRACE_AND_INDENT();
   return (tp()->gold_value_dice().roll());
 }
 
-const Dice &Thing::get_lifespan_dice(void) const
+const Dice &Thing::get_lifespan_dice(void)
 {
   TRACE_AND_INDENT();
   return (tp()->lifespan_dice());
 }
-const std::string &Thing::get_lifespan_dice_str(void) const
+const std::string &Thing::get_lifespan_dice_str(void)
 {
   TRACE_AND_INDENT();
   return (tp()->lifespan_dice_str());
 }
-int Thing::get_lifespan_initial(void) const
+int Thing::get_lifespan_initial(void)
 {
   TRACE_AND_INDENT();
   return (tp()->lifespan_dice().roll());
 }
 
-const Dice &Thing::get_resurrect_dice(void) const
+const Dice &Thing::get_resurrect_dice(void)
 {
   TRACE_AND_INDENT();
   return (tp()->resurrect_dice());
 }
-const std::string &Thing::get_resurrect_dice_str(void) const
+const std::string &Thing::get_resurrect_dice_str(void)
 {
   TRACE_AND_INDENT();
   return (tp()->resurrect_dice_str());
 }
-int Thing::get_resurrect(void) const
+int Thing::get_resurrect(void)
 {
   TRACE_AND_INDENT();
   return (tp()->resurrect_dice().roll());
 }
 
-int Thing::ai_avoid_distance(void) const
+int Thing::ai_avoid_distance(void)
 {
   TRACE_AND_INDENT();
   return (tp()->ai_avoid_distance());
 }
-int Thing::ai_resent_count(void) const
+int Thing::ai_resent_count(void)
 {
   TRACE_AND_INDENT();
   return (tp()->ai_resent_count());
 }
-int Thing::ai_obstacle(void) const
+int Thing::ai_obstacle(void)
 {
   TRACE_AND_INDENT();
   return (tp()->ai_obstacle());
 }
-int Thing::ai_scent_distance(void) const
+int Thing::ai_scent_distance(void)
 {
   TRACE_AND_INDENT();
   return (tp()->ai_scent_distance());
 }
-int Thing::ai_vision_distance(void) const
+int Thing::ai_vision_distance(void)
 {
   TRACE_AND_INDENT();
   return (tp()->ai_vision_distance());
 }
-int Thing::attack_eater(void) const
+int Thing::attack_eater(void)
 {
   TRACE_AND_INDENT();
   return (tp()->attack_eater());
 }
-int Thing::attack_humanoid(void) const
+int Thing::attack_humanoid(void)
 {
   TRACE_AND_INDENT();
   return (tp()->attack_humanoid());
 }
-int Thing::attack_living(void) const
+int Thing::attack_living(void)
 {
   TRACE_AND_INDENT();
   return (tp()->attack_living());
 }
-int Thing::attack_lunge(void) const
+int Thing::attack_lunge(void)
 {
   TRACE_AND_INDENT();
   return (tp()->attack_lunge());
 }
-int Thing::attack_meat(void) const
+int Thing::attack_meat(void)
 {
   TRACE_AND_INDENT();
   return (tp()->attack_meat());
 }
-int Thing::ai_shove_chance_d1000(void) const
+int Thing::ai_shove_chance_d1000(void)
 {
   TRACE_AND_INDENT();
   return (tp()->ai_shove_chance_d1000());
 }
-int Thing::ai_unprovoked_attack_chance_d1000(void) const
+int Thing::ai_unprovoked_attack_chance_d1000(void)
 {
   TRACE_AND_INDENT();
   return (tp()->ai_unprovoked_attack_chance_d1000());
 }
-int Thing::ai_is_able_to_shove(void) const
+int Thing::ai_is_able_to_shove(void)
 {
   TRACE_AND_INDENT();
   return (tp()->ai_is_able_to_shove());
 }
-int Thing::blast_max_radius(void) const
+int Thing::blast_max_radius(void)
 {
   TRACE_AND_INDENT();
   return (tp()->blast_max_radius());
 }
-int Thing::blast_min_radius(void) const
+int Thing::blast_min_radius(void)
 {
   TRACE_AND_INDENT();
   return (tp()->blast_min_radius());
 }
-int Thing::collision_attack(void) const
+int Thing::collision_attack(void)
 {
   TRACE_AND_INDENT();
   return (tp()->collision_attack());
 }
-int Thing::collision_box(void) const
+int Thing::collision_box(void)
 {
   TRACE_AND_INDENT();
   return (tp()->collision_box());
 }
-int Thing::collision_check(void) const
+int Thing::collision_check(void)
 {
   TRACE_AND_INDENT();
   return (tp()->collision_check());
 }
-int Thing::collision_circle(void) const
+int Thing::collision_circle(void)
 {
   TRACE_AND_INDENT();
   return (tp()->collision_circle());
 }
-int Thing::collision_hit_priority(void) const
+int Thing::collision_hit_priority(void)
 {
   TRACE_AND_INDENT();
   return (tp()->collision_hit_priority());
 }
-int Thing::environ_damage_doubled_from_acid(void) const
+int Thing::environ_damage_doubled_from_acid(void)
 {
   TRACE_AND_INDENT();
   return (tp()->environ_damage_doubled_from_acid());
 }
-int Thing::environ_damage_doubled_from_fire(void) const
+int Thing::environ_damage_doubled_from_fire(void)
 {
   TRACE_AND_INDENT();
   return (tp()->environ_damage_doubled_from_fire());
 }
-int Thing::environ_damage_doubled_from_poison(void) const
+int Thing::environ_damage_doubled_from_poison(void)
 {
   TRACE_AND_INDENT();
   return (tp()->environ_damage_doubled_from_poison());
 }
-int Thing::environ_damage_doubled_from_water(void) const
+int Thing::environ_damage_doubled_from_water(void)
 {
   TRACE_AND_INDENT();
   return (tp()->environ_damage_doubled_from_water());
 }
-int Thing::defence(void) const
+int Thing::defence(void)
 {
   TRACE_AND_INDENT();
   return (tp()->stat_defence());
 }
-int Thing::enchant_level(void) const
+int Thing::enchant_level(void)
 {
   TRACE_AND_INDENT();
   return (tp()->enchant_level());
 }
-int Thing::enchant_max(void) const
+int Thing::enchant_max(void)
 {
   TRACE_AND_INDENT();
   return (tp()->enchant_max());
 }
-int Thing::get_initial_charge_count(void) const
+int Thing::get_initial_charge_count(void)
 {
   TRACE_AND_INDENT();
   return (tp()->charge_count());
 }
-int Thing::gfx_an_animation_only(void) const
+int Thing::gfx_an_animation_only(void)
 {
   TRACE_AND_INDENT();
   return (tp()->gfx_an_animation_only());
 }
-int Thing::gfx_animated_can_hflip(void) const
+int Thing::gfx_animated_can_hflip(void)
 {
   TRACE_AND_INDENT();
   return (tp()->gfx_animated_can_hflip());
 }
-int Thing::gfx_animated_can_vflip(void) const
+int Thing::gfx_animated_can_vflip(void)
 {
   TRACE_AND_INDENT();
   return (tp()->gfx_animated_can_vflip());
 }
-int Thing::gfx_animated_no_dir(void) const
+int Thing::gfx_animated_no_dir(void)
 {
   TRACE_AND_INDENT();
   return (tp()->gfx_animated_no_dir());
 }
-int Thing::gfx_animated(void) const
+int Thing::gfx_animated(void)
 {
   TRACE_AND_INDENT();
   return (tp()->gfx_animated());
 }
-int Thing::gfx_attack_anim(void) const
+int Thing::gfx_attack_anim(void)
 {
   TRACE_AND_INDENT();
   return (tp()->gfx_attack_anim());
 }
-int Thing::gfx_bounce_always(void) const
+int Thing::gfx_bounce_always(void)
 {
   TRACE_AND_INDENT();
   return (tp()->gfx_bounce_always());
 }
-int Thing::gfx_bounce_on_move(void) const
+int Thing::gfx_bounce_on_move(void)
 {
   TRACE_AND_INDENT();
   return (tp()->gfx_bounce_on_move());
 }
-int Thing::gfx_dead_anim(void) const
+int Thing::gfx_dead_anim(void)
 {
   TRACE_AND_INDENT();
   return (tp()->gfx_dead_anim());
 }
-int Thing::gfx_flickers(void) const
+int Thing::gfx_flickers(void)
 {
   TRACE_AND_INDENT();
   return (tp()->gfx_flickers());
 }
-int Thing::gfx_glows(void) const
+int Thing::gfx_glows(void)
 {
   TRACE_AND_INDENT();
   return (tp()->gfx_glows());
 }
-int Thing::gfx_health_bar_autohide(void) const
+int Thing::gfx_health_bar_autohide(void)
 {
   TRACE_AND_INDENT();
   return (tp()->gfx_health_bar_autohide());
 }
-int Thing::gfx_health_bar_shown(void) const
+int Thing::gfx_health_bar_shown(void)
 {
   TRACE_AND_INDENT();
   return (tp()->gfx_health_bar_shown());
 }
-int Thing::gfx_long_shadow_caster(void) const
+int Thing::gfx_long_shadow_caster(void)
 {
   TRACE_AND_INDENT();
   return (tp()->gfx_long_shadow_caster());
 }
-int Thing::gfx_on_fire_anim(void) const
+int Thing::gfx_on_fire_anim(void)
 {
   TRACE_AND_INDENT();
   return (tp()->gfx_on_fire_anim());
 }
-int Thing::gfx_oversized_and_on_floor(void) const
+int Thing::gfx_oversized_and_on_floor(void)
 {
   TRACE_AND_INDENT();
   return (tp()->gfx_oversized_and_on_floor());
 }
-int Thing::gfx_short_shadow_caster(void) const
+int Thing::gfx_short_shadow_caster(void)
 {
   TRACE_AND_INDENT();
   return (tp()->gfx_short_shadow_caster());
 }
-int Thing::gfx_shown_in_bg(void) const
+int Thing::gfx_shown_in_bg(void)
 {
   TRACE_AND_INDENT();
   return (tp()->gfx_shown_in_bg());
 }
-int Thing::gfx_show_outlined(void) const
+int Thing::gfx_show_outlined(void)
 {
   TRACE_AND_INDENT();
   return (tp()->gfx_show_outlined());
 }
-int Thing::gfx_solid_shadow(void) const
+int Thing::gfx_solid_shadow(void)
 {
   TRACE_AND_INDENT();
   return (tp()->gfx_solid_shadow());
 }
-int Thing::gfx_very_short_shadow_caster(void) const
+int Thing::gfx_very_short_shadow_caster(void)
 {
   TRACE_AND_INDENT();
   return (tp()->gfx_very_short_shadow_caster());
 }
-int Thing::gfx_water(void) const
+int Thing::gfx_water(void)
 {
   TRACE_AND_INDENT();
   return (tp()->gfx_water());
 }
-int Thing::gfx_equip_carry_anim(void) const
+int Thing::gfx_equip_carry_anim(void)
 {
   TRACE_AND_INDENT();
   return (tp()->gfx_equip_carry_anim());
 }
-int Thing::environ_dislikes_acid(void) const
+int Thing::environ_dislikes_acid(void)
 {
   TRACE_AND_INDENT();
   return (tp()->environ_dislikes_acid());
 }
-int Thing::environ_dislikes_fire(void) const
+int Thing::environ_dislikes_fire(void)
 {
   TRACE_AND_INDENT();
   return (tp()->environ_dislikes_fire());
 }
-int Thing::environ_dislikes_poison(void) const
+int Thing::environ_dislikes_poison(void)
 {
   TRACE_AND_INDENT();
   return (tp()->environ_dislikes_poison());
 }
-int Thing::environ_dislikes_water(void) const
+int Thing::environ_dislikes_water(void)
 {
   TRACE_AND_INDENT();
   return (tp()->environ_dislikes_water());
 }
-int Thing::health_hunger_pct(void) const
+int Thing::health_hunger_pct(void)
 {
   TRACE_AND_INDENT();
   return (tp()->health_hunger_pct());
 }
-int Thing::health_starving_pct(void) const
+int Thing::health_starving_pct(void)
 {
   TRACE_AND_INDENT();
   return (tp()->health_starving_pct());
 }
-int Thing::is_able_to_change_levels(void) const
+int Thing::is_able_to_change_levels(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_able_to_change_levels());
 }
-int Thing::is_able_to_fall(void) const
+int Thing::is_able_to_fall(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_able_to_fall());
 }
-int Thing::is_able_to_fire_at(void) const
+int Thing::is_able_to_fire_at(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_able_to_fire_at());
 }
-int Thing::ai_is_able_to_see_through_doors(void) const
+int Thing::ai_is_able_to_see_through_doors(void)
 {
   TRACE_AND_INDENT();
   return (tp()->ai_is_able_to_see_through_doors());
 }
-int Thing::ai_is_able_to_walk_through_walls(void) const
+int Thing::ai_is_able_to_walk_through_walls(void)
 {
   TRACE_AND_INDENT();
   return (tp()->ai_is_able_to_walk_through_walls());
 }
-int Thing::environ_loves_acid(void) const
+int Thing::environ_loves_acid(void)
 {
   TRACE_AND_INDENT();
   return (tp()->environ_loves_acid());
 }
-int Thing::is_acid(void) const
+int Thing::is_acid(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_acid());
 }
-int Thing::is_alive_monst(void) const
+int Thing::is_alive_monst(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_monst() && ! is_dead);
 }
-int Thing::is_alive_on_end_of_anim(void) const
+int Thing::is_alive_on_end_of_anim(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_alive_on_end_of_anim());
 }
-int Thing::is_always_hit(void) const
+int Thing::is_always_hit(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_always_hit());
 }
-int Thing::is_ascend_dungeon(void) const
+int Thing::is_ascend_dungeon(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_ascend_dungeon());
 }
-int Thing::is_ascend_sewer(void) const
+int Thing::is_ascend_sewer(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_ascend_sewer());
 }
-int Thing::is_attackable_by_monst(void) const
+int Thing::is_attackable_by_monst(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_attackable_by_monst());
 }
-int Thing::is_attackable_by_player(void) const
+int Thing::is_attackable_by_player(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_attackable_by_player());
 }
-int Thing::is_auto_collect_item(void) const
+int Thing::is_auto_collect_item(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_auto_collect_item());
 }
-int Thing::is_bag_item_container(void) const
+int Thing::is_bag_item_container(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_bag_item_container());
 }
-int Thing::is_bag_item_not_stackable(void) const
+int Thing::is_bag_item_not_stackable(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_bag_item_not_stackable());
 }
-int Thing::is_bag_item(void) const
+int Thing::is_bag_item(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_bag_item());
 }
-int Thing::is_bag(void) const
+int Thing::is_bag(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_bag());
 }
-int Thing::is_barrel(void) const
+int Thing::is_barrel(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_barrel());
 }
-int Thing::is_bleeder(void) const
+int Thing::is_bleeder(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_bleeder());
 }
-int Thing::is_blood_splatter(void) const
+int Thing::is_blood_splatter(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_blood_splatter());
 }
-int Thing::is_blood(void) const
+int Thing::is_blood(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_blood());
 }
-int Thing::is_bones(void) const
+int Thing::is_bones(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_bones());
 }
-int Thing::is_brazier(void) const
+int Thing::is_brazier(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_brazier());
 }
-int Thing::is_bridge(void) const
+int Thing::is_bridge(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_bridge());
 }
-int Thing::is_burnable(void) const
+int Thing::is_burnable(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_burnable());
 }
-int Thing::is_carrier_of_treasure_class_a(void) const
+int Thing::is_carrier_of_treasure_class_a(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_carrier_of_treasure_class_a());
 }
-int Thing::is_carrier_of_treasure_class_b(void) const
+int Thing::is_carrier_of_treasure_class_b(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_carrier_of_treasure_class_b());
 }
-int Thing::is_carrier_of_treasure_class_c(void) const
+int Thing::is_carrier_of_treasure_class_c(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_carrier_of_treasure_class_c());
 }
-int Thing::is_chasm(void) const
+int Thing::is_chasm(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_chasm());
 }
-int Thing::is_collectable(void) const
+int Thing::is_collectable(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_collectable());
 }
-int Thing::is_collect_as_keys(void) const
+int Thing::is_collect_as_keys(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_collect_as_keys());
 }
-int Thing::is_collected_as_gold(void) const
+int Thing::is_collected_as_gold(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_collected_as_gold());
 }
-int Thing::is_combustible(void) const
+int Thing::is_combustible(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_combustible());
 }
-int Thing::is_corpse_on_death(void) const
+int Thing::is_corpse_on_death(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_corpse_on_death());
 }
-int Thing::is_corpse(void) const
+int Thing::is_corpse(void)
 {
   TRACE_AND_INDENT();
   return (is_dead && is_corpse_on_death());
 }
-int Thing::is_corridor(void) const
+int Thing::is_corridor(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_corridor());
 }
-int Thing::is_critical_to_level(void) const
+int Thing::is_critical_to_level(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_critical_to_level());
 }
-int Thing::is_cursor_can_hover_over_x2_click(void) const
+int Thing::is_cursor_can_hover_over_x2_click(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_cursor_can_hover_over_x2_click());
 }
-int Thing::is_cursor_can_hover_over(void) const
+int Thing::is_cursor_can_hover_over(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_cursor_can_hover_over());
 }
-int Thing::is_cursor_path(void) const
+int Thing::is_cursor_path(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_cursor_path());
 }
-int Thing::is_cursor(void) const
+int Thing::is_cursor(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_cursor());
 }
-int Thing::is_dead_on_end_of_anim(void) const
+int Thing::is_dead_on_end_of_anim(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_dead_on_end_of_anim());
 }
-int Thing::is_dead_on_shove(void) const
+int Thing::is_dead_on_shove(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_dead_on_shove());
 }
-int Thing::is_dead_or_dying(void) const
+int Thing::is_dead_or_dying(void)
 {
   TRACE_AND_INDENT();
   return is_dead || is_dying;
 }
-int Thing::is_debug_path(void) const
+int Thing::is_debug_path(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_debug_path());
 }
-int Thing::is_debug_type(void) const
+int Thing::is_debug_type(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_debug_type());
 }
-int Thing::is_deep_water(void) const
+int Thing::is_deep_water(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_deep_water());
 }
-int Thing::is_descend_dungeon(void) const
+int Thing::is_descend_dungeon(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_descend_dungeon());
 }
-int Thing::is_descend_sewer(void) const
+int Thing::is_descend_sewer(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_descend_sewer());
 }
-int Thing::is_described_when_hovering_over(void) const
+int Thing::is_described_when_hovering_over(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_described_when_hovering_over());
 }
-int Thing::is_dirt(void) const
+int Thing::is_dirt(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_dirt());
 }
-int Thing::is_door(void) const
+int Thing::is_door(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_door());
 }
-int Thing::is_droppable(void) const
+int Thing::is_droppable(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_droppable());
 }
-int Thing::is_dry_grass(void) const
+int Thing::is_dry_grass(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_dry_grass());
 }
-int Thing::is_enchantable(void) const
+int Thing::is_enchantable(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_enchantable());
 }
-int Thing::is_enchantstone(void) const
+int Thing::is_enchantstone(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_enchantstone());
 }
-int Thing::is_ethereal_minion_generator(void) const
+int Thing::is_ethereal_minion_generator(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_ethereal_minion_generator());
 }
-int Thing::is_ethereal(void) const
+int Thing::is_ethereal(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_ethereal());
 }
-int Thing::is_explosion(void) const
+int Thing::is_explosion(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_explosion());
 }
-int Thing::is_cursor_path_hazard_for_player(void) const
+int Thing::is_cursor_path_hazard_for_player(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_cursor_path_hazard_for_player());
 }
-int Thing::is_fearless(void) const
+int Thing::is_fearless(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_fearless());
 }
-int Thing::is_fire(void) const
+int Thing::is_fire(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_fire());
 }
-int Thing::is_floating(void) const
+int Thing::is_floating(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_floating());
 }
-int Thing::is_floor_deco(void) const
+int Thing::is_floor_deco(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_floor_deco());
 }
-int Thing::is_floor(void) const
+int Thing::is_floor(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_floor());
 }
-int Thing::is_foilage(void) const
+int Thing::is_foilage(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_foilage());
 }
-int Thing::is_food_eater(void) const
+int Thing::is_food_eater(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_food_eater());
 }
-int Thing::is_food(void) const
+int Thing::is_food(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_food());
 }
-int Thing::is_gold(void) const
+int Thing::is_gold(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_gold());
 }
-int Thing::is_hazard(void) const
+int Thing::is_hazard(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_hazard());
 }
-int Thing::is_hittable(void) const
+int Thing::is_hittable(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_hittable());
 }
-int Thing::is_humanoid(void) const
+int Thing::is_humanoid(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_humanoid());
 }
-int Thing::is_hunger_insatiable(void) const
+int Thing::is_hunger_insatiable(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_hunger_insatiable());
 }
-int Thing::is_indestructible(void) const
+int Thing::is_indestructible(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_indestructible());
 }
-int Thing::is_intelligent(void) const
+int Thing::is_intelligent(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_intelligent());
 }
-int Thing::is_interesting(void) const
+int Thing::is_interesting(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_interesting());
 }
-int Thing::is_item_carrier(void) const
+int Thing::is_item_carrier(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_item_carrier());
 }
-int Thing::is_item_eater(void) const
+int Thing::is_item_eater(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_item_eater());
 }
-int Thing::is_item(void) const
+int Thing::is_item(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_item());
 }
-int Thing::is_jelly_baby_eater(void) const
+int Thing::is_jelly_baby_eater(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_jelly_baby_eater());
 }
-int Thing::is_jelly_baby(void) const
+int Thing::is_jelly_baby(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_jelly_baby());
 }
-int Thing::is_jelly_eater(void) const
+int Thing::is_jelly_eater(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_jelly_eater());
 }
-int Thing::is_jelly_parent(void) const
+int Thing::is_jelly_parent(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_jelly_parent());
 }
-int Thing::is_jelly(void) const
+int Thing::is_jelly(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_jelly());
 }
-int Thing::ai_random_jump_chance_d1000(void) const
+int Thing::ai_random_jump_chance_d1000(void)
 {
   TRACE_AND_INDENT();
   return (tp()->ai_random_jump_chance_d1000());
 }
-int Thing::ai_is_able_to_jump_distance(void) const
+int Thing::ai_is_able_to_jump_distance(void)
 {
   TRACE_AND_INDENT();
   return (tp()->ai_is_able_to_jump_distance());
 }
-int Thing::ai_is_able_to_jump_on_low_hp_chance_d1000(void) const
+int Thing::ai_is_able_to_jump_on_low_hp_chance_d1000(void)
 {
   TRACE_AND_INDENT();
   return (tp()->ai_is_able_to_jump_on_low_hp_chance_d1000());
 }
-int Thing::ai_is_able_to_jump(void) const
+int Thing::ai_is_able_to_jump(void)
 {
   TRACE_AND_INDENT();
   return (tp()->ai_is_able_to_jump());
 }
-int Thing::ai_is_able_to_collect_keys(void) const
+int Thing::ai_is_able_to_collect_keys(void)
 {
   TRACE_AND_INDENT();
   return (tp()->ai_is_able_to_collect_keys());
 }
-int Thing::is_key(void) const
+int Thing::is_key(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_key());
 }
-int Thing::is_destroyed_on_hit_or_miss(void) const
+int Thing::is_destroyed_on_hit_or_miss(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_destroyed_on_hit_or_miss());
 }
-int Thing::is_destroyed_on_hitting(void) const
+int Thing::is_destroyed_on_hitting(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_destroyed_on_hitting());
 }
-int Thing::is_laser(void) const
+int Thing::is_laser(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_laser());
 }
-int Thing::is_lava(void) const
+int Thing::is_lava(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_lava());
 }
-int Thing::is_light_blocker(void) const
+int Thing::is_light_blocker(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_light_blocker());
 }
-int Thing::is_living(void) const
+int Thing::is_living(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_living());
 }
-int Thing::is_loggable(void) const
+int Thing::is_loggable(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_loggable());
 }
-int Thing::is_meat_eater(void) const
+int Thing::is_meat_eater(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_meat_eater());
 }
-int Thing::is_meat(void) const
+int Thing::is_meat(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_meat());
 }
-int Thing::is_minion_generator(void) const
+int Thing::is_minion_generator(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_minion_generator());
 }
-int Thing::is_minion(void) const
+int Thing::is_minion(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_minion());
 }
-int Thing::is_monst(void) const
+int Thing::is_monst(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_monst());
 }
-int Thing::is_moveable(void) const
+int Thing::is_moveable(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_moveable());
 }
-int Thing::is_obs_wall_or_door(void) const
+int Thing::is_obs_wall_or_door(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_obs_wall_or_door());
 }
-int Thing::is_obs_destructable(void) const
+int Thing::is_obs_destructable(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_obs_destructable());
 }
-int Thing::is_msg(void) const
+int Thing::is_msg(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_msg());
 }
-int Thing::is_no_tile(void) const
+int Thing::is_no_tile(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_no_tile());
 }
-int Thing::is_openable(void) const
+int Thing::is_openable(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_openable());
 }
-int Thing::is_player(void) const
+int Thing::is_player(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_player());
 }
-int Thing::is_poison(void) const
+int Thing::is_poison(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_poison());
 }
-int Thing::is_potion_eater(void) const
+int Thing::is_potion_eater(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_potion_eater());
 }
-int Thing::is_potion(void) const
+int Thing::is_potion(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_potion());
 }
-int Thing::is_projectile(void) const
+int Thing::is_projectile(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_projectile());
 }
-int Thing::is_removeable_if_out_of_slots(void) const
+int Thing::is_removeable_if_out_of_slots(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_removeable_if_out_of_slots());
 }
-int Thing::is_resurrectable(void) const
+int Thing::is_resurrectable(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_resurrectable());
 }
-int Thing::is_ripple(void) const
+int Thing::is_ripple(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_ripple());
 }
-int Thing::is_rock(void) const
+int Thing::is_rock(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_rock());
 }
-int Thing::unused_flag10(void) const
+int Thing::unused_flag10(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag10());
 }
-int Thing::unused_flag11(void) const
+int Thing::unused_flag11(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag11());
 }
-int Thing::unused_flag12(void) const
+int Thing::unused_flag12(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag12());
 }
-int Thing::unused_flag13(void) const
+int Thing::unused_flag13(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag13());
 }
-int Thing::unused_flag14(void) const
+int Thing::unused_flag14(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag14());
 }
-int Thing::unused_flag15(void) const
+int Thing::unused_flag15(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag15());
 }
-int Thing::unused_flag16(void) const
+int Thing::unused_flag16(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag16());
 }
-int Thing::unused_flag17(void) const
+int Thing::unused_flag17(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag17());
 }
-int Thing::unused_flag18(void) const
+int Thing::unused_flag18(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag18());
 }
-int Thing::unused_flag19(void) const
+int Thing::unused_flag19(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag19());
 }
-int Thing::unused_flag1(void) const
+int Thing::unused_flag1(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag1());
 }
-int Thing::unused_flag20(void) const
+int Thing::unused_flag20(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag20());
 }
-int Thing::unused_flag21(void) const
+int Thing::unused_flag21(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag21());
 }
-int Thing::unused_flag22(void) const
+int Thing::unused_flag22(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag22());
 }
-int Thing::unused_flag23(void) const
+int Thing::unused_flag23(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag23());
 }
-int Thing::unused_flag24(void) const
+int Thing::unused_flag24(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag24());
 }
-int Thing::unused_flag25(void) const
+int Thing::unused_flag25(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag25());
 }
-int Thing::unused_flag26(void) const
+int Thing::unused_flag26(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag26());
 }
-int Thing::unused_flag27(void) const
+int Thing::unused_flag27(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag27());
 }
-int Thing::unused_flag28(void) const
+int Thing::unused_flag28(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag28());
 }
-int Thing::unused_flag29(void) const
+int Thing::unused_flag29(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag29());
 }
-int Thing::unused_flag2(void) const
+int Thing::unused_flag2(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag2());
 }
-int Thing::unused_flag30(void) const
+int Thing::unused_flag30(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag30());
 }
-int Thing::unused_flag31(void) const
+int Thing::unused_flag31(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag31());
 }
-int Thing::unused_flag32(void) const
+int Thing::is_auto_equipped(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->unused_flag32());
+  return (tp()->is_auto_equipped());
 }
-int Thing::is_buff(void) const
+int Thing::is_buff(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_buff());
 }
-int Thing::is_debuff(void) const
+int Thing::is_debuff(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_debuff());
 }
-int Thing::attack_undead(void) const
+int Thing::attack_undead(void)
 {
   TRACE_AND_INDENT();
   return (tp()->attack_undead());
 }
-int Thing::is_blood_eater(void) const
+int Thing::is_blood_eater(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_blood_eater());
 }
-int Thing::attack_blood(void) const
+int Thing::attack_blood(void)
 {
   TRACE_AND_INDENT();
   return (tp()->attack_blood());
 }
-int Thing::environ_hates_poison(void) const
+int Thing::environ_hates_poison(void)
 {
   TRACE_AND_INDENT();
   return (tp()->environ_hates_poison());
 }
-int Thing::environ_hates_fire(void) const
+int Thing::environ_hates_fire(void)
 {
   TRACE_AND_INDENT();
   return (tp()->environ_hates_fire());
 }
-int Thing::unused_flag3(void) const
+int Thing::unused_flag3(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag3());
 }
-int Thing::environ_hates_water(void) const
+int Thing::environ_hates_water(void)
 {
   TRACE_AND_INDENT();
   return (tp()->environ_hates_water());
 }
-int Thing::environ_hates_acid(void) const
+int Thing::environ_hates_acid(void)
 {
   TRACE_AND_INDENT();
   return (tp()->environ_hates_acid());
 }
-int Thing::ai_is_able_to_detect_secret_doors_when_close(void) const
+int Thing::ai_is_able_to_detect_secret_doors_when_close(void)
 {
   TRACE_AND_INDENT();
   return (tp()->ai_is_able_to_detect_secret_doors_when_close());
 }
-int Thing::ai_is_able_to_break_down_doors(void) const
+int Thing::ai_is_able_to_break_down_doors(void)
 {
   TRACE_AND_INDENT();
   return (tp()->ai_is_able_to_break_down_doors());
 }
-int Thing::ai_is_able_to_break_out_of_webs(void) const
+int Thing::ai_is_able_to_break_out_of_webs(void)
 {
   TRACE_AND_INDENT();
   return (tp()->ai_is_able_to_break_out_of_webs());
 }
-int Thing::ai_is_able_to_open_doors(void) const
+int Thing::ai_is_able_to_open_doors(void)
 {
   TRACE_AND_INDENT();
   return (tp()->ai_is_able_to_open_doors());
 }
-int Thing::ai_is_exit_finder(void) const
+int Thing::ai_is_exit_finder(void)
 {
   TRACE_AND_INDENT();
   return (tp()->ai_is_exit_finder());
 }
-int Thing::ai_is_level_explorer(void) const
+int Thing::ai_is_level_explorer(void)
 {
   TRACE_AND_INDENT();
   return (tp()->ai_is_level_explorer());
 }
-int Thing::is_rusty(void) const
+int Thing::is_rusty(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_rusty());
 }
-int Thing::unused_flag4(void) const
+int Thing::unused_flag4(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag4());
 }
-int Thing::ai_is_able_to_learn_skills(void) const
+int Thing::ai_is_able_to_learn_skills(void)
 {
   TRACE_AND_INDENT();
   return (tp()->ai_is_able_to_learn_skills());
 }
-int Thing::ai_is_able_to_enchant_weapons(void) const
+int Thing::ai_is_able_to_enchant_weapons(void)
 {
   TRACE_AND_INDENT();
   return (tp()->ai_is_able_to_enchant_weapons());
 }
-int Thing::ai_is_able_to_attack_generators(void) const
+int Thing::ai_is_able_to_attack_generators(void)
 {
   TRACE_AND_INDENT();
   return (tp()->ai_is_able_to_attack_generators());
 }
-int Thing::ai_wanderer(void) const
+int Thing::ai_wanderer(void)
 {
   TRACE_AND_INDENT();
   return (tp()->ai_wanderer());
 }
-int Thing::is_organic(void) const
+int Thing::is_organic(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_organic());
 }
-int Thing::is_glass(void) const
+int Thing::is_glass(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_glass());
 }
-int Thing::is_stone(void) const
+int Thing::is_stone(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_stone());
 }
-int Thing::is_item_organic(void) const
+int Thing::is_item_organic(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_item_organic());
 }
-int Thing::is_metal(void) const
+int Thing::is_metal(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_metal());
 }
-int Thing::is_wooden(void) const
+int Thing::is_wooden(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_wooden());
 }
-int Thing::unused_flag5(void) const
+int Thing::unused_flag5(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag5());
 }
-int Thing::is_engulfer(void) const
+int Thing::is_engulfer(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_engulfer());
 }
-int Thing::is_health_booster(void) const
+int Thing::is_health_booster(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_health_booster());
 }
-int Thing::unused_flag6(void) const
+int Thing::unused_flag6(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag6());
 }
-int Thing::unused_flag7(void) const
+int Thing::unused_flag7(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag7());
 }
-int Thing::unused_flag8(void) const
+int Thing::unused_flag8(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag8());
 }
-int Thing::unused_flag9(void) const
+int Thing::unused_flag9(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag9());
 }
-int Thing::is_secret_door(void) const
+int Thing::is_secret_door(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_secret_door());
 }
-int Thing::is_sewer_wall(void) const
+int Thing::is_sewer_wall(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_sewer_wall());
 }
-int Thing::is_shallow_water(void) const
+int Thing::is_shallow_water(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_shallow_water());
 }
-int Thing::is_shovable(void) const
+int Thing::is_shovable(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_shovable());
 }
-int Thing::is_skillstone(void) const
+int Thing::is_skillstone(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_skillstone());
 }
-int Thing::is_skill(void) const
+int Thing::is_skill(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_skill());
 }
-int Thing::is_smoke(void) const
+int Thing::is_smoke(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_smoke());
 }
-int Thing::is_soft_body(void) const
+int Thing::is_soft_body(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_soft_body());
 }
-int Thing::is_spawner(void) const
+int Thing::is_spawner(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_spawner());
 }
-int Thing::is_spiderweb(void) const
+int Thing::is_spiderweb(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_spiderweb());
 }
-int Thing::is_able_to_tire(void) const
+int Thing::is_able_to_tire(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_able_to_tire());
 }
-int Thing::is_steal_item_chance_d1000(void) const
+int Thing::is_steal_item_chance_d1000(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_steal_item_chance_d1000());
 }
-int Thing::attack_engulf_chance_d1000(void) const
+int Thing::attack_engulf_chance_d1000(void)
 {
   TRACE_AND_INDENT();
   return (tp()->attack_engulf_chance_d1000());
 }
-int Thing::attack_poison_chance_d1000(void) const
+int Thing::attack_poison_chance_d1000(void)
 {
   TRACE_AND_INDENT();
   return (tp()->attack_poison_chance_d1000());
 }
-int Thing::is_sticky(void) const
+int Thing::is_sticky(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_sticky());
 }
-int Thing::is_sword(void) const
+int Thing::is_sword(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_sword());
 }
-int Thing::is_target_auto_select(void) const
+int Thing::is_target_auto_select(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_target_auto_select());
 }
-int Thing::is_throwable(void) const
+int Thing::is_throwable(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_throwable());
 }
-int Thing::is_auto_throw(void) const
+int Thing::is_auto_throw(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_auto_throw());
 }
-int Thing::is_tickable(void) const
+int Thing::is_tickable(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_tickable());
 }
-int Thing::is_tmp_thing(void) const
+int Thing::is_tmp_thing(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_tmp_thing());
 }
-int Thing::is_torch(void) const
+int Thing::is_torch(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_torch());
 }
-int Thing::is_treasure_class_a(void) const
+int Thing::is_treasure_class_a(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_treasure_class_a());
 }
-int Thing::is_treasure_class_b(void) const
+int Thing::is_treasure_class_b(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_treasure_class_b());
 }
-int Thing::is_treasure_class_c(void) const
+int Thing::is_treasure_class_c(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_treasure_class_c());
 }
-int Thing::is_treasure_type_chest(void) const
+int Thing::is_treasure_type_chest(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_treasure_type_chest());
 }
-int Thing::ai_is_item_collector(void) const
+int Thing::ai_is_item_collector(void)
 {
   TRACE_AND_INDENT();
   return (tp()->ai_is_item_collector());
 }
-int Thing::is_treasure_type_eater(void) const
+int Thing::is_treasure_type_eater(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_treasure_type_eater());
 }
-int Thing::is_treasure_type(void) const
+int Thing::is_treasure_type(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_treasure_type());
 }
-int Thing::is_undead(void) const
+int Thing::is_undead(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_undead());
 }
-int Thing::is_usable(void) const
+int Thing::is_usable(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_usable());
 }
-int Thing::is_auto_use(void) const
+int Thing::is_auto_use(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_auto_use());
 }
-int Thing::is_used_when_thrown(void) const
+int Thing::is_used_when_thrown(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_used_when_thrown());
 }
-int Thing::is_very_combustible(void) const
+int Thing::is_very_combustible(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_very_combustible());
 }
-int Thing::is_wall_dungeon(void) const
+int Thing::is_wall_dungeon(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_wall_dungeon());
 }
-int Thing::is_wall(void) const
+int Thing::is_wall(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_wall());
 }
-int Thing::is_wand_eater(void) const
+int Thing::is_wand_eater(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_wand_eater());
 }
-int Thing::is_wand(void) const
+int Thing::is_wand(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_wand());
 }
-int Thing::environ_loves_water(void) const
+int Thing::environ_loves_water(void)
 {
   TRACE_AND_INDENT();
   return (tp()->environ_loves_water());
 }
-int Thing::is_weapon(void) const
+int Thing::is_weapon(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_weapon());
 }
-int Thing::is_weapon_equiper(void) const
+int Thing::is_weapon_equiper(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_weapon_equiper());
 }
-int Thing::environ_loves_fire(void) const
+int Thing::environ_loves_fire(void)
 {
   TRACE_AND_INDENT();
   return (tp()->environ_loves_fire());
 }
-int Thing::environ_loves_poison(void) const
+int Thing::environ_loves_poison(void)
 {
   TRACE_AND_INDENT();
   return (tp()->environ_loves_poison());
 }
-int Thing::environ_loves_spiderwebs(void) const
+int Thing::environ_loves_spiderwebs(void)
 {
   TRACE_AND_INDENT();
   return (tp()->environ_loves_spiderwebs());
 }
-int Thing::minion_leash_distance(void) const
+int Thing::minion_leash_distance(void)
 {
   TRACE_AND_INDENT();
   return (tp()->minion_leash_distance());
 }
-int Thing::minion_limit(void) const
+int Thing::minion_limit(void)
 {
   TRACE_AND_INDENT();
   return (tp()->minion_limit());
 }
-int Thing::normal_placement_rules(void) const
+int Thing::normal_placement_rules(void)
 {
   TRACE_AND_INDENT();
   return (tp()->normal_placement_rules());
 }
-int Thing::on_death_drop_all_items(void) const
+int Thing::on_death_drop_all_items(void)
 {
   TRACE_AND_INDENT();
   return (tp()->on_death_drop_all_items());
 }
-int Thing::on_death_is_open(void) const
+int Thing::on_death_is_open(void)
 {
   TRACE_AND_INDENT();
   return (tp()->on_death_is_open());
 }
-int Thing::range_max(void) const
+int Thing::range_max(void)
 {
   TRACE_AND_INDENT();
   return (tp()->range_max());
 }
-int Thing::weapon_damage(void) const
+int Thing::weapon_damage(void)
 {
   TRACE_AND_INDENT();
   return (tp()->weapon_damage());
 }
 
-int Thing::is_water(void) const
+int Thing::is_water(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_shallow_water() || tp()->is_deep_water());
@@ -1695,13 +1695,13 @@ void Thing::clear_can_see_ever(void)
   monst_aip->can_see_ever.can_see = {};
 }
 
-int Thing::item_height(void) const
+int Thing::item_height(void)
 {
   TRACE_AND_INDENT();
   return (tp()->item_height());
 }
 
-int Thing::item_width(void) const
+int Thing::item_width(void)
 {
   TRACE_AND_INDENT();
   return (tp()->item_width());
@@ -1727,13 +1727,13 @@ int Thing::capacity_width(void)
   return (tp()->capacity_width());
 }
 
-int Thing::monst_size(void) const
+int Thing::monst_size(void)
 {
   TRACE_AND_INDENT();
   return (tp()->monst_size());
 }
 
-int Thing::rarity(void) const
+int Thing::rarity(void)
 {
   TRACE_AND_INDENT();
   return (tp()->rarity());
@@ -1742,7 +1742,7 @@ int Thing::rarity(void) const
 ////////////////////////////////////////////////////////////////////////////
 // lunge_to
 ////////////////////////////////////////////////////////////////////////////
-point Thing::get_lunge_to(void) const
+point Thing::get_lunge_to(void)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -1763,7 +1763,7 @@ void Thing::set_lunge_to(point v)
 ////////////////////////////////////////////////////////////////////////////
 // bounce_height
 ////////////////////////////////////////////////////////////////////////////
-float Thing::get_bounce_height(void) const
+float Thing::get_bounce_height(void)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -1784,7 +1784,7 @@ void Thing::set_bounce_height(float v)
 ////////////////////////////////////////////////////////////////////////////
 // fall_height
 ////////////////////////////////////////////////////////////////////////////
-float Thing::get_fall_height(void) const
+float Thing::get_fall_height(void)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -1805,7 +1805,7 @@ void Thing::set_fall_height(float v)
 ////////////////////////////////////////////////////////////////////////////
 // bounce_fade
 ////////////////////////////////////////////////////////////////////////////
-float Thing::get_bounce_fade(void) const
+float Thing::get_bounce_fade(void)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -1826,7 +1826,7 @@ void Thing::set_bounce_fade(float v)
 ////////////////////////////////////////////////////////////////////////////
 // bounce_count
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_bounce_count(void) const
+int Thing::get_bounce_count(void)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -1847,7 +1847,7 @@ void Thing::set_bounce_count(int v)
 ////////////////////////////////////////////////////////////////////////////
 // fadeup_height
 ////////////////////////////////////////////////////////////////////////////
-float Thing::get_fadeup_height(void) const
+float Thing::get_fadeup_height(void)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -1868,7 +1868,7 @@ void Thing::set_fadeup_height(float v)
 ////////////////////////////////////////////////////////////////////////////
 // fadeup_fade
 ////////////////////////////////////////////////////////////////////////////
-float Thing::get_fadeup_fade(void) const
+float Thing::get_fadeup_fade(void)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -1889,7 +1889,7 @@ void Thing::set_fadeup_fade(float v)
 ////////////////////////////////////////////////////////////////////////////
 // wobble
 ////////////////////////////////////////////////////////////////////////////
-float Thing::get_wobble(void) const
+float Thing::get_wobble(void)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -1910,7 +1910,7 @@ void Thing::set_wobble(float v)
 ////////////////////////////////////////////////////////////////////////////
 // msg
 ////////////////////////////////////////////////////////////////////////////
-const std::string &Thing::get_msg(void) const
+const std::string &Thing::get_msg(void)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -1932,7 +1932,7 @@ void Thing::set_msg(const std::string &v)
 ////////////////////////////////////////////////////////////////////////////
 // dead_reason
 ////////////////////////////////////////////////////////////////////////////
-const std::string &Thing::get_dead_reason(void) const
+const std::string &Thing::get_dead_reason(void)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -1954,7 +1954,7 @@ void Thing::set_dead_reason(const std::string &v)
 ////////////////////////////////////////////////////////////////////////////
 // submerged_offset
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_submerged_offset(void) const
+int Thing::get_submerged_offset(void)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -1982,7 +1982,7 @@ void Thing::set_submerged_offset(int v)
 ////////////////////////////////////////////////////////////////////////////
 // gold
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_gold(void) const
+int Thing::get_gold(void)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -2057,7 +2057,7 @@ int Thing::incr_gold(void)
 ////////////////////////////////////////////////////////////////////////////
 // score
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_score(void) const
+int Thing::get_score(void)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -2091,7 +2091,7 @@ void Thing::incr_score(int v)
 ////////////////////////////////////////////////////////////////////////////
 // keys
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_keys(void) const
+int Thing::get_keys(void)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -2166,7 +2166,7 @@ int Thing::incr_keys(void)
 ////////////////////////////////////////////////////////////////////////////
 // health
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_health(void) const
+int Thing::get_health(void)
 {
   TRACE_AND_INDENT();
   int v = 0;
@@ -2175,8 +2175,7 @@ int Thing::get_health(void) const
     v = monst_infop->health;
   }
   auto owner = get_immediate_owner();
-  if (owner) {
-    auto owner = get_immediate_owner();
+  if (owner && (owner != this)) {
     v += owner->get_health();
   }
   return v;
@@ -2240,7 +2239,7 @@ int Thing::incr_health(void)
 ////////////////////////////////////////////////////////////////////////////
 // health_max
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_health_max(void) const
+int Thing::get_health_max(void)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -2309,7 +2308,7 @@ int Thing::incr_health_max(void)
 ////////////////////////////////////////////////////////////////////////////
 // defence
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_stat_defence(void) const
+int Thing::get_stat_defence(void)
 {
   TRACE_AND_INDENT();
   int v = 0;
@@ -2318,8 +2317,7 @@ int Thing::get_stat_defence(void) const
     v = monst_infop->stat_defence;
   }
   auto owner = get_immediate_owner();
-  if (owner) {
-    auto owner = get_immediate_owner();
+  if (owner && (owner != this)) {
     v += owner->get_stat_defence();
   }
   if (is_minion()) {
@@ -2396,7 +2394,7 @@ int Thing::incr_stat_defence(void)
 ////////////////////////////////////////////////////////////////////////////
 // stats19
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_stats19(void) const
+int Thing::get_stats19(void)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -2465,7 +2463,7 @@ int Thing::incr_stats19(void)
 ////////////////////////////////////////////////////////////////////////////
 // stamina_max
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_stamina_max(void) const
+int Thing::get_stamina_max(void)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -2534,7 +2532,7 @@ int Thing::incr_stamina_max(void)
 ////////////////////////////////////////////////////////////////////////////
 // enchant_max
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_enchant_max(void) const
+int Thing::get_enchant_max(void)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -2603,7 +2601,7 @@ int Thing::incr_enchant_max(void)
 ////////////////////////////////////////////////////////////////////////////
 // attack_resurrect_when
 ////////////////////////////////////////////////////////////////////////////
-uint32_t Thing::get_tick_resurrect_when(void) const
+uint32_t Thing::get_tick_resurrect_when(void)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -2657,7 +2655,7 @@ uint32_t Thing::incr_tick_resurrect_when(void)
 ////////////////////////////////////////////////////////////////////////////
 // stats01
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_stats01(void) const
+int Thing::get_stats01(void)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -2726,7 +2724,7 @@ int Thing::incr_stats01(void)
 ////////////////////////////////////////////////////////////////////////////
 // stats02
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_stats02(void) const
+int Thing::get_stats02(void)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -2795,7 +2793,7 @@ int Thing::incr_stats02(void)
 ////////////////////////////////////////////////////////////////////////////
 // stats03
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_stats03(void) const
+int Thing::get_stats03(void)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -2864,7 +2862,7 @@ int Thing::incr_stats03(void)
 ////////////////////////////////////////////////////////////////////////////
 // stats04
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_stats04(void) const
+int Thing::get_stats04(void)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -2933,7 +2931,7 @@ int Thing::incr_stats04(void)
 ////////////////////////////////////////////////////////////////////////////
 // stats05
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_stats05(void) const
+int Thing::get_stats05(void)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -3002,7 +3000,7 @@ int Thing::incr_stats05(void)
 ////////////////////////////////////////////////////////////////////////////
 // stats06
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_stats06(void) const
+int Thing::get_stats06(void)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -3071,7 +3069,7 @@ int Thing::incr_stats06(void)
 ////////////////////////////////////////////////////////////////////////////
 // stats07
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_stats07(void) const
+int Thing::get_stats07(void)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -3140,7 +3138,7 @@ int Thing::incr_stats07(void)
 ////////////////////////////////////////////////////////////////////////////
 // stats08
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_stats08(void) const
+int Thing::get_stats08(void)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -3209,7 +3207,7 @@ int Thing::incr_stats08(void)
 ////////////////////////////////////////////////////////////////////////////
 // stats09
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_stats09(void) const
+int Thing::get_stats09(void)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -3278,7 +3276,7 @@ int Thing::incr_stats09(void)
 ////////////////////////////////////////////////////////////////////////////
 // stats10
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_stats10(void) const
+int Thing::get_stats10(void)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -3347,7 +3345,7 @@ int Thing::incr_stats10(void)
 ////////////////////////////////////////////////////////////////////////////
 // stats11
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_stats11(void) const
+int Thing::get_stats11(void)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -3416,7 +3414,7 @@ int Thing::incr_stats11(void)
 ////////////////////////////////////////////////////////////////////////////
 // stats12
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_stats12(void) const
+int Thing::get_stats12(void)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -3485,7 +3483,7 @@ int Thing::incr_stats12(void)
 ////////////////////////////////////////////////////////////////////////////
 // stat_constitution
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_stat_constitution(void) const
+int Thing::get_stat_constitution(void)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -3554,7 +3552,7 @@ int Thing::incr_stat_constitution(void)
 ////////////////////////////////////////////////////////////////////////////
 // stat_attack
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_stat_attack(void) const
+int Thing::get_stat_attack(void)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -3623,7 +3621,7 @@ int Thing::incr_stat_attack(void)
 ////////////////////////////////////////////////////////////////////////////
 // stats17
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_stats17(void) const
+int Thing::get_stats17(void)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -3692,7 +3690,7 @@ int Thing::incr_stats17(void)
 ////////////////////////////////////////////////////////////////////////////
 // throw_distance
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_throw_distance(void) const
+int Thing::get_throw_distance(void)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -3746,7 +3744,7 @@ int Thing::incr_throw_distance(void)
 ////////////////////////////////////////////////////////////////////////////
 // stamina
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_stamina(void) const
+int Thing::get_stamina(void)
 {
   TRACE_AND_INDENT();
   int v = 0;
@@ -3755,8 +3753,7 @@ int Thing::get_stamina(void) const
     v = monst_infop->stamina;
   }
   auto owner = get_immediate_owner();
-  if (owner) {
-    auto owner = get_immediate_owner();
+  if (owner && (owner != this)) {
     v += owner->get_stamina();
   }
   if (is_minion()) {
@@ -3818,7 +3815,7 @@ int Thing::incr_stamina(void)
 ////////////////////////////////////////////////////////////////////////////
 // enchant
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_enchant(void) const
+int Thing::get_enchant(void)
 {
   TRACE_AND_INDENT();
   int v = 0;
@@ -3827,8 +3824,7 @@ int Thing::get_enchant(void) const
     v = monst_infop->enchant;
   }
   auto owner = get_immediate_owner();
-  if (owner) {
-    auto owner = get_immediate_owner();
+  if (owner && (owner != this)) {
     v += owner->get_enchant();
   }
   if (is_minion()) {
@@ -3890,7 +3886,7 @@ int Thing::incr_enchant(void)
 ////////////////////////////////////////////////////////////////////////////
 // poison
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_poison(void) const
+int Thing::get_poison(void)
 {
   TRACE_AND_INDENT();
   int v = 0;
@@ -3899,8 +3895,7 @@ int Thing::get_poison(void) const
     v = monst_infop->poison;
   }
   auto owner = get_immediate_owner();
-  if (owner) {
-    auto owner = get_immediate_owner();
+  if (owner && (owner != this)) {
     v += owner->get_poison();
   }
   if (is_minion()) {
@@ -3968,7 +3963,7 @@ int Thing::incr_poison(void)
 ////////////////////////////////////////////////////////////////////////////
 // stat_strength
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_stat_strength(void) const
+int Thing::get_stat_strength(void)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -4037,7 +4032,7 @@ int Thing::incr_stat_strength(void)
 ////////////////////////////////////////////////////////////////////////////
 // owned_count
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_owned_count(void) const
+int Thing::get_owned_count(void)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -4086,7 +4081,7 @@ int Thing::incr_owned_count(void)
 ////////////////////////////////////////////////////////////////////////////
 // minion_count
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_minion_count(void) const
+int Thing::get_minion_count(void)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -4135,7 +4130,7 @@ int Thing::incr_minion_count(void)
 ////////////////////////////////////////////////////////////////////////////
 // spawned_count
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_spawned_count(void) const
+int Thing::get_spawned_count(void)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -4184,7 +4179,7 @@ int Thing::incr_spawned_count(void)
 ////////////////////////////////////////////////////////////////////////////
 // charge_count
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_charge_count(void) const
+int Thing::get_charge_count(void)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -4233,7 +4228,7 @@ int Thing::incr_charge_count(void)
 ////////////////////////////////////////////////////////////////////////////
 // lifespan
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_lifespan(void) const
+int Thing::get_lifespan(void)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -4282,13 +4277,13 @@ int Thing::incr_lifespan(void)
 ////////////////////////////////////////////////////////////////////////////
 // light_strength
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_initial_light_strength(void) const
+int Thing::get_initial_light_strength(void)
 {
   TRACE_AND_INDENT();
   return (tp()->light_strength());
 }
 
-int Thing::get_light_strength(void) const
+int Thing::get_light_strength(void)
 {
   TRACE_AND_INDENT();
   if (! monst_infop) {
@@ -4370,7 +4365,7 @@ int Thing::incr_light_strength(void)
 ////////////////////////////////////////////////////////////////////////////
 // tick_last_did_something
 ////////////////////////////////////////////////////////////////////////////
-uint32_t Thing::get_tick_last_did_something(void) const
+uint32_t Thing::get_tick_last_did_something(void)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -4419,7 +4414,7 @@ uint32_t Thing::incr_tick_last_did_something(void)
 ////////////////////////////////////////////////////////////////////////////
 // tick_last_dropped
 ////////////////////////////////////////////////////////////////////////////
-uint32_t Thing::get_tick_last_dropped(void) const
+uint32_t Thing::get_tick_last_dropped(void)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -4468,7 +4463,7 @@ uint32_t Thing::incr_tick_last_dropped(void)
 ////////////////////////////////////////////////////////////////////////////
 // tick_last_location_check
 ////////////////////////////////////////////////////////////////////////////
-uint32_t Thing::get_tick_last_location_check(void) const
+uint32_t Thing::get_tick_last_location_check(void)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -4517,7 +4512,7 @@ uint32_t Thing::incr_tick_last_location_check(void)
 ////////////////////////////////////////////////////////////////////////////
 // tick_last_escape
 ////////////////////////////////////////////////////////////////////////////
-uint32_t Thing::get_tick_last_escape(void) const
+uint32_t Thing::get_tick_last_escape(void)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -4566,7 +4561,7 @@ uint32_t Thing::incr_tick_last_escape(void)
 ////////////////////////////////////////////////////////////////////////////
 // tick_last_level_change
 ////////////////////////////////////////////////////////////////////////////
-uint32_t Thing::get_tick_last_level_change(void) const
+uint32_t Thing::get_tick_last_level_change(void)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -4615,7 +4610,7 @@ uint32_t Thing::incr_tick_last_level_change(void)
 ////////////////////////////////////////////////////////////////////////////
 // where_i_dropped_an_item_last
 ////////////////////////////////////////////////////////////////////////////
-point Thing::get_where_i_dropped_an_item_last(void) const
+point Thing::get_where_i_dropped_an_item_last(void)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -4636,7 +4631,7 @@ point Thing::set_where_i_dropped_an_item_last(point v)
 ////////////////////////////////////////////////////////////////////////////
 // where_i_failed_to_collect_last
 ////////////////////////////////////////////////////////////////////////////
-point Thing::get_where_i_failed_to_collect_last(void) const
+point Thing::get_where_i_failed_to_collect_last(void)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -4657,7 +4652,7 @@ point Thing::set_where_i_failed_to_collect_last(point v)
 ////////////////////////////////////////////////////////////////////////////
 // ts_lunge_begin
 ////////////////////////////////////////////////////////////////////////////
-ts_t Thing::get_ts_lunge_begin(void) const
+ts_t Thing::get_ts_lunge_begin(void)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -4706,7 +4701,7 @@ ts_t Thing::incr_ts_lunge_begin(void)
 ////////////////////////////////////////////////////////////////////////////
 // ts_lunge_end
 ////////////////////////////////////////////////////////////////////////////
-ts_t Thing::get_ts_lunge_end(void) const
+ts_t Thing::get_ts_lunge_end(void)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -4755,7 +4750,7 @@ ts_t Thing::incr_ts_lunge_end(void)
 ////////////////////////////////////////////////////////////////////////////
 // ts_bounce_begin
 ////////////////////////////////////////////////////////////////////////////
-ts_t Thing::get_ts_bounce_begin(void) const
+ts_t Thing::get_ts_bounce_begin(void)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -4804,7 +4799,7 @@ ts_t Thing::incr_ts_bounce_begin(void)
 ////////////////////////////////////////////////////////////////////////////
 // ts_bounce_end
 ////////////////////////////////////////////////////////////////////////////
-ts_t Thing::get_ts_bounce_end(void) const
+ts_t Thing::get_ts_bounce_end(void)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -4853,7 +4848,7 @@ ts_t Thing::incr_ts_bounce_end(void)
 ////////////////////////////////////////////////////////////////////////////
 // ts_fadeup_begin
 ////////////////////////////////////////////////////////////////////////////
-ts_t Thing::get_ts_fadeup_begin(void) const
+ts_t Thing::get_ts_fadeup_begin(void)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -4902,7 +4897,7 @@ ts_t Thing::incr_ts_fadeup_begin(void)
 ////////////////////////////////////////////////////////////////////////////
 // ts_fadeup_end
 ////////////////////////////////////////////////////////////////////////////
-ts_t Thing::get_ts_fadeup_end(void) const
+ts_t Thing::get_ts_fadeup_end(void)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -4951,7 +4946,7 @@ ts_t Thing::incr_ts_fadeup_end(void)
 ////////////////////////////////////////////////////////////////////////////
 // ts_flip_start
 ////////////////////////////////////////////////////////////////////////////
-ts_t Thing::get_ts_flip_start(void) const
+ts_t Thing::get_ts_flip_start(void)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -5000,7 +4995,7 @@ ts_t Thing::incr_ts_flip_start(void)
 ////////////////////////////////////////////////////////////////////////////
 // ts_anim_delay_end
 ////////////////////////////////////////////////////////////////////////////
-ts_t Thing::get_ts_anim_delay_end(void) const
+ts_t Thing::get_ts_anim_delay_end(void)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -5049,7 +5044,7 @@ ts_t Thing::incr_ts_anim_delay_end(void)
 ////////////////////////////////////////////////////////////////////////////
 // ts_fall_begin
 ////////////////////////////////////////////////////////////////////////////
-ts_t Thing::get_ts_fall_begin(void) const
+ts_t Thing::get_ts_fall_begin(void)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -5098,7 +5093,7 @@ ts_t Thing::incr_ts_fall_begin(void)
 ////////////////////////////////////////////////////////////////////////////
 // ts_fall_end
 ////////////////////////////////////////////////////////////////////////////
-ts_t Thing::get_ts_fall_end(void) const
+ts_t Thing::get_ts_fall_end(void)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -5147,7 +5142,7 @@ ts_t Thing::incr_ts_fall_end(void)
 ////////////////////////////////////////////////////////////////////////////
 // equip_id_carry_anim
 ////////////////////////////////////////////////////////////////////////////
-ThingId Thing::get_equip_id_carry_anim(int equip) const
+ThingId Thing::get_equip_id_carry_anim(int equip)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -5167,7 +5162,7 @@ ThingId Thing::set_equip_id_carry_anim(ThingId v, int equip)
 ////////////////////////////////////////////////////////////////////////////
 // equip_id_use_anim
 ////////////////////////////////////////////////////////////////////////////
-ThingId Thing::get_equip_id_use_anim(int equip) const
+ThingId Thing::get_equip_id_use_anim(int equip)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -5187,7 +5182,7 @@ ThingId Thing::set_equip_id_use_anim(ThingId v, int equip)
 ////////////////////////////////////////////////////////////////////////////
 // equip_tp_id
 ////////////////////////////////////////////////////////////////////////////
-ThingId Thing::get_equip_id(int equip) const
+ThingId Thing::get_equip_id(int equip)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -5210,7 +5205,7 @@ ThingId Thing::set_equip_id(ThingId v, int equip)
 ////////////////////////////////////////////////////////////////////////////
 // on_fire_id_anim
 ////////////////////////////////////////////////////////////////////////////
-ThingId Thing::get_on_fire_anim_id(void) const
+ThingId Thing::get_on_fire_anim_id(void)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -5230,7 +5225,7 @@ ThingId Thing::set_on_fire_anim_id(ThingId v)
 ////////////////////////////////////////////////////////////////////////////
 // current_damage
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_current_damage(void) const
+int Thing::get_current_damage(void)
 {
   TRACE_AND_INDENT();
   int v = 0;
@@ -5239,8 +5234,7 @@ int Thing::get_current_damage(void) const
     v = monst_infop->current_damage;
   }
   auto owner = get_immediate_owner();
-  if (owner) {
-    auto owner = get_immediate_owner();
+  if (owner && (owner != this)) {
     v += owner->get_current_damage();
   }
   return v;
@@ -5301,187 +5295,187 @@ int Thing::incr_current_damage(void)
   return (n);
 }
 
-const std::string &Thing::gfx_anim_use(void) const
+const std::string &Thing::gfx_anim_use(void)
 {
   TRACE_AND_INDENT();
   return (tp()->gfx_anim_use());
 }
-const std::string &Thing::laser_name(void) const
+const std::string &Thing::laser_name(void)
 {
   TRACE_AND_INDENT();
   return (tp()->laser_name());
 }
-const std::string &Thing::light_color(void) const
+const std::string &Thing::light_color(void)
 {
   TRACE_AND_INDENT();
   return (tp()->light_color());
 }
-const std::string &Thing::long_text_description(void) const
+const std::string &Thing::long_text_description(void)
 {
   TRACE_AND_INDENT();
   return (tp()->long_text_description());
 }
-const std::string &Thing::name(void) const
+const std::string &Thing::name(void)
 {
   TRACE_AND_INDENT();
   return (tp()->name());
 }
-const std::string &Thing::on_birth_do(void) const
+const std::string &Thing::on_birth_do(void)
 {
   TRACE_AND_INDENT();
   return (tp()->on_birth_do());
 }
-const std::string &Thing::on_you_bite_attack_do(void) const
+const std::string &Thing::on_you_bite_attack_do(void)
 {
   TRACE_AND_INDENT();
   return (tp()->on_you_bite_attack_do());
 }
-const std::string &Thing::on_born_do(void) const
+const std::string &Thing::on_born_do(void)
 {
   TRACE_AND_INDENT();
   return (tp()->on_born_do());
 }
-const std::string &Thing::on_death_do(void) const
+const std::string &Thing::on_death_do(void)
 {
   TRACE_AND_INDENT();
   return (tp()->on_death_do());
 }
-const std::string &Thing::on_enchant_do(void) const
+const std::string &Thing::on_enchant_do(void)
 {
   TRACE_AND_INDENT();
   return (tp()->on_enchant_do());
 }
-const std::string &Thing::on_fall_do(void) const
+const std::string &Thing::on_fall_do(void)
 {
   TRACE_AND_INDENT();
   return (tp()->on_fall_do());
 }
-const std::string &Thing::on_you_are_on_fire_do(void) const
+const std::string &Thing::on_you_are_on_fire_do(void)
 {
   TRACE_AND_INDENT();
   return (tp()->on_you_are_on_fire_do());
 }
-const std::string &Thing::on_firing_at_something_do(void) const
+const std::string &Thing::on_firing_at_something_do(void)
 {
   TRACE_AND_INDENT();
   return (tp()->on_firing_at_something_do());
 }
-const std::string &Thing::on_you_are_hit_do(void) const
+const std::string &Thing::on_you_are_hit_do(void)
 {
   TRACE_AND_INDENT();
   return (tp()->on_you_are_hit_do());
 }
-const std::string &Thing::on_lifespan_do(void) const
+const std::string &Thing::on_lifespan_do(void)
 {
   TRACE_AND_INDENT();
   return (tp()->on_lifespan_do());
 }
-const std::string &Thing::on_you_miss_do_do(void) const
+const std::string &Thing::on_you_miss_do_do(void)
 {
   TRACE_AND_INDENT();
   return (tp()->on_you_miss_do_do());
 }
-const std::string &Thing::on_move_do(void) const
+const std::string &Thing::on_move_do(void)
 {
   TRACE_AND_INDENT();
   return (tp()->on_move_do());
 }
-const std::string &Thing::on_open_do(void) const
+const std::string &Thing::on_open_do(void)
 {
   TRACE_AND_INDENT();
   return (tp()->on_open_do());
 }
-const std::string &Thing::on_tick_do(void) const
+const std::string &Thing::on_tick_do(void)
 {
   TRACE_AND_INDENT();
   return (tp()->on_tick_do());
 }
-const std::string &Thing::on_use_do(void) const
+const std::string &Thing::on_use_do(void)
 {
   TRACE_AND_INDENT();
   return (tp()->on_use_do());
 }
-const std::string &Thing::projectile_name(void) const
+const std::string &Thing::projectile_name(void)
 {
   TRACE_AND_INDENT();
   return (tp()->projectile_name());
 }
-const std::string &Thing::short_text_name(void) const
+const std::string &Thing::short_text_name(void)
 {
   TRACE_AND_INDENT();
   return (tp()->short_text_name());
 }
-const std::string &Thing::spawn_on_shoved(void) const
+const std::string &Thing::spawn_on_shoved(void)
 {
   TRACE_AND_INDENT();
   return (tp()->spawn_on_shoved());
 }
-const std::string &Thing::str1(void) const
+const std::string &Thing::str1(void)
 {
   TRACE_AND_INDENT();
   return (tp()->str1());
 }
-const std::string &Thing::str2(void) const
+const std::string &Thing::str2(void)
 {
   TRACE_AND_INDENT();
   return (tp()->str2());
 }
-const std::string &Thing::str4(void) const
+const std::string &Thing::str4(void)
 {
   TRACE_AND_INDENT();
   return (tp()->str4());
 }
-const std::string &Thing::str5(void) const
+const std::string &Thing::str5(void)
 {
   TRACE_AND_INDENT();
   return (tp()->str5());
 }
-const std::string &Thing::text_description(void) const
+const std::string &Thing::text_description(void)
 {
   TRACE_AND_INDENT();
   return (tp()->text_description());
 }
-const std::string &Thing::text_enchant(void) const
+const std::string &Thing::text_enchant(void)
 {
   TRACE_AND_INDENT();
   return (tp()->text_enchant());
 }
-const std::string &Thing::text_hits(void) const
+const std::string &Thing::text_hits(void)
 {
   TRACE_AND_INDENT();
   return (tp()->text_hits());
 }
-const std::string &Thing::text_name(void) const
+const std::string &Thing::text_name(void)
 {
   TRACE_AND_INDENT();
   return (tp()->text_name());
 }
-const std::string &Thing::text_skill(void) const
+const std::string &Thing::text_skill(void)
 {
   TRACE_AND_INDENT();
   return (tp()->text_skill());
 }
-const std::string &Thing::text_debuff(void) const
+const std::string &Thing::text_debuff(void)
 {
   TRACE_AND_INDENT();
   return (tp()->text_debuff());
 }
-const std::string &Thing::text_buff(void) const
+const std::string &Thing::text_buff(void)
 {
   TRACE_AND_INDENT();
   return (tp()->text_buff());
 }
-const std::string &Thing::text_title(void) const
+const std::string &Thing::text_title(void)
 {
   TRACE_AND_INDENT();
   return (tp()->text_title());
 }
-const std::string &Thing::text_unused(void) const
+const std::string &Thing::text_unused(void)
 {
   TRACE_AND_INDENT();
   return (tp()->text_unused());
 }
-const std::string &Thing::equip_carry_anim(void) const
+const std::string &Thing::equip_carry_anim(void)
 {
   TRACE_AND_INDENT();
   return (tp()->equip_carry_anim());
@@ -5497,7 +5491,7 @@ std::array< std::array< ThingId, MAX_BAG_WIDTH >, MAX_BAG_HEIGHT > *Thing::get_b
   }
 }
 
-const std::array< std::array< ThingId, MAX_BAG_WIDTH >, MAX_BAG_HEIGHT > *Thing::get_const_bag(void) const
+const std::array< std::array< ThingId, MAX_BAG_WIDTH >, MAX_BAG_HEIGHT > *Thing::get_const_bag(void)
 {
   TRACE_AND_INDENT();
   if (monst_infop) {
@@ -5507,7 +5501,7 @@ const std::array< std::array< ThingId, MAX_BAG_WIDTH >, MAX_BAG_HEIGHT > *Thing:
   }
 }
 
-const std::string &Thing::title(void) const
+const std::string &Thing::title(void)
 {
   if (g_opt_player_name.empty()) {
     return text_title();

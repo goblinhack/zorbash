@@ -18,7 +18,7 @@
 #include "my_wid_console.h"
 #include "my_wid_topcon.h"
 
-void Thing::log_(const char *fmt, va_list args) const
+void Thing::log_(const char *fmt, va_list args)
 {
   verify(this);
   auto t = this;
@@ -37,7 +37,7 @@ void Thing::log_(const char *fmt, va_list args) const
   putf(MY_STDOUT, buf);
 }
 
-void Thing::log(const char *fmt, ...) const
+void Thing::log(const char *fmt, ...)
 {
   verify(this);
   log_catchup_missing_indent_levels();
@@ -80,7 +80,7 @@ void Thing::die(const char *fmt, ...)
   va_end(args);
 }
 
-void Thing::con_(const char *fmt, va_list args) const
+void Thing::con_(const char *fmt, va_list args)
 {
   verify(this);
   auto t = this;
@@ -103,7 +103,7 @@ void Thing::con_(const char *fmt, va_list args) const
   FLUSH_THE_CONSOLE();
 }
 
-void Thing::topcon_(const char *fmt, va_list args) const
+void Thing::topcon_(const char *fmt, va_list args)
 {
   verify(this);
   auto t = this;
@@ -127,7 +127,7 @@ void Thing::topcon_(const char *fmt, va_list args) const
   FLUSH_THE_CONSOLE();
 }
 
-void Thing::con(const char *fmt, ...) const
+void Thing::con(const char *fmt, ...)
 {
   verify(this);
   auto    t = this;
@@ -138,7 +138,7 @@ void Thing::con(const char *fmt, ...) const
   va_end(args);
 }
 
-void Thing::topcon(const char *fmt, ...) const
+void Thing::topcon(const char *fmt, ...)
 {
   verify(this);
   auto    t = this;
@@ -149,7 +149,7 @@ void Thing::topcon(const char *fmt, ...) const
   va_end(args);
 }
 
-void Thing::err_(const char *fmt, va_list args) const
+void Thing::err_(const char *fmt, va_list args)
 {
   static bool nested_error;
   if (nested_error) {
@@ -185,7 +185,7 @@ void Thing::err_(const char *fmt, va_list args) const
   nested_error = false;
 }
 
-void Thing::err(const char *fmt, ...) const
+void Thing::err(const char *fmt, ...)
 {
   static bool nested_error;
   if (nested_error) {
@@ -213,7 +213,7 @@ void Thing::err(const char *fmt, ...) const
   nested_error = false;
 }
 
-void Thing::botcon_(const char *fmt, va_list args) const
+void Thing::botcon_(const char *fmt, va_list args)
 {
   verify(this);
   auto t = this;
@@ -237,7 +237,7 @@ void Thing::botcon_(const char *fmt, va_list args) const
   FLUSH_THE_CONSOLE();
 }
 
-void Thing::botcon(const char *fmt, ...) const
+void Thing::botcon(const char *fmt, ...)
 {
   verify(this);
   auto    t = this;

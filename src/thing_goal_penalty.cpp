@@ -19,7 +19,7 @@
 #include <algorithm>
 #include <set>
 
-int Thing::get_goal_penalty(Thingp attacker) const
+int Thing::get_goal_penalty(Thingp attacker)
 {
   TRACE_AND_INDENT();
   if (unlikely(! monst_aip)) {
@@ -34,7 +34,7 @@ int Thing::get_goal_penalty(Thingp attacker) const
   return f->second * 10;
 }
 
-void Thing::reset_goal_penalty(Thingp attacker) const
+void Thing::reset_goal_penalty(Thingp attacker)
 {
   TRACE_AND_INDENT();
   if (unlikely(! monst_aip)) {

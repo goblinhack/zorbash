@@ -72,19 +72,19 @@ void Thing::hooks_remove()
         if (is_loggable()) {
           dbg("Detach carry-anim from owner %s", owner->to_string().c_str());
         }
-        owner->equip_set_carry_anim_id(NoThingId.id, e);
+        owner->set_equip_carry_anim_id(NoThingId.id, e);
       }
 
       if (id == owner->get_equip_id_use_anim(e)) {
         if (is_loggable()) {
           dbg("Detach use_anim from owner %s", owner->to_string().c_str());
         }
-        owner->equip_set_use_anim_id(NoThingId.id, e);
+        owner->set_equip_use_anim_id(NoThingId.id, e);
 
         //
         // End of the use-animation, make the sword visible again.
         //
-        auto carry_anim = owner->equip_get_carry_anim(e);
+        auto carry_anim = owner->get_equip_carry_anim(e);
         if (carry_anim) {
           dbg("Make carry weapon visible %s", owner->to_string().c_str());
           TRACE_AND_INDENT();
@@ -107,7 +107,7 @@ void Thing::hooks_remove()
           }
           auto id = owner->get_equip_id(e);
           if (id.ok()) {
-            owner->equip(owner->equip_get(e), e);
+            owner->equip(owner->get_equip(e), e);
           }
         }
       }
@@ -143,12 +143,12 @@ void Thing::hooks_remove()
   FOR_ALL_EQUIP(e)
   {
     TRACE_AND_INDENT();
-    auto item = equip_get_carry_anim(e);
+    auto item = get_equip_carry_anim(e);
     if (item) {
       if (is_loggable()) {
         dbg("Hooks remove carry-anim");
       }
-      equip_set_carry_anim(nullptr, e);
+      set_equip_carry_anim(nullptr, e);
       verify(item);
       item->remove_owner();
       item->dead("weapon carry-anim owner defeated ");
@@ -158,12 +158,12 @@ void Thing::hooks_remove()
   FOR_ALL_EQUIP(e)
   {
     TRACE_AND_INDENT();
-    auto item = equip_get_use_anim(e);
+    auto item = get_equip_use_anim(e);
     if (item) {
       if (is_loggable()) {
         dbg("Hooks remove use-anim");
       }
-      equip_set_use_anim(nullptr, e);
+      set_equip_use_anim(nullptr, e);
       verify(item);
       item->remove_owner();
       item->dead("weapon use-anim owner defeated ");

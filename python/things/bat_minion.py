@@ -286,7 +286,7 @@ def tp_init(name, text_name):
     mytp.set_unused_flag2(False)
     mytp.set_unused_flag30(False)
     mytp.set_unused_flag31(False)
-    mytp.set_unused_flag32(False)
+    mytp.set_is_auto_equipped(False)
     mytp.set_is_buff(False)
     mytp.set_is_debuff(False)
     mytp.set_attack_undead(False)

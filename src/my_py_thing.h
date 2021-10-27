@@ -229,7 +229,7 @@ PyObject *thing_unused_flag29(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag2(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag30(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag31(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag32(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_auto_equipped(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_buff(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_debuff(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_attack_undead(PyObject *obj, PyObject *args, PyObject *keywds);

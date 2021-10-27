@@ -13,7 +13,7 @@
 #include "my_thing.h"
 #include "my_tile.h"
 
-bool Thing::is_enemy(Thingp attacker) const
+bool Thing::is_enemy(Thingp attacker)
 {
   TRACE_AND_INDENT();
   if (unlikely(! monst_aip)) {

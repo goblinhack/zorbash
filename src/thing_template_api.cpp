@@ -360,7 +360,7 @@ int Tp::unused_flag29(void) const { return _unused_flag29; }
 int Tp::unused_flag2(void) const { return _unused_flag2; }
 int Tp::unused_flag30(void) const { return _unused_flag30; }
 int Tp::unused_flag31(void) const { return _unused_flag31; }
-int Tp::unused_flag32(void) const { return _unused_flag32; }
+int Tp::is_auto_equipped(void) const { return _is_auto_equipped; }
 int Tp::is_buff(void) const { return _is_buff; }
 int Tp::is_debuff(void) const { return _is_debuff; }
 int Tp::attack_undead(void) const { return _attack_undead; }
@@ -680,7 +680,7 @@ void Tp::set_unused_flag29(int v) { _unused_flag29 = v; }
 void Tp::set_unused_flag2(int v) { _unused_flag2 = v; }
 void Tp::set_unused_flag30(int v) { _unused_flag30 = v; }
 void Tp::set_unused_flag31(int v) { _unused_flag31 = v; }
-void Tp::set_unused_flag32(int v) { _unused_flag32 = v; }
+void Tp::set_is_auto_equipped(int v) { _is_auto_equipped = v; }
 void Tp::set_is_buff(int v) { _is_buff = v; }
 void Tp::set_is_debuff(int v) { _is_debuff = v; }
 void Tp::set_attack_undead(int v) { _attack_undead = v; }

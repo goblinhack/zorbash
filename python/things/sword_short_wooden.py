@@ -119,6 +119,7 @@ def init_weapon(name, text_name, short_text_name):
     mytp.set_is_treasure_type(True)
     mytp.set_is_usable(True)
     mytp.set_is_weapon(True)
+    mytp.set_is_auto_equipped(True)
     mytp.set_item_height(4)
     mytp.set_item_width(4)
     mytp.set_long_text_description("A wooden short sword. Ideal for play fighting and not much else.")

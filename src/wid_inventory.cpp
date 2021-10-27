@@ -599,8 +599,7 @@ static uint8_t wid_slot_item_mouse_up(Widp w, int32_t x, int32_t y, uint32_t but
 bool wid_inventory_create(Thingp selected, Thingp over)
 {
   TRACE_AND_INDENT();
-  TOPCON("Create inventory");
-  traceback_dump();
+  LOG("Create inventory");
 
   auto level = game->level;
   if (! level) {
@@ -978,7 +977,7 @@ bool wid_inventory_create(Thingp selected, Thingp over)
     point tl = point(15, y_at);
     point br = point(18, y_at + 3);
     wid_set_pos(w, tl, br);
-    auto t = player->equip_get(MONST_EQUIP_WEAPON);
+    auto t = player->get_equip(MONST_EQUIP_WEAPON);
     if (t) {
       wid_set_thing_id_context(w, t->id);
       wid_set_bg_tile(w, t);

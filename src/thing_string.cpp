@@ -15,7 +15,7 @@
 #include "my_thing.h"
 #include "my_thing_template.h"
 
-std::string Thing::to_string(void) const
+std::string Thing::to_string(void)
 {
   TRACE_AND_INDENT();
   auto tpp = tp();
@@ -55,7 +55,7 @@ std::string Thing::to_string(void) const
   }
 }
 
-std::string Thing::to_short_string(void) const
+std::string Thing::to_short_string(void)
 {
   TRACE_AND_INDENT();
   auto tpp = tp();
@@ -99,7 +99,7 @@ std::string Thing::to_short_string(void) const
   }
 }
 
-std::string Thing::to_dbg_string(void) const
+std::string Thing::to_dbg_string(void)
 {
   TRACE_AND_INDENT();
   verify(this);
@@ -163,7 +163,7 @@ std::string Thing::to_dbg_string(void) const
 //
 // Like the above, but excludes temporary flags like particles
 //
-std::string Thing::to_dbg_saved_string(void) const
+std::string Thing::to_dbg_saved_string(void)
 {
   TRACE_AND_INDENT();
   verify(this);

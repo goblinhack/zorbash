@@ -44,7 +44,7 @@ void Thing::on_fire(void)
   }
 }
 
-bool Thing::is_on_fire(void) const
+bool Thing::is_on_fire(void)
 {
   TRACE_AND_INDENT();
   auto id = get_on_fire_anim_id();

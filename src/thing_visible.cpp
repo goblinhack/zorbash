@@ -26,8 +26,8 @@ void Thing::visible(void)
   //
   auto owner = get_top_owner();
   if (owner) {
-    if (this == owner->equip_get_carry_anim(MONST_EQUIP_WEAPON)) {
-      if (owner->equip_get_use_anim(MONST_EQUIP_WEAPON)) {
+    if (this == owner->get_equip_carry_anim(MONST_EQUIP_WEAPON)) {
+      if (owner->get_equip_use_anim(MONST_EQUIP_WEAPON)) {
         //
         // Stay hidden until the weapon use is done.
         //
@@ -71,7 +71,7 @@ void Thing::visible(void)
   move_finish();
 }
 
-uint8_t Thing::is_visible(void) const
+uint8_t Thing::is_visible(void)
 {
   TRACE_AND_INDENT();
   return (! is_hidden);

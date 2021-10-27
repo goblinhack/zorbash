@@ -122,6 +122,7 @@ def init_weapon(name, text_name, short_text_name):
     mytp.set_is_treasure_type(True)
     mytp.set_is_usable(True)
     mytp.set_is_weapon(True)
+    mytp.set_is_auto_equipped(True)
     mytp.set_item_height(5)
     mytp.set_item_width(5)
     mytp.set_long_text_description("A rusting short sword. Ideal for absolutely no one.")

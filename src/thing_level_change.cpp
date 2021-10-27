@@ -56,21 +56,21 @@ void Thing::level_change(Levelp l)
     }
   }
 
-  FOR_ALL_EQUIP(e) {{auto it = equip_get(e);
+  FOR_ALL_EQUIP(e) {{auto it = get_equip(e);
   if (it) {
     it->level_change(l);
   }
 }
 
 {
-  auto it = equip_get_carry_anim(e);
+  auto it = get_equip_carry_anim(e);
   if (it) {
     it->level_change(l);
   }
 }
 
 {
-  auto it = equip_get_use_anim(e);
+  auto it = get_equip_use_anim(e);
   if (it) {
     it->level_change(l);
   }

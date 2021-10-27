@@ -70,6 +70,20 @@ bool Thing::carry(Thingp item)
     }
   }
 
+  //
+  // If we have no weapon yet, equip it
+  //
+  if (is_weapon_equiper() && item->is_auto_equipped() && item->is_weapon() && ! get_equip_id(MONST_EQUIP_WEAPON)) {
+    if (equip(item, MONST_EQUIP_WEAPON)) {
+      if (is_player()) {
+        if (! level->is_starting) {
+          TOPCON("You equip %s.", item->text_the().c_str());
+        }
+      }
+      return true;
+    }
+  }
+
   if (is_monst()) {
     //
     // Always carry
@@ -92,7 +106,9 @@ bool Thing::carry(Thingp item)
     set_where_i_failed_to_collect_last(item->mid_at);
 
     if (is_player()) {
-      TOPCON("%%fg=red$No space to carry %s.%%fg=reset$", item->text_the().c_str());
+      if (! level->is_starting) {
+        TOPCON("%%fg=red$No space to carry %s.%%fg=reset$", item->text_the().c_str());
+      }
     }
     return false;
   }
@@ -120,9 +136,14 @@ bool Thing::carry(Thingp item)
   }
 
   if (is_player()) {
-    if (! inventory_id_insert(item)) {
-      dbg("No; no space in inventory");
-      return false;
+    //
+    // If not already equipped then it has to go in a bag
+    //
+    if (! is_equipped(item)) {
+      if (! inventory_id_insert(item)) {
+        dbg("No; no space in inventory");
+        return false;
+      }
     }
 
     if (item->is_collected_as_gold()) {
@@ -147,15 +168,6 @@ bool Thing::carry(Thingp item)
       if (! level->is_starting) {
         TOPCON("You carry %s.", item->text_the().c_str());
       }
-    }
-  }
-
-  //
-  // If we have no weapon yet, equip it
-  //
-  if (is_weapon_equiper()) {
-    if (item->is_weapon() && ! get_equip_id(MONST_EQUIP_WEAPON)) {
-      equip(item, MONST_EQUIP_WEAPON);
     }
   }
 

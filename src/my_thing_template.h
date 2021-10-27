@@ -272,7 +272,7 @@ private:
   int         _unused_flag3 {};
   int         _unused_flag30 {};
   int         _unused_flag31 {};
-  int         _unused_flag32 {};
+  int         _is_auto_equipped {};
   int         _is_buff {};
   int         _is_debuff {};
   int         _attack_undead {};
@@ -748,7 +748,7 @@ public:
   int                unused_flag2(void) const;
   int                unused_flag30(void) const;
   int                unused_flag31(void) const;
-  int                unused_flag32(void) const;
+  int                is_auto_equipped(void) const;
   int                is_buff(void) const;
   int                is_debuff(void) const;
   int                attack_undead(void) const;
@@ -1077,7 +1077,7 @@ public:
   void               set_unused_flag2(int);
   void               set_unused_flag30(int);
   void               set_unused_flag31(int);
-  void               set_unused_flag32(int);
+  void               set_is_auto_equipped(int);
   void               set_is_buff(int);
   void               set_is_debuff(int);
   void               set_attack_undead(int);

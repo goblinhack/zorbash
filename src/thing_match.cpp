@@ -12,7 +12,7 @@
 #include "slre.h"
 #include <algorithm>
 
-bool Thing::matches(const std::string &what) const
+bool Thing::matches(const std::string &what)
 {
   if (strisregexp(what.c_str())) {
     struct slre slre;
@@ -547,7 +547,7 @@ bool Thing::matches(const std::string &what) const
   if (unused_flag31() && (what == "unused_flag31")) {
     return true;
   }
-  if (unused_flag32() && (what == "unused_flag32")) {
+  if (is_auto_equipped() && (what == "is_auto_equipped")) {
     return true;
   }
   if (is_buff() && (what == "is_buff")) {
@@ -1319,8 +1319,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag31") {
     return &Thing::unused_flag31;
   }
-  if (what == "unused_flag32") {
-    return &Thing::unused_flag32;
+  if (what == "is_auto_equipped") {
+    return &Thing::is_auto_equipped;
   }
   if (what == "is_buff") {
     return &Thing::is_buff;

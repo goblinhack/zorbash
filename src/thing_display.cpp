@@ -673,7 +673,7 @@ bool Thing::get_map_offset_coords(point &blit_tl, point &blit_br, Tilep &tile, b
   return (blit);
 }
 
-uint8_t Thing::blit_begin_submerged(void) const
+uint8_t Thing::blit_begin_submerged(void)
 {
   TRACE_AND_INDENT();
   auto submerged = get_submerged_offset();
@@ -695,7 +695,7 @@ uint8_t Thing::blit_begin_submerged(void) const
   return (submerged);
 }
 
-void Thing::blit_end_submerged(uint8_t submerged) const
+void Thing::blit_end_submerged(uint8_t submerged)
 {
   TRACE_AND_INDENT();
   blit_flush();
@@ -705,7 +705,7 @@ void Thing::blit_end_submerged(uint8_t submerged) const
   blit_init();
 }
 
-uint8_t Thing::blit_begin_reflection_submerged(void) const
+uint8_t Thing::blit_begin_reflection_submerged(void)
 {
   TRACE_AND_INDENT();
   auto submerged = get_submerged_offset();
@@ -727,7 +727,7 @@ uint8_t Thing::blit_begin_reflection_submerged(void) const
   return (submerged);
 }
 
-void Thing::blit_end_reflection_submerged(uint8_t submerged) const
+void Thing::blit_end_reflection_submerged(uint8_t submerged)
 {
   TRACE_AND_INDENT();
   blit_flush();

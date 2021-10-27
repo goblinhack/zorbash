@@ -12,7 +12,18 @@
 #include "my_thing.h"
 #include "my_thing_template.h"
 
-Thingp Thing::equip_get(int equip) const
+bool Thing::is_equipped(Thingp item)
+{
+  FOR_ALL_EQUIP(e)
+  {
+    if (item == get_equip(e)) {
+      return true;
+    }
+  }
+  return false;
+}
+
+Thingp Thing::get_equip(int equip)
 {
   TRACE_AND_INDENT();
   auto id = get_equip_id(equip);
@@ -23,13 +34,13 @@ Thingp Thing::equip_get(int equip) const
   return (nullptr);
 }
 
-void Thing::equip_set_carry_anim_id(ThingId equip_carry_anim_id, int equip)
+void Thing::set_equip_carry_anim_id(ThingId equip_carry_anim_id, int equip)
 {
   TRACE_AND_INDENT();
   Thingp equip_carry_anim;
 
   if (! equip_carry_anim_id) {
-    equip_set_carry_anim(nullptr, equip);
+    set_equip_carry_anim(nullptr, equip);
     return;
   }
 
@@ -38,17 +49,17 @@ void Thing::equip_set_carry_anim_id(ThingId equip_carry_anim_id, int equip)
     return;
   }
 
-  equip_set_carry_anim(equip_carry_anim, equip);
+  set_equip_carry_anim(equip_carry_anim, equip);
 }
 
-void Thing::equip_set_carry_anim(Thingp new_equip_carry_anim, int equip)
+void Thing::set_equip_carry_anim(Thingp new_equip_carry_anim, int equip)
 {
   TRACE_AND_INDENT();
   if (new_equip_carry_anim) {
     verify(new_equip_carry_anim);
   }
 
-  auto old_equip_carry_anim = equip_get_carry_anim(equip);
+  auto old_equip_carry_anim = get_equip_carry_anim(equip);
   if (old_equip_carry_anim) {
     if (old_equip_carry_anim == new_equip_carry_anim) {
       return;
@@ -76,13 +87,13 @@ void Thing::equip_set_carry_anim(Thingp new_equip_carry_anim, int equip)
   }
 }
 
-void Thing::equip_set_use_anim_id(ThingId gfx_anim_use_id, int equip)
+void Thing::set_equip_use_anim_id(ThingId gfx_anim_use_id, int equip)
 {
   TRACE_AND_INDENT();
   Thingp gfx_anim_use;
 
   if (! gfx_anim_use_id) {
-    equip_set_use_anim(nullptr, equip);
+    set_equip_use_anim(nullptr, equip);
     return;
   }
 
@@ -91,17 +102,17 @@ void Thing::equip_set_use_anim_id(ThingId gfx_anim_use_id, int equip)
     return;
   }
 
-  equip_set_use_anim(gfx_anim_use, equip);
+  set_equip_use_anim(gfx_anim_use, equip);
 }
 
-void Thing::equip_set_use_anim(Thingp new_gfx_anim_use, int equip)
+void Thing::set_equip_use_anim(Thingp new_gfx_anim_use, int equip)
 {
   TRACE_AND_INDENT();
   if (new_gfx_anim_use) {
     verify(new_gfx_anim_use);
   }
 
-  auto old_gfx_anim_use = equip_get_use_anim(equip);
+  auto old_gfx_anim_use = get_equip_use_anim(equip);
 
   if (old_gfx_anim_use) {
     if (old_gfx_anim_use == new_gfx_anim_use) {
@@ -129,13 +140,13 @@ void Thing::equip_set_use_anim(Thingp new_gfx_anim_use, int equip)
   }
 }
 
-void Thing::equip_get_use_offset(int *dx, int *dy, int equip) const
+void Thing::get_equip_use_offset(int *dx, int *dy, int equip)
 {
   TRACE_AND_INDENT();
   *dx = 0;
   *dy = 0;
 
-  auto equip_thing = equip_get(equip);
+  auto equip_thing = get_equip(equip);
   if (! equip_thing) {
     return;
   }
@@ -194,7 +205,7 @@ void Thing::equip_get_use_offset(int *dx, int *dy, int equip) const
   }
 }
 
-Thingp Thing::equip_get_carry_anim(int equip)
+Thingp Thing::get_equip_carry_anim(int equip)
 {
   TRACE_AND_INDENT();
   Thingp equip_carry_anim = 0;
@@ -207,7 +218,7 @@ Thingp Thing::equip_get_carry_anim(int equip)
   return (equip_carry_anim);
 }
 
-Thingp Thing::equip_get_use_anim(int equip) const
+Thingp Thing::get_equip_use_anim(int equip)
 {
   TRACE_AND_INDENT();
   //
@@ -233,7 +244,7 @@ void Thing::unequip(const char *why, int equip)
 
   dbg("Unequiping %08" PRIx32 ", why: %s", get_equip_id(equip).id, why);
 
-  auto equip_thing = equip_get(equip);
+  auto equip_thing = get_equip(equip);
   if (! equip_thing) {
     dbg("Could not unequip %08" PRIx32 ", why: %s", get_equip_id(equip).id, why);
     return;
@@ -247,7 +258,7 @@ void Thing::unequip(const char *why, int equip)
 void Thing::equip_remove_anim(int equip)
 {
   TRACE_AND_INDENT();
-  auto equip_thing = equip_get(equip);
+  auto equip_thing = get_equip(equip);
   if (! equip_thing) {
     return;
   }
@@ -258,20 +269,20 @@ void Thing::equip_remove_anim(int equip)
   //
   // If this thing has its own thing id for animations then destroy that.
   //
-  auto equip_carry_anim = equip_get_carry_anim(equip);
+  auto equip_carry_anim = get_equip_carry_anim(equip);
   if (equip_carry_anim) {
     dbg("Remove carry-anim");
     equip_carry_anim->dead("by owner sheathed weapon, remove carry-anim");
-    equip_set_carry_anim(nullptr, equip);
+    set_equip_carry_anim(nullptr, equip);
   } else {
     dbg("Weapon had no carry-anim");
   }
 
-  auto gfx_anim_use = equip_get_use_anim(equip);
+  auto gfx_anim_use = get_equip_use_anim(equip);
   if (gfx_anim_use) {
     dbg("Remove use-anim");
     gfx_anim_use->dead("by owner sheathed weapon, remove use-anim");
-    equip_set_use_anim(nullptr, equip);
+    set_equip_use_anim(nullptr, equip);
   } else {
     dbg("Weapon had no use/attack anim");
   }
@@ -291,7 +302,7 @@ bool Thing::equip(Thingp equip_thing, int equip)
   TRACE_AND_INDENT();
   auto equip_tp = equip_thing->tp();
 
-  if (equip_get(equip) == equip_thing) {
+  if (get_equip(equip) == equip_thing) {
     dbg("Re-equiping: %s", equip_tp->name().c_str());
     //
     // Do not return here. We need to set the carry-anim post swing
@@ -319,7 +330,7 @@ bool Thing::equip(Thingp equip_thing, int equip)
   //
   // Save the thing id so the client wid can keep track of the thing.
   //
-  equip_set_carry_anim(carry_anim, equip);
+  set_equip_carry_anim(carry_anim, equip);
 
   //
   // Attach to the thing.
@@ -336,13 +347,13 @@ bool Thing::equip_use_try(int equip)
   TRACE_AND_INDENT();
 
   int  dx, dy;
-  auto equip_thing = equip_get(equip);
+  auto equip_thing = get_equip(equip);
   if (! equip_thing) {
     auto d = dir_to_direction();
     dx     = d.x;
     dy     = d.y;
   } else {
-    equip_get_use_offset(&dx, &dy, equip);
+    get_equip_use_offset(&dx, &dy, equip);
   }
 
   bool target_attacked = false;
@@ -615,7 +626,7 @@ bool Thing::equip_use(bool forced, int equip)
 
   std::string used_as;
 
-  auto equip_thing = equip_get(equip);
+  auto equip_thing = get_equip(equip);
   if (! equip_thing) {
     if (equip == MONST_EQUIP_WEAPON) {
       if (is_player()) {
@@ -654,12 +665,12 @@ bool Thing::equip_use(bool forced, int equip)
   //
   use_anim->set_owner(this);
 
-  equip_set_use_anim(use_anim, equip);
+  set_equip_use_anim(use_anim, equip);
 
   //
   // Hide the carry_anim while using.
   //
-  auto c = equip_get_carry_anim(equip);
+  auto c = get_equip_carry_anim(equip);
   if (c) {
     c->hide();
   }

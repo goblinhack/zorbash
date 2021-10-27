@@ -132,7 +132,7 @@ bool Thing::will_avoid_monst(const point &p)
   return false;
 }
 
-bool Thing::is_to_be_avoided(Thingp attacker) const
+bool Thing::is_to_be_avoided(Thingp attacker)
 {
   TRACE_AND_INDENT();
   if (unlikely(! monst_aip)) {
@@ -145,7 +145,7 @@ bool Thing::is_to_be_avoided(Thingp attacker) const
   return false;
 }
 
-bool Thing::cannot_avoid(Thingp attacker) const
+bool Thing::cannot_avoid(Thingp attacker)
 {
   TRACE_AND_INDENT();
   if (unlikely(! monst_aip)) {

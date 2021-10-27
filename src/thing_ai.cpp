@@ -679,7 +679,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
   dmap_process(dmap_can_see, point(minx, miny), point(maxx, maxy));
 
   if (check_for_interrupts) {
-    auto threat = most_dangerous_visible_thing_get();
+    auto threat = get_most_dangerous_visible_thing();
     if (threat) {
       if (threat && (is_dangerous(threat) || is_enemy(threat) || is_to_be_avoided(threat))) {
         if (! get_goal_penalty(threat)) {
@@ -1410,7 +1410,7 @@ bool Thing::ai_tick(bool recursing)
   //
   // See if anything dangerous is close
   //
-  auto threat = most_dangerous_visible_thing_get();
+  auto threat = get_most_dangerous_visible_thing();
 
   //
   // Update what we can see
@@ -1589,7 +1589,7 @@ bool Thing::ai_tick(bool recursing)
           //
           Thingp best_weapon;
           get_carried_weapon_highest_value(&best_weapon);
-          if (best_weapon && (best_weapon != equip_get(MONST_EQUIP_WEAPON))) {
+          if (best_weapon && (best_weapon != get_equip(MONST_EQUIP_WEAPON))) {
             if (equip(best_weapon, MONST_EQUIP_WEAPON)) {
               AI_LOG("Change weapon", best_weapon);
               if (is_player()) {

@@ -1,8 +1,8 @@
 
 Bugs
 ----
-- drag to equip
-- auto equip
+- drag weapon to bag
+- replace weapon
 - can click on equip to use ring
 - equip armour etc
 
@@ -70,7 +70,7 @@ Doors
 
 AI
 --
-- add monst states, like hunting, worshipping, sleeping
+- add monst states, like wandering (not noticed your stealth), hunting, worshipping, sleeping
 
 Wands
 -----

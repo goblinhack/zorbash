@@ -58,8 +58,8 @@
 #define UI_WID_SAVE_SLOTS            40 // How many save game slots
 #define UI_WID_STYLE_SPARSE_NONE     -1
 #define UI_WID_STYLE_SOLID_NONE      0
-#define UI_WID_STYLE_OK           1
-#define UI_WID_STYLE_HIGHLIGHTED             2
+#define UI_WID_STYLE_OK              1
+#define UI_WID_STYLE_HIGHLIGHTED     2
 #define UI_WID_STYLE_NORMAL          3
 #define UI_WID_STYLE_DARK            4
 #define UI_WID_STYLE_SOLID_DEFAULT   5

@@ -404,8 +404,12 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
     }
   }
 
-  auto t = most_dangerous_adjacent_thing_get();
-  if (is_monst() && t) {
+  auto t = get_most_dangerous_adjacent_thing();
+  //
+  // If we allow the player here to get a free attack, then it looks nuts
+  // as we end up attacking without actually attacking
+  //
+  if (is_monst() && t && ! t->is_player()) {
     auto free_attack = (((t->mid_at.x >= mid_at.x) && left) || ((t->mid_at.x <= mid_at.x) && right) ||
                         ((t->mid_at.y >= mid_at.y) && up) || ((t->mid_at.y <= mid_at.y) && down));
 
