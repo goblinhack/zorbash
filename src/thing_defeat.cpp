@@ -148,7 +148,7 @@ void Thing::defeat(Thingp defeater, const char *reason)
     if (p) {
       int distance = distance_to_player();
       if (defeater && defeater->is_fire()) {
-        if ((distance < 5) || (distance == DMAP_IS_WALL)) {
+        if (distance < 5) {
           TOPCON("The door burns through.");
         } else if (distance < DMAP_IS_PASSABLE) {
           TOPCON("The hear the crackling of burning wood.");
@@ -156,12 +156,12 @@ void Thing::defeat(Thingp defeater, const char *reason)
           TOPCON("You smell smoke in the air.");
         }
       } else {
-        if ((distance <= 1) || (distance == DMAP_IS_WALL)) {
+        if (distance <= 1) {
           TOPCON("The door crashes open.");
         } else if (distance < DMAP_IS_PASSABLE) {
           TOPCON("The hear the noise of a door crashing open.");
         } else {
-          TOPCON("You hear a muffled crash. %d", distance);
+          TOPCON("The hear the distant noise of a door crashing open.");
         }
       }
       p->update_light();
