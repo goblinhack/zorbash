@@ -2,6 +2,7 @@
 Bugs
 ----
 - drag to equip
+- auto equip
 - can click on equip to use ring
 - equip armour etc
 
@@ -83,6 +84,7 @@ Potions
 
 Weapons
 -------
+- strength penalties
 - axe hits all monsts around you ?
 - darts / poison darts
 - three damage types, blunt(club warhammer) pierce(arrow javelin) or cut(axe scythe swwrd)

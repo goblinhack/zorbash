@@ -1094,7 +1094,7 @@ void Game::config_keyboard_select(void)
 
     point tl = make_point(width - 17, y_at);
     point br = make_point(width - 12, y_at + 2);
-    wid_set_style(w, UI_WID_STYLE_GREEN);
+    wid_set_style(w, UI_WID_STYLE_OK);
     wid_set_on_mouse_up(w, game_config_keyboard_save);
     wid_set_pos(w, tl, br);
     wid_set_text(w, "Save");
@@ -1106,7 +1106,7 @@ void Game::config_keyboard_select(void)
 
     point tl = make_point(width - 10, y_at);
     point br = make_point(width - 3, y_at + 2);
-    wid_set_style(w, UI_WID_STYLE_RED);
+    wid_set_style(w, UI_WID_STYLE_HIGHLIGHTED);
     wid_set_on_mouse_up(w, game_config_keyboard_cancel);
     wid_set_pos(w, tl, br);
     wid_set_text(w, "Cancel");

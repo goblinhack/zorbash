@@ -706,7 +706,7 @@ static bool wid_rightbar_create(void)
 
     wid_set_pos(w, tl, br);
     wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
-    wid_set_style(w, UI_WID_STYLE_RED);
+    wid_set_style(w, UI_WID_STYLE_HIGHLIGHTED);
     wid_set_shape_none(w);
 
     wid_update(wid_rightbar);

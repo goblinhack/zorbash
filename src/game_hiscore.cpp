@@ -176,7 +176,7 @@ void Game::hiscore_select(void)
     point tl = make_point(28, 47);
     point br = make_point(width - 28, 49);
 
-    wid_set_style(w, UI_WID_STYLE_RED);
+    wid_set_style(w, UI_WID_STYLE_HIGHLIGHTED);
     wid_set_on_mouse_up(w, wid_hiscore_mouse_up);
 
     wid_set_pos(w, tl, br);

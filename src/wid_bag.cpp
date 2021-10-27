@@ -70,7 +70,7 @@ static void wid_bag_add_items(Widp wid_bag_container, Thingp bag)
     wid_set_style(w, UI_WID_STYLE_DARK);
 
     if (t == wid_inventory_thing_selected) {
-      wid_set_style(w, UI_WID_STYLE_RED);
+      wid_set_style(w, UI_WID_STYLE_HIGHLIGHTED);
     }
 
     bag->log("+ item %s at %d,%d", t->to_string().c_str(), t->monst_infop->bag_position.x,
@@ -192,6 +192,13 @@ uint8_t wid_in_transit_item_place(Widp w, int32_t x, int32_t y, uint32_t button)
       wid_bag_container             = wid_inventory_bag->wid_bag_container;
       game->request_remake_rightbar = true;
       wid_inventory_select_requested(t);
+      break;
+    }
+
+    if (over->name == "equip weapon") {
+      auto what = t;
+      player->log("Use %s", what->to_string().c_str());
+      player->use(what);
       break;
     }
   }
@@ -398,14 +405,7 @@ bool Game::wid_bag_move_item(Thingp t)
 
   wid_set_thing_id_context(game->in_transit_item, t->id);
   wid_set_on_mouse_up(game->in_transit_item, wid_in_transit_item_place);
-
-  auto tpp   = t->tp();
-  auto tiles = &tpp->tiles;
-
-  auto tile = tile_first(tiles);
-  if (tile) {
-    wid_set_fg_tile(game->in_transit_item, tile);
-  }
+  wid_set_fg_tile(game->in_transit_item, t);
 
   wid_set_moveable(game->in_transit_item, true);
   wid_update(game->in_transit_item);

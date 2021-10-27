@@ -753,7 +753,7 @@ bool wid_inventory_create(Thingp selected, Thingp over)
 
         if (wid_inventory_thing_selected) {
           if (wid_inventory_thing_selected->tp() == tpp) {
-            wid_set_style(wid_icon, UI_WID_STYLE_RED);
+            wid_set_style(wid_icon, UI_WID_STYLE_HIGHLIGHTED);
           }
         }
 
@@ -781,7 +781,7 @@ bool wid_inventory_create(Thingp selected, Thingp over)
 
         if (wid_inventory_thing_selected) {
           if (wid_inventory_thing_selected->tp() == tpp) {
-            wid_set_style(wid_item, UI_WID_STYLE_RED);
+            wid_set_style(wid_item, UI_WID_STYLE_HIGHLIGHTED);
           }
         }
 
@@ -983,9 +983,14 @@ bool wid_inventory_create(Thingp selected, Thingp over)
     point tl = point(15, y_at);
     point br = point(18, y_at + 3);
     wid_set_pos(w, tl, br);
-    wid_set_bg_tilename(w, "equip_weapon");
-    // wid_set_fg_tilename(w, "bag_large");
-    wid_set_style(w, UI_WID_STYLE_GRAY);
+    auto t = player->equip_get(MONST_EQUIP_WEAPON);
+    if (t) {
+      wid_set_bg_tile(w, t);
+      wid_set_style(w, UI_WID_STYLE_HIGHLIGHTED);
+    } else {
+      wid_set_bg_tilename(w, "equip_weapon");
+      wid_set_style(w, UI_WID_STYLE_DARK);
+    }
     wid_set_do_not_lower(w, true);
     // wid_set_on_mouse_over_begin(w, wid_inventory_mouse_over_tab_bag2);
   }

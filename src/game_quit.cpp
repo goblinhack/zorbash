@@ -178,7 +178,7 @@ void Game::quit_select(void)
 
     point tl = make_point(0, y_at);
     point br = make_point(width / 2 - 2, y_at + 2);
-    wid_set_style(w, UI_WID_STYLE_RED);
+    wid_set_style(w, UI_WID_STYLE_HIGHLIGHTED);
     wid_set_on_mouse_up(w, game_quit_yes);
     wid_set_pos(w, tl, br);
     wid_set_text(w, "%%fg=white$Y%%fg=reset$es");
@@ -191,7 +191,7 @@ void Game::quit_select(void)
 
     point tl = make_point(width / 2 + 1, y_at);
     point br = make_point(width - 2, y_at + 2);
-    wid_set_style(w, UI_WID_STYLE_GREEN);
+    wid_set_style(w, UI_WID_STYLE_OK);
     wid_set_on_mouse_up(w, game_quit_no);
     wid_set_pos(w, tl, br);
     wid_set_text(w, "%%fg=white$N%%fg=reset$o");

@@ -17,6 +17,8 @@
 #include "my_sprintf.h"
 #include "my_sys.h"
 #include "my_tex.h"
+#include "my_thing.h"
+#include "my_thing_template.h"
 #include "my_tile.h"
 #include "my_time.h"
 #include "my_traceback.h"
@@ -1532,6 +1534,50 @@ void wid_set_fg3_tilename(Widp w, std::string name)
   }
 
   w->fg3_tile = tile;
+}
+
+void wid_set_bg_tile(Widp w, Thingp t)
+{
+  auto tpp   = t->tp();
+  auto tiles = &tpp->tiles;
+
+  auto tile = tile_first(tiles);
+  if (tile) {
+    wid_set_bg_tile(w, tile);
+  }
+}
+
+void wid_set_fg_tile(Widp w, Thingp t)
+{
+  auto tpp   = t->tp();
+  auto tiles = &tpp->tiles;
+
+  auto tile = tile_first(tiles);
+  if (tile) {
+    wid_set_fg_tile(w, tile);
+  }
+}
+
+void wid_set_fg2_tile(Widp w, Thingp t)
+{
+  auto tpp   = t->tp();
+  auto tiles = &tpp->tiles;
+
+  auto tile = tile_first(tiles);
+  if (tile) {
+    wid_set_fg2_tile(w, tile);
+  }
+}
+
+void wid_set_fg3_tile(Widp w, Thingp t)
+{
+  auto tpp   = t->tp();
+  auto tiles = &tpp->tiles;
+
+  auto tile = tile_first(tiles);
+  if (tile) {
+    wid_set_fg3_tile(w, tile);
+  }
 }
 
 //

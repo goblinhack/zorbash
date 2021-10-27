@@ -551,13 +551,18 @@ public:
 };
 
 uint8_t wid_is_moving(Widp w);
-void    wid_set_style(Widp w, int style);
-void    wid_set_bg_tile(Widp w, Tilep tile);
-void    wid_set_fg_tile(Widp w, Tilep tile);
-void    wid_set_fg2_tile(Widp w, Tilep tile);
-void    wid_set_fg3_tile(Widp w, Tilep tile);
-void    wid_ignore_events_briefly(void);
-bool    wid_some_recent_event_occurred(void);
+
+void wid_set_style(Widp w, int style);
+void wid_set_bg_tile(Widp w, Tilep tile);
+void wid_set_fg_tile(Widp w, Tilep tile);
+void wid_set_fg2_tile(Widp w, Tilep tile);
+void wid_set_fg3_tile(Widp w, Tilep tile);
+void wid_set_bg_tile(Widp w, class Thing_ *t);
+void wid_set_fg_tile(Widp w, class Thing_ *t);
+void wid_set_fg2_tile(Widp w, class Thing_ *t);
+void wid_set_fg3_tile(Widp w, class Thing_ *t);
+void wid_ignore_events_briefly(void);
+bool wid_some_recent_event_occurred(void);
 
 extern bool                                                              wid_mouse_two_clicks;
 extern const int32_t                                                     wid_destroy_delay_ms;

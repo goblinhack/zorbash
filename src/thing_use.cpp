@@ -176,7 +176,7 @@ bool Thing::use(Thingp what)
   } else if (what->is_weapon()) {
     if (equip(what, MONST_EQUIP_WEAPON)) {
       if (is_player()) {
-        TOPCON("You wield the %s.", what->text_the().c_str());
+        TOPCON("You equip the %s.", what->text_the().c_str());
         game->tick_begin("player changed weapon");
       }
     }
