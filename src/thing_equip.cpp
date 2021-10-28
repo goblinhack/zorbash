@@ -235,17 +235,17 @@ Thingp Thing::get_equip_use_anim(int equip)
   return (gfx_anim_use);
 }
 
-void Thing::unequip(const char *why, int equip)
+bool Thing::unequip(const char *why, int equip)
 {
   TRACE_AND_INDENT();
   if (! get_equip_id(equip)) {
-    return;
+    return false;
   }
 
   auto equip_thing = get_equip(equip);
   if (! equip_thing) {
     dbg("Could not unequip %08" PRIx32 ", why: %s", get_equip_id(equip).id, why);
-    return;
+    return false;
   }
 
   dbg("Unequiping current %s, why: %s", equip_thing->to_string().c_str(), why);
@@ -268,6 +268,20 @@ void Thing::unequip(const char *why, int equip)
   } else {
     dbg("Has unequipped %s and has no owner now", equip_thing->to_string().c_str());
   }
+  return true;
+}
+
+bool Thing::unequip(const char *why)
+{
+  TRACE_AND_INDENT();
+
+  FOR_ALL_EQUIP(e)
+  {
+    if (this == get_equip(e)) {
+      return unequip(why, e);
+    }
+  }
+  return false;
 }
 
 void Thing::equip_remove_anim(int equip)

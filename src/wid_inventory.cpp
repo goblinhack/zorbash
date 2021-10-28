@@ -852,12 +852,12 @@ bool wid_inventory_create(Thingp selected, Thingp over)
     }
   }
 
+  //
+  // Hightlight the thing we're over, or the selected thing with preference.
+  //
   Thingp item_option = wid_inventory_thing_over;
   if (wid_inventory_thing_selected) {
-    TOPCON("SEL");
     item_option = wid_inventory_thing_selected;
-  } else {
-    TOPCON("NOSEL");
   }
 
   if (item_option) {

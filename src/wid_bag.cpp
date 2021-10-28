@@ -351,6 +351,17 @@ bool Game::wid_bag_move_item(Thingp t)
   DBG3("Chosen to move item");
   TRACE_AND_INDENT();
 
+  auto level = game->level;
+  if (! level) {
+    return false;
+  }
+
+  auto player = level->player;
+  if (player && player->is_dead) {
+    DBG3("Ignore input; player is dead");
+    return false;
+  }
+
   if (! t) {
     ERR("No thing to move");
     return false;
@@ -378,10 +389,16 @@ bool Game::wid_bag_move_item(Thingp t)
   }
 
   if (! bag) {
-    ERR("%s has no bag so cannot move it!", t->text_The().c_str());
-    return false;
+    if (player->is_equipped(t)) {
+      //
+      // This is ok, moving from equipment into the ether
+      //
+      t->unequip("moved item into ether");
+    } else {
+      ERR("%s has no bag so cannot move it!", t->text_The().c_str());
+      return false;
+    }
   }
-  verify(bag);
 
   auto old_owner = t->get_immediate_owner();
   if (! old_owner) {
@@ -389,10 +406,15 @@ bool Game::wid_bag_move_item(Thingp t)
     return true;
   }
 
-  bag->bag_remove(t);
+  if (bag) {
+    bag->bag_remove(t);
+  }
+
   old_owner->drop_into_ether(t);
 
-  while (bag->bag_compress()) {
+  if (bag) {
+    while (bag->bag_compress()) {
+    }
   }
 
   t->describe_when_hovered_over_in_rightbar();

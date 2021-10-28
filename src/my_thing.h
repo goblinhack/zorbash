@@ -418,6 +418,8 @@ public:
   bool will_avoid_monst(const point &p);
   bool will_prefer_terrain(const Thingp it);
   bool worth_eating(const Thingp it);
+  bool unequip(const char *why, int equip);
+  bool unequip(const char *why);
 
   void reset_goal_penalty(Thingp attacker);
   void buff_tick();
@@ -1412,7 +1414,6 @@ public:
   void unleash_minions(void);
   void unleash_spawners_things(void);
   void unset_on_fire(void);
-  void unequip(const char *why, int equip);
   void update_all(void);
   void update_interpolated_position(void);
   void update_light(void);

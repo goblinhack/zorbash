@@ -36,9 +36,7 @@ void Thing::hooks_remove()
       dbg("Detach %08" PRIx32 " from owner %s", id.id, owner->to_string().c_str());
     }
 
-    if (is_skill()) {
-      owner->skill_remove(this);
-    }
+    if (is_skill()) { owner->skill_remove(this); }
 
     if (is_buff()) {
       owner->buff_remove(this);
