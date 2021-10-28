@@ -28,10 +28,7 @@
 #include "my_wid_topcon.h"
 #include "slre.h"
 
-static uint8_t wid_bag_item_mouse_up(Widp w, int32_t x, int32_t y, uint32_t button);
-static uint8_t wid_bag_item_mouse_held(Widp w, int32_t x, int32_t y, uint32_t button);
-static uint8_t wid_bag_item_key_down(Widp w, const struct SDL_Keysym *key);
-static void    wid_bag_tick(Widp w);
+static void wid_bag_tick(Widp w);
 
 static void wid_bag_add_items(Widp wid_bag_container, Thingp bag)
 {
@@ -305,7 +302,7 @@ uint8_t wid_in_transit_item_drop(void)
   return true;
 }
 
-static uint8_t wid_bag_item_mouse_up(Widp w, int32_t x, int32_t y, uint32_t button)
+uint8_t wid_bag_item_mouse_up(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
   DBG3("Mouse down, item select");
@@ -328,7 +325,7 @@ static uint8_t wid_bag_item_mouse_up(Widp w, int32_t x, int32_t y, uint32_t butt
   return true;
 }
 
-static uint8_t wid_bag_item_mouse_held(Widp w, int32_t x, int32_t y, uint32_t button)
+uint8_t wid_bag_item_mouse_held(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
   DBG3("Mouse held down, item select");
@@ -465,7 +462,7 @@ void wid_bag_item_mouse_over_end(Widp w)
   BOTCON(" ");
 }
 
-static uint8_t wid_bag_item_key_down(Widp w, const struct SDL_Keysym *key)
+uint8_t wid_bag_item_key_down(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_AND_INDENT();
   DBG3("Bag item key down");

@@ -609,6 +609,9 @@ static void wid_inventory_add_equip(Widp parent, int equip, point tl, point br, 
     wid_set_style(w, UI_WID_STYLE_HIGHLIGHTED);
     wid_set_on_mouse_over_begin(w, wid_bag_item_mouse_over_begin);
     wid_set_on_mouse_over_end(w, wid_bag_item_mouse_over_end);
+    wid_set_on_mouse_up(w, wid_bag_item_mouse_up);
+    wid_set_on_mouse_held(w, wid_bag_item_mouse_held);
+    wid_set_on_key_down(w, wid_bag_item_key_down);
 
     //
     // Show a small visible button key
@@ -849,12 +852,20 @@ bool wid_inventory_create(Thingp selected, Thingp over)
     }
   }
 
+  Thingp item_option = wid_inventory_thing_over;
   if (wid_inventory_thing_selected) {
+    TOPCON("SEL");
+    item_option = wid_inventory_thing_selected;
+  } else {
+    TOPCON("NOSEL");
+  }
+
+  if (item_option) {
     int y_at  = 28;
     int x_off = 22;
     int width = 21;
 
-    if (player->can_eat(wid_inventory_thing_selected)) {
+    if (player->can_eat(item_option)) {
       TRACE_AND_INDENT();
       auto p = wid_inventory_window;
       auto w = wid_new_square_button(p, "eat");
@@ -866,7 +877,7 @@ bool wid_inventory_create(Thingp selected, Thingp over)
       wid_set_pos(w, tl, br);
       wid_set_text(w, "%%fg=white$E%%fg=reset$at");
       y_at += 3;
-    } else if (wid_inventory_thing_selected->is_usable()) {
+    } else if (item_option->is_usable()) {
       TRACE_AND_INDENT();
       auto p = wid_inventory_window;
       auto w = wid_new_square_button(p, "use");
@@ -876,18 +887,18 @@ bool wid_inventory_create(Thingp selected, Thingp over)
       wid_set_style(w, UI_WID_STYLE_NORMAL);
       wid_set_on_mouse_up(w, wid_inventory_item_option_use);
       wid_set_pos(w, tl, br);
-      if (wid_inventory_thing_selected->is_weapon()) {
+      if (item_option->is_weapon()) {
         wid_set_text(w, "%%fg=white$U%%fg=reset$se (equip)");
-      } else if (wid_inventory_thing_selected->is_potion()) {
+      } else if (item_option->is_potion()) {
         wid_set_text(w, "%%fg=white$U%%fg=reset$se (drink)");
-      } else if (wid_inventory_thing_selected->is_wand()) {
+      } else if (item_option->is_wand()) {
         wid_set_text(w, "%%fg=white$U%%fg=reset$se (fire it)");
       } else {
         wid_set_text(w, "%%fg=white$U%%fg=reset$se");
       }
       y_at += 3;
     }
-    if (wid_inventory_thing_selected->is_throwable()) {
+    if (item_option->is_throwable()) {
       TRACE_AND_INDENT();
       auto p = wid_inventory_window;
       auto w = wid_new_square_button(p, "throw");

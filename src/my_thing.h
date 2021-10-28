@@ -438,7 +438,7 @@ public:
   const ThingId &get_immediate_minion_owner_id(void);
   const ThingId &get_immediate_owner_id(void);
   const ThingId &get_immediate_spawned_owner_id(void);
-  const ThingId &get_top_owner_id(void) ;
+  const ThingId &get_top_owner_id(void);
   const ThingId &set_minion_owner_id(const ThingId &v);
   const ThingId &set_owner_id(const ThingId &v);
   const ThingId &set_spawned_owner_id(const ThingId &v);

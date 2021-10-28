@@ -403,6 +403,26 @@ bool Thing::bag_place_at(Thingp item, point pos)
   }
   item->monst_infop->bag_position      = pos;
   item->monst_infop->last_bag_position = pos;
+
+  if (1) {
+    LOG("Bag contents after add:");
+    for (auto y = 0; y < bh; y++) {
+      std::string s;
+      for (auto x = 0; x < bw; x++) {
+        auto id = get(bag, x, y);
+        if (id == NoThingId) {
+          s += ".";
+          continue;
+        }
+        if (id == item->id) {
+          s += "i";
+        } else {
+          s += "o";
+        }
+      }
+      LOG("bag[%s]", s.c_str());
+    }
+  }
   return true;
 }
 
@@ -421,7 +441,7 @@ bool Thing::bag_remove(Thingp item)
   auto bw    = capacity_width();
   auto bh    = capacity_height();
 
-  if (1) {
+  if (0) {
     LOG("Bag contents before remove:");
     for (auto y = 0; y < bh; y++) {
       std::string s;
@@ -456,7 +476,7 @@ bool Thing::bag_remove(Thingp item)
     dbg3("Bag: failed to remove %s", item->to_string().c_str());
   }
 
-  if (1) {
+  if (0) {
     LOG("Bag contents after remove:");
     for (auto y = 0; y < bh; y++) {
       std::string s;

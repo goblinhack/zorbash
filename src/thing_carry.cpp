@@ -26,12 +26,20 @@ bool Thing::carry(Thingp item, bool can_equip)
   }
 
   dbg("Try to carry %s", item->to_string().c_str());
+  TRACE_AND_INDENT();
+
+  auto top_owner = item->get_top_owner();
+  if (top_owner) {
+    dbg("Item %s has existing owner: %s", item->to_string().c_str(), top_owner->to_string().c_str());
+  } else {
+    dbg("Item %s has no owner", item->to_string().c_str());
+  }
 
   //
   // Only player/monsts or bags can carry items
   //
   if (! monst_infop && ! is_bag()) {
-    dbg("No; not a monst or bag");
+    dbg("Cannot carry; not a monst or bag");
     return false;
   }
 
@@ -41,7 +49,7 @@ bool Thing::carry(Thingp item, bool can_equip)
   if (item->is_bag()) {
     for (const auto t : item->get_item_vector()) {
       if (t->is_bag()) {
-        dbg("No; only one bag can be carried");
+        dbg("Cannot carry; only one bag can be carried");
         return false;
       }
     }
@@ -60,7 +68,7 @@ bool Thing::carry(Thingp item, bool can_equip)
     // Stop fast loops in collecting things
     //
     if (particle_anim_exists()) {
-      dbg("No; particle anim exists");
+      dbg("Cannot carry; particle anim exists");
       return false;
     }
 
@@ -69,7 +77,7 @@ bool Thing::carry(Thingp item, bool can_equip)
     //
     if (is_player()) {
       if (game->tick_current < item->get_tick_last_dropped() + 1) {
-        dbg("No; was dropped here recently");
+        dbg("Cannot carry; was dropped here recently");
         return false;
       }
     }
@@ -114,7 +122,7 @@ bool Thing::carry(Thingp item, bool can_equip)
     dbg("Added %s to bag at %d,%d", item->to_string().c_str(), item->monst_infop->bag_position.x,
         item->monst_infop->bag_position.y);
   } else {
-    dbg("No; cannot store in a bag");
+    dbg("Cannot carry; cannot store in a bag");
     set_where_i_failed_to_collect_last(item->mid_at);
 
     if (is_player()) {
@@ -127,26 +135,27 @@ bool Thing::carry(Thingp item, bool can_equip)
 
   auto existing_owner = item->get_immediate_owner();
   if (existing_owner) {
-    //
-    // We hit this case when unequipping items
-    //
     if (existing_owner == this) {
-      dbg("No; same owner");
-      return true;
+      //
+      // We hit this case when unequipping items
+      //
+      dbg("Already owned: %s", item->to_string().c_str());
+    } else {
+      //
+      // Different owner. A different bag?
+      //
+      // Can't use drop as that can cause things to interact with
+      // the level. If this is moving between bags, this is safer.
+      //
+      dbg("Drop from existing owner");
+      existing_owner->drop_into_ether(item);
     }
-
-    //
-    // Can't use drop as that can cause things to interact with
-    // the level. If this is moving between bags, this is safer.
-    //
-    dbg("Drop from existing owner");
-    existing_owner->drop_into_ether(item);
   }
 
+  bool already_carried = false;
   for (const auto t : get_item_vector()) {
     if (t == item) {
-      dbg("No; already carried");
-      return false;
+      already_carried = true;
     }
   }
 
@@ -156,21 +165,28 @@ bool Thing::carry(Thingp item, bool can_equip)
     //
     if (! is_equipped(item)) {
       if (! inventory_id_insert(item)) {
-        dbg("No; no space in inventory");
+        dbg("Cannot carry; no space in inventory");
         return false;
       }
     }
 
-    if (item->is_collected_as_gold()) {
-      return true;
-    }
+    if (! already_carried) {
+      if (item->is_collected_as_gold()) {
+        dbg("Auto carry as gold");
+        return true;
+      }
 
-    if (item->is_collect_as_keys()) {
-      return true;
+      if (item->is_collect_as_keys()) {
+        dbg("Auto carry as keys");
+        return true;
+      }
     }
   }
 
-  monst_infop->carrying.push_front(item->id);
+  dbg("Can carry, set owner");
+  if (! already_carried) {
+    monst_infop->carrying.push_front(item->id);
+  }
   item->set_owner(this);
   item->hide();
 

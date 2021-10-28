@@ -260,6 +260,14 @@ void Thing::unequip(const char *why, int equip)
       drop(equip_thing);
     }
   }
+
+  dbg("Has unequipped: %s", equip_thing->to_string().c_str());
+  auto top_owner = equip_thing->get_top_owner();
+  if (top_owner) {
+    dbg("Has unequipped %s and has owner: %s", equip_thing->to_string().c_str(), top_owner->to_string().c_str());
+  } else {
+    dbg("Has unequipped %s and has no owner now", equip_thing->to_string().c_str());
+  }
 }
 
 void Thing::equip_remove_anim(int equip)
@@ -349,6 +357,17 @@ bool Thing::equip(Thingp equip_thing, int equip)
   // Attach to the thing.
   //
   carry_anim->set_owner(this);
+
+  dbg("Has equipped: %s", equip_thing->to_string().c_str());
+  auto top_owner = equip_thing->get_top_owner();
+  if (top_owner) {
+    dbg("Has equipped %s and has owner: %s", equip_thing->to_string().c_str(), top_owner->to_string().c_str());
+  } else {
+    //
+    // This is ok if being carried and we're about to set the owner
+    //
+    dbg("Has equipped %s but has no owner now", equip_thing->to_string().c_str());
+  }
 
   return true;
 }

@@ -163,6 +163,14 @@ bool Thing::use(Thingp what)
   dbg("Trying to use: %s", what->to_string().c_str());
   TRACE_AND_INDENT();
 
+  //
+  // If dropping an in transit item into an eqiup slot, then the owner is not set
+  //
+  if (what->get_top_owner() == nullptr) {
+    dbg("Need to set owner for: %s", what->to_string().c_str());
+    what->set_owner(this);
+  }
+
   if (what->is_skill()) {
     skill_use(what);
   } else if (what->is_enchantstone()) {
