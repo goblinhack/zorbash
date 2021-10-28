@@ -596,6 +596,41 @@ static uint8_t wid_slot_item_mouse_up(Widp w, int32_t x, int32_t y, uint32_t but
   return true;
 }
 
+static void wid_inventory_add_equip(Widp parent, int equip, point tl, point br, const char *wid_name,
+                                    const char *tile_name)
+{
+  auto w = wid_new_square_button(parent, wid_name);
+  wid_set_pos(w, tl, br);
+
+  auto t = game->level->player->get_equip(equip);
+  if (t) {
+    wid_set_thing_id_context(w, t->id);
+    wid_set_bg_tile(w, t);
+    wid_set_style(w, UI_WID_STYLE_HIGHLIGHTED);
+    wid_set_on_mouse_over_begin(w, wid_bag_item_mouse_over_begin);
+    wid_set_on_mouse_over_end(w, wid_bag_item_mouse_over_end);
+
+    //
+    // Show a small visible button key
+    //
+    auto slot = game->level->inventory_get_slot(t);
+    if (slot != -1) {
+      auto w = wid_new_square_button(parent, "wid_bag button" + t->to_string());
+      wid_set_pos(w, tl, tl);
+      wid_set_fg_tilename(w, "key_" + std::to_string(slot + 1));
+      wid_set_text_lhs(w, true);
+      wid_set_text_top(w, true);
+    }
+  } else {
+    wid_set_bg_tilename(w, tile_name);
+    wid_set_style(w, UI_WID_STYLE_DARK);
+  }
+}
+static void wid_inventory_add_equip(Widp parent, int equip, point tl, point br, const char *wid_name)
+{
+  wid_inventory_add_equip(parent, equip, tl, br, wid_name, wid_name);
+}
+
 bool wid_inventory_create(Thingp selected, Thingp over)
 {
   TRACE_AND_INDENT();
@@ -885,14 +920,9 @@ bool wid_inventory_create(Thingp selected, Thingp over)
   // helmet
   //
   {
-    auto  w  = wid_new_square_button(wid_inventory_window, "equip helmet");
     point tl = point(9, y_at);
     point br = point(12, y_at + 3);
-    wid_set_pos(w, tl, br);
-    wid_set_bg_tilename(w, "equip_helmet");
-    // wid_set_fg_tilename(w, "bag_large");
-    wid_set_style(w, UI_WID_STYLE_GRAY);
-    // wid_set_on_mouse_over_begin(w, wid_inventory_mouse_over_tab_bag2);
+    wid_inventory_add_equip(wid_inventory_window, MONST_EQUIP_HELMET, tl, br, "equip_helmet");
   }
 
   y_at += 7;
@@ -901,42 +931,27 @@ bool wid_inventory_create(Thingp selected, Thingp over)
   // gauntlet
   //
   {
-    auto  w  = wid_new_square_button(wid_inventory_window, "equip gauntlet");
     point tl = point(3, y_at);
     point br = point(6, y_at + 3);
-    wid_set_pos(w, tl, br);
-    wid_set_bg_tilename(w, "equip_gauntlet");
-    // wid_set_fg_tilename(w, "bag_large");
-    wid_set_style(w, UI_WID_STYLE_GRAY);
-    // wid_set_on_mouse_over_begin(w, wid_inventory_mouse_over_tab_bag2);
+    wid_inventory_add_equip(wid_inventory_window, MONST_EQUIP_GAUNTLET, tl, br, "equip_gauntlet");
   }
 
   //
   // amulet
   //
   {
-    auto  w  = wid_new_square_button(wid_inventory_window, "equip amulet");
     point tl = point(9, y_at);
     point br = point(12, y_at + 3);
-    wid_set_pos(w, tl, br);
-    wid_set_bg_tilename(w, "equip_amulet");
-    // wid_set_fg_tilename(w, "bag_large");
-    wid_set_style(w, UI_WID_STYLE_GRAY);
-    // wid_set_on_mouse_over_begin(w, wid_inventory_mouse_over_tab_bag2);
+    wid_inventory_add_equip(wid_inventory_window, MONST_EQUIP_AMULET, tl, br, "equip_amulet");
   }
 
   //
   // cloak
   //
   {
-    auto  w  = wid_new_square_button(wid_inventory_window, "equip cloak");
     point tl = point(15, y_at);
     point br = point(18, y_at + 3);
-    wid_set_pos(w, tl, br);
-    wid_set_bg_tilename(w, "equip_cloak");
-    // wid_set_fg_tilename(w, "bag_large");
-    wid_set_style(w, UI_WID_STYLE_GRAY);
-    // wid_set_on_mouse_over_begin(w, wid_inventory_mouse_over_tab_bag2);
+    wid_inventory_add_equip(wid_inventory_window, MONST_EQUIP_CLOAK, tl, br, "equip_cloak");
   }
 
   y_at += 7;
@@ -945,49 +960,27 @@ bool wid_inventory_create(Thingp selected, Thingp over)
   // shield
   //
   {
-    auto  w  = wid_new_square_button(wid_inventory_window, "equip shield");
     point tl = point(3, y_at);
     point br = point(6, y_at + 3);
-    wid_set_pos(w, tl, br);
-    wid_set_bg_tilename(w, "equip_shield");
-    // wid_set_fg_tilename(w, "bag_large");
-    wid_set_style(w, UI_WID_STYLE_GRAY);
-    // wid_set_on_mouse_over_begin(w, wid_inventory_mouse_over_tab_bag2);
+    wid_inventory_add_equip(wid_inventory_window, MONST_EQUIP_SHIELD, tl, br, "equip_shield");
   }
 
   //
   // armor
   //
   {
-    auto  w  = wid_new_square_button(wid_inventory_window, "equip armor");
     point tl = point(9, y_at);
     point br = point(12, y_at + 3);
-    wid_set_pos(w, tl, br);
-    wid_set_bg_tilename(w, "equip_armor");
-    // wid_set_fg_tilename(w, "bag_large");
-    wid_set_style(w, UI_WID_STYLE_GRAY);
-    // wid_set_on_mouse_over_begin(w, wid_inventory_mouse_over_tab_bag2);
+    wid_inventory_add_equip(wid_inventory_window, MONST_EQUIP_ARMOR, tl, br, "equip_armor");
   }
 
   //
   // weapon
   //
   {
-    auto  w  = wid_new_square_button(wid_inventory_window, "equip weapon");
     point tl = point(15, y_at);
     point br = point(18, y_at + 3);
-    wid_set_pos(w, tl, br);
-    auto t = player->get_equip(MONST_EQUIP_WEAPON);
-    if (t) {
-      wid_set_thing_id_context(w, t->id);
-      wid_set_bg_tile(w, t);
-      wid_set_style(w, UI_WID_STYLE_HIGHLIGHTED);
-      wid_set_on_mouse_over_begin(w, wid_bag_item_mouse_over_begin);
-      wid_set_on_mouse_over_end(w, wid_bag_item_mouse_over_end);
-    } else {
-      wid_set_bg_tilename(w, "equip_weapon");
-      wid_set_style(w, UI_WID_STYLE_DARK);
-    }
+    wid_inventory_add_equip(wid_inventory_window, MONST_EQUIP_WEAPON, tl, br, "equip_weapon");
   }
 
   y_at += 7;
@@ -996,42 +989,27 @@ bool wid_inventory_create(Thingp selected, Thingp over)
   // ring1
   //
   {
-    auto  w  = wid_new_square_button(wid_inventory_window, "equip ring1");
     point tl = point(3, y_at);
     point br = point(6, y_at + 3);
-    wid_set_pos(w, tl, br);
-    wid_set_bg_tilename(w, "equip_ring");
-    // wid_set_fg_tilename(w, "bag_large");
-    wid_set_style(w, UI_WID_STYLE_GRAY);
-    // wid_set_on_mouse_over_begin(w, wid_inventory_mouse_over_tab_bag2);
+    wid_inventory_add_equip(wid_inventory_window, MONST_EQUIP_RING1, tl, br, "equip_ring1", "equip_ring");
   }
 
   //
   // boots
   //
   {
-    auto  w  = wid_new_square_button(wid_inventory_window, "equip boots");
     point tl = point(9, y_at);
     point br = point(12, y_at + 3);
-    wid_set_pos(w, tl, br);
-    wid_set_bg_tilename(w, "equip_boots");
-    // wid_set_fg_tilename(w, "bag_large");
-    wid_set_style(w, UI_WID_STYLE_GRAY);
-    // wid_set_on_mouse_over_begin(w, wid_inventory_mouse_over_tab_bag2);
+    wid_inventory_add_equip(wid_inventory_window, MONST_EQUIP_BOOTS, tl, br, "equip_boots");
   }
 
   //
   // ring2
   //
   {
-    auto  w  = wid_new_square_button(wid_inventory_window, "equip ring2");
     point tl = point(15, y_at);
     point br = point(18, y_at + 3);
-    wid_set_pos(w, tl, br);
-    wid_set_bg_tilename(w, "equip_ring");
-    // wid_set_fg_tilename(w, "bag_large");
-    wid_set_style(w, UI_WID_STYLE_GRAY);
-    // wid_set_on_mouse_over_begin(w, wid_inventory_mouse_over_tab_bag2);
+    wid_inventory_add_equip(wid_inventory_window, MONST_EQUIP_RING2, tl, br, "equip_ring2", "equip_ring");
   }
 
   wid_update(wid_inventory_window);

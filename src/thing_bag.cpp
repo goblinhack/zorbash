@@ -19,7 +19,6 @@
 #include "my_wid_popup.h"
 
 static std::list< WidBag * > bags;
-static bool                  bag_debug;
 
 bool Thing::bag_contains(Thingp item)
 {
@@ -188,7 +187,6 @@ bool Thing::bag_compress(void)
   auto did_something = false;
 
   dbg3("Bag: Try to compress");
-  bag_debug = false;
 
   for (auto x = 0; x < bw; x++) {
     for (auto y = 0; y < bh; y++) {
@@ -231,8 +229,6 @@ bool Thing::bag_compress(void)
     dbg3("Bag: Could not be compressed");
   }
 
-  bag_debug = true;
-
   return did_something;
 }
 
@@ -245,19 +241,21 @@ bool Thing::bag_remove_at(Thingp item, point pos)
   auto w      = item->item_width();
   auto h      = item->item_height();
   bool logged = false;
+  bool ret    = false;
 
   for (auto x = pos.x; x < pos.x + w; x++) {
     for (auto y = pos.y; y < pos.y + h; y++) {
-      if (! logged && bag_debug) {
-        if (get(bag, x, y) == item->id) {
+      if (get(bag, x, y) == item->id) {
+        if (! logged) {
           logged = true;
           dbg3("Bag: remove %s at %d,%d", item->to_string().c_str(), x, y);
         }
+        set(bag, x, y, NoThingId);
+        ret = true;
       }
-      set(bag, x, y, NoThingId);
     }
   }
-  return true;
+  return ret;
 }
 
 bool Thing::bag_can_place_at(Thingp item, point pos)
@@ -293,25 +291,25 @@ bool Thing::bag_can_place_at(Thingp item, point pos)
     return false;
   }
 
-#if 0
-  LOG("Bag contents:");
-  for (auto y = 0; y < bh; y++) {
-    std::string s;
-    for (auto x = 0; x < bw; x++) {
-    auto id = get(bag, x, y);
-    if (id == NoThingId) {
-        s += ".";
-    continue;
-    }
-    if (id == item->id) {
-        s += "i";
-    } else {
-        s += "o";
+  if (0) {
+    LOG("Bag contents:");
+    for (auto y = 0; y < bh; y++) {
+      std::string s;
+      for (auto x = 0; x < bw; x++) {
+        auto id = get(bag, x, y);
+        if (id == NoThingId) {
+          s += ".";
+          continue;
+        }
+        if (id == item->id) {
+          s += "i";
+        } else {
+          s += "o";
+        }
       }
+      LOG("bag[%s]", s.c_str());
+    }
   }
-    LOG("bag[%s]", s.c_str());
-  }
-#endif
 
   for (auto y = pos.y; y < pos.y + h; y++) {
     for (auto x = pos.x; x < pos.x + w; x++) {
@@ -329,9 +327,7 @@ bool Thing::bag_can_place_at(Thingp item, point pos)
   //
   // Do not set pos here
   //
-  if (bag_debug) {
-    dbg3("Bag: Can place %s at %d,%d", item->to_string().c_str(), pos.x, pos.y);
-  }
+  dbg3("Bag: Can place %s at %d,%d", item->to_string().c_str(), pos.x, pos.y);
   return true;
 }
 
@@ -418,14 +414,32 @@ bool Thing::bag_remove(Thingp item)
     return false;
   }
 
-  if (bag_debug) {
-    dbg3("Bag: remove %s", item->to_string().c_str());
-  }
+  dbg3("Bag: remove %s", item->to_string().c_str());
 
   bool found = false;
   auto bag   = get_bag();
   auto bw    = capacity_width();
   auto bh    = capacity_height();
+
+  if (1) {
+    LOG("Bag contents before remove:");
+    for (auto y = 0; y < bh; y++) {
+      std::string s;
+      for (auto x = 0; x < bw; x++) {
+        auto id = get(bag, x, y);
+        if (id == NoThingId) {
+          s += ".";
+          continue;
+        }
+        if (id == item->id) {
+          s += "i";
+        } else {
+          s += "o";
+        }
+      }
+      LOG("bag[%s]", s.c_str());
+    }
+  }
 
   for (auto x = 0; x < bw; x++) {
     for (auto y = 0; y < bh; y++) {
@@ -436,10 +450,34 @@ bool Thing::bag_remove(Thingp item)
     }
   }
 
-  if (found && bag_debug) {
+  if (found) {
     dbg3("Bag: removed %s", item->to_string().c_str());
   } else {
     dbg3("Bag: failed to remove %s", item->to_string().c_str());
+  }
+
+  if (1) {
+    LOG("Bag contents after remove:");
+    for (auto y = 0; y < bh; y++) {
+      std::string s;
+      for (auto x = 0; x < bw; x++) {
+        auto id = get(bag, x, y);
+        if (id == NoThingId) {
+          s += ".";
+          continue;
+        }
+        if (id == item->id) {
+          s += "i";
+        } else {
+          s += "o";
+        }
+      }
+      LOG("bag[%s]", s.c_str());
+    }
+  }
+
+  if (found) {
+    item->monst_infop->bag_position = point(-1, -1);
   }
 
   return found;

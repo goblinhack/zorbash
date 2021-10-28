@@ -129,7 +129,10 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
   wid_thing_info_add_enchant(wid_popup_window, t);
   wid_thing_info_add_item_rarity(wid_popup_window, t);
   wid_thing_info_add_monst_rarity(wid_popup_window, t);
-  wid_thing_info_add_gold_value(wid_popup_window, t);
+  //
+  // Not sure if we will have shops
+  //
+  // wid_thing_info_add_gold_value(wid_popup_window, t);
   wid_thing_info_add_nutrition(wid_popup_window, t);
   wid_thing_info_add_health(wid_popup_window, t);
   wid_thing_info_add_melee_damage(wid_popup_window, t);
@@ -178,7 +181,10 @@ WidPopup *Game::wid_thing_info_create_popup_compact(const std::vector< Thingp > 
 
     wid_thing_info_add_item_rarity(wid_popup_window, t);
     wid_thing_info_add_monst_rarity(wid_popup_window, t);
-    wid_thing_info_add_gold_value(wid_popup_window, t);
+    //
+    // Not sure if we will have shops
+    //
+    // wid_thing_info_add_gold_value(wid_popup_window, t);
     wid_thing_info_add_nutrition(wid_popup_window, t);
     wid_thing_info_add_health(wid_popup_window, t);
     wid_thing_info_add_melee_damage(wid_popup_window, t);
@@ -569,7 +575,7 @@ void Game::wid_thing_info_add_gold_value(WidPopup *w, Thingp t)
     } else {
       snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->get_gold_value_dice_str().c_str());
     }
-    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Gold  %15s ``````", tmp2);
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Value %15s ``````", tmp2);
     w->log(tmp);
   }
 }

@@ -127,9 +127,12 @@ bool Thing::carry(Thingp item, bool can_equip)
 
   auto existing_owner = item->get_immediate_owner();
   if (existing_owner) {
+    //
+    // We hit this case when unequipping items
+    //
     if (existing_owner == this) {
       dbg("No; same owner");
-      return false;
+      return true;
     }
 
     //
