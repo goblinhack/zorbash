@@ -61,87 +61,87 @@ extern int TILES_DOWN;
 #define NODEBUG4 (likely(! g_opt_debug4))
 #define NODEBUG5 (likely(! g_opt_debug5))
 
-#define IF_DEBUG1                                                                                                      \
-  TRACE_NO_INDENT();                                                                                                   \
+#define IF_DEBUG1                                                                                                    \
+  TRACE_NO_INDENT();                                                                                                 \
   if (DEBUG1)
-#define IF_DEBUG2                                                                                                      \
-  TRACE_NO_INDENT();                                                                                                   \
+#define IF_DEBUG2                                                                                                    \
+  TRACE_NO_INDENT();                                                                                                 \
   if (DEBUG2)
-#define IF_DEBUG3                                                                                                      \
-  TRACE_NO_INDENT();                                                                                                   \
+#define IF_DEBUG3                                                                                                    \
+  TRACE_NO_INDENT();                                                                                                 \
   if (DEBUG3)
-#define IF_DEBUG4                                                                                                      \
-  TRACE_NO_INDENT();                                                                                                   \
+#define IF_DEBUG4                                                                                                    \
+  TRACE_NO_INDENT();                                                                                                 \
   if (DEBUG4)
-#define IF_DEBUG5                                                                                                      \
-  TRACE_NO_INDENT();                                                                                                   \
+#define IF_DEBUG5                                                                                                    \
+  TRACE_NO_INDENT();                                                                                                 \
   if (DEBUG5)
 
-#define IF_NODEBUG1                                                                                                    \
-  TRACE_NO_INDENT();                                                                                                   \
+#define IF_NODEBUG1                                                                                                  \
+  TRACE_NO_INDENT();                                                                                                 \
   if (NODEBUG1)
-#define IF_NODEBUG2                                                                                                    \
-  TRACE_NO_INDENT();                                                                                                   \
+#define IF_NODEBUG2                                                                                                  \
+  TRACE_NO_INDENT();                                                                                                 \
   if (NODEBUG2)
-#define IF_NODEBUG3                                                                                                    \
-  TRACE_NO_INDENT();                                                                                                   \
+#define IF_NODEBUG3                                                                                                  \
+  TRACE_NO_INDENT();                                                                                                 \
   if (NODEBUG3)
-#define IF_NODEBUG4                                                                                                    \
-  TRACE_NO_INDENT();                                                                                                   \
+#define IF_NODEBUG4                                                                                                  \
+  TRACE_NO_INDENT();                                                                                                 \
   if (NODEBUG4)
-#define IF_NODEBUG5                                                                                                    \
-  TRACE_NO_INDENT();                                                                                                   \
+#define IF_NODEBUG5                                                                                                  \
+  TRACE_NO_INDENT();                                                                                                 \
   if (NODEBUG5)
 
-#define ERR                                                                                                            \
-  TRACE_NO_INDENT();                                                                                                   \
+#define ERR                                                                                                          \
+  TRACE_NO_INDENT();                                                                                                 \
   myerr
 
-#define dbg                                                                                                            \
-  TRACE_NO_INDENT();                                                                                                   \
-  if (DEBUG1)                                                                                                          \
+#define dbg                                                                                                          \
+  TRACE_NO_INDENT();                                                                                                 \
+  if (DEBUG1)                                                                                                        \
   log
-#define dbg2                                                                                                           \
-  TRACE_NO_INDENT();                                                                                                   \
-  if (DEBUG2)                                                                                                          \
+#define dbg2                                                                                                         \
+  TRACE_NO_INDENT();                                                                                                 \
+  if (DEBUG2)                                                                                                        \
   log
-#define dbg3                                                                                                           \
-  TRACE_NO_INDENT();                                                                                                   \
-  if (DEBUG3)                                                                                                          \
+#define dbg3                                                                                                         \
+  TRACE_NO_INDENT();                                                                                                 \
+  if (DEBUG3)                                                                                                        \
   log
-#define dbg4                                                                                                           \
-  TRACE_NO_INDENT();                                                                                                   \
-  if (DEBUG4)                                                                                                          \
+#define dbg4                                                                                                         \
+  TRACE_NO_INDENT();                                                                                                 \
+  if (DEBUG4)                                                                                                        \
   log
-#define dbg5                                                                                                           \
-  TRACE_NO_INDENT();                                                                                                   \
-  if (DEBUG5)                                                                                                          \
+#define dbg5                                                                                                         \
+  TRACE_NO_INDENT();                                                                                                 \
+  if (DEBUG5)                                                                                                        \
   log
 
-#define DBG                                                                                                            \
-  TRACE_NO_INDENT();                                                                                                   \
-  if (DEBUG1)                                                                                                          \
+#define DBG                                                                                                          \
+  TRACE_NO_INDENT();                                                                                                 \
+  if (DEBUG1)                                                                                                        \
   LOG
-#define DBG2                                                                                                           \
-  TRACE_NO_INDENT();                                                                                                   \
-  if (DEBUG2)                                                                                                          \
+#define DBG2                                                                                                         \
+  TRACE_NO_INDENT();                                                                                                 \
+  if (DEBUG2)                                                                                                        \
   LOG
-#define DBG3                                                                                                           \
-  TRACE_NO_INDENT();                                                                                                   \
-  if (DEBUG3)                                                                                                          \
+#define DBG3                                                                                                         \
+  TRACE_NO_INDENT();                                                                                                 \
+  if (DEBUG3)                                                                                                        \
   LOG
-#define DBG4                                                                                                           \
-  TRACE_NO_INDENT();                                                                                                   \
-  if (DEBUG4)                                                                                                          \
+#define DBG4                                                                                                         \
+  TRACE_NO_INDENT();                                                                                                 \
+  if (DEBUG4)                                                                                                        \
   LOG
-#define DBG5                                                                                                           \
-  TRACE_NO_INDENT();                                                                                                   \
-  if (DEBUG5)                                                                                                          \
+#define DBG5                                                                                                         \
+  TRACE_NO_INDENT();                                                                                                 \
+  if (DEBUG5)                                                                                                        \
   LOG
 
-#define AI_LOG                                                                                                         \
-  TRACE_NO_INDENT();                                                                                                   \
-  if (DEBUG3)                                                                                                          \
+#define AI_LOG                                                                                                       \
+  TRACE_NO_INDENT();                                                                                                 \
+  if (DEBUG3)                                                                                                        \
   ai_log
 
 //

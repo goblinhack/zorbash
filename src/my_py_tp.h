@@ -22,23 +22,23 @@ PyObject *level_place_at(PyObject *obj, PyObject *args, PyObject *keywds);
 
 #define TP_SET_PROTO(__field__) PyObject *tp_set_##__field__(PyObject *obj, PyObject *args, PyObject *keywds);
 
-#define ZX_ADD_PYTHON_TP_FUNCTION(__field__)                                                                           \
-  {                                                                                                                    \
-    "tp_set_" #__field__, (PyCFunction) tp_set_##__field__, METH_VARARGS | METH_KEYWORDS,                              \
-        "set a " #__field__ " in a thing template"                                                                     \
+#define ZX_ADD_PYTHON_TP_FUNCTION(__field__)                                                                         \
+  {                                                                                                                  \
+    "tp_set_" #__field__, (PyCFunction) tp_set_##__field__, METH_VARARGS | METH_KEYWORDS,                            \
+        "set a " #__field__ " in a thing template"                                                                   \
   }
 
 /*
  * The cast of the function is necessary since PyCFunction values
  * only take two PyObject *parameters, and some take three.
  */
-#define ZX_ADD_PYTHON_FUNCTION(__func__)                                                                               \
-  {                                                                                                                    \
-#__func__, (PyCFunction) __func__, METH_VARARGS | METH_KEYWORDS, #__func__                                         \
+#define ZX_ADD_PYTHON_FUNCTION(__func__)                                                                             \
+  {                                                                                                                  \
+#__func__, (PyCFunction) __func__, METH_VARARGS | METH_KEYWORDS, #__func__                                       \
   }
-#define ZX_ADD_WRAPPED_PYTHON_FUNCTION(__func__)                                                                       \
-  {                                                                                                                    \
-#__func__, (PyCFunction) __func__##_, METH_VARARGS | METH_KEYWORDS, #__func__                                      \
+#define ZX_ADD_WRAPPED_PYTHON_FUNCTION(__func__)                                                                     \
+  {                                                                                                                  \
+#__func__, (PyCFunction) __func__##_, METH_VARARGS | METH_KEYWORDS, #__func__                                    \
   }
 
 TP_SET_PROTO(ai_avoid_distance)

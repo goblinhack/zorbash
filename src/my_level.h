@@ -270,217 +270,217 @@ public:
 #define JOIN1(X, Y) X##Y
 #define JOIN(X, Y)  JOIN1(X, Y)
 
-#define FOR_ALL_THINGS_WALKER(level, t, x, y)                                                                          \
-  if (! (level)->is_oob(x, y)) {                                                                                       \
-    static Thingp things_to_walk[ MAP_SLOTS ];                                                                         \
-    auto          _vec_               = getptr(level->all_things_ptr_at[ THING_GROUP_ALL ], x, y);                     \
-    auto          things_to_walk_size = _vec_->size();                                                                 \
-    for (size_t idx = 0; idx < things_to_walk_size; idx++)                                                             \
-      things_to_walk[ idx ] = (*_vec_)[ idx ];                                                                         \
-    for (size_t idx = 0; idx < things_to_walk_size; idx++) {                                                           \
-      Thingp t;                                                                                                        \
-      t = things_to_walk[ idx ];                                                                                       \
+#define FOR_ALL_THINGS_WALKER(level, t, x, y)                                                                        \
+  if (! (level)->is_oob(x, y)) {                                                                                     \
+    static Thingp things_to_walk[ MAP_SLOTS ];                                                                       \
+    auto          _vec_               = getptr(level->all_things_ptr_at[ THING_GROUP_ALL ], x, y);                   \
+    auto          things_to_walk_size = _vec_->size();                                                               \
+    for (size_t idx = 0; idx < things_to_walk_size; idx++)                                                           \
+      things_to_walk[ idx ] = (*_vec_)[ idx ];                                                                       \
+    for (size_t idx = 0; idx < things_to_walk_size; idx++) {                                                         \
+      Thingp t;                                                                                                      \
+      t = things_to_walk[ idx ];                                                                                     \
       verify(t);
 
 #define FOR_ALL_THINGS(level, t, x, y) FOR_ALL_THINGS_WALKER(level, t, x, y)
 
-#define FOR_TMP_THINGS_WALKER(level, t, x, y)                                                                          \
-  if (! (level)->is_oob(x, y)) {                                                                                       \
-    static Thingp things_to_walk[ MAP_SLOTS ];                                                                         \
-    auto          _vec_               = getptr(level->all_things_ptr_at[ THING_GROUP_TMP ], x, y);                     \
-    auto          things_to_walk_size = _vec_->size();                                                                 \
-    for (size_t idx = 0; idx < things_to_walk_size; idx++)                                                             \
-      things_to_walk[ idx ] = (*_vec_)[ idx ];                                                                         \
-    for (size_t idx = 0; idx < things_to_walk_size; idx++) {                                                           \
-      Thingp t;                                                                                                        \
-      t = things_to_walk[ idx ];                                                                                       \
+#define FOR_TMP_THINGS_WALKER(level, t, x, y)                                                                        \
+  if (! (level)->is_oob(x, y)) {                                                                                     \
+    static Thingp things_to_walk[ MAP_SLOTS ];                                                                       \
+    auto          _vec_               = getptr(level->all_things_ptr_at[ THING_GROUP_TMP ], x, y);                   \
+    auto          things_to_walk_size = _vec_->size();                                                               \
+    for (size_t idx = 0; idx < things_to_walk_size; idx++)                                                           \
+      things_to_walk[ idx ] = (*_vec_)[ idx ];                                                                       \
+    for (size_t idx = 0; idx < things_to_walk_size; idx++) {                                                         \
+      Thingp t;                                                                                                      \
+      t = things_to_walk[ idx ];                                                                                     \
       verify(t);
 
 #define FOR_ALL_THINGS(level, t, x, y) FOR_ALL_THINGS_WALKER(level, t, x, y)
 
-#define FOR_ALL_THINGS_END()                                                                                           \
-  }                                                                                                                    \
+#define FOR_ALL_THINGS_END()                                                                                         \
+  }                                                                                                                  \
   }
 
 //
 // Things that can move or fall or catch fire etc...
 //
-#define FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL(level, t)                                                                \
-  {                                                                                                                    \
-    level->all_things_of_interest_walk_in_progress = true;                                                             \
-    auto c                                         = level->all_things_of_interest[ THING_GROUP_ALL ];                 \
-    auto i                                         = level->all_things_of_interest[ THING_GROUP_ALL ].begin();         \
-    while (i != level->all_things_of_interest[ THING_GROUP_ALL ].end()) {                                              \
-      auto t = i->second;                                                                                              \
-      /* LOG("ID %08x -> %p", i->first.id, t); */                                                                      \
-      i++;                                                                                                             \
-      if (t->is_hidden) {                                                                                              \
-        t->set_tick_last_did_something(game->tick_current);                                                            \
-        continue;                                                                                                      \
-      }                                                                                                                \
-                                                                                                                       \
+#define FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL(level, t)                                                              \
+  {                                                                                                                  \
+    level->all_things_of_interest_walk_in_progress = true;                                                           \
+    auto c                                         = level->all_things_of_interest[ THING_GROUP_ALL ];               \
+    auto i                                         = level->all_things_of_interest[ THING_GROUP_ALL ].begin();       \
+    while (i != level->all_things_of_interest[ THING_GROUP_ALL ].end()) {                                            \
+      auto t = i->second;                                                                                            \
+      /* LOG("ID %08x -> %p", i->first.id, t); */                                                                    \
+      i++;                                                                                                           \
+      if (t->is_hidden) {                                                                                            \
+        t->set_tick_last_did_something(game->tick_current);                                                          \
+        continue;                                                                                                    \
+      }                                                                                                              \
+                                                                                                                     \
       verify(t);
 
-#define FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL_END(level)                                                               \
-  if (i == level->all_things_of_interest[ THING_GROUP_ALL ].end()) {                                                   \
-    break;                                                                                                             \
-  }                                                                                                                    \
-  }                                                                                                                    \
-  level->all_things_of_interest_walk_in_progress = false;                                                              \
-  level->handle_all_pending_things(THING_GROUP_ALL);                                                                   \
+#define FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL_END(level)                                                             \
+  if (i == level->all_things_of_interest[ THING_GROUP_ALL ].end()) {                                                 \
+    break;                                                                                                           \
+  }                                                                                                                  \
+  }                                                                                                                  \
+  level->all_things_of_interest_walk_in_progress = false;                                                            \
+  level->handle_all_pending_things(THING_GROUP_ALL);                                                                 \
   }
 
-#define FOR_ALL_ANIMATED_THINGS_LEVEL(level, group, t)                                                                 \
-  {                                                                                                                    \
-    level->all_animated_things_walk_in_progress = true;                                                                \
-    auto c                                      = level->all_animated_things[ group ];                                 \
-    auto i                                      = level->all_animated_things[ group ].begin();                         \
-    while (i != level->all_animated_things[ group ].end()) {                                                           \
-      auto t = i->second;                                                                                              \
-      i++;                                                                                                             \
+#define FOR_ALL_ANIMATED_THINGS_LEVEL(level, group, t)                                                               \
+  {                                                                                                                  \
+    level->all_animated_things_walk_in_progress = true;                                                              \
+    auto c                                      = level->all_animated_things[ group ];                               \
+    auto i                                      = level->all_animated_things[ group ].begin();                       \
+    while (i != level->all_animated_things[ group ].end()) {                                                         \
+      auto t = i->second;                                                                                            \
+      i++;                                                                                                           \
       verify(t);
 
-#define FOR_ALL_ANIMATED_THINGS_LEVEL_END(level)                                                                       \
-  if (i == level->all_animated_things[ group ].end()) {                                                                \
-    break;                                                                                                             \
-  }                                                                                                                    \
-  }                                                                                                                    \
-  level->all_animated_things_walk_in_progress = false;                                                                 \
-  level->handle_all_pending_things(group);                                                                             \
+#define FOR_ALL_ANIMATED_THINGS_LEVEL_END(level)                                                                     \
+  if (i == level->all_animated_things[ group ].end()) {                                                              \
+    break;                                                                                                           \
+  }                                                                                                                  \
+  }                                                                                                                  \
+  level->all_animated_things_walk_in_progress = false;                                                               \
+  level->handle_all_pending_things(group);                                                                           \
   }
 
 //
 // Things that make decisions or have a lifespan
 //
-#define FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL(level, t)                                                                \
-  {                                                                                                                    \
-    level->all_things_of_interest_walk_in_progress = true;                                                             \
-    auto c                                         = level->all_things_of_interest[ THING_GROUP_ALL ];                 \
-    auto i                                         = level->all_things_of_interest[ THING_GROUP_ALL ].begin();         \
-    while (i != level->all_things_of_interest[ THING_GROUP_ALL ].end()) {                                              \
-      auto t = i->second;                                                                                              \
-      /* LOG("ID %08x -> %p", i->first.id, t); */                                                                      \
-      i++;                                                                                                             \
-      if (t->is_hidden) {                                                                                              \
-        if (! t->is_tickable()) { /* e.g. carried wand */                                                              \
-          continue;                                                                                                    \
-        }                                                                                                              \
-      }                                                                                                                \
-                                                                                                                       \
+#define FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL(level, t)                                                              \
+  {                                                                                                                  \
+    level->all_things_of_interest_walk_in_progress = true;                                                           \
+    auto c                                         = level->all_things_of_interest[ THING_GROUP_ALL ];               \
+    auto i                                         = level->all_things_of_interest[ THING_GROUP_ALL ].begin();       \
+    while (i != level->all_things_of_interest[ THING_GROUP_ALL ].end()) {                                            \
+      auto t = i->second;                                                                                            \
+      /* LOG("ID %08x -> %p", i->first.id, t); */                                                                    \
+      i++;                                                                                                           \
+      if (t->is_hidden) {                                                                                            \
+        if (! t->is_tickable()) { /* e.g. carried wand */                                                            \
+          continue;                                                                                                  \
+        }                                                                                                            \
+      }                                                                                                              \
+                                                                                                                     \
       verify(t);
 
-#define FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL_END(level)                                                               \
-  if (i == level->all_things_of_interest[ THING_GROUP_ALL ].end()) {                                                   \
-    break;                                                                                                             \
-  }                                                                                                                    \
-  }                                                                                                                    \
-  level->all_things_of_interest_walk_in_progress = false;                                                              \
-  level->handle_all_pending_things(THING_GROUP_ALL);                                                                   \
+#define FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL_END(level)                                                             \
+  if (i == level->all_things_of_interest[ THING_GROUP_ALL ].end()) {                                                 \
+    break;                                                                                                           \
+  }                                                                                                                  \
+  }                                                                                                                  \
+  level->all_things_of_interest_walk_in_progress = false;                                                            \
+  level->handle_all_pending_things(THING_GROUP_ALL);                                                                 \
   }
 
 //
 // NOTE: get is a lot safer than getptr, if the vector gets resized somehow
 // during walks
 //
-#define FOR_ALL_GRID_THINGS(level, t, x, y)                                                                            \
-  FOR_ALL_THINGS_WALKER(level, t, x, y)                                                                                \
-  if (! t->is_the_grid) {                                                                                              \
-    continue;                                                                                                          \
+#define FOR_ALL_GRID_THINGS(level, t, x, y)                                                                          \
+  FOR_ALL_THINGS_WALKER(level, t, x, y)                                                                              \
+  if (! t->is_the_grid) {                                                                                            \
+    continue;                                                                                                        \
   }
 
-#define FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z)                                                                     \
-  FOR_ALL_THINGS_WALKER(level, t, x, y)                                                                                \
-  if (t->z_depth != z) {                                                                                               \
-    continue;                                                                                                          \
-  }                                                                                                                    \
-  if (t->is_hidden) {                                                                                                  \
-    continue;                                                                                                          \
+#define FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z)                                                                   \
+  FOR_ALL_THINGS_WALKER(level, t, x, y)                                                                              \
+  if (t->z_depth != z) {                                                                                             \
+    continue;                                                                                                        \
+  }                                                                                                                  \
+  if (t->is_hidden) {                                                                                                \
+    continue;                                                                                                        \
   }
 
-#define FOR_TMP_THINGS_AT_DEPTH(level, t, x, y, z)                                                                     \
-  FOR_TMP_THINGS_WALKER(level, t, x, y)                                                                                \
-  if (t->z_depth != z) {                                                                                               \
-    continue;                                                                                                          \
-  }                                                                                                                    \
-  if (t->is_hidden) {                                                                                                  \
-    continue;                                                                                                          \
+#define FOR_TMP_THINGS_AT_DEPTH(level, t, x, y, z)                                                                   \
+  FOR_TMP_THINGS_WALKER(level, t, x, y)                                                                              \
+  if (t->z_depth != z) {                                                                                             \
+    continue;                                                                                                        \
+  }                                                                                                                  \
+  if (t->is_hidden) {                                                                                                \
+    continue;                                                                                                        \
   }
 
-#define FOR_ALL_LIGHTS_AT_DEPTH(level, t, x, y)                                                                        \
-  FOR_ALL_THINGS_WALKER(level, t, x, y)                                                                                \
-  if (likely(! t->has_light)) {                                                                                        \
-    continue;                                                                                                          \
-  }                                                                                                                    \
-  if (t->is_hidden) {                                                                                                  \
-    continue;                                                                                                          \
+#define FOR_ALL_LIGHTS_AT_DEPTH(level, t, x, y)                                                                      \
+  FOR_ALL_THINGS_WALKER(level, t, x, y)                                                                              \
+  if (likely(! t->has_light)) {                                                                                      \
+    continue;                                                                                                        \
+  }                                                                                                                  \
+  if (t->is_hidden) {                                                                                                \
+    continue;                                                                                                        \
   }
 
 //
 // Things that move around
 //
-#define FOR_ALL_THINGS_THAT_DO_STUFF(level, t, x, y)                                                                   \
-  FOR_ALL_THINGS_WALKER(level, t, x, y)                                                                                \
-  if (t->is_the_grid) {                                                                                                \
-    continue;                                                                                                          \
-  }                                                                                                                    \
-  if (t->is_hidden) {                                                                                                  \
-    continue;                                                                                                          \
-  }                                                                                                                    \
-  if (! t->is_tickable()) {                                                                                            \
-    continue;                                                                                                          \
+#define FOR_ALL_THINGS_THAT_DO_STUFF(level, t, x, y)                                                                 \
+  FOR_ALL_THINGS_WALKER(level, t, x, y)                                                                              \
+  if (t->is_the_grid) {                                                                                              \
+    continue;                                                                                                        \
+  }                                                                                                                  \
+  if (t->is_hidden) {                                                                                                \
+    continue;                                                                                                        \
+  }                                                                                                                  \
+  if (! t->is_tickable()) {                                                                                          \
+    continue;                                                                                                        \
   }
 
 //
 // Things that move around and things that do not, but are interesting
 // like food or walls that can be destroyed
 //
-#define FOR_ALL_THINGS_THAT_INTERACT(level, t, x, y)                                                                   \
-  FOR_ALL_THINGS_WALKER(level, t, x, y)                                                                                \
-  if (t->is_the_grid) {                                                                                                \
-    continue;                                                                                                          \
-  }                                                                                                                    \
-  if (t->is_hidden) {                                                                                                  \
-    continue;                                                                                                          \
-  }                                                                                                                    \
-  if (! t->is_interesting()) {                                                                                         \
-    continue;                                                                                                          \
+#define FOR_ALL_THINGS_THAT_INTERACT(level, t, x, y)                                                                 \
+  FOR_ALL_THINGS_WALKER(level, t, x, y)                                                                              \
+  if (t->is_the_grid) {                                                                                              \
+    continue;                                                                                                        \
+  }                                                                                                                  \
+  if (t->is_hidden) {                                                                                                \
+    continue;                                                                                                        \
+  }                                                                                                                  \
+  if (! t->is_interesting()) {                                                                                       \
+    continue;                                                                                                        \
   }
 
 //
 // Things you can bump into
 //
-#define FOR_ALL_COLLISION_THINGS(level, t, x, y)                                                                       \
-  FOR_ALL_THINGS_WALKER(level, t, x, y)                                                                                \
-  if (t->is_the_grid) {                                                                                                \
-    continue;                                                                                                          \
-  }                                                                                                                    \
-  if (t->is_hidden) {                                                                                                  \
-    continue;                                                                                                          \
-  }                                                                                                                    \
-  if (t->is_interesting() || t->is_attackable_by_monst() || t->is_attackable_by_player() || t->ai_obstacle()) {        \
-  } else {                                                                                                             \
-    continue;                                                                                                          \
+#define FOR_ALL_COLLISION_THINGS(level, t, x, y)                                                                     \
+  FOR_ALL_THINGS_WALKER(level, t, x, y)                                                                              \
+  if (t->is_the_grid) {                                                                                              \
+    continue;                                                                                                        \
+  }                                                                                                                  \
+  if (t->is_hidden) {                                                                                                \
+    continue;                                                                                                        \
+  }                                                                                                                  \
+  if (t->is_interesting() || t->is_attackable_by_monst() || t->is_attackable_by_player() || t->ai_obstacle()) {      \
+  } else {                                                                                                           \
+    continue;                                                                                                        \
   }
 
-#define FOR_ALL_MONSTS(level, t, x, y)                                                                                 \
-  FOR_ALL_THINGS_WALKER(level, t, x, y)                                                                                \
-  if (! t->is_monst()) {                                                                                               \
-    continue;                                                                                                          \
+#define FOR_ALL_MONSTS(level, t, x, y)                                                                               \
+  FOR_ALL_THINGS_WALKER(level, t, x, y)                                                                              \
+  if (! t->is_monst()) {                                                                                             \
+    continue;                                                                                                        \
   }
 
 //
 // Cursor path is the highlighted path the player follows.
 //
-#define FOR_ALL_CURSOR_PATH_THINGS(level, t, x, y)                                                                     \
-  FOR_TMP_THINGS_WALKER(level, t, x, y)                                                                                \
-  if (! t->is_cursor_path()) {                                                                                         \
-    continue;                                                                                                          \
+#define FOR_ALL_CURSOR_PATH_THINGS(level, t, x, y)                                                                   \
+  FOR_TMP_THINGS_WALKER(level, t, x, y)                                                                              \
+  if (! t->is_cursor_path()) {                                                                                       \
+    continue;                                                                                                        \
   }
 
-#define FOR_ALL_DEBUG_PATH_THINGS(level, t, x, y)                                                                      \
-  FOR_TMP_THINGS_WALKER(level, t, x, y)                                                                                \
-  if (! t->is_debug_path()) {                                                                                          \
-    continue;                                                                                                          \
+#define FOR_ALL_DEBUG_PATH_THINGS(level, t, x, y)                                                                    \
+  FOR_TMP_THINGS_WALKER(level, t, x, y)                                                                              \
+  if (! t->is_debug_path()) {                                                                                        \
+    continue;                                                                                                        \
   }
 
   Thingp buffbox_describe(const uint32_t slot);

@@ -25,7 +25,7 @@ double gaussrand(double mean, double stddev);
 #define DISTANCE(xa, ya, xb, yb) sqrt((double) (SQUARED((xb) - (xa)) + SQUARED((yb) - (ya))))
 
 #undef DISTANCE3f
-#define DISTANCE3f(xa, ya, za, xb, yb, zb)                                                                             \
+#define DISTANCE3f(xa, ya, za, xb, yb, zb)                                                                           \
   sqrt((double) (SQUARED((xb) - (xa)) + SQUARED((yb) - (ya)) + SQUARED((zb) - (za))))
 
 #define PI      3.14159265358979323846f          // pi

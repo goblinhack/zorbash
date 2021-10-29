@@ -199,8 +199,8 @@ static inline void set(std::vector< std::vector< std::vector< TYPE > > > &contai
 }
 
 template < class TYPE >
-static inline TYPE get(std::vector< std::vector< std::vector< TYPE > > > const &container, std::size_t X, std::size_t Y,
-                       std::size_t Z)
+static inline TYPE get(std::vector< std::vector< std::vector< TYPE > > > const &container, std::size_t X,
+                       std::size_t Y, std::size_t Z)
 {
   DODEBUG(std::cerr << "get [" << X << "][" << Y << "][" << Z << "] = ");
   if (DEBUG3) {
@@ -269,8 +269,8 @@ static inline void set(std::vector< std::vector< std::vector< std::vector< TYPE 
 }
 
 template < class TYPE >
-static inline TYPE get(std::vector< std::vector< std::vector< std::vector< TYPE > > > > const &container, std::size_t X,
-                       std::size_t Y, std::size_t Z, std::size_t I)
+static inline TYPE get(std::vector< std::vector< std::vector< std::vector< TYPE > > > > const &container,
+                       std::size_t X, std::size_t Y, std::size_t Z, std::size_t I)
 {
   DODEBUG(std::cerr << "getptr [" << X << "][" << Y << "][" << Z << "][" << I << "] = ");
   if (DEBUG3) {

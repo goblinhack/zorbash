@@ -49,13 +49,25 @@ public:
     z -= a.z;
   }
 
-  friend my_apoint3d operator+(my_apoint3d a, my_apoint3d b) { return (my_apoint3d(a.x + b.x, a.y + b.y, a.z + b.z)); }
+  friend my_apoint3d operator+(my_apoint3d a, my_apoint3d b)
+  {
+    return (my_apoint3d(a.x + b.x, a.y + b.y, a.z + b.z));
+  }
 
-  friend my_apoint3d operator-(my_apoint3d a, my_apoint3d b) { return (my_apoint3d(a.x - b.x, a.y - b.y, a.z - b.z)); }
+  friend my_apoint3d operator-(my_apoint3d a, my_apoint3d b)
+  {
+    return (my_apoint3d(a.x - b.x, a.y - b.y, a.z - b.z));
+  }
 
-  friend my_apoint3d operator/(my_apoint3d a, my_apoint3d b) { return (my_apoint3d(a.x / b.x, a.y / b.y, a.z / b.z)); }
+  friend my_apoint3d operator/(my_apoint3d a, my_apoint3d b)
+  {
+    return (my_apoint3d(a.x / b.x, a.y / b.y, a.z / b.z));
+  }
 
-  friend my_apoint3d operator*(my_apoint3d a, my_apoint3d b) { return (my_apoint3d(a.x * b.x, a.y * b.y, a.z * b.z)); }
+  friend my_apoint3d operator*(my_apoint3d a, my_apoint3d b)
+  {
+    return (my_apoint3d(a.x * b.x, a.y * b.y, a.z * b.z));
+  }
 
   friend my_apoint3d operator/(my_apoint3d a, T b) { return (my_apoint3d(a.x / b, a.y / b, a.z / b)); }
 

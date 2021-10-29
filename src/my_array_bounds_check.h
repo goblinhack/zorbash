@@ -77,7 +77,8 @@ static inline TYPE get(std::array< TYPE, XDIM > const &container, std::size_t X)
   return (container[ X ]);
 }
 
-template < class TYPE, std::size_t XDIM > static inline TYPE &getref(std::array< TYPE, XDIM > &container, std::size_t X)
+template < class TYPE, std::size_t XDIM >
+static inline TYPE &getref(std::array< TYPE, XDIM > &container, std::size_t X)
 {
   DODEBUG(std::cerr << "getref [" << X << "] = ");
   if (DEBUG3) {
@@ -87,7 +88,8 @@ template < class TYPE, std::size_t XDIM > static inline TYPE &getref(std::array<
   return (container[ X ]);
 }
 
-template < class TYPE, std::size_t XDIM > static inline TYPE *getptr(std::array< TYPE, XDIM > &container, std::size_t X)
+template < class TYPE, std::size_t XDIM >
+static inline TYPE *getptr(std::array< TYPE, XDIM > &container, std::size_t X)
 {
   DODEBUG(std::cerr << "getptr [" << X << "] = ");
   if (DEBUG3) {
@@ -228,8 +230,8 @@ static inline void set(std::array< std::array< std::array< TYPE, ZDIM >, YDIM >,
 }
 
 template < class TYPE, std::size_t XDIM, std::size_t YDIM, std::size_t ZDIM >
-static inline TYPE get(std::array< std::array< std::array< TYPE, ZDIM >, YDIM >, XDIM > const &container, std::size_t X,
-                       std::size_t Y, std::size_t Z)
+static inline TYPE get(std::array< std::array< std::array< TYPE, ZDIM >, YDIM >, XDIM > const &container,
+                       std::size_t X, std::size_t Y, std::size_t Z)
 {
   DODEBUG(std::cerr << "get [" << X << "][" << Y << "][" << Z << "] = ");
   if (DEBUG3) {
@@ -280,8 +282,9 @@ static inline TYPE *getptr(std::array< std::array< std::array< TYPE, ZDIM >, YDI
 // Four dimension array check
 //
 template < class TYPE, std::size_t XDIM, std::size_t YDIM, std::size_t ZDIM, std::size_t IDIM >
-static inline void set(std::array< std::array< std::array< std::array< TYPE, IDIM >, ZDIM >, YDIM >, XDIM > &container,
-                       std::size_t X, std::size_t Y, std::size_t Z, std::size_t I, TYPE v)
+static inline void
+    set(std::array< std::array< std::array< std::array< TYPE, IDIM >, ZDIM >, YDIM >, XDIM > &container,
+        std::size_t X, std::size_t Y, std::size_t Z, std::size_t I, TYPE v)
 {
   DODEBUG(std::cerr << "set [" << X << "][" << Y << "][" << Z << "][" << I << "] = " << v << std::endl);
   if (DEBUG3) {
@@ -415,15 +418,15 @@ static inline void set_no_check(std::array< std::array< TYPE, YDIM >, XDIM > &co
 }
 
 template < class TYPE, std::size_t XDIM, std::size_t YDIM >
-static inline void incr_no_check(std::array< std::array< TYPE, YDIM >, XDIM > &container, std::size_t X, std::size_t Y,
-                                 TYPE v)
+static inline void incr_no_check(std::array< std::array< TYPE, YDIM >, XDIM > &container, std::size_t X,
+                                 std::size_t Y, TYPE v)
 {
   container[ X ][ Y ] += v;
 }
 
 template < class TYPE, std::size_t XDIM, std::size_t YDIM >
-static inline void decr_no_check(std::array< std::array< TYPE, YDIM >, XDIM > &container, std::size_t X, std::size_t Y,
-                                 TYPE v)
+static inline void decr_no_check(std::array< std::array< TYPE, YDIM >, XDIM > &container, std::size_t X,
+                                 std::size_t Y, TYPE v)
 {
   container[ X ][ Y ] -= v;
 }
@@ -485,9 +488,9 @@ static inline void
 }
 
 template < class TYPE, std::size_t XDIM, std::size_t YDIM, std::size_t ZDIM, std::size_t IDIM >
-static inline TYPE
-    get_no_check(std::array< std::array< std::array< std::array< TYPE, IDIM >, ZDIM >, YDIM >, XDIM > const &container,
-                 std::size_t X, std::size_t Y, std::size_t Z, std::size_t I)
+static inline TYPE get_no_check(
+    std::array< std::array< std::array< std::array< TYPE, IDIM >, ZDIM >, YDIM >, XDIM > const &container,
+    std::size_t X, std::size_t Y, std::size_t Z, std::size_t I)
 {
   return (container[ X ][ Y ][ Z ][ I ]);
 }

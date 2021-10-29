@@ -39,30 +39,30 @@ int   ptrcheck_verify(const void *ptr, std::string &file, std::string &func, int
 int   ptrcheck_free(void *ptr, std::string file, std::string func, int line);
 void  ptrcheck_leak_print(void);
 
-#define newptr(__ptr__, __what__)                                                                                      \
-  {                                                                                                                    \
-    if (DEBUG4) {                                                                                                      \
-      TRACE_AND_INDENT();                                                                                              \
-      ptrcheck_alloc((__ptr__), (__what__), sizeof(*(__ptr__)), PTRCHECK_AT);                                          \
-    }                                                                                                                  \
+#define newptr(__ptr__, __what__)                                                                                    \
+  {                                                                                                                  \
+    if (DEBUG4) {                                                                                                    \
+      TRACE_AND_INDENT();                                                                                            \
+      ptrcheck_alloc((__ptr__), (__what__), sizeof(*(__ptr__)), PTRCHECK_AT);                                        \
+    }                                                                                                                \
   }
 
-#define oldptr(__ptr__)                                                                                                \
-  {                                                                                                                    \
-    if (DEBUG4) {                                                                                                      \
-      TRACE_AND_INDENT();                                                                                              \
-      ptrcheck_free((__ptr__), PTRCHECK_AT);                                                                           \
-    }                                                                                                                  \
+#define oldptr(__ptr__)                                                                                              \
+  {                                                                                                                  \
+    if (DEBUG4) {                                                                                                    \
+      TRACE_AND_INDENT();                                                                                            \
+      ptrcheck_free((__ptr__), PTRCHECK_AT);                                                                         \
+    }                                                                                                                \
   }
 
-#define verify(__ptr__)                                                                                                \
-  {                                                                                                                    \
-    if (DEBUG4) {                                                                                                      \
-      TRACE_AND_INDENT();                                                                                              \
-      static std::string a = std::string(__FILE__);                                                                    \
-      static std::string b = std::string(__PRETTY_FUNCTION__);                                                         \
-      ptrcheck_verify((__ptr__), a, b, __LINE__);                                                                      \
-    }                                                                                                                  \
+#define verify(__ptr__)                                                                                              \
+  {                                                                                                                  \
+    if (DEBUG4) {                                                                                                    \
+      TRACE_AND_INDENT();                                                                                            \
+      static std::string a = std::string(__FILE__);                                                                  \
+      static std::string b = std::string(__PRETTY_FUNCTION__);                                                       \
+      ptrcheck_verify((__ptr__), a, b, __LINE__);                                                                    \
+    }                                                                                                                \
   }
 
 #endif // __PTRCHECK_H__
