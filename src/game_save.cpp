@@ -27,10 +27,10 @@ bool            game_save_config_only;
 int             GAME_SAVE_MARKER_EOL = 123456;
 extern uint32_t csum(char *mem, uint32_t len);
 
-#define WRITE_MAGIC(m)                                                                                                 \
-  {                                                                                                                    \
-    uint32_t magic = m;                                                                                                \
-    out << bits(magic);                                                                                                \
+#define WRITE_MAGIC(m)                                                                                               \
+  {                                                                                                                  \
+    uint32_t magic = m;                                                                                              \
+    out << bits(magic);                                                                                              \
   }
 
 std::ostream &operator<<(std::ostream &out, Bits< MonstInfop & > const my)
@@ -786,7 +786,8 @@ bool Game::save(std::string file_to_save)
   HEAP_ALLOC(wrkmem, LZO1X_1_MEM_COMPRESS);
 
   lzo_uint compressed_len = 0;
-  int r = lzo1x_1_compress((lzo_bytep) uncompressed, uncompressed_len, (lzo_bytep) compressed, &compressed_len, wrkmem);
+  int      r =
+      lzo1x_1_compress((lzo_bytep) uncompressed, uncompressed_len, (lzo_bytep) compressed, &compressed_len, wrkmem);
   if (r == LZO_E_OK) {
     LOG("DGN: Saved as %s, compress %luMb -> %luMb", file_to_save.c_str(),
         (unsigned long) uncompressed_len / (1024 * 1024), (unsigned long) compressed_len / (1024 * 1024));
@@ -805,7 +806,8 @@ bool Game::save(std::string file_to_save)
     memcpy(tmp_compressed, compressed, compressed_len);
 
     lzo_uint new_len = 0;
-    int r = lzo1x_decompress((lzo_bytep) tmp_compressed, compressed_len, (lzo_bytep) tmp_uncompressed, &new_len, NULL);
+    int      r =
+        lzo1x_decompress((lzo_bytep) tmp_compressed, compressed_len, (lzo_bytep) tmp_uncompressed, &new_len, NULL);
     if (r == LZO_E_OK && new_len == uncompressed_len) {
       if (memcmp(tmp_uncompressed, uncompressed, uncompressed_len)) {
         ERR("LZO compress-decompress failed");

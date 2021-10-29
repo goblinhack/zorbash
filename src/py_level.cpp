@@ -66,10 +66,10 @@ PyObject *level_add_(PyObject *obj, PyObject *args, PyObject *keywds)
         } else if (m.is_blood || m.is_deep_water || m.is_door || m.is_ascend_dungeon || m.is_descend_dungeon ||
                    m.is_descend_sewer || m.is_floor_deco || m.is_food || m.is_minion_generator_easy ||
                    m.is_minion_generator_hard || m.is_gold || m.is_key || m.is_lava || m.is_monst_easy ||
-                   m.is_monst_med || m.is_monst_hard || m.is_enchantstone || m.is_skillstone || m.is_treasure_class_a ||
-                   m.is_treasure_class_b || m.is_treasure_class_c || m.is_potion || m.is_wand || m.is_secret_door ||
-                   m.is_brazier || m.is_barrel || m.is_trap || m.is_shallow_water || m.is_deep_water ||
-                   m.is_floor_deco) {
+                   m.is_monst_med || m.is_monst_hard || m.is_enchantstone || m.is_skillstone ||
+                   m.is_treasure_class_a || m.is_treasure_class_b || m.is_treasure_class_c || m.is_potion ||
+                   m.is_wand || m.is_secret_door || m.is_brazier || m.is_barrel || m.is_trap || m.is_shallow_water ||
+                   m.is_deep_water || m.is_floor_deco) {
           floor_string += Charmap::FLOOR;
         } else {
           floor_string += Charmap::SPACE;
@@ -309,44 +309,44 @@ PyObject *level_flood_fill_get_all_things(PyObject *obj, PyObject *args, PyObjec
   return (lst);
 }
 
-#define LEVEL_BODY_GET_BOOL_AT(__func__, __api__)                                                                      \
-  PyObject *__func__(PyObject * obj, PyObject * args, PyObject * keywds)                                               \
-  {                                                                                                                    \
-    TRACE_AND_INDENT();                                                                                                \
-    uint32_t     id       = 0;                                                                                         \
-    int          x        = -1;                                                                                        \
-    int          y        = -1;                                                                                        \
-    static char *kwlist[] = {(char *) "id", (char *) "x", (char *) "y", 0};                                            \
-                                                                                                                       \
-    if (! PyArg_ParseTupleAndKeywords(args, keywds, "Iii", kwlist, &id, &x, &y)) {                                     \
-      ERR("%s: Failed parsing keywords", __FUNCTION__);                                                                \
-      Py_RETURN_FALSE;                                                                                                 \
-    }                                                                                                                  \
-                                                                                                                       \
-    if (! id) {                                                                                                        \
-      ERR("%s: No thing ID set", __FUNCTION__);                                                                        \
-      Py_RETURN_FALSE;                                                                                                 \
-    }                                                                                                                  \
-                                                                                                                       \
-    Thingp t = game->thing_find(id);                                                                                   \
-    if (! t) {                                                                                                         \
-      ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);                                                            \
-      Py_RETURN_FALSE;                                                                                                 \
-    }                                                                                                                  \
-                                                                                                                       \
-    if (t->level->is_oob(x, y)) {                                                                                      \
-      Py_RETURN_FALSE;                                                                                                 \
-    }                                                                                                                  \
-                                                                                                                       \
-    FOR_ALL_THINGS(t->level, t, x, y)                                                                                  \
-    {                                                                                                                  \
-      if (t->__api__()) {                                                                                              \
-        Py_RETURN_TRUE;                                                                                                \
-      }                                                                                                                \
-    }                                                                                                                  \
-    FOR_ALL_THINGS_END()                                                                                               \
-                                                                                                                       \
-    Py_RETURN_FALSE;                                                                                                   \
+#define LEVEL_BODY_GET_BOOL_AT(__func__, __api__)                                                                    \
+  PyObject *__func__(PyObject * obj, PyObject * args, PyObject * keywds)                                             \
+  {                                                                                                                  \
+    TRACE_AND_INDENT();                                                                                              \
+    uint32_t     id       = 0;                                                                                       \
+    int          x        = -1;                                                                                      \
+    int          y        = -1;                                                                                      \
+    static char *kwlist[] = {(char *) "id", (char *) "x", (char *) "y", 0};                                          \
+                                                                                                                     \
+    if (! PyArg_ParseTupleAndKeywords(args, keywds, "Iii", kwlist, &id, &x, &y)) {                                   \
+      ERR("%s: Failed parsing keywords", __FUNCTION__);                                                              \
+      Py_RETURN_FALSE;                                                                                               \
+    }                                                                                                                \
+                                                                                                                     \
+    if (! id) {                                                                                                      \
+      ERR("%s: No thing ID set", __FUNCTION__);                                                                      \
+      Py_RETURN_FALSE;                                                                                               \
+    }                                                                                                                \
+                                                                                                                     \
+    Thingp t = game->thing_find(id);                                                                                 \
+    if (! t) {                                                                                                       \
+      ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);                                                          \
+      Py_RETURN_FALSE;                                                                                               \
+    }                                                                                                                \
+                                                                                                                     \
+    if (t->level->is_oob(x, y)) {                                                                                    \
+      Py_RETURN_FALSE;                                                                                               \
+    }                                                                                                                \
+                                                                                                                     \
+    FOR_ALL_THINGS(t->level, t, x, y)                                                                                \
+    {                                                                                                                \
+      if (t->__api__()) {                                                                                            \
+        Py_RETURN_TRUE;                                                                                              \
+      }                                                                                                              \
+    }                                                                                                                \
+    FOR_ALL_THINGS_END()                                                                                             \
+                                                                                                                     \
+    Py_RETURN_FALSE;                                                                                                 \
   }
 
 LEVEL_BODY_GET_BOOL_AT(level_ai_resent_count_at, ai_resent_count)

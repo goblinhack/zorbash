@@ -686,7 +686,8 @@ WidBag::~WidBag()
   }
 }
 
-WidBag::WidBag(Widp parent, Thingp bag_, bool highlight, point tl, point br, const std::string &title) : tl(tl), br(br)
+WidBag::WidBag(Widp parent, Thingp bag_, bool highlight, point tl, point br, const std::string &title)
+    : tl(tl), br(br)
 {
   TRACE_AND_INDENT();
   bag = bag_;

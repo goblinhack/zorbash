@@ -120,7 +120,8 @@ void Thing::set_equip_use_anim(Thingp new_gfx_anim_use, int equip)
     }
 
     if (new_gfx_anim_use) {
-      dbg("Change equip use-anim %s->%s", old_gfx_anim_use->to_string().c_str(), new_gfx_anim_use->to_string().c_str());
+      dbg("Change equip use-anim %s->%s", old_gfx_anim_use->to_string().c_str(),
+          new_gfx_anim_use->to_string().c_str());
       new_gfx_anim_use->set_owner(this);
     } else {
       dbg("Remove equip use-anim %s", old_gfx_anim_use->to_string().c_str());

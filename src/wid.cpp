@@ -113,8 +113,8 @@ const ts_t wid_destroy_delay_ms = 200;
 //
 static void    wid_destroy_delay(Widp *wp, int32_t delay);
 static uint8_t wid_scroll_trough_mouse_down(Widp w, int32_t x, int32_t y, uint32_t button);
-static uint8_t wid_scroll_trough_mouse_motion(Widp w, int32_t x, int32_t y, int32_t relx, int32_t rely, int32_t wheelx,
-                                              int32_t wheely);
+static uint8_t wid_scroll_trough_mouse_motion(Widp w, int32_t x, int32_t y, int32_t relx, int32_t rely,
+                                              int32_t wheelx, int32_t wheely);
 static void    wid_find_first_focus(void);
 static void    wid_find_top_focus(void);
 static void    wid_destroy_immediate(Widp w);
@@ -791,7 +791,8 @@ static void wid_m_over_e(void)
   }
 }
 
-static uint8_t wid_m_over_b(Widp w, uint32_t x, uint32_t y, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+static uint8_t wid_m_over_b(Widp w, uint32_t x, uint32_t y, int32_t relx, int32_t rely, int32_t wheelx,
+                            int32_t wheely)
 {
   TRACE_AND_INDENT();
   if (! wid_mouse_visible) {
@@ -3370,8 +3371,8 @@ static uint8_t wid_scroll_trough_mouse_down(Widp w, int32_t x, int32_t y, uint32
   return true;
 }
 
-static uint8_t wid_scroll_trough_mouse_motion(Widp w, int32_t x, int32_t y, int32_t relx, int32_t rely, int32_t wheelx,
-                                              int32_t wheely)
+static uint8_t wid_scroll_trough_mouse_motion(Widp w, int32_t x, int32_t y, int32_t relx, int32_t rely,
+                                              int32_t wheelx, int32_t wheely)
 {
   TRACE_AND_INDENT();
   int32_t dx;
@@ -3517,7 +3518,7 @@ static void wid_adjust_scrollbar(Widp scrollbar, Widp owner)
       owner->offset.y = -miny;
       owner->offset.y -= (pct * (child_height - height));
 
-      float n             = (float) wid_get_tl_y(scrollbar->parent) + pct * (float) (trough_height - scrollbar_height);
+      float n = (float) wid_get_tl_y(scrollbar->parent) + pct * (float) (trough_height - scrollbar_height);
       scrollbar->key.tl.y = (int) ceil(n);
 
       wid_tree_detach(scrollbar);

@@ -1312,7 +1312,8 @@ std::vector< std::string > split_tokens(const std::string &s, const char delimit
 // https://www.techiedelight.com/trim-string-cpp-remove-leading-trailing-spaces/
 std::string &ltrim(std::string &s)
 {
-  auto it = std::find_if(s.begin(), s.end(), [](char c) { return ! std::isspace< char >(c, std::locale::classic()); });
+  auto it =
+      std::find_if(s.begin(), s.end(), [](char c) { return ! std::isspace< char >(c, std::locale::classic()); });
   s.erase(s.begin(), it);
   return s;
 }
@@ -1345,7 +1346,8 @@ std::string trim_ws(const std::string &s) { return rtrim_ws(ltrim_ws(s)); }
 
 std::wstring &ltrim(std::wstring &s)
 {
-  auto it = std::find_if(s.begin(), s.end(), [](char c) { return ! std::isspace< char >(c, std::locale::classic()); });
+  auto it =
+      std::find_if(s.begin(), s.end(), [](char c) { return ! std::isspace< char >(c, std::locale::classic()); });
   s.erase(s.begin(), it);
   return s;
 }

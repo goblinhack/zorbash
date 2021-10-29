@@ -291,10 +291,11 @@ bool Thing::possible_to_attack(const Thingp it)
     }
   }
 
-  if (it->is_alive_monst() || it->is_combustible() || it->is_very_combustible() || it->is_burnable() || it->is_wall() ||
-      it->is_rock() || it->is_door() || it->is_bridge() || it->is_dry_grass() || it->is_treasure_type() ||
-      it->is_enchantstone() || it->is_skillstone() || it->is_foilage() || it->is_spiderweb() || it->is_sticky() ||
-      it->is_brazier() || it->is_barrel() || it->is_player() || it->is_food() || it->is_bag_item()) {
+  if (it->is_alive_monst() || it->is_combustible() || it->is_very_combustible() || it->is_burnable() ||
+      it->is_wall() || it->is_rock() || it->is_door() || it->is_bridge() || it->is_dry_grass() ||
+      it->is_treasure_type() || it->is_enchantstone() || it->is_skillstone() || it->is_foilage() ||
+      it->is_spiderweb() || it->is_sticky() || it->is_brazier() || it->is_barrel() || it->is_player() ||
+      it->is_food() || it->is_bag_item()) {
 
     if (is_laser()) {
       dbg("Can attack as laser %s", it->to_string().c_str());

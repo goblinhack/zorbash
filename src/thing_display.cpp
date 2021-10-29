@@ -17,7 +17,8 @@
 #include "my_tile.h"
 #include "my_ui.h"
 
-void Thing::blit_non_player_owned_shadow(const Tpp &tpp, const Tilep &tile, const point &blit_tl, const point &blit_br)
+void Thing::blit_non_player_owned_shadow(const Tpp &tpp, const Tilep &tile, const point &blit_tl,
+                                         const point &blit_br)
 {
   TRACE_AND_INDENT();
   IF_DEBUG3 { return; }
@@ -685,7 +686,8 @@ uint8_t Thing::blit_begin_submerged(void)
       waterline = owner->last_blit_br.y;
     }
     if (waterline < game->config.game_pix_height) {
-      glScissor(0, game->config.game_pix_height - waterline, game->config.game_pix_width, game->config.game_pix_height);
+      glScissor(0, game->config.game_pix_height - waterline, game->config.game_pix_width,
+                game->config.game_pix_height);
       GL_ERROR_CHECK();
     }
     glEnable(GL_SCISSOR_TEST);

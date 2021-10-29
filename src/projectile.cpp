@@ -20,8 +20,8 @@
 #include "my_tile.h"
 #include "my_vector_bounds_check.h"
 
-Projectile_::Projectile_(Levelp level, ThingId thing_id, point start, point stop, point pixel_map_at, uint32_t ts_start,
-                         uint32_t ts_stop)
+Projectile_::Projectile_(Levelp level, ThingId thing_id, point start, point stop, point pixel_map_at,
+                         uint32_t ts_start, uint32_t ts_stop)
     : id(thing_id), start(start), stop(stop), pixel_map_at(pixel_map_at), ts_start(ts_start), ts_stop(ts_stop)
 {
   TRACE_AND_INDENT();

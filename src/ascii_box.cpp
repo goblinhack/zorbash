@@ -175,8 +175,8 @@ static void ascii_put_box_(int style, Tilep bg_tile, Tilep fg_tile, Tilep fg2_ti
 {
   TRACE_AND_INDENT();
   if (! *fmt) {
-    ascii_put_box__(style, bg_tile, fg_tile, fg2_tile, fg3_tile, x, y, x + width - 1, y + height - 1, col_bg, col_text,
-                    0 /* context */);
+    ascii_put_box__(style, bg_tile, fg_tile, fg2_tile, fg3_tile, x, y, x + width - 1, y + height - 1, col_bg,
+                    col_text, 0 /* context */);
   } else {
     wchar_t buf[ MAXLONGSTR ];
     auto    wrote = vswprintf(buf, MAXLONGSTR, fmt, args);
@@ -191,8 +191,8 @@ static void ascii_put_box_(int style, Tilep bg_tile, Tilep fg_tile, Tilep fg2_ti
     auto b   = std::wstring(buf);
     int  len = ascii_strlen(b);
 
-    ascii_put_box__(style, bg_tile, fg_tile, fg2_tile, fg3_tile, x, y, x + width - 1, y + height - 1, col_bg, col_text,
-                    0 /* context */);
+    ascii_put_box__(style, bg_tile, fg_tile, fg2_tile, fg3_tile, x, y, x + width - 1, y + height - 1, col_bg,
+                    col_text, 0 /* context */);
 
     ascii_putf__(x + ((width - len) / 2), y + 1, col_text, COLOR_NONE, b);
   }

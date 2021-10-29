@@ -397,8 +397,8 @@ Fontp ttf_write_tga(std::string name, int pointsize, int style)
   stbi_write_tga(filename, dst->w, dst->h, STBI_rgb_alpha, dst->pixels);
   SDL_UnlockSurface(dst);
 
-  printf("wrote %s (unicode char %d to %d) image is %dx%d pixels, glyph_per_row %d char size %dx%d pixels\n", filename,
-         TTF_GLYPH_MIN, TTF_GLYPH_MAX, dst->w, dst->h, glyph_per_row, max_char_width, max_char_height);
+  printf("wrote %s (unicode char %d to %d) image is %dx%d pixels, glyph_per_row %d char size %dx%d pixels\n",
+         filename, TTF_GLYPH_MIN, TTF_GLYPH_MAX, dst->w, dst->h, glyph_per_row, max_char_width, max_char_height);
 
   Texp tex;
   tex = tex_from_surface(dst, filename, filename, GL_LINEAR);

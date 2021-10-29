@@ -691,7 +691,10 @@ void Tp::set_environ_hates_fire(int v) { _environ_hates_fire = v; }
 void Tp::set_unused_flag3(int v) { _unused_flag3 = v; }
 void Tp::set_environ_hates_water(int v) { _environ_hates_water = v; }
 void Tp::set_environ_hates_acid(int v) { _environ_hates_acid = v; }
-void Tp::set_ai_is_able_to_detect_secret_doors_when_close(int v) { _ai_is_able_to_detect_secret_doors_when_close = v; }
+void Tp::set_ai_is_able_to_detect_secret_doors_when_close(int v)
+{
+  _ai_is_able_to_detect_secret_doors_when_close = v;
+}
 void Tp::set_ai_is_able_to_break_down_doors(int v) { _ai_is_able_to_break_down_doors = v; }
 void Tp::set_ai_is_able_to_break_out_of_webs(int v) { _ai_is_able_to_break_out_of_webs = v; }
 void Tp::set_ai_is_able_to_open_doors(int v) { _ai_is_able_to_open_doors = v; }

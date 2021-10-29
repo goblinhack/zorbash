@@ -1962,7 +1962,10 @@ void Level::unset_is_light_blocker(const int x, const int y)
   set(_is_light_blocker, x, y, false);
 }
 
-void Level::unset_is_light_blocker_no_check(const int x, const int y) { set_no_check(_is_light_blocker, x, y, false); }
+void Level::unset_is_light_blocker_no_check(const int x, const int y)
+{
+  set_no_check(_is_light_blocker, x, y, false);
+}
 
 //
 // Used in lighting, so inlined

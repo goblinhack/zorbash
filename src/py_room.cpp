@@ -31,9 +31,9 @@ PyObject *map_load_room_(PyObject *obj, PyObject *args, PyObject *keywds)
       (char *) "down",      (char *) "left", (char *) "right",  (char *) "entrance",  (char *) "exit",
       (char *) "lock",      (char *) "key",  (char *) "secret", (char *) "depth",     0};
 
-  if (! PyArg_ParseTupleAndKeywords(args, keywds, "|Oiisiiiiiiiiii", kwlist, &py_room_data, &xxx, &yyy, &room_name, &up,
-                                    &down, &left, &right, &is_ascend_dungeon, &is_descend_dungeon, &is_lock, &is_key,
-                                    &is_secret, &depth)) {
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "|Oiisiiiiiiiiii", kwlist, &py_room_data, &xxx, &yyy, &room_name,
+                                    &up, &down, &left, &right, &is_ascend_dungeon, &is_descend_dungeon, &is_lock,
+                                    &is_key, &is_secret, &depth)) {
     ERR("map_load_room: Bad args");
     Py_RETURN_FALSE;
   }
@@ -77,10 +77,10 @@ PyObject *map_load_room_(PyObject *obj, PyObject *args, PyObject *keywds)
         } else if (m.is_blood || m.is_ascend_dungeon || m.is_barrel || m.is_brazier || m.is_deep_water ||
                    m.is_descend_dungeon || m.is_door || m.is_foilage || m.is_spiderweb || m.is_dry_grass ||
                    m.is_floor_deco || m.is_food || m.is_gold || m.is_key || m.is_lava || m.is_minion_generator_easy ||
-                   m.is_minion_generator_hard || m.is_monst_easy || m.is_monst_med || m.is_monst_hard || m.is_potion ||
-                   m.is_secret_door || m.is_shallow_water || m.is_trap || m.is_enchantstone || m.is_skillstone ||
-                   m.is_treasure_class_a || m.is_treasure_class_b || m.is_treasure_class_c || m.is_wand ||
-                   m.is_deep_water) {
+                   m.is_minion_generator_hard || m.is_monst_easy || m.is_monst_med || m.is_monst_hard ||
+                   m.is_potion || m.is_secret_door || m.is_shallow_water || m.is_trap || m.is_enchantstone ||
+                   m.is_skillstone || m.is_treasure_class_a || m.is_treasure_class_b || m.is_treasure_class_c ||
+                   m.is_wand || m.is_deep_water) {
           floor_string += Charmap::FLOOR;
         } else {
           floor_string += Charmap::SPACE;
@@ -121,8 +121,8 @@ PyObject *map_load_room_(PyObject *obj, PyObject *args, PyObject *keywds)
         if (m.is_blood || m.is_ascend_dungeon || m.is_descend_dungeon || m.is_floor_deco || m.is_food ||
             m.is_minion_generator_easy || m.is_minion_generator_hard || m.is_gold || m.is_key || m.is_monst_easy ||
             m.is_monst_med || m.is_monst_hard || m.is_enchantstone || m.is_skillstone || m.is_treasure_class_a ||
-            m.is_treasure_class_b || m.is_treasure_class_c || m.is_potion || m.is_wand || m.is_brazier || m.is_barrel ||
-            m.is_trap || m.is_descend_sewer) {
+            m.is_treasure_class_b || m.is_treasure_class_c || m.is_potion || m.is_wand || m.is_brazier ||
+            m.is_barrel || m.is_trap || m.is_descend_sewer) {
           obj_strings += c;
         } else {
           obj_strings += Charmap::SPACE;

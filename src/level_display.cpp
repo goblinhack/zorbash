@@ -147,7 +147,8 @@ void Level::display_map_bg_things(void)
   gl_enter_2d_mode(game->config.game_pix_width, game->config.game_pix_height);
 }
 
-void Level::display_map_things(int fbo, const int16_t minx, const int16_t miny, const int16_t maxx, const int16_t maxy)
+void Level::display_map_things(int fbo, const int16_t minx, const int16_t miny, const int16_t maxx,
+                               const int16_t maxy)
 {
   TRACE_AND_INDENT();
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

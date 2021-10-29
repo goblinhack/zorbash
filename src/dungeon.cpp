@@ -304,7 +304,10 @@ bool Dungeon::is_oob(const int x, const int y, const int z)
   return ((x < 0) || (x >= map_width) || (y < 0) || (y >= map_height) || (z < 0) || (z >= map_depth));
 }
 
-bool Dungeon::is_oob(const int x, const int y) { return ((x < 0) || (x >= map_width) || (y < 0) || (y >= map_height)); }
+bool Dungeon::is_oob(const int x, const int y)
+{
+  return ((x < 0) || (x >= map_width) || (y < 0) || (y >= map_height));
+}
 
 void Dungeon::debug(const std::string s)
 {

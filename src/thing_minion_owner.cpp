@@ -59,7 +59,8 @@ void Thing::set_minion_owner(Thingp minion_owner)
     }
 
     if (minion_owner) {
-      dbg("Will change minion owner %s->%s", old_minion_owner->to_string().c_str(), minion_owner->to_string().c_str());
+      dbg("Will change minion owner %s->%s", old_minion_owner->to_string().c_str(),
+          minion_owner->to_string().c_str());
     } else {
       dbg("Will remove minion owner %s", old_minion_owner->to_string().c_str());
     }

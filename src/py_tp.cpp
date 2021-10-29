@@ -58,248 +58,248 @@ PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds)
   Py_RETURN_TRUE;
 }
 
-#define TP_BODY_SET_STRING(__field__)                                                                                  \
-  PyObject *tp_set_##__field__(PyObject *obj, PyObject *args, PyObject *keywds)                                        \
-  {                                                                                                                    \
-    PyObject *py_class = 0;                                                                                            \
-    char     *tp_name  = 0;                                                                                            \
-    char     *value    = 0;                                                                                            \
-    Tpp       tp;                                                                                                      \
-                                                                                                                       \
-    static char *kwlist[] = {(char *) "class", (char *) "value", 0};                                                   \
-                                                                                                                       \
-    if (! PyArg_ParseTupleAndKeywords(args, keywds, "O|s", kwlist, &py_class, &value)) {                               \
-      ERR("%s: Bad args", __FUNCTION__);                                                                               \
-      return 0;                                                                                                        \
-    }                                                                                                                  \
-                                                                                                                       \
-    if (! py_class) {                                                                                                  \
-      ERR("%s: Missing class", __FUNCTION__);                                                                          \
-      Py_RETURN_FALSE;                                                                                                 \
-    }                                                                                                                  \
-                                                                                                                       \
-    if (! value) {                                                                                                     \
-      ERR("%s: Missing value", __FUNCTION__);                                                                          \
-      Py_RETURN_FALSE;                                                                                                 \
-    }                                                                                                                  \
-                                                                                                                       \
-    tp_name = py_obj_attr_str(py_class, "name");                                                                       \
-    if (! tp_name) {                                                                                                   \
-      ERR("%s: Missing tp name", __FUNCTION__);                                                                        \
-      goto done;                                                                                                       \
-    }                                                                                                                  \
-                                                                                                                       \
-    PY_DBG("%s(%s -> \"%s\")", __FUNCTION__, tp_name, value);                                                          \
-                                                                                                                       \
-    tp = tp_find(tp_name);                                                                                             \
-    if (! tp) {                                                                                                        \
-      ERR("%s: Cannot find tp %s", __FUNCTION__, tp_name);                                                             \
-      goto done;                                                                                                       \
-    }                                                                                                                  \
-                                                                                                                       \
-    tp->set_##__field__(std::string(value ? value : ""));                                                              \
-    value = 0;                                                                                                         \
-                                                                                                                       \
-  done:                                                                                                                \
-    if (tp_name) {                                                                                                     \
-      myfree(tp_name);                                                                                                 \
-    }                                                                                                                  \
-                                                                                                                       \
-    Py_RETURN_TRUE;                                                                                                    \
+#define TP_BODY_SET_STRING(__field__)                                                                                \
+  PyObject *tp_set_##__field__(PyObject *obj, PyObject *args, PyObject *keywds)                                      \
+  {                                                                                                                  \
+    PyObject *py_class = 0;                                                                                          \
+    char     *tp_name  = 0;                                                                                          \
+    char     *value    = 0;                                                                                          \
+    Tpp       tp;                                                                                                    \
+                                                                                                                     \
+    static char *kwlist[] = {(char *) "class", (char *) "value", 0};                                                 \
+                                                                                                                     \
+    if (! PyArg_ParseTupleAndKeywords(args, keywds, "O|s", kwlist, &py_class, &value)) {                             \
+      ERR("%s: Bad args", __FUNCTION__);                                                                             \
+      return 0;                                                                                                      \
+    }                                                                                                                \
+                                                                                                                     \
+    if (! py_class) {                                                                                                \
+      ERR("%s: Missing class", __FUNCTION__);                                                                        \
+      Py_RETURN_FALSE;                                                                                               \
+    }                                                                                                                \
+                                                                                                                     \
+    if (! value) {                                                                                                   \
+      ERR("%s: Missing value", __FUNCTION__);                                                                        \
+      Py_RETURN_FALSE;                                                                                               \
+    }                                                                                                                \
+                                                                                                                     \
+    tp_name = py_obj_attr_str(py_class, "name");                                                                     \
+    if (! tp_name) {                                                                                                 \
+      ERR("%s: Missing tp name", __FUNCTION__);                                                                      \
+      goto done;                                                                                                     \
+    }                                                                                                                \
+                                                                                                                     \
+    PY_DBG("%s(%s -> \"%s\")", __FUNCTION__, tp_name, value);                                                        \
+                                                                                                                     \
+    tp = tp_find(tp_name);                                                                                           \
+    if (! tp) {                                                                                                      \
+      ERR("%s: Cannot find tp %s", __FUNCTION__, tp_name);                                                           \
+      goto done;                                                                                                     \
+    }                                                                                                                \
+                                                                                                                     \
+    tp->set_##__field__(std::string(value ? value : ""));                                                            \
+    value = 0;                                                                                                       \
+                                                                                                                     \
+  done:                                                                                                              \
+    if (tp_name) {                                                                                                   \
+      myfree(tp_name);                                                                                               \
+    }                                                                                                                \
+                                                                                                                     \
+    Py_RETURN_TRUE;                                                                                                  \
   }
 
-#define TP_BODY_SET_STRING_FN(__field__, __fn__)                                                                       \
-  PyObject *tp_set_##__field__(PyObject *obj, PyObject *args, PyObject *keywds)                                        \
-  {                                                                                                                    \
-    PyObject *py_class = 0;                                                                                            \
-    char     *tp_name  = 0;                                                                                            \
-    char     *value    = 0;                                                                                            \
-    Tpp       tp;                                                                                                      \
-                                                                                                                       \
-    static char *kwlist[] = {(char *) "class", (char *) "value", 0};                                                   \
-                                                                                                                       \
-    if (! PyArg_ParseTupleAndKeywords(args, keywds, "O|s", kwlist, &py_class, &value)) {                               \
-      ERR("%s: Bad args", __FUNCTION__);                                                                               \
-      return 0;                                                                                                        \
-    }                                                                                                                  \
-                                                                                                                       \
-    if (! py_class) {                                                                                                  \
-      ERR("%s: Missing class", __FUNCTION__);                                                                          \
-      Py_RETURN_FALSE;                                                                                                 \
-    }                                                                                                                  \
-                                                                                                                       \
-    if (! value) {                                                                                                     \
-      ERR("%s: Missing value", __FUNCTION__);                                                                          \
-      Py_RETURN_FALSE;                                                                                                 \
-    }                                                                                                                  \
-                                                                                                                       \
-    tp_name = py_obj_attr_str(py_class, "name");                                                                       \
-    if (! tp_name) {                                                                                                   \
-      ERR("%s: Missing tp name", __FUNCTION__);                                                                        \
-      goto done;                                                                                                       \
-    }                                                                                                                  \
-                                                                                                                       \
-    PY_DBG("%s(%s -> \"%s\")", __FUNCTION__, tp_name, value);                                                          \
-                                                                                                                       \
-    tp = tp_find(tp_name);                                                                                             \
-    if (! tp) {                                                                                                        \
-      ERR("%s: Cannot find tp %s", __FUNCTION__, tp_name);                                                             \
-      goto done;                                                                                                       \
-    }                                                                                                                  \
-                                                                                                                       \
-    tp->set_##__field__(std::string(value ? value : ""));                                                              \
-    value = 0;                                                                                                         \
-    (__fn__)(tp);                                                                                                      \
-                                                                                                                       \
-  done:                                                                                                                \
-    if (tp_name) {                                                                                                     \
-      myfree(tp_name);                                                                                                 \
-    }                                                                                                                  \
-                                                                                                                       \
-    Py_RETURN_TRUE;                                                                                                    \
+#define TP_BODY_SET_STRING_FN(__field__, __fn__)                                                                     \
+  PyObject *tp_set_##__field__(PyObject *obj, PyObject *args, PyObject *keywds)                                      \
+  {                                                                                                                  \
+    PyObject *py_class = 0;                                                                                          \
+    char     *tp_name  = 0;                                                                                          \
+    char     *value    = 0;                                                                                          \
+    Tpp       tp;                                                                                                    \
+                                                                                                                     \
+    static char *kwlist[] = {(char *) "class", (char *) "value", 0};                                                 \
+                                                                                                                     \
+    if (! PyArg_ParseTupleAndKeywords(args, keywds, "O|s", kwlist, &py_class, &value)) {                             \
+      ERR("%s: Bad args", __FUNCTION__);                                                                             \
+      return 0;                                                                                                      \
+    }                                                                                                                \
+                                                                                                                     \
+    if (! py_class) {                                                                                                \
+      ERR("%s: Missing class", __FUNCTION__);                                                                        \
+      Py_RETURN_FALSE;                                                                                               \
+    }                                                                                                                \
+                                                                                                                     \
+    if (! value) {                                                                                                   \
+      ERR("%s: Missing value", __FUNCTION__);                                                                        \
+      Py_RETURN_FALSE;                                                                                               \
+    }                                                                                                                \
+                                                                                                                     \
+    tp_name = py_obj_attr_str(py_class, "name");                                                                     \
+    if (! tp_name) {                                                                                                 \
+      ERR("%s: Missing tp name", __FUNCTION__);                                                                      \
+      goto done;                                                                                                     \
+    }                                                                                                                \
+                                                                                                                     \
+    PY_DBG("%s(%s -> \"%s\")", __FUNCTION__, tp_name, value);                                                        \
+                                                                                                                     \
+    tp = tp_find(tp_name);                                                                                           \
+    if (! tp) {                                                                                                      \
+      ERR("%s: Cannot find tp %s", __FUNCTION__, tp_name);                                                           \
+      goto done;                                                                                                     \
+    }                                                                                                                \
+                                                                                                                     \
+    tp->set_##__field__(std::string(value ? value : ""));                                                            \
+    value = 0;                                                                                                       \
+    (__fn__)(tp);                                                                                                    \
+                                                                                                                     \
+  done:                                                                                                              \
+    if (tp_name) {                                                                                                   \
+      myfree(tp_name);                                                                                               \
+    }                                                                                                                \
+                                                                                                                     \
+    Py_RETURN_TRUE;                                                                                                  \
   }
 
-#define TP_BODY_SET_ENUM(__field__, __str2val__)                                                                       \
-  PyObject *tp_set_##__field__(PyObject *obj, PyObject *args, PyObject *keywds)                                        \
-  {                                                                                                                    \
-    PyObject *py_class = 0;                                                                                            \
-    char     *tp_name  = 0;                                                                                            \
-    char     *value    = 0;                                                                                            \
-    Tpp       tp;                                                                                                      \
-                                                                                                                       \
-    static char *kwlist[] = {(char *) "class", (char *) "value", 0};                                                   \
-                                                                                                                       \
-    if (! PyArg_ParseTupleAndKeywords(args, keywds, "O|s", kwlist, &py_class, &value)) {                               \
-      ERR("%s: Bad args", __FUNCTION__);                                                                               \
-      Py_RETURN_FALSE;                                                                                                 \
-    }                                                                                                                  \
-                                                                                                                       \
-    if (! py_class) {                                                                                                  \
-      ERR("%s: Missing class", __FUNCTION__);                                                                          \
-      Py_RETURN_FALSE;                                                                                                 \
-    }                                                                                                                  \
-                                                                                                                       \
-    if (! value) {                                                                                                     \
-      ERR("%s: Missing value", __FUNCTION__);                                                                          \
-      Py_RETURN_FALSE;                                                                                                 \
-    }                                                                                                                  \
-                                                                                                                       \
-    tp_name = py_obj_attr_str(py_class, "name");                                                                       \
-    if (! tp_name) {                                                                                                   \
-      ERR("%s: Missing tp name", __FUNCTION__);                                                                        \
-      goto done;                                                                                                       \
-    }                                                                                                                  \
-                                                                                                                       \
-    tp = tp_find(tp_name);                                                                                             \
-    if (! tp) {                                                                                                        \
-      ERR("%s: Cannot find tp %s", __FUNCTION__, tp_name);                                                             \
-      goto done;                                                                                                       \
-    }                                                                                                                  \
-                                                                                                                       \
-    tp->set_##__field__((__str2val__) (value));                                                                        \
-    if (tp->__field__() == (int) (tp->__field__()) - 1) {                                                              \
-      ERR("%s: Cannot find enum %s", __FUNCTION__, value);                                                             \
-      goto done;                                                                                                       \
-    }                                                                                                                  \
-                                                                                                                       \
-    PY_DBG("%s(%s -> \"%s\"[%d])", __FUNCTION__, tp_name, value, tp->__field__());                                     \
-                                                                                                                       \
-    value = 0;                                                                                                         \
-                                                                                                                       \
-  done:                                                                                                                \
-    if (tp_name) {                                                                                                     \
-      myfree(tp_name);                                                                                                 \
-    }                                                                                                                  \
-                                                                                                                       \
-    Py_RETURN_TRUE;                                                                                                    \
+#define TP_BODY_SET_ENUM(__field__, __str2val__)                                                                     \
+  PyObject *tp_set_##__field__(PyObject *obj, PyObject *args, PyObject *keywds)                                      \
+  {                                                                                                                  \
+    PyObject *py_class = 0;                                                                                          \
+    char     *tp_name  = 0;                                                                                          \
+    char     *value    = 0;                                                                                          \
+    Tpp       tp;                                                                                                    \
+                                                                                                                     \
+    static char *kwlist[] = {(char *) "class", (char *) "value", 0};                                                 \
+                                                                                                                     \
+    if (! PyArg_ParseTupleAndKeywords(args, keywds, "O|s", kwlist, &py_class, &value)) {                             \
+      ERR("%s: Bad args", __FUNCTION__);                                                                             \
+      Py_RETURN_FALSE;                                                                                               \
+    }                                                                                                                \
+                                                                                                                     \
+    if (! py_class) {                                                                                                \
+      ERR("%s: Missing class", __FUNCTION__);                                                                        \
+      Py_RETURN_FALSE;                                                                                               \
+    }                                                                                                                \
+                                                                                                                     \
+    if (! value) {                                                                                                   \
+      ERR("%s: Missing value", __FUNCTION__);                                                                        \
+      Py_RETURN_FALSE;                                                                                               \
+    }                                                                                                                \
+                                                                                                                     \
+    tp_name = py_obj_attr_str(py_class, "name");                                                                     \
+    if (! tp_name) {                                                                                                 \
+      ERR("%s: Missing tp name", __FUNCTION__);                                                                      \
+      goto done;                                                                                                     \
+    }                                                                                                                \
+                                                                                                                     \
+    tp = tp_find(tp_name);                                                                                           \
+    if (! tp) {                                                                                                      \
+      ERR("%s: Cannot find tp %s", __FUNCTION__, tp_name);                                                           \
+      goto done;                                                                                                     \
+    }                                                                                                                \
+                                                                                                                     \
+    tp->set_##__field__((__str2val__) (value));                                                                      \
+    if (tp->__field__() == (int) (tp->__field__()) - 1) {                                                            \
+      ERR("%s: Cannot find enum %s", __FUNCTION__, value);                                                           \
+      goto done;                                                                                                     \
+    }                                                                                                                \
+                                                                                                                     \
+    PY_DBG("%s(%s -> \"%s\"[%d])", __FUNCTION__, tp_name, value, tp->__field__());                                   \
+                                                                                                                     \
+    value = 0;                                                                                                       \
+                                                                                                                     \
+  done:                                                                                                              \
+    if (tp_name) {                                                                                                   \
+      myfree(tp_name);                                                                                               \
+    }                                                                                                                \
+                                                                                                                     \
+    Py_RETURN_TRUE;                                                                                                  \
   }
 
-#define TP_BODY_SET_INT(__field__)                                                                                     \
-  PyObject *tp_set_##__field__(PyObject *obj, PyObject *args, PyObject *keywds)                                        \
-  {                                                                                                                    \
-    PyObject *py_class = 0;                                                                                            \
-    char     *tp_name  = 0;                                                                                            \
-    int       value    = 0;                                                                                            \
-    Tpp       tp;                                                                                                      \
-                                                                                                                       \
-    static char *kwlist[] = {(char *) "class", (char *) "value", 0};                                                   \
-                                                                                                                       \
-    if (! PyArg_ParseTupleAndKeywords(args, keywds, "O|i", kwlist, &py_class, &value)) {                               \
-      ERR("%s: Bad args", __FUNCTION__);                                                                               \
-      Py_RETURN_FALSE;                                                                                                 \
-    }                                                                                                                  \
-                                                                                                                       \
-    if (! py_class) {                                                                                                  \
-      ERR("%s: Missing class", __FUNCTION__);                                                                          \
-      Py_RETURN_FALSE;                                                                                                 \
-    }                                                                                                                  \
-                                                                                                                       \
-    tp_name = py_obj_attr_str(py_class, "name");                                                                       \
-    if (! tp_name) {                                                                                                   \
-      ERR("%s: Missing tp name", __FUNCTION__);                                                                        \
-      goto done;                                                                                                       \
-    }                                                                                                                  \
-                                                                                                                       \
-    PY_DBG("%s(%s -> %d)", __FUNCTION__, tp_name, value);                                                              \
-                                                                                                                       \
-    tp = tp_find(tp_name);                                                                                             \
-    if (! tp) {                                                                                                        \
-      ERR("%s: Cannot find tp %s", __FUNCTION__, tp_name);                                                             \
-      goto done;                                                                                                       \
-    }                                                                                                                  \
-                                                                                                                       \
-    tp->set_##__field__(value);                                                                                        \
-                                                                                                                       \
-  done:                                                                                                                \
-    if (tp_name) {                                                                                                     \
-      myfree(tp_name);                                                                                                 \
-    }                                                                                                                  \
-                                                                                                                       \
-    Py_RETURN_TRUE;                                                                                                    \
+#define TP_BODY_SET_INT(__field__)                                                                                   \
+  PyObject *tp_set_##__field__(PyObject *obj, PyObject *args, PyObject *keywds)                                      \
+  {                                                                                                                  \
+    PyObject *py_class = 0;                                                                                          \
+    char     *tp_name  = 0;                                                                                          \
+    int       value    = 0;                                                                                          \
+    Tpp       tp;                                                                                                    \
+                                                                                                                     \
+    static char *kwlist[] = {(char *) "class", (char *) "value", 0};                                                 \
+                                                                                                                     \
+    if (! PyArg_ParseTupleAndKeywords(args, keywds, "O|i", kwlist, &py_class, &value)) {                             \
+      ERR("%s: Bad args", __FUNCTION__);                                                                             \
+      Py_RETURN_FALSE;                                                                                               \
+    }                                                                                                                \
+                                                                                                                     \
+    if (! py_class) {                                                                                                \
+      ERR("%s: Missing class", __FUNCTION__);                                                                        \
+      Py_RETURN_FALSE;                                                                                               \
+    }                                                                                                                \
+                                                                                                                     \
+    tp_name = py_obj_attr_str(py_class, "name");                                                                     \
+    if (! tp_name) {                                                                                                 \
+      ERR("%s: Missing tp name", __FUNCTION__);                                                                      \
+      goto done;                                                                                                     \
+    }                                                                                                                \
+                                                                                                                     \
+    PY_DBG("%s(%s -> %d)", __FUNCTION__, tp_name, value);                                                            \
+                                                                                                                     \
+    tp = tp_find(tp_name);                                                                                           \
+    if (! tp) {                                                                                                      \
+      ERR("%s: Cannot find tp %s", __FUNCTION__, tp_name);                                                           \
+      goto done;                                                                                                     \
+    }                                                                                                                \
+                                                                                                                     \
+    tp->set_##__field__(value);                                                                                      \
+                                                                                                                     \
+  done:                                                                                                              \
+    if (tp_name) {                                                                                                   \
+      myfree(tp_name);                                                                                               \
+    }                                                                                                                \
+                                                                                                                     \
+    Py_RETURN_TRUE;                                                                                                  \
   }
 
-#define TP_BODY_SET_DOUBLE(__field__)                                                                                  \
-  PyObject *tp_set_##__field__(PyObject *obj, PyObject *args, PyObject *keywds)                                        \
-  {                                                                                                                    \
-    PyObject *py_class = 0;                                                                                            \
-    char     *tp_name  = 0;                                                                                            \
-    double    value    = 0;                                                                                            \
-    Tpp       tp;                                                                                                      \
-                                                                                                                       \
-    static char *kwlist[] = {(char *) "class", (char *) "value", 0};                                                   \
-                                                                                                                       \
-    if (! PyArg_ParseTupleAndKeywords(args, keywds, "O|d", kwlist, &py_class, &value)) {                               \
-      ERR("%s: Bad args", __FUNCTION__);                                                                               \
-      Py_RETURN_FALSE;                                                                                                 \
-    }                                                                                                                  \
-                                                                                                                       \
-    if (! py_class) {                                                                                                  \
-      ERR("%s: Missing class", __FUNCTION__);                                                                          \
-      Py_RETURN_FALSE;                                                                                                 \
-    }                                                                                                                  \
-                                                                                                                       \
-    tp_name = py_obj_attr_str(py_class, (char *) "name");                                                              \
-    if (! tp_name) {                                                                                                   \
-      ERR("%s: Missing tp name", __FUNCTION__);                                                                        \
-      goto done;                                                                                                       \
-    }                                                                                                                  \
-                                                                                                                       \
-    PY_DBG("%s(%s -> %g)", __FUNCTION__, tp_name, value);                                                              \
-                                                                                                                       \
-    tp = tp_find(tp_name);                                                                                             \
-    if (! tp) {                                                                                                        \
-      ERR("%s: Cannot find tp %s", __FUNCTION__, tp_name);                                                             \
-      goto done;                                                                                                       \
-    }                                                                                                                  \
-                                                                                                                       \
-    tp->set_##__field__(value);                                                                                        \
-                                                                                                                       \
-  done:                                                                                                                \
-    if (tp_name) {                                                                                                     \
-      myfree(tp_name);                                                                                                 \
-    }                                                                                                                  \
-                                                                                                                       \
-    Py_RETURN_TRUE;                                                                                                    \
+#define TP_BODY_SET_DOUBLE(__field__)                                                                                \
+  PyObject *tp_set_##__field__(PyObject *obj, PyObject *args, PyObject *keywds)                                      \
+  {                                                                                                                  \
+    PyObject *py_class = 0;                                                                                          \
+    char     *tp_name  = 0;                                                                                          \
+    double    value    = 0;                                                                                          \
+    Tpp       tp;                                                                                                    \
+                                                                                                                     \
+    static char *kwlist[] = {(char *) "class", (char *) "value", 0};                                                 \
+                                                                                                                     \
+    if (! PyArg_ParseTupleAndKeywords(args, keywds, "O|d", kwlist, &py_class, &value)) {                             \
+      ERR("%s: Bad args", __FUNCTION__);                                                                             \
+      Py_RETURN_FALSE;                                                                                               \
+    }                                                                                                                \
+                                                                                                                     \
+    if (! py_class) {                                                                                                \
+      ERR("%s: Missing class", __FUNCTION__);                                                                        \
+      Py_RETURN_FALSE;                                                                                               \
+    }                                                                                                                \
+                                                                                                                     \
+    tp_name = py_obj_attr_str(py_class, (char *) "name");                                                            \
+    if (! tp_name) {                                                                                                 \
+      ERR("%s: Missing tp name", __FUNCTION__);                                                                      \
+      goto done;                                                                                                     \
+    }                                                                                                                \
+                                                                                                                     \
+    PY_DBG("%s(%s -> %g)", __FUNCTION__, tp_name, value);                                                            \
+                                                                                                                     \
+    tp = tp_find(tp_name);                                                                                           \
+    if (! tp) {                                                                                                      \
+      ERR("%s: Cannot find tp %s", __FUNCTION__, tp_name);                                                           \
+      goto done;                                                                                                     \
+    }                                                                                                                \
+                                                                                                                     \
+    tp->set_##__field__(value);                                                                                      \
+                                                                                                                     \
+  done:                                                                                                              \
+    if (tp_name) {                                                                                                   \
+      myfree(tp_name);                                                                                               \
+    }                                                                                                                \
+                                                                                                                     \
+    Py_RETURN_TRUE;                                                                                                  \
   }
 
 static PyObject *tp_set_tile_dir(PyObject *obj, PyObject *args, PyObject *keywds, int dir, int level)

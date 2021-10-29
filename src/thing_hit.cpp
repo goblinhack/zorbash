@@ -327,7 +327,8 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
           } else if (poison) {
             TOPCON("%%fg=red$You feel sick for %d damage with %s!%%fg=reset$", poison, hitter->text_the().c_str());
           } else {
-            TOPCON("%%fg=red$You hurt yourself for %d damage with %s!%%fg=reset$", damage, hitter->text_the().c_str());
+            TOPCON("%%fg=red$You hurt yourself for %d damage with %s!%%fg=reset$", damage,
+                   hitter->text_the().c_str());
           }
         }
       } else {
@@ -341,11 +342,11 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
             TOPCON("%%fg=red$%s zaps you for %d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(), damage,
                    hitter->text_the().c_str());
           } else if (hitter->is_projectile() || hitter->is_laser()) {
-            TOPCON("%%fg=red$%s blasted you for %d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(), damage,
-                   hitter->text_the().c_str());
+            TOPCON("%%fg=red$%s blasted you for %d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(),
+                   damage, hitter->text_the().c_str());
           } else if (poison) {
-            TOPCON("%%fg=red$%s poisons you for %d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(), damage,
-                   hitter->text_the().c_str());
+            TOPCON("%%fg=red$%s poisons you for %d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(),
+                   damage, hitter->text_the().c_str());
           } else {
             TOPCON("%%fg=red$%s %s you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(),
                    real_hitter->text_hits().c_str(), damage);
@@ -381,11 +382,11 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
           TOPCON("%%fg=yellow$%s bites you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(), damage);
         } else {
           if (hitter->is_weapon()) {
-            TOPCON("%%fg=yellow$%s hits you for %d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(), damage,
-                   hitter->text_the().c_str());
+            TOPCON("%%fg=yellow$%s hits you for %d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(),
+                   damage, hitter->text_the().c_str());
           } else if (hitter->is_wand()) {
-            TOPCON("%%fg=yellow$%s zaps you for %d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(), damage,
-                   hitter->text_the().c_str());
+            TOPCON("%%fg=yellow$%s zaps you for %d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(),
+                   damage, hitter->text_the().c_str());
           } else if (hitter->is_projectile() || hitter->is_laser()) {
             TOPCON("%%fg=yellow$%s blasts you for %d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(),
                    damage, hitter->text_the().c_str());

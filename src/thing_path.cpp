@@ -184,8 +184,8 @@ bool Thing::path_pop_next_move(void)
             {
               IF_DEBUG3
               {
-                auto s =
-                    string_sprintf("Tried to shove monst into hazard at %s but failed", future_pos.to_string().c_str());
+                auto s = string_sprintf("Tried to shove monst into hazard at %s but failed",
+                                        future_pos.to_string().c_str());
                 AI_LOG("", s);
               }
               if (is_player()) {

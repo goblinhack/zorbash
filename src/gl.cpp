@@ -1247,8 +1247,8 @@ void glcolorfast(color s) { gl_last_color = s; }
 //
 void gl_push(float **P, float *p_end, uint8_t first, float tex_left, float tex_top, float tex_right, float tex_bottom,
              point tl, point tr, point bl, point br, uint8_t r1, uint8_t g1, uint8_t b1, uint8_t a1, uint8_t r2,
-             uint8_t g2, uint8_t b2, uint8_t a2, uint8_t r3, uint8_t g3, uint8_t b3, uint8_t a3, uint8_t r4, uint8_t g4,
-             uint8_t b4, uint8_t a4)
+             uint8_t g2, uint8_t b2, uint8_t a2, uint8_t r3, uint8_t g3, uint8_t b3, uint8_t a3, uint8_t r4,
+             uint8_t g4, uint8_t b4, uint8_t a4)
 {
   float *p = *P;
 
@@ -1301,16 +1301,16 @@ void gl_push(float **P, float *p_end, uint8_t first, float tex_left, float tex_t
 //
 void gl_push(float **P, float *p_end, uint8_t first, float tex_left, float tex_top, float tex_right, float tex_bottom,
              GLushort left, GLushort top, GLushort right, GLushort bottom, uint8_t r1, uint8_t g1, uint8_t b1,
-             uint8_t a1, uint8_t r2, uint8_t g2, uint8_t b2, uint8_t a2, uint8_t r3, uint8_t g3, uint8_t b3, uint8_t a3,
-             uint8_t r4, uint8_t g4, uint8_t b4, uint8_t a4)
+             uint8_t a1, uint8_t r2, uint8_t g2, uint8_t b2, uint8_t a2, uint8_t r3, uint8_t g3, uint8_t b3,
+             uint8_t a3, uint8_t r4, uint8_t g4, uint8_t b4, uint8_t a4)
 {
   point tl(left, top);
   point tr(right, top);
   point bl(left, bottom);
   point br(right, bottom);
 
-  gl_push(P, p_end, first, tex_left, tex_top, tex_right, tex_bottom, tl, tr, bl, br, r1, g1, b1, a1, r2, g2, b2, a2, r3,
-          g3, b3, a3, r4, g4, b4, a4);
+  gl_push(P, p_end, first, tex_left, tex_top, tex_right, tex_bottom, tl, tr, bl, br, r1, g1, b1, a1, r2, g2, b2, a2,
+          r3, g3, b3, a3, r4, g4, b4, a4);
 }
 
 void blit(int tex, float texMinX, float texMinY, float texMaxX, float texMaxY, GLushort left, GLushort top,
@@ -1336,8 +1336,8 @@ void blit(int tex, float texMinX, float texMinY, float texMaxX, float texMaxY, G
   uint8_t b = c.b;
   uint8_t a = c.a;
 
-  gl_push(&bufp, bufp_end, first, texMinX, texMinY, texMaxX, texMaxY, left, top, right, bottom, r, g, b, a, r, g, b, a,
-          r, g, b, a, r, g, b, a);
+  gl_push(&bufp, bufp_end, first, texMinX, texMinY, texMaxX, texMaxY, left, top, right, bottom, r, g, b, a, r, g, b,
+          a, r, g, b, a, r, g, b, a);
 }
 
 void blit(int tex, float texMinX, float texMinY, float texMaxX, float texMaxY, point tl, point tr, point bl, point br)
@@ -1383,9 +1383,9 @@ void blit_colored(int tex, float texMinX, float texMinY, float texMaxX, float te
 
   buf_tex = tex;
 
-  gl_push(&bufp, bufp_end, first, texMinX, texMinY, texMaxX, texMaxY, left, top, right, bottom, color_tl.r, color_tl.g,
-          color_tl.b, color_tl.a, color_bl.r, color_bl.g, color_bl.b, color_bl.a, color_tr.r, color_tr.g, color_tr.b,
-          color_tr.a, color_br.r, color_br.g, color_br.b, color_br.a);
+  gl_push(&bufp, bufp_end, first, texMinX, texMinY, texMaxX, texMaxY, left, top, right, bottom, color_tl.r,
+          color_tl.g, color_tl.b, color_tl.a, color_bl.r, color_bl.g, color_bl.b, color_bl.a, color_tr.r, color_tr.g,
+          color_tr.b, color_tr.a, color_br.r, color_br.g, color_br.b, color_br.a);
 }
 
 void blit(int tex, GLushort left, GLushort top, GLushort right, GLushort bottom)

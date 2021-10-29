@@ -44,20 +44,20 @@
 #define GOAL_PRIO_LOW       3
 #define GOAL_PRIO_VERY_LOW  4
 
-#define GOAL_ADD(prio, score, msg, it)                                                                                 \
-  IF_DEBUG3                                                                                                            \
-  {                                                                                                                    \
-    auto s = string_sprintf("Add goal prio %d score %d @(%d,%d) %s", prio, score, p.x, p.y, msg);                      \
-    AI_LOG("", s, it);                                                                                                 \
-  }                                                                                                                    \
+#define GOAL_ADD(prio, score, msg, it)                                                                               \
+  IF_DEBUG3                                                                                                          \
+  {                                                                                                                  \
+    auto s = string_sprintf("Add goal prio %d score %d @(%d,%d) %s", prio, score, p.x, p.y, msg);                    \
+    AI_LOG("", s, it);                                                                                               \
+  }                                                                                                                  \
   goals.insert(Goal(prio, score, p, msg, it));
 
-#define GOAL_AVOID_ADD(prio, score, msg, it)                                                                           \
-  IF_DEBUG3                                                                                                            \
-  {                                                                                                                    \
-    auto s = string_sprintf("Add goal (avoid) prio %d score %d @(%d,%d) %s", prio, score, p.x, p.y, msg);              \
-    AI_LOG("", s, it);                                                                                                 \
-  }                                                                                                                    \
+#define GOAL_AVOID_ADD(prio, score, msg, it)                                                                         \
+  IF_DEBUG3                                                                                                          \
+  {                                                                                                                  \
+    auto s = string_sprintf("Add goal (avoid) prio %d score %d @(%d,%d) %s", prio, score, p.x, p.y, msg);            \
+    AI_LOG("", s, it);                                                                                               \
+  }                                                                                                                  \
   goals.insert(Goal(prio, score, p, msg, it, true /* avoid */));
 
 void Thing::ai_log(const std::string &short_msg, const std::string &long_msg, Thingp it)
@@ -69,8 +69,8 @@ void Thing::ai_log(const std::string &short_msg, const std::string &long_msg, Th
     }
 
     if (it) {
-      CON("Robot: @(%s, %d,%d %d/%dh) %s, %s", level->to_string().c_str(), (int) mid_at.x, (int) mid_at.y, get_health(),
-          get_health_max(), long_msg.c_str(), it->to_string().c_str());
+      CON("Robot: @(%s, %d,%d %d/%dh) %s, %s", level->to_string().c_str(), (int) mid_at.x, (int) mid_at.y,
+          get_health(), get_health_max(), long_msg.c_str(), it->to_string().c_str());
     } else {
       CON("Robot: @(%s, %d,%d %d/%dh) %s", level->to_string().c_str(), (int) mid_at.x, (int) mid_at.y, get_health(),
           get_health_max(), long_msg.c_str());
@@ -84,7 +84,10 @@ void Thing::ai_log(const std::string &short_msg, const std::string &long_msg, Th
   }
 }
 
-void Thing::ai_log(const std::string &short_msg, const std::string &long_msg) { ai_log(short_msg, long_msg, nullptr); }
+void Thing::ai_log(const std::string &short_msg, const std::string &long_msg)
+{
+  ai_log(short_msg, long_msg, nullptr);
+}
 
 void Thing::ai_log(const std::string &short_msg) { ai_log(short_msg, short_msg, nullptr); }
 
@@ -850,7 +853,8 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
                 //
                 // The closer an enemy is (something that attacked us), the higher the score
                 //
-                GOAL_ADD(GOAL_PRIO_VERY_HIGH, (int) (max_dist - dist) * health_diff - goal_penalty, "attack-enemy", it);
+                GOAL_ADD(GOAL_PRIO_VERY_HIGH, (int) (max_dist - dist) * health_diff - goal_penalty, "attack-enemy",
+                         it);
               }
             } else if (! is_fearless() && (dist < ai_avoid_distance()) && will_avoid_monst(it)) {
               //
@@ -870,8 +874,8 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
               //
               // Very close, high priority attack
               //
-              GOAL_ADD(GOAL_PRIO_HIGH, (int) (max_dist - dist) * health_diff - goal_penalty, "attack-nearby-generator",
-                       it);
+              GOAL_ADD(GOAL_PRIO_HIGH, (int) (max_dist - dist) * health_diff - goal_penalty,
+                       "attack-nearby-generator", it);
             } else if (possible_to_attack(it)) {
               if (dist < 2) {
                 //

@@ -229,25 +229,25 @@ bool Light::calculate(void)
   uint8_t last_x;
   uint8_t last_y;
 
-#define AVOID_LOOKING_AT_THE_SAME_TILE()                                                                               \
-  {                                                                                                                    \
-    if (likely((x == last_x) && (y == last_y))) {                                                                      \
-      rp++;                                                                                                            \
-      continue;                                                                                                        \
-    }                                                                                                                  \
-    last_x = x;                                                                                                        \
-    last_y = y;                                                                                                        \
+#define AVOID_LOOKING_AT_THE_SAME_TILE()                                                                             \
+  {                                                                                                                  \
+    if (likely((x == last_x) && (y == last_y))) {                                                                    \
+      rp++;                                                                                                          \
+      continue;                                                                                                      \
+    }                                                                                                                \
+    last_x = x;                                                                                                      \
+    last_y = y;                                                                                                      \
   }
 
-#define AVOID_LOOKING_AT_THE_SAME_TILE2()                                                                              \
-  {                                                                                                                    \
-    if (likely((x == last_x) && (y == last_y))) {                                                                      \
-      rp++;                                                                                                            \
-      step2++;                                                                                                         \
-      continue;                                                                                                        \
-    }                                                                                                                  \
-    last_x = x;                                                                                                        \
-    last_y = y;                                                                                                        \
+#define AVOID_LOOKING_AT_THE_SAME_TILE2()                                                                            \
+  {                                                                                                                  \
+    if (likely((x == last_x) && (y == last_y))) {                                                                    \
+      rp++;                                                                                                          \
+      step2++;                                                                                                       \
+      continue;                                                                                                      \
+    }                                                                                                                \
+    last_x = x;                                                                                                      \
+    last_y = y;                                                                                                      \
   }
 
   //

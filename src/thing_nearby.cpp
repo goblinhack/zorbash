@@ -75,9 +75,10 @@ Thingp Thing::get_most_dangerous_adjacent_thing(void)
     return nullptr;
   }
 
-  sort(
-      possible.begin(), possible.end(),
-      [](const std::pair< Thingp, int > &a, const std::pair< Thingp, int > &b) -> bool { return a.second > b.second; });
+  sort(possible.begin(), possible.end(),
+       [](const std::pair< Thingp, int > &a, const std::pair< Thingp, int > &b) -> bool {
+         return a.second > b.second;
+       });
 
   return possible[ 0 ].first;
 }
@@ -137,9 +138,10 @@ Thingp Thing::get_most_dangerous_visible_thing(void)
     return nullptr;
   }
 
-  sort(
-      possible.begin(), possible.end(),
-      [](const std::pair< Thingp, int > &a, const std::pair< Thingp, int > &b) -> bool { return a.second > b.second; });
+  sort(possible.begin(), possible.end(),
+       [](const std::pair< Thingp, int > &a, const std::pair< Thingp, int > &b) -> bool {
+         return a.second > b.second;
+       });
 
   return possible[ 0 ].first;
 }

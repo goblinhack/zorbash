@@ -404,8 +404,8 @@ void Nodes::dump(void)
       }
 
       if (t > 1) {
-        ERR("Too many node types S %d E %d D %d k %d", node->is_ascend_dungeon, node->is_descend_dungeon, node->is_lock,
-            node->is_key);
+        ERR("Too many node types S %d E %d D %d k %d", node->is_ascend_dungeon, node->is_descend_dungeon,
+            node->is_lock, node->is_key);
       }
 
       if (node->depth == depth_obstacle) {
@@ -630,7 +630,10 @@ int Nodes::offset(const int x, const int y)
   return (offset);
 }
 
-bool Nodes::is_oob(const int x, const int y) { return ((x < 0) || (x >= grid_width) || (y < 0) || (y >= grid_height)); }
+bool Nodes::is_oob(const int x, const int y)
+{
+  return ((x < 0) || (x >= grid_width) || (y < 0) || (y >= grid_height));
+}
 
 DungeonNode *Nodes::node_addr(const int x, const int y)
 {

@@ -44,8 +44,8 @@ void HiScores::add_new_hiscore(Thingp player, const std::string &name, const std
 
   while (h != hiscores.end()) {
     if (player->get_score() > h->score) {
-      hiscores.insert(h, HiScore(hiscore_name, current_date(), player->get_score(), (player->level->world_at.z + 1) / 2,
-                                 defeated_by));
+      hiscores.insert(h, HiScore(hiscore_name, current_date(), player->get_score(),
+                                 (player->level->world_at.z + 1) / 2, defeated_by));
 
       hiscores.resize(HiScore::max);
 

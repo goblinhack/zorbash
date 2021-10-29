@@ -160,8 +160,9 @@ void Game::hiscore_select(void)
     }
 
     auto color = colors[ index++ ];
-    snprintf(tmp, sizeof(tmp) - 1, "%%%%fg=%s$%07u  %-*s %-*s %-5u %*s", color, h->score, name_field_len, name.c_str(),
-             when_field_len, when.c_str(), h->level_reached, defeated_by_field_len, defeated_by.c_str());
+    snprintf(tmp, sizeof(tmp) - 1, "%%%%fg=%s$%07u  %-*s %-*s %-5u %*s", color, h->score, name_field_len,
+             name.c_str(), when_field_len, when.c_str(), h->level_reached, defeated_by_field_len,
+             defeated_by.c_str());
 
     wid_hiscore_window->log(" ");
     wid_hiscore_window->log(tmp);

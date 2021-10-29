@@ -152,12 +152,12 @@ void ERROR(const char *fmt, ...)
   va_end(args);
 }
 
-#define DIE(args...)                                                                                                   \
-  std::cerr << string_sprintf("Died at %s:%s line %u", __FILE__, __PRETTY_FUNCTION__, __LINE__);                       \
+#define DIE(args...)                                                                                                 \
+  std::cerr << string_sprintf("Died at %s:%s line %u", __FILE__, __PRETTY_FUNCTION__, __LINE__);                     \
   CROAK(args);
 
-#define ERR(args...)                                                                                                   \
-  std::cerr << string_sprintf("Error at %s:%s line %u", __FILE__, __PRETTY_FUNCTION__, __LINE__);                      \
+#define ERR(args...)                                                                                                 \
+  std::cerr << string_sprintf("Error at %s:%s line %u", __FILE__, __PRETTY_FUNCTION__, __LINE__);                    \
   ERROR(args);
 
 #endif
@@ -457,7 +457,8 @@ static Ptrcheck *ptrcheck_verify_pointer(const void *ptr, std::string &func, std
         std::cerr << f->tb->to_string() << std::endl;
 
         LOG("PTRCHECK:");
-        LOG("PTRCHECK: %p freed at %s:%s line %u at %s", ptr, f->file.c_str(), f->func.c_str(), f->line, f->ts.c_str());
+        LOG("PTRCHECK: %p freed at %s:%s line %u at %s", ptr, f->file.c_str(), f->func.c_str(), f->line,
+            f->ts.c_str());
         f->tb->log();
       }
 
