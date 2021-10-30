@@ -388,16 +388,14 @@ bool Game::wid_bag_move_item(Thingp t)
     }
   }
 
-  if (! bag) {
-    if (player->is_equipped(t)) {
-      //
-      // This is ok, moving from equipment into the ether
-      //
-      t->unequip("moved item into ether");
-    } else {
-      ERR("%s has no bag so cannot move it!", t->text_The().c_str());
-      return false;
-    }
+  if (player->is_equipped(t)) {
+    //
+    // This is ok, moving from equipment into the ether
+    //
+    t->unequip("moved item into ether");
+  } else {
+    ERR("%s has no bag so cannot move it!", t->text_The().c_str());
+    return false;
   }
 
   auto old_owner = t->get_immediate_owner();

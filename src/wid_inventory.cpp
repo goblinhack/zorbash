@@ -148,6 +148,7 @@ static uint8_t wid_inventory_key_down(Widp w, const struct SDL_Keysym *key)
   if (player->is_dead) {
     return true;
   }
+
   if (sdl_shift_held) {
     if (key->scancode == (SDL_Scancode) game->config.key_console) {
       return false;
@@ -602,8 +603,19 @@ static void wid_inventory_add_equip(Widp parent, int equip, point tl, point br, 
   auto w = wid_new_square_button(parent, wid_name);
   wid_set_pos(w, tl, br);
 
-  auto t = game->level->player->get_equip(equip);
+  auto level = game->level;
+  if (! level) {
+    return;
+  }
+
+  auto player = level->player;
+  if (! player) {
+    return;
+  }
+
+  auto t = player->get_equip(equip);
   if (t) {
+    t->log("Set as equip");
     wid_set_thing_id_context(w, t->id);
     wid_set_bg_tile(w, t);
     wid_set_style(w, UI_WID_STYLE_HIGHLIGHTED);
@@ -629,6 +641,7 @@ static void wid_inventory_add_equip(Widp parent, int equip, point tl, point br, 
     wid_set_style(w, UI_WID_STYLE_DARK);
   }
 }
+
 static void wid_inventory_add_equip(Widp parent, int equip, point tl, point br, const char *wid_name)
 {
   wid_inventory_add_equip(parent, equip, tl, br, wid_name, wid_name);
@@ -924,6 +937,13 @@ bool wid_inventory_create(Thingp selected, Thingp over)
       wid_set_text(w, "%%fg=white$D%%fg=reset$rop");
     }
   }
+
+  TRACE_AND_INDENT();
+  LOG("Add equip");
+
+  TRACE_AND_INDENT();
+  LOG("Current equip:");
+  player->dump_equip();
 
   int y_at = 8;
 

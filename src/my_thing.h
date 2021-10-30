@@ -227,6 +227,8 @@ public:
   Thingp get_equip_carry_anim(int equip);
   Thingp get_equip_use_anim(int equip);
 
+  void dump_equip(void);
+
   Thingp get_immediate_minion_owner();
   Thingp get_top_minion_owner();
 
