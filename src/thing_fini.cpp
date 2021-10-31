@@ -32,7 +32,18 @@ void Thing::destroy(void)
   verify(this);
 
   if (is_loggable()) {
-    dbg2("Is being destroyed");
+    auto immediate_owner = get_immediate_owner();
+    if (immediate_owner) {
+      auto top_owner = get_top_owner();
+      if (top_owner) {
+        dbg2("Is being destroyed with owner: %s", top_owner->to_string().c_str());
+      }
+      if (top_owner != immediate_owner) {
+        dbg2("Is being destroyed with owner: %s", immediate_owner->to_string().c_str());
+      }
+    } else {
+      dbg2("Is being destroyed with no owner");
+    }
   }
 
   if (is_being_destroyed) {
@@ -44,7 +55,7 @@ void Thing::destroy(void)
   level_pop();
   level_leave();
 
-  FOR_ALL_EQUIP(e) { unequip("owner is destroyed", e); }
+  FOR_ALL_EQUIP(e) { unequip("unequip item as owner is destroyed", e); }
 
   //
   // hooks remove must be after unequip

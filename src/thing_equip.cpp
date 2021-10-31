@@ -222,6 +222,7 @@ Thingp Thing::get_equip_carry_anim(int equip)
 Thingp Thing::get_equip_use_anim(int equip)
 {
   TRACE_AND_INDENT();
+
   //
   // If this gfx_anim_use has its own thing id for animations then
   // destroy that.
@@ -240,17 +241,17 @@ bool Thing::unequip(const char *why, int equip)
 {
   TRACE_AND_INDENT();
   if (! get_equip_id(equip)) {
+    dbg("Could not unequip %08" PRIx32 ", is not equipped: %s", get_equip_id(equip).id, why);
     return false;
   }
 
   auto equip_thing = get_equip(equip);
   if (! equip_thing) {
-    dbg("Could not unequip %08" PRIx32 ", why: %s", get_equip_id(equip).id, why);
+    dbg("Could not unequip %08" PRIx32 ", no equip thing: %s", get_equip_id(equip).id, why);
     return false;
   }
 
   dbg("Unequiping current %s, why: %s", equip_thing->to_string().c_str(), why);
-
   equip_remove_anim(equip);
 
   //
@@ -262,7 +263,6 @@ bool Thing::unequip(const char *why, int equip)
     }
   }
 
-  dbg("Has unequipped: %s", equip_thing->to_string().c_str());
   auto top_owner = equip_thing->get_top_owner();
   if (top_owner) {
     dbg("Has unequipped %s, owner: %s", equip_thing->to_string().c_str(), top_owner->to_string().c_str());

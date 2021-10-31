@@ -18,6 +18,8 @@ void Thing::level_leave(void)
   if (is_loggable()) {
     dbg("Leave level");
   }
+  TRACE_AND_INDENT();
+
   level_pop();
 
   //

@@ -369,9 +369,7 @@ bool Game::wid_bag_move_item(Thingp t)
 
   verify(t);
   t->log("Chosen to move me");
-
-  wid_inventory_init();
-  game->request_remake_rightbar = true;
+  TRACE_AND_INDENT();
 
   Widp    wid_bag_container;
   ThingId bag_id;
@@ -381,6 +379,7 @@ bool Game::wid_bag_move_item(Thingp t)
     for (auto w : wid_find_all_containing(b->wid_bag_container, "wid_bag item")) {
       t->log("+ current item %s", wid_get_name(w).c_str());
       if (wid_get_thing_id_context(w).id == t->id) {
+        t->log("Moving bag thing");
         wid_bag_container = wid_get_parent(w);
         bag_id            = wid_get_thing_id_context(wid_bag_container);
         bag               = game->thing_find(bag_id);
@@ -392,8 +391,9 @@ bool Game::wid_bag_move_item(Thingp t)
     //
     // This is ok, moving from equipment into the ether
     //
+    t->log("Moving equipped thing");
     t->unequip("moved item into ether");
-  } else {
+  } else if (! bag) {
     ERR("%s has no bag so cannot move it!", t->text_The().c_str());
     return false;
   }
