@@ -74,7 +74,7 @@ void Thing::set_minion_owner(Thingp minion_owner)
     set_minion_owner_id(minion_owner->id);
     minion_owner->incr_minion_count();
   } else {
-    set_minion_owner_id(0);
+    set_minion_owner_id(NoThingId);
     if (old_minion_owner) {
       old_minion_owner->decr_minion_count();
     }
@@ -92,7 +92,7 @@ void Thing::remove_minion_owner(void)
 
   dbg("Remove minion owner %s", old_minion_owner->to_string().c_str());
 
-  set_minion_owner_id(0);
+  set_minion_owner_id(NoThingId);
   old_minion_owner->decr_minion_count();
 }
 

@@ -67,7 +67,7 @@ void Thing::unset_on_fire(void)
   if (fire_anim) {
     dbg("Unset on fire");
     fire_anim->dead("by removing fire");
-    set_on_fire_anim_id(0);
+    set_on_fire_anim_id(NoThingId);
   }
 }
 

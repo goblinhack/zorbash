@@ -74,7 +74,7 @@ void Thing::set_spawned_owner(Thingp spawner_owner)
     set_spawned_owner_id(spawner_owner->id);
     spawner_owner->incr_spawned_count();
   } else {
-    set_spawned_owner_id(0);
+    set_spawned_owner_id(NoThingId);
     if (old_spawner_owner) {
       old_spawner_owner->decr_spawned_count();
     }
@@ -92,7 +92,7 @@ void Thing::remove_spawner_owner(void)
 
   dbg("Remove spawner owner %s", old_spawner_owner->to_string().c_str());
 
-  set_spawned_owner_id(0);
+  set_spawned_owner_id(NoThingId);
   old_spawner_owner->decr_spawned_count();
 }
 

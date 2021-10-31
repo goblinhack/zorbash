@@ -7,6 +7,8 @@
 #ifndef _MY_THING_ID_H_
 #define _MY_THING_ID_H_
 
+#include "my_sys.h"
+
 //
 // All levels share the same thing ID namespace so we can find any
 // thing on any level just by its number
@@ -17,6 +19,7 @@
 using ThingId = struct ThingId_ {
 public:
   uint32_t id {};
+  ThingId_(int16_t id) : id(id) { DIE("error, ThingID must be uint32"); }
   ThingId_(uint32_t id) : id(id) {}
   constexpr ThingId_() {}
 

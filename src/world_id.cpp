@@ -79,7 +79,7 @@ void World::free_thing_id(Thingp t)
     return;
   }
 
-  t->id = 0;
+  t->id = NoThingId;
   all_thing_ptrs.erase(f);
 }
 

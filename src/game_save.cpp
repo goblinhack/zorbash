@@ -112,7 +112,7 @@ std::ostream &operator<<(std::ostream &out, Bits< MonstInfop & > const my)
   /* std::list<ThingId>   debuffs           */ out << bits(my.t->debuffs);
   /* std::string          msg               */ out << bits(my.t->msg);
   /* std::string          dead_reason       */ out << bits(my.t->dead_reason);
-  /* std::vector<uint16_t> inventory_id     */ out << bits(my.t->inventory_id);
+  /* std::vector<ThingId> inventory_id      */ out << bits(my.t->inventory_id);
   /* std::vector<uint16_t> skillbox_id      */ out << bits(my.t->skillbox_id);
   /* std::vector<uint16_t> buffbox_id       */ out << bits(my.t->buffbox_id);
   /* std::vector<uint16_t> debuffbox_id     */ out << bits(my.t->debuffbox_id);

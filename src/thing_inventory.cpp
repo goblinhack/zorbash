@@ -21,6 +21,7 @@ void Thing::inventory_particle(Thingp item, uint32_t slot)
   TRACE_AND_INDENT();
   dbg("Create inventory particle? %s", item->to_string().c_str());
   TRACE_AND_INDENT();
+
   //
   // No animations at the start
   //
@@ -190,6 +191,7 @@ bool Thing::inventory_id_insert(Thingp item)
   TRACE_AND_INDENT();
   dbg("Inventory insert %s", item->to_string().c_str());
   TRACE_AND_INDENT();
+
   auto player = level->player;
   if (! player) {
     return false;
@@ -243,20 +245,20 @@ bool Thing::inventory_id_insert(Thingp item)
   int  free_slot       = -1;
   auto inventory_items = player->monst_infop->inventory_id.size();
   for (auto i = 0U; i < inventory_items; i++) {
-    auto tp_id = monst_infop->inventory_id[ i ];
-    if (! tp_id) {
+    auto thing_id = get(monst_infop->inventory_id, i);
+    if (! thing_id) {
       if (free_slot == -1) {
         free_slot = i;
       }
       continue;
     }
 
-    auto tpp = tp_find(tp_id);
-    if (! tpp) {
+    auto t = level->thing_find(thing_id);
+    if (! t) {
       continue;
     }
 
-    if (item->tp() == tpp) {
+    if (item->tp() == t->tp()) {
       if (item->is_bag_item_not_stackable()) {
         //
         // Needs its own slot
@@ -280,12 +282,12 @@ bool Thing::inventory_id_insert(Thingp item)
 
   int item_slot = -1;
   if (free_slot != -1) {
-    monst_infop->inventory_id[ free_slot ] = item->tp_id;
-    item_slot                              = free_slot;
-    game->previous_slot                    = item_slot;
+    set(monst_infop->inventory_id, free_slot, item->id);
+    item_slot           = free_slot;
+    game->previous_slot = item_slot;
   } else {
     if (inventory_items < UI_INVENTORY_QUICK_ITEMS_MAX) {
-      monst_infop->inventory_id.push_back(item->tp_id);
+      monst_infop->inventory_id.push_back(item->id);
       item_slot           = monst_infop->inventory_id.size() - 1;
       game->previous_slot = item_slot;
     }
@@ -334,16 +336,16 @@ bool Thing::inventory_id_remove(Thingp item)
 
   auto inventory_items = player->monst_infop->inventory_id.size();
   for (auto i = 0U; i < inventory_items; i++) {
-    auto tp_id = monst_infop->inventory_id[ i ];
-    if (! tp_id) {
+    auto thing_id = get(monst_infop->inventory_id, i);
+    if (! thing_id) {
       continue;
     }
-    auto tpp = tp_find(tp_id);
-    if (! tpp) {
+    auto t = level->thing_find(thing_id);
+    if (! t) {
       continue;
     }
 
-    if (item->tp() == tpp) {
+    if (item->tp() == t->tp()) {
       game->request_remake_rightbar = true;
 
       inventory_particle(item, i, this);
@@ -356,7 +358,7 @@ bool Thing::inventory_id_remove(Thingp item)
       } else {
         TRACE_AND_INDENT();
         dbg("Remove slot");
-        monst_infop->inventory_id[ i ] = 0;
+        set(monst_infop->inventory_id, i, NoThingId);
 
         if (! monst_infop->inventory_id.size()) {
           game->inventory_highlight_slot = {};
@@ -403,16 +405,16 @@ bool Thing::inventory_id_remove(Thingp item, Thingp particle_target)
 
   auto inventory_items = player->monst_infop->inventory_id.size();
   for (auto i = 0U; i < inventory_items; i++) {
-    auto tp_id = monst_infop->inventory_id[ i ];
-    if (! tp_id) {
+    auto thing_id = get(monst_infop->inventory_id, i);
+    if (! thing_id) {
       continue;
     }
-    auto tpp = tp_find(tp_id);
-    if (! tpp) {
+    auto t = level->thing_find(thing_id);
+    if (! t) {
       continue;
     }
 
-    if (item->tp() == tpp) {
+    if (item->tp() == t->tp()) {
       game->request_remake_rightbar = true;
 
       if (particle_target) {
@@ -458,17 +460,17 @@ int Thing::item_slot_charge_count(const uint32_t slot)
     return 0;
   }
 
-  auto tp_id = get(monst_infop->inventory_id, slot);
-  if (! tp_id) {
+  auto thing_id = get(monst_infop->inventory_id, slot);
+  if (! thing_id) {
     return 0;
   }
 
-  auto tpp = tp_find(tp_id);
-  if (! tpp) {
+  auto t = level->thing_find(thing_id);
+  if (! t) {
     return 0;
   }
 
-  return item_count_including_charges(tpp);
+  return item_count_including_charges(t->tp());
 }
 
 int Thing::item_enchant_count(const uint32_t slot)
@@ -478,13 +480,13 @@ int Thing::item_enchant_count(const uint32_t slot)
     return 0;
   }
 
-  auto tp_id = get(monst_infop->inventory_id, slot);
-  if (! tp_id) {
+  auto thing_id = get(monst_infop->inventory_id, slot);
+  if (! thing_id) {
     return 0;
   }
 
   for (const auto o : get_item_vector()) {
-    if (o->tp()->id == tp_id) {
+    if (o->id == thing_id) {
       if (o->get_enchant()) {
         return o->get_enchant();
       }
@@ -497,8 +499,8 @@ int Thing::item_enchant_count(const uint32_t slot)
 int Thing::item_slot_count(const uint32_t slot)
 {
   TRACE_AND_INDENT();
-  auto tp_id = get(monst_infop->inventory_id, slot);
-  if (! tp_id) {
+  auto thing_id = get(monst_infop->inventory_id, slot);
+  if (! thing_id) {
     return 0;
   }
 
@@ -506,12 +508,12 @@ int Thing::item_slot_count(const uint32_t slot)
     return 0;
   }
 
-  auto tpp = tp_find(tp_id);
-  if (! tpp) {
+  auto t = level->thing_find(thing_id);
+  if (! t) {
     return 0;
   }
 
-  return item_count_excluding_charges(tpp);
+  return item_count_excluding_charges(t->tp());
 }
 
 Thingp Level::inventory_get(const uint32_t slot)
@@ -535,51 +537,20 @@ Thingp Level::inventory_get(const uint32_t slot)
     return nullptr;
   }
 
-  auto tp_id = get(monst_infop->inventory_id, slot);
-  if (! tp_id) {
-    LOG("Slot %d has no tp", slot);
+  auto thing_id = get(monst_infop->inventory_id, slot);
+  if (! thing_id) {
+    LOG("Slot %d has no thing", slot);
     return nullptr;
   }
 
-  auto tpp = tp_find(tp_id);
-  if (! tpp) {
-    LOG("Slot %d has no valid tp", slot);
+  auto t = thing_find(thing_id);
+  if (! t) {
+    LOG("Slot %d has no valid thing", slot);
     return nullptr;
   }
 
-  LOG("Slot %d has %s", slot, tpp->name().c_str());
-
-  //
-  // If stackable, then get the nth item
-  //
-  int nth = 0;
-  if (tpp->is_bag_item_not_stackable()) {
-    for (auto i = 0U; i < slot; i++) {
-      auto tp_id = player->monst_infop->inventory_id[ i ];
-      if (! tp_id) {
-        continue;
-      }
-      auto otpp = tp_find(tp_id);
-      if (otpp == tpp) {
-        nth++;
-      }
-    }
-  }
-
-  for (const auto o : player->get_item_vector()) {
-    if (o->tp() == tpp) {
-      IF_DEBUG2 { o->log("Got inventory item %s", tpp->name().c_str()); }
-
-      if (nth) {
-        nth--;
-        continue;
-      }
-      return o;
-    }
-  }
-
-  LOG("Slot %d has tp %s that is not carried", slot, tpp->name().c_str());
-  return nullptr;
+  LOG("Slot %d has %s", slot, t->name().c_str());
+  return t;
 }
 
 Thingp Level::inventory_get(void)
@@ -691,6 +662,7 @@ bool Level::inventory_assign(const uint32_t slot, Thingp item)
   TRACE_AND_INDENT();
   LOG("Inventory: Assign inventory slot %d", slot);
   TRACE_AND_INDENT();
+
   if (! player) {
     return false;
   }
@@ -704,17 +676,17 @@ bool Level::inventory_assign(const uint32_t slot, Thingp item)
 
   auto inventory_items = player->monst_infop->inventory_id.size();
   for (auto i = 0U; i < inventory_items; i++) {
-    auto tp_id = player->monst_infop->inventory_id[ i ];
-    if (! tp_id) {
+    auto thing_id = get(player->monst_infop->inventory_id, i);
+    if (! thing_id) {
       continue;
     }
-    auto tpp = tp_find(tp_id);
-    if (! tpp) {
+    auto t = thing_find(thing_id);
+    if (! t) {
       continue;
     }
 
-    if (item->tp() == tpp) {
-      player->monst_infop->inventory_id[ i ] = 0;
+    if (item->tp() == t->tp()) {
+      set(player->monst_infop->inventory_id, i, NoThingId);
       if (i == game->inventory_highlight_slot) {
         game->inventory_highlight_slot = slot;
         LOG("Inventory: Highlight slot %d", slot);
@@ -722,8 +694,8 @@ bool Level::inventory_assign(const uint32_t slot, Thingp item)
     }
   }
 
-  player->monst_infop->inventory_id[ slot ] = item->tp_id;
-  game->request_remake_rightbar             = true;
+  set(player->monst_infop->inventory_id, slot, item->id);
+  game->request_remake_rightbar = true;
   inventory_dump();
 
   return true;
@@ -740,34 +712,35 @@ void Level::inventory_dump(void)
   TRACE_AND_INDENT();
 
   for (auto i = 0U; i < player->monst_infop->inventory_id.size(); i++) {
-    auto tp_id = player->monst_infop->inventory_id[ i ];
-    if (! tp_id) {
+    auto thing_id = get(player->monst_infop->inventory_id, i);
+    if (! thing_id) {
       continue;
     }
-    auto tpp = tp_find(tp_id);
-    if (! tpp) {
+    auto t = thing_find(thing_id);
+    if (! t) {
       continue;
     }
 
-    con("Inventory: slot: %d -> %s", i + 1, tpp->short_text_name().c_str());
+    con("Inventory: slot: %d -> %s", i + 1, t->short_text_name().c_str());
   }
 }
 
 int Level::inventory_get_slot(Thingp item)
 {
   TRACE_AND_INDENT();
+
   auto inventory_items = player->monst_infop->inventory_id.size();
   for (auto i = 0U; i < inventory_items; i++) {
-    auto tp_id = player->monst_infop->inventory_id[ i ];
-    if (! tp_id) {
+    auto thing_id = get(player->monst_infop->inventory_id, i);
+    if (! thing_id) {
       continue;
     }
-    auto tpp = tp_find(tp_id);
-    if (! tpp) {
+    auto t = thing_find(thing_id);
+    if (! t) {
       continue;
     }
 
-    if (item->tp() == tpp) {
+    if (item->tp() == t->tp()) {
       return i;
     }
   }
@@ -780,6 +753,7 @@ Thingp Level::inventory_describe(const uint32_t slot)
   TRACE_AND_INDENT();
   LOG("Inventory: Describe slot %d", slot);
   TRACE_AND_INDENT();
+
   auto item = inventory_get(slot);
   if (item) {
     IF_DEBUG2 { item->log("Inventory: Describe slot %d", slot); }

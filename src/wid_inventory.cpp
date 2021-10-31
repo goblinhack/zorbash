@@ -764,12 +764,12 @@ bool wid_inventory_create(Thingp selected, Thingp over)
     int y_at  = 5;
 
     for (auto slot = 0; slot < (int) UI_INVENTORY_QUICK_ITEMS_MAX; slot++) {
-      Tpp tpp = nullptr;
+      Thingp t = nullptr;
 
       if (slot < (int) player->monst_infop->inventory_id.size()) {
-        auto tp_id = get(player->monst_infop->inventory_id, slot);
-        if (tp_id) {
-          tpp = tp_find(tp_id);
+        auto thing_id = get(player->monst_infop->inventory_id, slot);
+        if (thing_id.ok()) {
+          t = level->thing_find(thing_id);
         }
       }
 
@@ -789,8 +789,8 @@ bool wid_inventory_create(Thingp selected, Thingp over)
         wid_set_on_mouse_over_end(wid_icon, wid_slot_item_mouse_over_end);
         wid_set_on_mouse_up(wid_icon, wid_slot_item_mouse_up);
 
-        if (tpp) {
-          auto tiles = &tpp->tiles;
+        if (t) {
+          auto tiles = &t->tp()->tiles;
           if (tiles) {
             auto tile = tile_first(tiles);
             if (tile) {
@@ -798,14 +798,14 @@ bool wid_inventory_create(Thingp selected, Thingp over)
               wid_set_fg_tile(wid_icon, tile);
             }
           }
+
+          if (wid_inventory_thing_selected) {
+            if (wid_inventory_thing_selected->tp() == t->tp()) {
+              wid_set_style(wid_icon, UI_WID_STYLE_HIGHLIGHTED);
+            }
+          }
         } else {
           wid_set_style(wid_icon, UI_WID_STYLE_DARK);
-        }
-
-        if (wid_inventory_thing_selected) {
-          if (wid_inventory_thing_selected->tp() == tpp) {
-            wid_set_style(wid_icon, UI_WID_STYLE_HIGHLIGHTED);
-          }
         }
 
         wid_update(wid_icon);
@@ -823,18 +823,18 @@ bool wid_inventory_create(Thingp selected, Thingp over)
         wid_set_on_mouse_over_end(wid_item, wid_slot_item_mouse_over_end);
         wid_set_on_mouse_up(wid_item, wid_slot_item_mouse_up);
 
-        if (tpp) {
-          wid_set_text(wid_item, " " + std::to_string(slot + 1) + ". " + tpp->short_text_name());
+        if (t) {
+          wid_set_text(wid_item, " " + std::to_string(slot + 1) + ". " + t->tp()->short_text_name());
+
+          if (wid_inventory_thing_selected) {
+            if (wid_inventory_thing_selected->tp() == t->tp()) {
+              wid_set_style(wid_item, UI_WID_STYLE_HIGHLIGHTED);
+            }
+          }
         } else {
           wid_set_text(wid_item, " " + std::to_string(slot + 1) + ". empty, drag items here");
         }
         wid_set_text_lhs(wid_item, true);
-
-        if (wid_inventory_thing_selected) {
-          if (wid_inventory_thing_selected->tp() == tpp) {
-            wid_set_style(wid_item, UI_WID_STYLE_HIGHLIGHTED);
-          }
-        }
 
         wid_update(wid_item);
       }

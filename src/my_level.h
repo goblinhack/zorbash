@@ -102,29 +102,34 @@ public:
   int maxx;
   int miny;
   int maxy;
+
   //
   // All randomness jumps off of this as the root
   //
-  bool   cursor_found {};
-  bool   is_heatmap_valid {};
-  bool   is_starting {}; // Loading level
-  bool   map_changed {}; // Something moved on the map
-  bool   map_follow_player {};
-  bool   minimap_valid {};
-  bool   is_level_type_sewer {};
-  bool   is_level_type_dungeon {};
-  point  cursor_at;
-  point  cursor_old;
+  bool cursor_found {};
+  bool is_heatmap_valid {};
+  bool is_starting {}; // Loading level
+  bool map_changed {}; // Something moved on the map
+  bool map_follow_player {};
+  bool minimap_valid {};
+  bool is_level_type_sewer {};
+  bool is_level_type_dungeon {};
+
+  point cursor_at;
+  point cursor_old;
+  point map_br;       // visible map br
+  point map_tl;       // visible map tl
+  point pixel_map_at; // map pixel location
+
   fpoint map_at;        // map tile location
   fpoint map_wanted_at; // map scroll desired at
-  float  wobble = {};   // Fades when set
-  int    mouse_at {-1}; // ticks for every move
-  int    mouse_old {-1};
-  int    seed {};
-  int    monst_count {};
-  point  map_br;       // visible map br
-  point  map_tl;       // visible map tl
-  point  pixel_map_at; // map pixel location
+
+  float wobble = {}; // Fades when set
+
+  int mouse_at {-1}; // ticks for every move
+  int mouse_old {-1};
+  int seed {};
+  int monst_count {};
 
 #define MAX_THING_GROUPS              2
 #define THING_GROUP_ALL               0

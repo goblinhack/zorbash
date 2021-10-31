@@ -90,7 +90,7 @@ void Thing::set_owner(Thingp owner)
     set_owner_id(owner->id);
     owner->incr_owned_count();
   } else {
-    set_owner_id(0);
+    set_owner_id(NoThingId);
     if (old_owner) {
       old_owner->decr_owned_count();
     }
@@ -107,7 +107,7 @@ void Thing::remove_owner(void)
 
   dbg("Remove owner %s", old_owner->to_string().c_str());
 
-  set_owner_id(0);
+  set_owner_id(NoThingId);
   old_owner->decr_owned_count();
 
   //

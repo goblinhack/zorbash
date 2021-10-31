@@ -5148,7 +5148,7 @@ ThingId Thing::get_equip_id_carry_anim(int equip)
   if (monst_infop) {
     return (monst_infop->equip_id_carry_anim[ equip ]);
   } else {
-    return 0;
+    return NoThingId;
   }
 }
 
@@ -5168,7 +5168,7 @@ ThingId Thing::get_equip_id_use_anim(int equip)
   if (monst_infop) {
     return (monst_infop->equip_id_use_anim[ equip ]);
   } else {
-    return 0;
+    return NoThingId;
   }
 }
 
@@ -5190,7 +5190,7 @@ ThingId Thing::get_equip_id(int equip)
     return (monst_infop->equip_id[ equip ]);
   } else {
     // con("get equip id => none");
-    return 0;
+    return NoThingId;
   }
 }
 
@@ -5211,7 +5211,7 @@ ThingId Thing::get_on_fire_anim_id(void)
   if (monst_infop) {
     return (monst_infop->on_fire_id_anim);
   } else {
-    return 0;
+    return NoThingId;
   }
 }
 
