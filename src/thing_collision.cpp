@@ -258,30 +258,8 @@ bool things_overlap(const Thingp A, point A_at, const Thingp B)
 #endif
       return true;
     }
-
-    //
-    // This is to allow hits when a thing is in transit
-    //
-    if (circle_circle_collision(A, // circle
-                                make_fpoint(A_at),
-                                B, // box
-                                B->get_interpolated_mid_at(), nullptr)) {
-#if 0
-      LOG("%s %s (test5) overlaps", A->to_string().c_str(), B->to_string().c_str());
-#endif
-      return true;
-    }
   }
 
-#if 0
-  return (things_tile_overlap(A, A_at, B));
-#endif
-#if 0
-  LOG("%s %s (test6) A %f %f B %f %f B interp %f %f", A->to_string().c_str(), B->to_string().c_str(),
-    A_at.x, A_at.y,
-    B->mid_at.x, B->mid_at.y,
-    B->get_interpolated_mid_at().x, B->get_interpolated_mid_at().y);
-#endif
   return false;
 }
 
@@ -294,24 +272,6 @@ bool things_overlap_attack(const Thingp A, point A_at, const Thingp B)
                                        make_fpoint(B->mid_at), nullptr)) {
 #if 0
       LOG("%s %s (test7) overlaps", A->to_string().c_str(), B->to_string().c_str());
-#endif
-      return true;
-    }
-    if (circle_circle_collision_attack(A, // circle
-                                       make_fpoint(A_at),
-                                       B, // box
-                                       B->get_interpolated_mid_at(), nullptr)) {
-#if 0
-      LOG("%s %s (test8) overlaps", A->to_string().c_str(), B->to_string().c_str());
-#endif
-      return true;
-    }
-    if (circle_circle_collision_attack(A, // circle
-                                       A->get_interpolated_mid_at(),
-                                       B, // box
-                                       B->get_interpolated_mid_at(), nullptr)) {
-#if 0
-      LOG("%s %s (test9) overlaps", A->to_string().c_str(), B->to_string().c_str());
 #endif
       return true;
     }
