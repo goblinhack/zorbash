@@ -90,11 +90,6 @@ bool Thing::carry(Thingp item, bool can_equip)
   if (can_equip && is_weapon_equiper() && item->is_auto_equipped() && item->is_weapon() &&
       ! get_equip_id(MONST_EQUIP_WEAPON)) {
     if (equip(item, MONST_EQUIP_WEAPON)) {
-      if (is_player()) {
-        if (! level->is_starting) {
-          TOPCON("You equip %s.", item->text_the().c_str());
-        }
-      }
       equipped = true;
     }
   }

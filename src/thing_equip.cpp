@@ -147,8 +147,8 @@ void Thing::get_equip_use_offset(int *dx, int *dy, int equip)
   *dx = 0;
   *dy = 0;
 
-  auto equip_thing = get_equip(equip);
-  if (! equip_thing) {
+  auto item = get_equip(equip);
+  if (! item) {
     return;
   }
 
@@ -241,34 +241,40 @@ bool Thing::unequip(const char *why, int equip)
 {
   TRACE_AND_INDENT();
   if (! get_equip_id(equip)) {
-    dbg("Could not unequip %08" PRIx32 ", is not equipped: %s", get_equip_id(equip).id, why);
     return false;
   }
 
-  auto equip_thing = get_equip(equip);
-  if (! equip_thing) {
+  auto item = get_equip(equip);
+  if (! item) {
     dbg("Could not unequip %08" PRIx32 ", no equip thing: %s", get_equip_id(equip).id, why);
     return false;
   }
 
-  dbg("Unequiping current %s, why: %s", equip_thing->to_string().c_str(), why);
+  dbg("Unequiping current %s, why: %s", item->to_string().c_str(), why);
   equip_remove_anim(equip);
 
   //
   // Put it back in the bag
   //
   if (! is_being_destroyed) {
-    if (! carry(equip_thing, false /* can_equip */)) {
-      drop(equip_thing);
+    if (! carry(item, false /* can_equip */)) {
+      drop(item);
     }
   }
 
-  auto top_owner = equip_thing->get_top_owner();
+  auto top_owner = item->get_top_owner();
   if (top_owner) {
-    dbg("Has unequipped %s, owner: %s", equip_thing->to_string().c_str(), top_owner->to_string().c_str());
+    dbg("Has unequipped %s, owner: %s", item->to_string().c_str(), top_owner->to_string().c_str());
   } else {
-    dbg("Has unequipped %s, no owner now", equip_thing->to_string().c_str());
+    dbg("Has unequipped %s, no owner now", item->to_string().c_str());
   }
+
+  if (is_player()) {
+    if (! level->is_starting) {
+      TOPCON("You unequip %s.", item->text_the().c_str());
+    }
+  }
+
   return true;
 }
 
@@ -276,13 +282,89 @@ bool Thing::unequip(const char *why)
 {
   TRACE_AND_INDENT();
 
+  auto top_owner = get_top_owner();
+  if (! top_owner) {
+    err("Could not unequp; no owner");
+    return false;
+  }
+
   FOR_ALL_EQUIP(e)
   {
-    if (this == get_equip(e)) {
-      return unequip(why, e);
+    if (this == top_owner->get_equip(e)) {
+      return top_owner->unequip(why, e);
     }
   }
+  err("Could not unequp; item not found in equipment");
   return false;
+}
+
+//
+// Returns true on weapon change
+//
+bool Thing::equip(Thingp item, int equip)
+{
+  TRACE_AND_INDENT();
+  auto equip_tp = item->tp();
+
+  if (get_equip(equip) == item) {
+    dbg("Re-equiping: %s", item->to_string().c_str());
+    //
+    // Do not return here. We need to set the carry-anim post swing
+    //
+    equip_remove_anim(equip);
+    return false;
+  }
+
+  dbg("Is equiping: %s", item->to_string().c_str());
+
+  //
+  // Remove from the bag first so we can swap the current equipped thing.
+  //
+  bag_remove(item);
+
+  unequip("equip new", equip);
+
+  auto carry_anim_as = equip_tp->equip_carry_anim();
+  if (carry_anim_as == "") {
+    err("Could not equip %s", item->to_string().c_str());
+    return false;
+  }
+
+  auto carry_anim = level->thing_new(carry_anim_as, this);
+
+  //
+  // Set the id so we can use it later
+  //
+  set_equip_id(item->id, equip);
+
+  //
+  // Save the thing id so the client wid can keep track of the thing.
+  //
+  set_equip_carry_anim(carry_anim, equip);
+
+  //
+  // Attach to the thing.
+  //
+  carry_anim->set_owner(this);
+
+  dbg("Has equipped: %s", item->to_string().c_str());
+  auto top_owner = item->get_top_owner();
+  if (top_owner) {
+    dbg("Has equipped %s, owner: %s", item->to_string().c_str(), top_owner->to_string().c_str());
+  } else {
+    //
+    // This is ok if being carried and we're about to set the owner
+    //
+    dbg("Has equipped %s, no owner now", item->to_string().c_str());
+  }
+
+  if (is_player()) {
+    if (! level->is_starting) {
+      TOPCON("You equip %s.", item->text_the().c_str());
+    }
+  }
+
+  return true;
 }
 
 void Thing::dump_equip(void)
@@ -301,12 +383,12 @@ void Thing::dump_equip(void)
 void Thing::equip_remove_anim(int equip)
 {
   TRACE_AND_INDENT();
-  auto equip_thing = get_equip(equip);
-  if (! equip_thing) {
+  auto item = get_equip(equip);
+  if (! item) {
     return;
   }
 
-  dbg("Remove equip animations %s", equip_thing->to_string().c_str());
+  dbg("Remove equip animations %s", item->to_string().c_str());
   TRACE_AND_INDENT();
 
   //
@@ -337,69 +419,6 @@ void Thing::equip_remove_anim(int equip)
   set_equip_id(NoThingId.id, equip);
 }
 
-//
-// Returns true on weapon change
-//
-bool Thing::equip(Thingp equip_thing, int equip)
-{
-  TRACE_AND_INDENT();
-  auto equip_tp = equip_thing->tp();
-
-  if (get_equip(equip) == equip_thing) {
-    dbg("Re-equiping: %s", equip_thing->to_string().c_str());
-    //
-    // Do not return here. We need to set the carry-anim post swing
-    //
-    equip_remove_anim(equip);
-    return false;
-  }
-
-  dbg("Is equiping: %s", equip_thing->to_string().c_str());
-
-  //
-  // Remove from the bag first so we can swap the current equipped thing.
-  //
-  bag_remove(equip_thing);
-
-  unequip("equip new", equip);
-
-  auto carry_anim_as = equip_tp->equip_carry_anim();
-  if (carry_anim_as == "") {
-    err("Could not equip %s", equip_thing->to_string().c_str());
-    return false;
-  }
-
-  auto carry_anim = level->thing_new(carry_anim_as, this);
-
-  //
-  // Set the id so we can use it later
-  //
-  set_equip_id(equip_thing->id, equip);
-
-  //
-  // Save the thing id so the client wid can keep track of the thing.
-  //
-  set_equip_carry_anim(carry_anim, equip);
-
-  //
-  // Attach to the thing.
-  //
-  carry_anim->set_owner(this);
-
-  dbg("Has equipped: %s", equip_thing->to_string().c_str());
-  auto top_owner = equip_thing->get_top_owner();
-  if (top_owner) {
-    dbg("Has equipped %s, owner: %s", equip_thing->to_string().c_str(), top_owner->to_string().c_str());
-  } else {
-    //
-    // This is ok if being carried and we're about to set the owner
-    //
-    dbg("Has equipped %s, no owner now", equip_thing->to_string().c_str());
-  }
-
-  return true;
-}
-
 bool Thing::equip_use_try(int equip)
 {
   TRACE_AND_INDENT();
@@ -407,8 +426,8 @@ bool Thing::equip_use_try(int equip)
   TRACE_AND_INDENT();
 
   int  dx, dy;
-  auto equip_thing = get_equip(equip);
-  if (! equip_thing) {
+  auto item = get_equip(equip);
+  if (! item) {
     auto d = dir_to_direction();
     dx     = d.x;
     dy     = d.y;
@@ -428,11 +447,11 @@ bool Thing::equip_use_try(int equip)
   //
   decr_stamina();
 
-  if (equip_thing) {
-    dbg("Have equip item %s", equip_thing->to_string().c_str());
+  if (item) {
+    dbg("Have equip item %s", item->to_string().c_str());
     TRACE_AND_INDENT();
-    on_use(equip_thing);
-    if (equip_thing->collision_check_and_handle_at(hit_at, &target_attacked, &target_overlaps)) {
+    on_use(item);
+    if (item->collision_check_and_handle_at(hit_at, &target_attacked, &target_overlaps)) {
       lunge(hit_at);
       if (target_attacked) {
         dbg("Attacked with equip item");
@@ -513,8 +532,8 @@ bool Thing::equip_use_try(int equip)
     target_overlaps = false;
 
     dbg("Best target to hit is %s", best->to_string().c_str());
-    if (equip_thing) {
-      if (equip_thing->collision_check_and_handle_at(best_hit_at, &target_attacked, &target_overlaps)) {
+    if (item) {
+      if (item->collision_check_and_handle_at(best_hit_at, &target_attacked, &target_overlaps)) {
         lunge(best_hit_at);
         return true;
       }
@@ -573,8 +592,8 @@ bool Thing::equip_use_try(int equip)
     target_overlaps = false;
 
     dbg("Best target (2nd try) to hit is %s", best->to_string().c_str());
-    if (equip_thing) {
-      if (equip_thing->collision_check_and_handle_at(best_hit_at, &target_attacked, &target_overlaps)) {
+    if (item) {
+      if (item->collision_check_and_handle_at(best_hit_at, &target_attacked, &target_overlaps)) {
         lunge(best_hit_at);
         return true;
       }
@@ -633,8 +652,8 @@ bool Thing::equip_use_try(int equip)
     target_overlaps = false;
 
     dbg("Best target (3rd try) to hit is %s", best->to_string().c_str());
-    if (equip_thing) {
-      if (equip_thing->collision_check_and_handle_at(best_hit_at, &target_attacked, &target_overlaps)) {
+    if (item) {
+      if (item->collision_check_and_handle_at(best_hit_at, &target_attacked, &target_overlaps)) {
         lunge(best_hit_at);
         return true;
       }
@@ -686,8 +705,8 @@ bool Thing::equip_use(bool forced, int equip)
 
   std::string used_as;
 
-  auto equip_thing = get_equip(equip);
-  if (! equip_thing) {
+  auto item = get_equip(equip);
+  if (! item) {
     if (equip == MONST_EQUIP_WEAPON) {
       if (is_player()) {
         TOPCON("You attack with bare fists!");
@@ -700,12 +719,11 @@ bool Thing::equip_use(bool forced, int equip)
     }
     used_as = gfx_anim_use();
   } else {
-    auto equip_tp = equip_thing->tp();
+    auto equip_tp = item->tp();
 
     used_as = equip_tp->gfx_anim_use();
     if (used_as == "") {
-      die("Could not use %s/%08" PRIx32 " has no 'use' animation frame", equip_thing->to_string().c_str(),
-          equip_thing->id.id);
+      die("Could not use %s/%08" PRIx32 " has no 'use' animation frame", item->to_string().c_str(), item->id.id);
       return false;
     }
 

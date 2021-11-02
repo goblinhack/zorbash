@@ -113,7 +113,7 @@ static void wid_in_transit_item_place_in_bag(Widp wid_bag_container, Thingp bag,
   wid_destroy(&game->in_transit_item);
 
   t->monst_infop->preferred_bag_position = at;
-  bag->carry(t);
+  bag->carry(t, false /* auto equip */);
   t->monst_infop->preferred_bag_position = point(-1, -1);
 
   if (t->is_bag_item_container()) {
@@ -377,9 +377,9 @@ bool Game::wid_bag_move_item(Thingp t)
 
   for (auto b : game->bags) {
     for (auto w : wid_find_all_containing(b->wid_bag_container, "wid_bag item")) {
-      t->log("+ current item %s", wid_get_name(w).c_str());
+      player->log("+ current item %s", wid_get_name(w).c_str());
       if (wid_get_thing_id_context(w).id == t->id) {
-        t->log("Moving bag thing");
+        player->log("Moving bag thing %s", t->to_string().c_str());
         wid_bag_container = wid_get_parent(w);
         bag_id            = wid_get_thing_id_context(wid_bag_container);
         bag               = game->thing_find(bag_id);
@@ -387,15 +387,20 @@ bool Game::wid_bag_move_item(Thingp t)
     }
   }
 
-  if (player->is_equipped(t)) {
-    //
-    // This is ok, moving from equipment into the ether
-    //
-    t->log("Moving equipped thing");
-    t->unequip("moved item into ether");
-  } else if (! bag) {
-    ERR("%s has no bag so cannot move it!", t->text_The().c_str());
-    return false;
+  //
+  // If not moving a thing in a bag, is it equipped?
+  //
+  if (! bag) {
+    if (player->is_equipped(t)) {
+      //
+      // This is ok, moving from equipment into the ether
+      //
+      t->log("Moving equipped thing");
+      t->unequip("moved item into ether");
+    } else if (! bag) {
+      ERR("%s has no bag so cannot move it!", t->text_The().c_str());
+      return false;
+    }
   }
 
   auto old_owner = t->get_immediate_owner();
