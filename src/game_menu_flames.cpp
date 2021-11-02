@@ -3,15 +3,15 @@
 // See the README.md file for license info.
 //
 
-#include "my_array_bounds_check.h"
-#include "my_game.h"
-#include "my_gl.h"
-#include "my_random.h"
-#include "my_sys.h"
-#include "my_wid_botcon.h"
-#include "my_wid_popup.h"
-#include "my_wid_rightbar.h"
-#include "my_wid_topcon.h"
+#include "my_array_bounds_check.hpp"
+#include "my_game.hpp"
+#include "my_gl.hpp"
+#include "my_random.hpp"
+#include "my_sys.hpp"
+#include "my_wid_botcon.hpp"
+#include "my_wid_popup.hpp"
+#include "my_wid_rightbar.hpp"
+#include "my_wid_topcon.hpp"
 
 color bg[ TERM_WIDTH_MAX * 2 ][ TERM_HEIGHT_MAX * 2 ];
 color bg2[ TERM_WIDTH_MAX * 2 ][ TERM_HEIGHT_MAX * 2 ];

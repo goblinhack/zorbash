@@ -3,26 +3,26 @@
 // See the README.md file for license info.
 //
 
-#include "my_py_level.h"
-#include "my_py_thing.h"
-#include "my_py_tp.h"
+#include "my_py_level.hpp"
+#include "my_py_thing.hpp"
+#include "my_py_tp.hpp"
 #include <frameobject.h>
 #include <map>
 
-#include "my_ascii.h"
-#include "my_callstack.h"
-#include "my_depth.h"
-#include "my_main.h"
-#include "my_monst.h"
-#include "my_ptrcheck.h"
-#include "my_py_sdl.h"
-#include "my_python.h"
-#include "my_random.h"
-#include "my_sdl.h"
-#include "my_sound.h"
-#include "my_string.h"
-#include "my_thing.h"
-#include "my_thing_template.h"
+#include "my_ascii.hpp"
+#include "my_callstack.hpp"
+#include "my_depth.hpp"
+#include "my_main.hpp"
+#include "my_monst.hpp"
+#include "my_ptrcheck.hpp"
+#include "my_py_sdl.hpp"
+#include "my_python.hpp"
+#include "my_random.hpp"
+#include "my_sdl.hpp"
+#include "my_sound.hpp"
+#include "my_string.hpp"
+#include "my_thing.hpp"
+#include "my_thing_template.hpp"
 
 static std::map< std::string, PyObject * > py_mods;
 PyObject                                  *zx_mod;

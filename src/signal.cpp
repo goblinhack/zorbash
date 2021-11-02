@@ -3,10 +3,10 @@
 // See the README.md file for license info.
 //
 
-#include "my_game.h"
-#include "my_globals.h"
-#include "my_sys.h"
-#include "my_traceback.h"
+#include "my_game.hpp"
+#include "my_globals.hpp"
+#include "my_sys.hpp"
+#include "my_traceback.hpp"
 #include <signal.h>  // dirname
 #include <string.h>  // do not remove
 #include <strings.h> // do not remove

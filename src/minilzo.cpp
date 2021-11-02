@@ -44,8 +44,8 @@
 #endif
 #if defined(MINILZO_CFG_USE_INTERNAL_LZODEFS)
 
-#ifndef __LZODEFS_H_INCLUDED
-#define __LZODEFS_H_INCLUDED 1
+#ifndef __LZODEFS_HPP_INCLUDED
+#define __LZODEFS_HPP_INCLUDED 1
 
 #if defined(__CYGWIN32__) && !defined(__CYGWIN__)
 #  define __CYGWIN__ __CYGWIN32__
@@ -3286,7 +3286,7 @@ LZO_COMPILE_TIME_ASSERT_HEADER(sizeof(lzo_int_fast64_t) == sizeof(lzo_uint_fast6
 #endif
 
 #undef LZO_HAVE_CONFIG_H
-#include "minilzo.h"
+#include "minilzo.hpp"
 
 #if !defined(MINILZO_VERSION) || (MINILZO_VERSION != 0x20a0)
 #  error "version mismatch in miniLZO source files"
@@ -3307,11 +3307,11 @@ LZO_COMPILE_TIME_ASSERT_HEADER(sizeof(lzo_int_fast64_t) == sizeof(lzo_uint_fast6
 #if defined(LZO_CFG_EXTRA_CONFIG_HEADER)
 #  include LZO_CFG_EXTRA_CONFIG_HEADER
 #endif
-#if defined(__LZOCONF_H) || defined(__LZOCONF_H_INCLUDED)
+#if defined(__LZOCONF_H) || defined(__LZOCONF_HPP_INCLUDED)
 #  error "include this file first"
 #endif
 #if defined(LZO_CFG_BUILD_DLL) && (LZO_CFG_BUILD_DLL+0) && !defined(__LZO_EXPORT1) && !defined(__LZO_EXPORT2) && 0
-#ifndef __LZODEFS_H_INCLUDED
+#ifndef __LZODEFS_HPP_INCLUDED
 #if defined(LZO_HAVE_CONFIG_H)
 #  include <config.h>
 #endif
@@ -3324,7 +3324,7 @@ LZO_COMPILE_TIME_ASSERT_HEADER(sizeof(lzo_int_fast64_t) == sizeof(lzo_uint_fast6
 #endif
 #endif
 
-#if !defined(__LZOCONF_H_INCLUDED) || (LZO_VERSION+0 != 0x20a0)
+#if !defined(__LZOCONF_HPP_INCLUDED) || (LZO_VERSION+0 != 0x20a0)
 #  error "version mismatch"
 #endif
 

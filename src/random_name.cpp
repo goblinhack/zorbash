@@ -3,8 +3,8 @@
 // See the README.md file for license info.
 //
 
-#include "my_random_name.h"
-#include "my_sys.h"
+#include "my_random_name.hpp"
+#include "my_sys.hpp"
 
 #include <functional> // for std::hash
 #include <iostream>

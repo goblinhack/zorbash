@@ -3,13 +3,13 @@
 // See the README.md file for license info.
 //
 
-#include "my_game.h"
-#include "my_game_notice.h"
-#include "my_sdl.h"
-#include "my_sys.h"
-#include "my_ui.h"
-#include "my_wid_actionbar.h"
-#include "my_wid_popup.h"
+#include "my_game.hpp"
+#include "my_game_notice.hpp"
+#include "my_sdl.hpp"
+#include "my_sys.hpp"
+#include "my_ui.hpp"
+#include "my_wid_actionbar.hpp"
+#include "my_wid_popup.hpp"
 
 static int last_vert_scroll_offset = -1;
 WidPopup  *game_config_keyboard_window;

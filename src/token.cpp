@@ -5,10 +5,10 @@
 
 #include <string.h>
 
-#include "my_main.h"
-#include "my_sys.h"
-#include "my_token.h"
-#include "slre.h"
+#include "my_main.hpp"
+#include "my_sys.hpp"
+#include "my_token.hpp"
+#include "slre.hpp"
 
 static tokens_t *tokens_parse(const char *input, tokens_t *tokens)
 {

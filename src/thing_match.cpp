@@ -3,13 +3,13 @@
 // See the README.md file for license info.
 //
 
-#include "my_dmap.h"
-#include "my_level.h"
-#include "my_math.h"
-#include "my_string.h"
-#include "my_sys.h"
-#include "my_thing.h"
-#include "slre.h"
+#include "my_dmap.hpp"
+#include "my_level.hpp"
+#include "my_math.hpp"
+#include "my_string.hpp"
+#include "my_sys.hpp"
+#include "my_thing.hpp"
+#include "slre.hpp"
 #include <algorithm>
 
 bool Thing::matches(const std::string &what)

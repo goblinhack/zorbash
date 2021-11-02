@@ -3,22 +3,22 @@
 // See the README.md file for license info.
 //
 
-#include "my_game.h"
-#include "my_globals.h"
-#include "my_monst.h"
-#include "my_string.h"
-#include "my_sys.h"
-#include "my_thing.h"
-#include "my_tile.h"
-#include "my_traceback.h"
-#include "my_ui.h"
-#include "my_wid_bag.h"
-#include "my_wid_botcon.h"
-#include "my_wid_console.h"
-#include "my_wid_inventory.h"
-#include "my_wid_popup.h"
-#include "my_wid_thing_info.h"
-#include "my_wid_topcon.h"
+#include "my_game.hpp"
+#include "my_globals.hpp"
+#include "my_monst.hpp"
+#include "my_string.hpp"
+#include "my_sys.hpp"
+#include "my_thing.hpp"
+#include "my_tile.hpp"
+#include "my_traceback.hpp"
+#include "my_ui.hpp"
+#include "my_wid_bag.hpp"
+#include "my_wid_botcon.hpp"
+#include "my_wid_console.hpp"
+#include "my_wid_inventory.hpp"
+#include "my_wid_popup.hpp"
+#include "my_wid_thing_info.hpp"
+#include "my_wid_topcon.hpp"
 
 std::list< WidPopup * > wid_thing_info_window;
 

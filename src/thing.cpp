@@ -3,11 +3,11 @@
 // See the README.md file for license info.
 //
 
-#include "my_level.h"
-#include "my_monst.h"
-#include "my_ptrcheck.h"
-#include "my_sys.h"
-#include "my_thing.h"
+#include "my_level.hpp"
+#include "my_monst.hpp"
+#include "my_ptrcheck.hpp"
+#include "my_sys.hpp"
+#include "my_thing.hpp"
 
 Thingp g_debug_thing;
 

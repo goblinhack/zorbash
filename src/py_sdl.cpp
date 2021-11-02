@@ -3,9 +3,9 @@
 // See the README.md file for license info.
 //
 
-#include "my_py_sdl.h"
-#include "my_python.h"
-#include "my_sys.h"
+#include "my_py_sdl.hpp"
+#include "my_python.hpp"
+#include "my_sys.hpp"
 #include <SDL.h>
 
 /*

@@ -5,21 +5,21 @@
 
 #include <SDL_mixer.h>
 
-#include "my_game.h"
-#include "my_main.h"
-#include "my_monst.h"
-#include "my_sdl.h"
-#include "my_sys.h"
-#include "my_thing.h"
-#include "my_thing_template.h"
-#include "my_ui.h"
-#include "my_wid.h"
-#include "my_wid_actionbar.h"
-#include "my_wid_inventory.h"
-#include "my_wid_popup.h"
-#include "my_wid_rightbar.h"
-#include "my_wid_skillbox.h"
-#include "my_wid_thing_info.h"
+#include "my_game.hpp"
+#include "my_main.hpp"
+#include "my_monst.hpp"
+#include "my_sdl.hpp"
+#include "my_sys.hpp"
+#include "my_thing.hpp"
+#include "my_thing_template.hpp"
+#include "my_ui.hpp"
+#include "my_wid.hpp"
+#include "my_wid_actionbar.hpp"
+#include "my_wid_inventory.hpp"
+#include "my_wid_popup.hpp"
+#include "my_wid_rightbar.hpp"
+#include "my_wid_skillbox.hpp"
+#include "my_wid_thing_info.hpp"
 
 static Widp wid_actionbar;
 

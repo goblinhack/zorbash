@@ -3,10 +3,10 @@
 // See the README.md file for license info.
 //
 
-#include "my_array_bounds_check.h"
-#include "my_level.h"
-#include "my_level_static.h"
-#include "my_ptrcheck.h"
+#include "my_array_bounds_check.hpp"
+#include "my_level.hpp"
+#include "my_level_static.hpp"
+#include "my_ptrcheck.hpp"
 
 static int debug_enabled = false;
 

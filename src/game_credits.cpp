@@ -3,14 +3,14 @@
 // See the README.md file for license info.
 //
 
-#include "my_game.h"
-#include "my_gl.h"
-#include "my_sdl.h"
-#include "my_sys.h"
-#include "my_ui.h"
-#include "my_wid_botcon.h"
-#include "my_wid_popup.h"
-#include "my_wid_topcon.h"
+#include "my_game.hpp"
+#include "my_gl.hpp"
+#include "my_sdl.hpp"
+#include "my_sys.hpp"
+#include "my_ui.hpp"
+#include "my_wid_botcon.hpp"
+#include "my_wid_popup.hpp"
+#include "my_wid_topcon.hpp"
 
 static WidPopup *wid_credits_window;
 

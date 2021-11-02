@@ -3,15 +3,15 @@
 // See the README.md file for license info.
 //
 
-#include "my_ascii.h"
-#include "my_game.h"
-#include "my_gl.h"
-#include "my_player.h"
-#include "my_ptrcheck.h"
-#include "my_string.h"
-#include "my_sys.h"
-#include "my_wid_console.h"
-#include "stb_image_write.h"
+#include "my_ascii.hpp"
+#include "my_game.hpp"
+#include "my_gl.hpp"
+#include "my_player.hpp"
+#include "my_ptrcheck.hpp"
+#include "my_string.hpp"
+#include "my_sys.hpp"
+#include "my_wid_console.hpp"
+#include "stb_image_write.hpp"
 
 void sdl_screenshot(void)
 {

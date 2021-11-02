@@ -3,12 +3,12 @@
 // See the README.md file for license info.
 //
 
-#include "my_game.h"
-#include "my_music.h"
-#include "my_sdl.h"
-#include "my_sys.h"
-#include "my_ui.h"
-#include "my_wid_popup.h"
+#include "my_game.hpp"
+#include "my_music.hpp"
+#include "my_sdl.hpp"
+#include "my_sys.hpp"
+#include "my_ui.hpp"
+#include "my_wid_popup.hpp"
 #include <SDL_mixer.h>
 
 static WidPopup *game_config_sound_window;

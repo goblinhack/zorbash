@@ -12,11 +12,11 @@
 #include <cxxabi.h>
 #include <memory>
 
-#include "my_globals.h"
-#include "my_main.h"
-#include "my_sprintf.h"
-#include "my_sys.h"
-#include "my_traceback.h"
+#include "my_globals.hpp"
+#include "my_main.hpp"
+#include "my_sprintf.hpp"
+#include "my_sys.hpp"
+#include "my_traceback.hpp"
 
 void Traceback::init(void)
 {

@@ -3,13 +3,13 @@
 // See the README.md file for license info.
 //
 
-#include "my_random.h"
-#include "my_sys.h"
-#include "my_thing.h"
-#include "my_thing_template.h"
-#include "my_tile.h"
-#include "my_ui.h"
-#include "my_wid_topcon.h"
+#include "my_random.hpp"
+#include "my_sys.hpp"
+#include "my_thing.hpp"
+#include "my_thing_template.hpp"
+#include "my_tile.hpp"
+#include "my_ui.hpp"
+#include "my_wid_topcon.hpp"
 
 void Thing::poison_tick(void)
 {

@@ -3,12 +3,12 @@
 // See the README.md file for license info.
 //
 
-#include "my_depth.h"
-#include "my_level.h"
-#include "my_random.h"
-#include "my_sprintf.h"
-#include "my_sys.h"
-#include "my_thing.h"
+#include "my_depth.hpp"
+#include "my_level.hpp"
+#include "my_random.hpp"
+#include "my_sprintf.hpp"
+#include "my_sys.hpp"
+#include "my_thing.hpp"
 
 void Thing::water_tick(void)
 {

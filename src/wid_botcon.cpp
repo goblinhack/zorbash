@@ -5,16 +5,16 @@
 
 #include <SDL.h>
 
-#include "my_ascii.h"
-#include "my_game.h"
-#include "my_sdl.h"
-#include "my_string.h"
-#include "my_sys.h"
-#include "my_ttf.h"
-#include "my_ui.h"
-#include "my_wid.h"
-#include "my_wid_botcon.h"
-#include "slre.h"
+#include "my_ascii.hpp"
+#include "my_game.hpp"
+#include "my_sdl.hpp"
+#include "my_string.hpp"
+#include "my_sys.hpp"
+#include "my_ttf.hpp"
+#include "my_ui.hpp"
+#include "my_wid.hpp"
+#include "my_wid_botcon.hpp"
+#include "slre.hpp"
 
 static void wid_botcon_wid_create(void);
 

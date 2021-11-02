@@ -3,7 +3,7 @@
 // See the README.md file for license info.
 //
 
-#include "my_globals.h"
+#include "my_globals.hpp"
 
 class Game *game;
 

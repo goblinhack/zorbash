@@ -8,17 +8,17 @@
 #include <math.h>
 #include <vector>
 
-#include "my_game.h"
-#include "my_gl.h"
-#include "my_laser.h"
-#include "my_level.h"
-#include "my_point.h"
-#include "my_random.h"
-#include "my_sys.h"
-#include "my_thing.h"
-#include "my_thing_template.h"
-#include "my_tile.h"
-#include "my_vector_bounds_check.h"
+#include "my_game.hpp"
+#include "my_gl.hpp"
+#include "my_laser.hpp"
+#include "my_level.hpp"
+#include "my_point.hpp"
+#include "my_random.hpp"
+#include "my_sys.hpp"
+#include "my_thing.hpp"
+#include "my_thing_template.hpp"
+#include "my_tile.hpp"
+#include "my_vector_bounds_check.hpp"
 
 Laser_::Laser_(Levelp level, ThingId thing_id, point start, point stop, point pixel_map_at, uint32_t ts_start,
                uint32_t ts_stop)

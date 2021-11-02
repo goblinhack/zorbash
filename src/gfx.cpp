@@ -3,9 +3,9 @@
 // See the README.md file for license info.
 //
 
-#include "my_gfx.h"
-#include "my_tile.h"
-#include "my_ui.h"
+#include "my_gfx.hpp"
+#include "my_tile.hpp"
+#include "my_ui.hpp"
 
 static void gfx_init_font_small(void)
 {

@@ -88,7 +88,7 @@ for record_number, (folder, filenames) in enumerate(sorted(files.items())):
 # the files
 #
 with open("src/ramdisk_data.cpp".format(ram_file), "w") as myfile:
-    myfile.write("#include \"my_ramdisk.h\"")
+    myfile.write("#include \"my_ramdisk.hpp\"")
     myfile.write("\n")
     myfile.write("\n")
     myfile.write("void ramdisk_init (void)\n")

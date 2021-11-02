@@ -3,17 +3,17 @@
 // See the README.md file for license info.
 //
 
-#include "my_console.h"
-#include "my_game.h"
-#include "my_globals.h"
-#include "my_log.h"
-#include "my_python.h"
-#include "my_string.h"
-#include "my_sys.h"
-#include "my_traceback.h"
-#include "my_wid_botcon.h"
-#include "my_wid_console.h"
-#include "my_wid_topcon.h"
+#include "my_console.hpp"
+#include "my_game.hpp"
+#include "my_globals.hpp"
+#include "my_log.hpp"
+#include "my_python.hpp"
+#include "my_string.hpp"
+#include "my_sys.hpp"
+#include "my_traceback.hpp"
+#include "my_wid_botcon.hpp"
+#include "my_wid_console.hpp"
+#include "my_wid_topcon.hpp"
 
 //
 // Whan a log appears, if some indent levels are missing, then pull them

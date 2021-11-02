@@ -3,12 +3,12 @@
 // See the README.md file for license info.
 //
 
-#include "my_callstack.h"
-#include "my_main.h"
-#include "my_ptrcheck.h"
-#include "my_python.h"
-#include "my_sys.h"
-#include "my_tile.h"
+#include "my_callstack.hpp"
+#include "my_main.hpp"
+#include "my_ptrcheck.hpp"
+#include "my_python.hpp"
+#include "my_sys.hpp"
+#include "my_tile.hpp"
 
 PyObject *tile_load_arr_(PyObject *obj, PyObject *args, PyObject *keywds)
 {

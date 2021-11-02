@@ -3,9 +3,9 @@
 // See the README.md file for license info.
 //
 
-#include "my_array_bounds_check.h"
-#include "my_level.h"
-#include "my_sys.h"
+#include "my_array_bounds_check.hpp"
+#include "my_level.hpp"
+#include "my_sys.hpp"
 
 std::string Level::to_string(void)
 {

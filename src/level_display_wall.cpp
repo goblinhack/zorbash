@@ -3,14 +3,14 @@
 // See the README.md file for license info.
 //
 
-#include "my_depth.h"
-#include "my_font.h"
-#include "my_game.h"
-#include "my_gl.h"
-#include "my_level.h"
-#include "my_sys.h"
-#include "my_tex.h"
-#include "my_thing.h"
+#include "my_depth.hpp"
+#include "my_font.hpp"
+#include "my_game.hpp"
+#include "my_gl.hpp"
+#include "my_level.hpp"
+#include "my_sys.hpp"
+#include "my_tex.hpp"
+#include "my_thing.hpp"
 
 void Thing::blit_wall_cladding(point &tl, point &br, const ThingTiles *tiles)
 {

@@ -3,10 +3,10 @@
 // See the README.md file for license info.
 //
 
-#include "my_sdl.h"
-#include "my_string.h"
-#include "my_sys.h"
-#include "my_time.h"
+#include "my_sdl.hpp"
+#include "my_string.hpp"
+#include "my_sys.hpp"
+#include "my_time.hpp"
 
 ts_t        time_now;
 ts_t        base_time_in_mill;

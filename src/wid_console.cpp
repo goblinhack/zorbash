@@ -6,17 +6,17 @@
 #include <SDL.h>
 #include <algorithm>
 
-#include "my_ascii.h"
-#include "my_command.h"
-#include "my_game.h"
-#include "my_sdl.h"
-#include "my_string.h"
-#include "my_sys.h"
-#include "my_ttf.h"
-#include "my_ui.h"
-#include "my_wid.h"
-#include "my_wid_console.h"
-#include "slre.h"
+#include "my_ascii.hpp"
+#include "my_command.hpp"
+#include "my_game.hpp"
+#include "my_sdl.hpp"
+#include "my_string.hpp"
+#include "my_sys.hpp"
+#include "my_ttf.hpp"
+#include "my_ui.hpp"
+#include "my_wid.hpp"
+#include "my_wid_console.hpp"
+#include "slre.hpp"
 
 static int32_t wid_console_inited;
 static int32_t wid_console_exiting;

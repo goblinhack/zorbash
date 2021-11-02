@@ -7,12 +7,12 @@
 // Implements layered cycles that can be used to then create a dungeon
 //
 
-#include "my_array_bounds_check.h"
-#include "my_dmap.h"
-#include "my_dungeon_grid.h"
-#include "my_main.h"
-#include "my_random.h"
-#include "my_sys.h"
+#include "my_array_bounds_check.hpp"
+#include "my_dmap.hpp"
+#include "my_dungeon_grid.hpp"
+#include "my_main.hpp"
+#include "my_random.hpp"
+#include "my_sys.hpp"
 #include <list>
 
 static bool debug_enabled = false;

@@ -3,14 +3,14 @@
 // See the README.md file for license info.
 //
 
-#include "my_dungeon.h"
-#include "my_game.h"
-#include "my_level.h"
-#include "my_ptrcheck.h"
-#include "my_random.h"
-#include "my_sys.h"
-#include "my_thing.h"
-#include "my_wid_actionbar.h"
+#include "my_dungeon.hpp"
+#include "my_game.hpp"
+#include "my_level.hpp"
+#include "my_ptrcheck.hpp"
+#include "my_random.hpp"
+#include "my_sys.hpp"
+#include "my_thing.hpp"
+#include "my_wid_actionbar.hpp"
 
 void Game::tick_begin(const std::string &why)
 {

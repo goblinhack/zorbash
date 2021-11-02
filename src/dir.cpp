@@ -10,10 +10,10 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-#include "my_dir.h"
-#include "my_ptrcheck.h"
-#include "my_string.h"
-#include "my_sys.h"
+#include "my_dir.hpp"
+#include "my_ptrcheck.hpp"
+#include "my_string.hpp"
+#include "my_sys.hpp"
 
 /*
  * Does the requested dir exist?

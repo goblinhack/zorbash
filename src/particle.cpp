@@ -8,16 +8,16 @@
 #include <math.h>
 #include <vector>
 
-#include "my_game.h"
-#include "my_gl.h"
-#include "my_level.h"
-#include "my_particle.h"
-#include "my_point.h"
-#include "my_random.h"
-#include "my_sys.h"
-#include "my_thing.h"
-#include "my_thing_template.h"
-#include "my_tile.h"
+#include "my_game.hpp"
+#include "my_gl.hpp"
+#include "my_level.hpp"
+#include "my_particle.hpp"
+#include "my_point.hpp"
+#include "my_random.hpp"
+#include "my_sys.hpp"
+#include "my_thing.hpp"
+#include "my_thing_template.hpp"
+#include "my_tile.hpp"
 
 void Level::new_internal_particle(ThingId id, point start, point stop, isize sz, uint32_t dur, const Tilep tile,
                                   bool hflip, bool make_visible_at_end)

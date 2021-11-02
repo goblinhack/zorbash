@@ -3,10 +3,10 @@
 // See the README.md file for license info.
 //
 
-#include "my_globals.h"
-#include "my_main.h"
-#include "my_sys.h"
-#include "my_thing.h"
+#include "my_globals.hpp"
+#include "my_main.hpp"
+#include "my_sys.hpp"
+#include "my_thing.hpp"
 
 void Thing::rest(void)
 {

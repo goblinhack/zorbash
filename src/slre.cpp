@@ -13,7 +13,7 @@
 #include <ctype.h>
 #include <string.h>
 
-#include "slre.h"
+#include "slre.hpp"
 
 enum {END, BRANCH, ANY, EXACT, ANYOF, ANYBUT, OPEN, CLOSE, BOL, EOL,
     STAR, PLUS, STARQ, PLUSQ, QUEST, SPACE, NONSPACE, DIGIT};

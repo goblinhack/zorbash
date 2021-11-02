@@ -3,11 +3,11 @@
 // See the README.md file for license info.
 //
 
-#include "my_gl.h"
-#include "my_main.h"
-#include "my_string.h"
-#include "my_sys.h"
-#include "my_ui.h"
+#include "my_gl.hpp"
+#include "my_main.hpp"
+#include "my_string.hpp"
+#include "my_sys.hpp"
+#include "my_ui.hpp"
 #include <string.h>  // do not remove
 #include <strings.h> // do not remove, strcasecmp
 

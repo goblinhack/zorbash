@@ -1,4 +1,4 @@
-#include "my_ramdisk.h"
+#include "my_ramdisk.hpp"
 
 void ramdisk_init (void)
 {

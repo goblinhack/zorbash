@@ -93,12 +93,14 @@ Usage: $0 [options]
   [--dev]  Enable development warnings
   [--dev2] Enable stack checking (SLOW)
   [--prof] Enable gprof
+  [--gcc]  Prefer g++ over clang
 %%
 }
 
 OPT_DEV1=
 OPT_DEV2=
 OPT_PROF=
+OPT_GCC=
 
 read_opts()
 {
@@ -122,6 +124,11 @@ read_opts()
             -*prof)
                 OPT_PROF="yes"
                 export OPT_PROF
+                shift
+                ;;
+            -*gcc)
+                OPT_GCC="yes"
+                export OPT_GCC
                 shift
                 ;;
             *)

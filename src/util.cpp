@@ -3,10 +3,9 @@
 // See the README.md file for license info.
 //
 
-#include "my_main.h"
-#include "my_ptrcheck.h"
-#include "my_sys.h"
-#include "stdlib.h"
+#include "my_main.hpp"
+#include "my_ptrcheck.hpp"
+#include "my_sys.hpp"
 #include <string.h>
 
 void *myzalloc_(int size, std::string what, std::string file, std::string func, int line)

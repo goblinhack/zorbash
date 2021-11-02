@@ -3,7 +3,7 @@
 /* Copyright (c) Robert Patrick Rankin, 1991              */
 /* NetHack may be freely redistributed.  See license for details. */
 
-#include "my_sys.h"
+#include "my_sys.hpp"
 
 static struct tm *getlt (void)
 { TRACE_AND_INDENT();

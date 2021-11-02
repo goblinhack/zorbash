@@ -28,10 +28,10 @@
  * your project.
  */
 
-#include "my_pcg_basic.h"
-#include "my_main.h"
-#include "my_sys.h"
-#include "my_game.h"
+#include "my_pcg_basic.hpp"
+#include "my_main.hpp"
+#include "my_sys.hpp"
+#include "my_game.hpp"
 
 // state for global RNGs
 

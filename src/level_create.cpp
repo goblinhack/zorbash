@@ -3,12 +3,12 @@
 // See the README.md file for license info.
 //
 
-#include "my_dungeon.h"
-#include "my_game.h"
-#include "my_globals.h"
-#include "my_random.h"
-#include "my_sys.h"
-#include "my_thing.h"
+#include "my_dungeon.hpp"
+#include "my_game.hpp"
+#include "my_globals.hpp"
+#include "my_random.hpp"
+#include "my_sys.hpp"
+#include "my_thing.hpp"
 
 void Level::create(point3d at, int seed)
 {

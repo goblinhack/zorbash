@@ -3,16 +3,16 @@
 // See the LICENSE file for license.
 //
 
-#include "my_array_bounds_check.h"
-#include "my_charmap.h"
-#include "my_dmap.h"
-#include "my_dungeon.h"
-#include "my_globals.h"
-#include "my_level_static.h"
-#include "my_main.h"
-#include "my_random.h"
-#include "my_room.h"
-#include "my_vector_bounds_check.h"
+#include "my_array_bounds_check.hpp"
+#include "my_charmap.hpp"
+#include "my_dmap.hpp"
+#include "my_dungeon.hpp"
+#include "my_globals.hpp"
+#include "my_level_static.hpp"
+#include "my_main.hpp"
+#include "my_random.hpp"
+#include "my_room.hpp"
+#include "my_vector_bounds_check.hpp"
 
 //
 // The algorithm

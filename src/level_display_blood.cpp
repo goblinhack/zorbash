@@ -3,12 +3,12 @@
 // See the README.md file for license info.
 //
 
-#include "my_game.h"
-#include "my_gl.h"
-#include "my_sys.h"
-#include "my_tex.h"
-#include "my_thing.h"
-#include "my_tile.h"
+#include "my_game.hpp"
+#include "my_gl.hpp"
+#include "my_sys.hpp"
+#include "my_tex.hpp"
+#include "my_thing.hpp"
+#include "my_tile.hpp"
 
 void Level::display_blood(void)
 {

@@ -5,11 +5,11 @@
 
 #include <string.h>
 
-#include "my_main.h"
-#include "my_ptrcheck.h"
-#include "my_ramdisk.h"
-#include "my_string.h"
-#include "my_sys.h"
+#include "my_main.hpp"
+#include "my_ptrcheck.hpp"
+#include "my_ramdisk.hpp"
+#include "my_string.hpp"
+#include "my_sys.hpp"
 
 std::map< std::string, ramdisk_t_ > ramdisk_data;
 

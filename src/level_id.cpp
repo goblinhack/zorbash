@@ -3,12 +3,12 @@
 // See the README.md file for license info.
 //
 
-#include "my_game.h"
-#include "my_gl.h"
-#include "my_level.h"
-#include "my_sys.h"
-#include "my_thing.h"
-#include "my_world.h"
+#include "my_game.hpp"
+#include "my_gl.hpp"
+#include "my_level.hpp"
+#include "my_sys.hpp"
+#include "my_thing.hpp"
+#include "my_world.hpp"
 
 //
 // Find an existing thing.

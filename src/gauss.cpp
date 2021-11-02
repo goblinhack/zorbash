@@ -3,8 +3,8 @@
 // See the README.md file for license info.
 //
 
-#include "my_random.h"
-#include "my_sys.h"
+#include "my_random.hpp"
+#include "my_sys.hpp"
 #include <math.h> // do not remove
 
 double gaussrand(double mean, double stddev)

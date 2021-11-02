@@ -3,12 +3,12 @@
 // See the README.md file for license info.
 //
 
-#include "my_file.h"
-#include "my_game.h"
-#include "my_main.h"
-#include "my_music.h"
-#include "my_ptrcheck.h"
-#include "my_sys.h"
+#include "my_file.hpp"
+#include "my_game.hpp"
+#include "my_main.hpp"
+#include "my_music.hpp"
+#include "my_ptrcheck.hpp"
+#include "my_sys.hpp"
 #include <SDL_mixer.h>
 
 class music

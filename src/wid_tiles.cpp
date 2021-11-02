@@ -3,13 +3,13 @@
 // See the README.md file for license info.
 //
 
-#include "my_array_bounds_check.h"
-#include "my_gl.h"
-#include "my_ptrcheck.h"
-#include "my_sys.h"
-#include "my_tex.h"
-#include "my_tile.h"
-#include "my_wid_tiles.h"
+#include "my_array_bounds_check.hpp"
+#include "my_gl.hpp"
+#include "my_ptrcheck.hpp"
+#include "my_sys.hpp"
+#include "my_tex.hpp"
+#include "my_tile.hpp"
+#include "my_wid_tiles.hpp"
 
 static int                                                        wid_tiles_init_done;
 static std::map< std::string, std::shared_ptr< class WidTiles > > wid_tiles_all;

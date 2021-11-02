@@ -3,9 +3,9 @@
 // See the README.md file for license info.
 //
 
-#include "my_random.h"
-#include "my_random_name.h"
-#include "my_sys.h"
+#include "my_random.hpp"
+#include "my_random_name.hpp"
+#include "my_sys.hpp"
 
 static const char *dict1_names[] = {
     "alchemy", "amulet",   "banshee", "bats",     "beast",   "berserk", "bleak",   "blood",   "bloody",  "bogey",

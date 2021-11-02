@@ -3,22 +3,22 @@
 // See the README.md file for license info.
 //
 
-#include "my_game.h"
-#include "my_gl.h"
-#include "my_globals.h"
-#include "my_music.h"
-#include "my_random.h"
-#include "my_sdl.h"
-#include "my_sys.h"
-#include "my_ui.h"
-#include "my_wid_actionbar.h"
-#include "my_wid_botcon.h"
-#include "my_wid_inventory.h"
-#include "my_wid_popup.h"
-#include "my_wid_rightbar.h"
-#include "my_wid_skillbox.h"
-#include "my_wid_thing_info.h"
-#include "my_wid_topcon.h"
+#include "my_game.hpp"
+#include "my_gl.hpp"
+#include "my_globals.hpp"
+#include "my_music.hpp"
+#include "my_random.hpp"
+#include "my_sdl.hpp"
+#include "my_sys.hpp"
+#include "my_ui.hpp"
+#include "my_wid_actionbar.hpp"
+#include "my_wid_botcon.hpp"
+#include "my_wid_inventory.hpp"
+#include "my_wid_popup.hpp"
+#include "my_wid_rightbar.hpp"
+#include "my_wid_skillbox.hpp"
+#include "my_wid_thing_info.hpp"
+#include "my_wid_topcon.hpp"
 
 static WidPopup *game_main_menu_window;
 

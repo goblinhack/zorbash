@@ -3,12 +3,12 @@
 // See the README.md file for license info.
 //
 
-#include "my_file.h"
-#include "my_globals.h"
-#include "my_log.h"
-#include "my_string.h"
-#include "my_sys.h"
-#include "my_time.h"
+#include "my_file.hpp"
+#include "my_globals.hpp"
+#include "my_log.hpp"
+#include "my_string.hpp"
+#include "my_sys.hpp"
+#include "my_time.hpp"
 #include <cstring>
 
 static void file_log_(const char *fmt, va_list args)

@@ -3,11 +3,11 @@
 // See the README.md file for license info.
 //
 
-#include "my_command.h"
-#include "my_command_history.h"
-#include "my_main.h"
-#include "my_python.h"
-#include "my_sys.h"
+#include "my_command.hpp"
+#include "my_command_history.hpp"
+#include "my_main.hpp"
+#include "my_python.hpp"
+#include "my_sys.hpp"
 #include <array>
 
 /*

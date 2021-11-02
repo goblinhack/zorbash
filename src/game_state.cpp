@@ -3,14 +3,14 @@
 // See the README.md file for license info.
 //
 
-#include "my_game.h"
-#include "my_sys.h"
-#include "my_thing.h"
-#include "my_traceback.h"
-#include "my_wid_actionbar.h"
-#include "my_wid_bag.h"
-#include "my_wid_inventory.h"
-#include "my_wid_thing_info.h"
+#include "my_game.hpp"
+#include "my_sys.hpp"
+#include "my_thing.hpp"
+#include "my_traceback.hpp"
+#include "my_wid_actionbar.hpp"
+#include "my_wid_bag.hpp"
+#include "my_wid_inventory.hpp"
+#include "my_wid_thing_info.hpp"
 
 void Game::change_state(int new_state)
 {

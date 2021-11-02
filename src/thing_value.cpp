@@ -3,15 +3,15 @@
 // See the README.md file for license info.
 //
 
-#include "my_game.h"
-#include "my_globals.h"
-#include "my_main.h"
-#include "my_monst.h"
-#include "my_sprintf.h"
-#include "my_sys.h"
-#include "my_thing.h"
-#include "my_thing_template.h"
-#include "my_tile.h"
+#include "my_game.hpp"
+#include "my_globals.hpp"
+#include "my_main.hpp"
+#include "my_monst.hpp"
+#include "my_sprintf.hpp"
+#include "my_sys.hpp"
+#include "my_thing.hpp"
+#include "my_thing_template.hpp"
+#include "my_tile.hpp"
 
 //
 // Return a score, higher is better for perceived value to you

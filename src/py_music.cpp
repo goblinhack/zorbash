@@ -3,11 +3,11 @@
 // See the README.md file for license info.
 //
 
-#include "my_gl.h"
-#include "my_main.h"
-#include "my_music.h"
-#include "my_python.h"
-#include "my_sys.h"
+#include "my_gl.hpp"
+#include "my_main.hpp"
+#include "my_music.hpp"
+#include "my_python.hpp"
+#include "my_sys.hpp"
 #include <string.h>  // do not remove
 #include <strings.h> // do not remove
 

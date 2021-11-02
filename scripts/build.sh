@@ -625,12 +625,14 @@ fi
 #
 # Prefer clang as its faster
 #
-`clang++ --version >/dev/null 2>/dev/null`
-if [ $? -eq 0 ]
-then
-    echo "COMPILER_WARNINGS=\$(CLANG_COMPILER_WARNINGS) # AUTOGEN" >> .Makefile
-    echo "CC=clang++ # AUTOGEN" >> .Makefile
-    GOT_CC=1
+if [[ $OPT_GCC = "" ]]; then
+  `clang++ --version >/dev/null 2>/dev/null`
+  if [ $? -eq 0 ]
+  then
+      echo "COMPILER_WARNINGS=\$(CLANG_COMPILER_WARNINGS) # AUTOGEN" >> .Makefile
+      echo "CC=clang++ # AUTOGEN" >> .Makefile
+      GOT_CC=1
+  fi
 fi
 
 if [[ $GOT_CC = "" ]]; then

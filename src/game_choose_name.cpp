@@ -3,19 +3,19 @@
 // See the README.md file for license info.
 //
 
-#include "my_game.h"
-#include "my_globals.h"
-#include "my_sdl.h"
-#include "my_string.h"
-#include "my_sys.h"
-#include "my_ui.h"
-#include "my_wid.h"
-#include "my_wid_inventory.h"
-#include "my_wid_keyboard.h"
-#include "my_wid_popup.h"
-#include "my_wid_rightbar.h"
-#include "my_wid_skillbox.h"
-#include "my_wid_thing_info.h"
+#include "my_game.hpp"
+#include "my_globals.hpp"
+#include "my_sdl.hpp"
+#include "my_string.hpp"
+#include "my_sys.hpp"
+#include "my_ui.hpp"
+#include "my_wid.hpp"
+#include "my_wid_inventory.hpp"
+#include "my_wid_keyboard.hpp"
+#include "my_wid_popup.hpp"
+#include "my_wid_rightbar.hpp"
+#include "my_wid_skillbox.hpp"
+#include "my_wid_thing_info.hpp"
 #include <SDL_mixer.h>
 
 static Widp wid_keyboard_choose_player_name;

@@ -5,16 +5,16 @@
 
 #include <SDL.h>
 
-#include "my_color.h"
-#include "my_main.h"
-#include "my_math.h"
-#include "my_ptrcheck.h"
-#include "my_sdl.h"
-#include "my_sys.h"
-#include "my_time.h"
-#include "my_ui.h"
-#include "my_wid.h"
-#include "my_wid_keyboard.h"
+#include "my_color.hpp"
+#include "my_main.hpp"
+#include "my_math.hpp"
+#include "my_ptrcheck.hpp"
+#include "my_sdl.hpp"
+#include "my_sys.hpp"
+#include "my_time.hpp"
+#include "my_ui.hpp"
+#include "my_wid.hpp"
+#include "my_wid_keyboard.hpp"
 
 /*
  * How keys appear on screen

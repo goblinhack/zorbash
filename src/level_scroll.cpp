@@ -3,13 +3,13 @@
 // See the README.md file for license info.
 //
 
-#include "my_game.h"
-#include "my_globals.h"
-#include "my_sdl.h"
-#include "my_sys.h"
-#include "my_thing.h"
-#include "my_wid.h"
-#include "my_wid_rightbar.h"
+#include "my_game.hpp"
+#include "my_globals.hpp"
+#include "my_sdl.hpp"
+#include "my_sys.hpp"
+#include "my_thing.hpp"
+#include "my_wid.hpp"
+#include "my_wid_rightbar.hpp"
 
 void Level::scroll_map_do(bool fast)
 {

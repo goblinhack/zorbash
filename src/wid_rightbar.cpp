@@ -3,21 +3,21 @@
 // See the README.md file for license info.
 //
 
-#include "my_game.h"
-#include "my_monst.h"
-#include "my_ptrcheck.h"
-#include "my_sdl.h"
-#include "my_string.h"
-#include "my_sys.h"
-#include "my_thing.h"
-#include "my_traceback.h"
-#include "my_ui.h"
-#include "my_vector_bounds_check.h"
-#include "my_wid_buffbox.h"
-#include "my_wid_debuffbox.h"
-#include "my_wid_inventory.h"
-#include "my_wid_rightbar.h"
-#include "my_wid_skillbox.h"
+#include "my_game.hpp"
+#include "my_monst.hpp"
+#include "my_ptrcheck.hpp"
+#include "my_sdl.hpp"
+#include "my_string.hpp"
+#include "my_sys.hpp"
+#include "my_thing.hpp"
+#include "my_traceback.hpp"
+#include "my_ui.hpp"
+#include "my_vector_bounds_check.hpp"
+#include "my_wid_buffbox.hpp"
+#include "my_wid_debuffbox.hpp"
+#include "my_wid_inventory.hpp"
+#include "my_wid_rightbar.hpp"
+#include "my_wid_skillbox.hpp"
 
 static bool wid_rightbar_create(void);
 

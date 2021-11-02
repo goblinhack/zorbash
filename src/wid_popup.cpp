@@ -5,18 +5,18 @@
 
 #include <SDL.h>
 
-#include "my_ascii.h"
-#include "my_sdl.h"
-#include "my_string.h"
-#include "my_sys.h"
-#include "my_ttf.h"
-#include "my_ui.h"
-#include "my_wid.h"
-#include "my_wid_actionbar.h"
-#include "my_wid_inventory.h"
-#include "my_wid_popup.h"
-#include "my_wid_text_box.h"
-#include "slre.h"
+#include "my_ascii.hpp"
+#include "my_sdl.hpp"
+#include "my_string.hpp"
+#include "my_sys.hpp"
+#include "my_ttf.hpp"
+#include "my_ui.hpp"
+#include "my_wid.hpp"
+#include "my_wid_actionbar.hpp"
+#include "my_wid_inventory.hpp"
+#include "my_wid_popup.hpp"
+#include "my_wid_text_box.hpp"
+#include "slre.hpp"
 
 bool wid_popup_exists(void)
 {

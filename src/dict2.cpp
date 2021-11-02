@@ -3,9 +3,9 @@
 // See the README.md file for license info.
 //
 
-#include "my_random.h"
-#include "my_random_name.h"
-#include "my_sys.h"
+#include "my_random.hpp"
+#include "my_random_name.hpp"
+#include "my_sys.hpp"
 
 static const char *dict2_names[] = {
     "ace",   "acid",  "aged",  "ahead", "aid",   "ail",   "ails",  "aim",   "aims",  "air",   "airs",    "al",

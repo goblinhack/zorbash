@@ -3,8 +3,8 @@
 // See the README.md file for license info.
 //
 
-#include "my_math.h"
-#include "my_point.h"
+#include "my_math.hpp"
+#include "my_point.hpp"
 #include <math.h>
 
 float distance(const fpoint &a, const fpoint &b) { return ((float) DISTANCE(a.x, a.y, b.x, b.y)); }

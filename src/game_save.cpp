@@ -3,21 +3,21 @@
 // See the README.md file for license info.
 //
 
-#include "minilzo.h"
-#include "my_alloc.h"
-#include "my_array_bounds_check.h"
-#include "my_game.h"
-#include "my_gl.h"
-#include "my_monst.h"
-#include "my_sdl.h"
-#include "my_string.h"
-#include "my_sys.h"
-#include "my_thing.h"
-#include "my_ui.h"
-#include "my_wid_actionbar.h"
-#include "my_wid_console.h"
-#include "my_wid_popup.h"
-#include "my_wid_topcon.h"
+#include "minilzo.hpp"
+#include "my_alloc.hpp"
+#include "my_array_bounds_check.hpp"
+#include "my_game.hpp"
+#include "my_gl.hpp"
+#include "my_monst.hpp"
+#include "my_sdl.hpp"
+#include "my_string.hpp"
+#include "my_sys.hpp"
+#include "my_thing.hpp"
+#include "my_ui.hpp"
+#include "my_wid_actionbar.hpp"
+#include "my_wid_console.hpp"
+#include "my_wid_popup.hpp"
+#include "my_wid_topcon.hpp"
 
 WidPopup *wid_save;
 void      wid_save_destroy(void);

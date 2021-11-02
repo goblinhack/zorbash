@@ -3,15 +3,15 @@
 // See the README.md file for license info.
 //
 
-#include "my_array_bounds_check.h"
-#include "my_game.h"
-#include "my_level.h"
-#include "my_monst.h"
-#include "my_sound.h"
-#include "my_sys.h"
-#include "my_thing.h"
-#include "my_wid_inventory.h"
-#include "my_wid_thing_info.h"
+#include "my_array_bounds_check.hpp"
+#include "my_game.hpp"
+#include "my_level.hpp"
+#include "my_monst.hpp"
+#include "my_sound.hpp"
+#include "my_sys.hpp"
+#include "my_thing.hpp"
+#include "my_wid_inventory.hpp"
+#include "my_wid_thing_info.hpp"
 
 bool Thing::drop(Thingp what, Thingp target, bool stolen)
 {

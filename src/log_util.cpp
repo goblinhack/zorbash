@@ -3,8 +3,8 @@
 // See the README.md file for license info.
 //
 
-#include "my_ascii.h"
-#include "my_log.h"
+#include "my_ascii.hpp"
+#include "my_log.hpp"
 
 void putf(FILE *fp, const char *s)
 {

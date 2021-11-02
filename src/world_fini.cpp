@@ -3,10 +3,10 @@
 // See the README.md file for license info.
 //
 
-#include "my_array_bounds_check.h"
-#include "my_depth.h"
-#include "my_sys.h"
-#include "my_world.h"
+#include "my_array_bounds_check.hpp"
+#include "my_depth.hpp"
+#include "my_sys.hpp"
+#include "my_world.hpp"
 
 void World::fini(void)
 {

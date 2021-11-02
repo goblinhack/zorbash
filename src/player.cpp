@@ -1,18 +1,18 @@
 // See the README.md file for license info.
 //
 
-#include "my_sys.h"
-#include "my_game.h"
-#include "my_thing.h"
-#include "my_monst.h"
-#include "my_monst.h"
-#include "my_thing_template.h"
-#include "my_wid_console.h"
-#include "my_player.h"
-#include "my_array_bounds_check.h"
-#include "my_wid_thing_info.h"
-#include "my_sdl.h"
-#include "my_ptrcheck.h"
+#include "my_sys.hpp"
+#include "my_game.hpp"
+#include "my_thing.hpp"
+#include "my_monst.hpp"
+#include "my_monst.hpp"
+#include "my_thing_template.hpp"
+#include "my_wid_console.hpp"
+#include "my_player.hpp"
+#include "my_array_bounds_check.hpp"
+#include "my_wid_thing_info.hpp"
+#include "my_sdl.hpp"
+#include "my_ptrcheck.hpp"
 
 void player_tick (bool left, bool right, bool up, bool down, bool attack, bool wait, bool jump)
 {

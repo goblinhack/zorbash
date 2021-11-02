@@ -3,11 +3,11 @@
 // See the README.md file for license info.
 //
 
-#include "my_game.h"
-#include "my_gl.h"
-#include "my_ptrcheck.h"
-#include "my_sys.h"
-#include "my_thing_template.h"
+#include "my_game.hpp"
+#include "my_gl.hpp"
+#include "my_ptrcheck.hpp"
+#include "my_sys.hpp"
+#include "my_thing_template.hpp"
 
 float      glapi_last_tex_right;
 float      glapi_last_tex_bottom;

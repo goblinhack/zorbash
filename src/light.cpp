@@ -3,17 +3,17 @@
 // See the README.md file for license info.
 //
 
-#include "my_array_bounds_check.h"
-#include "my_game.h"
-#include "my_gl.h"
-#include "my_level.h"
-#include "my_light.h"
-#include "my_ptrcheck.h"
-#include "my_random.h"
-#include "my_sys.h"
-#include "my_tex.h"
-#include "my_thing.h"
-#include "my_vector_bounds_check.h"
+#include "my_array_bounds_check.hpp"
+#include "my_game.hpp"
+#include "my_gl.hpp"
+#include "my_level.hpp"
+#include "my_light.hpp"
+#include "my_ptrcheck.hpp"
+#include "my_random.hpp"
+#include "my_sys.hpp"
+#include "my_tex.hpp"
+#include "my_thing.hpp"
+#include "my_vector_bounds_check.hpp"
 
 static Texp g_light_overlay_tex;
 static int  g_light_overlay_texid;

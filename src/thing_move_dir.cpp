@@ -3,13 +3,13 @@
 // See the README.md file for license info.
 //
 
-#include "my_color.h"
-#include "my_depth.h"
-#include "my_dmap.h"
-#include "my_level.h"
-#include "my_sys.h"
-#include "my_thing.h"
-#include "my_thing_template.h"
+#include "my_color.hpp"
+#include "my_depth.hpp"
+#include "my_dmap.hpp"
+#include "my_level.hpp"
+#include "my_sys.hpp"
+#include "my_thing.hpp"
+#include "my_thing_template.hpp"
 
 void Thing::dir_set_none(void)
 {

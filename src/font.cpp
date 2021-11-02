@@ -3,11 +3,11 @@
 // See the README.md file for license info.
 //
 
-#include "my_array_bounds_check.h"
-#include "my_main.h"
-#include "my_sys.h"
-#include "my_ttf.h"
-#include "my_ui.h"
+#include "my_array_bounds_check.hpp"
+#include "my_main.hpp"
+#include "my_sys.hpp"
+#include "my_ttf.hpp"
+#include "my_ui.hpp"
 #include <map>
 
 Fontp font_small;

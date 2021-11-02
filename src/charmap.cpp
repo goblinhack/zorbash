@@ -3,8 +3,8 @@
 // See the README.md file for license info.
 //
 
-#include "my_charmap.h"
-#include "my_sys.h"
+#include "my_charmap.hpp"
+#include "my_sys.hpp"
 
 std::vector< Charmap > Charmap::all_charmaps;
 

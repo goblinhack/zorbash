@@ -3,13 +3,13 @@
 // See the README.md file for license info.
 //
 
-#include "my_array_bounds_check.h"
-#include "my_game.h"
-#include "my_monst.h"
-#include "my_random.h"
-#include "my_sprintf.h"
-#include "my_sys.h"
-#include "my_thing.h"
+#include "my_array_bounds_check.hpp"
+#include "my_game.hpp"
+#include "my_monst.hpp"
+#include "my_random.hpp"
+#include "my_sprintf.hpp"
+#include "my_sys.hpp"
+#include "my_thing.hpp"
 #include <math.h>
 
 float Thing::how_far_i_can_jump(void)

@@ -3,12 +3,12 @@
 // See the README.md file for license info.
 //
 
-#include "my_array_bounds_check.h"
-#include "my_ascii.h"
-#include "my_main.h"
-#include "my_string.h"
-#include "my_sys.h"
-#include "my_ui.h"
+#include "my_array_bounds_check.hpp"
+#include "my_ascii.hpp"
+#include "my_main.hpp"
+#include "my_string.hpp"
+#include "my_sys.hpp"
+#include "my_ui.hpp"
 
 static void ascii_put_box__(int style, Tilep bg_tile, Tilep fg_tile, Tilep fg2_tile, Tilep fg3_tile, int x1, int y1,
                             int x2, int y2, color col_bg, color col_fg, void *context)

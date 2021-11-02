@@ -12,12 +12,12 @@
 #include <time.h>    // do not remove
 #include <unistd.h>  // do not remove
 
-#include "my_callstack.h"
-#include "my_globals.h"
-#include "my_main.h"
-#include "my_sprintf.h"
-#include "my_time.h"
-#include "my_traceback.h"
+#include "my_callstack.hpp"
+#include "my_globals.hpp"
+#include "my_main.hpp"
+#include "my_sprintf.hpp"
+#include "my_time.hpp"
+#include "my_traceback.hpp"
 
 bool ptr_check_some_pointers_changed;
 
@@ -198,11 +198,6 @@ static void *local_zalloc(int size)
 }
 
 //
-// Wrapper for free.
-//
-static void local_free(void *ptr) { free(ptr); }
-
-//
 // World a pointer to a hash slot.
 //
 static hash_elem_t **ptr2hash(hash_t *hash_table, void *ptr)
@@ -246,7 +241,7 @@ static void hash_add(hash_t *hash_table, Ptrcheck *pc)
   }
 
   if (! hash_table) {
-    local_free(pc);
+    delete pc;
     return;
   }
 
@@ -257,7 +252,7 @@ static void hash_add(hash_t *hash_table, Ptrcheck *pc)
   }
 
   if (elem != 0) {
-    local_free(pc);
+    delete pc;
     return;
   }
 
@@ -331,7 +326,7 @@ static void hash_free(hash_t *hash_table, void *ptr)
   }
 
   delete elem->pc;
-  local_free(elem);
+  delete elem;
 
   ptr_check_some_pointers_changed = true;
 }
@@ -755,13 +750,13 @@ void ptrcheck_usage_cleanup (void)
       }
 
       next = elem->next;
-      local_free(elem);
+      delete elem;
       elem = next;
     }
   }
 
-  local_free(hash->elements);
-  local_free(hash);
+  delete hash->elements;
+  delete hash;
 
   hash = 0;
 }

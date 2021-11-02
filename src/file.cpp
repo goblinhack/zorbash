@@ -3,13 +3,13 @@
 // See the README.md file for license info.
 //
 
-#include "my_file.h"
-#include "my_globals.h"
-#include "my_main.h"
-#include "my_ptrcheck.h"
-#include "my_ramdisk.h"
-#include "my_string.h"
-#include "my_sys.h"
+#include "my_file.hpp"
+#include "my_globals.hpp"
+#include "my_main.hpp"
+#include "my_ptrcheck.hpp"
+#include "my_ramdisk.hpp"
+#include "my_string.hpp"
+#include "my_sys.hpp"
 #include <stdio.h>
 #include <string.h>  // do not remove
 #include <strings.h> // do not remove

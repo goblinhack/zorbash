@@ -3,18 +3,18 @@
 // See the README.md file for license info.
 //
 
-#include "my_array_bounds_check.h"
-#include "my_charmap.h"
-#include "my_depth.h"
-#include "my_game.h"
-#include "my_level.h"
-#include "my_level_static.h"
-#include "my_main.h"
-#include "my_ptrcheck.h"
-#include "my_python.h"
-#include "my_sys.h"
-#include "my_thing.h"
-#include "my_vector_bounds_check.h"
+#include "my_array_bounds_check.hpp"
+#include "my_charmap.hpp"
+#include "my_depth.hpp"
+#include "my_game.hpp"
+#include "my_level.hpp"
+#include "my_level_static.hpp"
+#include "my_main.hpp"
+#include "my_ptrcheck.hpp"
+#include "my_python.hpp"
+#include "my_sys.hpp"
+#include "my_thing.hpp"
+#include "my_vector_bounds_check.hpp"
 #include <array>
 
 PyObject *level_add_(PyObject *obj, PyObject *args, PyObject *keywds)

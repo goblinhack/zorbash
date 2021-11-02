@@ -3,18 +3,18 @@
 // See the README.md file for license info.
 //
 
-#include "my_array_bounds_check.h"
-#include "my_dmap.h"
-#include "my_game.h"
-#include "my_globals.h"
-#include "my_level.h"
-#include "my_main.h"
-#include "my_math.h"
-#include "my_monst.h"
-#include "my_sys.h"
-#include "my_thing.h"
-#include "my_thing_ai.h"
-#include "my_vector_bounds_check.h"
+#include "my_array_bounds_check.hpp"
+#include "my_dmap.hpp"
+#include "my_game.hpp"
+#include "my_globals.hpp"
+#include "my_level.hpp"
+#include "my_main.hpp"
+#include "my_math.hpp"
+#include "my_monst.hpp"
+#include "my_sys.hpp"
+#include "my_thing.hpp"
+#include "my_thing_ai.hpp"
+#include "my_vector_bounds_check.hpp"
 #include <algorithm>
 
 bool Thing::ai_blocked(void)

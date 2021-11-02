@@ -3,16 +3,16 @@
 // See the README.md file for license info.
 //
 
-#include "my_file.h"
-#include "my_gl.h"
-#include "my_main.h"
-#include "my_math.h"
-#include "my_pixel.h"
-#include "my_ptrcheck.h"
-#include "my_string.h"
-#include "my_sys.h"
-#include "my_tex.h"
-#include "stb_image.h"
+#include "my_file.hpp"
+#include "my_gl.hpp"
+#include "my_main.hpp"
+#include "my_math.hpp"
+#include "my_pixel.hpp"
+#include "my_ptrcheck.hpp"
+#include "my_string.hpp"
+#include "my_sys.hpp"
+#include "my_tex.hpp"
+#include "stb_image.hpp"
 
 class Tex
 {
@@ -567,7 +567,7 @@ Texp string2tex(const char **s)
 {
   TRACE_AND_INDENT();
   static char        tmp[ MAXSHORTSTR ];
-  static std::string eo_tmp = tmp + MAXSHORTSTR;
+  static std::string eo_tmp = tmp + MAXSHORTSTR - 1;
   const char        *c      = *s;
   char              *t      = tmp;
 

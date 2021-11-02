@@ -3,10 +3,10 @@
 // See the README.md file for license info.
 //
 
-#include "my_array_bounds_check.h"
-#include "my_python.h"
-#include "my_room.h"
-#include "my_vector_bounds_check.h"
+#include "my_array_bounds_check.hpp"
+#include "my_python.hpp"
+#include "my_room.hpp"
+#include "my_vector_bounds_check.hpp"
 
 PyObject *map_load_room_(PyObject *obj, PyObject *args, PyObject *keywds)
 {

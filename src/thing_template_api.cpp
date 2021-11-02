@@ -3,12 +3,12 @@
 // See the README.md file for license info.
 //
 
-#include "my_depth.h"
-#include "my_dice.h"
-#include "my_level.h"
-#include "my_sys.h"
-#include "my_thing_template.h"
-#include "my_tile.h"
+#include "my_depth.hpp"
+#include "my_dice.hpp"
+#include "my_level.hpp"
+#include "my_sys.hpp"
+#include "my_thing_template.hpp"
+#include "my_tile.hpp"
 
 //
 // Dice

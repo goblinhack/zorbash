@@ -3,8 +3,8 @@
 // See the README.md file for license info.
 //
 
-#include "my_game.h"
-#include "my_sys.h"
+#include "my_game.hpp"
+#include "my_sys.hpp"
 
 void Game::fini(void)
 {

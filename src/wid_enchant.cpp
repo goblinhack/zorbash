@@ -3,20 +3,20 @@
 // See the README.md file for license info.
 //
 
-#include "my_game.h"
-#include "my_level.h"
-#include "my_main.h"
-#include "my_monst.h"
-#include "my_sdl.h"
-#include "my_sys.h"
-#include "my_thing.h"
-#include "my_tile.h"
-#include "my_ui.h"
-#include "my_wid_actionbar.h"
-#include "my_wid_bag.h"
-#include "my_wid_console.h"
-#include "my_wid_popup.h"
-#include "my_wid_thing_info.h"
+#include "my_game.hpp"
+#include "my_level.hpp"
+#include "my_main.hpp"
+#include "my_monst.hpp"
+#include "my_sdl.hpp"
+#include "my_sys.hpp"
+#include "my_thing.hpp"
+#include "my_tile.hpp"
+#include "my_ui.hpp"
+#include "my_wid_actionbar.hpp"
+#include "my_wid_bag.hpp"
+#include "my_wid_console.hpp"
+#include "my_wid_popup.hpp"
+#include "my_wid_thing_info.hpp"
 
 WidPopup                    *wid_enchant;
 static std::vector< Thingp > enchant_items;

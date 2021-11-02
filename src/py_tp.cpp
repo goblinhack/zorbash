@@ -3,14 +3,14 @@
 // See the README.md file for license info.
 //
 
-#include "my_game.h"
-#include "my_level.h"
-#include "my_ptrcheck.h"
-#include "my_py_tp.h"
-#include "my_python.h"
-#include "my_sys.h"
-#include "my_thing.h"
-#include "my_thing_template.h"
+#include "my_game.hpp"
+#include "my_level.hpp"
+#include "my_ptrcheck.hpp"
+#include "my_py_tp.hpp"
+#include "my_python.hpp"
+#include "my_sys.hpp"
+#include "my_thing.hpp"
+#include "my_thing_template.hpp"
 
 PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds)
 {

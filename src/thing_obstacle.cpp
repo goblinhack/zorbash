@@ -6,13 +6,13 @@
 #include <algorithm>
 #include <set>
 
-#include "my_array_bounds_check.h"
-#include "my_dmap.h"
-#include "my_game.h"
-#include "my_level.h"
-#include "my_math.h"
-#include "my_sys.h"
-#include "my_thing.h"
+#include "my_array_bounds_check.hpp"
+#include "my_dmap.hpp"
+#include "my_game.hpp"
+#include "my_level.hpp"
+#include "my_math.hpp"
+#include "my_sys.hpp"
+#include "my_thing.hpp"
 
 bool Thing::ai_obstacle_for_me(const point &p)
 {

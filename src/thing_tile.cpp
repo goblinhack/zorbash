@@ -3,10 +3,10 @@
 // See the README.md file for license info.
 //
 
-#include "my_sys.h"
-#include "my_thing.h"
-#include "my_thing_template.h"
-#include "my_tile.h"
+#include "my_sys.hpp"
+#include "my_thing.hpp"
+#include "my_thing_template.hpp"
+#include "my_tile.hpp"
 
 void Thing::get_tiles()
 {

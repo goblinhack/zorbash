@@ -3,15 +3,15 @@
 // See the README.md file for license info.
 //
 
-#include "my_console.h"
-#include "my_game.h"
-#include "my_globals.h"
-#include "my_log.h"
-#include "my_ptrcheck.h"
-#include "my_string.h"
-#include "my_sys.h"
-#include "my_traceback.h"
-#include "my_wid_console.h"
+#include "my_console.hpp"
+#include "my_game.hpp"
+#include "my_globals.hpp"
+#include "my_log.hpp"
+#include "my_ptrcheck.hpp"
+#include "my_string.hpp"
+#include "my_sys.hpp"
+#include "my_traceback.hpp"
+#include "my_wid_console.hpp"
 
 void Level::log_(const char *fmt, va_list args)
 {
