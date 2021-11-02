@@ -9,7 +9,7 @@ def tp_init(name, tiles=[]):
     mytp.set_collision_circle(True)
     mytp.set_collision_hit_priority(2)
     mytp.set_collision_radius(0.40)
-    mytp.set_gfx_shown_in_bg(True)
+    mytp.set_gfx_shown_in_bg(False)
     mytp.set_health_initial_dice("1d20")
     mytp.set_is_able_to_fall(True)
     mytp.set_is_attackable_by_player(True)

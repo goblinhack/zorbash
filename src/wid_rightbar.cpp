@@ -363,14 +363,18 @@ static bool wid_rightbar_create(void)
       wid_set_pos(w, tl, br);
       wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
 
-      if (item < monst_infop->inventory_id.size()) {
-        auto thing_id = get(monst_infop->inventory_id, item);
+      if (item < monst_infop->inventory_shortcuts.size()) {
+        auto thing_id = get(monst_infop->inventory_shortcuts, item);
         if (! thing_id) {
           item++;
           continue;
         }
 
-        auto t     = level->thing_find(thing_id);
+        auto t = level->thing_find(thing_id);
+        if (! t) {
+          continue;
+        }
+
         auto tpp   = t->tp();
         auto tiles = &tpp->tiles;
 
@@ -402,7 +406,7 @@ static bool wid_rightbar_create(void)
         auto weapon = player->get_equip(MONST_EQUIP_WEAPON);
         if (weapon) {
           auto equip_id = weapon->id;
-          auto thing_id = get(player->monst_infop->inventory_id, i);
+          auto thing_id = get(player->monst_infop->inventory_shortcuts, i);
           if (thing_id == equip_id) {
             static Tilep tile;
             if (! tile) {

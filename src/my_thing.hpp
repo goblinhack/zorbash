@@ -345,9 +345,9 @@ public:
   bool health_boost_would_occur(int v);
   bool idle_check(void);
   bool if_matches_then_kill(const std::string &what, const point &p);
-  bool inventory_id_insert(Thingp what);
-  bool inventory_id_remove(Thingp what);
-  bool inventory_id_remove(Thingp what, Thingp target);
+  bool inventory_shortcuts_insert(Thingp what);
+  bool inventory_shortcuts_remove(Thingp what);
+  bool inventory_shortcuts_remove(Thingp what, Thingp target);
   bool is_blocking_terrain(const Thingp it);
   bool is_bloodied(void);
   bool is_carrying_item(void);

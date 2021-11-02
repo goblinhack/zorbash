@@ -135,7 +135,7 @@ std::istream &operator>>(std::istream &in, Bits< MonstInfop & > my)
   /* std::list<ThingId>   debuffs           */ in >> bits(my.t->debuffs);
   /* std::string          msg               */ in >> bits(my.t->msg);
   /* std::string          dead_reason       */ in >> bits(my.t->dead_reason);
-  /* std::vector<ThingId> inventory_id      */ in >> bits(my.t->inventory_id);
+  /* std::vector<ThingId> inventory_shortcuts      */ in >> bits(my.t->inventory_shortcuts);
   /* std::vector<uint16_t> skillbox_id      */ in >> bits(my.t->skillbox_id);
   /* std::vector<uint16_t> buffbox_id       */ in >> bits(my.t->buffbox_id);
   /* std::vector<uint16_t> debuffbox_id     */ in >> bits(my.t->debuffbox_id);

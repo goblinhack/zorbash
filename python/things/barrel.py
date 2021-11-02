@@ -33,7 +33,7 @@ def tp_init(name, text_name):
     mytp.set_environ_damage_doubled_from_fire(True)
     mytp.set_gfx_oversized_and_on_floor(True)
     mytp.set_gfx_short_shadow_caster(True)
-    mytp.set_gfx_shown_in_bg(True)
+    mytp.set_gfx_shown_in_bg(False)
     mytp.set_gfx_show_outlined(True)
     mytp.set_environ_dislikes_fire(100)
     mytp.set_is_able_to_fall(True)

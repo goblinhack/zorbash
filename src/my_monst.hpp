@@ -142,7 +142,7 @@ public:
   std::string msg;         // Text that floats on screen
   std::string dead_reason; // What defeated me
 
-  std::vector< ThingId >  inventory_id; // Which items are in which slot
+  std::vector< ThingId >  inventory_shortcuts; // Which items are in which slot
   std::vector< uint16_t > skillbox_id;  // Which skills are in which slot
   std::vector< uint16_t > buffbox_id;   // Which buffs are in which slot
   std::vector< uint16_t > debuffbox_id; // Which debuffs are in which slot

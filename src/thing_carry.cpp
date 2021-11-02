@@ -159,7 +159,7 @@ bool Thing::carry(Thingp item, bool can_equip)
     // If not already equipped then it has to go in a bag
     //
     if (! is_equipped(item)) {
-      if (! inventory_id_insert(item)) {
+      if (! inventory_shortcuts_insert(item)) {
         dbg("Cannot carry; no space in inventory");
         return false;
       }

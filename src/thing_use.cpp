@@ -128,12 +128,12 @@ void Thing::used(Thingp what, Thingp target, bool remove_after_use)
     // Last charge used up.
     //
     if (what->get_initial_charge_count()) {
-      inventory_id_remove(what);
+      inventory_shortcuts_remove(what);
     } else {
       if (target) {
-        inventory_id_remove(what, target);
+        inventory_shortcuts_remove(what, target);
       } else {
-        inventory_id_remove(what);
+        inventory_shortcuts_remove(what);
       }
     }
   }

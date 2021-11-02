@@ -62,9 +62,9 @@ bool Thing::drop(Thingp what, Thingp target, bool stolen)
   what->is_being_dropped = true;
   if (is_player()) {
     if (target) {
-      inventory_id_remove(what, target);
+      inventory_shortcuts_remove(what, target);
     } else {
-      inventory_id_remove(what);
+      inventory_shortcuts_remove(what);
     }
   }
 
@@ -165,7 +165,7 @@ bool Thing::drop_into_ether(Thingp what)
     }
 
     if (top_owner->is_player()) {
-      top_owner->inventory_id_remove(what);
+      top_owner->inventory_shortcuts_remove(what);
     }
   } else {
     //
