@@ -125,6 +125,7 @@ void Thing::hooks_remove()
   //
   // Remove from inventory and remove from ownership
   //
+  top_owner = get_top_owner(); // Intentional to update this
   if (top_owner) {
     top_owner->drop_into_ether(this);
   }
