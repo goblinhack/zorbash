@@ -83,7 +83,7 @@ void Thing::defeat(Thingp defeater, const char *reason)
   //
   // Unequip weapons
   //
-  FOR_ALL_EQUIP(e) { unequip("owner is dead", e); }
+  FOR_ALL_EQUIP(e) { unequip("owner is dead", e, false); }
 
   //
   // If in a bag, get out of there!

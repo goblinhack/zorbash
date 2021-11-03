@@ -55,7 +55,7 @@ void Thing::destroy(void)
   level_pop();
   level_leave();
 
-  FOR_ALL_EQUIP(e) { unequip("unequip item as owner is destroyed", e); }
+  FOR_ALL_EQUIP(e) { unequip("unequip item as owner is destroyed", e, false); }
 
   //
   // hooks remove must be after unequip

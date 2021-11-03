@@ -396,24 +396,27 @@ bool Game::wid_bag_move_item(Thingp t)
       // This is ok, moving from equipment into the ether
       //
       t->log("Moving equipped thing");
-      t->unequip("moved item into ether");
+      TRACE_AND_INDENT();
+      t->unequip_me_from_owner("moved item into ether", true);
     } else if (! bag) {
       ERR("%s has no bag so cannot move it!", t->text_The().c_str());
       return false;
     }
   }
 
+  //
+  // No owner can happen if we could not move the item as we had no space
+  // to carry. Just remove the transit itme.
+  //
   auto old_owner = t->get_immediate_owner();
-  if (! old_owner) {
-    ERR("%s has no owner so cannot move it!", t->text_The().c_str());
-    return true;
-  }
 
   if (bag) {
     bag->bag_remove(t);
   }
 
-  old_owner->drop_into_ether(t);
+  if (old_owner) {
+    old_owner->drop_into_ether(t);
+  }
 
   if (bag) {
     while (bag->bag_compress()) {

@@ -237,7 +237,7 @@ Thingp Thing::get_equip_use_anim(int equip)
   return (gfx_anim_use);
 }
 
-bool Thing::unequip(const char *why, int equip)
+bool Thing::unequip(const char *why, int equip, bool allowed_to_recarry)
 {
   TRACE_AND_INDENT();
   if (! get_equip_id(equip)) {
@@ -256,9 +256,11 @@ bool Thing::unequip(const char *why, int equip)
   //
   // Put it back in the bag
   //
-  if (! is_being_destroyed) {
-    if (! carry(item, false /* can_equip */)) {
-      drop(item);
+  if (allowed_to_recarry) {
+    if (! is_being_destroyed && ! item->is_being_destroyed) {
+      if (! carry(item, false /* can_equip */)) {
+        drop(item);
+      }
     }
   }
 
@@ -278,7 +280,7 @@ bool Thing::unequip(const char *why, int equip)
   return true;
 }
 
-bool Thing::unequip(const char *why)
+bool Thing::unequip_me_from_owner(const char *why, bool allowed_to_recarry)
 {
   TRACE_AND_INDENT();
 
@@ -291,7 +293,7 @@ bool Thing::unequip(const char *why)
   FOR_ALL_EQUIP(e)
   {
     if (this == top_owner->get_equip(e)) {
-      return top_owner->unequip(why, e);
+      return top_owner->unequip(why, e, allowed_to_recarry);
     }
   }
   err("Could not unequp; item not found in equipment");
@@ -322,7 +324,7 @@ bool Thing::equip(Thingp item, int equip)
   //
   bag_remove(item);
 
-  unequip("equip new", equip);
+  unequip("equip new", equip, true);
 
   auto carry_anim_as = equip_tp->equip_carry_anim();
   if (carry_anim_as == "") {

@@ -420,8 +420,8 @@ public:
   bool will_avoid_monst(const point &p);
   bool will_prefer_terrain(const Thingp it);
   bool worth_eating(const Thingp it);
-  bool unequip(const char *why, int equip);
-  bool unequip(const char *why);
+  bool unequip(const char *why, int equip, bool allowed_to_recarry);
+  bool unequip_me_from_owner(const char *why, bool allowed_to_recarry);
 
   void reset_goal_penalty(Thingp attacker);
   void buff_tick();

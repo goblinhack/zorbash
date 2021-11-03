@@ -58,7 +58,7 @@ void Thing::hooks_remove()
     FOR_ALL_EQUIP(e)
     {
       if (id == top_owner->get_equip_id(e)) {
-        top_owner->unequip("remove hooks for equip id", e);
+        top_owner->unequip("remove hooks for equip id", e, false);
 
         if (is_loggable()) {
           dbg("Detach equip_id from top_owner %s", top_owner->to_string().c_str());
@@ -67,7 +67,7 @@ void Thing::hooks_remove()
       }
 
       if (id == top_owner->get_equip_id_carry_anim(e)) {
-        top_owner->unequip("remove hooks for carry-anim", e);
+        top_owner->unequip("remove hooks for carry-anim", e, false);
 
         if (is_loggable()) {
           dbg("Detach carry-anim from top_owner %s", top_owner->to_string().c_str());

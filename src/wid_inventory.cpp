@@ -618,7 +618,12 @@ static void wid_inventory_add_equip(Widp parent, int equip, point tl, point br, 
     t->log("Set as equip");
     wid_set_thing_id_context(w, t->id);
     wid_set_bg_tile(w, t);
-    wid_set_style(w, UI_WID_STYLE_HIGHLIGHTED);
+    wid_set_style(w, UI_WID_STYLE_DARK);
+    if (wid_inventory_thing_selected) {
+      if (wid_inventory_thing_selected == t) {
+        wid_set_style(w, UI_WID_STYLE_HIGHLIGHTED);
+      }
+    }
     wid_set_on_mouse_over_begin(w, wid_bag_item_mouse_over_begin);
     wid_set_on_mouse_over_end(w, wid_bag_item_mouse_over_end);
     wid_set_on_mouse_up(w, wid_bag_item_mouse_up);
@@ -800,7 +805,7 @@ bool wid_inventory_create(Thingp selected, Thingp over)
           }
 
           if (wid_inventory_thing_selected) {
-            if (wid_inventory_thing_selected->tp() == t->tp()) {
+            if (wid_inventory_thing_selected == t) {
               wid_set_style(wid_icon, UI_WID_STYLE_HIGHLIGHTED);
             }
           }
@@ -827,7 +832,7 @@ bool wid_inventory_create(Thingp selected, Thingp over)
           wid_set_text(wid_item, " " + std::to_string(slot + 1) + ". " + t->tp()->short_text_name());
 
           if (wid_inventory_thing_selected) {
-            if (wid_inventory_thing_selected->tp() == t->tp()) {
+            if (wid_inventory_thing_selected == t) {
               wid_set_style(wid_item, UI_WID_STYLE_HIGHLIGHTED);
             }
           }

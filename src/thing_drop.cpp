@@ -160,7 +160,7 @@ bool Thing::drop_into_ether(Thingp what)
     FOR_ALL_EQUIP(e)
     {
       if (what == top_owner->get_equip(e)) {
-        top_owner->unequip("moved into ether", e);
+        top_owner->unequip("moved into ether", e, true);
       }
     }
 
@@ -213,6 +213,11 @@ bool Thing::drop_from_ether(Thingp what)
   // Prevent too soon re-carry
   //
   set_where_i_dropped_an_item_last(player->mid_at);
+
+  //
+  // Remove from the inventory
+  //
+  inventory_shortcuts_remove(what);
 
   wid_inventory_fini();
   wid_thing_info_fini();
