@@ -178,8 +178,12 @@ static uint8_t wid_inventory_item_option_use(Widp w, int32_t x, int32_t y, uint3
     return true;
   }
 
-  if (wid_inventory_thing_selected) {
-    auto what = wid_inventory_thing_selected;
+  auto what = wid_inventory_thing_selected;
+  if (! what) {
+    what = wid_inventory_thing_over;
+  }
+
+  if (what) {
     wid_inventory_fini();
     player->log("Use %s", what->to_string().c_str());
     player->use(what);
@@ -208,8 +212,12 @@ static uint8_t wid_inventory_item_option_eat(Widp w, int32_t x, int32_t y, uint3
     return true;
   }
 
-  if (wid_inventory_thing_selected) {
-    auto what = wid_inventory_thing_selected;
+  auto what = wid_inventory_thing_selected;
+  if (! what) {
+    what = wid_inventory_thing_over;
+  }
+
+  if (what) {
     if (! player->can_eat(what)) {
       sound_play("bonk");
       return true;
@@ -242,8 +250,12 @@ static uint8_t wid_inventory_item_option_throw(Widp w, int32_t x, int32_t y, uin
     return true;
   }
 
-  if (wid_inventory_thing_selected) {
-    auto what = wid_inventory_thing_selected;
+  auto what = wid_inventory_thing_selected;
+  if (! what) {
+    what = wid_inventory_thing_over;
+  }
+
+  if (what) {
     if (! what->is_throwable()) {
       sound_play("bonk");
       return true;
@@ -276,8 +288,12 @@ static uint8_t wid_inventory_item_option_drop(Widp w, int32_t x, int32_t y, uint
     return true;
   }
 
-  if (wid_inventory_thing_selected) {
-    auto what = wid_inventory_thing_selected;
+  auto what = wid_inventory_thing_selected;
+  if (! what) {
+    what = wid_inventory_thing_over;
+  }
+
+  if (what) {
     wid_inventory_fini();
     player->log("Drop %s", what->to_string().c_str());
     player->drop(what);
