@@ -198,10 +198,10 @@ public:
   std::list< ThingId > buffs;
   std::list< ThingId > debuffs;
 
-  std::vector< ThingId >  inventory_shortcuts; // Which items are in which slot
-  std::vector< uint16_t > skillbox_id;         // Which skills are in which slot
-  std::vector< uint16_t > buffbox_id;          // Which buffs are in which slot
-  std::vector< uint16_t > debuffbox_id;        // Which debuffs are in which slot
+  std::vector< ThingId > inventory_shortcuts; // Which items are in which slot
+  std::vector< ThingId > skillbox_id;         // Which skills are in which slot
+  std::vector< ThingId > buffbox_id;          // Which buffs are in which slot
+  std::vector< ThingId > debuffbox_id;        // Which debuffs are in which slot
 
   std::array< std::array< ThingId, MAX_BAG_WIDTH >, MAX_BAG_HEIGHT > bag {};
 

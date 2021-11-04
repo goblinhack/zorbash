@@ -133,15 +133,15 @@ int Thing::skill_enchant_count(const uint32_t slot)
     return 0;
   }
 
-  auto tp_id = get(get_itemp()->skillbox_id, slot);
-  if (! tp_id) {
+  auto thing_id = get(get_itemp()->skillbox_id, slot);
+  if (! thing_id) {
     return 0;
   }
 
   for (auto oid : get_itemp()->skills) {
     auto o = game->level->thing_find(oid);
     if (o) {
-      if (o->tp()->id == tp_id) {
+      if (o->id == thing_id) {
         return o->get_enchant();
       }
     }

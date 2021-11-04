@@ -36,20 +36,20 @@ bool Thing::debuffbox_id_insert(Thingp what)
   int  free_slot       = -1;
   auto debuffbox_items = player->get_itemp()->debuffbox_id.size();
   for (auto i = 0U; i < debuffbox_items; i++) {
-    auto tp_id = get_itemp()->debuffbox_id[ i ];
-    if (! tp_id) {
+    auto thing_id = get_itemp()->debuffbox_id[ i ];
+    if (! thing_id) {
       if (free_slot == -1) {
         free_slot = i;
       }
       continue;
     }
 
-    auto tpp = tp_find(tp_id);
-    if (! tpp) {
+    auto t = level->thing_find(thing_id);
+    if (! t) {
       continue;
     }
 
-    if (what->tp() == tpp) {
+    if (what == t) {
       if (what->is_bag_item_not_stackable()) {
         //
         // Needs its own slot
@@ -115,20 +115,20 @@ bool Thing::debuffbox_id_remove(Thingp what)
 
   auto debuffbox_items = player->get_itemp()->debuffbox_id.size();
   for (auto i = 0U; i < debuffbox_items; i++) {
-    auto tp_id = get_itemp()->debuffbox_id[ i ];
-    if (! tp_id) {
+    auto thing_id = get_itemp()->debuffbox_id[ i ];
+    if (! thing_id) {
       continue;
     }
-    auto tpp = tp_find(tp_id);
-    if (! tpp) {
+    auto t = level->thing_find(thing_id);
+    if (! t) {
       continue;
     }
 
-    if (what->tp() == tpp) {
+    if (what == t) {
       game->request_remake_debuffbox = true;
 
       dbg("Remove slot");
-      get_itemp()->debuffbox_id[ i ] = 0;
+      get_itemp()->debuffbox_id[ i ] = NoThingId;
 
       wid_debuffbox_init();
       if ((game->state != Game::STATE_CHOOSING_TARGET) && (game->state != Game::STATE_INVENTORY) &&
@@ -162,31 +162,31 @@ Thingp Level::debuffbox_get(const uint32_t slot)
     return nullptr;
   }
 
-  auto tp_id = get(itemp->debuffbox_id, slot);
-  if (! tp_id) {
+  auto thing_id = get(itemp->debuffbox_id, slot);
+  if (! thing_id) {
     LOG("Slot %d has no tp", slot);
     return nullptr;
   }
 
-  auto tpp = tp_find(tp_id);
-  if (! tpp) {
+  auto t = thing_find(thing_id);
+  if (! t) {
     LOG("Slot %d has no valid tp", slot);
     return nullptr;
   }
 
-  LOG("Slot %d has %s", slot, tpp->name().c_str());
+  LOG("Slot %d has %s", slot, t->name().c_str());
 
   for (auto oid : itemp->debuffs) {
     auto o = thing_find(oid);
     if (o) {
-      if (o->tp() == tpp) {
-        IF_DEBUG2 { o->log("Got debuffbox item %s", tpp->name().c_str()); }
+      if (o == t) {
+        IF_DEBUG2 { o->log("Got debuffbox item %s", t->name().c_str()); }
         return o;
       }
     }
   }
 
-  LOG("Slot %d has debuff tp %s that is not carried", slot, tpp->name().c_str());
+  LOG("Slot %d has debuff tp %s that is not carried", slot, t->name().c_str());
   return nullptr;
 }
 

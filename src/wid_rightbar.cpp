@@ -488,25 +488,25 @@ static bool wid_rightbar_create(void)
       wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
 
       if (item < itemp->skillbox_id.size()) {
-        auto tp_id = get(itemp->skillbox_id, item);
-        if (! tp_id) {
+        auto thing_id = get(itemp->skillbox_id, item);
+        if (! thing_id) {
           item++;
           continue;
         }
 
-        auto tpp       = tp_find(tp_id);
+        auto t         = level->thing_find(thing_id);
         bool activated = false;
 
         for (auto id : itemp->skills) {
-          auto t = level->thing_find(id);
-          if (t) {
-            if (t->tp() == tpp) {
-              activated = t->is_activated;
+          auto o = level->thing_find(id);
+          if (o) {
+            if (o == t) {
+              activated = o->is_activated;
             }
           }
         }
 
-        auto tiles = &tpp->tiles;
+        auto tiles = &t->tp()->tiles;
 
         if (! tiles) {
           item++;
@@ -580,25 +580,25 @@ static bool wid_rightbar_create(void)
       wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
 
       if (item < itemp->buffbox_id.size()) {
-        auto tp_id = get(itemp->buffbox_id, item);
-        if (! tp_id) {
+        auto thing_id = get(itemp->buffbox_id, item);
+        if (! thing_id) {
           item++;
           continue;
         }
 
-        auto tpp       = tp_find(tp_id);
+        auto t         = level->thing_find(thing_id);
         bool activated = false;
 
         for (auto id : itemp->buffs) {
-          auto t = level->thing_find(id);
-          if (t) {
-            if (t->tp() == tpp) {
-              activated = t->is_activated;
+          auto o = level->thing_find(id);
+          if (o) {
+            if (o == t) {
+              activated = o->is_activated;
             }
           }
         }
 
-        auto tiles = &tpp->tiles;
+        auto tiles = &t->tp()->tiles;
 
         if (! tiles) {
           item++;
@@ -655,25 +655,25 @@ static bool wid_rightbar_create(void)
       wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
 
       if (item < itemp->debuffbox_id.size()) {
-        auto tp_id = get(itemp->debuffbox_id, item);
-        if (! tp_id) {
+        auto thing_id = get(itemp->debuffbox_id, item);
+        if (! thing_id) {
           item++;
           continue;
         }
 
-        auto tpp       = tp_find(tp_id);
+        auto t         = level->thing_find(thing_id);
         bool activated = false;
 
         for (auto id : itemp->debuffs) {
-          auto t = level->thing_find(id);
-          if (t) {
-            if (t->tp() == tpp) {
-              activated = t->is_activated;
+          auto o = level->thing_find(id);
+          if (o) {
+            if (o == t) {
+              activated = o->is_activated;
             }
           }
         }
 
-        auto tiles = &tpp->tiles;
+        auto tiles = &t->tp()->tiles;
 
         if (! tiles) {
           item++;
