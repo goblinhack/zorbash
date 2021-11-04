@@ -22,7 +22,7 @@
 int Thing::get_goal_penalty(Thingp attacker)
 {
   TRACE_AND_INDENT();
-  auto aip = get_aip();
+  auto aip = maybe_aip();
   if (! aip) {
     return 0;
   }
@@ -38,7 +38,7 @@ int Thing::get_goal_penalty(Thingp attacker)
 void Thing::reset_goal_penalty(Thingp attacker)
 {
   TRACE_AND_INDENT();
-  auto aip = get_aip();
+  auto aip = maybe_aip();
   if (! aip) {
     return;
   }
@@ -57,7 +57,7 @@ void Thing::reset_goal_penalty(Thingp attacker)
 void Thing::goal_penalty_tick(void)
 {
   TRACE_AND_INDENT();
-  auto aip = get_aip();
+  auto aip = maybe_aip();
   if (! aip) {
     return;
   }
@@ -96,7 +96,7 @@ void Thing::goal_penalty_tick(void)
 void Thing::add_goal_penalty(Thingp attacker)
 {
   TRACE_AND_INDENT();
-  auto aip = get_aip();
+  auto aip = maybe_aip();
   if (! aip) {
     return;
   }

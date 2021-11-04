@@ -53,9 +53,9 @@ public:
   Thing_(void);
   ~Thing_(void);
 
-  ThingInfop infop {};
-  ThingItemp itemp {};
-  ThingAip   aip {};
+  ThingInfop _infop {};
+  ThingItemp _itemp {};
+  ThingAip   _aip {};
 
   Levelp level {};
 
@@ -206,13 +206,13 @@ public:
   //
   // Walk all items and bags to get the items
   //
-  std::list< Thingp > get_itemp_list(void);
+  std::list< Thingp > maybe_itemp_list(void);
   std::list< Thingp > get_treasure_list(void);
   std::list< Thingp > get_wand_list(void);
   std::list< Thingp > get_food_list(void);
   std::list< Thingp > get_weapon_list(void);
 
-  std::vector< Thingp > get_itemp_vector(void);
+  std::vector< Thingp > get_item_vector(void);
   std::vector< Thingp > get_treasure_vector(void);
   std::vector< Thingp > get_wand_vector(void);
   std::vector< Thingp > get_food_vector(void);
@@ -705,7 +705,7 @@ public:
   int get_idle_tick(void);
   int get_initial_charge_count(void);
   int get_initial_light_strength(void);
-  int get_itemp_value(const Thingp it);
+  int maybe_itemp_value(const Thingp it);
   int get_keys(void);
   int get_lifespan(void);
   int get_lifespan_initial(void);
@@ -1452,9 +1452,13 @@ public:
   ThingItemp get_or_alloc_itemp(void);
   ThingAip   get_or_alloc_aip(void);
 
-  ThingInfop get_infop(void) { return infop; }
-  ThingItemp get_itemp(void) { return itemp; }
-  ThingAip   get_aip(void) { return aip; }
+  ThingInfop maybe_infop(void) { return _infop; }
+  ThingItemp maybe_itemp(void) { return _itemp; }
+  ThingAip   maybe_aip(void) { return _aip; }
+
+  ThingInfop get_infop(void);
+  ThingItemp get_itemp(void);
+  ThingAip   get_aip(void);
 
 } Thing;
 

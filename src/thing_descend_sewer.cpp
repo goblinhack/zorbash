@@ -66,7 +66,7 @@ bool Thing::descend_sewer(void)
     return false;
   }
 
-  if (! get_infop()) {
+  if (! maybe_infop()) {
     return false;
   }
 

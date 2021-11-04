@@ -20,7 +20,7 @@ bool Thing::skill_add(Thingp what)
   TRACE_AND_INDENT();
   dbg("Try to add skill %s", what->to_string().c_str());
   TRACE_AND_INDENT();
-  if (! get_itemp()) {
+  if (! maybe_itemp()) {
     dbg("No; not a monst");
     return false;
   }
@@ -90,7 +90,7 @@ bool Thing::skill_remove(Thingp what)
 void Thing::skill_remove_all(void)
 {
   TRACE_AND_INDENT();
-  if (! get_itemp()) {
+  if (! maybe_itemp()) {
     return;
   }
 
@@ -129,7 +129,7 @@ void Thing::skill_activate(Thingp what)
 int Thing::skill_enchant_count(const uint32_t slot)
 {
   TRACE_AND_INDENT();
-  if (! get_itemp()) {
+  if (! maybe_itemp()) {
     return 0;
   }
 
@@ -166,7 +166,7 @@ bool Thing::skill_add(Tpp what)
   // Drop a skillstone
   //
   auto found = false;
-  for (const auto t : get_itemp_vector()) {
+  for (const auto t : get_item_vector()) {
     if (t->is_skillstone()) {
       t->dead("used");
       found = true;
@@ -184,7 +184,7 @@ int Thing::get_skillstone_count(void)
 {
   TRACE_AND_INDENT();
   int v = 0;
-  for (const auto t : get_itemp_vector()) {
+  for (const auto t : get_item_vector()) {
     if (! t->is_skillstone()) {
       continue;
     }

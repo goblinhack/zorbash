@@ -58,7 +58,7 @@ static void wid_collect_slot(int slot)
     // from the choice.
     //
     if (t->is_bag_item_container()) {
-      auto bag_items = t->get_itemp_vector();
+      auto bag_items = t->get_item_vector();
 
       if (! player->try_to_carry(t)) {
         DBG3("Failed to collect slot %d", slot);
@@ -307,8 +307,8 @@ void Game::wid_collect_create(const std::list< Thingp > items /* intentional cop
       found[ t ] = true;
       collect_items.push_back(t);
 
-      if (t->get_infop()) {
-        for (const auto t : t->get_itemp_vector()) {
+      if (t->maybe_infop()) {
+        for (const auto t : t->get_item_vector()) {
           if (found.find(t) != found.end()) {
             continue;
           }

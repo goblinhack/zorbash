@@ -93,7 +93,7 @@ void Thing::move_finish(void)
   dbg("Move finish call on move");
   on_move();
 
-  if (get_aip()) {
+  if (maybe_aip()) {
     std::string s = "";
     for (auto p1 : get_aip()->move_path) {
       s += p1.to_string() + " ";
@@ -778,7 +778,7 @@ bool Thing::move_to_or_escape_check_only(const point &nh)
 
 void Thing::clear_move_path(const std::string &why)
 {
-  if (! get_aip()) {
+  if (! maybe_aip()) {
     //
     // Fire can hit this path
     //

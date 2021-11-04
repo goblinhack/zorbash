@@ -23,7 +23,7 @@ void Thing::get_light_strength_including_torch_effect(int &out_light_strength)
 
   auto torch_count = 0;
 
-  for (const auto o : get_itemp_vector()) {
+  for (const auto o : get_item_vector()) {
     if (! o->is_torch()) {
       continue;
     }

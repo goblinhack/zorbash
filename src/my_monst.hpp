@@ -82,23 +82,23 @@ public:
   point lunge_to;            // When a monst attacks something
   point last_failed_jump_at; // Previous jump attempt
 
-  int bounce_count = {};
-  int capacity_height = {};
-  int capacity_width = {};
-  int charge_count = {}; // How many things this thing spawned.
-  int enchant      = {};
-  int enchant_max  = {};
-  int gold         = {};
-  int health       = {};
-  int health_max   = {};
-  int keys         = {};
-  int lifespan     = {}; // How many things this thing owns.
-  int light_quality = {};
-  int light_strength = {}; // Current strength, including torches
-  int minion_count = {}; // How many things this thing spawned.
-  int owned_count  = {}; // How many things this thing owns.
-  int poison       = {};
-  int monst_state = {};
+  int bounce_count        = {};
+  int capacity_height     = {};
+  int capacity_width      = {};
+  int charge_count        = {}; // How many things this thing spawned.
+  int enchant             = {};
+  int enchant_max         = {};
+  int gold                = {};
+  int health              = {};
+  int health_max          = {};
+  int keys                = {};
+  int lifespan            = {}; // How many things this thing owns.
+  int light_quality       = {};
+  int light_strength      = {}; // Current strength, including torches
+  int minion_count        = {}; // How many things this thing spawned.
+  int owned_count         = {}; // How many things this thing owns.
+  int poison              = {};
+  int monst_state         = {};
   int score               = {};
   int spawned_count       = {}; // How many things this thing owns.
   int stamina             = {};
@@ -170,7 +170,7 @@ public:
   //
   // Things not worth saving
   //
-  int   current_damage {}; // Current damage; so it can be modified by python
+  int current_damage {}; // Current damage; so it can be modified by python
 } ThingInfo;
 std::ostream &operator<<(std::ostream &out, Bits< const ThingInfop & > const my);
 std::istream &operator>>(std::istream &in, Bits< ThingInfop & > my);
@@ -199,9 +199,9 @@ public:
   std::list< ThingId > debuffs;
 
   std::vector< ThingId >  inventory_shortcuts; // Which items are in which slot
-  std::vector< uint16_t > skillbox_id;  // Which skills are in which slot
-  std::vector< uint16_t > buffbox_id;   // Which buffs are in which slot
-  std::vector< uint16_t > debuffbox_id; // Which debuffs are in which slot
+  std::vector< uint16_t > skillbox_id;         // Which skills are in which slot
+  std::vector< uint16_t > buffbox_id;          // Which buffs are in which slot
+  std::vector< uint16_t > debuffbox_id;        // Which debuffs are in which slot
 
   std::array< std::array< ThingId, MAX_BAG_WIDTH >, MAX_BAG_HEIGHT > bag {};
 
@@ -223,11 +223,11 @@ std::istream &operator>>(std::istream &in, Bits< ThingItemp & > my);
 
 typedef struct ThingAi_ {
 public:
-  AgeMap age_map;           // How old a cell is
-  AgeMap seen_map;          // If we've ever seen this tile and when
-  AgeMap interrupt_map;     // If we've ever interrupt this tile and when
+  AgeMap age_map;       // How old a cell is
+  AgeMap seen_map;      // If we've ever seen this tile and when
+  AgeMap interrupt_map; // If we've ever interrupt this tile and when
 
-  Dmap   dmap_can_see;      // What the monster can reach during AI
+  Dmap dmap_can_see; // What the monster can reach during AI
 
   FovMap can_see_currently; // Shadowcasting of what can be seen currently
   FovMap can_see_ever;      // Shadowcasting of what can be seen ever on this level

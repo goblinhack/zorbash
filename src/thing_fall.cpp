@@ -143,7 +143,7 @@ float Thing::get_fall(void)
 bool Thing::fall_to_next_level(void)
 {
   TRACE_AND_INDENT();
-  if (! get_infop()) {
+  if (! maybe_infop()) {
     return false;
   }
 

@@ -217,6 +217,8 @@ bool Thing::ai_create_path_to_single_goal(int minx, int miny, int maxx, int maxy
   }
   TRACE_AND_INDENT();
 
+  auto aip = get_aip();
+
   //
   // Copy the dmap so we start with a fresh map per goal.
   //
@@ -344,7 +346,7 @@ bool Thing::ai_create_path_to_single_goal(int minx, int miny, int maxx, int maxy
         return true;
       }
     } else {
-      get_aip()->move_path = new_move_path;
+      aip->move_path = new_move_path;
       return true;
     }
 
@@ -389,10 +391,12 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
     jump_allowed = false;
   }
 
+  auto aip = get_aip();
+
   for (int y = miny; y < maxy; y++) {
     for (int x = minx; x < maxx; x++) {
       point p(x, y);
-      if (! get(get_aip()->can_see_ever.can_see, x, y)) {
+      if (! get(aip->can_see_ever.can_see, x, y)) {
         continue;
       }
 
@@ -442,7 +446,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
             //
             // Must be able to see the begin/end.
             //
-            if (! get(get_aip()->can_see_ever.can_see, jump_begin.x, jump_begin.y)) {
+            if (! get(aip->can_see_ever.can_see, jump_begin.x, jump_begin.y)) {
               continue;
             }
 
@@ -511,7 +515,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
           continue;
         }
 
-        if (! get(get_aip()->can_see_ever.can_see, p.x, p.y)) {
+        if (! get(aip->can_see_ever.can_see, p.x, p.y)) {
           continue;
         }
 
@@ -554,7 +558,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
               continue;
             }
 
-            if (! get(get_aip()->can_see_ever.can_see, o.x, o.y) && ! get(get_aip()->interrupt_map.val, o.x, o.y)) {
+            if (! get(aip->can_see_ever.can_see, o.x, o.y) && ! get(aip->interrupt_map.val, o.x, o.y)) {
 
               FOR_ALL_THINGS_THAT_INTERACT(level, it, o.x, o.y)
               {
@@ -563,7 +567,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
                 }
 
                 if (worth_collecting(it) || worth_eating(it) || is_dangerous(it)) {
-                  set(get_aip()->interrupt_map.val, o.x, o.y, game->tick_current);
+                  set(aip->interrupt_map.val, o.x, o.y, game->tick_current);
                   if (check_for_interrupts) {
                     something_changed++;
                     // con("INTERRUPT %s", it->to_string().c_str());
@@ -585,7 +589,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
     for (int y = 0; y < MAP_HEIGHT; y++) {
       for (int x = 0; x < MAP_WIDTH; x++) {
         if ((x == (int) mid_at.x) && (y == (int) mid_at.y)) {
-          if (get(get_aip()->can_see_ever.can_see, x, y)) {
+          if (get(aip->can_see_ever.can_see, x, y)) {
             printf("*");
           } else {
             printf("o");
@@ -594,13 +598,13 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
         }
         if (get(walked, x, y)) {
           if (level->is_obs_wall_or_door(x, y)) {
-            if (get(get_aip()->can_see_ever.can_see, x, y)) {
+            if (get(aip->can_see_ever.can_see, x, y)) {
               printf("X");
             } else {
               printf("x");
             }
           } else {
-            if (get(get_aip()->can_see_ever.can_see, x, y)) {
+            if (get(aip->can_see_ever.can_see, x, y)) {
               printf("?");
             } else {
               printf(",");
@@ -610,7 +614,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
           if (level->is_obs_wall_or_door(x, y)) {
             printf("+");
           } else {
-            if (get(get_aip()->can_see_currently.can_see, x, y)) {
+            if (get(aip->can_see_currently.can_see, x, y)) {
               printf("l");
             } else {
               printf(" ");
@@ -714,11 +718,13 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
   auto dmap_can_see = get_dmap_can_see();
   auto age_map      = get_age_map();
 
+  auto aip = get_aip();
+
   for (int y = miny; y < maxy; y++) {
     for (int x = minx; x < maxx; x++) {
       point p(x, y);
 
-      if (! get(get_aip()->can_see_currently.can_see, p.x, p.y)) {
+      if (! get(aip->can_see_currently.can_see, p.x, p.y)) {
         continue;
       }
 
@@ -769,7 +775,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
         // Don't allow of attacking monsts from memory if the player or
         // robot
         //
-        auto lit_recently = get(get_aip()->can_see_currently.can_see, it->mid_at.x, it->mid_at.y);
+        auto lit_recently = get(aip->can_see_currently.can_see, it->mid_at.x, it->mid_at.y);
 
         if (is_starving) {
           if (worth_eating(it)) {
@@ -930,6 +936,8 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
   TRACE_AND_INDENT();
   point start((int) mid_at.x, (int) mid_at.y);
 
+  auto aip = get_aip();
+
   std::array< std::array< bool, MAP_WIDTH >, MAP_HEIGHT > walked = {};
   std::array< std::array< bool, MAP_WIDTH >, MAP_HEIGHT > pushed = {};
   std::deque< point >                                     in;
@@ -965,10 +973,12 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
       continue;
     }
 
+    auto aip = get_aip();
+
     //
     // If an unvisited tile is next to a visited one, consider that tile.
     //
-    if (! get(get_aip()->can_see_ever.can_see, p.x, p.y)) {
+    if (! get(aip->can_see_ever.can_see, p.x, p.y)) {
       can_reach_cands.push_back(p);
       continue;
     }
@@ -1099,7 +1109,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
           //
           // If lit then we can already see it, so not worth exploring.
           //
-          if (get(get_aip()->can_see_ever.can_see, o.x, o.y)) {
+          if (get(aip->can_see_ever.can_see, o.x, o.y)) {
             continue;
           }
 
@@ -1121,7 +1131,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
       std::string s;
       for (int x = 0; x < MAP_WIDTH; x++) {
         if ((x == (int) mid_at.x) && (y == (int) mid_at.y)) {
-          if (get(get_aip()->can_see_ever.can_see, x, y)) {
+          if (get(aip->can_see_ever.can_see, x, y)) {
             s += "* ";
           } else {
             s += "o ";
@@ -1155,9 +1165,9 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
             s += " ";
           }
         }
-        if (get(get_aip()->can_see_currently.can_see, x, y)) {
+        if (get(aip->can_see_currently.can_see, x, y)) {
           s += ".";
-        } else if (get(get_aip()->can_see_ever.can_see, x, y)) {
+        } else if (get(aip->can_see_ever.can_see, x, y)) {
           s += ",";
         } else {
           s += " ";
@@ -1355,6 +1365,8 @@ bool Thing::ai_tick(bool recursing)
   dbg3("AI tick");
   TRACE_AND_INDENT();
 
+  auto aip = get_aip();
+
   if (is_player()) {
     if (game->things_are_moving) {
       return false;
@@ -1420,14 +1432,14 @@ bool Thing::ai_tick(bool recursing)
   // Update what we can see
   //
   bool light_walls = true;
-  level->fov_calculete(&get_aip()->can_see_currently, mid_at.x, mid_at.y, ai_vision_distance(), light_walls);
+  level->fov_calculete(&aip->can_see_currently, mid_at.x, mid_at.y, ai_vision_distance(), light_walls);
 
   //  if (! recursing) {
   for (int y = miny; y < maxy; y++) {
     for (int x = minx; x < maxx; x++) {
-      if (get_aip()->can_see_currently.can_see[ x ][ y ]) {
+      if (aip->can_see_currently.can_see[ x ][ y ]) {
         IF_DEBUG4 { (void) level->thing_new("ai_path2", point(x, y)); }
-        set(get_aip()->can_see_ever.can_see, x, y, true);
+        set(aip->can_see_ever.can_see, x, y, true);
       }
     }
   }
@@ -1441,7 +1453,7 @@ bool Thing::ai_tick(bool recursing)
         if ((x == (int) mid_at.x) && (y == (int) mid_at.y)) {
           printf("*");
         } else {
-          if (get(get_aip()->can_see_currently.can_see, x, y)) {
+          if (get(aip->can_see_currently.can_see, x, y)) {
             if (level->is_door(x, y)) {
               printf("D");
             } else if (level->is_obs_wall_or_door(x, y)) {
@@ -1449,7 +1461,7 @@ bool Thing::ai_tick(bool recursing)
             } else {
               printf(".");
             }
-          } else if (get(get_aip()->can_see_ever.can_see, x, y)) {
+          } else if (get(aip->can_see_ever.can_see, x, y)) {
             if (level->is_door(x, y)) {
               printf("D");
             } else if (level->is_obs_wall_or_door(x, y)) {
@@ -1643,7 +1655,7 @@ bool Thing::ai_tick(bool recursing)
 
         for (int search_type = 0; search_type < search_type_max; search_type++) {
           if (ai_create_path_to_goal(minx, miny, maxx, maxy, search_type)) {
-            if (get_aip()->move_path.size()) {
+            if (aip->move_path.size()) {
               ai_change_state(MONST_STATE_MOVING, "found a new goal");
             }
             return true;
@@ -1727,7 +1739,7 @@ bool Thing::ai_tick(bool recursing)
         //
         // Finished the move?
         //
-        if (get_aip()->move_path.empty()) {
+        if (aip->move_path.empty()) {
           AI_LOG("Move finished.");
           if (is_player()) {
             game->tick_begin("Robot move finished");
@@ -1958,7 +1970,7 @@ void Thing::ai_get_next_hop(void)
   TRACE_AND_INDENT();
   point start((int) mid_at.x, (int) mid_at.y);
 
-  if (! get_aip()) {
+  if (! maybe_aip()) {
     err("No monst aip");
   }
 
@@ -1973,6 +1985,8 @@ void Thing::ai_get_next_hop(void)
     }
   }
 
+  auto aip = get_aip();
+
   //
   // If somewhere bad, escape
   //
@@ -1982,7 +1996,7 @@ void Thing::ai_get_next_hop(void)
       return;
     }
 
-    get_aip()->wander_target = point(0, 0);
+    aip->wander_target = point(0, 0);
     dbg("Cannot escape, try to wander");
     if (ai_wander()) {
       return;
@@ -1992,7 +2006,7 @@ void Thing::ai_get_next_hop(void)
   //
   // If going somewhere, continue
   //
-  if (get_aip()->wander_target != point(0, 0)) {
+  if (aip->wander_target != point(0, 0)) {
     if (pcg_random_range(0, 100) < 50) {
       dbg("Try to continue wander");
       if (ai_wander()) {
@@ -2005,7 +2019,7 @@ void Thing::ai_get_next_hop(void)
   // Find the best goal to go to
   //
   if (ai_choose_goal()) {
-    get_aip()->wander_target = point(0, 0);
+    aip->wander_target = point(0, 0);
     return;
   }
 

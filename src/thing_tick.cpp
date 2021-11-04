@@ -73,7 +73,7 @@ void Thing::achieve_goals_in_life(void)
   //
   // Allow the same thing to hit us again
   //
-  if (get_aip()) {
+  if (maybe_aip()) {
     get_aip()->recently_hit_by.clear();
   }
 
@@ -208,7 +208,7 @@ void Thing::achieve_goals_in_life(void)
     }
   }
 
-  if (aip && get_aip()->move_path.empty()) {
+  if (maybe_aip() && get_aip()->move_path.empty()) {
     if (is_player()) {
       //
       // If resting, keep resting

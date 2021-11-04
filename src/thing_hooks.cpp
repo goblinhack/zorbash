@@ -242,7 +242,7 @@ void Thing::remove_all_references()
         if (t == this) {
           continue;
         }
-        if (t->get_infop()) {
+        if (t->maybe_infop()) {
           if (id == t->get_infop()->on_fire_id_anim) {
             err("thing is still attached to (on fire) %s", t->to_string().c_str());
           }
@@ -256,7 +256,7 @@ void Thing::remove_all_references()
             err("thing is still attached to (spawner owner) %s", t->to_string().c_str());
           }
         }
-        if (t->get_itemp()) {
+        if (t->maybe_itemp()) {
           FOR_ALL_EQUIP(e)
           {
             if (id == t->get_itemp()->equip_id[ e ]) {
@@ -279,7 +279,7 @@ void Thing::remove_all_references()
       if (t == this) {
         continue;
       }
-      if (t->get_infop()) {
+      if (t->maybe_infop()) {
         if (id == t->get_infop()->on_fire_id_anim) {
           err("interesting thing is still attached to (on fire) %s", t->to_string().c_str());
         }
@@ -293,7 +293,7 @@ void Thing::remove_all_references()
           err("interesting thing is still attached to (spawner owner) %s", t->to_string().c_str());
         }
       }
-      if (t->get_itemp()) {
+      if (t->maybe_itemp()) {
         FOR_ALL_EQUIP(e)
         {
           if (id == t->get_itemp()->equip_id[ e ]) {
@@ -314,7 +314,7 @@ void Thing::remove_all_references()
       if (t == this) {
         continue;
       }
-      if (t->get_infop()) {
+      if (t->maybe_infop()) {
         if (id == t->get_infop()->on_fire_id_anim) {
           err("interesting thing is still attached to (on fire) %s", t->to_string().c_str());
         }
@@ -328,7 +328,7 @@ void Thing::remove_all_references()
           err("interesting thing is still attached to (spawner owner) %s", t->to_string().c_str());
         }
       }
-      if (t->get_itemp()) {
+      if (t->maybe_itemp()) {
         FOR_ALL_EQUIP(e)
         {
           if (id == t->get_itemp()->equip_id[ e ]) {

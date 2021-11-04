@@ -116,7 +116,7 @@ void Thing::location_check_forced(void)
   // If we have a move path then we are perhaps trying to do descend into the
   // level below.
   //
-  if (aip && get_aip()->move_path.size() <= 1) {
+  if (maybe_aip() && get_aip()->move_path.size() <= 1) {
     if (descend_dungeon_tick()) {
       dbg("Location check, descending dungeon");
       return;

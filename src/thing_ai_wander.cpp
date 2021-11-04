@@ -185,7 +185,7 @@ bool Thing::ai_choose_wander(point &nh)
 {
   TRACE_AND_INDENT();
 
-  if (! get_aip()) {
+  if (! maybe_aip()) {
     err("No monst aip");
   }
 

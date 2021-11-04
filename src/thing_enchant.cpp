@@ -56,7 +56,7 @@ bool Thing::enchant(Thingp what)
   // Drop an enchantstone
   //
   auto found = false;
-  for (const auto t : get_itemp_vector()) {
+  for (const auto t : get_item_vector()) {
     if (t->is_enchantstone()) {
       t->dead("used");
       found = true;
@@ -90,7 +90,7 @@ int Thing::get_enchantstone_count(void)
 {
   TRACE_AND_INDENT();
   int v = 0;
-  for (const auto t : get_itemp_vector()) {
+  for (const auto t : get_item_vector()) {
     if (! t->is_enchantstone()) {
       continue;
     }
@@ -103,7 +103,7 @@ int Thing::get_enchantstone_count(void)
 bool Thing::can_enchant_something(void)
 {
   TRACE_AND_INDENT();
-  for (const auto t : get_itemp_vector()) {
+  for (const auto t : get_item_vector()) {
     if (t->is_enchantable()) {
       log("Found something we can enchant: %s", t->to_string().c_str());
       return true;
@@ -116,7 +116,7 @@ bool Thing::enchant_random_item(void)
 {
   TRACE_AND_INDENT();
   std::vector< Thingp > cands;
-  for (const auto t : get_itemp_vector()) {
+  for (const auto t : get_item_vector()) {
     if (! t->is_enchantable()) {
       continue;
     }

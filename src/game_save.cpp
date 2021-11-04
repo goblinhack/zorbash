@@ -191,22 +191,22 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   const std::string name(tp_id_map[ my.t->tp_id - 1 ]->name());
   out << bits(name);
 
-  bool monst_info_present = (my.t->get_infop() != nullptr);
+  bool monst_info_present = (my.t->maybe_infop() != nullptr);
   out << bits(monst_info_present);
   if (monst_info_present) {
-    out << bits(my.t->infop);
+    out << bits(my.t->_infop);
   }
 
-  bool monst_item_present = (my.t->get_itemp() != nullptr);
+  bool monst_item_present = (my.t->maybe_itemp() != nullptr);
   out << bits(monst_item_present);
   if (monst_item_present) {
-    out << bits(my.t->itemp);
+    out << bits(my.t->_itemp);
   }
 
-  bool monst_ai_present = (my.t->get_aip() != nullptr);
+  bool monst_ai_present = (my.t->maybe_aip() != nullptr);
   out << bits(monst_ai_present);
   if (monst_ai_present) {
-    out << bits(my.t->aip);
+    out << bits(my.t->_aip);
   }
 
   out << bits(my.t->tp_id);
@@ -441,7 +441,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   {
     auto diff = out.tellp() - start;
     LOG("SAVE %d bytes %s TP %d ID %x last_mid_at %d,%d infop %p", (int) diff, name.c_str(), my.t->tp_id, my.t->id.id,
-        my.t->last_mid_at.x, my.t->last_mid_at.y, my.t->get_infop());
+        my.t->last_mid_at.x, my.t->last_mid_at.y, my.t->maybe_infop());
   }
   return (out);
 }

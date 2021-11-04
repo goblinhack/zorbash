@@ -22,7 +22,7 @@ bool Thing::path_pop_next_move(void)
 {
   bool too_far = false;
 
-  auto aip = get_aip();
+  auto aip = maybe_aip();
   if (! aip) {
     return false;
   }

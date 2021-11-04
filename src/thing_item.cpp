@@ -16,7 +16,7 @@ int Thing::item_count_including_charges(Tpp tp)
 {
   TRACE_AND_INDENT();
   auto count = 0;
-  for (const auto o : get_itemp_vector()) {
+  for (const auto o : get_item_vector()) {
     if (o->tp() == tp) {
       if (o->is_bag_item_not_stackable()) {
         count = 1;
@@ -37,7 +37,7 @@ int Thing::item_count_excluding_charges(Tpp tp)
 {
   TRACE_AND_INDENT();
   auto count = 0;
-  for (const auto o : get_itemp_vector()) {
+  for (const auto o : get_item_vector()) {
     if (o->tp() == tp) {
       if (o->is_bag_item_not_stackable()) {
         count = 1;
@@ -84,8 +84,8 @@ void Thing::move_carried_items(void)
   // Move carried items too as when we attack, we will use say the
   // carried sword and so it had better be in the same location.
   //
-  if (get_infop()) {
-    for (const auto o : get_itemp_vector()) {
+  if (maybe_infop()) {
+    for (const auto o : get_item_vector()) {
       o->move_to(mid_at);
       o->dir = dir;
     }
@@ -161,8 +161,8 @@ void Thing::move_carried_items_immediately(void)
   // Move carried items too as when we attack, we will use say the
   // carried sword and so it had better be in the same location.
   //
-  if (get_itemp()) {
-    for (const auto o : get_itemp_vector()) {
+  if (maybe_itemp()) {
+    for (const auto o : get_item_vector()) {
       o->move_to_immediately(mid_at);
       o->dir = dir;
     }
@@ -182,7 +182,7 @@ void Thing::move_carried_items_immediately(void)
 bool Thing::is_carrying_item(void)
 {
   TRACE_AND_INDENT();
-  if (! get_itemp()) {
+  if (! maybe_itemp()) {
     return false;
   }
 

@@ -228,21 +228,21 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
   in >> bits(monst_info_present);
   if (monst_info_present) {
     my.t->new_infop();
-    in >> bits(my.t->infop);
+    in >> bits(my.t->_infop);
   }
 
   bool monst_item_present = false;
   in >> bits(monst_item_present);
   if (monst_item_present) {
     my.t->new_itemp();
-    in >> bits(my.t->itemp);
+    in >> bits(my.t->_itemp);
   }
 
   bool monst_ai_present = false;
   in >> bits(monst_ai_present);
   if (monst_ai_present) {
     my.t->new_aip();
-    in >> bits(my.t->aip);
+    in >> bits(my.t->_aip);
   }
 
   /////////////////////////////////////////////////////////////////////////

@@ -871,7 +871,7 @@ void Game::wid_thing_info_add_carry_info(WidPopup *w, Thingp t)
     return;
   }
 
-  if (! t->get_itemp()) {
+  if (! t->maybe_itemp()) {
     return;
   }
 

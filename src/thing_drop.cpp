@@ -257,7 +257,7 @@ bool Thing::drop(Thingp what)
 void Thing::drop_all(void)
 {
   TRACE_AND_INDENT();
-  if (! get_itemp()) {
+  if (! maybe_itemp()) {
     return;
   }
 

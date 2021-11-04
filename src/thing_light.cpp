@@ -20,8 +20,8 @@
 std::vector< Lightp > &Thing::get_light(void)
 {
   TRACE_AND_INDENT();
-  if (get_infop()) {
-    verify(get_infop());
+  if (maybe_infop()) {
+    verify(maybe_infop());
     return (get_infop()->light);
   } else {
     static std::vector< Lightp > no_light;
@@ -51,8 +51,8 @@ void Thing::new_light(point offset, int strength)
 void Thing::delete_lights(void)
 {
   TRACE_AND_INDENT();
-  if (get_infop()) {
-    verify(get_infop());
+  if (maybe_infop()) {
+    verify(maybe_infop());
     for (auto &l : get_infop()->light) {
       delete l;
     }

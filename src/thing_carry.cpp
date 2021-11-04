@@ -38,7 +38,7 @@ bool Thing::carry(Thingp item, bool can_equip)
   //
   // Only player/monsts or bags can carry items
   //
-  if (! get_infop() && ! is_bag()) {
+  if (! maybe_infop() && ! is_bag()) {
     dbg("Cannot carry; not a monst or bag");
     return false;
   }
@@ -47,7 +47,7 @@ bool Thing::carry(Thingp item, bool can_equip)
   // Limit is 1 bag per the inventory UI
   //
   if (item->is_bag()) {
-    for (const auto t : item->get_itemp_vector()) {
+    for (const auto t : item->get_item_vector()) {
       if (t->is_bag()) {
         dbg("Cannot carry; only one bag can be carried");
         return false;
@@ -148,7 +148,7 @@ bool Thing::carry(Thingp item, bool can_equip)
   }
 
   bool already_carried = false;
-  for (const auto t : get_itemp_vector()) {
+  for (const auto t : get_item_vector()) {
     if (t == item) {
       already_carried = true;
     }
@@ -201,7 +201,7 @@ bool Thing::carry(Thingp item, bool can_equip)
   // Auto carry items in the bag? like keys?
   //
   if (item->is_bag_item_container()) {
-    for (const auto t : item->get_itemp_vector()) {
+    for (const auto t : item->get_item_vector()) {
       if (! t->is_bag_item()) {
         if (! carry(t)) {
           err("Could not auto carry %s's non item: %s", item->to_string().c_str(), t->to_string().c_str());
@@ -271,8 +271,8 @@ std::list< Thingp > Thing::anything_to_carry_at(point at)
       //
       open(t);
 
-      for (const auto t : t->get_itemp_vector()) {
-        items.push_back(std::make_pair(t, get_itemp_value(t)));
+      for (const auto t : t->get_item_vector()) {
+        items.push_back(std::make_pair(t, maybe_itemp_value(t)));
       }
     }
 
@@ -282,7 +282,7 @@ std::list< Thingp > Thing::anything_to_carry_at(point at)
     }
 
     dbg("Potential item to carry: %s", t->to_string().c_str());
-    items.push_back(std::make_pair(t, get_itemp_value(t)));
+    items.push_back(std::make_pair(t, maybe_itemp_value(t)));
   }
   FOR_ALL_THINGS_END()
 

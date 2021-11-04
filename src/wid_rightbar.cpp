@@ -323,7 +323,7 @@ static bool wid_rightbar_create(void)
   }
   y_at += 3;
 
-  auto itemp = player->get_itemp();
+  auto itemp = player->maybe_itemp();
   if (! itemp) {
     ERR("No itemp for player");
     return false;

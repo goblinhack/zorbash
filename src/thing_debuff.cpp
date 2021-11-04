@@ -20,7 +20,7 @@ bool Thing::debuff_add(Thingp what)
   TRACE_AND_INDENT();
   dbg("Try to add debuff %s", what->to_string().c_str());
   TRACE_AND_INDENT();
-  if (! get_infop()) {
+  if (! maybe_infop()) {
     dbg("No; not a monst");
     return false;
   }
@@ -90,7 +90,7 @@ bool Thing::debuff_remove(Thingp what)
 void Thing::debuff_remove_all(void)
 {
   TRACE_AND_INDENT();
-  if (! get_itemp()) {
+  if (! maybe_itemp()) {
     return;
   }
 
@@ -114,7 +114,7 @@ bool Thing::debuff_use(Thingp what)
 
 bool Thing::debuff_add(Tpp what)
 {
-  if (! get_itemp()) {
+  if (! maybe_itemp()) {
     return false;
   }
   for (const auto &item : get_itemp()->debuffs) {
@@ -139,7 +139,7 @@ bool Thing::debuff_add(Tpp what)
 
 void Thing::debuff_tick(void)
 {
-  if (! get_itemp()) {
+  if (! maybe_itemp()) {
     return;
   }
   if (get_itemp()->debuffs.empty()) {

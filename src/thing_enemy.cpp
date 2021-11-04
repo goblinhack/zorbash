@@ -16,7 +16,7 @@
 bool Thing::is_enemy(Thingp attacker)
 {
   TRACE_AND_INDENT();
-  if (unlikely(! get_aip())) {
+  if (unlikely(! maybe_aip())) {
     return false;
   }
 
@@ -32,7 +32,7 @@ bool Thing::is_enemy(Thingp attacker)
 void Thing::enemies_tick(void)
 {
   TRACE_AND_INDENT();
-  if (! get_aip()) {
+  if (! maybe_aip()) {
     return;
   }
 

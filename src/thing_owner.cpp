@@ -24,7 +24,7 @@ Thingp Thing::get_top_owner(void)
     return nullptr;
   }
 
-  if (! get_infop()) {
+  if (! maybe_infop()) {
     return nullptr;
   }
 
@@ -54,7 +54,7 @@ Thingp Thing::get_immediate_owner(void)
     return nullptr;
   }
 
-  if (! get_infop()) {
+  if (! maybe_infop()) {
     return nullptr;
   }
 

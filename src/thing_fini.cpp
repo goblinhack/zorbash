@@ -143,8 +143,18 @@ void Thing::destroy(void)
 
   game->world.free_thing_id(this);
 
-  if (get_infop()) {
-    oldptr(get_infop());
-    delete infop;
+  if (maybe_infop()) {
+    oldptr(maybe_infop());
+    delete _infop;
+  }
+
+  if (maybe_itemp()) {
+    oldptr(maybe_itemp());
+    delete _itemp;
+  }
+
+  if (maybe_aip()) {
+    oldptr(maybe_aip());
+    delete _aip;
   }
 }

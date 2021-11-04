@@ -15,12 +15,12 @@
 //
 // Including items in bags
 //
-std::list< Thingp > Thing::get_itemp_list(void)
+std::list< Thingp > Thing::maybe_itemp_list(void)
 {
   std::list< Thingp > out;
 
   TRACE_AND_INDENT();
-  if (! get_itemp()) {
+  if (! maybe_itemp()) {
     static std::list< Thingp > empty;
     return empty;
   }
@@ -49,7 +49,7 @@ std::list< Thingp > Thing::get_treasure_list(void)
   std::list< Thingp > out;
 
   TRACE_AND_INDENT();
-  if (! get_itemp()) {
+  if (! maybe_itemp()) {
     static std::list< Thingp > empty;
     return empty;
   }
@@ -82,7 +82,7 @@ std::list< Thingp > Thing::get_food_list(void)
   std::list< Thingp > out;
 
   TRACE_AND_INDENT();
-  if (! get_itemp()) {
+  if (! maybe_itemp()) {
     static std::list< Thingp > empty;
     return empty;
   }
@@ -115,7 +115,7 @@ std::list< Thingp > Thing::get_wand_list(void)
   std::list< Thingp > out;
 
   TRACE_AND_INDENT();
-  if (! get_itemp()) {
+  if (! maybe_itemp()) {
     static std::list< Thingp > empty;
     return empty;
   }
@@ -148,7 +148,7 @@ std::list< Thingp > Thing::get_weapon_list(void)
   std::list< Thingp > out;
 
   TRACE_AND_INDENT();
-  if (! get_itemp()) {
+  if (! maybe_itemp()) {
     static std::list< Thingp > empty;
     return empty;
   }
@@ -176,12 +176,12 @@ std::list< Thingp > Thing::get_weapon_list(void)
   return out;
 }
 
-std::vector< Thingp > Thing::get_itemp_vector(void)
+std::vector< Thingp > Thing::get_item_vector(void)
 {
   std::vector< Thingp > out;
 
   TRACE_AND_INDENT();
-  if (! get_itemp()) {
+  if (! maybe_itemp()) {
     static std::vector< Thingp > empty;
     return empty;
   }
@@ -210,7 +210,7 @@ std::vector< Thingp > Thing::get_treasure_vector(void)
   std::vector< Thingp > out;
 
   TRACE_AND_INDENT();
-  if (! get_itemp()) {
+  if (! maybe_itemp()) {
     static std::vector< Thingp > empty;
     return empty;
   }
@@ -243,7 +243,7 @@ std::vector< Thingp > Thing::get_food_vector(void)
   std::vector< Thingp > out;
 
   TRACE_AND_INDENT();
-  if (! get_itemp()) {
+  if (! maybe_itemp()) {
     static std::vector< Thingp > empty;
     return empty;
   }
@@ -276,7 +276,7 @@ std::vector< Thingp > Thing::get_wand_vector(void)
   std::vector< Thingp > out;
 
   TRACE_AND_INDENT();
-  if (! get_itemp()) {
+  if (! maybe_itemp()) {
     static std::vector< Thingp > empty;
     return empty;
   }
@@ -309,7 +309,7 @@ std::vector< Thingp > Thing::get_weapon_vector(void)
   std::vector< Thingp > out;
 
   TRACE_AND_INDENT();
-  if (! get_itemp()) {
+  if (! maybe_itemp()) {
     static std::vector< Thingp > empty;
     return empty;
   }
@@ -342,7 +342,7 @@ int Thing::get_carried_weapon_count(void)
   TRACE_AND_INDENT();
   int count = 0;
 
-  if (! get_itemp()) {
+  if (! maybe_itemp()) {
     return count;
   }
 
@@ -359,7 +359,7 @@ int Thing::get_carried_wand_count(void)
   TRACE_AND_INDENT();
   int count = 0;
 
-  if (! get_itemp()) {
+  if (! maybe_itemp()) {
     return count;
   }
 
@@ -376,7 +376,7 @@ int Thing::get_carried_food_count(void)
   TRACE_AND_INDENT();
   int count = 0;
 
-  if (! get_itemp()) {
+  if (! maybe_itemp()) {
     return count;
   }
 
@@ -394,7 +394,7 @@ int Thing::get_carried_weapon_least_value(Thingp *out)
   int least_value = -1;
 
   *out = nullptr;
-  if (! get_itemp()) {
+  if (! maybe_itemp()) {
     return least_value;
   }
 
@@ -403,7 +403,7 @@ int Thing::get_carried_weapon_least_value(Thingp *out)
       continue;
     }
 
-    auto v = get_itemp_value(t);
+    auto v = maybe_itemp_value(t);
     if (! *out) {
       *out        = t;
       least_value = v;
@@ -423,7 +423,7 @@ int Thing::get_carried_wand_least_value(Thingp *out)
   int least_value = -1;
 
   *out = nullptr;
-  if (! get_itemp()) {
+  if (! maybe_itemp()) {
     return least_value;
   }
 
@@ -432,7 +432,7 @@ int Thing::get_carried_wand_least_value(Thingp *out)
       continue;
     }
 
-    auto v = get_itemp_value(t);
+    auto v = maybe_itemp_value(t);
     if (! *out) {
       *out        = t;
       least_value = v;
@@ -452,7 +452,7 @@ int Thing::get_carried_food_least_value(Thingp *out)
   int least_value = -1;
 
   *out = nullptr;
-  if (! get_itemp()) {
+  if (! maybe_itemp()) {
     return least_value;
   }
 
@@ -461,7 +461,7 @@ int Thing::get_carried_food_least_value(Thingp *out)
       continue;
     }
 
-    auto v = get_itemp_value(t);
+    auto v = maybe_itemp_value(t);
     if (! *out) {
       *out        = t;
       least_value = v;
@@ -481,7 +481,7 @@ int Thing::get_carried_weapon_highest_value(Thingp *out)
   int highest_value = -1;
 
   *out = nullptr;
-  if (! get_itemp()) {
+  if (! maybe_itemp()) {
     return highest_value;
   }
 
@@ -490,7 +490,7 @@ int Thing::get_carried_weapon_highest_value(Thingp *out)
       continue;
     }
 
-    auto v = get_itemp_value(t);
+    auto v = maybe_itemp_value(t);
     if (! *out) {
       *out          = t;
       highest_value = v;
@@ -510,7 +510,7 @@ int Thing::get_carried_wand_highest_value(Thingp *out)
   int highest_value = -1;
 
   *out = nullptr;
-  if (! get_itemp()) {
+  if (! maybe_itemp()) {
     return highest_value;
   }
 
@@ -519,7 +519,7 @@ int Thing::get_carried_wand_highest_value(Thingp *out)
       continue;
     }
 
-    auto v = get_itemp_value(t);
+    auto v = maybe_itemp_value(t);
     if (! *out) {
       *out          = t;
       highest_value = v;
@@ -539,7 +539,7 @@ int Thing::get_carried_food_highest_value(Thingp *out)
   int highest_value = -1;
 
   *out = nullptr;
-  if (! get_itemp()) {
+  if (! maybe_itemp()) {
     return highest_value;
   }
 
@@ -548,7 +548,7 @@ int Thing::get_carried_food_highest_value(Thingp *out)
       continue;
     }
 
-    auto v = get_itemp_value(t);
+    auto v = maybe_itemp_value(t);
     if (! *out) {
       *out          = t;
       highest_value = v;

@@ -21,7 +21,7 @@ bool Thing::buff_add(Thingp what)
   dbg("Try to add buff %s", what->to_string().c_str());
   TRACE_AND_INDENT();
 
-  if (! get_itemp()) {
+  if (! maybe_itemp()) {
     dbg("No; not a monst");
     return false;
   }
@@ -91,7 +91,7 @@ bool Thing::buff_remove(Thingp what)
 void Thing::buff_remove_all(void)
 {
   TRACE_AND_INDENT();
-  if (! get_itemp()) {
+  if (! maybe_itemp()) {
     return;
   }
 
@@ -115,7 +115,7 @@ bool Thing::buff_use(Thingp what)
 
 bool Thing::buff_add(Tpp what)
 {
-  if (! get_itemp()) {
+  if (! maybe_itemp()) {
     return false;
   }
   for (const auto &item : get_itemp()->buffs) {
@@ -140,7 +140,7 @@ bool Thing::buff_add(Tpp what)
 
 void Thing::buff_tick(void)
 {
-  if (! get_itemp()) {
+  if (! maybe_itemp()) {
     return;
   }
   if (get_itemp()->buffs.empty()) {

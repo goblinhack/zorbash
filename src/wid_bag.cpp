@@ -239,7 +239,7 @@ uint8_t wid_in_transit_item_place(Widp w, int32_t x, int32_t y, uint32_t button)
   bag->log("Try to place %s at %d,%d", t->to_string().c_str(), at.x, at.y);
   if (bag->bag_can_place_at(t, at)) {
     wid_in_transit_item_place_in_bag(wid_bag_container, bag, t, at);
-  } else if (t->get_itemp() && bag->bag_can_place_at(t, t->get_itemp()->last_bag_position)) {
+  } else if (t->maybe_itemp() && bag->bag_can_place_at(t, t->get_itemp()->last_bag_position)) {
     //
     // Place back where it was picked up
     //

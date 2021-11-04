@@ -29,7 +29,7 @@ bool Thing::buffbox_id_insert(Thingp what)
     return false;
   }
 
-  if (! get_itemp()) {
+  if (! maybe_itemp()) {
     return false;
   }
 
@@ -104,7 +104,7 @@ bool Thing::buffbox_id_remove(Thingp what)
     return false;
   }
 
-  if (! get_itemp()) {
+  if (! maybe_itemp()) {
     return false;
   }
 
@@ -151,7 +151,7 @@ Thingp Level::buffbox_get(const uint32_t slot)
     return nullptr;
   }
 
-  auto itemp = player->get_itemp();
+  auto itemp = player->maybe_itemp();
   if (! itemp) {
     ERR("No itemp for player");
     return nullptr;
