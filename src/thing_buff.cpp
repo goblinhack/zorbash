@@ -21,7 +21,7 @@ bool Thing::buff_add(Thingp what)
   dbg("Try to add buff %s", what->to_string().c_str());
   TRACE_AND_INDENT();
 
-  if (! monst_infop) {
+  if (! get_itemp()) {
     dbg("No; not a monst");
     return false;
   }
@@ -35,7 +35,7 @@ bool Thing::buff_add(Thingp what)
     existing_owner->drop(what);
   }
 
-  for (const auto &item : monst_infop->buffs) {
+  for (const auto &item : get_itemp()->buffs) {
     if (item == what->id) {
       dbg("No; already carried");
       return true;
@@ -49,7 +49,7 @@ bool Thing::buff_add(Thingp what)
     }
   }
 
-  monst_infop->buffs.push_front(what->id);
+  get_itemp()->buffs.push_front(what->id);
   what->set_owner(this);
   what->hide();
 
@@ -81,7 +81,7 @@ bool Thing::buff_remove(Thingp what)
   }
 
   what->remove_owner();
-  monst_infop->buffs.remove(what->id);
+  get_itemp()->buffs.remove(what->id);
   game->request_remake_buffbox = true;
 
   dbg("Removed %s", what->to_string().c_str());
@@ -91,12 +91,12 @@ bool Thing::buff_remove(Thingp what)
 void Thing::buff_remove_all(void)
 {
   TRACE_AND_INDENT();
-  if (! monst_infop) {
+  if (! get_itemp()) {
     return;
   }
 
-  while (! monst_infop->buffs.empty()) {
-    auto id = *monst_infop->buffs.begin();
+  while (! get_itemp()->buffs.empty()) {
+    auto id = *get_itemp()->buffs.begin();
     auto t  = level->thing_find(id);
     if (! t) {
       return;
@@ -115,10 +115,10 @@ bool Thing::buff_use(Thingp what)
 
 bool Thing::buff_add(Tpp what)
 {
-  if (! monst_infop) {
+  if (! get_itemp()) {
     return false;
   }
-  for (const auto &item : monst_infop->buffs) {
+  for (const auto &item : get_itemp()->buffs) {
     auto t = level->thing_find(item.id);
     if (t && (t->tp() == what)) {
       return true;
@@ -140,10 +140,10 @@ bool Thing::buff_add(Tpp what)
 
 void Thing::buff_tick(void)
 {
-  if (! monst_infop) {
+  if (! get_itemp()) {
     return;
   }
-  if (monst_infop->buffs.empty()) {
+  if (get_itemp()->buffs.empty()) {
     return;
   }
 
@@ -151,7 +151,7 @@ void Thing::buff_tick(void)
   dbg("Buff tick");
   TRACE_AND_INDENT();
 
-  for (const auto &item : monst_infop->buffs) {
+  for (const auto &item : get_itemp()->buffs) {
     auto t = level->thing_find(item.id);
     if (t) {
       dbg("Buff (%s)", t->to_string().c_str());

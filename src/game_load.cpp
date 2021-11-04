@@ -56,7 +56,7 @@ static ts_t load(ts_t T)
   return (T - old_ts_dungeon_created + new_ts_dungeon_created);
 }
 
-std::istream &operator>>(std::istream &in, Bits< MonstInfop & > my)
+std::istream &operator>>(std::istream &in, Bits< ThingInfop & > my)
 {
   TRACE_AND_INDENT();
   /////////////////////////////////////////////////////////////////////////
@@ -71,9 +71,6 @@ std::istream &operator>>(std::istream &in, Bits< MonstInfop & > my)
   /* ThingId      owner_id                  */ in >> bits(my.t->owner_id);
   /* ThingId      minion_owner_id           */ in >> bits(my.t->minion_owner_id);
   /* ThingId      spawner_owner_id          */ in >> bits(my.t->spawner_owner_id);
-  /* ThingId      equip_id                  */ in >> bits(my.t->equip_id);
-  /* ThingId      equip_id_carry_anim       */ in >> bits(my.t->equip_id_carry_anim);
-  /* ThingId      equip_id_use_anim         */ in >> bits(my.t->equip_id_use_anim);
   /* color        light_col                 */ in >> bits(my.t->light_col);
   /* float        bounce_fade               */ in >> bits(my.t->bounce_fade);
   /* float        bounce_height             */ in >> bits(my.t->bounce_height);
@@ -123,22 +120,8 @@ std::istream &operator>>(std::istream &in, Bits< MonstInfop & > my)
   /* int          submerged_offset          */ in >> bits(my.t->submerged_offset);
   /* int          throw_distance            */ in >> bits(my.t->throw_distance);
   /* int          tick_resurrect_when       */ in >> bits(my.t->tick_resurrect_when);
-  /* point        bag_position              */ in >> bits(my.t->bag_position);
-  /* point        last_bag_position         */ in >> bits(my.t->last_bag_position);
-  /* point        wander_target             */ in >> bits(my.t->wander_target);
-  /* point     where_i_dropped_an_item_last */ in >> bits(my.t->where_i_dropped_an_item_last);
-  /* point   where_i_failed_to_collect_last */ in >> bits(my.t->where_i_failed_to_collect_last);
-  /* std::array<std::array<ThingId > >      */ in >> bits(my.t->bag);
-  /* std::list<ThingId>   carrying          */ in >> bits(my.t->carrying);
-  /* std::list<ThingId>   skills            */ in >> bits(my.t->skills);
-  /* std::list<ThingId>   buffs             */ in >> bits(my.t->buffs);
-  /* std::list<ThingId>   debuffs           */ in >> bits(my.t->debuffs);
   /* std::string          msg               */ in >> bits(my.t->msg);
   /* std::string          dead_reason       */ in >> bits(my.t->dead_reason);
-  /* std::vector<ThingId> inventory_shortcuts      */ in >> bits(my.t->inventory_shortcuts);
-  /* std::vector<uint16_t> skillbox_id      */ in >> bits(my.t->skillbox_id);
-  /* std::vector<uint16_t> buffbox_id       */ in >> bits(my.t->buffbox_id);
-  /* std::vector<uint16_t> debuffbox_id     */ in >> bits(my.t->debuffbox_id);
   /* ts_t  ts_bounce_begin                  */ in >> bits(T); my.t->ts_bounce_begin = load(T);
   /* ts_t  ts_bounce_end                    */ in >> bits(T); my.t->ts_bounce_end = load(T);
   /* ts_t  ts_fadeup_begin                  */ in >> bits(T); my.t->ts_fadeup_begin = load(T);
@@ -166,7 +149,46 @@ std::istream &operator>>(std::istream &in, Bits< MonstInfop & > my)
   return (in);
 }
 
-std::istream &operator>>(std::istream &in, Bits< MonstAip & > my)
+std::istream &operator>>(std::istream &in, Bits< ThingItemp & > my)
+{
+  TRACE_AND_INDENT();
+  /////////////////////////////////////////////////////////////////////////
+  // Keep these sorted alphabetically to make it easier to see additions
+  // and always update game_load.cpp and game_save.cpp
+  //
+  // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+  // v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v
+  /////////////////////////////////////////////////////////////////////////
+  // clang-format off
+  /* ThingId      equip_id                    */ in >> bits(my.t->equip_id);
+  /* ThingId      equip_id_carry_anim         */ in >> bits(my.t->equip_id_carry_anim);
+  /* ThingId      equip_id_use_anim           */ in >> bits(my.t->equip_id_use_anim);
+  /* point        bag_position                */ in >> bits(my.t->bag_position);
+  /* point        last_bag_position           */ in >> bits(my.t->last_bag_position);
+  /* point     where_i_dropped_an_item_last   */ in >> bits(my.t->where_i_dropped_an_item_last);
+  /* point   where_i_failed_to_collect_last   */ in >> bits(my.t->where_i_failed_to_collect_last);
+  /* std::array<std::array<ThingId > >        */ in >> bits(my.t->bag);
+  /* std::list<ThingId>   carrying            */ in >> bits(my.t->carrying);
+  /* std::list<ThingId>   skills              */ in >> bits(my.t->skills);
+  /* std::list<ThingId>   buffs               */ in >> bits(my.t->buffs);
+  /* std::list<ThingId>   debuffs             */ in >> bits(my.t->debuffs);
+  /* std::vector<ThingId> inventory_shortcuts */ in >> bits(my.t->inventory_shortcuts);
+  /* std::vector<uint16_t> skillbox_id        */ in >> bits(my.t->skillbox_id);
+  /* std::vector<uint16_t> buffbox_id         */ in >> bits(my.t->buffbox_id);
+  /* std::vector<uint16_t> debuffbox_id       */ in >> bits(my.t->debuffbox_id);
+  // clang-format on
+  /////////////////////////////////////////////////////////////////////////
+  // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
+  // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+  //
+  // Keep these sorted alphabetically to make it easier to see additions
+  // and always update game_load.cpp and game_save.cpp
+  /////////////////////////////////////////////////////////////////////////
+
+  return (in);
+}
+
+std::istream &operator>>(std::istream &in, Bits< ThingAip & > my)
 {
   TRACE_AND_INDENT();
   in >> bits(my.t->age_map.val);
@@ -179,6 +201,7 @@ std::istream &operator>>(std::istream &in, Bits< MonstAip & > my)
   in >> bits(my.t->goal_penalty);
   in >> bits(my.t->avoid);
   in >> bits(my.t->move_path);
+  in >> bits(my.t->wander_target);
   return (in);
 }
 
@@ -204,15 +227,22 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
   bool monst_info_present = false;
   in >> bits(monst_info_present);
   if (monst_info_present) {
-    my.t->new_monst_info();
-    in >> bits(my.t->monst_infop);
+    my.t->new_infop();
+    in >> bits(my.t->infop);
+  }
+
+  bool monst_item_present = false;
+  in >> bits(monst_item_present);
+  if (monst_item_present) {
+    my.t->new_itemp();
+    in >> bits(my.t->itemp);
   }
 
   bool monst_ai_present = false;
   in >> bits(monst_ai_present);
   if (monst_ai_present) {
-    my.t->new_monst_ai();
-    in >> bits(my.t->monst_aip);
+    my.t->new_aip();
+    in >> bits(my.t->aip);
   }
 
   /////////////////////////////////////////////////////////////////////////

@@ -171,10 +171,10 @@ WidPopup *Game::wid_thing_info_create_popup_compact(const std::vector< Thingp > 
 
   for (auto t : ts) {
     auto name = t->short_text_capitalized();
-    snprintf(tmp, sizeof(tmp) - 1, "%%fg=white$%-28s%%fg=reset$", name.c_str());
+    snprintf(tmp, sizeof(tmp) - 2, "%%fg=white$%-28s%%fg=reset$", name.c_str());
     for (auto c = tmp; c < tmp + sizeof(tmp); c++) {
       if (*c == ' ') {
-        *c = '`';
+        *c = '.';
       }
     }
     wid_popup_window->log(tmp);
@@ -196,6 +196,7 @@ WidPopup *Game::wid_thing_info_create_popup_compact(const std::vector< Thingp > 
     wid_thing_info_add_constitution(wid_popup_window, t);
     wid_thing_info_add_charge_count(wid_popup_window, t);
     wid_thing_info_add_danger_level(wid_popup_window, t);
+    wid_popup_window->log("-");
   }
 
   auto w        = wid_popup_window;
@@ -365,7 +366,7 @@ void Game::wid_thing_info_create(Thingp t, bool when_hovering_over)
   if (t->is_player() || t->is_bag_item_container()) {
     int existing_bags_height = 0;
 
-    for (const auto &item : player->monst_infop->carrying) {
+    for (const auto &item : player->get_infop()->carrying) {
       auto b = game->thing_find(item.id);
       if (! b) {
         continue;
@@ -870,11 +871,11 @@ void Game::wid_thing_info_add_carry_info(WidPopup *w, Thingp t)
     return;
   }
 
-  if (! t->monst_infop) {
+  if (! t->get_itemp()) {
     return;
   }
 
-  auto items = t->monst_infop->carrying.size();
+  auto items = t->get_itemp()->carrying.size();
 
   if (t->is_open) {
     w->log(" ");

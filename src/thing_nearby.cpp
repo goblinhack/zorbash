@@ -33,7 +33,7 @@ Thingp Thing::get_most_dangerous_adjacent_thing(void)
       continue;
     }
 
-    if (! get(monst_aip->can_see_currently.can_see, o.x, o.y)) {
+    if (! get(get_aip()->can_see_currently.can_see, o.x, o.y)) {
       continue;
     }
 
@@ -96,7 +96,7 @@ Thingp Thing::get_most_dangerous_visible_thing(void)
         continue;
       }
 
-      if (! get(monst_aip->can_see_currently.can_see, o.x, o.y)) {
+      if (! get(get_aip()->can_see_currently.can_see, o.x, o.y)) {
         continue;
       }
 
@@ -161,7 +161,7 @@ bool Thing::any_unfriendly_monst_visible(void)
         continue;
       }
 
-      if (! get(monst_aip->can_see_currently.can_see, o.x, o.y)) {
+      if (! get(get_aip()->can_see_currently.can_see, o.x, o.y)) {
         continue;
       }
 
@@ -205,7 +205,7 @@ bool Thing::any_adjacent_monst(void)
       continue;
     }
 
-    if (! get(monst_aip->can_see_currently.can_see, o.x, o.y)) {
+    if (! get(get_aip()->can_see_currently.can_see, o.x, o.y)) {
       continue;
     }
 

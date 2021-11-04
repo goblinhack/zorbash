@@ -29,14 +29,14 @@ bool Thing::buffbox_id_insert(Thingp what)
     return false;
   }
 
-  if (! monst_infop) {
+  if (! get_itemp()) {
     return false;
   }
 
   int  free_slot     = -1;
-  auto buffbox_items = player->monst_infop->buffbox_id.size();
+  auto buffbox_items = player->get_itemp()->buffbox_id.size();
   for (auto i = 0U; i < buffbox_items; i++) {
-    auto tp_id = monst_infop->buffbox_id[ i ];
+    auto tp_id = get_itemp()->buffbox_id[ i ];
     if (! tp_id) {
       if (free_slot == -1) {
         free_slot = i;
@@ -67,7 +67,7 @@ bool Thing::buffbox_id_insert(Thingp what)
 
   int item_slot = -1;
   if (free_slot != -1) {
-    monst_infop->buffbox_id[ free_slot ] = what->tp_id;
+    get_itemp()->buffbox_id[ free_slot ] = what->tp_id;
     item_slot                            = free_slot;
   } else {
     if (buffbox_items >= UI_INVENTORY_QUICK_ITEMS_MAX) {
@@ -75,8 +75,8 @@ bool Thing::buffbox_id_insert(Thingp what)
       return false;
     }
 
-    monst_infop->buffbox_id.push_back(what->tp_id);
-    item_slot = monst_infop->buffbox_id.size() - 1;
+    get_itemp()->buffbox_id.push_back(what->tp_id);
+    item_slot = get_itemp()->buffbox_id.size() - 1;
   }
 
   game->previous_slot = item_slot;
@@ -104,7 +104,7 @@ bool Thing::buffbox_id_remove(Thingp what)
     return false;
   }
 
-  if (! monst_infop) {
+  if (! get_itemp()) {
     return false;
   }
 
@@ -113,9 +113,9 @@ bool Thing::buffbox_id_remove(Thingp what)
     immediate_owner->bag_remove(what);
   }
 
-  auto buffbox_items = player->monst_infop->buffbox_id.size();
+  auto buffbox_items = player->get_itemp()->buffbox_id.size();
   for (auto i = 0U; i < buffbox_items; i++) {
-    auto tp_id = monst_infop->buffbox_id[ i ];
+    auto tp_id = get_itemp()->buffbox_id[ i ];
     if (! tp_id) {
       continue;
     }
@@ -128,7 +128,7 @@ bool Thing::buffbox_id_remove(Thingp what)
       game->request_remake_buffbox = true;
 
       dbg("Remove slot");
-      monst_infop->buffbox_id[ i ] = 0;
+      get_itemp()->buffbox_id[ i ] = 0;
 
       wid_buffbox_init();
       if ((game->state != Game::STATE_CHOOSING_TARGET) && (game->state != Game::STATE_INVENTORY) &&
@@ -151,18 +151,18 @@ Thingp Level::buffbox_get(const uint32_t slot)
     return nullptr;
   }
 
-  auto monst_infop = player->monst_infop;
-  if (! monst_infop) {
-    ERR("No monst_infop for player");
+  auto itemp = player->get_itemp();
+  if (! itemp) {
+    ERR("No itemp for player");
     return nullptr;
   }
 
-  if (slot >= monst_infop->buffbox_id.size()) {
-    LOG("Slot %d out of range, max %d", slot, (int) monst_infop->buffbox_id.size());
+  if (slot >= itemp->buffbox_id.size()) {
+    LOG("Slot %d out of range, max %d", slot, (int) itemp->buffbox_id.size());
     return nullptr;
   }
 
-  auto tp_id = get(monst_infop->buffbox_id, slot);
+  auto tp_id = get(itemp->buffbox_id, slot);
   if (! tp_id) {
     LOG("Slot %d has no tp", slot);
     return nullptr;
@@ -176,7 +176,7 @@ Thingp Level::buffbox_get(const uint32_t slot)
 
   LOG("Slot %d has %s", slot, tpp->name().c_str());
 
-  for (auto oid : monst_infop->buffs) {
+  for (auto oid : itemp->buffs) {
     auto o = thing_find(oid);
     if (o) {
       if (o->tp() == tpp) {
@@ -200,12 +200,12 @@ bool Level::buffbox_over(const uint32_t slot)
     return false;
   }
 
-  if (slot >= player->monst_infop->buffbox_id.size()) {
+  if (slot >= player->get_itemp()->buffbox_id.size()) {
     LOG("buffbox: Ignore; slot out of range");
     return false;
   }
 
-  auto oid = get(player->monst_infop->buffbox_id, slot);
+  auto oid = get(player->get_itemp()->buffbox_id, slot);
   if (! oid) {
     LOG("buffbox: Ignore; nothing at that slot");
     return false;

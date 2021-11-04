@@ -750,7 +750,7 @@ bool wid_inventory_create(Thingp selected, Thingp over)
   //
   Thingp bag = nullptr;
   {
-    for (const auto t : player->get_item_vector()) {
+    for (const auto t : player->get_itemp_vector()) {
       if (t->is_bag()) {
         bag = t;
         break;
@@ -790,8 +790,8 @@ bool wid_inventory_create(Thingp selected, Thingp over)
     for (auto slot = 0; slot < (int) UI_INVENTORY_QUICK_ITEMS_MAX; slot++) {
       Thingp t = nullptr;
 
-      if (slot < (int) player->monst_infop->inventory_shortcuts.size()) {
-        auto thing_id = get(player->monst_infop->inventory_shortcuts, slot);
+      if (slot < (int) player->get_itemp()->inventory_shortcuts.size()) {
+        auto thing_id = get(player->get_itemp()->inventory_shortcuts, slot);
         if (thing_id.ok()) {
           t = level->thing_find(thing_id);
         }

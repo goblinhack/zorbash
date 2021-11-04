@@ -60,7 +60,7 @@ bool Thing::ascend_sewer(void)
     return false;
   }
 
-  if (! monst_infop) {
+  if (! get_infop()) {
     return false;
   }
 

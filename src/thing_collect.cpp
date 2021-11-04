@@ -38,7 +38,7 @@ int Thing::worth_collecting(Thingp item, Thingp *would_need_to_drop)
   // Look in the bag.
   //
   if (item->is_bag()) {
-    for (const auto bag_item : item->get_item_vector()) {
+    for (const auto bag_item : item->get_itemp_vector()) {
       auto value = worth_collecting(bag_item, would_need_to_drop);
       if (value > 0) {
         dbg("Worth collecting bag item %s, yes", bag_item->to_string().c_str());
@@ -69,7 +69,7 @@ int Thing::worth_collecting(Thingp item, Thingp *would_need_to_drop)
   // This can be nutrition or gold value etc... just something that is worth
   // something to us
   //
-  int value_to_me = get_item_value(item);
+  int value_to_me = get_itemp_value(item);
   if (value_to_me < 0) {
     dbg("Worth collecting %s? no, worthless", item->to_string().c_str());
     return -1;

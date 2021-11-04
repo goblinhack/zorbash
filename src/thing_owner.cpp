@@ -24,6 +24,10 @@ Thingp Thing::get_top_owner(void)
     return nullptr;
   }
 
+  if (! get_infop()) {
+    return nullptr;
+  }
+
   auto id = get_immediate_owner_id();
   if (likely(id.ok())) {
     auto i = level->thing_find(id);
@@ -47,6 +51,10 @@ Thingp Thing::get_immediate_owner(void)
   // Things own themselves
   //
   if (is_player() || is_monst()) {
+    return nullptr;
+  }
+
+  if (! get_infop()) {
     return nullptr;
   }
 
@@ -143,7 +151,7 @@ bool Thing::change_owner(Thingp new_owner)
     }
   }
 
-  old_owner->monst_infop->carrying.remove(id);
+  old_owner->get_itemp()->carrying.remove(id);
 
   hooks_remove();
 

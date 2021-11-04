@@ -43,7 +43,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
     return false;
   }
 
-  if (! monst_aip) {
+  if (! get_aip()) {
     return false;
   }
 
@@ -246,7 +246,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   // Move carried items too as when we attack, we will use say the
   // carried sword and so it had better be in the same location.
   //
-  for (const auto w : get_item_vector()) {
+  for (const auto w : get_itemp_vector()) {
     w->move_to_immediately(mid_at);
     w->is_jumping = true;
   }
@@ -479,7 +479,7 @@ void Thing::jump_end(void)
   // Move carried items too as when we attack, we will use say the
   // carried sword and so it had better be in the same location.
   //
-  for (const auto o : get_item_vector()) {
+  for (const auto o : get_itemp_vector()) {
     o->is_jumping = false;
   }
 
@@ -518,5 +518,5 @@ void Thing::jump_end(void)
   //
   collision_check_do();
 
-  monst_infop->last_failed_jump_at = point(-1, -1);
+  get_infop()->last_failed_jump_at = point(-1, -1);
 }

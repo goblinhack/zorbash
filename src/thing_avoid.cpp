@@ -135,11 +135,11 @@ bool Thing::will_avoid_monst(const point &p)
 bool Thing::is_to_be_avoided(Thingp attacker)
 {
   TRACE_AND_INDENT();
-  if (unlikely(! monst_aip)) {
+  if (unlikely(! get_aip())) {
     return false;
   }
 
-  if (monst_aip->avoid.find(attacker->id) != monst_aip->avoid.end()) {
+  if (get_aip()->avoid.find(attacker->id) != get_aip()->avoid.end()) {
     return true;
   }
   return false;
@@ -148,12 +148,12 @@ bool Thing::is_to_be_avoided(Thingp attacker)
 bool Thing::cannot_avoid(Thingp attacker)
 {
   TRACE_AND_INDENT();
-  if (unlikely(! monst_aip)) {
+  if (unlikely(! get_aip())) {
     return false;
   }
 
-  auto f = monst_aip->avoid.find(attacker->id);
-  if (f == monst_aip->avoid.end()) {
+  auto f = get_aip()->avoid.find(attacker->id);
+  if (f == get_aip()->avoid.end()) {
     return false;
   }
 
@@ -173,14 +173,14 @@ bool Thing::cannot_avoid(Thingp attacker)
 void Thing::avoid_tick(void)
 {
   TRACE_AND_INDENT();
-  if (! monst_aip) {
+  if (! get_aip()) {
     return;
   }
 
-  for (auto &p : monst_aip->avoid) {
+  for (auto &p : get_aip()->avoid) {
     auto attacker = level->thing_find_optional(p.first);
     if (! attacker) {
-      monst_aip->avoid.erase(p.first);
+      get_aip()->avoid.erase(p.first);
       return;
     }
 
@@ -188,7 +188,7 @@ void Thing::avoid_tick(void)
       if (is_player() && game->robot_mode) {
         CON("Robot: Remove avoid, is dead: %s", attacker->to_string().c_str());
       }
-      monst_aip->avoid.erase(p.first);
+      get_aip()->avoid.erase(p.first);
       return;
     }
 
@@ -206,11 +206,11 @@ void Thing::avoid_tick(void)
       if (is_player() && game->robot_mode) {
         CON("Robot: Remove avoid: %s", attacker->to_string().c_str());
       }
-      monst_aip->avoid.erase(p.first);
+      get_aip()->avoid.erase(p.first);
       return;
     }
 
-    monst_aip->avoid.erase(p.first);
+    get_aip()->avoid.erase(p.first);
     return;
   }
 }
@@ -232,19 +232,19 @@ void Thing::add_avoid(Thingp attacker)
     return;
   }
 
-  if (! monst_aip->avoid[ attacker->id ]) {
+  if (! get_aip()->avoid[ attacker->id ]) {
     if (is_player() && game->robot_mode) {
       CON("Robot: Add new avoid %s", attacker->to_string().c_str());
     } else {
       dbg("Add new avoid %s", attacker->to_string().c_str());
     }
-    monst_aip->avoid[ attacker->id ] += 2;
+    get_aip()->avoid[ attacker->id ] += 2;
   } else {
     dbg("Increment old avoid %s", attacker->to_string().c_str());
-    monst_aip->avoid[ attacker->id ] += 2;
+    get_aip()->avoid[ attacker->id ] += 2;
 
-    if (monst_aip->avoid[ attacker->id ] > THING_MAX_AVOID_COUNT) {
-      monst_aip->avoid[ attacker->id ] = THING_MAX_AVOID_COUNT;
+    if (get_aip()->avoid[ attacker->id ] > THING_MAX_AVOID_COUNT) {
+      get_aip()->avoid[ attacker->id ] = THING_MAX_AVOID_COUNT;
     }
   }
 }

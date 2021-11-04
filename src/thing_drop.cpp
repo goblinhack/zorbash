@@ -96,7 +96,7 @@ bool Thing::drop(Thingp what, Thingp target, bool stolen)
     what->move_to_immediately(mid_at);
   }
 
-  monst_infop->carrying.remove(what->id);
+  get_itemp()->carrying.remove(what->id);
 
   if (! stolen) {
     //
@@ -179,7 +179,7 @@ bool Thing::drop_into_ether(Thingp what)
   }
 
   what->remove_owner();
-  monst_infop->carrying.remove(what->id);
+  get_itemp()->carrying.remove(what->id);
   game->request_remake_rightbar = true;
 
   dbg("Dropped %s into the ether", what->to_string().c_str());
@@ -257,12 +257,12 @@ bool Thing::drop(Thingp what)
 void Thing::drop_all(void)
 {
   TRACE_AND_INDENT();
-  if (! monst_infop) {
+  if (! get_itemp()) {
     return;
   }
 
-  while (! monst_infop->carrying.empty()) {
-    auto id = *monst_infop->carrying.begin();
+  while (! get_itemp()->carrying.empty()) {
+    auto id = *get_itemp()->carrying.begin();
     auto t  = level->thing_find(id);
     if (! t) {
       return;

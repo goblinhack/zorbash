@@ -323,11 +323,16 @@ static bool wid_rightbar_create(void)
   }
   y_at += 3;
 
+  auto itemp = player->get_itemp();
+  if (! itemp) {
+    ERR("No itemp for player");
+    return false;
+  }
+
   //
   // Inventory items
   //
   {
-    auto                monst_infop = player->monst_infop;
     std::vector< Widp > wid_inventory_items;
 
     uint8_t item = 0;
@@ -363,8 +368,8 @@ static bool wid_rightbar_create(void)
       wid_set_pos(w, tl, br);
       wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
 
-      if (item < monst_infop->inventory_shortcuts.size()) {
-        auto thing_id = get(monst_infop->inventory_shortcuts, item);
+      if (item < itemp->inventory_shortcuts.size()) {
+        auto thing_id = get(itemp->inventory_shortcuts, item);
         if (! thing_id) {
           item++;
           continue;
@@ -406,7 +411,7 @@ static bool wid_rightbar_create(void)
         auto weapon = player->get_equip(MONST_EQUIP_WEAPON);
         if (weapon) {
           auto equip_id = weapon->id;
-          auto thing_id = get(player->monst_infop->inventory_shortcuts, i);
+          auto thing_id = get(itemp->inventory_shortcuts, i);
           if (thing_id == equip_id) {
             static Tilep tile;
             if (! tile) {
@@ -460,7 +465,6 @@ static bool wid_rightbar_create(void)
   //
   y_at += 8;
   {
-    auto                monst_infop = player->monst_infop;
     std::vector< Widp > wid_skillbox_items;
 
     uint8_t item = 0;
@@ -483,8 +487,8 @@ static bool wid_rightbar_create(void)
       wid_set_pos(w, tl, br);
       wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
 
-      if (item < monst_infop->skillbox_id.size()) {
-        auto tp_id = get(monst_infop->skillbox_id, item);
+      if (item < itemp->skillbox_id.size()) {
+        auto tp_id = get(itemp->skillbox_id, item);
         if (! tp_id) {
           item++;
           continue;
@@ -493,7 +497,7 @@ static bool wid_rightbar_create(void)
         auto tpp       = tp_find(tp_id);
         bool activated = false;
 
-        for (auto id : monst_infop->skills) {
+        for (auto id : itemp->skills) {
           auto t = level->thing_find(id);
           if (t) {
             if (t->tp() == tpp) {
@@ -553,7 +557,6 @@ static bool wid_rightbar_create(void)
   //
   y_at += 8;
   {
-    auto                monst_infop = player->monst_infop;
     std::vector< Widp > wid_buffbox_items;
 
     uint8_t item = 0;
@@ -576,8 +579,8 @@ static bool wid_rightbar_create(void)
       wid_set_pos(w, tl, br);
       wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
 
-      if (item < monst_infop->buffbox_id.size()) {
-        auto tp_id = get(monst_infop->buffbox_id, item);
+      if (item < itemp->buffbox_id.size()) {
+        auto tp_id = get(itemp->buffbox_id, item);
         if (! tp_id) {
           item++;
           continue;
@@ -586,7 +589,7 @@ static bool wid_rightbar_create(void)
         auto tpp       = tp_find(tp_id);
         bool activated = false;
 
-        for (auto id : monst_infop->buffs) {
+        for (auto id : itemp->buffs) {
           auto t = level->thing_find(id);
           if (t) {
             if (t->tp() == tpp) {
@@ -629,7 +632,6 @@ static bool wid_rightbar_create(void)
   //
   y_at += 5;
   {
-    auto                monst_infop = player->monst_infop;
     std::vector< Widp > wid_debuffbox_items;
 
     uint8_t item = 0;
@@ -652,8 +654,8 @@ static bool wid_rightbar_create(void)
       wid_set_pos(w, tl, br);
       wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
 
-      if (item < monst_infop->debuffbox_id.size()) {
-        auto tp_id = get(monst_infop->debuffbox_id, item);
+      if (item < itemp->debuffbox_id.size()) {
+        auto tp_id = get(itemp->debuffbox_id, item);
         if (! tp_id) {
           item++;
           continue;
@@ -662,7 +664,7 @@ static bool wid_rightbar_create(void)
         auto tpp       = tp_find(tp_id);
         bool activated = false;
 
-        for (auto id : monst_infop->debuffs) {
+        for (auto id : itemp->debuffs) {
           auto t = level->thing_find(id);
           if (t) {
             if (t->tp() == tpp) {

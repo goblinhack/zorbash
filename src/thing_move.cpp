@@ -93,14 +93,14 @@ void Thing::move_finish(void)
   dbg("Move finish call on move");
   on_move();
 
-  if (monst_aip) {
+  if (get_aip()) {
     std::string s = "";
-    for (auto p1 : monst_aip->move_path) {
+    for (auto p1 : get_aip()->move_path) {
       s += p1.to_string() + " ";
     }
     log("End of move, moves left: %s", s.c_str());
 
-    if (! monst_aip->move_path.size() && (monst_infop->monst_state == MONST_STATE_MOVING)) {
+    if (! get_aip()->move_path.size() && (get_infop()->monst_state == MONST_STATE_MOVING)) {
       ai_change_state(MONST_STATE_IDLE, "move finished");
     }
   }
@@ -778,7 +778,7 @@ bool Thing::move_to_or_escape_check_only(const point &nh)
 
 void Thing::clear_move_path(const std::string &why)
 {
-  if (! monst_aip) {
+  if (! get_aip()) {
     //
     // Fire can hit this path
     //
@@ -796,5 +796,5 @@ void Thing::clear_move_path(const std::string &why)
     }
   }
 
-  monst_aip->move_path.clear();
+  get_aip()->move_path.clear();
 }

@@ -22,11 +22,12 @@ bool Thing::path_pop_next_move(void)
 {
   bool too_far = false;
 
-  if (! monst_aip) {
+  auto aip = get_aip();
+  if (! aip) {
     return false;
   }
 
-  if (! monst_aip->move_path.size()) {
+  if (! aip->move_path.size()) {
     return false;
   }
 
@@ -34,12 +35,12 @@ bool Thing::path_pop_next_move(void)
   std::string s = "";
   IF_DEBUG3
   {
-    for (auto p : monst_aip->move_path) {
+    for (auto p : aip->move_path) {
       s += p.to_string() + " ";
       (void) level->thing_new("ai_path1", point(p.x, p.y));
     }
   }
-  auto to         = monst_aip->move_path[ 0 ];
+  auto to         = aip->move_path[ 0 ];
   auto future_pos = point(to.x, to.y);
   dbg("Path pop next move %s, path: %s", future_pos.to_string().c_str(), s.c_str());
 
@@ -64,12 +65,12 @@ bool Thing::path_pop_next_move(void)
   //
   // Remove the first element
   //
-  monst_aip->move_path.erase(monst_aip->move_path.begin());
+  aip->move_path.erase(aip->move_path.begin());
 
   //
   // Jump over obstacles if they appear in the path
   //
-  if ((mid_at != monst_infop->last_failed_jump_at) && ai_is_able_to_jump() &&
+  if ((mid_at != get_infop()->last_failed_jump_at) && ai_is_able_to_jump() &&
       (is_monst() || (is_player() && game->robot_mode))) {
     if (is_disliked_by_me(future_pos) || level->is_barrel(future_pos) || level->is_brazier(future_pos)) {
       IF_DEBUG3
@@ -79,23 +80,23 @@ bool Thing::path_pop_next_move(void)
       }
 
       TRACE_AND_INDENT();
-      if (monst_aip->move_path.size()) {
-        auto jump_pos = monst_aip->move_path[ 0 ];
-        monst_aip->move_path.erase(monst_aip->move_path.begin());
+      if (aip->move_path.size()) {
+        auto jump_pos = aip->move_path[ 0 ];
+        aip->move_path.erase(aip->move_path.begin());
 
         //
         // If the thing we are going to land on is also a hazard, can we jump further?
         //
         TRACE_AND_INDENT();
-        if (is_disliked_by_me(jump_pos) && monst_aip->move_path.size()) {
+        if (is_disliked_by_me(jump_pos) && aip->move_path.size()) {
           IF_DEBUG3
           {
             auto s = string_sprintf("Next-next position %d,%d is also a hazard", (int) jump_pos.x, (int) jump_pos.y);
             AI_LOG("", s);
           }
 
-          auto jump_pos = monst_aip->move_path[ 0 ];
-          monst_aip->move_path.erase(monst_aip->move_path.begin());
+          auto jump_pos = aip->move_path[ 0 ];
+          aip->move_path.erase(aip->move_path.begin());
 
           if (is_disliked_by_me(jump_pos)) {
             //
@@ -103,7 +104,7 @@ bool Thing::path_pop_next_move(void)
             //
             AI_LOG("Failed to jump cannot jump over hazards");
             clear_move_path("Failed to jump cannot jump over all hazards");
-            monst_infop->last_failed_jump_at = mid_at;
+            get_infop()->last_failed_jump_at = mid_at;
             return false;
           } else if (try_to_jump_carefully(jump_pos)) {
             AI_LOG("Long jump");
@@ -118,7 +119,7 @@ bool Thing::path_pop_next_move(void)
             //
             AI_LOG("Failed to try a long jump");
             clear_move_path("Failed to try a long jump");
-            monst_infop->last_failed_jump_at = mid_at;
+            get_infop()->last_failed_jump_at = mid_at;
             return false;
           }
         } else if (try_to_jump_carefully(jump_pos, &too_far)) {
@@ -131,7 +132,7 @@ bool Thing::path_pop_next_move(void)
         } else {
           AI_LOG("Failed to jump carefully");
           clear_move_path("Failed to jump carefully");
-          monst_infop->last_failed_jump_at = mid_at;
+          get_infop()->last_failed_jump_at = mid_at;
 
           if (too_far) {
             if (any_unfriendly_monst_visible()) {
@@ -327,8 +328,8 @@ bool Thing::cursor_path_pop_first_move(void)
     //
     // A path to the target exists.
     //
-    new_monst_ai();
-    monst_aip->move_path = game->cursor_move_path;
+    new_aip();
+    get_aip()->move_path = game->cursor_move_path;
     game->cursor_move_path.clear();
 
     if (path_pop_next_move()) {

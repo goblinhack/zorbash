@@ -69,7 +69,7 @@ bool Thing::ascend_dungeon(void)
     return false;
   }
 
-  if (! monst_infop) {
+  if (! get_infop()) {
     return false;
   }
 

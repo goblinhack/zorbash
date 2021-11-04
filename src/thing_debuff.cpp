@@ -20,7 +20,7 @@ bool Thing::debuff_add(Thingp what)
   TRACE_AND_INDENT();
   dbg("Try to add debuff %s", what->to_string().c_str());
   TRACE_AND_INDENT();
-  if (! monst_infop) {
+  if (! get_infop()) {
     dbg("No; not a monst");
     return false;
   }
@@ -34,7 +34,7 @@ bool Thing::debuff_add(Thingp what)
     existing_owner->drop(what);
   }
 
-  for (const auto &item : monst_infop->debuffs) {
+  for (const auto &item : get_itemp()->debuffs) {
     if (item == what->id) {
       dbg("No; already carried");
       return false;
@@ -48,7 +48,7 @@ bool Thing::debuff_add(Thingp what)
     }
   }
 
-  monst_infop->debuffs.push_front(what->id);
+  get_itemp()->debuffs.push_front(what->id);
   what->set_owner(this);
   what->hide();
 
@@ -80,7 +80,7 @@ bool Thing::debuff_remove(Thingp what)
   }
 
   what->remove_owner();
-  monst_infop->debuffs.remove(what->id);
+  get_itemp()->debuffs.remove(what->id);
   game->request_remake_debuffbox = true;
 
   dbg("Removed %s", what->to_string().c_str());
@@ -90,12 +90,12 @@ bool Thing::debuff_remove(Thingp what)
 void Thing::debuff_remove_all(void)
 {
   TRACE_AND_INDENT();
-  if (! monst_infop) {
+  if (! get_itemp()) {
     return;
   }
 
-  while (! monst_infop->debuffs.empty()) {
-    auto id = *monst_infop->debuffs.begin();
+  while (! get_itemp()->debuffs.empty()) {
+    auto id = *get_itemp()->debuffs.begin();
     auto t  = level->thing_find(id);
     if (! t) {
       return;
@@ -114,10 +114,10 @@ bool Thing::debuff_use(Thingp what)
 
 bool Thing::debuff_add(Tpp what)
 {
-  if (! monst_infop) {
+  if (! get_itemp()) {
     return false;
   }
-  for (const auto &item : monst_infop->debuffs) {
+  for (const auto &item : get_itemp()->debuffs) {
     auto t = level->thing_find(item.id);
     if (t && (t->tp() == what)) {
       return true;
@@ -139,10 +139,10 @@ bool Thing::debuff_add(Tpp what)
 
 void Thing::debuff_tick(void)
 {
-  if (! monst_infop) {
+  if (! get_itemp()) {
     return;
   }
-  if (monst_infop->debuffs.empty()) {
+  if (get_itemp()->debuffs.empty()) {
     return;
   }
 
@@ -150,7 +150,7 @@ void Thing::debuff_tick(void)
   dbg("Debuff tick");
   TRACE_AND_INDENT();
 
-  for (const auto &item : monst_infop->debuffs) {
+  for (const auto &item : get_itemp()->debuffs) {
     auto t = level->thing_find(item.id);
     if (t) {
       dbg("Debuff (%s)", t->to_string().c_str());

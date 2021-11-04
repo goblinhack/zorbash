@@ -15,11 +15,11 @@
 bool Thing::is_carrying_treasure(void)
 {
   TRACE_AND_INDENT();
-  if (! monst_infop) {
+  if (! get_infop()) {
     return false;
   }
 
-  if (! get_item_vector().empty()) {
+  if (! get_itemp_vector().empty()) {
     return true;
   }
 

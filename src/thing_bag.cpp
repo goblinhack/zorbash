@@ -65,13 +65,13 @@ bool Thing::bag_add(Thingp item)
   //
   // Food might not have a monst pointer
   //
-  item->new_monst_info();
+  item->new_itemp();
 
-  if (item->monst_infop->preferred_bag_position != point(-1, -1)) {
+  if (item->get_itemp()->preferred_bag_position != point(-1, -1)) {
     if (! log_quiet) {
       dbg3("Bag: Add %s at preferred position", item->to_string().c_str());
     }
-    auto at = item->monst_infop->preferred_bag_position;
+    auto at = item->get_itemp()->preferred_bag_position;
     if (bag_can_place_at(item, at)) {
       if (bag_place_at(item, at)) {
         while (bag_compress()) {
@@ -159,13 +159,13 @@ bool Thing::bag_add_test(Thingp item)
   //
   // Food might not have a monst pointer
   //
-  item->new_monst_info();
+  item->new_itemp();
 
-  if (item->monst_infop->preferred_bag_position != point(-1, -1)) {
+  if (item->get_itemp()->preferred_bag_position != point(-1, -1)) {
     if (! log_quiet) {
       dbg3("Bag: Add test %s at preferred position", item->to_string().c_str());
     }
-    auto at = item->monst_infop->preferred_bag_position;
+    auto at = item->get_itemp()->preferred_bag_position;
     if (bag_can_place_at(item, at)) {
       return true;
     }
@@ -238,15 +238,15 @@ bool Thing::bag_compress(void)
         continue;
       }
 
-      if (bag_remove_at(t, t->monst_infop->bag_position)) {
-        if (bag_can_place_at(t, t->monst_infop->bag_position + point(0, 1))) {
-          if (bag_place_at(t, t->monst_infop->bag_position + point(0, 1))) {
+      if (bag_remove_at(t, t->get_itemp()->bag_position)) {
+        if (bag_can_place_at(t, t->get_itemp()->bag_position + point(0, 1))) {
+          if (bag_place_at(t, t->get_itemp()->bag_position + point(0, 1))) {
             did_something = true;
           } else {
-            bag_place_at(t, t->monst_infop->bag_position);
+            bag_place_at(t, t->get_itemp()->bag_position);
           }
         } else {
-          bag_place_at(t, t->monst_infop->bag_position);
+          bag_place_at(t, t->get_itemp()->bag_position);
         }
       }
     }
@@ -281,6 +281,21 @@ bool Thing::bag_remove_at(Thingp item, point pos)
   auto h      = item->item_height();
   bool logged = false;
   bool ret    = false;
+  auto bw     = capacity_width();
+  auto bh     = capacity_height();
+
+  if (pos.x < 0) {
+    return false;
+  }
+  if (pos.y < 0) {
+    return false;
+  }
+  if (pos.y >= bh) {
+    return false;
+  }
+  if (pos.x >= bw) {
+    return false;
+  }
 
   for (auto x = pos.x; x < pos.x + w; x++) {
     for (auto y = pos.y; y < pos.y + h; y++) {
@@ -450,8 +465,8 @@ bool Thing::bag_place_at(Thingp item, point pos)
       set(bag, x, y, item->id);
     }
   }
-  item->monst_infop->bag_position      = pos;
-  item->monst_infop->last_bag_position = pos;
+  item->get_itemp()->bag_position      = pos;
+  item->get_itemp()->last_bag_position = pos;
 
   if (0) {
     LOG("Bag contents after add:");
@@ -552,7 +567,7 @@ bool Thing::bag_remove(Thingp item)
   }
 
   if (found) {
-    item->monst_infop->bag_position = point(-1, -1);
+    item->get_itemp()->bag_position = point(-1, -1);
   }
 
   return found;

@@ -119,7 +119,7 @@ void Thing::defeat(Thingp defeater, const char *reason)
     }
   }
 
-  if (monst_infop) {
+  if (get_infop()) {
     //
     // So that slimes don't keep moving when dead
     //

@@ -36,13 +36,13 @@ void Thing::destroy(void)
     if (immediate_owner) {
       auto top_owner = get_top_owner();
       if (top_owner) {
-        dbg2("Is being destroyed with owner: %s", top_owner->to_string().c_str());
+        dbg2("Is being destroyed, has top owner: %s", top_owner->to_string().c_str());
       }
       if (top_owner != immediate_owner) {
-        dbg2("Is being destroyed with owner: %s", immediate_owner->to_string().c_str());
+        dbg2("Is being destroyed, has immediate owner: %s", immediate_owner->to_string().c_str());
       }
     } else {
-      dbg2("Is being destroyed with no owner");
+      dbg2("Is being destroyed, has no owner");
     }
   }
 
@@ -143,8 +143,8 @@ void Thing::destroy(void)
 
   game->world.free_thing_id(this);
 
-  if (monst_infop) {
-    oldptr(monst_infop);
-    delete monst_infop;
+  if (get_infop()) {
+    oldptr(get_infop());
+    delete infop;
   }
 }

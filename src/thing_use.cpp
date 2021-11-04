@@ -146,7 +146,7 @@ void Thing::used(Thingp what, Thingp target, bool remove_after_use)
 
     what->hooks_remove();
     what->remove_owner();
-    monst_infop->carrying.remove(what->id);
+    get_itemp()->carrying.remove(what->id);
 
     what->dead("by being used");
   }

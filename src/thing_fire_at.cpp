@@ -103,7 +103,7 @@ Thingp Thing::get_best_fire_at_target(void)
  */
 static void thing_possible_hit_add(Thingp me, Thingp target)
 {
-  if (! get(me->monst_aip->can_see_currently.can_see, (int) target->mid_at.x, (int) target->mid_at.y)) {
+  if (! get(me->get_aip()->can_see_currently.can_see, (int) target->mid_at.x, (int) target->mid_at.y)) {
     return;
   }
 

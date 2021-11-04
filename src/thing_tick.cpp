@@ -73,8 +73,8 @@ void Thing::achieve_goals_in_life(void)
   //
   // Allow the same thing to hit us again
   //
-  if (monst_aip) {
-    monst_aip->recently_hit_by.clear();
+  if (get_aip()) {
+    get_aip()->recently_hit_by.clear();
   }
 
   update_light_strength();
@@ -208,12 +208,12 @@ void Thing::achieve_goals_in_life(void)
     }
   }
 
-  if (monst_aip && monst_aip->move_path.empty()) {
+  if (aip && get_aip()->move_path.empty()) {
     if (is_player()) {
       //
       // If resting, keep resting
       //
-      if (monst_infop->monst_state == MONST_STATE_MOVING) {
+      if (get_infop()->monst_state == MONST_STATE_MOVING) {
         ai_change_state(MONST_STATE_IDLE, "move path is empty");
       }
     }

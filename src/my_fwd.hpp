@@ -24,8 +24,8 @@ class WidBag;
 struct AgeMap_;
 struct Dmap_;
 struct FovMap_;
-struct MonstInfo_;
-struct MonstAi_;
+struct ThingInfo_;
+struct ThingAi_;
 struct SDL_Surface;
 struct ascii_;
 
@@ -34,8 +34,9 @@ using Fontp        = class Font *;
 using LevelStaticp = class LevelStatic *;
 using Levelp       = class Level *;
 using Lightp       = class Light *;
-using MonstInfop   = struct MonstInfo_ *;
-using MonstAip     = struct MonstAi_ *;
+using ThingInfop   = struct ThingInfo_ *;
+using ThingItemp   = struct ThingItem_ *;
+using ThingAip     = struct ThingAi_ *;
 
 using Roomp  = class Room *;
 using Texp   = class Tex *;

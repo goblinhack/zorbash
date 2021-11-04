@@ -362,7 +362,7 @@ bool Thing::attack(Thingp it)
   dbg("Attack %s", it->to_string().c_str());
   TRACE_AND_INDENT();
   //
-  // Carry to eat later. Monsts attack their food.
+  // Carry to eat later. Things attack their food.
   //
   auto owner = get_top_owner();
   if (owner) {

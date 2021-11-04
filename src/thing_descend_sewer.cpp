@@ -48,7 +48,7 @@ bool Thing::descend_sewer_tick(void)
     //
     // Not sure if monsts should do this as they crawl out of sewers
     //
-    dbg("MonstInfo cannot descend sewer");
+    dbg("ThingInfo cannot descend sewer");
     return false;
   }
 
@@ -66,7 +66,7 @@ bool Thing::descend_sewer(void)
     return false;
   }
 
-  if (! monst_infop) {
+  if (! get_infop()) {
     return false;
   }
 

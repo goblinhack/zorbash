@@ -32,8 +32,8 @@ void Thing::level_change(Levelp l)
   level = l;
   level_enter();
 
-  if (monst_aip) {
-    monst_aip->move_path = {};
+  if (get_aip()) {
+    get_aip()->move_path = {};
     clear_age_map();
     clear_seen_map();
     clear_interrupt_map();
@@ -87,8 +87,8 @@ void Thing::level_change(Levelp l)
   }
 }
 
-if (monst_infop) {
-  for (const auto it : get_item_vector()) {
+if (get_infop()) {
+  for (const auto it : get_itemp_vector()) {
     it->level_change(l);
   }
 }

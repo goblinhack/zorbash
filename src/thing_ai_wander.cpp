@@ -184,10 +184,15 @@ bool Thing::ai_create_path(point &nh, const point start, const point end)
 bool Thing::ai_choose_wander(point &nh)
 {
   TRACE_AND_INDENT();
+
+  if (! get_aip()) {
+    err("No monst aip");
+  }
+
   //
   // Reached the target? Choose a new one.
   //
-  auto target = monst_infop->wander_target;
+  auto target = get_aip()->wander_target;
   if ((mid_at.x == target.x) && (mid_at.y == target.y)) {
     dbg("Reached target");
     target = point(-1, -1);
@@ -205,7 +210,7 @@ bool Thing::ai_choose_wander(point &nh)
   //
   // Choose a new wander location
   //
-  monst_infop->wander_target = point(-1, -1);
+  get_aip()->wander_target = point(-1, -1);
 
   target = get_random_scent_target();
 
@@ -233,7 +238,7 @@ bool Thing::ai_choose_wander(point &nh)
     return false;
   }
 
-  monst_infop->wander_target = target;
+  get_aip()->wander_target = target;
 #ifdef ENABLE_DEBUG_AI_WANDER
   thing_new("ai_path2", fpoint(target.x, target.y));
 #endif
@@ -289,7 +294,7 @@ bool Thing::ai_wander(void)
       //
       // Set this so next time we will choose another target
       //
-      monst_infop->wander_target = point(-1, -1);
+      get_aip()->wander_target = point(-1, -1);
     }
   }
 

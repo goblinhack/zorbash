@@ -121,8 +121,8 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     return false;
   }
 
-  if (! real_hitter->monst_infop) {
-    real_hitter->err("Has no monst_infop");
+  if (! real_hitter->get_infop()) {
+    real_hitter->err("Has no infop");
     return false;
   }
 
@@ -203,7 +203,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
   //
   if (is_player()) {
     if (game->robot_mode) {
-      if (monst_infop->monst_state == MONST_STATE_MOVING) {
+      if (get_infop()->monst_state == MONST_STATE_MOVING) {
         clear_move_path("robot was hit while moving");
       } else {
         //
@@ -297,7 +297,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     }
   }
 
-  for (auto oid : real_hitter->monst_infop->skills) {
+  for (auto oid : real_hitter->get_itemp()->skills) {
     auto skill = level->thing_find(oid);
     if (skill && skill->is_activated) {
       //
@@ -444,11 +444,11 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     msg(string_sprintf("%%fg=red$-%d", damage));
   } else if (is_monst()) {
     //
-    // MonstInfo being hit
+    // ThingInfo being hit
     //
     if (hitter->is_player() || real_hitter->is_player()) {
       //
-      // MonstInfo being hit by player
+      // ThingInfo being hit by player
       //
       msg(string_sprintf("%%fg=white$-%d", damage));
     }
@@ -530,8 +530,8 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
   //
   // Keep track of who hit me to avoid multiple hits per tick
   //
-  if (monst_aip) {
-    monst_aip->recently_hit_by[ real_hitter->id ] = true;
+  if (get_aip()) {
+    get_aip()->recently_hit_by[ real_hitter->id ] = true;
   }
 
   return true;
@@ -582,8 +582,8 @@ int Thing::is_hit_by(Thingp hitter, bool crit, bool bite, int poison, int damage
   // If we are pushed into lava and then catch fire, the spawn of fire causes another location check.
   // Avoid the lava hitting twice.
   //
-  if (monst_aip) {
-    if (monst_aip->recently_hit_by.find(real_hitter->id) != monst_aip->recently_hit_by.end()) {
+  if (get_aip()) {
+    if (get_aip()->recently_hit_by.find(real_hitter->id) != get_aip()->recently_hit_by.end()) {
       IF_DEBUG2 { hitter->log("No, I've already hit %s", to_string().c_str()); }
       return false;
     }

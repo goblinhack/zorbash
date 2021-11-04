@@ -60,7 +60,7 @@ bool Thing::ai_escape(void)
       //
       // Set this so next time we will choose another target
       //
-      monst_infop->wander_target = point(-1, -1);
+      get_aip()->wander_target = point(-1, -1);
     }
   }
   TRACE_AND_INDENT();

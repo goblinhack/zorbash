@@ -52,25 +52,35 @@ typedef class Thing_
 public:
   Thing_(void);
   ~Thing_(void);
-  MonstInfop monst_infop {};
-  MonstAip   monst_aip {};
-  Levelp     level {};
-  int16_t    tp_id {-1}; // Common settings
-  uint16_t   frame_count {};
+
+  ThingInfop infop {};
+  ThingItemp itemp {};
+  ThingAip   aip {};
+
+  Levelp level {};
+
   ThingId    id {}; // Unique per thing.
   ThingTiles tiles {};
-  fpoint     interpolated_mid_at;
-  point      last_mid_at; // Previous hop where we were.
-  point      mid_at;      // Grid coordinates.
-  point      last_attached;
-  point      last_blit_br; // Last blit coords
-  point      last_blit_tl; // Offset from top left of map
-  point      last_blit_at; // Center of the above
-  ts_t       ts_next_frame {};
-  uint16_t   tile_curr {};
-  uint8_t    alpha {255}; // For fading
-  uint8_t    z_depth {};
-  uint64_t   dir : 4 {}; // Direction
+
+  fpoint interpolated_mid_at;
+
+  ts_t ts_next_frame {};
+
+  point last_mid_at; // Previous hop where we were.
+  point mid_at;      // Grid coordinates.
+  point last_attached;
+  point last_blit_br; // Last blit coords
+  point last_blit_tl; // Offset from top left of map
+  point last_blit_at; // Center of the above
+
+  uint16_t tile_curr {};
+  uint16_t frame_count {};
+  int16_t  tp_id {-1}; // Common settings
+
+  uint8_t alpha {255}; // For fading
+  uint8_t z_depth {};
+
+  uint64_t dir : 4 {}; // Direction
 
   /////////////////////////////////////////////////////////////////////////
   // Keep these sorted alphabetically to make it easier to see additions
@@ -196,13 +206,13 @@ public:
   //
   // Walk all items and bags to get the items
   //
-  std::list< Thingp > get_item_list(void);
+  std::list< Thingp > get_itemp_list(void);
   std::list< Thingp > get_treasure_list(void);
   std::list< Thingp > get_wand_list(void);
   std::list< Thingp > get_food_list(void);
   std::list< Thingp > get_weapon_list(void);
 
-  std::vector< Thingp > get_item_vector(void);
+  std::vector< Thingp > get_itemp_vector(void);
   std::vector< Thingp > get_treasure_vector(void);
   std::vector< Thingp > get_wand_vector(void);
   std::vector< Thingp > get_food_vector(void);
@@ -695,7 +705,7 @@ public:
   int get_idle_tick(void);
   int get_initial_charge_count(void);
   int get_initial_light_strength(void);
-  int get_item_value(const Thingp it);
+  int get_itemp_value(const Thingp it);
   int get_keys(void);
   int get_lifespan(void);
   int get_lifespan_initial(void);
@@ -1356,8 +1366,9 @@ public:
   void msg(const std::string &);
   void new_light(point offset, int strength);
   void new_light(point offset, int strength, color col, int fbo);
-  void new_monst_info(void);
-  void new_monst_ai(void);
+  void new_infop(void);
+  void new_itemp(void);
+  void new_aip(void);
   void on_you_bite_attack(void);
   void on_born(void);
   void on_enchant(void);
@@ -1436,6 +1447,15 @@ public:
   const std::array< std::array< ThingId, MAX_BAG_WIDTH >, MAX_BAG_HEIGHT > *get_const_bag(void);
   std::array< std::array< ThingId, MAX_BAG_WIDTH >, MAX_BAG_HEIGHT >       *get_bag(void);
   static std::function< int(Thingp) >                                       matches_to_func(const std::string &what);
+
+  ThingInfop get_or_alloc_infop(void);
+  ThingItemp get_or_alloc_itemp(void);
+  ThingAip   get_or_alloc_aip(void);
+
+  ThingInfop get_infop(void) { return infop; }
+  ThingItemp get_itemp(void) { return itemp; }
+  ThingAip   get_aip(void) { return aip; }
+
 } Thing;
 
 std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my);

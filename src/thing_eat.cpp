@@ -138,7 +138,7 @@ bool Thing::eat_something(void)
   //
   // Try for food first, ignoring potions
   //
-  for (const auto t : get_item_vector()) {
+  for (const auto t : get_itemp_vector()) {
     if (! can_eat(t)) {
       continue;
     }
@@ -162,7 +162,7 @@ bool Thing::eat_something(void)
   //
   // Try again but include potions
   //
-  for (const auto &item : monst_infop->carrying) {
+  for (const auto &item : get_itemp()->carrying) {
     auto t = level->thing_find(item.id);
     if (! t) {
       continue;
@@ -183,7 +183,7 @@ bool Thing::can_eat_something(void)
   //
   // Try for food first, ignoring potions
   //
-  for (const auto t : get_item_vector()) {
+  for (const auto t : get_itemp_vector()) {
     if (! can_eat(t)) {
       continue;
     }
@@ -196,7 +196,7 @@ bool Thing::can_eat_something(void)
   //
   // Try again but include potions
   //
-  for (const auto t : get_item_vector()) {
+  for (const auto t : get_itemp_vector()) {
     if (t->is_health_booster()) {
       return true;
     }

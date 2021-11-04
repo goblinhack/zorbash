@@ -33,7 +33,7 @@ extern uint32_t csum(char *mem, uint32_t len);
     out << bits(magic);                                                                                              \
   }
 
-std::ostream &operator<<(std::ostream &out, Bits< MonstInfop & > const my)
+std::ostream &operator<<(std::ostream &out, Bits< ThingInfop & > const my)
 {
   TRACE_AND_INDENT();
   /////////////////////////////////////////////////////////////////////////
@@ -48,9 +48,6 @@ std::ostream &operator<<(std::ostream &out, Bits< MonstInfop & > const my)
   /* ThingId      owner_id                  */ out << bits(my.t->owner_id);
   /* ThingId      minion_owner_id           */ out << bits(my.t->minion_owner_id);
   /* ThingId      spawner_owner_id          */ out << bits(my.t->spawner_owner_id);
-  /* ThingId      equip_id                 */ out << bits(my.t->equip_id);
-  /* ThingId      equip_id_carry_anim      */ out << bits(my.t->equip_id_carry_anim);
-  /* ThingId      equip_id_use_anim        */ out << bits(my.t->equip_id_use_anim);
   /* color        light_col                 */ out << bits(my.t->light_col);
   /* float        bounce_fade               */ out << bits(my.t->bounce_fade);
   /* float        bounce_height             */ out << bits(my.t->bounce_height);
@@ -100,22 +97,8 @@ std::ostream &operator<<(std::ostream &out, Bits< MonstInfop & > const my)
   /* int          submerged_offset          */ out << bits(my.t->submerged_offset);
   /* int          throw_distance            */ out << bits(my.t->throw_distance);
   /* int          tick_resurrect_when       */ out << bits(my.t->tick_resurrect_when);
-  /* point        bag_position              */ out << bits(my.t->bag_position);
-  /* point        last_bag_position         */ out << bits(my.t->last_bag_position);
-  /* point        wander_target             */ out << bits(my.t->wander_target);
-  /* point     where_i_dropped_an_item_last */ out << bits(my.t->where_i_dropped_an_item_last);
-  /* point   where_i_failed_to_collect_last */ out << bits(my.t->where_i_failed_to_collect_last);
-  /* std::array<std::array<ThingId > >      */ out << bits(my.t->bag);
-  /* std::list<ThingId>   carrying          */ out << bits(my.t->carrying);
-  /* std::list<ThingId>   skills            */ out << bits(my.t->skills);
-  /* std::list<ThingId>   buffs             */ out << bits(my.t->buffs);
-  /* std::list<ThingId>   debuffs           */ out << bits(my.t->debuffs);
   /* std::string          msg               */ out << bits(my.t->msg);
   /* std::string          dead_reason       */ out << bits(my.t->dead_reason);
-  /* std::vector<ThingId> inventory_shortcuts      */ out << bits(my.t->inventory_shortcuts);
-  /* std::vector<uint16_t> skillbox_id      */ out << bits(my.t->skillbox_id);
-  /* std::vector<uint16_t> buffbox_id       */ out << bits(my.t->buffbox_id);
-  /* std::vector<uint16_t> debuffbox_id     */ out << bits(my.t->debuffbox_id);
   /* ts_t  ts_bounce_begin                  */ out << bits(my.t->ts_bounce_begin);
   /* ts_t  ts_bounce_end                    */ out << bits(my.t->ts_bounce_end);
   /* ts_t  ts_fadeup_begin                  */ out << bits(my.t->ts_fadeup_begin);
@@ -143,7 +126,46 @@ std::ostream &operator<<(std::ostream &out, Bits< MonstInfop & > const my)
   return (out);
 }
 
-std::ostream &operator<<(std::ostream &out, Bits< MonstAip & > const my)
+std::ostream &operator<<(std::ostream &out, Bits< ThingItemp & > const my)
+{
+  TRACE_AND_INDENT();
+  /////////////////////////////////////////////////////////////////////////
+  // Keep these sorted alphabetically to make it easier to see additions
+  // and always update game_load.cpp and game_save.cpp
+  //
+  // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+  // v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v
+  /////////////////////////////////////////////////////////////////////////
+  // clang-format off
+  /* ThingId      equip_id                    */ out << bits(my.t->equip_id);
+  /* ThingId      equip_id_carry_anim         */ out << bits(my.t->equip_id_carry_anim);
+  /* ThingId      equip_id_use_anim           */ out << bits(my.t->equip_id_use_anim);
+  /* point        bag_position                */ out << bits(my.t->bag_position);
+  /* point        last_bag_position           */ out << bits(my.t->last_bag_position);
+  /* point     where_i_dropped_an_item_last   */ out << bits(my.t->where_i_dropped_an_item_last);
+  /* point   where_i_failed_to_collect_last   */ out << bits(my.t->where_i_failed_to_collect_last);
+  /* std::array<std::array<ThingId > >        */ out << bits(my.t->bag);
+  /* std::list<ThingId>   carrying            */ out << bits(my.t->carrying);
+  /* std::list<ThingId>   skills              */ out << bits(my.t->skills);
+  /* std::list<ThingId>   buffs               */ out << bits(my.t->buffs);
+  /* std::list<ThingId>   debuffs             */ out << bits(my.t->debuffs);
+  /* std::vector<ThingId> inventory_shortcuts */ out << bits(my.t->inventory_shortcuts);
+  /* std::vector<uint16_t> skillbox_id        */ out << bits(my.t->skillbox_id);
+  /* std::vector<uint16_t> buffbox_id         */ out << bits(my.t->buffbox_id);
+  /* std::vector<uint16_t> debuffbox_id       */ out << bits(my.t->debuffbox_id);
+  // clang-format on
+  /////////////////////////////////////////////////////////////////////////
+  // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
+  // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+  //
+  // Keep these sorted alphabetically to make it easier to see additions
+  // and always update game_load.cpp and game_save.cpp
+  /////////////////////////////////////////////////////////////////////////
+
+  return (out);
+}
+
+std::ostream &operator<<(std::ostream &out, Bits< ThingAip & > const my)
 {
   TRACE_AND_INDENT();
   out << bits(my.t->age_map.val);
@@ -156,6 +178,7 @@ std::ostream &operator<<(std::ostream &out, Bits< MonstAip & > const my)
   out << bits(my.t->goal_penalty);
   out << bits(my.t->avoid);
   out << bits(my.t->move_path);
+  out << bits(my.t->wander_target);
   return (out);
 }
 
@@ -168,16 +191,22 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   const std::string name(tp_id_map[ my.t->tp_id - 1 ]->name());
   out << bits(name);
 
-  bool monst_info_present = (my.t->monst_infop != nullptr);
+  bool monst_info_present = (my.t->get_infop() != nullptr);
   out << bits(monst_info_present);
   if (monst_info_present) {
-    out << bits(my.t->monst_infop);
+    out << bits(my.t->infop);
   }
 
-  bool monst_ai_present = (my.t->monst_aip != nullptr);
+  bool monst_item_present = (my.t->get_itemp() != nullptr);
+  out << bits(monst_item_present);
+  if (monst_item_present) {
+    out << bits(my.t->itemp);
+  }
+
+  bool monst_ai_present = (my.t->get_aip() != nullptr);
   out << bits(monst_ai_present);
   if (monst_ai_present) {
-    out << bits(my.t->monst_aip);
+    out << bits(my.t->aip);
   }
 
   out << bits(my.t->tp_id);
@@ -411,8 +440,8 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   IF_DEBUG4
   {
     auto diff = out.tellp() - start;
-    LOG("SAVE %d bytes %s TP %d ID %x last_mid_at %d,%d monst_infop %p", (int) diff, name.c_str(), my.t->tp_id,
-        my.t->id.id, my.t->last_mid_at.x, my.t->last_mid_at.y, my.t->monst_infop);
+    LOG("SAVE %d bytes %s TP %d ID %x last_mid_at %d,%d infop %p", (int) diff, name.c_str(), my.t->tp_id, my.t->id.id,
+        my.t->last_mid_at.x, my.t->last_mid_at.y, my.t->get_infop());
   }
   return (out);
 }

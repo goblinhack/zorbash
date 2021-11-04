@@ -16,11 +16,11 @@
 bool Thing::is_enemy(Thingp attacker)
 {
   TRACE_AND_INDENT();
-  if (unlikely(! monst_aip)) {
+  if (unlikely(! get_aip())) {
     return false;
   }
 
-  if (monst_aip->enemies.find(attacker->id) != monst_aip->enemies.end()) {
+  if (get_aip()->enemies.find(attacker->id) != get_aip()->enemies.end()) {
     return true;
   }
   return false;
@@ -32,14 +32,14 @@ bool Thing::is_enemy(Thingp attacker)
 void Thing::enemies_tick(void)
 {
   TRACE_AND_INDENT();
-  if (! monst_aip) {
+  if (! get_aip()) {
     return;
   }
 
-  for (auto &p : monst_aip->enemies) {
+  for (auto &p : get_aip()->enemies) {
     auto attacker = level->thing_find_optional(p.first);
     if (! attacker) {
-      monst_aip->enemies.erase(p.first);
+      get_aip()->enemies.erase(p.first);
       return;
     }
 
@@ -54,7 +54,7 @@ void Thing::enemies_tick(void)
       if (is_player() && game->robot_mode) {
         CON("Robot: enemy remove as is dead: %s", attacker->to_string().c_str());
       }
-      monst_aip->enemies.erase(p.first);
+      get_aip()->enemies.erase(p.first);
       return;
     }
 
@@ -65,7 +65,7 @@ void Thing::enemies_tick(void)
       if (is_player() && game->robot_mode) {
         CON("Robot: enemy remove as is far away: %s", attacker->to_string().c_str());
       }
-      monst_aip->enemies.erase(p.first);
+      get_aip()->enemies.erase(p.first);
       return;
     }
 
@@ -96,19 +96,19 @@ void Thing::add_enemy(Thingp attacker)
     return;
   }
 
-  if (! monst_aip->enemies[ attacker->id ]) {
+  if (! get_aip()->enemies[ attacker->id ]) {
     if (is_player() && game->robot_mode) {
       CON("Robot: enemy add %s", attacker->to_string().c_str());
     } else {
       dbg("Add new enemy %s", attacker->to_string().c_str());
     }
-    monst_aip->enemies[ attacker->id ] = ai_resent_count();
+    get_aip()->enemies[ attacker->id ] = ai_resent_count();
   } else {
     dbg("Increment old enemy %s", attacker->to_string().c_str());
-    monst_aip->enemies[ attacker->id ] *= 2;
+    get_aip()->enemies[ attacker->id ] *= 2;
 
-    if (monst_aip->enemies[ attacker->id ] > THING_MAX_ENEMY_COUNT) {
-      monst_aip->enemies[ attacker->id ] = THING_MAX_ENEMY_COUNT;
+    if (get_aip()->enemies[ attacker->id ] > THING_MAX_ENEMY_COUNT) {
+      get_aip()->enemies[ attacker->id ] = THING_MAX_ENEMY_COUNT;
     }
   }
 }

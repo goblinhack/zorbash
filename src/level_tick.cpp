@@ -501,7 +501,7 @@ bool Level::tick(void)
         if (player) {
           if (game->robot_mode) {
             player->ai_tick();
-          } else if (player->monst_aip->move_path.size()) {
+          } else if (player->get_aip()->move_path.size()) {
             player->path_pop_next_move();
           }
         }
@@ -516,7 +516,7 @@ bool Level::tick(void)
     } else if (player) {
       if (game->robot_mode) {
         player->ai_tick();
-      } else if (player->monst_aip->move_path.size()) {
+      } else if (player->get_aip()->move_path.size()) {
         player->path_pop_next_move();
       }
     }
