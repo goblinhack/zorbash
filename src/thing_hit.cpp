@@ -297,15 +297,17 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     }
   }
 
-  for (auto oid : real_hitter->get_itemp()->skills) {
-    auto skill = level->thing_find(oid);
-    if (skill && skill->is_activated) {
-      //
-      // Allow the damage to be modified
-      //
-      real_hitter->set_current_damage(damage);
-      real_hitter->use(skill);
-      damage = real_hitter->get_current_damage();
+  if (real_hitter->maybe_itemp()) {
+    for (auto oid : real_hitter->get_itemp()->skills) {
+      auto skill = level->thing_find(oid);
+      if (skill && skill->is_activated) {
+        //
+        // Allow the damage to be modified
+        //
+        real_hitter->set_current_damage(damage);
+        real_hitter->use(skill);
+        damage = real_hitter->get_current_damage();
+      }
     }
   }
 
