@@ -23,7 +23,8 @@ void Level::dump(std::string pfx)
   LOG("%s ts_dungeon_created %u", pfx.c_str(), ts_dungeon_created);
 
   LOG("%s all_things", pfx.c_str());
-  for (auto group = THING_GROUP_ALL; group < MAX_THING_GROUPS; group++) {
+  FOR_ALL_THING_GROUPS(group)
+  {
     for (auto x = 0; x < MAP_WIDTH; ++x) {
       for (auto y = 0; y < MAP_HEIGHT; ++y) {
         for (auto z = 0; z < MAP_SLOTS; ++z) {

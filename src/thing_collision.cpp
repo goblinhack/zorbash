@@ -225,7 +225,7 @@ bool Thing::collision_find_best_target(bool *target_attacked, bool *target_overl
     // Cannot do this for players or we end up attacking when waiting whilst
     // being consumed by a cleaner
     //
-    if (is_weapon() || is_monst() || (is_player() && game->robot_mode)) {
+    if (is_laser() || is_weapon() || is_monst() || (is_player() && game->robot_mode)) {
       if (! *target_attacked) {
         if (attack(it)) {
           *target_attacked = true;

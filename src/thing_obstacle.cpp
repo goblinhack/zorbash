@@ -17,23 +17,27 @@
 bool Thing::ai_obstacle_for_me(const point &p)
 {
   TRACE_AND_INDENT();
+
   //
   // Avoid threats and treat them as obstacles
   //
-  for (auto &t : get(level->all_things_ptr_at[ THING_GROUP_ALL ], p.x, p.y)) {
-    if (! t) {
-      continue;
-    }
+  FOR_ALL_THING_GROUPS(group)
+  {
+    for (auto &t : get(level->all_things_ptr_at[ group ], p.x, p.y)) {
+      if (! t) {
+        continue;
+      }
 
-    if (t->is_the_grid) {
-      continue;
-    }
+      if (t->is_the_grid) {
+        continue;
+      }
 
-    //
-    // "true" on collision
-    //
-    if (ai_obstacle(t)) {
-      return true;
+      //
+      // "true" on collision
+      //
+      if (ai_obstacle(t)) {
+        return true;
+      }
     }
   }
 

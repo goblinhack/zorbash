@@ -618,7 +618,7 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
 
 #if 0
   LOG("DGN: Loaded slots");
-  for (auto group = THING_GROUP_ALL; group < MAX_THING_GROUPS; group++) {
+  FOR_ALL_THING_GROUPS(group) {
     for (auto x = 0; x < MAP_WIDTH; x++) {
       for (auto y = 0; y < MAP_HEIGHT; y++) {
         for (auto slot = 0; slot < MAP_SLOTS; slot++) {
@@ -635,7 +635,8 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   //
   // Operate on a copy, not live data that might change as we add things
   //
-  for (auto group = THING_GROUP_ALL; group < MAX_THING_GROUPS; group++) {
+  FOR_ALL_THING_GROUPS(group)
+  {
     auto ids = my.t->all_things_id_at[ group ];
 
     for (auto x = 0; x < MAP_WIDTH; x++) {
@@ -688,7 +689,8 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   }
 
   uint32_t csum = 0;
-  for (auto group = THING_GROUP_ALL; group < MAX_THING_GROUPS; group++) {
+  FOR_ALL_THING_GROUPS(group)
+  {
     for (auto p : l->all_things[ group ]) {
       auto t = p.second;
       csum += t->mid_at.x + t->mid_at.y + t->id.id;

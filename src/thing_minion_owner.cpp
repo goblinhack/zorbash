@@ -118,7 +118,8 @@ void Thing::destroy_minions(Thingp defeater)
   //
   // Slow, but not used too often
   //
-  for (auto group = THING_GROUP_ALL; group < MAX_THING_GROUPS; group++) {
+  FOR_ALL_THING_GROUPS(group)
+  {
     for (auto p : level->all_things[ group ]) {
       auto minion = p.second;
       auto o      = minion->get_immediate_minion_owner();
@@ -148,7 +149,8 @@ void Thing::unleash_minions(void)
   //
   // Slow, but not used too often
   //
-  for (auto group = THING_GROUP_ALL; group < MAX_THING_GROUPS; group++) {
+  FOR_ALL_THING_GROUPS(group)
+  {
     for (auto p : level->all_things[ group ]) {
       auto minion = p.second;
       auto o      = minion->get_immediate_minion_owner();

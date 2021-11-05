@@ -465,7 +465,8 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   }
 
   uint32_t csum = 0;
-  for (auto group = THING_GROUP_ALL; group < MAX_THING_GROUPS; group++) {
+  FOR_ALL_THING_GROUPS(group)
+  {
     for (auto p : my.t->all_things[ group ]) {
       auto t = p.second;
       csum += t->mid_at.x + t->mid_at.y + t->id.id;
@@ -571,7 +572,8 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
 
 #ifdef ENABLE_DEBUG_THING_SER
   LOG("DGN: Check things");
-  for (auto group = THING_GROUP_ALL; group < MAX_THING_GROUPS; group++) {
+  FOR_ALL_THING_GROUPS(group)
+  {
     for (auto p : my.t->all_things[ group ]) {
       auto t = p.second;
       my.t->check_thing(t);
@@ -581,7 +583,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
 
 #if 0
   LOG("DGN: Saved slots");
-  for (auto group = THING_GROUP_ALL; group < MAX_THING_GROUPS; group++) {
+  FOR_ALL_THING_GROUPS(group) {
     for (auto x = 0; x < MAP_WIDTH; x++) {
       for (auto y = 0; y < MAP_HEIGHT; y++) {
         for (auto slot = 0; slot < MAP_SLOTS; slot++) {
@@ -596,7 +598,8 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
 #endif
 
   LOG("DGN: Save things");
-  for (auto group = THING_GROUP_ALL; group < MAX_THING_GROUPS; group++) {
+  FOR_ALL_THING_GROUPS(group)
+  {
     for (auto x = 0; x < MAP_WIDTH; x++) {
       for (auto y = 0; y < MAP_HEIGHT; y++) {
         for (auto slot = 0; slot < MAP_SLOTS; slot++) {

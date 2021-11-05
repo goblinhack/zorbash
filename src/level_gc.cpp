@@ -22,7 +22,8 @@ void Level::things_gc(bool force)
     dbg("Begin thing garbage collection");
   }
 
-  for (auto group = THING_GROUP_ALL; group < MAX_THING_GROUPS; group++) {
+  FOR_ALL_THING_GROUPS(group)
+  {
     if (all_things_to_be_destroyed[ group ].empty()) {
       continue;
     }
@@ -77,7 +78,8 @@ void Level::things_gc(bool force)
     }
   }
 
-  for (auto group = THING_GROUP_ALL; group < MAX_THING_GROUPS; group++) {
+  FOR_ALL_THING_GROUPS(group)
+  {
     for (auto &i : all_things_of_interest_pending_remove[ group ]) {
       all_things_of_interest[ group ].erase(i.first);
     }

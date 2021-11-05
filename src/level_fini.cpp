@@ -37,7 +37,8 @@ void Level::fini(void)
   // are referred to.
   //
   log("Destroy all things");
-  for (auto group = THING_GROUP_ALL; group < MAX_THING_GROUPS; group++) {
+  FOR_ALL_THING_GROUPS(group)
+  {
     for (auto x = 0; x < MAP_WIDTH; ++x) {
       for (auto y = 0; y < MAP_HEIGHT; ++y) {
         for (auto z = 0; z < MAP_SLOTS; ++z) {
@@ -68,7 +69,8 @@ void Level::fini(void)
   // Check all things were fully detached
   //
   log("Check all things are detached");
-  for (auto group = THING_GROUP_ALL; group < MAX_THING_GROUPS; group++) {
+  FOR_ALL_THING_GROUPS(group)
+  {
     for (auto x = 0; x < MAP_WIDTH; ++x) {
       for (auto y = 0; y < MAP_HEIGHT; ++y) {
         for (auto z = 0; z < MAP_SLOTS; ++z) {
