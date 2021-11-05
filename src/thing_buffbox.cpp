@@ -56,7 +56,7 @@ bool Thing::buffbox_id_insert(Thingp what)
 
   int item_slot = -1;
   if (free_slot != -1) {
-    get_itemp()->buffbox_id[ free_slot ] = what->tp_id;
+    get_itemp()->buffbox_id[ free_slot ] = what->id;
     item_slot                            = free_slot;
   } else {
     if (buffbox_items >= UI_INVENTORY_QUICK_ITEMS_MAX) {
@@ -64,7 +64,7 @@ bool Thing::buffbox_id_insert(Thingp what)
       return false;
     }
 
-    get_itemp()->buffbox_id.push_back(what->tp_id);
+    get_itemp()->buffbox_id.push_back(what->id);
     item_slot = get_itemp()->buffbox_id.size() - 1;
   }
 

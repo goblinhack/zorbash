@@ -56,7 +56,7 @@ bool Thing::skillbox_id_insert(Thingp what)
 
   int item_slot = -1;
   if (free_slot != -1) {
-    get_itemp()->skillbox_id[ free_slot ] = what->tp_id;
+    get_itemp()->skillbox_id[ free_slot ] = what->id;
     item_slot                             = free_slot;
   } else {
     if (skillbox_items >= UI_INVENTORY_QUICK_ITEMS_MAX) {
@@ -64,7 +64,7 @@ bool Thing::skillbox_id_insert(Thingp what)
       return false;
     }
 
-    get_itemp()->skillbox_id.push_back(what->tp_id);
+    get_itemp()->skillbox_id.push_back(what->id);
     item_slot = get_itemp()->skillbox_id.size() - 1;
   }
 

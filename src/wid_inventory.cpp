@@ -187,7 +187,10 @@ static uint8_t wid_inventory_item_option_use(Widp w, int32_t x, int32_t y, uint3
     wid_inventory_fini();
     player->log("Use %s", what->to_string().c_str());
     player->use(what);
-    wid_inventory_init();
+    //
+    // Don't do this. It closes up popups for skills
+    //
+    // wid_inventory_init();
   }
 
   return true;
