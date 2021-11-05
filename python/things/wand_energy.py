@@ -19,6 +19,10 @@ def on_use(owner, item, target, x, y):
     enchant = zx.thing_get_enchant(item)
     zx.thing_set_current_damage(owner, damage + enchant)
 
+def on_final_use(owner, item, target, x, y):
+    if zx.thing_is_player(owner):
+        zx.topcon("The wand fades away into nothingness.")
+
 def explode(me, x, y):
     zx.thing_msg(me, "The wand of energy explodes in a blaze of power.")
     zx.level_spawn_at_thing(me, "explosion_minor")
@@ -285,6 +289,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_on_fall_do("wand_energy.on_fall()")
     mytp.set_on_idle_dice("1d200+200:wand_energy.on_idle()")
     mytp.set_on_use_do("wand_energy.on_use()")
+    mytp.set_on_final_use_do("wand_energy.on_final_use()")
     mytp.set_on_you_are_hit_do("wand_energy.on_you_are_hit()")
     mytp.set_on_you_are_on_fire_do("wand_energy.on_fire()")
     mytp.set_range_max(7)

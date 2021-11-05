@@ -438,6 +438,10 @@ bool Level::create_dungeon(point3d at, int seed)
               auto W = thing_new("wand_energy", point(x, y));
               t->carry(W);
             }
+            {
+              auto W = thing_new("wand_descent", point(x, y));
+              t->carry(W);
+            }
 #if 0
             auto w2 = thing_new("sword_rusty_basic", point(x, y));
             t->carry(w2);
@@ -463,10 +467,6 @@ bool Level::create_dungeon(point3d at, int seed)
               t->carry(p);
             }
 
-            {
-              auto W = thing_new("wand_descent", point(x, y));
-              t->carry(W);
-            }
 
             {
               auto W = thing_new("wand_lightning", point(x, y));

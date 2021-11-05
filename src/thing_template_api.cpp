@@ -132,6 +132,7 @@ const std::string &Tp::on_move_do(void) const { return _on_move_do; }
 const std::string &Tp::on_open_do(void) const { return _on_open_do; }
 const std::string &Tp::on_tick_do(void) const { return _on_tick_do; }
 const std::string &Tp::on_use_do(void) const { return _on_use_do; }
+const std::string &Tp::on_final_use_do(void) const { return _on_final_use_do; }
 const std::string &Tp::projectile_name(void) const { return _projectile_name; }
 const std::string &Tp::short_text_name(void) const { return _short_text_name; }
 const std::string &Tp::spawn_on_shoved(void) const { return _spawn_on_shoved; }
@@ -789,6 +790,7 @@ void Tp::set_on_move_do(const std::string &v) { _on_move_do = v; }
 void Tp::set_on_open_do(const std::string &v) { _on_open_do = v; }
 void Tp::set_on_tick_do(const std::string &v) { _on_tick_do = v; }
 void Tp::set_on_use_do(const std::string &v) { _on_use_do = v; }
+void Tp::set_on_final_use_do(const std::string &v) { _on_final_use_do = v; }
 void Tp::set_projectile_name(const std::string &v) { _projectile_name = v; }
 void Tp::set_range_max(int v) { _range_max = v; }
 void Tp::set_rarity(int v) { _rarity = v; }

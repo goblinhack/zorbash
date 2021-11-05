@@ -24,11 +24,13 @@ const Dice &Thing::get_on_idle_dice(void)
   TRACE_AND_INDENT();
   return (tp()->on_idle_dice());
 }
+
 const std::string &Thing::get_on_idle_dice_str(void)
 {
   TRACE_AND_INDENT();
   return (tp()->on_idle_dice_str());
 }
+
 int Thing::get_idle_tick(void)
 {
   TRACE_AND_INDENT();
@@ -40,11 +42,13 @@ const Dice &Thing::get_nutrition_dice(void)
   TRACE_AND_INDENT();
   return (tp()->nutrition_dice());
 }
+
 const std::string &Thing::get_nutrition_dice_str(void)
 {
   TRACE_AND_INDENT();
   return (tp()->nutrition_dice_str());
 }
+
 int Thing::get_nutrition(void)
 {
   TRACE_AND_INDENT();
@@ -56,11 +60,13 @@ const Dice &Thing::get_health_initial_dice(void)
   TRACE_AND_INDENT();
   return (tp()->get_health_initial_dice());
 }
+
 const std::string &Thing::get_health_initial_dice_str(void)
 {
   TRACE_AND_INDENT();
   return (tp()->get_health_initial_dice_str());
 }
+
 int Thing::get_health_initial(void)
 {
   TRACE_AND_INDENT();
@@ -72,11 +78,13 @@ const Dice &Thing::get_gold_value_dice(void)
   TRACE_AND_INDENT();
   return (tp()->gold_value_dice());
 }
+
 const std::string &Thing::get_gold_value_dice_str(void)
 {
   TRACE_AND_INDENT();
   return (tp()->gold_value_dice_str());
 }
+
 int Thing::get_gold_value(void)
 {
   TRACE_AND_INDENT();
@@ -88,11 +96,13 @@ const Dice &Thing::get_lifespan_dice(void)
   TRACE_AND_INDENT();
   return (tp()->lifespan_dice());
 }
+
 const std::string &Thing::get_lifespan_dice_str(void)
 {
   TRACE_AND_INDENT();
   return (tp()->lifespan_dice_str());
 }
+
 int Thing::get_lifespan_initial(void)
 {
   TRACE_AND_INDENT();
@@ -104,11 +114,13 @@ const Dice &Thing::get_resurrect_dice(void)
   TRACE_AND_INDENT();
   return (tp()->resurrect_dice());
 }
+
 const std::string &Thing::get_resurrect_dice_str(void)
 {
   TRACE_AND_INDENT();
   return (tp()->resurrect_dice_str());
 }
+
 int Thing::get_resurrect(void)
 {
   TRACE_AND_INDENT();
@@ -120,1431 +132,1717 @@ int Thing::ai_avoid_distance(void)
   TRACE_AND_INDENT();
   return (tp()->ai_avoid_distance());
 }
+
 int Thing::ai_resent_count(void)
 {
   TRACE_AND_INDENT();
   return (tp()->ai_resent_count());
 }
+
 int Thing::ai_obstacle(void)
 {
   TRACE_AND_INDENT();
   return (tp()->ai_obstacle());
 }
+
 int Thing::ai_scent_distance(void)
 {
   TRACE_AND_INDENT();
   return (tp()->ai_scent_distance());
 }
+
 int Thing::ai_vision_distance(void)
 {
   TRACE_AND_INDENT();
   return (tp()->ai_vision_distance());
 }
+
 int Thing::attack_eater(void)
 {
   TRACE_AND_INDENT();
   return (tp()->attack_eater());
 }
+
 int Thing::attack_humanoid(void)
 {
   TRACE_AND_INDENT();
   return (tp()->attack_humanoid());
 }
+
 int Thing::attack_living(void)
 {
   TRACE_AND_INDENT();
   return (tp()->attack_living());
 }
+
 int Thing::attack_lunge(void)
 {
   TRACE_AND_INDENT();
   return (tp()->attack_lunge());
 }
+
 int Thing::attack_meat(void)
 {
   TRACE_AND_INDENT();
   return (tp()->attack_meat());
 }
+
 int Thing::ai_shove_chance_d1000(void)
 {
   TRACE_AND_INDENT();
   return (tp()->ai_shove_chance_d1000());
 }
+
 int Thing::ai_unprovoked_attack_chance_d1000(void)
 {
   TRACE_AND_INDENT();
   return (tp()->ai_unprovoked_attack_chance_d1000());
 }
+
 int Thing::ai_is_able_to_shove(void)
 {
   TRACE_AND_INDENT();
   return (tp()->ai_is_able_to_shove());
 }
+
 int Thing::blast_max_radius(void)
 {
   TRACE_AND_INDENT();
   return (tp()->blast_max_radius());
 }
+
 int Thing::blast_min_radius(void)
 {
   TRACE_AND_INDENT();
   return (tp()->blast_min_radius());
 }
+
 int Thing::collision_attack(void)
 {
   TRACE_AND_INDENT();
   return (tp()->collision_attack());
 }
+
 int Thing::collision_box(void)
 {
   TRACE_AND_INDENT();
   return (tp()->collision_box());
 }
+
 int Thing::collision_check(void)
 {
   TRACE_AND_INDENT();
   return (tp()->collision_check());
 }
+
 int Thing::collision_circle(void)
 {
   TRACE_AND_INDENT();
   return (tp()->collision_circle());
 }
+
 int Thing::collision_hit_priority(void)
 {
   TRACE_AND_INDENT();
   return (tp()->collision_hit_priority());
 }
+
 int Thing::environ_damage_doubled_from_acid(void)
 {
   TRACE_AND_INDENT();
   return (tp()->environ_damage_doubled_from_acid());
 }
+
 int Thing::environ_damage_doubled_from_fire(void)
 {
   TRACE_AND_INDENT();
   return (tp()->environ_damage_doubled_from_fire());
 }
+
 int Thing::environ_damage_doubled_from_poison(void)
 {
   TRACE_AND_INDENT();
   return (tp()->environ_damage_doubled_from_poison());
 }
+
 int Thing::environ_damage_doubled_from_water(void)
 {
   TRACE_AND_INDENT();
   return (tp()->environ_damage_doubled_from_water());
 }
+
 int Thing::defence(void)
 {
   TRACE_AND_INDENT();
   return (tp()->stat_defence());
 }
+
 int Thing::enchant_level(void)
 {
   TRACE_AND_INDENT();
   return (tp()->enchant_level());
 }
+
 int Thing::enchant_max(void)
 {
   TRACE_AND_INDENT();
   return (tp()->enchant_max());
 }
+
 int Thing::get_initial_charge_count(void)
 {
   TRACE_AND_INDENT();
   return (tp()->charge_count());
 }
+
 int Thing::gfx_an_animation_only(void)
 {
   TRACE_AND_INDENT();
   return (tp()->gfx_an_animation_only());
 }
+
 int Thing::gfx_animated_can_hflip(void)
 {
   TRACE_AND_INDENT();
   return (tp()->gfx_animated_can_hflip());
 }
+
 int Thing::gfx_animated_can_vflip(void)
 {
   TRACE_AND_INDENT();
   return (tp()->gfx_animated_can_vflip());
 }
+
 int Thing::gfx_animated_no_dir(void)
 {
   TRACE_AND_INDENT();
   return (tp()->gfx_animated_no_dir());
 }
+
 int Thing::gfx_animated(void)
 {
   TRACE_AND_INDENT();
   return (tp()->gfx_animated());
 }
+
 int Thing::gfx_attack_anim(void)
 {
   TRACE_AND_INDENT();
   return (tp()->gfx_attack_anim());
 }
+
 int Thing::gfx_bounce_always(void)
 {
   TRACE_AND_INDENT();
   return (tp()->gfx_bounce_always());
 }
+
 int Thing::gfx_bounce_on_move(void)
 {
   TRACE_AND_INDENT();
   return (tp()->gfx_bounce_on_move());
 }
+
 int Thing::gfx_dead_anim(void)
 {
   TRACE_AND_INDENT();
   return (tp()->gfx_dead_anim());
 }
+
 int Thing::gfx_flickers(void)
 {
   TRACE_AND_INDENT();
   return (tp()->gfx_flickers());
 }
+
 int Thing::gfx_glows(void)
 {
   TRACE_AND_INDENT();
   return (tp()->gfx_glows());
 }
+
 int Thing::gfx_health_bar_autohide(void)
 {
   TRACE_AND_INDENT();
   return (tp()->gfx_health_bar_autohide());
 }
+
 int Thing::gfx_health_bar_shown(void)
 {
   TRACE_AND_INDENT();
   return (tp()->gfx_health_bar_shown());
 }
+
 int Thing::gfx_long_shadow_caster(void)
 {
   TRACE_AND_INDENT();
   return (tp()->gfx_long_shadow_caster());
 }
+
 int Thing::gfx_on_fire_anim(void)
 {
   TRACE_AND_INDENT();
   return (tp()->gfx_on_fire_anim());
 }
+
 int Thing::gfx_oversized_and_on_floor(void)
 {
   TRACE_AND_INDENT();
   return (tp()->gfx_oversized_and_on_floor());
 }
+
 int Thing::gfx_short_shadow_caster(void)
 {
   TRACE_AND_INDENT();
   return (tp()->gfx_short_shadow_caster());
 }
+
 int Thing::gfx_shown_in_bg(void)
 {
   TRACE_AND_INDENT();
   return (tp()->gfx_shown_in_bg());
 }
+
 int Thing::gfx_show_outlined(void)
 {
   TRACE_AND_INDENT();
   return (tp()->gfx_show_outlined());
 }
+
 int Thing::gfx_solid_shadow(void)
 {
   TRACE_AND_INDENT();
   return (tp()->gfx_solid_shadow());
 }
+
 int Thing::gfx_very_short_shadow_caster(void)
 {
   TRACE_AND_INDENT();
   return (tp()->gfx_very_short_shadow_caster());
 }
+
 int Thing::gfx_water(void)
 {
   TRACE_AND_INDENT();
   return (tp()->gfx_water());
 }
+
 int Thing::gfx_equip_carry_anim(void)
 {
   TRACE_AND_INDENT();
   return (tp()->gfx_equip_carry_anim());
 }
+
 int Thing::environ_dislikes_acid(void)
 {
   TRACE_AND_INDENT();
   return (tp()->environ_dislikes_acid());
 }
+
 int Thing::environ_dislikes_fire(void)
 {
   TRACE_AND_INDENT();
   return (tp()->environ_dislikes_fire());
 }
+
 int Thing::environ_dislikes_poison(void)
 {
   TRACE_AND_INDENT();
   return (tp()->environ_dislikes_poison());
 }
+
 int Thing::environ_dislikes_water(void)
 {
   TRACE_AND_INDENT();
   return (tp()->environ_dislikes_water());
 }
+
 int Thing::health_hunger_pct(void)
 {
   TRACE_AND_INDENT();
   return (tp()->health_hunger_pct());
 }
+
 int Thing::health_starving_pct(void)
 {
   TRACE_AND_INDENT();
   return (tp()->health_starving_pct());
 }
+
 int Thing::is_able_to_change_levels(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_able_to_change_levels());
 }
+
 int Thing::is_able_to_fall(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_able_to_fall());
 }
+
 int Thing::is_able_to_fire_at(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_able_to_fire_at());
 }
+
 int Thing::ai_is_able_to_see_through_doors(void)
 {
   TRACE_AND_INDENT();
   return (tp()->ai_is_able_to_see_through_doors());
 }
+
 int Thing::ai_is_able_to_walk_through_walls(void)
 {
   TRACE_AND_INDENT();
   return (tp()->ai_is_able_to_walk_through_walls());
 }
+
 int Thing::environ_loves_acid(void)
 {
   TRACE_AND_INDENT();
   return (tp()->environ_loves_acid());
 }
+
 int Thing::is_acid(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_acid());
 }
+
 int Thing::is_alive_monst(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_monst() && ! is_dead);
 }
+
 int Thing::is_alive_on_end_of_anim(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_alive_on_end_of_anim());
 }
+
 int Thing::is_always_hit(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_always_hit());
 }
+
 int Thing::is_ascend_dungeon(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_ascend_dungeon());
 }
+
 int Thing::is_ascend_sewer(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_ascend_sewer());
 }
+
 int Thing::is_attackable_by_monst(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_attackable_by_monst());
 }
+
 int Thing::is_attackable_by_player(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_attackable_by_player());
 }
+
 int Thing::is_auto_collect_item(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_auto_collect_item());
 }
+
 int Thing::is_bag_item_container(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_bag_item_container());
 }
+
 int Thing::is_bag_item_not_stackable(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_bag_item_not_stackable());
 }
+
 int Thing::is_bag_item(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_bag_item());
 }
+
 int Thing::is_bag(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_bag());
 }
+
 int Thing::is_barrel(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_barrel());
 }
+
 int Thing::is_bleeder(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_bleeder());
 }
+
 int Thing::is_blood_splatter(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_blood_splatter());
 }
+
 int Thing::is_blood(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_blood());
 }
+
 int Thing::is_bones(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_bones());
 }
+
 int Thing::is_brazier(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_brazier());
 }
+
 int Thing::is_bridge(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_bridge());
 }
+
 int Thing::is_burnable(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_burnable());
 }
+
 int Thing::is_carrier_of_treasure_class_a(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_carrier_of_treasure_class_a());
 }
+
 int Thing::is_carrier_of_treasure_class_b(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_carrier_of_treasure_class_b());
 }
+
 int Thing::is_carrier_of_treasure_class_c(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_carrier_of_treasure_class_c());
 }
+
 int Thing::is_chasm(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_chasm());
 }
+
 int Thing::is_collectable(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_collectable());
 }
+
 int Thing::is_collect_as_keys(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_collect_as_keys());
 }
+
 int Thing::is_collected_as_gold(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_collected_as_gold());
 }
+
 int Thing::is_combustible(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_combustible());
 }
+
 int Thing::is_corpse_on_death(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_corpse_on_death());
 }
+
 int Thing::is_corpse(void)
 {
   TRACE_AND_INDENT();
   return (is_dead && is_corpse_on_death());
 }
+
 int Thing::is_corridor(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_corridor());
 }
+
 int Thing::is_critical_to_level(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_critical_to_level());
 }
+
 int Thing::is_cursor_can_hover_over_x2_click(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_cursor_can_hover_over_x2_click());
 }
+
 int Thing::is_cursor_can_hover_over(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_cursor_can_hover_over());
 }
+
 int Thing::is_cursor_path(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_cursor_path());
 }
+
 int Thing::is_cursor(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_cursor());
 }
+
 int Thing::is_dead_on_end_of_anim(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_dead_on_end_of_anim());
 }
+
 int Thing::is_dead_on_shove(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_dead_on_shove());
 }
+
 int Thing::is_dead_or_dying(void)
 {
   TRACE_AND_INDENT();
   return is_dead || is_dying;
 }
+
 int Thing::is_debug_path(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_debug_path());
 }
+
 int Thing::is_debug_type(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_debug_type());
 }
+
 int Thing::is_deep_water(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_deep_water());
 }
+
 int Thing::is_descend_dungeon(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_descend_dungeon());
 }
+
 int Thing::is_descend_sewer(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_descend_sewer());
 }
+
 int Thing::is_described_when_hovering_over(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_described_when_hovering_over());
 }
+
 int Thing::is_dirt(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_dirt());
 }
+
 int Thing::is_door(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_door());
 }
+
 int Thing::is_droppable(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_droppable());
 }
+
 int Thing::is_dry_grass(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_dry_grass());
 }
+
 int Thing::is_enchantable(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_enchantable());
 }
+
 int Thing::is_enchantstone(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_enchantstone());
 }
+
 int Thing::is_ethereal_minion_generator(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_ethereal_minion_generator());
 }
+
 int Thing::is_ethereal(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_ethereal());
 }
+
 int Thing::is_explosion(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_explosion());
 }
+
 int Thing::is_cursor_path_hazard_for_player(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_cursor_path_hazard_for_player());
 }
+
 int Thing::is_fearless(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_fearless());
 }
+
 int Thing::is_fire(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_fire());
 }
+
 int Thing::is_floating(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_floating());
 }
+
 int Thing::is_floor_deco(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_floor_deco());
 }
+
 int Thing::is_floor(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_floor());
 }
+
 int Thing::is_foilage(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_foilage());
 }
+
 int Thing::is_food_eater(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_food_eater());
 }
+
 int Thing::is_food(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_food());
 }
+
 int Thing::is_gold(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_gold());
 }
+
 int Thing::is_hazard(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_hazard());
 }
+
 int Thing::is_hittable(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_hittable());
 }
+
 int Thing::is_humanoid(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_humanoid());
 }
+
 int Thing::is_hunger_insatiable(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_hunger_insatiable());
 }
+
 int Thing::is_indestructible(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_indestructible());
 }
+
 int Thing::is_intelligent(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_intelligent());
 }
+
 int Thing::is_interesting(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_interesting());
 }
+
 int Thing::is_item_carrier(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_item_carrier());
 }
+
 int Thing::is_item_eater(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_item_eater());
 }
+
 int Thing::is_item(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_item());
 }
+
 int Thing::is_jelly_baby_eater(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_jelly_baby_eater());
 }
+
 int Thing::is_jelly_baby(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_jelly_baby());
 }
+
 int Thing::is_jelly_eater(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_jelly_eater());
 }
+
 int Thing::is_jelly_parent(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_jelly_parent());
 }
+
 int Thing::is_jelly(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_jelly());
 }
+
 int Thing::ai_random_jump_chance_d1000(void)
 {
   TRACE_AND_INDENT();
   return (tp()->ai_random_jump_chance_d1000());
 }
+
 int Thing::ai_is_able_to_jump_distance(void)
 {
   TRACE_AND_INDENT();
   return (tp()->ai_is_able_to_jump_distance());
 }
+
 int Thing::ai_is_able_to_jump_on_low_hp_chance_d1000(void)
 {
   TRACE_AND_INDENT();
   return (tp()->ai_is_able_to_jump_on_low_hp_chance_d1000());
 }
+
 int Thing::ai_is_able_to_jump(void)
 {
   TRACE_AND_INDENT();
   return (tp()->ai_is_able_to_jump());
 }
+
 int Thing::ai_is_able_to_collect_keys(void)
 {
   TRACE_AND_INDENT();
   return (tp()->ai_is_able_to_collect_keys());
 }
+
 int Thing::is_key(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_key());
 }
+
 int Thing::is_destroyed_on_hit_or_miss(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_destroyed_on_hit_or_miss());
 }
+
 int Thing::is_destroyed_on_hitting(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_destroyed_on_hitting());
 }
+
 int Thing::is_laser(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_laser());
 }
+
 int Thing::is_lava(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_lava());
 }
+
 int Thing::is_light_blocker(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_light_blocker());
 }
+
 int Thing::is_living(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_living());
 }
+
 int Thing::is_loggable(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_loggable());
 }
+
 int Thing::is_meat_eater(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_meat_eater());
 }
+
 int Thing::is_meat(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_meat());
 }
+
 int Thing::is_minion_generator(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_minion_generator());
 }
+
 int Thing::is_minion(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_minion());
 }
+
 int Thing::is_monst(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_monst());
 }
+
 int Thing::is_moveable(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_moveable());
 }
+
 int Thing::is_obs_wall_or_door(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_obs_wall_or_door());
 }
+
 int Thing::is_obs_destructable(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_obs_destructable());
 }
+
 int Thing::is_msg(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_msg());
 }
+
 int Thing::is_no_tile(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_no_tile());
 }
+
 int Thing::is_openable(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_openable());
 }
+
 int Thing::is_player(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_player());
 }
+
 int Thing::is_poison(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_poison());
 }
+
 int Thing::is_potion_eater(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_potion_eater());
 }
+
 int Thing::is_potion(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_potion());
 }
+
 int Thing::is_projectile(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_projectile());
 }
+
 int Thing::is_removeable_if_out_of_slots(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_removeable_if_out_of_slots());
 }
+
 int Thing::is_resurrectable(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_resurrectable());
 }
+
 int Thing::is_ripple(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_ripple());
 }
+
 int Thing::is_rock(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_rock());
 }
+
 int Thing::unused_flag10(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag10());
 }
+
 int Thing::unused_flag11(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag11());
 }
+
 int Thing::unused_flag12(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag12());
 }
+
 int Thing::unused_flag13(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag13());
 }
+
 int Thing::unused_flag14(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag14());
 }
+
 int Thing::unused_flag15(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag15());
 }
+
 int Thing::unused_flag16(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag16());
 }
+
 int Thing::unused_flag17(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag17());
 }
+
 int Thing::unused_flag18(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag18());
 }
+
 int Thing::unused_flag19(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag19());
 }
+
 int Thing::unused_flag1(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag1());
 }
+
 int Thing::unused_flag20(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag20());
 }
+
 int Thing::unused_flag21(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag21());
 }
+
 int Thing::unused_flag22(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag22());
 }
+
 int Thing::unused_flag23(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag23());
 }
+
 int Thing::unused_flag24(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag24());
 }
+
 int Thing::unused_flag25(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag25());
 }
+
 int Thing::unused_flag26(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag26());
 }
+
 int Thing::unused_flag27(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag27());
 }
+
 int Thing::unused_flag28(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag28());
 }
+
 int Thing::unused_flag29(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag29());
 }
+
 int Thing::unused_flag2(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag2());
 }
+
 int Thing::unused_flag30(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag30());
 }
+
 int Thing::unused_flag31(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag31());
 }
+
 int Thing::is_auto_equipped(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_auto_equipped());
 }
+
 int Thing::is_buff(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_buff());
 }
+
 int Thing::is_debuff(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_debuff());
 }
+
 int Thing::attack_undead(void)
 {
   TRACE_AND_INDENT();
   return (tp()->attack_undead());
 }
+
 int Thing::is_blood_eater(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_blood_eater());
 }
+
 int Thing::attack_blood(void)
 {
   TRACE_AND_INDENT();
   return (tp()->attack_blood());
 }
+
 int Thing::environ_hates_poison(void)
 {
   TRACE_AND_INDENT();
   return (tp()->environ_hates_poison());
 }
+
 int Thing::environ_hates_fire(void)
 {
   TRACE_AND_INDENT();
   return (tp()->environ_hates_fire());
 }
+
 int Thing::unused_flag3(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag3());
 }
+
 int Thing::environ_hates_water(void)
 {
   TRACE_AND_INDENT();
   return (tp()->environ_hates_water());
 }
+
 int Thing::environ_hates_acid(void)
 {
   TRACE_AND_INDENT();
   return (tp()->environ_hates_acid());
 }
+
 int Thing::ai_is_able_to_detect_secret_doors_when_close(void)
 {
   TRACE_AND_INDENT();
   return (tp()->ai_is_able_to_detect_secret_doors_when_close());
 }
+
 int Thing::ai_is_able_to_break_down_doors(void)
 {
   TRACE_AND_INDENT();
   return (tp()->ai_is_able_to_break_down_doors());
 }
+
 int Thing::ai_is_able_to_break_out_of_webs(void)
 {
   TRACE_AND_INDENT();
   return (tp()->ai_is_able_to_break_out_of_webs());
 }
+
 int Thing::ai_is_able_to_open_doors(void)
 {
   TRACE_AND_INDENT();
   return (tp()->ai_is_able_to_open_doors());
 }
+
 int Thing::ai_is_exit_finder(void)
 {
   TRACE_AND_INDENT();
   return (tp()->ai_is_exit_finder());
 }
+
 int Thing::ai_is_level_explorer(void)
 {
   TRACE_AND_INDENT();
   return (tp()->ai_is_level_explorer());
 }
+
 int Thing::is_rusty(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_rusty());
 }
+
 int Thing::unused_flag4(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag4());
 }
+
 int Thing::ai_is_able_to_learn_skills(void)
 {
   TRACE_AND_INDENT();
   return (tp()->ai_is_able_to_learn_skills());
 }
+
 int Thing::ai_is_able_to_enchant_weapons(void)
 {
   TRACE_AND_INDENT();
   return (tp()->ai_is_able_to_enchant_weapons());
 }
+
 int Thing::ai_is_able_to_attack_generators(void)
 {
   TRACE_AND_INDENT();
   return (tp()->ai_is_able_to_attack_generators());
 }
+
 int Thing::ai_wanderer(void)
 {
   TRACE_AND_INDENT();
   return (tp()->ai_wanderer());
 }
+
 int Thing::is_organic(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_organic());
 }
+
 int Thing::is_glass(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_glass());
 }
+
 int Thing::is_stone(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_stone());
 }
+
 int Thing::is_item_organic(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_item_organic());
 }
+
 int Thing::is_metal(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_metal());
 }
+
 int Thing::is_wooden(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_wooden());
 }
+
 int Thing::unused_flag5(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag5());
 }
+
 int Thing::is_engulfer(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_engulfer());
 }
+
 int Thing::is_health_booster(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_health_booster());
 }
+
 int Thing::unused_flag6(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag6());
 }
+
 int Thing::unused_flag7(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag7());
 }
+
 int Thing::unused_flag8(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag8());
 }
+
 int Thing::unused_flag9(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag9());
 }
+
 int Thing::is_secret_door(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_secret_door());
 }
+
 int Thing::is_sewer_wall(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_sewer_wall());
 }
+
 int Thing::is_shallow_water(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_shallow_water());
 }
+
 int Thing::is_shovable(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_shovable());
 }
+
 int Thing::is_skillstone(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_skillstone());
 }
+
 int Thing::is_skill(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_skill());
 }
+
 int Thing::is_smoke(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_smoke());
 }
+
 int Thing::is_soft_body(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_soft_body());
 }
+
 int Thing::is_spawner(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_spawner());
 }
+
 int Thing::is_spiderweb(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_spiderweb());
 }
+
 int Thing::is_able_to_tire(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_able_to_tire());
 }
+
 int Thing::is_steal_item_chance_d1000(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_steal_item_chance_d1000());
 }
+
 int Thing::attack_engulf_chance_d1000(void)
 {
   TRACE_AND_INDENT();
   return (tp()->attack_engulf_chance_d1000());
 }
+
 int Thing::attack_poison_chance_d1000(void)
 {
   TRACE_AND_INDENT();
   return (tp()->attack_poison_chance_d1000());
 }
+
 int Thing::is_sticky(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_sticky());
 }
+
 int Thing::is_sword(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_sword());
 }
+
 int Thing::is_target_auto_select(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_target_auto_select());
 }
+
 int Thing::is_throwable(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_throwable());
 }
+
 int Thing::is_auto_throw(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_auto_throw());
 }
+
 int Thing::is_tickable(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_tickable());
 }
+
 int Thing::is_tmp_thing(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_tmp_thing());
 }
+
 int Thing::is_torch(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_torch());
 }
+
 int Thing::is_treasure_class_a(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_treasure_class_a());
 }
+
 int Thing::is_treasure_class_b(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_treasure_class_b());
 }
+
 int Thing::is_treasure_class_c(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_treasure_class_c());
 }
+
 int Thing::is_treasure_type_chest(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_treasure_type_chest());
 }
+
 int Thing::ai_is_item_collector(void)
 {
   TRACE_AND_INDENT();
   return (tp()->ai_is_item_collector());
 }
+
 int Thing::is_treasure_type_eater(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_treasure_type_eater());
 }
+
 int Thing::is_treasure_type(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_treasure_type());
 }
+
 int Thing::is_undead(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_undead());
 }
+
 int Thing::is_usable(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_usable());
 }
+
 int Thing::is_auto_use(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_auto_use());
 }
+
 int Thing::is_used_when_thrown(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_used_when_thrown());
 }
+
 int Thing::is_very_combustible(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_very_combustible());
 }
+
 int Thing::is_wall_dungeon(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_wall_dungeon());
 }
+
 int Thing::is_wall(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_wall());
 }
+
 int Thing::is_wand_eater(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_wand_eater());
 }
+
 int Thing::is_wand(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_wand());
 }
+
 int Thing::environ_loves_water(void)
 {
   TRACE_AND_INDENT();
   return (tp()->environ_loves_water());
 }
+
 int Thing::is_weapon(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_weapon());
 }
+
 int Thing::is_weapon_equiper(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_weapon_equiper());
 }
+
 int Thing::environ_loves_fire(void)
 {
   TRACE_AND_INDENT();
   return (tp()->environ_loves_fire());
 }
+
 int Thing::environ_loves_poison(void)
 {
   TRACE_AND_INDENT();
   return (tp()->environ_loves_poison());
 }
+
 int Thing::environ_loves_spiderwebs(void)
 {
   TRACE_AND_INDENT();
   return (tp()->environ_loves_spiderwebs());
 }
+
 int Thing::minion_leash_distance(void)
 {
   TRACE_AND_INDENT();
   return (tp()->minion_leash_distance());
 }
+
 int Thing::minion_limit(void)
 {
   TRACE_AND_INDENT();
   return (tp()->minion_limit());
 }
+
 int Thing::normal_placement_rules(void)
 {
   TRACE_AND_INDENT();
   return (tp()->normal_placement_rules());
 }
+
 int Thing::on_death_drop_all_items(void)
 {
   TRACE_AND_INDENT();
   return (tp()->on_death_drop_all_items());
 }
+
 int Thing::on_death_is_open(void)
 {
   TRACE_AND_INDENT();
   return (tp()->on_death_is_open());
 }
+
 int Thing::range_max(void)
 {
   TRACE_AND_INDENT();
   return (tp()->range_max());
 }
+
 int Thing::weapon_damage(void)
 {
   TRACE_AND_INDENT();
@@ -5380,181 +5678,223 @@ const std::string &Thing::gfx_anim_use(void)
   TRACE_AND_INDENT();
   return (tp()->gfx_anim_use());
 }
+
 const std::string &Thing::laser_name(void)
 {
   TRACE_AND_INDENT();
   return (tp()->laser_name());
 }
+
 const std::string &Thing::light_color(void)
 {
   TRACE_AND_INDENT();
   return (tp()->light_color());
 }
+
 const std::string &Thing::long_text_description(void)
 {
   TRACE_AND_INDENT();
   return (tp()->long_text_description());
 }
+
 const std::string &Thing::name(void)
 {
   TRACE_AND_INDENT();
   return (tp()->name());
 }
+
 const std::string &Thing::on_birth_do(void)
 {
   TRACE_AND_INDENT();
   return (tp()->on_birth_do());
 }
+
 const std::string &Thing::on_you_bite_attack_do(void)
 {
   TRACE_AND_INDENT();
   return (tp()->on_you_bite_attack_do());
 }
+
 const std::string &Thing::on_born_do(void)
 {
   TRACE_AND_INDENT();
   return (tp()->on_born_do());
 }
+
 const std::string &Thing::on_death_do(void)
 {
   TRACE_AND_INDENT();
   return (tp()->on_death_do());
 }
+
 const std::string &Thing::on_enchant_do(void)
 {
   TRACE_AND_INDENT();
   return (tp()->on_enchant_do());
 }
+
 const std::string &Thing::on_fall_do(void)
 {
   TRACE_AND_INDENT();
   return (tp()->on_fall_do());
 }
+
 const std::string &Thing::on_you_are_on_fire_do(void)
 {
   TRACE_AND_INDENT();
   return (tp()->on_you_are_on_fire_do());
 }
+
 const std::string &Thing::on_firing_at_something_do(void)
 {
   TRACE_AND_INDENT();
   return (tp()->on_firing_at_something_do());
 }
+
 const std::string &Thing::on_you_are_hit_do(void)
 {
   TRACE_AND_INDENT();
   return (tp()->on_you_are_hit_do());
 }
+
 const std::string &Thing::on_lifespan_do(void)
 {
   TRACE_AND_INDENT();
   return (tp()->on_lifespan_do());
 }
+
 const std::string &Thing::on_you_miss_do_do(void)
 {
   TRACE_AND_INDENT();
   return (tp()->on_you_miss_do_do());
 }
+
 const std::string &Thing::on_move_do(void)
 {
   TRACE_AND_INDENT();
   return (tp()->on_move_do());
 }
+
 const std::string &Thing::on_open_do(void)
 {
   TRACE_AND_INDENT();
   return (tp()->on_open_do());
 }
+
 const std::string &Thing::on_tick_do(void)
 {
   TRACE_AND_INDENT();
   return (tp()->on_tick_do());
 }
+
 const std::string &Thing::on_use_do(void)
 {
   TRACE_AND_INDENT();
   return (tp()->on_use_do());
 }
+
+const std::string &Thing::on_final_use_do(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->on_final_use_do());
+}
+
 const std::string &Thing::projectile_name(void)
 {
   TRACE_AND_INDENT();
   return (tp()->projectile_name());
 }
+
 const std::string &Thing::short_text_name(void)
 {
   TRACE_AND_INDENT();
   return (tp()->short_text_name());
 }
+
 const std::string &Thing::spawn_on_shoved(void)
 {
   TRACE_AND_INDENT();
   return (tp()->spawn_on_shoved());
 }
+
 const std::string &Thing::str1(void)
 {
   TRACE_AND_INDENT();
   return (tp()->str1());
 }
+
 const std::string &Thing::str2(void)
 {
   TRACE_AND_INDENT();
   return (tp()->str2());
 }
+
 const std::string &Thing::str4(void)
 {
   TRACE_AND_INDENT();
   return (tp()->str4());
 }
+
 const std::string &Thing::str5(void)
 {
   TRACE_AND_INDENT();
   return (tp()->str5());
 }
+
 const std::string &Thing::text_description(void)
 {
   TRACE_AND_INDENT();
   return (tp()->text_description());
 }
+
 const std::string &Thing::text_enchant(void)
 {
   TRACE_AND_INDENT();
   return (tp()->text_enchant());
 }
+
 const std::string &Thing::text_hits(void)
 {
   TRACE_AND_INDENT();
   return (tp()->text_hits());
 }
+
 const std::string &Thing::text_name(void)
 {
   TRACE_AND_INDENT();
   return (tp()->text_name());
 }
+
 const std::string &Thing::text_skill(void)
 {
   TRACE_AND_INDENT();
   return (tp()->text_skill());
 }
+
 const std::string &Thing::text_debuff(void)
 {
   TRACE_AND_INDENT();
   return (tp()->text_debuff());
 }
+
 const std::string &Thing::text_buff(void)
 {
   TRACE_AND_INDENT();
   return (tp()->text_buff());
 }
+
 const std::string &Thing::text_title(void)
 {
   TRACE_AND_INDENT();
   return (tp()->text_title());
 }
+
 const std::string &Thing::text_unused(void)
 {
   TRACE_AND_INDENT();
   return (tp()->text_unused());
 }
+
 const std::string &Thing::equip_carry_anim(void)
 {
   TRACE_AND_INDENT();

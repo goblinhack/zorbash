@@ -2214,6 +2214,7 @@ static PyMethodDef python_c_METHODS[] = {
     ZX_ADD_PYTHON_TP_FUNCTION(on_open_do),
     ZX_ADD_PYTHON_TP_FUNCTION(on_tick_do),
     ZX_ADD_PYTHON_TP_FUNCTION(on_use_do),
+    ZX_ADD_PYTHON_TP_FUNCTION(on_final_use_do),
     ZX_ADD_PYTHON_TP_FUNCTION(projectile_name),
     ZX_ADD_PYTHON_TP_FUNCTION(range_max),
     ZX_ADD_PYTHON_TP_FUNCTION(rarity),

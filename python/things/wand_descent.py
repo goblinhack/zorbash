@@ -15,6 +15,10 @@ def explode(me, x, y):
     zx.level_spawn_using_items_radius_range(me, me, me, "explosion_destroy_floor")
     zx.thing_defeated(me, "exploded")
 
+def on_final_use(owner, item, target, x, y):
+    if zx.thing_is_player(owner):
+        zx.topcon("The wand crumbles into dust.")
+
 def on_you_are_hit(me, hitter, real_hitter, x, y, crit, bite, poison, damage):
     explode(me, x, y)
 
@@ -268,6 +272,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_on_death_drop_all_items(False)
     mytp.set_on_death_is_open(False)
     mytp.set_on_fall_do("wand_descent.on_fall()")
+    mytp.set_on_final_use_do("wand_descent.on_final_use()")
     mytp.set_on_idle_dice("1d1000+200:wand_descent.on_idle()")
     mytp.set_on_you_are_hit_do("wand_descent.on_you_are_hit()")
     mytp.set_on_you_are_on_fire_do("wand_descent.on_fire()")

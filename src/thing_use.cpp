@@ -82,6 +82,75 @@ void Thing::on_use(Thingp what, Thingp target)
   }
 }
 
+void Thing::on_final_use(Thingp what)
+{
+  verify(what);
+  if (! what) {
+    err("Cannot final_use null thing");
+    return;
+  }
+
+  auto on_final_use = what->tp()->on_final_use_do();
+  if (std::empty(on_final_use)) {
+    return;
+  }
+
+  auto t = split_tokens(on_final_use, '.');
+  if (t.size() == 2) {
+    auto        mod   = t[ 0 ];
+    auto        fn    = t[ 1 ];
+    std::size_t found = fn.find("()");
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
+
+    dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_string().c_str(), what->to_string().c_str());
+
+    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, 0U, (unsigned int) mid_at.x,
+                    (unsigned int) mid_at.y);
+  } else {
+    ERR("Bad on_final_use call [%s] expected mod:function, got %d elems", on_final_use.c_str(),
+        (int) on_final_use.size());
+  }
+}
+
+void Thing::on_final_use(Thingp what, Thingp target)
+{
+  verify(what);
+  if (! what) {
+    err("Cannot on_final_use null thing");
+    return;
+  }
+
+  verify(target);
+  if (! what) {
+    err("Cannot on_final_use null target");
+    return;
+  }
+
+  auto on_final_use = what->tp()->on_final_use_do();
+  if (! std::empty(on_final_use)) {
+    auto t = split_tokens(on_final_use, '.');
+    if (t.size() == 2) {
+      auto        mod   = t[ 0 ];
+      auto        fn    = t[ 1 ];
+      std::size_t found = fn.find("()");
+      if (found != std::string::npos) {
+        fn = fn.replace(found, 2, "");
+      }
+
+      dbg("Call %s.%s(%s, %s, %s)", mod.c_str(), fn.c_str(), to_string().c_str(), what->to_string().c_str(),
+          target->to_string().c_str());
+
+      py_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, target->id.id, (unsigned int) mid_at.x,
+                      (unsigned int) mid_at.y);
+    } else {
+      ERR("Bad on_final_use call [%s] expected mod:function, got %d elems", on_final_use.c_str(),
+          (int) on_final_use.size());
+    }
+  }
+}
+
 void Thing::used(Thingp what, Thingp target, bool remove_after_use)
 {
   verify(what);
@@ -115,6 +184,12 @@ void Thing::used(Thingp what, Thingp target, bool remove_after_use)
       game->request_remake_rightbar = true;
       return;
     }
+  }
+
+  if (target) {
+    on_final_use(what, target);
+  } else {
+    on_final_use(what);
   }
 
   dbg("Used %s", what->to_string().c_str());

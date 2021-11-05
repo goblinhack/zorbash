@@ -496,6 +496,7 @@ public:
   const std::string &on_open_do(void);
   const std::string &on_tick_do(void);
   const std::string &on_use_do(void);
+  const std::string &on_final_use_do(void);
   const std::string &projectile_name(void);
   const std::string &short_text_name(void);
   const std::string &spawn_on_shoved(void);
@@ -1381,6 +1382,8 @@ public:
   void on_open(void);
   void on_use(Thingp what);
   void on_use(Thingp what, Thingp target);
+  void on_final_use(Thingp what);
+  void on_final_use(Thingp what, Thingp target);
   void poison_tick(void);
   void reinit(void);
   void remove_all_references();
