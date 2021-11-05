@@ -312,6 +312,9 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
   real_hitter->reset_goal_penalty(this);
 
   if (is_player()) {
+    //
+    // Player being hit
+    //
     if (damage > THING_DAMAGE_SHAKE_ABOVE) {
       level->set_wobble(damage / THING_DAMAGE_SHAKE_SCALE);
       if (real_hitter == this) {
@@ -322,8 +325,11 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
         } else {
           if (hitter->is_weapon()) {
             TOPCON("%%fg=red$You hit yourself for %d damage with %s!%%fg=reset$", damage, hitter->text_the().c_str());
-          } else if (hitter->is_wand()) {
+          } else if (hitter->is_laser()) {
             TOPCON("%%fg=red$You zap yourself for %d damage with %s!%%fg=reset$", damage, hitter->text_the().c_str());
+          } else if (hitter->is_wand()) {
+            TOPCON("%%fg=red$You blast yourself for %d damage with %s!%%fg=reset$", damage,
+                   hitter->text_the().c_str());
           } else if (poison) {
             TOPCON("%%fg=red$You feel sick for %d damage with %s!%%fg=reset$", poison, hitter->text_the().c_str());
           } else {
@@ -338,9 +344,12 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
           if (hitter->is_weapon()) {
             TOPCON("%%fg=red$%s hits you for %d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(), damage,
                    hitter->text_the().c_str());
-          } else if (hitter->is_wand()) {
+          } else if (hitter->is_laser()) {
             TOPCON("%%fg=red$%s zaps you for %d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(), damage,
                    hitter->text_the().c_str());
+          } else if (hitter->is_wand()) {
+            TOPCON("%%fg=red$%s blasts you for %d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(),
+                   damage, hitter->text_the().c_str());
           } else if (hitter->is_projectile() || hitter->is_laser()) {
             TOPCON("%%fg=red$%s blasted you for %d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(),
                    damage, hitter->text_the().c_str());
@@ -367,8 +376,11 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
           if (hitter->is_weapon()) {
             TOPCON("%%fg=yellow$You hit yourself for %d damage with %s!%%fg=reset$", damage,
                    hitter->text_the().c_str());
-          } else if (hitter->is_wand()) {
+          } else if (hitter->is_laser()) {
             TOPCON("%%fg=yellow$You zap yourself for %d damage with %s!%%fg=reset$", damage,
+                   hitter->text_the().c_str());
+          } else if (hitter->is_wand()) {
+            TOPCON("%%fg=yellow$You blast yourself for %d damage with %s!%%fg=reset$", damage,
                    hitter->text_the().c_str());
           } else if (poison) {
             TOPCON("%%fg=yellow$You feel sick for %d damage with %s!%%fg=reset$", poison, hitter->text_the().c_str());
@@ -384,8 +396,11 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
           if (hitter->is_weapon()) {
             TOPCON("%%fg=yellow$%s hits you for %d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(),
                    damage, hitter->text_the().c_str());
-          } else if (hitter->is_wand()) {
+          } else if (hitter->is_laser()) {
             TOPCON("%%fg=yellow$%s zaps you for %d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(),
+                   damage, hitter->text_the().c_str());
+          } else if (hitter->is_wand()) {
+            TOPCON("%%fg=yellow$%s blasts you for %d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(),
                    damage, hitter->text_the().c_str());
           } else if (hitter->is_projectile() || hitter->is_laser()) {
             TOPCON("%%fg=yellow$%s blasts you for %d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(),
@@ -398,34 +413,86 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       }
     }
 
+    //
+    // Player being hit
+    //
     if (is_bloodied()) {
       level->set_wobble(damage / THING_DAMAGE_SHAKE_SCALE);
     }
-
-    if (game->robot_mode) {
-      ai_change_state(MONST_STATE_IDLE, "robot was attacked");
-    }
   } else {
     if (real_hitter->is_player()) {
+      //
+      // Player hitting something else
+      //
       if (is_alive_monst() || is_minion_generator()) {
         if (crit) {
           TOPCON("%%fg=red$You CRIT hit %s for %d damage!%%fg=reset$", text_the().c_str(), damage);
         } else {
           if (hitter && (hitter != real_hitter)) {
-            TOPCON("You hit %s for %d damage with %s.", text_the().c_str(), damage, hitter->text_the().c_str());
+            if (hitter->is_weapon()) {
+              TOPCON("You hit %s for %d damage with %s.", text_the().c_str(), damage, hitter->text_the().c_str());
+            } else if (hitter->is_laser()) {
+              TOPCON("You zap %s for %d damage with %s.", text_the().c_str(), damage, hitter->text_the().c_str());
+            } else if (hitter->is_wand()) {
+              TOPCON("You blast %s for %d damage with %s.", text_the().c_str(), damage, hitter->text_the().c_str());
+            } else if (poison) {
+              TOPCON("You poison %s for %d damage with %s.", text_the().c_str(), damage, hitter->text_the().c_str());
+            } else {
+              TOPCON("You hit %s for %d damage with %s.", text_the().c_str(), damage, hitter->text_the().c_str());
+            }
           } else {
-            TOPCON("You hit %s for %d damage.", text_the().c_str(), damage);
+            if (hitter->is_weapon()) {
+              TOPCON("You hit %s for %d damage.", text_the().c_str(), damage);
+            } else if (hitter->is_laser()) {
+              TOPCON("You zap %s for %d damage.", text_the().c_str(), damage);
+            } else if (hitter->is_wand()) {
+              TOPCON("You blast %s for %d damage.", text_the().c_str(), damage);
+            } else if (poison) {
+              TOPCON("You poison %s for %d damage.", text_the().c_str(), damage);
+            } else {
+              TOPCON("You hit %s for %d damage.", text_the().c_str(), damage);
+            }
           }
         }
+      } else if (is_item()) {
+        if (hitter->is_weapon()) {
+          TOPCON("You hit %s.", text_the().c_str());
+        } else if (hitter->is_laser()) {
+          TOPCON("You zap %s.", text_the().c_str());
+        } else if (hitter->is_wand()) {
+          TOPCON("You blast %s.", text_the().c_str());
+        } else {
+          TOPCON("You hit %s.", text_the().c_str());
+        }
       } else {
-        TOPCON("You hit %s.", text_the().c_str());
+        if (hitter->is_weapon()) {
+          TOPCON("You hit %s for %d damage.", text_the().c_str(), damage);
+        } else if (hitter->is_laser()) {
+          TOPCON("You zap %s for %d damage.", text_the().c_str(), damage);
+        } else if (hitter->is_wand()) {
+          TOPCON("You blast %s for %d damage.", text_the().c_str(), damage);
+        } else {
+          TOPCON("You hit %s for %d damage.", text_the().c_str(), damage);
+        }
       }
+    } else {
+      //
+      // Something else hitting something else
+      //
     }
 
+    //
+    // Monster or player hitting something
+    //
     if (real_hitter->is_fire() || real_hitter->is_lava()) {
       set_on_fire("hit by fire or lava");
     }
+  }
 
+  //
+  // Interrupt whatever the monster was doing.
+  //
+  if (is_monst() || (is_player() && game->robot_mode)) {
     ai_change_state(MONST_STATE_IDLE, "monst was attacked");
   }
 

@@ -176,7 +176,7 @@ def key_init(name, text_name):
     mytp.set_is_lava(False)
     mytp.set_is_light_blocker(False)
     mytp.set_is_living(False)
-    mytp.set_is_loggable(False)
+    mytp.set_is_loggable(True)
     mytp.set_is_meat_eater(False)
     mytp.set_is_meat(False)
     mytp.set_is_metal(True)

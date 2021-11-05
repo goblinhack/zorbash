@@ -11,8 +11,8 @@ def acid_init(name, text_name, short_text_name, tiles=[], left_tiles=[]):
     mytp.set_is_acid(True)
     mytp.set_is_tickable(True) # for lifespan tick
     mytp.set_is_hazard(True)
-    mytp.set_is_loggable(False)
-    mytp.set_is_loggable(False)
+    mytp.set_is_loggable(True)
+    mytp.set_is_loggable(True)
     mytp.set_is_meat_eater(True)
     mytp.set_is_removeable_if_out_of_slots(True)
     mytp.set_lifespan_dice("1d20+20")

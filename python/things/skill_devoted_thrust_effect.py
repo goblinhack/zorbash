@@ -9,8 +9,8 @@ def tp_init(name):
     mytp.set_is_able_to_fall(False)
     mytp.set_is_tickable(True)
     mytp.set_is_floating(True)
-    mytp.set_is_loggable(False)
-    mytp.set_is_loggable(False)
+    mytp.set_is_loggable(True)
+    mytp.set_is_loggable(True)
     mytp.set_z_depth(zx.MAP_DEPTH_EXPLOSION_MINOR)
     mytp.set_z_prio(zx.MAP_PRIO_INFRONT)
 

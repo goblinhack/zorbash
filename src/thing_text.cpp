@@ -57,6 +57,15 @@ std::string Thing::text_the(void)
 
   std::string out = "the ";
 
+  //
+  // "the goblin's short sword" for example
+  //
+  auto top_owner = get_top_owner();
+  if (top_owner && ! top_owner->is_player()) {
+    out += top_owner->text_name();
+    out += "'s ";
+  }
+
   if (is_dead) {
     if (is_undead()) {
       out += "extra dead ";
