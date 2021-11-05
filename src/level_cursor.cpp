@@ -160,10 +160,13 @@ void Level::cursor_recreate(void)
   if (what && (game->state == Game::STATE_CHOOSING_TARGET)) {
     bool too_far = false;
     auto dist    = DISTANCE(player->mid_at.x, player->mid_at.y, mid_at.x, mid_at.y);
-    if (what->get_throw_distance()) {
+
+    if (player->get_throw_distance()) {
       too_far = dist > player->get_throw_distance();
-    } else if (what->range_max()) {
-      too_far = dist > what->range_max();
+    }
+
+    if (what->range_max()) {
+      too_far = too_far || dist > what->range_max();
     }
 
     if (too_far) {

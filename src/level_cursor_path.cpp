@@ -31,6 +31,10 @@ void Level::cursor_path_draw_circle(void)
   auto radius_max = what->tp()->blast_max_radius();
   auto mid_at     = cursor->mid_at;
 
+  if (! radius_max) {
+    return;
+  }
+
   //
   // Check not out of range
   //
