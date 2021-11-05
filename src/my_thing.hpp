@@ -1324,7 +1324,7 @@ public:
   void fall(float fall_height, ts_t ms);
   void fire_tick();
   void gc(void);
-  void get_light_strength_including_torch_effect(int &light_strength);
+  void get_light_strength_including_torch_effect(uint8_t &light_strength);
   void get_tiles(void);
   void grass_tick();
   void hide();
@@ -1430,7 +1430,7 @@ public:
   void update_all(void);
   void update_interpolated_position(void);
   void update_light(void);
-  void update_light_strength_including_torch_effect(int &light_strength);
+  void update_light_strength_including_torch_effect(uint8_t &light_strength);
   void update_pos(point, bool immediately);
   void update_tick(void);
   void used(Thingp w, Thingp target, bool remove_after_use);

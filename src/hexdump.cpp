@@ -2,7 +2,7 @@
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
 //
-//
+
 #include "my_string.hpp"
 #include <iomanip>
 #include <iostream>

@@ -1566,7 +1566,7 @@ void Thing::new_infop(void)
     // err("New monst info");
     newptr(_infop, "ThingInfo");
 
-    if (tp_id != -1) {
+    if (mytp && (tp_id != -1)) {
       //
       // Walls and rock can be destroyed, hence no checks
       //
@@ -1584,9 +1584,9 @@ void Thing::new_itemp(void)
     _itemp = new ThingItem();
     // uncomment to see who allocates things
     // err("New monst item");
-    newptr(_itemp, "ThingInfo");
+    newptr(_itemp, "ThingItem");
 
-    if (tp_id != -1) {
+    if (mytp && (tp_id != -1)) {
       //
       // Walls and rock can be destroyed, hence no checks
       //
@@ -4371,7 +4371,7 @@ int Thing::get_light_strength(void)
   }
 
   verify(maybe_infop());
-  auto light_strength = get_infop()->light_strength;
+  uint8_t light_strength = get_infop()->light_strength;
 
   if (! light_strength) {
     light_strength = get_initial_light_strength();
@@ -4393,7 +4393,7 @@ int Thing::update_light_strength(void)
   }
 
   verify(maybe_infop());
-  auto light_strength = get_infop()->light_strength;
+  uint8_t light_strength = get_infop()->light_strength;
 
   if (! light_strength) {
     light_strength = get_initial_light_strength();

@@ -33,7 +33,13 @@ float Thing::get_bounce(void)
   if (t >= get_ts_bounce_end()) {
     is_bouncing = false;
 
-    if (get_bounce_count()) {
+    if (get_bounce_count() == 255) {
+      //
+      // Bounce forever
+      //
+      bounce(get_bounce_height() * get_bounce_fade(), get_bounce_fade(),
+             (float) (get_ts_bounce_end() - get_ts_bounce_begin()) * get_bounce_fade(), get_bounce_count());
+    } else if (get_bounce_count()) {
       bounce(get_bounce_height() * get_bounce_fade(), get_bounce_fade(),
              (float) (get_ts_bounce_end() - get_ts_bounce_begin()) * get_bounce_fade(), get_bounce_count() - 1);
     }

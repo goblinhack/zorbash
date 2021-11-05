@@ -402,7 +402,7 @@ void Thing::init(Levelp level, const std::string &name, const point born)
   }
 
   if (gfx_bounce_always()) {
-    bounce(0.2, 1.0, 500 + pcg_random_range(0, 50), 99999);
+    bounce(0.2, 1.0, 500 + pcg_random_range(0, 50), 255);
   }
 
   init_lights();
@@ -551,18 +551,9 @@ void Thing::reinit(void)
     level_push();
   }
 
-#if 0
-  //
-  // Relearn the cursor after loading.
-  //
   if (is_cursor()) {
-    if (level->cursor) {
-      dead("by already exists");
-    } else {
-      level->cursor = this;
-    }
+    level->cursor = this;
   }
-#endif
 
   init_lights();
 }

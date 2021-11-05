@@ -33,69 +33,61 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
+
+//
+// Changed by goblinhack@gmail.com
+//
+
 #include <math.h>
 #include <stdbool.h>
 #include <stdlib.h>
 #include <string.h>
 
+#include "my_array_bounds_check.hpp"
 #include "my_level.hpp"
 #include "my_level_shadow_casting.hpp"
-#include "my_array_bounds_check.hpp"
 
 // Octant transformation matrixes.
 // {xx, xy, yx, yy}
-static const int matrix_table[8][4] = {
-    {1, 0, 0, 1},
-    {0, 1, 1, 0},
-    {0, -1, 1, 0},
-    {-1, 0, 0, 1},
-    {-1, 0, 0, -1},
-    {0, -1, -1, 0},
-    {0, 1, -1, 0},
-    {1, 0, 0, -1},
+static const int matrix_table[ 8 ][ 4 ] = {
+    {1, 0, 0, 1},   {0, 1, 1, 0},   {0, -1, 1, 0}, {-1, 0, 0, 1},
+    {-1, 0, 0, -1}, {0, -1, -1, 0}, {0, 1, -1, 0}, {1, 0, 0, -1},
 };
 
 // Cast visiblity using shadowcasting.
-void Level::scan(
-    FovMap* fov,
-    int pov_x,
-    int pov_y,
-    int distance,  // Polar distance from POV.
-    float view_slope_high,
-    float view_slope_low,
-    int max_radius,
-    int octant,
-    bool light_walls) 
+void Level::scan(FovMap *fov, int pov_x, int pov_y,
+                 int   distance, // Polar distance from POV.
+                 float view_slope_high, float view_slope_low, int max_radius, int octant, bool light_walls)
 {
-  const int xx = matrix_table[octant][0];
-  const int xy = matrix_table[octant][1];
-  const int yx = matrix_table[octant][2];
-  const int yy = matrix_table[octant][3];
+  const int xx             = matrix_table[ octant ][ 0 ];
+  const int xy             = matrix_table[ octant ][ 1 ];
+  const int yx             = matrix_table[ octant ][ 2 ];
+  const int yy             = matrix_table[ octant ][ 3 ];
   const int radius_squared = max_radius * max_radius;
 
   if (view_slope_high < view_slope_low) {
-    return;  // View is invalid.
+    return; // View is invalid.
   }
 
   if (distance > max_radius) {
-    return;  // Distance is out-of-range.
+    return; // Distance is out-of-range.
   }
 
   if (is_oob(pov_x + distance * xy, pov_y + distance * yy)) {
-    return;  // Distance is out-of-bounds.
+    return; // Distance is out-of-bounds.
   }
 
   bool prev_tile_blocked = false;
 
-  for (int angle = distance; angle >= 0; --angle) {  // Polar angle coordinates from high to low.
-    const float tile_slope_high = (angle + 0.5f) / (distance - 0.5f);
-    const float tile_slope_low = (angle - 0.5f) / (distance + 0.5f);
+  for (int angle = distance; angle >= 0; --angle) { // Polar angle coordinates from high to low.
+    const float tile_slope_high     = (angle + 0.5f) / (distance - 0.5f);
+    const float tile_slope_low      = (angle - 0.5f) / (distance + 0.5f);
     const float prev_tile_slope_low = (angle + 0.5f) / (distance + 0.5f);
 
     if (tile_slope_low > view_slope_high) {
-      continue;  // Tile is not in the view yet.
+      continue; // Tile is not in the view yet.
     } else if (tile_slope_high < view_slope_low) {
-      break;  // Tiles will no longer be in view.
+      break; // Tiles will no longer be in view.
     }
 
     // Current tile is in view.
@@ -103,19 +95,18 @@ void Level::scan(
     const int map_y = pov_y + angle * yx + distance * yy;
 
     if (is_oob(map_x, map_y)) {
-      continue;  // Angle is out-of-bounds.
+      continue; // Angle is out-of-bounds.
     }
 
-    if (angle * angle + distance * distance <= radius_squared && (light_walls ||
-          ! is_light_blocker(map_x, map_y))) {
+    if (angle * angle + distance * distance <= radius_squared && (light_walls || ! is_light_blocker(map_x, map_y))) {
       set(fov->can_see, map_x, map_y, true);
     }
 
-    if (prev_tile_blocked && !is_light_blocker(map_x, map_y)) {  // Wall -> floor.
-      view_slope_high = prev_tile_slope_low;  // Reduce the view size.
+    if (prev_tile_blocked && ! is_light_blocker(map_x, map_y)) { // Wall -> floor.
+      view_slope_high = prev_tile_slope_low;                     // Reduce the view size.
     }
 
-    if (!prev_tile_blocked && is_light_blocker(map_x, map_y)) {  // Floor -> wall.
+    if (! prev_tile_blocked && is_light_blocker(map_x, map_y)) { // Floor -> wall.
       // Get the last sequence of floors as a view and recurse into them.
       scan(fov, pov_x, pov_y, distance + 1, view_slope_high, tile_slope_high, max_radius, octant, light_walls);
     }
@@ -123,13 +114,13 @@ void Level::scan(
     prev_tile_blocked = is_light_blocker(map_x, map_y);
   }
 
-  if (!prev_tile_blocked) {
+  if (! prev_tile_blocked) {
     // Tail-recurse into the current view.
     scan(fov, pov_x, pov_y, distance + 1, view_slope_high, view_slope_low, max_radius, octant, light_walls);
   }
 }
 
-bool Level::fov_calculete(FovMap* fov, int pov_x, int pov_y, int max_radius, bool light_walls) 
+bool Level::fov_calculete(FovMap *fov, int pov_x, int pov_y, int max_radius, bool light_walls)
 {
   if (is_oob(pov_x, pov_y)) {
     err("Point of view {%i, %i} is out of bounds.", pov_x, pov_y);
@@ -141,7 +132,7 @@ bool Level::fov_calculete(FovMap* fov, int pov_x, int pov_y, int max_radius, boo
   if (max_radius <= 0) {
     int max_radius_x = std::max(MAP_WIDTH - pov_x, pov_x);
     int max_radius_y = std::max(MAP_HEIGHT - pov_y, pov_y);
-    max_radius = (int)(sqrt(max_radius_x * max_radius_x + max_radius_y * max_radius_y)) + 1;
+    max_radius       = (int) (sqrt(max_radius_x * max_radius_x + max_radius_y * max_radius_y)) + 1;
   }
 
   /* recursive shadow casting */

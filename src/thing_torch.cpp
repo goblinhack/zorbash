@@ -16,12 +16,11 @@
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"
 
-void Thing::get_light_strength_including_torch_effect(int &out_light_strength)
+void Thing::get_light_strength_including_torch_effect(uint8_t &out_light_strength)
 {
   TRACE_AND_INDENT();
-  auto light_strength = get_initial_light_strength();
-
-  auto torch_count = 0;
+  uint8_t light_strength = get_initial_light_strength();
+  uint8_t torch_count    = 0;
 
   for (const auto o : get_item_vector()) {
     if (! o->is_torch()) {
@@ -46,11 +45,11 @@ void Thing::get_light_strength_including_torch_effect(int &out_light_strength)
   out_light_strength = light_strength;
 }
 
-void Thing::update_light_strength_including_torch_effect(int &out_light_strength)
+void Thing::update_light_strength_including_torch_effect(uint8_t &out_light_strength)
 {
   TRACE_AND_INDENT();
-  auto orig_light_strength = out_light_strength;
-  int  light_strength;
+  uint8_t orig_light_strength = out_light_strength;
+  uint8_t light_strength;
 
   get_light_strength_including_torch_effect(light_strength);
 
