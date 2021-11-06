@@ -15,7 +15,7 @@
 //
 // Including items in bags
 //
-std::list< Thingp > Thing::maybe_itemp_list(void)
+std::list< Thingp > Thing::get_item_list(void)
 {
   std::list< Thingp > out;
 

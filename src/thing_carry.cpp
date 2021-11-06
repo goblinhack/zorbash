@@ -136,14 +136,8 @@ bool Thing::carry(Thingp item, bool can_equip)
       //
       dbg("Already owned: %s", item->to_string().c_str());
     } else {
-      //
-      // Different owner. A different bag?
-      //
-      // Can't use drop as that can cause things to interact with
-      // the level. If this is moving between bags, this is safer.
-      //
       dbg("Drop from existing owner");
-      existing_owner->drop_into_ether(item);
+      existing_owner->drop(item);
     }
   }
 

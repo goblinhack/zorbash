@@ -36,6 +36,10 @@ bool Thing::drop(Thingp what, Thingp target, bool stolen)
     }
   }
   TRACE_AND_INDENT();
+
+  auto top_owner       = what->get_top_owner();
+  auto immediate_owner = what->get_immediate_owner();
+
   if (game->in_transit_item) {
     //
     // Such items are not owned by anyone
@@ -44,14 +48,12 @@ bool Thing::drop(Thingp what, Thingp target, bool stolen)
     //
     // Check we own it
     //
-    auto top_owner      = what->get_top_owner();
-    auto existing_owner = what->get_immediate_owner();
-    if (top_owner != this) {
-      if (existing_owner) {
+    if ((top_owner != this) && (immediate_owner != this)) {
+      if (immediate_owner) {
         log("Immediate owner of %s is %s", what->to_string().c_str(), top_owner->to_string().c_str());
         log("Top owner of %s is %s", what->to_string().c_str(), what->get_top_owner()->to_string().c_str());
         err("Attempt to drop %s which is not carried and owned by %s", what->to_string().c_str(),
-            existing_owner->to_string().c_str());
+            immediate_owner->to_string().c_str());
       } else {
         err("Attempt to drop %s which is not carried and not owned", what->to_string().c_str());
       }
@@ -96,7 +98,9 @@ bool Thing::drop(Thingp what, Thingp target, bool stolen)
     what->move_to_immediately(mid_at);
   }
 
-  get_itemp()->carrying.remove(what->id);
+  if (immediate_owner) {
+    immediate_owner->get_itemp()->carrying.remove(what->id);
+  }
 
   if (! stolen) {
     //
@@ -126,6 +130,7 @@ bool Thing::drop(Thingp what, Thingp target, bool stolen)
   }
   what->is_being_dropped = false;
   what->set_tick_last_dropped(game->tick_current);
+  check_all_carried();
 
   return true;
 }
@@ -144,18 +149,21 @@ bool Thing::drop_into_ether(Thingp what)
   TRACE_AND_INDENT();
   dbg("Dropping %s into the ether", what->to_string().c_str());
   TRACE_AND_INDENT();
-  auto existing_owner = what->get_immediate_owner();
-  if (existing_owner != this) {
-    if (existing_owner) {
-      err("Attempt to drop %s into the ether which is not carried and owned by %s", what->to_string().c_str(),
-          existing_owner->to_string().c_str());
+
+  auto top_owner       = what->get_top_owner();
+  auto immediate_owner = what->get_immediate_owner();
+  if ((top_owner != this) && (immediate_owner != this)) {
+    if (immediate_owner) {
+      log("Immediate owner of %s is %s", what->to_string().c_str(), top_owner->to_string().c_str());
+      log("Top owner of %s is %s", what->to_string().c_str(), what->get_top_owner()->to_string().c_str());
+      err("Attempt to drop into ether %s which is not carried and owned by %s", what->to_string().c_str(),
+          immediate_owner->to_string().c_str());
     } else {
-      err("Attempt to drop %s into the ether which is not carried and not owned", what->to_string().c_str());
+      err("Attempt to drop into ether %s which is not carried and not owned", what->to_string().c_str());
     }
     return false;
   }
 
-  Thingp top_owner = get_top_owner();
   if (top_owner) {
     FOR_ALL_EQUIP(e)
     {
@@ -179,10 +187,13 @@ bool Thing::drop_into_ether(Thingp what)
   }
 
   what->remove_owner();
-  get_itemp()->carrying.remove(what->id);
+  if (immediate_owner) {
+    immediate_owner->get_itemp()->carrying.remove(what->id);
+  }
   game->request_remake_rightbar = true;
 
   dbg("Dropped %s into the ether", what->to_string().c_str());
+  check_all_carried();
 
   return true;
 }
@@ -244,6 +255,7 @@ bool Thing::drop_from_ether(Thingp what)
     sound_play("drop");
   }
   what->set_tick_last_dropped(game->tick_current);
+  check_all_carried();
 
   return true;
 }
@@ -268,5 +280,38 @@ void Thing::drop_all(void)
       return;
     }
     drop(t);
+  }
+}
+
+void Thing::check_all_carried(void)
+{
+  if (! maybe_itemp()) {
+    return;
+  }
+
+  TRACE_AND_INDENT();
+  log("Carried items:");
+  TRACE_AND_INDENT();
+
+  for (const auto &what : get_item_list()) {
+    auto top_owner       = what->get_top_owner();
+    auto immediate_owner = what->get_immediate_owner();
+    if ((top_owner != this) && (immediate_owner != this)) {
+      if (immediate_owner) {
+        log("Immediate owner of %s is %s", what->to_string().c_str(), top_owner->to_string().c_str());
+        log("Top owner of %s is %s", what->to_string().c_str(), what->get_top_owner()->to_string().c_str());
+        err("Item check failed for %s which is not carried and owned by %s", what->to_string().c_str(),
+            immediate_owner->to_string().c_str());
+      } else {
+        err("Item check failed for %s which is not carried and not owned", what->to_string().c_str());
+      }
+      continue;
+    }
+
+    if (top_owner != immediate_owner) {
+      log("Carried %s, owner %s", what->to_string().c_str(), immediate_owner->to_string().c_str());
+    } else {
+      log("Carried %s", what->to_string().c_str());
+    }
   }
 }

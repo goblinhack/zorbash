@@ -583,7 +583,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
       }
     }
   }
-#if 1
+#if 0
   if (is_player()) {
     printf("\nrobot search grown:\n");
     for (int y = 0; y < MAP_HEIGHT; y++) {
@@ -936,8 +936,6 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
   TRACE_AND_INDENT();
   point start((int) mid_at.x, (int) mid_at.y);
 
-  auto aip = get_aip();
-
   std::array< std::array< bool, MAP_WIDTH >, MAP_HEIGHT > walked = {};
   std::array< std::array< bool, MAP_WIDTH >, MAP_HEIGHT > pushed = {};
   std::deque< point >                                     in;
@@ -1124,7 +1122,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
     }
   }
 
-#if 1
+#if 0
   if (is_player()) {
     log("Search type %d", search_type);
     for (int y = 0; y < MAP_HEIGHT; y++) {
@@ -1445,7 +1443,7 @@ bool Thing::ai_tick(bool recursing)
   }
   //  }
 
-#if 1
+#if 0
   if (is_player()) {
     con("Can see fov:");
     for (int y = 0; y < MAP_HEIGHT; y++) {

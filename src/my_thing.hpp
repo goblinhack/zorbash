@@ -206,7 +206,7 @@ public:
   //
   // Walk all items and bags to get the items
   //
-  std::list< Thingp > maybe_itemp_list(void);
+  std::list< Thingp > get_item_list(void);
   std::list< Thingp > get_treasure_list(void);
   std::list< Thingp > get_wand_list(void);
   std::list< Thingp > get_food_list(void);
@@ -334,6 +334,7 @@ public:
   bool describe_when_hovering_over(void);
   bool drop(Thingp w);
   bool drop(Thingp w, Thingp target, bool stolen = false);
+  void check_all_carried();
   bool drop_from_ether(Thingp w);
   bool drop_into_ether(Thingp w);
   bool eat(Thingp it);

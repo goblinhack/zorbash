@@ -917,7 +917,7 @@ bool wid_inventory_create(Thingp selected, Thingp over)
       wid_set_pos(w, tl, br);
       wid_set_text(w, "%%fg=white$E%%fg=reset$at");
       y_at += 3;
-    } else if (item_option->is_usable()) {
+    } else if (item_option->is_usable() && ! player->is_equipped(item_option)) {
       TRACE_AND_INDENT();
       auto p = wid_inventory_window;
       auto w = wid_new_square_button(p, "use");

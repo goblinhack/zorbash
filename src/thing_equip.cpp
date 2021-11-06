@@ -272,7 +272,7 @@ bool Thing::unequip(const char *why, int equip, bool allowed_to_recarry)
   }
 
   if (is_player()) {
-    if (! level->is_starting) {
+    if (! level->is_starting && ! level->is_being_destroyed) {
       TOPCON("You unequip %s.", item->text_the().c_str());
     }
   }
@@ -361,7 +361,7 @@ bool Thing::equip(Thingp item, int equip)
   }
 
   if (is_player()) {
-    if (! level->is_starting) {
+    if (! level->is_starting && ! level->is_being_destroyed) {
       TOPCON("You equip %s.", item->text_the().c_str());
     }
   }
