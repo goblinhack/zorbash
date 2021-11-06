@@ -200,9 +200,15 @@ void WidTextBox::log(std::string s, bool lhs, bool rhs)
 
   auto d = split(s, chars_per_line);
 
+  CON("[%s] len %d", s.c_str(), (int) s.length());
   if (d) {
     for (const auto &c : *d) {
-      log_(string_to_wstring(c), lhs, rhs);
+      //
+      // Handles %%fg=...$ with no text due to a split
+      //
+      if (length_without_format(c)) {
+        log_(string_to_wstring(c), lhs, rhs);
+      }
     }
   }
 }

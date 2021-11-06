@@ -340,6 +340,6 @@ def tp_init(name, text_name, short_text_name):
     mytp.update()
 
 def init():
-    tp_init(name="wand_energy", text_name="wand of energy", short_text_name="wand.energy")
+    tp_init(name="wand_energy", text_name="wand of dept of energy", short_text_name="wand.energy")
 
 init()

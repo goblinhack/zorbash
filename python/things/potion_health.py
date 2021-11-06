@@ -55,6 +55,8 @@ def on_enchant(me, x, y):
     enchant = zx.thing_get_enchant(me)
     global mytp
     if enchant == 0:
+        mytp.set_long_text_description("Restores you to 80 percent health")
+    elif enchant == 0:
         mytp.set_long_text_description("Restores you to 90 percent health")
     else:
         mytp.set_long_text_description("Restores you to full health")
@@ -297,7 +299,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_wooden(False)
     mytp.set_item_height(4)
     mytp.set_item_width(4)
-    mytp.set_long_text_description("Restores you to 80 percent health")
+    mytp.set_long_text_description("Restores your health and stamina to at least 80 percent. You'll feel like your old self again. Only even more awesome.")
     mytp.set_normal_placement_rules(True)
     mytp.set_on_death_drop_all_items(False)
     mytp.set_on_death_is_open(False)
@@ -353,6 +355,6 @@ def tp_init(name, text_name, short_text_name):
     mytp.update()
 
 def init():
-    tp_init(name="potion_health", text_name="potion of health", short_text_name="pot.health")
+    tp_init(name="potion_health", text_name="potion of awesomeness", short_text_name="pot.health")
 
 init()

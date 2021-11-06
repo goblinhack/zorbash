@@ -111,29 +111,28 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
   wid_update(wid_popup_window->wid_popup_container);
   wid_raise(wid_popup_window->wid_popup_container);
 
-  wid_popup_window->log(" ");
-  wid_popup_window->log(" ");
-  wid_popup_window->log(" ");
-  wid_popup_window->log(" ");
-  wid_popup_window->log(" ");
-  wid_popup_window->log(" ");
-  wid_popup_window->log(" ");
+  wid_popup_window->log("`");
+  wid_popup_window->log("`");
+  wid_popup_window->log("`");
+  wid_popup_window->log("`");
+  wid_popup_window->log("`");
+  wid_popup_window->log("`");
+  wid_popup_window->log("`");
 
   auto name = t->short_text_capitalized();
   wid_popup_window->log("%%fg=white$" + name);
-  wid_popup_window->log(" ");
+  wid_popup_window->log("`");
 
   if (t->is_dead) {
     wid_popup_window->log("It's dead, Jim");
-    wid_popup_window->log(" ");
+    wid_popup_window->log("`");
   } else {
     wid_popup_window->log(tp->long_text_description(), true);
-    wid_popup_window->log(" ");
+    wid_popup_window->log("`");
   }
 
   wid_thing_info_add_enchant(wid_popup_window, t);
-  wid_thing_info_add_item_rarity(wid_popup_window, t);
-  wid_thing_info_add_monst_rarity(wid_popup_window, t);
+  wid_thing_info_add_rarity(wid_popup_window, t);
   //
   // Not sure if we will have shops
   //
@@ -179,13 +178,12 @@ WidPopup *Game::wid_thing_info_create_popup_compact(const std::vector< Thingp > 
     snprintf(tmp, sizeof(tmp) - 2, "%%fg=white$%-28s%%fg=reset$", name.c_str());
     for (auto c = tmp; c < tmp + sizeof(tmp); c++) {
       if (*c == ' ') {
-        *c = '.';
+        *c = '`';
       }
     }
     wid_popup_window->log(tmp);
 
-    wid_thing_info_add_item_rarity(wid_popup_window, t);
-    wid_thing_info_add_monst_rarity(wid_popup_window, t);
+    wid_thing_info_add_rarity(wid_popup_window, t);
     //
     // Not sure if we will have shops
     //
@@ -201,7 +199,6 @@ WidPopup *Game::wid_thing_info_create_popup_compact(const std::vector< Thingp > 
     wid_thing_info_add_constitution(wid_popup_window, t);
     wid_thing_info_add_charge_count(wid_popup_window, t);
     wid_thing_info_add_danger_level(wid_popup_window, t);
-    wid_popup_window->log("-");
   }
 
   auto w        = wid_popup_window;
@@ -528,41 +525,34 @@ void Game::wid_thing_info_add_enchant(WidPopup *w, Thingp t)
     } else {
       w->log("%%fg=yellow$This item is enchanted!");
     }
-    w->log(" ");
+    w->log("`");
   }
 }
 
-void Game::wid_thing_info_add_item_rarity(WidPopup *w, Thingp t)
+void Game::wid_thing_info_add_rarity(WidPopup *w, Thingp t)
 {
   TRACE_AND_INDENT();
-  auto tp = t->tp();
-  if (t->is_collectable()) {
+
+  auto        tp = t->tp();
+  std::string text;
+  if (t->is_collectable() || t->is_monst()) {
     if (tp->rarity() == THING_RARITY_UNCOMMON) {
-      w->log("Uncommon item");
+      text = "Uncommon";
     } else if (tp->rarity() == THING_RARITY_RARE) {
-      w->log("Rare item");
+      text = "Rare";
     } else if (tp->rarity() == THING_RARITY_VERY_RARE) {
-      w->log("Very rare item");
+      text = "Very rare";
     } else if (tp->rarity() == THING_RARITY_UNIQUE) {
-      w->log("Unique item");
+      text = "Unique";
     }
   }
-}
 
-void Game::wid_thing_info_add_monst_rarity(WidPopup *w, Thingp t)
-{
-  TRACE_AND_INDENT();
-  auto tp = t->tp();
-  if (t->is_monst()) {
-    if (tp->rarity() == THING_RARITY_UNCOMMON) {
-      w->log("Uncommon monster");
-    } else if (tp->rarity() == THING_RARITY_RARE) {
-      w->log("Rare monster");
-    } else if (tp->rarity() == THING_RARITY_VERY_RARE) {
-      w->log("Very rare monster");
-    } else if (tp->rarity() == THING_RARITY_UNIQUE) {
-      w->log("Unique monster");
-    }
+  if (! text.empty()) {
+    char tmp[ MAXSHORTSTR ];
+    char tmp2[ MAXSHORTSTR ];
+    snprintf(tmp2, sizeof(tmp2) - 1, "%s", text.c_str());
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Rarity %17s````", tmp2);
+    w->log(tmp);
   }
 }
 
@@ -581,7 +571,7 @@ void Game::wid_thing_info_add_gold_value(WidPopup *w, Thingp t)
     } else {
       snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->get_gold_value_dice_str().c_str());
     }
-    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Value %15s ``````", tmp2);
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Value  %17s````", tmp2);
     w->log(tmp);
   }
 }
@@ -606,7 +596,7 @@ void Game::wid_thing_info_add_nutrition(WidPopup *w, Thingp t)
       } else {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->get_nutrition_dice_str().c_str());
       }
-      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Food  %15s ``````", tmp2);
+      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Food   %17s````", tmp2);
       w->log(tmp);
     }
   }
@@ -620,10 +610,10 @@ void Game::wid_thing_info_add_health(WidPopup *w, Thingp t)
 
   if (t->is_alive_monst() || t->is_player()) {
     if (t->get_health() == t->get_health_max()) {
-      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Health%15d ``````", t->get_health());
+      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Health %17d```", t->get_health());
     } else {
       snprintf(tmp2, sizeof(tmp2) - 1, "%d/%d", t->get_health(), t->get_health_max());
-      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Health%15s ``````", tmp2);
+      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Health %17s````", tmp2);
     }
     w->log(tmp);
   }
@@ -642,10 +632,10 @@ void Game::wid_thing_info_add_melee_damage(WidPopup *w, Thingp t)
     if (min_value > 0) {
       if (min_value == max_value) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->get_damage_melee_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Damage%15s ``````", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Damage %17s````", tmp2);
       } else {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->get_damage_melee_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Damage%15s ``````", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Damage %17s````", tmp2);
       }
       w->log(tmp);
     }
@@ -665,10 +655,10 @@ void Game::wid_thing_info_add_poison_damage(WidPopup *w, Thingp t)
     if (min_value > 0) {
       if (min_value == max_value) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->get_damage_poison_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Poison%15s ``````", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Poison %17s````", tmp2);
       } else {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->get_damage_poison_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Poison%15s ``````", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Poison %17s````", tmp2);
       }
       w->log(tmp);
     }
@@ -688,10 +678,10 @@ void Game::wid_thing_info_add_bite_damage(WidPopup *w, Thingp t)
     if (min_value > 0) {
       if (min_value == max_value) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->get_damage_bite_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Bite  %15s ``````", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Bite   %17s````", tmp2);
       } else {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->get_damage_bite_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Bite  %15s ``````", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Bite   %17s````", tmp2);
       }
       w->log(tmp);
     }
@@ -711,10 +701,10 @@ void Game::wid_thing_info_add_swallow_damage(WidPopup *w, Thingp t)
     if (min_value > 0) {
       if (min_value == max_value) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->get_damage_swallow_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Digest%15s ``````", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Digest %17s````", tmp2);
       } else {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d%s", min_value, max_value, t->get_damage_swallow_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Digest%15s ``````", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Digest %17s````", tmp2);
       }
       w->log(tmp);
     }
@@ -809,7 +799,7 @@ void Game::wid_thing_info_add_danger_level(WidPopup *w, Thingp t)
   }
 
   const std::string danger_level = player->get_danger_level_str(t);
-  w->log(" ");
+  w->log("`");
   w->log(danger_level);
 
   auto monst_max_damage = t->get_damage_max();
@@ -824,16 +814,16 @@ void Game::wid_thing_info_add_danger_level(WidPopup *w, Thingp t)
     }
 
     if (monst_defeat_count == 1) {
-      w->log(" ");
+      w->log("`");
       w->log("%%fg=red$Could defeat you in " + std::to_string(monst_defeat_count) + " hit!");
     } else if (monst_defeat_count <= 2) {
-      w->log(" ");
+      w->log("`");
       w->log("%%fg=red$Could defeat you in " + std::to_string(monst_defeat_count) + " hits");
     } else if (monst_defeat_count <= 10) {
-      w->log(" ");
+      w->log("`");
       w->log("%%fg=orange$Could defeat you in " + std::to_string(monst_defeat_count) + " hits");
     } else {
-      w->log(" ");
+      w->log("`");
       w->log("Could defeat you eventually...");
     }
   }
@@ -850,19 +840,19 @@ void Game::wid_thing_info_add_danger_level(WidPopup *w, Thingp t)
     }
 
     if (player_defeat_count == 1) {
-      w->log(" ");
+      w->log("`");
       w->log("You could defeat it in " + std::to_string(player_defeat_count) + " hit.");
       w->log("More likely, " + std::to_string(player_defeat_count * 2) + " hits");
     } else if (player_defeat_count <= 2) {
-      w->log(" ");
+      w->log("`");
       w->log("You could defeat it in " + std::to_string(player_defeat_count) + " hits.");
       w->log("More likely, " + std::to_string(player_defeat_count * 2) + " hits.");
     } else if (player_defeat_count <= 10) {
-      w->log(" ");
+      w->log("`");
       w->log("You could defeat it in " + std::to_string(player_defeat_count) + " hits.");
       w->log("More likely, " + std::to_string(player_defeat_count * 2) + " hits.");
     } else {
-      w->log(" ");
+      w->log("`");
       w->log("%%fg=red$It will take many hits to defeat...");
     }
   }
@@ -883,7 +873,7 @@ void Game::wid_thing_info_add_carry_info(WidPopup *w, Thingp t)
   auto items = t->get_itemp()->carrying.size();
 
   if (t->is_open) {
-    w->log(" ");
+    w->log("`");
     w->log("It's open.", true);
 
     //
@@ -891,16 +881,16 @@ void Game::wid_thing_info_add_carry_info(WidPopup *w, Thingp t)
     //
     if (t->is_bag_item_container()) {
       if (items > 3) {
-        w->log(" ");
+        w->log("`");
         w->log("Looks to be full of presents.", true);
       } else if (items > 1) {
-        w->log(" ");
+        w->log("`");
         w->log("Looks like it contains a few things.", true);
       } else if (items > 0) {
-        w->log(" ");
+        w->log("`");
         w->log("Looks like it contains something.", true);
       } else {
-        w->log(" ");
+        w->log("`");
         w->log("Is empty.", true);
       }
     }
@@ -910,16 +900,16 @@ void Game::wid_thing_info_add_carry_info(WidPopup *w, Thingp t)
     //
     if (t->is_bag()) {
       if (items > 3) {
-        w->log(" ");
+        w->log("`");
         w->log("Looks to be bulging with presents.", true);
       } else if (items > 1) {
-        w->log(" ");
+        w->log("`");
         w->log("Looks like it contains a few things.", true);
       } else if (items > 0) {
-        w->log(" ");
+        w->log("`");
         w->log("Looks like it contains something.", true);
       } else {
-        w->log(" ");
+        w->log("`");
         w->log("Looks like it is empty.", true);
       }
     }
@@ -942,18 +932,18 @@ void Game::wid_thing_info_add_charge_count(WidPopup *w, Thingp t)
     auto c = player->item_count_including_charges(t->tp());
     if (c > t->get_charge_count()) {
       snprintf(tmp2, sizeof(tmp2) - 1, "%d(%d tot)", t->get_charge_count(), c);
-      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Charges%14s ``````", tmp2);
+      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Charges%17s````", tmp2);
       w->log(tmp);
     } else {
       snprintf(tmp2, sizeof(tmp2) - 1, "%d", t->get_charge_count());
-      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Charges%14s ``````", tmp2);
+      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Charges%17s````", tmp2);
       w->log(tmp);
     }
   } else {
     auto c = player->item_count_including_charges(t->tp());
     if (c > 1) {
       snprintf(tmp2, sizeof(tmp2) - 1, "%d", c);
-      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Count %15s ``````", tmp2);
+      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Count  %17s````", tmp2);
       w->log(tmp);
     }
   }
