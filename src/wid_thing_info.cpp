@@ -123,8 +123,13 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
   wid_popup_window->log("%%fg=white$" + name);
   wid_popup_window->log(" ");
 
-  wid_popup_window->log(tp->long_text_description(), true);
-  wid_popup_window->log(" ");
+  if (t->is_dead()) {
+    wid_popup_window->log("It's dead, Jim");
+    wid_popup_window->log(" ");
+  } else {
+    wid_popup_window->log(tp->long_text_description(), true);
+    wid_popup_window->log(" ");
+  }
 
   wid_thing_info_add_enchant(wid_popup_window, t);
   wid_thing_info_add_item_rarity(wid_popup_window, t);
