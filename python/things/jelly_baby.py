@@ -7,8 +7,10 @@ def on_you_are_hit(me, hitter, real_hitter, x, y, crit, bite, poison, damage):
 
 def on_death(me, x, y):
     zx.level_spawn_at_thing(me, "pink_splatter")
-    zx.level_spawn_next_to(me, "jelly_baby")
-    zx.level_spawn_next_to(me, "jelly_baby")
+    if zx.pcg_randint(1, 100) < 20:
+        zx.level_spawn_next_to(me, "jelly_baby")
+    if zx.pcg_randint(1, 100) < 20:
+        zx.level_spawn_next_to(me, "jelly_baby")
     zx.thing_sound_play_channel(me, zx.CHANNEL_MONST, "slime{}".format(zx.non_pcg_randint(1, 9)))
 
 def tp_init(name, text_name):
