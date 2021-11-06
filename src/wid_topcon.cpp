@@ -67,7 +67,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     return false;
   }
 
-  DBG3("Unhandled input");
+  LOG("Unhandled input");
   TRACE_AND_INDENT();
   auto level = game->level;
   if (! level) {
@@ -111,19 +111,23 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
 
   if (key->scancode == (SDL_Scancode) game->config.key_move_left) {
     left = true;
-    return player_tick(left, right, up, down, attack, wait, jump);
+    player_tick(left, right, up, down, attack, wait, jump);
+    return false; // To avoid click noise
   }
   if (key->scancode == (SDL_Scancode) game->config.key_move_right) {
     right = true;
-    return player_tick(left, right, up, down, attack, wait, jump);
+    player_tick(left, right, up, down, attack, wait, jump);
+    return false; // To avoid click noise
   }
   if (key->scancode == (SDL_Scancode) game->config.key_move_up) {
     up = true;
-    return player_tick(left, right, up, down, attack, wait, jump);
+    player_tick(left, right, up, down, attack, wait, jump);
+    return false; // To avoid click noise
   }
   if (key->scancode == (SDL_Scancode) game->config.key_move_down) {
     down = true;
-    return player_tick(left, right, up, down, attack, wait, jump);
+    player_tick(left, right, up, down, attack, wait, jump);
+    return false; // To avoid click noise
   }
 
   //

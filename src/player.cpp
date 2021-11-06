@@ -18,16 +18,25 @@
 bool player_tick(bool left, bool right, bool up, bool down, bool attack, bool wait, bool jump)
 {
   TRACE_AND_INDENT();
+
+  if (game->things_are_moving) {
+    game->current_move_speed = (float) game->current_move_speed * 0.9;
+
+    TOPCON("W %d", game->current_move_speed);
+    LOG("PLAY Player tick; ignore, things are moving");
+    return false;
+  }
+
   //
   // Trying to move when the console is visible.
   //
   if (wid_console_window && wid_console_window->visible) {
-    IF_DEBUG3 { LOG("Player tick; ignore, console open"); }
+    LOG("PLAY Player tick; ignore, console open");
     return false;
   }
 
-  if (game->level->ts_fade_in_begin || game->level->ts_fade_out_begin) {
-    IF_DEBUG3 { LOG("Player tick; ignore, level fading im/out"); }
+  if (game->level->ts_fade_out_begin) {
+    LOG("PLAY Player tick; ignore, level fading im/out");
     return false;
   }
 
@@ -36,54 +45,32 @@ bool player_tick(bool left, bool right, bool up, bool down, bool attack, bool wa
   //
   switch (game->state) {
     case Game::STATE_NORMAL : break;
-    case Game::STATE_OPTIONS_FOR_ITEM_MENU :
-      {
-        IF_DEBUG3 { LOG("Ignore player action when choosing item options"); }
-      }
-      return false;
+    case Game::STATE_OPTIONS_FOR_ITEM_MENU : LOG("Ignore player action when choosing item options"); return false;
     case Game::STATE_INVENTORY : // Currently managing inventory
-      {
-        IF_DEBUG3 { LOG("Ignore player action when moving items"); }
-      }
+      LOG("Ignore player action when moving items");
       return false;
     case Game::STATE_COLLECTING_ITEMS : // Collecting en masse from the level
-      {
-        IF_DEBUG3 { LOG("Ignore player action when collecting items"); }
-      }
+      LOG("Ignore player action when collecting items");
       return false;
-    case Game::STATE_ENCHANTING_ITEMS :
-      {
-        IF_DEBUG3 { LOG("Ignore player action when enchanting items"); }
-      }
-      return false;
-    case Game::STATE_CHOOSING_SKILLS :
-      {
-        IF_DEBUG3 { LOG("Ignore player action when choosing skills"); }
-      }
-      return false;
+    case Game::STATE_ENCHANTING_ITEMS : LOG("Ignore player action when enchanting items"); return false;
+    case Game::STATE_CHOOSING_SKILLS : LOG("Ignore player action when choosing skills"); return false;
     case Game::STATE_CHOOSING_TARGET : // Looking to somewhere to throw at
-      {
-        IF_DEBUG3 { LOG("Ignore player action when choosing target"); }
-      }
+      LOG("Ignore player action when choosing target");
       return false;
     case Game::STATE_LOAD_MENU :
     case Game::STATE_SAVE_MENU :
-    case Game::STATE_QUIT_MENU :
-      {
-        IF_DEBUG3 { LOG("Ignore player action when in menu"); }
-      }
-      return false;
+    case Game::STATE_QUIT_MENU : LOG("Ignore player action when in menu"); return false;
   }
 
   auto level = game->level;
   if (! level) {
-    IF_DEBUG3 { LOG("Player tick; ignore, no level"); }
+    LOG("Player tick; ignore, no level");
     return false;
   }
 
   auto player = level->player;
   if (! player) {
-    IF_DEBUG3 { LOG("Player tick; ignore, no player"); }
+    LOG("Player tick; ignore, no player");
     return false;
   }
 
@@ -117,102 +104,47 @@ bool player_tick(bool left, bool right, bool up, bool down, bool attack, bool wa
     level->map_follow_player = false;
   }
 
-  if (player->is_dead || player->is_hidden) {
-    IF_DEBUG3 { LOG("Player tick; ignore, is dead"); }
+  if (player->is_dead) {
+    LOG("Player tick; ignore, is dead");
     return false;
   }
 
-  if (left) {
-    if (level && level->cursor) {
-      level->cursor_path_clear();
-      level->cursor->hide();
-    }
-  }
-
-  if (right) {
-    if (level && level->cursor) {
-      level->cursor_path_clear();
-      level->cursor->hide();
-    }
-  }
-
-  if (up) {
-    if (level && level->cursor) {
-      level->cursor_path_clear();
-      level->cursor->hide();
-    }
-  }
-
-  if (down) {
-    if (level && level->cursor) {
-      level->cursor_path_clear();
-      level->cursor->hide();
-    }
+  if (player->is_hidden) {
+    LOG("Player tick; ignore, is hidden");
+    return false;
   }
 
   if (get(sdl_joy_buttons, SDL_JOY_BUTTON_UP)) {
     up = true;
-    if (level && level->cursor) {
-      level->cursor_path_clear();
-      level->cursor->hide();
-    }
   }
 
   if (get(sdl_joy_buttons, SDL_JOY_BUTTON_DOWN)) {
     down = true;
-    if (level && level->cursor) {
-      level->cursor_path_clear();
-      level->cursor->hide();
-    }
   }
 
   if (get(sdl_joy_buttons, SDL_JOY_BUTTON_LEFT)) {
     left = true;
-    if (level && level->cursor) {
-      level->cursor_path_clear();
-      level->cursor->hide();
-    }
   }
 
   if (get(sdl_joy_buttons, SDL_JOY_BUTTON_RIGHT)) {
     right = true;
-    if (level && level->cursor) {
-      level->cursor_path_clear();
-      level->cursor->hide();
-    }
   }
 
   if (sdl_joy_axes) {
     if (sdl_joy_axes[ 3 ] > sdl_joy_deadzone) {
       right = true;
-      if (level && level->cursor) {
-        level->cursor_path_clear();
-        level->cursor->hide();
-      }
     }
 
     if (sdl_joy_axes[ 3 ] < -sdl_joy_deadzone) {
       left = true;
-      if (level && level->cursor) {
-        level->cursor_path_clear();
-        level->cursor->hide();
-      }
     }
 
     if (sdl_joy_axes[ 4 ] > sdl_joy_deadzone) {
       down = true;
-      if (level && level->cursor) {
-        level->cursor_path_clear();
-        level->cursor->hide();
-      }
     }
 
     if (sdl_joy_axes[ 4 ] < -sdl_joy_deadzone) {
       up = true;
-      if (level && level->cursor) {
-        level->cursor_path_clear();
-        level->cursor->hide();
-      }
     }
 
     if (sdl_joy_axes[ 0 ] > sdl_joy_deadzone) {
@@ -221,26 +153,21 @@ bool player_tick(bool left, bool right, bool up, bool down, bool attack, bool wa
 
     if (sdl_joy_axes[ 0 ] < -sdl_joy_deadzone) {
       left = true;
-      if (level && level->cursor) {
-        level->cursor_path_clear();
-        level->cursor->hide();
-      }
     }
 
     if (sdl_joy_axes[ 1 ] > sdl_joy_deadzone) {
       down = true;
-      if (level && level->cursor) {
-        level->cursor_path_clear();
-        level->cursor->hide();
-      }
     }
 
     if (sdl_joy_axes[ 1 ] < -sdl_joy_deadzone) {
       up = true;
-      if (level && level->cursor) {
-        level->cursor_path_clear();
-        level->cursor->hide();
-      }
+    }
+  }
+
+  if (left || right || up || down) {
+    if (level && level->cursor) {
+      level->cursor_path_clear();
+      level->cursor->hide();
     }
   }
 
@@ -332,6 +259,7 @@ bool player_tick(bool left, bool right, bool up, bool down, bool attack, bool wa
       shove_allowed  = false;
       attack_allowed = false;
     }
+
     bool moved = player->move(future_pos, up, down, left, right, attack, wait, shove_allowed, attack_allowed);
 
     if (moved) {

@@ -8,6 +8,7 @@
 #include "my_level.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_random.hpp"
+#include "my_sdl.hpp"
 #include "my_sys.hpp"
 #include "my_thing.hpp"
 #include "my_wid_actionbar.hpp"
@@ -50,13 +51,10 @@ void Game::tick_begin_now(void)
   //
   pcg_srand(game->tick_current);
 
-  if (game->robot_mode) {
-    game->current_move_speed = game->fast_move_speed;
-  } else if (! game->cursor_move_path.empty()) {
-    game->current_move_speed = game->fast_move_speed;
-  } else {
-    game->current_move_speed = game->slow_move_speed;
-  }
+  //
+  // Set how long each tick takes.
+  //
+  tick_set_speed();
 
   auto level = game->level;
   if (level) {
@@ -77,6 +75,22 @@ void Game::tick_begin_now(void)
 
   if (level) {
     level->lights_fade();
+  }
+}
+
+void Game::tick_set_speed(void)
+{
+  TRACE_AND_INDENT();
+
+  //
+  // Set how long each tick takes.
+  //
+  if (game->robot_mode) {
+    game->current_move_speed = game->fast_move_speed;
+  } else if (! game->cursor_move_path.empty()) {
+    game->current_move_speed = game->fast_move_speed;
+  } else {
+    game->current_move_speed = game->slow_move_speed;
   }
 }
 
@@ -126,6 +140,11 @@ bool Game::tick_end(void)
     CON("TICK %d hash %u rand %d", tick_current, h, pcg_random_range(1, 10000));
 #endif
   }
+
+  //
+  // Set how long each tick takes.
+  //
+  tick_set_speed();
 
   return true;
 }

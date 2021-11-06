@@ -63,7 +63,7 @@ bool Thing::ai_blocked_completely(void)
 bool Thing::ai_create_path(point &nh, const point start, const point end)
 {
   TRACE_AND_INDENT();
-  log("AI create path");
+  dbg("AI create path");
   TRACE_AND_INDENT();
 
   if (end == point(-1, -1)) {

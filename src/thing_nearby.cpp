@@ -128,7 +128,7 @@ Thingp Thing::get_most_dangerous_visible_thing(void)
         }
 
         possible.push_back(std::make_pair(t, score));
-        log("Potential danger: %s", t->to_string().c_str());
+        dbg("Potential danger: %s", t->to_string().c_str());
       }
       FOR_ALL_THINGS_END()
     }

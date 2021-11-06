@@ -31,12 +31,11 @@
 #define THING_AI_WANDER_TRIES              1    // Quite CPU heavy
 #define THING_DAMAGE_SHAKE_ABOVE           10   // Damage above this causes shakes
 #define THING_DAMAGE_SHAKE_SCALE           40.0 // Smaller means more shaking
-#define THING_FAST_MOVE_SPEED_MS           50
+#define THING_FAST_MOVE_SPEED_MS           75
 #define THING_HEALTH_BLOODIED_PCT1         35 // Some blood on the screen
 #define THING_HEALTH_BLOODIED_PCT2         15 // More...
 #define THING_HEALTH_BLOODIED_PCT3         15 // More...
 #define THING_HEALTH_BLOODIED_PCT4         5  // Lots of blood on screen
-#define THING_JUMP_SPEED                   450
 #define THING_SLOW_MOVE_SPEED_MS           125
 #define THING_TICK_DURATION_TOO_LONG       10  // How many ms per thing tick we expect not to exceed
 #define THING_TICK_WAIT_TOO_LONG           50  // How many ticks we wait for things to stop moving

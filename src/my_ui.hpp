@@ -50,8 +50,8 @@
 #define UI_SIDEBAR_RIGHT_WIDTH       16
 #define UI_TEXT_COLOR                GRAY // Default text color
 #define UI_TEXT_COLOR_STR            "gray"
-#define UI_UPDATE_FAST_MS            10
-#define UI_UPDATE_SLOW_MS            20 // FPS and game status
+#define UI_UPDATE_FAST_MS            2
+#define UI_UPDATE_SLOW_MS            10 // FPS and game status
 #define UI_WID_POPUP_WIDTH_NORMAL    24
 #define UI_WID_POPUP_WIDTH_WIDE      38
 #define UI_WID_POPUP_WIDTH_WIDEST    48

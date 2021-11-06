@@ -106,9 +106,10 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   //
   // Add some random delta for fun and some for diagonals
   //
-  float d = how_far_i_can_jump();
+  float d    = how_far_i_can_jump();
+  float dist = distance(mid_at, to);
 
-  if (distance(mid_at, to) > d) {
+  if (dist > d) {
     auto u = (to - mid_at);
     u.unit();
     u *= d;
@@ -162,21 +163,20 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
     }
   }
 
-  auto  src           = (last_blit_tl + last_blit_br) / 2;
-  auto  dx            = x - mid_at.x;
-  auto  dy            = y - mid_at.y;
-  auto  tw            = TILE_WIDTH;
-  auto  th            = TILE_HEIGHT;
-  auto  sz            = isize(last_blit_br.x - last_blit_tl.x, last_blit_br.y - last_blit_tl.y);
-  auto  delay         = THING_JUMP_SPEED;
-  auto  delay_shorter = delay - 10;
-  point dst(src.x + dx * tw, src.y + dy * th);
+  auto  src   = (last_blit_tl + last_blit_br) / 2;
+  auto  dx    = x - mid_at.x;
+  auto  dy    = y - mid_at.y;
+  auto  tw    = TILE_WIDTH;
+  auto  th    = TILE_HEIGHT;
+  auto  sz    = isize(last_blit_br.x - last_blit_tl.x, last_blit_br.y - last_blit_tl.y);
+  auto  delay = (int) (dist * (float) game->current_move_speed);
+  point dest(src.x + dx * tw, src.y + dy * th);
 
   if (is_player()) {
     //
     // So the player is visible above light
     //
-    level->new_external_particle(id, src, dst, sz, delay, tile_index_to_tile(tile_curr), false,
+    level->new_external_particle(id, src, dest, sz, delay, tile_index_to_tile(tile_curr), false,
                                  true /* make_visible_at_end */);
   } else {
     //
@@ -190,7 +190,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
       }
     }
 
-    level->new_internal_particle(id, src, dst, sz, delay, tile_index_to_tile(tile_curr), false,
+    level->new_internal_particle(id, src, dest, sz, delay, tile_index_to_tile(tile_curr), false,
                                  true /* make_visible_at_end */);
   }
 
@@ -209,11 +209,11 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
         w->move_to_immediately(mid_at);
         w->is_jumping = true;
         if (is_player()) {
-          level->new_external_particle(id, src, dst, sz, delay_shorter, tile_index_to_tile(w->tile_curr),
+          level->new_external_particle(id, src, dest, sz, delay, tile_index_to_tile(w->tile_curr),
                                        (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()),
                                        true /* make_visible_at_end */);
         } else {
-          level->new_internal_particle(id, src, dst, sz, delay_shorter, tile_index_to_tile(w->tile_curr),
+          level->new_internal_particle(id, src, dest, sz, delay, tile_index_to_tile(w->tile_curr),
                                        (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()),
                                        true /* make_visible_at_end */);
         }
@@ -230,11 +230,11 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
         // No, the weapon is shown as carry anim
         //
         if (is_player()) {
-          level->new_external_particle(id, src, dst, sz, delay_shorter, tile_index_to_tile(w->tile_curr),
+          level->new_external_particle(id, src, dest, sz, delay, tile_index_to_tile(w->tile_curr),
                                        (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()),
                                        true /* make_visible_at_end */);
         } else {
-          level->new_internal_particle(id, src, dst, sz, delay_shorter, tile_index_to_tile(w->tile_curr),
+          level->new_internal_particle(id, src, dest, sz, delay, tile_index_to_tile(w->tile_curr),
                                        (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()),
                                        true /* make_visible_at_end */);
         }
@@ -260,11 +260,11 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
       w->move_to_immediately(mid_at);
       w->is_jumping = true;
       if (is_player()) {
-        level->new_external_particle(id, src, dst, sz, delay_shorter, tile_index_to_tile(w->tile_curr),
+        level->new_external_particle(id, src, dest, sz, delay, tile_index_to_tile(w->tile_curr),
                                      (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()),
                                      false /* make_visible_at_end */);
       } else {
-        level->new_internal_particle(id, src, dst, sz, delay_shorter, tile_index_to_tile(w->tile_curr),
+        level->new_internal_particle(id, src, dest, sz, delay, tile_index_to_tile(w->tile_curr),
                                      (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()),
                                      false /* make_visible_at_end */);
       }

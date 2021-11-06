@@ -134,17 +134,13 @@ bool Level::tick(void)
       // may not intersect with all interactive things. i.e a carried
       // sword animation.
       //
-      if (t->is_moving) {
-        if (game->robot_mode) {
+      if (game->robot_mode) {
+        if (t->is_moving) {
           if ((wait_count > wait_count_max) && ! game->things_are_moving) {
             t->con("Waiting on animated moving thing longer than expected: %s", t->to_dbg_string().c_str());
           }
           game->things_are_moving = true;
-        } else if (! t->is_offscreen) {
-          if ((wait_count > wait_count_max) && ! game->things_are_moving) {
-            t->con("Waiting on animated moving thing longer than expected: %s", t->to_dbg_string().c_str());
-          }
-          game->things_are_moving = true;
+          // t->log("WAIT %d", __LINE__);
         }
       }
     }
@@ -186,113 +182,85 @@ bool Level::tick(void)
     t->update_interpolated_position();
     t->get_fall();
 
-    //
-    // Check if we finished moving above. If not, keep waiting.
-    //
-    if (t->is_moving) {
-      if (game->robot_mode) {
+    if (game->robot_mode) {
+      //
+      // Check if we finished moving above. If not, keep waiting.
+      //
+      if (t->is_moving) {
         if ((wait_count > wait_count_max) && ! game->things_are_moving) {
           t->con("Waiting on moving thing longer than expected: %s", t->to_dbg_string().c_str());
         }
         game->things_are_moving = true;
-      } else if (! t->is_offscreen) {
-        if ((wait_count > wait_count_max) && ! game->things_are_moving) {
-          t->con("Waiting on moving thing longer than expected: %s", t->to_dbg_string().c_str());
-        }
-        game->things_are_moving = true;
+        // t->log("WAIT %d", __LINE__);
       }
-    }
 
-    //
-    // Check if we finished moving above. If not, keep waiting.
-    //
-    if (t->is_jumping) {
-      if (game->robot_mode) {
+      //
+      // Check if we finished moving above. If not, keep waiting.
+      //
+      if (t->is_jumping) {
         if ((wait_count > wait_count_max) && ! game->things_are_moving) {
           t->con("Waiting on jumping thing longer than expected: %s", t->to_dbg_string().c_str());
         }
         game->things_are_moving = true;
-      } else if (! t->is_offscreen) {
-        if ((wait_count > wait_count_max) && ! game->things_are_moving) {
-          t->con("Waiting on jumping thing longer than expected: %s", t->to_dbg_string().c_str());
-        }
-        game->things_are_moving = true;
+        // t->log("WAIT %d", __LINE__);
       }
-    }
 
-    //
-    // If falling we need to update the z depth and position; and wait.
-    //
-    if (t->is_falling) {
-      if (game->robot_mode) {
+      //
+      // If falling we need to update the z depth and position; and wait.
+      //
+      if (t->is_falling) {
         if ((wait_count > wait_count_max) && ! game->things_are_moving) {
           t->con("Waiting on falling thing longer than expected: %s", t->to_dbg_string().c_str());
         }
         game->things_are_moving = true;
-      } else if (! t->is_offscreen) {
-        if ((wait_count > wait_count_max) && ! game->things_are_moving) {
-          t->con("Waiting on falling thing longer than expected: %s", t->to_dbg_string().c_str());
-        }
-        game->things_are_moving = true;
+        // t->log("WAIT %d", __LINE__);
       }
-    }
 
-    //
-    // Wait on dying thing?
-    //
-    if ((t->is_dead_on_end_of_anim() && ! t->is_dead)) {
-      if (game->robot_mode) {
+      //
+      // Wait on dying thing?
+      //
+      if ((t->is_dead_on_end_of_anim() && ! t->is_dead)) {
         if ((wait_count > wait_count_max) && ! game->things_are_moving) {
           t->con("Waiting on dying thing longer than expected: %s", t->to_dbg_string().c_str());
         }
         game->things_are_moving = true;
-      } else if (! t->is_offscreen) {
-        if ((wait_count > wait_count_max) && ! game->things_are_moving) {
-          t->con("Waiting on dying thing longer than expected: %s", t->to_dbg_string().c_str());
-        }
-        game->things_are_moving = true;
+        // t->log("WAIT %d", __LINE__);
       }
-    }
 
-    //
-    // Wait on resurrecting thing?
-    //
-    if (t->is_alive_on_end_of_anim() && t->is_resurrecting) {
-      if (game->robot_mode) {
+      //
+      // Wait on resurrecting thing?
+      //
+      if (t->is_alive_on_end_of_anim() && t->is_resurrecting) {
         if ((wait_count > wait_count_max) && ! game->things_are_moving) {
           t->con("Waiting on resurrecting thing longer than expected: %s", t->to_dbg_string().c_str());
         }
         game->things_are_moving = true;
-      } else if (! t->is_offscreen) {
-        if ((wait_count > wait_count_max) && ! game->things_are_moving) {
-          t->con("Waiting on resurrecting thing longer than expected: %s", t->to_dbg_string().c_str());
-        }
-        game->things_are_moving = true;
+        // t->log("WAIT %d", __LINE__);
       }
-    }
 
-    FOR_ALL_EQUIP(e)
-    {
-      auto equip_id = t->get_equip_id_use_anim(e);
-      if (equip_id.ok()) {
-        auto w = thing_find(equip_id);
-        if (w && ! w->is_dead) {
-          if ((wait_count > wait_count_max) && ! game->things_are_moving) {
-            w->con("Waiting on this");
-            t->con("This is the owner");
+      FOR_ALL_EQUIP(e)
+      {
+        auto equip_id = t->get_equip_id_use_anim(e);
+        if (equip_id.ok()) {
+          auto w = thing_find(equip_id);
+          if (w && ! w->is_dead) {
+            if ((wait_count > wait_count_max) && ! game->things_are_moving) {
+              w->con("Waiting on this");
+              t->con("This is the owner");
+            }
+            game->things_are_moving = true;
+            // t->log("WAIT %d", __LINE__);
           }
-          game->things_are_moving = true;
         }
       }
-    }
 
-    if (t->get_ts_flip_start() && ! t->is_dead) {
-      if (game->robot_mode) {
+      if (t->get_ts_flip_start() && ! t->is_dead) {
         if ((wait_count > wait_count_max) && ! game->things_are_moving) {
           t->con("Waiting on flipping thing longer than expected: %s", t->to_dbg_string().c_str());
         }
 
         game->things_are_moving = true;
+        // t->log("WAIT %d", __LINE__);
 
         //
         // Make sure offscreen animation occurs.
@@ -309,6 +277,7 @@ bool Level::tick(void)
         t->con("Waiting on waiting to fall thing longer than expected: %s", t->to_dbg_string().c_str());
       }
       game->things_are_moving = true;
+      // t->log("WAIT %d", __LINE__);
     }
 
     if (t->is_scheduled_for_death) {
@@ -316,6 +285,7 @@ bool Level::tick(void)
         t->con("Waiting on scheduled for death thing longer than expected: %s", t->to_dbg_string().c_str());
       }
       game->things_are_moving = true;
+      // t->log("WAIT %d", __LINE__);
     }
 
     //

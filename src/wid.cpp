@@ -5722,6 +5722,7 @@ void wid_key_down(const struct SDL_Keysym *key, int32_t x, int32_t y)
 
   if ((w->on_key_down)(w, key)) {
     sound_play("click");
+
     //
     // Do not raise, gets in the way of popups the callback creates.
     //

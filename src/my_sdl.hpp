@@ -73,6 +73,9 @@ extern int sdl_joy2_right;
 extern int sdl_joy2_left;
 extern int sdl_joy2_down;
 extern int sdl_joy2_up;
+extern int sdl_key_repeat_count;
+
+extern ts_t sdl_last_time_for_key;
 
 extern SDL_Scancode sdl_grabbed_scancode;
 extern bool         g_grab_next_key;
