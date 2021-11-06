@@ -369,7 +369,25 @@ void Thing::try_to_carry(const std::list< Thingp > &items)
 bool Thing::try_to_carry_if_worthwhile_dropping_items_if_needed(Thingp item)
 {
   TRACE_AND_INDENT();
+  log("Try to carry if worthwhile: %s", item->to_string().c_str());
+  TRACE_AND_INDENT();
+
   Thingp would_need_to_drop = nullptr;
+
+  //
+  // Don't try to carry the bag itself if you're an AI. Carry the contents.
+  //
+  if (item->is_bag_item_container()) {
+    log("Try to carry contents of: %s", item->to_string().c_str());
+    TRACE_AND_INDENT();
+
+    for (const auto t : item->get_item_vector()) {
+      if (! try_to_carry_if_worthwhile_dropping_items_if_needed(t)) {
+        return false;
+      }
+    }
+    return true;
+  }
 
   if (worth_collecting(item, &would_need_to_drop) < 0) {
     log("Carry check: @(%s, %d,%d %d/%dh) is not worth collecting %s", level->to_string().c_str(), (int) mid_at.x,

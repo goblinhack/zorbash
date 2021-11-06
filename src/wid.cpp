@@ -6429,6 +6429,7 @@ void wid_tick_all(void)
   }
 
   if (game->request_remake_inventory) {
+    DBG3("Handle request to remake inventory");
     wid_inventory_init();
     game->request_remake_inventory = false;
   }

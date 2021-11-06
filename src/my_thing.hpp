@@ -1010,7 +1010,6 @@ public:
   int item_enchant_count(const uint32_t slot);
   int item_height(void);
   int item_slot_charge_count(const uint32_t slot);
-  int item_slot_count(const uint32_t slot);
   int item_width(void);
   int light_strength(void);
   int minion_leash_distance(void);

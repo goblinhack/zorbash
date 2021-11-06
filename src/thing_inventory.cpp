@@ -129,6 +129,7 @@ void Thing::inventory_particle(Thingp item, uint32_t slot, Thingp particle_targe
   TRACE_AND_INDENT();
   dbg("Create inventory particle %s with target %s", item->to_string().c_str(), particle_target->to_string().c_str());
   TRACE_AND_INDENT();
+
   if (game->in_transit_item) {
     dbg("No; not while moving an item");
     return;
@@ -318,6 +319,7 @@ bool Thing::inventory_shortcuts_remove(Thingp item)
   TRACE_AND_INDENT();
   dbg("Inventory remove %s", item->to_string().c_str());
   TRACE_AND_INDENT();
+
   auto player = level->player;
   if (! player) {
     return false;
@@ -354,22 +356,16 @@ bool Thing::inventory_shortcuts_remove(Thingp item)
 
       inventory_particle(item, i, this);
 
-      auto cnt = item_slot_count(i);
-      dbg("Remove slot %d, count %d", i, cnt);
-      if (cnt > 1) {
-        TRACE_AND_INDENT();
-        dbg("Decrement slot count");
-      } else {
-        TRACE_AND_INDENT();
-        dbg("Remove slot");
-        set(itemp->inventory_shortcuts, i, NoThingId);
+      TRACE_AND_INDENT();
+      dbg("Remove slot");
 
-        if (! itemp->inventory_shortcuts.size()) {
-          game->inventory_highlight_slot = {};
-        } else {
-          while (game->inventory_highlight_slot >= itemp->inventory_shortcuts.size()) {
-            game->inventory_highlight_slot--;
-          }
+      set(itemp->inventory_shortcuts, i, NoThingId);
+
+      if (! itemp->inventory_shortcuts.size()) {
+        game->inventory_highlight_slot = {};
+      } else {
+        while (game->inventory_highlight_slot >= itemp->inventory_shortcuts.size()) {
+          game->inventory_highlight_slot--;
         }
       }
 
@@ -389,6 +385,7 @@ bool Thing::inventory_shortcuts_remove(Thingp item, Thingp particle_target)
   TRACE_AND_INDENT();
   dbg("Inventory remove %s with target %s", item->to_string().c_str(), particle_target->to_string().c_str());
   TRACE_AND_INDENT();
+
   auto player = level->player;
   if (! player) {
     return false;
@@ -427,25 +424,19 @@ bool Thing::inventory_shortcuts_remove(Thingp item, Thingp particle_target)
         inventory_particle(item, i, particle_target);
       }
 
-      auto cnt = item_slot_count(i);
-      dbg("Remove slot %d, count %d", i, cnt);
-      if (cnt > 1) {
-        TRACE_AND_INDENT();
-        dbg("Decrement slot count");
+      dbg("Remove slot");
+      TRACE_AND_INDENT();
+
+      itemp->inventory_shortcuts.erase(itemp->inventory_shortcuts.begin() + i);
+
+      if (! itemp->inventory_shortcuts.size()) {
+        game->inventory_highlight_slot = {};
       } else {
-        TRACE_AND_INDENT();
-        dbg("Remove slot");
-        itemp->inventory_shortcuts.erase(itemp->inventory_shortcuts.begin() + i);
-
-        if (! itemp->inventory_shortcuts.size()) {
-          game->inventory_highlight_slot = {};
-        } else {
-          while (game->inventory_highlight_slot >= itemp->inventory_shortcuts.size()) {
-            game->inventory_highlight_slot--;
-          }
-
-          level->inventory_describe(game->inventory_highlight_slot);
+        while (game->inventory_highlight_slot >= itemp->inventory_shortcuts.size()) {
+          game->inventory_highlight_slot--;
         }
+
+        level->inventory_describe(game->inventory_highlight_slot);
       }
 
       if ((game->state != Game::STATE_CHOOSING_TARGET) && (game->state != Game::STATE_INVENTORY) &&
@@ -506,28 +497,6 @@ int Thing::item_enchant_count(const uint32_t slot)
   return 0;
 }
 
-int Thing::item_slot_count(const uint32_t slot)
-{
-  TRACE_AND_INDENT();
-
-  auto itemp = maybe_itemp();
-  if (! itemp) {
-    return 0;
-  }
-
-  auto thing_id = get(itemp->inventory_shortcuts, slot);
-  if (! thing_id) {
-    return 0;
-  }
-
-  auto t = level->thing_find(thing_id);
-  if (! t) {
-    return 0;
-  }
-
-  return item_count_excluding_charges(t->tp());
-}
-
 Thingp Level::inventory_get(const uint32_t slot)
 {
   TRACE_AND_INDENT();
@@ -577,6 +546,7 @@ bool Level::inventory_over(const uint32_t slot)
   TRACE_AND_INDENT();
   LOG("Inventory: Over inventory slot %d", slot);
   TRACE_AND_INDENT();
+
   if (! player) {
     LOG("Inventory: Ignore; no player");
     return false;
@@ -625,6 +595,7 @@ bool Level::inventory_chosen(const uint32_t slot)
   TRACE_AND_INDENT();
   LOG("Inventory: Chosen inventory slot %d", slot);
   TRACE_AND_INDENT();
+
   if (! player) {
     return false;
   }

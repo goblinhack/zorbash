@@ -36,6 +36,8 @@ static int wid_inventory_tab = WID_INVENTORY_TAB_BAG1;
 void wid_inventory_fini(void)
 {
   TRACE_AND_INDENT();
+  LOG("Close inventory");
+  TRACE_AND_INDENT();
 
   if (wid_inventory_thing_info) {
     delete wid_inventory_thing_info;
@@ -59,6 +61,8 @@ void wid_inventory_fini(void)
 
 bool wid_inventory_init(void)
 {
+  TRACE_AND_INDENT();
+  LOG("Init inventory");
   TRACE_AND_INDENT();
   return wid_inventory_create(nullptr, nullptr);
 }
@@ -678,6 +682,7 @@ bool wid_inventory_create(Thingp selected, Thingp over)
 {
   TRACE_AND_INDENT();
   LOG("Create inventory");
+  TRACE_AND_INDENT();
 
   auto level = game->level;
   if (! level) {
