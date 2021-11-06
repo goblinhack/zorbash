@@ -95,6 +95,7 @@ bool Thing::debuffbox_id_remove(Thingp what)
   TRACE_AND_INDENT();
   dbg("debuffbox remove %s", what->to_string().c_str());
   TRACE_AND_INDENT();
+
   auto player = level->player;
   if (! player) {
     return false;
