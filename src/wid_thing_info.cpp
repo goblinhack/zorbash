@@ -123,7 +123,7 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
   wid_popup_window->log("%%fg=white$" + name);
   wid_popup_window->log(" ");
 
-  if (t->is_dead()) {
+  if (t->is_dead) {
     wid_popup_window->log("It's dead, Jim");
     wid_popup_window->log(" ");
   } else {
