@@ -465,10 +465,16 @@ static void sdl_event(SDL_Event *event)
             //
             key_repeat_count++;
             if (key_repeat_count > 1) {
-              if (! time_have_x_hundredths_passed_since(5, last_time_for_key)) {
+              //
+              // Fast repeat
+              //
+              if (! time_have_x_hundredths_passed_since(10, last_time_for_key)) {
                 return;
               }
             } else {
+              //
+              // First press
+              //
               if (! time_have_x_hundredths_passed_since(10000, last_time_for_key)) {
                 return;
               }

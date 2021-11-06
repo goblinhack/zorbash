@@ -8,6 +8,7 @@
 #include "my_array_bounds_check.hpp"
 #include "my_ascii.hpp"
 #include "my_game.hpp"
+#include "my_player.hpp"
 #include "my_sdl.hpp"
 #include "my_string.hpp"
 #include "my_sys.hpp"
@@ -89,6 +90,40 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     CON("PLAYER: Zoom in.");
     config_game_pix_zoom_in();
     return true;
+  }
+
+  bool left   = false;
+  bool right  = false;
+  bool up     = false;
+  bool down   = false;
+  bool attack = false;
+  bool wait   = false;
+  bool jump   = false;
+
+  //
+  // Allow diagonal movements by checking for multiple presses
+  //
+  const uint8_t *state = SDL_GetKeyboardState(0);
+  up                   = state[ game->config.key_move_up ];
+  down                 = state[ game->config.key_move_down ];
+  left                 = state[ game->config.key_move_left ];
+  right                = state[ game->config.key_move_right ];
+
+  if (key->scancode == (SDL_Scancode) game->config.key_move_left) {
+    left = true;
+    return player_tick(left, right, up, down, attack, wait, jump);
+  }
+  if (key->scancode == (SDL_Scancode) game->config.key_move_right) {
+    right = true;
+    return player_tick(left, right, up, down, attack, wait, jump);
+  }
+  if (key->scancode == (SDL_Scancode) game->config.key_move_up) {
+    up = true;
+    return player_tick(left, right, up, down, attack, wait, jump);
+  }
+  if (key->scancode == (SDL_Scancode) game->config.key_move_down) {
+    down = true;
+    return player_tick(left, right, up, down, attack, wait, jump);
   }
 
   //

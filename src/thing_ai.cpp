@@ -1330,6 +1330,7 @@ bool Thing::ai_choose_immediately_adjacent_goal(void)
             down           = dy > 0;
             attack         = true;
             attack_allowed = true;
+
             AI_LOG("Trying to break out of a web", "Trying to break out of a web", it);
             if (is_player()) {
               player_tick(left, right, up, down, attack, wait, jump);

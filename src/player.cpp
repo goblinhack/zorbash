@@ -15,7 +15,7 @@
 #include "my_wid_console.hpp"
 #include "my_wid_thing_info.hpp"
 
-void player_tick(bool left, bool right, bool up, bool down, bool attack, bool wait, bool jump)
+bool player_tick(bool left, bool right, bool up, bool down, bool attack, bool wait, bool jump)
 {
   TRACE_AND_INDENT();
   //
@@ -23,12 +23,12 @@ void player_tick(bool left, bool right, bool up, bool down, bool attack, bool wa
   //
   if (wid_console_window && wid_console_window->visible) {
     IF_DEBUG3 { LOG("Player tick; ignore, console open"); }
-    return;
+    return false;
   }
 
   if (game->level->ts_fade_in_begin || game->level->ts_fade_out_begin) {
     IF_DEBUG3 { LOG("Player tick; ignore, level fading im/out"); }
-    return;
+    return false;
   }
 
   //
@@ -40,51 +40,51 @@ void player_tick(bool left, bool right, bool up, bool down, bool attack, bool wa
       {
         IF_DEBUG3 { LOG("Ignore player action when choosing item options"); }
       }
-      return;
+      return false;
     case Game::STATE_INVENTORY : // Currently managing inventory
       {
         IF_DEBUG3 { LOG("Ignore player action when moving items"); }
       }
-      return;
+      return false;
     case Game::STATE_COLLECTING_ITEMS : // Collecting en masse from the level
       {
         IF_DEBUG3 { LOG("Ignore player action when collecting items"); }
       }
-      return;
+      return false;
     case Game::STATE_ENCHANTING_ITEMS :
       {
         IF_DEBUG3 { LOG("Ignore player action when enchanting items"); }
       }
-      return;
+      return false;
     case Game::STATE_CHOOSING_SKILLS :
       {
         IF_DEBUG3 { LOG("Ignore player action when choosing skills"); }
       }
-      return;
+      return false;
     case Game::STATE_CHOOSING_TARGET : // Looking to somewhere to throw at
       {
         IF_DEBUG3 { LOG("Ignore player action when choosing target"); }
       }
-      return;
+      return false;
     case Game::STATE_LOAD_MENU :
     case Game::STATE_SAVE_MENU :
     case Game::STATE_QUIT_MENU :
       {
         IF_DEBUG3 { LOG("Ignore player action when in menu"); }
       }
-      return;
+      return false;
   }
 
   auto level = game->level;
   if (! level) {
     IF_DEBUG3 { LOG("Player tick; ignore, no level"); }
-    return;
+    return false;
   }
 
   auto player = level->player;
   if (! player) {
     IF_DEBUG3 { LOG("Player tick; ignore, no player"); }
-    return;
+    return false;
   }
 
   //
@@ -119,35 +119,31 @@ void player_tick(bool left, bool right, bool up, bool down, bool attack, bool wa
 
   if (player->is_dead || player->is_hidden) {
     IF_DEBUG3 { LOG("Player tick; ignore, is dead"); }
-    return;
+    return false;
   }
 
-  if (state[ game->config.key_move_left ]) {
-    left = true;
+  if (left) {
     if (level && level->cursor) {
       level->cursor_path_clear();
       level->cursor->hide();
     }
   }
 
-  if (state[ game->config.key_move_right ]) {
-    right = true;
+  if (right) {
     if (level && level->cursor) {
       level->cursor_path_clear();
       level->cursor->hide();
     }
   }
 
-  if (state[ game->config.key_move_up ]) {
-    up = true;
+  if (up) {
     if (level && level->cursor) {
       level->cursor_path_clear();
       level->cursor->hide();
     }
   }
 
-  if (state[ game->config.key_move_down ]) {
-    down = true;
+  if (down) {
     if (level && level->cursor) {
       level->cursor_path_clear();
       level->cursor->hide();
@@ -345,8 +341,5 @@ void player_tick(bool left, bool right, bool up, bool down, bool attack, bool wa
     }
   }
 
-  left  = false;
-  right = false;
-  up    = false;
-  down  = false;
+  return true;
 }
