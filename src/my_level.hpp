@@ -753,7 +753,7 @@ public:
   void get_tiles(void);
   void handle_all_pending_things(int group);
   void handle_all_pending_things(void);
-  void handle_map_scroll(void);
+  void handle_input_events(void);
   void incr_fade_in(const int x, const int y);
   void incr_fade_in_no_check(const int x, const int y);
   void incr_heatmap(const int x, const int y);

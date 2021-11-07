@@ -35,7 +35,7 @@ void Level::handle_all_pending_things(void)
   FOR_ALL_THING_GROUPS(group) { handle_all_pending_things(group); }
 }
 
-void Level::handle_map_scroll(void)
+void Level::handle_input_events(void)
 {
   //
   // Trying to scroll the map?
@@ -66,6 +66,40 @@ void Level::handle_map_scroll(void)
     cursor_found      = false;
     map_follow_player = false;
   }
+
+  bool up    = state[ game->config.key_move_up ];
+  bool down  = state[ game->config.key_move_down ];
+  bool left  = state[ game->config.key_move_left ];
+  bool right = state[ game->config.key_move_right ];
+
+  if (up || down || left || right) {
+    if (! game->request_player_move) {
+      game->request_player_move = time_get_time_ms();
+    }
+  }
+
+  if (game->request_player_move && time_have_x_tenths_passed_since(1, game->request_player_move)) {
+    game->request_player_move = 0;
+
+    bool wait   = false;
+    bool jump   = false;
+    bool attack = false;
+
+    up    = up || game->request_player_up;
+    down  = down || game->request_player_down;
+    right = right || game->request_player_right;
+    left  = left || game->request_player_left;
+
+    game->request_player_up    = false;
+    game->request_player_down  = false;
+    game->request_player_right = false;
+    game->request_player_left  = false;
+
+    if (up || down || left || right) {
+      // TOPCON("%d%d%d%d", up, down, left, right);
+      player_tick(left, right, up, down, attack, wait, jump);
+    }
+  }
 }
 
 bool Level::tick(void)
@@ -74,7 +108,7 @@ bool Level::tick(void)
   // LOG("Tick");
   // TOPCON("monsts %d.", monst_count);
 
-  handle_map_scroll();
+  handle_input_events();
 
   if (! game->started) {
     return false;

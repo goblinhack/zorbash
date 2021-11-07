@@ -163,13 +163,14 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
     }
   }
 
-  auto  src   = (last_blit_tl + last_blit_br) / 2;
-  auto  dx    = x - mid_at.x;
-  auto  dy    = y - mid_at.y;
-  auto  tw    = TILE_WIDTH;
-  auto  th    = TILE_HEIGHT;
-  auto  sz    = isize(last_blit_br.x - last_blit_tl.x, last_blit_br.y - last_blit_tl.y);
-  auto  delay = (int) (dist * (float) game->current_move_speed);
+  auto src   = (last_blit_tl + last_blit_br) / 2;
+  auto dx    = x - mid_at.x;
+  auto dy    = y - mid_at.y;
+  auto tw    = TILE_WIDTH;
+  auto th    = TILE_HEIGHT;
+  auto sz    = isize(last_blit_br.x - last_blit_tl.x, last_blit_br.y - last_blit_tl.y);
+  auto delay = THING_JUMP_SPEED_MS;
+
   point dest(src.x + dx * tw, src.y + dy * th);
 
   if (is_player()) {

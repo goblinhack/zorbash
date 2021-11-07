@@ -1045,7 +1045,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
           if (! ai_is_able_to_detect_secret_doors_when_close()) {
             continue;
           }
-          if (dist > ROBOT_CAN_SEE_SECRET_DOOR_DISTANCE) {
+          if (dist > THING_AI_CAN_SEE_SECRET_DOOR_DIST) {
             continue;
           }
         } else if (level->is_descend_sewer(o)) {
@@ -2051,7 +2051,7 @@ bool Thing::ai_choose_avoid_goals(std::multiset< Goal > &goals, const Goal &goal
   if (is_player()) {
     max_avoid = -1;
   } else {
-    max_avoid = THING_MAX_AVOID_ATTEMPT_LOCATIONS;
+    max_avoid = THING_AI_MAX_AVOID_ATTEMPT_LOC;
   }
 
   AI_LOG("Needs to avoid", it);

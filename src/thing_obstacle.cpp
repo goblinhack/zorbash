@@ -270,7 +270,7 @@ bool Thing::ai_obstacle(Thingp it)
 
   if (it->is_secret_door()) {
     auto dist = distance(it->mid_at, mid_at);
-    if (dist > ROBOT_CAN_SEE_SECRET_DOOR_DISTANCE) {
+    if (dist > THING_AI_CAN_SEE_SECRET_DOOR_DIST) {
       return true;
     }
     return false;

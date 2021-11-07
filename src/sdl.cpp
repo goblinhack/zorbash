@@ -469,14 +469,14 @@ static void sdl_event(SDL_Event *event)
               //
               // Fast repeat
               //
-              if (! time_have_x_hundredths_passed_since(10, sdl_last_time_for_key)) {
+              if (! time_have_x_hundredths_passed_since(5, sdl_last_time_for_key)) {
                 return;
               }
             } else {
               //
               // First press
               //
-              if (! time_have_x_hundredths_passed_since(3000, sdl_last_time_for_key)) {
+              if (! time_have_x_hundredths_passed_since(5000, sdl_last_time_for_key)) {
                 return;
               }
             }

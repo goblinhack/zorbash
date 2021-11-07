@@ -103,30 +103,44 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
   //
   // Allow diagonal movements by checking for multiple presses
   //
-  const uint8_t *state = SDL_GetKeyboardState(0);
-  up                   = state[ game->config.key_move_up ];
-  down                 = state[ game->config.key_move_down ];
-  left                 = state[ game->config.key_move_left ];
-  right                = state[ game->config.key_move_right ];
-
   if (key->scancode == (SDL_Scancode) game->config.key_move_left) {
-    left = true;
-    player_tick(left, right, up, down, attack, wait, jump);
+    //
+    // Handle in the next event, to give time to have two keys pressed to allow diagonal moves.
+    //
+    if (! game->request_player_move) {
+      game->request_player_move = time_get_time_ms();
+    }
+    game->request_player_left = true;
     return false; // To avoid click noise
   }
   if (key->scancode == (SDL_Scancode) game->config.key_move_right) {
-    right = true;
-    player_tick(left, right, up, down, attack, wait, jump);
+    //
+    // Handle in the next event, to give time to have two keys pressed to allow diagonal moves.
+    //
+    if (! game->request_player_move) {
+      game->request_player_move = time_get_time_ms();
+    }
+    game->request_player_right = true;
     return false; // To avoid click noise
   }
   if (key->scancode == (SDL_Scancode) game->config.key_move_up) {
-    up = true;
-    player_tick(left, right, up, down, attack, wait, jump);
+    //
+    // Handle in the next event, to give time to have two keys pressed to allow diagonal moves.
+    //
+    if (! game->request_player_move) {
+      game->request_player_move = time_get_time_ms();
+    }
+    game->request_player_up = true;
     return false; // To avoid click noise
   }
   if (key->scancode == (SDL_Scancode) game->config.key_move_down) {
-    down = true;
-    player_tick(left, right, up, down, attack, wait, jump);
+    //
+    // Handle in the next event, to give time to have two keys pressed to allow diagonal moves.
+    //
+    if (! game->request_player_move) {
+      game->request_player_move = time_get_time_ms();
+    }
+    game->request_player_down = true;
     return false; // To avoid click noise
   }
   if (key->scancode == (SDL_Scancode) game->config.key_attack) {

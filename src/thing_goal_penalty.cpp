@@ -118,8 +118,8 @@ void Thing::add_goal_penalty(Thingp attacker)
     }
     penalty += 2;
 
-    if (penalty > THING_MAX_GOAL_PENALTY) {
-      penalty = THING_MAX_GOAL_PENALTY;
+    if (penalty > THING_AI_MAX_GOAL_PENALTY) {
+      penalty = THING_AI_MAX_GOAL_PENALTY;
     }
   }
   aip->goal_penalty[ attacker->id ] = penalty;

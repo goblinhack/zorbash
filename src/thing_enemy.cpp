@@ -107,8 +107,8 @@ void Thing::add_enemy(Thingp attacker)
     dbg("Increment old enemy %s", attacker->to_string().c_str());
     get_aip()->enemies[ attacker->id ] *= 2;
 
-    if (get_aip()->enemies[ attacker->id ] > THING_MAX_ENEMY_COUNT) {
-      get_aip()->enemies[ attacker->id ] = THING_MAX_ENEMY_COUNT;
+    if (get_aip()->enemies[ attacker->id ] > THING_AI_MAX_RESENT_COUNT) {
+      get_aip()->enemies[ attacker->id ] = THING_AI_MAX_RESENT_COUNT;
     }
   }
 }

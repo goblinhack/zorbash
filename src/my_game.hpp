@@ -265,9 +265,9 @@ public:
     STATE_QUIT_MENU,
   };
   int state {STATE_NORMAL};
-  int fast_move_speed {THING_FAST_MOVE_SPEED_MS};    // Robot and/or move via cursor
-  int slow_move_speed {THING_SLOW_MOVE_SPEED_MS};    // Normal speed of all things
-  int current_move_speed {THING_SLOW_MOVE_SPEED_MS}; // Current speed
+  int fast_move_speed {THING_MOVE_SPEED_FAST_MS};    // Robot and/or move via cursor
+  int slow_move_speed {THING_MOVE_SPEED_SLOW_MS};    // Normal speed of all things
+  int current_move_speed {THING_MOVE_SPEED_SLOW_MS}; // Current speed
 
   //
   // Make sure to update thing_fini.cpp to remove these pointers
@@ -279,21 +279,28 @@ public:
   //
   // Temporary. Global requests
   //
-  bool     request_remake_rightbar {};
-  bool     request_remake_inventory {};
-  bool     request_remake_actionbar {};
-  bool     request_remake_skillbox {};
-  bool     request_remake_debuffbox {};
-  bool     request_remake_buffbox {};
-  bool     request_update_rightbar {};
-  bool     request_update_same_level {};
-  bool     request_snapshot {}; // Something has requested a game snapshot
-  bool     saving_snapshot {};
+  bool request_remake_rightbar {};
+  bool request_remake_inventory {};
+  bool request_remake_actionbar {};
+  bool request_remake_skillbox {};
+  bool request_remake_debuffbox {};
+  bool request_remake_buffbox {};
+  bool request_update_rightbar {};
+  bool request_update_same_level {};
+  bool request_snapshot {}; // Something has requested a game snapshot
+  bool saving_snapshot {};
+  bool request_inventory_thing_over_do {};
+  bool request_inventory_thing_selected_do {};
+
   uint32_t request_destroy_thing_info {}; // Timestamp
-  Thingp   request_inventory_thing_over {};
-  bool     request_inventory_thing_over_do {};
-  Thingp   request_inventory_thing_selected {};
-  bool     request_inventory_thing_selected_do {};
+  uint32_t request_player_move {};        // Player pressed some keys
+  bool     request_player_up {};
+  bool     request_player_down {};
+  bool     request_player_left {};
+  bool     request_player_right {};
+
+  Thingp request_inventory_thing_over {};
+  Thingp request_inventory_thing_selected {};
 
   //
   // An item being moved between bags

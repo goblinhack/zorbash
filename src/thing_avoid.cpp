@@ -160,7 +160,7 @@ bool Thing::cannot_avoid(Thingp attacker)
   //
   // If we hit this limit, then we're really failing to avoid
   //
-  if (f->second >= THING_MAX_AVOID_COUNT) {
+  if (f->second >= THING_AI_MAX_AVOID_COUNT) {
     return true;
   }
 
@@ -243,8 +243,8 @@ void Thing::add_avoid(Thingp attacker)
     dbg("Increment old avoid %s", attacker->to_string().c_str());
     get_aip()->avoid[ attacker->id ] += 2;
 
-    if (get_aip()->avoid[ attacker->id ] > THING_MAX_AVOID_COUNT) {
-      get_aip()->avoid[ attacker->id ] = THING_MAX_AVOID_COUNT;
+    if (get_aip()->avoid[ attacker->id ] > THING_AI_MAX_AVOID_COUNT) {
+      get_aip()->avoid[ attacker->id ] = THING_AI_MAX_AVOID_COUNT;
     }
   }
 }
