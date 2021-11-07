@@ -681,7 +681,6 @@ public:
   uint8_t is_water(const int x, const int y);
   uint8_t is_water(const point &p);
 
-  void inventory_dump(void);
   void clear(void);
   void con(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
   void con_(const char *fmt, va_list args); // compile error without
@@ -690,8 +689,6 @@ public:
   void create_dungeon_place_chasm(Dungeonp d, const std::string &what);
   void create_dungeon_place_corridor(Dungeonp d, const std::string what, int depth);
   void create_dungeon_place_deep_water(Dungeonp d, const std::string &what);
-  void handle_all_pending_things(int group);
-  void handle_all_pending_things(void);
   void create_dungeon_place_floors(Dungeonp d, const std::string what, int depth, int var, int w, int h, int tries);
   void create_dungeon_place_lava(Dungeonp d, const std::string &what);
   void create_dungeon_place_lava_smoke(Dungeonp d);
@@ -730,21 +727,17 @@ public:
   void describe(Thingp);
   void display_anim(void);
   void display_blood(void);
-  void display_deep_water(const int fbo, const int16_t minx, const int16_t miny, const int16_t maxx,
-                          const int16_t maxy);
+  void display_deep_water(const int fbo, const int16_t minx, const int16_t miny, const int16_t, const int16_t maxy);
   void display_external_particles(void);
   void display_fade_in(void);
   void display_fade_out(void);
   void display_internal_particles(void);
   void display_lasers(void);
-  void display_lava(const int fbo, const int16_t minx, const int16_t miny, const int16_t maxx, const int16_t maxy);
+  void display_lava(const int fbo, const int16_t minx, const int16_t miny, const int16_t maxx, const int16_t);
   void display_map_bg_things(void);
-  void display_map_fg2_things(const int fbo, const int16_t minx, const int16_t miny, const int16_t maxx,
-                              const int16_t maxy);
-  void display_map_fg_things(const int fbo, const int16_t minx, const int16_t miny, const int16_t maxx,
-                             const int16_t maxy);
-  void display_map_things(const int fbo, const int16_t minx, const int16_t miny, const int16_t maxx,
-                          const int16_t maxy);
+  void display_map_fg2_things(const int fbo, const int16_t minx, const int16_t miny, const int16_t, const int16_t);
+  void display_map_fg_things(const int fbo, const int16_t minx, const int16_t miny, const int16_t, const int16_t);
+  void display_map_things(const int fbo, const int16_t minx, const int16_t miny, const int16_t, const int16_t);
   void display_map(void);
   void display_minimap(void);
   void display_projectiles(void);
@@ -758,11 +751,15 @@ public:
   void err_(const char *fmt, va_list args); // compile error without
   void fini(void);
   void get_tiles(void);
+  void handle_all_pending_things(int group);
+  void handle_all_pending_things(void);
+  void handle_map_scroll(void);
   void incr_fade_in(const int x, const int y);
   void incr_fade_in_no_check(const int x, const int y);
   void incr_heatmap(const int x, const int y);
   void incr_heatmap_no_check(const int x, const int y);
   void incr_heatmap_no_check(const int x, const int y, int dv);
+  void inventory_dump(void);
   void lights_fade(void);
   void lights_render(int minx, int miny, int maxx, int maxy, int fbo);
   void lights_render_small_lights(int minx, int miny, int maxx, int maxy, int fbo, bool include_player_lights);
@@ -770,14 +767,10 @@ public:
   void lights_update_same_level(void);
   void log(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
   void log_(const char *fmt, va_list args); // compile error without
-  void new_external_particle(point start, point end, isize sz, uint32_t dur, Tilep tile, bool hflip,
-                             bool make_visible_at_end);
-  void new_external_particle(ThingId, point start, point end, isize sz, uint32_t dur, Tilep tile, bool hflip,
-                             bool make_visible_at_end);
-  void new_internal_particle(point start, point end, isize sz, uint32_t dur, Tilep tile, bool hflip,
-                             bool make_visible_at_end);
-  void new_internal_particle(ThingId, point start, point end, isize sz, uint32_t dur, Tilep tile, bool hflip,
-                             bool make_visible_at_end);
+  void new_external_particle(point start, point end, isize sz, uint32_t dur, Tilep, bool hflip, bool vis);
+  void new_external_particle(ThingId, point start, point end, isize sz, uint32_t dur, Tilep, bool hflip, bool vis);
+  void new_internal_particle(point start, point end, isize sz, uint32_t dur, Tilep tile, bool, bool vis);
+  void new_internal_particle(ThingId, point start, point end, isize sz, uint32_t dur, Tilep, bool hflip, bool vis);
   void new_laser(ThingId id, point start, point stop, uint32_t dur);
   void new_projectile(ThingId id, point start, point stop, uint32_t dur);
   void place_dirt(Dungeonp d);
@@ -806,6 +799,7 @@ public:
   void set_is_chasm(const int x, const int y);
   void set_is_corpse(const int x, const int y);
   void set_is_corridor(const int x, const int y);
+  void set_is_cursor_path_hazard_for_player(const int x, const int y);
   void set_is_deep_water(const int x, const int y);
   void set_is_descend_dungeon(const int x, const int y);
   void set_is_descend_sewer(const int x, const int y);
@@ -813,7 +807,6 @@ public:
   void set_is_door(const int x, const int y);
   void set_is_dry_grass(const int x, const int y);
   void set_is_enchantstone(const int x, const int y);
-  void set_is_cursor_path_hazard_for_player(const int x, const int y);
   void set_is_fire(const int x, const int y);
   void set_is_floor(const int x, const int y);
   void set_is_foilage(const int x, const int y);
@@ -831,21 +824,21 @@ public:
   void set_is_lit_ever_no_check(const int x, const int y);
   void set_is_minion_generator(const int x, const int y);
   void set_is_monst(const int x, const int y);
-  void set_is_obs_wall_or_door(const int x, const int y);
-  void set_is_obs_wall_or_door_no_check(const int x, const int y);
   void set_is_obs_destructable(const int x, const int y);
   void set_is_obs_destructable_no_check(const int x, const int y);
+  void set_is_obs_wall_or_door(const int x, const int y);
+  void set_is_obs_wall_or_door_no_check(const int x, const int y);
   void set_is_poison(const int x, const int y);
   void set_is_potion(const int x, const int y);
   void set_is_ripple(const int x, const int y);
   void set_is_rock(const int x, const int y);
   void set_is_secret_door(const int x, const int y);
   void set_is_shallow_water(const int x, const int y);
+  void set_is_shovable(const int x, const int y);
   void set_is_skillstone(const int x, const int y);
   void set_is_smoke(const int x, const int y);
   void set_is_spiderweb(const int x, const int y);
   void set_is_sticky(const int x, const int y);
-  void set_is_shovable(const int x, const int y);
   void set_is_treasure_class_a(const int x, const int y);
   void set_is_treasure_class_b(const int x, const int y);
   void set_is_treasure_class_c(const int x, const int y);
@@ -873,6 +866,7 @@ public:
   void unset_is_chasm(const int x, const int y);
   void unset_is_corpse(const int x, const int y);
   void unset_is_corridor(const int x, const int y);
+  void unset_is_cursor_path_hazard_for_player(const int x, const int y);
   void unset_is_deep_water(const int x, const int y);
   void unset_is_descend_dungeon(const int x, const int y);
   void unset_is_descend_sewer(const int x, const int y);
@@ -880,7 +874,6 @@ public:
   void unset_is_door(const int x, const int y);
   void unset_is_dry_grass(const int x, const int y);
   void unset_is_enchantstone(const int x, const int y);
-  void unset_is_cursor_path_hazard_for_player(const int x, const int y);
   void unset_is_fire(const int x, const int y);
   void unset_is_floor(const int x, const int y);
   void unset_is_foilage(const int x, const int y);
@@ -897,21 +890,21 @@ public:
   void unset_is_lit_ever_no_check(const int x, const int y);
   void unset_is_minion_generator(const int x, const int y);
   void unset_is_monst(const int x, const int y);
-  void unset_is_obs_wall_or_door(const int x, const int y);
-  void unset_is_obs_wall_or_door_no_check(const int x, const int y);
   void unset_is_obs_destructable(const int x, const int y);
   void unset_is_obs_destructable_no_check(const int x, const int y);
+  void unset_is_obs_wall_or_door(const int x, const int y);
+  void unset_is_obs_wall_or_door_no_check(const int x, const int y);
   void unset_is_poison(const int x, const int y);
   void unset_is_potion(const int x, const int y);
   void unset_is_ripple(const int x, const int y);
   void unset_is_rock(const int x, const int y);
   void unset_is_secret_door(const int x, const int y);
   void unset_is_shallow_water(const int x, const int y);
+  void unset_is_shovable(const int x, const int y);
   void unset_is_skillstone(const int x, const int y);
   void unset_is_smoke(const int x, const int y);
   void unset_is_spiderweb(const int x, const int y);
   void unset_is_sticky(const int x, const int y);
-  void unset_is_shovable(const int x, const int y);
   void unset_is_treasure_class_a(const int x, const int y);
   void unset_is_treasure_class_b(const int x, const int y);
   void unset_is_treasure_class_c(const int x, const int y);

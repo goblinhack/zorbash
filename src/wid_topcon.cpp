@@ -129,6 +129,21 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     player_tick(left, right, up, down, attack, wait, jump);
     return false; // To avoid click noise
   }
+  if (key->scancode == (SDL_Scancode) game->config.key_attack) {
+    attack = true;
+    player_tick(left, right, up, down, attack, wait, jump);
+    return false; // To avoid click noise
+  }
+  if (key->scancode == (SDL_Scancode) game->config.key_jump) {
+    jump = true;
+    player_tick(left, right, up, down, attack, wait, jump);
+    return false; // To avoid click noise
+  }
+  if (key->scancode == (SDL_Scancode) game->config.key_wait_or_collect) {
+    wait = true;
+    player_tick(left, right, up, down, attack, wait, jump);
+    return false; // To avoid click noise
+  }
 
   //
   // Events after this cannot be invoked when dead

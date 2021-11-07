@@ -19,11 +19,25 @@ bool player_tick(bool left, bool right, bool up, bool down, bool attack, bool wa
 {
   TRACE_AND_INDENT();
 
-  if (game->things_are_moving) {
-    game->current_move_speed = (float) game->current_move_speed * 0.9;
+  auto level = game->level;
+  if (! level) {
+    LOG("Player tick; ignore, no level");
+    return false;
+  }
 
-    TOPCON("W %d", game->current_move_speed);
-    LOG("PLAY Player tick; ignore, things are moving");
+  auto player = level->player;
+  if (! player) {
+    LOG("Player tick; ignore, no player");
+    return false;
+  }
+
+  if (player->is_dead) {
+    LOG("Player tick; ignore, is dead");
+    return false;
+  }
+
+  if (player->is_hidden) {
+    LOG("Player tick; ignore, is hidden");
     return false;
   }
 
@@ -62,118 +76,12 @@ bool player_tick(bool left, bool right, bool up, bool down, bool attack, bool wa
     case Game::STATE_QUIT_MENU : LOG("Ignore player action when in menu"); return false;
   }
 
-  auto level = game->level;
-  if (! level) {
-    LOG("Player tick; ignore, no level");
-    return false;
-  }
-
-  auto player = level->player;
-  if (! player) {
-    LOG("Player tick; ignore, no player");
-    return false;
-  }
-
-  //
-  // Trying to scroll the map?
-  //
-  const float    map_move_scroll_delta = 0.2;
-  const uint8_t *state                 = SDL_GetKeyboardState(0);
-
-  if (state[ game->config.key_map_left ]) {
-    level->map_wanted_at.x -= map_move_scroll_delta;
-    level->cursor_found      = false;
-    level->map_follow_player = false;
-  }
-
-  if (state[ game->config.key_map_right ]) {
-    level->map_wanted_at.x += map_move_scroll_delta;
-    level->cursor_found      = false;
-    level->map_follow_player = false;
-  }
-
-  if (state[ game->config.key_map_up ]) {
-    level->map_wanted_at.y -= map_move_scroll_delta;
-    level->cursor_found      = false;
-    level->map_follow_player = false;
-  }
-
-  if (state[ game->config.key_map_down ]) {
-    level->map_wanted_at.y += map_move_scroll_delta;
-    level->cursor_found      = false;
-    level->map_follow_player = false;
-  }
-
-  if (player->is_dead) {
-    LOG("Player tick; ignore, is dead");
-    return false;
-  }
-
-  if (player->is_hidden) {
-    LOG("Player tick; ignore, is hidden");
-    return false;
-  }
-
-  if (get(sdl_joy_buttons, SDL_JOY_BUTTON_UP)) {
-    up = true;
-  }
-
-  if (get(sdl_joy_buttons, SDL_JOY_BUTTON_DOWN)) {
-    down = true;
-  }
-
-  if (get(sdl_joy_buttons, SDL_JOY_BUTTON_LEFT)) {
-    left = true;
-  }
-
-  if (get(sdl_joy_buttons, SDL_JOY_BUTTON_RIGHT)) {
-    right = true;
-  }
-
-  if (sdl_joy_axes) {
-    if (sdl_joy_axes[ 3 ] > sdl_joy_deadzone) {
-      right = true;
-    }
-
-    if (sdl_joy_axes[ 3 ] < -sdl_joy_deadzone) {
-      left = true;
-    }
-
-    if (sdl_joy_axes[ 4 ] > sdl_joy_deadzone) {
-      down = true;
-    }
-
-    if (sdl_joy_axes[ 4 ] < -sdl_joy_deadzone) {
-      up = true;
-    }
-
-    if (sdl_joy_axes[ 0 ] > sdl_joy_deadzone) {
-      right = true;
-    }
-
-    if (sdl_joy_axes[ 0 ] < -sdl_joy_deadzone) {
-      left = true;
-    }
-
-    if (sdl_joy_axes[ 1 ] > sdl_joy_deadzone) {
-      down = true;
-    }
-
-    if (sdl_joy_axes[ 1 ] < -sdl_joy_deadzone) {
-      up = true;
-    }
-  }
-
   if (left || right || up || down) {
     if (level && level->cursor) {
       level->cursor_path_clear();
       level->cursor->hide();
     }
   }
-
-  attack |= state[ game->config.key_attack ] ? true : false;
-  wait |= state[ game->config.key_wait_or_collect ] ? true : false;
-  jump |= state[ game->config.key_jump ] ? true : false;
 
   double d  = 1.0;
   double dx = 0.0;

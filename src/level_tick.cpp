@@ -35,11 +35,46 @@ void Level::handle_all_pending_things(void)
   FOR_ALL_THING_GROUPS(group) { handle_all_pending_things(group); }
 }
 
+void Level::handle_map_scroll(void)
+{
+  //
+  // Trying to scroll the map?
+  //
+  const float    map_move_scroll_delta = 0.2;
+  const uint8_t *state                 = SDL_GetKeyboardState(0);
+
+  if (state[ game->config.key_map_left ]) {
+    map_wanted_at.x -= map_move_scroll_delta;
+    cursor_found      = false;
+    map_follow_player = false;
+  }
+
+  if (state[ game->config.key_map_right ]) {
+    map_wanted_at.x += map_move_scroll_delta;
+    cursor_found      = false;
+    map_follow_player = false;
+  }
+
+  if (state[ game->config.key_map_up ]) {
+    map_wanted_at.y -= map_move_scroll_delta;
+    cursor_found      = false;
+    map_follow_player = false;
+  }
+
+  if (state[ game->config.key_map_down ]) {
+    map_wanted_at.y += map_move_scroll_delta;
+    cursor_found      = false;
+    map_follow_player = false;
+  }
+}
+
 bool Level::tick(void)
 {
   TRACE_AND_INDENT();
   // LOG("Tick");
   // TOPCON("monsts %d.", monst_count);
+
+  handle_map_scroll();
 
   if (! game->started) {
     return false;
@@ -354,10 +389,6 @@ bool Level::tick(void)
   debug_path_clear();
 
   wait_count = 0;
-
-  if (! game->robot_mode) {
-    player_tick();
-  }
 
   //
   // Stop rapid pickup/drop events if particles are still in progress

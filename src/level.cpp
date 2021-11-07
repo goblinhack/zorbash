@@ -5,6 +5,7 @@
 
 #include "my_array_bounds_check.hpp"
 #include "my_level.hpp"
+#include "my_sdl.hpp"
 #include "my_sys.hpp"
 
 std::string Level::to_string(void)
