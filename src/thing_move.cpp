@@ -90,6 +90,8 @@ void Thing::move_finish(void)
   dbg("Move finish update interp pos");
   update_interpolated_position();
 
+  move_carried_items();
+
   dbg("Move finish call on move");
   on_move();
 

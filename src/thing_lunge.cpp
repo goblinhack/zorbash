@@ -11,6 +11,8 @@
 
 void Thing::lunge(point to)
 {
+  move_finish();
+
   auto t = set_ts_lunge_begin(time_get_time_ms_cached());
   auto p = to - mid_at;
   set_ts_lunge_end(t + 200);
