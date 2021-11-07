@@ -49,9 +49,9 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
 
   TRACE_AND_INDENT();
   if (be_careful) {
-    log("Try to jump to %d,%d", to.x, to.y);
+    dbg("Try to jump to %d,%d", to.x, to.y);
   } else {
-    log("Try to jump carefully %d,%d", to.x, to.y);
+    dbg("Try to jump carefully %d,%d", to.x, to.y);
   }
 
   if (is_able_to_tire()) {
@@ -450,7 +450,7 @@ void Thing::jump_end(void)
     return;
   }
 
-  log("End of jump");
+  dbg("End of jump");
   is_jumping = false;
   move_finish();
   update_interpolated_position();

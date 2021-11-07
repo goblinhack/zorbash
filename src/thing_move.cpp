@@ -96,11 +96,14 @@ void Thing::move_finish(void)
   on_move();
 
   if (maybe_aip()) {
-    std::string s = "";
-    for (auto p1 : get_aip()->move_path) {
-      s += p1.to_string() + " ";
+    IF_DEBUG1
+    {
+      std::string s = "";
+      for (auto p1 : get_aip()->move_path) {
+        s += p1.to_string() + " ";
+      }
+      log("End of move, moves left: %s", s.c_str());
     }
-    log("End of move, moves left: %s", s.c_str());
 
     if (! get_aip()->move_path.size() && (get_infop()->monst_state == MONST_STATE_MOVING)) {
       ai_change_state(MONST_STATE_IDLE, "move finished");

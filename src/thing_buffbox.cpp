@@ -147,23 +147,23 @@ Thingp Level::buffbox_get(const uint32_t slot)
   }
 
   if (slot >= itemp->buffbox_id.size()) {
-    LOG("Slot %d out of range, max %d", slot, (int) itemp->buffbox_id.size());
+    DBG("Slot %d out of range, max %d", slot, (int) itemp->buffbox_id.size());
     return nullptr;
   }
 
   auto thing_id = get(itemp->buffbox_id, slot);
   if (! thing_id) {
-    LOG("Slot %d has no tp", slot);
+    DBG("Slot %d has no tp", slot);
     return nullptr;
   }
 
   auto t = thing_find(thing_id);
   if (! t) {
-    LOG("Slot %d has no valid tp", slot);
+    DBG("Slot %d has no valid tp", slot);
     return nullptr;
   }
 
-  LOG("Slot %d has %s", slot, t->name().c_str());
+  DBG("Slot %d has %s", slot, t->name().c_str());
 
   for (auto oid : itemp->buffs) {
     auto o = thing_find(oid);
@@ -175,28 +175,28 @@ Thingp Level::buffbox_get(const uint32_t slot)
     }
   }
 
-  LOG("Slot %d has buff tp %s that is not carried", slot, t->name().c_str());
+  DBG("Slot %d has buff tp %s that is not carried", slot, t->name().c_str());
   return nullptr;
 }
 
 bool Level::buffbox_over(const uint32_t slot)
 {
   TRACE_AND_INDENT();
-  LOG("buffbox: Over buffbox slot %d", slot);
+  DBG("buffbox: Over buffbox slot %d", slot);
   TRACE_AND_INDENT();
   if (! player) {
-    LOG("buffbox: Ignore; no player");
+    DBG("buffbox: Ignore; no player");
     return false;
   }
 
   if (slot >= player->get_itemp()->buffbox_id.size()) {
-    LOG("buffbox: Ignore; slot out of range");
+    DBG("buffbox: Ignore; slot out of range");
     return false;
   }
 
   auto oid = get(player->get_itemp()->buffbox_id, slot);
   if (! oid) {
-    LOG("buffbox: Ignore; nothing at that slot");
+    DBG("buffbox: Ignore; nothing at that slot");
     return false;
   }
 
@@ -214,14 +214,14 @@ bool Level::buffbox_over(const uint32_t slot)
 Thingp Level::buffbox_describe(const uint32_t slot)
 {
   TRACE_AND_INDENT();
-  LOG("buffbox: Describe slot %d", slot);
+  DBG("buffbox: Describe slot %d", slot);
   TRACE_AND_INDENT();
   auto what = buffbox_get(slot);
   if (what) {
     IF_DEBUG2 { what->log("buffbox: Describe slot %d", slot); }
     what->describe_when_hovered_over_in_rightbar();
   } else {
-    LOG("buffbox: Describe slot %d => nothing there", slot);
+    DBG("buffbox: Describe slot %d => nothing there", slot);
   }
   return what;
 }

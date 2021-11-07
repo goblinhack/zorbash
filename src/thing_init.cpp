@@ -140,7 +140,7 @@ void Thing::init(Levelp level, const std::string &name, const point born)
   }
 
   if (tpp->is_loggable()) {
-    log("Creating");
+    dbg("Creating");
   }
 
   //

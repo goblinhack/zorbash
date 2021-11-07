@@ -200,7 +200,6 @@ void WidTextBox::log(std::string s, bool lhs, bool rhs)
 
   auto d = split(s, chars_per_line);
 
-  CON("[%s] len %d", s.c_str(), (int) s.length());
   if (d) {
     for (const auto &c : *d) {
       //

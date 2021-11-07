@@ -25,7 +25,7 @@ std::list< WidPopup * > wid_thing_info_window;
 void wid_thing_info_fini(void)
 {
   TRACE_AND_INDENT();
-  LOG("Destroy wid thing info");
+  DBG("Destroy wid thing info");
   // traceback_dump();
   TRACE_AND_INDENT();
 

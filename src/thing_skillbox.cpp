@@ -156,23 +156,23 @@ Thingp Level::skillbox_get(const uint32_t slot)
   }
 
   if (slot >= itemp->skillbox_id.size()) {
-    LOG("Slot %d out of range, max %d", slot, (int) itemp->skillbox_id.size());
+    DBG("Slot %d out of range, max %d", slot, (int) itemp->skillbox_id.size());
     return nullptr;
   }
 
   auto thing_id = get(itemp->skillbox_id, slot);
   if (! thing_id) {
-    LOG("Slot %d has no tp", slot);
+    DBG("Slot %d has no tp", slot);
     return nullptr;
   }
 
   auto t = thing_find(thing_id);
   if (! t) {
-    LOG("Slot %d has no valid tp", slot);
+    DBG("Slot %d has no valid tp", slot);
     return nullptr;
   }
 
-  LOG("Slot %d has %s", slot, t->name().c_str());
+  DBG("Slot %d has %s", slot, t->name().c_str());
 
   for (auto oid : itemp->skills) {
     auto o = thing_find(oid);
@@ -184,7 +184,7 @@ Thingp Level::skillbox_get(const uint32_t slot)
     }
   }
 
-  LOG("Slot %d has skill tp %s that is not carried", slot, t->name().c_str());
+  DBG("Slot %d has skill tp %s that is not carried", slot, t->name().c_str());
   return nullptr;
 }
 
@@ -193,11 +193,11 @@ Thingp Level::skillbox_get(void) { return skillbox_get(game->skillbox_highlight_
 bool Level::skillbox_over(const uint32_t slot)
 {
   TRACE_AND_INDENT();
-  LOG("Skillbox: Over skillbox slot %d", slot);
+  DBG("Skillbox: Over skillbox slot %d", slot);
   TRACE_AND_INDENT();
 
   if (! player) {
-    LOG("Skillbox: Ignore; no player");
+    DBG("Skillbox: Ignore; no player");
     return false;
   }
 
@@ -208,20 +208,20 @@ bool Level::skillbox_over(const uint32_t slot)
   }
 
   if (slot >= itemp->skillbox_id.size()) {
-    LOG("Skillbox: Ignore; slot out of range");
+    DBG("Skillbox: Ignore; slot out of range");
     return false;
   }
 
   auto oid = get(itemp->skillbox_id, slot);
   if (! oid) {
-    LOG("Skillbox: Ignore; nothing at that slot");
+    DBG("Skillbox: Ignore; nothing at that slot");
     return false;
   }
 
   Thingp what;
 
   if (slot != game->skillbox_highlight_slot) {
-    LOG("Skillbox: Request to remake skillbox due to highlight");
+    DBG("Skillbox: Request to remake skillbox due to highlight");
     game->request_remake_skillbox = true;
     game->skillbox_highlight_slot = slot;
     what                          = skillbox_describe(slot);
@@ -230,7 +230,7 @@ bool Level::skillbox_over(const uint32_t slot)
   }
 
   if (! what) {
-    LOG("Skillbox: No skill chosen");
+    DBG("Skillbox: No skill chosen");
     return false;
   }
 
@@ -241,7 +241,7 @@ bool Level::skillbox_over(const uint32_t slot)
 bool Level::skillbox_chosen(const uint32_t slot)
 {
   TRACE_AND_INDENT();
-  LOG("Skillbox: Chosen skillbox slot %d", slot);
+  DBG("Skillbox: Chosen skillbox slot %d", slot);
   TRACE_AND_INDENT();
   if (! player) {
     return false;
@@ -254,16 +254,16 @@ bool Level::skillbox_chosen(const uint32_t slot)
   }
 
   if (slot >= itemp->skillbox_id.size()) {
-    LOG("Skillbox: Nothing in slot %d", slot);
+    DBG("Skillbox: Nothing in slot %d", slot);
     return false;
   }
 
-  LOG("Skillbox: Request to remake skillbox");
+  DBG("Skillbox: Request to remake skillbox");
   game->request_remake_skillbox = true;
 
   auto oid = get(itemp->skillbox_id, slot);
   if (! oid) {
-    LOG("Skillbox: No skill at slot %d", slot);
+    DBG("Skillbox: No skill at slot %d", slot);
     return false;
   }
 
@@ -276,7 +276,7 @@ bool Level::skillbox_chosen(const uint32_t slot)
   }
 
   if (! what) {
-    LOG("Skillbox: No thing at slot %d", slot);
+    DBG("Skillbox: No thing at slot %d", slot);
     return false;
   }
 
@@ -295,14 +295,14 @@ bool Level::skillbox_chosen(const uint32_t slot)
 Thingp Level::skillbox_describe(const uint32_t slot)
 {
   TRACE_AND_INDENT();
-  LOG("Skillbox: Describe slot %d", slot);
+  DBG("Skillbox: Describe slot %d", slot);
   TRACE_AND_INDENT();
   auto what = skillbox_get(slot);
   if (what) {
     IF_DEBUG2 { what->log("Skillbox: Describe slot %d", slot); }
     what->describe_when_hovered_over_in_rightbar();
   } else {
-    LOG("Skillbox: Describe slot %d => nothing there", slot);
+    DBG("Skillbox: Describe slot %d => nothing there", slot);
   }
   return what;
 }

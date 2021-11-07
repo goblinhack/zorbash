@@ -224,12 +224,15 @@ bool player_tick(bool left, bool right, bool up, bool down, bool attack, bool wa
     }
     player->clear_move_path("Tried to jump");
   } else if (up || down || left || right || attack || wait) {
-    if (attack) {
-      player->log("Player attack");
-    } else if (wait) {
-      player->log("Player collect or wait");
-    } else {
-      player->log("Player move attempt");
+    IF_DEBUG1
+    {
+      if (attack) {
+        player->log("Player attack");
+      } else if (wait) {
+        player->log("Player collect or wait");
+      } else {
+        player->log("Player move attempt");
+      }
     }
 
     //

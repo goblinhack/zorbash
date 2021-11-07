@@ -67,7 +67,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     return false;
   }
 
-  LOG("Unhandled input");
+  DBG("Unhandled input");
   TRACE_AND_INDENT();
   auto level = game->level;
   if (! level) {
@@ -81,13 +81,13 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
   }
 
   if (key->scancode == (SDL_Scancode) game->config.key_zoom_out) {
-    CON("PLAYER: Zoom out.");
+    LOG("PLAYER: Zoom out.");
     config_game_pix_zoom_out();
     return true;
   }
 
   if (key->scancode == (SDL_Scancode) game->config.key_zoom_in) {
-    CON("PLAYER: Zoom in.");
+    LOG("PLAYER: Zoom in.");
     config_game_pix_zoom_in();
     return true;
   }
@@ -135,7 +135,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
   //
   auto player = level->player;
   if (player && player->is_dead) {
-    CON("PLAYER: Ignore input; player is dead");
+    LOG("PLAYER: Ignore input; player is dead");
     return false;
   }
 
@@ -145,7 +145,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
   //
   if (! game->robot_mode) {
     if (player && player->particle_anim_exists()) {
-      CON("PLAYER: Ignore input; anim exists");
+      DBG("PLAYER: Ignore input; anim exists");
       return false;
     }
 
@@ -153,29 +153,29 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     // No moving if weapons have not finished firing
     //
     if (level->all_projectiles.size()) {
-      CON("PLAYER: Ignore input; projectile exists");
+      DBG("PLAYER: Ignore input; projectile exists");
       return false;
     }
 
     if (level->new_projectiles.size()) {
-      CON("PLAYER: Ignore input; projectile exists");
+      DBG("PLAYER: Ignore input; projectile exists");
       return false;
     }
 
     if (level->all_lasers.size()) {
-      CON("PLAYER: Ignore input; laser exists");
+      DBG("PLAYER: Ignore input; laser exists");
       return false;
     }
 
     if (level->new_lasers.size()) {
-      CON("PLAYER: Ignore input; laser exists");
+      DBG("PLAYER: Ignore input; laser exists");
       return false;
     }
   }
 
   if (game->state == Game::STATE_INVENTORY) {
     if (key->scancode == SDL_SCANCODE_ESCAPE) {
-      LOG("PLAYER: Escape pressed when in inventory");
+      DBG("PLAYER: Escape pressed when in inventory");
 
       if (game->in_transit_item) {
         wid_in_transit_item_drop();
@@ -193,7 +193,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
   }
 
   if (key->scancode == (SDL_Scancode) game->config.key_drop) {
-    CON("PLAYER: Pressed drop key");
+    LOG("PLAYER: Pressed drop key");
     TRACE_AND_INDENT();
 
     //
@@ -222,7 +222,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
 
   if (game->state == Game::STATE_COLLECTING_ITEMS) {
     if (key->scancode == SDL_SCANCODE_ESCAPE) {
-      CON("PLAYER: Escape pressed, clear collecting items state");
+      LOG("PLAYER: Escape pressed, clear collecting items state");
       TRACE_AND_INDENT();
       game->change_state(Game::STATE_NORMAL);
       return true;
@@ -231,7 +231,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
 
   if (game->state == Game::STATE_ENCHANTING_ITEMS) {
     if (key->scancode == SDL_SCANCODE_ESCAPE) {
-      CON("PLAYER: Escape pressed, clear enchanting items state");
+      LOG("PLAYER: Escape pressed, clear enchanting items state");
       TRACE_AND_INDENT();
       game->change_state(Game::STATE_NORMAL);
       return true;
@@ -239,7 +239,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
   }
 
   if (key->scancode == (SDL_Scancode) game->config.key_eat) {
-    CON("PLAYER: Pressed eat key");
+    LOG("PLAYER: Pressed eat key");
     TRACE_AND_INDENT();
     if (game->state == Game::STATE_CHOOSING_TARGET) {
       game->change_state(Game::STATE_NORMAL);
@@ -264,7 +264,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
 
   if (game->state == Game::STATE_CHOOSING_TARGET) {
     if (key->scancode == SDL_SCANCODE_ESCAPE) {
-      CON("PLAYER: Escape pressed, clear choosing target flag");
+      LOG("PLAYER: Escape pressed, clear choosing target flag");
       TRACE_AND_INDENT();
       game->change_state(Game::STATE_NORMAL);
       return true;
@@ -272,7 +272,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
   }
 
   if (key->scancode == (SDL_Scancode) game->config.key_robot_mode) {
-    CON("PLAYER: Pressed robot mode key");
+    LOG("PLAYER: Pressed robot mode key");
     TRACE_AND_INDENT();
     wid_actionbar_robot_mode_toggle();
     game->change_state(Game::STATE_NORMAL);
@@ -281,7 +281,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
   }
 
   if (key->scancode == (SDL_Scancode) game->config.key_quit) {
-    CON("PLAYER: Pressed quit key");
+    LOG("PLAYER: Pressed quit key");
     TRACE_AND_INDENT();
     wid_actionbar_robot_mode_off();
     game->change_state(Game::STATE_NORMAL);
@@ -296,7 +296,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     //
   } else {
     if (key->scancode == (SDL_Scancode) game->config.key_help) {
-      CON("PLAYER: Pressed help key");
+      LOG("PLAYER: Pressed help key");
       TRACE_AND_INDENT();
       wid_actionbar_robot_mode_off();
       game->change_state(Game::STATE_NORMAL);
@@ -305,27 +305,27 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
       return true;
     }
     if (key->scancode == (SDL_Scancode) game->config.key_load) {
-      CON("PLAYER: Pressed load key");
+      LOG("PLAYER: Pressed load key");
       TRACE_AND_INDENT();
       wid_actionbar_robot_mode_off();
       game->change_state(Game::STATE_NORMAL);
       wid_thing_info_fini(); // To remove bag or other info
-      CON("PLAYER: Loading game");
+      LOG("PLAYER: Loading game");
       game->load_select();
       return true;
     }
     if (key->scancode == (SDL_Scancode) game->config.key_save) {
-      CON("PLAYER: Pressed save key");
+      LOG("PLAYER: Pressed save key");
       TRACE_AND_INDENT();
       wid_actionbar_robot_mode_off();
       game->change_state(Game::STATE_NORMAL);
       wid_thing_info_fini(); // To remove bag or other info
-      CON("PLAYER: Saving the game");
+      LOG("PLAYER: Saving the game");
       game->save_select();
       return true;
     }
     if (key->scancode == (SDL_Scancode) game->config.key_use) {
-      CON("PLAYER: Pressed use key");
+      LOG("PLAYER: Pressed use key");
       TRACE_AND_INDENT();
       if (game->state == Game::STATE_CHOOSING_TARGET || game->state == Game::STATE_COLLECTING_ITEMS) {
         return false;
@@ -341,7 +341,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
       return true;
     }
     if (key->scancode == (SDL_Scancode) game->config.key_throw) {
-      CON("PLAYER: Pressed throw key");
+      LOG("PLAYER: Pressed throw key");
       TRACE_AND_INDENT();
       if (game->state == Game::STATE_CHOOSING_TARGET || game->state == Game::STATE_COLLECTING_ITEMS) {
         return false;
@@ -353,7 +353,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
       return true;
     }
     if (key->scancode == (SDL_Scancode) game->config.key_inventory) {
-      CON("PLAYER: Pressed inventory key");
+      LOG("PLAYER: Pressed inventory key");
       wid_inventory_init();
       return true;
     }
@@ -363,7 +363,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
       // If shift is held, select skills
       //
       if (key->scancode == (SDL_Scancode) game->config.key_action0) {
-        CON("PLAYER: Pressed skill action key");
+        LOG("PLAYER: Pressed skill action key");
         TRACE_AND_INDENT();
         game->change_state(Game::STATE_NORMAL);
         wid_thing_info_fini(); // To remove bag or other info
@@ -372,7 +372,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         return true;
       }
       if (key->scancode == (SDL_Scancode) game->config.key_action1) {
-        CON("PLAYER: Pressed skill action key");
+        LOG("PLAYER: Pressed skill action key");
         TRACE_AND_INDENT();
         game->change_state(Game::STATE_NORMAL);
         wid_thing_info_fini(); // To remove bag or other info
@@ -381,7 +381,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         return true;
       }
       if (key->scancode == (SDL_Scancode) game->config.key_action2) {
-        CON("PLAYER: Pressed skill action key");
+        LOG("PLAYER: Pressed skill action key");
         TRACE_AND_INDENT();
         game->change_state(Game::STATE_NORMAL);
         wid_thing_info_fini(); // To remove bag or other info
@@ -390,7 +390,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         return true;
       }
       if (key->scancode == (SDL_Scancode) game->config.key_action3) {
-        CON("PLAYER: Pressed skill action key");
+        LOG("PLAYER: Pressed skill action key");
         TRACE_AND_INDENT();
         game->change_state(Game::STATE_NORMAL);
         wid_thing_info_fini(); // To remove bag or other info
@@ -399,7 +399,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         return true;
       }
       if (key->scancode == (SDL_Scancode) game->config.key_action4) {
-        CON("PLAYER: Pressed skill action key");
+        LOG("PLAYER: Pressed skill action key");
         TRACE_AND_INDENT();
         game->change_state(Game::STATE_NORMAL);
         wid_thing_info_fini(); // To remove bag or other info
@@ -408,7 +408,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         return true;
       }
       if (key->scancode == (SDL_Scancode) game->config.key_action5) {
-        CON("PLAYER: Pressed skill action key");
+        LOG("PLAYER: Pressed skill action key");
         TRACE_AND_INDENT();
         game->change_state(Game::STATE_NORMAL);
         wid_thing_info_fini(); // To remove bag or other info
@@ -417,7 +417,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         return true;
       }
       if (key->scancode == (SDL_Scancode) game->config.key_action6) {
-        CON("PLAYER: Pressed skill action key");
+        LOG("PLAYER: Pressed skill action key");
         TRACE_AND_INDENT();
         game->change_state(Game::STATE_NORMAL);
         wid_thing_info_fini(); // To remove bag or other info
@@ -426,7 +426,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         return true;
       }
       if (key->scancode == (SDL_Scancode) game->config.key_action7) {
-        CON("PLAYER: Pressed skill action key");
+        LOG("PLAYER: Pressed skill action key");
         TRACE_AND_INDENT();
         game->change_state(Game::STATE_NORMAL);
         wid_thing_info_fini(); // To remove bag or other info
@@ -435,7 +435,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         return true;
       }
       if (key->scancode == (SDL_Scancode) game->config.key_action8) {
-        CON("PLAYER: Pressed skill action key");
+        LOG("PLAYER: Pressed skill action key");
         TRACE_AND_INDENT();
         game->change_state(Game::STATE_NORMAL);
         wid_thing_info_fini(); // To remove bag or other info
@@ -444,7 +444,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         return true;
       }
       if (key->scancode == (SDL_Scancode) game->config.key_action9) {
-        CON("PLAYER: Pressed skill action key");
+        LOG("PLAYER: Pressed skill action key");
         TRACE_AND_INDENT();
         game->change_state(Game::STATE_NORMAL);
         wid_thing_info_fini(); // To remove bag or other info
@@ -457,7 +457,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
       // If shift is not held, select inventory
       //
       if (key->scancode == (SDL_Scancode) game->config.key_action0) {
-        CON("PLAYER: Pressed action key");
+        LOG("PLAYER: Pressed action key");
         TRACE_AND_INDENT();
         game->change_state(Game::STATE_NORMAL);
         wid_thing_info_fini(); // To remove bag or other info
@@ -470,7 +470,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         return true;
       }
       if (key->scancode == (SDL_Scancode) game->config.key_action1) {
-        CON("PLAYER: Pressed action key");
+        LOG("PLAYER: Pressed action key");
         TRACE_AND_INDENT();
         game->change_state(Game::STATE_NORMAL);
         wid_thing_info_fini(); // To remove bag or other info
@@ -483,7 +483,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         return true;
       }
       if (key->scancode == (SDL_Scancode) game->config.key_action2) {
-        CON("PLAYER: Pressed action key");
+        LOG("PLAYER: Pressed action key");
         TRACE_AND_INDENT();
         game->change_state(Game::STATE_NORMAL);
         wid_thing_info_fini(); // To remove bag or other info
@@ -496,7 +496,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         return true;
       }
       if (key->scancode == (SDL_Scancode) game->config.key_action3) {
-        CON("PLAYER: Pressed action key");
+        LOG("PLAYER: Pressed action key");
         TRACE_AND_INDENT();
         game->change_state(Game::STATE_NORMAL);
         wid_thing_info_fini(); // To remove bag or other info
@@ -509,7 +509,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         return true;
       }
       if (key->scancode == (SDL_Scancode) game->config.key_action4) {
-        CON("PLAYER: Pressed action key");
+        LOG("PLAYER: Pressed action key");
         TRACE_AND_INDENT();
         game->change_state(Game::STATE_NORMAL);
         wid_thing_info_fini(); // To remove bag or other info
@@ -522,7 +522,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         return true;
       }
       if (key->scancode == (SDL_Scancode) game->config.key_action5) {
-        CON("PLAYER: Pressed action key");
+        LOG("PLAYER: Pressed action key");
         TRACE_AND_INDENT();
         game->change_state(Game::STATE_NORMAL);
         wid_thing_info_fini(); // To remove bag or other info
@@ -535,7 +535,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         return true;
       }
       if (key->scancode == (SDL_Scancode) game->config.key_action6) {
-        CON("PLAYER: Pressed action key");
+        LOG("PLAYER: Pressed action key");
         TRACE_AND_INDENT();
         game->change_state(Game::STATE_NORMAL);
         wid_thing_info_fini(); // To remove bag or other info
@@ -548,7 +548,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         return true;
       }
       if (key->scancode == (SDL_Scancode) game->config.key_action7) {
-        CON("PLAYER: Pressed action key");
+        LOG("PLAYER: Pressed action key");
         TRACE_AND_INDENT();
         game->change_state(Game::STATE_NORMAL);
         wid_thing_info_fini(); // To remove bag or other info
@@ -561,7 +561,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         return true;
       }
       if (key->scancode == (SDL_Scancode) game->config.key_action8) {
-        CON("PLAYER: Pressed action key");
+        LOG("PLAYER: Pressed action key");
         TRACE_AND_INDENT();
         game->change_state(Game::STATE_NORMAL);
         wid_thing_info_fini(); // To remove bag or other info
@@ -574,7 +574,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         return true;
       }
       if (key->scancode == (SDL_Scancode) game->config.key_action9) {
-        CON("PLAYER: Pressed action key");
+        LOG("PLAYER: Pressed action key");
         TRACE_AND_INDENT();
         game->change_state(Game::STATE_NORMAL);
         wid_thing_info_fini(); // To remove bag or other info

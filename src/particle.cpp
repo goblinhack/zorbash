@@ -123,8 +123,6 @@ void Level::display_internal_particles(void)
           if (p.make_visible_at_end) {
             t->visible();
           }
-          IF_DEBUG4
-          t->log("End of jump particle");
           t->is_scheduled_for_jump_end = true;
           t->has_internal_particle     = false;
         }

@@ -33,7 +33,7 @@ void Level::things_gc(bool force)
       ++next_it;
 
       auto id = it->first;
-      LOG("Thing %08" PRIx32 " garbage collect", id.id);
+      DBG3("Thing %08" PRIx32 " garbage collect", id.id);
 
       auto t = thing_find(id);
       if (! t) {
