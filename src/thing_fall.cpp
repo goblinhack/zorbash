@@ -260,6 +260,9 @@ bool Thing::fall_to_next_level(void)
       dbg("Land on the next level, move to %d,%d", x, y);
       move_to_immediately(point(x, y));
 
+      dbg("Level change move carried items");
+      move_carried_items_immediately();
+
       if (is_player()) {
         next_level->scroll_map_to_player();
         next_level->update_new_level();
