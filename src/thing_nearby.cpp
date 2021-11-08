@@ -66,6 +66,13 @@ Thingp Thing::get_most_dangerous_adjacent_thing(void)
         score += t->get_health_max();
       }
 
+      //
+      // If not moving, it's not so dangerous?
+      //
+      if (t->last_mid_at == t->mid_at) {
+        score /= 2;
+      }
+
       possible.push_back(std::make_pair(t, score));
     }
     FOR_ALL_THINGS_END()
@@ -125,6 +132,13 @@ Thingp Thing::get_most_dangerous_visible_thing(void)
 
         if (will_avoid_monst(o)) {
           score += t->get_health_max();
+        }
+
+        //
+        // If not moving, it's not so dangerous?
+        //
+        if (t->last_mid_at == t->mid_at) {
+          score /= 2;
         }
 
         possible.push_back(std::make_pair(t, score));

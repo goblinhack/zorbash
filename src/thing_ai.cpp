@@ -685,17 +685,6 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
 
   dmap_process(dmap_can_see, point(minx, miny), point(maxx, maxy));
 
-  if (check_for_interrupts) {
-    auto threat = get_most_dangerous_visible_thing();
-    if (threat) {
-      if (threat && (is_dangerous(threat) || is_enemy(threat) || is_to_be_avoided(threat))) {
-        if (! get_goal_penalty(threat)) {
-          something_changed = true;
-        }
-      }
-    }
-  }
-
   IF_DEBUG3
   {
     if (is_player()) {
@@ -1756,8 +1745,8 @@ bool Thing::ai_tick(bool recursing)
         AI_LOG("Keep on moving");
         if (is_player()) {
           game->tick_begin("Robot move");
-          path_pop_next_move();
         }
+        path_pop_next_move();
         return true;
       }
       break;
