@@ -189,6 +189,9 @@ void Thing::achieve_goals_in_life(void)
   if (is_monst()) {
     dbg("Get next hop");
     ai_get_next_hop();
+    if (is_moving) {
+      return;
+    }
   }
 
   //
@@ -198,6 +201,14 @@ void Thing::achieve_goals_in_life(void)
     //
     // Pop the next player move at the end of the game tick
     //
+    if (maybe_aip() && get_aip()->move_path.empty()) {
+      //
+      // If resting, keep resting
+      //
+      if (get_infop()->monst_state == MONST_STATE_MOVING) {
+        ai_change_state(MONST_STATE_IDLE, "move path is empty");
+      }
+    }
   } else {
     //
     // Pop the next monst move.
@@ -205,17 +216,6 @@ void Thing::achieve_goals_in_life(void)
     if (path_pop_next_move()) {
       dbg("Popped next move");
       return;
-    }
-  }
-
-  if (maybe_aip() && get_aip()->move_path.empty()) {
-    if (is_player()) {
-      //
-      // If resting, keep resting
-      //
-      if (get_infop()->monst_state == MONST_STATE_MOVING) {
-        ai_change_state(MONST_STATE_IDLE, "move path is empty");
-      }
     }
   }
 }

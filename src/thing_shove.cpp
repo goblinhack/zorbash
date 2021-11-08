@@ -53,6 +53,7 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta)
 
   dbg("Try to shove, %s delta %d,%d", it->to_string().c_str(), (int) delta.x, (int) delta.y);
   TRACE_AND_INDENT();
+  move_finish();
 
   bool was_dead = it->is_dead;
 

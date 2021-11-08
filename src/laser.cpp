@@ -91,7 +91,7 @@ void Level::new_laser(ThingId id, point start, point stop, uint32_t dur)
     }
   }
 
-  uint32_t now = time_update_time_milli();
+  uint32_t now = time_get_time_ms();
   new_lasers.push_back(Laser(this, id, start, stop, pixel_map_at, now, now + dur));
 }
 
@@ -125,7 +125,7 @@ void Level::display_lasers(void)
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
   blit_init();
-  auto now = time_update_time_milli();
+  auto now = time_get_time_ms();
   auto e   = std::remove_if(all_lasers.begin(), all_lasers.end(), [ =, this ](Laser &p) {
     float timestep = p.ts_stop - p.ts_start;
     float dt       = ((float) (now - p.ts_start)) / timestep;

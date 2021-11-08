@@ -477,6 +477,7 @@ bool Thing::get_coords(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
   //
   auto owner   = get_immediate_owner();
   auto falling = is_falling || (owner && owner->is_falling);
+
   if (likely(! falling)) {
     if (unlikely(tpp->gfx_animated_can_hflip())) {
       if (get_ts_flip_start()) {

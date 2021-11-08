@@ -1273,7 +1273,7 @@ void sdl_loop(void)
     //
     // Less frequent updates
     //
-    int  ts_now      = time_update_time_milli();
+    int  ts_now      = time_get_time_ms();
     bool update_slow = (ts_now - ui_ts_slow_last >= UI_UPDATE_SLOW_MS);
     bool update_fast = (ts_now - ui_ts_fast_last >= UI_UPDATE_FAST_MS);
 
