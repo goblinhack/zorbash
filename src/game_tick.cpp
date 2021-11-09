@@ -17,7 +17,6 @@ void Game::tick_begin(const std::string &why)
 {
   TRACE_AND_INDENT();
   tick_requested = why;
-  game->tick_dt  = 0;
 
   auto level = game->level;
   if (level) {
@@ -44,6 +43,7 @@ void Game::tick_begin_now(void)
   // Move when all things are done moving
   //
   game->tick_current++;
+  game->tick_dt = 0;
 
   //
   // Helps to maintain randomness if the user say scrolls around the level we
@@ -162,8 +162,5 @@ void Game::tick_update(void)
     if (game->tick_dt > 1) {
       game->tick_dt = 1;
     }
-  } else {
-    game->tick_dt = 0;
   }
-  // CON("DT %f at %u %u",game->tick_dt, time_get_time_ms() - game->tick_begin_ms, game->current_move_speed);
 }

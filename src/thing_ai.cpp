@@ -1503,6 +1503,7 @@ bool Thing::ai_tick(bool recursing)
               return true;
             }
           }
+
           //
           // No resting when in danger unless in dire straits
           //

@@ -159,7 +159,7 @@ bool Level::tick(void)
   //
   // A new game event has occurred?
   //
-  if (! game->tick_requested.empty()) {
+  if (! game->tick_requested.empty() && ! game->things_are_moving) {
     game->tick_begin_now();
 
     FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL(this, t)
@@ -184,6 +184,14 @@ bool Level::tick(void)
     FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL_END(this)
   }
 
+  //
+  // For all things that move, like monsters, or those that do not, like
+  // wands, and even those that do not move but can be destroyed, like
+  // walls. Omits things like floors, corridors, the grid; those that
+  // generally do nothing or are hidden.
+  //
+  game->things_are_moving = false;
+
   FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL(this, t)
   {
     if (t->is_scheduled_for_jump_end) {
@@ -196,14 +204,6 @@ bool Level::tick(void)
     }
   }
   FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL_END(this)
-
-  //
-  // For all things that move, like monsters, or those that do not, like
-  // wands, and even those that do not move but can be destroyed, like
-  // walls. Omits things like floors, corridors, the grid; those that
-  // generally do nothing or are hidden.
-  //
-  game->things_are_moving = false;
 
   static const int wait_count_max = THING_TICK_WAIT_TOO_LONG;
   static int       wait_count;

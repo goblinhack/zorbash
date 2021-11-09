@@ -171,7 +171,7 @@ void Thing::blit_non_player_owned_shadow(const Tpp &tpp, const Tilep &tile, cons
 
     float bounce = get_bounce();
     float tileh  = game->config.tile_pix_height;
-    float bh     = (tileh / TILE_HEIGHT) * (int) (bounce * TILE_HEIGHT * 2);
+    float bh     = (tileh / TILE_HEIGHT) * (int) (bounce * TILE_HEIGHT);
 
     float fadeup = get_fadeup();
     if (fadeup < 0) {
