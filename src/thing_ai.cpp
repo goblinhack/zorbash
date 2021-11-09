@@ -1492,6 +1492,18 @@ bool Thing::ai_tick(bool recursing)
         //
         if (threat && (is_dangerous(threat) || is_enemy(threat) || is_to_be_avoided(threat))) {
           //
+          // If not too close to the thread we can try and do something else like pick up a weapon.
+          //
+          if (distance(mid_at, threat->mid_at) > 1) {
+            //
+            // Look around for something nearby to do; like collect an item.
+            //
+            AI_LOG("Look around for some immediately adjacent goal as threat is not too close");
+            if (ai_choose_immediately_adjacent_goal()) {
+              return true;
+            }
+          }
+          //
           // No resting when in danger unless in dire straits
           //
           // If we're absolutely exhausted, we must rest, threat or no threat
@@ -1521,8 +1533,7 @@ bool Thing::ai_tick(bool recursing)
           }
         } else {
           //
-          // Not under threat, so we can think about doing some other
-          // housecleaning tasks.
+          // Not under threat, so we can think about doing some other house cleaning tasks.
           //
           AI_LOG("Idle, look for something to do");
 

@@ -24,6 +24,13 @@ bool Thing::will_avoid_monst(const Thingp it)
   TRACE_AND_INDENT();
   auto me = tp();
 
+  //
+  // Not moving?
+  //
+  if (it->mid_at == it->last_mid_at) {
+    return false;
+  }
+
   if (is_dangerous(it)) {
     return true;
   }
@@ -82,6 +89,14 @@ bool Thing::will_avoid_monst(const point &p)
     if (it == this) {
       continue;
     }
+
+    //
+    // Not moving?
+    //
+    if (it->mid_at == it->last_mid_at) {
+      continue;
+    }
+
     if (me->is_monst()) {
       if (it->is_player()) {
         if (is_dangerous(it)) {

@@ -104,7 +104,7 @@ void Thing::add_goal_penalty(Thingp attacker)
   auto penalty = aip->goal_penalty[ attacker->id ];
 
   if (! penalty) {
-    penalty = 10;
+    penalty = 20;
     if (is_player() && game->robot_mode) {
       CON("Robot: Set new goal penalty %s to %d", attacker->to_string().c_str(), penalty);
     } else {
