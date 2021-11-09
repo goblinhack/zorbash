@@ -582,6 +582,10 @@ public:
   int collision_hit_priority(void);
   int decr_charge_count(int);
   int decr_charge_count(void);
+  int decr_idle_count(int);
+  int decr_idle_count(void);
+  int decr_stuck_count(int);
+  int decr_stuck_count(void);
   int decr_current_damage(int);
   int decr_current_damage(void);
   int decr_enchant(int);
@@ -682,6 +686,8 @@ public:
   int get_carried_weapon_highest_value(Thingp *out);
   int get_carried_weapon_least_value(Thingp *out);
   int get_charge_count(void);
+  int get_idle_count(void);
+  int get_stuck_count(void);
   int get_current_damage(void);
   int get_damage_bite(void);
   int get_damage_crush(void);
@@ -771,6 +777,10 @@ public:
   int health_starving_pct(void);
   int incr_charge_count(int);
   int incr_charge_count(void);
+  int incr_idle_count(int);
+  int incr_idle_count(void);
+  int incr_stuck_count(int);
+  int incr_stuck_count(void);
   int incr_current_damage(int);
   int incr_current_damage(void);
   int incr_enchant(int);
@@ -1021,6 +1031,8 @@ public:
   int range_max(void);
   int rarity(void);
   int set_charge_count(int);
+  int set_idle_count(int);
+  int set_stuck_count(int);
   int set_current_damage(int);
   int set_enchant(int);
   int set_enchant_max(int);

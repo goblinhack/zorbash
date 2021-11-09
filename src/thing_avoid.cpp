@@ -27,7 +27,14 @@ bool Thing::will_avoid_monst(const Thingp it)
   //
   // Not moving?
   //
-  if (it->mid_at == it->last_mid_at) {
+  if (it->get_idle_count() > 5) {
+    return false;
+  }
+
+  //
+  // It's stuck?
+  //
+  if (it->get_stuck_count() > 5) {
     return false;
   }
 
@@ -93,7 +100,14 @@ bool Thing::will_avoid_monst(const point &p)
     //
     // Not moving?
     //
-    if (it->mid_at == it->last_mid_at) {
+    if (it->get_idle_count() > 5) {
+      continue;
+    }
+
+    //
+    // It's stuck?
+    //
+    if (it->get_stuck_count() > 5) {
       continue;
     }
 

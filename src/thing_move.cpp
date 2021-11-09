@@ -240,10 +240,13 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
           }
         }
         lunge(future_pos);
+        incr_stuck_count();
         return false;
       }
     }
   }
+
+  set_stuck_count(0);
 
   //
   // No rest for the undead.

@@ -284,8 +284,13 @@ void Thing::tick(void)
   // Tick on player move/change of the current tick
   //
   achieve_goals_in_life();
+  if (is_dead) {
+    return;
+  }
 
-  //
-  // Could be dead here. Sadly.
-  //
+  if (mid_at == last_mid_at) {
+    incr_idle_count();
+  } else {
+    set_idle_count(0);
+  }
 }

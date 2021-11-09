@@ -4604,6 +4604,104 @@ int Thing::incr_charge_count(void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
+// idle_count
+////////////////////////////////////////////////////////////////////////////
+int Thing::get_idle_count(void)
+{
+  TRACE_AND_INDENT();
+  if (maybe_aip()) {
+    verify(maybe_aip());
+    return (get_aip()->idle_count);
+  } else {
+    return 0;
+  }
+}
+
+int Thing::set_idle_count(int v)
+{
+  TRACE_AND_INDENT();
+  new_aip();
+  return (get_aip()->idle_count = v);
+}
+
+int Thing::decr_idle_count(int v)
+{
+  TRACE_AND_INDENT();
+  new_aip();
+  return (get_aip()->idle_count -= v);
+}
+
+int Thing::incr_idle_count(int v)
+{
+  TRACE_AND_INDENT();
+  new_aip();
+  return (get_aip()->idle_count += v);
+}
+
+int Thing::decr_idle_count(void)
+{
+  TRACE_AND_INDENT();
+  new_aip();
+  return (get_aip()->idle_count--);
+}
+
+int Thing::incr_idle_count(void)
+{
+  TRACE_AND_INDENT();
+  new_aip();
+  return (get_aip()->idle_count++);
+}
+
+////////////////////////////////////////////////////////////////////////////
+// stuck_count
+////////////////////////////////////////////////////////////////////////////
+int Thing::get_stuck_count(void)
+{
+  TRACE_AND_INDENT();
+  if (maybe_aip()) {
+    verify(maybe_aip());
+    return (get_aip()->stuck_count);
+  } else {
+    return 0;
+  }
+}
+
+int Thing::set_stuck_count(int v)
+{
+  TRACE_AND_INDENT();
+  new_aip();
+  return (get_aip()->stuck_count = v);
+}
+
+int Thing::decr_stuck_count(int v)
+{
+  TRACE_AND_INDENT();
+  new_aip();
+  return (get_aip()->stuck_count -= v);
+}
+
+int Thing::incr_stuck_count(int v)
+{
+  TRACE_AND_INDENT();
+  new_aip();
+  return (get_aip()->stuck_count += v);
+}
+
+int Thing::decr_stuck_count(void)
+{
+  TRACE_AND_INDENT();
+  new_aip();
+  return (get_aip()->stuck_count--);
+}
+
+int Thing::incr_stuck_count(void)
+{
+  TRACE_AND_INDENT();
+  new_aip();
+  return (get_aip()->stuck_count++);
+}
+
+////////////////////////////////////////////////////////////////////////////
 // lifespan
 ////////////////////////////////////////////////////////////////////////////
 int Thing::get_lifespan(void)

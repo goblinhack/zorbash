@@ -174,6 +174,8 @@ std::ostream &operator<<(std::ostream &out, Bits< ThingAip & > const my)
   out << bits(my.t->avoid);
   out << bits(my.t->move_path);
   out << bits(my.t->wander_target);
+  out << bits(my.t->idle_count);
+  out << bits(my.t->stuck_count);
   return (out);
 }
 

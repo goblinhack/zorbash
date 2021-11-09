@@ -228,6 +228,9 @@ public:
   AgeMap seen_map;      // If we've ever seen this tile and when
   AgeMap interrupt_map; // If we've ever interrupt this tile and when
 
+  uint8_t idle_count;  // How long we have not moved
+  uint8_t stuck_count; // How long we have not moved due to being stuck
+
   Dmap dmap_can_see; // What the monster can reach during AI
 
   FovMap can_see_currently; // Shadowcasting of what can be seen currently

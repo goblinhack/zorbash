@@ -128,6 +128,12 @@ int Thing::get_danger_initial_level(void)
   if (is_able_to_fire_at()) {
     danger_level += 20;
   }
+  if (get_idle_count() > 5) {
+    danger_level /= 2;
+  }
+  if (get_stuck_count() > 5) {
+    danger_level /= 2;
+  }
 
   danger_level += get_damage_max();
 
@@ -203,6 +209,12 @@ int Thing::get_danger_current_level(void)
   }
   if (is_able_to_fire_at()) {
     danger_level += 20;
+  }
+  if (get_idle_count() > 5) {
+    danger_level /= 2;
+  }
+  if (get_stuck_count() > 5) {
+    danger_level /= 2;
   }
 
   danger_level += get_damage_max();

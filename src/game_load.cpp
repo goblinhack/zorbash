@@ -199,6 +199,8 @@ std::istream &operator>>(std::istream &in, Bits< ThingAip & > my)
   in >> bits(my.t->avoid);
   in >> bits(my.t->move_path);
   in >> bits(my.t->wander_target);
+  in >> bits(my.t->idle_count);
+  in >> bits(my.t->stuck_count);
   return (in);
 }
 

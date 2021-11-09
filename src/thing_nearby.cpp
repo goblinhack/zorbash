@@ -37,43 +37,36 @@ Thingp Thing::get_most_dangerous_adjacent_thing(void)
       continue;
     }
 
-    FOR_ALL_THINGS_THAT_INTERACT(level, t, x, y)
+    FOR_ALL_THINGS_THAT_INTERACT(level, it, x, y)
     {
-      if (t == this) {
+      if (it == this) {
         continue;
       }
 
-      if (t->is_dead) {
+      if (it->is_dead) {
         continue;
       }
 
       //
       // Treat as a threat so they attack
       //
-      if (t->is_spiderweb()) {
-        if (t->mid_at == mid_at) {
-          possible.push_back(std::make_pair(t, 666));
+      if (it->is_spiderweb()) {
+        if (it->mid_at == mid_at) {
+          possible.push_back(std::make_pair(it, 666));
           continue;
         }
       }
 
-      if (! t->is_monst() && ! t->is_player()) {
+      if (! it->is_monst() && ! it->is_player()) {
         continue;
       }
 
-      auto score = t->get_health();
+      auto score = it->get_health();
       if (will_avoid_monst(point(x, y))) {
-        score += t->get_health_max();
+        score += it->get_health_max();
       }
 
-      //
-      // If not moving, it's not so dangerous?
-      //
-      if (t->last_mid_at == t->mid_at) {
-        score /= 2;
-      }
-
-      possible.push_back(std::make_pair(t, score));
+      possible.push_back(std::make_pair(it, score));
     }
     FOR_ALL_THINGS_END()
   }
@@ -132,13 +125,6 @@ Thingp Thing::get_most_dangerous_visible_thing(void)
 
         if (will_avoid_monst(o)) {
           score += t->get_health_max();
-        }
-
-        //
-        // If not moving, it's not so dangerous?
-        //
-        if (t->last_mid_at == t->mid_at) {
-          score /= 2;
         }
 
         possible.push_back(std::make_pair(t, score));
