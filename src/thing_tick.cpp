@@ -288,9 +288,11 @@ void Thing::tick(void)
     return;
   }
 
-  if (mid_at == last_mid_at) {
-    incr_idle_count();
-  } else {
-    set_idle_count(0);
+  if (is_monst() || is_player()) {
+    if (mid_at == last_mid_at) {
+      incr_idle_count();
+    } else {
+      set_idle_count(0);
+    }
   }
 }
