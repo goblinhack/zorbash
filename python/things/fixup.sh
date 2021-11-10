@@ -106,6 +106,7 @@ for IN in \
   wand_descent.py \
   wand_energy.py \
   wand_fire.py \
+  ring_poison_resist.py \
   wand_lightning.py
 do
     echo $IN
