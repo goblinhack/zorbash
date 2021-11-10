@@ -13,6 +13,7 @@
 #include "my_monst.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_sdl.hpp"
+#include "my_sound.hpp"
 #include "my_string.hpp"
 #include "my_sys.hpp"
 #include "my_thing.hpp"
@@ -194,6 +195,8 @@ uint8_t wid_in_transit_item_place(Widp w, int32_t x, int32_t y, uint32_t button)
       auto what = t;
       if (! what->is_weapon()) {
         TOPCON("Cannot equip %s as a weapon.", what->text_the().c_str());
+        sound_play("bonk");
+        return false;
       }
 
       //
@@ -201,6 +204,46 @@ uint8_t wid_in_transit_item_place(Widp w, int32_t x, int32_t y, uint32_t button)
       //
       player->log("Use %s", what->to_string().c_str());
       player->use(what);
+
+      wid_destroy(&game->in_transit_item);
+      wid_inventory_init();
+      game->request_remake_rightbar = true;
+      return true;
+    }
+
+    if (over->name == "equip_ring1") {
+      auto what = t;
+      if (! what->is_ring()) {
+        TOPCON("Cannot wear %s as a ring.", what->text_the().c_str());
+        sound_play("bonk");
+        return false;
+      }
+
+      //
+      // Wear the ring
+      //
+      player->log("Use %s", what->to_string().c_str());
+      player->use(what, MONST_EQUIP_RING1);
+
+      wid_destroy(&game->in_transit_item);
+      wid_inventory_init();
+      game->request_remake_rightbar = true;
+      return true;
+    }
+
+    if (over->name == "equip_ring2") {
+      auto what = t;
+      if (! what->is_ring()) {
+        TOPCON("Cannot wear %s as a ring.", what->text_the().c_str());
+        sound_play("bonk");
+        return false;
+      }
+
+      //
+      // Wear the ring
+      //
+      player->log("Use %s", what->to_string().c_str());
+      player->use(what, MONST_EQUIP_RING2);
 
       wid_destroy(&game->in_transit_item);
       wid_inventory_init();

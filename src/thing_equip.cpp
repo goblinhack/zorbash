@@ -328,7 +328,7 @@ bool Thing::equip(Thingp item, int equip)
 
   auto carry_anim_as = equip_tp->equip_carry_anim();
   if (carry_anim_as == "") {
-    err("Could not equip %s", item->to_string().c_str());
+    err("Could not equip %s as has no carry anim", item->to_string().c_str());
     return false;
   }
 

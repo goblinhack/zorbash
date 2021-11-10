@@ -227,7 +227,7 @@ void Thing::used(Thingp what, Thingp target, bool remove_after_use)
   }
 }
 
-bool Thing::use(Thingp what)
+bool Thing::use(Thingp what, int preferred_equip)
 {
   verify(what);
   if (! what) {
@@ -248,44 +248,65 @@ bool Thing::use(Thingp what)
   }
 
   if (what->is_skill()) {
+    dbg("Trying to use skill: %s", what->to_string().c_str());
+    TRACE_AND_INDENT();
     skill_use(what);
   } else if (what->is_enchantstone()) {
+    dbg("Trying to use enchantstone: %s", what->to_string().c_str());
+    TRACE_AND_INDENT();
     if (is_player()) {
       game->wid_enchant_an_item();
     }
   } else if (what->is_skillstone()) {
+    dbg("Trying to use skillstone: %s", what->to_string().c_str());
+    TRACE_AND_INDENT();
     if (is_player()) {
       game->wid_skill_choose();
     }
   } else if (what->is_weapon()) {
-    if (equip(what, MONST_EQUIP_WEAPON)) {
+    dbg("Trying to use weapon: %s", what->to_string().c_str());
+    TRACE_AND_INDENT();
+    if (preferred_equip == -1) {
+      preferred_equip = MONST_EQUIP_WEAPON;
+    }
+    if (equip(what, preferred_equip)) {
       if (is_player()) {
         TOPCON("You equip the %s.", what->text_the().c_str());
         game->tick_begin("player changed weapon");
       }
     }
   } else if (what->is_auto_throw()) {
+    dbg("Trying to throw item: %s", what->to_string().c_str());
+    TRACE_AND_INDENT();
     throw_item_choose_target(what);
     if (is_player()) {
       level->describe(what);
     }
   } else if (what->is_target_auto_select()) {
+    dbg("Trying to choose target: %s", what->to_string().c_str());
+    TRACE_AND_INDENT();
     fire_at_and_choose_target(what);
     if (is_player()) {
       level->describe(what);
     }
   } else if (what->is_auto_use()) {
+    dbg("Trying to auto use: %s", what->to_string().c_str());
+    TRACE_AND_INDENT();
     use(what);
     if (is_player()) {
       level->describe(what);
     }
   } else if (what->is_food()) {
+    dbg("Trying to eat: %s", what->to_string().c_str());
+    TRACE_AND_INDENT();
     eat(what);
     used(what, this, true /* remove after use */);
     if (is_player()) {
       game->tick_begin("player ate an item");
     }
   } else if (what->is_potion()) {
+    dbg("Trying to drink: %s", what->to_string().c_str());
+    TRACE_AND_INDENT();
     if (is_player()) {
       TOPCON("You quaff the %s.", what->text_the().c_str());
     }
@@ -294,6 +315,8 @@ bool Thing::use(Thingp what)
       game->tick_begin("player drunk an item");
     }
   } else if (what->is_wand()) {
+    dbg("Trying to wave: %s", what->to_string().c_str());
+    TRACE_AND_INDENT();
     if (is_player()) {
       TOPCON("You wave the %s.", what->text_the().c_str());
     }
@@ -302,14 +325,30 @@ bool Thing::use(Thingp what)
       game->tick_begin("player drunk an item");
     }
   } else if (what->is_ring()) {
-    if (is_player()) {
-      TOPCON("You put on the %s.", what->text_the().c_str());
+    dbg("Trying to put on: %s", what->to_string().c_str());
+    TRACE_AND_INDENT();
+    //
+    // Choose a free slot if not specified
+    //
+    if (preferred_equip == -1) {
+      if (! get_equip(MONST_EQUIP_RING1)) {
+        preferred_equip = MONST_EQUIP_RING1;
+      } else if (! get_equip(MONST_EQUIP_RING2)) {
+        preferred_equip = MONST_EQUIP_RING2;
+      } else {
+        preferred_equip = MONST_EQUIP_RING1;
+      }
     }
-    used(what, this, false /* remove after use */);
-    if (is_player()) {
-      game->tick_begin("player wore a ring");
+
+    if (equip(what, preferred_equip)) {
+      if (is_player()) {
+        TOPCON("You put on the %s.", what->text_the().c_str());
+        game->tick_begin("player wore a ring");
+      }
     }
   } else if (! what->is_usable()) {
+    dbg("Trying to use, last resort: %s", what->to_string().c_str());
+    TRACE_AND_INDENT();
     if (is_player()) {
       TOPCON("I don't know how to use %s.", what->text_the().c_str());
       game->tick_begin("player tried to use something they could not");

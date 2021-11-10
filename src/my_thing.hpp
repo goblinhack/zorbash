@@ -429,7 +429,7 @@ public:
   bool try_to_jump_carefully(point to);
   bool try_to_jump_carefully(point to, bool *too_far);
   bool try_to_jump_towards_player(void);
-  bool use(Thingp w);
+  bool use(Thingp w, int equip = -1);
   bool will_avoid_monst(const Thingp it);
   bool will_avoid_monst(const point &p);
   bool will_prefer_terrain(const Thingp it);

@@ -52,7 +52,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_environ_hates_water(False)
     mytp.set_environ_loves_acid(False)
     mytp.set_environ_loves_fire(False)
-    mytp.set_environ_loves_poison(False)
+    mytp.set_environ_loves_poison(True)
     mytp.set_environ_loves_spiderwebs(False)
     mytp.set_environ_loves_water(False)
     mytp.set_gfx_an_animation_only(False)
@@ -241,11 +241,10 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_wooden(True)
     mytp.set_item_height(4)
     mytp.set_item_width(4)
-    mytp.set_long_text_description("Eat drink and be merry wearing this ring, for poison can do you no harm. Please wear responsibly...")
+    mytp.set_long_text_description("Eat drink and be merry while wearing this ring, for poison can do you no harm. Please wear responsibly...")
     mytp.set_normal_placement_rules(True)
     mytp.set_on_death_drop_all_items(False)
     mytp.set_on_death_is_open(False)
-    mytp.set_range_max(7)
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("%%fg=green$A ring of poison resist.")
     mytp.set_unused_flag10(False)
@@ -285,6 +284,6 @@ def tp_init(name, text_name, short_text_name):
     mytp.update()
 
 def init():
-    tp_init(name="ring_poison_resist", text_name="ring of poison love", short_text_name="ring.poison_resist")
+    tp_init(name="ring_poison_resist", text_name="ring of poison loving", short_text_name="ring.poison_resist")
 
 init()
