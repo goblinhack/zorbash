@@ -241,10 +241,13 @@ void Thing::show_botcon_description(void)
                 "%%fg=reset$ to eat.";
       } else if (is_potion()) {
         text += " %%fg=green$" + std::string(SDL_GetScancodeName((SDL_Scancode) game->config.key_use)) +
-                "%%fg=reset$ to use.";
+                "%%fg=reset$ to drink.";
       } else if (is_wand()) {
         text += " %%fg=green$" + std::string(SDL_GetScancodeName((SDL_Scancode) game->config.key_use)) +
                 "%%fg=reset$ to use.";
+      } else if (is_ring()) {
+        text += " %%fg=green$" + std::string(SDL_GetScancodeName((SDL_Scancode) game->config.key_use)) +
+                "%%fg=reset$ to wear.";
       } else {
         text += " %%fg=cyan$" + std::string(SDL_GetScancodeName((SDL_Scancode) game->config.key_use)) +
                 "%%fg=reset$ to use.";

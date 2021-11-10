@@ -535,7 +535,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag28() && (what == "unused_flag28")) {
     return true;
   }
-  if (unused_flag29() && (what == "unused_flag29")) {
+  if (is_item_magical() && (what == "is_item_magical")) {
     return true;
   }
   if (unused_flag2() && (what == "unused_flag2")) {
@@ -544,7 +544,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag30() && (what == "unused_flag30")) {
     return true;
   }
-  if (unused_flag31() && (what == "unused_flag31")) {
+  if (is_ring() && (what == "is_ring")) {
     return true;
   }
   if (is_auto_equipped() && (what == "is_auto_equipped")) {
@@ -751,10 +751,13 @@ bool Thing::matches(const std::string &what)
   if (is_wall() && (what == "is_wall")) {
     return true;
   }
-  if (is_wand_eater() && (what == "is_wand_eater")) {
+  if (is_item_magical_eater() && (what == "is_item_magical_eater")) {
     return true;
   }
   if (is_wand() && (what == "is_wand")) {
+    return true;
+  }
+  if (is_ring() && (what == "is_ring")) {
     return true;
   }
   if (environ_loves_water() && (what == "environ_loves_water")) {
@@ -1307,8 +1310,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag28") {
     return &Thing::unused_flag28;
   }
-  if (what == "unused_flag29") {
-    return &Thing::unused_flag29;
+  if (what == "is_item_magical") {
+    return &Thing::is_item_magical;
   }
   if (what == "unused_flag2") {
     return &Thing::unused_flag2;
@@ -1316,8 +1319,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag30") {
     return &Thing::unused_flag30;
   }
-  if (what == "unused_flag31") {
-    return &Thing::unused_flag31;
+  if (what == "is_ring") {
+    return &Thing::is_ring;
   }
   if (what == "is_auto_equipped") {
     return &Thing::is_auto_equipped;
@@ -1523,11 +1526,14 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_wall") {
     return &Thing::is_wall;
   }
-  if (what == "is_wand_eater") {
-    return &Thing::is_wand_eater;
+  if (what == "is_item_magical_eater") {
+    return &Thing::is_item_magical_eater;
   }
   if (what == "is_wand") {
     return &Thing::is_wand;
+  }
+  if (what == "is_ring") {
+    return &Thing::is_ring;
   }
   if (what == "environ_loves_water") {
     return &Thing::environ_loves_water;

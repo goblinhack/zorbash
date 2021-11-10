@@ -81,6 +81,7 @@ public:
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_treasure_type {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_wall {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_wand {};
+  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_ring {};
 
   //
   // When this Level was made. Used to restore timestamps relative to this.
@@ -678,6 +679,8 @@ public:
   uint8_t is_wall(const point &p);
   uint8_t is_wand(const int x, const int y);
   uint8_t is_wand(const point &p);
+  uint8_t is_ring(const int x, const int y);
+  uint8_t is_ring(const point &p);
   uint8_t is_water(const int x, const int y);
   uint8_t is_water(const point &p);
 
@@ -845,6 +848,7 @@ public:
   void set_is_treasure_type(const int x, const int y);
   void set_is_wall(const int x, const int y);
   void set_is_wand(const int x, const int y);
+  void set_is_ring(const int x, const int y);
   void set_wobble(float);
   void things_gc(bool force);
   void things_gc_force(void);
@@ -911,6 +915,7 @@ public:
   void unset_is_treasure_type(const int x, const int y);
   void unset_is_wall(const int x, const int y);
   void unset_is_wand(const int x, const int y);
+  void unset_is_ring(const int x, const int y);
   void update_all_ticks(void);
   void update_deep_water(void);
   void update_hazard_tile_map(void);

@@ -1303,10 +1303,10 @@ int Thing::unused_flag28(void)
   return (tp()->unused_flag28());
 }
 
-int Thing::unused_flag29(void)
+int Thing::is_item_magical(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->unused_flag29());
+  return (tp()->is_item_magical());
 }
 
 int Thing::unused_flag2(void)
@@ -1321,10 +1321,10 @@ int Thing::unused_flag30(void)
   return (tp()->unused_flag30());
 }
 
-int Thing::unused_flag31(void)
+int Thing::is_ring(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->unused_flag31());
+  return (tp()->is_ring());
 }
 
 int Thing::is_auto_equipped(void)
@@ -1759,10 +1759,10 @@ int Thing::is_wall(void)
   return (tp()->is_wall());
 }
 
-int Thing::is_wand_eater(void)
+int Thing::is_item_magical_eater(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->is_wand_eater());
+  return (tp()->is_item_magical_eater());
 }
 
 int Thing::is_wand(void)

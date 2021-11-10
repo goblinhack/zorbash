@@ -291,6 +291,10 @@ bool Thing::fall_to_next_level(void)
         fall_damage = get_health() / 2;
       }
 
+      if (is_ring()) {
+        fall_damage = 0;
+      }
+
       auto new_pos = make_point(x, y);
       if (next_level->is_lava(new_pos)) {
         if (is_player()) {

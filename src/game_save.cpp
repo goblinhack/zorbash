@@ -414,6 +414,8 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   shift++;
   bits64 |= (my.t->i_set_is_wand ? 1LLU : 0LLU) << shift;
   shift++;
+  bits64 |= (my.t->i_set_is_ring ? 1LLU : 0LLU) << shift;
+  shift++;
 
   if (shift >= (int) (sizeof(bits64) * 8)) {
     ERR("Ran out of bits in serialization");
@@ -537,6 +539,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->_is_treasure_type);
   out << bits(my.t->_is_wall);
   out << bits(my.t->_is_wand);
+  out << bits(my.t->_is_ring);
 
   LOG("DGN: - Save all_things_id_at");
   out << bits(my.t->all_things_id_at);

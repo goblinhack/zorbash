@@ -143,6 +143,39 @@ std::list< Thingp > Thing::get_wand_list(void)
   return out;
 }
 
+std::list< Thingp > Thing::get_ring_list(void)
+{
+  std::list< Thingp > out;
+
+  TRACE_AND_INDENT();
+  if (! maybe_itemp()) {
+    static std::list< Thingp > empty;
+    return empty;
+  }
+
+  for (const auto &item : get_itemp()->carrying) {
+    auto t = level->thing_find(item.id);
+    if (! t) {
+      continue;
+    }
+    if (t->is_bag()) {
+      for (const auto &item : t->get_itemp()->carrying) {
+        auto t = level->thing_find(item.id);
+        if (! t) {
+          continue;
+        }
+        if (t->is_ring()) {
+          out.push_back(t);
+        }
+      }
+    }
+    if (t->is_ring()) {
+      out.push_back(t);
+    }
+  }
+  return out;
+}
+
 std::list< Thingp > Thing::get_weapon_list(void)
 {
   std::list< Thingp > out;
@@ -304,6 +337,39 @@ std::vector< Thingp > Thing::get_wand_vector(void)
   return out;
 }
 
+std::vector< Thingp > Thing::get_ring_vector(void)
+{
+  std::vector< Thingp > out;
+
+  TRACE_AND_INDENT();
+  if (! maybe_itemp()) {
+    static std::vector< Thingp > empty;
+    return empty;
+  }
+
+  for (const auto &item : get_itemp()->carrying) {
+    auto t = level->thing_find(item.id);
+    if (! t) {
+      continue;
+    }
+    if (t->is_bag()) {
+      for (const auto &item : t->get_itemp()->carrying) {
+        auto t = level->thing_find(item.id);
+        if (! t) {
+          continue;
+        }
+        if (t->is_ring()) {
+          out.push_back(t);
+        }
+      }
+    }
+    if (t->is_ring()) {
+      out.push_back(t);
+    }
+  }
+  return out;
+}
+
 std::vector< Thingp > Thing::get_weapon_vector(void)
 {
   std::vector< Thingp > out;
@@ -371,6 +437,23 @@ int Thing::get_carried_wand_count(void)
   return count;
 }
 
+int Thing::get_carried_ring_count(void)
+{
+  TRACE_AND_INDENT();
+  int count = 0;
+
+  if (! maybe_itemp()) {
+    return count;
+  }
+
+  for (const auto t : get_ring_list()) {
+    if (t->is_ring()) {
+      count++;
+    }
+  }
+  return count;
+}
+
 int Thing::get_carried_food_count(void)
 {
   TRACE_AND_INDENT();
@@ -429,6 +512,35 @@ int Thing::get_carried_wand_least_value(Thingp *out)
 
   for (const auto t : get_wand_list()) {
     if (! t->is_wand()) {
+      continue;
+    }
+
+    auto v = maybe_itemp_value(t);
+    if (! *out) {
+      *out        = t;
+      least_value = v;
+    } else {
+      if (v < least_value) {
+        *out        = t;
+        least_value = v;
+      }
+    }
+  }
+  return least_value;
+}
+
+int Thing::get_carried_ring_least_value(Thingp *out)
+{
+  TRACE_AND_INDENT();
+  int least_value = -1;
+
+  *out = nullptr;
+  if (! maybe_itemp()) {
+    return least_value;
+  }
+
+  for (const auto t : get_ring_list()) {
+    if (! t->is_ring()) {
       continue;
     }
 
@@ -516,6 +628,35 @@ int Thing::get_carried_wand_highest_value(Thingp *out)
 
   for (const auto t : get_wand_list()) {
     if (! t->is_wand()) {
+      continue;
+    }
+
+    auto v = maybe_itemp_value(t);
+    if (! *out) {
+      *out          = t;
+      highest_value = v;
+    } else {
+      if (v > highest_value) {
+        *out          = t;
+        highest_value = v;
+      }
+    }
+  }
+  return highest_value;
+}
+
+int Thing::get_carried_ring_highest_value(Thingp *out)
+{
+  TRACE_AND_INDENT();
+  int highest_value = -1;
+
+  *out = nullptr;
+  if (! maybe_itemp()) {
+    return highest_value;
+  }
+
+  for (const auto t : get_ring_list()) {
+    if (! t->is_ring()) {
       continue;
     }
 

@@ -483,6 +483,10 @@ bool Level::create_dungeon(point3d at, int seed)
               t->carry(W);
             }
 #endif
+            {
+              auto W = thing_new("ring_poison_resist", point(x, y));
+              t->carry(W);
+            }
 
             {
               auto W = thing_new("key", point(x, y));
@@ -500,7 +504,7 @@ bool Level::create_dungeon(point3d at, int seed)
             }
 
             if (0) {
-              auto s = thing_new("buff_poison_resistant", point(x, y));
+              auto s = thing_new("buff_poison_resist", point(x, y));
               t->buff_add(s);
             }
 
@@ -927,6 +931,9 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules(Dungeonp d)
       if (d->is_wand(x, y)) {
         tp = tp_random_wand();
       }
+      if (d->is_ring(x, y)) {
+        tp = tp_random_ring();
+      }
       if (d->is_secret_door(x, y)) {
         tp = tp_random_secret_door();
       }
@@ -1289,9 +1296,9 @@ void Level::place_floor_deco(Dungeonp d)
 
       if (d->is_food(x, y) || d->is_blood(x, y) || d->is_door(x, y) || d->is_ascend_dungeon(x, y) ||
           d->is_descend_dungeon(x, y) || d->is_minion_generator_any(x, y) || d->is_key(x, y) || d->is_potion(x, y) ||
-          d->is_barrel(x, y) || d->is_wand(x, y) || d->is_secret_door(x, y) || d->is_treasure_type(x, y) ||
-          d->is_treasure_class_a(x, y) || d->is_treasure_class_b(x, y) || d->is_treasure_class_c(x, y) ||
-          d->is_monst_any(x, y)) {
+          d->is_barrel(x, y) || d->is_wand(x, y) || d->is_ring(x, y) || d->is_secret_door(x, y) ||
+          d->is_treasure_type(x, y) || d->is_treasure_class_a(x, y) || d->is_treasure_class_b(x, y) ||
+          d->is_treasure_class_c(x, y) || d->is_monst_any(x, y)) {
         continue;
       }
 
@@ -1331,9 +1338,9 @@ void Level::create_dungeon_place_random_floor_deco(Dungeonp d)
 
       if (d->is_food(x, y) || d->is_blood(x, y) || d->is_door(x, y) || d->is_ascend_dungeon(x, y) ||
           d->is_descend_dungeon(x, y) || d->is_minion_generator_any(x, y) || d->is_key(x, y) || d->is_potion(x, y) ||
-          d->is_barrel(x, y) || d->is_wand(x, y) || d->is_secret_door(x, y) || d->is_treasure_type(x, y) ||
-          d->is_treasure_class_a(x, y) || d->is_treasure_class_b(x, y) || d->is_treasure_class_c(x, y) ||
-          d->is_monst_any(x, y)) {
+          d->is_barrel(x, y) || d->is_wand(x, y) || d->is_ring(x, y) || d->is_secret_door(x, y) ||
+          d->is_treasure_type(x, y) || d->is_treasure_class_a(x, y) || d->is_treasure_class_b(x, y) ||
+          d->is_treasure_class_c(x, y) || d->is_monst_any(x, y)) {
         continue;
       }
 

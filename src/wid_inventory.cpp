@@ -938,6 +938,8 @@ bool wid_inventory_create(Thingp selected, Thingp over)
         wid_set_text(w, "%%fg=white$U%%fg=reset$se (drink)");
       } else if (item_option->is_wand()) {
         wid_set_text(w, "%%fg=white$U%%fg=reset$se (fire it)");
+      } else if (item_option->is_ring()) {
+        wid_set_text(w, "%%fg=white$U%%fg=reset$se (wear it)");
       } else {
         wid_set_text(w, "%%fg=white$U%%fg=reset$se");
       }

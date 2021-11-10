@@ -110,7 +110,7 @@ std::string Thing::to_dbg_string(void)
       "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s"
       "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s"
       "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s"
-      "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s)",
+      "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s)",
       level->world_at.x, level->world_at.y, level->world_at.z, id, tp() ? tp()->name().c_str() : "notp", mid_at.x,
       mid_at.y, has_ever_moved ? ", has_ever_moved" : "", has_external_particle ? ", has_external_particle" : "",
       has_internal_particle ? ", has_internal_particle" : "", has_laser ? ", has_laser" : "",
@@ -158,7 +158,7 @@ std::string Thing::to_dbg_string(void)
       i_set_is_treasure_class_b ? ", i_set_is_treasure_class_b" : "",
       i_set_is_treasure_class_c ? ", i_set_is_treasure_class_c" : "",
       i_set_is_treasure_type ? ", i_set_is_treasure_type" : "", i_set_is_wall ? ", i_set_is_wall" : "",
-      i_set_is_wand ? ", i_set_is_wand" : ""));
+      i_set_is_wand ? ", i_set_is_wand" : "", i_set_is_ring ? ", i_set_is_ring" : ""));
 }
 
 //
@@ -175,7 +175,7 @@ std::string Thing::to_dbg_saved_string(void)
       "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s"
       "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s"
       "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s"
-      "%s%s%s%s%s%s%s%s%s%s%s%s%s)",
+      "%s%s%s%s%s%s%s%s%s%s%s%s%s%s)",
       level->world_at.x, level->world_at.y, level->world_at.z, id, tp() ? tp()->name().c_str() : "notp", mid_at.x,
       mid_at.y, has_ever_moved ? ", has_ever_moved" : "", has_laser ? ", has_laser" : "",
       has_light ? ", has_light" : "", has_projectile ? ", has_projectile" : "", is_activated ? ", is_activated" : "",
@@ -222,5 +222,5 @@ std::string Thing::to_dbg_saved_string(void)
       i_set_is_treasure_class_b ? ", i_set_is_treasure_class_b" : "",
       i_set_is_treasure_class_c ? ", i_set_is_treasure_class_c" : "",
       i_set_is_treasure_type ? ", i_set_is_treasure_type" : "", i_set_is_wall ? ", i_set_is_wall" : "",
-      i_set_is_wand ? ", i_set_is_wand" : ""));
+      i_set_is_wand ? ", i_set_is_wand" : "", i_set_is_ring ? ", i_set_is_ring" : ""));
 }

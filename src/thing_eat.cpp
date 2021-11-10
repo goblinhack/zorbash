@@ -35,8 +35,8 @@ bool Thing::eat(Thingp what)
   if (attack_eater()) {
     if ((is_jelly_eater() && what->is_jelly()) || (is_meat_eater() && what->is_meat()) ||
         (is_blood_eater() && what->is_blood()) || (is_food_eater() && what->is_food()) ||
-        (is_treasure_type_eater() && what->is_treasure_type()) || (is_wand_eater() && what->is_wand()) ||
-        (is_potion_eater() && what->is_potion())) {
+        (is_treasure_type_eater() && what->is_treasure_type()) ||
+        (is_item_magical_eater() && what->is_item_magical()) || (is_potion_eater() && what->is_potion())) {
 
       //
       // For treasure what should the boost be?
@@ -112,8 +112,8 @@ bool Thing::can_eat(const Thingp itp)
       return true;
     }
   }
-  if (me->is_wand_eater()) {
-    if (it->is_wand()) {
+  if (me->is_item_magical_eater()) {
+    if (it->is_item_magical()) {
       return true;
     }
   }

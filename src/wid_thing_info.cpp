@@ -625,7 +625,7 @@ void Game::wid_thing_info_add_melee_damage(WidPopup *w, Thingp t)
   char tmp[ MAXSHORTSTR ];
   char tmp2[ MAXSHORTSTR ];
 
-  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_wand()) {
+  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_item_magical()) {
     auto attack_melee_dice = t->get_damage_melee_dice();
     auto min_value         = attack_melee_dice.min_roll();
     auto max_value         = attack_melee_dice.max_roll();
@@ -648,7 +648,7 @@ void Game::wid_thing_info_add_poison_damage(WidPopup *w, Thingp t)
   char tmp[ MAXSHORTSTR ];
   char tmp2[ MAXSHORTSTR ];
 
-  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_wand()) {
+  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_item_magical()) {
     auto attack_poison_dice = t->get_damage_poison_dice();
     auto min_value          = attack_poison_dice.min_roll();
     auto max_value          = attack_poison_dice.max_roll();

@@ -59,6 +59,7 @@ public:
     TREASURE_CLASS_C      = '3',
     WALL                  = 'x',
     WAND                  = '/',
+    RING                  = 'R',
   };
 
   char c;
@@ -90,6 +91,7 @@ public:
   bool is_monst_hard {false};
   bool is_potion {false};
   bool is_wand {false};
+  bool is_ring {false};
   bool is_rock {false};
   bool is_secret_corridor {false};
   bool is_secret_door {false};

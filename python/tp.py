@@ -325,14 +325,14 @@ class Tp:
     def set_unused_flag28(self, value):
         zx.tp_set_unused_flag28(self, value)
 
-    def set_unused_flag29(self, value):
-        zx.tp_set_unused_flag29(self, value)
+    def set_is_item_magical(self, value):
+        zx.tp_set_is_item_magical(self, value)
 
     def set_unused_flag30(self, value):
         zx.tp_set_unused_flag30(self, value)
 
-    def set_unused_flag31(self, value):
-        zx.tp_set_unused_flag31(self, value)
+    def set_is_ring(self, value):
+        zx.tp_set_is_ring(self, value)
 
     def set_is_auto_equipped(self, value):
         zx.tp_set_is_auto_equipped(self, value)
@@ -520,8 +520,8 @@ class Tp:
     def set_is_burnable(self, value):
         zx.tp_set_is_burnable(self, value)
 
-    def set_is_wand_eater(self, value):
-        zx.tp_set_is_wand_eater(self, value)
+    def set_is_item_magical_eater(self, value):
+        zx.tp_set_is_item_magical_eater(self, value)
 
     def set_environ_loves_fire(self, value):
         zx.tp_set_environ_loves_fire(self, value)

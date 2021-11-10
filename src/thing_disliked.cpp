@@ -174,8 +174,8 @@ bool Thing::is_disliked_by_me(const Thingp itp)
     }
   }
 
-  if (me->is_wand()) {
-    if (it->is_wand_eater()) {
+  if (me->is_item_magical()) {
+    if (it->is_item_magical_eater()) {
       return true;
     }
   }

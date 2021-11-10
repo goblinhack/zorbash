@@ -303,10 +303,10 @@ do
       set_unused_flag26 \
       set_unused_flag27 \
       set_unused_flag28 \
-      set_unused_flag29 \
+      set_is_item_magical \
       set_unused_flag3 \
       set_unused_flag30 \
-      set_unused_flag31 \
+      set_is_ring \
       set_is_auto_equipped \
       set_is_buff \
       set_is_debuff \
@@ -369,7 +369,7 @@ do
       set_is_wall \
       set_is_wall_dungeon \
       set_is_wand \
-      set_is_wand_eater \
+      set_is_item_magical_eater \
       set_environ_loves_water \
       set_is_weapon \
       set_is_weapon_equiper \

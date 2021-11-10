@@ -68,8 +68,8 @@ PyObject *level_add_(PyObject *obj, PyObject *args, PyObject *keywds)
                    m.is_minion_generator_hard || m.is_gold || m.is_key || m.is_lava || m.is_monst_easy ||
                    m.is_monst_med || m.is_monst_hard || m.is_enchantstone || m.is_skillstone ||
                    m.is_treasure_class_a || m.is_treasure_class_b || m.is_treasure_class_c || m.is_potion ||
-                   m.is_wand || m.is_secret_door || m.is_brazier || m.is_barrel || m.is_trap || m.is_shallow_water ||
-                   m.is_deep_water || m.is_floor_deco) {
+                   m.is_wand || m.is_ring || m.is_secret_door || m.is_brazier || m.is_barrel || m.is_trap ||
+                   m.is_shallow_water || m.is_deep_water || m.is_floor_deco) {
           floor_string += Charmap::FLOOR;
         } else {
           floor_string += Charmap::SPACE;
@@ -111,7 +111,7 @@ PyObject *level_add_(PyObject *obj, PyObject *args, PyObject *keywds)
             m.is_food || m.is_minion_generator_easy || m.is_minion_generator_hard || m.is_gold || m.is_key ||
             m.is_monst_easy || m.is_monst_med || m.is_monst_hard || m.is_enchantstone || m.is_skillstone ||
             m.is_treasure_class_a || m.is_treasure_class_b || m.is_treasure_class_c || m.is_potion || m.is_wand ||
-            m.is_brazier || m.is_barrel || m.is_trap || m.is_descend_sewer) {
+            m.is_ring || m.is_brazier || m.is_barrel || m.is_trap || m.is_descend_sewer) {
           obj_strings += c;
         } else {
           obj_strings += Charmap::SPACE;
@@ -508,10 +508,10 @@ LEVEL_BODY_GET_BOOL_AT(level_unused_flag25_at, unused_flag25)
 LEVEL_BODY_GET_BOOL_AT(level_unused_flag26_at, unused_flag26)
 LEVEL_BODY_GET_BOOL_AT(level_unused_flag27_at, unused_flag27)
 LEVEL_BODY_GET_BOOL_AT(level_unused_flag28_at, unused_flag28)
-LEVEL_BODY_GET_BOOL_AT(level_unused_flag29_at, unused_flag29)
+LEVEL_BODY_GET_BOOL_AT(level_is_item_magical_at, is_item_magical)
 LEVEL_BODY_GET_BOOL_AT(level_unused_flag2_at, unused_flag2)
 LEVEL_BODY_GET_BOOL_AT(level_unused_flag30_at, unused_flag30)
-LEVEL_BODY_GET_BOOL_AT(level_unused_flag31_at, unused_flag31)
+LEVEL_BODY_GET_BOOL_AT(level_is_ring_at, is_ring)
 LEVEL_BODY_GET_BOOL_AT(level_is_auto_equipped_at, is_auto_equipped)
 LEVEL_BODY_GET_BOOL_AT(level_is_buff_at, is_buff)
 LEVEL_BODY_GET_BOOL_AT(level_is_debuff_at, is_debuff)
@@ -587,7 +587,7 @@ LEVEL_BODY_GET_BOOL_AT(level_is_visible_at, is_visible)
 LEVEL_BODY_GET_BOOL_AT(level_is_wall_at, is_wall)
 LEVEL_BODY_GET_BOOL_AT(level_is_wall_dungeon_at, is_wall_dungeon)
 LEVEL_BODY_GET_BOOL_AT(level_is_wand_at, is_wand)
-LEVEL_BODY_GET_BOOL_AT(level_is_wand_eater_at, is_wand_eater)
+LEVEL_BODY_GET_BOOL_AT(level_is_item_magical_eater_at, is_item_magical_eater)
 LEVEL_BODY_GET_BOOL_AT(level_is_water_at, is_water)
 LEVEL_BODY_GET_BOOL_AT(level_environ_loves_water_at, environ_loves_water)
 LEVEL_BODY_GET_BOOL_AT(level_is_weapon_at, is_weapon)

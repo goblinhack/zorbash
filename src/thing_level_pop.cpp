@@ -181,6 +181,10 @@ void Thing::level_pop(void)
     i_set_is_wand = false;
     level->unset_is_wand(mx, my);
   }
+  if (i_set_is_ring) {
+    i_set_is_ring = false;
+    level->unset_is_ring(mx, my);
+  }
   if (i_set_is_ripple) {
     i_set_is_ripple = false;
     level->unset_is_ripple(mx, my);

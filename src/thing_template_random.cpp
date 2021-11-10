@@ -34,6 +34,7 @@ static Tpidmap tp_gold;
 static Tpidmap tp_key;
 static Tpidmap tp_potion;
 static Tpidmap tp_wand;
+static Tpidmap tp_ring;
 static Tpidmap tp_monst;
 static Tpidmap tp_ripples;
 static Tpidmap tp_rock;
@@ -193,6 +194,9 @@ void tp_random_init(void)
     }
     if (tp->is_wand()) {
       tp_wand.push_back(tp);
+    }
+    if (tp->is_ring()) {
+      tp_ring.push_back(tp);
     }
 
     if (tp->is_weapon()) {
@@ -671,6 +675,16 @@ Tpp tp_random_wand(void)
     return (nullptr);
   }
   return tp_get_with_rarity_filter(tp_wand);
+}
+
+Tpp tp_random_ring(void)
+{
+  TRACE_AND_INDENT();
+  if (unlikely(! tp_ring.size())) {
+    ERR("No ring found");
+    return (nullptr);
+  }
+  return tp_get_with_rarity_filter(tp_ring);
 }
 
 Tpp tp_random_ascend_dungeon(void)

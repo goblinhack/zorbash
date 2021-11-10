@@ -258,6 +258,95 @@ int Thing::worth_collecting(Thingp item, Thingp *would_need_to_drop)
     }
   }
 
+  if (item->is_ring()) {
+    Thingp worst_ring       = nullptr;
+    auto   worst_ring_value = get_carried_ring_least_value(&worst_ring);
+    //
+    // If we have an existing ring, we can be smarter on checks and decided if
+    // we perhaps want to swap the worst ring for this one.
+    //
+    if (worst_ring) {
+      dbg("Worth collecting %s? compare against worst ring %s", item->to_string().c_str(),
+          worst_ring->to_string().c_str());
+
+      //
+      // Can it fit in the bag?
+      //
+      if (item->is_bag_item()) {
+        if (! bag_add_test(item)) {
+          //
+          // No. Can we drop something worse.
+          //
+          if (value_to_me > worst_ring_value) {
+            //
+            // This is better than the worst ring.
+            //
+            *would_need_to_drop = worst_ring;
+            dbg("Worth collecting %s? no space, would need to drop %s", item->to_string().c_str(),
+                worst_ring->to_string().c_str());
+            return value_to_me;
+          }
+
+          //
+          // This is WORSE than the worst ring.
+          //
+          dbg("Worth collecting %s? no, cannot fit and is worse than the worst ring %s", item->to_string().c_str(),
+              worst_ring->to_string().c_str());
+          return -1;
+        }
+
+        //
+        // Yes it fits. Check we do not have too many.
+        //
+        if (value_to_me > worst_ring_value) {
+          //
+          // Here we're adding a ring that is better than the worst.
+          // Check if we have too many, to drop the new worst ring.
+          //
+          if (get_carried_ring_count() > 2) {
+            *would_need_to_drop = worst_ring;
+            dbg("Worth collecting %s? yes, but no space and too many rings, would need to drop %s",
+                item->to_string().c_str(), worst_ring->to_string().c_str());
+            return value_to_me;
+          }
+
+          //
+          // This is WORSE than the worst ring. Only carry if we have little
+          // else.
+          //
+          dbg("Worth collecting? yes as %s is better than the worst ring %s", item->to_string().c_str(),
+              worst_ring->to_string().c_str());
+          return value_to_me;
+        }
+
+        //
+        // Here we're adding a ring that is worse than the worst.
+        // Only carry if we are low on rings.
+        //
+        if (get_carried_ring_count() > 2) {
+          dbg("Worth collecting %s? no, it is worse than the worst ring %s, "
+              "and we already have enough rings",
+              item->to_string().c_str(), worst_ring->to_string().c_str());
+          return -1;
+        }
+
+        dbg("Worth collecting %s? yes, it is worse than the worst ring %s, "
+            "but only collect as are low on rings",
+            item->to_string().c_str(), worst_ring->to_string().c_str());
+        return value_to_me;
+      }
+    } else {
+      if (item->is_bag_item()) {
+        if (! bag_add_test(item)) {
+          dbg("Worth collecting %s? no, no space", item->to_string().c_str());
+          return -1;
+        }
+      }
+      dbg("Worth collecting %s? yes, have space", item->to_string().c_str());
+      return value_to_me;
+    }
+  }
+
   if (item->is_food()) {
     Thingp worst_food       = nullptr;
     auto   worst_food_value = get_carried_food_least_value(&worst_food);

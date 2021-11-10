@@ -471,6 +471,8 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
   shift++;
   my.t->i_set_is_wand = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU;
   shift++;
+  my.t->i_set_is_ring = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU;
+  shift++;
 
   /////////////////////////////////////////////////////////////////////////
   // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
@@ -581,6 +583,7 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   in >> bits(my.t->_is_treasure_type);
   in >> bits(my.t->_is_wall);
   in >> bits(my.t->_is_wand);
+  in >> bits(my.t->_is_ring);
 
   in >> bits(l->all_things_id_at);
   in >> bits(l->cursor_at);

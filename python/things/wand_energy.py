@@ -4,6 +4,9 @@ import tp
 mytp = None
 
 def on_idle(me, x, y):
+    #
+    # Random recharge
+    #
     if zx.thing_get_charge_count(me) < zx.thing_get_initial_charge_count(me):
         zx.thing_incr_charge_count(me, 1)
         owner = zx.thing_get_top_owner_id(me)
@@ -206,6 +209,9 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_interesting(False)
     mytp.set_is_item_carrier(False)
     mytp.set_is_item_eater(False)
+    mytp.set_is_item_magical_eater(False)
+    mytp.set_is_item_magical(False)
+    mytp.set_is_item_magical(True)
     mytp.set_is_item_organic(False)
     mytp.set_is_item(True)
     mytp.set_is_jelly_baby_eater(False)
@@ -239,6 +245,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_projectile(False)
     mytp.set_is_removeable_if_out_of_slots(False)
     mytp.set_is_resurrectable(False)
+    mytp.set_is_ring(False)
     mytp.set_is_ripple(False)
     mytp.set_is_rock(False)
     mytp.set_is_rusty(False)
@@ -273,7 +280,6 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_very_combustible(True)
     mytp.set_is_wall_dungeon(False)
     mytp.set_is_wall(False)
-    mytp.set_is_wand_eater(False)
     mytp.set_is_wand(True)
     mytp.set_is_weapon_equiper(False)
     mytp.set_is_weapon(False)
@@ -287,9 +293,9 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_on_death_is_open(False)
     mytp.set_on_enchant_do("wand_energy.on_enchant()")
     mytp.set_on_fall_do("wand_energy.on_fall()")
+    mytp.set_on_final_use_do("wand_energy.on_final_use()")
     mytp.set_on_idle_dice("1d200+200:wand_energy.on_idle()")
     mytp.set_on_use_do("wand_energy.on_use()")
-    mytp.set_on_final_use_do("wand_energy.on_final_use()")
     mytp.set_on_you_are_hit_do("wand_energy.on_you_are_hit()")
     mytp.set_on_you_are_on_fire_do("wand_energy.on_fire()")
     mytp.set_range_max(7)
@@ -316,10 +322,8 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_unused_flag26(False)
     mytp.set_unused_flag27(False)
     mytp.set_unused_flag28(False)
-    mytp.set_unused_flag29(False)
     mytp.set_unused_flag2(False)
     mytp.set_unused_flag30(False)
-    mytp.set_unused_flag31(False)
     mytp.set_unused_flag3(False)
     mytp.set_unused_flag4(False)
     mytp.set_unused_flag5(False)

@@ -183,6 +183,10 @@ void Thing::level_push(void)
     i_set_is_wand = true;
     level->set_is_wand(mx, my);
   }
+  if (is_ring()) {
+    i_set_is_ring = true;
+    level->set_is_ring(mx, my);
+  }
   if (is_ripple()) {
     i_set_is_ripple = true;
     level->set_is_ripple(mx, my);

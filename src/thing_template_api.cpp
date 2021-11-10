@@ -357,10 +357,10 @@ int Tp::unused_flag25(void) const { return _unused_flag25; }
 int Tp::unused_flag26(void) const { return _unused_flag26; }
 int Tp::unused_flag27(void) const { return _unused_flag27; }
 int Tp::unused_flag28(void) const { return _unused_flag28; }
-int Tp::unused_flag29(void) const { return _unused_flag29; }
+int Tp::is_item_magical(void) const { return _is_item_magical; }
 int Tp::unused_flag2(void) const { return _unused_flag2; }
 int Tp::unused_flag30(void) const { return _unused_flag30; }
-int Tp::unused_flag31(void) const { return _unused_flag31; }
+int Tp::is_ring(void) const { return _is_ring; }
 int Tp::is_auto_equipped(void) const { return _is_auto_equipped; }
 int Tp::is_buff(void) const { return _is_buff; }
 int Tp::is_debuff(void) const { return _is_debuff; }
@@ -432,7 +432,7 @@ int  Tp::is_used_when_thrown(void) const { return _is_used_when_thrown; }
 int  Tp::is_very_combustible(void) const { return _is_very_combustible; }
 int  Tp::is_wall_dungeon(void) const { return _is_wall_dungeon; }
 int  Tp::is_wall(void) const { return _is_wall; }
-int  Tp::is_wand_eater(void) const { return _is_wand_eater; }
+int  Tp::is_item_magical_eater(void) const { return _is_item_magical_eater; }
 int  Tp::is_wand(void) const { return _is_wand; }
 int  Tp::environ_loves_water(void) const { return _environ_loves_water; }
 int  Tp::is_weapon(void) const { return _is_weapon; }
@@ -677,10 +677,10 @@ void Tp::set_unused_flag25(int v) { _unused_flag25 = v; }
 void Tp::set_unused_flag26(int v) { _unused_flag26 = v; }
 void Tp::set_unused_flag27(int v) { _unused_flag27 = v; }
 void Tp::set_unused_flag28(int v) { _unused_flag28 = v; }
-void Tp::set_unused_flag29(int v) { _unused_flag29 = v; }
+void Tp::set_is_item_magical(int v) { _is_item_magical = v; }
 void Tp::set_unused_flag2(int v) { _unused_flag2 = v; }
 void Tp::set_unused_flag30(int v) { _unused_flag30 = v; }
-void Tp::set_unused_flag31(int v) { _unused_flag31 = v; }
+void Tp::set_is_ring(int v) { _is_ring = v; }
 void Tp::set_is_auto_equipped(int v) { _is_auto_equipped = v; }
 void Tp::set_is_buff(int v) { _is_buff = v; }
 void Tp::set_is_debuff(int v) { _is_debuff = v; }
@@ -754,7 +754,7 @@ void Tp::set_is_used_when_thrown(int v) { _is_used_when_thrown = v; }
 void Tp::set_is_very_combustible(int v) { _is_very_combustible = v; }
 void Tp::set_is_wall_dungeon(int v) { _is_wall_dungeon = v; }
 void Tp::set_is_wall(int v) { _is_wall = v; }
-void Tp::set_is_wand_eater(int v) { _is_wand_eater = v; }
+void Tp::set_is_item_magical_eater(int v) { _is_item_magical_eater = v; }
 void Tp::set_is_wand(int v) { _is_wand = v; }
 void Tp::set_environ_loves_water(int v) { _environ_loves_water = v; }
 void Tp::set_is_weapon(int v) { _is_weapon = v; }

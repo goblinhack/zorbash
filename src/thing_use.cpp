@@ -297,9 +297,17 @@ bool Thing::use(Thingp what)
     if (is_player()) {
       TOPCON("You wave the %s.", what->text_the().c_str());
     }
-    used(what, this, true /* remove after use */);
+    used(what, this, false /* remove after use */);
     if (is_player()) {
       game->tick_begin("player drunk an item");
+    }
+  } else if (what->is_ring()) {
+    if (is_player()) {
+      TOPCON("You put on the %s.", what->text_the().c_str());
+    }
+    used(what, this, false /* remove after use */);
+    if (is_player()) {
+      game->tick_begin("player wore a ring");
     }
   } else if (! what->is_usable()) {
     if (is_player()) {

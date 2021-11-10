@@ -329,7 +329,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
             TOPCON("%%fg=red$You hit yourself for %d damage with %s!%%fg=reset$", damage, hitter->text_the().c_str());
           } else if (hitter->is_laser()) {
             TOPCON("%%fg=red$You zap yourself for %d damage with %s!%%fg=reset$", damage, hitter->text_the().c_str());
-          } else if (hitter->is_wand()) {
+          } else if (hitter->is_item_magical()) {
             TOPCON("%%fg=red$You blast yourself for %d damage with %s!%%fg=reset$", damage,
                    hitter->text_the().c_str());
           } else if (poison) {
@@ -349,7 +349,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
           } else if (hitter->is_laser()) {
             TOPCON("%%fg=red$%s zaps you for %d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(), damage,
                    hitter->text_the().c_str());
-          } else if (hitter->is_wand()) {
+          } else if (hitter->is_item_magical()) {
             TOPCON("%%fg=red$%s blasts you for %d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(),
                    damage, hitter->text_the().c_str());
           } else if (hitter->is_projectile() || hitter->is_laser()) {
@@ -381,7 +381,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
           } else if (hitter->is_laser()) {
             TOPCON("%%fg=yellow$You zap yourself for %d damage with %s!%%fg=reset$", damage,
                    hitter->text_the().c_str());
-          } else if (hitter->is_wand()) {
+          } else if (hitter->is_item_magical()) {
             TOPCON("%%fg=yellow$You blast yourself for %d damage with %s!%%fg=reset$", damage,
                    hitter->text_the().c_str());
           } else if (poison) {
@@ -401,7 +401,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
           } else if (hitter->is_laser()) {
             TOPCON("%%fg=yellow$%s zaps you for %d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(),
                    damage, hitter->text_the().c_str());
-          } else if (hitter->is_wand()) {
+          } else if (hitter->is_item_magical()) {
             TOPCON("%%fg=yellow$%s blasts you for %d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(),
                    damage, hitter->text_the().c_str());
           } else if (hitter->is_projectile() || hitter->is_laser()) {
@@ -435,7 +435,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
               TOPCON("You hit %s for %d damage with %s.", text_the().c_str(), damage, hitter->text_the().c_str());
             } else if (hitter->is_laser()) {
               TOPCON("You zap %s for %d damage with %s.", text_the().c_str(), damage, hitter->text_the().c_str());
-            } else if (hitter->is_wand()) {
+            } else if (hitter->is_item_magical()) {
               TOPCON("You blast %s for %d damage with %s.", text_the().c_str(), damage, hitter->text_the().c_str());
             } else if (poison) {
               TOPCON("You poison %s for %d damage with %s.", text_the().c_str(), damage, hitter->text_the().c_str());
@@ -447,7 +447,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
               TOPCON("You hit %s for %d damage.", text_the().c_str(), damage);
             } else if (hitter->is_laser()) {
               TOPCON("You zap %s for %d damage.", text_the().c_str(), damage);
-            } else if (hitter->is_wand()) {
+            } else if (hitter->is_item_magical()) {
               TOPCON("You blast %s for %d damage.", text_the().c_str(), damage);
             } else if (poison) {
               TOPCON("You poison %s for %d damage.", text_the().c_str(), damage);
@@ -461,7 +461,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
           TOPCON("You hit %s.", text_the().c_str());
         } else if (hitter->is_laser()) {
           TOPCON("You zap %s.", text_the().c_str());
-        } else if (hitter->is_wand()) {
+        } else if (hitter->is_item_magical()) {
           TOPCON("You blast %s.", text_the().c_str());
         } else {
           TOPCON("You hit %s.", text_the().c_str());
@@ -471,7 +471,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
           TOPCON("You hit %s for %d damage.", text_the().c_str(), damage);
         } else if (hitter->is_laser()) {
           TOPCON("You zap %s for %d damage.", text_the().c_str(), damage);
-        } else if (hitter->is_wand()) {
+        } else if (hitter->is_item_magical()) {
           TOPCON("You blast %s for %d damage.", text_the().c_str(), damage);
         } else {
           TOPCON("You hit %s for %d damage.", text_the().c_str(), damage);
@@ -702,8 +702,8 @@ int Thing::is_hit_by(Thingp hitter, bool crit, bool bite, int poison, int damage
     auto hitter_tp = hitter->tp();
     if (is_door()) {
       if (! hitter_tp->is_explosion() && ! hitter_tp->is_projectile() && ! hitter_tp->is_laser() &&
-          ! hitter_tp->is_weapon() && ! hitter_tp->is_wand() && ! hitter_tp->is_fire() && ! hitter_tp->is_lava() &&
-          ! hitter_tp->gfx_attack_anim()) {
+          ! hitter_tp->is_weapon() && ! hitter_tp->is_item_magical() && ! hitter_tp->is_fire() &&
+          ! hitter_tp->is_lava() && ! hitter_tp->gfx_attack_anim()) {
         //
         // Not something that typically damages walls.
         //
@@ -714,8 +714,8 @@ int Thing::is_hit_by(Thingp hitter, bool crit, bool bite, int poison, int damage
 
     if (is_wall() || is_rock()) {
       if (! hitter_tp->is_explosion() && ! hitter_tp->is_projectile() && ! hitter_tp->is_laser() &&
-          ! hitter_tp->is_weapon() && ! hitter_tp->is_wand() && ! hitter_tp->is_fire() && ! hitter_tp->is_lava() &&
-          ! hitter_tp->gfx_attack_anim()) {
+          ! hitter_tp->is_weapon() && ! hitter_tp->is_item_magical() && ! hitter_tp->is_fire() &&
+          ! hitter_tp->is_lava() && ! hitter_tp->gfx_attack_anim()) {
         //
         // Not something that typically damages walls.
         //

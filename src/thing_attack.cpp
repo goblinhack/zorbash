@@ -47,7 +47,7 @@ bool Thing::possible_to_attack(const Thingp it)
   //
   // Weapons can't attack all by themselves. That would be nuts.
   //
-  if (is_weapon() || is_wand()) {
+  if (is_weapon() || is_wand() || is_ring()) {
     if (! my_owner) {
       return false;
     }
@@ -111,8 +111,18 @@ bool Thing::possible_to_attack(const Thingp it)
       }
     }
 
-    if (me->is_wand_eater()) {
-      if (it->is_wand()) {
+    if (me->is_item_magical_eater()) {
+      if (it->is_item_magical()) {
+        dbg("Can attack %s", it->to_string().c_str());
+        return true;
+      }
+    }
+
+    //
+    // Cleaners can attack cleaners?
+    //
+    if (me->is_item_magical_eater()) {
+      if (it->is_item_magical_eater()) {
         dbg("Can attack %s", it->to_string().c_str());
         return true;
       }
@@ -312,6 +322,11 @@ bool Thing::possible_to_attack(const Thingp it)
       return true;
     }
 
+    if (is_ring()) {
+      dbg("Can attack as ring %s", it->to_string().c_str());
+      return true;
+    }
+
     if (is_explosion()) {
       dbg("Can attack as explosion %s", it->to_string().c_str());
       return true;
@@ -320,24 +335,6 @@ bool Thing::possible_to_attack(const Thingp it)
 
   dbg("Cannot attack %s, ignore", it->to_string().c_str());
 
-#if 0
-  if (is_lava() || is_fire() || is_wand() || is_laser() || is_projectile() || is_explosion()) {
-    // continue
-  } else if (owner && owner->is_monst() && it->is_attackable_by_monst()) {
-    // monst weapon, continue
-  } else if (is_monst() && it->is_attackable_by_monst()) {
-    // continue
-  } else if (is_player() && it->is_attackable_by_player()) {
-    // continue
-  } else if (owner && owner->is_player() && it->is_attackable_by_player()) {
-    // continue
-  } else {
-    IF_DEBUG4 { // very noisy
-      dbg("Cannot attack %s", it->to_string().c_str());
-    }
-    return false;
-  }
-#endif
   return false;
 }
 
@@ -413,8 +410,8 @@ bool Thing::attack(Thingp it)
       //
       if (is_item_carrier() &&
           ((is_jelly_eater() && it->is_jelly()) || (is_food_eater() && it->is_food()) ||
-           (is_treasure_type_eater() && it->is_treasure_type()) || (is_wand_eater() && it->is_wand()) ||
-           (is_potion_eater() && it->is_potion())) &&
+           (is_treasure_type_eater() && it->is_treasure_type()) ||
+           (is_item_magical_eater() && it->is_item_magical()) || (is_potion_eater() && it->is_potion())) &&
           try_to_carry_if_worthwhile_dropping_items_if_needed(it)) {
         dbg("Don't eat, try to carry %s", it->to_string().c_str());
         return true;
