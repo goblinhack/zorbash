@@ -278,6 +278,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_unused_flag9(False)
     mytp.set_z_depth(zx.MAP_DEPTH_OBJ)
     mytp.set_z_prio(zx.MAP_PRIO_BEHIND)
+    mytp.set_equip_carry_anim("ring_poison_resist_carry")
 
     mytp.set_tile(tile=name, delay_ms=100)
 

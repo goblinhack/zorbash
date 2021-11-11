@@ -17,7 +17,7 @@ def init1(name, text_name):
     mytp.set_is_tmp_thing(True)
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("Punch out.")
-    mytp.set_z_depth(zx.MAP_DEPTH_WEAPON)
+    mytp.set_z_depth(zx.MAP_DEPTH_EQUIP)
     mytp.set_z_prio(zx.MAP_PRIO_NORMAL)
 
     delay = 10

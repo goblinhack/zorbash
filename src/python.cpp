@@ -2638,7 +2638,7 @@ static void python_add_consts(void)
   PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_LAVA", MAP_DEPTH_LAVA);
   PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_OBJ", MAP_DEPTH_OBJ);
   PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_WATER", MAP_DEPTH_WATER);
-  PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_WEAPON", MAP_DEPTH_WEAPON);
+  PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_EQUIP", MAP_DEPTH_EQUIP);
   PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_EXPLOSION_MAJOR", MAP_DEPTH_EXPLOSION_MAJOR);
   PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_EXPLOSION_MINOR", MAP_DEPTH_EXPLOSION_MINOR);
   PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_MESSAGE", MAP_DEPTH_MESSAGE);
