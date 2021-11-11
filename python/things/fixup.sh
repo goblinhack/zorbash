@@ -12,6 +12,18 @@ POST=$(mktemp) || exit 1
 OUT=$(mktemp) || exit 1
 
 for IN in \
+  scythe_carry.py \
+  scythe.py \
+  scythe_swing.py \
+  sword_short_basic_carry.py \
+  sword_short_basic.py \
+  sword_short_basic_swing.py \
+  sword_short_rusty_carry.py \
+  sword_short_rusty.py \
+  sword_short_rusty_swing.py \
+  sword_short_wooden_carry.py \
+  sword_short_wooden.py \
+  sword_short_wooden_swing.py \
   bat_lesser.py \
   chest1.py \
   cleaner.py \
