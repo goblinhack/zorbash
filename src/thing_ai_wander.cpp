@@ -252,6 +252,11 @@ bool Thing::ai_wander(void)
   dbg("AI wander");
   TRACE_AND_INDENT();
 
+  //
+  // Need to clear any existing path, so we don't come back to that later and jump around the screen
+  //
+  clear_move_path("AI wander");
+
   if (ai_blocked_completely()) {
     dbg("Blocked on all sides, try escape");
     if (ai_escape()) {
