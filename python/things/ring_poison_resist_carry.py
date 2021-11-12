@@ -16,9 +16,71 @@ def tp_init(name):
     mytp.set_z_depth(zx.MAP_DEPTH_EQUIP)
     mytp.set_z_prio(zx.MAP_PRIO_NORMAL)
 
-    delay = 550
-    mytp.set_tile(tile=name + ".1", delay_ms=delay)
-    mytp.set_tile(tile=name + ".2", delay_ms=delay)
+    delay = 900
+    mytp.set_tile(tile=name + ".1", is_dir_left=True, is_moving=True, delay_ms=delay)
+    mytp.set_tile(tile=name + ".2", is_dir_left=True, is_moving=True, delay_ms=delay)
+    mytp.set_tile(tile=name + ".3", is_dir_left=True, is_moving=True, delay_ms=delay)
+    mytp.set_tile(tile=name + ".4", is_dir_left=True, is_moving=True, delay_ms=delay)
+    mytp.set_tile(tile=name + ".5", is_dir_left=True, is_moving=True, delay_ms=delay)
+    mytp.set_tile(tile=name + ".6", is_dir_left=True, is_moving=True, delay_ms=delay)
+
+    mytp.set_tile(tile=name + ".1", is_dir_up=True, is_moving=True, delay_ms=delay)
+    mytp.set_tile(tile=name + ".2", is_dir_up=True, is_moving=True, delay_ms=delay)
+    mytp.set_tile(tile=name + ".3", is_dir_up=True, is_moving=True, delay_ms=delay)
+    mytp.set_tile(tile=name + ".4", is_dir_up=True, is_moving=True, delay_ms=delay)
+    mytp.set_tile(tile=name + ".5", is_dir_up=True, is_moving=True, delay_ms=delay)
+    mytp.set_tile(tile=name + ".6", is_dir_up=True, is_moving=True, delay_ms=delay)
+
+    mytp.set_tile(tile=name + ".1", is_dir_down=True, is_moving=True, delay_ms=delay)
+    mytp.set_tile(tile=name + ".2", is_dir_down=True, is_moving=True, delay_ms=delay)
+    mytp.set_tile(tile=name + ".3", is_dir_down=True, is_moving=True, delay_ms=delay)
+    mytp.set_tile(tile=name + ".4", is_dir_down=True, is_moving=True, delay_ms=delay)
+    mytp.set_tile(tile=name + ".5", is_dir_down=True, is_moving=True, delay_ms=delay)
+    mytp.set_tile(tile=name + ".6", is_dir_down=True, is_moving=True, delay_ms=delay)
+
+    mytp.set_tile(tile=name + ".1", is_dir_right=True, is_moving=True, delay_ms=delay)
+    mytp.set_tile(tile=name + ".2", is_dir_right=True, is_moving=True, delay_ms=delay)
+    mytp.set_tile(tile=name + ".3", is_dir_right=True, is_moving=True, delay_ms=delay)
+    mytp.set_tile(tile=name + ".4", is_dir_right=True, is_moving=True, delay_ms=delay)
+    mytp.set_tile(tile=name + ".5", is_dir_right=True, is_moving=True, delay_ms=delay)
+    mytp.set_tile(tile=name + ".6", is_dir_right=True, is_moving=True, delay_ms=delay)
+
+    mytp.set_tile(tile=name + ".1", is_dir_left=True, delay_ms=delay)
+    mytp.set_tile(tile=name + ".2", is_dir_left=True, delay_ms=delay)
+    mytp.set_tile(tile=name + ".3", is_dir_left=True, delay_ms=delay)
+    mytp.set_tile(tile=name + ".4", is_dir_left=True, delay_ms=delay)
+    mytp.set_tile(tile=name + ".5", is_dir_left=True, delay_ms=delay)
+    mytp.set_tile(tile=name + ".6", is_dir_left=True, delay_ms=delay)
+
+    mytp.set_tile(tile=name + ".1", is_dir_up=True, delay_ms=delay)
+    mytp.set_tile(tile=name + ".2", is_dir_up=True, delay_ms=delay)
+    mytp.set_tile(tile=name + ".3", is_dir_up=True, delay_ms=delay)
+    mytp.set_tile(tile=name + ".4", is_dir_up=True, delay_ms=delay)
+    mytp.set_tile(tile=name + ".5", is_dir_up=True, delay_ms=delay)
+    mytp.set_tile(tile=name + ".6", is_dir_up=True, delay_ms=delay)
+
+    mytp.set_tile(tile=name + ".1", is_dir_down=True, delay_ms=delay)
+    mytp.set_tile(tile=name + ".2", is_dir_down=True, delay_ms=delay)
+    mytp.set_tile(tile=name + ".3", is_dir_down=True, delay_ms=delay)
+    mytp.set_tile(tile=name + ".4", is_dir_down=True, delay_ms=delay)
+    mytp.set_tile(tile=name + ".5", is_dir_down=True, delay_ms=delay)
+    mytp.set_tile(tile=name + ".6", is_dir_down=True, delay_ms=delay)
+
+    mytp.set_tile(tile=name + ".1", is_dir_right=True, delay_ms=delay)
+    mytp.set_tile(tile=name + ".2", is_dir_right=True, delay_ms=delay)
+    mytp.set_tile(tile=name + ".3", is_dir_right=True, delay_ms=delay)
+    mytp.set_tile(tile=name + ".4", is_dir_right=True, delay_ms=delay)
+    mytp.set_tile(tile=name + ".5", is_dir_right=True, delay_ms=delay)
+    mytp.set_tile(tile=name + ".6", is_dir_right=True, delay_ms=delay)
+
+    mytp.set_tile(tile=name + ".1", is_dir_none=True, delay_ms=delay)
+    mytp.set_tile(tile=name + ".2", is_dir_none=True, delay_ms=delay)
+    mytp.set_tile(tile=name + ".3", is_dir_none=True, delay_ms=delay)
+    mytp.set_tile(tile=name + ".4", is_dir_none=True, delay_ms=delay)
+    mytp.set_tile(tile=name + ".5", is_dir_none=True, delay_ms=delay)
+    mytp.set_tile(tile=name + ".6", is_dir_none=True, delay_ms=delay)
+
+    mytp.set_tile(tile=name + ".dead", is_dead=True)
 
     mytp.update()
 

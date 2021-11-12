@@ -489,6 +489,11 @@ bool Level::create_dungeon(point3d at, int seed)
             }
 
             {
+              auto W = thing_new("ring_poison_resist", point(x, y));
+              t->carry(W);
+            }
+
+            {
               auto W = thing_new("key", point(x, y));
               t->carry(W);
             }
