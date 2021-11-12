@@ -173,6 +173,17 @@ std::list< Thingp > Thing::get_ring_list(void)
       out.push_back(t);
     }
   }
+
+  auto r = get_equip(MONST_EQUIP_RING1);
+  if (r) {
+    out.push_back(r);
+  }
+
+  r = get_equip(MONST_EQUIP_RING2);
+  if (r) {
+    out.push_back(r);
+  }
+
   return out;
 }
 
@@ -206,6 +217,12 @@ std::list< Thingp > Thing::get_weapon_list(void)
       out.push_back(t);
     }
   }
+
+  auto r = get_equip(MONST_EQUIP_WEAPON);
+  if (r) {
+    out.push_back(r);
+  }
+
   return out;
 }
 
@@ -235,6 +252,15 @@ std::vector< Thingp > Thing::get_item_vector(void)
     }
     out.push_back(t);
   }
+
+  FOR_ALL_EQUIP(e)
+  {
+    auto r = get_equip(e);
+    if (r) {
+      out.push_back(r);
+    }
+  }
+
   return out;
 }
 

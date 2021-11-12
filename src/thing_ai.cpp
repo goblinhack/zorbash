@@ -1618,6 +1618,26 @@ bool Thing::ai_tick(bool recursing)
           }
 
           //
+          // Can we switch to a better ring?
+          //
+          Thingp curr_ring = get_equip(MONST_EQUIP_RING1);
+          Thingp best_ring = nullptr;
+          get_carried_ring_highest_value(&best_ring);
+          if (best_ring && (best_ring != curr_ring)) {
+            auto curr_ring_val = curr_ring ? maybe_itemp_value(curr_ring) : 0;
+            auto best_ring_val = maybe_itemp_value(best_ring);
+            if (best_ring_val > curr_ring_val) {
+              if (equip(best_ring, MONST_EQUIP_RING1)) {
+                AI_LOG("Change ring", best_ring);
+                if (is_player()) {
+                  game->tick_begin("Robot, is changing ring");
+                }
+                return true;
+              }
+            }
+          }
+
+          //
           // Look around for something nearby to do; like collect an item.
           //
           AI_LOG("Look around for some immediately adjacent goal");
