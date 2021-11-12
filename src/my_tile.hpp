@@ -88,6 +88,7 @@ public:
   // Delay in ms between frames.
   //
   uint32_t delay_ms {};
+  uint32_t frame {};
 
   bool internal_has_dir_anim {};
   bool is_alive_on_end_of_anim {};
@@ -159,6 +160,7 @@ int32_t     tile_get_width(Tilep);
 std::string tile_get_name(Tilep);
 std::string tile_name(Tilep);
 uint32_t    tile_delay_ms(Tilep);
+uint32_t    tile_frame(Tilep);
 uint32_t    tile_get_index(Tilep);
 uint32_t    tile_move(Tilep);
 uint8_t     gfx_outline_index_offset(Tilep);
@@ -249,5 +251,7 @@ void  tile_load_arr_sprites(std::string file, std::string name, uint32_t width, 
 Tilep tile_find(std::string name);
 void  tile_load_arr_sprites(std::string file, std::string tex_name, uint32_t width, uint32_t height, uint32_t nargs,
                             const char *arr[]);
+int   tile_get_n(Tilemap *tmap, Tile *p);
+Tilep tile_get_frame(Tilemap *tmap, int frame);
 
 #endif

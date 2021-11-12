@@ -311,6 +311,7 @@ static PyObject *tp_set_tile_dir(PyObject *obj, PyObject *args, PyObject *keywds
   char     *fg_color                = 0;
   char     *bg_color                = 0;
   int       delay_ms                = 0;
+  int       frame                   = 0;
   int       is_moving               = 0;
   int       is_jumping              = 0;
   int       begin_jump              = 0;
@@ -347,6 +348,7 @@ static PyObject *tp_set_tile_dir(PyObject *obj, PyObject *args, PyObject *keywds
                            (char *) "fg_color",
                            (char *) "bg_color",
                            (char *) "delay_ms",
+                           (char *) "frame",
                            (char *) "is_moving",
                            (char *) "is_jumping",
                            (char *) "begin_jump",
@@ -377,11 +379,11 @@ static PyObject *tp_set_tile_dir(PyObject *obj, PyObject *args, PyObject *keywds
                            0};
 
   if (! PyArg_ParseTupleAndKeywords(
-          args, keywds, "O|sssssiiisiiiiiiiiiiiiiiiiiiiiiiii", kwlist, &py_class, &py_tile_name, &fg, &bg, &fg_color,
-          &bg_color, &delay_ms, &is_moving, &is_jumping, &begin_jump, &is_outline, &left, &right, &up, &down, &none,
-          &is_yyy5, &is_yyy6, &is_yyy7, &is_yyy8, &is_yyy9, &is_invisible, &is_hp_25_percent, &is_hp_50_percent,
-          &is_hp_75_percent, &is_hp_100_percent, &is_in_water, &is_sleeping, &is_open, &is_dead, &is_end_of_anim,
-          &is_dead_on_end_of_anim, &is_resurrecting, &is_alive_on_end_of_anim)) {
+          args, keywds, "O|sssssiiisiiiiiiiiiiiiiiiiiiiiiiiii", kwlist, &py_class, &py_tile_name, &fg, &bg, &fg_color,
+          &bg_color, &delay_ms, &frame, &is_moving, &is_jumping, &begin_jump, &is_outline, &left, &right, &up, &down,
+          &none, &is_yyy5, &is_yyy6, &is_yyy7, &is_yyy8, &is_yyy9, &is_invisible, &is_hp_25_percent,
+          &is_hp_50_percent, &is_hp_75_percent, &is_hp_100_percent, &is_in_water, &is_sleeping, &is_open, &is_dead,
+          &is_end_of_anim, &is_dead_on_end_of_anim, &is_resurrecting, &is_alive_on_end_of_anim)) {
     ERR("%s: Bad args", __FUNCTION__);
     Py_RETURN_FALSE;
   }
@@ -513,6 +515,7 @@ static PyObject *tp_set_tile_dir(PyObject *obj, PyObject *args, PyObject *keywds
       tile->in_use = true;
 
       tile->delay_ms  = delay_ms;
+      tile->frame     = frame;
       tile->is_moving = is_moving;
 
       tile->is_yyy5                = is_yyy5;

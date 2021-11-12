@@ -20,6 +20,25 @@ void Thing::animate(void)
   Tilep tile;
   auto  tpp = tp();
 
+  auto tmap = &tpp->tiles;
+  if (unlikely(! tmap)) {
+    return;
+  }
+
+  //
+  // If this thing has an owner, sync the anim tiles.
+  auto owner = get_top_owner();
+  if (owner) {
+    tile = tile_index_to_tile(owner->tile_curr);
+    if (tile) {
+      auto ntile = tile_get_frame(tmap, tile->frame);
+      if (ntile) {
+        tile_curr = ntile->global_index;
+        return;
+      }
+    }
+  }
+
   if (time_get_time_ms_cached() <= get_ts_anim_delay_end()) {
 #ifdef DEBUG_ANIM
     if (is_debug_type()) {
@@ -35,10 +54,6 @@ void Thing::animate(void)
   }
 #endif
 
-  auto tmap = &tpp->tiles;
-  if (unlikely(! tmap)) {
-    return;
-  }
   std::vector< Tilep > *tiles = &((*tmap));
   if (unlikely(! tiles || tiles->empty())) {
 #ifdef DEBUG_ANIM

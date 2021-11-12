@@ -996,6 +996,28 @@ Tilep tile_n(Tilemap *tmap, int n)
   return tile_index_to_tile(tile->global_index);
 }
 
+int tile_get_n(Tilemap *tmap, Tile *p)
+{
+  int n = 0;
+  for (const auto t : *tmap) {
+    if (t == p) {
+      return n;
+    }
+    n++;
+  }
+  return -1;
+}
+
+Tilep tile_get_frame(Tilemap *tmap, int frame)
+{
+  for (const auto t : *tmap) {
+    if (t->frame == frame) {
+      return t;
+    }
+  }
+  return nullptr;
+}
+
 Tilep tile_next(Tilemap *tmap, Tilep in)
 {
   if (unlikely(! tmap)) {
