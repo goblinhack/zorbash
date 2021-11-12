@@ -19,11 +19,11 @@ def tp_init(name):
     # This should be synced with its owner, but just in case it is not, we have delay set
     delay = 900
     mytp.set_tile(tile=name + ".1", delay_ms=delay, frame=1)
-    mytp.set_tile(tile=name + ".1", delay_ms=delay, frame=2)
-    mytp.set_tile(tile=name + ".1", delay_ms=delay, frame=3)
-    mytp.set_tile(tile=name + ".1", delay_ms=delay, frame=4)
-    mytp.set_tile(tile=name + ".1", delay_ms=delay, frame=5)
-    mytp.set_tile(tile=name + ".1", delay_ms=delay, frame=6)
+    mytp.set_tile(tile=name + ".2", delay_ms=delay, frame=2)
+    mytp.set_tile(tile=name + ".3", delay_ms=delay, frame=3)
+    mytp.set_tile(tile=name + ".4", delay_ms=delay, frame=4)
+    mytp.set_tile(tile=name + ".5", delay_ms=delay, frame=5)
+    mytp.set_tile(tile=name + ".6", delay_ms=delay, frame=6)
 
     mytp.update()
 
