@@ -1297,10 +1297,10 @@ int Thing::unused_flag27(void)
   return (tp()->unused_flag27());
 }
 
-int Thing::unused_flag28(void)
+int Thing::is_gfx_anim_synced_with_owner(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->unused_flag28());
+  return (tp()->is_gfx_anim_synced_with_owner());
 }
 
 int Thing::is_item_magical(void)

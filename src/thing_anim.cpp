@@ -28,14 +28,16 @@ void Thing::animate(void)
   //
   // If this thing has an owner, sync the anim tiles so the weapon moves as the player does.
   //
-  auto owner = get_top_owner();
-  if (owner) {
-    tile = tile_index_to_tile(owner->tile_curr);
-    if (tile) {
-      auto ntile = tile_get_frame(tmap, tile->frame);
-      if (ntile) {
-        tile_curr = ntile->global_index;
-        return;
+  if (is_gfx_anim_synced_with_owner()) {
+    auto owner = get_top_owner();
+    if (owner) {
+      tile = tile_index_to_tile(owner->tile_curr);
+      if (tile) {
+        auto ntile = tile_get_frame(tmap, tile->frame);
+        if (ntile) {
+          tile_curr = ntile->global_index;
+          return;
+        }
       }
     }
   }

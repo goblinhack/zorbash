@@ -475,8 +475,9 @@ bool Thing::get_coords(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
   //
   // Flipping
   //
-  auto owner   = get_immediate_owner();
-  auto falling = is_falling || (owner && owner->is_falling);
+  auto top_owner = get_top_owner();
+  auto owner     = get_immediate_owner();
+  auto falling   = is_falling || (owner && owner->is_falling);
 
   if (likely(! falling)) {
     if (unlikely(tpp->gfx_animated_can_hflip())) {
@@ -529,9 +530,15 @@ bool Thing::get_coords(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
   //
   // Boing.
   //
-  if (unlikely(is_bouncing)) {
-    float bounce = get_bounce();
-    float bh     = (tileh / TILE_HEIGHT) * (int) (bounce * TILE_HEIGHT);
+  if (unlikely(is_bouncing || (top_owner && top_owner->is_bouncing))) {
+    float bounce;
+    if (top_owner) {
+      bounce = owner->get_bounce();
+    } else {
+      bounce = get_bounce();
+    }
+
+    float bh = (tileh / TILE_HEIGHT) * (int) (bounce * TILE_HEIGHT);
     if (reflection) {
       blit_tl.y += bh;
       blit_br.y += bh;

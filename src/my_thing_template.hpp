@@ -376,7 +376,7 @@ private:
   int _unused_flag25 {};
   int _unused_flag26 {};
   int _unused_flag27 {};
-  int _unused_flag28 {};
+  int _is_gfx_anim_synced_with_owner {};
   int _unused_flag3 {};
   int _unused_flag30 {};
   int _unused_flag4 {};
@@ -755,7 +755,7 @@ public:
   int unused_flag25(void) const;
   int unused_flag26(void) const;
   int unused_flag27(void) const;
-  int unused_flag28(void) const;
+  int is_gfx_anim_synced_with_owner(void) const;
   int is_item_magical(void) const;
   int unused_flag2(void) const;
   int unused_flag30(void) const;
@@ -1086,7 +1086,7 @@ public:
   void set_unused_flag25(int);
   void set_unused_flag26(int);
   void set_unused_flag27(int);
-  void set_unused_flag28(int);
+  void set_is_gfx_anim_synced_with_owner(int);
   void set_is_item_magical(int);
   void set_unused_flag2(int);
   void set_unused_flag30(int);

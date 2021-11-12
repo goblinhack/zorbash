@@ -280,7 +280,7 @@ def tp_init(name, text_name):
     mytp.set_unused_flag25(False)
     mytp.set_unused_flag26(False)
     mytp.set_unused_flag27(False)
-    mytp.set_unused_flag28(False)
+    mytp.set_is_gfx_anim_synced_with_owner(False)
     mytp.set_is_item_magical(False)
     mytp.set_unused_flag2(False)
     mytp.set_unused_flag30(False)

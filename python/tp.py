@@ -322,8 +322,8 @@ class Tp:
     def set_unused_flag27(self, value):
         zx.tp_set_unused_flag27(self, value)
 
-    def set_unused_flag28(self, value):
-        zx.tp_set_unused_flag28(self, value)
+    def set_is_gfx_anim_synced_with_owner(self, value):
+        zx.tp_set_is_gfx_anim_synced_with_owner(self, value)
 
     def set_is_item_magical(self, value):
         zx.tp_set_is_item_magical(self, value)

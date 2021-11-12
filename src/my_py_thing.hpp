@@ -232,7 +232,7 @@ PyObject *thing_unused_flag24(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag25(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag26(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag27(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag28(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_gfx_anim_synced_with_owner(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_item_magical(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag2(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag30(PyObject *obj, PyObject *args, PyObject *keywds);

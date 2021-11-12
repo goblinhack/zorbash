@@ -532,7 +532,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag27() && (what == "unused_flag27")) {
     return true;
   }
-  if (unused_flag28() && (what == "unused_flag28")) {
+  if (is_gfx_anim_synced_with_owner() && (what == "is_gfx_anim_synced_with_owner")) {
     return true;
   }
   if (is_item_magical() && (what == "is_item_magical")) {
@@ -1307,8 +1307,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag27") {
     return &Thing::unused_flag27;
   }
-  if (what == "unused_flag28") {
-    return &Thing::unused_flag28;
+  if (what == "is_gfx_anim_synced_with_owner") {
+    return &Thing::is_gfx_anim_synced_with_owner;
   }
   if (what == "is_item_magical") {
     return &Thing::is_item_magical;

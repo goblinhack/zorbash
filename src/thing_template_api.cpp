@@ -356,7 +356,7 @@ int Tp::unused_flag24(void) const { return _unused_flag24; }
 int Tp::unused_flag25(void) const { return _unused_flag25; }
 int Tp::unused_flag26(void) const { return _unused_flag26; }
 int Tp::unused_flag27(void) const { return _unused_flag27; }
-int Tp::unused_flag28(void) const { return _unused_flag28; }
+int Tp::is_gfx_anim_synced_with_owner(void) const { return _is_gfx_anim_synced_with_owner; }
 int Tp::is_item_magical(void) const { return _is_item_magical; }
 int Tp::unused_flag2(void) const { return _unused_flag2; }
 int Tp::unused_flag30(void) const { return _unused_flag30; }
@@ -676,7 +676,7 @@ void Tp::set_unused_flag24(int v) { _unused_flag24 = v; }
 void Tp::set_unused_flag25(int v) { _unused_flag25 = v; }
 void Tp::set_unused_flag26(int v) { _unused_flag26 = v; }
 void Tp::set_unused_flag27(int v) { _unused_flag27 = v; }
-void Tp::set_unused_flag28(int v) { _unused_flag28 = v; }
+void Tp::set_is_gfx_anim_synced_with_owner(int v) { _is_gfx_anim_synced_with_owner = v; }
 void Tp::set_is_item_magical(int v) { _is_item_magical = v; }
 void Tp::set_unused_flag2(int v) { _unused_flag2 = v; }
 void Tp::set_unused_flag30(int v) { _unused_flag30 = v; }

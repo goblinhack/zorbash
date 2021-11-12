@@ -1095,7 +1095,7 @@ public:
   int unused_flag25(void);
   int unused_flag26(void);
   int unused_flag27(void);
-  int unused_flag28(void);
+  int is_gfx_anim_synced_with_owner(void);
   int unused_flag2(void);
   int unused_flag30(void);
   int unused_flag3(void);

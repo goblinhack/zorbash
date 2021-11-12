@@ -343,7 +343,10 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
   auto y     = future_pos.y;
   auto delta = point(x, y) - mid_at;
 
-  if (tp()->gfx_bounce_on_move()) {
+  //
+  // Bounce rings and weapons
+  //
+  if (gfx_bounce_on_move()) {
     if (get_bounce() == 0) {
       bounce(0.2 /* height */, 0.1 /* fade */, 200, 3);
     }

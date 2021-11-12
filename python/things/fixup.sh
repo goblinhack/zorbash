@@ -382,7 +382,7 @@ do
       set_unused_flag25 \
       set_unused_flag26 \
       set_unused_flag27 \
-      set_unused_flag28 \
+      set_is_gfx_anim_synced_with_owner \
       set_unused_flag3 \
       set_unused_flag30 \
       set_unused_flag4 \
