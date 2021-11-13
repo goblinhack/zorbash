@@ -88,45 +88,46 @@ public:
   // Delay in ms between frames.
   //
   uint32_t delay_ms {};
-  uint32_t frame {};
 
-  bool internal_has_dir_anim {};
-  bool is_alive_on_end_of_anim {};
-  bool is_dead {};
-  bool is_dead_on_end_of_anim {};
-  bool is_end_of_anim {};
-  bool is_hp_100_percent {};
-  bool is_hp_25_percent {};
-  bool is_hp_50_percent {};
-  bool is_hp_75_percent {};
-  bool is_invisible {};
-  bool is_join_bot {};
-  bool is_join_horiz {};
-  bool is_join_l {};
-  bool is_join_l180 {};
-  bool is_join_l270 {};
-  bool is_join_l90 {};
-  bool is_join_left {};
-  bool is_join_node {};
-  bool is_join_right {};
-  bool is_join_t {};
-  bool is_join_t180 {};
-  bool is_join_t270 {};
-  bool is_join_t90 {};
-  bool is_join_top {};
-  bool is_join_vert {};
-  bool is_join_x {};
-  bool is_moving {};
-  bool is_open {};
-  bool is_outline {};
-  bool is_resurrecting {};
-  bool is_sleeping {};
-  bool is_yyy5 {};
-  bool is_yyy6 {};
-  bool is_yyy7 {};
-  bool is_yyy8 {};
-  bool is_yyy9 {};
-  int  dir {};
+  uint8_t frame {};
+  uint8_t dir {};
+
+  bool internal_has_dir_anim   : 1 {};
+  bool is_alive_on_end_of_anim : 1 {};
+  bool is_dead                 : 1 {};
+  bool is_dead_on_end_of_anim  : 1 {};
+  bool is_end_of_anim          : 1 {};
+  bool is_hp_100_percent       : 1 {};
+  bool is_hp_25_percent        : 1 {};
+  bool is_hp_50_percent        : 1 {};
+  bool is_hp_75_percent        : 1 {};
+  bool is_invisible            : 1 {};
+  bool is_join_bot             : 1 {};
+  bool is_join_horiz           : 1 {};
+  bool is_join_l               : 1 {};
+  bool is_join_l180            : 1 {};
+  bool is_join_l270            : 1 {};
+  bool is_join_l90             : 1 {};
+  bool is_join_left            : 1 {};
+  bool is_join_node            : 1 {};
+  bool is_join_right           : 1 {};
+  bool is_join_t               : 1 {};
+  bool is_join_t180            : 1 {};
+  bool is_join_t270            : 1 {};
+  bool is_join_t90             : 1 {};
+  bool is_join_top             : 1 {};
+  bool is_join_vert            : 1 {};
+  bool is_join_x               : 1 {};
+  bool is_moving               : 1 {};
+  bool is_open                 : 1 {};
+  bool is_outline              : 1 {};
+  bool is_resurrecting         : 1 {};
+  bool is_sleeping             : 1 {};
+  bool is_yyy5                 : 1 {};
+  bool is_yyy6                 : 1 {};
+  bool is_yyy7                 : 1 {};
+  bool is_yyy8                 : 1 {};
+  bool is_yyy9                 : 1 {};
 
 private:
   int32_t _gl_binding {};
@@ -252,6 +253,6 @@ Tilep tile_find(std::string name);
 void  tile_load_arr_sprites(std::string file, std::string tex_name, uint32_t width, uint32_t height, uint32_t nargs,
                             const char *arr[]);
 int   tile_get_n(Tilemap *tmap, Tile *p);
-Tilep tile_get_frame(Tilemap *tmap, int frame);
+Tilep tile_get_frame(Tilemap *tmap, uint32_t frame);
 
 #endif

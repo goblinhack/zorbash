@@ -1008,7 +1008,7 @@ int tile_get_n(Tilemap *tmap, Tile *p)
   return -1;
 }
 
-Tilep tile_get_frame(Tilemap *tmap, int frame)
+Tilep tile_get_frame(Tilemap *tmap, uint32_t frame)
 {
   for (const auto t : *tmap) {
     if (t->frame == frame) {
