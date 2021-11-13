@@ -1603,18 +1603,30 @@ bool Thing::ai_tick(bool recursing)
           //
           // Can we switch to a better weapon?
           //
-          Thingp best_weapon;
+          Thingp curr_weapon = get_equip(MONST_EQUIP_WEAPON);
+          Thingp best_weapon = nullptr;
           get_carried_weapon_highest_value(&best_weapon);
-          if (best_weapon && (best_weapon != get_equip(MONST_EQUIP_WEAPON))) {
-            if (use(best_weapon, MONST_EQUIP_WEAPON)) {
-              AI_LOG("Change weapon", best_weapon);
-              if (is_player()) {
-                game->tick_begin("Robot is changing weapon");
-              }
-              return true;
-            }
+          if (best_weapon) {
+            auto curr_weapon_val = curr_weapon ? maybe_itemp_value(curr_weapon) : 0;
+            auto best_weapon_val = maybe_itemp_value(best_weapon);
 
-            AI_LOG("Failed to change weapon", best_weapon);
+            if (! curr_weapon) {
+              if (use(best_weapon, MONST_EQUIP_WEAPON)) {
+                AI_LOG("Change weapon", best_weapon);
+                if (is_player()) {
+                  game->tick_begin("Robot, has equipped weapon");
+                }
+                return true;
+              }
+            } else if (best_weapon_val > curr_weapon_val) {
+              if (use(best_weapon, MONST_EQUIP_WEAPON)) {
+                AI_LOG("Change weapon", best_weapon);
+                if (is_player()) {
+                  game->tick_begin("Robot, has changed to weapon");
+                }
+                return true;
+              }
+            }
           }
 
           //

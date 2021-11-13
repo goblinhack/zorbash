@@ -390,7 +390,7 @@ bool Level::create_dungeon(point3d at, int seed)
             if (0) {
               t->incr_poison(10);
             }
-#if 1
+#if 0
             auto w = thing_new("scythe", point(x, y));
             t->carry(w);
 
@@ -411,6 +411,10 @@ bool Level::create_dungeon(point3d at, int seed)
 
             {
               thing_new("sword_short_wooden", point(x + 1, y));
+            }
+
+            {
+              thing_new("ring_poison_resist", point(x + 2, y));
             }
 
             {
