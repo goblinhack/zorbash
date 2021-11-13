@@ -390,7 +390,7 @@ bool Level::create_dungeon(point3d at, int seed)
             if (0) {
               t->incr_poison(10);
             }
-#if 0
+#if 1
             auto w = thing_new("scythe", point(x, y));
             t->carry(w);
 
