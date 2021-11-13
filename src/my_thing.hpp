@@ -101,8 +101,9 @@ public:
   uint64_t is_dead                                      : 1 {};
   uint64_t is_dying                                     : 1 {}; // is currently in the throes of death
   uint64_t is_facing_left                               : 1 {};
-  uint64_t is_fadeup                                    : 1 {};
+  uint64_t is_fadeup                                    : 1 {}; // for text that fades upwards
   uint64_t is_falling                                   : 1 {};
+  uint64_t is_ring2                                     : 1 {}; // for 2nd rings
   uint64_t is_hidden                                    : 1 {};
   uint64_t is_hungry                                    : 1 {};
   uint64_t is_in_lava                                   : 1 {};
@@ -129,7 +130,7 @@ public:
   // These are flags used to make sure we set or unset flags onto
   // the level only once.
   //
-  uint64_t i_set_gfx_water                        : 1 {};
+  uint64_t i_set_water                            : 1 {};
   uint64_t i_set_is_acid                          : 1 {};
   uint64_t i_set_is_ascend_dungeon                : 1 {};
   uint64_t i_set_is_ascend_sewer                  : 1 {};

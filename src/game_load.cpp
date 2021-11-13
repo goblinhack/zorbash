@@ -326,6 +326,8 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
   shift++;
   my.t->is_falling = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU;
   shift++;
+  my.t->is_ring2 = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU;
+  shift++;
   my.t->is_hidden = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU;
   shift++;
   my.t->is_hungry = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU;
@@ -373,7 +375,7 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
   // CON("LOAD %016LX ",bits64);
   shift = 0;
 
-  my.t->i_set_gfx_water = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU;
+  my.t->i_set_water = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU;
   shift++;
   my.t->i_set_is_acid = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU;
   shift++;

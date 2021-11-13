@@ -6,7 +6,10 @@ Liberate the Orb of Zorb and defeat Zorbash to win.
 
 (Well you will once the game is finished! :)
 
-This is work in progress. It's sort of playable right now but probably way too tough.
+This is work in progress. Consider this in demo mode in that you
+currently start with a bunch of equipment each time. That will
+change once I add character seletion.
+
 Comments and suggestions welcome at this early stage.
 
 Screenshots

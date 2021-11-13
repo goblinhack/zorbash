@@ -525,6 +525,14 @@ bool Thing::get_coords(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
     }
   }
 
+  //
+  // For second rings
+  //
+  if (is_ring2) {
+    blit_tl.x += 2;
+    blit_br.x += 2;
+  }
+
   last_blit_at = ((blit_tl + blit_br) / 2);
 
   //

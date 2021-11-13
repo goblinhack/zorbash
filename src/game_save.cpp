@@ -265,6 +265,8 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   shift++;
   bits64 |= (my.t->is_falling ? 1LLU : 0LLU) << shift;
   shift++;
+  bits64 |= (my.t->is_ring2 ? 1LLU : 0LLU) << shift;
+  shift++;
   bits64 |= (my.t->is_hidden ? 1LLU : 0LLU) << shift;
   shift++;
   bits64 |= (my.t->is_hungry ? 1LLU : 0LLU) << shift;
@@ -316,7 +318,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
 
   bits64 = 0;
   shift  = 0;
-  bits64 |= (my.t->i_set_gfx_water ? 1LLU : 0LLU) << shift;
+  bits64 |= (my.t->i_set_water ? 1LLU : 0LLU) << shift;
   shift++;
   bits64 |= (my.t->i_set_is_acid ? 1LLU : 0LLU) << shift;
   shift++;

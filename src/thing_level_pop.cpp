@@ -217,8 +217,8 @@ void Thing::level_pop(void)
     i_set_is_wall = false;
     level->unset_is_wall(mx, my);
   }
-  if (i_set_gfx_water) {
-    i_set_gfx_water = false;
+  if (i_set_water) {
+    i_set_water = false;
     level->unset_gfx_water(mx, my);
   }
   int group = get_group();

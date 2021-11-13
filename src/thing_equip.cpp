@@ -85,6 +85,11 @@ void Thing::set_equip_carry_anim(Thingp new_equip_carry_anim, int equip)
   } else {
     set_equip_id_carry_anim(NoThingId.id, equip);
   }
+
+  new_equip_carry_anim->is_ring2 = false;
+  if (equip == MONST_EQUIP_RING2) {
+    new_equip_carry_anim->is_ring2 = true;
+  }
 }
 
 void Thing::set_equip_use_anim_id(ThingId gfx_anim_use_id, int equip)
