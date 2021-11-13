@@ -387,6 +387,8 @@ bool Level::create_dungeon(point3d at, int seed)
           if (dungeon->is_ascend_dungeon(x, y)) {
             auto t = thing_new("player2", point(x, y));
 
+            TOPCON("%%fg=yellow$THIS IS A DEMO. YOU WONT START THE REAL GAME WITH ALL THIS KIT LOL.");
+
             if (0) {
               t->incr_poison(10);
             }
