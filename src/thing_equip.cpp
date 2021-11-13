@@ -273,7 +273,13 @@ bool Thing::unequip(const char *why, int equip, bool allowed_to_recarry)
 
   if (is_player()) {
     if (! level->is_starting && ! level->is_being_destroyed) {
-      TOPCON("You unequip %s.", item->text_the().c_str());
+      if (item->is_ring()) {
+        TOPCON("You slip off the %s.", item->text_the().c_str());
+      } else if (item->is_weapon()) {
+        TOPCON("You unwield the %s.", item->text_the().c_str());
+      } else {
+        TOPCON("You take off on %s.", item->text_the().c_str());
+      }
     }
   }
 
@@ -309,7 +315,7 @@ bool Thing::equip(Thingp item, int equip)
   auto equip_tp = item->tp();
 
   if (get_equip(equip) == item) {
-    dbg("Re-equiping: %s", item->to_string().c_str());
+    dbg("Re-equipping: %s", item->to_string().c_str());
     //
     // Do not return here. We need to set the carry-anim post swing
     //
@@ -317,12 +323,20 @@ bool Thing::equip(Thingp item, int equip)
     return false;
   }
 
-  dbg("Is equiping: %s", item->to_string().c_str());
+  dbg("Is equipping: %s", item->to_string().c_str());
 
   //
   // Remove from the bag first so we can swap the current equipped thing.
   //
   bag_remove(item);
+
+  //
+  // Remove from the container of carrier
+  //
+  auto immediate_owner = item->get_immediate_owner();
+  if (immediate_owner) {
+    immediate_owner->get_itemp()->carrying.remove(item->id);
+  }
 
   unequip("equip new", equip, true);
 
@@ -362,7 +376,13 @@ bool Thing::equip(Thingp item, int equip)
 
   if (is_player()) {
     if (! level->is_starting && ! level->is_being_destroyed) {
-      TOPCON("You equip %s.", item->text_the().c_str());
+      if (item->is_ring()) {
+        TOPCON("You slip on the %s.", item->text_the().c_str());
+      } else if (item->is_weapon()) {
+        TOPCON("You wield the %s.", item->text_the().c_str());
+      } else {
+        TOPCON("You put on %s.", item->text_the().c_str());
+      }
     }
   }
 
