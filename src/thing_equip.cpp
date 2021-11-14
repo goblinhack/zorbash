@@ -392,6 +392,14 @@ bool Thing::equip(Thingp item, int equip)
     return false;
   }
 
+  if ((equip == MONST_EQUIP_RING2) && (get_equip(MONST_EQUIP_RING1) == item)) {
+    unequip("equip swap", MONST_EQUIP_RING1, true);
+  }
+
+  if ((equip == MONST_EQUIP_RING1) && (get_equip(MONST_EQUIP_RING2) == item)) {
+    unequip("equip swap", MONST_EQUIP_RING2, true);
+  }
+
   dbg("Is equipping: %s", item->to_string().c_str());
 
   //
