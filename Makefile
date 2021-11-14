@@ -4,7 +4,7 @@ pre:
 
 all: pre
 	@if [ ! -f src/Makefile ]; then \
-	    (RUNME;) \
+	    (./RUNME;) \
 	fi
 	(cd src; $(MAKE) $@)
 
