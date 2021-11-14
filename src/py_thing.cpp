@@ -450,6 +450,158 @@ PyObject *thing_defeated(PyObject *obj, PyObject *args, PyObject *keywds)
   Py_RETURN_NONE;
 }
 
+PyObject *thing_buff_add(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_AND_INDENT();
+  uint32_t     owner_id = 0;
+  char        *what     = nullptr;
+  static char *kwlist[] = {(char *) "owner", (char *) "what", 0};
+
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &owner_id, &what)) {
+    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  if (! owner_id) {
+    ERR("%s: No owner thing ID set", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  Thingp owner = game->thing_find(owner_id);
+  if (! owner) {
+    ERR("%s: Cannot find owner thing ID %u", __FUNCTION__, owner_id);
+    Py_RETURN_NONE;
+  }
+
+  if (! what) {
+    ERR("%s: No buff name set", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  auto tp = tp_find(what);
+  if (! tp) {
+    ERR("%s: No buff tp called %s found", __FUNCTION__, what);
+    Py_RETURN_NONE;
+  }
+
+  owner->buff_add(tp);
+  Py_RETURN_NONE;
+}
+
+PyObject *thing_debuff_add(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_AND_INDENT();
+  uint32_t     owner_id = 0;
+  char        *what     = nullptr;
+  static char *kwlist[] = {(char *) "owner", (char *) "what", 0};
+
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &owner_id, &what)) {
+    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  if (! owner_id) {
+    ERR("%s: No owner thing ID set", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  Thingp owner = game->thing_find(owner_id);
+  if (! owner) {
+    ERR("%s: Cannot find owner thing ID %u", __FUNCTION__, owner_id);
+    Py_RETURN_NONE;
+  }
+
+  if (! what) {
+    ERR("%s: No debuff name set", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  auto tp = tp_find(what);
+  if (! tp) {
+    ERR("%s: No debuff tp called %s found", __FUNCTION__, what);
+    Py_RETURN_NONE;
+  }
+
+  owner->debuff_add(tp);
+  Py_RETURN_NONE;
+}
+
+PyObject *thing_buff_remove(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_AND_INDENT();
+  uint32_t     owner_id = 0;
+  char        *what     = nullptr;
+  static char *kwlist[] = {(char *) "owner", (char *) "what", 0};
+
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &owner_id, &what)) {
+    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  if (! owner_id) {
+    ERR("%s: No owner thing ID set", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  Thingp owner = game->thing_find(owner_id);
+  if (! owner) {
+    ERR("%s: Cannot find owner thing ID %u", __FUNCTION__, owner_id);
+    Py_RETURN_NONE;
+  }
+
+  if (! what) {
+    ERR("%s: No buff name set", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  auto tp = tp_find(what);
+  if (! tp) {
+    ERR("%s: No buff tp called %s found", __FUNCTION__, what);
+    Py_RETURN_NONE;
+  }
+
+  owner->buff_remove(tp);
+  Py_RETURN_NONE;
+}
+
+PyObject *thing_debuff_remove(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_AND_INDENT();
+  uint32_t     owner_id = 0;
+  char        *what     = nullptr;
+  static char *kwlist[] = {(char *) "owner", (char *) "what", 0};
+
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &owner_id, &what)) {
+    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  if (! owner_id) {
+    ERR("%s: No owner thing ID set", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  Thingp owner = game->thing_find(owner_id);
+  if (! owner) {
+    ERR("%s: Cannot find owner thing ID %u", __FUNCTION__, owner_id);
+    Py_RETURN_NONE;
+  }
+
+  if (! what) {
+    ERR("%s: No debuff name set", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  auto tp = tp_find(what);
+  if (! tp) {
+    ERR("%s: No debuff tp called %s found", __FUNCTION__, what);
+    Py_RETURN_NONE;
+  }
+
+  owner->debuff_remove(tp);
+  Py_RETURN_NONE;
+}
+
 PyObject *thing_msg(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();

@@ -296,6 +296,7 @@ public:
   bool bag_remove_at(Thingp item, point pos);
   bool buff_add(Thingp it);
   bool buff_add(Tpp what);
+  bool buff_remove(Tpp what);
   bool buff_remove(Thingp it);
   bool buff_use(Thingp it);
   bool buffbox_id_insert(Thingp what);
@@ -326,6 +327,7 @@ public:
   bool cursor_path_pop_first_move(void);
   bool debuff_add(Thingp it);
   bool debuff_add(Tpp what);
+  bool debuff_remove(Tpp what);
   bool debuff_remove(Thingp it);
   bool debuff_use(Thingp it);
   bool debuffbox_id_insert(Thingp what);
@@ -504,6 +506,8 @@ public:
   const std::string &on_final_use_do(void);
   const std::string &on_equip_do(void);
   const std::string &on_unequip_do(void);
+  const std::string &on_owner_set_do(void);
+  const std::string &on_owner_unset_do(void);
   const std::string &projectile_name(void);
   const std::string &short_text_name(void);
   const std::string &spawn_on_shoved(void);
@@ -1407,6 +1411,8 @@ public:
   void on_final_use(Thingp what, Thingp target);
   void on_equip(Thingp what);
   void on_unequip(Thingp what);
+  void on_owner_set(Thingp what);
+  void on_owner_unset(Thingp what);
   void poison_tick(void);
   void reinit(void);
   void remove_all_references();

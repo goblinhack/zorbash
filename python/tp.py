@@ -181,6 +181,12 @@ class Tp:
     def set_on_unequip_do(self, value):
         zx.tp_set_on_unequip_do(self, value)
 
+    def set_on_owner_set_do(self, value):
+        zx.tp_set_on_owner_set_do(self, value)
+
+    def set_on_owner_unset_do(self, value):
+        zx.tp_set_on_owner_unset_do(self, value)
+
     def set_on_you_are_hit_do(self, value):
         zx.tp_set_on_you_are_hit_do(self, value)
 

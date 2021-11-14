@@ -136,6 +136,20 @@ bool Thing::debuff_add(Tpp what)
 
   return true;
 }
+bool Thing::debuff_remove(Tpp what)
+{
+  if (! maybe_itemp()) {
+    return false;
+  }
+  for (const auto &item : get_itemp()->debuffs) {
+    auto t = level->thing_find(item.id);
+    if (t && (t->tp() == what)) {
+      debuff_remove(t);
+      return true;
+    }
+  }
+  return false;
+}
 
 void Thing::debuff_tick(void)
 {

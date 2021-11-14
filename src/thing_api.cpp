@@ -5909,6 +5909,18 @@ const std::string &Thing::on_unequip_do(void)
   return (tp()->on_unequip_do());
 }
 
+const std::string &Thing::on_owner_set_do(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->on_owner_set_do());
+}
+
+const std::string &Thing::on_owner_unset_do(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->on_owner_unset_do());
+}
+
 const std::string &Thing::projectile_name(void)
 {
   TRACE_AND_INDENT();

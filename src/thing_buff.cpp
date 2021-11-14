@@ -76,6 +76,7 @@ bool Thing::buff_remove(Thingp what)
   Thingp top_owner = get_top_owner();
   if (top_owner) {
     if (top_owner->is_player()) {
+      dbg("Removing from buffbox %s", what->to_string().c_str());
       top_owner->buffbox_id_remove(what);
     }
   }
@@ -136,6 +137,21 @@ bool Thing::buff_add(Tpp what)
   buff_add(t);
 
   return true;
+}
+
+bool Thing::buff_remove(Tpp what)
+{
+  if (! maybe_itemp()) {
+    return false;
+  }
+  for (const auto &item : get_itemp()->buffs) {
+    auto t = level->thing_find(item.id);
+    if (t && (t->tp() == what)) {
+      buff_remove(t);
+      return true;
+    }
+  }
+  return false;
 }
 
 void Thing::buff_tick(void)

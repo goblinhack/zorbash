@@ -9,9 +9,73 @@
 #include "my_level.hpp"
 #include "my_monst.hpp"
 #include "my_ptrcheck.hpp"
+#include "my_python.hpp"
 #include "my_sprintf.hpp"
+#include "my_string.hpp"
 #include "my_sys.hpp"
 #include "my_thing.hpp"
+
+void Thing::on_owner_set(Thingp what)
+{
+  verify(what);
+  if (! what) {
+    err("Cannot owner_set null thing");
+    return;
+  }
+
+  auto on_owner_set = on_owner_set_do();
+  if (std::empty(on_owner_set)) {
+    return;
+  }
+
+  auto t = split_tokens(on_owner_set, '.');
+  if (t.size() == 2) {
+    auto        mod   = t[ 0 ];
+    auto        fn    = t[ 1 ];
+    std::size_t found = fn.find("()");
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
+
+    dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_string().c_str(), what->to_string().c_str());
+
+    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, (unsigned int) mid_at.x, (unsigned int) mid_at.y);
+  } else {
+    ERR("Bad on_owner_set call [%s] expected mod:function, got %d elems", on_owner_set.c_str(),
+        (int) on_owner_set.size());
+  }
+}
+
+void Thing::on_owner_unset(Thingp what)
+{
+  verify(what);
+  if (! what) {
+    err("Cannot owner_unset null thing");
+    return;
+  }
+
+  auto on_owner_unset = on_owner_unset_do();
+  if (std::empty(on_owner_unset)) {
+    return;
+  }
+
+  auto t = split_tokens(on_owner_unset, '.');
+  if (t.size() == 2) {
+    auto        mod   = t[ 0 ];
+    auto        fn    = t[ 1 ];
+    std::size_t found = fn.find("()");
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
+
+    dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_string().c_str(), what->to_string().c_str());
+
+    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, (unsigned int) mid_at.x, (unsigned int) mid_at.y);
+  } else {
+    ERR("Bad on_owner_unset call [%s] expected mod:function, got %d elems", on_owner_unset.c_str(),
+        (int) on_owner_unset.size());
+  }
+}
 
 Thingp Thing::get_top_owner(void)
 {
@@ -103,6 +167,8 @@ void Thing::set_owner(Thingp owner)
       old_owner->decr_owned_count();
     }
   }
+
+  on_owner_set(owner);
 }
 
 void Thing::remove_owner(void)
@@ -115,6 +181,7 @@ void Thing::remove_owner(void)
 
   dbg("Remove owner %s", old_owner->to_string().c_str());
 
+  on_owner_unset(old_owner);
   set_owner_id(NoThingId);
   old_owner->decr_owned_count();
 
@@ -151,6 +218,8 @@ bool Thing::change_owner(Thingp new_owner)
     }
   }
 
+  on_owner_unset(old_owner);
+
   old_owner->get_itemp()->carrying.remove(id);
 
   hooks_remove();
@@ -172,6 +241,8 @@ bool Thing::change_owner(Thingp new_owner)
     err("Owner change failed, owner is still %s", changed_owner->to_string().c_str());
     return false;
   }
+
+  on_owner_set(new_owner);
 
   return true;
 }

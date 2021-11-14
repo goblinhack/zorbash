@@ -1,13 +1,13 @@
 import zx
 import tp
 
-def on_equip(owner, item, x, y):
+def on_equip(owner, me, x, y):
     zx.topcon("ON")
-    return
+    zx.thing_buff_add(owner, "buff_poison_resist")
 
-def on_unequip(owner, item, x, y):
+def on_unequip(owner, me, x, y):
     zx.topcon("OFF")
-    return
+    zx.thing_buff_remove(owner, "buff_poison_resist")
 
 def tp_init(name, text_name, short_text_name):
     mytp = tp.Tp(name, text_name, short_text_name)
