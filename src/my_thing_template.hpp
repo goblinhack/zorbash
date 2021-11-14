@@ -419,6 +419,8 @@ private:
   std::string _on_tick_do;
   std::string _on_use_do;
   std::string _on_final_use_do;
+  std::string _on_equip_do;
+  std::string _on_unequip_do;
   std::string _projectile_name;
   std::string _resurrect_dice_str;
   std::string _short_text_name;
@@ -501,6 +503,8 @@ public:
   const std::string &on_tick_do(void) const;
   const std::string &on_use_do(void) const;
   const std::string &on_final_use_do(void) const;
+  const std::string &on_equip_do(void) const;
+  const std::string &on_unequip_do(void) const;
   const std::string &projectile_name(void) const;
   const std::string &resurrect_dice_str(void) const;
   const std::string &short_text_name(void) const;
@@ -1204,6 +1208,8 @@ public:
   void set_on_tick_do(const std::string &);
   void set_on_use_do(const std::string &);
   void set_on_final_use_do(const std::string &);
+  void set_on_equip_do(const std::string &);
+  void set_on_unequip_do(const std::string &);
   void set_projectile_name(const std::string &);
   void set_range_max(int);
   void set_rarity(int);

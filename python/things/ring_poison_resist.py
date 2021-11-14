@@ -1,6 +1,14 @@
 import zx
 import tp
 
+def on_equip(owner, item, x, y):
+    zx.topcon("ON")
+    return
+
+def on_unequip(owner, item, x, y):
+    zx.topcon("OFF")
+    return
+
 def tp_init(name, text_name, short_text_name):
     mytp = tp.Tp(name, text_name, short_text_name)
     mytp.set_ai_is_able_to_attack_generators(False)
@@ -270,6 +278,8 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_unused_flag2(False)
     mytp.set_unused_flag30(False)
     mytp.set_unused_flag3(False)
+    mytp.set_on_equip_do("ring_poison_resist.on_equip()")
+    mytp.set_on_unequip_do("ring_poison_resist.on_unequip()")
     mytp.set_unused_flag4(False)
     mytp.set_unused_flag5(False)
     mytp.set_unused_flag6(False)

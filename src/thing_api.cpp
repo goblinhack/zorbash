@@ -5897,6 +5897,18 @@ const std::string &Thing::on_final_use_do(void)
   return (tp()->on_final_use_do());
 }
 
+const std::string &Thing::on_equip_do(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->on_equip_do());
+}
+
+const std::string &Thing::on_unequip_do(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->on_unequip_do());
+}
+
 const std::string &Thing::projectile_name(void)
 {
   TRACE_AND_INDENT();

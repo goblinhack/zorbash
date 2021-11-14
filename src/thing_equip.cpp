@@ -8,9 +8,71 @@
 #include "my_level.hpp"
 #include "my_monst.hpp"
 #include "my_ptrcheck.hpp"
+#include "my_python.hpp"
+#include "my_string.hpp"
 #include "my_sys.hpp"
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"
+
+void Thing::on_equip(Thingp what)
+{
+  verify(what);
+  if (! what) {
+    err("Cannot equip null thing");
+    return;
+  }
+
+  auto on_equip = what->tp()->on_equip_do();
+  if (std::empty(on_equip)) {
+    return;
+  }
+
+  auto t = split_tokens(on_equip, '.');
+  if (t.size() == 2) {
+    auto        mod   = t[ 0 ];
+    auto        fn    = t[ 1 ];
+    std::size_t found = fn.find("()");
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
+
+    dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_string().c_str(), what->to_string().c_str());
+
+    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, (unsigned int) mid_at.x, (unsigned int) mid_at.y);
+  } else {
+    ERR("Bad on_equip call [%s] expected mod:function, got %d elems", on_equip.c_str(), (int) on_equip.size());
+  }
+}
+
+void Thing::on_unequip(Thingp what)
+{
+  verify(what);
+  if (! what) {
+    err("Cannot unequip null thing");
+    return;
+  }
+
+  auto on_unequip = what->tp()->on_unequip_do();
+  if (std::empty(on_unequip)) {
+    return;
+  }
+
+  auto t = split_tokens(on_unequip, '.');
+  if (t.size() == 2) {
+    auto        mod   = t[ 0 ];
+    auto        fn    = t[ 1 ];
+    std::size_t found = fn.find("()");
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
+
+    dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_string().c_str(), what->to_string().c_str());
+
+    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, (unsigned int) mid_at.x, (unsigned int) mid_at.y);
+  } else {
+    ERR("Bad on_unequip call [%s] expected mod:function, got %d elems", on_unequip.c_str(), (int) on_unequip.size());
+  }
+}
 
 bool Thing::is_equipped(Thingp item)
 {
@@ -288,6 +350,8 @@ bool Thing::unequip(const char *why, int equip, bool allowed_to_recarry)
     }
   }
 
+  on_unequip(item);
+
   return true;
 }
 
@@ -390,6 +454,8 @@ bool Thing::equip(Thingp item, int equip)
       }
     }
   }
+
+  on_equip(item);
 
   return true;
 }
