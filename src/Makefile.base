@@ -316,9 +316,10 @@ GAME_OBJECTS=				    \
 
 #
 # compile
+# Nice but creates too many diffs with clang versions
+# @$(shell grep -q goblin $< && echo clang-format -i $<)
 #
 $(OBJDIR)/%.o: %.cpp
-	# @$(shell grep -q goblin $< && echo clang-format -i $<)
 	@echo $(CC) $(EXTRA_CFLAGS) $(CFLAGS) -c -o $@ $<
 	@$(CC) $(EXTRA_CFLAGS) $(CFLAGS) -c -o $@ $<
 
