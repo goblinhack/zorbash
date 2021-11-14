@@ -5,19 +5,20 @@
 
 #include "my_sys.hpp"
 
-static struct tm *getlt (void)
-{ TRACE_AND_INDENT();
-    time_t date;
+static struct tm *getlt(void)
+{
+  TRACE_AND_INDENT();
+  time_t date;
 
-#if defined(BSD) && !defined(POSIX_TYPES)
-    (void) time((long *)(&date));
+#if defined(BSD) && ! defined(POSIX_TYPES)
+  (void) time((long *) (&date));
 #else
-    (void) time(&date);
+  (void) time(&date);
 #endif
-#if (defined(ULTRIX) && !(defined(ULTRIX_PROTO) || defined(NHSTDC))) || (defined(BSD) && !defined(POSIX_TYPES))
-    return(localtime((long *)(&date)));
+#if (defined(ULTRIX) && ! (defined(ULTRIX_PROTO) || defined(NHSTDC))) || (defined(BSD) && ! defined(POSIX_TYPES))
+  return (localtime((long *) (&date)));
 #else
-    return(localtime(&date));
+  return (localtime(&date));
 #endif
 }
 
@@ -34,76 +35,85 @@ static struct tm *getlt (void)
  * 177 ~= 8 reported phases * 22
  * + 11/22 for rounding
  */
-int phase_of_the_moon (void)            /* 0-7, with 0: new, 4: full */
-{ TRACE_AND_INDENT();
-    struct tm *lt = getlt();
-    int epact, diy, goldn;
+int phase_of_the_moon(void) /* 0-7, with 0: new, 4: full */
+{
+  TRACE_AND_INDENT();
+  struct tm *lt = getlt();
+  int        epact, diy, goldn;
 
-    diy = lt->tm_yday;
-    goldn = (lt->tm_year % 19) + 1;
-    epact = (11 * goldn + 18) % 30;
-    if ((epact == 25 && goldn > 11) || epact == 24)
-        epact++;
+  diy   = lt->tm_yday;
+  goldn = (lt->tm_year % 19) + 1;
+  epact = (11 * goldn + 18) % 30;
+  if ((epact == 25 && goldn > 11) || epact == 24)
+    epact++;
 
-    return( (((((diy + epact) * 6) + 11) % 177) / 22) & 7 );
+  return ((((((diy + epact) * 6) + 11) % 177) / 22) & 7);
 }
 
-int friday_13th (void)
-{ TRACE_AND_INDENT();
-    struct tm *lt = getlt();
+int friday_13th(void)
+{
+  TRACE_AND_INDENT();
+  struct tm *lt = getlt();
 
-    return((int)((lt->tm_wday == 5) /* friday */ && (lt->tm_mday == 13)));
+  return ((int) ((lt->tm_wday == 5) /* friday */ && (lt->tm_mday == 13)));
 }
 
-int halloween (void)
-{ TRACE_AND_INDENT();
-    struct tm *lt = getlt();
+int halloween(void)
+{
+  TRACE_AND_INDENT();
+  struct tm *lt = getlt();
 
-    return((int)((lt->tm_mday == 31) && (lt->tm_mon == 9)));
+  return ((int) ((lt->tm_mday == 31) && (lt->tm_mon == 9)));
 }
 
-int night (void)
-{ TRACE_AND_INDENT();
-    int hour = getlt()->tm_hour;
+int night(void)
+{
+  TRACE_AND_INDENT();
+  int hour = getlt()->tm_hour;
 
-    return((hour < 6) || (hour > 21));
+  return ((hour < 6) || (hour > 21));
 }
 
-int december (void)
-{ TRACE_AND_INDENT();
-    struct tm *lt = getlt();
+int december(void)
+{
+  TRACE_AND_INDENT();
+  struct tm *lt = getlt();
 
-    return((int)(lt->tm_mon == 11));
+  return ((int) (lt->tm_mon == 11));
 }
 
-int xmas (void)
-{ TRACE_AND_INDENT();
-    struct tm *lt = getlt();
+int xmas(void)
+{
+  TRACE_AND_INDENT();
+  struct tm *lt = getlt();
 
-    return((int)((lt->tm_mday == 25) && (lt->tm_mon == 11)));
+  return ((int) ((lt->tm_mday == 25) && (lt->tm_mon == 11)));
 }
 
-int first_of_month (void)
-{ TRACE_AND_INDENT();
-    struct tm *lt = getlt();
+int first_of_month(void)
+{
+  TRACE_AND_INDENT();
+  struct tm *lt = getlt();
 
-    return (int)((lt->tm_mday == 1));
+  return (int) ((lt->tm_mday == 1));
 }
 
-int midnight (void)
-{ TRACE_AND_INDENT();
-    return(getlt()->tm_hour == 0);
+int midnight(void)
+{
+  TRACE_AND_INDENT();
+  return (getlt()->tm_hour == 0);
 }
 
-int midnight_close (void)
-{ TRACE_AND_INDENT();
-    int hour = getlt()->tm_hour;
+int midnight_close(void)
+{
+  TRACE_AND_INDENT();
+  int hour = getlt()->tm_hour;
 
-    return (hour > 23);
+  return (hour > 23);
 }
 
-int getyear (void)
-{ TRACE_AND_INDENT();
-    return(1900 + getlt()->tm_year);
+int getyear(void)
+{
+  TRACE_AND_INDENT();
+  return (1900 + getlt()->tm_year);
 }
-

@@ -8,6 +8,9 @@ all: pre
 	fi
 	(cd src; $(MAKE) $@)
 
+format:
+	(cd src; $(MAKE) $@)
+
 clean:
 	(cd src; $(MAKE) $@)
 	/bin/rm -rf data/gfx

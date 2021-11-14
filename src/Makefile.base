@@ -342,6 +342,9 @@ $(TARGET_GAME): $(GAME_OBJECTS)
 .PHONY: clean
 .PHONY: clobber
 
+format:
+	clang-format -i *cpp *hpp
+
 clean:
 	rm -f ../$(TARGET_GAME) ../stdout.txt ../stderr.txt
 	rm -f $(TARGET_GAME) stdout.txt stderr.txt
