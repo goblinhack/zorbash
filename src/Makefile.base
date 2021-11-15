@@ -1,22 +1,22 @@
 
 NAME=zorbash-game
-OBJDIR=.build
+BUILD_DIR=.build
 
 GAME_SOURCE := $(wildcard *.cpp) $(wildcard *.S)
 GAME_OBJECTS :=\
-	$(addprefix $(OBJDIR)/,$(addsuffix .o,$(basename $(GAME_SOURCE))))
+	$(addprefix $(BUILD_DIR)/,$(addsuffix .o,$(basename $(GAME_SOURCE))))
 
 DEP_FILES := $(patsubst %.o,%.d,$(GAME_OBJECTS))
 DEP_FLAGS = -MMD -MP
 
-$(OBJDIR): ; mkdir -p $(OBJDIR)
-$(GAME_OBJECTS): | $(OBJDIR)
+$(BUILD_DIR): ; mkdir -p $(BUILD_DIR)
+$(GAME_OBJECTS): | $(BUILD_DIR)
 
-$(OBJDIR)/%.o: %.cpp
+$(BUILD_DIR)/%.o: %.cpp
 	@echo $(CC) $(EXTRA_CFLAGS) $(CFLAGS) $(DEP_FLAGS) -c -o $@ $<
 	@$(CC) $(EXTRA_CFLAGS) $(CFLAGS) $(DEP_FLAGS) -c -o $@ $<
 
-$(OBJDIR)/%.o: %.S
+$(BUILD_DIR)/%.o: %.S
 	@echo $(CC) -c -o $@ $<
 	@$(CC) -c -o $@ $<
 
@@ -38,17 +38,17 @@ $(TARGET_GAME): $(GAME_OBJECTS)
 clean:
 	rm -f ../$(TARGET_GAME) ../stdout.txt ../stderr.txt
 	rm -f $(TARGET_GAME) stdout.txt stderr.txt
-	rm -rf $(OBJDIR)
-	mkdir -p $(OBJDIR)
+	rm -rf $(BUILD_DIR)
+	mkdir -p $(BUILD_DIR)
 
 clobber: clean
-	rm -rf $(OBJDIR)
-	mkdir -p $(OBJDIR)
+	rm -rf $(BUILD_DIR)
+	mkdir -p $(BUILD_DIR)
 
 all: $(TARGET_GAME)
 
 # delete corresponding object file if dependency file needs regeneration
-$(OBJDIR)/%.d: ; @rm -f "$(@:.d=.o)"
+$(BUILD_DIR)/%.d: ; @rm -f "$(@:.d=.o)"
 
 # include all dependency files
 -include $(DEP_FILES)
