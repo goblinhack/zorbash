@@ -115,13 +115,10 @@ bool Thing::buff_add(Tpp what)
   if (! maybe_itemp()) {
     return false;
   }
-  for (const auto &item : get_itemp()->buffs) {
-    auto t = level->thing_find(item.id);
-    if (t && (t->tp() == what)) {
-      return true;
-    }
-  }
 
+  //
+  // Need to allow for duplicates, so cannot check if the tp exists
+  //
   auto t = level->thing_new(what, mid_at);
   if (! t) {
     return false;
