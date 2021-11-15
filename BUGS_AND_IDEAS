@@ -1,9 +1,7 @@
 
 Bugs
 ----
-- can click on equip to use ring
 - poison resist
-- ring combos?
 - goblin use wand
 - equip armour etc
 - get rid of circle collision stuff
@@ -73,6 +71,10 @@ Doors
 AI
 --
 - add monst states, like wandering (not noticed your stealth), hunting, worshipping, sleeping
+
+Rings
+-----
+- ring combos?
 
 Wands
 -----
