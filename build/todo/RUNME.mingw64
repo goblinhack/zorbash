@@ -34,7 +34,7 @@
 #
 
 . ./VERSION
-. ./scripts/common.sh
+. ./build/common.sh
 
 cat <<%%
 ${RED}
@@ -57,9 +57,9 @@ LOG=./build.log
 MAINTAINER=goblinhack@gmail.com
 
 TOP_DIR=`pwd`
-TP_DIR=third-party
+TP_DIR=build/third-party
 
-. ./scripts/common.sh
+. ./build/common.sh
 
 for i in /mingw64
 do
@@ -201,8 +201,8 @@ mycp()
     popd >/dev/null
 )
 
-mycp "third-party/makedepend-1.0.5/*.exe" $MINGW64_DIR/bin/
-mycp "third-party/makedepend-1.0.5/*.exe" $TOP_DIR
+mycp "build/third-party/makedepend-1.0.5/*.exe" $MINGW64_DIR/bin/
+mycp "build/third-party/makedepend-1.0.5/*.exe" $TOP_DIR
 
 cd $TOP_DIR
 
@@ -211,6 +211,6 @@ cd $TOP_DIR
 if [ $? -eq 0 ]
 then
     /bin/rm -rf data/gfx # For licensing issues with oryx
-    cd windows
+    cd build/windows
     ./windows.sh
 fi

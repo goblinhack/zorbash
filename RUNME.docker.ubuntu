@@ -1,6 +1,6 @@
 #!/bin/bash
 # Credit to https://janakerman.co.uk/docker-git-clone/ for the SSH idea
-cd docker
+cd build/docker
 DOCKER_FILE=ubuntu.dockerfile
 DOCKER_IMAGE=zorbash.ubuntu
 

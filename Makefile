@@ -1,6 +1,6 @@
 pre:
-	@scripts/check_files.sh
-	@scripts/ramdisk.py
+	@build/check_files.sh
+	@build/ramdisk.py
 
 all: pre
 	@if [ ! -f src/Makefile ]; then \

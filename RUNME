@@ -17,8 +17,8 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #
 
-. ./VERSION
-. ./scripts/common.sh
+. ./build/VERSION
+. ./build/common.sh
 
 cat <<%%
 ${RED}
@@ -141,7 +141,7 @@ read_opts()
 
 read_opts $*
 
-run scripts/build.sh $LOG
+run build/build.sh $LOG
 
 if [ $? -ne 0 ]; then
     log_err "Build failed."
@@ -150,4 +150,5 @@ if [ $? -ne 0 ]; then
     exit 1
 else
     log "Built successfully"
+    rm $LOG
 fi

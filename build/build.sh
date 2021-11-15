@@ -17,7 +17,7 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #
 
-. ./scripts/common.sh
+. ./build/common.sh
 
 case `uname` in
     *MING*|*MSYS*)
@@ -421,14 +421,14 @@ else
 fi
 
 PYVER=$($Python --version | sed -e 's/Python //g' -e 's/\.[0-9]*$//g')
-echo "PYVER=$PYVER" > windows/python.version.sh
+echo "PYVER=$PYVER" > build/windows/python.version.sh
 
 log_info "Python lib version         : $PYVER"
 
-cat windows/windows.xml.tmpl | \
+cat build/windows/windows.xml.tmpl | \
     sed -e "s/PYVER/$PYVER/g" \
         -e "s/MYVER/$MYVER/g" \
-    > windows/windows.xml
+    > build/windows/windows.xml
 
 /bin/rm -f data/zorbash-hiscore.txt data/zorbash-config.txt
 
@@ -446,7 +446,7 @@ case `uname` in
         ../makedepend *.cpp -p .o/ 2>/dev/null
 
         if [ $? -ne 0 ]; then
-            ../third-party/makedepend *.cpp -p .o/ 2>/dev/null
+            ../build/third-party/makedepend *.cpp -p .o/ 2>/dev/null
         fi
         ;;
     *)
@@ -459,13 +459,13 @@ if [ $? -ne 0 ]; then
     log_warn "Is makedepend installed? If not:"
     log_warn "  For ubuntu do: sudo apt-get install xutils-dev"
     log_warn "  For MAC    do: sudo port install makedepend"
-    log_warn "  For MingW  do: look in third-party for Win32 binary"
+    log_warn "  For MingW  do: look in build/third-party for Win32 binary"
 
     case `uname` in
         *MING*|*MSYS*)
             echo
             log_warn "If you still can't find it, I have the source in third-party"
-            log_warn "  cd third-party"
+            log_warn "  cd build/third-party"
             log_warn "  tar xvf makedepend-1.0.5.tar.gz"
             log_warn "  cd makedepend-1.0.5"
             log_warn "  ./configure"

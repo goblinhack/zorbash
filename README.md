@@ -1,14 +1,165 @@
+<!-- Bugs                                                                                                                                         -->
+<!-- ----                                                                                                                                         -->
+<!-- - poison resist                                                                                                                              -->
+<!-- - goblin use wand                                                                                                                            -->
+<!-- - equip armour etc                                                                                                                           -->
+<!-- - get rid of circle collision stuff                                                                                                          -->
+<!--                                                                                                                                              -->
+<!-- Next todo                                                                                                                                    -->
+<!-- ---------                                                                                                                                    -->
+<!-- - add poisoned notify on screen from spider?                                                                                                 -->
+<!-- - antipoison potion                                                                                                                          -->
+<!-- - chocolote frog cures poison?                                                                                                               -->
+<!-- - holy water cures poison                                                                                                                    -->
+<!-- - AI if you see a potion of health, drop food in preference?                                                                                 -->
+<!-- - AI did not pick up enchantstone due to space                                                                                               -->
+<!-- - AI wand use                                                                                                                                -->
+<!--                                                                                                                                              -->
+<!-- Level                                                                                                                                        -->
+<!-- -----                                                                                                                                        -->
+<!-- - gold needs to do something - shop? buy/sell                                                                                                -->
+<!-- - totems are like generators, but do not spawn except initially. The worshippers are imbued with power but do not die when the totem does.   -->
+<!-- - exploding bogs                                                                                                                             -->
+<!-- - vaults                                                                                                                                     -->
+<!-- - teleports                                                                                                                                  -->
+<!-- - portable hunger - teleports you to a room full of digestive juices                                                                         -->
+<!-- - moving floor                                                                                                                               -->
+<!-- - shove chocolate frog statue, get frog?                                                                                                     -->
+<!--                                                                                                                                              -->
+<!-- Traps                                                                                                                                        -->
+<!-- -----                                                                                                                                        -->
+<!-- - random floor trap                                                                                                                          -->
+<!-- - moving blocks?                                                                                                                             -->
+<!-- - boulders blocking secret room?                                                                                                             -->
+<!--                                                                                                                                              -->
+<!-- Sound                                                                                                                                        -->
+<!-- -----                                                                                                                                        -->
+<!-- - sword noises                                                                                                                               -->
+<!--                                                                                                                                              -->
+<!-- Skills                                                                                                                                       -->
+<!-- ------                                                                                                                                       -->
+<!-- - melee in shallow water should have advantage over something in deep water                                                                  -->
+<!-- - challenging learning spot to acquire skills?                                                                                               -->
+<!-- - skills                                                                                                                                     -->
+<!-- - skill, dodge                                                                                                                               -->
+<!-- - skill, instakill, once per level                                                                                                           -->
+<!-- - skill, heroic charge, rush enemy                                                                                                           -->
+<!-- - skill, guaranteed hit, but you have no defense in the next move                                                                            -->
+<!-- - skill, whirl attack, attack 2 or 3 enemies                                                                                                 -->
+<!-- - skill, healing                                                                                                                             -->
+<!-- - skill, defensive mode, recover stamina                                                                                                     -->
+<!-- - skill, kneecap, hobble enemy                                                                                                               -->
+<!-- - skill, switch to defensive                                                                                                                 -->
+<!-- - skill, blind strike, attack the eyes                                                                                                       -->
+<!-- - skill, slash and roll                                                                                                                      -->
+<!-- - skill, slash and jump                                                                                                                      -->
+<!-- - skill, spring attack, give up a round for 2.5 times damage                                                                                 -->
+<!--                                                                                                                                              -->
+<!-- Poison                                                                                                                                       -->
+<!-- ------                                                                                                                                       -->
+<!--                                                                                                                                              -->
+<!-- Gasses                                                                                                                                       -->
+<!-- ------                                                                                                                                       -->
+<!-- - gasses that spread however you will need to allow levels with gas or fire to tick so it can dissipate                                      -->
+<!--                                                                                                                                              -->
+<!-- Doors                                                                                                                                        -->
+<!-- -----                                                                                                                                        -->
+<!-- - hit door, summon monst chance                                                                                                              -->
+<!-- - hit door, wake sleeping monsters                                                                                                           -->
+<!--                                                                                                                                              -->
+<!-- AI                                                                                                                                           -->
+<!-- --                                                                                                                                           -->
+<!-- - add monst states, like wandering (not noticed your stealth), hunting, worshipping, sleeping                                                -->
+<!--                                                                                                                                              -->
+<!-- Rings                                                                                                                                        -->
+<!-- -----                                                                                                                                        -->
+<!-- - ring combos?                                                                                                                               -->
+<!--                                                                                                                                              -->
+<!-- Wands                                                                                                                                        -->
+<!-- -----                                                                                                                                        -->
+<!-- - staves that recharge                                                                                                                       -->
+<!-- - wand of death should stop regenerating monst                                                                                               -->
+<!--                                                                                                                                              -->
+<!-- Potions                                                                                                                                      -->
+<!-- -------                                                                                                                                      -->
+<!-- - potion of descent does not cause damage and floor reheals                                                                                  -->
+<!--   throwing it has similar effect                                                                                                             -->
+<!--                                                                                                                                              -->
+<!-- Weapons                                                                                                                                      -->
+<!-- -------                                                                                                                                      -->
+<!-- - gauntlet of lion armour (Henry II)                                                                                                         -->
+<!-- - strength penalties                                                                                                                         -->
+<!-- - axe hits all monsts around you ?                                                                                                           -->
+<!-- - darts / poison darts                                                                                                                       -->
+<!-- - three damage types, blunt(club warhammer) pierce(arrow javelin) or cut(axe scythe swwrd)                                                   -->
+<!-- - blessed items resist explosion                                                                                                             -->
+<!-- - warhammer should kill parent jelly in one go                                                                                               -->
+<!-- - warhammer smash skeletton                                                                                                                  -->
+<!-- - fire portion                                                                                                                               -->
+<!-- - enchant potion                                                                                                                             -->
+<!-- - enchant potion of descent radius                                                                                                           -->
+<!-- - have a monster use a potion?                                                                                                               -->
+<!-- - (blunt/warhamma?) slime specific weapon does not cause slimes to split                                                                     -->
+<!-- - plutonium sword                                                                                                                            -->
+<!--                                                                                                                                              -->
+<!-- Water                                                                                                                                        -->
+<!-- -----                                                                                                                                        -->
+<!-- - water, kraken, eels; kraken will move out of shallows                                                                                      -->
+<!-- - make ripples, summon monsters                                                                                                              -->
+<!--                                                                                                                                              -->
+<!-- Monsts                                                                                                                                       -->
+<!-- ------                                                                                                                                       -->
+<!-- - random carry of gold                                                                                                                       -->
+<!-- - acid jellies should damage weapons                                                                                                         -->
+<!-- - spider that throws web?                                                                                                                    -->
+<!-- - grass death wakes monsters                                                                                                                 -->
+<!-- - mold growth / floor puddings                                                                                                               -->
+<!-- - bloodgrass, grows near corpses                                                                                                             -->
+<!-- - yak that eats foilage                                                                                                                      -->
+<!-- - in a spider web every hit gets you                                                                                                         -->
+<!-- - shove/lure monsters into webs?                                                                                                             -->
+<!-- - rat pack and king rat                                                                                                                      -->
+<!-- - goblin mage                                                                                                                                -->
+<!-- - goblin generator                                                                                                                           -->
+<!-- - pack spawn of goblins?                                                                                                                     -->
+<!-- - zombie camel?                                                                                                                              -->
+<!-- - new monst? should explode in fire?                                                                                                         -->
+<!-- - sewer wolf?                                                                                                                                -->
+<!-- - invisible monst?                                                                                                                           -->
+<!-- - monster that runs from light ?                                                                                                             -->
+<!-- - tentacles out of the ground that try to surround you                                                                                       -->
+<!-- - creature that pretends to be a stone until close by then sprouts legs                                                                      -->
+<!-- - dungeon walrus; long headed walrus with many tusks                                                                                         -->
+<!-- - gloat - cube like creature that explodes on touch and then its spirit gloats over your death                                               -->
+<!-- - pet robot                                                                                                                                  -->
+<!--                                                                                                                                              -->
+<!-- Gods                                                                                                                                         -->
+<!-- ----                                                                                                                                         -->
+<!-- - runes lean more torwards old gods                                                                                                          -->
+<!--                                                                                                                                              -->
+<!-- Gfx                                                                                                                                          -->
+<!-- ---                                                                                                                                          -->
+<!-- - tiny pixel effects that bounce?                                                                                                            -->
+<!--                                                                                                                                              -->
+<!-- Player                                                                                                                                       -->
+<!-- ------                                                                                                                                       -->
+<!-- - weight factors into jumping                                                                                                                -->
+<!-- - carry eat slime mold and gain acid resis?                                                                                                  -->
+<!--                                                                                                                                              -->
+<!-- Spells                                                                                                                                       -->
+<!-- ------                                                                                                                                       -->
+<!-- - spell capacitor                                                                                                                            -->
+<!-- - spell chaining                                                                                                                             -->
+<!--                                                                                                                                              -->
+
 Zorbash
 -------
 
-Welcome to the lair of the dread tentacleye, Zorbash.
-Liberate the Orb of Zorb and defeat Zorbash to win.
+Welcome to the lair of the dread tentacleye, Zorbash. Liberate the Orb of Zorb and defeat Zorbash to win.
 
 (Well you will once the game is finished! :)
 
-This is work in progress. Consider this in demo mode in that you
-currently start with a bunch of equipment each time. That will
-change once I add character seletion.
+This is work in progress. Consider this in demo mode in that you currently start with a bunch of equipment each time. That will change once I add character seletion.
 
 Comments and suggestions welcome at this early stage.
 
