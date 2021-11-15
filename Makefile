@@ -20,4 +20,6 @@ clobber:
 	rm src/Makefile
 	/bin/rm -rf data/gfx
 
+.PHONY: all clean clobber format pre
+
 .DEFAULT_GOAL := all
