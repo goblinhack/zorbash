@@ -73,12 +73,8 @@ bool Thing::buff_remove(Thingp what)
     return false;
   }
 
-  Thingp top_owner = get_top_owner();
-  if (top_owner) {
-    if (top_owner->is_player()) {
-      dbg("Removing from buffbox %s", what->to_string().c_str());
-      top_owner->buffbox_id_remove(what);
-    }
+  if (is_player()) {
+    buffbox_id_remove(what);
   }
 
   what->remove_owner();

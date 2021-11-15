@@ -321,6 +321,11 @@ bool Thing::unequip(const char *why, int equip, bool allowed_to_recarry)
   equip_remove_anim(equip);
 
   //
+  // Call prior to dropping so the owner is prserved.
+  //
+  on_unequip(item);
+
+  //
   // Put it back in the bag
   //
   if (allowed_to_recarry) {
@@ -349,8 +354,6 @@ bool Thing::unequip(const char *why, int equip, bool allowed_to_recarry)
       }
     }
   }
-
-  on_unequip(item);
 
   return true;
 }

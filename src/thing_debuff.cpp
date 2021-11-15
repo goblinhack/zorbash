@@ -72,11 +72,8 @@ bool Thing::debuff_remove(Thingp what)
     return false;
   }
 
-  Thingp top_owner = get_top_owner();
-  if (top_owner) {
-    if (top_owner->is_player()) {
-      top_owner->debuffbox_id_remove(what);
-    }
+  if (is_player()) {
+    debuffbox_id_remove(what);
   }
 
   what->remove_owner();

@@ -411,6 +411,7 @@ bool Level::create_dungeon(point3d at, int seed)
               t->carry(w3);
             }
 
+#if 0
             {
               thing_new("sword_short_wooden", point(x + 1, y));
             }
@@ -418,6 +419,7 @@ bool Level::create_dungeon(point3d at, int seed)
             {
               thing_new("ring_poison_resist", point(x + 2, y));
             }
+#endif
 
             {
               auto f = thing_new("enchantstone", point(x, y));

@@ -9,7 +9,7 @@ def on_owner_set(me, owner, x, y):
 
 def on_owner_unset(me, owner, x, y):
     if zx.thing_is_player(owner):
-        zx.topcon("A green glow fades.")
+        zx.topcon("The green glow around you fades.")
 
 def on_tick(owner, item, x, y):
     poison = zx.thing_get_poison(item)

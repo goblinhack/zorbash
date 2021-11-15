@@ -304,7 +304,6 @@ static uint8_t wid_inventory_item_option_drop(Widp w, int32_t x, int32_t y, uint
 
   if (what) {
     wid_inventory_fini();
-    player->log("Drop %s", what->to_string().c_str());
     player->drop(what);
     wid_inventory_init();
   }
