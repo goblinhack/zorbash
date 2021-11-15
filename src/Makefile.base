@@ -1,19 +1,20 @@
 
 NAME=zorbash-game
-OBJDIR=.o
+OBJDIR=.build
 
 GAME_SOURCE := $(wildcard *.cpp) $(wildcard *.S)
 GAME_OBJECTS :=\
 	$(addprefix $(OBJDIR)/,$(addsuffix .o,$(basename $(GAME_SOURCE))))
 
-#
-# compile
-# Nice but creates too many diffs with clang versions
-# @$(shell grep -q goblin $< && echo clang-format -i $<)
-#
+DEP_FILES := $(patsubst %.o,%.d,$(GAME_OBJECTS))
+DEP_FLAGS = -MMD -MP
+
+$(OBJDIR): ; mkdir -p $(OBJDIR)
+$(GAME_OBJECTS): | $(OBJDIR)
+
 $(OBJDIR)/%.o: %.cpp
-	@echo $(CC) $(EXTRA_CFLAGS) $(CFLAGS) -c -o $@ $<
-	@$(CC) $(EXTRA_CFLAGS) $(CFLAGS) -c -o $@ $<
+	@echo $(CC) $(EXTRA_CFLAGS) $(CFLAGS) $(DEP_FLAGS) -c -o $@ $<
+	@$(CC) $(EXTRA_CFLAGS) $(CFLAGS) $(DEP_FLAGS) -c -o $@ $<
 
 $(OBJDIR)/%.o: %.S
 	@echo $(CC) -c -o $@ $<
@@ -31,8 +32,8 @@ $(TARGET_GAME): $(GAME_OBJECTS)
 #
 # To force clean and avoid "up to date" warning.
 #
-.PHONY: clean
-.PHONY: clobber
+# clean/clobber
+.PHONY: all clean clobber
 
 clean:
 	rm -f ../$(TARGET_GAME) ../stdout.txt ../stderr.txt
@@ -45,3 +46,9 @@ clobber: clean
 	mkdir -p $(OBJDIR)
 
 all: $(TARGET_GAME)
+
+# delete corresponding object file if dependency file needs regeneration
+$(OBJDIR)/%.d: ; @rm -f "$(@:.d=.o)"
+
+# include all dependency files
+-include $(DEP_FILES)

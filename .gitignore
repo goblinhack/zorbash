@@ -17,3 +17,4 @@ zorbash-game.exe
 zorbash-game.exe.dSYM/
 *.session
 */*.session
+src/.build/

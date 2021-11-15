@@ -441,44 +441,6 @@ rm -f Makefile
 cat Makefile.base | sed '/DO NOT DELETE/,$d' > Makefile.tmp
 mv Makefile.tmp Makefile
 
-case `uname` in
-    *MING*|*MSYS*)
-        ../makedepend *.cpp -p .o/ 2>/dev/null
-
-        if [ $? -ne 0 ]; then
-            ../build/third-party/makedepend *.cpp -p .o/ 2>/dev/null
-        fi
-        ;;
-    *)
-        makedepend *.cpp -p .o/ 2>/dev/null
-        ;;
-esac
-
-if [ $? -ne 0 ]; then
-
-    log_warn "Is makedepend installed? If not:"
-    log_warn "  For ubuntu do: sudo apt-get install xutils-dev"
-    log_warn "  For MAC    do: sudo port install makedepend"
-    log_warn "  For MingW  do: look in build/third-party for Win32 binary"
-
-    case `uname` in
-        *MING*|*MSYS*)
-            echo
-            log_warn "If you still can't find it, I have the source in third-party"
-            log_warn "  cd build/third-party"
-            log_warn "  tar xvf makedepend-1.0.5.tar.gz"
-            log_warn "  cd makedepend-1.0.5"
-            log_warn "  ./configure"
-            ;;
-    esac
-
-    log_warn "Hit enter to continue; I'll ignore this error."
-    log_warn "It's not essential. Rebuilds will be slower is all."
-    read dummy
-
-    makedepend *.cpp -p .o/ 2>/dev/null
-fi
-
 cd ..
 
 #
