@@ -13,11 +13,8 @@ def on_open(me, x, y):
 
 def tp_init(name):
     mytp = tp.Tp(name, "reinforced door")
-    mytp.set_collision_attack(True)
     mytp.set_collision_check(True)
-    mytp.set_collision_circle(True)
     mytp.set_collision_hit_priority(9)
-    mytp.set_collision_radius(0.40)
     mytp.set_gfx_animated(True)
     mytp.set_gfx_health_bar_autohide(True)
     mytp.set_gfx_oversized_and_on_floor(True)

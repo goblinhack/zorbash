@@ -5,11 +5,8 @@ import tp
 def lava_init(name, text_name, tiles=[]):
     mytp = tp.Tp(name, text_name)
     mytp.set_ai_obstacle(True)
-    mytp.set_collision_attack(True)
     mytp.set_collision_check(True)
-    mytp.set_collision_circle(True)
     mytp.set_collision_hit_priority(100)
-    mytp.set_collision_radius(0.40)
     mytp.set_damage_melee_dice("1d12+6")
     mytp.set_gfx_animated(True)
     mytp.set_gfx_glows(True)

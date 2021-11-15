@@ -4,11 +4,8 @@ import tp
 
 def tp_init(name, tiles=[]):
     mytp = tp.Tp(name, "foilage")
-    mytp.set_collision_attack(True)
     mytp.set_collision_check(True)
-    mytp.set_collision_circle(True)
     mytp.set_collision_hit_priority(2)
-    mytp.set_collision_radius(0.40)
     mytp.set_gfx_long_shadow_caster(True)
     mytp.set_gfx_oversized_and_on_floor(True)
     mytp.set_gfx_shown_in_bg(True)

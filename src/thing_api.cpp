@@ -217,34 +217,16 @@ int Thing::blast_min_radius(void)
   return (tp()->blast_min_radius());
 }
 
-int Thing::collision_attack(void)
+int Thing::collision_hit_priority(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->collision_attack());
-}
-
-int Thing::collision_box(void)
-{
-  TRACE_AND_INDENT();
-  return (tp()->collision_box());
+  return (tp()->collision_hit_priority());
 }
 
 int Thing::collision_check(void)
 {
   TRACE_AND_INDENT();
   return (tp()->collision_check());
-}
-
-int Thing::collision_circle(void)
-{
-  TRACE_AND_INDENT();
-  return (tp()->collision_circle());
-}
-
-int Thing::collision_hit_priority(void)
-{
-  TRACE_AND_INDENT();
-  return (tp()->collision_hit_priority());
 }
 
 int Thing::environ_damage_doubled_from_acid(void)

@@ -5,9 +5,7 @@ import tp
 def tp_init(name, text_name, tiles=[]):
     mytp = tp.Tp(name, text_name)
     mytp.set_ai_obstacle(True)
-    mytp.set_collision_circle(True)
     mytp.set_collision_hit_priority(2)
-    mytp.set_collision_radius(0.40)
     mytp.set_gfx_animated_can_hflip(True)
     mytp.set_gfx_animated(True)
     mytp.set_gfx_flickers(True)

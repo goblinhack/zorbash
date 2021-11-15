@@ -32,85 +32,6 @@ public:
 static std::vector< class ThingColl > thing_colls;
 static const float                    thing_collision_tiles = 1;
 
-static int circle_circle_collision(Thingp A, fpoint future_pos, Thingp B, fpoint B_at, fpoint *intersect)
-{
-  // fpoint A0, A1, A2, A3;
-  // A->to_coords(&A0, &A1, &A2, &A3);
-  // float A_radius = fmin((A1.x - A0.x) / 2.0, (A2.y - A0.y) / 2.0);
-  float A_radius = A->tp()->collision_radius();
-  float B_radius = B->tp()->collision_radius();
-
-  // fpoint B0, B1, B2, B3;
-  // B->to_coords(&B0, &B1, &B2, &B3);
-  // float B_radius = fmin((B1.x - B0.x) / 2.0, (B2.y - B0.y) / 2.0);
-
-  fpoint n             = B_at - future_pos;
-  float  touching_dist = A_radius + B_radius;
-  float  dist_squared  = n.x * n.x + n.y * n.y;
-
-  float diff = dist_squared - touching_dist * touching_dist;
-  if (diff > 0.0) {
-    //
-    // Circles are not touching
-    //
-    return false;
-  }
-
-  diff = sqrt(fabs(diff));
-  diff /= 2.0;
-
-  n = unit(n);
-  n *= (A_radius - diff);
-  n += future_pos;
-
-  if (intersect) {
-    *intersect = n;
-  }
-
-  return true;
-}
-
-static int circle_circle_collision_attack(Thingp A, fpoint future_pos, Thingp B, fpoint B_at, fpoint *intersect)
-{
-  // fpoint A0, A1, A2, A3;
-  // A->to_coords(&A0, &A1, &A2, &A3);
-  // float A_radius = fmin((A1.x - A0.x) / 2.0, (A2.y - A0.y) / 2.0);
-  float A_radius = A->tp()->collision_radius();
-  float B_radius = B->tp()->collision_attack_radius();
-  if (! B_radius) {
-    B_radius = B->tp()->collision_radius();
-  }
-
-  // fpoint B0, B1, B2, B3;
-  // B->to_coords(&B0, &B1, &B2, &B3);
-  // float B_radius = fmin((B1.x - B0.x) / 2.0, (B2.y - B0.y) / 2.0);
-
-  fpoint n             = B_at - future_pos;
-  float  touching_dist = A_radius + B_radius;
-  float  dist_squared  = n.x * n.x + n.y * n.y;
-
-  float diff = dist_squared - touching_dist * touching_dist;
-  if (diff > 0.0) {
-    //
-    // Circles are not touching
-    //
-    return false;
-  }
-
-  diff = sqrt(fabs(diff));
-  diff /= 2.0;
-
-  n = unit(n);
-  n *= (A_radius - diff);
-  n += future_pos;
-
-  if (intersect) {
-    *intersect = n;
-  }
-
-  return true;
-}
-
 //
 // Add a thing to the list of things that could be hit on this attack.
 //
@@ -243,45 +164,7 @@ bool Thing::collision_find_best_target(bool *target_attacked, bool *target_overl
   return (ret);
 }
 
-bool things_overlap(const Thingp A, point A_at, const Thingp B)
-{
-  //
-  // FYI This path is used for monst attacks
-  //
-  if (A->tp()->collision_circle() && B->tp()->collision_circle()) {
-    if (circle_circle_collision(A, // circle
-                                make_fpoint(A_at),
-                                B, // box
-                                make_fpoint(B->mid_at), nullptr)) {
-#if 0
-      LOG("%s %s (test4) overlaps", A->to_string().c_str(), B->to_string().c_str());
-#endif
-      return true;
-    }
-  }
-
-  return false;
-}
-
-bool things_overlap_attack(const Thingp A, point A_at, const Thingp B)
-{
-  if (A->tp()->collision_circle() && B->tp()->collision_circle()) {
-    if (circle_circle_collision_attack(A, // circle
-                                       make_fpoint(A_at),
-                                       B, // box
-                                       make_fpoint(B->mid_at), nullptr)) {
-#if 0
-      LOG("%s %s (test7) overlaps", A->to_string().c_str(), B->to_string().c_str());
-#endif
-      return true;
-    }
-  }
-
-#if 0
-  LOG("%s %s (test10) no overlaps", A->to_string().c_str(), B->to_string().c_str());
-#endif
-  return false;
-}
+bool things_overlap(const Thingp A, point A_at, const Thingp B) { return A_at == B->mid_at; }
 
 //
 // If two things collide, return false to stop the walk
@@ -320,7 +203,7 @@ bool Thing::collision_add_candidates(Thingp it, point future_pos, int x, int y, 
   if (is_player() && it->is_collectable()) {
     dbg("No; allow items to be collected manually");
   } else if (! it->is_dead && possible_to_attack(it)) {
-    if (things_overlap_attack(me, future_pos, it)) {
+    if (things_overlap(me, future_pos, it)) {
       dbg("Yes; candidate to attack");
       thing_add_ai_possible_hit(it, "battle");
     } else {
@@ -348,7 +231,7 @@ bool Thing::collision_add_candidates(Thingp it, point future_pos, int x, int y, 
     //
     // Fire attack?
     //
-    if (things_overlap_attack(me, future_pos, it)) {
+    if (things_overlap(me, future_pos, it)) {
       dbg("Yes; allow fire to burn %s", it->to_string().c_str());
       thing_add_ai_possible_hit(it, "burn");
     } else {
@@ -358,7 +241,7 @@ bool Thing::collision_add_candidates(Thingp it, point future_pos, int x, int y, 
     //
     // Fire attack?
     //
-    if (things_overlap_attack(me, future_pos, it)) {
+    if (things_overlap(me, future_pos, it)) {
       dbg("Yes; allow fire to burn %s", it->to_string().c_str());
       thing_add_ai_possible_hit(it, "burn");
     } else {
@@ -495,7 +378,7 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
       //
       // Weapon hits monster or generator.
       //
-      if (things_overlap_attack(me, future_pos, it)) {
+      if (things_overlap(me, future_pos, it)) {
         dbg("Yes; overlaps and can attack");
         return true;
       }
@@ -508,7 +391,7 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
         dbg("Yes; overlaps and can open");
         if (open_door(it)) {
           return false;
-        } else if (things_overlap_attack(me, future_pos, it)) {
+        } else if (things_overlap(me, future_pos, it)) {
           dbg("Yes; overlaps and can attack");
           return true;
         }
@@ -611,7 +494,7 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
       return false;
     }
 
-    if (things_overlap_attack(me, future_pos, it)) {
+    if (things_overlap(me, future_pos, it)) {
       dbg("Yes; overlaps barrel");
       return true;
     }
@@ -629,7 +512,7 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
       return false;
     }
 
-    if (things_overlap_attack(me, future_pos, it)) {
+    if (things_overlap(me, future_pos, it)) {
       dbg("Yes; overlaps brazier");
       return true;
     }
@@ -642,7 +525,7 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
     if (is_minion()) {
       if (it->is_minion_generator()) {
         if (it == get_top_minion_owner()) {
-          if (things_overlap_attack(me, future_pos, it)) {
+          if (things_overlap(me, future_pos, it)) {
             dbg("Yes; cannot pass through my manifestor");
             return true;
           }

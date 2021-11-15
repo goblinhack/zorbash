@@ -585,10 +585,7 @@ public:
   int blast_min_radius(void);
   int capacity_height(void);
   int capacity_width(void);
-  int collision_attack(void);
-  int collision_box(void);
   int collision_check(void);
-  int collision_circle(void);
   int collision_hit_priority(void);
   int decr_charge_count(int);
   int decr_charge_count(void);
@@ -1499,7 +1496,6 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my);
 
 bool things_overlap(Thingp t, Thingp o);
 bool things_overlap(Thingp t, fpoint t_at, Thingp o);
-bool things_overlap_attack(Thingp t, fpoint t_at, Thingp o);
 int  bag_estimate_volume(const std::list< Thingp > &items);
 
 extern Thingp g_debug_thing;

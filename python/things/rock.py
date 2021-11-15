@@ -23,8 +23,6 @@ def tp_init(name,
 
     mytp = tp.Tp(name, "rock")
     mytp.set_ai_obstacle(True)
-    mytp.set_collision_circle(True)
-    mytp.set_collision_radius(0.40)
     mytp.set_gfx_shown_in_bg(True)
     mytp.set_health_initial_dice("999")
     mytp.set_is_able_to_fall(False)

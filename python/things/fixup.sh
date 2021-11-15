@@ -154,10 +154,7 @@ do
       set_attack_lunge \
       set_attack_meat \
       set_attack_undead \
-      set_collision_attack \
-      set_collision_box \
       set_collision_check \
-      set_collision_circle \
       set_collision_hit_priority \
       set_enchant_level \
       set_enchant_max \

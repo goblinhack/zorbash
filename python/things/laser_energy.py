@@ -13,8 +13,6 @@ def on_death(me, x, y):
 #
 def tp_init(name, text_name, short_text_name):
     mytp = tp.Tp(name, text_name, short_text_name)
-    mytp.set_collision_circle(True)
-    mytp.set_collision_radius(0.40)
     mytp.set_damage_melee_dice("1d6") # This is the damage when the monst fires
     mytp.set_collision_check(True)
     mytp.set_is_interesting(True)

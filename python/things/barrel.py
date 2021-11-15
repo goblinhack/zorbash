@@ -24,11 +24,8 @@ def on_death(me, x, y):
 def tp_init(name, text_name):
     mytp = tp.Tp(name, text_name)
     mytp.set_ai_obstacle(True)
-    mytp.set_collision_attack(True)
     mytp.set_collision_check(True)
-    mytp.set_collision_circle(True)
     mytp.set_collision_hit_priority(1)
-    mytp.set_collision_radius(0.40)
     mytp.set_damage_crush_dice("2d6")
     mytp.set_environ_damage_doubled_from_fire(True)
     mytp.set_gfx_oversized_and_on_floor(True)

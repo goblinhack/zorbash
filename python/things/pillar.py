@@ -5,8 +5,6 @@ import tp
 def tp_init(name, text_name, tiles=[]):
     mytp = tp.Tp(name, text_name)
     mytp.set_ai_obstacle(True)
-    mytp.set_collision_circle(True)
-    mytp.set_collision_radius(0.40)
     mytp.set_gfx_oversized_and_on_floor(True)
     mytp.set_gfx_short_shadow_caster(True)
     mytp.set_gfx_show_outlined(True)

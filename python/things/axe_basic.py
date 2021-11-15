@@ -12,11 +12,8 @@ def on_use(owner, item, target, x, y):
 
 def init_swing(name):
     mytp = tp.Tp(name)
-    mytp.set_collision_attack(True)
     mytp.set_collision_check(True)
-    mytp.set_collision_circle(True)
     mytp.set_collision_hit_priority(10)
-    mytp.set_collision_radius(0.40)
     mytp.set_gfx_animated_can_hflip(True)
     mytp.set_gfx_animated_can_vflip(True)
     mytp.set_gfx_animated(True)
@@ -90,11 +87,8 @@ def init_carry(name):
 
 def init_weapon(name, text_name, short_text_name):
     mytp = tp.Tp(name, text_name, short_text_name)
-    mytp.set_collision_attack(True)
     mytp.set_collision_check(True)
-    mytp.set_collision_circle(True)
     mytp.set_collision_hit_priority(10)
-    mytp.set_collision_radius(0.40)
     mytp.set_damage_melee_dice("1d10+1")
     mytp.set_gfx_animated_can_hflip(True)
     mytp.set_gfx_animated(True)

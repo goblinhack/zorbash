@@ -4,8 +4,6 @@ import tp
 
 def tp_init(name, text_name, short_text_name):
     mytp = tp.Tp(name, text_name, short_text_name)
-    mytp.set_collision_circle(True)
-    mytp.set_collision_radius(0.40)
     mytp.set_gfx_animated(True)
     mytp.set_gfx_short_shadow_caster(True)
     mytp.set_gfx_shown_in_bg(True)

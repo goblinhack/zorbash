@@ -13,11 +13,8 @@ def on_open(me, x, y):
 
 def tp_init(name):
     mytp = tp.Tp(name, "wooden door")
-    mytp.set_collision_attack(True)
     mytp.set_collision_check(True)
-    mytp.set_collision_circle(True)
     mytp.set_collision_hit_priority(9)
-    mytp.set_collision_radius(0.40)
     mytp.set_environ_damage_doubled_from_fire(True)
     mytp.set_is_interesting(True)
     mytp.set_gfx_animated(True)

@@ -63,9 +63,6 @@ private:
   Dice _on_idle_dice {};
   Dice _resurrect_dice {};
 
-  float _collision_attack_radius {};
-  float _collision_radius {};
-
   fsize _sz;
 
   int _ai_avoid_distance {};
@@ -114,9 +111,7 @@ private:
   int _capacity_width {};
   int _charge_count {};
   int _collision_attack {};
-  int _collision_box {};
   int _collision_check {};
-  int _collision_circle {};
   int _collision_hit_priority {};
   int _enchant_level {};
   int _enchant_max {};
@@ -559,9 +554,6 @@ public:
   const Tilemap *tp_vert_tiles(void) const;
   const Tilemap *tp_x_tiles(void) const;
 
-  float collision_attack_radius(void) const;
-  float collision_radius(void) const;
-
   int ai_avoid_distance(void) const;
   int ai_resent_count(void) const;
   int ai_obstacle(void) const;
@@ -585,10 +577,7 @@ public:
   int capacity_height(void) const;
   int capacity_width(void) const;
   int charge_count(void) const;
-  int collision_attack(void) const;
-  int collision_box(void) const;
   int collision_check(void) const;
-  int collision_circle(void) const;
   int collision_hit_priority(void) const;
   int environ_damage_doubled_from_acid(void) const;
   int environ_damage_doubled_from_fire(void) const;
@@ -908,11 +897,8 @@ public:
   void set_charge_count(int);
   void set_collision_attack(int);
   void set_collision_attack_radius(float);
-  void set_collision_box(int);
   void set_collision_check(int);
-  void set_collision_circle(int);
   void set_collision_hit_priority(int);
-  void set_collision_radius(float);
   void set_damage_bite_dice(const std::string &);
   void set_damage_swallow_dice(const std::string &);
   void set_damage_crush_dice(const std::string &);
