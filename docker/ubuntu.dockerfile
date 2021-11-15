@@ -3,7 +3,7 @@
 #
 # https://github.com/dockerfile/ubuntu
 #
-FROM ubuntu:21.04
+FROM ubuntu:latest
 
 ARG SSH_KEY
 ARG SSH_KEY_PASSPHRASE

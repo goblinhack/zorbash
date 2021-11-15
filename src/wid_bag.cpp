@@ -421,7 +421,7 @@ bool Game::wid_bag_move_item(Thingp t)
   for (auto b : game->bags) {
     for (auto w : wid_find_all_containing(b->wid_bag_container, "wid_bag item")) {
       player->log("+ current item %s", wid_get_name(w).c_str());
-      if (wid_get_thing_id_context(w).id == t->id) {
+      if (wid_get_thing_id_context(w).id == t->id.id) {
         player->log("Moving bag thing %s", t->to_string().c_str());
         wid_bag_container = wid_get_parent(w);
         bag_id            = wid_get_thing_id_context(wid_bag_container);
