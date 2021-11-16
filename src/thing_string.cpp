@@ -35,6 +35,19 @@ std::string Thing::to_string(void)
                            is_resurrecting ? "/resurrecting" : "", is_offscreen ? "/offscr" : "",
                            is_on_fire() ? "/onfire" : "", is_hidden ? "/hidden" : "", is_jumping ? "/jumping" : "",
                            is_moving ? "/mv" : "", is_falling ? "/fall" : "", mid_at.x, mid_at.y));
+  } else if (g_loading) {
+    TRACE_AND_INDENT();
+    //
+    // Don't get health when loading as that looks for the owner
+    //
+    return (string_sprintf(
+        "L%d,%d,%d %08" PRIx32 "(%s%s%s%s%s%s%s%s%s%s%s%s%s%s @%d,%d)", level->world_at.x, level->world_at.y,
+        level->world_at.z, id, tpp->name().c_str(), is_dead ? "/dead" : "", is_resurrecting ? "/resurrecting" : "",
+        is_offscreen ? "/offscr" : "", is_on_fire() ? "/onfire" : "", is_hidden ? "/hidden" : "",
+        is_jumping ? "/jumping" : "", is_moving ? "/mv" : "", is_falling ? "/fall" : "",
+        is_changing_level ? "/chg-level" : "", is_waiting_to_ascend_dungeon ? "/ascend-dungeon" : "",
+        is_waiting_to_descend_dungeon ? "/descend-dungeon" : "", is_waiting_to_ascend_sewer ? "/ascend-sewer" : "",
+        is_waiting_to_descend_sewer ? "/descend-sewer" : "", mid_at.x, mid_at.y));
   } else if (get_health_max() || is_tickable() || is_interesting()) {
     TRACE_AND_INDENT();
     return (string_sprintf(

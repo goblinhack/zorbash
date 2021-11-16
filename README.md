@@ -4,7 +4,8 @@
 <!--                                                                                                                                              -->
 <!-- Next todo                                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
-<!-- - poison resist stacking                                                                                                                     -->
+<!-- - slowdown on level 2                                                                                                                        -->
+<!-- - with 1 torch, what does the robot see?                                                                                                     -->
 <!-- - equip armour etc                                                                                                                           -->
 <!-- - antipoison potion                                                                                                                          -->
 <!-- - chocolote frog cures poison?                                                                                                               -->
@@ -252,7 +253,6 @@ SDL2 and Python3 is needed.
 </pre>
 - MacOS (install Mac Ports first [found here](https://www.macports.org/))
 <pre>
-    sudo port install makedepend
     sudo port install libsdl2
     sudo port install libsdl2_mixer
     sudo port install libsdl2_ttf

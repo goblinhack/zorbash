@@ -272,10 +272,8 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
   //
   set_where_i_dropped_an_item_last(point(-1, -1));
 
-  if (wait_or_collect) {
-    if (is_player()) {
-      game->tick_begin("player idled");
-    }
+  if (is_player() && wait_or_collect) {
+    game->tick_begin("player idled");
 
     if (! game->robot_mode) {
       dbg("Check if there is anything to carry here");
