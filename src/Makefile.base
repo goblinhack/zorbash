@@ -2,6 +2,15 @@
 NAME=zorbash-game
 BUILD_DIR=.build
 
+TARGET_GAME=$(NAME)$(EXE)
+
+#
+# To force clean and avoid "up to date" warning.
+#
+.PHONY: all clean clobber
+
+all: $(TARGET_GAME)
+
 GAME_SOURCE := $(wildcard *.cpp) $(wildcard *.S)
 GAME_OBJECTS :=\
 	$(addprefix $(BUILD_DIR)/,$(addsuffix .o,$(basename $(GAME_SOURCE))))
@@ -13,39 +22,23 @@ $(BUILD_DIR): ; mkdir -p $(BUILD_DIR)
 $(GAME_OBJECTS): | $(BUILD_DIR)
 
 $(BUILD_DIR)/%.o: %.cpp
-	@echo $(CC) $(EXTRA_CFLAGS) $(CFLAGS) $(DEP_FLAGS) -c -o $@ $<
-	@$(CC) $(EXTRA_CFLAGS) $(CFLAGS) $(DEP_FLAGS) -c -o $@ $<
+	$(CC) $(EXTRA_CFLAGS) $(CFLAGS) $(DEP_FLAGS) -c -o $@ $<
 
 $(BUILD_DIR)/%.o: %.S
-	@echo $(CC) -c -o $@ $<
-	@$(CC) -c -o $@ $<
+	$(CC) $(DEP_FLAGS) -c -o $@ $<
 
-#
-# link
-#
-TARGET_GAME=$(NAME)$(EXE)
 $(TARGET_GAME): $(GAME_OBJECTS)
 	/bin/rm -f ../$(TARGET_GAME)
 	$(CC) $(LDFLAGS) $(GAME_OBJECTS) $(LDLIBS) -o $(TARGET_GAME)
 	cp $(TARGET_GAME) ..
 
-#
-# To force clean and avoid "up to date" warning.
-#
-# clean/clobber
-.PHONY: all clean clobber
-
 clean:
 	rm -f ../$(TARGET_GAME) ../stdout.txt ../stderr.txt
 	rm -f $(TARGET_GAME) stdout.txt stderr.txt
 	rm -rf $(BUILD_DIR)
-	mkdir -p $(BUILD_DIR)
 
 clobber: clean
 	rm -rf $(BUILD_DIR)
-	mkdir -p $(BUILD_DIR)
-
-all: $(TARGET_GAME)
 
 # delete corresponding object file if dependency file needs regeneration
 $(BUILD_DIR)/%.d: ; @rm -f "$(@:.d=.o)"
