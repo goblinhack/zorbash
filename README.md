@@ -1,17 +1,17 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- - poison resist stacking                                                                                                                     -->
-<!-- - equip armour etc                                                                                                                           -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Next todo                                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
-<!-- - AI wand use                                                                                                                                -->
+<!-- - poison resist stacking                                                                                                                     -->
+<!-- - equip armour etc                                                                                                                           -->
 <!-- - antipoison potion                                                                                                                          -->
 <!-- - chocolote frog cures poison?                                                                                                               -->
 <!-- - holy water cures poison                                                                                                                    -->
 <!-- - AI if you see a potion of health, drop food in preference?                                                                                 -->
 <!-- - AI did not pick up enchantstone due to space                                                                                               -->
+<!-- - AI wand use                                                                                                                                -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Level                                                                                                                                        -->
