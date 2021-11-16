@@ -33,6 +33,5 @@ unsigned char *ramdisk_load(const char *filename, int *outlen)
   *(out + ramfile.len) = 0;
   *outlen              = ramfile.len;
 
-  LOG("Read from ramdisk: %s", filename);
   return (out);
 }

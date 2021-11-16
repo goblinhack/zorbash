@@ -1,6 +1,7 @@
 data/gfx
 data/sounds
 appdata/
+src/appdata/
 build.log
 python/__pycache__/
 python/things/__pycache__/
