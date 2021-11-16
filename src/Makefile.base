@@ -38,7 +38,7 @@ clean:
 	rm -rf $(BUILD_DIR)
 
 clobber: clean
-	rm -rf $(BUILD_DIR)
+	rm -rf $(BUILD_DIR) ramdisk_data.cpp $(ramdisk *.S)
 
 # delete corresponding object file if dependency file needs regeneration
 $(BUILD_DIR)/%.d: ; @rm -f "$(@:.d=.o)"
