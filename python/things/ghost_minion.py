@@ -1,8 +1,8 @@
-import zx
+import my
 import tp
 
 def on_death(me, x, y):
-    zx.level_spawn_at_thing(me, "ghost_explosion")
+    my.level_spawn_at_thing(me, "ghost_explosion")
 
 def tp_init(name, text_name):
     mytp = tp.Tp(name, text_name)
@@ -246,12 +246,12 @@ def tp_init(name, text_name):
     mytp.set_light_strength(1)
     mytp.set_long_text_description("A spirit of one less fortunate than you. Beware, ghosts can traverse chasms that you cannot.")
     mytp.set_minion_leash_distance(6)
-    mytp.set_monst_size(zx.MONST_SIZE_NORMAL)
+    mytp.set_monst_size(my.MONST_SIZE_NORMAL)
     mytp.set_normal_placement_rules(True)
     mytp.set_on_death_do("ghost.on_death()")
     mytp.set_on_death_drop_all_items(False)
     mytp.set_on_death_is_open(False)
-    mytp.set_rarity(zx.RARITY_COMMON)
+    mytp.set_rarity(my.RARITY_COMMON)
     mytp.set_stat_attack(10) # 10, means no bonus
     mytp.set_stat_constitution(20)
     mytp.set_stat_defence(12)
@@ -287,8 +287,8 @@ def tp_init(name, text_name):
     mytp.set_unused_flag7(False)
     mytp.set_unused_flag8(False)
     mytp.set_unused_flag9(False)
-    mytp.set_z_depth(zx.MAP_DEPTH_OBJ)
-    mytp.set_z_prio(zx.MAP_PRIO_BEHIND)
+    mytp.set_z_depth(my.MAP_DEPTH_OBJ)
+    mytp.set_z_prio(my.MAP_PRIO_BEHIND)
 
     delay = 200
     mytp.set_tile("ghost.1", delay_ms=delay)

@@ -1,4 +1,4 @@
-import zx
+import my
 import tp
 
 
@@ -17,8 +17,8 @@ def tp_init(name, text_name, tiles=[]):
     mytp.set_is_loggable(False)
     mytp.set_text_a_or_an("the")
     mytp.set_text_description("A pool of deep dank water, with things in it.")
-    mytp.set_z_depth(zx.MAP_DEPTH_WATER)
-    mytp.set_z_prio(zx.MAP_PRIO_NORMAL)
+    mytp.set_z_depth(my.MAP_DEPTH_WATER)
+    mytp.set_z_prio(my.MAP_PRIO_NORMAL)
 
     delay = 1250
     for t in tiles:

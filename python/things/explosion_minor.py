@@ -1,8 +1,8 @@
-import zx
+import my
 import tp
 
 def on_death(me, x, y):
-    zx.thing_sound_play_channel(me, zx.CHANNEL_EXPLOSION, "explosion_a")
+    my.thing_sound_play_channel(me, my.CHANNEL_EXPLOSION, "explosion_a")
 
 def tp_init(name):
     mytp = tp.Tp(name)
@@ -15,8 +15,8 @@ def tp_init(name):
     mytp.set_is_loggable(True)
     mytp.set_is_tickable(True)
     mytp.set_on_death_do("explosion_minor.on_death()")
-    mytp.set_z_depth(zx.MAP_DEPTH_EXPLOSION_MINOR)
-    mytp.set_z_prio(zx.MAP_PRIO_INFRONT)
+    mytp.set_z_depth(my.MAP_DEPTH_EXPLOSION_MINOR)
+    mytp.set_z_prio(my.MAP_PRIO_INFRONT)
 
     mytp.set_tile(tile="nothing")
     delay = 25

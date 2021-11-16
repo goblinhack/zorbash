@@ -1,4 +1,4 @@
-import zx
+import my
 import tp
 
 
@@ -18,8 +18,8 @@ def tp_init(name, text_name):
     mytp.set_is_tmp_thing(True)
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("Splat attack.")
-    mytp.set_z_depth(zx.MAP_DEPTH_EQUIP)
-    mytp.set_z_prio(zx.MAP_PRIO_NORMAL)
+    mytp.set_z_depth(my.MAP_DEPTH_EQUIP)
+    mytp.set_z_prio(my.MAP_PRIO_NORMAL)
 
     delay = 10
     mytp.set_tile("pink_splatter.1", delay_ms=delay)

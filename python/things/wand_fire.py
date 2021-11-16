@@ -1,23 +1,23 @@
-import zx
+import my
 import tp
 
 def on_idle(me, x, y):
     #
     # Random recharge
     #
-    if zx.thing_get_charge_count(me) < zx.thing_get_initial_charge_count(me):
-        zx.thing_incr_charge_count(me, 1)
-        owner = zx.thing_get_top_owner_id(me)
-        if zx.thing_is_player(owner):
-            zx.topcon("%%fg=orange$The {} pulses.%%fg=reset$".format(
-                zx.thing_get_name(me)))
+    if my.thing_get_charge_count(me) < my.thing_get_initial_charge_count(me):
+        my.thing_incr_charge_count(me, 1)
+        owner = my.thing_get_top_owner_id(me)
+        if my.thing_is_player(owner):
+            my.topcon("%%fg=orange$The {} pulses.%%fg=reset$".format(
+                my.thing_get_name(me)))
 
 def explode(me, x, y):
-    zx.thing_msg(me, "The wand of fire explodes, predictably in a fireball.")
-    zx.level_spawn_at_thing(me, "explosion_major")
-    zx.level_spawn_fire_around_thing(me, "fire")
-    zx.level_spawn_at_thing(me, "fire")
-    zx.thing_defeated(me, "exploded")
+    my.thing_msg(me, "The wand of fire explodes, predictably in a fireball.")
+    my.level_spawn_at_thing(me, "explosion_major")
+    my.level_spawn_fire_around_thing(me, "fire")
+    my.level_spawn_at_thing(me, "fire")
+    my.thing_defeated(me, "exploded")
 
 def on_you_are_hit(me, hitter, real_hitter, x, y, crit, bite, poison, damage):
     explode(me, x, y)
@@ -305,8 +305,8 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_unused_flag7(False)
     mytp.set_unused_flag8(False)
     mytp.set_unused_flag9(False)
-    mytp.set_z_depth(zx.MAP_DEPTH_OBJ)
-    mytp.set_z_prio(zx.MAP_PRIO_BEHIND)
+    mytp.set_z_depth(my.MAP_DEPTH_OBJ)
+    mytp.set_z_prio(my.MAP_PRIO_BEHIND)
 
     mytp.set_tile(tile=name + ".1", delay_ms=100)
     mytp.set_tile(tile=name + ".2", delay_ms=100)

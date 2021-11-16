@@ -1,26 +1,26 @@
-import zx
+import my
 import tp
 
 def on_idle(me, x, y):
     #
     # Random recharge
     #
-    if zx.thing_get_charge_count(me) < zx.thing_get_initial_charge_count(me):
-        zx.thing_incr_charge_count(me, 1)
-        owner = zx.thing_get_top_owner_id(me)
-        if zx.thing_is_player(owner):
-            zx.topcon("%%fg=blue$The {} pulses.%%fg=reset$".format(
-                zx.thing_get_name(me)))
+    if my.thing_get_charge_count(me) < my.thing_get_initial_charge_count(me):
+        my.thing_incr_charge_count(me, 1)
+        owner = my.thing_get_top_owner_id(me)
+        if my.thing_is_player(owner):
+            my.topcon("%%fg=blue$The {} pulses.%%fg=reset$".format(
+                my.thing_get_name(me)))
 
 def explode(me, x, y):
-    zx.thing_msg(me, "The wand of descent explodes. The earth tremors.")
-    zx.level_spawn_at_thing(me, "explosion_major")
-    zx.level_spawn_using_items_radius_range(me, me, me, "explosion_destroy_floor")
-    zx.thing_defeated(me, "exploded")
+    my.thing_msg(me, "The wand of descent explodes. The earth tremors.")
+    my.level_spawn_at_thing(me, "explosion_major")
+    my.level_spawn_using_items_radius_range(me, me, me, "explosion_destroy_floor")
+    my.thing_defeated(me, "exploded")
 
 def on_final_use(owner, item, target, x, y):
-    if zx.thing_is_player(owner):
-        zx.topcon("The wand crumbles into dust.")
+    if my.thing_is_player(owner):
+        my.topcon("The wand crumbles into dust.")
 
 def on_you_are_hit(me, hitter, real_hitter, x, y, crit, bite, poison, damage):
     explode(me, x, y)
@@ -310,8 +310,8 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_unused_flag7(False)
     mytp.set_unused_flag8(False)
     mytp.set_unused_flag9(False)
-    mytp.set_z_depth(zx.MAP_DEPTH_OBJ)
-    mytp.set_z_prio(zx.MAP_PRIO_BEHIND)
+    mytp.set_z_depth(my.MAP_DEPTH_OBJ)
+    mytp.set_z_prio(my.MAP_PRIO_BEHIND)
 
     mytp.set_tile(tile=name + ".1", delay_ms=100)
     mytp.set_tile(tile=name + ".2", delay_ms=100)

@@ -1,45 +1,45 @@
-import zx
+import my
 import tp
 
 mytp = None
 
 def on_use(owner, item, target, x, y):
-    #zx.con("owner   {} {:08X}".format(zx.thing_get_name(owner), owner))
-    #zx.con("item    {} {:08X}".format(zx.thing_get_name(item), item))
-    #zx.con("target  {} {:08X}".format(zx.thing_get_name(target), target))
+    #my.con("owner   {} {:08X}".format(my.thing_get_name(owner), owner))
+    #my.con("item    {} {:08X}".format(my.thing_get_name(item), item))
+    #my.con("target  {} {:08X}".format(my.thing_get_name(target), target))
     did_something = False
 
-    enchant = zx.thing_get_enchant(item)
+    enchant = my.thing_get_enchant(item)
 
-    health = zx.thing_get_health(owner)
-    new_health = int((zx.thing_get_health_max(owner) / 100.0) * 80 + enchant * 10)
+    health = my.thing_get_health(owner)
+    new_health = int((my.thing_get_health_max(owner) / 100.0) * 80 + enchant * 10)
     if new_health > health:
         did_something = True
-        zx.thing_set_health(owner, new_health)
+        my.thing_set_health(owner, new_health)
 
-    stamina = zx.thing_get_stamina(owner)
-    new_stamina = int((zx.thing_get_stamina_max(owner) / 100.0) * 80 + enchant * 10)
+    stamina = my.thing_get_stamina(owner)
+    new_stamina = int((my.thing_get_stamina_max(owner) / 100.0) * 80 + enchant * 10)
     if new_stamina > stamina:
         did_something = True
-        zx.thing_set_stamina(owner, new_stamina)
+        my.thing_set_stamina(owner, new_stamina)
 
-    if zx.thing_get_poison(owner) != 0:
+    if my.thing_get_poison(owner) != 0:
         did_something = True
-        zx.thing_set_poison(owner, 0)
+        my.thing_set_poison(owner, 0)
 
     if did_something:
-        zx.level_spawn_using_items_radius_range(owner, item, target, "potion_health_effect")
-        if zx.if_matches(owner, "is_player"):
-            zx.topcon("%%fg=pink$You glow with renewed health.%%fg=reset$")
+        my.level_spawn_using_items_radius_range(owner, item, target, "potion_health_effect")
+        if my.if_matches(owner, "is_player"):
+            my.topcon("%%fg=pink$You glow with renewed health.%%fg=reset$")
     else:
-        if zx.if_matches(owner, "is_player"):
-            zx.topcon("Hm. That potion didn't seem to do anything.")
+        if my.if_matches(owner, "is_player"):
+            my.topcon("Hm. That potion didn't seem to do anything.")
 
 def explode(me, x, y):
-    zx.thing_msg(me, "The potion of health explodes.")
-    zx.level_spawn_at_thing(me, "explosion_minor")
-    zx.level_spawn_fire_around_thing(me, "fire")
-    zx.thing_defeated(me, "exploded")
+    my.thing_msg(me, "The potion of health explodes.")
+    my.level_spawn_at_thing(me, "explosion_minor")
+    my.level_spawn_fire_around_thing(me, "fire")
+    my.thing_defeated(me, "exploded")
 
 def on_you_are_hit(me, hitter, real_hitter, x, y, crit, bite, poison, damage):
     explode(me, x, y)
@@ -51,8 +51,8 @@ def on_fall(me, x, y):
     explode(me, x, y)
 
 def on_enchant(me, x, y):
-    zx.topcon("The potion bubbles.")
-    enchant = zx.thing_get_enchant(me)
+    my.topcon("The potion bubbles.")
+    enchant = my.thing_get_enchant(me)
     global mytp
     if enchant == 0:
         mytp.set_long_text_description("Restores you to 80 percent health")
@@ -338,8 +338,8 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_unused_flag7(False)
     mytp.set_unused_flag8(False)
     mytp.set_unused_flag9(False)
-    mytp.set_z_depth(zx.MAP_DEPTH_OBJ)
-    mytp.set_z_prio(zx.MAP_PRIO_BEHIND)
+    mytp.set_z_depth(my.MAP_DEPTH_OBJ)
+    mytp.set_z_prio(my.MAP_PRIO_BEHIND)
 
     mytp.set_tile(tile=name + ".1", delay_ms=500)
     mytp.set_tile(tile=name + ".2", delay_ms=500)

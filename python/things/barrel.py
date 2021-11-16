@@ -1,13 +1,13 @@
-import zx
+import my
 import tp
 
 
 def explode(me, x, y):
-    zx.thing_msg(me, "The oil filled barrel explodes. Health and safety have been alerted.")
-    zx.level_spawn_at_thing(me, "explosion_major")
-    zx.level_spawn_fire_around_thing(me, "fire")
-    zx.level_spawn_at_thing(me, "fire")
-    zx.thing_defeated(me, "exploded")
+    my.thing_msg(me, "The oil filled barrel explodes. Health and safety have been alerted.")
+    my.level_spawn_at_thing(me, "explosion_major")
+    my.level_spawn_fire_around_thing(me, "fire")
+    my.level_spawn_at_thing(me, "fire")
+    my.thing_defeated(me, "exploded")
 
 def on_you_are_hit(me, hitter, real_hitter, x, y, crit, bite, poison, damage):
     explode(me, x, y)
@@ -53,8 +53,8 @@ def tp_init(name, text_name):
     mytp.set_on_you_are_hit_do("barrel.on_you_are_hit()")
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("A barrel of oil. Why? Don't ask.")
-    mytp.set_z_depth(zx.MAP_DEPTH_OBJ)
-    mytp.set_z_prio(zx.MAP_PRIO_NORMAL)
+    mytp.set_z_depth(my.MAP_DEPTH_OBJ)
+    mytp.set_z_prio(my.MAP_PRIO_NORMAL)
 
     mytp.set_tile(tile=name)
 

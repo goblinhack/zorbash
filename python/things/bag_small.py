@@ -1,4 +1,4 @@
-import zx
+import my
 import tp
 
 
@@ -31,8 +31,8 @@ def tp_init(name, text_name):
     mytp.set_normal_placement_rules(True)
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("A small brown bag.")
-    mytp.set_z_depth(zx.MAP_DEPTH_OBJ)
-    mytp.set_z_prio(zx.MAP_PRIO_BEHIND)
+    mytp.set_z_depth(my.MAP_DEPTH_OBJ)
+    mytp.set_z_prio(my.MAP_PRIO_BEHIND)
 
     mytp.set_tile(tile="bag_small", delay_ms=1000)
     mytp.update()

@@ -1,15 +1,15 @@
-import zx
+import my
 import tp
 
 
 def on_you_are_hit(me, hitter, real_hitter, x, y, crit, bite, poison, damage):
-    zx.sound_play("door_hit{}".format(zx.non_pcg_randint(1, 2)))
+    my.sound_play("door_hit{}".format(my.non_pcg_randint(1, 2)))
 
 def on_death(me, x, y):
-    zx.sound_play("door_break")
+    my.sound_play("door_break")
 
 def on_open(me, x, y):
-    zx.sound_play("door_open")
+    my.sound_play("door_open")
 
 def tp_init(name):
     mytp = tp.Tp(name, "wooden door")
@@ -48,8 +48,8 @@ def tp_init(name):
     mytp.set_stat_strength(0)
     mytp.set_text_a_or_an("the")
     mytp.set_text_description("A door covered in claw marks.")
-    mytp.set_z_depth(zx.MAP_DEPTH_OBJ)
-    mytp.set_z_prio(zx.MAP_PRIO_NORMAL)
+    mytp.set_z_depth(my.MAP_DEPTH_OBJ)
+    mytp.set_z_prio(my.MAP_PRIO_NORMAL)
 
     mytp.set_tile(tile=name + ".100", is_hp_100_percent=True)
     mytp.set_tile(tile=name + ".75", is_hp_75_percent=True)

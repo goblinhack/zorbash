@@ -1,9 +1,9 @@
-import zx
+import my
 import tp
 
 def on_death(me, x, y):
-    zx.level_spawn_at_thing(me, "explosion_major")
-    zx.level_spawn_using_items_radius_range(me, me, me, "explosion_destroy_floor")
+    my.level_spawn_at_thing(me, "explosion_major")
+    my.level_spawn_using_items_radius_range(me, me, me, "explosion_destroy_floor")
 
 #
 # This is an internal only object to fire lasers from monsters
@@ -21,8 +21,8 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_usable(True)
     mytp.set_on_death_do("laser_descent.on_death()")
     mytp.set_text_a_or_an("a")
-    mytp.set_z_depth(zx.MAP_DEPTH_OBJ)
-    mytp.set_z_prio(zx.MAP_PRIO_BEHIND)
+    mytp.set_z_depth(my.MAP_DEPTH_OBJ)
+    mytp.set_z_prio(my.MAP_PRIO_BEHIND)
 
     mytp.update()
 

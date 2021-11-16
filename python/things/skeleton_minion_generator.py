@@ -1,25 +1,25 @@
-import zx
+import my
 import tp
 
 def on_idle_dice(me, x, y):
-    if zx.pcg_randint(1, 100) < 10:
-        if zx.level_spawn_next_to(me, "skeleton_minion_fire"):
-            zx.thing_sound_play_channel(me, zx.CHANNEL_MONST_BIRTH, "bones1")
-    elif zx.pcg_randint(1, 100) < 10:
-        if zx.level_spawn_next_to(me, "skeleton_minion_long_leash"):
-            zx.thing_sound_play_channel(me, zx.CHANNEL_MONST_BIRTH, "bones1")
+    if my.pcg_randint(1, 100) < 10:
+        if my.level_spawn_next_to(me, "skeleton_minion_fire"):
+            my.thing_sound_play_channel(me, my.CHANNEL_MONST_BIRTH, "bones1")
+    elif my.pcg_randint(1, 100) < 10:
+        if my.level_spawn_next_to(me, "skeleton_minion_long_leash"):
+            my.thing_sound_play_channel(me, my.CHANNEL_MONST_BIRTH, "bones1")
     else:
-        if zx.level_spawn_next_to(me, "skeleton_minion"):
-            zx.thing_sound_play_channel(me, zx.CHANNEL_MONST_BIRTH, "bones2")
+        if my.level_spawn_next_to(me, "skeleton_minion"):
+            my.thing_sound_play_channel(me, my.CHANNEL_MONST_BIRTH, "bones2")
 
 def on_death(me, x, y):
-    if zx.non_pcg_randint(1, 2) == 1:
-        if not zx.thing_sound_play_channel(me, zx.CHANNEL_MONST, "bones1"):
-            zx.thing_sound_play_channel(me, zx.CHANNEL_MONST_DEATH, "bones1")
+    if my.non_pcg_randint(1, 2) == 1:
+        if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, "bones1"):
+            my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, "bones1")
     else:
-        if not zx.thing_sound_play_channel(me, zx.CHANNEL_MONST, "bones2"):
-            zx.thing_sound_play_channel(me, zx.CHANNEL_MONST_DEATH, "bones2")
-    zx.level_spawn_at_thing(me, "generator_explosion")
+        if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, "bones2"):
+            my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, "bones2")
+    my.level_spawn_at_thing(me, "generator_explosion")
 
 def tp_init(name, text_name):
     mytp = tp.Tp(name, text_name)
@@ -59,8 +59,8 @@ def tp_init(name, text_name):
     mytp.set_stat_strength(0)
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("The dead rise again here.")
-    mytp.set_z_depth(zx.MAP_DEPTH_OBJ)
-    mytp.set_z_prio(zx.MAP_PRIO_NORMAL)
+    mytp.set_z_depth(my.MAP_DEPTH_OBJ)
+    mytp.set_z_prio(my.MAP_PRIO_NORMAL)
 
     delay = 200
     mytp.set_tile(tile=name + ".1.100", is_hp_100_percent=True, delay_ms=delay)

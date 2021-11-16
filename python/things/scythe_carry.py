@@ -1,4 +1,4 @@
-import zx
+import my
 import tp
 
 def tp_init(name):
@@ -267,8 +267,8 @@ def tp_init(name):
     mytp.set_unused_flag7(False)
     mytp.set_unused_flag8(False)
     mytp.set_unused_flag9(False)
-    mytp.set_z_depth(zx.MAP_DEPTH_EQUIP)
-    mytp.set_z_prio(zx.MAP_PRIO_NORMAL)
+    mytp.set_z_depth(my.MAP_DEPTH_EQUIP)
+    mytp.set_z_prio(my.MAP_PRIO_NORMAL)
 
     # This should be synced with its owner, but just in case it is not, we have delay set
     delay = 900

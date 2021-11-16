@@ -1,9 +1,9 @@
 import builtins
-import zx
+import my
 import tp
 
 def spawn(me, x, y):
-    zx.level_spawn_fire_around_thing(me, "small_fire")
+    my.level_spawn_fire_around_thing(me, "small_fire")
 
 def tp_init(name, text_name):
     mytp = tp.Tp(name, text_name)
@@ -32,8 +32,8 @@ def tp_init(name, text_name):
     mytp.set_text_a_or_an("")
     mytp.set_text_description("Fire.")
     mytp.set_text_hits("burns")
-    mytp.set_z_depth(zx.MAP_DEPTH_OBJ)
-    mytp.set_z_prio(zx.MAP_PRIO_INFRONT)
+    mytp.set_z_depth(my.MAP_DEPTH_OBJ)
+    mytp.set_z_prio(my.MAP_PRIO_INFRONT)
 
     delay = 75
     mytp.set_tile(tile=name + ".1", delay_ms=delay)

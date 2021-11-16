@@ -1,17 +1,17 @@
-import zx
+import my
 import tp
 
 def on_you_are_hit(me, hitter, real_hitter, x, y, crit, bite, poison, damage):
-    if not zx.thing_sound_play_channel(me, zx.CHANNEL_MONST, "squelch"):
-        zx.thing_sound_play_channel(me, zx.CHANNEL_MONST_DEATH, "squelch")
+    if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, "squelch"):
+        my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, "squelch")
 
 def on_death(me, x, y):
-    zx.level_spawn_at_thing(me, "pink_splatter")
-    if zx.pcg_randint(1, 100) < 20:
-        zx.level_spawn_next_to(me, "jelly_baby")
-    if zx.pcg_randint(1, 100) < 20:
-        zx.level_spawn_next_to(me, "jelly_baby")
-    zx.thing_sound_play_channel(me, zx.CHANNEL_MONST, "slime{}".format(zx.non_pcg_randint(1, 9)))
+    my.level_spawn_at_thing(me, "pink_splatter")
+    if my.pcg_randint(1, 100) < 20:
+        my.level_spawn_next_to(me, "jelly_baby")
+    if my.pcg_randint(1, 100) < 20:
+        my.level_spawn_next_to(me, "jelly_baby")
+    my.thing_sound_play_channel(me, my.CHANNEL_MONST, "slime{}".format(my.non_pcg_randint(1, 9)))
 
 def tp_init(name, text_name):
     mytp = tp.Tp(name, text_name)
@@ -256,14 +256,14 @@ def tp_init(name, text_name):
     mytp.set_is_weapon(False)
     mytp.set_is_wooden(False)
     mytp.set_long_text_description("Jelly jumpers are numerous, bouncy and carnivorous. They will eat almost anything, including their own. They have the annoying habit of jumping when threatened. This one is a baby jelly. It tends to avoid adults of its kind. So should you.")
-    mytp.set_monst_size(zx.MONST_SIZE_TINY)
+    mytp.set_monst_size(my.MONST_SIZE_TINY)
     mytp.set_normal_placement_rules(True)
     mytp.set_nutrition_dice("1d4")
     mytp.set_on_death_do("jelly_baby.on_death()")
     mytp.set_on_death_drop_all_items(False)
     mytp.set_on_death_is_open(False)
     mytp.set_on_you_are_hit_do("jelly_baby.on_you_are_hit()")
-    mytp.set_rarity(zx.RARITY_COMMON)
+    mytp.set_rarity(my.RARITY_COMMON)
     mytp.set_stat_attack(10) # 10, means no bonus
     mytp.set_stat_constitution(10)
     mytp.set_stat_defence(5)
@@ -299,8 +299,8 @@ def tp_init(name, text_name):
     mytp.set_unused_flag7(False)
     mytp.set_unused_flag8(False)
     mytp.set_unused_flag9(False)
-    mytp.set_z_depth(zx.MAP_DEPTH_OBJ)
-    mytp.set_z_prio(zx.MAP_PRIO_NORMAL)
+    mytp.set_z_depth(my.MAP_DEPTH_OBJ)
+    mytp.set_z_prio(my.MAP_PRIO_NORMAL)
 
     delay = 200
     mytp.set_tile(tile=name + ".1.100", is_hp_100_percent=True, delay_ms=delay)

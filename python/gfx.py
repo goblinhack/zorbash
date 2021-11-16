@@ -1,4 +1,4 @@
-import zx
+import my
 import time
 
 
@@ -21,13 +21,13 @@ def timeme(py_function):
 
 @timeme
 def init_solid():
-    zx.tex_load(file="data/gfx/solid.tga", name="solid")
+    my.tex_load(file="data/gfx/solid.tga", name="solid")
 
 
 @timeme
 def init_light():
-    zx.tex_load(file="data/gfx/light.tga", name="light")
-    zx.tex_load(file="data/gfx/glow.tga", name="glow")
+    my.tex_load(file="data/gfx/light.tga", name="light")
+    my.tex_load(file="data/gfx/glow.tga", name="glow")
 
 
 @timeme
@@ -35,7 +35,7 @@ def init_ui_circle():
     tiles = [
         "ui_circle",
     ]
-    zx.tile_load_arr(
+    my.tile_load_arr(
         file="data/gfx/ui_circle.tga",
         name="ui_circle", width=256, height=256, arr=tiles)
 
@@ -49,7 +49,7 @@ def init_ui_tabs():
         "ui_tab_bag2_dark",
         "ui_tab_slots_dark",
     ]
-    zx.tile_load_arr(
+    my.tile_load_arr(
         file="data/gfx/ui_tabs.tga",
         name="ui_tabs", width=24, height=8, arr=tiles)
 
@@ -58,7 +58,7 @@ def init_ui_tile_bg():
     tiles = [
         "ui_tile_bg",
     ]
-    zx.tile_load_arr(
+    my.tile_load_arr(
         file="data/gfx/ui_tile_bg.tga",
         name="ui_tile_bg", width=128, height=128, arr=tiles)
 
@@ -84,7 +84,7 @@ def init_ui_health_bar():
       "health_bar_1",
       "health_bar_0",
     ]
-    zx.tile_load_arr(
+    my.tile_load_arr(
         file="data/gfx/ui_health_bar.tga",
         name="ui_health_bar", width=128, height=8, arr=tiles)
 
@@ -93,7 +93,7 @@ def init_ui_status_bar():
     tiles = [
       "ui_status_bar",
     ]
-    zx.tile_load_arr(
+    my.tile_load_arr(
         file="data/gfx/ui_status_bar.tga",
         name="ui_status_bar", width=128, height=512, arr=tiles)
 
@@ -102,7 +102,7 @@ def init_ui_inventory():
     tiles = [
       "ui_inventory",
     ]
-    zx.tile_load_arr(
+    my.tile_load_arr(
         file="data/gfx/ui_inventory.tga",
         name="ui_inventory", width=864, height=320, arr=tiles)
 
@@ -114,7 +114,7 @@ def init_ui_blood():
       "blood_2",
       "blood_3",
     ]
-    zx.tile_load_arr(
+    my.tile_load_arr(
         file="data/gfx/blood.tga",
         name="blood", width=360, height=225, arr=tiles)
 
@@ -123,7 +123,7 @@ def init_ui_credits_bg():
     tiles = [
       "ui_credits_bg",
     ]
-    zx.tile_load_arr(
+    my.tile_load_arr(
         file="data/gfx/ui_credits_bg.tga",
         name="ui_credits_bg", width=200, height=86, arr=tiles)
 
@@ -132,7 +132,7 @@ def init_ui_credits_fg():
     tiles = [
       "ui_credits_fg",
     ]
-    zx.tile_load_arr(
+    my.tile_load_arr(
         file="data/gfx/ui_credits_fg.tga",
         name="ui_credits_fg", width=200, height=86, arr=tiles)
 
@@ -141,7 +141,7 @@ def init_title_fg1():
     tiles = [
       "title_fg1_1",
     ]
-    zx.tile_load_arr(
+    my.tile_load_arr(
         file="data/gfx/title_fg1.tga",
         name="title_fg1", width=200, height=86, arr=tiles)
 
@@ -150,7 +150,7 @@ def init_title_fg2():
     tiles = [
       "title_fg2_1",
     ]
-    zx.tile_load_arr(
+    my.tile_load_arr(
         file="data/gfx/title_fg2.tga",
         name="title_fg2", width=200, height=86, arr=tiles)
 
@@ -159,7 +159,7 @@ def init_title_fg3():
     tiles = [
       "title_fg3_1",
     ]
-    zx.tile_load_arr(
+    my.tile_load_arr(
         file="data/gfx/title_fg3.tga",
         name="title_fg3", width=200, height=86, arr=tiles)
 
@@ -231,7 +231,7 @@ def init_title_fg4():
       "title_fg4_63",
       "title_fg4_64",
     ]
-    zx.tile_load_arr(
+    my.tile_load_arr(
         file="data/gfx/title_fg4.tga",
         name="title_fg4", width=200, height=86, arr=tiles)
 
@@ -240,7 +240,7 @@ def init_title_bg():
     tiles = [
       "title_bg",
     ]
-    zx.tile_load_arr(
+    my.tile_load_arr(
         file="data/gfx/title_bg.tga",
         name="title_bg", width=200, height=86, arr=tiles)
 
@@ -249,7 +249,7 @@ def init_ui_dead():
     tiles = [
       "ui_dead",
     ]
-    zx.tile_load_arr(
+    my.tile_load_arr(
         file="data/gfx/ui_dead.tga",
         name="ui_dead", width=304, height=248, arr=tiles)
 
@@ -2675,7 +2675,7 @@ def init_tiles1_walls():
       #########################################################################
     ]
 
-    zx.tile_load_arr_sprites(
+    my.tile_load_arr_sprites(
         file="data/gfx/tiles1_walls.tga",
         name="tiles1_walls", width=16, height=16, arr=tiles)
 
@@ -6062,7 +6062,7 @@ def init_tiles1_floor():
       "dry_grass_dead.19",
     ]
 
-    zx.tile_load_arr_sprites(
+    my.tile_load_arr_sprites(
         file="data/gfx/tiles1_floors.tga",
         name="tiles1_floor", width=16, height=16, arr=tiles)
 
@@ -8310,7 +8310,7 @@ def init_tiles1_monsts_and_items():
       "",
     ]
 
-    zx.tile_load_arr_sprites(
+    my.tile_load_arr_sprites(
         file="data/gfx/tiles1_monsts_and_items.tga",
         name="tiles1_monsts_and_items", width=16, height=16, arr=tiles)
 
@@ -8540,7 +8540,7 @@ def init_tiles2():
       #########################################################################
     ]
 
-    zx.tile_load_arr_sprites(
+    my.tile_load_arr_sprites(
         file="data/gfx/tiles2.tga",
         name="tiles2", width=24, height=24, arr=tiles)
 
@@ -8769,7 +8769,7 @@ def init_tiles3():
       "",
     ]
 
-    zx.tile_load_arr_sprites(
+    my.tile_load_arr_sprites(
         file="data/gfx/tiles3.tga",
         name="tiles3", width=32, height=32, arr=tiles)
 
@@ -8858,7 +8858,7 @@ def init_tiles3_surface_effects():
       "lava1.16",
     ]
 
-    zx.tile_load_arr_sprites(
+    my.tile_load_arr_sprites(
         file="data/gfx/tiles3_surface_effects.tga",
         name="tiles3_surface_effects", width=32, height=32, arr=tiles)
 
@@ -8931,7 +8931,7 @@ def init_tiles3_water():
       "water8h",
     ]
 
-    zx.tile_load_arr_sprites(
+    my.tile_load_arr_sprites(
         file="data/gfx/tiles3_water.tga",
         name="tiles3_water", width=32, height=32, arr=tiles)
 
@@ -9004,7 +9004,7 @@ def init_tiles3_sewer_water():
       "sewer_water8h",
     ]
 
-    zx.tile_load_arr_sprites(
+    my.tile_load_arr_sprites(
         file="data/gfx/tiles3_sewer_water.tga",
         name="tiles3_sewer_water", width=32, height=32, arr=tiles)
 
@@ -9077,7 +9077,7 @@ def init_tiles3_deep_water():
       "deep_water8h",
     ]
 
-    zx.tile_load_arr_sprites(
+    my.tile_load_arr_sprites(
         file="data/gfx/tiles3_deep_water.tga",
         name="tiles3_deep_water", width=32, height=32, arr=tiles)
 
@@ -9151,7 +9151,7 @@ def init_tiles3_lava():
       "lava8h",
     ]
 
-    zx.tile_load_arr_sprites(
+    my.tile_load_arr_sprites(
         file="data/gfx/tiles3_lava.tga",
         name="tiles3_lava", width=32, height=32, arr=tiles)
 
@@ -9180,7 +9180,7 @@ def init_chasm():
       "chasm1.19",
     ]
 
-    zx.tile_load_arr_sprites(
+    my.tile_load_arr_sprites(
         file="data/gfx/chasm.tga",
         name="chasm", width=16, height=512, arr=tiles)
 
@@ -9206,7 +9206,7 @@ def init_chasm():
       "chasm2.19",
     ]
 
-    zx.tile_load_arr_sprites(
+    my.tile_load_arr_sprites(
         file="data/gfx/chasm2.tga",
         name="chasm2", width=16, height=512, arr=tiles)
 
@@ -9376,7 +9376,7 @@ def init_weapons_tiles():
       ###########################################################################
     ]
 
-    zx.tile_load_arr_sprites(
+    my.tile_load_arr_sprites(
         file="data/gfx/weapons.tga",
         name="weapons", width=48, height=48, arr=tiles)
 
@@ -9395,7 +9395,7 @@ def init_claws_tiles():
       "attack_punch.4",
     ]
 
-    zx.tile_load_arr_sprites(
+    my.tile_load_arr_sprites(
         file="data/gfx/attack.tga",
         name="claws", width=32, height=32, arr=tiles)
 
@@ -9420,7 +9420,7 @@ def init_explosions():
       "explosion_major.16",
     ]
 
-    zx.tile_load_arr_sprites(
+    my.tile_load_arr_sprites(
         file="data/gfx/explosion.tga",
         name="explosion", width=32, height=64, arr=tiles)
 
@@ -9701,7 +9701,7 @@ def init_laser_descent_tiles():
       "laser_descent.16.end",
     ]
 
-    zx.tile_load_arr_sprites(
+    my.tile_load_arr_sprites(
         file="data/gfx/laser_descent.tga",
         name="laser_descent", width=32, height=32, arr=tiles)
 
@@ -9982,7 +9982,7 @@ def init_laser_energy_tiles():
       "laser_energy.16.end",
     ]
 
-    zx.tile_load_arr_sprites(
+    my.tile_load_arr_sprites(
         file="data/gfx/laser_energy.tga",
         name="laser_energy", width=32, height=32, arr=tiles)
 
@@ -10263,7 +10263,7 @@ def init_laser_lightning_tiles():
       "laser_lightning.16.end",
     ]
 
-    zx.tile_load_arr_sprites(
+    my.tile_load_arr_sprites(
         file="data/gfx/laser_lightning.tga",
         name="laser_lightning", width=32, height=32, arr=tiles)
 
@@ -10544,7 +10544,7 @@ def init_laser_lightning_secondary_tiles():
       "laser_lightning_secondary.16.end",
     ]
 
-    zx.tile_load_arr_sprites(
+    my.tile_load_arr_sprites(
         file="data/gfx/laser_lightning.tga",
         name="laser_lightning_secondary", width=32, height=32, arr=tiles)
 
@@ -10569,7 +10569,7 @@ def init_projectile_fire_tiles():
       "projectile_fire.16",
     ]
 
-    zx.tile_load_arr_sprites(
+    my.tile_load_arr_sprites(
         file="data/gfx/projectile_fire.tga",
         name="projectile_fire", width=32, height=32, arr=tiles)
 

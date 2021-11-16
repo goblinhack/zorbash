@@ -1,27 +1,27 @@
-import zx
+import my
 import tp
 
 mytp = None
 
 def on_use(owner, skill, target, x, y):
-    zx.level_spawn_using_items_radius_range(owner, skill, target, "skill_devoted_thrust_effect")
-    #zx.topcon("owner  {} {}".format(zx.thing_get_name(owner), zx.thing_get_health(owner)))
-    #zx.topcon("skill  {} {}".format(zx.thing_get_name(skill), zx.thing_get_health(skill)))
-    #zx.topcon("target {} {}".format(zx.thing_get_name(target), zx.thing_get_health(target)))
-    bonus = int(zx.thing_get_stamina(owner) / 2)
+    my.level_spawn_using_items_radius_range(owner, skill, target, "skill_devoted_thrust_effect")
+    #my.topcon("owner  {} {}".format(my.thing_get_name(owner), my.thing_get_health(owner)))
+    #my.topcon("skill  {} {}".format(my.thing_get_name(skill), my.thing_get_health(skill)))
+    #my.topcon("target {} {}".format(my.thing_get_name(target), my.thing_get_health(target)))
+    bonus = int(my.thing_get_stamina(owner) / 2)
 
-    enchant = zx.thing_get_enchant(skill)
+    enchant = my.thing_get_enchant(skill)
     bonus += int((bonus / 10) * enchant)
 
     if bonus > 1:
-        if zx.if_matches(owner, "is_player"):
-            zx.topcon("%%fg=yellow$You strike with a mighty thrust of {}.%%fg=reset$".format(bonus))
-        zx.thing_incr_current_damage(owner, bonus)
-        zx.thing_decr_stamina(owner, bonus)
+        if my.if_matches(owner, "is_player"):
+            my.topcon("%%fg=yellow$You strike with a mighty thrust of {}.%%fg=reset$".format(bonus))
+        my.thing_incr_current_damage(owner, bonus)
+        my.thing_decr_stamina(owner, bonus)
     else:
-        if zx.if_matches(owner, "is_player"):
-            zx.topcon("You run out of devotion.")
-        zx.thing_skill_deactivate(owner, skill)
+        if my.if_matches(owner, "is_player"):
+            my.topcon("You run out of devotion.")
+        my.thing_skill_deactivate(owner, skill)
 
 def skill_devoted_thrust_init(name, text_name):
     global mytp

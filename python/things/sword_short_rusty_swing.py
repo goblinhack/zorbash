@@ -1,4 +1,4 @@
-import zx
+import my
 import tp
 
 def tp_init(name):
@@ -266,8 +266,8 @@ def tp_init(name):
     mytp.set_unused_flag7(False)
     mytp.set_unused_flag8(False)
     mytp.set_unused_flag9(False)
-    mytp.set_z_depth(zx.MAP_DEPTH_EQUIP)
-    mytp.set_z_prio(zx.MAP_PRIO_BEHIND)
+    mytp.set_z_depth(my.MAP_DEPTH_EQUIP)
+    mytp.set_z_prio(my.MAP_PRIO_BEHIND)
 
     delay = 10
     mytp.set_tile(tile=name + "_left.1", delay_ms=delay, is_dir_left=True)

@@ -1,4 +1,4 @@
-import zx
+import my
 import tp
 
 
@@ -37,8 +37,8 @@ def tp_init(name,
     mytp.set_is_hittable(True)
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("A slime covered wall.")
-    mytp.set_z_depth(zx.MAP_DEPTH_OBJ)
-    mytp.set_z_prio(zx.MAP_PRIO_NORMAL)
+    mytp.set_z_depth(my.MAP_DEPTH_OBJ)
+    mytp.set_z_prio(my.MAP_PRIO_NORMAL)
 
     if tiles is not None:
         for t in tiles:

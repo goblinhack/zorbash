@@ -1,4 +1,4 @@
-import zx
+import my
 import tp
 
 
@@ -19,8 +19,8 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_normal_placement_rules(True)
     mytp.set_text_a_or_an("the")
     mytp.set_text_description("%%fg=gold$The way up.")
-    mytp.set_z_depth(zx.MAP_DEPTH_OBJ)
-    mytp.set_z_prio(zx.MAP_PRIO_ALWAYS_BEHIND)
+    mytp.set_z_depth(my.MAP_DEPTH_OBJ)
+    mytp.set_z_prio(my.MAP_PRIO_ALWAYS_BEHIND)
 
     delay = 1000
     mytp.set_tile(tile=name + ".1", delay_ms=delay)

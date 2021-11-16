@@ -1,4 +1,4 @@
-import zx
+import my
 import tp
 
 
@@ -30,8 +30,8 @@ def tp_init(name, text_name, tiles=[]):
     mytp.set_spawn_on_shoved("fire")
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("A beacon of light in this blighted place.")
-    mytp.set_z_depth(zx.MAP_DEPTH_OBJ)
-    mytp.set_z_prio(zx.MAP_PRIO_NORMAL)
+    mytp.set_z_depth(my.MAP_DEPTH_OBJ)
+    mytp.set_z_prio(my.MAP_PRIO_NORMAL)
 
     delay=100
     for t in tiles:

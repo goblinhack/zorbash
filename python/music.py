@@ -1,4 +1,4 @@
-import zx
+import my
 
-zx.music_load(rate=44100, file="data/music/DST-PhaserSwitch.ogg", name="intro");
-#zx.music_play(name="intro");
+my.music_load(rate=44100, file="data/music/DST-PhaserSwitch.ogg", name="intro");
+#my.music_play(name="intro");

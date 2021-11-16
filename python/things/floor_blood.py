@@ -1,4 +1,4 @@
-import zx
+import my
 import tp
 
 
@@ -20,8 +20,8 @@ def tp_init(name, text_name):
     mytp.set_nutrition_dice("1d4")
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("An artwork comprised mainly of blood.")
-    mytp.set_z_depth(zx.MAP_DEPTH_FLOOR2)
-    mytp.set_z_prio(zx.MAP_PRIO_BEHIND)
+    mytp.set_z_depth(my.MAP_DEPTH_FLOOR2)
+    mytp.set_z_prio(my.MAP_PRIO_BEHIND)
 
     mytp.set_tile(tile=name + ".100", is_hp_100_percent=True)
     mytp.set_tile(tile=name + ".75", is_hp_75_percent=True)

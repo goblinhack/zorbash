@@ -1,10 +1,10 @@
-import zx
+import my
 import tp
 
 
 def on_lifespan(owner, me, x, y):
-    if zx.if_matches(owner, "is_player"):
-        zx.topcon("One of your torches fizzles out.")
+    if my.if_matches(owner, "is_player"):
+        my.topcon("One of your torches fizzles out.")
 
 def tp_init(name, text_name, tiles=[]):
     mytp = tp.Tp(name, text_name)
@@ -278,8 +278,8 @@ def tp_init(name, text_name, tiles=[]):
     mytp.set_unused_flag7(False)
     mytp.set_unused_flag8(False)
     mytp.set_unused_flag9(False)
-    mytp.set_z_depth(zx.MAP_DEPTH_OBJ)
-    mytp.set_z_prio(zx.MAP_PRIO_NORMAL)
+    mytp.set_z_depth(my.MAP_DEPTH_OBJ)
+    mytp.set_z_prio(my.MAP_PRIO_NORMAL)
 
     delay=100
     for t in tiles:

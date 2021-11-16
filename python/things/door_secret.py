@@ -1,4 +1,4 @@
-import zx
+import my
 import tp
 
 
@@ -15,8 +15,8 @@ def tp_init(name, text_name):
     mytp.set_normal_placement_rules(True)
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("A strange looking wall.")
-    mytp.set_z_depth(zx.MAP_DEPTH_OBJ)
-    mytp.set_z_prio(zx.MAP_PRIO_NORMAL)
+    mytp.set_z_depth(my.MAP_DEPTH_OBJ)
+    mytp.set_z_prio(my.MAP_PRIO_NORMAL)
 
     mytp.set_tile(tile=name + ".1")
     mytp.set_tile(tile=name + ".2")

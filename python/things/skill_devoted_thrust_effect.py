@@ -1,4 +1,4 @@
-import zx
+import my
 import tp
 
 def tp_init(name):
@@ -11,8 +11,8 @@ def tp_init(name):
     mytp.set_is_floating(True)
     mytp.set_is_loggable(True)
     mytp.set_is_loggable(True)
-    mytp.set_z_depth(zx.MAP_DEPTH_EXPLOSION_MINOR)
-    mytp.set_z_prio(zx.MAP_PRIO_INFRONT)
+    mytp.set_z_depth(my.MAP_DEPTH_EXPLOSION_MINOR)
+    mytp.set_z_prio(my.MAP_PRIO_INFRONT)
 
     mytp.set_tile(tile="nothing")
     mytp.set_tile(tile=name + ".1", delay_ms=50)

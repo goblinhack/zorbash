@@ -1,18 +1,18 @@
-import zx
+import my
 import tp
 
 def attack(me, thing):
-    if zx.thing_possible_to_attack(me, thing):
+    if my.thing_possible_to_attack(me, thing):
         if thing != me:
-            zx.thing_hit(me, thing)
+            my.thing_hit(me, thing)
 
 def on_death(me, x, y):
-    zx.thing_sound_play_channel(me,  zx.CHANNEL_EXPLOSION, "explosion_d")
+    my.thing_sound_play_channel(me,  my.CHANNEL_EXPLOSION, "explosion_d")
 
-    target_x, target_y = zx.thing_get_coords(me)
+    target_x, target_y = my.thing_get_coords(me)
     for dx in range(-1, 2):
         for dy in range(-1, 2):
-            for thing in zx.level_get_all(me, target_x + dx, target_y + dy):
+            for thing in my.level_get_all(me, target_x + dx, target_y + dy):
                 attack(me, thing)
 
 def tp_init(name):
@@ -32,8 +32,8 @@ def tp_init(name):
     mytp.set_light_strength(4)
     mytp.set_on_death_do("explosion_major.on_death()")
     mytp.set_text_hits("blasts")
-    mytp.set_z_depth(zx.MAP_DEPTH_EXPLOSION_MAJOR)
-    mytp.set_z_prio(zx.MAP_PRIO_INFRONT)
+    mytp.set_z_depth(my.MAP_DEPTH_EXPLOSION_MAJOR)
+    mytp.set_z_prio(my.MAP_PRIO_INFRONT)
 
     delay = 50
     mytp.set_tile(tile=name + ".1", delay_ms=delay)

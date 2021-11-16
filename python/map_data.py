@@ -1,4 +1,4 @@
-import zx
+import my
 
 # BARREL                        b
 # BLOOD                         _
@@ -50,9 +50,9 @@ import zx
 #
 #def add_room():
 #    def add_things():
-#        zx.room_add_thing(name="skeleton1", rel_coord=True, x=4, y=1)
+#        my.room_add_thing(name="skeleton1", rel_coord=True, x=4, y=1)
 #
-#    zx.map_load_room(entrance=True,
+#    my.map_load_room(entrance=True,
 #                     name="skel1",
 #                     on_create=add_things,
 #                     room_data=[
@@ -75,7 +75,7 @@ import zx
 #
 #  entrance rooms
 #
-zx.map_load_room(entrance=True, room_data=[
+my.map_load_room(entrance=True, room_data=[
 "      ^      ","      ^      ","   ^         ","      ^      ","      ^      ",
 "      #      ","      #      ","   #         ","      #      ","    .....    ",
 "      #      ","      #      ","   #         ","      #      ","    .....    ",
@@ -90,7 +90,7 @@ zx.map_load_room(entrance=True, room_data=[
 "             ","             ","       ..... ","             ","             ",
 "             ","             ","             ","             ","             ",
 ])
-zx.map_load_room(entrance=True, room_data=[
+my.map_load_room(entrance=True, room_data=[
 "      ^      ","      ^      ","   ^         ","      ^      ","      ^      ",
 "      #      ","      #      ","   #         ","      #      ","    ...`$    ",
 "      #      ","      #      ","   #         ","      #      ","    ...``    ",
@@ -105,7 +105,7 @@ zx.map_load_room(entrance=True, room_data=[
 "             ","             ","       ..... ","             ","             ",
 "             ","             ","             ","             ","             ",
 ])
-zx.map_load_room(entrance=True, room_data=[
+my.map_load_room(entrance=True, room_data=[
 "      ^      ","      ^      ","   ^         ","      ^      ","      ^      ",
 "      #      ","      #      ","   #         ","      #      ","    .....    ",
 "      #      ","      #      ","   #         ","      #``.   ","    .....    ",
@@ -120,7 +120,7 @@ zx.map_load_room(entrance=True, room_data=[
 "             ","             ","   .   ..... ","             ","             ",
 "             ","             ","   .CCC.     ","             ","             ",
 ])
-zx.map_load_room(entrance=True, room_data=[
+my.map_load_room(entrance=True, room_data=[
 "      ^      ","      ^      ","   ^         ","      ^      ","      ^      ",
 "      #      ","      #      ","   #         ","      #      ","    ww...    ",
 "      #      ","      #      ","   #         ","      #      ","    w....    ",
@@ -135,7 +135,7 @@ zx.map_load_room(entrance=True, room_data=[
 "             ","             ","       ..... ","             ","             ",
 "             ","             ","             ","             ","             ",
 ])
-zx.map_load_room(entrance=True, room_data=[
+my.map_load_room(entrance=True, room_data=[
 "      ^      ","      ^      ","   ^         ","      ^      ","      ^      ",
 "      #      ","      #      ","   #         ","      #      ","    wwwww    ",
 "      #      ","      #      ","   #         ","      #      ","   wwwwww    ",
@@ -150,7 +150,7 @@ zx.map_load_room(entrance=True, room_data=[
 "             ","             ","    www....ww","             ","             ",
 "             ","             ","      ww  www","             ","             ",
 ])
-zx.map_load_room(entrance=True, room_data=[
+my.map_load_room(entrance=True, room_data=[
 "      ^      ","      ^      ","   ^         ","      ^      ","      ^      ",
 "      #      ","      #      ","   #         ","      #      ","    wwwww    ",
 "      #      ","      #      ","   #         ","      #      ","   wwwwwww   ",
@@ -165,7 +165,7 @@ zx.map_load_room(entrance=True, room_data=[
 "             ","             ","    WWw....ww","             ","             ",
 "             ","             ","     Wwwwwwww","             ","             ",
 ])
-zx.map_load_room(entrance=True, room_data=[
+my.map_load_room(entrance=True, room_data=[
 "      ^      ","      ^      ","   ^         ","      ^      ","      ^  .   ",
 "      #      ","      #      ","   #         ","      #      ","    ......   ",
 "      #      ","      #      ","   #         ","      #      "," ........    ",
@@ -180,7 +180,7 @@ zx.map_load_room(entrance=True, room_data=[
 "             ","             ","    ........ ","             ","             ",
 "             ","             ","             ","             ","             ",
 ])
-zx.map_load_room(entrance=True, room_data=[
+my.map_load_room(entrance=True, room_data=[
 "      ^      ","      ^      ","   ^         ","      ^      ","      ^  .   ",
 "      #      ","      #      ","   #         ","      #      ","    ......   ",
 "      #      ","      #      ","   #         ","      #      "," ........    ",
@@ -195,7 +195,7 @@ zx.map_load_room(entrance=True, room_data=[
 "             ","             ","   C........ ","             ","             ",
 "             ","             ","             ","             ","             ",
 ])
-zx.map_load_room(entrance=True, room_data=[
+my.map_load_room(entrance=True, room_data=[
 "      ^      ","      ^      ","   ^         ","      ^      ","      ^      ",
 "      #      ","      #      ","   #         ","      #      ","    ``..C    ",
 "      #      ","      #      ","   #         ","      #      ","    `....    ",
@@ -210,7 +210,7 @@ zx.map_load_room(entrance=True, room_data=[
 "             ","             ","  ..C....... ","             ","             ",
 "             ","             ","  ....       ","             ","             ",
 ])
-zx.map_load_room(entrance=True, room_data=[
+my.map_load_room(entrance=True, room_data=[
 "      ^      ","      ^      ","   ^         ","      ^      ","      ^      ",
 "      #      ","      #      ","   #         ","      #      ","   C.....C   ",
 "      #      ","      #      ","   #         ","      #      ","   C.....C   ",
@@ -225,7 +225,7 @@ zx.map_load_room(entrance=True, room_data=[
 "             ","             ","       C...  ","             ","             ",
 "             ","             ","             ","             ","             ",
 ])
-zx.map_load_room(entrance=True, room_data=[
+my.map_load_room(entrance=True, room_data=[
 "      ^      ","      ^      ","   ^         ","      ^      ","      ^      ",
 "      #      ","      #      ","   #######   ","      #      ","      #      ",
 "      #      ","      #      ","   #     #   ","      #      ","      #      ",
@@ -240,7 +240,7 @@ zx.map_load_room(entrance=True, room_data=[
 "     ...     ","             ","   ......... ","             ","             ",
 "             ","             ","             ","             ","             ",
 ])
-zx.map_load_room(entrance=True, room_data=[
+my.map_load_room(entrance=True, room_data=[
 "      ^      ","      ^      ","   ^         ","      ^      ","      ^      ",
 "      #      ","      #      ","   #######   ","      #      ","      #      ",
 "      #      ","      #      ","   #     #   ","      #      ","      #      ",
@@ -255,7 +255,7 @@ zx.map_load_room(entrance=True, room_data=[
 "     ...     ","             ","   ......... ","             ","             ",
 "             ","             ","             ","             ","             ",
 ])
-zx.map_load_room(entrance=True, room_data=[
+my.map_load_room(entrance=True, room_data=[
 "      ^      ","      ^      ","   ^         ","      ^      ","      ^      ",
 "      #      ","      #      ","   #         ","      #      ","    .B.B.    ",
 "      #      ","      #      ","   #         ","      #      ","    .....    ",
@@ -270,7 +270,7 @@ zx.map_load_room(entrance=True, room_data=[
 "             ","             ","       B...B ","             ","             ",
 "             ","             ","             ","             ","             ",
 ])
-zx.map_load_room(entrance=True, room_data=[
+my.map_load_room(entrance=True, room_data=[
 "      ^      ","      ^      ","             "," $    ^      ","      ^      ",
 "  . LL#.b..$ ","      #      ","             "," m    #      ","      #      ",
 "  C.LL...... ","      #      ","             "," .... # ..   ","  .......CC  ",
@@ -285,7 +285,7 @@ zx.map_load_room(entrance=True, room_data=[
 "C/.........m ","     CCC.C.  ","             "," ..  .....   ","  CCCC. ...m ",
 "      v    m ","       LLLm  ","             ","      ...    ","             ",
 ])
-zx.map_load_room(entrance=True, room_data=[
+my.map_load_room(entrance=True, room_data=[
 "      ^      ","             ","             ","      ^      ","      ^      ",
 "     CoC     ","       ^     ","        ^    ","      #      ","      #      ",
 "     C.C     ","      C.C    ","      CC.C   ","     C.C     ","     C.C     ",
@@ -300,7 +300,7 @@ zx.map_load_room(entrance=True, room_data=[
 "     C.C     ","       C.C   ","      C.C    ","        C.C  ","             ",
 "      v      ","        V    ","       V     ","         v   ","             ",
 ])
-zx.map_load_room(entrance=True, room_data=[
+my.map_load_room(entrance=True, room_data=[
 "      ^      ","      ^      ","             "," $    ^      ","             ",
 "  . ..#....$ ","      #      ","             "," m    #      ","      ^      ",
 "  ....#..... ","      #      ","             "," .... # ..   ","  ....#..ww  ",
@@ -315,7 +315,7 @@ zx.map_load_room(entrance=True, room_data=[
 "..b.b..... . ","        . .  ","             "," ..  .....   ","  WWww. ...m ",
 "      v    m ","        ..m  ","             ","      ...    ","             ",
 ])
-zx.map_load_room(entrance=True, room_data=[
+my.map_load_room(entrance=True, room_data=[
 "      ^      ","      ^      ","             "," $    ^      ","             ",
 "    .......$ ","      #      ","             "," m    #      ","      ^      ",
 "  ..CCCCCC.. ","      #      ","             "," .... . CC   ","  .CC....ww  ",
@@ -330,7 +330,7 @@ zx.map_load_room(entrance=True, room_data=[
 " ...C..    . ","        . .  ","        ..   "," ..  CCCCC   ","  WWww. ...m ",
 "      v    m ","        ..m  ","             ","      CCC    ","             ",
 ])
-zx.map_load_room(entrance=True, room_data=[
+my.map_load_room(entrance=True, room_data=[
 "      ^      ","             ","             ","             ","             ",
 "      .=CCC  ","      ^      ","        ^    ","             "," m    ^      ",
 "      C=CC.. ","      . Ci   ","        #.C  ","      ^      "," ..CC...|w   ",
@@ -345,7 +345,7 @@ zx.map_load_room(entrance=True, room_data=[
 " ..   . !.g  ","         #   ","       v     "," ......  . g ","  wwxvwwwww  ",
 "      v      ","         v   ","             ","         v   ","             ",
 ])
-zx.map_load_room(entrance=True, room_data=[
+my.map_load_room(entrance=True, room_data=[
 "      ^      ","      ^      ","             ","             ","             ",
 "      #      ","      #      ","        ^    ","      ^      ","      ^      ",
 "     ...m..B ","      #      ","   ww   #    ","      #      ","  .$ .#..Sw  ",
@@ -360,7 +360,7 @@ zx.map_load_room(entrance=True, room_data=[
 "      .L     ","             ","       m     ","  .......#   ","  CCCCCCCCC  ",
 "      v      ","             ","       v     ","         v   ","             ",
 ])
-zx.map_load_room(entrance=True, room_data=[
+my.map_load_room(entrance=True, room_data=[
 "      ^      ","      ^      ","        ^    ","             ","      ^      ",
 "      #  $.. ","      #      ","        #    ","      ^      ","      #      ",
 "     w.. ... ","      #      ","  CCC   #.   ","      #      ","  .$ ....Sw  ",
@@ -375,7 +375,7 @@ zx.map_load_room(entrance=True, room_data=[
 "      .wW    ","             ","       m     ","         .   ","  wwwwwwwww  ",
 "      v      ","             ","       v     ","         v   ","             ",
 ])
-zx.map_load_room(entrance=True, room_data=[
+my.map_load_room(entrance=True, room_data=[
 "      ^      ","             ","             ","             ","             ",
 "     BoB     ","       ^     ","        ^    ","      ^      ","      ^      ",
 "      .      ","       #     ","       .#.   ","      #      ","     B#B     ",
@@ -390,7 +390,7 @@ zx.map_load_room(entrance=True, room_data=[
 "      .      ","        #    ","       #     ","         #   ","             ",
 "      v      ","        V    ","       V     ","         v   ","             ",
 ])
-zx.map_load_room(entrance=True, room_data=[
+my.map_load_room(entrance=True, room_data=[
 "             ","             ","             ","             "," oom  ^      ",
 "             ","       ^     ","        ^    ","      ^      "," $o   #      ",
 "      ^      ","       #     ","       B.B   ","      #      "," .    #      ",
@@ -405,7 +405,7 @@ zx.map_load_room(entrance=True, room_data=[
 "    CCCCCC..$","        #    ","  .........  ","             ","             ",
 "     CCCCC..m","        v    ","             ","             ","             ",
 ])
-zx.map_load_room(entrance=True, room_data=[
+my.map_load_room(entrance=True, room_data=[
 "             ","             ","             ","             "," oom  ^      ",
 "             ","       ^     ","        ^    ","      ^      "," $o   #      ",
 "      ^      ","       #     ","       B.B   ","      #      "," .    #      ",
@@ -420,7 +420,7 @@ zx.map_load_room(entrance=True, room_data=[
 "    ,,,,,,..$","        #    ","  .........  ","             ","             ",
 "     ,,,,,..m","        v    ","             ","             ","             ",
 ])
-zx.map_load_room(entrance=True, room_data=[
+my.map_load_room(entrance=True, room_data=[
 "             ","             ","             ","             ","      ^      ",
 "             ","       ^     ","        ^    ","      ^      "," ..g  #      ",
 "      ^      ","       #     ","       |.|   ","      #      "," !..  #      ",
@@ -435,7 +435,7 @@ zx.map_load_room(entrance=True, room_data=[
 "      #      ","             ","       v     ","             ","             ",
 "      v      ","             ","             ","             ","             ",
 ])
-zx.map_load_room(entrance=True, room_data=[
+my.map_load_room(entrance=True, room_data=[
 "             ","             ","             ","             ","             ",
 "             ","       ^     ","        ^    ","      ^      ","      ^      ",
 "      ^      ","       #     ","        .    ","      #      ","      #      ",
@@ -450,7 +450,7 @@ zx.map_load_room(entrance=True, room_data=[
 "      .      ","             ","       v     ","             ","             ",
 "      v      ","             ","             ","             ","             ",
 ])
-zx.map_load_room(entrance=True, room_data=[
+my.map_load_room(entrance=True, room_data=[
 "             ","       ^     ","             ","             ","             ",
 "             ","       .     ","   ^         ","      ^      ","      ^      ",
 "      ^      ","  LLLLL.LLL  ","   m         ","      C      ","      C      ",
@@ -469,7 +469,7 @@ zx.map_load_room(entrance=True, room_data=[
 #
 # exit rooms
 #
-zx.map_load_room(exit=True, room_data=[
+my.map_load_room(exit=True, room_data=[
 "   ^         ","      ^      ","             ","             ","      ^      ",
 "   ....  C*  ","     B*B     ","             ","             ","      .      ",
 "      . .CC  ","      .      ","        g*   ","      ^      ","      .      ",
@@ -484,7 +484,7 @@ zx.map_load_room(exit=True, room_data=[
 "      v      ","             ","     .E.     ","    $H.....  ","             ",
 "             ","             ","             ","             ","             ",
 ])
-zx.map_load_room(exit=True, room_data=[
+my.map_load_room(exit=True, room_data=[
 "             ","             ","             ","      ^      ","      ^      ",
 "             ","             ","             ","      .      ","     B.B     ",
 "      ^ ..   ","      ^      ","             ","      .      ","      .      ",
@@ -499,7 +499,7 @@ zx.map_load_room(exit=True, room_data=[
 "      .      ","             ","      E      ","    $......  ","             ",
 "      v      ","             ","             ","    ...f     ","             ",
 ])
-zx.map_load_room(exit=True, room_data=[
+my.map_load_room(exit=True, room_data=[
 "   LLLELLLLLL","       g..   ","             ","             ","      ^      ",
 "<..=========$","       .*.   ","             ","             ","     C=C     ",
 "   LLL=LLLLL=","        C    ","         f   ","    .......  ","     C=C     ",
@@ -514,7 +514,7 @@ zx.map_load_room(exit=True, room_data=[
 "      .....f ","    f..      ","      E      ","    !H....f  ","    .C*..    ",
 "             ","             ","             ","             ","             ",
 ])
-zx.map_load_room(exit=True, room_data=[
+my.map_load_room(exit=True, room_data=[
 "     wEw     ","             ","             ","      ^      ","      ^      ",
 "     wHw     ","             ","             ","      .      ","     B.B     ",
 "    ww=ww    ","             ","             ","      .      ","      .      ",
@@ -529,7 +529,7 @@ zx.map_load_room(exit=True, room_data=[
 "        *    ","             ","      E      ","    $.CfC..  ","  ....$..C*  ",
 "             ","             ","             ","             ","             ",
 ])
-zx.map_load_room(exit=True, room_data=[
+my.map_load_room(exit=True, room_data=[
 "     .E.     ","             ","             ","      ^      ","      ^      ",
 "     ...     ","             ","             ","     B.B     ","     B.B     ",
 "    f....    ","             ","    f        ","      .      ","      .      ",
@@ -544,7 +544,7 @@ zx.map_load_room(exit=True, room_data=[
 "             ","             ","      E      ","    $...H..  ","      E      ",
 "             ","             ","             ","             ","             ",
 ])
-zx.map_load_room(exit=True, room_data=[
+my.map_load_room(exit=True, room_data=[
 "     LHL     ","             ","             ","      ^      ","      ^      ",
 "     L.L     ","             ","    CCCCC    ","     B.B     ","     B.B     ",
 "    LL.LL    ","   CCCCCCC   ","    C.H.C    ","      .      ","      .      ",
@@ -559,7 +559,7 @@ zx.map_load_room(exit=True, room_data=[
 "     LLL     ","             ","             ","    f..C..E  ","             ",
 "             ","             ","             ","       ....  ","             ",
 ])
-zx.map_load_room(exit=True, room_data=[
+my.map_load_room(exit=True, room_data=[
 "     .H.     ","             ","             ","             ","             ",
 "     ...     ","             ","             ","             ","             ",
 "    .....    ","             ","             ","      ^      ","      ^      ",
@@ -578,7 +578,7 @@ zx.map_load_room(exit=True, room_data=[
 #
 # directional combined with exit rooms
 #
-zx.map_load_room(room_data=[
+my.map_load_room(room_data=[
 "             ","             ","             ","             ","             ",
 "      ^      ","      ^      ","             ","      ^      ","      ^      ",
 "  .m......f  ","      ..*.B  ","  B.m..C...  ","  B.......B  ","      .      ",
@@ -593,7 +593,7 @@ zx.map_load_room(room_data=[
 "             ","             ","             ","             ","             ",
 "             ","             ","             ","             ","             ",
 ])
-zx.map_load_room(room_data=[
+my.map_load_room(room_data=[
 "             ","             ","             ","             ","             ",
 "      ^      ","      ^      ","             ","      ^      ","      ^      ",
 "  LLLL....*  ","      ....*  ","  *.m..L..B  ","  ........B  ","      .      ",
@@ -608,7 +608,7 @@ zx.map_load_room(room_data=[
 "             ","             ","             ","             ","  B...E      ",
 "             ","             ","             ","             ","             ",
 ])
-zx.map_load_room(room_data=[
+my.map_load_room(room_data=[
 "             ","             ","             ","             ","             ",
 "      ^      ","      ^      ","             ","      ^      ","      ^      ",
 "  ........B  ","      ....f  ","  ..m..w..B  ","  B.......B  ","      .      ",
@@ -623,7 +623,7 @@ zx.map_load_room(room_data=[
 "             ","             ","             ","             ","  B........  ",
 "             ","             ","             ","             ","             ",
 ])
-zx.map_load_room(room_data=[
+my.map_load_room(room_data=[
 "             ","             ","C$.CCCCC...  ","             ","             ",
 "             ","             ","CCCCm.CC.m.  ","      ^      ","      ^      ",
 "    B.*.B    ","             ","  .C..CCCCC  ","  .....C...  ","  m....  .g  ",
@@ -638,7 +638,7 @@ zx.map_load_room(room_data=[
 "             ","             ","             ","             ","             ",
 "             ","             ","             ","             ","             ",
 ])
-zx.map_load_room(room_data=[
+my.map_load_room(room_data=[
 "             ","             ","L$.LLLLL...  ","             ","             ",
 "             ","   .......*  ","LLLLm.LL.m.  ","      ^      ","      ^      ",
 "     ...     ","   .LLLL.L.  ","  .L..LLLLL  ","  .....L...  ","  m....  .g  ",
@@ -653,7 +653,7 @@ zx.map_load_room(room_data=[
 "             ","             ","             ","             ","             ",
 "             ","             ","             ","             ","             ",
 ])
-zx.map_load_room(room_data=[
+my.map_load_room(room_data=[
 "             ","             ","w$.wwwww...  ","             ","             ",
 "             ","   w.......  ","wwwwm.ww.m.  ","      ^      ","      ^      ",
 "     ww.     ","   wwwww.w.  ","  .w..wwwww  ","  .....w...  ","  m....  .g  ",
@@ -668,7 +668,7 @@ zx.map_load_room(room_data=[
 "             ","             ","             ","             ","             ",
 "             ","             ","             ","             ","             ",
 ])
-zx.map_load_room(room_data=[
+my.map_load_room(room_data=[
 "             ","             ","C$.CCCCC...  ","             ","             ",
 "    LLLLL    ","   ........  ","CCCCm.CC.m.  ","      ^      ","      ^      ",
 "    Lm..L    ","   .CCCC.C.  ","  .C..CC.CC  ","  .....C.*.  ","  m....  .$  ",
@@ -683,7 +683,7 @@ zx.map_load_room(room_data=[
 "             ","          E  ","             ","  E          ","             ",
 "             ","             ","             ","             ","             ",
 ])
-zx.map_load_room(room_data=[
+my.map_load_room(room_data=[
 "             ","             ","w$.wwwww...  ","             ","             ",
 "             ","   ........  ","wwwwm.ww.m.  ","      ^      ","      ^      ",
 "     E..     ","   .w.wwww.  ","  .w..wwwww  ","  B....w..B  ","  m....  Bg  ",
@@ -698,7 +698,7 @@ zx.map_load_room(room_data=[
 "             ","             ","             ","             ","             ",
 "             ","             ","             ","             ","             ",
 ])
-zx.map_load_room(room_data=[
+my.map_load_room(room_data=[
 "             ","             ","  .wwwww.$E  ","             ","             ",
 "             ","   E.......  ","  wwm.ww.m.  ","      ^      ","      ^      ",
 "      E      ","   .$.m..$.  ","  $w..wwwww  ","     C=C     ","<.m....  Bg  ",
@@ -717,7 +717,7 @@ zx.map_load_room(room_data=[
 #
 # lock rooms
 #
-zx.map_load_room(lock=True, room_data=[
+my.map_load_room(lock=True, room_data=[
 "    ^        ","             ","             ","             ","             ",
 "    .....    ","      ^      ","             ","      ^      ","      ^      ",
 "  ....|....  ","   .......   ","   ......LL  ","  ........m  ","  ...L...bb  ",
@@ -732,7 +732,7 @@ zx.map_load_room(lock=True, room_data=[
 "             ","             ","             ","             ","             ",
 "             ","             ","             ","             ","             ",
 ])
-zx.map_load_room(lock=True, room_data=[
+my.map_load_room(lock=True, room_data=[
 "    ^        ","             ","             ","             ","             ",
 "    .....    ","      ^      ","             ","      ^      ","      ^      ",
 "  .........  ","   .......   ","   ......LL  ","  ...|.|..f  ","  ...L.....  ",
@@ -747,7 +747,7 @@ zx.map_load_room(lock=True, room_data=[
 "             ","             ","             ","             ","             ",
 "             ","             ","             ","             ","             ",
 ])
-zx.map_load_room(lock=True, room_data=[
+my.map_load_room(lock=True, room_data=[
 "    ^        ","             ","             ","      ^      ","      ^      ",
 "    .....    ","      ^      ","             ","      .      ","      .      ",
 "  .........  ","  g..C.C...  ","   .....     ","    .......  ","   ......    ",
@@ -762,7 +762,7 @@ zx.map_load_room(lock=True, room_data=[
 "             ","  ......m.   ","             ","             ","    .....    ",
 "             ","   .......!  ","             ","             ","   .......   ",
 ])
-zx.map_load_room(lock=True, room_data=[
+my.map_load_room(lock=True, room_data=[
 "    ^        ","             ","             ","             ","             ",
 "    .....    ","      ^      ","             ","      ^      ","      ^      ",
 "  ....|....  ","   .......   ","   ........  ","  ........m  ","  .......bb  ",
@@ -777,7 +777,7 @@ zx.map_load_room(lock=True, room_data=[
 "             ","             ","             ","             ","             ",
 "             ","             ","             ","             ","             ",
 ])
-zx.map_load_room(lock=True, room_data=[
+my.map_load_room(lock=True, room_data=[
 "    ^        ","             ","             ","             ","             ",
 "    .....    ","      ^      ","             ","      ^      ","      ^      ",
 "  .........  ","   .......   ","   ........  ","  ...|.|..f  ","  .........  ",
@@ -792,7 +792,7 @@ zx.map_load_room(lock=True, room_data=[
 "             ","             ","             ","             ","             ",
 "             ","             ","             ","             ","             ",
 ])
-zx.map_load_room(lock=True, room_data=[
+my.map_load_room(lock=True, room_data=[
 "    ^        ","             ","             ","      ^      ","      ^      ",
 "    .....    ","      ^      ","             ","      .      ","      .      ",
 "  .........  ","  g..C.C...  ","   .....     ","    .......  ","   ......    ",
@@ -811,7 +811,7 @@ zx.map_load_room(lock=True, room_data=[
 #
 # key rooms
 #
-zx.map_load_room(key=True, room_data=[
+my.map_load_room(key=True, room_data=[
 "             ","             ","             ","             ","             ",
 "             ","    ^        ","             ","    ^        ","             ",
 "   ..=CC.kg  ","   ......,,  ","  ..C..g.C.  ","   C=CCC..g  ","<......CC.k  ",
@@ -826,7 +826,7 @@ zx.map_load_room(key=True, room_data=[
 "             ","             ","  ....,....  ","     C.C  .  ","      v      ",
 "             ","             ","  g.......$  ","     |g|..$  ","             ",
 ])
-zx.map_load_room(key=True, room_data=[
+my.map_load_room(key=True, room_data=[
 "             ","             ","             ","             ","             ",
 "             ","    ^        ","             ","    ^        ","             ",
 "   ..=L...g  ","   ......,,  ","  ..C....C.  ","   C=C.C..g  ","<......LL.k  ",
@@ -841,7 +841,7 @@ zx.map_load_room(key=True, room_data=[
 "             ","             ","  ....,....  ","     C.C  .  ","      v      ",
 "             ","             ","  g.......$  ","     |g|..$  ","             ",
 ])
-zx.map_load_room(key=True, room_data=[
+my.map_load_room(key=True, room_data=[
 "             ","             ","             ","    ^        ","             ",
 "    ^        ","    ^        ","             ","    .        ","    ^        ",
 "   .......g  ","   |.|...Bf  ","  ..CCC$.C.  ","   ...CC..g  ","  $.. .CC.k  ",
@@ -856,7 +856,7 @@ zx.map_load_room(key=True, room_data=[
 "             ","             ","  ..  .....  ","     C.C  .  ","             ",
 "             ","             ","  gk  ....$  ","     CgC..$  ","             ",
 ])
-zx.map_load_room(key=True, room_data=[
+my.map_load_room(key=True, room_data=[
 "             ","             ","             ","    ^        ","             ",
 "    ^        ","    ^        ","             ","  .....C.Ck  ","    ^        ",
 "    .L....g  ","   ......B   ","  .........  ","  .m..C.C.C  ","    .CCCCCC  ",
@@ -871,7 +871,7 @@ zx.map_load_room(key=True, room_data=[
 "             ","             ","  CC      C  ","             "," CCCCB...g   ",
 "             ","             ","  g.......$  ","             ","             ",
 ])
-zx.map_load_room(key=True, room_data=[
+my.map_load_room(key=True, room_data=[
 "             ","             ","             ","    ^        ","             ",
 "    ^        ","    ^        ","             ","  .B...C.Ck  ","    ^        ",
 "    B....LL  ","   .......   ","  ...CkC...  ","  B...C.C.C  ","    .CCCCCC  ",
@@ -886,7 +886,7 @@ zx.map_load_room(key=True, room_data=[
 "        .    ","             ","             ","             "," CCCC....g   ",
 "        v    ","             ","             ","             ","             ",
 ])
-zx.map_load_room(key=True, room_data=[
+my.map_load_room(key=True, room_data=[
 "             ","             ","             ","    ^        ","             ",
 "    ^        ","    ^        ","             ","   g...L.Lk  ","    ^        ",
 "    .....LL  ","   .......   ","  ...LkL...  ","   .....L.L  "," ......LLLL  ",
@@ -901,7 +901,7 @@ zx.map_load_room(key=True, room_data=[
 "        .    ","             ","             ","             "," LLLL....g   ",
 "        v    ","             ","             ","             ","             ",
 ])
-zx.map_load_room(key=True, room_data=[
+my.map_load_room(key=True, room_data=[
 "    ^        ","             ","             ","    ^        ","             ",
 "    .      $ ","    ^        ","             ","   g...L.Lk  ","    ^        ",
 "    .....LL  ","   .......   ","  ...LkL...  ","   .....L.L  "," g.....LLLL  ",
@@ -916,7 +916,7 @@ zx.map_load_room(key=True, room_data=[
 " LLLLLLL.    ","             ","             ","             "," LLL..L..g   ",
 "        v    ","             ","             ","             ","             ",
 ])
-zx.map_load_room(key=True, room_data=[
+my.map_load_room(key=True, room_data=[
 "             ","             ","             ","    ^        ","             ",
 "    ^        ","    ^        ","             ","   g......k  ","    ^        ",
 "    .......  ","   ....C..   ","  CC..k....  ","   ........  ","   ........  ",
@@ -931,7 +931,7 @@ zx.map_load_room(key=True, room_data=[
 "    C.. .    ","             ","             ","             ","  .......g   ",
 "        v    ","             ","             ","             ","             ",
 ])
-zx.map_load_room(key=True, room_data=[
+my.map_load_room(key=True, room_data=[
 "             ","             ","             ","    ^        ","             ",
 "    ^        ","    ^        ","             ","   g... .Ck  ","    ^        ",
 "    .......  ","   .......   ","  ...CkC...  ","   .... .CC  "," ...... ...  ",
@@ -950,7 +950,7 @@ zx.map_load_room(key=True, room_data=[
 #
 # depth 1 rooms
 #
-zx.map_load_room(depth=1, room_data=[
+my.map_load_room(depth=1, room_data=[
 "             ","         ^   ","             ","             ","             ",
 "    ^        ","         .   ","             ","    ^        ","    ^        ",
 "   ....w.w.  ","  ww......B  ","  f.ww....   ","  ...L.....  ","  ...L....f  ",
@@ -965,7 +965,7 @@ zx.map_load_room(depth=1, room_data=[
 "             ","             ","             ","             ","             ",
 "             ","             ","             ","             ","             ",
 ])
-zx.map_load_room(depth=1, room_data=[
+my.map_load_room(depth=1, room_data=[
 "             ","             ","             ","             ","             ",
 "    ^        ","    ^        ","         f   ","    ^     f  ","    ^        ",
 "   ....L.L.  ","  LL......   ","  ..LL....   ","  ...L.....  ","  ...L.....  ",
@@ -980,7 +980,7 @@ zx.map_load_room(depth=1, room_data=[
 "             ","             ","             ","             ","             ",
 "             ","             ","             ","             ","             ",
 ])
-zx.map_load_room(depth=1, room_data=[
+my.map_load_room(depth=1, room_data=[
 "             ","             ","             ","             ","             ",
 "    ^        ","    ^        ","             ","    ^        ","    ^        ",
 "   .......   ","    ...f     ","             ","  ...LL  $.m ","   ....      ",
@@ -995,7 +995,7 @@ zx.map_load_room(depth=1, room_data=[
 "             ","             ","             ","             "," .M.    ...  ",
 "             ","             ","             ","             "," $..D.mD..$  ",
 ])
-zx.map_load_room(depth=1, room_data=[
+my.map_load_room(depth=1, room_data=[
 "             ","             ","             ","             ","             ",
 "    ^        ","    ^        ","             ","    ^        ","    ^        ",
 "   ...       ","    ....LLL  ","             ","  ...LL  ..m ","   ....      ",
@@ -1010,7 +1010,7 @@ zx.map_load_room(depth=1, room_data=[
 "  $..!       ","    .m...    ","   Cm...$C   "," L.........  ","..m...D..$   ",
 "             ","    ....$    ","   CCCCCCC   "," LLLLLLL     ","$..... !..   ",
 ])
-zx.map_load_room(depth=1, room_data=[
+my.map_load_room(depth=1, room_data=[
 "             ","             ","             ","             ","             ",
 "    ^        ","    ^        ","             ","    ^        ","    ^        ",
 "   ...LLLLL  ","    ....LLL  ","             ","  ...LL  f.m ","  .......    ",
@@ -1025,7 +1025,7 @@ zx.map_load_room(depth=1, room_data=[
 "  ...!  .    ","    .L.L.    ","    m...f    "," L.........  ","..m...D.!$.  ",
 "        v    ","    !.m.$    ","    .....    "," LLLLLLL     ","...... f$f.  ",
 ])
-zx.map_load_room(depth=1, room_data=[
+my.map_load_room(depth=1, room_data=[
 "             ","         ^   ","             ","             ","             ",
 "    ^        ","         .   ","             ","    ^        ","    ^        ",
 "   ....w.w.  ","  ww......B  ","  ..ww....   ","  ...C.....  ","  ...C....f  ",
@@ -1040,7 +1040,7 @@ zx.map_load_room(depth=1, room_data=[
 "             ","             ","             ","             ","             ",
 "             ","             ","             ","             ","             ",
 ])
-zx.map_load_room(depth=1, room_data=[
+my.map_load_room(depth=1, room_data=[
 "             ","             ","             ","             ","             ",
 "    ^        ","    ^        ","             ","    ^        ","    ^        ",
 "   ....C.C.  ","  CC.......  ","  ..CC....f  ","  ...C.....  ","  ...C...f.  ",
@@ -1055,7 +1055,7 @@ zx.map_load_room(depth=1, room_data=[
 "             ","             ","             ","             ","             ",
 "             ","             ","             ","             ","             ",
 ])
-zx.map_load_room(depth=1, room_data=[
+my.map_load_room(depth=1, room_data=[
 "             ","             ","             ","             ","             ",
 "    ^        ","    ^        ","             ","    ^        ","    ^        ",
 "   ...       ","    ....     ","             ","  ...CC  $.m ","   ....      ",
@@ -1070,7 +1070,7 @@ zx.map_load_room(depth=1, room_data=[
 "             ","             ","             ","             "," .M.    ...  ",
 "             ","             ","             ","             "," $..D.mD..$  ",
 ])
-zx.map_load_room(depth=1, room_data=[
+my.map_load_room(depth=1, room_data=[
 "             ","             ","             ","             ","             ",
 "    ^        ","    ^        ","             ","    ^        ","    ^        ",
 "   f..       ","    f...CCC  ","             ","  ...CC  f.m ","   ....  ... ",
@@ -1085,7 +1085,7 @@ zx.map_load_room(depth=1, room_data=[
 "  $..!       ","    .m...    ","   Cm...$C   "," C.........  ","..m...D..$   ",
 "             ","    ....$    ","   CCCCCCC   "," CCCCCCC     ","$..... !..   ",
 ])
-zx.map_load_room(depth=1, room_data=[
+my.map_load_room(depth=1, room_data=[
 "             ","             ","             ","             ","             ",
 "    ^        ","    ^        ","             ","    ^        ","    ^        ",
 "   ...CCCCC  ","    ....CCC  ","             ","  ...CC  ..m ","  .......    ",
@@ -1100,7 +1100,7 @@ zx.map_load_room(depth=1, room_data=[
 "  ...!  .    ","    .C.C.    ","    m...f    "," C.........  ","..m...D.!$.  ",
 "        v    ","    !.m.$    ","    .....    "," CCCCCCC     ","...... f$f.  ",
 ])
-zx.map_load_room(depth=1, room_data=[
+my.map_load_room(depth=1, room_data=[
 "             ","         ^   ","             ","             ","             ",
 "    ^        ","         .   ","             ","    ^        ","    ^        ",
 "   ....w.w.  ","  ww......B  ","  ..ww....   ","  .........  ","  .........  ",
@@ -1115,7 +1115,7 @@ zx.map_load_room(depth=1, room_data=[
 "             ","             ","             ","             ","             ",
 "             ","             ","             ","             ","             ",
 ])
-zx.map_load_room(depth=1, room_data=[
+my.map_load_room(depth=1, room_data=[
 "             ","             ","             ","             ","             ",
 "    ^        ","    ^        ","             ","    ^        ","    ^        ",
 "   ........  ","  .........  ","  ........   ","  .........  ","  .........  ",
@@ -1130,7 +1130,7 @@ zx.map_load_room(depth=1, room_data=[
 "             ","             ","             ","             ","             ",
 "             ","             ","             ","             ","             ",
 ])
-zx.map_load_room(depth=1, room_data=[
+my.map_load_room(depth=1, room_data=[
 "             ","             ","             ","             ","             ",
 "    ^        ","    ^        ","             ","    ^        ","    ^        ",
 "   ...       ","    ....     ","             ","  .....  $.m ","   ....      ",
@@ -1145,7 +1145,7 @@ zx.map_load_room(depth=1, room_data=[
 "             ","             ","             ","             "," .M.    ...  ",
 "             ","             ","             ","             "," $..D.mD..$  ",
 ])
-zx.map_load_room(depth=1, room_data=[
+my.map_load_room(depth=1, room_data=[
 "             ","             ","             ","             ","             ",
 "    ^        ","    ^        ","             ","    ^        ","    ^        ",
 "   ...       ","    .......  ","             ","  .....  ..m ","   ....      ",
@@ -1160,7 +1160,7 @@ zx.map_load_room(depth=1, room_data=[
 "  $..!       ","    .m...    ","   Cm...$C   "," ..........  ","..m...D..$   ",
 "             ","    ....$    ","   CCCCCCC   "," .......     ","$..... !..   ",
 ])
-zx.map_load_room(depth=1, room_data=[
+my.map_load_room(depth=1, room_data=[
 "             ","             ","             ","             ","             ",
 "    ^        ","    ^        ","             ","    ^        ","    ^        ",
 "   ........  ","    .......  ","             ","  .....  ..m ","  .......    ",
@@ -1179,7 +1179,7 @@ zx.map_load_room(depth=1, room_data=[
 #
 # depth 2 rooms
 #
-zx.map_load_room(depth=2, room_data=[
+my.map_load_room(depth=2, room_data=[
 "     ^       ","     C^.     ","             ","             ","             ",
 "     .       ","    .C=C.    "," b.......... ","    ^        ","    ^        ",
 "  C.C.C.C.C  ","   ..C=C..   "," .g.....C... ","    .        ","   ....      ",
@@ -1194,7 +1194,7 @@ zx.map_load_room(depth=2, room_data=[
 "             ","    .....    ","             ","    .        ","   ....m.... ",
 "             ","     .v.     ","             ","    ........>","   ......... ",
 ])
-zx.map_load_room(depth=2, room_data=[
+my.map_load_room(depth=2, room_data=[
 "     ^       ","             ","      ^      ","             ","             ",
 "     .       ","    C....    "," .C......... ","    ^        ","    ^        ",
 "  ..C.C.C..  ","   .C.....   "," .         . ","    .        ","   ....      ",
@@ -1209,7 +1209,7 @@ zx.map_load_room(depth=2, room_data=[
 "             ","    C....    ","      .      ","  .k.  .     ","   ...L.m... ",
 "             ","             ","      v      ","       v     ","   ...L..... ",
 ])
-zx.map_load_room(depth=2, room_data=[
+my.map_load_room(depth=2, room_data=[
 "             ","             ","             ","             ","             ",
 "    ^        ","    ^        ","             ","    ^        ","    ^        ",
 "  C........  ","   ....C...  ","  ...C....B  ","  ........G  ","  G....C...  ",
@@ -1224,7 +1224,7 @@ zx.map_load_room(depth=2, room_data=[
 "             ","             ","             ","             ","             ",
 "             ","             ","             ","             ","             ",
 ])
-zx.map_load_room(depth=2, room_data=[
+my.map_load_room(depth=2, room_data=[
 "             ","             ","             ","             ","             ",
 "    ^        ","    ^        ","             ","    ^        ","    ^        ",
 "  ....C..g$  ","   .....     ","    ......B  ","  ........G  ","  G.... ...  ",
@@ -1239,7 +1239,7 @@ zx.map_load_room(depth=2, room_data=[
 "             ","             ","             ","             ","             ",
 "             ","             ","             ","             ","             ",
 ])
-zx.map_load_room(depth=2, room_data=[
+my.map_load_room(depth=2, room_data=[
 "             ","             ","             ","             ","             ",
 "    ^        ","    ^        ","             ","    ^        ","    ^        ",
 "   B.B       ","    ...B     ","             ","  .B.B.  $.G ","   ....      ",
@@ -1254,7 +1254,7 @@ zx.map_load_room(depth=2, room_data=[
 "             ","             ","             ","             ","             ",
 "             ","             ","             ","             ","             ",
 ])
-zx.map_load_room(depth=2, room_data=[
+my.map_load_room(depth=2, room_data=[
 "             ","             ","             ","             ","             ",
 "    ^        ","    ^        ","             ","    ^        ","    ^        ",
 "   ...C.     ","    .....b.  ","             ","  .....  ..G ","   ....C$    ",
@@ -1269,7 +1269,7 @@ zx.map_load_room(depth=2, room_data=[
 "  $...  .    ","    .G...    ","    G...$    "," ..........  ","..g...D..$   ",
 "        v    ","    ....$    ","             "," .......     ","...... ...   ",
 ])
-zx.map_load_room(depth=2, room_data=[
+my.map_load_room(depth=2, room_data=[
 "             ","             ","             ","             ","             ",
 "    ^        ","    ^        ","             ","    ^        ","    ^        ",
 "   .......B  ","    ......B  ","             ","  B....  ..G ","   ....      ",
@@ -1288,7 +1288,7 @@ zx.map_load_room(depth=2, room_data=[
 #
 # depth 3 rooms
 #
-zx.map_load_room(depth=3, room_data=[
+my.map_load_room(depth=3, room_data=[
 "             ","             ","             ","             ","             ",
 "    ^        ","    ^        ","             ","    ^        ","    ^        ",
 "  B.......B  ","  .M....C..  ","  .b.....B   ","    .....    ","  G......B   ",
@@ -1307,7 +1307,7 @@ zx.map_load_room(depth=3, room_data=[
 #
 # depth 4 rooms
 #
-zx.map_load_room(depth=4, room_data=[
+my.map_load_room(depth=4, room_data=[
 "             ","             ","             ","             ","             ",
 "    ^        ","    ^        ","             ","    ^        ","    ^        ",
 "  ........L  ","  ......L..  ","  ........L  ","   ........  ","  ........   ",
@@ -1326,7 +1326,7 @@ zx.map_load_room(depth=4, room_data=[
 #
 # depth 5 rooms
 #
-zx.map_load_room(depth=5, room_data=[
+my.map_load_room(depth=5, room_data=[
 "             ","             ","             ","             ","             ",
 "   ^         ","    ^        ","             ","    ^        ","    ^        ",
 "  M........  ","  ........M  ","  .........  ","  ........G  ","  .........  ",
@@ -1345,7 +1345,7 @@ zx.map_load_room(depth=5, room_data=[
 #
 # depth 6 rooms
 #
-zx.map_load_room(depth=6, room_data=[
+my.map_load_room(depth=6, room_data=[
 "             ","             ","             ","             ","             ",
 "    ^        ","    ^        ","             ","    ^        ","    ^        ",
 "  B...www..  ","  wwww....B  ","  .www....B  ","  B........  ","  ........M  ",
@@ -1364,7 +1364,7 @@ zx.map_load_room(depth=6, room_data=[
 #
 # secret rooms
 #
-zx.map_load_room(secret=True, room_data=[
+my.map_load_room(secret=True, room_data=[
 "             ","             ","             ","             ","             ",
 "    ^        ","    ^        ","             ","    ^        ","    ^        ",
 "  !.......B  ","  g........  ","  LL.....L   ","  L......L*  ","  L.....L.!  ",
@@ -1379,7 +1379,7 @@ zx.map_load_room(secret=True, room_data=[
 "             ","             "," o.L...      ","  ...L.L.$m. ","  $o g,...*  ",
 "             ","             ","             ","         ooo ","             ",
 ])
-zx.map_load_room(secret=True, room_data=[
+my.map_load_room(secret=True, room_data=[
 "             ","             ","             ","    ^        ","    ^        ",
 "    ^        ","    ^        ","             ","    .   CC$  ","    .        ",
 "  *.......B  ","  g.......*  ","  CC,...CCk  ","  C....,CCC  ","  C.....C.k  ",
@@ -1394,7 +1394,7 @@ zx.map_load_room(secret=True, room_data=[
 "        .    ","    .!k.     ","  oC,..  $.  ","  ..,C.C.$m. ","  $. g,...o  ",
 "        v    ","    $..$     ","             ","         ..* ","             ",
 ])
-zx.map_load_room(secret=True, room_data=[
+my.map_load_room(secret=True, room_data=[
 "             ","             ","             ","             ","             ",
 "    ^        ","    ^        ","             ","    ^        ","    ^        ",
 "  k.......B  ","  g.....b.!  ","  ww......   ","  w......w   ","  w.....w.   ",
@@ -1409,7 +1409,7 @@ zx.map_load_room(secret=True, room_data=[
 "             ","             ","  .w,..      ","  ..,w.w.$m. ","  $* g,....  ",
 "             ","             ","             ","         ..* ","  oo         ",
 ])
-zx.map_load_room(secret=True, room_data=[
+my.map_load_room(secret=True, room_data=[
 "             ","             ","     ^       ","             ","             ",
 "    ^        ","    ^        ","     .       ","    ^        ","    ^        ",
 "  .... ..$   ","    wwww,.!  ","  ww.....w   ","  w.....,w   ","    .        ",
@@ -1424,7 +1424,7 @@ zx.map_load_room(secret=True, room_data=[
 "        .    ","   ........  ","  ....g...*  ","  ..,w.w.$m. "," ..    .     ",
 "        v    ","             ","             ","         ... ","       V     ",
 ])
-zx.map_load_room(secret=True, room_data=[
+my.map_load_room(secret=True, room_data=[
 "             ","             ","             ","             ","             ",
 "    ^        ","    ^        ","             ","    ^        ","    ^        ",
 "  k.......B  ","  g.....b.!  ","  ``......   ","  `......`   ","  `.....`.   ",
@@ -1439,7 +1439,7 @@ zx.map_load_room(secret=True, room_data=[
 "             ","             ","  .`,..      ","  ..,`.`.$m. ","  $* g,....  ",
 "             ","             ","             ","         ..* ","  oo         ",
 ])
-zx.map_load_room(secret=True, room_data=[
+my.map_load_room(secret=True, room_data=[
 "             ","             ","     ^       ","             ","             ",
 "    ^        ","    ^        ","     .       ","    ^        ","    ^        ",
 "  .... ..$   ","    ````,.!  ","  ``.....`   ","  `.....,`   ","    .        ",
@@ -1454,7 +1454,7 @@ zx.map_load_room(secret=True, room_data=[
 "        .    ","   ........  ","  ....g...*  ","  ..,`.`.$m. "," ..    .     ",
 "        v    ","             ","             ","         ... ","       V     ",
 ])
-zx.map_load_room(secret=True, room_data=[
+my.map_load_room(secret=True, room_data=[
 "             ","             ","     ^       ","             ","             ",
 "    ^        ","    ^        ","     .       ","    ^        ","    ^        ",
 "  .... m.m   ","    ooo...!  ","  g.......g  ","  WWwww,.w   ","    .        ",
@@ -1469,7 +1469,7 @@ zx.map_load_room(secret=True, room_data=[
 "        *    ","   .......*  ","  ....g....  ","         ..$ ","  ..   .     ",
 "        v    ","             ","             ","         $.. ","       V     ",
 ])
-zx.map_load_room(secret=True, room_data=[
+my.map_load_room(secret=True, room_data=[
 "             ","             ","     ^       ","             ","             ",
 "    ^        ","    ^        ","     D       ","    ^        ","    ^        ",
 "  m... ...   ","    oooo..!  ","   .......   ","  WWwww,.w   ","    .        ",
@@ -1484,7 +1484,7 @@ zx.map_load_room(secret=True, room_data=[
 "  $.M$  .    ","   .CCCCCCC  ","  ....g....  ","    ..   ..$ ","       .     ",
 "        v    ","             ","             ","    ....D$.M ","       V     ",
 ])
-zx.map_load_room(secret=True, room_data=[
+my.map_load_room(secret=True, room_data=[
 "             ","    ^        ","     ^       ","             ","             ",
 "    ^        ","    .        ","     D       ","    ^        ","    ^        ",
 "    .        ","    ....L.!  "," LLL C...&   ","    =     !  ","    .        ",
@@ -1499,7 +1499,7 @@ zx.map_load_room(secret=True, room_data=[
 "  $.M$.      ",".  C     ofo ","   $!$....   ","    ..   ..$ ","             ",
 "             ",".....&.DC!o$ ","             ","    &.CCC$.. ","             ",
 ])
-zx.map_load_room(secret=True, room_data=[
+my.map_load_room(secret=True, room_data=[
 "             ","    ^        ","     ^       ","             ","             ",
 "    ^        ","    .        ","     D       ","    ^        ","    ^        ",
 "    .        "," ..........  "," LLL.C...&   ","    =     &  ","    .        ",

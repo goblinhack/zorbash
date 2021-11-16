@@ -1,4 +1,4 @@
-import zx
+import my
 import tp
 
 
@@ -16,8 +16,8 @@ def tp_init(name, tiles=[]):
     mytp.set_is_loggable(False)
     mytp.set_text_a_or_an("the")
     mytp.set_text_description("Burnt not so funky grass.")
-    mytp.set_z_depth(zx.MAP_DEPTH_FLOOR2)
-    mytp.set_z_prio(zx.MAP_PRIO_BEHIND)
+    mytp.set_z_depth(my.MAP_DEPTH_FLOOR2)
+    mytp.set_z_prio(my.MAP_PRIO_BEHIND)
 
     for t in tiles:
         mytp.set_tile(t)

@@ -1,14 +1,14 @@
-import zx
+import my
 import tp
 
 def on_use(owner, item, target, x, y):
-    #zx.con("owner   {} {:08X}".format(zx.thing_get_name(owner), owner))
-    #zx.con("item    {} {:08X}".format(zx.thing_get_name(item), item))
-    #zx.con("target  {} {:08X}".format(zx.thing_get_name(target), target))
-    zx.thing_sound_play_channel(owner, zx.CHANNEL_WEAPON, "sword_swing{}".format(zx.non_pcg_randint(1,3)))
-    damage = zx.thing_get_damage_melee(item)
-    enchant = zx.thing_get_enchant(item)
-    zx.thing_set_current_damage(owner, damage + enchant)
+    #my.con("owner   {} {:08X}".format(my.thing_get_name(owner), owner))
+    #my.con("item    {} {:08X}".format(my.thing_get_name(item), item))
+    #my.con("target  {} {:08X}".format(my.thing_get_name(target), target))
+    my.thing_sound_play_channel(owner, my.CHANNEL_WEAPON, "sword_swing{}".format(my.non_pcg_randint(1,3)))
+    damage = my.thing_get_damage_melee(item)
+    enchant = my.thing_get_enchant(item)
+    my.thing_set_current_damage(owner, damage + enchant)
 
 def init_swing(name):
     mytp = tp.Tp(name)
@@ -28,8 +28,8 @@ def init_swing(name):
     mytp.set_is_tmp_thing(True)
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("Thy shining pointy mechanism of justice.")
-    mytp.set_z_depth(zx.MAP_DEPTH_EQUIP)
-    mytp.set_z_prio(zx.MAP_PRIO_BEHIND)
+    mytp.set_z_depth(my.MAP_DEPTH_EQUIP)
+    mytp.set_z_prio(my.MAP_PRIO_BEHIND)
 
     delay = 10
     mytp.set_tile(tile=name + "_left.1", delay_ms=delay, is_dir_left=True)
@@ -76,8 +76,8 @@ def init_carry(name):
     mytp.set_is_moveable(True)
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("Thy shining pointy mechanism of justice.")
-    mytp.set_z_depth(zx.MAP_DEPTH_EQUIP)
-    mytp.set_z_prio(zx.MAP_PRIO_NORMAL)
+    mytp.set_z_depth(my.MAP_DEPTH_EQUIP)
+    mytp.set_z_prio(my.MAP_PRIO_NORMAL)
 
     delay = 550
     mytp.set_tile(tile=name + ".1", delay_ms=delay)
@@ -126,8 +126,8 @@ def init_weapon(name, text_name, short_text_name):
     mytp.set_text_enchant("increase damage by 1")
     mytp.set_equip_carry_anim("axe_basic_carry")
     mytp.set_gold_value_dice("150")
-    mytp.set_z_depth(zx.MAP_DEPTH_OBJ)
-    mytp.set_z_prio(zx.MAP_PRIO_BEHIND)
+    mytp.set_z_depth(my.MAP_DEPTH_OBJ)
+    mytp.set_z_prio(my.MAP_PRIO_BEHIND)
 
     mytp.set_tile(tile=name + ".1")
 

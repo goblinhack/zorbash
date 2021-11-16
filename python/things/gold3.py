@@ -1,4 +1,4 @@
-import zx
+import my
 import tp
 
 
@@ -240,7 +240,7 @@ def gold_init(name, text_name):
     mytp.set_normal_placement_rules(True)
     mytp.set_on_death_drop_all_items(False)
     mytp.set_on_death_is_open(False)
-    mytp.set_rarity(zx.RARITY_COMMON)
+    mytp.set_rarity(my.RARITY_COMMON)
     mytp.set_text_a_or_an("an")
     mytp.set_text_description("Some gold goins.")
     mytp.set_unused_flag10(False)
@@ -271,8 +271,8 @@ def gold_init(name, text_name):
     mytp.set_unused_flag7(False)
     mytp.set_unused_flag8(False)
     mytp.set_unused_flag9(False)
-    mytp.set_z_depth(zx.MAP_DEPTH_OBJ)
-    mytp.set_z_prio(zx.MAP_PRIO_BEHIND)
+    mytp.set_z_depth(my.MAP_DEPTH_OBJ)
+    mytp.set_z_prio(my.MAP_PRIO_BEHIND)
 
     mytp.set_tile(tile=name + ".1", is_dir_none=True)
 

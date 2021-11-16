@@ -1,4 +1,4 @@
-import zx
+import my
 import tp
 
 
@@ -14,8 +14,8 @@ def tp_init(name, tiles=[], left1_tiles=[], bot3_tiles=[]):
     mytp.set_is_loggable(False)
     mytp.set_text_a_or_an("the")
     mytp.set_text_description("Some dirt, what more can I say?")
-    mytp.set_z_depth(zx.MAP_DEPTH_FLOOR)
-    mytp.set_z_prio(zx.MAP_PRIO_NORMAL)
+    mytp.set_z_depth(my.MAP_DEPTH_FLOOR)
+    mytp.set_z_prio(my.MAP_PRIO_NORMAL)
 
     for t in tiles:
         mytp.set_tile(t)

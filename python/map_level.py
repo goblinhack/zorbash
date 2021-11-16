@@ -1,7 +1,7 @@
-import zx
+import my
 
 #TODO
-#zx.level_add(level_data=[
+#my.level_add(level_data=[
 #"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
 #"x                                                                      x",
 #"x                                                                      x",

@@ -1,16 +1,16 @@
-import zx
+import my
 import tp
 
 mytp = None
 
 def on_tick(owner, item, x, y):
-    poison = zx.thing_get_poison(owner)
+    poison = my.thing_get_poison(owner)
     if poison == 0:
-        zx.topcon("You are no longer poisoned.")
-        zx.thing_defeated(item, "end of debuff")
+        my.topcon("You are no longer poisoned.")
+        my.thing_defeated(item, "end of debuff")
         return True
     # Too noisy
-    # zx.topcon("%%fg=yellow$You are poisoned!")
+    # my.topcon("%%fg=yellow$You are poisoned!")
     return True
 
 def debuff_poisoned_init(name, text_name):

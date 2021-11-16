@@ -1,11 +1,11 @@
-import zx
+import my
 import tp
 
 def on_idle_dice(me, x, y):
-    zx.level_spawn_next_to(me, "ghost_minion")
+    my.level_spawn_next_to(me, "ghost_minion")
 
 def on_death(me, x, y):
-    zx.level_spawn_at_thing(me, "generator_explosion")
+    my.level_spawn_at_thing(me, "generator_explosion")
 
 def tp_init(name, text_name):
     mytp = tp.Tp(name, text_name)
@@ -49,8 +49,8 @@ def tp_init(name, text_name):
     mytp.set_stat_strength(0)
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("A cursed pile of bones, spawning spirits.")
-    mytp.set_z_depth(zx.MAP_DEPTH_OBJ)
-    mytp.set_z_prio(zx.MAP_PRIO_NORMAL)
+    mytp.set_z_depth(my.MAP_DEPTH_OBJ)
+    mytp.set_z_prio(my.MAP_PRIO_NORMAL)
 
     delay = 200
     mytp.set_tile(tile=name + ".1.100", is_hp_100_percent=True, delay_ms=delay)

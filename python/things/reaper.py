@@ -1,4 +1,4 @@
-import zx
+import my
 import tp
 
 def tp_init(name, text_name):
@@ -240,11 +240,11 @@ def tp_init(name, text_name):
     mytp.set_is_weapon(False)
     mytp.set_is_wooden(False)
     mytp.set_long_text_description("A lesser reaper. You cannot defeat what does not live!")
-    mytp.set_monst_size(zx.MONST_SIZE_NORMAL)
+    mytp.set_monst_size(my.MONST_SIZE_NORMAL)
     mytp.set_normal_placement_rules(True)
     mytp.set_on_death_drop_all_items(False)
     mytp.set_on_death_is_open(False)
-    mytp.set_rarity(zx.RARITY_VERY_RARE)
+    mytp.set_rarity(my.RARITY_VERY_RARE)
     mytp.set_resurrect_dice("1d10+30")
     mytp.set_stat_attack(18) # 10, means no bonus
     mytp.set_stat_constitution(25)
@@ -281,8 +281,8 @@ def tp_init(name, text_name):
     mytp.set_unused_flag7(False)
     mytp.set_unused_flag8(False)
     mytp.set_unused_flag9(False)
-    mytp.set_z_depth(zx.MAP_DEPTH_OBJ)
-    mytp.set_z_prio(zx.MAP_PRIO_NORMAL)
+    mytp.set_z_depth(my.MAP_DEPTH_OBJ)
+    mytp.set_z_prio(my.MAP_PRIO_NORMAL)
 
     delay = 1000
     mytp.set_tile(tile=name + ".1.100", is_hp_100_percent=True, delay_ms=delay)

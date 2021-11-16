@@ -1,12 +1,12 @@
 import builtins
-import zx
+import my
 import tp
 
 def on_idle(me, x, y):
-    zx.level_spawn_at_thing(me, "acid1")
+    my.level_spawn_at_thing(me, "acid1")
 
 def on_death(me, x, y):
-    zx.level_spawn_at_thing(me, "green_splatter")
+    my.level_spawn_at_thing(me, "green_splatter")
 
 def tp_init(name, text_name, short_text_name):
     mytp = tp.Tp(name, text_name, short_text_name)
@@ -247,14 +247,14 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_light_color("green")
     mytp.set_light_strength(2)
     mytp.set_long_text_description("Dungeon cleaners have evolved to scrub their domain of all messy organic matter. That means you. Cleaners leave a trail of corrosive slime in their wake. Avoid this. Cleaners also have a habit of eating your hard fought items.")
-    mytp.set_monst_size(zx.MONST_SIZE_LARGE)
+    mytp.set_monst_size(my.MONST_SIZE_LARGE)
     mytp.set_normal_placement_rules(True)
     mytp.set_nutrition_dice("1d4")
     mytp.set_on_death_do("cleaner.on_death()")
     mytp.set_on_death_drop_all_items(True)
     mytp.set_on_death_is_open(False)
     mytp.set_on_idle_dice("1d5:cleaner.on_idle()")
-    mytp.set_rarity(zx.RARITY_COMMON)
+    mytp.set_rarity(my.RARITY_COMMON)
     mytp.set_stat_attack(10) # 10, means no bonus
     mytp.set_stat_constitution(20)
     mytp.set_stat_defence(14)
@@ -290,8 +290,8 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_unused_flag7(False)
     mytp.set_unused_flag8(False)
     mytp.set_unused_flag9(False)
-    mytp.set_z_depth(zx.MAP_DEPTH_OBJ)
-    mytp.set_z_prio(zx.MAP_PRIO_INFRONT) # so it appears over things when consuming
+    mytp.set_z_depth(my.MAP_DEPTH_OBJ)
+    mytp.set_z_prio(my.MAP_PRIO_INFRONT) # so it appears over things when consuming
 
     delay = 200
     mytp.set_tile(tile=name + ".1.100", is_hp_100_percent=True, delay_ms=delay)

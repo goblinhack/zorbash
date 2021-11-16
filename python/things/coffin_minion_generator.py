@@ -1,16 +1,16 @@
-import zx
+import my
 import tp
 
 def on_idle_dice(me, x, y):
-    if zx.pcg_randint(1, 100) < 10:
-        if zx.level_spawn_next_to(me, "bat_greater"):
-            zx.thing_sound_play_channel(me, zx.CHANNEL_MONST_BIRTH, "bones1")
+    if my.pcg_randint(1, 100) < 10:
+        if my.level_spawn_next_to(me, "bat_greater"):
+            my.thing_sound_play_channel(me, my.CHANNEL_MONST_BIRTH, "bones1")
     else:
-        if zx.level_spawn_next_to(me, "bat_minion"):
-            zx.thing_sound_play_channel(me, zx.CHANNEL_MONST_BIRTH, "bones2")
+        if my.level_spawn_next_to(me, "bat_minion"):
+            my.thing_sound_play_channel(me, my.CHANNEL_MONST_BIRTH, "bones2")
 
 def on_death(me, x, y):
-    zx.level_spawn_at_thing(me, "generator_explosion")
+    my.level_spawn_at_thing(me, "generator_explosion")
 
 def tp_init(name, text_name):
     mytp = tp.Tp(name, text_name)
@@ -54,8 +54,8 @@ def tp_init(name, text_name):
     mytp.set_stat_strength(0)
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("A cursed coffin, spawning all manner of surprises.")
-    mytp.set_z_depth(zx.MAP_DEPTH_OBJ)
-    mytp.set_z_prio(zx.MAP_PRIO_NORMAL)
+    mytp.set_z_depth(my.MAP_DEPTH_OBJ)
+    mytp.set_z_prio(my.MAP_PRIO_NORMAL)
 
     delay = 200
     mytp.set_tile(tile=name + ".100", is_hp_100_percent=True, delay_ms=delay)

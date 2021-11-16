@@ -1,11 +1,11 @@
-import zx
+import my
 import tp
 
 
 def on_you_are_hit(me, hitter, real_hitter, x, y, crit, bite, poison, damage):
-    zx.level_spawn_at_thing(me, "small_fire")
-    zx.level_place_at(me, "dry_grass_dead", x, y)
-    zx.topcon("The dry grass burns!")
+    my.level_spawn_at_thing(me, "small_fire")
+    my.level_place_at(me, "dry_grass_dead", x, y)
+    my.topcon("The dry grass burns!")
 
 def tp_init(name, tiles=[]):
     mytp = tp.Tp(name, "dry grass")
@@ -24,8 +24,8 @@ def tp_init(name, tiles=[]):
     mytp.set_on_you_are_hit_do("dry_grass.on_you_are_hit()")
     mytp.set_text_a_or_an("the")
     mytp.set_text_description("Brittle dry and slightly funky grass.")
-    mytp.set_z_depth(zx.MAP_DEPTH_FLOOR2)
-    mytp.set_z_prio(zx.MAP_PRIO_BEHIND)
+    mytp.set_z_depth(my.MAP_DEPTH_FLOOR2)
+    mytp.set_z_prio(my.MAP_PRIO_BEHIND)
 
     for t in tiles:
         mytp.set_tile(t)

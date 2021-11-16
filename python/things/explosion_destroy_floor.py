@@ -1,12 +1,12 @@
-import zx
+import my
 import tp
 
 def on_death(me, x, y):
-    zx.thing_sound_play_channel(me, zx.CHANNEL_EXPLOSION, "explosion_e")
-    zx.if_matches_then_kill(me, "is_floor", x, y)
-    zx.if_matches_then_kill(me, "is_corridor", x, y)
-    zx.if_matches_then_kill(me, "is_dirt", x, y)
-    zx.level_place_at(me, "chasm1", x, y)
+    my.thing_sound_play_channel(me, my.CHANNEL_EXPLOSION, "explosion_e")
+    my.if_matches_then_kill(me, "is_floor", x, y)
+    my.if_matches_then_kill(me, "is_corridor", x, y)
+    my.if_matches_then_kill(me, "is_dirt", x, y)
+    my.level_place_at(me, "chasm1", x, y)
 
 def tp_init(name):
     mytp = tp.Tp(name)
@@ -19,8 +19,8 @@ def tp_init(name):
     mytp.set_is_loggable(True)
     mytp.set_is_tickable(True)
     mytp.set_on_death_do("explosion_destroy_floor.on_death()")
-    mytp.set_z_depth(zx.MAP_DEPTH_EXPLOSION_MINOR)
-    mytp.set_z_prio(zx.MAP_PRIO_INFRONT)
+    mytp.set_z_depth(my.MAP_DEPTH_EXPLOSION_MINOR)
+    mytp.set_z_prio(my.MAP_PRIO_INFRONT)
 
     delay = 50
     mytp.set_tile(tile="nothing")

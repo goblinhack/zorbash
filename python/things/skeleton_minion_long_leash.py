@@ -1,28 +1,28 @@
-import zx
+import my
 import tp
 
 def on_you_bite_attack(me, x, y):
-    sound = "growl{}".format(zx.non_pcg_randint(1, 10))
-    if not zx.thing_sound_play_channel(me, zx.CHANNEL_MONST, sound):
-        zx.thing_sound_play_channel(me, zx.CHANNEL_MONST_DEATH, sound)
+    sound = "growl{}".format(my.non_pcg_randint(1, 10))
+    if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound):
+        my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
 
 def on_you_are_hit(me, hitter, real_hitter, x, y, crit, bite, poison, damage):
-    sound = "hiss{}".format(zx.non_pcg_randint(1, 10))
-    if not zx.thing_sound_play_channel(me, zx.CHANNEL_MONST, sound):
-        zx.thing_sound_play_channel(me, zx.CHANNEL_MONST_DEATH, sound)
+    sound = "hiss{}".format(my.non_pcg_randint(1, 10))
+    if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound):
+        my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
 
 def on_you_miss_do(me, hitter, x, y):
-    sound = "hiss{}".format(zx.non_pcg_randint(1, 10))
-    if not zx.thing_sound_play_channel(me, zx.CHANNEL_MONST, sound):
-        zx.thing_sound_play_channel(me, zx.CHANNEL_MONST_DEATH, sound)
+    sound = "hiss{}".format(my.non_pcg_randint(1, 10))
+    if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound):
+        my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
 
 def on_death(me, x, y):
-    if zx.non_pcg_randint(1, 2) == 1:
-        if not zx.thing_sound_play_channel(me, zx.CHANNEL_MONST, "bones1"):
-            zx.thing_sound_play_channel(me, zx.CHANNEL_MONST_DEATH, "bones1")
+    if my.non_pcg_randint(1, 2) == 1:
+        if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, "bones1"):
+            my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, "bones1")
     else:
-        if not zx.thing_sound_play_channel(me, zx.CHANNEL_MONST, "bones2"):
-            zx.thing_sound_play_channel(me, zx.CHANNEL_MONST_DEATH, "bones2")
+        if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, "bones2"):
+            my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, "bones2")
 
 def tp_init(name, text_name):
     mytp = tp.Tp(name, text_name)
@@ -257,7 +257,7 @@ def tp_init(name, text_name):
     mytp.set_is_wooden(False)
     mytp.set_long_text_description("A collection of tortured bones, driven to wander the dungeon forever. Or at least until you release them. Such creatures abhor the cleansing powers of water.")
     mytp.set_minion_leash_distance(10)
-    mytp.set_monst_size(zx.MONST_SIZE_NORMAL)
+    mytp.set_monst_size(my.MONST_SIZE_NORMAL)
     mytp.set_normal_placement_rules(True)
     mytp.set_on_you_bite_attack_do("skeleton_minion.on_you_bite_attack()")
     mytp.set_on_death_do("skeleton_minion.on_death()")
@@ -265,7 +265,7 @@ def tp_init(name, text_name):
     mytp.set_on_death_is_open(False)
     mytp.set_on_you_are_hit_do("skeleton_minion.on_you_are_hit()")
     mytp.set_on_you_miss_do_do("skeleton_minion.on_you_miss_do()")
-    mytp.set_rarity(zx.RARITY_COMMON)
+    mytp.set_rarity(my.RARITY_COMMON)
     mytp.set_resurrect_dice("1d20+30")
     mytp.set_stat_attack(10) # 10, means no bonus
     mytp.set_stat_constitution(9)
@@ -311,8 +311,8 @@ def tp_init(name, text_name):
     mytp.set_unused_flag7(False)
     mytp.set_unused_flag8(False)
     mytp.set_unused_flag9(False)
-    mytp.set_z_depth(zx.MAP_DEPTH_OBJ)
-    mytp.set_z_prio(zx.MAP_PRIO_NORMAL)
+    mytp.set_z_depth(my.MAP_DEPTH_OBJ)
+    mytp.set_z_prio(my.MAP_PRIO_NORMAL)
 
     delay = 200
     mytp.set_tile("skeleton.1", is_dir_left=True, is_moving=True, delay_ms=delay)

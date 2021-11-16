@@ -1,4 +1,4 @@
-import zx
+import my
 import tp
 
 
@@ -18,8 +18,8 @@ def chasm_init(name, text_name, tiles=[]):
     mytp.set_is_loggable(False)
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("%%fg=red$A yawning chasm to the unknown below%%fg=reset$ (double click to jump into)")
-    mytp.set_z_depth(zx.MAP_DEPTH_CHASM)
-    mytp.set_z_prio(zx.MAP_PRIO_BEHIND)
+    mytp.set_z_depth(my.MAP_DEPTH_CHASM)
+    mytp.set_z_prio(my.MAP_PRIO_BEHIND)
 
     delay = 200
 

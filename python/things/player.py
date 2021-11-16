@@ -1,18 +1,18 @@
-import zx
+import my
 import tp
 
 
 # hitter: arrow / monst
 # real_hitter: who fired the arrow
 def on_you_are_hit(me, hitter, real_hitter, x, y, crit, bite, poison, damage):
-    # zx.topcon("player hit damage {}".format(damage))
+    # my.topcon("player hit damage {}".format(damage))
     if damage <= 5:
-        zx.thing_sound_play_channel(me, zx.CHANNEL_IMPACT, "player_hit{}".format(zx.non_pcg_randint(1, 4)))
+        my.thing_sound_play_channel(me, my.CHANNEL_IMPACT, "player_hit{}".format(my.non_pcg_randint(1, 4)))
     else:
-        zx.thing_sound_play_channel(me, zx.CHANNEL_IMPACT, "player_hit5")
+        my.thing_sound_play_channel(me, my.CHANNEL_IMPACT, "player_hit5")
 
 def on_you_bite_attack(me, x, y):
-    zx.sound_play("player_punch")
+    my.sound_play("player_punch")
 
 def on_born(me, x, y):
     pass
@@ -22,19 +22,19 @@ last_footstep = 0
 def on_move(me, x, y):
     global last_footstep
 
-    if zx.level_is_water_at(me, x, y):
-        footstep = zx.non_pcg_randint(1, 6)
+    if my.level_is_water_at(me, x, y):
+        footstep = my.non_pcg_randint(1, 6)
         while footstep == last_footstep:
-            footstep = zx.non_pcg_randint(1, 6)
+            footstep = my.non_pcg_randint(1, 6)
 
-        if zx.thing_sound_play_channel(me, zx.CHANNEL_FOOTSTEPS, "splash{}".format(footstep)):
+        if my.thing_sound_play_channel(me, my.CHANNEL_FOOTSTEPS, "splash{}".format(footstep)):
             last_footstep = footstep
     else:
-        footstep = zx.non_pcg_randint(1, 8)
+        footstep = my.non_pcg_randint(1, 8)
         while footstep == last_footstep:
-            footstep = zx.non_pcg_randint(1, 8)
+            footstep = my.non_pcg_randint(1, 8)
 
-        if zx.thing_sound_play_channel(me, zx.CHANNEL_FOOTSTEPS, "footsteps{}".format(footstep)):
+        if my.thing_sound_play_channel(me, my.CHANNEL_FOOTSTEPS, "footsteps{}".format(footstep)):
             last_footstep = footstep
 
 def tp_init(name, text_name, short_text_name, title):
@@ -282,7 +282,7 @@ def tp_init(name, text_name, short_text_name, title):
     mytp.set_is_wooden(False)
     mytp.set_light_strength(8)
     mytp.set_long_text_description("Our most noble adventurer of no particular race or gender or creed. Devoid of fear and stout of heart. Likes kittens.")
-    mytp.set_monst_size(zx.MONST_SIZE_NORMAL)
+    mytp.set_monst_size(my.MONST_SIZE_NORMAL)
     mytp.set_normal_placement_rules(False)
     mytp.set_on_born_do("player.on_born()")
     mytp.set_on_death_drop_all_items(False)
@@ -328,8 +328,8 @@ def tp_init(name, text_name, short_text_name, title):
     mytp.set_unused_flag7(False)
     mytp.set_unused_flag8(False)
     mytp.set_unused_flag9(False)
-    mytp.set_z_depth(zx.MAP_DEPTH_OBJ)
-    mytp.set_z_prio(zx.MAP_PRIO_NORMAL)
+    mytp.set_z_depth(my.MAP_DEPTH_OBJ)
+    mytp.set_z_prio(my.MAP_PRIO_NORMAL)
 
     delay = 900
     mytp.set_tile(tile=name + ".1", is_dir_left=True, is_moving=True, delay_ms=delay, frame=1)

@@ -1,11 +1,11 @@
-import zx
+import my
 import tp
 
 def on_equip(owner, me, x, y):
-    zx.thing_buff_add(owner, "buff_poison_resist")
+    my.thing_buff_add(owner, "buff_poison_resist")
 
 def on_unequip(owner, me, x, y):
-    zx.thing_buff_remove(owner, "buff_poison_resist")
+    my.thing_buff_remove(owner, "buff_poison_resist")
 
 def tp_init(name, text_name, short_text_name):
     mytp = tp.Tp(name, text_name, short_text_name)
@@ -280,8 +280,8 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_unused_flag7(False)
     mytp.set_unused_flag8(False)
     mytp.set_unused_flag9(False)
-    mytp.set_z_depth(zx.MAP_DEPTH_OBJ)
-    mytp.set_z_prio(zx.MAP_PRIO_BEHIND)
+    mytp.set_z_depth(my.MAP_DEPTH_OBJ)
+    mytp.set_z_prio(my.MAP_PRIO_BEHIND)
     mytp.set_equip_carry_anim("ring_poison_resist_carry")
 
     mytp.set_tile(tile=name, delay_ms=100)

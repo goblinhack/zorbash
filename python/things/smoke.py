@@ -1,8 +1,8 @@
-import zx
+import my
 import tp
 
 def on_fall(me, x, y):
-    zx.thing_defeated(me, "dissipated")
+    my.thing_defeated(me, "dissipated")
 
 def tp_init(name):
     mytp = tp.Tp(name)
@@ -17,8 +17,8 @@ def tp_init(name):
     mytp.set_on_fall_do("smoke.on_fall()")
     mytp.set_text_a_or_an("")
     mytp.set_text_description("Whisps of smoke.")
-    mytp.set_z_depth(zx.MAP_DEPTH_OBJ)
-    mytp.set_z_prio(zx.MAP_PRIO_NORMAL)
+    mytp.set_z_depth(my.MAP_DEPTH_OBJ)
+    mytp.set_z_prio(my.MAP_PRIO_NORMAL)
 
     delay = 150
     mytp.set_tile(tile=name + ".1", delay_ms=delay)

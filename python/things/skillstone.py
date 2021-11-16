@@ -1,12 +1,12 @@
-import zx
+import my
 import tp
 
 def explode(me, x, y):
-    zx.thing_msg(me, "The skillstone explodes.")
-    zx.level_spawn_at_thing(me, "explosion_major")
-    zx.level_spawn_fire_around_thing(me, "fire")
-    zx.level_spawn_at_thing(me, "fire")
-    zx.thing_defeated(me, "exploded")
+    my.thing_msg(me, "The skillstone explodes.")
+    my.level_spawn_at_thing(me, "explosion_major")
+    my.level_spawn_fire_around_thing(me, "fire")
+    my.level_spawn_at_thing(me, "fire")
+    my.thing_defeated(me, "exploded")
 
 def on_you_are_hit(me, hitter, real_hitter, x, y, crit, bite, poison, damage):
     explode(me, x, y)
@@ -286,8 +286,8 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_unused_flag7(False)
     mytp.set_unused_flag8(False)
     mytp.set_unused_flag9(False)
-    mytp.set_z_depth(zx.MAP_DEPTH_OBJ)
-    mytp.set_z_prio(zx.MAP_PRIO_BEHIND)
+    mytp.set_z_depth(my.MAP_DEPTH_OBJ)
+    mytp.set_z_prio(my.MAP_PRIO_BEHIND)
 
     mytp.set_tile(tile=name, delay_ms=100)
 

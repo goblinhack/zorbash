@@ -1,24 +1,24 @@
-import zx
+import my
 import tp
 
 def on_you_bite_attack(me, x, y):
-    sound = "growl{}".format(zx.non_pcg_randint(1, 10))
-    if not zx.thing_sound_play_channel(me, zx.CHANNEL_MONST, sound):
-        zx.thing_sound_play_channel(me, zx.CHANNEL_MONST_DEATH, sound)
+    sound = "growl{}".format(my.non_pcg_randint(1, 10))
+    if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound):
+        my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
 
 def on_you_are_hit(me, hitter, real_hitter, x, y, crit, bite, poison, damage):
-    sound = "hiss{}".format(zx.non_pcg_randint(1, 10))
-    if not zx.thing_sound_play_channel(me, zx.CHANNEL_MONST, sound):
-        zx.thing_sound_play_channel(me, zx.CHANNEL_MONST_DEATH, sound)
+    sound = "hiss{}".format(my.non_pcg_randint(1, 10))
+    if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound):
+        my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
 
 def on_you_miss_do(me, hitter, x, y):
-    sound = "hiss{}".format(zx.non_pcg_randint(1, 10))
-    if not zx.thing_sound_play_channel(me, zx.CHANNEL_MONST, sound):
-        zx.thing_sound_play_channel(me, zx.CHANNEL_MONST_DEATH, sound)
+    sound = "hiss{}".format(my.non_pcg_randint(1, 10))
+    if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound):
+        my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
 
 def on_death(me, x, y):
-    if not zx.thing_sound_play_channel(me, zx.CHANNEL_MONST, "squelch"):
-        zx.thing_sound_play_channel(me, zx.CHANNEL_MONST_DEATH, "squelch")
+    if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, "squelch"):
+        my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, "squelch")
 
 def tp_init(name, text_name):
     mytp = tp.Tp(name, text_name)
@@ -264,7 +264,7 @@ def tp_init(name, text_name):
     mytp.set_is_weapon(False)
     mytp.set_is_wooden(False)
     mytp.set_long_text_description("An enormous spider. Ichor drips from its glistening fangs. Watch out for its web and poisonous bite.")
-    mytp.set_monst_size(zx.MONST_SIZE_GIANT)
+    mytp.set_monst_size(my.MONST_SIZE_GIANT)
     mytp.set_normal_placement_rules(True)
     mytp.set_nutrition_dice("1d6")
     mytp.set_on_death_do("spider_giant.on_death()")
@@ -273,7 +273,7 @@ def tp_init(name, text_name):
     mytp.set_on_you_are_hit_do("spider_giant.on_you_are_hit()")
     mytp.set_on_you_bite_attack_do("spider_giant.on_you_bite_attack()")
     mytp.set_on_you_miss_do_do("spider_giant.on_you_miss_do()")
-    mytp.set_rarity(zx.RARITY_COMMON)
+    mytp.set_rarity(my.RARITY_COMMON)
     mytp.set_stamina(100)
     mytp.set_stat_attack(12) # 10, means no bonus
     mytp.set_stat_constitution(12)
@@ -310,8 +310,8 @@ def tp_init(name, text_name):
     mytp.set_unused_flag7(False)
     mytp.set_unused_flag8(False)
     mytp.set_unused_flag9(False)
-    mytp.set_z_depth(zx.MAP_DEPTH_OBJ)
-    mytp.set_z_prio(zx.MAP_PRIO_NORMAL)
+    mytp.set_z_depth(my.MAP_DEPTH_OBJ)
+    mytp.set_z_prio(my.MAP_PRIO_NORMAL)
 
     delay=150
     mytp.set_tile("spider_giant.1", delay_ms=delay)

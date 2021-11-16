@@ -1,4 +1,4 @@
-import zx
+import my
 import tp
 
 def tp_init(name, text_name):
@@ -270,8 +270,8 @@ def tp_init(name, text_name):
     mytp.set_unused_flag7(False)
     mytp.set_unused_flag8(False)
     mytp.set_unused_flag9(False)
-    mytp.set_z_depth(zx.MAP_DEPTH_OBJ)
-    mytp.set_z_prio(zx.MAP_PRIO_BEHIND)
+    mytp.set_z_depth(my.MAP_DEPTH_OBJ)
+    mytp.set_z_prio(my.MAP_PRIO_BEHIND)
 
     mytp.set_tile(tile="chest1", delay_ms=1000)
     mytp.set_tile(tile=name + ".open", is_open=True)
