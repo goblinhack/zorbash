@@ -368,7 +368,12 @@ static void find_data_dir(void)
   if (dir_exists(DATA_PATH)) {
     return;
   }
+  myfree(DATA_PATH);
 
+  DATA_PATH = dynprintf(".." DIR_SEP "data");
+  if (dir_exists(DATA_PATH)) {
+    return;
+  }
   myfree(DATA_PATH);
 
   DATA_PATH = dupstr(EXEC_DIR, __FUNCTION__);
@@ -393,7 +398,12 @@ static void find_world_dir(void)
   if (dir_exists(WORLD_PATH)) {
     return;
   }
+  myfree(WORLD_PATH);
 
+  WORLD_PATH = dynprintf(".." DIR_SEP "world");
+  if (dir_exists(WORLD_PATH)) {
+    return;
+  }
   myfree(WORLD_PATH);
 
   WORLD_PATH = dupstr(EXEC_DIR, __FUNCTION__);
@@ -409,7 +419,12 @@ static void find_ttf_dir(void)
   if (dir_exists(TTF_PATH)) {
     return;
   }
+  myfree(TTF_PATH);
 
+  TTF_PATH = dynprintf(".." DIR_SEP "data" DIR_SEP "ttf" DIR_SEP);
+  if (dir_exists(TTF_PATH)) {
+    return;
+  }
   myfree(TTF_PATH);
 
   TTF_PATH = dupstr(EXEC_DIR, __FUNCTION__);
@@ -425,7 +440,12 @@ static void find_gfx_dir(void)
   if (dir_exists(GFX_PATH)) {
     return;
   }
+  myfree(GFX_PATH);
 
+  GFX_PATH = dynprintf(".." DIR_SEP "gfx" DIR_SEP);
+  if (dir_exists(GFX_PATH)) {
+    return;
+  }
   myfree(GFX_PATH);
 
   GFX_PATH = dupstr(EXEC_DIR, __FUNCTION__);

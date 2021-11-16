@@ -32,7 +32,7 @@ void py_call_void(const char *name)
 {
   TRACE_AND_INDENT();
   if (! zx_mod) {
-    ERR("Python module not inited yet");
+    DIE("Python module not inited yet");
     return;
   }
 
@@ -2365,7 +2365,7 @@ PyMODINIT_FUNC python_mouse_y_module_create(void)
   PyObject *m = PyModule_Create(&python_c_MODULE);
   if (! m) {
     PyErr_Print();
-    ERR("Python init");
+    DIE("Python init");
     return 0;
   }
 
@@ -3528,6 +3528,7 @@ void python_init(char *argv[])
   ////////////////////////////////////////////////////////////////////////////////////////////////////
 
   py_add_to_path("python");
+  py_add_to_path(".." DIR_SEP "python");
   py_add_to_path(GFX_PATH);
   py_add_to_path(DATA_PATH);
   py_add_to_path(EXEC_PYTHONPATH);

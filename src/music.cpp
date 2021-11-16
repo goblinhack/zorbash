@@ -84,7 +84,7 @@ bool music_load(uint32_t rate, const std::string &file, const std::string &name_
   m->rate = rate;
   m->data = file_load(file.c_str(), &m->len);
   if (! m->data) {
-    ERR("Cannot load music %s", file.c_str());
+    DIE("Cannot load music %s", file.c_str());
     return false;
   }
 
@@ -144,7 +144,7 @@ bool music_play(const std::string &name)
 
   auto music = all_music.find(name);
   if (music == all_music.end()) {
-    ERR("Cannot find music %s: %s", name.c_str(), Mix_GetError());
+    DIE("Cannot find music %s: %s", name.c_str(), Mix_GetError());
     SDL_ClearError();
     return false;
   }

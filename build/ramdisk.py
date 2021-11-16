@@ -24,6 +24,12 @@ root = pathlib.Path(".")
 try:
     with open('zorbash-game') as unused:
         newer = False
+        for filepath in root.rglob(r'data/fonts/*.tga'):
+            if os.path.getctime("zorbash-game") < os.path.getctime(filepath):
+                print("{} is newer".format(filepath))
+                newer = True
+                break
+
         for filepath in root.rglob(r'data/gfx/*.tga'):
             if os.path.getctime("zorbash-game") < os.path.getctime(filepath):
                 print("{} is newer".format(filepath))
@@ -31,6 +37,12 @@ try:
                 break
 
         for filepath in root.rglob(r'data/sounds/*/*/.wav'):
+            if os.path.getctime("zorbash-game") < os.path.getctime(filepath):
+                print("{} is newer".format(filepath))
+                newer = True
+                break
+
+        for filepath in root.rglob(r'data/music/*.ogg'):
             if os.path.getctime("zorbash-game") < os.path.getctime(filepath):
                 print("{} is newer".format(filepath))
                 newer = True
@@ -53,9 +65,18 @@ for filepath in root.rglob(r'data/gfx/*.tga'):
     files[filepath.parent].append(filepath.name)
     number_of_files_to_add_to_ramdisk += 1
 
+for filepath in root.rglob(r'data/fonts/*.tga'):
+    files[filepath.parent].append(filepath.name)
+    number_of_files_to_add_to_ramdisk += 1
+
 for filepath in root.rglob(r'data/sounds/*/*.wav'):
     files[filepath.parent].append(filepath.name)
     number_of_files_to_add_to_ramdisk += 1
+
+for filepath in root.rglob(r'data/music/*.ogg'):
+    files[filepath.parent].append(filepath.name)
+    number_of_files_to_add_to_ramdisk += 1
+
 
 for ram_file in range(number_of_ramdisk_files):
     with open("src/ramdisk_data_{}.S".format(ram_file), "w") as myfile:
