@@ -13,12 +13,11 @@ format:
 
 clean:
 	(cd src; $(MAKE) $@)
+	/bin/rm -rf data/sounds
 	/bin/rm -rf data/gfx
 
-clobber:
+clobber: clean
 	(cd src; $(MAKE) $@)
-	rm src/Makefile
-	/bin/rm -rf data/gfx
 
 .PHONY: all clean clobber format pre
 
