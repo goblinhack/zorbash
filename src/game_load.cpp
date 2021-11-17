@@ -695,6 +695,10 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
     }
   }
 
+  //
+  // Post thing reinit fixups for things that may carry other items
+  // and may not have been loaded yet when reiniting.
+  //
   uint32_t csum = 0;
   FOR_ALL_THING_GROUPS(group)
   {
@@ -702,6 +706,7 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
       auto t = p.second;
       csum += t->mid_at.x + t->mid_at.y + t->id.id;
       // t->con("LOAD %f %f %d", t->mid_at.x, t->mid_at.y, t->id.id);
+      t->init_lights();
     }
   }
 

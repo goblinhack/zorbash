@@ -554,6 +554,4 @@ void Thing::reinit(void)
   if (is_cursor()) {
     level->cursor = this;
   }
-
-  init_lights();
 }
