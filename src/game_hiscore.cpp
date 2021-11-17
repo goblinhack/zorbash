@@ -100,10 +100,10 @@ void Game::hiscore_select(void)
   // Want console to be able to be on top
   // wid_set_do_not_lower(wid_hiscore_window->wid_popup_container, true);
 
-  wid_hiscore_window->log("'");
+  wid_hiscore_window->log(UI_LOGGING_EMPTY_LINE);
   wid_hiscore_window->log("Gone, but not forgotten...");
-  wid_hiscore_window->log("'");
-  wid_hiscore_window->log("'");
+  wid_hiscore_window->log(UI_LOGGING_EMPTY_LINE);
+  wid_hiscore_window->log(UI_LOGGING_EMPTY_LINE);
 
   std::vector< HiScore >::iterator h     = game->config.hiscores.hiscores.begin();
   bool                             first = true;
@@ -164,7 +164,7 @@ void Game::hiscore_select(void)
              name.c_str(), when_field_len, when.c_str(), h->level_reached, defeated_by_field_len,
              defeated_by.c_str());
 
-    wid_hiscore_window->log("'");
+    wid_hiscore_window->log(UI_LOGGING_EMPTY_LINE);
     wid_hiscore_window->log(tmp);
     h++;
   }

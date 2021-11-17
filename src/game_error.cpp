@@ -108,11 +108,11 @@ void game_error(std::string error)
 
   game_error_window->log("ERROR: %%fg=red$" + error);
   game_error_window->log("Press ESCAPE to dismiss this window");
-  game_error_window->log("'");
-  game_error_window->log("'");
-  game_error_window->log("'");
+  game_error_window->log(UI_LOGGING_EMPTY_LINE);
+  game_error_window->log(UI_LOGGING_EMPTY_LINE);
+  game_error_window->log(UI_LOGGING_EMPTY_LINE);
   game_error_window->log("Please send a screenshot to %%fg=white$goblinhack@gmail.com");
-  game_error_window->log("'");
+  game_error_window->log(UI_LOGGING_EMPTY_LINE);
   sdl_screenshot_do();
 
   {

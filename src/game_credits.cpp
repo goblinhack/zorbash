@@ -145,10 +145,10 @@ void Game::credits_select(void)
   wid_credits_window->log("`");
   wid_credits_window->log("`");
   wid_credits_window->log("`");
-  wid_credits_window->log("'");
-  wid_credits_window->log("'");
-  wid_credits_window->log("'");
-  wid_credits_window->log("'");
+  wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
+  wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
+  wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
+  wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
   wid_credits_window->log("`");
   wid_credits_window->log("`");
   wid_credits_window->log("`");

@@ -124,28 +124,28 @@ void Game::dead_select(const char *reason)
   // Want console to be able to be on top
   // wid_set_do_not_lower(wid_dead_window->wid_popup_container, true);
 
-  wid_dead_window->log("'");
-  wid_dead_window->log("'");
-  wid_dead_window->log("'");
-  wid_dead_window->log("'");
-  wid_dead_window->log("'");
-  wid_dead_window->log("'");
-  wid_dead_window->log("'");
-  wid_dead_window->log("'");
-  wid_dead_window->log("'");
-  wid_dead_window->log("'");
-  wid_dead_window->log("'");
-  wid_dead_window->log("'");
-  wid_dead_window->log("'");
-  wid_dead_window->log("'");
-  wid_dead_window->log("'");
-  wid_dead_window->log("'");
-  wid_dead_window->log("'");
-  wid_dead_window->log("'");
-  wid_dead_window->log("'");
-  wid_dead_window->log("'");
+  wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
+  wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
+  wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
+  wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
+  wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
+  wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
+  wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
+  wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
+  wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
+  wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
+  wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
+  wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
+  wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
+  wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
+  wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
+  wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
+  wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
+  wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
+  wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
+  wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
   wid_dead_window->log("Defeated...");
-  wid_dead_window->log("'");
+  wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
   wid_dead_window->log(reason);
 
   {

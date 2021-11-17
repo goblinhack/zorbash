@@ -1285,7 +1285,7 @@ void Game::load_select(void)
 
   game_load_headers_only = true;
 
-  wid_load->log("'");
+  wid_load->log(UI_LOGGING_EMPTY_LINE);
   wid_load->log("Choose a load slot.");
 
   int y_at = 3;
