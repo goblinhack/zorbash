@@ -726,6 +726,7 @@ public:
   int get_lifespan_initial(void);
   int get_lifespan(void);
   int get_light_strength_initial(void);
+  int get_torch_count(void);
   int get_light_strength(void);
   int get_minion_count(void);
   int get_nutrition(void);

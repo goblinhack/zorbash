@@ -781,6 +781,7 @@ public:
   void place_floor_deco(Dungeonp d);
   void place_foilage(Dungeonp d);
   void place_random_treasure(Dungeonp d);
+  void place_random_torches(Dungeonp d);
   void place_spiderweb(Dungeonp d);
   void place_the_grid(void);
   void sanity_check(void);

@@ -387,12 +387,12 @@ bool Level::create_dungeon(point3d at, int seed)
           if (dungeon->is_ascend_dungeon(x, y)) {
             auto t = thing_new("player2", point(x, y));
 
-            TOPCON("%%fg=yellow$THIS IS A DEMO. YOU WONT START THE REAL GAME WITH ALL THIS KIT LOL.");
+            TOPCON("%%fg=yellow$THIS IS A DEMO. YOU WONT START THE REAL GAME WITH ALL THIS KIT.%%fg=reset$");
 
             if (0) {
               t->incr_poison(10);
             }
-#if 1
+#if 0
             auto w = thing_new("scythe", point(x, y));
             t->carry(w);
 
@@ -400,13 +400,13 @@ bool Level::create_dungeon(point3d at, int seed)
               auto p = thing_new("potion_health", point(x, y));
               t->carry(p);
             }
-#endif
             {
               auto b = thing_new("food_frog", point(x, y));
               t->carry(b);
             }
+#endif
 
-            if (0) {
+            {
               auto w3 = thing_new("sword_short_wooden", point(x, y));
               t->carry(w3);
             }
@@ -429,17 +429,6 @@ bool Level::create_dungeon(point3d at, int seed)
             {
               auto f = thing_new("skillstone", point(x, y));
               t->carry(f);
-            }
-            {
-              auto f = thing_new("skillstone", point(x, y));
-              t->carry(f);
-            }
-
-            if (1) {
-              auto b = thing_new("bag_small", point(x, y));
-              t->carry(b);
-              auto w2 = thing_new("sword_short_basic", point(x, y));
-              b->carry(w2);
             }
 
             {
@@ -511,25 +500,14 @@ bool Level::create_dungeon(point3d at, int seed)
               t->carry(W);
             }
 
-            {
-              auto W = thing_new("torch", point(x, y));
-              t->carry(W);
-            }
-
             if (0) {
-              auto s = thing_new("buff_poison_resist", point(x, y));
-              t->buff_add(s);
-            }
-
-#if 0
-            auto s = thing_new("skill_devoted_thrust", point(x, y));
-            t->skill_add(s);
-
-            {
               auto i = thing_new("thunderstone", point(x, y));
               t->carry(i);
             }
-#endif
+            if (1) {
+              auto b = thing_new("bag_small", point(x, y));
+              t->carry(b);
+            }
 
             goto placed_player;
           }
@@ -571,42 +549,72 @@ bool Level::create_dungeon(point3d at, int seed)
       return false;
     }
 
+    //
+    // Place some pools of blood
+    //
     dbg2("DGN: Place random floor deco");
     create_dungeon_place_random_floor_deco(dungeon);
     if (g_errored) {
       return false;
     }
 
+    //
+    // Place some horrible sewers
+    //
     dbg2("DGN: Place sewer pipes");
     create_dungeon_place_sewer_pipes(dungeon);
     if (g_errored) {
       return false;
     }
 
+    //
+    // Place some greenery
+    //
     dbg2("DGN: Place grass");
     place_dry_grass(dungeon);
     if (g_errored) {
       return false;
     }
 
+    //
+    // Place some brownery
+    //
     dbg2("DGN: Place foilage");
     place_foilage(dungeon);
     if (g_errored) {
       return false;
     }
 
+    //
+    // Be evil
+    //
     dbg2("DGN: Place spiderweb");
     place_spiderweb(dungeon);
     if (g_errored) {
       return false;
     }
 
+    //
+    // Be nice
+    //
     dbg2("DGN: Place random treasure");
     place_random_treasure(dungeon);
     if (g_errored) {
       return false;
     }
 
+    //
+    // Take pity on the player getting close to the dark
+    //
+    if (player && (player->get_torch_count() < 3))
+      place_random_torches(dungeon);
+    if (g_errored) {
+      return false;
+    }
+
+    //
+    // Zoom the map to the player
+    //
     dbg2("DGN: Scroll to player");
     scroll_map_to_player();
     if (g_errored) {
@@ -1646,6 +1654,36 @@ void Level::place_random_treasure(Dungeonp d)
       con("DGN: Placed random item '%s'", t->short_text_capitalized().c_str());
 
       if (treasure_max-- < 0) {
+        return;
+      }
+    }
+  }
+}
+
+void Level::place_random_torches(Dungeonp d)
+{
+  TRACE_AND_INDENT();
+  int tries     = 1000;
+  int torch_max = pcg_random_range(1, 10);
+
+  while (tries--) {
+    auto x = pcg_random_range(MAP_BORDER_ROCK, MAP_WIDTH - MAP_BORDER_ROCK);
+    auto y = pcg_random_range(MAP_BORDER_ROCK, MAP_HEIGHT - MAP_BORDER_ROCK);
+
+    if (d->is_dirt(x, y) || d->is_treasure_class_a(x, y) || d->is_treasure_class_b(x, y) ||
+        d->is_treasure_class_c(x, y) || d->is_deep_water(x, y) || d->is_spiderweb(x, y) || d->is_foilage(x, y)) {
+
+      if (d->is_deep_water(x, y) || d->is_foilage(x, y)) {
+        continue;
+      }
+
+      //
+      // Be nice and enchant this lost treasure.
+      //
+      (void) thing_new("torch", point(x, y));
+
+      con("DGN: Placed random torch");
+      if (torch_max-- < 0) {
         return;
       }
     }
