@@ -169,7 +169,7 @@ PyObject *level_unused_flag23_at(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *level_unused_flag24_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag25_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag26_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag27_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_able_to_see_in_the_dark_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_gfx_anim_synced_with_owner_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_item_magical_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag2_at(PyObject *obj, PyObject *args, PyObject *keywds);

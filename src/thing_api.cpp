@@ -1273,10 +1273,10 @@ int Thing::unused_flag26(void)
   return (tp()->unused_flag26());
 }
 
-int Thing::unused_flag27(void)
+int Thing::is_able_to_see_in_the_dark(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->unused_flag27());
+  return (tp()->is_able_to_see_in_the_dark());
 }
 
 int Thing::is_gfx_anim_synced_with_owner(void)
@@ -4744,6 +4744,10 @@ int Thing::get_initial_light_strength(void)
 int Thing::get_light_strength(void)
 {
   TRACE_AND_INDENT();
+  //  if (is_able_to_see_in_the_dark()) {
+  //    return ai_vision_distance();
+  //  }
+
   if (! maybe_infop()) {
     return get_initial_light_strength();
   }
@@ -4755,9 +4759,7 @@ int Thing::get_light_strength(void)
     light_strength = get_initial_light_strength();
   }
 
-  if (is_player()) {
-    get_light_strength_including_torch_effect(light_strength);
-  }
+  get_light_strength_including_torch_effect(light_strength);
 
   get_infop()->light_strength = light_strength;
   return light_strength;

@@ -4,8 +4,9 @@
 <!--                                                                                                                                              -->
 <!-- Next todo                                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
-<!-- - slowdown on level 2                                                                                                                        -->
 <!-- - with 1 torch, what does the robot see?                                                                                                     -->
+<!-- - slowdown on level 2                                                                                                                        -->
+<!-- - goblin cannot attach skeletons standing in lava                                                                                            -->
 <!-- - equip armour etc                                                                                                                           -->
 <!-- - antipoison potion                                                                                                                          -->
 <!-- - chocolote frog cures poison?                                                                                                               -->

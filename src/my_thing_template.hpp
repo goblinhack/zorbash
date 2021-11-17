@@ -370,7 +370,7 @@ private:
   int _unused_flag24 {};
   int _unused_flag25 {};
   int _unused_flag26 {};
-  int _unused_flag27 {};
+  int _is_able_to_see_in_the_dark {};
   int _is_gfx_anim_synced_with_owner {};
   int _unused_flag3 {};
   int _unused_flag30 {};
@@ -751,7 +751,7 @@ public:
   int unused_flag24(void) const;
   int unused_flag25(void) const;
   int unused_flag26(void) const;
-  int unused_flag27(void) const;
+  int is_able_to_see_in_the_dark(void) const;
   int is_gfx_anim_synced_with_owner(void) const;
   int is_item_magical(void) const;
   int unused_flag2(void) const;
@@ -1079,7 +1079,7 @@ public:
   void set_unused_flag24(int);
   void set_unused_flag25(int);
   void set_unused_flag26(int);
-  void set_unused_flag27(int);
+  void set_is_able_to_see_in_the_dark(int);
   void set_is_gfx_anim_synced_with_owner(int);
   void set_is_item_magical(int);
   void set_unused_flag2(int);

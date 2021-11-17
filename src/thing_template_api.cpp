@@ -355,7 +355,7 @@ int Tp::unused_flag23(void) const { return _unused_flag23; }
 int Tp::unused_flag24(void) const { return _unused_flag24; }
 int Tp::unused_flag25(void) const { return _unused_flag25; }
 int Tp::unused_flag26(void) const { return _unused_flag26; }
-int Tp::unused_flag27(void) const { return _unused_flag27; }
+int Tp::is_able_to_see_in_the_dark(void) const { return _is_able_to_see_in_the_dark; }
 int Tp::is_gfx_anim_synced_with_owner(void) const { return _is_gfx_anim_synced_with_owner; }
 int Tp::is_item_magical(void) const { return _is_item_magical; }
 int Tp::unused_flag2(void) const { return _unused_flag2; }
@@ -671,7 +671,7 @@ void Tp::set_unused_flag23(int v) { _unused_flag23 = v; }
 void Tp::set_unused_flag24(int v) { _unused_flag24 = v; }
 void Tp::set_unused_flag25(int v) { _unused_flag25 = v; }
 void Tp::set_unused_flag26(int v) { _unused_flag26 = v; }
-void Tp::set_unused_flag27(int v) { _unused_flag27 = v; }
+void Tp::set_is_able_to_see_in_the_dark(int v) { _is_able_to_see_in_the_dark = v; }
 void Tp::set_is_gfx_anim_synced_with_owner(int v) { _is_gfx_anim_synced_with_owner = v; }
 void Tp::set_is_item_magical(int v) { _is_item_magical = v; }
 void Tp::set_unused_flag2(int v) { _unused_flag2 = v; }

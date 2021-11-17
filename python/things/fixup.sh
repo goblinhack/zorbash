@@ -12,115 +12,24 @@ POST=$(mktemp) || exit 1
 OUT=$(mktemp) || exit 1
 
 for IN in \
-  scythe_carry.py \
-  scythe.py \
-  scythe_swing.py \
-  sword_short_basic_carry.py \
-  sword_short_basic.py \
-  sword_short_basic_swing.py \
-  sword_short_rusty_carry.py \
-  sword_short_rusty.py \
-  sword_short_rusty_swing.py \
-  sword_short_wooden_carry.py \
-  sword_short_wooden.py \
-  sword_short_wooden_swing.py \
-  bat_lesser.py \
-  chest1.py \
-  cleaner.py \
-  enchantstone.py \
-  food_apple1.py \
-  food_apple2.py \
-  food_apple_cider.py \
-  food_applepie.py \
-  food_aubergine.py \
-  food_bacon.py \
-  food_baguette.py \
-  food_beer1.py \
-  food_beer2.py \
-  food_cheesecake.py \
-  food_cherry.py \
-  food_chicken.py \
-  food_chocolate_bar.py \
-  food_cookie.py \
-  food_custardpie.py \
-  food_durian.py \
-  food_eggs.py \
-  food_fish.py \
-  food_flagon_ale.py \
-  food_frog.py \
-  food_gherkin.py \
-  food_ginger.py \
-  food_greenpepper.py \
-  food_honey.py \
-  food_hotsauce.py \
-  food_lemonpie.py \
-  food_melon1.py \
-  food_melon2.py \
-  food_onion.py \
-  food_orange_slices.py \
-  food_peach.py \
-  food_pickled_eggs.py \
-  food_pickledeyes.py \
-  food_pineapple.py \
-  food_potato.py \
-  food_pottedmeat.py \
-  food_pretzel.py \
-  food_redpepper.py \
-  food_roastchicken.py \
-  food_salami.py \
-  food_salmon.py \
-  food_sardines.py \
-  food_sirloin.py \
-  food_somekindofmeat.py \
-  food_steak.py \
-  food_strawberry.py \
-  food_sushi1.py \
-  food_sushi2.py \
-  food_tomato.py \
-  food_turnip.py \
-  food_watermelon.py \
-  food_wine.py \
-  gem_amber.py \
-  gem_amethyst.py \
-  gem_aventurine.py \
-  gem_diamond.py \
-  gem_emerald.py \
-  gem_ruby.py \
-  gem_sapphire.py \
-  gem_topaz.py \
-  ghost.py \
-  ghost_minion.py \
-  goblin.py \
-  gold1.py \
-  gold2.py \
-  gold3.py \
-  gold4.py \
-  gold5.py \
-  gold6.py \
-  jelly_baby.py \
-  jelly_parent.py \
-  key.py \
-  mummy.py \
-  player.py \
-  potion_health.py \
-  rat_giant.py \
-  reaper.py \
-  skeleton.py \
-  skeleton_fire.py \
-  skeleton_giant.py \
-  skeleton_minion.py \
-  skeleton_minion_fire.py \
-  skillstone.py \
-  spider_giant.py \
-  tentacleye.py \
-  thunderstone.py \
-  torch.py \
-  wand_descent.py \
-  wand_energy.py \
-  wand_fire.py \
-  ring_poison_resist.py \
-  ring_poison_resist_carry.py \
-  wand_lightning.py
+   buffs/*py \
+   debuffs/*py \
+   doors/*py \
+   dungeon/*py \
+   effects/*py \
+   fixup.sh/*py \
+   food/*py \
+   generators/*py \
+   internal/*py \
+   items/*py \
+   monsts/*py \
+   player.py/*py \
+   potions/*py \
+   rings/*py \
+   skills/*py \
+   treasure/*py \
+   wands/*py \
+   weapons/*py
 do
     echo $IN
 
@@ -378,7 +287,7 @@ do
       set_unused_flag24 \
       set_unused_flag25 \
       set_unused_flag26 \
-      set_unused_flag27 \
+      set_is_able_to_see_in_the_dark \
       set_is_gfx_anim_synced_with_owner \
       set_unused_flag3 \
       set_unused_flag30 \

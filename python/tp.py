@@ -331,8 +331,8 @@ class Tp:
     def set_unused_flag26(self, value):
         my.tp_set_unused_flag26(self, value)
 
-    def set_unused_flag27(self, value):
-        my.tp_set_unused_flag27(self, value)
+    def set_is_able_to_see_in_the_dark(self, value):
+        my.tp_set_is_able_to_see_in_the_dark(self, value)
 
     def set_is_gfx_anim_synced_with_owner(self, value):
         my.tp_set_is_gfx_anim_synced_with_owner(self, value)

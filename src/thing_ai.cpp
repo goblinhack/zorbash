@@ -1422,16 +1422,16 @@ bool Thing::ai_tick(bool recursing)
   bool light_walls = true;
   level->fov_calculete(&aip->can_see_currently, mid_at.x, mid_at.y, ai_vision_distance(), light_walls);
 
-  //  if (! recursing) {
-  for (int y = miny; y < maxy; y++) {
-    for (int x = minx; x < maxx; x++) {
-      if (aip->can_see_currently.can_see[ x ][ y ]) {
-        IF_DEBUG4 { (void) level->thing_new("ai_path2", point(x, y)); }
-        set(aip->can_see_ever.can_see, x, y, true);
+  if (! recursing) {
+    for (int y = miny; y < maxy; y++) {
+      for (int x = minx; x < maxx; x++) {
+        if (aip->can_see_currently.can_see[ x ][ y ]) {
+          IF_DEBUG4 { (void) level->thing_new("ai_path2", point(x, y)); }
+          set(aip->can_see_ever.can_see, x, y, true);
+        }
       }
     }
   }
-  //  }
 
 #if 0
   if (is_player()) {

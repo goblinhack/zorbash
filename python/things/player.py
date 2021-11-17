@@ -318,7 +318,7 @@ def tp_init(name, text_name, short_text_name, title):
     mytp.set_unused_flag24(False)
     mytp.set_unused_flag25(False)
     mytp.set_unused_flag26(False)
-    mytp.set_unused_flag27(False)
+    mytp.set_is_able_to_see_in_the_dark(False)
     mytp.set_unused_flag2(False)
     mytp.set_unused_flag30(False)
     mytp.set_unused_flag3(False)

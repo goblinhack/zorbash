@@ -529,7 +529,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag26() && (what == "unused_flag26")) {
     return true;
   }
-  if (unused_flag27() && (what == "unused_flag27")) {
+  if (is_able_to_see_in_the_dark() && (what == "is_able_to_see_in_the_dark")) {
     return true;
   }
   if (is_gfx_anim_synced_with_owner() && (what == "is_gfx_anim_synced_with_owner")) {
@@ -1304,8 +1304,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag26") {
     return &Thing::unused_flag26;
   }
-  if (what == "unused_flag27") {
-    return &Thing::unused_flag27;
+  if (what == "is_able_to_see_in_the_dark") {
+    return &Thing::is_able_to_see_in_the_dark;
   }
   if (what == "is_gfx_anim_synced_with_owner") {
     return &Thing::is_gfx_anim_synced_with_owner;
