@@ -154,7 +154,21 @@ int Thing::ai_scent_distance(void)
 int Thing::ai_vision_distance(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->ai_vision_distance());
+
+  //
+  // Limit vision by torch light if needed.
+  //
+  auto v = tp()->ai_vision_distance();
+
+  if (is_able_to_see_in_the_dark()) {
+    return v;
+  }
+
+  auto l = get_light_strength();
+  if (l < v) {
+    return l;
+  }
+  return v;
 }
 
 int Thing::attack_eater(void)
@@ -4744,9 +4758,6 @@ int Thing::get_initial_light_strength(void)
 int Thing::get_light_strength(void)
 {
   TRACE_AND_INDENT();
-  //  if (is_able_to_see_in_the_dark()) {
-  //    return ai_vision_distance();
-  //  }
 
   if (! maybe_infop()) {
     return get_initial_light_strength();

@@ -4,7 +4,7 @@
 <!--                                                                                                                                              -->
 <!-- Next todo                                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
-<!-- - with 1 torch, what does the robot see?                                                                                                     -->
+<!-- - need more torches                                                                                                                          -->
 <!-- - slowdown on level 2                                                                                                                        -->
 <!-- - goblin cannot attach skeletons standing in lava                                                                                            -->
 <!-- - equip armour etc                                                                                                                           -->
