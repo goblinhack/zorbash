@@ -144,13 +144,13 @@ static bool wid_rightbar_create(void)
   {
     TRACE_AND_INDENT();
     point tl = make_point(TERM_WIDTH - UI_SIDEBAR_RIGHT_WIDTH, 0);
-    point br = make_point(TERM_WIDTH - 1, 63);
+    point br = make_point(TERM_WIDTH - 1, 69);
 
     wid_rightbar = wid_new_square_window("wid rightbar");
     wid_set_ignore_scroll_events(wid_rightbar, true);
     wid_set_pos(wid_rightbar, tl, br);
     wid_set_style(wid_rightbar, UI_WID_STYLE_SOLID_NONE);
-    wid_set_bg_tilename(wid_rightbar, "ui_status_bar");
+    wid_set_bg_tilename(wid_rightbar, "ui_rightbar");
     wid_lower(wid_rightbar);
   }
 
@@ -560,7 +560,7 @@ static bool wid_rightbar_create(void)
     std::vector< Widp > wid_buffbox_items;
 
     uint8_t item = 0;
-    for (auto i = 0U; i < UI_INVENTORY_QUICK_ITEMS_MAX / 2; i++) {
+    for (auto i = 0U; i < UI_INVENTORY_QUICK_ITEMS_MAX; i++) {
       //
       // slot number
       //
@@ -635,7 +635,7 @@ static bool wid_rightbar_create(void)
     std::vector< Widp > wid_debuffbox_items;
 
     uint8_t item = 0;
-    for (auto i = 0U; i < UI_INVENTORY_QUICK_ITEMS_MAX / 2; i++) {
+    for (auto i = 0U; i < UI_INVENTORY_QUICK_ITEMS_MAX; i++) {
       //
       // slot number
       //
@@ -705,7 +705,7 @@ static bool wid_rightbar_create(void)
   //
   // Map
   //
-  y_at += 6;
+  y_at += 10;
   {
     auto  w  = wid_new_container(wid_rightbar, "minimap wid");
     point tl = make_point(0, y_at);

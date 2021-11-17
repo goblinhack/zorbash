@@ -89,13 +89,13 @@ def init_ui_health_bar():
         name="ui_health_bar", width=128, height=8, arr=tiles)
 
 @timeme
-def init_ui_status_bar():
+def init_ui_rightbar():
     tiles = [
-      "ui_status_bar",
+      "ui_rightbar",
     ]
     my.tile_load_arr(
-        file="data/gfx/ui_status_bar.tga",
-        name="ui_status_bar", width=128, height=512, arr=tiles)
+        file="data/gfx/ui_rightbar.tga",
+        name="ui_rightbar", width=128, height=560, arr=tiles)
 
 @timeme
 def init_ui_inventory():
@@ -10605,7 +10605,7 @@ init_ui_credits_fg()
 init_ui_dead()
 init_ui_health_bar()
 init_ui_inventory()
-init_ui_status_bar()
+init_ui_rightbar()
 init_ui_tabs()
 init_ui_tile_bg()
 init_weapons_tiles()

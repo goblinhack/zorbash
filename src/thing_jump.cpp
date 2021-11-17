@@ -171,6 +171,10 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   auto sz    = isize(last_blit_br.x - last_blit_tl.x, last_blit_br.y - last_blit_tl.y);
   auto delay = THING_JUMP_SPEED_MS;
 
+  if (is_offscreen) {
+    delay /= 2;
+  }
+
   point dest(src.x + dx * tw, src.y + dy * th);
 
   if (is_player()) {

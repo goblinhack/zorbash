@@ -98,8 +98,10 @@
 <!--                                                                                                                                              -->
 <!-- Weapons                                                                                                                                      -->
 <!-- ------                                                                                                                                       -->
-<!-- - gauntlet of lion armour (Henry II)                                                                                                         -->
+<!-- - damage when hitting walls                                                                                                                  -->
+<!-- - plutonium sword, no wall damage                                                                                                            -->
 <!-- - strength penalties                                                                                                                         -->
+<!-- - gauntlet of lion armour (Henry II)                                                                                                         -->
 <!-- - axe hits all monsts around you ?                                                                                                           -->
 <!-- - darts / poison darts                                                                                                                       -->
 <!-- - three damage types, blunt(club warhammer) pierce(arrow javelin) or cut(axe scythe swwrd)                                                   -->
@@ -111,7 +113,6 @@
 <!-- - enchant potion of descent radius                                                                                                           -->
 <!-- - have a monster use a potion?                                                                                                               -->
 <!-- - (blunt/warhamma?) slime specific weapon does not cause slimes to split                                                                     -->
-<!-- - plutonium sword                                                                                                                            -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Water                                                                                                                                        -->

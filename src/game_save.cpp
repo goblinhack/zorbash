@@ -1078,7 +1078,7 @@ void Game::save_select(void)
 
   game_load_headers_only = true;
 
-  wid_save->log(" ");
+  wid_save->log("'");
   wid_save->log("Choose a save slot.");
 
   int y_at = 3;
