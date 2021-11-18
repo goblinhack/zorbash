@@ -10,7 +10,7 @@ def on_tick(owner, item, x, y):
         my.thing_defeated(item, "end of debuff")
         return True
     # Too noisy
-    # my.topcon("%%fg=yellow$You are poisoned!")
+    # my.topcon("%%fg=yellow$You are poisoned!%%fg=reset$")
     return True
 
 def tp_init(name, text_name):

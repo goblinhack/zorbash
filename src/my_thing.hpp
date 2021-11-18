@@ -326,6 +326,7 @@ public:
   bool collision_obstacle(point);
   bool cursor_path_pop_first_move(void);
   bool debuff_add(Thingp it);
+  bool debuff_add_if_not_found(Tpp what);
   bool debuff_add(Tpp what);
   bool debuff_remove(Tpp what);
   bool debuff_remove(Thingp it);
@@ -545,7 +546,7 @@ public:
   int ai_avoid_distance(void);
   int ai_choose_goal(void);
   int ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int type, bool check);
-  int ai_hit_actual(Thingp hitter, Thingp real_hitter, bool crit, bool bite, int poison, int dmg);
+  int ai_hit_actual(Thingp hitter, Thingp real_hitter, bool crit, bool bite, bool poison, int dmg);
   int ai_is_able_to_attack_generators(void);
   int ai_is_able_to_break_down_doors(void);
   int ai_is_able_to_break_out_of_webs(void);
@@ -941,9 +942,9 @@ public:
   int is_gold(void);
   int is_hazard(void);
   int is_health_booster(void);
-  int is_hit_by(Thingp hitter);
-  int is_hit_by(Thingp hitter, bool crit, bool bite, int poison, int damage);
-  int is_hit_by(Thingp hitter, int damage);
+  int is_poisoned_by(Thingp hitter, int damage);
+  int is_attacked_by(Thingp hitter, int damage);
+  int is_hit(Thingp hitter, bool crit, bool bite, bool poison, int damage);
   int is_hittable(void);
   int is_humanoid(void);
   int is_hunger_insatiable(void);

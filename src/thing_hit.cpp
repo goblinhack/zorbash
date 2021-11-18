@@ -108,7 +108,7 @@ void Thing::on_you_bite_attack(void)
 
 int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
                          Thingp real_hitter, // who fired the arrow?
-                         bool crit, bool bite, int poison, int damage)
+                         bool crit, bool bite, bool poison, int damage)
 {
   TRACE_AND_INDENT();
   if (! hitter) {
@@ -126,12 +126,72 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     return false;
   }
 
-  IF_DEBUG2 { hitter->log("Hit %s (health %d) for damage %d", text_the().c_str(), get_health(), damage); }
-
-  auto delta = mid_at - hitter->mid_at;
-
   if (crit) {
     damage *= 2;
+  }
+
+  if (environ_dislikes_fire()) {
+    if (real_hitter->is_fire() || real_hitter->is_lava()) {
+      if (environ_damage_doubled_from_fire()) {
+        damage *= 2;
+        dbg("Double damage from fire");
+      }
+    }
+  }
+
+  if (environ_dislikes_acid()) {
+    if (real_hitter->is_acid()) {
+      if (environ_damage_doubled_from_acid()) {
+        damage *= 2;
+        dbg("Double damage from acid");
+      }
+    }
+  }
+
+  if (environ_dislikes_poison()) {
+    if (real_hitter->is_poison()) {
+      if (environ_damage_doubled_from_poison()) {
+        damage *= 2;
+        dbg("Double damage from poison");
+      }
+    }
+  }
+
+  if (environ_dislikes_water()) {
+    if (real_hitter->is_shallow_water() || real_hitter->is_deep_water()) {
+      if (environ_damage_doubled_from_water()) {
+        damage *= 2;
+        dbg("Double damage from water");
+      }
+    }
+  }
+
+  //
+  // Cruel to let things keep on hitting you when you're dead
+  //
+  if (is_dead) {
+    if (real_hitter->can_eat(this)) {
+      IF_DEBUG2 { hitter->log("Hit bypass, eat it"); }
+      damage = 0;
+    } else {
+      IF_DEBUG2 { hitter->log("Hit fails, it's dead"); }
+      return false;
+    }
+  } else {
+    if (! damage) {
+      IF_DEBUG2 { hitter->log("Hit fails, no damage"); }
+      return false;
+    }
+  }
+
+  if (real_hitter->is_able_to_tire()) {
+    if (! real_hitter->get_stamina()) {
+      if (real_hitter->is_player()) {
+        TOPCON("You are too tired to attack. You need to rest.");
+        return false;
+      }
+    }
+    real_hitter->decr_stamina(1);
   }
 
   //
@@ -170,33 +230,9 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     }
   }
 
-  if (real_hitter->is_able_to_tire()) {
-    if (! real_hitter->get_stamina()) {
-      if (real_hitter->is_player()) {
-        TOPCON("You are too tired to attack. You need to rest.");
-        return false;
-      }
-    }
-    real_hitter->decr_stamina(1);
-  }
+  auto delta = mid_at - hitter->mid_at;
 
-  //
-  // Cruel to let things keep on hitting you when you're dead
-  //
-  if (is_dead) {
-    if (real_hitter->can_eat(this)) {
-      IF_DEBUG2 { hitter->log("Hit bypass, eat it"); }
-      damage = 0;
-    } else {
-      IF_DEBUG2 { hitter->log("Hit fails, it's dead"); }
-      return false;
-    }
-  } else {
-    if (! damage) {
-      IF_DEBUG2 { hitter->log("Hit fails, no damage"); }
-      return false;
-    }
-  }
+  IF_DEBUG2 { hitter->log("Hit %s (health %d) for damage %d", text_the().c_str(), get_health(), damage); }
 
   //
   // If hit by something then abort following any path
@@ -233,42 +269,6 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       case THING_SHOVE_TRIED_AND_FAILED : return true;
       case THING_SHOVE_TRIED_AND_PASSED : return true;
       case THING_SHOVE_NEVER_TRIED : break;
-    }
-  }
-
-  if (environ_dislikes_fire()) {
-    if (real_hitter->is_fire() || real_hitter->is_lava()) {
-      if (environ_damage_doubled_from_fire()) {
-        damage *= 2;
-        dbg("Double damage from fire");
-      }
-    }
-  }
-
-  if (environ_dislikes_acid()) {
-    if (real_hitter->is_acid()) {
-      if (environ_damage_doubled_from_acid()) {
-        damage *= 2;
-        dbg("Double damage from acid");
-      }
-    }
-  }
-
-  if (environ_dislikes_poison()) {
-    if (real_hitter->is_poison()) {
-      if (environ_damage_doubled_from_poison()) {
-        damage *= 2;
-        dbg("Double damage from poison");
-      }
-    }
-  }
-
-  if (environ_dislikes_water()) {
-    if (real_hitter->is_shallow_water() || real_hitter->is_deep_water()) {
-      if (environ_damage_doubled_from_water()) {
-        damage *= 2;
-        dbg("Double damage from water");
-      }
     }
   }
 
@@ -609,19 +609,24 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
 //
 // Returns true on the target being dead.
 //
-int Thing::is_hit_by(Thingp hitter, bool crit, bool bite, int poison, int damage)
+int Thing::is_hit(Thingp hitter, bool crit, bool bite, bool poison, int damage)
 {
   TRACE_AND_INDENT();
   if (bite) {
-    IF_DEBUG2 { hitter->log("Possible hit %s for %d bite damage", to_string().c_str(), bite); }
-  }
-  if (poison) {
-    IF_DEBUG2 { hitter->log("Possible hit %s for %d poison damage", to_string().c_str(), poison); }
-  }
-  if (damage) {
+    IF_DEBUG2 { hitter->log("Possible hit %s for %d bite damage", to_string().c_str(), damage); }
+  } else if (poison) {
+    IF_DEBUG2 { hitter->log("Possible hit %s for %d poison damage", to_string().c_str(), damage); }
+  } else if (damage) {
     IF_DEBUG2 { hitter->log("Possible hit %s for %d damage", to_string().c_str(), damage); }
+  } else {
+    IF_DEBUG2
+    {
+      hitter->log("No damage");
+      return false;
+    }
   }
   TRACE_AND_INDENT();
+
   //
   // If an arrow, who really fired it?
   //
@@ -737,14 +742,14 @@ int Thing::is_hit_by(Thingp hitter, bool crit, bool bite, int poison, int damage
   return (hit_and_destroyed);
 }
 
-int Thing::is_hit_by(Thingp hitter, int damage)
+int Thing::is_attacked_by(Thingp hitter, int damage)
 {
   TRACE_AND_INDENT();
-  return (is_hit_by(hitter, false, false, 0, damage));
+  return (is_hit(hitter, false, false, false, damage));
 }
 
-int Thing::is_hit_by(Thingp hitter)
+int Thing::is_poisoned_by(Thingp hitter, int damage)
 {
   TRACE_AND_INDENT();
-  return (is_hit_by(hitter, false, false, hitter->get_damage_poison(), hitter->get_damage_melee()));
+  return (is_hit(hitter, false, false, true, damage));
 }

@@ -255,9 +255,7 @@ PyObject *thing_hit(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_NONE;
   }
 
-  hitter->log("Hit with %s target %s", hitter->to_string().c_str(), target->to_string().c_str());
-
-  if (target->is_hit_by(hitter)) {
+  if (hitter->attack(target)) {
     Py_RETURN_TRUE;
   } else {
     Py_RETURN_FALSE;

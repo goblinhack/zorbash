@@ -390,7 +390,7 @@ bool Level::create_dungeon(point3d at, int seed)
             TOPCON("%%fg=yellow$THIS IS A DEMO. YOU WONT START THE REAL GAME WITH ALL THIS KIT.%%fg=reset$");
 
             if (0) {
-              t->incr_poison(10);
+              t->incr_poison(100);
             }
 #if 0
             auto w = thing_new("scythe", point(x, y));

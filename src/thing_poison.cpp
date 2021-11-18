@@ -26,13 +26,10 @@ void Thing::poison_tick(void)
   dbg("Poison tick");
   TRACE_AND_INDENT();
 
-  debuff_add(tp_find("debuff_poisoned"));
+  debuff_add_if_not_found(tp_find("debuff_poisoned"));
 
   Thingp hitter = this;
-  bool   crit   = false;
-  bool   bite   = false;
   int    poison = old_poison;
-  int    damage = 0;
 
   if (poison) {
     if ((int) pcg_random_range(0, 20) < get_stat_constitution()) {
@@ -43,7 +40,7 @@ void Thing::poison_tick(void)
     }
 
     if (poison) {
-      is_hit_by(hitter, crit, bite, poison, damage);
+      is_poisoned_by(hitter, poison);
     }
   }
 

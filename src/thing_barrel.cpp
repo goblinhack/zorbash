@@ -42,7 +42,7 @@ void Thing::barrel_tick(void)
       continue;
     }
 
-    is_hit_by(t, t->get_damage_crush());
+    is_attacked_by(t, t->get_damage_crush());
     break;
   }
   FOR_ALL_THINGS_END()

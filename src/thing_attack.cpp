@@ -17,29 +17,29 @@
 #include "my_thing_template.hpp"
 #include <algorithm>
 
-bool Thing::possible_to_attack(const Thingp it)
+bool Thing::possible_to_attack(const Thingp victim)
 {
   TRACE_AND_INDENT();
   auto me = tp();
 
-  if (it == this) {
+  if (victim == this) {
     return false;
   }
 
   auto my_owner  = get_top_owner();
-  auto its_owner = it->get_top_owner();
+  auto its_owner = victim->get_top_owner();
   if (my_owner && (my_owner == its_owner)) {
     return false;
   }
 
   auto my_minion_owner  = get_top_minion_owner();
-  auto its_minion_owner = it->get_top_minion_owner();
+  auto its_minion_owner = victim->get_top_minion_owner();
   if (my_minion_owner && (my_minion_owner == its_minion_owner)) {
     return false;
   }
 
   auto my_spawned_owner  = get_top_spawned_owner();
-  auto its_spawned_owner = it->get_top_spawned_owner();
+  auto its_spawned_owner = victim->get_top_spawned_owner();
   if (my_spawned_owner && (my_spawned_owner == its_spawned_owner)) {
     return false;
   }
@@ -53,7 +53,7 @@ bool Thing::possible_to_attack(const Thingp it)
     }
   }
 
-  dbg("Is it possible to attack %s?", it->to_string().c_str());
+  dbg("Is it possible to attack %s?", victim->to_string().c_str());
   TRACE_AND_INDENT();
 
   //
@@ -61,7 +61,7 @@ bool Thing::possible_to_attack(const Thingp it)
   //
   if (is_fire()) {
     if (! is_monst() && ! is_laser() && ! is_projectile() && ! is_weapon()) {
-      dbg("Cannot attack %s, I am fire", it->to_string().c_str());
+      dbg("Cannot attack %s, I am fire", victim->to_string().c_str());
       return false;
     }
   }
@@ -71,8 +71,8 @@ bool Thing::possible_to_attack(const Thingp it)
     // Meat eaters eat you when you are dead!
     //
   } else {
-    if (it->is_dead) {
-      dbg("Cannot attack %s, it's dead", it->to_string().c_str());
+    if (victim->is_dead) {
+      dbg("Cannot attack %s, it's dead", victim->to_string().c_str());
       return false;
     }
   }
@@ -80,40 +80,40 @@ bool Thing::possible_to_attack(const Thingp it)
   //
   // No attacking of open doors!
   //
-  if (it->is_open) {
-    dbg("Cannot attack %s, it's open", it->to_string().c_str());
+  if (victim->is_open) {
+    dbg("Cannot attack %s, it's open", victim->to_string().c_str());
     return false;
   }
 
   if (is_alive_monst() || is_resurrected) {
     if (me->is_jelly_baby_eater()) {
-      if (it->is_jelly_baby()) {
-        dbg("Can attack %s", it->to_string().c_str());
+      if (victim->is_jelly_baby()) {
+        dbg("Can attack %s", victim->to_string().c_str());
         return true;
       }
     }
 
     if (me->is_treasure_type_eater()) {
-      if (it->is_treasure_type()) {
-        dbg("Can attack %s", it->to_string().c_str());
+      if (victim->is_treasure_type()) {
+        dbg("Can attack %s", victim->to_string().c_str());
         return true;
       }
-      if (it->is_carrying_treasure()) {
-        dbg("Can steal from %s", it->to_string().c_str());
+      if (victim->is_carrying_treasure()) {
+        dbg("Can steal from %s", victim->to_string().c_str());
         return true;
       }
     }
 
     if (me->is_potion_eater()) {
-      if (it->is_potion()) {
-        dbg("Can attack %s", it->to_string().c_str());
+      if (victim->is_potion()) {
+        dbg("Can attack %s", victim->to_string().c_str());
         return true;
       }
     }
 
     if (me->is_item_magical_eater()) {
-      if (it->is_item_magical()) {
-        dbg("Can attack %s", it->to_string().c_str());
+      if (victim->is_item_magical()) {
+        dbg("Can attack %s", victim->to_string().c_str());
         return true;
       }
     }
@@ -122,8 +122,8 @@ bool Thing::possible_to_attack(const Thingp it)
     // Cleaners can attack cleaners?
     //
     if (me->is_item_magical_eater()) {
-      if (it->is_item_magical_eater()) {
-        dbg("Can attack %s", it->to_string().c_str());
+      if (victim->is_item_magical_eater()) {
+        dbg("Can attack %s", victim->to_string().c_str());
         return true;
       }
     }
@@ -132,21 +132,21 @@ bool Thing::possible_to_attack(const Thingp it)
     // Can we eats it?
     //
     if (me->is_meat_eater()) {
-      if (! it->is_attackable_by_monst()) {
-        dbg("No, cannot attack %s, not is_attackable by meat eating monst", it->to_string().c_str());
+      if (! victim->is_attackable_by_monst()) {
+        dbg("No, cannot attack %s, not is_attackable by meat eating monst", victim->to_string().c_str());
         return false;
       }
 
-      if (it->is_meat()) {
+      if (victim->is_meat()) {
         //
         // Doesn't matter if dead, if it can eat you...
         //
-        if (it->is_dead) {
-          dbg("Can eat dead meat: %s", it->to_string().c_str());
+        if (victim->is_dead) {
+          dbg("Can eat dead meat: %s", victim->to_string().c_str());
           return true;
         }
 
-        dbg("Can attack meat or blood: %s", it->to_string().c_str());
+        dbg("Can attack meat or blood: %s", victim->to_string().c_str());
         return true;
       }
     }
@@ -155,101 +155,101 @@ bool Thing::possible_to_attack(const Thingp it)
     // Can we attack the meat? Only if it is alive.
     //
     if (me->attack_meat()) {
-      if (! it->is_attackable_by_monst()) {
-        dbg("no, cannot attack %s, not is_attackable by meat eating monst", it->to_string().c_str());
+      if (! victim->is_attackable_by_monst()) {
+        dbg("no, cannot attack %s, not is_attackable by meat eating monst", victim->to_string().c_str());
         return false;
       }
 
-      if (it->is_meat()) {
-        if (it->is_dead) {
-          dbg("Can not attack dead meat: %s", it->to_string().c_str());
+      if (victim->is_meat()) {
+        if (victim->is_dead) {
+          dbg("Can not attack dead meat: %s", victim->to_string().c_str());
           return false;
         }
-        if (it->is_dead) {
-          dbg("Can not attack dead meat: %s", it->to_string().c_str());
+        if (victim->is_dead) {
+          dbg("Can not attack dead meat: %s", victim->to_string().c_str());
           return false;
         }
 
-        dbg("Can attack living meat: %s", it->to_string().c_str());
+        dbg("Can attack living meat: %s", victim->to_string().c_str());
         return true;
       }
     }
 
     if (me->is_blood_eater()) {
-      if (! it->is_attackable_by_monst()) {
-        dbg("No, cannot attack %s, not is_attackable by blood eating monst", it->to_string().c_str());
+      if (! victim->is_attackable_by_monst()) {
+        dbg("No, cannot attack %s, not is_attackable by blood eating monst", victim->to_string().c_str());
         return false;
       }
 
-      if (it->is_blood()) {
+      if (victim->is_blood()) {
         //
         // Doesn't matter if dead, if it can eat you...
         //
-        if (it->is_dead) {
-          dbg("Can eat dead blood: %s", it->to_string().c_str());
+        if (victim->is_dead) {
+          dbg("Can eat dead blood: %s", victim->to_string().c_str());
           return true;
         }
 
-        dbg("Can attack blood or blood: %s", it->to_string().c_str());
+        dbg("Can attack blood or blood: %s", victim->to_string().c_str());
         return true;
       }
     }
 
     if (me->attack_humanoid()) {
-      if (it->is_humanoid()) {
-        if (! it->is_dead) {
-          dbg("Can attack humanoid: %s", it->to_string().c_str());
+      if (victim->is_humanoid()) {
+        if (! victim->is_dead) {
+          dbg("Can attack humanoid: %s", victim->to_string().c_str());
           return true;
         }
       }
     }
 
     if (me->attack_living()) {
-      if (it->is_living()) {
-        if (! it->is_dead) {
-          dbg("Can attack living: %s", it->to_string().c_str());
+      if (victim->is_living()) {
+        if (! victim->is_dead) {
+          dbg("Can attack living: %s", victim->to_string().c_str());
           return true;
         }
       }
     }
 
     if (me->attack_undead()) {
-      if (it->is_undead()) {
-        if (! it->is_dead) {
-          dbg("Can attack undead: %s", it->to_string().c_str());
+      if (victim->is_undead()) {
+        if (! victim->is_dead) {
+          dbg("Can attack undead: %s", victim->to_string().c_str());
           return true;
         }
       }
     }
 
     if (me->is_food_eater()) {
-      if (! it->is_attackable_by_monst()) {
-        dbg("No, cannot attack %s, not is_attackable by food eating monst", it->to_string().c_str());
+      if (! victim->is_attackable_by_monst()) {
+        dbg("No, cannot attack %s, not is_attackable by food eating monst", victim->to_string().c_str());
         return false;
       }
-      if (it->is_food()) {
-        dbg("Can attack food: %s", it->to_string().c_str());
+      if (victim->is_food()) {
+        dbg("Can attack food: %s", victim->to_string().c_str());
         return true;
       }
     }
   }
 
   if (is_player()) {
-    if (it->is_attackable_by_player()) {
+    if (victim->is_attackable_by_player()) {
       if (game->robot_mode) {
-        if (it->is_barrel()) {
-          dbg("No, do not attack %s, is explosive barrel", it->to_string().c_str());
+        if (victim->is_barrel()) {
+          dbg("No, do not attack %s, is explosive barrel", victim->to_string().c_str());
           return false;
         }
       }
-      if (it->is_foilage()) {
-        dbg("No, do not attack %s", it->to_string().c_str());
+      if (victim->is_foilage()) {
+        dbg("No, do not attack %s", victim->to_string().c_str());
         return false;
       }
-      dbg("Can attack %s", it->to_string().c_str());
+      dbg("Can attack %s", victim->to_string().c_str());
       return true;
     }
-    dbg("No, cannot attack %s, not is_attackable", it->to_string().c_str());
+    dbg("No, cannot attack %s, not is_attackable", victim->to_string().c_str());
     return false;
   }
 
@@ -257,20 +257,20 @@ bool Thing::possible_to_attack(const Thingp it)
     auto o = get_immediate_owner();
     if (o) {
       if (o->is_monst()) {
-        if (! it->is_attackable_by_monst()) {
+        if (! victim->is_attackable_by_monst()) {
           // Too noisy
           // dbg("Cannot weapon attack %s, not is_attackable by monst",
-          //     it->to_string().c_str());
+          //     victim->to_string().c_str());
           return false;
         }
-        dbg("Can attack %s", it->to_string().c_str());
+        dbg("Can attack %s", victim->to_string().c_str());
         return true;
       } else {
-        if (! it->is_attackable_by_player()) {
-          dbg("Cannot weapon attack %s, not is_attackable by player", it->to_string().c_str());
+        if (! victim->is_attackable_by_player()) {
+          dbg("Cannot weapon attack %s, not is_attackable by player", victim->to_string().c_str());
           return false;
         }
-        dbg("Can attack %s", it->to_string().c_str());
+        dbg("Can attack %s", victim->to_string().c_str());
         return true;
       }
     }
@@ -281,59 +281,59 @@ bool Thing::possible_to_attack(const Thingp it)
       //
       // Fire monsters do not attack always
       //
-    } else if (it->is_burnable() || it->is_very_combustible() || it->is_combustible()) {
-      if (! it->is_fire() && ! it->is_lava()) {
-        dbg("Can attack as I am firey %s", it->to_string().c_str());
+    } else if (victim->is_burnable() || victim->is_very_combustible() || victim->is_combustible()) {
+      if (! victim->is_fire() && ! victim->is_lava()) {
+        dbg("Can attack as I am firey %s", victim->to_string().c_str());
         return true;
       }
     }
   }
 
-  if (is_enemy(it)) {
-    dbg("Can attack enemy %s", it->to_string().c_str());
+  if (is_enemy(victim)) {
+    dbg("Can attack enemy %s", victim->to_string().c_str());
     return true;
   }
 
   if (is_weapon()) {
-    if (it->is_foilage() || it->is_sticky() || it->is_spiderweb()) {
-      dbg("Can attack scenery %s", it->to_string().c_str());
+    if (victim->is_foilage() || victim->is_sticky() || victim->is_spiderweb()) {
+      dbg("Can attack scenery %s", victim->to_string().c_str());
       return true;
     }
   }
 
-  if (it->is_alive_monst() || it->is_combustible() || it->is_very_combustible() || it->is_burnable() ||
-      it->is_wall() || it->is_rock() || it->is_door() || it->is_bridge() || it->is_dry_grass() ||
-      it->is_treasure_type() || it->is_enchantstone() || it->is_skillstone() || it->is_foilage() ||
-      it->is_spiderweb() || it->is_sticky() || it->is_brazier() || it->is_barrel() || it->is_player() ||
-      it->is_food() || it->is_bag_item()) {
+  if (victim->is_alive_monst() || victim->is_combustible() || victim->is_very_combustible() ||
+      victim->is_burnable() || victim->is_wall() || victim->is_rock() || victim->is_door() || victim->is_bridge() ||
+      victim->is_dry_grass() || victim->is_treasure_type() || victim->is_enchantstone() || victim->is_skillstone() ||
+      victim->is_foilage() || victim->is_spiderweb() || victim->is_sticky() || victim->is_brazier() ||
+      victim->is_barrel() || victim->is_player() || victim->is_food() || victim->is_bag_item()) {
 
     if (is_laser()) {
-      dbg("Can attack as laser %s", it->to_string().c_str());
+      dbg("Can attack as laser %s", victim->to_string().c_str());
       return true;
     }
 
     if (is_projectile()) {
-      dbg("Can attack as projectile %s", it->to_string().c_str());
+      dbg("Can attack as projectile %s", victim->to_string().c_str());
       return true;
     }
 
     if (is_wand()) {
-      dbg("Can attack as wand %s", it->to_string().c_str());
+      dbg("Can attack as wand %s", victim->to_string().c_str());
       return true;
     }
 
     if (is_ring()) {
-      dbg("Can attack as ring %s", it->to_string().c_str());
+      dbg("Can attack as ring %s", victim->to_string().c_str());
       return true;
     }
 
     if (is_explosion()) {
-      dbg("Can attack as explosion %s", it->to_string().c_str());
+      dbg("Can attack as explosion %s", victim->to_string().c_str());
       return true;
     }
   }
 
-  dbg("Cannot attack %s, ignore", it->to_string().c_str());
+  dbg("Cannot attack %s, ignore", victim->to_string().c_str());
 
   return false;
 }
@@ -353,11 +353,12 @@ bool Thing::attack(point future_pos)
   return (move(future_pos, up, down, left, right, attack, idle, shove_allowed, attack_allowed));
 }
 
-bool Thing::attack(Thingp it)
+bool Thing::attack(Thingp victim)
 {
   TRACE_AND_INDENT();
-  dbg("Attack %s", it->to_string().c_str());
+  dbg("Attack %s", victim->to_string().c_str());
   TRACE_AND_INDENT();
+
   //
   // Carry to eat later. Things attack their food.
   //
@@ -371,29 +372,29 @@ bool Thing::attack(Thingp it)
     //
     // Owner eat food?
     //
-    if (owner == it) {
+    if (owner == victim) {
       //
       // This is an odd one.
       //
       err("Trying to attack self");
-    } else if (owner->can_eat(it)) {
+    } else if (owner->can_eat(victim)) {
       //
       // Eat corpse?
       //
-      IF_DEBUG2 { owner->log("Can eat %s", it->to_string().c_str()); }
+      IF_DEBUG2 { owner->log("Can eat %s", victim->to_string().c_str()); }
 
-      if (it->is_dead) {
-        if (owner->eat(it)) {
+      if (victim->is_dead) {
+        if (owner->eat(victim)) {
           //
-          // Can't defeat it twice, so hide it
+          // Can't defeat victim twice, so hide victim
           //
-          IF_DEBUG1 { owner->log("Eat corpse %s", it->to_string().c_str()); }
-          it->hide();
+          IF_DEBUG1 { owner->log("Eat corpse %s", victim->to_string().c_str()); }
+          victim->hide();
           return true;
         }
       } else if (owner->is_player()) {
-        owner->log("Carry %s", it->to_string().c_str());
-        if (owner->try_to_carry_if_worthwhile_dropping_items_if_needed(it)) {
+        owner->log("Carry %s", victim->to_string().c_str());
+        if (owner->try_to_carry_if_worthwhile_dropping_items_if_needed(victim)) {
           return true;
         }
         return false;
@@ -403,41 +404,41 @@ bool Thing::attack(Thingp it)
     //
     // As above, but not for owner.
     //
-    if (can_eat(it)) {
-      dbg("Try to eat instead of attacking %s", it->to_string().c_str());
+    if (can_eat(victim)) {
+      dbg("Try to eat instead of attacking %s", victim->to_string().c_str());
       //
       // Eat corpse?
       //
       if (is_item_carrier() &&
-          ((is_jelly_eater() && it->is_jelly()) || (is_food_eater() && it->is_food()) ||
-           (is_treasure_type_eater() && it->is_treasure_type()) ||
-           (is_item_magical_eater() && it->is_item_magical()) || (is_potion_eater() && it->is_potion())) &&
-          try_to_carry_if_worthwhile_dropping_items_if_needed(it)) {
-        dbg("Don't eat, try to carry %s", it->to_string().c_str());
+          ((is_jelly_eater() && victim->is_jelly()) || (is_food_eater() && victim->is_food()) ||
+           (is_treasure_type_eater() && victim->is_treasure_type()) ||
+           (is_item_magical_eater() && victim->is_item_magical()) || (is_potion_eater() && victim->is_potion())) &&
+          try_to_carry_if_worthwhile_dropping_items_if_needed(victim)) {
+        dbg("Don't eat, try to carry %s", victim->to_string().c_str());
         return true;
       }
 
-      if (is_monst() && it->is_dead && ! it->is_player() && eat(it)) {
+      if (is_monst() && victim->is_dead && ! victim->is_player() && eat(victim)) {
         //
         // Can only eat once alive things when dead... But the player is gone once dead.
-        // Can't defeat it twice, so hide it
+        // Can't defeat victim twice, so hide victim
         //
-        dbg("Eat corpse %s", it->to_string().c_str());
-        it->hide();
-        it->gc();
+        dbg("Eat corpse %s", victim->to_string().c_str());
+        victim->hide();
+        victim->gc();
         return true;
       }
 
-      if (is_monst() && it->is_food() &&
-          ((is_jelly_eater() && it->is_jelly()) || (is_meat_eater() && it->is_meat()) ||
-           (is_blood_eater() && it->is_blood()) || (is_food_eater() && it->is_food())) &&
-          eat(it)) {
+      if (is_monst() && victim->is_food() &&
+          ((is_jelly_eater() && victim->is_jelly()) || (is_meat_eater() && victim->is_meat()) ||
+           (is_blood_eater() && victim->is_blood()) || (is_food_eater() && victim->is_food())) &&
+          eat(victim)) {
         return true;
       }
 
       if (is_player()) {
-        dbg("Don't attack, try to carry %s", it->to_string().c_str());
-        if (try_to_carry_if_worthwhile_dropping_items_if_needed(it)) {
+        dbg("Don't attack, try to carry %s", victim->to_string().c_str());
+        if (try_to_carry_if_worthwhile_dropping_items_if_needed(victim)) {
           return true;
         }
         return false;
@@ -445,8 +446,8 @@ bool Thing::attack(Thingp it)
     }
   }
 
-  if (! possible_to_attack(it)) {
-    dbg("Attack failed, not possible to attack %s", it->to_string().c_str());
+  if (! possible_to_attack(victim)) {
+    dbg("Attack failed, not possible to attack %s", victim->to_string().c_str());
     return false;
   }
 
@@ -465,7 +466,7 @@ bool Thing::attack(Thingp it)
     att_mod += stat_to_bonus(owner->get_stat_attack());
   }
 
-  auto def_mod  = stat_to_bonus(it->get_stat_defence());
+  auto def_mod  = stat_to_bonus(victim->get_stat_defence());
   auto it_owner = get_top_owner();
   if (it_owner) {
     def_mod = stat_to_bonus(it_owner->get_stat_defence());
@@ -474,17 +475,17 @@ bool Thing::attack(Thingp it)
   //
   // We hit. See how much damage.
   //
-  auto damage = get_damage_melee();
+  auto damage = get_damage_melee() + att_mod;
 
   //
   // Chance of poison damage?
   //
-  int poison = 0;
+  bool poison        = false;
+  auto poison_damage = get_damage_poison();
   if ((int) pcg_random_range(0, 1000) < attack_poison_chance_d1000()) {
-    poison = get_damage_poison();
+    damage = poison_damage;
+    poison = true;
   }
-
-  auto total_damage = damage + att_mod;
 
   //
   // Bite?
@@ -493,9 +494,14 @@ bool Thing::attack(Thingp it)
   auto bite_damage = get_damage_bite();
   if (bite_damage) {
     if (pcg_random_range(0, 100) < 50) {
-      total_damage = bite_damage;
-      bite         = true;
+      damage = bite_damage + att_mod;
+      bite   = true;
     }
+  }
+
+  if (damage <= 0) {
+    dbg("Attack failed, no damage");
+    return false;
   }
 
   if (is_player()) {
@@ -503,7 +509,7 @@ bool Thing::attack(Thingp it)
     // Player always uses their weapon
     //
     if (get_equip(MONST_EQUIP_WEAPON)) {
-      auto delta = it->mid_at - mid_at;
+      auto delta = victim->mid_at - mid_at;
       move_set_dir_from_delta(delta);
       equip_use_may_attack(MONST_EQUIP_WEAPON);
       return true;
@@ -512,9 +518,9 @@ bool Thing::attack(Thingp it)
     //
     // Don't swing weapons at pools of blood.
     //
-    if (it->is_alive_monst() || it->is_door() || it->is_player() || it->is_minion_generator()) {
+    if (victim->is_alive_monst() || victim->is_door() || victim->is_player() || victim->is_minion_generator()) {
       if (get_equip(MONST_EQUIP_WEAPON)) {
-        auto delta = it->mid_at - mid_at;
+        auto delta = victim->mid_at - mid_at;
         move_set_dir_from_delta(delta);
         equip_use_may_attack(MONST_EQUIP_WEAPON);
         return true;
@@ -531,47 +537,47 @@ bool Thing::attack(Thingp it)
   // See if we can bypass its defences
   //
   if (is_player() || is_alive_monst()) {
-    if (it->is_dead) {
+    if (victim->is_dead) {
       //
       // It's hard to miss a corpse.
       //
-    } else if (it->is_always_hit()) {
+    } else if (victim->is_always_hit()) {
       //
       // You just cannot miss this.
       //
     } else {
-      // it->topcon("att_mod %d def_mod %d", att_mod, def_mod);
+      // victim->topcon("att_mod %d def_mod %d", att_mod, def_mod);
       auto hit = d20roll(att_mod, def_mod, fumble, crit);
 
       //
       // Cannot miss (if engulfing?)
       //
-      if (it->mid_at == mid_at) {
+      if (victim->mid_at == mid_at) {
         hit = true;
       }
 
       if (! hit) {
         if (is_player() || (owner && owner->is_player())) {
-          TOPCON("You miss %s.", it->text_the().c_str());
+          TOPCON("You miss %s.", victim->text_the().c_str());
           msg("!");
-        } else if (it->is_player()) {
+        } else if (victim->is_player()) {
           if (owner) {
             TOPCON("%s misses with %s.", owner->text_the().c_str(), text_The().c_str());
           } else {
             TOPCON("%s misses.", text_The().c_str());
           }
         } else {
-          dbg("The attack missed (att %d, def %d) on %s", att_mod, def_mod, it->to_string().c_str());
+          dbg("The attack missed (att %d, def %d) on %s", att_mod, def_mod, victim->to_string().c_str());
         }
 
         if (attack_lunge()) {
-          lunge(it->mid_at);
+          lunge(victim->mid_at);
         }
 
         //
         // An attempt at an attack counts
         //
-        it->add_enemy(this);
+        victim->add_enemy(this);
 
         //
         // We tried to attack, so do not move
@@ -581,31 +587,27 @@ bool Thing::attack(Thingp it)
     }
   }
 
-  if (total_damage <= 0) {
-    total_damage = 1;
-  }
-
   //
   // This handles when we are stuck inside a cleaner
   //
   if (is_engulfer()) {
-    if (it->mid_at == mid_at) {
+    if (victim->mid_at == mid_at) {
       bite_damage = get_damage_swallow();
-      if (it->is_player()) {
+      if (victim->is_player()) {
         TOPCON("%%fg=red$You are being consumed by %s!%%fg=reset$", text_the().c_str());
         msg("Gulp!");
       }
     }
   }
 
-  if (it->is_hit_by(this, crit, bite, poison, total_damage)) {
-    dbg("The attack succeeded (dmg %d att, def %d) on %s", att_mod, def_mod, it->to_string().c_str());
+  if (victim->is_hit(this, crit, bite, poison, damage)) {
+    dbg("The attack succeeded");
 
     if (attack_lunge()) {
-      lunge(it->mid_at);
+      lunge(victim->mid_at);
     }
     if (attack_eater()) {
-      health_boost(it->get_nutrition());
+      health_boost(victim->get_nutrition());
     }
     if (is_destroyed_on_hitting() || is_destroyed_on_hit_or_miss()) {
       dead("by foolishness");
@@ -615,17 +617,17 @@ bool Thing::attack(Thingp it)
     return true;
   }
 
-  it->on_you_miss_do(this);
+  victim->on_you_miss_do(this);
 
   //
   // Missiles?
   //
   if (is_destroyed_on_hit_or_miss()) {
     if (is_loggable()) {
-      dbg("Attack missed %s", it->to_string().c_str());
+      dbg("Attack missed %s", victim->to_string().c_str());
     }
     if (attack_lunge()) {
-      lunge(it->mid_at);
+      lunge(victim->mid_at);
     }
     dead("by foolishness");
     return true;
@@ -642,12 +644,12 @@ bool Thing::possible_to_attack_at(point at)
   dbg("Possible to attack at %s", at.to_string().c_str());
   TRACE_AND_INDENT();
 
-  FOR_ALL_COLLISION_THINGS(level, it, at.x, at.y)
+  FOR_ALL_COLLISION_THINGS(level, victim, at.x, at.y)
   {
-    if (! possible_to_attack(it)) {
+    if (! possible_to_attack(victim)) {
       continue;
     }
-    dbg("Yes; %s", it->to_string().c_str());
+    dbg("Yes; %s", victim->to_string().c_str());
     ret = true;
   }
 

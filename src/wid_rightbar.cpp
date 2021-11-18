@@ -630,7 +630,7 @@ static bool wid_rightbar_create(void)
   //
   // Debuffs
   //
-  y_at += 5;
+  y_at += 8;
   {
     std::vector< Widp > wid_debuffbox_items;
 
@@ -705,7 +705,7 @@ static bool wid_rightbar_create(void)
   //
   // Map
   //
-  y_at += 10;
+  y_at += 9;
   {
     auto  w  = wid_new_container(wid_rightbar, "minimap wid");
     point tl = make_point(0, y_at);

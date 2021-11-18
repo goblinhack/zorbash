@@ -130,6 +130,39 @@ bool Thing::debuff_add(Tpp what)
 
   return true;
 }
+
+bool Thing::debuff_add_if_not_found(Tpp what)
+{
+  if (! maybe_itemp()) {
+    return false;
+  }
+
+  while (! get_itemp()->debuffs.empty()) {
+    auto id = *get_itemp()->debuffs.begin();
+    auto t  = level->thing_find(id);
+    if (t) {
+      if (t->tp() == what) {
+        return true;
+      }
+    }
+  }
+
+  //
+  // Need to allow for duplicates, so cannot check if the tp exists
+  //
+  auto t = level->thing_new(what, mid_at);
+  if (! t) {
+    return false;
+  }
+
+  TRACE_AND_INDENT();
+  dbg("Add debuff: %s", t->to_string().c_str());
+  TRACE_AND_INDENT();
+  debuff_add(t);
+
+  return true;
+}
+
 bool Thing::debuff_remove(Tpp what)
 {
   if (! maybe_itemp()) {

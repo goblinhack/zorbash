@@ -244,6 +244,7 @@ bool Thing::path_pop_next_move(void)
         auto s = string_sprintf("Cannot pass hazard at %s", future_pos.to_string().c_str());
         AI_LOG("", s);
       }
+
       //
       // Could be a monster sitting in lava, attack it?
       //

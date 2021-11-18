@@ -111,24 +111,24 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
   wid_update(wid_popup_window->wid_popup_container);
   wid_raise(wid_popup_window->wid_popup_container);
 
-  wid_popup_window->log("`");
-  wid_popup_window->log("`");
-  wid_popup_window->log("`");
-  wid_popup_window->log("`");
-  wid_popup_window->log("`");
-  wid_popup_window->log("`");
-  wid_popup_window->log("`");
+  wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
+  wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
+  wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
+  wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
+  wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
+  wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
+  wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
 
   auto name = t->short_text_capitalized();
   wid_popup_window->log("%%fg=white$" + name);
-  wid_popup_window->log("`");
+  wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
 
   if (t->is_dead) {
     wid_popup_window->log("It's dead, Jim");
-    wid_popup_window->log("`");
+    wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
   } else {
     wid_popup_window->log(tp->long_text_description(), true);
-    wid_popup_window->log("`");
+    wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
   }
 
   wid_thing_info_add_enchant(wid_popup_window, t);
@@ -525,7 +525,7 @@ void Game::wid_thing_info_add_enchant(WidPopup *w, Thingp t)
     } else {
       w->log("%%fg=yellow$This item is enchanted!");
     }
-    w->log("`");
+    w->log(UI_LOGGING_EMPTY_LINE);
   }
 }
 
@@ -799,7 +799,7 @@ void Game::wid_thing_info_add_danger_level(WidPopup *w, Thingp t)
   }
 
   const std::string danger_level = player->get_danger_level_str(t);
-  w->log("`");
+  w->log(UI_LOGGING_EMPTY_LINE);
   w->log(danger_level);
 
   auto monst_max_damage = t->get_damage_max();
@@ -814,16 +814,16 @@ void Game::wid_thing_info_add_danger_level(WidPopup *w, Thingp t)
     }
 
     if (monst_defeat_count == 1) {
-      w->log("`");
+      w->log(UI_LOGGING_EMPTY_LINE);
       w->log("%%fg=red$Could defeat you in " + std::to_string(monst_defeat_count) + " hit!");
     } else if (monst_defeat_count <= 2) {
-      w->log("`");
+      w->log(UI_LOGGING_EMPTY_LINE);
       w->log("%%fg=red$Could defeat you in " + std::to_string(monst_defeat_count) + " hits");
     } else if (monst_defeat_count <= 10) {
-      w->log("`");
+      w->log(UI_LOGGING_EMPTY_LINE);
       w->log("%%fg=orange$Could defeat you in " + std::to_string(monst_defeat_count) + " hits");
     } else {
-      w->log("`");
+      w->log(UI_LOGGING_EMPTY_LINE);
       w->log("Could defeat you eventually...");
     }
   }
@@ -840,19 +840,19 @@ void Game::wid_thing_info_add_danger_level(WidPopup *w, Thingp t)
     }
 
     if (player_defeat_count == 1) {
-      w->log("`");
+      w->log(UI_LOGGING_EMPTY_LINE);
       w->log("You could defeat it in " + std::to_string(player_defeat_count) + " hit.");
       w->log("More likely, " + std::to_string(player_defeat_count * 2) + " hits");
     } else if (player_defeat_count <= 2) {
-      w->log("`");
+      w->log(UI_LOGGING_EMPTY_LINE);
       w->log("You could defeat it in " + std::to_string(player_defeat_count) + " hits.");
       w->log("More likely, " + std::to_string(player_defeat_count * 2) + " hits.");
     } else if (player_defeat_count <= 10) {
-      w->log("`");
+      w->log(UI_LOGGING_EMPTY_LINE);
       w->log("You could defeat it in " + std::to_string(player_defeat_count) + " hits.");
       w->log("More likely, " + std::to_string(player_defeat_count * 2) + " hits.");
     } else {
-      w->log("`");
+      w->log(UI_LOGGING_EMPTY_LINE);
       w->log("%%fg=red$It will take many hits to defeat...");
     }
   }
@@ -873,7 +873,7 @@ void Game::wid_thing_info_add_carry_info(WidPopup *w, Thingp t)
   auto items = t->get_itemp()->carrying.size();
 
   if (t->is_open) {
-    w->log("`");
+    w->log(UI_LOGGING_EMPTY_LINE);
     w->log("It's open.", true);
 
     //
@@ -881,16 +881,16 @@ void Game::wid_thing_info_add_carry_info(WidPopup *w, Thingp t)
     //
     if (t->is_bag_item_container()) {
       if (items > 3) {
-        w->log("`");
+        w->log(UI_LOGGING_EMPTY_LINE);
         w->log("Looks to be full of presents.", true);
       } else if (items > 1) {
-        w->log("`");
+        w->log(UI_LOGGING_EMPTY_LINE);
         w->log("Looks like it contains a few things.", true);
       } else if (items > 0) {
-        w->log("`");
+        w->log(UI_LOGGING_EMPTY_LINE);
         w->log("Looks like it contains something.", true);
       } else {
-        w->log("`");
+        w->log(UI_LOGGING_EMPTY_LINE);
         w->log("Is empty.", true);
       }
     }
@@ -900,16 +900,16 @@ void Game::wid_thing_info_add_carry_info(WidPopup *w, Thingp t)
     //
     if (t->is_bag()) {
       if (items > 3) {
-        w->log("`");
+        w->log(UI_LOGGING_EMPTY_LINE);
         w->log("Looks to be bulging with presents.", true);
       } else if (items > 1) {
-        w->log("`");
+        w->log(UI_LOGGING_EMPTY_LINE);
         w->log("Looks like it contains a few things.", true);
       } else if (items > 0) {
-        w->log("`");
+        w->log(UI_LOGGING_EMPTY_LINE);
         w->log("Looks like it contains something.", true);
       } else {
-        w->log("`");
+        w->log(UI_LOGGING_EMPTY_LINE);
         w->log("Looks like it is empty.", true);
       }
     }

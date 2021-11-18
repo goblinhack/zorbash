@@ -32,7 +32,7 @@
 #define UI_HEALTH_BAR_STEPS          18 // How many graduations on health bar
 #define UI_HEALTH_ICON_STEPS         5
 #define UI_INVENTORY_QUICK_ITEMS_MAX 10
-#define UI_LOGGING_EMPTY_LINE        "'" // Complete hack, char I use to force space
+#define UI_LOGGING_EMPTY_LINE        "`" // Complete hack, char I use to force space
 #define UI_MINIMAP_SIZE              0.155
 #define UI_MOUSE_DOUBLE_CLICK        500 // Double click time
 #define UI_MOUSE_WHEEL_SCALE         1.0 // How much the wheel mouse moves.

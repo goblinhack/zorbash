@@ -15,11 +15,11 @@ def on_tick(owner, item, x, y):
     poison = my.thing_get_poison(item)
     if poison == 0:
         return True
-    mew_poison = int(poison / 2)
+    new_poison = int(poison / 2)
     if new_poison == 0:
-        my.topcon("%%fg=green$The poison has no effect on you!")
+        my.topcon("%%fg=green$The poison has little effect on you!%%fg=reset$")
     else:
-        my.topcon("%%fg=green$The poison fades from your system!")
+        my.topcon("%%fg=green$The poison fades from your system!%%fg=reset$")
     my.thing_set_poison(owner, new_poison)
     return True
 
