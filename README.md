@@ -224,18 +224,21 @@ How to build
 <pre>
     sh ./RUNME
 </pre>
-- Ubuntu docker (experimental):
-<pre>
-    sh ./RUNME.docker.ubuntu
-</pre>
 - On MacOS (needs Mac Ports/Homebrew):
 <pre>
     sh ./RUNME
 </pre>
-- On Windows (todo): (install msys2 first via https://www.msys2.org/)
+- Docker (experimental, it builds but cannot find a video display):
 <pre>
-    sh ./RUNME.windows.mingw64
+    sh ./RUNME.docker.ubuntu
+    sh ./RUNME.docker.fedora
+    sh ./RUNME.docker.debian
 </pre>
+- On Windows (todo)
+<!-- - On Windows (todo): (install msys2 first via https://www.msys2.org/) -->
+<!-- <pre>                                                                 -->
+<!--     sh ./RUNME.windows.mingw64                                        -->
+<!-- </pre>                                                                -->
 
 If it doesn't build, just email goblinhack@gmail.com for help
 
