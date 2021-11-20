@@ -301,7 +301,6 @@ do
     do
         grep -q $arg $PAYLOAD
         if [ $? -ne 0 ]; then
-            echo "    mytp.$arg(False)" >> $PAYLOAD
         fi
     done
 
