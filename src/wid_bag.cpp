@@ -137,7 +137,7 @@ uint8_t wid_in_transit_item_place(Widp w, int32_t x, int32_t y, uint32_t button)
   TRACE_AND_INDENT();
   DBG3("Place in transit item");
   TRACE_AND_INDENT();
-  auto level = game->level;
+  auto level = game->get_current_level();
   if (! level) {
     return false;
   }
@@ -394,7 +394,7 @@ bool Game::wid_bag_move_item(Thingp t)
   DBG3("Chosen to move item");
   TRACE_AND_INDENT();
 
-  auto level = game->level;
+  auto level = game->get_current_level();
   if (! level) {
     return false;
   }
@@ -546,7 +546,7 @@ uint8_t wid_bag_item_key_down(Widp w, const struct SDL_Keysym *key)
     return false;
   }
 
-  auto level = game->level;
+  auto level = game->get_current_level();
   if (! level) {
     return false;
   }

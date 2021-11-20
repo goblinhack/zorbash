@@ -18,7 +18,7 @@ void Game::tick_begin(const std::string &why)
   TRACE_AND_INDENT();
   tick_requested = why;
 
-  auto level = game->level;
+  auto level = game->get_current_level();
   if (level) {
     TRACE_AND_INDENT();
     auto player = level->player;
@@ -56,7 +56,7 @@ void Game::tick_begin_now(void)
   //
   tick_set_speed();
 
-  auto level = game->level;
+  auto level = game->get_current_level();
   if (level) {
     TRACE_AND_INDENT();
     auto player = level->player;
@@ -107,7 +107,7 @@ bool Game::tick_end(void)
 
   save_snapshot_check();
 
-  auto level = game->level;
+  auto level = game->get_current_level();
   if (level) {
     TRACE_AND_INDENT();
     auto player = level->player;

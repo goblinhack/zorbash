@@ -19,7 +19,7 @@ bool player_tick(bool left, bool right, bool up, bool down, bool attack, bool wa
 {
   TRACE_AND_INDENT();
 
-  auto level = game->level;
+  auto level = game->get_current_level();
   if (! level) {
     LOG("Player tick; ignore, no level");
     return false;

@@ -57,7 +57,7 @@ void Level::debug_path_create(const std::vector< point > &move_path)
 void Level::debug_path_clear(void)
 {
   TRACE_AND_INDENT();
-  auto level = game->level;
+  auto level = game->get_current_level();
   if (! level) {
     return;
   }

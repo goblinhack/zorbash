@@ -32,7 +32,7 @@ void Level::create(point3d at, int seed)
   //
   // Must set the level pointer so for e.g. spiders can spawn webs when born
   //
-  // game->level = this;
+  game->level_being_created = this;
 
   bool ret;
   if (at.z & 1) {
@@ -40,6 +40,8 @@ void Level::create(point3d at, int seed)
   } else {
     ret = create_sewer(at, seed);
   }
+
+  game->level_being_created = nullptr;
 
   log("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ");
   log("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");

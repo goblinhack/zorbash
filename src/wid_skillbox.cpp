@@ -45,7 +45,7 @@ void wid_skillbox_mouse_over_begin(Widp w, int32_t relx, int32_t rely, int32_t w
     return;
   }
 
-  auto level = game->level;
+  auto level = game->get_current_level();
   if (! level) {
     DBG3("Skillbox: No level; ignore");
     return;
@@ -86,7 +86,7 @@ void wid_skillbox_mouse_over_end(Widp w)
     return;
   }
 
-  auto level = game->level;
+  auto level = game->get_current_level();
   if (! level) {
     DBG3("Skillbox: No level; ignore");
     return;
@@ -121,7 +121,7 @@ uint8_t wid_skillbox_item_mouse_up(Widp w, int32_t x, int32_t y, uint32_t button
     return false;
   }
 
-  auto level = game->level;
+  auto level = game->get_current_level();
   if (! level) {
     return true;
   }

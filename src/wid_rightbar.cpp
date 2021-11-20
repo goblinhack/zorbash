@@ -56,7 +56,7 @@ static void wid_rightbar_inventory_over_b(Widp w, int32_t relx, int32_t rely, in
     return;
   }
 
-  auto level = game->level;
+  auto level = game->get_current_level();
   if (! level) {
     DBG3("Inventory: No level; ignore");
     return;
@@ -98,7 +98,7 @@ static void wid_rightbar_inventory_over_e(Widp w)
     return;
   }
 
-  auto level = game->level;
+  auto level = game->get_current_level();
   if (! level) {
     DBG3("Inventory: No level; ignore");
     return;
@@ -129,7 +129,7 @@ static bool wid_rightbar_create(void)
   TRACE_AND_INDENT();
   DBG3("Remake rightbar");
 
-  auto level = game->level;
+  auto level = game->get_current_level();
   if (! level) {
     return false;
   }

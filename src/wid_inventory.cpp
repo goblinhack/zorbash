@@ -139,7 +139,7 @@ static void wid_inventory_mouse_over_tab_bag2(Widp w, int32_t x, int32_t y, int3
 static uint8_t wid_inventory_key_down(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_AND_INDENT();
-  auto level = game->level;
+  auto level = game->get_current_level();
   if (! level) {
     return true;
   }
@@ -168,7 +168,7 @@ static uint8_t wid_inventory_item_option_use(Widp w, int32_t x, int32_t y, uint3
   DBG3("Item options use");
   TRACE_AND_INDENT();
 
-  auto level = game->level;
+  auto level = game->get_current_level();
   if (! level) {
     return true;
   }
@@ -206,7 +206,7 @@ static uint8_t wid_inventory_item_option_eat(Widp w, int32_t x, int32_t y, uint3
   DBG3("Item options eat");
   TRACE_AND_INDENT();
 
-  auto level = game->level;
+  auto level = game->get_current_level();
   if (! level) {
     return true;
   }
@@ -245,7 +245,7 @@ static uint8_t wid_inventory_item_option_throw(Widp w, int32_t x, int32_t y, uin
   DBG3("Item options throw");
   TRACE_AND_INDENT();
 
-  auto level = game->level;
+  auto level = game->get_current_level();
   if (! level) {
     return true;
   }
@@ -283,7 +283,7 @@ static uint8_t wid_inventory_item_option_drop(Widp w, int32_t x, int32_t y, uint
   DBG3("Item options drop");
   TRACE_AND_INDENT();
 
-  auto level = game->level;
+  auto level = game->get_current_level();
   if (! level) {
     return true;
   }
@@ -314,7 +314,7 @@ static uint8_t wid_inventory_item_option_drop(Widp w, int32_t x, int32_t y, uint
 static uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_AND_INDENT();
-  auto level = game->level;
+  auto level = game->get_current_level();
   if (! level) {
     return true;
   }
@@ -628,7 +628,7 @@ static void wid_inventory_add_equip(Widp parent, int equip, point tl, point br, 
   auto w = wid_new_square_button(parent, wid_name);
   wid_set_pos(w, tl, br);
 
-  auto level = game->level;
+  auto level = game->get_current_level();
   if (! level) {
     return;
   }
@@ -683,7 +683,7 @@ bool wid_inventory_create(Thingp selected, Thingp over)
   DBG("Create inventory");
   TRACE_AND_INDENT();
 
-  auto level = game->level;
+  auto level = game->get_current_level();
   if (! level) {
     return false;
   }

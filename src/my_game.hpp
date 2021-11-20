@@ -125,6 +125,8 @@ public:
   Game(std::string appdata);
   Game(void) {}
 
+  Levelp get_current_level(void);
+
   Thingp thing_find(const ThingId id);
   Thingp thing_find_optional(const ThingId id);
 
@@ -216,6 +218,7 @@ public:
   Config      config;
   World       world;
   Levelp      level {}; // Current displayed level
+  Levelp      level_being_created {};
 
   //
   // Keep all in order:

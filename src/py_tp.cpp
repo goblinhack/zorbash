@@ -751,7 +751,7 @@ PyObject *level_spawn_next_to_(PyObject *obj, PyObject *args, PyObject *keywds)
 
   PY_DBG("%s(%x, %s)", __FUNCTION__, id, what);
 
-  auto level = game->level;
+  auto level = game->get_current_level();
   if (! level) {
     Py_RETURN_FALSE;
   }
@@ -793,7 +793,7 @@ PyObject *level_spawn_next_to_or_on_monst_(PyObject *obj, PyObject *args, PyObje
 
   PY_DBG("%s(%x, %s)", __FUNCTION__, id, what);
 
-  auto level = game->level;
+  auto level = game->get_current_level();
   if (! level) {
     Py_RETURN_FALSE;
   }
@@ -851,7 +851,7 @@ PyObject *level_spawn_using_items_radius_range_(PyObject *obj, PyObject *args, P
 
   PY_DBG("%s(%x, %s, %u, %u)", __FUNCTION__, id, what, radius_min, radius_max);
 
-  auto level = game->level;
+  auto level = game->get_current_level();
   if (! level) {
     Py_RETURN_FALSE;
   }
@@ -905,7 +905,7 @@ PyObject *level_spawn_fire_around_thing(PyObject *obj, PyObject *args, PyObject 
 
   PY_DBG("%s(%x, %s)", __FUNCTION__, id, what);
 
-  auto level = game->level;
+  auto level = game->get_current_level();
   if (! level) {
     Py_RETURN_FALSE;
   }
@@ -947,7 +947,7 @@ PyObject *level_spawn_at_thing(PyObject *obj, PyObject *args, PyObject *keywds)
 
   PY_DBG("%s(%x, %s)", __FUNCTION__, id, what);
 
-  auto level = game->level;
+  auto level = game->get_current_level();
   if (! level) {
     Py_RETURN_FALSE;
   }
@@ -989,7 +989,7 @@ PyObject *level_spawn_at_thing_if_possible(PyObject *obj, PyObject *args, PyObje
 
   PY_DBG("%s(%x, %s)", __FUNCTION__, id, what);
 
-  auto level = game->level;
+  auto level = game->get_current_level();
   if (! level) {
     Py_RETURN_FALSE;
   }
@@ -1043,7 +1043,7 @@ PyObject *if_matches_then_kill_(PyObject *obj, PyObject *args, PyObject *keywds)
 
   PY_DBG("%s(%x, %s, %d, %d)", __FUNCTION__, id, what, x, y);
 
-  auto level = game->level;
+  auto level = game->get_current_level();
   if (! level) {
     Py_RETURN_FALSE;
   }
@@ -1085,7 +1085,7 @@ PyObject *if_matches_(PyObject *obj, PyObject *args, PyObject *keywds)
 
   PY_DBG("%s(%x, %s)", __FUNCTION__, id, what);
 
-  auto level = game->level;
+  auto level = game->get_current_level();
   if (! level) {
     Py_RETURN_FALSE;
   }
@@ -1139,7 +1139,7 @@ PyObject *level_place_at(PyObject *obj, PyObject *args, PyObject *keywds)
 
   PY_DBG("%s(%x, %s, %d, %d)", __FUNCTION__, id, what, x, y);
 
-  auto level = game->level;
+  auto level = game->get_current_level();
   if (! level) {
     Py_RETURN_FALSE;
   }

@@ -46,3 +46,14 @@ int Game::get_move_speed(void)
   TRACE_AND_INDENT();
   return current_move_speed;
 }
+
+Levelp Game::get_current_level(void)
+{
+  if (level) {
+    return level;
+  }
+  if (level_being_created) {
+    return level_being_created;
+  }
+  return nullptr;
+}

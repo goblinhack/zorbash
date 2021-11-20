@@ -84,7 +84,7 @@ def tp_init(name, text_name):
     mytp.set_on_you_are_hit_do("spider_giant.on_you_are_hit()")
     mytp.set_on_you_bite_attack_do("spider_giant.on_you_bite_attack()")
     mytp.set_on_you_miss_do("spider_giant.on_you_miss_do()")
-    #mytp.set_on_born_do("spider_giant.on_born()")
+    mytp.set_on_born_do("spider_giant.on_born()")
     mytp.set_rarity(my.RARITY_COMMON)
     mytp.set_stamina(100)
     mytp.set_stat_attack_bonus(20) # 10, means no bonus

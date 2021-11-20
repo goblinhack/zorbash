@@ -45,7 +45,7 @@ void wid_buffbox_mouse_over_begin(Widp w, int32_t relx, int32_t rely, int32_t wh
     return;
   }
 
-  auto level = game->level;
+  auto level = game->get_current_level();
   if (! level) {
     DBG3("buffbox: No level; ignore");
     return;
@@ -86,7 +86,7 @@ void wid_buffbox_mouse_over_end(Widp w)
     return;
   }
 
-  auto level = game->level;
+  auto level = game->get_current_level();
   if (! level) {
     DBG3("buffbox: No level; ignore");
     return;

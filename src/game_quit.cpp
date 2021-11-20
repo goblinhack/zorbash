@@ -30,7 +30,7 @@ static uint8_t game_quit_yes(Widp w, int32_t x, int32_t y, uint32_t button)
   if (game->started) {
     LOG("PLAYER: Restart game");
 
-    auto level = game->level;
+    auto level = game->get_current_level();
     if (level) {
       auto player = level->player;
       if (player) {

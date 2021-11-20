@@ -50,7 +50,7 @@ static void wid_enchant_slot(int slot)
 static uint8_t wid_enchant_key_up(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_AND_INDENT();
-  auto level = game->level;
+  auto level = game->get_current_level();
   if (! level) {
     return true;
   }
@@ -119,7 +119,7 @@ static uint8_t wid_enchant_key_up(Widp w, const struct SDL_Keysym *key)
 static uint8_t wid_enchant_key_down(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_AND_INDENT();
-  auto level = game->level;
+  auto level = game->get_current_level();
   if (! level) {
     return true;
   }
@@ -145,7 +145,7 @@ static uint8_t wid_enchant_key_down(Widp w, const struct SDL_Keysym *key)
 static uint8_t wid_enchant_mouse_up(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
-  auto level = game->level;
+  auto level = game->get_current_level();
   if (! level) {
     return true;
   }

@@ -427,7 +427,7 @@ void Game::wid_thing_info_create_list(const std::vector< Thingp > &ts)
     return;
   }
 
-  auto level = game->level;
+  auto level = game->get_current_level();
   if (! level) {
     game->change_state(Game::STATE_NORMAL);
     ERR("No level");
