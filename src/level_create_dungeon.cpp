@@ -411,6 +411,9 @@ bool Level::create_dungeon(point3d at, int seed)
               t->carry(w3);
             }
 
+            {
+              thing_new("spider_giant", point(x + 3, y));
+            }
 #if 0
             {
               thing_new("sword_short_wooden", point(x + 1, y));

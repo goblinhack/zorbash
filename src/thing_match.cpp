@@ -526,7 +526,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag25() && (what == "unused_flag25")) {
     return true;
   }
-  if (unused_flag26() && (what == "unused_flag26")) {
+  if (aggression_level() && (what == "aggression_level")) {
     return true;
   }
   if (is_able_to_see_in_the_dark() && (what == "is_able_to_see_in_the_dark")) {
@@ -1301,8 +1301,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag25") {
     return &Thing::unused_flag25;
   }
-  if (what == "unused_flag26") {
-    return &Thing::unused_flag26;
+  if (what == "aggression_level") {
+    return &Thing::aggression_level;
   }
   if (what == "is_able_to_see_in_the_dark") {
     return &Thing::is_able_to_see_in_the_dark;

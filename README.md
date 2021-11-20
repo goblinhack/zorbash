@@ -4,14 +4,18 @@
 <!--                                                                                                                                              -->
 <!-- Next todo                                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
-<!-- - slowdown on level 2                                                                                                                        -->
-<!-- - equip armour etc                                                                                                                           -->
+<!-- - test giant spider poison                                                                                                                   -->
+<!-- - giant spider web throw                                                                                                                     -->
+<!-- - spider ball anims                                                                                                                          -->
 <!-- - antipoison potion                                                                                                                          -->
 <!-- - chocolote frog cures poison?                                                                                                               -->
 <!-- - holy water cures poison                                                                                                                    -->
+<!-- - darts / poison darts                                                                                                                       -->
+<!-- - AI wand use                                                                                                                                -->
+<!-- - slowdown on level 2                                                                                                                        -->
+<!-- - equip armour etc                                                                                                                           -->
 <!-- - AI if you see a potion of health, drop food in preference?                                                                                 -->
 <!-- - AI did not pick up enchantstone due to space                                                                                               -->
-<!-- - AI wand use                                                                                                                                -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Level                                                                                                                                        -->
@@ -102,7 +106,6 @@
 <!-- - strength penalties                                                                                                                         -->
 <!-- - gauntlet of lion armour (Henry II)                                                                                                         -->
 <!-- - axe hits all monsts around you ?                                                                                                           -->
-<!-- - darts / poison darts                                                                                                                       -->
 <!-- - three damage types, blunt(club warhammer) pierce(arrow javelin) or cut(axe scythe swwrd)                                                   -->
 <!-- - blessed items resist explosion                                                                                                             -->
 <!-- - warhammer should kill parent jelly in one go                                                                                               -->

@@ -328,8 +328,8 @@ class Tp:
     def set_unused_flag25(self, value):
         my.tp_set_unused_flag25(self, value)
 
-    def set_unused_flag26(self, value):
-        my.tp_set_unused_flag26(self, value)
+    def set_aggression_level(self, value):
+        my.tp_set_aggression_level(self, value)
 
     def set_is_able_to_see_in_the_dark(self, value):
         my.tp_set_is_able_to_see_in_the_dark(self, value)

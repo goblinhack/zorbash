@@ -1099,7 +1099,7 @@ public:
   int unused_flag23(void);
   int unused_flag24(void);
   int unused_flag25(void);
-  int unused_flag26(void);
+  int aggression_level(void);
   int is_able_to_see_in_the_dark(void);
   int is_gfx_anim_synced_with_owner(void);
   int unused_flag2(void);
