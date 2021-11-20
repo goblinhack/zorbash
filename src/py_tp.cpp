@@ -958,8 +958,9 @@ PyObject *level_spawn_at_thing(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_FALSE;
   }
 
-  if (t->spawn_at(std::string(what))) {
-    Py_RETURN_TRUE;
+  auto it = t->spawn_at(std::string(what));
+  if (it) {
+    return Py_BuildValue("I", it->id);
   }
   Py_RETURN_FALSE;
 }

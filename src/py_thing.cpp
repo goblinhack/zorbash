@@ -448,6 +448,44 @@ PyObject *thing_defeated(PyObject *obj, PyObject *args, PyObject *keywds)
   Py_RETURN_NONE;
 }
 
+PyObject *thing_set_minion_owner(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_AND_INDENT();
+  uint32_t     me_id    = 0;
+  uint32_t     owner_id = 0;
+  static char *kwlist[] = {(char *) "me", (char *) "owner", 0};
+
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "II", kwlist, &me_id, &owner_id)) {
+    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  if (! me_id) {
+    ERR("%s: No me thing ID set", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  if (! owner_id) {
+    ERR("%s: No owner thing ID set", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  Thingp me = game->thing_find(me_id);
+  if (! me) {
+    ERR("%s: Cannot find me thing ID %u", __FUNCTION__, me_id);
+    Py_RETURN_NONE;
+  }
+
+  Thingp owner = game->thing_find(owner_id);
+  if (! owner) {
+    ERR("%s: Cannot find owner thing ID %u", __FUNCTION__, owner_id);
+    Py_RETURN_NONE;
+  }
+
+  me->set_minion_owner(owner);
+  Py_RETURN_NONE;
+}
+
 PyObject *thing_buff_add(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();

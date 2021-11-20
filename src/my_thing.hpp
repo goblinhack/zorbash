@@ -409,11 +409,11 @@ public:
   bool skill_use(Thingp it);
   bool skillbox_id_insert(Thingp what);
   bool skillbox_id_remove(Thingp what);
-  bool spawn_at(const std::string &what);
-  bool spawn_at_if_possible(const std::string &what);
-  bool spawn_fire(const std::string &what);
-  bool spawn_next_to(const std::string &what);
-  bool spawn_next_to_or_on_monst(const std::string &what);
+  Thingp spawn_at(const std::string &what);
+  Thingp spawn_at_if_possible(const std::string &what);
+  bool   spawn_fire(const std::string &what);
+  bool   spawn_next_to(const std::string &what);
+  bool   spawn_next_to_or_on_monst(const std::string &what);
   bool spawn_radius_range(Thingp parent, Thingp target, const std::string &what, uint32_t rad_min, uint32_t rad_max);
   bool steal_item_from(Thingp);
   bool steal_treasure_from(Thingp);

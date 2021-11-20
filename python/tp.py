@@ -328,6 +328,9 @@ class Tp:
     def set_unused_flag25(self, value):
         my.tp_set_unused_flag25(self, value)
 
+    def set_birthplace_leas(self, value):
+        my.tp_set_birthplace_leas(self, value)
+
     def set_ai_aggression_level(self, value):
         my.tp_set_ai_aggression_level(self, value)
 

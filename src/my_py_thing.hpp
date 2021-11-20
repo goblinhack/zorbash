@@ -320,6 +320,7 @@ PyObject *thing_is_weapon(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_weapon_equiper(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_defeated_by(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_defeated(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_set_minion_owner(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_buff_add(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_debuff_add(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_buff_remove(PyObject *obj, PyObject *args, PyObject *keywds);

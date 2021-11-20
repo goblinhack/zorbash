@@ -1665,6 +1665,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_FUNCTION(thing_decr_stamina),
     MY_ADD_PYTHON_FUNCTION(thing_decr_stamina_max),
     MY_ADD_PYTHON_FUNCTION(thing_defeated),
+    MY_ADD_PYTHON_FUNCTION(thing_set_minion_owner),
     MY_ADD_PYTHON_FUNCTION(thing_defeated_by),
     MY_ADD_PYTHON_FUNCTION(thing_buff_add),
     MY_ADD_PYTHON_FUNCTION(thing_buff_remove),

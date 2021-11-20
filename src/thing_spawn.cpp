@@ -291,7 +291,7 @@ bool Thing::spawn_fire(const std::string &what)
   return true;
 }
 
-bool Thing::spawn_at_if_possible(const std::string &what)
+Thingp Thing::spawn_at_if_possible(const std::string &what)
 {
   TRACE_AND_INDENT();
   dbg("Spawn under: %s", what.c_str());
@@ -302,14 +302,14 @@ bool Thing::spawn_at_if_possible(const std::string &what)
   auto                 p = point(x, y);
 
   if (level->is_hazard(x, y) || level->is_rock(x, y) || level->is_wall(x, y)) {
-    return false;
+    return nullptr;
   }
 
   possible.push_back(p);
 
   auto cands = possible.size();
   if (! cands) {
-    return false;
+    return nullptr;
   }
 
   auto chosen = possible[ pcg_random_range(0, cands) ];
@@ -326,10 +326,10 @@ bool Thing::spawn_at_if_possible(const std::string &what)
   //
   c->location_check_forced_all_things_at();
 
-  return true;
+  return c;
 }
 
-bool Thing::spawn_at(const std::string &what)
+Thingp Thing::spawn_at(const std::string &what)
 {
   TRACE_AND_INDENT();
   dbg("Spawn under: %s", what.c_str());
@@ -343,7 +343,7 @@ bool Thing::spawn_at(const std::string &what)
 
   auto cands = possible.size();
   if (! cands) {
-    return false;
+    return nullptr;
   }
 
   auto chosen = possible[ pcg_random_range(0, cands) ];
@@ -360,5 +360,5 @@ bool Thing::spawn_at(const std::string &what)
   //
   c->location_check_forced_all_things_at();
 
-  return true;
+  return c;
 }

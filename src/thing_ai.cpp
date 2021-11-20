@@ -892,11 +892,13 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
             }
           }
 
-          if (it->is_spiderweb() && ! dist) {
-            //
-            // Very close, high priority attack
-            //
-            GOAL_ADD(GOAL_PRIO_VERY_HIGH, 666, "get-out-of-web", it);
+          if (! environ_loves_spiderwebs()) {
+            if (it->is_spiderweb() && ! dist) {
+              //
+              // Very close, high priority attack
+              //
+              GOAL_ADD(GOAL_PRIO_VERY_HIGH, 666, "get-out-of-web", it);
+            }
           }
         }
 

@@ -21,7 +21,9 @@ def on_death(me, x, y):
         my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, "squelch")
 
 def on_born(me, x, y):
-    my.level_spawn_at_thing(me, "spiderweb")
+    it = my.level_spawn_at_thing(me, "spiderweb")
+    if it != 0:
+        my.thing_set_minion_owner(me, it)
 
 def tp_init(name, text_name):
     mytp = tp.Tp(name, text_name)
@@ -73,6 +75,7 @@ def tp_init(name, text_name):
     mytp.set_is_meat_eater(True)
     mytp.set_is_monst(True)
     mytp.set_is_moveable(True)
+    mytp.set_minion_leash_distance(3)
     mytp.set_is_poison(2) # danger level
     mytp.set_is_shovable(True)
     mytp.set_is_tickable(True)
