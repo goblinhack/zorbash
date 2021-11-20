@@ -190,8 +190,8 @@ class Tp:
     def set_on_you_are_hit_do(self, value):
         my.tp_set_on_you_are_hit_do(self, value)
 
-    def set_on_you_miss_do_do(self, value):
-        my.tp_set_on_you_miss_do_do(self, value)
+    def set_on_you_miss_do(self, value):
+        my.tp_set_on_you_miss_do(self, value)
 
     def set_on_fall_do(self, value):
         my.tp_set_on_fall_do(self, value)

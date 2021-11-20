@@ -408,7 +408,7 @@ private:
   std::string _on_you_are_hit_do;
   std::string _on_idle_dice_str;
   std::string _on_lifespan_do;
-  std::string _on_you_miss_do_do;
+  std::string _on_you_miss_do;
   std::string _on_move_do;
   std::string _on_open_do;
   std::string _on_tick_do;
@@ -494,7 +494,7 @@ public:
   const std::string &on_you_are_hit_do(void) const;
   const std::string &on_idle_dice_str(void) const;
   const std::string &on_lifespan_do(void) const;
-  const std::string &on_you_miss_do_do(void) const;
+  const std::string &on_you_miss_do(void) const;
   const std::string &on_move_do(void) const;
   const std::string &on_open_do(void) const;
   const std::string &on_tick_do(void) const;
@@ -1192,7 +1192,7 @@ public:
   void set_on_you_are_hit_do(const std::string &);
   void set_on_idle_dice(const std::string &);
   void set_on_lifespan_do(const std::string &);
-  void set_on_you_miss_do_do(const std::string &);
+  void set_on_you_miss_do(const std::string &);
   void set_on_move_do(const std::string &);
   void set_on_open_do(const std::string &);
   void set_on_tick_do(const std::string &);

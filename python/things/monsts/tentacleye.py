@@ -81,7 +81,7 @@ def tp_init(name, text_name):
     mytp.set_on_firing_at_something_do("tentacleye.on_firing_at_something()")
     mytp.set_on_you_are_hit_do("tentacleye.on_you_are_hit()")
     mytp.set_on_you_bite_attack_do("tentacleye.on_you_bite_attack()")
-    mytp.set_on_you_miss_do_do("tentacleye.on_you_miss_do()")
+    mytp.set_on_you_miss_do("tentacleye.on_you_miss_do()")
     mytp.set_rarity(my.RARITY_COMMON)
     mytp.set_stamina(100)
     mytp.set_stat_attack_bonus(10) # 10, means no bonus

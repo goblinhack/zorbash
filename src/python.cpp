@@ -2211,7 +2211,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_TP_FUNCTION(on_you_are_hit_do),
     MY_ADD_PYTHON_TP_FUNCTION(on_idle_dice),
     MY_ADD_PYTHON_TP_FUNCTION(on_lifespan_do),
-    MY_ADD_PYTHON_TP_FUNCTION(on_you_miss_do_do),
+    MY_ADD_PYTHON_TP_FUNCTION(on_you_miss_do),
     MY_ADD_PYTHON_TP_FUNCTION(on_move_do),
     MY_ADD_PYTHON_TP_FUNCTION(on_open_do),
     MY_ADD_PYTHON_TP_FUNCTION(on_tick_do),

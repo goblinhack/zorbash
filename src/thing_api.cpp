@@ -5866,10 +5866,10 @@ const std::string &Thing::on_lifespan_do(void)
   return (tp()->on_lifespan_do());
 }
 
-const std::string &Thing::on_you_miss_do_do(void)
+const std::string &Thing::on_you_miss_do(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->on_you_miss_do_do());
+  return (tp()->on_you_miss_do());
 }
 
 const std::string &Thing::on_move_do(void)

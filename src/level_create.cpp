@@ -29,6 +29,11 @@ void Level::create(point3d at, int seed)
   log("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
   log("v v v v v v v v v v v v v v v v v v v v v v v v v v v ");
 
+  //
+  // Must set the level pointer so for e.g. spiders can spawn webs when born
+  //
+  // game->level = this;
+
   bool ret;
   if (at.z & 1) {
     ret = create_dungeon(at, seed);

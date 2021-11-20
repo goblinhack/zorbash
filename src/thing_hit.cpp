@@ -57,7 +57,7 @@ void Thing::on_you_are_hit(Thingp hitter,      // an arrow / monst /...
 void Thing::on_you_miss_do(Thingp hitter)
 {
   TRACE_AND_INDENT();
-  auto on_you_miss_do = tp()->on_you_miss_do_do();
+  auto on_you_miss_do = tp()->on_you_miss_do();
   if (std::empty(on_you_miss_do)) {
     return;
   }

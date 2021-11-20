@@ -94,7 +94,7 @@ def tp_init(name, text_name):
     mytp.set_on_firing_at_something_do("skeleton_fire.on_firing_at_something()")
     mytp.set_on_you_are_hit_do("skeleton_fire.on_you_are_hit()")
     mytp.set_on_you_bite_attack_do("skeleton_fire.on_you_bite_attack()")
-    mytp.set_on_you_miss_do_do("skeleton_fire.on_you_miss_do()")
+    mytp.set_on_you_miss_do("skeleton_fire.on_you_miss_do()")
     mytp.set_rarity(my.RARITY_COMMON)
     mytp.set_resurrect_dice("1d20+30")
     mytp.set_stat_attack_bonus(10) # 10, means no bonus

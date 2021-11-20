@@ -499,7 +499,7 @@ public:
   const std::string &on_firing_at_something_do(void);
   const std::string &on_you_are_hit_do(void);
   const std::string &on_lifespan_do(void);
-  const std::string &on_you_miss_do_do(void);
+  const std::string &on_you_miss_do(void);
   const std::string &on_move_do(void);
   const std::string &on_open_do(void);
   const std::string &on_tick_do(void);
