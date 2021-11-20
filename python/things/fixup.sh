@@ -286,7 +286,7 @@ do
       set_unused_flag23 \
       set_unused_flag24 \
       set_unused_flag25 \
-      set_aggression_level \
+      set_ai_aggression_level \
       set_is_able_to_see_in_the_dark \
       set_is_gfx_anim_synced_with_owner \
       set_unused_flag3 \

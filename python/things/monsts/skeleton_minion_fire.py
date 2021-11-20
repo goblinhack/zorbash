@@ -26,6 +26,7 @@ def on_death(me, x, y):
 
 def tp_init(name, text_name):
     mytp = tp.Tp(name, text_name)
+    mytp.set_ai_aggression_level(50)
     mytp.set_ai_is_able_to_attack_generators(False)
     mytp.set_ai_is_able_to_break_down_doors(False)
     mytp.set_ai_is_able_to_break_out_of_webs(False)
@@ -302,7 +303,6 @@ def tp_init(name, text_name):
     mytp.set_unused_flag23(False)
     mytp.set_unused_flag24(False)
     mytp.set_unused_flag25(False)
-    mytp.set_aggression_level(50)
     mytp.set_unused_flag2(False)
     mytp.set_unused_flag30(False)
     mytp.set_unused_flag3(False)

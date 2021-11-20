@@ -369,7 +369,7 @@ private:
   int _unused_flag23 {};
   int _unused_flag24 {};
   int _unused_flag25 {};
-  int _aggression_level {};
+  int _ai_aggression_level {};
   int _is_able_to_see_in_the_dark {};
   int _is_gfx_anim_synced_with_owner {};
   int _unused_flag3 {};
@@ -750,7 +750,7 @@ public:
   int unused_flag23(void) const;
   int unused_flag24(void) const;
   int unused_flag25(void) const;
-  int aggression_level(void) const;
+  int ai_aggression_level(void) const;
   int is_able_to_see_in_the_dark(void) const;
   int is_gfx_anim_synced_with_owner(void) const;
   int is_item_magical(void) const;
@@ -1078,7 +1078,7 @@ public:
   void set_unused_flag23(int);
   void set_unused_flag24(int);
   void set_unused_flag25(int);
-  void set_aggression_level(int);
+  void set_ai_aggression_level(int);
   void set_is_able_to_see_in_the_dark(int);
   void set_is_gfx_anim_synced_with_owner(int);
   void set_is_item_magical(int);

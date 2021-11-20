@@ -60,7 +60,7 @@ int Tp::get_danger_level(void)
     danger_level += 20;
   }
 
-  danger_level += aggression_level();
+  danger_level += ai_aggression_level();
 
   danger_level +=
       std::max(get_damage_melee_dice().max_roll(),
@@ -139,7 +139,7 @@ int Thing::get_danger_initial_level(void)
 
   danger_level += get_damage_max();
 
-  danger_level += aggression_level();
+  danger_level += ai_aggression_level();
 
   //
   // Low on health, reduce the level
@@ -223,7 +223,7 @@ int Thing::get_danger_current_level(void)
 
   danger_level += get_damage_max();
 
-  danger_level += aggression_level();
+  danger_level += ai_aggression_level();
 
   //
   // Low on health, reduce the level
@@ -272,7 +272,7 @@ int Thing::is_dangerous(Thingp it)
     b += 2;
   }
 
-  con("My danger level %d, its %d, %s", a, b, it->to_string().c_str());
+  // con("My danger level %d, its %d, %s", a, b, it->to_string().c_str());
 
   //
   // So giant rats will attack each other if at the same danger level

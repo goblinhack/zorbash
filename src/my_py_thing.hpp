@@ -230,7 +230,7 @@ PyObject *thing_unused_flag22(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag23(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag24(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag25(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_aggression_level(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_ai_aggression_level(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_see_in_the_dark(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_gfx_anim_synced_with_owner(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_item_magical(PyObject *obj, PyObject *args, PyObject *keywds);

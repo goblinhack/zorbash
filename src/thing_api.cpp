@@ -1281,10 +1281,10 @@ int Thing::unused_flag25(void)
   return (tp()->unused_flag25());
 }
 
-int Thing::aggression_level(void)
+int Thing::ai_aggression_level(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->aggression_level());
+  return (tp()->ai_aggression_level());
 }
 
 int Thing::is_able_to_see_in_the_dark(void)

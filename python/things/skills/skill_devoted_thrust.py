@@ -285,7 +285,6 @@ def tp_inti(name, text_name):
     mytp.set_unused_flag23(False)
     mytp.set_unused_flag24(False)
     mytp.set_unused_flag25(False)
-    mytp.set_aggression_level(0)
     mytp.set_unused_flag2(False)
     mytp.set_unused_flag30(False)
     mytp.set_unused_flag3(False)
@@ -295,9 +294,8 @@ def tp_inti(name, text_name):
     mytp.set_unused_flag7(False)
     mytp.set_unused_flag8(False)
     mytp.set_unused_flag9(False)
-    mytp.update()
-
     # mytp.set_z_prio(my.MAP_PRIO_NORMAL) # End marker for fixup.sh
+    mytp.update()
 
 def init():
     tp_inti(name="skill_devoted_thrust", text_name="devoted thrust")
