@@ -246,6 +246,10 @@ bool Thing::possible_to_attack(const Thingp victim)
         dbg("No, do not attack %s", victim->to_string().c_str());
         return false;
       }
+      if (victim->is_spiderweb()) {
+        dbg("No, do not attack %s", victim->to_string().c_str());
+        return false;
+      }
       dbg("Can attack %s", victim->to_string().c_str());
       return true;
     }
