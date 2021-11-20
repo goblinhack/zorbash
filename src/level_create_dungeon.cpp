@@ -387,11 +387,11 @@ bool Level::create_dungeon(point3d at, int seed)
           if (dungeon->is_ascend_dungeon(x, y)) {
             auto t = thing_new("player2", point(x, y));
 
-            TOPCON("%%fg=yellow$THIS IS A DEMO. YOU WONT START THE REAL GAME WITH ALL THIS KIT.%%fg=reset$");
-
-            if (0) {
-              t->incr_poison(100);
-            }
+            IF_DEBUG3
+            {
+              if (0) {
+                t->incr_poison(100);
+              }
 #if 0
             auto w = thing_new("scythe", point(x, y));
             t->carry(w);
@@ -406,14 +406,9 @@ bool Level::create_dungeon(point3d at, int seed)
             }
 #endif
 
-            {
-              auto w3 = thing_new("sword_short_wooden", point(x, y));
-              t->carry(w3);
-            }
-
-            {
-              thing_new("spider_giant", point(x + 3, y));
-            }
+              {
+                thing_new("spider_giant", point(x + 3, y));
+              }
 #if 0
             {
               thing_new("sword_short_wooden", point(x + 1, y));
@@ -424,24 +419,24 @@ bool Level::create_dungeon(point3d at, int seed)
             }
 #endif
 
-            {
-              auto f = thing_new("enchantstone", point(x, y));
-              t->carry(f);
-            }
+              {
+                auto f = thing_new("enchantstone", point(x, y));
+                t->carry(f);
+              }
 
-            {
-              auto f = thing_new("skillstone", point(x, y));
-              t->carry(f);
-            }
+              {
+                auto f = thing_new("skillstone", point(x, y));
+                t->carry(f);
+              }
 
-            {
-              auto W = thing_new("wand_energy", point(x, y));
-              t->carry(W);
-            }
-            {
-              auto W = thing_new("wand_descent", point(x, y));
-              t->carry(W);
-            }
+              {
+                auto W = thing_new("wand_energy", point(x, y));
+                t->carry(W);
+              }
+              {
+                auto W = thing_new("wand_descent", point(x, y));
+                t->carry(W);
+              }
 #if 0
             auto w2 = thing_new("sword_rusty_basic", point(x, y));
             t->carry(w2);
@@ -483,33 +478,39 @@ bool Level::create_dungeon(point3d at, int seed)
               t->carry(W);
             }
 #endif
-            {
-              auto W = thing_new("ring_poison_resist", point(x, y));
-              t->carry(W);
+              {
+                auto W = thing_new("ring_poison_resist", point(x, y));
+                t->carry(W);
+              }
+
+              {
+                auto W = thing_new("ring_poison_resist", point(x, y));
+                t->carry(W);
+              }
+
+              {
+                auto W = thing_new("key", point(x, y));
+                t->carry(W);
+              }
+
+              if (0) {
+                auto i = thing_new("thunderstone", point(x, y));
+                t->carry(i);
+              }
+              if (1) {
+                auto b = thing_new("bag_small", point(x, y));
+                t->carry(b);
+              }
             }
 
             {
-              auto W = thing_new("ring_poison_resist", point(x, y));
-              t->carry(W);
-            }
-
-            {
-              auto W = thing_new("key", point(x, y));
-              t->carry(W);
+              auto w3 = thing_new("sword_short_wooden", point(x, y));
+              t->carry(w3);
             }
 
             {
               auto W = thing_new("torch", point(x, y));
               t->carry(W);
-            }
-
-            if (0) {
-              auto i = thing_new("thunderstone", point(x, y));
-              t->carry(i);
-            }
-            if (1) {
-              auto b = thing_new("bag_small", point(x, y));
-              t->carry(b);
             }
 
             goto placed_player;
