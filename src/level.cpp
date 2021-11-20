@@ -7,6 +7,7 @@
 #include "my_level.hpp"
 #include "my_sdl.hpp"
 #include "my_sys.hpp"
+#include "my_thing.hpp"
 
 std::string Level::to_string(void)
 {
@@ -1332,6 +1333,17 @@ uint8_t Level::is_monst(const point &p)
     return false;
   }
   return (get(_is_monst, p.x, p.y));
+}
+
+uint8_t Level::is_monst_or_player(const point &p)
+{
+  if (is_monst(p)) {
+    return true;
+  }
+  if (player && (player->mid_at == p)) {
+    return true;
+  }
+  return false;
 }
 
 uint8_t Level::is_monst(const int x, const int y)

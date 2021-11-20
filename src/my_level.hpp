@@ -644,6 +644,7 @@ public:
   uint8_t is_minion_generator(const int x, const int y);
   uint8_t is_minion_generator(const point &p);
   uint8_t is_monst(const int x, const int y);
+  uint8_t is_monst_or_player(const point &p);
   uint8_t is_monst(const point &p);
   uint8_t is_poison(const int x, const int y);
   uint8_t is_poison(const point &p);
