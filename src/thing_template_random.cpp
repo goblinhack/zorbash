@@ -312,7 +312,8 @@ Tpp Level::tp_random_monst(const point &p)
 Tpp Level::tp_random_monst_easy(const point &p)
 {
   TRACE_AND_INDENT();
-  Thingp current_player = player;
+  Thingp current_player      = player;
+  int    player_danger_level = 0;
   if (! current_player) {
     //
     // Try the current level
@@ -320,18 +321,15 @@ Tpp Level::tp_random_monst_easy(const point &p)
     if (game->level) {
       current_player = game->level->player;
     }
-    if (! current_player) {
-      ERR("Cannot place easy monst if no player yet");
-      return nullptr;
+    if (current_player) {
+      player_danger_level = current_player->get_danger_initial_level();
+
+      //
+      // Increase the danger level of the parent as we go deeper
+      //
+      player_danger_level += num() * 10;
     }
   }
-
-  auto player_danger_level = current_player->get_danger_initial_level();
-
-  //
-  // Increase the danger level of the parent as we go deeper
-  //
-  player_danger_level += num() * 10;
 
   auto tries = 0U;
   for (;;) {
@@ -344,8 +342,10 @@ Tpp Level::tp_random_monst_easy(const point &p)
       continue;
     }
 
-    if (tpp->get_danger_level() > player_danger_level) {
-      continue;
+    if (player_danger_level) {
+      if (tpp->get_danger_level() > player_danger_level) {
+        continue;
+      }
     }
 
     con("DGN: Placed easy monster '%s'", tpp->short_text_capitalized().c_str());
@@ -356,7 +356,8 @@ Tpp Level::tp_random_monst_easy(const point &p)
 Tpp Level::tp_random_monst_med(const point &p)
 {
   TRACE_AND_INDENT();
-  Thingp current_player = player;
+  Thingp current_player      = player;
+  int    player_danger_level = 0;
   if (! current_player) {
     //
     // Try the current level
@@ -364,18 +365,15 @@ Tpp Level::tp_random_monst_med(const point &p)
     if (game->level) {
       current_player = game->level->player;
     }
-    if (! current_player) {
-      ERR("Cannot place medium monst if no player yet");
-      return nullptr;
+    if (current_player) {
+      player_danger_level = current_player->get_danger_initial_level();
+
+      //
+      // Increase the danger level of the parent as we go deeper
+      //
+      player_danger_level += num() * 10;
     }
   }
-
-  auto player_danger_level = current_player->get_danger_initial_level();
-
-  //
-  // Increase the danger level of the parent as we go deeper
-  //
-  player_danger_level += num() * 10;
 
   auto tries = 0U;
   for (;;) {
@@ -388,11 +386,13 @@ Tpp Level::tp_random_monst_med(const point &p)
       continue;
     }
 
-    if (tpp->get_danger_level() < (int) ((float) player_danger_level * 1.0)) {
-      continue;
-    }
-    if (tpp->get_danger_level() > (int) ((float) player_danger_level * 1.5)) {
-      continue;
+    if (player_danger_level) {
+      if (tpp->get_danger_level() < (int) ((float) player_danger_level * 1.0)) {
+        continue;
+      }
+      if (tpp->get_danger_level() > (int) ((float) player_danger_level * 1.5)) {
+        continue;
+      }
     }
 
     con("DGN: Placed medium monster '%s'", tpp->short_text_capitalized().c_str());
@@ -403,7 +403,8 @@ Tpp Level::tp_random_monst_med(const point &p)
 Tpp Level::tp_random_monst_hard(const point &p)
 {
   TRACE_AND_INDENT();
-  Thingp current_player = player;
+  Thingp current_player      = player;
+  int    player_danger_level = 0;
   if (! current_player) {
     //
     // Try the current level
@@ -411,18 +412,14 @@ Tpp Level::tp_random_monst_hard(const point &p)
     if (game->level) {
       current_player = game->level->player;
     }
-    if (! current_player) {
-      ERR("Cannot place hard monst if no player yet");
-      return nullptr;
+    if (current_player) {
+      player_danger_level = current_player->get_danger_initial_level();
+      //
+      // Increase the danger level of the parent as we go deeper
+      //
+      player_danger_level += num() * 10;
     }
   }
-
-  auto player_danger_level = current_player->get_danger_initial_level();
-
-  //
-  // Increase the danger level of the parent as we go deeper
-  //
-  player_danger_level += num() * 10;
 
   auto tries = 0U;
   for (;;) {
@@ -435,11 +432,13 @@ Tpp Level::tp_random_monst_hard(const point &p)
       continue;
     }
 
-    if (tpp->get_danger_level() < (int) ((float) player_danger_level * 1.0)) {
-      continue;
-    }
-    if (tpp->get_danger_level() > (int) ((float) player_danger_level * 2.0)) {
-      continue;
+    if (player_danger_level) {
+      if (tpp->get_danger_level() < (int) ((float) player_danger_level * 1.0)) {
+        continue;
+      }
+      if (tpp->get_danger_level() > (int) ((float) player_danger_level * 2.0)) {
+        continue;
+      }
     }
 
     con("DGN: Placed hard monster '%s'", tpp->short_text_capitalized().c_str());
