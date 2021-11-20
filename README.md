@@ -4,8 +4,7 @@
 <!--                                                                                                                                              -->
 <!-- Next todo                                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
-<!-- - spiders should not wander from birth web                                                                                                   -->
-<!-- - test giant spider poison                                                                                                                   -->
+<!-- - can move into but get stuck in web                                                                                                         -->
 <!-- - giant spider web throw                                                                                                                     -->
 <!-- - spider ball anims                                                                                                                          -->
 <!-- - antipoison potion                                                                                                                          -->
