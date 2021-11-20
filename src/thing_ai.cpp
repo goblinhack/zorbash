@@ -1767,8 +1767,7 @@ bool Thing::ai_tick(bool recursing)
           wid_actionbar_robot_mode_off();
         }
 
-        ai_wander();
-        return false;
+        return ai_wander();
       }
       break;
 

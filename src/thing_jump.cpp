@@ -340,6 +340,8 @@ bool Thing::try_to_jump(void)
     return false;
   }
 
+  set_idle_count(0);
+
   float d     = how_far_i_can_jump();
   int   tries = d * d;
 
@@ -362,6 +364,8 @@ bool Thing::try_to_jump_towards_player(void)
       is_jumping) {
     return false;
   }
+
+  set_idle_count(0);
 
   float d     = how_far_i_can_jump();
   int   tries = d * d;

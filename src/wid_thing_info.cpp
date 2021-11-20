@@ -145,6 +145,7 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
   wid_thing_info_add_swallow_damage(wid_popup_window, t);
   wid_thing_info_add_attack(wid_popup_window, t);
   wid_thing_info_add_defence(wid_popup_window, t);
+  wid_thing_info_add_dexterity(wid_popup_window, t);
   wid_thing_info_add_strength(wid_popup_window, t);
   wid_thing_info_add_constitution(wid_popup_window, t);
   wid_thing_info_add_charge_count(wid_popup_window, t);
@@ -195,6 +196,7 @@ WidPopup *Game::wid_thing_info_create_popup_compact(const std::vector< Thingp > 
     wid_thing_info_add_bite_damage(wid_popup_window, t);
     wid_thing_info_add_attack(wid_popup_window, t);
     wid_thing_info_add_defence(wid_popup_window, t);
+    wid_thing_info_add_dexterity(wid_popup_window, t);
     wid_thing_info_add_strength(wid_popup_window, t);
     wid_thing_info_add_constitution(wid_popup_window, t);
     wid_thing_info_add_charge_count(wid_popup_window, t);
@@ -717,9 +719,9 @@ void Game::wid_thing_info_add_attack(WidPopup *w, Thingp t)
   char tmp[ MAXSHORTSTR ];
 
   if (t->is_alive_monst() || t->is_player()) {
-    auto stat = t->get_stat_attack();
+    auto stat = t->get_stat_attack_bonus();
     if (stat != 10) {
-      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Attack          %2d%-3s to dmg", stat,
+      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Attack bonus    %2d%-3s to dmg", stat,
                stat_to_bonus_slash_str(stat).c_str());
       w->log(tmp);
     } else {
@@ -735,13 +737,13 @@ void Game::wid_thing_info_add_defence(WidPopup *w, Thingp t)
   char tmp[ MAXSHORTSTR ];
 
   if (t->is_alive_monst() || t->is_player()) {
-    auto stat = t->get_stat_defence();
+    auto stat = t->get_stat_armor_class();
     if (stat != 10) {
-      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Defence         %2d%-3s to dmg", stat,
+      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor class     %2d%-3s to def", stat,
                stat_to_bonus_slash_str(stat).c_str());
       w->log(tmp);
     } else {
-      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Defence         %2d/no bonus`", stat);
+      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor class     %2d/no bonus`", stat);
       w->log(tmp);
     }
   }
@@ -760,6 +762,24 @@ void Game::wid_thing_info_add_strength(WidPopup *w, Thingp t)
       w->log(tmp);
     } else {
       snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Strength        %2d/no bonus`", stat);
+      w->log(tmp);
+    }
+  }
+}
+
+void Game::wid_thing_info_add_dexterity(WidPopup *w, Thingp t)
+{
+  TRACE_AND_INDENT();
+  char tmp[ MAXSHORTSTR ];
+
+  if (t->is_alive_monst() || t->is_player()) {
+    auto stat = t->get_stat_dexterity();
+    if (stat != 10) {
+      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Dexterity       %2d%-3s to def", stat,
+               stat_to_bonus_slash_str(stat).c_str());
+      w->log(tmp);
+    } else {
+      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Dexterity       %2d/no bonus`", stat);
       w->log(tmp);
     }
   }
@@ -785,9 +805,6 @@ void Game::wid_thing_info_add_constitution(WidPopup *w, Thingp t)
 
 void Game::wid_thing_info_add_danger_level(WidPopup *w, Thingp t)
 {
-  //
-  // t->topcon("XXX DEBUG");
-  //
   TRACE_AND_INDENT();
   auto player = game->level->player;
   if (! player) {

@@ -40,9 +40,9 @@ def tp_init(name):
     mytp.set_on_death_is_open(True)
     mytp.set_on_open_do("door_wood.on_open()")
     mytp.set_on_you_are_hit_do("door_wood.on_you_are_hit()")
-    mytp.set_stat_attack(10) # 10, means no bonus
+    mytp.set_stat_attack_bonus(10) # 10, means no bonus
     mytp.set_stat_constitution(0)
-    mytp.set_stat_defence(20)
+    mytp.set_stat_armor_class(20)
     mytp.set_stat_strength(0)
     mytp.set_text_a_or_an("the")
     mytp.set_text_description("A door covered in claw marks.")

@@ -270,7 +270,7 @@ int Thing::environ_damage_doubled_from_water(void)
 int Thing::defence(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->stat_defence());
+  return (tp()->stat_armor_class());
 }
 
 int Thing::enchant_level(void)
@@ -2682,86 +2682,86 @@ int Thing::incr_health_max(void)
 ////////////////////////////////////////////////////////////////////////////
 // defence
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_stat_defence(void)
+int Thing::get_stat_armor_class(void)
 {
   TRACE_AND_INDENT();
   int v = 0;
   if (maybe_infop()) {
     verify(maybe_infop());
-    v = get_infop()->stat_defence;
+    v = get_infop()->stat_armor_class;
   }
   auto owner = get_immediate_owner();
   if (owner && (owner != this)) {
-    v += owner->get_stat_defence();
+    v += owner->get_stat_armor_class();
   }
   if (is_minion()) {
     auto minion_owner = get_immediate_minion_owner();
     if (minion_owner) {
       auto minion_owner = get_immediate_minion_owner();
-      v += minion_owner->get_stat_defence();
+      v += minion_owner->get_stat_armor_class();
     }
   }
   return v;
 }
 
-int Thing::set_stat_defence(int v)
+int Thing::set_stat_armor_class(int v)
 {
   TRACE_AND_INDENT();
   if (is_player()) {
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (get_infop()->stat_defence = v);
+  auto n = (get_infop()->stat_armor_class = v);
   return (n);
 }
 
-int Thing::decr_stat_defence(int v)
+int Thing::decr_stat_armor_class(int v)
 {
   TRACE_AND_INDENT();
   if (is_player()) {
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (get_infop()->stat_defence -= v);
-  if (get_infop()->stat_defence < 0) {
-    get_infop()->stat_defence = 0;
-  }
-  return (n);
-}
-
-int Thing::incr_stat_defence(int v)
-{
-  TRACE_AND_INDENT();
-  if (is_player()) {
-    game->request_update_rightbar = true;
-  }
-  new_infop();
-  auto n = (get_infop()->stat_defence += v);
-  return (n);
-}
-
-int Thing::decr_stat_defence(void)
-{
-  TRACE_AND_INDENT();
-  if (is_player()) {
-    game->request_update_rightbar = true;
-  }
-  new_infop();
-  auto n = (get_infop()->stat_defence--);
-  if (get_infop()->stat_defence < 0) {
-    get_infop()->stat_defence = 0;
+  auto n = (get_infop()->stat_armor_class -= v);
+  if (get_infop()->stat_armor_class < 0) {
+    get_infop()->stat_armor_class = 0;
   }
   return (n);
 }
 
-int Thing::incr_stat_defence(void)
+int Thing::incr_stat_armor_class(int v)
 {
   TRACE_AND_INDENT();
   if (is_player()) {
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (get_infop()->stat_defence++);
+  auto n = (get_infop()->stat_armor_class += v);
+  return (n);
+}
+
+int Thing::decr_stat_armor_class(void)
+{
+  TRACE_AND_INDENT();
+  if (is_player()) {
+    game->request_update_rightbar = true;
+  }
+  new_infop();
+  auto n = (get_infop()->stat_armor_class--);
+  if (get_infop()->stat_armor_class < 0) {
+    get_infop()->stat_armor_class = 0;
+  }
+  return (n);
+}
+
+int Thing::incr_stat_armor_class(void)
+{
+  TRACE_AND_INDENT();
+  if (is_player()) {
+    game->request_update_rightbar = true;
+  }
+  new_infop();
+  auto n = (get_infop()->stat_armor_class++);
   return (n);
 }
 
@@ -3027,71 +3027,71 @@ uint32_t Thing::incr_tick_resurrect_when(void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// stats01
+// stat_dexterity
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_stats01(void)
+int Thing::get_stat_dexterity(void)
 {
   TRACE_AND_INDENT();
   if (maybe_infop()) {
     verify(maybe_infop());
-    return (get_infop()->stats01);
+    return (get_infop()->stat_dexterity);
   } else {
     return 0;
   }
 }
 
-int Thing::set_stats01(int v)
+int Thing::set_stat_dexterity(int v)
 {
   TRACE_AND_INDENT();
   if (is_player()) {
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (get_infop()->stats01 = v);
+  auto n = (get_infop()->stat_dexterity = v);
   return (n);
 }
 
-int Thing::decr_stats01(int v)
+int Thing::decr_stat_dexterity(int v)
 {
   TRACE_AND_INDENT();
   if (is_player()) {
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (get_infop()->stats01 -= v);
+  auto n = (get_infop()->stat_dexterity -= v);
   return (n);
 }
 
-int Thing::incr_stats01(int v)
+int Thing::incr_stat_dexterity(int v)
 {
   TRACE_AND_INDENT();
   if (is_player()) {
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (get_infop()->stats01 += v);
+  auto n = (get_infop()->stat_dexterity += v);
   return (n);
 }
 
-int Thing::decr_stats01(void)
+int Thing::decr_stat_dexterity(void)
 {
   TRACE_AND_INDENT();
   if (is_player()) {
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (get_infop()->stats01--);
+  auto n = (get_infop()->stat_dexterity--);
   return (n);
 }
 
-int Thing::incr_stats01(void)
+int Thing::incr_stat_dexterity(void)
 {
   TRACE_AND_INDENT();
   if (is_player()) {
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (get_infop()->stats01++);
+  auto n = (get_infop()->stat_dexterity++);
   return (n);
 }
 
@@ -3924,71 +3924,71 @@ int Thing::incr_stat_constitution(void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// stat_attack
+// stat_attack_bonus
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_stat_attack(void)
+int Thing::get_stat_attack_bonus(void)
 {
   TRACE_AND_INDENT();
   if (maybe_infop()) {
     verify(maybe_infop());
-    return (get_infop()->stat_attack);
+    return (get_infop()->stat_attack_bonus);
   } else {
     return 0;
   }
 }
 
-int Thing::set_stat_attack(int v)
+int Thing::set_stat_attack_bonus(int v)
 {
   TRACE_AND_INDENT();
   if (is_player()) {
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (get_infop()->stat_attack = v);
+  auto n = (get_infop()->stat_attack_bonus = v);
   return (n);
 }
 
-int Thing::decr_stat_attack(int v)
+int Thing::decr_stat_attack_bonus(int v)
 {
   TRACE_AND_INDENT();
   if (is_player()) {
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (get_infop()->stat_attack -= v);
+  auto n = (get_infop()->stat_attack_bonus -= v);
   return (n);
 }
 
-int Thing::incr_stat_attack(int v)
+int Thing::incr_stat_attack_bonus(int v)
 {
   TRACE_AND_INDENT();
   if (is_player()) {
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (get_infop()->stat_attack += v);
+  auto n = (get_infop()->stat_attack_bonus += v);
   return (n);
 }
 
-int Thing::decr_stat_attack(void)
+int Thing::decr_stat_attack_bonus(void)
 {
   TRACE_AND_INDENT();
   if (is_player()) {
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (get_infop()->stat_attack--);
+  auto n = (get_infop()->stat_attack_bonus--);
   return (n);
 }
 
-int Thing::incr_stat_attack(void)
+int Thing::incr_stat_attack_bonus(void)
 {
   TRACE_AND_INDENT();
   if (is_player()) {
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (get_infop()->stat_attack++);
+  auto n = (get_infop()->stat_attack_bonus++);
   return (n);
 }
 
@@ -4605,6 +4605,11 @@ int Thing::incr_charge_count(void)
 int Thing::get_idle_count(void)
 {
   TRACE_AND_INDENT();
+
+  if (! is_monst() && ! is_player()) {
+    return 0;
+  }
+
   if (maybe_aip()) {
     verify(maybe_aip());
     return (get_aip()->idle_count);
@@ -4654,6 +4659,11 @@ int Thing::incr_idle_count(void)
 int Thing::get_stuck_count(void)
 {
   TRACE_AND_INDENT();
+
+  if (! is_monst() && ! is_player()) {
+    return 0;
+  }
+
   if (maybe_aip()) {
     verify(maybe_aip());
     return (get_aip()->stuck_count);

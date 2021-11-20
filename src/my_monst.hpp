@@ -97,10 +97,10 @@ public:
   uint8_t submerged_offset = {}; // Pixels
   uint8_t throw_distance   = {};
 
-  uint8_t stat_attack       = {};
+  uint8_t stat_attack_bonus       = {};
   uint8_t stat_constitution = {};
-  uint8_t stat_defence      = {};
-  uint8_t stats01           = {};
+  uint8_t stat_armor_class      = {};
+  uint8_t stat_dexterity           = {};
   uint8_t stats02           = {};
   uint8_t stats03           = {};
   uint8_t stats04           = {};

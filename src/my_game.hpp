@@ -194,6 +194,7 @@ public:
   void wid_thing_info_add_poison_damage(WidPopup *w, Thingp t);
   void wid_thing_info_add_nutrition(WidPopup *w, Thingp t);
   void wid_thing_info_add_strength(WidPopup *w, Thingp t);
+  void wid_thing_info_add_dexterity(WidPopup *w, Thingp t);
   void wid_thing_info_clear_popup(void);
   void wid_thing_info_create(Thingp, bool when_hovering_over = false);
   void wid_thing_info_create_list(const std::vector< Thingp > &ts);

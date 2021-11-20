@@ -42,9 +42,9 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_item_width(5)
     mytp.set_long_text_description("A gleaming entry-level short sword. Ideal for beginners or the occasional weekend dungeoneer.")
     mytp.set_on_use_do("sword_short_basic.on_use()")
-    mytp.set_stat_attack(10) # 10, means no bonus
+    mytp.set_stat_attack_bonus(10) # 10, means no bonus
     mytp.set_stat_constitution(0)
-    mytp.set_stat_defence(0)
+    mytp.set_stat_armor_class(0)
     mytp.set_stat_strength(0)
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("Thy pointy means of justice.")

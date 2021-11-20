@@ -31,7 +31,7 @@ def tp_init(name, text_name):
     mytp.set_attack_lunge(True)
     mytp.set_collision_check(True)
     mytp.set_collision_hit_priority(10)
-    mytp.set_damage_melee_dice("1")
+    mytp.set_damage_bite_dice("1")
     mytp.set_environ_damage_doubled_from_fire(True)
     mytp.set_environ_dislikes_fire(100)
     mytp.set_gfx_animated_can_hflip(True)
@@ -69,9 +69,10 @@ def tp_init(name, text_name):
     mytp.set_on_death_do("jelly_baby.on_death()")
     mytp.set_on_you_are_hit_do("jelly_baby.on_you_are_hit()")
     mytp.set_rarity(my.RARITY_COMMON)
-    mytp.set_stat_attack(10) # 10, means no bonus
+    mytp.set_stat_attack_bonus(10) # 10, means no bonus
     mytp.set_stat_constitution(10)
-    mytp.set_stat_defence(5)
+    mytp.set_stat_armor_class(5)
+    mytp.set_stat_dexterity(10)
     mytp.set_stat_strength(5)
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("%%fg=limegreen$A small pile of semi sentient jelly.")

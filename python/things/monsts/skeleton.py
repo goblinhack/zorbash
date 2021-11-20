@@ -40,7 +40,7 @@ def tp_init(name, text_name):
     mytp.set_collision_check(True)
     mytp.set_collision_hit_priority(10)
     mytp.set_damage_bite_dice("1d3")
-    mytp.set_damage_melee_dice("2")
+    mytp.set_damage_melee_dice("1d2")
     mytp.set_environ_damage_doubled_from_water(True)
     mytp.set_environ_dislikes_water(100)
     mytp.set_environ_hates_water(True)
@@ -78,10 +78,11 @@ def tp_init(name, text_name):
     mytp.set_on_you_miss_do_do("skeleton.on_you_miss_do()")
     mytp.set_rarity(my.RARITY_COMMON)
     mytp.set_resurrect_dice("1d20+30")
-    mytp.set_stat_attack(10) # 10, means no bonus
+    mytp.set_stat_attack_bonus(10) # 10, means no bonus
     mytp.set_stat_constitution(9)
-    mytp.set_stat_defence(9)
-    mytp.set_stat_strength(9)
+    mytp.set_stat_armor_class(13)
+    mytp.set_stat_dexterity(10)
+    mytp.set_stat_strength(10)
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("The bones of one surprised to be moving again.")
     mytp.set_text_hits("claws")

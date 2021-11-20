@@ -98,10 +98,10 @@ std::istream &operator>>(std::istream &in, Bits< ThingInfop & > my)
    in >> bits(my.t->monst_state);
    in >> bits(my.t->stamina);
    in >> bits(my.t->stamina_max);
-   in >> bits(my.t->stat_attack);
+   in >> bits(my.t->stat_attack_bonus);
    in >> bits(my.t->stat_constitution);
-   in >> bits(my.t->stat_defence);
-   in >> bits(my.t->stats01);
+   in >> bits(my.t->stat_armor_class);
+   in >> bits(my.t->stat_dexterity);
    in >> bits(my.t->stats02);
    in >> bits(my.t->stats03);
    in >> bits(my.t->stats04);

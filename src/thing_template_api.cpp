@@ -452,10 +452,10 @@ int  Tp::on_death_is_open(void) const { return _on_death_is_open; }
 int  Tp::range_max(void) const { return _range_max; }
 int  Tp::rarity(void) const { return _rarity; }
 int  Tp::stamina(void) const { return _stamina; }
-int  Tp::stat_attack(void) const { return _stat_attack; }
+int  Tp::stat_attack_bonus(void) const { return _stat_attack_bonus; }
 int  Tp::stat_constitution(void) const { return _stat_constitution; }
-int  Tp::stat_defence(void) const { return _stat_defence; }
-int  Tp::stats01(void) const { return _stats01; }
+int  Tp::stat_armor_class(void) const { return _stat_armor_class; }
+int  Tp::stat_dexterity(void) const { return _stat_dexterity; }
 int  Tp::stats02(void) const { return _stats02; }
 int  Tp::stats03(void) const { return _stats03; }
 int  Tp::stats04(void) const { return _stats04; }
@@ -797,10 +797,10 @@ void Tp::set_rarity(int v) { _rarity = v; }
 void Tp::set_short_text_name(const std::string &v) { _short_text_name = v; }
 void Tp::set_spawn_on_shoved(const std::string &v) { _spawn_on_shoved = v; }
 void Tp::set_stamina(int v) { _stamina = v; }
-void Tp::set_stat_attack(int v) { _stat_attack = v; }
+void Tp::set_stat_attack_bonus(int v) { _stat_attack_bonus = v; }
 void Tp::set_stat_constitution(int v) { _stat_constitution = v; }
-void Tp::set_stat_defence(int v) { _stat_defence = v; }
-void Tp::set_stats01(int v) { _stats01 = v; }
+void Tp::set_stat_armor_class(int v) { _stat_armor_class = v; }
+void Tp::set_stat_dexterity(int v) { _stat_dexterity = v; }
 void Tp::set_stats02(int v) { _stats02 = v; }
 void Tp::set_stats03(int v) { _stats03 = v; }
 void Tp::set_stats04(int v) { _stats04 = v; }

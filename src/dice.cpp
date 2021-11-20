@@ -11,115 +11,109 @@
 
 int stat_to_bonus(int stat)
 {
-  switch (stat) {
-    case 0 : return 0; // Acts like not set
-    case 1 : return -5;
-    case 2 : return -4;
-    case 3 : return -4;
-    case 4 : return -3;
-    case 5 : return -3;
-    case 6 : return -2;
-    case 7 : return -2;
-    case 8 : return -1;
-    case 9 : return -1;
-    case 10 : return 0;
-    case 11 : return 0;
-    case 12 : return 1;
-    case 13 : return 1;
-    case 14 : return 2;
-    case 15 : return 2;
-    case 16 : return 3;
-    case 17 : return 3;
-    case 18 : return 4;
-    case 19 : return 4;
-    case 20 : return 5;
-    case 21 : return 5;
-    case 22 : return 6;
-    case 23 : return 6;
-    case 24 : return 7;
-    case 25 : return 7;
-    case 26 : return 8;
-    case 27 : return 8;
-    case 28 : return 9;
-    case 29 : return 9;
-    case 30 : return 9;
-    default : return 9;
+  int bonus = (stat - 10) / 2;
+  if (bonus < -20) {
+    return -20;
   }
+  if (bonus > 20) {
+    return 20;
+  }
+  return bonus;
 }
 
 const std::string stat_to_bonus_str(int stat)
 {
-  switch (stat) {
-    case 0 : return "0"; // Acts like not set
-    case 1 : return "-5";
-    case 2 : return "-4";
-    case 3 : return "-4";
-    case 4 : return "-3";
-    case 5 : return "-3";
-    case 6 : return "-2";
-    case 7 : return "-2";
-    case 8 : return "-1";
-    case 9 : return "-1";
-    case 10 : return "+0";
-    case 11 : return "+0";
-    case 12 : return "+1";
-    case 13 : return "+1";
-    case 14 : return "+2";
-    case 15 : return "+2";
-    case 16 : return "+3";
-    case 17 : return "+3";
-    case 18 : return "+4";
-    case 19 : return "+4";
-    case 20 : return "+5";
-    case 21 : return "+5";
-    case 22 : return "+6";
-    case 23 : return "+6";
-    case 24 : return "+7";
-    case 25 : return "+7";
-    case 26 : return "+8";
-    case 27 : return "+8";
-    case 28 : return "+9";
-    case 29 : return "+9";
-    case 30 : return "+9";
-    default : return "+9";
+  switch (stat_to_bonus(stat)) {
+    case -20 : return "-20";
+    case -19 : return "-19";
+    case -18 : return "-18";
+    case -17 : return "-17";
+    case -16 : return "-16";
+    case -15 : return "-15";
+    case -14 : return "-14";
+    case -13 : return "-13";
+    case -12 : return "-12";
+    case -11 : return "-11";
+    case -10 : return "-10";
+    case -9 : return "-9";
+    case -8 : return "-8";
+    case -7 : return "-7";
+    case -6 : return "-6";
+    case -5 : return "-5";
+    case -4 : return "-4";
+    case -3 : return "-3";
+    case -2 : return "-2";
+    case -1 : return "-1";
+    case 0 : return "0";
+    case 1 : return "1";
+    case 2 : return "2";
+    case 3 : return "3";
+    case 4 : return "4";
+    case 5 : return "5";
+    case 6 : return "6";
+    case 7 : return "7";
+    case 8 : return "8";
+    case 9 : return "9";
+    case 10 : return "10";
+    case 11 : return "11";
+    case 12 : return "12";
+    case 13 : return "13";
+    case 14 : return "14";
+    case 15 : return "15";
+    case 16 : return "16";
+    case 17 : return "17";
+    case 18 : return "18";
+    case 19 : return "19";
+    case 20 : return "20";
+    default : return "na";
   }
 }
 
 const std::string stat_to_bonus_slash_str(int stat)
 {
   switch (stat) {
-    case 0 : return "/na"; // Acts like not set
-    case 1 : return "/-5";
-    case 2 : return "/-4";
-    case 3 : return "/-4";
-    case 4 : return "/-3";
-    case 5 : return "/-3";
-    case 6 : return "/-2";
-    case 7 : return "/-2";
-    case 8 : return "/-1";
-    case 9 : return "/-1";
-    case 10 : return "/+0";
-    case 11 : return "/+0";
-    case 12 : return "/+1";
-    case 13 : return "/+1";
-    case 14 : return "/+2";
-    case 15 : return "/+2";
-    case 16 : return "/+3";
-    case 17 : return "/+3";
-    case 18 : return "/+4";
-    case 19 : return "/+4";
-    case 20 : return "/+5";
-    case 21 : return "/+5";
-    case 22 : return "/+6";
-    case 23 : return "/+6";
-    case 24 : return "/+7";
-    case 25 : return "/+7";
-    case 26 : return "/+8";
-    case 27 : return "/+8";
-    case 28 : return "/+9";
-    case 29 : return "/+9";
-    case 30 : return "/+9";
-    default : return "/+9";
+    case -20 : return "/-20";
+    case -19 : return "/-19";
+    case -18 : return "/-18";
+    case -17 : return "/-17";
+    case -16 : return "/-16";
+    case -15 : return "/-15";
+    case -14 : return "/-14";
+    case -13 : return "/-13";
+    case -12 : return "/-12";
+    case -11 : return "/-11";
+    case -10 : return "/-10";
+    case -9 : return "/-9";
+    case -8 : return "/-8";
+    case -7 : return "/-7";
+    case -6 : return "/-6";
+    case -5 : return "/-5";
+    case -4 : return "/-4";
+    case -3 : return "/-3";
+    case -2 : return "/-2";
+    case -1 : return "/-1";
+    case 0 : return "/0";
+    case 1 : return "/1";
+    case 2 : return "/2";
+    case 3 : return "/3";
+    case 4 : return "/4";
+    case 5 : return "/5";
+    case 6 : return "/6";
+    case 7 : return "/7";
+    case 8 : return "/8";
+    case 9 : return "/9";
+    case 10 : return "/10";
+    case 11 : return "/11";
+    case 12 : return "/12";
+    case 13 : return "/13";
+    case 14 : return "/14";
+    case 15 : return "/15";
+    case 16 : return "/16";
+    case 17 : return "/17";
+    case 18 : return "/18";
+    case 19 : return "/19";
+    case 20 : return "/20";
+    default : return "/na";
   }
 }
 
@@ -144,7 +138,8 @@ bool d20roll(int stat_a, int stat_b, bool &fumble, bool &critical)
   }
 
   auto roll_b = pcg_random_range_inclusive(1, 20);
-  // TOPCON("a %d b %d", roll_a, roll_b);
+  // TOPCON("a %d+(%d->%d) b %d+(%d->%d)", roll_a, stat_a, stat_to_bonus(stat_a), roll_b, stat_b,
+  // stat_to_bonus(stat_b));
 
   return roll_a + stat_to_bonus(stat_a) >= roll_b + stat_to_bonus(stat_b);
 }

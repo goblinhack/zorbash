@@ -47,9 +47,10 @@ def tp_init(name, text_name):
     mytp.set_normal_placement_rules(True)
     mytp.set_on_death_do("ghost.on_death()")
     mytp.set_rarity(my.RARITY_COMMON)
-    mytp.set_stat_attack(10) # 10, means no bonus
+    mytp.set_stat_attack_bonus(10) # 10, means no bonus
     mytp.set_stat_constitution(20)
-    mytp.set_stat_defence(12)
+    mytp.set_stat_armor_class(11)
+    mytp.set_stat_dexterity(13)
     mytp.set_stat_strength(7)
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("The angry spirit of one long passed.")

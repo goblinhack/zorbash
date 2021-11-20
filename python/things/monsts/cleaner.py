@@ -36,7 +36,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_gfx_short_shadow_caster(True)
     mytp.set_gfx_show_outlined(True)
     mytp.set_health_hunger_pct(95)
-    mytp.set_health_initial_dice("6d12")
+    mytp.set_health_initial_dice("8d10+40")
     mytp.set_is_able_to_fall(True)
     mytp.set_is_able_to_see_in_the_dark(True)
     mytp.set_is_acid(True)
@@ -73,9 +73,10 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_on_death_drop_all_items(True)
     mytp.set_on_idle_dice("1d5:cleaner.on_idle()")
     mytp.set_rarity(my.RARITY_COMMON)
-    mytp.set_stat_attack(10) # 10, means no bonus
+    mytp.set_stat_attack_bonus(10) # 10, means no bonus
     mytp.set_stat_constitution(20)
-    mytp.set_stat_defence(14)
+    mytp.set_stat_armor_class(6)
+    mytp.set_stat_dexterity(3)
     mytp.set_stat_strength(14)
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("A dungeon auto cleaner jelly thingy.")

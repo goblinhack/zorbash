@@ -97,9 +97,10 @@ def tp_init(name, text_name):
     mytp.set_on_you_miss_do_do("goblin.on_you_miss_do()")
     mytp.set_rarity(my.RARITY_COMMON)
     mytp.set_stamina(100)
-    mytp.set_stat_attack(10) # 10, means no bonus
+    mytp.set_stat_attack_bonus(10) # 10, means no bonus
     mytp.set_stat_constitution(10)
-    mytp.set_stat_defence(14)
+    mytp.set_stat_armor_class(10)
+    mytp.set_stat_dexterity(10)
     mytp.set_stat_strength(8)
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("A very lesser and a bit insecure goblin.")

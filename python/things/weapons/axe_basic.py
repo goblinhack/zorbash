@@ -41,9 +41,9 @@ def init_weapon(name, text_name, short_text_name):
     mytp.set_item_width(6)
     mytp.set_long_text_description("A gleaming axe. It's edge is hungry.")
     mytp.set_on_use_do("axe_basic.on_use()")
-    mytp.set_stat_attack(10) # 10, means no bonus
+    mytp.set_stat_attack_bonus(10) # 10, means no bonus
     mytp.set_stat_constitution(0)
-    mytp.set_stat_defence(0)
+    mytp.set_stat_armor_class(0)
     mytp.set_stat_strength(0)
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("Thy choppy means of justice.")

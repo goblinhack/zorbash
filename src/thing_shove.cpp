@@ -55,6 +55,8 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta)
   TRACE_AND_INDENT();
   move_finish();
 
+  set_idle_count(0);
+
   bool was_dead = it->is_dead;
 
   //

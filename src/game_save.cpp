@@ -74,10 +74,10 @@ std::ostream &operator<<(std::ostream &out, Bits< ThingInfop & > const my)
   out << bits(my.t->monst_state);
   out << bits(my.t->stamina);
   out << bits(my.t->stamina_max);
-  out << bits(my.t->stat_attack);
+  out << bits(my.t->stat_attack_bonus);
   out << bits(my.t->stat_constitution);
-  out << bits(my.t->stat_defence);
-  out << bits(my.t->stats01);
+  out << bits(my.t->stat_armor_class);
+  out << bits(my.t->stat_dexterity);
   out << bits(my.t->stats02);
   out << bits(my.t->stats03);
   out << bits(my.t->stats04);

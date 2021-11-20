@@ -207,9 +207,9 @@ void Thing::init(Levelp level, const std::string &name, const point born)
 
   {
     TRACE_AND_INDENT();
-    auto v = tpp->stat_defence();
+    auto v = tpp->stat_armor_class();
     if (unlikely(v)) {
-      set_stat_defence(v);
+      set_stat_armor_class(v);
       set_stats19(v);
     }
   }
@@ -224,9 +224,9 @@ void Thing::init(Levelp level, const std::string &name, const point born)
 
   {
     TRACE_AND_INDENT();
-    auto v = tpp->stats01();
+    auto v = tpp->stat_dexterity();
     if (unlikely(v)) {
-      set_stats01(v);
+      set_stat_dexterity(v);
     }
   }
 
@@ -328,9 +328,9 @@ void Thing::init(Levelp level, const std::string &name, const point born)
 
   {
     TRACE_AND_INDENT();
-    auto v = tpp->stat_attack();
+    auto v = tpp->stat_attack_bonus();
     if (unlikely(v)) {
-      set_stat_attack(v);
+      set_stat_attack_bonus(v);
     }
   }
 

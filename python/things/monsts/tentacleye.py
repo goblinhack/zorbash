@@ -53,7 +53,7 @@ def tp_init(name, text_name):
     mytp.set_gfx_short_shadow_caster(True)
     mytp.set_gfx_show_outlined(True)
     mytp.set_health_hunger_pct(95)
-    mytp.set_health_initial_dice("10d10")
+    mytp.set_health_initial_dice("19d10+76")
     mytp.set_is_able_to_change_levels(True)
     mytp.set_is_able_to_fire_at(True)
     mytp.set_is_able_to_see_in_the_dark(True)
@@ -84,10 +84,11 @@ def tp_init(name, text_name):
     mytp.set_on_you_miss_do_do("tentacleye.on_you_miss_do()")
     mytp.set_rarity(my.RARITY_COMMON)
     mytp.set_stamina(100)
-    mytp.set_stat_attack(10) # 10, means no bonus
+    mytp.set_stat_attack_bonus(10) # 10, means no bonus
     mytp.set_stat_constitution(10)
-    mytp.set_stat_defence(14)
-    mytp.set_stat_strength(12)
+    mytp.set_stat_armor_class(18)
+    mytp.set_stat_dexterity(14)
+    mytp.set_stat_strength(10)
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("A writhing mass of tentacles and eyeballs.")
     mytp.set_text_hits("slashes")

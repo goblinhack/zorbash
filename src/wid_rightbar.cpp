@@ -297,7 +297,7 @@ static bool wid_rightbar_create(void)
     wid_set_shape_none(w);
 
     char tmp[ UI_SIDEBAR_RIGHT_WIDTH + 1 ];
-    snprintf(tmp, sizeof(tmp) - 1, "   %2d   %2d   %2d", player->get_stat_attack(), player->get_stat_defence(),
+    snprintf(tmp, sizeof(tmp) - 1, "   %2d   %2d   %2d", player->get_stat_attack_bonus(), player->get_stat_armor_class(),
              player->get_stat_strength());
     wid_set_text(w, tmp);
     wid_set_text_lhs(w, true);

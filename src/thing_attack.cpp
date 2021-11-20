@@ -359,6 +359,8 @@ bool Thing::attack(Thingp victim)
   dbg("Attack %s", victim->to_string().c_str());
   TRACE_AND_INDENT();
 
+  set_idle_count(0);
+
   //
   // Carry to eat later. Things attack their food.
   //
@@ -460,22 +462,40 @@ bool Thing::attack(Thingp victim)
     }
   }
 
-  auto att_mod = stat_to_bonus(get_stat_strength()) + stat_to_bonus(get_stat_attack());
+  //
+  // attack modifier: strength + attack bonus
+  //
+  auto attack_total = get_stat_strength() + get_stat_attack_bonus();
   if (owner) {
-    att_mod += stat_to_bonus(owner->get_stat_strength());
-    att_mod += stat_to_bonus(owner->get_stat_attack());
+    attack_total += owner->get_stat_strength();
+    attack_total += owner->get_stat_attack_bonus();
   }
 
-  auto def_mod  = stat_to_bonus(victim->get_stat_defence());
-  auto it_owner = get_top_owner();
-  if (it_owner) {
-    def_mod = stat_to_bonus(it_owner->get_stat_defence());
+  attack_total -= get_idle_count();
+  attack_total -= get_stuck_count();
+
+  //
+  // defence modifier: armor class + dexterity
+  //
+  auto defence_total = victim->get_stat_armor_class();
+  defence_total += victim->get_stat_dexterity();
+
+  auto victim_owner = get_top_owner();
+  if (victim_owner) {
+    defence_total = victim_owner->get_stat_armor_class();
+    defence_total = victim_owner->get_stat_dexterity();
   }
+
+  defence_total -= victim->get_idle_count();
+  defence_total -= victim->get_stuck_count();
 
   //
   // We hit. See how much damage.
   //
-  auto damage = get_damage_melee() + att_mod;
+  auto damage = get_damage_melee() + stat_to_bonus(attack_total);
+  if (damage < 1) {
+    damage = 1;
+  }
 
   //
   // Chance of poison damage?
@@ -494,7 +514,7 @@ bool Thing::attack(Thingp victim)
   auto bite_damage = get_damage_bite();
   if (bite_damage) {
     if (pcg_random_range(0, 100) < 50) {
-      damage = bite_damage + att_mod;
+      damage = bite_damage + stat_to_bonus(attack_total);
       bite   = true;
     }
   }
@@ -546,8 +566,8 @@ bool Thing::attack(Thingp victim)
       // You just cannot miss this.
       //
     } else {
-      // victim->topcon("att_mod %d def_mod %d", att_mod, def_mod);
-      auto hit = d20roll(att_mod, def_mod, fumble, crit);
+      log("attack_total %d %s defence_total %d", attack_total, victim->to_string().c_str(), defence_total);
+      auto hit = d20roll(attack_total, defence_total, fumble, crit);
 
       //
       // Cannot miss (if engulfing?)
@@ -567,7 +587,7 @@ bool Thing::attack(Thingp victim)
             TOPCON("%s misses.", text_The().c_str());
           }
         } else {
-          dbg("The attack missed (att %d, def %d) on %s", att_mod, def_mod, victim->to_string().c_str());
+          dbg("The attack missed (att %d, def %d) on %s", attack_total, defence_total, victim->to_string().c_str());
         }
 
         if (attack_lunge()) {

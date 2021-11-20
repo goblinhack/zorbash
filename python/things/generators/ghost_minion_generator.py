@@ -42,9 +42,9 @@ def tp_init(name, text_name):
     mytp.set_normal_placement_rules(True)
     mytp.set_on_death_do("ghost_minion_generator.on_death()")
     mytp.set_on_idle_dice("1d20+20:ghost_minion_generator.on_idle_dice()")
-    mytp.set_stat_attack(10) # 10, means no bonus
+    mytp.set_stat_attack_bonus(10) # 10, means no bonus
     mytp.set_stat_constitution(0)
-    mytp.set_stat_defence(0)
+    mytp.set_stat_armor_class(0)
     mytp.set_stat_strength(0)
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("A cursed pile of bones, spawning spirits.")
