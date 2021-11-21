@@ -4,8 +4,8 @@
 <!--                                                                                                                                              -->
 <!-- Next todo                                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
-<!-- - minion can move closer back to home                                                                                                        -->
 <!-- - check d cleaner engulfs                                                                                                                    -->
+<!-- - spider jump attack?                                                                                                                        -->
 <!-- - giant spider web throw                                                                                                                     -->
 <!-- - spider ball anims                                                                                                                          -->
 <!-- - antipoison potion                                                                                                                          -->
