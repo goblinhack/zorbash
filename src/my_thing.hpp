@@ -162,8 +162,8 @@ public:
   uint64_t i_set_is_monst                         : 1 {};
   uint64_t i_set_is_obs_wall_or_door              : 1 {};
   uint64_t i_set_is_obs_destructable              : 1 {};
-  uint64_t i_set_is_poisonous_danger_level                     : 1 {};
-  uint64_t i_set_is_necrotic_danger_level                      : 1 {};
+  uint64_t i_set_is_poisonous_danger_level        : 1 {};
+  uint64_t i_set_is_necrotic_danger_level         : 1 {};
   uint64_t i_set_is_potion                        : 1 {};
   uint64_t i_set_is_ripple                        : 1 {};
   uint64_t i_set_is_rock                          : 1 {};
@@ -1434,6 +1434,7 @@ public:
   void on_owner_set(Thingp what);
   void on_owner_unset(Thingp what);
   void poison_tick(void);
+  void necrosis_tick(void);
   void reinit(void);
   void remove_all_references();
   void remove_minion_owner(void);
