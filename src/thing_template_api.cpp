@@ -174,8 +174,8 @@ int Tp::unused_chance5_d1000(void) const { return _unused_chance5_d1000; }
 int Tp::unused_chance6_d1000(void) const { return _unused_chance6_d1000; }
 int Tp::unused_chance7_d1000(void) const { return _unused_chance7_d1000; }
 int Tp::unused_chance8_d1000(void) const { return _unused_chance8_d1000; }
-int Tp::unused_chance9_d1000(void) const { return _unused_chance9_d1000; }
-int Tp::unused_chance10_d1000(void) const { return _unused_chance10_d1000; }
+int Tp::damage_melee_chance_d1000(void) const { return _damage_melee_chance_d1000; }
+int Tp::damage_bite_chance_d1000(void) const { return _damage_bite_chance_d1000; }
 int Tp::ai_is_able_to_shove(void) const { return _ai_is_able_to_shove; }
 int Tp::blast_max_radius(void) const { return _blast_max_radius; }
 int Tp::blast_min_radius(void) const { return _blast_min_radius; }
@@ -188,10 +188,10 @@ int Tp::capacity_width(void) const { return _capacity_width; }
 int Tp::charge_count(void) const { return _charge_count; }
 int Tp::collision_check(void) const { return _collision_check; }
 int Tp::collision_hit_priority(void) const { return _collision_hit_priority; }
-int Tp::environ_damage_doubled_from_acid(void) const { return _environ_damage_doubled_from_acid; }
-int Tp::environ_damage_doubled_from_fire(void) const { return _environ_damage_doubled_from_fire; }
-int Tp::environ_damage_doubled_from_poison(void) const { return _environ_damage_doubled_from_poison; }
-int Tp::environ_damage_doubled_from_water(void) const { return _environ_damage_doubled_from_water; }
+int Tp::damage_environment_doubled_from_acid(void) const { return _damage_environment_doubled_from_acid; }
+int Tp::damage_environment_doubled_from_fire(void) const { return _damage_environment_doubled_from_fire; }
+int Tp::damage_environment_doubled_from_poison(void) const { return _damage_environment_doubled_from_poison; }
+int Tp::damage_environment_doubled_from_water(void) const { return _damage_environment_doubled_from_water; }
 int Tp::enchant_level(void) const { return _enchant_level; }
 int Tp::enchant_max(void) const { return _enchant_max; }
 int Tp::gfx_an_animation_only(void) const { return _gfx_an_animation_only; }
@@ -281,7 +281,7 @@ int Tp::is_dry_grass(void) const { return _is_dry_grass; }
 int Tp::is_enchantable(void) const { return _is_enchantable; }
 int Tp::is_enchantstone(void) const { return _is_enchantstone; }
 int Tp::attack_engulf_chance_d1000(void) const { return _attack_engulf_chance_d1000; }
-int Tp::attack_poison_chance_d1000(void) const { return _attack_poison_chance_d1000; }
+int Tp::damage_poison_chance_d1000(void) const { return _damage_poison_chance_d1000; }
 int Tp::is_engulfer(void) const { return _is_engulfer; }
 int Tp::is_ethereal_minion_generator(void) const { return _is_ethereal_minion_generator; }
 int Tp::is_ethereal(void) const { return _is_ethereal; }
@@ -499,8 +499,8 @@ void Tp::set_unused_chance5_d1000(int v) { _unused_chance5_d1000 = v; }
 void Tp::set_unused_chance6_d1000(int v) { _unused_chance6_d1000 = v; }
 void Tp::set_unused_chance7_d1000(int v) { _unused_chance7_d1000 = v; }
 void Tp::set_unused_chance8_d1000(int v) { _unused_chance8_d1000 = v; }
-void Tp::set_unused_chance9_d1000(int v) { _unused_chance9_d1000 = v; }
-void Tp::set_unused_chance10_d1000(int v) { _unused_chance10_d1000 = v; }
+void Tp::set_damage_melee_chance_d1000(int v) { _damage_melee_chance_d1000 = v; }
+void Tp::set_damage_bite_chance_d1000(int v) { _damage_bite_chance_d1000 = v; }
 void Tp::set_ai_is_able_to_shove(int v) { _ai_is_able_to_shove = v; }
 void Tp::set_blast_max_radius(int v) { _blast_max_radius = v; }
 void Tp::set_blast_min_radius(int v) { _blast_min_radius = v; }
@@ -514,10 +514,10 @@ void Tp::set_charge_count(int v) { _charge_count = v; }
 void Tp::set_collision_attack(int v) { _collision_attack = v; }
 void Tp::set_collision_check(int v) { _collision_check = v; }
 void Tp::set_collision_hit_priority(int v) { _collision_hit_priority = v; }
-void Tp::set_environ_damage_doubled_from_acid(int v) { _environ_damage_doubled_from_acid = v; }
-void Tp::set_environ_damage_doubled_from_fire(int v) { _environ_damage_doubled_from_fire = v; }
-void Tp::set_environ_damage_doubled_from_poison(int v) { _environ_damage_doubled_from_poison = v; }
-void Tp::set_environ_damage_doubled_from_water(int v) { _environ_damage_doubled_from_water = v; }
+void Tp::set_damage_environment_doubled_from_acid(int v) { _damage_environment_doubled_from_acid = v; }
+void Tp::set_damage_environment_doubled_from_fire(int v) { _damage_environment_doubled_from_fire = v; }
+void Tp::set_damage_environment_doubled_from_poison(int v) { _damage_environment_doubled_from_poison = v; }
+void Tp::set_damage_environment_doubled_from_water(int v) { _damage_environment_doubled_from_water = v; }
 void Tp::set_enchant_level(int v) { _enchant_level = v; }
 void Tp::set_enchant_max(int v) { _enchant_max = v; }
 void Tp::set_gfx_an_animation_only(int v) { _gfx_an_animation_only = v; }
@@ -745,7 +745,7 @@ void Tp::set_is_spiderweb(int v) { _is_spiderweb = v; }
 void Tp::set_is_able_to_tire(int v) { _is_able_to_tire = v; }
 void Tp::set_is_steal_item_chance_d1000(int v) { _is_steal_item_chance_d1000 = v; }
 void Tp::set_attack_engulf_chance_d1000(int v) { _attack_engulf_chance_d1000 = v; }
-void Tp::set_attack_poison_chance_d1000(int v) { _attack_poison_chance_d1000 = v; }
+void Tp::set_damage_poison_chance_d1000(int v) { _damage_poison_chance_d1000 = v; }
 void Tp::set_is_sticky(int v) { _is_sticky = v; }
 void Tp::set_is_sword(int v) { _is_sword = v; }
 void Tp::set_is_target_auto_select(int v) { _is_target_auto_select = v; }

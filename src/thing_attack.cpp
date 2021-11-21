@@ -493,33 +493,57 @@ bool Thing::attack(Thingp victim)
   defence_total -= victim->get_idle_count();
   defence_total -= victim->get_stuck_count();
 
-  //
-  // We hit. See how much damage.
-  //
-  auto damage = get_damage_melee() + stat_to_bonus(attack_total);
-  if (damage < 1) {
-    damage = 1;
-  }
+  bool damage_set = false;
+  bool poison     = false;
+  bool bite       = false;
+  int  damage     = 0;
 
   //
   // Chance of poison damage?
   //
-  bool poison        = false;
-  auto poison_damage = get_damage_poison();
-  if ((int) pcg_random_range(0, 1000) < attack_poison_chance_d1000()) {
-    damage = poison_damage;
-    poison = true;
+  if (! damage_set) {
+    if ((int) pcg_random_range(0, 1000) < damage_poison_chance_d1000()) {
+      int poison_damage = get_damage_poison();
+      if (poison_damage > 0) {
+        damage     = poison_damage;
+        damage_set = true;
+        poison     = true;
+      }
+    }
   }
 
   //
   // Bite?
   //
-  auto bite        = false;
-  auto bite_damage = get_damage_bite();
-  if (bite_damage) {
-    if (pcg_random_range(0, 100) < 50) {
-      damage = bite_damage + stat_to_bonus(attack_total);
-      bite   = true;
+  if (! damage_set) {
+    if ((int) pcg_random_range(0, 1000) < damage_bite_chance_d1000()) {
+      int bite_damage = get_damage_bite();
+      if (bite_damage > 0) {
+        damage     = bite_damage + stat_to_bonus(attack_total);
+        damage_set = true;
+        bite       = true;
+      }
+    }
+  }
+
+  //
+  // Melee?
+  //
+  if (! damage_set) {
+    if ((int) pcg_random_range(0, 1000) < damage_melee_chance_d1000()) {
+      damage = get_damage_melee() + stat_to_bonus(attack_total);
+      if (damage > 0) {
+        damage_set = true;
+      }
+    }
+  }
+
+  //
+  // If some attack type worked, then make sure we have some damage
+  //
+  if (damage_set) {
+    if (damage < 1) {
+      damage = 1;
     }
   }
 
@@ -616,7 +640,7 @@ bool Thing::attack(Thingp victim)
   //
   if (is_engulfer()) {
     if (victim->mid_at == mid_at) {
-      bite_damage = get_damage_swallow();
+      damage = get_damage_swallow();
       if (victim->is_player()) {
         TOPCON("%%fg=red$You are being consumed by %s!%%fg=reset$", text_the().c_str());
         msg("Gulp!");

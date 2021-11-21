@@ -12,23 +12,24 @@ POST=$(mktemp) || exit 1
 OUT=$(mktemp) || exit 1
 
 for IN in \
-   buffs/*py \
-   debuffs/*py \
-   doors/*py \
-   dungeon/*py \
-   effects/*py \
-   food/*py \
-   generators/*py \
-   internal/*py \
-   items/*py \
-   monsts/*py \
-   player.py/*py \
-   potions/*py \
-   rings/*py \
-   skills/*py \
-   treasure/*py \
-   wands/*py \
-   weapons/*py
+    player.py \
+    buffs/*py \
+    debuffs/*py \
+    doors/*py \
+    dungeon/*py \
+    effects/*py \
+    food/*py \
+    generators/*py \
+    internal/*py \
+    items/*py \
+    monsts/*py \
+    player.py/*py \
+    potions/*py \
+    rings/*py \
+    skills/*py \
+    treasure/*py \
+    wands/*py \
+    weapons/*py
 do
     echo $IN
 
@@ -66,10 +67,10 @@ do
       set_collision_hit_priority \
       set_enchant_level \
       set_enchant_max \
-      set_environ_damage_doubled_from_acid \
-      set_environ_damage_doubled_from_fire \
-      set_environ_damage_doubled_from_poison \
-      set_environ_damage_doubled_from_water \
+      set_damage_environment_doubled_from_acid \
+      set_damage_environment_doubled_from_fire \
+      set_damage_environment_doubled_from_poison \
+      set_damage_environment_doubled_from_water \
       set_environ_dislikes_acid \
       set_environ_dislikes_fire \
       set_environ_dislikes_poison \

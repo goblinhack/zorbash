@@ -628,9 +628,9 @@ void Game::wid_thing_info_add_melee_damage(WidPopup *w, Thingp t)
   char tmp2[ MAXSHORTSTR ];
 
   if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_item_magical()) {
-    auto attack_melee_dice = t->get_damage_melee_dice();
-    auto min_value         = attack_melee_dice.min_roll();
-    auto max_value         = attack_melee_dice.max_roll();
+    auto damage_melee_dice = t->get_damage_melee_dice();
+    auto min_value         = damage_melee_dice.min_roll();
+    auto max_value         = damage_melee_dice.max_roll();
     if (min_value > 0) {
       if (min_value == max_value) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->get_damage_melee_dice_str().c_str());
@@ -651,9 +651,9 @@ void Game::wid_thing_info_add_poison_damage(WidPopup *w, Thingp t)
   char tmp2[ MAXSHORTSTR ];
 
   if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_item_magical()) {
-    auto attack_poison_dice = t->get_damage_poison_dice();
-    auto min_value          = attack_poison_dice.min_roll();
-    auto max_value          = attack_poison_dice.max_roll();
+    auto damage_poison_dice = t->get_damage_poison_dice();
+    auto min_value          = damage_poison_dice.min_roll();
+    auto max_value          = damage_poison_dice.max_roll();
     if (min_value > 0) {
       if (min_value == max_value) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->get_damage_poison_dice_str().c_str());
@@ -674,9 +674,9 @@ void Game::wid_thing_info_add_bite_damage(WidPopup *w, Thingp t)
   char tmp2[ MAXSHORTSTR ];
 
   if (t->is_alive_monst() || t->is_player()) {
-    auto attack_bite_dice = t->get_damage_bite_dice();
-    auto min_value        = attack_bite_dice.min_roll();
-    auto max_value        = attack_bite_dice.max_roll();
+    auto damage_bite_dice = t->get_damage_bite_dice();
+    auto min_value        = damage_bite_dice.min_roll();
+    auto max_value        = damage_bite_dice.max_roll();
     if (min_value > 0) {
       if (min_value == max_value) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->get_damage_bite_dice_str().c_str());

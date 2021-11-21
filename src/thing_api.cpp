@@ -255,16 +255,16 @@ int Thing::unused_chance8_d1000(void)
   return (tp()->unused_chance8_d1000());
 }
 
-int Thing::unused_chance9_d1000(void)
+int Thing::damage_melee_chance_d1000(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->unused_chance9_d1000());
+  return (tp()->damage_melee_chance_d1000());
 }
 
-int Thing::unused_chance10_d1000(void)
+int Thing::damage_bite_chance_d1000(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->unused_chance10_d1000());
+  return (tp()->damage_bite_chance_d1000());
 }
 
 int Thing::ai_is_able_to_shove(void)
@@ -297,28 +297,28 @@ int Thing::collision_check(void)
   return (tp()->collision_check());
 }
 
-int Thing::environ_damage_doubled_from_acid(void)
+int Thing::damage_environment_doubled_from_acid(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->environ_damage_doubled_from_acid());
+  return (tp()->damage_environment_doubled_from_acid());
 }
 
-int Thing::environ_damage_doubled_from_fire(void)
+int Thing::damage_environment_doubled_from_fire(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->environ_damage_doubled_from_fire());
+  return (tp()->damage_environment_doubled_from_fire());
 }
 
-int Thing::environ_damage_doubled_from_poison(void)
+int Thing::damage_environment_doubled_from_poison(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->environ_damage_doubled_from_poison());
+  return (tp()->damage_environment_doubled_from_poison());
 }
 
-int Thing::environ_damage_doubled_from_water(void)
+int Thing::damage_environment_doubled_from_water(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->environ_damage_doubled_from_water());
+  return (tp()->damage_environment_doubled_from_water());
 }
 
 int Thing::defence(void)
@@ -1671,10 +1671,10 @@ int Thing::attack_engulf_chance_d1000(void)
   return (tp()->attack_engulf_chance_d1000());
 }
 
-int Thing::attack_poison_chance_d1000(void)
+int Thing::damage_poison_chance_d1000(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->attack_poison_chance_d1000());
+  return (tp()->damage_poison_chance_d1000());
 }
 
 int Thing::is_sticky(void)

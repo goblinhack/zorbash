@@ -225,7 +225,7 @@ PyObject *level_is_spiderweb_at(PyObject *obj, PyObject *args, PyObject *keywds)
 PyObject *level_is_able_to_tire_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_steal_item_chance_d1000_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_attack_engulf_chance_d1000_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_attack_poison_chance_d1000_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_damage_poison_chance_d1000_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_sticky_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_shovable_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_sword_at(PyObject *obj, PyObject *args, PyObject *keywds);

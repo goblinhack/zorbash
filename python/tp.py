@@ -646,8 +646,8 @@ class Tp:
     def set_environ_loves_poison(self, value):
         my.tp_set_environ_loves_poison(self, value)
 
-    def set_environ_damage_doubled_from_poison(self, value):
-        my.tp_set_environ_damage_doubled_from_poison(self, value)
+    def set_damage_environment_doubled_from_poison(self, value):
+        my.tp_set_damage_environment_doubled_from_poison(self, value)
 
     def set_environ_dislikes_poison(self, value):
         my.tp_set_environ_dislikes_poison(self, value)
@@ -727,8 +727,8 @@ class Tp:
     def set_attack_engulf_chance_d1000(self, value):
         my.tp_set_attack_engulf_chance_d1000(self, value)
 
-    def set_attack_poison_chance_d1000(self, value):
-        my.tp_set_attack_poison_chance_d1000(self, value)
+    def set_damage_poison_chance_d1000(self, value):
+        my.tp_set_damage_poison_chance_d1000(self, value)
 
     def set_is_weapon_equiper(self, value):
         my.tp_set_is_weapon_equiper(self, value)
@@ -811,11 +811,11 @@ class Tp:
     def set_is_floating(self, value):
         my.tp_set_is_floating(self, value)
 
-    def set_environ_damage_doubled_from_acid(self, value):
-        my.tp_set_environ_damage_doubled_from_acid(self, value)
+    def set_damage_environment_doubled_from_acid(self, value):
+        my.tp_set_damage_environment_doubled_from_acid(self, value)
 
-    def set_environ_damage_doubled_from_water(self, value):
-        my.tp_set_environ_damage_doubled_from_water(self, value)
+    def set_damage_environment_doubled_from_water(self, value):
+        my.tp_set_damage_environment_doubled_from_water(self, value)
 
     def set_is_minion_generator(self, value):
         my.tp_set_is_minion_generator(self, value)
@@ -823,8 +823,8 @@ class Tp:
     def set_is_treasure_type_eater(self, value):
         my.tp_set_is_treasure_type_eater(self, value)
 
-    def set_environ_damage_doubled_from_acid(self, value):
-        my.tp_set_environ_damage_doubled_from_acid(self, value)
+    def set_damage_environment_doubled_from_acid(self, value):
+        my.tp_set_damage_environment_doubled_from_acid(self, value)
 
     def set_environ_loves_acid(self, value):
         my.tp_set_environ_loves_acid(self, value)
@@ -892,8 +892,8 @@ class Tp:
     def set_is_intelligent(self, value):
         my.tp_set_is_intelligent(self, value)
 
-    def set_environ_damage_doubled_from_fire(self, value):
-        my.tp_set_environ_damage_doubled_from_fire(self, value)
+    def set_damage_environment_doubled_from_fire(self, value):
+        my.tp_set_damage_environment_doubled_from_fire(self, value)
 
     def set_is_fire(self, value):
         my.tp_set_is_fire(self, value)
@@ -949,11 +949,11 @@ class Tp:
     def set_unused_chance8_d1000(self, value):
         my.tp_set_unused_chance8_d1000(self, value)
 
-    def set_unused_chance9_d1000(self, value):
-        my.tp_set_unused_chance9_d1000(self, value)
+    def set_damage_melee_chance_d1000(self, value):
+        my.tp_set_damage_melee_chance_d1000(self, value)
 
-    def set_unused_chance10_d1000(self, value):
-        my.tp_set_unused_chance10_d1000(self, value)
+    def set_damage_bite_chance_d1000(self, value):
+        my.tp_set_damage_bite_chance_d1000(self, value)
 
     def set_ai_random_jump_chance_d1000(self, value):
         my.tp_set_ai_random_jump_chance_d1000(self, value)

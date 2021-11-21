@@ -577,8 +577,8 @@ public:
   int unused_chance6_d1000(void);
   int unused_chance7_d1000(void);
   int unused_chance8_d1000(void);
-  int unused_chance9_d1000(void);
-  int unused_chance10_d1000(void);
+  int damage_melee_chance_d1000(void);
+  int damage_bite_chance_d1000(void);
   int ai_vision_distance(void);
   int ai_wanderer(void);
   int attack_blood(void);
@@ -588,7 +588,7 @@ public:
   int attack_living(void);
   int attack_lunge(void);
   int attack_meat(void);
-  int attack_poison_chance_d1000(void);
+  int damage_poison_chance_d1000(void);
   int attack_undead(void);
   int attack(void);
   int blast_max_radius(void);
@@ -675,10 +675,10 @@ public:
   int distance_to_player(void);
   int enchant_level(void);
   int enchant_max(void);
-  int environ_damage_doubled_from_acid(void);
-  int environ_damage_doubled_from_fire(void);
-  int environ_damage_doubled_from_poison(void);
-  int environ_damage_doubled_from_water(void);
+  int damage_environment_doubled_from_acid(void);
+  int damage_environment_doubled_from_fire(void);
+  int damage_environment_doubled_from_poison(void);
+  int damage_environment_doubled_from_water(void);
   int environ_dislikes_acid(void);
   int environ_dislikes_fire(void);
   int environ_dislikes_poison(void);

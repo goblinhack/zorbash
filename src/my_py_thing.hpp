@@ -287,7 +287,7 @@ PyObject *thing_is_spiderweb(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_tire(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_steal_item_chance_d1000(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_attack_engulf_chance_d1000(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_attack_poison_chance_d1000(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_damage_poison_chance_d1000(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_sticky(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_sword(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_target_auto_select(PyObject *obj, PyObject *args, PyObject *keywds);
