@@ -6111,7 +6111,7 @@ def init_tiles1_monsts_and_items():
       ######################################################################
       "",
       "debuff_poisoned",
-      "",
+      "debuff_necrotized",
       "",
       "",
       "",

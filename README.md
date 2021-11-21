@@ -4,7 +4,7 @@
 <!--                                                                                                                                              -->
 <!-- Next todo                                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
-<!-- - necrosis damage mummy                                                                                                                      -->
+<!-- - necrosis damage mummy / buff                                                                                                               -->
 <!-- - check d cleaner engulfs                                                                                                                    -->
 <!-- - spider jump attack?                                                                                                                        -->
 <!-- - giant spider web throw                                                                                                                     -->
