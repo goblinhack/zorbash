@@ -667,11 +667,11 @@ class Tp:
     def set_attack_humanoid(self, value):
         my.tp_set_attack_humanoid(self, value)
 
-    def set_is_poisonous(self, value):
-        my.tp_set_is_poisonous(self, value)
+    def set_is_poisonous_danger_level(self, value):
+        my.tp_set_is_poisonous_danger_level(self, value)
 
-    def set_is_necrotic(self, value):
-        my.tp_set_is_necrotic(self, value)
+    def set_is_necrotic_danger_level(self, value):
+        my.tp_set_is_necrotic_danger_level(self, value)
 
     def set_is_used_when_thrown(self, value):
         my.tp_set_is_used_when_thrown(self, value)

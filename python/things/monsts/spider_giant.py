@@ -74,7 +74,7 @@ def tp_init(name, text_name):
     mytp.set_is_meat_eater(True)
     mytp.set_is_monst(True)
     mytp.set_is_moveable(True)
-    mytp.set_is_poisonous(2) # danger level
+    mytp.set_is_poisonous_danger_level(2) # danger level
     mytp.set_is_shovable(True)
     mytp.set_is_tickable(True)
     mytp.set_long_text_description("An enormous spider. Ichor drips from its glistening fangs. Watch out for its web and poisonous bite.")

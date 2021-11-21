@@ -383,9 +383,9 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   shift++;
   bits64 |= (my.t->i_set_is_obs_destructable ? 1LLU : 0LLU) << shift;
   shift++;
-  bits64 |= (my.t->i_set_is_poisonous ? 1LLU : 0LLU) << shift;
+  bits64 |= (my.t->i_set_is_poisonous_danger_level ? 1LLU : 0LLU) << shift;
   shift++;
-  bits64 |= (my.t->i_set_is_necrotic ? 1LLU : 0LLU) << shift;
+  bits64 |= (my.t->i_set_is_necrotic_danger_level ? 1LLU : 0LLU) << shift;
   shift++;
   bits64 |= (my.t->i_set_is_potion ? 1LLU : 0LLU) << shift;
   shift++;
@@ -527,8 +527,6 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->_is_lit_currently);
   out << bits(my.t->_is_minion_generator);
   out << bits(my.t->_is_monst);
-  out << bits(my.t->_is_poisonous);
-  out << bits(my.t->_is_necrotic);
   out << bits(my.t->_is_potion);
   out << bits(my.t->_is_ripple);
   out << bits(my.t->_is_rock);

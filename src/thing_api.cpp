@@ -1197,16 +1197,16 @@ int Thing::is_player(void)
   return (tp()->is_player());
 }
 
-int Thing::is_poisonous(void)
+int Thing::is_poisonous_danger_level(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->is_poisonous());
+  return (tp()->is_poisonous_danger_level());
 }
 
-int Thing::is_necrotic(void)
+int Thing::is_necrotic_danger_level(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->is_necrotic());
+  return (tp()->is_necrotic_danger_level());
 }
 
 int Thing::is_potion_eater(void)

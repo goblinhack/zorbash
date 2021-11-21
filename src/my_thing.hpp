@@ -162,8 +162,8 @@ public:
   uint64_t i_set_is_monst                         : 1 {};
   uint64_t i_set_is_obs_wall_or_door              : 1 {};
   uint64_t i_set_is_obs_destructable              : 1 {};
-  uint64_t i_set_is_poisonous                     : 1 {};
-  uint64_t i_set_is_necrotic                      : 1 {};
+  uint64_t i_set_is_poisonous_danger_level                     : 1 {};
+  uint64_t i_set_is_necrotic_danger_level                      : 1 {};
   uint64_t i_set_is_potion                        : 1 {};
   uint64_t i_set_is_ripple                        : 1 {};
   uint64_t i_set_is_rock                          : 1 {};
@@ -988,7 +988,7 @@ public:
   int is_monst(void);
   int is_moveable(void);
   int is_msg(void);
-  int is_necrotic(void);
+  int is_necrotic_danger_level(void);
   int is_necrotized_by(Thingp hitter, int damage);
   int is_no_tile(void);
   int is_obs_destructable(void);
@@ -997,7 +997,7 @@ public:
   int is_organic(void);
   int is_player(void);
   int is_poisoned_by(Thingp hitter, int damage);
-  int is_poisonous(void);
+  int is_poisonous_danger_level(void);
   int is_potion_eater(void);
   int is_potion(void);
   int is_projectile(void);

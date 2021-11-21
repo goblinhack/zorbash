@@ -225,8 +225,8 @@ do
       set_is_openable \
       set_is_organic \
       set_is_player \
-      set_is_poisonous \
-      set_is_necrotic \
+      set_is_poisonous_danger_level \
+      set_is_necrotic_danger_level \
       set_is_potion \
       set_is_potion_eater \
       set_is_projectile \

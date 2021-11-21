@@ -502,7 +502,7 @@ bool Thing::matches(const std::string &what)
   if (is_msg() && (what == "is_msg")) {
     return true;
   }
-  if (is_necrotic() && (what == "is_necrotic")) {
+  if (is_necrotic_danger_level() && (what == "is_necrotic_danger_level")) {
     return true;
   }
   if (is_no_tile() && (what == "is_no_tile")) {
@@ -523,7 +523,7 @@ bool Thing::matches(const std::string &what)
   if (is_player() && (what == "is_player")) {
     return true;
   }
-  if (is_poisonous() && (what == "is_poisonous")) {
+  if (is_poisonous_danger_level() && (what == "is_poisonous_danger_level")) {
     return true;
   }
   if (is_potion_eater() && (what == "is_potion_eater")) {
@@ -1232,8 +1232,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_msg") {
     return &Thing::is_msg;
   }
-  if (what == "is_necrotic") {
-    return &Thing::is_necrotic;
+  if (what == "is_necrotic_danger_level") {
+    return &Thing::is_necrotic_danger_level;
   }
   if (what == "is_no_tile") {
     return &Thing::is_no_tile;
@@ -1253,8 +1253,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_player") {
     return &Thing::is_player;
   }
-  if (what == "is_poisonous") {
-    return &Thing::is_poisonous;
+  if (what == "is_poisonous_danger_level") {
+    return &Thing::is_poisonous_danger_level;
   }
   if (what == "is_potion_eater") {
     return &Thing::is_potion_eater;

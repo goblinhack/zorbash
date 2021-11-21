@@ -35,14 +35,6 @@ void Thing::level_push(void)
     i_set_is_acid = true;
     level->set_is_acid(mx, my);
   }
-  if (is_poisonous()) {
-    i_set_is_poisonous = true;
-    level->set_is_poisonous(mx, my);
-  }
-  if (is_necrotic()) {
-    i_set_is_necrotic = true;
-    level->set_is_necrotic(mx, my);
-  }
   if (is_blood()) {
     i_set_is_blood = true;
     level->set_is_blood(mx, my);

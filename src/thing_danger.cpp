@@ -44,11 +44,11 @@ int Tp::get_danger_level(void)
   if (is_lava()) {
     danger_level++;
   }
-  if (is_poisonous()) {
-    danger_level += is_poisonous();
+  if (is_poisonous_danger_level()) {
+    danger_level += is_poisonous_danger_level();
   }
-  if (is_necrotic()) {
-    danger_level += is_necrotic() * 20;
+  if (is_necrotic_danger_level()) {
+    danger_level += is_necrotic_danger_level() * 20;
   }
   if (is_floating()) {
     danger_level += 2;
@@ -115,11 +115,11 @@ int Thing::get_danger_initial_level(void)
   if (is_lava()) {
     danger_level++;
   }
-  if (is_poisonous()) {
-    danger_level += is_poisonous();
+  if (is_poisonous_danger_level()) {
+    danger_level += is_poisonous_danger_level();
   }
-  if (is_necrotic()) {
-    danger_level += is_necrotic() * 20;
+  if (is_necrotic_danger_level()) {
+    danger_level += is_necrotic_danger_level() * 20;
   }
   if (is_floating()) {
     danger_level += 2;
@@ -199,11 +199,11 @@ int Thing::get_danger_current_level(void)
   if (is_lava()) {
     danger_level++;
   }
-  if (is_poisonous()) {
-    danger_level += is_poisonous();
+  if (is_poisonous_danger_level()) {
+    danger_level += is_poisonous_danger_level();
   }
-  if (is_necrotic()) {
-    danger_level += is_necrotic() * 20;
+  if (is_necrotic_danger_level()) {
+    danger_level += is_necrotic_danger_level() * 20;
   }
   if (is_floating()) {
     danger_level += 2;

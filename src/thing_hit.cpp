@@ -144,14 +144,14 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     }
   }
 
-  if (real_hitter->is_poisonous()) {
+  if (real_hitter->is_poisonous_danger_level()) {
     if (damage_value_doubled_from_poison()) {
       damage *= 2;
       dbg("Double damage from poison");
     }
   }
 
-  if (real_hitter->is_necrotic()) {
+  if (real_hitter->is_necrotic_danger_level()) {
     if (damage_value_doubled_from_necrosis()) {
       damage *= 2;
       dbg("Double damage from necrosis");
@@ -211,7 +211,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
 
   if (poison) {
     if (environ_prefers_poison()) {
-      if (hitter->is_poisonous() || real_hitter->is_poisonous()) {
+      if (hitter->is_poisonous_danger_level() || real_hitter->is_poisonous_danger_level()) {
         if (is_player()) {
           TOPCON("You drink in the poison!");
         } else if (real_hitter->is_player()) {
@@ -233,7 +233,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
 
   if (necrosis) {
     if (environ_prefers_necrosis()) {
-      if (hitter->is_necrotic() || real_hitter->is_necrotic()) {
+      if (hitter->is_necrotic_danger_level() || real_hitter->is_necrotic_danger_level()) {
         if (is_player()) {
           TOPCON("You resist the necrotic touch!");
         } else if (real_hitter->is_player()) {

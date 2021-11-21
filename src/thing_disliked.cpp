@@ -25,18 +25,6 @@ bool Thing::is_disliked_by_me(const point &p)
     }
   }
 
-  if (level->is_poisonous(p)) {
-    if (environ_avoids_poison()) {
-      return true;
-    }
-  }
-
-  if (level->is_necrotic(p)) {
-    if (environ_avoids_necrosis()) {
-      return true;
-    }
-  }
-
   if (! is_floating()) {
     if (level->is_chasm(p)) {
       return true;
@@ -74,18 +62,6 @@ bool Tp::is_disliked_by_me(Levelp level, point p) const
 
   if (level->is_acid(p)) {
     if (environ_avoids_acid()) {
-      return true;
-    }
-  }
-
-  if (level->is_poisonous(p)) {
-    if (environ_avoids_poison()) {
-      return true;
-    }
-  }
-
-  if (level->is_necrotic(p)) {
-    if (environ_avoids_necrosis()) {
       return true;
     }
   }
@@ -131,13 +107,13 @@ bool Thing::is_disliked_by_me(const Thingp itp)
   }
 
   if (me->environ_avoids_poison()) {
-    if (it->is_poisonous()) {
+    if (it->is_poisonous_danger_level()) {
       return true;
     }
   }
 
   if (me->environ_avoids_necrosis()) {
-    if (it->is_necrotic()) {
+    if (it->is_necrotic_danger_level()) {
       return true;
     }
   }

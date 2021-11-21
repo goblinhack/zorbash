@@ -230,11 +230,11 @@ void Thing::show_botcon_description(void)
     text += " Damage %%fg=red$" + tp()->get_damage_melee_dice_str() + "%%fg=reset$.";
   }
 
-  if (is_poisonous()) {
+  if (is_poisonous_danger_level()) {
     text += " Poisonos. ";
   }
 
-  if (is_necrotic()) {
+  if (is_necrotic_danger_level()) {
     text += " Necrotic. ";
   }
 
