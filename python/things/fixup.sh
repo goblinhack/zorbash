@@ -221,7 +221,7 @@ do
       set_is_openable \
       set_is_organic \
       set_is_player \
-      set_is_poison \
+      set_is_poisonous \
       set_is_potion \
       set_is_potion_eater \
       set_is_projectile \
@@ -301,7 +301,6 @@ do
     do
         grep -q $arg $PAYLOAD
         if [ $? -ne 0 ]; then
-          echo "    mytp.$arg(False)" >> $PAYLOAD
         fi
     done
 

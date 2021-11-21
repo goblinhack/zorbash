@@ -433,7 +433,7 @@ bool Thing::matches(const std::string &what)
   if (is_player() && (what == "is_player")) {
     return true;
   }
-  if (is_poison() && (what == "is_poison")) {
+  if (is_poisonous() && (what == "is_poisonous")) {
     return true;
   }
   if (is_potion_eater() && (what == "is_potion_eater")) {
@@ -1187,8 +1187,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_player") {
     return &Thing::is_player;
   }
-  if (what == "is_poison") {
-    return &Thing::is_poison;
+  if (what == "is_poisonous") {
+    return &Thing::is_poisonous;
   }
   if (what == "is_potion_eater") {
     return &Thing::is_potion_eater;

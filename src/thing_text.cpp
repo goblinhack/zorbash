@@ -230,7 +230,7 @@ void Thing::show_botcon_description(void)
     text += " Damage %%fg=red$" + tp()->get_damage_melee_dice_str() + "%%fg=reset$.";
   }
 
-  if (is_poison()) {
+  if (is_poisonous()) {
     text += " Poison %%fg=red$" + tp()->get_damage_poison_dice_str() + "%%fg=reset$.";
   }
 

@@ -64,7 +64,7 @@ public:
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_lit_currently {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_minion_generator {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_monst {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_poison {};
+  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_poisonous {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_potion {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_ripple {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_rock {};
@@ -646,8 +646,8 @@ public:
   uint8_t is_monst(const int x, const int y);
   uint8_t is_monst_or_player(const point &p);
   uint8_t is_monst(const point &p);
-  uint8_t is_poison(const int x, const int y);
-  uint8_t is_poison(const point &p);
+  uint8_t is_poisonous(const int x, const int y);
+  uint8_t is_poisonous(const point &p);
   uint8_t is_potion(const int x, const int y);
   uint8_t is_potion(const point &p);
   uint8_t is_ripple(const int x, const int y);
@@ -833,7 +833,7 @@ public:
   void set_is_obs_destructable_no_check(const int x, const int y);
   void set_is_obs_wall_or_door(const int x, const int y);
   void set_is_obs_wall_or_door_no_check(const int x, const int y);
-  void set_is_poison(const int x, const int y);
+  void set_is_poisonous(const int x, const int y);
   void set_is_potion(const int x, const int y);
   void set_is_ripple(const int x, const int y);
   void set_is_rock(const int x, const int y);
@@ -900,7 +900,7 @@ public:
   void unset_is_obs_destructable_no_check(const int x, const int y);
   void unset_is_obs_wall_or_door(const int x, const int y);
   void unset_is_obs_wall_or_door_no_check(const int x, const int y);
-  void unset_is_poison(const int x, const int y);
+  void unset_is_poisonous(const int x, const int y);
   void unset_is_potion(const int x, const int y);
   void unset_is_ripple(const int x, const int y);
   void unset_is_rock(const int x, const int y);

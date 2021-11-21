@@ -205,7 +205,7 @@ PyObject *thing_is_no_tile(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_on_fire(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_openable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_player(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_poison(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_poisonous(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_potion_eater(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_potion(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_projectile(PyObject *obj, PyObject *args, PyObject *keywds);

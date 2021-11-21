@@ -44,8 +44,8 @@ int Tp::get_danger_level(void)
   if (is_lava()) {
     danger_level++;
   }
-  if (is_poison()) {
-    danger_level += is_poison();
+  if (is_poisonous()) {
+    danger_level += is_poisonous();
   }
   if (is_floating()) {
     danger_level += 2;
@@ -106,7 +106,7 @@ int Thing::get_danger_initial_level(void)
   if (is_hunger_insatiable()) {
     danger_level++;
   }
-  if (is_poison()) {
+  if (is_poisonous()) {
     danger_level++;
   }
   if (is_fire()) {
@@ -115,8 +115,8 @@ int Thing::get_danger_initial_level(void)
   if (is_lava()) {
     danger_level++;
   }
-  if (is_poison()) {
-    danger_level += is_poison();
+  if (is_poisonous()) {
+    danger_level += is_poisonous();
   }
   if (is_floating()) {
     danger_level += 2;
@@ -190,7 +190,7 @@ int Thing::get_danger_current_level(void)
   if (is_hunger_insatiable()) {
     danger_level++;
   }
-  if (is_poison()) {
+  if (is_poisonous()) {
     danger_level++;
   }
   if (is_fire()) {
@@ -199,8 +199,8 @@ int Thing::get_danger_current_level(void)
   if (is_lava()) {
     danger_level++;
   }
-  if (is_poison()) {
-    danger_level += is_poison();
+  if (is_poisonous()) {
+    danger_level += is_poisonous();
   }
   if (is_floating()) {
     danger_level += 2;

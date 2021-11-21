@@ -25,7 +25,7 @@ bool Thing::is_disliked_by_me(const point &p)
     }
   }
 
-  if (level->is_poison(p)) {
+  if (level->is_poisonous(p)) {
     if (environ_dislikes_poison()) {
       return true;
     }
@@ -72,7 +72,7 @@ bool Tp::is_disliked_by_me(Levelp level, point p) const
     }
   }
 
-  if (level->is_poison(p)) {
+  if (level->is_poisonous(p)) {
     if (environ_dislikes_poison()) {
       return true;
     }
@@ -119,7 +119,7 @@ bool Thing::is_disliked_by_me(const Thingp itp)
   }
 
   if (me->environ_dislikes_poison()) {
-    if (it->is_poison()) {
+    if (it->is_poisonous()) {
       return true;
     }
   }

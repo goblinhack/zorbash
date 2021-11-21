@@ -104,42 +104,42 @@ void Level::unset_is_acid(const int x, const int y)
   decr(_is_acid, x, y, (uint8_t) 1);
 }
 
-uint8_t Level::is_poison(const point &p)
+uint8_t Level::is_poisonous(const point &p)
 {
   TRACE_AND_INDENT();
   if (unlikely(is_oob(p.x, p.y))) {
     return false;
   }
-  return (get(_is_poison, p.x, p.y));
+  return (get(_is_poisonous, p.x, p.y));
 }
 
-uint8_t Level::is_poison(const int x, const int y)
+uint8_t Level::is_poisonous(const int x, const int y)
 {
   TRACE_AND_INDENT();
   if (unlikely(is_oob(x, y))) {
     return false;
   }
-  return (get(_is_poison, x, y));
+  return (get(_is_poisonous, x, y));
 }
 
-void Level::set_is_poison(const int x, const int y)
+void Level::set_is_poisonous(const int x, const int y)
 {
   TRACE_AND_INDENT();
   if (unlikely(is_oob(x, y))) {
     return;
   }
   map_changed = true;
-  incr(_is_poison, x, y, (uint8_t) 1);
+  incr(_is_poisonous, x, y, (uint8_t) 1);
 }
 
-void Level::unset_is_poison(const int x, const int y)
+void Level::unset_is_poisonous(const int x, const int y)
 {
   TRACE_AND_INDENT();
   if (unlikely(is_oob(x, y))) {
     return;
   }
   map_changed = true;
-  decr(_is_poison, x, y, (uint8_t) 1);
+  decr(_is_poisonous, x, y, (uint8_t) 1);
 }
 
 uint8_t Level::is_chasm(const int x, const int y)

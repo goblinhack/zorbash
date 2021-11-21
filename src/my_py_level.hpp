@@ -143,7 +143,7 @@ PyObject *level_is_no_tile_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_on_firing_at_something(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_openable_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_player_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_poison_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_poisonous_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_potion_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_potion_eater_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_projectile_at(PyObject *obj, PyObject *args, PyObject *keywds);

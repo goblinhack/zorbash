@@ -338,7 +338,7 @@ int Tp::is_msg(void) const { return _is_msg; }
 int Tp::is_no_tile(void) const { return _is_no_tile; }
 int Tp::is_openable(void) const { return _is_openable; }
 int Tp::is_player(void) const { return _is_player; }
-int Tp::is_poison(void) const { return _is_poison; }
+int Tp::is_poisonous(void) const { return _is_poisonous; }
 int Tp::is_potion_eater(void) const { return _is_potion_eater; }
 int Tp::is_potion(void) const { return _is_potion; }
 int Tp::is_projectile(void) const { return _is_projectile; }
@@ -663,7 +663,7 @@ void Tp::set_is_msg(int v) { _is_msg = v; }
 void Tp::set_is_no_tile(int v) { _is_no_tile = v; }
 void Tp::set_is_openable(int v) { _is_openable = v; }
 void Tp::set_is_player(int v) { _is_player = v; }
-void Tp::set_is_poison(int v) { _is_poison = v; }
+void Tp::set_is_poisonous(int v) { _is_poisonous = v; }
 void Tp::set_is_potion_eater(int v) { _is_potion_eater = v; }
 void Tp::set_is_potion(int v) { _is_potion = v; }
 void Tp::set_is_projectile(int v) { _is_projectile = v; }

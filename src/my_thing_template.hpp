@@ -284,7 +284,7 @@ private:
   int _is_openable {};
   int _is_organic {};
   int _is_player {};
-  int _is_poison {};
+  int _is_poisonous {};
   int _is_potion {};
   int _is_potion_eater {};
   int _is_projectile {};
@@ -743,7 +743,7 @@ public:
   int is_no_tile(void) const;
   int is_openable(void) const;
   int is_player(void) const;
-  int is_poison(void) const;
+  int is_poisonous(void) const;
   int is_potion_eater(void) const;
   int is_potion(void) const;
   int is_projectile(void) const;
@@ -1080,7 +1080,7 @@ public:
   void set_is_no_tile(int);
   void set_is_openable(int);
   void set_is_player(int);
-  void set_is_poison(int);
+  void set_is_poisonous(int);
   void set_is_potion_eater(int);
   void set_is_potion(int);
   void set_is_projectile(int);

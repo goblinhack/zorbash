@@ -162,7 +162,7 @@ public:
   uint64_t i_set_is_monst                         : 1 {};
   uint64_t i_set_is_obs_wall_or_door              : 1 {};
   uint64_t i_set_is_obs_destructable              : 1 {};
-  uint64_t i_set_is_poison                        : 1 {};
+  uint64_t i_set_is_poisonous                        : 1 {};
   uint64_t i_set_is_potion                        : 1 {};
   uint64_t i_set_is_ripple                        : 1 {};
   uint64_t i_set_is_rock                          : 1 {};
@@ -951,7 +951,7 @@ public:
   int is_gold(void);
   int is_hazard(void);
   int is_health_booster(void);
-  int is_poisoned_by(Thingp hitter, int damage);
+  int is_poisonoused_by(Thingp hitter, int damage);
   int is_attacked_by(Thingp hitter, int damage);
   int is_hit(Thingp hitter, bool crit, bool bite, bool poison, int damage);
   int is_hittable(void);
@@ -991,7 +991,7 @@ public:
   int is_openable(void);
   int is_organic(void);
   int is_player(void);
-  int is_poison(void);
+  int is_poisonous(void);
   int is_potion_eater(void);
   int is_potion(void);
   int is_projectile(void);

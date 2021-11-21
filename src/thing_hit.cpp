@@ -149,7 +149,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
   }
 
   if (environ_dislikes_poison()) {
-    if (real_hitter->is_poison()) {
+    if (real_hitter->is_poisonous()) {
       if (damage_value_doubled_from_poison()) {
         damage *= 2;
         dbg("Double damage from poison");
@@ -210,7 +210,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
 
   if (bite || poison) {
     if (environ_loves_poison()) {
-      if (hitter->is_poison() || real_hitter->is_poison()) {
+      if (hitter->is_poisonous() || real_hitter->is_poisonous()) {
         if (is_player()) {
           TOPCON("You drink in the poison!");
         } else if (real_hitter->is_player()) {
@@ -747,7 +747,7 @@ int Thing::is_attacked_by(Thingp hitter, int damage)
   return (is_hit(hitter, false, false, false, damage));
 }
 
-int Thing::is_poisoned_by(Thingp hitter, int damage)
+int Thing::is_poisonoused_by(Thingp hitter, int damage)
 {
   TRACE_AND_INDENT();
   return (is_hit(hitter, false, false, true, damage));

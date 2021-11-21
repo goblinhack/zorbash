@@ -1185,10 +1185,10 @@ int Thing::is_player(void)
   return (tp()->is_player());
 }
 
-int Thing::is_poison(void)
+int Thing::is_poisonous(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->is_poison());
+  return (tp()->is_poisonous());
 }
 
 int Thing::is_potion_eater(void)

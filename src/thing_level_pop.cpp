@@ -25,9 +25,9 @@ void Thing::level_pop(void)
     i_set_is_acid = false;
     level->unset_is_acid(mx, my);
   }
-  if (i_set_is_poison) {
-    i_set_is_poison = false;
-    level->unset_is_poison(mx, my);
+  if (i_set_is_poisonous) {
+    i_set_is_poisonous = false;
+    level->unset_is_poisonous(mx, my);
   }
   if (i_set_is_blood) {
     i_set_is_blood = false;

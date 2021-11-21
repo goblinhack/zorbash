@@ -439,7 +439,7 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
   shift++;
   my.t->i_set_is_obs_destructable = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU;
   shift++;
-  my.t->i_set_is_poison = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU;
+  my.t->i_set_is_poisonous = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU;
   shift++;
   my.t->i_set_is_potion = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU;
   shift++;
@@ -568,7 +568,7 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   in >> bits(my.t->_is_lit_currently);
   in >> bits(my.t->_is_minion_generator);
   in >> bits(my.t->_is_monst);
-  in >> bits(my.t->_is_poison);
+  in >> bits(my.t->_is_poisonous);
   in >> bits(my.t->_is_potion);
   in >> bits(my.t->_is_ripple);
   in >> bits(my.t->_is_rock);

@@ -40,7 +40,7 @@ void Thing::poison_tick(void)
     }
 
     if (poison) {
-      is_poisoned_by(hitter, poison);
+      is_poisonoused_by(hitter, poison);
     }
   }
 
