@@ -207,10 +207,64 @@ int Thing::ai_shove_chance_d1000(void)
   return (tp()->ai_shove_chance_d1000());
 }
 
-int Thing::ai_unprovoked_attack_chance_d1000(void)
+int Thing::unused_chance1_d1000(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->ai_unprovoked_attack_chance_d1000());
+  return (tp()->unused_chance1_d1000());
+}
+
+int Thing::unused_chance2_d1000(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->unused_chance2_d1000());
+}
+
+int Thing::unused_chance3_d1000(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->unused_chance3_d1000());
+}
+
+int Thing::unused_chance4_d1000(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->unused_chance4_d1000());
+}
+
+int Thing::unused_chance5_d1000(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->unused_chance5_d1000());
+}
+
+int Thing::unused_chance6_d1000(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->unused_chance6_d1000());
+}
+
+int Thing::unused_chance7_d1000(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->unused_chance7_d1000());
+}
+
+int Thing::unused_chance8_d1000(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->unused_chance8_d1000());
+}
+
+int Thing::unused_chance9_d1000(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->unused_chance9_d1000());
+}
+
+int Thing::unused_chance10_d1000(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->unused_chance10_d1000());
 }
 
 int Thing::ai_is_able_to_shove(void)

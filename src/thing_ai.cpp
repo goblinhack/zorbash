@@ -883,7 +883,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
                 // No hunting monsters we cannot see just because we have visited that area before.
                 // How aggressive are we?
                 //
-                if ((int) pcg_random_range(0, 1000) < tp()->ai_unprovoked_attack_chance_d1000()) {
+                if ((int) pcg_random_range(0, 100) < ai_aggression_level()) {
                   if (possible_to_attack(it)) {
                     GOAL_ADD(GOAL_PRIO_MED, -health_diff - goal_penalty, "can-attack-monst-unprovoked", it);
                   }

@@ -17,7 +17,6 @@ for IN in \
    doors/*py \
    dungeon/*py \
    effects/*py \
-   fixup.sh/*py \
    food/*py \
    generators/*py \
    internal/*py \
@@ -301,6 +300,7 @@ do
     do
         grep -q $arg $PAYLOAD
         if [ $? -ne 0 ]; then
+          echo "    mytp.$arg(False)" >> $PAYLOAD
         fi
     done
 

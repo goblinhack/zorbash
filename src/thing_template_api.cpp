@@ -166,7 +166,16 @@ int Tp::attack_living(void) const { return _attack_living; }
 int Tp::attack_lunge(void) const { return _attack_lunge; }
 int Tp::attack_meat(void) const { return _attack_meat; }
 int Tp::ai_shove_chance_d1000(void) const { return _ai_shove_chance_d1000; }
-int Tp::ai_unprovoked_attack_chance_d1000(void) const { return _ai_unprovoked_attack_chance_d1000; }
+int Tp::unused_chance1_d1000(void) const { return _unused_chance1_d1000; }
+int Tp::unused_chance2_d1000(void) const { return _unused_chance2_d1000; }
+int Tp::unused_chance3_d1000(void) const { return _unused_chance3_d1000; }
+int Tp::unused_chance4_d1000(void) const { return _unused_chance4_d1000; }
+int Tp::unused_chance5_d1000(void) const { return _unused_chance5_d1000; }
+int Tp::unused_chance6_d1000(void) const { return _unused_chance6_d1000; }
+int Tp::unused_chance7_d1000(void) const { return _unused_chance7_d1000; }
+int Tp::unused_chance8_d1000(void) const { return _unused_chance8_d1000; }
+int Tp::unused_chance9_d1000(void) const { return _unused_chance9_d1000; }
+int Tp::unused_chance10_d1000(void) const { return _unused_chance10_d1000; }
 int Tp::ai_is_able_to_shove(void) const { return _ai_is_able_to_shove; }
 int Tp::blast_max_radius(void) const { return _blast_max_radius; }
 int Tp::blast_min_radius(void) const { return _blast_min_radius; }
@@ -482,7 +491,16 @@ void Tp::set_attack_living(int v) { _attack_living = v; }
 void Tp::set_attack_lunge(int v) { _attack_lunge = v; }
 void Tp::set_attack_meat(int v) { _attack_meat = v; }
 void Tp::set_ai_shove_chance_d1000(int v) { _ai_shove_chance_d1000 = v; }
-void Tp::set_ai_unprovoked_attack_chance_d1000(int v) { _ai_unprovoked_attack_chance_d1000 = v; }
+void Tp::set_unused_chance1_d1000(int v) { _unused_chance1_d1000 = v; }
+void Tp::set_unused_chance2_d1000(int v) { _unused_chance2_d1000 = v; }
+void Tp::set_unused_chance3_d1000(int v) { _unused_chance3_d1000 = v; }
+void Tp::set_unused_chance4_d1000(int v) { _unused_chance4_d1000 = v; }
+void Tp::set_unused_chance5_d1000(int v) { _unused_chance5_d1000 = v; }
+void Tp::set_unused_chance6_d1000(int v) { _unused_chance6_d1000 = v; }
+void Tp::set_unused_chance7_d1000(int v) { _unused_chance7_d1000 = v; }
+void Tp::set_unused_chance8_d1000(int v) { _unused_chance8_d1000 = v; }
+void Tp::set_unused_chance9_d1000(int v) { _unused_chance9_d1000 = v; }
+void Tp::set_unused_chance10_d1000(int v) { _unused_chance10_d1000 = v; }
 void Tp::set_ai_is_able_to_shove(int v) { _ai_is_able_to_shove = v; }
 void Tp::set_blast_max_radius(int v) { _blast_max_radius = v; }
 void Tp::set_blast_min_radius(int v) { _blast_min_radius = v; }

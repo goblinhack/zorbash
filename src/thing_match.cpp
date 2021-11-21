@@ -49,12 +49,6 @@ bool Thing::matches(const std::string &what)
   if (attack_meat() && (what == "attack_meat")) {
     return true;
   }
-  if (ai_shove_chance_d1000() && (what == "ai_shove_chance_d1000")) {
-    return true;
-  }
-  if (ai_unprovoked_attack_chance_d1000() && (what == "ai_unprovoked_attack_chance_d1000")) {
-    return true;
-  }
   if (ai_is_able_to_shove() && (what == "ai_is_able_to_shove")) {
     return true;
   }
@@ -274,12 +268,6 @@ bool Thing::matches(const std::string &what)
   if (is_enchantstone() && (what == "is_enchantstone")) {
     return true;
   }
-  if (attack_engulf_chance_d1000() && (what == "attack_engulf_chance_d1000")) {
-    return true;
-  }
-  if (attack_poison_chance_d1000() && (what == "attack_poison_chance_d1000")) {
-    return true;
-  }
   if (is_engulfer() && (what == "is_engulfer")) {
     return true;
   }
@@ -373,13 +361,7 @@ bool Thing::matches(const std::string &what)
   if (is_jelly() && (what == "is_jelly")) {
     return true;
   }
-  if (ai_random_jump_chance_d1000() && (what == "ai_random_jump_chance_d1000")) {
-    return true;
-  }
   if (ai_is_able_to_jump_distance() && (what == "ai_is_able_to_jump_distance")) {
-    return true;
-  }
-  if (ai_is_able_to_jump_on_low_hp_chance_d1000() && (what == "ai_is_able_to_jump_on_low_hp_chance_d1000")) {
     return true;
   }
   if (ai_is_able_to_jump() && (what == "ai_is_able_to_jump")) {
@@ -685,9 +667,6 @@ bool Thing::matches(const std::string &what)
   if (is_able_to_tire() && (what == "is_able_to_tire")) {
     return true;
   }
-  if (is_steal_item_chance_d1000() && (what == "is_steal_item_chance_d1000")) {
-    return true;
-  }
   if (is_sticky() && (what == "is_sticky")) {
     return true;
   }
@@ -823,12 +802,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   }
   if (what == "attack_meat") {
     return &Thing::attack_meat;
-  }
-  if (what == "ai_shove_chance_d1000") {
-    return &Thing::ai_shove_chance_d1000;
-  }
-  if (what == "ai_unprovoked_attack_chance_d1000") {
-    return &Thing::ai_unprovoked_attack_chance_d1000;
   }
   if (what == "ai_is_able_to_shove") {
     return &Thing::ai_is_able_to_shove;
@@ -1049,12 +1022,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_enchantstone") {
     return &Thing::is_enchantstone;
   }
-  if (what == "attack_engulf_chance_d1000") {
-    return &Thing::attack_engulf_chance_d1000;
-  }
-  if (what == "attack_poison_chance_d1000") {
-    return &Thing::attack_poison_chance_d1000;
-  }
   if (what == "is_engulfer") {
     return &Thing::is_engulfer;
   }
@@ -1148,14 +1115,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_jelly") {
     return &Thing::is_jelly;
   }
-  if (what == "ai_random_jump_chance_d1000") {
-    return &Thing::ai_random_jump_chance_d1000;
-  }
   if (what == "ai_is_able_to_jump_distance") {
     return &Thing::ai_is_able_to_jump_distance;
-  }
-  if (what == "ai_is_able_to_jump_on_low_hp_chance_d1000") {
-    return &Thing::ai_is_able_to_jump_on_low_hp_chance_d1000;
   }
   if (what == "ai_is_able_to_jump") {
     return &Thing::ai_is_able_to_jump;
@@ -1459,9 +1420,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   }
   if (what == "is_able_to_tire") {
     return &Thing::is_able_to_tire;
-  }
-  if (what == "is_steal_item_chance_d1000") {
-    return &Thing::is_steal_item_chance_d1000;
   }
   if (what == "is_sticky") {
     return &Thing::is_sticky;

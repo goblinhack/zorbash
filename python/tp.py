@@ -925,8 +925,35 @@ class Tp:
     def set_ai_shove_chance_d1000(self, value):
         my.tp_set_ai_shove_chance_d1000(self, value)
 
-    def set_ai_unprovoked_attack_chance_d1000(self, value):
-        my.tp_set_ai_unprovoked_attack_chance_d1000(self, value)
+    def set_unused_chance1_d1000(self, value):
+        my.tp_set_unused_chance1_d1000(self, value)
+
+    def set_unused_chance2_d1000(self, value):
+        my.tp_set_unused_chance2_d1000(self, value)
+
+    def set_unused_chance3_d1000(self, value):
+        my.tp_set_unused_chance3_d1000(self, value)
+
+    def set_unused_chance4_d1000(self, value):
+        my.tp_set_unused_chance4_d1000(self, value)
+
+    def set_unused_chance5_d1000(self, value):
+        my.tp_set_unused_chance5_d1000(self, value)
+
+    def set_unused_chance6_d1000(self, value):
+        my.tp_set_unused_chance6_d1000(self, value)
+
+    def set_unused_chance7_d1000(self, value):
+        my.tp_set_unused_chance7_d1000(self, value)
+
+    def set_unused_chance8_d1000(self, value):
+        my.tp_set_unused_chance8_d1000(self, value)
+
+    def set_unused_chance9_d1000(self, value):
+        my.tp_set_unused_chance9_d1000(self, value)
+
+    def set_unused_chance10_d1000(self, value):
+        my.tp_set_unused_chance10_d1000(self, value)
 
     def set_ai_random_jump_chance_d1000(self, value):
         my.tp_set_ai_random_jump_chance_d1000(self, value)
