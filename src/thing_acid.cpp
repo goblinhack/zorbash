@@ -17,7 +17,7 @@
 void Thing::acid_tick(void)
 {
   TRACE_AND_INDENT();
-  if (! environ_dislikes_acid()) {
+  if (! environ_avoids_acid()) {
     return;
   }
 

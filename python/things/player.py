@@ -4,7 +4,7 @@ import tp
 
 # hitter: arrow / monst
 # real_hitter: who fired the arrow
-def on_you_are_hit(me, hitter, real_hitter, x, y, crit, bite, poison, damage):
+def on_you_are_hit(me, hitter, real_hitter, x, y, crit, bite, poison, necrosis, damage):
     # my.topcon("player hit damage {}".format(damage))
     if damage <= 5:
         my.thing_sound_play_channel(me, my.CHANNEL_IMPACT, "player_hit{}".format(my.non_pcg_randint(1, 4)))
@@ -40,11 +40,11 @@ def on_move(me, x, y):
 def tp_init(name, text_name, short_text_name, title):
     mytp = tp.Tp(name, text_name, short_text_name)
     mytp.set_ai_avoid_distance(4)
+    mytp.set_ai_detect_secret_doors(True)
     mytp.set_ai_is_able_to_attack_generators(True)
     mytp.set_ai_is_able_to_break_down_doors(True)
     mytp.set_ai_is_able_to_break_out_of_webs(True)
     mytp.set_ai_is_able_to_collect_keys(True)
-    mytp.set_ai_is_able_to_detect_secret_doors_when_close(True)
     mytp.set_ai_is_able_to_enchant_weapons(True)
     mytp.set_ai_is_able_to_jump_distance(2)
     mytp.set_ai_is_able_to_jump(True)
@@ -66,10 +66,9 @@ def tp_init(name, text_name, short_text_name, title):
     mytp.set_collision_hit_priority(20)
     mytp.set_damage_melee_chance_d1000(50)
     mytp.set_damage_melee_dice("1d6+1")
-    mytp.set_environ_dislikes_acid(True)
-    mytp.set_environ_dislikes_fire(100)
-    mytp.set_environ_dislikes_poison(True)
-    mytp.set_environ_hates_poison(True)
+    mytp.set_environ_avoids_acid(True)
+    mytp.set_environ_avoids_fire(100)
+    mytp.set_environ_avoids_poison(True)
     mytp.set_gfx_animated_can_hflip(True)
     mytp.set_gfx_animated(True)
     mytp.set_gfx_anim_use("attack_punch")

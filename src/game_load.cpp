@@ -95,6 +95,7 @@ std::istream &operator>>(std::istream &in, Bits< ThingInfop & > my)
    in >> bits(my.t->minion_count);
    in >> bits(my.t->owned_count);
    in >> bits(my.t->poison);
+   in >> bits(my.t->necrosis);
    in >> bits(my.t->monst_state);
    in >> bits(my.t->stamina);
    in >> bits(my.t->stamina_max);
@@ -441,6 +442,8 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
   shift++;
   my.t->i_set_is_poisonous = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU;
   shift++;
+  my.t->i_set_is_necrotic = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU;
+  shift++;
   my.t->i_set_is_potion = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU;
   shift++;
   my.t->i_set_is_ripple = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU;
@@ -569,6 +572,7 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   in >> bits(my.t->_is_minion_generator);
   in >> bits(my.t->_is_monst);
   in >> bits(my.t->_is_poisonous);
+  in >> bits(my.t->_is_necrotic);
   in >> bits(my.t->_is_potion);
   in >> bits(my.t->_is_ripple);
   in >> bits(my.t->_is_rock);

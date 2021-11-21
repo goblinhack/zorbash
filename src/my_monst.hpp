@@ -123,6 +123,7 @@ public:
   int health_max          = {};
   int lifespan            = {}; // How many things this thing owns.
   int poison              = {};
+  int necrosis            = {};
   int score               = {};
   int tick_resurrect_when = {};
 

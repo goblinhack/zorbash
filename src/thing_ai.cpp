@@ -892,7 +892,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
             }
           }
 
-          if (! environ_loves_spiderwebs()) {
+          if (! environ_prefers_spiderwebs()) {
             if (it->is_spiderweb() && ! dist) {
               //
               // Very close, high priority attack
@@ -1033,7 +1033,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
             continue;
           }
         } else if (level->is_secret_door(o)) {
-          if (! ai_is_able_to_detect_secret_doors_when_close()) {
+          if (! ai_detect_secret_doors()) {
             continue;
           }
           if (dist > THING_AI_CAN_SEE_SECRET_DOOR_DIST) {
@@ -2037,7 +2037,7 @@ void Thing::ai_get_next_hop(void)
   //
   // If on fire, try and put it out!
   //
-  if (is_on_fire() && environ_dislikes_fire()) {
+  if (is_on_fire() && environ_avoids_fire()) {
     if (is_intelligent()) {
       if (ai_on_fire()) {
         return;

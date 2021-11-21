@@ -367,20 +367,23 @@ class Tp:
     def set_attack_blood(self, value):
         my.tp_set_attack_blood(self, value)
 
-    def set_environ_hates_poison(self, value):
-        my.tp_set_environ_hates_poison(self, value)
+    def set_environ_avoids_poison(self, value):
+        my.tp_set_environ_avoids_poison(self, value)
 
-    def set_environ_hates_fire(self, value):
-        my.tp_set_environ_hates_fire(self, value)
+    def set_environ_avoids_necrosis(self, value):
+        my.tp_set_environ_avoids_necrosis(self, value)
 
-    def set_environ_hates_water(self, value):
-        my.tp_set_environ_hates_water(self, value)
+    def set_environ_avoids_fire(self, value):
+        my.tp_set_environ_avoids_fire(self, value)
 
-    def set_environ_hates_acid(self, value):
-        my.tp_set_environ_hates_acid(self, value)
+    def set_environ_avoids_water(self, value):
+        my.tp_set_environ_avoids_water(self, value)
 
-    def set_ai_is_able_to_detect_secret_doors_when_close(self, value):
-        my.tp_set_ai_is_able_to_detect_secret_doors_when_close(self, value)
+    def set_environ_avoids_acid(self, value):
+        my.tp_set_environ_avoids_acid(self, value)
+
+    def set_ai_detect_secret_doors(self, value):
+        my.tp_set_ai_detect_secret_doors(self, value)
 
     def set_ai_is_able_to_break_down_doors(self, value):
         my.tp_set_ai_is_able_to_break_down_doors(self, value)
@@ -538,8 +541,8 @@ class Tp:
     def set_is_item_magical_eater(self, value):
         my.tp_set_is_item_magical_eater(self, value)
 
-    def set_environ_loves_fire(self, value):
-        my.tp_set_environ_loves_fire(self, value)
+    def set_environ_prefers_fire(self, value):
+        my.tp_set_environ_prefers_fire(self, value)
 
     def set_is_projectile(self, value):
         my.tp_set_is_projectile(self, value)
@@ -607,8 +610,8 @@ class Tp:
     def set_is_descend_sewer(self, value):
         my.tp_set_is_descend_sewer(self, value)
 
-    def set_environ_loves_spiderwebs(self, value):
-        my.tp_set_environ_loves_spiderwebs(self, value)
+    def set_environ_prefers_spiderwebs(self, value):
+        my.tp_set_environ_prefers_spiderwebs(self, value)
 
     def set_is_shallow_water(self, value):
         my.tp_set_is_shallow_water(self, value)
@@ -643,20 +646,32 @@ class Tp:
     def set_is_humanoid(self, value):
         my.tp_set_is_humanoid(self, value)
 
-    def set_environ_loves_poison(self, value):
-        my.tp_set_environ_loves_poison(self, value)
+    def set_environ_prefers_poison(self, value):
+        my.tp_set_environ_prefers_poison(self, value)
 
     def set_damage_value_doubled_from_poison(self, value):
         my.tp_set_damage_value_doubled_from_poison(self, value)
 
-    def set_environ_dislikes_poison(self, value):
-        my.tp_set_environ_dislikes_poison(self, value)
+    def set_environ_avoids_poison(self, value):
+        my.tp_set_environ_avoids_poison(self, value)
+
+    def set_environ_prefers_necrosis(self, value):
+        my.tp_set_environ_prefers_necrosis(self, value)
+
+    def set_damage_value_doubled_from_necrosis(self, value):
+        my.tp_set_damage_value_doubled_from_necrosis(self, value)
+
+    def set_environ_avoids_necrosis(self, value):
+        my.tp_set_environ_avoids_necrosis(self, value)
 
     def set_attack_humanoid(self, value):
         my.tp_set_attack_humanoid(self, value)
 
     def set_is_poisonous(self, value):
         my.tp_set_is_poisonous(self, value)
+
+    def set_is_necrotic(self, value):
+        my.tp_set_is_necrotic(self, value)
 
     def set_is_used_when_thrown(self, value):
         my.tp_set_is_used_when_thrown(self, value)
@@ -729,6 +744,9 @@ class Tp:
 
     def set_damage_poison_chance_d1000(self, value):
         my.tp_set_damage_poison_chance_d1000(self, value)
+
+    def set_damage_necrosis_chance_d1000(self, value):
+        my.tp_set_damage_necrosis_chance_d1000(self, value)
 
     def set_is_weapon_equiper(self, value):
         my.tp_set_is_weapon_equiper(self, value)
@@ -826,11 +844,11 @@ class Tp:
     def set_damage_value_doubled_from_acid(self, value):
         my.tp_set_damage_value_doubled_from_acid(self, value)
 
-    def set_environ_loves_acid(self, value):
-        my.tp_set_environ_loves_acid(self, value)
+    def set_environ_prefers_acid(self, value):
+        my.tp_set_environ_prefers_acid(self, value)
 
-    def set_environ_dislikes_acid(self, value):
-        my.tp_set_environ_dislikes_acid(self, value)
+    def set_environ_avoids_acid(self, value):
+        my.tp_set_environ_avoids_acid(self, value)
 
     def set_is_jelly_parent(self, value):
         my.tp_set_is_jelly_parent(self, value)
@@ -877,8 +895,8 @@ class Tp:
     def set_is_smoke(self, value):
         my.tp_set_is_smoke(self, value)
 
-    def set_environ_dislikes_fire(self, value):
-        my.tp_set_environ_dislikes_fire(self, value)
+    def set_environ_avoids_fire(self, value):
+        my.tp_set_environ_avoids_fire(self, value)
 
     def set_is_treasure_type(self, value):
         my.tp_set_is_treasure_type(self, value)
@@ -1033,8 +1051,8 @@ class Tp:
     def set_is_food(self, value):
         my.tp_set_is_food(self, value)
 
-    def set_environ_dislikes_water(self, value):
-        my.tp_set_environ_dislikes_water(self, value)
+    def set_environ_avoids_water(self, value):
+        my.tp_set_environ_avoids_water(self, value)
 
     def set_is_hunger_insatiable(self, value):
         my.tp_set_is_hunger_insatiable(self, value)
@@ -1053,6 +1071,9 @@ class Tp:
 
     def set_damage_poison_dice(self, value):
         my.tp_set_damage_poison_dice(self, value)
+
+    def set_damage_necrosis_dice(self, value):
+        my.tp_set_damage_necrosis_dice(self, value)
 
     def set_damage_crush_dice(self, value):
         my.tp_set_damage_crush_dice(self, value)
@@ -1075,8 +1096,8 @@ class Tp:
     def set_collision_attack(self, value):
         my.tp_set_collision_attack(self, value)
 
-    def set_environ_loves_water(self, value):
-        my.tp_set_environ_loves_water(self, value)
+    def set_environ_prefers_water(self, value):
+        my.tp_set_environ_prefers_water(self, value)
 
     def set_collision_hit_priority(self, value):
         my.tp_set_collision_hit_priority(self, value)

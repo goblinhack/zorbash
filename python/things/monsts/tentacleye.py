@@ -6,7 +6,7 @@ def on_you_bite_attack(me, x, y):
     if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound):
         my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
 
-def on_you_are_hit(me, hitter, real_hitter, x, y, crit, bite, poison, damage):
+def on_you_are_hit(me, hitter, real_hitter, x, y, crit, bite, poison, necrosis, damage):
     sound = "hiss{}".format(my.non_pcg_randint(1, 10))
     if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound):
         my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
@@ -45,7 +45,7 @@ def tp_init(name, text_name):
     mytp.set_damage_melee_chance_d1000(1000)
     mytp.set_damage_melee_dice("2d6")
     mytp.set_damage_value_doubled_from_fire(True)
-    mytp.set_environ_dislikes_fire(100)
+    mytp.set_environ_avoids_fire(100)
     mytp.set_gfx_animated_can_hflip(True)
     mytp.set_gfx_animated(True)
     mytp.set_gfx_anim_use("attack_claws")

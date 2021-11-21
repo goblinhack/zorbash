@@ -49,7 +49,8 @@ void Level::clear(void)
   _is_monst            = {};
   _is_obs_wall_or_door = {};
   _is_obs_destructable = {};
-  _is_poisonous           = {};
+  _is_poisonous        = {};
+  _is_necrotic         = {};
   _is_rock             = {};
   _is_shallow_water    = {};
   _is_skillstone       = {};

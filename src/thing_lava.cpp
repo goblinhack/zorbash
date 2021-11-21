@@ -18,7 +18,7 @@
 void Thing::lava_tick(void)
 {
   TRACE_AND_INDENT();
-  if (! environ_dislikes_fire()) {
+  if (! environ_avoids_fire()) {
     if (is_player()) {
       dbg("Lava tick: No, not a fire avoider");
     }

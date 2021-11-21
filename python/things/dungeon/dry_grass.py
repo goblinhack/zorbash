@@ -2,7 +2,7 @@ import my
 import tp
 
 
-def on_you_are_hit(me, hitter, real_hitter, x, y, crit, bite, poison, damage):
+def on_you_are_hit(me, hitter, real_hitter, x, y, crit, bite, poison, necrosis, damage):
     my.level_spawn_at_thing(me, "small_fire")
     my.level_place_at(me, "dry_grass_dead", x, y)
     my.topcon("The dry grass burns!")

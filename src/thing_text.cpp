@@ -231,7 +231,11 @@ void Thing::show_botcon_description(void)
   }
 
   if (is_poisonous()) {
-    text += " Poison %%fg=red$" + tp()->get_damage_poison_dice_str() + "%%fg=reset$.";
+    text += " Poisonos. ";
+  }
+
+  if (is_necrotic()) {
+    text += " Necrotic. ";
   }
 
   if (get_immediate_owner()) {

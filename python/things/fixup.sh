@@ -42,7 +42,7 @@ do
       set_ai_is_able_to_break_down_doors \
       set_ai_is_able_to_break_out_of_webs \
       set_ai_is_able_to_collect_keys \
-      set_ai_is_able_to_detect_secret_doors_when_close \
+      set_ai_detect_secret_doors \
       set_ai_is_able_to_enchant_weapons \
       set_ai_is_able_to_jump \
       set_ai_is_able_to_learn_skills \
@@ -70,20 +70,24 @@ do
       set_damage_value_doubled_from_acid \
       set_damage_value_doubled_from_fire \
       set_damage_value_doubled_from_poison \
+      set_damage_value_doubled_from_necrosis \
       set_damage_value_doubled_from_water \
-      set_environ_dislikes_acid \
-      set_environ_dislikes_fire \
-      set_environ_dislikes_poison \
-      set_environ_dislikes_water \
-      set_environ_hates_acid \
-      set_environ_hates_fire \
-      set_environ_hates_poison \
-      set_environ_hates_water \
-      set_environ_loves_acid \
-      set_environ_loves_fire \
-      set_environ_loves_poison \
-      set_environ_loves_spiderwebs \
-      set_environ_loves_water \
+      set_environ_avoids_acid \
+      set_environ_avoids_fire \
+      set_environ_avoids_poison \
+      set_environ_avoids_necrosis \
+      set_environ_avoids_water \
+      set_environ_avoids_acid \
+      set_environ_avoids_fire \
+      set_environ_avoids_poison \
+      set_environ_avoids_necrosis \
+      set_environ_avoids_water \
+      set_environ_prefers_acid \
+      set_environ_prefers_fire \
+      set_environ_prefers_poison \
+      set_environ_prefers_necrosis \
+      set_environ_prefers_spiderwebs \
+      set_environ_prefers_water \
       set_gfx_an_animation_only \
       set_gfx_animated \
       set_gfx_animated_can_hflip \
@@ -222,6 +226,7 @@ do
       set_is_organic \
       set_is_player \
       set_is_poisonous \
+      set_is_necrotic \
       set_is_potion \
       set_is_potion_eater \
       set_is_projectile \
@@ -300,8 +305,10 @@ do
       set_on_death_is_open
     do
         grep -q $arg $PAYLOAD
-        if [ $? -ne 0 ]; then
-        fi
+        # Too much noise
+        #if [ $? -ne 0 ]; then
+        #  echo "    mytp.$arg(False)" >> $PAYLOAD
+        #fi
     done
 
     sort $PAYLOAD | uniq > $PAYLOAD.tmp

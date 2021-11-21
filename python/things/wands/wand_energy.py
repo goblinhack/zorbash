@@ -32,7 +32,7 @@ def explode(me, x, y):
     my.level_spawn_fire_around_thing(me, "fire")
     my.thing_defeated(me, "exploded")
 
-def on_you_are_hit(me, hitter, real_hitter, x, y, crit, bite, poison, damage):
+def on_you_are_hit(me, hitter, real_hitter, x, y, crit, bite, poison, necrosis, damage):
     explode(me, x, y)
 
 def on_fire(me, x, y):

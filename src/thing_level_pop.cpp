@@ -29,6 +29,14 @@ void Thing::level_pop(void)
     i_set_is_poisonous = false;
     level->unset_is_poisonous(mx, my);
   }
+  if (i_set_is_necrotic) {
+    i_set_is_necrotic = false;
+    level->unset_is_necrotic(mx, my);
+  }
+  if (i_set_is_necrotic) {
+    i_set_is_necrotic = false;
+    level->unset_is_necrotic(mx, my);
+  }
   if (i_set_is_blood) {
     i_set_is_blood = false;
     level->unset_is_blood(mx, my);

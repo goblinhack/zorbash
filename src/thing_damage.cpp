@@ -67,6 +67,31 @@ int Thing::get_damage_poison(void)
 }
 
 ///////////////////////////////////////////////////////////////////////////
+// necrosis
+///////////////////////////////////////////////////////////////////////////
+const Dice &Thing::get_damage_necrosis_dice(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->get_damage_necrosis_dice());
+}
+
+const std::string &Thing::get_damage_necrosis_dice_str(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->get_damage_necrosis_dice_str());
+}
+
+int Thing::get_damage_necrosis(void)
+{
+  TRACE_AND_INDENT();
+  auto roll = tp()->get_damage_necrosis_dice().roll();
+  if (roll) {
+    return roll + get_enchant();
+  }
+  return roll;
+}
+
+///////////////////////////////////////////////////////////////////////////
 // crush
 ///////////////////////////////////////////////////////////////////////////
 const Dice &Thing::get_damage_crush_dice(void)
@@ -151,6 +176,7 @@ int Thing::get_damage_max(void)
   max_damage      = std::max(max_damage, get_damage_swallow_dice().max_roll());
   max_damage      = std::max(max_damage, get_damage_melee_dice().max_roll());
   max_damage      = std::max(max_damage, get_damage_poison_dice().max_roll());
+  max_damage      = std::max(max_damage, get_damage_necrosis_dice().max_roll());
   //
   // Don't include crush damage as it is non typical
   //
@@ -164,6 +190,7 @@ int Thing::get_damage_min(void)
   min_damage      = std::min(min_damage, get_damage_swallow_dice().min_roll());
   min_damage      = std::min(min_damage, get_damage_melee_dice().min_roll());
   min_damage      = std::min(min_damage, get_damage_poison_dice().min_roll());
+  min_damage      = std::min(min_damage, get_damage_necrosis_dice().min_roll());
   //
   // Don't include crush damage as it is non typical
   //

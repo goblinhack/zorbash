@@ -19,7 +19,7 @@ def explode(me, x, y):
     my.level_spawn_at_thing(me, "fire")
     my.thing_defeated(me, "exploded")
 
-def on_you_are_hit(me, hitter, real_hitter, x, y, crit, bite, poison, damage):
+def on_you_are_hit(me, hitter, real_hitter, x, y, crit, bite, poison, necrosis, damage):
     explode(me, x, y)
 
 def on_fire(me, x, y):
@@ -33,7 +33,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_charge_count(5)
     mytp.set_damage_melee_dice("1d8+6")
     mytp.set_damage_value_doubled_from_fire(True)
-    mytp.set_environ_dislikes_water(100)
+    mytp.set_environ_avoids_water(100)
     mytp.set_gfx_animated(True)
     mytp.set_gfx_short_shadow_caster(True)
     mytp.set_gfx_show_outlined(True)

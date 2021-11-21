@@ -12,7 +12,7 @@ def on_owner_unset(me, owner, x, y):
         my.topcon("The green glow around you fades.")
 
 def on_tick(owner, item, x, y):
-    poison = my.thing_get_poison(item)
+    poison = my.thing_get_poisoned_amount(item)
     if poison == 0:
         return True
     new_poison = int(poison / 2)
@@ -20,7 +20,7 @@ def on_tick(owner, item, x, y):
         my.topcon("%%fg=green$The poison has little effect on you!%%fg=reset$")
     else:
         my.topcon("%%fg=green$The poison fades from your system!%%fg=reset$")
-    my.thing_set_poison(owner, new_poison)
+    my.thing_set_poisoned_amount(owner, new_poison)
     return True
 
 def tp_init(name, text_name):

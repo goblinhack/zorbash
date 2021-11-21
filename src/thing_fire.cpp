@@ -20,7 +20,7 @@ void Thing::fire_tick(void)
     //
     // Keep going
     //
-  } else if (! environ_dislikes_fire()) {
+  } else if (! environ_avoids_fire()) {
     IF_DEBUG4 { log("No, is not fire avoider"); }
     return;
   }
@@ -91,7 +91,7 @@ void Thing::fire_tick(void)
     auto fire   = tp_find("fire");
     auto damage = fire->get_damage_melee();
 
-    if (environ_dislikes_fire()) {
+    if (environ_avoids_fire()) {
       damage *= 2;
     }
 

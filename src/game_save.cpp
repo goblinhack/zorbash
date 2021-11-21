@@ -71,6 +71,7 @@ std::ostream &operator<<(std::ostream &out, Bits< ThingInfop & > const my)
   out << bits(my.t->minion_count);
   out << bits(my.t->owned_count);
   out << bits(my.t->poison);
+  out << bits(my.t->necrosis);
   out << bits(my.t->monst_state);
   out << bits(my.t->stamina);
   out << bits(my.t->stamina_max);
@@ -384,6 +385,8 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   shift++;
   bits64 |= (my.t->i_set_is_poisonous ? 1LLU : 0LLU) << shift;
   shift++;
+  bits64 |= (my.t->i_set_is_necrotic ? 1LLU : 0LLU) << shift;
+  shift++;
   bits64 |= (my.t->i_set_is_potion ? 1LLU : 0LLU) << shift;
   shift++;
   bits64 |= (my.t->i_set_is_ripple ? 1LLU : 0LLU) << shift;
@@ -525,6 +528,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->_is_minion_generator);
   out << bits(my.t->_is_monst);
   out << bits(my.t->_is_poisonous);
+  out << bits(my.t->_is_necrotic);
   out << bits(my.t->_is_potion);
   out << bits(my.t->_is_ripple);
   out << bits(my.t->_is_rock);

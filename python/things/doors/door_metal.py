@@ -2,7 +2,7 @@ import my
 import tp
 
 
-def on_you_are_hit(me, hitter, real_hitter, x, y, crit, bite, poison, damage):
+def on_you_are_hit(me, hitter, real_hitter, x, y, crit, bite, poison, necrosis, damage):
     my.sound_play("door_hit{}".format(my.non_pcg_randint(1, 2)))
 
 def on_death(me, x, y):

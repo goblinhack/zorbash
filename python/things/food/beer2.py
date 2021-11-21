@@ -4,7 +4,7 @@ import tp
 
 def tp_init(name, text_name, short_text_name):
     mytp = tp.Tp(name, text_name, short_text_name)
-    mytp.set_environ_dislikes_fire(100)
+    mytp.set_environ_avoids_fire(100)
     mytp.set_gfx_short_shadow_caster(True)
     mytp.set_is_able_to_fall(True)
     mytp.set_is_bag_item(True)

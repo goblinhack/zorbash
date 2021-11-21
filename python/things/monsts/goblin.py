@@ -6,7 +6,7 @@ def on_you_bite_attack(me, x, y):
     if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound):
         my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
 
-def on_you_are_hit(me, hitter, real_hitter, x, y, crit, bite, poison, damage):
+def on_you_are_hit(me, hitter, real_hitter, x, y, crit, bite, poison, necrosis, damage):
     sound = "hiss{}".format(my.non_pcg_randint(1, 10))
     if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound):
         my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
@@ -24,11 +24,11 @@ def tp_init(name, text_name):
     mytp = tp.Tp(name, text_name)
     mytp.set_ai_aggression_level(15)
     mytp.set_ai_avoid_distance(5)
+    mytp.set_ai_detect_secret_doors(True)
     mytp.set_ai_is_able_to_attack_generators(True)
     mytp.set_ai_is_able_to_break_down_doors(True)
     mytp.set_ai_is_able_to_break_out_of_webs(True)
     mytp.set_ai_is_able_to_collect_keys(True)
-    mytp.set_ai_is_able_to_detect_secret_doors_when_close(True)
     mytp.set_ai_is_able_to_enchant_weapons(True)
     mytp.set_ai_is_able_to_jump_distance(2)
     mytp.set_ai_is_able_to_jump(True)
@@ -54,9 +54,8 @@ def tp_init(name, text_name):
     mytp.set_damage_bite_dice("1d6+2")
     mytp.set_damage_melee_chance_d1000(900)
     mytp.set_damage_melee_dice("1d4")
-    mytp.set_environ_dislikes_acid(True)
-    mytp.set_environ_dislikes_fire(100)
-    mytp.set_environ_hates_acid(True)
+    mytp.set_environ_avoids_acid(True)
+    mytp.set_environ_avoids_fire(100)
     mytp.set_gfx_animated_can_hflip(True)
     mytp.set_gfx_animated(True)
     mytp.set_gfx_anim_use("attack_claws")

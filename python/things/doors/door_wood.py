@@ -2,7 +2,7 @@ import my
 import tp
 
 
-def on_you_are_hit(me, hitter, real_hitter, x, y, crit, bite, poison, damage):
+def on_you_are_hit(me, hitter, real_hitter, x, y, crit, bite, poison, necrosis, damage):
     my.sound_play("door_hit{}".format(my.non_pcg_randint(1, 2)))
 
 def on_death(me, x, y):
@@ -16,7 +16,7 @@ def tp_init(name):
     mytp.set_collision_check(True)
     mytp.set_collision_hit_priority(9)
     mytp.set_damage_value_doubled_from_fire(True)
-    mytp.set_environ_dislikes_fire(100)
+    mytp.set_environ_avoids_fire(100)
     mytp.set_gfx_animated(True)
     mytp.set_gfx_health_bar_autohide(True)
     mytp.set_gfx_oversized_and_on_floor(True)

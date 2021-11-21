@@ -16,7 +16,6 @@ def tp_init(name, text_name):
     mytp.set_collision_hit_priority(10)
     mytp.set_damage_melee_chance_d1000(1000)
     mytp.set_damage_melee_dice("1")
-    mytp.set_environ_loves_poison(True)
     mytp.set_gfx_animated_can_hflip(True)
     mytp.set_gfx_animated(True)
     mytp.set_gfx_anim_use("attack_claws")

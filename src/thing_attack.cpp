@@ -495,6 +495,7 @@ bool Thing::attack(Thingp victim)
 
   bool damage_set = false;
   bool poison     = false;
+  bool necrosis   = false;
   bool bite       = false;
   int  damage     = 0;
 
@@ -508,6 +509,20 @@ bool Thing::attack(Thingp victim)
         damage     = poison_damage;
         damage_set = true;
         poison     = true;
+      }
+    }
+  }
+
+  //
+  // Chance of necrosis damage?
+  //
+  if (! damage_set) {
+    if ((int) pcg_random_range(0, 1000) < damage_necrosis_chance_d1000()) {
+      int necrosis_damage = get_damage_necrosis();
+      if (necrosis_damage > 0) {
+        damage     = necrosis_damage;
+        damage_set = true;
+        necrosis   = true;
       }
     }
   }
@@ -648,7 +663,7 @@ bool Thing::attack(Thingp victim)
     }
   }
 
-  if (victim->is_hit(this, crit, bite, poison, damage)) {
+  if (victim->is_hit(this, crit, bite, poison, necrosis, damage)) {
     dbg("The attack succeeded");
 
     if (attack_lunge()) {

@@ -17,7 +17,7 @@ void Thing::poison_tick(void)
     return;
   }
 
-  auto old_poison = get_poison();
+  auto old_poison = get_poisoned_amount();
   if (! old_poison) {
     return;
   }
@@ -40,9 +40,9 @@ void Thing::poison_tick(void)
     }
 
     if (poison) {
-      is_poisonoused_by(hitter, poison);
+      is_poisoned_by(hitter, poison);
     }
   }
 
-  set_poison(old_poison / 2);
+  set_poisoned_amount(old_poison / 2);
 }

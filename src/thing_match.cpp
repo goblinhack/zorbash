@@ -25,13 +25,70 @@ bool Thing::matches(const std::string &what)
     return false;
   }
 
+  if (ai_aggression_level() && (what == "ai_aggression_level")) {
+    return true;
+  }
   if (ai_avoid_distance() && (what == "ai_avoid_distance")) {
+    return true;
+  }
+  if (ai_is_able_to_attack_generators() && (what == "ai_is_able_to_attack_generators")) {
+    return true;
+  }
+  if (ai_is_able_to_break_down_doors() && (what == "ai_is_able_to_break_down_doors")) {
+    return true;
+  }
+  if (ai_is_able_to_break_out_of_webs() && (what == "ai_is_able_to_break_out_of_webs")) {
+    return true;
+  }
+  if (ai_is_able_to_collect_keys() && (what == "ai_is_able_to_collect_keys")) {
+    return true;
+  }
+  if (ai_detect_secret_doors() && (what == "ai_detect_secret_doors")) {
+    return true;
+  }
+  if (ai_is_able_to_enchant_weapons() && (what == "ai_is_able_to_enchant_weapons")) {
+    return true;
+  }
+  if (ai_is_able_to_jump_distance() && (what == "ai_is_able_to_jump_distance")) {
+    return true;
+  }
+  if (ai_is_able_to_jump() && (what == "ai_is_able_to_jump")) {
+    return true;
+  }
+  if (ai_is_able_to_learn_skills() && (what == "ai_is_able_to_learn_skills")) {
+    return true;
+  }
+  if (ai_is_able_to_open_doors() && (what == "ai_is_able_to_open_doors")) {
+    return true;
+  }
+  if (ai_is_able_to_see_through_doors() && (what == "ai_is_able_to_see_through_doors")) {
+    return true;
+  }
+  if (ai_is_able_to_shove() && (what == "ai_is_able_to_shove")) {
+    return true;
+  }
+  if (ai_is_able_to_walk_through_walls() && (what == "ai_is_able_to_walk_through_walls")) {
+    return true;
+  }
+  if (ai_is_exit_finder() && (what == "ai_is_exit_finder")) {
+    return true;
+  }
+  if (ai_is_item_collector() && (what == "ai_is_item_collector")) {
+    return true;
+  }
+  if (ai_is_level_explorer() && (what == "ai_is_level_explorer")) {
     return true;
   }
   if (ai_resent_count() && (what == "ai_resent_count")) {
     return true;
   }
   if (ai_vision_distance() && (what == "ai_vision_distance")) {
+    return true;
+  }
+  if (ai_wanderer() && (what == "ai_wanderer")) {
+    return true;
+  }
+  if (attack_blood() && (what == "attack_blood")) {
     return true;
   }
   if (attack_eater() && (what == "attack_eater")) {
@@ -49,7 +106,7 @@ bool Thing::matches(const std::string &what)
   if (attack_meat() && (what == "attack_meat")) {
     return true;
   }
-  if (ai_is_able_to_shove() && (what == "ai_is_able_to_shove")) {
+  if (attack_undead() && (what == "attack_undead")) {
     return true;
   }
   if (blast_max_radius() && (what == "blast_max_radius")) {
@@ -58,22 +115,43 @@ bool Thing::matches(const std::string &what)
   if (blast_min_radius() && (what == "blast_min_radius")) {
     return true;
   }
-  if (damage_value_doubled_from_acid() && (what == "damage_value_doubled_from_acid")) {
-    return true;
-  }
-  if (damage_value_doubled_from_fire() && (what == "damage_value_doubled_from_fire")) {
-    return true;
-  }
-  if (damage_value_doubled_from_poison() && (what == "damage_value_doubled_from_poison")) {
-    return true;
-  }
-  if (damage_value_doubled_from_water() && (what == "damage_value_doubled_from_water")) {
-    return true;
-  }
   if (enchant_level() && (what == "enchant_level")) {
     return true;
   }
   if (enchant_max() && (what == "enchant_max")) {
+    return true;
+  }
+  if (environ_avoids_acid() && (what == "environ_avoids_acid")) {
+    return true;
+  }
+  if (environ_avoids_fire() && (what == "environ_avoids_fire")) {
+    return true;
+  }
+  if (environ_avoids_necrosis() && (what == "environ_avoids_necrosis")) {
+    return true;
+  }
+  if (environ_avoids_poison() && (what == "environ_avoids_poison")) {
+    return true;
+  }
+  if (environ_avoids_water() && (what == "environ_avoids_water")) {
+    return true;
+  }
+  if (environ_prefers_acid() && (what == "environ_prefers_acid")) {
+    return true;
+  }
+  if (environ_prefers_fire() && (what == "environ_prefers_fire")) {
+    return true;
+  }
+  if (environ_prefers_necrosis() && (what == "environ_prefers_necrosis")) {
+    return true;
+  }
+  if (environ_prefers_poison() && (what == "environ_prefers_poison")) {
+    return true;
+  }
+  if (environ_prefers_spiderwebs() && (what == "environ_prefers_spiderwebs")) {
+    return true;
+  }
+  if (environ_prefers_water() && (what == "environ_prefers_water")) {
     return true;
   }
   if (gfx_flickers() && (what == "gfx_flickers")) {
@@ -88,18 +166,6 @@ bool Thing::matches(const std::string &what)
   if (gfx_very_short_shadow_caster() && (what == "gfx_very_short_shadow_caster")) {
     return true;
   }
-  if (environ_dislikes_acid() && (what == "environ_dislikes_acid")) {
-    return true;
-  }
-  if (environ_dislikes_fire() && (what == "environ_dislikes_fire")) {
-    return true;
-  }
-  if (environ_dislikes_poison() && (what == "environ_dislikes_poison")) {
-    return true;
-  }
-  if (environ_dislikes_water() && (what == "environ_dislikes_water")) {
-    return true;
-  }
   if (is_able_to_change_levels() && (what == "is_able_to_change_levels")) {
     return true;
   }
@@ -109,13 +175,10 @@ bool Thing::matches(const std::string &what)
   if (is_able_to_fire_at() && (what == "is_able_to_fire_at")) {
     return true;
   }
-  if (ai_is_able_to_see_through_doors() && (what == "ai_is_able_to_see_through_doors")) {
+  if (is_able_to_see_in_the_dark() && (what == "is_able_to_see_in_the_dark")) {
     return true;
   }
-  if (ai_is_able_to_walk_through_walls() && (what == "ai_is_able_to_walk_through_walls")) {
-    return true;
-  }
-  if (environ_loves_acid() && (what == "environ_loves_acid")) {
+  if (is_able_to_tire() && (what == "is_able_to_tire")) {
     return true;
   }
   if (is_acid() && (what == "is_acid")) {
@@ -145,6 +208,15 @@ bool Thing::matches(const std::string &what)
   if (is_auto_collect_item() && (what == "is_auto_collect_item")) {
     return true;
   }
+  if (is_auto_equipped() && (what == "is_auto_equipped")) {
+    return true;
+  }
+  if (is_auto_throw() && (what == "is_auto_throw")) {
+    return true;
+  }
+  if (is_auto_use() && (what == "is_auto_use")) {
+    return true;
+  }
   if (is_bag_item_container() && (what == "is_bag_item_container")) {
     return true;
   }
@@ -163,6 +235,9 @@ bool Thing::matches(const std::string &what)
   if (is_bleeder() && (what == "is_bleeder")) {
     return true;
   }
+  if (is_blood_eater() && (what == "is_blood_eater")) {
+    return true;
+  }
   if (is_blood_splatter() && (what == "is_blood_splatter")) {
     return true;
   }
@@ -176,6 +251,9 @@ bool Thing::matches(const std::string &what)
     return true;
   }
   if (is_bridge() && (what == "is_bridge")) {
+    return true;
+  }
+  if (is_buff() && (what == "is_buff")) {
     return true;
   }
   if (is_burnable() && (what == "is_burnable")) {
@@ -214,10 +292,13 @@ bool Thing::matches(const std::string &what)
   if (is_critical_to_level() && (what == "is_critical_to_level")) {
     return true;
   }
+  if (is_cursor_can_hover_over() && (what == "is_cursor_can_hover_over")) {
+    return true;
+  }
   if (is_cursor_can_hover_over_x2_click() && (what == "is_cursor_can_hover_over_x2_click")) {
     return true;
   }
-  if (is_cursor_can_hover_over() && (what == "is_cursor_can_hover_over")) {
+  if (is_cursor_path_hazard_for_player() && (what == "is_cursor_path_hazard_for_player")) {
     return true;
   }
   if (is_cursor_path() && (what == "is_cursor_path")) {
@@ -230,6 +311,9 @@ bool Thing::matches(const std::string &what)
     return true;
   }
   if (is_dead_on_shove() && (what == "is_dead_on_shove")) {
+    return true;
+  }
+  if (is_debuff() && (what == "is_debuff")) {
     return true;
   }
   if (is_debug_path() && (what == "is_debug_path")) {
@@ -248,6 +332,12 @@ bool Thing::matches(const std::string &what)
     return true;
   }
   if (is_described_when_hovering_over() && (what == "is_described_when_hovering_over")) {
+    return true;
+  }
+  if (is_destroyed_on_hit_or_miss() && (what == "is_defeated _on_you_are_hit_or_miss")) {
+    return true;
+  }
+  if (is_destroyed_on_hitting() && (what == "is_defeated _on_you_are_hitting")) {
     return true;
   }
   if (is_dirt() && (what == "is_dirt")) {
@@ -280,9 +370,6 @@ bool Thing::matches(const std::string &what)
   if (is_explosion() && (what == "is_explosion")) {
     return true;
   }
-  if (is_cursor_path_hazard_for_player() && (what == "is_cursor_path_hazard_for_player")) {
-    return true;
-  }
   if (is_fearless() && (what == "is_fearless")) {
     return true;
   }
@@ -305,6 +392,12 @@ bool Thing::matches(const std::string &what)
     return true;
   }
   if (is_food() && (what == "is_food")) {
+    return true;
+  }
+  if (is_gfx_anim_synced_with_owner() && (what == "is_gfx_anim_synced_with_owner")) {
+    return true;
+  }
+  if (is_glass() && (what == "is_glass")) {
     return true;
   }
   if (is_gold() && (what == "is_gold")) {
@@ -337,10 +430,16 @@ bool Thing::matches(const std::string &what)
   if (is_item_carrier() && (what == "is_item_carrier")) {
     return true;
   }
-  if (ai_is_item_collector() && (what == "ai_is_item_collector")) {
+  if (is_item_eater() && (what == "is_item_eater")) {
     return true;
   }
-  if (is_item_eater() && (what == "is_item_eater")) {
+  if (is_item_magical_eater() && (what == "is_item_magical_eater")) {
+    return true;
+  }
+  if (is_item_magical() && (what == "is_item_magical")) {
+    return true;
+  }
+  if (is_item_organic() && (what == "is_item_organic")) {
     return true;
   }
   if (is_item() && (what == "is_item")) {
@@ -361,22 +460,7 @@ bool Thing::matches(const std::string &what)
   if (is_jelly() && (what == "is_jelly")) {
     return true;
   }
-  if (ai_is_able_to_jump_distance() && (what == "ai_is_able_to_jump_distance")) {
-    return true;
-  }
-  if (ai_is_able_to_jump() && (what == "ai_is_able_to_jump")) {
-    return true;
-  }
-  if (ai_is_able_to_collect_keys() && (what == "ai_is_able_to_collect_keys")) {
-    return true;
-  }
   if (is_key() && (what == "is_key")) {
-    return true;
-  }
-  if (is_destroyed_on_hit_or_miss() && (what == "is_defeated _on_you_are_hit_or_miss")) {
-    return true;
-  }
-  if (is_destroyed_on_hitting() && (what == "is_defeated _on_you_are_hitting")) {
     return true;
   }
   if (is_laser() && (what == "is_laser")) {
@@ -394,13 +478,13 @@ bool Thing::matches(const std::string &what)
   if (is_loggable() && (what == "is_loggable")) {
     return true;
   }
-  if (is_loggable() && (what == "is_loggable")) {
-    return true;
-  }
   if (is_meat_eater() && (what == "is_meat_eater")) {
     return true;
   }
   if (is_meat() && (what == "is_meat")) {
+    return true;
+  }
+  if (is_metal() && (what == "is_metal")) {
     return true;
   }
   if (is_minion_generator() && (what == "is_minion_generator")) {
@@ -415,19 +499,25 @@ bool Thing::matches(const std::string &what)
   if (is_moveable() && (what == "is_moveable")) {
     return true;
   }
+  if (is_msg() && (what == "is_msg")) {
+    return true;
+  }
+  if (is_necrotic() && (what == "is_necrotic")) {
+    return true;
+  }
+  if (is_no_tile() && (what == "is_no_tile")) {
+    return true;
+  }
   if (is_obs_destructable() && (what == "is_obs_destructable")) {
     return true;
   }
   if (is_obs_wall_or_door() && (what == "is_obs_wall_or_door")) {
     return true;
   }
-  if (is_msg() && (what == "is_msg")) {
-    return true;
-  }
-  if (is_no_tile() && (what == "is_no_tile")) {
-    return true;
-  }
   if (is_openable() && (what == "is_openable")) {
+    return true;
+  }
+  if (is_organic() && (what == "is_organic")) {
     return true;
   }
   if (is_player() && (what == "is_player")) {
@@ -451,10 +541,127 @@ bool Thing::matches(const std::string &what)
   if (is_resurrectable() && (what == "is_resurrectable")) {
     return true;
   }
+  if (is_ring() && (what == "is_ring")) {
+    return true;
+  }
   if (is_ripple() && (what == "is_ripple")) {
     return true;
   }
   if (is_rock() && (what == "is_rock")) {
+    return true;
+  }
+  if (is_rusty() && (what == "is_rusty")) {
+    return true;
+  }
+  if (is_secret_door() && (what == "is_secret_door")) {
+    return true;
+  }
+  if (is_sewer_wall() && (what == "is_sewer_wall")) {
+    return true;
+  }
+  if (is_shallow_water() && (what == "is_shallow_water")) {
+    return true;
+  }
+  if (is_shovable() && (what == "is_shovable")) {
+    return true;
+  }
+  if (is_skillstone() && (what == "is_skillstone")) {
+    return true;
+  }
+  if (is_skill() && (what == "is_skill")) {
+    return true;
+  }
+  if (is_smoke() && (what == "is_smoke")) {
+    return true;
+  }
+  if (is_soft_body() && (what == "is_soft_body")) {
+    return true;
+  }
+  if (is_spawner() && (what == "is_spawner")) {
+    return true;
+  }
+  if (is_spiderweb() && (what == "is_spiderweb")) {
+    return true;
+  }
+  if (is_sticky() && (what == "is_sticky")) {
+    return true;
+  }
+  if (is_stone() && (what == "is_stone")) {
+    return true;
+  }
+  if (is_sword() && (what == "is_sword")) {
+    return true;
+  }
+  if (is_target_auto_select() && (what == "is_target_auto_select")) {
+    return true;
+  }
+  if (is_throwable() && (what == "is_throwable")) {
+    return true;
+  }
+  if (is_tickable() && (what == "is_tickable")) {
+    return true;
+  }
+  if (is_tmp_thing() && (what == "is_tmp_thing")) {
+    return true;
+  }
+  if (is_torch() && (what == "is_torch")) {
+    return true;
+  }
+  if (is_treasure_class_a() && (what == "is_treasure_class_a")) {
+    return true;
+  }
+  if (is_treasure_class_b() && (what == "is_treasure_class_b")) {
+    return true;
+  }
+  if (is_treasure_class_c() && (what == "is_treasure_class_c")) {
+    return true;
+  }
+  if (is_treasure_type_chest() && (what == "is_treasure_type_chest")) {
+    return true;
+  }
+  if (is_treasure_type_eater() && (what == "is_treasure_type_eater")) {
+    return true;
+  }
+  if (is_treasure_type() && (what == "is_treasure_type")) {
+    return true;
+  }
+  if (is_undead() && (what == "is_undead")) {
+    return true;
+  }
+  if (is_usable() && (what == "is_usable")) {
+    return true;
+  }
+  if (is_used_when_thrown() && (what == "is_used_when_thrown")) {
+    return true;
+  }
+  if (is_very_combustible() && (what == "is_very_combustible")) {
+    return true;
+  }
+  if (is_wall_dungeon() && (what == "is_wall_dungeon")) {
+    return true;
+  }
+  if (is_wall() && (what == "is_wall")) {
+    return true;
+  }
+  if (is_wand() && (what == "is_wand")) {
+    return true;
+  }
+  if (is_weapon_equiper() && (what == "is_weapon_equiper")) {
+    return true;
+  }
+  if (is_weapon() && (what == "is_weapon")) {
+    return true;
+  }
+  if (is_wooden() && (what == "is_wooden")) {
+    return true;
+  }
+  if (minion_leash_distance() && (what == "minion_leash_distance")) {
+    return true;
+  }
+  if (minion_limit() && (what == "minion_limit")) {
+    return true;
+  }
+  if (range_max() && (what == "range_max")) {
     return true;
   }
   if (unused_flag10() && (what == "unused_flag10")) {
@@ -508,115 +715,16 @@ bool Thing::matches(const std::string &what)
   if (unused_flag25() && (what == "unused_flag25")) {
     return true;
   }
-  if (ai_aggression_level() && (what == "ai_aggression_level")) {
-    return true;
-  }
-  if (is_able_to_see_in_the_dark() && (what == "is_able_to_see_in_the_dark")) {
-    return true;
-  }
-  if (is_gfx_anim_synced_with_owner() && (what == "is_gfx_anim_synced_with_owner")) {
-    return true;
-  }
-  if (is_item_magical() && (what == "is_item_magical")) {
-    return true;
-  }
   if (unused_flag2() && (what == "unused_flag2")) {
     return true;
   }
   if (unused_flag30() && (what == "unused_flag30")) {
     return true;
   }
-  if (is_ring() && (what == "is_ring")) {
-    return true;
-  }
-  if (is_auto_equipped() && (what == "is_auto_equipped")) {
-    return true;
-  }
-  if (is_buff() && (what == "is_buff")) {
-    return true;
-  }
-  if (is_debuff() && (what == "is_debuff")) {
-    return true;
-  }
-  if (attack_undead() && (what == "attack_undead")) {
-    return true;
-  }
-  if (is_blood_eater() && (what == "is_blood_eater")) {
-    return true;
-  }
-  if (attack_blood() && (what == "attack_blood")) {
-    return true;
-  }
-  if (environ_hates_poison() && (what == "environ_hates_poison")) {
-    return true;
-  }
-  if (environ_hates_fire() && (what == "environ_hates_fire")) {
-    return true;
-  }
   if (unused_flag3() && (what == "unused_flag3")) {
     return true;
   }
-  if (environ_hates_water() && (what == "environ_hates_water")) {
-    return true;
-  }
-  if (environ_hates_acid() && (what == "environ_hates_acid")) {
-    return true;
-  }
-  if (ai_is_able_to_detect_secret_doors_when_close() && (what == "ai_is_able_to_detect_secret_doors_when_close")) {
-    return true;
-  }
-  if (ai_is_able_to_break_down_doors() && (what == "ai_is_able_to_break_down_doors")) {
-    return true;
-  }
-  if (ai_is_able_to_break_out_of_webs() && (what == "ai_is_able_to_break_out_of_webs")) {
-    return true;
-  }
-  if (ai_is_able_to_break_out_of_webs() && (what == "ai_is_able_to_break_out_of_webs")) {
-    return true;
-  }
-  if (ai_is_able_to_open_doors() && (what == "ai_is_able_to_open_doors")) {
-    return true;
-  }
-  if (ai_is_exit_finder() && (what == "ai_is_exit_finder")) {
-    return true;
-  }
-  if (ai_is_level_explorer() && (what == "ai_is_level_explorer")) {
-    return true;
-  }
-  if (is_rusty() && (what == "is_rusty")) {
-    return true;
-  }
   if (unused_flag4() && (what == "unused_flag4")) {
-    return true;
-  }
-  if (ai_is_able_to_learn_skills() && (what == "ai_is_able_to_learn_skills")) {
-    return true;
-  }
-  if (ai_is_able_to_enchant_weapons() && (what == "ai_is_able_to_enchant_weapons")) {
-    return true;
-  }
-  if (ai_is_able_to_attack_generators() && (what == "ai_is_able_to_attack_generators")) {
-    return true;
-  }
-  if (ai_wanderer() && (what == "ai_wanderer")) {
-    return true;
-  }
-  if (is_organic() && (what == "is_organic")) {
-    return true;
-  }
-  if (is_glass() && (what == "is_glass")) {
-    return true;
-  }
-  if (is_stone() && (what == "is_stone")) {
-    return true;
-  }
-  if (is_item_organic() && (what == "is_item_organic")) {
-    return true;
-  }
-  if (is_metal() && (what == "is_metal")) {
-    return true;
-  }
-  if (is_wooden() && (what == "is_wooden")) {
     return true;
   }
   if (unused_flag5() && (what == "unused_flag5")) {
@@ -634,138 +742,6 @@ bool Thing::matches(const std::string &what)
   if (unused_flag9() && (what == "unused_flag9")) {
     return true;
   }
-  if (is_secret_door() && (what == "is_secret_door")) {
-    return true;
-  }
-  if (is_sewer_wall() && (what == "is_sewer_wall")) {
-    return true;
-  }
-  if (is_shallow_water() && (what == "is_shallow_water")) {
-    return true;
-  }
-  if (is_shovable() && (what == "is_shovable")) {
-    return true;
-  }
-  if (is_skillstone() && (what == "is_skillstone")) {
-    return true;
-  }
-  if (is_skill() && (what == "is_skill")) {
-    return true;
-  }
-  if (is_smoke() && (what == "is_smoke")) {
-    return true;
-  }
-  if (is_soft_body() && (what == "is_soft_body")) {
-    return true;
-  }
-  if (is_spawner() && (what == "is_spawner")) {
-    return true;
-  }
-  if (is_spiderweb() && (what == "is_spiderweb")) {
-    return true;
-  }
-  if (is_able_to_tire() && (what == "is_able_to_tire")) {
-    return true;
-  }
-  if (is_sticky() && (what == "is_sticky")) {
-    return true;
-  }
-  if (is_sword() && (what == "is_sword")) {
-    return true;
-  }
-  if (is_target_auto_select() && (what == "is_target_auto_select")) {
-    return true;
-  }
-  if (is_throwable() && (what == "is_throwable")) {
-    return true;
-  }
-  if (is_auto_throw() && (what == "is_auto_throw")) {
-    return true;
-  }
-  if (is_tickable() && (what == "is_tickable")) {
-    return true;
-  }
-  if (is_tmp_thing() && (what == "is_tmp_thing")) {
-    return true;
-  }
-  if (is_torch() && (what == "is_torch")) {
-    return true;
-  }
-  if (is_treasure_class_a() && (what == "is_treasure_class_a")) {
-    return true;
-  }
-  if (is_treasure_class_b() && (what == "is_treasure_class_b")) {
-    return true;
-  }
-  if (is_treasure_class_c() && (what == "is_treasure_class_c")) {
-    return true;
-  }
-  if (is_treasure_type_chest() && (what == "is_treasure_type_chest")) {
-    return true;
-  }
-  if (is_treasure_type_eater() && (what == "is_treasure_type_eater")) {
-    return true;
-  }
-  if (is_treasure_type() && (what == "is_treasure_type")) {
-    return true;
-  }
-  if (is_undead() && (what == "is_undead")) {
-    return true;
-  }
-  if (is_usable() && (what == "is_usable")) {
-    return true;
-  }
-  if (is_auto_use() && (what == "is_auto_use")) {
-    return true;
-  }
-  if (is_used_when_thrown() && (what == "is_used_when_thrown")) {
-    return true;
-  }
-  if (is_very_combustible() && (what == "is_very_combustible")) {
-    return true;
-  }
-  if (is_wall_dungeon() && (what == "is_wall_dungeon")) {
-    return true;
-  }
-  if (is_wall() && (what == "is_wall")) {
-    return true;
-  }
-  if (is_item_magical_eater() && (what == "is_item_magical_eater")) {
-    return true;
-  }
-  if (is_wand() && (what == "is_wand")) {
-    return true;
-  }
-  if (is_ring() && (what == "is_ring")) {
-    return true;
-  }
-  if (environ_loves_water() && (what == "environ_loves_water")) {
-    return true;
-  }
-  if (is_weapon() && (what == "is_weapon")) {
-    return true;
-  }
-  if (is_weapon_equiper() && (what == "is_weapon_equiper")) {
-    return true;
-  }
-  if (environ_loves_fire() && (what == "environ_loves_fire")) {
-    return true;
-  }
-  if (environ_loves_poison() && (what == "environ_loves_poison")) {
-    return true;
-  }
-  if (environ_loves_spiderwebs() && (what == "environ_loves_spiderwebs")) {
-    return true;
-  }
-  if (minion_leash_distance() && (what == "minion_leash_distance")) {
-    return true;
-  }
-  if (minion_limit() && (what == "minion_limit")) {
-    return true;
-  }
-  if (range_max() && (what == "range_max")) {
-    return true;
-  }
 
   //
   // Any water type
@@ -779,14 +755,71 @@ bool Thing::matches(const std::string &what)
 
 std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
 {
+  if (what == "ai_aggression_level") {
+    return &Thing::ai_aggression_level;
+  }
   if (what == "ai_avoid_distance") {
     return &Thing::ai_avoid_distance;
+  }
+  if (what == "ai_is_able_to_attack_generators") {
+    return &Thing::ai_is_able_to_attack_generators;
+  }
+  if (what == "ai_is_able_to_break_down_doors") {
+    return &Thing::ai_is_able_to_break_down_doors;
+  }
+  if (what == "ai_is_able_to_break_out_of_webs") {
+    return &Thing::ai_is_able_to_break_out_of_webs;
+  }
+  if (what == "ai_is_able_to_collect_keys") {
+    return &Thing::ai_is_able_to_collect_keys;
+  }
+  if (what == "ai_detect_secret_doors") {
+    return &Thing::ai_detect_secret_doors;
+  }
+  if (what == "ai_is_able_to_enchant_weapons") {
+    return &Thing::ai_is_able_to_enchant_weapons;
+  }
+  if (what == "ai_is_able_to_jump_distance") {
+    return &Thing::ai_is_able_to_jump_distance;
+  }
+  if (what == "ai_is_able_to_jump") {
+    return &Thing::ai_is_able_to_jump;
+  }
+  if (what == "ai_is_able_to_learn_skills") {
+    return &Thing::ai_is_able_to_learn_skills;
+  }
+  if (what == "ai_is_able_to_open_doors") {
+    return &Thing::ai_is_able_to_open_doors;
+  }
+  if (what == "ai_is_able_to_see_through_doors") {
+    return &Thing::ai_is_able_to_see_through_doors;
+  }
+  if (what == "ai_is_able_to_shove") {
+    return &Thing::ai_is_able_to_shove;
+  }
+  if (what == "ai_is_able_to_walk_through_walls") {
+    return &Thing::ai_is_able_to_walk_through_walls;
+  }
+  if (what == "ai_is_exit_finder") {
+    return &Thing::ai_is_exit_finder;
+  }
+  if (what == "ai_is_item_collector") {
+    return &Thing::ai_is_item_collector;
+  }
+  if (what == "ai_is_level_explorer") {
+    return &Thing::ai_is_level_explorer;
   }
   if (what == "ai_resent_count") {
     return &Thing::ai_resent_count;
   }
   if (what == "ai_vision_distance") {
     return &Thing::ai_vision_distance;
+  }
+  if (what == "ai_wanderer") {
+    return &Thing::ai_wanderer;
+  }
+  if (what == "attack_blood") {
+    return &Thing::attack_blood;
   }
   if (what == "attack_eater") {
     return &Thing::attack_eater;
@@ -803,8 +836,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "attack_meat") {
     return &Thing::attack_meat;
   }
-  if (what == "ai_is_able_to_shove") {
-    return &Thing::ai_is_able_to_shove;
+  if (what == "attack_undead") {
+    return &Thing::attack_undead;
   }
   if (what == "blast_max_radius") {
     return &Thing::blast_max_radius;
@@ -812,23 +845,44 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "blast_min_radius") {
     return &Thing::blast_min_radius;
   }
-  if (what == "damage_value_doubled_from_acid") {
-    return &Thing::damage_value_doubled_from_acid;
-  }
-  if (what == "damage_value_doubled_from_fire") {
-    return &Thing::damage_value_doubled_from_fire;
-  }
-  if (what == "damage_value_doubled_from_poison") {
-    return &Thing::damage_value_doubled_from_poison;
-  }
-  if (what == "damage_value_doubled_from_water") {
-    return &Thing::damage_value_doubled_from_water;
-  }
   if (what == "enchant_level") {
     return &Thing::enchant_level;
   }
   if (what == "enchant_max") {
     return &Thing::enchant_max;
+  }
+  if (what == "environ_avoids_acid") {
+    return &Thing::environ_avoids_acid;
+  }
+  if (what == "environ_avoids_fire") {
+    return &Thing::environ_avoids_fire;
+  }
+  if (what == "environ_avoids_necrosis") {
+    return &Thing::environ_avoids_necrosis;
+  }
+  if (what == "environ_avoids_poison") {
+    return &Thing::environ_avoids_poison;
+  }
+  if (what == "environ_avoids_water") {
+    return &Thing::environ_avoids_water;
+  }
+  if (what == "environ_prefers_acid") {
+    return &Thing::environ_prefers_acid;
+  }
+  if (what == "environ_prefers_fire") {
+    return &Thing::environ_prefers_fire;
+  }
+  if (what == "environ_prefers_necrosis") {
+    return &Thing::environ_prefers_necrosis;
+  }
+  if (what == "environ_prefers_poison") {
+    return &Thing::environ_prefers_poison;
+  }
+  if (what == "environ_prefers_spiderwebs") {
+    return &Thing::environ_prefers_spiderwebs;
+  }
+  if (what == "environ_prefers_water") {
+    return &Thing::environ_prefers_water;
   }
   if (what == "gfx_flickers") {
     return &Thing::gfx_flickers;
@@ -842,18 +896,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "gfx_very_short_shadow_caster") {
     return &Thing::gfx_very_short_shadow_caster;
   }
-  if (what == "environ_dislikes_acid") {
-    return &Thing::environ_dislikes_acid;
-  }
-  if (what == "environ_dislikes_fire") {
-    return &Thing::environ_dislikes_fire;
-  }
-  if (what == "environ_dislikes_poison") {
-    return &Thing::environ_dislikes_poison;
-  }
-  if (what == "environ_dislikes_water") {
-    return &Thing::environ_dislikes_water;
-  }
   if (what == "is_able_to_change_levels") {
     return &Thing::is_able_to_change_levels;
   }
@@ -863,14 +905,11 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_able_to_fire_at") {
     return &Thing::is_able_to_fire_at;
   }
-  if (what == "ai_is_able_to_see_through_doors") {
-    return &Thing::ai_is_able_to_see_through_doors;
+  if (what == "is_able_to_see_in_the_dark") {
+    return &Thing::is_able_to_see_in_the_dark;
   }
-  if (what == "ai_is_able_to_walk_through_walls") {
-    return &Thing::ai_is_able_to_walk_through_walls;
-  }
-  if (what == "environ_loves_acid") {
-    return &Thing::environ_loves_acid;
+  if (what == "is_able_to_tire") {
+    return &Thing::is_able_to_tire;
   }
   if (what == "is_acid") {
     return &Thing::is_acid;
@@ -899,6 +938,15 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_auto_collect_item") {
     return &Thing::is_auto_collect_item;
   }
+  if (what == "is_auto_equipped") {
+    return &Thing::is_auto_equipped;
+  }
+  if (what == "is_auto_throw") {
+    return &Thing::is_auto_throw;
+  }
+  if (what == "is_auto_use") {
+    return &Thing::is_auto_use;
+  }
   if (what == "is_bag_item_container") {
     return &Thing::is_bag_item_container;
   }
@@ -917,6 +965,9 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_bleeder") {
     return &Thing::is_bleeder;
   }
+  if (what == "is_blood_eater") {
+    return &Thing::is_blood_eater;
+  }
   if (what == "is_blood") {
     return &Thing::is_blood;
   }
@@ -931,6 +982,9 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   }
   if (what == "is_bridge") {
     return &Thing::is_bridge;
+  }
+  if (what == "is_buff") {
+    return &Thing::is_buff;
   }
   if (what == "is_burnable") {
     return &Thing::is_burnable;
@@ -968,11 +1022,14 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_critical_to_level") {
     return &Thing::is_critical_to_level;
   }
+  if (what == "is_cursor_can_hover_over") {
+    return &Thing::is_cursor_can_hover_over;
+  }
   if (what == "is_cursor_can_hover_over_x2_click") {
     return &Thing::is_cursor_can_hover_over_x2_click;
   }
-  if (what == "is_cursor_can_hover_over") {
-    return &Thing::is_cursor_can_hover_over;
+  if (what == "is_cursor_path_hazard_for_player") {
+    return &Thing::is_cursor_path_hazard_for_player;
   }
   if (what == "is_cursor_path") {
     return &Thing::is_cursor_path;
@@ -986,6 +1043,9 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_dead_on_shove") {
     return &Thing::is_dead_on_shove;
   }
+  if (what == "is_debuff") {
+    return &Thing::is_debuff;
+  }
   if (what == "is_debug_path") {
     return &Thing::is_debug_path;
   }
@@ -994,6 +1054,12 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   }
   if (what == "is_deep_water") {
     return &Thing::is_deep_water;
+  }
+  if (what == "is_defeated _on_you_are_hit_or_miss") {
+    return &Thing::is_destroyed_on_hit_or_miss;
+  }
+  if (what == "is_defeated _on_you_are_hitting") {
+    return &Thing::is_destroyed_on_hitting;
   }
   if (what == "is_descend_dungeon") {
     return &Thing::is_descend_dungeon;
@@ -1034,9 +1100,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_explosion") {
     return &Thing::is_explosion;
   }
-  if (what == "is_cursor_path_hazard_for_player") {
-    return &Thing::is_cursor_path_hazard_for_player;
-  }
   if (what == "is_fearless") {
     return &Thing::is_fearless;
   }
@@ -1060,6 +1123,12 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   }
   if (what == "is_food") {
     return &Thing::is_food;
+  }
+  if (what == "is_gfx_anim_synced_with_owner") {
+    return &Thing::is_gfx_anim_synced_with_owner;
+  }
+  if (what == "is_glass") {
+    return &Thing::is_glass;
   }
   if (what == "is_gold") {
     return &Thing::is_gold;
@@ -1091,11 +1160,17 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_item_carrier") {
     return &Thing::is_item_carrier;
   }
-  if (what == "ai_is_item_collector") {
-    return &Thing::ai_is_item_collector;
-  }
   if (what == "is_item_eater") {
     return &Thing::is_item_eater;
+  }
+  if (what == "is_item_magical_eater") {
+    return &Thing::is_item_magical_eater;
+  }
+  if (what == "is_item_magical") {
+    return &Thing::is_item_magical;
+  }
+  if (what == "is_item_organic") {
+    return &Thing::is_item_organic;
   }
   if (what == "is_item") {
     return &Thing::is_item;
@@ -1115,23 +1190,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_jelly") {
     return &Thing::is_jelly;
   }
-  if (what == "ai_is_able_to_jump_distance") {
-    return &Thing::ai_is_able_to_jump_distance;
-  }
-  if (what == "ai_is_able_to_jump") {
-    return &Thing::ai_is_able_to_jump;
-  }
-  if (what == "ai_is_able_to_collect_keys") {
-    return &Thing::ai_is_able_to_collect_keys;
-  }
   if (what == "is_key") {
     return &Thing::is_key;
-  }
-  if (what == "is_defeated _on_you_are_hit_or_miss") {
-    return &Thing::is_destroyed_on_hit_or_miss;
-  }
-  if (what == "is_defeated _on_you_are_hitting") {
-    return &Thing::is_destroyed_on_hitting;
   }
   if (what == "is_laser") {
     return &Thing::is_laser;
@@ -1148,14 +1208,14 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_loggable") {
     return &Thing::is_loggable;
   }
-  if (what == "is_loggable") {
-    return &Thing::is_loggable;
-  }
   if (what == "is_meat_eater") {
     return &Thing::is_meat_eater;
   }
   if (what == "is_meat") {
     return &Thing::is_meat;
+  }
+  if (what == "is_metal") {
+    return &Thing::is_metal;
   }
   if (what == "is_minion_generator") {
     return &Thing::is_minion_generator;
@@ -1169,20 +1229,26 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_moveable") {
     return &Thing::is_moveable;
   }
+  if (what == "is_msg") {
+    return &Thing::is_msg;
+  }
+  if (what == "is_necrotic") {
+    return &Thing::is_necrotic;
+  }
+  if (what == "is_no_tile") {
+    return &Thing::is_no_tile;
+  }
   if (what == "is_obs_destructable") {
     return &Thing::is_obs_destructable;
   }
   if (what == "is_obs_wall_or_door") {
     return &Thing::is_obs_wall_or_door;
   }
-  if (what == "is_msg") {
-    return &Thing::is_msg;
-  }
-  if (what == "is_no_tile") {
-    return &Thing::is_no_tile;
-  }
   if (what == "is_openable") {
     return &Thing::is_openable;
+  }
+  if (what == "is_organic") {
+    return &Thing::is_organic;
   }
   if (what == "is_player") {
     return &Thing::is_player;
@@ -1205,11 +1271,128 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_resurrectable") {
     return &Thing::is_resurrectable;
   }
+  if (what == "is_ring") {
+    return &Thing::is_ring;
+  }
   if (what == "is_ripple") {
     return &Thing::is_ripple;
   }
   if (what == "is_rock") {
     return &Thing::is_rock;
+  }
+  if (what == "is_rusty") {
+    return &Thing::is_rusty;
+  }
+  if (what == "is_secret_door") {
+    return &Thing::is_secret_door;
+  }
+  if (what == "is_sewer_wall") {
+    return &Thing::is_sewer_wall;
+  }
+  if (what == "is_shallow_water") {
+    return &Thing::is_shallow_water;
+  }
+  if (what == "is_shovable") {
+    return &Thing::is_shovable;
+  }
+  if (what == "is_skill") {
+    return &Thing::is_skill;
+  }
+  if (what == "is_skillstone") {
+    return &Thing::is_skillstone;
+  }
+  if (what == "is_smoke") {
+    return &Thing::is_smoke;
+  }
+  if (what == "is_soft_body") {
+    return &Thing::is_soft_body;
+  }
+  if (what == "is_spawner") {
+    return &Thing::is_spawner;
+  }
+  if (what == "is_spiderweb") {
+    return &Thing::is_spiderweb;
+  }
+  if (what == "is_sticky") {
+    return &Thing::is_sticky;
+  }
+  if (what == "is_stone") {
+    return &Thing::is_stone;
+  }
+  if (what == "is_sword") {
+    return &Thing::is_sword;
+  }
+  if (what == "is_target_auto_select") {
+    return &Thing::is_target_auto_select;
+  }
+  if (what == "is_throwable") {
+    return &Thing::is_throwable;
+  }
+  if (what == "is_tickable") {
+    return &Thing::is_tickable;
+  }
+  if (what == "is_tmp_thing") {
+    return &Thing::is_tmp_thing;
+  }
+  if (what == "is_torch") {
+    return &Thing::is_torch;
+  }
+  if (what == "is_treasure_class_a") {
+    return &Thing::is_treasure_class_a;
+  }
+  if (what == "is_treasure_class_b") {
+    return &Thing::is_treasure_class_b;
+  }
+  if (what == "is_treasure_class_c") {
+    return &Thing::is_treasure_class_c;
+  }
+  if (what == "is_treasure_type_chest") {
+    return &Thing::is_treasure_type_chest;
+  }
+  if (what == "is_treasure_type_eater") {
+    return &Thing::is_treasure_type_eater;
+  }
+  if (what == "is_treasure_type") {
+    return &Thing::is_treasure_type;
+  }
+  if (what == "is_undead") {
+    return &Thing::is_undead;
+  }
+  if (what == "is_usable") {
+    return &Thing::is_usable;
+  }
+  if (what == "is_used_when_thrown") {
+    return &Thing::is_used_when_thrown;
+  }
+  if (what == "is_very_combustible") {
+    return &Thing::is_very_combustible;
+  }
+  if (what == "is_wall_dungeon") {
+    return &Thing::is_wall_dungeon;
+  }
+  if (what == "is_wall") {
+    return &Thing::is_wall;
+  }
+  if (what == "is_wand") {
+    return &Thing::is_wand;
+  }
+  if (what == "is_water") {
+    return &Thing::is_water;
+  }
+  if (what == "is_weapon_equiper") {
+    return &Thing::is_weapon_equiper;
+  }
+  if (what == "is_weapon") {
+    return &Thing::is_weapon;
+  }
+  if (what == "is_wooden") {
+    return &Thing::is_wooden;
+  }
+  if (what == "minion_leash_distance") {
+    return &Thing::minion_leash_distance;
+  }
+  if (what == "minion_limit") {
+    return &Thing::minion_limit;
   }
   if (what == "unused_flag10") {
     return &Thing::unused_flag10;
@@ -1262,116 +1445,17 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag25") {
     return &Thing::unused_flag25;
   }
-  if (what == "ai_aggression_level") {
-    return &Thing::ai_aggression_level;
-  }
-  if (what == "is_able_to_see_in_the_dark") {
-    return &Thing::is_able_to_see_in_the_dark;
-  }
-  if (what == "is_gfx_anim_synced_with_owner") {
-    return &Thing::is_gfx_anim_synced_with_owner;
-  }
-  if (what == "is_item_magical") {
-    return &Thing::is_item_magical;
-  }
   if (what == "unused_flag2") {
     return &Thing::unused_flag2;
   }
   if (what == "unused_flag30") {
     return &Thing::unused_flag30;
   }
-  if (what == "is_ring") {
-    return &Thing::is_ring;
-  }
-  if (what == "is_auto_equipped") {
-    return &Thing::is_auto_equipped;
-  }
-  if (what == "is_buff") {
-    return &Thing::is_buff;
-  }
-  if (what == "is_debuff") {
-    return &Thing::is_debuff;
-  }
-  if (what == "attack_undead") {
-    return &Thing::attack_undead;
-  }
-  if (what == "is_blood_eater") {
-    return &Thing::is_blood_eater;
-  }
-  if (what == "attack_blood") {
-    return &Thing::attack_blood;
-  }
-  if (what == "environ_hates_poison") {
-    return &Thing::environ_hates_poison;
-  }
-  if (what == "environ_hates_fire") {
-    return &Thing::environ_hates_fire;
-  }
   if (what == "unused_flag3") {
     return &Thing::unused_flag3;
   }
-  if (what == "environ_hates_water") {
-    return &Thing::environ_hates_water;
-  }
-  if (what == "environ_hates_acid") {
-    return &Thing::environ_hates_acid;
-  }
-  if (what == "ai_is_able_to_detect_secret_doors_when_close") {
-    return &Thing::ai_is_able_to_detect_secret_doors_when_close;
-  }
-  if (what == "ai_is_able_to_break_down_doors") {
-    return &Thing::ai_is_able_to_break_down_doors;
-  }
-  if (what == "ai_is_able_to_break_out_of_webs") {
-    return &Thing::ai_is_able_to_break_out_of_webs;
-  }
-  if (what == "ai_is_able_to_break_out_of_webs") {
-    return &Thing::ai_is_able_to_break_out_of_webs;
-  }
-  if (what == "ai_is_able_to_open_doors") {
-    return &Thing::ai_is_able_to_open_doors;
-  }
-  if (what == "ai_is_exit_finder") {
-    return &Thing::ai_is_exit_finder;
-  }
-  if (what == "ai_is_level_explorer") {
-    return &Thing::ai_is_level_explorer;
-  }
-  if (what == "is_rusty") {
-    return &Thing::is_rusty;
-  }
   if (what == "unused_flag4") {
     return &Thing::unused_flag4;
-  }
-  if (what == "ai_is_able_to_learn_skills") {
-    return &Thing::ai_is_able_to_learn_skills;
-  }
-  if (what == "ai_is_able_to_enchant_weapons") {
-    return &Thing::ai_is_able_to_enchant_weapons;
-  }
-  if (what == "ai_is_able_to_attack_generators") {
-    return &Thing::ai_is_able_to_attack_generators;
-  }
-  if (what == "ai_wanderer") {
-    return &Thing::ai_wanderer;
-  }
-  if (what == "is_organic") {
-    return &Thing::is_organic;
-  }
-  if (what == "is_glass") {
-    return &Thing::is_glass;
-  }
-  if (what == "is_stone") {
-    return &Thing::is_stone;
-  }
-  if (what == "is_item_organic") {
-    return &Thing::is_item_organic;
-  }
-  if (what == "is_metal") {
-    return &Thing::is_metal;
-  }
-  if (what == "is_wooden") {
-    return &Thing::is_wooden;
   }
   if (what == "unused_flag5") {
     return &Thing::unused_flag5;
@@ -1387,138 +1471,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   }
   if (what == "unused_flag9") {
     return &Thing::unused_flag9;
-  }
-  if (what == "is_secret_door") {
-    return &Thing::is_secret_door;
-  }
-  if (what == "is_sewer_wall") {
-    return &Thing::is_sewer_wall;
-  }
-  if (what == "is_shallow_water") {
-    return &Thing::is_shallow_water;
-  }
-  if (what == "is_shovable") {
-    return &Thing::is_shovable;
-  }
-  if (what == "is_skill") {
-    return &Thing::is_skill;
-  }
-  if (what == "is_skillstone") {
-    return &Thing::is_skillstone;
-  }
-  if (what == "is_smoke") {
-    return &Thing::is_smoke;
-  }
-  if (what == "is_soft_body") {
-    return &Thing::is_soft_body;
-  }
-  if (what == "is_spawner") {
-    return &Thing::is_spawner;
-  }
-  if (what == "is_spiderweb") {
-    return &Thing::is_spiderweb;
-  }
-  if (what == "is_able_to_tire") {
-    return &Thing::is_able_to_tire;
-  }
-  if (what == "is_sticky") {
-    return &Thing::is_sticky;
-  }
-  if (what == "is_sword") {
-    return &Thing::is_sword;
-  }
-  if (what == "is_target_auto_select") {
-    return &Thing::is_target_auto_select;
-  }
-  if (what == "is_throwable") {
-    return &Thing::is_throwable;
-  }
-  if (what == "is_auto_throw") {
-    return &Thing::is_auto_throw;
-  }
-  if (what == "is_tickable") {
-    return &Thing::is_tickable;
-  }
-  if (what == "is_tmp_thing") {
-    return &Thing::is_tmp_thing;
-  }
-  if (what == "is_torch") {
-    return &Thing::is_torch;
-  }
-  if (what == "is_treasure_class_a") {
-    return &Thing::is_treasure_class_a;
-  }
-  if (what == "is_treasure_class_b") {
-    return &Thing::is_treasure_class_b;
-  }
-  if (what == "is_treasure_class_c") {
-    return &Thing::is_treasure_class_c;
-  }
-  if (what == "is_treasure_type_chest") {
-    return &Thing::is_treasure_type_chest;
-  }
-  if (what == "is_treasure_type_eater") {
-    return &Thing::is_treasure_type_eater;
-  }
-  if (what == "is_treasure_type") {
-    return &Thing::is_treasure_type;
-  }
-  if (what == "is_undead") {
-    return &Thing::is_undead;
-  }
-  if (what == "is_usable") {
-    return &Thing::is_usable;
-  }
-  if (what == "is_auto_use") {
-    return &Thing::is_auto_use;
-  }
-  if (what == "is_used_when_thrown") {
-    return &Thing::is_used_when_thrown;
-  }
-  if (what == "is_very_combustible") {
-    return &Thing::is_very_combustible;
-  }
-  if (what == "is_wall_dungeon") {
-    return &Thing::is_wall_dungeon;
-  }
-  if (what == "is_wall") {
-    return &Thing::is_wall;
-  }
-  if (what == "is_item_magical_eater") {
-    return &Thing::is_item_magical_eater;
-  }
-  if (what == "is_wand") {
-    return &Thing::is_wand;
-  }
-  if (what == "is_ring") {
-    return &Thing::is_ring;
-  }
-  if (what == "environ_loves_water") {
-    return &Thing::environ_loves_water;
-  }
-  if (what == "is_water") {
-    return &Thing::is_water;
-  }
-  if (what == "is_weapon") {
-    return &Thing::is_weapon;
-  }
-  if (what == "is_weapon_equiper") {
-    return &Thing::is_weapon_equiper;
-  }
-  if (what == "environ_loves_fire") {
-    return &Thing::environ_loves_fire;
-  }
-  if (what == "environ_loves_poison") {
-    return &Thing::environ_loves_poison;
-  }
-  if (what == "environ_loves_spiderwebs") {
-    return &Thing::environ_loves_spiderwebs;
-  }
-  if (what == "minion_leash_distance") {
-    return &Thing::minion_leash_distance;
-  }
-  if (what == "minion_limit") {
-    return &Thing::minion_limit;
   }
   if (what == "range_max") {
     return &Thing::range_max;

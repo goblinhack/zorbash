@@ -19,7 +19,7 @@
 //
 void Thing::on_you_are_hit(Thingp hitter,      // an arrow / monst /...
                            Thingp real_hitter, // who fired the arrow?
-                           bool crit, bool bite, bool poison, int damage)
+                           bool crit, bool bite, bool poison, bool necrosis, int damage)
 {
   TRACE_AND_INDENT();
   auto on_you_are_hit = tp()->on_you_are_hit_do();
@@ -36,15 +36,15 @@ void Thing::on_you_are_hit(Thingp hitter,      // an arrow / monst /...
       fn = fn.replace(found, 2, "");
     }
 
-    dbg("Call %s.%s(%s, %s, %s, crit=%d, bite=%d, poison=%d damage=%d)", mod.c_str(), fn.c_str(), to_string().c_str(),
-        hitter->to_string().c_str(), real_hitter->to_string().c_str(), crit, bite, poison, damage);
+    dbg("Call %s.%s(%s, %s, %s, crit=%d, bite=%d, damage=%d)", mod.c_str(), fn.c_str(), to_string().c_str(),
+        hitter->to_string().c_str(), real_hitter->to_string().c_str(), crit, bite, damage);
 
     //
     // Warning cannot handle negative values here for damage
     //
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, real_hitter->id.id, (unsigned int) mid_at.x,
                     (unsigned int) mid_at.y, (unsigned int) crit, (unsigned int) bite, (unsigned int) poison,
-                    (unsigned int) damage);
+                    (unsigned int) necrosis, (unsigned int) damage);
   } else {
     ERR("Bad on_you_are_hit call [%s] expected mod:function, got %d elems", on_you_are_hit.c_str(),
         (int) on_you_are_hit.size());
@@ -108,7 +108,7 @@ void Thing::on_you_bite_attack(void)
 
 int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
                          Thingp real_hitter, // who fired the arrow?
-                         bool crit, bool bite, bool poison, int damage)
+                         bool crit, bool bite, bool poison, bool necrosis, int damage)
 {
   TRACE_AND_INDENT();
   if (! hitter) {
@@ -130,34 +130,35 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     damage *= 2;
   }
 
-  if (environ_dislikes_fire()) {
-    if (real_hitter->is_fire() || real_hitter->is_lava()) {
-      if (damage_value_doubled_from_fire()) {
-        damage *= 2;
-        dbg("Double damage from fire");
-      }
+  if (real_hitter->is_fire() || real_hitter->is_lava()) {
+    if (damage_value_doubled_from_fire()) {
+      damage *= 2;
+      dbg("Double damage from fire");
     }
   }
 
-  if (environ_dislikes_acid()) {
-    if (real_hitter->is_acid()) {
-      if (damage_value_doubled_from_acid()) {
-        damage *= 2;
-        dbg("Double damage from acid");
-      }
+  if (real_hitter->is_acid()) {
+    if (damage_value_doubled_from_acid()) {
+      damage *= 2;
+      dbg("Double damage from acid");
     }
   }
 
-  if (environ_dislikes_poison()) {
-    if (real_hitter->is_poisonous()) {
-      if (damage_value_doubled_from_poison()) {
-        damage *= 2;
-        dbg("Double damage from poison");
-      }
+  if (real_hitter->is_poisonous()) {
+    if (damage_value_doubled_from_poison()) {
+      damage *= 2;
+      dbg("Double damage from poison");
     }
   }
 
-  if (environ_dislikes_water()) {
+  if (real_hitter->is_necrotic()) {
+    if (damage_value_doubled_from_necrosis()) {
+      damage *= 2;
+      dbg("Double damage from necrosis");
+    }
+  }
+
+  if (environ_avoids_water()) {
     if (real_hitter->is_shallow_water() || real_hitter->is_deep_water()) {
       if (damage_value_doubled_from_water()) {
         damage *= 2;
@@ -197,7 +198,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
   //
   // Check for immunity
   //
-  if (environ_loves_fire()) {
+  if (environ_prefers_fire()) {
     if (hitter->is_fire() || real_hitter->is_fire()) {
       if (is_player()) {
         TOPCON("You bask in the fire!");
@@ -208,8 +209,8 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     }
   }
 
-  if (bite || poison) {
-    if (environ_loves_poison()) {
+  if (poison) {
+    if (environ_prefers_poison()) {
       if (hitter->is_poisonous() || real_hitter->is_poisonous()) {
         if (is_player()) {
           TOPCON("You drink in the poison!");
@@ -221,11 +222,37 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       }
     } else if (poison) {
       if (is_player()) {
-        incr_poison(poison);
+        incr_poisoned_amount(poison);
         TOPCON("%%fg=yellow$You are poisoned for %d damage!%%fg=reset$", poison);
       } else if (is_alive_monst() && real_hitter->is_player()) {
-        incr_poison(poison);
+        incr_poisoned_amount(poison);
         TOPCON("%%fg=yellow$You poison %s for %d damage!%%fg=reset$", text_the().c_str(), poison);
+      }
+    }
+  }
+
+  if (necrosis) {
+    if (environ_prefers_necrosis()) {
+      if (hitter->is_necrotic() || real_hitter->is_necrotic()) {
+        if (is_player()) {
+          TOPCON("You resist the necrotic touch!");
+        } else if (real_hitter->is_player()) {
+          TOPCON("%s laps up the rotting energy!", text_The().c_str());
+        }
+        incr_stat_constitution(necrosis);
+        incr_stat_strength(necrosis);
+        return false;
+      }
+    } else if (necrosis) {
+      if (is_player()) {
+        TOPCON("%%fg=yellow$Your skin is rotting for %d permanent damage!%%fg=reset$", necrosis);
+        decr_stat_constitution(necrosis);
+        decr_stat_strength(necrosis);
+      } else if (is_alive_monst() && real_hitter->is_player()) {
+        TOPCON("%%fg=yellow$You rotting hand touches %s for %d permanent damage!%%fg=reset$", text_the().c_str(),
+               necrosis);
+        decr_stat_constitution(necrosis);
+        decr_stat_strength(necrosis);
       }
     }
   }
@@ -592,7 +619,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
   // Python callback
   //
   if (! is_dead) {
-    on_you_are_hit(hitter, real_hitter, crit, bite, poison, damage);
+    on_you_are_hit(hitter, real_hitter, crit, bite, poison, necrosis, damage);
   }
 
   //
@@ -608,13 +635,15 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
 //
 // Returns true on the target being dead.
 //
-int Thing::is_hit(Thingp hitter, bool crit, bool bite, bool poison, int damage)
+int Thing::is_hit(Thingp hitter, bool crit, bool bite, bool poison, bool necrosis, int damage)
 {
   TRACE_AND_INDENT();
   if (bite) {
     IF_DEBUG2 { hitter->log("Possible hit %s for %d bite damage", to_string().c_str(), damage); }
   } else if (poison) {
     IF_DEBUG2 { hitter->log("Possible hit %s for %d poison damage", to_string().c_str(), damage); }
+  } else if (necrosis) {
+    IF_DEBUG2 { hitter->log("Possible hit %s for %d necrosis damage", to_string().c_str(), damage); }
   } else if (damage) {
     IF_DEBUG2 { hitter->log("Possible hit %s for %d damage", to_string().c_str(), damage); }
   } else {
@@ -736,7 +765,7 @@ int Thing::is_hit(Thingp hitter, bool crit, bool bite, bool poison, int damage)
   IF_DEBUG2 { hitter->log("Hit succeeds"); }
   int hit_and_destroyed;
 
-  hit_and_destroyed = ai_hit_actual(hitter, real_hitter, crit, bite, poison, damage);
+  hit_and_destroyed = ai_hit_actual(hitter, real_hitter, crit, bite, poison, necrosis, damage);
 
   return (hit_and_destroyed);
 }
@@ -744,11 +773,17 @@ int Thing::is_hit(Thingp hitter, bool crit, bool bite, bool poison, int damage)
 int Thing::is_attacked_by(Thingp hitter, int damage)
 {
   TRACE_AND_INDENT();
-  return (is_hit(hitter, false, false, false, damage));
+  return (is_hit(hitter, false, false, false, false, damage));
 }
 
-int Thing::is_poisonoused_by(Thingp hitter, int damage)
+int Thing::is_poisoned_by(Thingp hitter, int damage)
 {
   TRACE_AND_INDENT();
-  return (is_hit(hitter, false, false, true, damage));
+  return (is_hit(hitter, false, false, true, false, damage));
+}
+
+int Thing::is_necrotized_by(Thingp hitter, int damage)
+{
+  TRACE_AND_INDENT();
+  return (is_hit(hitter, false, false, false, true, damage));
 }

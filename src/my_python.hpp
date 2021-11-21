@@ -32,18 +32,22 @@ char     *py_obj_attr_str(const PyObject *py_obj, const char *attr);
 char     *py_obj_to_str(const PyObject *py_str);
 double    py_obj_attr_double(const PyObject *py_obj, const char *attr);
 double    py_obj_to_double(PyObject *py_obj);
-void      py_call_void(const char *name);
-void      py_call_void_fn(const char *module, const char *name, int v1);
-void      py_call_void_fn(const char *module, const char *name, int v1, int v2);
-void      py_call_void_fn(const char *module, const char *name, int v1, int v2, int v3);
-void      py_call_void_fn(const char *module, const char *name, int v1, int v2, int v3, int v4);
-void      py_call_void_fn(const char *module, const char *name, int v1, int v2, int v3, int v4, int v5);
-void      py_call_void_fn(const char *module, const char *name, int v1, int v2, int v3, int v4, int v5, int v6);
+
+void py_call_void(const char *name);
+void py_call_void_fn(const char *module, const char *name, int v1);
+void py_call_void_fn(const char *module, const char *name, int v1, int v2);
+void py_call_void_fn(const char *module, const char *name, int v1, int v2, int v3);
+void py_call_void_fn(const char *module, const char *name, int v1, int v2, int v3, int v4);
+void py_call_void_fn(const char *module, const char *name, int v1, int v2, int v3, int v4, int v5);
+void py_call_void_fn(const char *module, const char *name, int v1, int v2, int v3, int v4, int v5, int v6);
+
 void py_call_void_fn(const char *module, const char *name, int v1, int v2, int v3, int v4, int v5, int v6, int v7);
 void py_call_void_fn(const char *module, const char *name, int v1, int v2, int v3, int v4, int v5, int v6, int v7,
                      int v8);
 void py_call_void_fn(const char *module, const char *name, int v1, int v2, int v3, int v4, int v5, int v6, int v7,
                      int v8, int v9);
+void py_call_void_fn(const char *module, const char *name, int v1, int v2, int v3, int v4, int v5, int v6, int v7,
+                     int v8, int v9, int v10);
 void py_call_void_fn(const char *module, const char *name, unsigned int v1);
 void py_call_void_fn(const char *module, const char *name, unsigned int v1, unsigned int v2);
 void py_call_void_fn(const char *module, const char *name, unsigned int v1, unsigned int v2, unsigned int v3);
@@ -60,6 +64,9 @@ void py_call_void_fn(const char *module, const char *name, unsigned int v1, unsi
 void py_call_void_fn(const char *module, const char *name, unsigned int v1, unsigned int v2, unsigned int v3,
                      unsigned int v4, unsigned int v5, unsigned int v6, unsigned int v7, unsigned int v8,
                      unsigned int v9);
+void py_call_void_fn(const char *module, const char *name, unsigned int v1, unsigned int v2, unsigned int v3,
+                     unsigned int v4, unsigned int v5, unsigned int v6, unsigned int v7, unsigned int v8,
+                     unsigned int v9, unsigned int v10);
 bool py_call_bool(const char *name);
 bool py_call_bool_fn(const char *module, const char *name, int v1);
 bool py_call_bool_fn(const char *module, const char *name, int v1, int v2);

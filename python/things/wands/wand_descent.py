@@ -22,7 +22,7 @@ def on_final_use(owner, item, target, x, y):
     if my.thing_is_player(owner):
         my.topcon("The wand crumbles into dust.")
 
-def on_you_are_hit(me, hitter, real_hitter, x, y, crit, bite, poison, damage):
+def on_you_are_hit(me, hitter, real_hitter, x, y, crit, bite, poison, necrosis, damage):
     explode(me, x, y)
 
 def on_fire(me, x, y):

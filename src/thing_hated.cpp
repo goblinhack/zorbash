@@ -18,19 +18,31 @@ bool Thing::is_hated_by_me(const point &p)
 {
   TRACE_AND_INDENT();
   if (level->is_shallow_water(p) || level->is_deep_water(p)) {
-    if (environ_hates_water()) {
+    if (environ_avoids_water()) {
       return true;
     }
   }
 
   if (level->is_acid(p)) {
-    if (environ_hates_acid()) {
+    if (environ_avoids_acid()) {
       return true;
     }
   }
 
   if (level->is_poisonous(p)) {
-    if (environ_hates_poison()) {
+    if (environ_avoids_poison()) {
+      return true;
+    }
+  }
+
+  if (level->is_necrotic(p)) {
+    if (environ_avoids_necrosis()) {
+      return true;
+    }
+  }
+
+  if (level->is_necrotic(p)) {
+    if (environ_avoids_necrosis()) {
       return true;
     }
   }
@@ -45,13 +57,13 @@ bool Thing::is_hated_by_me(const point &p)
     int heat = level->heatmap(p);
     if (damage_value_doubled_from_fire()) {
       if (heat > 0) {
-        if (environ_hates_fire()) {
+        if (environ_avoids_fire()) {
           return true;
         }
       }
     } else {
       if (heat >= 1) {
-        if (environ_hates_fire()) {
+        if (environ_avoids_fire()) {
           return true;
         }
       }
@@ -65,19 +77,25 @@ bool Tp::is_hated_by_me(Levelp level, point p) const
 {
   TRACE_AND_INDENT();
   if (level->is_shallow_water(p) || level->is_deep_water(p)) {
-    if (environ_hates_water()) {
+    if (environ_avoids_water()) {
       return true;
     }
   }
 
   if (level->is_acid(p)) {
-    if (environ_hates_acid()) {
+    if (environ_avoids_acid()) {
       return true;
     }
   }
 
   if (level->is_poisonous(p)) {
-    if (environ_hates_poison()) {
+    if (environ_avoids_poison()) {
+      return true;
+    }
+  }
+
+  if (level->is_necrotic(p)) {
+    if (environ_avoids_necrosis()) {
       return true;
     }
   }
@@ -88,7 +106,7 @@ bool Tp::is_hated_by_me(Levelp level, point p) const
     }
   }
 
-  if (environ_hates_fire()) {
+  if (environ_avoids_fire()) {
     int heat = level->heatmap(p);
     if (damage_value_doubled_from_fire()) {
       if (heat > 0) { // avoid if hotter
@@ -110,20 +128,26 @@ bool Thing::is_hated_by_me(const Thingp itp)
   auto me = tp();
   auto it = itp->tp();
 
-  if (me->environ_hates_water()) {
+  if (me->environ_avoids_water()) {
     if (it->is_shallow_water() || it->is_deep_water()) {
       return true;
     }
   }
 
-  if (me->environ_hates_acid()) {
+  if (me->environ_avoids_acid()) {
     if (it->is_acid()) {
       return true;
     }
   }
 
-  if (me->environ_hates_poison()) {
+  if (me->environ_avoids_poison()) {
     if (it->is_poisonous()) {
+      return true;
+    }
+  }
+
+  if (me->environ_avoids_necrosis()) {
+    if (it->is_necrotic()) {
       return true;
     }
   }
@@ -194,7 +218,7 @@ bool Thing::is_hated_by_me(const Thingp itp)
   }
 
   if (! is_on_fire()) {
-    if (me->environ_hates_fire()) {
+    if (me->environ_avoids_fire()) {
       if (it->is_brazier()) {
         return false;
       }

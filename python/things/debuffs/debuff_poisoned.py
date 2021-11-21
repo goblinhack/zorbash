@@ -4,7 +4,7 @@ import tp
 mytp = None
 
 def on_tick(owner, item, x, y):
-    poison = my.thing_get_poison(owner)
+    poison = my.thing_get_poisoned_amount(owner)
     if poison == 0:
         my.topcon("You are no longer poisoned.")
         my.thing_defeated(item, "end of debuff")

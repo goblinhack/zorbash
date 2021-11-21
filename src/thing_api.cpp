@@ -315,6 +315,12 @@ int Thing::damage_value_doubled_from_poison(void)
   return (tp()->damage_value_doubled_from_poison());
 }
 
+int Thing::damage_value_doubled_from_necrosis(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->damage_value_doubled_from_necrosis());
+}
+
 int Thing::damage_value_doubled_from_water(void)
 {
   TRACE_AND_INDENT();
@@ -483,28 +489,34 @@ int Thing::gfx_equip_carry_anim(void)
   return (tp()->gfx_equip_carry_anim());
 }
 
-int Thing::environ_dislikes_acid(void)
+int Thing::environ_avoids_acid(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->environ_dislikes_acid());
+  return (tp()->environ_avoids_acid());
 }
 
-int Thing::environ_dislikes_fire(void)
+int Thing::environ_avoids_fire(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->environ_dislikes_fire());
+  return (tp()->environ_avoids_fire());
 }
 
-int Thing::environ_dislikes_poison(void)
+int Thing::environ_avoids_poison(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->environ_dislikes_poison());
+  return (tp()->environ_avoids_poison());
 }
 
-int Thing::environ_dislikes_water(void)
+int Thing::environ_avoids_necrosis(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->environ_dislikes_water());
+  return (tp()->environ_avoids_necrosis());
+}
+
+int Thing::environ_avoids_water(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->environ_avoids_water());
 }
 
 int Thing::health_hunger_pct(void)
@@ -549,10 +561,10 @@ int Thing::ai_is_able_to_walk_through_walls(void)
   return (tp()->ai_is_able_to_walk_through_walls());
 }
 
-int Thing::environ_loves_acid(void)
+int Thing::environ_prefers_acid(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->environ_loves_acid());
+  return (tp()->environ_prefers_acid());
 }
 
 int Thing::is_acid(void)
@@ -1191,6 +1203,12 @@ int Thing::is_poisonous(void)
   return (tp()->is_poisonous());
 }
 
+int Thing::is_necrotic(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->is_necrotic());
+}
+
 int Thing::is_potion_eater(void)
 {
   TRACE_AND_INDENT();
@@ -1413,40 +1431,16 @@ int Thing::attack_blood(void)
   return (tp()->attack_blood());
 }
 
-int Thing::environ_hates_poison(void)
-{
-  TRACE_AND_INDENT();
-  return (tp()->environ_hates_poison());
-}
-
-int Thing::environ_hates_fire(void)
-{
-  TRACE_AND_INDENT();
-  return (tp()->environ_hates_fire());
-}
-
 int Thing::unused_flag3(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag3());
 }
 
-int Thing::environ_hates_water(void)
+int Thing::ai_detect_secret_doors(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->environ_hates_water());
-}
-
-int Thing::environ_hates_acid(void)
-{
-  TRACE_AND_INDENT();
-  return (tp()->environ_hates_acid());
-}
-
-int Thing::ai_is_able_to_detect_secret_doors_when_close(void)
-{
-  TRACE_AND_INDENT();
-  return (tp()->ai_is_able_to_detect_secret_doors_when_close());
+  return (tp()->ai_detect_secret_doors());
 }
 
 int Thing::ai_is_able_to_break_down_doors(void)
@@ -1677,6 +1671,12 @@ int Thing::damage_poison_chance_d1000(void)
   return (tp()->damage_poison_chance_d1000());
 }
 
+int Thing::damage_necrosis_chance_d1000(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->damage_necrosis_chance_d1000());
+}
+
 int Thing::is_sticky(void)
 {
   TRACE_AND_INDENT();
@@ -1821,10 +1821,10 @@ int Thing::is_wand(void)
   return (tp()->is_wand());
 }
 
-int Thing::environ_loves_water(void)
+int Thing::environ_prefers_water(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->environ_loves_water());
+  return (tp()->environ_prefers_water());
 }
 
 int Thing::is_weapon(void)
@@ -1839,22 +1839,28 @@ int Thing::is_weapon_equiper(void)
   return (tp()->is_weapon_equiper());
 }
 
-int Thing::environ_loves_fire(void)
+int Thing::environ_prefers_fire(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->environ_loves_fire());
+  return (tp()->environ_prefers_fire());
 }
 
-int Thing::environ_loves_poison(void)
+int Thing::environ_prefers_poison(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->environ_loves_poison());
+  return (tp()->environ_prefers_poison());
 }
 
-int Thing::environ_loves_spiderwebs(void)
+int Thing::environ_prefers_necrosis(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->environ_loves_spiderwebs());
+  return (tp()->environ_prefers_necrosis());
+}
+
+int Thing::environ_prefers_spiderwebs(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->environ_prefers_spiderwebs());
 }
 
 int Thing::minion_leash_distance(void)
@@ -4314,7 +4320,7 @@ int Thing::incr_enchant(void)
 ////////////////////////////////////////////////////////////////////////////
 // poison
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_poison(void)
+int Thing::get_poisoned_amount(void)
 {
   TRACE_AND_INDENT();
   int v = 0;
@@ -4324,19 +4330,19 @@ int Thing::get_poison(void)
   }
   auto owner = get_immediate_owner();
   if (owner && (owner != this)) {
-    v += owner->get_poison();
+    v += owner->get_poisoned_amount();
   }
   if (is_minion()) {
     auto minion_owner = get_immediate_minion_owner();
     if (minion_owner) {
       auto minion_owner = get_immediate_minion_owner();
-      v += minion_owner->get_poison();
+      v += minion_owner->get_poisoned_amount();
     }
   }
   return v;
 }
 
-int Thing::set_poison(int v)
+int Thing::set_poisoned_amount(int v)
 {
   TRACE_AND_INDENT();
   new_infop();
@@ -4347,7 +4353,7 @@ int Thing::set_poison(int v)
   return (n);
 }
 
-int Thing::decr_poison(int v)
+int Thing::decr_poisoned_amount(int v)
 {
   TRACE_AND_INDENT();
   new_infop();
@@ -4358,7 +4364,7 @@ int Thing::decr_poison(int v)
   return (n);
 }
 
-int Thing::incr_poison(int v)
+int Thing::incr_poisoned_amount(int v)
 {
   TRACE_AND_INDENT();
   new_infop();
@@ -4369,7 +4375,7 @@ int Thing::incr_poison(int v)
   return (n);
 }
 
-int Thing::decr_poison(void)
+int Thing::decr_poisoned_amount(void)
 {
   TRACE_AND_INDENT();
   new_infop();
@@ -4380,11 +4386,88 @@ int Thing::decr_poison(void)
   return (n);
 }
 
-int Thing::incr_poison(void)
+int Thing::incr_poisoned_amount(void)
 {
   TRACE_AND_INDENT();
   new_infop();
   auto n = (get_infop()->poison++);
+  return (n);
+}
+
+////////////////////////////////////////////////////////////////////////////
+// necrosis
+////////////////////////////////////////////////////////////////////////////
+int Thing::get_necrotized_amount(void)
+{
+  TRACE_AND_INDENT();
+  int v = 0;
+  if (maybe_infop()) {
+    verify(maybe_infop());
+    v = get_infop()->necrosis;
+  }
+  auto owner = get_immediate_owner();
+  if (owner && (owner != this)) {
+    v += owner->get_necrotized_amount();
+  }
+  if (is_minion()) {
+    auto minion_owner = get_immediate_minion_owner();
+    if (minion_owner) {
+      auto minion_owner = get_immediate_minion_owner();
+      v += minion_owner->get_necrotized_amount();
+    }
+  }
+  return v;
+}
+
+int Thing::set_necrotized_amount(int v)
+{
+  TRACE_AND_INDENT();
+  new_infop();
+  auto n = (get_infop()->necrosis = v);
+  if (get_infop()->necrosis < 0) {
+    get_infop()->necrosis = 0;
+  }
+  return (n);
+}
+
+int Thing::decr_necrotized_amount(int v)
+{
+  TRACE_AND_INDENT();
+  new_infop();
+  auto n = (get_infop()->necrosis -= v);
+  if (get_infop()->necrosis < 0) {
+    get_infop()->necrosis = 0;
+  }
+  return (n);
+}
+
+int Thing::incr_necrotized_amount(int v)
+{
+  TRACE_AND_INDENT();
+  new_infop();
+  auto n = (get_infop()->necrosis += v);
+  if (get_infop()->necrosis < 0) {
+    get_infop()->necrosis = 0;
+  }
+  return (n);
+}
+
+int Thing::decr_necrotized_amount(void)
+{
+  TRACE_AND_INDENT();
+  new_infop();
+  auto n = (get_infop()->necrosis--);
+  if (get_infop()->necrosis < 0) {
+    get_infop()->necrosis = 0;
+  }
+  return (n);
+}
+
+int Thing::incr_necrotized_amount(void)
+{
+  TRACE_AND_INDENT();
+  new_infop();
+  auto n = (get_infop()->necrosis++);
   return (n);
 }
 

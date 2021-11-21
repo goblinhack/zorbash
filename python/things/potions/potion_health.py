@@ -23,9 +23,9 @@ def on_use(owner, item, target, x, y):
         did_something = True
         my.thing_set_stamina(owner, new_stamina)
 
-    if my.thing_get_poison(owner) != 0:
+    if my.thing_get_poisoned_amount(owner) != 0:
         did_something = True
-        my.thing_set_poison(owner, 0)
+        my.thing_set_poisoned_amount(owner, 0)
 
     if did_something:
         my.level_spawn_using_items_radius_range(owner, item, target, "potion_health_effect")
@@ -41,7 +41,7 @@ def explode(me, x, y):
     my.level_spawn_fire_around_thing(me, "fire")
     my.thing_defeated(me, "exploded")
 
-def on_you_are_hit(me, hitter, real_hitter, x, y, crit, bite, poison, damage):
+def on_you_are_hit(me, hitter, real_hitter, x, y, crit, bite, poison, necrosis, damage):
     explode(me, x, y)
 
 def on_fire(me, x, y):
@@ -67,7 +67,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_collision_hit_priority(5)
     mytp.set_damage_value_doubled_from_fire(True)
     mytp.set_enchant_max(2)
-    mytp.set_environ_dislikes_fire(100)
+    mytp.set_environ_avoids_fire(100)
     mytp.set_gfx_animated(True)
     mytp.set_gfx_short_shadow_caster(True)
     mytp.set_gfx_show_outlined(True)
