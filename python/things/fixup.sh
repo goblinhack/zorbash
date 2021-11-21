@@ -67,10 +67,10 @@ do
       set_collision_hit_priority \
       set_enchant_level \
       set_enchant_max \
-      set_damage_environment_doubled_from_acid \
-      set_damage_environment_doubled_from_fire \
-      set_damage_environment_doubled_from_poison \
-      set_damage_environment_doubled_from_water \
+      set_damage_value_doubled_from_acid \
+      set_damage_value_doubled_from_fire \
+      set_damage_value_doubled_from_poison \
+      set_damage_value_doubled_from_water \
       set_environ_dislikes_acid \
       set_environ_dislikes_fire \
       set_environ_dislikes_poison \

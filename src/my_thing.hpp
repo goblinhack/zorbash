@@ -675,10 +675,10 @@ public:
   int distance_to_player(void);
   int enchant_level(void);
   int enchant_max(void);
-  int damage_environment_doubled_from_acid(void);
-  int damage_environment_doubled_from_fire(void);
-  int damage_environment_doubled_from_poison(void);
-  int damage_environment_doubled_from_water(void);
+  int damage_value_doubled_from_acid(void);
+  int damage_value_doubled_from_fire(void);
+  int damage_value_doubled_from_poison(void);
+  int damage_value_doubled_from_water(void);
   int environ_dislikes_acid(void);
   int environ_dislikes_fire(void);
   int environ_dislikes_poison(void);

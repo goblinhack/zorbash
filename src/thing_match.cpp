@@ -58,16 +58,16 @@ bool Thing::matches(const std::string &what)
   if (blast_min_radius() && (what == "blast_min_radius")) {
     return true;
   }
-  if (damage_environment_doubled_from_acid() && (what == "damage_environment_doubled_from_acid")) {
+  if (damage_value_doubled_from_acid() && (what == "damage_value_doubled_from_acid")) {
     return true;
   }
-  if (damage_environment_doubled_from_fire() && (what == "damage_environment_doubled_from_fire")) {
+  if (damage_value_doubled_from_fire() && (what == "damage_value_doubled_from_fire")) {
     return true;
   }
-  if (damage_environment_doubled_from_poison() && (what == "damage_environment_doubled_from_poison")) {
+  if (damage_value_doubled_from_poison() && (what == "damage_value_doubled_from_poison")) {
     return true;
   }
-  if (damage_environment_doubled_from_water() && (what == "damage_environment_doubled_from_water")) {
+  if (damage_value_doubled_from_water() && (what == "damage_value_doubled_from_water")) {
     return true;
   }
   if (enchant_level() && (what == "enchant_level")) {
@@ -812,17 +812,17 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "blast_min_radius") {
     return &Thing::blast_min_radius;
   }
-  if (what == "damage_environment_doubled_from_acid") {
-    return &Thing::damage_environment_doubled_from_acid;
+  if (what == "damage_value_doubled_from_acid") {
+    return &Thing::damage_value_doubled_from_acid;
   }
-  if (what == "damage_environment_doubled_from_fire") {
-    return &Thing::damage_environment_doubled_from_fire;
+  if (what == "damage_value_doubled_from_fire") {
+    return &Thing::damage_value_doubled_from_fire;
   }
-  if (what == "damage_environment_doubled_from_poison") {
-    return &Thing::damage_environment_doubled_from_poison;
+  if (what == "damage_value_doubled_from_poison") {
+    return &Thing::damage_value_doubled_from_poison;
   }
-  if (what == "damage_environment_doubled_from_water") {
-    return &Thing::damage_environment_doubled_from_water;
+  if (what == "damage_value_doubled_from_water") {
+    return &Thing::damage_value_doubled_from_water;
   }
   if (what == "enchant_level") {
     return &Thing::enchant_level;

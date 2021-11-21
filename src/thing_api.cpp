@@ -297,28 +297,28 @@ int Thing::collision_check(void)
   return (tp()->collision_check());
 }
 
-int Thing::damage_environment_doubled_from_acid(void)
+int Thing::damage_value_doubled_from_acid(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->damage_environment_doubled_from_acid());
+  return (tp()->damage_value_doubled_from_acid());
 }
 
-int Thing::damage_environment_doubled_from_fire(void)
+int Thing::damage_value_doubled_from_fire(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->damage_environment_doubled_from_fire());
+  return (tp()->damage_value_doubled_from_fire());
 }
 
-int Thing::damage_environment_doubled_from_poison(void)
+int Thing::damage_value_doubled_from_poison(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->damage_environment_doubled_from_poison());
+  return (tp()->damage_value_doubled_from_poison());
 }
 
-int Thing::damage_environment_doubled_from_water(void)
+int Thing::damage_value_doubled_from_water(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->damage_environment_doubled_from_water());
+  return (tp()->damage_value_doubled_from_water());
 }
 
 int Thing::defence(void)

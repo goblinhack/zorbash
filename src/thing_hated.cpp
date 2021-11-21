@@ -43,7 +43,7 @@ bool Thing::is_hated_by_me(const point &p)
 
   if (! is_on_fire()) {
     int heat = level->heatmap(p);
-    if (damage_environment_doubled_from_fire()) {
+    if (damage_value_doubled_from_fire()) {
       if (heat > 0) {
         if (environ_hates_fire()) {
           return true;
@@ -90,7 +90,7 @@ bool Tp::is_hated_by_me(Levelp level, point p) const
 
   if (environ_hates_fire()) {
     int heat = level->heatmap(p);
-    if (damage_environment_doubled_from_fire()) {
+    if (damage_value_doubled_from_fire()) {
       if (heat > 0) { // avoid if hotter
         return true;
       }

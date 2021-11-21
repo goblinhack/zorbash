@@ -188,10 +188,10 @@ int Tp::capacity_width(void) const { return _capacity_width; }
 int Tp::charge_count(void) const { return _charge_count; }
 int Tp::collision_check(void) const { return _collision_check; }
 int Tp::collision_hit_priority(void) const { return _collision_hit_priority; }
-int Tp::damage_environment_doubled_from_acid(void) const { return _damage_environment_doubled_from_acid; }
-int Tp::damage_environment_doubled_from_fire(void) const { return _damage_environment_doubled_from_fire; }
-int Tp::damage_environment_doubled_from_poison(void) const { return _damage_environment_doubled_from_poison; }
-int Tp::damage_environment_doubled_from_water(void) const { return _damage_environment_doubled_from_water; }
+int Tp::damage_value_doubled_from_acid(void) const { return _damage_value_doubled_from_acid; }
+int Tp::damage_value_doubled_from_fire(void) const { return _damage_value_doubled_from_fire; }
+int Tp::damage_value_doubled_from_poison(void) const { return _damage_value_doubled_from_poison; }
+int Tp::damage_value_doubled_from_water(void) const { return _damage_value_doubled_from_water; }
 int Tp::enchant_level(void) const { return _enchant_level; }
 int Tp::enchant_max(void) const { return _enchant_max; }
 int Tp::gfx_an_animation_only(void) const { return _gfx_an_animation_only; }
@@ -514,10 +514,10 @@ void Tp::set_charge_count(int v) { _charge_count = v; }
 void Tp::set_collision_attack(int v) { _collision_attack = v; }
 void Tp::set_collision_check(int v) { _collision_check = v; }
 void Tp::set_collision_hit_priority(int v) { _collision_hit_priority = v; }
-void Tp::set_damage_environment_doubled_from_acid(int v) { _damage_environment_doubled_from_acid = v; }
-void Tp::set_damage_environment_doubled_from_fire(int v) { _damage_environment_doubled_from_fire = v; }
-void Tp::set_damage_environment_doubled_from_poison(int v) { _damage_environment_doubled_from_poison = v; }
-void Tp::set_damage_environment_doubled_from_water(int v) { _damage_environment_doubled_from_water = v; }
+void Tp::set_damage_value_doubled_from_acid(int v) { _damage_value_doubled_from_acid = v; }
+void Tp::set_damage_value_doubled_from_fire(int v) { _damage_value_doubled_from_fire = v; }
+void Tp::set_damage_value_doubled_from_poison(int v) { _damage_value_doubled_from_poison = v; }
+void Tp::set_damage_value_doubled_from_water(int v) { _damage_value_doubled_from_water = v; }
 void Tp::set_enchant_level(int v) { _enchant_level = v; }
 void Tp::set_enchant_max(int v) { _enchant_max = v; }
 void Tp::set_gfx_an_animation_only(int v) { _gfx_an_animation_only = v; }
