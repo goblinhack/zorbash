@@ -6,7 +6,8 @@ mytp = None
 def on_tick(owner, item, x, y):
     necrosis = my.thing_get_necrotized_amount(owner)
     if necrosis == 0:
-        my.topcon("You are no longer rotting any more than usua..")
+        if my.thing_is_player(owner):
+            my.topcon("You are no longer rotting any more than usual..")
         my.thing_defeated(item, "end of debuff")
         return True
     # Too noisy

@@ -3,7 +3,7 @@ import tp
 
 
 def on_lifespan(owner, me, x, y):
-    if my.if_matches(owner, "is_player"):
+    if my.thing_is_player(owner):
         my.topcon("One of your torches fizzles out.")
 
 def tp_init(name, text_name, tiles=[]):

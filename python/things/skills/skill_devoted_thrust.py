@@ -14,12 +14,12 @@ def on_use(owner, skill, target, x, y):
     bonus += int((bonus / 10) * enchant)
 
     if bonus > 1:
-        if my.if_matches(owner, "is_player"):
+        if my.thing_is_player(owner):
             my.topcon("%%fg=yellow$You strike with a mighty thrust of {}.%%fg=reset$".format(bonus))
         my.thing_incr_current_damage(owner, bonus)
         my.thing_decr_stamina(owner, bonus)
     else:
-        if my.if_matches(owner, "is_player"):
+        if my.thing_is_player(owner):
             my.topcon("You run out of devotion.")
         my.thing_skill_deactivate(owner, skill)
 

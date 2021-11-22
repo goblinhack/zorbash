@@ -29,10 +29,10 @@ def on_use(owner, item, target, x, y):
 
     if did_something:
         my.level_spawn_using_items_radius_range(owner, item, target, "potion_health_effect")
-        if my.if_matches(owner, "is_player"):
+        if my.thing_is_player(owner):
             my.topcon("%%fg=pink$You glow with renewed health.%%fg=reset$")
     else:
-        if my.if_matches(owner, "is_player"):
+        if my.thing_is_player(owner):
             my.topcon("Hm. That potion didn't seem to do anything.")
 
 def explode(me, x, y):
@@ -51,7 +51,9 @@ def on_fall(me, x, y):
     explode(me, x, y)
 
 def on_enchant(me, x, y):
-    my.topcon("The potion bubbles.")
+    owner = my.thing_get_top_owner_id(me)
+    if my.thing_is_player(owner):
+        my.topcon("The potion bubbles.")
     enchant = my.thing_get_enchant(me)
     global mytp
     if enchant == 0:

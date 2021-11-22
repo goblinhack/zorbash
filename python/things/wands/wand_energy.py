@@ -42,7 +42,9 @@ def on_fall(me, x, y):
     explode(me, x, y)
 
 def on_enchant(me, x, y):
-    my.topcon("The wand glows.")
+    owner = my.thing_get_top_owner_id(me)
+    if my.thing_is_player(owner):
+        my.topcon("The wand glows.")
     my.thing_incr_charge_count(me, 5)
 
 def tp_init(name, text_name, short_text_name):
