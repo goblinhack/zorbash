@@ -117,7 +117,7 @@ static void ttf_set_color_key(SDL_Surface *glyph_surface, GLfloat *texcoord, uin
     return;
   }
 
-  newptr(tmp, "SDL_CreateRGBSurface");
+  newptr(MTYPE_SDL, tmp, "SDL_CreateRGBSurface");
 
   //
   // Set up so that colorkey pixels become transparent
@@ -133,7 +133,7 @@ static void ttf_set_color_key(SDL_Surface *glyph_surface, GLfloat *texcoord, uin
 #endif
 
   SDL_FreeSurface(tmp);
-  oldptr(tmp);
+  oldptr(MTYPE_SDL, tmp);
 }
 
 //
@@ -296,7 +296,7 @@ Fontp ttf_write_tga(std::string name, int pointsize, int style)
     ERR("No surface created for size %dx%d font %s", width, height, name.c_str());
   }
 
-  newptr(dst, "SDL_CreateRGBSurface");
+  newptr(MTYPE_SDL, dst, "SDL_CreateRGBSurface");
 
   //
   // Blit each glyph to the large surface.

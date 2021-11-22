@@ -26,7 +26,7 @@ void Thing::poison_tick(void)
   dbg("Poison tick");
   TRACE_AND_INDENT();
 
-  debuff_add_if_not_found(tp_find("debuff_poisoned"));
+  poisoned();
 
   Thingp hitter = this;
   int    poison = old_poison;
@@ -45,4 +45,11 @@ void Thing::poison_tick(void)
   }
 
   set_poisoned_amount(old_poison / 2);
+}
+
+void Thing::poisoned(void)
+{
+  if (is_player()) {
+    debuff_add_if_not_found(tp_find("debuff_poisoned"));
+  }
 }

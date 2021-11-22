@@ -15,7 +15,7 @@
 
 bool Thing::drop(Thingp what, Thingp target, bool stolen)
 {
-  verify(what);
+  verify(MTYPE_THING, what);
   if (! what) {
     err("Cannot drop null thing");
     return false;
@@ -140,7 +140,7 @@ bool Thing::drop(Thingp what, Thingp target, bool stolen)
 //
 bool Thing::drop_into_ether(Thingp what)
 {
-  verify(what);
+  verify(MTYPE_THING, what);
   if (! what) {
     err("Cannot drop into ether null thing");
     return false;
@@ -203,7 +203,7 @@ bool Thing::drop_into_ether(Thingp what)
 //
 bool Thing::drop_from_ether(Thingp what)
 {
-  verify(what);
+  verify(MTYPE_THING, what);
   if (! what) {
     err("Cannot drop from ether null thing");
     return false;

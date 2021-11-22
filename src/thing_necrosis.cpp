@@ -23,7 +23,7 @@ void Thing::necrosis_tick(void)
     dbg("Necrosis tick");
     TRACE_AND_INDENT();
 
-    debuff_add_if_not_found(tp_find("debuff_necrotized"));
+    rotting();
 
     Thingp hitter   = this;
     int    necrosis = old_necrosis;
@@ -33,5 +33,12 @@ void Thing::necrosis_tick(void)
     }
 
     decr_necrotized_amount();
+  }
+}
+
+void Thing::rotting(void)
+{
+  if (is_player()) {
+    debuff_add_if_not_found(tp_find("debuff_necrotized"));
   }
 }

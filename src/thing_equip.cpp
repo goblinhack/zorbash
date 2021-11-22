@@ -16,7 +16,7 @@
 
 void Thing::on_equip(Thingp what)
 {
-  verify(what);
+  verify(MTYPE_THING, what);
   if (! what) {
     err("Cannot equip null thing");
     return;
@@ -46,7 +46,7 @@ void Thing::on_equip(Thingp what)
 
 void Thing::on_unequip(Thingp what)
 {
-  verify(what);
+  verify(MTYPE_THING, what);
   if (! what) {
     err("Cannot unequip null thing");
     return;
@@ -118,7 +118,7 @@ void Thing::set_equip_carry_anim(Thingp new_equip_carry_anim, int equip)
 {
   TRACE_AND_INDENT();
   if (new_equip_carry_anim) {
-    verify(new_equip_carry_anim);
+    verify(MTYPE_THING, new_equip_carry_anim);
   }
 
   auto old_equip_carry_anim = get_equip_carry_anim(equip);
@@ -176,7 +176,7 @@ void Thing::set_equip_use_anim(Thingp new_gfx_anim_use, int equip)
 {
   TRACE_AND_INDENT();
   if (new_gfx_anim_use) {
-    verify(new_gfx_anim_use);
+    verify(MTYPE_THING, new_gfx_anim_use);
   }
 
   auto old_gfx_anim_use = get_equip_use_anim(equip);

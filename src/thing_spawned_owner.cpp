@@ -49,7 +49,7 @@ void Thing::set_spawned_owner(Thingp spawner_owner)
 {
   TRACE_AND_INDENT();
   if (spawner_owner) {
-    verify(spawner_owner);
+    verify(MTYPE_THING, spawner_owner);
   }
 
   auto old_spawner_owner = get_immediate_spawned_owner();

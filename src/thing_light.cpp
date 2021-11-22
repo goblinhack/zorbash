@@ -21,7 +21,7 @@ std::vector< Lightp > &Thing::get_light(void)
 {
   TRACE_AND_INDENT();
   if (maybe_infop()) {
-    verify(maybe_infop());
+    verify(MTYPE_INFOP, maybe_infop());
     return (get_infop()->light);
   } else {
     static std::vector< Lightp > no_light;
@@ -52,7 +52,7 @@ void Thing::delete_lights(void)
 {
   TRACE_AND_INDENT();
   if (maybe_infop()) {
-    verify(maybe_infop());
+    verify(MTYPE_INFOP, maybe_infop());
     for (auto &l : get_infop()->light) {
       delete l;
     }

@@ -20,7 +20,7 @@
 
 void Thing::log_(const char *fmt, va_list args)
 {
-  verify(this);
+  verify(MTYPE_THING, this);
   auto t = this;
   char buf[ MAXLONGSTR ];
   int  len;
@@ -39,7 +39,7 @@ void Thing::log_(const char *fmt, va_list args)
 
 void Thing::log(const char *fmt, ...)
 {
-  verify(this);
+  verify(MTYPE_THING, this);
   log_catchup_missing_indent_levels();
 
   auto    t = this;
@@ -51,7 +51,7 @@ void Thing::log(const char *fmt, ...)
 
 void Thing::die_(const char *fmt, va_list args)
 {
-  verify(this);
+  verify(MTYPE_THING, this);
   auto t = this;
   char buf[ MAXLONGSTR ];
   int  len;
@@ -71,7 +71,7 @@ void Thing::die(const char *fmt, ...)
 {
   g_errored = true;
 
-  verify(this);
+  verify(MTYPE_THING, this);
   auto    t = this;
   va_list args;
 
@@ -82,7 +82,7 @@ void Thing::die(const char *fmt, ...)
 
 void Thing::con_(const char *fmt, va_list args)
 {
-  verify(this);
+  verify(MTYPE_THING, this);
   auto t = this;
   char buf[ MAXLONGSTR ];
   int  len;
@@ -105,7 +105,7 @@ void Thing::con_(const char *fmt, va_list args)
 
 void Thing::topcon_(const char *fmt, va_list args)
 {
-  verify(this);
+  verify(MTYPE_THING, this);
   auto t = this;
   char buf[ MAXLONGSTR ];
   int  len;
@@ -129,7 +129,7 @@ void Thing::topcon_(const char *fmt, va_list args)
 
 void Thing::con(const char *fmt, ...)
 {
-  verify(this);
+  verify(MTYPE_THING, this);
   auto    t = this;
   va_list args;
 
@@ -140,7 +140,7 @@ void Thing::con(const char *fmt, ...)
 
 void Thing::topcon(const char *fmt, ...)
 {
-  verify(this);
+  verify(MTYPE_THING, this);
   auto    t = this;
   va_list args;
 
@@ -157,7 +157,7 @@ void Thing::err_(const char *fmt, va_list args)
   }
   nested_error = true;
 
-  verify(this);
+  verify(MTYPE_THING, this);
   auto t = this;
   char buf[ MAXLONGSTR ];
   int  len;
@@ -215,7 +215,7 @@ void Thing::err(const char *fmt, ...)
 
 void Thing::botcon_(const char *fmt, va_list args)
 {
-  verify(this);
+  verify(MTYPE_THING, this);
   auto t = this;
   char buf[ MAXLONGSTR ];
   int  len;
@@ -239,7 +239,7 @@ void Thing::botcon_(const char *fmt, va_list args)
 
 void Thing::botcon(const char *fmt, ...)
 {
-  verify(this);
+  verify(MTYPE_THING, this);
   auto    t = this;
   va_list args;
 

@@ -16,10 +16,10 @@ LevelStatic::LevelStatic(void)
 {
   this->levelno = all_static_levels.size();
 
-  newptr(this, "level");
+  newptr(MTYPE_LEVEL, this, "level");
 }
 
-LevelStatic::~LevelStatic(void) { oldptr(this); }
+LevelStatic::~LevelStatic(void) { oldptr(MTYPE_LEVEL, this); }
 
 void level_fini(void)
 {

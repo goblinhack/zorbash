@@ -16,7 +16,7 @@
 
 bool Thing::eat(Thingp what)
 {
-  verify(what);
+  verify(MTYPE_THING, what);
   if (! what) {
     err("Cannot eat null thing");
     return false;
@@ -67,7 +67,7 @@ bool Thing::eat(Thingp what)
 
 bool Thing::worth_eating(Thingp what)
 {
-  verify(what);
+  verify(MTYPE_THING, what);
   if (! what) {
     err("Cannot check worth eating null thing");
     return false;

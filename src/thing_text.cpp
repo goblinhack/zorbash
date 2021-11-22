@@ -19,8 +19,8 @@ std::string Thing::text_a_or_an(void)
 {
   TRACE_AND_INDENT();
   auto tpp = tp();
-  verify(this);
-  verify(tpp);
+  verify(MTYPE_THING, this);
+  verify(MTYPE_TP, tpp);
   if (unlikely(! tpp)) {
     return ("<no name>");
   }
@@ -49,8 +49,8 @@ std::string Thing::text_the(void)
 {
   TRACE_AND_INDENT();
   auto tpp = tp();
-  verify(this);
-  verify(tpp);
+  verify(MTYPE_THING, this);
+  verify(MTYPE_TP, tpp);
   if (unlikely(! tpp)) {
     return ("<no name>");
   }
@@ -91,8 +91,8 @@ std::string Thing::short_text_a_or_an(void)
 {
   TRACE_AND_INDENT();
   auto tpp = tp();
-  verify(this);
-  verify(tpp);
+  verify(MTYPE_THING, this);
+  verify(MTYPE_TP, tpp);
   if (unlikely(! tpp)) {
     return ("<no name>");
   }
@@ -121,8 +121,8 @@ std::string Thing::short_text_the(void)
 {
   TRACE_AND_INDENT();
   auto tpp = tp();
-  verify(this);
-  verify(tpp);
+  verify(MTYPE_THING, this);
+  verify(MTYPE_TP, tpp);
   if (unlikely(! tpp)) {
     return ("<no name>");
   }

@@ -274,7 +274,7 @@ bool Thing::bag_compress(void)
 bool Thing::bag_remove_at(Thingp item, point pos)
 {
   TRACE_AND_INDENT();
-  verify(item);
+  verify(MTYPE_THING, item);
 
   auto bag    = get_bag();
   auto w      = item->item_width();
@@ -322,7 +322,7 @@ bool Thing::bag_can_place_at(Thingp item, point pos)
     return false;
   }
 
-  verify(item);
+  verify(MTYPE_THING, item);
 
   auto bag = get_const_bag();
   auto bw  = capacity_width();

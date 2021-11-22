@@ -16,11 +16,10 @@
 #include "my_callstack.hpp"
 #include "my_globals.hpp"
 #include "my_main.hpp"
+#include "my_ptrcheck.hpp"
 #include "my_sprintf.hpp"
 #include "my_time.hpp"
 #include "my_traceback.hpp"
-
-bool ptr_check_some_pointers_changed;
 
 //
 // A single event in the life of a pointer.
@@ -176,17 +175,17 @@ typedef struct hash_t_ {
   hash_elem_t **elements;
 } hash_t;
 
-static hash_t *hash;
+static hash_t *hash[ MTYPE_MAX ];
 
 //
 // How many old/freed pointers do we keep track of. We use this when we find
 // an unknown pointer to find when it last lived.
 //
-static const int                                      ringbuf_max_size = 2000000;
-static int                                            ringbuf_current_size;
-static std::array< class Ptrcheck, ringbuf_max_size > ringbuf;
-static Ptrcheck                                      *ringbuf_next;
-static Ptrcheck                                      *ringbuf_base;
+static const int                                      ringbuf_max_size = 100000;
+static int                                            ringbuf_current_size[ MTYPE_MAX ];
+static std::array< class Ptrcheck, ringbuf_max_size > ringbuf[ MTYPE_MAX ];
+static Ptrcheck                                      *ringbuf_next[ MTYPE_MAX ];
+static Ptrcheck                                      *ringbuf_base[ MTYPE_MAX ];
 
 //
 // Wrapper for calloc.
@@ -261,8 +260,6 @@ static void hash_add(hash_t *hash_table, Ptrcheck *pc)
   elem->pc   = pc;
   elem->next = *slot;
   *slot      = elem;
-
-  ptr_check_some_pointers_changed = true;
 }
 
 //
@@ -327,15 +324,13 @@ static void hash_free(hash_t *hash_table, void *ptr)
   }
 
   delete elem->pc;
-  delete elem;
-
-  ptr_check_some_pointers_changed = true;
+  free(elem);
 }
 
 //
 // Check a pointer for validity.
 //
-static Ptrcheck *ptrcheck_verify_pointer(const void *ptr, std::string &func, std::string &file, int line,
+static Ptrcheck *ptrcheck_verify_pointer(int mtype, const void *ptr, std::string &func, std::string &file, int line,
                                          int dont_store)
 {
   static const char *unknown_ptr_warning  = "** UNKNOWN POINTER ** ";
@@ -344,7 +339,7 @@ static Ptrcheck *ptrcheck_verify_pointer(const void *ptr, std::string &func, std
   Ptrcheck          *pc;
   hash_elem_t       *e;
 
-  if (! hash) {
+  if (! hash[ mtype ]) {
     return 0;
   }
 
@@ -355,7 +350,7 @@ static Ptrcheck *ptrcheck_verify_pointer(const void *ptr, std::string &func, std
   //
   // Check the robust handle is valid.
   //
-  e = hash_find(hash, (void *) ptr);
+  e = hash_find(hash[ mtype ], (void *) ptr);
   if (e) {
     pc = e->pc;
 
@@ -411,14 +406,14 @@ static Ptrcheck *ptrcheck_verify_pointer(const void *ptr, std::string &func, std
   //
   // Check the ring buffer to see if we've seen this pointer before.
   //
-  pc = &ringbuf_next[ 0 ];
+  pc = &ringbuf_next[ mtype ][ 0 ];
   pc--;
 
-  if (pc < ringbuf_base) {
-    pc = ringbuf_base + ringbuf_max_size - 1;
+  if (pc < ringbuf_base[ mtype ]) {
+    pc = ringbuf_base[ mtype ] + ringbuf_max_size - 1;
   }
 
-  ring_ptr_size = ringbuf_current_size;
+  ring_ptr_size = ringbuf_current_size[ mtype ];
 
   CON("vvvvv Pointer history for %p vvvvv (max %u ptrs saved)", ptr, ring_ptr_size);
 
@@ -494,8 +489,8 @@ static Ptrcheck *ptrcheck_verify_pointer(const void *ptr, std::string &func, std
     //
     // Handle wraps.
     //
-    if (pc < ringbuf_base) {
-      pc = ringbuf_base + ringbuf_max_size - 1;
+    if (pc < ringbuf_base[ mtype ]) {
+      pc = ringbuf_base[ mtype ] + ringbuf_max_size - 1;
     }
   }
 
@@ -506,7 +501,8 @@ static Ptrcheck *ptrcheck_verify_pointer(const void *ptr, std::string &func, std
 //
 // Record this pointer.
 //
-void *ptrcheck_alloc(const void *ptr, std::string what, int size, std::string func, std::string file, int line)
+void *ptrcheck_alloc(int mtype, const void *ptr, std::string what, int size, std::string func, std::string file,
+                     int line)
 {
   Ptrcheck *pc;
 
@@ -523,28 +519,28 @@ void *ptrcheck_alloc(const void *ptr, std::string what, int size, std::string fu
   //
   // Create a hash table to store pointers.
   //
-  if (! hash) {
+  if (! hash[ mtype ]) {
     //
     // Create enough space for lots of pointers.
     //
-    hash = hash_init(1046527 * 11 /* prime */);
+    hash[ mtype ] = hash_init(1046527 /* prime */);
 
-    if (! hash) {
+    if (! hash[ mtype ]) {
       return ((void *) ptr);
     }
 
     //
     // And a ring buffer to store old pointer into.
     //
-    ringbuf_next         = &ringbuf[ 0 ];
-    ringbuf_base         = &ringbuf[ 0 ];
-    ringbuf_current_size = 0;
+    ringbuf_next[ mtype ]         = &ringbuf[ mtype ][ 0 ];
+    ringbuf_base[ mtype ]         = &ringbuf[ mtype ][ 0 ];
+    ringbuf_current_size[ mtype ] = 0;
   }
 
   //
   // Missing an earlier free?
   //
-  if (hash_find(hash, (void *) ptr)) {
+  if (hash_find(hash[ mtype ], (void *) ptr)) {
     ERR("Pointer %p already exists and attempting to add again", ptr);
     return ((void *) ptr);
   }
@@ -572,7 +568,7 @@ void *ptrcheck_alloc(const void *ptr, std::string what, int size, std::string fu
   //
   // Add it to the hash. Not the ring buffer (only when freed).
   //
-  hash_add(hash, pc);
+  hash_add(hash[ mtype ], pc);
 
   return ((void *) ptr);
 }
@@ -581,7 +577,7 @@ void *ptrcheck_alloc(const void *ptr, std::string what, int size, std::string fu
 // Check a pointer is valid and if so add it to the ring buffer. If not,
 // return false and avert the myfree(), just in case.
 //
-int ptrcheck_free(void *ptr, std::string func, std::string file, int line)
+int ptrcheck_free(int mtype, void *ptr, std::string func, std::string file, int line)
 {
   Ptrcheck *pc;
 
@@ -596,7 +592,7 @@ int ptrcheck_free(void *ptr, std::string func, std::string file, int line)
     return false;
   }
 
-  pc = ptrcheck_verify_pointer(ptr, file, func, line, true /* dont store */);
+  pc = ptrcheck_verify_pointer(mtype, ptr, file, func, line, true /* dont store */);
   if (! pc) {
     DIE("Failed to save pointer history");
     return false;
@@ -617,26 +613,26 @@ int ptrcheck_free(void *ptr, std::string func, std::string file, int line)
   //
   // Add the free info to the ring buffer.
   //
-  *ringbuf_next = *pc;
+  *ringbuf_next[ mtype ] = *pc;
 
   //
   // Take care of wraps.
   //
-  ringbuf_next++;
-  if (ringbuf_next >= ringbuf_base + ringbuf_max_size) {
-    ringbuf_next = ringbuf_base;
+  ringbuf_next[ mtype ]++;
+  if (ringbuf_next[ mtype ] >= ringbuf_base[ mtype ] + ringbuf_max_size) {
+    ringbuf_next[ mtype ] = ringbuf_base[ mtype ];
   }
 
   //
   // Increment the ring buffer used size up to the limit.
   //
-  if (ringbuf_current_size < ringbuf_max_size) {
-    ringbuf_current_size++;
+  if (ringbuf_current_size[ mtype ] < ringbuf_max_size) {
+    ringbuf_current_size[ mtype ]++;
   } else {
-    ERR("overflowed ptrcheck ring buf size %u", ringbuf_current_size);
+    ERR("overflowed ptrcheck ring buf size %u", ringbuf_current_size[ mtype ]);
   }
 
-  hash_free(hash, ptr);
+  hash_free(hash[ mtype ], ptr);
 
   return true;
 }
@@ -644,22 +640,15 @@ int ptrcheck_free(void *ptr, std::string func, std::string file, int line)
 //
 // Check a pointer for validity with no recording of history.
 //
-int ptrcheck_verify(const void *ptr, std::string &func, std::string &file, int line)
+int ptrcheck_verify(int mtype, const void *ptr, std::string &func, std::string &file, int line)
 {
-  IF_NODEBUG5
-  {
-    if (! ptr_check_some_pointers_changed) {
-      return true;
-    }
-  }
-
-  return (ptrcheck_verify_pointer(ptr, file, func, line, false /* don't store */) != 0);
+  return (ptrcheck_verify_pointer(mtype, ptr, file, func, line, false /* don't store */) != 0);
 }
 
 //
 // Show any leaks
 //
-void ptrcheck_leak_print(void)
+void ptrcheck_leak_print(int mtype)
 {
   hash_elem_t **slot;
   hash_elem_t  *elem;
@@ -669,12 +658,12 @@ void ptrcheck_leak_print(void)
 
   leak = 0;
 
-  if (! hash) {
+  if (! hash[ mtype ]) {
     return;
   }
 
-  for (i = 0; i < hash->hash_size; i++) {
-    slot = &hash->elements[ i ];
+  for (i = 0; i < hash[ mtype ]->hash_size; i++) {
+    slot = &hash[ mtype ]->elements[ i ];
     elem = *slot;
 
     while (elem) {
@@ -719,6 +708,13 @@ void ptrcheck_leak_print(void)
 
   if (! leak) {
     CON("No memory leaks!");
+  }
+}
+
+void ptrcheck_leak_print(void)
+{
+  for (int mtype = 0; mtype < MTYPE_MAX; mtype++) {
+    ptrcheck_leak_print(mtype);
   }
 }
 

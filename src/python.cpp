@@ -1731,6 +1731,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_FUNCTION(thing_get_initial_charge_count),
     MY_ADD_PYTHON_FUNCTION(thing_get_name),
     MY_ADD_PYTHON_FUNCTION(thing_get_poisoned_amount),
+    MY_ADD_PYTHON_FUNCTION(thing_get_necrotized_amount),
     MY_ADD_PYTHON_FUNCTION(thing_get_stamina),
     MY_ADD_PYTHON_FUNCTION(thing_get_stamina_max),
     MY_ADD_PYTHON_FUNCTION(thing_get_top_owner_id),

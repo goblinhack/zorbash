@@ -16,7 +16,7 @@
 
 void Light::log_(const char *fmt, va_list args)
 {
-  verify(this);
+  verify(MTYPE_LIGHT, this);
   char buf[ MAXLONGSTR ];
   int  len;
 
@@ -33,7 +33,7 @@ void Light::log_(const char *fmt, va_list args)
 
 void Light::log(const char *fmt, ...)
 {
-  verify(this);
+  verify(MTYPE_LIGHT, this);
   auto    t = this;
   va_list args;
 
@@ -44,7 +44,7 @@ void Light::log(const char *fmt, ...)
 
 void Light::die_(const char *fmt, va_list args)
 {
-  verify(this);
+  verify(MTYPE_LIGHT, this);
   char buf[ MAXLONGSTR ];
   int  len;
 
@@ -63,7 +63,7 @@ void Light::die(const char *fmt, ...)
 {
   g_errored = true;
 
-  verify(this);
+  verify(MTYPE_LIGHT, this);
   auto    t = this;
   va_list args;
 
@@ -74,7 +74,7 @@ void Light::die(const char *fmt, ...)
 
 void Light::con_(const char *fmt, va_list args)
 {
-  verify(this);
+  verify(MTYPE_LIGHT, this);
   char buf[ MAXLONGSTR ];
   int  len;
 
@@ -95,7 +95,7 @@ void Light::con_(const char *fmt, va_list args)
 
 void Light::con(const char *fmt, ...)
 {
-  verify(this);
+  verify(MTYPE_LIGHT, this);
   auto    t = this;
   va_list args;
 
@@ -106,7 +106,7 @@ void Light::con(const char *fmt, ...)
 
 void Light::err_(const char *fmt, va_list args)
 {
-  verify(this);
+  verify(MTYPE_LIGHT, this);
   char buf[ MAXLONGSTR ];
   int  len;
 
@@ -135,7 +135,7 @@ void Light::err(const char *fmt, ...)
 {
   g_errored = true;
 
-  verify(this);
+  verify(MTYPE_LIGHT, this);
   auto    t = this;
   va_list args;
 

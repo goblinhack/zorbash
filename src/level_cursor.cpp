@@ -106,7 +106,7 @@ void Level::cursor_move(void)
 
   if (cursor) {
     TRACE_AND_INDENT();
-    verify(cursor);
+    verify(MTYPE_THING, cursor);
     if (cursor_at != cursor_old) {
       cursor_old = cursor_at;
       cursor->move_to_immediately(cursor_at);

@@ -19,7 +19,7 @@ Level::~Level(void)
     log("Delete current game level");
     game->level = nullptr;
   }
-  oldptr(this);
+  oldptr(MTYPE_LEVEL, this);
 }
 
 void Level::fini(void)

@@ -157,7 +157,7 @@ void Thing::animate(void)
         }
       }
     } else {
-      verify(tile);
+      verify(MTYPE_TILE, tile);
       tile = tile_next(tmap, tile);
     }
   }
@@ -205,7 +205,7 @@ void Thing::animate(void)
       if (! tile) {
         tile = tile_first(tmap);
       }
-      verify(tile);
+      verify(MTYPE_TILE, tile);
 #ifdef DEBUG_ANIM
       if (is_debug_type()) {
         con("Tile %s moving %d up %d down %d left %d right %d "

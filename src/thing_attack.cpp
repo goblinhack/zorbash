@@ -351,7 +351,7 @@ bool Thing::attack(point future_pos)
   bool attack = true;
   bool idle   = false;
 
-  verify(this);
+  verify(MTYPE_THING, this);
   bool shove_allowed  = true;
   bool attack_allowed = true;
   return (move(future_pos, up, down, left, right, attack, idle, shove_allowed, attack_allowed));

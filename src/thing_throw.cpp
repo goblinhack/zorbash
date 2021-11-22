@@ -15,7 +15,7 @@
 
 bool Thing::throw_item_choose_target(Thingp what)
 {
-  verify(what);
+  verify(MTYPE_THING, what);
   if (! what) {
     err("Cannot throw null thing");
     return false;
@@ -48,13 +48,13 @@ void Thing::throw_at(Thingp what, Thingp target)
     what = game->request_to_throw_item;
   }
 
-  verify(what);
+  verify(MTYPE_THING, what);
   if (! what) {
     err("Cannot throw null thing");
     return;
   }
 
-  verify(what);
+  verify(MTYPE_THING, what);
   if (! what) {
     err("Cannot throw at null target");
     return;

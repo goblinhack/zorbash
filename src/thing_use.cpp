@@ -17,7 +17,7 @@
 
 void Thing::on_use(Thingp what)
 {
-  verify(what);
+  verify(MTYPE_THING, what);
   if (! what) {
     err("Cannot use null thing");
     return;
@@ -48,13 +48,13 @@ void Thing::on_use(Thingp what)
 
 void Thing::on_use(Thingp what, Thingp target)
 {
-  verify(what);
+  verify(MTYPE_THING, what);
   if (! what) {
     err("Cannot on_use null thing");
     return;
   }
 
-  verify(target);
+  verify(MTYPE_THING, target);
   if (! what) {
     err("Cannot on_use null target");
     return;
@@ -84,7 +84,7 @@ void Thing::on_use(Thingp what, Thingp target)
 
 void Thing::on_final_use(Thingp what)
 {
-  verify(what);
+  verify(MTYPE_THING, what);
   if (! what) {
     err("Cannot final_use null thing");
     return;
@@ -116,13 +116,13 @@ void Thing::on_final_use(Thingp what)
 
 void Thing::on_final_use(Thingp what, Thingp target)
 {
-  verify(what);
+  verify(MTYPE_THING, what);
   if (! what) {
     err("Cannot on_final_use null thing");
     return;
   }
 
-  verify(target);
+  verify(MTYPE_THING, target);
   if (! what) {
     err("Cannot on_final_use null target");
     return;
@@ -153,7 +153,7 @@ void Thing::on_final_use(Thingp what, Thingp target)
 
 void Thing::used(Thingp what, Thingp target, bool remove_after_use)
 {
-  verify(what);
+  verify(MTYPE_THING, what);
   if (! what) {
     err("Cannot used null thing");
     return;
@@ -229,7 +229,7 @@ void Thing::used(Thingp what, Thingp target, bool remove_after_use)
 
 bool Thing::use(Thingp what, int preferred_equip)
 {
-  verify(what);
+  verify(MTYPE_THING, what);
   if (! what) {
     err("Cannot use null thing");
     return false;

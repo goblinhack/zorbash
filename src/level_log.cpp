@@ -15,7 +15,7 @@
 
 void Level::log_(const char *fmt, va_list args)
 {
-  verify(this);
+  verify(MTYPE_LEVEL, this);
   auto l = this;
   char buf[ MAXLONGSTR ];
   int  len;
@@ -34,7 +34,7 @@ void Level::log_(const char *fmt, va_list args)
 
 void Level::log(const char *fmt, ...)
 {
-  verify(this);
+  verify(MTYPE_LEVEL, this);
   log_catchup_missing_indent_levels();
   auto    l = this;
   va_list args;
@@ -45,7 +45,7 @@ void Level::log(const char *fmt, ...)
 
 void Level::con_(const char *fmt, va_list args)
 {
-  verify(this);
+  verify(MTYPE_LEVEL, this);
   auto l = this;
   char buf[ MAXLONGSTR ];
   int  len;
@@ -68,7 +68,7 @@ void Level::con_(const char *fmt, va_list args)
 
 void Level::con(const char *fmt, ...)
 {
-  verify(this);
+  verify(MTYPE_LEVEL, this);
   auto    l = this;
   va_list args;
 
@@ -85,7 +85,7 @@ void Level::err_(const char *fmt, va_list args)
   }
   nested_error = true;
 
-  verify(this);
+  verify(MTYPE_LEVEL, this);
   auto l = this;
   char buf[ MAXLONGSTR ];
   int  len;

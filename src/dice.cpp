@@ -173,7 +173,7 @@ bool d20roll(int stat_a, int stat_b)
 //
 bool d20roll_under(int stat)
 {
-  auto roll_a = pcg_random_range_inclusive(1, 20);
+  int roll_a = pcg_random_range_inclusive(1, 20);
 
   if (roll_a == 20) {
     return true;

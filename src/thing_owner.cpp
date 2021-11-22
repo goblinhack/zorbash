@@ -17,7 +17,7 @@
 
 void Thing::on_owner_set(Thingp what)
 {
-  verify(what);
+  verify(MTYPE_THING, what);
   if (! what) {
     err("Cannot owner_set null thing");
     return;
@@ -48,7 +48,7 @@ void Thing::on_owner_set(Thingp what)
 
 void Thing::on_owner_unset(Thingp what)
 {
-  verify(what);
+  verify(MTYPE_THING, what);
   if (! what) {
     err("Cannot owner_unset null thing");
     return;
@@ -138,7 +138,7 @@ void Thing::set_owner(Thingp owner)
 {
   TRACE_AND_INDENT();
   if (owner) {
-    verify(owner);
+    verify(MTYPE_THING, owner);
   }
 
   auto old_owner = get_immediate_owner();

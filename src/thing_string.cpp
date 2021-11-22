@@ -19,7 +19,7 @@ std::string Thing::to_string(void)
 {
   TRACE_AND_INDENT();
   auto tpp = tp();
-  verify(this);
+  verify(MTYPE_THING, this);
 
   if (unlikely(! level)) {
     return (string_sprintf("<not in level> %08" PRIx32 "(<no tp>%s%s%s%s%s%s%s%s @%d,%d)", id, is_dead ? "/dead" : "",
@@ -72,7 +72,7 @@ std::string Thing::to_short_string(void)
 {
   TRACE_AND_INDENT();
   auto tpp = tp();
-  verify(this);
+  verify(MTYPE_THING, this);
 
   if (unlikely(! level)) {
     return (string_sprintf("<not in level> (<no tp>%s%s%s%s%s%s%s%s @%d,%d)", is_dead ? "/dead" : "",
@@ -115,7 +115,7 @@ std::string Thing::to_short_string(void)
 std::string Thing::to_dbg_string(void)
 {
   TRACE_AND_INDENT();
-  verify(this);
+  verify(MTYPE_THING, this);
 
   return (string_sprintf(
       "L%d,%d,%d %08" PRIx32
@@ -180,7 +180,7 @@ std::string Thing::to_dbg_string(void)
 std::string Thing::to_dbg_saved_string(void)
 {
   TRACE_AND_INDENT();
-  verify(this);
+  verify(MTYPE_THING, this);
 
   return (string_sprintf(
       "L%d,%d,%d %08" PRIx32

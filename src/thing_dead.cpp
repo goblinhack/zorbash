@@ -17,7 +17,7 @@
 
 void Thing::dead_(Thingp defeater, const char *fmt, va_list args)
 {
-  verify(this);
+  verify(MTYPE_THING, this);
   char reason[ MAXSTR ];
   vsnprintf(reason, MAXSTR, fmt, args);
   defeat(defeater, reason);
@@ -25,7 +25,7 @@ void Thing::dead_(Thingp defeater, const char *fmt, va_list args)
 
 void Thing::dead(Thingp defeater, const char *fmt, ...)
 {
-  verify(this);
+  verify(MTYPE_THING, this);
   auto    t = this;
   va_list args;
 
@@ -36,7 +36,7 @@ void Thing::dead(Thingp defeater, const char *fmt, ...)
 
 void Thing::dead_(const char *fmt, va_list args)
 {
-  verify(this);
+  verify(MTYPE_THING, this);
   char reason[ MAXSTR ];
   vsnprintf(reason, MAXSTR, fmt, args);
   defeat(nullptr, reason);
@@ -44,19 +44,19 @@ void Thing::dead_(const char *fmt, va_list args)
 
 void Thing::dead(Thingp defeater, std::string &reason)
 {
-  verify(this);
+  verify(MTYPE_THING, this);
   defeat(defeater, reason);
 }
 
 void Thing::dead(const std::string &reason)
 {
-  verify(this);
+  verify(MTYPE_THING, this);
   defeat(nullptr, reason);
 }
 
 void Thing::dead(const char *fmt, ...)
 {
-  verify(this);
+  verify(MTYPE_THING, this);
   auto    t = this;
   va_list args;
 
@@ -67,7 +67,7 @@ void Thing::dead(const char *fmt, ...)
 
 void Thing::dead_scheduled_(const char *fmt, va_list args)
 {
-  verify(this);
+  verify(MTYPE_THING, this);
   char reason[ MAXSTR ];
   vsnprintf(reason, MAXSTR, fmt, args);
   is_scheduled_for_death = true;
@@ -76,13 +76,13 @@ void Thing::dead_scheduled_(const char *fmt, va_list args)
 
 void Thing::dead_scheduled(const std::string &reason)
 {
-  verify(this);
+  verify(MTYPE_THING, this);
   defeat(nullptr, reason);
 }
 
 void Thing::dead_scheduled(const char *fmt, ...)
 {
-  verify(this);
+  verify(MTYPE_THING, this);
   auto    t = this;
   va_list args;
 

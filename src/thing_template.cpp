@@ -19,9 +19,9 @@ Tpidmap   tp_id_map;
 
 static uint8_t tp_init_done;
 
-Tp::Tp(void) { newptr(this, "Tp"); }
+Tp::Tp(void) { newptr(MTYPE_TP, this, "Tp"); }
 
-Tp::~Tp(void) { oldptr(this); }
+Tp::~Tp(void) { oldptr(MTYPE_TP, this); }
 
 Tpp tp_find(const std::string &name)
 {

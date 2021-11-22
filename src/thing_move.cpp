@@ -127,7 +127,7 @@ bool Thing::move(point future_pos)
   bool shove_allowed   = true;
   bool attack_allowed  = true;
 
-  verify(this);
+  verify(MTYPE_THING, this);
   return (move(future_pos, up, down, left, right, attack, wait_or_collect, shove_allowed, attack_allowed));
 }
 
@@ -144,7 +144,7 @@ bool Thing::move_no_shove_no_attack(point future_pos)
   bool shove_allowed   = false;
   bool attack_allowed  = false;
 
-  verify(this);
+  verify(MTYPE_THING, this);
   return (move(future_pos, up, down, left, right, attack, wait_or_collect, shove_allowed, attack_allowed));
 }
 
@@ -161,7 +161,7 @@ bool Thing::move_no_shove_attack_allowed(point future_pos)
   bool shove_allowed   = false;
   bool attack_allowed  = true;
 
-  verify(this);
+  verify(MTYPE_THING, this);
   return (move(future_pos, up, down, left, right, attack, wait_or_collect, shove_allowed, attack_allowed));
 }
 

@@ -37,7 +37,7 @@ Thingp Level::thing_new(const std::string &name, const point at)
   return (t);
 }
 
-Thing::Thing_(void) { newptr(this, "thing"); }
+Thing::Thing_(void) { newptr(MTYPE_THING, this, "thing"); }
 
 void Thing::on_born(void)
 {
@@ -66,7 +66,7 @@ void Thing::on_born(void)
 
 void Thing::init(Levelp level, const std::string &name, const point born)
 {
-  verify(this);
+  verify(MTYPE_THING, this);
 
   this->level = level;
   mid_at      = born;
@@ -510,7 +510,7 @@ void Thing::init(Levelp level, const std::string &name, const point born)
 void Thing::reinit(void)
 {
   TRACE_AND_INDENT();
-  verify(this);
+  verify(MTYPE_THING, this);
   const auto tpp = tp_or_update();
   if (unlikely(! tpp)) {
     ERR("No tp found for reinitialized thing ID %x tp_id %d", id.id, tp_id);

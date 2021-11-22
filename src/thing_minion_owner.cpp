@@ -49,7 +49,7 @@ void Thing::set_minion_owner(Thingp minion_owner)
 {
   TRACE_AND_INDENT();
   if (minion_owner) {
-    verify(minion_owner);
+    verify(MTYPE_THING, minion_owner);
   }
 
   auto old_minion_owner = get_immediate_minion_owner();

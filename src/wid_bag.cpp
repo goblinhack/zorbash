@@ -410,7 +410,7 @@ bool Game::wid_bag_move_item(Thingp t)
     return false;
   }
 
-  verify(t);
+  verify(MTYPE_THING, t);
   t->log("Chosen to move me");
   TRACE_AND_INDENT();
 

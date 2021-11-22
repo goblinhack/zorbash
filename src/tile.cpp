@@ -26,9 +26,9 @@ static uint8_t tile_init_done;
 
 #define ENABLE_TILE_BOUNDS
 
-Tile::Tile(void) { newptr(this, "Tile"); }
+Tile::Tile(void) { newptr(MTYPE_TILE, this, "Tile"); }
 
-Tile::~Tile(void) { oldptr(this); }
+Tile::~Tile(void) { oldptr(MTYPE_TILE, this); }
 
 Tilep tile_index_to_tile(uint16_t i)
 {
@@ -56,7 +56,7 @@ void tile_fini(void)
   }
 
   for (auto &t : all_tiles) {
-    verify(t.second);
+    verify(MTYPE_TILE, t.second);
     delete t.second;
   }
 
@@ -65,7 +65,7 @@ void tile_fini(void)
 
 Tile::Tile(const class Tile *tile)
 {
-  newptr(this, "Tile copy");
+  newptr(MTYPE_TILE, this, "Tile copy");
 
   pix_width  = tile->pix_width;
   pix_height = tile->pix_height;

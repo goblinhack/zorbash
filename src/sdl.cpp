@@ -1441,13 +1441,6 @@ void sdl_loop(void)
       } else {
         glFlush();
       }
-
-      //
-      // Optimization to only bother checking pointers if some kind of
-      // allocation occurred.
-      //
-      extern bool ptr_check_some_pointers_changed;
-      ptr_check_some_pointers_changed = false;
     }
 
     pcg_random_allowed = true;

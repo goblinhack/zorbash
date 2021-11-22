@@ -17,7 +17,7 @@ static void wid_log_(Widp t, const char *fmt, va_list args)
   char buf[ MAXLONGSTR ];
   int  len;
 
-  verify(t);
+  verify(MTYPE_THING, t);
   buf[ 0 ] = '\0';
   get_timestamp(buf, MAXLONGSTR);
   len = (int) strlen(buf);
@@ -32,7 +32,7 @@ void WID_LOG(Widp t, const char *fmt, ...)
 {
   va_list args;
 
-  verify(t);
+  verify(MTYPE_THING, t);
 
   va_start(args, fmt);
   wid_log_(t, fmt, args);
@@ -45,7 +45,7 @@ void WID_DBG(Widp t, const char *fmt, ...)
 
   IF_NODEBUG4 { return; }
 
-  verify(t);
+  verify(MTYPE_THING, t);
 
   va_start(args, fmt);
   wid_log_(t, fmt, args);

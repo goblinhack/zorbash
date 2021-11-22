@@ -21,17 +21,17 @@ public:
   {
     surface            = 0;
     gl_surface_binding = 0;
-    newptr(this, "Tex");
+    newptr(MTYPE_TEX, this, "Tex");
   }
 
   ~Tex(void)
   {
-    oldptr(this);
+    oldptr(MTYPE_TEX, this);
 
     if (surface) {
-      verify(surface);
+      verify(MTYPE_SDL, surface);
       SDL_FreeSurface(surface);
-      oldptr(surface);
+      oldptr(MTYPE_SDL, surface);
       surface = 0;
     }
 
@@ -140,13 +140,13 @@ static SDL_Surface *load_image(std::string filename)
 
   if (comp == 4) {
     surf = SDL_CreateRGBSurface(0, x, y, 32, rmask, gmask, bmask, amask);
-    newptr(surf, "SDL_CreateRGBSurface1");
+    newptr(MTYPE_SDL, surf, "SDL_CreateRGBSurface1");
   } else if (comp == 3) {
     surf = SDL_CreateRGBSurface(0, x, y, 24, rmask, gmask, bmask, 0);
-    newptr(surf, "SDL_CreateRGBSurface2");
+    newptr(MTYPE_SDL, surf, "SDL_CreateRGBSurface2");
   } else if (comp == 2) {
     surf = SDL_CreateRGBSurface(0, x, y, 32, 0, 0, 0, 0);
-    newptr(surf, "SDL_CreateRGBSurface3");
+    newptr(MTYPE_SDL, surf, "SDL_CreateRGBSurface3");
   } else {
     ERR("Could not handle image with %d components", comp);
     free_raw_image(image_data);
@@ -159,8 +159,8 @@ static SDL_Surface *load_image(std::string filename)
     SDL_Surface *old_surf = surf;
     DBG4("- SDL_ConvertSurfaceFormat");
     surf = SDL_ConvertSurfaceFormat(old_surf, SDL_PIXELFORMAT_RGBA8888, 0);
-    newptr(surf, "SDL_CreateRGBSurface4");
-    oldptr(old_surf);
+    newptr(MTYPE_SDL, surf, "SDL_CreateRGBSurface4");
+    oldptr(MTYPE_SDL, old_surf);
     SDL_FreeSurface(old_surf);
     SDL_SaveBMP(surf, filename.c_str());
   }
@@ -198,26 +198,26 @@ static void load_images(SDL_Surface **surf1_out, SDL_Surface **surf2_out, std::s
 
   if (comp == 4) {
     surf1 = SDL_CreateRGBSurface(0, x, y, 32, rmask, gmask, bmask, amask);
-    newptr(surf1, "SDL_CreateRGBSurface5");
+    newptr(MTYPE_SDL, surf1, "SDL_CreateRGBSurface5");
   } else if (comp == 3) {
     surf1 = SDL_CreateRGBSurface(0, x, y, 24, rmask, gmask, bmask, 0);
-    newptr(surf1, "SDL_CreateRGBSurface6");
+    newptr(MTYPE_SDL, surf1, "SDL_CreateRGBSurface6");
   } else if (comp == 2) {
     surf1 = SDL_CreateRGBSurface(0, x, y, 32, 0, 0, 0, 0);
-    newptr(surf1, "SDL_CreateRGBSurface7");
+    newptr(MTYPE_SDL, surf1, "SDL_CreateRGBSurface7");
   } else {
     ERR("Could not handle image with %d components", comp);
   }
 
   if (comp == 4) {
     surf2 = SDL_CreateRGBSurface(0, x, y, 32, rmask, gmask, bmask, amask);
-    newptr(surf2, "SDL_CreateRGBSurface8");
+    newptr(MTYPE_SDL, surf2, "SDL_CreateRGBSurface8");
   } else if (comp == 3) {
     surf2 = SDL_CreateRGBSurface(0, x, y, 24, rmask, gmask, bmask, 0);
-    newptr(surf2, "SDL_CreateRGBSurface9");
+    newptr(MTYPE_SDL, surf2, "SDL_CreateRGBSurface9");
   } else if (comp == 2) {
     surf2 = SDL_CreateRGBSurface(0, x, y, 32, 0, 0, 0, 0);
-    newptr(surf2, "SDL_CreateRGBSurface10");
+    newptr(MTYPE_SDL, surf2, "SDL_CreateRGBSurface10");
   } else {
     ERR("Could not handle image with %d components", comp);
   }
@@ -229,8 +229,8 @@ static void load_images(SDL_Surface **surf1_out, SDL_Surface **surf2_out, std::s
     SDL_Surface *old_surf = surf1;
     DBG4("- SDL_ConvertSurfaceFormat");
     surf1 = SDL_ConvertSurfaceFormat(old_surf, SDL_PIXELFORMAT_RGBA8888, 0);
-    newptr(surf1, "SDL_CreateRGBSurface14");
-    oldptr(old_surf);
+    newptr(MTYPE_SDL, surf1, "SDL_CreateRGBSurface14");
+    oldptr(MTYPE_SDL, old_surf);
     SDL_FreeSurface(old_surf);
     SDL_SaveBMP(surf1, filename.c_str());
   }
@@ -239,8 +239,8 @@ static void load_images(SDL_Surface **surf1_out, SDL_Surface **surf2_out, std::s
     SDL_Surface *old_surf = surf2;
     DBG4("- SDL_ConvertSurfaceFormat");
     surf2 = SDL_ConvertSurfaceFormat(old_surf, SDL_PIXELFORMAT_RGBA8888, 0);
-    newptr(surf2, "SDL_CreateRGBSurface15");
-    oldptr(old_surf);
+    newptr(MTYPE_SDL, surf2, "SDL_CreateRGBSurface15");
+    oldptr(MTYPE_SDL, old_surf);
     SDL_FreeSurface(old_surf);
     SDL_SaveBMP(surf2, filename.c_str());
   }
@@ -330,9 +330,9 @@ static std::pair< Texp, Texp > tex_sprite(SDL_Surface *in, std::string file, std
   uint32_t oy;
 
   SDL_Surface *out1 = SDL_CreateRGBSurface(0, owidth, oheight, 32, rmask, gmask, bmask, amask);
-  newptr(out1, "SDL_CreateRGBSurface17");
+  newptr(MTYPE_SDL, out1, "SDL_CreateRGBSurface17");
   SDL_Surface *out2 = SDL_CreateRGBSurface(0, owidth, oheight, 32, rmask, gmask, bmask, amask);
-  newptr(out2, "SDL_CreateRGBSurface18");
+  newptr(MTYPE_SDL, out2, "SDL_CreateRGBSurface18");
 
   oy = 0;
   for (iy = 0; iy < (int32_t) iheight; iy++) {
@@ -372,7 +372,7 @@ static std::pair< Texp, Texp > tex_sprite(SDL_Surface *in, std::string file, std
   }
 
   SDL_FreeSurface(in);
-  oldptr(in);
+  oldptr(MTYPE_SDL, in);
 
   t1 = tex_from_surface(out1, file, n1, mode);
   t2 = tex_from_surface(out2, file, n2, mode);

@@ -1435,6 +1435,8 @@ public:
   void on_owner_set(Thingp what);
   void on_owner_unset(Thingp what);
   void poison_tick(void);
+  void poisoned(void);
+  void rotting(void);
   void necrosis_tick(void);
   void reinit(void);
   void remove_all_references();

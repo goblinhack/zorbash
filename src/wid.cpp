@@ -158,9 +158,9 @@ static uint8_t wid_exiting;
 
 static int wid_refresh_overlay_count;
 
-Wid::Wid(void) { newptr(this, "wid"); }
+Wid::Wid(void) { newptr(MTYPE_WID, this, "wid"); }
 
-Wid::~Wid(void) { oldptr(this); }
+Wid::~Wid(void) { oldptr(MTYPE_WID, this); }
 
 uint8_t wid_init(void)
 {
@@ -426,9 +426,9 @@ ThingId wid_get_thing_id2_context(Widp w)
 void wid_set_prev(Widp w, Widp prev)
 {
   TRACE_AND_INDENT();
-  verify(w);
+  verify(MTYPE_WID, w);
   if (prev) {
-    verify(prev);
+    verify(MTYPE_WID, prev);
   }
   if (! w) {
     DIE("No wid");
@@ -513,14 +513,14 @@ Widp wid_get_top_parent(Widp w)
   if (! w) {
     return (w);
   }
-  verify(w);
+  verify(MTYPE_WID, w);
 
   if (! w->parent) {
     return (w);
   }
 
   while (w->parent) {
-    verify(w);
+    verify(MTYPE_WID, w);
     w = w->parent;
   }
 
@@ -1123,9 +1123,9 @@ void wid_set_name(Widp w, std::string name)
 {
   TRACE_AND_INDENT();
   if (name != "") {
-    oldptr(w);
+    oldptr(MTYPE_WID, w);
     w->name = name;
-    newptr(w, name);
+    newptr(MTYPE_WID, w, name);
   } else {
     w->name = name;
   }
@@ -4093,7 +4093,7 @@ Widp wid_find_at(int32_t x, int32_t y)
     return nullptr;
   }
 
-  verify(w);
+  verify(MTYPE_WID, w);
   if (wid_ignore_being_destroyed(w)) {
     return nullptr;
   }
@@ -4994,7 +4994,7 @@ static Widp wid_mouse_motion_handler(int32_t x, int32_t y, int32_t relx, int32_t
 
   w = get(wid_on_screen_at, x, y);
   if (w) {
-    verify(w);
+    verify(MTYPE_WID, w);
     if (w->hidden) {
       return nullptr;
     }

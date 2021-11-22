@@ -49,7 +49,7 @@ void Level::display_minimap(void)
     point to(game->minimap_over.x, game->minimap_over.y);
     if (cursor) {
       TRACE_AND_INDENT();
-      verify(cursor);
+      verify(MTYPE_THING, cursor);
       cursor_at = to;
       if (cursor_at != cursor_old) {
         cursor_old = to;

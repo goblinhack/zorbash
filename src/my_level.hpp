@@ -291,7 +291,7 @@ public:
       for (size_t idx = 0; idx < things_to_walk_size; idx++) {                                                       \
         Thingp t;                                                                                                    \
         t = things_to_walk[ idx ];                                                                                   \
-        verify(t);
+        verify(MTYPE_THING, t);
 
 #define FOR_ALL_THINGS(level, t, x, y) FOR_ALL_THINGS_WALKER(level, t, x, y)
 
@@ -306,7 +306,7 @@ public:
       for (size_t idx = 0; idx < things_to_walk_size; idx++) {                                                       \
         Thingp t;                                                                                                    \
         t = things_to_walk[ idx ];                                                                                   \
-        verify(t);
+        verify(MTYPE_THING, t);
 
 #define FOR_ALL_THINGS(level, t, x, y) FOR_ALL_THINGS_WALKER(level, t, x, y)
 
@@ -333,7 +333,7 @@ public:
         continue;                                                                                                    \
       }                                                                                                              \
                                                                                                                      \
-      verify(t);
+      verify(MTYPE_THING, t);
 
 #define FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL_END(level)                                                             \
   if (i == level->all_things_of_interest[ _group_ ].end()) {                                                         \
@@ -352,7 +352,7 @@ public:
     while (i != level->all_animated_things[ group ].end()) {                                                         \
       auto t = i->second;                                                                                            \
       i++;                                                                                                           \
-      verify(t);
+      verify(MTYPE_THING, t);
 
 #define FOR_ALL_ANIMATED_THINGS_LEVEL_END(level)                                                                     \
   if (i == level->all_animated_things[ group ].end()) {                                                              \
@@ -382,7 +382,7 @@ public:
         }                                                                                                            \
       }                                                                                                              \
                                                                                                                      \
-      verify(t);
+      verify(MTYPE_THING, t);
 
 #define FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL_END(level)                                                             \
   if (i == level->all_things_of_interest[ _group_ ].end()) {                                                         \

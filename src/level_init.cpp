@@ -12,7 +12,7 @@
 Level::Level(void)
 {
   TRACE_AND_INDENT();
-  newptr(this, "level");
+  newptr(MTYPE_LEVEL, this, "level");
 }
 
 void Level::clear(void)

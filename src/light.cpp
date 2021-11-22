@@ -24,19 +24,19 @@ static int  g_glow_overlay_texid;
 Light::Light(void)
 {
   TRACE_AND_INDENT();
-  newptr(this, "Light");
+  newptr(MTYPE_LIGHT, this, "Light");
 }
 
 Light::~Light(void)
 {
   TRACE_AND_INDENT();
-  verify(this);
+  verify(MTYPE_LIGHT, this);
   if (is_being_destroyed) {
     die("Death recursion");
   }
   is_being_destroyed = true;
   destroy();
-  oldptr(this);
+  oldptr(MTYPE_LIGHT, this);
 }
 
 void Light::draw_pixel(int16_t index, const point &p0, const point &p1)

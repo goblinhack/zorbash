@@ -137,13 +137,16 @@ void Thing::achieve_goals_in_life(void)
   }
 
   //
-  // Apply poison damage
+  // Apply necrosis damage
   //
-  poison_tick();
+  necrosis_tick();
   if (is_dead) {
     return;
   }
 
+  //
+  // Check for impacts
+  //
   if (collision_check_do()) {
     return;
   }

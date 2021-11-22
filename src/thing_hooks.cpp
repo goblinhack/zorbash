@@ -150,7 +150,7 @@ void Thing::hooks_remove()
         dbg("Hooks remove carry-anim");
       }
       set_equip_carry_anim(nullptr, e);
-      verify(item);
+      verify(MTYPE_ITEMP, item);
       item->remove_owner();
       item->dead("weapon carry-anim owner defeated ");
     }
@@ -165,7 +165,7 @@ void Thing::hooks_remove()
         dbg("Hooks remove use-anim");
       }
       set_equip_use_anim(nullptr, e);
-      verify(item);
+      verify(MTYPE_ITEMP, item);
       item->remove_owner();
       item->dead("weapon use-anim owner defeated ");
     }

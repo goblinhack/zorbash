@@ -15,10 +15,10 @@ std::vector< Roomp > Room::all_rooms;
 Room::Room(void)
 {
   this->roomno = all_rooms.size();
-  newptr(this, "room");
+  newptr(MTYPE_ROOM, this, "room");
 }
 
-Room::~Room(void) { oldptr(this); }
+Room::~Room(void) { oldptr(MTYPE_ROOM, this); }
 
 void room_init(void) { TRACE_AND_INDENT(); }
 
