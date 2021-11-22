@@ -186,6 +186,13 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     }
   }
 
+  auto delta = mid_at - hitter->mid_at;
+
+  if (real_hitter->tp()->gfx_bounce_on_move()) {
+    real_hitter->bounce(0.5, 0.1, 100, 3);
+    real_hitter->move_set_dir_from_delta(delta);
+  }
+
   if (real_hitter->is_able_to_tire()) {
     if (! real_hitter->get_stamina()) {
       if (real_hitter->is_player()) {
@@ -261,6 +268,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
             TOPCON("%%fg=yellow$Your rotting hand touches %s for 1 permanent strength damage!%%fg=reset$",
                    text_the().c_str());
           }
+          incr_necrotized_amount(damage);
         }
       } else {
         if (environ_prefers_necrosis()) {
@@ -280,12 +288,11 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
             TOPCON("%%fg=yellow$Your rotting hand touches %s for 1 permanent constitution damage!%%fg=reset$",
                    text_the().c_str());
           }
+          incr_necrotized_amount(damage);
         }
       }
     }
   }
-
-  auto delta = mid_at - hitter->mid_at;
 
   IF_DEBUG2 { hitter->log("Hit %s (health %d) for damage %d", text_the().c_str(), get_health(), damage); }
 
@@ -305,11 +312,6 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     } else {
       clear_move_path("player was hit");
     }
-  }
-
-  if (real_hitter->tp()->gfx_bounce_on_move()) {
-    real_hitter->bounce(0.5, 0.1, 100, 3);
-    real_hitter->move_set_dir_from_delta(delta);
   }
 
   //
