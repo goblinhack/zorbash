@@ -118,7 +118,7 @@ const std::string stat_to_bonus_slash_str(int stat)
 }
 
 //
-// Roll "a" to see if it beats "b"
+// Roll for stat modifier "a" to see if it beats "b"
 //
 bool d20roll(int stat_a, int stat_b, bool &fumble, bool &critical)
 {
@@ -145,7 +145,7 @@ bool d20roll(int stat_a, int stat_b, bool &fumble, bool &critical)
 }
 
 //
-// Roll "a" to see if it beats "b"
+// Roll for stat modifier "a" to see if it beats "b"
 //
 bool d20roll(int stat_a, int stat_b)
 {
@@ -166,6 +166,24 @@ bool d20roll(int stat_a, int stat_b)
   // TOPCON("A %d(+%d) B %d(%d)", roll_a, stat_a, roll_b, stat_b);
 
   return roll_a >= roll_b;
+}
+
+//
+// Succedd if we can roll under
+//
+bool d20roll_under(int stat)
+{
+  auto roll_a = pcg_random_range_inclusive(1, 20);
+
+  if (roll_a == 20) {
+    return true;
+  }
+
+  if (roll_a == 1) {
+    return false;
+  }
+
+  return roll_a <= stat + stat_to_bonus(stat);
 }
 
 Dice::Dice(void) {}

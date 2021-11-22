@@ -13,27 +13,25 @@
 
 void Thing::necrosis_tick(void)
 {
-  if (! is_monst() && ! is_player()) {
-    return;
+  if ((is_alive_monst() || is_player()) && ! is_ethereal() && ! is_undead()) {
+    auto old_necrosis = get_necrotized_amount();
+    if (! old_necrosis) {
+      return;
+    }
+
+    TRACE_AND_INDENT();
+    dbg("Necrosis tick");
+    TRACE_AND_INDENT();
+
+    debuff_add_if_not_found(tp_find("debuff_necrotized"));
+
+    Thingp hitter   = this;
+    int    necrosis = old_necrosis;
+
+    if (necrosis) {
+      is_necrotized_by(hitter, necrosis);
+    }
+
+    decr_necrotized_amount();
   }
-
-  auto old_necrosis = get_necrotized_amount();
-  if (! old_necrosis) {
-    return;
-  }
-
-  TRACE_AND_INDENT();
-  dbg("Necrosis tick");
-  TRACE_AND_INDENT();
-
-  debuff_add_if_not_found(tp_find("debuff_necrotized"));
-
-  Thingp hitter   = this;
-  int    necrosis = old_necrosis;
-
-  if (necrosis) {
-    is_necrotized_by(hitter, necrosis);
-  }
-
-  decr_necrotized_amount();
 }

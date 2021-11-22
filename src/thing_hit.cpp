@@ -233,45 +233,54 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
   }
 
   if (necrosis) {
-    if (pcg_random_range(0, 100) < 50) {
-      if (environ_prefers_necrosis()) {
-        if (hitter->is_necrotic_danger_level() || real_hitter->is_necrotic_danger_level()) {
-          if (is_player()) {
-            TOPCON("You gain strength from the necrotic attack!");
-          } else if (real_hitter->is_player()) {
-            TOPCON("%s gains strength from the necrotic attack!", text_The().c_str());
-          }
-          incr_stat_strength();
-          return false;
-        }
-      } else if (necrosis) {
+    if (is_undead() || is_ethereal()) {
+      if (hitter->is_necrotic_danger_level() || real_hitter->is_necrotic_danger_level()) {
         if (is_player()) {
-          TOPCON("%%fg=yellow$Your skin is rotting. You lose 1 permanent strength!%%fg=reset$");
-        } else if (is_alive_monst() && real_hitter->is_player()) {
-          TOPCON("%%fg=yellow$Your rotting hand touches %s for 1 permanent strength damage!%%fg=reset$",
-                 text_the().c_str());
+          TOPCON("You are immune to the necrotic attack of %s!", text_the().c_str());
+        } else if (real_hitter->is_player()) {
+          TOPCON("%s shrugs off your no effect!", text_The().c_str());
         }
-        decr_stat_strength();
+        return false;
       }
     } else {
-      if (environ_prefers_necrosis()) {
-        if (hitter->is_necrotic_danger_level() || real_hitter->is_necrotic_danger_level()) {
-          if (is_player()) {
-            TOPCON("You gain constitution from the necrotic attack!");
-          } else if (real_hitter->is_player()) {
-            TOPCON("%s gains constitution from the necrotic attack!", text_The().c_str());
+      if (pcg_random_range(0, 100) < 50) {
+        if (environ_prefers_necrosis()) {
+          if (hitter->is_necrotic_danger_level() || real_hitter->is_necrotic_danger_level()) {
+            if (is_player()) {
+              TOPCON("You gain strength from the necrotic attack!");
+            } else if (real_hitter->is_player()) {
+              TOPCON("%s gains strength from the necrotic attack!", text_The().c_str());
+            }
+            incr_stat_strength();
+            return false;
           }
-          incr_stat_constitution();
-          return false;
+        } else {
+          if (is_player()) {
+            TOPCON("%%fg=yellow$Your skin is rotting. You lose 1 permanent strength!%%fg=reset$");
+          } else if (is_alive_monst() && real_hitter->is_player()) {
+            TOPCON("%%fg=yellow$Your rotting hand touches %s for 1 permanent strength damage!%%fg=reset$",
+                   text_the().c_str());
+          }
         }
-      } else if (necrosis) {
-        if (is_player()) {
-          TOPCON("%%fg=yellow$Your skin is rotting. You lose 1 permanent constitution!%%fg=reset$");
-        } else if (is_alive_monst() && real_hitter->is_player()) {
-          TOPCON("%%fg=yellow$Your rotting hand touches %s for 1 permanent constitution damage!%%fg=reset$",
-                 text_the().c_str());
+      } else {
+        if (environ_prefers_necrosis()) {
+          if (hitter->is_necrotic_danger_level() || real_hitter->is_necrotic_danger_level()) {
+            if (is_player()) {
+              TOPCON("You gain constitution from the necrotic attack!");
+            } else if (real_hitter->is_player()) {
+              TOPCON("%s gains constitution from the necrotic attack!", text_The().c_str());
+            }
+            incr_stat_constitution();
+            return false;
+          }
+        } else {
+          if (is_player()) {
+            TOPCON("%%fg=yellow$Your skin is rotting. You lose 1 permanent constitution!%%fg=reset$");
+          } else if (is_alive_monst() && real_hitter->is_player()) {
+            TOPCON("%%fg=yellow$Your rotting hand touches %s for 1 permanent constitution damage!%%fg=reset$",
+                   text_the().c_str());
+          }
         }
-        decr_stat_constitution();
       }
     }
   }

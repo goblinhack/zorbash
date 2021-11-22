@@ -42,16 +42,6 @@ void Thing::lifespan_tick(void)
 {
   TRACE_AND_INDENT();
 
-  if (! get_stat_strength()) {
-    dead("by becoming too weak to breath");
-    return;
-  }
-
-  if (! get_stat_constitution()) {
-    dead("by becoming too sickly to live");
-    return;
-  }
-
   //
   // Torches only tick when carried
   //

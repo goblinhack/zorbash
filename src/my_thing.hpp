@@ -1394,6 +1394,7 @@ public:
   void level_pop(void);
   void level_push(void);
   void lifespan_tick();
+  void stats_tick();
   void light_update_strength(void);
   void location_check();
   void location_check_all_things_at();

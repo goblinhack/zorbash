@@ -87,6 +87,17 @@ void Thing::achieve_goals_in_life(void)
     return;
   }
 
+  //
+  // Check stats don't get too low
+  //
+  stats_tick();
+  if (is_dead) {
+    return;
+  }
+
+  //
+  // Periodic health checks
+  //
   hunger_clock();
   if (is_dead) {
     return;
