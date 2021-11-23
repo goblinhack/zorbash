@@ -557,10 +557,6 @@ case `uname` in
         ;;
 esac
 
-if [[ $OPT_PROF != "" ]]; then
-    LD_FLAGS+=" -pg"
-fi
-
 GCC_WARN=""
 
 #
@@ -589,6 +585,7 @@ cd src
 
 if [[ $OPT_PROF != "" ]]; then
     C_FLAGS+=" -pg"
+    LDFLAGS+=" -pg"
 fi
 
 if [[ $OPT_DEV1 != "" ]]; then
