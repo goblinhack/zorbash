@@ -12,15 +12,15 @@
 // __FUNCTION__ is not a preprocessor directive so we can't convert it into a
 // string
 //
-#define PTRCHECK_AT std::string(__FILE__), std::string(__PRETTY_FUNCTION__), __LINE__
+#define PTRCHECK_AT __FILE__, __PRETTY_FUNCTION__, __LINE__
 
-void *myzalloc_(int size, std::string what, std::string func, std::string file, int line);
-void *mymalloc_(int size, std::string what, std::string func, std::string file, int line);
-void *myrealloc_(void *ptr, int size, std::string what, std::string func, std::string file, int line);
-void  myfree_(void *ptr, std::string func, std::string file, int line);
-char *dupstr_(const char *in, std::string what, std::string func, std::string file, int line);
-char *strsub_(const char *in, const char *old, const char *replace_with, std::string what, std::string file,
-              std::string func, int line);
+void *myzalloc_(int size, const char *what, const char *func, const char *file, int line);
+void *mymalloc_(int size, const char *what, const char *func, const char *file, int line);
+void *myrealloc_(void *ptr, int size, const char *what, const char *func, const char *file, int line);
+void  myfree_(void *ptr, const char *func, const char *file, int line);
+char *dupstr_(const char *in, const char *what, const char *func, const char *file, int line);
+char *strsub_(const char *in, const char *old, const char *replace_with, const char *what, const char *file,
+              const char *func, int line);
 
 #define myzalloc(__size__, __what__) myzalloc_((__size__), (__what__), PTRCHECK_AT)
 
@@ -34,36 +34,34 @@ char *strsub_(const char *in, const char *old, const char *replace_with, std::st
 
 #define strsub(a, b, c, __what__) strsub_(a, b, c, (__what__), PTRCHECK_AT)
 
-void *ptrcheck_alloc(int mtype, const void *ptr, std::string what, int size, std::string file, std::string func,
+void *ptrcheck_alloc(int mtype, const void *ptr, const char *what, int size, const char *file, const char *func,
                      int line);
-int   ptrcheck_verify(int mtype, const void *ptr, std::string &file, std::string &func, int line);
-int   ptrcheck_free(int mtype, void *ptr, std::string file, std::string func, int line);
+int   ptrcheck_verify(int mtype, const void *ptr, const char *file, const char *func, int line);
+int   ptrcheck_free(int mtype, void *ptr, const char *file, const char *func, int line);
 void  ptrcheck_leak_print(int mtype);
 void  ptrcheck_leak_print(void);
 
 #define newptr(__mtype__, __ptr__, __what__)                                                                         \
   {                                                                                                                  \
-    if (DEBUG3) {                                                                                                    \
+    if (DEBUG2) {                                                                                                    \
       TRACE_AND_INDENT();                                                                                            \
-      ptrcheck_alloc(__mtype__, (__ptr__), (__what__), sizeof(*(__ptr__)), PTRCHECK_AT);                             \
+      ptrcheck_alloc(__mtype__, __ptr__, __what__, sizeof(*(__ptr__)), PTRCHECK_AT);                                 \
     }                                                                                                                \
   }
 
 #define oldptr(__mtype__, __ptr__)                                                                                   \
   {                                                                                                                  \
-    if (DEBUG3) {                                                                                                    \
+    if (DEBUG2) {                                                                                                    \
       TRACE_AND_INDENT();                                                                                            \
-      ptrcheck_free(__mtype__, (__ptr__), PTRCHECK_AT);                                                              \
+      ptrcheck_free(__mtype__, __ptr__, PTRCHECK_AT);                                                                \
     }                                                                                                                \
   }
 
 #define verify(__mtype__, __ptr__)                                                                                   \
   {                                                                                                                  \
-    if (DEBUG3) {                                                                                                    \
+    if (DEBUG2) {                                                                                                    \
       TRACE_AND_INDENT();                                                                                            \
-      static std::string a = std::string(__FILE__);                                                                  \
-      static std::string b = std::string(__PRETTY_FUNCTION__);                                                       \
-      ptrcheck_verify(__mtype__, (__ptr__), a, b, __LINE__);                                                         \
+      ptrcheck_verify(__mtype__, __ptr__, __FILE__, __PRETTY_FUNCTION__, __LINE__);                                  \
     }                                                                                                                \
   }
 

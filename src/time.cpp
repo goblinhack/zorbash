@@ -3,6 +3,9 @@
 // See the README.md file for license info.
 //
 
+#include <ctime>
+#include <time.h>
+
 #include "my_sdl.hpp"
 #include "my_string.hpp"
 #include "my_sys.hpp"
@@ -236,3 +239,24 @@ std::string current_date(void)
   strftime(buffer, sizeof(buffer), "%c", timeinfo);
   return std::string(buffer);
 }
+
+std::string &string_timestamp(void)
+{
+  static ts_t        time_last;
+  static std::string last_timestamp;
+  auto               time_now = time_get_time_ms_cached();
+
+  if (last_timestamp.length()) {
+    if (time_now - time_last < 1000) {
+      return last_timestamp;
+    }
+  }
+
+  time_last          = time_now;
+  std::time_t result = std::time(nullptr);
+  auto        s      = std::string(std::asctime(std::localtime(&result)));
+  s.pop_back();
+  last_timestamp = s;
+  return last_timestamp;
+}
+

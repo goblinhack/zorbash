@@ -40,7 +40,7 @@ void PY_DBG(const char *fmt, ...)
 {
   va_list args;
 
-  IF_NODEBUG4 { return; }
+  IF_NODEBUG3 { return; }
 
   va_start(args, fmt);
   py_log_(fmt, args);

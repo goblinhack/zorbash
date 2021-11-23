@@ -484,10 +484,8 @@ static void usage(void)
   CON(" --quick-start               // Skip menus, start the game");
   CON(" --resume                    // Load last snapshot");
   CON(" --debug                     // Basic debug");
-  CON(" --debug2                    // As above but includes log indentation and more detailed debugs");
-  CON(" --debug3                    // As above but show the entire level");
-  CON(" --debug4                    // As above but include memory checks");
-  CON(" --debug5                    // As above but include out of bounds checks");
+  CON(" --debug2                    // Map is visible and memory checks enabled");
+  CON(" --debug3                    // All debugs. Slow.");
   CON(" --no-debug                  // Disable debug");
   CON(" --seed <name/number>        // Set the random dungeon seed");
   CON(" ");
@@ -541,8 +539,6 @@ static void parse_args(int32_t argc, char *argv[])
       g_opt_debug1               = false;
       g_opt_debug2               = false;
       g_opt_debug3               = false;
-      g_opt_debug4               = false;
-      g_opt_debug5               = false;
       g_opt_override_debug_level = true;
       continue;
     }
@@ -565,25 +561,6 @@ static void parse_args(int32_t argc, char *argv[])
       g_opt_debug1               = true;
       g_opt_debug2               = true;
       g_opt_debug3               = true;
-      g_opt_override_debug_level = true;
-      continue;
-    }
-
-    if (! strcasecmp(argv[ i ], "--debug4") || ! strcasecmp(argv[ i ], "-debug4")) {
-      g_opt_debug1               = true;
-      g_opt_debug2               = true;
-      g_opt_debug3               = true;
-      g_opt_debug4               = true;
-      g_opt_override_debug_level = true;
-      continue;
-    }
-
-    if (! strcasecmp(argv[ i ], "--debug5") || ! strcasecmp(argv[ i ], "-debug5")) {
-      g_opt_debug1               = true;
-      g_opt_debug2               = true;
-      g_opt_debug3               = true;
-      g_opt_debug4               = true;
-      g_opt_debug5               = true;
       g_opt_override_debug_level = true;
       continue;
     }

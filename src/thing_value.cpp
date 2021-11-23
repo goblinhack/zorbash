@@ -52,7 +52,7 @@ int Thing::maybe_itemp_value(Thingp it)
 
   value *= 1 + it->get_charge_count();
 
-  dbg4("Item value for %s is %d", it->to_string().c_str(), value);
+  dbg3("Item value for %s is %d", it->to_string().c_str(), value);
 
   return value;
 }

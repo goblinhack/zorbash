@@ -20,13 +20,15 @@
 std::vector< Lightp > &Thing::get_light(void)
 {
   TRACE_AND_INDENT();
-  if (maybe_infop()) {
-    verify(MTYPE_INFOP, maybe_infop());
-    return (get_infop()->light);
-  } else {
-    static std::vector< Lightp > no_light;
-    return no_light;
+
+  //
+  // Faster to avoid the infop API as this is called a lot
+  //
+  if (_infop) {
+    return (_infop->light);
   }
+  static std::vector< Lightp > no_light;
+  return no_light;
 }
 
 void Thing::new_light(point offset, int strength, color col, int fbo)

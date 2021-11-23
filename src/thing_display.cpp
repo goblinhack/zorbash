@@ -21,7 +21,7 @@ void Thing::blit_non_player_owned_shadow(const Tpp &tpp, const Tilep &tile, cons
                                          const point &blit_br)
 {
   TRACE_AND_INDENT();
-  IF_DEBUG3 { return; }
+  IF_DEBUG2 { return; }
 
   if (g_render_black_and_white) {
     return;
@@ -204,7 +204,7 @@ void Thing::blit_non_player_owned_shadow(const Tpp &tpp, const Tilep &tile, cons
 void Thing::blit_player_owned_shadow(const Tpp &tpp, const Tilep &tile, const point &blit_tl, const point &blit_br)
 {
   TRACE_AND_INDENT();
-  IF_DEBUG3 { return; }
+  IF_DEBUG2 { return; }
 
   if (g_render_black_and_white) {
     return;
@@ -239,7 +239,7 @@ void Thing::blit_player_owned_shadow(const Tpp &tpp, const Tilep &tile, const po
 void Thing::blit_shadow(const Tpp &tpp, const Tilep &tile, const point &blit_tl, const point &blit_br)
 {
   TRACE_AND_INDENT();
-  IF_DEBUG3 { return; }
+  IF_DEBUG2 { return; }
 
   if (g_render_black_and_white) {
     return;
@@ -839,7 +839,7 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
     c.a = fade;
   }
 
-  IF_DEBUG3 { c.a = 255; }
+  IF_DEBUG2 { c.a = 255; }
 
   glcolor(c);
 

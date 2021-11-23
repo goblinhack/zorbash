@@ -33,7 +33,7 @@ bool Thing::path_pop_next_move(void)
 
   TRACE_AND_INDENT();
   std::string s = "";
-  IF_DEBUG3
+  IF_DEBUG2
   {
     for (auto p : aip->move_path) {
       s += p.to_string() + " ";
@@ -73,7 +73,7 @@ bool Thing::path_pop_next_move(void)
   if ((mid_at != get_infop()->last_failed_jump_at) && ai_is_able_to_jump() &&
       (is_monst() || (is_player() && game->robot_mode))) {
     if (is_disliked_by_me(future_pos) || level->is_barrel(future_pos) || level->is_brazier(future_pos)) {
-      IF_DEBUG3
+      IF_DEBUG2
       {
         auto s = string_sprintf("Next position %d,%d is a hazard", (int) future_pos.x, (int) future_pos.y);
         AI_LOG("", s);
@@ -89,7 +89,7 @@ bool Thing::path_pop_next_move(void)
         //
         TRACE_AND_INDENT();
         if (is_disliked_by_me(jump_pos) && aip->move_path.size()) {
-          IF_DEBUG3
+          IF_DEBUG2
           {
             auto s = string_sprintf("Next-next position %d,%d is also a hazard", (int) jump_pos.x, (int) jump_pos.y);
             AI_LOG("", s);
@@ -183,7 +183,7 @@ bool Thing::path_pop_next_move(void)
         switch (try_to_shove_into_hazard(t, delta)) {
           case THING_SHOVE_TRIED_AND_FAILED :
             {
-              IF_DEBUG3
+              IF_DEBUG2
               {
                 auto s = string_sprintf("Tried to shove monst into hazard at %s but failed",
                                         future_pos.to_string().c_str());
@@ -197,7 +197,7 @@ bool Thing::path_pop_next_move(void)
             }
           case THING_SHOVE_TRIED_AND_PASSED :
             {
-              IF_DEBUG3
+              IF_DEBUG2
               {
                 auto s = string_sprintf("Shoved monst at %s", future_pos.to_string().c_str());
                 AI_LOG("", s);
@@ -213,7 +213,7 @@ bool Thing::path_pop_next_move(void)
       }
       FOR_ALL_THINGS_END()
 
-      IF_DEBUG3
+      IF_DEBUG2
       {
         auto s = string_sprintf("Try to attack monst at %s", future_pos.to_string().c_str());
         AI_LOG("", s);
@@ -239,7 +239,7 @@ bool Thing::path_pop_next_move(void)
     // could be floating over lava or a chasm
     //
     if (is_disliked_by_me(future_pos)) {
-      IF_DEBUG3
+      IF_DEBUG2
       {
         auto s = string_sprintf("Cannot pass hazard at %s", future_pos.to_string().c_str());
         AI_LOG("", s);
@@ -255,7 +255,7 @@ bool Thing::path_pop_next_move(void)
       return false;
     }
 
-    IF_DEBUG3
+    IF_DEBUG2
     {
       auto s =
           string_sprintf("Try to move (shoving not allowed, attack allowed) to %s", future_pos.to_string().c_str());
@@ -274,7 +274,7 @@ bool Thing::path_pop_next_move(void)
       return true;
     }
 
-    IF_DEBUG3
+    IF_DEBUG2
     {
       auto s = string_sprintf("Try to move (shoving and attacking allowed) to %s", future_pos.to_string().c_str());
       AI_LOG("", s);

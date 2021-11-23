@@ -121,7 +121,7 @@ void Level::display_lava(int fbo, int16_t minx, int16_t miny, int16_t maxx, int1
       if (likely(! is_lava(x, y))) {
         continue;
       }
-      FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z)
+      FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z)
       {
         auto tpp = t->tp();
         if (! tpp->is_lava()) {

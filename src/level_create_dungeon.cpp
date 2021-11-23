@@ -387,7 +387,7 @@ bool Level::create_dungeon(point3d at, int seed)
           if (dungeon->is_ascend_dungeon(x, y)) {
             auto t = thing_new("player2", point(x, y));
 
-            IF_DEBUG3
+            IF_DEBUG2
             {
               if (0) {
                 t->incr_poisoned_amount(100);

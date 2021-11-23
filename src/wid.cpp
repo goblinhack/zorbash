@@ -5,6 +5,7 @@
 
 #include "my_array_bounds_check.hpp"
 #include "my_ascii.hpp"
+#include "my_backtrace.hpp"
 #include "my_command.hpp"
 #include "my_depth.hpp"
 #include "my_game.hpp"
@@ -21,7 +22,6 @@
 #include "my_thing_template.hpp"
 #include "my_tile.hpp"
 #include "my_time.hpp"
-#include "my_backtrace.hpp"
 #include "my_ui.hpp"
 #include "my_wid.hpp"
 #include "my_wid_actionbar.hpp"
@@ -1125,7 +1125,7 @@ void wid_set_name(Widp w, std::string name)
   if (name != "") {
     oldptr(MTYPE_WID, w);
     w->name = name;
-    newptr(MTYPE_WID, w, name);
+    newptr(MTYPE_WID, w, "wid");
   } else {
     w->name = name;
   }

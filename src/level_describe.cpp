@@ -56,11 +56,11 @@ void Level::describe(point p)
   {
     int x = p.x;
     int y = p.y;
-    IF_DEBUG3 { t->log("Active thing cand for describe"); }
+    IF_DEBUG2 { t->log("Active thing cand for describe"); }
     TRACE_AND_INDENT();
     if (! is_lit_currently(x, y) && ! is_lit_ever(x, y)) {
       TRACE_AND_INDENT();
-      IF_DEBUG3
+      IF_DEBUG2
       {
         //
         // Allow snooping in debug mode
@@ -70,7 +70,7 @@ void Level::describe(point p)
     }
 
     if (t->is_cursor() || t->is_player() || t->is_cursor_path() || t->is_the_grid) {
-      IF_DEBUG3 { t->log("Ignore for describe, boring"); }
+      IF_DEBUG2 { t->log("Ignore for describe, boring"); }
       continue;
     }
 
@@ -78,26 +78,26 @@ void Level::describe(point p)
     // Dead monst clog up the screen
     //
     if (t->is_monst() && t->is_dead) {
-      IF_DEBUG3 { t->log("Ignore for describe, monst or dead"); }
+      IF_DEBUG2 { t->log("Ignore for describe, monst or dead"); }
       continue;
     }
 
     if (t->get_immediate_owner()) {
-      IF_DEBUG3 { t->log("Ignore for describe, has owner"); }
+      IF_DEBUG2 { t->log("Ignore for describe, has owner"); }
       continue;
     }
 
     if (t->is_described_when_hovering_over()) {
       if (! t->text_description().empty() || ! t->long_text_description().empty()) {
 
-        IF_DEBUG3 { t->log("Add to describe"); }
+        IF_DEBUG2 { t->log("Add to describe"); }
         got_one_with_long_text |= ! t->long_text_description().empty();
         push_back_if_unique(hover_over_things, t);
       } else {
-        IF_DEBUG3 { t->log("Ignore for describe, no text"); }
+        IF_DEBUG2 { t->log("Ignore for describe, no text"); }
       }
     } else {
-      IF_DEBUG3 { t->log("Ignore for describe, not described"); }
+      IF_DEBUG2 { t->log("Ignore for describe, not described"); }
     }
 
     if (! hover_over) {
@@ -110,11 +110,11 @@ void Level::describe(point p)
   {
     int x = p.x;
     int y = p.y;
-    IF_DEBUG3 { t->log("Interesting thing cand for describe"); }
+    IF_DEBUG2 { t->log("Interesting thing cand for describe"); }
     TRACE_AND_INDENT();
     if (! is_lit_currently(x, y) && ! is_lit_ever(x, y)) {
       TRACE_AND_INDENT();
-      IF_DEBUG3
+      IF_DEBUG2
       {
         //
         // Allow snooping in debug mode
@@ -124,7 +124,7 @@ void Level::describe(point p)
     }
 
     if (t->is_cursor() || t->is_player() || t->is_cursor_path() || t->is_the_grid) {
-      IF_DEBUG3 { t->log("Ignore for describe, boring"); }
+      IF_DEBUG2 { t->log("Ignore for describe, boring"); }
       continue;
     }
 
@@ -132,25 +132,25 @@ void Level::describe(point p)
     // Dead monst clog up the screen
     //
     if (t->is_monst() && t->is_dead) {
-      IF_DEBUG3 { t->log("Ignore for describe, monst or dead"); }
+      IF_DEBUG2 { t->log("Ignore for describe, monst or dead"); }
       continue;
     }
 
     if (t->get_immediate_owner()) {
-      IF_DEBUG3 { t->log("Ignore for describe, has owner"); }
+      IF_DEBUG2 { t->log("Ignore for describe, has owner"); }
       continue;
     }
 
     if (t->is_described_when_hovering_over()) {
       if (! t->text_description().empty() || ! t->long_text_description().empty()) {
-        IF_DEBUG3 { t->log("Add to describe"); }
+        IF_DEBUG2 { t->log("Add to describe"); }
         got_one_with_long_text |= ! t->long_text_description().empty();
         push_back_if_unique(hover_over_things, t);
       } else {
-        IF_DEBUG3 { t->log("Ignore for describe, no text"); }
+        IF_DEBUG2 { t->log("Ignore for describe, no text"); }
       }
     } else {
-      IF_DEBUG3 { t->log("Ignore for describe, not described"); }
+      IF_DEBUG2 { t->log("Ignore for describe, not described"); }
     }
 
     if (! hover_over) {
@@ -163,11 +163,11 @@ void Level::describe(point p)
   {
     int x = p.x;
     int y = p.y;
-    IF_DEBUG3 { t->log("All thing cand for describe"); }
+    IF_DEBUG2 { t->log("All thing cand for describe"); }
     TRACE_AND_INDENT();
     if (! is_lit_currently(x, y) && ! is_lit_ever(x, y)) {
       TRACE_AND_INDENT();
-      IF_DEBUG3
+      IF_DEBUG2
       {
         //
         // Allow snooping in debug mode
@@ -177,7 +177,7 @@ void Level::describe(point p)
     }
 
     if (t->get_immediate_owner() || t->is_player() || t->is_cursor() || t->is_cursor_path() || t->is_the_grid) {
-      IF_DEBUG3 { t->log("Ignore for describe, boring"); }
+      IF_DEBUG2 { t->log("Ignore for describe, boring"); }
       continue;
     }
 
@@ -186,7 +186,7 @@ void Level::describe(point p)
     //
     if (hover_over_things.size()) {
       if (t->is_player()) {
-        IF_DEBUG3 { t->log("Ignore for describe, showing something better"); }
+        IF_DEBUG2 { t->log("Ignore for describe, showing something better"); }
         continue;
       }
 
@@ -194,7 +194,7 @@ void Level::describe(point p)
       // Dead monst clog up the screen. Unless we have nothing else.
       //
       if (t->is_monst() && t->is_dead) {
-        IF_DEBUG3 { t->log("Ignore for describe, showing something better"); }
+        IF_DEBUG2 { t->log("Ignore for describe, showing something better"); }
         continue;
       }
     }
@@ -202,13 +202,13 @@ void Level::describe(point p)
     if (t->is_described_when_hovering_over()) {
       if (! t->text_description().empty() || ! t->long_text_description().empty()) {
         got_one_with_long_text |= ! t->long_text_description().empty();
-        IF_DEBUG3 { t->log("Add to describe"); }
+        IF_DEBUG2 { t->log("Add to describe"); }
         push_back_if_unique(hover_over_things, t);
       } else {
-        IF_DEBUG3 { t->log("Ignore for describe, no text"); }
+        IF_DEBUG2 { t->log("Ignore for describe, no text"); }
       }
     } else {
-      IF_DEBUG3 { t->log("Ignore for describe, not described"); }
+      IF_DEBUG2 { t->log("Ignore for describe, not described"); }
     }
 
     if (! hover_over) {

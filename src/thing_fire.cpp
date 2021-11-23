@@ -21,7 +21,7 @@ void Thing::fire_tick(void)
     // Keep going
     //
   } else if (! environ_avoids_fire()) {
-    IF_DEBUG4 { log("No, is not fire avoider"); }
+    IF_DEBUG3 { log("No, is not fire avoider"); }
     return;
   }
 

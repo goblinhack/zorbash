@@ -458,7 +458,7 @@ fi
 #
 # Filter some junk out of the python config that can cause link errors
 #
-C_FLAGS="$C_FLAGS `$Python_CONFIG --cflags | \
+C_FLAGS+=" `$Python_CONFIG --cflags | \
            tr ' ' '\n' | sort | uniq       | \
            grep  "\-I"                     | \
            tr '\n' ' '                     | \
@@ -484,8 +484,8 @@ case `uname` in
 
         EXE=".exe"
         # gcc only
-        C_FLAGS="$C_FLAGS -mwin32 "
-        C_FLAGS+="$C_FLAGS -I/mingw64/x86_64-w64-mingw32/include "
+        C_FLAGS+=" -mwin32 "
+        C_FLAGS+=" -I/mingw64/x86_64-w64-mingw32/include "
 
         #
         # Does not seem to work
@@ -547,9 +547,10 @@ case `uname` in
             LDFLAGS+=" -fsanitize=address"
         fi
 
-        if [[ -f /usr/include/x86_64-linux-gnu/libunwind.h ]]; then
+        pkg-config --print-provides libunwind 2>/dev/null
+        if [[ $? -eq 0 ]]; then
+            C_FLAGS+=" -DHAVE_LIBUNWIND"
             LDLIBS+=" -lunwind"
-            C_FLAGS="$C_FLAGS -DHAVE_LIBUNWIND"
         fi
         ;;
     *)
@@ -568,8 +569,8 @@ if [[ $OPT_DEV1 != "" ]]; then
 fi
 
 PYTHONPATH=$($Python -c "import os, sys; print(os.pathsep.join(x for x in sys.path if x))")
-C_FLAGS="$C_FLAGS -DMYVER=\\\"$MYVER\\\""
-C_FLAGS="$C_FLAGS -DPYVER=\\\"$PYVER\\\""
+C_FLAGS+=" -DMYVER=\\\"$MYVER\\\""
+C_FLAGS+=" -DPYVER=\\\"$PYVER\\\""
 
 log_info "PYVER                      : $PYVER"
 log_info "PYTHONPATH                 : $PYTHONPATH"

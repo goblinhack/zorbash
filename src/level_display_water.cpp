@@ -192,7 +192,7 @@ void Level::display_water(int fbo, int16_t minx, int16_t miny, int16_t maxx, int
       if (likely(! gfx_water(x, y))) {
         continue;
       }
-      FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z)
+      FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z)
       {
         auto tpp = t->tp();
         if (! tpp->gfx_water()) {
@@ -259,7 +259,7 @@ void Level::display_water(int fbo, int16_t minx, int16_t miny, int16_t maxx, int
         if (likely(! get_no_check(tile_map, x, y + 1))) {
           continue;
         }
-        FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) { t->blit_upside_down(fbo); }
+        FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z) { t->blit_upside_down(fbo); }
         FOR_ALL_THINGS_END()
       }
     }

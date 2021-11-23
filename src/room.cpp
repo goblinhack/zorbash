@@ -191,7 +191,7 @@ void Room::finalize(void)
 {
   find_doors();
 
-  IF_DEBUG4 { dump(); }
+  IF_DEBUG3 { dump(); }
 }
 
 void Room::dump(void)

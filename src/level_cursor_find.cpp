@@ -31,7 +31,7 @@ void Level::cursor_find_on_visible_things(const int16_t minx, const int16_t miny
     return;
   }
 
-  dbg4("Cursor find on visible things");
+  dbg3("Cursor find on visible things");
   TRACE_AND_INDENT();
   if ((game->minimap_over.x > 0) && (game->minimap_over.y > 0)) {
     //

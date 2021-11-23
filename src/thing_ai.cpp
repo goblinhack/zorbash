@@ -45,7 +45,7 @@
 #define GOAL_PRIO_VERY_LOW  4
 
 #define GOAL_ADD(prio, score, msg, it)                                                                               \
-  IF_DEBUG3                                                                                                          \
+  IF_DEBUG2                                                                                                          \
   {                                                                                                                  \
     auto s = string_sprintf("Add goal prio %d score %d @(%d,%d) %s", prio, score, p.x, p.y, msg);                    \
     AI_LOG("", s, it);                                                                                               \
@@ -53,7 +53,7 @@
   goals.insert(Goal(prio, score, p, msg, it));
 
 #define GOAL_AVOID_ADD(prio, score, msg, it)                                                                         \
-  IF_DEBUG3                                                                                                          \
+  IF_DEBUG2                                                                                                          \
   {                                                                                                                  \
     auto s = string_sprintf("Add goal (avoid) prio %d score %d @(%d,%d) %s", prio, score, p.x, p.y, msg);            \
     AI_LOG("", s, it);                                                                                               \
@@ -107,7 +107,7 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
   // Choose goals (higher scores, lower costs are preferred)
   //
   std::string s = "Choose goal";
-  IF_DEBUG3 { s = string_sprintf("Try to find goals, search-type %d", search_type); }
+  IF_DEBUG2 { s = string_sprintf("Try to find goals, search-type %d", search_type); }
 
   AI_LOG("", s);
   TRACE_AND_INDENT();
@@ -146,7 +146,7 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
   }
 
   for (auto &g : goalmaps) {
-    IF_DEBUG3 { dmap_print(g.dmap, point(start.x, start.y), point(minx, miny), point(maxx, maxy)); }
+    IF_DEBUG2 { dmap_print(g.dmap, point(start.x, start.y), point(minx, miny), point(maxx, maxy)); }
 
     //
     // Modify the dmap for terrain.
@@ -174,7 +174,7 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
                 add_goal_penalty(goal.what);
               }
 
-              IF_DEBUG3
+              IF_DEBUG2
               {
                 auto s = string_sprintf("Accept goal score %d @(%d,%d) %s", (int) goal.score, (int) goal.at.x,
                                         (int) goal.at.y, goal.msg.c_str());
@@ -187,7 +187,7 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
         continue;
       }
       if (ai_create_path_to_single_goal(minx, miny, maxx, maxy, goal, &saved_dmap)) {
-        IF_DEBUG3
+        IF_DEBUG2
         {
           if (goal.what) {
             add_goal_penalty(goal.what);
@@ -209,7 +209,7 @@ bool Thing::ai_create_path_to_single_goal(int minx, int miny, int maxx, int maxy
                                           const Dmap *saved_dmap)
 {
   TRACE_AND_INDENT();
-  IF_DEBUG3
+  IF_DEBUG2
   {
     auto s = string_sprintf("Process goal score %d @(%d,%d) %s", (int) goal.score, (int) goal.at.x, (int) goal.at.y,
                             goal.msg.c_str());
@@ -248,7 +248,7 @@ bool Thing::ai_create_path_to_single_goal(int minx, int miny, int maxx, int maxy
     set(dmap.val, start.x, start.y, DMAP_IS_PASSABLE);
   }
 
-  IF_DEBUG3 { dmap_print(&dmap, point(start.x, start.y), point(minx, miny), point(maxx, maxy)); }
+  IF_DEBUG2 { dmap_print(&dmap, point(start.x, start.y), point(minx, miny), point(maxx, maxy)); }
 
   //
   // Record we've been here.
@@ -326,7 +326,7 @@ bool Thing::ai_create_path_to_single_goal(int minx, int miny, int maxx, int maxy
 
     if (is_player()) {
       level->cursor_path_create(new_move_path);
-      IF_DEBUG3 { level->debug_path_create(new_move_path); }
+      IF_DEBUG2 { level->debug_path_create(new_move_path); }
 
       //
       // Try to move. It might not work and we end up attacking.
@@ -685,7 +685,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
 
   dmap_process(dmap_can_see, point(minx, miny), point(maxx, maxy));
 
-  IF_DEBUG3
+  IF_DEBUG2
   {
     if (is_player()) {
       log("Dmap can see:");
@@ -1184,7 +1184,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
     // No search destinations that are, for example, a chasm
     //
     if (is_hated_by_me(p)) {
-      IF_DEBUG3
+      IF_DEBUG2
       {
         auto s = string_sprintf("Search cand is hated @(%d,%d)", p.x, p.y);
         AI_LOG("", s);
@@ -1428,7 +1428,7 @@ bool Thing::ai_tick(bool recursing)
     for (int y = miny; y < maxy; y++) {
       for (int x = minx; x < maxx; x++) {
         if (aip->can_see_currently.can_see[ x ][ y ]) {
-          IF_DEBUG4 { (void) level->thing_new("ai_path2", point(x, y)); }
+          IF_DEBUG3 { (void) level->thing_new("ai_path2", point(x, y)); }
           set(aip->can_see_ever.can_see, x, y, true);
         }
       }
@@ -1992,7 +1992,7 @@ void Thing::ai_change_state(int new_state, const std::string &why)
       break;
   }
 
-  IF_DEBUG3
+  IF_DEBUG2
   {
     auto s = string_sprintf("State change %s -> %s, reason: %s", from.c_str(), to.c_str(), why.c_str());
     AI_LOG("", s);

@@ -4,19 +4,16 @@
 //
 
 #include <algorithm>
-#include <ctime>
 #include <iostream>
 #include <libgen.h>
 #include <sstream>
 #include <string>
-#include <time.h>
 
 #include "my_ptrcheck.hpp"
 #include "my_sdl.hpp"
 #include "my_sys.hpp"
 #include "my_tex.hpp"
 #include "my_thing_template.hpp"
-#include "my_time.hpp"
 
 std::wstring string_to_wstring(const std::string &s);
 std::string  wstring_to_string(const std::wstring &s);
@@ -107,8 +104,8 @@ static char *substr (const char *in, int32_t pos, int32_t len)
 //
 // strsub("foo.zip", ".zip", ""); -> "foo"
 //
-char *strsub_(const char *in, const char *look_for, const char *replace_with, std::string what, std::string file,
-              std::string func, int line)
+char *strsub_(const char *in, const char *look_for, const char *replace_with, const char *what, const char *file,
+              const char *func, int line)
 {
   TRACE_AND_INDENT();
   char       *buf;
@@ -1377,26 +1374,6 @@ std::wstring rtrim_ws(const std::wstring &s)
 }
 
 std::wstring trim_ws(const std::wstring &s) { return rtrim_ws(ltrim_ws(s)); }
-
-std::string &string_timestamp(void)
-{
-  static ts_t        time_last;
-  static std::string last_timestamp;
-  auto               time_now = time_get_time_ms_cached();
-
-  if (last_timestamp.length()) {
-    if (time_now - time_last < 1000) {
-      return last_timestamp;
-    }
-  }
-
-  time_last          = time_now;
-  std::time_t result = std::time(nullptr);
-  auto        s      = std::string(std::asctime(std::localtime(&result)));
-  s.pop_back();
-  last_timestamp = s;
-  return last_timestamp;
-}
 
 //
 // Concert errno to a std::string

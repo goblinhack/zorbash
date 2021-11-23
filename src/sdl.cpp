@@ -560,7 +560,7 @@ static void sdl_event(SDL_Event *event)
       {
         mouse_down = sdl_get_mouse();
 
-        DBG4("SDL: Mouse: Moved to %d,%d (%d,%d) state %d", event->motion.x, event->motion.y, event->motion.xrel,
+        DBG2("SDL: Mouse: Moved to %d,%d (%d,%d) state %d", event->motion.x, event->motion.y, event->motion.xrel,
              event->motion.yrel, mouse_down);
 
         wid_mouse_visible = 1;

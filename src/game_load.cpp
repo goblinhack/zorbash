@@ -489,7 +489,7 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
 
   READ_MAGIC("thing end", THING_MAGIC_END);
 
-  IF_DEBUG4
+  IF_DEBUG3
   {
     auto diff = in.tellg() - start;
     LOG("LOAD %d bytes %s TP %d ID %x last_mid_at %d,%d", (int) diff, name.c_str(), my.t->tp_id, my.t->id.id,
@@ -854,8 +854,6 @@ std::istream &operator>>(std::istream &in, Bits< Config & > my)
 
   if (! g_opt_override_debug_level) {
     if (my.t.debug_mode) {
-      g_opt_debug5 = false;
-      g_opt_debug4 = false;
       g_opt_debug3 = true;
       g_opt_debug2 = true;
       g_opt_debug1 = true;
@@ -1045,7 +1043,7 @@ bool Game::load(std::string file_to_load, class Game &target)
   }
 
 #if 0
-  IF_DEBUG4 {
+  IF_DEBUG3 {
     std::cout << "decompressed as ";
     hexdump((const unsigned char *)uncompressed, uncompressed_len);
   }

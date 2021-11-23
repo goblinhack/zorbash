@@ -278,7 +278,7 @@ bool Thing::collision_check_do(void)
 void Thing::tick(void)
 {
   TRACE_AND_INDENT();
-  IF_DEBUG4 { dbg("Tick"); }
+  IF_DEBUG3 { dbg("Tick"); }
   TRACE_AND_INDENT();
   update_interpolated_position();
 
@@ -293,12 +293,12 @@ void Thing::tick(void)
       achieve_goals_in_death();
     }
 
-    IF_DEBUG4 { log("Tick; is dead"); }
+    IF_DEBUG3 { log("Tick; is dead"); }
     return;
   }
 
   if (unlikely(is_dead)) {
-    IF_DEBUG4 { log("Tick; died"); }
+    IF_DEBUG3 { log("Tick; died"); }
     return;
   }
 

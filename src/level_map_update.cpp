@@ -178,7 +178,7 @@ void Level::update_deep_water(void)
             thing_new("water1", point(x, y));
           }
 
-          IF_DEBUG3
+          IF_DEBUG2
           {
             if (is_deep_water(x, y)) {
               FOR_ALL_THINGS(this, t, x, y)

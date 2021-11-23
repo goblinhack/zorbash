@@ -39,7 +39,7 @@ void FILE_DBG(const char *fmt, ...)
 {
   va_list args;
 
-  IF_NODEBUG4 { return; }
+  IF_NODEBUG2 { return; }
 
   va_start(args, fmt);
   file_log_(fmt, args);

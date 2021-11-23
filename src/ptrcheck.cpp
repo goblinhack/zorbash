@@ -27,19 +27,19 @@
 class Ptrcheck_history
 {
 public:
-  std::string file;
-  std::string func;
+  const char *file {};
+  const char *func {};
+  char        ts[ TS_SIZE ];
   int         line {};
-  std::string ts;
   Backtrace  *bt {};
 
-  Ptrcheck_history() {}
+  Ptrcheck_history() { ts[ 0 ] = '\0'; }
   Ptrcheck_history(const Ptrcheck_history &other)
   {
     file = other.file;
     func = other.func;
     line = other.line;
-    ts   = other.ts;
+    strcpy(ts, other.ts);
     if (other.bt) {
       bt = new Backtrace(other.bt);
     }
@@ -62,7 +62,7 @@ public:
   //
   // The type of memory.
   //
-  std::string what;
+  const char *what;
 
   //
   // How much memory it is using.
@@ -84,24 +84,6 @@ public:
   int last_seen_at {};
   int last_seen_size {};
 };
-
-static std::string &timestamp(void)
-{
-  static ts_t        time_last;
-  static std::string last_timestamp;
-  auto               time_now = time_get_time_ms_cached();
-
-  if (time_now - time_last < 1000) {
-    return last_timestamp;
-  }
-
-  time_last          = time_now;
-  std::time_t result = std::time(nullptr);
-  auto        s      = std::string(std::asctime(std::localtime(&result)));
-  s.pop_back();
-  last_timestamp = s;
-  return last_timestamp;
-}
 
 #ifndef DIE
 static void die(void)
@@ -274,10 +256,6 @@ static hash_elem_t *hash_find(hash_t *hash_table, void *ptr)
     return 0;
   }
 
-  if (! ptr) {
-    return 0;
-  }
-
   slot = ptr2hash(hash_table, ptr);
   elem = *slot;
   while (elem && (elem->pc->ptr != ptr)) {
@@ -330,7 +308,7 @@ static void hash_free(hash_t *hash_table, void *ptr)
 //
 // Check a pointer for validity.
 //
-static Ptrcheck *ptrcheck_verify_pointer(int mtype, const void *ptr, std::string &func, std::string &file, int line,
+static Ptrcheck *ptrcheck_verify_pointer(int mtype, const void *ptr, const char *func, const char *file, int line,
                                          int dont_store)
 {
   static const char *unknown_ptr_warning  = "** UNKNOWN POINTER ** ";
@@ -338,14 +316,6 @@ static Ptrcheck *ptrcheck_verify_pointer(int mtype, const void *ptr, std::string
   int                ring_ptr_size;
   Ptrcheck          *pc;
   hash_elem_t       *e;
-
-  if (! hash[ mtype ]) {
-    return 0;
-  }
-
-  if (! ptr) {
-    ERR("%s%p NULL pointer %s:%s line %u", null_pointer_warning, ptr, file.c_str(), func.c_str(), line);
-  }
 
   //
   // Check the robust handle is valid.
@@ -357,7 +327,7 @@ static Ptrcheck *ptrcheck_verify_pointer(int mtype, const void *ptr, std::string
     if (dont_store) {
 #ifdef ENABLE_DEBUG_PTRCHECK
       std::cerr << string_sprintf("PTRCHECK: %p verified at \"%s\" (%u bytes) at %s:%s line %u (do not store)\n", ptr,
-                                  pc->what.c_str(), pc->size, file.c_str(), func.c_str(), line);
+                                  pc->what, pc->size, file, func, line);
 #endif
       return (pc);
     }
@@ -367,41 +337,47 @@ static Ptrcheck *ptrcheck_verify_pointer(int mtype, const void *ptr, std::string
     // point in time.
     //
 #ifdef ENABLE_PTRCHECK_HISTORY
-    auto l = pc->last_seen[ pc->last_seen_at ];
-    if (! l) {
-      l = pc->last_seen[ pc->last_seen_at ] = new Ptrcheck_history();
-    }
-    l->file = file;
-    l->func = func;
-    l->line = line;
-    delete l->bt;
+    IF_DEBUG2
+    {
+      auto l = pc->last_seen[ pc->last_seen_at ];
+      if (! l) {
+        l = pc->last_seen[ pc->last_seen_at ] = new Ptrcheck_history();
+      }
+      l->file = file;
+      l->func = func;
+      l->line = line;
+      delete l->bt;
 
-    l->bt = new Backtrace();
-    l->bt->init();
-    l->ts = timestamp();
+      l->bt = new Backtrace();
+      l->bt->init();
+      timestamp(l->ts, sizeof(l->ts));
 
-    pc->last_seen_at++;
-    pc->last_seen_size++;
+      pc->last_seen_at++;
+      pc->last_seen_size++;
 
-    if (pc->last_seen_at >= ENABLE_PTRCHECK_HISTORY) {
-      pc->last_seen_at = 0;
-    }
+      if (pc->last_seen_at >= ENABLE_PTRCHECK_HISTORY) {
+        pc->last_seen_at = 0;
+      }
 
-    if (pc->last_seen_size >= ENABLE_PTRCHECK_HISTORY) {
-      pc->last_seen_size = ENABLE_PTRCHECK_HISTORY;
+      if (pc->last_seen_size >= ENABLE_PTRCHECK_HISTORY) {
+        pc->last_seen_size = ENABLE_PTRCHECK_HISTORY;
+      }
     }
 #endif
 #ifdef ENABLE_DEBUG_PTRCHECK
-    std::cerr << string_sprintf("PTRCHECK: %p verified at \"%s\" (%u bytes) at %s:%s line %u at %s\n", ptr,
-                                pc->what.c_str(), pc->size, file.c_str(), func.c_str(), line, l->ts.c_str());
+    std::cerr << string_sprintf("PTRCHECK: %p verified at \"%s\" (%u bytes) at %s:%s line %u at %s\n", ptr, pc->what,
+                                pc->size, file, func, line, l->ts);
 #endif
     return (pc);
+  } else if (! ptr) {
+    ERR("%s%p NULL pointer %s:%s line %u", null_pointer_warning, ptr, file, func, line);
+    return nullptr;
   }
 
   //
   // We may be about to crash. Complain!
   //
-  ERR("%s%p %s:%s line %u", unknown_ptr_warning, ptr, file.c_str(), func.c_str(), line);
+  ERR("%s%p %s:%s line %u", unknown_ptr_warning, ptr, file, func, line);
 
   //
   // Check the ring buffer to see if we've seen this pointer before.
@@ -427,29 +403,26 @@ static Ptrcheck *ptrcheck_verify_pointer(int mtype, const void *ptr, std::string
     if (pc->ptr == ptr) {
       CON("----- Pointer is known");
 
-      auto a  = pc->allocated_by;
-      auto ts = timestamp();
+      auto a = pc->allocated_by;
       if (a) {
         std::cerr << string_sprintf("PTRCHECK: %p allocated at \"%s\" (%u bytes) at %s:%s line %u at %s\n", ptr,
-                                    pc->what.c_str(), pc->size, a->file.c_str(), a->func.c_str(), a->line,
-                                    a->ts.c_str());
+                                    pc->what, pc->size, a->file, a->func, a->line, a->ts);
         std::cerr << a->bt->to_string() << std::endl;
 
         LOG("PTRCHECK:");
-        LOG("PTRCHECK: %p allocated at \"%s\" (%u bytes) at %s:%s line %u at %s", ptr, pc->what.c_str(), pc->size,
-            a->file.c_str(), a->func.c_str(), a->line, a->ts.c_str());
+        LOG("PTRCHECK: %p allocated at \"%s\" (%u bytes) at %s:%s line %u at %s", ptr, pc->what, pc->size, a->file,
+            a->func, a->line, a->ts);
         a->bt->log();
       }
 
       auto f = pc->freed_by;
       if (f) {
-        std::cerr << string_sprintf("PTRCHECK: %p freed at %s:%s line %u at %s\n", ptr, f->file.c_str(),
-                                    f->func.c_str(), f->line, f->ts.c_str());
+        std::cerr << string_sprintf("PTRCHECK: %p freed at %s:%s line %u at %s\n", ptr, f->file, f->func, f->line,
+                                    f->ts);
         std::cerr << f->bt->to_string() << std::endl;
 
         LOG("PTRCHECK:");
-        LOG("PTRCHECK: %p freed at %s:%s line %u at %s", ptr, f->file.c_str(), f->func.c_str(), f->line,
-            f->ts.c_str());
+        LOG("PTRCHECK: %p freed at %s:%s line %u at %s", ptr, f->file, f->func, f->line, f->ts);
         f->bt->log();
       }
 
@@ -465,13 +438,12 @@ static Ptrcheck *ptrcheck_verify_pointer(int mtype, const void *ptr, std::string
 
         auto H = pc->last_seen[ h ];
         if (H) {
-          std::cerr << string_sprintf("PTRCHECK: %p last seen at [%u] at %s:%s line %u at %s\n", ptr, i,
-                                      H->file.c_str(), H->func.c_str(), H->line, H->ts.c_str());
+          std::cerr << string_sprintf("PTRCHECK: %p last seen at [%u] at %s:%s line %u at %s\n", ptr, i, H->file,
+                                      H->func, H->line, H->ts);
           std::cerr << H->bt->to_string() << std::endl;
 
           LOG("PTRCHECK:");
-          LOG("PTRCHECK: %p last seen at [%u] at %s:%s line %u at %s", ptr, i, H->file.c_str(), H->func.c_str(),
-              H->line, H->ts.c_str());
+          LOG("PTRCHECK: %p last seen at [%u] at %s:%s line %u at %s", ptr, i, H->file, H->func, H->line, H->ts);
           H->bt->log();
         }
       }
@@ -501,15 +473,15 @@ static Ptrcheck *ptrcheck_verify_pointer(int mtype, const void *ptr, std::string
 //
 // Record this pointer.
 //
-void *ptrcheck_alloc(int mtype, const void *ptr, std::string what, int size, std::string func, std::string file,
+void *ptrcheck_alloc(int mtype, const void *ptr, const char *what, int size, const char *func, const char *file,
                      int line)
 {
   Ptrcheck *pc;
 
 #ifdef ENABLE_DEBUG_PTRCHECK
   auto ts = timestamp();
-  fprintf(stderr, "%s: PTRCHECK: Alloc %p \"%s\" (%u bytes) at %s:%s line %u\n", ts.c_str(), ptr, what.c_str(), size,
-          file.c_str(), func.c_str(), line);
+  fprintf(stderr, "%s: PTRCHECK: Alloc %p \"%s\" (%u bytes) at %s:%s line %u\n", ts, ptr, what, size, file, func,
+          line);
 #endif
 
   if (! ptr) {
@@ -558,11 +530,13 @@ void *ptrcheck_alloc(int mtype, const void *ptr, std::string what, int size, std
   pc->size = size;
 
   auto a = pc->allocated_by = new Ptrcheck_history();
-  a->func                   = func;
-  a->file                   = file;
-  a->line                   = line;
-  a->ts                     = timestamp();
-  a->bt                     = new Backtrace();
+
+  a->func = func;
+  a->file = file;
+  a->line = line;
+
+  timestamp(a->ts, sizeof(a->ts));
+  a->bt = new Backtrace();
   a->bt->init();
 
   //
@@ -577,14 +551,14 @@ void *ptrcheck_alloc(int mtype, const void *ptr, std::string what, int size, std
 // Check a pointer is valid and if so add it to the ring buffer. If not,
 // return false and avert the myfree(), just in case.
 //
-int ptrcheck_free(int mtype, void *ptr, std::string func, std::string file, int line)
+int ptrcheck_free(int mtype, void *ptr, const char *func, const char *file, int line)
 {
   Ptrcheck *pc;
 
 #ifdef ENABLE_DEBUG_PTRCHECK
   auto ts = timestamp();
-  fprintf(stderr, "%s: PTRCHECK: Free %p at %s:%s line %u ringbuf_current_size %u\n", ts.c_str(), ptr, file.c_str(),
-          func.c_str(), line, ringbuf_current_size);
+  fprintf(stderr, "%s: PTRCHECK: Free %p at %s:%s line %u ringbuf_current_size %u\n", ts, ptr, file, func, line,
+          ringbuf_current_size);
 #endif
 
   if (! ptr) {
@@ -603,12 +577,15 @@ int ptrcheck_free(int mtype, void *ptr, std::string func, std::string file, int 
   // point in time.
   //
   auto f = pc->freed_by = new Ptrcheck_history();
-  f->file               = file;
-  f->func               = func;
-  f->line               = line;
-  f->bt                 = new Backtrace();
+
+  f->file = file;
+  f->func = func;
+  f->line = line;
+
+  f->bt = new Backtrace();
   f->bt->init();
-  f->ts = timestamp();
+
+  timestamp(f->ts, sizeof(f->ts));
 
   //
   // Add the free info to the ring buffer.
@@ -640,7 +617,7 @@ int ptrcheck_free(int mtype, void *ptr, std::string func, std::string file, int 
 //
 // Check a pointer for validity with no recording of history.
 //
-int ptrcheck_verify(int mtype, const void *ptr, std::string &func, std::string &file, int line)
+int ptrcheck_verify(int mtype, const void *ptr, const char *func, const char *file, int line)
 {
   return (ptrcheck_verify_pointer(mtype, ptr, file, func, line, false /* don't store */) != 0);
 }
@@ -672,12 +649,12 @@ void ptrcheck_leak_print(int mtype)
 
       auto a = pc->allocated_by;
       if (a) {
-        fprintf(stderr, "PTRCHECK: Leak %p \"%s\" (%u bytes) at %s:%s line %u at %s\n", pc->ptr, pc->what.c_str(),
-                pc->size, a->file.c_str(), a->func.c_str(), a->line, a->ts.c_str());
+        fprintf(stderr, "PTRCHECK: Leak %p \"%s\" (%u bytes) at %s:%s line %u at %s\n", pc->ptr, pc->what, pc->size,
+                a->file, a->func, a->line, a->ts);
 
         fprintf(stderr, "%s", a->bt->to_string().c_str());
       } else {
-        fprintf(stderr, "PTRCHECK: Leak \"%s\" (%u bytes)\n", pc->what.c_str(), pc->size);
+        fprintf(stderr, "PTRCHECK: Leak \"%s\" (%u bytes)\n", pc->what, pc->size);
       }
 
       //
@@ -692,9 +669,11 @@ void ptrcheck_leak_print(int mtype)
 
         auto H = pc->last_seen[ h ];
         if (H) {
-          fprintf(stderr, "PTRCHECK: Last seen at [%u] at %s:%s line %u at %s\n", j, H->file.c_str(), H->func.c_str(),
-                  H->line, H->ts.c_str());
-          fprintf(stderr, "%s", H->bt->to_string().c_str());
+          fprintf(stderr, "PTRCHECK: Last seen at [%u] at %s:%s line %u at %s\n", j, H->file, H->func, H->line,
+                  H->ts);
+          if (H->bt) {
+            fprintf(stderr, "%s", H->bt->to_string().c_str());
+          }
         }
       }
 #endif

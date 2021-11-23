@@ -118,7 +118,7 @@ void Level::display_deep_water(int fbo, int16_t minx, int16_t miny, int16_t maxx
       if (likely(! is_deep_water(x, y))) {
         continue;
       }
-      FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z)
+      FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z)
       {
         auto tpp = t->tp();
         if (! tpp->is_deep_water()) {

@@ -237,7 +237,7 @@ void Thing::remove_all_references()
     }
   }
 
-  IF_DEBUG4
+  IF_DEBUG3
   {
     FOR_ALL_THING_GROUPS(group)
     {
