@@ -11,7 +11,7 @@
 #include "my_ptrcheck.hpp"
 #include "my_string.hpp"
 #include "my_sys.hpp"
-#include "my_traceback.hpp"
+#include "my_backtrace.hpp"
 #include "my_wid_console.hpp"
 
 void Light::log_(const char *fmt, va_list args)
@@ -125,7 +125,7 @@ void Light::err_(const char *fmt, va_list args)
   fprintf(stderr, "%s\n", buf);
 
   callstack_dump();
-  traceback_dump();
+  backtrace_dump();
 
   wid_console_log(buf);
   FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS();

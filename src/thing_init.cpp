@@ -17,7 +17,7 @@
 #include "my_sys.hpp"
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"
-#include "my_traceback.hpp"
+#include "my_backtrace.hpp"
 
 Thingp Level::thing_new(Tpp tp, const point at)
 {
@@ -124,7 +124,7 @@ void Thing::init(Levelp level, const std::string &name, const point born)
   if (game->robot_mode) {
     if (! pcg_random_allowed) {
       con("Error, trying to create a thing outside of game loop");
-      traceback_dump();
+      backtrace_dump();
     }
   }
 

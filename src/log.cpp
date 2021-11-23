@@ -10,14 +10,14 @@
 #include "my_python.hpp"
 #include "my_string.hpp"
 #include "my_sys.hpp"
-#include "my_traceback.hpp"
+#include "my_backtrace.hpp"
 #include "my_wid_botcon.hpp"
 #include "my_wid_console.hpp"
 #include "my_wid_topcon.hpp"
 
 //
 // Whan a log appears, if some indent levels are missing, then pull them
-// out of the callstack - it's like a mini traceback
+// out of the callstack - it's like a mini backtrace
 //
 void log_catchup_missing_indent_levels(void)
 {
@@ -373,7 +373,7 @@ static void err_(const char *fmt, va_list args)
   wid_console_log(buf);
 
   callstack_dump();
-  traceback_dump();
+  backtrace_dump();
 
   FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS();
   nested_error = false;
@@ -516,7 +516,7 @@ static void msgerr_(const char *fmt, va_list args)
   wid_console_log(buf);
 
   callstack_dump();
-  traceback_dump();
+  backtrace_dump();
 
   FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS();
 }
@@ -562,7 +562,7 @@ static void sdl_msgerr_(const char *fmt, va_list args)
   FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS();
 
   callstack_dump();
-  traceback_dump();
+  backtrace_dump();
 
   FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS();
 }

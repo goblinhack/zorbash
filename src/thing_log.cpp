@@ -13,7 +13,7 @@
 #include "my_sys.hpp"
 #include "my_thing.hpp"
 #include "my_time.hpp"
-#include "my_traceback.hpp"
+#include "my_backtrace.hpp"
 #include "my_wid_botcon.hpp"
 #include "my_wid_console.hpp"
 #include "my_wid_topcon.hpp"
@@ -177,7 +177,7 @@ void Thing::err_(const char *fmt, va_list args)
   fprintf(stderr, "%s\n", buf);
 
   callstack_dump();
-  traceback_dump();
+  backtrace_dump();
 
   wid_console_log(buf);
   FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS();

@@ -15,7 +15,7 @@
 #include "my_wid_bag.hpp"
 #include "my_wid_inventory.hpp"
 #include "my_wid_thing_info.hpp"
-//#include "my_traceback.hpp"
+//#include "my_backtrace.hpp"
 
 void Level::cursor_check_if_scroll_needed(void)
 {
@@ -130,7 +130,7 @@ void Level::cursor_move(void)
 void Level::cursor_recreate(void)
 {
   TRACE_AND_INDENT();
-  // traceback_dump();
+  // backtrace_dump();
   //
   // Player might be on another level
   //

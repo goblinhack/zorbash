@@ -10,7 +10,7 @@
 #include "my_sys.hpp"
 #include "my_thing.hpp"
 #include "my_tile.hpp"
-#include "my_traceback.hpp"
+#include "my_backtrace.hpp"
 #include "my_ui.hpp"
 #include "my_wid_bag.hpp"
 #include "my_wid_botcon.hpp"
@@ -26,7 +26,7 @@ void wid_thing_info_fini(void)
 {
   TRACE_AND_INDENT();
   DBG("Destroy wid thing info");
-  // traceback_dump();
+  // backtrace_dump();
   TRACE_AND_INDENT();
 
   game->wid_thing_info_clear_popup();

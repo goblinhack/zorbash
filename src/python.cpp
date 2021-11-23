@@ -2431,23 +2431,23 @@ void py_err(void)
     return;
   }
 
-  PyObject *ptype, *pvalue, *ptraceback, *pyobj_str;
+  PyObject *ptype, *pvalue, *pbacktrace, *pyobj_str;
   PyObject *ret, *list, *string;
   PyObject *mod;
   char     *py_str;
 
-  PyErr_Fetch(&ptype, &pvalue, &ptraceback);
-  PyErr_NormalizeException(&ptype, &pvalue, &ptraceback);
-  PyErr_Display(ptype, pvalue, ptraceback);
-  PyTraceBack_Print(ptraceback, pvalue);
+  PyErr_Fetch(&ptype, &pvalue, &pbacktrace);
+  PyErr_NormalizeException(&ptype, &pvalue, &pbacktrace);
+  PyErr_Display(ptype, pvalue, pbacktrace);
+  PyTraceBack_Print(pbacktrace, pvalue);
 
   pyobj_str = PyObject_Str(pvalue);
   py_str    = py_obj_to_str(pyobj_str);
   ERR("%s", py_str);
   myfree(py_str);
 
-  mod  = PyImport_ImportModule("traceback");
-  list = PyObject_CallMethod(mod, "format_exception", "OOO", ptype, pvalue, ptraceback);
+  mod  = PyImport_ImportModule("backtrace");
+  list = PyObject_CallMethod(mod, "format_exception", "OOO", ptype, pvalue, pbacktrace);
   if (list) {
     string = PyUnicode_FromString("\n");
     ret    = PyUnicode_Join(string, list);

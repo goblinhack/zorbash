@@ -8,7 +8,7 @@
 #include "my_sdl.hpp"
 #include "my_sys.hpp"
 #include "my_thing.hpp"
-#include "my_traceback.hpp"
+#include "my_backtrace.hpp"
 #include "my_ui.hpp"
 #include "my_wid_actionbar.hpp"
 #include "my_wid_botcon.hpp"
@@ -117,9 +117,9 @@ void game_error(std::string error)
 
   {
     TRACE_AND_INDENT();
-    auto tb = new Traceback();
-    tb->init();
-    auto s = tb->to_string();
+    auto bt = new Backtrace();
+    bt->init();
+    auto s = bt->to_string();
     game_error_window->log(s, true, false);
   }
 

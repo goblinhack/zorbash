@@ -13,13 +13,13 @@
 #include <time.h>    // do not remove
 #include <unistd.h>  // do not remove
 
+#include "my_backtrace.hpp"
 #include "my_callstack.hpp"
 #include "my_globals.hpp"
 #include "my_main.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_sprintf.hpp"
 #include "my_time.hpp"
-#include "my_traceback.hpp"
 
 //
 // A single event in the life of a pointer.
@@ -31,7 +31,7 @@ public:
   std::string func;
   int         line {};
   std::string ts;
-  Traceback  *tb {};
+  Backtrace  *bt {};
 
   Ptrcheck_history() {}
   Ptrcheck_history(const Ptrcheck_history &other)
@@ -40,8 +40,8 @@ public:
     func = other.func;
     line = other.line;
     ts   = other.ts;
-    if (other.tb) {
-      tb = new Traceback(other.tb);
+    if (other.bt) {
+      bt = new Backtrace(other.bt);
     }
   }
 };
@@ -374,10 +374,10 @@ static Ptrcheck *ptrcheck_verify_pointer(int mtype, const void *ptr, std::string
     l->file = file;
     l->func = func;
     l->line = line;
-    delete l->tb;
+    delete l->bt;
 
-    l->tb = new Traceback();
-    l->tb->init();
+    l->bt = new Backtrace();
+    l->bt->init();
     l->ts = timestamp();
 
     pc->last_seen_at++;
@@ -433,24 +433,24 @@ static Ptrcheck *ptrcheck_verify_pointer(int mtype, const void *ptr, std::string
         std::cerr << string_sprintf("PTRCHECK: %p allocated at \"%s\" (%u bytes) at %s:%s line %u at %s\n", ptr,
                                     pc->what.c_str(), pc->size, a->file.c_str(), a->func.c_str(), a->line,
                                     a->ts.c_str());
-        std::cerr << a->tb->to_string() << std::endl;
+        std::cerr << a->bt->to_string() << std::endl;
 
         LOG("PTRCHECK:");
         LOG("PTRCHECK: %p allocated at \"%s\" (%u bytes) at %s:%s line %u at %s", ptr, pc->what.c_str(), pc->size,
             a->file.c_str(), a->func.c_str(), a->line, a->ts.c_str());
-        a->tb->log();
+        a->bt->log();
       }
 
       auto f = pc->freed_by;
       if (f) {
         std::cerr << string_sprintf("PTRCHECK: %p freed at %s:%s line %u at %s\n", ptr, f->file.c_str(),
                                     f->func.c_str(), f->line, f->ts.c_str());
-        std::cerr << f->tb->to_string() << std::endl;
+        std::cerr << f->bt->to_string() << std::endl;
 
         LOG("PTRCHECK:");
         LOG("PTRCHECK: %p freed at %s:%s line %u at %s", ptr, f->file.c_str(), f->func.c_str(), f->line,
             f->ts.c_str());
-        f->tb->log();
+        f->bt->log();
       }
 
       //
@@ -467,12 +467,12 @@ static Ptrcheck *ptrcheck_verify_pointer(int mtype, const void *ptr, std::string
         if (H) {
           std::cerr << string_sprintf("PTRCHECK: %p last seen at [%u] at %s:%s line %u at %s\n", ptr, i,
                                       H->file.c_str(), H->func.c_str(), H->line, H->ts.c_str());
-          std::cerr << H->tb->to_string() << std::endl;
+          std::cerr << H->bt->to_string() << std::endl;
 
           LOG("PTRCHECK:");
           LOG("PTRCHECK: %p last seen at [%u] at %s:%s line %u at %s", ptr, i, H->file.c_str(), H->func.c_str(),
               H->line, H->ts.c_str());
-          H->tb->log();
+          H->bt->log();
         }
       }
 #endif
@@ -562,8 +562,8 @@ void *ptrcheck_alloc(int mtype, const void *ptr, std::string what, int size, std
   a->file                   = file;
   a->line                   = line;
   a->ts                     = timestamp();
-  a->tb                     = new Traceback();
-  a->tb->init();
+  a->bt                     = new Backtrace();
+  a->bt->init();
 
   //
   // Add it to the hash. Not the ring buffer (only when freed).
@@ -606,8 +606,8 @@ int ptrcheck_free(int mtype, void *ptr, std::string func, std::string file, int 
   f->file               = file;
   f->func               = func;
   f->line               = line;
-  f->tb                 = new Traceback();
-  f->tb->init();
+  f->bt                 = new Backtrace();
+  f->bt->init();
   f->ts = timestamp();
 
   //
@@ -675,7 +675,7 @@ void ptrcheck_leak_print(int mtype)
         fprintf(stderr, "PTRCHECK: Leak %p \"%s\" (%u bytes) at %s:%s line %u at %s\n", pc->ptr, pc->what.c_str(),
                 pc->size, a->file.c_str(), a->func.c_str(), a->line, a->ts.c_str());
 
-        fprintf(stderr, "%s", a->tb->to_string().c_str());
+        fprintf(stderr, "%s", a->bt->to_string().c_str());
       } else {
         fprintf(stderr, "PTRCHECK: Leak \"%s\" (%u bytes)\n", pc->what.c_str(), pc->size);
       }
@@ -694,7 +694,7 @@ void ptrcheck_leak_print(int mtype)
         if (H) {
           fprintf(stderr, "PTRCHECK: Last seen at [%u] at %s:%s line %u at %s\n", j, H->file.c_str(), H->func.c_str(),
                   H->line, H->ts.c_str());
-          fprintf(stderr, "%s", H->tb->to_string().c_str());
+          fprintf(stderr, "%s", H->bt->to_string().c_str());
         }
       }
 #endif

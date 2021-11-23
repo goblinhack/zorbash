@@ -6,7 +6,7 @@
 #include "my_game.hpp"
 #include "my_sys.hpp"
 #include "my_thing.hpp"
-#include "my_traceback.hpp"
+#include "my_backtrace.hpp"
 #include "my_wid_actionbar.hpp"
 #include "my_wid_bag.hpp"
 #include "my_wid_inventory.hpp"
@@ -33,7 +33,7 @@ void Game::change_state(int new_state)
 
   switch (new_state) {
     case STATE_NORMAL :
-      // traceback_dump();
+      // backtrace_dump();
       LOG("State changing to STATE_NORMAL");
       wid_thing_info_fini();
       wid_collect_destroy();

@@ -546,6 +546,11 @@ case `uname` in
             C_FLAGS+=" -fsanitize=address -fno-omit-frame-pointer -fno-common"
             LDFLAGS+=" -fsanitize=address"
         fi
+
+        if [[ -f /usr/include/x86_64-linux-gnu/libunwind.h ]]; then
+            LDFLAGS+=" -lunwind"
+            C_FLAGS="$C_FLAGS -DHAVE_LIBUNWIND"
+        fi
         ;;
     *)
         EXE=""

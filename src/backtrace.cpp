@@ -10,20 +10,27 @@
 #include <execinfo.h>
 #endif
 #include <cxxabi.h>
+#ifdef HAVE_LIBUNWIND
+#include <libunwind.h>
+#endif
 #include <memory>
 
+#include "my_backtrace.hpp"
 #include "my_globals.hpp"
 #include "my_main.hpp"
 #include "my_sprintf.hpp"
 #include "my_sys.hpp"
-#include "my_traceback.hpp"
 
-void Traceback::init(void)
+void Backtrace::init(void)
 {
-#ifndef _WIN32
-  size = backtrace(&tb[ 0 ], tb.size());
+#ifdef HAVE_LIBUNWIND
+  size = unw_backtrace(&bt[ 0 ], bt.size());
 #else
-  size                 = 0;
+#ifndef _WIN32
+  size                 = backtrace(&bt[ 0 ], bt.size());
+#else
+  size = 0;
+#endif
 #endif
 }
 
@@ -94,12 +101,12 @@ static auto cppDemangle(const char *abiName)
   return retval;
 }
 
-std::string Traceback::to_string(void)
+std::string Backtrace::to_string(void)
 {
 #ifdef _WIN32
   return ("");
 #else
-  auto        addrlist = &tb[ 0 ];
+  auto        addrlist = &bt[ 0 ];
   std::string sout     = "stack trace\n===========\n";
 
   if (size == 0) {
@@ -173,12 +180,12 @@ std::string Traceback::to_string(void)
 #endif
 }
 
-void Traceback::log(void)
+void Backtrace::log(void)
 {
 #ifdef _WIN32
   return ("");
 #else
-  auto addrlist = &tb[ 0 ];
+  auto addrlist = &bt[ 0 ];
 
   LOG("stack trace");
   LOG("===========");
@@ -252,11 +259,11 @@ void Traceback::log(void)
 #endif
 }
 
-void traceback_dump(void)
+void backtrace_dump(void)
 {
-  auto tb = new Traceback();
-  tb->init();
-  auto s = tb->to_string();
+  auto bt = new Backtrace();
+  bt->init();
+  auto s = bt->to_string();
   std::cerr << s << std::endl;
   fprintf(MY_STDERR, "%s", s.c_str());
 }

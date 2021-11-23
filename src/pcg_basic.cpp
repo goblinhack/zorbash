@@ -61,7 +61,7 @@ uint32_t pcg32_random_r(pcg32_random_t* rng)
   uint32_t rot = oldstate >> 59u;
   uint32_t r =  (xorshifted >> rot) | (xorshifted << ((-rot) & 31));
   //LOG("RAND %u ", r);
-  //traceback_dump();
+  //backtrace_dump();
   return r;
 }
 

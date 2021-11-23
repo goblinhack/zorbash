@@ -6,7 +6,7 @@
 #include "my_game.hpp"
 #include "my_globals.hpp"
 #include "my_sys.hpp"
-#include "my_traceback.hpp"
+#include "my_backtrace.hpp"
 #include <signal.h>  // dirname
 #include <string.h>  // do not remove
 #include <strings.h> // do not remove
@@ -135,7 +135,7 @@ void segv_handler(int sig)
 
   crashed = 1;
   fprintf(MY_STDERR, "Crash!!!");
-  traceback_dump();
+  backtrace_dump();
   ERR("Crashed");
 
 #if defined __linux__
@@ -150,7 +150,7 @@ void ctrlc_handler(int sig)
 {
   TRACE_AND_INDENT();
   fprintf(MY_STDERR, "Interrupted!!!");
-  traceback_dump();
+  backtrace_dump();
   DIE_CLEAN("Interrupted");
 }
 #endif
