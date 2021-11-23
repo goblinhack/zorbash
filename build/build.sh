@@ -548,7 +548,7 @@ case `uname` in
         fi
 
         if [[ -f /usr/include/x86_64-linux-gnu/libunwind.h ]]; then
-            LDFLAGS+=" -lunwind"
+            LDLIBS+=" -lunwind"
             C_FLAGS="$C_FLAGS -DHAVE_LIBUNWIND"
         fi
         ;;
