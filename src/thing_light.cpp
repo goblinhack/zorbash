@@ -80,52 +80,23 @@ void Thing::init_lights(void)
     color col = WHITE;
 
     int strength = get_initial_light_strength();
-    int d1       = 1;
-    int d2       = 2;
 
     //
     // This is a raycast only light to mark things as visible
     //
     new_light(point(0, 0), strength);
 
-    new_light(point(0, 0), strength, col, FBO_FULLMAP_LIGHT);
-    new_light(point(0, 0), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
+    new_light(point(0, 0), strength / 2, col, FBO_FULLMAP_LIGHT);
+    new_light(point(0, 0), strength / 2, col, FBO_PLAYER_VISIBLE_LIGHTING);
     new_light(point(0, 0), 3, col, FBO_SMALL_POINT_LIGHTS);
-
-    new_light(point(-d1, -d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-    new_light(point(d1, -d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-    new_light(point(-d1, d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-    new_light(point(d1, d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-
-    new_light(point(-d2, -d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-    new_light(point(d2, -d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-    new_light(point(-d2, d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-    new_light(point(d2, d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-
-    new_light(point(-d1, -d2), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-    new_light(point(d1, -d2), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-    new_light(point(-d1, d2), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-    new_light(point(d1, d2), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-
-    {
-      d1 = 3;
-      d2 = 5;
-
-      new_light(point(-d1, -d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-      new_light(point(d1, -d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-      new_light(point(-d1, d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-      new_light(point(d1, d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-
-      new_light(point(-d2, -d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-      new_light(point(d2, -d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-      new_light(point(-d2, d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-      new_light(point(d2, d1), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-
-      new_light(point(-d1, -d2), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-      new_light(point(d1, -d2), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-      new_light(point(-d1, d2), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-      new_light(point(d1, d2), strength, col, FBO_PLAYER_VISIBLE_LIGHTING);
-    }
+    col.a = 50;
+    new_light(point(0, 0), strength + 1, col, FBO_PLAYER_VISIBLE_LIGHTING);
+    new_light(point(0, 0), strength + 2, col, FBO_PLAYER_VISIBLE_LIGHTING);
+    col.a = 20;
+    new_light(point(0, 0), strength + 3, col, FBO_PLAYER_VISIBLE_LIGHTING);
+    new_light(point(0, 0), strength + 4, col, FBO_PLAYER_VISIBLE_LIGHTING);
+    col.a = 10;
+    new_light(point(0, 0), strength + 6, col, FBO_PLAYER_VISIBLE_LIGHTING);
 
     has_light = true;
     dbg("Player created");
@@ -153,14 +124,21 @@ void Thing::init_lights(void)
 void Thing::light_update_strength(void)
 {
   TRACE_AND_INDENT();
-  auto str = get_light_strength();
+  float oldstr = get_initial_light_strength();
+  float newstr = get_light_strength();
+  if (! newstr) {
+    newstr = 1;
+  }
+  float light_scale_factor = newstr / oldstr;
+  if (! light_scale_factor) {
+    light_scale_factor = 0.1;
+  }
+
   for (auto l : get_light()) {
     if (l->ray_cast_only) {
       continue;
     }
 
-    if (str != l->prev_strength) {
-      l->update(str);
-    }
+    l->update_light_scale(light_scale_factor);
   }
 }

@@ -37,8 +37,7 @@ public:
   std::vector< Ray >                                    ray;
   std::vector< float >                                  cached_gl_cmds;
   std::array< std::vector< RayPoint >, LIGHT_MAX_RAYS > points;
-  int16_t                                               orig_strength {}; // Initial strenght
-  int16_t                                               prev_strength {}; // Light before torch changes
+  int16_t                                               orig_strength {}; // Initial strength
   int16_t                                               strength {};      // Current torch strength
   uint16_t                                              flicker {};
   uint16_t                                              max_light_rays {};
@@ -47,7 +46,7 @@ public:
   void destroy();
   void destroyed(void);
   void reset(void);
-  void update(int strength);
+  void update_light_scale(float scale);
   void update(void);
   bool calculate(void);
   void render_triangle_fans(void);

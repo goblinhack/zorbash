@@ -111,13 +111,13 @@ Lightp light_new(Thingp owner, point offset, int strength, color col, int fbo)
   auto l = new Light(); // std::make_shared< class Light >();
 
   l->offset        = offset;
+  l->strength      = strength;
   l->orig_strength = strength;
-  l->prev_strength = strength;
   l->owner         = owner;
   l->col           = col;
   l->fbo           = fbo;
 
-  l->update(strength);
+  l->update_light_scale(1.0);
 
   // log("Created");
   return (l);
@@ -129,28 +129,22 @@ Lightp light_new(Thingp owner, point offset, int strength)
   auto l = new Light(); // std::make_shared< class Light >();
 
   l->offset        = offset;
+  l->strength      = strength;
   l->orig_strength = strength;
-  l->prev_strength = strength;
   l->owner         = owner;
   l->ray_cast_only = true;
   l->fbo           = -1;
 
-  l->update(strength);
+  l->update_light_scale(1.0);
 
   // log("Created");
   return (l);
 }
 
-void Light::update(int strength_in)
+void Light::update_light_scale(float scale)
 {
   TRACE_AND_INDENT();
-  if (! strength_in) {
-    DIE("no light strength set");
-  }
-
-  prev_strength = strength_in;
-  strength      = strength_in * TILE_WIDTH;
-
+  strength = (float) orig_strength * TILE_WIDTH * scale;
   update();
 }
 
@@ -563,12 +557,7 @@ void Light::render_triangle_fans(void)
     return;
   }
 
-  if (offset != point(0, 0)) {
-    static color l(255, 255, 255, 50);
-    glcolor(l);
-  } else {
-    glcolor(WHITE);
-  }
+  glcolor(col);
 
   if (! cached_gl_cmds.size()) {
     blit_init();
