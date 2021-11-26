@@ -4,7 +4,6 @@
 <!--                                                                                                                                              -->
 <!-- Next todo                                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
-<!-- - player hidden when fallin                                                                                                                  -->
 <!-- - mosnt light source?                                                                                                                        -->
 <!-- - cannot click to move to diagonal jump                                                                                                      -->
 <!-- - click on jelly does not hit and no msg                                                                                                     -->

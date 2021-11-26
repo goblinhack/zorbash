@@ -533,9 +533,16 @@ void Thing::update_interpolated_position(void)
     new_pos.y = last_mid_at.y + dy * step;
   }
 
-  level_pop();
-  set_interpolated_mid_at(new_pos);
-  level_push();
+  //
+  // Try not to push/pop as it breaks the unsafe walker
+  //
+  if (mid_at != make_point(new_pos)) {
+    level_pop();
+    set_interpolated_mid_at(new_pos);
+    level_push();
+  } else {
+    set_interpolated_mid_at(new_pos);
+  }
 
   //
   // For now only the player has a calculated light
@@ -584,9 +591,14 @@ void Thing::update_pos(point to, bool immediately)
     }
   }
 
-  level_pop();
-  mid_at = to;
-  level_push();
+  //
+  // Try not to push/pop as it breaks the unsafe walker
+  //
+  if (mid_at != to) {
+    level_pop();
+    mid_at = to;
+    level_push();
+  }
 
   if (! immediately) {
     is_moving = true;

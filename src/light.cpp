@@ -558,7 +558,6 @@ void Light::render_triangle_fans(void)
   }
 
   glcolor(col);
-
   if (! cached_gl_cmds.size()) {
     blit_init();
     {

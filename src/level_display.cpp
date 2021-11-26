@@ -159,9 +159,14 @@ void Level::display_map_things(int fbo, const int16_t minx, const int16_t miny, 
   //
   blit_fbo_bind(fbo);
   blit_init();
+
   for (auto z = 0; z < MAP_DEPTH_OBJ; z++) {
     for (auto y = miny; y < maxy; y++) {
       for (auto x = minx; x < maxx; x++) {
+        //
+        // NOTE: if level pop/push happens here then we can end up missing this
+        // thing in the blit as we are using the unsafe(faster) walker.
+        //
         FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z)
         {
           if (z <= MAP_DEPTH_FLOOR2) {

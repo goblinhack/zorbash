@@ -75,6 +75,10 @@ void Thing::fall(float fall_height, ts_t ms)
   set_fall_height(fall_height);
 
   dbg("Begin falling");
+
+  //
+  // Push pop here is needed to remove items as they are now in freefall
+  //
   level_pop();
   is_falling = true;
   level_push();
@@ -119,7 +123,7 @@ float Thing::get_fall(void)
   }
 
   float time_step = (float) (t - get_ts_fall_begin()) / (float) (get_ts_fall_end() - get_ts_fall_begin());
-  dbg("Is currrently falling, dt %f", time_step);
+  dbg("Is currently falling, dt %f", time_step);
 
   //
   // This hide things like the sword
