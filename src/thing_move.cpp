@@ -715,6 +715,14 @@ void Thing::move_to_immediately(point to)
   }
 
   update_interpolated_position();
+
+  //
+  // If this move was initiated by a jump make sure and clear the move path
+  // so we don't try to continua an AI move
+  //
+  if (maybe_aip()) {
+    get_aip()->move_path.clear();
+  }
 }
 
 bool Thing::move_to_try(const point &nh, const bool escaping, bool check_only)
