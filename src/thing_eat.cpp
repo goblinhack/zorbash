@@ -22,7 +22,9 @@ bool Thing::eat(Thingp what)
     return false;
   }
 
+  log("Eat %s", what->text_the().c_str());
   TRACE_AND_INDENT();
+
   //
   // Does the attacker feast on success?
   //
@@ -39,9 +41,13 @@ bool Thing::eat(Thingp what)
         (is_item_magical_eater() && what->is_item_magical()) || (is_potion_eater() && what->is_potion())) {
 
       //
-      // For treasure what should the boost be?
+      // Worth eating?
       //
-      if (! health_boost(what->get_nutrition())) {
+      if (is_hunger_insatiable()) {
+        //
+        // Munch munch
+        //
+      } else if (! health_boost(what->get_nutrition())) {
         dbg("No health boost from eating %s", what->text_the().c_str());
         return false;
       }
@@ -54,8 +60,31 @@ bool Thing::eat(Thingp what)
             level->thing_new(tp_random_blood_splatter()->name(), mid_at);
           }
 
-          TOPCON("%s eats %s.", text_The().c_str(), what->text_the().c_str());
+          if (! what->is_offscreen) {
+            if (what->is_monst() || what->is_player()) {
+              TOPCON("%s is eating %s!", text_The().c_str(), what->text_the().c_str());
+            } else {
+              TOPCON("%s eats %s.", text_The().c_str(), what->text_the().c_str());
+            }
+          }
         }
+      }
+
+      if (what->is_monst() || what->is_player()) {
+        if (is_engulfer() && (what->mid_at == mid_at)) {
+          int bite_damage = get_damage_swallow();
+          if (bite_damage) {
+            what->is_bitten_by(this, bite_damage);
+            return true;
+          }
+        }
+
+        int bite_damage = get_damage_bite();
+        if (bite_damage) {
+          what->is_bitten_by(this, bite_damage);
+          return true;
+        }
+        return false;
       }
 
       what->dead("by being eaten");

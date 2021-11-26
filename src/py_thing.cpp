@@ -409,7 +409,7 @@ PyObject *thing_defeated_by(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_NONE;
   }
 
-  owner->log("Defeated by %s, reason %s", defeater->to_string().c_str(), reason);
+  owner->log("Killed by %s, reason %s", defeater->to_string().c_str(), reason);
   owner->dead(defeater, "%s", reason);
 
   Py_RETURN_NONE;

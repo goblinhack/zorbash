@@ -16,7 +16,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_ai_vision_distance(3)
     mytp.set_ai_wanderer(True)
     mytp.set_attack_eater(True)
-    mytp.set_attack_engulf_chance_d1000(100)
+    mytp.set_attack_engulf_chance_d1000(1000)
     mytp.set_attack_lunge(True)
     mytp.set_collision_check(True)
     mytp.set_collision_hit_priority(10)

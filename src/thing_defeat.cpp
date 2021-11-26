@@ -197,7 +197,21 @@ void Thing::defeat(Thingp defeater, const char *reason)
         TOPCON("RIP: Robot is defeated %s.", reason);
       } else {
         TOPCON("%%fg=yellow$New high score, %s place!%%fg=reset$", game->config.hiscores.place_str(this));
-        TOPCON("RIP: You are defeated %s.", reason);
+        if (defeater && defeater->is_acid()) {
+          TOPCON("RIP: You are dissolved to death %s.", reason);
+        } else if (defeater && defeater->is_fire()) {
+          TOPCON("RIP: You are burnt to death %s.", reason);
+        } else if (defeater && defeater->is_water()) {
+          TOPCON("RIP: You are drowned %s.", reason);
+        } else if (defeater && defeater->is_necrotic_danger_level()) {
+          TOPCON("RIP: You are rotted to death %s.", reason);
+        } else if (defeater && defeater->is_engulfer()) {
+          TOPCON("RIP: You are consumed %s.", reason);
+        } else if (defeater && defeater->is_monst()) {
+          TOPCON("RIP: You are defeated %s.", reason);
+        } else {
+          TOPCON("RIP: You are killed %s.", reason);
+        }
       }
       game->config.hiscores.add_new_hiscore(this, title(), reason);
     }

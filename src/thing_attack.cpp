@@ -4,6 +4,7 @@
 //
 
 #include "my_array_bounds_check.hpp"
+#include "my_backtrace.hpp"
 #include "my_dmap.hpp"
 #include "my_game.hpp"
 #include "my_level.hpp"
@@ -354,6 +355,7 @@ bool Thing::possible_to_attack(const Thingp victim)
 
 bool Thing::attack(point future_pos)
 {
+  backtrace_dump();
   bool up     = future_pos.y < mid_at.y;
   bool down   = future_pos.y > mid_at.y;
   bool left   = future_pos.x < mid_at.x;
@@ -422,6 +424,8 @@ bool Thing::attack(Thingp victim)
     //
     if (can_eat(victim)) {
       dbg("Try to eat instead of attacking %s", victim->to_string().c_str());
+      TRACE_AND_INDENT();
+
       //
       // Eat corpse?
       //
@@ -445,9 +449,10 @@ bool Thing::attack(Thingp victim)
         return true;
       }
 
-      if (is_monst() && victim->is_food() &&
-          ((is_jelly_eater() && victim->is_jelly()) || (is_meat_eater() && victim->is_meat()) ||
-           (is_blood_eater() && victim->is_blood()) || (is_food_eater() && victim->is_food())) &&
+      if (is_monst() &&
+          ((is_food_eater() && victim->is_food()) || (is_jelly_eater() && victim->is_jelly()) ||
+           (is_meat_eater() && victim->is_meat()) || (is_blood_eater() && victim->is_blood()) ||
+           (is_food_eater() && victim->is_food())) &&
           eat(victim)) {
         return true;
       }

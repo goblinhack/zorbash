@@ -997,6 +997,7 @@ public:
   int is_organic(void);
   int is_player(void);
   int is_poisoned_by(Thingp hitter, int damage);
+  int is_bitten_by(Thingp hitter, int damage);
   int is_poisonous_danger_level(void);
   int is_potion_eater(void);
   int is_potion(void);

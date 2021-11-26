@@ -170,7 +170,7 @@ std::istream &operator>>(std::istream &in, Bits< HiScores & > my)
   my.t.hiscores.resize(0);
   in >> bits(my.t.hiscores);
   for (auto h : my.t.hiscores) {
-    DBG3("Loaded Hiscore: %s, %d defeated by %s, %s", h.name.c_str(), h.score, h.defeated_by.c_str(), h.when.c_str());
+    DBG3("Loaded Hiscore: %s, %d killed by %s, %s", h.name.c_str(), h.score, h.defeated_by.c_str(), h.when.c_str());
   }
 
   return in;

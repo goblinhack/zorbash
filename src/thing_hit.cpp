@@ -779,6 +779,12 @@ int Thing::is_hit(Thingp hitter, bool crit, bool bite, bool poison, bool necrosi
   return (hit_and_destroyed);
 }
 
+int Thing::is_bitten_by(Thingp hitter, int damage)
+{
+  TRACE_AND_INDENT();
+  return (is_hit(hitter, false, true, false, false, damage));
+}
+
 int Thing::is_attacked_by(Thingp hitter, int damage)
 {
   TRACE_AND_INDENT();
