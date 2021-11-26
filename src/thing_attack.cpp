@@ -83,6 +83,16 @@ bool Thing::possible_to_attack(const Thingp victim)
   if (victim->is_open) {
     dbg("Cannot attack %s, it's open", victim->to_string().c_str());
     return false;
+  } else {
+    //
+    // Attacking of closed doors?
+    //
+    if (victim->is_door()) {
+      if (me->ai_is_able_to_break_down_doors()) {
+        dbg("Can break down door %s", victim->to_string().c_str());
+        return true;
+      }
+    }
   }
 
   if (is_alive_monst() || is_resurrected) {
