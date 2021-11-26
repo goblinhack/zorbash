@@ -4,10 +4,12 @@
 <!--                                                                                                                                              -->
 <!-- Next todo                                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
+<!-- - jelly jump                                                                                                                                 -->
+<!-- - mosnt light source?                                                                                                                        -->
 <!-- - cannot click to move to diagonal jump                                                                                                      -->
 <!-- - click on jelly does not hit and no msg                                                                                                     -->
 <!-- - necrosis damage mummy / buff                                                                                                               -->
-<!-- - check d cleaner engulfs                                                                                                                    -->
+<!-- - check cleaner engulfs                                                                                                                      -->
 <!-- - spider jump attack?                                                                                                                        -->
 <!-- - giant spider web throw                                                                                                                     -->
 <!-- - spider ball anims                                                                                                                          -->

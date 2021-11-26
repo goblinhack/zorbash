@@ -12,42 +12,42 @@
 #include "my_time.hpp"
 #include "my_wid.hpp"
 
-static void wid_log_(Widp t, const char *fmt, va_list args)
+static void wid_log_(Widp w, const char *fmt, va_list args)
 {
   char buf[ MAXLONGSTR ];
   int  len;
 
-  verify(MTYPE_THING, t);
+  verify(MTYPE_WID, w);
   buf[ 0 ] = '\0';
   get_timestamp(buf, MAXLONGSTR);
   len = (int) strlen(buf);
-  snprintf(buf + len, MAXLONGSTR - len, "WID [%s]: ", to_string(t).c_str());
+  snprintf(buf + len, MAXLONGSTR - len, "WID [%s]: ", to_string(w).c_str());
   len = (int) strlen(buf);
   vsnprintf(buf + len, MAXLONGSTR - len, fmt, args);
 
   putf(MY_STDOUT, buf);
 }
 
-void WID_LOG(Widp t, const char *fmt, ...)
+void WID_LOG(Widp w, const char *fmt, ...)
 {
   va_list args;
 
-  verify(MTYPE_THING, t);
+  verify(MTYPE_WID, w);
 
   va_start(args, fmt);
-  wid_log_(t, fmt, args);
+  wid_log_(w, fmt, args);
   va_end(args);
 }
 
-void WID_DBG(Widp t, const char *fmt, ...)
+void WID_DBG(Widp w, const char *fmt, ...)
 {
   va_list args;
 
   IF_NODEBUG3 { return; }
 
-  verify(MTYPE_THING, t);
+  verify(MTYPE_WID, w);
 
   va_start(args, fmt);
-  wid_log_(t, fmt, args);
+  wid_log_(w, fmt, args);
   va_end(args);
 }
