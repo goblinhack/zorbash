@@ -14,145 +14,184 @@
 #include "my_thing_template.hpp"
 #include "my_tile.hpp"
 
-bool Thing::eat(Thingp what)
+bool Thing::worth_eating(Thingp victim)
 {
-  verify(MTYPE_THING, what);
-  if (! what) {
-    err("Cannot eat null thing");
+  verify(MTYPE_THING, victim);
+  if (! victim) {
+    err("Cannot check worth eating null thing");
     return false;
   }
 
-  log("Eat %s", what->text_the().c_str());
   TRACE_AND_INDENT();
-
-  //
-  // Does the attacker feast on success?
-  //
-  if (is_player()) {
-    auto boost = health_boost(what->get_nutrition());
-    TOPCON("You munch %s for %d health.", what->text_the().c_str(), boost);
-    return true;
+  if (! can_eat(victim)) {
+    return false;
   }
 
-  if (attack_eater()) {
-    if ((is_jelly_eater() && what->is_jelly()) || (is_meat_eater() && what->is_meat()) ||
-        (is_blood_eater() && what->is_blood()) || (is_food_eater() && what->is_food()) ||
-        (is_treasure_type_eater() && what->is_treasure_type()) ||
-        (is_item_magical_eater() && what->is_item_magical()) || (is_potion_eater() && what->is_potion())) {
+  return health_boost_would_occur(victim->get_nutrition());
+}
 
-      //
-      // Worth eating?
-      //
-      if (is_hunger_insatiable()) {
-        //
-        // Munch munch
-        //
-      } else if (! health_boost(what->get_nutrition())) {
-        dbg("No health boost from eating %s", what->text_the().c_str());
-        return false;
-      }
+bool Thing::can_eat(const Thingp itp)
+{
+  TRACE_AND_INDENT();
+  auto me    = tp();
+  auto vitim = itp->tp();
 
-      dbg("Eats %s", what->text_the().c_str());
-
-      if (! is_player()) {
-        if (distance_to_player() < DMAP_IS_PASSABLE) {
-          if (what->is_meat()) {
-            level->thing_new(tp_random_blood_splatter()->name(), mid_at);
-          }
-
-          if (! what->is_offscreen) {
-            if (what->is_monst() || what->is_player()) {
-              TOPCON("%s is eating %s!", text_The().c_str(), what->text_the().c_str());
-            } else {
-              TOPCON("%s eats %s.", text_The().c_str(), what->text_the().c_str());
-            }
-          }
-        }
-      }
-
-      if (what->is_monst() || what->is_player()) {
-        if (is_engulfer() && (what->mid_at == mid_at)) {
-          int bite_damage = get_damage_swallow();
-          if (bite_damage) {
-            what->is_bitten_by(this, bite_damage);
-            return true;
-          }
-        }
-
-        int bite_damage = get_damage_bite();
-        if (bite_damage) {
-          what->is_bitten_by(this, bite_damage);
-          return true;
-        }
-        return false;
-      }
-
-      what->dead("by being eaten");
+  if (me->is_meat_eater()) {
+    if (vitim->is_meat()) {
+      return true;
+    }
+  }
+  if (me->is_blood_eater()) {
+    if (vitim->is_blood()) {
+      return true;
+    }
+  }
+  if (me->is_food_eater()) {
+    if (vitim->is_food()) {
+      return true;
+    }
+  }
+  if (me->is_treasure_type_eater()) {
+    if (vitim->is_treasure_type()) {
+      return true;
+    }
+  }
+  if (me->is_potion_eater()) {
+    if (vitim->is_potion()) {
+      return true;
+    }
+  }
+  if (me->is_item_magical_eater()) {
+    if (vitim->is_item_magical()) {
+      return true;
+    }
+  }
+  if (me->is_jelly_baby_eater()) {
+    if (vitim->is_jelly_baby()) {
+      return true;
+    }
+  }
+  if (is_player()) {
+    if (vitim->is_food()) {
       return true;
     }
   }
   return false;
 }
 
-bool Thing::worth_eating(Thingp what)
+//
+// Try to eat
+//
+bool Thing::eat(Thingp victim)
 {
-  verify(MTYPE_THING, what);
-  if (! what) {
-    err("Cannot check worth eating null thing");
+  verify(MTYPE_THING, victim);
+  if (! victim) {
+    err("Cannot eat null thing");
     return false;
   }
 
+  log("Eat %s", victim->text_the().c_str());
   TRACE_AND_INDENT();
-  if (! can_eat(what)) {
-    return false;
+
+  //
+  // Does the attacker feast on success?
+  //
+  if (is_player()) {
+    auto boost = health_boost(victim->get_nutrition());
+    TOPCON("You munch %s for %d health.", victim->text_the().c_str(), boost);
+    return true;
   }
 
-  return health_boost_would_occur(what->get_nutrition());
+  if (attack_eater()) {
+    if ((is_jelly_eater() && victim->is_jelly()) || (is_meat_eater() && victim->is_meat()) ||
+        (is_blood_eater() && victim->is_blood()) || (is_food_eater() && victim->is_food()) ||
+        (is_treasure_type_eater() && victim->is_treasure_type()) ||
+        (is_item_magical_eater() && victim->is_item_magical()) || (is_potion_eater() && victim->is_potion())) {
+
+      //
+      // Worth eating?
+      //
+      if (is_hunger_insatiable()) {
+        //
+        // Munch munch. Always try to eat.
+        //
+      } else if (! health_boost(victim->get_nutrition())) {
+        dbg("No health boost from eating %s", victim->text_the().c_str());
+        return false;
+      }
+
+      dbg("Eating %s", victim->text_the().c_str());
+
+      if (victim->is_monst() || victim->is_player()) {
+        if (is_engulfer() && (victim->mid_at == mid_at)) {
+          int bite_damage = get_damage_swallow();
+          if (bite_damage) {
+            victim->is_bitten_by(this, bite_damage);
+            return true;
+          }
+        }
+
+        int bite_damage = get_damage_bite();
+        if (bite_damage) {
+          victim->is_bitten_by(this, bite_damage);
+          return true;
+        }
+        return false;
+      } else {
+        return consume(victim);
+      }
+    }
+  }
+  return false;
 }
 
-bool Thing::can_eat(const Thingp itp)
+bool Thing::consume(Thingp victim)
 {
-  TRACE_AND_INDENT();
-  auto me = tp();
-  auto it = itp->tp();
+  verify(MTYPE_THING, victim);
+  if (! victim) {
+    err("Cannot eat null thing");
+    return false;
+  }
 
-  if (me->is_meat_eater()) {
-    if (it->is_meat()) {
-      return true;
-    }
-  }
-  if (me->is_blood_eater()) {
-    if (it->is_blood()) {
-      return true;
-    }
-  }
-  if (me->is_food_eater()) {
-    if (it->is_food()) {
-      return true;
-    }
-  }
-  if (me->is_treasure_type_eater()) {
-    if (it->is_treasure_type()) {
-      return true;
-    }
-  }
-  if (me->is_potion_eater()) {
-    if (it->is_potion()) {
-      return true;
-    }
-  }
-  if (me->is_item_magical_eater()) {
-    if (it->is_item_magical()) {
-      return true;
-    }
-  }
-  if (me->is_jelly_baby_eater()) {
-    if (it->is_jelly_baby()) {
-      return true;
-    }
-  }
+  log("Consume %s", victim->text_the().c_str());
+  TRACE_AND_INDENT();
+
+  //
+  // Does the attacker feast on success?
+  //
   if (is_player()) {
-    if (it->is_food()) {
+    auto boost = health_boost(victim->get_nutrition());
+    TOPCON("You munch %s for %d health.", victim->text_the().c_str(), boost);
+    return true;
+  }
+
+  if (attack_eater()) {
+    if ((is_jelly_eater() && victim->is_jelly()) || (is_meat_eater() && victim->is_meat()) ||
+        (is_blood_eater() && victim->is_blood()) || (is_food_eater() && victim->is_food()) ||
+        (is_treasure_type_eater() && victim->is_treasure_type()) ||
+        (is_item_magical_eater() && victim->is_item_magical()) || (is_potion_eater() && victim->is_potion())) {
+
+      dbg("Consumes %s", victim->text_the().c_str());
+
+      if (! is_player()) {
+        if (distance_to_player() < DMAP_IS_PASSABLE) {
+          if (victim->is_meat()) {
+            level->thing_new(tp_random_blood_splatter()->name(), mid_at);
+          }
+
+          if (! victim->is_offscreen) {
+            if (victim->is_player()) {
+              TOPCON("%s is eating you!", text_The().c_str());
+            } else if (victim->is_monst() || victim->is_player()) {
+              TOPCON("%s is eating %s!", text_The().c_str(), victim->text_the().c_str());
+            } else {
+              TOPCON("%s eats %s.", text_The().c_str(), victim->text_the().c_str());
+            }
+          }
+        }
+      }
+
+      victim->dead("by being eaten");
       return true;
     }
   }

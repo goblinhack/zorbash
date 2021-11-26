@@ -233,7 +233,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
   }
 
   //
-  // Try to steal
+  // Try to steal instead of attacking?
   //
   if (real_hitter->is_item_eater()) {
     if (is_carrying_item()) {
@@ -434,6 +434,12 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       } else if (hitter->is_projectile() || hitter->is_laser()) {
         TOPCON("%%fg=orange$%s blasted you for %d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(),
                damage, hitter->text_the().c_str());
+      } else if (bite) {
+        if (real_hitter->mid_at == mid_at) {
+          TOPCON("%%fg=orange$%s digests you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(), damage);
+        } else {
+          TOPCON("%%fg=orange$%s bites you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(), damage);
+        }
       } else {
         TOPCON("%%fg=orange$%s %s you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(),
                real_hitter->text_hits().c_str(), damage);
@@ -614,7 +620,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     // Does the attacker feast on success?
     //
     if (real_hitter->can_eat(this)) {
-      real_hitter->eat(this);
+      real_hitter->consume(this);
     }
   } else {
     dbg("Is hit by (%s) %u damage, health now %d", real_hitter->to_string().c_str(), damage, h);
@@ -648,13 +654,13 @@ int Thing::is_hit(Thingp hitter, bool crit, bool bite, bool poison, bool necrosi
 {
   TRACE_AND_INDENT();
   if (bite) {
-    IF_DEBUG2 { hitter->log("Possible hit %s for %d bite damage", to_string().c_str(), damage); }
+    IF_DEBUG2 { hitter->log("Possible bite %s for %d bite damage", to_string().c_str(), damage); }
   } else if (poison) {
-    IF_DEBUG2 { hitter->log("Possible hit %s for %d poison damage", to_string().c_str(), damage); }
+    IF_DEBUG2 { hitter->log("Possible poison attack %s for %d damage", to_string().c_str(), damage); }
   } else if (necrosis) {
-    IF_DEBUG2 { hitter->log("Possible hit %s for %d necrosis damage", to_string().c_str(), damage); }
+    IF_DEBUG2 { hitter->log("Possible necrosis attack %s for %d damage", to_string().c_str(), damage); }
   } else if (damage) {
-    IF_DEBUG2 { hitter->log("Possible hit %s for %d damage", to_string().c_str(), damage); }
+    IF_DEBUG2 { hitter->log("Possible melee hit %s for %d damage", to_string().c_str(), damage); }
   } else {
     IF_DEBUG2
     {

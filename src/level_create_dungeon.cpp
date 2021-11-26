@@ -408,7 +408,11 @@ bool Level::create_dungeon(point3d at, int seed)
 
               {
                 // thing_new("spider_giant", point(x + 3, y));
-                thing_new("cleaner", point(x + 3, y));
+                thing_new("mummy", point(x + 3, y - 1));
+                thing_new("jelly_baby", point(x + 3, y - 1));
+                thing_new("jelly_baby", point(x + 4, y));
+                thing_new("jelly_baby", point(x + 5, y));
+                thing_new("jelly_baby", point(x + 6, y));
               }
 #if 0
             {

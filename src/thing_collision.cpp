@@ -119,26 +119,122 @@ bool Thing::collision_find_best_target(bool *target_attacked, bool *target_overl
   if (best) {
     *target_overlaps = true;
 
-    auto it = best->target;
+    auto victim = best->target;
 
-    if (is_loggable()) {
-      dbg("Best candidate %s", it->to_string().c_str());
-    }
+    dbg("Best candidate %s", victim->to_string().c_str());
+    TRACE_AND_INDENT();
 
     //
-    // We hit this path if you click on a door and attack it.
+    // We hit this path if you click on a door and attack victim.
     // However, try to open the door if you have a key.
     //
-    if (it->is_door() && ! it->is_open) {
+    if (victim->is_door() && ! victim->is_open) {
       auto owner = get_immediate_owner();
       if (owner) {
-        if (owner->open_door(it)) {
+        if (owner->open_door(victim)) {
           *target_attacked = false;
           ret              = true;
         }
-      } else if (open_door(it)) {
+      } else if (open_door(victim)) {
         *target_attacked = false;
         ret              = true;
+      }
+    }
+
+    auto owner = get_top_owner();
+    if (! *target_attacked) {
+      //
+      // Carry to eat later. Things attack their food.
+      //
+      if (owner) {
+        //
+        // We hit this path for swords. We don't really want the sword to
+        // do the eating, so pass control to the owner.
+        //
+
+        //
+        // Owner eat food?
+        //
+        if (owner == victim) {
+          //
+          // This is an odd one.
+          //
+          err("Trying to attack self");
+        } else if (owner->can_eat(victim)) {
+          //
+          // Eat corpse?
+          //
+          IF_DEBUG2 { owner->log("Can eat %s", victim->to_string().c_str()); }
+
+          if (victim->is_dead) {
+            if (owner->eat(victim)) {
+              //
+              // Can't defeat victim twice, so hide victim
+              //
+              IF_DEBUG1 { owner->log("Eat corpse %s", victim->to_string().c_str()); }
+              victim->hide();
+              *target_attacked = true;
+              ret              = true;
+            }
+          } else if (owner->is_player()) {
+            owner->log("Carry %s", victim->to_string().c_str());
+            if (owner->try_to_carry_if_worthwhile_dropping_items_if_needed(victim)) {
+              *target_attacked = true;
+              ret              = true;
+            }
+          }
+        }
+      } else {
+        //
+        // As above, but not for owner.
+        //
+        if (can_eat(victim)) {
+          dbg("Try to eat instead of attacking %s", victim->to_string().c_str());
+          TRACE_AND_INDENT();
+
+          //
+          // Eat corpse?
+          //
+          if (is_item_carrier() &&
+              ((is_jelly_eater() && victim->is_jelly()) || (is_food_eater() && victim->is_food()) ||
+               (is_treasure_type_eater() && victim->is_treasure_type()) ||
+               (is_item_magical_eater() && victim->is_item_magical()) ||
+               (is_potion_eater() && victim->is_potion())) &&
+              try_to_carry_if_worthwhile_dropping_items_if_needed(victim)) {
+            dbg("Don't eat, try to carry %s", victim->to_string().c_str());
+            *target_attacked = true;
+            ret              = true;
+          }
+
+          if (is_monst() && victim->is_dead && ! victim->is_player() && eat(victim)) {
+            //
+            // Can only eat once alive things when dead... But the player is gone once dead.
+            // Can't defeat victim twice, so hide victim
+            //
+            dbg("Eat corpse %s", victim->to_string().c_str());
+            victim->hide();
+            victim->gc();
+            *target_attacked = true;
+            ret              = true;
+          }
+
+          if (is_monst() &&
+              ((is_food_eater() && victim->is_food()) || (is_jelly_eater() && victim->is_jelly()) ||
+               (is_meat_eater() && victim->is_meat()) || (is_blood_eater() && victim->is_blood()) ||
+               (is_food_eater() && victim->is_food())) &&
+              eat(victim)) {
+            *target_attacked = true;
+            ret              = true;
+          }
+
+          if (is_player()) {
+            dbg("Don't attack, try to carry %s", victim->to_string().c_str());
+            if (try_to_carry_if_worthwhile_dropping_items_if_needed(victim)) {
+              *target_attacked = true;
+              ret              = true;
+            }
+          }
+        }
       }
     }
 
@@ -148,12 +244,12 @@ bool Thing::collision_find_best_target(bool *target_attacked, bool *target_overl
     //
     if (is_laser() || is_weapon() || is_monst() || (is_player() && game->robot_mode)) {
       if (! *target_attacked) {
-        if (attack(it)) {
+        if (attack(victim)) {
           *target_attacked = true;
           ret              = true;
         } else {
           if (is_loggable()) {
-            dbg("Collision: Cannot hit %s", it->to_string().c_str());
+            dbg("Collision: Cannot hit %s", victim->to_string().c_str());
           }
         }
       }
