@@ -698,7 +698,6 @@ bool Thing::attack(Thingp victim)
     if (is_destroyed_on_hitting() || is_destroyed_on_hit_or_miss()) {
       dead("by foolishness");
     }
-
     decr_stamina();
     return true;
   }

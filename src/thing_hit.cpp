@@ -218,6 +218,32 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
   }
 
   //
+  // Try to push the thing into a hazard if we can just to be sneaky
+  //
+  if (this == hitter) {
+    //
+    // On fire?
+    //
+  } else if (hitter->is_monst()) {
+    switch (hitter->try_to_shove_into_hazard(this, delta)) {
+      case THING_SHOVE_TRIED_AND_FAILED : return true;
+      case THING_SHOVE_TRIED_AND_PASSED : return true;
+      case THING_SHOVE_NEVER_TRIED : break;
+    }
+  }
+
+  //
+  // Try to steal
+  //
+  if (real_hitter->is_item_eater()) {
+    if (is_carrying_item()) {
+      if (real_hitter->steal_item_from(this)) {
+        return true;
+      }
+    }
+  }
+
+  //
   // Poison attack
   //
   if (poison) {
@@ -237,7 +263,9 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       } else if (is_alive_monst() && real_hitter->is_player()) {
         TOPCON("%%fg=yellow$You poison %s for %d damage!%%fg=reset$", text_the().c_str(), poison);
       }
-      incr_poisoned_amount(poison);
+      if (real_hitter->is_poisonous_danger_level()) {
+        incr_poisoned_amount(poison);
+      }
       poisoned();
     }
   }
@@ -274,7 +302,12 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
             TOPCON("%%fg=limegreen$Your rotting hand touches %s for 1 permanent strength damage!%%fg=reset$",
                    text_the().c_str());
           }
-          incr_necrotized_amount(damage);
+          if (real_hitter->is_necrotic_danger_level()) {
+            if (damage > 1) {
+              incr_necrotized_amount(damage - 1);
+            }
+          }
+          decr_stat_strength();
           rotting();
         }
       } else {
@@ -295,7 +328,12 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
             TOPCON("%%fg=limegreen$Your rotting hand touches %s for 1 permanent constitution damage!%%fg=reset$",
                    text_the().c_str());
           }
-          incr_necrotized_amount(damage);
+          if (real_hitter->is_necrotic_danger_level()) {
+            if (damage > 1) {
+              incr_necrotized_amount(damage - 1);
+            }
+          }
+          decr_stat_constitution();
           rotting();
         }
       }
@@ -319,32 +357,6 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       }
     } else {
       clear_move_path("player was hit");
-    }
-  }
-
-  //
-  // Try to push the thing into a hazard if we can just to be sneaky
-  //
-  if (this == hitter) {
-    //
-    // On fire?
-    //
-  } else if (hitter->is_monst()) {
-    switch (hitter->try_to_shove_into_hazard(this, delta)) {
-      case THING_SHOVE_TRIED_AND_FAILED : return true;
-      case THING_SHOVE_TRIED_AND_PASSED : return true;
-      case THING_SHOVE_NEVER_TRIED : break;
-    }
-  }
-
-  //
-  // Try to steal
-  //
-  if (real_hitter->is_item_eater()) {
-    if (is_carrying_item()) {
-      if (real_hitter->steal_item_from(this)) {
-        return true;
-      }
     }
   }
 
@@ -404,9 +416,10 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       }
     } else {
       if (poison) {
-        TOPCON("%%fg=darkred$%s bite poisons you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(), damage);
+        TOPCON("%%fg=darkred$%s's bite poisons you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(),
+               damage);
       } else if (necrosis) {
-        TOPCON("%%fg=limegreen$%s withering touch rots your skin!%%fg=reset$", real_hitter->text_The().c_str());
+        TOPCON("%%fg=limegreen$%s's withering touch rots your skin!%%fg=reset$", real_hitter->text_The().c_str());
       } else if (crit) {
         TOPCON("%%fg=red$%s CRITS you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(), damage);
       } else if (hitter->is_weapon()) {

@@ -4,8 +4,6 @@
 <!--                                                                                                                                              -->
 <!-- Next todo                                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
-<!-- - click on jelly does not hit and no msg                                                                                                     -->
-<!-- - necrosis damage mummy / buff                                                                                                               -->
 <!-- - check cleaner engulfs                                                                                                                      -->
 <!-- - spider jump attack?                                                                                                                        -->
 <!-- - giant spider web throw                                                                                                                     -->

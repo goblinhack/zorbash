@@ -29,7 +29,7 @@ void Thing::necrosis_tick(void)
     int    necrosis = old_necrosis;
 
     if (necrosis) {
-      is_necrotized_by(hitter, necrosis);
+      is_necrotized_by(hitter, 1);
     }
 
     decr_necrotized_amount();

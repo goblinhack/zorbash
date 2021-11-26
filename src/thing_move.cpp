@@ -403,7 +403,10 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
         if (is_player()) {
           game->tick_begin("player tried to attack");
         }
-        equip_use(must_attack, MONST_EQUIP_WEAPON);
+        if (equip_use(must_attack, MONST_EQUIP_WEAPON)) {
+          clear_move_path("Attacked");
+          return true;
+        }
       }
       dbg("Move failed");
       lunge(future_pos);
@@ -830,11 +833,8 @@ void Thing::clear_move_path(const std::string &why)
     if (level) {
       level->cursor_path_clear();
     }
-
-    if (game->robot_mode) {
-      ai_change_state(MONST_STATE_IDLE, why);
-    }
   }
 
+  ai_change_state(MONST_STATE_IDLE, why);
   get_aip()->move_path.clear();
 }
