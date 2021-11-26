@@ -45,7 +45,7 @@ std::string Thing::text_a_or_an(void)
   return (out);
 }
 
-std::string Thing::text_the(void)
+std::string Thing::text_the(bool include_owner)
 {
   TRACE_AND_INDENT();
   auto tpp = tp();
@@ -61,9 +61,11 @@ std::string Thing::text_the(void)
   // "the goblin's short sword" for example
   //
   auto top_owner = get_top_owner();
-  if (top_owner && ! top_owner->is_player()) {
-    out += top_owner->text_name();
-    out += "'s ";
+  if (include_owner) {
+    if (top_owner && ! top_owner->is_player()) {
+      out += top_owner->text_name();
+      out += "'s ";
+    }
   }
 
   if (is_dead) {

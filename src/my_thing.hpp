@@ -1160,7 +1160,7 @@ public:
   std::string short_text_the(void);
   std::string text_The(void);
   std::string text_a_or_an(void);
-  std::string text_the(void);
+  std::string text_the(bool include_owner = false);
   std::string to_dbg_saved_string(void);
   std::string to_dbg_string(void);
   std::string to_short_string(void);

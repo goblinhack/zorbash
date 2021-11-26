@@ -424,7 +424,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
         TOPCON("%%fg=red$%s CRITS you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(), damage);
       } else if (hitter->is_weapon()) {
         TOPCON("%%fg=orange$%s hits you for %d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(), damage,
-               hitter->text_the().c_str());
+               hitter->text_the(false).c_str());
       } else if (hitter->is_laser()) {
         TOPCON("%%fg=orange$%s zaps you for %d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(), damage,
                hitter->text_the().c_str());
