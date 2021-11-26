@@ -562,6 +562,16 @@ bool Thing::attack(Thingp victim)
       }
     }
   }
+  if (! damage_set) {
+    if (owner) {
+      if ((int) pcg_random_range(0, 1000) < owner->damage_melee_chance_d1000()) {
+        damage = get_damage_melee() + stat_to_bonus(attack_total);
+        if (damage > 0) {
+          damage_set = true;
+        }
+      }
+    }
+  }
 
   //
   // If some attack type worked, then make sure we have some damage
@@ -573,6 +583,9 @@ bool Thing::attack(Thingp victim)
   }
 
   if (damage <= 0) {
+    if (is_player() || (owner && owner->is_player())) {
+      TOPCON("You inflict no damage on %s.", victim->text_the().c_str());
+    }
     dbg("Attack failed, no damage");
     return false;
   }

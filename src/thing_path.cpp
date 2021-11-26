@@ -371,9 +371,11 @@ bool Thing::cursor_path_pop_first_move(void)
   //
   if ((fabs(future_pos.x - mid_at.x) <= 1) && (fabs(future_pos.y - mid_at.y) <= 1)) {
     dbg("Target is adjacent, attack or move to %d,%d", cursor->mid_at.x, cursor->mid_at.y);
-    attack(cursor->mid_at);
-    level->cursor_path_create();
-    return true;
+    if (possible_to_attack_at(future_pos)) {
+      attack(cursor->mid_at);
+      level->cursor_path_create();
+      return true;
+    }
   }
 
   //

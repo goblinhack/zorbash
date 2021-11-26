@@ -4,7 +4,6 @@
 <!--                                                                                                                                              -->
 <!-- Next todo                                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
-<!-- - cannot click to move to diagonal jump                                                                                                      -->
 <!-- - click on jelly does not hit and no msg                                                                                                     -->
 <!-- - necrosis damage mummy / buff                                                                                                               -->
 <!-- - check cleaner engulfs                                                                                                                      -->

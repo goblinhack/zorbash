@@ -15,6 +15,9 @@
 uint8_t game_mouse_down(int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
+  LOG("Game mouse down");
+  TRACE_AND_INDENT();
+
   if (! game || ! game->started) {
     return false;
   }

@@ -329,7 +329,7 @@ bool Thing::unequip(const char *why, int equip, bool allowed_to_recarry)
   // Put it back in the bag
   //
   if (allowed_to_recarry) {
-    if (! is_being_destroyed && ! item->is_being_destroyed) {
+    if (! is_being_destroyed && ! item->is_being_destroyed && ! is_dead) {
       if (! carry(item, false /* can_equip */)) {
         drop(item);
       }
@@ -344,7 +344,7 @@ bool Thing::unequip(const char *why, int equip, bool allowed_to_recarry)
   }
 
   if (is_player()) {
-    if (! level->is_starting && ! level->is_being_destroyed) {
+    if (! level->is_starting && ! level->is_being_destroyed && ! is_dead) {
       if (item->is_ring()) {
         TOPCON("You slip off the %s.", item->text_the().c_str());
       } else if (item->is_weapon()) {
@@ -455,7 +455,7 @@ bool Thing::equip(Thingp item, int equip)
   }
 
   if (is_player()) {
-    if (! level->is_starting && ! level->is_being_destroyed) {
+    if (! level->is_starting && ! level->is_being_destroyed && ! is_dead) {
       if (item->is_ring()) {
         TOPCON("You slip on the %s.", item->text_the().c_str());
       } else if (item->is_weapon()) {

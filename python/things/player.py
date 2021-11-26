@@ -64,7 +64,7 @@ def tp_init(name, text_name, short_text_name, title):
     mytp.set_capacity_width(20)
     mytp.set_collision_check(True)
     mytp.set_collision_hit_priority(20)
-    mytp.set_damage_melee_chance_d1000(50)
+    mytp.set_damage_melee_chance_d1000(1000)
     mytp.set_damage_melee_dice("1d6+1")
     mytp.set_environ_avoids_acid(True)
     mytp.set_environ_avoids_fire(100)
