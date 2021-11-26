@@ -437,7 +437,6 @@ void Level::display_map(void)
     blit_fbo_bind(FBO_MAP_VISIBLE);
     glClear(GL_COLOR_BUFFER_BIT);
     display_map_things(FBO_MAP_VISIBLE, minx, miny, maxx, maxy);
-    display_internal_particles();
 
     //
     // Blit small lights and glow
@@ -452,11 +451,21 @@ void Level::display_map(void)
     display_lasers();
     display_projectiles();
     display_map_fg_things(FBO_MAP_VISIBLE, minx, miny, maxx, maxy);
+
+    //
+    // So we can see monsts jump over walls
+    //
+    display_internal_particles();
+
     IF_NODEBUG2
     {
       glBlendFunc(GL_DST_COLOR, GL_SRC_ALPHA_SATURATE);
       blit_fbo_game_pix(FBO_PLAYER_VISIBLE_LIGHTING);
     }
+
+    //
+    // Messages and explosions are above the light
+    //
     display_map_fg2_things(FBO_MAP_VISIBLE, minx, miny, maxx, maxy);
 
     //
