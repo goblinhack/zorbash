@@ -472,6 +472,13 @@ C_FLAGS+=" `$Python_CONFIG --cflags | \
 LDLIBS="$LDLIBS $Python_LIBS"
 
 #
+# Common config file
+#
+CONFIG_H=src/config.h
+echo > $CONFIG_H
+C_FLAGS+="-include config.h"
+
+#
 # for backtraces, but it doesn't help much
 #
 case `uname` in
@@ -549,7 +556,7 @@ case `uname` in
 
         pkg-config --print-provides libunwind 2>/dev/null
         if [[ $? -eq 0 ]]; then
-            C_FLAGS+=" -DHAVE_LIBUNWIND"
+            echo "#define HAVE_LIBUNWIND" >> $CONFIG_H
             LDLIBS+=" -lunwind"
         fi
         ;;
@@ -569,8 +576,8 @@ if [[ $OPT_DEV1 != "" ]]; then
 fi
 
 PYTHONPATH=$($Python -c "import os, sys; print(os.pathsep.join(x for x in sys.path if x))")
-C_FLAGS+=" -DMYVER=\\\"$MYVER\\\""
-C_FLAGS+=" -DPYVER=\\\"$PYVER\\\""
+echo "#define MYVER \"$MYVER\"" >> $CONFIG_H
+echo "#define PYVER \"$PYVER\"" >> $CONFIG_H
 
 log_info "PYVER                      : $PYVER"
 log_info "PYTHONPATH                 : $PYTHONPATH"
