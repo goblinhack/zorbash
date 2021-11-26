@@ -47,7 +47,13 @@ void Thing::get_light_strength_including_torch_effect(uint8_t &out_light_strengt
   }
 
   if (torch_count == 0) {
-    light_strength = 1;
+    if (is_player()) {
+      light_strength = 1;
+    }
+  }
+
+  if (light_strength < 0) {
+    light_strength = 0;
   }
 
   out_light_strength = light_strength;
