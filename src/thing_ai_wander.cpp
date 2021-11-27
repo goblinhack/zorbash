@@ -146,10 +146,14 @@ bool Thing::ai_create_path(point &nh, const point start, const point end)
   dmap_print(&dmap, start, dmap_start, dmap_end);
 #endif
 
-  char path_debug = '\0'; // astart path debug
-  auto astar      = astar_solve(this, NULL, path_debug, start, end, &dmap);
-  auto result     = astar.first;
-  auto fallback   = astar.second;
+  char path_debug           = '\0'; // astart path debug
+  auto [ result, fallback ] = astar_solve(this, NULL, path_debug, start, end, &dmap);
+
+  if (result.cost == std::numeric_limits< int >::max()) {
+    if (fallback.path.size()) {
+      result = fallback;
+    }
+  }
 
 #if 0
   for (auto i : result.path) {

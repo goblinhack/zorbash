@@ -27,6 +27,10 @@ int Thing::worth_collecting(Thingp item, Thingp *would_need_to_drop)
     }
   }
 
+  if (! ai_is_item_collector()) {
+    return -1;
+  }
+
   //
   // Don't try to pick up goblins carrying gold
   //

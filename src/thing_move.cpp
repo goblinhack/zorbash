@@ -109,6 +109,11 @@ void Thing::move_finish(void)
       ai_change_state(MONST_STATE_IDLE, "move finished");
     }
   }
+
+  //
+  // Something moved
+  //
+  level->set_is_map_changed(mid_at.x, mid_at.y);
 }
 
 bool Thing::move(point future_pos)

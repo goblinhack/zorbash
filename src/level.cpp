@@ -4,6 +4,7 @@
 //
 
 #include "my_array_bounds_check.hpp"
+#include "my_game.hpp"
 #include "my_level.hpp"
 #include "my_sdl.hpp"
 #include "my_sys.hpp"
@@ -2163,4 +2164,36 @@ void Level::unset_is_lit_currently(const int x, const int y)
 void Level::unset_is_lit_currently_no_check(const int x, const int y)
 {
   set_no_check(_is_lit_currently, x, y, (uint8_t) 0);
+}
+
+uint32_t Level::is_map_changed(const int x, const int y)
+{
+  if (unlikely(is_oob(x, y))) {
+    return false;
+  }
+  return (get(_is_map_changed, x, y));
+}
+
+uint32_t Level::is_map_changed_no_check(const int x, const int y) { return (get_no_check(_is_map_changed, x, y)); }
+
+void Level::set_is_map_changed_no_check(const int x, const int y) { set(_is_map_changed, x, y, game->tick_current); }
+
+void Level::set_is_map_changed(const int x, const int y) { set(_is_map_changed, x, y, game->tick_current); }
+
+void Level::set_is_map_changed_no_check(const int x, const int y, uint32_t v)
+{
+  set_no_check(_is_map_changed, x, y, v);
+}
+
+void Level::unset_is_map_changed(const int x, const int y)
+{
+  if (unlikely(is_oob(x, y))) {
+    return;
+  }
+  set(_is_map_changed, x, y, (uint32_t) 0);
+}
+
+void Level::unset_is_map_changed_no_check(const int x, const int y)
+{
+  set_no_check(_is_map_changed, x, y, (uint32_t) 0);
 }

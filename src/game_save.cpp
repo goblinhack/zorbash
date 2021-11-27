@@ -544,6 +544,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->_is_wall);
   out << bits(my.t->_is_wand);
   out << bits(my.t->_is_ring);
+  out << bits(my.t->_is_map_changed);
 
   LOG("DGN: - Save all_things_id_at");
   out << bits(my.t->all_things_id_at);

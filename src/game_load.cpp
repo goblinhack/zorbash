@@ -584,6 +584,7 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   in >> bits(my.t->_is_wall);
   in >> bits(my.t->_is_wand);
   in >> bits(my.t->_is_ring);
+  in >> bits(my.t->_is_map_changed);
 
   in >> bits(l->all_things_id_at);
   in >> bits(l->cursor_at);

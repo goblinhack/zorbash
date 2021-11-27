@@ -81,6 +81,10 @@ public:
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_wall {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_wand {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_ring {};
+  //
+  // Something moved
+  //
+  std::array< std::array< uint32_t, MAP_HEIGHT >, MAP_WIDTH > _is_map_changed {};
 
   //
   // When this Level was made. Used to restore timestamps relative to this.
@@ -659,10 +663,6 @@ public:
   uint8_t is_key(const point &p);
   uint8_t is_lava(const int x, const int y);
   uint8_t is_lava(const point &p);
-  uint8_t is_lit_currently(const int x, const int y);
-  uint8_t is_lit_currently(const point &p);
-  uint8_t is_lit_currently_no_check(const int x, const int y);
-  uint8_t is_lit_currently_no_check(const point &p);
   uint8_t is_lit_ever(const int x, const int y);
   uint8_t is_lit_ever(const point &p);
   uint8_t is_lit_ever_no_check(const int x, const int y);
@@ -709,6 +709,26 @@ public:
   uint8_t is_ring(const point &p);
   uint8_t is_water(const int x, const int y);
   uint8_t is_water(const point &p);
+
+  uint8_t is_lit_currently(const int x, const int y);
+  uint8_t is_lit_currently(const point &p);
+  uint8_t is_lit_currently_no_check(const int x, const int y);
+  uint8_t is_lit_currently_no_check(const point &p);
+  void    set_is_lit_currently(const int x, const int y);
+  void    set_is_lit_currently_no_check(const int x, const int y);
+  void    set_is_lit_currently_no_check(const int x, const int y, uint8_t v);
+  void    unset_is_lit_currently(const int x, const int y);
+  void    unset_is_lit_currently_no_check(const int x, const int y);
+
+  uint32_t is_map_changed(const int x, const int y);
+  uint32_t is_map_changed(const point &p);
+  uint32_t is_map_changed_no_check(const int x, const int y);
+  uint32_t is_map_changed_no_check(const point &p);
+  void     set_is_map_changed(const int x, const int y);
+  void     set_is_map_changed_no_check(const int x, const int y);
+  void     set_is_map_changed_no_check(const int x, const int y, uint32_t v);
+  void     unset_is_map_changed(const int x, const int y);
+  void     unset_is_map_changed_no_check(const int x, const int y);
 
   void clear(void);
   void con(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
@@ -847,9 +867,6 @@ public:
   void set_is_lava(const int x, const int y);
   void set_is_light_blocker(const int x, const int y);
   void set_is_light_blocker_no_check(const int x, const int y);
-  void set_is_lit_currently(const int x, const int y);
-  void set_is_lit_currently_no_check(const int x, const int y);
-  void set_is_lit_currently_no_check(const int x, const int y, uint8_t v);
   void set_is_lit_ever(const int x, const int y);
   void set_is_lit_ever_no_check(const int x, const int y);
   void set_is_minion_generator(const int x, const int y);
@@ -914,8 +931,6 @@ public:
   void unset_is_lava(const int x, const int y);
   void unset_is_light_blocker(const int x, const int y);
   void unset_is_light_blocker_no_check(const int x, const int y);
-  void unset_is_lit_currently(const int x, const int y);
-  void unset_is_lit_currently_no_check(const int x, const int y);
   void unset_is_lit_ever(const int x, const int y);
   void unset_is_lit_ever_no_check(const int x, const int y);
   void unset_is_minion_generator(const int x, const int y);

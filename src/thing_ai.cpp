@@ -504,7 +504,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
   // Grow the search space beyond the light
   //
   std::array< std::array< bool, MAP_WIDTH >, MAP_HEIGHT > walked = {};
-  if (is_player()) {
+  {
     for (int y = miny; y < maxy; y++) {
       for (int x = minx; x < maxx; x++) {
         point p(x, y);
@@ -524,6 +524,40 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
 
         if (! get(aip->can_see_ever.can_see, p.x, p.y)) {
           continue;
+        }
+
+        if (check_for_interrupts) {
+          if (level->is_map_changed(p.x, p.y) >= game->tick_current - 1) {
+            FOR_ALL_THINGS_THAT_INTERACT(level, it, p.x, p.y)
+            {
+              if (it->is_changing_level || it->is_hidden || it->is_falling || it->is_jumping) {
+                continue;
+              }
+
+              if (worth_collecting(it) > 0) {
+                set(aip->interrupt_map.val, p.x, p.y, game->tick_current);
+                if (check_for_interrupts) {
+                  something_changed++;
+                  log("interrupted by %s", it->to_string().c_str());
+                }
+              }
+              if (is_dangerous(it)) {
+                set(aip->interrupt_map.val, p.x, p.y, game->tick_current);
+                if (check_for_interrupts) {
+                  something_changed++;
+                  log("interrupted by %s", it->to_string().c_str());
+                }
+              }
+              if (worth_eating(it)) {
+                set(aip->interrupt_map.val, p.x, p.y, game->tick_current);
+                if (check_for_interrupts) {
+                  something_changed++;
+                  log("interrupted by %s", it->to_string().c_str());
+                }
+              }
+            }
+            FOR_ALL_THINGS_END();
+          }
         }
 
         //
@@ -565,6 +599,9 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
               continue;
             }
 
+            //
+            // Check for something we've never seen before
+            //
             if (! get(aip->can_see_ever.can_see, o.x, o.y) && ! get(aip->interrupt_map.val, o.x, o.y)) {
 
               FOR_ALL_THINGS_THAT_INTERACT(level, it, o.x, o.y)
@@ -573,11 +610,29 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
                   continue;
                 }
 
-                if (worth_collecting(it) || worth_eating(it) || is_dangerous(it)) {
-                  set(aip->interrupt_map.val, o.x, o.y, game->tick_current);
+                if (worth_collecting(it) > 0) {
+                  con("1INTERRUPT CAND %s", it->to_string().c_str());
+                  set(aip->interrupt_map.val, p.x, p.y, game->tick_current);
                   if (check_for_interrupts) {
                     something_changed++;
-                    // con("INTERRUPT %s", it->to_string().c_str());
+                    log("interrupted by %s", it->to_string().c_str());
+                  }
+                }
+                if (is_dangerous(it)) {
+                  con("2INTERRUPT CAND %s", it->to_string().c_str());
+                  set(aip->interrupt_map.val, p.x, p.y, game->tick_current);
+                  if (check_for_interrupts) {
+                    something_changed++;
+                    log("interrupted by %s", it->to_string().c_str());
+                  }
+                }
+
+                if (worth_eating(it)) {
+                  con("3INTERRUPT CAND %s", it->to_string().c_str());
+                  set(aip->interrupt_map.val, p.x, p.y, game->tick_current);
+                  if (check_for_interrupts) {
+                    something_changed++;
+                    log("interrupted by %s", it->to_string().c_str());
                   }
                 }
               }
@@ -590,6 +645,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
       }
     }
   }
+
 #if 0
   if (is_player()) {
     printf("\nrobot search grown:\n");
@@ -1440,6 +1496,26 @@ bool Thing::ai_tick(bool recursing)
         }
       }
     }
+    //
+    // Check for interrupts
+    //
+    AI_LOG("", "Check for interruptions");
+    if (ai_dmap_can_see_init(minx, miny, maxx, maxy, SEARCH_TYPE_CAN_SEE_JUMP_ALLOWED, true)) {
+      AI_LOG("Something interrupted me");
+      if (is_player()) {
+        game->tick_begin("Robot move interrupted by something");
+      }
+
+      ai_change_state(MONST_STATE_IDLE, "move interrupted by a change");
+      if (is_player()) {
+        game->request_remake_actionbar = true;
+      }
+
+      //
+      // Allow another go; this stops monster's moves stuttering
+      //
+      return ai_tick(true);
+    }
   }
 
 #if 0
@@ -1782,27 +1858,6 @@ bool Thing::ai_tick(bool recursing)
 
     case MONST_STATE_MOVING :
       {
-        //
-        // Check for interrupts
-        //
-        AI_LOG("", "Check for interruptions");
-        if (ai_dmap_can_see_init(minx, miny, maxx, maxy, SEARCH_TYPE_CAN_SEE_JUMP_ALLOWED, true)) {
-          AI_LOG("Something interrupted me");
-          if (is_player()) {
-            game->tick_begin("Robot move interrupted by something");
-          }
-
-          ai_change_state(MONST_STATE_IDLE, "move interrupted by a change");
-          if (is_player()) {
-            game->request_remake_actionbar = true;
-          }
-
-          //
-          // Allow another go; this stops monster's moves stuttering
-          //
-          return ai_tick(true);
-        }
-
         //
         // Finished the move?
         //
