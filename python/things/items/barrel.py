@@ -41,6 +41,7 @@ def tp_init(name, text_name):
     mytp.set_is_cursor_can_hover_over(True)
     mytp.set_is_described_when_hovering_over(True)
     mytp.set_is_hittable(True)
+    mytp.set_is_shovable(True)
     mytp.set_is_tickable(True) # So it can interact with fire
     mytp.set_is_very_combustible(True)
     mytp.set_normal_placement_rules(True)

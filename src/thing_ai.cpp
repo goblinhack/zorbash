@@ -358,7 +358,7 @@ bool Thing::ai_create_path_to_single_goal(int minx, int miny, int maxx, int maxy
     }
 
     if (is_player()) {
-      log("Robot: Failed to move to goal");
+      dbg("Robot: Failed to move to goal");
     }
   }
 
@@ -538,21 +538,21 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
                 set(aip->interrupt_map.val, p.x, p.y, game->tick_current);
                 if (check_for_interrupts) {
                   something_changed++;
-                  log("interrupted by %s", it->to_string().c_str());
+                  dbg("interrupted by %s", it->to_string().c_str());
                 }
               }
               if (is_dangerous(it)) {
                 set(aip->interrupt_map.val, p.x, p.y, game->tick_current);
                 if (check_for_interrupts) {
                   something_changed++;
-                  log("interrupted by %s", it->to_string().c_str());
+                  dbg("interrupted by %s", it->to_string().c_str());
                 }
               }
               if (worth_eating(it)) {
                 set(aip->interrupt_map.val, p.x, p.y, game->tick_current);
                 if (check_for_interrupts) {
                   something_changed++;
-                  log("interrupted by %s", it->to_string().c_str());
+                  dbg("interrupted by %s", it->to_string().c_str());
                 }
               }
             }
@@ -611,28 +611,25 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
                 }
 
                 if (worth_collecting(it) > 0) {
-                  con("1INTERRUPT CAND %s", it->to_string().c_str());
                   set(aip->interrupt_map.val, p.x, p.y, game->tick_current);
                   if (check_for_interrupts) {
                     something_changed++;
-                    log("interrupted by %s", it->to_string().c_str());
+                    dbg("interrupted by %s", it->to_string().c_str());
                   }
                 }
                 if (is_dangerous(it)) {
-                  con("2INTERRUPT CAND %s", it->to_string().c_str());
                   set(aip->interrupt_map.val, p.x, p.y, game->tick_current);
                   if (check_for_interrupts) {
                     something_changed++;
-                    log("interrupted by %s", it->to_string().c_str());
+                    dbg("interrupted by %s", it->to_string().c_str());
                   }
                 }
 
                 if (worth_eating(it)) {
-                  con("3INTERRUPT CAND %s", it->to_string().c_str());
                   set(aip->interrupt_map.val, p.x, p.y, game->tick_current);
                   if (check_for_interrupts) {
                     something_changed++;
-                    log("interrupted by %s", it->to_string().c_str());
+                    dbg("interrupted by %s", it->to_string().c_str());
                   }
                 }
               }

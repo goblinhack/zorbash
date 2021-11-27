@@ -18,29 +18,37 @@
 ThingShoved Thing::try_to_shove(Thingp it, point delta)
 {
   TRACE_AND_INDENT();
+  dbg("Try to shove, %s delta %d,%d", it->to_string().c_str(), (int) delta.x, (int) delta.y);
+  TRACE_AND_INDENT();
+
   if (! is_able_to_shove()) {
+    dbg("Not able to shove");
     return (THING_SHOVE_NEVER_TRIED);
   }
 
   if (! it->is_shovable()) {
+    dbg("Not able to shove %s", it->to_string().c_str());
     return (THING_SHOVE_NEVER_TRIED);
   }
 
   auto my_owner  = get_top_owner();
   auto its_owner = it->get_top_owner();
   if (my_owner && (my_owner == its_owner)) {
+    dbg("Not able to shove (same owner) %s", it->to_string().c_str());
     return (THING_SHOVE_NEVER_TRIED);
   }
 
   auto my_minion_owner  = get_top_minion_owner();
   auto its_minion_owner = it->get_top_minion_owner();
   if (my_minion_owner && (my_minion_owner == its_minion_owner)) {
+    dbg("Not able to shove (same master) %s", it->to_string().c_str());
     return (THING_SHOVE_NEVER_TRIED);
   }
 
   auto my_spawned_owner  = get_top_spawned_owner();
   auto its_spawned_owner = it->get_top_spawned_owner();
   if (my_spawned_owner && (my_spawned_owner == its_spawned_owner)) {
+    dbg("Not able to shove (same spawner) %s", it->to_string().c_str());
     return (THING_SHOVE_NEVER_TRIED);
   }
 
@@ -48,11 +56,13 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta)
   // Sanity check we cannot shove more than one tile
   //
   if ((fabs(delta.x) > 1) || (fabs(delta.y) > 1)) {
+    dbg("Not able to shove (too far) %s", it->to_string().c_str());
     return (THING_SHOVE_NEVER_TRIED);
   }
 
-  dbg("Try to shove, %s delta %d,%d", it->to_string().c_str(), (int) delta.x, (int) delta.y);
+  dbg("Can shove, %s delta %d,%d", it->to_string().c_str(), (int) delta.x, (int) delta.y);
   TRACE_AND_INDENT();
+
   move_finish();
 
   set_idle_count(0);
@@ -211,7 +221,12 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta)
 
 ThingShoved Thing::try_to_shove(point future_pos)
 {
+  TRACE_AND_INDENT();
+  dbg("Try to shove, future pos %d,%d", (int) future_pos.x, (int) future_pos.y);
+  TRACE_AND_INDENT();
+
   if (! is_able_to_shove()) {
+    dbg("Not able to shove");
     return (THING_SHOVE_NEVER_TRIED);
   }
 

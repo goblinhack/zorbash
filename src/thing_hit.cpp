@@ -171,7 +171,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
   //
   // Cruel to let things keep on hitting you when you're dead
   //
-  if (is_dead) {
+  if (is_dead || is_dying) {
     if (real_hitter->can_eat(this)) {
       IF_DEBUG2 { hitter->log("Hit bypass, eat it"); }
       damage = 0;
@@ -657,10 +657,22 @@ int Thing::is_hit(Thingp hitter, bool crit, bool bite, bool poison, bool necrosi
     IF_DEBUG2 { hitter->log("Possible bite %s for %d bite damage", to_string().c_str(), damage); }
   } else if (poison) {
     IF_DEBUG2 { hitter->log("Possible poison attack %s for %d damage", to_string().c_str(), damage); }
+    if (is_dead || is_dying) {
+      hitter->log("Already dead, no more poison attacks %s", to_string().c_str());
+      return false;
+    }
   } else if (necrosis) {
     IF_DEBUG2 { hitter->log("Possible necrosis attack %s for %d damage", to_string().c_str(), damage); }
+    if (is_dead || is_dying) {
+      hitter->log("Already dead, no more rotting attacks %s", to_string().c_str());
+      return false;
+    }
   } else if (damage) {
     IF_DEBUG2 { hitter->log("Possible melee hit %s for %d damage", to_string().c_str(), damage); }
+    if (is_dead || is_dying) {
+      hitter->log("Already dead, no more melee hits %s", to_string().c_str());
+      return false;
+    }
   } else {
     IF_DEBUG2
     {
@@ -710,7 +722,7 @@ int Thing::is_hit(Thingp hitter, bool crit, bool bite, bool poison, bool necrosi
   // Cruel to let things keep on hitting you when you're dead
   // Even worse, to let them eat you, but better if you are dead first.
   //
-  if (is_dead) {
+  if (is_dead || is_dying) {
     if (real_hitter->can_eat(this)) {
       IF_DEBUG2 { hitter->log("Cannot hit dead thing, but can eat: %s", to_string().c_str()); }
     } else {
@@ -729,7 +741,7 @@ int Thing::is_hit(Thingp hitter, bool crit, bool bite, bool poison, bool necrosi
     return false;
   }
 
-  if (hitter && hitter->is_dead) {
+  if (hitter && (hitter->is_dead || hitter->is_dying)) {
     //
     // This case is hit if a ghost runs into a player. The ghost takes
     // damage. We don't want the player to keep absorbing hits when
