@@ -267,10 +267,10 @@ int Thing::damage_bite_chance_d1000(void)
   return (tp()->damage_bite_chance_d1000());
 }
 
-int Thing::ai_is_able_to_shove(void)
+int Thing::is_able_to_shove(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->ai_is_able_to_shove());
+  return (tp()->is_able_to_shove());
 }
 
 int Thing::blast_max_radius(void)
@@ -297,34 +297,34 @@ int Thing::collision_check(void)
   return (tp()->collision_check());
 }
 
-int Thing::damage_value_doubled_from_acid(void)
+int Thing::damage_received_doubled_from_acid(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->damage_value_doubled_from_acid());
+  return (tp()->damage_received_doubled_from_acid());
 }
 
-int Thing::damage_value_doubled_from_fire(void)
+int Thing::damage_received_doubled_from_fire(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->damage_value_doubled_from_fire());
+  return (tp()->damage_received_doubled_from_fire());
 }
 
-int Thing::damage_value_doubled_from_poison(void)
+int Thing::damage_received_doubled_from_poison(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->damage_value_doubled_from_poison());
+  return (tp()->damage_received_doubled_from_poison());
 }
 
-int Thing::damage_value_doubled_from_necrosis(void)
+int Thing::damage_received_doubled_from_necrosis(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->damage_value_doubled_from_necrosis());
+  return (tp()->damage_received_doubled_from_necrosis());
 }
 
-int Thing::damage_value_doubled_from_water(void)
+int Thing::damage_received_doubled_from_water(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->damage_value_doubled_from_water());
+  return (tp()->damage_received_doubled_from_water());
 }
 
 int Thing::defence(void)
@@ -549,16 +549,16 @@ int Thing::is_able_to_fire_at(void)
   return (tp()->is_able_to_fire_at());
 }
 
-int Thing::ai_is_able_to_see_through_doors(void)
+int Thing::is_able_to_see_through_doors(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->ai_is_able_to_see_through_doors());
+  return (tp()->is_able_to_see_through_doors());
 }
 
-int Thing::ai_is_able_to_walk_through_walls(void)
+int Thing::is_able_to_walk_through_walls(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->ai_is_able_to_walk_through_walls());
+  return (tp()->is_able_to_walk_through_walls());
 }
 
 int Thing::environ_prefers_acid(void)
@@ -1053,28 +1053,28 @@ int Thing::ai_random_jump_chance_d1000(void)
   return (tp()->ai_random_jump_chance_d1000());
 }
 
-int Thing::ai_is_able_to_jump_distance(void)
+int Thing::is_able_to_jump_distance(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->ai_is_able_to_jump_distance());
+  return (tp()->is_able_to_jump_distance());
 }
 
-int Thing::ai_is_able_to_jump_on_low_hp_chance_d1000(void)
+int Thing::is_able_to_jump_on_low_hp_chance_d1000(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->ai_is_able_to_jump_on_low_hp_chance_d1000());
+  return (tp()->is_able_to_jump_on_low_hp_chance_d1000());
 }
 
-int Thing::ai_is_able_to_jump(void)
+int Thing::is_able_to_jump(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->ai_is_able_to_jump());
+  return (tp()->is_able_to_jump());
 }
 
-int Thing::ai_is_able_to_collect_keys(void)
+int Thing::is_able_to_collect_keys(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->ai_is_able_to_collect_keys());
+  return (tp()->is_able_to_collect_keys());
 }
 
 int Thing::is_key(void)
@@ -1353,10 +1353,10 @@ int Thing::unused_flag25(void)
   return (tp()->unused_flag25());
 }
 
-int Thing::ai_aggression_level(void)
+int Thing::ai_aggression_level_pct(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->ai_aggression_level());
+  return (tp()->ai_aggression_level_pct());
 }
 
 int Thing::is_able_to_see_in_the_dark(void)
@@ -1443,34 +1443,34 @@ int Thing::ai_detect_secret_doors(void)
   return (tp()->ai_detect_secret_doors());
 }
 
-int Thing::ai_is_able_to_break_down_doors(void)
+int Thing::is_able_to_break_down_doors(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->ai_is_able_to_break_down_doors());
+  return (tp()->is_able_to_break_down_doors());
 }
 
-int Thing::ai_is_able_to_break_out_of_webs(void)
+int Thing::is_able_to_break_out_of_webs(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->ai_is_able_to_break_out_of_webs());
+  return (tp()->is_able_to_break_out_of_webs());
 }
 
-int Thing::ai_is_able_to_open_doors(void)
+int Thing::is_able_to_open_doors(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->ai_is_able_to_open_doors());
+  return (tp()->is_able_to_open_doors());
 }
 
-int Thing::ai_is_exit_finder(void)
+int Thing::is_exit_finder(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->ai_is_exit_finder());
+  return (tp()->is_exit_finder());
 }
 
-int Thing::ai_is_level_explorer(void)
+int Thing::is_level_explorer(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->ai_is_level_explorer());
+  return (tp()->is_level_explorer());
 }
 
 int Thing::is_rusty(void)
@@ -1485,22 +1485,22 @@ int Thing::unused_flag4(void)
   return (tp()->unused_flag4());
 }
 
-int Thing::ai_is_able_to_learn_skills(void)
+int Thing::is_able_to_learn_skills(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->ai_is_able_to_learn_skills());
+  return (tp()->is_able_to_learn_skills());
 }
 
-int Thing::ai_is_able_to_enchant_weapons(void)
+int Thing::is_able_to_enchant_weapons(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->ai_is_able_to_enchant_weapons());
+  return (tp()->is_able_to_enchant_weapons());
 }
 
-int Thing::ai_is_able_to_attack_generators(void)
+int Thing::is_able_to_attack_generators(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->ai_is_able_to_attack_generators());
+  return (tp()->is_able_to_attack_generators());
 }
 
 int Thing::ai_wanderer(void)
@@ -1749,10 +1749,10 @@ int Thing::is_treasure_type_chest(void)
   return (tp()->is_treasure_type_chest());
 }
 
-int Thing::ai_is_item_collector(void)
+int Thing::is_item_collector(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->ai_is_item_collector());
+  return (tp()->is_item_collector());
 }
 
 int Thing::is_treasure_type_eater(void)

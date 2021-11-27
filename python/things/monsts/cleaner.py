@@ -10,8 +10,7 @@ def on_death(me, x, y):
 
 def tp_init(name, text_name, short_text_name):
     mytp = tp.Tp(name, text_name, short_text_name)
-    mytp.set_ai_aggression_level(100)
-    mytp.set_ai_is_item_collector(True)
+    mytp.set_ai_aggression_level_pct(100)
     mytp.set_ai_scent_distance(5)
     mytp.set_ai_vision_distance(3)
     mytp.set_ai_wanderer(True)
@@ -20,8 +19,8 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_attack_lunge(True)
     mytp.set_collision_check(True)
     mytp.set_collision_hit_priority(10)
+    mytp.set_damage_received_doubled_from_fire(True)
     mytp.set_damage_swallow_dice("1d20")
-    mytp.set_damage_value_doubled_from_fire(True)
     mytp.set_environ_avoids_fire(100)
     mytp.set_environ_prefers_acid(True)
     mytp.set_gfx_animated_can_hflip(True)
@@ -48,6 +47,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_engulfer(True)
     mytp.set_is_hittable(True)
     mytp.set_is_hunger_insatiable(True)
+    mytp.set_is_item_collector(True)
     mytp.set_is_item_eater(True)
     mytp.set_is_jelly_baby_eater(True)
     mytp.set_is_jelly_eater(True)

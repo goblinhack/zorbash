@@ -29,7 +29,7 @@ int Tp::get_danger_level(void)
   if (is_resurrectable()) {
     danger_level *= 2;
   }
-  if (ai_is_able_to_shove()) {
+  if (is_able_to_shove()) {
     danger_level++;
   }
   if (is_acid()) {
@@ -53,7 +53,7 @@ int Tp::get_danger_level(void)
   if (is_floating()) {
     danger_level += 2;
   }
-  if (ai_is_able_to_jump()) {
+  if (is_able_to_jump()) {
     danger_level += 5;
   }
   if (is_item_eater()) {
@@ -63,7 +63,7 @@ int Tp::get_danger_level(void)
     danger_level += 20;
   }
 
-  danger_level += ai_aggression_level();
+  danger_level += ai_aggression_level_pct();
 
   danger_level +=
       std::max(get_damage_melee_dice().max_roll(),
@@ -97,7 +97,7 @@ int Thing::get_danger_initial_level(void)
   if (is_resurrectable()) {
     danger_level *= 2;
   }
-  if (ai_is_able_to_shove()) {
+  if (is_able_to_shove()) {
     danger_level++;
   }
   if (is_carrying_item()) {
@@ -124,7 +124,7 @@ int Thing::get_danger_initial_level(void)
   if (is_floating()) {
     danger_level += 2;
   }
-  if (ai_is_able_to_jump()) {
+  if (is_able_to_jump()) {
     danger_level += 5;
   }
   if (is_item_eater()) {
@@ -142,7 +142,7 @@ int Thing::get_danger_initial_level(void)
 
   danger_level += get_damage_max();
 
-  danger_level += ai_aggression_level();
+  danger_level += ai_aggression_level_pct();
 
   //
   // Low on health, reduce the level
@@ -181,7 +181,7 @@ int Thing::get_danger_current_level(void)
   if (is_resurrectable()) {
     danger_level *= 2;
   }
-  if (ai_is_able_to_shove()) {
+  if (is_able_to_shove()) {
     danger_level++;
   }
   if (is_carrying_item()) {
@@ -208,7 +208,7 @@ int Thing::get_danger_current_level(void)
   if (is_floating()) {
     danger_level += 2;
   }
-  if (ai_is_able_to_jump()) {
+  if (is_able_to_jump()) {
     danger_level += 5;
   }
   if (is_item_eater()) {
@@ -226,7 +226,7 @@ int Thing::get_danger_current_level(void)
 
   danger_level += get_damage_max();
 
-  danger_level += ai_aggression_level();
+  danger_level += ai_aggression_level_pct();
 
   //
   // Low on health, reduce the level

@@ -475,7 +475,7 @@ LDLIBS="$LDLIBS $Python_LIBS"
 # Common config file
 #
 CONFIG_H=src/config.h
-echo > $CONFIG_H
+echo "#include \"my_config.hpp\"" > $CONFIG_H
 C_FLAGS+="-include config.h"
 
 #

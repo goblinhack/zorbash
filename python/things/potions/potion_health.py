@@ -67,7 +67,7 @@ def tp_init(name, text_name, short_text_name):
     global mytp
     mytp = tp.Tp(name, text_name, short_text_name)
     mytp.set_collision_hit_priority(5)
-    mytp.set_damage_value_doubled_from_fire(True)
+    mytp.set_damage_received_doubled_from_fire(True)
     mytp.set_enchant_max(2)
     mytp.set_environ_avoids_fire(100)
     mytp.set_gfx_animated(True)

@@ -12,7 +12,7 @@ POST=$(mktemp) || exit 1
 OUT=$(mktemp) || exit 1
 
 for IN in \
-    player.py \
+    player/*py \
     buffs/*py \
     debuffs/*py \
     doors/*py \
@@ -23,7 +23,6 @@ for IN in \
     internal/*py \
     items/*py \
     monsts/*py \
-    player.py/*py \
     potions/*py \
     rings/*py \
     skills/*py \
@@ -38,21 +37,21 @@ do
     sed '/mytp.set_z_prio(/,$!d' $IN | tail -n +2 - > $POST
 
     for arg in \
-      set_ai_is_able_to_attack_generators \
-      set_ai_is_able_to_break_down_doors \
-      set_ai_is_able_to_break_out_of_webs \
-      set_ai_is_able_to_collect_keys \
+      set_is_able_to_attack_generators \
+      set_is_able_to_break_down_doors \
+      set_is_able_to_break_out_of_webs \
+      set_is_able_to_collect_keys \
       set_ai_detect_secret_doors \
-      set_ai_is_able_to_enchant_weapons \
-      set_ai_is_able_to_jump \
-      set_ai_is_able_to_learn_skills \
-      set_ai_is_able_to_open_doors \
-      set_ai_is_able_to_see_through_doors \
-      set_ai_is_able_to_shove \
-      set_ai_is_able_to_walk_through_walls \
-      set_ai_is_exit_finder \
-      set_ai_is_item_collector \
-      set_ai_is_level_explorer \
+      set_is_able_to_enchant_weapons \
+      set_is_able_to_jump \
+      set_is_able_to_learn_skills \
+      set_is_able_to_open_doors \
+      set_is_able_to_see_through_doors \
+      set_is_able_to_shove \
+      set_is_able_to_walk_through_walls \
+      set_is_exit_finder \
+      set_is_item_collector \
+      set_is_level_explorer \
       set_ai_obstacle \
       set_ai_resent_count \
       set_ai_wanderer \
@@ -67,11 +66,11 @@ do
       set_collision_hit_priority \
       set_enchant_level \
       set_enchant_max \
-      set_damage_value_doubled_from_acid \
-      set_damage_value_doubled_from_fire \
-      set_damage_value_doubled_from_poison \
-      set_damage_value_doubled_from_necrosis \
-      set_damage_value_doubled_from_water \
+      set_damage_received_doubled_from_acid \
+      set_damage_received_doubled_from_fire \
+      set_damage_received_doubled_from_poison \
+      set_damage_received_doubled_from_necrosis \
+      set_damage_received_doubled_from_water \
       set_environ_avoids_acid \
       set_environ_avoids_fire \
       set_environ_avoids_poison \
@@ -291,7 +290,7 @@ do
       set_unused_flag23 \
       set_unused_flag24 \
       set_unused_flag25 \
-      set_ai_aggression_level \
+      set_ai_aggression_level_pct \
       set_is_able_to_see_in_the_dark \
       set_is_gfx_anim_synced_with_owner \
       set_unused_flag3 \

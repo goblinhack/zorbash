@@ -331,8 +331,8 @@ class Tp:
     def set_birthplace_leas(self, value):
         my.tp_set_birthplace_leas(self, value)
 
-    def set_ai_aggression_level(self, value):
-        my.tp_set_ai_aggression_level(self, value)
+    def set_ai_aggression_level_pct(self, value):
+        my.tp_set_ai_aggression_level_pct(self, value)
 
     def set_is_able_to_see_in_the_dark(self, value):
         my.tp_set_is_able_to_see_in_the_dark(self, value)
@@ -385,35 +385,35 @@ class Tp:
     def set_ai_detect_secret_doors(self, value):
         my.tp_set_ai_detect_secret_doors(self, value)
 
-    def set_ai_is_able_to_break_down_doors(self, value):
-        my.tp_set_ai_is_able_to_break_down_doors(self, value)
+    def set_is_able_to_break_down_doors(self, value):
+        my.tp_set_is_able_to_break_down_doors(self, value)
 
-    def set_ai_is_able_to_break_out_of_webs(self, value):
-        my.tp_set_ai_is_able_to_break_out_of_webs(self, value)
+    def set_is_able_to_break_out_of_webs(self, value):
+        my.tp_set_is_able_to_break_out_of_webs(self, value)
 
-    def set_ai_is_able_to_break_out_of_webs(self, value):
-        my.tp_set_ai_is_able_to_break_out_of_webs(self, value)
+    def set_is_able_to_break_out_of_webs(self, value):
+        my.tp_set_is_able_to_break_out_of_webs(self, value)
 
-    def set_ai_is_able_to_open_doors(self, value):
-        my.tp_set_ai_is_able_to_open_doors(self, value)
+    def set_is_able_to_open_doors(self, value):
+        my.tp_set_is_able_to_open_doors(self, value)
 
-    def set_ai_is_exit_finder(self, value):
-        my.tp_set_ai_is_exit_finder(self, value)
+    def set_is_exit_finder(self, value):
+        my.tp_set_is_exit_finder(self, value)
 
-    def set_ai_is_level_explorer(self, value):
-        my.tp_set_ai_is_level_explorer(self, value)
+    def set_is_level_explorer(self, value):
+        my.tp_set_is_level_explorer(self, value)
 
     def set_is_rusty(self, value):
         my.tp_set_is_rusty(self, value)
 
-    def set_ai_is_able_to_learn_skills(self, value):
-        my.tp_set_ai_is_able_to_learn_skills(self, value)
+    def set_is_able_to_learn_skills(self, value):
+        my.tp_set_is_able_to_learn_skills(self, value)
 
-    def set_ai_is_able_to_enchant_weapons(self, value):
-        my.tp_set_ai_is_able_to_enchant_weapons(self, value)
+    def set_is_able_to_enchant_weapons(self, value):
+        my.tp_set_is_able_to_enchant_weapons(self, value)
 
-    def set_ai_is_able_to_attack_generators(self, value):
-        my.tp_set_ai_is_able_to_attack_generators(self, value)
+    def set_is_able_to_attack_generators(self, value):
+        my.tp_set_is_able_to_attack_generators(self, value)
 
     def set_ai_wanderer(self, value):
         my.tp_set_ai_wanderer(self, value)
@@ -463,11 +463,11 @@ class Tp:
     def set_is_debug_path(self, value):
         my.tp_set_is_debug_path(self, value)
 
-    def set_ai_is_able_to_collect_keys(self, value):
-        my.tp_set_ai_is_able_to_collect_keys(self, value)
+    def set_is_able_to_collect_keys(self, value):
+        my.tp_set_is_able_to_collect_keys(self, value)
 
-    def set_ai_is_item_collector(self, value):
-        my.tp_set_ai_is_item_collector(self, value)
+    def set_is_item_collector(self, value):
+        my.tp_set_is_item_collector(self, value)
 
     def set_is_item(self, value):
         my.tp_set_is_item(self, value)
@@ -637,11 +637,11 @@ class Tp:
     def set_is_fearless(self, value):
         my.tp_set_is_fearless(self, value)
 
-    def set_ai_is_able_to_see_through_doors(self, value):
-        my.tp_set_ai_is_able_to_see_through_doors(self, value)
+    def set_is_able_to_see_through_doors(self, value):
+        my.tp_set_is_able_to_see_through_doors(self, value)
 
-    def set_ai_is_able_to_walk_through_walls(self, value):
-        my.tp_set_ai_is_able_to_walk_through_walls(self, value)
+    def set_is_able_to_walk_through_walls(self, value):
+        my.tp_set_is_able_to_walk_through_walls(self, value)
 
     def set_is_humanoid(self, value):
         my.tp_set_is_humanoid(self, value)
@@ -649,8 +649,8 @@ class Tp:
     def set_environ_prefers_poison(self, value):
         my.tp_set_environ_prefers_poison(self, value)
 
-    def set_damage_value_doubled_from_poison(self, value):
-        my.tp_set_damage_value_doubled_from_poison(self, value)
+    def set_damage_received_doubled_from_poison(self, value):
+        my.tp_set_damage_received_doubled_from_poison(self, value)
 
     def set_environ_avoids_poison(self, value):
         my.tp_set_environ_avoids_poison(self, value)
@@ -658,8 +658,8 @@ class Tp:
     def set_environ_prefers_necrosis(self, value):
         my.tp_set_environ_prefers_necrosis(self, value)
 
-    def set_damage_value_doubled_from_necrosis(self, value):
-        my.tp_set_damage_value_doubled_from_necrosis(self, value)
+    def set_damage_received_doubled_from_necrosis(self, value):
+        my.tp_set_damage_received_doubled_from_necrosis(self, value)
 
     def set_environ_avoids_necrosis(self, value):
         my.tp_set_environ_avoids_necrosis(self, value)
@@ -829,11 +829,11 @@ class Tp:
     def set_is_floating(self, value):
         my.tp_set_is_floating(self, value)
 
-    def set_damage_value_doubled_from_acid(self, value):
-        my.tp_set_damage_value_doubled_from_acid(self, value)
+    def set_damage_received_doubled_from_acid(self, value):
+        my.tp_set_damage_received_doubled_from_acid(self, value)
 
-    def set_damage_value_doubled_from_water(self, value):
-        my.tp_set_damage_value_doubled_from_water(self, value)
+    def set_damage_received_doubled_from_water(self, value):
+        my.tp_set_damage_received_doubled_from_water(self, value)
 
     def set_is_minion_generator(self, value):
         my.tp_set_is_minion_generator(self, value)
@@ -841,8 +841,8 @@ class Tp:
     def set_is_treasure_type_eater(self, value):
         my.tp_set_is_treasure_type_eater(self, value)
 
-    def set_damage_value_doubled_from_acid(self, value):
-        my.tp_set_damage_value_doubled_from_acid(self, value)
+    def set_damage_received_doubled_from_acid(self, value):
+        my.tp_set_damage_received_doubled_from_acid(self, value)
 
     def set_environ_prefers_acid(self, value):
         my.tp_set_environ_prefers_acid(self, value)
@@ -862,11 +862,11 @@ class Tp:
     def set_attack_eater(self, value):
         my.tp_set_attack_eater(self, value)
 
-    def set_ai_is_able_to_jump_distance(self, value):
-        my.tp_set_ai_is_able_to_jump_distance(self, value)
+    def set_is_able_to_jump_distance(self, value):
+        my.tp_set_is_able_to_jump_distance(self, value)
 
-    def set_ai_is_able_to_jump(self, value):
-        my.tp_set_ai_is_able_to_jump(self, value)
+    def set_is_able_to_jump(self, value):
+        my.tp_set_is_able_to_jump(self, value)
 
     def set_is_acid(self, value):
         my.tp_set_is_acid(self, value)
@@ -910,8 +910,8 @@ class Tp:
     def set_is_intelligent(self, value):
         my.tp_set_is_intelligent(self, value)
 
-    def set_damage_value_doubled_from_fire(self, value):
-        my.tp_set_damage_value_doubled_from_fire(self, value)
+    def set_damage_received_doubled_from_fire(self, value):
+        my.tp_set_damage_received_doubled_from_fire(self, value)
 
     def set_is_fire(self, value):
         my.tp_set_is_fire(self, value)
@@ -976,8 +976,8 @@ class Tp:
     def set_ai_random_jump_chance_d1000(self, value):
         my.tp_set_ai_random_jump_chance_d1000(self, value)
 
-    def set_ai_is_able_to_jump_on_low_hp_chance_d1000(self, value):
-        my.tp_set_ai_is_able_to_jump_on_low_hp_chance_d1000(self, value)
+    def set_is_able_to_jump_on_low_hp_chance_d1000(self, value):
+        my.tp_set_is_able_to_jump_on_low_hp_chance_d1000(self, value)
 
     def set_is_chasm(self, value):
         my.tp_set_is_chasm(self, value)
@@ -985,8 +985,8 @@ class Tp:
     def set_is_hazard(self, value):
         my.tp_set_is_hazard(self, value)
 
-    def set_ai_is_able_to_shove(self, value):
-        my.tp_set_ai_is_able_to_shove(self, value)
+    def set_is_able_to_shove(self, value):
+        my.tp_set_is_able_to_shove(self, value)
 
     def set_is_shovable(self, value):
         my.tp_set_is_shovable(self, value)

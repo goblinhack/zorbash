@@ -27,7 +27,7 @@ int Thing::worth_collecting(Thingp item, Thingp *would_need_to_drop)
     }
   }
 
-  if (! ai_is_item_collector()) {
+  if (! is_item_collector()) {
     return -1;
   }
 

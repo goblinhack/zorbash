@@ -25,58 +25,58 @@ bool Thing::matches(const std::string &what)
     return false;
   }
 
-  if (ai_aggression_level() && (what == "ai_aggression_level")) {
+  if (ai_aggression_level_pct() && (what == "ai_aggression_level_pct")) {
     return true;
   }
   if (ai_avoid_distance() && (what == "ai_avoid_distance")) {
     return true;
   }
-  if (ai_is_able_to_attack_generators() && (what == "ai_is_able_to_attack_generators")) {
+  if (is_able_to_attack_generators() && (what == "is_able_to_attack_generators")) {
     return true;
   }
-  if (ai_is_able_to_break_down_doors() && (what == "ai_is_able_to_break_down_doors")) {
+  if (is_able_to_break_down_doors() && (what == "is_able_to_break_down_doors")) {
     return true;
   }
-  if (ai_is_able_to_break_out_of_webs() && (what == "ai_is_able_to_break_out_of_webs")) {
+  if (is_able_to_break_out_of_webs() && (what == "is_able_to_break_out_of_webs")) {
     return true;
   }
-  if (ai_is_able_to_collect_keys() && (what == "ai_is_able_to_collect_keys")) {
+  if (is_able_to_collect_keys() && (what == "is_able_to_collect_keys")) {
     return true;
   }
   if (ai_detect_secret_doors() && (what == "ai_detect_secret_doors")) {
     return true;
   }
-  if (ai_is_able_to_enchant_weapons() && (what == "ai_is_able_to_enchant_weapons")) {
+  if (is_able_to_enchant_weapons() && (what == "is_able_to_enchant_weapons")) {
     return true;
   }
-  if (ai_is_able_to_jump_distance() && (what == "ai_is_able_to_jump_distance")) {
+  if (is_able_to_jump_distance() && (what == "is_able_to_jump_distance")) {
     return true;
   }
-  if (ai_is_able_to_jump() && (what == "ai_is_able_to_jump")) {
+  if (is_able_to_jump() && (what == "is_able_to_jump")) {
     return true;
   }
-  if (ai_is_able_to_learn_skills() && (what == "ai_is_able_to_learn_skills")) {
+  if (is_able_to_learn_skills() && (what == "is_able_to_learn_skills")) {
     return true;
   }
-  if (ai_is_able_to_open_doors() && (what == "ai_is_able_to_open_doors")) {
+  if (is_able_to_open_doors() && (what == "is_able_to_open_doors")) {
     return true;
   }
-  if (ai_is_able_to_see_through_doors() && (what == "ai_is_able_to_see_through_doors")) {
+  if (is_able_to_see_through_doors() && (what == "is_able_to_see_through_doors")) {
     return true;
   }
-  if (ai_is_able_to_shove() && (what == "ai_is_able_to_shove")) {
+  if (is_able_to_shove() && (what == "is_able_to_shove")) {
     return true;
   }
-  if (ai_is_able_to_walk_through_walls() && (what == "ai_is_able_to_walk_through_walls")) {
+  if (is_able_to_walk_through_walls() && (what == "is_able_to_walk_through_walls")) {
     return true;
   }
-  if (ai_is_exit_finder() && (what == "ai_is_exit_finder")) {
+  if (is_exit_finder() && (what == "is_exit_finder")) {
     return true;
   }
-  if (ai_is_item_collector() && (what == "ai_is_item_collector")) {
+  if (is_item_collector() && (what == "is_item_collector")) {
     return true;
   }
-  if (ai_is_level_explorer() && (what == "ai_is_level_explorer")) {
+  if (is_level_explorer() && (what == "is_level_explorer")) {
     return true;
   }
   if (ai_resent_count() && (what == "ai_resent_count")) {
@@ -755,59 +755,59 @@ bool Thing::matches(const std::string &what)
 
 std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
 {
-  if (what == "ai_aggression_level") {
-    return &Thing::ai_aggression_level;
+  if (what == "ai_aggression_level_pct") {
+    return &Thing::ai_aggression_level_pct;
   }
   if (what == "ai_avoid_distance") {
     return &Thing::ai_avoid_distance;
   }
-  if (what == "ai_is_able_to_attack_generators") {
-    return &Thing::ai_is_able_to_attack_generators;
+  if (what == "is_able_to_attack_generators") {
+    return &Thing::is_able_to_attack_generators;
   }
-  if (what == "ai_is_able_to_break_down_doors") {
-    return &Thing::ai_is_able_to_break_down_doors;
+  if (what == "is_able_to_break_down_doors") {
+    return &Thing::is_able_to_break_down_doors;
   }
-  if (what == "ai_is_able_to_break_out_of_webs") {
-    return &Thing::ai_is_able_to_break_out_of_webs;
+  if (what == "is_able_to_break_out_of_webs") {
+    return &Thing::is_able_to_break_out_of_webs;
   }
-  if (what == "ai_is_able_to_collect_keys") {
-    return &Thing::ai_is_able_to_collect_keys;
+  if (what == "is_able_to_collect_keys") {
+    return &Thing::is_able_to_collect_keys;
   }
   if (what == "ai_detect_secret_doors") {
     return &Thing::ai_detect_secret_doors;
   }
-  if (what == "ai_is_able_to_enchant_weapons") {
-    return &Thing::ai_is_able_to_enchant_weapons;
+  if (what == "is_able_to_enchant_weapons") {
+    return &Thing::is_able_to_enchant_weapons;
   }
-  if (what == "ai_is_able_to_jump_distance") {
-    return &Thing::ai_is_able_to_jump_distance;
+  if (what == "is_able_to_jump_distance") {
+    return &Thing::is_able_to_jump_distance;
   }
-  if (what == "ai_is_able_to_jump") {
-    return &Thing::ai_is_able_to_jump;
+  if (what == "is_able_to_jump") {
+    return &Thing::is_able_to_jump;
   }
-  if (what == "ai_is_able_to_learn_skills") {
-    return &Thing::ai_is_able_to_learn_skills;
+  if (what == "is_able_to_learn_skills") {
+    return &Thing::is_able_to_learn_skills;
   }
-  if (what == "ai_is_able_to_open_doors") {
-    return &Thing::ai_is_able_to_open_doors;
+  if (what == "is_able_to_open_doors") {
+    return &Thing::is_able_to_open_doors;
   }
-  if (what == "ai_is_able_to_see_through_doors") {
-    return &Thing::ai_is_able_to_see_through_doors;
+  if (what == "is_able_to_see_through_doors") {
+    return &Thing::is_able_to_see_through_doors;
   }
-  if (what == "ai_is_able_to_shove") {
-    return &Thing::ai_is_able_to_shove;
+  if (what == "is_able_to_shove") {
+    return &Thing::is_able_to_shove;
   }
-  if (what == "ai_is_able_to_walk_through_walls") {
-    return &Thing::ai_is_able_to_walk_through_walls;
+  if (what == "is_able_to_walk_through_walls") {
+    return &Thing::is_able_to_walk_through_walls;
   }
-  if (what == "ai_is_exit_finder") {
-    return &Thing::ai_is_exit_finder;
+  if (what == "is_exit_finder") {
+    return &Thing::is_exit_finder;
   }
-  if (what == "ai_is_item_collector") {
-    return &Thing::ai_is_item_collector;
+  if (what == "is_item_collector") {
+    return &Thing::is_item_collector;
   }
-  if (what == "ai_is_level_explorer") {
-    return &Thing::ai_is_level_explorer;
+  if (what == "is_level_explorer") {
+    return &Thing::is_level_explorer;
   }
   if (what == "ai_resent_count") {
     return &Thing::ai_resent_count;

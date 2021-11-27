@@ -70,7 +70,7 @@ bool Thing::path_pop_next_move(void)
   //
   // Jump over obstacles if they appear in the path
   //
-  if ((mid_at != get_infop()->last_failed_jump_at) && ai_is_able_to_jump() &&
+  if ((mid_at != get_infop()->last_failed_jump_at) && is_able_to_jump() &&
       (is_monst() || (is_player() && game->robot_mode))) {
     if (is_disliked_by_me(future_pos) || level->is_barrel(future_pos) || level->is_brazier(future_pos)) {
       IF_DEBUG2
@@ -161,7 +161,7 @@ bool Thing::path_pop_next_move(void)
     }
   }
 
-  if (ai_is_able_to_shove() && (is_monst() || (is_player() && game->robot_mode))) {
+  if (is_able_to_shove() && (is_monst() || (is_player() && game->robot_mode))) {
     //
     // Someone in our way?
     //
@@ -381,7 +381,7 @@ bool Thing::cursor_path_pop_first_move(void)
   //
   // If not adjacent, try and jump.
   //
-  if (ai_is_able_to_jump() && (is_monst() || (is_player() && game->robot_mode))) {
+  if (is_able_to_jump() && (is_monst() || (is_player() && game->robot_mode))) {
     if (try_to_jump_carefully(future_pos)) {
       game->tick_begin("player tried to jump");
       return true;

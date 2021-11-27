@@ -132,28 +132,28 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
   }
 
   if (real_hitter->is_fire() || real_hitter->is_lava()) {
-    if (damage_value_doubled_from_fire()) {
+    if (damage_received_doubled_from_fire()) {
       damage *= 2;
       dbg("Double damage from fire");
     }
   }
 
   if (real_hitter->is_acid()) {
-    if (damage_value_doubled_from_acid()) {
+    if (damage_received_doubled_from_acid()) {
       damage *= 2;
       dbg("Double damage from acid");
     }
   }
 
   if (real_hitter->is_poisonous_danger_level()) {
-    if (damage_value_doubled_from_poison()) {
+    if (damage_received_doubled_from_poison()) {
       damage *= 2;
       dbg("Double damage from poison");
     }
   }
 
   if (real_hitter->is_necrotic_danger_level()) {
-    if (damage_value_doubled_from_necrosis()) {
+    if (damage_received_doubled_from_necrosis()) {
       damage *= 2;
       dbg("Double damage from necrosis");
     }
@@ -161,7 +161,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
 
   if (environ_avoids_water()) {
     if (real_hitter->is_shallow_water() || real_hitter->is_deep_water()) {
-      if (damage_value_doubled_from_water()) {
+      if (damage_received_doubled_from_water()) {
         damage *= 2;
         dbg("Double damage from water");
       }

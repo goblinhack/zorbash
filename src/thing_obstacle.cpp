@@ -84,7 +84,7 @@ bool Thing::collision_obstacle(Thingp it)
   // Allow movement through open doors only
   //
   if (it->is_obs_wall_or_door()) {
-    if (ai_is_able_to_walk_through_walls()) {
+    if (is_able_to_walk_through_walls()) {
       return false;
     }
 
@@ -233,8 +233,8 @@ bool Thing::ai_obstacle(Thingp it)
   //
   // Stop entities piling on top of each other
   //
-  if (it->ai_is_able_to_walk_through_walls()) {
-    if (ai_is_able_to_walk_through_walls()) {
+  if (it->is_able_to_walk_through_walls()) {
+    if (is_able_to_walk_through_walls()) {
       return true;
     }
   }
@@ -242,25 +242,25 @@ bool Thing::ai_obstacle(Thingp it)
   //
   // Allow movement through open doors only
   //
-  if (it->ai_is_able_to_see_through_doors()) {
+  if (it->is_able_to_see_through_doors()) {
     if (it->is_door()) {
       return false;
     }
   }
 
   if (it->is_brazier() || it->is_barrel() || it->is_obs_wall_or_door()) {
-    if (ai_is_able_to_walk_through_walls()) {
+    if (is_able_to_walk_through_walls()) {
       return false;
     }
 
     if (! it->is_open) {
       if (it->is_door()) {
-        if (ai_is_able_to_open_doors()) {
+        if (is_able_to_open_doors()) {
           if (get_keys()) {
             return false;
           }
         }
-        if (ai_is_able_to_break_down_doors()) {
+        if (is_able_to_break_down_doors()) {
           return false;
         }
       }

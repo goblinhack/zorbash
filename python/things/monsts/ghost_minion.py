@@ -6,8 +6,7 @@ def on_death(me, x, y):
 
 def tp_init(name, text_name):
     mytp = tp.Tp(name, text_name)
-    mytp.set_ai_aggression_level(50)
-    mytp.set_ai_is_able_to_walk_through_walls(True)
+    mytp.set_ai_aggression_level_pct(50)
     mytp.set_ai_scent_distance(10)
     mytp.set_ai_vision_distance(5)
     mytp.set_attack_humanoid(True)
@@ -24,6 +23,7 @@ def tp_init(name, text_name):
     mytp.set_gfx_short_shadow_caster(True)
     mytp.set_health_initial_dice("1")
     mytp.set_is_able_to_see_in_the_dark(True)
+    mytp.set_is_able_to_walk_through_walls(True)
     mytp.set_is_attackable_by_monst(True)
     mytp.set_is_attackable_by_player(True)
     mytp.set_is_described_when_hovering_over(True)

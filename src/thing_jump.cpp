@@ -15,7 +15,7 @@
 float Thing::how_far_i_can_jump(void)
 {
   TRACE_AND_INDENT();
-  auto d = (float) ai_is_able_to_jump_distance() + ceil(0.5 + (pcg_random_range(0, 100) / 100.0));
+  auto d = (float) is_able_to_jump_distance() + ceil(0.5 + (pcg_random_range(0, 100) / 100.0));
 
   if (get_stamina() < get_stamina_max() / 2) {
     d /= 2;
@@ -31,7 +31,7 @@ float Thing::how_far_i_can_jump(void)
 float Thing::how_far_i_can_jump_max(void)
 {
   TRACE_AND_INDENT();
-  auto d = (float) ai_is_able_to_jump_distance() + 1;
+  auto d = (float) is_able_to_jump_distance() + 1;
   return d;
 }
 

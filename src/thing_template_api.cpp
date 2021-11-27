@@ -164,25 +164,25 @@ const std::string &Tp::text_title(void) const { return _text_title; }
 const std::string &Tp::text_unused(void) const { return _text_unused; }
 const std::string &Tp::equip_carry_anim(void) const { return _equip_carry_anim; }
 
-int Tp::ai_aggression_level(void) const { return _ai_aggression_level; }
+int Tp::ai_aggression_level_pct(void) const { return _ai_aggression_level_pct; }
 int Tp::ai_avoid_distance(void) const { return _ai_avoid_distance; }
 int Tp::ai_detect_secret_doors(void) const { return _ai_detect_secret_doors; }
-int Tp::ai_is_able_to_attack_generators(void) const { return _ai_is_able_to_attack_generators; }
-int Tp::ai_is_able_to_break_down_doors(void) const { return _ai_is_able_to_break_down_doors; }
-int Tp::ai_is_able_to_break_out_of_webs(void) const { return _ai_is_able_to_break_out_of_webs; }
-int Tp::ai_is_able_to_collect_keys(void) const { return _ai_is_able_to_collect_keys; }
-int Tp::ai_is_able_to_enchant_weapons(void) const { return _ai_is_able_to_enchant_weapons; }
-int Tp::ai_is_able_to_jump_distance(void) const { return _ai_is_able_to_jump_distance; }
-int Tp::ai_is_able_to_jump_on_low_hp_chance_d1000(void) const { return _ai_is_able_to_jump_on_low_hp_chance_d1000; }
-int Tp::ai_is_able_to_jump(void) const { return _ai_is_able_to_jump; }
-int Tp::ai_is_able_to_learn_skills(void) const { return _ai_is_able_to_learn_skills; }
-int Tp::ai_is_able_to_open_doors(void) const { return _ai_is_able_to_open_doors; }
-int Tp::ai_is_able_to_see_through_doors(void) const { return _ai_is_able_to_see_through_doors; }
-int Tp::ai_is_able_to_shove(void) const { return _ai_is_able_to_shove; }
-int Tp::ai_is_able_to_walk_through_walls(void) const { return _ai_is_able_to_walk_through_walls; }
-int Tp::ai_is_exit_finder(void) const { return _ai_is_exit_finder; }
-int Tp::ai_is_item_collector(void) const { return _ai_is_item_collector; }
-int Tp::ai_is_level_explorer(void) const { return _ai_is_level_explorer; }
+int Tp::is_able_to_attack_generators(void) const { return _is_able_to_attack_generators; }
+int Tp::is_able_to_break_down_doors(void) const { return _is_able_to_break_down_doors; }
+int Tp::is_able_to_break_out_of_webs(void) const { return _is_able_to_break_out_of_webs; }
+int Tp::is_able_to_collect_keys(void) const { return _is_able_to_collect_keys; }
+int Tp::is_able_to_enchant_weapons(void) const { return _is_able_to_enchant_weapons; }
+int Tp::is_able_to_jump_distance(void) const { return _is_able_to_jump_distance; }
+int Tp::is_able_to_jump_on_low_hp_chance_d1000(void) const { return _is_able_to_jump_on_low_hp_chance_d1000; }
+int Tp::is_able_to_jump(void) const { return _is_able_to_jump; }
+int Tp::is_able_to_learn_skills(void) const { return _is_able_to_learn_skills; }
+int Tp::is_able_to_open_doors(void) const { return _is_able_to_open_doors; }
+int Tp::is_able_to_see_through_doors(void) const { return _is_able_to_see_through_doors; }
+int Tp::is_able_to_shove(void) const { return _is_able_to_shove; }
+int Tp::is_able_to_walk_through_walls(void) const { return _is_able_to_walk_through_walls; }
+int Tp::is_exit_finder(void) const { return _is_exit_finder; }
+int Tp::is_item_collector(void) const { return _is_item_collector; }
+int Tp::is_level_explorer(void) const { return _is_level_explorer; }
 int Tp::ai_obstacle(void) const { return _ai_obstacle; }
 int Tp::ai_random_jump_chance_d1000(void) const { return _ai_random_jump_chance_d1000; }
 int Tp::ai_resent_count(void) const { return _ai_resent_count; }
@@ -213,11 +213,11 @@ int Tp::damage_bite_chance_d1000(void) const { return _damage_bite_chance_d1000;
 int Tp::damage_melee_chance_d1000(void) const { return _damage_melee_chance_d1000; }
 int Tp::damage_poison_chance_d1000(void) const { return _damage_poison_chance_d1000; }
 int Tp::damage_necrosis_chance_d1000(void) const { return _damage_necrosis_chance_d1000; }
-int Tp::damage_value_doubled_from_acid(void) const { return _damage_value_doubled_from_acid; }
-int Tp::damage_value_doubled_from_fire(void) const { return _damage_value_doubled_from_fire; }
-int Tp::damage_value_doubled_from_poison(void) const { return _damage_value_doubled_from_poison; }
-int Tp::damage_value_doubled_from_necrosis(void) const { return _damage_value_doubled_from_necrosis; }
-int Tp::damage_value_doubled_from_water(void) const { return _damage_value_doubled_from_water; }
+int Tp::damage_received_doubled_from_acid(void) const { return _damage_received_doubled_from_acid; }
+int Tp::damage_received_doubled_from_fire(void) const { return _damage_received_doubled_from_fire; }
+int Tp::damage_received_doubled_from_poison(void) const { return _damage_received_doubled_from_poison; }
+int Tp::damage_received_doubled_from_necrosis(void) const { return _damage_received_doubled_from_necrosis; }
+int Tp::damage_received_doubled_from_water(void) const { return _damage_received_doubled_from_water; }
 int Tp::enchant_level(void) const { return _enchant_level; }
 int Tp::enchant_max(void) const { return _enchant_max; }
 int Tp::environ_avoids_acid(void) const { return _environ_avoids_acid; }
@@ -488,25 +488,25 @@ int Tp::unused_flag8(void) const { return _unused_flag8; }
 int Tp::unused_flag9(void) const { return _unused_flag9; }
 int Tp::weapon_damage(void) const { return _weapon_damage; }
 
-void Tp::set_ai_aggression_level(int v) { _ai_aggression_level = v; }
+void Tp::set_ai_aggression_level_pct(int v) { _ai_aggression_level_pct = v; }
 void Tp::set_ai_avoid_distance(int v) { _ai_avoid_distance = v; }
 void Tp::set_ai_detect_secret_doors(int v) { _ai_detect_secret_doors = v; }
-void Tp::set_ai_is_able_to_attack_generators(int v) { _ai_is_able_to_attack_generators = v; }
-void Tp::set_ai_is_able_to_break_down_doors(int v) { _ai_is_able_to_break_down_doors = v; }
-void Tp::set_ai_is_able_to_break_out_of_webs(int v) { _ai_is_able_to_break_out_of_webs = v; }
-void Tp::set_ai_is_able_to_collect_keys(int v) { _ai_is_able_to_collect_keys = v; }
-void Tp::set_ai_is_able_to_enchant_weapons(int v) { _ai_is_able_to_enchant_weapons = v; }
-void Tp::set_ai_is_able_to_jump_distance(int v) { _ai_is_able_to_jump_distance = v; }
-void Tp::set_ai_is_able_to_jump(int v) { _ai_is_able_to_jump = v; }
-void Tp::set_ai_is_able_to_jump_on_low_hp_chance_d1000(int v) { _ai_is_able_to_jump_on_low_hp_chance_d1000 = v; }
-void Tp::set_ai_is_able_to_learn_skills(int v) { _ai_is_able_to_learn_skills = v; }
-void Tp::set_ai_is_able_to_open_doors(int v) { _ai_is_able_to_open_doors = v; }
-void Tp::set_ai_is_able_to_see_through_doors(int v) { _ai_is_able_to_see_through_doors = v; }
-void Tp::set_ai_is_able_to_shove(int v) { _ai_is_able_to_shove = v; }
-void Tp::set_ai_is_able_to_walk_through_walls(int v) { _ai_is_able_to_walk_through_walls = v; }
-void Tp::set_ai_is_exit_finder(int v) { _ai_is_exit_finder = v; }
-void Tp::set_ai_is_item_collector(int v) { _ai_is_item_collector = v; }
-void Tp::set_ai_is_level_explorer(int v) { _ai_is_level_explorer = v; }
+void Tp::set_is_able_to_attack_generators(int v) { _is_able_to_attack_generators = v; }
+void Tp::set_is_able_to_break_down_doors(int v) { _is_able_to_break_down_doors = v; }
+void Tp::set_is_able_to_break_out_of_webs(int v) { _is_able_to_break_out_of_webs = v; }
+void Tp::set_is_able_to_collect_keys(int v) { _is_able_to_collect_keys = v; }
+void Tp::set_is_able_to_enchant_weapons(int v) { _is_able_to_enchant_weapons = v; }
+void Tp::set_is_able_to_jump_distance(int v) { _is_able_to_jump_distance = v; }
+void Tp::set_is_able_to_jump(int v) { _is_able_to_jump = v; }
+void Tp::set_is_able_to_jump_on_low_hp_chance_d1000(int v) { _is_able_to_jump_on_low_hp_chance_d1000 = v; }
+void Tp::set_is_able_to_learn_skills(int v) { _is_able_to_learn_skills = v; }
+void Tp::set_is_able_to_open_doors(int v) { _is_able_to_open_doors = v; }
+void Tp::set_is_able_to_see_through_doors(int v) { _is_able_to_see_through_doors = v; }
+void Tp::set_is_able_to_shove(int v) { _is_able_to_shove = v; }
+void Tp::set_is_able_to_walk_through_walls(int v) { _is_able_to_walk_through_walls = v; }
+void Tp::set_is_exit_finder(int v) { _is_exit_finder = v; }
+void Tp::set_is_item_collector(int v) { _is_item_collector = v; }
+void Tp::set_is_level_explorer(int v) { _is_level_explorer = v; }
 void Tp::set_ai_obstacle(int v) { _ai_obstacle = v; }
 void Tp::set_ai_random_jump_chance_d1000(int v) { _ai_random_jump_chance_d1000 = v; }
 void Tp::set_ai_resent_count(int v) { _ai_resent_count = v; }
@@ -538,11 +538,11 @@ void Tp::set_damage_bite_chance_d1000(int v) { _damage_bite_chance_d1000 = v; }
 void Tp::set_damage_melee_chance_d1000(int v) { _damage_melee_chance_d1000 = v; }
 void Tp::set_damage_poison_chance_d1000(int v) { _damage_poison_chance_d1000 = v; }
 void Tp::set_damage_necrosis_chance_d1000(int v) { _damage_necrosis_chance_d1000 = v; }
-void Tp::set_damage_value_doubled_from_acid(int v) { _damage_value_doubled_from_acid = v; }
-void Tp::set_damage_value_doubled_from_fire(int v) { _damage_value_doubled_from_fire = v; }
-void Tp::set_damage_value_doubled_from_poison(int v) { _damage_value_doubled_from_poison = v; }
-void Tp::set_damage_value_doubled_from_necrosis(int v) { _damage_value_doubled_from_necrosis = v; }
-void Tp::set_damage_value_doubled_from_water(int v) { _damage_value_doubled_from_water = v; }
+void Tp::set_damage_received_doubled_from_acid(int v) { _damage_received_doubled_from_acid = v; }
+void Tp::set_damage_received_doubled_from_fire(int v) { _damage_received_doubled_from_fire = v; }
+void Tp::set_damage_received_doubled_from_poison(int v) { _damage_received_doubled_from_poison = v; }
+void Tp::set_damage_received_doubled_from_necrosis(int v) { _damage_received_doubled_from_necrosis = v; }
+void Tp::set_damage_received_doubled_from_water(int v) { _damage_received_doubled_from_water = v; }
 void Tp::set_enchant_level(int v) { _enchant_level = v; }
 void Tp::set_enchant_max(int v) { _enchant_max = v; }
 void Tp::set_environ_avoids_acid(int v) { _environ_avoids_acid = v; }

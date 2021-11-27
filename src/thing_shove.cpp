@@ -18,7 +18,7 @@
 ThingShoved Thing::try_to_shove(Thingp it, point delta)
 {
   TRACE_AND_INDENT();
-  if (! ai_is_able_to_shove()) {
+  if (! is_able_to_shove()) {
     return (THING_SHOVE_NEVER_TRIED);
   }
 
@@ -211,7 +211,7 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta)
 
 ThingShoved Thing::try_to_shove(point future_pos)
 {
-  if (! ai_is_able_to_shove()) {
+  if (! is_able_to_shove()) {
     return (THING_SHOVE_NEVER_TRIED);
   }
 
@@ -239,7 +239,7 @@ ThingShoved Thing::try_to_shove(point future_pos)
 
 ThingShoved Thing::try_to_shove_into_hazard(Thingp it, point delta)
 {
-  if (ai_is_able_to_shove()) {
+  if (is_able_to_shove()) {
     auto shoved_to_position = it->mid_at + delta;
     if (level->is_hazard((int) shoved_to_position.x, (int) shoved_to_position.y)) {
       return (try_to_shove(it, delta));

@@ -33,9 +33,8 @@ def on_firing_at_something(me, target, x, y): # Return True on doing an action
 
 def tp_init(name, text_name):
     mytp = tp.Tp(name, text_name)
-    mytp.set_ai_aggression_level(50)
+    mytp.set_ai_aggression_level_pct(50)
     mytp.set_ai_avoid_distance(4)
-    mytp.set_ai_is_able_to_shove(True)
     mytp.set_ai_resent_count(10)
     mytp.set_ai_scent_distance(10)
     mytp.set_ai_shove_chance_d1000(200)
@@ -50,7 +49,7 @@ def tp_init(name, text_name):
     mytp.set_damage_bite_dice("1d3")
     mytp.set_damage_melee_chance_d1000(900)
     mytp.set_damage_melee_dice("1d2")
-    mytp.set_damage_value_doubled_from_water(True)
+    mytp.set_damage_received_doubled_from_water(True)
     mytp.set_environ_avoids_water(100)
     mytp.set_environ_avoids_water(True)
     mytp.set_environ_prefers_fire(True)
@@ -67,6 +66,7 @@ def tp_init(name, text_name):
     mytp.set_is_able_to_fall(True)
     mytp.set_is_able_to_fire_at(True)
     mytp.set_is_able_to_see_in_the_dark(True)
+    mytp.set_is_able_to_shove(True)
     mytp.set_is_attackable_by_monst(True)
     mytp.set_is_attackable_by_player(True)
     mytp.set_is_carrier_of_treasure_class_a(True)

@@ -22,8 +22,7 @@ def on_death(me, x, y):
 
 def tp_init(name, text_name):
     mytp = tp.Tp(name, text_name)
-    mytp.set_ai_aggression_level(100)
-    mytp.set_ai_is_able_to_shove(True)
+    mytp.set_ai_aggression_level_pct(100)
     mytp.set_ai_resent_count(100)
     mytp.set_ai_scent_distance(20)
     mytp.set_ai_shove_chance_d1000(200)
@@ -43,8 +42,8 @@ def tp_init(name, text_name):
     mytp.set_damage_melee_dice("1d6+10")
     mytp.set_damage_necrosis_chance_d1000(100)
     mytp.set_damage_necrosis_dice("1")
-    mytp.set_damage_value_doubled_from_fire(True)
-    mytp.set_damage_value_doubled_from_water(True)
+    mytp.set_damage_received_doubled_from_fire(True)
+    mytp.set_damage_received_doubled_from_water(True)
     mytp.set_environ_avoids_acid(True)
     mytp.set_environ_avoids_fire(100)
     mytp.set_environ_avoids_fire(True)
@@ -63,6 +62,7 @@ def tp_init(name, text_name):
     mytp.set_is_able_to_change_levels(True)
     mytp.set_is_able_to_fall(True)
     mytp.set_is_able_to_see_in_the_dark(True)
+    mytp.set_is_able_to_shove(True)
     mytp.set_is_attackable_by_monst(True)
     mytp.set_is_attackable_by_player(True)
     mytp.set_is_blood_eater(True)

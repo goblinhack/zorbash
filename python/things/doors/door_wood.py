@@ -15,7 +15,7 @@ def tp_init(name):
     mytp = tp.Tp(name, "wooden door")
     mytp.set_collision_check(True)
     mytp.set_collision_hit_priority(9)
-    mytp.set_damage_value_doubled_from_fire(True)
+    mytp.set_damage_received_doubled_from_fire(True)
     mytp.set_environ_avoids_fire(100)
     mytp.set_gfx_animated(True)
     mytp.set_gfx_health_bar_autohide(True)

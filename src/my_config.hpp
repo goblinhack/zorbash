@@ -13,8 +13,8 @@
 #define ENABLE_DEBUG_TRACE                  // (SLOW) Function tracing
 #define ENABLE_PTRCHECK_HISTORY          2  // Per pointer history
 #define ENABLE_SAVE_SNAPSHOT_FREQ        42 // How often/move count, to save a snapshot
+#undef ENABLE_DEBUG_AI_ASTAR                // Astar AI path costs
 
-#undef ENABLE_DEBUG_AI_ASTAR     // Astar AI path costs
 #undef ENABLE_DEBUG_AI           // Monster AI decisions
 #undef ENABLE_DEBUG_AI_WANDER    // AI wander path selection
 #undef ENABLE_DEBUG_GFX_GL_BLEND // Use to debug specific blends

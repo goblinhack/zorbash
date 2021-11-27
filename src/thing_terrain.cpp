@@ -21,8 +21,12 @@ void Thing::dmap_modify_terrain_cost(point p, uint8_t *d)
   TRACE_AND_INDENT();
   int pref = *d;
 
+  //
+  // So things that cannot jump do not consider chasms
+  //
   if (collision_obstacle(p)) {
-    pref++;
+    *d = DMAP_IS_WALL;
+    return;
   }
 
   std::vector< std::pair< Thingp, int > > possible;

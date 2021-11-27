@@ -7,8 +7,6 @@
 #ifndef _MY_SYS_HPP_
 #define _MY_SYS_HPP_
 
-#include "my_defs.hpp"
-
 #include <cinttypes> // PRIx32
 #include <stdint.h>
 
