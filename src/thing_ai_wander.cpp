@@ -63,7 +63,7 @@ bool Thing::ai_blocked_completely(void)
 bool Thing::ai_create_path(point &nh, const point start, const point end)
 {
   TRACE_AND_INDENT();
-  dbg("AI create path");
+  dbg("AI create path from %d,%d to %d,%d", start.x, start.y, end.x, end.y);
   TRACE_AND_INDENT();
 
   if (end == point(-1, -1)) {
@@ -147,7 +147,10 @@ bool Thing::ai_create_path(point &nh, const point start, const point end)
 #endif
 
   char path_debug = '\0'; // astart path debug
-  auto result     = astar_solve(this, NULL, path_debug, start, end, &dmap);
+  auto astar      = astar_solve(this, NULL, path_debug, start, end, &dmap);
+  auto result     = astar.first;
+  auto fallback   = astar.second;
+
 #if 0
   for (auto i : result.path) {
     set(dmap.val, i.x, i.y, (uint8_t)0);

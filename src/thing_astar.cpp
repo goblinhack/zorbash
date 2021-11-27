@@ -208,7 +208,7 @@ public:
     return {l, cost};
   }
 
-  Path solve(Thingp me, const Goal *goalp, char *path_debug)
+  std::pair< Path, Path > solve(Thingp me, const Goal *goalp, char *path_debug)
   {
     auto distance_to_next_hop = 0;
     auto ncost                = Nodecost(distance_to_next_hop + heuristic(start));
@@ -216,6 +216,8 @@ public:
     add_to_open(neighbor);
     Path best;
     best.cost = std::numeric_limits< int >::max();
+    Path fallback;
+    fallback.cost = std::numeric_limits< int >::max();
 
     while (! open_nodes.empty()) {
       auto  c       = open_nodes.begin();
@@ -248,6 +250,19 @@ public:
         remove_from_open(current);
         add_to_closed(current);
         continue;
+      } else {
+        //
+        // Create any old path in case we cannot reach the goal
+        //
+        auto [ path, cost ] = create_path(dmap, current);
+
+        if (path.size() > fallback.path.size()) {
+          if (goalp) {
+            fallback.goal = *goalp;
+          }
+          fallback.path = path;
+          fallback.cost = cost;
+        }
       }
 
       remove_from_open(current);
@@ -275,7 +290,7 @@ public:
 
     cleanup();
 
-    return (best);
+    return (std::pair(best, fallback));
   }
 };
 
@@ -316,7 +331,7 @@ void astar_dump(const Dmap *dmap, const point &at, const point &start, const poi
   }
 }
 
-Path astar_solve(Thingp me, const Goal *goal, char path_debug, point s, point g, const Dmap *d)
+std::pair< Path, Path > astar_solve(Thingp me, const Goal *goal, char path_debug, point s, point g, const Dmap *d)
 {
   char tmp = path_debug;
   auto a   = Astar(s, g, d);

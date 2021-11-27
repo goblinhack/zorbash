@@ -267,31 +267,38 @@ bool Thing::ai_create_path_to_single_goal(int minx, int miny, int maxx, int maxy
   astar_debug = {};
 #endif
   point astar_start(start.x, start.y);
-  auto  astar_end = goal.at;
-  auto  result    = astar_solve(this, &goal, path_debug, astar_start, astar_end, &dmap);
+  auto  astar_end           = goal.at;
+  auto [ result, fallback ] = astar_solve(this, &goal, path_debug, astar_start, astar_end, &dmap);
 
   //
   // Unreachable?
   //
   if (result.cost == std::numeric_limits< int >::max()) {
+    if (fallback.path.size()) {
+      AI_LOG("", "Use fallback path as goal is unreachable");
+      result = fallback;
+    } else {
 #ifdef ENABLE_DEBUG_AI_ASTAR
-    auto start = point(minx, miny);
-    auto end   = point(maxx, maxy);
-    astar_dump(&dmap, goal.at, start, end);
+      auto start = point(minx, miny);
+      auto end   = point(maxx, maxy);
+      astar_dump(&dmap, goal.at, start, end);
 #endif
-    AI_LOG("", "Goal is astar unreachable");
-    return false;
+      AI_LOG("", "Goal is astar unreachable");
+      return false;
+    }
   }
 
   paths.insert(result);
 
 #ifdef ENABLE_DEBUG_AI_ASTAR
-  for (auto &p : result.path) {
-    set(astar_debug, p.x, p.y, '*');
+  {
+    for (auto &p : result.path) {
+      set(astar_debug, p.x, p.y, '*');
+    }
+    auto start = point(minx, miny);
+    auto end   = point(maxx, maxy);
+    astar_dump(&dmap, goal.at, start, end);
   }
-  auto start = point(minx, miny);
-  auto end   = point(maxx, maxy);
-  astar_dump(&dmap, goal.at, start, end);
 #endif
 
   for (auto &result : paths) {

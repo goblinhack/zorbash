@@ -5696,10 +5696,13 @@ ThingId Thing::get_equip_id_carry_anim(int equip)
 {
   TRACE_AND_INDENT();
   if (maybe_itemp()) {
-    return (get_itemp()->equip_id_carry_anim[ equip ]);
-  } else {
-    return NoThingId;
+    auto id = get(get_itemp()->equip_id_carry_anim, equip);
+    if (id != NoThingId) {
+      verify(MTYPE_THING, level->thing_find(id));
+    }
+    return id;
   }
+  return NoThingId;
 }
 
 ThingId Thing::set_equip_id_carry_anim(ThingId v, int equip)
@@ -5716,10 +5719,13 @@ ThingId Thing::get_equip_id_use_anim(int equip)
 {
   TRACE_AND_INDENT();
   if (maybe_itemp()) {
-    return (get_itemp()->equip_id_use_anim[ equip ]);
-  } else {
-    return NoThingId;
+    auto id = get(get_itemp()->equip_id_use_anim, equip);
+    if (id != NoThingId) {
+      verify(MTYPE_THING, level->thing_find(id));
+    }
+    return id;
   }
+  return NoThingId;
 }
 
 ThingId Thing::set_equip_id_use_anim(ThingId v, int equip)

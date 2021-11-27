@@ -91,7 +91,8 @@ public:
   }
 };
 
-extern Path astar_solve(class Thing_ *, const class Goal *goal, char path_debug, point s, point g, const Dmap *d);
+extern std::pair< Path, Path > astar_solve(class Thing_ *, const class Goal *goal, char path_debug, point s, point g,
+                                           const Dmap *d);
 
 extern void astar_dump(const Dmap *dmap, const point &at, const point &start, const point &end);
 

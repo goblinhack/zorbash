@@ -173,8 +173,8 @@ bool Thing::ai_create_on_fire_path(point &nh, const point start, const point end
 
   auto p = dmap_solve(&dmap, start);
 
-  char path_debug = '\0'; // astart path debug
-  auto result     = astar_solve(this, NULL, path_debug, start, end, &dmap);
+  char path_debug           = '\0'; // astart path debug
+  auto [ result, fallback ] = astar_solve(this, NULL, path_debug, start, end, &dmap);
 #if 0
   for (auto i : result.path) {
     set(dmap.val, i.x, i.y, (uint8_t)0);

@@ -144,13 +144,13 @@ void Thing::hooks_remove()
   FOR_ALL_EQUIP(e)
   {
     TRACE_AND_INDENT();
-    auto item = get_equip_carry_anim(e);
+    Thingp item = get_equip_carry_anim(e);
     if (item) {
+      verify(MTYPE_THING, item);
       if (is_loggable()) {
         dbg("Hooks remove carry-anim");
       }
       set_equip_carry_anim(nullptr, e);
-      verify(MTYPE_ITEMP, item);
       item->remove_owner();
       item->dead("weapon carry-anim owner defeated ");
     }
@@ -159,13 +159,13 @@ void Thing::hooks_remove()
   FOR_ALL_EQUIP(e)
   {
     TRACE_AND_INDENT();
-    auto item = get_equip_use_anim(e);
+    Thingp item = get_equip_use_anim(e);
     if (item) {
+      verify(MTYPE_THING, item);
       if (is_loggable()) {
         dbg("Hooks remove use-anim");
       }
       set_equip_use_anim(nullptr, e);
-      verify(MTYPE_ITEMP, item);
       item->remove_owner();
       item->dead("weapon use-anim owner defeated ");
     }
