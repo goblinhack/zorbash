@@ -20,6 +20,7 @@ python/things/skills/__pycache__
 python/things/treasure/__pycache__
 python/things/wands/__pycache__
 python/things/weapons/__pycache__
+python/things/player/__pycache__/
 *.session
 */*.session
 src/appdata
