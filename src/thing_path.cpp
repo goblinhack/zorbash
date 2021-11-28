@@ -329,6 +329,9 @@ bool Thing::cursor_path_pop_first_move(void)
 {
   TRACE_AND_INDENT();
   auto cursor = level->cursor;
+  if (! cursor) {
+    return false;
+  }
 
   if (game->cursor_move_path.size()) {
     dbg("Cursor path exists");
