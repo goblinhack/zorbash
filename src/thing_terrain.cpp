@@ -20,10 +20,7 @@ void Thing::dmap_modify_terrain_cost(point p, uint8_t *d)
 {
   int pref = *d;
 
-  //
-  // So things that cannot jump do not consider chasms
-  //
-  if (collision_obstacle(p)) {
+  if (is_hated_by_me(p)) {
     *d = DMAP_IS_WALL;
     return;
   }
@@ -46,9 +43,7 @@ void Thing::dmap_modify_terrain_cost(point p, uint8_t *d)
     }
   }
 
-  if (is_hated_by_me(p)) {
-    pref += DMAP_LESS_PREFERRED_TERRAIN;
-  } else if (is_disliked_by_me(p)) {
+  if (is_disliked_by_me(p)) {
     pref += DMAP_LESS_PREFERRED_TERRAIN / 2;
   }
 
