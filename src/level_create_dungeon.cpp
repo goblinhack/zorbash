@@ -400,6 +400,7 @@ bool Level::create_dungeon(point3d at, int seed)
             }
             IF_DEBUG2
             {
+#if 0
               // thing_new("spider_giant", point(x + 3, y));
               thing_new("mummy", point(x + 3, y - 1));
               thing_new("jelly_baby", point(x + 3, y - 1));
@@ -409,6 +410,7 @@ bool Level::create_dungeon(point3d at, int seed)
               if (0) {
                 t->incr_poisoned_amount(100);
               }
+#endif
 #if 0
             auto w = thing_new("scythe", point(x, y));
             t->carry(w);
@@ -506,15 +508,6 @@ bool Level::create_dungeon(point3d at, int seed)
                 auto W = thing_new("key", point(x, y));
                 t->carry(W);
               }
-
-              if (0) {
-                auto i = thing_new("thunderstone", point(x, y));
-                t->carry(i);
-              }
-              if (1) {
-                auto b = thing_new("bag_small", point(x, y));
-                t->carry(b);
-              }
             }
 
             {
@@ -525,6 +518,14 @@ bool Level::create_dungeon(point3d at, int seed)
             {
               auto W = thing_new("torch", point(x, y));
               t->carry(W);
+            }
+            if (0) {
+              auto i = thing_new("thunderstone", point(x, y));
+              t->carry(i);
+            }
+            if (1) {
+              auto b = thing_new("bag_small", point(x, y));
+              t->carry(b);
             }
 
             goto placed_player;
