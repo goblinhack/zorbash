@@ -7,9 +7,9 @@ def on_you_are_hit(me, hitter, real_hitter, x, y, crit, bite, poison, necrosis, 
 
 def on_death(me, x, y):
     my.level_spawn_at_thing(me, "pink_splatter")
-    if my.pcg_randint(1, 100) < 100:
+    if my.pcg_randint(1, 100) < 40:
         my.level_spawn_next_to(me, "jelly_baby")
-    if my.pcg_randint(1, 100) < 100:
+    if my.pcg_randint(1, 100) < 40:
         my.level_spawn_next_to(me, "jelly_baby")
     my.thing_sound_play_channel(me, my.CHANNEL_MONST, "slime{}".format(my.non_pcg_randint(1, 9)))
 
