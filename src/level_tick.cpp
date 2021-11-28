@@ -94,9 +94,11 @@ void Level::handle_input_events(void)
       } else {
         time_boost += 20;
       }
-      if (time_boost > 100) {
-        time_boost = 100;
+      if (time_boost > 50) {
+        time_boost = 50;
       }
+
+      CON("PLAYER WAITING %d", time_boost);
       time_delta += time_boost;
       return;
     }
@@ -231,7 +233,7 @@ bool Level::tick(void)
           t->con("Waiting on animated moving thing longer than expected: %s", t->to_dbg_string().c_str());
         }
         game->things_are_moving = true;
-        // t->log("WAIT %d", __LINE__);
+        // t->con("WAIT %d", __LINE__);
       }
     }
     FOR_ALL_ANIMATED_THINGS_LEVEL_END(this)
@@ -280,7 +282,7 @@ bool Level::tick(void)
         t->con("Waiting on moving thing longer than expected: %s", t->to_dbg_string().c_str());
       }
       game->things_are_moving = true;
-      // t->log("WAIT %d", __LINE__);
+      // t->con("WAIT %d", __LINE__);
     }
 
     //
@@ -291,7 +293,7 @@ bool Level::tick(void)
         t->con("Waiting on jumping thing longer than expected: %s", t->to_dbg_string().c_str());
       }
       game->things_are_moving = true;
-      // t->log("WAIT %d", __LINE__);
+      // t->con("WAIT %d", __LINE__);
     }
 
     //
@@ -302,18 +304,18 @@ bool Level::tick(void)
         t->con("Waiting on falling thing longer than expected: %s", t->to_dbg_string().c_str());
       }
       game->things_are_moving = true;
-      // t->log("WAIT %d", __LINE__);
+      // t->con("WAIT %d", __LINE__);
     }
 
     //
     // Wait on dying thing?
     //
-    if ((t->is_dead_on_end_of_anim() && ! t->is_dead)) {
+    if (t->is_dead_on_end_of_anim() && ! (t->is_dead || t->is_scheduled_for_death || t->is_offscreen)) {
       if ((wait_count > wait_count_max) && ! game->things_are_moving) {
         t->con("Waiting on dying thing longer than expected: %s", t->to_dbg_string().c_str());
       }
       game->things_are_moving = true;
-      // t->log("WAIT %d", __LINE__);
+      // t->con("WAIT %d", __LINE__);
     }
 
     //
@@ -324,7 +326,7 @@ bool Level::tick(void)
         t->con("Waiting on resurrecting thing longer than expected: %s", t->to_dbg_string().c_str());
       }
       game->things_are_moving = true;
-      // t->log("WAIT %d", __LINE__);
+      // t->con("WAIT %d", __LINE__);
     }
 
     FOR_ALL_EQUIP(e)
@@ -332,24 +334,25 @@ bool Level::tick(void)
       auto equip_id = t->get_equip_id_use_anim(e);
       if (equip_id.ok()) {
         auto w = thing_find(equip_id);
-        if (w && ! w->is_dead) {
+        if (w && ! (w->is_dead || w->is_scheduled_for_death)) {
           if ((wait_count > wait_count_max) && ! game->things_are_moving) {
             w->con("Waiting on this");
             t->con("This is the owner");
           }
           game->things_are_moving = true;
-          // t->log("WAIT %d", __LINE__);
+          // w->con("WAIT EQUIP %d", __LINE__);
+          // t->con("WAIT %d", __LINE__);
         }
       }
     }
 
-    if (t->get_ts_flip_start() && ! t->is_dead) {
+    if (t->get_ts_flip_start() && ! (t->is_dead || t->is_scheduled_for_death)) {
       if ((wait_count > wait_count_max) && ! game->things_are_moving) {
         t->con("Waiting on flipping thing longer than expected: %s", t->to_dbg_string().c_str());
       }
 
       game->things_are_moving = true;
-      // t->log("WAIT %d", __LINE__);
+      // t->con("WAIT %d", __LINE__);
 
       //
       // Make sure offscreen animation occurs.
@@ -365,7 +368,7 @@ bool Level::tick(void)
         t->con("Waiting on waiting to fall thing longer than expected: %s", t->to_dbg_string().c_str());
       }
       game->things_are_moving = true;
-      // t->log("WAIT %d", __LINE__);
+      // t->con("WAIT %d", __LINE__);
     }
 
     if (t->is_scheduled_for_death) {
@@ -436,6 +439,19 @@ bool Level::tick(void)
   }
 
   if (game->things_are_moving) {
+    if (game->request_player_move || (player && player->get_aip()->move_path.size())) {
+      if ((time_get_time_ms() - game->tick_begin_ms) > 100) {
+        game->current_tick_is_too_slow = true;
+        time_delta += 20;
+      } else if ((time_get_time_ms() - game->tick_begin_ms) > 50) {
+        game->current_tick_is_too_slow = true;
+        time_delta += 10;
+      } else if ((time_get_time_ms() - game->tick_begin_ms) > 20) {
+        game->current_tick_is_too_slow = true;
+        time_delta += 5;
+      }
+    }
+
     return false;
   }
 

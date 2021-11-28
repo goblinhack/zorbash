@@ -56,7 +56,10 @@ bool Thing::ai_escape(void)
 
   dbg("AI escape");
   auto tries = THING_AI_ESCAPE_ATTEMPTS;
-  while (tries--) {
+  if (game->current_tick_is_too_slow || game->prev_tick_was_too_slow) {
+    tries = 1;
+  }
+  while (tries-- > 0) {
     point nh;
     if (ai_choose_wander(nh)) {
       if (move_to_or_attack(nh)) {

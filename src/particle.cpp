@@ -114,6 +114,7 @@ void Level::display_internal_particles(void)
 
     float t  = p.ts_stop - p.ts_start;
     float dt = ((float) (now - p.ts_start)) / t;
+    // con("dt %f", dt);
     if (dt > 1) {
       if (p.id.id) {
         auto t = thing_find(p.id);
@@ -121,6 +122,7 @@ void Level::display_internal_particles(void)
           if (p.make_visible_at_end) {
             t->visible();
           }
+          // t->con("end jump");
           t->is_scheduled_for_jump_end = true;
           t->has_internal_particle     = false;
         }
@@ -314,6 +316,7 @@ void Level::display_external_particles(void)
 
     float t  = p.ts_stop - p.ts_start;
     float dt = ((float) (now - p.ts_start)) / t;
+    // con("dt %f", dt);
     if (dt > 1) {
       if (p.id.id) {
         auto t = thing_find(p.id);
@@ -325,6 +328,7 @@ void Level::display_external_particles(void)
           }
           IF_DEBUG3
           t->log("Particle end");
+          // t->con("end jump");
           t->is_scheduled_for_jump_end = true;
           t->has_external_particle     = false;
         }

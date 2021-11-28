@@ -107,6 +107,10 @@ bool Game::tick_end(void)
 
   save_snapshot_check();
 
+  game->tick_duration          = time_get_time_ms() - game->tick_begin_ms;
+  game->prev_tick_was_too_slow = game->current_tick_is_too_slow;
+  game->current_tick_is_too_slow               = false;
+
   auto level = game->get_current_level();
   if (level) {
     TRACE_AND_INDENT();

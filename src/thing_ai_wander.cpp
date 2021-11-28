@@ -62,13 +62,17 @@ bool Thing::ai_blocked_completely(void)
 
 bool Thing::ai_create_path(point &nh, const point start, const point end)
 {
-  TRACE_AND_INDENT();
-  dbg("AI create path from %d,%d to %d,%d", start.x, start.y, end.x, end.y);
-  TRACE_AND_INDENT();
-
   if (end == point(-1, -1)) {
     return false;
   }
+
+  if (end == point(0, 0)) {
+    return false;
+  }
+
+  TRACE_AND_INDENT();
+  dbg("AI create path from %d,%d to %d,%d", start.x, start.y, end.x, end.y);
+  TRACE_AND_INDENT();
 
   Dmap  dmap {};
   point dmap_start = start;
@@ -114,15 +118,11 @@ bool Thing::ai_create_path(point &nh, const point start, const point end)
   //
   for (auto y = miny; y < maxy; y++) {
     for (auto x = minx; x < maxx; x++) {
-      if (collision_obstacle(point(x, y))) {
-        set(dmap.val, x, y, DMAP_IS_WALL);
+      auto c = get_terrain_cost(point(x, y));
+      if (c >= DMAP_LESS_PREFERRED_TERRAIN) {
+        set(dmap.val, x, y, c);
       } else {
-        auto c = get_terrain_cost(point(x, y));
-        if (c >= DMAP_LESS_PREFERRED_TERRAIN) {
-          set(dmap.val, x, y, c);
-        } else {
-          set(dmap.val, x, y, DMAP_IS_PASSABLE);
-        }
+        set(dmap.val, x, y, DMAP_IS_PASSABLE);
       }
     }
   }
@@ -208,10 +208,8 @@ bool Thing::ai_choose_wander(point &nh)
   //
   // Try to use the same location.
   //
-  if (target != point(-1, -1)) {
-    if (ai_create_path(nh, mid_at, target)) {
-      return true;
-    }
+  if (ai_create_path(nh, mid_at, target)) {
+    return true;
   }
 
   //
@@ -294,7 +292,10 @@ bool Thing::ai_wander(void)
 
   dbg("AI wander");
   auto tries = THING_AI_WANDER_TRIES;
-  while (tries--) {
+  if (game->current_tick_is_too_slow || game->prev_tick_was_too_slow) {
+    tries = 1;
+  }
+  while (tries-- > 0) {
     point nh;
     if (ai_choose_wander(nh)) {
       if (get_terrain_cost(nh) < DMAP_LESS_PREFERRED_TERRAIN) {

@@ -6,7 +6,7 @@ def tp_init(name):
     mytp.set_gfx_animated(True)
     mytp.set_is_removeable_if_out_of_slots(True)
     mytp.set_is_ripple(True)
-    mytp.set_is_tickable(True)
+    mytp.set_is_tmp_thing(True)
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("An ominous ripple.")
     mytp.set_z_depth(my.MAP_DEPTH_OBJ)

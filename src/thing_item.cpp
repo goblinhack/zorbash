@@ -95,21 +95,26 @@ void Thing::move_carried_items(void)
   // If something moves on the water, make a ripple
   //
   if (is_monst() || is_player()) {
-    if (! is_floating()) {
+    if (! is_floating() && ! is_offscreen) {
       if (level->is_shallow_water((int) mid_at.x, (int) mid_at.y) &&
           ! level->is_ripple((int) mid_at.x, (int) mid_at.y)) {
         point at(mid_at.x, mid_at.y);
-        dbg("Causes ripples");
-        if (game->robot_mode) {
+        if (game->current_tick_is_too_slow || game->prev_tick_was_too_slow) {
           //
-          // Faster
+          // No ripples
           //
-          if (pcg_random_range(0, 1000) > 900) {
-            level->thing_new(tp_random_ripple()->name(), at);
-          }
         } else {
-          if (pcg_random_range(0, 1000) > 500) {
-            level->thing_new(tp_random_ripple()->name(), at);
+          if (game->robot_mode) {
+            //
+            // Faster
+            //
+            if (pcg_random_range(0, 1000) > 900) {
+              level->thing_new(tp_random_ripple()->name(), at);
+            }
+          } else {
+            if (pcg_random_range(0, 1000) > 500) {
+              level->thing_new(tp_random_ripple()->name(), at);
+            }
           }
         }
       }

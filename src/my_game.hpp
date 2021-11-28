@@ -252,7 +252,22 @@ public:
   //
   uint32_t robot_mode_requested {};
   uint32_t robot_mode_tick_requested {};
-  float    tick_dt {0}; // Used for timesteps within a game tick
+
+  //
+  // Used for timesteps within a game tick for smooth thing movement
+  //
+  float tick_dt {0};
+
+  //
+  // How long the last tick took
+  //
+  uint32_t tick_duration {};
+
+  //
+  // This is used to try and speed up animations if in the midst of a jelly storm
+  //
+  bool current_tick_is_too_slow {};
+  bool prev_tick_was_too_slow {};
 
   //
   // Temporary. Global states

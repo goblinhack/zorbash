@@ -88,14 +88,22 @@ void Thing::init_lights(void)
 
     new_light(point(0, 0), strength / 2, col, FBO_FULLMAP_LIGHT);
     new_light(point(0, 0), strength / 2, col, FBO_PLAYER_VISIBLE_LIGHTING);
-    new_light(point(0, 0), 3, col, FBO_SMALL_POINT_LIGHTS);
+    new_light(point(0, 0), 4, col, FBO_SMALL_POINT_LIGHTS);
+    col.a = 150;
+    new_light(point(0, 0), (strength * 2) / 3, col, FBO_PLAYER_VISIBLE_LIGHTING);
+    col.a = 100;
+    new_light(point(0, 0), (strength * 3) / 4, col, FBO_PLAYER_VISIBLE_LIGHTING);
     col.a = 50;
     new_light(point(0, 0), strength + 1, col, FBO_PLAYER_VISIBLE_LIGHTING);
+    col.a = 40;
     new_light(point(0, 0), strength + 2, col, FBO_PLAYER_VISIBLE_LIGHTING);
-    col.a = 20;
+    col.a = 30;
     new_light(point(0, 0), strength + 3, col, FBO_PLAYER_VISIBLE_LIGHTING);
+    col.a = 20;
     new_light(point(0, 0), strength + 4, col, FBO_PLAYER_VISIBLE_LIGHTING);
     col.a = 10;
+    new_light(point(0, 0), strength + 5, col, FBO_PLAYER_VISIBLE_LIGHTING);
+    col.a = 5;
     new_light(point(0, 0), strength + 6, col, FBO_PLAYER_VISIBLE_LIGHTING);
 
     has_light = true;

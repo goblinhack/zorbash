@@ -90,7 +90,7 @@ bool Thing::eat(Thingp victim)
     return false;
   }
 
-  log("Eat %s", victim->text_the().c_str());
+  dbg("Eat %s", victim->text_the().c_str());
   TRACE_AND_INDENT();
 
   //
@@ -153,7 +153,7 @@ bool Thing::consume(Thingp victim)
     return false;
   }
 
-  log("Consume %s", victim->text_the().c_str());
+  dbg("Consume %s", victim->text_the().c_str());
   TRACE_AND_INDENT();
 
   //

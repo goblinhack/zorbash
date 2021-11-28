@@ -17,7 +17,7 @@ def tp_init(name, text_name):
     mytp.set_z_depth(my.MAP_DEPTH_EQUIP)
     mytp.set_z_prio(my.MAP_PRIO_NORMAL)
 
-    delay = 10
+    delay = 5
     mytp.set_tile("pink_splatter.1", delay_ms=delay)
     mytp.set_tile("pink_splatter.2", delay_ms=delay)
     mytp.set_tile("pink_splatter.3", delay_ms=delay)

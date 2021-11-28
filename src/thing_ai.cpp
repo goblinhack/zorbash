@@ -1849,7 +1849,14 @@ bool Thing::ai_tick(bool recursing)
           wid_actionbar_robot_mode_off();
         }
 
-        return ai_wander();
+        if (is_player()) {
+          return ai_wander();
+        }
+
+        //
+        // Caller will try and wander
+        //
+        return false;
       }
       break;
 
@@ -2104,7 +2111,8 @@ void Thing::ai_get_next_hop(void)
     }
   }
 
-  auto aip = get_aip();
+  auto aip          = get_aip();
+  bool wander_tried = false;
 
   //
   // If somewhere bad, escape
@@ -2120,6 +2128,7 @@ void Thing::ai_get_next_hop(void)
     if (ai_wander()) {
       return;
     }
+    wander_tried = true;
   }
 
   //
@@ -2128,8 +2137,11 @@ void Thing::ai_get_next_hop(void)
   if (aip->wander_target != point(0, 0)) {
     if (pcg_random_range(0, 100) < 50) {
       dbg("Try to continue wander");
-      if (ai_wander()) {
-        return;
+      if (! wander_tried) {
+        if (ai_wander()) {
+          return;
+        }
+        wander_tried = true;
       }
     }
   }
@@ -2145,8 +2157,11 @@ void Thing::ai_get_next_hop(void)
   //
   // If we get here we found no goal. Try to wander.
   //
-  if (ai_wander()) {
-    return;
+  if (! wander_tried) {
+    if (ai_wander()) {
+      return;
+    }
+    wander_tried = true;
   }
 
   //

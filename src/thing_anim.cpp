@@ -25,6 +25,13 @@ void Thing::animate(void)
     return;
   }
 
+  if (is_tmp_thing()) {
+    if (game->current_tick_is_too_slow) {
+      dead_scheduled("by end of anim; too slow");
+      return;
+    }
+  }
+
   //
   // If this thing has an owner, sync the anim tiles so the weapon moves as the player does.
   //

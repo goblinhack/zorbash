@@ -387,8 +387,25 @@ bool Level::create_dungeon(point3d at, int seed)
           if (dungeon->is_ascend_dungeon(x, y)) {
             auto t = thing_new("player2", point(x, y));
 
+            {
+#if 0
+              for (auto m = 0; m < 500; m++) {
+                auto x = pcg_random_range(MAP_BORDER_ROCK, MAP_WIDTH - MAP_BORDER_ROCK);
+                auto y = pcg_random_range(MAP_BORDER_ROCK, MAP_HEIGHT - MAP_BORDER_ROCK);
+                if (is_floor(x, y)) {
+                  thing_new("jelly_baby", point(x, y));
+                }
+              }
+#endif
+            }
             IF_DEBUG2
             {
+              // thing_new("spider_giant", point(x + 3, y));
+              thing_new("mummy", point(x + 3, y - 1));
+              thing_new("jelly_baby", point(x + 3, y - 1));
+              thing_new("jelly_baby", point(x + 4, y));
+              thing_new("jelly_baby", point(x + 5, y));
+              thing_new("jelly_baby", point(x + 6, y));
               if (0) {
                 t->incr_poisoned_amount(100);
               }
@@ -406,14 +423,6 @@ bool Level::create_dungeon(point3d at, int seed)
             }
 #endif
 
-              {
-                // thing_new("spider_giant", point(x + 3, y));
-                thing_new("mummy", point(x + 3, y - 1));
-                thing_new("jelly_baby", point(x + 3, y - 1));
-                thing_new("jelly_baby", point(x + 4, y));
-                thing_new("jelly_baby", point(x + 5, y));
-                thing_new("jelly_baby", point(x + 6, y));
-              }
 #if 0
             {
               thing_new("sword_short_wooden", point(x + 1, y));

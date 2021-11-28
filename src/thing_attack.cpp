@@ -549,7 +549,7 @@ bool Thing::attack(Thingp victim)
       // You just cannot miss this.
       //
     } else {
-      log("attack_total %d %s defence_total %d", attack_total, victim->to_string().c_str(), defence_total);
+      dbg("attack_total %d %s defence_total %d", attack_total, victim->to_string().c_str(), defence_total);
       auto hit = d20roll(attack_total, defence_total, fumble, crit);
 
       //

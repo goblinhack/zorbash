@@ -18,7 +18,6 @@
 
 void Thing::dmap_modify_terrain_cost(point p, uint8_t *d)
 {
-  TRACE_AND_INDENT();
   int pref = *d;
 
   //
@@ -62,11 +61,8 @@ void Thing::dmap_modify_terrain_cost(point p, uint8_t *d)
 
 uint8_t Thing::get_terrain_cost(point p)
 {
-  TRACE_AND_INDENT();
   uint8_t pref = 0;
-
   dmap_modify_terrain_cost(p, &pref);
-
   return (uint8_t) pref;
 }
 
