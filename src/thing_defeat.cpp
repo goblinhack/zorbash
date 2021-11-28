@@ -155,9 +155,11 @@ void Thing::defeat(Thingp defeater, const char *reason)
         } else {
           TOPCON("You smell smoke in the air.");
         }
+      } else if (defeater && defeater->is_player()) {
+        TOPCON("The door crashes open.");
       } else {
         if (distance <= 1) {
-          TOPCON("The door crashes open.");
+          TOPCON("You see the door crash open.");
         } else if (distance < DMAP_IS_PASSABLE) {
           TOPCON("The hear the noise of a door crashing open.");
         } else {
