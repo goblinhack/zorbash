@@ -88,9 +88,6 @@ void Game::dead_select(const char *reason)
   TRACE_AND_INDENT();
   LOG("Open dead select: %s", reason);
 
-  game->robot_mode           = false;
-  game->robot_mode_requested = false;
-
   wid_actionbar_fini();
   wid_thing_info_fini();
 
@@ -144,9 +141,16 @@ void Game::dead_select(const char *reason)
   wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
   wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
   wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
-  wid_dead_window->log("Killed...");
+  if (game->robot_mode) {
+    wid_dead_window->log("Deactivated...");
+  } else {
+    wid_dead_window->log("Killed...");
+  }
   wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
   wid_dead_window->log(reason);
+
+  game->robot_mode           = false;
+  game->robot_mode_requested = false;
 
   {
     TRACE_AND_INDENT();
