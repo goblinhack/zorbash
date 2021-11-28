@@ -3,12 +3,12 @@
 // See the README.md file for license info.
 //
 
+#include "my_backtrace.hpp"
 #include "my_game.hpp"
 #include "my_game_error.hpp"
 #include "my_sdl.hpp"
 #include "my_sys.hpp"
 #include "my_thing.hpp"
-#include "my_backtrace.hpp"
 #include "my_ui.hpp"
 #include "my_wid_actionbar.hpp"
 #include "my_wid_botcon.hpp"

@@ -357,6 +357,8 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
   auto y     = future_pos.y;
   auto delta = point(x, y) - mid_at;
 
+  move_set_dir_from_delta(delta);
+
   //
   // Bounce rings and weapons
   //
@@ -365,8 +367,6 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
       bounce(0.2 /* height */, 0.1 /* fade */, 200, 3);
     }
   }
-
-  move_set_dir_from_delta(delta);
 
   if (must_attack) {
     if (is_player()) {

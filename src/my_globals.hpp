@@ -60,6 +60,9 @@ extern int TILES_DOWN;
 #define NODEBUG2 (likely(! g_opt_debug2))
 #define NODEBUG3 (likely(! g_opt_debug3))
 
+#define IF_DEBUG                                                                                                     \
+  TRACE_NO_INDENT();                                                                                                 \
+  if (DEBUG1)
 #define IF_DEBUG1                                                                                                    \
   TRACE_NO_INDENT();                                                                                                 \
   if (DEBUG1)
@@ -73,6 +76,9 @@ extern int TILES_DOWN;
   TRACE_NO_INDENT();                                                                                                 \
   if (DEBUG3)
 
+#define IF_NODEBUG                                                                                                   \
+  TRACE_NO_INDENT();                                                                                                 \
+  if (NODEBUG1)
 #define IF_NODEBUG1                                                                                                  \
   TRACE_NO_INDENT();                                                                                                 \
   if (NODEBUG1)
@@ -118,7 +124,7 @@ extern int TILES_DOWN;
 
 #define AI_LOG                                                                                                       \
   TRACE_NO_INDENT();                                                                                                 \
-  if (DEBUG2)                                                                                                        \
+  if (DEBUG1)                                                                                                        \
   ai_log
 
 //

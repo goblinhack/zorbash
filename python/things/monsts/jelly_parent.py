@@ -16,7 +16,7 @@ def on_death(me, x, y):
 
 def tp_init(name, text_name):
     mytp = tp.Tp(name, text_name)
-    mytp.set_ai_aggression_level_pct(20)
+    mytp.set_ai_aggression_level_pct(80)
     mytp.set_ai_avoid_distance(3)
     mytp.set_ai_random_jump_chance_d1000(2)
     mytp.set_ai_resent_count(10)
