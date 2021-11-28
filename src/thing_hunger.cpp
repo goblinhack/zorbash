@@ -3,6 +3,7 @@
 // See the README.md file for license info.
 //
 
+#include "my_game.hpp"
 #include "my_globals.hpp"
 #include "my_main.hpp"
 #include "my_sys.hpp"
@@ -12,9 +13,18 @@
 
 void Thing::hunger_clock(void)
 {
-  TRACE_AND_INDENT();
+  //
+  // Hunger clock fires rarely
+  //
+  if (game->tick_current % 50) {
+    return;
+  }
 
   if ((is_alive_monst() || is_player()) && ! is_ethereal() && ! is_undead()) {
+    TRACE_AND_INDENT();
+    dbg("Hunger tick");
+    TRACE_AND_INDENT();
+
     auto tpp = tp();
 
     //

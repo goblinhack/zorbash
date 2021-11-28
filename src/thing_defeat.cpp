@@ -194,7 +194,21 @@ void Thing::defeat(Thingp defeater, const char *reason)
     if (game->config.hiscores.is_new_hiscore(this)) {
       if (game->robot_mode) {
         TOPCON("%%fg=yellow$New robo high score, %s place!%%fg=reset$", game->config.hiscores.place_str(this));
-        TOPCON("RIP: Robot is defeated %s.", reason);
+        if (defeater && defeater->is_acid()) {
+          TOPCON("RIP: Robot is dissolved to death %s.", reason);
+        } else if (defeater && defeater->is_fire()) {
+          TOPCON("RIP: Robot is burnt to death %s.", reason);
+        } else if (defeater && defeater->is_water()) {
+          TOPCON("RIP: Robot is drowned %s.", reason);
+        } else if (defeater && defeater->is_necrotic_danger_level()) {
+          TOPCON("RIP: Robot is rotted to death %s.", reason);
+        } else if (defeater && defeater->is_engulfer()) {
+          TOPCON("RIP: Robot is consumed %s.", reason);
+        } else if (defeater && defeater->is_monst()) {
+          TOPCON("RIP: Robot is defeated %s.", reason);
+        } else {
+          TOPCON("RIP: Robot is deactivated %s.", reason);
+        }
       } else {
         TOPCON("%%fg=yellow$New high score, %s place!%%fg=reset$", game->config.hiscores.place_str(this));
         if (defeater && defeater->is_acid()) {
