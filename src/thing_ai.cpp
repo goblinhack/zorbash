@@ -530,6 +530,10 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
           if (level->is_map_changed(p.x, p.y) >= game->tick_current - 1) {
             FOR_ALL_THINGS_THAT_INTERACT(level, it, p.x, p.y)
             {
+              if (it == this) {
+                continue;
+              }
+
               if (it->is_changing_level || it->is_hidden || it->is_falling || it->is_jumping) {
                 continue;
               }
@@ -606,6 +610,10 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
 
               FOR_ALL_THINGS_THAT_INTERACT(level, it, o.x, o.y)
               {
+                if (it == this) {
+                  continue;
+                }
+
                 if (it->is_changing_level || it->is_hidden || it->is_falling || it->is_jumping) {
                   continue;
                 }

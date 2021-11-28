@@ -49,6 +49,7 @@ bool Thing::bag_contains(Thingp item)
 bool Thing::bag_add(Thingp item)
 {
   TRACE_AND_INDENT();
+
   //
   // Only players can compress bag contents. Monst just carry everything
   //
@@ -56,6 +57,7 @@ bool Thing::bag_add(Thingp item)
   if (top_owner && ! top_owner->is_player()) {
     return false;
   }
+
   if (! log_quiet) {
     if (! log_quiet) {
       dbg3("Bag: Add %s", item->to_string().c_str());
