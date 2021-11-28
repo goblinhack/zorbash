@@ -165,6 +165,11 @@ int Thing::get_danger_initial_level(void)
 int Thing::get_danger_current_level(void)
 {
   TRACE_AND_INDENT();
+
+  if (is_dead || is_dying) {
+    return 0;
+  }
+
   int danger_level = 0;
 
   danger_level = get_health() / 10;
@@ -244,6 +249,10 @@ int Thing::get_danger_current_level(void)
 
 int Thing::is_dangerous(Thingp it)
 {
+  if (is_dead || is_dying) {
+    return false;
+  }
+
   if (! it->is_monst() && ! it->is_player()) {
     return false;
   }

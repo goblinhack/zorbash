@@ -113,7 +113,9 @@ void Thing::move_finish(void)
   //
   // Something moved
   //
-  level->set_is_map_changed(mid_at.x, mid_at.y);
+  if (mid_at != last_mid_at) {
+    level->set_is_map_changed(mid_at.x, mid_at.y);
+  }
 }
 
 bool Thing::move(point future_pos)

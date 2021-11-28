@@ -542,21 +542,21 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
                 set(aip->interrupt_map.val, p.x, p.y, game->tick_current);
                 if (check_for_interrupts) {
                   something_changed++;
-                  dbg("interrupted by %s", it->to_string().c_str());
+                  dbg("Interrupted by thing worth collecting %s", it->to_string().c_str());
                 }
               }
               if (is_dangerous(it)) {
                 set(aip->interrupt_map.val, p.x, p.y, game->tick_current);
                 if (check_for_interrupts) {
                   something_changed++;
-                  dbg("interrupted by %s", it->to_string().c_str());
+                  dbg("Interrupted by dangerous thing %s", it->to_string().c_str());
                 }
               }
               if (worth_eating(it)) {
                 set(aip->interrupt_map.val, p.x, p.y, game->tick_current);
                 if (check_for_interrupts) {
                   something_changed++;
-                  dbg("interrupted by %s", it->to_string().c_str());
+                  dbg("Interrupted by edible collecting %s", it->to_string().c_str());
                 }
               }
             }
@@ -622,14 +622,14 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
                   set(aip->interrupt_map.val, p.x, p.y, game->tick_current);
                   if (check_for_interrupts) {
                     something_changed++;
-                    dbg("interrupted by %s", it->to_string().c_str());
+                    dbg("Interrupted by thing worth collecting %s", it->to_string().c_str());
                   }
                 }
                 if (is_dangerous(it)) {
                   set(aip->interrupt_map.val, p.x, p.y, game->tick_current);
                   if (check_for_interrupts) {
                     something_changed++;
-                    dbg("interrupted by %s", it->to_string().c_str());
+                    dbg("Interrupted by dangerous thing %s", it->to_string().c_str());
                   }
                 }
 
@@ -637,7 +637,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
                   set(aip->interrupt_map.val, p.x, p.y, game->tick_current);
                   if (check_for_interrupts) {
                     something_changed++;
-                    dbg("interrupted by %s", it->to_string().c_str());
+                    dbg("Interrupted by edible collecting %s", it->to_string().c_str());
                   }
                 }
               }
