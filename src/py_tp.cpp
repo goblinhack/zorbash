@@ -304,42 +304,44 @@ PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds)
 
 static PyObject *tp_set_tile_dir(PyObject *obj, PyObject *args, PyObject *keywds, int dir, int level)
 {
-  PyObject *py_class                = 0;
-  char     *tp_name                 = 0;
-  char     *fg                      = 0;
-  char     *bg                      = 0;
-  char     *fg_color                = 0;
-  char     *bg_color                = 0;
-  int       delay_ms                = 0;
-  int       frame                   = 0;
-  int       is_moving               = 0;
-  int       is_jumping              = 0;
-  int       begin_jump              = 0;
-  int       is_outline              = 0;
-  int       left                    = 0;
-  int       right                   = 0;
-  int       up                      = 0;
-  int       down                    = 0;
-  int       none                    = 0;
-  int       is_yyy5                 = 0;
-  int       is_yyy6                 = 0;
-  int       is_yyy7                 = 0;
-  int       is_yyy8                 = 0;
-  int       is_yyy9                 = 0;
-  int       is_invisible            = 0;
-  int       is_hp_25_percent        = 0;
-  int       is_hp_50_percent        = 0;
-  int       is_hp_75_percent        = 0;
-  int       is_hp_100_percent       = 0;
-  int       is_in_water             = 0;
-  int       is_sleeping             = 0;
-  int       is_open                 = 0;
-  int       is_dead                 = 0;
-  int       is_end_of_anim          = 0;
-  int       is_dead_on_end_of_anim  = 0;
-  int       is_alive_on_end_of_anim = 0;
-  int       is_resurrecting         = 0;
-  char     *py_tile_name            = nullptr;
+  PyObject *py_class = 0;
+  char     *tp_name  = 0;
+  char     *fg       = 0;
+  char     *bg       = 0;
+  char     *fg_color = 0;
+  char     *bg_color = 0;
+
+  int delay_ms                = 0;
+  int frame                   = 0;
+  int is_moving               = 0;
+  int is_jumping              = 0;
+  int begin_jump              = 0;
+  int is_outline              = 0;
+  int left                    = 0;
+  int right                   = 0;
+  int up                      = 0;
+  int down                    = 0;
+  int none                    = 0;
+  int is_yyy5                 = 0;
+  int is_yyy6                 = 0;
+  int is_yyy7                 = 0;
+  int is_yyy8                 = 0;
+  int is_yyy9                 = 0;
+  int is_invisible            = 0;
+  int is_hp_25_percent        = 0;
+  int is_hp_50_percent        = 0;
+  int is_hp_75_percent        = 0;
+  int is_hp_100_percent       = 0;
+  int is_in_water             = 0;
+  int is_sleeping             = 0;
+  int is_open                 = 0;
+  int is_dead                 = 0;
+  int is_end_of_anim          = 0;
+  int is_dead_on_end_of_anim  = 0;
+  int is_alive_on_end_of_anim = 0;
+  int is_resurrecting         = 0;
+
+  char *py_tile_name = nullptr;
 
   static char *kwlist[] = {(char *) "class",
                            (char *) "tile",
@@ -1159,25 +1161,8 @@ PyObject *level_place_at(PyObject *obj, PyObject *args, PyObject *keywds)
 
 TP_BODY_SET_INT(ai_aggression_level_pct)
 TP_BODY_SET_INT(ai_avoid_distance)
-TP_BODY_SET_INT(is_able_to_attack_generators)
-TP_BODY_SET_INT(is_able_to_break_down_doors)
-TP_BODY_SET_INT(is_able_to_break_out_of_webs)
-TP_BODY_SET_INT(is_able_to_collect_keys)
 TP_BODY_SET_INT(ai_detect_secret_doors)
-TP_BODY_SET_INT(is_able_to_enchant_weapons)
-TP_BODY_SET_INT(is_able_to_jump)
-TP_BODY_SET_INT(is_able_to_jump_distance)
-TP_BODY_SET_INT(is_able_to_jump_on_low_hp_chance_d1000)
-TP_BODY_SET_INT(is_able_to_learn_skills)
-TP_BODY_SET_INT(is_able_to_open_doors)
-TP_BODY_SET_INT(is_able_to_see_through_doors)
-TP_BODY_SET_INT(is_able_to_shove)
-TP_BODY_SET_INT(is_able_to_walk_through_walls)
-TP_BODY_SET_INT(is_exit_finder)
-TP_BODY_SET_INT(is_item_collector)
-TP_BODY_SET_INT(is_level_explorer)
 TP_BODY_SET_INT(ai_obstacle)
-TP_BODY_SET_INT(ai_random_jump_chance_d1000)
 TP_BODY_SET_INT(ai_resent_count)
 TP_BODY_SET_INT(ai_scent_distance)
 TP_BODY_SET_INT(ai_shove_chance_d1000)
@@ -1249,11 +1234,27 @@ TP_BODY_SET_INT(gfx_very_short_shadow_caster)
 TP_BODY_SET_INT(gfx_water)
 TP_BODY_SET_INT(health_hunger_pct)
 TP_BODY_SET_INT(health_starving_pct)
+TP_BODY_SET_INT(is_able_to_attack_generators)
+TP_BODY_SET_INT(is_able_to_break_down_doors)
+TP_BODY_SET_INT(is_able_to_break_out_of_webs)
 TP_BODY_SET_INT(is_able_to_change_levels)
+TP_BODY_SET_INT(is_able_to_collect_keys)
+TP_BODY_SET_INT(is_able_to_enchant_weapons)
 TP_BODY_SET_INT(is_able_to_fall)
 TP_BODY_SET_INT(is_able_to_fire_at)
+TP_BODY_SET_INT(is_able_to_jump)
+TP_BODY_SET_INT(is_able_to_jump_attack)
+TP_BODY_SET_INT(is_able_to_jump_attack_chance_d1000)
+TP_BODY_SET_INT(is_able_to_jump_distance)
+TP_BODY_SET_INT(is_able_to_jump_on_low_hp_chance_d1000)
+TP_BODY_SET_INT(is_able_to_jump_randomly_chance_d1000)
+TP_BODY_SET_INT(is_able_to_learn_skills)
+TP_BODY_SET_INT(is_able_to_open_doors)
 TP_BODY_SET_INT(is_able_to_see_in_the_dark)
+TP_BODY_SET_INT(is_able_to_see_through_doors)
+TP_BODY_SET_INT(is_able_to_shove)
 TP_BODY_SET_INT(is_able_to_tire)
+TP_BODY_SET_INT(is_able_to_walk_through_walls)
 TP_BODY_SET_INT(is_acid)
 TP_BODY_SET_INT(is_alive_on_end_of_anim)
 TP_BODY_SET_INT(is_always_hit)
@@ -1315,6 +1316,7 @@ TP_BODY_SET_INT(is_enchantstone)
 TP_BODY_SET_INT(is_engulfer)
 TP_BODY_SET_INT(is_ethereal)
 TP_BODY_SET_INT(is_ethereal_minion_generator)
+TP_BODY_SET_INT(is_exit_finder)
 TP_BODY_SET_INT(is_explosion)
 TP_BODY_SET_INT(is_fearless)
 TP_BODY_SET_INT(is_fire)
@@ -1337,6 +1339,7 @@ TP_BODY_SET_INT(is_intelligent)
 TP_BODY_SET_INT(is_interesting)
 TP_BODY_SET_INT(is_item)
 TP_BODY_SET_INT(is_item_carrier)
+TP_BODY_SET_INT(is_item_collector)
 TP_BODY_SET_INT(is_item_eater)
 TP_BODY_SET_INT(is_item_magical)
 TP_BODY_SET_INT(is_item_magical_eater)
@@ -1349,6 +1352,7 @@ TP_BODY_SET_INT(is_jelly_parent)
 TP_BODY_SET_INT(is_key)
 TP_BODY_SET_INT(is_laser)
 TP_BODY_SET_INT(is_lava)
+TP_BODY_SET_INT(is_level_explorer)
 TP_BODY_SET_INT(is_light_blocker)
 TP_BODY_SET_INT(is_living)
 TP_BODY_SET_INT(is_loggable)
@@ -1467,7 +1471,6 @@ TP_BODY_SET_INT(unused_flag20)
 TP_BODY_SET_INT(unused_flag21)
 TP_BODY_SET_INT(unused_flag22)
 TP_BODY_SET_INT(unused_flag23)
-TP_BODY_SET_INT(unused_flag24)
 TP_BODY_SET_INT(unused_flag25)
 TP_BODY_SET_INT(unused_flag3)
 TP_BODY_SET_INT(unused_flag30)

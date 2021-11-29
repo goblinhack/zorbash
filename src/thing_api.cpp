@@ -1047,10 +1047,16 @@ int Thing::is_jelly(void)
   return (tp()->is_jelly());
 }
 
-int Thing::ai_random_jump_chance_d1000(void)
+int Thing::is_able_to_jump_randomly_chance_d1000(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->ai_random_jump_chance_d1000());
+  return (tp()->is_able_to_jump_randomly_chance_d1000());
+}
+
+int Thing::is_able_to_jump_attack_chance_d1000(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->is_able_to_jump_attack_chance_d1000());
 }
 
 int Thing::is_able_to_jump_distance(void)
@@ -1341,10 +1347,10 @@ int Thing::unused_flag23(void)
   return (tp()->unused_flag23());
 }
 
-int Thing::unused_flag24(void)
+int Thing::is_able_to_jump_attack(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->unused_flag24());
+  return (tp()->is_able_to_jump_attack());
 }
 
 int Thing::unused_flag25(void)

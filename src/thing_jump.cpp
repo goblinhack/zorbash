@@ -10,6 +10,7 @@
 #include "my_sprintf.hpp"
 #include "my_sys.hpp"
 #include "my_thing.hpp"
+#include "my_vector_bounds_check.hpp"
 #include <math.h>
 
 float Thing::how_far_i_can_jump(void)
@@ -539,4 +540,27 @@ void Thing::jump_end(void)
   collision_check_do();
 
   get_infop()->last_failed_jump_at = point(-1, -1);
+}
+
+bool Thing::jump_attack(void)
+{
+  if (! is_able_to_jump_attack()) {
+    return false;
+  }
+
+  if (! maybe_aip()) {
+    return false;
+  }
+
+  if ((int) pcg_random_range(0, 1000) > tp()->is_able_to_jump_randomly_chance_d1000()) {
+    return false;
+  }
+
+  dbg("Try to jump attack");
+  TRACE_AND_INDENT();
+
+  auto p         = get_aip()->move_path;
+  auto jump_dist = pcg_random_range(0, p.size());
+
+  return try_to_jump_carefree(get(p, jump_dist));
 }

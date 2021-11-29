@@ -322,8 +322,8 @@ class Tp:
     def set_unused_flag23(self, value):
         my.tp_set_unused_flag23(self, value)
 
-    def set_unused_flag24(self, value):
-        my.tp_set_unused_flag24(self, value)
+    def set_is_able_to_jump_attack(self, value):
+        my.tp_set_is_able_to_jump_attack(self, value)
 
     def set_unused_flag25(self, value):
         my.tp_set_unused_flag25(self, value)
@@ -973,8 +973,11 @@ class Tp:
     def set_damage_bite_chance_d1000(self, value):
         my.tp_set_damage_bite_chance_d1000(self, value)
 
-    def set_ai_random_jump_chance_d1000(self, value):
-        my.tp_set_ai_random_jump_chance_d1000(self, value)
+    def set_is_able_to_jump_randomly_chance_d1000(self, value):
+        my.tp_set_is_able_to_jump_randomly_chance_d1000(self, value)
+
+    def set_is_able_to_jump_attack_chance_d1000(self, value):
+        my.tp_set_is_able_to_jump_attack_chance_d1000(self, value)
 
     def set_is_able_to_jump_on_low_hp_chance_d1000(self, value):
         my.tp_set_is_able_to_jump_on_low_hp_chance_d1000(self, value)

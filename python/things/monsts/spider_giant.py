@@ -27,9 +27,8 @@ def on_born(me, x, y):
 
 def tp_init(name, text_name):
     mytp = tp.Tp(name, text_name)
-    mytp.set_ai_aggression_level_pct(50)
+    mytp.set_ai_aggression_level_pct(100)
     mytp.set_ai_avoid_distance(5)
-    mytp.set_ai_random_jump_chance_d1000(20)
     mytp.set_ai_resent_count(10)
     mytp.set_ai_scent_distance(3)
     mytp.set_ai_vision_distance(5)
@@ -57,7 +56,10 @@ def tp_init(name, text_name):
     mytp.set_health_hunger_pct(95)
     mytp.set_health_initial_dice("4d15+4")
     mytp.set_is_able_to_fall(True)
+    mytp.set_is_able_to_jump_attack_chance_d1000(500)
+    mytp.set_is_able_to_jump_attack(True)
     mytp.set_is_able_to_jump_distance(2)
+    mytp.set_is_able_to_jump_randomly_chance_d1000(20)
     mytp.set_is_able_to_jump(True)
     mytp.set_is_able_to_see_in_the_dark(True)
     mytp.set_is_able_to_tire(True)

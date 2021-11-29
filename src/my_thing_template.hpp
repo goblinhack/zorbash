@@ -66,39 +66,13 @@ private:
 
   fsize _sz;
 
+  int _ai_aggression_level_pct {};
   int _ai_avoid_distance {};
-  int _is_able_to_attack_generators {};
-  int _is_able_to_break_down_doors {};
-  int _is_able_to_break_out_of_webs {};
-  int _is_able_to_collect_keys {};
   int _ai_detect_secret_doors {};
-  int _is_able_to_enchant_weapons {};
-  int _is_able_to_jump {};
-  int _is_able_to_jump_distance {};
-  int _is_able_to_jump_on_low_hp_chance_d1000 {};
-  int _is_able_to_learn_skills {};
-  int _is_able_to_open_doors {};
-  int _is_able_to_see_through_doors {};
-  int _is_able_to_shove {};
-  int _is_able_to_walk_through_walls {};
-  int _is_exit_finder {};
-  int _is_item_collector {};
-  int _is_level_explorer {};
   int _ai_obstacle {};
-  int _ai_random_jump_chance_d1000 {};
   int _ai_resent_count {};
   int _ai_scent_distance {};
   int _ai_shove_chance_d1000 {};
-  int _unused_chance1_d1000 {};
-  int _unused_chance2_d1000 {};
-  int _unused_chance3_d1000 {};
-  int _unused_chance4_d1000 {};
-  int _unused_chance5_d1000 {};
-  int _unused_chance6_d1000 {};
-  int _unused_chance7_d1000 {};
-  int _unused_chance8_d1000 {};
-  int _damage_melee_chance_d1000 {};
-  int _damage_bite_chance_d1000 {};
   int _ai_vision_distance {};
   int _ai_wanderer {};
   int _attack_blood {};
@@ -108,8 +82,6 @@ private:
   int _attack_living {};
   int _attack_lunge {};
   int _attack_meat {};
-  int _damage_poison_chance_d1000 {};
-  int _damage_necrosis_chance_d1000 {};
   int _attack_undead {};
   int _blast_max_radius {};
   int _blast_min_radius {};
@@ -124,22 +96,26 @@ private:
   int _collision_attack {};
   int _collision_check {};
   int _collision_hit_priority {};
-  int _enchant_level {};
-  int _enchant_max {};
+  int _damage_bite_chance_d1000 {};
+  int _damage_melee_chance_d1000 {};
+  int _damage_necrosis_chance_d1000 {};
+  int _damage_poison_chance_d1000 {};
   int _damage_received_doubled_from_acid {};
   int _damage_received_doubled_from_fire {};
-  int _damage_received_doubled_from_poison {};
   int _damage_received_doubled_from_necrosis {};
+  int _damage_received_doubled_from_poison {};
   int _damage_received_doubled_from_water {};
+  int _enchant_level {};
+  int _enchant_max {};
   int _environ_avoids_acid {};
   int _environ_avoids_fire {};
-  int _environ_avoids_poison {};
   int _environ_avoids_necrosis {};
+  int _environ_avoids_poison {};
   int _environ_avoids_water {};
   int _environ_prefers_acid {};
   int _environ_prefers_fire {};
-  int _environ_prefers_poison {};
   int _environ_prefers_necrosis {};
+  int _environ_prefers_poison {};
   int _environ_prefers_spiderwebs {};
   int _environ_prefers_water {};
   int _gfx_an_animation_only {};
@@ -169,10 +145,27 @@ private:
   int _health_starving_pct {};
   int _internal_has_dir_anim {};
   int _internal_has_hp_anim {};
+  int _is_able_to_attack_generators {};
+  int _is_able_to_break_down_doors {};
+  int _is_able_to_break_out_of_webs {};
   int _is_able_to_change_levels {};
+  int _is_able_to_collect_keys {};
+  int _is_able_to_enchant_weapons {};
   int _is_able_to_fall {};
   int _is_able_to_fire_at {};
+  int _is_able_to_jump {};
+  int _is_able_to_jump_attack {};
+  int _is_able_to_jump_distance {};
+  int _is_able_to_jump_on_low_hp_chance_d1000 {};
+  int _is_able_to_jump_randomly_chance_d1000 {};
+  int _is_able_to_jump_attack_chance_d1000 {};
+  int _is_able_to_learn_skills {};
+  int _is_able_to_open_doors {};
+  int _is_able_to_see_in_the_dark {};
+  int _is_able_to_see_through_doors {};
+  int _is_able_to_shove {};
   int _is_able_to_tire {};
+  int _is_able_to_walk_through_walls {};
   int _is_acid {};
   int _is_alive_on_end_of_anim {};
   int _is_always_hit {};
@@ -234,6 +227,7 @@ private:
   int _is_engulfer {};
   int _is_ethereal {};
   int _is_ethereal_minion_generator {};
+  int _is_exit_finder {};
   int _is_explosion {};
   int _is_fearless {};
   int _is_fire {};
@@ -243,6 +237,7 @@ private:
   int _is_foilage {};
   int _is_food {};
   int _is_food_eater {};
+  int _is_gfx_anim_synced_with_owner {};
   int _is_glass {};
   int _is_gold {};
   int _is_hazard {};
@@ -256,6 +251,7 @@ private:
   int _is_item {};
   int _is_item_carrier {};
   int _is_item_carrier0 {};
+  int _is_item_collector {};
   int _is_item_eater {};
   int _is_item_magical {};
   int _is_item_magical_eater {};
@@ -268,6 +264,7 @@ private:
   int _is_key {};
   int _is_laser {};
   int _is_lava {};
+  int _is_level_explorer {};
   int _is_light_blocker {};
   int _is_living {};
   int _is_loggable {};
@@ -279,6 +276,7 @@ private:
   int _is_monst {};
   int _is_moveable {};
   int _is_msg {};
+  int _is_necrotic_danger_level {};
   int _is_no_tile {};
   int _is_obs_destructable {};
   int _is_obs_wall_or_door {};
@@ -286,7 +284,6 @@ private:
   int _is_organic {};
   int _is_player {};
   int _is_poisonous_danger_level {};
-  int _is_necrotic_danger_level {};
   int _is_potion {};
   int _is_potion_eater {};
   int _is_projectile {};
@@ -344,9 +341,9 @@ private:
   int _range_max {};
   int _rarity {};
   int _stamina {};
+  int _stat_armor_class {};
   int _stat_attack_bonus {};
   int _stat_constitution {};
-  int _stat_armor_class {};
   int _stat_dexterity {};
   int _stats02 {};
   int _stats03 {};
@@ -362,6 +359,14 @@ private:
   int _stats17 {};
   int _stat_strength {};
   int _throw_distance {};
+  int _unused_chance1_d1000 {};
+  int _unused_chance2_d1000 {};
+  int _unused_chance3_d1000 {};
+  int _unused_chance4_d1000 {};
+  int _unused_chance5_d1000 {};
+  int _unused_chance6_d1000 {};
+  int _unused_chance7_d1000 {};
+  int _unused_chance8_d1000 {};
   int _unused_flag1 {};
   int _unused_flag10 {};
   int _unused_flag11 {};
@@ -378,11 +383,7 @@ private:
   int _unused_flag21 {};
   int _unused_flag22 {};
   int _unused_flag23 {};
-  int _unused_flag24 {};
   int _unused_flag25 {};
-  int _ai_aggression_level_pct {};
-  int _is_able_to_see_in_the_dark {};
-  int _is_gfx_anim_synced_with_owner {};
   int _unused_flag3 {};
   int _unused_flag30 {};
   int _unused_flag4 {};
@@ -591,24 +592,7 @@ public:
   int ai_aggression_level_pct(void) const { return _ai_aggression_level_pct; }
   int ai_avoid_distance(void) const { return _ai_avoid_distance; }
   int ai_detect_secret_doors(void) const { return _ai_detect_secret_doors; }
-  int is_able_to_attack_generators(void) const { return _is_able_to_attack_generators; }
-  int is_able_to_break_down_doors(void) const { return _is_able_to_break_down_doors; }
-  int is_able_to_break_out_of_webs(void) const { return _is_able_to_break_out_of_webs; }
-  int is_able_to_collect_keys(void) const { return _is_able_to_collect_keys; }
-  int is_able_to_enchant_weapons(void) const { return _is_able_to_enchant_weapons; }
-  int is_able_to_jump_distance(void) const { return _is_able_to_jump_distance; }
-  int is_able_to_jump_on_low_hp_chance_d1000(void) const { return _is_able_to_jump_on_low_hp_chance_d1000; }
-  int is_able_to_jump(void) const { return _is_able_to_jump; }
-  int is_able_to_learn_skills(void) const { return _is_able_to_learn_skills; }
-  int is_able_to_open_doors(void) const { return _is_able_to_open_doors; }
-  int is_able_to_see_through_doors(void) const { return _is_able_to_see_through_doors; }
-  int is_able_to_shove(void) const { return _is_able_to_shove; }
-  int is_able_to_walk_through_walls(void) const { return _is_able_to_walk_through_walls; }
-  int is_exit_finder(void) const { return _is_exit_finder; }
-  int is_item_collector(void) const { return _is_item_collector; }
-  int is_level_explorer(void) const { return _is_level_explorer; }
   int ai_obstacle(void) const { return _ai_obstacle; }
-  int ai_random_jump_chance_d1000(void) const { return _ai_random_jump_chance_d1000; }
   int ai_resent_count(void) const { return _ai_resent_count; }
   int ai_scent_distance(void) const { return _ai_scent_distance; }
   int ai_shove_chance_d1000(void) const { return _ai_shove_chance_d1000; }
@@ -635,12 +619,12 @@ public:
   int collision_hit_priority(void) const { return _collision_hit_priority; }
   int damage_bite_chance_d1000(void) const { return _damage_bite_chance_d1000; }
   int damage_melee_chance_d1000(void) const { return _damage_melee_chance_d1000; }
-  int damage_poison_chance_d1000(void) const { return _damage_poison_chance_d1000; }
   int damage_necrosis_chance_d1000(void) const { return _damage_necrosis_chance_d1000; }
+  int damage_poison_chance_d1000(void) const { return _damage_poison_chance_d1000; }
   int damage_received_doubled_from_acid(void) const { return _damage_received_doubled_from_acid; }
   int damage_received_doubled_from_fire(void) const { return _damage_received_doubled_from_fire; }
-  int damage_received_doubled_from_poison(void) const { return _damage_received_doubled_from_poison; }
   int damage_received_doubled_from_necrosis(void) const { return _damage_received_doubled_from_necrosis; }
+  int damage_received_doubled_from_poison(void) const { return _damage_received_doubled_from_poison; }
   int damage_received_doubled_from_water(void) const { return _damage_received_doubled_from_water; }
   int enchant_level(void) const { return _enchant_level; }
   int enchant_max(void) const { return _enchant_max; }
@@ -682,11 +666,27 @@ public:
   int health_starving_pct(void) const { return _health_starving_pct; }
   int internal_has_dir_anim(void) const { return _internal_has_dir_anim; }
   int internal_has_hp_anim(void) const { return _internal_has_hp_anim; }
+  int is_able_to_attack_generators(void) const { return _is_able_to_attack_generators; }
+  int is_able_to_break_down_doors(void) const { return _is_able_to_break_down_doors; }
+  int is_able_to_break_out_of_webs(void) const { return _is_able_to_break_out_of_webs; }
   int is_able_to_change_levels(void) const { return _is_able_to_change_levels; }
+  int is_able_to_collect_keys(void) const { return _is_able_to_collect_keys; }
+  int is_able_to_enchant_weapons(void) const { return _is_able_to_enchant_weapons; }
   int is_able_to_fall(void) const { return _is_able_to_fall; }
   int is_able_to_fire_at(void) const { return _is_able_to_fire_at; }
+  int is_able_to_jump_attack_chance_d1000(void) const { return _is_able_to_jump_attack_chance_d1000; }
+  int is_able_to_jump_attack(void) const { return _is_able_to_jump_attack; }
+  int is_able_to_jump_distance(void) const { return _is_able_to_jump_distance; }
+  int is_able_to_jump_on_low_hp_chance_d1000(void) const { return _is_able_to_jump_on_low_hp_chance_d1000; }
+  int is_able_to_jump_randomly_chance_d1000(void) const { return _is_able_to_jump_randomly_chance_d1000; }
+  int is_able_to_jump(void) const { return _is_able_to_jump; }
+  int is_able_to_learn_skills(void) const { return _is_able_to_learn_skills; }
+  int is_able_to_open_doors(void) const { return _is_able_to_open_doors; }
   int is_able_to_see_in_the_dark(void) const { return _is_able_to_see_in_the_dark; }
+  int is_able_to_see_through_doors(void) const { return _is_able_to_see_through_doors; }
+  int is_able_to_shove(void) const { return _is_able_to_shove; }
   int is_able_to_tire(void) const { return _is_able_to_tire; }
+  int is_able_to_walk_through_walls(void) const { return _is_able_to_walk_through_walls; }
   int is_acid(void) const { return _is_acid; }
   int is_alive_on_end_of_anim(void) const { return _is_alive_on_end_of_anim; }
   int is_always_hit(void) const { return _is_always_hit; }
@@ -748,6 +748,7 @@ public:
   int is_engulfer(void) const { return _is_engulfer; }
   int is_ethereal_minion_generator(void) const { return _is_ethereal_minion_generator; }
   int is_ethereal(void) const { return _is_ethereal; }
+  int is_exit_finder(void) const { return _is_exit_finder; }
   int is_explosion(void) const { return _is_explosion; }
   int is_fearless(void) const { return _is_fearless; }
   int is_fire(void) const { return _is_fire; }
@@ -769,6 +770,7 @@ public:
   int is_intelligent(void) const { return _is_intelligent; }
   int is_interesting(void) const { return _is_interesting; }
   int is_item_carrier(void) const { return _is_item_carrier; }
+  int is_item_collector(void) const { return _is_item_collector; }
   int is_item_eater(void) const { return _is_item_eater; }
   int is_item_magical_eater(void) const { return _is_item_magical_eater; }
   int is_item_magical(void) const { return _is_item_magical; }
@@ -782,6 +784,7 @@ public:
   int is_key(void) const { return _is_key; }
   int is_laser(void) const { return _is_laser; }
   int is_lava(void) const { return _is_lava; }
+  int is_level_explorer(void) const { return _is_level_explorer; }
   int is_light_blocker(void) const { return _is_light_blocker; }
   int is_living(void) const { return _is_living; }
   int is_loggable(void) const { return _is_loggable; }
@@ -899,7 +902,6 @@ public:
   int unused_flag21(void) const { return _unused_flag21; }
   int unused_flag22(void) const { return _unused_flag22; }
   int unused_flag23(void) const { return _unused_flag23; }
-  int unused_flag24(void) const { return _unused_flag24; }
   int unused_flag25(void) const { return _unused_flag25; }
   int unused_flag2(void) const { return _unused_flag2; }
   int unused_flag30(void) const { return _unused_flag30; }
@@ -915,24 +917,7 @@ public:
   void set_ai_aggression_level_pct(int v) { _ai_aggression_level_pct = v; }
   void set_ai_avoid_distance(int v) { _ai_avoid_distance = v; }
   void set_ai_detect_secret_doors(int v) { _ai_detect_secret_doors = v; }
-  void set_is_able_to_attack_generators(int v) { _is_able_to_attack_generators = v; }
-  void set_is_able_to_break_down_doors(int v) { _is_able_to_break_down_doors = v; }
-  void set_is_able_to_break_out_of_webs(int v) { _is_able_to_break_out_of_webs = v; }
-  void set_is_able_to_collect_keys(int v) { _is_able_to_collect_keys = v; }
-  void set_is_able_to_enchant_weapons(int v) { _is_able_to_enchant_weapons = v; }
-  void set_is_able_to_jump_distance(int v) { _is_able_to_jump_distance = v; }
-  void set_is_able_to_jump(int v) { _is_able_to_jump = v; }
-  void set_is_able_to_jump_on_low_hp_chance_d1000(int v) { _is_able_to_jump_on_low_hp_chance_d1000 = v; }
-  void set_is_able_to_learn_skills(int v) { _is_able_to_learn_skills = v; }
-  void set_is_able_to_open_doors(int v) { _is_able_to_open_doors = v; }
-  void set_is_able_to_see_through_doors(int v) { _is_able_to_see_through_doors = v; }
-  void set_is_able_to_shove(int v) { _is_able_to_shove = v; }
-  void set_is_able_to_walk_through_walls(int v) { _is_able_to_walk_through_walls = v; }
-  void set_is_exit_finder(int v) { _is_exit_finder = v; }
-  void set_is_item_collector(int v) { _is_item_collector = v; }
-  void set_is_level_explorer(int v) { _is_level_explorer = v; }
   void set_ai_obstacle(int v) { _ai_obstacle = v; }
-  void set_ai_random_jump_chance_d1000(int v) { _ai_random_jump_chance_d1000 = v; }
   void set_ai_resent_count(int v) { _ai_resent_count = v; }
   void set_ai_scent_distance(int v) { _ai_scent_distance = v; }
   void set_ai_shove_chance_d1000(int v) { _ai_shove_chance_d1000 = v; }
@@ -960,12 +945,12 @@ public:
   void set_collision_hit_priority(int v) { _collision_hit_priority = v; }
   void set_damage_bite_chance_d1000(int v) { _damage_bite_chance_d1000 = v; }
   void set_damage_melee_chance_d1000(int v) { _damage_melee_chance_d1000 = v; }
-  void set_damage_poison_chance_d1000(int v) { _damage_poison_chance_d1000 = v; }
   void set_damage_necrosis_chance_d1000(int v) { _damage_necrosis_chance_d1000 = v; }
+  void set_damage_poison_chance_d1000(int v) { _damage_poison_chance_d1000 = v; }
   void set_damage_received_doubled_from_acid(int v) { _damage_received_doubled_from_acid = v; }
   void set_damage_received_doubled_from_fire(int v) { _damage_received_doubled_from_fire = v; }
-  void set_damage_received_doubled_from_poison(int v) { _damage_received_doubled_from_poison = v; }
   void set_damage_received_doubled_from_necrosis(int v) { _damage_received_doubled_from_necrosis = v; }
+  void set_damage_received_doubled_from_poison(int v) { _damage_received_doubled_from_poison = v; }
   void set_damage_received_doubled_from_water(int v) { _damage_received_doubled_from_water = v; }
   void set_enchant_level(int v) { _enchant_level = v; }
   void set_enchant_max(int v) { _enchant_max = v; }
@@ -1009,11 +994,27 @@ public:
   void set_health_starving_pct(int v) { _health_starving_pct = v; }
   void set_internal_has_dir_anim(int v) { _internal_has_dir_anim = v; }
   void set_internal_has_hp_anim(int v) { _internal_has_hp_anim = v; }
+  void set_is_able_to_attack_generators(int v) { _is_able_to_attack_generators = v; }
+  void set_is_able_to_break_down_doors(int v) { _is_able_to_break_down_doors = v; }
+  void set_is_able_to_break_out_of_webs(int v) { _is_able_to_break_out_of_webs = v; }
   void set_is_able_to_change_levels(int v) { _is_able_to_change_levels = v; }
+  void set_is_able_to_collect_keys(int v) { _is_able_to_collect_keys = v; }
+  void set_is_able_to_enchant_weapons(int v) { _is_able_to_enchant_weapons = v; }
   void set_is_able_to_fall(int v) { _is_able_to_fall = v; }
   void set_is_able_to_fire_at(int v) { _is_able_to_fire_at = v; }
+  void set_is_able_to_jump_attack_chance_d1000(int v) { _is_able_to_jump_attack_chance_d1000 = v; }
+  void set_is_able_to_jump_attack(int v) { _is_able_to_jump_attack = v; }
+  void set_is_able_to_jump_distance(int v) { _is_able_to_jump_distance = v; }
+  void set_is_able_to_jump(int v) { _is_able_to_jump = v; }
+  void set_is_able_to_jump_on_low_hp_chance_d1000(int v) { _is_able_to_jump_on_low_hp_chance_d1000 = v; }
+  void set_is_able_to_jump_randomly_chance_d1000(int v) { _is_able_to_jump_randomly_chance_d1000 = v; }
+  void set_is_able_to_learn_skills(int v) { _is_able_to_learn_skills = v; }
+  void set_is_able_to_open_doors(int v) { _is_able_to_open_doors = v; }
   void set_is_able_to_see_in_the_dark(int v) { _is_able_to_see_in_the_dark = v; }
+  void set_is_able_to_see_through_doors(int v) { _is_able_to_see_through_doors = v; }
+  void set_is_able_to_shove(int v) { _is_able_to_shove = v; }
   void set_is_able_to_tire(int v) { _is_able_to_tire = v; }
+  void set_is_able_to_walk_through_walls(int v) { _is_able_to_walk_through_walls = v; }
   void set_is_acid(int v) { _is_acid = v; }
   void set_is_alive_on_end_of_anim(int v) { _is_alive_on_end_of_anim = v; }
   void set_is_always_hit(int v) { _is_always_hit = v; }
@@ -1075,6 +1076,7 @@ public:
   void set_is_engulfer(int v) { _is_engulfer = v; }
   void set_is_ethereal(int v) { _is_ethereal = v; }
   void set_is_ethereal_minion_generator(int v) { _is_ethereal_minion_generator = v; }
+  void set_is_exit_finder(int v) { _is_exit_finder = v; }
   void set_is_explosion(int v) { _is_explosion = v; }
   void set_is_fearless(int v) { _is_fearless = v; }
   void set_is_fire(int v) { _is_fire = v; }
@@ -1096,6 +1098,7 @@ public:
   void set_is_intelligent(int v) { _is_intelligent = v; }
   void set_is_interesting(int v) { _is_interesting = v; }
   void set_is_item_carrier(int v) { _is_item_carrier = v; }
+  void set_is_item_collector(int v) { _is_item_collector = v; }
   void set_is_item_eater(int v) { _is_item_eater = v; }
   void set_is_item(int v) { _is_item = v; }
   void set_is_item_magical_eater(int v) { _is_item_magical_eater = v; }
@@ -1109,6 +1112,7 @@ public:
   void set_is_key(int v) { _is_key = v; }
   void set_is_laser(int v) { _is_laser = v; }
   void set_is_lava(int v) { _is_lava = v; }
+  void set_is_level_explorer(int v) { _is_level_explorer = v; }
   void set_is_light_blocker(int v) { _is_light_blocker = v; }
   void set_is_living(int v) { _is_living = v; }
   void set_is_loggable(int v) { _is_loggable = v; }
@@ -1267,7 +1271,6 @@ public:
   void set_unused_flag21(int v) { _unused_flag21 = v; }
   void set_unused_flag22(int v) { _unused_flag22 = v; }
   void set_unused_flag23(int v) { _unused_flag23 = v; }
-  void set_unused_flag24(int v) { _unused_flag24 = v; }
   void set_unused_flag25(int v) { _unused_flag25 = v; }
   void set_unused_flag2(int v) { _unused_flag2 = v; }
   void set_unused_flag30(int v) { _unused_flag30 = v; }

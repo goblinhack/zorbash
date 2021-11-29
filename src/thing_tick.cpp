@@ -182,7 +182,7 @@ void Thing::achieve_goals_in_life(void)
     }
 
     if (is_able_to_jump()) {
-      if ((int) pcg_random_range(0, 1000) < tp()->ai_random_jump_chance_d1000()) {
+      if ((int) pcg_random_range(0, 1000) < tp()->is_able_to_jump_randomly_chance_d1000()) {
         dbg("Try to randomly jump");
         if (! collision_obstacle(level->player)) {
           if (try_to_jump_towards_player()) {
