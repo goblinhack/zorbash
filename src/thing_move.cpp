@@ -256,8 +256,24 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
             TOPCON("You cannot move!");
             game->tick_begin("trapped in something sticky");
           }
+          msg(string_sprintf("%%fg=red$!"));
         }
         lunge(future_pos);
+
+        //
+        // Shake the web
+        //
+        FOR_ALL_THINGS(level, t, mid_at.x, mid_at.y)
+        {
+          if (t->is_spiderweb()) {
+            t->wobble(10);
+          }
+          if (t->is_player() || t->is_monst()) {
+            t->wobble(20);
+          }
+        }
+        FOR_ALL_THINGS_END()
+
         incr_stuck_count();
         return false;
       }
