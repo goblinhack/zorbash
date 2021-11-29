@@ -316,14 +316,17 @@ class Tp:
     def set_unused_flag21(self, value):
         my.tp_set_unused_flag21(self, value)
 
-    def set_unused_flag22(self, value):
-        my.tp_set_unused_flag22(self, value)
+    def set_is_able_to_jump_without_tiring(self, value):
+        my.tp_set_is_able_to_jump_without_tiring(self, value)
 
-    def set_unused_flag23(self, value):
-        my.tp_set_unused_flag23(self, value)
+    def set_is_spider(self, value):
+        my.tp_set_is_spider(self, value)
 
     def set_is_able_to_jump_attack(self, value):
         my.tp_set_is_able_to_jump_attack(self, value)
+
+    def set_is_able_to_jump_onto(self, value):
+        my.tp_set_is_able_to_jump_onto(self, value)
 
     def set_unused_flag25(self, value):
         my.tp_set_unused_flag25(self, value)
@@ -979,6 +982,9 @@ class Tp:
     def set_is_able_to_jump_attack_chance_d1000(self, value):
         my.tp_set_is_able_to_jump_attack_chance_d1000(self, value)
 
+    def set_is_able_to_jump_onto_chance_d1000(self, value):
+        my.tp_set_is_able_to_jump_onto_chance_d1000(self, value)
+
     def set_is_able_to_jump_on_low_hp_chance_d1000(self, value):
         my.tp_set_is_able_to_jump_on_low_hp_chance_d1000(self, value)
 
@@ -1147,8 +1153,6 @@ class Tp:
     def set_stat_armor_class(self, value):
         my.tp_set_stat_armor_class(self, value)
 
-    def set_ai_scent_distance(self, value):
-        my.tp_set_ai_scent_distance(self, value)
 
     def set_is_ripple(self, value):
         my.tp_set_is_ripple(self, value)

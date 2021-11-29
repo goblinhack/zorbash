@@ -241,7 +241,7 @@ bool Thing::ai_on_fire_choose_target(point &nh)
     auto  got_one = false;
 
     while (tries--) {
-      auto target = get_random_scent_target();
+      auto target = get_random_target();
       if (level->is_shallow_water(target)) {
         if (distance(start, target) < closest) {
           best    = target;

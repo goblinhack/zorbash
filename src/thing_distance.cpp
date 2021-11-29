@@ -10,9 +10,9 @@
 #include "my_sys.hpp"
 #include "my_thing.hpp"
 
-point Thing::get_random_scent_target(void)
+point Thing::get_random_target(void)
 {
-  int16_t d     = ai_scent_distance();
+  int16_t d     = ai_vision_distance();
   auto    tries = 100;
 
   if (is_player()) {

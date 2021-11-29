@@ -5,7 +5,6 @@ def tp_init(name, text_name):
     mytp = tp.Tp(name, text_name)
     mytp.set_ai_aggression_level_pct(100)
     mytp.set_ai_resent_count(100)
-    mytp.set_ai_scent_distance(40)
     mytp.set_ai_vision_distance(7)
     mytp.set_ai_wanderer(True)
     mytp.set_attack_humanoid(True)

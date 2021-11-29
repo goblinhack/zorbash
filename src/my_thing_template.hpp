@@ -71,7 +71,6 @@ private:
   int _ai_detect_secret_doors {};
   int _ai_obstacle {};
   int _ai_resent_count {};
-  int _ai_scent_distance {};
   int _ai_shove_chance_d1000 {};
   int _ai_vision_distance {};
   int _ai_wanderer {};
@@ -155,10 +154,12 @@ private:
   int _is_able_to_fire_at {};
   int _is_able_to_jump {};
   int _is_able_to_jump_attack {};
+  int _is_able_to_jump_onto {};
   int _is_able_to_jump_distance {};
   int _is_able_to_jump_on_low_hp_chance_d1000 {};
   int _is_able_to_jump_randomly_chance_d1000 {};
   int _is_able_to_jump_attack_chance_d1000 {};
+  int _is_able_to_jump_onto_chance_d1000 {};
   int _is_able_to_learn_skills {};
   int _is_able_to_open_doors {};
   int _is_able_to_see_in_the_dark {};
@@ -381,8 +382,8 @@ private:
   int _unused_flag2 {};
   int _unused_flag20 {};
   int _unused_flag21 {};
-  int _unused_flag22 {};
-  int _unused_flag23 {};
+  int _is_able_to_jump_without_tiring {};
+  int _is_spider {};
   int _unused_flag25 {};
   int _unused_flag3 {};
   int _unused_flag30 {};
@@ -594,7 +595,6 @@ public:
   int ai_detect_secret_doors(void) const { return _ai_detect_secret_doors; }
   int ai_obstacle(void) const { return _ai_obstacle; }
   int ai_resent_count(void) const { return _ai_resent_count; }
-  int ai_scent_distance(void) const { return _ai_scent_distance; }
   int ai_shove_chance_d1000(void) const { return _ai_shove_chance_d1000; }
   int ai_vision_distance(void) const { return _ai_vision_distance; }
   int ai_wanderer(void) const { return _ai_wanderer; }
@@ -676,6 +676,8 @@ public:
   int is_able_to_fire_at(void) const { return _is_able_to_fire_at; }
   int is_able_to_jump_attack_chance_d1000(void) const { return _is_able_to_jump_attack_chance_d1000; }
   int is_able_to_jump_attack(void) const { return _is_able_to_jump_attack; }
+  int is_able_to_jump_onto_chance_d1000(void) const { return _is_able_to_jump_onto_chance_d1000; }
+  int is_able_to_jump_onto(void) const { return _is_able_to_jump_onto; }
   int is_able_to_jump_distance(void) const { return _is_able_to_jump_distance; }
   int is_able_to_jump_on_low_hp_chance_d1000(void) const { return _is_able_to_jump_on_low_hp_chance_d1000; }
   int is_able_to_jump_randomly_chance_d1000(void) const { return _is_able_to_jump_randomly_chance_d1000; }
@@ -900,8 +902,8 @@ public:
   int unused_flag1(void) const { return _unused_flag1; }
   int unused_flag20(void) const { return _unused_flag20; }
   int unused_flag21(void) const { return _unused_flag21; }
-  int unused_flag22(void) const { return _unused_flag22; }
-  int unused_flag23(void) const { return _unused_flag23; }
+  int is_able_to_jump_without_tiring(void) const { return _is_able_to_jump_without_tiring; }
+  int is_spider(void) const { return _is_spider; }
   int unused_flag25(void) const { return _unused_flag25; }
   int unused_flag2(void) const { return _unused_flag2; }
   int unused_flag30(void) const { return _unused_flag30; }
@@ -919,7 +921,6 @@ public:
   void set_ai_detect_secret_doors(int v) { _ai_detect_secret_doors = v; }
   void set_ai_obstacle(int v) { _ai_obstacle = v; }
   void set_ai_resent_count(int v) { _ai_resent_count = v; }
-  void set_ai_scent_distance(int v) { _ai_scent_distance = v; }
   void set_ai_shove_chance_d1000(int v) { _ai_shove_chance_d1000 = v; }
   void set_ai_vision_distance(int v) { _ai_vision_distance = v; }
   void set_ai_wanderer(int v) { _ai_wanderer = v; }
@@ -1004,6 +1005,8 @@ public:
   void set_is_able_to_fire_at(int v) { _is_able_to_fire_at = v; }
   void set_is_able_to_jump_attack_chance_d1000(int v) { _is_able_to_jump_attack_chance_d1000 = v; }
   void set_is_able_to_jump_attack(int v) { _is_able_to_jump_attack = v; }
+  void set_is_able_to_jump_onto_chance_d1000(int v) { _is_able_to_jump_onto_chance_d1000 = v; }
+  void set_is_able_to_jump_onto(int v) { _is_able_to_jump_onto = v; }
   void set_is_able_to_jump_distance(int v) { _is_able_to_jump_distance = v; }
   void set_is_able_to_jump(int v) { _is_able_to_jump = v; }
   void set_is_able_to_jump_on_low_hp_chance_d1000(int v) { _is_able_to_jump_on_low_hp_chance_d1000 = v; }
@@ -1269,8 +1272,8 @@ public:
   void set_unused_flag1(int v) { _unused_flag1 = v; }
   void set_unused_flag20(int v) { _unused_flag20 = v; }
   void set_unused_flag21(int v) { _unused_flag21 = v; }
-  void set_unused_flag22(int v) { _unused_flag22 = v; }
-  void set_unused_flag23(int v) { _unused_flag23 = v; }
+  void set_is_able_to_jump_without_tiring(int v) { _is_able_to_jump_without_tiring = v; }
+  void set_is_spider(int v) { _is_spider = v; }
   void set_unused_flag25(int v) { _unused_flag25 = v; }
   void set_unused_flag2(int v) { _unused_flag2 = v; }
   void set_unused_flag30(int v) { _unused_flag30 = v; }

@@ -19,7 +19,6 @@ def tp_init(name, text_name):
     mytp.set_ai_aggression_level_pct(80)
     mytp.set_ai_avoid_distance(3)
     mytp.set_ai_resent_count(10)
-    mytp.set_ai_scent_distance(5)
     mytp.set_ai_vision_distance(3)
     mytp.set_ai_wanderer(True)
     mytp.set_attack_blood(True)

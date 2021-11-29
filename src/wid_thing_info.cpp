@@ -3,6 +3,7 @@
 // See the README.md file for license info.
 //
 
+#include "my_backtrace.hpp"
 #include "my_game.hpp"
 #include "my_globals.hpp"
 #include "my_monst.hpp"
@@ -10,7 +11,6 @@
 #include "my_sys.hpp"
 #include "my_thing.hpp"
 #include "my_tile.hpp"
-#include "my_backtrace.hpp"
 #include "my_ui.hpp"
 #include "my_wid_bag.hpp"
 #include "my_wid_botcon.hpp"

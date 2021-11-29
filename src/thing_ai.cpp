@@ -355,7 +355,7 @@ bool Thing::ai_create_path_to_single_goal(int minx, int miny, int maxx, int maxy
     } else {
       aip->move_path = new_move_path;
 
-      if (jump_attack()) {
+      if (jump_attack(goal.what)) {
         return true;
       }
 
@@ -527,6 +527,13 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
           continue;
         }
 
+        //
+        // Don't look too far beyond where we can go
+        //
+        if (too_far_from_minion_owner(p, ai_vision_distance())) {
+          continue;
+        }
+
         if (! get(aip->can_see_ever.can_see, p.x, p.y)) {
           continue;
         }
@@ -657,8 +664,8 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
   }
 
 #if 0
-  if (is_player()) {
-    printf("\nrobot search grown:\n");
+  if (is_spider()) {
+    con("This is what I can see:");
     for (int y = 0; y < MAP_HEIGHT; y++) {
       for (int x = 0; x < MAP_WIDTH; x++) {
         if ((x == (int) mid_at.x) && (y == (int) mid_at.y)) {
@@ -718,7 +725,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
         // Ignore interruptions too far away
         //
         auto  dist     = distance(mid_at, point(x, y));
-        float max_dist = ai_scent_distance();
+        float max_dist = ai_vision_distance();
         if (dist > max_dist) {
           continue;
         }
@@ -796,6 +803,8 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
 
       FOR_ALL_THINGS_THAT_INTERACT(level, it, p.x, p.y)
       {
+        AI_LOG("", "Can see", it);
+
         if (it->is_changing_level || it->is_hidden || it->is_falling || it->is_jumping) {
           continue;
         }
@@ -821,8 +830,6 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
         if (it->is_minion() && (it->get_top_minion_owner() == get_top_minion_owner())) {
           continue;
         }
-
-        // AI_LOG("", "Can see", it);
 
         auto goal_penalty = get_goal_penalty(it);
 
@@ -893,7 +900,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
 
         if (! it->is_dead) {
           auto  dist     = distance(mid_at, it->mid_at);
-          float max_dist = ai_scent_distance();
+          float max_dist = ai_vision_distance();
 
           //
           // If we can see an enemy, get them! If the monster is not lit
@@ -1030,6 +1037,13 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
       continue;
     }
     if (p.y < MAP_BORDER_ROCK) {
+      continue;
+    }
+
+    //
+    // Don't look too far beyond where we can go
+    //
+    if (too_far_from_minion_owner(p, ai_vision_distance())) {
       continue;
     }
 
@@ -1189,13 +1203,13 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
   }
 
 #if 0
-  if (is_player()) {
-    log("Search type %d", search_type);
+  if (is_spider()) {
+    con("This is what I am searching (type %d):", search_type);
     for (int y = 0; y < MAP_HEIGHT; y++) {
       std::string s;
       for (int x = 0; x < MAP_WIDTH; x++) {
         if ((x == (int) mid_at.x) && (y == (int) mid_at.y)) {
-          if (get(aip->can_see_ever.can_see, x, y)) {
+          if (get(get_aip()->can_see_ever.can_see, x, y)) {
             s += "* ";
           } else {
             s += "o ";
@@ -1229,9 +1243,9 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
             s += " ";
           }
         }
-        if (get(aip->can_see_currently.can_see, x, y)) {
+        if (get(get_aip()->can_see_currently.can_see, x, y)) {
           s += ".";
-        } else if (get(aip->can_see_ever.can_see, x, y)) {
+        } else if (get(get_aip()->can_see_ever.can_see, x, y)) {
           s += ",";
         } else {
           s += " ";
@@ -1464,7 +1478,7 @@ bool Thing::ai_tick(bool recursing)
   // Set up the extent of the AI, choosing smaller areas for monsters for
   // speed.
   //
-  const float dx = ai_scent_distance();
+  const float dx = ai_vision_distance();
   const float dy = dx;
 
   int minx = std::max(0, (int) (mid_at.x - dx));
@@ -1531,8 +1545,10 @@ bool Thing::ai_tick(bool recursing)
   }
 
 #if 0
-  if (is_player()) {
-    con("Can see fov:");
+  if (is_spider()) {
+    con("This is my field of view:");
+    con("  .  - can see currently");
+    con("  ,  - have seen ever");
     for (int y = 0; y < MAP_HEIGHT; y++) {
       for (int x = 0; x < MAP_WIDTH; x++) {
         if ((x == (int) mid_at.x) && (y == (int) mid_at.y)) {
@@ -1819,6 +1835,18 @@ bool Thing::ai_tick(bool recursing)
         }
 
         //
+        // If going somewhere, continue
+        //
+        if (aip->wander_target != point(0, 0)) {
+          if (pcg_random_range(0, 100) < 50) {
+            dbg("Try to continue wander");
+            if (ai_wander()) {
+              return true;
+            }
+          }
+        }
+
+        //
         // If nothing to do, might as well rest. If there is a point.
         //
         auto rest = true;
@@ -1910,6 +1938,7 @@ bool Thing::ai_tick(bool recursing)
         //
         // If resting, check if we are rested enough.
         //
+        topcon("h %d/%d s %d/%d", get_health(), get_health_max(), get_stamina(), get_stamina_max());
         if ((get_health() >= (get_health_max() / 4) * 3) && (get_stamina() >= (get_stamina_max() / 4) * 3)) {
           AI_LOG("Rested enough. Back to work.");
           if (is_player()) {
@@ -2144,21 +2173,6 @@ void Thing::ai_get_next_hop(void)
       return;
     }
     wander_tried = true;
-  }
-
-  //
-  // If going somewhere, continue
-  //
-  if (aip->wander_target != point(0, 0)) {
-    if (pcg_random_range(0, 100) < 50) {
-      dbg("Try to continue wander");
-      if (! wander_tried) {
-        if (ai_wander()) {
-          return;
-        }
-        wander_tried = true;
-      }
-    }
   }
 
   //

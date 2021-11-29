@@ -286,9 +286,10 @@ do
       set_unused_flag2 \
       set_unused_flag20 \
       set_unused_flag21 \
-      set_unused_flag22 \
-      set_unused_flag23 \
+      set_is_able_to_jump_without_tiring \
+      set_is_spider \
       set_is_able_to_jump_attack \
+      set_is_able_to_jump_onto \
       set_unused_flag25 \
       set_ai_aggression_level_pct \
       set_is_able_to_see_in_the_dark \

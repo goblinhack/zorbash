@@ -703,13 +703,16 @@ bool Thing::matches(const std::string &what)
   if (unused_flag21() && (what == "unused_flag21")) {
     return true;
   }
-  if (unused_flag22() && (what == "unused_flag22")) {
+  if (is_able_to_jump_without_tiring() && (what == "is_able_to_jump_without_tiring")) {
     return true;
   }
-  if (unused_flag23() && (what == "unused_flag23")) {
+  if (is_spider() && (what == "is_spider")) {
     return true;
   }
   if (is_able_to_jump_attack() && (what == "is_able_to_jump_attack")) {
+    return true;
+  }
+  if (is_able_to_jump_onto() && (what == "is_able_to_jump_onto")) {
     return true;
   }
   if (unused_flag25() && (what == "unused_flag25")) {
@@ -1433,14 +1436,17 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag21") {
     return &Thing::unused_flag21;
   }
-  if (what == "unused_flag22") {
-    return &Thing::unused_flag22;
+  if (what == "is_able_to_jump_without_tiring") {
+    return &Thing::is_able_to_jump_without_tiring;
   }
-  if (what == "unused_flag23") {
-    return &Thing::unused_flag23;
+  if (what == "is_spider") {
+    return &Thing::is_spider;
   }
   if (what == "is_able_to_jump_attack") {
     return &Thing::is_able_to_jump_attack;
+  }
+  if (what == "is_able_to_jump_onto") {
+    return &Thing::is_able_to_jump_onto;
   }
   if (what == "unused_flag25") {
     return &Thing::unused_flag25;

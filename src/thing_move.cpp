@@ -238,6 +238,28 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
   // Check for being stuck in webs or something else sticky
   //
   if (up || down || left || right) {
+    //
+    // Blocked from moving by something stronger?
+    //
+    FOR_ALL_THINGS(level, it, mid_at.x, mid_at.y)
+    {
+      if (it == this) {
+        continue;
+      }
+      if (! it->is_alive_monst()) {
+        continue;
+      }
+      if (! d20roll(get_stat_strength(), it->get_stat_strength())) {
+        if (is_player()) {
+          TOPCON("You are held in place and cannot move!");
+        }
+        dbg("You are held in place");
+        wobble(25);
+        return false;
+      }
+    }
+    FOR_ALL_THINGS_END()
+
     if (environ_prefers_spiderwebs() && level->is_spiderweb(mid_at.x, mid_at.y)) {
       //
       // No getting stuck in webs
@@ -327,9 +349,9 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
         game->wid_collect_create(items);
 #endif
       }
+      TOPCON("You wait...");
     } else {
       TOPCON("You rest...");
-
       rest();
     }
 #if 0

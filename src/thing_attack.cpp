@@ -257,10 +257,6 @@ bool Thing::possible_to_attack(const Thingp victim)
         dbg("No, do not attack %s", victim->to_string().c_str());
         return false;
       }
-      if (victim->is_spiderweb()) {
-        dbg("No, do not attack %s", victim->to_string().c_str());
-        return false;
-      }
       dbg("Can attack %s", victim->to_string().c_str());
       return true;
     }
@@ -355,7 +351,6 @@ bool Thing::possible_to_attack(const Thingp victim)
 
 bool Thing::attack(point future_pos)
 {
-  backtrace_dump();
   bool up     = future_pos.y < mid_at.y;
   bool down   = future_pos.y > mid_at.y;
   bool left   = future_pos.x < mid_at.x;

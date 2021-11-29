@@ -12,6 +12,65 @@
 #include "my_sys.hpp"
 #include "my_thing.hpp"
 
+int Thing::get_distance_from_minion_owner(void)
+{
+  auto manifestor = get_top_minion_owner();
+  if (! manifestor) {
+    return -1;
+  }
+
+  return (int) distance(mid_at, manifestor->mid_at);
+}
+
+int Thing::get_distance_from_minion_owner(point p)
+{
+  auto manifestor = get_top_minion_owner();
+  if (! manifestor) {
+    return -1;
+  }
+
+  return (int) distance(p, manifestor->mid_at);
+}
+
+bool Thing::too_far_from_minion_owner(void)
+{
+  auto manifestor = get_top_minion_owner();
+  if (! manifestor) {
+    return false;
+  }
+
+  if (distance(mid_at, manifestor->mid_at) > minion_leash_distance()) {
+    return true;
+  }
+  return false;
+}
+
+bool Thing::too_far_from_minion_owner(point p)
+{
+  auto manifestor = get_top_minion_owner();
+  if (! manifestor) {
+    return false;
+  }
+
+  if (distance(p, manifestor->mid_at) > minion_leash_distance()) {
+    return true;
+  }
+  return false;
+}
+
+bool Thing::too_far_from_minion_owner(point p, int delta)
+{
+  auto manifestor = get_top_minion_owner();
+  if (! manifestor) {
+    return false;
+  }
+
+  if (distance(p, manifestor->mid_at) > minion_leash_distance() + delta) {
+    return true;
+  }
+  return false;
+}
+
 Thingp Thing::get_top_minion_owner(void)
 {
   TRACE_AND_INDENT();

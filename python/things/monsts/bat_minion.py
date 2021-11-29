@@ -25,7 +25,6 @@ def tp_init(name, text_name):
     mytp.set_ai_aggression_level_pct(10)
     mytp.set_ai_avoid_distance(3)
     mytp.set_ai_resent_count(100)
-    mytp.set_ai_scent_distance(3)
     mytp.set_ai_vision_distance(3)
     mytp.set_attack_eater(True)
     mytp.set_attack_humanoid(True)

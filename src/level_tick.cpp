@@ -98,7 +98,6 @@ void Level::handle_input_events(void)
         time_boost = 50;
       }
 
-      CON("PLAYER WAITING %d", time_boost);
       time_delta += time_boost;
       return;
     }
@@ -439,16 +438,18 @@ bool Level::tick(void)
   }
 
   if (game->things_are_moving) {
-    if (game->request_player_move || (player && player->get_aip()->move_path.size())) {
-      if ((time_get_time_ms() - game->tick_begin_ms) > 100) {
-        game->current_tick_is_too_slow = true;
-        time_delta += 20;
-      } else if ((time_get_time_ms() - game->tick_begin_ms) > 50) {
-        game->current_tick_is_too_slow = true;
-        time_delta += 10;
-      } else if ((time_get_time_ms() - game->tick_begin_ms) > 20) {
-        game->current_tick_is_too_slow = true;
-        time_delta += 5;
+    if (ts_dungeon_created && time_have_x_tenths_passed_since(10, ts_dungeon_created)) {
+      if (game->request_player_move || (player && player->get_aip()->move_path.size())) {
+        if ((time_get_time_ms() - game->tick_begin_ms) > 100) {
+          game->current_tick_is_too_slow = true;
+          time_delta += 20;
+        } else if ((time_get_time_ms() - game->tick_begin_ms) > 50) {
+          game->current_tick_is_too_slow = true;
+          time_delta += 10;
+        } else if ((time_get_time_ms() - game->tick_begin_ms) > 20) {
+          game->current_tick_is_too_slow = true;
+          time_delta += 5;
+        }
       }
     }
 

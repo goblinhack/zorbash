@@ -120,6 +120,8 @@ const std::string stat_to_bonus_slash_str(int stat)
 //
 // Roll for stat modifier "a" to see if it beats "b"
 //
+// True if the a >= b
+//
 bool d20roll(int stat_a, int stat_b, bool &fumble, bool &critical)
 {
   auto roll_a = pcg_random_range_inclusive(1, 20);

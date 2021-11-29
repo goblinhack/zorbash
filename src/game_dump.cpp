@@ -15,11 +15,11 @@ void Level::dump(std::string pfx, std::ostream &out)
   auto old_pfx = pfx;
   pfx += "  ";
 
-  out << pfx << "cursor_at                 " << cursor_at << std::endl;
-  out << pfx << "cursor_old                " << cursor_old << std::endl;
-  out << pfx << "map_at                    " << map_at << std::endl;
-  out << pfx << "map_follow_player         " << map_follow_player << std::endl;
-  out << pfx << "map_wanted_at             " << map_wanted_at << std::endl;
+  out << pfx << "cursor_at          " << cursor_at << std::endl;
+  out << pfx << "cursor_old         " << cursor_old << std::endl;
+  out << pfx << "map_at             " << map_at << std::endl;
+  out << pfx << "map_follow_player  " << map_follow_player << std::endl;
+  out << pfx << "map_wanted_at      " << map_wanted_at << std::endl;
   out << pfx << "ts_dungeon_created " << ts_dungeon_created << std::endl;
 
   out << pfx << "all_things" << std::endl;

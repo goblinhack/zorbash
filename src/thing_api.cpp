@@ -145,12 +145,6 @@ int Thing::ai_obstacle(void)
   return (tp()->ai_obstacle());
 }
 
-int Thing::ai_scent_distance(void)
-{
-  TRACE_AND_INDENT();
-  return (tp()->ai_scent_distance());
-}
-
 int Thing::ai_vision_distance(void)
 {
   TRACE_AND_INDENT();
@@ -1059,6 +1053,12 @@ int Thing::is_able_to_jump_attack_chance_d1000(void)
   return (tp()->is_able_to_jump_attack_chance_d1000());
 }
 
+int Thing::is_able_to_jump_onto_chance_d1000(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->is_able_to_jump_onto_chance_d1000());
+}
+
 int Thing::is_able_to_jump_distance(void)
 {
   TRACE_AND_INDENT();
@@ -1335,22 +1335,28 @@ int Thing::unused_flag21(void)
   return (tp()->unused_flag21());
 }
 
-int Thing::unused_flag22(void)
+int Thing::is_able_to_jump_without_tiring(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->unused_flag22());
+  return (tp()->is_able_to_jump_without_tiring());
 }
 
-int Thing::unused_flag23(void)
+int Thing::is_spider(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->unused_flag23());
+  return (tp()->is_spider());
 }
 
 int Thing::is_able_to_jump_attack(void)
 {
   TRACE_AND_INDENT();
   return (tp()->is_able_to_jump_attack());
+}
+
+int Thing::is_able_to_jump_onto(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->is_able_to_jump_onto());
 }
 
 int Thing::unused_flag25(void)

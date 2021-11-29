@@ -238,6 +238,12 @@ public:
   ThingId set_equip_id_carry_anim(ThingId, int equip);
   ThingId set_equip_id_use_anim(ThingId, int equip);
 
+  int  get_distance_from_minion_owner(void);
+  int  get_distance_from_minion_owner(point p);
+  bool too_far_from_minion_owner(void);
+  bool too_far_from_minion_owner(point p);
+  bool too_far_from_minion_owner(point p, int delta);
+
   Thingp get_equip(int equip);
   Thingp get_equip_carry_anim(int equip);
   Thingp get_equip_use_anim(int equip);
@@ -556,7 +562,6 @@ public:
   int ai_hit_actual(Thingp hitter, Thingp real_hitter, bool crit, bool bite, bool poison, bool necrosis, int dmg);
   int ai_obstacle(void);
   int ai_resent_count(void);
-  int ai_scent_distance(void);
   int ai_shove_chance_d1000(void);
   int ai_vision_distance(void);
   int ai_wanderer(void);
@@ -865,10 +870,12 @@ public:
   int is_able_to_fall(void);
   int is_able_to_fire_at(void);
   int is_able_to_jump_attack(void);
+  int is_able_to_jump_onto(void);
   int is_able_to_jump_distance(void);
   int is_able_to_jump_on_low_hp_chance_d1000(void);
   int is_able_to_jump_randomly_chance_d1000(void);
   int is_able_to_jump_attack_chance_d1000(void);
+  int is_able_to_jump_onto_chance_d1000(void);
   int is_able_to_jump(void);
   int is_able_to_learn_skills(void);
   int is_able_to_open_doors(void);
@@ -1124,8 +1131,8 @@ public:
   int unused_flag1(void);
   int unused_flag20(void);
   int unused_flag21(void);
-  int unused_flag22(void);
-  int unused_flag23(void);
+  int is_able_to_jump_without_tiring(void);
+  int is_spider(void);
   int unused_flag25(void);
   int unused_flag2(void);
   int unused_flag30(void);
@@ -1142,7 +1149,7 @@ public:
   int worth_collecting(const Thingp it, Thingp *would_need_to_drop);
 
   point dir_to_direction();
-  point get_random_scent_target(void);
+  point get_random_target(void);
   point get_where_i_dropped_an_item_last(void);
   point get_lunge_to(void);
 
@@ -1291,7 +1298,7 @@ public:
   uint8_t is_visible();
   uint8_t z_prio(void);
 
-  bool jump_attack(void);
+  bool jump_attack(Thingp it = nullptr);
   void achieve_goals_in_death();
   void achieve_goals_in_life();
   void acid_tick();

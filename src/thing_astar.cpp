@@ -219,6 +219,8 @@ public:
     Path fallback;
     fallback.cost = std::numeric_limits< int >::max();
 
+    float fallback_dist = distance(start, goal);
+
     while (! open_nodes.empty()) {
       auto  c       = open_nodes.begin();
       Node *current = c->second;
@@ -254,9 +256,10 @@ public:
         //
         // Create any old path in case we cannot reach the goal
         //
-        auto [ path, cost ] = create_path(dmap, current);
-
-        if (path.size() > fallback.path.size()) {
+        float dist = distance(goal, current->at);
+        if (dist < fallback_dist) {
+          fallback_dist       = dist;
+          auto [ path, cost ] = create_path(dmap, current);
           if (goalp) {
             fallback.goal = *goalp;
           }

@@ -48,10 +48,12 @@ PyObject *level_is_able_to_fall_at(PyObject *obj, PyObject *args, PyObject *keyw
 PyObject *level_is_able_to_fire_at_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_able_to_jump_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_able_to_jump_attack_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_able_to_jump_onto_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_able_to_jump_distance_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_able_to_jump_on_low_hp_chance_d1000_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_able_to_jump_randomly_chance_d1000_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_able_to_jump_attack_chance_d1000_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_able_to_jump_onto_chance_d1000_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_able_to_learn_skills_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_able_to_open_doors_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_able_to_see_in_the_dark_at(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -249,8 +251,8 @@ PyObject *level_unused_flag19_at(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *level_unused_flag1_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag20_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag21_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag22_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag23_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_able_to_jump_without_tiring_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_spider_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag25_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag2_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag30_at(PyObject *obj, PyObject *args, PyObject *keywds);

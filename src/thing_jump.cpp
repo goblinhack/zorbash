@@ -6,6 +6,7 @@
 #include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
 #include "my_monst.hpp"
+#include "my_ptrcheck.hpp"
 #include "my_random.hpp"
 #include "my_sprintf.hpp"
 #include "my_sys.hpp"
@@ -50,9 +51,25 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
 
   TRACE_AND_INDENT();
   if (be_careful) {
-    dbg("Try to jump to %d,%d", to.x, to.y);
-  } else {
     dbg("Try to jump carefully %d,%d", to.x, to.y);
+  } else {
+    dbg("Try to jump to %d,%d", to.x, to.y);
+  }
+
+  //
+  // Spider minions need to be leashed
+  //
+  bool jumping_home = false;
+  if (too_far_from_minion_owner(to)) {
+    dbg("No, minion is too far off the leash to jump");
+    auto manifestor = get_top_minion_owner();
+    if (manifestor) {
+      dbg("Try jumping home");
+      to           = manifestor->mid_at;
+      jumping_home = true;
+    } else {
+      return false;
+    }
   }
 
   if (is_able_to_tire()) {
@@ -60,6 +77,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
       if (is_player()) {
         TOPCON("You are too tired to jump. You need to rest.");
       }
+      dbg("Too tired to jump, stamina %d", get_stamina());
       return false;
     }
   }
@@ -67,9 +85,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   auto x = to.x;
   auto y = to.y;
 
-  if (is_player()) {
-    dbg("Try jump to %d,%d", x, y);
-  }
+  dbg("Try jump to %d,%d", x, y);
 
   if (level->is_oob(x, y)) {
     TRACE_AND_INDENT();
@@ -84,11 +100,41 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   // Ensure cleaners do not get stuck in themselves!
   //
   if (! is_sticky() && level->is_sticky(mid_at.x, mid_at.y)) {
-    if (is_player()) {
-      TOPCON("You try to jump but are stuck fast.");
+    if (environ_prefers_spiderwebs() && level->is_spiderweb(mid_at.x, mid_at.y)) {
+      //
+      // Ok ot move
+      //
+    } else {
+      if (is_player()) {
+        TOPCON("You try to jump but are stuck fast.");
+      }
+      wobble(25);
+      dbg("You try to jump but are stuck fast.");
+      return false;
     }
-    return false;
   }
+
+  //
+  // See if we are prevented from jumping. i.e. from a spider sitting on us.
+  //
+  FOR_ALL_THINGS(level, it, mid_at.x, mid_at.y)
+  {
+    if (it == this) {
+      continue;
+    }
+    if (! it->is_alive_monst()) {
+      continue;
+    }
+    if (! d20roll(get_stat_strength(), it->get_stat_strength())) {
+      if (is_player()) {
+        TOPCON("You are held in place!");
+      }
+      dbg("You are held in place");
+      wobble(25);
+      return false;
+    }
+  }
+  FOR_ALL_THINGS_END()
 
   //
   // Block jumping over doors
@@ -100,6 +146,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
       if (is_player()) {
         TOPCON("You can't jump into the unknown.");
       }
+      dbg("You can't jump into the unknown.");
       return false;
     }
   }
@@ -125,18 +172,10 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
       if (too_far) {
         *too_far = true;
       }
-      return false;
-    }
-  }
-
-  //
-  // Don't jump too short a distance.
-  //
-  if (is_monst()) {
-    if (distance(mid_at, point(x, y)) < 2) {
-      TRACE_AND_INDENT();
-      dbg("No, too close");
-      return false;
+      if (! jumping_home) {
+        dbg("Too far");
+        return false;
+      }
     }
   }
 
@@ -155,11 +194,13 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   if (be_careful) {
     if (! level->is_able_to_stand_on(x, y)) {
       TRACE_AND_INDENT();
+      dbg("No, nothing to stand on at target");
       return false;
     }
 
     if (collision_obstacle(point(x, y))) {
       TRACE_AND_INDENT();
+      dbg("No, obstacle at target");
       return false;
     }
   }
@@ -173,14 +214,14 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   auto duration = THING_JUMP_SPEED_MS;
 
   if (is_offscreen) {
-    duration /= 10;
+    duration /= 2;
   }
 
   //
   // Check the number of things jumping is not slowing the game too much
   //
   if (game->current_tick_is_too_slow || game->prev_tick_was_too_slow) {
-    duration /= 10;
+    duration /= 2;
   }
 
   if (game->robot_mode) {
@@ -314,8 +355,13 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
 
   wobble(25);
 
-  decr_stamina(10);
+  if (! is_able_to_jump_without_tiring()) {
+    if ((int) pcg_random_range(0, 20) > get_stat_strength()) {
+      decr_stamina(10);
+    }
+  }
 
+  dbg("Jump success.");
   return true;
 }
 
@@ -542,7 +588,7 @@ void Thing::jump_end(void)
   get_infop()->last_failed_jump_at = point(-1, -1);
 }
 
-bool Thing::jump_attack(void)
+bool Thing::jump_attack(Thingp maybe_victim)
 {
   if (! is_able_to_jump_attack()) {
     return false;
@@ -552,15 +598,24 @@ bool Thing::jump_attack(void)
     return false;
   }
 
-  if ((int) pcg_random_range(0, 1000) > tp()->is_able_to_jump_randomly_chance_d1000()) {
+  if ((int) pcg_random_range(0, 1000) > tp()->is_able_to_jump_attack_chance_d1000()) {
     return false;
   }
 
   dbg("Try to jump attack");
   TRACE_AND_INDENT();
 
+  if (maybe_victim && can_eat(maybe_victim)) {
+    if ((int) pcg_random_range(0, 1000) < tp()->is_able_to_jump_onto_chance_d1000()) {
+      dbg("Try to jump onto %s", maybe_victim->to_string().c_str());
+      TRACE_AND_INDENT();
+      if (try_to_jump_carefree(maybe_victim->mid_at)) {
+        return true;
+      }
+    }
+  }
+
   auto p         = get_aip()->move_path;
   auto jump_dist = pcg_random_range(0, p.size());
-
-  return try_to_jump_carefree(get(p, jump_dist));
+  return try_to_jump_carefully(get(p, jump_dist));
 }

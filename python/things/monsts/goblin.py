@@ -26,7 +26,6 @@ def tp_init(name, text_name):
     mytp.set_ai_avoid_distance(5)
     mytp.set_ai_detect_secret_doors(True)
     mytp.set_ai_resent_count(20)
-    mytp.set_ai_scent_distance(20)
     mytp.set_ai_shove_chance_d1000(500)
     mytp.set_ai_vision_distance(7)
     mytp.set_ai_wanderer(True)
