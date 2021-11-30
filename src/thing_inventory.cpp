@@ -35,7 +35,7 @@ void Thing::inventory_particle(Thingp item, uint32_t slot)
 
     std::string name = "gold and keys";
     auto        w    = wid_find(name);
-    if (! w) {
+    if (unlikely(! w)) {
       log("Could not find wid %s", name.c_str());
       return;
     }
@@ -80,7 +80,7 @@ void Thing::inventory_particle(Thingp item, uint32_t slot)
 
     std::string name = "gold and keys";
     auto        w    = wid_find(name);
-    if (! w) {
+    if (unlikely(! w)) {
       log("Could not find wid %s", name.c_str());
       return;
     }
@@ -104,7 +104,7 @@ void Thing::inventory_particle(Thingp item, uint32_t slot)
   {
     std::string name = "inventory slot" + std::to_string(slot);
     auto        w    = wid_find(name);
-    if (! w) {
+    if (unlikely(! w)) {
       log("Could not find wid %s", name.c_str());
       return;
     }
@@ -167,7 +167,7 @@ void Thing::inventory_particle(Thingp item, uint32_t slot, Thingp particle_targe
   if (throw_from_inventory) {
     std::string name = "inventory slot" + std::to_string(slot);
     auto        w    = wid_find(name);
-    if (! w) {
+    if (unlikely(! w)) {
       log("Could not find wid %s", name.c_str());
       return;
     }
@@ -257,7 +257,7 @@ bool Thing::inventory_shortcuts_insert(Thingp item)
     }
 
     auto t = level->thing_find(thing_id);
-    if (! t) {
+    if (unlikely(! t)) {
       continue;
     }
 
@@ -347,7 +347,7 @@ bool Thing::inventory_shortcuts_remove(Thingp item)
       continue;
     }
     auto t = level->thing_find(thing_id);
-    if (! t) {
+    if (unlikely(! t)) {
       continue;
     }
 
@@ -413,7 +413,7 @@ bool Thing::inventory_shortcuts_remove(Thingp item, Thingp particle_target)
       continue;
     }
     auto t = level->thing_find(thing_id);
-    if (! t) {
+    if (unlikely(! t)) {
       continue;
     }
 
@@ -465,7 +465,7 @@ int Thing::item_slot_charge_count(const uint32_t slot)
   }
 
   auto t = level->thing_find(thing_id);
-  if (! t) {
+  if (unlikely(! t)) {
     return 0;
   }
 
@@ -526,7 +526,7 @@ Thingp Level::inventory_get(const uint32_t slot)
   }
 
   auto t = thing_find(thing_id);
-  if (! t) {
+  if (unlikely(! t)) {
     LOG("Slot %d has no valid thing", slot);
     return nullptr;
   }
@@ -683,7 +683,7 @@ bool Level::inventory_assign(const uint32_t slot, Thingp item)
       continue;
     }
     auto t = thing_find(thing_id);
-    if (! t) {
+    if (unlikely(! t)) {
       continue;
     }
 
@@ -725,7 +725,7 @@ void Level::inventory_dump(void)
       continue;
     }
     auto t = thing_find(thing_id);
-    if (! t) {
+    if (unlikely(! t)) {
       continue;
     }
 
@@ -750,7 +750,7 @@ int Level::inventory_get_slot(Thingp item)
       continue;
     }
     auto t = thing_find(thing_id);
-    if (! t) {
+    if (unlikely(! t)) {
       continue;
     }
 

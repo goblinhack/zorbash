@@ -263,7 +263,7 @@ bool Thing::eat_something(void)
   //
   for (const auto &item : get_itemp()->carrying) {
     auto t = level->thing_find(item.id);
-    if (! t) {
+    if (unlikely(! t)) {
       continue;
     }
     if (t->is_health_booster()) {

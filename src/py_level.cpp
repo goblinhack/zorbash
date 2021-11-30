@@ -221,7 +221,7 @@ PyObject *level_get_all(PyObject *obj, PyObject *args, PyObject *keywds)
   }
 
   Thingp t = game->thing_find(id);
-  if (! t) {
+  if (unlikely(! t)) {
     ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
     Py_RETURN_NONE;
   }
@@ -287,7 +287,7 @@ PyObject *level_flood_fill_get_all_things(PyObject *obj, PyObject *args, PyObjec
   }
 
   Thingp t = game->thing_find(id);
-  if (! t) {
+  if (unlikely(! t)) {
     ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
     Py_RETURN_NONE;
   }
@@ -329,7 +329,7 @@ PyObject *level_flood_fill_get_all_things(PyObject *obj, PyObject *args, PyObjec
     }                                                                                                                \
                                                                                                                      \
     Thingp t = game->thing_find(id);                                                                                 \
-    if (! t) {                                                                                                       \
+    if (unlikely(! t)) {                                                                                             \
       ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);                                                          \
       Py_RETURN_FALSE;                                                                                               \
     }                                                                                                                \

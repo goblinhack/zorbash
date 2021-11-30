@@ -194,7 +194,7 @@ void wid_fini(void)
 void wid_dump(Widp w, int depth)
 {
   TRACE_AND_INDENT();
-  if (! w) {
+  if (unlikely(! w)) {
     return;
   }
 
@@ -220,7 +220,7 @@ void wid_dump(Widp w, int depth)
 int wid_count(Widp w, int depth)
 {
   TRACE_AND_INDENT();
-  if (! w) {
+  if (unlikely(! w)) {
     return 0;
   }
 
@@ -430,7 +430,7 @@ void wid_set_prev(Widp w, Widp prev)
   if (prev) {
     verify(MTYPE_WID, prev);
   }
-  if (! w) {
+  if (unlikely(! w)) {
     DIE("No wid");
   }
 
@@ -448,7 +448,7 @@ void wid_set_prev(Widp w, Widp prev)
 Widp wid_get_prev(Widp w)
 {
   TRACE_AND_INDENT();
-  if (! w) {
+  if (unlikely(! w)) {
     DIE("No wid");
   }
 
@@ -462,7 +462,7 @@ Widp wid_get_prev(Widp w)
 Widp wid_get_next(Widp w)
 {
   TRACE_AND_INDENT();
-  if (! w) {
+  if (unlikely(! w)) {
     DIE("No wid");
   }
 
@@ -510,7 +510,7 @@ Widp wid_get_tail(Widp w)
 Widp wid_get_top_parent(Widp w)
 {
   TRACE_AND_INDENT();
-  if (! w) {
+  if (unlikely(! w)) {
     return (w);
   }
   verify(MTYPE_WID, w);
@@ -577,7 +577,7 @@ uint8_t wid_ignore_events(Widp w)
   TRACE_AND_INDENT();
   Widp top {};
 
-  if (! w) {
+  if (unlikely(! w)) {
     return true;
   }
 
@@ -601,7 +601,7 @@ uint8_t wid_ignore_events_only(Widp w)
   TRACE_AND_INDENT();
   Widp top {};
 
-  if (! w) {
+  if (unlikely(! w)) {
     return true;
   }
 
@@ -625,7 +625,7 @@ uint8_t wid_ignore_scroll_events(Widp w)
   TRACE_AND_INDENT();
   Widp top {};
 
-  if (! w) {
+  if (unlikely(! w)) {
     return true;
   }
 
@@ -710,7 +710,7 @@ static void wid_mfocus_end(void)
   wid_focus        = nullptr;
   wid_focus_locked = nullptr;
 
-  if (! w) {
+  if (unlikely(! w)) {
     return;
   }
 
@@ -730,7 +730,7 @@ static void wid_mfocus_begin(Widp w)
   TRACE_AND_INDENT();
   Widp top {};
 
-  if (! w) {
+  if (unlikely(! w)) {
     wid_mfocus_end();
     wid_focus = nullptr;
 
@@ -773,7 +773,7 @@ static void wid_m_over_e(void)
   }
   wid_over = nullptr;
 
-  if (! w) {
+  if (unlikely(! w)) {
     return;
   }
 
@@ -1481,11 +1481,11 @@ void wid_set_bg_tilename(Widp w, std::string name)
 {
   TRACE_AND_INDENT();
   Tilep tile = tile_find(name);
-  if (! tile) {
+  if (unlikely(! tile)) {
     ERR("Failed to find wid tile %s", name.c_str());
   }
 
-  if (! w) {
+  if (unlikely(! w)) {
     DIE("Widget does not exist to set tile %s", name.c_str());
   }
 
@@ -1496,11 +1496,11 @@ void wid_set_fg_tilename(Widp w, std::string name)
 {
   TRACE_AND_INDENT();
   Tilep tile = tile_find(name);
-  if (! tile) {
+  if (unlikely(! tile)) {
     ERR("Failed to find wid tile %s", name.c_str());
   }
 
-  if (! w) {
+  if (unlikely(! w)) {
     DIE("Widget does not exist to set tile %s", name.c_str());
   }
 
@@ -1511,11 +1511,11 @@ void wid_set_fg2_tilename(Widp w, std::string name)
 {
   TRACE_AND_INDENT();
   Tilep tile = tile_find(name);
-  if (! tile) {
+  if (unlikely(! tile)) {
     ERR("Failed to find wid tile %s", name.c_str());
   }
 
-  if (! w) {
+  if (unlikely(! w)) {
     DIE("Widget does not exist to set tile %s", name.c_str());
   }
 
@@ -1526,11 +1526,11 @@ void wid_set_fg3_tilename(Widp w, std::string name)
 {
   TRACE_AND_INDENT();
   Tilep tile = tile_find(name);
-  if (! tile) {
+  if (unlikely(! tile)) {
     ERR("Failed to find wid tile %s", name.c_str());
   }
 
-  if (! w) {
+  if (unlikely(! w)) {
     DIE("Widget does not exist to set tile %s", name.c_str());
   }
 
@@ -2259,7 +2259,7 @@ static void wid_destroy_delay(Widp *wp, int32_t delay)
 
   auto w = *wp;
 
-  if (! w) {
+  if (unlikely(! w)) {
     return;
   }
 
@@ -3257,7 +3257,7 @@ void wid_always_hidden(Widp w, uint8_t value)
 void wid_visible(Widp w)
 {
   TRACE_AND_INDENT();
-  if (! w) {
+  if (unlikely(! w)) {
     return;
   }
 
@@ -3276,7 +3276,7 @@ void wid_visible(Widp w)
 void wid_this_visible(Widp w)
 {
   TRACE_AND_INDENT();
-  if (! w) {
+  if (unlikely(! w)) {
     return;
   }
 
@@ -3287,7 +3287,7 @@ void wid_this_visible(Widp w)
 void wid_hide(Widp w)
 {
   TRACE_AND_INDENT();
-  if (! w) {
+  if (unlikely(! w)) {
     return;
   }
 
@@ -4089,7 +4089,7 @@ Widp wid_find_at(int32_t x, int32_t y)
 {
   TRACE_AND_INDENT();
   auto w = get(wid_on_screen_at, x, y);
-  if (! w) {
+  if (unlikely(! w)) {
     return nullptr;
   }
 
@@ -4144,7 +4144,7 @@ Widp wid_find_under_mouse_when_scrolling(void)
 static Widp wid_key_down_handler_at(Widp w, int32_t x, int32_t y, uint8_t strict)
 {
   TRACE_AND_INDENT();
-  if (! w) {
+  if (unlikely(! w)) {
     return nullptr;
   }
 
@@ -4220,7 +4220,7 @@ static Widp wid_key_down_handler_at(Widp w, int32_t x, int32_t y, uint8_t strict
 static Widp wid_key_up_handler_at(Widp w, int32_t x, int32_t y, uint8_t strict)
 {
   TRACE_AND_INDENT();
-  if (! w) {
+  if (unlikely(! w)) {
     return nullptr;
   }
 
@@ -4287,7 +4287,7 @@ static Widp wid_key_up_handler_at(Widp w, int32_t x, int32_t y, uint8_t strict)
 static Widp wid_joy_button_handler_at(Widp w, int32_t x, int32_t y, uint8_t strict)
 {
   TRACE_AND_INDENT();
-  if (! w) {
+  if (unlikely(! w)) {
     return nullptr;
   }
 
@@ -4341,7 +4341,7 @@ static Widp wid_joy_button_handler_at(Widp w, int32_t x, int32_t y, uint8_t stri
 static Widp wid_mouse_down_handler_at(Widp w, int32_t x, int32_t y, uint8_t strict)
 {
   TRACE_AND_INDENT();
-  if (! w) {
+  if (unlikely(! w)) {
     return nullptr;
   }
 
@@ -4419,7 +4419,7 @@ static Widp wid_mouse_down_handler_at(Widp w, int32_t x, int32_t y, uint8_t stri
 static Widp wid_mouse_held_handler_at(Widp w, int32_t x, int32_t y, uint8_t strict)
 {
   TRACE_AND_INDENT();
-  if (! w) {
+  if (unlikely(! w)) {
     return nullptr;
   }
 
@@ -4493,7 +4493,7 @@ static Widp wid_mouse_held_handler_at(Widp w, int32_t x, int32_t y, uint8_t stri
 static Widp wid_mouse_up_handler_at(Widp w, int32_t x, int32_t y, uint8_t strict)
 {
   TRACE_AND_INDENT();
-  if (! w) {
+  if (unlikely(! w)) {
     return nullptr;
   }
 
@@ -4833,7 +4833,7 @@ static Widp wid_joy_button_handler(int32_t x, int32_t y)
     }
 
     w = wid_joy_button_handler_at(w, x, y, false /* strict */);
-    if (! w) {
+    if (unlikely(! w)) {
       continue;
     }
 
@@ -4866,7 +4866,7 @@ static Widp wid_mouse_down_handler(int32_t x, int32_t y)
     }
 
     w = wid_mouse_down_handler_at(w, x, y, true /* strict */);
-    if (! w) {
+    if (unlikely(! w)) {
       continue;
     }
 
@@ -4881,7 +4881,7 @@ static Widp wid_mouse_down_handler(int32_t x, int32_t y)
     }
 
     w = wid_mouse_down_handler_at(w, x, y, false /* strict */);
-    if (! w) {
+    if (unlikely(! w)) {
       continue;
     }
 
@@ -4914,7 +4914,7 @@ static Widp wid_mouse_held_handler(int32_t x, int32_t y)
     }
 
     w = wid_mouse_held_handler_at(w, x, y, true /* strict */);
-    if (! w) {
+    if (unlikely(! w)) {
       continue;
     }
 
@@ -4929,7 +4929,7 @@ static Widp wid_mouse_held_handler(int32_t x, int32_t y)
     }
 
     w = wid_mouse_held_handler_at(w, x, y, false /* strict */);
-    if (! w) {
+    if (unlikely(! w)) {
       continue;
     }
 
@@ -4962,7 +4962,7 @@ static Widp wid_mouse_up_handler(int32_t x, int32_t y)
     }
 
     w = wid_mouse_up_handler_at(w, x, y, true /* strict */);
-    if (! w) {
+    if (unlikely(! w)) {
       continue;
     }
 
@@ -4977,7 +4977,7 @@ static Widp wid_mouse_up_handler(int32_t x, int32_t y)
     }
 
     w = wid_mouse_up_handler_at(w, x, y, false /* strict */);
-    if (! w) {
+    if (unlikely(! w)) {
       continue;
     }
 
@@ -5052,7 +5052,7 @@ void wid_mouse_motion(int32_t x, int32_t y, int32_t relx, int32_t rely, int32_t 
     //
     if (! wheelx && ! wheely) {
       w = wid_find_at(x, y);
-      if (! w) {
+      if (unlikely(! w)) {
         continue;
       }
     }
@@ -5069,7 +5069,7 @@ void wid_mouse_motion(int32_t x, int32_t y, int32_t relx, int32_t rely, int32_t 
         w = w->parent;
       }
 
-      if (! w) {
+      if (unlikely(! w)) {
         continue;
       }
     }
@@ -5084,7 +5084,7 @@ void wid_mouse_motion(int32_t x, int32_t y, int32_t relx, int32_t rely, int32_t 
 
     uint8_t done = false;
 
-    if (! w) {
+    if (unlikely(! w)) {
       //
       // Allow scrollbar to grab.
       //
@@ -5289,7 +5289,7 @@ void wid_joy_button(int32_t x, int32_t y)
   Widp w {};
 
   w = wid_joy_button_handler(x, y);
-  if (! w) {
+  if (unlikely(! w)) {
     wid_fake_joy_button(x, y);
     return;
   }
@@ -5308,7 +5308,7 @@ void wid_joy_button(int32_t x, int32_t y)
         w = w->parent;
       }
 
-      if (! w) {
+      if (unlikely(! w)) {
         wid_fake_joy_button(x, y);
         return;
       }
@@ -5352,7 +5352,7 @@ void wid_mouse_down(uint32_t button, int32_t x, int32_t y)
   ascii_mouse_y = y;
 
   w = wid_mouse_down_handler(x, y);
-  if (! w) {
+  if (unlikely(! w)) {
     return;
   }
 
@@ -5409,7 +5409,7 @@ void wid_mouse_held(uint32_t button, int32_t x, int32_t y)
   ascii_mouse_y = y;
 
   w = wid_mouse_held_handler(x, y);
-  if (! w) {
+  if (unlikely(! w)) {
     return;
   }
 
@@ -5456,7 +5456,7 @@ void wid_mouse_up(uint32_t button, int32_t x, int32_t y)
   wid_mouse_motion_end();
 
   w = wid_mouse_up_handler(x, y);
-  if (! w) {
+  if (unlikely(! w)) {
     return;
   }
 
@@ -5511,7 +5511,7 @@ static Widp wid_key_down_handler(int32_t x, int32_t y)
     }
 
     w = wid_key_down_handler_at(w, x, y, true /* strict */);
-    if (! w) {
+    if (unlikely(! w)) {
       continue;
     }
     // TOPCON("     got top level strict handler%s.",to_string(w).c_str());
@@ -5528,7 +5528,7 @@ static Widp wid_key_down_handler(int32_t x, int32_t y)
     }
 
     w = wid_key_down_handler_at(w, x, y, false /* strict */);
-    if (! w) {
+    if (unlikely(! w)) {
       continue;
     }
 
@@ -5572,7 +5572,7 @@ static Widp wid_key_up_handler(int32_t x, int32_t y)
     }
 
     w = wid_key_up_handler_at(w, x, y, true /* strict */);
-    if (! w) {
+    if (unlikely(! w)) {
       continue;
     }
 
@@ -5587,7 +5587,7 @@ static Widp wid_key_up_handler(int32_t x, int32_t y)
     }
 
     w = wid_key_up_handler_at(w, x, y, false /* strict */);
-    if (! w) {
+    if (unlikely(! w)) {
       continue;
     }
 
@@ -5712,7 +5712,7 @@ void wid_key_down(const struct SDL_Keysym *key, int32_t x, int32_t y)
   }
 
   w = wid_key_down_handler(x, y);
-  if (! w) {
+  if (unlikely(! w)) {
     //
     // If no-one handles it, feed it to the default handler, the console.
     //
@@ -5787,7 +5787,7 @@ void wid_key_up(const struct SDL_Keysym *key, int32_t x, int32_t y)
   }
 
   w = wid_key_up_handler(x, y);
-  if (! w) {
+  if (unlikely(! w)) {
     //
     // If no-one handles it, drop it. We only hand key down to the
     // console.
@@ -6573,7 +6573,7 @@ printf("========================================= %d\n", wid_total_count);
 uint8_t wid_is_hidden(Widp w)
 {
   TRACE_AND_INDENT();
-  if (! w) {
+  if (unlikely(! w)) {
     return false;
   }
 

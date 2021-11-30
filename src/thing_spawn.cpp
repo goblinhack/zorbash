@@ -28,7 +28,7 @@ bool Thing::spawn_next_to(const std::string &what)
   };
 
   auto tpp = tp_find(what);
-  if (! tpp) {
+  if (unlikely(! tpp)) {
     err("Cannot find %s to spawn", what.c_str());
     return false;
   }
@@ -108,7 +108,7 @@ bool Thing::spawn_next_to_or_on_monst(const std::string &what)
   };
 
   auto tpp = tp_find(what);
-  if (! tpp) {
+  if (unlikely(! tpp)) {
     err("Cannot find %s to spawn", what.c_str());
     return false;
   }
@@ -173,7 +173,7 @@ bool Thing::spawn_radius_range(Thingp item, Thingp target, const std::string &wh
 {
   TRACE_AND_INDENT();
   auto tpp = tp_find(what);
-  if (! tpp) {
+  if (unlikely(! tpp)) {
     err("Cannot find %s to spawn", what.c_str());
     return false;
   }

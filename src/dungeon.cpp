@@ -376,7 +376,7 @@ void Dungeon::putc(const int x, const int y, const int z, const char c)
   if (! c) {
     ERR("Putting nul char at %d,%d,%d", x, y, z);
   }
-  if (is_oob(x, y)) {
+  if (unlikely(is_oob(x, y))) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
   auto p = cell_addr(x, y, z);
@@ -401,7 +401,7 @@ void Dungeon::putc_no_check(const int x, const int y, const int z, const char c)
 //
 char Dungeon::getc(const int x, const int y, const int z)
 {
-  if (is_oob(x, y)) {
+  if (unlikely(is_oob(x, y))) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
   auto p = cell_addr(x, y, z);
@@ -425,7 +425,7 @@ char Dungeon::getc_no_check(const int x, const int y, const int z)
 
 Roomp *Dungeon::cell_rooms_addr(const int x, const int y)
 {
-  if (is_oob(x, y)) {
+  if (unlikely(is_oob(x, y))) {
     return (nullptr);
   }
 
@@ -462,7 +462,7 @@ Roomp Dungeon::getr_no_check(const int x, const int y)
 
 bool Dungeon::is_anything_at(const int x, const int y)
 {
-  if (is_oob(x, y)) {
+  if (unlikely(is_oob(x, y))) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
@@ -477,7 +477,7 @@ bool Dungeon::is_anything_at(const int x, const int y)
 
 bool Dungeon::is_anything_at(const int x, const int y, const int z)
 {
-  if (is_oob(x, y)) {
+  if (unlikely(is_oob(x, y))) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
@@ -503,7 +503,7 @@ int Dungeon::get_grid_depth_at(const int x, const int y)
 
 bool Dungeon::is_floor(const int x, const int y)
 {
-  if (is_oob(x, y)) {
+  if (unlikely(is_oob(x, y))) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
@@ -520,7 +520,7 @@ bool Dungeon::is_floor(const int x, const int y)
 
 bool Dungeon::is_corridor(const int x, const int y)
 {
-  if (is_oob(x, y)) {
+  if (unlikely(is_oob(x, y))) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
@@ -537,7 +537,7 @@ bool Dungeon::is_corridor(const int x, const int y)
 
 bool Dungeon::is_bridge(const int x, const int y)
 {
-  if (is_oob(x, y)) {
+  if (unlikely(is_oob(x, y))) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
@@ -554,7 +554,7 @@ bool Dungeon::is_bridge(const int x, const int y)
 
 bool Dungeon::is_corridor_no_check(const int x, const int y)
 {
-  if (is_oob(x, y)) {
+  if (unlikely(is_oob(x, y))) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
@@ -571,7 +571,7 @@ bool Dungeon::is_corridor_no_check(const int x, const int y)
 
 bool Dungeon::is_dirt(const int x, const int y)
 {
-  if (is_oob(x, y)) {
+  if (unlikely(is_oob(x, y))) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
@@ -588,7 +588,7 @@ bool Dungeon::is_dirt(const int x, const int y)
 
 bool Dungeon::is_dirt_no_check(const int x, const int y)
 {
-  if (is_oob(x, y)) {
+  if (unlikely(is_oob(x, y))) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
@@ -605,7 +605,7 @@ bool Dungeon::is_dirt_no_check(const int x, const int y)
 
 bool Dungeon::is_dry_grass(const int x, const int y)
 {
-  if (is_oob(x, y)) {
+  if (unlikely(is_oob(x, y))) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
@@ -622,7 +622,7 @@ bool Dungeon::is_dry_grass(const int x, const int y)
 
 bool Dungeon::is_enchantstone(const int x, const int y)
 {
-  if (is_oob(x, y)) {
+  if (unlikely(is_oob(x, y))) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
@@ -639,7 +639,7 @@ bool Dungeon::is_enchantstone(const int x, const int y)
 
 bool Dungeon::is_skillstone(const int x, const int y)
 {
-  if (is_oob(x, y)) {
+  if (unlikely(is_oob(x, y))) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
@@ -656,7 +656,7 @@ bool Dungeon::is_skillstone(const int x, const int y)
 
 bool Dungeon::is_foilage(const int x, const int y)
 {
-  if (is_oob(x, y)) {
+  if (unlikely(is_oob(x, y))) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
@@ -673,7 +673,7 @@ bool Dungeon::is_foilage(const int x, const int y)
 
 bool Dungeon::is_spiderweb(const int x, const int y)
 {
-  if (is_oob(x, y)) {
+  if (unlikely(is_oob(x, y))) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
@@ -690,7 +690,7 @@ bool Dungeon::is_spiderweb(const int x, const int y)
 
 bool Dungeon::is_secret_corridor_at(const int x, const int y)
 {
-  if (is_oob(x, y)) {
+  if (unlikely(is_oob(x, y))) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
@@ -707,7 +707,7 @@ bool Dungeon::is_secret_corridor_at(const int x, const int y)
 
 bool Dungeon::is_wall(const int x, const int y)
 {
-  if (is_oob(x, y)) {
+  if (unlikely(is_oob(x, y))) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
@@ -719,7 +719,7 @@ bool Dungeon::is_wall(const int x, const int y)
 
 bool Dungeon::is_monst_easy(const int x, const int y)
 {
-  if (is_oob(x, y)) {
+  if (unlikely(is_oob(x, y))) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
@@ -736,7 +736,7 @@ bool Dungeon::is_monst_easy(const int x, const int y)
 
 bool Dungeon::is_monst_any(const int x, const int y)
 {
-  if (is_oob(x, y)) {
+  if (unlikely(is_oob(x, y))) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
@@ -759,7 +759,7 @@ bool Dungeon::is_monst_any(const int x, const int y)
 
 bool Dungeon::is_monst_med(const int x, const int y)
 {
-  if (is_oob(x, y)) {
+  if (unlikely(is_oob(x, y))) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
@@ -776,7 +776,7 @@ bool Dungeon::is_monst_med(const int x, const int y)
 
 bool Dungeon::is_monst_hard(const int x, const int y)
 {
-  if (is_oob(x, y)) {
+  if (unlikely(is_oob(x, y))) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
@@ -793,7 +793,7 @@ bool Dungeon::is_monst_hard(const int x, const int y)
 
 bool Dungeon::is_minion_generator_any(const int x, const int y)
 {
-  if (is_oob(x, y)) {
+  if (unlikely(is_oob(x, y))) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
@@ -813,7 +813,7 @@ bool Dungeon::is_minion_generator_any(const int x, const int y)
 
 bool Dungeon::is_minion_generator_easy(const int x, const int y)
 {
-  if (is_oob(x, y)) {
+  if (unlikely(is_oob(x, y))) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
@@ -830,7 +830,7 @@ bool Dungeon::is_minion_generator_easy(const int x, const int y)
 
 bool Dungeon::is_minion_generator_hard(const int x, const int y)
 {
-  if (is_oob(x, y)) {
+  if (unlikely(is_oob(x, y))) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
@@ -847,7 +847,7 @@ bool Dungeon::is_minion_generator_hard(const int x, const int y)
 
 bool Dungeon::is_food(const int x, const int y)
 {
-  if (is_oob(x, y)) {
+  if (unlikely(is_oob(x, y))) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
@@ -864,7 +864,7 @@ bool Dungeon::is_food(const int x, const int y)
 
 bool Dungeon::is_brazier(const int x, const int y)
 {
-  if (is_oob(x, y)) {
+  if (unlikely(is_oob(x, y))) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
@@ -881,7 +881,7 @@ bool Dungeon::is_brazier(const int x, const int y)
 
 bool Dungeon::is_barrel(const int x, const int y)
 {
-  if (is_oob(x, y)) {
+  if (unlikely(is_oob(x, y))) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
@@ -898,7 +898,7 @@ bool Dungeon::is_barrel(const int x, const int y)
 
 bool Dungeon::is_blood(const int x, const int y)
 {
-  if (is_oob(x, y)) {
+  if (unlikely(is_oob(x, y))) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
@@ -915,7 +915,7 @@ bool Dungeon::is_blood(const int x, const int y)
 
 bool Dungeon::is_rock(const int x, const int y)
 {
-  if (is_oob(x, y)) {
+  if (unlikely(is_oob(x, y))) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
@@ -932,7 +932,7 @@ bool Dungeon::is_rock(const int x, const int y)
 
 bool Dungeon::is_door(const int x, const int y)
 {
-  if (is_oob(x, y)) {
+  if (unlikely(is_oob(x, y))) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
@@ -949,7 +949,7 @@ bool Dungeon::is_door(const int x, const int y)
 
 bool Dungeon::is_secret_door(const int x, const int y)
 {
-  if (is_oob(x, y)) {
+  if (unlikely(is_oob(x, y))) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
@@ -966,7 +966,7 @@ bool Dungeon::is_secret_door(const int x, const int y)
 
 bool Dungeon::is_ascend_dungeon(const int x, const int y)
 {
-  if (is_oob(x, y)) {
+  if (unlikely(is_oob(x, y))) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
@@ -983,7 +983,7 @@ bool Dungeon::is_ascend_dungeon(const int x, const int y)
 
 bool Dungeon::is_floor_deco_at(const int x, const int y)
 {
-  if (is_oob(x, y)) {
+  if (unlikely(is_oob(x, y))) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
@@ -1000,7 +1000,7 @@ bool Dungeon::is_floor_deco_at(const int x, const int y)
 
 bool Dungeon::is_descend_sewer_at(const int x, const int y)
 {
-  if (is_oob(x, y)) {
+  if (unlikely(is_oob(x, y))) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
@@ -1017,7 +1017,7 @@ bool Dungeon::is_descend_sewer_at(const int x, const int y)
 
 bool Dungeon::is_descend_dungeon(const int x, const int y)
 {
-  if (is_oob(x, y)) {
+  if (unlikely(is_oob(x, y))) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
@@ -1034,7 +1034,7 @@ bool Dungeon::is_descend_dungeon(const int x, const int y)
 
 bool Dungeon::is_descend_sewer(const int x, const int y)
 {
-  if (is_oob(x, y)) {
+  if (unlikely(is_oob(x, y))) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
@@ -1051,7 +1051,7 @@ bool Dungeon::is_descend_sewer(const int x, const int y)
 
 bool Dungeon::is_lava(const int x, const int y)
 {
-  if (is_oob(x, y)) {
+  if (unlikely(is_oob(x, y))) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
@@ -1068,7 +1068,7 @@ bool Dungeon::is_lava(const int x, const int y)
 
 bool Dungeon::is_chasm(const int x, const int y)
 {
-  if (is_oob(x, y)) {
+  if (unlikely(is_oob(x, y))) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
@@ -1085,7 +1085,7 @@ bool Dungeon::is_chasm(const int x, const int y)
 
 bool Dungeon::is_shallow_water(const int x, const int y)
 {
-  if (is_oob(x, y)) {
+  if (unlikely(is_oob(x, y))) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
@@ -1102,7 +1102,7 @@ bool Dungeon::is_shallow_water(const int x, const int y)
 
 bool Dungeon::is_deep_water(const int x, const int y)
 {
-  if (is_oob(x, y)) {
+  if (unlikely(is_oob(x, y))) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
@@ -1119,7 +1119,7 @@ bool Dungeon::is_deep_water(const int x, const int y)
 
 bool Dungeon::is_hazard(const int x, const int y)
 {
-  if (is_oob(x, y)) {
+  if (unlikely(is_oob(x, y))) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
@@ -1145,7 +1145,7 @@ bool Dungeon::is_hazard(const int x, const int y)
 
 bool Dungeon::is_treasure_type(const int x, const int y)
 {
-  if (is_oob(x, y)) {
+  if (unlikely(is_oob(x, y))) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
@@ -1162,7 +1162,7 @@ bool Dungeon::is_treasure_type(const int x, const int y)
 
 bool Dungeon::is_treasure_class_a(const int x, const int y)
 {
-  if (is_oob(x, y)) {
+  if (unlikely(is_oob(x, y))) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
@@ -1179,7 +1179,7 @@ bool Dungeon::is_treasure_class_a(const int x, const int y)
 
 bool Dungeon::is_treasure_class_b(const int x, const int y)
 {
-  if (is_oob(x, y)) {
+  if (unlikely(is_oob(x, y))) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
@@ -1196,7 +1196,7 @@ bool Dungeon::is_treasure_class_b(const int x, const int y)
 
 bool Dungeon::is_treasure_class_c(const int x, const int y)
 {
-  if (is_oob(x, y)) {
+  if (unlikely(is_oob(x, y))) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
@@ -1213,7 +1213,7 @@ bool Dungeon::is_treasure_class_c(const int x, const int y)
 
 bool Dungeon::is_gold(const int x, const int y)
 {
-  if (is_oob(x, y)) {
+  if (unlikely(is_oob(x, y))) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
@@ -1230,7 +1230,7 @@ bool Dungeon::is_gold(const int x, const int y)
 
 bool Dungeon::is_key(const int x, const int y)
 {
-  if (is_oob(x, y)) {
+  if (unlikely(is_oob(x, y))) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
@@ -1247,7 +1247,7 @@ bool Dungeon::is_key(const int x, const int y)
 
 bool Dungeon::is_potion(const int x, const int y)
 {
-  if (is_oob(x, y)) {
+  if (unlikely(is_oob(x, y))) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
@@ -1264,7 +1264,7 @@ bool Dungeon::is_potion(const int x, const int y)
 
 bool Dungeon::is_wand(const int x, const int y)
 {
-  if (is_oob(x, y)) {
+  if (unlikely(is_oob(x, y))) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 
@@ -1281,7 +1281,7 @@ bool Dungeon::is_wand(const int x, const int y)
 
 bool Dungeon::is_ring(const int x, const int y)
 {
-  if (is_oob(x, y)) {
+  if (unlikely(is_oob(x, y))) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
   }
 

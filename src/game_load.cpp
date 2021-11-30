@@ -215,7 +215,7 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
   std::string name;
   in >> bits(name);
   auto tpp = tp_find(name);
-  if (! tpp) {
+  if (unlikely(! tpp)) {
     game_load_error = "unknown thing name '" + name;
     return (in);
   }

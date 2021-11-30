@@ -1066,7 +1066,7 @@ void tile_blit_outline(const Tilep &tile, const point &tl, const point &br, cons
 {
   float x1, x2, y1, y2;
 
-  if (! tile) {
+  if (unlikely(! tile)) {
     return;
   }
 
@@ -1100,7 +1100,7 @@ void tile_blit_outline(const Tilep &tile, const point &tl, const point &br, cons
 {
   float x1, x2, y1, y2;
 
-  if (! tile) {
+  if (unlikely(! tile)) {
     return;
   }
 
@@ -1138,7 +1138,7 @@ void tile_blit(const Tilep &tile, const point &tl, const point &br, const color 
 {
   float x1, x2, y1, y2;
 
-  if (! tile) {
+  if (unlikely(! tile)) {
     return;
   }
 
@@ -1161,7 +1161,7 @@ static void tile_blit_outline_section(const Tilep &tile, const fpoint &tile_tl, 
 {
   float x1, x2, y1, y2;
 
-  if (! tile) {
+  if (unlikely(! tile)) {
     return;
   }
 
@@ -1202,7 +1202,7 @@ void tile_blit(const Tilep &tile, const point &tl, const point &br)
   // Only some walls have deco tiles, so the pointer is left null for
   // those that do not.
   //
-  if (! tile) {
+  if (unlikely(! tile)) {
     return;
   }
 
@@ -1222,7 +1222,7 @@ void tile_blit(const Tilep &tile, const point &tl, const point &tr, const point 
   // Only some walls have deco tiles, so the pointer is left null for
   // those that do not.
   //
-  if (! tile) {
+  if (unlikely(! tile)) {
     return;
   }
 
@@ -1245,7 +1245,7 @@ void tile_blit_section(const Tilep &tile, const point &tile_tl, const point &til
   // Only some walls have deco tiles, so the pointer is left null for
   // those that do not.
   //
-  if (! tile) {
+  if (unlikely(! tile)) {
     return;
   }
 
@@ -1274,7 +1274,7 @@ void tile_blit_section_colored(const Tilep &tile, const fpoint &tile_tl, const f
   // Only some walls have deco tiles, so the pointer is left null for
   // those that do not.
   //
-  if (! tile) {
+  if (unlikely(! tile)) {
     return;
   }
 

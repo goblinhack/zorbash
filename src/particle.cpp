@@ -25,7 +25,7 @@ void Level::new_internal_particle(ThingId id, point start, point stop, isize sz,
   TRACE_AND_INDENT();
   DBG3("Create new internal particle");
 
-  if (! tile) {
+  if (unlikely(! tile)) {
     err("No internal particle tile");
     return;
   }
@@ -58,7 +58,7 @@ void Level::new_internal_particle(point start, point stop, isize sz, uint32_t du
   TRACE_AND_INDENT();
   DBG3("Create new internal particle");
 
-  if (! tile) {
+  if (unlikely(! tile)) {
     err("No internal particle tile");
     return;
   }
@@ -210,7 +210,7 @@ void Level::new_external_particle(ThingId id, point start, point stop, isize sz,
   TRACE_AND_INDENT();
   DBG3("Create new external particle");
 
-  if (! tile) {
+  if (unlikely(! tile)) {
     err("No external particle tile");
     return;
   }
@@ -246,7 +246,7 @@ void Level::new_external_particle(point start, point stop, isize sz, uint32_t du
   TRACE_AND_INDENT();
   DBG3("Create new external particle");
 
-  if (! tile) {
+  if (unlikely(! tile)) {
     err("No external particle tile");
     return;
   }

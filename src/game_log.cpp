@@ -31,7 +31,7 @@ void Level::dump(std::string pfx)
           auto id = get(all_things_id_at[ group ], x, y, z);
           if (id.ok()) {
             auto t = thing_find(id);
-            if (! t) {
+            if (unlikely(! t)) {
               continue;
             }
             t->log("dump");

@@ -27,13 +27,13 @@ std::list< Thingp > Thing::get_item_list(void)
 
   for (const auto &item : get_itemp()->carrying) {
     auto t = level->thing_find(item.id);
-    if (! t) {
+    if (unlikely(! t)) {
       continue;
     }
     if (t->is_bag()) {
       for (const auto &item : t->get_itemp()->carrying) {
         auto t = level->thing_find(item.id);
-        if (! t) {
+        if (unlikely(! t)) {
           continue;
         }
         out.push_back(t);
@@ -56,13 +56,13 @@ std::list< Thingp > Thing::get_treasure_list(void)
 
   for (const auto &item : get_itemp()->carrying) {
     auto t = level->thing_find(item.id);
-    if (! t) {
+    if (unlikely(! t)) {
       continue;
     }
     if (t->is_bag()) {
       for (const auto &item : t->get_itemp()->carrying) {
         auto t = level->thing_find(item.id);
-        if (! t) {
+        if (unlikely(! t)) {
           continue;
         }
         if (t->is_treasure_type()) {
@@ -89,13 +89,13 @@ std::list< Thingp > Thing::get_food_list(void)
 
   for (const auto &item : get_itemp()->carrying) {
     auto t = level->thing_find(item.id);
-    if (! t) {
+    if (unlikely(! t)) {
       continue;
     }
     if (t->is_bag()) {
       for (const auto &item : t->get_itemp()->carrying) {
         auto t = level->thing_find(item.id);
-        if (! t) {
+        if (unlikely(! t)) {
           continue;
         }
         if (t->is_food()) {
@@ -122,13 +122,13 @@ std::list< Thingp > Thing::get_wand_list(void)
 
   for (const auto &item : get_itemp()->carrying) {
     auto t = level->thing_find(item.id);
-    if (! t) {
+    if (unlikely(! t)) {
       continue;
     }
     if (t->is_bag()) {
       for (const auto &item : t->get_itemp()->carrying) {
         auto t = level->thing_find(item.id);
-        if (! t) {
+        if (unlikely(! t)) {
           continue;
         }
         if (t->is_wand()) {
@@ -155,13 +155,13 @@ std::list< Thingp > Thing::get_ring_list(void)
 
   for (const auto &item : get_itemp()->carrying) {
     auto t = level->thing_find(item.id);
-    if (! t) {
+    if (unlikely(! t)) {
       continue;
     }
     if (t->is_bag()) {
       for (const auto &item : t->get_itemp()->carrying) {
         auto t = level->thing_find(item.id);
-        if (! t) {
+        if (unlikely(! t)) {
           continue;
         }
         if (t->is_ring()) {
@@ -193,13 +193,13 @@ std::list< Thingp > Thing::get_weapon_list(void)
 
   for (const auto &item : get_itemp()->carrying) {
     auto t = level->thing_find(item.id);
-    if (! t) {
+    if (unlikely(! t)) {
       continue;
     }
     if (t->is_bag()) {
       for (const auto &item : t->get_itemp()->carrying) {
         auto t = level->thing_find(item.id);
-        if (! t) {
+        if (unlikely(! t)) {
           continue;
         }
         if (t->is_weapon()) {
@@ -231,13 +231,13 @@ std::vector< Thingp > Thing::get_item_vector(void)
 
   for (const auto &item : get_itemp()->carrying) {
     auto t = level->thing_find(item.id);
-    if (! t) {
+    if (unlikely(! t)) {
       continue;
     }
     if (t->is_bag()) {
       for (const auto &item : t->get_itemp()->carrying) {
         auto t = level->thing_find(item.id);
-        if (! t) {
+        if (unlikely(! t)) {
           continue;
         }
         out.push_back(t);
@@ -261,13 +261,13 @@ std::vector< Thingp > Thing::get_treasure_vector(void)
 
   for (const auto &item : get_itemp()->carrying) {
     auto t = level->thing_find(item.id);
-    if (! t) {
+    if (unlikely(! t)) {
       continue;
     }
     if (t->is_bag()) {
       for (const auto &item : t->get_itemp()->carrying) {
         auto t = level->thing_find(item.id);
-        if (! t) {
+        if (unlikely(! t)) {
           continue;
         }
         if (t->is_treasure_type()) {
@@ -294,13 +294,13 @@ std::vector< Thingp > Thing::get_food_vector(void)
 
   for (const auto &item : get_itemp()->carrying) {
     auto t = level->thing_find(item.id);
-    if (! t) {
+    if (unlikely(! t)) {
       continue;
     }
     if (t->is_bag()) {
       for (const auto &item : t->get_itemp()->carrying) {
         auto t = level->thing_find(item.id);
-        if (! t) {
+        if (unlikely(! t)) {
           continue;
         }
         if (t->is_food()) {
@@ -327,13 +327,13 @@ std::vector< Thingp > Thing::get_wand_vector(void)
 
   for (const auto &item : get_itemp()->carrying) {
     auto t = level->thing_find(item.id);
-    if (! t) {
+    if (unlikely(! t)) {
       continue;
     }
     if (t->is_bag()) {
       for (const auto &item : t->get_itemp()->carrying) {
         auto t = level->thing_find(item.id);
-        if (! t) {
+        if (unlikely(! t)) {
           continue;
         }
         if (t->is_wand()) {
@@ -360,13 +360,13 @@ std::vector< Thingp > Thing::get_ring_vector(void)
 
   for (const auto &item : get_itemp()->carrying) {
     auto t = level->thing_find(item.id);
-    if (! t) {
+    if (unlikely(! t)) {
       continue;
     }
     if (t->is_bag()) {
       for (const auto &item : t->get_itemp()->carrying) {
         auto t = level->thing_find(item.id);
-        if (! t) {
+        if (unlikely(! t)) {
           continue;
         }
         if (t->is_ring()) {
@@ -393,13 +393,13 @@ std::vector< Thingp > Thing::get_weapon_vector(void)
 
   for (const auto &item : get_itemp()->carrying) {
     auto t = level->thing_find(item.id);
-    if (! t) {
+    if (unlikely(! t)) {
       continue;
     }
     if (t->is_bag()) {
       for (const auto &item : t->get_itemp()->carrying) {
         auto t = level->thing_find(item.id);
-        if (! t) {
+        if (unlikely(! t)) {
           continue;
         }
         if (t->is_weapon()) {

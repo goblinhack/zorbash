@@ -376,7 +376,7 @@ static bool wid_rightbar_create(void)
         }
 
         auto t = level->thing_find(thing_id);
-        if (! t) {
+        if (unlikely(! t)) {
           continue;
         }
 
@@ -389,7 +389,7 @@ static bool wid_rightbar_create(void)
         }
 
         auto tile = tile_first(tiles);
-        if (! tile) {
+        if (unlikely(! tile)) {
           item++;
           continue;
         }
@@ -414,7 +414,7 @@ static bool wid_rightbar_create(void)
           auto thing_id = get(itemp->inventory_shortcuts, i);
           if (thing_id == equip_id) {
             static Tilep tile;
-            if (! tile) {
+            if (unlikely(! tile)) {
               tile = tile_find_mand("item_equiped");
             }
             if (i == game->inventory_highlight_slot) {
@@ -514,7 +514,7 @@ static bool wid_rightbar_create(void)
         }
 
         auto tile = tile_n(tiles, activated ? 2 : 1);
-        if (! tile) {
+        if (unlikely(! tile)) {
           item++;
           continue;
         }
@@ -606,7 +606,7 @@ static bool wid_rightbar_create(void)
         }
 
         auto tile = tile_n(tiles, activated ? 2 : 1);
-        if (! tile) {
+        if (unlikely(! tile)) {
           item++;
           continue;
         }
@@ -681,7 +681,7 @@ static bool wid_rightbar_create(void)
         }
 
         auto tile = tile_n(tiles, activated ? 2 : 1);
-        if (! tile) {
+        if (unlikely(! tile)) {
           item++;
           continue;
         }

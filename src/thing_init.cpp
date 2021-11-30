@@ -21,7 +21,7 @@
 
 Thingp Level::thing_new(Tpp tp, const point at)
 {
-  if (! tp) {
+  if (unlikely(! tp)) {
     err("No tp provided for thing creation");
     return nullptr;
   }

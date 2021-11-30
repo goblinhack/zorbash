@@ -48,7 +48,7 @@ void Level::fini(void)
             LOG("Clean thing %08" PRIx32 " at %d,%d", id.id, x, y);
 #endif
             auto t = thing_find(id);
-            if (! t) {
+            if (unlikely(! t)) {
               continue;
             }
 #ifdef ENABLE_THING_ID_LOGS
@@ -78,7 +78,7 @@ void Level::fini(void)
           if (id.ok()) {
             err("Level fini: Did not detach thing id %08" PRIx32 " at %d,%d,%d", id.id, x, y, z);
             auto t = thing_find(id);
-            if (! t) {
+            if (unlikely(! t)) {
               continue;
             }
             t->err("Level fini: Did not detach thing id from all_things_id_at");

@@ -36,7 +36,7 @@ void Level::things_gc(bool force)
       DBG3("Thing %08" PRIx32 " garbage collect", id.id);
 
       auto t = thing_find(id);
-      if (! t) {
+      if (unlikely(! t)) {
         ERR("Thing %08" PRIx32 " not found to garbage collect", id.id);
         continue;
       }

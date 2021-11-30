@@ -95,7 +95,7 @@ void Thing::buff_remove_all(void)
   while (! get_itemp()->buffs.empty()) {
     auto id = *get_itemp()->buffs.begin();
     auto t  = level->thing_find(id);
-    if (! t) {
+    if (unlikely(! t)) {
       return;
     }
     buff_remove(t);
@@ -120,7 +120,7 @@ bool Thing::buff_add(Tpp what)
   // Need to allow for duplicates, so cannot check if the tp exists
   //
   auto t = level->thing_new(what, mid_at);
-  if (! t) {
+  if (unlikely(! t)) {
     return false;
   }
 

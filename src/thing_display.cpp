@@ -375,11 +375,13 @@ void Thing::blit_text(std::string const &text, color fg, point oblit_tl, point o
       continue;
     }
 
-    if (! tile) {
+    if (unlikely(! tile)) {
       tile = font_small->unicode_to_tile(c);
     }
 
-    tile_blit(tile, blit_tl, blit_br, fg);
+    if (tile) {
+      tile_blit(tile, blit_tl, blit_br, fg);
+    }
 
     tile = nullptr;
     blit_tl.x += UI_FONT_SMALL_WIDTH;
@@ -439,7 +441,7 @@ bool Thing::get_coords(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
   float tile_pix_height = TILE_HEIGHT;
   if (! is_no_tile()) {
     tile = tile_index_to_tile(tile_curr);
-    if (! tile) {
+    if (unlikely(! tile)) {
       err("Has no tile, index %d", tile_curr);
       blit = false;
     } else {
@@ -801,7 +803,7 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
 
     {
       auto tile = get(game->tile_cache_health, h_step);
-      if (! tile) {
+      if (unlikely(! tile)) {
         std::string s = "health" + std::to_string(h_step);
         tile          = tile_find_mand(s);
         set(game->tile_cache_health, h_step, tile);

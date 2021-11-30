@@ -715,7 +715,7 @@ void Level::create_dungeon_place_walls(Dungeonp d, Tpp tp, int variant, int bloc
 
         auto t    = thing_new(what, point(X, Y));
         auto tile = tile_find(tilename);
-        if (! tile) {
+        if (unlikely(! tile)) {
           ERR("Wall tile %s not found", tilename.c_str());
           return;
         }
@@ -735,7 +735,7 @@ void Level::create_dungeon_place_rocks(Dungeonp d, int variant, int block_width,
 {
   TRACE_AND_INDENT();
   auto tp = tp_random_rock();
-  if (! tp) {
+  if (unlikely(! tp)) {
     ERR("Place rocks failed");
     return;
   }
@@ -800,7 +800,7 @@ void Level::create_dungeon_place_rocks(Dungeonp d, int variant, int block_width,
 
         auto t    = thing_new(what, point(X, Y));
         auto tile = tile_find(tilename);
-        if (! tile) {
+        if (unlikely(! tile)) {
           ERR("Rock tile %s not found", tilename.c_str());
           return;
         }
@@ -916,7 +916,7 @@ void Level::create_dungeon_place_floors(Dungeonp d, std::string what, int floor_
 
         auto t    = thing_new(new_thing, point(X, Y));
         auto tile = tile_find(tilename);
-        if (! tile) {
+        if (unlikely(! tile)) {
           ERR("Floor tile %s not found", tilename.c_str());
           return;
         }
@@ -1108,7 +1108,7 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules(Dungeonp d)
         tp = tp_random_skillstone();
       }
 
-      if (! tp) {
+      if (unlikely(! tp)) {
         continue;
       }
 
@@ -1347,7 +1347,7 @@ void Level::place_floor_deco(Dungeonp d)
       pcg_srand(seed + x + (y * MAP_WIDTH));
 
       auto tp = tp_random_deco();
-      if (! tp) {
+      if (unlikely(! tp)) {
         return;
       }
 
@@ -1401,7 +1401,7 @@ void Level::create_dungeon_place_random_floor_deco(Dungeonp d)
       pcg_srand(seed + x + (y * MAP_WIDTH));
 
       auto tp = tp_random_deco();
-      if (! tp) {
+      if (unlikely(! tp)) {
         return;
       }
 
@@ -1507,7 +1507,7 @@ void Level::create_dungeon_place_sewer_pipes(Dungeonp d)
     pcg_srand(seed + x + (y * MAP_WIDTH));
 
     auto tp = tp_random_descend_sewer();
-    if (! tp) {
+    if (unlikely(! tp)) {
       return;
     }
 
@@ -1613,7 +1613,7 @@ void Level::place_dirt(Dungeonp d)
     for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
       if (! d->is_anything_at(x, y) || d->is_dirt(x, y)) {
         auto tp = tp_random_dirt();
-        if (! tp) {
+        if (unlikely(! tp)) {
           return;
         }
 
@@ -1636,7 +1636,7 @@ void Level::place_random_treasure(Dungeonp d)
     if (d->is_dirt(x, y) || d->is_treasure_class_a(x, y) || d->is_treasure_class_b(x, y) ||
         d->is_treasure_class_c(x, y) || d->is_deep_water(x, y) || d->is_spiderweb(x, y) || d->is_foilage(x, y)) {
       auto tp = tp_random_treasure();
-      if (! tp) {
+      if (unlikely(! tp)) {
         return;
       }
 
@@ -1713,7 +1713,7 @@ void Level::place_dry_grass(Dungeonp d)
     for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
       if (! d->is_anything_at(x, y) || d->is_dry_grass(x, y)) {
         auto tp = tp_random_dry_grass();
-        if (! tp) {
+        if (unlikely(! tp)) {
           return;
         }
 
@@ -1734,7 +1734,7 @@ void Level::place_foilage(Dungeonp d)
     for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
       if (! d->is_anything_at(x, y) || d->is_foilage(x, y)) {
         auto tp = tp_random_foilage();
-        if (! tp) {
+        if (unlikely(! tp)) {
           return;
         }
 
@@ -1755,7 +1755,7 @@ void Level::place_spiderweb(Dungeonp d)
     for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
       if (! d->is_anything_at(x, y) || d->is_spiderweb(x, y)) {
         auto tp = tp_random_spiderweb();
-        if (! tp) {
+        if (unlikely(! tp)) {
           return;
         }
 

@@ -1161,7 +1161,7 @@ Tpp string2tp(const char **s)
   *s += (t - tmp);
 
   Tpp tp = tp_find(tmp);
-  if (! tp) {
+  if (unlikely(! tp)) {
     ERR("Tp name [%s] not found", tmp);
   }
 
@@ -1195,7 +1195,7 @@ Tpp string2tp(const std::string &s, int *len)
   }
 
   Tpp tp = tp_find(out);
-  if (! tp) {
+  if (unlikely(! tp)) {
     ERR("Tp name [%s] not found", out.c_str());
   }
 

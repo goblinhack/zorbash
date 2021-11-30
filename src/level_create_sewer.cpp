@@ -331,7 +331,7 @@ void Level::create_sewer_place_walls(int variant, int block_width, int block_hei
 {
   TRACE_AND_INDENT();
   auto tp = tp_random_sewer_wall();
-  if (! tp) {
+  if (unlikely(! tp)) {
     ERR("Place walls failed");
     return;
   }
@@ -393,7 +393,7 @@ void Level::create_sewer_place_walls(int variant, int block_width, int block_hei
 
         auto t    = thing_new(what, point(X, Y));
         auto tile = tile_find(tilename);
-        if (! tile) {
+        if (unlikely(! tile)) {
           ERR("wall tile %s not found", tilename.c_str());
           return;
         }

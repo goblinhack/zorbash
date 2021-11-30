@@ -24,7 +24,7 @@ bool Thing::ai_obstacle_for_me(const point &p)
   FOR_ALL_THING_GROUPS(group)
   {
     for (auto &t : get(level->all_things_ptr_at[ group ], p.x, p.y)) {
-      if (! t) {
+      if (unlikely(! t)) {
         continue;
       }
 

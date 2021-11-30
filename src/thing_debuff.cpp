@@ -94,7 +94,7 @@ void Thing::debuff_remove_all(void)
   while (! get_itemp()->debuffs.empty()) {
     auto id = *get_itemp()->debuffs.begin();
     auto t  = level->thing_find(id);
-    if (! t) {
+    if (unlikely(! t)) {
       return;
     }
     debuff_remove(t);
@@ -119,7 +119,7 @@ bool Thing::debuff_add(Tpp what)
   // Need to allow for duplicates, so cannot check if the tp exists
   //
   auto t = level->thing_new(what, mid_at);
-  if (! t) {
+  if (unlikely(! t)) {
     return false;
   }
 
@@ -151,7 +151,7 @@ bool Thing::debuff_add_if_not_found(Tpp what)
   // Need to allow for duplicates, so cannot check if the tp exists
   //
   auto t = level->thing_new(what, mid_at);
-  if (! t) {
+  if (unlikely(! t)) {
     return false;
   }
 

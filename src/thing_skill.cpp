@@ -97,7 +97,7 @@ void Thing::skill_remove_all(void)
   while (! get_itemp()->skills.empty()) {
     auto id = *get_itemp()->skills.begin();
     auto t  = level->thing_find(id);
-    if (! t) {
+    if (unlikely(! t)) {
       return;
     }
     skill_remove(t);
@@ -154,7 +154,7 @@ bool Thing::skill_add(Tpp what)
 {
   TRACE_AND_INDENT();
   auto t = level->thing_new(what, mid_at);
-  if (! t) {
+  if (unlikely(! t)) {
     err("Cannot learn skill");
     return false;
   }

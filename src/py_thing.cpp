@@ -28,7 +28,7 @@
     }                                                                                                                \
                                                                                                                      \
     Thingp t = game->thing_find(id);                                                                                 \
-    if (! t) {                                                                                                       \
+    if (unlikely(! t)) {                                                                                             \
       ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);                                                          \
       Py_RETURN_FALSE;                                                                                               \
     }                                                                                                                \
@@ -50,7 +50,7 @@
     }                                                                                                                \
                                                                                                                      \
     Thingp t = game->thing_find(id);                                                                                 \
-    if (! t) {                                                                                                       \
+    if (unlikely(! t)) {                                                                                             \
       ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);                                                          \
       Py_RETURN_FALSE;                                                                                               \
     }                                                                                                                \
@@ -72,7 +72,7 @@
     }                                                                                                                \
                                                                                                                      \
     Thingp t = game->thing_find(id);                                                                                 \
-    if (! t) {                                                                                                       \
+    if (unlikely(! t)) {                                                                                             \
       ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);                                                          \
       Py_RETURN_FALSE;                                                                                               \
     }                                                                                                                \
@@ -105,13 +105,13 @@
     }                                                                                                                \
                                                                                                                      \
     Thingp t = game->thing_find(id);                                                                                 \
-    if (! t) {                                                                                                       \
+    if (unlikely(! t)) {                                                                                             \
       ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);                                                          \
       Py_RETURN_FALSE;                                                                                               \
     }                                                                                                                \
                                                                                                                      \
     Thingp o = game->thing_find(oid);                                                                                \
-    if (! t) {                                                                                                       \
+    if (unlikely(! t)) {                                                                                             \
       ERR("%s: Cannot find thing ID %u", __FUNCTION__, oid);                                                         \
       Py_RETURN_FALSE;                                                                                               \
     }                                                                                                                \
@@ -138,7 +138,7 @@
     }                                                                                                                \
                                                                                                                      \
     Thingp t = game->thing_find(id);                                                                                 \
-    if (! t) {                                                                                                       \
+    if (unlikely(! t)) {                                                                                             \
       ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);                                                          \
       return Py_BuildValue("I", 0);                                                                                  \
     }                                                                                                                \
@@ -165,7 +165,7 @@
     }                                                                                                                \
                                                                                                                      \
     Thingp t = game->thing_find(id);                                                                                 \
-    if (! t) {                                                                                                       \
+    if (unlikely(! t)) {                                                                                             \
       ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);                                                          \
       Py_RETURN_FALSE;                                                                                               \
     }                                                                                                                \
@@ -194,7 +194,7 @@ PyObject *thing_get_coords(PyObject *obj, PyObject *args, PyObject *keywds)
   }
 
   Thingp t = game->thing_find(id);
-  if (! t) {
+  if (unlikely(! t)) {
     ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
     Py_RETURN_NONE;
   }
@@ -515,7 +515,7 @@ PyObject *thing_buff_add(PyObject *obj, PyObject *args, PyObject *keywds)
   }
 
   auto tp = tp_find(what);
-  if (! tp) {
+  if (unlikely(! tp)) {
     ERR("%s: No buff tp called %s found", __FUNCTION__, what);
     Py_RETURN_NONE;
   }
@@ -553,7 +553,7 @@ PyObject *thing_debuff_add(PyObject *obj, PyObject *args, PyObject *keywds)
   }
 
   auto tp = tp_find(what);
-  if (! tp) {
+  if (unlikely(! tp)) {
     ERR("%s: No debuff tp called %s found", __FUNCTION__, what);
     Py_RETURN_NONE;
   }
@@ -591,7 +591,7 @@ PyObject *thing_buff_remove(PyObject *obj, PyObject *args, PyObject *keywds)
   }
 
   auto tp = tp_find(what);
-  if (! tp) {
+  if (unlikely(! tp)) {
     ERR("%s: No buff tp called %s found", __FUNCTION__, what);
     Py_RETURN_NONE;
   }
@@ -629,7 +629,7 @@ PyObject *thing_debuff_remove(PyObject *obj, PyObject *args, PyObject *keywds)
   }
 
   auto tp = tp_find(what);
-  if (! tp) {
+  if (unlikely(! tp)) {
     ERR("%s: No debuff tp called %s found", __FUNCTION__, what);
     Py_RETURN_NONE;
   }

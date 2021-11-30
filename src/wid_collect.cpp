@@ -293,7 +293,7 @@ void Game::wid_collect_create(const std::list< Thingp > items /* intentional cop
     collect_items.clear();
     std::map< Thingp, bool > found;
     for (auto t : items) {
-      if (! t) {
+      if (unlikely(! t)) {
         collect_items.push_back(t);
         continue;
       }

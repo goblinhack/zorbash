@@ -248,7 +248,7 @@ bool ascii_is_empty(int x, int y)
 
 void ascii_set_fg(int x, int y, color c)
 {
-  if (! ascii_ok_for_scissors(x, y)) {
+  if (unlikely(! ascii_ok_for_scissors(x, y))) {
     return;
   }
 
@@ -262,7 +262,7 @@ void ascii_set_fg(int x, int y, color c)
 
 void ascii_set_bg(int x, int y, color c)
 {
-  if (! ascii_ok_for_scissors(x, y)) {
+  if (unlikely(! ascii_ok_for_scissors(x, y))) {
     return;
   }
 
@@ -276,7 +276,7 @@ void ascii_set_bg(int x, int y, color c)
 
 void ascii_set_bg2(int x, int y, color c)
 {
-  if (! ascii_ok_for_scissors(x, y)) {
+  if (unlikely(! ascii_ok_for_scissors(x, y))) {
     return;
   }
 
@@ -290,7 +290,7 @@ void ascii_set_bg2(int x, int y, color c)
 
 void ascii_set_fg2(int x, int y, color c)
 {
-  if (! ascii_ok_for_scissors(x, y)) {
+  if (unlikely(! ascii_ok_for_scissors(x, y))) {
     return;
   }
 
@@ -304,7 +304,7 @@ void ascii_set_fg2(int x, int y, color c)
 
 void ascii_set_fg3(int x, int y, color c)
 {
-  if (! ascii_ok_for_scissors(x, y)) {
+  if (unlikely(! ascii_ok_for_scissors(x, y))) {
     return;
   }
 
@@ -318,7 +318,7 @@ void ascii_set_fg3(int x, int y, color c)
 
 void ascii_set_fg4(int x, int y, color c)
 {
-  if (! ascii_ok_for_scissors(x, y)) {
+  if (unlikely(! ascii_ok_for_scissors(x, y))) {
     return;
   }
 
@@ -336,7 +336,7 @@ void ascii_set_context(int x, int y, void *context)
     return;
   }
 
-  if (! ascii_ok_for_scissors(x, y)) {
+  if (unlikely(! ascii_ok_for_scissors(x, y))) {
     return;
   }
 
@@ -358,7 +358,7 @@ void *ascii_get_context(int x, int y)
 
 void ascii_set_bg(int x, int y, const Texp tex, float tx, float ty, float dx, float dy)
 {
-  if (! ascii_ok_for_scissors(x, y)) {
+  if (unlikely(! ascii_ok_for_scissors(x, y))) {
     return;
   }
 
@@ -373,7 +373,7 @@ void ascii_set_bg(int x, int y, const Texp tex, float tx, float ty, float dx, fl
 
 void ascii_set_bg(int x, int y, const Tilep tile)
 {
-  if (! ascii_ok_for_scissors(x, y)) {
+  if (unlikely(! ascii_ok_for_scissors(x, y))) {
     return;
   }
 
@@ -388,7 +388,7 @@ void ascii_set_bg(int x, int y, const Tilep tile)
 
 void ascii_set_bg2(int x, int y, const Tilep tile)
 {
-  if (! ascii_ok_for_scissors(x, y)) {
+  if (unlikely(! ascii_ok_for_scissors(x, y))) {
     return;
   }
 
@@ -403,7 +403,7 @@ void ascii_set_bg2(int x, int y, const Tilep tile)
 
 void ascii_set_bg2(int x, int y, const Tilep tile, float tx, float ty, float dx, float dy)
 {
-  if (! ascii_ok_for_scissors(x, y)) {
+  if (unlikely(! ascii_ok_for_scissors(x, y))) {
     return;
   }
 
@@ -426,7 +426,7 @@ void ascii_set_bg2(int x, int y, const wchar_t c) { ascii_set_bg2(x, y, font_lar
 
 void ascii_set_fg(int x, int y, const Texp tex, float tx, float ty, float dx, float dy)
 {
-  if (! ascii_ok_for_scissors(x, y)) {
+  if (unlikely(! ascii_ok_for_scissors(x, y))) {
     return;
   }
 
@@ -441,7 +441,7 @@ void ascii_set_fg(int x, int y, const Texp tex, float tx, float ty, float dx, fl
 
 void ascii_set_fg(int x, int y, const Tilep tile)
 {
-  if (! ascii_ok_for_scissors(x, y)) {
+  if (unlikely(! ascii_ok_for_scissors(x, y))) {
     return;
   }
 
@@ -456,7 +456,7 @@ void ascii_set_fg(int x, int y, const Tilep tile)
 
 void ascii_set_fg2(int x, int y, const Tilep tile)
 {
-  if (! ascii_ok_for_scissors(x, y)) {
+  if (unlikely(! ascii_ok_for_scissors(x, y))) {
     return;
   }
 
@@ -471,7 +471,7 @@ void ascii_set_fg2(int x, int y, const Tilep tile)
 
 void ascii_set_fg3(int x, int y, const Tilep tile)
 {
-  if (! ascii_ok_for_scissors(x, y)) {
+  if (unlikely(! ascii_ok_for_scissors(x, y))) {
     return;
   }
 
@@ -486,7 +486,7 @@ void ascii_set_fg3(int x, int y, const Tilep tile)
 
 void ascii_set_fg4(int x, int y, const Tilep tile)
 {
-  if (! ascii_ok_for_scissors(x, y)) {
+  if (unlikely(! ascii_ok_for_scissors(x, y))) {
     return;
   }
 
@@ -501,7 +501,7 @@ void ascii_set_fg4(int x, int y, const Tilep tile)
 
 void ascii_set_fg2(int x, int y, const Tilep tile, float tx, float ty, float dx, float dy)
 {
-  if (! ascii_ok_for_scissors(x, y)) {
+  if (unlikely(! ascii_ok_for_scissors(x, y))) {
     return;
   }
 
@@ -516,7 +516,7 @@ void ascii_set_fg2(int x, int y, const Tilep tile, float tx, float ty, float dx,
 
 void ascii_set_fg3(int x, int y, const Tilep tile, float tx, float ty, float dx, float dy)
 {
-  if (! ascii_ok_for_scissors(x, y)) {
+  if (unlikely(! ascii_ok_for_scissors(x, y))) {
     return;
   }
 
@@ -531,7 +531,7 @@ void ascii_set_fg3(int x, int y, const Tilep tile, float tx, float ty, float dx,
 
 void ascii_set_fg4(int x, int y, const Tilep tile, float tx, float ty, float dx, float dy)
 {
-  if (! ascii_ok_for_scissors(x, y)) {
+  if (unlikely(! ascii_ok_for_scissors(x, y))) {
     return;
   }
 
@@ -634,7 +634,7 @@ void ascii_putf__(int x, int y, color fg, color bg, const std::wstring text)
       continue;
     }
 
-    if (! tile) {
+    if (unlikely(! tile)) {
       tile = font_large->unicode_to_tile(c);
       if (tile == nullptr) {
         tile = tile_find_mand(TILE_UNKNOWN_NAME);
@@ -675,7 +675,7 @@ void ascii_putf__(int x, int y, color fg, color bg, const std::wstring text)
     if (bg_set) {
       if (bg.r || bg.g || bg.b || bg.a) {
         static Tilep tile;
-        if (! tile) {
+        if (unlikely(! tile)) {
           tile = tile_find_mand(TILE_CURSOR_NAME);
         }
         cell->bg_tile = tile;

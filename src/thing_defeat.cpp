@@ -60,27 +60,6 @@ void Thing::defeat(Thingp defeater, const char *reason)
     }
   }
 
-  if (! level->is_being_destroyed) {
-    auto on_death = on_death_do();
-    if (! std::empty(on_death)) {
-      auto t = split_tokens(on_death, '.');
-      if (t.size() == 2) {
-        auto        mod   = t[ 0 ];
-        auto        fn    = t[ 1 ];
-        std::size_t found = fn.find("()");
-        if (found != std::string::npos) {
-          fn = fn.replace(found, 2, "");
-        }
-
-        dbg("Call %s.%s(%s)", mod.c_str(), fn.c_str(), to_string().c_str());
-
-        py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) mid_at.x, (unsigned int) mid_at.y);
-      } else {
-        ERR("Bad on_death call [%s] expected mod:function, got %d elems", on_death.c_str(), (int) on_death.size());
-      }
-    }
-  }
-
   //
   // Unequip weapons
   //
@@ -176,9 +155,72 @@ void Thing::defeat(Thingp defeater, const char *reason)
     for (int splatter = 0; splatter < splatters; splatter++) {
       auto tpp = tp_random_blood();
       (void) level->thing_new(tpp, mid_at);
-      if (! tpp) {
+      if (unlikely(! tpp)) {
         err("Could not place blood");
         break;
+      }
+    }
+  }
+
+  //
+  // Add to the hiscore table?
+  //
+  if (is_player()) {
+    //
+    // Poor player
+    //
+    if (game->robot_mode) {
+      if (defeater && defeater->is_acid()) {
+        TOPCON("%%fg=red$RIP: Robot is dissolved to death %s.%%fg=reset$", reason);
+      } else if (defeater && defeater->is_fire()) {
+        TOPCON("%%fg=red$RIP: Robot is burnt to death %s.%%fg=reset$", reason);
+      } else if (defeater && defeater->is_water()) {
+        TOPCON("%%fg=red$RIP: Robot is drowned %s.%%fg=reset$", reason);
+      } else if (defeater && defeater->is_necrotic_danger_level()) {
+        TOPCON("%%fg=red$RIP: Robot is rotted to death %s.%%fg=reset$", reason);
+      } else if (defeater && defeater->is_engulfer()) {
+        TOPCON("%%fg=red$RIP: Robot is consumed %s.%%fg=reset$", reason);
+      } else if (defeater && defeater->is_monst()) {
+        TOPCON("%%fg=red$RIP: Robot is defeated %s.%%fg=reset$", reason);
+      } else {
+        TOPCON("%%fg=red$RIP: Robot is deactivated %s.%%fg=reset$", reason);
+      }
+    } else {
+      if (defeater && defeater->is_acid()) {
+        TOPCON("%%fg=red$RIP: You are dissolved to death %s.%%fg=reset$", reason);
+      } else if (defeater && defeater->is_fire()) {
+        TOPCON("%%fg=red$RIP: You are burnt to death %s.%%fg=reset$", reason);
+      } else if (defeater && defeater->is_water()) {
+        TOPCON("%%fg=red$RIP: You are drowned %s.", reason);
+      } else if (defeater && defeater->is_necrotic_danger_level()) {
+        TOPCON("%%fg=red$RIP: You are rotted to death %s.%%fg=reset$", reason);
+      } else if (defeater && defeater->is_engulfer()) {
+        TOPCON("%%fg=red$RIP: You are consumed %s.%%fg=reset$", reason);
+      } else if (defeater && defeater->is_monst()) {
+        TOPCON("%%fg=red$RIP: You are defeated %s.%%fg=reset$", reason);
+      } else {
+        TOPCON("%%fg=red$RIP: You are killed %s.%%fg=reset$", reason);
+      }
+    }
+  }
+
+  if (is_player() || (is_monst() && ! level->is_being_destroyed)) {
+    auto on_death = on_death_do();
+    if (! std::empty(on_death)) {
+      auto t = split_tokens(on_death, '.');
+      if (t.size() == 2) {
+        auto        mod   = t[ 0 ];
+        auto        fn    = t[ 1 ];
+        std::size_t found = fn.find("()");
+        if (found != std::string::npos) {
+          fn = fn.replace(found, 2, "");
+        }
+
+        dbg("Call %s.%s(%s)", mod.c_str(), fn.c_str(), to_string().c_str());
+
+        py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) mid_at.x, (unsigned int) mid_at.y);
+      } else {
+        ERR("Bad on_death call [%s] expected mod:function, got %d elems", on_death.c_str(), (int) on_death.size());
       }
     }
   }
@@ -197,61 +239,11 @@ void Thing::defeat(Thingp defeater, const char *reason)
     if (game->config.hiscores.is_new_hiscore(this)) {
       if (game->robot_mode) {
         TOPCON("%%fg=yellow$New robo high score, %s place!%%fg=reset$", game->config.hiscores.place_str(this));
-        if (defeater && defeater->is_acid()) {
-          TOPCON("%%fg=red$RIP: Robot is dissolved to death %s.%%fg=reset$", reason);
-        } else if (defeater && defeater->is_fire()) {
-          TOPCON("%%fg=red$RIP: Robot is burnt to death %s.%%fg=reset$", reason);
-        } else if (defeater && defeater->is_water()) {
-          TOPCON("%%fg=red$RIP: Robot is drowned %s.%%fg=reset$", reason);
-        } else if (defeater && defeater->is_necrotic_danger_level()) {
-          TOPCON("%%fg=red$RIP: Robot is rotted to death %s.%%fg=reset$", reason);
-        } else if (defeater && defeater->is_engulfer()) {
-          TOPCON("%%fg=red$RIP: Robot is consumed %s.%%fg=reset$", reason);
-        } else if (defeater && defeater->is_monst()) {
-          TOPCON("%%fg=red$RIP: Robot is defeated %s.%%fg=reset$", reason);
-        } else {
-          TOPCON("%%fg=red$RIP: Robot is deactivated %s.%%fg=reset$", reason);
-        }
       } else {
         TOPCON("%%fg=yellow$New high score, %s place!%%fg=reset$", game->config.hiscores.place_str(this));
-        if (defeater && defeater->is_acid()) {
-          TOPCON("%%fg=red$RIP: You are dissolved to death %s.%%fg=reset$", reason);
-        } else if (defeater && defeater->is_fire()) {
-          TOPCON("%%fg=red$RIP: You are burnt to death %s.%%fg=reset$", reason);
-        } else if (defeater && defeater->is_water()) {
-          TOPCON("%%fg=red$RIP: You are drowned %s.", reason);
-        } else if (defeater && defeater->is_necrotic_danger_level()) {
-          TOPCON("%%fg=red$RIP: You are rotted to death %s.%%fg=reset$", reason);
-        } else if (defeater && defeater->is_engulfer()) {
-          TOPCON("%%fg=red$RIP: You are consumed %s.%%fg=reset$", reason);
-        } else if (defeater && defeater->is_monst()) {
-          TOPCON("%%fg=red$RIP: You are defeated %s.%%fg=reset$", reason);
-        } else {
-          TOPCON("%%fg=red$RIP: You are killed %s.%%fg=reset$", reason);
-        }
       }
       game->config.hiscores.add_new_hiscore(this, title(), reason);
     }
-
-    //
-    // Some funny? death messages
-    //
-    std::vector< std::string > messages;
-    messages.push_back("Congratulations, you are dead!");
-    messages.push_back("Time to rest in the fjords with your parrot!");
-    messages.push_back("Welcome to the afterlife!");
-    messages.push_back("You hear the sound of monsters laughing...");
-    messages.push_back("You wave farewell to the monsters.");
-    messages.push_back("The Gods are disappointed in you...");
-    messages.push_back("And I thought you were tough...");
-    messages.push_back("Life was hard. Take it easy now...");
-    messages.push_back("In this dungeon the only certainty is death...");
-    messages.push_back("You fought bravely...");
-    messages.push_back("Dead, what? When?");
-    messages.push_back("Not sure how that happened. It was going so well...");
-    messages.push_back("Just give me a minute to recover my breath...");
-    auto which = non_pcg_one_of(messages);
-    TOPCON("%%fg=red$%s%%fg=reset$", which.c_str());
 
     level->map_follow_player = false;
     game->dead_select(reason);
@@ -294,7 +286,7 @@ void Thing::defeat(Thingp defeater, const char *reason)
       dbg("Already a corpse, clean it up");
     }
     auto tpp = tp_random_bones();
-    if (! tpp) {
+    if (unlikely(! tpp)) {
       err("Could not place bones");
     }
     (void) level->thing_new(tpp, mid_at);

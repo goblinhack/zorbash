@@ -312,7 +312,7 @@ void Level::describe(Thingp t)
     return;
   }
 
-  if (! t) {
+  if (unlikely(! t)) {
     err("Null thing");
     return;
   }

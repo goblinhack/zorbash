@@ -66,7 +66,7 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
   auto tp    = t->tp();
   auto tiles = &tp->tiles;
   auto tile  = tile_first(tiles);
-  if (! tile) {
+  if (unlikely(! tile)) {
     t->err("No tile for thing info");
     return nullptr;
   }
@@ -237,7 +237,7 @@ bool Game::wid_thing_info_push_popup(Thingp t)
   point br     = make_point(29, TERM_HEIGHT - 2);
 
   auto w = game->wid_thing_info_create_popup(t, tl, br);
-  if (! w) {
+  if (unlikely(! w)) {
     IF_DEBUG1 { t->log("No; cannot create popup"); }
     return false;
   }

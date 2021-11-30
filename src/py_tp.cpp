@@ -92,7 +92,7 @@ PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds)
     PY_DBG("%s(%s -> \"%s\")", __FUNCTION__, tp_name, value);                                                        \
                                                                                                                      \
     tp = tp_find(tp_name);                                                                                           \
-    if (! tp) {                                                                                                      \
+    if (unlikely(! tp)) {                                                                                            \
       ERR("%s: Cannot find tp %s", __FUNCTION__, tp_name);                                                           \
       goto done;                                                                                                     \
     }                                                                                                                \
@@ -142,7 +142,7 @@ PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds)
     PY_DBG("%s(%s -> \"%s\")", __FUNCTION__, tp_name, value);                                                        \
                                                                                                                      \
     tp = tp_find(tp_name);                                                                                           \
-    if (! tp) {                                                                                                      \
+    if (unlikely(! tp)) {                                                                                            \
       ERR("%s: Cannot find tp %s", __FUNCTION__, tp_name);                                                           \
       goto done;                                                                                                     \
     }                                                                                                                \
@@ -191,7 +191,7 @@ PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds)
     }                                                                                                                \
                                                                                                                      \
     tp = tp_find(tp_name);                                                                                           \
-    if (! tp) {                                                                                                      \
+    if (unlikely(! tp)) {                                                                                            \
       ERR("%s: Cannot find tp %s", __FUNCTION__, tp_name);                                                           \
       goto done;                                                                                                     \
     }                                                                                                                \
@@ -243,7 +243,7 @@ PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds)
     PY_DBG("%s(%s -> %d)", __FUNCTION__, tp_name, value);                                                            \
                                                                                                                      \
     tp = tp_find(tp_name);                                                                                           \
-    if (! tp) {                                                                                                      \
+    if (unlikely(! tp)) {                                                                                            \
       ERR("%s: Cannot find tp %s", __FUNCTION__, tp_name);                                                           \
       goto done;                                                                                                     \
     }                                                                                                                \
@@ -287,7 +287,7 @@ PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds)
     PY_DBG("%s(%s -> %g)", __FUNCTION__, tp_name, value);                                                            \
                                                                                                                      \
     tp = tp_find(tp_name);                                                                                           \
-    if (! tp) {                                                                                                      \
+    if (unlikely(! tp)) {                                                                                            \
       ERR("%s: Cannot find tp %s", __FUNCTION__, tp_name);                                                           \
       goto done;                                                                                                     \
     }                                                                                                                \
@@ -406,7 +406,7 @@ static PyObject *tp_set_tile_dir(PyObject *obj, PyObject *args, PyObject *keywds
   PY_DBG("%s(%s -> \"%s\")", __FUNCTION__, tp_name, py_tile_name);
 
   tp = tp_find(tp_name);
-  if (! tp) {
+  if (unlikely(! tp)) {
     ERR("%s: Cannot find tp %s", __FUNCTION__, tp_name);
     Py_RETURN_FALSE;
   }
@@ -500,7 +500,7 @@ static PyObject *tp_set_tile_dir(PyObject *obj, PyObject *args, PyObject *keywds
       Tilep tile;
 
       tile = tile_find(std::string(py_tile_name));
-      if (! tile) {
+      if (unlikely(! tile)) {
         ERR("%s: Cannot find tile '%s' for tp %s", __FUNCTION__, py_tile_name, tp_name);
         Py_RETURN_FALSE;
       }
@@ -715,7 +715,7 @@ PyObject *tp_update_(PyObject *obj, PyObject *args, PyObject *keywds)
   PY_DBG("%s(%s -> %d)", __FUNCTION__, tp_name, value);
 
   tp = tp_find(tp_name);
-  if (! tp) {
+  if (unlikely(! tp)) {
     ERR("%s: Cannot find tp %s", __FUNCTION__, tp_name);
     goto done;
   }
@@ -759,7 +759,7 @@ PyObject *level_spawn_next_to_(PyObject *obj, PyObject *args, PyObject *keywds)
   }
 
   auto t = level->thing_find(ThingId(id));
-  if (! t) {
+  if (unlikely(! t)) {
     ERR("%s: Cannot find thing %08" PRIx32 "", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
@@ -801,7 +801,7 @@ PyObject *level_spawn_next_to_or_on_monst_(PyObject *obj, PyObject *args, PyObje
   }
 
   auto t = level->thing_find(ThingId(id));
-  if (! t) {
+  if (unlikely(! t)) {
     ERR("%s: Cannot find thing %08" PRIx32 "", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
@@ -859,7 +859,7 @@ PyObject *level_spawn_using_items_radius_range_(PyObject *obj, PyObject *args, P
   }
 
   auto t = level->thing_find(ThingId(id));
-  if (! t) {
+  if (unlikely(! t)) {
     ERR("%s: Cannot find 'me' thing %08" PRIx32 "", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
@@ -913,7 +913,7 @@ PyObject *level_spawn_fire_around_thing(PyObject *obj, PyObject *args, PyObject 
   }
 
   auto t = level->thing_find(ThingId(id));
-  if (! t) {
+  if (unlikely(! t)) {
     ERR("%s: Cannot find thing %08" PRIx32 "", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
@@ -955,7 +955,7 @@ PyObject *level_spawn_at_thing(PyObject *obj, PyObject *args, PyObject *keywds)
   }
 
   auto t = level->thing_find(ThingId(id));
-  if (! t) {
+  if (unlikely(! t)) {
     ERR("%s: Cannot find thing %08" PRIx32 "", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
@@ -998,7 +998,7 @@ PyObject *level_spawn_at_thing_if_possible(PyObject *obj, PyObject *args, PyObje
   }
 
   auto t = level->thing_find(ThingId(id));
-  if (! t) {
+  if (unlikely(! t)) {
     ERR("%s: Cannot find thing %08" PRIx32 "", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
@@ -1052,7 +1052,7 @@ PyObject *if_matches_then_kill_(PyObject *obj, PyObject *args, PyObject *keywds)
   }
 
   auto t = level->thing_find(ThingId(id));
-  if (! t) {
+  if (unlikely(! t)) {
     ERR("%s: Cannot find thing %08" PRIx32 "", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
@@ -1094,7 +1094,7 @@ PyObject *if_matches_(PyObject *obj, PyObject *args, PyObject *keywds)
   }
 
   auto t = level->thing_find(ThingId(id));
-  if (! t) {
+  if (unlikely(! t)) {
     ERR("%s: Cannot find thing %08" PRIx32 "", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
@@ -1148,7 +1148,7 @@ PyObject *level_place_at(PyObject *obj, PyObject *args, PyObject *keywds)
   }
 
   auto t = level->thing_find(ThingId(id));
-  if (! t) {
+  if (unlikely(! t)) {
     ERR("%s: Cannot find thing %08" PRIx32 "", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }

@@ -13,7 +13,7 @@ void Level::put_thing(int x, int y, ThingId id, int group)
 {
   TRACE_AND_INDENT();
   auto t = thing_find(id);
-  if (! t) {
+  if (unlikely(! t)) {
     return;
   }
 
@@ -22,12 +22,12 @@ void Level::put_thing(int x, int y, ThingId id, int group)
     return;
   }
 
-  if (! t) {
+  if (unlikely(! t)) {
     t->err("Oob at map (%d,%d) for put of %08" PRIx32 "", x, y, id.id);
     return;
   }
 
-  if (is_oob(x, y)) {
+  if (unlikely(is_oob(x, y))) {
     t->err("Oob at map (%d,%d) for put of %08" PRIx32 "", x, y, id.id);
     return;
   }
@@ -70,7 +70,7 @@ do_retry:
       auto idp = &getref(all_things_id_at[ group ], x, y, slot);
       if (idp->id) {
         auto t = thing_find(*idp);
-        if (! t) {
+        if (unlikely(! t)) {
           continue;
         }
         t->log("- slot %u", slot);
@@ -95,7 +95,7 @@ do_retry:
     auto idp = &getref(all_things_id_at[ group ], x, y, slot);
     if (idp->id) {
       auto t = thing_find(*idp);
-      if (! t) {
+      if (unlikely(! t)) {
         continue;
       }
       t->log("- slot %u", slot);
@@ -116,12 +116,12 @@ void Level::remove_thing(int x, int y, ThingId id, int group)
 {
   TRACE_AND_INDENT();
   auto t = thing_find(id);
-  if (! t) {
+  if (unlikely(! t)) {
     ERR("Oob at map (%d,%d) for remove of %08" PRIx32 "", x, y, id.id);
     return;
   }
 
-  if (is_oob(x, y)) {
+  if (unlikely(is_oob(x, y))) {
     t->err("Oob at map (%d,%d) for remove of %08" PRIx32 "", x, y, id.id);
     return;
   }
@@ -186,7 +186,7 @@ void Level::check_thing(Thingp t)
   int x     = t->mid_at.x;
   int y     = t->mid_at.y;
 
-  if (is_oob(x, y)) {
+  if (unlikely(is_oob(x, y))) {
     t->err("Oob thing");
     return;
   }

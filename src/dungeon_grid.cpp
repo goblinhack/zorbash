@@ -637,7 +637,7 @@ bool Nodes::is_oob(const int x, const int y)
 
 DungeonNode *Nodes::node_addr(const int x, const int y)
 {
-  if (is_oob(x, y)) {
+  if (unlikely(is_oob(x, y))) {
     return (nullptr);
   }
 

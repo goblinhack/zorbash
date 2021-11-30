@@ -236,7 +236,7 @@ bool Thing::drop_from_ether(Thingp what)
   point e = (player->last_blit_tl + player->last_blit_br) / 2;
 
   auto w = game->in_transit_item;
-  if (! w) {
+  if (unlikely(! w)) {
     ERR("No in transit item");
     return false;
   }
@@ -276,7 +276,7 @@ void Thing::drop_all(void)
   while (! get_itemp()->carrying.empty()) {
     auto id = *get_itemp()->carrying.begin();
     auto t  = level->thing_find(id);
-    if (! t) {
+    if (unlikely(! t)) {
       return;
     }
     drop(t);

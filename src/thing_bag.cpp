@@ -253,7 +253,7 @@ bool Thing::bag_compress(void)
       }
 
       auto t = game->thing_find(id);
-      if (! t) {
+      if (unlikely(! t)) {
         continue;
       }
 

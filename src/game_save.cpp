@@ -616,7 +616,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
           auto id = get(my.t->all_things_id_at[ group ], x, y, slot);
           if (id.ok()) {
             const Thingp t = my.t->thing_find(id);
-            if (! t) {
+            if (unlikely(! t)) {
               ERR("Found a thing I could not save %08" PRIx32, id.id);
               return out;
             }

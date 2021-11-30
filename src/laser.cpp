@@ -26,7 +26,7 @@ Laser_::Laser_(Levelp level, ThingId thing_id, point start, point stop, point pi
 {
   TRACE_AND_INDENT();
   auto t = level->thing_find(id);
-  if (! t) {
+  if (unlikely(! t)) {
     ERR("no laser");
     return;
   }
@@ -133,7 +133,7 @@ void Level::display_lasers(void)
     Thingp t;
 
     t = thing_find(p.id);
-    if (! t) {
+    if (unlikely(! t)) {
       return true;
     }
 
@@ -197,7 +197,7 @@ void Level::display_lasers(void)
         tile = get(p.tiles, frame, animstep);
       }
 
-      if (! tile) {
+      if (unlikely(! tile)) {
         t->err("No tile for laser, animstep %d, frame %d, steps %d", animstep, frame, steps);
         break;
       }

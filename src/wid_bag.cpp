@@ -47,7 +47,7 @@ static void wid_bag_add_items(Widp wid_bag_container, Thingp bag)
   //
   for (const auto &item : bag->get_itemp()->carrying) {
     auto t = game->thing_find(item.id);
-    if (! t) {
+    if (unlikely(! t)) {
       continue;
     }
 
@@ -155,7 +155,7 @@ uint8_t wid_in_transit_item_place(Widp w, int32_t x, int32_t y, uint32_t button)
 
   auto id = wid_get_thing_id_context(game->in_transit_item);
   auto t  = game->thing_find(id);
-  if (! t) {
+  if (unlikely(! t)) {
     DBG3("Cannot find thing");
     return false;
   }
@@ -324,7 +324,7 @@ uint8_t wid_in_transit_item_drop(void)
 
   auto id = wid_get_thing_id_context(game->in_transit_item);
   auto t  = game->thing_find(id);
-  if (! t) {
+  if (unlikely(! t)) {
     ERR("Cannot find thing to drop");
     return false;
   }
@@ -356,7 +356,7 @@ uint8_t wid_bag_item_mouse_up(Widp w, int32_t x, int32_t y, uint32_t button)
 
   auto id = wid_get_thing_id_context(w);
   auto t  = game->thing_find(id);
-  if (! t) {
+  if (unlikely(! t)) {
     return false;
   }
 
@@ -379,7 +379,7 @@ uint8_t wid_bag_item_mouse_held(Widp w, int32_t x, int32_t y, uint32_t button)
 
   auto id = wid_get_thing_id_context(w);
   auto t  = game->thing_find(id);
-  if (! t) {
+  if (unlikely(! t)) {
     return false;
   }
 
@@ -405,7 +405,7 @@ bool Game::wid_bag_move_item(Thingp t)
     return false;
   }
 
-  if (! t) {
+  if (unlikely(! t)) {
     ERR("No thing to move");
     return false;
   }
@@ -506,7 +506,7 @@ void wid_bag_item_mouse_over_begin(Widp w, int32_t relx, int32_t rely, int32_t w
 
   auto id = wid_get_thing_id_context(w);
   auto t  = game->thing_find(id);
-  if (! t) {
+  if (unlikely(! t)) {
     ERR("Could not find thing ID context");
     return;
   }

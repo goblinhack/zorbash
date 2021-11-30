@@ -116,7 +116,7 @@ Tilep Font::unicode_to_tile(int u)
   snprintf(tile_name, sizeof(tile_name), "%d.%d", tile_index, index);
 
   tile = tile_find(tile_name);
-  if (! tile) {
+  if (unlikely(! tile)) {
     if (u == L'?') {
       DIE("unicode char 0x%x/%d -> not found as tile %s", u, u, tile_name);
     } else {

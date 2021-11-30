@@ -45,7 +45,7 @@ bool Thing::skillbox_id_insert(Thingp what)
     }
 
     auto t = level->thing_find(thing_id);
-    if (! t) {
+    if (unlikely(! t)) {
       continue;
     }
 
@@ -109,7 +109,7 @@ bool Thing::skillbox_id_remove(Thingp what)
       continue;
     }
     auto t = level->thing_find(thing_id);
-    if (! t) {
+    if (unlikely(! t)) {
       continue;
     }
 
@@ -167,7 +167,7 @@ Thingp Level::skillbox_get(const uint32_t slot)
   }
 
   auto t = thing_find(thing_id);
-  if (! t) {
+  if (unlikely(! t)) {
     DBG("Slot %d has no valid tp", slot);
     return nullptr;
   }

@@ -573,7 +573,7 @@ static void wid_slot_item_mouse_over_begin(Widp w, int32_t relx, int32_t rely, i
 
   int  slot = wid_get_int_context(w);
   auto t    = game->level->inventory_get(slot);
-  if (! t) {
+  if (unlikely(! t)) {
     return;
   }
 
@@ -610,7 +610,7 @@ static uint8_t wid_slot_item_mouse_up(Widp w, int32_t x, int32_t y, uint32_t but
 
   int  slot = wid_get_int_context(w);
   auto t    = game->level->inventory_get(slot);
-  if (! t) {
+  if (unlikely(! t)) {
     return true;
   }
 

@@ -26,7 +26,7 @@ Projectile_::Projectile_(Levelp level, ThingId thing_id, point start, point stop
 {
   TRACE_AND_INDENT();
   auto t = level->thing_find(id);
-  if (! t) {
+  if (unlikely(! t)) {
     ERR("no projectile");
     return;
   }
@@ -126,7 +126,7 @@ void Level::display_projectiles(void)
     Thingp t;
 
     t = thing_find(p.id);
-    if (! t) {
+    if (unlikely(! t)) {
       return true;
     }
 

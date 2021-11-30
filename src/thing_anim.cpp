@@ -209,7 +209,7 @@ void Thing::animate(void)
       //
       // Cater for wraps.
       //
-      if (! tile) {
+      if (unlikely(! tile)) {
         tile = tile_first(tmap);
       }
       verify(MTYPE_TILE, tile);
@@ -460,7 +460,7 @@ void Thing::animate(void)
     }
   }
 
-  if (! tile) {
+  if (unlikely(! tile)) {
 #ifdef DEBUG_ANIM
     if (is_debug_type()) {
       con("No tile");
