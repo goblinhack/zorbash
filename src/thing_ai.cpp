@@ -803,8 +803,6 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
 
       FOR_ALL_THINGS_THAT_INTERACT(level, it, p.x, p.y)
       {
-        AI_LOG("", "Can see", it);
-
         if (it->is_changing_level || it->is_hidden || it->is_falling || it->is_jumping) {
           continue;
         }
@@ -830,6 +828,8 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
         if (it->is_minion() && (it->get_top_minion_owner() == get_top_minion_owner())) {
           continue;
         }
+
+        AI_LOG("", "Can see", it);
 
         auto goal_penalty = get_goal_penalty(it);
 
@@ -1938,7 +1938,6 @@ bool Thing::ai_tick(bool recursing)
         //
         // If resting, check if we are rested enough.
         //
-        topcon("h %d/%d s %d/%d", get_health(), get_health_max(), get_stamina(), get_stamina_max());
         if ((get_health() >= (get_health_max() / 4) * 3) && (get_stamina() >= (get_stamina_max() / 4) * 3)) {
           AI_LOG("Rested enough. Back to work.");
           if (is_player()) {

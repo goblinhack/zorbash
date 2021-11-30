@@ -225,7 +225,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   }
 
   if (game->robot_mode) {
-    duration = THING_JUMP_SPEED_MS / 2;
+    duration /= 2;
   }
 
   point dest(src.x + dx * tw, src.y + dy * th);

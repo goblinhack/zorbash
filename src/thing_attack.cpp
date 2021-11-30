@@ -426,7 +426,6 @@ bool Thing::attack(Thingp victim)
   //
   if (! damage_set) {
     if ((int) pcg_random_range(0, 1000) < damage_poison_chance_d1000()) {
-      topcon("poison");
       int poison_damage = get_damage_poison();
       if (poison_damage > 0) {
         damage     = poison_damage;
