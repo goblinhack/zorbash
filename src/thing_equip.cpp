@@ -329,7 +329,7 @@ bool Thing::unequip(const char *why, int equip, bool allowed_to_recarry)
   // Put it back in the bag
   //
   if (allowed_to_recarry) {
-    if (! is_being_destroyed && ! item->is_being_destroyed && ! is_dead) {
+    if (! is_being_destroyed && ! item->is_being_destroyed && ! is_dead && ! is_dying) {
       if (! carry(item, false /* can_equip */)) {
         drop(item);
       }
@@ -344,7 +344,7 @@ bool Thing::unequip(const char *why, int equip, bool allowed_to_recarry)
   }
 
   if (is_player()) {
-    if (! level->is_starting && ! level->is_being_destroyed && ! is_dead) {
+    if (! level->is_starting && ! level->is_being_destroyed && ! is_dead && ! is_dying) {
       if (item->is_ring()) {
         TOPCON("You slip off the %s.", item->text_the().c_str());
       } else if (item->is_weapon()) {
@@ -455,7 +455,7 @@ bool Thing::equip(Thingp item, int equip)
   }
 
   if (is_player()) {
-    if (! level->is_starting && ! level->is_being_destroyed && ! is_dead) {
+    if (! level->is_starting && ! level->is_being_destroyed && ! is_dead && ! is_dying) {
       if (item->is_ring()) {
         TOPCON("You slip on the %s.", item->text_the().c_str());
       } else if (item->is_weapon()) {
@@ -607,7 +607,7 @@ bool Thing::equip_use_try(int equip)
         continue;
       }
 
-      if (t->is_dead) {
+      if (t->is_dead || t->is_dying) {
         continue;
       } else if (t->is_monst()) {
         prio = t->collision_hit_priority() + get_danger_current_level(t);
@@ -673,7 +673,7 @@ bool Thing::equip_use_try(int equip)
         continue;
       }
 
-      if (t->is_dead) {
+      if (t->is_dead || t->is_dying) {
         continue;
       } else if (t->is_door()) {
         prio = t->collision_hit_priority();
@@ -733,7 +733,7 @@ bool Thing::equip_use_try(int equip)
         continue;
       }
 
-      if (t->is_dead) {
+      if (t->is_dead || t->is_dying) {
         continue;
       } else if (t->is_hittable()) {
         prio = t->collision_hit_priority() + get_danger_current_level(t);

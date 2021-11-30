@@ -254,17 +254,12 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
         } else if (real_hitter->is_player()) {
           TOPCON("%s drinks in the poison!", text_The().c_str());
         }
-        health_boost(poison);
+        health_boost(damage);
         return false;
       }
-    } else if (poison) {
-      if (is_player()) {
-        TOPCON("%%fg=yellow$You are poisoned for %d damage!%%fg=reset$", poison);
-      } else if (is_alive_monst() && real_hitter->is_player()) {
-        TOPCON("%%fg=yellow$You poison %s for %d damage!%%fg=reset$", text_the().c_str(), poison);
-      }
+    } else {
       if (real_hitter->is_poisonous_danger_level()) {
-        incr_poisoned_amount(poison);
+        incr_poisoned_amount(damage / 2);
       }
       poisoned();
     }
@@ -399,7 +394,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       // You hit yourself
       //
       if (poison) {
-        TOPCON("%%fg=darkred$Poison courses through your veins for %d damage!%%fg=reset$", damage);
+        TOPCON("%%fg=yellow$Poison circulates through your veins for %d damage!%%fg=reset$", damage);
       } else if (necrosis) {
         TOPCON("%%fg=limegreen$Your skin is falling away in chunks!%%fg=reset$");
       } else if (crit) {
@@ -416,7 +411,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       }
     } else {
       if (poison) {
-        TOPCON("%%fg=darkred$%s's bite poisons you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(),
+        TOPCON("%%fg=yellow$%s's bite poisons you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(),
                damage);
       } else if (necrosis) {
         TOPCON("%%fg=limegreen$%s's withering touch rots your skin!%%fg=reset$", real_hitter->text_The().c_str());

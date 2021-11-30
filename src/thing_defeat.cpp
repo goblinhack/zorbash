@@ -16,6 +16,7 @@
 #include "my_sprintf.hpp"
 #include "my_string.hpp"
 #include "my_sys.hpp"
+#include "my_template.hpp"
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"
 
@@ -197,42 +198,61 @@ void Thing::defeat(Thingp defeater, const char *reason)
       if (game->robot_mode) {
         TOPCON("%%fg=yellow$New robo high score, %s place!%%fg=reset$", game->config.hiscores.place_str(this));
         if (defeater && defeater->is_acid()) {
-          TOPCON("RIP: Robot is dissolved to death %s.", reason);
+          TOPCON("%%fg=red$RIP: Robot is dissolved to death %s.%%fg=reset$", reason);
         } else if (defeater && defeater->is_fire()) {
-          TOPCON("RIP: Robot is burnt to death %s.", reason);
+          TOPCON("%%fg=red$RIP: Robot is burnt to death %s.%%fg=reset$", reason);
         } else if (defeater && defeater->is_water()) {
-          TOPCON("RIP: Robot is drowned %s.", reason);
+          TOPCON("%%fg=red$RIP: Robot is drowned %s.%%fg=reset$", reason);
         } else if (defeater && defeater->is_necrotic_danger_level()) {
-          TOPCON("RIP: Robot is rotted to death %s.", reason);
+          TOPCON("%%fg=red$RIP: Robot is rotted to death %s.%%fg=reset$", reason);
         } else if (defeater && defeater->is_engulfer()) {
-          TOPCON("RIP: Robot is consumed %s.", reason);
+          TOPCON("%%fg=red$RIP: Robot is consumed %s.%%fg=reset$", reason);
         } else if (defeater && defeater->is_monst()) {
-          TOPCON("RIP: Robot is defeated %s.", reason);
+          TOPCON("%%fg=red$RIP: Robot is defeated %s.%%fg=reset$", reason);
         } else {
-          TOPCON("RIP: Robot is deactivated %s.", reason);
+          TOPCON("%%fg=red$RIP: Robot is deactivated %s.%%fg=reset$", reason);
         }
       } else {
         TOPCON("%%fg=yellow$New high score, %s place!%%fg=reset$", game->config.hiscores.place_str(this));
         if (defeater && defeater->is_acid()) {
-          TOPCON("RIP: You are dissolved to death %s.", reason);
+          TOPCON("%%fg=red$RIP: You are dissolved to death %s.%%fg=reset$", reason);
         } else if (defeater && defeater->is_fire()) {
-          TOPCON("RIP: You are burnt to death %s.", reason);
+          TOPCON("%%fg=red$RIP: You are burnt to death %s.%%fg=reset$", reason);
         } else if (defeater && defeater->is_water()) {
-          TOPCON("RIP: You are drowned %s.", reason);
+          TOPCON("%%fg=red$RIP: You are drowned %s.", reason);
         } else if (defeater && defeater->is_necrotic_danger_level()) {
-          TOPCON("RIP: You are rotted to death %s.", reason);
+          TOPCON("%%fg=red$RIP: You are rotted to death %s.%%fg=reset$", reason);
         } else if (defeater && defeater->is_engulfer()) {
-          TOPCON("RIP: You are consumed %s.", reason);
+          TOPCON("%%fg=red$RIP: You are consumed %s.%%fg=reset$", reason);
         } else if (defeater && defeater->is_monst()) {
-          TOPCON("RIP: You are defeated %s.", reason);
+          TOPCON("%%fg=red$RIP: You are defeated %s.%%fg=reset$", reason);
         } else {
-          TOPCON("RIP: You are killed %s.", reason);
+          TOPCON("%%fg=red$RIP: You are killed %s.%%fg=reset$", reason);
         }
       }
       game->config.hiscores.add_new_hiscore(this, title(), reason);
     }
 
-    TOPCON("%%fg=red$Congratulations, you are dead!%%fg=reset$");
+    //
+    // Some funny? death messages
+    //
+    std::vector< std::string > messages;
+    messages.push_back("Congratulations, you are dead!");
+    messages.push_back("Time to rest in the fjords with your parrot!");
+    messages.push_back("Welcome to the afterlife!");
+    messages.push_back("You hear the sound of monsters laughing...");
+    messages.push_back("You wave farewell to the monsters.");
+    messages.push_back("The Gods are disappointed in you...");
+    messages.push_back("And I thought you were tough...");
+    messages.push_back("Life was hard. Take it easy now...");
+    messages.push_back("In this dungeon the only certainty is death...");
+    messages.push_back("You fought bravely...");
+    messages.push_back("Dead, what? When?");
+    messages.push_back("Not sure how that happened. It was going so well...");
+    messages.push_back("Just give me a minute to recover my breath...");
+    auto which = non_pcg_one_of(messages);
+    TOPCON("%%fg=red$%s%%fg=reset$", which.c_str());
+
     level->map_follow_player = false;
     game->dead_select(reason);
   } else if (is_loggable()) {

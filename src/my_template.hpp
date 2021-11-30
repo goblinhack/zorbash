@@ -42,17 +42,15 @@ void push_back_if_unique(C< T > &c, T d)
   c.push_back(d);
 }
 
-#ifdef NO_ONE_USES_YET_AND_COINCERNED_ABOUT_WHICH_RAND_SHOULD_BE_USED
 template < class T, template < typename ELEM, typename ALLOC = std::allocator< ELEM > > class C >
 
-T one_of(C< T > &c)
+T non_pcg_one_of(C< T > &c)
 {
   typename C< T >::iterator so = c.begin();
   typename C< T >::iterator eo = c.end();
 
   size_t sz = eo - so;
-  return *(so + (myrand() % sz));
+  return *(so + (rand() % sz));
 }
-#endif
 
 #endif

@@ -32,19 +32,23 @@ void Thing::poison_tick(void)
   int    poison = old_poison;
 
   if (poison) {
-    if ((int) pcg_random_range(0, 20) < get_stat_constitution()) {
-      if (is_player()) {
-        TOPCON("You take half damage fron poison due to your sturdy constitution.");
+    poison /= 2;
+    set_poisoned_amount(poison);
+
+    if (poison) {
+      if ((int) pcg_random_range(0, 20) < get_stat_constitution()) {
+        if (is_player()) {
+          TOPCON("You take half damage fron poison due to your sturdy constitution.");
+        }
+        poison /= 2;
+        set_poisoned_amount(poison);
       }
-      poison /= 2;
     }
 
     if (poison) {
       is_poisoned_by(hitter, poison);
     }
   }
-
-  set_poisoned_amount(old_poison / 2);
 }
 
 void Thing::poisoned(void)

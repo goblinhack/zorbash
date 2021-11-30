@@ -4,7 +4,6 @@
 <!--                                                                                                                                              -->
 <!-- Next todo                                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
-<!-- - giant spider poison bite                                                                                                                   -->
 <!-- - giant spider web throw                                                                                                                     -->
 <!-- - spider ball anims                                                                                                                          -->
 <!-- - antipoison potion                                                                                                                          -->

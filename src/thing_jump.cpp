@@ -599,23 +599,35 @@ bool Thing::jump_attack(Thingp maybe_victim)
   }
 
   if ((int) pcg_random_range(0, 1000) > tp()->is_able_to_jump_attack_chance_d1000()) {
-    return false;
+    dbg("Try to jump attack");
+    TRACE_AND_INDENT();
+    auto p         = get_aip()->move_path;
+    auto jump_dist = pcg_random_range(0, p.size());
+    return try_to_jump_carefully(get(p, jump_dist));
   }
 
-  dbg("Try to jump attack");
-  TRACE_AND_INDENT();
-
   if (maybe_victim && can_eat(maybe_victim)) {
-    if ((int) pcg_random_range(0, 1000) < tp()->is_able_to_jump_onto_chance_d1000()) {
-      dbg("Try to jump onto %s", maybe_victim->to_string().c_str());
-      TRACE_AND_INDENT();
-      if (try_to_jump_carefree(maybe_victim->mid_at)) {
-        return true;
+    //
+    // If the things is near death, pounce
+    //
+    if (maybe_victim->get_health() < maybe_victim->get_health_initial() / 10) {
+      {
+        dbg("Try to jump onto weakly %s", maybe_victim->to_string().c_str());
+        TRACE_AND_INDENT();
+        if (try_to_jump_carefree(maybe_victim->mid_at)) {
+          return true;
+        }
+      }
+
+      if ((int) pcg_random_range(0, 1000) < tp()->is_able_to_jump_onto_chance_d1000()) {
+        dbg("Try to jump onto %s", maybe_victim->to_string().c_str());
+        TRACE_AND_INDENT();
+        if (try_to_jump_carefree(maybe_victim->mid_at)) {
+          return true;
+        }
       }
     }
   }
 
-  auto p         = get_aip()->move_path;
-  auto jump_dist = pcg_random_range(0, p.size());
-  return try_to_jump_carefully(get(p, jump_dist));
+  return false;
 }
