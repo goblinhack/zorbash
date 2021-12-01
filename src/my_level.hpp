@@ -557,10 +557,12 @@ public:
   bool buffbox_over(const uint32_t slot);
   bool can_see_(int x0_in, int y0_in, int x1_in, int y1_in, int flag);
   bool can_see_obstacle(int x, int y);
+  bool can_see_unimpeded(int x0, int y0, int x1, int y1);
   bool create_dungeon(point3d at, int seed);
-  bool create_sewer(point3d at, int seed);
   bool create_sewer_pipes(point3d at);
+  bool create_sewer(point3d at, int seed);
   bool create_sewer_pools(void);
+  bool create_wandering_monster(void);
   bool debuffbox_over(const uint32_t slot);
   bool inventory_assign(const uint32_t slot, Thingp);
   bool inventory_chosen(const uint32_t slot);
@@ -585,7 +587,6 @@ public:
   bool skillbox_chosen(const uint32_t slot);
   bool skillbox_over(const uint32_t slot);
   bool tick(void);
-  bool can_see_unimpeded(int x0, int y0, int x1, int y1);
 
   float get_wobble(void) const;
   float update_wobble(void);
@@ -830,7 +831,6 @@ public:
   void place_random_torches(Dungeonp d);
   void place_spiderweb(Dungeonp d);
   void place_the_grid(void);
-  void sanity_check(void);
   void screen_shake_end(void);
   void scroll_map_do(bool fast);
   void scroll_map_set_target(void);

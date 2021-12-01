@@ -533,6 +533,7 @@ bool Level::tick(void)
   if (tick_done) {
     handle_all_pending_things();
     things_gc_if_possible();
+    create_wandering_monster();
 #if 0
     //
     // For debugging consistent randomness
@@ -610,33 +611,6 @@ bool Level::tick(void)
   }
 
   return false;
-}
-
-void Level::sanity_check(void)
-{
-  TRACE_AND_INDENT();
-  for (auto x = 0; x < MAP_WIDTH; x++) {
-    for (auto y = 0; y < MAP_HEIGHT; y++) {
-      auto monst_count = 0;
-      FOR_ALL_THINGS(this, t, x, y)
-      {
-        if (t->is_monst()) {
-          monst_count++;
-        }
-      }
-      FOR_ALL_THINGS_END()
-
-      if (monst_count) {
-        if (! is_monst(x, y)) {
-          DIE("Level sanity fail. monst count exists, but no monster found, at %d,%d", x, y);
-        }
-      } else {
-        if (is_monst(x, y)) {
-          DIE("Level sanity fail. no monst count exists, but monster found, at %d,%d", x, y);
-        }
-      }
-    }
-  }
 }
 
 void Level::update_all_ticks(void)

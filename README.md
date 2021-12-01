@@ -4,6 +4,7 @@
 <!--                                                                                                                                              -->
 <!-- Next todo                                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
+<!-- - fix r key                                                                                                                                  -->
 <!-- - test poison rings                                                                                                                          -->
 <!-- - necro ring                                                                                                                                 -->
 <!-- - giant spider web throw                                                                                                                     -->

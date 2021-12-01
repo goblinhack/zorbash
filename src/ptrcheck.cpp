@@ -605,8 +605,6 @@ int ptrcheck_free(int mtype, void *ptr, const char *func, const char *file, int 
   //
   if (ringbuf_current_size[ mtype ] < ringbuf_max_size) {
     ringbuf_current_size[ mtype ]++;
-  } else {
-    ERR("overflowed ptrcheck ring buf size %u", ringbuf_current_size[ mtype ]);
   }
 
   hash_free(hash[ mtype ], ptr);
