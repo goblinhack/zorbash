@@ -4,6 +4,8 @@
 <!--                                                                                                                                              -->
 <!-- Next todo                                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
+<!-- - test poison rings                                                                                                                          -->
+<!-- - necro ring                                                                                                                                 -->
 <!-- - giant spider web throw                                                                                                                     -->
 <!-- - spider ball anims                                                                                                                          -->
 <!-- - antipoison potion                                                                                                                          -->
