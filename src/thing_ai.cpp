@@ -274,17 +274,22 @@ bool Thing::ai_create_path_to_single_goal(int minx, int miny, int maxx, int maxy
   // Unreachable?
   //
   if (result.cost == std::numeric_limits< int >::max()) {
-    if (fallback.path.size()) {
-      AI_LOG("", "Use fallback path as goal is unreachable");
-      result = fallback;
-    } else {
+    //
+    // Occasionally try the fallback path for a bit of variety.
+    //
+    if ((int) pcg_random_range(0, 100) < 20) {
+      if (fallback.path.size()) {
+        AI_LOG("", "Use fallback path as goal is unreachable");
+        result = fallback;
+      } else {
 #ifdef ENABLE_DEBUG_AI_ASTAR
-      auto start = point(minx, miny);
-      auto end   = point(maxx, maxy);
-      astar_dump(&dmap, goal.at, start, end);
+        auto start = point(minx, miny);
+        auto end   = point(maxx, maxy);
+        astar_dump(&dmap, goal.at, start, end);
 #endif
-      AI_LOG("", "Goal is astar unreachable");
-      return false;
+        AI_LOG("", "Goal is astar unreachable");
+        return false;
+      }
     }
   }
 
@@ -748,7 +753,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
           //
           // Was seen but now cannot see; did something close?
           //
-          if (seen_when) {
+          if (seen_when && (seen_when < game->tick_current - 20)) {
             something_changed++;
             // con("INTERRUPT2 %d,%d", x, y);
             set(seen_map->val, x, y, 0U);

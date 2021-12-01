@@ -179,7 +179,7 @@ Welcome to the lair of the dread tentacleye, Zorbash. Liberate the Orb of Zorb a
 
 (Well you will once the game is finished! :)
 
-This is work in progress. Consider this in demo mode in that you currently start with a bunch of equipment each time. That will change once I add character seletion.
+This is work in progress. Consider this in demo mode for now. The game is playable, but has no end yet.
 
 Comments and suggestions welcome at this early stage.
 
