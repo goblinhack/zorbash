@@ -179,11 +179,6 @@ void Game::wid_enchant_an_item(void)
     return;
   }
 
-  //
-  // In case a scancode was used to open this widget
-  //
-  wid_ignore_events_briefly();
-
   enchant_items.clear();
   std::map< Tpp, bool > found;
   for (const auto t : player->get_item_vector()) {

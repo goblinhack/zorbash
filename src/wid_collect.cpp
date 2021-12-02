@@ -276,11 +276,6 @@ void Game::wid_collect_create(const std::list< Thingp > items /* intentional cop
     return;
   }
 
-  //
-  // In case a scancode was used to open this widget
-  //
-  wid_ignore_events_briefly();
-
   if (items.size()) {
     for (auto t : items) {
       if (t) {

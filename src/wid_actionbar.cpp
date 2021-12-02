@@ -551,7 +551,6 @@ void wid_actionbar_init(void)
   //
   // In case a scancode was used to open this widget
   //
-  wid_ignore_events_briefly();
   TRACE_AND_INDENT();
   if (wid_actionbar) {
     DBG("Actionbar init exists close it and recreate");

@@ -179,11 +179,6 @@ void Game::wid_skill_choose(void)
   }
 
   //
-  // In case a scancode was used to open this widget
-  //
-  wid_ignore_events_briefly();
-
-  //
   // Once skills are maxxed out, that's it
   //
   if (player->get_itemp()->skills.size() >= UI_INVENTORY_QUICK_ITEMS_MAX) {

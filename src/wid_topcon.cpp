@@ -80,6 +80,15 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     }
   }
 
+  if (key->scancode == (SDL_Scancode) game->config.key_robot_mode) {
+    LOG("PLAYER: Pressed robot mode key");
+    TRACE_AND_INDENT();
+    wid_actionbar_robot_mode_toggle();
+    game->change_state(Game::STATE_NORMAL);
+    wid_thing_info_fini(); // To remove bag or other info
+    return true;
+  }
+
   if (key->scancode == (SDL_Scancode) game->config.key_zoom_out) {
     LOG("PLAYER: Zoom out.");
     config_game_pix_zoom_out();
@@ -298,15 +307,6 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
       game->change_state(Game::STATE_NORMAL);
       return true;
     }
-  }
-
-  if (key->scancode == (SDL_Scancode) game->config.key_robot_mode) {
-    LOG("PLAYER: Pressed robot mode key");
-    TRACE_AND_INDENT();
-    wid_actionbar_robot_mode_toggle();
-    game->change_state(Game::STATE_NORMAL);
-    wid_thing_info_fini(); // To remove bag or other info
-    return true;
   }
 
   if (key->scancode == (SDL_Scancode) game->config.key_quit) {

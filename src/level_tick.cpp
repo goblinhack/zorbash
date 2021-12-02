@@ -553,14 +553,15 @@ bool Level::tick(void)
   //
   if (! ts_fade_in_begin) {
     if (game->robot_mode_requested != game->robot_mode) {
+      LOG("PLAYER: Pressed requested robot change");
       game->robot_mode                = game->robot_mode_requested;
       game->robot_mode_tick_requested = true;
       wid_actionbar_robot_mode_update();
       if (game->robot_mode) {
         game->tick_begin("robot mode");
-        BOTCON("Robot mode");
+        LOG("PLAYER: Robot mode");
       } else {
-        BOTCON("Robot mode off");
+        LOG("PLAYER: Robot mode off");
       }
     }
   }
@@ -568,7 +569,7 @@ bool Level::tick(void)
   if (tick_done) {
     if (game->robot_mode) {
       if (game->robot_mode_tick_requested) {
-        CON("Robot: tick requested");
+        LOG("Robot: tick requested");
         game->robot_mode_tick_requested = false;
         if (player) {
           if (game->robot_mode) {
@@ -584,14 +585,14 @@ bool Level::tick(void)
         // We can get stuck with timing with the inventory open. So make sure we close it.
         //
         if (game->state != Game::STATE_NORMAL) {
-          CON("Robot: reset to normal state");
+          LOG("Robot: reset to normal state");
           player->ai_change_state(MONST_STATE_IDLE, "reset to normal state");
         }
 
-        CON("Robot: no new tick was requested, so tick anyway");
+        LOG("Robot: no new tick was requested, so tick anyway");
         game->robot_mode_tick();
       } else {
-        CON("Robot: a new tick was requested");
+        LOG("Robot: a new tick was requested");
       }
     } else if (player) {
       if (game->robot_mode) {
