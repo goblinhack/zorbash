@@ -454,6 +454,13 @@ public:
   void buff_tick();
   void debuff_tick();
 
+  int buff_on_poison_damage(Thingp hitter, int damage);
+  int buff_on_bite_damage(Thingp hitter, int damage);
+  int buff_on_melee_damage(Thingp hitter, int damage);
+  int buff_on_necrosis_damage(Thingp hitter, int damage);
+  int buff_on_strength_damage(Thingp hitter, int damage);
+  int buff_on_constitution_damage(Thingp hitter, int damage);
+
   const Dice &get_damage_bite_dice(void);
   const Dice &get_damage_crush_dice(void);
   const Dice &get_damage_melee_dice(void);
@@ -520,6 +527,12 @@ public:
   const std::string &on_unequip_do(void);
   const std::string &on_owner_set_do(void);
   const std::string &on_owner_unset_do(void);
+  const std::string &on_owner_poison_damage_do(void);
+  const std::string &on_owner_constitution_damage_do(void);
+  const std::string &on_owner_strength_damage_do(void);
+  const std::string &on_owner_melee_damage_do(void);
+  const std::string &on_owner_necrosis_damage_do(void);
+  const std::string &on_owner_bite_damage_do(void);
   const std::string &projectile_name(void);
   const std::string &short_text_name(void);
   const std::string &spawn_on_shoved(void);
@@ -1147,6 +1160,12 @@ public:
   int weapon_damage(void);
   int worth_collecting(const Thingp it);
   int worth_collecting(const Thingp it, Thingp *would_need_to_drop);
+  int on_owner_poison_damage(Thingp owner, Thingp hitter, int damage);
+  int on_owner_constitution_damage(Thingp owner, Thingp hitter, int damage);
+  int on_owner_strength_damage(Thingp owner, Thingp hitter, int damage);
+  int on_owner_melee_damage(Thingp owner, Thingp hitter, int damage);
+  int on_owner_necrosis_damage(Thingp owner, Thingp hitter, int damage);
+  int on_owner_bite_damage(Thingp owner, Thingp hitter, int damage);
 
   point dir_to_direction();
   point get_random_target(void);
@@ -1446,8 +1465,8 @@ public:
   void on_lifespan(Thingp hitter);
   void on_move(void);
   void on_open(void);
-  void on_owner_set(Thingp what);
-  void on_owner_unset(Thingp what);
+  void on_owner_set(Thingp owner);
+  void on_owner_unset(Thingp owner);
   void on_unequip(Thingp what);
   void on_use(Thingp what);
   void on_use(Thingp what, Thingp target);

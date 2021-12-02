@@ -6012,6 +6012,42 @@ const std::string &Thing::on_owner_unset_do(void)
   return (tp()->on_owner_unset_do());
 }
 
+const std::string &Thing::on_owner_poison_damage_do(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->on_owner_poison_damage_do());
+}
+
+const std::string &Thing::on_owner_constitution_damage_do(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->on_owner_constitution_damage_do());
+}
+
+const std::string &Thing::on_owner_strength_damage_do(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->on_owner_strength_damage_do());
+}
+
+const std::string &Thing::on_owner_melee_damage_do(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->on_owner_melee_damage_do());
+}
+
+const std::string &Thing::on_owner_necrosis_damage_do(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->on_owner_necrosis_damage_do());
+}
+
+const std::string &Thing::on_owner_bite_damage_do(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->on_owner_bite_damage_do());
+}
+
 const std::string &Thing::projectile_name(void)
 {
   TRACE_AND_INDENT();

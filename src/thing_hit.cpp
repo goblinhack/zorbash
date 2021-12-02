@@ -131,6 +131,14 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     damage *= 2;
   }
 
+  if (poison) {
+    damage = buff_on_poison_damage(real_hitter, damage);
+    if (! damage) {
+      real_hitter->err("No poison damage");
+      return false;
+    }
+  }
+
   if (real_hitter->is_fire() || real_hitter->is_lava()) {
     if (damage_received_doubled_from_fire()) {
       damage *= 2;

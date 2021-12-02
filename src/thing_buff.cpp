@@ -173,3 +173,20 @@ void Thing::buff_tick(void)
     }
   }
 }
+
+int Thing::buff_on_poison_damage(Thingp hitter, int damage)
+{
+  if (! maybe_itemp()) {
+    return damage;
+  }
+  if (get_itemp()->buffs.empty()) {
+    return damage;
+  }
+  for (const auto &item : get_itemp()->buffs) {
+    auto t = level->thing_find(item.id);
+    if (t) {
+      damage = t->on_owner_poison_damage(this, hitter, damage);
+    }
+  }
+  return damage;
+}

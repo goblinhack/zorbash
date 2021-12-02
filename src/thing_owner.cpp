@@ -15,10 +15,10 @@
 #include "my_sys.hpp"
 #include "my_thing.hpp"
 
-void Thing::on_owner_set(Thingp what)
+void Thing::on_owner_set(Thingp owner)
 {
-  verify(MTYPE_THING, what);
-  if (! what) {
+  verify(MTYPE_THING, owner);
+  if (! owner) {
     err("Cannot owner_set null thing");
     return;
   }
@@ -37,19 +37,19 @@ void Thing::on_owner_set(Thingp what)
       fn = fn.replace(found, 2, "");
     }
 
-    dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_string().c_str(), what->to_string().c_str());
+    dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_string().c_str(), owner->to_string().c_str());
 
-    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, (unsigned int) mid_at.x, (unsigned int) mid_at.y);
+    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, owner->id.id, (unsigned int) mid_at.x, (unsigned int) mid_at.y);
   } else {
     ERR("Bad on_owner_set call [%s] expected mod:function, got %d elems", on_owner_set.c_str(),
         (int) on_owner_set.size());
   }
 }
 
-void Thing::on_owner_unset(Thingp what)
+void Thing::on_owner_unset(Thingp owner)
 {
-  verify(MTYPE_THING, what);
-  if (! what) {
+  verify(MTYPE_THING, owner);
+  if (! owner) {
     err("Cannot owner_unset null thing");
     return;
   }
@@ -68,9 +68,9 @@ void Thing::on_owner_unset(Thingp what)
       fn = fn.replace(found, 2, "");
     }
 
-    dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_string().c_str(), what->to_string().c_str());
+    dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_string().c_str(), owner->to_string().c_str());
 
-    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, (unsigned int) mid_at.x, (unsigned int) mid_at.y);
+    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, owner->id.id, (unsigned int) mid_at.x, (unsigned int) mid_at.y);
   } else {
     ERR("Bad on_owner_unset call [%s] expected mod:function, got %d elems", on_owner_unset.c_str(),
         (int) on_owner_unset.size());

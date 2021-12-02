@@ -187,6 +187,24 @@ class Tp:
     def set_on_owner_unset_do(self, value):
         my.tp_set_on_owner_unset_do(self, value)
 
+    def set_on_owner_poison_damage_do(self, value):
+        my.tp_set_on_owner_poison_damage_do(self, value)
+
+    def set_on_owner_constitution_damage_do(self, value):
+        my.tp_set_on_owner_constitution_damage_do(self, value)
+
+    def set_on_owner_strength_damage_do(self, value):
+        my.tp_set_on_owner_strength_damage_do(self, value)
+
+    def set_on_owner_melee_damage_do(self, value):
+        my.tp_set_on_owner_melee_damage_do(self, value)
+
+    def set_on_owner_necrosis_damage_do(self, value):
+        my.tp_set_on_owner_necrosis_damage_do(self, value)
+
+    def set_on_owner_bite_damage_do(self, value):
+        my.tp_set_on_owner_bite_damage_do(self, value)
+
     def set_on_you_are_hit_do(self, value):
         my.tp_set_on_you_are_hit_do(self, value)
 
