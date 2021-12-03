@@ -55,7 +55,7 @@ void Thing::lava_tick(void)
         continue;
       }
 
-      is_attacked_by(t, t->get_damage_melee());
+      is_melee_attacked_by(t, t->get_damage_melee());
       break;
     }
     FOR_ALL_THINGS_END()

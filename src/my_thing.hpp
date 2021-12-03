@@ -905,7 +905,7 @@ public:
   int is_ascend_sewer(void);
   int is_attackable_by_monst(void);
   int is_attackable_by_player(void);
-  int is_attacked_by(Thingp hitter, int damage);
+  int is_melee_attacked_by(Thingp hitter, int damage);
   int is_auto_collect_item(void);
   int is_auto_equipped(void);
   int is_auto_throw(void);
@@ -1470,7 +1470,7 @@ public:
   void on_unequip(Thingp what);
   void on_use(Thingp what);
   void on_use(Thingp what, Thingp target);
-  void on_you_are_hit(Thingp hitter, Thingp real_hitter, bool crit, bool bite, bool poison, bool necro, int dmg);
+  void on_you_are_hit(Thingp hitter, Thingp real_hitter, bool crit, int dmg);
   void on_you_bite_attack(void);
   void on_you_miss_do(Thingp hitter);
   void poisoned(void);

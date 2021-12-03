@@ -5,7 +5,7 @@ import random
 
 # hitter: arrow / monst
 # real_hitter: who fired the arrow
-def on_you_are_hit(me, hitter, real_hitter, x, y, crit, bite, poison, necrosis, damage):
+def on_you_are_hit(me, hitter, real_hitter, x, y, crit, damage):
     # my.topcon("player hit damage {}".format(damage))
     if damage <= 5:
         my.thing_sound_play_channel(me, my.CHANNEL_IMPACT, "player_hit{}".format(my.non_pcg_randint(1, 4)))

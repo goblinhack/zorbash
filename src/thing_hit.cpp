@@ -20,7 +20,7 @@
 //
 void Thing::on_you_are_hit(Thingp hitter,      // an arrow / monst /...
                            Thingp real_hitter, // who fired the arrow?
-                           bool crit, bool bite, bool poison, bool necrosis, int damage)
+                           bool crit, int damage)
 {
   TRACE_AND_INDENT();
   auto on_you_are_hit = tp()->on_you_are_hit_do();
@@ -37,15 +37,14 @@ void Thing::on_you_are_hit(Thingp hitter,      // an arrow / monst /...
       fn = fn.replace(found, 2, "");
     }
 
-    dbg("Call %s.%s(%s, %s, %s, crit=%d, bite=%d, damage=%d)", mod.c_str(), fn.c_str(), to_string().c_str(),
-        hitter->to_string().c_str(), real_hitter->to_string().c_str(), crit, bite, damage);
+    dbg("Call %s.%s(%s, %s, %s, crit=%d, damage=%d)", mod.c_str(), fn.c_str(), to_string().c_str(),
+        hitter->to_string().c_str(), real_hitter->to_string().c_str(), crit, damage);
 
     //
     // Warning cannot handle negative values here for damage
     //
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, real_hitter->id.id, (unsigned int) mid_at.x,
-                    (unsigned int) mid_at.y, (unsigned int) crit, (unsigned int) bite, (unsigned int) poison,
-                    (unsigned int) necrosis, (unsigned int) damage);
+                    (unsigned int) mid_at.y, (unsigned int) crit, (unsigned int) damage);
   } else {
     ERR("Bad on_you_are_hit call [%s] expected mod:function, got %d elems", on_you_are_hit.c_str(),
         (int) on_you_are_hit.size());
@@ -135,6 +134,24 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     damage = buff_on_poison_damage(real_hitter, damage);
     if (! damage) {
       real_hitter->err("No poison damage");
+      return false;
+    }
+  } else if (necrosis) {
+    damage = buff_on_necrosis_damage(real_hitter, damage);
+    if (! damage) {
+      real_hitter->err("No necrosis damage");
+      return false;
+    }
+  } else if (bite) {
+    damage = buff_on_bite_damage(real_hitter, damage);
+    if (! damage) {
+      real_hitter->err("No bite damage");
+      return false;
+    }
+  } else {
+    damage = buff_on_melee_damage(real_hitter, damage);
+    if (! damage) {
+      real_hitter->err("No melee damage");
       return false;
     }
   }
@@ -299,19 +316,30 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
             return false;
           }
         } else {
+          if (real_hitter->is_necrotic_danger_level()) {
+            damage = real_hitter->is_necrotic_danger_level();
+          } else {
+            damage = 1;
+          }
+          damage = buff_on_strength_damage(real_hitter, damage);
+          if (! damage) {
+            real_hitter->err("No strength damage");
+            return false;
+          }
+          if (real_hitter->is_necrotic_danger_level()) {
+            if (damage > 1) {
+              rotting();
+              incr_necrotized_amount(damage - 1);
+            }
+          }
+          decr_stat_strength();
           if (is_player()) {
             TOPCON("%%fg=limegreen$Your skin is rotting. You lose 1 permanent strength!%%fg=reset$");
           } else if (is_alive_monst() && real_hitter->is_player()) {
             TOPCON("%%fg=limegreen$Your rotting hand touches %s for 1 permanent strength damage!%%fg=reset$",
                    text_the().c_str());
           }
-          if (real_hitter->is_necrotic_danger_level()) {
-            if (damage > 1) {
-              incr_necrotized_amount(damage - 1);
-            }
-          }
-          decr_stat_strength();
-          rotting();
+          return true;
         }
       } else {
         if (environ_prefers_necrosis()) {
@@ -325,19 +353,30 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
             return false;
           }
         } else {
+          if (real_hitter->is_necrotic_danger_level()) {
+            damage = real_hitter->is_necrotic_danger_level();
+          } else {
+            damage = 1;
+          }
+          damage = buff_on_constitution_damage(real_hitter, damage);
+          if (! damage) {
+            real_hitter->err("No constitution damage");
+            return false;
+          }
+          if (real_hitter->is_necrotic_danger_level()) {
+            if (damage > 1) {
+              rotting();
+              incr_necrotized_amount(damage - 1);
+            }
+          }
+          decr_stat_constitution();
           if (is_player()) {
             TOPCON("%%fg=limegreen$Your skin is rotting. You lose 1 permanent constitution!%%fg=reset$");
           } else if (is_alive_monst() && real_hitter->is_player()) {
             TOPCON("%%fg=limegreen$Your rotting hand touches %s for 1 permanent constitution damage!%%fg=reset$",
                    text_the().c_str());
           }
-          if (real_hitter->is_necrotic_danger_level()) {
-            if (damage > 1) {
-              incr_necrotized_amount(damage - 1);
-            }
-          }
-          decr_stat_constitution();
-          rotting();
+          return true;
         }
       }
     }
@@ -637,7 +676,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
   // Python callback
   //
   if (! is_dead) {
-    on_you_are_hit(hitter, real_hitter, crit, bite, poison, necrosis, damage);
+    on_you_are_hit(hitter, real_hitter, crit, damage);
   }
 
   //
@@ -800,16 +839,16 @@ int Thing::is_hit(Thingp hitter, bool crit, bool bite, bool poison, bool necrosi
   return (hit_and_destroyed);
 }
 
+int Thing::is_melee_attacked_by(Thingp hitter, int damage)
+{
+  TRACE_AND_INDENT();
+  return (is_hit(hitter, false, false, false, false, damage));
+}
+
 int Thing::is_bitten_by(Thingp hitter, int damage)
 {
   TRACE_AND_INDENT();
   return (is_hit(hitter, false, true, false, false, damage));
-}
-
-int Thing::is_attacked_by(Thingp hitter, int damage)
-{
-  TRACE_AND_INDENT();
-  return (is_hit(hitter, false, false, false, false, damage));
 }
 
 int Thing::is_poisoned_by(Thingp hitter, int damage)

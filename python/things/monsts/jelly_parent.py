@@ -2,7 +2,7 @@ import builtins
 import my
 import tp
 
-def on_you_are_hit(me, hitter, real_hitter, x, y, crit, bite, poison, necrosis, damage):
+def on_you_are_hit(me, hitter, real_hitter, x, y, crit, damage):
     if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, "squelch"):
         my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, "squelch")
 
