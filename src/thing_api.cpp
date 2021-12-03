@@ -6012,40 +6012,40 @@ const std::string &Thing::on_owner_unset_do(void)
   return (tp()->on_owner_unset_do());
 }
 
-const std::string &Thing::on_owner_poison_damage_do(void)
+const std::string &Thing::on_owner_damage_poison_do(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->on_owner_poison_damage_do());
+  return (tp()->on_owner_damage_poison_do());
 }
 
-const std::string &Thing::on_owner_constitution_damage_do(void)
+const std::string &Thing::on_owner_damage_constitution_do(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->on_owner_constitution_damage_do());
+  return (tp()->on_owner_damage_constitution_do());
 }
 
-const std::string &Thing::on_owner_strength_damage_do(void)
+const std::string &Thing::on_owner_damage_strength_do(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->on_owner_strength_damage_do());
+  return (tp()->on_owner_damage_strength_do());
 }
 
-const std::string &Thing::on_owner_melee_damage_do(void)
+const std::string &Thing::on_owner_damage_melee_do(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->on_owner_melee_damage_do());
+  return (tp()->on_owner_damage_melee_do());
 }
 
-const std::string &Thing::on_owner_necrosis_damage_do(void)
+const std::string &Thing::on_owner_damage_necrosis_do(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->on_owner_necrosis_damage_do());
+  return (tp()->on_owner_damage_necrosis_do());
 }
 
-const std::string &Thing::on_owner_bite_damage_do(void)
+const std::string &Thing::on_owner_damage_bite_do(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->on_owner_bite_damage_do());
+  return (tp()->on_owner_damage_bite_do());
 }
 
 const std::string &Thing::projectile_name(void)

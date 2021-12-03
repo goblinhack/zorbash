@@ -454,19 +454,20 @@ public:
   void buff_tick();
   void debuff_tick();
 
-  int buff_on_poison_damage(Thingp hitter, int damage);
-  int buff_on_bite_damage(Thingp hitter, int damage);
-  int buff_on_melee_damage(Thingp hitter, int damage);
-  int buff_on_necrosis_damage(Thingp hitter, int damage);
-  int buff_on_strength_damage(Thingp hitter, int damage);
-  int buff_on_constitution_damage(Thingp hitter, int damage);
+  int buff_on_damage_poison(Thingp hitter, int damage);
+  int buff_on_damage_bite(Thingp hitter, int damage);
+  int buff_on_damage_melee(Thingp hitter, int damage);
+  int buff_on_damage_necrosis(Thingp hitter, int damage);
+  int buff_on_damage_strength(Thingp hitter, int damage);
+  int buff_on_damage_constitution(Thingp hitter, int damage);
 
   const Dice &get_damage_bite_dice(void);
   const Dice &get_damage_crush_dice(void);
   const Dice &get_damage_melee_dice(void);
   const Dice &get_damage_poison_dice(void);
   const Dice &get_damage_necrosis_dice(void);
-  const Dice &get_damage_swallow_dice(void);
+  const Dice &get_damage_digest_dice(void);
+
   const Dice &get_gold_value_dice(void);
   const Dice &get_health_initial_dice(void);
   const Dice &get_lifespan_dice(void);
@@ -493,7 +494,7 @@ public:
   const std::string &get_damage_melee_dice_str(void);
   const std::string &get_damage_poison_dice_str(void);
   const std::string &get_damage_necrosis_dice_str(void);
-  const std::string &get_damage_swallow_dice_str(void);
+  const std::string &get_damage_digest_dice_str(void);
   const std::string &get_dead_reason(void);
   const std::string &get_gold_value_dice_str(void);
   const std::string &get_health_initial_dice_str(void);
@@ -527,12 +528,12 @@ public:
   const std::string &on_unequip_do(void);
   const std::string &on_owner_set_do(void);
   const std::string &on_owner_unset_do(void);
-  const std::string &on_owner_poison_damage_do(void);
-  const std::string &on_owner_constitution_damage_do(void);
-  const std::string &on_owner_strength_damage_do(void);
-  const std::string &on_owner_melee_damage_do(void);
-  const std::string &on_owner_necrosis_damage_do(void);
-  const std::string &on_owner_bite_damage_do(void);
+  const std::string &on_owner_damage_poison_do(void);
+  const std::string &on_owner_damage_constitution_do(void);
+  const std::string &on_owner_damage_strength_do(void);
+  const std::string &on_owner_damage_melee_do(void);
+  const std::string &on_owner_damage_necrosis_do(void);
+  const std::string &on_owner_damage_bite_do(void);
   const std::string &projectile_name(void);
   const std::string &short_text_name(void);
   const std::string &spawn_on_shoved(void);
@@ -715,7 +716,7 @@ public:
   int get_damage_min(void);
   int get_damage_necrosis(void);
   int get_damage_poison(void);
-  int get_damage_swallow(void);
+  int get_damage_digest(void);
   int get_danger_current_level(Thingp);
   int get_danger_current_level(void);
   int get_danger_initial_level(Thingp);
@@ -1160,12 +1161,12 @@ public:
   int weapon_damage(void);
   int worth_collecting(const Thingp it);
   int worth_collecting(const Thingp it, Thingp *would_need_to_drop);
-  int on_owner_poison_damage(Thingp owner, Thingp hitter, int damage);
-  int on_owner_constitution_damage(Thingp owner, Thingp hitter, int damage);
-  int on_owner_strength_damage(Thingp owner, Thingp hitter, int damage);
-  int on_owner_melee_damage(Thingp owner, Thingp hitter, int damage);
-  int on_owner_necrosis_damage(Thingp owner, Thingp hitter, int damage);
-  int on_owner_bite_damage(Thingp owner, Thingp hitter, int damage);
+  int on_owner_damage_poison(Thingp owner, Thingp hitter, int damage);
+  int on_owner_damage_constitution(Thingp owner, Thingp hitter, int damage);
+  int on_owner_damage_strength(Thingp owner, Thingp hitter, int damage);
+  int on_owner_damage_melee(Thingp owner, Thingp hitter, int damage);
+  int on_owner_damage_necrosis(Thingp owner, Thingp hitter, int damage);
+  int on_owner_damage_bite(Thingp owner, Thingp hitter, int damage);
 
   point dir_to_direction();
   point get_random_target(void);

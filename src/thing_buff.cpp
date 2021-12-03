@@ -174,7 +174,7 @@ void Thing::buff_tick(void)
   }
 }
 
-int Thing::buff_on_poison_damage(Thingp hitter, int damage)
+int Thing::buff_on_damage_poison(Thingp hitter, int damage)
 {
   if (! maybe_itemp()) {
     return damage;
@@ -185,13 +185,13 @@ int Thing::buff_on_poison_damage(Thingp hitter, int damage)
   for (const auto &item : get_itemp()->buffs) {
     auto t = level->thing_find(item.id);
     if (t) {
-      damage = t->on_owner_poison_damage(this, hitter, damage);
+      damage = t->on_owner_damage_poison(this, hitter, damage);
     }
   }
   return damage;
 }
 
-int Thing::buff_on_constitution_damage(Thingp hitter, int damage)
+int Thing::buff_on_damage_constitution(Thingp hitter, int damage)
 {
   if (! maybe_itemp()) {
     return damage;
@@ -202,13 +202,13 @@ int Thing::buff_on_constitution_damage(Thingp hitter, int damage)
   for (const auto &item : get_itemp()->buffs) {
     auto t = level->thing_find(item.id);
     if (t) {
-      damage = t->on_owner_constitution_damage(this, hitter, damage);
+      damage = t->on_owner_damage_constitution(this, hitter, damage);
     }
   }
   return damage;
 }
 
-int Thing::buff_on_strength_damage(Thingp hitter, int damage)
+int Thing::buff_on_damage_strength(Thingp hitter, int damage)
 {
   if (! maybe_itemp()) {
     return damage;
@@ -219,13 +219,13 @@ int Thing::buff_on_strength_damage(Thingp hitter, int damage)
   for (const auto &item : get_itemp()->buffs) {
     auto t = level->thing_find(item.id);
     if (t) {
-      damage = t->on_owner_strength_damage(this, hitter, damage);
+      damage = t->on_owner_damage_strength(this, hitter, damage);
     }
   }
   return damage;
 }
 
-int Thing::buff_on_melee_damage(Thingp hitter, int damage)
+int Thing::buff_on_damage_melee(Thingp hitter, int damage)
 {
   if (! maybe_itemp()) {
     return damage;
@@ -236,13 +236,13 @@ int Thing::buff_on_melee_damage(Thingp hitter, int damage)
   for (const auto &item : get_itemp()->buffs) {
     auto t = level->thing_find(item.id);
     if (t) {
-      damage = t->on_owner_melee_damage(this, hitter, damage);
+      damage = t->on_owner_damage_melee(this, hitter, damage);
     }
   }
   return damage;
 }
 
-int Thing::buff_on_necrosis_damage(Thingp hitter, int damage)
+int Thing::buff_on_damage_necrosis(Thingp hitter, int damage)
 {
   if (! maybe_itemp()) {
     return damage;
@@ -253,13 +253,13 @@ int Thing::buff_on_necrosis_damage(Thingp hitter, int damage)
   for (const auto &item : get_itemp()->buffs) {
     auto t = level->thing_find(item.id);
     if (t) {
-      damage = t->on_owner_necrosis_damage(this, hitter, damage);
+      damage = t->on_owner_damage_necrosis(this, hitter, damage);
     }
   }
   return damage;
 }
 
-int Thing::buff_on_bite_damage(Thingp hitter, int damage)
+int Thing::buff_on_damage_bite(Thingp hitter, int damage)
 {
   if (! maybe_itemp()) {
     return damage;
@@ -270,7 +270,7 @@ int Thing::buff_on_bite_damage(Thingp hitter, int damage)
   for (const auto &item : get_itemp()->buffs) {
     auto t = level->thing_find(item.id);
     if (t) {
-      damage = t->on_owner_bite_damage(this, hitter, damage);
+      damage = t->on_owner_damage_bite(this, hitter, damage);
     }
   }
   return damage;

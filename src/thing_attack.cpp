@@ -426,9 +426,9 @@ bool Thing::attack(Thingp victim)
   //
   if (! damage_set) {
     if ((int) pcg_random_range(0, 1000) < damage_poison_chance_d1000()) {
-      int poison_damage = get_damage_poison();
-      if (poison_damage > 0) {
-        damage     = poison_damage;
+      int damage_poison = get_damage_poison();
+      if (damage_poison > 0) {
+        damage     = damage_poison;
         damage_set = true;
         poison     = true;
       }
@@ -440,9 +440,9 @@ bool Thing::attack(Thingp victim)
   //
   if (! damage_set) {
     if ((int) pcg_random_range(0, 1000) < damage_necrosis_chance_d1000()) {
-      int necrosis_damage = get_damage_necrosis();
-      if (necrosis_damage > 0) {
-        damage     = necrosis_damage;
+      int damage_necrosis = get_damage_necrosis();
+      if (damage_necrosis > 0) {
+        damage     = damage_necrosis;
         damage_set = true;
         necrosis   = true;
       }
@@ -454,9 +454,9 @@ bool Thing::attack(Thingp victim)
   //
   if (! damage_set) {
     if ((int) pcg_random_range(0, 1000) < damage_bite_chance_d1000()) {
-      int bite_damage = get_damage_bite();
-      if (bite_damage > 0) {
-        damage     = bite_damage + stat_to_bonus(attack_total);
+      int damage_bite = get_damage_bite();
+      if (damage_bite > 0) {
+        damage     = damage_bite + stat_to_bonus(attack_total);
         damage_set = true;
         bite       = true;
       }
@@ -590,7 +590,7 @@ bool Thing::attack(Thingp victim)
   //
   if (is_engulfer()) {
     if (victim->mid_at == mid_at) {
-      damage = get_damage_swallow();
+      damage = get_damage_digest();
       if (victim->is_player()) {
         TOPCON("%%fg=red$You are being consumed by %s!%%fg=reset$", text_the().c_str());
         msg("Gulp!");

@@ -43,26 +43,26 @@ int Thing::get_damage_melee(void)
   return roll;
 }
 
-int Thing::on_owner_melee_damage(Thingp owner, Thingp hitter, int damage)
+int Thing::on_owner_damage_melee(Thingp owner, Thingp hitter, int damage)
 {
   verify(MTYPE_THING, owner);
   if (! owner) {
-    err("Cannot owner_melee_damage null thing");
+    err("Cannot owner_damage_melee null thing");
     return damage;
   }
 
   verify(MTYPE_THING, hitter);
   if (! hitter) {
-    err("Cannot owner_melee_damage null thing");
+    err("Cannot owner_damage_melee null thing");
     return damage;
   }
 
-  auto on_owner_melee_damage = on_owner_melee_damage_do();
-  if (std::empty(on_owner_melee_damage)) {
+  auto on_owner_damage_melee = on_owner_damage_melee_do();
+  if (std::empty(on_owner_damage_melee)) {
     return damage;
   }
 
-  auto t = split_tokens(on_owner_melee_damage, '.');
+  auto t = split_tokens(on_owner_damage_melee, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -78,8 +78,8 @@ int Thing::on_owner_melee_damage(Thingp owner, Thingp hitter, int damage)
                           (unsigned int) mid_at.y, (unsigned int) damage);
   }
 
-  ERR("Bad on_owner_melee_damage call [%s] expected mod:function, got %d elems", on_owner_melee_damage.c_str(),
-      (int) on_owner_melee_damage.size());
+  ERR("Bad on_owner_damage_melee call [%s] expected mod:function, got %d elems", on_owner_damage_melee.c_str(),
+      (int) on_owner_damage_melee.size());
 
   return damage;
 }
@@ -109,26 +109,26 @@ int Thing::get_damage_poison(void)
   return roll;
 }
 
-int Thing::on_owner_poison_damage(Thingp owner, Thingp hitter, int damage)
+int Thing::on_owner_damage_poison(Thingp owner, Thingp hitter, int damage)
 {
   verify(MTYPE_THING, owner);
   if (! owner) {
-    err("Cannot owner_poison_damage null thing");
+    err("Cannot owner_damage_poison null thing");
     return damage;
   }
 
   verify(MTYPE_THING, hitter);
   if (! hitter) {
-    err("Cannot owner_poison_damage null thing");
+    err("Cannot owner_damage_poison null thing");
     return damage;
   }
 
-  auto on_owner_poison_damage = on_owner_poison_damage_do();
-  if (std::empty(on_owner_poison_damage)) {
+  auto on_owner_damage_poison = on_owner_damage_poison_do();
+  if (std::empty(on_owner_damage_poison)) {
     return damage;
   }
 
-  auto t = split_tokens(on_owner_poison_damage, '.');
+  auto t = split_tokens(on_owner_damage_poison, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -144,8 +144,8 @@ int Thing::on_owner_poison_damage(Thingp owner, Thingp hitter, int damage)
                           (unsigned int) mid_at.y, (unsigned int) damage);
   }
 
-  ERR("Bad on_owner_poison_damage call [%s] expected mod:function, got %d elems", on_owner_poison_damage.c_str(),
-      (int) on_owner_poison_damage.size());
+  ERR("Bad on_owner_damage_poison call [%s] expected mod:function, got %d elems", on_owner_damage_poison.c_str(),
+      (int) on_owner_damage_poison.size());
 
   return damage;
 }
@@ -175,26 +175,26 @@ int Thing::get_damage_necrosis(void)
   return roll;
 }
 
-int Thing::on_owner_necrosis_damage(Thingp owner, Thingp hitter, int damage)
+int Thing::on_owner_damage_necrosis(Thingp owner, Thingp hitter, int damage)
 {
   verify(MTYPE_THING, owner);
   if (! owner) {
-    err("Cannot owner_necrosis_damage null thing");
+    err("Cannot owner_damage_necrosis null thing");
     return damage;
   }
 
   verify(MTYPE_THING, hitter);
   if (! hitter) {
-    err("Cannot owner_necrosis_damage null thing");
+    err("Cannot owner_damage_necrosis null thing");
     return damage;
   }
 
-  auto on_owner_necrosis_damage = on_owner_necrosis_damage_do();
-  if (std::empty(on_owner_necrosis_damage)) {
+  auto on_owner_damage_necrosis = on_owner_damage_necrosis_do();
+  if (std::empty(on_owner_damage_necrosis)) {
     return damage;
   }
 
-  auto t = split_tokens(on_owner_necrosis_damage, '.');
+  auto t = split_tokens(on_owner_damage_necrosis, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -210,8 +210,8 @@ int Thing::on_owner_necrosis_damage(Thingp owner, Thingp hitter, int damage)
                           (unsigned int) mid_at.y, (unsigned int) damage);
   }
 
-  ERR("Bad on_owner_necrosis_damage call [%s] expected mod:function, got %d elems", on_owner_necrosis_damage.c_str(),
-      (int) on_owner_necrosis_damage.size());
+  ERR("Bad on_owner_damage_necrosis call [%s] expected mod:function, got %d elems", on_owner_damage_necrosis.c_str(),
+      (int) on_owner_damage_necrosis.size());
 
   return damage;
 }
@@ -266,26 +266,26 @@ int Thing::get_damage_bite(void)
   return roll;
 }
 
-int Thing::on_owner_bite_damage(Thingp owner, Thingp hitter, int damage)
+int Thing::on_owner_damage_bite(Thingp owner, Thingp hitter, int damage)
 {
   verify(MTYPE_THING, owner);
   if (! owner) {
-    err("Cannot owner_bite_damage null thing");
+    err("Cannot owner_damage_bite null thing");
     return damage;
   }
 
   verify(MTYPE_THING, hitter);
   if (! hitter) {
-    err("Cannot owner_bite_damage null thing");
+    err("Cannot owner_damage_bite null thing");
     return damage;
   }
 
-  auto on_owner_bite_damage = on_owner_bite_damage_do();
-  if (std::empty(on_owner_bite_damage)) {
+  auto on_owner_damage_bite = on_owner_damage_bite_do();
+  if (std::empty(on_owner_damage_bite)) {
     return damage;
   }
 
-  auto t = split_tokens(on_owner_bite_damage, '.');
+  auto t = split_tokens(on_owner_damage_bite, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -301,8 +301,8 @@ int Thing::on_owner_bite_damage(Thingp owner, Thingp hitter, int damage)
                           (unsigned int) mid_at.y, (unsigned int) damage);
   }
 
-  ERR("Bad on_owner_bite_damage call [%s] expected mod:function, got %d elems", on_owner_bite_damage.c_str(),
-      (int) on_owner_bite_damage.size());
+  ERR("Bad on_owner_damage_bite call [%s] expected mod:function, got %d elems", on_owner_damage_bite.c_str(),
+      (int) on_owner_damage_bite.size());
 
   return damage;
 }
@@ -310,22 +310,22 @@ int Thing::on_owner_bite_damage(Thingp owner, Thingp hitter, int damage)
 ///////////////////////////////////////////////////////////////////////////
 // swallow
 ///////////////////////////////////////////////////////////////////////////
-const Dice &Thing::get_damage_swallow_dice(void)
+const Dice &Thing::get_damage_digest_dice(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->get_damage_swallow_dice());
+  return (tp()->get_damage_digest_dice());
 }
 
-const std::string &Thing::get_damage_swallow_dice_str(void)
+const std::string &Thing::get_damage_digest_dice_str(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->get_damage_swallow_dice_str());
+  return (tp()->get_damage_digest_dice_str());
 }
 
-int Thing::get_damage_swallow(void)
+int Thing::get_damage_digest(void)
 {
   TRACE_AND_INDENT();
-  auto roll = tp()->get_damage_swallow_dice().roll();
+  auto roll = tp()->get_damage_digest_dice().roll();
   if (roll) {
     return roll + get_enchant();
   }
@@ -339,7 +339,7 @@ int Thing::get_damage_max(void)
 {
   TRACE_AND_INDENT();
   auto max_damage = get_damage_bite_dice().max_roll();
-  max_damage      = std::max(max_damage, get_damage_swallow_dice().max_roll());
+  max_damage      = std::max(max_damage, get_damage_digest_dice().max_roll());
   max_damage      = std::max(max_damage, get_damage_melee_dice().max_roll());
   max_damage      = std::max(max_damage, get_damage_poison_dice().max_roll());
   max_damage      = std::max(max_damage, get_damage_necrosis_dice().max_roll());
@@ -353,7 +353,7 @@ int Thing::get_damage_min(void)
 {
   TRACE_AND_INDENT();
   auto min_damage = get_damage_bite_dice().min_roll();
-  min_damage      = std::min(min_damage, get_damage_swallow_dice().min_roll());
+  min_damage      = std::min(min_damage, get_damage_digest_dice().min_roll());
   min_damage      = std::min(min_damage, get_damage_melee_dice().min_roll());
   min_damage      = std::min(min_damage, get_damage_poison_dice().min_roll());
   min_damage      = std::min(min_damage, get_damage_necrosis_dice().min_roll());
@@ -363,26 +363,26 @@ int Thing::get_damage_min(void)
   return min_damage + get_enchant();
 }
 
-int Thing::on_owner_strength_damage(Thingp owner, Thingp hitter, int damage)
+int Thing::on_owner_damage_strength(Thingp owner, Thingp hitter, int damage)
 {
   verify(MTYPE_THING, owner);
   if (! owner) {
-    err("Cannot owner_strength_damage null thing");
+    err("Cannot owner_damage_strength null thing");
     return damage;
   }
 
   verify(MTYPE_THING, hitter);
   if (! hitter) {
-    err("Cannot owner_strength_damage null thing");
+    err("Cannot owner_damage_strength null thing");
     return damage;
   }
 
-  auto on_owner_strength_damage = on_owner_strength_damage_do();
-  if (std::empty(on_owner_strength_damage)) {
+  auto on_owner_damage_strength = on_owner_damage_strength_do();
+  if (std::empty(on_owner_damage_strength)) {
     return damage;
   }
 
-  auto t = split_tokens(on_owner_strength_damage, '.');
+  auto t = split_tokens(on_owner_damage_strength, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -398,32 +398,32 @@ int Thing::on_owner_strength_damage(Thingp owner, Thingp hitter, int damage)
                           (unsigned int) mid_at.y, (unsigned int) damage);
   }
 
-  ERR("Bad on_owner_strength_damage call [%s] expected mod:function, got %d elems", on_owner_strength_damage.c_str(),
-      (int) on_owner_strength_damage.size());
+  ERR("Bad on_owner_damage_strength call [%s] expected mod:function, got %d elems", on_owner_damage_strength.c_str(),
+      (int) on_owner_damage_strength.size());
 
   return damage;
 }
 
-int Thing::on_owner_constitution_damage(Thingp owner, Thingp hitter, int damage)
+int Thing::on_owner_damage_constitution(Thingp owner, Thingp hitter, int damage)
 {
   verify(MTYPE_THING, owner);
   if (! owner) {
-    err("Cannot owner_constitution_damage null thing");
+    err("Cannot owner_damage_constitution null thing");
     return damage;
   }
 
   verify(MTYPE_THING, hitter);
   if (! hitter) {
-    err("Cannot owner_constitution_damage null thing");
+    err("Cannot owner_damage_constitution null thing");
     return damage;
   }
 
-  auto on_owner_constitution_damage = on_owner_constitution_damage_do();
-  if (std::empty(on_owner_constitution_damage)) {
+  auto on_owner_damage_constitution = on_owner_damage_constitution_do();
+  if (std::empty(on_owner_damage_constitution)) {
     return damage;
   }
 
-  auto t = split_tokens(on_owner_constitution_damage, '.');
+  auto t = split_tokens(on_owner_damage_constitution, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -439,8 +439,8 @@ int Thing::on_owner_constitution_damage(Thingp owner, Thingp hitter, int damage)
                           (unsigned int) mid_at.y, (unsigned int) damage);
   }
 
-  ERR("Bad on_owner_constitution_damage call [%s] expected mod:function, got %d elems",
-      on_owner_constitution_damage.c_str(), (int) on_owner_constitution_damage.size());
+  ERR("Bad on_owner_damage_constitution call [%s] expected mod:function, got %d elems",
+      on_owner_damage_constitution.c_str(), (int) on_owner_damage_constitution.size());
 
   return damage;
 }

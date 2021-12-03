@@ -11,22 +11,22 @@ def on_owner_unset(me, owner, x, y):
     if my.thing_is_player(owner):
         my.topcon("The green glow around you fades.")
 
-def on_owner_melee_damage(me, owner, hitter, x, y, damage):
+def on_owner_damage_melee(me, owner, hitter, x, y, damage):
     return damage
 
-def on_owner_poison_damage(me, owner, hitter, x, y, damage):
+def on_owner_damage_poison(me, owner, hitter, x, y, damage):
     return int(poison / 2)
 
-def on_owner_bite_damage(me, owner, hitter, x, y, damage):
+def on_owner_damage_bite(me, owner, hitter, x, y, damage):
     return damage
 
-def on_owner_necrosis_damage(me, owner, hitter, x, y, damage):
+def on_owner_damage_necrosis(me, owner, hitter, x, y, damage):
     return damage
 
-def on_owner_strength_damage(me, owner, hitter, x, y, damage):
+def on_owner_damage_strength(me, owner, hitter, x, y, damage):
     return damage
 
-def on_owner_constitution_damage(me, owner, hitter, x, y, damage):
+def on_owner_damage_constitution(me, owner, hitter, x, y, damage):
     return damage
 
 def on_tick(owner, item, x, y):
@@ -49,13 +49,13 @@ def tp_init(name, text_name):
     mytp.set_is_buff(True)
     mytp.set_is_loggable(True)
     mytp.set_long_text_description("Poison causes you 50 percent less damage.")
-    mytp.set_on_owner_bite_damage_do("buff_bite_resist.on_owner_bite_damage()")
-    mytp.set_on_owner_constitution_damage_do("buff_constitution_resist.on_owner_constitution_damage()")
-    mytp.set_on_owner_melee_damage_do("buff_melee_resist.on_owner_melee_damage()")
-    mytp.set_on_owner_necrosis_damage_do("buff_necrosis_resist.on_owner_necrosis_damage()")
-    mytp.set_on_owner_poison_damage_do("buff_poison_resist.on_owner_poison_damage()")
+    mytp.set_on_owner_damage_bite_do("buff_bite_resist.on_owner_damage_bite()")
+    mytp.set_on_owner_damage_constitution_do("buff_constitution_resist.on_owner_damage_constitution()")
+    mytp.set_on_owner_damage_melee_do("buff_melee_resist.on_owner_damage_melee()")
+    mytp.set_on_owner_damage_necrosis_do("buff_necrosis_resist.on_owner_damage_necrosis()")
+    mytp.set_on_owner_damage_poison_do("buff_poison_resist.on_owner_damage_poison()")
     mytp.set_on_owner_set_do("buff_poison_resist.on_owner_set()")
-    mytp.set_on_owner_strength_damage_do("buff_strength_resist.on_owner_strength_damage()")
+    mytp.set_on_owner_damage_strength_do("buff_strength_resist.on_owner_damage_strength()")
     mytp.set_on_owner_unset_do("buff_poison_resist.on_owner_unset()")
     mytp.set_on_tick_do("buff_poison_resist.on_tick()")
     mytp.set_text_buff("You are mostly poison resistant");

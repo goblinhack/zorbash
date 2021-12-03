@@ -131,27 +131,27 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
   }
 
   if (poison) {
-    damage = buff_on_poison_damage(real_hitter, damage);
+    damage = buff_on_damage_poison(real_hitter, damage);
     if (! damage) {
-      real_hitter->err("No poison damage");
+      real_hitter->log("No poison damage");
       return false;
     }
   } else if (necrosis) {
-    damage = buff_on_necrosis_damage(real_hitter, damage);
+    damage = buff_on_damage_necrosis(real_hitter, damage);
     if (! damage) {
-      real_hitter->err("No necrosis damage");
+      real_hitter->log("No necrosis damage");
       return false;
     }
   } else if (bite) {
-    damage = buff_on_bite_damage(real_hitter, damage);
+    damage = buff_on_damage_bite(real_hitter, damage);
     if (! damage) {
-      real_hitter->err("No bite damage");
+      real_hitter->log("No bite damage");
       return false;
     }
   } else {
-    damage = buff_on_melee_damage(real_hitter, damage);
+    damage = buff_on_damage_melee(real_hitter, damage);
     if (! damage) {
-      real_hitter->err("No melee damage");
+      real_hitter->log("No melee damage");
       return false;
     }
   }
@@ -321,9 +321,9 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
           } else {
             damage = 1;
           }
-          damage = buff_on_strength_damage(real_hitter, damage);
+          damage = buff_on_damage_strength(real_hitter, damage);
           if (! damage) {
-            real_hitter->err("No strength damage");
+            real_hitter->log("No strength damage");
             return false;
           }
           if (real_hitter->is_necrotic_danger_level()) {
@@ -358,9 +358,9 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
           } else {
             damage = 1;
           }
-          damage = buff_on_constitution_damage(real_hitter, damage);
+          damage = buff_on_damage_constitution(real_hitter, damage);
           if (! damage) {
-            real_hitter->err("No constitution damage");
+            real_hitter->log("No constitution damage");
             return false;
           }
           if (real_hitter->is_necrotic_danger_level()) {

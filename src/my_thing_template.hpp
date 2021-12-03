@@ -52,7 +52,7 @@ public:
 
 private:
   Dice _damage_bite_dice {};
-  Dice _damage_swallow_dice {};
+  Dice _damage_digest_dice {};
   Dice _damage_crush_dice {};
   Dice _damage_melee_dice {};
   Dice _damage_poison_dice {};
@@ -397,7 +397,7 @@ private:
   int _weapon_use_distance {};
 
   std::string _damage_bite_dice_str;
-  std::string _damage_swallow_dice_str;
+  std::string _damage_digest_dice_str;
   std::string _damage_crush_dice_str;
   std::string _damage_melee_dice_str;
   std::string _damage_poison_dice_str;
@@ -432,12 +432,12 @@ private:
   std::string _on_unequip_do;
   std::string _on_owner_set_do;
   std::string _on_owner_unset_do;
-  std::string _on_owner_poison_damage_do;
-  std::string _on_owner_constitution_damage_do;
-  std::string _on_owner_strength_damage_do;
-  std::string _on_owner_melee_damage_do;
-  std::string _on_owner_necrosis_damage_do;
-  std::string _on_owner_bite_damage_do;
+  std::string _on_owner_damage_poison_do;
+  std::string _on_owner_damage_constitution_do;
+  std::string _on_owner_damage_strength_do;
+  std::string _on_owner_damage_melee_do;
+  std::string _on_owner_damage_necrosis_do;
+  std::string _on_owner_damage_bite_do;
   std::string _projectile_name;
   std::string _resurrect_dice_str;
   std::string _short_text_name;
@@ -466,7 +466,7 @@ public:
   bool is_hated_by_me(class Level *, point p) const;
 
   const Dice &get_damage_bite_dice(void) const;
-  const Dice &get_damage_swallow_dice(void) const;
+  const Dice &get_damage_digest_dice(void) const;
   const Dice &get_damage_crush_dice(void) const;
   const Dice &get_damage_melee_dice(void) const;
   const Dice &get_damage_poison_dice(void) const;
@@ -480,7 +480,7 @@ public:
 
   const int cash(void) const;
   const int get_damage_bite(void) const;
-  const int get_damage_swallow(void) const;
+  const int get_damage_digest(void) const;
   const int get_damage_crush(void) const;
   const int get_damage_melee(void) const;
   const int get_damage_poison(void) const;
@@ -530,7 +530,7 @@ public:
   void set_damage_melee_dice(const std::string &);
   void set_damage_necrosis_dice(const std::string &);
   void set_damage_poison_dice(const std::string &);
-  void set_damage_swallow_dice(const std::string &);
+  void set_damage_digest_dice(const std::string &);
   void set_gold_value_dice(const std::string &);
   void set_health_initial_dice(const std::string &);
   void set_lifespan_dice(const std::string &);
@@ -539,7 +539,7 @@ public:
   void set_resurrect_dice(const std::string &);
 
   const std::string &get_damage_bite_dice_str(void) const;
-  const std::string &get_damage_swallow_dice_str(void) const;
+  const std::string &get_damage_digest_dice_str(void) const;
   const std::string &get_damage_crush_dice_str(void) const;
   const std::string &get_damage_melee_dice_str(void) const;
   const std::string &get_damage_poison_dice_str(void) const;
@@ -578,12 +578,12 @@ public:
   const std::string &on_unequip_do(void) const { return _on_unequip_do; }
   const std::string &on_owner_set_do(void) const { return _on_owner_set_do; }
   const std::string &on_owner_unset_do(void) const { return _on_owner_unset_do; }
-  const std::string &on_owner_poison_damage_do(void) const { return _on_owner_poison_damage_do; }
-  const std::string &on_owner_constitution_damage_do(void) const { return _on_owner_constitution_damage_do; }
-  const std::string &on_owner_strength_damage_do(void) const { return _on_owner_strength_damage_do; }
-  const std::string &on_owner_melee_damage_do(void) const { return _on_owner_melee_damage_do; }
-  const std::string &on_owner_necrosis_damage_do(void) const { return _on_owner_necrosis_damage_do; }
-  const std::string &on_owner_bite_damage_do(void) const { return _on_owner_bite_damage_do; }
+  const std::string &on_owner_damage_poison_do(void) const { return _on_owner_damage_poison_do; }
+  const std::string &on_owner_damage_constitution_do(void) const { return _on_owner_damage_constitution_do; }
+  const std::string &on_owner_damage_strength_do(void) const { return _on_owner_damage_strength_do; }
+  const std::string &on_owner_damage_melee_do(void) const { return _on_owner_damage_melee_do; }
+  const std::string &on_owner_damage_necrosis_do(void) const { return _on_owner_damage_necrosis_do; }
+  const std::string &on_owner_damage_bite_do(void) const { return _on_owner_damage_bite_do; }
   const std::string &projectile_name(void) const { return _projectile_name; }
   const std::string &short_text_name(void) const { return _short_text_name; }
   const std::string &spawn_on_shoved(void) const { return _spawn_on_shoved; }
@@ -1218,12 +1218,12 @@ public:
   void set_on_open_do(const std::string &v) { _on_open_do = v; }
   void set_on_owner_set_do(const std::string &v) { _on_owner_set_do = v; }
   void set_on_owner_unset_do(const std::string &v) { _on_owner_unset_do = v; }
-  void set_on_owner_poison_damage_do(const std::string &v) { _on_owner_poison_damage_do = v; }
-  void set_on_owner_constitution_damage_do(const std::string &v) { _on_owner_constitution_damage_do = v; }
-  void set_on_owner_strength_damage_do(const std::string &v) { _on_owner_strength_damage_do = v; }
-  void set_on_owner_melee_damage_do(const std::string &v) { _on_owner_melee_damage_do = v; }
-  void set_on_owner_necrosis_damage_do(const std::string &v) { _on_owner_necrosis_damage_do = v; }
-  void set_on_owner_bite_damage_do(const std::string &v) { _on_owner_bite_damage_do = v; }
+  void set_on_owner_damage_poison_do(const std::string &v) { _on_owner_damage_poison_do = v; }
+  void set_on_owner_damage_constitution_do(const std::string &v) { _on_owner_damage_constitution_do = v; }
+  void set_on_owner_damage_strength_do(const std::string &v) { _on_owner_damage_strength_do = v; }
+  void set_on_owner_damage_melee_do(const std::string &v) { _on_owner_damage_melee_do = v; }
+  void set_on_owner_damage_necrosis_do(const std::string &v) { _on_owner_damage_necrosis_do = v; }
+  void set_on_owner_damage_bite_do(const std::string &v) { _on_owner_damage_bite_do = v; }
   void set_on_tick_do(const std::string &v) { _on_tick_do = v; }
   void set_on_unequip_do(const std::string &v) { _on_unequip_do = v; }
   void set_on_use_do(const std::string &v) { _on_use_do = v; }

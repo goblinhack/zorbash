@@ -344,7 +344,7 @@ PyObject *thing_possible_to_attack(PyObject *obj, PyObject *args, PyObject *keyw
 
 PyObject *thing_get_damage_crush(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_get_damage_bite(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_get_damage_swallow(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_get_damage_digest(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_get_damage_melee(PyObject *obj, PyObject *args, PyObject *keywds);
 
 #endif

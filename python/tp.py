@@ -187,23 +187,23 @@ class Tp:
     def set_on_owner_unset_do(self, value):
         my.tp_set_on_owner_unset_do(self, value)
 
-    def set_on_owner_poison_damage_do(self, value):
-        my.tp_set_on_owner_poison_damage_do(self, value)
+    def set_on_owner_damage_poison_do(self, value):
+        my.tp_set_on_owner_damage_poison_do(self, value)
 
-    def set_on_owner_constitution_damage_do(self, value):
-        my.tp_set_on_owner_constitution_damage_do(self, value)
+    def set_on_owner_damage_constitution_do(self, value):
+        my.tp_set_on_owner_damage_constitution_do(self, value)
 
-    def set_on_owner_strength_damage_do(self, value):
-        my.tp_set_on_owner_strength_damage_do(self, value)
+    def set_on_owner_damage_strength_do(self, value):
+        my.tp_set_on_owner_damage_strength_do(self, value)
 
-    def set_on_owner_melee_damage_do(self, value):
-        my.tp_set_on_owner_melee_damage_do(self, value)
+    def set_on_owner_damage_melee_do(self, value):
+        my.tp_set_on_owner_damage_melee_do(self, value)
 
-    def set_on_owner_necrosis_damage_do(self, value):
-        my.tp_set_on_owner_necrosis_damage_do(self, value)
+    def set_on_owner_damage_necrosis_do(self, value):
+        my.tp_set_on_owner_damage_necrosis_do(self, value)
 
-    def set_on_owner_bite_damage_do(self, value):
-        my.tp_set_on_owner_bite_damage_do(self, value)
+    def set_on_owner_damage_bite_do(self, value):
+        my.tp_set_on_owner_damage_bite_do(self, value)
 
     def set_on_you_are_hit_do(self, value):
         my.tp_set_on_you_are_hit_do(self, value)
@@ -1108,8 +1108,8 @@ class Tp:
     def set_damage_bite_dice(self, value):
         my.tp_set_damage_bite_dice(self, value)
 
-    def set_damage_swallow_dice(self, value):
-        my.tp_set_damage_swallow_dice(self, value)
+    def set_damage_digest_dice(self, value):
+        my.tp_set_damage_digest_dice(self, value)
 
     def set_gold_value_dice(self, value):
         my.tp_set_gold_value_dice(self, value)

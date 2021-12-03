@@ -125,9 +125,9 @@ bool Thing::eat(Thingp victim)
 
       if (victim->is_monst() || victim->is_player()) {
         if (is_engulfer() && (victim->mid_at == mid_at)) {
-          int bite_damage = get_damage_swallow();
-          if (bite_damage) {
-            victim->is_bitten_by(this, bite_damage);
+          int damage_bite = get_damage_digest();
+          if (damage_bite) {
+            victim->is_bitten_by(this, damage_bite);
             return true;
           }
         }
@@ -136,9 +136,9 @@ bool Thing::eat(Thingp victim)
         // Chance of poison damage?
         //
         if ((int) pcg_random_range(0, 1000) < damage_poison_chance_d1000()) {
-          int poison_damage = get_damage_poison();
-          if (poison_damage > 0) {
-            victim->is_poisoned_by(this, poison_damage);
+          int damage_poison = get_damage_poison();
+          if (damage_poison > 0) {
+            victim->is_poisoned_by(this, damage_poison);
             return true;
           }
         }
@@ -147,16 +147,16 @@ bool Thing::eat(Thingp victim)
         // Chance of necrosis damage?
         //
         if ((int) pcg_random_range(0, 1000) < damage_necrosis_chance_d1000()) {
-          int necrosis_damage = get_damage_necrosis();
-          if (necrosis_damage > 0) {
-            victim->is_necrotized_by(this, necrosis_damage);
+          int damage_necrosis = get_damage_necrosis();
+          if (damage_necrosis > 0) {
+            victim->is_necrotized_by(this, damage_necrosis);
             return true;
           }
         }
 
-        int bite_damage = get_damage_bite();
-        if (bite_damage) {
-          victim->is_bitten_by(this, bite_damage);
+        int damage_bite = get_damage_bite();
+        if (damage_bite) {
+          victim->is_bitten_by(this, damage_bite);
           return true;
         }
         return false;
