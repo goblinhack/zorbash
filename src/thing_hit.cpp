@@ -108,8 +108,8 @@ void Thing::on_you_bite_attack(void)
 
 int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
                          Thingp real_hitter, // who fired the arrow?
-                         bool crit, bool bite, bool poison, bool necrosis, bool xxx1, bool xxx2, bool xxx3, bool xxx4,
-                         bool xxx5, bool xxx6, bool xxx7, bool xxx8, bool xxx9, bool xxx10, int damage)
+                         bool crit, bool bite, bool poison, bool necrosis, bool damage_future1, bool damage_future2, bool damage_future3, bool damage_future4,
+                         bool damage_future5, bool damage_future6, bool damage_future7, bool damage_future8, bool damage_future9, bool damage_future10, int damage)
 {
   TRACE_AND_INDENT();
   if (! hitter) {
@@ -137,64 +137,64 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       real_hitter->log("No poison damage");
       return false;
     }
-  } else if (xxx1) {
-    damage = buff_on_damage_xxx1(real_hitter, damage);
+  } else if (damage_future1) {
+    damage = buff_on_damage_future1(real_hitter, damage);
     if (! damage) {
-      real_hitter->log("No xxx1 damage");
+      real_hitter->log("No damage_future1 damage");
       return false;
     }
-  } else if (xxx2) {
-    damage = buff_on_damage_xxx2(real_hitter, damage);
+  } else if (damage_future2) {
+    damage = buff_on_damage_future2(real_hitter, damage);
     if (! damage) {
-      real_hitter->log("No xxx2 damage");
+      real_hitter->log("No damage_future2 damage");
       return false;
     }
-  } else if (xxx3) {
-    damage = buff_on_damage_xxx3(real_hitter, damage);
+  } else if (damage_future3) {
+    damage = buff_on_damage_future3(real_hitter, damage);
     if (! damage) {
-      real_hitter->log("No xxx3 damage");
+      real_hitter->log("No damage_future3 damage");
       return false;
     }
-  } else if (xxx4) {
-    damage = buff_on_damage_xxx4(real_hitter, damage);
+  } else if (damage_future4) {
+    damage = buff_on_damage_future4(real_hitter, damage);
     if (! damage) {
-      real_hitter->log("No xxx4 damage");
+      real_hitter->log("No damage_future4 damage");
       return false;
     }
-  } else if (xxx5) {
-    damage = buff_on_damage_xxx5(real_hitter, damage);
+  } else if (damage_future5) {
+    damage = buff_on_damage_future5(real_hitter, damage);
     if (! damage) {
-      real_hitter->log("No xxx5 damage");
+      real_hitter->log("No damage_future5 damage");
       return false;
     }
-  } else if (xxx6) {
-    damage = buff_on_damage_xxx6(real_hitter, damage);
+  } else if (damage_future6) {
+    damage = buff_on_damage_future6(real_hitter, damage);
     if (! damage) {
-      real_hitter->log("No xxx6 damage");
+      real_hitter->log("No damage_future6 damage");
       return false;
     }
-  } else if (xxx7) {
-    damage = buff_on_damage_xxx7(real_hitter, damage);
+  } else if (damage_future7) {
+    damage = buff_on_damage_future7(real_hitter, damage);
     if (! damage) {
-      real_hitter->log("No xxx7 damage");
+      real_hitter->log("No damage_future7 damage");
       return false;
     }
-  } else if (xxx8) {
-    damage = buff_on_damage_xxx8(real_hitter, damage);
+  } else if (damage_future8) {
+    damage = buff_on_damage_future8(real_hitter, damage);
     if (! damage) {
-      real_hitter->log("No xxx8 damage");
+      real_hitter->log("No damage_future8 damage");
       return false;
     }
-  } else if (xxx9) {
-    damage = buff_on_damage_xxx9(real_hitter, damage);
+  } else if (damage_future9) {
+    damage = buff_on_damage_future9(real_hitter, damage);
     if (! damage) {
-      real_hitter->log("No xxx9 damage");
+      real_hitter->log("No damage_future9 damage");
       return false;
     }
-  } else if (xxx10) {
-    damage = buff_on_damage_xxx10(real_hitter, damage);
+  } else if (damage_future10) {
+    damage = buff_on_damage_future10(real_hitter, damage);
     if (! damage) {
-      real_hitter->log("No xxx10 damage");
+      real_hitter->log("No damage_future10 damage");
       return false;
     }
   } else if (necrosis) {
@@ -753,8 +753,8 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
 //
 // Returns true on the target being dead.
 //
-int Thing::is_hit(Thingp hitter, bool crit, bool bite, bool poison, bool necrosis, bool xxx1, bool xxx2, bool xxx3,
-                  bool xxx4, bool xxx5, bool xxx6, bool xxx7, bool xxx8, bool xxx9, bool xxx10, int damage)
+int Thing::is_hit(Thingp hitter, bool crit, bool bite, bool poison, bool necrosis, bool damage_future1, bool damage_future2, bool damage_future3,
+                  bool damage_future4, bool damage_future5, bool damage_future6, bool damage_future7, bool damage_future8, bool damage_future9, bool damage_future10, int damage)
 {
   TRACE_AND_INDENT();
   if (bite) {
@@ -896,8 +896,8 @@ int Thing::is_hit(Thingp hitter, bool crit, bool bite, bool poison, bool necrosi
   IF_DEBUG2 { hitter->log("Hit succeeds"); }
   int hit_and_destroyed;
 
-  hit_and_destroyed = ai_hit_actual(hitter, real_hitter, crit, bite, poison, necrosis, xxx1, xxx2, xxx3, xxx4, xxx5,
-                                    xxx6, xxx7, xxx8, xxx9, xxx10, damage);
+  hit_and_destroyed = ai_hit_actual(hitter, real_hitter, crit, bite, poison, necrosis, damage_future1, damage_future2, damage_future3, damage_future4, damage_future5,
+                                    damage_future6, damage_future7, damage_future8, damage_future9, damage_future10, damage);
 
   return (hit_and_destroyed);
 }

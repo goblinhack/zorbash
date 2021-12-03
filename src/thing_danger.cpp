@@ -67,16 +67,16 @@ int Tp::get_danger_level(void)
 
   danger_level += get_damage_melee_dice().max_roll();
   danger_level += get_damage_poison_dice().max_roll();
-  danger_level += get_damage_xxx1_dice().max_roll();
-  danger_level += get_damage_xxx2_dice().max_roll();
-  danger_level += get_damage_xxx3_dice().max_roll();
-  danger_level += get_damage_xxx4_dice().max_roll();
-  danger_level += get_damage_xxx5_dice().max_roll();
-  danger_level += get_damage_xxx6_dice().max_roll();
-  danger_level += get_damage_xxx7_dice().max_roll();
-  danger_level += get_damage_xxx8_dice().max_roll();
-  danger_level += get_damage_xxx9_dice().max_roll();
-  danger_level += get_damage_xxx10_dice().max_roll();
+  danger_level += get_damage_future1_dice().max_roll();
+  danger_level += get_damage_future2_dice().max_roll();
+  danger_level += get_damage_future3_dice().max_roll();
+  danger_level += get_damage_future4_dice().max_roll();
+  danger_level += get_damage_future5_dice().max_roll();
+  danger_level += get_damage_future6_dice().max_roll();
+  danger_level += get_damage_future7_dice().max_roll();
+  danger_level += get_damage_future8_dice().max_roll();
+  danger_level += get_damage_future9_dice().max_roll();
+  danger_level += get_damage_future10_dice().max_roll();
   danger_level += get_damage_digest_dice().max_roll();
   danger_level += get_damage_bite_dice().max_roll();
 

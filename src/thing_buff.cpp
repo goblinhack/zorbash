@@ -191,7 +191,7 @@ int Thing::buff_on_damage_poison(Thingp hitter, int damage)
   return damage;
 }
 
-int Thing::buff_on_damage_xxx1(Thingp hitter, int damage)
+int Thing::buff_on_damage_future1(Thingp hitter, int damage)
 {
   if (! maybe_itemp()) {
     return damage;
@@ -202,13 +202,13 @@ int Thing::buff_on_damage_xxx1(Thingp hitter, int damage)
   for (const auto &item : get_itemp()->buffs) {
     auto t = level->thing_find(item.id);
     if (t) {
-      damage = t->on_owner_damage_xxx1(this, hitter, damage);
+      damage = t->on_owner_damage_future1(this, hitter, damage);
     }
   }
   return damage;
 }
 
-int Thing::buff_on_damage_xxx2(Thingp hitter, int damage)
+int Thing::buff_on_damage_future2(Thingp hitter, int damage)
 {
   if (! maybe_itemp()) {
     return damage;
@@ -219,13 +219,13 @@ int Thing::buff_on_damage_xxx2(Thingp hitter, int damage)
   for (const auto &item : get_itemp()->buffs) {
     auto t = level->thing_find(item.id);
     if (t) {
-      damage = t->on_owner_damage_xxx2(this, hitter, damage);
+      damage = t->on_owner_damage_future2(this, hitter, damage);
     }
   }
   return damage;
 }
 
-int Thing::buff_on_damage_xxx3(Thingp hitter, int damage)
+int Thing::buff_on_damage_future3(Thingp hitter, int damage)
 {
   if (! maybe_itemp()) {
     return damage;
@@ -236,13 +236,13 @@ int Thing::buff_on_damage_xxx3(Thingp hitter, int damage)
   for (const auto &item : get_itemp()->buffs) {
     auto t = level->thing_find(item.id);
     if (t) {
-      damage = t->on_owner_damage_xxx3(this, hitter, damage);
+      damage = t->on_owner_damage_future3(this, hitter, damage);
     }
   }
   return damage;
 }
 
-int Thing::buff_on_damage_xxx4(Thingp hitter, int damage)
+int Thing::buff_on_damage_future4(Thingp hitter, int damage)
 {
   if (! maybe_itemp()) {
     return damage;
@@ -253,13 +253,13 @@ int Thing::buff_on_damage_xxx4(Thingp hitter, int damage)
   for (const auto &item : get_itemp()->buffs) {
     auto t = level->thing_find(item.id);
     if (t) {
-      damage = t->on_owner_damage_xxx4(this, hitter, damage);
+      damage = t->on_owner_damage_future4(this, hitter, damage);
     }
   }
   return damage;
 }
 
-int Thing::buff_on_damage_xxx5(Thingp hitter, int damage)
+int Thing::buff_on_damage_future5(Thingp hitter, int damage)
 {
   if (! maybe_itemp()) {
     return damage;
@@ -270,13 +270,13 @@ int Thing::buff_on_damage_xxx5(Thingp hitter, int damage)
   for (const auto &item : get_itemp()->buffs) {
     auto t = level->thing_find(item.id);
     if (t) {
-      damage = t->on_owner_damage_xxx5(this, hitter, damage);
+      damage = t->on_owner_damage_future5(this, hitter, damage);
     }
   }
   return damage;
 }
 
-int Thing::buff_on_damage_xxx6(Thingp hitter, int damage)
+int Thing::buff_on_damage_future6(Thingp hitter, int damage)
 {
   if (! maybe_itemp()) {
     return damage;
@@ -287,13 +287,13 @@ int Thing::buff_on_damage_xxx6(Thingp hitter, int damage)
   for (const auto &item : get_itemp()->buffs) {
     auto t = level->thing_find(item.id);
     if (t) {
-      damage = t->on_owner_damage_xxx6(this, hitter, damage);
+      damage = t->on_owner_damage_future6(this, hitter, damage);
     }
   }
   return damage;
 }
 
-int Thing::buff_on_damage_xxx7(Thingp hitter, int damage)
+int Thing::buff_on_damage_future7(Thingp hitter, int damage)
 {
   if (! maybe_itemp()) {
     return damage;
@@ -304,13 +304,13 @@ int Thing::buff_on_damage_xxx7(Thingp hitter, int damage)
   for (const auto &item : get_itemp()->buffs) {
     auto t = level->thing_find(item.id);
     if (t) {
-      damage = t->on_owner_damage_xxx7(this, hitter, damage);
+      damage = t->on_owner_damage_future7(this, hitter, damage);
     }
   }
   return damage;
 }
 
-int Thing::buff_on_damage_xxx8(Thingp hitter, int damage)
+int Thing::buff_on_damage_future8(Thingp hitter, int damage)
 {
   if (! maybe_itemp()) {
     return damage;
@@ -321,13 +321,13 @@ int Thing::buff_on_damage_xxx8(Thingp hitter, int damage)
   for (const auto &item : get_itemp()->buffs) {
     auto t = level->thing_find(item.id);
     if (t) {
-      damage = t->on_owner_damage_xxx8(this, hitter, damage);
+      damage = t->on_owner_damage_future8(this, hitter, damage);
     }
   }
   return damage;
 }
 
-int Thing::buff_on_damage_xxx9(Thingp hitter, int damage)
+int Thing::buff_on_damage_future9(Thingp hitter, int damage)
 {
   if (! maybe_itemp()) {
     return damage;
@@ -338,13 +338,13 @@ int Thing::buff_on_damage_xxx9(Thingp hitter, int damage)
   for (const auto &item : get_itemp()->buffs) {
     auto t = level->thing_find(item.id);
     if (t) {
-      damage = t->on_owner_damage_xxx9(this, hitter, damage);
+      damage = t->on_owner_damage_future9(this, hitter, damage);
     }
   }
   return damage;
 }
 
-int Thing::buff_on_damage_xxx10(Thingp hitter, int damage)
+int Thing::buff_on_damage_future10(Thingp hitter, int damage)
 {
   if (! maybe_itemp()) {
     return damage;
@@ -355,7 +355,7 @@ int Thing::buff_on_damage_xxx10(Thingp hitter, int damage)
   for (const auto &item : get_itemp()->buffs) {
     auto t = level->thing_find(item.id);
     if (t) {
-      damage = t->on_owner_damage_xxx10(this, hitter, damage);
+      damage = t->on_owner_damage_future10(this, hitter, damage);
     }
   }
   return damage;

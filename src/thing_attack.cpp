@@ -417,16 +417,16 @@ bool Thing::attack(Thingp victim)
 
   bool damage_set = false;
   bool poison     = false;
-  bool xxx1       = false;
-  bool xxx2       = false;
-  bool xxx3       = false;
-  bool xxx4       = false;
-  bool xxx5       = false;
-  bool xxx6       = false;
-  bool xxx7       = false;
-  bool xxx8       = false;
-  bool xxx9       = false;
-  bool xxx10      = false;
+  bool damage_future1       = false;
+  bool damage_future2       = false;
+  bool damage_future3       = false;
+  bool damage_future4       = false;
+  bool damage_future5       = false;
+  bool damage_future6       = false;
+  bool damage_future7       = false;
+  bool damage_future8       = false;
+  bool damage_future9       = false;
+  bool damage_future10      = false;
   bool necrosis   = false;
   bool bite       = false;
   int  damage     = 0;
@@ -445,141 +445,141 @@ bool Thing::attack(Thingp victim)
     }
   }
   //
-  // Chance of xxx1 damage?
+  // Chance of damage_future1 damage?
   //
   if (! damage_set) {
-    if ((int) pcg_random_range(0, 1000) < damage_xxx1_chance_d1000()) {
-      int damage_xxx1 = get_damage_xxx1();
-      if (damage_xxx1 > 0) {
-        damage     = damage_xxx1;
+    if ((int) pcg_random_range(0, 1000) < damage_future1_chance_d1000()) {
+      int damage_future1 = get_damage_future1();
+      if (damage_future1 > 0) {
+        damage     = damage_future1;
         damage_set = true;
-        xxx1       = true;
+        damage_future1       = true;
       }
     }
   }
 
   //
-  // Chance of xxx2 damage?
+  // Chance of damage_future2 damage?
   //
   if (! damage_set) {
-    if ((int) pcg_random_range(0, 1000) < damage_xxx2_chance_d1000()) {
-      int damage_xxx2 = get_damage_xxx2();
-      if (damage_xxx2 > 0) {
-        damage     = damage_xxx2;
+    if ((int) pcg_random_range(0, 1000) < damage_future2_chance_d1000()) {
+      int damage_future2 = get_damage_future2();
+      if (damage_future2 > 0) {
+        damage     = damage_future2;
         damage_set = true;
-        xxx2       = true;
+        damage_future2       = true;
       }
     }
   }
 
   //
-  // Chance of xxx3 damage?
+  // Chance of damage_future3 damage?
   //
   if (! damage_set) {
-    if ((int) pcg_random_range(0, 1000) < damage_xxx3_chance_d1000()) {
-      int damage_xxx3 = get_damage_xxx3();
-      if (damage_xxx3 > 0) {
-        damage     = damage_xxx3;
+    if ((int) pcg_random_range(0, 1000) < damage_future3_chance_d1000()) {
+      int damage_future3 = get_damage_future3();
+      if (damage_future3 > 0) {
+        damage     = damage_future3;
         damage_set = true;
-        xxx3       = true;
+        damage_future3       = true;
       }
     }
   }
 
   //
-  // Chance of xxx4 damage?
+  // Chance of damage_future4 damage?
   //
   if (! damage_set) {
-    if ((int) pcg_random_range(0, 1000) < damage_xxx4_chance_d1000()) {
-      int damage_xxx4 = get_damage_xxx4();
-      if (damage_xxx4 > 0) {
-        damage     = damage_xxx4;
+    if ((int) pcg_random_range(0, 1000) < damage_future4_chance_d1000()) {
+      int damage_future4 = get_damage_future4();
+      if (damage_future4 > 0) {
+        damage     = damage_future4;
         damage_set = true;
-        xxx4       = true;
+        damage_future4       = true;
       }
     }
   }
 
   //
-  // Chance of xxx5 damage?
+  // Chance of damage_future5 damage?
   //
   if (! damage_set) {
-    if ((int) pcg_random_range(0, 1000) < damage_xxx5_chance_d1000()) {
-      int damage_xxx5 = get_damage_xxx5();
-      if (damage_xxx5 > 0) {
-        damage     = damage_xxx5;
+    if ((int) pcg_random_range(0, 1000) < damage_future5_chance_d1000()) {
+      int damage_future5 = get_damage_future5();
+      if (damage_future5 > 0) {
+        damage     = damage_future5;
         damage_set = true;
-        xxx5       = true;
+        damage_future5       = true;
       }
     }
   }
 
   //
-  // Chance of xxx6 damage?
+  // Chance of damage_future6 damage?
   //
   if (! damage_set) {
-    if ((int) pcg_random_range(0, 1000) < damage_xxx6_chance_d1000()) {
-      int damage_xxx6 = get_damage_xxx6();
-      if (damage_xxx6 > 0) {
-        damage     = damage_xxx6;
+    if ((int) pcg_random_range(0, 1000) < damage_future6_chance_d1000()) {
+      int damage_future6 = get_damage_future6();
+      if (damage_future6 > 0) {
+        damage     = damage_future6;
         damage_set = true;
-        xxx6       = true;
+        damage_future6       = true;
       }
     }
   }
 
   //
-  // Chance of xxx7 damage?
+  // Chance of damage_future7 damage?
   //
   if (! damage_set) {
-    if ((int) pcg_random_range(0, 1000) < damage_xxx7_chance_d1000()) {
-      int damage_xxx7 = get_damage_xxx7();
-      if (damage_xxx7 > 0) {
-        damage     = damage_xxx7;
+    if ((int) pcg_random_range(0, 1000) < damage_future7_chance_d1000()) {
+      int damage_future7 = get_damage_future7();
+      if (damage_future7 > 0) {
+        damage     = damage_future7;
         damage_set = true;
-        xxx7       = true;
+        damage_future7       = true;
       }
     }
   }
 
   //
-  // Chance of xxx8 damage?
+  // Chance of damage_future8 damage?
   //
   if (! damage_set) {
-    if ((int) pcg_random_range(0, 1000) < damage_xxx8_chance_d1000()) {
-      int damage_xxx8 = get_damage_xxx8();
-      if (damage_xxx8 > 0) {
-        damage     = damage_xxx8;
+    if ((int) pcg_random_range(0, 1000) < damage_future8_chance_d1000()) {
+      int damage_future8 = get_damage_future8();
+      if (damage_future8 > 0) {
+        damage     = damage_future8;
         damage_set = true;
-        xxx8       = true;
+        damage_future8       = true;
       }
     }
   }
 
   //
-  // Chance of xxx9 damage?
+  // Chance of damage_future9 damage?
   //
   if (! damage_set) {
-    if ((int) pcg_random_range(0, 1000) < damage_xxx9_chance_d1000()) {
-      int damage_xxx9 = get_damage_xxx9();
-      if (damage_xxx9 > 0) {
-        damage     = damage_xxx9;
+    if ((int) pcg_random_range(0, 1000) < damage_future9_chance_d1000()) {
+      int damage_future9 = get_damage_future9();
+      if (damage_future9 > 0) {
+        damage     = damage_future9;
         damage_set = true;
-        xxx9       = true;
+        damage_future9       = true;
       }
     }
   }
 
   //
-  // Chance of xxx10 damage?
+  // Chance of damage_future10 damage?
   //
   if (! damage_set) {
-    if ((int) pcg_random_range(0, 1000) < damage_xxx10_chance_d1000()) {
-      int damage_xxx10 = get_damage_xxx10();
-      if (damage_xxx10 > 0) {
-        damage     = damage_xxx10;
+    if ((int) pcg_random_range(0, 1000) < damage_future10_chance_d1000()) {
+      int damage_future10 = get_damage_future10();
+      if (damage_future10 > 0) {
+        damage     = damage_future10;
         damage_set = true;
-        xxx10      = true;
+        damage_future10      = true;
       }
     }
   }
@@ -747,7 +747,7 @@ bool Thing::attack(Thingp victim)
     }
   }
 
-  if (victim->is_hit(this, crit, bite, poison, necrosis, xxx1, xxx2, xxx3, xxx4, xxx5, xxx6, xxx7, xxx8, xxx9, xxx10,
+  if (victim->is_hit(this, crit, bite, poison, necrosis, damage_future1, damage_future2, damage_future3, damage_future4, damage_future5, damage_future6, damage_future7, damage_future8, damage_future9, damage_future10,
                      damage)) {
     dbg("The attack succeeded");
 

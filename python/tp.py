@@ -190,35 +190,35 @@ class Tp:
     def set_on_owner_damage_poison_do(self, value):
         my.tp_set_on_owner_damage_poison_do(self, value)
 
-    def set_on_owner_damage_xxx1_do(self, value):
-        my.tp_set_on_owner_damage_xxx1_do(self, value)
+    def set_on_owner_damage_future1_do(self, value):
+        my.tp_set_on_owner_damage_future1_do(self, value)
 
-    def set_on_owner_damage_xxx2_do(self, value):
-        my.tp_set_on_owner_damage_xxx2_do(self, value)
+    def set_on_owner_damage_future2_do(self, value):
+        my.tp_set_on_owner_damage_future2_do(self, value)
 
-    def set_on_owner_damage_xxx3_do(self, value):
-        my.tp_set_on_owner_damage_xxx3_do(self, value)
+    def set_on_owner_damage_future3_do(self, value):
+        my.tp_set_on_owner_damage_future3_do(self, value)
 
-    def set_on_owner_damage_xxx4_do(self, value):
-        my.tp_set_on_owner_damage_xxx4_do(self, value)
+    def set_on_owner_damage_future4_do(self, value):
+        my.tp_set_on_owner_damage_future4_do(self, value)
 
-    def set_on_owner_damage_xxx5_do(self, value):
-        my.tp_set_on_owner_damage_xxx5_do(self, value)
+    def set_on_owner_damage_future5_do(self, value):
+        my.tp_set_on_owner_damage_future5_do(self, value)
 
-    def set_on_owner_damage_xxx6_do(self, value):
-        my.tp_set_on_owner_damage_xxx6_do(self, value)
+    def set_on_owner_damage_future6_do(self, value):
+        my.tp_set_on_owner_damage_future6_do(self, value)
 
-    def set_on_owner_damage_xxx7_do(self, value):
-        my.tp_set_on_owner_damage_xxx7_do(self, value)
+    def set_on_owner_damage_future7_do(self, value):
+        my.tp_set_on_owner_damage_future7_do(self, value)
 
-    def set_on_owner_damage_xxx8_do(self, value):
-        my.tp_set_on_owner_damage_xxx8_do(self, value)
+    def set_on_owner_damage_future8_do(self, value):
+        my.tp_set_on_owner_damage_future8_do(self, value)
 
-    def set_on_owner_damage_xxx9_do(self, value):
-        my.tp_set_on_owner_damage_xxx9_do(self, value)
+    def set_on_owner_damage_future9_do(self, value):
+        my.tp_set_on_owner_damage_future9_do(self, value)
 
-    def set_on_owner_damage_xxx10_do(self, value):
-        my.tp_set_on_owner_damage_xxx10_do(self, value)
+    def set_on_owner_damage_future10_do(self, value):
+        my.tp_set_on_owner_damage_future10_do(self, value)
 
     def set_on_owner_damage_constitution_do(self, value):
         my.tp_set_on_owner_damage_constitution_do(self, value)
@@ -796,35 +796,35 @@ class Tp:
     def set_damage_poison_chance_d1000(self, value):
         my.tp_set_damage_poison_chance_d1000(self, value)
 
-    def set_damage_xxx1_chance_d1000(self, value):
-        my.tp_set_damage_xxx1_chance_d1000(self, value)
+    def set_damage_future1_chance_d1000(self, value):
+        my.tp_set_damage_future1_chance_d1000(self, value)
 
-    def set_damage_xxx2_chance_d1000(self, value):
-        my.tp_set_damage_xxx2_chance_d1000(self, value)
+    def set_damage_future2_chance_d1000(self, value):
+        my.tp_set_damage_future2_chance_d1000(self, value)
 
-    def set_damage_xxx3_chance_d1000(self, value):
-        my.tp_set_damage_xxx3_chance_d1000(self, value)
+    def set_damage_future3_chance_d1000(self, value):
+        my.tp_set_damage_future3_chance_d1000(self, value)
 
-    def set_damage_xxx4_chance_d1000(self, value):
-        my.tp_set_damage_xxx4_chance_d1000(self, value)
+    def set_damage_future4_chance_d1000(self, value):
+        my.tp_set_damage_future4_chance_d1000(self, value)
 
-    def set_damage_xxx5_chance_d1000(self, value):
-        my.tp_set_damage_xxx5_chance_d1000(self, value)
+    def set_damage_future5_chance_d1000(self, value):
+        my.tp_set_damage_future5_chance_d1000(self, value)
 
-    def set_damage_xxx6_chance_d1000(self, value):
-        my.tp_set_damage_xxx6_chance_d1000(self, value)
+    def set_damage_future6_chance_d1000(self, value):
+        my.tp_set_damage_future6_chance_d1000(self, value)
 
-    def set_damage_xxx7_chance_d1000(self, value):
-        my.tp_set_damage_xxx7_chance_d1000(self, value)
+    def set_damage_future7_chance_d1000(self, value):
+        my.tp_set_damage_future7_chance_d1000(self, value)
 
-    def set_damage_xxx8_chance_d1000(self, value):
-        my.tp_set_damage_xxx8_chance_d1000(self, value)
+    def set_damage_future8_chance_d1000(self, value):
+        my.tp_set_damage_future8_chance_d1000(self, value)
 
-    def set_damage_xxx9_chance_d1000(self, value):
-        my.tp_set_damage_xxx9_chance_d1000(self, value)
+    def set_damage_future9_chance_d1000(self, value):
+        my.tp_set_damage_future9_chance_d1000(self, value)
 
-    def set_damage_xxx10_chance_d1000(self, value):
-        my.tp_set_damage_xxx10_chance_d1000(self, value)
+    def set_damage_future10_chance_d1000(self, value):
+        my.tp_set_damage_future10_chance_d1000(self, value)
 
     def set_damage_necrosis_chance_d1000(self, value):
         my.tp_set_damage_necrosis_chance_d1000(self, value)
@@ -1159,35 +1159,35 @@ class Tp:
     def set_damage_poison_dice(self, value):
         my.tp_set_damage_poison_dice(self, value)
 
-    def set_damage_xxx1_dice(self, value):
-        my.tp_set_damage_xxx1_dice(self, value)
+    def set_damage_future1_dice(self, value):
+        my.tp_set_damage_future1_dice(self, value)
 
-    def set_damage_xxx2_dice(self, value):
-        my.tp_set_damage_xxx2_dice(self, value)
+    def set_damage_future2_dice(self, value):
+        my.tp_set_damage_future2_dice(self, value)
 
-    def set_damage_xxx3_dice(self, value):
-        my.tp_set_damage_xxx3_dice(self, value)
+    def set_damage_future3_dice(self, value):
+        my.tp_set_damage_future3_dice(self, value)
 
-    def set_damage_xxx4_dice(self, value):
-        my.tp_set_damage_xxx4_dice(self, value)
+    def set_damage_future4_dice(self, value):
+        my.tp_set_damage_future4_dice(self, value)
 
-    def set_damage_xxx5_dice(self, value):
-        my.tp_set_damage_xxx5_dice(self, value)
+    def set_damage_future5_dice(self, value):
+        my.tp_set_damage_future5_dice(self, value)
 
-    def set_damage_xxx6_dice(self, value):
-        my.tp_set_damage_xxx6_dice(self, value)
+    def set_damage_future6_dice(self, value):
+        my.tp_set_damage_future6_dice(self, value)
 
-    def set_damage_xxx7_dice(self, value):
-        my.tp_set_damage_xxx7_dice(self, value)
+    def set_damage_future7_dice(self, value):
+        my.tp_set_damage_future7_dice(self, value)
 
-    def set_damage_xxx8_dice(self, value):
-        my.tp_set_damage_xxx8_dice(self, value)
+    def set_damage_future8_dice(self, value):
+        my.tp_set_damage_future8_dice(self, value)
 
-    def set_damage_xxx9_dice(self, value):
-        my.tp_set_damage_xxx9_dice(self, value)
+    def set_damage_future9_dice(self, value):
+        my.tp_set_damage_future9_dice(self, value)
 
-    def set_damage_xxx10_dice(self, value):
-        my.tp_set_damage_xxx10_dice(self, value)
+    def set_damage_future10_dice(self, value):
+        my.tp_set_damage_future10_dice(self, value)
 
     def set_damage_necrosis_dice(self, value):
         my.tp_set_damage_necrosis_dice(self, value)

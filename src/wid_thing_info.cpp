@@ -141,16 +141,16 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
   wid_thing_info_add_health(wid_popup_window, t);
   wid_thing_info_add_damage_melee(wid_popup_window, t);
   wid_thing_info_add_damage_poison(wid_popup_window, t);
-  wid_thing_info_add_damage_xxx1(wid_popup_window, t);
-  wid_thing_info_add_damage_xxx2(wid_popup_window, t);
-  wid_thing_info_add_damage_xxx3(wid_popup_window, t);
-  wid_thing_info_add_damage_xxx4(wid_popup_window, t);
-  wid_thing_info_add_damage_xxx5(wid_popup_window, t);
-  wid_thing_info_add_damage_xxx6(wid_popup_window, t);
-  wid_thing_info_add_damage_xxx7(wid_popup_window, t);
-  wid_thing_info_add_damage_xxx8(wid_popup_window, t);
-  wid_thing_info_add_damage_xxx9(wid_popup_window, t);
-  wid_thing_info_add_damage_xxx10(wid_popup_window, t);
+  wid_thing_info_add_damage_future1(wid_popup_window, t);
+  wid_thing_info_add_damage_future2(wid_popup_window, t);
+  wid_thing_info_add_damage_future3(wid_popup_window, t);
+  wid_thing_info_add_damage_future4(wid_popup_window, t);
+  wid_thing_info_add_damage_future5(wid_popup_window, t);
+  wid_thing_info_add_damage_future6(wid_popup_window, t);
+  wid_thing_info_add_damage_future7(wid_popup_window, t);
+  wid_thing_info_add_damage_future8(wid_popup_window, t);
+  wid_thing_info_add_damage_future9(wid_popup_window, t);
+  wid_thing_info_add_damage_future10(wid_popup_window, t);
   wid_thing_info_add_damage_bite(wid_popup_window, t);
   wid_thing_info_add_damage_digest(wid_popup_window, t);
   wid_thing_info_add_damage_necrosis(wid_popup_window, t);
@@ -204,16 +204,16 @@ WidPopup *Game::wid_thing_info_create_popup_compact(const std::vector< Thingp > 
     wid_thing_info_add_health(wid_popup_window, t);
     wid_thing_info_add_damage_melee(wid_popup_window, t);
     wid_thing_info_add_damage_poison(wid_popup_window, t);
-    wid_thing_info_add_damage_xxx1(wid_popup_window, t);
-    wid_thing_info_add_damage_xxx2(wid_popup_window, t);
-    wid_thing_info_add_damage_xxx3(wid_popup_window, t);
-    wid_thing_info_add_damage_xxx4(wid_popup_window, t);
-    wid_thing_info_add_damage_xxx5(wid_popup_window, t);
-    wid_thing_info_add_damage_xxx6(wid_popup_window, t);
-    wid_thing_info_add_damage_xxx7(wid_popup_window, t);
-    wid_thing_info_add_damage_xxx8(wid_popup_window, t);
-    wid_thing_info_add_damage_xxx9(wid_popup_window, t);
-    wid_thing_info_add_damage_xxx10(wid_popup_window, t);
+    wid_thing_info_add_damage_future1(wid_popup_window, t);
+    wid_thing_info_add_damage_future2(wid_popup_window, t);
+    wid_thing_info_add_damage_future3(wid_popup_window, t);
+    wid_thing_info_add_damage_future4(wid_popup_window, t);
+    wid_thing_info_add_damage_future5(wid_popup_window, t);
+    wid_thing_info_add_damage_future6(wid_popup_window, t);
+    wid_thing_info_add_damage_future7(wid_popup_window, t);
+    wid_thing_info_add_damage_future8(wid_popup_window, t);
+    wid_thing_info_add_damage_future9(wid_popup_window, t);
+    wid_thing_info_add_damage_future10(wid_popup_window, t);
     wid_thing_info_add_damage_bite(wid_popup_window, t);
     wid_thing_info_add_damage_necrosis(wid_popup_window, t);
     wid_thing_info_add_damage_digest(wid_popup_window, t);
@@ -690,230 +690,230 @@ void Game::wid_thing_info_add_damage_poison(WidPopup *w, Thingp t)
   }
 }
 
-void Game::wid_thing_info_add_damage_xxx1(WidPopup *w, Thingp t)
+void Game::wid_thing_info_add_damage_future1(WidPopup *w, Thingp t)
 {
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
   char tmp2[ MAXSHORTSTR ];
 
   if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_item_magical()) {
-    auto damage_xxx1_dice = t->get_damage_xxx1_dice();
-    auto min_value        = damage_xxx1_dice.min_roll();
-    auto max_value        = damage_xxx1_dice.max_roll();
+    auto damage_future1_dice = t->get_damage_future1_dice();
+    auto min_value        = damage_future1_dice.min_roll();
+    auto max_value        = damage_future1_dice.max_roll();
     if (min_value > 0) {
       if (min_value == max_value) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->get_damage_xxx1_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$xxx1   %17s````", tmp2);
+        snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->get_damage_future1_dice_str().c_str());
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$damage_future1   %17s````", tmp2);
       } else {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->get_damage_xxx1_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$xxx1   %17s````", tmp2);
+        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->get_damage_future1_dice_str().c_str());
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$damage_future1   %17s````", tmp2);
       }
       w->log(tmp);
     }
   }
 }
 
-void Game::wid_thing_info_add_damage_xxx2(WidPopup *w, Thingp t)
+void Game::wid_thing_info_add_damage_future2(WidPopup *w, Thingp t)
 {
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
   char tmp2[ MAXSHORTSTR ];
 
   if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_item_magical()) {
-    auto damage_xxx2_dice = t->get_damage_xxx2_dice();
-    auto min_value        = damage_xxx2_dice.min_roll();
-    auto max_value        = damage_xxx2_dice.max_roll();
+    auto damage_future2_dice = t->get_damage_future2_dice();
+    auto min_value        = damage_future2_dice.min_roll();
+    auto max_value        = damage_future2_dice.max_roll();
     if (min_value > 0) {
       if (min_value == max_value) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->get_damage_xxx2_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$xxx2   %17s````", tmp2);
+        snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->get_damage_future2_dice_str().c_str());
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$damage_future2   %17s````", tmp2);
       } else {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->get_damage_xxx2_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$xxx2   %17s````", tmp2);
+        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->get_damage_future2_dice_str().c_str());
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$damage_future2   %17s````", tmp2);
       }
       w->log(tmp);
     }
   }
 }
 
-void Game::wid_thing_info_add_damage_xxx3(WidPopup *w, Thingp t)
+void Game::wid_thing_info_add_damage_future3(WidPopup *w, Thingp t)
 {
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
   char tmp2[ MAXSHORTSTR ];
 
   if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_item_magical()) {
-    auto damage_xxx3_dice = t->get_damage_xxx3_dice();
-    auto min_value        = damage_xxx3_dice.min_roll();
-    auto max_value        = damage_xxx3_dice.max_roll();
+    auto damage_future3_dice = t->get_damage_future3_dice();
+    auto min_value        = damage_future3_dice.min_roll();
+    auto max_value        = damage_future3_dice.max_roll();
     if (min_value > 0) {
       if (min_value == max_value) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->get_damage_xxx3_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$xxx3   %17s````", tmp2);
+        snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->get_damage_future3_dice_str().c_str());
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$damage_future3   %17s````", tmp2);
       } else {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->get_damage_xxx3_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$xxx3   %17s````", tmp2);
+        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->get_damage_future3_dice_str().c_str());
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$damage_future3   %17s````", tmp2);
       }
       w->log(tmp);
     }
   }
 }
 
-void Game::wid_thing_info_add_damage_xxx4(WidPopup *w, Thingp t)
+void Game::wid_thing_info_add_damage_future4(WidPopup *w, Thingp t)
 {
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
   char tmp2[ MAXSHORTSTR ];
 
   if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_item_magical()) {
-    auto damage_xxx4_dice = t->get_damage_xxx4_dice();
-    auto min_value        = damage_xxx4_dice.min_roll();
-    auto max_value        = damage_xxx4_dice.max_roll();
+    auto damage_future4_dice = t->get_damage_future4_dice();
+    auto min_value        = damage_future4_dice.min_roll();
+    auto max_value        = damage_future4_dice.max_roll();
     if (min_value > 0) {
       if (min_value == max_value) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->get_damage_xxx4_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$xxx4   %17s````", tmp2);
+        snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->get_damage_future4_dice_str().c_str());
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$damage_future4   %17s````", tmp2);
       } else {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->get_damage_xxx4_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$xxx4   %17s````", tmp2);
+        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->get_damage_future4_dice_str().c_str());
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$damage_future4   %17s````", tmp2);
       }
       w->log(tmp);
     }
   }
 }
 
-void Game::wid_thing_info_add_damage_xxx5(WidPopup *w, Thingp t)
+void Game::wid_thing_info_add_damage_future5(WidPopup *w, Thingp t)
 {
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
   char tmp2[ MAXSHORTSTR ];
 
   if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_item_magical()) {
-    auto damage_xxx5_dice = t->get_damage_xxx5_dice();
-    auto min_value        = damage_xxx5_dice.min_roll();
-    auto max_value        = damage_xxx5_dice.max_roll();
+    auto damage_future5_dice = t->get_damage_future5_dice();
+    auto min_value        = damage_future5_dice.min_roll();
+    auto max_value        = damage_future5_dice.max_roll();
     if (min_value > 0) {
       if (min_value == max_value) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->get_damage_xxx5_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$xxx5   %17s````", tmp2);
+        snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->get_damage_future5_dice_str().c_str());
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$damage_future5   %17s````", tmp2);
       } else {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->get_damage_xxx5_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$xxx5   %17s````", tmp2);
+        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->get_damage_future5_dice_str().c_str());
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$damage_future5   %17s````", tmp2);
       }
       w->log(tmp);
     }
   }
 }
 
-void Game::wid_thing_info_add_damage_xxx6(WidPopup *w, Thingp t)
+void Game::wid_thing_info_add_damage_future6(WidPopup *w, Thingp t)
 {
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
   char tmp2[ MAXSHORTSTR ];
 
   if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_item_magical()) {
-    auto damage_xxx6_dice = t->get_damage_xxx6_dice();
-    auto min_value        = damage_xxx6_dice.min_roll();
-    auto max_value        = damage_xxx6_dice.max_roll();
+    auto damage_future6_dice = t->get_damage_future6_dice();
+    auto min_value        = damage_future6_dice.min_roll();
+    auto max_value        = damage_future6_dice.max_roll();
     if (min_value > 0) {
       if (min_value == max_value) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->get_damage_xxx6_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$xxx6   %17s````", tmp2);
+        snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->get_damage_future6_dice_str().c_str());
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$damage_future6   %17s````", tmp2);
       } else {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->get_damage_xxx6_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$xxx6   %17s````", tmp2);
+        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->get_damage_future6_dice_str().c_str());
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$damage_future6   %17s````", tmp2);
       }
       w->log(tmp);
     }
   }
 }
 
-void Game::wid_thing_info_add_damage_xxx7(WidPopup *w, Thingp t)
+void Game::wid_thing_info_add_damage_future7(WidPopup *w, Thingp t)
 {
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
   char tmp2[ MAXSHORTSTR ];
 
   if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_item_magical()) {
-    auto damage_xxx7_dice = t->get_damage_xxx7_dice();
-    auto min_value        = damage_xxx7_dice.min_roll();
-    auto max_value        = damage_xxx7_dice.max_roll();
+    auto damage_future7_dice = t->get_damage_future7_dice();
+    auto min_value        = damage_future7_dice.min_roll();
+    auto max_value        = damage_future7_dice.max_roll();
     if (min_value > 0) {
       if (min_value == max_value) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->get_damage_xxx7_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$xxx7   %17s````", tmp2);
+        snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->get_damage_future7_dice_str().c_str());
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$damage_future7   %17s````", tmp2);
       } else {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->get_damage_xxx7_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$xxx7   %17s````", tmp2);
+        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->get_damage_future7_dice_str().c_str());
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$damage_future7   %17s````", tmp2);
       }
       w->log(tmp);
     }
   }
 }
 
-void Game::wid_thing_info_add_damage_xxx8(WidPopup *w, Thingp t)
+void Game::wid_thing_info_add_damage_future8(WidPopup *w, Thingp t)
 {
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
   char tmp2[ MAXSHORTSTR ];
 
   if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_item_magical()) {
-    auto damage_xxx8_dice = t->get_damage_xxx8_dice();
-    auto min_value        = damage_xxx8_dice.min_roll();
-    auto max_value        = damage_xxx8_dice.max_roll();
+    auto damage_future8_dice = t->get_damage_future8_dice();
+    auto min_value        = damage_future8_dice.min_roll();
+    auto max_value        = damage_future8_dice.max_roll();
     if (min_value > 0) {
       if (min_value == max_value) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->get_damage_xxx8_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$xxx8   %17s````", tmp2);
+        snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->get_damage_future8_dice_str().c_str());
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$damage_future8   %17s````", tmp2);
       } else {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->get_damage_xxx8_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$xxx8   %17s````", tmp2);
+        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->get_damage_future8_dice_str().c_str());
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$damage_future8   %17s````", tmp2);
       }
       w->log(tmp);
     }
   }
 }
 
-void Game::wid_thing_info_add_damage_xxx9(WidPopup *w, Thingp t)
+void Game::wid_thing_info_add_damage_future9(WidPopup *w, Thingp t)
 {
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
   char tmp2[ MAXSHORTSTR ];
 
   if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_item_magical()) {
-    auto damage_xxx9_dice = t->get_damage_xxx9_dice();
-    auto min_value        = damage_xxx9_dice.min_roll();
-    auto max_value        = damage_xxx9_dice.max_roll();
+    auto damage_future9_dice = t->get_damage_future9_dice();
+    auto min_value        = damage_future9_dice.min_roll();
+    auto max_value        = damage_future9_dice.max_roll();
     if (min_value > 0) {
       if (min_value == max_value) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->get_damage_xxx9_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$xxx9   %17s````", tmp2);
+        snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->get_damage_future9_dice_str().c_str());
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$damage_future9   %17s````", tmp2);
       } else {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->get_damage_xxx9_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$xxx9   %17s````", tmp2);
+        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->get_damage_future9_dice_str().c_str());
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$damage_future9   %17s````", tmp2);
       }
       w->log(tmp);
     }
   }
 }
 
-void Game::wid_thing_info_add_damage_xxx10(WidPopup *w, Thingp t)
+void Game::wid_thing_info_add_damage_future10(WidPopup *w, Thingp t)
 {
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
   char tmp2[ MAXSHORTSTR ];
 
   if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_item_magical()) {
-    auto damage_xxx10_dice = t->get_damage_xxx10_dice();
-    auto min_value         = damage_xxx10_dice.min_roll();
-    auto max_value         = damage_xxx10_dice.max_roll();
+    auto damage_future10_dice = t->get_damage_future10_dice();
+    auto min_value         = damage_future10_dice.min_roll();
+    auto max_value         = damage_future10_dice.max_roll();
     if (min_value > 0) {
       if (min_value == max_value) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->get_damage_xxx10_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$xxx10   %17s````", tmp2);
+        snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->get_damage_future10_dice_str().c_str());
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$damage_future10   %17s````", tmp2);
       } else {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->get_damage_xxx10_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$xxx10   %17s````", tmp2);
+        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->get_damage_future10_dice_str().c_str());
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$damage_future10   %17s````", tmp2);
       }
       w->log(tmp);
     }
