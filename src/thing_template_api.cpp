@@ -58,6 +58,96 @@ void               Tp::set_damage_poison_dice(const std::string &v)
   _damage_poison_dice_str = v;
 }
 
+const Dice        &Tp::get_damage_xxx1_dice(void) const { return _damage_xxx1_dice; }
+const int          Tp::get_damage_xxx1(void) const { return _damage_xxx1_dice.roll(); }
+const std::string &Tp::get_damage_xxx1_dice_str(void) const { return _damage_xxx1_dice_str; }
+void               Tp::set_damage_xxx1_dice(const std::string &v)
+{
+  _damage_xxx1_dice     = v;
+  _damage_xxx1_dice_str = v;
+}
+
+const Dice        &Tp::get_damage_xxx2_dice(void) const { return _damage_xxx2_dice; }
+const int          Tp::get_damage_xxx2(void) const { return _damage_xxx2_dice.roll(); }
+const std::string &Tp::get_damage_xxx2_dice_str(void) const { return _damage_xxx2_dice_str; }
+void               Tp::set_damage_xxx2_dice(const std::string &v)
+{
+  _damage_xxx2_dice     = v;
+  _damage_xxx2_dice_str = v;
+}
+
+const Dice        &Tp::get_damage_xxx3_dice(void) const { return _damage_xxx3_dice; }
+const int          Tp::get_damage_xxx3(void) const { return _damage_xxx3_dice.roll(); }
+const std::string &Tp::get_damage_xxx3_dice_str(void) const { return _damage_xxx3_dice_str; }
+void               Tp::set_damage_xxx3_dice(const std::string &v)
+{
+  _damage_xxx3_dice     = v;
+  _damage_xxx3_dice_str = v;
+}
+
+const Dice        &Tp::get_damage_xxx4_dice(void) const { return _damage_xxx4_dice; }
+const int          Tp::get_damage_xxx4(void) const { return _damage_xxx4_dice.roll(); }
+const std::string &Tp::get_damage_xxx4_dice_str(void) const { return _damage_xxx4_dice_str; }
+void               Tp::set_damage_xxx4_dice(const std::string &v)
+{
+  _damage_xxx4_dice     = v;
+  _damage_xxx4_dice_str = v;
+}
+
+const Dice        &Tp::get_damage_xxx5_dice(void) const { return _damage_xxx1_dice; }
+const int          Tp::get_damage_xxx5(void) const { return _damage_xxx1_dice.roll(); }
+const std::string &Tp::get_damage_xxx5_dice_str(void) const { return _damage_xxx1_dice_str; }
+void               Tp::set_damage_xxx5_dice(const std::string &v)
+{
+  _damage_xxx5_dice     = v;
+  _damage_xxx5_dice_str = v;
+}
+
+const Dice        &Tp::get_damage_xxx6_dice(void) const { return _damage_xxx6_dice; }
+const int          Tp::get_damage_xxx6(void) const { return _damage_xxx6_dice.roll(); }
+const std::string &Tp::get_damage_xxx6_dice_str(void) const { return _damage_xxx6_dice_str; }
+void               Tp::set_damage_xxx6_dice(const std::string &v)
+{
+  _damage_xxx6_dice     = v;
+  _damage_xxx6_dice_str = v;
+}
+
+const Dice        &Tp::get_damage_xxx7_dice(void) const { return _damage_xxx7_dice; }
+const int          Tp::get_damage_xxx7(void) const { return _damage_xxx7_dice.roll(); }
+const std::string &Tp::get_damage_xxx7_dice_str(void) const { return _damage_xxx7_dice_str; }
+void               Tp::set_damage_xxx7_dice(const std::string &v)
+{
+  _damage_xxx7_dice     = v;
+  _damage_xxx7_dice_str = v;
+}
+
+const Dice        &Tp::get_damage_xxx8_dice(void) const { return _damage_xxx8_dice; }
+const int          Tp::get_damage_xxx8(void) const { return _damage_xxx8_dice.roll(); }
+const std::string &Tp::get_damage_xxx8_dice_str(void) const { return _damage_xxx8_dice_str; }
+void               Tp::set_damage_xxx8_dice(const std::string &v)
+{
+  _damage_xxx8_dice     = v;
+  _damage_xxx8_dice_str = v;
+}
+
+const Dice        &Tp::get_damage_xxx9_dice(void) const { return _damage_xxx9_dice; }
+const int          Tp::get_damage_xxx9(void) const { return _damage_xxx9_dice.roll(); }
+const std::string &Tp::get_damage_xxx9_dice_str(void) const { return _damage_xxx9_dice_str; }
+void               Tp::set_damage_xxx9_dice(const std::string &v)
+{
+  _damage_xxx9_dice     = v;
+  _damage_xxx9_dice_str = v;
+}
+
+const Dice        &Tp::get_damage_xxx10_dice(void) const { return _damage_xxx10_dice; }
+const int          Tp::get_damage_xxx10(void) const { return _damage_xxx10_dice.roll(); }
+const std::string &Tp::get_damage_xxx10_dice_str(void) const { return _damage_xxx10_dice_str; }
+void               Tp::set_damage_xxx10_dice(const std::string &v)
+{
+  _damage_xxx10_dice     = v;
+  _damage_xxx10_dice_str = v;
+}
+
 const Dice        &Tp::get_damage_necrosis_dice(void) const { return _damage_necrosis_dice; }
 const int          Tp::get_damage_necrosis(void) const { return _damage_necrosis_dice.roll(); }
 const std::string &Tp::get_damage_necrosis_dice_str(void) const { return _damage_necrosis_dice_str; }

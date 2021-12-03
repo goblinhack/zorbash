@@ -108,7 +108,8 @@ void Thing::on_you_bite_attack(void)
 
 int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
                          Thingp real_hitter, // who fired the arrow?
-                         bool crit, bool bite, bool poison, bool necrosis, int damage)
+                         bool crit, bool bite, bool poison, bool necrosis, bool xxx1, bool xxx2, bool xxx3, bool xxx4,
+                         bool xxx5, bool xxx6, bool xxx7, bool xxx8, bool xxx9, bool xxx10, int damage)
 {
   TRACE_AND_INDENT();
   if (! hitter) {
@@ -134,6 +135,66 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     damage = buff_on_damage_poison(real_hitter, damage);
     if (! damage) {
       real_hitter->log("No poison damage");
+      return false;
+    }
+  } else if (xxx1) {
+    damage = buff_on_damage_xxx1(real_hitter, damage);
+    if (! damage) {
+      real_hitter->log("No xxx1 damage");
+      return false;
+    }
+  } else if (xxx2) {
+    damage = buff_on_damage_xxx2(real_hitter, damage);
+    if (! damage) {
+      real_hitter->log("No xxx2 damage");
+      return false;
+    }
+  } else if (xxx3) {
+    damage = buff_on_damage_xxx3(real_hitter, damage);
+    if (! damage) {
+      real_hitter->log("No xxx3 damage");
+      return false;
+    }
+  } else if (xxx4) {
+    damage = buff_on_damage_xxx4(real_hitter, damage);
+    if (! damage) {
+      real_hitter->log("No xxx4 damage");
+      return false;
+    }
+  } else if (xxx5) {
+    damage = buff_on_damage_xxx5(real_hitter, damage);
+    if (! damage) {
+      real_hitter->log("No xxx5 damage");
+      return false;
+    }
+  } else if (xxx6) {
+    damage = buff_on_damage_xxx6(real_hitter, damage);
+    if (! damage) {
+      real_hitter->log("No xxx6 damage");
+      return false;
+    }
+  } else if (xxx7) {
+    damage = buff_on_damage_xxx7(real_hitter, damage);
+    if (! damage) {
+      real_hitter->log("No xxx7 damage");
+      return false;
+    }
+  } else if (xxx8) {
+    damage = buff_on_damage_xxx8(real_hitter, damage);
+    if (! damage) {
+      real_hitter->log("No xxx8 damage");
+      return false;
+    }
+  } else if (xxx9) {
+    damage = buff_on_damage_xxx9(real_hitter, damage);
+    if (! damage) {
+      real_hitter->log("No xxx9 damage");
+      return false;
+    }
+  } else if (xxx10) {
+    damage = buff_on_damage_xxx10(real_hitter, damage);
+    if (! damage) {
+      real_hitter->log("No xxx10 damage");
       return false;
     }
   } else if (necrosis) {
@@ -692,7 +753,8 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
 //
 // Returns true on the target being dead.
 //
-int Thing::is_hit(Thingp hitter, bool crit, bool bite, bool poison, bool necrosis, int damage)
+int Thing::is_hit(Thingp hitter, bool crit, bool bite, bool poison, bool necrosis, bool xxx1, bool xxx2, bool xxx3,
+                  bool xxx4, bool xxx5, bool xxx6, bool xxx7, bool xxx8, bool xxx9, bool xxx10, int damage)
 {
   TRACE_AND_INDENT();
   if (bite) {
@@ -834,7 +896,8 @@ int Thing::is_hit(Thingp hitter, bool crit, bool bite, bool poison, bool necrosi
   IF_DEBUG2 { hitter->log("Hit succeeds"); }
   int hit_and_destroyed;
 
-  hit_and_destroyed = ai_hit_actual(hitter, real_hitter, crit, bite, poison, necrosis, damage);
+  hit_and_destroyed = ai_hit_actual(hitter, real_hitter, crit, bite, poison, necrosis, xxx1, xxx2, xxx3, xxx4, xxx5,
+                                    xxx6, xxx7, xxx8, xxx9, xxx10, damage);
 
   return (hit_and_destroyed);
 }
@@ -842,23 +905,27 @@ int Thing::is_hit(Thingp hitter, bool crit, bool bite, bool poison, bool necrosi
 int Thing::is_melee_attacked_by(Thingp hitter, int damage)
 {
   TRACE_AND_INDENT();
-  return (is_hit(hitter, false, false, false, false, damage));
+  return (is_hit(hitter, false, false, false, false, false, false, false, false, false, false, false, false, false,
+                 false, damage));
 }
 
 int Thing::is_bitten_by(Thingp hitter, int damage)
 {
   TRACE_AND_INDENT();
-  return (is_hit(hitter, false, true, false, false, damage));
+  return (is_hit(hitter, false, true, false, false, false, false, false, false, false, false, false, false, false,
+                 false, damage));
 }
 
 int Thing::is_poisoned_by(Thingp hitter, int damage)
 {
   TRACE_AND_INDENT();
-  return (is_hit(hitter, false, false, true, false, damage));
+  return (is_hit(hitter, false, false, true, false, false, false, false, false, false, false, false, false, false,
+                 false, damage));
 }
 
 int Thing::is_necrotized_by(Thingp hitter, int damage)
 {
   TRACE_AND_INDENT();
-  return (is_hit(hitter, false, false, false, true, damage));
+  return (is_hit(hitter, false, false, false, true, false, false, false, false, false, false, false, false, false,
+                 false, damage));
 }

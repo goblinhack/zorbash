@@ -56,6 +56,16 @@ private:
   Dice _damage_crush_dice {};
   Dice _damage_melee_dice {};
   Dice _damage_poison_dice {};
+  Dice _damage_xxx1_dice {};
+  Dice _damage_xxx2_dice {};
+  Dice _damage_xxx3_dice {};
+  Dice _damage_xxx4_dice {};
+  Dice _damage_xxx5_dice {};
+  Dice _damage_xxx6_dice {};
+  Dice _damage_xxx7_dice {};
+  Dice _damage_xxx8_dice {};
+  Dice _damage_xxx9_dice {};
+  Dice _damage_xxx10_dice {};
   Dice _damage_necrosis_dice {};
   Dice _gold_value_dice {};
   Dice _health_initial_dice {};
@@ -99,6 +109,16 @@ private:
   int _damage_melee_chance_d1000 {};
   int _damage_necrosis_chance_d1000 {};
   int _damage_poison_chance_d1000 {};
+  int _damage_xxx1_chance_d1000 {};
+  int _damage_xxx2_chance_d1000 {};
+  int _damage_xxx3_chance_d1000 {};
+  int _damage_xxx4_chance_d1000 {};
+  int _damage_xxx5_chance_d1000 {};
+  int _damage_xxx6_chance_d1000 {};
+  int _damage_xxx7_chance_d1000 {};
+  int _damage_xxx8_chance_d1000 {};
+  int _damage_xxx9_chance_d1000 {};
+  int _damage_xxx10_chance_d1000 {};
   int _damage_received_doubled_from_acid {};
   int _damage_received_doubled_from_fire {};
   int _damage_received_doubled_from_necrosis {};
@@ -401,6 +421,16 @@ private:
   std::string _damage_crush_dice_str;
   std::string _damage_melee_dice_str;
   std::string _damage_poison_dice_str;
+  std::string _damage_xxx1_dice_str;
+  std::string _damage_xxx2_dice_str;
+  std::string _damage_xxx3_dice_str;
+  std::string _damage_xxx4_dice_str;
+  std::string _damage_xxx5_dice_str;
+  std::string _damage_xxx6_dice_str;
+  std::string _damage_xxx7_dice_str;
+  std::string _damage_xxx8_dice_str;
+  std::string _damage_xxx9_dice_str;
+  std::string _damage_xxx10_dice_str;
   std::string _damage_necrosis_dice_str;
   std::string _gfx_anim_use;
   std::string _gold_value_dice_str;
@@ -433,6 +463,16 @@ private:
   std::string _on_owner_set_do;
   std::string _on_owner_unset_do;
   std::string _on_owner_damage_poison_do;
+  std::string _on_owner_damage_xxx1_do;
+  std::string _on_owner_damage_xxx2_do;
+  std::string _on_owner_damage_xxx3_do;
+  std::string _on_owner_damage_xxx4_do;
+  std::string _on_owner_damage_xxx5_do;
+  std::string _on_owner_damage_xxx6_do;
+  std::string _on_owner_damage_xxx7_do;
+  std::string _on_owner_damage_xxx8_do;
+  std::string _on_owner_damage_xxx9_do;
+  std::string _on_owner_damage_xxx10_do;
   std::string _on_owner_damage_constitution_do;
   std::string _on_owner_damage_strength_do;
   std::string _on_owner_damage_melee_do;
@@ -470,6 +510,16 @@ public:
   const Dice &get_damage_crush_dice(void) const;
   const Dice &get_damage_melee_dice(void) const;
   const Dice &get_damage_poison_dice(void) const;
+  const Dice &get_damage_xxx1_dice(void) const;
+  const Dice &get_damage_xxx2_dice(void) const;
+  const Dice &get_damage_xxx3_dice(void) const;
+  const Dice &get_damage_xxx4_dice(void) const;
+  const Dice &get_damage_xxx5_dice(void) const;
+  const Dice &get_damage_xxx6_dice(void) const;
+  const Dice &get_damage_xxx7_dice(void) const;
+  const Dice &get_damage_xxx8_dice(void) const;
+  const Dice &get_damage_xxx9_dice(void) const;
+  const Dice &get_damage_xxx10_dice(void) const;
   const Dice &get_damage_necrosis_dice(void) const;
   const Dice &get_health_initial_dice(void) const;
   const Dice &gold_value_dice(void) const;
@@ -484,6 +534,16 @@ public:
   const int get_damage_crush(void) const;
   const int get_damage_melee(void) const;
   const int get_damage_poison(void) const;
+  const int get_damage_xxx1(void) const;
+  const int get_damage_xxx2(void) const;
+  const int get_damage_xxx3(void) const;
+  const int get_damage_xxx4(void) const;
+  const int get_damage_xxx5(void) const;
+  const int get_damage_xxx6(void) const;
+  const int get_damage_xxx7(void) const;
+  const int get_damage_xxx8(void) const;
+  const int get_damage_xxx9(void) const;
+  const int get_damage_xxx10(void) const;
   const int get_damage_necrosis(void) const;
   const int get_health_initial(void) const;
   const int idle_tick(void) const;
@@ -530,6 +590,16 @@ public:
   void set_damage_melee_dice(const std::string &);
   void set_damage_necrosis_dice(const std::string &);
   void set_damage_poison_dice(const std::string &);
+  void set_damage_xxx1_dice(const std::string &);
+  void set_damage_xxx2_dice(const std::string &);
+  void set_damage_xxx3_dice(const std::string &);
+  void set_damage_xxx4_dice(const std::string &);
+  void set_damage_xxx5_dice(const std::string &);
+  void set_damage_xxx6_dice(const std::string &);
+  void set_damage_xxx7_dice(const std::string &);
+  void set_damage_xxx8_dice(const std::string &);
+  void set_damage_xxx9_dice(const std::string &);
+  void set_damage_xxx10_dice(const std::string &);
   void set_damage_digest_dice(const std::string &);
   void set_gold_value_dice(const std::string &);
   void set_health_initial_dice(const std::string &);
@@ -543,6 +613,16 @@ public:
   const std::string &get_damage_crush_dice_str(void) const;
   const std::string &get_damage_melee_dice_str(void) const;
   const std::string &get_damage_poison_dice_str(void) const;
+  const std::string &get_damage_xxx1_dice_str(void) const;
+  const std::string &get_damage_xxx2_dice_str(void) const;
+  const std::string &get_damage_xxx3_dice_str(void) const;
+  const std::string &get_damage_xxx4_dice_str(void) const;
+  const std::string &get_damage_xxx5_dice_str(void) const;
+  const std::string &get_damage_xxx6_dice_str(void) const;
+  const std::string &get_damage_xxx7_dice_str(void) const;
+  const std::string &get_damage_xxx8_dice_str(void) const;
+  const std::string &get_damage_xxx9_dice_str(void) const;
+  const std::string &get_damage_xxx10_dice_str(void) const;
   const std::string &get_damage_necrosis_dice_str(void) const;
   const std::string &get_health_initial_dice_str(void) const;
   const std::string &gold_value_dice_str(void) const;
@@ -579,6 +659,16 @@ public:
   const std::string &on_owner_set_do(void) const { return _on_owner_set_do; }
   const std::string &on_owner_unset_do(void) const { return _on_owner_unset_do; }
   const std::string &on_owner_damage_poison_do(void) const { return _on_owner_damage_poison_do; }
+  const std::string &on_owner_damage_xxx1_do(void) const { return _on_owner_damage_xxx1_do; }
+  const std::string &on_owner_damage_xxx2_do(void) const { return _on_owner_damage_xxx2_do; }
+  const std::string &on_owner_damage_xxx3_do(void) const { return _on_owner_damage_xxx3_do; }
+  const std::string &on_owner_damage_xxx4_do(void) const { return _on_owner_damage_xxx4_do; }
+  const std::string &on_owner_damage_xxx5_do(void) const { return _on_owner_damage_xxx5_do; }
+  const std::string &on_owner_damage_xxx6_do(void) const { return _on_owner_damage_xxx6_do; }
+  const std::string &on_owner_damage_xxx7_do(void) const { return _on_owner_damage_xxx7_do; }
+  const std::string &on_owner_damage_xxx8_do(void) const { return _on_owner_damage_xxx8_do; }
+  const std::string &on_owner_damage_xxx9_do(void) const { return _on_owner_damage_xxx9_do; }
+  const std::string &on_owner_damage_xxx10_do(void) const { return _on_owner_damage_xxx10_do; }
   const std::string &on_owner_damage_constitution_do(void) const { return _on_owner_damage_constitution_do; }
   const std::string &on_owner_damage_strength_do(void) const { return _on_owner_damage_strength_do; }
   const std::string &on_owner_damage_melee_do(void) const { return _on_owner_damage_melee_do; }
@@ -633,6 +723,16 @@ public:
   int damage_melee_chance_d1000(void) const { return _damage_melee_chance_d1000; }
   int damage_necrosis_chance_d1000(void) const { return _damage_necrosis_chance_d1000; }
   int damage_poison_chance_d1000(void) const { return _damage_poison_chance_d1000; }
+  int damage_xxx1_chance_d1000(void) const { return _damage_xxx1_chance_d1000; }
+  int damage_xxx2_chance_d1000(void) const { return _damage_xxx2_chance_d1000; }
+  int damage_xxx3_chance_d1000(void) const { return _damage_xxx3_chance_d1000; }
+  int damage_xxx4_chance_d1000(void) const { return _damage_xxx4_chance_d1000; }
+  int damage_xxx5_chance_d1000(void) const { return _damage_xxx5_chance_d1000; }
+  int damage_xxx6_chance_d1000(void) const { return _damage_xxx6_chance_d1000; }
+  int damage_xxx7_chance_d1000(void) const { return _damage_xxx7_chance_d1000; }
+  int damage_xxx8_chance_d1000(void) const { return _damage_xxx8_chance_d1000; }
+  int damage_xxx9_chance_d1000(void) const { return _damage_xxx9_chance_d1000; }
+  int damage_xxx10_chance_d1000(void) const { return _damage_xxx10_chance_d1000; }
   int damage_received_doubled_from_acid(void) const { return _damage_received_doubled_from_acid; }
   int damage_received_doubled_from_fire(void) const { return _damage_received_doubled_from_fire; }
   int damage_received_doubled_from_necrosis(void) const { return _damage_received_doubled_from_necrosis; }
@@ -960,6 +1060,16 @@ public:
   void set_damage_melee_chance_d1000(int v) { _damage_melee_chance_d1000 = v; }
   void set_damage_necrosis_chance_d1000(int v) { _damage_necrosis_chance_d1000 = v; }
   void set_damage_poison_chance_d1000(int v) { _damage_poison_chance_d1000 = v; }
+  void set_damage_xxx1_chance_d1000(int v) { _damage_xxx1_chance_d1000 = v; }
+  void set_damage_xxx2_chance_d1000(int v) { _damage_xxx2_chance_d1000 = v; }
+  void set_damage_xxx3_chance_d1000(int v) { _damage_xxx3_chance_d1000 = v; }
+  void set_damage_xxx4_chance_d1000(int v) { _damage_xxx4_chance_d1000 = v; }
+  void set_damage_xxx5_chance_d1000(int v) { _damage_xxx5_chance_d1000 = v; }
+  void set_damage_xxx6_chance_d1000(int v) { _damage_xxx6_chance_d1000 = v; }
+  void set_damage_xxx7_chance_d1000(int v) { _damage_xxx7_chance_d1000 = v; }
+  void set_damage_xxx8_chance_d1000(int v) { _damage_xxx8_chance_d1000 = v; }
+  void set_damage_xxx9_chance_d1000(int v) { _damage_xxx9_chance_d1000 = v; }
+  void set_damage_xxx10_chance_d1000(int v) { _damage_xxx10_chance_d1000 = v; }
   void set_damage_received_doubled_from_acid(int v) { _damage_received_doubled_from_acid = v; }
   void set_damage_received_doubled_from_fire(int v) { _damage_received_doubled_from_fire = v; }
   void set_damage_received_doubled_from_necrosis(int v) { _damage_received_doubled_from_necrosis = v; }
@@ -1219,6 +1329,16 @@ public:
   void set_on_owner_set_do(const std::string &v) { _on_owner_set_do = v; }
   void set_on_owner_unset_do(const std::string &v) { _on_owner_unset_do = v; }
   void set_on_owner_damage_poison_do(const std::string &v) { _on_owner_damage_poison_do = v; }
+  void set_on_owner_damage_xxx1_do(const std::string &v) { _on_owner_damage_xxx1_do = v; }
+  void set_on_owner_damage_xxx2_do(const std::string &v) { _on_owner_damage_xxx2_do = v; }
+  void set_on_owner_damage_xxx3_do(const std::string &v) { _on_owner_damage_xxx3_do = v; }
+  void set_on_owner_damage_xxx4_do(const std::string &v) { _on_owner_damage_xxx4_do = v; }
+  void set_on_owner_damage_xxx5_do(const std::string &v) { _on_owner_damage_xxx5_do = v; }
+  void set_on_owner_damage_xxx6_do(const std::string &v) { _on_owner_damage_xxx6_do = v; }
+  void set_on_owner_damage_xxx7_do(const std::string &v) { _on_owner_damage_xxx7_do = v; }
+  void set_on_owner_damage_xxx8_do(const std::string &v) { _on_owner_damage_xxx8_do = v; }
+  void set_on_owner_damage_xxx9_do(const std::string &v) { _on_owner_damage_xxx9_do = v; }
+  void set_on_owner_damage_xxx10_do(const std::string &v) { _on_owner_damage_xxx10_do = v; }
   void set_on_owner_damage_constitution_do(const std::string &v) { _on_owner_damage_constitution_do = v; }
   void set_on_owner_damage_strength_do(const std::string &v) { _on_owner_damage_strength_do = v; }
   void set_on_owner_damage_melee_do(const std::string &v) { _on_owner_damage_melee_do = v; }

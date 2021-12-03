@@ -417,6 +417,16 @@ bool Thing::attack(Thingp victim)
 
   bool damage_set = false;
   bool poison     = false;
+  bool xxx1       = false;
+  bool xxx2       = false;
+  bool xxx3       = false;
+  bool xxx4       = false;
+  bool xxx5       = false;
+  bool xxx6       = false;
+  bool xxx7       = false;
+  bool xxx8       = false;
+  bool xxx9       = false;
+  bool xxx10      = false;
   bool necrosis   = false;
   bool bite       = false;
   int  damage     = 0;
@@ -431,6 +441,145 @@ bool Thing::attack(Thingp victim)
         damage     = damage_poison;
         damage_set = true;
         poison     = true;
+      }
+    }
+  }
+  //
+  // Chance of xxx1 damage?
+  //
+  if (! damage_set) {
+    if ((int) pcg_random_range(0, 1000) < damage_xxx1_chance_d1000()) {
+      int damage_xxx1 = get_damage_xxx1();
+      if (damage_xxx1 > 0) {
+        damage     = damage_xxx1;
+        damage_set = true;
+        xxx1       = true;
+      }
+    }
+  }
+
+  //
+  // Chance of xxx2 damage?
+  //
+  if (! damage_set) {
+    if ((int) pcg_random_range(0, 1000) < damage_xxx2_chance_d1000()) {
+      int damage_xxx2 = get_damage_xxx2();
+      if (damage_xxx2 > 0) {
+        damage     = damage_xxx2;
+        damage_set = true;
+        xxx2       = true;
+      }
+    }
+  }
+
+  //
+  // Chance of xxx3 damage?
+  //
+  if (! damage_set) {
+    if ((int) pcg_random_range(0, 1000) < damage_xxx3_chance_d1000()) {
+      int damage_xxx3 = get_damage_xxx3();
+      if (damage_xxx3 > 0) {
+        damage     = damage_xxx3;
+        damage_set = true;
+        xxx3       = true;
+      }
+    }
+  }
+
+  //
+  // Chance of xxx4 damage?
+  //
+  if (! damage_set) {
+    if ((int) pcg_random_range(0, 1000) < damage_xxx4_chance_d1000()) {
+      int damage_xxx4 = get_damage_xxx4();
+      if (damage_xxx4 > 0) {
+        damage     = damage_xxx4;
+        damage_set = true;
+        xxx4       = true;
+      }
+    }
+  }
+
+  //
+  // Chance of xxx5 damage?
+  //
+  if (! damage_set) {
+    if ((int) pcg_random_range(0, 1000) < damage_xxx5_chance_d1000()) {
+      int damage_xxx5 = get_damage_xxx5();
+      if (damage_xxx5 > 0) {
+        damage     = damage_xxx5;
+        damage_set = true;
+        xxx5       = true;
+      }
+    }
+  }
+
+  //
+  // Chance of xxx6 damage?
+  //
+  if (! damage_set) {
+    if ((int) pcg_random_range(0, 1000) < damage_xxx6_chance_d1000()) {
+      int damage_xxx6 = get_damage_xxx6();
+      if (damage_xxx6 > 0) {
+        damage     = damage_xxx6;
+        damage_set = true;
+        xxx6       = true;
+      }
+    }
+  }
+
+  //
+  // Chance of xxx7 damage?
+  //
+  if (! damage_set) {
+    if ((int) pcg_random_range(0, 1000) < damage_xxx7_chance_d1000()) {
+      int damage_xxx7 = get_damage_xxx7();
+      if (damage_xxx7 > 0) {
+        damage     = damage_xxx7;
+        damage_set = true;
+        xxx7       = true;
+      }
+    }
+  }
+
+  //
+  // Chance of xxx8 damage?
+  //
+  if (! damage_set) {
+    if ((int) pcg_random_range(0, 1000) < damage_xxx8_chance_d1000()) {
+      int damage_xxx8 = get_damage_xxx8();
+      if (damage_xxx8 > 0) {
+        damage     = damage_xxx8;
+        damage_set = true;
+        xxx8       = true;
+      }
+    }
+  }
+
+  //
+  // Chance of xxx9 damage?
+  //
+  if (! damage_set) {
+    if ((int) pcg_random_range(0, 1000) < damage_xxx9_chance_d1000()) {
+      int damage_xxx9 = get_damage_xxx9();
+      if (damage_xxx9 > 0) {
+        damage     = damage_xxx9;
+        damage_set = true;
+        xxx9       = true;
+      }
+    }
+  }
+
+  //
+  // Chance of xxx10 damage?
+  //
+  if (! damage_set) {
+    if ((int) pcg_random_range(0, 1000) < damage_xxx10_chance_d1000()) {
+      int damage_xxx10 = get_damage_xxx10();
+      if (damage_xxx10 > 0) {
+        damage     = damage_xxx10;
+        damage_set = true;
+        xxx10      = true;
       }
     }
   }
@@ -598,7 +747,8 @@ bool Thing::attack(Thingp victim)
     }
   }
 
-  if (victim->is_hit(this, crit, bite, poison, necrosis, damage)) {
+  if (victim->is_hit(this, crit, bite, poison, necrosis, xxx1, xxx2, xxx3, xxx4, xxx5, xxx6, xxx7, xxx8, xxx9, xxx10,
+                     damage)) {
     dbg("The attack succeeded");
 
     if (attack_lunge()) {

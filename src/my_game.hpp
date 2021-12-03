@@ -193,6 +193,16 @@ public:
   void wid_thing_info_add_damage_melee(WidPopup *w, Thingp t);
   void wid_thing_info_add_damage_necrosis(WidPopup *w, Thingp t);
   void wid_thing_info_add_damage_poison(WidPopup *w, Thingp t);
+  void wid_thing_info_add_damage_xxx1(WidPopup *w, Thingp t);
+  void wid_thing_info_add_damage_xxx2(WidPopup *w, Thingp t);
+  void wid_thing_info_add_damage_xxx3(WidPopup *w, Thingp t);
+  void wid_thing_info_add_damage_xxx4(WidPopup *w, Thingp t);
+  void wid_thing_info_add_damage_xxx5(WidPopup *w, Thingp t);
+  void wid_thing_info_add_damage_xxx6(WidPopup *w, Thingp t);
+  void wid_thing_info_add_damage_xxx7(WidPopup *w, Thingp t);
+  void wid_thing_info_add_damage_xxx8(WidPopup *w, Thingp t);
+  void wid_thing_info_add_damage_xxx9(WidPopup *w, Thingp t);
+  void wid_thing_info_add_damage_xxx10(WidPopup *w, Thingp t);
   void wid_thing_info_add_danger_level(WidPopup *w, Thingp t);
   void wid_thing_info_add_defence(WidPopup *w, Thingp t);
   void wid_thing_info_add_dexterity(WidPopup *w, Thingp t);

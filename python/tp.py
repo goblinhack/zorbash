@@ -190,6 +190,36 @@ class Tp:
     def set_on_owner_damage_poison_do(self, value):
         my.tp_set_on_owner_damage_poison_do(self, value)
 
+    def set_on_owner_damage_xxx1_do(self, value):
+        my.tp_set_on_owner_damage_xxx1_do(self, value)
+
+    def set_on_owner_damage_xxx2_do(self, value):
+        my.tp_set_on_owner_damage_xxx2_do(self, value)
+
+    def set_on_owner_damage_xxx3_do(self, value):
+        my.tp_set_on_owner_damage_xxx3_do(self, value)
+
+    def set_on_owner_damage_xxx4_do(self, value):
+        my.tp_set_on_owner_damage_xxx4_do(self, value)
+
+    def set_on_owner_damage_xxx5_do(self, value):
+        my.tp_set_on_owner_damage_xxx5_do(self, value)
+
+    def set_on_owner_damage_xxx6_do(self, value):
+        my.tp_set_on_owner_damage_xxx6_do(self, value)
+
+    def set_on_owner_damage_xxx7_do(self, value):
+        my.tp_set_on_owner_damage_xxx7_do(self, value)
+
+    def set_on_owner_damage_xxx8_do(self, value):
+        my.tp_set_on_owner_damage_xxx8_do(self, value)
+
+    def set_on_owner_damage_xxx9_do(self, value):
+        my.tp_set_on_owner_damage_xxx9_do(self, value)
+
+    def set_on_owner_damage_xxx10_do(self, value):
+        my.tp_set_on_owner_damage_xxx10_do(self, value)
+
     def set_on_owner_damage_constitution_do(self, value):
         my.tp_set_on_owner_damage_constitution_do(self, value)
 
@@ -766,6 +796,36 @@ class Tp:
     def set_damage_poison_chance_d1000(self, value):
         my.tp_set_damage_poison_chance_d1000(self, value)
 
+    def set_damage_xxx1_chance_d1000(self, value):
+        my.tp_set_damage_xxx1_chance_d1000(self, value)
+
+    def set_damage_xxx2_chance_d1000(self, value):
+        my.tp_set_damage_xxx2_chance_d1000(self, value)
+
+    def set_damage_xxx3_chance_d1000(self, value):
+        my.tp_set_damage_xxx3_chance_d1000(self, value)
+
+    def set_damage_xxx4_chance_d1000(self, value):
+        my.tp_set_damage_xxx4_chance_d1000(self, value)
+
+    def set_damage_xxx5_chance_d1000(self, value):
+        my.tp_set_damage_xxx5_chance_d1000(self, value)
+
+    def set_damage_xxx6_chance_d1000(self, value):
+        my.tp_set_damage_xxx6_chance_d1000(self, value)
+
+    def set_damage_xxx7_chance_d1000(self, value):
+        my.tp_set_damage_xxx7_chance_d1000(self, value)
+
+    def set_damage_xxx8_chance_d1000(self, value):
+        my.tp_set_damage_xxx8_chance_d1000(self, value)
+
+    def set_damage_xxx9_chance_d1000(self, value):
+        my.tp_set_damage_xxx9_chance_d1000(self, value)
+
+    def set_damage_xxx10_chance_d1000(self, value):
+        my.tp_set_damage_xxx10_chance_d1000(self, value)
+
     def set_damage_necrosis_chance_d1000(self, value):
         my.tp_set_damage_necrosis_chance_d1000(self, value)
 
@@ -1098,6 +1158,36 @@ class Tp:
 
     def set_damage_poison_dice(self, value):
         my.tp_set_damage_poison_dice(self, value)
+
+    def set_damage_xxx1_dice(self, value):
+        my.tp_set_damage_xxx1_dice(self, value)
+
+    def set_damage_xxx2_dice(self, value):
+        my.tp_set_damage_xxx2_dice(self, value)
+
+    def set_damage_xxx3_dice(self, value):
+        my.tp_set_damage_xxx3_dice(self, value)
+
+    def set_damage_xxx4_dice(self, value):
+        my.tp_set_damage_xxx4_dice(self, value)
+
+    def set_damage_xxx5_dice(self, value):
+        my.tp_set_damage_xxx5_dice(self, value)
+
+    def set_damage_xxx6_dice(self, value):
+        my.tp_set_damage_xxx6_dice(self, value)
+
+    def set_damage_xxx7_dice(self, value):
+        my.tp_set_damage_xxx7_dice(self, value)
+
+    def set_damage_xxx8_dice(self, value):
+        my.tp_set_damage_xxx8_dice(self, value)
+
+    def set_damage_xxx9_dice(self, value):
+        my.tp_set_damage_xxx9_dice(self, value)
+
+    def set_damage_xxx10_dice(self, value):
+        my.tp_set_damage_xxx10_dice(self, value)
 
     def set_damage_necrosis_dice(self, value):
         my.tp_set_damage_necrosis_dice(self, value)

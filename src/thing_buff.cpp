@@ -191,6 +191,176 @@ int Thing::buff_on_damage_poison(Thingp hitter, int damage)
   return damage;
 }
 
+int Thing::buff_on_damage_xxx1(Thingp hitter, int damage)
+{
+  if (! maybe_itemp()) {
+    return damage;
+  }
+  if (get_itemp()->buffs.empty()) {
+    return damage;
+  }
+  for (const auto &item : get_itemp()->buffs) {
+    auto t = level->thing_find(item.id);
+    if (t) {
+      damage = t->on_owner_damage_xxx1(this, hitter, damage);
+    }
+  }
+  return damage;
+}
+
+int Thing::buff_on_damage_xxx2(Thingp hitter, int damage)
+{
+  if (! maybe_itemp()) {
+    return damage;
+  }
+  if (get_itemp()->buffs.empty()) {
+    return damage;
+  }
+  for (const auto &item : get_itemp()->buffs) {
+    auto t = level->thing_find(item.id);
+    if (t) {
+      damage = t->on_owner_damage_xxx2(this, hitter, damage);
+    }
+  }
+  return damage;
+}
+
+int Thing::buff_on_damage_xxx3(Thingp hitter, int damage)
+{
+  if (! maybe_itemp()) {
+    return damage;
+  }
+  if (get_itemp()->buffs.empty()) {
+    return damage;
+  }
+  for (const auto &item : get_itemp()->buffs) {
+    auto t = level->thing_find(item.id);
+    if (t) {
+      damage = t->on_owner_damage_xxx3(this, hitter, damage);
+    }
+  }
+  return damage;
+}
+
+int Thing::buff_on_damage_xxx4(Thingp hitter, int damage)
+{
+  if (! maybe_itemp()) {
+    return damage;
+  }
+  if (get_itemp()->buffs.empty()) {
+    return damage;
+  }
+  for (const auto &item : get_itemp()->buffs) {
+    auto t = level->thing_find(item.id);
+    if (t) {
+      damage = t->on_owner_damage_xxx4(this, hitter, damage);
+    }
+  }
+  return damage;
+}
+
+int Thing::buff_on_damage_xxx5(Thingp hitter, int damage)
+{
+  if (! maybe_itemp()) {
+    return damage;
+  }
+  if (get_itemp()->buffs.empty()) {
+    return damage;
+  }
+  for (const auto &item : get_itemp()->buffs) {
+    auto t = level->thing_find(item.id);
+    if (t) {
+      damage = t->on_owner_damage_xxx5(this, hitter, damage);
+    }
+  }
+  return damage;
+}
+
+int Thing::buff_on_damage_xxx6(Thingp hitter, int damage)
+{
+  if (! maybe_itemp()) {
+    return damage;
+  }
+  if (get_itemp()->buffs.empty()) {
+    return damage;
+  }
+  for (const auto &item : get_itemp()->buffs) {
+    auto t = level->thing_find(item.id);
+    if (t) {
+      damage = t->on_owner_damage_xxx6(this, hitter, damage);
+    }
+  }
+  return damage;
+}
+
+int Thing::buff_on_damage_xxx7(Thingp hitter, int damage)
+{
+  if (! maybe_itemp()) {
+    return damage;
+  }
+  if (get_itemp()->buffs.empty()) {
+    return damage;
+  }
+  for (const auto &item : get_itemp()->buffs) {
+    auto t = level->thing_find(item.id);
+    if (t) {
+      damage = t->on_owner_damage_xxx7(this, hitter, damage);
+    }
+  }
+  return damage;
+}
+
+int Thing::buff_on_damage_xxx8(Thingp hitter, int damage)
+{
+  if (! maybe_itemp()) {
+    return damage;
+  }
+  if (get_itemp()->buffs.empty()) {
+    return damage;
+  }
+  for (const auto &item : get_itemp()->buffs) {
+    auto t = level->thing_find(item.id);
+    if (t) {
+      damage = t->on_owner_damage_xxx8(this, hitter, damage);
+    }
+  }
+  return damage;
+}
+
+int Thing::buff_on_damage_xxx9(Thingp hitter, int damage)
+{
+  if (! maybe_itemp()) {
+    return damage;
+  }
+  if (get_itemp()->buffs.empty()) {
+    return damage;
+  }
+  for (const auto &item : get_itemp()->buffs) {
+    auto t = level->thing_find(item.id);
+    if (t) {
+      damage = t->on_owner_damage_xxx9(this, hitter, damage);
+    }
+  }
+  return damage;
+}
+
+int Thing::buff_on_damage_xxx10(Thingp hitter, int damage)
+{
+  if (! maybe_itemp()) {
+    return damage;
+  }
+  if (get_itemp()->buffs.empty()) {
+    return damage;
+  }
+  for (const auto &item : get_itemp()->buffs) {
+    auto t = level->thing_find(item.id);
+    if (t) {
+      damage = t->on_owner_damage_xxx10(this, hitter, damage);
+    }
+  }
+  return damage;
+}
+
 int Thing::buff_on_damage_constitution(Thingp hitter, int damage)
 {
   if (! maybe_itemp()) {

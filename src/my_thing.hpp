@@ -455,6 +455,16 @@ public:
   void debuff_tick();
 
   int buff_on_damage_poison(Thingp hitter, int damage);
+  int buff_on_damage_xxx1(Thingp hitter, int damage);
+  int buff_on_damage_xxx2(Thingp hitter, int damage);
+  int buff_on_damage_xxx3(Thingp hitter, int damage);
+  int buff_on_damage_xxx4(Thingp hitter, int damage);
+  int buff_on_damage_xxx5(Thingp hitter, int damage);
+  int buff_on_damage_xxx6(Thingp hitter, int damage);
+  int buff_on_damage_xxx7(Thingp hitter, int damage);
+  int buff_on_damage_xxx8(Thingp hitter, int damage);
+  int buff_on_damage_xxx9(Thingp hitter, int damage);
+  int buff_on_damage_xxx10(Thingp hitter, int damage);
   int buff_on_damage_bite(Thingp hitter, int damage);
   int buff_on_damage_melee(Thingp hitter, int damage);
   int buff_on_damage_necrosis(Thingp hitter, int damage);
@@ -465,6 +475,16 @@ public:
   const Dice &get_damage_crush_dice(void);
   const Dice &get_damage_melee_dice(void);
   const Dice &get_damage_poison_dice(void);
+  const Dice &get_damage_xxx1_dice(void);
+  const Dice &get_damage_xxx2_dice(void);
+  const Dice &get_damage_xxx3_dice(void);
+  const Dice &get_damage_xxx4_dice(void);
+  const Dice &get_damage_xxx5_dice(void);
+  const Dice &get_damage_xxx6_dice(void);
+  const Dice &get_damage_xxx7_dice(void);
+  const Dice &get_damage_xxx8_dice(void);
+  const Dice &get_damage_xxx9_dice(void);
+  const Dice &get_damage_xxx10_dice(void);
   const Dice &get_damage_necrosis_dice(void);
   const Dice &get_damage_digest_dice(void);
 
@@ -493,6 +513,16 @@ public:
   const std::string &get_damage_crush_dice_str(void);
   const std::string &get_damage_melee_dice_str(void);
   const std::string &get_damage_poison_dice_str(void);
+  const std::string &get_damage_xxx1_dice_str(void);
+  const std::string &get_damage_xxx2_dice_str(void);
+  const std::string &get_damage_xxx3_dice_str(void);
+  const std::string &get_damage_xxx4_dice_str(void);
+  const std::string &get_damage_xxx5_dice_str(void);
+  const std::string &get_damage_xxx6_dice_str(void);
+  const std::string &get_damage_xxx7_dice_str(void);
+  const std::string &get_damage_xxx8_dice_str(void);
+  const std::string &get_damage_xxx9_dice_str(void);
+  const std::string &get_damage_xxx10_dice_str(void);
   const std::string &get_damage_necrosis_dice_str(void);
   const std::string &get_damage_digest_dice_str(void);
   const std::string &get_dead_reason(void);
@@ -529,6 +559,16 @@ public:
   const std::string &on_owner_set_do(void);
   const std::string &on_owner_unset_do(void);
   const std::string &on_owner_damage_poison_do(void);
+  const std::string &on_owner_damage_xxx1_do(void);
+  const std::string &on_owner_damage_xxx2_do(void);
+  const std::string &on_owner_damage_xxx3_do(void);
+  const std::string &on_owner_damage_xxx4_do(void);
+  const std::string &on_owner_damage_xxx5_do(void);
+  const std::string &on_owner_damage_xxx6_do(void);
+  const std::string &on_owner_damage_xxx7_do(void);
+  const std::string &on_owner_damage_xxx8_do(void);
+  const std::string &on_owner_damage_xxx9_do(void);
+  const std::string &on_owner_damage_xxx10_do(void);
   const std::string &on_owner_damage_constitution_do(void);
   const std::string &on_owner_damage_strength_do(void);
   const std::string &on_owner_damage_melee_do(void);
@@ -568,12 +608,18 @@ public:
   float how_far_i_can_jump(void);
   float update_wobble(void);
 
+  int ai_hit_actual(Thingp hitter, Thingp real_hitter, bool crit, bool bite, bool poison, bool necrosis, bool xxx1,
+                    bool xxx2, bool xxx3, bool xxx4, bool xxx5, bool xxx6, bool xxx7, bool xxx8, bool xxx9,
+                    bool xxx10, int dmg);
+
+  int is_hit(Thingp hitter, bool crit, bool bite, bool poison, bool necrosis, bool xxx1, bool xxx2, bool xxx3,
+             bool xxx4, bool xxx5, bool xxx6, bool xxx7, bool xxx8, bool xxx9, bool xxx10, int damage);
+
   int ai_aggression_level_pct(void);
   int ai_avoid_distance(void);
   int ai_choose_goal(void);
   int ai_detect_secret_doors(void);
   int ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int type, bool check);
-  int ai_hit_actual(Thingp hitter, Thingp real_hitter, bool crit, bool bite, bool poison, bool necrosis, int dmg);
   int ai_obstacle(void);
   int ai_resent_count(void);
   int ai_shove_chance_d1000(void);
@@ -598,6 +644,16 @@ public:
   int damage_melee_chance_d1000(void);
   int damage_necrosis_chance_d1000(void);
   int damage_poison_chance_d1000(void);
+  int damage_xxx1_chance_d1000(void);
+  int damage_xxx2_chance_d1000(void);
+  int damage_xxx3_chance_d1000(void);
+  int damage_xxx4_chance_d1000(void);
+  int damage_xxx5_chance_d1000(void);
+  int damage_xxx6_chance_d1000(void);
+  int damage_xxx7_chance_d1000(void);
+  int damage_xxx8_chance_d1000(void);
+  int damage_xxx9_chance_d1000(void);
+  int damage_xxx10_chance_d1000(void);
   int damage_received_doubled_from_acid(void);
   int damage_received_doubled_from_fire(void);
   int damage_received_doubled_from_necrosis(void);
@@ -716,6 +772,16 @@ public:
   int get_damage_min(void);
   int get_damage_necrosis(void);
   int get_damage_poison(void);
+  int get_damage_xxx1(void);
+  int get_damage_xxx2(void);
+  int get_damage_xxx3(void);
+  int get_damage_xxx4(void);
+  int get_damage_xxx5(void);
+  int get_damage_xxx6(void);
+  int get_damage_xxx7(void);
+  int get_damage_xxx8(void);
+  int get_damage_xxx9(void);
+  int get_damage_xxx10(void);
   int get_damage_digest(void);
   int get_danger_current_level(Thingp);
   int get_danger_current_level(void);
@@ -981,7 +1047,6 @@ public:
   int is_hazard(void);
   int is_health_booster(void);
   int is_hittable(void);
-  int is_hit(Thingp hitter, bool crit, bool bite, bool poison, bool necrosis, int damage);
   int is_humanoid(void);
   int is_hunger_insatiable(void);
   int is_indestructible(void);
@@ -1162,6 +1227,16 @@ public:
   int worth_collecting(const Thingp it);
   int worth_collecting(const Thingp it, Thingp *would_need_to_drop);
   int on_owner_damage_poison(Thingp owner, Thingp hitter, int damage);
+  int on_owner_damage_xxx1(Thingp owner, Thingp hitter, int damage);
+  int on_owner_damage_xxx2(Thingp owner, Thingp hitter, int damage);
+  int on_owner_damage_xxx3(Thingp owner, Thingp hitter, int damage);
+  int on_owner_damage_xxx4(Thingp owner, Thingp hitter, int damage);
+  int on_owner_damage_xxx5(Thingp owner, Thingp hitter, int damage);
+  int on_owner_damage_xxx6(Thingp owner, Thingp hitter, int damage);
+  int on_owner_damage_xxx7(Thingp owner, Thingp hitter, int damage);
+  int on_owner_damage_xxx8(Thingp owner, Thingp hitter, int damage);
+  int on_owner_damage_xxx9(Thingp owner, Thingp hitter, int damage);
+  int on_owner_damage_xxx10(Thingp owner, Thingp hitter, int damage);
   int on_owner_damage_constitution(Thingp owner, Thingp hitter, int damage);
   int on_owner_damage_strength(Thingp owner, Thingp hitter, int damage);
   int on_owner_damage_melee(Thingp owner, Thingp hitter, int damage);

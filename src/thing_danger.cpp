@@ -65,10 +65,20 @@ int Tp::get_danger_level(void)
 
   danger_level += ai_aggression_level_pct();
 
-  danger_level +=
-      std::max(get_damage_melee_dice().max_roll(),
-               std::max(get_damage_poison_dice().max_roll(),
-                        std::max(get_damage_digest_dice().max_roll(), get_damage_bite_dice().max_roll())));
+  danger_level += get_damage_melee_dice().max_roll();
+  danger_level += get_damage_poison_dice().max_roll();
+  danger_level += get_damage_xxx1_dice().max_roll();
+  danger_level += get_damage_xxx2_dice().max_roll();
+  danger_level += get_damage_xxx3_dice().max_roll();
+  danger_level += get_damage_xxx4_dice().max_roll();
+  danger_level += get_damage_xxx5_dice().max_roll();
+  danger_level += get_damage_xxx6_dice().max_roll();
+  danger_level += get_damage_xxx7_dice().max_roll();
+  danger_level += get_damage_xxx8_dice().max_roll();
+  danger_level += get_damage_xxx9_dice().max_roll();
+  danger_level += get_damage_xxx10_dice().max_roll();
+  danger_level += get_damage_digest_dice().max_roll();
+  danger_level += get_damage_bite_dice().max_roll();
 
   //
   // Don't include crush damage as it is non typical
