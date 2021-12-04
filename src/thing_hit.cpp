@@ -110,7 +110,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
                          Thingp real_hitter, // who fired the arrow?
                          bool crit, bool attack_bite, bool attack_poison, bool attack_necrosis, bool attack_future1,
                          bool attack_future2, bool attack_future3, bool attack_future4, bool attack_future5,
-                         bool attack_future6, bool attack_future7, bool attack_future8, bool attack_acid,
+                         bool attack_future6, bool attack_future7, bool attack_energy, bool attack_acid,
                          bool attack_digest, int damage)
 {
   TRACE_AND_INDENT();
@@ -197,13 +197,13 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     } else {
       real_hitter->log("Attack damage_future7 damage %d on %s", damage, to_string().c_str());
     }
-  } else if (attack_future8) {
-    damage = buff_on_damage_future8(real_hitter, damage);
+  } else if (attack_energy) {
+    damage = buff_on_damage_energy(real_hitter, damage);
     if (! damage) {
-      real_hitter->log("No damage_future8 damage on %s", to_string().c_str());
+      real_hitter->log("No damage_energy damage on %s", to_string().c_str());
       return false;
     } else {
-      real_hitter->log("Attack damage_future8 damage %d on %s", damage, to_string().c_str());
+      real_hitter->log("Attack damage_energy damage %d on %s", damage, to_string().c_str());
     }
   } else if (attack_acid) {
     damage = buff_on_damage_acid(real_hitter, damage);
@@ -571,6 +571,8 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
         TOPCON("%%fg=orange$%s burns you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(), damage);
       } else if (attack_bite) {
         TOPCON("%%fg=orange$%s bites you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(), damage);
+      } else if (attack_energy) {
+        TOPCON("%%fg=orange$%s blasts you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(), damage);
       } else if (attack_digest) {
         TOPCON("%%fg=red$You are being consumed by %s!%%fg=reset$", text_the().c_str());
         TOPCON("%%fg=orange$%s digests you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(), damage);
@@ -787,37 +789,30 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
 // Returns true on the target being dead.
 //
 int Thing::is_hit(Thingp hitter, bool crit, bool attack_bite, bool attack_poison, bool attack_necrosis,
-                  bool damage_future1, bool damage_future2, bool damage_future3, bool damage_future4,
-                  bool damage_future5, bool damage_future6, bool damage_future7, bool damage_future8,
-                  bool damage_acid, bool damage_digest, int damage)
+                  bool attack_future1, bool attack_future2, bool attack_future3, bool attack_future4,
+                  bool attack_future5, bool attack_future6, bool attack_future7, bool attack_energy, bool attack_acid,
+                  bool attack_digest, int damage)
 {
   TRACE_AND_INDENT();
-  if (attack_bite) {
-    IF_DEBUG2 { hitter->log("Possible bite %s for %d bite damage", to_string().c_str(), damage); }
-  } else if (attack_poison) {
-    IF_DEBUG2 { hitter->log("Possible poison attack %s for %d damage", to_string().c_str(), damage); }
-    if (is_dead || is_dying) {
-      hitter->log("Already dead, no more poison attacks %s", to_string().c_str());
-      return false;
-    }
-  } else if (attack_necrosis) {
-    IF_DEBUG2 { hitter->log("Possible necrosis attack %s for %d damage", to_string().c_str(), damage); }
-    if (is_dead || is_dying) {
-      hitter->log("Already dead, no more rotting attacks %s", to_string().c_str());
-      return false;
-    }
+  if (attack_bite || attack_digest) {
+    //
+    // Allow attacks when dead
+    //
+    hitter->log("Possible attack on %s", to_string().c_str());
   } else if (damage) {
-    IF_DEBUG2 { hitter->log("Possible melee hit %s for %d damage", to_string().c_str(), damage); }
+    //
+    // Filter attacks when dead
+    //
     if (is_dead || is_dying) {
       hitter->log("Already dead, no more melee hits %s", to_string().c_str());
       return false;
     }
+    hitter->log("Possible attack on %s", to_string().c_str());
   } else {
-    IF_DEBUG2
-    {
-      hitter->log("No damage");
-      return false;
-    }
+    //
+    // Failed attack
+    hitter->log("No damage");
+    return false;
   }
   TRACE_AND_INDENT();
 
@@ -932,9 +927,9 @@ int Thing::is_hit(Thingp hitter, bool crit, bool attack_bite, bool attack_poison
   int hit_and_destroyed;
 
   hit_and_destroyed =
-      ai_hit_actual(hitter, real_hitter, crit, attack_bite, attack_poison, attack_necrosis, damage_future1,
-                    damage_future2, damage_future3, damage_future4, damage_future5, damage_future6, damage_future7,
-                    damage_future8, damage_acid, damage_digest, damage);
+      ai_hit_actual(hitter, real_hitter, crit, attack_bite, attack_poison, attack_necrosis, attack_future1,
+                    attack_future2, attack_future3, attack_future4, attack_future5, attack_future6, attack_future7,
+                    attack_energy, attack_acid, attack_digest, damage);
 
   return (hit_and_destroyed);
 }

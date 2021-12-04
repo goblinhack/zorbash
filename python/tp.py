@@ -211,8 +211,8 @@ class Tp:
     def set_on_owner_damage_future7_do(self, value):
         my.tp_set_on_owner_damage_future7_do(self, value)
 
-    def set_on_owner_damage_future8_do(self, value):
-        my.tp_set_on_owner_damage_future8_do(self, value)
+    def set_on_owner_damage_energy_do(self, value):
+        my.tp_set_on_owner_damage_energy_do(self, value)
 
     def set_on_owner_damage_acid_do(self, value):
         my.tp_set_on_owner_damage_acid_do(self, value)
@@ -817,8 +817,8 @@ class Tp:
     def set_damage_future7_chance_d1000(self, value):
         my.tp_set_damage_future7_chance_d1000(self, value)
 
-    def set_damage_future8_chance_d1000(self, value):
-        my.tp_set_damage_future8_chance_d1000(self, value)
+    def set_damage_energy_chance_d1000(self, value):
+        my.tp_set_damage_energy_chance_d1000(self, value)
 
     def set_damage_acid_chance_d1000(self, value):
         my.tp_set_damage_acid_chance_d1000(self, value)
@@ -1180,8 +1180,8 @@ class Tp:
     def set_damage_future7_dice(self, value):
         my.tp_set_damage_future7_dice(self, value)
 
-    def set_damage_future8_dice(self, value):
-        my.tp_set_damage_future8_dice(self, value)
+    def set_damage_energy_dice(self, value):
+        my.tp_set_damage_energy_dice(self, value)
 
     def set_damage_acid_dice(self, value):
         my.tp_set_damage_acid_dice(self, value)

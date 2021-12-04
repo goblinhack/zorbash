@@ -63,7 +63,7 @@ private:
   Dice _damage_future5_dice {};
   Dice _damage_future6_dice {};
   Dice _damage_future7_dice {};
-  Dice _damage_future8_dice {};
+  Dice _damage_energy_dice {};
   Dice _damage_acid_dice {};
   Dice _damage_necrosis_dice {};
   Dice _gold_value_dice {};
@@ -115,7 +115,7 @@ private:
   int _damage_future5_chance_d1000 {};
   int _damage_future6_chance_d1000 {};
   int _damage_future7_chance_d1000 {};
-  int _damage_future8_chance_d1000 {};
+  int _damage_energy_chance_d1000 {};
   int _damage_acid_chance_d1000 {};
   int _damage_digest_chance_d1000 {};
   int _damage_received_doubled_from_acid {};
@@ -427,7 +427,7 @@ private:
   std::string _damage_future5_dice_str;
   std::string _damage_future6_dice_str;
   std::string _damage_future7_dice_str;
-  std::string _damage_future8_dice_str;
+  std::string _damage_energy_dice_str;
   std::string _damage_acid_dice_str;
   std::string _damage_necrosis_dice_str;
   std::string _gfx_anim_use;
@@ -468,7 +468,7 @@ private:
   std::string _on_owner_damage_future5_do;
   std::string _on_owner_damage_future6_do;
   std::string _on_owner_damage_future7_do;
-  std::string _on_owner_damage_future8_do;
+  std::string _on_owner_damage_energy_do;
   std::string _on_owner_damage_acid_do;
   std::string _on_owner_damage_digest_do;
   std::string _on_owner_damage_constitution_do;
@@ -515,7 +515,7 @@ public:
   const Dice &get_damage_future5_dice(void) const;
   const Dice &get_damage_future6_dice(void) const;
   const Dice &get_damage_future7_dice(void) const;
-  const Dice &get_damage_future8_dice(void) const;
+  const Dice &get_damage_energy_dice(void) const;
   const Dice &get_damage_acid_dice(void) const;
   const Dice &get_damage_necrosis_dice(void) const;
   const Dice &get_health_initial_dice(void) const;
@@ -538,7 +538,7 @@ public:
   const int get_damage_future5(void) const;
   const int get_damage_future6(void) const;
   const int get_damage_future7(void) const;
-  const int get_damage_future8(void) const;
+  const int get_damage_energy(void) const;
   const int get_damage_acid(void) const;
   const int get_damage_necrosis(void) const;
   const int get_health_initial(void) const;
@@ -593,7 +593,7 @@ public:
   void set_damage_future5_dice(const std::string &);
   void set_damage_future6_dice(const std::string &);
   void set_damage_future7_dice(const std::string &);
-  void set_damage_future8_dice(const std::string &);
+  void set_damage_energy_dice(const std::string &);
   void set_damage_acid_dice(const std::string &);
   void set_damage_digest_dice(const std::string &);
   void set_gold_value_dice(const std::string &);
@@ -615,7 +615,7 @@ public:
   const std::string &get_damage_future5_dice_str(void) const;
   const std::string &get_damage_future6_dice_str(void) const;
   const std::string &get_damage_future7_dice_str(void) const;
-  const std::string &get_damage_future8_dice_str(void) const;
+  const std::string &get_damage_energy_dice_str(void) const;
   const std::string &get_damage_acid_dice_str(void) const;
   const std::string &get_damage_necrosis_dice_str(void) const;
   const std::string &get_health_initial_dice_str(void) const;
@@ -660,7 +660,7 @@ public:
   const std::string &on_owner_damage_future5_do(void) const { return _on_owner_damage_future5_do; }
   const std::string &on_owner_damage_future6_do(void) const { return _on_owner_damage_future6_do; }
   const std::string &on_owner_damage_future7_do(void) const { return _on_owner_damage_future7_do; }
-  const std::string &on_owner_damage_future8_do(void) const { return _on_owner_damage_future8_do; }
+  const std::string &on_owner_damage_energy_do(void) const { return _on_owner_damage_energy_do; }
   const std::string &on_owner_damage_acid_do(void) const { return _on_owner_damage_acid_do; }
   const std::string &on_owner_damage_digest_do(void) const { return _on_owner_damage_digest_do; }
   const std::string &on_owner_damage_constitution_do(void) const { return _on_owner_damage_constitution_do; }
@@ -724,7 +724,7 @@ public:
   int damage_future5_chance_d1000(void) const { return _damage_future5_chance_d1000; }
   int damage_future6_chance_d1000(void) const { return _damage_future6_chance_d1000; }
   int damage_future7_chance_d1000(void) const { return _damage_future7_chance_d1000; }
-  int damage_future8_chance_d1000(void) const { return _damage_future8_chance_d1000; }
+  int damage_energy_chance_d1000(void) const { return _damage_energy_chance_d1000; }
   int damage_acid_chance_d1000(void) const { return _damage_acid_chance_d1000; }
   int damage_digest_chance_d1000(void) const { return _damage_digest_chance_d1000; }
   int damage_received_doubled_from_acid(void) const { return _damage_received_doubled_from_acid; }
@@ -1061,7 +1061,7 @@ public:
   void set_damage_future5_chance_d1000(int v) { _damage_future5_chance_d1000 = v; }
   void set_damage_future6_chance_d1000(int v) { _damage_future6_chance_d1000 = v; }
   void set_damage_future7_chance_d1000(int v) { _damage_future7_chance_d1000 = v; }
-  void set_damage_future8_chance_d1000(int v) { _damage_future8_chance_d1000 = v; }
+  void set_damage_energy_chance_d1000(int v) { _damage_energy_chance_d1000 = v; }
   void set_damage_acid_chance_d1000(int v) { _damage_acid_chance_d1000 = v; }
   void set_damage_digest_chance_d1000(int v) { _damage_digest_chance_d1000 = v; }
   void set_damage_received_doubled_from_acid(int v) { _damage_received_doubled_from_acid = v; }
@@ -1330,7 +1330,7 @@ public:
   void set_on_owner_damage_future5_do(const std::string &v) { _on_owner_damage_future5_do = v; }
   void set_on_owner_damage_future6_do(const std::string &v) { _on_owner_damage_future6_do = v; }
   void set_on_owner_damage_future7_do(const std::string &v) { _on_owner_damage_future7_do = v; }
-  void set_on_owner_damage_future8_do(const std::string &v) { _on_owner_damage_future8_do = v; }
+  void set_on_owner_damage_energy_do(const std::string &v) { _on_owner_damage_energy_do = v; }
   void set_on_owner_damage_acid_do(const std::string &v) { _on_owner_damage_acid_do = v; }
   void set_on_owner_damage_digest_do(const std::string &v) { _on_owner_damage_digest_do = v; }
   void set_on_owner_damage_constitution_do(const std::string &v) { _on_owner_damage_constitution_do = v; }

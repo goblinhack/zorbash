@@ -1725,10 +1725,10 @@ int Thing::damage_future7_chance_d1000(void)
   return (tp()->damage_future7_chance_d1000());
 }
 
-int Thing::damage_future8_chance_d1000(void)
+int Thing::damage_energy_chance_d1000(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->damage_future8_chance_d1000());
+  return (tp()->damage_energy_chance_d1000());
 }
 
 int Thing::damage_acid_chance_d1000(void)
@@ -6120,10 +6120,10 @@ const std::string &Thing::on_owner_damage_future7_do(void)
   return (tp()->on_owner_damage_future7_do());
 }
 
-const std::string &Thing::on_owner_damage_future8_do(void)
+const std::string &Thing::on_owner_damage_energy_do(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->on_owner_damage_future8_do());
+  return (tp()->on_owner_damage_energy_do());
 }
 
 const std::string &Thing::on_owner_damage_acid_do(void)

@@ -121,13 +121,13 @@ void               Tp::set_damage_future7_dice(const std::string &v)
   _damage_future7_dice_str = v;
 }
 
-const Dice        &Tp::get_damage_future8_dice(void) const { return _damage_future8_dice; }
-const int          Tp::get_damage_future8(void) const { return _damage_future8_dice.roll(); }
-const std::string &Tp::get_damage_future8_dice_str(void) const { return _damage_future8_dice_str; }
-void               Tp::set_damage_future8_dice(const std::string &v)
+const Dice        &Tp::get_damage_energy_dice(void) const { return _damage_energy_dice; }
+const int          Tp::get_damage_energy(void) const { return _damage_energy_dice.roll(); }
+const std::string &Tp::get_damage_energy_dice_str(void) const { return _damage_energy_dice_str; }
+void               Tp::set_damage_energy_dice(const std::string &v)
 {
-  _damage_future8_dice     = v;
-  _damage_future8_dice_str = v;
+  _damage_energy_dice     = v;
+  _damage_energy_dice_str = v;
 }
 
 const Dice        &Tp::get_damage_acid_dice(void) const { return _damage_acid_dice; }

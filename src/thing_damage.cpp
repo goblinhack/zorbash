@@ -481,50 +481,50 @@ int Thing::on_owner_damage_future7(Thingp owner, Thingp hitter, int damage)
 }
 
 ///////////////////////////////////////////////////////////////////////////
-// damage_future8
+// damage_energy
 ///////////////////////////////////////////////////////////////////////////
-const Dice &Thing::get_damage_future8_dice(void)
+const Dice &Thing::get_damage_energy_dice(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->get_damage_future8_dice());
+  return (tp()->get_damage_energy_dice());
 }
 
-const std::string &Thing::get_damage_future8_dice_str(void)
+const std::string &Thing::get_damage_energy_dice_str(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->get_damage_future8_dice_str());
+  return (tp()->get_damage_energy_dice_str());
 }
 
-int Thing::get_damage_future8(void)
+int Thing::get_damage_energy(void)
 {
   TRACE_AND_INDENT();
-  auto roll = tp()->get_damage_future8_dice().roll();
+  auto roll = tp()->get_damage_energy_dice().roll();
   if (roll) {
     return roll + get_enchant();
   }
   return roll;
 }
 
-int Thing::on_owner_damage_future8(Thingp owner, Thingp hitter, int damage)
+int Thing::on_owner_damage_energy(Thingp owner, Thingp hitter, int damage)
 {
   verify(MTYPE_THING, owner);
   if (! owner) {
-    err("Cannot owner_damage_future8 null thing");
+    err("Cannot owner_damage_energy null thing");
     return damage;
   }
 
   verify(MTYPE_THING, hitter);
   if (! hitter) {
-    err("Cannot owner_damage_future8 null thing");
+    err("Cannot owner_damage_energy null thing");
     return damage;
   }
 
-  auto on_owner_damage_future8 = on_owner_damage_future8_do();
-  if (std::empty(on_owner_damage_future8)) {
+  auto on_owner_damage_energy = on_owner_damage_energy_do();
+  if (std::empty(on_owner_damage_energy)) {
     return damage;
   }
 
-  auto t = split_tokens(on_owner_damage_future8, '.');
+  auto t = split_tokens(on_owner_damage_energy, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -540,8 +540,8 @@ int Thing::on_owner_damage_future8(Thingp owner, Thingp hitter, int damage)
                           (unsigned int) mid_at.y, (unsigned int) damage);
   }
 
-  ERR("Bad on_owner_damage_future8 call [%s] expected mod:function, got %d elems", on_owner_damage_future8.c_str(),
-      (int) on_owner_damage_future8.size());
+  ERR("Bad on_owner_damage_energy call [%s] expected mod:function, got %d elems", on_owner_damage_energy.c_str(),
+      (int) on_owner_damage_energy.size());
 
   return damage;
 }
@@ -984,7 +984,7 @@ int Thing::get_damage_max(void)
   max_damage      = std::max(max_damage, get_damage_future5_dice().max_roll());
   max_damage      = std::max(max_damage, get_damage_future6_dice().max_roll());
   max_damage      = std::max(max_damage, get_damage_future7_dice().max_roll());
-  max_damage      = std::max(max_damage, get_damage_future8_dice().max_roll());
+  max_damage      = std::max(max_damage, get_damage_energy_dice().max_roll());
   max_damage      = std::max(max_damage, get_damage_acid_dice().max_roll());
   max_damage      = std::max(max_damage, get_damage_digest_dice().max_roll());
   max_damage      = std::max(max_damage, get_damage_necrosis_dice().max_roll());
@@ -1008,7 +1008,7 @@ int Thing::get_damage_min(void)
   min_damage      = std::min(min_damage, get_damage_future5_dice().min_roll());
   min_damage      = std::min(min_damage, get_damage_future6_dice().min_roll());
   min_damage      = std::min(min_damage, get_damage_future7_dice().min_roll());
-  min_damage      = std::min(min_damage, get_damage_future8_dice().min_roll());
+  min_damage      = std::min(min_damage, get_damage_energy_dice().min_roll());
   min_damage      = std::min(min_damage, get_damage_acid_dice().min_roll());
   min_damage      = std::min(min_damage, get_damage_digest_dice().min_roll());
   min_damage      = std::min(min_damage, get_damage_necrosis_dice().min_roll());

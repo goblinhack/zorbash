@@ -91,7 +91,7 @@ PyObject *thing_damage_future4_chance_d1000(PyObject *obj, PyObject *args, PyObj
 PyObject *thing_damage_future5_chance_d1000(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_damage_future6_chance_d1000(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_damage_future7_chance_d1000(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_damage_future8_chance_d1000(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_damage_energy_chance_d1000(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_damage_acid_chance_d1000(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_damage_digest_chance_d1000(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_debuff_add(PyObject *obj, PyObject *args, PyObject *keywds);
