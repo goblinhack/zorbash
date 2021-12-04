@@ -41,7 +41,7 @@ def on_owner_damage_future7(me, owner, hitter, x, y, damage):
 def on_owner_damage_future8(me, owner, hitter, x, y, damage):
     return damage
 
-def on_owner_damage_future9(me, owner, hitter, x, y, damage):
+def on_owner_damage_acid(me, owner, hitter, x, y, damage):
     return damage
 
 def on_owner_damage_digest(me, owner, hitter, x, y, damage):
@@ -90,7 +90,7 @@ def tp_init(name, text_name):
     mytp.set_on_owner_damage_future6_do("buff_poison_resist.on_owner_damage_future6()")
     mytp.set_on_owner_damage_future7_do("buff_poison_resist.on_owner_damage_future7()")
     mytp.set_on_owner_damage_future8_do("buff_poison_resist.on_owner_damage_future8()")
-    mytp.set_on_owner_damage_future9_do("buff_poison_resist.on_owner_damage_future9()")
+    mytp.set_on_owner_damage_acid_do("buff_poison_resist.on_owner_damage_acid()")
     mytp.set_on_owner_damage_melee_do("buff_poison_resist.on_owner_damage_melee()")
     mytp.set_on_owner_damage_necrosis_do("buff_poison_resist.on_owner_damage_necrosis()")
     mytp.set_on_owner_damage_poison_do("buff_poison_resist.on_owner_damage_poison()")

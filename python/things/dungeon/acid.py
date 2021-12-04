@@ -5,7 +5,7 @@ import tp
 def acid_init(name, text_name, short_text_name, tiles=[], left_tiles=[]):
     mytp = tp.Tp(name, text_name, short_text_name)
     mytp.set_ai_obstacle(True)
-    mytp.set_damage_melee_dice("1d3+1")
+    mytp.set_damage_acid_dice("1d3+1")
     mytp.set_gfx_show_outlined(True)
     mytp.set_is_able_to_fall(True)
     mytp.set_is_acid(True)

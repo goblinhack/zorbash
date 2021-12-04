@@ -327,7 +327,7 @@ int Thing::buff_on_damage_future8(Thingp hitter, int damage)
   return damage;
 }
 
-int Thing::buff_on_damage_future9(Thingp hitter, int damage)
+int Thing::buff_on_damage_acid(Thingp hitter, int damage)
 {
   if (! maybe_itemp()) {
     return damage;
@@ -338,7 +338,7 @@ int Thing::buff_on_damage_future9(Thingp hitter, int damage)
   for (const auto &item : get_itemp()->buffs) {
     auto t = level->thing_find(item.id);
     if (t) {
-      damage = t->on_owner_damage_future9(this, hitter, damage);
+      damage = t->on_owner_damage_acid(this, hitter, damage);
     }
   }
   return damage;

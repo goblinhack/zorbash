@@ -239,11 +239,13 @@ ThingShoved Thing::try_to_shove(point future_pos)
     if (this == it) {
       continue;
     }
+    dbg("Shove candidate, %s", it->to_string().c_str());
 
     if (! it->is_shovable()) {
       continue;
     }
 
+    dbg("Shove candidate, %s", it->to_string().c_str());
     point shove_delta = delta;
     return (try_to_shove(it, shove_delta));
   }

@@ -110,7 +110,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
                          Thingp real_hitter, // who fired the arrow?
                          bool crit, bool attack_bite, bool attack_poison, bool attack_necrosis, bool attack_future1,
                          bool attack_future2, bool attack_future3, bool attack_future4, bool attack_future5,
-                         bool attack_future6, bool attack_future7, bool attack_future8, bool attack_future9,
+                         bool attack_future6, bool attack_future7, bool attack_future8, bool attack_acid,
                          bool attack_digest, int damage)
 {
   TRACE_AND_INDENT();
@@ -205,13 +205,13 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     } else {
       real_hitter->log("Attack damage_future8 damage %d on %s", damage, to_string().c_str());
     }
-  } else if (attack_future9) {
-    damage = buff_on_damage_future9(real_hitter, damage);
+  } else if (attack_acid) {
+    damage = buff_on_damage_acid(real_hitter, damage);
     if (! damage) {
-      real_hitter->log("No damage_future9 damage on %s", to_string().c_str());
+      real_hitter->log("No damage_acid damage on %s", to_string().c_str());
       return false;
     } else {
-      real_hitter->log("Attack damage_future9 damage %d on %s", damage, to_string().c_str());
+      real_hitter->log("Attack damage_acid damage %d on %s", damage, to_string().c_str());
     }
   } else if (attack_digest) {
     damage = buff_on_damage_digest(real_hitter, damage);
@@ -549,7 +549,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       }
     } else {
       if (attack_poison) {
-        TOPCON("%%fg=yellow$%s's bite poisons you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(),
+        TOPCON("%%fg=yellow$%s's fangs poisons you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(),
                damage);
       } else if (attack_necrosis) {
         TOPCON("%%fg=limegreen$%s's withering touch rots your skin!%%fg=reset$", real_hitter->text_The().c_str());
@@ -567,6 +567,8 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       } else if (hitter->is_projectile() || hitter->is_laser()) {
         TOPCON("%%fg=orange$%s blasted you for %d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(),
                damage, hitter->text_the().c_str());
+      } else if (attack_acid) {
+        TOPCON("%%fg=orange$%s burns you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(), damage);
       } else if (attack_bite) {
         TOPCON("%%fg=orange$%s bites you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(), damage);
       } else if (attack_digest) {
@@ -714,7 +716,8 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
   //
   // Are we carrying a weapon? If not, see if we can do a claw attack
   //
-  if (attack_bite || ! real_hitter->get_equip_id_carry_anim(MONST_EQUIP_WEAPON).ok()) {
+  if (attack_bite || attack_bite || attack_poison || attack_digest ||
+      ! real_hitter->get_equip_id_carry_anim(MONST_EQUIP_WEAPON).ok()) {
     auto claws = real_hitter->tp()->gfx_anim_use();
     if (claws != "") {
       auto bite = level->thing_new(claws, mid_at);
@@ -786,7 +789,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
 int Thing::is_hit(Thingp hitter, bool crit, bool attack_bite, bool attack_poison, bool attack_necrosis,
                   bool damage_future1, bool damage_future2, bool damage_future3, bool damage_future4,
                   bool damage_future5, bool damage_future6, bool damage_future7, bool damage_future8,
-                  bool damage_future9, bool damage_digest, int damage)
+                  bool damage_acid, bool damage_digest, int damage)
 {
   TRACE_AND_INDENT();
   if (attack_bite) {
@@ -931,7 +934,7 @@ int Thing::is_hit(Thingp hitter, bool crit, bool attack_bite, bool attack_poison
   hit_and_destroyed =
       ai_hit_actual(hitter, real_hitter, crit, attack_bite, attack_poison, attack_necrosis, damage_future1,
                     damage_future2, damage_future3, damage_future4, damage_future5, damage_future6, damage_future7,
-                    damage_future8, damage_future9, damage_digest, damage);
+                    damage_future8, damage_acid, damage_digest, damage);
 
   return (hit_and_destroyed);
 }
