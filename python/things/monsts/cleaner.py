@@ -56,6 +56,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_monst(True)
     mytp.set_is_moveable(True)
     mytp.set_is_potion_eater(True)
+    mytp.set_is_soft_body(True)
     mytp.set_is_steal_item_chance_d1000(200)
     mytp.set_is_sticky(True)
     mytp.set_is_tickable(True)
@@ -79,7 +80,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_text_description("A dungeon auto cleaner jelly thingy.")
     mytp.set_text_hits("burns")
     mytp.set_z_depth(my.MAP_DEPTH_OBJ)
-    mytp.set_z_prio(my.MAP_PRIO_INFRONT) # so it appears over things when consuming
+    mytp.set_z_prio(my.MAP_PRIO_IN_FRONT) # so it appears over things when consuming
 
     delay = 200
     mytp.set_tile(tile=name + ".1.100", is_hp_100_percent=True, delay_ms=delay)

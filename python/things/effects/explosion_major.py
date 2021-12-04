@@ -30,7 +30,7 @@ def tp_init(name):
     mytp.set_on_death_do("explosion_major.on_death()")
     mytp.set_text_hits("blasts")
     mytp.set_z_depth(my.MAP_DEPTH_EXPLOSION_MAJOR)
-    mytp.set_z_prio(my.MAP_PRIO_INFRONT)
+    mytp.set_z_prio(my.MAP_PRIO_IN_FRONT)
 
     delay = 50
     mytp.set_tile(tile=name + ".1", delay_ms=delay)

@@ -10,7 +10,7 @@ def tp_init(name):
     mytp.set_is_loggable(True)
     mytp.set_is_tickable(True)
     mytp.set_z_depth(my.MAP_DEPTH_EXPLOSION_MINOR)
-    mytp.set_z_prio(my.MAP_PRIO_INFRONT)
+    mytp.set_z_prio(my.MAP_PRIO_IN_FRONT)
 
     delay = 100
     mytp.set_tile(tile=name + ".1", delay_ms=delay)

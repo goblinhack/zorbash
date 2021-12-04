@@ -219,6 +219,44 @@ void Level::unset_is_cursor_path_hazard_for_player(const int x, const int y)
   decr(_is_cursor_path_hazard_for_player, x, y, (uint8_t) 1);
 }
 
+uint8_t Level::is_heavy(const point &p)
+{
+  TRACE_AND_INDENT();
+  if (unlikely(is_oob(p.x, p.y))) {
+    return false;
+  }
+  return (get(_is_heavy, p.x, p.y));
+}
+
+uint8_t Level::is_heavy(const int x, const int y)
+{
+  TRACE_AND_INDENT();
+  if (unlikely(is_oob(x, y))) {
+    return false;
+  }
+  return (get(_is_heavy, x, y));
+}
+
+void Level::set_is_heavy(const int x, const int y)
+{
+  TRACE_AND_INDENT();
+  if (unlikely(is_oob(x, y))) {
+    return;
+  }
+  map_changed = true;
+  incr(_is_heavy, x, y, (uint8_t) 1);
+}
+
+void Level::unset_is_heavy(const int x, const int y)
+{
+  TRACE_AND_INDENT();
+  if (unlikely(is_oob(x, y))) {
+    return;
+  }
+  map_changed = true;
+  decr(_is_heavy, x, y, (uint8_t) 1);
+}
+
 uint8_t Level::is_secret_door(const point &p)
 {
   TRACE_AND_INDENT();

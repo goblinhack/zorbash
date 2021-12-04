@@ -135,6 +135,10 @@ void Thing::level_push(void)
     i_set_is_cursor_path_hazard_for_player = true;
     level->set_is_cursor_path_hazard_for_player(mx, my);
   }
+  if (is_heavy()) {
+    i_set_is_heavy = true;
+    level->set_is_heavy(mx, my);
+  }
   if (is_treasure_class_a()) {
     i_set_is_treasure_class_a = true;
     level->set_is_treasure_class_a(mx, my);

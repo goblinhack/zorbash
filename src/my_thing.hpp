@@ -130,7 +130,6 @@ public:
   // These are flags used to make sure we set or unset flags onto
   // the level only once.
   //
-  uint64_t i_set_water                            : 1 {};
   uint64_t i_set_is_acid                          : 1 {};
   uint64_t i_set_is_ascend_dungeon                : 1 {};
   uint64_t i_set_is_ascend_sewer                  : 1 {};
@@ -141,6 +140,7 @@ public:
   uint64_t i_set_is_chasm                         : 1 {};
   uint64_t i_set_is_corpse                        : 1 {};
   uint64_t i_set_is_corridor                      : 1 {};
+  uint64_t i_set_is_cursor_path_hazard_for_player : 1 {};
   uint64_t i_set_is_deep_water                    : 1 {};
   uint64_t i_set_is_descend_dungeon               : 1 {};
   uint64_t i_set_is_descend_sewer                 : 1 {};
@@ -148,39 +148,40 @@ public:
   uint64_t i_set_is_door                          : 1 {};
   uint64_t i_set_is_dry_grass                     : 1 {};
   uint64_t i_set_is_enchantstone                  : 1 {};
-  uint64_t i_set_is_cursor_path_hazard_for_player : 1 {};
   uint64_t i_set_is_fire                          : 1 {};
   uint64_t i_set_is_floor                         : 1 {};
   uint64_t i_set_is_foilage                       : 1 {};
   uint64_t i_set_is_food                          : 1 {};
   uint64_t i_set_is_gold                          : 1 {};
   uint64_t i_set_is_hazard                        : 1 {};
+  uint64_t i_set_is_heavy                         : 1 {};
   uint64_t i_set_is_key                           : 1 {};
   uint64_t i_set_is_lava                          : 1 {};
   uint64_t i_set_is_light_blocker                 : 1 {};
   uint64_t i_set_is_minion_generator              : 1 {};
   uint64_t i_set_is_monst                         : 1 {};
-  uint64_t i_set_is_obs_wall_or_door              : 1 {};
-  uint64_t i_set_is_obs_destructable              : 1 {};
-  uint64_t i_set_is_poisonous_danger_level        : 1 {};
   uint64_t i_set_is_necrotic_danger_level         : 1 {};
+  uint64_t i_set_is_obs_destructable              : 1 {};
+  uint64_t i_set_is_obs_wall_or_door              : 1 {};
+  uint64_t i_set_is_poisonous_danger_level        : 1 {};
   uint64_t i_set_is_potion                        : 1 {};
+  uint64_t i_set_is_ring                          : 1 {};
   uint64_t i_set_is_ripple                        : 1 {};
   uint64_t i_set_is_rock                          : 1 {};
   uint64_t i_set_is_secret_door                   : 1 {};
   uint64_t i_set_is_shallow_water                 : 1 {};
+  uint64_t i_set_is_shovable                      : 1 {};
   uint64_t i_set_is_skillstone                    : 1 {};
   uint64_t i_set_is_smoke                         : 1 {};
   uint64_t i_set_is_spiderweb                     : 1 {};
   uint64_t i_set_is_sticky                        : 1 {};
-  uint64_t i_set_is_shovable                      : 1 {};
   uint64_t i_set_is_treasure_class_a              : 1 {};
   uint64_t i_set_is_treasure_class_b              : 1 {};
   uint64_t i_set_is_treasure_class_c              : 1 {};
   uint64_t i_set_is_treasure_type                 : 1 {};
   uint64_t i_set_is_wall                          : 1 {};
   uint64_t i_set_is_wand                          : 1 {};
-  uint64_t i_set_is_ring                          : 1 {};
+  uint64_t i_set_water                            : 1 {};
 
   /////////////////////////////////////////////////////////////////////////
   // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
@@ -1019,6 +1020,7 @@ public:
   int is_cursor_can_hover_over(void);
   int is_cursor_can_hover_over_x2_click(void);
   int is_cursor_path_hazard_for_player(void);
+  int is_heavy(void);
   int is_cursor_path(void);
   int is_cursor(void);
   int is_dangerous(Thingp);
@@ -1239,7 +1241,6 @@ public:
   int unused_flag21(void);
   int unused_flag25(void);
   int unused_flag2(void);
-  int is_heavy(void);
   int unused_flag3(void);
   int unused_flag4(void);
   int unused_flag5(void);

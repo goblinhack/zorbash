@@ -22,7 +22,7 @@ def tp_init(name, tiles=[]):
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("Thick and sticky spiderweb.")
     mytp.set_z_depth(my.MAP_DEPTH_OBJ)
-    mytp.set_z_prio(my.MAP_PRIO_INFRONT) # so appears behind spider
+    mytp.set_z_prio(my.MAP_PRIO_IN_FRONT) # so appears behind spider
 
     for t in tiles:
         mytp.set_tile(t)

@@ -897,6 +897,12 @@ int Thing::is_cursor_path_hazard_for_player(void)
   return (tp()->is_cursor_path_hazard_for_player());
 }
 
+int Thing::is_heavy(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->is_heavy());
+}
+
 int Thing::is_fearless(void)
 {
   TRACE_AND_INDENT();
@@ -1393,12 +1399,6 @@ int Thing::unused_flag2(void)
 {
   TRACE_AND_INDENT();
   return (tp()->unused_flag2());
-}
-
-int Thing::is_heavy(void)
-{
-  TRACE_AND_INDENT();
-  return (tp()->is_heavy());
 }
 
 int Thing::is_ring(void)

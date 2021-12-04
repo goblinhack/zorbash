@@ -133,6 +133,10 @@ void Thing::level_pop(void)
     i_set_is_cursor_path_hazard_for_player = false;
     level->unset_is_cursor_path_hazard_for_player(mx, my);
   }
+  if (i_set_is_heavy) {
+    i_set_is_heavy = false;
+    level->unset_is_heavy(mx, my);
+  }
   if (i_set_is_treasure_class_a) {
     i_set_is_treasure_class_a = false;
     level->unset_is_treasure_class_a(mx, my);

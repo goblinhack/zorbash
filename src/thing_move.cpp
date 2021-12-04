@@ -265,6 +265,40 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
       // No getting stuck in webs
       // Also no cleaners stuck in their own gel
       //
+    } else if (is_soft_body() && level->is_heavy(mid_at.x, mid_at.y)) {
+      //
+      // Makes sure ghosts (or the cursor!) do not get stuck under barrels
+      //
+      if (! is_ethereal() && ! is_cursor() && ! is_cursor_path()) {
+        if (is_player()) {
+          if (level->is_spiderweb(mid_at.x, mid_at.y)) {
+            TOPCON("You are trapped under a barrel!");
+            game->tick_begin("trapped in a barrel");
+          } else {
+            TOPCON("You cannot move!");
+            game->tick_begin("trapped in a barrel");
+          }
+          msg(string_sprintf("%%fg=red$!"));
+        }
+        lunge(future_pos);
+
+        //
+        // Shake the web
+        //
+        FOR_ALL_THINGS(level, t, mid_at.x, mid_at.y)
+        {
+          if (t->is_barrel()) {
+            t->wobble(10);
+          }
+          if (t->is_player() || t->is_monst()) {
+            t->wobble(20);
+          }
+        }
+        FOR_ALL_THINGS_END()
+
+        incr_stuck_count();
+        return false;
+      }
     } else if (! is_sticky() && level->is_sticky(mid_at.x, mid_at.y)) {
       //
       // Makes sure ghosts (or the cursor!) do not get stuck in webs.

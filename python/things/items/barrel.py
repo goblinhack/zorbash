@@ -37,8 +37,8 @@ def tp_init(name, text_name):
     mytp.set_is_burnable(True)
     mytp.set_is_cursor_can_hover_over(True)
     mytp.set_is_described_when_hovering_over(True)
-    mytp.set_is_hittable(True)
     mytp.set_is_heavy(True)
+    mytp.set_is_hittable(True)
     mytp.set_is_loggable(True)
     mytp.set_is_shovable(True)
     mytp.set_is_tickable(True) # So it can interact with fire
@@ -50,7 +50,7 @@ def tp_init(name, text_name):
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("A barrel of oil. Why? Don't ask.")
     mytp.set_z_depth(my.MAP_DEPTH_OBJ)
-    mytp.set_z_prio(my.MAP_PRIO_NORMAL)
+    mytp.set_z_prio(my.MAP_PRIO_IN_FRONT)
 
     mytp.set_tile(tile=name)
 

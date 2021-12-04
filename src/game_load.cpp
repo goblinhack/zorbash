@@ -414,6 +414,8 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
   shift++;
   my.t->i_set_is_cursor_path_hazard_for_player = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU;
   shift++;
+  my.t->i_set_is_heavy = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU;
+  shift++;
   my.t->i_set_is_fire = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU;
   shift++;
   my.t->i_set_is_floor = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU;
@@ -556,6 +558,7 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   in >> bits(my.t->_is_dry_grass);
   in >> bits(my.t->_is_enchantstone);
   in >> bits(my.t->_is_cursor_path_hazard_for_player);
+  in >> bits(my.t->_is_heavy);
   in >> bits(my.t->_is_fire);
   in >> bits(my.t->_is_floor);
   in >> bits(my.t->_is_foilage);

@@ -357,6 +357,8 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   shift++;
   bits64 |= (my.t->i_set_is_cursor_path_hazard_for_player ? 1LLU : 0LLU) << shift;
   shift++;
+  bits64 |= (my.t->i_set_is_heavy ? 1LLU : 0LLU) << shift;
+  shift++;
   bits64 |= (my.t->i_set_is_fire ? 1LLU : 0LLU) << shift;
   shift++;
   bits64 |= (my.t->i_set_is_floor ? 1LLU : 0LLU) << shift;
@@ -516,6 +518,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->_is_dry_grass);
   out << bits(my.t->_is_enchantstone);
   out << bits(my.t->_is_cursor_path_hazard_for_player);
+  out << bits(my.t->_is_heavy);
   out << bits(my.t->_is_fire);
   out << bits(my.t->_is_floor);
   out << bits(my.t->_is_foilage);

@@ -53,6 +53,7 @@ public:
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_dry_grass {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_enchantstone {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_cursor_path_hazard_for_player {};
+  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_heavy {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_fire {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_floor {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_foilage {};
@@ -634,6 +635,8 @@ public:
   uint8_t is_corridor(const point &p);
   uint8_t is_cursor_path_hazard_for_player(const int x, const int y);
   uint8_t is_cursor_path_hazard_for_player(const point &p);
+  uint8_t is_heavy(const int x, const int y);
+  uint8_t is_heavy(const point &p);
   uint8_t is_deep_water(const int x, const int y);
   uint8_t is_deep_water(const point &p);
   uint8_t is_descend_dungeon(const int x, const int y);
@@ -755,6 +758,7 @@ public:
   void create(point3d at, int seed);
   void create_sewer_place_remaining_walls(const std::string &what);
   void create_sewer_place_walls(int variant, int block_width, int block_height, int tries);
+  void l_shaped_path_to_diag(std::vector< point > &path);
   void cursor_check_if_scroll_needed(void);
   void cursor_describe(void);
   void cursor_find_on_visible_things(const int16_t minx, const int16_t miny, const int16_t maxx, const int16_t maxy);
@@ -850,6 +854,7 @@ public:
   void set_is_corpse(const int x, const int y);
   void set_is_corridor(const int x, const int y);
   void set_is_cursor_path_hazard_for_player(const int x, const int y);
+  void set_is_heavy(const int x, const int y);
   void set_is_deep_water(const int x, const int y);
   void set_is_descend_dungeon(const int x, const int y);
   void set_is_descend_sewer(const int x, const int y);
@@ -914,6 +919,7 @@ public:
   void unset_is_corpse(const int x, const int y);
   void unset_is_corridor(const int x, const int y);
   void unset_is_cursor_path_hazard_for_player(const int x, const int y);
+  void unset_is_heavy(const int x, const int y);
   void unset_is_deep_water(const int x, const int y);
   void unset_is_descend_dungeon(const int x, const int y);
   void unset_is_descend_sewer(const int x, const int y);

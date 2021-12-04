@@ -189,6 +189,8 @@ PyObject *thing_is_critical_to_level(PyObject *obj, PyObject *args, PyObject *ke
 PyObject *thing_is_cursor_can_hover_over(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_cursor_can_hover_over_x2_click(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_cursor_path_hazard_for_player(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_heavy(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_barrel(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_cursor_path(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_cursor(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_dead_on_end_of_anim(PyObject *obj, PyObject *args, PyObject *keywds);

@@ -1995,6 +1995,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_FUNCTION(level_is_cursor_can_hover_over_at),
     MY_ADD_PYTHON_FUNCTION(level_is_cursor_path_at),
     MY_ADD_PYTHON_FUNCTION(level_is_cursor_path_hazard_for_player_at),
+    MY_ADD_PYTHON_FUNCTION(level_is_heavy_at),
     MY_ADD_PYTHON_FUNCTION(level_is_dead_on_end_of_anim_at),
     MY_ADD_PYTHON_FUNCTION(level_is_dead_on_shove_at),
     MY_ADD_PYTHON_FUNCTION(level_is_debuff_at),
@@ -2316,6 +2317,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_FUNCTION(thing_is_cursor_can_hover_over_x2_click),
     MY_ADD_PYTHON_FUNCTION(thing_is_cursor_path),
     MY_ADD_PYTHON_FUNCTION(thing_is_cursor_path_hazard_for_player),
+    MY_ADD_PYTHON_FUNCTION(thing_is_heavy),
     MY_ADD_PYTHON_FUNCTION(thing_is_dead_on_end_of_anim),
     MY_ADD_PYTHON_FUNCTION(thing_is_dead_or_dying),
     MY_ADD_PYTHON_FUNCTION(thing_is_dead_or_dying_on_shove),
@@ -2662,6 +2664,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_TP_FUNCTION(is_cursor_can_hover_over_x2_click),
     MY_ADD_PYTHON_TP_FUNCTION(is_cursor_path),
     MY_ADD_PYTHON_TP_FUNCTION(is_cursor_path_hazard_for_player),
+    MY_ADD_PYTHON_TP_FUNCTION(is_heavy),
     MY_ADD_PYTHON_TP_FUNCTION(is_dead_on_end_of_anim),
     MY_ADD_PYTHON_TP_FUNCTION(is_dead_on_shove),
     MY_ADD_PYTHON_TP_FUNCTION(is_debuff),
@@ -3254,7 +3257,7 @@ static void python_add_consts(void)
   PyModule_AddIntConstant(my_mod, "MAP_HEIGHT", MAP_HEIGHT);
   PyModule_AddIntConstant(my_mod, "MAP_PRIO_ALWAYS_BEHIND", MAP_PRIO_ALWAYS_BEHIND);
   PyModule_AddIntConstant(my_mod, "MAP_PRIO_BEHIND", MAP_PRIO_BEHIND);
-  PyModule_AddIntConstant(my_mod, "MAP_PRIO_INFRONT", MAP_PRIO_INFRONT);
+  PyModule_AddIntConstant(my_mod, "MAP_PRIO_IN_FRONT", MAP_PRIO_IN_FRONT);
   PyModule_AddIntConstant(my_mod, "MAP_PRIO_NORMAL", MAP_PRIO_NORMAL);
   PyModule_AddIntConstant(my_mod, "RARITY_COMMON", THING_RARITY_COMMON);
   PyModule_AddIntConstant(my_mod, "RARITY_UNCOMMON", THING_RARITY_UNCOMMON);

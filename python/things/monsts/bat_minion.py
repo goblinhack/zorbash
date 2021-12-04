@@ -77,7 +77,7 @@ def tp_init(name, text_name):
     mytp.set_text_description("A little bat.")
     mytp.set_text_hits("claws")
     mytp.set_z_depth(my.MAP_DEPTH_OBJ)
-    mytp.set_z_prio(my.MAP_PRIO_INFRONT)
+    mytp.set_z_prio(my.MAP_PRIO_IN_FRONT)
 
     delay = 70
     mytp.set_tile(tile=name + ".1.100", is_hp_100_percent=True, delay_ms=delay)

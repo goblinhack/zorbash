@@ -226,6 +226,7 @@ private:
   int _is_cursor_can_hover_over_x2_click {};
   int _is_cursor_path {};
   int _is_cursor_path_hazard_for_player {};
+  int _is_heavy {};
   int _is_dead_on_end_of_anim {};
   int _is_dead_on_shove {};
   int _is_debuff {};
@@ -404,7 +405,6 @@ private:
   int _is_spider {};
   int _unused_flag25 {};
   int _unused_flag3 {};
-  int _is_heavy {};
   int _unused_flag4 {};
   int _unused_flag5 {};
   int _unused_flag6 {};
@@ -830,6 +830,7 @@ public:
   int is_cursor_can_hover_over(void) const { return _is_cursor_can_hover_over; }
   int is_cursor_can_hover_over_x2_click(void) const { return _is_cursor_can_hover_over_x2_click; }
   int is_cursor_path_hazard_for_player(void) const { return _is_cursor_path_hazard_for_player; }
+  int is_heavy(void) const { return _is_heavy; }
   int is_cursor_path(void) const { return _is_cursor_path; }
   int is_cursor(void) const { return _is_cursor; }
   int is_dead_on_end_of_anim(void) const { return _is_dead_on_end_of_anim; }
@@ -1008,7 +1009,6 @@ public:
   int is_spider(void) const { return _is_spider; }
   int unused_flag25(void) const { return _unused_flag25; }
   int unused_flag2(void) const { return _unused_flag2; }
-  int is_heavy(void) const { return _is_heavy; }
   int unused_flag3(void) const { return _unused_flag3; }
   int unused_flag4(void) const { return _unused_flag4; }
   int unused_flag5(void) const { return _unused_flag5; }
@@ -1170,6 +1170,7 @@ public:
   void set_is_cursor_can_hover_over_x2_click(int v) { _is_cursor_can_hover_over_x2_click = v; }
   void set_is_cursor(int v) { _is_cursor = v; }
   void set_is_cursor_path_hazard_for_player(int v) { _is_cursor_path_hazard_for_player = v; }
+  void set_is_heavy(int v) { _is_heavy = v; }
   void set_is_cursor_path(int v) { _is_cursor_path = v; }
   void set_is_dead_on_end_of_anim(int v) { _is_dead_on_end_of_anim = v; }
   void set_is_dead_on_shove(int v) { _is_dead_on_shove = v; }
@@ -1405,7 +1406,6 @@ public:
   void set_is_spider(int v) { _is_spider = v; }
   void set_unused_flag25(int v) { _unused_flag25 = v; }
   void set_unused_flag2(int v) { _unused_flag2 = v; }
-  void set_is_heavy(int v) { _is_heavy = v; }
   void set_unused_flag3(int v) { _unused_flag3 = v; }
   void set_unused_flag4(int v) { _unused_flag4 = v; }
   void set_unused_flag5(int v) { _unused_flag5 = v; }
