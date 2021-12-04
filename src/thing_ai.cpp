@@ -151,8 +151,8 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
     //
     // Modify the dmap for terrain.
     //
-    for (int y = miny; y < maxy; y++) {
-      for (int x = minx; x < maxx; x++) {
+    for (int y = miny; y <= maxy; y++) {
+      for (int x = minx; x <= maxx; x++) {
         point p(x, y);
         auto  c = getptr(g.dmap->val, x, y);
         if ((*c < DMAP_IS_PASSABLE) && (*c > DMAP_IS_GOAL)) {
@@ -388,8 +388,8 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
   bool                                                       jump_allowed      = false;
   int                                                        something_changed = 0;
 
-  for (int y = miny; y < maxy; y++) {
-    for (int x = minx; x < maxx; x++) {
+  for (int y = miny; y <= maxy; y++) {
+    for (int x = minx; x <= maxx; x++) {
       set(dmap_can_see->val, x, y, DMAP_IS_WALL);
     }
   }
@@ -410,8 +410,8 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
 
   auto aip = get_aip();
 
-  for (int y = miny; y < maxy; y++) {
-    for (int x = minx; x < maxx; x++) {
+  for (int y = miny; y <= maxy; y++) {
+    for (int x = minx; x <= maxx; x++) {
       point p(x, y);
       if (! get(aip->can_see_ever.can_see, x, y)) {
         continue;
@@ -515,8 +515,8 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
   //
   std::array< std::array< bool, MAP_WIDTH >, MAP_HEIGHT > walked = {};
   {
-    for (int y = miny; y < maxy; y++) {
-      for (int x = minx; x < maxx; x++) {
+    for (int y = miny; y <= maxy; y++) {
+      for (int x = minx; x <= maxx; x++) {
         point p(x, y);
 
         if (p.x >= MAP_WIDTH - MAP_BORDER_ROCK) {
@@ -718,8 +718,8 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
   //
   if (check_for_interrupts) {
     auto seen_map = get_seen_map();
-    for (int y = miny; y < maxy; y++) {
-      for (int x = minx; x < maxx; x++) {
+    for (int y = miny; y <= maxy; y++) {
+      for (int x = minx; x <= maxx; x++) {
 
         if (get(can_jump, x, y)) {
           set(dmap_can_see->val, x, y, DMAP_IS_PASSABLE);
@@ -794,8 +794,8 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
 
   auto aip = get_aip();
 
-  for (int y = miny; y < maxy; y++) {
-    for (int x = minx; x < maxx; x++) {
+  for (int y = miny; y <= maxy; y++) {
+    for (int x = minx; x <= maxx; x++) {
       point p(x, y);
 
       if (! get(aip->can_see_currently.can_see, p.x, p.y)) {
@@ -915,7 +915,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
             dbg("AI: Consider attacking %s%s%s%s", it->to_string().c_str(), is_enemy(it) ? ", is enemy" : "",
                 is_dangerous(it) ? ", is dangerous" : "", is_to_be_avoided(it) ? ", is to be avoided" : "");
 
-            if (is_enemy(it) && (dist < max_dist)) {
+            if (is_enemy(it) && (dist <= max_dist)) {
               if (! is_fearless() && (is_to_be_avoided(it) || is_dangerous(it)) &&
                   (get_health() < get_health_max() / 2)) {
                 //
@@ -963,7 +963,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
                 //
                 GOAL_ADD(GOAL_PRIO_HIGH, (int) (max_dist - dist) * health_diff - goal_penalty, "attack-nearby-monst",
                          it);
-              } else if (dist < max_dist) {
+              } else if (dist <= max_dist) {
                 //
                 // No hunting monsters we cannot see just because we have visited that area before.
                 // How aggressive are we?
@@ -1487,15 +1487,15 @@ bool Thing::ai_tick(bool recursing)
   const float dy = dx;
 
   int minx = std::max(0, (int) (mid_at.x - dx));
-  int maxx = std::min(MAP_WIDTH, (int) (mid_at.x + dx));
+  int maxx = std::min(MAP_WIDTH - 1, (int) (mid_at.x + dx));
   int miny = std::max(0, (int) (mid_at.y - dy));
-  int maxy = std::min(MAP_HEIGHT, (int) (mid_at.y + dy));
+  int maxy = std::min(MAP_HEIGHT - 1, (int) (mid_at.y + dy));
 
   if (is_player()) {
     minx = 0;
-    maxx = MAP_WIDTH;
+    maxx = MAP_WIDTH - 1;
     miny = 0;
-    maxy = MAP_HEIGHT;
+    maxy = MAP_HEIGHT - 1;
   }
 
   bool left         = false;
@@ -1516,11 +1516,11 @@ bool Thing::ai_tick(bool recursing)
   // Update what we can see
   //
   bool light_walls = true;
-  level->fov_calculete(&aip->can_see_currently, mid_at.x, mid_at.y, ai_vision_distance(), light_walls);
+  level->fov_calculete(&aip->can_see_currently, mid_at.x, mid_at.y, ai_vision_distance() + 1, light_walls);
 
   if (! recursing) {
-    for (int y = miny; y < maxy; y++) {
-      for (int x = minx; x < maxx; x++) {
+    for (int y = miny; y <= maxy; y++) {
+      for (int x = minx; x <= maxx; x++) {
         if (aip->can_see_currently.can_see[ x ][ y ]) {
           IF_DEBUG3 { (void) level->thing_new("ai_path2", point(x, y)); }
           set(aip->can_see_ever.can_see, x, y, true);
