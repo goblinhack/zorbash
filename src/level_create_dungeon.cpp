@@ -386,6 +386,11 @@ bool Level::create_dungeon(point3d at, int seed)
         for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
           if (dungeon->is_ascend_dungeon(x, y)) {
             auto t = thing_new("player2", point(x, y));
+            {
+              auto W = thing_new("wand_energy", point(x, y));
+              t->carry(W);
+              t->enchant_without_stone(W);
+            }
 
             {
 #if 0
@@ -442,10 +447,6 @@ bool Level::create_dungeon(point3d at, int seed)
                 t->carry(f);
               }
 
-              {
-                auto W = thing_new("wand_energy", point(x, y));
-                t->carry(W);
-              }
               {
                 auto W = thing_new("wand_descent", point(x, y));
                 t->carry(W);

@@ -415,50 +415,50 @@ int Thing::on_owner_damage_future6(Thingp owner, Thingp hitter, int damage)
 }
 
 ///////////////////////////////////////////////////////////////////////////
-// damage_future7
+// damage_lightning
 ///////////////////////////////////////////////////////////////////////////
-const Dice &Thing::get_damage_future7_dice(void)
+const Dice &Thing::get_damage_lightning_dice(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->get_damage_future7_dice());
+  return (tp()->get_damage_lightning_dice());
 }
 
-const std::string &Thing::get_damage_future7_dice_str(void)
+const std::string &Thing::get_damage_lightning_dice_str(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->get_damage_future7_dice_str());
+  return (tp()->get_damage_lightning_dice_str());
 }
 
-int Thing::get_damage_future7(void)
+int Thing::get_damage_lightning(void)
 {
   TRACE_AND_INDENT();
-  auto roll = tp()->get_damage_future7_dice().roll();
+  auto roll = tp()->get_damage_lightning_dice().roll();
   if (roll) {
     return roll + get_enchant();
   }
   return roll;
 }
 
-int Thing::on_owner_damage_future7(Thingp owner, Thingp hitter, int damage)
+int Thing::on_owner_damage_lightning(Thingp owner, Thingp hitter, int damage)
 {
   verify(MTYPE_THING, owner);
   if (! owner) {
-    err("Cannot owner_damage_future7 null thing");
+    err("Cannot owner_damage_lightning null thing");
     return damage;
   }
 
   verify(MTYPE_THING, hitter);
   if (! hitter) {
-    err("Cannot owner_damage_future7 null thing");
+    err("Cannot owner_damage_lightning null thing");
     return damage;
   }
 
-  auto on_owner_damage_future7 = on_owner_damage_future7_do();
-  if (std::empty(on_owner_damage_future7)) {
+  auto on_owner_damage_lightning = on_owner_damage_lightning_do();
+  if (std::empty(on_owner_damage_lightning)) {
     return damage;
   }
 
-  auto t = split_tokens(on_owner_damage_future7, '.');
+  auto t = split_tokens(on_owner_damage_lightning, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -474,8 +474,8 @@ int Thing::on_owner_damage_future7(Thingp owner, Thingp hitter, int damage)
                           (unsigned int) mid_at.y, (unsigned int) damage);
   }
 
-  ERR("Bad on_owner_damage_future7 call [%s] expected mod:function, got %d elems", on_owner_damage_future7.c_str(),
-      (int) on_owner_damage_future7.size());
+  ERR("Bad on_owner_damage_lightning call [%s] expected mod:function, got %d elems", on_owner_damage_lightning.c_str(),
+      (int) on_owner_damage_lightning.size());
 
   return damage;
 }
@@ -983,7 +983,7 @@ int Thing::get_damage_max(void)
   max_damage      = std::max(max_damage, get_damage_future4_dice().max_roll());
   max_damage      = std::max(max_damage, get_damage_future5_dice().max_roll());
   max_damage      = std::max(max_damage, get_damage_future6_dice().max_roll());
-  max_damage      = std::max(max_damage, get_damage_future7_dice().max_roll());
+  max_damage      = std::max(max_damage, get_damage_lightning_dice().max_roll());
   max_damage      = std::max(max_damage, get_damage_energy_dice().max_roll());
   max_damage      = std::max(max_damage, get_damage_acid_dice().max_roll());
   max_damage      = std::max(max_damage, get_damage_digest_dice().max_roll());
@@ -1007,7 +1007,7 @@ int Thing::get_damage_min(void)
   min_damage      = std::min(min_damage, get_damage_future4_dice().min_roll());
   min_damage      = std::min(min_damage, get_damage_future5_dice().min_roll());
   min_damage      = std::min(min_damage, get_damage_future6_dice().min_roll());
-  min_damage      = std::min(min_damage, get_damage_future7_dice().min_roll());
+  min_damage      = std::min(min_damage, get_damage_lightning_dice().min_roll());
   min_damage      = std::min(min_damage, get_damage_energy_dice().min_roll());
   min_damage      = std::min(min_damage, get_damage_acid_dice().min_roll());
   min_damage      = std::min(min_damage, get_damage_digest_dice().min_roll());

@@ -358,7 +358,8 @@ public:
   bool eat_something(void);
   bool eat(Thingp it);
   bool enchant_random_item(void);
-  bool enchant(Thingp);
+  bool enchant_with_stone(Thingp);
+  bool enchant_without_stone(Thingp);
   bool equip(Thingp w, int equip);
   bool equip_use(bool forced, int equip);
   bool equip_use_may_attack(int equip);
@@ -462,7 +463,7 @@ public:
   int buff_on_damage_future4(Thingp hitter, int damage);
   int buff_on_damage_future5(Thingp hitter, int damage);
   int buff_on_damage_future6(Thingp hitter, int damage);
-  int buff_on_damage_future7(Thingp hitter, int damage);
+  int buff_on_damage_lightning(Thingp hitter, int damage);
   int buff_on_damage_energy(Thingp hitter, int damage);
   int buff_on_damage_acid(Thingp hitter, int damage);
   int buff_on_damage_digest(Thingp hitter, int damage);
@@ -482,7 +483,7 @@ public:
   const Dice &get_damage_future4_dice(void);
   const Dice &get_damage_future5_dice(void);
   const Dice &get_damage_future6_dice(void);
-  const Dice &get_damage_future7_dice(void);
+  const Dice &get_damage_lightning_dice(void);
   const Dice &get_damage_energy_dice(void);
   const Dice &get_damage_acid_dice(void);
   const Dice &get_damage_digest_dice(void);
@@ -519,7 +520,7 @@ public:
   const std::string &get_damage_future4_dice_str(void);
   const std::string &get_damage_future5_dice_str(void);
   const std::string &get_damage_future6_dice_str(void);
-  const std::string &get_damage_future7_dice_str(void);
+  const std::string &get_damage_lightning_dice_str(void);
   const std::string &get_damage_energy_dice_str(void);
   const std::string &get_damage_acid_dice_str(void);
   const std::string &get_damage_digest_dice_str(void);
@@ -564,7 +565,7 @@ public:
   const std::string &on_owner_damage_future4_do(void);
   const std::string &on_owner_damage_future5_do(void);
   const std::string &on_owner_damage_future6_do(void);
-  const std::string &on_owner_damage_future7_do(void);
+  const std::string &on_owner_damage_lightning_do(void);
   const std::string &on_owner_damage_energy_do(void);
   const std::string &on_owner_damage_acid_do(void);
   const std::string &on_owner_damage_digest_do(void);
@@ -609,12 +610,12 @@ public:
 
   int ai_hit_actual(Thingp hitter, Thingp real_hitter, bool crit, bool bite, bool poison, bool necrosis,
                     bool damage_future1, bool damage_future2, bool damage_future3, bool damage_future4,
-                    bool damage_future5, bool damage_future6, bool damage_future7, bool damage_energy,
+                    bool damage_future5, bool damage_future6, bool damage_lightning, bool damage_energy,
                     bool damage_acid, bool damage_digest, int dmg);
 
   int is_hit(Thingp hitter, bool crit, bool bite, bool poison, bool necrosis, bool damage_future1,
              bool damage_future2, bool damage_future3, bool damage_future4, bool damage_future5, bool damage_future6,
-             bool damage_future7, bool damage_energy, bool damage_acid, bool damage_digest, int damage);
+             bool damage_lightning, bool damage_energy, bool damage_acid, bool damage_digest, int damage);
 
   int ai_aggression_level_pct(void);
   int ai_avoid_distance(void);
@@ -635,7 +636,7 @@ public:
   int attack_damage_future4(Thingp hitter, int damage);
   int attack_damage_future5(Thingp hitter, int damage);
   int attack_damage_future6(Thingp hitter, int damage);
-  int attack_damage_future7(Thingp hitter, int damage);
+  int attack_damage_lightning(Thingp hitter, int damage);
   int attack_damage_energy(Thingp hitter, int damage);
   int attack_damage_acid(Thingp hitter, int damage);
   int attack_damage_melee(Thingp hitter, int damage);
@@ -663,7 +664,7 @@ public:
   int damage_future4_chance_d1000(void);
   int damage_future5_chance_d1000(void);
   int damage_future6_chance_d1000(void);
-  int damage_future7_chance_d1000(void);
+  int damage_lightning_chance_d1000(void);
   int damage_energy_chance_d1000(void);
   int damage_acid_chance_d1000(void);
   int damage_melee_chance_d1000(void);
@@ -789,7 +790,7 @@ public:
   int get_damage_future4(void);
   int get_damage_future5(void);
   int get_damage_future6(void);
-  int get_damage_future7(void);
+  int get_damage_lightning(void);
   int get_damage_energy(void);
   int get_damage_acid(void);
   int get_damage_max(void);
@@ -1169,7 +1170,7 @@ public:
   int on_owner_damage_future4(Thingp owner, Thingp hitter, int damage);
   int on_owner_damage_future5(Thingp owner, Thingp hitter, int damage);
   int on_owner_damage_future6(Thingp owner, Thingp hitter, int damage);
-  int on_owner_damage_future7(Thingp owner, Thingp hitter, int damage);
+  int on_owner_damage_lightning(Thingp owner, Thingp hitter, int damage);
   int on_owner_damage_energy(Thingp owner, Thingp hitter, int damage);
   int on_owner_damage_acid(Thingp owner, Thingp hitter, int damage);
   int on_owner_damage_melee(Thingp owner, Thingp hitter, int damage);

@@ -14,7 +14,7 @@ def on_death(me, x, y):
 #
 def tp_init(name, text_name, short_text_name):
     mytp = tp.Tp(name, text_name, short_text_name)
-    mytp.set_damage_melee_dice("1d10") # This is the damage when the monst fires
+    mytp.set_damage_lightning_dice("1d10") # This is the damage when the monst fires
     mytp.set_is_interesting(True)
     mytp.set_is_laser(True)
     mytp.set_is_loggable(True)

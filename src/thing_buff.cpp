@@ -293,7 +293,7 @@ int Thing::buff_on_damage_future6(Thingp hitter, int damage)
   return damage;
 }
 
-int Thing::buff_on_damage_future7(Thingp hitter, int damage)
+int Thing::buff_on_damage_lightning(Thingp hitter, int damage)
 {
   if (! maybe_itemp()) {
     return damage;
@@ -304,7 +304,7 @@ int Thing::buff_on_damage_future7(Thingp hitter, int damage)
   for (const auto &item : get_itemp()->buffs) {
     auto t = level->thing_find(item.id);
     if (t) {
-      damage = t->on_owner_damage_future7(this, hitter, damage);
+      damage = t->on_owner_damage_lightning(this, hitter, damage);
     }
   }
   return damage;

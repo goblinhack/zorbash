@@ -208,8 +208,8 @@ class Tp:
     def set_on_owner_damage_future6_do(self, value):
         my.tp_set_on_owner_damage_future6_do(self, value)
 
-    def set_on_owner_damage_future7_do(self, value):
-        my.tp_set_on_owner_damage_future7_do(self, value)
+    def set_on_owner_damage_lightning_do(self, value):
+        my.tp_set_on_owner_damage_lightning_do(self, value)
 
     def set_on_owner_damage_energy_do(self, value):
         my.tp_set_on_owner_damage_energy_do(self, value)
@@ -814,8 +814,8 @@ class Tp:
     def set_damage_future6_chance_d1000(self, value):
         my.tp_set_damage_future6_chance_d1000(self, value)
 
-    def set_damage_future7_chance_d1000(self, value):
-        my.tp_set_damage_future7_chance_d1000(self, value)
+    def set_damage_lightning_chance_d1000(self, value):
+        my.tp_set_damage_lightning_chance_d1000(self, value)
 
     def set_damage_energy_chance_d1000(self, value):
         my.tp_set_damage_energy_chance_d1000(self, value)
@@ -1177,8 +1177,8 @@ class Tp:
     def set_damage_future6_dice(self, value):
         my.tp_set_damage_future6_dice(self, value)
 
-    def set_damage_future7_dice(self, value):
-        my.tp_set_damage_future7_dice(self, value)
+    def set_damage_lightning_dice(self, value):
+        my.tp_set_damage_lightning_dice(self, value)
 
     def set_damage_energy_dice(self, value):
         my.tp_set_damage_energy_dice(self, value)

@@ -45,7 +45,7 @@ void Thing::on_enchant(void)
   }
 }
 
-bool Thing::enchant(Thingp what)
+bool Thing::enchant_with_stone(Thingp what)
 {
   TRACE_AND_INDENT();
   TOPCON("You enchant %s.", what->text_the().c_str());
@@ -64,8 +64,21 @@ bool Thing::enchant(Thingp what)
     }
   }
   if (! found) {
-    err("no enchantstone found");
+    //
+    // Not really an error if the enchant is automatic
+    //
+    log("no enchantstone found");
   }
+
+  return true;
+}
+
+bool Thing::enchant_without_stone(Thingp what)
+{
+  TRACE_AND_INDENT();
+  TOPCON("You enchant %s.", what->text_the().c_str());
+  what->on_enchant();
+  what->incr_enchant(1);
 
   return true;
 }
@@ -129,5 +142,5 @@ bool Thing::enchant_random_item(void)
 
   auto chosen = cands[ pcg_random_range(0, cands.size()) ];
   log("Enchant this randomly: %s", chosen->to_string().c_str());
-  return enchant(chosen);
+  return enchant_without_stone(chosen);
 }

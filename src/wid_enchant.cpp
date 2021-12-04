@@ -40,7 +40,7 @@ static void wid_enchant_slot(int slot)
   auto player = game->level->player;
   if (player) {
     auto t = enchant_items[ slot ];
-    player->enchant(t);
+    player->enchant_with_stone(t);
     game->tick_begin("enchant an item");
   }
 

@@ -18,7 +18,7 @@ def on_use(owner, item, target, x, y):
     #my.topcon("owner  {} {}".format(my.thing_get_name(owner), my.thing_get_health(owner)))
     #my.topcon("item   {} {}".format(my.thing_get_name(item), my.thing_get_health(item)))
     #my.topcon("target {} {}".format(my.thing_get_name(target), my.thing_get_health(target)))
-    damage = my.thing_get_damage_melee(item)
+    damage = my.thing_get_damage_energy(item)
     enchant = my.thing_get_enchant(item)
     my.thing_set_current_damage(owner, damage + enchant)
 
@@ -52,7 +52,7 @@ def tp_init(name, text_name, short_text_name):
     mytp = tp.Tp(name, text_name, short_text_name)
     mytp.set_charge_count(5)
     mytp.set_collision_hit_priority(5)
-    mytp.set_damage_melee_dice("1d6+6")
+    mytp.set_damage_energy_dice("1d6+6")
     mytp.set_damage_received_doubled_from_fire(True)
     mytp.set_enchant_max(2)
     mytp.set_gfx_animated(True)
