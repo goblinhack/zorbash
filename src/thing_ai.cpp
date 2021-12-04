@@ -307,14 +307,11 @@ bool Thing::ai_create_path_to_single_goal(int minx, int miny, int maxx, int maxy
 #endif
 
   for (auto &result : paths) {
-    std::vector< point > new_move_path;
+    std::vector< point > new_move_path = result.path;
 
-    for (point p : result.path) {
-      if ((p.x == mid_at.x) && (p.y == mid_at.y)) {
-        continue;
-      }
-      new_move_path.push_back(p);
-    }
+    std::reverse(new_move_path.begin(), new_move_path.end());
+
+    path_shorten(new_move_path);
 
     if (new_move_path.empty()) {
       if (level->is_sticky(mid_at.x, mid_at.y)) {
@@ -327,8 +324,6 @@ bool Thing::ai_create_path_to_single_goal(int minx, int miny, int maxx, int maxy
       AI_LOG("", "Goal has no path");
       return false;
     }
-
-    std::reverse(new_move_path.begin(), new_move_path.end());
 
     std::string goal_path_str = "Goal path: ";
     for (auto p1 : new_move_path) {

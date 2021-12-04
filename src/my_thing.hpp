@@ -1446,6 +1446,7 @@ public:
   void clear_age_map(void);
   void clear_can_see_currently(void);
   void clear_can_see_ever(void);
+  void path_shorten(std::vector< point > &path);
   void clear_dmap_can_see(void);
   void clear_interrupt_map(void);
   void clear_move_path(const std::string &why);
