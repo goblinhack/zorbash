@@ -28,10 +28,10 @@ std::string Thing::text_a_or_an(void)
   std::string out = "";
 
   if (is_player() || is_monst()) {
-    if (is_dying) {
-      out += "a dying ";
-    } else if (is_dead) {
+    if (is_dead) {
       out += "a dead ";
+    } else if (is_dying) {
+      out += "a dying ";
     }
   }
 
@@ -73,14 +73,14 @@ std::string Thing::text_the(bool include_owner)
   }
 
   if (is_player() || is_monst()) {
-    if (is_dying) {
-      out += "dying ";
-    } else if (is_dead) {
+    if (is_dead) {
       if (is_undead()) {
         out += "extra dead ";
       } else {
         out += "dead ";
       }
+    } else if (is_dying) {
+      out += "dying ";
     }
   }
 
@@ -110,10 +110,10 @@ std::string Thing::short_text_a_or_an(void)
   std::string out = "";
 
   if (is_player() || is_monst()) {
-    if (is_dying) {
-      out += "a dying ";
-    } else if (is_dead) {
+    if (is_dead) {
       out += "a dead ";
+    } else if (is_dying) {
+      out += "a dying ";
     }
   }
 
