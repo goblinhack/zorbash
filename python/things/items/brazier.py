@@ -6,6 +6,7 @@ def tp_init(name, text_name, tiles=[]):
     mytp = tp.Tp(name, text_name)
     mytp.set_ai_obstacle(True)
     mytp.set_collision_hit_priority(2)
+    mytp.set_damage_crush_dice("1d6")
     mytp.set_gfx_animated_can_hflip(True)
     mytp.set_gfx_animated(True)
     mytp.set_gfx_flickers(True)
@@ -18,9 +19,9 @@ def tp_init(name, text_name, tiles=[]):
     mytp.set_is_corpse_on_death(True)
     mytp.set_is_dead_on_shove(True)
     mytp.set_is_described_when_hovering_over(True)
-    mytp.set_is_heavy(True)
     mytp.set_is_fire(True)
     mytp.set_is_floor_deco(True)
+    mytp.set_is_heavy(True)
     mytp.set_is_shovable(True)
     mytp.set_is_tickable(True) # for pushing and falling
     mytp.set_light_color("orange")
