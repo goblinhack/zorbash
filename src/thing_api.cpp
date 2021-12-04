@@ -1395,10 +1395,10 @@ int Thing::unused_flag2(void)
   return (tp()->unused_flag2());
 }
 
-int Thing::unused_flag30(void)
+int Thing::is_heavy(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->unused_flag30());
+  return (tp()->is_heavy());
 }
 
 int Thing::is_ring(void)
@@ -1713,10 +1713,10 @@ int Thing::damage_future5_chance_d1000(void)
   return (tp()->damage_future5_chance_d1000());
 }
 
-int Thing::damage_future6_chance_d1000(void)
+int Thing::damage_crush_chance_d1000(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->damage_future6_chance_d1000());
+  return (tp()->damage_crush_chance_d1000());
 }
 
 int Thing::damage_lightning_chance_d1000(void)
@@ -6114,10 +6114,10 @@ const std::string &Thing::on_owner_damage_future5_do(void)
   return (tp()->on_owner_damage_future5_do());
 }
 
-const std::string &Thing::on_owner_damage_future6_do(void)
+const std::string &Thing::on_owner_damage_crush_do(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->on_owner_damage_future6_do());
+  return (tp()->on_owner_damage_crush_do());
 }
 
 const std::string &Thing::on_owner_damage_lightning_do(void)

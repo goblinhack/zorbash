@@ -30,7 +30,7 @@ void Thing::necrosis_tick(void)
 
     if (necrosis) {
       decr_necrotized_amount();
-      attack_damage_necrosis(hitter, 1);
+      is_attacked_with_damage_necrosis(hitter, 1);
     }
   }
 }

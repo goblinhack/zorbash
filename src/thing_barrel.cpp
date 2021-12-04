@@ -18,6 +18,7 @@
 void Thing::barrel_tick(void)
 {
   TRACE_AND_INDENT();
+  dbg("barrel check");
   if (is_floating()) {
     return;
   }
@@ -26,7 +27,7 @@ void Thing::barrel_tick(void)
     return;
   }
 
-  if (! is_soft_body()) {
+  if (! is_soft_body() && ! is_barrel()) {
     return;
   }
 
@@ -34,16 +35,29 @@ void Thing::barrel_tick(void)
     return;
   }
 
-  dbg("Crushed by a barrel");
-
-  FOR_ALL_THINGS(level, t, mid_at.x, mid_at.y)
-  {
-    if (! t->is_barrel()) {
-      continue;
+  if (is_barrel()) {
+    //
+    // Find all non barrels and crush them
+    //
+    FOR_ALL_THINGS_THAT_INTERACT(level, t, mid_at.x, mid_at.y)
+    {
+      if (! t->is_barrel()) {
+        t->dbg_("Crushed by a barrel");
+        t->is_attacked_with_damage_crush(this, get_damage_crush());
+      }
     }
-
-    attack_damage_melee(t, t->get_damage_crush());
-    break;
+    FOR_ALL_THINGS_END()
+  } else {
+    //
+    // See if we are under a barrel
+    //
+    FOR_ALL_THINGS_THAT_INTERACT(level, t, mid_at.x, mid_at.y)
+    {
+      if (t->is_barrel()) {
+        log("Crushed by a barrel");
+        is_attacked_with_damage_crush(t, t->get_damage_crush());
+      }
+    }
+    FOR_ALL_THINGS_END()
   }
-  FOR_ALL_THINGS_END()
 }

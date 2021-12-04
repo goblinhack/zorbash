@@ -103,13 +103,13 @@ void               Tp::set_damage_future5_dice(const std::string &v)
   _damage_future5_dice_str = v;
 }
 
-const Dice        &Tp::get_damage_future6_dice(void) const { return _damage_future6_dice; }
-const int          Tp::get_damage_future6(void) const { return _damage_future6_dice.roll(); }
-const std::string &Tp::get_damage_future6_dice_str(void) const { return _damage_future6_dice_str; }
-void               Tp::set_damage_future6_dice(const std::string &v)
+const Dice        &Tp::get_damage_crush_dice(void) const { return _damage_crush_dice; }
+const int          Tp::get_damage_crush(void) const { return _damage_crush_dice.roll(); }
+const std::string &Tp::get_damage_crush_dice_str(void) const { return _damage_crush_dice_str; }
+void               Tp::set_damage_crush_dice(const std::string &v)
 {
-  _damage_future6_dice     = v;
-  _damage_future6_dice_str = v;
+  _damage_crush_dice     = v;
+  _damage_crush_dice_str = v;
 }
 
 const Dice        &Tp::get_damage_lightning_dice(void) const { return _damage_lightning_dice; }
@@ -155,15 +155,6 @@ void               Tp::set_damage_necrosis_dice(const std::string &v)
 {
   _damage_necrosis_dice     = v;
   _damage_necrosis_dice_str = v;
-}
-
-const Dice        &Tp::get_damage_crush_dice(void) const { return _damage_crush_dice; }
-const int          Tp::get_damage_crush(void) const { return _damage_crush_dice.roll(); }
-const std::string &Tp::get_damage_crush_dice_str(void) const { return _damage_crush_dice_str; }
-void               Tp::set_damage_crush_dice(const std::string &v)
-{
-  _damage_crush_dice     = v;
-  _damage_crush_dice_str = v;
 }
 
 const Dice        &Tp::get_damage_bite_dice(void) const { return _damage_bite_dice; }

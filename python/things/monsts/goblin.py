@@ -83,6 +83,7 @@ def tp_init(name, text_name):
     mytp.set_is_monst(True)
     mytp.set_is_moveable(True)
     mytp.set_is_shovable(True)
+    mytp.set_is_soft_body(True)
     mytp.set_is_steal_item_chance_d1000(50)
     mytp.set_is_tickable(True)
     mytp.set_is_weapon_equiper(True)

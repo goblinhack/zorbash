@@ -295,7 +295,7 @@ do
       set_is_able_to_see_in_the_dark \
       set_is_gfx_anim_synced_with_owner \
       set_unused_flag3 \
-      set_unused_flag30 \
+      set_is_heavy \
       set_unused_flag4 \
       set_unused_flag5 \
       set_unused_flag6 \

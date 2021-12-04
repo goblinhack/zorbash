@@ -58,6 +58,7 @@ def tp_init(name, text_name):
     mytp.set_is_monst(True)
     mytp.set_is_moveable(True)
     mytp.set_is_shovable(True)
+    mytp.set_is_soft_body(True)
     mytp.set_is_tickable(True)
     mytp.set_long_text_description("A snarling mass of flying cuteness. They don't see so well, so best to keep far away.")
     mytp.set_monst_size(my.MONST_SIZE_NORMAL)

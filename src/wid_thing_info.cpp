@@ -146,7 +146,7 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
   wid_thing_info_add_damage_future3(wid_popup_window, t);
   wid_thing_info_add_damage_future4(wid_popup_window, t);
   wid_thing_info_add_damage_future5(wid_popup_window, t);
-  wid_thing_info_add_damage_future6(wid_popup_window, t);
+  wid_thing_info_add_damage_crush(wid_popup_window, t);
   wid_thing_info_add_damage_lightning(wid_popup_window, t);
   wid_thing_info_add_damage_energy(wid_popup_window, t);
   wid_thing_info_add_damage_acid(wid_popup_window, t);
@@ -208,7 +208,7 @@ WidPopup *Game::wid_thing_info_create_popup_compact(const std::vector< Thingp > 
     wid_thing_info_add_damage_future3(wid_popup_window, t);
     wid_thing_info_add_damage_future4(wid_popup_window, t);
     wid_thing_info_add_damage_future5(wid_popup_window, t);
-    wid_thing_info_add_damage_future6(wid_popup_window, t);
+    wid_thing_info_add_damage_crush(wid_popup_window, t);
     wid_thing_info_add_damage_lightning(wid_popup_window, t);
     wid_thing_info_add_damage_energy(wid_popup_window, t);
     wid_thing_info_add_damage_acid(wid_popup_window, t);
@@ -803,23 +803,23 @@ void Game::wid_thing_info_add_damage_future5(WidPopup *w, Thingp t)
   }
 }
 
-void Game::wid_thing_info_add_damage_future6(WidPopup *w, Thingp t)
+void Game::wid_thing_info_add_damage_crush(WidPopup *w, Thingp t)
 {
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
   char tmp2[ MAXSHORTSTR ];
 
   if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_item_magical()) {
-    auto damage_future6_dice = t->get_damage_future6_dice();
-    auto min_value           = damage_future6_dice.min_roll();
-    auto max_value           = damage_future6_dice.max_roll();
+    auto damage_crush_dice = t->get_damage_crush_dice();
+    auto min_value           = damage_crush_dice.min_roll();
+    auto max_value           = damage_crush_dice.max_roll();
     if (min_value > 0) {
       if (min_value == max_value) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->get_damage_future6_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$damage_future6   %17s````", tmp2);
+        snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->get_damage_crush_dice_str().c_str());
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$damage_crush   %17s````", tmp2);
       } else {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->get_damage_future6_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$damage_future6   %17s````", tmp2);
+        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->get_damage_crush_dice_str().c_str());
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$damage_crush   %17s````", tmp2);
       }
       w->log(tmp);
     }

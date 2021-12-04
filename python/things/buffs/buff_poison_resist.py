@@ -32,7 +32,7 @@ def on_owner_damage_future4(me, owner, hitter, x, y, damage):
 def on_owner_damage_future5(me, owner, hitter, x, y, damage):
     return damage
 
-def on_owner_damage_future6(me, owner, hitter, x, y, damage):
+def on_owner_damage_crush(me, owner, hitter, x, y, damage):
     return damage
 
 def on_owner_damage_lightning(me, owner, hitter, x, y, damage):
@@ -79,18 +79,18 @@ def tp_init(name, text_name):
     mytp.set_is_buff(True)
     mytp.set_is_loggable(True)
     mytp.set_long_text_description("Poison causes you 50 percent less damage.")
+    mytp.set_on_owner_damage_acid_do("buff_poison_resist.on_owner_damage_acid()")
     mytp.set_on_owner_damage_bite_do("buff_bite_resist.on_owner_damage_bite()")
     mytp.set_on_owner_damage_constitution_do("buff_poison_resist.on_owner_damage_constitution()")
+    mytp.set_on_owner_damage_crush_do("buff_poison_resist.on_owner_damage_crush()")
     mytp.set_on_owner_damage_digest_do("buff_poison_resist.on_owner_damage_digest()")
+    mytp.set_on_owner_damage_energy_do("buff_poison_resist.on_owner_damage_energy()")
     mytp.set_on_owner_damage_future1_do("buff_poison_resist.on_owner_damage_future1()")
     mytp.set_on_owner_damage_future2_do("buff_poison_resist.on_owner_damage_future2()")
     mytp.set_on_owner_damage_future3_do("buff_poison_resist.on_owner_damage_future3()")
     mytp.set_on_owner_damage_future4_do("buff_poison_resist.on_owner_damage_future4()")
     mytp.set_on_owner_damage_future5_do("buff_poison_resist.on_owner_damage_future5()")
-    mytp.set_on_owner_damage_future6_do("buff_poison_resist.on_owner_damage_future6()")
     mytp.set_on_owner_damage_lightning_do("buff_poison_resist.on_owner_damage_lightning()")
-    mytp.set_on_owner_damage_energy_do("buff_poison_resist.on_owner_damage_energy()")
-    mytp.set_on_owner_damage_acid_do("buff_poison_resist.on_owner_damage_acid()")
     mytp.set_on_owner_damage_melee_do("buff_poison_resist.on_owner_damage_melee()")
     mytp.set_on_owner_damage_necrosis_do("buff_poison_resist.on_owner_damage_necrosis()")
     mytp.set_on_owner_damage_poison_do("buff_poison_resist.on_owner_damage_poison()")

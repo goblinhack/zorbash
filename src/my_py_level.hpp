@@ -23,7 +23,7 @@ PyObject *level_damage_future2_chance_d1000_at(PyObject *obj, PyObject *args, Py
 PyObject *level_damage_future3_chance_d1000_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_damage_future4_chance_d1000_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_damage_future5_chance_d1000_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_damage_future6_chance_d1000_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_damage_crush_chance_d1000_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_damage_lightning_chance_d1000_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_damage_energy_chance_d1000_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_damage_acid_chance_d1000_at(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -265,7 +265,7 @@ PyObject *level_is_able_to_jump_without_tiring_at(PyObject *obj, PyObject *args,
 PyObject *level_is_spider_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag25_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag2_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag30_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_heavy_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag3_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag4_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag5_at(PyObject *obj, PyObject *args, PyObject *keywds);

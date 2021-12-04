@@ -155,7 +155,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
                          Thingp real_hitter, // who fired the arrow?
                          bool crit, bool attack_bite, bool attack_poison, bool attack_necrosis, bool attack_future1,
                          bool attack_future2, bool attack_future3, bool attack_future4, bool attack_future5,
-                         bool attack_future6, bool attack_lightning, bool attack_energy, bool attack_acid,
+                         bool attack_crush, bool attack_lightning, bool attack_energy, bool attack_acid,
                          bool attack_digest, int damage)
 {
   TRACE_AND_INDENT();
@@ -226,13 +226,13 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     } else {
       real_hitter->log("Attack damage_future5 damage %d on %s", damage, to_string().c_str());
     }
-  } else if (attack_future6) {
-    damage = buff_on_damage_future6(real_hitter, damage);
+  } else if (attack_crush) {
+    damage = buff_on_damage_crush(real_hitter, damage);
     if (! damage) {
-      real_hitter->log("No damage_future6 damage on %s", to_string().c_str());
+      real_hitter->log("No damage_crush damage on %s", to_string().c_str());
       return false;
     } else {
-      real_hitter->log("Attack damage_future6 damage %d on %s", damage, to_string().c_str());
+      real_hitter->log("Attack damage_crush damage %d on %s", damage, to_string().c_str());
     }
   } else if (attack_lightning) {
     damage = buff_on_damage_lightning(real_hitter, damage);
@@ -624,6 +624,9 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       } else if (attack_lightning) {
         TOPCON("%%fg=orange$%s electrocutes you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(), damage);
         msg("Brzzt!");
+      } else if (attack_crush) {
+        TOPCON("%%fg=orange$You are being crushed by %s!%%fg=reset$", real_hitter->text_the().c_str());
+        msg("Ouch!");
       } else if (attack_digest) {
         TOPCON("%%fg=red$You are being consumed by %s!%%fg=reset$", real_hitter->text_the().c_str());
         msg("Gulp!");
@@ -851,8 +854,8 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
 //
 int Thing::is_hit(Thingp hitter, bool crit, bool attack_bite, bool attack_poison, bool attack_necrosis,
                   bool attack_future1, bool attack_future2, bool attack_future3, bool attack_future4,
-                  bool attack_future5, bool attack_future6, bool attack_lightning, bool attack_energy,
-                  bool attack_acid, bool attack_digest, int damage)
+                  bool attack_future5, bool attack_crush, bool attack_lightning, bool attack_energy, bool attack_acid,
+                  bool attack_digest, int damage)
 {
   TRACE_AND_INDENT();
   if (attack_bite || attack_digest) {
@@ -989,7 +992,7 @@ int Thing::is_hit(Thingp hitter, bool crit, bool attack_bite, bool attack_poison
 
   hit_and_destroyed =
       ai_hit_actual(hitter, real_hitter, crit, attack_bite, attack_poison, attack_necrosis, attack_future1,
-                    attack_future2, attack_future3, attack_future4, attack_future5, attack_future6, attack_lightning,
+                    attack_future2, attack_future3, attack_future4, attack_future5, attack_crush, attack_lightning,
                     attack_energy, attack_acid, attack_digest, damage);
 
   return (hit_and_destroyed);

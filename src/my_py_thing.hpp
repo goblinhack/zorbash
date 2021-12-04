@@ -89,7 +89,7 @@ PyObject *thing_damage_future2_chance_d1000(PyObject *obj, PyObject *args, PyObj
 PyObject *thing_damage_future3_chance_d1000(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_damage_future4_chance_d1000(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_damage_future5_chance_d1000(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_damage_future6_chance_d1000(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_damage_crush_chance_d1000(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_damage_lightning_chance_d1000(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_damage_energy_chance_d1000(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_damage_acid_chance_d1000(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -342,7 +342,7 @@ PyObject *thing_is_able_to_jump_without_tiring(PyObject *obj, PyObject *args, Py
 PyObject *thing_is_spider(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag25(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag2(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag30(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_heavy(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag3(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag4(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag5(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -363,7 +363,7 @@ PyObject *thing_get_damage_future2(PyObject *obj, PyObject *args, PyObject *keyw
 PyObject *thing_get_damage_future3(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_get_damage_future4(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_get_damage_future5(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_get_damage_future6(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_get_damage_crush(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_get_damage_lightning(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_get_damage_energy(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_get_damage_acid(PyObject *obj, PyObject *args, PyObject *keywds);

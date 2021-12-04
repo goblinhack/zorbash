@@ -234,6 +234,31 @@ ThingShoved Thing::try_to_shove(point future_pos)
   auto  y     = future_pos.y;
   auto  delta = point(x, y) - mid_at;
   point p(future_pos.x, future_pos.y);
+
+  //
+  // Try to shove heavy things first.
+  //
+  FOR_ALL_THINGS_THAT_INTERACT(level, it, p.x, p.y)
+  {
+    if (this == it) {
+      continue;
+    }
+    dbg("Shove candidate, %s", it->to_string().c_str());
+
+    if (! it->is_shovable()) {
+      continue;
+    }
+
+    if (! it->is_heavy()) {
+      continue;
+    }
+
+    dbg("Shove heavy candidate, %s", it->to_string().c_str());
+    point shove_delta = delta;
+    return (try_to_shove(it, shove_delta));
+  }
+  FOR_ALL_THINGS_END()
+
   FOR_ALL_THINGS_THAT_INTERACT(level, it, p.x, p.y)
   {
     if (this == it) {

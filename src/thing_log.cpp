@@ -3,6 +3,7 @@
 // See the README.md file for license info.
 //
 
+#include "my_backtrace.hpp"
 #include "my_console.hpp"
 #include "my_game.hpp"
 #include "my_level.hpp"
@@ -13,7 +14,6 @@
 #include "my_sys.hpp"
 #include "my_thing.hpp"
 #include "my_time.hpp"
-#include "my_backtrace.hpp"
 #include "my_wid_botcon.hpp"
 #include "my_wid_console.hpp"
 #include "my_wid_topcon.hpp"
@@ -39,6 +39,20 @@ void Thing::log_(const char *fmt, va_list args)
 
 void Thing::log(const char *fmt, ...)
 {
+  verify(MTYPE_THING, this);
+  log_catchup_missing_indent_levels();
+
+  auto    t = this;
+  va_list args;
+  va_start(args, fmt);
+  t->log_(fmt, args);
+  va_end(args);
+}
+
+void Thing::dbg_(const char *fmt, ...)
+{
+  IF_NODEBUG { return; }
+
   verify(MTYPE_THING, this);
   log_catchup_missing_indent_levels();
 

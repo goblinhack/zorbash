@@ -198,7 +198,7 @@ public:
   void wid_thing_info_add_damage_future3(WidPopup *w, Thingp t);
   void wid_thing_info_add_damage_future4(WidPopup *w, Thingp t);
   void wid_thing_info_add_damage_future5(WidPopup *w, Thingp t);
-  void wid_thing_info_add_damage_future6(WidPopup *w, Thingp t);
+  void wid_thing_info_add_damage_crush(WidPopup *w, Thingp t);
   void wid_thing_info_add_damage_lightning(WidPopup *w, Thingp t);
   void wid_thing_info_add_damage_energy(WidPopup *w, Thingp t);
   void wid_thing_info_add_damage_acid(WidPopup *w, Thingp t);
