@@ -390,7 +390,7 @@ bool Thing::attack(point future_pos)
   return (move(future_pos, up, down, left, right, attack, idle, shove_allowed, attack_allowed));
 }
 
-bool Thing::attack(Thingp victim)
+bool Thing::attack(Thingp victim, bool prefer_attack_with_jaws)
 {
   TRACE_AND_INDENT();
   dbg("Attack %s", victim->to_string().c_str());
@@ -460,7 +460,7 @@ bool Thing::attack(Thingp victim)
   //
   // Chance of poison damage?
   //
-  if (! damage_set) {
+  if (! damage_set || prefer_attack_with_jaws) {
     if ((int) pcg_random_range(0, 1000) < damage_poison_chance_d1000()) {
       int damage_poison = get_damage_poison();
       if (damage_poison > 0) {
@@ -613,7 +613,7 @@ bool Thing::attack(Thingp victim)
   //
   // Chance of necrosis damage?
   //
-  if (! damage_set) {
+  if (! damage_set || prefer_attack_with_jaws) {
     if ((int) pcg_random_range(0, 1000) < damage_necrosis_chance_d1000()) {
       int damage_necrosis = get_damage_necrosis();
       if (damage_necrosis > 0) {
@@ -627,7 +627,7 @@ bool Thing::attack(Thingp victim)
   //
   // Bite?
   //
-  if (! damage_set) {
+  if (! damage_set || prefer_attack_with_jaws) {
     if ((int) pcg_random_range(0, 1000) < damage_bite_chance_d1000()) {
       int damage_bite = get_damage_bite();
       if (damage_bite > 0) {
@@ -665,9 +665,21 @@ bool Thing::attack(Thingp victim)
   //
   if (is_engulfer()) {
     if (victim->mid_at == mid_at) {
-      damage        = get_damage_digest();
-      attack_digest = true;
-      damage_set    = true;
+      damage          = get_damage_digest();
+      attack_poison   = false;
+      attack_future1  = false;
+      attack_future2  = false;
+      attack_future3  = false;
+      attack_future4  = false;
+      attack_future5  = false;
+      attack_future6  = false;
+      attack_future7  = false;
+      attack_future8  = false;
+      attack_future9  = false;
+      attack_digest   = true;
+      attack_necrosis = false;
+      attack_bite     = false;
+      damage_set      = true;
     }
   }
 
@@ -807,6 +819,7 @@ bool Thing::attack(Thingp victim)
 
   return false;
 }
+bool Thing::bite(Thingp victim) { return attack(victim, true); }
 
 int Thing::attack_damage_melee(Thingp hitter, int damage)
 {

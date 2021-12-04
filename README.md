@@ -4,7 +4,6 @@
 <!--                                                                                                                                              -->
 <!-- Next todo                                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
-<!-- - fix digest damage                                                                                                                          -->
 <!-- - acid, crush, fire, cold, energy and lightning damage                                                                                       -->
 <!-- - test poison rings                                                                                                                          -->
 <!-- - necro ring                                                                                                                                 -->

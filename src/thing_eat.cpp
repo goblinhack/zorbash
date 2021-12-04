@@ -124,42 +124,7 @@ bool Thing::eat(Thingp victim)
       dbg("Eating %s", victim->text_the().c_str());
 
       if (victim->is_monst() || victim->is_player()) {
-        if (is_engulfer() && (victim->mid_at == mid_at)) {
-          int damage_bite = get_damage_digest();
-          if (damage_bite) {
-            victim->attack_damage_bite(this, damage_bite);
-            return true;
-          }
-        }
-
-        //
-        // Chance of poison damage?
-        //
-        if ((int) pcg_random_range(0, 1000) < damage_poison_chance_d1000()) {
-          int damage_poison = get_damage_poison();
-          if (damage_poison > 0) {
-            victim->attack_damage_poison(this, damage_poison);
-            return true;
-          }
-        }
-
-        //
-        // Chance of necrosis damage?
-        //
-        if ((int) pcg_random_range(0, 1000) < damage_necrosis_chance_d1000()) {
-          int damage_necrosis = get_damage_necrosis();
-          if (damage_necrosis > 0) {
-            victim->attack_damage_necrosis(this, damage_necrosis);
-            return true;
-          }
-        }
-
-        int damage_bite = get_damage_bite();
-        if (damage_bite) {
-          victim->attack_damage_bite(this, damage_bite);
-          return true;
-        }
-        return false;
+        return bite(victim);
       } else {
         return consume(victim);
       }

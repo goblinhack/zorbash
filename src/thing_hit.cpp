@@ -136,86 +136,114 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
   if (attack_poison) {
     damage = buff_on_damage_poison(real_hitter, damage);
     if (! damage) {
-      real_hitter->log("No poison damage");
+      real_hitter->log("No poison damage on %s", to_string().c_str());
       return false;
+    } else {
+      real_hitter->log("Attack poison damage %d on %s", damage, to_string().c_str());
     }
   } else if (attack_future1) {
     damage = buff_on_damage_future1(real_hitter, damage);
     if (! damage) {
-      real_hitter->log("No damage_future1 damage");
+      real_hitter->log("No damage_future1 damage on %s", to_string().c_str());
       return false;
+    } else {
+      real_hitter->log("Attack damage_future1 damage %d on %s", damage, to_string().c_str());
     }
   } else if (attack_future2) {
     damage = buff_on_damage_future2(real_hitter, damage);
     if (! damage) {
-      real_hitter->log("No damage_future2 damage");
+      real_hitter->log("No damage_future2 damage on %s", to_string().c_str());
       return false;
+    } else {
+      real_hitter->log("Attack damage_future2 damage %d on %s", damage, to_string().c_str());
     }
   } else if (attack_future3) {
     damage = buff_on_damage_future3(real_hitter, damage);
     if (! damage) {
-      real_hitter->log("No damage_future3 damage");
+      real_hitter->log("No damage_future3 damage on %s", to_string().c_str());
       return false;
+    } else {
+      real_hitter->log("Attack damage_future3 damage %d on %s", damage, to_string().c_str());
     }
   } else if (attack_future4) {
     damage = buff_on_damage_future4(real_hitter, damage);
     if (! damage) {
-      real_hitter->log("No damage_future4 damage");
+      real_hitter->log("No damage_future4 damage on %s", to_string().c_str());
       return false;
+    } else {
+      real_hitter->log("Attack damage_future4 damage %d on %s", damage, to_string().c_str());
     }
   } else if (attack_future5) {
     damage = buff_on_damage_future5(real_hitter, damage);
     if (! damage) {
-      real_hitter->log("No damage_future5 damage");
+      real_hitter->log("No damage_future5 damage on %s", to_string().c_str());
       return false;
+    } else {
+      real_hitter->log("Attack damage_future5 damage %d on %s", damage, to_string().c_str());
     }
   } else if (attack_future6) {
     damage = buff_on_damage_future6(real_hitter, damage);
     if (! damage) {
-      real_hitter->log("No damage_future6 damage");
+      real_hitter->log("No damage_future6 damage on %s", to_string().c_str());
       return false;
+    } else {
+      real_hitter->log("Attack damage_future6 damage %d on %s", damage, to_string().c_str());
     }
   } else if (attack_future7) {
     damage = buff_on_damage_future7(real_hitter, damage);
     if (! damage) {
-      real_hitter->log("No damage_future7 damage");
+      real_hitter->log("No damage_future7 damage on %s", to_string().c_str());
       return false;
+    } else {
+      real_hitter->log("Attack damage_future7 damage %d on %s", damage, to_string().c_str());
     }
   } else if (attack_future8) {
     damage = buff_on_damage_future8(real_hitter, damage);
     if (! damage) {
-      real_hitter->log("No damage_future8 damage");
+      real_hitter->log("No damage_future8 damage on %s", to_string().c_str());
       return false;
+    } else {
+      real_hitter->log("Attack damage_future8 damage %d on %s", damage, to_string().c_str());
     }
   } else if (attack_future9) {
     damage = buff_on_damage_future9(real_hitter, damage);
     if (! damage) {
-      real_hitter->log("No damage_future9 damage");
+      real_hitter->log("No damage_future9 damage on %s", to_string().c_str());
       return false;
+    } else {
+      real_hitter->log("Attack damage_future9 damage %d on %s", damage, to_string().c_str());
     }
   } else if (attack_digest) {
     damage = buff_on_damage_digest(real_hitter, damage);
     if (! damage) {
-      real_hitter->log("No damage_digest damage");
+      real_hitter->log("No damage_digest damage on %s", to_string().c_str());
       return false;
+    } else {
+      real_hitter->log("Attack damage_digest damage %d on %s", damage, to_string().c_str());
     }
   } else if (attack_necrosis) {
     damage = buff_on_damage_necrosis(real_hitter, damage);
     if (! damage) {
-      real_hitter->log("No necrosis damage");
+      real_hitter->log("No necrosis damage on %s", to_string().c_str());
       return false;
+    } else {
+      real_hitter->log("Attack necrosis damage %d on %s", damage, to_string().c_str());
     }
   } else if (attack_bite) {
     damage = buff_on_damage_bite(real_hitter, damage);
     if (! damage) {
-      real_hitter->log("No bite damage");
+      real_hitter->log("No bite damage on %s", to_string().c_str());
       return false;
+    } else {
+      real_hitter->log("Attack bite damage %d on %s", damage, to_string().c_str());
     }
   } else {
     damage = buff_on_damage_melee(real_hitter, damage);
     if (! damage) {
-      real_hitter->log("No melee damage");
+      real_hitter->log("No melee damage on %s", to_string().c_str());
       return false;
+    } else {
+      real_hitter->log("Attack melee damage %d on %s", damage, to_string().c_str());
     }
   }
 
