@@ -608,12 +608,29 @@ public:
   float how_far_i_can_jump(void);
   float update_wobble(void);
 
-  int ai_hit_actual(Thingp hitter, Thingp real_hitter, bool crit, bool bite, bool poison, bool necrosis, bool damage_future1,
-                    bool damage_future2, bool damage_future3, bool damage_future4, bool damage_future5, bool damage_future6, bool damage_future7, bool damage_future8, bool damage_future9,
-                    bool damage_future10, int dmg);
+  int ai_hit_actual(Thingp hitter, Thingp real_hitter, bool crit, bool bite, bool poison, bool necrosis,
+                    bool damage_future1, bool damage_future2, bool damage_future3, bool damage_future4,
+                    bool damage_future5, bool damage_future6, bool damage_future7, bool damage_future8,
+                    bool damage_future9, bool damage_future10, int dmg);
 
-  int is_hit(Thingp hitter, bool crit, bool bite, bool poison, bool necrosis, bool damage_future1, bool damage_future2, bool damage_future3,
-             bool damage_future4, bool damage_future5, bool damage_future6, bool damage_future7, bool damage_future8, bool damage_future9, bool damage_future10, int damage);
+  int is_hit(Thingp hitter, bool crit, bool bite, bool poison, bool necrosis, bool damage_future1,
+             bool damage_future2, bool damage_future3, bool damage_future4, bool damage_future5, bool damage_future6,
+             bool damage_future7, bool damage_future8, bool damage_future9, bool damage_future10, int damage);
+
+  int attack_damage_poison(Thingp hitter, int damage);
+  int attack_damage_necrosis(Thingp hitter, int damage);
+  int attack_damage_bite(Thingp hitter, int damage);
+  int attack_damage_melee(Thingp hitter, int damage);
+  int attack_damage_future1(Thingp hitter, int damage);
+  int attack_damage_future2(Thingp hitter, int damage);
+  int attack_damage_future3(Thingp hitter, int damage);
+  int attack_damage_future4(Thingp hitter, int damage);
+  int attack_damage_future5(Thingp hitter, int damage);
+  int attack_damage_future6(Thingp hitter, int damage);
+  int attack_damage_future7(Thingp hitter, int damage);
+  int attack_damage_future8(Thingp hitter, int damage);
+  int attack_damage_future9(Thingp hitter, int damage);
+  int attack_damage_future10(Thingp hitter, int damage);
 
   int ai_aggression_level_pct(void);
   int ai_avoid_distance(void);
@@ -972,7 +989,6 @@ public:
   int is_ascend_sewer(void);
   int is_attackable_by_monst(void);
   int is_attackable_by_player(void);
-  int is_melee_attacked_by(Thingp hitter, int damage);
   int is_auto_collect_item(void);
   int is_auto_equipped(void);
   int is_auto_throw(void);
@@ -982,7 +998,6 @@ public:
   int is_bag_item(void);
   int is_bag(void);
   int is_barrel(void);
-  int is_bitten_by(Thingp hitter, int damage);
   int is_bleeder(void);
   int is_blood_eater(void);
   int is_blood_splatter(void);
@@ -1080,14 +1095,12 @@ public:
   int is_moveable(void);
   int is_msg(void);
   int is_necrotic_danger_level(void);
-  int is_necrotized_by(Thingp hitter, int damage);
   int is_no_tile(void);
   int is_obs_destructable(void);
   int is_obs_wall_or_door(void);
   int is_openable(void);
   int is_organic(void);
   int is_player(void);
-  int is_poisoned_by(Thingp hitter, int damage);
   int is_poisonous_danger_level(void);
   int is_potion_eater(void);
   int is_potion(void);

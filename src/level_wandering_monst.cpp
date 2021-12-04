@@ -72,4 +72,3 @@ bool Level::create_wandering_monster(void)
   }
   return false;
 }
-

@@ -127,7 +127,7 @@ bool Thing::eat(Thingp victim)
         if (is_engulfer() && (victim->mid_at == mid_at)) {
           int damage_bite = get_damage_digest();
           if (damage_bite) {
-            victim->is_bitten_by(this, damage_bite);
+            victim->attack_damage_bite(this, damage_bite);
             return true;
           }
         }
@@ -138,7 +138,7 @@ bool Thing::eat(Thingp victim)
         if ((int) pcg_random_range(0, 1000) < damage_poison_chance_d1000()) {
           int damage_poison = get_damage_poison();
           if (damage_poison > 0) {
-            victim->is_poisoned_by(this, damage_poison);
+            victim->attack_damage_poison(this, damage_poison);
             return true;
           }
         }
@@ -149,14 +149,14 @@ bool Thing::eat(Thingp victim)
         if ((int) pcg_random_range(0, 1000) < damage_necrosis_chance_d1000()) {
           int damage_necrosis = get_damage_necrosis();
           if (damage_necrosis > 0) {
-            victim->is_necrotized_by(this, damage_necrosis);
+            victim->attack_damage_necrosis(this, damage_necrosis);
             return true;
           }
         }
 
         int damage_bite = get_damage_bite();
         if (damage_bite) {
-          victim->is_bitten_by(this, damage_bite);
+          victim->attack_damage_bite(this, damage_bite);
           return true;
         }
         return false;

@@ -46,7 +46,7 @@ void Thing::poison_tick(void)
     }
 
     if (poison) {
-      is_poisoned_by(hitter, poison);
+      attack_damage_poison(hitter, poison);
     }
   }
 }

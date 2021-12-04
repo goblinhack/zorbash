@@ -108,8 +108,10 @@ void Thing::on_you_bite_attack(void)
 
 int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
                          Thingp real_hitter, // who fired the arrow?
-                         bool crit, bool bite, bool poison, bool necrosis, bool damage_future1, bool damage_future2, bool damage_future3, bool damage_future4,
-                         bool damage_future5, bool damage_future6, bool damage_future7, bool damage_future8, bool damage_future9, bool damage_future10, int damage)
+                         bool crit, bool attack_bite, bool attack_poison, bool attack_necrosis, bool damage_future1,
+                         bool damage_future2, bool damage_future3, bool damage_future4, bool damage_future5,
+                         bool damage_future6, bool damage_future7, bool damage_future8, bool damage_future9,
+                         bool damage_future10, int damage)
 {
   TRACE_AND_INDENT();
   if (! hitter) {
@@ -131,7 +133,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     damage *= 2;
   }
 
-  if (poison) {
+  if (attack_poison) {
     damage = buff_on_damage_poison(real_hitter, damage);
     if (! damage) {
       real_hitter->log("No poison damage");
@@ -197,13 +199,13 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       real_hitter->log("No damage_future10 damage");
       return false;
     }
-  } else if (necrosis) {
+  } else if (attack_necrosis) {
     damage = buff_on_damage_necrosis(real_hitter, damage);
     if (! damage) {
       real_hitter->log("No necrosis damage");
       return false;
     }
-  } else if (bite) {
+  } else if (attack_bite) {
     damage = buff_on_damage_bite(real_hitter, damage);
     if (! damage) {
       real_hitter->log("No bite damage");
@@ -332,7 +334,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
   //
   // Poison attack
   //
-  if (poison) {
+  if (attack_poison) {
     if (environ_prefers_poison()) {
       if (hitter->is_poisonous_danger_level() || real_hitter->is_poisonous_danger_level()) {
         if (is_player()) {
@@ -354,7 +356,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
   //
   // Necrotic attack
   //
-  if (necrosis) {
+  if (attack_necrosis) {
     if (is_undead() || is_ethereal()) {
       if (hitter->is_necrotic_danger_level() || real_hitter->is_necrotic_danger_level()) {
         if (is_player()) {
@@ -501,9 +503,9 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       //
       // You hit yourself
       //
-      if (poison) {
+      if (attack_poison) {
         TOPCON("%%fg=yellow$Poison circulates through your veins for %d damage!%%fg=reset$", damage);
-      } else if (necrosis) {
+      } else if (attack_necrosis) {
         TOPCON("%%fg=limegreen$Your skin is falling away in chunks!%%fg=reset$");
       } else if (crit) {
         TOPCON("%%fg=red$You CRIT yourself for %d damage!%%fg=reset$", damage);
@@ -518,10 +520,10 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
         TOPCON("%%fg=orange$You hurt yourself for %d damage with %s!%%fg=reset$", damage, hitter->text_the().c_str());
       }
     } else {
-      if (poison) {
+      if (attack_poison) {
         TOPCON("%%fg=yellow$%s's bite poisons you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(),
                damage);
-      } else if (necrosis) {
+      } else if (attack_necrosis) {
         TOPCON("%%fg=limegreen$%s's withering touch rots your skin!%%fg=reset$", real_hitter->text_The().c_str());
       } else if (crit) {
         TOPCON("%%fg=red$%s CRITS you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(), damage);
@@ -537,7 +539,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       } else if (hitter->is_projectile() || hitter->is_laser()) {
         TOPCON("%%fg=orange$%s blasted you for %d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(),
                damage, hitter->text_the().c_str());
-      } else if (bite) {
+      } else if (attack_bite) {
         if (real_hitter->mid_at == mid_at) {
           TOPCON("%%fg=orange$%s digests you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(), damage);
         } else {
@@ -571,9 +573,9 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
           TOPCON("%%fg=red$You CRIT hit %s for %d damage!%%fg=reset$", text_the().c_str(), damage);
         } else {
           if (hitter && (hitter != real_hitter)) {
-            if (poison) {
+            if (attack_poison) {
               TOPCON("You poison %s for %d damage with %s.", text_the().c_str(), damage, hitter->text_the().c_str());
-            } else if (necrosis) {
+            } else if (attack_necrosis) {
               TOPCON("You rot %s for %d damage with %s.", text_the().c_str(), damage, hitter->text_the().c_str());
             } else if (hitter->is_weapon()) {
               TOPCON("You hit %s for %d damage with %s.", text_the().c_str(), damage, hitter->text_the().c_str());
@@ -585,9 +587,9 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
               TOPCON("You hit %s for %d damage with %s.", text_the().c_str(), damage, hitter->text_the().c_str());
             }
           } else {
-            if (poison) {
+            if (attack_poison) {
               TOPCON("You poison %s for %d damage.", text_the().c_str(), damage);
-            } else if (necrosis) {
+            } else if (attack_necrosis) {
               TOPCON("You rot %s for %d damage.", text_the().c_str(), damage);
             } else if (hitter->is_weapon()) {
               TOPCON("You hit %s for %d damage.", text_the().c_str(), damage);
@@ -684,7 +686,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
   //
   // Are we carrying a weapon? If not, see if we can do a claw attack
   //
-  if (bite || ! real_hitter->get_equip_id_carry_anim(MONST_EQUIP_WEAPON).ok()) {
+  if (attack_bite || ! real_hitter->get_equip_id_carry_anim(MONST_EQUIP_WEAPON).ok()) {
     auto claws = real_hitter->tp()->gfx_anim_use();
     if (claws != "") {
       auto bite = level->thing_new(claws, mid_at);
@@ -753,19 +755,21 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
 //
 // Returns true on the target being dead.
 //
-int Thing::is_hit(Thingp hitter, bool crit, bool bite, bool poison, bool necrosis, bool damage_future1, bool damage_future2, bool damage_future3,
-                  bool damage_future4, bool damage_future5, bool damage_future6, bool damage_future7, bool damage_future8, bool damage_future9, bool damage_future10, int damage)
+int Thing::is_hit(Thingp hitter, bool crit, bool attack_bite, bool attack_poison, bool attack_necrosis,
+                  bool damage_future1, bool damage_future2, bool damage_future3, bool damage_future4,
+                  bool damage_future5, bool damage_future6, bool damage_future7, bool damage_future8,
+                  bool damage_future9, bool damage_future10, int damage)
 {
   TRACE_AND_INDENT();
-  if (bite) {
+  if (attack_bite) {
     IF_DEBUG2 { hitter->log("Possible bite %s for %d bite damage", to_string().c_str(), damage); }
-  } else if (poison) {
+  } else if (attack_poison) {
     IF_DEBUG2 { hitter->log("Possible poison attack %s for %d damage", to_string().c_str(), damage); }
     if (is_dead || is_dying) {
       hitter->log("Already dead, no more poison attacks %s", to_string().c_str());
       return false;
     }
-  } else if (necrosis) {
+  } else if (attack_necrosis) {
     IF_DEBUG2 { hitter->log("Possible necrosis attack %s for %d damage", to_string().c_str(), damage); }
     if (is_dead || is_dying) {
       hitter->log("Already dead, no more rotting attacks %s", to_string().c_str());
@@ -896,36 +900,10 @@ int Thing::is_hit(Thingp hitter, bool crit, bool bite, bool poison, bool necrosi
   IF_DEBUG2 { hitter->log("Hit succeeds"); }
   int hit_and_destroyed;
 
-  hit_and_destroyed = ai_hit_actual(hitter, real_hitter, crit, bite, poison, necrosis, damage_future1, damage_future2, damage_future3, damage_future4, damage_future5,
-                                    damage_future6, damage_future7, damage_future8, damage_future9, damage_future10, damage);
+  hit_and_destroyed =
+      ai_hit_actual(hitter, real_hitter, crit, attack_bite, attack_poison, attack_necrosis, damage_future1,
+                    damage_future2, damage_future3, damage_future4, damage_future5, damage_future6, damage_future7,
+                    damage_future8, damage_future9, damage_future10, damage);
 
   return (hit_and_destroyed);
-}
-
-int Thing::is_melee_attacked_by(Thingp hitter, int damage)
-{
-  TRACE_AND_INDENT();
-  return (is_hit(hitter, false, false, false, false, false, false, false, false, false, false, false, false, false,
-                 false, damage));
-}
-
-int Thing::is_bitten_by(Thingp hitter, int damage)
-{
-  TRACE_AND_INDENT();
-  return (is_hit(hitter, false, true, false, false, false, false, false, false, false, false, false, false, false,
-                 false, damage));
-}
-
-int Thing::is_poisoned_by(Thingp hitter, int damage)
-{
-  TRACE_AND_INDENT();
-  return (is_hit(hitter, false, false, true, false, false, false, false, false, false, false, false, false, false,
-                 false, damage));
-}
-
-int Thing::is_necrotized_by(Thingp hitter, int damage)
-{
-  TRACE_AND_INDENT();
-  return (is_hit(hitter, false, false, false, true, false, false, false, false, false, false, false, false, false,
-                 false, damage));
 }

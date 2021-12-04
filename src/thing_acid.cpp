@@ -47,7 +47,7 @@ void Thing::acid_tick(void)
       if (! t->is_acid()) {
         continue;
       }
-      is_melee_attacked_by(t, t->get_damage_melee());
+      attack_damage_melee(t, t->get_damage_melee());
       break;
     }
     FOR_ALL_THINGS_END()
