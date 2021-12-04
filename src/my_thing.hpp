@@ -464,7 +464,7 @@ public:
   int buff_on_damage_future7(Thingp hitter, int damage);
   int buff_on_damage_future8(Thingp hitter, int damage);
   int buff_on_damage_future9(Thingp hitter, int damage);
-  int buff_on_damage_future10(Thingp hitter, int damage);
+  int buff_on_damage_digest(Thingp hitter, int damage);
   int buff_on_damage_bite(Thingp hitter, int damage);
   int buff_on_damage_melee(Thingp hitter, int damage);
   int buff_on_damage_necrosis(Thingp hitter, int damage);
@@ -484,9 +484,8 @@ public:
   const Dice &get_damage_future7_dice(void);
   const Dice &get_damage_future8_dice(void);
   const Dice &get_damage_future9_dice(void);
-  const Dice &get_damage_future10_dice(void);
-  const Dice &get_damage_necrosis_dice(void);
   const Dice &get_damage_digest_dice(void);
+  const Dice &get_damage_necrosis_dice(void);
 
   const Dice &get_gold_value_dice(void);
   const Dice &get_health_initial_dice(void);
@@ -522,9 +521,8 @@ public:
   const std::string &get_damage_future7_dice_str(void);
   const std::string &get_damage_future8_dice_str(void);
   const std::string &get_damage_future9_dice_str(void);
-  const std::string &get_damage_future10_dice_str(void);
-  const std::string &get_damage_necrosis_dice_str(void);
   const std::string &get_damage_digest_dice_str(void);
+  const std::string &get_damage_necrosis_dice_str(void);
   const std::string &get_dead_reason(void);
   const std::string &get_gold_value_dice_str(void);
   const std::string &get_health_initial_dice_str(void);
@@ -568,7 +566,7 @@ public:
   const std::string &on_owner_damage_future7_do(void);
   const std::string &on_owner_damage_future8_do(void);
   const std::string &on_owner_damage_future9_do(void);
-  const std::string &on_owner_damage_future10_do(void);
+  const std::string &on_owner_damage_digest_do(void);
   const std::string &on_owner_damage_constitution_do(void);
   const std::string &on_owner_damage_strength_do(void);
   const std::string &on_owner_damage_melee_do(void);
@@ -611,26 +609,11 @@ public:
   int ai_hit_actual(Thingp hitter, Thingp real_hitter, bool crit, bool bite, bool poison, bool necrosis,
                     bool damage_future1, bool damage_future2, bool damage_future3, bool damage_future4,
                     bool damage_future5, bool damage_future6, bool damage_future7, bool damage_future8,
-                    bool damage_future9, bool damage_future10, int dmg);
+                    bool damage_future9, bool damage_digest, int dmg);
 
   int is_hit(Thingp hitter, bool crit, bool bite, bool poison, bool necrosis, bool damage_future1,
              bool damage_future2, bool damage_future3, bool damage_future4, bool damage_future5, bool damage_future6,
-             bool damage_future7, bool damage_future8, bool damage_future9, bool damage_future10, int damage);
-
-  int attack_damage_poison(Thingp hitter, int damage);
-  int attack_damage_necrosis(Thingp hitter, int damage);
-  int attack_damage_bite(Thingp hitter, int damage);
-  int attack_damage_melee(Thingp hitter, int damage);
-  int attack_damage_future1(Thingp hitter, int damage);
-  int attack_damage_future2(Thingp hitter, int damage);
-  int attack_damage_future3(Thingp hitter, int damage);
-  int attack_damage_future4(Thingp hitter, int damage);
-  int attack_damage_future5(Thingp hitter, int damage);
-  int attack_damage_future6(Thingp hitter, int damage);
-  int attack_damage_future7(Thingp hitter, int damage);
-  int attack_damage_future8(Thingp hitter, int damage);
-  int attack_damage_future9(Thingp hitter, int damage);
-  int attack_damage_future10(Thingp hitter, int damage);
+             bool damage_future7, bool damage_future8, bool damage_future9, bool damage_digest, int damage);
 
   int ai_aggression_level_pct(void);
   int ai_avoid_distance(void);
@@ -643,6 +626,20 @@ public:
   int ai_vision_distance(void);
   int ai_wanderer(void);
   int attack_blood(void);
+  int attack_damage_bite(Thingp hitter, int damage);
+  int attack_damage_digest(Thingp hitter, int damage);
+  int attack_damage_future1(Thingp hitter, int damage);
+  int attack_damage_future2(Thingp hitter, int damage);
+  int attack_damage_future3(Thingp hitter, int damage);
+  int attack_damage_future4(Thingp hitter, int damage);
+  int attack_damage_future5(Thingp hitter, int damage);
+  int attack_damage_future6(Thingp hitter, int damage);
+  int attack_damage_future7(Thingp hitter, int damage);
+  int attack_damage_future8(Thingp hitter, int damage);
+  int attack_damage_future9(Thingp hitter, int damage);
+  int attack_damage_melee(Thingp hitter, int damage);
+  int attack_damage_necrosis(Thingp hitter, int damage);
+  int attack_damage_poison(Thingp hitter, int damage);
   int attack_eater(void);
   int attack_engulf_chance_d1000(void);
   int attack_humanoid(void);
@@ -658,9 +655,7 @@ public:
   int collision_check(void);
   int collision_hit_priority(void);
   int damage_bite_chance_d1000(void);
-  int damage_melee_chance_d1000(void);
-  int damage_necrosis_chance_d1000(void);
-  int damage_poison_chance_d1000(void);
+  int damage_digest_chance_d1000(void);
   int damage_future1_chance_d1000(void);
   int damage_future2_chance_d1000(void);
   int damage_future3_chance_d1000(void);
@@ -670,7 +665,9 @@ public:
   int damage_future7_chance_d1000(void);
   int damage_future8_chance_d1000(void);
   int damage_future9_chance_d1000(void);
-  int damage_future10_chance_d1000(void);
+  int damage_melee_chance_d1000(void);
+  int damage_necrosis_chance_d1000(void);
+  int damage_poison_chance_d1000(void);
   int damage_received_doubled_from_acid(void);
   int damage_received_doubled_from_fire(void);
   int damage_received_doubled_from_necrosis(void);
@@ -784,11 +781,7 @@ public:
   int get_current_damage(void);
   int get_damage_bite(void);
   int get_damage_crush(void);
-  int get_damage_max(void);
-  int get_damage_melee(void);
-  int get_damage_min(void);
-  int get_damage_necrosis(void);
-  int get_damage_poison(void);
+  int get_damage_digest(void);
   int get_damage_future1(void);
   int get_damage_future2(void);
   int get_damage_future3(void);
@@ -798,8 +791,11 @@ public:
   int get_damage_future7(void);
   int get_damage_future8(void);
   int get_damage_future9(void);
-  int get_damage_future10(void);
-  int get_damage_digest(void);
+  int get_damage_max(void);
+  int get_damage_melee(void);
+  int get_damage_min(void);
+  int get_damage_necrosis(void);
+  int get_damage_poison(void);
   int get_danger_current_level(Thingp);
   int get_danger_current_level(void);
   int get_danger_initial_level(Thingp);
@@ -966,14 +962,15 @@ public:
   int is_able_to_enchant_weapons(void);
   int is_able_to_fall(void);
   int is_able_to_fire_at(void);
+  int is_able_to_jump_attack_chance_d1000(void);
   int is_able_to_jump_attack(void);
-  int is_able_to_jump_onto(void);
   int is_able_to_jump_distance(void);
   int is_able_to_jump_on_low_hp_chance_d1000(void);
-  int is_able_to_jump_randomly_chance_d1000(void);
-  int is_able_to_jump_attack_chance_d1000(void);
   int is_able_to_jump_onto_chance_d1000(void);
+  int is_able_to_jump_onto(void);
+  int is_able_to_jump_randomly_chance_d1000(void);
   int is_able_to_jump(void);
+  int is_able_to_jump_without_tiring(void);
   int is_able_to_learn_skills(void);
   int is_able_to_open_doors(void);
   int is_able_to_see_in_the_dark(void);
@@ -1120,6 +1117,7 @@ public:
   int is_smoke(void);
   int is_soft_body(void);
   int is_spawner(void);
+  int is_spider(void);
   int is_spiderweb(void);
   int is_steal_item_chance_d1000(void);
   int is_sticky(void);
@@ -1161,6 +1159,22 @@ public:
   int normal_placement_rules(void);
   int on_death_drop_all_items(void);
   int on_death_is_open(void);
+  int on_owner_damage_bite(Thingp owner, Thingp hitter, int damage);
+  int on_owner_damage_constitution(Thingp owner, Thingp hitter, int damage);
+  int on_owner_damage_digest(Thingp owner, Thingp hitter, int damage);
+  int on_owner_damage_future1(Thingp owner, Thingp hitter, int damage);
+  int on_owner_damage_future2(Thingp owner, Thingp hitter, int damage);
+  int on_owner_damage_future3(Thingp owner, Thingp hitter, int damage);
+  int on_owner_damage_future4(Thingp owner, Thingp hitter, int damage);
+  int on_owner_damage_future5(Thingp owner, Thingp hitter, int damage);
+  int on_owner_damage_future6(Thingp owner, Thingp hitter, int damage);
+  int on_owner_damage_future7(Thingp owner, Thingp hitter, int damage);
+  int on_owner_damage_future8(Thingp owner, Thingp hitter, int damage);
+  int on_owner_damage_future9(Thingp owner, Thingp hitter, int damage);
+  int on_owner_damage_melee(Thingp owner, Thingp hitter, int damage);
+  int on_owner_damage_necrosis(Thingp owner, Thingp hitter, int damage);
+  int on_owner_damage_poison(Thingp owner, Thingp hitter, int damage);
+  int on_owner_damage_strength(Thingp owner, Thingp hitter, int damage);
   int range_max(void);
   int rarity(void);
   int set_charge_count(int);
@@ -1223,8 +1237,6 @@ public:
   int unused_flag1(void);
   int unused_flag20(void);
   int unused_flag21(void);
-  int is_able_to_jump_without_tiring(void);
-  int is_spider(void);
   int unused_flag25(void);
   int unused_flag2(void);
   int unused_flag30(void);
@@ -1239,22 +1251,6 @@ public:
   int weapon_damage(void);
   int worth_collecting(const Thingp it);
   int worth_collecting(const Thingp it, Thingp *would_need_to_drop);
-  int on_owner_damage_poison(Thingp owner, Thingp hitter, int damage);
-  int on_owner_damage_future1(Thingp owner, Thingp hitter, int damage);
-  int on_owner_damage_future2(Thingp owner, Thingp hitter, int damage);
-  int on_owner_damage_future3(Thingp owner, Thingp hitter, int damage);
-  int on_owner_damage_future4(Thingp owner, Thingp hitter, int damage);
-  int on_owner_damage_future5(Thingp owner, Thingp hitter, int damage);
-  int on_owner_damage_future6(Thingp owner, Thingp hitter, int damage);
-  int on_owner_damage_future7(Thingp owner, Thingp hitter, int damage);
-  int on_owner_damage_future8(Thingp owner, Thingp hitter, int damage);
-  int on_owner_damage_future9(Thingp owner, Thingp hitter, int damage);
-  int on_owner_damage_future10(Thingp owner, Thingp hitter, int damage);
-  int on_owner_damage_constitution(Thingp owner, Thingp hitter, int damage);
-  int on_owner_damage_strength(Thingp owner, Thingp hitter, int damage);
-  int on_owner_damage_melee(Thingp owner, Thingp hitter, int damage);
-  int on_owner_damage_necrosis(Thingp owner, Thingp hitter, int damage);
-  int on_owner_damage_bite(Thingp owner, Thingp hitter, int damage);
 
   point dir_to_direction();
   point get_random_target(void);

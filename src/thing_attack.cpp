@@ -452,7 +452,7 @@ bool Thing::attack(Thingp victim)
   bool attack_future7  = false;
   bool attack_future8  = false;
   bool attack_future9  = false;
-  bool attack_future10 = false;
+  bool attack_digest   = false;
   bool attack_necrosis = false;
   bool attack_bite     = false;
   int  damage          = 0;
@@ -597,15 +597,15 @@ bool Thing::attack(Thingp victim)
   }
 
   //
-  // Chance of attack_future10 damage?
+  // Chance of attack_digest damage?
   //
   if (! damage_set) {
-    if ((int) pcg_random_range(0, 1000) < damage_future10_chance_d1000()) {
-      int attack_future10 = get_damage_future10();
-      if (attack_future10 > 0) {
-        damage          = attack_future10;
-        damage_set      = true;
-        attack_future10 = true;
+    if ((int) pcg_random_range(0, 1000) < damage_digest_chance_d1000()) {
+      int attack_digest = get_damage_digest();
+      if (attack_digest > 0) {
+        damage        = attack_digest;
+        damage_set    = true;
+        attack_digest = true;
       }
     }
   }
@@ -657,6 +657,17 @@ bool Thing::attack(Thingp victim)
           damage_set = true;
         }
       }
+    }
+  }
+
+  //
+  // This overrides other damage types. For when we are stuck inside a cleaner
+  //
+  if (is_engulfer()) {
+    if (victim->mid_at == mid_at) {
+      damage        = get_damage_digest();
+      attack_digest = true;
+      damage_set    = true;
     }
   }
 
@@ -760,22 +771,9 @@ bool Thing::attack(Thingp victim)
     }
   }
 
-  //
-  // This handles when we are stuck inside a cleaner
-  //
-  if (is_engulfer()) {
-    if (victim->mid_at == mid_at) {
-      damage = get_damage_digest();
-      if (victim->is_player()) {
-        TOPCON("%%fg=red$You are being consumed by %s!%%fg=reset$", text_the().c_str());
-        msg("Gulp!");
-      }
-    }
-  }
-
   if (victim->is_hit(this, crit, attack_bite, attack_poison, attack_necrosis, attack_future1, attack_future2,
                      attack_future3, attack_future4, attack_future5, attack_future6, attack_future7, attack_future8,
-                     attack_future9, attack_future10, damage)) {
+                     attack_future9, attack_digest, damage)) {
     dbg("The attack succeeded");
 
     if (attack_lunge()) {
@@ -826,10 +824,10 @@ int Thing::attack_damage_melee(Thingp hitter, int damage)
   const bool attack_future7  = false;
   const bool attack_future8  = false;
   const bool attack_future9  = false;
-  const bool attack_future10 = false;
+  const bool attack_digest   = false;
   return (is_hit(hitter, crit, attack_bite, attack_poison, attack_necrosis, attack_future1, attack_future2,
                  attack_future3, attack_future4, attack_future5, attack_future6, attack_future7, attack_future8,
-                 attack_future9, attack_future10, damage));
+                 attack_future9, attack_digest, damage));
 }
 
 int Thing::attack_damage_bite(Thingp hitter, int damage)
@@ -848,10 +846,10 @@ int Thing::attack_damage_bite(Thingp hitter, int damage)
   const bool attack_future7  = false;
   const bool attack_future8  = false;
   const bool attack_future9  = false;
-  const bool attack_future10 = false;
+  const bool attack_digest   = false;
   return (is_hit(hitter, crit, attack_bite, attack_poison, attack_necrosis, attack_future1, attack_future2,
                  attack_future3, attack_future4, attack_future5, attack_future6, attack_future7, attack_future8,
-                 attack_future9, attack_future10, damage));
+                 attack_future9, attack_digest, damage));
 }
 
 int Thing::attack_damage_poison(Thingp hitter, int damage)
@@ -870,10 +868,10 @@ int Thing::attack_damage_poison(Thingp hitter, int damage)
   const bool attack_future7  = false;
   const bool attack_future8  = false;
   const bool attack_future9  = false;
-  const bool attack_future10 = false;
+  const bool attack_digest   = false;
   return (is_hit(hitter, crit, attack_bite, attack_poison, attack_necrosis, attack_future1, attack_future2,
                  attack_future3, attack_future4, attack_future5, attack_future6, attack_future7, attack_future8,
-                 attack_future9, attack_future10, damage));
+                 attack_future9, attack_digest, damage));
 }
 
 int Thing::attack_damage_necrosis(Thingp hitter, int damage)
@@ -892,10 +890,10 @@ int Thing::attack_damage_necrosis(Thingp hitter, int damage)
   const bool attack_future7  = false;
   const bool attack_future8  = false;
   const bool attack_future9  = false;
-  const bool attack_future10 = false;
+  const bool attack_digest   = false;
   return (is_hit(hitter, crit, attack_bite, attack_poison, attack_necrosis, attack_future1, attack_future2,
                  attack_future3, attack_future4, attack_future5, attack_future6, attack_future7, attack_future8,
-                 attack_future9, attack_future10, damage));
+                 attack_future9, attack_digest, damage));
 }
 
 int Thing::attack_damage_future1(Thingp hitter, int damage)
@@ -914,10 +912,10 @@ int Thing::attack_damage_future1(Thingp hitter, int damage)
   const bool attack_future7  = false;
   const bool attack_future8  = false;
   const bool attack_future9  = false;
-  const bool attack_future10 = false;
+  const bool attack_digest   = false;
   return (is_hit(hitter, crit, attack_bite, attack_poison, attack_necrosis, attack_future1, attack_future2,
                  attack_future3, attack_future4, attack_future5, attack_future6, attack_future7, attack_future8,
-                 attack_future9, attack_future10, damage));
+                 attack_future9, attack_digest, damage));
 }
 
 int Thing::attack_damage_future2(Thingp hitter, int damage)
@@ -936,10 +934,10 @@ int Thing::attack_damage_future2(Thingp hitter, int damage)
   const bool attack_future7  = false;
   const bool attack_future8  = false;
   const bool attack_future9  = false;
-  const bool attack_future10 = false;
+  const bool attack_digest   = false;
   return (is_hit(hitter, crit, attack_bite, attack_poison, attack_necrosis, attack_future1, attack_future2,
                  attack_future3, attack_future4, attack_future5, attack_future6, attack_future7, attack_future8,
-                 attack_future9, attack_future10, damage));
+                 attack_future9, attack_digest, damage));
 }
 
 int Thing::attack_damage_future3(Thingp hitter, int damage)
@@ -958,10 +956,10 @@ int Thing::attack_damage_future3(Thingp hitter, int damage)
   const bool attack_future7  = false;
   const bool attack_future8  = false;
   const bool attack_future9  = false;
-  const bool attack_future10 = false;
+  const bool attack_digest   = false;
   return (is_hit(hitter, crit, attack_bite, attack_poison, attack_necrosis, attack_future1, attack_future2,
                  attack_future3, attack_future4, attack_future5, attack_future6, attack_future7, attack_future8,
-                 attack_future9, attack_future10, damage));
+                 attack_future9, attack_digest, damage));
 }
 
 int Thing::attack_damage_future4(Thingp hitter, int damage)
@@ -980,10 +978,10 @@ int Thing::attack_damage_future4(Thingp hitter, int damage)
   const bool attack_future7  = false;
   const bool attack_future8  = false;
   const bool attack_future9  = false;
-  const bool attack_future10 = false;
+  const bool attack_digest   = false;
   return (is_hit(hitter, crit, attack_bite, attack_poison, attack_necrosis, attack_future1, attack_future2,
                  attack_future3, attack_future4, attack_future5, attack_future6, attack_future7, attack_future8,
-                 attack_future9, attack_future10, damage));
+                 attack_future9, attack_digest, damage));
 }
 
 int Thing::attack_damage_future5(Thingp hitter, int damage)
@@ -1002,10 +1000,10 @@ int Thing::attack_damage_future5(Thingp hitter, int damage)
   const bool attack_future7  = false;
   const bool attack_future8  = false;
   const bool attack_future9  = false;
-  const bool attack_future10 = false;
+  const bool attack_digest   = false;
   return (is_hit(hitter, crit, attack_bite, attack_poison, attack_necrosis, attack_future1, attack_future2,
                  attack_future3, attack_future4, attack_future5, attack_future6, attack_future7, attack_future8,
-                 attack_future9, attack_future10, damage));
+                 attack_future9, attack_digest, damage));
 }
 
 int Thing::attack_damage_future6(Thingp hitter, int damage)
@@ -1024,10 +1022,10 @@ int Thing::attack_damage_future6(Thingp hitter, int damage)
   const bool attack_future7  = false;
   const bool attack_future8  = false;
   const bool attack_future9  = false;
-  const bool attack_future10 = false;
+  const bool attack_digest   = false;
   return (is_hit(hitter, crit, attack_bite, attack_poison, attack_necrosis, attack_future1, attack_future2,
                  attack_future3, attack_future4, attack_future5, attack_future6, attack_future7, attack_future8,
-                 attack_future9, attack_future10, damage));
+                 attack_future9, attack_digest, damage));
 }
 
 int Thing::attack_damage_future7(Thingp hitter, int damage)
@@ -1046,10 +1044,10 @@ int Thing::attack_damage_future7(Thingp hitter, int damage)
   const bool attack_future7  = true;
   const bool attack_future8  = false;
   const bool attack_future9  = false;
-  const bool attack_future10 = false;
+  const bool attack_digest   = false;
   return (is_hit(hitter, crit, attack_bite, attack_poison, attack_necrosis, attack_future1, attack_future2,
                  attack_future3, attack_future4, attack_future5, attack_future6, attack_future7, attack_future8,
-                 attack_future9, attack_future10, damage));
+                 attack_future9, attack_digest, damage));
 }
 
 int Thing::attack_damage_future8(Thingp hitter, int damage)
@@ -1068,10 +1066,10 @@ int Thing::attack_damage_future8(Thingp hitter, int damage)
   const bool attack_future7  = false;
   const bool attack_future8  = true;
   const bool attack_future9  = false;
-  const bool attack_future10 = false;
+  const bool attack_digest   = false;
   return (is_hit(hitter, crit, attack_bite, attack_poison, attack_necrosis, attack_future1, attack_future2,
                  attack_future3, attack_future4, attack_future5, attack_future6, attack_future7, attack_future8,
-                 attack_future9, attack_future10, damage));
+                 attack_future9, attack_digest, damage));
 }
 
 int Thing::attack_damage_future9(Thingp hitter, int damage)
@@ -1090,13 +1088,13 @@ int Thing::attack_damage_future9(Thingp hitter, int damage)
   const bool attack_future7  = false;
   const bool attack_future8  = false;
   const bool attack_future9  = true;
-  const bool attack_future10 = false;
+  const bool attack_digest   = false;
   return (is_hit(hitter, crit, attack_bite, attack_poison, attack_necrosis, attack_future1, attack_future2,
                  attack_future3, attack_future4, attack_future5, attack_future6, attack_future7, attack_future8,
-                 attack_future9, attack_future10, damage));
+                 attack_future9, attack_digest, damage));
 }
 
-int Thing::attack_damage_future10(Thingp hitter, int damage)
+int Thing::attack_damage_digest(Thingp hitter, int damage)
 {
   TRACE_AND_INDENT();
   const bool crit            = false;
@@ -1112,8 +1110,8 @@ int Thing::attack_damage_future10(Thingp hitter, int damage)
   const bool attack_future7  = false;
   const bool attack_future8  = false;
   const bool attack_future9  = false;
-  const bool attack_future10 = true;
+  const bool attack_digest   = true;
   return (is_hit(hitter, crit, attack_bite, attack_poison, attack_necrosis, attack_future1, attack_future2,
                  attack_future3, attack_future4, attack_future5, attack_future6, attack_future7, attack_future8,
-                 attack_future9, attack_future10, damage));
+                 attack_future9, attack_digest, damage));
 }

@@ -202,7 +202,6 @@ public:
   void wid_thing_info_add_damage_future7(WidPopup *w, Thingp t);
   void wid_thing_info_add_damage_future8(WidPopup *w, Thingp t);
   void wid_thing_info_add_damage_future9(WidPopup *w, Thingp t);
-  void wid_thing_info_add_damage_future10(WidPopup *w, Thingp t);
   void wid_thing_info_add_danger_level(WidPopup *w, Thingp t);
   void wid_thing_info_add_defence(WidPopup *w, Thingp t);
   void wid_thing_info_add_dexterity(WidPopup *w, Thingp t);

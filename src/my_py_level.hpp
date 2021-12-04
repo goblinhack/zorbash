@@ -27,7 +27,7 @@ PyObject *level_damage_future6_chance_d1000_at(PyObject *obj, PyObject *args, Py
 PyObject *level_damage_future7_chance_d1000_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_damage_future8_chance_d1000_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_damage_future9_chance_d1000_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_damage_future10_chance_d1000_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_damage_digest_chance_d1000_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_enchant_level_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_enchant_max_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_environ_avoids_acid_at(PyObject *obj, PyObject *args, PyObject *keywds);

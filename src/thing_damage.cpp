@@ -613,50 +613,50 @@ int Thing::on_owner_damage_future9(Thingp owner, Thingp hitter, int damage)
 }
 
 ///////////////////////////////////////////////////////////////////////////
-// damage_future10
+// damage_digest
 ///////////////////////////////////////////////////////////////////////////
-const Dice &Thing::get_damage_future10_dice(void)
+const Dice &Thing::get_damage_digest_dice(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->get_damage_future10_dice());
+  return (tp()->get_damage_digest_dice());
 }
 
-const std::string &Thing::get_damage_future10_dice_str(void)
+const std::string &Thing::get_damage_digest_dice_str(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->get_damage_future10_dice_str());
+  return (tp()->get_damage_digest_dice_str());
 }
 
-int Thing::get_damage_future10(void)
+int Thing::get_damage_digest(void)
 {
   TRACE_AND_INDENT();
-  auto roll = tp()->get_damage_future10_dice().roll();
+  auto roll = tp()->get_damage_digest_dice().roll();
   if (roll) {
     return roll + get_enchant();
   }
   return roll;
 }
 
-int Thing::on_owner_damage_future10(Thingp owner, Thingp hitter, int damage)
+int Thing::on_owner_damage_digest(Thingp owner, Thingp hitter, int damage)
 {
   verify(MTYPE_THING, owner);
   if (! owner) {
-    err("Cannot owner_damage_future10 null thing");
+    err("Cannot owner_damage_digest null thing");
     return damage;
   }
 
   verify(MTYPE_THING, hitter);
   if (! hitter) {
-    err("Cannot owner_damage_future10 null thing");
+    err("Cannot owner_damage_digest null thing");
     return damage;
   }
 
-  auto on_owner_damage_future10 = on_owner_damage_future10_do();
-  if (std::empty(on_owner_damage_future10)) {
+  auto on_owner_damage_digest = on_owner_damage_digest_do();
+  if (std::empty(on_owner_damage_digest)) {
     return damage;
   }
 
-  auto t = split_tokens(on_owner_damage_future10, '.');
+  auto t = split_tokens(on_owner_damage_digest, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -672,8 +672,8 @@ int Thing::on_owner_damage_future10(Thingp owner, Thingp hitter, int damage)
                           (unsigned int) mid_at.y, (unsigned int) damage);
   }
 
-  ERR("Bad on_owner_damage_future10 call [%s] expected mod:function, got %d elems", on_owner_damage_future10.c_str(),
-      (int) on_owner_damage_future10.size());
+  ERR("Bad on_owner_damage_digest call [%s] expected mod:function, got %d elems", on_owner_damage_digest.c_str(),
+      (int) on_owner_damage_digest.size());
 
   return damage;
 }
@@ -968,31 +968,6 @@ int Thing::on_owner_damage_bite(Thingp owner, Thingp hitter, int damage)
 }
 
 ///////////////////////////////////////////////////////////////////////////
-// swallow
-///////////////////////////////////////////////////////////////////////////
-const Dice &Thing::get_damage_digest_dice(void)
-{
-  TRACE_AND_INDENT();
-  return (tp()->get_damage_digest_dice());
-}
-
-const std::string &Thing::get_damage_digest_dice_str(void)
-{
-  TRACE_AND_INDENT();
-  return (tp()->get_damage_digest_dice_str());
-}
-
-int Thing::get_damage_digest(void)
-{
-  TRACE_AND_INDENT();
-  auto roll = tp()->get_damage_digest_dice().roll();
-  if (roll) {
-    return roll + get_enchant();
-  }
-  return roll;
-}
-
-///////////////////////////////////////////////////////////////////////////
 // misc
 ///////////////////////////////////////////////////////////////////////////
 int Thing::get_damage_max(void)
@@ -1011,7 +986,7 @@ int Thing::get_damage_max(void)
   max_damage      = std::max(max_damage, get_damage_future7_dice().max_roll());
   max_damage      = std::max(max_damage, get_damage_future8_dice().max_roll());
   max_damage      = std::max(max_damage, get_damage_future9_dice().max_roll());
-  max_damage      = std::max(max_damage, get_damage_future10_dice().max_roll());
+  max_damage      = std::max(max_damage, get_damage_digest_dice().max_roll());
   max_damage      = std::max(max_damage, get_damage_necrosis_dice().max_roll());
   //
   // Don't include crush damage as it is non typical
@@ -1035,7 +1010,7 @@ int Thing::get_damage_min(void)
   min_damage      = std::min(min_damage, get_damage_future7_dice().min_roll());
   min_damage      = std::min(min_damage, get_damage_future8_dice().min_roll());
   min_damage      = std::min(min_damage, get_damage_future9_dice().min_roll());
-  min_damage      = std::min(min_damage, get_damage_future10_dice().min_roll());
+  min_damage      = std::min(min_damage, get_damage_digest_dice().min_roll());
   min_damage      = std::min(min_damage, get_damage_necrosis_dice().min_roll());
   //
   // Don't include crush damage as it is non typical

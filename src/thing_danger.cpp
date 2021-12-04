@@ -76,7 +76,7 @@ int Tp::get_danger_level(void)
   danger_level += get_damage_future7_dice().max_roll();
   danger_level += get_damage_future8_dice().max_roll();
   danger_level += get_damage_future9_dice().max_roll();
-  danger_level += get_damage_future10_dice().max_roll();
+  danger_level += get_damage_digest_dice().max_roll();
   danger_level += get_damage_digest_dice().max_roll();
   danger_level += get_damage_bite_dice().max_roll();
 

@@ -139,13 +139,13 @@ void               Tp::set_damage_future9_dice(const std::string &v)
   _damage_future9_dice_str = v;
 }
 
-const Dice        &Tp::get_damage_future10_dice(void) const { return _damage_future10_dice; }
-const int          Tp::get_damage_future10(void) const { return _damage_future10_dice.roll(); }
-const std::string &Tp::get_damage_future10_dice_str(void) const { return _damage_future10_dice_str; }
-void               Tp::set_damage_future10_dice(const std::string &v)
+const Dice        &Tp::get_damage_digest_dice(void) const { return _damage_digest_dice; }
+const int          Tp::get_damage_digest(void) const { return _damage_digest_dice.roll(); }
+const std::string &Tp::get_damage_digest_dice_str(void) const { return _damage_digest_dice_str; }
+void               Tp::set_damage_digest_dice(const std::string &v)
 {
-  _damage_future10_dice     = v;
-  _damage_future10_dice_str = v;
+  _damage_digest_dice     = v;
+  _damage_digest_dice_str = v;
 }
 
 const Dice        &Tp::get_damage_necrosis_dice(void) const { return _damage_necrosis_dice; }
@@ -173,15 +173,6 @@ void               Tp::set_damage_bite_dice(const std::string &v)
 {
   _damage_bite_dice     = v;
   _damage_bite_dice_str = v;
-}
-
-const Dice        &Tp::get_damage_digest_dice(void) const { return _damage_digest_dice; }
-const int          Tp::get_damage_digest(void) const { return _damage_digest_dice.roll(); }
-const std::string &Tp::get_damage_digest_dice_str(void) const { return _damage_digest_dice_str; }
-void               Tp::set_damage_digest_dice(const std::string &v)
-{
-  _damage_digest_dice     = v;
-  _damage_digest_dice_str = v;
 }
 
 const Dice        &Tp::get_health_initial_dice(void) const { return _health_initial_dice; }

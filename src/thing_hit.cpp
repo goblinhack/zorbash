@@ -108,10 +108,10 @@ void Thing::on_you_bite_attack(void)
 
 int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
                          Thingp real_hitter, // who fired the arrow?
-                         bool crit, bool attack_bite, bool attack_poison, bool attack_necrosis, bool damage_future1,
-                         bool damage_future2, bool damage_future3, bool damage_future4, bool damage_future5,
-                         bool damage_future6, bool damage_future7, bool damage_future8, bool damage_future9,
-                         bool damage_future10, int damage)
+                         bool crit, bool attack_bite, bool attack_poison, bool attack_necrosis, bool attack_future1,
+                         bool attack_future2, bool attack_future3, bool attack_future4, bool attack_future5,
+                         bool attack_future6, bool attack_future7, bool attack_future8, bool attack_future9,
+                         bool attack_digest, int damage)
 {
   TRACE_AND_INDENT();
   if (! hitter) {
@@ -139,64 +139,64 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       real_hitter->log("No poison damage");
       return false;
     }
-  } else if (damage_future1) {
+  } else if (attack_future1) {
     damage = buff_on_damage_future1(real_hitter, damage);
     if (! damage) {
       real_hitter->log("No damage_future1 damage");
       return false;
     }
-  } else if (damage_future2) {
+  } else if (attack_future2) {
     damage = buff_on_damage_future2(real_hitter, damage);
     if (! damage) {
       real_hitter->log("No damage_future2 damage");
       return false;
     }
-  } else if (damage_future3) {
+  } else if (attack_future3) {
     damage = buff_on_damage_future3(real_hitter, damage);
     if (! damage) {
       real_hitter->log("No damage_future3 damage");
       return false;
     }
-  } else if (damage_future4) {
+  } else if (attack_future4) {
     damage = buff_on_damage_future4(real_hitter, damage);
     if (! damage) {
       real_hitter->log("No damage_future4 damage");
       return false;
     }
-  } else if (damage_future5) {
+  } else if (attack_future5) {
     damage = buff_on_damage_future5(real_hitter, damage);
     if (! damage) {
       real_hitter->log("No damage_future5 damage");
       return false;
     }
-  } else if (damage_future6) {
+  } else if (attack_future6) {
     damage = buff_on_damage_future6(real_hitter, damage);
     if (! damage) {
       real_hitter->log("No damage_future6 damage");
       return false;
     }
-  } else if (damage_future7) {
+  } else if (attack_future7) {
     damage = buff_on_damage_future7(real_hitter, damage);
     if (! damage) {
       real_hitter->log("No damage_future7 damage");
       return false;
     }
-  } else if (damage_future8) {
+  } else if (attack_future8) {
     damage = buff_on_damage_future8(real_hitter, damage);
     if (! damage) {
       real_hitter->log("No damage_future8 damage");
       return false;
     }
-  } else if (damage_future9) {
+  } else if (attack_future9) {
     damage = buff_on_damage_future9(real_hitter, damage);
     if (! damage) {
       real_hitter->log("No damage_future9 damage");
       return false;
     }
-  } else if (damage_future10) {
-    damage = buff_on_damage_future10(real_hitter, damage);
+  } else if (attack_digest) {
+    damage = buff_on_damage_digest(real_hitter, damage);
     if (! damage) {
-      real_hitter->log("No damage_future10 damage");
+      real_hitter->log("No damage_digest damage");
       return false;
     }
   } else if (attack_necrosis) {
@@ -540,11 +540,11 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
         TOPCON("%%fg=orange$%s blasted you for %d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(),
                damage, hitter->text_the().c_str());
       } else if (attack_bite) {
-        if (real_hitter->mid_at == mid_at) {
-          TOPCON("%%fg=orange$%s digests you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(), damage);
-        } else {
-          TOPCON("%%fg=orange$%s bites you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(), damage);
-        }
+        TOPCON("%%fg=orange$%s bites you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(), damage);
+      } else if (attack_digest) {
+        TOPCON("%%fg=red$You are being consumed by %s!%%fg=reset$", text_the().c_str());
+        TOPCON("%%fg=orange$%s digests you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(), damage);
+        msg("Gulp!");
       } else {
         TOPCON("%%fg=orange$%s %s you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(),
                real_hitter->text_hits().c_str(), damage);
@@ -758,7 +758,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
 int Thing::is_hit(Thingp hitter, bool crit, bool attack_bite, bool attack_poison, bool attack_necrosis,
                   bool damage_future1, bool damage_future2, bool damage_future3, bool damage_future4,
                   bool damage_future5, bool damage_future6, bool damage_future7, bool damage_future8,
-                  bool damage_future9, bool damage_future10, int damage)
+                  bool damage_future9, bool damage_digest, int damage)
 {
   TRACE_AND_INDENT();
   if (attack_bite) {
@@ -903,7 +903,7 @@ int Thing::is_hit(Thingp hitter, bool crit, bool attack_bite, bool attack_poison
   hit_and_destroyed =
       ai_hit_actual(hitter, real_hitter, crit, attack_bite, attack_poison, attack_necrosis, damage_future1,
                     damage_future2, damage_future3, damage_future4, damage_future5, damage_future6, damage_future7,
-                    damage_future8, damage_future9, damage_future10, damage);
+                    damage_future8, damage_future9, damage_digest, damage);
 
   return (hit_and_destroyed);
 }
