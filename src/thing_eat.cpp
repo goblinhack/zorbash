@@ -181,7 +181,7 @@ bool Thing::consume(Thingp victim)
                 TOPCON("%s is eating %s!", text_The().c_str(), victim->text_the().c_str());
               }
             } else {
-              TOPCON("%s eats %s.", text_The().c_str(), victim->text_the().c_str());
+              TOPCON("%s consumes %s.", text_The().c_str(), victim->text_the().c_str());
             }
           }
         }

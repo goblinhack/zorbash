@@ -614,15 +614,18 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
                damage, hitter->text_the().c_str());
       } else if (attack_acid) {
         TOPCON("%%fg=orange$%s burns you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(), damage);
+        msg("Sizzle!");
       } else if (attack_bite) {
         TOPCON("%%fg=orange$%s bites you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(), damage);
+        msg("Chomp!");
       } else if (attack_energy) {
         TOPCON("%%fg=orange$%s blasts you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(), damage);
+        msg("Zap!");
       } else if (attack_lightning) {
         TOPCON("%%fg=orange$%s electrocutes you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(), damage);
+        msg("Brzzt!");
       } else if (attack_digest) {
-        TOPCON("%%fg=red$You are being consumed by %s!%%fg=reset$", text_the().c_str());
-        TOPCON("%%fg=orange$%s digests you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(), damage);
+        TOPCON("%%fg=red$You are being consumed by %s!%%fg=reset$", real_hitter->text_the().c_str());
         msg("Gulp!");
       } else {
         TOPCON("%%fg=orange$%s %s you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(),

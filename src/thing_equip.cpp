@@ -681,6 +681,13 @@ bool Thing::equip_use_try(int equip)
         continue;
       }
 
+      //
+      // If being digested, this is high priority...
+      //
+      if (t->mid_at == mid_at) {
+        prio *= 100;
+      }
+
       if (prio > best_priority) {
         best_priority = prio;
         best_hit_at   = hit_at;
