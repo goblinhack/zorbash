@@ -9,6 +9,7 @@ def tp_init(name, text_name):
     mytp.set_gfx_animated(True)
     mytp.set_gfx_attack_anim(True)
     mytp.set_gfx_show_outlined(True)
+    mytp.set_is_green_splatter(True)
     mytp.set_is_moveable(True)
     mytp.set_is_removeable_if_out_of_slots(True)
     mytp.set_is_tmp_thing(True)

@@ -6,7 +6,6 @@ def on_you_are_hit_but_still_alive(me, hitter, real_hitter, x, y, crit, damage):
         my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, "squelch")
 
 def on_death(me, x, y):
-    my.level_spawn_at_thing(me, "pink_splatter")
     if my.pcg_randint(1, 100) < 40:
         my.level_spawn_next_to(me, "jelly_baby")
     if my.pcg_randint(1, 100) < 40:
@@ -31,7 +30,6 @@ def tp_init(name, text_name):
     mytp.set_environ_avoids_fire(100)
     mytp.set_gfx_animated_can_hflip(True)
     mytp.set_gfx_animated(True)
-    mytp.set_gfx_anim_use("pink_splatter")
     mytp.set_gfx_bounce_on_move(True)
     mytp.set_gfx_health_bar_shown(True)
     mytp.set_gfx_short_shadow_caster(True)
@@ -49,6 +47,8 @@ def tp_init(name, text_name):
     mytp.set_is_attackable_by_monst(True)
     mytp.set_is_attackable_by_player(True)
     mytp.set_is_blood_eater(True)
+    mytp.set_is_pink_blooded(True)
+    mytp.set_is_crushable(True)
     mytp.set_is_described_when_hovering_over(True)
     mytp.set_is_hittable(True)
     mytp.set_is_hunger_insatiable(True)

@@ -18,6 +18,8 @@
 static Tpidmap tp_blood;
 static Tpidmap tp_bones;
 static Tpidmap tp_blood_splatter;
+static Tpidmap tp_green_splatter;
+static Tpidmap tp_pink_splatter;
 static Tpidmap tp_deco;
 static Tpidmap tp_dirt;
 static Tpidmap tp_dry_grass;
@@ -77,6 +79,12 @@ void tp_random_init(void)
     }
     if (tp->is_blood_splatter()) {
       tp_blood_splatter.push_back(tp);
+    }
+    if (tp->is_green_splatter()) {
+      tp_green_splatter.push_back(tp);
+    }
+    if (tp->is_pink_splatter()) {
+      tp_pink_splatter.push_back(tp);
     }
     if (tp->is_bones()) {
       tp_bones.push_back(tp);
@@ -665,6 +673,26 @@ Tpp tp_random_blood_splatter(void)
     return (nullptr);
   }
   return tp_get_with_no_rarity_filter(tp_blood_splatter);
+}
+
+Tpp tp_random_green_splatter(void)
+{
+  TRACE_AND_INDENT();
+  if (unlikely(! tp_green_splatter.size())) {
+    ERR("No green_splatter found");
+    return (nullptr);
+  }
+  return tp_get_with_no_rarity_filter(tp_green_splatter);
+}
+
+Tpp tp_random_pink_splatter(void)
+{
+  TRACE_AND_INDENT();
+  if (unlikely(! tp_pink_splatter.size())) {
+    ERR("No pink_splatter found");
+    return (nullptr);
+  }
+  return tp_get_with_no_rarity_filter(tp_pink_splatter);
 }
 
 Tpp tp_random_key(void)

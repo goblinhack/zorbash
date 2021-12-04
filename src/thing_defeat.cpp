@@ -285,11 +285,13 @@ void Thing::defeat(Thingp defeater, const char *reason)
     if (is_loggable()) {
       dbg("Already a corpse, clean it up");
     }
-    auto tpp = tp_random_bones();
-    if (unlikely(! tpp)) {
-      err("Could not place bones");
+    if (is_bony()) {
+      auto tpp = tp_random_bones();
+      if (unlikely(! tpp)) {
+        err("Could not place bones");
+      }
+      (void) level->thing_new(tpp, mid_at);
     }
-    (void) level->thing_new(tpp, mid_at);
   } else if (is_corpse_on_death()) {
     //
     // Leaves a corpse

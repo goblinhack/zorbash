@@ -165,6 +165,12 @@ bool Thing::consume(Thingp victim)
         if (distance_to_player() < DMAP_IS_PASSABLE) {
           if (victim->is_meat()) {
             level->thing_new(tp_random_blood_splatter()->name(), mid_at);
+          } else if (victim->is_pink_blooded()) {
+            level->thing_new(tp_random_pink_splatter()->name(), mid_at);
+          } else if (victim->is_red_blooded()) {
+            level->thing_new(tp_random_green_splatter()->name(), mid_at);
+          } else if (victim->is_green_blooded()) {
+            level->thing_new(tp_random_green_splatter()->name(), mid_at);
           }
 
           if (! victim->is_offscreen) {

@@ -227,6 +227,10 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       real_hitter->log("Attack damage_future5 damage %d on %s", damage, to_string().c_str());
     }
   } else if (attack_crush) {
+    if (! is_crushable()) {
+      real_hitter->log("Cannot crush %s", to_string().c_str());
+      return false;
+    }
     damage = buff_on_damage_crush(real_hitter, damage);
     if (! damage) {
       real_hitter->log("No damage_crush damage on %s", to_string().c_str());
@@ -757,10 +761,21 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
   real_hitter->set_tick_last_did_something(game->tick_current);
 
   //
-  // Blood splat
+  // Splat graphics
   //
   if (is_monst() || is_player()) {
-    level->thing_new(tp_random_blood_splatter()->name(), mid_at);
+    if (is_pink_blooded()) {
+      level->thing_new(tp_random_pink_splatter()->name(), mid_at);
+    } else if (is_green_blooded()) {
+      level->thing_new(tp_random_green_splatter()->name(), mid_at);
+    } else if (is_red_blooded()) {
+      level->thing_new(tp_random_blood_splatter()->name(), mid_at);
+    } else {
+      //
+      // Need something else for the undead?
+      //
+      level->thing_new(tp_random_blood_splatter()->name(), mid_at);
+    }
   }
 
   if (real_hitter->is_player() || real_hitter->is_monst()) {

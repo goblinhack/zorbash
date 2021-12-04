@@ -682,25 +682,25 @@ bool Thing::matches(const std::string &what)
   if (unused_flag15() && (what == "unused_flag15")) {
     return true;
   }
-  if (unused_flag16() && (what == "unused_flag16")) {
+  if (is_bony() && (what == "is_bony")) {
     return true;
   }
-  if (unused_flag17() && (what == "unused_flag17")) {
+  if (is_pink_blooded() && (what == "is_pink_blooded")) {
     return true;
   }
-  if (unused_flag18() && (what == "unused_flag18")) {
+  if (is_pink_splatter() && (what == "is_pink_splatter")) {
     return true;
   }
-  if (unused_flag19() && (what == "unused_flag19")) {
+  if (is_green_splatter() && (what == "is_green_splatter")) {
     return true;
   }
   if (unused_flag1() && (what == "unused_flag1")) {
     return true;
   }
-  if (unused_flag20() && (what == "unused_flag20")) {
+  if (is_red_blooded() && (what == "is_red_blooded")) {
     return true;
   }
-  if (unused_flag21() && (what == "unused_flag21")) {
+  if (is_green_blooded() && (what == "is_green_blooded")) {
     return true;
   }
   if (is_able_to_jump_without_tiring() && (what == "is_able_to_jump_without_tiring")) {
@@ -715,7 +715,7 @@ bool Thing::matches(const std::string &what)
   if (is_able_to_jump_onto() && (what == "is_able_to_jump_onto")) {
     return true;
   }
-  if (unused_flag25() && (what == "unused_flag25")) {
+  if (is_crushable() && (what == "is_crushable")) {
     return true;
   }
   if (unused_flag2() && (what == "unused_flag2")) {
@@ -1409,26 +1409,26 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag15") {
     return &Thing::unused_flag15;
   }
-  if (what == "unused_flag16") {
-    return &Thing::unused_flag16;
+  if (what == "is_bony") {
+    return &Thing::is_bony;
   }
-  if (what == "unused_flag17") {
-    return &Thing::unused_flag17;
+  if (what == "is_pink_blooded") {
+    return &Thing::is_pink_blooded;
   }
-  if (what == "unused_flag18") {
-    return &Thing::unused_flag18;
+  if (what == "is_pink_splatter") {
+    return &Thing::is_pink_splatter;
   }
-  if (what == "unused_flag19") {
-    return &Thing::unused_flag19;
+  if (what == "is_green_splatter") {
+    return &Thing::is_green_splatter;
   }
   if (what == "unused_flag1") {
     return &Thing::unused_flag1;
   }
-  if (what == "unused_flag20") {
-    return &Thing::unused_flag20;
+  if (what == "is_red_blooded") {
+    return &Thing::is_red_blooded;
   }
-  if (what == "unused_flag21") {
-    return &Thing::unused_flag21;
+  if (what == "is_green_blooded") {
+    return &Thing::is_green_blooded;
   }
   if (what == "is_able_to_jump_without_tiring") {
     return &Thing::is_able_to_jump_without_tiring;
@@ -1442,8 +1442,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_able_to_jump_onto") {
     return &Thing::is_able_to_jump_onto;
   }
-  if (what == "unused_flag25") {
-    return &Thing::unused_flag25;
+  if (what == "is_crushable") {
+    return &Thing::is_crushable;
   }
   if (what == "unused_flag2") {
     return &Thing::unused_flag2;

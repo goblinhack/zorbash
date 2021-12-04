@@ -4,6 +4,9 @@
 <!--                                                                                                                                              -->
 <!-- Next todo                                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
+<!-- - clener is wielding a weaopn???                                                                                                     -->
+<!-- - goblin bones                                                                                                                         -->
+<!-- - minion wander looks odd                                                                                                             -->
 <!-- - crush, fire, cold, energy and lightning damage                                                                                       -->
 <!-- - test poison rings                                                                                                                          -->
 <!-- - necro ring                                                                                                                                 -->

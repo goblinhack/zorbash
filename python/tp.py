@@ -349,23 +349,23 @@ class Tp:
     def set_unused_flag15(self, value):
         my.tp_set_unused_flag15(self, value)
 
-    def set_unused_flag16(self, value):
-        my.tp_set_unused_flag16(self, value)
+    def set_is_bony(self, value):
+        my.tp_set_is_bony(self, value)
 
-    def set_unused_flag17(self, value):
-        my.tp_set_unused_flag17(self, value)
+    def set_is_pink_blooded(self, value):
+        my.tp_set_is_pink_blooded(self, value)
 
-    def set_unused_flag18(self, value):
-        my.tp_set_unused_flag18(self, value)
+    def set_is_pink_splatter(self, value):
+        my.tp_set_is_pink_splatter(self, value)
 
-    def set_unused_flag19(self, value):
-        my.tp_set_unused_flag19(self, value)
+    def set_is_green_splatter(self, value):
+        my.tp_set_is_green_splatter(self, value)
 
-    def set_unused_flag20(self, value):
-        my.tp_set_unused_flag20(self, value)
+    def set_is_red_blooded(self, value):
+        my.tp_set_is_red_blooded(self, value)
 
-    def set_unused_flag21(self, value):
-        my.tp_set_unused_flag21(self, value)
+    def set_is_green_blooded(self, value):
+        my.tp_set_is_green_blooded(self, value)
 
     def set_is_able_to_jump_without_tiring(self, value):
         my.tp_set_is_able_to_jump_without_tiring(self, value)
@@ -379,8 +379,8 @@ class Tp:
     def set_is_able_to_jump_onto(self, value):
         my.tp_set_is_able_to_jump_onto(self, value)
 
-    def set_unused_flag25(self, value):
-        my.tp_set_unused_flag25(self, value)
+    def set_is_crushable(self, value):
+        my.tp_set_is_crushable(self, value)
 
     def set_birthplace_leas(self, value):
         my.tp_set_birthplace_leas(self, value)

@@ -394,16 +394,16 @@ private:
   int _unused_flag13 {};
   int _unused_flag14 {};
   int _unused_flag15 {};
-  int _unused_flag16 {};
-  int _unused_flag17 {};
-  int _unused_flag18 {};
-  int _unused_flag19 {};
+  int _is_bony {};
+  int _is_pink_blooded {};
+  int _is_pink_splatter {};
+  int _is_green_splatter {};
   int _unused_flag2 {};
-  int _unused_flag20 {};
-  int _unused_flag21 {};
+  int _is_red_blooded {};
+  int _is_green_blooded {};
   int _is_able_to_jump_without_tiring {};
   int _is_spider {};
-  int _unused_flag25 {};
+  int _is_crushable {};
   int _unused_flag3 {};
   int _unused_flag4 {};
   int _unused_flag5 {};
@@ -998,16 +998,16 @@ public:
   int unused_flag13(void) const { return _unused_flag13; }
   int unused_flag14(void) const { return _unused_flag14; }
   int unused_flag15(void) const { return _unused_flag15; }
-  int unused_flag16(void) const { return _unused_flag16; }
-  int unused_flag17(void) const { return _unused_flag17; }
-  int unused_flag18(void) const { return _unused_flag18; }
-  int unused_flag19(void) const { return _unused_flag19; }
+  int is_bony(void) const { return _is_bony; }
+  int is_pink_blooded(void) const { return _is_pink_blooded; }
+  int is_pink_splatter(void) const { return _is_pink_splatter; }
+  int is_green_splatter(void) const { return _is_green_splatter; }
   int unused_flag1(void) const { return _unused_flag1; }
-  int unused_flag20(void) const { return _unused_flag20; }
-  int unused_flag21(void) const { return _unused_flag21; }
+  int is_red_blooded(void) const { return _is_red_blooded; }
+  int is_green_blooded(void) const { return _is_green_blooded; }
   int is_able_to_jump_without_tiring(void) const { return _is_able_to_jump_without_tiring; }
   int is_spider(void) const { return _is_spider; }
-  int unused_flag25(void) const { return _unused_flag25; }
+  int is_crushable(void) const { return _is_crushable; }
   int unused_flag2(void) const { return _unused_flag2; }
   int unused_flag3(void) const { return _unused_flag3; }
   int unused_flag4(void) const { return _unused_flag4; }
@@ -1395,16 +1395,16 @@ public:
   void set_unused_flag13(int v) { _unused_flag13 = v; }
   void set_unused_flag14(int v) { _unused_flag14 = v; }
   void set_unused_flag15(int v) { _unused_flag15 = v; }
-  void set_unused_flag16(int v) { _unused_flag16 = v; }
-  void set_unused_flag17(int v) { _unused_flag17 = v; }
-  void set_unused_flag18(int v) { _unused_flag18 = v; }
-  void set_unused_flag19(int v) { _unused_flag19 = v; }
+  void set_is_bony(int v) { _is_bony = v; }
+  void set_is_pink_blooded(int v) { _is_pink_blooded = v; }
+  void set_is_pink_splatter(int v) { _is_pink_splatter = v; }
+  void set_is_green_splatter(int v) { _is_green_splatter = v; }
   void set_unused_flag1(int v) { _unused_flag1 = v; }
-  void set_unused_flag20(int v) { _unused_flag20 = v; }
-  void set_unused_flag21(int v) { _unused_flag21 = v; }
+  void set_is_red_blooded(int v) { _is_red_blooded = v; }
+  void set_is_green_blooded(int v) { _is_green_blooded = v; }
   void set_is_able_to_jump_without_tiring(int v) { _is_able_to_jump_without_tiring = v; }
   void set_is_spider(int v) { _is_spider = v; }
-  void set_unused_flag25(int v) { _unused_flag25 = v; }
+  void set_is_crushable(int v) { _is_crushable = v; }
   void set_unused_flag2(int v) { _unused_flag2 = v; }
   void set_unused_flag3(int v) { _unused_flag3 = v; }
   void set_unused_flag4(int v) { _unused_flag4 = v; }
@@ -1430,6 +1430,8 @@ class Tp *tp_random_ascend_sewer(void);
 class Tp *tp_random_blood(void);
 class Tp *tp_random_bones(void);
 class Tp *tp_random_blood_splatter(void);
+class Tp *tp_random_green_splatter(void);
+class Tp *tp_random_pink_splatter(void);
 class Tp *tp_random_deco(void);
 class Tp *tp_random_descend_sewer(void);
 class Tp *tp_random_dirt(void);

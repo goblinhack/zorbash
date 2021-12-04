@@ -47,6 +47,7 @@ def tp_init(name, text_name):
     mytp.set_is_able_to_tire(True)
     mytp.set_is_attackable_by_monst(True)
     mytp.set_is_attackable_by_player(True)
+    mytp.set_is_crushable(True)
     mytp.set_is_described_when_hovering_over(True)
     mytp.set_is_floating(True)
     mytp.set_is_hittable(True)

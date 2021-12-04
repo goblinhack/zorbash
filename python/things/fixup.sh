@@ -279,18 +279,18 @@ do
       set_unused_flag13 \
       set_unused_flag14 \
       set_unused_flag15 \
-      set_unused_flag16 \
-      set_unused_flag17 \
-      set_unused_flag18 \
-      set_unused_flag19 \
+      set_is_bony \
+      set_is_pink_blooded \
+      set_is_pink_splatter \
+      set_is_green_splatter \
       set_unused_flag2 \
-      set_unused_flag20 \
-      set_unused_flag21 \
+      set_is_red_blooded \
+      set_is_green_blooded \
       set_is_able_to_jump_without_tiring \
       set_is_spider \
       set_is_able_to_jump_attack \
       set_is_able_to_jump_onto \
-      set_unused_flag25 \
+      set_is_crushable \
       set_ai_aggression_level_pct \
       set_is_able_to_see_in_the_dark \
       set_is_gfx_anim_synced_with_owner \

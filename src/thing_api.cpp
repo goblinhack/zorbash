@@ -1299,28 +1299,28 @@ int Thing::unused_flag15(void)
   return (tp()->unused_flag15());
 }
 
-int Thing::unused_flag16(void)
+int Thing::is_bony(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->unused_flag16());
+  return (tp()->is_bony());
 }
 
-int Thing::unused_flag17(void)
+int Thing::is_pink_blooded(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->unused_flag17());
+  return (tp()->is_pink_blooded());
 }
 
-int Thing::unused_flag18(void)
+int Thing::is_pink_splatter(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->unused_flag18());
+  return (tp()->is_pink_splatter());
 }
 
-int Thing::unused_flag19(void)
+int Thing::is_green_splatter(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->unused_flag19());
+  return (tp()->is_green_splatter());
 }
 
 int Thing::unused_flag1(void)
@@ -1329,16 +1329,16 @@ int Thing::unused_flag1(void)
   return (tp()->unused_flag1());
 }
 
-int Thing::unused_flag20(void)
+int Thing::is_red_blooded(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->unused_flag20());
+  return (tp()->is_red_blooded());
 }
 
-int Thing::unused_flag21(void)
+int Thing::is_green_blooded(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->unused_flag21());
+  return (tp()->is_green_blooded());
 }
 
 int Thing::is_able_to_jump_without_tiring(void)
@@ -1365,10 +1365,10 @@ int Thing::is_able_to_jump_onto(void)
   return (tp()->is_able_to_jump_onto());
 }
 
-int Thing::unused_flag25(void)
+int Thing::is_crushable(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->unused_flag25());
+  return (tp()->is_crushable());
 }
 
 int Thing::ai_aggression_level_pct(void)

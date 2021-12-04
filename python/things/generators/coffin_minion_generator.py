@@ -33,6 +33,7 @@ def tp_init(name, text_name):
     mytp.set_is_attackable_by_monst(True)
     mytp.set_is_attackable_by_player(True)
     mytp.set_is_burnable(True)
+    mytp.set_is_crushable(True)
     mytp.set_is_described_when_hovering_over(True)
     mytp.set_is_ethereal_minion_generator(True)
     mytp.set_is_loggable(True)
