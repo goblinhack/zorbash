@@ -22,7 +22,7 @@ def on_final_use(owner, item, target, x, y):
     if my.thing_is_player(owner):
         my.topcon("The wand crumbles into dust.")
 
-def on_you_are_hit(me, hitter, real_hitter, x, y, crit, damage):
+def on_you_are_hit_and_now_dead(me, hitter, real_hitter, x, y, crit, damage):
     explode(me, x, y)
 
 def on_fire(me, x, y):
@@ -67,7 +67,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_on_fall_do("wand_descent.on_fall()")
     mytp.set_on_final_use_do("wand_descent.on_final_use()")
     mytp.set_on_idle_dice("1d1000+200:wand_descent.on_idle()")
-    mytp.set_on_you_are_hit_do("wand_descent.on_you_are_hit()")
+    mytp.set_on_you_are_hit_and_now_dead_do("wand_descent.on_you_are_hit_and_now_dead()")
     mytp.set_on_you_are_on_fire_do("wand_descent.on_fire()")
     mytp.set_range_max(7)
     mytp.set_text_a_or_an("a")

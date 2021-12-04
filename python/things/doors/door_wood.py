@@ -2,7 +2,7 @@ import my
 import tp
 
 
-def on_you_are_hit(me, hitter, real_hitter, x, y, crit, damage):
+def on_you_are_hit_but_still_alive(me, hitter, real_hitter, x, y, crit, damage):
     my.sound_play("door_hit{}".format(my.non_pcg_randint(1, 2)))
 
 def on_death(me, x, y):
@@ -39,7 +39,7 @@ def tp_init(name):
     mytp.set_on_death_do("door_wood.on_death()")
     mytp.set_on_death_is_open(True)
     mytp.set_on_open_do("door_wood.on_open()")
-    mytp.set_on_you_are_hit_do("door_wood.on_you_are_hit()")
+    mytp.set_on_you_are_hit_but_still_alive_do("door_wood.on_you_are_hit_but_still_alive()")
     mytp.set_stat_armor_class(20)
     mytp.set_stat_attack_bonus(10) # 10, means no bonus
     mytp.set_text_a_or_an("the")

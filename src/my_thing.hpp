@@ -546,7 +546,8 @@ public:
   const std::string &on_fall_do(void);
   const std::string &on_you_are_on_fire_do(void);
   const std::string &on_firing_at_something_do(void);
-  const std::string &on_you_are_hit_do(void);
+  const std::string &on_you_are_hit_but_still_alive_do(void);
+  const std::string &on_you_are_hit_and_now_dead_do(void);
   const std::string &on_lifespan_do(void);
   const std::string &on_you_miss_do(void);
   const std::string &on_move_do(void);
@@ -1557,7 +1558,8 @@ public:
   void on_unequip(Thingp what);
   void on_use(Thingp what);
   void on_use(Thingp what, Thingp target);
-  void on_you_are_hit(Thingp hitter, Thingp real_hitter, bool crit, int dmg);
+  void on_you_are_hit_but_still_alive(Thingp hitter, Thingp real_hitter, bool crit, int dmg);
+  void on_you_are_hit_and_now_dead(Thingp hitter, Thingp real_hitter, bool crit, int dmg);
   void on_you_bite_attack(void);
   void on_you_miss_do(Thingp hitter);
   void poisoned(void);

@@ -2,7 +2,7 @@ import my
 import tp
 
 
-def on_you_are_hit(me, hitter, real_hitter, x, y, crit, damage):
+def on_you_are_hit_and_now_dead(me, hitter, real_hitter, x, y, crit, damage):
     my.level_spawn_at_thing(me, "small_fire")
     my.level_place_at(me, "dry_grass_dead", x, y)
     my.topcon("The dry grass burns!")
@@ -19,7 +19,7 @@ def tp_init(name, tiles=[]):
     mytp.set_is_described_when_hovering_over(True)
     mytp.set_is_dry_grass(True)
     mytp.set_is_interesting(True)
-    mytp.set_on_you_are_hit_do("dry_grass.on_you_are_hit()")
+    mytp.set_on_you_are_hit_and_now_dead_do("dry_grass.on_you_are_hit_and_now_dead()")
     mytp.set_text_a_or_an("the")
     mytp.set_text_description("Brittle dry and slightly funky grass.")
     mytp.set_z_depth(my.MAP_DEPTH_FLOOR2)

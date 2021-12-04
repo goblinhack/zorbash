@@ -447,7 +447,8 @@ private:
   std::string _on_fall_do;
   std::string _on_you_are_on_fire_do;
   std::string _on_firing_at_something_do;
-  std::string _on_you_are_hit_do;
+  std::string _on_you_are_hit_but_still_alive_do;
+  std::string _on_you_are_hit_and_now_dead_do;
   std::string _on_idle_dice_str;
   std::string _on_lifespan_do;
   std::string _on_you_miss_do;
@@ -640,7 +641,8 @@ public:
   const std::string &on_fall_do(void) const { return _on_fall_do; }
   const std::string &on_you_are_on_fire_do(void) const { return _on_you_are_on_fire_do; }
   const std::string &on_firing_at_something_do(void) const { return _on_firing_at_something_do; }
-  const std::string &on_you_are_hit_do(void) const { return _on_you_are_hit_do; }
+  const std::string &on_you_are_hit_but_still_alive_do(void) const { return _on_you_are_hit_but_still_alive_do; }
+  const std::string &on_you_are_hit_and_now_dead_do(void) const { return _on_you_are_hit_and_now_dead_do; }
   const std::string &on_lifespan_do(void) const { return _on_lifespan_do; }
   const std::string &on_you_miss_do(void) const { return _on_you_miss_do; }
   const std::string &on_move_do(void) const { return _on_move_do; }
@@ -1341,7 +1343,8 @@ public:
   void set_on_tick_do(const std::string &v) { _on_tick_do = v; }
   void set_on_unequip_do(const std::string &v) { _on_unequip_do = v; }
   void set_on_use_do(const std::string &v) { _on_use_do = v; }
-  void set_on_you_are_hit_do(const std::string &v) { _on_you_are_hit_do = v; }
+  void set_on_you_are_hit_but_still_alive_do(const std::string &v) { _on_you_are_hit_but_still_alive_do = v; }
+  void set_on_you_are_hit_and_now_dead_do(const std::string &v) { _on_you_are_hit_and_now_dead_do = v; }
   void set_on_you_are_on_fire_do(const std::string &v) { _on_you_are_on_fire_do = v; }
   void set_on_you_bite_attack_do(const std::string &v) { _on_you_bite_attack_do = v; }
   void set_on_you_miss_do(const std::string &v) { _on_you_miss_do = v; }

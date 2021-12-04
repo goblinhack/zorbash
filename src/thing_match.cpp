@@ -334,10 +334,10 @@ bool Thing::matches(const std::string &what)
   if (is_described_when_hovering_over() && (what == "is_described_when_hovering_over")) {
     return true;
   }
-  if (is_destroyed_on_hit_or_miss() && (what == "is_defeated _on_you_are_hit_or_miss")) {
+  if (is_destroyed_on_hit_or_miss() && (what == "is_defeated _on_you_are_hit_but_still_alive_or_miss")) {
     return true;
   }
-  if (is_destroyed_on_hitting() && (what == "is_defeated _on_you_are_hitting")) {
+  if (is_destroyed_on_hitting() && (what == "is_defeated _on_you_are_hit_but_still_aliveting")) {
     return true;
   }
   if (is_dirt() && (what == "is_dirt")) {
@@ -1057,12 +1057,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   }
   if (what == "is_deep_water") {
     return &Thing::is_deep_water;
-  }
-  if (what == "is_defeated _on_you_are_hit_or_miss") {
-    return &Thing::is_destroyed_on_hit_or_miss;
-  }
-  if (what == "is_defeated _on_you_are_hitting") {
-    return &Thing::is_destroyed_on_hitting;
   }
   if (what == "is_descend_dungeon") {
     return &Thing::is_descend_dungeon;

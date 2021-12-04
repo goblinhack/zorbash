@@ -41,7 +41,7 @@ def explode(me, x, y):
     my.level_spawn_fire_around_thing(me, "fire")
     my.thing_defeated(me, "exploded")
 
-def on_you_are_hit(me, hitter, real_hitter, x, y, crit, damage):
+def on_you_are_hit_but_still_alive(me, hitter, real_hitter, x, y, crit, damage):
     explode(me, x, y)
 
 def on_fire(me, x, y):
@@ -100,7 +100,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_on_enchant_do("potion_health.on_enchant()")
     mytp.set_on_fall_do("potion_health.on_fall()")
     mytp.set_on_use_do("potion_health.on_use()")
-    mytp.set_on_you_are_hit_do("potion_health.on_you_are_hit()")
+    mytp.set_on_you_are_hit_but_still_alive_do("potion_health.on_you_are_hit_but_still_alive()")
     mytp.set_on_you_are_on_fire_do("potion_health.on_fire()")
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("%%fg=pink$A potion of health restoration.")

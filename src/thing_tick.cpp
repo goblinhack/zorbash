@@ -70,13 +70,6 @@ void Thing::achieve_goals_in_life(void)
   dbg("Achieve goals tick %u", game->tick_current);
   TRACE_AND_INDENT();
 
-  //
-  // Allow the same thing to hit us again
-  //
-  if (maybe_aip()) {
-    get_aip()->recently_hit_by.clear();
-  }
-
   update_light_strength();
 
   //
@@ -281,6 +274,13 @@ void Thing::tick(void)
   IF_DEBUG3 { dbg("Tick"); }
   TRACE_AND_INDENT();
   update_interpolated_position();
+
+  //
+  // Allow the same thing to hit us again
+  //
+  if (maybe_aip()) {
+    get_aip()->recently_hit_by.clear();
+  }
 
   if (unlikely(is_dead)) {
     //

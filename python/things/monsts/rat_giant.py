@@ -6,7 +6,7 @@ def on_you_bite_attack(me, x, y):
     if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound):
         my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
 
-def on_you_are_hit(me, hitter, real_hitter, x, y, crit, damage):
+def on_you_are_hit_but_still_alive(me, hitter, real_hitter, x, y, crit, damage):
     sound = "hiss{}".format(my.non_pcg_randint(1, 10))
     if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound):
         my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
@@ -77,7 +77,7 @@ def tp_init(name, text_name):
     mytp.set_normal_placement_rules(True)
     mytp.set_nutrition_dice("1d6")
     mytp.set_on_death_do("rat_giant.on_death()")
-    mytp.set_on_you_are_hit_do("rat_giant.on_you_are_hit()")
+    mytp.set_on_you_are_hit_but_still_alive_do("rat_giant.on_you_are_hit_but_still_alive()")
     mytp.set_on_you_bite_attack_do("rat_giant.on_you_bite_attack()")
     mytp.set_on_you_miss_do("rat_giant.on_you_miss_do()")
     mytp.set_rarity(my.RARITY_COMMON)

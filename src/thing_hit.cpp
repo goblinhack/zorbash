@@ -18,17 +18,21 @@
 //
 // Python callback upon being hit
 //
-void Thing::on_you_are_hit(Thingp hitter,      // an arrow / monst /...
-                           Thingp real_hitter, // who fired the arrow?
-                           bool crit, int damage)
+void Thing::on_you_are_hit_but_still_alive(Thingp hitter,      // an arrow / monst /...
+                                           Thingp real_hitter, // who fired the arrow?
+                                           bool crit, int damage)
 {
-  TRACE_AND_INDENT();
-  auto on_you_are_hit = tp()->on_you_are_hit_do();
-  if (std::empty(on_you_are_hit)) {
+  if (is_dead) {
     return;
   }
 
-  auto t = split_tokens(on_you_are_hit, '.');
+  TRACE_AND_INDENT();
+  auto on_you_are_hit_but_still_alive = tp()->on_you_are_hit_but_still_alive_do();
+  if (std::empty(on_you_are_hit_but_still_alive)) {
+    return;
+  }
+
+  auto t = split_tokens(on_you_are_hit_but_still_alive, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -46,8 +50,41 @@ void Thing::on_you_are_hit(Thingp hitter,      // an arrow / monst /...
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, real_hitter->id.id, (unsigned int) mid_at.x,
                     (unsigned int) mid_at.y, (unsigned int) crit, (unsigned int) damage);
   } else {
-    ERR("Bad on_you_are_hit call [%s] expected mod:function, got %d elems", on_you_are_hit.c_str(),
-        (int) on_you_are_hit.size());
+    ERR("Bad on_you_are_hit_but_still_alive call [%s] expected mod:function, got %d elems",
+        on_you_are_hit_but_still_alive.c_str(), (int) on_you_are_hit_but_still_alive.size());
+  }
+}
+
+void Thing::on_you_are_hit_and_now_dead(Thingp hitter,      // an arrow / monst /...
+                                        Thingp real_hitter, // who fired the arrow?
+                                        bool crit, int damage)
+{
+  TRACE_AND_INDENT();
+  auto on_you_are_hit_and_now_dead = tp()->on_you_are_hit_and_now_dead_do();
+  if (std::empty(on_you_are_hit_and_now_dead)) {
+    return;
+  }
+
+  auto t = split_tokens(on_you_are_hit_and_now_dead, '.');
+  if (t.size() == 2) {
+    auto        mod   = t[ 0 ];
+    auto        fn    = t[ 1 ];
+    std::size_t found = fn.find("()");
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
+
+    dbg("Call %s.%s(%s, %s, %s, crit=%d, damage=%d)", mod.c_str(), fn.c_str(), to_string().c_str(),
+        hitter->to_string().c_str(), real_hitter->to_string().c_str(), crit, damage);
+
+    //
+    // Warning cannot handle negative values here for damage
+    //
+    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, real_hitter->id.id, (unsigned int) mid_at.x,
+                    (unsigned int) mid_at.y, (unsigned int) crit, (unsigned int) damage);
+  } else {
+    ERR("Bad on_you_are_hit_and_now_dead call [%s] expected mod:function, got %d elems",
+        on_you_are_hit_and_now_dead.c_str(), (int) on_you_are_hit_and_now_dead.size());
   }
 }
 
@@ -56,6 +93,10 @@ void Thing::on_you_are_hit(Thingp hitter,      // an arrow / monst /...
 //
 void Thing::on_you_miss_do(Thingp hitter)
 {
+  if (is_dead) {
+    return;
+  }
+
   TRACE_AND_INDENT();
   auto on_you_miss_do = tp()->on_you_miss_do();
   if (std::empty(on_you_miss_do)) {
@@ -82,6 +123,10 @@ void Thing::on_you_miss_do(Thingp hitter)
 
 void Thing::on_you_bite_attack(void)
 {
+  if (is_dead) {
+    return;
+  }
+
   TRACE_AND_INDENT();
   auto on_you_bite_attack = tp()->on_you_bite_attack_do();
   if (std::empty(on_you_bite_attack)) {
@@ -773,15 +818,26 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
   //
   // Python callback
   //
-  if (! is_dead) {
-    on_you_are_hit(hitter, real_hitter, crit, damage);
+  if (is_dead || is_dying) {
+    on_you_are_hit_and_now_dead(hitter, real_hitter, crit, damage);
+  } else {
+    on_you_are_hit_but_still_alive(hitter, real_hitter, crit, damage);
   }
 
   //
   // Keep track of who hit me to avoid multiple hits per tick
   //
   if (maybe_aip()) {
-    get_aip()->recently_hit_by[ real_hitter->id ] = true;
+    if (is_dead) {
+      //
+      // If dead, allow things to chomp on your bones
+      //
+    } else {
+      //
+      // If alive, one hit per tick
+      //
+      get_aip()->recently_hit_by[ real_hitter->id ] = true;
+    }
   }
 
   return true;

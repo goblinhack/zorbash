@@ -6000,10 +6000,16 @@ const std::string &Thing::on_firing_at_something_do(void)
   return (tp()->on_firing_at_something_do());
 }
 
-const std::string &Thing::on_you_are_hit_do(void)
+const std::string &Thing::on_you_are_hit_but_still_alive_do(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->on_you_are_hit_do());
+  return (tp()->on_you_are_hit_but_still_alive_do());
+}
+
+const std::string &Thing::on_you_are_hit_and_now_dead_do(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->on_you_are_hit_and_now_dead_do());
 }
 
 const std::string &Thing::on_lifespan_do(void)

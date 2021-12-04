@@ -204,7 +204,7 @@ void Thing::defeat(Thingp defeater, const char *reason)
     }
   }
 
-  if (is_player() || (is_monst() && ! level->is_being_destroyed)) {
+  {
     auto on_death = on_death_do();
     if (! std::empty(on_death)) {
       auto t = split_tokens(on_death, '.');

@@ -235,8 +235,11 @@ class Tp:
     def set_on_owner_damage_bite_do(self, value):
         my.tp_set_on_owner_damage_bite_do(self, value)
 
-    def set_on_you_are_hit_do(self, value):
-        my.tp_set_on_you_are_hit_do(self, value)
+    def set_on_you_are_hit_but_still_alive_do(self, value):
+        my.tp_set_on_you_are_hit_but_still_alive_do(self, value)
+
+    def set_on_you_are_hit_and_now_dead_do(self, value):
+        my.tp_set_on_you_are_hit_and_now_dead_do(self, value)
 
     def set_on_you_miss_do(self, value):
         my.tp_set_on_you_miss_do(self, value)
