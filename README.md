@@ -4,7 +4,6 @@
 <!--                                                                                                                                              -->
 <!-- Next todo                                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
-<!-- - enchant loop                                                                                                                        -->
 <!-- - minion wander looks odd                                                                                                             -->
 <!-- - crush, fire, cold, energy and lightning damage                                                                                       -->
 <!-- - test poison rings                                                                                                                          -->

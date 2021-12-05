@@ -663,7 +663,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
     }
   }
 
-#if 1
+#if 0
   if (is_debug_type()) {
     con("This is what I can see:");
     for (int y = 0; y < MAP_HEIGHT; y++) {
@@ -1202,7 +1202,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
     }
   }
 
-#if 1
+#if 0
   if (is_debug_type()) {
     con("This is what I am searching (type %d):", search_type);
     for (int y = 0; y < MAP_HEIGHT; y++) {
@@ -1544,7 +1544,7 @@ bool Thing::ai_tick(bool recursing)
     }
   }
 
-#if 1
+#if 0
   if (is_debug_type()) {
     con("This is my field of view:");
     con("  .  - can see currently");
