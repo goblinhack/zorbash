@@ -95,6 +95,7 @@ public:
   uint64_t has_projectile                               : 1 {}; // current projectile being fired
   uint64_t is_activated                                 : 1 {}; // this skill is activated
   uint64_t is_attached                                  : 1 {}; // is attached to the level
+  uint64_t is_scheduled_for_gc                          : 1 {};
   uint64_t is_being_destroyed                           : 1 {};
   uint64_t is_bouncing                                  : 1 {};
   uint64_t is_changing_level                            : 1 {}; // is in the process of changing level

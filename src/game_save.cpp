@@ -252,6 +252,8 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   shift++;
   bits64 |= (my.t->is_being_destroyed ? 1LLU : 0LLU) << shift;
   shift++;
+  bits64 |= (my.t->is_scheduled_for_gc ? 1LLU : 0LLU) << shift;
+  shift++;
   bits64 |= (my.t->is_bouncing ? 1LLU : 0LLU) << shift;
   shift++;
   bits64 |= (my.t->is_changing_level ? 1LLU : 0LLU) << shift;

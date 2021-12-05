@@ -313,6 +313,8 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
   shift++;
   my.t->is_being_destroyed = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU;
   shift++;
+  my.t->is_scheduled_for_gc = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU;
+  shift++;
   my.t->is_bouncing = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU;
   shift++;
   my.t->is_changing_level = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU;

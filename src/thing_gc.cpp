@@ -15,6 +15,11 @@
 
 void Thing::gc(void)
 {
+  if (is_scheduled_for_gc) {
+    return;
+  }
+  is_scheduled_for_gc = true;
+
   TRACE_AND_INDENT();
   int  group  = get_group();
   auto result = level->all_things_to_be_destroyed[ group ].insert(std::pair(id, this));
