@@ -20,16 +20,16 @@
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"
 
-void Thing::destroy(Thingp defeater, const std::string &reason)
+void Thing::last_rites(Thingp defeater, const std::string &reason)
 {
   TRACE_AND_INDENT();
-  destroy(defeater, reason.c_str());
+  last_rites(defeater, reason.c_str());
 }
 
 //
 // Lower level function than dead. Adds the thing to gc.
 //
-void Thing::destroy(Thingp defeater, const char *reason)
+void Thing::last_rites(Thingp defeater, const char *reason)
 {
   //
   // Check we're not in a death loop
