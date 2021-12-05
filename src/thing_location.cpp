@@ -139,12 +139,15 @@ void Thing::location_check_forced(void)
 void Thing::location_check(void)
 {
   TRACE_AND_INDENT();
-  if (get_tick_last_location_check() == game->tick_current) {
-    return;
-  }
 
-  dbg("Do location check. Last %d, game tick %d", get_tick_last_location_check(), game->tick_current);
-  set_tick_last_location_check(game->tick_current);
+  if (maybe_infop()) {
+    if (get_tick_last_location_check() == game->tick_current) {
+      return;
+    }
+
+    dbg("Do location check. Last %d, game tick %d", get_tick_last_location_check(), game->tick_current);
+    set_tick_last_location_check(game->tick_current);
+  }
 
   location_check_forced();
 }
@@ -165,6 +168,9 @@ void Thing::location_check_all_things_at(void)
   //
   FOR_ALL_THINGS(level, t, mid_at.x, mid_at.y)
   {
+    if (t->is_hidden) {
+      continue;
+    }
     TRACE_AND_INDENT();
     IF_DEBUG2 { t->log("Do location check"); }
     t->location_check();
@@ -186,6 +192,9 @@ void Thing::location_check_forced_all_things_at(void)
   //
   FOR_ALL_THINGS(level, t, mid_at.x, mid_at.y)
   {
+    if (t->is_hidden) {
+      continue;
+    }
     TRACE_AND_INDENT();
     IF_DEBUG2 { t->log("Do location check"); }
     t->location_check_forced();

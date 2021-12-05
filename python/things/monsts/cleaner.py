@@ -50,6 +50,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_hunger_insatiable(True)
     mytp.set_is_item_collector(True)
     mytp.set_is_item_eater(True)
+    mytp.set_is_debug_type(True)
     mytp.set_is_jelly_baby_eater(True)
     mytp.set_is_jelly_eater(True)
     mytp.set_is_loggable(True)
