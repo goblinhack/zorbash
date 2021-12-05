@@ -84,6 +84,41 @@ int Thing::on_owner_damage_future1(Thingp owner, Thingp hitter, int damage)
   return damage;
 }
 
+int Thing::on_damage_future1(Thingp hitter, int damage)
+{
+  verify(MTYPE_THING, hitter);
+  if (! hitter) {
+    err("Cannot damage_future1 null thing");
+    return damage;
+  }
+
+  auto on_damage_future1 = on_damage_future1_do();
+  if (std::empty(on_damage_future1)) {
+    return damage;
+  }
+
+  auto t = split_tokens(on_damage_future1, '.');
+  if (t.size() == 2) {
+    auto        mod   = t[ 0 ];
+    auto        fn    = t[ 1 ];
+    std::size_t found = fn.find("()");
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
+
+    dbg("Call %s.%s(%s, %s, %s, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), hitter->to_string().c_str(),
+        damage);
+
+    return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, (unsigned int) mid_at.x,
+                          (unsigned int) mid_at.y, (unsigned int) damage);
+  }
+
+  ERR("Bad on_damage_future1 call [%s] expected mod:function, got %d elems", on_damage_future1.c_str(),
+      (int) on_damage_future1.size());
+
+  return damage;
+}
+
 ///////////////////////////////////////////////////////////////////////////
 // damage_future2
 ///////////////////////////////////////////////////////////////////////////
@@ -146,6 +181,41 @@ int Thing::on_owner_damage_future2(Thingp owner, Thingp hitter, int damage)
 
   ERR("Bad on_owner_damage_future2 call [%s] expected mod:function, got %d elems", on_owner_damage_future2.c_str(),
       (int) on_owner_damage_future2.size());
+
+  return damage;
+}
+
+int Thing::on_damage_future2(Thingp hitter, int damage)
+{
+  verify(MTYPE_THING, hitter);
+  if (! hitter) {
+    err("Cannot damage_future2 null thing");
+    return damage;
+  }
+
+  auto on_damage_future2 = on_damage_future2_do();
+  if (std::empty(on_damage_future2)) {
+    return damage;
+  }
+
+  auto t = split_tokens(on_damage_future2, '.');
+  if (t.size() == 2) {
+    auto        mod   = t[ 0 ];
+    auto        fn    = t[ 1 ];
+    std::size_t found = fn.find("()");
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
+
+    dbg("Call %s.%s(%s, %s, %s, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), hitter->to_string().c_str(),
+        damage);
+
+    return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, (unsigned int) mid_at.x,
+                          (unsigned int) mid_at.y, (unsigned int) damage);
+  }
+
+  ERR("Bad on_damage_future2 call [%s] expected mod:function, got %d elems", on_damage_future2.c_str(),
+      (int) on_damage_future2.size());
 
   return damage;
 }
@@ -216,6 +286,41 @@ int Thing::on_owner_damage_future3(Thingp owner, Thingp hitter, int damage)
   return damage;
 }
 
+int Thing::on_damage_future3(Thingp hitter, int damage)
+{
+  verify(MTYPE_THING, hitter);
+  if (! hitter) {
+    err("Cannot damage_future3 null thing");
+    return damage;
+  }
+
+  auto on_damage_future3 = on_damage_future3_do();
+  if (std::empty(on_damage_future3)) {
+    return damage;
+  }
+
+  auto t = split_tokens(on_damage_future3, '.');
+  if (t.size() == 2) {
+    auto        mod   = t[ 0 ];
+    auto        fn    = t[ 1 ];
+    std::size_t found = fn.find("()");
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
+
+    dbg("Call %s.%s(%s, %s, %s, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), hitter->to_string().c_str(),
+        damage);
+
+    return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, (unsigned int) mid_at.x,
+                          (unsigned int) mid_at.y, (unsigned int) damage);
+  }
+
+  ERR("Bad on_damage_future3 call [%s] expected mod:function, got %d elems", on_damage_future3.c_str(),
+      (int) on_damage_future3.size());
+
+  return damage;
+}
+
 ///////////////////////////////////////////////////////////////////////////
 // damage_future4
 ///////////////////////////////////////////////////////////////////////////
@@ -278,6 +383,41 @@ int Thing::on_owner_damage_future4(Thingp owner, Thingp hitter, int damage)
 
   ERR("Bad on_owner_damage_future4 call [%s] expected mod:function, got %d elems", on_owner_damage_future4.c_str(),
       (int) on_owner_damage_future4.size());
+
+  return damage;
+}
+
+int Thing::on_damage_future4(Thingp hitter, int damage)
+{
+  verify(MTYPE_THING, hitter);
+  if (! hitter) {
+    err("Cannot damage_future4 null thing");
+    return damage;
+  }
+
+  auto on_damage_future4 = on_damage_future4_do();
+  if (std::empty(on_damage_future4)) {
+    return damage;
+  }
+
+  auto t = split_tokens(on_damage_future4, '.');
+  if (t.size() == 2) {
+    auto        mod   = t[ 0 ];
+    auto        fn    = t[ 1 ];
+    std::size_t found = fn.find("()");
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
+
+    dbg("Call %s.%s(%s, %s, %s, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), hitter->to_string().c_str(),
+        damage);
+
+    return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, (unsigned int) mid_at.x,
+                          (unsigned int) mid_at.y, (unsigned int) damage);
+  }
+
+  ERR("Bad on_damage_future4 call [%s] expected mod:function, got %d elems", on_damage_future4.c_str(),
+      (int) on_damage_future4.size());
 
   return damage;
 }
@@ -348,6 +488,41 @@ int Thing::on_owner_damage_future5(Thingp owner, Thingp hitter, int damage)
   return damage;
 }
 
+int Thing::on_damage_future5(Thingp hitter, int damage)
+{
+  verify(MTYPE_THING, hitter);
+  if (! hitter) {
+    err("Cannot damage_future5 null thing");
+    return damage;
+  }
+
+  auto on_damage_future5 = on_damage_future5_do();
+  if (std::empty(on_damage_future5)) {
+    return damage;
+  }
+
+  auto t = split_tokens(on_damage_future5, '.');
+  if (t.size() == 2) {
+    auto        mod   = t[ 0 ];
+    auto        fn    = t[ 1 ];
+    std::size_t found = fn.find("()");
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
+
+    dbg("Call %s.%s(%s, %s, %s, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), hitter->to_string().c_str(),
+        damage);
+
+    return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, (unsigned int) mid_at.x,
+                          (unsigned int) mid_at.y, (unsigned int) damage);
+  }
+
+  ERR("Bad on_damage_future5 call [%s] expected mod:function, got %d elems", on_damage_future5.c_str(),
+      (int) on_damage_future5.size());
+
+  return damage;
+}
+
 ///////////////////////////////////////////////////////////////////////////
 // damage_crush
 ///////////////////////////////////////////////////////////////////////////
@@ -410,6 +585,41 @@ int Thing::on_owner_damage_crush(Thingp owner, Thingp hitter, int damage)
 
   ERR("Bad on_owner_damage_crush call [%s] expected mod:function, got %d elems", on_owner_damage_crush.c_str(),
       (int) on_owner_damage_crush.size());
+
+  return damage;
+}
+
+int Thing::on_damage_crush(Thingp hitter, int damage)
+{
+  verify(MTYPE_THING, hitter);
+  if (! hitter) {
+    err("Cannot damage_crush null thing");
+    return damage;
+  }
+
+  auto on_damage_crush = on_damage_crush_do();
+  if (std::empty(on_damage_crush)) {
+    return damage;
+  }
+
+  auto t = split_tokens(on_damage_crush, '.');
+  if (t.size() == 2) {
+    auto        mod   = t[ 0 ];
+    auto        fn    = t[ 1 ];
+    std::size_t found = fn.find("()");
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
+
+    dbg("Call %s.%s(%s, %s, %s, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), hitter->to_string().c_str(),
+        damage);
+
+    return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, (unsigned int) mid_at.x,
+                          (unsigned int) mid_at.y, (unsigned int) damage);
+  }
+
+  ERR("Bad on_damage_crush call [%s] expected mod:function, got %d elems", on_damage_crush.c_str(),
+      (int) on_damage_crush.size());
 
   return damage;
 }
@@ -480,6 +690,41 @@ int Thing::on_owner_damage_lightning(Thingp owner, Thingp hitter, int damage)
   return damage;
 }
 
+int Thing::on_damage_lightning(Thingp hitter, int damage)
+{
+  verify(MTYPE_THING, hitter);
+  if (! hitter) {
+    err("Cannot damage_lightning null thing");
+    return damage;
+  }
+
+  auto on_damage_lightning = on_damage_lightning_do();
+  if (std::empty(on_damage_lightning)) {
+    return damage;
+  }
+
+  auto t = split_tokens(on_damage_lightning, '.');
+  if (t.size() == 2) {
+    auto        mod   = t[ 0 ];
+    auto        fn    = t[ 1 ];
+    std::size_t found = fn.find("()");
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
+
+    dbg("Call %s.%s(%s, %s, %s, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), hitter->to_string().c_str(),
+        damage);
+
+    return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, (unsigned int) mid_at.x,
+                          (unsigned int) mid_at.y, (unsigned int) damage);
+  }
+
+  ERR("Bad on_damage_lightning call [%s] expected mod:function, got %d elems", on_damage_lightning.c_str(),
+      (int) on_damage_lightning.size());
+
+  return damage;
+}
+
 ///////////////////////////////////////////////////////////////////////////
 // damage_energy
 ///////////////////////////////////////////////////////////////////////////
@@ -542,6 +787,41 @@ int Thing::on_owner_damage_energy(Thingp owner, Thingp hitter, int damage)
 
   ERR("Bad on_owner_damage_energy call [%s] expected mod:function, got %d elems", on_owner_damage_energy.c_str(),
       (int) on_owner_damage_energy.size());
+
+  return damage;
+}
+
+int Thing::on_damage_energy(Thingp hitter, int damage)
+{
+  verify(MTYPE_THING, hitter);
+  if (! hitter) {
+    err("Cannot damage_energy null thing");
+    return damage;
+  }
+
+  auto on_damage_energy = on_damage_energy_do();
+  if (std::empty(on_damage_energy)) {
+    return damage;
+  }
+
+  auto t = split_tokens(on_damage_energy, '.');
+  if (t.size() == 2) {
+    auto        mod   = t[ 0 ];
+    auto        fn    = t[ 1 ];
+    std::size_t found = fn.find("()");
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
+
+    dbg("Call %s.%s(%s, %s, %s, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), hitter->to_string().c_str(),
+        damage);
+
+    return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, (unsigned int) mid_at.x,
+                          (unsigned int) mid_at.y, (unsigned int) damage);
+  }
+
+  ERR("Bad on_damage_energy call [%s] expected mod:function, got %d elems", on_damage_energy.c_str(),
+      (int) on_damage_energy.size());
 
   return damage;
 }
@@ -612,6 +892,41 @@ int Thing::on_owner_damage_acid(Thingp owner, Thingp hitter, int damage)
   return damage;
 }
 
+int Thing::on_damage_acid(Thingp hitter, int damage)
+{
+  verify(MTYPE_THING, hitter);
+  if (! hitter) {
+    err("Cannot damage_acid null thing");
+    return damage;
+  }
+
+  auto on_damage_acid = on_damage_acid_do();
+  if (std::empty(on_damage_acid)) {
+    return damage;
+  }
+
+  auto t = split_tokens(on_damage_acid, '.');
+  if (t.size() == 2) {
+    auto        mod   = t[ 0 ];
+    auto        fn    = t[ 1 ];
+    std::size_t found = fn.find("()");
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
+
+    dbg("Call %s.%s(%s, %s, %s, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), hitter->to_string().c_str(),
+        damage);
+
+    return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, (unsigned int) mid_at.x,
+                          (unsigned int) mid_at.y, (unsigned int) damage);
+  }
+
+  ERR("Bad on_damage_acid call [%s] expected mod:function, got %d elems", on_damage_acid.c_str(),
+      (int) on_damage_acid.size());
+
+  return damage;
+}
+
 ///////////////////////////////////////////////////////////////////////////
 // damage_digest
 ///////////////////////////////////////////////////////////////////////////
@@ -674,6 +989,41 @@ int Thing::on_owner_damage_digest(Thingp owner, Thingp hitter, int damage)
 
   ERR("Bad on_owner_damage_digest call [%s] expected mod:function, got %d elems", on_owner_damage_digest.c_str(),
       (int) on_owner_damage_digest.size());
+
+  return damage;
+}
+
+int Thing::on_damage_digest(Thingp hitter, int damage)
+{
+  verify(MTYPE_THING, hitter);
+  if (! hitter) {
+    err("Cannot damage_digest null thing");
+    return damage;
+  }
+
+  auto on_damage_digest = on_damage_digest_do();
+  if (std::empty(on_damage_digest)) {
+    return damage;
+  }
+
+  auto t = split_tokens(on_damage_digest, '.');
+  if (t.size() == 2) {
+    auto        mod   = t[ 0 ];
+    auto        fn    = t[ 1 ];
+    std::size_t found = fn.find("()");
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
+
+    dbg("Call %s.%s(%s, %s, %s, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), hitter->to_string().c_str(),
+        damage);
+
+    return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, (unsigned int) mid_at.x,
+                          (unsigned int) mid_at.y, (unsigned int) damage);
+  }
+
+  ERR("Bad on_damage_digest call [%s] expected mod:function, got %d elems", on_damage_digest.c_str(),
+      (int) on_damage_digest.size());
 
   return damage;
 }
@@ -744,6 +1094,41 @@ int Thing::on_owner_damage_melee(Thingp owner, Thingp hitter, int damage)
   return damage;
 }
 
+int Thing::on_damage_melee(Thingp hitter, int damage)
+{
+  verify(MTYPE_THING, hitter);
+  if (! hitter) {
+    err("Cannot damage_melee null thing");
+    return damage;
+  }
+
+  auto on_damage_melee = on_damage_melee_do();
+  if (std::empty(on_damage_melee)) {
+    return damage;
+  }
+
+  auto t = split_tokens(on_damage_melee, '.');
+  if (t.size() == 2) {
+    auto        mod   = t[ 0 ];
+    auto        fn    = t[ 1 ];
+    std::size_t found = fn.find("()");
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
+
+    dbg("Call %s.%s(%s, %s, %s, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), hitter->to_string().c_str(),
+        damage);
+
+    return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, (unsigned int) mid_at.x,
+                          (unsigned int) mid_at.y, (unsigned int) damage);
+  }
+
+  ERR("Bad on_damage_melee call [%s] expected mod:function, got %d elems", on_damage_melee.c_str(),
+      (int) on_damage_melee.size());
+
+  return damage;
+}
+
 ///////////////////////////////////////////////////////////////////////////
 // poison
 ///////////////////////////////////////////////////////////////////////////
@@ -806,6 +1191,41 @@ int Thing::on_owner_damage_poison(Thingp owner, Thingp hitter, int damage)
 
   ERR("Bad on_owner_damage_poison call [%s] expected mod:function, got %d elems", on_owner_damage_poison.c_str(),
       (int) on_owner_damage_poison.size());
+
+  return damage;
+}
+
+int Thing::on_damage_poison(Thingp hitter, int damage)
+{
+  verify(MTYPE_THING, hitter);
+  if (! hitter) {
+    err("Cannot damage_poison null thing");
+    return damage;
+  }
+
+  auto on_damage_poison = on_damage_poison_do();
+  if (std::empty(on_damage_poison)) {
+    return damage;
+  }
+
+  auto t = split_tokens(on_damage_poison, '.');
+  if (t.size() == 2) {
+    auto        mod   = t[ 0 ];
+    auto        fn    = t[ 1 ];
+    std::size_t found = fn.find("()");
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
+
+    dbg("Call %s.%s(%s, %s, %s, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), hitter->to_string().c_str(),
+        damage);
+
+    return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, (unsigned int) mid_at.x,
+                          (unsigned int) mid_at.y, (unsigned int) damage);
+  }
+
+  ERR("Bad on_damage_poison call [%s] expected mod:function, got %d elems", on_damage_poison.c_str(),
+      (int) on_damage_poison.size());
 
   return damage;
 }
@@ -876,6 +1296,41 @@ int Thing::on_owner_damage_necrosis(Thingp owner, Thingp hitter, int damage)
   return damage;
 }
 
+int Thing::on_damage_necrosis(Thingp hitter, int damage)
+{
+  verify(MTYPE_THING, hitter);
+  if (! hitter) {
+    err("Cannot damage_necrosis null thing");
+    return damage;
+  }
+
+  auto on_damage_necrosis = on_damage_necrosis_do();
+  if (std::empty(on_damage_necrosis)) {
+    return damage;
+  }
+
+  auto t = split_tokens(on_damage_necrosis, '.');
+  if (t.size() == 2) {
+    auto        mod   = t[ 0 ];
+    auto        fn    = t[ 1 ];
+    std::size_t found = fn.find("()");
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
+
+    dbg("Call %s.%s(%s, %s, %s, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), hitter->to_string().c_str(),
+        damage);
+
+    return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, (unsigned int) mid_at.x,
+                          (unsigned int) mid_at.y, (unsigned int) damage);
+  }
+
+  ERR("Bad on_damage_necrosis call [%s] expected mod:function, got %d elems", on_damage_necrosis.c_str(),
+      (int) on_damage_necrosis.size());
+
+  return damage;
+}
+
 ///////////////////////////////////////////////////////////////////////////
 // bite
 ///////////////////////////////////////////////////////////////////////////
@@ -938,6 +1393,41 @@ int Thing::on_owner_damage_bite(Thingp owner, Thingp hitter, int damage)
 
   ERR("Bad on_owner_damage_bite call [%s] expected mod:function, got %d elems", on_owner_damage_bite.c_str(),
       (int) on_owner_damage_bite.size());
+
+  return damage;
+}
+
+int Thing::on_damage_bite(Thingp hitter, int damage)
+{
+  verify(MTYPE_THING, hitter);
+  if (! hitter) {
+    err("Cannot damage_bite null thing");
+    return damage;
+  }
+
+  auto on_damage_bite = on_damage_bite_do();
+  if (std::empty(on_damage_bite)) {
+    return damage;
+  }
+
+  auto t = split_tokens(on_damage_bite, '.');
+  if (t.size() == 2) {
+    auto        mod   = t[ 0 ];
+    auto        fn    = t[ 1 ];
+    std::size_t found = fn.find("()");
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
+
+    dbg("Call %s.%s(%s, %s, %s, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), hitter->to_string().c_str(),
+        damage);
+
+    return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, (unsigned int) mid_at.x,
+                          (unsigned int) mid_at.y, (unsigned int) damage);
+  }
+
+  ERR("Bad on_damage_bite call [%s] expected mod:function, got %d elems", on_damage_bite.c_str(),
+      (int) on_damage_bite.size());
 
   return damage;
 }
@@ -1034,6 +1524,41 @@ int Thing::on_owner_damage_strength(Thingp owner, Thingp hitter, int damage)
   return damage;
 }
 
+int Thing::on_damage_strength(Thingp hitter, int damage)
+{
+  verify(MTYPE_THING, hitter);
+  if (! hitter) {
+    err("Cannot damage_strength null thing");
+    return damage;
+  }
+
+  auto on_damage_strength = on_damage_strength_do();
+  if (std::empty(on_damage_strength)) {
+    return damage;
+  }
+
+  auto t = split_tokens(on_damage_strength, '.');
+  if (t.size() == 2) {
+    auto        mod   = t[ 0 ];
+    auto        fn    = t[ 1 ];
+    std::size_t found = fn.find("()");
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
+
+    dbg("Call %s.%s(%s, %s, %s, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), hitter->to_string().c_str(),
+        damage);
+
+    return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, (unsigned int) mid_at.x,
+                          (unsigned int) mid_at.y, (unsigned int) damage);
+  }
+
+  ERR("Bad on_damage_strength call [%s] expected mod:function, got %d elems", on_damage_strength.c_str(),
+      (int) on_damage_strength.size());
+
+  return damage;
+}
+
 int Thing::on_owner_damage_constitution(Thingp owner, Thingp hitter, int damage)
 {
   verify(MTYPE_THING, owner);
@@ -1071,6 +1596,41 @@ int Thing::on_owner_damage_constitution(Thingp owner, Thingp hitter, int damage)
 
   ERR("Bad on_owner_damage_constitution call [%s] expected mod:function, got %d elems",
       on_owner_damage_constitution.c_str(), (int) on_owner_damage_constitution.size());
+
+  return damage;
+}
+
+int Thing::on_damage_constitution(Thingp hitter, int damage)
+{
+  verify(MTYPE_THING, hitter);
+  if (! hitter) {
+    err("Cannot damage_constitution null thing");
+    return damage;
+  }
+
+  auto on_damage_constitution = on_damage_constitution_do();
+  if (std::empty(on_damage_constitution)) {
+    return damage;
+  }
+
+  auto t = split_tokens(on_damage_constitution, '.');
+  if (t.size() == 2) {
+    auto        mod   = t[ 0 ];
+    auto        fn    = t[ 1 ];
+    std::size_t found = fn.find("()");
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
+
+    dbg("Call %s.%s(%s, %s, %s, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), hitter->to_string().c_str(),
+        damage);
+
+    return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, (unsigned int) mid_at.x,
+                          (unsigned int) mid_at.y, (unsigned int) damage);
+  }
+
+  ERR("Bad on_damage_constitution call [%s] expected mod:function, got %d elems", on_damage_constitution.c_str(),
+      (int) on_damage_constitution.size());
 
   return damage;
 }

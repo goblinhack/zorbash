@@ -174,6 +174,54 @@ def on_move(me, x, y):
         if my.thing_sound_play_channel(me, my.CHANNEL_FOOTSTEPS, "footsteps{}".format(footstep)):
             last_footstep = footstep
 
+def on_damage_melee(me, hitter, x, y, damage):
+    return damage
+
+def on_damage_poison(me, hitter, x, y, damage):
+    return damage
+
+def on_damage_future1(me, hitter, x, y, damage):
+    return damage
+
+def on_damage_future2(me, hitter, x, y, damage):
+    return damage
+
+def on_damage_future3(me, hitter, x, y, damage):
+    return damage
+
+def on_damage_future4(me, hitter, x, y, damage):
+    return damage
+
+def on_damage_future5(me, hitter, x, y, damage):
+    return damage
+
+def on_damage_crush(me, hitter, x, y, damage):
+    return damage
+
+def on_damage_lightning(me, hitter, x, y, damage):
+    return damage
+
+def on_damage_energy(me, hitter, x, y, damage):
+    return damage
+
+def on_damage_acid(me, hitter, x, y, damage):
+    return damage
+
+def on_damage_digest(me, hitter, x, y, damage):
+    return damage
+
+def on_damage_bite(me, hitter, x, y, damage):
+    return damage
+
+def on_damage_necrosis(me, hitter, x, y, damage):
+    return damage
+
+def on_damage_strength(me, hitter, x, y, damage):
+    return damage
+
+def on_damage_constitution(me, hitter, x, y, damage):
+    return damage
+
 def tp_init(name, text_name, short_text_name, title):
     mytp = tp.Tp(name, text_name, short_text_name)
     mytp.set_ai_avoid_distance(4)
@@ -196,6 +244,22 @@ def tp_init(name, text_name, short_text_name, title):
     mytp.set_gfx_animated(True)
     mytp.set_gfx_anim_use("attack_punch")
     mytp.set_gfx_bounce_on_move(True)
+    mytp.set_on_damage_acid_do("player.on_damage_acid()")
+    mytp.set_on_damage_bite_do("player.on_damage_bite()")
+    mytp.set_on_damage_constitution_do("player.on_damage_constitution()")
+    mytp.set_on_damage_crush_do("player.on_damage_crush()")
+    mytp.set_on_damage_digest_do("player.on_damage_digest()")
+    mytp.set_on_damage_energy_do("player.on_damage_energy()")
+    mytp.set_on_damage_future1_do("player.on_damage_future1()")
+    mytp.set_on_damage_future2_do("player.on_damage_future2()")
+    mytp.set_on_damage_future3_do("player.on_damage_future3()")
+    mytp.set_on_damage_future4_do("player.on_damage_future4()")
+    mytp.set_on_damage_future5_do("player.on_damage_future5()")
+    mytp.set_on_damage_lightning_do("player.on_damage_lightning()")
+    mytp.set_on_damage_melee_do("player.on_damage_melee()")
+    mytp.set_on_damage_necrosis_do("player.on_damage_necrosis()")
+    mytp.set_on_damage_poison_do("player.on_damage_poison()")
+    mytp.set_on_damage_strength_do("player.on_damage_strength()")
     mytp.set_gfx_short_shadow_caster(True)
     mytp.set_gfx_show_outlined(True)
     mytp.set_health_hunger_pct(5)

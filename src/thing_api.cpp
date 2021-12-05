@@ -6174,6 +6174,102 @@ const std::string &Thing::on_owner_damage_bite_do(void)
   return (tp()->on_owner_damage_bite_do());
 }
 
+const std::string &Thing::on_damage_poison_do(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->on_damage_poison_do());
+}
+
+const std::string &Thing::on_damage_future1_do(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->on_damage_future1_do());
+}
+
+const std::string &Thing::on_damage_future2_do(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->on_damage_future2_do());
+}
+
+const std::string &Thing::on_damage_future3_do(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->on_damage_future3_do());
+}
+
+const std::string &Thing::on_damage_future4_do(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->on_damage_future4_do());
+}
+
+const std::string &Thing::on_damage_future5_do(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->on_damage_future5_do());
+}
+
+const std::string &Thing::on_damage_crush_do(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->on_damage_crush_do());
+}
+
+const std::string &Thing::on_damage_lightning_do(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->on_damage_lightning_do());
+}
+
+const std::string &Thing::on_damage_energy_do(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->on_damage_energy_do());
+}
+
+const std::string &Thing::on_damage_acid_do(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->on_damage_acid_do());
+}
+
+const std::string &Thing::on_damage_digest_do(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->on_damage_digest_do());
+}
+
+const std::string &Thing::on_damage_constitution_do(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->on_damage_constitution_do());
+}
+
+const std::string &Thing::on_damage_strength_do(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->on_damage_strength_do());
+}
+
+const std::string &Thing::on_damage_melee_do(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->on_damage_melee_do());
+}
+
+const std::string &Thing::on_damage_necrosis_do(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->on_damage_necrosis_do());
+}
+
+const std::string &Thing::on_damage_bite_do(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->on_damage_bite_do());
+}
+
 const std::string &Thing::projectile_name(void)
 {
   TRACE_AND_INDENT();

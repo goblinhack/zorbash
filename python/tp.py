@@ -235,6 +235,54 @@ class Tp:
     def set_on_owner_damage_bite_do(self, value):
         my.tp_set_on_owner_damage_bite_do(self, value)
 
+    def set_on_damage_poison_do(self, value):
+        my.tp_set_on_damage_poison_do(self, value)
+
+    def set_on_damage_future1_do(self, value):
+        my.tp_set_on_damage_future1_do(self, value)
+
+    def set_on_damage_future2_do(self, value):
+        my.tp_set_on_damage_future2_do(self, value)
+
+    def set_on_damage_future3_do(self, value):
+        my.tp_set_on_damage_future3_do(self, value)
+
+    def set_on_damage_future4_do(self, value):
+        my.tp_set_on_damage_future4_do(self, value)
+
+    def set_on_damage_future5_do(self, value):
+        my.tp_set_on_damage_future5_do(self, value)
+
+    def set_on_damage_crush_do(self, value):
+        my.tp_set_on_damage_crush_do(self, value)
+
+    def set_on_damage_lightning_do(self, value):
+        my.tp_set_on_damage_lightning_do(self, value)
+
+    def set_on_damage_energy_do(self, value):
+        my.tp_set_on_damage_energy_do(self, value)
+
+    def set_on_damage_acid_do(self, value):
+        my.tp_set_on_damage_acid_do(self, value)
+
+    def set_on_damage_digest_do(self, value):
+        my.tp_set_on_damage_digest_do(self, value)
+
+    def set_on_damage_constitution_do(self, value):
+        my.tp_set_on_damage_constitution_do(self, value)
+
+    def set_on_damage_strength_do(self, value):
+        my.tp_set_on_damage_strength_do(self, value)
+
+    def set_on_damage_melee_do(self, value):
+        my.tp_set_on_damage_melee_do(self, value)
+
+    def set_on_damage_necrosis_do(self, value):
+        my.tp_set_on_damage_necrosis_do(self, value)
+
+    def set_on_damage_bite_do(self, value):
+        my.tp_set_on_damage_bite_do(self, value)
+
     def set_on_you_are_hit_but_still_alive_do(self, value):
         my.tp_set_on_you_are_hit_but_still_alive_do(self, value)
 

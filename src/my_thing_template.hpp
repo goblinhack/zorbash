@@ -475,6 +475,22 @@ private:
   std::string _on_owner_damage_melee_do;
   std::string _on_owner_damage_necrosis_do;
   std::string _on_owner_damage_bite_do;
+  std::string _on_damage_poison_do;
+  std::string _on_damage_future1_do;
+  std::string _on_damage_future2_do;
+  std::string _on_damage_future3_do;
+  std::string _on_damage_future4_do;
+  std::string _on_damage_future5_do;
+  std::string _on_damage_crush_do;
+  std::string _on_damage_lightning_do;
+  std::string _on_damage_energy_do;
+  std::string _on_damage_acid_do;
+  std::string _on_damage_digest_do;
+  std::string _on_damage_constitution_do;
+  std::string _on_damage_strength_do;
+  std::string _on_damage_melee_do;
+  std::string _on_damage_necrosis_do;
+  std::string _on_damage_bite_do;
   std::string _projectile_name;
   std::string _resurrect_dice_str;
   std::string _short_text_name;
@@ -664,6 +680,22 @@ public:
   const std::string &on_owner_damage_melee_do(void) const { return _on_owner_damage_melee_do; }
   const std::string &on_owner_damage_necrosis_do(void) const { return _on_owner_damage_necrosis_do; }
   const std::string &on_owner_damage_bite_do(void) const { return _on_owner_damage_bite_do; }
+  const std::string &on_damage_poison_do(void) const { return _on_damage_poison_do; }
+  const std::string &on_damage_future1_do(void) const { return _on_damage_future1_do; }
+  const std::string &on_damage_future2_do(void) const { return _on_damage_future2_do; }
+  const std::string &on_damage_future3_do(void) const { return _on_damage_future3_do; }
+  const std::string &on_damage_future4_do(void) const { return _on_damage_future4_do; }
+  const std::string &on_damage_future5_do(void) const { return _on_damage_future5_do; }
+  const std::string &on_damage_crush_do(void) const { return _on_damage_crush_do; }
+  const std::string &on_damage_lightning_do(void) const { return _on_damage_lightning_do; }
+  const std::string &on_damage_energy_do(void) const { return _on_damage_energy_do; }
+  const std::string &on_damage_acid_do(void) const { return _on_damage_acid_do; }
+  const std::string &on_damage_digest_do(void) const { return _on_damage_digest_do; }
+  const std::string &on_damage_constitution_do(void) const { return _on_damage_constitution_do; }
+  const std::string &on_damage_strength_do(void) const { return _on_damage_strength_do; }
+  const std::string &on_damage_melee_do(void) const { return _on_damage_melee_do; }
+  const std::string &on_damage_necrosis_do(void) const { return _on_damage_necrosis_do; }
+  const std::string &on_damage_bite_do(void) const { return _on_damage_bite_do; }
   const std::string &projectile_name(void) const { return _projectile_name; }
   const std::string &short_text_name(void) const { return _short_text_name; }
   const std::string &spawn_on_shoved(void) const { return _spawn_on_shoved; }
@@ -1335,6 +1367,22 @@ public:
   void set_on_owner_damage_melee_do(const std::string &v) { _on_owner_damage_melee_do = v; }
   void set_on_owner_damage_necrosis_do(const std::string &v) { _on_owner_damage_necrosis_do = v; }
   void set_on_owner_damage_bite_do(const std::string &v) { _on_owner_damage_bite_do = v; }
+  void set_on_damage_poison_do(const std::string &v) { _on_damage_poison_do = v; }
+  void set_on_damage_future1_do(const std::string &v) { _on_damage_future1_do = v; }
+  void set_on_damage_future2_do(const std::string &v) { _on_damage_future2_do = v; }
+  void set_on_damage_future3_do(const std::string &v) { _on_damage_future3_do = v; }
+  void set_on_damage_future4_do(const std::string &v) { _on_damage_future4_do = v; }
+  void set_on_damage_future5_do(const std::string &v) { _on_damage_future5_do = v; }
+  void set_on_damage_crush_do(const std::string &v) { _on_damage_crush_do = v; }
+  void set_on_damage_lightning_do(const std::string &v) { _on_damage_lightning_do = v; }
+  void set_on_damage_energy_do(const std::string &v) { _on_damage_energy_do = v; }
+  void set_on_damage_acid_do(const std::string &v) { _on_damage_acid_do = v; }
+  void set_on_damage_digest_do(const std::string &v) { _on_damage_digest_do = v; }
+  void set_on_damage_constitution_do(const std::string &v) { _on_damage_constitution_do = v; }
+  void set_on_damage_strength_do(const std::string &v) { _on_damage_strength_do = v; }
+  void set_on_damage_melee_do(const std::string &v) { _on_damage_melee_do = v; }
+  void set_on_damage_necrosis_do(const std::string &v) { _on_damage_necrosis_do = v; }
+  void set_on_damage_bite_do(const std::string &v) { _on_damage_bite_do = v; }
   void set_on_tick_do(const std::string &v) { _on_tick_do = v; }
   void set_on_unequip_do(const std::string &v) { _on_unequip_do = v; }
   void set_on_use_do(const std::string &v) { _on_use_do = v; }

@@ -80,7 +80,7 @@ def tp_init(name, text_name):
     mytp.set_is_loggable(True)
     mytp.set_long_text_description("Poison causes you 50 percent less damage.")
     mytp.set_on_owner_damage_acid_do("buff_poison_resist.on_owner_damage_acid()")
-    mytp.set_on_owner_damage_bite_do("buff_bite_resist.on_owner_damage_bite()")
+    mytp.set_on_owner_damage_bite_do("buff_poison_resist.on_owner_damage_bite()")
     mytp.set_on_owner_damage_constitution_do("buff_poison_resist.on_owner_damage_constitution()")
     mytp.set_on_owner_damage_crush_do("buff_poison_resist.on_owner_damage_crush()")
     mytp.set_on_owner_damage_digest_do("buff_poison_resist.on_owner_damage_digest()")
