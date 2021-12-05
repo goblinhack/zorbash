@@ -159,7 +159,11 @@ void Thing::location_check_all_things_at(void)
   TRACE_AND_INDENT();
   dbg("Do location checks");
 
-  FOR_ALL_THINGS_THAT_INTERACT(level, t, mid_at.x, mid_at.y)
+  //
+  // Needs to be for all things to stuff that does nothing like bones can fall
+  // into a chasm
+  //
+  FOR_ALL_THINGS(level, t, mid_at.x, mid_at.y)
   {
     TRACE_AND_INDENT();
     IF_DEBUG2 { t->log("Do location check"); }
@@ -176,7 +180,11 @@ void Thing::location_check_forced_all_things_at(void)
   TRACE_AND_INDENT();
   dbg("Do location checks");
 
-  FOR_ALL_THINGS_THAT_INTERACT(level, t, mid_at.x, mid_at.y)
+  //
+  // Needs to be for all things to stuff that does nothing like bones can fall
+  // into a chasm
+  //
+  FOR_ALL_THINGS(level, t, mid_at.x, mid_at.y)
   {
     TRACE_AND_INDENT();
     IF_DEBUG2 { t->log("Do location check"); }

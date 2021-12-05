@@ -112,17 +112,24 @@ float Thing::get_fall(void)
     return 0;
   }
 
-  auto t = time_get_time_ms_cached();
+  auto ts = time_get_time_ms_cached();
 
-  if (t >= get_ts_fall_end()) {
+  if (ts >= get_ts_fall_end()) {
     is_falling = false;
     dbg("End of falling timestamp");
     level_push();
     is_waiting_to_leave_level_has_completed_fall = true;
+
+    //
+    // Things that do not tick, like bones, push them now
+    //
+    if (! is_tickable()) {
+      fall_to_next_level();
+    }
     return 0;
   }
 
-  float time_step = (float) (t - get_ts_fall_begin()) / (float) (get_ts_fall_end() - get_ts_fall_begin());
+  float time_step = (float) (ts - get_ts_fall_begin()) / (float) (get_ts_fall_end() - get_ts_fall_begin());
   dbg("Is currently falling, dt %f", time_step);
 
   //

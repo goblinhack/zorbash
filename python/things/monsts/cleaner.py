@@ -4,10 +4,7 @@ import tp
 
 def on_idle(me, x, y):
     if not my.level_is_acid_at(me, x, y):
-        my.topcon("ACID")
         my.level_spawn_at_thing(me, "acid1")
-    else:
-        my.topcon("NO ACID")
 
 def on_death(me, x, y):
     my.level_spawn_at_thing(me, "green_splatter")
@@ -39,17 +36,16 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_health_initial_dice("8d10+40")
     mytp.set_is_able_to_fall(True)
     mytp.set_is_able_to_see_in_the_dark(True)
-    mytp.set_is_green_blooded(True)
     mytp.set_is_attackable_by_monst(True)
     mytp.set_is_attackable_by_player(True)
     mytp.set_is_carrier_of_treasure_class_a(True)
     mytp.set_is_carrier_of_treasure_class_b(True)
     mytp.set_is_carrier_of_treasure_class_c(True)
     mytp.set_is_combustible(True)
-    mytp.set_is_critical_to_level(True)
     mytp.set_is_crushable(True)
     mytp.set_is_described_when_hovering_over(True)
     mytp.set_is_engulfer(True)
+    mytp.set_is_green_blooded(True)
     mytp.set_is_hittable(True)
     mytp.set_is_hunger_insatiable(True)
     mytp.set_is_item_collector(True)
