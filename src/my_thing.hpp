@@ -956,7 +956,7 @@ public:
   int is_able_to_break_out_of_webs(void);
   int is_able_to_change_levels(void);
   int is_able_to_collect_keys(void);
-  int is_able_to_enchant_weapons(void);
+  int is_able_to_enchant_items(void);
   int is_able_to_fall(void);
   int is_able_to_fire_at(void);
   int is_able_to_jump_attack_chance_d1000(void);
@@ -1227,7 +1227,7 @@ public:
   int unused_flag12(void);
   int unused_flag13(void);
   int unused_flag14(void);
-  int unused_flag15(void);
+  int is_able_to_use_weapons(void);
   int is_bony(void);
   int is_pink_blooded(void);
   int is_pink_splatter(void);

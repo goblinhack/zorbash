@@ -53,7 +53,7 @@ PyObject *level_is_able_to_break_down_doors_at(PyObject *obj, PyObject *args, Py
 PyObject *level_is_able_to_break_out_of_webs_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_able_to_change_levels_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_able_to_collect_keys_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_able_to_enchant_weapons_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_able_to_enchant_items_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_able_to_fall_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_able_to_fire_at_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_able_to_jump_at(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -255,7 +255,7 @@ PyObject *level_unused_flag11_at(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *level_unused_flag12_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag13_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag14_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag15_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_able_to_use_weapons_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_bony_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_pink_blooded_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_pink_splatter_at(PyObject *obj, PyObject *args, PyObject *keywds);

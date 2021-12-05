@@ -346,8 +346,8 @@ class Tp:
     def set_unused_flag14(self, value):
         my.tp_set_unused_flag14(self, value)
 
-    def set_unused_flag15(self, value):
-        my.tp_set_unused_flag15(self, value)
+    def set_is_able_to_use_weapons(self, value):
+        my.tp_set_is_able_to_use_weapons(self, value)
 
     def set_is_bony(self, value):
         my.tp_set_is_bony(self, value)
@@ -463,8 +463,8 @@ class Tp:
     def set_is_able_to_learn_skills(self, value):
         my.tp_set_is_able_to_learn_skills(self, value)
 
-    def set_is_able_to_enchant_weapons(self, value):
-        my.tp_set_is_able_to_enchant_weapons(self, value)
+    def set_is_able_to_enchant_items(self, value):
+        my.tp_set_is_able_to_enchant_items(self, value)
 
     def set_is_able_to_attack_generators(self, value):
         my.tp_set_is_able_to_attack_generators(self, value)

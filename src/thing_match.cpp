@@ -46,7 +46,7 @@ bool Thing::matches(const std::string &what)
   if (ai_detect_secret_doors() && (what == "ai_detect_secret_doors")) {
     return true;
   }
-  if (is_able_to_enchant_weapons() && (what == "is_able_to_enchant_weapons")) {
+  if (is_able_to_enchant_items() && (what == "is_able_to_enchant_items")) {
     return true;
   }
   if (is_able_to_jump_distance() && (what == "is_able_to_jump_distance")) {
@@ -679,7 +679,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag14() && (what == "unused_flag14")) {
     return true;
   }
-  if (unused_flag15() && (what == "unused_flag15")) {
+  if (is_able_to_use_weapons() && (what == "is_able_to_use_weapons")) {
     return true;
   }
   if (is_bony() && (what == "is_bony")) {
@@ -779,8 +779,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "ai_detect_secret_doors") {
     return &Thing::ai_detect_secret_doors;
   }
-  if (what == "is_able_to_enchant_weapons") {
-    return &Thing::is_able_to_enchant_weapons;
+  if (what == "is_able_to_enchant_items") {
+    return &Thing::is_able_to_enchant_items;
   }
   if (what == "is_able_to_jump_distance") {
     return &Thing::is_able_to_jump_distance;
@@ -1406,8 +1406,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag14") {
     return &Thing::unused_flag14;
   }
-  if (what == "unused_flag15") {
-    return &Thing::unused_flag15;
+  if (what == "is_able_to_use_weapons") {
+    return &Thing::is_able_to_use_weapons;
   }
   if (what == "is_bony") {
     return &Thing::is_bony;

@@ -42,7 +42,7 @@ do
       set_is_able_to_break_out_of_webs \
       set_is_able_to_collect_keys \
       set_ai_detect_secret_doors \
-      set_is_able_to_enchant_weapons \
+      set_is_able_to_enchant_items \
       set_is_able_to_jump \
       set_is_able_to_learn_skills \
       set_is_able_to_open_doors \
@@ -278,7 +278,7 @@ do
       set_unused_flag12 \
       set_unused_flag13 \
       set_unused_flag14 \
-      set_unused_flag15 \
+      set_is_able_to_use_weapons \
       set_is_bony \
       set_is_pink_blooded \
       set_is_pink_splatter \

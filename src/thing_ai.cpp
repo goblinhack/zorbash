@@ -1683,61 +1683,66 @@ bool Thing::ai_tick(bool recursing)
           // attack us, even if it is not a threat. i.e. a harmless goblin
           // could push us off of a cliff while we're doing other stuff.
           //
-          if (! any_unfriendly_monst_visible()) {
-            //
-            // Can we enchant something?
-            //
-            if (is_able_to_enchant_weapons()) {
-              if (get_enchantstone_count() && can_enchant_something()) {
-                AI_LOG("Try to enchant something");
-                if (is_player()) {
-                  game->tick_begin("Robot can enchant something");
+          if (is_able_to_enchant_items() || is_able_to_learn_skills()) {
+            if (! any_unfriendly_monst_visible()) {
+              //
+              // Can we enchant something?
+              //
+              if (is_able_to_enchant_items()) {
+                if (get_enchantstone_count() && can_enchant_something()) {
+                  AI_LOG("Try to enchant something");
+                  if (is_player()) {
+                    game->tick_begin("Robot can enchant something");
+                  }
+                  ai_change_state(MONST_STATE_USING_ENCHANTSTONE, "can enchant something");
+                  return true;
                 }
-                ai_change_state(MONST_STATE_USING_ENCHANTSTONE, "can enchant something");
-                return true;
               }
-            }
 
-            //
-            // Can we learn some skills?
-            //
-            if (is_able_to_learn_skills()) {
-              if (get_skillstone_count() && can_learn_something()) {
-                AI_LOG("Try to use a skillstone");
-                if (is_player()) {
-                  game->tick_begin("Robot can learn something");
+              //
+              // Can we learn some skills?
+              //
+              if (is_able_to_learn_skills()) {
+                if (get_skillstone_count() && can_learn_something()) {
+                  AI_LOG("Try to use a skillstone");
+                  if (is_player()) {
+                    game->tick_begin("Robot can learn something");
+                  }
+                  ai_change_state(MONST_STATE_USING_SKILLSTONE, "can learn something");
+                  return true;
                 }
-                ai_change_state(MONST_STATE_USING_SKILLSTONE, "can learn something");
-                return true;
               }
             }
           }
 
           //
-          // Can we switch to a better weapon?
+          // Can we switch to a better weapon? Only if we can use weapons. We don't
+          // wand jellys wandering around with swords!
           //
-          Thingp curr_weapon = get_equip(MONST_EQUIP_WEAPON);
-          Thingp best_weapon = nullptr;
-          get_carried_weapon_highest_value(&best_weapon);
-          if (best_weapon) {
-            auto curr_weapon_val = curr_weapon ? maybe_itemp_value(curr_weapon) : 0;
-            auto best_weapon_val = maybe_itemp_value(best_weapon);
+          if (is_able_to_use_weapons()) {
+            Thingp curr_weapon = get_equip(MONST_EQUIP_WEAPON);
+            Thingp best_weapon = nullptr;
+            get_carried_weapon_highest_value(&best_weapon);
+            if (best_weapon) {
+              auto curr_weapon_val = curr_weapon ? maybe_itemp_value(curr_weapon) : 0;
+              auto best_weapon_val = maybe_itemp_value(best_weapon);
 
-            if (! curr_weapon) {
-              if (use(best_weapon, MONST_EQUIP_WEAPON)) {
-                AI_LOG("Change weapon", best_weapon);
-                if (is_player()) {
-                  game->tick_begin("Robot, has equipped weapon");
+              if (! curr_weapon) {
+                if (use(best_weapon, MONST_EQUIP_WEAPON)) {
+                  AI_LOG("Change weapon", best_weapon);
+                  if (is_player()) {
+                    game->tick_begin("Robot, has equipped weapon");
+                  }
+                  return true;
                 }
-                return true;
-              }
-            } else if (best_weapon_val > curr_weapon_val) {
-              if (use(best_weapon, MONST_EQUIP_WEAPON)) {
-                AI_LOG("Change weapon", best_weapon);
-                if (is_player()) {
-                  game->tick_begin("Robot, has changed to weapon");
+              } else if (best_weapon_val > curr_weapon_val) {
+                if (use(best_weapon, MONST_EQUIP_WEAPON)) {
+                  AI_LOG("Change weapon", best_weapon);
+                  if (is_player()) {
+                    game->tick_begin("Robot, has changed to weapon");
+                  }
+                  return true;
                 }
-                return true;
               }
             }
           }

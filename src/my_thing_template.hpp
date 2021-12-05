@@ -167,7 +167,7 @@ private:
   int _is_able_to_break_out_of_webs {};
   int _is_able_to_change_levels {};
   int _is_able_to_collect_keys {};
-  int _is_able_to_enchant_weapons {};
+  int _is_able_to_enchant_items {};
   int _is_able_to_fall {};
   int _is_able_to_fire_at {};
   int _is_able_to_jump {};
@@ -393,7 +393,7 @@ private:
   int _unused_flag12 {};
   int _unused_flag13 {};
   int _unused_flag14 {};
-  int _unused_flag15 {};
+  int _is_able_to_use_weapons {};
   int _is_bony {};
   int _is_pink_blooded {};
   int _is_pink_splatter {};
@@ -773,7 +773,7 @@ public:
   int is_able_to_break_out_of_webs(void) const { return _is_able_to_break_out_of_webs; }
   int is_able_to_change_levels(void) const { return _is_able_to_change_levels; }
   int is_able_to_collect_keys(void) const { return _is_able_to_collect_keys; }
-  int is_able_to_enchant_weapons(void) const { return _is_able_to_enchant_weapons; }
+  int is_able_to_enchant_items(void) const { return _is_able_to_enchant_items; }
   int is_able_to_fall(void) const { return _is_able_to_fall; }
   int is_able_to_fire_at(void) const { return _is_able_to_fire_at; }
   int is_able_to_jump_attack_chance_d1000(void) const { return _is_able_to_jump_attack_chance_d1000; }
@@ -997,7 +997,7 @@ public:
   int unused_flag12(void) const { return _unused_flag12; }
   int unused_flag13(void) const { return _unused_flag13; }
   int unused_flag14(void) const { return _unused_flag14; }
-  int unused_flag15(void) const { return _unused_flag15; }
+  int is_able_to_use_weapons(void) const { return _is_able_to_use_weapons; }
   int is_bony(void) const { return _is_bony; }
   int is_pink_blooded(void) const { return _is_pink_blooded; }
   int is_pink_splatter(void) const { return _is_pink_splatter; }
@@ -1112,7 +1112,7 @@ public:
   void set_is_able_to_break_out_of_webs(int v) { _is_able_to_break_out_of_webs = v; }
   void set_is_able_to_change_levels(int v) { _is_able_to_change_levels = v; }
   void set_is_able_to_collect_keys(int v) { _is_able_to_collect_keys = v; }
-  void set_is_able_to_enchant_weapons(int v) { _is_able_to_enchant_weapons = v; }
+  void set_is_able_to_enchant_items(int v) { _is_able_to_enchant_items = v; }
   void set_is_able_to_fall(int v) { _is_able_to_fall = v; }
   void set_is_able_to_fire_at(int v) { _is_able_to_fire_at = v; }
   void set_is_able_to_jump_attack_chance_d1000(int v) { _is_able_to_jump_attack_chance_d1000 = v; }
@@ -1394,7 +1394,7 @@ public:
   void set_unused_flag12(int v) { _unused_flag12 = v; }
   void set_unused_flag13(int v) { _unused_flag13 = v; }
   void set_unused_flag14(int v) { _unused_flag14 = v; }
-  void set_unused_flag15(int v) { _unused_flag15 = v; }
+  void set_is_able_to_use_weapons(int v) { _is_able_to_use_weapons = v; }
   void set_is_bony(int v) { _is_bony = v; }
   void set_is_pink_blooded(int v) { _is_pink_blooded = v; }
   void set_is_pink_splatter(int v) { _is_pink_splatter = v; }

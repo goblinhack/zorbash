@@ -128,7 +128,7 @@ PyObject *thing_is_able_to_break_down_doors(PyObject *obj, PyObject *args, PyObj
 PyObject *thing_is_able_to_break_out_of_webs(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_change_levels(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_collect_keys(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_able_to_enchant_weapons(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_able_to_enchant_items(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_fall(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_jump_attack(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_jump_onto(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -332,7 +332,7 @@ PyObject *thing_unused_flag11(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag12(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag13(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag14(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag15(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_able_to_use_weapons(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_bony(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_pink_blooded(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_pink_splatter(PyObject *obj, PyObject *args, PyObject *keywds);

@@ -1293,10 +1293,10 @@ int Thing::unused_flag14(void)
   return (tp()->unused_flag14());
 }
 
-int Thing::unused_flag15(void)
+int Thing::is_able_to_use_weapons(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->unused_flag15());
+  return (tp()->is_able_to_use_weapons());
 }
 
 int Thing::is_bony(void)
@@ -1503,10 +1503,10 @@ int Thing::is_able_to_learn_skills(void)
   return (tp()->is_able_to_learn_skills());
 }
 
-int Thing::is_able_to_enchant_weapons(void)
+int Thing::is_able_to_enchant_items(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->is_able_to_enchant_weapons());
+  return (tp()->is_able_to_enchant_items());
 }
 
 int Thing::is_able_to_attack_generators(void)
