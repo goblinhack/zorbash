@@ -2000,7 +2000,7 @@ bool Thing::ai_tick(bool recursing)
         //
         // Enchant a random item.
         //
-        enchant_random_item();
+        enchant_random_item_with_stone();
         if (is_player()) {
           ai_change_state(MONST_STATE_REPACK_INVENTORY, "enchanted");
           game->tick_begin("Robot finished enchanting");

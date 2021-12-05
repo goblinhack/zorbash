@@ -125,7 +125,7 @@ bool Thing::can_enchant_something(void)
   return false;
 }
 
-bool Thing::enchant_random_item(void)
+bool Thing::enchant_random_item_with_stone(void)
 {
   TRACE_AND_INDENT();
   std::vector< Thingp > cands;
@@ -142,5 +142,5 @@ bool Thing::enchant_random_item(void)
 
   auto chosen = cands[ pcg_random_range(0, cands.size()) ];
   log("Enchant this randomly: %s", chosen->to_string().c_str());
-  return enchant_without_stone(chosen);
+  return enchant_with_stone(chosen);
 }
