@@ -45,6 +45,7 @@ int Thing::get_damage_future1(void)
 
 int Thing::on_owner_damage_future1(Thingp owner, Thingp hitter, int damage)
 {
+  TRACE_AND_INDENT();
   verify(MTYPE_THING, owner);
   if (! owner) {
     err("Cannot owner_damage_future1 null thing");
@@ -86,6 +87,7 @@ int Thing::on_owner_damage_future1(Thingp owner, Thingp hitter, int damage)
 
 int Thing::on_damage_future1(Thingp hitter, int damage)
 {
+  TRACE_AND_INDENT();
   verify(MTYPE_THING, hitter);
   if (! hitter) {
     err("Cannot damage_future1 null thing");
@@ -106,8 +108,7 @@ int Thing::on_damage_future1(Thingp hitter, int damage)
       fn = fn.replace(found, 2, "");
     }
 
-    dbg("Call %s.%s(%s, %s, %s, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), hitter->to_string().c_str(),
-        damage);
+    dbg("Call %s.%s(%s, %s, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), hitter->to_string().c_str(), damage);
 
     return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, (unsigned int) mid_at.x,
                           (unsigned int) mid_at.y, (unsigned int) damage);
@@ -146,6 +147,7 @@ int Thing::get_damage_future2(void)
 
 int Thing::on_owner_damage_future2(Thingp owner, Thingp hitter, int damage)
 {
+  TRACE_AND_INDENT();
   verify(MTYPE_THING, owner);
   if (! owner) {
     err("Cannot owner_damage_future2 null thing");
@@ -187,6 +189,7 @@ int Thing::on_owner_damage_future2(Thingp owner, Thingp hitter, int damage)
 
 int Thing::on_damage_future2(Thingp hitter, int damage)
 {
+  TRACE_AND_INDENT();
   verify(MTYPE_THING, hitter);
   if (! hitter) {
     err("Cannot damage_future2 null thing");
@@ -207,8 +210,7 @@ int Thing::on_damage_future2(Thingp hitter, int damage)
       fn = fn.replace(found, 2, "");
     }
 
-    dbg("Call %s.%s(%s, %s, %s, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), hitter->to_string().c_str(),
-        damage);
+    dbg("Call %s.%s(%s, %s, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), hitter->to_string().c_str(), damage);
 
     return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, (unsigned int) mid_at.x,
                           (unsigned int) mid_at.y, (unsigned int) damage);
@@ -247,6 +249,7 @@ int Thing::get_damage_future3(void)
 
 int Thing::on_owner_damage_future3(Thingp owner, Thingp hitter, int damage)
 {
+  TRACE_AND_INDENT();
   verify(MTYPE_THING, owner);
   if (! owner) {
     err("Cannot owner_damage_future3 null thing");
@@ -288,6 +291,7 @@ int Thing::on_owner_damage_future3(Thingp owner, Thingp hitter, int damage)
 
 int Thing::on_damage_future3(Thingp hitter, int damage)
 {
+  TRACE_AND_INDENT();
   verify(MTYPE_THING, hitter);
   if (! hitter) {
     err("Cannot damage_future3 null thing");
@@ -308,8 +312,7 @@ int Thing::on_damage_future3(Thingp hitter, int damage)
       fn = fn.replace(found, 2, "");
     }
 
-    dbg("Call %s.%s(%s, %s, %s, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), hitter->to_string().c_str(),
-        damage);
+    dbg("Call %s.%s(%s, %s, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), hitter->to_string().c_str(), damage);
 
     return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, (unsigned int) mid_at.x,
                           (unsigned int) mid_at.y, (unsigned int) damage);
@@ -348,6 +351,7 @@ int Thing::get_damage_future4(void)
 
 int Thing::on_owner_damage_future4(Thingp owner, Thingp hitter, int damage)
 {
+  TRACE_AND_INDENT();
   verify(MTYPE_THING, owner);
   if (! owner) {
     err("Cannot owner_damage_future4 null thing");
@@ -389,6 +393,7 @@ int Thing::on_owner_damage_future4(Thingp owner, Thingp hitter, int damage)
 
 int Thing::on_damage_future4(Thingp hitter, int damage)
 {
+  TRACE_AND_INDENT();
   verify(MTYPE_THING, hitter);
   if (! hitter) {
     err("Cannot damage_future4 null thing");
@@ -409,8 +414,7 @@ int Thing::on_damage_future4(Thingp hitter, int damage)
       fn = fn.replace(found, 2, "");
     }
 
-    dbg("Call %s.%s(%s, %s, %s, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), hitter->to_string().c_str(),
-        damage);
+    dbg("Call %s.%s(%s, %s, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), hitter->to_string().c_str(), damage);
 
     return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, (unsigned int) mid_at.x,
                           (unsigned int) mid_at.y, (unsigned int) damage);
@@ -449,6 +453,7 @@ int Thing::get_damage_future5(void)
 
 int Thing::on_owner_damage_future5(Thingp owner, Thingp hitter, int damage)
 {
+  TRACE_AND_INDENT();
   verify(MTYPE_THING, owner);
   if (! owner) {
     err("Cannot owner_damage_future5 null thing");
@@ -490,6 +495,7 @@ int Thing::on_owner_damage_future5(Thingp owner, Thingp hitter, int damage)
 
 int Thing::on_damage_future5(Thingp hitter, int damage)
 {
+  TRACE_AND_INDENT();
   verify(MTYPE_THING, hitter);
   if (! hitter) {
     err("Cannot damage_future5 null thing");
@@ -510,8 +516,7 @@ int Thing::on_damage_future5(Thingp hitter, int damage)
       fn = fn.replace(found, 2, "");
     }
 
-    dbg("Call %s.%s(%s, %s, %s, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), hitter->to_string().c_str(),
-        damage);
+    dbg("Call %s.%s(%s, %s, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), hitter->to_string().c_str(), damage);
 
     return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, (unsigned int) mid_at.x,
                           (unsigned int) mid_at.y, (unsigned int) damage);
@@ -550,6 +555,7 @@ int Thing::get_damage_crush(void)
 
 int Thing::on_owner_damage_crush(Thingp owner, Thingp hitter, int damage)
 {
+  TRACE_AND_INDENT();
   verify(MTYPE_THING, owner);
   if (! owner) {
     err("Cannot owner_damage_crush null thing");
@@ -591,6 +597,7 @@ int Thing::on_owner_damage_crush(Thingp owner, Thingp hitter, int damage)
 
 int Thing::on_damage_crush(Thingp hitter, int damage)
 {
+  TRACE_AND_INDENT();
   verify(MTYPE_THING, hitter);
   if (! hitter) {
     err("Cannot damage_crush null thing");
@@ -611,8 +618,7 @@ int Thing::on_damage_crush(Thingp hitter, int damage)
       fn = fn.replace(found, 2, "");
     }
 
-    dbg("Call %s.%s(%s, %s, %s, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), hitter->to_string().c_str(),
-        damage);
+    dbg("Call %s.%s(%s, %s, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), hitter->to_string().c_str(), damage);
 
     return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, (unsigned int) mid_at.x,
                           (unsigned int) mid_at.y, (unsigned int) damage);
@@ -651,6 +657,7 @@ int Thing::get_damage_lightning(void)
 
 int Thing::on_owner_damage_lightning(Thingp owner, Thingp hitter, int damage)
 {
+  TRACE_AND_INDENT();
   verify(MTYPE_THING, owner);
   if (! owner) {
     err("Cannot owner_damage_lightning null thing");
@@ -692,6 +699,7 @@ int Thing::on_owner_damage_lightning(Thingp owner, Thingp hitter, int damage)
 
 int Thing::on_damage_lightning(Thingp hitter, int damage)
 {
+  TRACE_AND_INDENT();
   verify(MTYPE_THING, hitter);
   if (! hitter) {
     err("Cannot damage_lightning null thing");
@@ -712,8 +720,7 @@ int Thing::on_damage_lightning(Thingp hitter, int damage)
       fn = fn.replace(found, 2, "");
     }
 
-    dbg("Call %s.%s(%s, %s, %s, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), hitter->to_string().c_str(),
-        damage);
+    dbg("Call %s.%s(%s, %s, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), hitter->to_string().c_str(), damage);
 
     return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, (unsigned int) mid_at.x,
                           (unsigned int) mid_at.y, (unsigned int) damage);
@@ -752,6 +759,7 @@ int Thing::get_damage_energy(void)
 
 int Thing::on_owner_damage_energy(Thingp owner, Thingp hitter, int damage)
 {
+  TRACE_AND_INDENT();
   verify(MTYPE_THING, owner);
   if (! owner) {
     err("Cannot owner_damage_energy null thing");
@@ -793,6 +801,7 @@ int Thing::on_owner_damage_energy(Thingp owner, Thingp hitter, int damage)
 
 int Thing::on_damage_energy(Thingp hitter, int damage)
 {
+  TRACE_AND_INDENT();
   verify(MTYPE_THING, hitter);
   if (! hitter) {
     err("Cannot damage_energy null thing");
@@ -813,8 +822,7 @@ int Thing::on_damage_energy(Thingp hitter, int damage)
       fn = fn.replace(found, 2, "");
     }
 
-    dbg("Call %s.%s(%s, %s, %s, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), hitter->to_string().c_str(),
-        damage);
+    dbg("Call %s.%s(%s, %s, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), hitter->to_string().c_str(), damage);
 
     return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, (unsigned int) mid_at.x,
                           (unsigned int) mid_at.y, (unsigned int) damage);
@@ -853,6 +861,7 @@ int Thing::get_damage_acid(void)
 
 int Thing::on_owner_damage_acid(Thingp owner, Thingp hitter, int damage)
 {
+  TRACE_AND_INDENT();
   verify(MTYPE_THING, owner);
   if (! owner) {
     err("Cannot owner_damage_acid null thing");
@@ -894,6 +903,7 @@ int Thing::on_owner_damage_acid(Thingp owner, Thingp hitter, int damage)
 
 int Thing::on_damage_acid(Thingp hitter, int damage)
 {
+  TRACE_AND_INDENT();
   verify(MTYPE_THING, hitter);
   if (! hitter) {
     err("Cannot damage_acid null thing");
@@ -914,8 +924,7 @@ int Thing::on_damage_acid(Thingp hitter, int damage)
       fn = fn.replace(found, 2, "");
     }
 
-    dbg("Call %s.%s(%s, %s, %s, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), hitter->to_string().c_str(),
-        damage);
+    dbg("Call %s.%s(%s, %s, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), hitter->to_string().c_str(), damage);
 
     return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, (unsigned int) mid_at.x,
                           (unsigned int) mid_at.y, (unsigned int) damage);
@@ -954,6 +963,7 @@ int Thing::get_damage_digest(void)
 
 int Thing::on_owner_damage_digest(Thingp owner, Thingp hitter, int damage)
 {
+  TRACE_AND_INDENT();
   verify(MTYPE_THING, owner);
   if (! owner) {
     err("Cannot owner_damage_digest null thing");
@@ -995,6 +1005,7 @@ int Thing::on_owner_damage_digest(Thingp owner, Thingp hitter, int damage)
 
 int Thing::on_damage_digest(Thingp hitter, int damage)
 {
+  TRACE_AND_INDENT();
   verify(MTYPE_THING, hitter);
   if (! hitter) {
     err("Cannot damage_digest null thing");
@@ -1015,8 +1026,7 @@ int Thing::on_damage_digest(Thingp hitter, int damage)
       fn = fn.replace(found, 2, "");
     }
 
-    dbg("Call %s.%s(%s, %s, %s, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), hitter->to_string().c_str(),
-        damage);
+    dbg("Call %s.%s(%s, %s, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), hitter->to_string().c_str(), damage);
 
     return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, (unsigned int) mid_at.x,
                           (unsigned int) mid_at.y, (unsigned int) damage);
@@ -1055,6 +1065,7 @@ int Thing::get_damage_melee(void)
 
 int Thing::on_owner_damage_melee(Thingp owner, Thingp hitter, int damage)
 {
+  TRACE_AND_INDENT();
   verify(MTYPE_THING, owner);
   if (! owner) {
     err("Cannot owner_damage_melee null thing");
@@ -1096,6 +1107,7 @@ int Thing::on_owner_damage_melee(Thingp owner, Thingp hitter, int damage)
 
 int Thing::on_damage_melee(Thingp hitter, int damage)
 {
+  TRACE_AND_INDENT();
   verify(MTYPE_THING, hitter);
   if (! hitter) {
     err("Cannot damage_melee null thing");
@@ -1116,8 +1128,7 @@ int Thing::on_damage_melee(Thingp hitter, int damage)
       fn = fn.replace(found, 2, "");
     }
 
-    dbg("Call %s.%s(%s, %s, %s, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), hitter->to_string().c_str(),
-        damage);
+    dbg("Call %s.%s(%s, %s, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), hitter->to_string().c_str(), damage);
 
     return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, (unsigned int) mid_at.x,
                           (unsigned int) mid_at.y, (unsigned int) damage);
@@ -1156,6 +1167,7 @@ int Thing::get_damage_poison(void)
 
 int Thing::on_owner_damage_poison(Thingp owner, Thingp hitter, int damage)
 {
+  TRACE_AND_INDENT();
   verify(MTYPE_THING, owner);
   if (! owner) {
     err("Cannot owner_damage_poison null thing");
@@ -1197,6 +1209,7 @@ int Thing::on_owner_damage_poison(Thingp owner, Thingp hitter, int damage)
 
 int Thing::on_damage_poison(Thingp hitter, int damage)
 {
+  TRACE_AND_INDENT();
   verify(MTYPE_THING, hitter);
   if (! hitter) {
     err("Cannot damage_poison null thing");
@@ -1217,8 +1230,7 @@ int Thing::on_damage_poison(Thingp hitter, int damage)
       fn = fn.replace(found, 2, "");
     }
 
-    dbg("Call %s.%s(%s, %s, %s, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), hitter->to_string().c_str(),
-        damage);
+    dbg("Call %s.%s(%s, %s, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), hitter->to_string().c_str(), damage);
 
     return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, (unsigned int) mid_at.x,
                           (unsigned int) mid_at.y, (unsigned int) damage);
@@ -1257,6 +1269,7 @@ int Thing::get_damage_necrosis(void)
 
 int Thing::on_owner_damage_necrosis(Thingp owner, Thingp hitter, int damage)
 {
+  TRACE_AND_INDENT();
   verify(MTYPE_THING, owner);
   if (! owner) {
     err("Cannot owner_damage_necrosis null thing");
@@ -1298,6 +1311,7 @@ int Thing::on_owner_damage_necrosis(Thingp owner, Thingp hitter, int damage)
 
 int Thing::on_damage_necrosis(Thingp hitter, int damage)
 {
+  TRACE_AND_INDENT();
   verify(MTYPE_THING, hitter);
   if (! hitter) {
     err("Cannot damage_necrosis null thing");
@@ -1318,8 +1332,7 @@ int Thing::on_damage_necrosis(Thingp hitter, int damage)
       fn = fn.replace(found, 2, "");
     }
 
-    dbg("Call %s.%s(%s, %s, %s, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), hitter->to_string().c_str(),
-        damage);
+    dbg("Call %s.%s(%s, %s, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), hitter->to_string().c_str(), damage);
 
     return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, (unsigned int) mid_at.x,
                           (unsigned int) mid_at.y, (unsigned int) damage);
@@ -1358,6 +1371,7 @@ int Thing::get_damage_bite(void)
 
 int Thing::on_owner_damage_bite(Thingp owner, Thingp hitter, int damage)
 {
+  TRACE_AND_INDENT();
   verify(MTYPE_THING, owner);
   if (! owner) {
     err("Cannot owner_damage_bite null thing");
@@ -1399,6 +1413,7 @@ int Thing::on_owner_damage_bite(Thingp owner, Thingp hitter, int damage)
 
 int Thing::on_damage_bite(Thingp hitter, int damage)
 {
+  TRACE_AND_INDENT();
   verify(MTYPE_THING, hitter);
   if (! hitter) {
     err("Cannot damage_bite null thing");
@@ -1419,8 +1434,7 @@ int Thing::on_damage_bite(Thingp hitter, int damage)
       fn = fn.replace(found, 2, "");
     }
 
-    dbg("Call %s.%s(%s, %s, %s, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), hitter->to_string().c_str(),
-        damage);
+    dbg("Call %s.%s(%s, %s, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), hitter->to_string().c_str(), damage);
 
     return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, (unsigned int) mid_at.x,
                           (unsigned int) mid_at.y, (unsigned int) damage);
@@ -1485,6 +1499,7 @@ int Thing::get_damage_min(void)
 
 int Thing::on_owner_damage_strength(Thingp owner, Thingp hitter, int damage)
 {
+  TRACE_AND_INDENT();
   verify(MTYPE_THING, owner);
   if (! owner) {
     err("Cannot owner_damage_strength null thing");
@@ -1526,6 +1541,7 @@ int Thing::on_owner_damage_strength(Thingp owner, Thingp hitter, int damage)
 
 int Thing::on_damage_strength(Thingp hitter, int damage)
 {
+  TRACE_AND_INDENT();
   verify(MTYPE_THING, hitter);
   if (! hitter) {
     err("Cannot damage_strength null thing");
@@ -1546,8 +1562,7 @@ int Thing::on_damage_strength(Thingp hitter, int damage)
       fn = fn.replace(found, 2, "");
     }
 
-    dbg("Call %s.%s(%s, %s, %s, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), hitter->to_string().c_str(),
-        damage);
+    dbg("Call %s.%s(%s, %s, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), hitter->to_string().c_str(), damage);
 
     return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, (unsigned int) mid_at.x,
                           (unsigned int) mid_at.y, (unsigned int) damage);
@@ -1561,6 +1576,7 @@ int Thing::on_damage_strength(Thingp hitter, int damage)
 
 int Thing::on_owner_damage_constitution(Thingp owner, Thingp hitter, int damage)
 {
+  TRACE_AND_INDENT();
   verify(MTYPE_THING, owner);
   if (! owner) {
     err("Cannot owner_damage_constitution null thing");
@@ -1602,6 +1618,7 @@ int Thing::on_owner_damage_constitution(Thingp owner, Thingp hitter, int damage)
 
 int Thing::on_damage_constitution(Thingp hitter, int damage)
 {
+  TRACE_AND_INDENT();
   verify(MTYPE_THING, hitter);
   if (! hitter) {
     err("Cannot damage_constitution null thing");
@@ -1622,8 +1639,7 @@ int Thing::on_damage_constitution(Thingp hitter, int damage)
       fn = fn.replace(found, 2, "");
     }
 
-    dbg("Call %s.%s(%s, %s, %s, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), hitter->to_string().c_str(),
-        damage);
+    dbg("Call %s.%s(%s, %s, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), hitter->to_string().c_str(), damage);
 
     return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, (unsigned int) mid_at.x,
                           (unsigned int) mid_at.y, (unsigned int) damage);
