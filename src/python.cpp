@@ -2929,7 +2929,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_WRAPPED_PYTHON_FUNCTION(die),
     MY_ADD_WRAPPED_PYTHON_FUNCTION(err),
     MY_ADD_WRAPPED_PYTHON_FUNCTION(if_matches),
-    MY_ADD_WRAPPED_PYTHON_FUNCTION(if_matches_then_kill),
+    MY_ADD_WRAPPED_PYTHON_FUNCTION(if_matches_then_dead),
     MY_ADD_WRAPPED_PYTHON_FUNCTION(level_add),
     MY_ADD_WRAPPED_PYTHON_FUNCTION(level_spawn_next_to),
     MY_ADD_WRAPPED_PYTHON_FUNCTION(level_spawn_next_to_or_on_monst),

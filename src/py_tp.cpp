@@ -1009,7 +1009,7 @@ PyObject *level_spawn_at_thing_if_possible(PyObject *obj, PyObject *args, PyObje
   Py_RETURN_FALSE;
 }
 
-PyObject *if_matches_then_kill_(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *if_matches_then_dead_(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
   char    *what = nullptr;
@@ -1057,7 +1057,7 @@ PyObject *if_matches_then_kill_(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_FALSE;
   }
 
-  if (t->if_matches_then_kill(std::string(what), point(x, y))) {
+  if (t->if_matches_then_dead(std::string(what), point(x, y))) {
     Py_RETURN_TRUE;
   }
   Py_RETURN_FALSE;

@@ -72,6 +72,7 @@ void Thing::resurrect_tick(void)
     // Catch up on ticks
     //
     set_tick_last_did_something(game->tick_current);
+    set_tick_resurrect_when(0);
     is_dead  = false;
     is_dying = false;
 

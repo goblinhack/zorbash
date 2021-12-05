@@ -5,6 +5,7 @@ import tp
 def tp_init(name):
     mytp = tp.Tp(name, "some bones and skin and stuff")
     mytp.set_gfx_show_outlined(True)
+    mytp.set_is_loggable(True)
     mytp.set_is_able_to_fall(True)
     mytp.set_is_bones(True)
     mytp.set_is_removeable_if_out_of_slots(True)

@@ -359,8 +359,8 @@ public:
   bool eat_something(void);
   bool eat(Thingp it);
   bool enchant_random_item(void);
-  bool enchant_with_stone(Thingp);
   bool enchant_without_stone(Thingp);
+  bool enchant_with_stone(Thingp);
   bool equip(Thingp w, int equip);
   bool equip_use(bool forced, int equip);
   bool equip_use_may_attack(int equip);
@@ -375,7 +375,7 @@ public:
   bool get_map_offset_coords(point &blit_tl, point &blit_br, Tilep &tile, bool reflection);
   bool health_boost_would_occur(int v);
   bool idle_check(void);
-  bool if_matches_then_kill(const std::string &what, const point &p);
+  bool if_matches_then_dead(const std::string &what, const point &p);
   bool inventory_shortcuts_insert(Thingp what);
   bool inventory_shortcuts_remove(Thingp what);
   bool inventory_shortcuts_remove(Thingp what, Thingp target);
@@ -391,6 +391,7 @@ public:
   bool is_hated_by_me(const Thingp it);
   bool is_on_fire(void);
   bool is_to_be_avoided(Thingp attacker);
+  bool jump_attack(Thingp it = nullptr);
   bool laser_anim_exists(void);
   bool laser_choose_target(Thingp item);
   bool learn_random_skill(void);
@@ -451,11 +452,6 @@ public:
   bool will_avoid_monst(const Thingp it);
   bool will_prefer_terrain(const Thingp it);
   bool worth_eating(const Thingp it);
-  void check_all_carried();
-
-  void reset_goal_penalty(Thingp attacker);
-  void buff_tick();
-  void debuff_tick();
 
   int buff_on_damage_poison(Thingp hitter, int damage);
   int buff_on_damage_future1(Thingp hitter, int damage);
@@ -1403,7 +1399,6 @@ public:
   uint8_t is_visible();
   uint8_t z_prio(void);
 
-  bool jump_attack(Thingp it = nullptr);
   void achieve_goals_in_death();
   void achieve_goals_in_life();
   void acid_tick();
@@ -1440,11 +1435,12 @@ public:
   void buff_activate(Thingp what);
   void buff_deactivate(Thingp what);
   void buff_remove_all(void);
+  void buff_tick();
   void chasm_tick();
+  void check_all_carried();
   void clear_age_map(void);
   void clear_can_see_currently(void);
   void clear_can_see_ever(void);
-  void path_shorten(std::vector< point > &path);
   void clear_dmap_can_see(void);
   void clear_interrupt_map(void);
   void clear_move_path(const std::string &why);
@@ -1453,6 +1449,7 @@ public:
   void con_(const char *fmt, va_list args); // compile error without
   void corrode_tick();
   void cursor_hover_over_check(void);
+  void dbg_(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
   void dead(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
   void dead_(const char *fmt, va_list args); // compile error without
   void dead(const std::string &);
@@ -1465,8 +1462,7 @@ public:
   void debuff_activate(Thingp what);
   void debuff_deactivate(Thingp what);
   void debuff_remove_all(void);
-  void defeat(Thingp defeater, const char *reason);
-  void defeat(Thingp defeater, const std::string &reason);
+  void debuff_tick();
   void delete_laser();
   void delete_lights(void);
   void delete_particle();
@@ -1475,6 +1471,8 @@ public:
   void destroyed(void);
   void destroy_minions(Thingp defeater);
   void destroy_spawned(Thingp defeater);
+  void destroy(Thingp defeater, const char *reason);
+  void destroy(Thingp defeater, const std::string &reason);
   void die(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
   void die_(const char *fmt, va_list args); // compile error without
   void dir_set_bl(void);
@@ -1526,7 +1524,6 @@ public:
   void location_check_forced();
   void location_check_forced_all_things_at();
   void log(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
-  void dbg_(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
   void log_(const char *fmt, va_list args); // compile error without
   void lunge(point tt);
   void move_carried_items_immediately(void);
@@ -1558,10 +1555,11 @@ public:
   void on_unequip(Thingp what);
   void on_use(Thingp what);
   void on_use(Thingp what, Thingp target);
-  void on_you_are_hit_but_still_alive(Thingp hitter, Thingp real_hitter, bool crit, int dmg);
   void on_you_are_hit_and_now_dead(Thingp hitter, Thingp real_hitter, bool crit, int dmg);
+  void on_you_are_hit_but_still_alive(Thingp hitter, Thingp real_hitter, bool crit, int dmg);
   void on_you_bite_attack(void);
   void on_you_miss_do(Thingp hitter);
+  void path_shorten(std::vector< point > &path);
   void poisoned(void);
   void poison_tick(void);
   void reinit(void);
@@ -1569,6 +1567,7 @@ public:
   void remove_minion_owner(void);
   void remove_owner(void);
   void remove_spawner_owner(void);
+  void reset_goal_penalty(Thingp attacker);
   void rest();
   void resurrect_tick();
   void rotting(void);

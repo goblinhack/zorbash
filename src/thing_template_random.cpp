@@ -861,7 +861,7 @@ Tpp tp_random_bones(void)
 {
   TRACE_AND_INDENT();
   if (unlikely(! tp_bones.size())) {
-    ERR("No boness found");
+    ERR("No bones found");
     return (nullptr);
   }
   return tp_get_with_no_rarity_filter(tp_bones);

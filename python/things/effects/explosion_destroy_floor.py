@@ -3,9 +3,9 @@ import tp
 
 def on_death(me, x, y):
     my.thing_sound_play_channel(me, my.CHANNEL_EXPLOSION, "explosion_e")
-    my.if_matches_then_kill(me, "is_floor", x, y)
-    my.if_matches_then_kill(me, "is_corridor", x, y)
-    my.if_matches_then_kill(me, "is_dirt", x, y)
+    my.if_matches_then_dead(me, "is_floor", x, y)
+    my.if_matches_then_dead(me, "is_corridor", x, y)
+    my.if_matches_then_dead(me, "is_dirt", x, y)
     my.level_place_at(me, "chasm1", x, y)
 
 def tp_init(name):

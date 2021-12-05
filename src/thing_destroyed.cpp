@@ -20,10 +20,16 @@
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"
 
+void Thing::destroy(Thingp defeater, const std::string &reason)
+{
+  TRACE_AND_INDENT();
+  destroy(defeater, reason.c_str());
+}
+
 //
 // Lower level function than dead. Adds the thing to gc.
 //
-void Thing::defeat(Thingp defeater, const char *reason)
+void Thing::destroy(Thingp defeater, const char *reason)
 {
   //
   // Check we're not in a death loop
@@ -278,28 +284,27 @@ void Thing::defeat(Thingp defeater, const char *reason)
     }
   }
 
+  is_dying = false;
+
   if (is_corpse_currently) {
     //
     // Already a corpse
     //
-    if (is_loggable()) {
-      dbg("Already a corpse, clean it up");
-    }
-    if (is_bony()) {
-      auto tpp = tp_random_bones();
-      if (unlikely(! tpp)) {
-        err("Could not place bones");
+    dbg("Already a corpse, clean it up");
+    if (! get_tick_resurrect_when()) {
+      if (is_bony()) {
+        dbg("Can place final bones");
+        auto tpp = tp_random_bones();
+        if (tpp) {
+          (void) level->thing_new(tpp, mid_at);
+        }
       }
-      (void) level->thing_new(tpp, mid_at);
     }
   } else if (is_corpse_on_death()) {
     //
     // Leaves a corpse
     //
-    if (is_loggable()) {
-      dbg("Defeated, leaves corpse");
-    }
-
+    dbg("Defeated, leaves corpse");
     level->set_is_corpse(mid_at.x, mid_at.y);
 
     if (i_set_is_monst) {
@@ -325,47 +330,4 @@ void Thing::defeat(Thingp defeater, const char *reason)
   }
 
   gc();
-}
-
-void Thing::defeat(Thingp defeater, const std::string &reason)
-{
-  TRACE_AND_INDENT();
-  defeat(defeater, reason.c_str());
-}
-
-bool Thing::if_matches_then_kill(const std::string &what, const point &p)
-{
-  TRACE_AND_INDENT();
-  //
-  // Don't destroy the floor under critical items
-  //
-  if ((what == "is_floor") || (what == "is_corridor")) {
-    FOR_ALL_THINGS(level, t, p.x, p.y)
-    {
-      if (t->is_critical_to_level()) {
-        return true;
-      }
-    }
-    FOR_ALL_THINGS_END()
-  }
-
-  FOR_ALL_THINGS(level, t, p.x, p.y)
-  {
-    if (t->is_indestructible()) {
-      continue;
-    }
-
-    if (t->matches(what)) {
-      t->dead(this, "defeated ");
-
-      //
-      // Check if we are newly spawned over a chasm
-      // Or if something we spawned at needs to react to us
-      //
-      location_check_forced_all_things_at();
-    }
-  }
-  FOR_ALL_THINGS_END()
-
-  return true;
 }
