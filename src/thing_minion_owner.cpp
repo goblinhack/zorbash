@@ -12,24 +12,24 @@
 #include "my_sys.hpp"
 #include "my_thing.hpp"
 
-int Thing::get_distance_from_minion_owner(void)
+float Thing::get_distance_from_minion_owner(void)
 {
   auto manifestor = get_top_minion_owner();
   if (! manifestor) {
     return -1;
   }
 
-  return (int) distance(mid_at, manifestor->mid_at);
+  return distance(mid_at, manifestor->mid_at);
 }
 
-int Thing::get_distance_from_minion_owner(point p)
+float Thing::get_distance_from_minion_owner(point p)
 {
   auto manifestor = get_top_minion_owner();
   if (! manifestor) {
     return -1;
   }
 
-  return (int) distance(p, manifestor->mid_at);
+  return distance(p, manifestor->mid_at);
 }
 
 bool Thing::too_far_from_minion_owner(void)
@@ -39,7 +39,7 @@ bool Thing::too_far_from_minion_owner(void)
     return false;
   }
 
-  if (distance(mid_at, manifestor->mid_at) > minion_leash_distance()) {
+  if (distance(mid_at, manifestor->mid_at) > get_distance_minion_leash()) {
     return true;
   }
   return false;
@@ -52,20 +52,23 @@ bool Thing::too_far_from_minion_owner(point p)
     return false;
   }
 
-  if (distance(p, manifestor->mid_at) > minion_leash_distance()) {
+  if (distance(p, manifestor->mid_at) > get_distance_minion_leash()) {
+    con("TODO %d,%d is dist %f vs %f too far", p.x, p.y, distance(p, manifestor->mid_at),
+        get_distance_minion_leash());
     return true;
   }
+  con("TODO %d,%d is dist %f vs %f ok", p.x, p.y, distance(p, manifestor->mid_at), get_distance_minion_leash());
   return false;
 }
 
-bool Thing::too_far_from_minion_owner(point p, int delta)
+bool Thing::too_far_from_minion_owner(point p, float delta)
 {
   auto manifestor = get_top_minion_owner();
   if (! manifestor) {
     return false;
   }
 
-  if (distance(p, manifestor->mid_at) > minion_leash_distance() + delta) {
+  if (distance(p, manifestor->mid_at) > get_distance_minion_leash() + delta) {
     return true;
   }
   return false;

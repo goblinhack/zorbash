@@ -377,11 +377,13 @@ bool Thing::ai_create_path_to_single_goal(int minx, int miny, int maxx, int maxy
 int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int search_type, bool check_for_interrupts)
 {
   TRACE_AND_INDENT();
+
   std::array< std::array< uint8_t, MAP_WIDTH >, MAP_HEIGHT > can_jump = {};
-  point                                                      start((int) mid_at.x, (int) mid_at.y);
-  auto                                                       dmap_can_see      = get_dmap_can_see();
-  bool                                                       jump_allowed      = false;
-  int                                                        something_changed = 0;
+
+  point start((int) mid_at.x, (int) mid_at.y);
+  auto  dmap_can_see      = get_dmap_can_see();
+  bool  jump_allowed      = false;
+  int   something_changed = 0;
 
   for (int y = miny; y <= maxy; y++) {
     for (int x = minx; x <= maxx; x++) {
@@ -409,6 +411,10 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
     for (int x = minx; x <= maxx; x++) {
       point p(x, y);
       if (! get(aip->can_see_ever.can_see, x, y)) {
+        continue;
+      }
+
+      if (too_far_from_minion_owner(p, get_distance_vision())) {
         continue;
       }
 
@@ -530,7 +536,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
         //
         // Don't look too far beyond where we can go
         //
-        if (too_far_from_minion_owner(p, ai_vision_distance())) {
+        if (too_far_from_minion_owner(p, get_distance_vision())) {
           continue;
         }
 
@@ -724,8 +730,8 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
         //
         // Ignore interruptions too far away
         //
-        auto  dist     = distance(mid_at, point(x, y));
-        float max_dist = ai_vision_distance();
+        float dist     = distance(mid_at, point(x, y));
+        float max_dist = get_distance_vision();
         if (dist > max_dist) {
           continue;
         }
@@ -899,8 +905,8 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
         }
 
         if (! it->is_dead) {
-          auto  dist     = distance(mid_at, it->mid_at);
-          float max_dist = ai_vision_distance();
+          float dist     = distance(mid_at, it->mid_at);
+          float max_dist = get_distance_vision();
 
           //
           // If we can see an enemy, get them! If the monster is not lit
@@ -931,7 +937,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
                 GOAL_ADD(GOAL_PRIO_VERY_HIGH, (int) (max_dist - dist) * health_diff - goal_penalty, "attack-enemy",
                          it);
               }
-            } else if (! is_fearless() && (dist < ai_avoid_distance()) && will_avoid_monst(it)) {
+            } else if (! is_fearless() && (dist < get_distance_avoid()) && will_avoid_monst(it)) {
               //
               // Things we avoid are more serious threats
               //
@@ -963,7 +969,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
                 // No hunting monsters we cannot see just because we have visited that area before.
                 // How aggressive are we?
                 //
-                if ((int) pcg_random_range(0, 100) < ai_aggression_level_pct()) {
+                if ((int) pcg_random_range(0, 100) < aggression_level_pct()) {
                   if (possible_to_attack(it)) {
                     GOAL_ADD(GOAL_PRIO_MED, -health_diff - goal_penalty, "can-attack-monst-unprovoked", it);
                   }
@@ -1043,7 +1049,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
     //
     // Don't look too far beyond where we can go
     //
-    if (too_far_from_minion_owner(p, ai_vision_distance())) {
+    if (too_far_from_minion_owner(p, get_distance_vision())) {
       continue;
     }
 
@@ -1269,6 +1275,10 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
       continue;
     }
 
+    if (too_far_from_minion_owner(p, get_distance_vision())) {
+      continue;
+    }
+
     //
     // No search destinations that are, for example, a chasm
     //
@@ -1333,8 +1343,20 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
       }
     }
 
-    auto msg = string_sprintf("search cand @(%d,%d)", p.x, p.y);
-    GOAL_ADD(GOAL_PRIO_VERY_LOW, total_score, msg.c_str(), nullptr);
+    if (is_minion()) {
+      auto manifestor = get_top_minion_owner();
+      if (manifestor) {
+        auto dist = distance(p, manifestor->mid_at);
+        auto msg  = string_sprintf("search cand @(%d,%d) dist-from-owner %f", p.x, p.y, dist);
+        GOAL_ADD(GOAL_PRIO_VERY_LOW, total_score, msg.c_str(), nullptr);
+      } else {
+        auto msg = string_sprintf("search cand @(%d,%d) no-owner", p.x, p.y);
+        GOAL_ADD(GOAL_PRIO_VERY_LOW, total_score, msg.c_str(), nullptr);
+      }
+    } else {
+      auto msg = string_sprintf("search cand @(%d,%d)", p.x, p.y);
+      GOAL_ADD(GOAL_PRIO_VERY_LOW, total_score, msg.c_str(), nullptr);
+    }
   }
 }
 
@@ -1478,13 +1500,14 @@ bool Thing::ai_tick(bool recursing)
   // Set up the extent of the AI, choosing smaller areas for monsters for
   // speed.
   //
-  const float dx = ai_vision_distance();
+  const float dx = get_distance_vision();
   const float dy = dx;
 
-  int minx = std::max(0, (int) (mid_at.x - dx));
-  int maxx = std::min(MAP_WIDTH - 1, (int) (mid_at.x + dx));
-  int miny = std::max(0, (int) (mid_at.y - dy));
-  int maxy = std::min(MAP_HEIGHT - 1, (int) (mid_at.y + dy));
+  auto vision_source = get_vision_source();
+  int  minx          = std::max(0, (int) (vision_source.x - dx));
+  int  maxx          = std::min(MAP_WIDTH - 1, (int) (vision_source.x + dx));
+  int  miny          = std::max(0, (int) (vision_source.y - dy));
+  int  maxy          = std::min(MAP_HEIGHT - 1, (int) (vision_source.y + dy));
 
   if (is_player()) {
     minx = 0;
@@ -1511,7 +1534,13 @@ bool Thing::ai_tick(bool recursing)
   // Update what we can see
   //
   bool light_walls = true;
-  level->fov_calculete(&aip->can_see_currently, mid_at.x, mid_at.y, ai_vision_distance() + 1, light_walls);
+
+  //
+  // Update what we can see - which if a minion is from the perspective of the manifestor.
+  //
+  auto vision_souce = get_vision_source();
+  level->fov_calculete(&aip->can_see_currently, vision_souce.x, vision_souce.y, get_distance_vision() + 1,
+                       light_walls);
 
   if (! recursing) {
     for (int y = miny; y <= maxy; y++) {
@@ -2225,7 +2254,7 @@ bool Thing::ai_choose_avoid_goals(std::multiset< Goal > &goals, const Goal &goal
   AI_LOG("Needs to avoid", it);
   TRACE_NO_INDENT();
 
-  auto d = ai_avoid_distance();
+  auto d = get_distance_avoid();
   if (! d) {
     d = 2;
   }
@@ -2245,7 +2274,7 @@ bool Thing::ai_choose_avoid_goals(std::multiset< Goal > &goals, const Goal &goal
       }
 
       float dist = distance(mid_at + point(dx, dy), it->mid_at);
-      if (dist < ai_avoid_distance()) {
+      if (dist < get_distance_avoid()) {
         continue;
       }
 

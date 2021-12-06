@@ -11,8 +11,7 @@ def on_death(me, x, y):
 
 def tp_init(name, text_name, short_text_name):
     mytp = tp.Tp(name, text_name, short_text_name)
-    mytp.set_ai_aggression_level_pct(100)
-    mytp.set_ai_vision_distance(3)
+    mytp.set_aggression_level_pct(100)
     mytp.set_ai_wanderer(True)
     mytp.set_attack_eater(True)
     mytp.set_attack_engulf_chance_d1000(1000)
@@ -22,6 +21,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_damage_bite_dice("1d20")
     mytp.set_damage_digest_dice("1d40")
     mytp.set_damage_received_doubled_from_fire(True)
+    mytp.set_distance_vision(3)
     mytp.set_environ_avoids_fire(100)
     mytp.set_environ_prefers_acid(True)
     mytp.set_gfx_animated_can_hflip(True)
@@ -43,6 +43,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_carrier_of_treasure_class_c(True)
     mytp.set_is_combustible(True)
     mytp.set_is_crushable(True)
+    mytp.set_is_debug_type(True)
     mytp.set_is_described_when_hovering_over(True)
     mytp.set_is_engulfer(True)
     mytp.set_is_green_blooded(True)
@@ -50,7 +51,6 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_hunger_insatiable(True)
     mytp.set_is_item_collector(True)
     mytp.set_is_item_eater(True)
-    mytp.set_is_debug_type(True)
     mytp.set_is_jelly_baby_eater(True)
     mytp.set_is_jelly_eater(True)
     mytp.set_is_loggable(True)

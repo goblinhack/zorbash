@@ -126,8 +126,8 @@ bool Thing::fire_at_target(void)
     return false;
   }
 
-  int dx, dy;
-  int distance = ai_vision_distance();
+  int   dx, dy;
+  float distance = get_distance_vision();
 
   for (dx = -distance; dx <= distance; dx++)
     for (dy = -distance; dy <= distance; dy++) {

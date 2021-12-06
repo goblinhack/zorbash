@@ -246,7 +246,7 @@ bool Thing::fall_to_next_level(void)
         game->level = next_level;
         TOPCON("%%fg=red$You tumble into the void!%%fg=reset$");
       } else {
-        if (distance_to_player() >= DMAP_IS_PASSABLE) {
+        if (get_distance_to_player() >= DMAP_IS_PASSABLE) {
           if (is_monst()) {
             TOPCON("You hear the distant cry of some creature falling");
           } else if (is_item()) {

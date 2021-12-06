@@ -12,7 +12,7 @@
 
 point Thing::get_random_target(void)
 {
-  int16_t d     = ai_vision_distance();
+  int16_t d     = (int) get_distance_vision();
   auto    tries = 100;
 
   if (is_player()) {
@@ -24,7 +24,7 @@ point Thing::get_random_target(void)
   //
   auto manifestor = get_top_minion_owner();
   if (manifestor) {
-    d = minion_leash_distance();
+    d = (int) get_distance_minion_leash();
   }
 
   while (tries--) {

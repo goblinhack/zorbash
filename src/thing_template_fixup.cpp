@@ -32,7 +32,7 @@ void tp_fixup(void)
     }
 
     if (tp->is_able_to_fire_at()) {
-      if (! tp->ai_vision_distance()) {
+      if (! tp->distance_vision()) {
         DIE("Tp %s needs vision distance if it is able to fire at things", tp->name().c_str());
       }
     }

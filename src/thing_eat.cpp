@@ -162,7 +162,7 @@ bool Thing::consume(Thingp victim)
       dbg("Consumes %s", victim->text_the().c_str());
 
       if (! is_player()) {
-        if (distance_to_player() < DMAP_IS_PASSABLE) {
+        if (get_distance_to_player() < DMAP_IS_PASSABLE) {
           if (victim->is_meat()) {
             level->thing_new(tp_random_blood_splatter()->name(), mid_at);
           } else if (victim->is_pink_blooded()) {

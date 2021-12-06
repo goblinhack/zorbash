@@ -391,8 +391,8 @@ class Tp:
     def set_unused_flag13(self, value):
         my.tp_set_unused_flag13(self, value)
 
-    def set_unused_flag14(self, value):
-        my.tp_set_unused_flag14(self, value)
+    def set_distance_minion_vision_centered_on_manifestor(self, value):
+        my.tp_set_distance_minion_vision_centered_on_manifestor(self, value)
 
     def set_is_able_to_use_weapons(self, value):
         my.tp_set_is_able_to_use_weapons(self, value)
@@ -433,8 +433,8 @@ class Tp:
     def set_birthplace_leas(self, value):
         my.tp_set_birthplace_leas(self, value)
 
-    def set_ai_aggression_level_pct(self, value):
-        my.tp_set_ai_aggression_level_pct(self, value)
+    def set_aggression_level_pct(self, value):
+        my.tp_set_aggression_level_pct(self, value)
 
     def set_is_able_to_see_in_the_dark(self, value):
         my.tp_set_is_able_to_see_in_the_dark(self, value)
@@ -658,8 +658,8 @@ class Tp:
     def set_is_able_to_fire_at(self, value):
         my.tp_set_is_able_to_fire_at(self, value)
 
-    def set_ai_vision_distance(self, value):
-        my.tp_set_ai_vision_distance(self, value)
+    def set_distance_vision(self, value):
+        my.tp_set_distance_vision(self, value)
 
     def set_is_ethereal_minion_generator(self, value):
         my.tp_set_is_ethereal_minion_generator(self, value)
@@ -667,8 +667,8 @@ class Tp:
     def set_is_spawner(self, value):
         my.tp_set_is_spawner(self, value)
 
-    def set_ai_avoid_distance(self, value):
-        my.tp_set_ai_avoid_distance(self, value)
+    def set_distance_avoid(self, value):
+        my.tp_set_distance_avoid(self, value)
 
     def set_is_item_carrier(self, value):
         my.tp_set_is_item_carrier(self, value)
@@ -697,8 +697,8 @@ class Tp:
     def set_charge_count(self, value):
         my.tp_set_charge_count(self, value)
 
-    def set_minion_leash_distance(self, value):
-        my.tp_set_minion_leash_distance(self, value)
+    def set_distance_minion_leash(self, value):
+        my.tp_set_distance_minion_leash(self, value)
 
     def set_is_skill(self, value):
         my.tp_set_is_skill(self, value)
@@ -1162,8 +1162,8 @@ class Tp:
     def set_stat_constitution(self, value):
         my.tp_set_stat_constitution(self, value)
 
-    def set_throw_distance(self, value):
-        my.tp_set_throw_distance(self, value)
+    def set_distance_throw(self, value):
+        my.tp_set_distance_throw(self, value)
 
     def set_lifespan_dice(self, value):
         my.tp_set_lifespan_dice(self, value)

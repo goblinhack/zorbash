@@ -22,12 +22,10 @@ def on_death(me, x, y):
 
 def tp_init(name, text_name):
     mytp = tp.Tp(name, text_name)
-    mytp.set_ai_aggression_level_pct(15)
-    mytp.set_ai_avoid_distance(5)
+    mytp.set_aggression_level_pct(15)
     mytp.set_ai_detect_secret_doors(True)
     mytp.set_ai_resent_count(20)
     mytp.set_ai_shove_chance_d1000(500)
-    mytp.set_ai_vision_distance(7)
     mytp.set_ai_wanderer(True)
     mytp.set_attack_eater(True)
     mytp.set_attack_lunge(True)
@@ -41,6 +39,8 @@ def tp_init(name, text_name):
     mytp.set_damage_bite_dice("1d6+2")
     mytp.set_damage_melee_chance_d1000(900)
     mytp.set_damage_melee_dice("1d4")
+    mytp.set_distance_avoid(5)
+    mytp.set_distance_vision(7)
     mytp.set_environ_avoids_acid(True)
     mytp.set_environ_avoids_fire(100)
     mytp.set_gfx_animated_can_hflip(True)

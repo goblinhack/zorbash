@@ -231,7 +231,7 @@ void Thing::avoid_tick(void)
     //
     // If far enough away start to forget this enemy
     //
-    if (distance(attacker->mid_at, mid_at) > ai_avoid_distance()) {
+    if (distance(attacker->mid_at, mid_at) > get_distance_avoid()) {
       if (is_player() && game->robot_mode) {
         CON("Robot: Remove avoid: %s", attacker->to_string().c_str());
       }
@@ -257,7 +257,7 @@ void Thing::add_avoid(Thingp attacker)
   if (unlikely(! is_monst() && ! is_player())) {
     return;
   }
-  if (! ai_avoid_distance()) {
+  if (! get_distance_avoid()) {
     return;
   }
 

@@ -669,7 +669,7 @@ PyObject *thing_msg(PyObject *obj, PyObject *args, PyObject *keywds)
   //
   // If not reachable, suppress the msg
   //
-  if (owner->distance_to_player() < DMAP_IS_PASSABLE) {
+  if (owner->get_distance_to_player() < DMAP_IS_PASSABLE) {
     TOPCON("%s", msg);
   }
 
@@ -757,10 +757,10 @@ PyObject *thing_sound_play_channel_(PyObject *obj, PyObject *args, PyObject *key
 THING_BODY_GET_BOOL(level_is_able_to_fire_at, is_able_to_fire_at)
 THING_BODY_GET_BOOL(level_is_attackable_by_monst, is_attackable_by_monst)
 THING_BODY_GET_BOOL(level_is_attackable_by_player, is_attackable_by_player)
-THING_BODY_GET_BOOL(thing_ai_aggression_level_pct, ai_aggression_level_pct)
+THING_BODY_GET_BOOL(thing_aggression_level_pct, aggression_level_pct)
 THING_BODY_GET_BOOL(thing_ai_detect_secret_doors, ai_detect_secret_doors)
 THING_BODY_GET_BOOL(thing_ai_resent_count, ai_resent_count)
-THING_BODY_GET_BOOL(thing_ai_vision_distance, ai_vision_distance)
+THING_BODY_GET_BOOL(thing_get_distance_vision, get_distance_vision)
 THING_BODY_GET_BOOL(thing_ai_wanderer, ai_wanderer)
 THING_BODY_GET_BOOL(thing_attack_blood, attack_blood)
 THING_BODY_GET_BOOL(thing_attack_engulf_chance_d1000, attack_engulf_chance_d1000)
@@ -1000,7 +1000,7 @@ THING_BODY_GET_BOOL(thing_unused_flag10, unused_flag10)
 THING_BODY_GET_BOOL(thing_unused_flag11, unused_flag11)
 THING_BODY_GET_BOOL(thing_unused_flag12, unused_flag12)
 THING_BODY_GET_BOOL(thing_unused_flag13, unused_flag13)
-THING_BODY_GET_BOOL(thing_unused_flag14, unused_flag14)
+THING_BODY_GET_BOOL(thing_get_distance_minion_vision_centered_on_manifestor, distance_minion_vision_centered_on_manifestor)
 THING_BODY_GET_BOOL(thing_is_able_to_use_weapons, is_able_to_use_weapons)
 THING_BODY_GET_BOOL(thing_is_bony, is_bony)
 THING_BODY_GET_BOOL(thing_is_pink_blooded, is_pink_blooded)

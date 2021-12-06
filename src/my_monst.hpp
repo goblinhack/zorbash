@@ -95,7 +95,7 @@ public:
   uint8_t keys             = {};
   uint8_t light_strength   = {}; // Current strength, including torches
   uint8_t submerged_offset = {}; // Pixels
-  uint8_t throw_distance   = {};
+  uint8_t distance_throw   = {};
 
   uint8_t stat_attack_bonus = {};
   uint8_t stat_constitution = {};

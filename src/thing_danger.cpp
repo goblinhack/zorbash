@@ -63,7 +63,7 @@ int Tp::get_danger_level(void)
     danger_level += 20;
   }
 
-  danger_level += ai_aggression_level_pct();
+  danger_level += aggression_level_pct();
 
   danger_level += get_damage_melee_dice().max_roll();
   danger_level += get_damage_poison_dice().max_roll();
@@ -152,7 +152,7 @@ int Thing::get_danger_initial_level(void)
 
   danger_level += get_damage_max();
 
-  danger_level += ai_aggression_level_pct();
+  danger_level += aggression_level_pct();
 
   //
   // Low on health, reduce the level
@@ -241,7 +241,7 @@ int Thing::get_danger_current_level(void)
 
   danger_level += get_damage_max();
 
-  danger_level += ai_aggression_level_pct();
+  danger_level += aggression_level_pct();
 
   //
   // Low on health, reduce the level

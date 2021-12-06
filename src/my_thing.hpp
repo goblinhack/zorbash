@@ -240,11 +240,9 @@ public:
   ThingId set_equip_id_carry_anim(ThingId, int equip);
   ThingId set_equip_id_use_anim(ThingId, int equip);
 
-  int  get_distance_from_minion_owner(void);
-  int  get_distance_from_minion_owner(point p);
   bool too_far_from_minion_owner(void);
   bool too_far_from_minion_owner(point p);
-  bool too_far_from_minion_owner(point p, int delta);
+  bool too_far_from_minion_owner(point p, float delta);
 
   Thingp get_equip(int equip);
   Thingp get_equip_carry_anim(int equip);
@@ -623,9 +621,14 @@ public:
   const std::string &title(void);
   const std::string &equip_carry_anim(void);
 
+  float get_distance_avoid(void);
+  float get_distance_vision(void);
   float get_bounce_fade(void);
   float get_bounce_height(void);
   float get_bounce(void);
+  float get_distance_from_minion_owner(point p);
+  float get_distance_from_minion_owner(void);
+  float get_distance_to_player(void);
   float get_fadeup_fade(void);
   float get_fadeup_height(void);
   float get_fadeup(void);
@@ -633,6 +636,8 @@ public:
   float get_fall(void);
   float get_health_pct(void);
   float get_lunge(void);
+  float get_distance_minion_leash(void);
+  float get_distance_throw(void);
   float get_wobble(void);
   float how_far_i_can_jump_max(void);
   float how_far_i_can_jump(void);
@@ -647,15 +652,13 @@ public:
              bool damage_future2, bool damage_future3, bool damage_future4, bool damage_future5, bool damage_crush,
              bool damage_lightning, bool damage_energy, bool damage_acid, bool damage_digest, int damage);
 
-  int ai_aggression_level_pct(void);
-  int ai_avoid_distance(void);
+  int aggression_level_pct(void);
   int ai_choose_goal(void);
   int ai_detect_secret_doors(void);
   int ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int type, bool check);
   int ai_obstacle(void);
   int ai_resent_count(void);
   int ai_shove_chance_d1000(void);
-  int ai_vision_distance(void);
   int ai_wanderer(void);
   int attack_blood(void);
   int is_attacked_with_damage_bite(Thingp hitter, int damage);
@@ -779,10 +782,9 @@ public:
   int decr_stat_strength(void);
   int decr_stuck_count(int);
   int decr_stuck_count(void);
-  int decr_throw_distance(int);
-  int decr_throw_distance(void);
+  int decr_distance_throw(int);
+  int decr_distance_throw(void);
   int defence(void);
-  int distance_to_player(void);
   int enchant_level(void);
   int enchant_max(void);
   int environ_avoids_acid(void);
@@ -881,7 +883,6 @@ public:
   int get_stat_strength(void);
   int get_stuck_count(void);
   int get_submerged_offset(void);
-  int get_throw_distance(void);
   int get_torch_count(void);
   int gfx_an_animation_only(void);
   int gfx_animated_can_hflip(void);
@@ -983,8 +984,8 @@ public:
   int incr_stat_strength(void);
   int incr_stuck_count(int);
   int incr_stuck_count(void);
-  int incr_throw_distance(int);
-  int incr_throw_distance(void);
+  int incr_distance_throw(int);
+  int incr_distance_throw(void);
   int is_able_to_attack_generators(void);
   int is_able_to_break_down_doors(void);
   int is_able_to_break_out_of_webs(void);
@@ -1185,7 +1186,6 @@ public:
   int item_width(void);
   int light_strength(void);
   int maybe_itemp_value(const Thingp it);
-  int minion_leash_distance(void);
   int minion_limit(void);
   int monst_size(void);
   int normal_placement_rules(void);
@@ -1262,7 +1262,7 @@ public:
   int set_stats19(int);
   int set_stat_strength(int);
   int set_stuck_count(int);
-  int set_throw_distance(int);
+  int set_distance_throw(int);
   int skill_enchant_count(const uint32_t slot);
   int unused_chance1_d1000(void);
   int unused_chance2_d1000(void);
@@ -1276,7 +1276,7 @@ public:
   int unused_flag11(void);
   int unused_flag12(void);
   int unused_flag13(void);
-  int unused_flag14(void);
+  int distance_minion_vision_centered_on_manifestor(void);
   int is_able_to_use_weapons(void);
   int is_bony(void);
   int is_pink_blooded(void);
@@ -1299,6 +1299,7 @@ public:
   int worth_collecting(const Thingp it);
   int worth_collecting(const Thingp it, Thingp *would_need_to_drop);
 
+  point get_vision_source(void);
   point dir_to_direction();
   point get_random_target(void);
   point get_where_i_dropped_an_item_last(void);

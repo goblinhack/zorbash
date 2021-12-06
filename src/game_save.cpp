@@ -94,7 +94,7 @@ std::ostream &operator<<(std::ostream &out, Bits< ThingInfop & > const my)
   out << bits(my.t->stats19);
   out << bits(my.t->stat_strength);
   out << bits(my.t->submerged_offset);
-  out << bits(my.t->throw_distance);
+  out << bits(my.t->distance_throw);
   out << bits(my.t->tick_resurrect_when);
   out << bits(my.t->msg);
   out << bits(my.t->dead_reason);

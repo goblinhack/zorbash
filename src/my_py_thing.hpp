@@ -74,7 +74,7 @@ PyObject *thing_msg(PyObject *obj, PyObject *args, PyObject *keywds);
 
 PyObject *level_is_able_to_fire_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_ai_resent_count(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_ai_aggression_level_pct(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_aggression_level_pct(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_ai_detect_secret_doors(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_ai_wanderer(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_attack_blood(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -331,7 +331,7 @@ PyObject *thing_unused_flag10(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag11(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag12(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag13(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag14(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_get_distance_minion_vision_centered_on_manifestor(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_use_weapons(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_bony(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_pink_blooded(PyObject *obj, PyObject *args, PyObject *keywds);

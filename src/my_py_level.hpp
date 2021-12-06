@@ -9,7 +9,7 @@
 #include <Python.h>
 
 PyObject *level_add_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_ai_aggression_level_pct_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_aggression_level_pct_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_ai_detect_secret_doors_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_ai_resent_count_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_ai_wanderer_at(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -254,7 +254,7 @@ PyObject *level_unused_flag10_at(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *level_unused_flag11_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag12_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag13_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag14_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_distance_minion_vision_centered_on_manifestor_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_able_to_use_weapons_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_bony_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_pink_blooded_at(PyObject *obj, PyObject *args, PyObject *keywds);

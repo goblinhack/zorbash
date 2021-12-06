@@ -161,8 +161,8 @@ void Level::cursor_recreate(void)
     bool too_far = false;
     auto dist    = DISTANCE(player->mid_at.x, player->mid_at.y, mid_at.x, mid_at.y);
 
-    if (player->get_throw_distance()) {
-      too_far = dist > player->get_throw_distance();
+    if (player->get_distance_throw()) {
+      too_far = dist > player->get_distance_throw();
     }
 
     if (what->range_max()) {

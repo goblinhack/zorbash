@@ -3,9 +3,8 @@ import tp
 
 def tp_init(name, text_name):
     mytp = tp.Tp(name, text_name)
-    mytp.set_ai_aggression_level_pct(100)
+    mytp.set_aggression_level_pct(100)
     mytp.set_ai_resent_count(100)
-    mytp.set_ai_vision_distance(7)
     mytp.set_ai_wanderer(True)
     mytp.set_attack_humanoid(True)
     mytp.set_attack_lunge(True)
@@ -14,6 +13,7 @@ def tp_init(name, text_name):
     mytp.set_damage_melee_chance_d1000(1000)
     mytp.set_damage_melee_dice("1d6+6")
     mytp.set_damage_received_doubled_from_water(True)
+    mytp.set_distance_vision(7)
     mytp.set_environ_avoids_water(100)
     mytp.set_gfx_animated_can_hflip(True)
     mytp.set_gfx_animated(True)

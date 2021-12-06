@@ -89,7 +89,7 @@ Thingp Thing::get_most_dangerous_visible_thing(void)
 {
   std::vector< std::pair< Thingp, int > > possible;
 
-  int d = ai_avoid_distance();
+  float d = get_distance_avoid();
 
   for (auto dx = -d; dx <= d; dx++) {
     for (auto dy = -d; dy <= d; dy++) {
@@ -150,7 +150,7 @@ Thingp Thing::get_most_dangerous_visible_thing(void)
 
 bool Thing::any_unfriendly_monst_visible(void)
 {
-  int d = ai_avoid_distance();
+  float d = get_distance_avoid();
 
   for (auto dx = -d; dx <= d; dx++) {
     for (auto dy = -d; dy <= d; dy++) {

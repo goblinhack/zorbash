@@ -118,7 +118,7 @@ std::istream &operator>>(std::istream &in, Bits< ThingInfop & > my)
    in >> bits(my.t->stats19);
    in >> bits(my.t->stat_strength);
    in >> bits(my.t->submerged_offset);
-   in >> bits(my.t->throw_distance);
+   in >> bits(my.t->distance_throw);
    in >> bits(my.t->tick_resurrect_when);
    in >> bits(my.t->msg);
    in >> bits(my.t->dead_reason);

@@ -25,10 +25,7 @@ bool Thing::matches(const std::string &what)
     return false;
   }
 
-  if (ai_aggression_level_pct() && (what == "ai_aggression_level_pct")) {
-    return true;
-  }
-  if (ai_avoid_distance() && (what == "ai_avoid_distance")) {
+  if (aggression_level_pct() && (what == "aggression_level_pct")) {
     return true;
   }
   if (is_able_to_attack_generators() && (what == "is_able_to_attack_generators")) {
@@ -47,9 +44,6 @@ bool Thing::matches(const std::string &what)
     return true;
   }
   if (is_able_to_enchant_items() && (what == "is_able_to_enchant_items")) {
-    return true;
-  }
-  if (is_able_to_jump_distance() && (what == "is_able_to_jump_distance")) {
     return true;
   }
   if (is_able_to_jump() && (what == "is_able_to_jump")) {
@@ -80,9 +74,6 @@ bool Thing::matches(const std::string &what)
     return true;
   }
   if (ai_resent_count() && (what == "ai_resent_count")) {
-    return true;
-  }
-  if (ai_vision_distance() && (what == "ai_vision_distance")) {
     return true;
   }
   if (ai_wanderer() && (what == "ai_wanderer")) {
@@ -655,9 +646,6 @@ bool Thing::matches(const std::string &what)
   if (is_wooden() && (what == "is_wooden")) {
     return true;
   }
-  if (minion_leash_distance() && (what == "minion_leash_distance")) {
-    return true;
-  }
   if (minion_limit() && (what == "minion_limit")) {
     return true;
   }
@@ -674,9 +662,6 @@ bool Thing::matches(const std::string &what)
     return true;
   }
   if (unused_flag13() && (what == "unused_flag13")) {
-    return true;
-  }
-  if (unused_flag14() && (what == "unused_flag14")) {
     return true;
   }
   if (is_able_to_use_weapons() && (what == "is_able_to_use_weapons")) {
@@ -758,11 +743,8 @@ bool Thing::matches(const std::string &what)
 
 std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
 {
-  if (what == "ai_aggression_level_pct") {
-    return &Thing::ai_aggression_level_pct;
-  }
-  if (what == "ai_avoid_distance") {
-    return &Thing::ai_avoid_distance;
+  if (what == "aggression_level_pct") {
+    return &Thing::aggression_level_pct;
   }
   if (what == "is_able_to_attack_generators") {
     return &Thing::is_able_to_attack_generators;
@@ -781,9 +763,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   }
   if (what == "is_able_to_enchant_items") {
     return &Thing::is_able_to_enchant_items;
-  }
-  if (what == "is_able_to_jump_distance") {
-    return &Thing::is_able_to_jump_distance;
   }
   if (what == "is_able_to_jump") {
     return &Thing::is_able_to_jump;
@@ -814,9 +793,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   }
   if (what == "ai_resent_count") {
     return &Thing::ai_resent_count;
-  }
-  if (what == "ai_vision_distance") {
-    return &Thing::ai_vision_distance;
   }
   if (what == "ai_wanderer") {
     return &Thing::ai_wanderer;
@@ -1385,9 +1361,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_wooden") {
     return &Thing::is_wooden;
   }
-  if (what == "minion_leash_distance") {
-    return &Thing::minion_leash_distance;
-  }
   if (what == "minion_limit") {
     return &Thing::minion_limit;
   }
@@ -1402,9 +1375,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   }
   if (what == "unused_flag13") {
     return &Thing::unused_flag13;
-  }
-  if (what == "unused_flag14") {
-    return &Thing::unused_flag14;
   }
   if (what == "is_able_to_use_weapons") {
     return &Thing::is_able_to_use_weapons;

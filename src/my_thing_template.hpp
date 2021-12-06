@@ -74,13 +74,13 @@ private:
 
   fsize _sz;
 
-  int _ai_aggression_level_pct {};
-  int _ai_avoid_distance {};
+  int _aggression_level_pct {};
+  int _distance_avoid {};
   int _ai_detect_secret_doors {};
   int _ai_obstacle {};
   int _ai_resent_count {};
   int _ai_shove_chance_d1000 {};
-  int _ai_vision_distance {};
+  int _distance_vision {};
   int _ai_wanderer {};
   int _attack_blood {};
   int _attack_eater {};
@@ -352,7 +352,7 @@ private:
   int _item_height {};
   int _item_width {};
   int _light_strength {};
-  int _minion_leash_distance {};
+  int _distance_minion_leash {};
   int _minion_limit {};
   int _monst_size {};
   int _normal_placement_rules {};
@@ -378,7 +378,7 @@ private:
   int _stats12 {};
   int _stats17 {};
   int _stat_strength {};
-  int _throw_distance {};
+  int _distance_throw {};
   int _unused_chance1_d1000 {};
   int _unused_chance2_d1000 {};
   int _unused_chance3_d1000 {};
@@ -392,7 +392,7 @@ private:
   int _unused_flag11 {};
   int _unused_flag12 {};
   int _unused_flag13 {};
-  int _unused_flag14 {};
+  int _distance_minion_vision_centered_on_manifestor {};
   int _is_able_to_use_weapons {};
   int _is_bony {};
   int _is_pink_blooded {};
@@ -714,13 +714,13 @@ public:
   const std::string &text_unused(void) const { return _text_unused; }
   const std::string &equip_carry_anim(void) const { return _equip_carry_anim; }
 
-  int ai_aggression_level_pct(void) const { return _ai_aggression_level_pct; }
-  int ai_avoid_distance(void) const { return _ai_avoid_distance; }
+  int aggression_level_pct(void) const { return _aggression_level_pct; }
+  int distance_avoid(void) const { return _distance_avoid; }
   int ai_detect_secret_doors(void) const { return _ai_detect_secret_doors; }
   int ai_obstacle(void) const { return _ai_obstacle; }
   int ai_resent_count(void) const { return _ai_resent_count; }
   int ai_shove_chance_d1000(void) const { return _ai_shove_chance_d1000; }
-  int ai_vision_distance(void) const { return _ai_vision_distance; }
+  int distance_vision(void) const { return _distance_vision; }
   int ai_wanderer(void) const { return _ai_wanderer; }
   int attack_blood(void) const { return _attack_blood; }
   int attack_eater(void) const { return _attack_eater; }
@@ -989,7 +989,7 @@ public:
   int item_height(void) const { return _item_height ? _item_height : 1; }
   int item_width(void) const { return _item_width ? _item_width : 1; }
   int light_strength(void) const { return _light_strength; }
-  int minion_leash_distance(void) const { return _minion_leash_distance; }
+  int distance_minion_leash(void) const { return _distance_minion_leash; }
   int minion_limit(void) const { return _minion_limit; }
   int monst_size(void) const { return _monst_size; }
   int normal_placement_rules(void) const { return _normal_placement_rules; }
@@ -1015,7 +1015,7 @@ public:
   int stats12(void) const { return _stats12; }
   int stats17(void) const { return _stats17; }
   int stat_strength(void) const { return _stat_strength; }
-  int throw_distance(void) const { return _throw_distance; }
+  int distance_throw(void) const { return _distance_throw; }
   int unused_chance1_d1000(void) const { return _unused_chance1_d1000; }
   int unused_chance2_d1000(void) const { return _unused_chance2_d1000; }
   int unused_chance3_d1000(void) const { return _unused_chance3_d1000; }
@@ -1028,7 +1028,7 @@ public:
   int unused_flag11(void) const { return _unused_flag11; }
   int unused_flag12(void) const { return _unused_flag12; }
   int unused_flag13(void) const { return _unused_flag13; }
-  int unused_flag14(void) const { return _unused_flag14; }
+  int distance_minion_vision_centered_on_manifestor(void) const { return _distance_minion_vision_centered_on_manifestor; }
   int is_able_to_use_weapons(void) const { return _is_able_to_use_weapons; }
   int is_bony(void) const { return _is_bony; }
   int is_pink_blooded(void) const { return _is_pink_blooded; }
@@ -1050,13 +1050,13 @@ public:
   int unused_flag9(void) const { return _unused_flag9; }
   int weapon_damage(void) const { return _weapon_damage; }
 
-  void set_ai_aggression_level_pct(int v) { _ai_aggression_level_pct = v; }
-  void set_ai_avoid_distance(int v) { _ai_avoid_distance = v; }
+  void set_aggression_level_pct(int v) { _aggression_level_pct = v; }
+  void set_distance_avoid(int v) { _distance_avoid = v; }
   void set_ai_detect_secret_doors(int v) { _ai_detect_secret_doors = v; }
   void set_ai_obstacle(int v) { _ai_obstacle = v; }
   void set_ai_resent_count(int v) { _ai_resent_count = v; }
   void set_ai_shove_chance_d1000(int v) { _ai_shove_chance_d1000 = v; }
-  void set_ai_vision_distance(int v) { _ai_vision_distance = v; }
+  void set_distance_vision(int v) { _distance_vision = v; }
   void set_ai_wanderer(int v) { _ai_wanderer = v; }
   void set_attack_blood(int v) { _attack_blood = v; }
   void set_attack_eater(int v) { _attack_eater = v; }
@@ -1331,7 +1331,7 @@ public:
   void set_light_color(const std::string &v) { _light_color = v; }
   void set_light_strength(int v) { _light_strength = v; }
   void set_long_text_description(const std::string &v) { _long_text_description = v; }
-  void set_minion_leash_distance(int v) { _minion_leash_distance = v; }
+  void set_distance_minion_leash(int v) { _distance_minion_leash = v; }
   void set_minion_limit(int v) { _minion_limit = v; }
   void set_monst_size(int v) { _monst_size = v; }
   void set_name(const std::string &v) { _name = v; }
@@ -1428,7 +1428,7 @@ public:
   void set_text_skill(const std::string &v) { _text_skill = v; }
   void set_text_title(const std::string &v) { _text_title = v; }
   void set_text_unused(const std::string &v) { _text_unused = v; }
-  void set_throw_distance(int v) { _throw_distance = v; }
+  void set_distance_throw(int v) { _distance_throw = v; }
   void set_unused_chance1_d1000(int v) { _unused_chance1_d1000 = v; }
   void set_unused_chance2_d1000(int v) { _unused_chance2_d1000 = v; }
   void set_unused_chance3_d1000(int v) { _unused_chance3_d1000 = v; }
@@ -1441,7 +1441,7 @@ public:
   void set_unused_flag11(int v) { _unused_flag11 = v; }
   void set_unused_flag12(int v) { _unused_flag12 = v; }
   void set_unused_flag13(int v) { _unused_flag13 = v; }
-  void set_unused_flag14(int v) { _unused_flag14 = v; }
+  void set_distance_minion_vision_centered_on_manifestor(int v) { _distance_minion_vision_centered_on_manifestor = v; }
   void set_is_able_to_use_weapons(int v) { _is_able_to_use_weapons = v; }
   void set_is_bony(int v) { _is_bony = v; }
   void set_is_pink_blooded(int v) { _is_pink_blooded = v; }

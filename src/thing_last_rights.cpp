@@ -132,7 +132,7 @@ void Thing::last_rites(Thingp defeater, const char *reason)
     level_push();
     auto p = level->player;
     if (p) {
-      int distance = distance_to_player();
+      float distance = get_distance_to_player();
       if (is_door()) {
         if (defeater && defeater->is_fire()) {
           if (distance < 5) {
@@ -291,7 +291,7 @@ void Thing::last_rites(Thingp defeater, const char *reason)
         }
 
         defeater->score_add(this);
-      } else if (is_monst() && (distance_to_player() >= DMAP_IS_PASSABLE)) {
+      } else if (is_monst() && (get_distance_to_player() >= DMAP_IS_PASSABLE)) {
         if (is_undead()) {
           TOPCON("You hear a distant moan...");
         } else if (is_jelly()) {

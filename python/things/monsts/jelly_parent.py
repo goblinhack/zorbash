@@ -15,10 +15,8 @@ def on_death(me, x, y):
 
 def tp_init(name, text_name):
     mytp = tp.Tp(name, text_name)
-    mytp.set_ai_aggression_level_pct(80)
-    mytp.set_ai_avoid_distance(3)
+    mytp.set_aggression_level_pct(80)
     mytp.set_ai_resent_count(10)
-    mytp.set_ai_vision_distance(3)
     mytp.set_ai_wanderer(True)
     mytp.set_attack_blood(True)
     mytp.set_attack_eater(True)
@@ -28,6 +26,8 @@ def tp_init(name, text_name):
     mytp.set_damage_bite_chance_d1000(1000)
     mytp.set_damage_bite_dice("1d5")
     mytp.set_damage_received_doubled_from_fire(True)
+    mytp.set_distance_avoid(3)
+    mytp.set_distance_vision(3)
     mytp.set_environ_avoids_fire(100)
     mytp.set_gfx_animated_can_hflip(True)
     mytp.set_gfx_animated(True)

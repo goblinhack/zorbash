@@ -127,10 +127,10 @@ int Thing::get_resurrect(void)
   return (tp()->resurrect_dice().roll());
 }
 
-int Thing::ai_avoid_distance(void)
+float Thing::get_distance_avoid(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->ai_avoid_distance());
+  return (tp()->distance_avoid());
 }
 
 int Thing::ai_resent_count(void)
@@ -145,14 +145,14 @@ int Thing::ai_obstacle(void)
   return (tp()->ai_obstacle());
 }
 
-int Thing::ai_vision_distance(void)
+float Thing::get_distance_vision(void)
 {
   TRACE_AND_INDENT();
 
   //
   // Limit vision by torch light if needed.
   //
-  auto v = tp()->ai_vision_distance();
+  auto v = tp()->distance_vision();
 
   if (is_able_to_see_in_the_dark()) {
     return v;
@@ -1287,10 +1287,10 @@ int Thing::unused_flag13(void)
   return (tp()->unused_flag13());
 }
 
-int Thing::unused_flag14(void)
+int Thing::distance_minion_vision_centered_on_manifestor(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->unused_flag14());
+  return (tp()->distance_minion_vision_centered_on_manifestor());
 }
 
 int Thing::is_able_to_use_weapons(void)
@@ -1371,10 +1371,10 @@ int Thing::is_crushable(void)
   return (tp()->is_crushable());
 }
 
-int Thing::ai_aggression_level_pct(void)
+int Thing::aggression_level_pct(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->ai_aggression_level_pct());
+  return (tp()->aggression_level_pct());
 }
 
 int Thing::is_able_to_see_in_the_dark(void)
@@ -1935,10 +1935,10 @@ int Thing::environ_prefers_spiderwebs(void)
   return (tp()->environ_prefers_spiderwebs());
 }
 
-int Thing::minion_leash_distance(void)
+float Thing::get_distance_minion_leash(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->minion_leash_distance());
+  return (tp()->distance_minion_leash());
 }
 
 int Thing::minion_limit(void)
@@ -4158,55 +4158,55 @@ int Thing::incr_stats17(void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// throw_distance
+// distance_throw
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_throw_distance(void)
+float Thing::get_distance_throw(void)
 {
   TRACE_AND_INDENT();
   if (maybe_infop()) {
-    return (get_infop()->throw_distance);
+    return (get_infop()->distance_throw);
   } else {
     return 0;
   }
 }
 
-int Thing::set_throw_distance(int v)
+int Thing::set_distance_throw(int v)
 {
   TRACE_AND_INDENT();
   new_infop();
-  auto n = (get_infop()->throw_distance = v);
+  auto n = (get_infop()->distance_throw = v);
   return (n);
 }
 
-int Thing::decr_throw_distance(int v)
+int Thing::decr_distance_throw(int v)
 {
   TRACE_AND_INDENT();
   new_infop();
-  auto n = (get_infop()->throw_distance -= v);
+  auto n = (get_infop()->distance_throw -= v);
   return (n);
 }
 
-int Thing::incr_throw_distance(int v)
+int Thing::incr_distance_throw(int v)
 {
   TRACE_AND_INDENT();
   new_infop();
-  auto n = (get_infop()->throw_distance += v);
+  auto n = (get_infop()->distance_throw += v);
   return (n);
 }
 
-int Thing::decr_throw_distance(void)
+int Thing::decr_distance_throw(void)
 {
   TRACE_AND_INDENT();
   new_infop();
-  auto n = (get_infop()->throw_distance--);
+  auto n = (get_infop()->distance_throw--);
   return (n);
 }
 
-int Thing::incr_throw_distance(void)
+int Thing::incr_distance_throw(void)
 {
   TRACE_AND_INDENT();
   new_infop();
-  auto n = (get_infop()->throw_distance++);
+  auto n = (get_infop()->distance_throw++);
   return (n);
 }
 

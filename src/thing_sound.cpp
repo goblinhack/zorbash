@@ -29,7 +29,7 @@ bool Thing::thing_sound_play(const std::string &alias)
     return false;
   }
 
-  int distance = distance_to_player();
+  float distance = get_distance_to_player();
   if (distance >= DMAP_IS_PASSABLE) {
     return true;
   }
@@ -78,7 +78,7 @@ bool Thing::thing_sound_play_channel(int channel, const std::string &alias)
     return false;
   }
 
-  int distance = distance_to_player();
+  float distance = get_distance_to_player();
   if (distance == DMAP_IS_WALL) {
     if (level->is_obs_wall_or_door(mid_at.x, mid_at.y)) {
       //

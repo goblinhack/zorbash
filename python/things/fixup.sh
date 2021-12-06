@@ -277,7 +277,7 @@ do
       set_unused_flag11 \
       set_unused_flag12 \
       set_unused_flag13 \
-      set_unused_flag14 \
+      set_distance_minion_vision_centered_on_manifestor \
       set_is_able_to_use_weapons \
       set_is_bony \
       set_is_pink_blooded \
@@ -291,7 +291,7 @@ do
       set_is_able_to_jump_attack \
       set_is_able_to_jump_onto \
       set_is_crushable \
-      set_ai_aggression_level_pct \
+      set_aggression_level_pct \
       set_is_able_to_see_in_the_dark \
       set_is_gfx_anim_synced_with_owner \
       set_unused_flag3 \

@@ -352,9 +352,9 @@ void Thing::init(Levelp level, const std::string &name, const point born)
 
   {
     TRACE_AND_INDENT();
-    auto v = tpp->throw_distance();
+    auto v = tpp->distance_throw();
     if (unlikely(v)) {
-      set_throw_distance(v);
+      set_distance_throw(v);
     }
   }
 

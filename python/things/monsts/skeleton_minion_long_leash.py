@@ -26,10 +26,9 @@ def on_death(me, x, y):
 
 def tp_init(name, text_name):
     mytp = tp.Tp(name, text_name)
-    mytp.set_ai_aggression_level_pct(100)
+    mytp.set_aggression_level_pct(100)
     mytp.set_ai_resent_count(10)
     mytp.set_ai_shove_chance_d1000(200)
-    mytp.set_ai_vision_distance(5)
     mytp.set_attack_humanoid(True)
     mytp.set_attack_lunge(True)
     mytp.set_attack_meat(True)
@@ -40,6 +39,8 @@ def tp_init(name, text_name):
     mytp.set_damage_melee_chance_d1000(900)
     mytp.set_damage_melee_dice("1d2")
     mytp.set_damage_received_doubled_from_water(True)
+    mytp.set_distance_minion_leash(10)
+    mytp.set_distance_vision(11)
     mytp.set_environ_avoids_water(100)
     mytp.set_environ_avoids_water(True)
     mytp.set_gfx_animated_can_hflip(True)
@@ -72,7 +73,6 @@ def tp_init(name, text_name):
     mytp.set_is_tickable(True)
     mytp.set_is_undead(True)
     mytp.set_long_text_description("A collection of tortured bones, driven to wander the dungeon forever. Or at least until you release them. Such creatures abhor the cleansing powers of water.")
-    mytp.set_minion_leash_distance(10)
     mytp.set_monst_size(my.MONST_SIZE_NORMAL)
     mytp.set_normal_placement_rules(True)
     mytp.set_on_death_do("skeleton_minion.on_death()")

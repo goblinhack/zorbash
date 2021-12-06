@@ -61,7 +61,7 @@ void Thing::enemies_tick(void)
     //
     // If far enough away start to forget this enemy
     //
-    if (distance(attacker->mid_at, mid_at) > ai_avoid_distance()) {
+    if (distance(attacker->mid_at, mid_at) > get_distance_avoid()) {
       if (is_player() && game->robot_mode) {
         CON("Robot: enemy remove as is far away: %s", attacker->to_string().c_str());
       }
