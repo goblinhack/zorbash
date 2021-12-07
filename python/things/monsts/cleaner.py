@@ -43,7 +43,6 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_carrier_of_treasure_class_c(True)
     mytp.set_is_combustible(True)
     mytp.set_is_crushable(True)
-    mytp.set_is_debug_type(True)
     mytp.set_is_described_when_hovering_over(True)
     mytp.set_is_engulfer(True)
     mytp.set_is_green_blooded(True)

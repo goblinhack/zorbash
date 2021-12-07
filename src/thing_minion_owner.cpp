@@ -53,11 +53,8 @@ bool Thing::too_far_from_minion_owner(point p)
   }
 
   if (distance(p, manifestor->mid_at) > get_distance_minion_leash()) {
-    con("TODO %d,%d is dist %f vs %f too far", p.x, p.y, distance(p, manifestor->mid_at),
-        get_distance_minion_leash());
     return true;
   }
-  con("TODO %d,%d is dist %f vs %f ok", p.x, p.y, distance(p, manifestor->mid_at), get_distance_minion_leash());
   return false;
 }
 

@@ -414,7 +414,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
         continue;
       }
 
-      if (too_far_from_minion_owner(p, get_distance_vision())) {
+      if (too_far_from_minion_owner(p)) {
         continue;
       }
 
@@ -423,16 +423,18 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
         continue;
       }
 
-      if (jump_allowed) {
-        if (is_disliked_by_me(p)) {
-          set(dmap_can_see->val, x, y, DMAP_IS_PASSABLE);
-        }
+      if (! jump_allowed) {
+        continue;
+      }
+
+      if (is_disliked_by_me(p)) {
+        set(dmap_can_see->val, x, y, DMAP_IS_PASSABLE);
       }
 
       //
       // Can jump but only if not tired.
       //
-      if (jump_allowed && (get_stamina() > get_stamina_max() / 2)) {
+      if (get_stamina() > get_stamina_max() / 2) {
         //
         // Trace all possible jump paths to see if we can jump over
         //
@@ -506,8 +508,6 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
           }
         }
       }
-
-      continue;
     }
   }
 
@@ -536,7 +536,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
         //
         // Don't look too far beyond where we can go
         //
-        if (too_far_from_minion_owner(p, get_distance_vision())) {
+        if (too_far_from_minion_owner(p, 1)) {
           continue;
         }
 
@@ -731,7 +731,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
         // Ignore interruptions too far away
         //
         float dist     = distance(mid_at, point(x, y));
-        float max_dist = get_distance_vision();
+        float max_dist = get_distance_vision() + 1;
         if (dist > max_dist) {
           continue;
         }
@@ -1049,7 +1049,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
     //
     // Don't look too far beyond where we can go
     //
-    if (too_far_from_minion_owner(p, get_distance_vision())) {
+    if (too_far_from_minion_owner(p)) {
       continue;
     }
 
@@ -1275,7 +1275,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
       continue;
     }
 
-    if (too_far_from_minion_owner(p, get_distance_vision())) {
+    if (too_far_from_minion_owner(p, 1)) {
       continue;
     }
 

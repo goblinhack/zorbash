@@ -211,7 +211,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
         //
         // Always allow moves that end up closer to the base
         //
-      } else if (new_distance > get_distance_minion_leash()) {
+      } else if (new_distance > get_distance_minion_leash() + 1) {
         //
         // Too far.
         //

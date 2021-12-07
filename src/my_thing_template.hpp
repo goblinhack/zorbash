@@ -1028,7 +1028,10 @@ public:
   int unused_flag11(void) const { return _unused_flag11; }
   int unused_flag12(void) const { return _unused_flag12; }
   int unused_flag13(void) const { return _unused_flag13; }
-  int distance_minion_vision_centered_on_manifestor(void) const { return _distance_minion_vision_centered_on_manifestor; }
+  int distance_minion_vision_centered_on_manifestor(void) const
+  {
+    return _distance_minion_vision_centered_on_manifestor;
+  }
   int is_able_to_use_weapons(void) const { return _is_able_to_use_weapons; }
   int is_bony(void) const { return _is_bony; }
   int is_pink_blooded(void) const { return _is_pink_blooded; }
@@ -1441,7 +1444,10 @@ public:
   void set_unused_flag11(int v) { _unused_flag11 = v; }
   void set_unused_flag12(int v) { _unused_flag12 = v; }
   void set_unused_flag13(int v) { _unused_flag13 = v; }
-  void set_distance_minion_vision_centered_on_manifestor(int v) { _distance_minion_vision_centered_on_manifestor = v; }
+  void set_distance_minion_vision_centered_on_manifestor(int v)
+  {
+    _distance_minion_vision_centered_on_manifestor = v;
+  }
   void set_is_able_to_use_weapons(int v) { _is_able_to_use_weapons = v; }
   void set_is_bony(int v) { _is_bony = v; }
   void set_is_pink_blooded(int v) { _is_pink_blooded = v; }

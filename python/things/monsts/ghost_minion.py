@@ -20,6 +20,7 @@ def tp_init(name, text_name):
     mytp.set_gfx_animated(True)
     mytp.set_gfx_anim_use("attack_claws")
     mytp.set_gfx_glows(True)
+    mytp.set_is_debug_type(True)
     mytp.set_gfx_health_bar_shown(True)
     mytp.set_gfx_short_shadow_caster(True)
     mytp.set_health_initial_dice("1")

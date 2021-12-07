@@ -511,6 +511,7 @@ void Game::wid_thing_info_create_list(const std::vector< Thingp > &ts)
       if (t->long_text_description().empty()) {
         continue;
       }
+      // t->topcon("over");
 
       i++;
       if (! wid_thing_info_push_popup(t)) {
@@ -811,8 +812,8 @@ void Game::wid_thing_info_add_damage_crush(WidPopup *w, Thingp t)
 
   if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_item_magical()) {
     auto damage_crush_dice = t->get_damage_crush_dice();
-    auto min_value           = damage_crush_dice.min_roll();
-    auto max_value           = damage_crush_dice.max_roll();
+    auto min_value         = damage_crush_dice.min_roll();
+    auto max_value         = damage_crush_dice.max_roll();
     if (min_value > 0) {
       if (min_value == max_value) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->get_damage_crush_dice_str().c_str());
@@ -834,14 +835,15 @@ void Game::wid_thing_info_add_damage_lightning(WidPopup *w, Thingp t)
 
   if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_item_magical()) {
     auto damage_lightning_dice = t->get_damage_lightning_dice();
-    auto min_value           = damage_lightning_dice.min_roll();
-    auto max_value           = damage_lightning_dice.max_roll();
+    auto min_value             = damage_lightning_dice.min_roll();
+    auto max_value             = damage_lightning_dice.max_roll();
     if (min_value > 0) {
       if (min_value == max_value) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->get_damage_lightning_dice_str().c_str());
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$damage_lightning   %17s````", tmp2);
       } else {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->get_damage_lightning_dice_str().c_str());
+        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value,
+                 t->get_damage_lightning_dice_str().c_str());
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$damage_lightning   %17s````", tmp2);
       }
       w->log(tmp);
@@ -857,8 +859,8 @@ void Game::wid_thing_info_add_damage_energy(WidPopup *w, Thingp t)
 
   if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_item_magical()) {
     auto damage_energy_dice = t->get_damage_energy_dice();
-    auto min_value           = damage_energy_dice.min_roll();
-    auto max_value           = damage_energy_dice.max_roll();
+    auto min_value          = damage_energy_dice.min_roll();
+    auto max_value          = damage_energy_dice.max_roll();
     if (min_value > 0) {
       if (min_value == max_value) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->get_damage_energy_dice_str().c_str());

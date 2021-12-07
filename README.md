@@ -4,7 +4,8 @@
 <!--                                                                                                                                              -->
 <!-- Next todo                                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
-<!-- - minion wander looks odd                                                                                                             -->
+<!-- - minion manifestory can summon help?                                                                                                 -->
+<!-- - if facing left should hit left wall in preference                                                                                   -->
 <!-- - crush, fire, cold, energy and lightning damage                                                                                       -->
 <!-- - test poison rings                                                                                                                          -->
 <!-- - necro ring                                                                                                                                 -->

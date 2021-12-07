@@ -614,10 +614,10 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
     }
   }
 
+  //
+  // This lets you skip around generators to avoid ghosts
+  //
   if (is_ethereal()) {
-    //
-    // This lets you skip around generators to avoid ghosts
-    //
     if (is_minion()) {
       if (it->is_minion_generator()) {
         if (it == get_top_minion_owner()) {
