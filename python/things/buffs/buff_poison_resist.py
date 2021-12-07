@@ -7,6 +7,7 @@ def on_owner_set(me, owner, x, y):
     if my.thing_is_player(owner):
         my.topcon("A green glow surrounds you.")
 
+# Called on removing a ring. Not called on death of the owner.
 def on_owner_unset(me, owner, x, y):
     if my.thing_is_player(owner):
         my.topcon("The green glow around you fades.")

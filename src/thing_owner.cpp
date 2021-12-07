@@ -59,6 +59,19 @@ void Thing::on_owner_unset(Thingp owner)
     return;
   }
 
+  //
+  // Don't call this on death of the owner to avoid spurious post RIP messages
+  //
+  if (level->is_being_destroyed) {
+    err("Do not call unset, level being destroyed");
+    return;
+  }
+
+  if (owner->is_dying || owner->is_dying) {
+    err("Do not call unset, owner is dying");
+    return;
+  }
+
   auto t = split_tokens(on_owner_unset, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
@@ -180,8 +193,8 @@ void Thing::remove_owner(void)
   }
 
   dbg("Remove owner %s", old_owner->to_string().c_str());
-
   on_owner_unset(old_owner);
+
   set_owner_id(NoThingId);
   old_owner->decr_owned_count();
 
