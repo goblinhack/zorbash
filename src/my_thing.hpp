@@ -364,7 +364,6 @@ public:
   bool equip_use(bool forced, int equip);
   bool equip_use_may_attack(int equip);
   bool equip_use_must_attack(int equip);
-  bool equip_use_try(int equip);
   bool fall_to_next_level(void);
   bool fall(void);
   bool fire_at_and_choose_target(Thingp);
@@ -428,6 +427,7 @@ public:
   bool spawn_radius_range(Thingp parent, Thingp target, const std::string &what, uint32_t rad_min, uint32_t rad_max);
   bool steal_item_from(Thingp);
   bool steal_treasure_from(Thingp);
+  bool target_attack_best(int equip);
   bool target_select(Thingp item);
   bool thing_sound_play_channel(int chan, const std::string &alias);
   bool thing_sound_play(const std::string &alias);

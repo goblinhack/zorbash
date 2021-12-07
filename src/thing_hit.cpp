@@ -180,124 +180,49 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
 
   if (attack_poison) {
     damage = buff_on_damage_poison(real_hitter, damage);
-    if (! damage) {
-      real_hitter->log("No poison damage on %s", to_string().c_str());
-      return false;
-    } else {
-      real_hitter->log("Attack poison damage %d on %s", damage, to_string().c_str());
-    }
+    damage = on_damage_poison(real_hitter, damage);
   } else if (attack_future1) {
     damage = buff_on_damage_future1(real_hitter, damage);
-    if (! damage) {
-      real_hitter->log("No damage_future1 damage on %s", to_string().c_str());
-      return false;
-    } else {
-      real_hitter->log("Attack damage_future1 damage %d on %s", damage, to_string().c_str());
-    }
+    damage = on_damage_future1(real_hitter, damage);
   } else if (attack_future2) {
     damage = buff_on_damage_future2(real_hitter, damage);
-    if (! damage) {
-      real_hitter->log("No damage_future2 damage on %s", to_string().c_str());
-      return false;
-    } else {
-      real_hitter->log("Attack damage_future2 damage %d on %s", damage, to_string().c_str());
-    }
+    damage = on_damage_future2(real_hitter, damage);
   } else if (attack_future3) {
     damage = buff_on_damage_future3(real_hitter, damage);
-    if (! damage) {
-      real_hitter->log("No damage_future3 damage on %s", to_string().c_str());
-      return false;
-    } else {
-      real_hitter->log("Attack damage_future3 damage %d on %s", damage, to_string().c_str());
-    }
+    damage = on_damage_future3(real_hitter, damage);
   } else if (attack_future4) {
     damage = buff_on_damage_future4(real_hitter, damage);
-    if (! damage) {
-      real_hitter->log("No damage_future4 damage on %s", to_string().c_str());
-      return false;
-    } else {
-      real_hitter->log("Attack damage_future4 damage %d on %s", damage, to_string().c_str());
-    }
+    damage = on_damage_future4(real_hitter, damage);
   } else if (attack_future5) {
     damage = buff_on_damage_future5(real_hitter, damage);
-    if (! damage) {
-      real_hitter->log("No damage_future5 damage on %s", to_string().c_str());
-      return false;
-    } else {
-      real_hitter->log("Attack damage_future5 damage %d on %s", damage, to_string().c_str());
-    }
+    damage = on_damage_future5(real_hitter, damage);
   } else if (attack_crush) {
-    if (! is_crushable()) {
-      real_hitter->log("Cannot crush %s", to_string().c_str());
-      return false;
-    }
     damage = buff_on_damage_crush(real_hitter, damage);
-    if (! damage) {
-      real_hitter->log("No damage_crush damage on %s", to_string().c_str());
-      return false;
-    } else {
-      real_hitter->log("Attack damage_crush damage %d on %s", damage, to_string().c_str());
-    }
+    damage = on_damage_crush(real_hitter, damage);
   } else if (attack_lightning) {
     damage = buff_on_damage_lightning(real_hitter, damage);
-    if (! damage) {
-      real_hitter->log("No damage_lightning damage on %s", to_string().c_str());
-      return false;
-    } else {
-      real_hitter->log("Attack damage_lightning damage %d on %s", damage, to_string().c_str());
-    }
+    damage = on_damage_lightning(real_hitter, damage);
   } else if (attack_energy) {
     damage = buff_on_damage_energy(real_hitter, damage);
-    if (! damage) {
-      real_hitter->log("No damage_energy damage on %s", to_string().c_str());
-      return false;
-    } else {
-      real_hitter->log("Attack damage_energy damage %d on %s", damage, to_string().c_str());
-    }
+    damage = on_damage_energy(real_hitter, damage);
   } else if (attack_acid) {
     damage = buff_on_damage_acid(real_hitter, damage);
-    if (! damage) {
-      real_hitter->log("No damage_acid damage on %s", to_string().c_str());
-      return false;
-    } else {
-      real_hitter->log("Attack damage_acid damage %d on %s", damage, to_string().c_str());
-    }
+    damage = on_damage_acid(real_hitter, damage);
   } else if (attack_digest) {
     damage = buff_on_damage_digest(real_hitter, damage);
-    if (! damage) {
-      real_hitter->log("No damage_digest damage on %s", to_string().c_str());
-      return false;
-    } else {
-      real_hitter->log("Attack damage_digest damage %d on %s", damage, to_string().c_str());
-    }
+    damage = on_damage_digest(real_hitter, damage);
   } else if (attack_necrosis) {
     damage = buff_on_damage_necrosis(real_hitter, damage);
-    if (! damage) {
-      real_hitter->log("No necrosis damage on %s", to_string().c_str());
-      return false;
-    } else {
-      real_hitter->log("Attack necrosis damage %d on %s", damage, to_string().c_str());
-    }
+    damage = on_damage_necrosis(real_hitter, damage);
   } else if (attack_bite) {
     damage = buff_on_damage_bite(real_hitter, damage);
-    if (! damage) {
-      real_hitter->log("No bite damage on %s", to_string().c_str());
-      return false;
-    } else {
-      real_hitter->log("Attack bite damage %d on %s", damage, to_string().c_str());
-    }
+    damage = on_damage_bite(real_hitter, damage);
   } else {
     damage = buff_on_damage_melee(real_hitter, damage);
-    if (! damage) {
-      real_hitter->log("No melee damage on %s", to_string().c_str());
-      return false;
-    } else {
-      real_hitter->log("Attack melee damage %d on %s", damage, to_string().c_str());
-    }
+    damage = on_damage_melee(real_hitter, damage);
   }
 
   if (attack_poison) {
-    damage = on_damage_poison(real_hitter, damage);
     if (! damage) {
       real_hitter->log("No poison damage on %s", to_string().c_str());
       return false;
@@ -305,7 +230,6 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       real_hitter->log("Attack poison damage %d on %s", damage, to_string().c_str());
     }
   } else if (attack_future1) {
-    damage = on_damage_future1(real_hitter, damage);
     if (! damage) {
       real_hitter->log("No damage_future1 damage on %s", to_string().c_str());
       return false;
@@ -313,7 +237,6 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       real_hitter->log("Attack damage_future1 damage %d on %s", damage, to_string().c_str());
     }
   } else if (attack_future2) {
-    damage = on_damage_future2(real_hitter, damage);
     if (! damage) {
       real_hitter->log("No damage_future2 damage on %s", to_string().c_str());
       return false;
@@ -321,7 +244,6 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       real_hitter->log("Attack damage_future2 damage %d on %s", damage, to_string().c_str());
     }
   } else if (attack_future3) {
-    damage = on_damage_future3(real_hitter, damage);
     if (! damage) {
       real_hitter->log("No damage_future3 damage on %s", to_string().c_str());
       return false;
@@ -329,7 +251,6 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       real_hitter->log("Attack damage_future3 damage %d on %s", damage, to_string().c_str());
     }
   } else if (attack_future4) {
-    damage = on_damage_future4(real_hitter, damage);
     if (! damage) {
       real_hitter->log("No damage_future4 damage on %s", to_string().c_str());
       return false;
@@ -337,7 +258,6 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       real_hitter->log("Attack damage_future4 damage %d on %s", damage, to_string().c_str());
     }
   } else if (attack_future5) {
-    damage = on_damage_future5(real_hitter, damage);
     if (! damage) {
       real_hitter->log("No damage_future5 damage on %s", to_string().c_str());
       return false;
@@ -349,7 +269,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       real_hitter->log("Cannot crush %s", to_string().c_str());
       return false;
     }
-    damage = on_damage_crush(real_hitter, damage);
+
     if (! damage) {
       real_hitter->log("No damage_crush damage on %s", to_string().c_str());
       return false;
@@ -357,7 +277,6 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       real_hitter->log("Attack damage_crush damage %d on %s", damage, to_string().c_str());
     }
   } else if (attack_lightning) {
-    damage = on_damage_lightning(real_hitter, damage);
     if (! damage) {
       real_hitter->log("No damage_lightning damage on %s", to_string().c_str());
       return false;
@@ -365,7 +284,6 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       real_hitter->log("Attack damage_lightning damage %d on %s", damage, to_string().c_str());
     }
   } else if (attack_energy) {
-    damage = on_damage_energy(real_hitter, damage);
     if (! damage) {
       real_hitter->log("No damage_energy damage on %s", to_string().c_str());
       return false;
@@ -373,7 +291,6 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       real_hitter->log("Attack damage_energy damage %d on %s", damage, to_string().c_str());
     }
   } else if (attack_acid) {
-    damage = on_damage_acid(real_hitter, damage);
     if (! damage) {
       real_hitter->log("No damage_acid damage on %s", to_string().c_str());
       return false;
@@ -381,7 +298,6 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       real_hitter->log("Attack damage_acid damage %d on %s", damage, to_string().c_str());
     }
   } else if (attack_digest) {
-    damage = on_damage_digest(real_hitter, damage);
     if (! damage) {
       real_hitter->log("No damage_digest damage on %s", to_string().c_str());
       return false;
@@ -389,7 +305,6 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       real_hitter->log("Attack damage_digest damage %d on %s", damage, to_string().c_str());
     }
   } else if (attack_necrosis) {
-    damage = on_damage_necrosis(real_hitter, damage);
     if (! damage) {
       real_hitter->log("No necrosis damage on %s", to_string().c_str());
       return false;
@@ -397,7 +312,6 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       real_hitter->log("Attack necrosis damage %d on %s", damage, to_string().c_str());
     }
   } else if (attack_bite) {
-    damage = on_damage_bite(real_hitter, damage);
     if (! damage) {
       real_hitter->log("No bite damage on %s", to_string().c_str());
       return false;
@@ -405,7 +319,6 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       real_hitter->log("Attack bite damage %d on %s", damage, to_string().c_str());
     }
   } else {
-    damage = on_damage_melee(real_hitter, damage);
     if (! damage) {
       real_hitter->log("No melee damage on %s", to_string().c_str());
       return false;
@@ -457,7 +370,6 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
   if (is_dead || is_dying) {
     if (real_hitter->can_eat(this)) {
       IF_DEBUG2 { hitter->log("Hit bypass, eat it"); }
-      damage = 0;
     } else {
       IF_DEBUG2 { hitter->log("Hit fails, it's dead"); }
       return false;
@@ -715,46 +627,95 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
         TOPCON("%%fg=orange$You hurt yourself for %d damage with %s!%%fg=reset$", damage, hitter->text_the().c_str());
       }
     } else {
-      if (attack_poison) {
-        TOPCON("%%fg=yellow$%s's fangs poisons you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(),
-               damage);
-      } else if (attack_necrosis) {
-        TOPCON("%%fg=limegreen$%s's withering touch rots your skin!%%fg=reset$", real_hitter->text_The().c_str());
-      } else if (crit) {
-        TOPCON("%%fg=red$%s CRITS you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(), damage);
-      } else if (hitter->is_weapon()) {
-        TOPCON("%%fg=orange$%s hits you for %d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(), damage,
-               hitter->text_the(false).c_str());
-      } else if (hitter->is_laser()) {
-        TOPCON("%%fg=orange$%s zaps you for %d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(), damage,
-               hitter->text_the().c_str());
-      } else if (hitter->is_item_magical()) {
-        TOPCON("%%fg=orange$%s blasts you for %d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(), damage,
-               hitter->text_the().c_str());
-      } else if (hitter->is_projectile() || hitter->is_laser()) {
-        TOPCON("%%fg=orange$%s blasted you for %d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(),
-               damage, hitter->text_the().c_str());
-      } else if (attack_acid) {
-        TOPCON("%%fg=orange$%s burns you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(), damage);
-        msg("Sizzle!");
-      } else if (attack_bite) {
-        TOPCON("%%fg=orange$%s bites you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(), damage);
-        msg("Chomp!");
-      } else if (attack_energy) {
-        TOPCON("%%fg=orange$%s blasts you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(), damage);
-        msg("Zap!");
-      } else if (attack_lightning) {
-        TOPCON("%%fg=orange$%s electrocutes you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(), damage);
-        msg("Brzzt!");
-      } else if (attack_crush) {
-        TOPCON("%%fg=orange$You are being crushed by %s!%%fg=reset$", real_hitter->text_the().c_str());
-        msg("Ouch!");
-      } else if (attack_digest) {
-        TOPCON("%%fg=red$You are being consumed by %s!%%fg=reset$", real_hitter->text_the().c_str());
-        msg("Gulp!");
+      if (is_dead || is_dying) {
+        //
+        // Fatal/final hit
+        //
+        if (attack_poison) {
+          TOPCON("%%fg=red$%s's fangs suck the last sustenance from you!%%fg=reset$",
+                 real_hitter->text_The().c_str());
+        } else if (attack_necrosis) {
+          TOPCON("%%fg=red$%s's withering touch finishes you off!%%fg=reset$", real_hitter->text_The().c_str());
+        } else if (hitter->is_weapon()) {
+          TOPCON("%%fg=red$%s cuts you down with %s!%%fg=reset$", real_hitter->text_The().c_str(),
+                 hitter->text_the(false).c_str());
+        } else if (hitter->is_laser()) {
+          TOPCON("%%fg=red$%s zaps you apart with %s!%%fg=reset$", real_hitter->text_The().c_str(),
+                 hitter->text_the().c_str());
+        } else if (hitter->is_item_magical()) {
+          TOPCON("%%fg=red$%s blasts you into pieces with %s!%%fg=reset$", real_hitter->text_The().c_str(),
+                 hitter->text_the().c_str());
+        } else if (hitter->is_projectile() || hitter->is_laser()) {
+          TOPCON("%%fg=red$%s blasted you into bits with %s!%%fg=reset$", real_hitter->text_The().c_str(),
+                 hitter->text_the().c_str());
+        } else if (attack_acid) {
+          TOPCON("%%fg=red$%s dissolves your body!%%fg=reset$", real_hitter->text_The().c_str());
+          msg("Sizzle!");
+        } else if (attack_bite) {
+          TOPCON("%%fg=red$%s bites deep!%%fg=reset$", real_hitter->text_The().c_str());
+          msg("Urk!");
+        } else if (attack_energy) {
+          TOPCON("%%fg=red$%s blasts you apart!%%fg=reset$", real_hitter->text_The().c_str());
+          msg("Zap!");
+        } else if (attack_lightning) {
+          TOPCON("%%fg=red$%s fries your body!%%fg=reset$", real_hitter->text_The().c_str());
+          msg("Brzzt!");
+        } else if (attack_crush) {
+          TOPCON("%%fg=red$You are flattened cby %s!%%fg=reset$", real_hitter->text_the().c_str());
+          msg("Splat!");
+        } else if (attack_digest) {
+          TOPCON("%%fg=red$You are being eaten by %s!%%fg=reset$", real_hitter->text_the().c_str());
+          msg("Slurp!");
+        } else {
+          TOPCON("%%fg=red$%s %s you fatally!%%fg=reset$", real_hitter->text_The().c_str(),
+                 real_hitter->text_hits().c_str());
+        }
       } else {
-        TOPCON("%%fg=orange$%s %s you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(),
-               real_hitter->text_hits().c_str(), damage);
+        //
+        // Hit when not dead yet...
+        //
+        if (attack_poison) {
+          TOPCON("%%fg=yellow$%s's fangs poisons you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(),
+                 damage);
+        } else if (attack_necrosis) {
+          TOPCON("%%fg=limegreen$%s's withering touch rots your skin!%%fg=reset$", real_hitter->text_The().c_str());
+        } else if (crit) {
+          TOPCON("%%fg=red$%s CRITS you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(), damage);
+        } else if (hitter->is_weapon()) {
+          TOPCON("%%fg=orange$%s hits you for %d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(), damage,
+                 hitter->text_the(false).c_str());
+        } else if (hitter->is_laser()) {
+          TOPCON("%%fg=orange$%s zaps you for %d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(), damage,
+                 hitter->text_the().c_str());
+        } else if (hitter->is_item_magical()) {
+          TOPCON("%%fg=orange$%s blasts you for %d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(),
+                 damage, hitter->text_the().c_str());
+        } else if (hitter->is_projectile() || hitter->is_laser()) {
+          TOPCON("%%fg=orange$%s blasted you for %d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(),
+                 damage, hitter->text_the().c_str());
+        } else if (attack_acid) {
+          TOPCON("%%fg=orange$%s burns you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(), damage);
+          msg("Sizzle!");
+        } else if (attack_bite) {
+          TOPCON("%%fg=orange$%s bites you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(), damage);
+          msg("Chomp!");
+        } else if (attack_energy) {
+          TOPCON("%%fg=orange$%s blasts you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(), damage);
+          msg("Zap!");
+        } else if (attack_lightning) {
+          TOPCON("%%fg=orange$%s electrocutes you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(),
+                 damage);
+          msg("Brzzt!");
+        } else if (attack_crush) {
+          TOPCON("%%fg=orange$You are being crushed by %s!%%fg=reset$", real_hitter->text_the().c_str());
+          msg("Ouch!");
+        } else if (attack_digest) {
+          TOPCON("%%fg=red$You are being consumed by %s!%%fg=reset$", real_hitter->text_the().c_str());
+          msg("Gulp!");
+        } else {
+          TOPCON("%%fg=orange$%s %s you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(),
+                 real_hitter->text_hits().c_str(), damage);
+        }
       }
     }
 
@@ -936,6 +897,36 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
 
     if ((real_hitter->mid_at == mid_at) && real_hitter->is_engulfer()) {
       reason = "in the bowels of " + defeater;
+    }
+
+    if (real_hitter == this) {
+      if (attack_poison) {
+        reason = "by poisoning";
+      } else if (attack_future1) {
+        reason = "by future1";
+      } else if (attack_future2) {
+        reason = "by future2";
+      } else if (attack_future3) {
+        reason = "by future3";
+      } else if (attack_future4) {
+        reason = "by future4";
+      } else if (attack_future5) {
+        reason = "by future5";
+      } else if (attack_crush) {
+        reason = "by crushing";
+      } else if (attack_lightning) {
+        reason = "by a bolt of lighting";
+      } else if (attack_energy) {
+        reason = "by too much energy";
+      } else if (attack_acid) {
+        reason = "by acid";
+      } else if (attack_digest) {
+        reason = "by digestion";
+      } else if (attack_necrosis) {
+        reason = "by rotting";
+      } else if (attack_bite) {
+        reason = "by over friendly biting";
+      }
     }
 
     dead(real_hitter, reason);

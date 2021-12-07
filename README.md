@@ -4,11 +4,9 @@
 <!--                                                                                                                                              -->
 <!-- Next todo                                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
-<!-- - minion manifestory can summon help?                                                                                                 -->
-<!-- - if facing left should hit left wall in preference                                                                                   -->
-<!-- - crush, fire, cold, energy and lightning damage                                                                                       -->
 <!-- - test poison rings                                                                                                                          -->
 <!-- - necro ring                                                                                                                                 -->
+<!-- - fire, cold, energy and lightning damage                                                                                       -->
 <!-- - giant spider web throw                                                                                                                     -->
 <!-- - spider ball anims                                                                                                                          -->
 <!-- - antipoison potion                                                                                                                          -->
@@ -16,7 +14,6 @@
 <!-- - holy water cures poison                                                                                                                    -->
 <!-- - darts / poison darts                                                                                                                       -->
 <!-- - AI wand use                                                                                                                                -->
-<!-- - slowdown on level 2                                                                                                                        -->
 <!-- - equip armour etc                                                                                                                           -->
 <!-- - AI if you see a potion of health, drop food in preference?                                                                                 -->
 <!-- - AI did not pick up enchantstone due to space                                                                                               -->

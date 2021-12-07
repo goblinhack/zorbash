@@ -14,8 +14,8 @@ def on_owner_unset(me, owner, x, y):
 def on_owner_damage_melee(me, owner, hitter, x, y, damage):
     return damage
 
-def on_owner_damage_poison(me, owner, hitter, x, y, damage):
-    return int(poison / 2)
+def on_owner_damage_poson(me, owner, hitter, x, y, damage):
+    return int(damage / 2)
 
 def on_owner_damage_future1(me, owner, hitter, x, y, damage):
     return damage

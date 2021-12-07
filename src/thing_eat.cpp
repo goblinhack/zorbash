@@ -176,9 +176,9 @@ bool Thing::consume(Thingp victim)
           if (! victim->is_offscreen) {
             if (victim->is_player()) {
               if (victim->is_dead || victim->is_dying) {
-                TOPCON("%s feasts on your corpse!", text_The().c_str());
+                TOPCON("%%fg=red$%s feasts on your corpse!%%fg=reset$", text_The().c_str());
               } else {
-                TOPCON("%s is eating you!", text_The().c_str());
+                TOPCON("%%fg=orange$%s is eating you!%%fg=reset$", text_The().c_str());
               }
             } else if (victim->is_monst() || victim->is_player()) {
               if (victim->is_dead || victim->is_dying) {

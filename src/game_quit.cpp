@@ -44,10 +44,10 @@ static uint8_t game_quit_yes(Widp w, int32_t x, int32_t y, uint32_t button)
         if (game->config.hiscores.is_new_hiscore(player)) {
           if (game->robot_mode) {
             TOPCON("%%fg=red$RIP: Robot went back to the metal shop%%fg=reset$");
-            TOPCON("%%fg=yellow$New robo high score, %s place!%%fg=reset$", game->config.hiscores.place_str(player));
+            TOPCON("%%fg=gold$New robo high score, %s place!%%fg=reset$", game->config.hiscores.place_str(player));
           } else {
             TOPCON("%%fg=red$RIP: Player quit the game%%fg=reset$");
-            TOPCON("%%fg=yellow$New high score, %s place!%%fg=reset$", game->config.hiscores.place_str(player));
+            TOPCON("%%fg=gold$New high score, %s place!%%fg=reset$", game->config.hiscores.place_str(player));
           }
           game->config.hiscores.add_new_hiscore(player, player->title(), "went home early");
           CON("Player quit the game; new hiscore");
