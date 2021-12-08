@@ -4,6 +4,7 @@
 <!--                                                                                                                                              -->
 <!-- Next todo                                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
+<!-- - jump over prey?                                                                                                                            -->
 <!-- - necro ring                                                                                                                                 -->
 <!-- - fire, cold, energy and lightning damage                                                                                       -->
 <!-- - giant spider web throw                                                                                                                     -->

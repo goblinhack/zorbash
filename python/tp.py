@@ -202,8 +202,8 @@ class Tp:
     def set_on_owner_damage_future4_do(self, value):
         my.tp_set_on_owner_damage_future4_do(self, value)
 
-    def set_on_owner_damage_future5_do(self, value):
-        my.tp_set_on_owner_damage_future5_do(self, value)
+    def set_on_owner_damage_fire_do(self, value):
+        my.tp_set_on_owner_damage_fire_do(self, value)
 
     def set_on_owner_damage_crush_do(self, value):
         my.tp_set_on_owner_damage_crush_do(self, value)
@@ -250,8 +250,8 @@ class Tp:
     def set_on_damage_future4_do(self, value):
         my.tp_set_on_damage_future4_do(self, value)
 
-    def set_on_damage_future5_do(self, value):
-        my.tp_set_on_damage_future5_do(self, value)
+    def set_on_damage_fire_do(self, value):
+        my.tp_set_on_damage_fire_do(self, value)
 
     def set_on_damage_crush_do(self, value):
         my.tp_set_on_damage_crush_do(self, value)
@@ -859,8 +859,8 @@ class Tp:
     def set_damage_future4_chance_d1000(self, value):
         my.tp_set_damage_future4_chance_d1000(self, value)
 
-    def set_damage_future5_chance_d1000(self, value):
-        my.tp_set_damage_future5_chance_d1000(self, value)
+    def set_damage_fire_chance_d1000(self, value):
+        my.tp_set_damage_fire_chance_d1000(self, value)
 
     def set_damage_crush_chance_d1000(self, value):
         my.tp_set_damage_crush_chance_d1000(self, value)
@@ -1222,8 +1222,8 @@ class Tp:
     def set_damage_future4_dice(self, value):
         my.tp_set_damage_future4_dice(self, value)
 
-    def set_damage_future5_dice(self, value):
-        my.tp_set_damage_future5_dice(self, value)
+    def set_damage_fire_dice(self, value):
+        my.tp_set_damage_fire_dice(self, value)
 
     def set_damage_crush_dice(self, value):
         my.tp_set_damage_crush_dice(self, value)

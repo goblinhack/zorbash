@@ -30,7 +30,7 @@ def on_owner_damage_future3(me, owner, hitter, x, y, damage):
 def on_owner_damage_future4(me, owner, hitter, x, y, damage):
     return damage
 
-def on_owner_damage_future5(me, owner, hitter, x, y, damage):
+def on_owner_damage_fire(me, owner, hitter, x, y, damage):
     return damage
 
 def on_owner_damage_crush(me, owner, hitter, x, y, damage):
@@ -90,7 +90,7 @@ def tp_init(name, text_name):
     mytp.set_on_owner_damage_future2_do("buff_poison_resist.on_owner_damage_future2()")
     mytp.set_on_owner_damage_future3_do("buff_poison_resist.on_owner_damage_future3()")
     mytp.set_on_owner_damage_future4_do("buff_poison_resist.on_owner_damage_future4()")
-    mytp.set_on_owner_damage_future5_do("buff_poison_resist.on_owner_damage_future5()")
+    mytp.set_on_owner_damage_fire_do("buff_poison_resist.on_owner_damage_fire()")
     mytp.set_on_owner_damage_lightning_do("buff_poison_resist.on_owner_damage_lightning()")
     mytp.set_on_owner_damage_melee_do("buff_poison_resist.on_owner_damage_melee()")
     mytp.set_on_owner_damage_necrosis_do("buff_poison_resist.on_owner_damage_necrosis()")

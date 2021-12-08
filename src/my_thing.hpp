@@ -457,7 +457,7 @@ public:
   int buff_on_damage_future2(Thingp hitter, int damage);
   int buff_on_damage_future3(Thingp hitter, int damage);
   int buff_on_damage_future4(Thingp hitter, int damage);
-  int buff_on_damage_future5(Thingp hitter, int damage);
+  int buff_on_damage_fire(Thingp hitter, int damage);
   int buff_on_damage_crush(Thingp hitter, int damage);
   int buff_on_damage_lightning(Thingp hitter, int damage);
   int buff_on_damage_energy(Thingp hitter, int damage);
@@ -474,7 +474,7 @@ public:
   int on_damage_future2(Thingp hitter, int damage);
   int on_damage_future3(Thingp hitter, int damage);
   int on_damage_future4(Thingp hitter, int damage);
-  int on_damage_future5(Thingp hitter, int damage);
+  int on_damage_fire(Thingp hitter, int damage);
   int on_damage_crush(Thingp hitter, int damage);
   int on_damage_lightning(Thingp hitter, int damage);
   int on_damage_energy(Thingp hitter, int damage);
@@ -494,7 +494,7 @@ public:
   const Dice &get_damage_future2_dice(void);
   const Dice &get_damage_future3_dice(void);
   const Dice &get_damage_future4_dice(void);
-  const Dice &get_damage_future5_dice(void);
+  const Dice &get_damage_fire_dice(void);
   const Dice &get_damage_lightning_dice(void);
   const Dice &get_damage_energy_dice(void);
   const Dice &get_damage_acid_dice(void);
@@ -530,7 +530,7 @@ public:
   const std::string &get_damage_future2_dice_str(void);
   const std::string &get_damage_future3_dice_str(void);
   const std::string &get_damage_future4_dice_str(void);
-  const std::string &get_damage_future5_dice_str(void);
+  const std::string &get_damage_fire_dice_str(void);
   const std::string &get_damage_lightning_dice_str(void);
   const std::string &get_damage_energy_dice_str(void);
   const std::string &get_damage_acid_dice_str(void);
@@ -575,7 +575,7 @@ public:
   const std::string &on_owner_damage_future2_do(void);
   const std::string &on_owner_damage_future3_do(void);
   const std::string &on_owner_damage_future4_do(void);
-  const std::string &on_owner_damage_future5_do(void);
+  const std::string &on_owner_damage_fire_do(void);
   const std::string &on_owner_damage_crush_do(void);
   const std::string &on_owner_damage_lightning_do(void);
   const std::string &on_owner_damage_energy_do(void);
@@ -591,7 +591,7 @@ public:
   const std::string &on_damage_future2_do(void);
   const std::string &on_damage_future3_do(void);
   const std::string &on_damage_future4_do(void);
-  const std::string &on_damage_future5_do(void);
+  const std::string &on_damage_fire_do(void);
   const std::string &on_damage_crush_do(void);
   const std::string &on_damage_lightning_do(void);
   const std::string &on_damage_energy_do(void);
@@ -645,11 +645,11 @@ public:
 
   int ai_hit_actual(Thingp hitter, Thingp real_hitter, bool crit, bool bite, bool poison, bool necrosis,
                     bool damage_future1, bool damage_future2, bool damage_future3, bool damage_future4,
-                    bool damage_future5, bool damage_crush, bool damage_lightning, bool damage_energy,
+                    bool damage_fire, bool damage_crush, bool damage_lightning, bool damage_energy,
                     bool damage_acid, bool damage_digest, int dmg);
 
   int is_hit(Thingp hitter, bool crit, bool bite, bool poison, bool necrosis, bool damage_future1,
-             bool damage_future2, bool damage_future3, bool damage_future4, bool damage_future5, bool damage_crush,
+             bool damage_future2, bool damage_future3, bool damage_future4, bool damage_fire, bool damage_crush,
              bool damage_lightning, bool damage_energy, bool damage_acid, bool damage_digest, int damage);
 
   int aggression_level_pct(void);
@@ -667,7 +667,7 @@ public:
   int is_attacked_with_damage_future2(Thingp hitter, int damage);
   int is_attacked_with_damage_future3(Thingp hitter, int damage);
   int is_attacked_with_damage_future4(Thingp hitter, int damage);
-  int is_attacked_with_damage_future5(Thingp hitter, int damage);
+  int is_attacked_with_damage_fire(Thingp hitter, int damage);
   int is_attacked_with_damage_crush(Thingp hitter, int damage);
   int is_attacked_with_damage_lightning(Thingp hitter, int damage);
   int is_attacked_with_damage_energy(Thingp hitter, int damage);
@@ -695,7 +695,7 @@ public:
   int damage_future2_chance_d1000(void);
   int damage_future3_chance_d1000(void);
   int damage_future4_chance_d1000(void);
-  int damage_future5_chance_d1000(void);
+  int damage_fire_chance_d1000(void);
   int damage_crush_chance_d1000(void);
   int damage_lightning_chance_d1000(void);
   int damage_energy_chance_d1000(void);
@@ -820,7 +820,7 @@ public:
   int get_damage_future2(void);
   int get_damage_future3(void);
   int get_damage_future4(void);
-  int get_damage_future5(void);
+  int get_damage_fire(void);
   int get_damage_lightning(void);
   int get_damage_energy(void);
   int get_damage_acid(void);
@@ -1198,7 +1198,7 @@ public:
   int on_owner_damage_future2(Thingp owner, Thingp hitter, int damage);
   int on_owner_damage_future3(Thingp owner, Thingp hitter, int damage);
   int on_owner_damage_future4(Thingp owner, Thingp hitter, int damage);
-  int on_owner_damage_future5(Thingp owner, Thingp hitter, int damage);
+  int on_owner_damage_fire(Thingp owner, Thingp hitter, int damage);
   int on_owner_damage_crush(Thingp owner, Thingp hitter, int damage);
   int on_owner_damage_lightning(Thingp owner, Thingp hitter, int damage);
   int on_owner_damage_energy(Thingp owner, Thingp hitter, int damage);
@@ -1214,7 +1214,7 @@ public:
   int on_damage_future2(Thingp owner, Thingp hitter, int damage);
   int on_damage_future3(Thingp owner, Thingp hitter, int damage);
   int on_damage_future4(Thingp owner, Thingp hitter, int damage);
-  int on_damage_future5(Thingp owner, Thingp hitter, int damage);
+  int on_damage_fire(Thingp owner, Thingp hitter, int damage);
   int on_damage_crush(Thingp owner, Thingp hitter, int damage);
   int on_damage_lightning(Thingp owner, Thingp hitter, int damage);
   int on_damage_energy(Thingp owner, Thingp hitter, int damage);
@@ -1557,7 +1557,7 @@ public:
   void hunger_clock();
   void incr_score(int);
   void inherit_from(Thingp it);
-  void init(Levelp, const std::string &name, point at);
+  void init(Levelp, const std::string &name, point at, Thingp owner = nullptr);
   void init_lights(void);
   void inventory_particle(Thingp what, uint32_t slot);
   void inventory_particle(Thingp what, uint32_t slot, Thingp particle_target);

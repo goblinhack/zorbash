@@ -192,7 +192,7 @@ def on_damage_future3(me, hitter, x, y, damage):
 def on_damage_future4(me, hitter, x, y, damage):
     return damage
 
-def on_damage_future5(me, hitter, x, y, damage):
+def on_damage_fire(me, hitter, x, y, damage):
     return damage
 
 def on_damage_crush(me, hitter, x, y, damage):
@@ -297,7 +297,7 @@ def tp_init(name, text_name, short_text_name, title):
     mytp.set_on_damage_future2_do("player.on_damage_future2()")
     mytp.set_on_damage_future3_do("player.on_damage_future3()")
     mytp.set_on_damage_future4_do("player.on_damage_future4()")
-    mytp.set_on_damage_future5_do("player.on_damage_future5()")
+    mytp.set_on_damage_fire_do("player.on_damage_fire()")
     mytp.set_on_damage_lightning_do("player.on_damage_lightning()")
     mytp.set_on_damage_melee_do("player.on_damage_melee()")
     mytp.set_on_damage_necrosis_do("player.on_damage_necrosis()")

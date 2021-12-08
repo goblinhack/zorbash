@@ -43,13 +43,10 @@ Thingp Thing::laser_fire_at(const std::string &laser_name, Thingp target)
     return nullptr;
   }
 
-  auto laser = level->thing_new(laser_name, mid_at);
+  auto laser = level->thing_new(laser_name, target->mid_at, this);
   if (! laser) {
     return nullptr;
   }
-
-  laser->set_owner(this);
-  laser->move_to_immediately(target->mid_at);
 
   dbg("Firing named laser with: %s at %s", laser->to_string().c_str(), target->to_string().c_str());
 

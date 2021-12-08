@@ -94,13 +94,13 @@ void               Tp::set_damage_future4_dice(const std::string &v)
   _damage_future4_dice_str = v;
 }
 
-const Dice        &Tp::get_damage_future5_dice(void) const { return _damage_future1_dice; }
-const int          Tp::get_damage_future5(void) const { return _damage_future1_dice.roll(); }
-const std::string &Tp::get_damage_future5_dice_str(void) const { return _damage_future1_dice_str; }
-void               Tp::set_damage_future5_dice(const std::string &v)
+const Dice        &Tp::get_damage_fire_dice(void) const { return _damage_future1_dice; }
+const int          Tp::get_damage_fire(void) const { return _damage_future1_dice.roll(); }
+const std::string &Tp::get_damage_fire_dice_str(void) const { return _damage_future1_dice_str; }
+void               Tp::set_damage_fire_dice(const std::string &v)
 {
-  _damage_future5_dice     = v;
-  _damage_future5_dice_str = v;
+  _damage_fire_dice     = v;
+  _damage_fire_dice_str = v;
 }
 
 const Dice        &Tp::get_damage_crush_dice(void) const { return _damage_crush_dice; }

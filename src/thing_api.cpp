@@ -1707,10 +1707,10 @@ int Thing::damage_future4_chance_d1000(void)
   return (tp()->damage_future4_chance_d1000());
 }
 
-int Thing::damage_future5_chance_d1000(void)
+int Thing::damage_fire_chance_d1000(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->damage_future5_chance_d1000());
+  return (tp()->damage_fire_chance_d1000());
 }
 
 int Thing::damage_crush_chance_d1000(void)
@@ -6108,10 +6108,10 @@ const std::string &Thing::on_owner_damage_future4_do(void)
   return (tp()->on_owner_damage_future4_do());
 }
 
-const std::string &Thing::on_owner_damage_future5_do(void)
+const std::string &Thing::on_owner_damage_fire_do(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->on_owner_damage_future5_do());
+  return (tp()->on_owner_damage_fire_do());
 }
 
 const std::string &Thing::on_owner_damage_crush_do(void)
@@ -6204,10 +6204,10 @@ const std::string &Thing::on_damage_future4_do(void)
   return (tp()->on_damage_future4_do());
 }
 
-const std::string &Thing::on_damage_future5_do(void)
+const std::string &Thing::on_damage_fire_do(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->on_damage_future5_do());
+  return (tp()->on_damage_fire_do());
 }
 
 const std::string &Thing::on_damage_crush_do(void)

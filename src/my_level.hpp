@@ -543,9 +543,9 @@ public:
   Thingp skillbox_get(void);
   Thingp thing_find(const ThingId id);
   Thingp thing_find_optional(const ThingId id);
-  Thingp thing_new(Tpp, const point at);
-  Thingp thing_new(const std::string &tp_name, Thingp owner);
-  Thingp thing_new(const std::string &tp_name, const point at);
+  Thingp thing_new(Tpp, const point at, Thingp owner = nullptr);
+  Thingp thing_new(const std::string &tp_name, Thingp owner = nullptr);
+  Thingp thing_new(const std::string &tp_name, const point at, Thingp owner = nullptr);
 
   Tpp tp_random_minion_generator(const point &p);
   Tpp tp_random_minion_generator_easy(const point &p);

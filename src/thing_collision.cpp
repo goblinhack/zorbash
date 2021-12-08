@@ -547,6 +547,9 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
     return false;
   }
 
+  //
+  // Allow movement into spiderwebs. We will block movement out.
+  //
   if (it->is_spiderweb() && ! is_ethereal()) {
     if (is_spider()) {
       dbg("No; spiders love webs");

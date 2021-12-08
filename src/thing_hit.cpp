@@ -154,7 +154,7 @@ void Thing::on_you_bite_attack(void)
 int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
                          Thingp real_hitter, // who fired the arrow?
                          bool crit, bool attack_bite, bool attack_poison, bool attack_necrosis, bool attack_future1,
-                         bool attack_future2, bool attack_future3, bool attack_future4, bool attack_future5,
+                         bool attack_future2, bool attack_future3, bool attack_future4, bool attack_fire,
                          bool attack_crush, bool attack_lightning, bool attack_energy, bool attack_acid,
                          bool attack_digest, int damage)
 {
@@ -170,7 +170,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
   }
 
   if (! real_hitter->maybe_infop()) {
-    real_hitter->err("Has no infop");
+    real_hitter->err("Hitter (orig %s) has no infop", hitter->to_string().c_str());
     return false;
   }
 
@@ -193,9 +193,9 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
   } else if (attack_future4) {
     damage = buff_on_damage_future4(real_hitter, damage);
     damage = on_damage_future4(real_hitter, damage);
-  } else if (attack_future5) {
-    damage = buff_on_damage_future5(real_hitter, damage);
-    damage = on_damage_future5(real_hitter, damage);
+  } else if (attack_fire) {
+    damage = buff_on_damage_fire(real_hitter, damage);
+    damage = on_damage_fire(real_hitter, damage);
   } else if (attack_crush) {
     damage = buff_on_damage_crush(real_hitter, damage);
     damage = on_damage_crush(real_hitter, damage);
@@ -257,12 +257,12 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     } else {
       real_hitter->log("Attack damage_future4 damage %d on %s", damage, to_string().c_str());
     }
-  } else if (attack_future5) {
+  } else if (attack_fire) {
     if (! damage) {
-      real_hitter->log("No damage_future5 damage on %s", to_string().c_str());
+      real_hitter->log("No damage_fire damage on %s", to_string().c_str());
       return false;
     } else {
-      real_hitter->log("Attack damage_future5 damage %d on %s", damage, to_string().c_str());
+      real_hitter->log("Attack damage_fire damage %d on %s", damage, to_string().c_str());
     }
   } else if (attack_crush) {
     if (! is_crushable()) {
@@ -661,8 +661,11 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
           TOPCON("%%fg=red$%s fries your body!%%fg=reset$", real_hitter->text_The().c_str());
           msg("Brzzt!");
         } else if (attack_crush) {
-          TOPCON("%%fg=red$You are flattened cby %s!%%fg=reset$", real_hitter->text_the().c_str());
+          TOPCON("%%fg=red$You are flattened by %s!%%fg=reset$", real_hitter->text_the().c_str());
           msg("Splat!");
+        } else if (attack_fire) {
+          TOPCON("%%fg=red$You are burnt to a crisp by %s!%%fg=reset$", real_hitter->text_the().c_str());
+          msg("Sizzle!");
         } else if (attack_digest) {
           TOPCON("%%fg=red$You are being eaten by %s!%%fg=reset$", real_hitter->text_the().c_str());
           msg("Slurp!");
@@ -709,6 +712,9 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
         } else if (attack_crush) {
           TOPCON("%%fg=orange$You are being crushed by %s!%%fg=reset$", real_hitter->text_the().c_str());
           msg("Ouch!");
+        } else if (attack_fire) {
+          TOPCON("%%fg=orange$You are being burnt by %s!%%fg=reset$", real_hitter->text_the().c_str());
+          msg("!");
         } else if (attack_digest) {
           TOPCON("%%fg=red$You are being consumed by %s!%%fg=reset$", real_hitter->text_the().c_str());
           msg("Gulp!");
@@ -910,10 +916,12 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
         reason = "by future3";
       } else if (attack_future4) {
         reason = "by future4";
-      } else if (attack_future5) {
-        reason = "by future5";
+      } else if (attack_fire) {
+        reason = "by fire";
       } else if (attack_crush) {
         reason = "by crushing";
+      } else if (attack_fire) {
+        reason = "by burning";
       } else if (attack_lightning) {
         reason = "by a bolt of lighting";
       } else if (attack_energy) {
@@ -978,7 +986,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
 //
 int Thing::is_hit(Thingp hitter, bool crit, bool attack_bite, bool attack_poison, bool attack_necrosis,
                   bool attack_future1, bool attack_future2, bool attack_future3, bool attack_future4,
-                  bool attack_future5, bool attack_crush, bool attack_lightning, bool attack_energy, bool attack_acid,
+                  bool attack_fire, bool attack_crush, bool attack_lightning, bool attack_energy, bool attack_acid,
                   bool attack_digest, int damage)
 {
   TRACE_AND_INDENT();
@@ -1010,11 +1018,10 @@ int Thing::is_hit(Thingp hitter, bool crit, bool attack_bite, bool attack_poison
   Thingp real_hitter = nullptr;
 
   if (hitter) {
-    real_hitter = hitter->get_immediate_owner();
+    real_hitter = hitter->get_top_owner();
 
     //
-    // If on fire, the fire is owned by the player. So don't make the
-    // player the real hitter.
+    // If on fire, the fire is owned by the player. So don't make the player the real hitter.
     //
     if (real_hitter) {
       if (real_hitter->is_fire()) {
@@ -1116,7 +1123,7 @@ int Thing::is_hit(Thingp hitter, bool crit, bool attack_bite, bool attack_poison
 
   hit_and_destroyed =
       ai_hit_actual(hitter, real_hitter, crit, attack_bite, attack_poison, attack_necrosis, attack_future1,
-                    attack_future2, attack_future3, attack_future4, attack_future5, attack_crush, attack_lightning,
+                    attack_future2, attack_future3, attack_future4, attack_fire, attack_crush, attack_lightning,
                     attack_energy, attack_acid, attack_digest, damage);
 
   return (hit_and_destroyed);

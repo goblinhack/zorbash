@@ -4,6 +4,7 @@
 //
 
 #include "my_array_bounds_check.hpp"
+#include "my_backtrace.hpp"
 #include "my_color.hpp"
 #include "my_depth.hpp"
 #include "my_dmap.hpp"
@@ -17,23 +18,22 @@
 #include "my_sys.hpp"
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"
-#include "my_backtrace.hpp"
 
-Thingp Level::thing_new(Tpp tp, const point at)
+Thingp Level::thing_new(Tpp tp, const point at, Thingp owner)
 {
   if (unlikely(! tp)) {
     err("No tp provided for thing creation");
     return nullptr;
   }
-  return thing_new(tp->name(), at);
+  return thing_new(tp->name(), at, owner);
 }
 
-Thingp Level::thing_new(const std::string &tp_name, Thingp owner) { return thing_new(tp_name, owner->mid_at); }
+Thingp Level::thing_new(const std::string &tp_name, Thingp owner) { return thing_new(tp_name, owner->mid_at, owner); }
 
-Thingp Level::thing_new(const std::string &name, const point at)
+Thingp Level::thing_new(const std::string &name, const point at, Thingp owner)
 {
   auto t = new class Thing_();
-  t->init(this, name, at);
+  t->init(this, name, at, owner);
   return (t);
 }
 
@@ -64,7 +64,7 @@ void Thing::on_born(void)
   }
 }
 
-void Thing::init(Levelp level, const std::string &name, const point born)
+void Thing::init(Levelp level, const std::string &name, const point born, Thingp owner)
 {
   verify(MTYPE_THING, this);
 
@@ -491,6 +491,13 @@ void Thing::init(Levelp level, const std::string &name, const point born)
         carry(W);
       }
     }
+  }
+
+  //
+  // Important to set the owner before the on_born call as we use that for lasers.
+  //
+  if (owner) {
+    set_owner(owner);
   }
 
   on_born();

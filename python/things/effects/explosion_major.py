@@ -17,7 +17,8 @@ def on_death(me, x, y):
 
 def tp_init(name):
     mytp = tp.Tp(name, "huge explosion")
-    mytp.set_damage_melee_dice("2d6")
+    mytp.set_damage_fire_dice("2d6")
+    mytp.set_damage_fire_chance_d1000(1000)
     mytp.set_gfx_animated(True)
     mytp.set_gfx_oversized_and_on_floor(True)
     mytp.set_gfx_short_shadow_caster(True)

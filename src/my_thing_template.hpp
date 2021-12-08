@@ -60,7 +60,7 @@ private:
   Dice _damage_future2_dice {};
   Dice _damage_future3_dice {};
   Dice _damage_future4_dice {};
-  Dice _damage_future5_dice {};
+  Dice _damage_fire_dice {};
   Dice _damage_lightning_dice {};
   Dice _damage_energy_dice {};
   Dice _damage_acid_dice {};
@@ -111,7 +111,7 @@ private:
   int _damage_future2_chance_d1000 {};
   int _damage_future3_chance_d1000 {};
   int _damage_future4_chance_d1000 {};
-  int _damage_future5_chance_d1000 {};
+  int _damage_fire_chance_d1000 {};
   int _damage_crush_chance_d1000 {};
   int _damage_lightning_chance_d1000 {};
   int _damage_energy_chance_d1000 {};
@@ -423,7 +423,7 @@ private:
   std::string _damage_future2_dice_str;
   std::string _damage_future3_dice_str;
   std::string _damage_future4_dice_str;
-  std::string _damage_future5_dice_str;
+  std::string _damage_fire_dice_str;
   std::string _damage_lightning_dice_str;
   std::string _damage_energy_dice_str;
   std::string _damage_acid_dice_str;
@@ -464,7 +464,7 @@ private:
   std::string _on_owner_damage_future2_do;
   std::string _on_owner_damage_future3_do;
   std::string _on_owner_damage_future4_do;
-  std::string _on_owner_damage_future5_do;
+  std::string _on_owner_damage_fire_do;
   std::string _on_owner_damage_crush_do;
   std::string _on_owner_damage_lightning_do;
   std::string _on_owner_damage_energy_do;
@@ -480,7 +480,7 @@ private:
   std::string _on_damage_future2_do;
   std::string _on_damage_future3_do;
   std::string _on_damage_future4_do;
-  std::string _on_damage_future5_do;
+  std::string _on_damage_fire_do;
   std::string _on_damage_crush_do;
   std::string _on_damage_lightning_do;
   std::string _on_damage_energy_do;
@@ -527,7 +527,7 @@ public:
   const Dice &get_damage_future2_dice(void) const;
   const Dice &get_damage_future3_dice(void) const;
   const Dice &get_damage_future4_dice(void) const;
-  const Dice &get_damage_future5_dice(void) const;
+  const Dice &get_damage_fire_dice(void) const;
   const Dice &get_damage_lightning_dice(void) const;
   const Dice &get_damage_energy_dice(void) const;
   const Dice &get_damage_acid_dice(void) const;
@@ -549,7 +549,7 @@ public:
   const int get_damage_future2(void) const;
   const int get_damage_future3(void) const;
   const int get_damage_future4(void) const;
-  const int get_damage_future5(void) const;
+  const int get_damage_fire(void) const;
   const int get_damage_lightning(void) const;
   const int get_damage_energy(void) const;
   const int get_damage_acid(void) const;
@@ -603,7 +603,7 @@ public:
   void set_damage_future2_dice(const std::string &);
   void set_damage_future3_dice(const std::string &);
   void set_damage_future4_dice(const std::string &);
-  void set_damage_future5_dice(const std::string &);
+  void set_damage_fire_dice(const std::string &);
   void set_damage_lightning_dice(const std::string &);
   void set_damage_energy_dice(const std::string &);
   void set_damage_acid_dice(const std::string &);
@@ -624,7 +624,7 @@ public:
   const std::string &get_damage_future2_dice_str(void) const;
   const std::string &get_damage_future3_dice_str(void) const;
   const std::string &get_damage_future4_dice_str(void) const;
-  const std::string &get_damage_future5_dice_str(void) const;
+  const std::string &get_damage_fire_dice_str(void) const;
   const std::string &get_damage_lightning_dice_str(void) const;
   const std::string &get_damage_energy_dice_str(void) const;
   const std::string &get_damage_acid_dice_str(void) const;
@@ -669,7 +669,7 @@ public:
   const std::string &on_owner_damage_future2_do(void) const { return _on_owner_damage_future2_do; }
   const std::string &on_owner_damage_future3_do(void) const { return _on_owner_damage_future3_do; }
   const std::string &on_owner_damage_future4_do(void) const { return _on_owner_damage_future4_do; }
-  const std::string &on_owner_damage_future5_do(void) const { return _on_owner_damage_future5_do; }
+  const std::string &on_owner_damage_fire_do(void) const { return _on_owner_damage_fire_do; }
   const std::string &on_owner_damage_crush_do(void) const { return _on_owner_damage_crush_do; }
   const std::string &on_owner_damage_lightning_do(void) const { return _on_owner_damage_lightning_do; }
   const std::string &on_owner_damage_energy_do(void) const { return _on_owner_damage_energy_do; }
@@ -685,7 +685,7 @@ public:
   const std::string &on_damage_future2_do(void) const { return _on_damage_future2_do; }
   const std::string &on_damage_future3_do(void) const { return _on_damage_future3_do; }
   const std::string &on_damage_future4_do(void) const { return _on_damage_future4_do; }
-  const std::string &on_damage_future5_do(void) const { return _on_damage_future5_do; }
+  const std::string &on_damage_fire_do(void) const { return _on_damage_fire_do; }
   const std::string &on_damage_crush_do(void) const { return _on_damage_crush_do; }
   const std::string &on_damage_lightning_do(void) const { return _on_damage_lightning_do; }
   const std::string &on_damage_energy_do(void) const { return _on_damage_energy_do; }
@@ -749,7 +749,7 @@ public:
   int damage_future2_chance_d1000(void) const { return _damage_future2_chance_d1000; }
   int damage_future3_chance_d1000(void) const { return _damage_future3_chance_d1000; }
   int damage_future4_chance_d1000(void) const { return _damage_future4_chance_d1000; }
-  int damage_future5_chance_d1000(void) const { return _damage_future5_chance_d1000; }
+  int damage_fire_chance_d1000(void) const { return _damage_fire_chance_d1000; }
   int damage_crush_chance_d1000(void) const { return _damage_crush_chance_d1000; }
   int damage_lightning_chance_d1000(void) const { return _damage_lightning_chance_d1000; }
   int damage_energy_chance_d1000(void) const { return _damage_energy_chance_d1000; }
@@ -1089,7 +1089,7 @@ public:
   void set_damage_future2_chance_d1000(int v) { _damage_future2_chance_d1000 = v; }
   void set_damage_future3_chance_d1000(int v) { _damage_future3_chance_d1000 = v; }
   void set_damage_future4_chance_d1000(int v) { _damage_future4_chance_d1000 = v; }
-  void set_damage_future5_chance_d1000(int v) { _damage_future5_chance_d1000 = v; }
+  void set_damage_fire_chance_d1000(int v) { _damage_fire_chance_d1000 = v; }
   void set_damage_crush_chance_d1000(int v) { _damage_crush_chance_d1000 = v; }
   void set_damage_lightning_chance_d1000(int v) { _damage_lightning_chance_d1000 = v; }
   void set_damage_energy_chance_d1000(int v) { _damage_energy_chance_d1000 = v; }
@@ -1359,7 +1359,7 @@ public:
   void set_on_owner_damage_future2_do(const std::string &v) { _on_owner_damage_future2_do = v; }
   void set_on_owner_damage_future3_do(const std::string &v) { _on_owner_damage_future3_do = v; }
   void set_on_owner_damage_future4_do(const std::string &v) { _on_owner_damage_future4_do = v; }
-  void set_on_owner_damage_future5_do(const std::string &v) { _on_owner_damage_future5_do = v; }
+  void set_on_owner_damage_fire_do(const std::string &v) { _on_owner_damage_fire_do = v; }
   void set_on_owner_damage_crush_do(const std::string &v) { _on_owner_damage_crush_do = v; }
   void set_on_owner_damage_lightning_do(const std::string &v) { _on_owner_damage_lightning_do = v; }
   void set_on_owner_damage_energy_do(const std::string &v) { _on_owner_damage_energy_do = v; }
@@ -1375,7 +1375,7 @@ public:
   void set_on_damage_future2_do(const std::string &v) { _on_damage_future2_do = v; }
   void set_on_damage_future3_do(const std::string &v) { _on_damage_future3_do = v; }
   void set_on_damage_future4_do(const std::string &v) { _on_damage_future4_do = v; }
-  void set_on_damage_future5_do(const std::string &v) { _on_damage_future5_do = v; }
+  void set_on_damage_fire_do(const std::string &v) { _on_damage_fire_do = v; }
   void set_on_damage_crush_do(const std::string &v) { _on_damage_crush_do = v; }
   void set_on_damage_lightning_do(const std::string &v) { _on_damage_lightning_do = v; }
   void set_on_damage_energy_do(const std::string &v) { _on_damage_energy_do = v; }

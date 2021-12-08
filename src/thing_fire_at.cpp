@@ -28,7 +28,7 @@ static int              thing_possible_hit_size;
 //
 // Python callback upon being fire_at
 //
-bool Thing::on_firing_at_something(Thingp hitter)
+bool Thing::on_firing_at_something(Thingp target)
 {
   TRACE_AND_INDENT();
   auto on_firing_at_something = tp()->on_firing_at_something_do();
@@ -45,9 +45,9 @@ bool Thing::on_firing_at_something(Thingp hitter)
       fn = fn.replace(found, 2, "");
     }
 
-    dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_string().c_str(), hitter->to_string().c_str());
+    dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_string().c_str(), target->to_string().c_str());
 
-    return py_call_bool_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, (unsigned int) mid_at.x,
+    return py_call_bool_fn(mod.c_str(), fn.c_str(), id.id, target->id.id, (unsigned int) mid_at.x,
                            (unsigned int) mid_at.y);
   }
 
