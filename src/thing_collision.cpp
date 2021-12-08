@@ -547,6 +547,17 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
     return false;
   }
 
+  if (it->is_spiderweb() && ! is_ethereal()) {
+    if (is_spider()) {
+      dbg("No; spiders love webs");
+      return false;
+    }
+    if (things_overlap(me, future_pos, it)) {
+      dbg("No; overlaps and is web; allow movement into");
+      return false;
+    }
+  }
+
   if (possible_to_attack(it)) {
     if (things_overlap(me, future_pos, it)) {
       dbg("Yes; overlaps and can attack");
