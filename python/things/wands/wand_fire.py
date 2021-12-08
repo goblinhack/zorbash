@@ -31,7 +31,8 @@ def on_fall(me, x, y):
 def tp_init(name, text_name, short_text_name):
     mytp = tp.Tp(name, text_name, short_text_name)
     mytp.set_charge_count(5)
-    mytp.set_damage_melee_dice("1d8+6")
+    mytp.set_damage_fire_dice("1d8+6")
+    mytp.set_damage_fire_chance_d1000(1000)
     mytp.set_damage_received_doubled_from_fire(True)
     mytp.set_environ_avoids_water(100)
     mytp.set_gfx_animated(True)

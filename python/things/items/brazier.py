@@ -7,6 +7,7 @@ def tp_init(name, text_name, tiles=[]):
     mytp.set_ai_obstacle(True)
     mytp.set_collision_hit_priority(2)
     mytp.set_damage_crush_dice("1d6")
+    mytp.set_damage_crush_chance_d1000(1000)
     mytp.set_gfx_animated_can_hflip(True)
     mytp.set_gfx_animated(True)
     mytp.set_gfx_flickers(True)

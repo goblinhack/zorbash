@@ -15,6 +15,7 @@ def init_weapon(name, text_name, short_text_name):
     mytp.set_collision_check(True)
     mytp.set_collision_hit_priority(10)
     mytp.set_damage_melee_dice("1d10+1")
+    mytp.set_damage_melee_chance_d1000(1000)
     mytp.set_equip_carry_anim("axe_basic_carry")
     mytp.set_gfx_animated_can_hflip(True)
     mytp.set_gfx_animated(True)

@@ -9,6 +9,7 @@ def tp_init(name, text_name):
     mytp = tp.Tp(name, text_name)
     mytp.set_collision_check(True)
     mytp.set_damage_melee_dice("1d3+1")
+    mytp.set_damage_fire_chance_d1000(1000)
     mytp.set_environ_avoids_water(100)
     mytp.set_gfx_animated(True)
     mytp.set_gfx_flickers(True)
