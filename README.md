@@ -4,9 +4,6 @@
 <!--                                                                                                                                              -->
 <!-- Next todo                                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
-<!-- - ring anim missing                                                                                                                          -->
-<!-- - jump over prey?                                                                                                                            -->
-<!-- - test poison rings                                                                                                                          -->
 <!-- - necro ring                                                                                                                                 -->
 <!-- - fire, cold, energy and lightning damage                                                                                       -->
 <!-- - giant spider web throw                                                                                                                     -->

@@ -598,6 +598,30 @@ bool Thing::jump_attack(Thingp maybe_victim)
     return false;
   }
 
+  if (maybe_victim) {
+    if ((int) pcg_random_range(0, 1000) > tp()->is_able_to_jump_attack_chance_d1000()) {
+      dbg("Try to jump in direction of escape attack");
+      TRACE_AND_INDENT();
+      auto delta = maybe_victim->mid_at - maybe_victim->last_mid_at;
+      if (delta != point(0, 0)) {
+        auto dest = maybe_victim->mid_at + (delta * 2);
+        if (! try_to_jump_carefully(dest)) {
+          auto dest = maybe_victim->mid_at + delta;
+          return try_to_jump_carefully(dest);
+        }
+        return true;
+      }
+    }
+
+    if ((int) pcg_random_range(0, 1000) > tp()->is_able_to_jump_attack_chance_d1000()) {
+      dbg("Try to jump in front attack");
+      TRACE_AND_INDENT();
+      auto delta = maybe_victim->mid_at - mid_at;
+      auto dest  = maybe_victim->mid_at + delta;
+      return try_to_jump_carefully(dest);
+    }
+  }
+
   if ((int) pcg_random_range(0, 1000) > tp()->is_able_to_jump_attack_chance_d1000()) {
     dbg("Try to jump attack");
     TRACE_AND_INDENT();
@@ -605,6 +629,9 @@ bool Thing::jump_attack(Thingp maybe_victim)
     auto jump_dist = pcg_random_range(0, p.size());
     return try_to_jump_carefully(get(p, jump_dist));
   }
+
+  point last_mid_at; // Previous hop where we were.
+  point mid_at;      // Grid coordinates.
 
   if (maybe_victim && can_eat(maybe_victim)) {
     //
