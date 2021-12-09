@@ -63,12 +63,12 @@ void Thing::on_owner_unset(Thingp owner)
   // Don't call this on death of the owner to avoid spurious post RIP messages
   //
   if (level->is_being_destroyed) {
-    err("Do not call unset, level being destroyed");
+    dbg("Do not call unset, level being destroyed");
     return;
   }
 
   if (owner->is_dying || owner->is_dying) {
-    err("Do not call unset, owner is dying");
+    dbg("Do not call unset, owner is dying");
     return;
   }
 

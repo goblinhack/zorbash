@@ -4,9 +4,10 @@
 <!--                                                                                                                                              -->
 <!-- Next todo                                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
-<!-- - jump over prey?                                                                                                                            -->
+<!-- - lightning damage                                                                                       -->
+<!-- - fire damage                                                                                       -->
+<!-- - energy damage                                                                                       -->
 <!-- - necro ring                                                                                                                                 -->
-<!-- - fire, cold, energy and lightning damage                                                                                       -->
 <!-- - giant spider web throw                                                                                                                     -->
 <!-- - spider ball anims                                                                                                                          -->
 <!-- - antipoison potion                                                                                                                          -->

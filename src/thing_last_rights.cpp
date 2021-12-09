@@ -39,7 +39,7 @@ void Thing::last_rites(Thingp defeater, const char *reason)
   }
   is_dying = true;
 
-  dbg("Destroy");
+  dbg3("Destroy");
   TRACE_AND_INDENT();
   ///////////////////////////////////////////////////////////////
   // WARNING: defeater can be nullptr

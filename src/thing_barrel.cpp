@@ -18,7 +18,7 @@
 void Thing::barrel_tick(void)
 {
   TRACE_AND_INDENT();
-  dbg("barrel check");
+
   if (is_floating()) {
     return;
   }

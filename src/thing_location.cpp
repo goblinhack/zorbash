@@ -23,7 +23,6 @@
 void Thing::location_check_forced(void)
 {
   TRACE_AND_INDENT();
-  dbg("Location check");
 
   //
   // Prevent interactions that might generate things like smoke.
@@ -108,7 +107,6 @@ void Thing::location_check_forced(void)
   }
 
   if (! is_able_to_change_levels()) {
-    dbg("Location check, done");
     return;
   }
 

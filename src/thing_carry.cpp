@@ -372,7 +372,8 @@ bool Thing::try_to_carry_if_worthwhile_dropping_items_if_needed(Thingp item)
   log("Try to carry if worthwhile: %s", item->to_string().c_str());
   TRACE_AND_INDENT();
 
-  Thingp would_need_to_drop = nullptr;
+  Thingp would_need_to_drop        = nullptr;
+  bool   tried_to_carry_a_bag_item = false;
 
   //
   // Don't try to carry the bag itself if you're an AI. Carry the contents.
@@ -385,8 +386,9 @@ bool Thing::try_to_carry_if_worthwhile_dropping_items_if_needed(Thingp item)
       if (! try_to_carry_if_worthwhile_dropping_items_if_needed(t)) {
         return false;
       }
+      tried_to_carry_a_bag_item = true;
     }
-    return true;
+    return tried_to_carry_a_bag_item;
   }
 
   if (worth_collecting(item, &would_need_to_drop) < 0) {

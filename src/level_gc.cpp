@@ -16,12 +16,6 @@
 
 void Level::things_gc(bool force)
 {
-  if (force) {
-    dbg("Begin forced thing garbage collection");
-  } else {
-    dbg("Begin thing garbage collection");
-  }
-
   FOR_ALL_THING_GROUPS(group)
   {
     if (all_things_to_be_destroyed[ group ].empty()) {
@@ -72,7 +66,7 @@ void Level::things_gc(bool force)
         monst_count--;
       }
 
-      IF_DEBUG2 { t->log("Thing garbage collect"); }
+      IF_DEBUG3 { t->log("Thing garbage collect"); }
 
       delete t;
     }
@@ -90,8 +84,6 @@ void Level::things_gc(bool force)
     }
     all_things_of_interest_pending_add[ group ] = {};
   }
-
-  dbg("End thing garbage collection");
 }
 
 void Level::things_gc_force(void)
