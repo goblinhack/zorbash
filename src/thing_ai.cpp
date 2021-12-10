@@ -557,44 +557,6 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
           continue;
         }
 
-        if (check_for_interrupts) {
-          if (level->is_map_changed(p.x, p.y) >= game->tick_current - 1) {
-            FOR_ALL_THINGS_THAT_INTERACT(level, it, p.x, p.y)
-            {
-              if (it == this) {
-                continue;
-              }
-
-              if (it->is_changing_level || it->is_hidden || it->is_falling || it->is_jumping) {
-                continue;
-              }
-
-              if (worth_collecting(it) > 0) {
-                set(aip->interrupt_map.val, p.x, p.y, game->tick_current);
-                if (check_for_interrupts) {
-                  something_changed++;
-                  dbg("Interrupted by thing worth collecting %s", it->to_string().c_str());
-                }
-              }
-              if (is_dangerous(it)) {
-                set(aip->interrupt_map.val, p.x, p.y, game->tick_current);
-                if (check_for_interrupts) {
-                  something_changed++;
-                  dbg("Interrupted by dangerous thing %s", it->to_string().c_str());
-                }
-              }
-              if (worth_eating(it)) {
-                set(aip->interrupt_map.val, p.x, p.y, game->tick_current);
-                if (check_for_interrupts) {
-                  something_changed++;
-                  dbg("Interrupted by edible collecting %s", it->to_string().c_str());
-                }
-              }
-            }
-            FOR_ALL_THINGS_END();
-          }
-        }
-
         //
         // Can't see past walls. However we can see over chasms to expand the search space
         //
@@ -853,7 +815,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
         auto goal_penalty = get_goal_penalty(it);
 
         //
-        // Worse terrain, less preferred. Higher score, more preferred.
+        // Worse terrain, less preferred. Higher score, morepreferred.
         //
         auto my_health   = get_health();
         auto it_health   = it->get_health();
