@@ -33,7 +33,9 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_tile(tile=name, is_hp_100_percent=True)
     mytp.update()
 
+
 def init():
     tp_init(name="food_frog", text_name="chocolate frog", short_text_name="choc frog")
+
 
 init()

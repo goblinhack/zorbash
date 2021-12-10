@@ -1,6 +1,7 @@
 import my
 import tp
 
+
 def tp_init(name, text_name):
     mytp = tp.Tp(name, text_name)
     mytp.set_aggression_level_pct(100)
@@ -47,7 +48,7 @@ def tp_init(name, text_name):
     mytp.set_rarity(my.RARITY_VERY_RARE)
     mytp.set_resurrect_dice("1d10+30")
     mytp.set_stat_armor_class(25)
-    mytp.set_stat_attack_bonus(18) # 10, means no bonus
+    mytp.set_stat_attack_bonus(18)  # 10, means no bonus
     mytp.set_stat_constitution(25)
     mytp.set_stat_dexterity(10)
     mytp.set_stat_strength(25)
@@ -78,12 +79,18 @@ def tp_init(name, text_name):
     mytp.set_tile(tile=name + ".4.dead", is_resurrecting=True, delay_ms=delay)
     mytp.set_tile(tile=name + ".3.dead", is_resurrecting=True, delay_ms=delay)
     mytp.set_tile(tile=name + ".2.dead", is_resurrecting=True, delay_ms=delay)
-    mytp.set_tile(tile=name + ".1.dead", is_resurrecting=True, is_end_of_anim=True, is_alive_on_end_of_anim=True)
+    mytp.set_tile(
+        tile=name + ".1.dead",
+        is_resurrecting=True,
+        is_end_of_anim=True,
+        is_alive_on_end_of_anim=True,
+    )
 
     mytp.update()
+
 
 def init():
     tp_init(name="reaper", text_name="reaper")
 
-init()
 
+init()

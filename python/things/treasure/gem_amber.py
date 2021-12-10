@@ -32,7 +32,9 @@ def tp_init(name, text_name):
 
     mytp.update()
 
+
 def init():
     tp_init(name="gem_amber", text_name="amber")
+
 
 init()

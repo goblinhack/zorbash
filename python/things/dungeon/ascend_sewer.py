@@ -1,6 +1,7 @@
 import my
 import tp
 
+
 def spawn(me, x, y):
     my.level_spawn_next_to(me, "jelly_baby")
 
@@ -31,9 +32,36 @@ def tp_init(name, tiles=[], left1_tiles=[]):
 
     mytp.update()
 
+
 def init():
-    tp_init(name="ascend_sewer1", tiles=[ "ascend_sewer1.1", "ascend_sewer1.2", ])
-    tp_init(name="ascend_sewer2", tiles=[ "ascend_sewer2.1", "ascend_sewer2.2", ])
-    tp_init(name="ascend_sewer3", tiles=[ "ascend_sewer3.1", "ascend_sewer3.2", ])
-    tp_init(name="ascend_sewer4", tiles=[ "ascend_sewer4.1", "ascend_sewer4.2", ])
+    tp_init(
+        name="ascend_sewer1",
+        tiles=[
+            "ascend_sewer1.1",
+            "ascend_sewer1.2",
+        ],
+    )
+    tp_init(
+        name="ascend_sewer2",
+        tiles=[
+            "ascend_sewer2.1",
+            "ascend_sewer2.2",
+        ],
+    )
+    tp_init(
+        name="ascend_sewer3",
+        tiles=[
+            "ascend_sewer3.1",
+            "ascend_sewer3.2",
+        ],
+    )
+    tp_init(
+        name="ascend_sewer4",
+        tiles=[
+            "ascend_sewer4.1",
+            "ascend_sewer4.2",
+        ],
+    )
+
+
 init()

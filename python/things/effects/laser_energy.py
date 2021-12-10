@@ -1,6 +1,7 @@
 import my
 import tp
 
+
 def on_born(me, x, y):
     target_x, target_y = my.thing_get_coords(me)
     for thing in my.level_get_all(me, target_x, target_y):
@@ -8,14 +9,15 @@ def on_born(me, x, y):
             my.thing_hit(me, thing)
     my.level_spawn_at_thing(me, "explosion_minor")
 
+
 #
 # This is an internal only object to fire lasers from monsters
 #
 def tp_init(name, text_name, short_text_name):
     mytp = tp.Tp(name, text_name, short_text_name)
     mytp.set_collision_check(True)
-    mytp.set_damage_energy_dice("1d6") # This is the damage when the monst fires
     mytp.set_damage_energy_chance_d1000(1000)
+    mytp.set_damage_energy_dice("1d6")  # This is the damage when the monst fires
     mytp.set_is_interesting(True)
     mytp.set_is_laser(True)
     mytp.set_is_loggable(True)
@@ -28,7 +30,9 @@ def tp_init(name, text_name, short_text_name):
 
     mytp.update()
 
+
 def init():
     tp_init(name="laser_energy", text_name="beam of energy", short_text_name="laser.energy")
+
 
 init()

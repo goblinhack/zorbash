@@ -1,6 +1,7 @@
 import my
 import tp
 
+
 def on_idle(me, x, y):
     #
     # Random recharge
@@ -11,6 +12,7 @@ def on_idle(me, x, y):
         if my.thing_is_player(owner):
             my.topcon(f"%%fg=orange$The {my.thing_get_name(me)} pulses.%%fg=reset$")
 
+
 def explode(me, x, y):
     my.thing_msg(me, "The wand of fire explodes, predictably in a fireball.")
     my.level_spawn_at_thing(me, "explosion_major")
@@ -18,20 +20,24 @@ def explode(me, x, y):
     my.level_spawn_at_thing(me, "fire")
     my.thing_defeated(me, "exploded")
 
+
 def on_you_are_hit_and_now_dead(me, hitter, real_hitter, x, y, crit, damage):
     explode(me, x, y)
+
 
 def on_fire(me, x, y):
     explode(me, x, y)
 
+
 def on_fall(me, x, y):
     explode(me, x, y)
+
 
 def tp_init(name, text_name, short_text_name):
     mytp = tp.Tp(name, text_name, short_text_name)
     mytp.set_charge_count(5)
-    mytp.set_damage_fire_dice("1d8+6")
     mytp.set_damage_fire_chance_d1000(1000)
+    mytp.set_damage_fire_dice("1d8+6")
     mytp.set_damage_received_doubled_from_fire(True)
     mytp.set_environ_avoids_water(100)
     mytp.set_gfx_animated(True)
@@ -48,7 +54,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_item(True)
     mytp.set_is_loggable(True)
     mytp.set_is_target_auto_select(True)
-    mytp.set_is_tickable(True) # So it can interact with fire
+    mytp.set_is_tickable(True)  # So it can interact with fire
     mytp.set_is_treasure_class_b(True)
     mytp.set_is_treasure_type(True)
     mytp.set_is_usable(True)
@@ -79,7 +85,9 @@ def tp_init(name, text_name, short_text_name):
 
     mytp.update()
 
+
 def init():
     tp_init(name="wand_fire", text_name="wand of fire", short_text_name="wand.fire")
+
 
 init()

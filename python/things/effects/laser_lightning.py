@@ -1,6 +1,7 @@
 import my
 import tp
 
+
 def on_born(me, x, y):
     target_x, target_y = my.thing_get_coords(me)
     for thing in my.level_get_all(me, target_x, target_y):
@@ -28,8 +29,8 @@ def on_born(me, x, y):
 #
 def tp_init(name, text_name, short_text_name):
     mytp = tp.Tp(name, text_name, short_text_name)
-    mytp.set_damage_lightning_dice("1d10+10") # This is the damage when the monst fires
     mytp.set_damage_lightning_chance_d1000(1000)
+    mytp.set_damage_lightning_dice("1d10+10")  # This is the damage when the monst fires
     mytp.set_is_interesting(True)
     mytp.set_is_laser(True)
     mytp.set_is_loggable(True)
@@ -42,7 +43,13 @@ def tp_init(name, text_name, short_text_name):
 
     mytp.update()
 
+
 def init():
-    tp_init(name="laser_lightning", text_name="beam of lightning", short_text_name="laser.lightning")
+    tp_init(
+        name="laser_lightning",
+        text_name="beam of lightning",
+        short_text_name="laser.lightning",
+    )
+
 
 init()

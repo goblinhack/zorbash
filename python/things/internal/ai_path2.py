@@ -18,7 +18,9 @@ def tp_init(name):
 
     mytp.update()
 
+
 def init():
     tp_init(name="ai_path2")
+
 
 init()

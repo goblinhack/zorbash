@@ -1,6 +1,7 @@
 import my
 import tp
 
+
 def tp_init(name, text_name):
     mytp = tp.Tp(name, text_name)
     mytp.set_capacity_height(8)
@@ -47,7 +48,9 @@ def tp_init(name, text_name):
     mytp.set_tile(tile=name + ".open", is_open=True)
     mytp.update()
 
+
 def init():
     tp_init(name="chest1", text_name="small treasure chest")
+
 
 init()

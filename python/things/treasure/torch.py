@@ -6,6 +6,7 @@ def on_lifespan(owner, me, x, y):
     if my.thing_is_player(owner):
         my.topcon("One of your torches fizzles out.")
 
+
 def tp_init(name, text_name, tiles=[]):
     mytp = tp.Tp(name, text_name)
     mytp.set_charge_count(4)
@@ -23,7 +24,7 @@ def tp_init(name, text_name, tiles=[]):
     mytp.set_is_hittable(True)
     mytp.set_is_item(True)
     mytp.set_is_loggable(True)
-    mytp.set_is_tickable(True) # for pushing and falling
+    mytp.set_is_tickable(True)  # for pushing and falling
     mytp.set_is_torch(True)
     mytp.set_is_treasure_class_a(True)
     mytp.set_is_treasure_type(True)
@@ -41,19 +42,25 @@ def tp_init(name, text_name, tiles=[]):
     mytp.set_z_depth(my.MAP_DEPTH_OBJ)
     mytp.set_z_prio(my.MAP_PRIO_NORMAL)
 
-    delay=100
+    delay = 100
     for t in tiles:
         mytp.set_tile(tile=t, delay_ms=delay)
 
     mytp.update()
 
+
 def init():
-    tp_init(name="torch", text_name="torch",
-            tiles=[
-                "torch.1",
-                "torch.2",
-                "torch.3",
-                "torch.4",
-                "torch.5",
-                ])
+    tp_init(
+        name="torch",
+        text_name="torch",
+        tiles=[
+            "torch.1",
+            "torch.2",
+            "torch.3",
+            "torch.4",
+            "torch.5",
+        ],
+    )
+
+
 init()

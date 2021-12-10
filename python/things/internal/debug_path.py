@@ -20,7 +20,9 @@ def tp_init(name):
 
     mytp.update()
 
+
 def init():
     tp_init(name="debug_path")
+
 
 init()

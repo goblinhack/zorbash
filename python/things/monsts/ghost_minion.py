@@ -1,8 +1,10 @@
 import my
 import tp
 
+
 def on_death(me, x, y):
     my.level_spawn_at_thing(me, "ghost_explosion")
+
 
 def tp_init(name, text_name):
     mytp = tp.Tp(name, text_name)
@@ -20,7 +22,6 @@ def tp_init(name, text_name):
     mytp.set_gfx_animated(True)
     mytp.set_gfx_anim_use("attack_claws")
     mytp.set_gfx_glows(True)
-    mytp.set_is_debug_type(True)
     mytp.set_gfx_health_bar_shown(True)
     mytp.set_gfx_short_shadow_caster(True)
     mytp.set_health_initial_dice("1")
@@ -28,6 +29,7 @@ def tp_init(name, text_name):
     mytp.set_is_able_to_walk_through_walls(True)
     mytp.set_is_attackable_by_monst(True)
     mytp.set_is_attackable_by_player(True)
+    mytp.set_is_debug_type(True)
     mytp.set_is_described_when_hovering_over(True)
     mytp.set_is_ethereal(True)
     mytp.set_is_fearless(True)
@@ -48,7 +50,7 @@ def tp_init(name, text_name):
     mytp.set_on_death_do("ghost.on_death()")
     mytp.set_rarity(my.RARITY_COMMON)
     mytp.set_stat_armor_class(11)
-    mytp.set_stat_attack_bonus(10) # 10, means no bonus
+    mytp.set_stat_attack_bonus(10)  # 10, means no bonus
     mytp.set_stat_constitution(20)
     mytp.set_stat_dexterity(13)
     mytp.set_stat_strength(7)
@@ -73,8 +75,9 @@ def tp_init(name, text_name):
 
     mytp.update()
 
+
 def init():
     tp_init(name="ghost_minion", text_name="ghost")
 
-init()
 
+init()

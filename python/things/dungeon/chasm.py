@@ -19,12 +19,11 @@ def chasm_init(name, text_name, tiles=[]):
     mytp.set_z_depth(my.MAP_DEPTH_CHASM)
     mytp.set_z_prio(my.MAP_PRIO_BEHIND)
 
-    delay = 200
-
     mytp.update()
 
+
 def init():
-    chasm_init(name="chasm1", text_name="yawning chasm",
-            tiles=[ ])
+    chasm_init(name="chasm1", text_name="yawning chasm", tiles=[])
+
 
 init()

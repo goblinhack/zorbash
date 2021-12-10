@@ -33,7 +33,9 @@ def gold_init(name, text_name):
 
     mytp.update()
 
+
 def init():
     gold_init(name="gold2", text_name="handful of gold coins")
+
 
 init()

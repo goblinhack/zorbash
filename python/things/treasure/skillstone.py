@@ -1,6 +1,7 @@
 import my
 import tp
 
+
 def explode(me, x, y):
     my.thing_msg(me, "The skillstone explodes.")
     my.level_spawn_at_thing(me, "explosion_major")
@@ -8,14 +9,18 @@ def explode(me, x, y):
     my.level_spawn_at_thing(me, "fire")
     my.thing_defeated(me, "exploded")
 
+
 def on_you_are_hit_and_now_dead(me, hitter, real_hitter, x, y, crit, damage):
     explode(me, x, y)
+
 
 def on_fire(me, x, y):
     explode(me, x, y)
 
+
 def on_fall(me, x, y):
     explode(me, x, y)
+
 
 def tp_init(name, text_name, short_text_name):
     mytp = tp.Tp(name, text_name, short_text_name)
@@ -53,7 +58,9 @@ def tp_init(name, text_name, short_text_name):
 
     mytp.update()
 
+
 def init():
     tp_init(name="skillstone", text_name="skillstone", short_text_name="skillstone")
+
 
 init()

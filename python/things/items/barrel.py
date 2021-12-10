@@ -9,22 +9,26 @@ def explode(me, x, y):
     my.level_spawn_at_thing(me, "fire")
     my.thing_defeated(me, "exploded")
 
+
 def on_fire(me, x, y):
     explode(me, x, y)
+
 
 def on_fall(me, x, y):
     explode(me, x, y)
 
+
 def on_death(me, x, y):
     explode(me, x, y)
+
 
 def tp_init(name, text_name):
     mytp = tp.Tp(name, text_name)
     mytp.set_ai_obstacle(True)
     mytp.set_collision_check(True)
     mytp.set_collision_hit_priority(1)
-    mytp.set_damage_crush_dice("2d6")
     mytp.set_damage_crush_chance_d1000(1000)
+    mytp.set_damage_crush_dice("2d6")
     mytp.set_damage_received_doubled_from_fire(True)
     mytp.set_environ_avoids_fire(100)
     mytp.set_gfx_oversized_and_on_floor(True)
@@ -42,7 +46,7 @@ def tp_init(name, text_name):
     mytp.set_is_hittable(True)
     mytp.set_is_loggable(True)
     mytp.set_is_shovable(True)
-    mytp.set_is_tickable(True) # So it can interact with fire
+    mytp.set_is_tickable(True)  # So it can interact with fire
     mytp.set_is_very_combustible(True)
     mytp.set_normal_placement_rules(True)
     mytp.set_on_death_do("barrel.on_death()")
@@ -57,7 +61,9 @@ def tp_init(name, text_name):
 
     mytp.update()
 
+
 def init():
     tp_init(name="barrel", text_name="barrel")
+
 
 init()

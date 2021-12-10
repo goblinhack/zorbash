@@ -1,21 +1,23 @@
 import my
 import tp
 
+
 def on_use(owner, item, target, x, y):
-    #my.con("owner   {} {:08X}".format(my.thing_get_name(owner), owner))
-    #my.con("item    {} {:08X}".format(my.thing_get_name(item), item))
-    #my.con("target  {} {:08X}".format(my.thing_get_name(target), target))
+    # my.con("owner   {} {:08X}".format(my.thing_get_name(owner), owner))
+    # my.con("item    {} {:08X}".format(my.thing_get_name(item), item))
+    # my.con("target  {} {:08X}".format(my.thing_get_name(target), target))
     my.thing_sound_play_channel(owner, my.CHANNEL_WEAPON, f"sword_swing{my.non_pcg_randint(1, 3)}")
     damage = my.thing_get_damage_melee(item)
     enchant = my.thing_get_enchant(item) * 2
     my.thing_set_current_damage(owner, damage + enchant)
 
+
 def tp_init(name, text_name, short_text_name):
     mytp = tp.Tp(name, text_name, short_text_name)
     mytp.set_collision_check(True)
     mytp.set_collision_hit_priority(10)
-    mytp.set_damage_melee_dice("1d4")
     mytp.set_damage_melee_chance_d1000(1000)
+    mytp.set_damage_melee_dice("1d4")
     mytp.set_equip_carry_anim("sword_short_wooden_carry")
     mytp.set_gfx_animated_can_hflip(True)
     mytp.set_gfx_animated(True)
@@ -43,7 +45,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_item_width(4)
     mytp.set_long_text_description("A wooden short sword. Ideal for play fighting and not much else.")
     mytp.set_on_use_do("sword_short_wooden.on_use()")
-    mytp.set_stat_attack_bonus(10) # 10, means no bonus
+    mytp.set_stat_attack_bonus(10)  # 10, means no bonus
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("Thy wooden means of justice.")
     mytp.set_text_enchant("increase damage by 2")
@@ -54,7 +56,13 @@ def tp_init(name, text_name, short_text_name):
 
     mytp.update()
 
+
 def init():
-    tp_init(name="sword_short_wooden", text_name="wooden short sword", short_text_name="wooden short sword")
+    tp_init(
+        name="sword_short_wooden",
+        text_name="wooden short sword",
+        short_text_name="wooden short sword",
+    )
+
 
 init()

@@ -1,6 +1,7 @@
 import my
 import tp
 
+
 def tp_init(name):
     mytp = tp.Tp(name)
     mytp.set_gfx_animated(True)
@@ -17,11 +18,13 @@ def tp_init(name):
     mytp.set_tile(tile=name + ".4", delay_ms=100)
     mytp.set_tile(tile=name + ".5", delay_ms=100)
     mytp.set_tile(tile=name + ".6", delay_ms=100)
-    mytp.set_tile(tile=name + ".7", delay_ms=100, is_end_of_anim = True, is_dead_on_end_of_anim=True)
+    mytp.set_tile(tile=name + ".7", delay_ms=100, is_end_of_anim=True, is_dead_on_end_of_anim=True)
 
     mytp.update()
 
+
 def init():
     tp_init(name="potion_health_effect")
+
 
 init()

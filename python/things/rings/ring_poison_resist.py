@@ -1,11 +1,14 @@
 import my
 import tp
 
+
 def on_equip(owner, me, x, y):
     my.thing_buff_add(owner, "buff_poison_resist")
 
+
 def on_unequip(owner, me, x, y):
     my.thing_buff_remove(owner, "buff_poison_resist")
+
 
 def tp_init(name, text_name, short_text_name):
     mytp = tp.Tp(name, text_name, short_text_name)
@@ -27,7 +30,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_loggable(True)
     mytp.set_is_ring(True)
     mytp.set_is_spawner(True)
-    mytp.set_is_tickable(True) # So it can interact with fire
+    mytp.set_is_tickable(True)  # So it can interact with fire
     mytp.set_is_treasure_class_c(True)
     mytp.set_is_treasure_type(True)
     mytp.set_is_usable(True)
@@ -49,7 +52,13 @@ def tp_init(name, text_name, short_text_name):
 
     mytp.update()
 
+
 def init():
-    tp_init(name="ring_poison_resist", text_name="ring of poison loving", short_text_name="ring.poison_resist")
+    tp_init(
+        name="ring_poison_resist",
+        text_name="ring of poison loving",
+        short_text_name="ring.poison_resist",
+    )
+
 
 init()

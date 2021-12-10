@@ -5,11 +5,14 @@ import tp
 def on_you_are_hit_but_still_alive(me, hitter, real_hitter, x, y, crit, damage):
     my.sound_play(f"door_hit{my.non_pcg_randint(1, 2)}")
 
+
 def on_death(me, x, y):
     my.sound_play("door_break")
 
+
 def on_open(me, x, y):
     my.sound_play("door_open")
+
 
 def tp_init(name):
     mytp = tp.Tp(name, "reinforced door")
@@ -37,7 +40,7 @@ def tp_init(name):
     mytp.set_on_open_do("door_metal.on_open()")
     mytp.set_on_you_are_hit_but_still_alive_do("door_metal.on_you_are_hit_but_still_alive()")
     mytp.set_stat_armor_class(20)
-    mytp.set_stat_attack_bonus(10) # 10, means no bonus
+    mytp.set_stat_attack_bonus(10)  # 10, means no bonus
     mytp.set_text_a_or_an("the")
     mytp.set_text_description("A metal door that's not for opening.")
     mytp.set_z_depth(my.MAP_DEPTH_OBJ)
@@ -55,7 +58,9 @@ def tp_init(name):
 
     mytp.update()
 
+
 def init():
     tp_init(name="door2")
+
 
 init()

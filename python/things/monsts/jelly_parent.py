@@ -1,10 +1,11 @@
-import builtins
 import my
 import tp
+
 
 def on_you_are_hit_but_still_alive(me, hitter, real_hitter, x, y, crit, damage):
     if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, "squelch"):
         my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, "squelch")
+
 
 def on_death(me, x, y):
     my.level_spawn_next_to(me, "jelly_baby")
@@ -12,6 +13,7 @@ def on_death(me, x, y):
     my.level_spawn_next_to(me, "jelly_baby")
     my.level_spawn_next_to(me, "jelly_baby")
     my.thing_sound_play_channel(me, my.CHANNEL_MONST, f"slime{my.non_pcg_randint(1, 9)}")
+
 
 def tp_init(name, text_name):
     mytp = tp.Tp(name, text_name)
@@ -74,7 +76,7 @@ def tp_init(name, text_name):
     mytp.set_on_you_are_hit_but_still_alive_do("jelly_parent.on_you_are_hit_but_still_alive()")
     mytp.set_rarity(my.RARITY_COMMON)
     mytp.set_stat_armor_class(8)
-    mytp.set_stat_attack_bonus(10) # 10, means no bonus
+    mytp.set_stat_attack_bonus(10)  # 10, means no bonus
     mytp.set_stat_constitution(14)
     mytp.set_stat_dexterity(10)
     mytp.set_stat_strength(15)
@@ -120,7 +122,9 @@ def tp_init(name, text_name):
 
     mytp.update()
 
+
 def init():
     tp_init(name="jelly_parent", text_name="jelly jumper")
+
 
 init()

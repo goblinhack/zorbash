@@ -1,29 +1,35 @@
 import my
 import tp
 
+
 def on_you_bite_attack(me, x, y):
     sound = f"growl{my.non_pcg_randint(1, 10)}"
     if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound):
         my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
+
 
 def on_you_are_hit_but_still_alive(me, hitter, real_hitter, x, y, crit, damage):
     sound = f"hiss{my.non_pcg_randint(1, 10)}"
     if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound):
         my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
 
+
 def on_you_miss_do(me, hitter, x, y):
     sound = f"hiss{my.non_pcg_randint(1, 10)}"
     if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound):
         my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
 
+
 def on_death(me, x, y):
     if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, "squelch"):
         my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, "squelch")
+
 
 def on_born(me, x, y):
     it = my.level_spawn_at_thing(me, "spiderweb")
     if it != 0:
         my.thing_set_minion_owner(me, it)
+
 
 def tp_init(name, text_name):
     mytp = tp.Tp(name, text_name)
@@ -82,7 +88,7 @@ def tp_init(name, text_name):
     mytp.set_is_meat_eater(True)
     mytp.set_is_monst(True)
     mytp.set_is_moveable(True)
-    mytp.set_is_poisonous_danger_level(2) # danger level
+    mytp.set_is_poisonous_danger_level(2)  # danger level
     mytp.set_is_shovable(True)
     mytp.set_is_spider(True)
     mytp.set_is_tickable(True)
@@ -98,7 +104,7 @@ def tp_init(name, text_name):
     mytp.set_rarity(my.RARITY_COMMON)
     mytp.set_stamina(100)
     mytp.set_stat_armor_class(14)
-    mytp.set_stat_attack_bonus(20) # 10, means no bonus
+    mytp.set_stat_attack_bonus(20)  # 10, means no bonus
     mytp.set_stat_constitution(12)
     mytp.set_stat_dexterity(16)
     mytp.set_stat_strength(14)
@@ -108,15 +114,16 @@ def tp_init(name, text_name):
     mytp.set_z_depth(my.MAP_DEPTH_OBJ)
     mytp.set_z_prio(my.MAP_PRIO_NORMAL)
 
-    delay=150
+    delay = 150
     mytp.set_tile("spider_giant.1", delay_ms=delay)
     mytp.set_tile("spider_giant.2", delay_ms=delay)
     mytp.set_tile("spider_giant.dead", is_dead=True, delay_ms=delay)
 
     mytp.update()
 
+
 def init():
     tp_init(name="spider_giant", text_name="giant spider")
 
-init()
 
+init()

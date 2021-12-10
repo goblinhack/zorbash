@@ -35,7 +35,9 @@ def tp_init(name, text_name):
 
     mytp.update()
 
+
 def init():
     tp_init(name="door_secret", text_name="An inconspicious dungeon wall.")
+
 
 init()

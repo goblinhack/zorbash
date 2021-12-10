@@ -1,8 +1,9 @@
-import my
+# import my
 
 # Faster to just print this in C code than python
 def hello():
     return
+
 
 #    my.con(" ")
 #    my.con("%fg=red$ @@@@@@@@  @@@@@@  @@@@@@@  @@@@@@@   @@@@@@   @@@@@@  @@@  @@@%fg=reset$")

@@ -1,24 +1,29 @@
 import my
 import tp
 
+
 def on_you_bite_attack(me, x, y):
     sound = f"growl{my.non_pcg_randint(1, 10)}"
     if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound):
         my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
+
 
 def on_you_are_hit_but_still_alive(me, hitter, real_hitter, x, y, crit, damage):
     sound = f"hiss{my.non_pcg_randint(1, 10)}"
     if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound):
         my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
 
+
 def on_you_miss_do(me, hitter, x, y):
     sound = f"hiss{my.non_pcg_randint(1, 10)}"
     if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound):
         my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
 
+
 def on_death(me, x, y):
     if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, "monst_death1"):
         my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, "monst_death1")
+
 
 def tp_init(name, text_name):
     mytp = tp.Tp(name, text_name)
@@ -71,7 +76,7 @@ def tp_init(name, text_name):
     mytp.set_rarity(my.RARITY_COMMON)
     mytp.set_stamina(100)
     mytp.set_stat_armor_class(12)
-    mytp.set_stat_attack_bonus(10) # 10, means no bonus
+    mytp.set_stat_attack_bonus(10)  # 10, means no bonus
     mytp.set_stat_constitution(10)
     mytp.set_stat_dexterity(15)
     mytp.set_stat_strength(2)
@@ -113,8 +118,9 @@ def tp_init(name, text_name):
 
     mytp.update()
 
+
 def init():
     tp_init(name="bat_minion", text_name="little fluffy bat")
 
-init()
 
+init()

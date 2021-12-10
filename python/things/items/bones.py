@@ -18,6 +18,7 @@ def tp_init(name):
     mytp.set_tile(tile=name)
     mytp.update()
 
+
 def init():
     tp_init(name="bones.1")
     tp_init(name="bones.2")
@@ -25,5 +26,6 @@ def init():
     tp_init(name="bones.4")
     tp_init(name="bones.5")
     tp_init(name="bones.6")
+
 
 init()

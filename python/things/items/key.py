@@ -38,7 +38,9 @@ def key_init(name, text_name):
 
     mytp.update()
 
+
 def init():
     key_init(name="key", text_name="key")
+
 
 init()

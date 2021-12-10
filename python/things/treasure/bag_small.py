@@ -38,7 +38,9 @@ def tp_init(name, text_name):
     mytp.set_tile(tile="bag_small", delay_ms=1000)
     mytp.update()
 
+
 def init():
     tp_init(name="bag_small", text_name="small bag")
+
 
 init()

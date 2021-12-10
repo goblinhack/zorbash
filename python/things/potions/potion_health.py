@@ -3,10 +3,11 @@ import tp
 
 mytp = None
 
+
 def on_use(owner, item, target, x, y):
-    #my.con("owner   {} {:08X}".format(my.thing_get_name(owner), owner))
-    #my.con("item    {} {:08X}".format(my.thing_get_name(item), item))
-    #my.con("target  {} {:08X}".format(my.thing_get_name(target), target))
+    # my.con("owner   {} {:08X}".format(my.thing_get_name(owner), owner))
+    # my.con("item    {} {:08X}".format(my.thing_get_name(item), item))
+    # my.con("target  {} {:08X}".format(my.thing_get_name(target), target))
     did_something = False
 
     enchant = my.thing_get_enchant(item)
@@ -35,20 +36,25 @@ def on_use(owner, item, target, x, y):
         if my.thing_is_player(owner):
             my.topcon("Hm. That potion didn't seem to do anything.")
 
+
 def explode(me, x, y):
     my.thing_msg(me, "The potion of health explodes.")
     my.level_spawn_at_thing(me, "explosion_minor")
     my.level_spawn_fire_around_thing(me, "fire")
     my.thing_defeated(me, "exploded")
 
+
 def on_you_are_hit_but_still_alive(me, hitter, real_hitter, x, y, crit, damage):
     explode(me, x, y)
+
 
 def on_fire(me, x, y):
     explode(me, x, y)
 
+
 def on_fall(me, x, y):
     explode(me, x, y)
+
 
 def on_enchant(me, x, y):
     owner = my.thing_get_top_owner_id(me)
@@ -62,6 +68,7 @@ def on_enchant(me, x, y):
         mytp.set_long_text_description("Restores you to 90 percent health")
     else:
         mytp.set_long_text_description("Restores you to full health")
+
 
 def tp_init(name, text_name, short_text_name):
     global mytp
@@ -90,7 +97,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_moveable(True)
     mytp.set_is_potion(True)
     mytp.set_is_throwable(True)
-    mytp.set_is_tickable(True) # So it can interact with fire
+    mytp.set_is_tickable(True)  # So it can interact with fire
     mytp.set_is_treasure_class_b(True)
     mytp.set_is_treasure_type(True)
     mytp.set_is_usable(True)
@@ -118,7 +125,13 @@ def tp_init(name, text_name, short_text_name):
 
     mytp.update()
 
+
 def init():
-    tp_init(name="potion_health", text_name="potion of awesomeness", short_text_name="pot.health")
+    tp_init(
+        name="potion_health",
+        text_name="potion of awesomeness",
+        short_text_name="pot.health",
+    )
+
 
 init()

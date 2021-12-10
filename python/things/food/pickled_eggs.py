@@ -32,7 +32,13 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_tile(tile=name, is_hp_100_percent=True)
     mytp.update()
 
+
 def init():
-    tp_init(name="food_pickled_eggs", text_name="pickled eggs", short_text_name="pickled eggs")
+    tp_init(
+        name="food_pickled_eggs",
+        text_name="pickled eggs",
+        short_text_name="pickled eggs",
+    )
+
 
 init()

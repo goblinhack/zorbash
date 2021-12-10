@@ -22,13 +22,31 @@ def tp_init(name, tiles=[]):
 
     mytp.update()
 
+
 def init():
-    tp_init(name="dry_grass_dead",
+    tp_init(
+        name="dry_grass_dead",
         tiles=[
-            "dry_grass_dead.1", "dry_grass_dead.2", "dry_grass_dead.3", "dry_grass_dead.4",
-            "dry_grass_dead.5", "dry_grass_dead.6", "dry_grass_dead.7", "dry_grass_dead.8",
-            "dry_grass_dead.9", "dry_grass_dead.10", "dry_grass_dead.11", "dry_grass_dead.12",
-            "dry_grass_dead.13", "dry_grass_dead.14", "dry_grass_dead.15", "dry_grass_dead.16",
-            "dry_grass_dead.17", "dry_grass_dead.18",
-        ])
+            "dry_grass_dead.1",
+            "dry_grass_dead.2",
+            "dry_grass_dead.3",
+            "dry_grass_dead.4",
+            "dry_grass_dead.5",
+            "dry_grass_dead.6",
+            "dry_grass_dead.7",
+            "dry_grass_dead.8",
+            "dry_grass_dead.9",
+            "dry_grass_dead.10",
+            "dry_grass_dead.11",
+            "dry_grass_dead.12",
+            "dry_grass_dead.13",
+            "dry_grass_dead.14",
+            "dry_grass_dead.15",
+            "dry_grass_dead.16",
+            "dry_grass_dead.17",
+            "dry_grass_dead.18",
+        ],
+    )
+
+
 init()

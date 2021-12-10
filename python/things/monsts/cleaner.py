@@ -1,13 +1,15 @@
-import builtins
 import my
 import tp
+
 
 def on_idle(me, x, y):
     if not my.level_is_acid_at(me, x, y):
         my.level_spawn_at_thing(me, "acid1")
 
+
 def on_death(me, x, y):
     my.level_spawn_at_thing(me, "green_splatter")
+
 
 def tp_init(name, text_name, short_text_name):
     mytp = tp.Tp(name, text_name, short_text_name)
@@ -18,10 +20,10 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_attack_lunge(True)
     mytp.set_collision_check(True)
     mytp.set_collision_hit_priority(10)
-    mytp.set_damage_bite_dice("1d20")
     mytp.set_damage_bite_chance_d1000(1000)
-    mytp.set_damage_digest_dice("1d40")
+    mytp.set_damage_bite_dice("1d20")
     mytp.set_damage_digest_chance_d1000(1000)
+    mytp.set_damage_digest_dice("1d40")
     mytp.set_damage_received_doubled_from_fire(True)
     mytp.set_distance_vision(3)
     mytp.set_environ_avoids_fire(100)
@@ -75,7 +77,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_on_idle_dice("1d5:cleaner.on_idle()")
     mytp.set_rarity(my.RARITY_COMMON)
     mytp.set_stat_armor_class(6)
-    mytp.set_stat_attack_bonus(10) # 10, means no bonus
+    mytp.set_stat_attack_bonus(10)  # 10, means no bonus
     mytp.set_stat_constitution(20)
     mytp.set_stat_dexterity(3)
     mytp.set_stat_strength(14)
@@ -83,7 +85,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_text_description("A dungeon auto cleaner jelly thingy.")
     mytp.set_text_hits("burns")
     mytp.set_z_depth(my.MAP_DEPTH_OBJ)
-    mytp.set_z_prio(my.MAP_PRIO_IN_FRONT) # so it appears over things when consuming
+    mytp.set_z_prio(my.MAP_PRIO_IN_FRONT)  # so it appears over things when consuming
 
     delay = 200
     mytp.set_tile(tile=name + ".1.100", is_hp_100_percent=True, delay_ms=delay)
@@ -97,7 +99,9 @@ def tp_init(name, text_name, short_text_name):
 
     mytp.update()
 
+
 def init():
     tp_init(name="cleaner", text_name="dungeon cleaner", short_text_name="cleaner")
+
 
 init()

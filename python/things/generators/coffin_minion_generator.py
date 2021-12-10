@@ -1,6 +1,7 @@
 import my
 import tp
 
+
 def on_idle_dice(me, x, y):
     if my.pcg_randint(1, 100) < 10:
         if my.level_spawn_next_to(me, "bat_greater"):
@@ -9,8 +10,10 @@ def on_idle_dice(me, x, y):
         if my.level_spawn_next_to(me, "bat_minion"):
             my.thing_sound_play_channel(me, my.CHANNEL_MONST_BIRTH, "bones2")
 
+
 def on_death(me, x, y):
     my.level_spawn_at_thing(me, "generator_explosion")
+
 
 def tp_init(name, text_name):
     mytp = tp.Tp(name, text_name)
@@ -48,7 +51,7 @@ def tp_init(name, text_name):
     mytp.set_normal_placement_rules(True)
     mytp.set_on_death_do("coffin_minion_generator.on_death()")
     mytp.set_on_idle_dice("1d10+10:coffin_minion_generator.on_idle_dice()")
-    mytp.set_stat_attack_bonus(10) # 10, means no bonus
+    mytp.set_stat_attack_bonus(10)  # 10, means no bonus
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("A cursed coffin, spawning all manner of surprises.")
     mytp.set_z_depth(my.MAP_DEPTH_OBJ)
@@ -62,8 +65,9 @@ def tp_init(name, text_name):
 
     mytp.update()
 
+
 def init():
     tp_init(name="coffin_minion_generator", text_name="pile of bones")
 
-init()
 
+init()

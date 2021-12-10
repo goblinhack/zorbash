@@ -28,6 +28,7 @@ def tp_init(name, text_name):
 
     mytp.update()
 
+
 def init():
     tp_init(name="floor_blood1", text_name="pool of blood")
     tp_init(name="floor_blood2", text_name="pool of blood")
@@ -37,5 +38,6 @@ def init():
     tp_init(name="floor_blood6", text_name="pool of blood")
     tp_init(name="floor_blood7", text_name="pool of blood")
     tp_init(name="floor_blood8", text_name="pool of blood")
+
 
 init()

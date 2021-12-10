@@ -5,11 +5,14 @@ import tp
 def on_you_are_hit_but_still_alive(me, hitter, real_hitter, x, y, crit, damage):
     my.sound_play(f"door_hit{my.non_pcg_randint(1, 2)}")
 
+
 def on_death(me, x, y):
     my.sound_play("door_break")
 
+
 def on_open(me, x, y):
     my.sound_play("door_open")
+
 
 def tp_init(name):
     mytp = tp.Tp(name, "wooden door")
@@ -34,14 +37,14 @@ def tp_init(name):
     mytp.set_is_interesting(True)
     mytp.set_is_light_blocker(True)
     mytp.set_is_obs_wall_or_door(True)
-    mytp.set_is_tickable(True) # So it can interact with fire
+    mytp.set_is_tickable(True)  # So it can interact with fire
     mytp.set_normal_placement_rules(True)
     mytp.set_on_death_do("door_wood.on_death()")
     mytp.set_on_death_is_open(True)
     mytp.set_on_open_do("door_wood.on_open()")
     mytp.set_on_you_are_hit_but_still_alive_do("door_wood.on_you_are_hit_but_still_alive()")
     mytp.set_stat_armor_class(20)
-    mytp.set_stat_attack_bonus(10) # 10, means no bonus
+    mytp.set_stat_attack_bonus(10)  # 10, means no bonus
     mytp.set_text_a_or_an("the")
     mytp.set_text_description("A door covered in claw marks.")
     mytp.set_z_depth(my.MAP_DEPTH_OBJ)
@@ -59,7 +62,9 @@ def tp_init(name):
 
     mytp.update()
 
+
 def init():
     tp_init(name="door1")
+
 
 init()

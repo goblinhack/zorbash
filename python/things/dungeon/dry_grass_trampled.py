@@ -7,6 +7,7 @@ def on_you_are_hit_and_now_dead(me, hitter, real_hitter, x, y, crit, damage):
     my.level_place_at(me, "dry_grass_dead", x, y)
     my.topcon("The dry grass burns!")
 
+
 def tp_init(name, tiles=[]):
     mytp = tp.Tp(name, "trampled grass")
     mytp.set_gfx_shown_in_bg(True)
@@ -28,13 +29,31 @@ def tp_init(name, tiles=[]):
 
     mytp.update()
 
+
 def init():
-    tp_init(name="dry_grass_trampled",
+    tp_init(
+        name="dry_grass_trampled",
         tiles=[
-            "dry_grass_trampled.1", "dry_grass_trampled.2", "dry_grass_trampled.3", "dry_grass_trampled.4",
-            "dry_grass_trampled.5", "dry_grass_trampled.6", "dry_grass_trampled.7", "dry_grass_trampled.8",
-            "dry_grass_trampled.9", "dry_grass_trampled.10", "dry_grass_trampled.11", "dry_grass_trampled.12",
-            "dry_grass_trampled.13", "dry_grass_trampled.14", "dry_grass_trampled.15", "dry_grass_trampled.16",
-            "dry_grass_trampled.17", "dry_grass_trampled.18",
-        ])
+            "dry_grass_trampled.1",
+            "dry_grass_trampled.2",
+            "dry_grass_trampled.3",
+            "dry_grass_trampled.4",
+            "dry_grass_trampled.5",
+            "dry_grass_trampled.6",
+            "dry_grass_trampled.7",
+            "dry_grass_trampled.8",
+            "dry_grass_trampled.9",
+            "dry_grass_trampled.10",
+            "dry_grass_trampled.11",
+            "dry_grass_trampled.12",
+            "dry_grass_trampled.13",
+            "dry_grass_trampled.14",
+            "dry_grass_trampled.15",
+            "dry_grass_trampled.16",
+            "dry_grass_trampled.17",
+            "dry_grass_trampled.18",
+        ],
+    )
+
+
 init()

@@ -1,8 +1,10 @@
 import my
 import tp
 
+
 def on_death(me, x, y):
     my.thing_sound_play_channel(me, my.CHANNEL_EXPLOSION, "explosion_a")
+
 
 def tp_init(name):
     mytp = tp.Tp(name)
@@ -21,11 +23,18 @@ def tp_init(name):
     mytp.set_tile("explosion_minor.1", delay_ms=delay)
     mytp.set_tile("explosion_minor.2", delay_ms=delay)
     mytp.set_tile("explosion_minor.3", delay_ms=delay)
-    mytp.set_tile("explosion_minor.4", delay_ms=delay, is_end_of_anim = True, is_dead_on_end_of_anim=True)
+    mytp.set_tile(
+        "explosion_minor.4",
+        delay_ms=delay,
+        is_end_of_anim=True,
+        is_dead_on_end_of_anim=True,
+    )
 
     mytp.update()
 
+
 def init():
     tp_init(name="explosion_minor")
+
 
 init()

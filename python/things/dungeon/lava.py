@@ -7,8 +7,8 @@ def lava_init(name, text_name, tiles=[]):
     mytp.set_ai_obstacle(True)
     mytp.set_collision_check(True)
     mytp.set_collision_hit_priority(100)
-    mytp.set_damage_fire_dice("1d12+6")
     mytp.set_damage_fire_chance_d1000(1000)
+    mytp.set_damage_fire_dice("1d12+6")
     mytp.set_gfx_animated(True)
     mytp.set_gfx_glows(True)
     mytp.set_is_able_to_fall(True)
@@ -32,24 +32,30 @@ def lava_init(name, text_name, tiles=[]):
 
     mytp.update()
 
+
 def init():
-    lava_init(name="lava1", text_name="broiling lava",
-            tiles=[
-                "lava1.1",
-                "lava1.2",
-                "lava1.3",
-                "lava1.4",
-                "lava1.5",
-                "lava1.6",
-                "lava1.7",
-                "lava1.8",
-                "lava1.9",
-                "lava1.10",
-                "lava1.11",
-                "lava1.12",
-                "lava1.13",
-                "lava1.14",
-                "lava1.15",
-                "lava1.16",
-                ])
+    lava_init(
+        name="lava1",
+        text_name="broiling lava",
+        tiles=[
+            "lava1.1",
+            "lava1.2",
+            "lava1.3",
+            "lava1.4",
+            "lava1.5",
+            "lava1.6",
+            "lava1.7",
+            "lava1.8",
+            "lava1.9",
+            "lava1.10",
+            "lava1.11",
+            "lava1.12",
+            "lava1.13",
+            "lava1.14",
+            "lava1.15",
+            "lava1.16",
+        ],
+    )
+
+
 init()

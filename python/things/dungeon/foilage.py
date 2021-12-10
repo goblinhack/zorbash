@@ -26,12 +26,29 @@ def tp_init(name, tiles=[]):
 
     mytp.update()
 
+
 def init():
-    tp_init(name="foilage",
+    tp_init(
+        name="foilage",
         tiles=[
-            "foilage.1", "foilage.2", "foilage.3", "foilage.4",
-            "foilage.5", "foilage.6", "foilage.7", "foilage.8",
-            "foilage.9", "foilage.10", "foilage.11", "foilage.12",
-            "foilage.13", "foilage.14", "foilage.15", "foilage.16",
-        ])
+            "foilage.1",
+            "foilage.2",
+            "foilage.3",
+            "foilage.4",
+            "foilage.5",
+            "foilage.6",
+            "foilage.7",
+            "foilage.8",
+            "foilage.9",
+            "foilage.10",
+            "foilage.11",
+            "foilage.12",
+            "foilage.13",
+            "foilage.14",
+            "foilage.15",
+            "foilage.16",
+        ],
+    )
+
+
 init()

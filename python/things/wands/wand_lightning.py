@@ -1,6 +1,7 @@
 import my
 import tp
 
+
 def on_idle(me, x, y):
     #
     # Random recharge
@@ -11,6 +12,7 @@ def on_idle(me, x, y):
         if my.thing_is_player(owner):
             my.topcon(f"%%fg=cyan$The {my.thing_get_name(me)} pulses.%%fg=reset$")
 
+
 def explode(me, x, y):
     my.thing_msg(me, "The wand of lightning explodes in a flash.")
     my.level_spawn_at_thing(me, "explosion_major")
@@ -19,21 +21,25 @@ def explode(me, x, y):
     my.level_spawn_fire_around_thing(me, "fire")
     my.thing_defeated(me, "exploded")
 
+
 def on_you_are_hit_and_now_dead(me, hitter, real_hitter, x, y, crit, damage):
     explode(me, x, y)
+
 
 def on_fire(me, x, y):
     explode(me, x, y)
 
+
 def on_fall(me, x, y):
     explode(me, x, y)
+
 
 def tp_init(name, text_name, short_text_name):
     mytp = tp.Tp(name, text_name, short_text_name)
     mytp.set_charge_count(3)
     mytp.set_collision_hit_priority(5)
-    mytp.set_damage_lightning_dice("1d10+6")
     mytp.set_damage_lightning_chance_d1000(1000)
+    mytp.set_damage_lightning_dice("1d10+6")
     mytp.set_damage_received_doubled_from_fire(True)
     mytp.set_gfx_animated(True)
     mytp.set_gfx_short_shadow_caster(True)
@@ -51,7 +57,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_loggable(True)
     mytp.set_is_spawner(True)
     mytp.set_is_target_auto_select(True)
-    mytp.set_is_tickable(True) # So it can interact with fire
+    mytp.set_is_tickable(True)  # So it can interact with fire
     mytp.set_is_treasure_class_c(True)
     mytp.set_is_treasure_type(True)
     mytp.set_is_usable(True)
@@ -82,7 +88,13 @@ def tp_init(name, text_name, short_text_name):
 
     mytp.update()
 
+
 def init():
-    tp_init(name="wand_lightning", text_name="wand of lightning", short_text_name="wand.lightning")
+    tp_init(
+        name="wand_lightning",
+        text_name="wand of lightning",
+        short_text_name="wand.lightning",
+    )
+
 
 init()

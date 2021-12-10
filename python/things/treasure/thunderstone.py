@@ -1,12 +1,14 @@
 import my
 import tp
 
+
 def on_use(owner, item, target, x, y):
-    #my.con("owner   {} {:08X}".format(my.thing_get_name(owner), owner))
-    #my.con("item    {} {:08X}".format(my.thing_get_name(item), item))
-    #my.con("target  {} {:08X}".format(my.thing_get_name(target), target))
+    # my.con("owner   {} {:08X}".format(my.thing_get_name(owner), owner))
+    # my.con("item    {} {:08X}".format(my.thing_get_name(item), item))
+    # my.con("target  {} {:08X}".format(my.thing_get_name(target), target))
     my.level_spawn_at_thing(target, "explosion_major")
     my.level_spawn_using_items_radius_range(owner, item, target, "explosion_destroy_floor")
+
 
 def tp_init(name, text_name, short_text_name):
     mytp = tp.Tp(name, text_name, short_text_name)
@@ -46,7 +48,9 @@ def tp_init(name, text_name, short_text_name):
 
     mytp.update()
 
+
 def init():
     tp_init(name="thunderstone", text_name="thunderstone", short_text_name="thunderstone")
+
 
 init()

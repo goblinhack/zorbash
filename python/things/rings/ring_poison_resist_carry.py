@@ -1,6 +1,7 @@
 import my
 import tp
 
+
 def tp_init(name):
     mytp = tp.Tp(name)
     mytp.set_gfx_animated_can_hflip(True)
@@ -27,7 +28,9 @@ def tp_init(name):
 
     mytp.update()
 
+
 def init():
     tp_init(name="ring_poison_resist_carry")
+
 
 init()

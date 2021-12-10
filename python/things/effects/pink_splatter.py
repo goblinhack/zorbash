@@ -32,11 +32,18 @@ def tp_init(name, text_name):
     mytp.set_tile("pink_splatter.11", delay_ms=delay)
     mytp.set_tile("pink_splatter.12", delay_ms=delay)
     mytp.set_tile("pink_splatter.13", delay_ms=delay)
-    mytp.set_tile("pink_splatter.14", delay_ms=delay, is_end_of_anim=True, is_dead_on_end_of_anim=True)
+    mytp.set_tile(
+        "pink_splatter.14",
+        delay_ms=delay,
+        is_end_of_anim=True,
+        is_dead_on_end_of_anim=True,
+    )
 
     mytp.update()
 
+
 def init():
     tp_init(name="pink_splatter", text_name="pink slime splatter")
+
 
 init()

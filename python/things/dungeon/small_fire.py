@@ -1,15 +1,16 @@
-import builtins
 import my
 import tp
+
 
 def spawn(me, x, y):
     my.level_spawn_fire_around_thing(me, "fire")
 
+
 def tp_init(name, text_name):
     mytp = tp.Tp(name, text_name)
     mytp.set_collision_check(True)
-    mytp.set_damage_melee_dice("1d3+1")
     mytp.set_damage_fire_chance_d1000(1000)
+    mytp.set_damage_melee_dice("1d3+1")
     mytp.set_environ_avoids_water(100)
     mytp.set_gfx_animated(True)
     mytp.set_gfx_flickers(True)
@@ -52,7 +53,9 @@ def tp_init(name, text_name):
     mytp.set_tile(tile=name + ".16", delay_ms=delay)
     mytp.update()
 
+
 def init():
     tp_init(name="small_fire", text_name="burning fire")
+
 
 init()

@@ -3,6 +3,7 @@ import tp
 
 mytp = None
 
+
 def on_idle(me, x, y):
     #
     # Random recharge
@@ -13,17 +14,20 @@ def on_idle(me, x, y):
         if my.thing_is_player(owner):
             my.topcon(f"%%fg=gold$The {my.thing_get_name(me)} pulses.%%fg=reset$")
 
+
 def on_use(owner, item, target, x, y):
-    #my.topcon("owner  {} {}".format(my.thing_get_name(owner), my.thing_get_health(owner)))
-    #my.topcon("item   {} {}".format(my.thing_get_name(item), my.thing_get_health(item)))
-    #my.topcon("target {} {}".format(my.thing_get_name(target), my.thing_get_health(target)))
+    # my.topcon("owner  {} {}".format(my.thing_get_name(owner), my.thing_get_health(owner)))
+    # my.topcon("item   {} {}".format(my.thing_get_name(item), my.thing_get_health(item)))
+    # my.topcon("target {} {}".format(my.thing_get_name(target), my.thing_get_health(target)))
     damage = my.thing_get_damage_energy(item)
     enchant = my.thing_get_enchant(item)
     my.thing_set_current_damage(owner, damage + enchant)
 
+
 def on_final_use(owner, item, target, x, y):
     if my.thing_is_player(owner):
         my.topcon("The wand fades away into nothingness.")
+
 
 def explode(me, x, y):
     my.thing_msg(me, "The wand of energy explodes in a blaze of power.")
@@ -31,14 +35,18 @@ def explode(me, x, y):
     my.level_spawn_fire_around_thing(me, "fire")
     my.thing_defeated(me, "exploded")
 
+
 def on_you_are_hit_and_now_dead(me, hitter, real_hitter, x, y, crit, damage):
     explode(me, x, y)
+
 
 def on_fire(me, x, y):
     explode(me, x, y)
 
+
 def on_fall(me, x, y):
     explode(me, x, y)
+
 
 def on_enchant(me, x, y):
     owner = my.thing_get_top_owner_id(me)
@@ -46,13 +54,14 @@ def on_enchant(me, x, y):
         my.topcon("The wand glows.")
     my.thing_incr_charge_count(me, 5)
 
+
 def tp_init(name, text_name, short_text_name):
     global mytp
     mytp = tp.Tp(name, text_name, short_text_name)
     mytp.set_charge_count(5)
     mytp.set_collision_hit_priority(5)
-    mytp.set_damage_energy_dice("1d6+6")
     mytp.set_damage_energy_chance_d1000(1000)
+    mytp.set_damage_energy_dice("1d6+6")
     mytp.set_damage_received_doubled_from_fire(True)
     mytp.set_enchant_max(2)
     mytp.set_gfx_animated(True)
@@ -72,7 +81,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_loggable(True)
     mytp.set_is_spawner(True)
     mytp.set_is_target_auto_select(True)
-    mytp.set_is_tickable(True) # So it can interact with fire
+    mytp.set_is_tickable(True)  # So it can interact with fire
     mytp.set_is_treasure_class_b(True)
     mytp.set_is_treasure_type(True)
     mytp.set_is_usable(True)
@@ -107,7 +116,13 @@ def tp_init(name, text_name, short_text_name):
 
     mytp.update()
 
+
 def init():
-    tp_init(name="wand_energy", text_name="wand of dept of energy", short_text_name="wand.energy")
+    tp_init(
+        name="wand_energy",
+        text_name="wand of dept of energy",
+        short_text_name="wand.energy",
+    )
+
 
 init()

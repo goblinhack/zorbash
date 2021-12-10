@@ -1,9 +1,11 @@
 import my
 import tp
 
+
 def on_bor(me, x, y):
     my.level_spawn_at_thing(me, "explosion_major")
     my.level_spawn_using_items_radius_range(me, me, me, "explosion_destroy_floor")
+
 
 #
 # This is an internal only object to fire lasers from monsters
@@ -24,7 +26,13 @@ def tp_init(name, text_name, short_text_name):
 
     mytp.update()
 
+
 def init():
-    tp_init(name="laser_descent", text_name="beam of destruction", short_text_name="laser.descent")
+    tp_init(
+        name="laser_descent",
+        text_name="beam of destruction",
+        short_text_name="laser.descent",
+    )
+
 
 init()

@@ -1,8 +1,10 @@
 import my
 import tp
 
+
 def on_death(me, x, y):
     my.level_spawn_at_thing(me, "ghost_explosion")
+
 
 def tp_init(name, text_name):
     mytp = tp.Tp(name, text_name)
@@ -45,7 +47,7 @@ def tp_init(name, text_name):
     mytp.set_on_death_do("ghost.on_death()")
     mytp.set_rarity(my.RARITY_COMMON)
     mytp.set_stat_armor_class(11)
-    mytp.set_stat_attack_bonus(10) # 10, means no bonus
+    mytp.set_stat_attack_bonus(10)  # 10, means no bonus
     mytp.set_stat_constitution(20)
     mytp.set_stat_dexterity(13)
     mytp.set_stat_strength(7)
@@ -70,8 +72,9 @@ def tp_init(name, text_name):
 
     mytp.update()
 
+
 def init():
     tp_init(name="ghost", text_name="ghost")
 
-init()
 
+init()

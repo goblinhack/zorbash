@@ -12,11 +12,14 @@ def on_you_are_hit_but_still_alive(me, hitter, real_hitter, x, y, crit, damage):
     else:
         my.thing_sound_play_channel(me, my.CHANNEL_IMPACT, "player_hit5")
 
+
 def on_you_bite_attack(me, x, y):
     my.sound_play("player_punch")
 
+
 def on_born(me, x, y):
     pass
+
 
 def on_death(me, x, y):
     messages = [
@@ -151,11 +154,14 @@ def on_death(me, x, y):
         "You went to meet your maker. It was not impressed.",
         "You went to the funky spirit in the sky.",
         "You went to the restaurant at the end of the universe.",
-        ]
+    ]
     my.topcon(f"{random.choice(messages)}")
+
 
 # Don't repeat footsteps and wait for the current channel to finish so sounds do not overlap
 last_footstep = 0
+
+
 def on_move(me, x, y):
     global last_footstep
 
@@ -174,53 +180,70 @@ def on_move(me, x, y):
         if my.thing_sound_play_channel(me, my.CHANNEL_FOOTSTEPS, f"footsteps{footstep}"):
             last_footstep = footstep
 
+
 def on_damage_melee(me, hitter, x, y, damage):
     return damage
+
 
 def on_damage_poison(me, hitter, x, y, damage):
     return damage
 
+
 def on_damage_future1(me, hitter, x, y, damage):
     return damage
+
 
 def on_damage_future2(me, hitter, x, y, damage):
     return damage
 
+
 def on_damage_future3(me, hitter, x, y, damage):
     return damage
+
 
 def on_damage_future4(me, hitter, x, y, damage):
     return damage
 
+
 def on_damage_fire(me, hitter, x, y, damage):
     return damage
+
 
 def on_damage_crush(me, hitter, x, y, damage):
     return damage
 
+
 def on_damage_lightning(me, hitter, x, y, damage):
     return damage
+
 
 def on_damage_energy(me, hitter, x, y, damage):
     return damage
 
+
 def on_damage_acid(me, hitter, x, y, damage):
     return damage
+
 
 def on_damage_digest(me, hitter, x, y, damage):
     return damage
 
+
 def on_damage_bite(me, hitter, x, y, damage):
     return damage
+
 
 def on_damage_necrosis(me, hitter, x, y, damage):
     return damage
 
+
 def on_damage_strength(me, hitter, x, y, damage):
     return damage
 
+
 def on_damage_constitution(me, hitter, x, y, damage):
     return damage
+
 
 def tp_init(name, text_name, short_text_name, title):
     mytp = tp.Tp(name, text_name, short_text_name)
@@ -293,11 +316,11 @@ def tp_init(name, text_name, short_text_name, title):
     mytp.set_on_damage_crush_do("player.on_damage_crush()")
     mytp.set_on_damage_digest_do("player.on_damage_digest()")
     mytp.set_on_damage_energy_do("player.on_damage_energy()")
+    mytp.set_on_damage_fire_do("player.on_damage_fire()")
     mytp.set_on_damage_future1_do("player.on_damage_future1()")
     mytp.set_on_damage_future2_do("player.on_damage_future2()")
     mytp.set_on_damage_future3_do("player.on_damage_future3()")
     mytp.set_on_damage_future4_do("player.on_damage_future4()")
-    mytp.set_on_damage_fire_do("player.on_damage_fire()")
     mytp.set_on_damage_lightning_do("player.on_damage_lightning()")
     mytp.set_on_damage_melee_do("player.on_damage_melee()")
     mytp.set_on_damage_necrosis_do("player.on_damage_necrosis()")
@@ -309,7 +332,7 @@ def tp_init(name, text_name, short_text_name, title):
     mytp.set_on_you_bite_attack_do("player.on_you_bite_attack()")
     mytp.set_stamina(100)
     mytp.set_stat_armor_class(10)
-    mytp.set_stat_attack_bonus(10) # 10, means no bonus
+    mytp.set_stat_attack_bonus(10)  # 10, means no bonus
     mytp.set_stat_constitution(10)
     mytp.set_stat_dexterity(10)
     mytp.set_stat_strength(10)
@@ -388,8 +411,20 @@ def tp_init(name, text_name, short_text_name, title):
 
     mytp.update()
 
+
 def init():
-    tp_init(name="player1", text_name="noble warrior", title="Ser Hackalot", short_text_name="you")
-    tp_init(name="player2", text_name="noble warrior", title="Ser Deadalot", short_text_name="you")
+    tp_init(
+        name="player1",
+        text_name="noble warrior",
+        title="Ser Hackalot",
+        short_text_name="you",
+    )
+    tp_init(
+        name="player2",
+        text_name="noble warrior",
+        title="Ser Deadalot",
+        short_text_name="you",
+    )
+
 
 init()

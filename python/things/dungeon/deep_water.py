@@ -24,24 +24,30 @@ def tp_init(name, text_name, tiles=[]):
 
     mytp.update()
 
+
 def init():
-    tp_init(name="deep_water1", text_name="deep water",
-            tiles=[
-                "deep_water1.1",
-                "deep_water1.2",
-                "deep_water1.3",
-                "deep_water1.4",
-                "deep_water1.5",
-                "deep_water1.6",
-                "deep_water1.7",
-                "deep_water1.8",
-                "deep_water1.9",
-                "deep_water1.10",
-                "deep_water1.11",
-                "deep_water1.12",
-                "deep_water1.13",
-                "deep_water1.14",
-                "deep_water1.15",
-                "deep_water1.16",
-                ])
+    tp_init(
+        name="deep_water1",
+        text_name="deep water",
+        tiles=[
+            "deep_water1.1",
+            "deep_water1.2",
+            "deep_water1.3",
+            "deep_water1.4",
+            "deep_water1.5",
+            "deep_water1.6",
+            "deep_water1.7",
+            "deep_water1.8",
+            "deep_water1.9",
+            "deep_water1.10",
+            "deep_water1.11",
+            "deep_water1.12",
+            "deep_water1.13",
+            "deep_water1.14",
+            "deep_water1.15",
+            "deep_water1.16",
+        ],
+    )
+
+
 init()

@@ -33,7 +33,9 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_tile(tile=name, is_hp_100_percent=True)
     mytp.update()
 
+
 def init():
     tp_init(name="food_wine", text_name="wine", short_text_name="wine")
+
 
 init()

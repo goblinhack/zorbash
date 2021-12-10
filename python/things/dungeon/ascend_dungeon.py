@@ -39,7 +39,9 @@ def tp_init(name, text_name, short_text_name):
 
     mytp.update()
 
+
 def init():
     tp_init(name="entrance", text_name="dungeon entrance", short_text_name="entrance")
+
 
 init()

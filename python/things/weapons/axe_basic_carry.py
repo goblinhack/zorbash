@@ -1,6 +1,7 @@
 import my
 import tp
 
+
 def init_carry(name):
     mytp = tp.Tp(name)
     mytp.set_gfx_animated_can_hflip(True)
@@ -21,7 +22,9 @@ def init_carry(name):
 
     mytp.update()
 
+
 def init():
     init_carry(name="axe_basic_carry")
+
 
 init()

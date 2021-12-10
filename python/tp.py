@@ -469,15 +469,6 @@ class Tp:
     def set_attack_blood(self, value):
         my.tp_set_attack_blood(self, value)
 
-    def set_environ_avoids_poison(self, value):
-        my.tp_set_environ_avoids_poison(self, value)
-
-    def set_environ_avoids_necrosis(self, value):
-        my.tp_set_environ_avoids_necrosis(self, value)
-
-    def set_environ_avoids_fire(self, value):
-        my.tp_set_environ_avoids_fire(self, value)
-
     def set_environ_avoids_water(self, value):
         my.tp_set_environ_avoids_water(self, value)
 
@@ -489,9 +480,6 @@ class Tp:
 
     def set_is_able_to_break_down_doors(self, value):
         my.tp_set_is_able_to_break_down_doors(self, value)
-
-    def set_is_able_to_break_out_of_webs(self, value):
-        my.tp_set_is_able_to_break_out_of_webs(self, value)
 
     def set_is_able_to_break_out_of_webs(self, value):
         my.tp_set_is_able_to_break_out_of_webs(self, value)
@@ -961,9 +949,6 @@ class Tp:
     def set_is_floating(self, value):
         my.tp_set_is_floating(self, value)
 
-    def set_damage_received_doubled_from_acid(self, value):
-        my.tp_set_damage_received_doubled_from_acid(self, value)
-
     def set_damage_received_doubled_from_water(self, value):
         my.tp_set_damage_received_doubled_from_water(self, value)
 
@@ -978,9 +963,6 @@ class Tp:
 
     def set_environ_prefers_acid(self, value):
         my.tp_set_environ_prefers_acid(self, value)
-
-    def set_environ_avoids_acid(self, value):
-        my.tp_set_environ_avoids_acid(self, value)
 
     def set_is_jelly_parent(self, value):
         my.tp_set_is_jelly_parent(self, value)
@@ -1017,9 +999,6 @@ class Tp:
 
     def set_is_gold(self, value):
         my.tp_set_is_gold(self, value)
-
-    def set_is_loggable(self, value):
-        my.tp_set_is_loggable(self, value)
 
     def set_is_removeable_if_out_of_slots(self, value):
         my.tp_set_is_removeable_if_out_of_slots(self, value)
@@ -1117,9 +1096,6 @@ class Tp:
     def set_is_able_to_jump_on_low_hp_chance_d1000(self, value):
         my.tp_set_is_able_to_jump_on_low_hp_chance_d1000(self, value)
 
-    def set_is_chasm(self, value):
-        my.tp_set_is_chasm(self, value)
-
     def set_is_hazard(self, value):
         my.tp_set_is_hazard(self, value)
 
@@ -1189,9 +1165,6 @@ class Tp:
     def set_is_food(self, value):
         my.tp_set_is_food(self, value)
 
-    def set_environ_avoids_water(self, value):
-        my.tp_set_environ_avoids_water(self, value)
-
     def set_is_hunger_insatiable(self, value):
         my.tp_set_is_hunger_insatiable(self, value)
 
@@ -1243,14 +1216,8 @@ class Tp:
     def set_damage_necrosis_dice(self, value):
         my.tp_set_damage_necrosis_dice(self, value)
 
-    def set_damage_crush_dice(self, value):
-        my.tp_set_damage_crush_dice(self, value)
-
     def set_damage_bite_dice(self, value):
         my.tp_set_damage_bite_dice(self, value)
-
-    def set_damage_digest_dice(self, value):
-        my.tp_set_damage_digest_dice(self, value)
 
     def set_gold_value_dice(self, value):
         my.tp_set_gold_value_dice(self, value)
@@ -1279,9 +1246,6 @@ class Tp:
     def set_gfx_bounce_on_move(self, value):
         my.tp_set_gfx_bounce_on_move(self, value)
 
-    def set_is_loggable(self, value):
-        my.tp_set_is_loggable(self, value)
-
     def set_is_bleeder(self, value):
         my.tp_set_is_bleeder(self, value)
 
@@ -1305,13 +1269,6 @@ class Tp:
 
     def set_health_hunger_pct(self, value):
         my.tp_set_health_hunger_pct(self, value)
-
-    def set_stat_attack_bonus(self, value):
-        my.tp_set_stat_attack_bonus(self, value)
-
-    def set_stat_armor_class(self, value):
-        my.tp_set_stat_armor_class(self, value)
-
 
     def set_is_ripple(self, value):
         my.tp_set_is_ripple(self, value)
@@ -1355,23 +1312,14 @@ class Tp:
     def set_weapon_damage(self, value):
         my.tp_set_weapon_damage(self, value)
 
-    def set_is_projectile(self, value):
-        my.tp_set_is_projectile(self, value)
-
     def set_is_explosion(self, value):
         my.tp_set_is_explosion(self, value)
-
-    def set_is_combustible(self, value):
-        my.tp_set_is_combustible(self, value)
 
     def set_weapon_use_distance(self, value):
         my.tp_set_weapon_use_distance(self, value)
 
     def set_gfx_equip_carry_anim(self, value):
         my.tp_set_gfx_equip_carry_anim(self, value)
-
-    def set_gfx_attack_anim(self, value):
-        my.tp_set_gfx_attack_anim(self, value)
 
     def set_is_weapon(self, value):
         my.tp_set_is_weapon(self, value)
@@ -1397,14 +1345,8 @@ class Tp:
     def set_gfx_animated_can_hflip(self, value):
         my.tp_set_gfx_animated_can_hflip(self, value)
 
-    def set_gfx_animated_can_vflip(self, value):
-        my.tp_set_gfx_animated_can_vflip(self, value)
-
     def set_is_obs_wall_or_door(self, value):
         my.tp_set_is_obs_wall_or_door(self, value)
-
-    def set_is_treasure_type(self, value):
-        my.tp_set_is_treasure_type(self, value)
 
     def set_is_wall(self, value):
         my.tp_set_is_wall(self, value)
@@ -1420,9 +1362,6 @@ class Tp:
 
     def set_is_lava(self, value):
         my.tp_set_is_lava(self, value)
-
-    def set_is_chasm(self, value):
-        my.tp_set_is_chasm(self, value)
 
     def set_gfx_water(self, value):
         my.tp_set_gfx_water(self, value)

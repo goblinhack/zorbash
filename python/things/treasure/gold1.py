@@ -42,7 +42,9 @@ def gold_init(name, text_name):
 
     mytp.update()
 
+
 def init():
     gold_init(name="gold1", text_name="lone gold coin")
+
 
 init()

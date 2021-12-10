@@ -1,6 +1,7 @@
 import my
 import tp
 
+
 def tp_init(name):
     mytp = tp.Tp(name)
     mytp.set_collision_check(True)
@@ -25,33 +26,55 @@ def tp_init(name):
     mytp.set_tile(tile=name + "_left.3", delay_ms=delay, is_dir_left=True)
     mytp.set_tile(tile=name + "_left.4", delay_ms=delay, is_dir_left=True)
     mytp.set_tile(tile=name + "_left.5", delay_ms=delay, is_dir_left=True)
-    mytp.set_tile(tile=name + "_left.6", delay_ms=delay, is_dir_left=True,
-               is_end_of_anim = True, is_dead_on_end_of_anim=True)
+    mytp.set_tile(
+        tile=name + "_left.6",
+        delay_ms=delay,
+        is_dir_left=True,
+        is_end_of_anim=True,
+        is_dead_on_end_of_anim=True,
+    )
     mytp.set_tile(tile=name + "_left.1", delay_ms=delay, is_dir_right=True)
     mytp.set_tile(tile=name + "_left.2", delay_ms=delay, is_dir_right=True)
     mytp.set_tile(tile=name + "_left.3", delay_ms=delay, is_dir_right=True)
     mytp.set_tile(tile=name + "_left.4", delay_ms=delay, is_dir_right=True)
     mytp.set_tile(tile=name + "_left.5", delay_ms=delay, is_dir_right=True)
-    mytp.set_tile(tile=name + "_left.6", delay_ms=delay, is_dir_right=True,
-               is_end_of_anim = True, is_dead_on_end_of_anim=True)
+    mytp.set_tile(
+        tile=name + "_left.6",
+        delay_ms=delay,
+        is_dir_right=True,
+        is_end_of_anim=True,
+        is_dead_on_end_of_anim=True,
+    )
     mytp.set_tile(tile=name + "_up.1", delay_ms=delay, is_dir_up=True)
     mytp.set_tile(tile=name + "_up.2", delay_ms=delay, is_dir_up=True)
     mytp.set_tile(tile=name + "_up.3", delay_ms=delay, is_dir_up=True)
     mytp.set_tile(tile=name + "_up.4", delay_ms=delay, is_dir_up=True)
     mytp.set_tile(tile=name + "_up.5", delay_ms=delay, is_dir_up=True)
-    mytp.set_tile(tile=name + "_up.6", delay_ms=delay, is_dir_up=True,
-               is_end_of_anim = True, is_dead_on_end_of_anim=True)
+    mytp.set_tile(
+        tile=name + "_up.6",
+        delay_ms=delay,
+        is_dir_up=True,
+        is_end_of_anim=True,
+        is_dead_on_end_of_anim=True,
+    )
     mytp.set_tile(tile=name + "_up.1", delay_ms=delay, is_dir_down=True)
     mytp.set_tile(tile=name + "_up.2", delay_ms=delay, is_dir_down=True)
     mytp.set_tile(tile=name + "_up.3", delay_ms=delay, is_dir_down=True)
     mytp.set_tile(tile=name + "_up.4", delay_ms=delay, is_dir_down=True)
     mytp.set_tile(tile=name + "_up.5", delay_ms=delay, is_dir_down=True)
-    mytp.set_tile(tile=name + "_up.6", delay_ms=delay, is_dir_down=True,
-               is_end_of_anim = True, is_dead_on_end_of_anim=True)
+    mytp.set_tile(
+        tile=name + "_up.6",
+        delay_ms=delay,
+        is_dir_down=True,
+        is_end_of_anim=True,
+        is_dead_on_end_of_anim=True,
+    )
 
     mytp.update()
 
+
 def init():
     tp_init(name="sword_short_rusty_swing")
+
 
 init()

@@ -41,7 +41,9 @@ def tp_init(name, text_name):
 
     mytp.update()
 
+
 def init():
     tp_init(name="gem_diamond", text_name="diamond")
+
 
 init()

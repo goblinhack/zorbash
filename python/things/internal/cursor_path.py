@@ -21,7 +21,9 @@ def tp_init(name):
 
     mytp.update()
 
+
 def init():
     tp_init(name="cursor_path")
+
 
 init()

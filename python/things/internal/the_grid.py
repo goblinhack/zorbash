@@ -14,7 +14,9 @@ def tp_init(name):
     mytp.set_tile(tile=name)
     mytp.update()
 
+
 def init():
     tp_init(name="the_grid")
+
 
 init()
