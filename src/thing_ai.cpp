@@ -279,7 +279,20 @@ bool Thing::ai_create_path_to_single_goal(int minx, int miny, int maxx, int maxy
     //
     if ((int) pcg_random_range(0, 100) < 20) {
       if (fallback.path.size()) {
-        AI_LOG("", "Use fallback path as goal is unreachable");
+        //
+        // If the fallback path ends in an AI obstacle (like a chasm)
+        // then this is sub ideal.
+        //
+        if (ai_obstacle_for_me(fallback.path[ fallback.path.size() - 1 ])) {
+          AI_LOG("", "Goal (and fallback) is astar unreachable");
+          return false;
+        }
+
+        IF_DEBUG
+        {
+          auto s = string_sprintf("Use fallback path as goal at %d,%d is unreachable", goal.at.x, goal.at.y);
+          AI_LOG("", s);
+        }
         result = fallback;
       } else {
 #ifdef ENABLE_DEBUG_AI_ASTAR
@@ -1463,7 +1476,7 @@ bool Thing::ai_choose_immediately_adjacent_goal(void)
 bool Thing::ai_tick(bool recursing)
 {
   TRACE_AND_INDENT();
-  dbg3("AI tick");
+  dbg("AI tick");
   TRACE_AND_INDENT();
 
   auto aip = get_aip();
