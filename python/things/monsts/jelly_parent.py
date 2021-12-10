@@ -11,7 +11,7 @@ def on_death(me, x, y):
     my.level_spawn_next_to(me, "jelly_baby")
     my.level_spawn_next_to(me, "jelly_baby")
     my.level_spawn_next_to(me, "jelly_baby")
-    my.thing_sound_play_channel(me, my.CHANNEL_MONST, "slime{}".format(my.non_pcg_randint(1, 9)))
+    my.thing_sound_play_channel(me, my.CHANNEL_MONST, f"slime{my.non_pcg_randint(1, 9)}")
 
 def tp_init(name, text_name):
     mytp = tp.Tp(name, text_name)

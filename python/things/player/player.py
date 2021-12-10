@@ -8,7 +8,7 @@ import random
 def on_you_are_hit_but_still_alive(me, hitter, real_hitter, x, y, crit, damage):
     # my.topcon("player hit damage {}".format(damage))
     if damage <= 5:
-        my.thing_sound_play_channel(me, my.CHANNEL_IMPACT, "player_hit{}".format(my.non_pcg_randint(1, 4)))
+        my.thing_sound_play_channel(me, my.CHANNEL_IMPACT, f"player_hit{my.non_pcg_randint(1, 4)}")
     else:
         my.thing_sound_play_channel(me, my.CHANNEL_IMPACT, "player_hit5")
 
@@ -152,7 +152,7 @@ def on_death(me, x, y):
         "You went to the funky spirit in the sky.",
         "You went to the restaurant at the end of the universe.",
         ]
-    my.topcon("{}".format(random.choice(messages)))
+    my.topcon(f"{random.choice(messages)}")
 
 # Don't repeat footsteps and wait for the current channel to finish so sounds do not overlap
 last_footstep = 0
@@ -164,14 +164,14 @@ def on_move(me, x, y):
         while footstep == last_footstep:
             footstep = my.non_pcg_randint(1, 6)
 
-        if my.thing_sound_play_channel(me, my.CHANNEL_FOOTSTEPS, "splash{}".format(footstep)):
+        if my.thing_sound_play_channel(me, my.CHANNEL_FOOTSTEPS, f"splash{footstep}"):
             last_footstep = footstep
     else:
         footstep = my.non_pcg_randint(1, 8)
         while footstep == last_footstep:
             footstep = my.non_pcg_randint(1, 8)
 
-        if my.thing_sound_play_channel(me, my.CHANNEL_FOOTSTEPS, "footsteps{}".format(footstep)):
+        if my.thing_sound_play_channel(me, my.CHANNEL_FOOTSTEPS, f"footsteps{footstep}"):
             last_footstep = footstep
 
 def on_damage_melee(me, hitter, x, y, damage):

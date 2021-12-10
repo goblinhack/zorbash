@@ -15,7 +15,7 @@ def on_use(owner, skill, target, x, y):
 
     if bonus > 1:
         if my.thing_is_player(owner):
-            my.topcon("%%fg=yellow$You strike with a mighty thrust of {}.%%fg=reset$".format(bonus))
+            my.topcon(f"%%fg=yellow$You strike with a mighty thrust of {bonus}.%%fg=reset$")
         my.thing_incr_current_damage(owner, bonus)
         my.thing_decr_stamina(owner, bonus)
     else:

@@ -9,8 +9,7 @@ def on_idle(me, x, y):
         my.thing_incr_charge_count(me, 1)
         owner = my.thing_get_top_owner_id(me)
         if my.thing_is_player(owner):
-            my.topcon("%%fg=orange$The {} pulses.%%fg=reset$".format(
-                my.thing_get_name(me)))
+            my.topcon(f"%%fg=orange$The {my.thing_get_name(me)} pulses.%%fg=reset$")
 
 def explode(me, x, y):
     my.thing_msg(me, "The wand of fire explodes, predictably in a fireball.")

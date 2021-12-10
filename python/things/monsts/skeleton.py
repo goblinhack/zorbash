@@ -2,17 +2,17 @@ import my
 import tp
 
 def on_you_bite_attack(me, x, y):
-    sound = "growl{}".format(my.non_pcg_randint(1, 10))
+    sound = f"growl{my.non_pcg_randint(1, 10)}"
     if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound):
         my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
 
 def on_you_are_hit_but_still_alive(me, hitter, real_hitter, x, y, crit, damage):
-    sound = "hiss{}".format(my.non_pcg_randint(1, 10))
+    sound = f"hiss{my.non_pcg_randint(1, 10)}"
     if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound):
         my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
 
 def on_you_miss_do(me, hitter, x, y):
-    sound = "hiss{}".format(my.non_pcg_randint(1, 10))
+    sound = f"hiss{my.non_pcg_randint(1, 10)}"
     if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound):
         my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
 

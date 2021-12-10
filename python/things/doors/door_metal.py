@@ -3,7 +3,7 @@ import tp
 
 
 def on_you_are_hit_but_still_alive(me, hitter, real_hitter, x, y, crit, damage):
-    my.sound_play("door_hit{}".format(my.non_pcg_randint(1, 2)))
+    my.sound_play(f"door_hit{my.non_pcg_randint(1, 2)}")
 
 def on_death(me, x, y):
     my.sound_play("door_break")

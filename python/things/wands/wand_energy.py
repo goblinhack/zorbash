@@ -11,8 +11,7 @@ def on_idle(me, x, y):
         my.thing_incr_charge_count(me, 1)
         owner = my.thing_get_top_owner_id(me)
         if my.thing_is_player(owner):
-            my.topcon("%%fg=gold$The {} pulses.%%fg=reset$".format(
-                my.thing_get_name(me)))
+            my.topcon(f"%%fg=gold$The {my.thing_get_name(me)} pulses.%%fg=reset$")
 
 def on_use(owner, item, target, x, y):
     #my.topcon("owner  {} {}".format(my.thing_get_name(owner), my.thing_get_health(owner)))

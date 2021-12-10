@@ -52,7 +52,7 @@ def timeme(py_function):
         start_time = time.time()
         return_code = py_function(*args, **kwargs)
         end_time = time.time()
-        print('PYC: perf {:s}({}) {:.3f} ms'.format(py_function.__name__, args, (end_time - start_time) * 1000.0))
+        print(f'PYC: perf {py_function.__name__:s}({args}) {(end_time - start_time) * 1000.0:.3f} ms')
         return return_code
     return timeme_wrapper
 
@@ -104,7 +104,7 @@ def load_plugin(plugin):
 
 @timeme
 def init1():
-    my.log("PYC: Init module: running in: {}".format(os.getcwd()))
+    my.log(f"PYC: Init module: running in: {os.getcwd()}")
 
 def init2():
     load_all_plugins()
