@@ -2885,7 +2885,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_TP_FUNCTION(str1),
     MY_ADD_PYTHON_TP_FUNCTION(str2),
     MY_ADD_PYTHON_TP_FUNCTION(str4),
-    MY_ADD_PYTHON_TP_FUNCTION(str5),
+    MY_ADD_PYTHON_TP_FUNCTION(is_friends_with),
     MY_ADD_PYTHON_TP_FUNCTION(text_a_or_an),
     MY_ADD_PYTHON_TP_FUNCTION(text_buff),
     MY_ADD_PYTHON_TP_FUNCTION(text_debuff),

@@ -145,8 +145,8 @@ class Tp:
     def set_str_str4(self, value):
         my.tp_set_str_str4(self, value)
 
-    def set_str_str5(self, value):
-        my.tp_set_str_str5(self, value)
+    def set_str_is_friends_with(self, value):
+        my.tp_set_str_is_friends_with(self, value)
 
     def set_str_projectile_name(self, value):
         my.tp_set_str_projectile_name(self, value)
@@ -603,6 +603,9 @@ class Tp:
 
     def set_is_bones(self, value):
         my.tp_set_is_bones(self, value)
+
+    def set_is_friends_with(self, value):
+        my.tp_set_is_friends_with(self, value)
 
     def set_is_soft_body(self, value):
         my.tp_set_is_soft_body(self, value)

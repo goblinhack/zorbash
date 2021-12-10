@@ -6306,10 +6306,10 @@ const std::string &Thing::str4(void)
   return (tp()->str4());
 }
 
-const std::string &Thing::str5(void)
+const std::string &Thing::is_friends_with(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->str5());
+  return (tp()->is_friends_with());
 }
 
 const std::string &Thing::text_description(void)

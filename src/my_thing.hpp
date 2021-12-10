@@ -608,7 +608,7 @@ public:
   const std::string &str1(void);
   const std::string &str2(void);
   const std::string &str4(void);
-  const std::string &str5(void);
+  const std::string &is_friends_with(void);
   const std::string &text_buff(void);
   const std::string &text_debuff(void);
   const std::string &text_description(void);

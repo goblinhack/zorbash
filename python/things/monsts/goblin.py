@@ -79,6 +79,7 @@ def tp_init(name, text_name):
     mytp.set_is_corpse_on_death(True)
     mytp.set_is_crushable(True)
     mytp.set_is_described_when_hovering_over(True)
+    mytp.set_is_friends_with("goblin")
     mytp.set_is_green_blooded(True)
     mytp.set_is_hittable(True)
     mytp.set_is_humanoid(True)

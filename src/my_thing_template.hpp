@@ -498,7 +498,7 @@ private:
   std::string _str1;
   std::string _str2;
   std::string _str4;
-  std::string _str5;
+  std::string _is_friends_with;
   std::string _text_a_or_an;
   std::string _text_description;
   std::string _text_enchant;
@@ -702,7 +702,7 @@ public:
   const std::string &str1(void) const { return _str1; }
   const std::string &str2(void) const { return _str2; }
   const std::string &str4(void) const { return _str4; }
-  const std::string &str5(void) const { return _str5; }
+  const std::string &is_friends_with(void) const { return _is_friends_with; }
   const std::string &text_description(void) const { return _text_description; }
   const std::string &text_enchant(void) const { return _text_enchant; }
   const std::string &text_hits(void) const { return _text_hits; }
@@ -1420,7 +1420,7 @@ public:
   void set_str1(const std::string &v) { _str1 = v; }
   void set_str2(const std::string &v) { _str2 = v; }
   void set_str4(const std::string &v) { _str4 = v; }
-  void set_str5(const std::string &v) { _str5 = v; }
+  void set_is_friends_with(const std::string &v) { _is_friends_with = v; }
   void set_text_a_or_an(const std::string &v) { _text_a_or_an = v; }
   void set_text_buff(const std::string &v) { _text_buff = v; }
   void set_text_debuff(const std::string &v) { _text_debuff = v; }
