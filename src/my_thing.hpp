@@ -240,9 +240,13 @@ public:
   ThingId set_equip_id_carry_anim(ThingId, int equip);
   ThingId set_equip_id_use_anim(ThingId, int equip);
 
-  bool too_far_from_minion_owner(void);
-  bool too_far_from_minion_owner(point p);
-  bool too_far_from_minion_owner(point p, float delta);
+  bool too_far_from_manifestor(void);
+  bool too_far_from_manifestor(point p);
+  bool too_far_from_manifestor(point p, float delta);
+
+  bool too_far_from_leader(void);
+  bool too_far_from_leader(point p);
+  bool too_far_from_leader(point p, float delta);
 
   Thingp get_equip(int equip);
   Thingp get_equip_carry_anim(int equip);
@@ -250,8 +254,11 @@ public:
 
   void dump_equip(void);
 
-  Thingp get_immediate_minion_owner();
-  Thingp get_top_minion_owner();
+  Thingp get_immediate_manifestor();
+  Thingp get_top_manifestor();
+
+  Thingp get_immediate_leader();
+  Thingp get_top_leader();
 
   Thingp get_immediate_spawned_owner();
   Thingp get_top_spawned_owner();
@@ -508,11 +515,13 @@ public:
   const Dice &get_on_idle_dice(void);
   const Dice &get_resurrect_dice(void);
 
-  const ThingId &get_immediate_minion_owner_id(void);
+  const ThingId &get_immediate_manifestor_id(void);
+  const ThingId &get_immediate_leader_id(void);
   const ThingId &get_immediate_owner_id(void);
   const ThingId &get_immediate_spawned_owner_id(void);
   const ThingId &get_top_owner_id(void);
-  const ThingId &set_minion_owner_id(const ThingId &v);
+  const ThingId &set_manifestor_id(const ThingId &v);
+  const ThingId &set_leader_id(const ThingId &v);
   const ThingId &set_owner_id(const ThingId &v);
   const ThingId &set_spawned_owner_id(const ThingId &v);
 
@@ -626,8 +635,14 @@ public:
   float get_bounce_fade(void);
   float get_bounce_height(void);
   float get_bounce(void);
-  float get_distance_from_minion_owner(point p);
-  float get_distance_from_minion_owner(void);
+  float get_distance_manifestor_max(point p);
+  float get_distance_manifestor_max(void);
+  float get_distance_from_manifestor(point p);
+  float get_distance_from_manifestor(void);
+  float get_distance_leader_max(point p);
+  float get_distance_leader_max(void);
+  float get_distance_from_leader(point p);
+  float get_distance_from_leader(void);
   float get_distance_to_player(void);
   float get_fadeup_fade(void);
   float get_fadeup_height(void);
@@ -636,7 +651,6 @@ public:
   float get_fall(void);
   float get_health_pct(void);
   float get_lunge(void);
-  float get_distance_minion_leash(void);
   float get_distance_throw(void);
   float get_wobble(void);
   float how_far_i_can_jump_max(void);
@@ -645,8 +659,8 @@ public:
 
   int ai_hit_actual(Thingp hitter, Thingp real_hitter, bool crit, bool bite, bool poison, bool necrosis,
                     bool damage_future1, bool damage_future2, bool damage_future3, bool damage_future4,
-                    bool damage_fire, bool damage_crush, bool damage_lightning, bool damage_energy,
-                    bool damage_acid, bool damage_digest, int dmg);
+                    bool damage_fire, bool damage_crush, bool damage_lightning, bool damage_energy, bool damage_acid,
+                    bool damage_digest, int dmg);
 
   int is_hit(Thingp hitter, bool crit, bool bite, bool poison, bool necrosis, bool damage_future1,
              bool damage_future2, bool damage_future3, bool damage_future4, bool damage_fire, bool damage_crush,
@@ -732,6 +746,8 @@ public:
   int decr_light_strength(void);
   int decr_minion_count(int);
   int decr_minion_count(void);
+  int decr_follower_count(int);
+  int decr_follower_count(void);
   int decr_necrotized_amount(int);
   int decr_necrotized_amount(void);
   int decr_owned_count(int);
@@ -853,6 +869,7 @@ public:
   int get_light_strength_initial(void);
   int get_light_strength(void);
   int get_minion_count(void);
+  int get_follower_count(void);
   int get_necrotized_amount(void);
   int get_nutrition(void);
   int get_owned_count(void);
@@ -934,6 +951,8 @@ public:
   int incr_light_strength(void);
   int incr_minion_count(int);
   int incr_minion_count(void);
+  int incr_follower_count(int);
+  int incr_follower_count(void);
   int incr_necrotized_amount(int);
   int incr_necrotized_amount(void);
   int incr_owned_count(int);
@@ -996,7 +1015,7 @@ public:
   int is_able_to_fire_at(void);
   int is_able_to_jump_attack_chance_d1000(void);
   int is_able_to_jump_attack(void);
-  int is_able_to_jump_distance(void);
+  int distance_jump(void);
   int is_able_to_jump_on_low_hp_chance_d1000(void);
   int is_able_to_jump_onto_chance_d1000(void);
   int is_able_to_jump_onto(void);
@@ -1237,6 +1256,7 @@ public:
   int set_lifespan(int);
   int set_light_strength(int);
   int set_minion_count(int);
+  int set_follower_count(int);
   int set_necrotized_amount(int);
   int set_owned_count(int);
   int set_poisoned_amount(int);
@@ -1275,7 +1295,7 @@ public:
   int unused_flag10(void);
   int unused_flag11(void);
   int unused_flag12(void);
-  int unused_flag13(void);
+  int distance_leader_max(void);
   int distance_minion_vision_shared(void);
   int is_able_to_use_weapons(void);
   int is_bony(void);
@@ -1521,6 +1541,7 @@ public:
   void destroy();
   void destroyed(void);
   void destroy_minions(Thingp defeater);
+  void destroy_followers(Thingp defeater);
   void destroy_spawned(Thingp defeater);
   void last_rites(Thingp defeater, const char *reason);
   void last_rites(Thingp defeater, const std::string &reason);
@@ -1615,7 +1636,8 @@ public:
   void poison_tick(void);
   void reinit(void);
   void remove_all_references();
-  void remove_minion_owner(void);
+  void remove_manifestor(void);
+  void remove_leader(void);
   void remove_owner(void);
   void remove_spawner_owner(void);
   void reset_goal_penalty(Thingp attacker);
@@ -1637,7 +1659,8 @@ public:
   void set_fall_height(float);
   void set_interpolated_mid_at(fpoint v);
   void set_lunge_to(point);
-  void set_minion_owner(Thingp minion_owner);
+  void set_manifestor(Thingp manifestor);
+  void set_leader(Thingp leader);
   void set_msg(const std::string &);
   void set_owner(Thingp owner);
   void set_score(int);
@@ -1656,6 +1679,7 @@ public:
   void topcon_(const char *fmt, va_list args); // compile error without
   void try_to_carry(const std::list< Thingp > &items);
   void unleash_minions(void);
+  void unleash_followers(void);
   void unleash_spawners_things(void);
   void unset_on_fire(void);
   void update_all(void);

@@ -1065,10 +1065,10 @@ int Thing::is_able_to_jump_onto_chance_d1000(void)
   return (tp()->is_able_to_jump_onto_chance_d1000());
 }
 
-int Thing::is_able_to_jump_distance(void)
+int Thing::distance_jump(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->is_able_to_jump_distance());
+  return (tp()->distance_jump());
 }
 
 int Thing::is_able_to_jump_on_low_hp_chance_d1000(void)
@@ -1281,10 +1281,10 @@ int Thing::unused_flag12(void)
   return (tp()->unused_flag12());
 }
 
-int Thing::unused_flag13(void)
+int Thing::distance_leader_max(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->unused_flag13());
+  return (tp()->distance_leader_max());
 }
 
 int Thing::distance_minion_vision_shared(void)
@@ -1935,10 +1935,16 @@ int Thing::environ_prefers_spiderwebs(void)
   return (tp()->environ_prefers_spiderwebs());
 }
 
-float Thing::get_distance_minion_leash(void)
+float Thing::get_distance_manifestor_max(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->distance_minion_leash());
+  return (tp()->distance_manifestor_max());
+}
+
+float Thing::get_distance_leader_max(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->distance_leader_max());
 }
 
 int Thing::minion_limit(void)
@@ -2810,10 +2816,10 @@ int Thing::get_stat_armor_class(void)
     v += owner->get_stat_armor_class();
   }
   if (is_minion()) {
-    auto minion_owner = get_immediate_minion_owner();
-    if (minion_owner) {
-      auto minion_owner = get_immediate_minion_owner();
-      v += minion_owner->get_stat_armor_class();
+    auto manifestor = get_immediate_manifestor();
+    if (manifestor) {
+      auto manifestor = get_immediate_manifestor();
+      v += manifestor->get_stat_armor_class();
     }
   }
   return v;
@@ -4225,10 +4231,10 @@ int Thing::get_stamina(void)
     v += owner->get_stamina();
   }
   if (is_minion()) {
-    auto minion_owner = get_immediate_minion_owner();
-    if (minion_owner) {
-      auto minion_owner = get_immediate_minion_owner();
-      v += minion_owner->get_stamina();
+    auto manifestor = get_immediate_manifestor();
+    if (manifestor) {
+      auto manifestor = get_immediate_manifestor();
+      v += manifestor->get_stamina();
     }
   }
   return v;
@@ -4295,10 +4301,10 @@ int Thing::get_enchant(void)
     v += owner->get_enchant();
   }
   if (is_minion()) {
-    auto minion_owner = get_immediate_minion_owner();
-    if (minion_owner) {
-      auto minion_owner = get_immediate_minion_owner();
-      v += minion_owner->get_enchant();
+    auto manifestor = get_immediate_manifestor();
+    if (manifestor) {
+      auto manifestor = get_immediate_manifestor();
+      v += manifestor->get_enchant();
     }
   }
   return v;
@@ -4365,10 +4371,10 @@ int Thing::get_poisoned_amount(void)
     v += owner->get_poisoned_amount();
   }
   if (is_minion()) {
-    auto minion_owner = get_immediate_minion_owner();
-    if (minion_owner) {
-      auto minion_owner = get_immediate_minion_owner();
-      v += minion_owner->get_poisoned_amount();
+    auto manifestor = get_immediate_manifestor();
+    if (manifestor) {
+      auto manifestor = get_immediate_manifestor();
+      v += manifestor->get_poisoned_amount();
     }
   }
   return v;
@@ -4441,10 +4447,10 @@ int Thing::get_necrotized_amount(void)
     v += owner->get_necrotized_amount();
   }
   if (is_minion()) {
-    auto minion_owner = get_immediate_minion_owner();
-    if (minion_owner) {
-      auto minion_owner = get_immediate_minion_owner();
-      v += minion_owner->get_necrotized_amount();
+    auto manifestor = get_immediate_manifestor();
+    if (manifestor) {
+      auto manifestor = get_immediate_manifestor();
+      v += manifestor->get_necrotized_amount();
     }
   }
   return v;
@@ -4664,6 +4670,54 @@ int Thing::incr_minion_count(void)
   TRACE_AND_INDENT();
   new_infop();
   return (get_infop()->minion_count++);
+}
+
+////////////////////////////////////////////////////////////////////////////
+// follower_count
+////////////////////////////////////////////////////////////////////////////
+int Thing::get_follower_count(void)
+{
+  TRACE_AND_INDENT();
+  if (maybe_infop()) {
+    return (get_infop()->follower_count);
+  } else {
+    return 0;
+  }
+}
+
+int Thing::set_follower_count(int v)
+{
+  TRACE_AND_INDENT();
+  new_infop();
+  return (get_infop()->follower_count = v);
+}
+
+int Thing::decr_follower_count(int v)
+{
+  TRACE_AND_INDENT();
+  new_infop();
+  return (get_infop()->follower_count -= v);
+}
+
+int Thing::incr_follower_count(int v)
+{
+  TRACE_AND_INDENT();
+  new_infop();
+  return (get_infop()->follower_count += v);
+}
+
+int Thing::decr_follower_count(void)
+{
+  TRACE_AND_INDENT();
+  new_infop();
+  return (get_infop()->follower_count--);
+}
+
+int Thing::incr_follower_count(void)
+{
+  TRACE_AND_INDENT();
+  new_infop();
+  return (get_infop()->follower_count++);
 }
 
 ////////////////////////////////////////////////////////////////////////////

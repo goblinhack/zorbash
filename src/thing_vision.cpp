@@ -133,7 +133,7 @@ bool Level::can_see_unimpeded(int x0, int y0, int x1, int y1)
 point Thing::get_vision_source(void)
 {
   if (is_minion() && distance_minion_vision_shared()) {
-    auto manifestor = get_top_minion_owner();
+    auto manifestor = get_top_manifestor();
     if (manifestor) {
       return manifestor->mid_at;
     }

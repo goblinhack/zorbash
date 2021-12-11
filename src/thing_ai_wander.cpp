@@ -226,7 +226,12 @@ bool Thing::ai_choose_wander(point &nh)
   //
   // Minions are constrained
   //
-  if (too_far_from_minion_owner(target)) {
+  if (too_far_from_manifestor(target)) {
+    dbg("Could not wander, too far off the leash; could not create path to %d,%d", target.x, target.y);
+    return false;
+  }
+
+  if (too_far_from_leader(target)) {
     dbg("Could not wander, too far off the leash; could not create path to %d,%d", target.x, target.y);
     return false;
   }

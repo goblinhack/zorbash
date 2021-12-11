@@ -28,7 +28,7 @@ def on_death(me, x, y):
 def on_born(me, x, y):
     it = my.level_spawn_at_thing(me, "spiderweb")
     if it != 0:
-        my.thing_set_minion_owner(me, it)
+        my.thing_set_manifestor(me, it)
 
 
 def tp_init(name, text_name):
@@ -45,7 +45,8 @@ def tp_init(name, text_name):
     mytp.set_damage_poison_dice("2d8+2")
     mytp.set_damage_received_doubled_from_fire(True)
     mytp.set_distance_avoid(5)
-    mytp.set_distance_minion_leash(5)
+    mytp.set_distance_manifestor_max(5)
+    mytp.set_distance_jump(2)
     mytp.set_distance_vision(5)
     mytp.set_environ_avoids_fire(100)
     mytp.set_environ_avoids_fire(True)
@@ -64,7 +65,6 @@ def tp_init(name, text_name):
     mytp.set_is_able_to_fall(True)
     mytp.set_is_able_to_jump_attack_chance_d1000(800)
     mytp.set_is_able_to_jump_attack(True)
-    mytp.set_is_able_to_jump_distance(2)
     mytp.set_is_able_to_jump_onto_chance_d1000(100)
     mytp.set_is_able_to_jump_onto(True)
     mytp.set_is_able_to_jump_randomly_chance_d1000(20)

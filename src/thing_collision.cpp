@@ -634,7 +634,7 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
   if (is_ethereal()) {
     if (is_minion()) {
       if (it->is_minion_generator()) {
-        if (it == get_top_minion_owner()) {
+        if (it == get_top_manifestor()) {
           if (things_overlap(me, future_pos, it)) {
             dbg("Yes; cannot pass through my manifestor");
             return true;

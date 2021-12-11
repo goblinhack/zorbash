@@ -12,9 +12,9 @@
 #include "my_sys.hpp"
 #include "my_thing.hpp"
 
-float Thing::get_distance_from_minion_owner(void)
+float Thing::get_distance_from_manifestor(void)
 {
-  auto manifestor = get_top_minion_owner();
+  auto manifestor = get_top_manifestor();
   if (! manifestor) {
     return -1;
   }
@@ -22,9 +22,9 @@ float Thing::get_distance_from_minion_owner(void)
   return distance(mid_at, manifestor->mid_at);
 }
 
-float Thing::get_distance_from_minion_owner(point p)
+float Thing::get_distance_from_manifestor(point p)
 {
-  auto manifestor = get_top_minion_owner();
+  auto manifestor = get_top_manifestor();
   if (! manifestor) {
     return -1;
   }
@@ -32,56 +32,56 @@ float Thing::get_distance_from_minion_owner(point p)
   return distance(p, manifestor->mid_at);
 }
 
-bool Thing::too_far_from_minion_owner(void)
+bool Thing::too_far_from_manifestor(void)
 {
-  auto manifestor = get_top_minion_owner();
+  auto manifestor = get_top_manifestor();
   if (! manifestor) {
     return false;
   }
 
-  if (distance(mid_at, manifestor->mid_at) > get_distance_minion_leash()) {
+  if (distance(mid_at, manifestor->mid_at) > get_distance_manifestor_max()) {
     return true;
   }
   return false;
 }
 
-bool Thing::too_far_from_minion_owner(point p)
+bool Thing::too_far_from_manifestor(point p)
 {
-  auto manifestor = get_top_minion_owner();
+  auto manifestor = get_top_manifestor();
   if (! manifestor) {
     return false;
   }
 
-  if (distance(p, manifestor->mid_at) > get_distance_minion_leash()) {
+  if (distance(p, manifestor->mid_at) > get_distance_manifestor_max()) {
     return true;
   }
   return false;
 }
 
-bool Thing::too_far_from_minion_owner(point p, float delta)
+bool Thing::too_far_from_manifestor(point p, float delta)
 {
-  auto manifestor = get_top_minion_owner();
+  auto manifestor = get_top_manifestor();
   if (! manifestor) {
     return false;
   }
 
-  if (distance(p, manifestor->mid_at) > get_distance_minion_leash() + delta) {
+  if (distance(p, manifestor->mid_at) > get_distance_manifestor_max() + delta) {
     return true;
   }
   return false;
 }
 
-Thingp Thing::get_top_minion_owner(void)
+Thingp Thing::get_top_manifestor(void)
 {
   TRACE_AND_INDENT();
-  auto id = get_immediate_minion_owner_id();
+  auto id = get_immediate_manifestor_id();
   if (likely(id.ok())) {
     auto i = level->thing_find(id);
     if (unlikely(! i)) {
       return nullptr;
     }
-    if (unlikely(i->get_immediate_minion_owner_id().ok())) {
-      return i->get_immediate_minion_owner();
+    if (unlikely(i->get_immediate_manifestor_id().ok())) {
+      return i->get_immediate_manifestor();
     }
     return i;
   } else {
@@ -89,10 +89,10 @@ Thingp Thing::get_top_minion_owner(void)
   }
 }
 
-Thingp Thing::get_immediate_minion_owner(void)
+Thingp Thing::get_immediate_manifestor(void)
 {
   TRACE_AND_INDENT();
-  auto id = get_immediate_minion_owner_id();
+  auto id = get_immediate_manifestor_id();
   if (likely(id.ok())) {
     auto i = level->thing_find(id);
     if (unlikely(! i)) {
@@ -104,55 +104,54 @@ Thingp Thing::get_immediate_minion_owner(void)
   }
 }
 
-void Thing::set_minion_owner(Thingp minion_owner)
+void Thing::set_manifestor(Thingp manifestor)
 {
   TRACE_AND_INDENT();
-  if (minion_owner) {
-    verify(MTYPE_THING, minion_owner);
+  if (manifestor) {
+    verify(MTYPE_THING, manifestor);
   }
 
-  auto old_minion_owner = get_immediate_minion_owner();
-  if (old_minion_owner) {
-    if (old_minion_owner == minion_owner) {
+  auto old_manifestor = get_immediate_manifestor();
+  if (old_manifestor) {
+    if (old_manifestor == manifestor) {
       return;
     }
 
-    if (minion_owner) {
-      dbg("Will change minion owner %s->%s", old_minion_owner->to_string().c_str(),
-          minion_owner->to_string().c_str());
+    if (manifestor) {
+      dbg("Will change minion owner %s->%s", old_manifestor->to_string().c_str(), manifestor->to_string().c_str());
     } else {
-      dbg("Will remove minion owner %s", old_minion_owner->to_string().c_str());
+      dbg("Will remove minion owner %s", old_manifestor->to_string().c_str());
     }
   } else {
-    if (minion_owner) {
-      dbg("Will set minion owner to %s", minion_owner->to_string().c_str());
+    if (manifestor) {
+      dbg("Will set minion owner to %s", manifestor->to_string().c_str());
     }
   }
 
-  if (minion_owner) {
-    set_minion_owner_id(minion_owner->id);
-    minion_owner->incr_minion_count();
+  if (manifestor) {
+    set_manifestor_id(manifestor->id);
+    manifestor->incr_minion_count();
   } else {
-    set_minion_owner_id(NoThingId);
-    if (old_minion_owner) {
-      old_minion_owner->decr_minion_count();
+    set_manifestor_id(NoThingId);
+    if (old_manifestor) {
+      old_manifestor->decr_minion_count();
     }
   }
 }
 
-void Thing::remove_minion_owner(void)
+void Thing::remove_manifestor(void)
 {
   TRACE_AND_INDENT();
-  auto old_minion_owner = get_immediate_minion_owner();
-  if (! old_minion_owner) {
+  auto old_manifestor = get_immediate_manifestor();
+  if (! old_manifestor) {
     err("No minion owner");
     return;
   }
 
-  dbg("Remove minion owner %s", old_minion_owner->to_string().c_str());
+  dbg("Remove minion owner %s", old_manifestor->to_string().c_str());
 
-  set_minion_owner_id(NoThingId);
-  old_minion_owner->decr_minion_count();
+  set_manifestor_id(NoThingId);
+  old_manifestor->decr_minion_count();
 }
 
 //
@@ -181,9 +180,9 @@ void Thing::destroy_minions(Thingp defeater)
   {
     for (auto p : level->all_things[ group ]) {
       auto minion = p.second;
-      auto o      = minion->get_immediate_minion_owner();
+      auto o      = minion->get_immediate_manifestor();
       if (o && (o == this)) {
-        minion->remove_minion_owner();
+        minion->remove_manifestor();
         minion->is_resurrection_blocked = true;
         minion->dead(defeater, "its manifestor died");
       }
@@ -212,9 +211,9 @@ void Thing::unleash_minions(void)
   {
     for (auto p : level->all_things[ group ]) {
       auto minion = p.second;
-      auto o      = minion->get_immediate_minion_owner();
+      auto o      = minion->get_immediate_manifestor();
       if (o && (o == this)) {
-        minion->remove_minion_owner();
+        minion->remove_manifestor();
       }
     }
   }

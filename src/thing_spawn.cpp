@@ -81,7 +81,7 @@ bool Thing::spawn_next_to(const std::string &what)
   c->inherit_from(this);
 
   if (c->is_minion()) {
-    c->set_minion_owner(this);
+    c->set_manifestor(this);
   }
 
   if (is_spawner()) {

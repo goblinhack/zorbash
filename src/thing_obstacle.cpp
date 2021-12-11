@@ -282,7 +282,7 @@ bool Thing::ai_obstacle(Thingp it)
     //
     if (is_minion()) {
       if (it->is_minion_generator()) {
-        if (it == get_top_minion_owner()) {
+        if (it == get_top_manifestor()) {
           return true;
         }
       }

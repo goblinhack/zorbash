@@ -17,7 +17,7 @@
 float Thing::how_far_i_can_jump(void)
 {
   TRACE_AND_INDENT();
-  auto d = (float) is_able_to_jump_distance() + ceil(0.5 + (pcg_random_range(0, 100) / 100.0));
+  auto d = (float) distance_jump() + ceil(0.5 + (pcg_random_range(0, 100) / 100.0));
 
   if (get_stamina() < get_stamina_max() / 2) {
     d /= 2;
@@ -33,7 +33,7 @@ float Thing::how_far_i_can_jump(void)
 float Thing::how_far_i_can_jump_max(void)
 {
   TRACE_AND_INDENT();
-  auto d = (float) is_able_to_jump_distance() + 1;
+  auto d = (float) distance_jump() + 1;
   return d;
 }
 
@@ -60,12 +60,24 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   // Spider minions need to be leashed
   //
   bool jumping_home = false;
-  if (too_far_from_minion_owner(to)) {
+  if (too_far_from_manifestor(to)) {
     dbg("No, minion is too far off the leash to jump");
-    auto manifestor = get_top_minion_owner();
+    auto manifestor = get_top_manifestor();
     if (manifestor) {
       dbg("Try jumping home");
       to           = manifestor->mid_at;
+      jumping_home = true;
+    } else {
+      return false;
+    }
+  }
+
+  if (too_far_from_leader(to)) {
+    dbg("No, follower is too far off the leash to jump");
+    auto leader = get_top_leader();
+    if (leader) {
+      dbg("Try jumping home");
+      to           = leader->mid_at;
       jumping_home = true;
     } else {
       return false;

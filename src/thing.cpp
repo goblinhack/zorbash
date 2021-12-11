@@ -81,20 +81,36 @@ const ThingId &Thing::set_owner_id(const ThingId &v)
   return (get_infop()->owner_id = v);
 }
 
-const ThingId &Thing::get_immediate_minion_owner_id(void)
+const ThingId &Thing::get_immediate_manifestor_id(void)
 {
   TRACE_AND_INDENT();
   if (! maybe_infop()) {
     return (NoThingId);
   }
-  return (get_infop()->minion_owner_id);
+  return (get_infop()->manifestor_id);
 }
 
-const ThingId &Thing::set_minion_owner_id(const ThingId &v)
+const ThingId &Thing::set_manifestor_id(const ThingId &v)
 {
   TRACE_AND_INDENT();
   new_infop();
-  return (get_infop()->minion_owner_id = v);
+  return (get_infop()->manifestor_id = v);
+}
+
+const ThingId &Thing::get_immediate_leader_id(void)
+{
+  TRACE_AND_INDENT();
+  if (! maybe_infop()) {
+    return (NoThingId);
+  }
+  return (get_infop()->leader_id);
+}
+
+const ThingId &Thing::set_leader_id(const ThingId &v)
+{
+  TRACE_AND_INDENT();
+  new_infop();
+  return (get_infop()->leader_id = v);
 }
 
 const ThingId &Thing::get_immediate_spawned_owner_id(void)

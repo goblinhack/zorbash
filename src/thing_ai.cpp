@@ -427,7 +427,11 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
         continue;
       }
 
-      if (too_far_from_minion_owner(p)) {
+      if (too_far_from_manifestor(p)) {
+        continue;
+      }
+
+      if (too_far_from_leader(p)) {
         continue;
       }
 
@@ -549,7 +553,11 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
         //
         // Don't look too far beyond where we can go
         //
-        if (too_far_from_minion_owner(p, 1)) {
+        if (too_far_from_manifestor(p, 1)) {
+          continue;
+        }
+
+        if (too_far_from_leader(p, 1)) {
           continue;
         }
 
@@ -799,14 +807,28 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
         //
         // Don't attack your manifestor
         //
-        if (it->is_minion_generator() && (get_top_minion_owner() == this)) {
+        if (it->is_minion_generator() && (get_top_manifestor() == this)) {
+          continue;
+        }
+
+        //
+        // Don't attack your leader
+        //
+        if (get_top_leader() == this) {
           continue;
         }
 
         //
         // Don't attack your fellow minion
         //
-        if (it->is_minion() && (it->get_top_minion_owner() == get_top_minion_owner())) {
+        if (it->is_minion() && (it->get_top_manifestor() == get_top_manifestor())) {
+          continue;
+        }
+
+        //
+        // Don't attack your fellow follower
+        //
+        if (it->get_top_leader() == get_top_leader()) {
           continue;
         }
 
@@ -1024,7 +1046,11 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
     //
     // Don't look too far beyond where we can go
     //
-    if (too_far_from_minion_owner(p)) {
+    if (too_far_from_manifestor(p)) {
+      continue;
+    }
+
+    if (too_far_from_leader(p)) {
       continue;
     }
 
@@ -1250,7 +1276,11 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
       continue;
     }
 
-    if (too_far_from_minion_owner(p, 1)) {
+    if (too_far_from_manifestor(p, 1)) {
+      continue;
+    }
+
+    if (too_far_from_leader(p, 1)) {
       continue;
     }
 
@@ -1319,7 +1349,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
     }
 
     if (is_minion()) {
-      auto manifestor = get_top_minion_owner();
+      auto manifestor = get_top_manifestor();
       if (manifestor) {
         auto dist = distance(p, manifestor->mid_at);
         auto msg  = string_sprintf("search cand @(%d,%d) dist-from-owner %f", p.x, p.y, dist);

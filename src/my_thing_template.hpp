@@ -127,7 +127,7 @@ private:
   int _damage_received_doubled_from_poison {};
   int _damage_received_doubled_from_water {};
   int _distance_avoid {};
-  int _distance_minion_leash {};
+  int _distance_manifestor_max {};
   int _distance_minion_vision_shared {};
   int _distance_throw {};
   int _distance_vision {};
@@ -182,7 +182,7 @@ private:
   int _is_able_to_jump {};
   int _is_able_to_jump_attack {};
   int _is_able_to_jump_attack_chance_d1000 {};
-  int _is_able_to_jump_distance {};
+  int _distance_jump {};
   int _is_able_to_jump_on_low_hp_chance_d1000 {};
   int _is_able_to_jump_onto {};
   int _is_able_to_jump_onto_chance_d1000 {};
@@ -408,7 +408,7 @@ private:
   int _unused_flag10 {};
   int _unused_flag11 {};
   int _unused_flag12 {};
-  int _unused_flag13 {};
+  int _distance_leader_max {};
   int _unused_flag2 {};
   int _unused_flag3 {};
   int _unused_flag4 {};
@@ -763,7 +763,9 @@ public:
   int damage_received_doubled_from_poison(void) const { return _damage_received_doubled_from_poison; }
   int damage_received_doubled_from_water(void) const { return _damage_received_doubled_from_water; }
   int distance_avoid(void) const { return _distance_avoid; }
-  int distance_minion_leash(void) const { return _distance_minion_leash; }
+  int distance_leader_max(void) const { return _distance_leader_max; }
+  int distance_manifestor_max(void) const { return _distance_manifestor_max; }
+  int distance_jump(void) const { return _distance_jump; }
   int distance_minion_vision_shared(void) const { return _distance_minion_vision_shared; }
   int distance_throw(void) const { return _distance_throw; }
   int distance_vision(void) const { return _distance_vision; }
@@ -818,7 +820,6 @@ public:
   int is_able_to_fire_at(void) const { return _is_able_to_fire_at; }
   int is_able_to_jump_attack_chance_d1000(void) const { return _is_able_to_jump_attack_chance_d1000; }
   int is_able_to_jump_attack(void) const { return _is_able_to_jump_attack; }
-  int is_able_to_jump_distance(void) const { return _is_able_to_jump_distance; }
   int is_able_to_jump_on_low_hp_chance_d1000(void) const { return _is_able_to_jump_on_low_hp_chance_d1000; }
   int is_able_to_jump_onto_chance_d1000(void) const { return _is_able_to_jump_onto_chance_d1000; }
   int is_able_to_jump_onto(void) const { return _is_able_to_jump_onto; }
@@ -1043,7 +1044,6 @@ public:
   int unused_flag10(void) const { return _unused_flag10; }
   int unused_flag11(void) const { return _unused_flag11; }
   int unused_flag12(void) const { return _unused_flag12; }
-  int unused_flag13(void) const { return _unused_flag13; }
   int unused_flag1(void) const { return _unused_flag1; }
   int unused_flag2(void) const { return _unused_flag2; }
   int unused_flag3(void) const { return _unused_flag3; }
@@ -1101,7 +1101,7 @@ public:
   void set_damage_received_doubled_from_poison(int v) { _damage_received_doubled_from_poison = v; }
   void set_damage_received_doubled_from_water(int v) { _damage_received_doubled_from_water = v; }
   void set_distance_avoid(int v) { _distance_avoid = v; }
-  void set_distance_minion_leash(int v) { _distance_minion_leash = v; }
+  void set_distance_manifestor_max(int v) { _distance_manifestor_max = v; }
   void set_distance_minion_vision_shared(int v) { _distance_minion_vision_shared = v; }
   void set_distance_throw(int v) { _distance_throw = v; }
   void set_distance_vision(int v) { _distance_vision = v; }
@@ -1157,7 +1157,7 @@ public:
   void set_is_able_to_fire_at(int v) { _is_able_to_fire_at = v; }
   void set_is_able_to_jump_attack_chance_d1000(int v) { _is_able_to_jump_attack_chance_d1000 = v; }
   void set_is_able_to_jump_attack(int v) { _is_able_to_jump_attack = v; }
-  void set_is_able_to_jump_distance(int v) { _is_able_to_jump_distance = v; }
+  void set_distance_jump(int v) { _distance_jump = v; }
   void set_is_able_to_jump(int v) { _is_able_to_jump = v; }
   void set_is_able_to_jump_on_low_hp_chance_d1000(int v) { _is_able_to_jump_on_low_hp_chance_d1000 = v; }
   void set_is_able_to_jump_onto_chance_d1000(int v) { _is_able_to_jump_onto_chance_d1000 = v; }
@@ -1456,7 +1456,7 @@ public:
   void set_unused_flag10(int v) { _unused_flag10 = v; }
   void set_unused_flag11(int v) { _unused_flag11 = v; }
   void set_unused_flag12(int v) { _unused_flag12 = v; }
-  void set_unused_flag13(int v) { _unused_flag13 = v; }
+  void set_distance_leader_max(int v) { _distance_leader_max = v; }
   void set_unused_flag1(int v) { _unused_flag1 = v; }
   void set_unused_flag2(int v) { _unused_flag2 = v; }
   void set_unused_flag3(int v) { _unused_flag3 = v; }

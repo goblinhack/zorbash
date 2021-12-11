@@ -4,7 +4,8 @@
 <!--                                                                                                                                              -->
 <!-- Next todo                                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
-<!-- - friends                                                                                                -->
+<!-- - minion still trying to move through manifestor                                                         -->
+<!-- - assign allies                                                                                          -->
 <!-- - lightning damage                                                                                       -->
 <!-- - fire damage                                                                                       -->
 <!-- - energy damage                                                                                       -->
@@ -128,6 +129,7 @@
 <!--                                                                                                                                              -->
 <!-- Monsts                                                                                                                                       -->
 <!-- ------                                                                                                                                       -->
+<!-- - chickens - battle chickens - lay eggs as food - and they get names                                                                         -->
 <!-- - random carry of gold                                                                                                                       -->
 <!-- - acid jellies should damage weapons                                                                                                         -->
 <!-- - spider that throws web?                                                                                                                    -->

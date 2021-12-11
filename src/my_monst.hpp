@@ -67,7 +67,8 @@ public:
 
   ThingId on_fire_id_anim {};
   ThingId owner_id {};         // Who carries this thing?
-  ThingId minion_owner_id {};  // Who generated this thing?
+  ThingId manifestor_id {};    // Who generated this thing?
+  ThingId leader_id {};        // Who is the current ally leader
   ThingId spawner_owner_id {}; // Who spawned this thing?
 
   color light_col {};
@@ -88,6 +89,7 @@ public:
   uint8_t enchant          = {};
   uint8_t enchant_max      = {};
   uint8_t minion_count     = {}; // How many things this thing spawned.
+  uint8_t follower_count   = {}; // How many things this thing spawned.
   uint8_t owned_count      = {}; // How many things this thing owns.
   uint8_t spawned_count    = {}; // How many things this thing owns.
   uint8_t capacity_height  = {};

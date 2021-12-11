@@ -388,8 +388,8 @@ class Tp:
     def set_unused_flag12(self, value):
         my.tp_set_unused_flag12(self, value)
 
-    def set_unused_flag13(self, value):
-        my.tp_set_unused_flag13(self, value)
+    def set_distance_leader_max(self, value):
+        my.tp_set_distance_leader_max(self, value)
 
     def set_distance_minion_vision_shared(self, value):
         my.tp_set_distance_minion_vision_shared(self, value)
@@ -688,8 +688,8 @@ class Tp:
     def set_charge_count(self, value):
         my.tp_set_charge_count(self, value)
 
-    def set_distance_minion_leash(self, value):
-        my.tp_set_distance_minion_leash(self, value)
+    def set_distance_manifestor_max(self, value):
+        my.tp_set_distance_manifestor_max(self, value)
 
     def set_is_skill(self, value):
         my.tp_set_is_skill(self, value)
@@ -979,8 +979,8 @@ class Tp:
     def set_attack_eater(self, value):
         my.tp_set_attack_eater(self, value)
 
-    def set_is_able_to_jump_distance(self, value):
-        my.tp_set_is_able_to_jump_distance(self, value)
+    def set_distance_jump(self, value):
+        my.tp_set_distance_jump(self, value)
 
     def set_is_able_to_jump(self, value):
         my.tp_set_is_able_to_jump(self, value)

@@ -59,7 +59,7 @@ PyObject *level_is_able_to_fire_at_at(PyObject *obj, PyObject *args, PyObject *k
 PyObject *level_is_able_to_jump_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_able_to_jump_attack_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_able_to_jump_onto_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_able_to_jump_distance_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_distance_jump_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_able_to_jump_on_low_hp_chance_d1000_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_able_to_jump_randomly_chance_d1000_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_able_to_jump_attack_chance_d1000_at(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -253,7 +253,7 @@ PyObject *level_is_wooden_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag10_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag11_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag12_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag13_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_distance_leader_max_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_distance_minion_vision_shared_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_able_to_use_weapons_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_bony_at(PyObject *obj, PyObject *args, PyObject *keywds);

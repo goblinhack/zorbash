@@ -448,7 +448,7 @@ PyObject *thing_defeated(PyObject *obj, PyObject *args, PyObject *keywds)
   Py_RETURN_NONE;
 }
 
-PyObject *thing_set_minion_owner(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *thing_set_manifestor(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
   uint32_t     me_id    = 0;
@@ -482,7 +482,45 @@ PyObject *thing_set_minion_owner(PyObject *obj, PyObject *args, PyObject *keywds
     Py_RETURN_NONE;
   }
 
-  me->set_minion_owner(owner);
+  me->set_manifestor(owner);
+  Py_RETURN_NONE;
+}
+
+PyObject *thing_set_leader(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_AND_INDENT();
+  uint32_t     me_id    = 0;
+  uint32_t     owner_id = 0;
+  static char *kwlist[] = {(char *) "me", (char *) "owner", 0};
+
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "II", kwlist, &me_id, &owner_id)) {
+    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  if (! me_id) {
+    ERR("%s: No me thing ID set", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  if (! owner_id) {
+    ERR("%s: No owner thing ID set", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  Thingp me = game->thing_find(me_id);
+  if (! me) {
+    ERR("%s: Cannot find me thing ID %u", __FUNCTION__, me_id);
+    Py_RETURN_NONE;
+  }
+
+  Thingp owner = game->thing_find(owner_id);
+  if (! owner) {
+    ERR("%s: Cannot find owner thing ID %u", __FUNCTION__, owner_id);
+    Py_RETURN_NONE;
+  }
+
+  me->set_leader(owner);
   Py_RETURN_NONE;
 }
 
@@ -804,7 +842,7 @@ THING_BODY_GET_BOOL(thing_is_able_to_enchant_items, is_able_to_enchant_items)
 THING_BODY_GET_BOOL(thing_is_able_to_fall, is_able_to_fall)
 THING_BODY_GET_BOOL(thing_is_able_to_jump_attack_chance_d1000, is_able_to_jump_attack_chance_d1000)
 THING_BODY_GET_BOOL(thing_is_able_to_jump_attack, is_able_to_jump_attack)
-THING_BODY_GET_BOOL(thing_is_able_to_jump_distance, is_able_to_jump_distance)
+THING_BODY_GET_BOOL(thing_distance_jump, distance_jump)
 THING_BODY_GET_BOOL(thing_is_able_to_jump, is_able_to_jump)
 THING_BODY_GET_BOOL(thing_is_able_to_jump_on_low_hp_chance_d1000, is_able_to_jump_on_low_hp_chance_d1000)
 THING_BODY_GET_BOOL(thing_is_able_to_jump_onto_chance_d1000, is_able_to_jump_onto_chance_d1000)
@@ -999,9 +1037,8 @@ THING_BODY_GET_BOOL(thing_is_wooden, is_wooden)
 THING_BODY_GET_BOOL(thing_unused_flag10, unused_flag10)
 THING_BODY_GET_BOOL(thing_unused_flag11, unused_flag11)
 THING_BODY_GET_BOOL(thing_unused_flag12, unused_flag12)
-THING_BODY_GET_BOOL(thing_unused_flag13, unused_flag13)
-THING_BODY_GET_BOOL(thing_get_distance_minion_vision_shared,
-                    distance_minion_vision_shared)
+THING_BODY_GET_BOOL(thing_distance_leader_max, distance_leader_max)
+THING_BODY_GET_BOOL(thing_get_distance_minion_vision_shared, distance_minion_vision_shared)
 THING_BODY_GET_BOOL(thing_is_able_to_use_weapons, is_able_to_use_weapons)
 THING_BODY_GET_BOOL(thing_is_bony, is_bony)
 THING_BODY_GET_BOOL(thing_is_pink_blooded, is_pink_blooded)
@@ -1045,7 +1082,8 @@ THING_BODY_GET_INT(thing_get_poisoned_amount, get_poisoned_amount)
 THING_BODY_GET_INT(thing_get_stamina, get_stamina)
 THING_BODY_GET_INT(thing_get_stamina_max, get_stamina_max)
 THING_BODY_GET_STRING(thing_get_name, text_name)
-THING_BODY_GET_THING(thing_get_immediate_minion_owner_id, get_immediate_minion_owner_id)
+THING_BODY_GET_THING(thing_get_immediate_manifestor_id, get_immediate_manifestor_id)
+THING_BODY_GET_THING(thing_get_immediate_leader_id, get_immediate_leader_id)
 THING_BODY_GET_THING(thing_get_immediate_owner_id, get_immediate_owner_id)
 THING_BODY_GET_THING(thing_get_immediate_spawned_owner_id, get_immediate_spawned_owner_id)
 THING_BODY_GET_THING(thing_get_top_owner_id, get_top_owner_id)

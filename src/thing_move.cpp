@@ -202,16 +202,16 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
   //
   // Don't let minions wander too far from their manifestor.
   //
-  auto manifestor = get_top_minion_owner();
+  auto manifestor = get_top_manifestor();
   if (manifestor) {
-    if (get_distance_minion_leash()) {
+    if (get_distance_manifestor_max()) {
       auto new_distance  = distance(future_pos, manifestor->mid_at);
       auto curr_distance = distance(mid_at, manifestor->mid_at);
       if (new_distance <= curr_distance) {
         //
         // Always allow moves that end up closer to the base
         //
-      } else if (new_distance > get_distance_minion_leash() + 1) {
+      } else if (new_distance > get_distance_manifestor_max() + 1) {
         //
         // Too far.
         //

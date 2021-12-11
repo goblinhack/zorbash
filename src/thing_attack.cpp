@@ -33,9 +33,15 @@ bool Thing::possible_to_attack(const Thingp victim)
     return false;
   }
 
-  auto my_minion_owner  = get_top_minion_owner();
-  auto its_minion_owner = victim->get_top_minion_owner();
-  if (my_minion_owner && (my_minion_owner == its_minion_owner)) {
+  auto my_manifestor  = get_top_manifestor();
+  auto its_manifestor = victim->get_top_manifestor();
+  if (my_manifestor && (my_manifestor == its_manifestor)) {
+    return false;
+  }
+
+  auto my_leader  = get_top_leader();
+  auto its_leader = victim->get_top_leader();
+  if (my_leader && (my_leader == its_leader)) {
     return false;
   }
 

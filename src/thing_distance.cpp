@@ -22,9 +22,14 @@ point Thing::get_random_target(void)
   //
   // Minions cannot wander too far
   //
-  auto manifestor = get_top_minion_owner();
+  auto manifestor = get_top_manifestor();
   if (manifestor) {
-    d = (int) get_distance_minion_leash();
+    d = (int) get_distance_manifestor_max();
+  }
+
+  auto leader = get_top_leader();
+  if (leader) {
+    d = (int) get_distance_leader_max();
   }
 
   while (tries--) {

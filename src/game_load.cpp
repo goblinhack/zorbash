@@ -69,7 +69,8 @@ std::istream &operator>>(std::istream &in, Bits< ThingInfop & > my)
   // clang-format off
    in >> bits(my.t->on_fire_id_anim);
    in >> bits(my.t->owner_id);
-   in >> bits(my.t->minion_owner_id);
+   in >> bits(my.t->manifestor_id);
+   in >> bits(my.t->leader_id);
    in >> bits(my.t->spawner_owner_id);
    in >> bits(my.t->light_col);
    in >> bits(my.t->bounce_fade);
@@ -93,6 +94,7 @@ std::istream &operator>>(std::istream &in, Bits< ThingInfop & > my)
    in >> bits(my.t->lifespan);
    in >> bits(my.t->light_strength);
    in >> bits(my.t->minion_count);
+   in >> bits(my.t->follower_count);
    in >> bits(my.t->owned_count);
    in >> bits(my.t->poison);
    in >> bits(my.t->necrosis);

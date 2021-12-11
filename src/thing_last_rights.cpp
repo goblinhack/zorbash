@@ -86,6 +86,8 @@ void Thing::last_rites(Thingp defeater, const char *reason)
     destroy_minions(defeater);
   }
 
+  unleash_followers();
+
   if (defeater && is_spawner()) {
     destroy_spawned(defeater);
   }

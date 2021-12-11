@@ -38,10 +38,17 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta)
     return (THING_SHOVE_NEVER_TRIED);
   }
 
-  auto my_minion_owner  = get_top_minion_owner();
-  auto its_minion_owner = it->get_top_minion_owner();
-  if (my_minion_owner && (my_minion_owner == its_minion_owner)) {
+  auto my_manifestor  = get_top_manifestor();
+  auto its_manifestor = it->get_top_manifestor();
+  if (my_manifestor && (my_manifestor == its_manifestor)) {
     dbg("Not able to shove (same master) %s", it->to_string().c_str());
+    return (THING_SHOVE_NEVER_TRIED);
+  }
+
+  auto my_leader  = get_top_leader();
+  auto its_leader = it->get_top_leader();
+  if (my_leader && (my_leader == its_leader)) {
+    dbg("Not able to shove (same leader) %s", it->to_string().c_str());
     return (THING_SHOVE_NEVER_TRIED);
   }
 

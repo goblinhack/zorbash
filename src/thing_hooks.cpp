@@ -130,8 +130,12 @@ void Thing::hooks_remove()
     top_owner->drop_into_ether(this);
   }
 
-  if (get_immediate_minion_owner_id().ok()) {
-    remove_minion_owner();
+  if (get_immediate_manifestor_id().ok()) {
+    remove_manifestor();
+  }
+
+  if (get_immediate_leader_id().ok()) {
+    remove_leader();
   }
 
   if (get_immediate_spawned_owner_id().ok()) {
@@ -211,9 +215,27 @@ void Thing::remove_all_references()
     {
       for (auto p : level->all_things[ group ]) {
         auto t = p.second;
-        auto o = t->get_immediate_minion_owner();
+        auto o = t->get_immediate_manifestor();
         if (o == this) {
-          t->remove_minion_owner();
+          t->remove_manifestor();
+        }
+      }
+    }
+  }
+
+  if (get_follower_count()) {
+    dbg("Remove all follower references, total %d", get_follower_count());
+
+    //
+    // Slow, but not used too often
+    //
+    FOR_ALL_THING_GROUPS(group)
+    {
+      for (auto p : level->all_things[ group ]) {
+        auto t = p.second;
+        auto o = t->get_immediate_leader();
+        if (o == this) {
+          t->remove_leader();
         }
       }
     }
@@ -253,8 +275,11 @@ void Thing::remove_all_references()
           if (id == t->get_infop()->owner_id) {
             err("thing is still attached to (owner) %s", t->to_string().c_str());
           }
-          if (id == t->get_infop()->minion_owner_id) {
+          if (id == t->get_infop()->manifestor_id) {
             err("thing is still attached to (minion owner) %s", t->to_string().c_str());
+          }
+          if (id == t->get_infop()->leader_id) {
+            err("thing is still attached to (leader owner) %s", t->to_string().c_str());
           }
           if (id == t->get_infop()->spawner_owner_id) {
             err("thing is still attached to (spawner owner) %s", t->to_string().c_str());
@@ -290,8 +315,11 @@ void Thing::remove_all_references()
         if (id == t->get_infop()->owner_id) {
           err("interesting thing is still attached to (owner) %s", t->to_string().c_str());
         }
-        if (id == t->get_infop()->minion_owner_id) {
+        if (id == t->get_infop()->manifestor_id) {
           err("interesting thing is still attached to (minion owner) %s", t->to_string().c_str());
+        }
+        if (id == t->get_infop()->leader_id) {
+          err("interesting thing is still attached to (leader owner) %s", t->to_string().c_str());
         }
         if (id == t->get_infop()->spawner_owner_id) {
           err("interesting thing is still attached to (spawner owner) %s", t->to_string().c_str());
@@ -325,8 +353,11 @@ void Thing::remove_all_references()
         if (id == t->get_infop()->owner_id) {
           err("interesting thing is still attached to (owner) %s", t->to_string().c_str());
         }
-        if (id == t->get_infop()->minion_owner_id) {
+        if (id == t->get_infop()->manifestor_id) {
           err("interesting thing is still attached to (minion owner) %s", t->to_string().c_str());
+        }
+        if (id == t->get_infop()->leader_id) {
+          err("interesting thing is still attached to (leader owner) %s", t->to_string().c_str());
         }
         if (id == t->get_infop()->spawner_owner_id) {
           err("interesting thing is still attached to (spawner owner) %s", t->to_string().c_str());

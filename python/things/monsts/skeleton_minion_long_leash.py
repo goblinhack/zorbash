@@ -44,7 +44,7 @@ def tp_init(name, text_name):
     mytp.set_damage_melee_chance_d1000(900)
     mytp.set_damage_melee_dice("1d2")
     mytp.set_damage_received_doubled_from_water(True)
-    mytp.set_distance_minion_leash(10)
+    mytp.set_distance_manifestor_max(10)
     mytp.set_distance_vision(11)
     mytp.set_environ_avoids_water(100)
     mytp.set_environ_avoids_water(True)
