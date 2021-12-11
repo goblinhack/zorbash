@@ -756,6 +756,7 @@ public:
   void create_dungeon_place_sewer_pipes(Dungeonp d);
   void create_dungeon_place_walls(Dungeonp d, Tpp tp, int variant, int block_width, int block_height, int tries);
   void create(point3d at, int seed);
+  void created(void);
   void create_sewer_place_remaining_walls(const std::string &what);
   void create_sewer_place_walls(int variant, int block_width, int block_height, int tries);
   void l_shaped_path_to_diag(std::vector< point > &path);

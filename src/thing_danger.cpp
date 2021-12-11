@@ -244,6 +244,15 @@ int Thing::get_danger_current_level(void)
   danger_level += aggression_level_pct();
 
   //
+  // Leaders are stronger with more followers
+  //
+  if (is_follower()) {
+    if (get_follower_count()) {
+      danger_level *= get_follower_count();
+    }
+  }
+
+  //
   // Low on health, reduce the level
   //
   if (get_health() < get_health_max() / 5) {

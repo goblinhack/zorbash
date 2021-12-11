@@ -2797,6 +2797,8 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_TP_FUNCTION(light_color),
     MY_ADD_PYTHON_TP_FUNCTION(light_strength),
     MY_ADD_PYTHON_TP_FUNCTION(long_text_description),
+    MY_ADD_PYTHON_TP_FUNCTION(leader_text_description),
+    MY_ADD_PYTHON_TP_FUNCTION(follower_text_description),
     MY_ADD_PYTHON_TP_FUNCTION(distance_manifestor_max),
     MY_ADD_PYTHON_TP_FUNCTION(minion_limit),
     MY_ADD_PYTHON_TP_FUNCTION(monst_size),

@@ -1057,6 +1057,7 @@ int Thing::get_damage_melee(void)
 {
   TRACE_AND_INDENT();
   auto roll = tp()->get_damage_melee_dice().roll();
+
   if (roll) {
     return roll + get_enchant();
   }

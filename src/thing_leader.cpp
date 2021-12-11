@@ -6,11 +6,13 @@
 #include "my_color.hpp"
 #include "my_depth.hpp"
 #include "my_dmap.hpp"
+#include "my_game.hpp"
 #include "my_level.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_sprintf.hpp"
 #include "my_sys.hpp"
 #include "my_thing.hpp"
+#include "my_thing_template.hpp"
 
 float Thing::get_distance_from_leader(void)
 {
@@ -210,4 +212,72 @@ void Thing::unleash_followers(void)
       }
     }
   }
+}
+
+void Thing::leader_tick(void)
+{
+  TRACE_AND_INDENT();
+
+  if (! is_follower()) {
+    return;
+  }
+
+  if (get_follower_count()) {
+    return;
+  }
+
+  if (get_immediate_leader()) {
+    return;
+  }
+
+  Thingp leader = nullptr;
+  auto   allies = tp()->allies;
+
+  FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL(level, t)
+  {
+    if (! t->is_follower()) {
+      continue;
+    }
+
+    if (t->get_follower_count()) {
+      leader = t;
+      break;
+    }
+
+    //
+    // If a leader is too far away, ignore
+    //
+    if (distance(t->mid_at, mid_at) > get_distance_leader_max() * 2) {
+      continue;
+    }
+
+    t->con("leader cand");
+
+    if (allies.find(t->tp()) == allies.end()) {
+      continue;
+    }
+
+    if (! leader) {
+      leader = t;
+      continue;
+    }
+
+    if (t->get_danger_current_level() > leader->get_danger_current_level()) {
+      leader = t;
+    }
+  }
+  FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL_END(level)
+
+  if (! leader) {
+    return;
+  }
+  leader->con("leader ");
+
+  if (leader == this) {
+    return;
+  }
+
+  con("Is being led by %s", leader->to_string().c_str());
+
+  set_leader(leader);
 }

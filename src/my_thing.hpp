@@ -557,6 +557,8 @@ public:
   const std::string &laser_name(void);
   const std::string &light_color(void);
   const std::string &long_text_description(void);
+  const std::string &leader_text_description(void);
+  const std::string &follower_text_description(void);
   const std::string &name(void);
   const std::string &on_birth_do(void);
   const std::string &on_you_bite_attack_do(void);
@@ -1508,6 +1510,7 @@ public:
   void buff_remove_all(void);
   void buff_tick();
   void chasm_tick();
+  void leader_tick();
   void check_all_carried();
   void clear_age_map(void);
   void clear_can_see_currently(void);

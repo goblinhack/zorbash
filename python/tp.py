@@ -160,6 +160,12 @@ class Tp:
     def set_long_text_description(self, value):
         my.tp_set_long_text_description(self, value)
 
+    def set_leader_text_description(self, value):
+        my.tp_set_leader_text_description(self, value)
+
+    def set_follower_text_description(self, value):
+        my.tp_set_follower_text_description(self, value)
+
     def set_text_description(self, value):
         my.tp_set_text_description(self, value)
 

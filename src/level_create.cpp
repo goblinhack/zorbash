@@ -6,6 +6,8 @@
 #include "my_dungeon.hpp"
 #include "my_game.hpp"
 #include "my_globals.hpp"
+#include "my_monst.hpp"
+#include "my_ptrcheck.hpp"
 #include "my_random.hpp"
 #include "my_sys.hpp"
 #include "my_thing.hpp"
@@ -65,6 +67,21 @@ void Level::create(point3d at, int seed)
     cursor = thing_new("cursor", player->mid_at);
     cursor->hide();
   }
+
+  created();
+}
+
+void Level::created(void)
+{
+  TRACE_AND_INDENT();
+  FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL(this, t)
+  {
+    //
+    // Assign leaders and soldiers
+    //
+    t->leader_tick();
+  }
+  FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL_END(this)
 }
 
 void Level::place_the_grid(void)

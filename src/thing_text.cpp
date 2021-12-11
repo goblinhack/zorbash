@@ -68,6 +68,11 @@ std::string Thing::text_the(bool include_owner)
   if (include_owner) {
     if (top_owner && ! top_owner->is_player()) {
       out += top_owner->text_name();
+      if (top_owner->get_follower_count()) {
+        out += " leader";
+      } else if (top_owner->get_immediate_leader()) {
+        out += " soldier";
+      }
       out += "'s ";
     }
   }
@@ -85,6 +90,9 @@ std::string Thing::text_the(bool include_owner)
   }
 
   out += tpp->text_name();
+  if (get_follower_count()) {
+    out += " leader";
+  }
 
   return (out);
 }
@@ -172,11 +180,31 @@ std::string Thing::short_text_The(void)
 std::string Thing::short_text_capitalized(void)
 {
   TRACE_AND_INDENT();
-  std::string out        = tp()->text_name();
-  char       *b          = (char *) out.c_str();
-  char       *e          = b + out.size();
-  char       *c          = b;
-  bool        word_start = true;
+  std::string out;
+
+  if (is_player() || is_monst()) {
+    if (is_dead) {
+      if (is_undead()) {
+        out += "extra dead ";
+      } else {
+        out += "dead ";
+      }
+    } else if (is_dying) {
+      out += "dying ";
+    }
+  }
+
+  out += text_name();
+  if (get_follower_count()) {
+    out += " leader";
+  } else if (get_immediate_leader()) {
+    out += " soldier";
+  }
+
+  char *b          = (char *) out.c_str();
+  char *e          = b + out.size();
+  char *c          = b;
+  bool  word_start = true;
   while (c < e) {
     if (word_start) {
       if (islower(*c)) {

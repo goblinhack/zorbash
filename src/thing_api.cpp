@@ -1374,7 +1374,37 @@ int Thing::is_crushable(void)
 int Thing::aggression_level_pct(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->aggression_level_pct());
+
+  auto aggression = tp()->aggression_level_pct();
+
+  if (is_follower()) {
+    //
+    // Followers are more cockey if they have a leader
+    //
+    auto leader = get_immediate_leader();
+    if (leader) {
+      //
+      // If the leader is dead, be timid
+      //
+      if (leader->is_dead) {
+        return (aggression / 4);
+      }
+
+      //
+      // If the leader is weak, be timid
+      //
+      if (leader->get_health() < leader->get_health_initial() / 3) {
+        return (aggression / 2);
+      }
+
+      //
+      // A strong leader
+      //
+      return (aggression * 2);
+    }
+  }
+
+  return aggression;
 }
 
 int Thing::is_able_to_see_in_the_dark(void)
@@ -5998,6 +6028,18 @@ const std::string &Thing::long_text_description(void)
 {
   TRACE_AND_INDENT();
   return (tp()->long_text_description());
+}
+
+const std::string &Thing::leader_text_description(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->leader_text_description());
+}
+
+const std::string &Thing::follower_text_description(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->follower_text_description());
 }
 
 const std::string &Thing::name(void)

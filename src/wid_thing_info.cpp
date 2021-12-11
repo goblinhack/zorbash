@@ -128,6 +128,18 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
     wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
   } else {
     wid_popup_window->log(tp->long_text_description(), true);
+    if (t->get_follower_count()) {
+      if (! tp->leader_text_description().empty()) {
+        wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
+        wid_popup_window->log(tp->leader_text_description(), true);
+      }
+    }
+    if (! tp->follower_text_description().empty()) {
+      if (t->get_immediate_leader()) {
+        wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
+        wid_popup_window->log(tp->follower_text_description(), true);
+      }
+    }
     wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
   }
 
