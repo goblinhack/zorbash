@@ -331,7 +331,7 @@ PyObject *thing_set_manifestor(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_set_leader(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag10(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag11(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag12(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_follower(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_distance_leader_max(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_get_distance_minion_vision_shared(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_use_weapons(PyObject *obj, PyObject *args, PyObject *keywds);

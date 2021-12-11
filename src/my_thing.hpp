@@ -1294,7 +1294,7 @@ public:
   int unused_chance8_d1000(void);
   int unused_flag10(void);
   int unused_flag11(void);
-  int unused_flag12(void);
+  int is_follower(void);
   int distance_leader_max(void);
   int distance_minion_vision_shared(void);
   int is_able_to_use_weapons(void);

@@ -1275,10 +1275,10 @@ int Thing::unused_flag11(void)
   return (tp()->unused_flag11());
 }
 
-int Thing::unused_flag12(void)
+int Thing::is_follower(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->unused_flag12());
+  return (tp()->is_follower());
 }
 
 int Thing::distance_leader_max(void)

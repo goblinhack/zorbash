@@ -407,7 +407,7 @@ private:
   int _unused_flag1 {};
   int _unused_flag10 {};
   int _unused_flag11 {};
-  int _unused_flag12 {};
+  int _is_follower {};
   int _distance_leader_max {};
   int _unused_flag2 {};
   int _unused_flag3 {};
@@ -1043,7 +1043,7 @@ public:
   int unused_chance8_d1000(void) const { return _unused_chance8_d1000; }
   int unused_flag10(void) const { return _unused_flag10; }
   int unused_flag11(void) const { return _unused_flag11; }
-  int unused_flag12(void) const { return _unused_flag12; }
+  int is_follower(void) const { return _is_follower; }
   int unused_flag1(void) const { return _unused_flag1; }
   int unused_flag2(void) const { return _unused_flag2; }
   int unused_flag3(void) const { return _unused_flag3; }
@@ -1455,7 +1455,7 @@ public:
   void set_unused_chance8_d1000(int v) { _unused_chance8_d1000 = v; }
   void set_unused_flag10(int v) { _unused_flag10 = v; }
   void set_unused_flag11(int v) { _unused_flag11 = v; }
-  void set_unused_flag12(int v) { _unused_flag12 = v; }
+  void set_is_follower(int v) { _is_follower = v; }
   void set_distance_leader_max(int v) { _distance_leader_max = v; }
   void set_unused_flag1(int v) { _unused_flag1 = v; }
   void set_unused_flag2(int v) { _unused_flag2 = v; }
