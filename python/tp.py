@@ -145,8 +145,8 @@ class Tp:
     def set_str_str4(self, value):
         my.tp_set_str_str4(self, value)
 
-    def set_str_is_friends_with(self, value):
-        my.tp_set_str_is_friends_with(self, value)
+    def set_str_is_allied_with(self, value):
+        my.tp_set_str_is_allied_with(self, value)
 
     def set_str_projectile_name(self, value):
         my.tp_set_str_projectile_name(self, value)
@@ -391,8 +391,8 @@ class Tp:
     def set_unused_flag13(self, value):
         my.tp_set_unused_flag13(self, value)
 
-    def set_distance_minion_vision_centered_on_manifestor(self, value):
-        my.tp_set_distance_minion_vision_centered_on_manifestor(self, value)
+    def set_distance_minion_vision_shared(self, value):
+        my.tp_set_distance_minion_vision_shared(self, value)
 
     def set_is_able_to_use_weapons(self, value):
         my.tp_set_is_able_to_use_weapons(self, value)
@@ -604,8 +604,8 @@ class Tp:
     def set_is_bones(self, value):
         my.tp_set_is_bones(self, value)
 
-    def set_is_friends_with(self, value):
-        my.tp_set_is_friends_with(self, value)
+    def set_is_allied_with(self, value):
+        my.tp_set_is_allied_with(self, value)
 
     def set_is_soft_body(self, value):
         my.tp_set_is_soft_body(self, value)

@@ -277,7 +277,7 @@ do
       set_unused_flag11 \
       set_unused_flag12 \
       set_unused_flag13 \
-      set_distance_minion_vision_centered_on_manifestor \
+      set_distance_minion_vision_shared \
       set_is_able_to_use_weapons \
       set_is_bony \
       set_is_pink_blooded \

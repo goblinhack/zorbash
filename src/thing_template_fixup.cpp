@@ -9,6 +9,7 @@
 #include "my_game.hpp"
 #include "my_level.hpp"
 #include "my_random.hpp"
+#include "my_string.hpp"
 #include "my_sys.hpp"
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"
@@ -50,6 +51,21 @@ void tp_fixup(void)
       if (! tpp->is_tickable()) {
         DIE("Thing template must be set to be is_tickable [%s] for lifespan tick to work", tp.first.c_str());
       }
+    }
+  }
+}
+
+void tp_assign_allies(void)
+{
+  TRACE_AND_INDENT();
+  for (auto &tp : tp_id_map) {
+    auto allies = tp->is_allied_with();
+    for (auto ally : split_tokens(allies, ',')) {
+      auto tp2 = tp_find(ally);
+      if (! tp2) {
+        DIE("Tp %s ally not found: %s", tp->name().c_str(), ally.c_str());
+      }
+      tp->allies.insert(tp2);
     }
   }
 }

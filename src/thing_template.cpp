@@ -53,6 +53,7 @@ uint8_t tp_init(void)
 
   tp_random_init();
   tp_fixup();
+  tp_assign_allies();
 
   return true;
 }

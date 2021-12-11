@@ -591,8 +591,8 @@ LEVEL_BODY_GET_BOOL_AT(level_unused_flag10_at, unused_flag10)
 LEVEL_BODY_GET_BOOL_AT(level_unused_flag11_at, unused_flag11)
 LEVEL_BODY_GET_BOOL_AT(level_unused_flag12_at, unused_flag12)
 LEVEL_BODY_GET_BOOL_AT(level_unused_flag13_at, unused_flag13)
-LEVEL_BODY_GET_BOOL_AT(level_distance_minion_vision_centered_on_manifestor_at,
-                       distance_minion_vision_centered_on_manifestor)
+LEVEL_BODY_GET_BOOL_AT(level_distance_minion_vision_shared_at,
+                       distance_minion_vision_shared)
 LEVEL_BODY_GET_BOOL_AT(level_is_able_to_use_weapons_at, is_able_to_use_weapons)
 LEVEL_BODY_GET_BOOL_AT(level_is_bony_at, is_bony)
 LEVEL_BODY_GET_BOOL_AT(level_is_pink_blooded_at, is_pink_blooded)

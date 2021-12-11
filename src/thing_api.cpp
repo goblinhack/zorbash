@@ -1287,10 +1287,10 @@ int Thing::unused_flag13(void)
   return (tp()->unused_flag13());
 }
 
-int Thing::distance_minion_vision_centered_on_manifestor(void)
+int Thing::distance_minion_vision_shared(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->distance_minion_vision_centered_on_manifestor());
+  return (tp()->distance_minion_vision_shared());
 }
 
 int Thing::is_able_to_use_weapons(void)
@@ -6306,10 +6306,10 @@ const std::string &Thing::str4(void)
   return (tp()->str4());
 }
 
-const std::string &Thing::is_friends_with(void)
+const std::string &Thing::is_allied_with(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->is_friends_with());
+  return (tp()->is_allied_with());
 }
 
 const std::string &Thing::text_description(void)

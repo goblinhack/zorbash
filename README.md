@@ -4,6 +4,7 @@
 <!--                                                                                                                                              -->
 <!-- Next todo                                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
+<!-- - friends                                                                                                -->
 <!-- - lightning damage                                                                                       -->
 <!-- - fire damage                                                                                       -->
 <!-- - energy damage                                                                                       -->

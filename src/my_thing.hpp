@@ -608,7 +608,7 @@ public:
   const std::string &str1(void);
   const std::string &str2(void);
   const std::string &str4(void);
-  const std::string &is_friends_with(void);
+  const std::string &is_allied_with(void);
   const std::string &text_buff(void);
   const std::string &text_debuff(void);
   const std::string &text_description(void);
@@ -1276,7 +1276,7 @@ public:
   int unused_flag11(void);
   int unused_flag12(void);
   int unused_flag13(void);
-  int distance_minion_vision_centered_on_manifestor(void);
+  int distance_minion_vision_shared(void);
   int is_able_to_use_weapons(void);
   int is_bony(void);
   int is_pink_blooded(void);
