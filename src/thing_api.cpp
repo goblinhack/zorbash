@@ -1275,10 +1275,10 @@ int Thing::unused_flag11(void)
   return (tp()->unused_flag11());
 }
 
-int Thing::is_follower(void)
+int Thing::is_able_to_follow(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->is_follower());
+  return (tp()->is_able_to_follow());
 }
 
 int Thing::distance_leader_max(void)
@@ -1377,7 +1377,7 @@ int Thing::aggression_level_pct(void)
 
   auto aggression = tp()->aggression_level_pct();
 
-  if (is_follower()) {
+  if (is_able_to_follow()) {
     //
     // Followers are more cockey if they have a leader
     //

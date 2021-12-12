@@ -658,7 +658,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag11() && (what == "unused_flag11")) {
     return true;
   }
-  if (is_follower() && (what == "is_follower")) {
+  if (is_able_to_follow() && (what == "is_able_to_follow")) {
     return true;
   }
   if (distance_leader_max() && (what == "distance_leader_max")) {
@@ -1370,8 +1370,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag11") {
     return &Thing::unused_flag11;
   }
-  if (what == "is_follower") {
-    return &Thing::is_follower;
+  if (what == "is_able_to_follow") {
+    return &Thing::is_able_to_follow;
   }
   if (what == "distance_leader_max") {
     return &Thing::distance_leader_max;

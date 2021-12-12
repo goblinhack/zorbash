@@ -246,7 +246,7 @@ int Thing::get_danger_current_level(void)
   //
   // Leaders are stronger with more followers
   //
-  if (is_follower()) {
+  if (is_able_to_follow()) {
     if (get_follower_count()) {
       danger_level *= get_follower_count();
     }

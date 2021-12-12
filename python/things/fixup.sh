@@ -275,7 +275,7 @@ do
       set_unused_flag1 \
       set_unused_flag10 \
       set_unused_flag11 \
-      set_is_follower \
+      set_is_able_to_follow \
       set_distance_leader_max \
       set_distance_minion_vision_shared \
       set_is_able_to_use_weapons \

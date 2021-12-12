@@ -83,7 +83,7 @@ def tp_init(name, text_name):
     mytp.set_is_described_when_hovering_over(True)
     mytp.set_is_green_blooded(True)
     mytp.set_is_hittable(True)
-    mytp.set_is_follower(True)
+    mytp.set_is_able_to_follow(True)
     mytp.set_is_humanoid(True)
     mytp.set_is_intelligent(True)
     mytp.set_is_item_carrier(True)

@@ -218,7 +218,7 @@ void Thing::leader_tick(void)
 {
   TRACE_AND_INDENT();
 
-  if (! is_follower()) {
+  if (! is_able_to_follow()) {
     return;
   }
 
@@ -235,7 +235,7 @@ void Thing::leader_tick(void)
 
   FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL(level, t)
   {
-    if (! t->is_follower()) {
+    if (! t->is_able_to_follow()) {
       continue;
     }
 

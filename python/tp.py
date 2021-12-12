@@ -391,8 +391,8 @@ class Tp:
     def set_unused_flag11(self, value):
         my.tp_set_unused_flag11(self, value)
 
-    def set_is_follower(self, value):
-        my.tp_set_is_follower(self, value)
+    def set_is_able_to_follow(self, value):
+        my.tp_set_is_able_to_follow(self, value)
 
     def set_distance_leader_max(self, value):
         my.tp_set_distance_leader_max(self, value)
