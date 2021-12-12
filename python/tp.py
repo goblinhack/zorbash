@@ -160,11 +160,11 @@ class Tp:
     def set_long_text_description(self, value):
         my.tp_set_long_text_description(self, value)
 
-    def set_leader_text_description(self, value):
-        my.tp_set_leader_text_description(self, value)
+    def set_text_unused1(self, value):
+        my.tp_set_text_unused1(self, value)
 
-    def set_follower_text_description(self, value):
-        my.tp_set_follower_text_description(self, value)
+    def set_text_unused2(self, value):
+        my.tp_set_text_unused2(self, value)
 
     def set_text_description(self, value):
         my.tp_set_text_description(self, value)
@@ -193,8 +193,20 @@ class Tp:
     def set_on_owner_unset_do(self, value):
         my.tp_set_on_owner_unset_do(self, value)
 
+    def set_on_leader_set_do(self, value):
+        my.tp_set_on_leader_set_do(self, value)
+
+    def set_on_leader_unset_do(self, value):
+        my.tp_set_on_leader_unset_do(self, value)
+
     def set_on_owner_damage_poison_do(self, value):
         my.tp_set_on_owner_damage_poison_do(self, value)
+
+    def set_on_follower_set_do(self, value):
+        my.tp_set_on_follower_set_do(self, value)
+
+    def set_on_follower_unset_do(self, value):
+        my.tp_set_on_follower_unset_do(self, value)
 
     def set_on_owner_damage_future1_do(self, value):
         my.tp_set_on_owner_damage_future1_do(self, value)

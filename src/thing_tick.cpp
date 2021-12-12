@@ -138,11 +138,6 @@ void Thing::achieve_goals_in_life(void)
   }
 
   //
-  // Assign a leader if applicable
-  //
-  leader_tick();
-
-  //
   // Check for impacts
   //
   if (collision_check_do()) {

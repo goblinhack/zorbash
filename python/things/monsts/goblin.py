@@ -99,8 +99,6 @@ def tp_init(name, text_name):
     mytp.set_is_tickable(True)
     mytp.set_is_weapon_equiper(True)
     mytp.set_long_text_description("Goblins are small, green skinned beings that lair in caves, abandoned mines, despoiled dungeons and other dismal settings, otherwise known as their homes. They spend their time defending their natural habitat from invading marauders like you. However, they usually carry some meagre amounts of gold, dug out from the depths with their bare, shaking hands. Best to find out...")
-    mytp.set_leader_text_description("This goblin is battle hardened and wont take any of your cheek! Gets one damage ponus per soldier.")
-    mytp.set_follower_text_description("This goblin is a die hard supporter of its brutal leader! Gets one damage bonus.")
     mytp.set_monst_size(my.MONST_SIZE_NORMAL)
     mytp.set_normal_placement_rules(True)
     mytp.set_on_death_do("goblin.on_death()")

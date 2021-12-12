@@ -2,6 +2,22 @@ import my
 import tp
 
 
+def on_leader_set(me, x, y):
+    my.topcon("I am a leader {}".format(my.thing_get_name(me)))
+
+
+def on_leader_unset(me, x, y):
+    my.topcon("I am no longer a leader {}".format(my.thing_get_name(me)))
+
+
+def on_follower_set(me, leader, x, y):
+    my.topcon("I {} am a follower of leader {}".format(my.thing_get_name(me), my.thing_get_name(leader)))
+
+
+def on_follower_unset(me, leader, x, y):
+    my.topcon("I {} am no longer a follower of leader {}".format(my.thing_get_name(me), my.thing_get_name(leader)))
+
+
 def explode(me, x, y):
     my.thing_msg(me, "The oil filled barrel explodes. Health and safety have been alerted.")
     my.level_spawn_at_thing(me, "explosion_major")
@@ -49,6 +65,10 @@ def tp_init(name, text_name):
     mytp.set_is_tickable(True)  # So it can interact with fire
     mytp.set_is_very_combustible(True)
     mytp.set_normal_placement_rules(True)
+    mytp.set_on_leader_set_do("goblin.on_leader_set()")
+    mytp.set_on_leader_unset_do("goblin.on_leader_unset()")
+    mytp.set_on_follower_set_do("goblin.on_follower_set()")
+    mytp.set_on_follower_unset_do("goblin.on_follower_unset()")
     mytp.set_on_death_do("barrel.on_death()")
     mytp.set_on_fall_do("barrel.on_fall()")
     mytp.set_on_you_are_on_fire_do("barrel.on_fire()")

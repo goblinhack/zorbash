@@ -9,10 +9,75 @@
 #include "my_game.hpp"
 #include "my_level.hpp"
 #include "my_ptrcheck.hpp"
+#include "my_python.hpp"
 #include "my_sprintf.hpp"
+#include "my_string.hpp"
 #include "my_sys.hpp"
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"
+
+void Thing::on_leader_set(void)
+{
+  auto on_leader_set = on_leader_set_do();
+  if (std::empty(on_leader_set)) {
+    return;
+  }
+
+  auto t = split_tokens(on_leader_set, '.');
+  if (t.size() == 2) {
+    auto        mod   = t[ 0 ];
+    auto        fn    = t[ 1 ];
+    std::size_t found = fn.find("()");
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
+
+    dbg("Call %s.%s(%ss)", mod.c_str(), fn.c_str(), to_string().c_str());
+
+    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) mid_at.x, (unsigned int) mid_at.y);
+  } else {
+    ERR("Bad on_leader_set call [%s] expected mod:function, got %d elems", on_leader_set.c_str(),
+        (int) on_leader_set.size());
+  }
+}
+
+void Thing::on_leader_unset(void)
+{
+  auto on_leader_unset = on_leader_unset_do();
+  if (std::empty(on_leader_unset)) {
+    return;
+  }
+
+  //
+  // Don't call this on death of the leader to avoid spurious post RIP messages
+  //
+  if (level->is_being_destroyed) {
+    dbg("Do not call unset, level being destroyed");
+    return;
+  }
+
+  if (is_dying || is_dying) {
+    dbg("Do not call unset, leader is dying");
+    return;
+  }
+
+  auto t = split_tokens(on_leader_unset, '.');
+  if (t.size() == 2) {
+    auto        mod   = t[ 0 ];
+    auto        fn    = t[ 1 ];
+    std::size_t found = fn.find("()");
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
+
+    dbg("Call %s.%s(%s)", mod.c_str(), fn.c_str(), to_string().c_str());
+
+    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) mid_at.x, (unsigned int) mid_at.y);
+  } else {
+    ERR("Bad on_leader_unset call [%s] expected mod:function, got %d elems", on_leader_unset.c_str(),
+        (int) on_leader_unset.size());
+  }
+}
 
 float Thing::get_distance_from_leader(void)
 {
@@ -133,12 +198,17 @@ void Thing::set_leader(Thingp leader)
   if (leader) {
     set_leader_id(leader->id);
     leader->incr_follower_count();
+    if (leader->get_follower_count() == 1) {
+      leader->on_leader_set();
+    }
   } else {
     set_leader_id(NoThingId);
     if (old_leader) {
       old_leader->decr_follower_count();
     }
   }
+
+  on_follower_set(leader);
 }
 
 void Thing::remove_leader(void)
@@ -151,9 +221,13 @@ void Thing::remove_leader(void)
   }
 
   dbg("Remove leader owner %s", old_leader->to_string().c_str());
+  on_follower_unset(old_leader);
 
   set_leader_id(NoThingId);
   old_leader->decr_follower_count();
+  if (old_leader->get_follower_count() == 0) {
+    old_leader->on_leader_unset();
+  }
 }
 
 //
@@ -251,8 +325,6 @@ void Thing::leader_tick(void)
       continue;
     }
 
-    t->con("leader cand");
-
     if (allies.find(t->tp()) == allies.end()) {
       continue;
     }
@@ -271,7 +343,6 @@ void Thing::leader_tick(void)
   if (! leader) {
     return;
   }
-  leader->con("leader ");
 
   if (leader == this) {
     return;

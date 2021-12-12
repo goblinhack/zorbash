@@ -557,8 +557,8 @@ public:
   const std::string &laser_name(void);
   const std::string &light_color(void);
   const std::string &long_text_description(void);
-  const std::string &leader_text_description(void);
-  const std::string &follower_text_description(void);
+  const std::string &text_unused1(void);
+  const std::string &text_unused2(void);
   const std::string &name(void);
   const std::string &on_birth_do(void);
   const std::string &on_you_bite_attack_do(void);
@@ -581,6 +581,10 @@ public:
   const std::string &on_unequip_do(void);
   const std::string &on_owner_set_do(void);
   const std::string &on_owner_unset_do(void);
+  const std::string &on_follower_set_do(void);
+  const std::string &on_follower_unset_do(void);
+  const std::string &on_leader_set_do(void);
+  const std::string &on_leader_unset_do(void);
   const std::string &on_owner_damage_poison_do(void);
   const std::string &on_owner_damage_future1_do(void);
   const std::string &on_owner_damage_future2_do(void);
@@ -1627,6 +1631,10 @@ public:
   void on_open(void);
   void on_owner_set(Thingp owner);
   void on_owner_unset(Thingp owner);
+  void on_leader_set(void);
+  void on_leader_unset(void);
+  void on_follower_set(Thingp leader);
+  void on_follower_unset(Thingp leader);
   void on_unequip(Thingp what);
   void on_use(Thingp what);
   void on_use(Thingp what, Thingp target);

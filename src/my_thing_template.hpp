@@ -443,8 +443,8 @@ private:
   std::string _lifespan_dice_str;
   std::string _light_color;
   std::string _long_text_description;
-  std::string _leader_text_description;
-  std::string _follower_text_description;
+  std::string _text_unused1;
+  std::string _text_unused2;
   std::string _name;
   std::string _nutrition_dice_str;
   std::string _on_birth_do;
@@ -493,6 +493,10 @@ private:
   std::string _on_owner_damage_strength_do;
   std::string _on_owner_set_do;
   std::string _on_owner_unset_do;
+  std::string _on_follower_set_do;
+  std::string _on_follower_unset_do;
+  std::string _on_leader_set_do;
+  std::string _on_leader_unset_do;
   std::string _on_tick_do;
   std::string _on_unequip_do;
   std::string _on_use_do;
@@ -650,8 +654,8 @@ public:
   const std::string &laser_name(void) const { return _laser_name; }
   const std::string &light_color(void) const { return _light_color; }
   const std::string &long_text_description(void) const { return _long_text_description; }
-  const std::string &leader_text_description(void) const { return _leader_text_description; }
-  const std::string &follower_text_description(void) const { return _follower_text_description; }
+  const std::string &text_unused1(void) const { return _text_unused1; }
+  const std::string &text_unused2(void) const { return _text_unused2; }
   const std::string &name(void) const { return _name; }
   const std::string &on_birth_do(void) const { return _on_birth_do; }
   const std::string &on_born_do(void) const { return _on_born_do; }
@@ -698,6 +702,10 @@ public:
   const std::string &on_owner_damage_strength_do(void) const { return _on_owner_damage_strength_do; }
   const std::string &on_owner_set_do(void) const { return _on_owner_set_do; }
   const std::string &on_owner_unset_do(void) const { return _on_owner_unset_do; }
+  const std::string &on_follower_set_do(void) const { return _on_follower_set_do; }
+  const std::string &on_follower_unset_do(void) const { return _on_follower_unset_do; }
+  const std::string &on_leader_set_do(void) const { return _on_leader_set_do; }
+  const std::string &on_leader_unset_do(void) const { return _on_leader_unset_do; }
   const std::string &on_tick_do(void) const { return _on_tick_do; }
   const std::string &on_unequip_do(void) const { return _on_unequip_do; }
   const std::string &on_use_do(void) const { return _on_use_do; }
@@ -1354,8 +1362,8 @@ public:
   void set_light_color(const std::string &v) { _light_color = v; }
   void set_light_strength(int v) { _light_strength = v; }
   void set_long_text_description(const std::string &v) { _long_text_description = v; }
-  void set_leader_text_description(const std::string &v) { _leader_text_description = v; }
-  void set_follower_text_description(const std::string &v) { _follower_text_description = v; }
+  void set_text_unused1(const std::string &v) { _text_unused1 = v; }
+  void set_text_unused2(const std::string &v) { _text_unused2 = v; }
   void set_minion_limit(int v) { _minion_limit = v; }
   void set_monst_size(int v) { _monst_size = v; }
   void set_name(const std::string &v) { _name = v; }
@@ -1407,6 +1415,10 @@ public:
   void set_on_owner_damage_strength_do(const std::string &v) { _on_owner_damage_strength_do = v; }
   void set_on_owner_set_do(const std::string &v) { _on_owner_set_do = v; }
   void set_on_owner_unset_do(const std::string &v) { _on_owner_unset_do = v; }
+  void set_on_leader_set_do(const std::string &v) { _on_leader_set_do = v; }
+  void set_on_leader_unset_do(const std::string &v) { _on_leader_unset_do = v; }
+  void set_on_follower_set_do(const std::string &v) { _on_follower_set_do = v; }
+  void set_on_follower_unset_do(const std::string &v) { _on_follower_unset_do = v; }
   void set_on_tick_do(const std::string &v) { _on_tick_do = v; }
   void set_on_unequip_do(const std::string &v) { _on_unequip_do = v; }
   void set_on_use_do(const std::string &v) { _on_use_do = v; }

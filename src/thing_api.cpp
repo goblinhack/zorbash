@@ -6030,16 +6030,16 @@ const std::string &Thing::long_text_description(void)
   return (tp()->long_text_description());
 }
 
-const std::string &Thing::leader_text_description(void)
+const std::string &Thing::text_unused1(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->leader_text_description());
+  return (tp()->text_unused1());
 }
 
-const std::string &Thing::follower_text_description(void)
+const std::string &Thing::text_unused2(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->follower_text_description());
+  return (tp()->text_unused2());
 }
 
 const std::string &Thing::name(void)
@@ -6172,6 +6172,30 @@ const std::string &Thing::on_owner_unset_do(void)
 {
   TRACE_AND_INDENT();
   return (tp()->on_owner_unset_do());
+}
+
+const std::string &Thing::on_follower_set_do(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->on_follower_set_do());
+}
+
+const std::string &Thing::on_follower_unset_do(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->on_follower_unset_do());
+}
+
+const std::string &Thing::on_leader_set_do(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->on_leader_set_do());
+}
+
+const std::string &Thing::on_leader_unset_do(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->on_leader_unset_do());
 }
 
 const std::string &Thing::on_owner_damage_poison_do(void)
