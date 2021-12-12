@@ -2,6 +2,22 @@ import my
 import tp
 
 
+def on_leader_set(me, x, y):
+    my.topcon("I am a leader {}".format(my.thing_get_name(me)))
+
+
+def on_leader_unset(me, x, y):
+    my.topcon("I am no longer a leader {}".format(my.thing_get_name(me)))
+
+
+def on_follower_set(me, leader, x, y):
+    my.topcon("I {} am a follower of leader {}".format(my.thing_get_name(me), my.thing_get_name(leader)))
+
+
+def on_follower_unset(me, leader, x, y):
+    my.topcon("I {} am no longer a follower of leader {}".format(my.thing_get_name(me), my.thing_get_name(leader)))
+
+
 def on_you_bite_attack(me, x, y):
     sound = f"growl{my.non_pcg_randint(1, 10)}"
     if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound):
@@ -101,6 +117,10 @@ def tp_init(name, text_name):
     mytp.set_long_text_description("Goblins are small, green skinned beings that lair in caves, abandoned mines, despoiled dungeons and other dismal settings, otherwise known as their homes. They spend their time defending their natural habitat from invading marauders like you. However, they usually carry some meagre amounts of gold, dug out from the depths with their bare, shaking hands. Best to find out...")
     mytp.set_monst_size(my.MONST_SIZE_NORMAL)
     mytp.set_normal_placement_rules(True)
+    mytp.set_on_leader_set_do("goblin.on_leader_set()")
+    mytp.set_on_leader_unset_do("goblin.on_leader_unset()")
+    mytp.set_on_follower_set_do("goblin.on_follower_set()")
+    mytp.set_on_follower_unset_do("goblin.on_follower_unset()")
     mytp.set_on_death_do("goblin.on_death()")
     mytp.set_on_death_drop_all_items(True)
     mytp.set_on_you_are_hit_but_still_alive_do("goblin.on_you_are_hit_but_still_alive()")

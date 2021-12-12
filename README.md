@@ -4,8 +4,8 @@
 <!--                                                                                                                                              -->
 <!-- Next todo                                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
+<!-- - leader unset callback                                                                                  -->
 <!-- - minion still trying to move through manifestor                                                         -->
-<!-- - assign allies                                                                                          -->
 <!-- - lightning damage                                                                                       -->
 <!-- - fire damage                                                                                       -->
 <!-- - energy damage                                                                                       -->
