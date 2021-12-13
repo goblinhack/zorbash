@@ -98,6 +98,7 @@ PyObject *thing_debuff_add(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_debuff_remove(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_killed_by(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_kill(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_polymorph(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_enchant_level(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_enchant_max(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_environ_avoids_acid(PyObject *obj, PyObject *args, PyObject *keywds);

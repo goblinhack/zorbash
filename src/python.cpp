@@ -2190,6 +2190,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_FUNCTION(thing_decr_stamina),
     MY_ADD_PYTHON_FUNCTION(thing_decr_stamina_max),
     MY_ADD_PYTHON_FUNCTION(thing_kill),
+    MY_ADD_PYTHON_FUNCTION(thing_polymorph),
     MY_ADD_PYTHON_FUNCTION(thing_killed_by),
     MY_ADD_PYTHON_FUNCTION(thing_enchant_level),
     MY_ADD_PYTHON_FUNCTION(thing_enchant_max),

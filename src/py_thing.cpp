@@ -372,24 +372,24 @@ PyObject *thing_fire_at(PyObject *obj, PyObject *args, PyObject *keywds)
 PyObject *thing_killed_by(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
-  uint32_t     owner_id    = 0;
-  char        *reason      = nullptr;
-  uint32_t     defeater_id = 0;
-  static char *kwlist[]    = {(char *) "owner", (char *) "reason", (char *) "defeater", 0};
+  uint32_t     me_id     = 0;
+  char        *reason    = nullptr;
+  uint32_t     killer_id = 0;
+  static char *kwlist[]  = {(char *) "me", (char *) "reason", (char *) "defeater", 0};
 
-  if (! PyArg_ParseTupleAndKeywords(args, keywds, "IsI", kwlist, &owner_id, &reason, &defeater_id)) {
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "IsI", kwlist, &me_id, &reason, &killer_id)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);
     Py_RETURN_NONE;
   }
 
-  if (! owner_id) {
-    ERR("%s: No owner thing ID set", __FUNCTION__);
+  if (! me_id) {
+    ERR("%s: No me thing ID set", __FUNCTION__);
     Py_RETURN_NONE;
   }
 
-  Thingp owner = game->thing_find(owner_id);
-  if (! owner) {
-    ERR("%s: Cannot find owner thing ID %u", __FUNCTION__, owner_id);
+  Thingp me = game->thing_find(me_id);
+  if (! me) {
+    ERR("%s: Cannot find me thing ID %u", __FUNCTION__, me_id);
     Py_RETURN_NONE;
   }
 
@@ -398,19 +398,19 @@ PyObject *thing_killed_by(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_NONE;
   }
 
-  if (! defeater_id) {
+  if (! killer_id) {
     ERR("%s: No defeater thing ID set", __FUNCTION__);
     Py_RETURN_NONE;
   }
 
-  Thingp defeater = game->thing_find(defeater_id);
+  Thingp defeater = game->thing_find(killer_id);
   if (! defeater) {
-    ERR("%s: Cannot find defeater thing ID %u", __FUNCTION__, defeater_id);
+    ERR("%s: Cannot find defeater thing ID %u", __FUNCTION__, killer_id);
     Py_RETURN_NONE;
   }
 
-  owner->log("Killed by %s, reason %s", defeater->to_string().c_str(), reason);
-  owner->dead(defeater, "%s", reason);
+  me->log("Killed by %s, reason %s", defeater->to_string().c_str(), reason);
+  me->dead(defeater, "%s", reason);
 
   Py_RETURN_NONE;
 }
@@ -418,23 +418,23 @@ PyObject *thing_killed_by(PyObject *obj, PyObject *args, PyObject *keywds)
 PyObject *thing_kill(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
-  uint32_t     owner_id = 0;
+  uint32_t     me_id    = 0;
   char        *reason   = nullptr;
-  static char *kwlist[] = {(char *) "owner", (char *) "reason", 0};
+  static char *kwlist[] = {(char *) "me", (char *) "reason", 0};
 
-  if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &owner_id, &reason)) {
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &me_id, &reason)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);
     Py_RETURN_NONE;
   }
 
-  if (! owner_id) {
-    ERR("%s: No owner thing ID set", __FUNCTION__);
+  if (! me_id) {
+    ERR("%s: No me thing ID set", __FUNCTION__);
     Py_RETURN_NONE;
   }
 
-  Thingp owner = game->thing_find(owner_id);
-  if (! owner) {
-    ERR("%s: Cannot find owner thing ID %u", __FUNCTION__, owner_id);
+  Thingp me = game->thing_find(me_id);
+  if (! me) {
+    ERR("%s: Cannot find me thing ID %u", __FUNCTION__, me_id);
     Py_RETURN_NONE;
   }
 
@@ -443,8 +443,41 @@ PyObject *thing_kill(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_NONE;
   }
 
-  owner->log("Defeated: Reason %s", reason);
-  owner->dead("%s", reason);
+  me->log("Defeated: reason %s", reason);
+  me->dead("%s", reason);
+  Py_RETURN_NONE;
+}
+
+PyObject *thing_polymorph(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_AND_INDENT();
+  uint32_t     me_id    = 0;
+  char        *into     = nullptr;
+  static char *kwlist[] = {(char *) "me", (char *) "into", 0};
+
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &me_id, &into)) {
+    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  if (! me_id) {
+    ERR("%s: No me thing ID set", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  Thingp me = game->thing_find(me_id);
+  if (! me) {
+    ERR("%s: Cannot find me thing ID %u", __FUNCTION__, me_id);
+    Py_RETURN_NONE;
+  }
+
+  auto tp = tp_find(into);
+  if (unlikely(! tp)) {
+    ERR("%s: No polymorph into %s found", __FUNCTION__, into);
+    Py_RETURN_NONE;
+  }
+
+  me->polymorph(tp);
   Py_RETURN_NONE;
 }
 
