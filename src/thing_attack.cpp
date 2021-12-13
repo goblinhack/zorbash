@@ -39,15 +39,29 @@ bool Thing::possible_to_attack(const Thingp victim)
     return false;
   }
 
+  auto my_spawned_owner  = get_top_spawned_owner();
+  auto its_spawned_owner = victim->get_top_spawned_owner();
+  if (my_spawned_owner && (my_spawned_owner == its_spawned_owner)) {
+    return false;
+  }
+
+  //
+  // Don't kill your leader or fellow followers
+  //
   auto my_leader  = get_top_leader();
   auto its_leader = victim->get_top_leader();
   if (my_leader && (my_leader == its_leader)) {
     return false;
   }
 
-  auto my_spawned_owner  = get_top_spawned_owner();
-  auto its_spawned_owner = victim->get_top_spawned_owner();
-  if (my_spawned_owner && (my_spawned_owner == its_spawned_owner)) {
+  //
+  // Don't kill your own followers; it's bad show.
+  //
+  if (my_leader && (my_leader == victim)) {
+    return false;
+  }
+
+  if (its_leader && (its_leader == this)) {
     return false;
   }
 

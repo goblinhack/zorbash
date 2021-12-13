@@ -61,7 +61,7 @@ def tp_init(name, text_name):
     mytp.set_damage_melee_chance_d1000(900)
     mytp.set_damage_melee_dice("1d4")
     mytp.set_distance_avoid(5)
-    mytp.set_distance_leader_max(10)
+    mytp.set_distance_leader_max(4)
     mytp.set_distance_jump(2)
     mytp.set_distance_vision(7)
     mytp.set_environ_avoids_acid(True)
