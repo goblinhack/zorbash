@@ -2805,7 +2805,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_TP_FUNCTION(name),
     MY_ADD_PYTHON_TP_FUNCTION(normal_placement_rules),
     MY_ADD_PYTHON_TP_FUNCTION(nutrition_dice),
-    MY_ADD_PYTHON_TP_FUNCTION(on_birth_do),
+    MY_ADD_PYTHON_TP_FUNCTION(on_polymorphed_do),
     MY_ADD_PYTHON_TP_FUNCTION(on_born_do),
     MY_ADD_PYTHON_TP_FUNCTION(on_death_do),
     MY_ADD_PYTHON_TP_FUNCTION(on_death_drop_all_items),

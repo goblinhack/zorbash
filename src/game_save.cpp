@@ -304,6 +304,8 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   shift++;
   bits64 |= (my.t->is_the_grid ? 1LLU : 0LLU) << shift;
   shift++;
+  bits64 |= (my.t->is_the_player ? 1LLU : 0LLU) << shift;
+  shift++;
   bits64 |= (my.t->is_waiting_to_ascend_dungeon ? 1LLU : 0LLU) << shift;
   shift++;
   bits64 |= (my.t->is_waiting_to_ascend_sewer ? 1LLU : 0LLU) << shift;

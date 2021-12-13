@@ -1206,7 +1206,7 @@ int Thing::is_openable(void)
 int Thing::is_player(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->is_player());
+  return (is_the_player);
 }
 
 int Thing::is_poisonous_danger_level(void)
@@ -6048,10 +6048,10 @@ const std::string &Thing::name(void)
   return (tp()->name());
 }
 
-const std::string &Thing::on_birth_do(void)
+const std::string &Thing::on_polymorphed_do(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->on_birth_do());
+  return (tp()->on_polymorphed_do());
 }
 
 const std::string &Thing::on_you_bite_attack_do(void)

@@ -365,6 +365,8 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
   shift++;
   my.t->is_the_grid = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU;
   shift++;
+  my.t->is_the_player = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU;
+  shift++;
   my.t->is_waiting_to_ascend_dungeon = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU;
   shift++;
   my.t->is_waiting_to_ascend_sewer = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU;

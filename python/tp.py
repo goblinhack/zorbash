@@ -175,6 +175,9 @@ class Tp:
     def set_on_birth_do(self, value):
         my.tp_set_on_birth_do(self, value)
 
+    def set_on_polymorphed_do(self, value):
+        my.tp_set_on_polymorphed_do(self, value)
+
     def set_on_use_do(self, value):
         my.tp_set_on_use_do(self, value)
 

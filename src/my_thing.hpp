@@ -121,6 +121,7 @@ public:
   uint64_t is_sleeping                                  : 1 {};
   uint64_t is_starving                                  : 1 {};
   uint64_t is_the_grid                                  : 1 {}; // is the backbone of the level
+  uint64_t is_the_player                                : 1 {};
   uint64_t is_waiting_to_ascend_dungeon                 : 1 {};
   uint64_t is_waiting_to_ascend_sewer                   : 1 {};
   uint64_t is_waiting_to_descend_dungeon                : 1 {};
@@ -560,7 +561,7 @@ public:
   const std::string &text_unused1(void);
   const std::string &text_unused2(void);
   const std::string &name(void);
-  const std::string &on_birth_do(void);
+  const std::string &on_polymorphed_do(void);
   const std::string &on_you_bite_attack_do(void);
   const std::string &on_born_do(void);
   const std::string &on_death_do(void);
@@ -1614,12 +1615,15 @@ public:
   void move_to(point to);
   void msg(const std::string &);
   void necrosis_tick(void);
+  void polymorph(Tpp);
+  void update(void);
   void new_aip(void);
   void new_infop(void);
   void new_itemp(void);
   void new_light(point offset, int strength);
   void new_light(point offset, int strength, color col, int fbo);
   void on_born(void);
+  void on_polymorphed(void);
   void on_enchant(void);
   void on_equip(Thingp what);
   void on_fall(void);

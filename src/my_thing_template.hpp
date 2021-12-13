@@ -447,7 +447,7 @@ private:
   std::string _text_unused2;
   std::string _name;
   std::string _nutrition_dice_str;
-  std::string _on_birth_do;
+  std::string _on_polymorphed_do;
   std::string _on_born_do;
   std::string _on_damage_acid_do;
   std::string _on_damage_bite_do;
@@ -657,7 +657,7 @@ public:
   const std::string &text_unused1(void) const { return _text_unused1; }
   const std::string &text_unused2(void) const { return _text_unused2; }
   const std::string &name(void) const { return _name; }
-  const std::string &on_birth_do(void) const { return _on_birth_do; }
+  const std::string &on_polymorphed_do(void) const { return _on_polymorphed_do; }
   const std::string &on_born_do(void) const { return _on_born_do; }
   const std::string &on_damage_acid_do(void) const { return _on_damage_acid_do; }
   const std::string &on_damage_bite_do(void) const { return _on_damage_bite_do; }
@@ -1368,7 +1368,7 @@ public:
   void set_monst_size(int v) { _monst_size = v; }
   void set_name(const std::string &v) { _name = v; }
   void set_normal_placement_rules(int v) { _normal_placement_rules = v; }
-  void set_on_birth_do(const std::string &v) { _on_birth_do = v; }
+  void set_on_polymorphed_do(const std::string &v) { _on_polymorphed_do = v; }
   void set_on_born_do(const std::string &v) { _on_born_do = v; }
   void set_on_damage_acid_do(const std::string &v) { _on_damage_acid_do = v; }
   void set_on_damage_bite_do(const std::string &v) { _on_damage_bite_do = v; }
