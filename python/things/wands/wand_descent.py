@@ -17,7 +17,7 @@ def explode(me, x, y):
     my.thing_msg(me, "The wand of descent explodes. The earth tremors.")
     my.level_spawn_at_thing(me, "explosion_major")
     my.level_spawn_using_items_radius_range(me, me, me, "explosion_destroy_floor")
-    my.thing_defeated(me, "exploded")
+    my.thing_kill(me, "exploded")
 
 
 def on_final_use(owner, item, target, x, y):

@@ -7,7 +7,7 @@ def explode(me, x, y):
     my.level_spawn_at_thing(me, "explosion_major")
     my.level_spawn_fire_around_thing(me, "fire")
     my.level_spawn_at_thing(me, "fire")
-    my.thing_defeated(me, "exploded")
+    my.thing_kill(me, "exploded")
 
 
 def on_fire(me, x, y):

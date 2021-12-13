@@ -369,7 +369,7 @@ PyObject *thing_fire_at(PyObject *obj, PyObject *args, PyObject *keywds)
   }
 }
 
-PyObject *thing_defeated_by(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *thing_killed_by(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
   uint32_t     owner_id    = 0;
@@ -415,7 +415,7 @@ PyObject *thing_defeated_by(PyObject *obj, PyObject *args, PyObject *keywds)
   Py_RETURN_NONE;
 }
 
-PyObject *thing_defeated(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *thing_kill(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
   uint32_t     owner_id = 0;

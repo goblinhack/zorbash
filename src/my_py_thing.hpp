@@ -96,8 +96,8 @@ PyObject *thing_damage_acid_chance_d1000(PyObject *obj, PyObject *args, PyObject
 PyObject *thing_damage_digest_chance_d1000(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_debuff_add(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_debuff_remove(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_defeated_by(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_defeated(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_killed_by(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_kill(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_enchant_level(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_enchant_max(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_environ_avoids_acid(PyObject *obj, PyObject *args, PyObject *keywds);
