@@ -43,7 +43,7 @@ def on_death(me, x, y):
 
 def tp_init(name, text_name):
     mytp = tp.Tp(name, text_name)
-    mytp.set_aggression_level_pct(15)
+    mytp.set_aggression_level_pct(75)
     mytp.set_ai_detect_secret_doors(True)
     mytp.set_ai_resent_count(20)
     mytp.set_ai_shove_chance_d1000(500)
@@ -71,6 +71,7 @@ def tp_init(name, text_name):
     mytp.set_gfx_animated(True)
     mytp.set_gfx_anim_use("attack_claws")
     mytp.set_gfx_bounce_on_move(True)
+    mytp.set_is_debug_type(True)
     mytp.set_gfx_health_bar_shown(True)
     mytp.set_gfx_short_shadow_caster(True)
     mytp.set_gfx_show_outlined(True)

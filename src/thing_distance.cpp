@@ -27,7 +27,7 @@ point Thing::get_random_target(void)
     d = (int) get_distance_manifestor_max();
   }
 
-  auto leader = get_top_leader();
+  auto leader = get_leader();
   if (leader) {
     d = (int) get_distance_leader_max();
   }

@@ -780,7 +780,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
 
   auto aip = get_aip();
 
-  auto leader = get_top_leader();
+  auto leader = get_leader();
   if (leader) {
     if (too_far_from_leader()) {
       point p = leader->curr_at;
@@ -802,6 +802,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
 
       FOR_ALL_THINGS_THAT_INTERACT(level, it, p.x, p.y)
       {
+        AI_LOG("", "Can see cand", it);
         if (it->is_changing_level || it->is_hidden || it->is_falling || it->is_jumping) {
           continue;
         }
@@ -824,7 +825,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
         //
         // Don't attack your leader
         //
-        if (get_top_leader() == this) {
+        if (get_leader() == this) {
           continue;
         }
 
@@ -838,8 +839,10 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
         //
         // Don't attack your fellow follower
         //
-        if (it->get_top_leader() == get_top_leader()) {
-          continue;
+        if (it->is_able_to_follow()) {
+          if (it->get_leader() == get_leader()) {
+            continue;
+          }
         }
 
         AI_LOG("", "Can see", it);
@@ -920,7 +923,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
           // then it's not really fair to use that knowledge.
           //
           if (lit_recently) {
-            dbg("AI: Consider attacking %s%s%s%s", it->to_string().c_str(), is_enemy(it) ? ", is enemy" : "",
+            dbg("AI: Consider attacking? %s%s%s%s", it->to_string().c_str(), is_enemy(it) ? ", is enemy" : "",
                 is_dangerous(it) ? ", is dangerous" : "", is_to_be_avoided(it) ? ", is to be avoided" : "");
 
             if (is_enemy(it) && (dist <= max_dist)) {
@@ -981,7 +984,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
                     GOAL_ADD(GOAL_PRIO_MED, -health_diff - goal_penalty, "can-attack-monst-unprovoked", it);
                   }
                 } else {
-                  AI_LOG("Feeling nice, no not attack", it);
+                  AI_LOG("Feeling nice, do not attack", it);
                 }
               }
             }

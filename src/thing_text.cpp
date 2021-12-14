@@ -70,7 +70,7 @@ std::string Thing::text_the(bool include_owner)
       out += top_owner->text_name();
       if (top_owner->get_follower_count()) {
         out += " leader";
-      } else if (top_owner->get_immediate_leader()) {
+      } else if (top_owner->get_leader()) {
         out += " soldier";
       }
       out += "'s ";
@@ -197,7 +197,7 @@ std::string Thing::short_text_capitalized(void)
   out += text_name();
   if (get_follower_count()) {
     out += " leader";
-  } else if (get_immediate_leader()) {
+  } else if (get_leader()) {
     out += " soldier";
   }
 

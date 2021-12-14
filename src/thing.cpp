@@ -97,7 +97,7 @@ const ThingId &Thing::set_manifestor_id(const ThingId &v)
   return (get_infop()->manifestor_id = v);
 }
 
-const ThingId &Thing::get_immediate_leader_id(void)
+const ThingId &Thing::get_leader_id(void)
 {
   TRACE_AND_INDENT();
   if (! maybe_infop()) {

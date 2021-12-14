@@ -1381,13 +1381,13 @@ int Thing::aggression_level_pct(void)
 {
   TRACE_AND_INDENT();
 
-  auto aggression = tp()->aggression_level_pct();
+  int aggression = tp()->aggression_level_pct();
 
   if (is_able_to_follow()) {
     //
     // Followers are more cockey if they have a leader
     //
-    auto leader = get_immediate_leader();
+    auto leader = get_leader();
     if (leader) {
       //
       // If the leader is dead, be timid
@@ -1406,8 +1406,14 @@ int Thing::aggression_level_pct(void)
       //
       // A strong leader
       //
-      return (aggression * 2);
+      aggression += 20;
+    } else {
+      aggression += 10 * get_follower_count();
     }
+  }
+
+  if (aggression > 100) {
+    aggression = 100;
   }
 
   return aggression;

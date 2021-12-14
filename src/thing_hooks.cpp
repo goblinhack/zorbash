@@ -28,7 +28,7 @@ void Thing::hooks_remove()
   //
   auto top_owner = get_top_owner();
 
-  unleash_followers();
+  release_followers();
 
   if (top_owner) {
     dbg("Detach %08" PRIx32 " from top owner %s", id.id, top_owner->to_string().c_str());
@@ -136,7 +136,7 @@ void Thing::hooks_remove()
     remove_manifestor();
   }
 
-  if (get_immediate_leader_id().ok()) {
+  if (get_leader_id().ok()) {
     remove_leader();
   }
 
@@ -235,7 +235,7 @@ void Thing::remove_all_references()
     {
       for (auto p : level->all_things[ group ]) {
         auto t = p.second;
-        auto o = t->get_immediate_leader();
+        auto o = t->get_leader();
         if (o == this) {
           t->remove_leader();
         }

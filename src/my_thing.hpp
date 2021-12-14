@@ -66,12 +66,12 @@ public:
 
   ts_t ts_next_frame {};
 
-  point last_at; // Previous hop where we were.
-  point curr_at; // Grid coordinates.
-  point last_attached;
-  point last_blit_br; // Last blit coords
-  point last_blit_tl; // Offset from top left of map
-  point last_blit_at; // Center of the above
+  point last_at;       // Previous hop where we were.
+  point curr_at;       // Grid coordinates.
+  point last_attached; // Where we were last pushed onto the map/
+  point last_blit_br;  // Last blit coords
+  point last_blit_tl;  // Offset from top left of map
+  point last_blit_at;  // Center of the above
 
   uint16_t tile_curr {};
   uint16_t frame_count {};
@@ -258,8 +258,7 @@ public:
   Thingp get_immediate_manifestor();
   Thingp get_top_manifestor();
 
-  Thingp get_immediate_leader();
-  Thingp get_top_leader();
+  Thingp get_leader();
   bool   same_leader(Thingp it);
 
   Thingp get_immediate_spawned_owner();
@@ -518,7 +517,7 @@ public:
   const Dice &get_resurrect_dice(void);
 
   const ThingId &get_immediate_manifestor_id(void);
-  const ThingId &get_immediate_leader_id(void);
+  const ThingId &get_leader_id(void);
   const ThingId &get_immediate_owner_id(void);
   const ThingId &get_immediate_spawned_owner_id(void);
   const ThingId &get_top_owner_id(void);
@@ -1698,7 +1697,7 @@ public:
   void topcon_(const char *fmt, va_list args); // compile error without
   void try_to_carry(const std::list< Thingp > &items);
   void unleash_minions(void);
-  void unleash_followers(void);
+  void release_followers(void);
   void unleash_spawners_things(void);
   void unset_on_fire(void);
   void update_all(void);

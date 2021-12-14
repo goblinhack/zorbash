@@ -26,7 +26,7 @@ void Thing::level_leave(void)
   // Remove minions if they stay behind on the old level
   //
   unleash_minions();
-  unleash_followers();
+  release_followers();
   unleash_spawners_things();
 
   {
@@ -37,7 +37,7 @@ void Thing::level_leave(void)
   }
 
   {
-    auto it = get_immediate_leader();
+    auto it = get_leader();
     if (it) {
       remove_leader();
     }

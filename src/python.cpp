@@ -2226,7 +2226,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_FUNCTION(thing_get_health),
     MY_ADD_PYTHON_FUNCTION(thing_get_health_max),
     MY_ADD_PYTHON_FUNCTION(thing_get_immediate_manifestor_id),
-    MY_ADD_PYTHON_FUNCTION(thing_get_immediate_leader_id),
+    MY_ADD_PYTHON_FUNCTION(thing_get_leader_id),
     MY_ADD_PYTHON_FUNCTION(thing_get_immediate_owner_id),
     MY_ADD_PYTHON_FUNCTION(thing_get_immediate_spawned_owner_id),
     MY_ADD_PYTHON_FUNCTION(thing_get_initial_charge_count),

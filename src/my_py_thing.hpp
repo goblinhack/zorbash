@@ -115,7 +115,7 @@ PyObject *thing_environ_prefers_water(PyObject *obj, PyObject *args, PyObject *k
 PyObject *thing_fire_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_get_coords(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_get_immediate_manifestor_id(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_get_immediate_leader_id(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_get_leader_id(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_get_immediate_owner_id(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_get_immediate_spawned_owner_id(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_get_top_owner_id(PyObject *obj, PyObject *args, PyObject *keywds);

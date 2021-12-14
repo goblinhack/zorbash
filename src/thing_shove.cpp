@@ -45,8 +45,8 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta)
     return (THING_SHOVE_NEVER_TRIED);
   }
 
-  auto my_leader  = get_top_leader();
-  auto its_leader = it->get_top_leader();
+  auto my_leader  = get_leader();
+  auto its_leader = it->get_leader();
   if (my_leader && (my_leader == its_leader)) {
     dbg("Not able to shove (same leader) %s", it->to_string().c_str());
     return (THING_SHOVE_NEVER_TRIED);

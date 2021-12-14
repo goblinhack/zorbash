@@ -77,7 +77,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
       dbg("Jumping closer to the leader");
     } else {
       dbg("No, follower is too far from the leader to jump");
-      auto leader = get_top_leader();
+      auto leader = get_leader();
       if (leader) {
         dbg("Try jumping closer to the leadeer");
         to           = leader->curr_at;

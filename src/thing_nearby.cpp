@@ -64,10 +64,11 @@ Thingp Thing::get_most_dangerous_adjacent_thing(void)
       }
 
       auto score = it->get_health();
-      if (will_avoid_monst(point(x, y))) {
-        score += it->get_health_max();
+      if (! will_avoid_monst(point(x, y))) {
+        continue;
       }
 
+      score += it->get_health_max();
       possible.push_back(std::make_pair(it, score));
     }
     FOR_ALL_THINGS_END()
@@ -125,10 +126,11 @@ Thingp Thing::get_most_dangerous_visible_thing(void)
           score += 100;
         }
 
-        if (will_avoid_monst(o)) {
-          score += t->get_health_max();
+        if (! will_avoid_monst(o)) {
+          continue;
         }
 
+        score += t->get_health_max();
         possible.push_back(std::make_pair(t, score));
         dbg("Potential danger: %s", t->to_string().c_str());
       }

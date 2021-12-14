@@ -81,7 +81,7 @@ void Thing::on_leader_unset(void)
 
 float Thing::get_distance_from_leader(void)
 {
-  auto manifestor = get_top_leader();
+  auto manifestor = get_leader();
   if (! manifestor) {
     return -1;
   }
@@ -91,7 +91,7 @@ float Thing::get_distance_from_leader(void)
 
 float Thing::get_distance_from_leader(point p)
 {
-  auto manifestor = get_top_leader();
+  auto manifestor = get_leader();
   if (! manifestor) {
     return -1;
   }
@@ -101,7 +101,7 @@ float Thing::get_distance_from_leader(point p)
 
 bool Thing::too_far_from_leader(void)
 {
-  auto manifestor = get_top_leader();
+  auto manifestor = get_leader();
   if (! manifestor) {
     return false;
   }
@@ -114,7 +114,7 @@ bool Thing::too_far_from_leader(void)
 
 bool Thing::too_far_from_leader(point p)
 {
-  auto manifestor = get_top_leader();
+  auto manifestor = get_leader();
   if (! manifestor) {
     return false;
   }
@@ -127,7 +127,7 @@ bool Thing::too_far_from_leader(point p)
 
 bool Thing::too_far_from_leader(point p, float delta)
 {
-  auto manifestor = get_top_leader();
+  auto manifestor = get_leader();
   if (! manifestor) {
     return false;
   }
@@ -138,28 +138,10 @@ bool Thing::too_far_from_leader(point p, float delta)
   return false;
 }
 
-Thingp Thing::get_top_leader(void)
+Thingp Thing::get_leader(void)
 {
   TRACE_AND_INDENT();
-  auto id = get_immediate_leader_id();
-  if (likely(id.ok())) {
-    auto i = level->thing_find(id);
-    if (unlikely(! i)) {
-      return nullptr;
-    }
-    if (unlikely(i->get_immediate_leader_id().ok())) {
-      return i->get_immediate_leader();
-    }
-    return i;
-  } else {
-    return nullptr;
-  }
-}
-
-Thingp Thing::get_immediate_leader(void)
-{
-  TRACE_AND_INDENT();
-  auto id = get_immediate_leader_id();
+  auto id = get_leader_id();
   if (likely(id.ok())) {
     auto i = level->thing_find(id);
     if (unlikely(! i)) {
@@ -178,7 +160,7 @@ void Thing::set_leader(Thingp leader)
     verify(MTYPE_THING, leader);
   }
 
-  auto old_leader = get_immediate_leader();
+  auto old_leader = get_leader();
   if (old_leader) {
     if (old_leader == leader) {
       return;
@@ -214,7 +196,7 @@ void Thing::set_leader(Thingp leader)
 void Thing::remove_leader(void)
 {
   TRACE_AND_INDENT();
-  auto old_leader = get_immediate_leader();
+  auto old_leader = get_leader();
   if (! old_leader) {
     err("No leader owner");
     return;
@@ -252,7 +234,7 @@ void Thing::destroy_followers(Thingp defeater)
   {
     for (auto p : level->all_things[ group ]) {
       auto leader = p.second;
-      auto o      = leader->get_immediate_leader();
+      auto o      = leader->get_leader();
       if (o && (o == this)) {
         leader->remove_leader();
         leader->is_resurrection_blocked = true;
@@ -265,7 +247,7 @@ void Thing::destroy_followers(Thingp defeater)
 //
 // Detach all followers from their owner
 //
-void Thing::unleash_followers(void)
+void Thing::release_followers(void)
 {
   TRACE_AND_INDENT();
 
@@ -280,7 +262,7 @@ void Thing::unleash_followers(void)
   {
     for (auto p : level->all_things[ group ]) {
       auto leader = p.second;
-      auto o      = leader->get_immediate_leader();
+      auto o      = leader->get_leader();
       if (o && (o == this)) {
         leader->remove_leader();
       }
@@ -300,7 +282,7 @@ void Thing::leader_tick(void)
     return;
   }
 
-  if (get_immediate_leader()) {
+  if (get_leader()) {
     return;
   }
 
@@ -382,10 +364,10 @@ bool Thing::same_leader(Thingp it)
     my_leader = my_owner;
   }
   if (! my_leader && my_owner) {
-    my_leader = my_owner->get_top_leader();
+    my_leader = my_owner->get_leader();
   }
   if (! my_leader) {
-    my_leader = get_top_leader();
+    my_leader = get_leader();
   }
 
   Thingp its_leader = nullptr;
@@ -396,10 +378,10 @@ bool Thing::same_leader(Thingp it)
     its_leader = its_owner;
   }
   if (! its_leader && its_owner) {
-    its_leader = its_owner->get_top_leader();
+    its_leader = its_owner->get_leader();
   }
   if (! its_leader) {
-    its_leader = it->get_top_leader();
+    its_leader = it->get_leader();
   }
 
   if (its_leader && (its_leader == my_leader)) {
