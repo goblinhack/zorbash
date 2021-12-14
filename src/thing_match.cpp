@@ -661,9 +661,6 @@ bool Thing::matches(const std::string &what)
   if (is_able_to_follow() && (what == "is_able_to_follow")) {
     return true;
   }
-  if (distance_leader_max() && (what == "distance_leader_max")) {
-    return true;
-  }
   if (is_able_to_use_weapons() && (what == "is_able_to_use_weapons")) {
     return true;
   }
@@ -1372,9 +1369,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   }
   if (what == "is_able_to_follow") {
     return &Thing::is_able_to_follow;
-  }
-  if (what == "distance_leader_max") {
-    return &Thing::distance_leader_max;
   }
   if (what == "is_able_to_use_weapons") {
     return &Thing::is_able_to_use_weapons;

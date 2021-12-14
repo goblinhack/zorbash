@@ -321,7 +321,7 @@ void Thing::leader_tick(void)
     //
     // If a leader is too far away, ignore
     //
-    if (distance(t->mid_at, mid_at) > get_distance_leader_max() * 2) {
+    if (distance(t->mid_at, mid_at) > get_distance_recruitment_max() * 2) {
       continue;
     }
 
@@ -351,4 +351,64 @@ void Thing::leader_tick(void)
   con("Is being led by %s", leader->to_string().c_str());
 
   set_leader(leader);
+}
+
+bool Thing::same_leader(Thingp it)
+{
+  if (! it) {
+    return false;
+  }
+
+  if (it == this) {
+    return true;
+  }
+
+  auto my_owner  = get_top_owner();
+  auto its_owner = it->get_top_owner();
+
+  if (my_owner && (my_owner == its_owner)) {
+    return true;
+  }
+
+  if (its_owner == this) {
+    return true;
+  }
+
+  Thingp my_leader = nullptr;
+  if (get_follower_count()) {
+    my_leader = this;
+  }
+  if (! my_leader && my_owner && my_owner->get_follower_count()) {
+    my_leader = my_owner;
+  }
+  if (! my_leader && my_owner) {
+    my_leader = my_owner->get_top_leader();
+  }
+  if (! my_leader) {
+    my_leader = get_top_leader();
+  }
+
+  Thingp its_leader = nullptr;
+  if (it->get_follower_count()) {
+    its_leader = it;
+  }
+  if (! its_leader && its_owner && its_owner->get_follower_count()) {
+    its_leader = its_owner;
+  }
+  if (! its_leader && its_owner) {
+    its_leader = its_owner->get_top_leader();
+  }
+  if (! its_leader) {
+    its_leader = it->get_top_leader();
+  }
+
+  if (its_leader && (its_leader == my_leader)) {
+    return true;
+  }
+
+  if (its_leader == this) {
+    return true;
+  }
+
+  return false;
 }

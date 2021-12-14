@@ -260,6 +260,7 @@ public:
 
   Thingp get_immediate_leader();
   Thingp get_top_leader();
+  bool   same_leader(Thingp it);
 
   Thingp get_immediate_spawned_owner();
   Thingp get_top_spawned_owner();
@@ -648,6 +649,8 @@ public:
   float get_distance_from_manifestor(void);
   float get_distance_leader_max(point p);
   float get_distance_leader_max(void);
+  float get_distance_recruitment_max(point p);
+  float get_distance_recruitment_max(void);
   float get_distance_from_leader(point p);
   float get_distance_from_leader(void);
   float get_distance_to_player(void);
@@ -1303,6 +1306,7 @@ public:
   int unused_flag11(void);
   int is_able_to_follow(void);
   int distance_leader_max(void);
+  int distance_recruitment_max(void);
   int distance_minion_vision_shared(void);
   int is_able_to_use_weapons(void);
   int is_bony(void);

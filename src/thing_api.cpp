@@ -1287,6 +1287,12 @@ int Thing::distance_leader_max(void)
   return (tp()->distance_leader_max());
 }
 
+int Thing::distance_recruitment_max(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->distance_recruitment_max());
+}
+
 int Thing::distance_minion_vision_shared(void)
 {
   TRACE_AND_INDENT();
@@ -1975,6 +1981,12 @@ float Thing::get_distance_leader_max(void)
 {
   TRACE_AND_INDENT();
   return (tp()->distance_leader_max());
+}
+
+float Thing::get_distance_recruitment_max(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->distance_recruitment_max());
 }
 
 int Thing::minion_limit(void)

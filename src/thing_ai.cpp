@@ -432,7 +432,9 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
       }
 
       if (too_far_from_leader(p)) {
-        continue;
+        if (get_distance_from_leader() < too_far_from_leader(p)) {
+          continue;
+        }
       }
 
       if (! ai_obstacle_for_me(p)) {
@@ -778,6 +780,14 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
 
   auto aip = get_aip();
 
+  auto leader = get_top_leader();
+  if (leader) {
+    if (too_far_from_leader()) {
+      point p = leader->mid_at;
+      GOAL_ADD(GOAL_PRIO_HIGH, 100, "follow-leader", leader);
+    }
+  }
+
   for (int y = miny; y <= maxy; y++) {
     for (int x = minx; x <= maxx; x++) {
       point p(x, y);
@@ -1051,7 +1061,9 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
     }
 
     if (too_far_from_leader(p)) {
-      continue;
+      if (get_distance_from_leader() < too_far_from_leader(p)) {
+        continue;
+      }
     }
 
     if (level->is_obs_wall_or_door(p.x, p.y)) {

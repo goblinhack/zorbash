@@ -45,23 +45,10 @@ bool Thing::possible_to_attack(const Thingp victim)
     return false;
   }
 
-  //
-  // Don't kill your leader or fellow followers
-  //
-  auto my_leader  = get_top_leader();
-  auto its_leader = victim->get_top_leader();
-  if (my_leader && (my_leader == its_leader)) {
-    return false;
-  }
-
-  //
-  // Don't kill your own followers; it's bad show.
-  //
-  if (my_leader && (my_leader == victim)) {
-    return false;
-  }
-
-  if (its_leader && (its_leader == this)) {
+  /*
+   * Don't attadk thy leader or follower
+   */
+  if (same_leader(victim)) {
     return false;
   }
 

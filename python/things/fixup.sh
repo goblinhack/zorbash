@@ -277,6 +277,7 @@ do
       set_unused_flag11 \
       set_is_able_to_follow \
       set_distance_leader_max \
+      set_distance_recruitment_max \
       set_distance_minion_vision_shared \
       set_is_able_to_use_weapons \
       set_is_bony \

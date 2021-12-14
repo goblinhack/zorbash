@@ -289,6 +289,10 @@ bool Thing::ai_obstacle(Thingp it)
     }
   }
 
+  if (same_leader(it)) {
+    return true;
+  }
+
   if (is_monst() || (is_player() && game->robot_mode)) {
     if (it->is_chasm()) {
       if (! is_floating()) {

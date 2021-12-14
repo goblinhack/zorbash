@@ -232,8 +232,12 @@ bool Thing::ai_choose_wander(point &nh)
   }
 
   if (too_far_from_leader(target)) {
-    dbg("Could not wander, too far off the leash; could not create path to %d,%d", target.x, target.y);
-    return false;
+    if (get_distance_from_leader() > too_far_from_leader(target)) {
+      dbg("Wander closer to leader via %d,%d", target.x, target.y);
+    } else {
+      dbg("Could not wander, too far from leader; could not create path to %d,%d", target.x, target.y);
+      return false;
+    }
   }
 
   if (! ai_create_path(nh, mid_at, target)) {

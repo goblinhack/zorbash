@@ -38,6 +38,14 @@ bool Thing::will_avoid_monst(const Thingp it)
     return false;
   }
 
+  if (same_leader(it)) {
+    return false;
+  }
+
+  if (it->is_minion() && (it->get_top_manifestor() == get_top_manifestor())) {
+    return false;
+  }
+
   if (is_dangerous(it)) {
     return true;
   }
@@ -109,6 +117,14 @@ bool Thing::will_avoid_monst(const point &p)
     //
     if (it->get_stuck_count() > 5) {
       continue;
+    }
+
+    if (same_leader(it)) {
+      return false;
+    }
+
+    if (it->is_minion() && (it->get_top_manifestor() == get_top_manifestor())) {
+      return false;
     }
 
     if (me->is_monst()) {

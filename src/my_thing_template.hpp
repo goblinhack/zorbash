@@ -127,8 +127,11 @@ private:
   int _damage_received_doubled_from_poison {};
   int _damage_received_doubled_from_water {};
   int _distance_avoid {};
+  int _distance_jump {};
+  int _distance_leader_max {};
   int _distance_manifestor_max {};
   int _distance_minion_vision_shared {};
+  int _distance_recruitment_max {};
   int _distance_throw {};
   int _distance_vision {};
   int _enchant_level {};
@@ -179,10 +182,10 @@ private:
   int _is_able_to_enchant_items {};
   int _is_able_to_fall {};
   int _is_able_to_fire_at {};
+  int _is_able_to_follow {};
   int _is_able_to_jump {};
   int _is_able_to_jump_attack {};
   int _is_able_to_jump_attack_chance_d1000 {};
-  int _distance_jump {};
   int _is_able_to_jump_on_low_hp_chance_d1000 {};
   int _is_able_to_jump_onto {};
   int _is_able_to_jump_onto_chance_d1000 {};
@@ -407,8 +410,6 @@ private:
   int _unused_flag1 {};
   int _unused_flag10 {};
   int _unused_flag11 {};
-  int _is_able_to_follow {};
-  int _distance_leader_max {};
   int _unused_flag2 {};
   int _unused_flag3 {};
   int _unused_flag4 {};
@@ -776,6 +777,7 @@ public:
   int damage_received_doubled_from_water(void) const { return _damage_received_doubled_from_water; }
   int distance_avoid(void) const { return _distance_avoid; }
   int distance_leader_max(void) const { return _distance_leader_max; }
+  int distance_recruitment_max(void) const { return _distance_recruitment_max; }
   int distance_manifestor_max(void) const { return _distance_manifestor_max; }
   int distance_jump(void) const { return _distance_jump; }
   int distance_minion_vision_shared(void) const { return _distance_minion_vision_shared; }
@@ -1475,6 +1477,7 @@ public:
   void set_unused_flag11(int v) { _unused_flag11 = v; }
   void set_is_able_to_follow(int v) { _is_able_to_follow = v; }
   void set_distance_leader_max(int v) { _distance_leader_max = v; }
+  void set_distance_recruitment_max(int v) { _distance_recruitment_max = v; }
   void set_unused_flag1(int v) { _unused_flag1 = v; }
   void set_unused_flag2(int v) { _unused_flag2 = v; }
   void set_unused_flag3(int v) { _unused_flag3 = v; }

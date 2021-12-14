@@ -280,6 +280,14 @@ int Thing::is_dangerous(Thingp it)
     return false;
   }
 
+  if (same_leader(it)) {
+    return false;
+  }
+
+  if (it->is_minion() && (it->get_top_manifestor() == get_top_manifestor())) {
+    return false;
+  }
+
   int a = get_danger_current_level();
   int b = it->get_danger_current_level();
 

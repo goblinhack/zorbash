@@ -73,14 +73,18 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   }
 
   if (too_far_from_leader(to)) {
-    dbg("No, follower is too far off the leash to jump");
-    auto leader = get_top_leader();
-    if (leader) {
-      dbg("Try jumping home");
-      to           = leader->mid_at;
-      jumping_home = true;
+    if (get_distance_from_leader() > too_far_from_leader(to)) {
+      dbg("Jumping closer to the leader");
     } else {
-      return false;
+      dbg("No, follower is too far from the leader to jump");
+      auto leader = get_top_leader();
+      if (leader) {
+        dbg("Try jumping closer to the leadeer");
+        to           = leader->mid_at;
+        jumping_home = true;
+      } else {
+        return false;
+      }
     }
   }
 
