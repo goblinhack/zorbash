@@ -164,7 +164,7 @@ void Thing::location_check_all_things_at(void)
   // Needs to be for all things to stuff that does nothing like bones can fall
   // into a chasm
   //
-  FOR_ALL_THINGS(level, t, mid_at.x, mid_at.y)
+  FOR_ALL_THINGS(level, t, curr_at.x, curr_at.y)
   {
     if (t->is_hidden) {
       continue;
@@ -188,7 +188,7 @@ void Thing::location_check_forced_all_things_at(void)
   // Needs to be for all things to stuff that does nothing like bones can fall
   // into a chasm
   //
-  FOR_ALL_THINGS(level, t, mid_at.x, mid_at.y)
+  FOR_ALL_THINGS(level, t, curr_at.x, curr_at.y)
   {
     if (t->is_hidden) {
       continue;

@@ -29,6 +29,6 @@ void Level::cursor_describe(void)
     return;
   }
 
-  auto p = cursor->mid_at;
+  auto p = cursor->curr_at;
   describe(p);
 }

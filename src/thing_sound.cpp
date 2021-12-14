@@ -80,7 +80,7 @@ bool Thing::thing_sound_play_channel(int channel, const std::string &alias)
 
   float distance = get_distance_to_player();
   if (distance == DMAP_IS_WALL) {
-    if (level->is_obs_wall_or_door(mid_at.x, mid_at.y)) {
+    if (level->is_obs_wall_or_door(curr_at.x, curr_at.y)) {
       //
       // Ok to hit walls or doors.
       //

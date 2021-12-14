@@ -247,7 +247,7 @@ void Thing::avoid_tick(void)
     //
     // If far enough away start to forget this enemy
     //
-    if (distance(attacker->mid_at, mid_at) > get_distance_avoid()) {
+    if (distance(attacker->curr_at, curr_at) > get_distance_avoid()) {
       if (is_player() && game->robot_mode) {
         CON("Robot: Remove avoid: %s", attacker->to_string().c_str());
       }

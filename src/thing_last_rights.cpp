@@ -183,7 +183,7 @@ void Thing::last_rites(Thingp defeater, const char *reason)
     int splatters = pcg_random_range(2, 10);
     for (int splatter = 0; splatter < splatters; splatter++) {
       auto tpp = tp_random_blood();
-      (void) level->thing_new(tpp, mid_at);
+      (void) level->thing_new(tpp, curr_at);
       if (unlikely(! tpp)) {
         err("Could not place blood");
         break;
@@ -247,7 +247,7 @@ void Thing::last_rites(Thingp defeater, const char *reason)
 
         dbg("Call %s.%s(%s)", mod.c_str(), fn.c_str(), to_string().c_str());
 
-        py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) mid_at.x, (unsigned int) mid_at.y);
+        py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
       } else {
         ERR("Bad on_death call [%s] expected mod:function, got %d elems", on_death.c_str(), (int) on_death.size());
       }
@@ -319,7 +319,7 @@ void Thing::last_rites(Thingp defeater, const char *reason)
         dbg("Can place final bones");
         auto tpp = tp_random_bones();
         if (tpp) {
-          (void) level->thing_new(tpp, mid_at);
+          (void) level->thing_new(tpp, curr_at);
         }
       }
     }
@@ -328,11 +328,11 @@ void Thing::last_rites(Thingp defeater, const char *reason)
     // Leaves a corpse
     //
     dbg("Defeated, leaves corpse");
-    level->set_is_corpse(mid_at.x, mid_at.y);
+    level->set_is_corpse(curr_at.x, curr_at.y);
 
     if (i_set_is_monst) {
       i_set_is_monst = false;
-      level->unset_is_monst(mid_at.x, mid_at.y);
+      level->unset_is_monst(curr_at.x, curr_at.y);
     }
     return;
   }

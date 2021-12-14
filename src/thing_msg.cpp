@@ -20,13 +20,13 @@ void Thing::msg(std::string const &m)
     //
     // Stop msgs piling up in the same tick
     //
-    if (last_at.y == mid_at.y) {
+    if (last_at.y == curr_at.y) {
       dy = 1.0;
     } else {
       dy = 0.0;
     }
 
-    if (last_at.x == mid_at.x) {
+    if (last_at.x == curr_at.x) {
       dx = 1.0;
     } else {
       dx = 0.0;
@@ -38,10 +38,10 @@ void Thing::msg(std::string const &m)
 
   last_tick = game->tick_current;
 
-  last_at.x = mid_at.x - dx;
-  last_at.y = mid_at.y - dy;
+  last_at.x = curr_at.x - dx;
+  last_at.y = curr_at.y - dy;
 
-  auto msg = level->thing_new("msg", mid_at - point(dx, dy));
+  auto msg = level->thing_new("msg", curr_at - point(dx, dy));
   msg->set_msg(m);
   msg->fadeup(6.0, 0.05, 3000);
 }

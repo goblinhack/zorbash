@@ -247,10 +247,10 @@ bool Light::calculate(void)
   //
   // Make sure the current tile is always marked visited.
   //
-  level->set_is_lit_ever((int) player->mid_at.x, (int) player->mid_at.y);
+  level->set_is_lit_ever((int) player->curr_at.x, (int) player->curr_at.y);
 
 #if 0
-  set(walked, player->mid_at.x, player->mid_at.y, true);
+  set(walked, player->curr_at.x, player->curr_at.y, true);
 #endif
 
   //
@@ -258,8 +258,8 @@ bool Light::calculate(void)
   // the light leak a little.
   //
   auto d = (strength / TILE_WIDTH) + 1;
-  if (likely(((player->mid_at.x >= d) && (player->mid_at.x <= MAP_WIDTH - d) && (player->mid_at.y >= d) &&
-              (player->mid_at.y <= MAP_HEIGHT - d)))) {
+  if (likely(((player->curr_at.x >= d) && (player->curr_at.x <= MAP_WIDTH - d) && (player->curr_at.y >= d) &&
+              (player->curr_at.y <= MAP_HEIGHT - d)))) {
     //
     // If were casting rays, we're wanting to update what is lit currently.
     //
@@ -511,7 +511,7 @@ bool Light::calculate(void)
     printf("\nlight:\n");
     for (auto y = 0; y < MAP_HEIGHT; y++) {
       for (auto x = 0; x < MAP_WIDTH; x++) {
-        if ((x == (int)player->mid_at.x) && (y == (int)player->mid_at.y)) {
+        if ((x == (int)player->curr_at.x) && (y == (int)player->curr_at.y)) {
           if (level->is_lit_ever(x, y)) {
             printf("*");
           } else {
@@ -705,11 +705,11 @@ void Level::lights_render_small_lights(int minx, int miny, int maxx, int maxy, i
           //
           // Skip lights that are in blocked off rooms the player cannot see
           //
-          if (get(dmap_to_player.val, t->mid_at.x, t->mid_at.y) >= DMAP_IS_PASSABLE) {
+          if (get(dmap_to_player.val, t->curr_at.x, t->curr_at.y) >= DMAP_IS_PASSABLE) {
             continue;
           }
 
-          if (! is_lit_currently_no_check(t->mid_at.x, t->mid_at.y)) {
+          if (! is_lit_currently_no_check(t->curr_at.x, t->curr_at.y)) {
             continue;
           }
 
@@ -768,11 +768,11 @@ void Level::lights_render_small_lights(int minx, int miny, int maxx, int maxy, i
           //
           // Skip lights that are in blocked off rooms the player cannot see
           //
-          if (get(dmap_to_player.val, t->mid_at.x, t->mid_at.y) >= DMAP_IS_PASSABLE) {
+          if (get(dmap_to_player.val, t->curr_at.x, t->curr_at.y) >= DMAP_IS_PASSABLE) {
             continue;
           }
 
-          if (! is_lit_currently_no_check(t->mid_at.x, t->mid_at.y)) {
+          if (! is_lit_currently_no_check(t->curr_at.x, t->curr_at.y)) {
             continue;
           }
 

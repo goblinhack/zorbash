@@ -29,7 +29,7 @@ float Thing::get_distance_to_player(void)
     return DMAP_IS_WALL;
   }
 
-  return get(&game->level->dmap_to_player.val, (int) mid_at.x, (int) mid_at.y);
+  return get(&game->level->dmap_to_player.val, (int) curr_at.x, (int) curr_at.y);
 }
 
 void Level::dmap_to_player_update(void)
@@ -44,10 +44,10 @@ void Level::dmap_to_player_update(void)
   // Limit the size of the dmap for performance?
   //
   auto max_dist = 20;
-  int minx = player->mid_at.x - max_dist;
-  int maxx = player->mid_at.x + max_dist;
-  int miny = player->mid_at.y - max_dist;
-  int maxy = player->mid_at.y + max_dist;
+  int minx = player->curr_at.x - max_dist;
+  int maxx = player->curr_at.x + max_dist;
+  int miny = player->curr_at.y - max_dist;
+  int maxy = player->curr_at.y + max_dist;
 #endif
 
   int minx = 0;
@@ -72,7 +72,7 @@ void Level::dmap_to_player_update(void)
     }
   }
 
-  set(dmap_to_player.val, player->mid_at.x, player->mid_at.y, DMAP_IS_GOAL);
+  set(dmap_to_player.val, player->curr_at.x, player->curr_at.y, DMAP_IS_GOAL);
 
   dmap_process(&dmap_to_player);
   IF_DEBUG3

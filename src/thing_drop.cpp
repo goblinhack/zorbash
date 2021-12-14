@@ -93,9 +93,9 @@ bool Thing::drop(Thingp what, Thingp target, bool stolen)
   }
 
   if (target) {
-    what->move_to_immediately(target->mid_at);
+    what->move_to_immediately(target->curr_at);
   } else {
-    what->move_to_immediately(mid_at);
+    what->move_to_immediately(curr_at);
   }
 
   if (immediate_owner) {
@@ -106,7 +106,7 @@ bool Thing::drop(Thingp what, Thingp target, bool stolen)
     //
     // Prevent too soon re-carry
     //
-    set_where_i_dropped_an_item_last(mid_at);
+    set_where_i_dropped_an_item_last(curr_at);
   }
 
   if (is_bag_item_container() || is_player()) {
@@ -218,12 +218,12 @@ bool Thing::drop_from_ether(Thingp what)
   what->remove_owner();
   what->hide();
   what->visible();
-  what->move_to_immediately(player->mid_at);
+  what->move_to_immediately(player->curr_at);
 
   //
   // Prevent too soon re-carry
   //
-  set_where_i_dropped_an_item_last(player->mid_at);
+  set_where_i_dropped_an_item_last(player->curr_at);
 
   //
   // Remove from the inventory

@@ -70,7 +70,7 @@ void Thing::destroy(void)
   //
   // Pop from the map
   //
-  point old_at((int) mid_at.x, (int) mid_at.y);
+  point old_at((int) curr_at.x, (int) curr_at.y);
 
   delete_lights();
   delete_particle();

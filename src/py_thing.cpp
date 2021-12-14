@@ -206,13 +206,13 @@ PyObject *thing_get_coords(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_NONE;
   }
 
-  auto err = PyTuple_SetItem(the_tuple, (Py_ssize_t) 0, PyLong_FromLong((long) t->mid_at.x));
+  auto err = PyTuple_SetItem(the_tuple, (Py_ssize_t) 0, PyLong_FromLong((long) t->curr_at.x));
   if (err < 0) {
     ERR("%s: Cannot create tuple (a) for ID %u", __FUNCTION__, id);
     Py_RETURN_NONE;
   }
 
-  err = PyTuple_SetItem(the_tuple, (Py_ssize_t) 1, PyLong_FromLong((long) t->mid_at.y));
+  err = PyTuple_SetItem(the_tuple, (Py_ssize_t) 1, PyLong_FromLong((long) t->curr_at.y));
   if (err < 0) {
     ERR("%s: Cannot create tuple (a) for ID %u", __FUNCTION__, id);
     Py_RETURN_NONE;

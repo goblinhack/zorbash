@@ -65,7 +65,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
     auto manifestor = get_top_manifestor();
     if (manifestor) {
       dbg("Try jumping home");
-      to           = manifestor->mid_at;
+      to           = manifestor->curr_at;
       jumping_home = true;
     } else {
       return false;
@@ -80,7 +80,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
       auto leader = get_top_leader();
       if (leader) {
         dbg("Try jumping closer to the leadeer");
-        to           = leader->mid_at;
+        to           = leader->curr_at;
         jumping_home = true;
       } else {
         return false;
@@ -115,8 +115,8 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   //
   // Ensure cleaners do not get stuck in themselves!
   //
-  if (! is_sticky() && level->is_sticky(mid_at.x, mid_at.y)) {
-    if (environ_prefers_spiderwebs() && level->is_spiderweb(mid_at.x, mid_at.y)) {
+  if (! is_sticky() && level->is_sticky(curr_at.x, curr_at.y)) {
+    if (environ_prefers_spiderwebs() && level->is_spiderweb(curr_at.x, curr_at.y)) {
       //
       // Ok ot move
       //
@@ -133,7 +133,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   //
   // See if we are prevented from jumping. i.e. from a spider sitting on us.
   //
-  FOR_ALL_THINGS(level, it, mid_at.x, mid_at.y)
+  FOR_ALL_THINGS(level, it, curr_at.x, curr_at.y)
   {
     if (it == this) {
       continue;
@@ -171,13 +171,13 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   // Add some random delta for fun and some for diagonals
   //
   float d    = how_far_i_can_jump();
-  float dist = distance(mid_at, to);
+  float dist = distance(curr_at, to);
 
   if (dist > d) {
-    auto u = (to - mid_at);
+    auto u = (to - curr_at);
     u.unit();
     u *= d;
-    to = mid_at + u;
+    to = curr_at + u;
     x  = to.x;
     y  = to.y;
 
@@ -222,8 +222,8 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   }
 
   auto src      = (last_blit_tl + last_blit_br) / 2;
-  auto dx       = x - mid_at.x;
-  auto dy       = y - mid_at.y;
+  auto dx       = x - curr_at.x;
+  auto dy       = y - curr_at.y;
   auto tw       = TILE_WIDTH;
   auto th       = TILE_HEIGHT;
   auto sz       = isize(last_blit_br.x - last_blit_tl.x, last_blit_br.y - last_blit_tl.y);
@@ -258,7 +258,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
     // not have to wait so long/
     //
     if (game->robot_mode) {
-      if (! level->is_lit_currently(make_point(mid_at.x, mid_at.y)) &&
+      if (! level->is_lit_currently(make_point(curr_at.x, curr_at.y)) &&
           ! level->is_lit_currently(make_point(to.x, to.y))) {
         duration = 0;
       }
@@ -280,7 +280,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
       auto id = get_equip_id_carry_anim(e);
       auto w  = level->thing_find(id);
       if (w) {
-        w->move_to_immediately(mid_at);
+        w->move_to_immediately(curr_at);
         w->is_jumping = true;
         if (is_player()) {
           level->new_external_particle(id, src, dest, sz, duration, tile_index_to_tile(w->tile_curr),
@@ -298,7 +298,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
       auto id = get_equip_id_use_anim(e);
       auto w  = level->thing_find(get_equip_id_use_anim(e));
       if (w) {
-        w->move_to_immediately(mid_at);
+        w->move_to_immediately(curr_at);
         w->is_jumping = true;
         //
         // No, the weapon is shown as carry anim
@@ -321,7 +321,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   // carried sword and so it had better be in the same location.
   //
   for (const auto w : get_item_vector()) {
-    w->move_to_immediately(mid_at);
+    w->move_to_immediately(curr_at);
     w->is_jumping = true;
   }
 
@@ -331,7 +331,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
     auto id = on_fire_anim_id;
     auto w  = level->thing_find(id);
     if (w) {
-      w->move_to_immediately(mid_at);
+      w->move_to_immediately(curr_at);
       w->is_jumping = true;
       if (is_player()) {
         level->new_external_particle(id, src, dest, sz, duration, tile_index_to_tile(w->tile_curr),
@@ -350,8 +350,8 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   //
   if (is_monst() || is_player()) {
     if (! is_floating()) {
-      if (level->is_shallow_water((int) mid_at.x, (int) mid_at.y)) {
-        point at(mid_at.x, mid_at.y);
+      if (level->is_shallow_water((int) curr_at.x, (int) curr_at.y)) {
+        point at(curr_at.x, curr_at.y);
         dbg("Causes ripples");
         if (game->robot_mode) {
           //
@@ -420,8 +420,8 @@ bool Thing::try_to_jump(void)
   int   tries = d * d;
 
   while (tries-- > 0) {
-    int x = pcg_random_range(mid_at.x - d, mid_at.x + d);
-    int y = pcg_random_range(mid_at.y - d, mid_at.y + d);
+    int x = pcg_random_range(curr_at.x - d, curr_at.x + d);
+    int y = pcg_random_range(curr_at.y - d, curr_at.y + d);
     if (try_to_jump_carefully(point(x, y))) {
       return true;
     }
@@ -444,12 +444,12 @@ bool Thing::try_to_jump_towards_player(void)
   float d     = how_far_i_can_jump();
   int   tries = d * d;
 
-  auto player_at = level->player->mid_at;
-  auto curr_dist = DISTANCE(mid_at.x, mid_at.y, player_at.x, player_at.y);
+  auto player_at = level->player->curr_at;
+  auto curr_dist = DISTANCE(curr_at.x, curr_at.y, player_at.x, player_at.y);
 
   while (tries-- > 0) {
-    int x = pcg_random_range(mid_at.x - d, mid_at.x + d);
-    int y = pcg_random_range(mid_at.y - d, mid_at.y + d);
+    int x = pcg_random_range(curr_at.x - d, curr_at.x + d);
+    int y = pcg_random_range(curr_at.y - d, curr_at.y + d);
 
     auto new_dist = DISTANCE(x, y, player_at.x, player_at.y);
     if (new_dist > curr_dist) {
@@ -483,12 +483,12 @@ bool Thing::try_to_jump_away_from_player(void)
   float d     = how_far_i_can_jump();
   int   tries = d * d;
 
-  auto player_at = level->player->mid_at;
-  auto curr_dist = DISTANCE(mid_at.x, mid_at.y, player_at.x, player_at.y);
+  auto player_at = level->player->curr_at;
+  auto curr_dist = DISTANCE(curr_at.x, curr_at.y, player_at.x, player_at.y);
 
   while (tries-- > 0) {
-    int x = pcg_random_range(mid_at.x - d, mid_at.x + d);
-    int y = pcg_random_range(mid_at.y - d, mid_at.y + d);
+    int x = pcg_random_range(curr_at.x - d, curr_at.x + d);
+    int y = pcg_random_range(curr_at.y - d, curr_at.y + d);
 
     auto new_dist = DISTANCE(x, y, player_at.x, player_at.y);
     if (new_dist < curr_dist) {
@@ -516,8 +516,8 @@ bool Thing::try_harder_to_jump(void)
   int   tries = 100;
 
   while (tries-- > 0) {
-    int x = pcg_random_range(mid_at.x - d, mid_at.x + d);
-    int y = pcg_random_range(mid_at.y - d, mid_at.y + d);
+    int x = pcg_random_range(curr_at.x - d, curr_at.x + d);
+    int y = pcg_random_range(curr_at.y - d, curr_at.y + d);
     if (try_to_jump_carefree(point(x, y))) {
       return true;
     }
@@ -618,11 +618,11 @@ bool Thing::jump_attack(Thingp maybe_victim)
     if ((int) pcg_random_range(0, 1000) > tp()->is_able_to_jump_attack_chance_d1000()) {
       dbg("Try to jump in direction of escape attack");
       TRACE_AND_INDENT();
-      auto delta = maybe_victim->mid_at - maybe_victim->last_mid_at;
+      auto delta = maybe_victim->curr_at - maybe_victim->last_at;
       if (delta != point(0, 0)) {
-        auto dest = maybe_victim->mid_at + (delta * 2);
+        auto dest = maybe_victim->curr_at + (delta * 2);
         if (! try_to_jump_carefully(dest)) {
-          auto dest = maybe_victim->mid_at + delta;
+          auto dest = maybe_victim->curr_at + delta;
           return try_to_jump_carefully(dest);
         }
         return true;
@@ -632,8 +632,8 @@ bool Thing::jump_attack(Thingp maybe_victim)
     if ((int) pcg_random_range(0, 1000) > tp()->is_able_to_jump_attack_chance_d1000()) {
       dbg("Try to jump in front attack");
       TRACE_AND_INDENT();
-      auto delta = maybe_victim->mid_at - mid_at;
-      auto dest  = maybe_victim->mid_at + delta;
+      auto delta = maybe_victim->curr_at - curr_at;
+      auto dest  = maybe_victim->curr_at + delta;
       return try_to_jump_carefully(dest);
     }
   }
@@ -646,8 +646,8 @@ bool Thing::jump_attack(Thingp maybe_victim)
     return try_to_jump_carefully(get(p, jump_dist));
   }
 
-  point last_mid_at; // Previous hop where we were.
-  point mid_at;      // Grid coordinates.
+  point last_at; // Previous hop where we were.
+  point curr_at;      // Grid coordinates.
 
   if (maybe_victim && can_eat(maybe_victim)) {
     //
@@ -657,7 +657,7 @@ bool Thing::jump_attack(Thingp maybe_victim)
       {
         dbg("Try to jump onto weakly %s", maybe_victim->to_string().c_str());
         TRACE_AND_INDENT();
-        if (try_to_jump_carefree(maybe_victim->mid_at)) {
+        if (try_to_jump_carefree(maybe_victim->curr_at)) {
           return true;
         }
       }
@@ -665,7 +665,7 @@ bool Thing::jump_attack(Thingp maybe_victim)
       if ((int) pcg_random_range(0, 1000) < tp()->is_able_to_jump_onto_chance_d1000()) {
         dbg("Try to jump onto %s", maybe_victim->to_string().c_str());
         TRACE_AND_INDENT();
-        if (try_to_jump_carefree(maybe_victim->mid_at)) {
+        if (try_to_jump_carefree(maybe_victim->curr_at)) {
           return true;
         }
       }

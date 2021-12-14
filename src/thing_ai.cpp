@@ -69,10 +69,10 @@ void Thing::ai_log(const std::string &short_msg, const std::string &long_msg, Th
     }
 
     if (it) {
-      CON("Robot: @(%s, %d,%d %d/%dh) %s, %s", level->to_string().c_str(), (int) mid_at.x, (int) mid_at.y,
+      CON("Robot: @(%s, %d,%d %d/%dh) %s, %s", level->to_string().c_str(), (int) curr_at.x, (int) curr_at.y,
           get_health(), get_health_max(), long_msg.c_str(), it->to_string().c_str());
     } else {
-      CON("Robot: @(%s, %d,%d %d/%dh) %s", level->to_string().c_str(), (int) mid_at.x, (int) mid_at.y, get_health(),
+      CON("Robot: @(%s, %d,%d %d/%dh) %s", level->to_string().c_str(), (int) curr_at.x, (int) curr_at.y, get_health(),
           get_health_max(), long_msg.c_str());
     }
   } else {
@@ -101,7 +101,7 @@ void Thing::ai_log(const std::string &short_msg, Thingp it) { ai_log(short_msg, 
 bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int search_type)
 {
   TRACE_AND_INDENT();
-  point start((int) mid_at.x, (int) mid_at.y);
+  point start((int) curr_at.x, (int) curr_at.y);
 
   //
   // Choose goals (higher scores, lower costs are preferred)
@@ -224,7 +224,7 @@ bool Thing::ai_create_path_to_single_goal(int minx, int miny, int maxx, int maxy
   //
   Dmap dmap = *saved_dmap;
 
-  point start((int) mid_at.x, (int) mid_at.y);
+  point start((int) curr_at.x, (int) curr_at.y);
 
   //
   // Check we can get to this goal
@@ -327,7 +327,7 @@ bool Thing::ai_create_path_to_single_goal(int minx, int miny, int maxx, int maxy
     path_shorten(new_move_path);
 
     if (new_move_path.empty()) {
-      if (! is_sticky() && level->is_sticky(mid_at.x, mid_at.y)) {
+      if (! is_sticky() && level->is_sticky(curr_at.x, curr_at.y)) {
         AI_LOG("Stuck in something");
         if (is_player()) {
           game->tick_begin("Try to break free");
@@ -393,7 +393,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
 
   std::array< std::array< uint8_t, MAP_WIDTH >, MAP_HEIGHT > can_jump = {};
 
-  point start((int) mid_at.x, (int) mid_at.y);
+  point start((int) curr_at.x, (int) curr_at.y);
   auto  dmap_can_see      = get_dmap_can_see();
   bool  jump_allowed      = false;
   int   something_changed = 0;
@@ -659,7 +659,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
     con("This is what I can see:");
     for (int y = 0; y < MAP_HEIGHT; y++) {
       for (int x = 0; x < MAP_WIDTH; x++) {
-        if ((x == (int) mid_at.x) && (y == (int) mid_at.y)) {
+        if ((x == (int) curr_at.x) && (y == (int) curr_at.y)) {
           if (get(aip->can_see_ever.can_see, x, y)) {
             printf("*");
           } else {
@@ -715,7 +715,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
         //
         // Ignore interruptions too far away
         //
-        float dist     = distance(mid_at, point(x, y));
+        float dist     = distance(curr_at, point(x, y));
         float max_dist = get_distance_vision() + 1;
         if (dist > max_dist) {
           continue;
@@ -783,7 +783,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
   auto leader = get_top_leader();
   if (leader) {
     if (too_far_from_leader()) {
-      point p = leader->mid_at;
+      point p = leader->curr_at;
       GOAL_ADD(GOAL_PRIO_HIGH, 100, "follow-leader", leader);
     }
   }
@@ -857,7 +857,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
         // Don't allow of attacking monsts from memory if the player or
         // robot
         //
-        auto lit_recently = get(aip->can_see_currently.can_see, it->mid_at.x, it->mid_at.y);
+        auto lit_recently = get(aip->can_see_currently.can_see, it->curr_at.x, it->curr_at.y);
 
         if (is_starving) {
           if (worth_eating(it)) {
@@ -912,7 +912,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
         }
 
         if (! it->is_dead) {
-          float dist     = distance(mid_at, it->mid_at);
+          float dist     = distance(curr_at, it->curr_at);
           float max_dist = get_distance_vision();
 
           //
@@ -1020,7 +1020,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
 void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type)
 {
   TRACE_AND_INDENT();
-  point start((int) mid_at.x, (int) mid_at.y);
+  point start((int) curr_at.x, (int) curr_at.y);
 
   std::array< std::array< bool, MAP_WIDTH >, MAP_HEIGHT > walked = {};
   std::array< std::array< bool, MAP_WIDTH >, MAP_HEIGHT > pushed = {};
@@ -1112,7 +1112,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
       default : DIE("unexpected search-type case"); break;
     }
 
-    auto dist = distance(p, mid_at);
+    auto dist = distance(p, curr_at);
     for (int dx = -jump_distance; dx <= jump_distance; dx++) {
       for (int dy = -jump_distance; dy <= jump_distance; dy++) {
 
@@ -1154,7 +1154,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
           if (! is_exit_finder()) {
             continue;
           }
-          if ((o.x == mid_at.x) && (o.y == mid_at.y)) {
+          if ((o.x == curr_at.x) && (o.y == curr_at.y)) {
             continue;
           }
           if (search_type < SEARCH_TYPE_LAST_RESORTS_NO_JUMP) {
@@ -1167,10 +1167,10 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
           if (! is_exit_finder()) {
             continue;
           }
-          if ((o.x == mid_at.x) && (o.y == mid_at.y)) {
+          if ((o.x == curr_at.x) && (o.y == curr_at.y)) {
             continue;
           }
-          if ((o.x == mid_at.x) && (o.y == mid_at.y)) {
+          if ((o.x == curr_at.x) && (o.y == curr_at.y)) {
             continue;
           }
           if (search_type < SEARCH_TYPE_LAST_RESORTS_NO_JUMP) {
@@ -1183,7 +1183,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
           if (! is_exit_finder()) {
             continue;
           }
-          if ((o.x == mid_at.x) && (o.y == mid_at.y)) {
+          if ((o.x == curr_at.x) && (o.y == curr_at.y)) {
             continue;
           }
           if (search_type < SEARCH_TYPE_LAST_RESORTS_NO_JUMP) {
@@ -1196,7 +1196,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
           if (! is_exit_finder()) {
             continue;
           }
-          if ((o.x == mid_at.x) && (o.y == mid_at.y)) {
+          if ((o.x == curr_at.x) && (o.y == curr_at.y)) {
             continue;
           }
           if (search_type < SEARCH_TYPE_LAST_RESORTS_NO_JUMP) {
@@ -1227,7 +1227,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
     for (int y = 0; y < MAP_HEIGHT; y++) {
       std::string s;
       for (int x = 0; x < MAP_WIDTH; x++) {
-        if ((x == (int) mid_at.x) && (y == (int) mid_at.y)) {
+        if ((x == (int) curr_at.x) && (y == (int) curr_at.y)) {
           if (get(get_aip()->can_see_ever.can_see, x, y)) {
             s += "* ";
           } else {
@@ -1284,7 +1284,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
     //
     // Avoid sewer descend/ascend loop
     //
-    if ((p.x == mid_at.x) && (p.y == mid_at.y)) {
+    if ((p.x == curr_at.x) && (p.y == curr_at.y)) {
       continue;
     }
 
@@ -1363,7 +1363,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
     if (is_minion()) {
       auto manifestor = get_top_manifestor();
       if (manifestor) {
-        auto dist = distance(p, manifestor->mid_at);
+        auto dist = distance(p, manifestor->curr_at);
         auto msg  = string_sprintf("search cand @(%d,%d) dist-from-owner %f", p.x, p.y, dist);
         GOAL_ADD(GOAL_PRIO_VERY_LOW, total_score, msg.c_str(), nullptr);
       } else {
@@ -1393,7 +1393,7 @@ bool Thing::ai_choose_immediately_adjacent_goal(void)
   for (int dx = -1; dx <= 1; dx++) {
     for (int dy = -1; dy <= 1; dy++) {
 
-      point at(mid_at.x + dx, mid_at.y + dy);
+      point at(curr_at.x + dx, curr_at.y + dy);
       if (level->is_oob(at)) {
         continue;
       }
@@ -1432,14 +1432,14 @@ bool Thing::ai_choose_immediately_adjacent_goal(void)
             if (is_player()) {
               player_tick(left, right, up, down, attack, wait, jump);
             } else {
-              move(mid_at, up, down, left, right, attack, wait, shove_allowed, attack_allowed);
+              move(curr_at, up, down, left, right, attack, wait, shove_allowed, attack_allowed);
             }
             return true;
           }
         }
 
         if (is_able_to_break_out_of_webs()) {
-          if (it->is_spiderweb() && (it->mid_at == mid_at)) {
+          if (it->is_spiderweb() && (it->curr_at == curr_at)) {
             //
             // Try hitting the web
             //
@@ -1454,7 +1454,7 @@ bool Thing::ai_choose_immediately_adjacent_goal(void)
             if (is_player()) {
               player_tick(left, right, up, down, attack, wait, jump);
             } else {
-              move(mid_at, up, down, left, right, attack, wait, shove_allowed, attack_allowed);
+              move(curr_at, up, down, left, right, attack, wait, shove_allowed, attack_allowed);
             }
             return true;
           }
@@ -1597,7 +1597,7 @@ bool Thing::ai_tick(bool recursing)
     con("  ,  - have seen ever");
     for (int y = 0; y < MAP_HEIGHT; y++) {
       for (int x = 0; x < MAP_WIDTH; x++) {
-        if ((x == (int) mid_at.x) && (y == (int) mid_at.y)) {
+        if ((x == (int) curr_at.x) && (y == (int) curr_at.y)) {
           printf("*");
         } else {
           if (get(aip->can_see_currently.can_see, x, y)) {
@@ -1653,7 +1653,7 @@ bool Thing::ai_tick(bool recursing)
           //
           // If not too close to the thread we can try and do something else like pick up a weapon.
           //
-          if (distance(mid_at, threat->mid_at) > 1) {
+          if (distance(curr_at, threat->curr_at) > 1) {
             //
             // Look around for something nearby to do; like collect an item.
             //
@@ -2099,7 +2099,7 @@ bool Thing::ai_tick(bool recursing)
     if (is_player()) {
       player_tick(left, right, up, down, attack, wait, jump);
     } else {
-      move(mid_at, up, down, left, right, attack, wait, false, false);
+      move(curr_at, up, down, left, right, attack, wait, false, false);
     }
   }
 
@@ -2188,7 +2188,7 @@ void Thing::ai_get_next_hop(void)
   TRACE_AND_INDENT();
   dbg("AI");
   TRACE_AND_INDENT();
-  point start((int) mid_at.x, (int) mid_at.y);
+  point start((int) curr_at.x, (int) curr_at.y);
 
   if (! maybe_aip()) {
     err("No monst aip");
@@ -2281,7 +2281,7 @@ bool Thing::ai_choose_avoid_goals(std::multiset< Goal > &goals, const Goal &goal
   for (auto dx = -d; dx <= d; dx++) {
     for (auto dy = -d; dy <= d; dy++) {
 
-      point p(mid_at.x + dx, mid_at.y + dy);
+      point p(curr_at.x + dx, curr_at.y + dy);
       if (level->is_oob(p)) {
         continue;
       }
@@ -2290,7 +2290,7 @@ bool Thing::ai_choose_avoid_goals(std::multiset< Goal > &goals, const Goal &goal
         continue;
       }
 
-      float dist = distance(mid_at + point(dx, dy), it->mid_at);
+      float dist = distance(curr_at + point(dx, dy), it->curr_at);
       if (dist < get_distance_avoid()) {
         continue;
       }
@@ -2324,7 +2324,7 @@ bool Thing::ai_choose_avoid_goals(std::multiset< Goal > &goals, const Goal &goal
   for (auto dx = -d; dx <= d; dx++) {
     for (auto dy = -d; dy <= d; dy++) {
 
-      point p(mid_at.x + dx, mid_at.y + dy);
+      point p(curr_at.x + dx, curr_at.y + dy);
       if (level->is_oob(p)) {
         continue;
       }
@@ -2333,7 +2333,7 @@ bool Thing::ai_choose_avoid_goals(std::multiset< Goal > &goals, const Goal &goal
         continue;
       }
 
-      float dist         = distance(mid_at + point(dx, dy), it->mid_at);
+      float dist         = distance(curr_at + point(dx, dy), it->curr_at);
       int   terrain_cost = get_terrain_cost(p);
       int   score        = -(int) terrain_cost;
       score += dist * 100;
@@ -2361,7 +2361,7 @@ bool Thing::ai_choose_avoid_goals(std::multiset< Goal > &goals, const Goal &goal
   for (auto dx = -d; dx <= d; dx++) {
     for (auto dy = -d; dy <= d; dy++) {
 
-      point p(mid_at.x + dx, mid_at.y + dy);
+      point p(curr_at.x + dx, curr_at.y + dy);
       if (level->is_oob(p)) {
         continue;
       }
@@ -2370,7 +2370,7 @@ bool Thing::ai_choose_avoid_goals(std::multiset< Goal > &goals, const Goal &goal
         continue;
       }
 
-      float dist         = distance(mid_at + point(dx, dy), it->mid_at);
+      float dist         = distance(curr_at + point(dx, dy), it->curr_at);
       int   terrain_cost = get_terrain_cost(p);
       int   score        = -(int) terrain_cost;
       score += dist * 100;

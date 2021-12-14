@@ -183,8 +183,8 @@ void Level::check_thing(Thingp t)
 {
   TRACE_AND_INDENT();
   int group = t->get_group();
-  int x     = t->mid_at.x;
-  int y     = t->mid_at.y;
+  int x     = t->curr_at.x;
+  int y     = t->curr_at.y;
 
   if (unlikely(is_oob(x, y))) {
     t->err("Oob thing");

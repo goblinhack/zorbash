@@ -25,8 +25,8 @@ Thingp Thing::get_most_dangerous_adjacent_thing(void)
   };
 
   for (const auto &d : all_deltas) {
-    auto x = mid_at.x + d.x;
-    auto y = mid_at.y + d.y;
+    auto x = curr_at.x + d.x;
+    auto y = curr_at.y + d.y;
 
     point o(x, y);
     if (level->is_oob(o)) {
@@ -52,7 +52,7 @@ Thingp Thing::get_most_dangerous_adjacent_thing(void)
       //
       if (! environ_prefers_spiderwebs()) {
         if (it->is_spiderweb()) {
-          if (it->mid_at == mid_at) {
+          if (it->curr_at == curr_at) {
             possible.push_back(std::make_pair(it, 666));
             continue;
           }
@@ -93,7 +93,7 @@ Thingp Thing::get_most_dangerous_visible_thing(void)
 
   for (auto dx = -d; dx <= d; dx++) {
     for (auto dy = -d; dy <= d; dy++) {
-      point o(mid_at.x + dx, mid_at.y + dy);
+      point o(curr_at.x + dx, curr_at.y + dy);
       if (level->is_oob(o)) {
         continue;
       }
@@ -121,7 +121,7 @@ Thingp Thing::get_most_dangerous_visible_thing(void)
         //
         // If we're being engulfed, this is a serious threat!
         //
-        if (t->mid_at == mid_at) {
+        if (t->curr_at == curr_at) {
           score += 100;
         }
 
@@ -154,7 +154,7 @@ bool Thing::any_unfriendly_monst_visible(void)
 
   for (auto dx = -d; dx <= d; dx++) {
     for (auto dy = -d; dy <= d; dy++) {
-      point o(mid_at.x + dx, mid_at.y + dy);
+      point o(curr_at.x + dx, curr_at.y + dy);
       if (! dx && ! dy) {
         continue;
       }
@@ -199,8 +199,8 @@ bool Thing::any_adjacent_monst(void)
   };
 
   for (const auto &d : all_deltas) {
-    auto x = mid_at.x + d.x;
-    auto y = mid_at.y + d.y;
+    auto x = curr_at.x + d.x;
+    auto y = curr_at.y + d.y;
 
     point o(x, y);
     if (level->is_oob(o)) {

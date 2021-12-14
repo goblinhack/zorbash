@@ -66,7 +66,7 @@ void Thing::move_carried_items(void)
     if (get_equip_id_carry_anim(e).ok()) {
       auto w = level->thing_find(get_equip_id_carry_anim(e));
       if (w) {
-        w->move_to(mid_at);
+        w->move_to(curr_at);
         w->dir = dir;
       }
     }
@@ -74,7 +74,7 @@ void Thing::move_carried_items(void)
     if (get_equip_id_use_anim(e).ok()) {
       auto w = level->thing_find(get_equip_id_use_anim(e));
       if (w) {
-        w->move_to(mid_at);
+        w->move_to(curr_at);
         w->dir = dir;
       }
     }
@@ -86,7 +86,7 @@ void Thing::move_carried_items(void)
   //
   if (maybe_infop()) {
     for (const auto o : get_item_vector()) {
-      o->move_to(mid_at);
+      o->move_to(curr_at);
       o->dir = dir;
     }
   }
@@ -96,9 +96,9 @@ void Thing::move_carried_items(void)
   //
   if (is_monst() || is_player()) {
     if (! is_floating() && ! is_offscreen) {
-      if (level->is_shallow_water((int) mid_at.x, (int) mid_at.y) &&
-          ! level->is_ripple((int) mid_at.x, (int) mid_at.y)) {
-        point at(mid_at.x, mid_at.y);
+      if (level->is_shallow_water((int) curr_at.x, (int) curr_at.y) &&
+          ! level->is_ripple((int) curr_at.x, (int) curr_at.y)) {
+        point at(curr_at.x, curr_at.y);
         if (game->current_tick_is_too_slow || game->prev_tick_was_too_slow) {
           //
           // No ripples
@@ -126,7 +126,7 @@ void Thing::move_carried_items(void)
     TRACE_AND_INDENT();
     auto w = level->thing_find(on_fire_anim_id);
     if (w) {
-      w->move_to(mid_at);
+      w->move_to(curr_at);
       w->dir = dir;
     }
   }
@@ -148,7 +148,7 @@ void Thing::move_carried_items_immediately(void)
     if (get_equip_id_carry_anim(e).ok()) {
       auto w = level->thing_find(get_equip_id_carry_anim(e));
       if (w) {
-        w->move_to_immediately(mid_at);
+        w->move_to_immediately(curr_at);
         w->dir = dir;
       }
     }
@@ -156,7 +156,7 @@ void Thing::move_carried_items_immediately(void)
     if (get_equip_id_use_anim(e).ok()) {
       auto w = level->thing_find(get_equip_id_use_anim(e));
       if (w) {
-        w->move_to_immediately(mid_at);
+        w->move_to_immediately(curr_at);
         w->dir = dir;
       }
     }
@@ -168,7 +168,7 @@ void Thing::move_carried_items_immediately(void)
   //
   if (maybe_itemp()) {
     for (const auto o : get_item_vector()) {
-      o->move_to_immediately(mid_at);
+      o->move_to_immediately(curr_at);
       o->dir = dir;
     }
   }
@@ -178,7 +178,7 @@ void Thing::move_carried_items_immediately(void)
     TRACE_AND_INDENT();
     auto w = level->thing_find(on_fire_anim_id);
     if (w) {
-      w->move_to_immediately(mid_at);
+      w->move_to_immediately(curr_at);
       w->dir = dir;
     }
   }

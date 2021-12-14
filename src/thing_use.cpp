@@ -39,8 +39,8 @@ void Thing::on_use(Thingp what)
 
     dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_string().c_str(), what->to_string().c_str());
 
-    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, 0U, (unsigned int) mid_at.x,
-                    (unsigned int) mid_at.y);
+    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, 0U, (unsigned int) curr_at.x,
+                    (unsigned int) curr_at.y);
   } else {
     ERR("Bad on_use call [%s] expected mod:function, got %d elems", on_use.c_str(), (int) on_use.size());
   }
@@ -74,8 +74,8 @@ void Thing::on_use(Thingp what, Thingp target)
       dbg("Call %s.%s(%s, %s, %s)", mod.c_str(), fn.c_str(), to_string().c_str(), what->to_string().c_str(),
           target->to_string().c_str());
 
-      py_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, target->id.id, (unsigned int) mid_at.x,
-                      (unsigned int) mid_at.y);
+      py_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, target->id.id, (unsigned int) curr_at.x,
+                      (unsigned int) curr_at.y);
     } else {
       ERR("Bad on_use call [%s] expected mod:function, got %d elems", on_use.c_str(), (int) on_use.size());
     }
@@ -106,8 +106,8 @@ void Thing::on_final_use(Thingp what)
 
     dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_string().c_str(), what->to_string().c_str());
 
-    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, 0U, (unsigned int) mid_at.x,
-                    (unsigned int) mid_at.y);
+    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, 0U, (unsigned int) curr_at.x,
+                    (unsigned int) curr_at.y);
   } else {
     ERR("Bad on_final_use call [%s] expected mod:function, got %d elems", on_final_use.c_str(),
         (int) on_final_use.size());
@@ -142,8 +142,8 @@ void Thing::on_final_use(Thingp what, Thingp target)
       dbg("Call %s.%s(%s, %s, %s)", mod.c_str(), fn.c_str(), to_string().c_str(), what->to_string().c_str(),
           target->to_string().c_str());
 
-      py_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, target->id.id, (unsigned int) mid_at.x,
-                      (unsigned int) mid_at.y);
+      py_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, target->id.id, (unsigned int) curr_at.x,
+                      (unsigned int) curr_at.y);
     } else {
       ERR("Bad on_final_use call [%s] expected mod:function, got %d elems", on_final_use.c_str(),
           (int) on_final_use.size());

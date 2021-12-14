@@ -28,7 +28,7 @@ Thingp Level::thing_new(Tpp tp, const point at, Thingp owner)
   return thing_new(tp->name(), at, owner);
 }
 
-Thingp Level::thing_new(const std::string &tp_name, Thingp owner) { return thing_new(tp_name, owner->mid_at, owner); }
+Thingp Level::thing_new(const std::string &tp_name, Thingp owner) { return thing_new(tp_name, owner->curr_at, owner); }
 
 Thingp Level::thing_new(const std::string &name, const point at, Thingp owner)
 {
@@ -56,9 +56,9 @@ void Thing::on_born(void)
       fn = fn.replace(found, 2, "");
     }
 
-    dbg("Call %s.%s(%s, %d, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), (int) mid_at.x, (int) mid_at.y);
+    dbg("Call %s.%s(%s, %d, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), (int) curr_at.x, (int) curr_at.y);
 
-    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) mid_at.x, (unsigned int) mid_at.y);
+    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
     ERR("Bad on_born call [%s] expected mod:function, got %d elems", on_born.c_str(), (int) on_born.size());
   }
@@ -69,8 +69,8 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
   verify(MTYPE_THING, this);
 
   this->level = level;
-  mid_at      = born;
-  last_mid_at = born;
+  curr_at      = born;
+  last_at = born;
 
   ts_next_frame = 0;
   if (name == "") {
@@ -139,7 +139,7 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
   } else {
     game->world.alloc_thing_id(this);
   }
-  if (mid_at != point(-1, -1)) {
+  if (curr_at != point(-1, -1)) {
     level_enter();
     level_push();
   }
@@ -207,8 +207,8 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
   //
   // Set position prior to attach
   //
-  if (mid_at != point(-1, -1)) {
-    set_interpolated_mid_at(make_fpoint(mid_at));
+  if (curr_at != point(-1, -1)) {
+    set_interpolated_at(make_fpoint(curr_at));
     update_interpolated_position();
   }
 
@@ -264,14 +264,14 @@ void Thing::reinit(void)
 
   if (unlikely(is_player())) {
     if (level->player && (level->player != this)) {
-      DIE("Player exists in multiple places on map, %d,%d and %d,%d", level->player->mid_at.x,
-          level->player->mid_at.y, mid_at.x, mid_at.y);
+      DIE("Player exists in multiple places on map, %d,%d and %d,%d", level->player->curr_at.x,
+          level->player->curr_at.y, curr_at.x, curr_at.y);
       return;
     }
     level->player = this;
   }
 
-  point new_at((int) mid_at.x, (int) mid_at.y);
+  point new_at((int) curr_at.x, (int) curr_at.y);
   if ((new_at.x >= MAP_WIDTH) || (new_at.y >= MAP_HEIGHT)) {
     DIE("New thing is oob at %d, %d", new_at.x, new_at.y);
     return;

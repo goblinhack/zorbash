@@ -260,19 +260,19 @@ void Thing::update(void)
   //
   if (is_weapon_equiper()) {
     if (is_carrier_of_treasure_class_a()) {
-      auto W = level->thing_new(tp_random_weapon_class_a(), mid_at);
+      auto W = level->thing_new(tp_random_weapon_class_a(), curr_at);
       if (W) {
         carry(W);
       }
     }
     if (is_carrier_of_treasure_class_b()) {
-      auto W = level->thing_new(tp_random_weapon_class_b(), mid_at);
+      auto W = level->thing_new(tp_random_weapon_class_b(), curr_at);
       if (W) {
         carry(W);
       }
     }
     if (is_carrier_of_treasure_class_c()) {
-      auto W = level->thing_new(tp_random_weapon_class_c(), mid_at);
+      auto W = level->thing_new(tp_random_weapon_class_c(), curr_at);
       if (W) {
         carry(W);
       }
@@ -281,38 +281,38 @@ void Thing::update(void)
 
   if (is_bag_item_container()) {
     if (is_carrier_of_treasure_class_a()) {
-      auto W = level->thing_new(tp_random_item_not_a_container_class_a(), mid_at);
+      auto W = level->thing_new(tp_random_item_not_a_container_class_a(), curr_at);
       if (W) {
         carry(W);
       }
     }
     if (is_carrier_of_treasure_class_b()) {
-      auto W = level->thing_new(tp_random_item_not_a_container_class_b(), mid_at);
+      auto W = level->thing_new(tp_random_item_not_a_container_class_b(), curr_at);
       if (W) {
         carry(W);
       }
     }
     if (is_carrier_of_treasure_class_c()) {
-      auto W = level->thing_new(tp_random_item_not_a_container_class_c(), mid_at);
+      auto W = level->thing_new(tp_random_item_not_a_container_class_c(), curr_at);
       if (W) {
         carry(W);
       }
     }
   } else if (is_item_carrier()) {
     if (is_carrier_of_treasure_class_a()) {
-      auto W = level->thing_new(tp_random_item_class_a(), mid_at);
+      auto W = level->thing_new(tp_random_item_class_a(), curr_at);
       if (W) {
         carry(W);
       }
     }
     if (is_carrier_of_treasure_class_b()) {
-      auto W = level->thing_new(tp_random_item_class_b(), mid_at);
+      auto W = level->thing_new(tp_random_item_class_b(), curr_at);
       if (W) {
         carry(W);
       }
     }
     if (is_carrier_of_treasure_class_c()) {
-      auto W = level->thing_new(tp_random_item_class_c(), mid_at);
+      auto W = level->thing_new(tp_random_item_class_c(), curr_at);
       if (W) {
         carry(W);
       }

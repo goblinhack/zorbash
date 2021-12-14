@@ -13,7 +13,7 @@
 void Thing::water_tick(void)
 {
   TRACE_AND_INDENT();
-  if (! level->is_water(mid_at.x, mid_at.y)) {
+  if (! level->is_water(curr_at.x, curr_at.y)) {
     return;
   }
 
@@ -27,7 +27,7 @@ void Thing::water_tick(void)
       }
     }
 
-    auto smoke = level->thing_new("smoke", mid_at);
+    auto smoke = level->thing_new("smoke", curr_at);
     smoke->set_lifespan(pcg_random_range(1, 10));
     return;
   }
@@ -37,6 +37,6 @@ void Thing::water_tick(void)
   }
 
   dead("by a watery end");
-  auto smoke = level->thing_new("smoke", mid_at);
+  auto smoke = level->thing_new("smoke", curr_at);
   smoke->set_lifespan(pcg_random_range(1, 10));
 }

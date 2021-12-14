@@ -60,7 +60,7 @@ void Thing::throw_at(Thingp what, Thingp target)
     return;
   }
 
-  if (DISTANCE(mid_at.x, mid_at.y, target->mid_at.x, target->mid_at.y) > get_distance_throw()) {
+  if (DISTANCE(curr_at.x, curr_at.y, target->curr_at.x, target->curr_at.y) > get_distance_throw()) {
     if (is_player()) {
       TOPCON("You cannot throw %s that far.", what->text_the().c_str());
     }
@@ -72,12 +72,12 @@ void Thing::throw_at(Thingp what, Thingp target)
   }
 
   dbg("Thrown %s", what->to_string().c_str());
-  what->move_to_immediately(target->mid_at);
+  what->move_to_immediately(target->curr_at);
 
   //
   // Potions for example are used when thrown. Chocolate frogs, no.
   //
-  if (level->is_lava(target->mid_at.x, target->mid_at.y) || level->is_chasm(target->mid_at.x, target->mid_at.y)) {
+  if (level->is_lava(target->curr_at.x, target->curr_at.y) || level->is_chasm(target->curr_at.x, target->curr_at.y)) {
     drop(what, target);
 
     what->location_check_forced();

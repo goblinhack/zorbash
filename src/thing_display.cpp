@@ -32,8 +32,8 @@ void Thing::blit_non_player_owned_shadow(const Tpp &tpp, const Tilep &tile, cons
   }
 
   if (is_foilage()) {
-    fpoint p  = level->player->get_interpolated_mid_at();
-    fpoint o  = get_interpolated_mid_at();
+    fpoint p  = level->player->get_interpolated_at();
+    fpoint o  = get_interpolated_at();
     fpoint d  = o - p;
     float  dx = d.x;
     float  dy = d.y;
@@ -111,8 +111,8 @@ void Thing::blit_non_player_owned_shadow(const Tpp &tpp, const Tilep &tile, cons
       if (get_immediate_owner_id() == level->player->id) {
         // use default shadow for carried items
       } else if (this != level->player) {
-        fpoint      p = level->player->get_interpolated_mid_at();
-        fpoint      o = get_interpolated_mid_at();
+        fpoint      p = level->player->get_interpolated_at();
+        fpoint      o = get_interpolated_at();
         fpoint      d = o - p;
         const float D = 16.0;
         dx            = d.x / D;
@@ -394,7 +394,7 @@ bool Thing::get_coords(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
                        Tilep &tile, bool reflection)
 {
   TRACE_AND_INDENT();
-  fpoint at = get_interpolated_mid_at();
+  fpoint at = get_interpolated_at();
 
   //
   // We render these offset form their owner, so if dead, then it is
@@ -591,9 +591,9 @@ bool Thing::get_coords(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
   if (unlikely(lunge > 0.0)) {
     point delta;
     if (owner) {
-      delta = owner->get_lunge_to() - owner->mid_at;
+      delta = owner->get_lunge_to() - owner->curr_at;
     } else {
-      delta = get_lunge_to() - mid_at;
+      delta = get_lunge_to() - curr_at;
     }
     float dx = -delta.x * lunge;
     float dy = -delta.y * lunge;
@@ -637,7 +637,7 @@ bool Thing::get_coords(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
     //
     auto map_loc = make_point(at);
     if (owner) {
-      map_loc = owner->mid_at;
+      map_loc = owner->curr_at;
     }
 
     set_submerged_offset(0);
@@ -790,7 +790,7 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
   auto h = get_health();
   auto m = get_health_max();
 
-  auto lit = (fbo == FBO_FULLMAP) || level->is_lit_currently_no_check(mid_at.x, mid_at.y);
+  auto lit = (fbo == FBO_FULLMAP) || level->is_lit_currently_no_check(curr_at.x, curr_at.y);
 
   if (tile && ! tile->is_invisible && ! is_dead && ! reflection && lit &&
       (gfx_health_bar_shown() || (gfx_health_bar_autohide() && (h < m)))) {
@@ -834,7 +834,7 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
   //
   // Means it has been lit, but light does fade
   //
-  uint8_t fade = level->is_lit_currently(mid_at.x, mid_at.y);
+  uint8_t fade = level->is_lit_currently(curr_at.x, curr_at.y);
   if (fbo == FBO_FULLMAP) {
     c.a = 255;
   } else if (get_light_strength()) {

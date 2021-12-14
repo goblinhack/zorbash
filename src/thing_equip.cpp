@@ -38,7 +38,7 @@ void Thing::on_equip(Thingp what)
 
     dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_string().c_str(), what->to_string().c_str());
 
-    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, (unsigned int) mid_at.x, (unsigned int) mid_at.y);
+    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
     ERR("Bad on_equip call [%s] expected mod:function, got %d elems", on_equip.c_str(), (int) on_equip.size());
   }
@@ -68,7 +68,7 @@ void Thing::on_unequip(Thingp what)
 
     dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_string().c_str(), what->to_string().c_str());
 
-    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, (unsigned int) mid_at.x, (unsigned int) mid_at.y);
+    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
     ERR("Bad on_unequip call [%s] expected mod:function, got %d elems", on_unequip.c_str(), (int) on_unequip.size());
   }

@@ -114,18 +114,18 @@ bool player_tick(bool left, bool right, bool up, bool down, bool attack, bool wa
           break;
         }
       }
-    } else if (level->cursor && (level->cursor->mid_at == player->mid_at)) {
+    } else if (level->cursor && (level->cursor->curr_at == player->curr_at)) {
       auto  player_move_delta = player->dir_to_direction();
-      point p = make_point(player->mid_at.x + player_move_delta.x, player->mid_at.y + player_move_delta.y);
+      point p = make_point(player->curr_at.x + player_move_delta.x, player->curr_at.y + player_move_delta.y);
       if (level->is_obs_wall_or_door(p.x, p.y) || level->is_obs_destructable(p.x, p.y)) {
-        player->try_to_jump_carefree(player->mid_at);
+        player->try_to_jump_carefree(player->curr_at);
       } else {
         player->try_to_jump_carefree(p);
       }
     } else if (level->cursor) {
-      point p = make_point(level->cursor->mid_at.x, level->cursor->mid_at.y);
+      point p = make_point(level->cursor->curr_at.x, level->cursor->curr_at.y);
       if (level->is_obs_wall_or_door(p.x, p.y) || level->is_obs_destructable(p.x, p.y)) {
-        player->try_to_jump_carefree(player->mid_at);
+        player->try_to_jump_carefree(player->curr_at);
       } else {
         player->try_to_jump_carefree(p);
       }
@@ -163,7 +163,7 @@ bool player_tick(bool left, bool right, bool up, bool down, bool attack, bool wa
     //
     bool moving = player->is_moving;
 
-    auto future_pos     = player->mid_at + point(dx, dy);
+    auto future_pos     = player->curr_at + point(dx, dy);
     bool shove_allowed  = true;
     bool attack_allowed = true;
     if (wait) {

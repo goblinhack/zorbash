@@ -73,8 +73,8 @@ int Thing::on_owner_damage_strength(Thingp owner, Thingp hitter, int damage)
     dbg("Call %s.%s(%s, %s, %s, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), owner->to_string().c_str(),
         hitter->to_string().c_str(), damage);
 
-    return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, owner->id.id, hitter->id.id, (unsigned int) mid_at.x,
-                          (unsigned int) mid_at.y, (unsigned int) damage);
+    return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, owner->id.id, hitter->id.id, (unsigned int) curr_at.x,
+                          (unsigned int) curr_at.y, (unsigned int) damage);
   }
 
   ERR("Bad on_owner_damage_strength call [%s] expected mod:function, got %d elems", on_owner_damage_strength.c_str(),
@@ -115,8 +115,8 @@ int Thing::on_owner_damage_necrosis(Thingp owner, Thingp hitter, int damage)
     dbg("Call %s.%s(%s, %s, %s, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), owner->to_string().c_str(),
         hitter->to_string().c_str(), damage);
 
-    return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, owner->id.id, hitter->id.id, (unsigned int) mid_at.x,
-                          (unsigned int) mid_at.y, (unsigned int) damage);
+    return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, owner->id.id, hitter->id.id, (unsigned int) curr_at.x,
+                          (unsigned int) curr_at.y, (unsigned int) damage);
   }
 
   ERR("Bad on_owner_damage_necrosis call [%s] expected mod:function, got %d elems", on_owner_damage_necrosis.c_str(),
@@ -150,8 +150,8 @@ int Thing::on_damage_necrosis(Thingp hitter, int damage)
 
     dbg("Call %s.%s(%s, %s, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), hitter->to_string().c_str(), damage);
 
-    return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, (unsigned int) mid_at.x,
-                          (unsigned int) mid_at.y, (unsigned int) damage);
+    return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, (unsigned int) curr_at.x,
+                          (unsigned int) curr_at.y, (unsigned int) damage);
   }
 
   ERR("Bad on_damage_necrosis call [%s] expected mod:function, got %d elems", on_damage_necrosis.c_str(),
@@ -185,8 +185,8 @@ int Thing::on_damage_strength(Thingp hitter, int damage)
 
     dbg("Call %s.%s(%s, %s, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), hitter->to_string().c_str(), damage);
 
-    return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, (unsigned int) mid_at.x,
-                          (unsigned int) mid_at.y, (unsigned int) damage);
+    return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, (unsigned int) curr_at.x,
+                          (unsigned int) curr_at.y, (unsigned int) damage);
   }
 
   ERR("Bad on_damage_strength call [%s] expected mod:function, got %d elems", on_damage_strength.c_str(),
@@ -227,8 +227,8 @@ int Thing::on_owner_damage_constitution(Thingp owner, Thingp hitter, int damage)
     dbg("Call %s.%s(%s, %s, %s, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), owner->to_string().c_str(),
         hitter->to_string().c_str(), damage);
 
-    return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, owner->id.id, hitter->id.id, (unsigned int) mid_at.x,
-                          (unsigned int) mid_at.y, (unsigned int) damage);
+    return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, owner->id.id, hitter->id.id, (unsigned int) curr_at.x,
+                          (unsigned int) curr_at.y, (unsigned int) damage);
   }
 
   ERR("Bad on_owner_damage_constitution call [%s] expected mod:function, got %d elems",

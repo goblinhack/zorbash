@@ -91,7 +91,7 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta)
   }
 
   point shove_delta = delta;
-  point shove_pos   = it->mid_at + shove_delta;
+  point shove_pos   = it->curr_at + shove_delta;
 
   if (it->monst_size() - monst_size() > 1) {
     if (is_player()) {
@@ -150,7 +150,7 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta)
         if (is_player()) {
           TOPCON("The brazier falls back on you!");
         }
-        it->move_to(mid_at);
+        it->move_to(curr_at);
       }
     } else if (it->is_barrel()) {
       if (is_player()) {
@@ -189,8 +189,8 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta)
       it->dead("by being shoved");
       auto spawn_what = it->spawn_on_shoved();
       if (spawn_what != "") {
-        auto spawn_at = it->mid_at;
-        if (spawn_at.x > mid_at.x) {
+        auto spawn_at = it->curr_at;
+        if (spawn_at.x > curr_at.x) {
           it->dir_set_left();
         } else {
           it->dir_set_right();
@@ -239,7 +239,7 @@ ThingShoved Thing::try_to_shove(point future_pos)
 
   auto  x     = future_pos.x;
   auto  y     = future_pos.y;
-  auto  delta = point(x, y) - mid_at;
+  auto  delta = point(x, y) - curr_at;
   point p(future_pos.x, future_pos.y);
 
   //
@@ -289,7 +289,7 @@ ThingShoved Thing::try_to_shove(point future_pos)
 ThingShoved Thing::try_to_shove_into_hazard(Thingp it, point delta)
 {
   if (is_able_to_shove()) {
-    auto shoved_to_position = it->mid_at + delta;
+    auto shoved_to_position = it->curr_at + delta;
     if (level->is_hazard((int) shoved_to_position.x, (int) shoved_to_position.y)) {
       return (try_to_shove(it, delta));
     }

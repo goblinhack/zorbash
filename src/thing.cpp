@@ -129,14 +129,14 @@ const ThingId &Thing::set_spawned_owner_id(const ThingId &v)
   return (get_infop()->spawner_owner_id = v);
 }
 
-const fpoint &Thing::get_interpolated_mid_at(void)
+const fpoint &Thing::get_interpolated_at(void)
 {
   TRACE_AND_INDENT();
-  return (interpolated_mid_at);
+  return (interpolated_at);
 }
 
-void Thing::set_interpolated_mid_at(fpoint v)
+void Thing::set_interpolated_at(fpoint v)
 {
   TRACE_AND_INDENT();
-  interpolated_mid_at = v;
+  interpolated_at = v;
 }

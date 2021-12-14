@@ -1341,7 +1341,7 @@ uint8_t Level::is_monst_or_player(const point &p)
   if (is_monst(p)) {
     return true;
   }
-  if (player && (player->mid_at == p)) {
+  if (player && (player->curr_at == p)) {
     return true;
   }
   return false;

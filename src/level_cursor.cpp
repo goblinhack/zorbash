@@ -26,9 +26,9 @@ void Level::cursor_check_if_scroll_needed(void)
   if (map_follow_player) {
     if (cursor) {
       if (player) {
-        auto d = distance(player->mid_at, cursor->mid_at);
+        auto d = distance(player->curr_at, cursor->curr_at);
         if (d > std::min(TILES_ACROSS, TILES_DOWN)) {
-          cursor->move_to_immediately(player->mid_at);
+          cursor->move_to_immediately(player->curr_at);
         }
       }
     }
@@ -149,7 +149,7 @@ void Level::cursor_recreate(void)
     return;
   }
 
-  auto mid_at = cursor->mid_at;
+  auto curr_at = cursor->curr_at;
 
   auto what = game->request_to_throw_item;
   if (! what) {
@@ -159,7 +159,7 @@ void Level::cursor_recreate(void)
   cursor->dead("update");
   if (what && (game->state == Game::STATE_CHOOSING_TARGET)) {
     bool too_far = false;
-    auto dist    = DISTANCE(player->mid_at.x, player->mid_at.y, mid_at.x, mid_at.y);
+    auto dist    = DISTANCE(player->curr_at.x, player->curr_at.y, curr_at.x, curr_at.y);
 
     if (player->get_distance_throw()) {
       too_far = dist > player->get_distance_throw();
@@ -170,12 +170,12 @@ void Level::cursor_recreate(void)
     }
 
     if (too_far) {
-      cursor = thing_new("cursor_select_fail", mid_at);
+      cursor = thing_new("cursor_select_fail", curr_at);
     } else {
-      cursor = thing_new("cursor_select", mid_at);
+      cursor = thing_new("cursor_select", curr_at);
     }
   } else {
-    cursor = thing_new("cursor", mid_at);
+    cursor = thing_new("cursor", curr_at);
   }
 
   //

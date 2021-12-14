@@ -37,13 +37,13 @@ bool Thing::on_tick(void)
     auto owner = get_top_owner();
     if (owner) {
       dbg("Call %s.%s(owner=%s, item=%s, %d, %d)", mod.c_str(), fn.c_str(), owner->to_string().c_str(),
-          to_string().c_str(), (unsigned int) mid_at.x, (unsigned int) mid_at.y);
-      return py_call_bool_fn(mod.c_str(), fn.c_str(), owner->id.id, id.id, (unsigned int) mid_at.x,
-                             (unsigned int) mid_at.y);
+          to_string().c_str(), (unsigned int) curr_at.x, (unsigned int) curr_at.y);
+      return py_call_bool_fn(mod.c_str(), fn.c_str(), owner->id.id, id.id, (unsigned int) curr_at.x,
+                             (unsigned int) curr_at.y);
     } else {
-      dbg("Call %s.%s(item=%s, %d, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), (unsigned int) mid_at.x,
-          (unsigned int) mid_at.y);
-      return py_call_bool_fn(mod.c_str(), fn.c_str(), 0U, (unsigned int) mid_at.x, (unsigned int) mid_at.y);
+      dbg("Call %s.%s(item=%s, %d, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), (unsigned int) curr_at.x,
+          (unsigned int) curr_at.y);
+      return py_call_bool_fn(mod.c_str(), fn.c_str(), 0U, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
     }
   }
 
@@ -162,8 +162,8 @@ void Thing::achieve_goals_in_life(void)
     auto roll = get_idle_tick();
     if (game->tick_current - get_tick_last_did_something() >= (unsigned int) roll) {
       auto d = get_on_idle_dice();
-      py_call_void_fn(d.python_mod.c_str(), d.python_func.c_str(), id.id, (unsigned int) mid_at.x,
-                      (unsigned int) mid_at.y);
+      py_call_void_fn(d.python_mod.c_str(), d.python_func.c_str(), id.id, (unsigned int) curr_at.x,
+                      (unsigned int) curr_at.y);
       set_tick_last_did_something(game->tick_current);
     }
   }
@@ -311,7 +311,7 @@ void Thing::tick(void)
   }
 
   if (is_monst() || is_player()) {
-    if (mid_at == last_mid_at) {
+    if (curr_at == last_at) {
       incr_idle_count();
     } else {
       set_idle_count(0);

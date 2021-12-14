@@ -29,7 +29,7 @@ void Level::cursor_path_draw_circle(void)
 
   auto radius_min = what->tp()->blast_min_radius();
   auto radius_max = what->tp()->blast_max_radius();
-  auto mid_at     = cursor->mid_at;
+  auto curr_at     = cursor->curr_at;
 
   if (! radius_max) {
     return;
@@ -39,7 +39,7 @@ void Level::cursor_path_draw_circle(void)
   // Check not out of range
   //
   bool too_far = false;
-  auto dist    = distance(player->mid_at, mid_at);
+  auto dist    = distance(player->curr_at, curr_at);
 
   if (game->request_to_throw_item) {
     if (dist > player->get_distance_throw()) {
@@ -51,9 +51,9 @@ void Level::cursor_path_draw_circle(void)
     }
   }
 
-  for (auto x = mid_at.x - radius_max; x <= mid_at.x + radius_max; x++) {
-    for (auto y = mid_at.y - radius_max; y <= mid_at.y + radius_max; y++) {
-      float dist = DISTANCE(x, y, mid_at.x, mid_at.y);
+  for (auto x = curr_at.x - radius_max; x <= curr_at.x + radius_max; x++) {
+    for (auto y = curr_at.y - radius_max; y <= curr_at.y + radius_max; y++) {
+      float dist = DISTANCE(x, y, curr_at.x, curr_at.y);
 
       if (unlikely(is_oob(x, y))) {
         continue;
@@ -128,7 +128,7 @@ void Level::cursor_path_draw_line(point start, point end)
   //
   // Set up obstacles for the search
   //
-  if (is_cursor_path_hazard_for_player(player->mid_at.x, player->mid_at.y)) {
+  if (is_cursor_path_hazard_for_player(player->curr_at.x, player->curr_at.y)) {
     //
     // Just map the shortest path outta here
     //
@@ -141,7 +141,7 @@ void Level::cursor_path_draw_line(point start, point end)
         }
       }
     }
-  } else if (cursor && is_cursor_path_hazard_for_player(cursor->mid_at.x, cursor->mid_at.y)) {
+  } else if (cursor && is_cursor_path_hazard_for_player(cursor->curr_at.x, cursor->curr_at.y)) {
     //
     // If the cursor is on a hazard we can plot a course via hazards.
     //
@@ -154,7 +154,7 @@ void Level::cursor_path_draw_line(point start, point end)
         }
       }
     }
-  } else if (player->collision_obstacle(player->mid_at)) {
+  } else if (player->collision_obstacle(player->curr_at)) {
     //
     // If already on a hazard we can plot a course via hazards.
     //
@@ -347,7 +347,7 @@ void Level::cursor_path_create(void)
   // If not following the player, draw the path
   //
   if (player) {
-    cursor_path_draw(point(player->mid_at.x, player->mid_at.y), point(cursor_at.x, cursor_at.y));
+    cursor_path_draw(point(player->curr_at.x, player->curr_at.y), point(cursor_at.x, cursor_at.y));
   }
 }
 

@@ -62,12 +62,12 @@ public:
   ThingId    id {}; // Unique per thing.
   ThingTiles tiles {};
 
-  fpoint interpolated_mid_at;
+  fpoint interpolated_at;
 
   ts_t ts_next_frame {};
 
-  point last_mid_at; // Previous hop where we were.
-  point mid_at;      // Grid coordinates.
+  point last_at; // Previous hop where we were.
+  point curr_at; // Grid coordinates.
   point last_attached;
   point last_blit_br; // Last blit coords
   point last_blit_tl; // Offset from top left of map
@@ -530,7 +530,7 @@ public:
   const Tpp tp(void);
   const Tpp tp_or_update(void);
 
-  const fpoint &get_interpolated_mid_at(void);
+  const fpoint &get_interpolated_at(void);
 
   const std::string  get_danger_level_str(Thingp); // Cannot return reference
   const std::string &get_damage_bite_dice_str(void);
@@ -1676,7 +1676,7 @@ public:
   void set_fadeup_fade(float);
   void set_fadeup_height(float);
   void set_fall_height(float);
-  void set_interpolated_mid_at(fpoint v);
+  void set_interpolated_at(fpoint v);
   void set_lunge_to(point);
   void set_manifestor(Thingp manifestor);
   void set_leader(Thingp leader);

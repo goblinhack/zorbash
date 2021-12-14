@@ -67,7 +67,7 @@ void Level::update_minimap(bool showing_two_levels, bool show_faded)
           c = RED;
         } else if (is_minion_generator(x, y)) {
           c = PINK;
-        } else if (player && (x == (int) player->mid_at.x) && (y == (int) player->mid_at.y)) {
+        } else if (player && (x == (int) player->curr_at.x) && (y == (int) player->curr_at.y)) {
           c = PINK;
         } else if (is_door(x, y)) {
           c = BROWN;
@@ -201,7 +201,7 @@ void Level::update_minimap(bool showing_two_levels, bool show_faded)
           c = RED;
         } else if (is_minion_generator(x, y)) {
           c = PINK;
-        } else if (player && (x == (int) player->mid_at.x) && (y == (int) player->mid_at.y)) {
+        } else if (player && (x == (int) player->curr_at.x) && (y == (int) player->curr_at.y)) {
           c = WHITE;
         } else if (is_door(x, y)) {
           c = BROWN;

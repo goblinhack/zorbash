@@ -219,7 +219,7 @@ bool Thing::inventory_shortcuts_insert(Thingp item)
     //
     if (game->state == Game::STATE_NORMAL) {
       if (is_player() && check_anything_to_carry(false)) {
-        level->describe(mid_at);
+        level->describe(curr_at);
       }
     }
 
@@ -238,7 +238,7 @@ bool Thing::inventory_shortcuts_insert(Thingp item)
     //
     if (game->state == Game::STATE_NORMAL) {
       if (is_player() && check_anything_to_carry(false)) {
-        level->describe(mid_at);
+        level->describe(curr_at);
       }
     }
 

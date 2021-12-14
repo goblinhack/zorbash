@@ -39,7 +39,7 @@ void Thing::on_owner_set(Thingp owner)
 
     dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_string().c_str(), owner->to_string().c_str());
 
-    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, owner->id.id, (unsigned int) mid_at.x, (unsigned int) mid_at.y);
+    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, owner->id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
     ERR("Bad on_owner_set call [%s] expected mod:function, got %d elems", on_owner_set.c_str(),
         (int) on_owner_set.size());
@@ -83,7 +83,7 @@ void Thing::on_owner_unset(Thingp owner)
 
     dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_string().c_str(), owner->to_string().c_str());
 
-    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, owner->id.id, (unsigned int) mid_at.x, (unsigned int) mid_at.y);
+    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, owner->id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
     ERR("Bad on_owner_unset call [%s] expected mod:function, got %d elems", on_owner_unset.c_str(),
         (int) on_owner_unset.size());

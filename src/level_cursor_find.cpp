@@ -50,7 +50,7 @@ void Level::cursor_find_on_visible_things(const int16_t minx, const int16_t miny
         FOR_ALL_THINGS_END()
       }
     }
-    cursor->mid_at = to;
+    cursor->curr_at = to;
   } else {
     //
     // What tile are we over?

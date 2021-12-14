@@ -153,7 +153,7 @@ int Thing::skill_enchant_count(const uint32_t slot)
 bool Thing::skill_add(Tpp what)
 {
   TRACE_AND_INDENT();
-  auto t = level->thing_new(what, mid_at);
+  auto t = level->thing_new(what, curr_at);
   if (unlikely(! t)) {
     err("Cannot learn skill");
     return false;

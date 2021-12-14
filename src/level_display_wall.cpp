@@ -18,8 +18,8 @@ void Thing::blit_wall_cladding(point &tl, point &br, const ThingTiles *tiles)
   float dw = game->config.one_pixel_width * 1;
   float dh = game->config.one_pixel_height * 1;
 
-  int x = (int) mid_at.x;
-  int y = (int) mid_at.y;
+  int x = (int) curr_at.x;
+  int y = (int) curr_at.y;
 
   if (unlikely(x <= 0) || unlikely(y <= 0) || unlikely(x >= MAP_WIDTH - 1) || unlikely(y >= MAP_HEIGHT - 1)) {
     return;
@@ -126,8 +126,8 @@ void Thing::blit_wall_shadow(point &tl, point &br, const ThingTiles *tiles)
   float tw = game->config.tile_pix_width;
   float th = game->config.tile_pix_height;
 
-  int x = (int) mid_at.x;
-  int y = (int) mid_at.y;
+  int x = (int) curr_at.x;
+  int y = (int) curr_at.y;
 
   if (unlikely(x <= 0) || unlikely(y <= 0) || unlikely(x >= MAP_WIDTH - 1) || unlikely(y >= MAP_HEIGHT - 1)) {
     return;

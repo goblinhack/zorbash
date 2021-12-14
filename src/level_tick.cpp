@@ -143,7 +143,7 @@ bool Level::tick(void)
   }
 
   if (! cursor) {
-    cursor = thing_new("cursor", player->mid_at);
+    cursor = thing_new("cursor", player->curr_at);
   }
 
   handle_all_pending_things();
@@ -540,9 +540,9 @@ bool Level::tick(void)
     //
     float h = 0;
     FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL(this, t) {
-      h += t->mid_at.x;
-      h += t->mid_at.y;
-      t->con("at %f,%f", t->mid_at.x, t->mid_at.y);
+      h += t->curr_at.x;
+      h += t->curr_at.y;
+      t->con("at %f,%f", t->curr_at.x, t->curr_at.y);
     } FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL_END(this)
     CON("TICK %d hash %f random %d", game->tick_current, h, pcg_rand());
 #endif

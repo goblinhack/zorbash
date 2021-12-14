@@ -47,8 +47,8 @@ void Thing::on_you_are_hit_but_still_alive(Thingp hitter,      // an arrow / mon
     //
     // Warning cannot handle negative values here for damage
     //
-    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, real_hitter->id.id, (unsigned int) mid_at.x,
-                    (unsigned int) mid_at.y, (unsigned int) crit, (unsigned int) damage);
+    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, real_hitter->id.id, (unsigned int) curr_at.x,
+                    (unsigned int) curr_at.y, (unsigned int) crit, (unsigned int) damage);
   } else {
     ERR("Bad on_you_are_hit_but_still_alive call [%s] expected mod:function, got %d elems",
         on_you_are_hit_but_still_alive.c_str(), (int) on_you_are_hit_but_still_alive.size());
@@ -80,8 +80,8 @@ void Thing::on_you_are_hit_and_now_dead(Thingp hitter,      // an arrow / monst 
     //
     // Warning cannot handle negative values here for damage
     //
-    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, real_hitter->id.id, (unsigned int) mid_at.x,
-                    (unsigned int) mid_at.y, (unsigned int) crit, (unsigned int) damage);
+    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, real_hitter->id.id, (unsigned int) curr_at.x,
+                    (unsigned int) curr_at.y, (unsigned int) crit, (unsigned int) damage);
   } else {
     ERR("Bad on_you_are_hit_and_now_dead call [%s] expected mod:function, got %d elems",
         on_you_are_hit_and_now_dead.c_str(), (int) on_you_are_hit_and_now_dead.size());
@@ -114,7 +114,7 @@ void Thing::on_you_miss_do(Thingp hitter)
 
     dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_string().c_str(), hitter->to_string().c_str());
 
-    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, (unsigned int) mid_at.x, (unsigned int) mid_at.y);
+    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
     ERR("Bad on_you_miss_do call [%s] expected mod:function, got %d elems", on_you_miss_do.c_str(),
         (int) on_you_miss_do.size());
@@ -144,7 +144,7 @@ void Thing::on_you_bite_attack(void)
 
     dbg("Call %s.%s(%s)", mod.c_str(), fn.c_str(), to_string().c_str());
 
-    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) mid_at.x, (unsigned int) mid_at.y);
+    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
     ERR("Bad on_you_bite_attack call [%s] expected mod:function, got %d elems", on_you_bite_attack.c_str(),
         (int) on_you_bite_attack.size());
@@ -381,7 +381,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     }
   }
 
-  auto delta = mid_at - hitter->mid_at;
+  auto delta = curr_at - hitter->curr_at;
 
   if (real_hitter->tp()->gfx_bounce_on_move()) {
     real_hitter->bounce(0.5, 0.1, 100, 3);
@@ -850,16 +850,16 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
   //
   if (is_monst() || is_player()) {
     if (is_pink_blooded()) {
-      level->thing_new(tp_random_pink_splatter()->name(), mid_at);
+      level->thing_new(tp_random_pink_splatter()->name(), curr_at);
     } else if (is_green_blooded()) {
-      level->thing_new(tp_random_green_splatter()->name(), mid_at);
+      level->thing_new(tp_random_green_splatter()->name(), curr_at);
     } else if (is_red_blooded()) {
-      level->thing_new(tp_random_blood_splatter()->name(), mid_at);
+      level->thing_new(tp_random_blood_splatter()->name(), curr_at);
     } else {
       //
       // Need something else for the undead?
       //
-      level->thing_new(tp_random_blood_splatter()->name(), mid_at);
+      level->thing_new(tp_random_blood_splatter()->name(), curr_at);
     }
   }
 
@@ -875,7 +875,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       ! real_hitter->get_equip_id_carry_anim(MONST_EQUIP_WEAPON).ok()) {
     auto claws = real_hitter->tp()->gfx_anim_use();
     if (claws != "") {
-      auto bite = level->thing_new(claws, mid_at);
+      auto bite = level->thing_new(claws, curr_at);
       bite->bounce(0.1, 0.1, 100, 3);
       bite->move_set_dir_from_delta(delta);
 
@@ -901,7 +901,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     //
     auto reason = "by " + defeater;
 
-    if ((real_hitter->mid_at == mid_at) && real_hitter->is_engulfer()) {
+    if ((real_hitter->curr_at == curr_at) && real_hitter->is_engulfer()) {
       reason = "in the bowels of " + defeater;
     }
 

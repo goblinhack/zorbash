@@ -275,9 +275,9 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
   // Keep these in the same order as my_thing.h and save/load
   /////////////////////////////////////////////////////////////////////////
   in >> bits(my.t->frame_count);
-  in >> bits(my.t->interpolated_mid_at);
-  in >> bits(my.t->last_mid_at);
-  in >> bits(my.t->mid_at);
+  in >> bits(my.t->interpolated_at);
+  in >> bits(my.t->last_at);
+  in >> bits(my.t->curr_at);
   in >> bits(my.t->last_attached);
   in >> bits(my.t->last_blit_br);
   in >> bits(my.t->last_blit_tl);
@@ -500,8 +500,8 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
   IF_DEBUG3
   {
     auto diff = in.tellg() - start;
-    LOG("LOAD %d bytes %s TP %d ID %x last_mid_at %d,%d", (int) diff, name.c_str(), my.t->tp_id, my.t->id.id,
-        my.t->last_mid_at.x, my.t->last_mid_at.y);
+    LOG("LOAD %d bytes %s TP %d ID %x last_at %d,%d", (int) diff, name.c_str(), my.t->tp_id, my.t->id.id,
+        my.t->last_at.x, my.t->last_at.y);
   }
 
   return (in);
@@ -685,7 +685,7 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
             }
 
             t->reinit();
-            // t->con("LOADED %f %f %d", t->mid_at.x, t->mid_at.y, t->id.id);
+            // t->con("LOADED %f %f %d", t->curr_at.x, t->curr_at.y, t->id.id);
 
             // CON("From save file  : %s", t->debug_str.c_str());
             // CON("Newly created as: %s", t->to_dbg_saved_string().c_str());
@@ -712,8 +712,8 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   {
     for (auto p : l->all_things[ group ]) {
       auto t = p.second;
-      csum += t->mid_at.x + t->mid_at.y + t->id.id;
-      // t->con("LOAD %f %f %d", t->mid_at.x, t->mid_at.y, t->id.id);
+      csum += t->curr_at.x + t->curr_at.y + t->id.id;
+      // t->con("LOAD %f %f %d", t->curr_at.x, t->curr_at.y, t->id.id);
       t->init_lights();
     }
   }

@@ -49,7 +49,7 @@ bool Thing::ai_obstacle_for_me(const point &p)
 //
 bool Thing::collision_obstacle(Thingp it)
 {
-  auto p = point(it->mid_at.x, it->mid_at.y);
+  auto p = point(it->curr_at.x, it->curr_at.y);
 
   if (it == this) {
     return false;
@@ -208,7 +208,7 @@ bool Thing::ai_obstacle(Thingp it)
   //
   // Lava, acid etc...
   //
-  if (is_disliked_by_me(it->mid_at)) {
+  if (is_disliked_by_me(it->curr_at)) {
     return true;
   }
 
@@ -269,7 +269,7 @@ bool Thing::ai_obstacle(Thingp it)
   }
 
   if (it->is_secret_door()) {
-    auto dist = distance(it->mid_at, mid_at);
+    auto dist = distance(it->curr_at, curr_at);
     if (dist > THING_AI_CAN_SEE_SECRET_DOOR_DIST) {
       return true;
     }

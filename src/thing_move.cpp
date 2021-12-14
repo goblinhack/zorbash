@@ -46,9 +46,9 @@ void Thing::on_move(void)
       fn = fn.replace(found, 2, "");
     }
 
-    dbg("Call %s.%s(%s, %d, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), (int) mid_at.x, (int) mid_at.y);
+    dbg("Call %s.%s(%s, %d, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), (int) curr_at.x, (int) curr_at.y);
 
-    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) mid_at.x, (unsigned int) mid_at.y);
+    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
     ERR("Bad on_move call [%s] expected mod:function, got %d elems", on_move.c_str(), (int) on_move.size());
   }
@@ -75,7 +75,7 @@ void Thing::move_finish(void)
     if (check_anything_to_carry(true)) {
       BOTCON("Press %%fg=yellow$%s%%fg=reset$ or click to collect.",
              SDL_GetScancodeName((SDL_Scancode) game->config.key_wait_or_collect));
-      level->describe(mid_at);
+      level->describe(curr_at);
       game->request_remake_actionbar = true;
     }
   }
@@ -85,7 +85,7 @@ void Thing::move_finish(void)
   // are where they should be.
   //
   dbg("Move finish update pos");
-  update_pos(mid_at, true);
+  update_pos(curr_at, true);
 
   dbg("Move finish update interp pos");
   update_interpolated_position();
@@ -113,8 +113,8 @@ void Thing::move_finish(void)
   //
   // Something moved
   //
-  if (mid_at != last_mid_at) {
-    level->set_is_map_changed(mid_at.x, mid_at.y);
+  if (curr_at != last_at) {
+    level->set_is_map_changed(curr_at.x, curr_at.y);
   }
 }
 
@@ -125,10 +125,10 @@ bool Thing::move(point future_pos)
     dbg("Move to %d,%d", future_pos.x, future_pos.y);
   }
 
-  bool up              = future_pos.y < mid_at.y;
-  bool down            = future_pos.y > mid_at.y;
-  bool left            = future_pos.x < mid_at.x;
-  bool right           = future_pos.x > mid_at.x;
+  bool up              = future_pos.y < curr_at.y;
+  bool down            = future_pos.y > curr_at.y;
+  bool left            = future_pos.x < curr_at.x;
+  bool right           = future_pos.x > curr_at.x;
   bool attack          = false;
   bool wait_or_collect = false;
   bool shove_allowed   = true;
@@ -142,10 +142,10 @@ bool Thing::move_no_shove_no_attack(point future_pos)
 {
   TRACE_AND_INDENT();
   dbg("Move, no shove, no attack to %s", future_pos.to_string().c_str());
-  bool up              = future_pos.y < mid_at.y;
-  bool down            = future_pos.y > mid_at.y;
-  bool left            = future_pos.x < mid_at.x;
-  bool right           = future_pos.x > mid_at.x;
+  bool up              = future_pos.y < curr_at.y;
+  bool down            = future_pos.y > curr_at.y;
+  bool left            = future_pos.x < curr_at.x;
+  bool right           = future_pos.x > curr_at.x;
   bool attack          = false;
   bool wait_or_collect = false;
   bool shove_allowed   = false;
@@ -159,10 +159,10 @@ bool Thing::move_no_shove_attack_allowed(point future_pos)
 {
   TRACE_AND_INDENT();
   dbg("Move, no shove, attack allowed to %s", future_pos.to_string().c_str());
-  bool up              = future_pos.y < mid_at.y;
-  bool down            = future_pos.y > mid_at.y;
-  bool left            = future_pos.x < mid_at.x;
-  bool right           = future_pos.x > mid_at.x;
+  bool up              = future_pos.y < curr_at.y;
+  bool down            = future_pos.y > curr_at.y;
+  bool left            = future_pos.x < curr_at.x;
+  bool right           = future_pos.x > curr_at.x;
   bool attack          = false;
   bool wait_or_collect = false;
   bool shove_allowed   = false;
@@ -205,8 +205,8 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
   auto manifestor = get_top_manifestor();
   if (manifestor) {
     if (get_distance_manifestor_max()) {
-      auto new_distance  = distance(future_pos, manifestor->mid_at);
-      auto curr_distance = distance(mid_at, manifestor->mid_at);
+      auto new_distance  = distance(future_pos, manifestor->curr_at);
+      auto curr_distance = distance(curr_at, manifestor->curr_at);
       if (new_distance <= curr_distance) {
         //
         // Always allow moves that end up closer to the base
@@ -221,7 +221,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
           //
         } else {
           dbg("Minion cannot move to %d,%d (new-dist %f, curr-dist %f); it tugs at the leash at %d,%d", future_pos.x,
-              future_pos.y, new_distance, curr_distance, manifestor->mid_at.x, manifestor->mid_at.y);
+              future_pos.y, new_distance, curr_distance, manifestor->curr_at.x, manifestor->curr_at.y);
           //
           // Don't make spiders (minions to webs) lunge
           //
@@ -241,7 +241,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
     //
     // Blocked from moving by something stronger?
     //
-    FOR_ALL_THINGS(level, it, mid_at.x, mid_at.y)
+    FOR_ALL_THINGS(level, it, curr_at.x, curr_at.y)
     {
       if (it == this) {
         continue;
@@ -260,18 +260,18 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
     }
     FOR_ALL_THINGS_END()
 
-    if (environ_prefers_spiderwebs() && level->is_spiderweb(mid_at.x, mid_at.y)) {
+    if (environ_prefers_spiderwebs() && level->is_spiderweb(curr_at.x, curr_at.y)) {
       //
       // No getting stuck in webs
       // Also no cleaners stuck in their own gel
       //
-    } else if (is_soft_body() && level->is_heavy(mid_at.x, mid_at.y)) {
+    } else if (is_soft_body() && level->is_heavy(curr_at.x, curr_at.y)) {
       //
       // Makes sure ghosts (or the cursor!) do not get stuck under barrels
       //
       if (! is_ethereal() && ! is_cursor() && ! is_cursor_path()) {
         if (is_player()) {
-          if (level->is_spiderweb(mid_at.x, mid_at.y)) {
+          if (level->is_spiderweb(curr_at.x, curr_at.y)) {
             TOPCON("You are trapped under a barrel!");
             game->tick_begin("trapped in a barrel");
           } else {
@@ -285,7 +285,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
         //
         // Shake the web
         //
-        FOR_ALL_THINGS(level, t, mid_at.x, mid_at.y)
+        FOR_ALL_THINGS(level, t, curr_at.x, curr_at.y)
         {
           if (t->is_barrel()) {
             t->wobble(10);
@@ -299,13 +299,13 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
         incr_stuck_count();
         return false;
       }
-    } else if (! is_sticky() && level->is_sticky(mid_at.x, mid_at.y)) {
+    } else if (! is_sticky() && level->is_sticky(curr_at.x, curr_at.y)) {
       //
       // Makes sure ghosts (or the cursor!) do not get stuck in webs.
       //
       if (! is_ethereal() && ! is_cursor() && ! is_cursor_path()) {
         if (is_player()) {
-          if (level->is_spiderweb(mid_at.x, mid_at.y)) {
+          if (level->is_spiderweb(curr_at.x, curr_at.y)) {
             TOPCON("You are trapped in a web!");
             game->tick_begin("trapped in a web");
           } else {
@@ -319,7 +319,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
         //
         // Shake the web
         //
-        FOR_ALL_THINGS(level, t, mid_at.x, mid_at.y)
+        FOR_ALL_THINGS(level, t, curr_at.x, curr_at.y)
         {
           if (t->is_spiderweb()) {
             t->wobble(10);
@@ -429,7 +429,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
 
   auto x     = future_pos.x;
   auto y     = future_pos.y;
-  auto delta = point(x, y) - mid_at;
+  auto delta = point(x, y) - curr_at;
 
   move_set_dir_from_delta(delta);
 
@@ -451,11 +451,11 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
     return false;
   }
 
-  if ((x == mid_at.x) && (y == mid_at.y)) {
+  if ((x == curr_at.x) && (y == curr_at.y)) {
     return false;
   }
 
-  if (mid_at != future_pos) {
+  if (curr_at != future_pos) {
     if (up) {
       dbg("Try to move up; collision check");
     } else if (down) {
@@ -512,8 +512,8 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
   // as we end up attacking without actually attacking
   //
   if (is_monst() && t && ! t->is_player()) {
-    auto free_attack = (((t->mid_at.x >= mid_at.x) && left) || ((t->mid_at.x <= mid_at.x) && right) ||
-                        ((t->mid_at.y >= mid_at.y) && up) || ((t->mid_at.y <= mid_at.y) && down));
+    auto free_attack = (((t->curr_at.x >= curr_at.x) && left) || ((t->curr_at.x <= curr_at.x) && right) ||
+                        ((t->curr_at.y >= curr_at.y) && up) || ((t->curr_at.y <= curr_at.y) && down));
 
     if (free_attack) {
       TRACE_AND_INDENT();
@@ -536,11 +536,11 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
   }
 
   if (tp()->gfx_animated_can_hflip()) {
-    if (future_pos.x > mid_at.x) {
+    if (future_pos.x > curr_at.x) {
       if (is_facing_left && ! get_ts_flip_start()) {
         set_ts_flip_start(time_get_time_ms_cached());
       }
-    } else if (future_pos.x < mid_at.x) {
+    } else if (future_pos.x < curr_at.x) {
       if (! is_facing_left && ! get_ts_flip_start()) {
         set_ts_flip_start(time_get_time_ms_cached());
       }
@@ -557,7 +557,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
 void Thing::update_interpolated_position(void)
 {
   TRACE_AND_INDENT();
-  fpoint new_pos = make_fpoint(mid_at);
+  fpoint new_pos = make_fpoint(curr_at);
   auto   tpp     = tp();
   float  step    = game->tick_dt;
 
@@ -582,48 +582,48 @@ void Thing::update_interpolated_position(void)
   }
 
   if (is_jumping) {
-    float dx = mid_at.x - last_mid_at.x;
-    float dy = mid_at.y - last_mid_at.y;
+    float dx = curr_at.x - last_at.x;
+    float dy = curr_at.y - last_at.y;
 
-    new_pos.x = last_mid_at.x + dx * step;
-    new_pos.y = last_mid_at.y + dy * step;
+    new_pos.x = last_at.x + dx * step;
+    new_pos.y = last_at.y + dy * step;
   } else if (! is_moving) {
-    if (mid_at != last_mid_at) {
+    if (curr_at != last_at) {
       if (! is_hidden) {
-        dbg("Changed position (new %d,%d, old %d,%d)", mid_at.x, mid_at.y, last_mid_at.x, last_mid_at.y);
+        dbg("Changed position (new %d,%d, old %d,%d)", curr_at.x, curr_at.y, last_at.x, last_at.y);
       }
 
-      new_pos     = make_fpoint(mid_at);
-      last_mid_at = mid_at;
+      new_pos     = make_fpoint(curr_at);
+      last_at = curr_at;
     }
   } else if (game->tick_dt >= 1) {
-    if (mid_at != last_mid_at) {
+    if (curr_at != last_at) {
       if (! is_hidden) {
-        dbg("End of move position (new %d,%d, old %d,%d)", mid_at.x, mid_at.y, last_mid_at.x, last_mid_at.y);
+        dbg("End of move position (new %d,%d, old %d,%d)", curr_at.x, curr_at.y, last_at.x, last_at.y);
       }
 
-      new_pos     = make_fpoint(mid_at);
-      last_mid_at = mid_at;
+      new_pos     = make_fpoint(curr_at);
+      last_at = curr_at;
 
       move_finish();
     }
   } else {
-    float dx = mid_at.x - last_mid_at.x;
-    float dy = mid_at.y - last_mid_at.y;
+    float dx = curr_at.x - last_at.x;
+    float dy = curr_at.y - last_at.y;
 
-    new_pos.x = last_mid_at.x + dx * step;
-    new_pos.y = last_mid_at.y + dy * step;
+    new_pos.x = last_at.x + dx * step;
+    new_pos.y = last_at.y + dy * step;
   }
 
   //
   // Try not to push/pop as it breaks the unsafe walker
   //
-  if (mid_at != make_point(new_pos)) {
+  if (curr_at != make_point(new_pos)) {
     level_pop();
-    set_interpolated_mid_at(new_pos);
+    set_interpolated_at(new_pos);
     level_push();
   } else {
-    set_interpolated_mid_at(new_pos);
+    set_interpolated_at(new_pos);
   }
 
   //
@@ -644,9 +644,9 @@ void Thing::update_pos(point to, bool immediately)
     return;
   }
 
-  point old_at((int) mid_at.x, (int) mid_at.y);
+  point old_at((int) curr_at.x, (int) curr_at.y);
 
-  last_mid_at    = mid_at;
+  last_at    = curr_at;
   has_ever_moved = true;
 
   //
@@ -676,9 +676,9 @@ void Thing::update_pos(point to, bool immediately)
   //
   // Try not to push/pop as it breaks the unsafe walker
   //
-  if (mid_at != to) {
+  if (curr_at != to) {
     level_pop();
-    mid_at = to;
+    curr_at = to;
     level_push();
   }
 
@@ -752,7 +752,7 @@ void Thing::move_to(point to)
 {
   TRACE_AND_INDENT();
   move_finish();
-  auto delta = to - mid_at;
+  auto delta = to - curr_at;
   move_set_dir_from_delta(delta);
 
   update_pos(to, false);
@@ -773,14 +773,14 @@ void Thing::move_delta(point delta)
     return;
   }
 
-  update_pos(mid_at + delta, false);
+  update_pos(curr_at + delta, false);
 }
 
 void Thing::move_to_immediately(point to)
 {
   TRACE_AND_INDENT();
   move_finish();
-  auto delta = to - mid_at;
+  auto delta = to - curr_at;
   move_set_dir_from_delta(delta);
 
   //

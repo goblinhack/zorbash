@@ -323,7 +323,7 @@ void Game::wid_thing_info_create(Thingp t, bool when_hovering_over)
   }
 
   if (when_hovering_over) {
-    if (! level->is_lit_recently(t->mid_at.x, t->mid_at.y)) {
+    if (! level->is_lit_recently(t->curr_at.x, t->curr_at.y)) {
       IF_DEBUG1 { t->log("No; not lit"); }
       return;
     }

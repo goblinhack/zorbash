@@ -21,8 +21,8 @@ void Thing::blit_floor_chasm(point &tl, point &br, const ThingTiles *tiles)
   TRACE_AND_INDENT();
   float th = game->config.tile_pix_height;
 
-  int x = (int) mid_at.x;
-  int y = (int) mid_at.y;
+  int x = (int) curr_at.x;
+  int y = (int) curr_at.y;
 
   if (unlikely(x <= 0) || unlikely(y <= 0) || unlikely(x >= MAP_WIDTH - 1) || unlikely(y >= MAP_HEIGHT - 1)) {
     return;

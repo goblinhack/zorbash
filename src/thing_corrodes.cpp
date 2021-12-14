@@ -29,7 +29,7 @@ void Thing::corrode_tick(void)
   // Need to check if being consumed by a cleaner, hence owner check
   //
   auto owner = get_top_owner();
-  if (level->is_acid(mid_at.x, mid_at.y) || (owner && owner->is_acid())) {
+  if (level->is_acid(curr_at.x, curr_at.y) || (owner && owner->is_acid())) {
     int chance = 0;
 
     if (is_organic()) {

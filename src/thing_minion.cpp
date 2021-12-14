@@ -19,7 +19,7 @@ float Thing::get_distance_from_manifestor(void)
     return -1;
   }
 
-  return distance(mid_at, manifestor->mid_at);
+  return distance(curr_at, manifestor->curr_at);
 }
 
 float Thing::get_distance_from_manifestor(point p)
@@ -29,7 +29,7 @@ float Thing::get_distance_from_manifestor(point p)
     return -1;
   }
 
-  return distance(p, manifestor->mid_at);
+  return distance(p, manifestor->curr_at);
 }
 
 bool Thing::too_far_from_manifestor(void)
@@ -39,7 +39,7 @@ bool Thing::too_far_from_manifestor(void)
     return false;
   }
 
-  if (distance(mid_at, manifestor->mid_at) > get_distance_manifestor_max()) {
+  if (distance(curr_at, manifestor->curr_at) > get_distance_manifestor_max()) {
     return true;
   }
   return false;
@@ -52,7 +52,7 @@ bool Thing::too_far_from_manifestor(point p)
     return false;
   }
 
-  if (distance(p, manifestor->mid_at) > get_distance_manifestor_max()) {
+  if (distance(p, manifestor->curr_at) > get_distance_manifestor_max()) {
     return true;
   }
   return false;
@@ -65,7 +65,7 @@ bool Thing::too_far_from_manifestor(point p, float delta)
     return false;
   }
 
-  if (distance(p, manifestor->mid_at) > get_distance_manifestor_max() + delta) {
+  if (distance(p, manifestor->curr_at) > get_distance_manifestor_max() + delta) {
     return true;
   }
   return false;

@@ -26,7 +26,7 @@ void Thing::fire_tick(void)
   }
 
   bool  hit = false;
-  point at  = mid_at;
+  point at  = curr_at;
 
   if (is_on_fire()) {
     //

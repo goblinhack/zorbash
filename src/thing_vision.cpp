@@ -135,8 +135,8 @@ point Thing::get_vision_source(void)
   if (is_minion() && distance_minion_vision_shared()) {
     auto manifestor = get_top_manifestor();
     if (manifestor) {
-      return manifestor->mid_at;
+      return manifestor->curr_at;
     }
   }
-  return mid_at;
+  return curr_at;
 }

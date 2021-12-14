@@ -27,7 +27,7 @@ bool Thing::ai_blocked(void)
       point(0, 1),
   };
 
-  auto at    = mid_at;
+  auto at    = curr_at;
   auto count = 0;
   for (const auto &d : move_deltas) {
     auto t = at + d;
@@ -47,7 +47,7 @@ bool Thing::ai_blocked_completely(void)
       point(0, -1), point(-1, 0), point(1, 0), point(0, 1), point(0, 0),
   };
 
-  auto at    = mid_at;
+  auto at    = curr_at;
   auto count = 0;
   for (const auto &d : move_deltas) {
     auto t = at + d;
@@ -204,7 +204,7 @@ bool Thing::ai_choose_wander(point &nh)
   // Reached the target? Choose a new one.
   //
   auto target = get_aip()->wander_target;
-  if ((mid_at.x == target.x) && (mid_at.y == target.y)) {
+  if ((curr_at.x == target.x) && (curr_at.y == target.y)) {
     dbg("Reached target");
     target = point(-1, -1);
   }
@@ -212,7 +212,7 @@ bool Thing::ai_choose_wander(point &nh)
   //
   // Try to use the same location.
   //
-  if (ai_create_path(nh, mid_at, target)) {
+  if (ai_create_path(nh, curr_at, target)) {
     return true;
   }
 
@@ -240,12 +240,12 @@ bool Thing::ai_choose_wander(point &nh)
     }
   }
 
-  if (! ai_create_path(nh, mid_at, target)) {
+  if (! ai_create_path(nh, curr_at, target)) {
     dbg("Could not wander; could not create path to %d,%d", target.x, target.y);
     return false;
   }
 
-  if (target == mid_at) {
+  if (target == curr_at) {
     dbg("Could not wander; at target");
     return false;
   }

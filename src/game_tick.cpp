@@ -137,8 +137,8 @@ bool Game::tick_end(void)
     //
     uint32_t h = 0;
     FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL(level, t) {
-      h += (int)t->mid_at.x;
-      h += (int)t->mid_at.y;
+      h += (int)t->curr_at.x;
+      h += (int)t->curr_at.y;
       t->con("THING AT");
     } FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL_END(level)
     CON("TICK %d hash %u rand %d", tick_current, h, pcg_random_range(1, 10000));

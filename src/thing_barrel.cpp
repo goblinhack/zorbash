@@ -31,7 +31,7 @@ void Thing::barrel_tick(void)
     return;
   }
 
-  if (! level->is_barrel(mid_at.x, mid_at.y)) {
+  if (! level->is_barrel(curr_at.x, curr_at.y)) {
     return;
   }
 
@@ -39,7 +39,7 @@ void Thing::barrel_tick(void)
     //
     // Find all non barrels and crush them
     //
-    FOR_ALL_THINGS_THAT_INTERACT(level, t, mid_at.x, mid_at.y)
+    FOR_ALL_THINGS_THAT_INTERACT(level, t, curr_at.x, curr_at.y)
     {
       if (! t->is_barrel()) {
         t->dbg_("Crushed by a barrel");
@@ -51,7 +51,7 @@ void Thing::barrel_tick(void)
     //
     // See if we are under a barrel
     //
-    FOR_ALL_THINGS_THAT_INTERACT(level, t, mid_at.x, mid_at.y)
+    FOR_ALL_THINGS_THAT_INTERACT(level, t, curr_at.x, curr_at.y)
     {
       if (t->is_barrel()) {
         log("Crushed by a barrel");

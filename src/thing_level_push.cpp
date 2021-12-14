@@ -19,9 +19,9 @@ void Thing::level_push(void)
   level_pop();
 
   int group = get_group();
-  level->put_thing((int) mid_at.x, (int) mid_at.y, id, group);
-  auto mx       = (int16_t) (int) mid_at.x;
-  auto my       = (int16_t) (int) mid_at.y;
+  level->put_thing((int) curr_at.x, (int) curr_at.y, id, group);
+  auto mx       = (int16_t) (int) curr_at.x;
+  auto my       = (int16_t) (int) curr_at.y;
   is_attached   = true;
   last_attached = point(mx, my);
 

@@ -53,8 +53,8 @@ bool Thing::spawn_next_to(const std::string &what)
   }
 
   for (const auto &d : all_deltas) {
-    auto x = mid_at.x + d.x;
-    auto y = mid_at.y + d.y;
+    auto x = curr_at.x + d.x;
+    auto y = curr_at.y + d.y;
     auto p = point(x, y);
 
     //
@@ -123,8 +123,8 @@ bool Thing::spawn_next_to_or_on_monst(const std::string &what)
   }
 
   for (const auto &d : all_deltas) {
-    auto x = mid_at.x + d.x;
-    auto y = mid_at.y + d.y;
+    auto x = curr_at.x + d.x;
+    auto y = curr_at.y + d.y;
     auto p = point(x, y);
 
     if (level->is_door(x, y) || level->is_secret_door(x, y) || level->is_minion_generator(x, y) ||
@@ -204,11 +204,11 @@ bool Thing::spawn_radius_range(Thingp item, Thingp target, const std::string &wh
     }
   }
 
-  auto mid_at = target->mid_at;
+  auto curr_at = target->curr_at;
 
-  for (auto x = mid_at.x - radius_max; x <= mid_at.x + radius_max; x++) {
-    for (auto y = mid_at.y - radius_max; y <= mid_at.y + radius_max; y++) {
-      float dist = DISTANCE(x, y, mid_at.x, mid_at.y);
+  for (auto x = curr_at.x - radius_max; x <= curr_at.x + radius_max; x++) {
+    for (auto y = curr_at.y - radius_max; y <= curr_at.y + radius_max; y++) {
+      float dist = DISTANCE(x, y, curr_at.x, curr_at.y);
 
       if (dist >= radius_max + 1) {
         continue;
@@ -252,8 +252,8 @@ bool Thing::spawn_fire(const std::string &what)
   };
 
   for (const auto &d : all_deltas) {
-    auto x = mid_at.x + d.x;
-    auto y = mid_at.y + d.y;
+    auto x = curr_at.x + d.x;
+    auto y = curr_at.y + d.y;
     auto p = point(x, y);
 
     if (level->is_hazard(x, y) || level->is_rock(x, y) || level->is_wall(x, y)) {
@@ -297,8 +297,8 @@ Thingp Thing::spawn_at_if_possible(const std::string &what)
   dbg("Spawn under: %s", what.c_str());
 
   std::vector< point > possible;
-  auto                 x = mid_at.x;
-  auto                 y = mid_at.y;
+  auto                 x = curr_at.x;
+  auto                 y = curr_at.y;
   auto                 p = point(x, y);
 
   if (level->is_hazard(x, y) || level->is_rock(x, y) || level->is_wall(x, y)) {
@@ -335,8 +335,8 @@ Thingp Thing::spawn_at(const std::string &what)
   dbg("Spawn under: %s", what.c_str());
 
   std::vector< point > possible;
-  auto                 x = mid_at.x;
-  auto                 y = mid_at.y;
+  auto                 x = curr_at.x;
+  auto                 y = curr_at.y;
   auto                 p = point(x, y);
 
   possible.push_back(p);

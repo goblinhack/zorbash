@@ -97,8 +97,8 @@ bool Thing::collision_find_best_target(bool *target_attacked, bool *target_overl
       //
       // If this target is closer, prefer it.
       //
-      auto me_pos   = mid_at;
-      auto best_pos = best->target->mid_at;
+      auto me_pos   = curr_at;
+      auto best_pos = best->target->curr_at;
 
       float dist_best = DISTANCE(me_pos.x, me_pos.y, best_pos.x, best_pos.y);
       float dist_cand = DISTANCE(me_pos.x, me_pos.y, best_pos.x, best_pos.y);
@@ -260,7 +260,7 @@ bool Thing::collision_find_best_target(bool *target_attacked, bool *target_overl
   return (ret);
 }
 
-bool things_overlap(const Thingp A, point A_at, const Thingp B) { return A_at == B->mid_at; }
+bool things_overlap(const Thingp A, point A_at, const Thingp B) { return A_at == B->curr_at; }
 
 //
 // If two things collide, return false to stop the walk
@@ -314,7 +314,7 @@ bool Thing::collision_add_candidates(Thingp it, point future_pos, int x, int y, 
       return true;
     }
 
-    if (things_overlap(me, me->mid_at, it)) {
+    if (things_overlap(me, me->curr_at, it)) {
       dbg("Yes; overlaps and can eat");
       thing_add_ai_possible_hit(it, "eat");
     }
@@ -415,7 +415,7 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
   //
   // Allow cleaners to engulf/swallow attack
   //
-  if (is_engulfer() && can_eat(it) && (it->mid_at == future_pos)) {
+  if (is_engulfer() && can_eat(it) && (it->curr_at == future_pos)) {
     if ((int) pcg_random_range(0, 1000) < me_tp->attack_engulf_chance_d1000()) {
       dbg("No; can engulf");
       return false;
@@ -445,7 +445,7 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
       // Allow walking over the dead
       //
       if (can_eat(it)) {
-        if (things_overlap(me, me->mid_at, it)) {
+        if (things_overlap(me, me->curr_at, it)) {
           dbg("Yes; overlaps and can eat");
           return true;
         }
@@ -572,7 +572,7 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
   }
 
   if (can_eat(it)) {
-    if (get_where_i_failed_to_collect_last() == it->mid_at) {
+    if (get_where_i_failed_to_collect_last() == it->curr_at) {
       dbg("No; tried to collect previously");
       set_where_i_failed_to_collect_last(point(-1, -1));
       return false;
@@ -583,7 +583,7 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
       return false;
     }
 
-    if (things_overlap(me, me->mid_at, it)) {
+    if (things_overlap(me, me->curr_at, it)) {
       dbg("Yes; can eat and overlaps");
       return true;
     } else {
@@ -597,7 +597,7 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
     // As we want to be able to shove the barrel, we need to check for
     // collision. However if standing on the thing, allow movement away.
     //
-    if (it->mid_at == mid_at) {
+    if (it->curr_at == curr_at) {
       //
       // Allow movement away. This happens if you jump onto a barrel.
       //
@@ -615,7 +615,7 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
     // As we want to be able to shove the brazier, we need to check for
     // collision. However if standing on the thing, allow movement away.
     //
-    if (it->mid_at == mid_at) {
+    if (it->curr_at == curr_at) {
       //
       // Allow movement away. This happens if you jump onto a brazier.
       //
@@ -771,27 +771,27 @@ bool Thing::collision_check_only(point future_pos)
   // turning a corner. It just helps the game look smoother and is easier to
   // play. However, don't allow shortcuts that bypass doors!
   //
-  auto diff = future_pos - mid_at;
+  auto diff = future_pos - curr_at;
   if (diff.x == -1) {
     if (diff.y == -1) {
-      if (level->is_door(mid_at.x, mid_at.y - 1) || level->is_door(mid_at.x - 1, mid_at.y)) {
+      if (level->is_door(curr_at.x, curr_at.y - 1) || level->is_door(curr_at.x - 1, curr_at.y)) {
         dbg("Cannot move diagonally");
         return true;
       }
     } else if (diff.y == 1) {
-      if (level->is_door(mid_at.x, mid_at.y + 1) || level->is_door(mid_at.x - 1, mid_at.y)) {
+      if (level->is_door(curr_at.x, curr_at.y + 1) || level->is_door(curr_at.x - 1, curr_at.y)) {
         dbg("Cannot move diagonally");
         return true;
       }
     }
   } else if (diff.x == 1) {
     if (diff.y == -1) {
-      if (level->is_door(mid_at.x, mid_at.y - 1) || level->is_door(mid_at.x + 1, mid_at.y)) {
+      if (level->is_door(curr_at.x, curr_at.y - 1) || level->is_door(curr_at.x + 1, curr_at.y)) {
         dbg("Cannot move diagonally");
         return true;
       }
     } else if (diff.y == 1) {
-      if (level->is_door(mid_at.x, mid_at.y + 1) || level->is_door(mid_at.x + 1, mid_at.y)) {
+      if (level->is_door(curr_at.x, curr_at.y + 1) || level->is_door(curr_at.x + 1, curr_at.y)) {
         dbg("Cannot move diagonally");
         return true;
       }
@@ -828,7 +828,7 @@ bool Thing::collision_check_only(point future_pos)
 //
 // "true" on overlap/collision at the current position
 //
-bool Thing::collision_check_only(void) { return (collision_check_only(mid_at)); }
+bool Thing::collision_check_only(void) { return (collision_check_only(curr_at)); }
 
 //
 // Have we hit anything? True on having done something at this (future?)
@@ -846,5 +846,5 @@ bool Thing::collision_check_and_handle_at(point future_pos, bool *target_attacke
 
 bool Thing::collision_check_and_handle_at(bool *target_attacked, bool *target_overlaps)
 {
-  return (collision_check_and_handle_at(mid_at, target_attacked, target_overlaps));
+  return (collision_check_and_handle_at(curr_at, target_attacked, target_overlaps));
 }

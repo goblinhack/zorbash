@@ -49,9 +49,9 @@ void Level::display_target(void)
   blit_fbo_bind(FBO_MAP_VISIBLE);
   glLineWidth(1.0);
 
-  auto mid_at  = cursor->mid_at;
+  auto curr_at  = cursor->curr_at;
   bool too_far = false;
-  if (DISTANCE(player->mid_at.x, player->mid_at.y, mid_at.x, mid_at.y) > what->tp()->range_max()) {
+  if (DISTANCE(player->curr_at.x, player->curr_at.y, curr_at.x, curr_at.y) > what->tp()->range_max()) {
     too_far = true;
   }
 

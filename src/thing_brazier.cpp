@@ -19,7 +19,7 @@ void Thing::brazier_tick(void)
   //
   // This is for if you land on a brazier
   //
-  if (! level->is_brazier(mid_at.x, mid_at.y)) {
+  if (! level->is_brazier(curr_at.x, curr_at.y)) {
     return;
   }
 
@@ -27,7 +27,7 @@ void Thing::brazier_tick(void)
       point(-1, -1), point(1, -1), point(-1, 1), point(1, 1), point(0, -1), point(-1, 0), point(1, 0), point(0, 1),
   };
 
-  FOR_ALL_THINGS_AT_DEPTH(level, t, mid_at.x, mid_at.y, MAP_DEPTH_OBJ)
+  FOR_ALL_THINGS_AT_DEPTH(level, t, curr_at.x, curr_at.y, MAP_DEPTH_OBJ)
   {
     if (! t->is_brazier()) {
       continue;

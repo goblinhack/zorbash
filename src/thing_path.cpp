@@ -55,7 +55,7 @@ bool Thing::path_pop_next_move(void)
     // Just in case the cursor next hop ends up too far away for a single move, then reset it.
     //
     if (! game->robot_mode) {
-      if ((fabs(to.x - mid_at.x) > 1) || (fabs(to.x - mid_at.x) > 1)) {
+      if ((fabs(to.x - curr_at.x) > 1) || (fabs(to.x - curr_at.x) > 1)) {
         clear_move_path("Cursor next-hop is too far away");
         return false;
       }
@@ -70,7 +70,7 @@ bool Thing::path_pop_next_move(void)
   //
   // Jump over obstacles if they appear in the path
   //
-  if ((mid_at != get_infop()->last_failed_jump_at) && is_able_to_jump() &&
+  if ((curr_at != get_infop()->last_failed_jump_at) && is_able_to_jump() &&
       (is_monst() || (is_player() && game->robot_mode))) {
     if (is_disliked_by_me(future_pos) || level->is_barrel(future_pos) || level->is_brazier(future_pos)) {
       IF_DEBUG2
@@ -104,7 +104,7 @@ bool Thing::path_pop_next_move(void)
             //
             AI_LOG("Failed to jump cannot jump over hazards");
             clear_move_path("Failed to jump cannot jump over all hazards");
-            get_infop()->last_failed_jump_at = mid_at;
+            get_infop()->last_failed_jump_at = curr_at;
             return false;
           } else if (try_to_jump_carefully(jump_pos)) {
             AI_LOG("Long jump");
@@ -119,7 +119,7 @@ bool Thing::path_pop_next_move(void)
             //
             AI_LOG("Failed to try a long jump");
             clear_move_path("Failed to try a long jump");
-            get_infop()->last_failed_jump_at = mid_at;
+            get_infop()->last_failed_jump_at = curr_at;
             return false;
           }
         } else if (try_to_jump_carefully(jump_pos, &too_far)) {
@@ -132,7 +132,7 @@ bool Thing::path_pop_next_move(void)
         } else {
           AI_LOG("Failed to jump carefully");
           clear_move_path("Failed to jump carefully");
-          get_infop()->last_failed_jump_at = mid_at;
+          get_infop()->last_failed_jump_at = curr_at;
 
           if (too_far) {
             if (any_unfriendly_monst_visible()) {
@@ -170,7 +170,7 @@ bool Thing::path_pop_next_move(void)
       // Can the monst shove it into a something bad?
       //
       AI_LOG("", "Something is in our way that can be shoved");
-      auto delta = future_pos - mid_at;
+      auto delta = future_pos - curr_at;
       FOR_ALL_THINGS(level, t, future_pos.x, future_pos.y)
       {
         if (t->is_hidden) {
@@ -365,17 +365,17 @@ bool Thing::cursor_path_pop_first_move(void)
   //
   // A path to the target does not exist. Jump?
   //
-  point future_pos = make_point(cursor->mid_at.x, cursor->mid_at.y);
+  point future_pos = make_point(cursor->curr_at.x, cursor->curr_at.y);
 
   //
   // If adjacent, try to move there. There may be no path
   // because perhaps a monster just moved but now we can
   // step there.
   //
-  if ((fabs(future_pos.x - mid_at.x) <= 1) && (fabs(future_pos.y - mid_at.y) <= 1)) {
-    dbg("Target is adjacent, attack or move to %d,%d", cursor->mid_at.x, cursor->mid_at.y);
+  if ((fabs(future_pos.x - curr_at.x) <= 1) && (fabs(future_pos.y - curr_at.y) <= 1)) {
+    dbg("Target is adjacent, attack or move to %d,%d", cursor->curr_at.x, cursor->curr_at.y);
     if (possible_to_attack_at(future_pos)) {
-      attack(cursor->mid_at);
+      attack(cursor->curr_at);
       level->cursor_path_create();
       return true;
     }
@@ -409,8 +409,8 @@ bool Thing::cursor_path_pop_first_move(void)
 void Thing::path_shorten(std::vector< point > &path)
 {
   if (path.size() == 2) {
-    auto px = mid_at.x;
-    auto py = mid_at.y;
+    auto px = curr_at.x;
+    auto py = curr_at.y;
 
     auto n  = path[ 0 ];
     auto nx = n.x;
@@ -462,7 +462,7 @@ void Thing::path_shorten(std::vector< point > &path)
   }
 
   if (path.size()) {
-    if (path[ 0 ] == mid_at) {
+    if (path[ 0 ] == curr_at) {
       path.erase(path.begin());
     }
   }

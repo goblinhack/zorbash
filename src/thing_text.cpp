@@ -320,7 +320,7 @@ void Thing::show_botcon_description(void)
 
   if (! is_hidden) {
     if (is_collectable() && level->player) {
-      if (mid_at == level->player->mid_at) {
+      if (curr_at == level->player->curr_at) {
         auto k = std::string(SDL_GetScancodeName((SDL_Scancode) game->config.key_wait_or_collect));
         if (k == ".") {
           text += " Press %%fg=yellow$" + k + "%%fg=reset$ or click to collect.";

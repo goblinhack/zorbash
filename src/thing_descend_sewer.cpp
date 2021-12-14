@@ -18,7 +18,7 @@
 bool Thing::descend_sewer_tick(void)
 {
   TRACE_AND_INDENT();
-  if (! level->is_descend_sewer(mid_at.x, mid_at.y)) {
+  if (! level->is_descend_sewer(curr_at.x, curr_at.y)) {
     return false;
   }
 
@@ -97,8 +97,8 @@ bool Thing::descend_sewer(void)
     return false;
   }
 
-  int x = player->mid_at.x;
-  int y = player->mid_at.y;
+  int x = player->curr_at.x;
+  int y = player->curr_at.y;
 
   if (is_player()) {
     game->level = l;
@@ -124,13 +124,13 @@ bool Thing::descend_sewer(void)
   }
 
   move_finish();
-  set_interpolated_mid_at(make_fpoint(mid_at));
+  set_interpolated_at(make_fpoint(curr_at));
   update_interpolated_position();
   location_check();
   update_light();
 
   if (is_player() && level->cursor) {
-    level->cursor->move_to_immediately(mid_at);
+    level->cursor->move_to_immediately(curr_at);
   }
 
   is_changing_level = false;

@@ -34,7 +34,7 @@ void Thing::on_leader_set(void)
 
     dbg("Call %s.%s(%ss)", mod.c_str(), fn.c_str(), to_string().c_str());
 
-    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) mid_at.x, (unsigned int) mid_at.y);
+    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
     ERR("Bad on_leader_set call [%s] expected mod:function, got %d elems", on_leader_set.c_str(),
         (int) on_leader_set.size());
@@ -72,7 +72,7 @@ void Thing::on_leader_unset(void)
 
     dbg("Call %s.%s(%s)", mod.c_str(), fn.c_str(), to_string().c_str());
 
-    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) mid_at.x, (unsigned int) mid_at.y);
+    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
     ERR("Bad on_leader_unset call [%s] expected mod:function, got %d elems", on_leader_unset.c_str(),
         (int) on_leader_unset.size());
@@ -86,7 +86,7 @@ float Thing::get_distance_from_leader(void)
     return -1;
   }
 
-  return distance(mid_at, manifestor->mid_at);
+  return distance(curr_at, manifestor->curr_at);
 }
 
 float Thing::get_distance_from_leader(point p)
@@ -96,7 +96,7 @@ float Thing::get_distance_from_leader(point p)
     return -1;
   }
 
-  return distance(p, manifestor->mid_at);
+  return distance(p, manifestor->curr_at);
 }
 
 bool Thing::too_far_from_leader(void)
@@ -106,7 +106,7 @@ bool Thing::too_far_from_leader(void)
     return false;
   }
 
-  if (distance(mid_at, manifestor->mid_at) > get_distance_leader_max()) {
+  if (distance(curr_at, manifestor->curr_at) > get_distance_leader_max()) {
     return true;
   }
   return false;
@@ -119,7 +119,7 @@ bool Thing::too_far_from_leader(point p)
     return false;
   }
 
-  if (distance(p, manifestor->mid_at) > get_distance_leader_max()) {
+  if (distance(p, manifestor->curr_at) > get_distance_leader_max()) {
     return true;
   }
   return false;
@@ -132,7 +132,7 @@ bool Thing::too_far_from_leader(point p, float delta)
     return false;
   }
 
-  if (distance(p, manifestor->mid_at) > get_distance_leader_max() + delta) {
+  if (distance(p, manifestor->curr_at) > get_distance_leader_max() + delta) {
     return true;
   }
   return false;
@@ -321,7 +321,7 @@ void Thing::leader_tick(void)
     //
     // If a leader is too far away, ignore
     //
-    if (distance(t->mid_at, mid_at) > get_distance_recruitment_max() * 2) {
+    if (distance(t->curr_at, curr_at) > get_distance_recruitment_max() * 2) {
       continue;
     }
 

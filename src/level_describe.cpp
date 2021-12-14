@@ -239,7 +239,7 @@ void Level::describe(point p)
       // If showing something under the player, then prefer
       // to keep showing that if nothing else.
       //
-      if (o->mid_at == player->mid_at) {
+      if (o->curr_at == player->curr_at) {
         dbg3("Describe %s; prefer me over current2", o->to_string().c_str());
         return;
       }
@@ -254,7 +254,7 @@ void Level::describe(point p)
           return;
         }
 
-        if (o->mid_at == player->mid_at) {
+        if (o->curr_at == player->curr_at) {
           dbg3("Describe %s; prefer me over current4", o->to_string().c_str());
           return;
         }
@@ -352,7 +352,7 @@ void Level::describe(Thingp t)
     // If showing something under the player, then prefer
     // to keep showing that if nothing else.
     //
-    if (o->mid_at == player->mid_at) {
+    if (o->curr_at == player->curr_at) {
       dbg3("Describe %s; prefer me over current6", o->to_string().c_str());
       return;
     }
@@ -367,7 +367,7 @@ void Level::describe(Thingp t)
         return;
       }
 
-      if (o->mid_at == player->mid_at) {
+      if (o->curr_at == player->curr_at) {
         dbg3("Describe %s; prefer me over current8", o->to_string().c_str());
         return;
       }

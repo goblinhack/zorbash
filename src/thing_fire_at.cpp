@@ -47,8 +47,8 @@ bool Thing::on_firing_at_something(Thingp target)
 
     dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_string().c_str(), target->to_string().c_str());
 
-    return py_call_bool_fn(mod.c_str(), fn.c_str(), id.id, target->id.id, (unsigned int) mid_at.x,
-                           (unsigned int) mid_at.y);
+    return py_call_bool_fn(mod.c_str(), fn.c_str(), id.id, target->id.id, (unsigned int) curr_at.x,
+                           (unsigned int) curr_at.y);
   }
 
   ERR("Bad on_firing_at_something call [%s] expected mod:function, got %d elems", on_firing_at_something.c_str(),
@@ -80,7 +80,7 @@ Thingp Thing::get_best_fire_at_target(void)
     //
     // Closer things are preferred
     //
-    cand->priority -= DISTANCE(mid_at.x, mid_at.y, cand->target->mid_at.x, cand->target->mid_at.y);
+    cand->priority -= DISTANCE(curr_at.x, curr_at.y, cand->target->curr_at.x, cand->target->curr_at.y);
 
     if (cand->priority > best->priority) {
       /*
@@ -103,7 +103,7 @@ Thingp Thing::get_best_fire_at_target(void)
  */
 static void thing_possible_hit_add(Thingp me, Thingp target)
 {
-  if (! get(me->get_aip()->can_see_currently.can_see, (int) target->mid_at.x, (int) target->mid_at.y)) {
+  if (! get(me->get_aip()->can_see_currently.can_see, (int) target->curr_at.x, (int) target->curr_at.y)) {
     return;
   }
 
@@ -132,13 +132,13 @@ bool Thing::fire_at_target(void)
   for (dx = -distance; dx <= distance; dx++)
     for (dy = -distance; dy <= distance; dy++) {
 
-      int x = mid_at.x + dx;
-      int y = mid_at.y + dy;
+      int x = curr_at.x + dx;
+      int y = curr_at.y + dy;
 
       //
       // Too far?
       //
-      auto d = DISTANCE(x, y, mid_at.x, mid_at.y);
+      auto d = DISTANCE(x, y, curr_at.x, curr_at.y);
       if (d > distance) {
         continue;
       }

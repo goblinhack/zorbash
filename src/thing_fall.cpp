@@ -36,7 +36,7 @@ void Thing::on_fall(void)
 
     dbg("Call %s.%s(%ss)", mod.c_str(), fn.c_str(), to_string().c_str());
 
-    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) mid_at.x, (unsigned int) mid_at.y);
+    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
     ERR("Bad on_fall call [%s] expected mod:function, got %d elems", on_fall.c_str(), (int) on_fall.size());
   }
@@ -195,17 +195,17 @@ bool Thing::fall_to_next_level(void)
     // Try close to where we are first; failing that anywhere will do.
     //
     if (tries < 1) {
-      x = mid_at.x;
-      y = mid_at.y;
+      x = curr_at.x;
+      y = curr_at.y;
     } else if (tries < 10) {
-      x = mid_at.x + pcg_random_range(0, MAP_BORDER_ROOM) - MAP_BORDER_ROOM / 2;
-      y = mid_at.y + pcg_random_range(0, MAP_BORDER_ROOM) - MAP_BORDER_ROOM / 2;
+      x = curr_at.x + pcg_random_range(0, MAP_BORDER_ROOM) - MAP_BORDER_ROOM / 2;
+      y = curr_at.y + pcg_random_range(0, MAP_BORDER_ROOM) - MAP_BORDER_ROOM / 2;
     } else if (tries < 100) {
-      x = mid_at.x + pcg_random_range(0, MAP_BORDER_ROOM * 2) - MAP_BORDER_ROOM;
-      y = mid_at.y + pcg_random_range(0, MAP_BORDER_ROOM * 2) - MAP_BORDER_ROOM;
+      x = curr_at.x + pcg_random_range(0, MAP_BORDER_ROOM * 2) - MAP_BORDER_ROOM;
+      y = curr_at.y + pcg_random_range(0, MAP_BORDER_ROOM * 2) - MAP_BORDER_ROOM;
     } else if (tries < 1000) {
-      x = mid_at.x + pcg_random_range(0, MAP_BORDER_ROOM * 4) - MAP_BORDER_ROOM * 2;
-      y = mid_at.y + pcg_random_range(0, MAP_BORDER_ROOM * 4) - MAP_BORDER_ROOM * 2;
+      x = curr_at.x + pcg_random_range(0, MAP_BORDER_ROOM * 4) - MAP_BORDER_ROOM * 2;
+      y = curr_at.y + pcg_random_range(0, MAP_BORDER_ROOM * 4) - MAP_BORDER_ROOM * 2;
     } else if (tries < 10000) {
       x = pcg_random_range(MAP_BORDER_ROOM, MAP_WIDTH - MAP_BORDER_ROOM);
       y = pcg_random_range(MAP_BORDER_ROOM, MAP_HEIGHT - MAP_BORDER_ROOM);

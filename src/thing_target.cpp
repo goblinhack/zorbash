@@ -51,7 +51,7 @@ bool Thing::target_attack_best(int equip)
 
   bool target_attacked = false;
   bool target_overlaps = false;
-  auto hit_at          = mid_at + point(dx, dy);
+  auto hit_at          = curr_at + point(dx, dy);
 
   dbg("Attack at %d,%d delta %d,%d", hit_at.x, hit_at.y, dx, dy);
   TRACE_AND_INDENT();
@@ -103,7 +103,7 @@ bool Thing::target_attack_best(int equip)
 
   dbg("Try to find something to attack, attempt 1");
   for (const auto &d : all_deltas) {
-    auto hit_at = mid_at + point(d.x, d.y);
+    auto hit_at = curr_at + point(d.x, d.y);
 
     //
     // Find the alternative best thing to hit
@@ -169,7 +169,7 @@ bool Thing::target_attack_best(int equip)
 
   dbg("Try to find something to attack, attempt 2");
   for (const auto &d : all_deltas) {
-    auto hit_at = mid_at + point(d.x, d.y);
+    auto hit_at = curr_at + point(d.x, d.y);
 
     //
     // Find the alternative best thing to hit
@@ -196,7 +196,7 @@ bool Thing::target_attack_best(int equip)
       //
       // If being digested, this is high priority...
       //
-      if (t->mid_at == mid_at) {
+      if (t->curr_at == curr_at) {
         prio *= 100;
       }
 
@@ -236,7 +236,7 @@ bool Thing::target_attack_best(int equip)
 
   dbg("Try to find something to attack, attempt 3");
   for (const auto &d : all_deltas) {
-    auto hit_at = mid_at + point(d.x, d.y);
+    auto hit_at = curr_at + point(d.x, d.y);
 
     //
     // Find the alternative best thing to hit

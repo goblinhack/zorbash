@@ -91,10 +91,10 @@ uint8_t game_mouse_down(int32_t x, int32_t y, uint32_t button)
   // double click so we can attack monsts sitting in lava
   //
   if (level->cursor) {
-    if ((std::abs(player->mid_at.x - level->cursor->mid_at.x) <= 1) &&
-        (std::abs(player->mid_at.y - level->cursor->mid_at.y) <= 1)) {
-      int x = level->cursor->mid_at.x;
-      int y = level->cursor->mid_at.y;
+    if ((std::abs(player->curr_at.x - level->cursor->curr_at.x) <= 1) &&
+        (std::abs(player->curr_at.y - level->cursor->curr_at.y) <= 1)) {
+      int x = level->cursor->curr_at.x;
+      int y = level->cursor->curr_at.y;
       FOR_ALL_THINGS_THAT_INTERACT(level, t, x, y)
       {
         if (t == level->player) {
@@ -108,7 +108,7 @@ uint8_t game_mouse_down(int32_t x, int32_t y, uint32_t button)
 
         if (t->is_door() || t->is_alive_monst() || t->is_minion_generator()) {
           player->log("Close enough to attack");
-          player->attack(level->cursor->mid_at);
+          player->attack(level->cursor->curr_at);
           return true;
         }
       }
@@ -121,7 +121,7 @@ uint8_t game_mouse_down(int32_t x, int32_t y, uint32_t button)
   // the user really means it.
   //
   if (! wid_mouse_two_clicks) {
-    auto to = level->cursor->mid_at;
+    auto to = level->cursor->curr_at;
     FOR_ALL_THINGS(level, t, to.x, to.y)
     {
       if (t->is_hidden) {
@@ -141,13 +141,13 @@ uint8_t game_mouse_down(int32_t x, int32_t y, uint32_t button)
   // click check so we do not try to collect things in lava.
   //
   if (level->cursor) {
-    if ((std::abs(player->mid_at.x - level->cursor->mid_at.x) <= 1) &&
-        (std::abs(player->mid_at.y - level->cursor->mid_at.y) <= 1)) {
+    if ((std::abs(player->curr_at.x - level->cursor->curr_at.x) <= 1) &&
+        (std::abs(player->curr_at.y - level->cursor->curr_at.y) <= 1)) {
       //
       // If more than one item, best to let the player move their and
       // open the collect popup.
       //
-      auto items = player->anything_to_carry_at(player->mid_at);
+      auto items = player->anything_to_carry_at(player->curr_at);
       if (items.size() == 1) {
         for (auto item : items) {
           player->log("Close enough to collect");
@@ -199,10 +199,10 @@ uint8_t game_mouse_motion(int32_t x, int32_t y, int32_t relx, int32_t rely, int3
 {
   g_debug_thing = nullptr;
 
-  point p(level->cursor->mid_at.x, level->cursor->mid_at.y);
+  point p(level->cursor->curr_at.x, level->cursor->curr_at.y);
   TOPCON("monst %d corpse %d", level->is_monst(p), level->is_corpse(p));
-  FOR_ALL_THINGS_THAT_INTERACT(level, t, level->cursor->mid_at.x, level->cursor->mid_at.y) {
-    if (level->cursor->mid_at != t->mid_at) {
+  FOR_ALL_THINGS_THAT_INTERACT(level, t, level->cursor->curr_at.x, level->cursor->curr_at.y) {
+    if (level->cursor->curr_at != t->curr_at) {
       continue;
     }
     if (t->is_dead) {

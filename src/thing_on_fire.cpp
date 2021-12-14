@@ -38,7 +38,7 @@ void Thing::on_fire(void)
 
     dbg("Call %s.%s(%s)", mod.c_str(), fn.c_str(), to_string().c_str());
 
-    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) mid_at.x, (unsigned int) mid_at.y);
+    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
     ERR("Bad on_fire call [%s] expected mod:function, got %d elems", on_fire.c_str(), (int) on_fire.size());
   }
@@ -206,7 +206,7 @@ bool Thing::ai_create_on_fire_path(point &nh, const point start, const point end
 bool Thing::ai_on_fire_choose_target(point &nh)
 {
   TRACE_AND_INDENT();
-  point start(mid_at.x, mid_at.y);
+  point start(curr_at.x, curr_at.y);
 
   //
   // Reached the target? Choose a new one.

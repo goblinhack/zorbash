@@ -22,7 +22,7 @@ bool Thing::descend_dungeon_tick(void)
     return false;
   }
 
-  if (! level->is_descend_dungeon(mid_at.x, mid_at.y)) {
+  if (! level->is_descend_dungeon(curr_at.x, curr_at.y)) {
     return false;
   }
 
@@ -126,7 +126,7 @@ bool Thing::descend_dungeon(void)
         move_finish();
 
         dbg("Level change update interpolated position");
-        set_interpolated_mid_at(make_fpoint(mid_at));
+        set_interpolated_at(make_fpoint(curr_at));
         update_interpolated_position();
 
         dbg("Level change location check");
@@ -134,7 +134,7 @@ bool Thing::descend_dungeon(void)
         update_light();
 
         if (is_player() && level->cursor) {
-          level->cursor->move_to_immediately(mid_at);
+          level->cursor->move_to_immediately(curr_at);
         }
 
         is_changing_level = false;

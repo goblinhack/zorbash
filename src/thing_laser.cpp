@@ -43,7 +43,7 @@ Thingp Thing::laser_fire_at(const std::string &laser_name, Thingp target)
     return nullptr;
   }
 
-  auto laser = level->thing_new(laser_name, target->mid_at, this);
+  auto laser = level->thing_new(laser_name, target->curr_at, this);
   if (! laser) {
     return nullptr;
   }

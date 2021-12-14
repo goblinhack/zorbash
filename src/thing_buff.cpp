@@ -119,7 +119,7 @@ bool Thing::buff_add(Tpp what)
   //
   // Need to allow for duplicates, so cannot check if the tp exists
   //
-  auto t = level->thing_new(what, mid_at);
+  auto t = level->thing_new(what, curr_at);
   if (unlikely(! t)) {
     return false;
   }

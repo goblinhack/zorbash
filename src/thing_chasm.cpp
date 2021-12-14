@@ -20,7 +20,7 @@ void Thing::chasm_tick(void)
     return;
   }
 
-  if (level->is_chasm(mid_at.x, mid_at.y)) {
+  if (level->is_chasm(curr_at.x, curr_at.y)) {
     dbg("Over a chasm");
     fall(1, 750);
   }

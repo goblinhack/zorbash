@@ -22,13 +22,13 @@ void Thing::secret_door_tick(void)
     return;
   }
 
-  if (! level->is_secret_door(mid_at.x, mid_at.y)) {
+  if (! level->is_secret_door(curr_at.x, curr_at.y)) {
     return;
   }
 
   dbg("Opened a secret door");
 
-  FOR_ALL_THINGS(level, t, mid_at.x, mid_at.y)
+  FOR_ALL_THINGS(level, t, curr_at.x, curr_at.y)
   {
     if (t->is_hidden) {
       continue;

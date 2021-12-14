@@ -33,7 +33,7 @@ point Thing::get_random_target(void)
   }
 
   while (tries--) {
-    point   start(mid_at.x, mid_at.y);
+    point   start(curr_at.x, curr_at.y);
     int16_t dx = pcg_random_range(-d, d);
     int16_t dy = pcg_random_range(-d, d);
     if (! dx && ! dy) {
@@ -71,7 +71,7 @@ point Thing::get_random_target(void)
   tries = 100;
 
   while (tries--) {
-    point   start(mid_at.x, mid_at.y);
+    point   start(curr_at.x, curr_at.y);
     int16_t dx = pcg_random_range(-d, d);
     int16_t dy = pcg_random_range(-d, d);
     if (! dx && ! dy) {
@@ -96,7 +96,7 @@ point Thing::get_random_target(void)
   //
   // Any point will do
   //
-  point   start(mid_at.x, mid_at.y);
+  point   start(curr_at.x, curr_at.y);
   int16_t dx = pcg_random_range(-d, d);
   int16_t dy = pcg_random_range(-d, d);
   if (! dx && ! dy) {

@@ -384,10 +384,10 @@ bool Thing::possible_to_attack_at(point at)
 
 bool Thing::attack(point future_pos)
 {
-  bool up     = future_pos.y < mid_at.y;
-  bool down   = future_pos.y > mid_at.y;
-  bool left   = future_pos.x < mid_at.x;
-  bool right  = future_pos.x > mid_at.x;
+  bool up     = future_pos.y < curr_at.y;
+  bool down   = future_pos.y > curr_at.y;
+  bool left   = future_pos.x < curr_at.x;
+  bool right  = future_pos.x > curr_at.x;
   bool attack = true;
   bool idle   = false;
 
@@ -671,7 +671,7 @@ bool Thing::attack(Thingp victim, bool prefer_attack_with_jaws)
   // This overrides other damage types. For when we are stuck inside a cleaner
   //
   if (is_engulfer()) {
-    if (victim->mid_at == mid_at) {
+    if (victim->curr_at == curr_at) {
       damage           = get_damage_digest();
       attack_poison    = false;
       attack_future1   = false;
@@ -712,7 +712,7 @@ bool Thing::attack(Thingp victim, bool prefer_attack_with_jaws)
     // Player always uses their weapon
     //
     if (get_equip(MONST_EQUIP_WEAPON)) {
-      auto delta = victim->mid_at - mid_at;
+      auto delta = victim->curr_at - curr_at;
       move_set_dir_from_delta(delta);
       equip_use_may_attack(MONST_EQUIP_WEAPON);
       return true;
@@ -723,7 +723,7 @@ bool Thing::attack(Thingp victim, bool prefer_attack_with_jaws)
     //
     if (victim->is_alive_monst() || victim->is_door() || victim->is_player() || victim->is_minion_generator()) {
       if (get_equip(MONST_EQUIP_WEAPON)) {
-        auto delta = victim->mid_at - mid_at;
+        auto delta = victim->curr_at - curr_at;
         move_set_dir_from_delta(delta);
         equip_use_may_attack(MONST_EQUIP_WEAPON);
         return true;
@@ -755,7 +755,7 @@ bool Thing::attack(Thingp victim, bool prefer_attack_with_jaws)
       //
       // Cannot miss (if engulfing?)
       //
-      if (victim->mid_at == mid_at) {
+      if (victim->curr_at == curr_at) {
         hit = true;
       }
 
@@ -774,7 +774,7 @@ bool Thing::attack(Thingp victim, bool prefer_attack_with_jaws)
         }
 
         if (attack_lunge()) {
-          lunge(victim->mid_at);
+          lunge(victim->curr_at);
         }
 
         //
@@ -796,7 +796,7 @@ bool Thing::attack(Thingp victim, bool prefer_attack_with_jaws)
     dbg("The attack succeeded");
 
     if (attack_lunge()) {
-      lunge(victim->mid_at);
+      lunge(victim->curr_at);
     }
     if (attack_eater()) {
       health_boost(victim->get_nutrition());
@@ -818,7 +818,7 @@ bool Thing::attack(Thingp victim, bool prefer_attack_with_jaws)
       dbg("Attack missed %s", victim->to_string().c_str());
     }
     if (attack_lunge()) {
-      lunge(victim->mid_at);
+      lunge(victim->curr_at);
     }
     dead("by foolishness");
     return true;

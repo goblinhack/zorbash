@@ -21,7 +21,7 @@ void Thing::acid_tick(void)
     return;
   }
 
-  if (! level->is_acid(mid_at.x, mid_at.y)) {
+  if (! level->is_acid(curr_at.x, curr_at.y)) {
     return;
   }
 
@@ -32,8 +32,8 @@ void Thing::acid_tick(void)
   //
   // Give the player a chance
   //
-  if (! level->is_smoke(mid_at.x, mid_at.y)) {
-    auto smoke = level->thing_new("smoke", mid_at);
+  if (! level->is_smoke(curr_at.x, curr_at.y)) {
+    auto smoke = level->thing_new("smoke", curr_at);
     smoke->set_lifespan(pcg_random_range(1, 10));
 
     hit = ((int) pcg_random_range(0, 100) < 50);
@@ -42,7 +42,7 @@ void Thing::acid_tick(void)
   }
 
   if (hit) {
-    FOR_ALL_THINGS_AT_DEPTH(level, t, mid_at.x, mid_at.y, MAP_DEPTH_FLOOR2)
+    FOR_ALL_THINGS_AT_DEPTH(level, t, curr_at.x, curr_at.y, MAP_DEPTH_FLOOR2)
     {
       if (! t->is_acid()) {
         continue;

@@ -36,9 +36,9 @@ void Thing::on_polymorphed(void)
       fn = fn.replace(found, 2, "");
     }
 
-    dbg("Call %s.%s(%s, %d, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), (int) mid_at.x, (int) mid_at.y);
+    dbg("Call %s.%s(%s, %d, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), (int) curr_at.x, (int) curr_at.y);
 
-    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) mid_at.x, (unsigned int) mid_at.y);
+    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
     ERR("Bad on_polymorphed call [%s] expected mod:function, got %d elems", on_polymorphed.c_str(),
         (int) on_polymorphed.size());

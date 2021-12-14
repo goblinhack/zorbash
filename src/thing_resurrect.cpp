@@ -32,17 +32,17 @@ void Thing::resurrect_tick(void)
   // No respawn onto lava or things like that if we don't like that.
   // Or no respawn if something we don't like is standing on us!
   //
-  if (get_terrain_cost(mid_at) >= DMAP_LESS_PREFERRED_TERRAIN) {
+  if (get_terrain_cost(curr_at) >= DMAP_LESS_PREFERRED_TERRAIN) {
     dbg("Do not resurrect, on bad terrain");
     return;
   }
 
-  if (is_hated_by_me(mid_at)) {
+  if (is_hated_by_me(curr_at)) {
     dbg("Do not resurrect, something is present that I hate");
     return;
   }
 
-  FOR_ALL_THINGS_THAT_INTERACT(level, t, mid_at.x, mid_at.x)
+  FOR_ALL_THINGS_THAT_INTERACT(level, t, curr_at.x, curr_at.x)
   {
     if (t == this) {
       continue;
@@ -78,7 +78,7 @@ void Thing::resurrect_tick(void)
 
     if (! i_set_is_monst) {
       i_set_is_monst = true;
-      level->set_is_monst(mid_at.x, mid_at.y);
+      level->set_is_monst(curr_at.x, curr_at.y);
     }
   } else {
     dbg("Too weak to rise from the grave");

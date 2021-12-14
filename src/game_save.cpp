@@ -217,9 +217,9 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   // Keep these in the same order as my_thing.h and save/load
   /////////////////////////////////////////////////////////////////////////
   out << bits(my.t->frame_count);
-  out << bits(my.t->interpolated_mid_at);
-  out << bits(my.t->last_mid_at);
-  out << bits(my.t->mid_at);
+  out << bits(my.t->interpolated_at);
+  out << bits(my.t->last_at);
+  out << bits(my.t->curr_at);
   out << bits(my.t->last_attached);
   out << bits(my.t->last_blit_br);
   out << bits(my.t->last_blit_tl);
@@ -453,8 +453,8 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   IF_DEBUG3
   {
     auto diff = out.tellp() - start;
-    LOG("SAVE %d bytes %s TP %d ID %x last_mid_at %d,%d infop %p", (int) diff, name.c_str(), my.t->tp_id, my.t->id.id,
-        my.t->last_mid_at.x, my.t->last_mid_at.y, my.t->maybe_infop());
+    LOG("SAVE %d bytes %s TP %d ID %x last_at %d,%d infop %p", (int) diff, name.c_str(), my.t->tp_id, my.t->id.id,
+        my.t->last_at.x, my.t->last_at.y, my.t->maybe_infop());
   }
   return (out);
 }
@@ -486,8 +486,8 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   {
     for (auto p : my.t->all_things[ group ]) {
       auto t = p.second;
-      csum += t->mid_at.x + t->mid_at.y + t->id.id;
-      // t->con("SAVE %f %f %d", t->mid_at.x, t->mid_at.y, t->id.id);
+      csum += t->curr_at.x + t->curr_at.y + t->id.id;
+      // t->con("SAVE %f %f %d", t->curr_at.x, t->curr_at.y, t->id.id);
     }
   }
   out << bits(csum);

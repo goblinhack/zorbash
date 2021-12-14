@@ -246,9 +246,9 @@ void Level::display_map_fg_things(int fbo, const int16_t minx, const int16_t min
           IF_DEBUG2
           {
             if (! t->is_moving && ! t->is_jumping && ! t->is_falling) {
-              if (t->mid_at != make_point(t->get_interpolated_mid_at())) {
-                t->die("Thing is not where its interpolated to be; is at %f,%f", t->get_interpolated_mid_at().x,
-                       t->get_interpolated_mid_at().y);
+              if (t->curr_at != make_point(t->get_interpolated_at())) {
+                t->die("Thing is not where its interpolated to be; is at %f,%f", t->get_interpolated_at().x,
+                       t->get_interpolated_at().y);
               }
             }
           }
