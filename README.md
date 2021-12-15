@@ -4,7 +4,9 @@
 <!--                                                                                                                                              -->
 <!-- Next todo                                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
+<!-- - goblin not eating rat                                                                                  -->
 <!-- - leader unset callback                                                                                  -->
+<!-- - goblin leader                                                                                          -->
 <!-- - minion still trying to move through manifestor                                                         -->
 <!-- - lightning damage                                                                                       -->
 <!-- - fire damage                                                                                       -->
