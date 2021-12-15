@@ -634,10 +634,10 @@ void Game::wid_thing_info_add_health(WidPopup *w, Thingp t)
 
   if (t->is_alive_monst() || t->is_player()) {
     if (t->get_health() == t->get_health_max()) {
-      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Health %20d", t->get_health());
+      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Health %21d", t->get_health());
     } else {
       snprintf(tmp2, sizeof(tmp2) - 1, "%d/%d", t->get_health(), t->get_health_max());
-      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Health %20s", tmp2);
+      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Health %21s", tmp2);
     }
     w->log(tmp);
   }
@@ -657,10 +657,10 @@ void Game::wid_thing_info_add_damage_melee(WidPopup *w, Thingp t)
     if (min_value > 0) {
       if (min_value == max_value) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->get_damage_melee_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Melee  %20s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Melee  %21s", tmp2);
       } else {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->get_damage_melee_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Melee  %20s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Melee  %21s", tmp2);
       }
       w->log(tmp);
 
@@ -688,10 +688,10 @@ void Game::wid_thing_info_add_damage_poison(WidPopup *w, Thingp t)
     if (min_value > 0) {
       if (min_value == max_value) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->get_damage_poison_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Poison %20s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Poison %21s", tmp2);
       } else {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->get_damage_poison_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Poison %20s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Poison %21s", tmp2);
       }
       w->log(tmp);
 
@@ -719,10 +719,10 @@ void Game::wid_thing_info_add_damage_future1(WidPopup *w, Thingp t)
     if (min_value > 0) {
       if (min_value == max_value) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->get_damage_future1_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$damage_future1   %20s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$damage_future1   %21s", tmp2);
       } else {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->get_damage_future1_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$damage_future1   %20s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$damage_future1   %21s", tmp2);
       }
       w->log(tmp);
 
@@ -750,10 +750,10 @@ void Game::wid_thing_info_add_damage_future2(WidPopup *w, Thingp t)
     if (min_value > 0) {
       if (min_value == max_value) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->get_damage_future2_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$damage_future2   %20s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$damage_future2   %21s", tmp2);
       } else {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->get_damage_future2_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$damage_future2   %20s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$damage_future2   %21s", tmp2);
       }
       w->log(tmp);
 
@@ -781,10 +781,10 @@ void Game::wid_thing_info_add_damage_future3(WidPopup *w, Thingp t)
     if (min_value > 0) {
       if (min_value == max_value) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->get_damage_future3_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$damage_future3   %20s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$damage_future3   %21s", tmp2);
       } else {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->get_damage_future3_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$damage_future3   %20s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$damage_future3   %21s", tmp2);
       }
       w->log(tmp);
 
@@ -812,10 +812,10 @@ void Game::wid_thing_info_add_damage_future4(WidPopup *w, Thingp t)
     if (min_value > 0) {
       if (min_value == max_value) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->get_damage_future4_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$damage_future4   %20s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$damage_future4   %21s", tmp2);
       } else {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->get_damage_future4_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$damage_future4   %20s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$damage_future4   %21s", tmp2);
       }
       w->log(tmp);
 
@@ -843,10 +843,10 @@ void Game::wid_thing_info_add_damage_fire(WidPopup *w, Thingp t)
     if (min_value > 0) {
       if (min_value == max_value) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->get_damage_fire_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Fire   %20s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Fire   %21s", tmp2);
       } else {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->get_damage_fire_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Fire   %20s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Fire   %21s", tmp2);
       }
       w->log(tmp);
 
@@ -874,10 +874,10 @@ void Game::wid_thing_info_add_damage_crush(WidPopup *w, Thingp t)
     if (min_value > 0) {
       if (min_value == max_value) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->get_damage_crush_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Crush  %20s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Crush  %21s", tmp2);
       } else {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->get_damage_crush_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Crush  %20s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Crush  %21s", tmp2);
       }
       w->log(tmp);
 
@@ -905,11 +905,11 @@ void Game::wid_thing_info_add_damage_lightning(WidPopup *w, Thingp t)
     if (min_value > 0) {
       if (min_value == max_value) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->get_damage_lightning_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Blast  %20s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Blast  %21s", tmp2);
       } else {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value,
                  t->get_damage_lightning_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Blast  %20s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Blast  %21s", tmp2);
       }
       w->log(tmp);
 
@@ -937,10 +937,10 @@ void Game::wid_thing_info_add_damage_energy(WidPopup *w, Thingp t)
     if (min_value > 0) {
       if (min_value == max_value) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->get_damage_energy_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Energy %20s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Energy %21s", tmp2);
       } else {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->get_damage_energy_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Energy %20s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Energy %21s", tmp2);
       }
       w->log(tmp);
 
@@ -968,10 +968,10 @@ void Game::wid_thing_info_add_damage_acid(WidPopup *w, Thingp t)
     if (min_value > 0) {
       if (min_value == max_value) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->get_damage_acid_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Acid   %20s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Acid   %21s", tmp2);
       } else {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->get_damage_acid_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Acid   %20s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Acid   %21s", tmp2);
       }
       w->log(tmp);
 
@@ -999,10 +999,10 @@ void Game::wid_thing_info_add_damage_bite(WidPopup *w, Thingp t)
     if (min_value > 0) {
       if (min_value == max_value) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->get_damage_bite_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Bite   %20s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Bite   %21s", tmp2);
       } else {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->get_damage_bite_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Bite   %20s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Bite   %21s", tmp2);
       }
       w->log(tmp);
 
@@ -1030,10 +1030,10 @@ void Game::wid_thing_info_add_damage_digest(WidPopup *w, Thingp t)
     if (min_value > 0) {
       if (min_value == max_value) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->get_damage_digest_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Digest %20s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Digest %21s", tmp2);
       } else {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d%s", min_value, max_value, t->get_damage_digest_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Digest %20s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Digest %21s", tmp2);
       }
       w->log(tmp);
 
@@ -1061,10 +1061,10 @@ void Game::wid_thing_info_add_damage_necrosis(WidPopup *w, Thingp t)
     if (min_value > 0) {
       if (min_value == max_value) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->get_damage_necrosis_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Rotting%20s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Rotting%21s", tmp2);
       } else {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d%s", min_value, max_value, t->get_damage_necrosis_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Rotting%20s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Rotting%21s", tmp2);
       }
       w->log(tmp);
 
@@ -1314,18 +1314,18 @@ void Game::wid_thing_info_add_charge_count(WidPopup *w, Thingp t)
     auto c = player->item_count_including_charges(t->tp());
     if (c > t->get_charge_count()) {
       snprintf(tmp2, sizeof(tmp2) - 1, "%d(%d tot)", t->get_charge_count(), c);
-      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Charges%20s", tmp2);
+      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Charges%21s", tmp2);
       w->log(tmp);
     } else {
       snprintf(tmp2, sizeof(tmp2) - 1, "%d", t->get_charge_count());
-      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Charges%20s", tmp2);
+      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Charges%21s", tmp2);
       w->log(tmp);
     }
   } else {
     auto c = player->item_count_including_charges(t->tp());
     if (c > 1) {
       snprintf(tmp2, sizeof(tmp2) - 1, "%d", c);
-      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Count  %20s", tmp2);
+      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Count  %21s", tmp2);
       w->log(tmp);
     }
   }
