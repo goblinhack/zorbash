@@ -45,13 +45,6 @@ bool Thing::possible_to_attack(const Thingp victim)
     return false;
   }
 
-  /*
-   * Don't attadk thy leader or follower
-   */
-  if (same_leader(victim)) {
-    return false;
-  }
-
   //
   // Weapons can't attack all by themselves. That would be nuts.
   //
@@ -91,16 +84,23 @@ bool Thing::possible_to_attack(const Thingp victim)
   if (victim->is_open) {
     dbg("Cannot attack %s, it's open", victim->to_string().c_str());
     return false;
-  } else {
-    //
-    // Attacking of closed doors?
-    //
-    if (victim->is_door()) {
-      if (me->is_able_to_break_down_doors()) {
-        dbg("Can break down door %s", victim->to_string().c_str());
-        return true;
-      }
+  }
+
+  //
+  // Attacking of closed doors?
+  //
+  if (victim->is_door()) {
+    if (me->is_able_to_break_down_doors()) {
+      dbg("Can break down door %s", victim->to_string().c_str());
+      return true;
     }
+  }
+
+  /*
+   * Don't attadk thy leader or follower
+   */
+  if (same_leader(victim)) {
+    return false;
   }
 
   if (is_alive_monst() || is_resurrected) {

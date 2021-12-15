@@ -31,6 +31,12 @@ bool Thing::ai_obstacle_for_me(const point &p)
       if (t->is_the_grid) {
         continue;
       }
+      if (t->is_floor()) {
+        continue;
+      }
+      if (t->is_hidden) {
+        continue;
+      }
 
       //
       // "true" on collision

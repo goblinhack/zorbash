@@ -43,6 +43,12 @@ void tp_fixup(void)
         DIE("Tp %s cannot be both interesting and temporary", tp->name().c_str());
       }
     }
+
+    if (tp->is_floor()) {
+      if (tp->is_interesting()) {
+        DIE("Tp %s interesting floor?", tp->name().c_str());
+      }
+    }
   }
 
   for (auto &tp : tp_name_map) {

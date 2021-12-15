@@ -459,6 +459,9 @@ public:
   if (t->is_the_grid) {                                                                                              \
     continue;                                                                                                        \
   }                                                                                                                  \
+  if (t->is_floor()) {                                                                                               \
+    continue;                                                                                                        \
+  }                                                                                                                  \
   if (t->is_hidden) {                                                                                                \
     continue;                                                                                                        \
   }                                                                                                                  \
@@ -475,6 +478,9 @@ public:
   if (t->is_the_grid) {                                                                                              \
     continue;                                                                                                        \
   }                                                                                                                  \
+  if (t->is_floor()) {                                                                                               \
+    continue;                                                                                                        \
+  }                                                                                                                  \
   if (t->is_hidden) {                                                                                                \
     continue;                                                                                                        \
   }                                                                                                                  \
@@ -485,6 +491,9 @@ public:
 #define FOR_ALL_THINGS_THAT_INTERACT_UNSAFE(level, t, x, y)                                                          \
   FOR_ALL_THINGS_WALKER_UNSAFE(level, t, x, y)                                                                       \
   if (t->is_the_grid) {                                                                                              \
+    continue;                                                                                                        \
+  }                                                                                                                  \
+  if (t->is_floor()) {                                                                                               \
     continue;                                                                                                        \
   }                                                                                                                  \
   if (t->is_hidden) {                                                                                                \
@@ -500,6 +509,9 @@ public:
 #define FOR_ALL_COLLISION_THINGS(level, t, x, y)                                                                     \
   FOR_ALL_THINGS_SAFE_WALKER(level, t, x, y)                                                                         \
   if (t->is_the_grid) {                                                                                              \
+    continue;                                                                                                        \
+  }                                                                                                                  \
+  if (t->is_floor()) {                                                                                               \
     continue;                                                                                                        \
   }                                                                                                                  \
   if (t->is_hidden) {                                                                                                \

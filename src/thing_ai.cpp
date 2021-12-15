@@ -442,6 +442,25 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
         continue;
       }
 
+      //
+      // If a member of the same team is in the way, do not try to
+      // jump over them. Better to walk around so you can attack
+      // from all sides.
+      //
+      if (is_able_to_follow()) {
+        FOR_ALL_THINGS_THAT_INTERACT(level, it, p.x, p.y)
+        {
+          if (same_leader(it)) {
+            jump_allowed = false;
+            break;
+          }
+        }
+        FOR_ALL_THINGS_END();
+      }
+
+      //
+      // So if we get here this thing is an AI obstacle. Can we jump over it?
+      //
       if (! jump_allowed) {
         continue;
       }
@@ -457,72 +476,70 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
         //
         // Trace all possible jump paths to see if we can jump over
         //
-        if (is_disliked_by_me(p) || ai_obstacle_for_me(p)) {
-          auto jump_dist = how_far_i_can_jump_max();
-          for (const auto &jp : game->jump_paths) {
-            point jump_begin(p.x + jp.begin.x, p.y + jp.begin.y);
-            point jump_end(p.x + jp.end.x, p.y + jp.end.y);
+        auto jump_dist = how_far_i_can_jump_max();
+        for (const auto &jp : game->jump_paths) {
+          point jump_begin(p.x + jp.begin.x, p.y + jp.begin.y);
+          point jump_end(p.x + jp.end.x, p.y + jp.end.y);
 
-            if (level->is_oob(jump_begin)) {
+          if (level->is_oob(jump_begin)) {
+            continue;
+          }
+
+          if (level->is_oob(jump_end)) {
+            continue;
+          }
+
+          //
+          // No jump begin/end from a chasm or barrel for example
+          //
+          if (is_disliked_by_me(jump_begin) || ai_obstacle_for_me(jump_begin)) {
+            continue;
+          }
+
+          if (is_disliked_by_me(jump_end) || ai_obstacle_for_me(jump_end)) {
+            continue;
+          }
+
+          //
+          // Must be able to see the begin/end.
+          //
+          if (! get(aip->can_see_ever.can_see, jump_begin.x, jump_begin.y)) {
+            continue;
+          }
+
+          //
+          // Too far?
+          //
+          float dist = DISTANCE(jump_begin.x, jump_begin.y, jump_end.x, jump_end.y);
+          if (dist > jump_dist + 1) {
+            continue;
+          }
+
+          //
+          // Check we really need to jump over all things in the path.
+          //
+          // Also check for walls. Is it fair to jump over walls?
+          //
+          bool jump = true;
+          for (const auto &jump_over : jp.path) {
+            auto j = jump_over + p;
+            if (j == p) {
               continue;
             }
-
-            if (level->is_oob(jump_end)) {
-              continue;
+            if (level->is_obs_wall_or_door(j)) {
+              jump = false;
+              break;
             }
-
-            //
-            // No jump begin/end from a chasm or barrel for example
-            //
-            if (is_disliked_by_me(jump_begin) || ai_obstacle_for_me(jump_begin)) {
-              continue;
+            if (! ai_obstacle_for_me(j)) {
+              jump = false;
+              break;
             }
+          }
 
-            if (is_disliked_by_me(jump_end) || ai_obstacle_for_me(jump_end)) {
-              continue;
-            }
-
-            //
-            // Must be able to see the begin/end.
-            //
-            if (! get(aip->can_see_ever.can_see, jump_begin.x, jump_begin.y)) {
-              continue;
-            }
-
-            //
-            // Too far?
-            //
-            float dist = DISTANCE(jump_begin.x, jump_begin.y, jump_end.x, jump_end.y);
-            if (dist > jump_dist + 1) {
-              continue;
-            }
-
-            //
-            // Check we really need to jump over all things in the path.
-            //
-            // Also check for walls. Is it fair to jump over walls?
-            //
-            bool jump = true;
+          if (jump) {
             for (const auto &jump_over : jp.path) {
               auto j = jump_over + p;
-              if (j == p) {
-                continue;
-              }
-              if (level->is_obs_wall_or_door(j)) {
-                jump = false;
-                break;
-              }
-              if (! ai_obstacle_for_me(j)) {
-                jump = false;
-                break;
-              }
-            }
-
-            if (jump) {
-              for (const auto &jump_over : jp.path) {
-                auto j = jump_over + p;
-                set(can_jump, j.x, j.y, DMAP_IS_PASSABLE);
-              }
+              set(can_jump, j.x, j.y, DMAP_IS_PASSABLE);
             }
           }
         }
@@ -534,120 +551,122 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
   // Grow the search space beyond the light
   //
   std::array< std::array< bool, MAP_WIDTH >, MAP_HEIGHT > walked = {};
-  {
-    for (int y = miny; y <= maxy; y++) {
-      for (int x = minx; x <= maxx; x++) {
-        point p(x, y);
+  if (0) {
+    {
+      for (int y = miny; y <= maxy; y++) {
+        for (int x = minx; x <= maxx; x++) {
+          point p(x, y);
 
-        if (p.x >= MAP_WIDTH - MAP_BORDER_ROCK) {
-          continue;
-        }
-        if (p.y >= MAP_HEIGHT - MAP_BORDER_ROCK) {
-          continue;
-        }
-        if (p.x < MAP_BORDER_ROCK) {
-          continue;
-        }
-        if (p.y < MAP_BORDER_ROCK) {
-          continue;
-        }
+          if (p.x >= MAP_WIDTH - MAP_BORDER_ROCK) {
+            continue;
+          }
+          if (p.y >= MAP_HEIGHT - MAP_BORDER_ROCK) {
+            continue;
+          }
+          if (p.x < MAP_BORDER_ROCK) {
+            continue;
+          }
+          if (p.y < MAP_BORDER_ROCK) {
+            continue;
+          }
 
-        //
-        // Don't look too far beyond where we can go
-        //
-        if (too_far_from_manifestor(p, 1)) {
-          continue;
-        }
-
-        if (too_far_from_leader(p, 1)) {
-          continue;
-        }
-
-        if (! get(aip->can_see_ever.can_see, p.x, p.y)) {
-          continue;
-        }
-
-        //
-        // Can't see past walls. However we can see over chasms to expand the search space
-        //
-        if (level->is_door(p)) {
           //
-          // Allow us to see doors so we can search them
+          // Don't look too far beyond where we can go
           //
-        } else if (level->is_obs_wall_or_door(p)) {
+          if (too_far_from_manifestor(p, 1)) {
+            continue;
+          }
+
+          if (too_far_from_leader(p, 1)) {
+            continue;
+          }
+
+          if (! get(aip->can_see_ever.can_see, p.x, p.y)) {
+            continue;
+          }
+
           //
-          // But allow chasms and lava so we can see over. Just block on walls and pillars etc...
+          // Can't see past walls. However we can see over chasms to expand the search space
           //
-          continue;
-        }
-
-        set(walked, x, y, true);
-
-        for (auto dx = -1; dx <= 1; dx++) {
-          for (auto dy = -1; dy <= 1; dy++) {
-
-            point o(p.x + dx, p.y + dy);
-            if (level->is_oob(o)) {
-              continue;
-            }
-
-            if (! dx && ! dy) {
-              continue;
-            }
-
-            if (level->is_door(o)) {
-              //
-              // Allow us to see doors so we can search them
-              //
-            } else if (level->is_obs_wall_or_door(o)) {
-              //
-              // But allow chasms and lava so we can see over. Just block on walls and pillars etc...
-              //
-              continue;
-            }
-
+          if (level->is_door(p)) {
             //
-            // Check for something we've never seen before
+            // Allow us to see doors so we can search them
             //
-            if (! get(aip->can_see_ever.can_see, o.x, o.y) && ! get(aip->interrupt_map.val, o.x, o.y)) {
+          } else if (level->is_obs_wall_or_door(p)) {
+            //
+            // But allow chasms and lava so we can see over. Just block on walls and pillars etc...
+            //
+            continue;
+          }
 
-              FOR_ALL_THINGS_THAT_INTERACT(level, it, o.x, o.y)
-              {
-                if (it == this) {
-                  continue;
-                }
+          set(walked, x, y, true);
 
-                if (it->is_changing_level || it->is_hidden || it->is_falling || it->is_jumping) {
-                  continue;
-                }
+          for (auto dx = -1; dx <= 1; dx++) {
+            for (auto dy = -1; dy <= 1; dy++) {
 
-                if (worth_collecting(it) > 0) {
-                  set(aip->interrupt_map.val, p.x, p.y, game->tick_current);
-                  if (check_for_interrupts) {
-                    something_changed++;
-                    dbg("Interrupted by thing worth collecting %s", it->to_string().c_str());
-                  }
-                }
-                if (is_dangerous(it)) {
-                  set(aip->interrupt_map.val, p.x, p.y, game->tick_current);
-                  if (check_for_interrupts) {
-                    something_changed++;
-                    dbg("Interrupted by dangerous thing %s", it->to_string().c_str());
-                  }
-                }
-
-                if (worth_eating(it)) {
-                  set(aip->interrupt_map.val, p.x, p.y, game->tick_current);
-                  if (check_for_interrupts) {
-                    something_changed++;
-                    dbg("Interrupted by edible collecting %s", it->to_string().c_str());
-                  }
-                }
+              point o(p.x + dx, p.y + dy);
+              if (level->is_oob(o)) {
+                continue;
               }
-              FOR_ALL_THINGS_END();
-            }
 
-            set(dmap_can_see->val, o.x, o.y, DMAP_IS_PASSABLE);
+              if (! dx && ! dy) {
+                continue;
+              }
+
+              if (level->is_door(o)) {
+                //
+                // Allow us to see doors so we can search them
+                //
+              } else if (level->is_obs_wall_or_door(o)) {
+                //
+                // But allow chasms and lava so we can see over. Just block on walls and pillars etc...
+                //
+                continue;
+              }
+
+              //
+              // Check for something we've never seen before
+              //
+              if (! get(aip->can_see_ever.can_see, o.x, o.y) && ! get(aip->interrupt_map.val, o.x, o.y)) {
+
+                FOR_ALL_THINGS_THAT_INTERACT(level, it, o.x, o.y)
+                {
+                  if (it == this) {
+                    continue;
+                  }
+
+                  if (it->is_changing_level || it->is_hidden || it->is_falling || it->is_jumping) {
+                    continue;
+                  }
+
+                  if (worth_collecting(it) > 0) {
+                    set(aip->interrupt_map.val, p.x, p.y, game->tick_current);
+                    if (check_for_interrupts) {
+                      something_changed++;
+                      dbg("Interrupted by thing worth collecting %s", it->to_string().c_str());
+                    }
+                  }
+                  if (is_dangerous(it)) {
+                    set(aip->interrupt_map.val, p.x, p.y, game->tick_current);
+                    if (check_for_interrupts) {
+                      something_changed++;
+                      dbg("Interrupted by dangerous thing %s", it->to_string().c_str());
+                    }
+                  }
+
+                  if (worth_eating(it)) {
+                    set(aip->interrupt_map.val, p.x, p.y, game->tick_current);
+                    if (check_for_interrupts) {
+                      something_changed++;
+                      dbg("Interrupted by edible collecting %s", it->to_string().c_str());
+                    }
+                  }
+                }
+                FOR_ALL_THINGS_END();
+              }
+
+              // set(dmap_can_see->val, o.x, o.y, DMAP_IS_PASSABLE);
+            }
           }
         }
       }
@@ -758,9 +777,9 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
 
   IF_DEBUG2
   {
-    if (is_player()) {
+    if (is_debug_type()) {
       log("Dmap can see:");
-      dmap_print(dmap_can_see);
+      dmap_print(dmap_can_see, curr_at, point(minx, miny), point(maxx, maxy));
     }
   }
 

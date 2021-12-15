@@ -95,6 +95,9 @@ void Thing::add_enemy(Thingp attacker)
   if (! ai_resent_count()) {
     return;
   }
+  if (same_leader(attacker)) {
+    return;
+  }
 
   if (! get_aip()->enemies[ attacker->id ]) {
     if (is_player() && game->robot_mode) {

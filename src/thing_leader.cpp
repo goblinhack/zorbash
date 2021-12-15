@@ -341,6 +341,14 @@ bool Thing::same_leader(Thingp it)
     return false;
   }
 
+  if (! is_interesting()) {
+    return false;
+  }
+
+  if (! it->is_interesting()) {
+    return false;
+  }
+
   if (it == this) {
     return true;
   }
@@ -383,6 +391,15 @@ bool Thing::same_leader(Thingp it)
   if (! its_leader) {
     its_leader = it->get_leader();
   }
+
+  //  con("same leader");
+  //  it->con("same leader");
+  //  if (my_leader) {
+  //    my_leader->con("my leader");
+  //  }
+  //  if (its_leader) {
+  //    its_leader->con("its leader");
+  //  }
 
   if (its_leader && (its_leader == my_leader)) {
     return true;
