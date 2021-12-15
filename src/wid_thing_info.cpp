@@ -667,7 +667,7 @@ void Game::wid_thing_info_add_damage_melee(WidPopup *w, Thingp t)
       int chance = (int) ((((float) tp->damage_melee_chance_d1000()) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- chance %18s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- chance %19s", tmp2);
         w->log(tmp);
       }
     }
@@ -698,7 +698,7 @@ void Game::wid_thing_info_add_damage_poison(WidPopup *w, Thingp t)
       int chance = (int) ((((float) tp->damage_poison_chance_d1000()) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- chance %18s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- chance %19s", tmp2);
         w->log(tmp);
       }
     }
@@ -729,7 +729,7 @@ void Game::wid_thing_info_add_damage_future1(WidPopup *w, Thingp t)
       int chance = (int) ((((float) tp->damage_future1_chance_d1000()) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- chance %18s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- chance %19s", tmp2);
         w->log(tmp);
       }
     }
@@ -760,7 +760,7 @@ void Game::wid_thing_info_add_damage_future2(WidPopup *w, Thingp t)
       int chance = (int) ((((float) tp->damage_future2_chance_d1000()) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- chance %18s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- chance %19s", tmp2);
         w->log(tmp);
       }
     }
@@ -791,7 +791,7 @@ void Game::wid_thing_info_add_damage_future3(WidPopup *w, Thingp t)
       int chance = (int) ((((float) tp->damage_future3_chance_d1000()) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- chance %18s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- chance %19s", tmp2);
         w->log(tmp);
       }
     }
@@ -822,7 +822,7 @@ void Game::wid_thing_info_add_damage_future4(WidPopup *w, Thingp t)
       int chance = (int) ((((float) tp->damage_future4_chance_d1000()) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- chance %18s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- chance %19s", tmp2);
         w->log(tmp);
       }
     }
@@ -853,7 +853,7 @@ void Game::wid_thing_info_add_damage_fire(WidPopup *w, Thingp t)
       int chance = (int) ((((float) tp->damage_fire_chance_d1000()) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- chance %18s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- chance %19s", tmp2);
         w->log(tmp);
       }
     }
@@ -884,7 +884,7 @@ void Game::wid_thing_info_add_damage_crush(WidPopup *w, Thingp t)
       int chance = (int) ((((float) tp->damage_crush_chance_d1000()) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- chance %18s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- chance %19s", tmp2);
         w->log(tmp);
       }
     }
@@ -916,7 +916,7 @@ void Game::wid_thing_info_add_damage_lightning(WidPopup *w, Thingp t)
       int chance = (int) ((((float) tp->damage_lightning_chance_d1000()) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- chance %18s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- chance %19s", tmp2);
         w->log(tmp);
       }
     }
@@ -947,7 +947,7 @@ void Game::wid_thing_info_add_damage_energy(WidPopup *w, Thingp t)
       int chance = (int) ((((float) tp->damage_energy_chance_d1000()) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- chance %18s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- chance %19s", tmp2);
         w->log(tmp);
       }
     }
@@ -978,7 +978,7 @@ void Game::wid_thing_info_add_damage_acid(WidPopup *w, Thingp t)
       int chance = (int) ((((float) tp->damage_acid_chance_d1000()) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- chance %18s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- chance %19s", tmp2);
         w->log(tmp);
       }
     }
@@ -1009,7 +1009,7 @@ void Game::wid_thing_info_add_damage_bite(WidPopup *w, Thingp t)
       int chance = (int) ((((float) tp->damage_bite_chance_d1000()) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- chance %18s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- chance %19s", tmp2);
         w->log(tmp);
       }
     }
@@ -1040,7 +1040,7 @@ void Game::wid_thing_info_add_damage_digest(WidPopup *w, Thingp t)
       int chance = (int) ((((float) tp->damage_digest_chance_d1000()) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- chance %18s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- chance %19s", tmp2);
         w->log(tmp);
       }
     }
@@ -1071,7 +1071,7 @@ void Game::wid_thing_info_add_damage_necrosis(WidPopup *w, Thingp t)
       int chance = (int) ((((float) tp->damage_necrosis_chance_d1000()) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- chance %18s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- chance %19s", tmp2);
         w->log(tmp);
       }
     }
@@ -1086,11 +1086,11 @@ void Game::wid_thing_info_add_attack(WidPopup *w, Thingp t)
   if (t->is_alive_monst() || t->is_player()) {
     auto stat = t->get_stat_attack_bonus();
     if (stat != 10) {
-      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Attack bonus    %2d%-3s to dmg", stat,
+      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Attack bonus     %2d%-3s``````", stat,
                stat_to_bonus_slash_str(stat).c_str());
       w->log(tmp);
     } else {
-      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Attack          %2d/no bonus`", stat);
+      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Attack           %2d/--``````", stat);
       w->log(tmp);
     }
   }
@@ -1104,11 +1104,11 @@ void Game::wid_thing_info_add_defence(WidPopup *w, Thingp t)
   if (t->is_alive_monst() || t->is_player()) {
     auto stat = t->get_stat_armor_class();
     if (stat != 10) {
-      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor class     %2d%-3s to def", stat,
+      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor class      %2d%-3s``````", stat,
                stat_to_bonus_slash_str(stat).c_str());
       w->log(tmp);
     } else {
-      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor class     %2d/no bonus`", stat);
+      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor class      %2d/--``````", stat);
       w->log(tmp);
     }
   }
@@ -1122,11 +1122,11 @@ void Game::wid_thing_info_add_strength(WidPopup *w, Thingp t)
   if (t->is_alive_monst() || t->is_player()) {
     auto stat = t->get_stat_strength();
     if (stat != 10) {
-      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Strength        %2d%-3s to dmg", stat,
+      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Strength         %2d%-3s``````", stat,
                stat_to_bonus_slash_str(stat).c_str());
       w->log(tmp);
     } else {
-      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Strength        %2d/no bonus`", stat);
+      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Strength         %2d/--``````", stat);
       w->log(tmp);
     }
   }
@@ -1140,11 +1140,11 @@ void Game::wid_thing_info_add_dexterity(WidPopup *w, Thingp t)
   if (t->is_alive_monst() || t->is_player()) {
     auto stat = t->get_stat_dexterity();
     if (stat != 10) {
-      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Dexterity       %2d%-3s to def", stat,
+      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Dexterity        %2d%-3s``````", stat,
                stat_to_bonus_slash_str(stat).c_str());
       w->log(tmp);
     } else {
-      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Dexterity       %2d/no bonus`", stat);
+      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Dexterity        %2d/--``````", stat);
       w->log(tmp);
     }
   }
@@ -1158,11 +1158,11 @@ void Game::wid_thing_info_add_constitution(WidPopup *w, Thingp t)
   if (t->is_alive_monst() || t->is_player()) {
     auto stat = t->get_stat_constitution();
     if (stat != 10) {
-      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Constitution    %2d%-3s to dmg", stat,
+      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Constitution     %2d%-3s``````", stat,
                stat_to_bonus_slash_str(stat).c_str());
       w->log(tmp);
     } else {
-      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Constitution    %2d/no bonus`", stat);
+      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Constitution     %2d/--``````", stat);
       w->log(tmp);
     }
   }

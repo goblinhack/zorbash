@@ -71,7 +71,7 @@ const std::string stat_to_bonus_str(int stat)
 
 const std::string stat_to_bonus_slash_str(int stat)
 {
-  switch (stat) {
+  switch (stat_to_bonus(stat)) {
     case -20 : return "/-20";
     case -19 : return "/-19";
     case -18 : return "/-18";
