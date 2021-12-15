@@ -514,8 +514,8 @@ class Tp:
     def set_is_exit_finder(self, value):
         my.tp_set_is_exit_finder(self, value)
 
-    def set_is_level_explorer(self, value):
-        my.tp_set_is_level_explorer(self, value)
+    def set_is_explorer(self, value):
+        my.tp_set_is_explorer(self, value)
 
     def set_is_rusty(self, value):
         my.tp_set_is_rusty(self, value)

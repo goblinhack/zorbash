@@ -87,7 +87,7 @@ def tp_init(name, text_name, short_text_name):
 
 
 def init():
-    tp_init(name="wand_fire", text_name="wand of fire", short_text_name="wand.fire")
+    tp_init(name="wand_fire", text_name="wand of fire", short_text_name="wand of fire")
 
 
 init()

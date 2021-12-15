@@ -177,7 +177,17 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta)
         }
       }
     } else if (it->is_player()) {
-      TOPCON("%s shoves you!", text_The().c_str());
+      if (level->is_chasm(shove_pos)) {
+        TOPCON("%%fg=red$%s shoves you into the abyss!%%fg=reset$", text_The().c_str());
+      } else if (level->is_lava(shove_pos)) {
+        TOPCON("%%fg=red$%s shoves you into the red death!%%fg=reset$", text_The().c_str());
+      } else if (level->is_water(shove_pos)) {
+        TOPCON("%%fg=red$%s shoves you into the depths!%%fg=reset$", text_The().c_str());
+      } else if (level->is_fire(shove_pos)) {
+        TOPCON("%%fg=red$%s shoves you into the flames!%%fg=reset$", text_The().c_str());
+      } else {
+        TOPCON("%s shoves you!", text_The().c_str());
+      }
     }
 
     it->move_to(shove_pos);
@@ -201,7 +211,7 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta)
     }
   }
 
-  dbg("Handle location for shoved thing");
+  dbg("Handle location for shoved thing: %s", it->to_string().c_str());
   it->location_check_forced();
 
   //

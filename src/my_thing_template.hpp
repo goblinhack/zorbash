@@ -302,7 +302,7 @@ private:
   int _is_key {};
   int _is_laser {};
   int _is_lava {};
-  int _is_level_explorer {};
+  int _is_explorer {};
   int _is_light_blocker {};
   int _is_living {};
   int _is_loggable {};
@@ -950,7 +950,7 @@ public:
   int is_key(void) const { return _is_key; }
   int is_laser(void) const { return _is_laser; }
   int is_lava(void) const { return _is_lava; }
-  int is_level_explorer(void) const { return _is_level_explorer; }
+  int is_explorer(void) const { return _is_explorer; }
   int is_light_blocker(void) const { return _is_light_blocker; }
   int is_living(void) const { return _is_living; }
   int is_loggable(void) const { return _is_loggable; }
@@ -1289,7 +1289,7 @@ public:
   void set_is_key(int v) { _is_key = v; }
   void set_is_laser(int v) { _is_laser = v; }
   void set_is_lava(int v) { _is_lava = v; }
-  void set_is_level_explorer(int v) { _is_level_explorer = v; }
+  void set_is_explorer(int v) { _is_explorer = v; }
   void set_is_light_blocker(int v) { _is_light_blocker = v; }
   void set_is_living(int v) { _is_living = v; }
   void set_is_loggable(int v) { _is_loggable = v; }

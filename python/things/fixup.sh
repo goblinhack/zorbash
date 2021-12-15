@@ -51,7 +51,7 @@ do
       set_is_able_to_walk_through_walls \
       set_is_exit_finder \
       set_is_item_collector \
-      set_is_level_explorer \
+      set_is_explorer \
       set_ai_obstacle \
       set_ai_resent_count \
       set_ai_wanderer \

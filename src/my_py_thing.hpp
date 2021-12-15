@@ -261,7 +261,7 @@ PyObject *thing_is_jelly(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_key(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_laser(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_lava(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_level_explorer(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_explorer(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_light_blocker(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_living(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_loggable(PyObject *obj, PyObject *args, PyObject *keywds);

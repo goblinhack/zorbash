@@ -121,7 +121,7 @@ def init():
     tp_init(
         name="wand_energy",
         text_name="wand of dept of energy",
-        short_text_name="wand.energy",
+        short_text_name="wand of energy",
     )
 
 

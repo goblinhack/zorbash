@@ -70,7 +70,7 @@ bool Thing::matches(const std::string &what)
   if (is_item_collector() && (what == "is_item_collector")) {
     return true;
   }
-  if (is_level_explorer() && (what == "is_level_explorer")) {
+  if (is_explorer() && (what == "is_explorer")) {
     return true;
   }
   if (ai_resent_count() && (what == "ai_resent_count")) {
@@ -785,8 +785,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_item_collector") {
     return &Thing::is_item_collector;
   }
-  if (what == "is_level_explorer") {
-    return &Thing::is_level_explorer;
+  if (what == "is_explorer") {
+    return &Thing::is_explorer;
   }
   if (what == "ai_resent_count") {
     return &Thing::ai_resent_count;

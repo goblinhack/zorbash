@@ -29,7 +29,7 @@ void Level::cursor_path_draw_circle(void)
 
   auto radius_min = what->tp()->blast_min_radius();
   auto radius_max = what->tp()->blast_max_radius();
-  auto curr_at     = cursor->curr_at;
+  auto curr_at    = cursor->curr_at;
 
   if (! radius_max) {
     return;
@@ -319,6 +319,10 @@ void Level::cursor_path_create(void)
   // The robot makes its own paths
   //
   if (game->robot_mode) {
+    return;
+  }
+
+  if (player && player->is_dead) {
     return;
   }
 

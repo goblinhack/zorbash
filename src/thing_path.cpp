@@ -130,7 +130,31 @@ bool Thing::path_pop_next_move(void)
           clear_move_path("Jumped carefully");
           return true;
         } else {
-          AI_LOG("Failed to jump carefully");
+          AI_LOG("Failed to jump carefully; try entire path");
+
+          //
+          // Try the entire path. This allows us to jump next to a thing that
+          // might have moved into our move path (and where we were trying to land.)
+          //
+          for (auto pit = aip->move_path.rbegin(); pit != aip->move_path.rend(); pit++) {
+            jump_pos = *pit;
+            if (distance(curr_at, jump_pos) < 2) {
+              break;
+            }
+            if (try_to_jump_carefully(jump_pos, &too_far)) {
+              IF_DEBUG2
+              {
+                auto s = string_sprintf("Jumped carefully; try entire path %d,%d", jump_pos.x, jump_pos.y);
+                AI_LOG("", s);
+              }
+              if (is_player()) {
+                game->tick_begin("Jumped carefully");
+              }
+              clear_move_path("Jumped carefully");
+              return true;
+            }
+          }
+
           clear_move_path("Failed to jump carefully");
           get_infop()->last_failed_jump_at = curr_at;
 

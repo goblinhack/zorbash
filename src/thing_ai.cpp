@@ -420,6 +420,8 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
 
   auto aip = get_aip();
 
+  std::array< std::array< bool, MAP_WIDTH >, MAP_HEIGHT > walked = {};
+
   for (int y = miny; y <= maxy; y++) {
     for (int x = minx; x <= maxx; x++) {
       point p(x, y);
@@ -437,6 +439,8 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
         }
       }
 
+      set(walked, x, y, true);
+
       if (! ai_obstacle_for_me(p)) {
         set(dmap_can_see->val, x, y, DMAP_IS_PASSABLE);
         continue;
@@ -451,7 +455,6 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
         FOR_ALL_THINGS_THAT_INTERACT(level, it, p.x, p.y)
         {
           if (same_leader(it)) {
-            jump_allowed = false;
             break;
           }
         }
@@ -548,10 +551,10 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
   }
 
   //
-  // Grow the search space beyond the light
+  // Walk tiles on the edge of what we can see i.e. stuff we did not walk
+  // above and look for something worth exploring.
   //
-  std::array< std::array< bool, MAP_WIDTH >, MAP_HEIGHT > walked = {};
-  if (0) {
+  if (is_explorer()) {
     {
       for (int y = miny; y <= maxy; y++) {
         for (int x = minx; x <= maxx; x++) {
@@ -569,18 +572,14 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
           if (p.y < MAP_BORDER_ROCK) {
             continue;
           }
-
-          //
-          // Don't look too far beyond where we can go
-          //
-          if (too_far_from_manifestor(p, 1)) {
+          if (get(walked, x, y)) {
             continue;
           }
 
-          if (too_far_from_leader(p, 1)) {
-            continue;
-          }
-
+          //
+          // Ignore tiles we have never seen. This check works as we allow the light to grow
+          // a bit when calling fov_calculete
+          //
           if (! get(aip->can_see_ever.can_see, p.x, p.y)) {
             continue;
           }
@@ -665,7 +664,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
                 FOR_ALL_THINGS_END();
               }
 
-              // set(dmap_can_see->val, o.x, o.y, DMAP_IS_PASSABLE);
+              set(dmap_can_see->val, o.x, o.y, DMAP_IS_PASSABLE);
             }
           }
         }
@@ -1001,6 +1000,10 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
                 if ((int) pcg_random_range(0, 100) < aggression_level_pct()) {
                   if (possible_to_attack(it)) {
                     GOAL_ADD(GOAL_PRIO_MED, -health_diff - goal_penalty, "can-attack-monst-unprovoked", it);
+                    //
+                    // Add it as an enemy so we will keep going for it and not cool off due to random aggression
+                    //
+                    add_enemy(it);
                   }
                 } else {
                   AI_LOG("Feeling nice, do not attack", it);
@@ -1351,7 +1354,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
     //
     // Choose doors etc... as a last resort when nothing else
     //
-    if (is_level_explorer()) {
+    if (is_explorer()) {
       if (level->is_door(p.x, p.y)) {
         total_score -= 100;
       }
@@ -1578,8 +1581,16 @@ bool Thing::ai_tick(bool recursing)
   // Update what we can see - which if a minion is from the perspective of the manifestor.
   //
   auto vision_souce = get_vision_source();
-  level->fov_calculete(&aip->can_see_currently, vision_souce.x, vision_souce.y, get_distance_vision() + 1,
-                       light_walls);
+
+  //
+  // We need to grow the light a bit for level explorers
+  //
+  if (is_explorer()) {
+    level->fov_calculete(&aip->can_see_currently, vision_souce.x, vision_souce.y, get_distance_vision() + 1,
+                         light_walls);
+  } else {
+    level->fov_calculete(&aip->can_see_currently, vision_souce.x, vision_souce.y, get_distance_vision(), light_walls);
+  }
 
   if (! recursing) {
     for (int y = miny; y <= maxy; y++) {
@@ -1877,7 +1888,7 @@ bool Thing::ai_tick(bool recursing)
         //
         int search_type_max;
         if (is_able_to_jump()) {
-          if (is_level_explorer()) {
+          if (is_explorer()) {
             if (is_exit_finder()) {
               search_type_max = SEARCH_TYPE_LAST_RESORTS_JUMP_ALLOWED + 1;
             } else {
@@ -1887,7 +1898,7 @@ bool Thing::ai_tick(bool recursing)
             search_type_max = SEARCH_TYPE_LOCAL_JUMP_ALLOWED + 1;
           }
         } else {
-          if (is_level_explorer()) {
+          if (is_explorer()) {
             if (is_exit_finder()) {
               search_type_max = SEARCH_TYPE_LAST_RESORTS_NO_JUMP + 1;
             } else {

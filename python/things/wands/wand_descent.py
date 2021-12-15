@@ -96,7 +96,7 @@ def init():
     tp_init(
         name="wand_descent",
         text_name="wand of sudden descent",
-        short_text_name="wand.descent",
+        short_text_name="wand of descent",
     )
 
 

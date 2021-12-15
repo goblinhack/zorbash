@@ -1140,7 +1140,7 @@ public:
   int is_key(void);
   int is_laser(void);
   int is_lava(void);
-  int is_level_explorer(void);
+  int is_explorer(void);
   int is_light_blocker(void);
   int is_living(void);
   int is_loggable(void);

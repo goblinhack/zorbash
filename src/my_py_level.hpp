@@ -182,7 +182,7 @@ PyObject *level_is_jelly_parent_at(PyObject *obj, PyObject *args, PyObject *keyw
 PyObject *level_is_key_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_laser_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_lava_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_level_explorer_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_explorer_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_light_blocker_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_living_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_loggable_at(PyObject *obj, PyObject *args, PyObject *keywds);

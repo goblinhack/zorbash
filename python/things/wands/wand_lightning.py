@@ -93,7 +93,7 @@ def init():
     tp_init(
         name="wand_lightning",
         text_name="wand of lightning",
-        short_text_name="wand.lightning",
+        short_text_name="wand of lightning",
     )
 
 

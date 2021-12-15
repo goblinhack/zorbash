@@ -57,7 +57,7 @@ def init():
     tp_init(
         name="ring_poison_resist",
         text_name="ring of poison loving",
-        short_text_name="ring.poison_resist",
+        short_text_name="ring of poison resist",
     )
 
 

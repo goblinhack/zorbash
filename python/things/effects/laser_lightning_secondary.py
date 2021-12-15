@@ -34,8 +34,8 @@ def tp_init(name, text_name, short_text_name):
 def init():
     tp_init(
         name="laser_lightning_secondary",
-        text_name="beam of lightning",
-        short_text_name="laser.lightning",
+        text_name="fork lightning",
+        short_text_name="fork lightning",
     )
 
 

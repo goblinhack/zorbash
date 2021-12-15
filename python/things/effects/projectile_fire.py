@@ -32,7 +32,7 @@ def tp_init(name, text_name, short_text_name):
 
 
 def init():
-    tp_init(name="projectile_fire", text_name="fireball", short_text_name="projectile.fire")
+    tp_init(name="projectile_fire", text_name="fire ball", short_text_name="fire ball")
 
 
 init()

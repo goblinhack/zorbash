@@ -79,7 +79,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
       dbg("No, follower is too far from the leader to jump");
       auto leader = get_leader();
       if (leader) {
-        dbg("Try jumping closer to the leadeer");
+        dbg("Try jumping closer to the leader");
         to           = leader->curr_at;
         jumping_home = true;
       } else {
@@ -216,7 +216,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
 
     if (collision_obstacle(point(x, y))) {
       TRACE_AND_INDENT();
-      dbg("No, obstacle at target");
+      dbg("No, collision obstacle at target");
       return false;
     }
   }
@@ -647,7 +647,7 @@ bool Thing::jump_attack(Thingp maybe_victim)
   }
 
   point last_at; // Previous hop where we were.
-  point curr_at;      // Grid coordinates.
+  point curr_at; // Grid coordinates.
 
   if (maybe_victim && can_eat(maybe_victim)) {
     //

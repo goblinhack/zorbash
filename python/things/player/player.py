@@ -296,7 +296,7 @@ def tp_init(name, text_name, short_text_name, title):
     mytp.set_is_exit_finder(True)
     mytp.set_is_humanoid(True)
     mytp.set_is_item_collector(True)
-    mytp.set_is_level_explorer(True)
+    mytp.set_is_explorer(True)
     mytp.set_is_living(True)
     mytp.set_is_loggable(True)
     mytp.set_is_meat(True)

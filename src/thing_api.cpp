@@ -1521,10 +1521,10 @@ int Thing::is_exit_finder(void)
   return (tp()->is_exit_finder());
 }
 
-int Thing::is_level_explorer(void)
+int Thing::is_explorer(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->is_level_explorer());
+  return (tp()->is_explorer());
 }
 
 int Thing::is_rusty(void)
