@@ -4,7 +4,7 @@
 <!--                                                                                                                                              -->
 <!-- Next todo                                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
-<!-- - goblin not eating rat                                                                                  -->
+<!-- - rat should avoid undead                                                                                -->
 <!-- - leader unset callback                                                                                  -->
 <!-- - goblin leader                                                                                          -->
 <!-- - minion still trying to move through manifestor                                                         -->

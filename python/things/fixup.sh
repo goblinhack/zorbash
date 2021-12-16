@@ -189,7 +189,7 @@ do
       set_is_health_booster \
       set_is_hittable \
       set_is_humanoid \
-      set_is_hunger_insatiable \
+      set_hunger_insatiable \
       set_is_indestructible \
       set_is_intelligent \
       set_is_interesting \
@@ -274,7 +274,7 @@ do
       set_on_death_drop_all_items \
       set_unused_flag1 \
       set_unused_flag10 \
-      set_unused_flag11 \
+      set_hunger_clock_tick_frequency \
       set_is_able_to_follow \
       set_distance_leader_max \
       set_distance_recruitment_max \

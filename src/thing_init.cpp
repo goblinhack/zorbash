@@ -28,7 +28,10 @@ Thingp Level::thing_new(Tpp tp, const point at, Thingp owner)
   return thing_new(tp->name(), at, owner);
 }
 
-Thingp Level::thing_new(const std::string &tp_name, Thingp owner) { return thing_new(tp_name, owner->curr_at, owner); }
+Thingp Level::thing_new(const std::string &tp_name, Thingp owner)
+{
+  return thing_new(tp_name, owner->curr_at, owner);
+}
 
 Thingp Level::thing_new(const std::string &name, const point at, Thingp owner)
 {
@@ -69,8 +72,8 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
   verify(MTYPE_THING, this);
 
   this->level = level;
-  curr_at      = born;
-  last_at = born;
+  curr_at     = born;
+  last_at     = born;
 
   ts_next_frame = 0;
   if (name == "") {
@@ -172,8 +175,6 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
     dir            = THING_DIR_NONE;
     is_facing_left = false;
   }
-
-  is_hungry = tpp->is_hunger_insatiable();
 
   update();
 

@@ -318,4 +318,6 @@ void Thing::update(void)
       }
     }
   }
+
+  hunger_update();
 }

@@ -934,7 +934,7 @@ public:
   int gfx_very_short_shadow_caster(void);
   int gfx_water(void);
   int health_boost(int v);
-  int health_hunger_pct(void);
+  int hunger_health_pct(void);
   int health_starving_pct(void);
   int incr_charge_count(int);
   int incr_charge_count(void);
@@ -1121,7 +1121,7 @@ public:
   int is_health_booster(void);
   int is_hittable(void);
   int is_humanoid(void);
-  int is_hunger_insatiable(void);
+  int hunger_insatiable(void);
   int is_indestructible(void);
   int is_intelligent(void);
   int is_interesting(void);
@@ -1302,7 +1302,7 @@ public:
   int unused_chance7_d1000(void);
   int unused_chance8_d1000(void);
   int unused_flag10(void);
-  int unused_flag11(void);
+  int hunger_clock_tick_frequency(void);
   int is_able_to_follow(void);
   int distance_leader_max(void);
   int distance_recruitment_max(void);
@@ -1586,7 +1586,8 @@ public:
   void grass_tick();
   void hide();
   void hooks_remove();
-  void hunger_clock();
+  void hunger_clock_tick();
+  void hunger_update();
   void incr_score(int);
   void inherit_from(Thingp it);
   void init(Levelp, const std::string &name, point at, Thingp owner = nullptr);

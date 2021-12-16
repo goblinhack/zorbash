@@ -91,7 +91,12 @@ void Thing::achieve_goals_in_life(void)
   //
   // Periodic health checks
   //
-  hunger_clock();
+  hunger_clock_tick();
+  if (is_dead) {
+    return;
+  }
+
+  hunger_update();
   if (is_dead) {
     return;
   }
@@ -100,16 +105,25 @@ void Thing::achieve_goals_in_life(void)
   // Timeout enemies
   //
   enemies_tick();
+  if (is_dead) {
+    return;
+  }
 
   //
   // Timeout goals
   //
   goal_penalty_tick();
+  if (is_dead) {
+    return;
+  }
 
   //
   // Timeout enemies to avoid
   //
   avoid_tick();
+  if (is_dead) {
+    return;
+  }
 
   buff_tick();
   if (is_dead) {

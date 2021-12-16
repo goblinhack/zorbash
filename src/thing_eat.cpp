@@ -112,7 +112,7 @@ bool Thing::eat(Thingp victim)
       //
       // Worth eating?
       //
-      if (is_hunger_insatiable()) {
+      if (hunger_insatiable()) {
         //
         // Munch munch. Always try to eat.
         //

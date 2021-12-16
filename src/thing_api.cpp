@@ -513,10 +513,10 @@ int Thing::environ_avoids_water(void)
   return (tp()->environ_avoids_water());
 }
 
-int Thing::health_hunger_pct(void)
+int Thing::hunger_health_pct(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->health_hunger_pct());
+  return (tp()->hunger_health_pct());
 }
 
 int Thing::health_starving_pct(void)
@@ -975,10 +975,10 @@ int Thing::is_humanoid(void)
   return (tp()->is_humanoid());
 }
 
-int Thing::is_hunger_insatiable(void)
+int Thing::hunger_insatiable(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->is_hunger_insatiable());
+  return (tp()->hunger_insatiable());
 }
 
 int Thing::is_indestructible(void)
@@ -1269,10 +1269,10 @@ int Thing::unused_flag10(void)
   return (tp()->unused_flag10());
 }
 
-int Thing::unused_flag11(void)
+int Thing::hunger_clock_tick_frequency(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->unused_flag11());
+  return (tp()->hunger_clock_tick_frequency());
 }
 
 int Thing::is_able_to_follow(void)

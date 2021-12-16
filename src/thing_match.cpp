@@ -406,7 +406,7 @@ bool Thing::matches(const std::string &what)
   if (is_humanoid() && (what == "is_humanoid")) {
     return true;
   }
-  if (is_hunger_insatiable() && (what == "is_hunger_insatiable")) {
+  if (hunger_insatiable() && (what == "hunger_insatiable")) {
     return true;
   }
   if (is_indestructible() && (what == "is_indestructible")) {
@@ -655,7 +655,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag10() && (what == "unused_flag10")) {
     return true;
   }
-  if (unused_flag11() && (what == "unused_flag11")) {
+  if (hunger_clock_tick_frequency() && (what == "hunger_clock_tick_frequency")) {
     return true;
   }
   if (is_able_to_follow() && (what == "is_able_to_follow")) {
@@ -1115,8 +1115,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_humanoid") {
     return &Thing::is_humanoid;
   }
-  if (what == "is_hunger_insatiable") {
-    return &Thing::is_hunger_insatiable;
+  if (what == "hunger_insatiable") {
+    return &Thing::hunger_insatiable;
   }
   if (what == "is_indestructible") {
     return &Thing::is_indestructible;
@@ -1364,8 +1364,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag10") {
     return &Thing::unused_flag10;
   }
-  if (what == "unused_flag11") {
-    return &Thing::unused_flag11;
+  if (what == "hunger_clock_tick_frequency") {
+    return &Thing::hunger_clock_tick_frequency;
   }
   if (what == "is_able_to_follow") {
     return &Thing::is_able_to_follow;

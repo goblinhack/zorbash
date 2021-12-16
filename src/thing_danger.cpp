@@ -35,7 +35,7 @@ int Tp::get_danger_level(void)
   if (is_acid()) {
     danger_level++;
   }
-  if (is_hunger_insatiable()) {
+  if (hunger_insatiable()) {
     danger_level++;
   }
   if (is_fire()) {
@@ -116,7 +116,7 @@ int Thing::get_danger_initial_level(void)
   if (is_acid()) {
     danger_level++;
   }
-  if (is_hunger_insatiable()) {
+  if (hunger_insatiable()) {
     danger_level++;
   }
   if (is_fire()) {
@@ -205,7 +205,7 @@ int Thing::get_danger_current_level(void)
   if (is_acid()) {
     danger_level++;
   }
-  if (is_hunger_insatiable()) {
+  if (hunger_insatiable()) {
     danger_level++;
   }
   if (is_fire()) {

@@ -403,8 +403,8 @@ class Tp:
     def set_unused_flag10(self, value):
         my.tp_set_unused_flag10(self, value)
 
-    def set_unused_flag11(self, value):
-        my.tp_set_unused_flag11(self, value)
+    def set_hunger_clock_tick_frequency(self, value):
+        my.tp_set_hunger_clock_tick_frequency(self, value)
 
     def set_is_able_to_follow(self, value):
         my.tp_set_is_able_to_follow(self, value)
@@ -1192,8 +1192,8 @@ class Tp:
     def set_is_food(self, value):
         my.tp_set_is_food(self, value)
 
-    def set_is_hunger_insatiable(self, value):
-        my.tp_set_is_hunger_insatiable(self, value)
+    def set_hunger_insatiable(self, value):
+        my.tp_set_hunger_insatiable(self, value)
 
     def set_is_undead(self, value):
         my.tp_set_is_undead(self, value)
@@ -1294,8 +1294,8 @@ class Tp:
     def set_health_initial_dice(self, value):
         my.tp_set_health_initial_dice(self, value)
 
-    def set_health_hunger_pct(self, value):
-        my.tp_set_health_hunger_pct(self, value)
+    def set_hunger_health_pct(self, value):
+        my.tp_set_hunger_health_pct(self, value)
 
     def set_is_ripple(self, value):
         my.tp_set_is_ripple(self, value)

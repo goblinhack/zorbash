@@ -170,7 +170,7 @@ private:
   int _gfx_solid_shadow {};
   int _gfx_very_short_shadow_caster {};
   int _gfx_water {};
-  int _health_hunger_pct {};
+  int _hunger_health_pct {};
   int _health_starving_pct {};
   int _internal_has_dir_anim {};
   int _internal_has_hp_anim {};
@@ -282,7 +282,7 @@ private:
   int _is_heavy {};
   int _is_hittable {};
   int _is_humanoid {};
-  int _is_hunger_insatiable {};
+  int _hunger_insatiable {};
   int _is_indestructible {};
   int _is_intelligent {};
   int _is_interesting {}; // e.g. something edible or a monst or lava
@@ -409,7 +409,7 @@ private:
   int _unused_chance8_d1000 {};
   int _unused_flag1 {};
   int _unused_flag10 {};
-  int _unused_flag11 {};
+  int _hunger_clock_tick_frequency {};
   int _unused_flag2 {};
   int _unused_flag3 {};
   int _unused_flag4 {};
@@ -820,7 +820,7 @@ public:
   int gfx_solid_shadow(void) const { return _gfx_solid_shadow; }
   int gfx_very_short_shadow_caster(void) const { return _gfx_very_short_shadow_caster; }
   int gfx_water(void) const { return _gfx_water; }
-  int health_hunger_pct(void) const { return _health_hunger_pct; }
+  int hunger_health_pct(void) const { return _hunger_health_pct; }
   int health_starving_pct(void) const { return _health_starving_pct; }
   int internal_has_dir_anim(void) const { return _internal_has_dir_anim; }
   int internal_has_hp_anim(void) const { return _internal_has_hp_anim; }
@@ -931,7 +931,7 @@ public:
   int is_heavy(void) const { return _is_heavy; }
   int is_hittable(void) const { return _is_hittable; }
   int is_humanoid(void) const { return _is_humanoid; }
-  int is_hunger_insatiable(void) const { return _is_hunger_insatiable; }
+  int hunger_insatiable(void) const { return _hunger_insatiable; }
   int is_indestructible(void) const { return _is_indestructible; }
   int is_intelligent(void) const { return _is_intelligent; }
   int is_interesting(void) const { return _is_interesting; }
@@ -1056,7 +1056,7 @@ public:
   int unused_chance7_d1000(void) const { return _unused_chance7_d1000; }
   int unused_chance8_d1000(void) const { return _unused_chance8_d1000; }
   int unused_flag10(void) const { return _unused_flag10; }
-  int unused_flag11(void) const { return _unused_flag11; }
+  int hunger_clock_tick_frequency(void) const { return _hunger_clock_tick_frequency; }
   int is_able_to_follow(void) const { return _is_able_to_follow; }
   int unused_flag1(void) const { return _unused_flag1; }
   int unused_flag2(void) const { return _unused_flag2; }
@@ -1157,7 +1157,7 @@ public:
   void set_gfx_solid_shadow(int v) { _gfx_solid_shadow = v; }
   void set_gfx_very_short_shadow_caster(int v) { _gfx_very_short_shadow_caster = v; }
   void set_gfx_water(int v) { _gfx_water = v; }
-  void set_health_hunger_pct(int v) { _health_hunger_pct = v; }
+  void set_hunger_health_pct(int v) { _hunger_health_pct = v; }
   void set_health_starving_pct(int v) { _health_starving_pct = v; }
   void set_internal_has_dir_anim(int v) { _internal_has_dir_anim = v; }
   void set_internal_has_hp_anim(int v) { _internal_has_hp_anim = v; }
@@ -1270,7 +1270,7 @@ public:
   void set_is_heavy(int v) { _is_heavy = v; }
   void set_is_hittable(int v) { _is_hittable = v; }
   void set_is_humanoid(int v) { _is_humanoid = v; }
-  void set_is_hunger_insatiable(int v) { _is_hunger_insatiable = v; }
+  void set_hunger_insatiable(int v) { _hunger_insatiable = v; }
   void set_is_indestructible(int v) { _is_indestructible = v; }
   void set_is_intelligent(int v) { _is_intelligent = v; }
   void set_is_interesting(int v) { _is_interesting = v; }
@@ -1474,7 +1474,7 @@ public:
   void set_unused_chance7_d1000(int v) { _unused_chance7_d1000 = v; }
   void set_unused_chance8_d1000(int v) { _unused_chance8_d1000 = v; }
   void set_unused_flag10(int v) { _unused_flag10 = v; }
-  void set_unused_flag11(int v) { _unused_flag11 = v; }
+  void set_hunger_clock_tick_frequency(int v) { _hunger_clock_tick_frequency = v; }
   void set_is_able_to_follow(int v) { _is_able_to_follow = v; }
   void set_distance_leader_max(int v) { _distance_leader_max = v; }
   void set_distance_recruitment_max(int v) { _distance_recruitment_max = v; }
