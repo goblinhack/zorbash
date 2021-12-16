@@ -10,6 +10,7 @@
 <!-- - goblin mage                                                                                                                                -->
 <!-- - goblin totem                                           -->
 <!-- - robot will loop on sewers                                                                           -->
+<!-- - laser damage should dissipate with multi targets                                                       -->
 <!-- - lightning damage                                                                                       -->
 <!-- - fire damage                                                                                       -->
 <!-- - energy damage                                                                                       -->
