@@ -376,6 +376,7 @@ void Level::display_map(void)
     // dramatic
     //
     lights_render(light_minx, light_miny, light_maxx, light_maxy, FBO_PLAYER_VISIBLE_LIGHTING);
+
     //
     // Add in point light sources so we can see lave for example that
     // is not directly lit but it hit by ray casting

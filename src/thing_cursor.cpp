@@ -5,7 +5,6 @@
 
 #include "my_ascii.hpp"
 #include "my_depth.hpp"
-#include "my_dmap.hpp"
 #include "my_game.hpp"
 #include "my_sdl.hpp"
 #include "my_sys.hpp"

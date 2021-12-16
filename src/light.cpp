@@ -722,7 +722,11 @@ void Level::lights_render_small_lights(int minx, int miny, int maxx, int maxy, i
           }
 
           auto  mid = (blit_br + blit_tl) / 2;
-          auto  s   = l->strength;
+          float s   = l->strength;
+          if (t->gfx_flickers()) {
+            s -= (((float) non_pcg_random_range(0, 5)) / 10.0);
+          }
+
           auto  tlx = mid.x - s;
           auto  tly = mid.y - s;
           auto  brx = mid.x + s;

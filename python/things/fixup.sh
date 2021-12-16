@@ -302,7 +302,7 @@ do
       set_unused_flag6 \
       set_unused_flag7 \
       set_unused_flag8 \
-      set_unused_flag9 \
+      set_is_aquatic \
       set_on_death_is_open
     do
         grep -q $arg $PAYLOAD

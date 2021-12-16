@@ -10,7 +10,6 @@
 #include "my_monst.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_random.hpp"
-#include "my_string.hpp"
 #include "my_sys.hpp"
 #include "my_thing.hpp"
 #include "my_ttf.hpp"

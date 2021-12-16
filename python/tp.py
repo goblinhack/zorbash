@@ -397,8 +397,8 @@ class Tp:
     def set_unused_flag8(self, value):
         my.tp_set_unused_flag8(self, value)
 
-    def set_unused_flag9(self, value):
-        my.tp_set_unused_flag9(self, value)
+    def set_is_aquatic(self, value):
+        my.tp_set_is_aquatic(self, value)
 
     def set_is_able_to_jump_escape(self, value):
         my.tp_set_is_able_to_jump_escape(self, value)

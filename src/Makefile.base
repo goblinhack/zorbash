@@ -36,6 +36,7 @@ clean:
 	rm -f ../$(TARGET_GAME) ../stdout.txt ../stderr.txt
 	rm -f $(TARGET_GAME) stdout.txt stderr.txt
 	rm -rf $(BUILD_DIR)
+	mkdir -p $(BUILD_DIR)
 
 clobber: clean
 	rm -f ramdisk_data.cpp $(wildcard ramdisk_data*.S)

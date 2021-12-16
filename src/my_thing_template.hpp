@@ -417,7 +417,7 @@ private:
   int _unused_flag6 {};
   int _unused_flag7 {};
   int _unused_flag8 {};
-  int _unused_flag9 {};
+  int _is_aquatic {};
   int _weapon_damage {};
   int _weapon_use_distance {};
 
@@ -1066,7 +1066,7 @@ public:
   int unused_flag6(void) const { return _unused_flag6; }
   int unused_flag7(void) const { return _unused_flag7; }
   int unused_flag8(void) const { return _unused_flag8; }
-  int unused_flag9(void) const { return _unused_flag9; }
+  int is_aquatic(void) const { return _is_aquatic; }
   int weapon_damage(void) const { return _weapon_damage; }
 
   void set_aggression_level_pct(int v) { _aggression_level_pct = v; }
@@ -1486,7 +1486,7 @@ public:
   void set_unused_flag6(int v) { _unused_flag6 = v; }
   void set_unused_flag7(int v) { _unused_flag7 = v; }
   void set_unused_flag8(int v) { _unused_flag8 = v; }
-  void set_unused_flag9(int v) { _unused_flag9 = v; }
+  void set_is_aquatic(int v) { _is_aquatic = v; }
   void set_weapon_damage(int v) { _weapon_damage = v; }
   void set_weapon_use_distance(int v) { _weapon_use_distance = v; }
   void set_z_depth(int v) { z_depth = v; }

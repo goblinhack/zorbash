@@ -355,7 +355,7 @@ PyObject *thing_unused_flag5(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag6(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag7(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag8(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag9(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_aquatic(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_possible_to_attack(PyObject *obj, PyObject *args, PyObject *keywds);
 
 PyObject *thing_get_damage_energy(PyObject *obj, PyObject *args, PyObject *keywds);

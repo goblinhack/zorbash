@@ -271,5 +271,5 @@ PyObject *level_unused_flag5_at(PyObject *obj, PyObject *args, PyObject *keywds)
 PyObject *level_unused_flag6_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag7_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag8_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag9_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_aquatic_at(PyObject *obj, PyObject *args, PyObject *keywds);
 #endif

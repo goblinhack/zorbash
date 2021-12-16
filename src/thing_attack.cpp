@@ -5,7 +5,6 @@
 
 #include "my_array_bounds_check.hpp"
 #include "my_backtrace.hpp"
-#include "my_dmap.hpp"
 #include "my_game.hpp"
 #include "my_level.hpp"
 #include "my_math.hpp"
@@ -447,6 +446,27 @@ bool Thing::attack(Thingp victim, bool prefer_attack_with_jaws)
 
   defence_total -= victim->get_idle_count();
   defence_total -= victim->get_stuck_count();
+
+  //
+  // Terrain penalties
+  //
+  if (! is_aquatic()) {
+    if (level->is_water(curr_at)) {
+      attack_total /= 2;
+    }
+    if (level->is_deep_water(curr_at)) {
+      attack_total /= 2;
+    }
+  }
+
+  if (! victim->is_aquatic()) {
+    if (level->is_water(victim->curr_at)) {
+      defence_total /= 2;
+    }
+    if (level->is_deep_water(victim->curr_at)) {
+      defence_total /= 2;
+    }
+  }
 
   bool damage_set       = false;
   bool attack_poison    = false;

@@ -33,7 +33,6 @@ std::default_random_engine rng;
 #include "my_room.hpp"
 #include "my_sdl.hpp"
 #include "my_sound.hpp"
-#include "my_string.hpp"
 #include "my_sys.hpp"
 #include "my_thing_template.hpp"
 #include "my_wid_actionbar.hpp"

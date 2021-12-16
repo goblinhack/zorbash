@@ -6,7 +6,6 @@
 #include "my_array_bounds_check.hpp"
 #include "my_color.hpp"
 #include "my_depth.hpp"
-#include "my_dmap.hpp"
 #include "my_game.hpp"
 #include "my_level.hpp"
 #include "my_monst.hpp"
@@ -1635,10 +1634,10 @@ int Thing::unused_flag8(void)
   return (tp()->unused_flag8());
 }
 
-int Thing::unused_flag9(void)
+int Thing::is_aquatic(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->unused_flag9());
+  return (tp()->is_aquatic());
 }
 
 int Thing::is_secret_door(void)

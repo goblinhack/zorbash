@@ -3,7 +3,6 @@
 // See the README.md file for license info.
 //
 
-#include "my_dmap.hpp"
 #include "my_level.hpp"
 #include "my_math.hpp"
 #include "my_string.hpp"
@@ -724,7 +723,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag8() && (what == "unused_flag8")) {
     return true;
   }
-  if (unused_flag9() && (what == "unused_flag9")) {
+  if (is_aquatic() && (what == "is_aquatic")) {
     return true;
   }
 
@@ -1433,8 +1432,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag8") {
     return &Thing::unused_flag8;
   }
-  if (what == "unused_flag9") {
-    return &Thing::unused_flag9;
+  if (what == "is_aquatic") {
+    return &Thing::is_aquatic;
   }
   if (what == "range_max") {
     return &Thing::range_max;

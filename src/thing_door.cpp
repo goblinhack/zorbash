@@ -9,7 +9,6 @@
 #include "my_globals.hpp"
 #include "my_python.hpp"
 #include "my_sprintf.hpp"
-#include "my_string.hpp"
 #include "my_sys.hpp"
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"

@@ -1323,7 +1323,7 @@ public:
   int unused_flag6(void);
   int unused_flag7(void);
   int unused_flag8(void);
-  int unused_flag9(void);
+  int is_aquatic(void);
   int update_light_strength(void);
   int weapon_damage(void);
   int worth_collecting(const Thingp it);

@@ -10,7 +10,6 @@
 #include "my_log.hpp"
 #include "my_main.hpp"
 #include "my_ptrcheck.hpp"
-#include "my_string.hpp"
 #include "my_sys.hpp"
 #include "my_thing.hpp"
 #include "my_time.hpp"

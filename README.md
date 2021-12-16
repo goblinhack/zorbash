@@ -4,21 +4,24 @@
 <!--                                                                                                                                              -->
 <!-- Next todo                                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
-<!-- - rat should avoid undead                                                                                -->
 <!-- - leader unset callback                                                                                  -->
 <!-- - goblin leader                                                                                          -->
+<!-- - pirate goblin random carry of gold                                                                                                                       -->
+<!-- - goblin mage                                                                                                                                -->
+<!-- - goblin totem                                           -->
 <!-- - minion still trying to move through manifestor                                                         -->
+<!-- - robot will loop on sewers                                                                           -->
 <!-- - lightning damage                                                                                       -->
 <!-- - fire damage                                                                                       -->
 <!-- - energy damage                                                                                       -->
 <!-- - necro ring                                                                                                                                 -->
 <!-- - giant spider web throw                                                                                                                     -->
 <!-- - spider ball anims                                                                                                                          -->
+<!-- - AI wand use                                                                                                                                -->
 <!-- - antipoison potion                                                                                                                          -->
 <!-- - chocolote frog cures poison?                                                                                                               -->
 <!-- - holy water cures poison                                                                                                                    -->
 <!-- - darts / poison darts                                                                                                                       -->
-<!-- - AI wand use                                                                                                                                -->
 <!-- - equip armour etc                                                                                                                           -->
 <!-- - AI if you see a potion of health, drop food in preference?                                                                                 -->
 <!-- - AI did not pick up enchantstone due to space                                                                                               -->
@@ -50,7 +53,6 @@
 <!--                                                                                                                                              -->
 <!-- Skills                                                                                                                                       -->
 <!-- ------                                                                                                                                       -->
-<!-- - melee in shallow water should have advantage over something in deep water                                                                  -->
 <!-- - challenging learning spot to acquire skills?                                                                                               -->
 <!-- - skills                                                                                                                                     -->
 <!-- - skill, dodge                                                                                                                               -->
@@ -101,8 +103,6 @@
 <!--                                                                                                                                              -->
 <!-- Potions                                                                                                                                      -->
 <!-- ------                                                                                                                                       -->
-<!-- - potion of descent does not cause damage and floor reheals                                                                                  -->
-<!--   throwing it has similar effect                                                                                                             -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Weapons                                                                                                                                      -->
@@ -132,19 +132,14 @@
 <!-- Monsts                                                                                                                                       -->
 <!-- ------                                                                                                                                       -->
 <!-- - chickens - battle chickens - lay eggs as food - and they get names                                                                         -->
-<!-- - random carry of gold                                                                                                                       -->
 <!-- - acid jellies should damage weapons                                                                                                         -->
 <!-- - spider that throws web?                                                                                                                    -->
 <!-- - grass death wakes monsters                                                                                                                 -->
 <!-- - mold growth / floor puddings                                                                                                               -->
 <!-- - bloodgrass, grows near corpses                                                                                                             -->
 <!-- - yak that eats foilage                                                                                                                      -->
-<!-- - in a spider web every hit gets you                                                                                                         -->
 <!-- - shove/lure monsters into webs?                                                                                                             -->
 <!-- - rat pack and king rat                                                                                                                      -->
-<!-- - goblin mage                                                                                                                                -->
-<!-- - goblin generator                                                                                                                           -->
-<!-- - pack spawn of goblins?                                                                                                                     -->
 <!-- - zombie camel?                                                                                                                              -->
 <!-- - new monst? should explode in fire?                                                                                                         -->
 <!-- - sewer wolf?                                                                                                                                -->
@@ -154,7 +149,6 @@
 <!-- - creature that pretends to be a stone until close by then sprouts legs                                                                      -->
 <!-- - dungeon walrus; long headed walrus with many tusks                                                                                         -->
 <!-- - gloat - cube like creature that explodes on touch and then its spirit gloats over your death                                               -->
-<!-- - pet robot                                                                                                                                  -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Gods                                                                                                                                         -->
