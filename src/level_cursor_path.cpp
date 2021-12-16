@@ -9,6 +9,7 @@
 #include "my_gl.hpp"
 #include "my_globals.hpp"
 #include "my_ptrcheck.hpp"
+#include "my_sound.hpp"
 #include "my_sys.hpp"
 #include "my_tex.hpp"
 #include "my_thing.hpp"
@@ -345,6 +346,13 @@ void Level::cursor_path_create(void)
     if (! game->request_to_fire_item->blast_max_radius()) {
       return;
     }
+  }
+
+  //
+  // No clicking into the dark void
+  //
+  if (! is_lit_ever(cursor_at.x, cursor_at.y)) {
+    return;
   }
 
   //
