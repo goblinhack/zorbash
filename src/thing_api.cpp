@@ -1263,10 +1263,10 @@ int Thing::is_rock(void)
   return (tp()->is_rock());
 }
 
-int Thing::unused_flag10(void)
+int Thing::is_able_to_jump_escape(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->unused_flag10());
+  return (tp()->is_able_to_jump_escape());
 }
 
 int Thing::hunger_clock_tick_frequency(void)

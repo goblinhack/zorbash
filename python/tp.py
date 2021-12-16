@@ -400,8 +400,8 @@ class Tp:
     def set_unused_flag9(self, value):
         my.tp_set_unused_flag9(self, value)
 
-    def set_unused_flag10(self, value):
-        my.tp_set_unused_flag10(self, value)
+    def set_is_able_to_jump_escape(self, value):
+        my.tp_set_is_able_to_jump_escape(self, value)
 
     def set_hunger_clock_tick_frequency(self, value):
         my.tp_set_hunger_clock_tick_frequency(self, value)

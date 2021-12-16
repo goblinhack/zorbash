@@ -43,18 +43,32 @@ bool Thing::try_to_escape(void)
 bool Thing::ai_escape(void)
 {
   TRACE_AND_INDENT();
+  dbg("AI escape");
+  TRACE_AND_INDENT();
 
   //
   // Need to clear any existing path, so we don't come back to that later and jump around the screen
   //
   clear_move_path("AI escape");
 
-  if (ai_blocked_completely()) {
-    dbg("AI escape blocked");
-    return false;
+  if (is_able_to_jump_escape()) {
+    if (try_to_jump()) {
+      dbg("AI escape jump");
+      return false;
+    }
   }
 
-  dbg("AI escape");
+  if (ai_blocked_completely()) {
+    if (is_able_to_jump()) {
+      if (try_to_jump()) {
+        dbg("AI escape last resort");
+        return false;
+      }
+      dbg("AI escape blocked");
+      return false;
+    }
+  }
+
   auto tries = THING_AI_ESCAPE_ATTEMPTS;
   if (game->current_tick_is_too_slow || game->prev_tick_was_too_slow) {
     tries = 1;

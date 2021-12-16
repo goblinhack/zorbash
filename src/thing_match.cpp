@@ -652,7 +652,7 @@ bool Thing::matches(const std::string &what)
   if (range_max() && (what == "range_max")) {
     return true;
   }
-  if (unused_flag10() && (what == "unused_flag10")) {
+  if (is_able_to_jump_escape() && (what == "is_able_to_jump_escape")) {
     return true;
   }
   if (hunger_clock_tick_frequency() && (what == "hunger_clock_tick_frequency")) {
@@ -1361,8 +1361,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "minion_limit") {
     return &Thing::minion_limit;
   }
-  if (what == "unused_flag10") {
-    return &Thing::unused_flag10;
+  if (what == "is_able_to_jump_escape") {
+    return &Thing::is_able_to_jump_escape;
   }
   if (what == "hunger_clock_tick_frequency") {
     return &Thing::hunger_clock_tick_frequency;

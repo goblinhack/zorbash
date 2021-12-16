@@ -3,19 +3,21 @@ import tp
 
 
 def on_leader_set(me, x, y):
-    my.topcon("I am a leader {}".format(my.thing_get_name(me)))
+    return
 
 
 def on_leader_unset(me, x, y):
-    my.topcon("I am no longer a leader {}".format(my.thing_get_name(me)))
+    if not my.thing_is_dead_or_dying(me):
+        my.topcon("The goblin soldier cries out in rage!")
 
 
 def on_follower_set(me, leader, x, y):
-    my.topcon("I {} am a follower of leader {}".format(my.thing_get_name(me), my.thing_get_name(leader)))
+    return
 
 
 def on_follower_unset(me, leader, x, y):
-    my.topcon("I {} am no longer a follower of leader {}".format(my.thing_get_name(me), my.thing_get_name(leader)))
+    if not my.thing_is_dead_or_dying(me):
+        my.topcon("The goblin leader cries out in rage!")
 
 
 def on_you_bite_attack(me, x, y):
@@ -77,7 +79,6 @@ def tp_init(name, text_name):
     mytp.set_health_initial_dice("2d6")
     mytp.set_hunger_clock_tick_frequency(50)
     mytp.set_hunger_health_pct(95)
-    mytp.set_hunger_insatiable(True)
     mytp.set_is_able_to_attack_generators(True)
     mytp.set_is_able_to_break_down_doors(True)
     mytp.set_is_able_to_break_out_of_webs(True)

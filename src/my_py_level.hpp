@@ -249,7 +249,7 @@ PyObject *level_is_water_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_weapon_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_weapon_equiper_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_wooden_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag10_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_able_to_jump_escape_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_hunger_clock_tick_frequency_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_able_to_follow_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_able_to_use_weapons_at(PyObject *obj, PyObject *args, PyObject *keywds);

@@ -330,7 +330,7 @@ PyObject *thing_is_weapon(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_wooden(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_set_manifestor(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_set_leader(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag10(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_able_to_jump_escape(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_hunger_clock_tick_frequency(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_follow(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_distance_leader_max(PyObject *obj, PyObject *args, PyObject *keywds);

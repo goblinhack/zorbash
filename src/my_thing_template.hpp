@@ -408,7 +408,7 @@ private:
   int _unused_chance7_d1000 {};
   int _unused_chance8_d1000 {};
   int _unused_flag1 {};
-  int _unused_flag10 {};
+  int _is_able_to_jump_escape {};
   int _hunger_clock_tick_frequency {};
   int _unused_flag2 {};
   int _unused_flag3 {};
@@ -1055,7 +1055,7 @@ public:
   int unused_chance6_d1000(void) const { return _unused_chance6_d1000; }
   int unused_chance7_d1000(void) const { return _unused_chance7_d1000; }
   int unused_chance8_d1000(void) const { return _unused_chance8_d1000; }
-  int unused_flag10(void) const { return _unused_flag10; }
+  int is_able_to_jump_escape(void) const { return _is_able_to_jump_escape; }
   int hunger_clock_tick_frequency(void) const { return _hunger_clock_tick_frequency; }
   int is_able_to_follow(void) const { return _is_able_to_follow; }
   int unused_flag1(void) const { return _unused_flag1; }
@@ -1473,7 +1473,7 @@ public:
   void set_unused_chance6_d1000(int v) { _unused_chance6_d1000 = v; }
   void set_unused_chance7_d1000(int v) { _unused_chance7_d1000 = v; }
   void set_unused_chance8_d1000(int v) { _unused_chance8_d1000 = v; }
-  void set_unused_flag10(int v) { _unused_flag10 = v; }
+  void set_is_able_to_jump_escape(int v) { _is_able_to_jump_escape = v; }
   void set_hunger_clock_tick_frequency(int v) { _hunger_clock_tick_frequency = v; }
   void set_is_able_to_follow(int v) { _is_able_to_follow = v; }
   void set_distance_leader_max(int v) { _distance_leader_max = v; }

@@ -1301,7 +1301,7 @@ public:
   int unused_chance6_d1000(void);
   int unused_chance7_d1000(void);
   int unused_chance8_d1000(void);
-  int unused_flag10(void);
+  int is_able_to_jump_escape(void);
   int hunger_clock_tick_frequency(void);
   int is_able_to_follow(void);
   int distance_leader_max(void);

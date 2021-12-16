@@ -273,7 +273,7 @@ do
       set_normal_placement_rules \
       set_on_death_drop_all_items \
       set_unused_flag1 \
-      set_unused_flag10 \
+      set_is_able_to_jump_escape \
       set_hunger_clock_tick_frequency \
       set_is_able_to_follow \
       set_distance_leader_max \
