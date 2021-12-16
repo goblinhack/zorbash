@@ -351,8 +351,11 @@ void Level::cursor_path_create(void)
   //
   // No clicking into the dark void
   //
-  if (! is_lit_ever(cursor_at.x, cursor_at.y)) {
-    return;
+  IF_NODEBUG
+  {
+    if (! is_lit_ever(cursor_at.x, cursor_at.y)) {
+      return;
+    }
   }
 
   //

@@ -43,7 +43,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_on_equip_do("ring_poison_resist.on_equip()")
     mytp.set_on_unequip_do("ring_poison_resist.on_unequip()")
     mytp.set_text_a_or_an("a")
-    mytp.set_text_description("%%fg=green$A ring of poison resist.")
+    mytp.set_text_description("A ring of poison resist.")
     mytp.set_z_depth(my.MAP_DEPTH_OBJ)
     mytp.set_z_prio(my.MAP_PRIO_BEHIND)
     mytp.set_equip_carry_anim("ring_poison_resist_carry")

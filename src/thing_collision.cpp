@@ -197,7 +197,7 @@ bool Thing::collision_find_best_target(bool *target_attacked, bool *target_overl
           //
           if (is_item_carrier() &&
               ((is_jelly_eater() && victim->is_jelly()) || (is_food_eater() && victim->is_food()) ||
-               (is_treasure_type_eater() && victim->is_treasure_type()) ||
+               (is_treasure_eater() && victim->is_treasure_type()) ||
                (is_item_magical_eater() && victim->is_item_magical()) ||
                (is_potion_eater() && victim->is_potion())) &&
               try_to_carry_if_worthwhile_dropping_items_if_needed(victim)) {

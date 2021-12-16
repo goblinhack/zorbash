@@ -285,6 +285,10 @@ void Thing::last_rites(Thingp defeater, const char *reason)
           } else {
             TOPCON("%%fg=white$%s is defeated, %s.%%fg=reset$", The.c_str(), reason);
           }
+        } else if (on_death_is_open()) {
+          //
+          // Already logged
+          //
         } else {
           TOPCON("%s is destroyed %s.", The.c_str(), reason);
         }

@@ -270,6 +270,10 @@ std::list< Thingp > Thing::anything_to_carry_at(point at)
       }
     }
 
+    if (t->is_treasure_chest()) {
+      continue;
+    }
+
     if (worth_collecting(t) < 0) {
       dbg("Potential item to carry, no, not worth it: %s", t->to_string().c_str());
       continue;
@@ -398,8 +402,8 @@ bool Thing::try_to_carry_if_worthwhile_dropping_items_if_needed(Thingp item)
   }
 
   if (would_need_to_drop) {
-    log("Carry check: @(%s, %d,%d %d/%dh) try to carry %s by dropping %s", level->to_string().c_str(), (int) curr_at.x,
-        (int) curr_at.y, get_health(), get_health_max(), item->to_string().c_str(),
+    log("Carry check: @(%s, %d,%d %d/%dh) try to carry %s by dropping %s", level->to_string().c_str(),
+        (int) curr_at.x, (int) curr_at.y, get_health(), get_health_max(), item->to_string().c_str(),
         would_need_to_drop->to_string().c_str());
 
     if (drop(would_need_to_drop)) {

@@ -22,7 +22,7 @@ def tp_init(name, text_name):
     mytp.set_normal_placement_rules(True)
     mytp.set_rarity(my.RARITY_COMMON)
     mytp.set_text_a_or_an("a")
-    mytp.set_text_description("%%fg=orange$Translucent amber, no flies in it.")
+    mytp.set_text_description("Translucent amber, no flies in it.")
     mytp.set_z_depth(my.MAP_DEPTH_OBJ)
     mytp.set_z_prio(my.MAP_PRIO_BEHIND)
 

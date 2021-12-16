@@ -1856,10 +1856,10 @@ int Thing::is_treasure_class_c(void)
   return (tp()->is_treasure_class_c());
 }
 
-int Thing::is_treasure_type_chest(void)
+int Thing::is_treasure_chest(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->is_treasure_type_chest());
+  return (tp()->is_treasure_chest());
 }
 
 int Thing::is_item_collector(void)
@@ -1868,10 +1868,10 @@ int Thing::is_item_collector(void)
   return (tp()->is_item_collector());
 }
 
-int Thing::is_treasure_type_eater(void)
+int Thing::is_treasure_eater(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->is_treasure_type_eater());
+  return (tp()->is_treasure_eater());
 }
 
 int Thing::is_treasure_type(void)

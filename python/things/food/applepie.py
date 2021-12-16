@@ -25,7 +25,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_nutrition_dice("10+1d15")
     mytp.set_rarity(my.RARITY_COMMON)
     mytp.set_text_a_or_an("a")
-    mytp.set_text_description("%%fg=yellow$Apple pie.")
+    mytp.set_text_description("Apple pie.")
     mytp.set_z_depth(my.MAP_DEPTH_OBJ)
     mytp.set_z_prio(my.MAP_PRIO_BEHIND)
 

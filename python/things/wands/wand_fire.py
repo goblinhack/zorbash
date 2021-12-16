@@ -72,7 +72,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_projectile_name("projectile_fire")
     mytp.set_range_max(7)
     mytp.set_text_a_or_an("a")
-    mytp.set_text_description("%%fg=yellow$A wand of fire.")
+    mytp.set_text_description("A wand of fire.")
     mytp.set_z_depth(my.MAP_DEPTH_OBJ)
     mytp.set_z_prio(my.MAP_PRIO_BEHIND)
 

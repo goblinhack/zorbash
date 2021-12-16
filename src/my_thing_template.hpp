@@ -359,8 +359,8 @@ private:
   int _is_treasure_class_b {};
   int _is_treasure_class_c {};
   int _is_treasure_type {};
-  int _is_treasure_type_chest {};
-  int _is_treasure_type_eater {};
+  int _is_treasure_chest {};
+  int _is_treasure_eater {};
   int _is_undead {};
   int _is_usable {};
   int _is_used_when_thrown {};
@@ -1006,8 +1006,8 @@ public:
   int is_treasure_class_a(void) const { return _is_treasure_class_a; }
   int is_treasure_class_b(void) const { return _is_treasure_class_b; }
   int is_treasure_class_c(void) const { return _is_treasure_class_c; }
-  int is_treasure_type_chest(void) const { return _is_treasure_type_chest; }
-  int is_treasure_type_eater(void) const { return _is_treasure_type_eater; }
+  int is_treasure_chest(void) const { return _is_treasure_chest; }
+  int is_treasure_eater(void) const { return _is_treasure_eater; }
   int is_treasure_type(void) const { return _is_treasure_type; }
   int is_undead(void) const { return _is_undead; }
   int is_usable(void) const { return _is_usable; }
@@ -1345,8 +1345,8 @@ public:
   void set_is_treasure_class_a(int v) { _is_treasure_class_a = v; }
   void set_is_treasure_class_b(int v) { _is_treasure_class_b = v; }
   void set_is_treasure_class_c(int v) { _is_treasure_class_c = v; }
-  void set_is_treasure_type_chest(int v) { _is_treasure_type_chest = v; }
-  void set_is_treasure_type_eater(int v) { _is_treasure_type_eater = v; }
+  void set_is_treasure_chest(int v) { _is_treasure_chest = v; }
+  void set_is_treasure_eater(int v) { _is_treasure_eater = v; }
   void set_is_treasure_type(int v) { _is_treasure_type = v; }
   void set_is_undead(int v) { _is_undead = v; }
   void set_is_usable(int v) { _is_usable = v; }

@@ -2,6 +2,18 @@ import my
 import tp
 
 
+def on_you_are_hit_but_still_alive(me, hitter, real_hitter, x, y, crit, damage):
+    my.sound_play(f"door_hit{my.non_pcg_randint(1, 2)}")
+
+
+def on_death(me, x, y):
+    my.sound_play("door_break")
+
+
+def on_open(me, x, y):
+    my.sound_play("door_open")
+
+
 def tp_init(name, text_name):
     mytp = tp.Tp(name, text_name)
     mytp.set_capacity_height(8)
@@ -12,6 +24,8 @@ def tp_init(name, text_name):
     mytp.set_is_bag_item_container(True)
     mytp.set_is_bag_item_not_stackable(True)
     mytp.set_is_bag_item(True)
+    mytp.set_is_attackable_by_monst(True)
+    mytp.set_is_attackable_by_player(True)
     mytp.set_is_burnable(True)
     mytp.set_is_carrier_of_treasure_class_a(True)
     mytp.set_is_carrier_of_treasure_class_b(True)
@@ -24,13 +38,18 @@ def tp_init(name, text_name):
     mytp.set_is_interesting(True)
     mytp.set_is_item_carrier(True)
     mytp.set_is_item(True)
+    mytp.set_on_death_is_open(True)
+    mytp.set_is_corpse_on_death(True)
+    mytp.set_on_death_do("chest1.on_death()")
+    mytp.set_on_you_are_hit_but_still_alive_do("chest1.on_you_are_hit_but_still_alive()")
+    mytp.set_on_open_do("chest1.on_open()")
     mytp.set_is_loggable(True)
     mytp.set_is_metal(True)
     mytp.set_is_moveable(True)
     mytp.set_is_openable(True)
+    mytp.set_is_treasure_chest(True)
     mytp.set_is_treasure_class_a(True)
     mytp.set_is_treasure_class_b(True)
-    mytp.set_is_treasure_type_chest(True)
     mytp.set_is_treasure_type(True)
     mytp.set_is_wooden(True)
     mytp.set_item_height(4)
@@ -46,6 +65,7 @@ def tp_init(name, text_name):
 
     mytp.set_tile(tile="chest1", delay_ms=1000)
     mytp.set_tile(tile=name + ".open", is_open=True)
+    mytp.set_tile(tile=name + ".open", is_dead=True)
     mytp.update()
 
 

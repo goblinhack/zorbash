@@ -97,7 +97,7 @@ def tp_init(name, text_name):
     mytp.set_stat_dexterity(10)
     mytp.set_stat_strength(7)
     mytp.set_text_a_or_an("a")
-    mytp.set_text_description("%%fg=brown$A giant rat. Slightly cute. Likely rabid.")
+    mytp.set_text_description("A giant rat. Slightly cute. Likely rabid.")
     mytp.set_text_hits("gores")
     mytp.set_z_depth(my.MAP_DEPTH_OBJ)
     mytp.set_z_prio(my.MAP_PRIO_NORMAL)

@@ -1192,8 +1192,8 @@ public:
   int is_treasure_class_a(void);
   int is_treasure_class_b(void);
   int is_treasure_class_c(void);
-  int is_treasure_type_chest(void);
-  int is_treasure_type_eater(void);
+  int is_treasure_chest(void);
+  int is_treasure_eater(void);
   int is_treasure_type(void);
   int is_undead(void);
   int is_usable(void);

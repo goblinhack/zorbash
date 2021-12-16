@@ -589,8 +589,8 @@ class Tp:
     def set_is_bag_item_container(self, value):
         my.tp_set_is_bag_item_container(self, value)
 
-    def set_is_treasure_type_chest(self, value):
-        my.tp_set_is_treasure_type_chest(self, value)
+    def set_is_treasure_chest(self, value):
+        my.tp_set_is_treasure_chest(self, value)
 
     def set_is_openable(self, value):
         my.tp_set_is_openable(self, value)
@@ -982,8 +982,8 @@ class Tp:
     def set_is_minion_generator(self, value):
         my.tp_set_is_minion_generator(self, value)
 
-    def set_is_treasure_type_eater(self, value):
-        my.tp_set_is_treasure_type_eater(self, value)
+    def set_is_treasure_eater(self, value):
+        my.tp_set_is_treasure_eater(self, value)
 
     def set_damage_received_doubled_from_acid(self, value):
         my.tp_set_damage_received_doubled_from_acid(self, value)

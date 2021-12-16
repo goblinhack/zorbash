@@ -235,8 +235,8 @@ PyObject *level_is_treasure_class_a_at(PyObject *obj, PyObject *args, PyObject *
 PyObject *level_is_treasure_class_b_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_treasure_class_c_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_treasure_type_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_treasure_type_chest_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_treasure_type_eater_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_treasure_chest_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_treasure_eater_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_undead_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_usable_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_used_when_thrown_at(PyObject *obj, PyObject *args, PyObject *keywds);

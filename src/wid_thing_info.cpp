@@ -511,7 +511,7 @@ void Game::wid_thing_info_create_list(const std::vector< Thingp > &ts)
       if (t->long_text_description().empty()) {
         continue;
       }
-      // t->topcon("over");
+      t->topcon("over");
 
       i++;
       if (! wid_thing_info_push_popup(t)) {
@@ -1230,7 +1230,6 @@ void Game::wid_thing_info_add_carry_info(WidPopup *w, Thingp t)
   auto items = t->get_itemp()->carrying.size();
 
   if (t->is_open) {
-    w->log(UI_LOGGING_EMPTY_LINE);
     w->log("It's open.", true);
 
     //
@@ -1255,7 +1254,10 @@ void Game::wid_thing_info_add_carry_info(WidPopup *w, Thingp t)
     //
     // Cannot see inside a chest, so no log
     //
-    if (t->is_bag()) {
+    if (t->is_treasure_chest()) {
+      w->log(UI_LOGGING_EMPTY_LINE);
+      w->log("Looks to be locked.", true);
+    } else if (t->is_bag()) {
       if (items > 3) {
         w->log(UI_LOGGING_EMPTY_LINE);
         w->log("Looks to be bulging with presents.", true);

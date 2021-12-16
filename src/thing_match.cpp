@@ -606,10 +606,10 @@ bool Thing::matches(const std::string &what)
   if (is_treasure_class_c() && (what == "is_treasure_class_c")) {
     return true;
   }
-  if (is_treasure_type_chest() && (what == "is_treasure_type_chest")) {
+  if (is_treasure_chest() && (what == "is_treasure_chest")) {
     return true;
   }
-  if (is_treasure_type_eater() && (what == "is_treasure_type_eater")) {
+  if (is_treasure_eater() && (what == "is_treasure_eater")) {
     return true;
   }
   if (is_treasure_type() && (what == "is_treasure_type")) {
@@ -1315,11 +1315,11 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_treasure_class_c") {
     return &Thing::is_treasure_class_c;
   }
-  if (what == "is_treasure_type_chest") {
-    return &Thing::is_treasure_type_chest;
+  if (what == "is_treasure_chest") {
+    return &Thing::is_treasure_chest;
   }
-  if (what == "is_treasure_type_eater") {
-    return &Thing::is_treasure_type_eater;
+  if (what == "is_treasure_eater") {
+    return &Thing::is_treasure_eater;
   }
   if (what == "is_treasure_type") {
     return &Thing::is_treasure_type;

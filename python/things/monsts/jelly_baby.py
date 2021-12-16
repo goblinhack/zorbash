@@ -81,7 +81,7 @@ def tp_init(name, text_name):
     mytp.set_stat_dexterity(10)
     mytp.set_stat_strength(5)
     mytp.set_text_a_or_an("a")
-    mytp.set_text_description("%%fg=limegreen$A small pile of semi sentient jelly.")
+    mytp.set_text_description("A small pile of semi sentient jelly.")
     mytp.set_text_hits("splats")
     mytp.set_z_depth(my.MAP_DEPTH_OBJ)
     mytp.set_z_prio(my.MAP_PRIO_NORMAL)

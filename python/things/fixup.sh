@@ -258,8 +258,8 @@ do
       set_is_treasure_class_b \
       set_is_treasure_class_c \
       set_is_treasure_type \
-      set_is_treasure_type_chest \
-      set_is_treasure_type_eater \
+      set_is_treasure_chest \
+      set_is_treasure_eater \
       set_is_undead \
       set_is_usable \
       set_is_used_when_thrown \

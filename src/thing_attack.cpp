@@ -110,7 +110,7 @@ bool Thing::possible_to_attack(const Thingp victim)
       }
     }
 
-    if (me->is_treasure_type_eater()) {
+    if (me->is_treasure_eater()) {
       if (victim->is_treasure_type()) {
         dbg("Can attack %s", victim->to_string().c_str());
         return true;

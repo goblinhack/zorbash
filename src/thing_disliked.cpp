@@ -157,7 +157,7 @@ bool Thing::is_disliked_by_me(const Thingp itp)
   }
 
   if (me->is_treasure_type()) {
-    if (it->is_treasure_type_eater()) {
+    if (it->is_treasure_eater()) {
       return true;
     }
   }

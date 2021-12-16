@@ -4,7 +4,7 @@
 <!--                                                                                                                                              -->
 <!-- Next todo                                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
-<!-- - cannot click on a tile that has never been lit                                                         -->
+<!-- - hitting a wall instead of monst                                                                        -->
 <!-- - leader unset callback                                                                                  -->
 <!-- - goblin leader                                                                                          -->
 <!-- - pirate goblin random carry of gold                                                                                                                       -->

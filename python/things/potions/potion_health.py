@@ -111,7 +111,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_on_you_are_hit_but_still_alive_do("potion_health.on_you_are_hit_but_still_alive()")
     mytp.set_on_you_are_on_fire_do("potion_health.on_fire()")
     mytp.set_text_a_or_an("a")
-    mytp.set_text_description("%%fg=pink$A potion of health restoration.")
+    mytp.set_text_description("A potion of health restoration.")
     mytp.set_text_enchant("+10 percent health and stamina")
     mytp.set_z_depth(my.MAP_DEPTH_OBJ)
     mytp.set_z_prio(my.MAP_PRIO_BEHIND)
