@@ -80,6 +80,13 @@ bool Thing::collision_find_best_target(bool *target_attacked, bool *target_overl
       continue;
     }
 
+    if (! cand.priority) {
+      if (is_loggable()) {
+        dbg("Ignore %s low priority", cand.target->to_string().c_str());
+      }
+      continue;
+    }
+
     if (! best) {
       best = &cand;
       continue;
