@@ -4,13 +4,11 @@
 <!--                                                                                                                                              -->
 <!-- Next todo                                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
-<!-- - hitting a wall instead of monst                                                                        -->
 <!-- - leader unset callback                                                                                  -->
 <!-- - goblin leader                                                                                          -->
 <!-- - pirate goblin random carry of gold                                                                                                                       -->
 <!-- - goblin mage                                                                                                                                -->
 <!-- - goblin totem                                           -->
-<!-- - minion still trying to move through manifestor                                                         -->
 <!-- - robot will loop on sewers                                                                           -->
 <!-- - lightning damage                                                                                       -->
 <!-- - fire damage                                                                                       -->
