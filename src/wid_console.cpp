@@ -10,7 +10,7 @@
 #include "my_command.hpp"
 #include "my_game.hpp"
 #include "my_sdl.hpp"
-#include "my_string.hpp"
+// REMOVED #include "my_string.hpp"
 #include "my_sys.hpp"
 #include "my_ttf.hpp"
 #include "my_ui.hpp"
