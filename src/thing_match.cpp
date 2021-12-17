@@ -405,7 +405,7 @@ bool Thing::matches(const std::string &what)
   if (is_humanoid() && (what == "is_humanoid")) {
     return true;
   }
-  if (hunger_insatiable() && (what == "hunger_insatiable")) {
+  if (hunger_is_insatiable() && (what == "hunger_is_insatiable")) {
     return true;
   }
   if (is_indestructible() && (what == "is_indestructible")) {
@@ -1111,8 +1111,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_humanoid") {
     return &Thing::is_humanoid;
   }
-  if (what == "hunger_insatiable") {
-    return &Thing::hunger_insatiable;
+  if (what == "hunger_is_insatiable") {
+    return &Thing::hunger_is_insatiable;
   }
   if (what == "is_indestructible") {
     return &Thing::is_indestructible;

@@ -175,7 +175,7 @@ private:
   int _health_starving_pct {};
   int _hunger_clock_tick_frequency {};
   int _hunger_health_pct {};
-  int _hunger_insatiable {};
+  int _hunger_is_insatiable {};
   int _internal_has_dir_anim {};
   int _internal_has_hp_anim {};
   int _is_able_to_attack_generators {};
@@ -831,7 +831,7 @@ public:
   int health_starving_pct(void) const { return _health_starving_pct; }
   int hunger_clock_tick_frequency(void) const { return _hunger_clock_tick_frequency; }
   int hunger_health_pct(void) const { return _hunger_health_pct; }
-  int hunger_insatiable(void) const { return _hunger_insatiable; }
+  int hunger_is_insatiable(void) const { return _hunger_is_insatiable; }
   int internal_has_dir_anim(void) const { return _internal_has_dir_anim; }
   int internal_has_hp_anim(void) const { return _internal_has_hp_anim; }
   int is_able_to_attack_generators(void) const { return _is_able_to_attack_generators; }
@@ -1172,7 +1172,7 @@ public:
   void set_health_starving_pct(int v) { _health_starving_pct = v; }
   void set_hunger_clock_tick_frequency(int v) { _hunger_clock_tick_frequency = v; }
   void set_hunger_health_pct(int v) { _hunger_health_pct = v; }
-  void set_hunger_insatiable(int v) { _hunger_insatiable = v; }
+  void set_hunger_is_insatiable(int v) { _hunger_is_insatiable = v; }
   void set_internal_has_dir_anim(int v) { _internal_has_dir_anim = v; }
   void set_internal_has_hp_anim(int v) { _internal_has_hp_anim = v; }
   void set_is_able_to_attack_generators(int v) { _is_able_to_attack_generators = v; }

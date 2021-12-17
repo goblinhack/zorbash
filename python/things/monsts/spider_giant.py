@@ -63,7 +63,7 @@ def tp_init(name, text_name):
     mytp.set_health_initial_dice("4d15+4")
     mytp.set_hunger_clock_tick_frequency(50)
     mytp.set_hunger_health_pct(95)
-    mytp.set_hunger_insatiable(True)
+    mytp.set_hunger_is_insatiable(True)
     mytp.set_is_able_to_fall(True)
     mytp.set_is_able_to_jump_attack_chance_d1000(800)
     mytp.set_is_able_to_jump_attack(True)

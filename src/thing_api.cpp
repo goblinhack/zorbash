@@ -992,10 +992,10 @@ int Thing::is_humanoid(void)
   return (tp()->is_humanoid());
 }
 
-int Thing::hunger_insatiable(void)
+int Thing::hunger_is_insatiable(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->hunger_insatiable());
+  return (tp()->hunger_is_insatiable());
 }
 
 int Thing::is_indestructible(void)

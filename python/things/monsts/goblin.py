@@ -131,8 +131,8 @@ def tp_init(name, text_name):
     mytp.set_on_you_bite_attack_do("me.on_you_bite_attack()")
     mytp.set_on_you_miss_do("me.on_you_miss_do()")
     mytp.set_rarity(my.RARITY_COMMON)
-    mytp.set_spawn_group_size_dice("1d8")
     mytp.set_spawn_group_radius(4)
+    mytp.set_spawn_group_size_dice("1d8")
     mytp.set_stamina(100)
     mytp.set_stat_armor_class(10)
     mytp.set_stat_attack_bonus(10)  # 10, means no bonus

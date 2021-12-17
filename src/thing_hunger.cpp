@@ -87,7 +87,7 @@ void Thing::hunger_update(void)
     }
   }
 
-  if (hunger_insatiable()) {
+  if (hunger_is_insatiable()) {
     is_starving = true;
   }
 }

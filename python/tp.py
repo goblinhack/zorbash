@@ -1198,8 +1198,8 @@ class Tp:
     def set_is_food(self, value):
         my.tp_set_is_food(self, value)
 
-    def set_hunger_insatiable(self, value):
-        my.tp_set_hunger_insatiable(self, value)
+    def set_hunger_is_insatiable(self, value):
+        my.tp_set_hunger_is_insatiable(self, value)
 
     def set_is_undead(self, value):
         my.tp_set_is_undead(self, value)

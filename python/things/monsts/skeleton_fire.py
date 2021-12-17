@@ -70,7 +70,7 @@ def tp_init(name, text_name):
     mytp.set_health_initial_dice("2")
     mytp.set_hunger_clock_tick_frequency(50)
     mytp.set_hunger_health_pct(95)
-    mytp.set_hunger_insatiable(True)
+    mytp.set_hunger_is_insatiable(True)
     mytp.set_is_able_to_fall(True)
     mytp.set_is_able_to_fire_at(True)
     mytp.set_is_able_to_see_in_the_dark(True)

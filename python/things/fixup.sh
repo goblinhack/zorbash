@@ -189,7 +189,7 @@ do
       set_is_health_booster \
       set_is_hittable \
       set_is_humanoid \
-      set_hunger_insatiable \
+      set_hunger_is_insatiable \
       set_is_indestructible \
       set_is_intelligent \
       set_is_interesting \

@@ -163,7 +163,7 @@ PyObject *level_is_hazard_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_health_booster_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_hittable_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_humanoid_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_hunger_insatiable_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_hunger_is_insatiable_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_indestructible_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_intelligent_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_interesting_at(PyObject *obj, PyObject *args, PyObject *keywds);

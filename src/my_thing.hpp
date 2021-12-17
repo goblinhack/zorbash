@@ -932,7 +932,7 @@ public:
   int get_health_starving_pct(void);
   int get_hunger_clock_tick_frequency(void);
   int get_hunger_health_pct(void);
-  int hunger_insatiable(void);
+  int hunger_is_insatiable(void);
   int incr_charge_count(int);
   int incr_charge_count(void);
   int incr_current_damage(int);

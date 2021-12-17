@@ -242,7 +242,7 @@ PyObject *thing_is_hazard(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_health_booster(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_hittable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_humanoid(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_hunger_insatiable(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_hunger_is_insatiable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_indestructible(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_intelligent(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_interesting(PyObject *obj, PyObject *args, PyObject *keywds);
