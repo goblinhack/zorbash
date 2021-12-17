@@ -67,11 +67,6 @@ std::string Thing::text_the(bool include_owner)
   if (include_owner) {
     if (top_owner && ! top_owner->is_player()) {
       out += top_owner->text_name();
-      if (top_owner->get_follower_count()) {
-        out += " leader";
-      } else if (top_owner->get_leader()) {
-        out += " soldier";
-      }
       out += "'s ";
     }
   }
@@ -89,9 +84,6 @@ std::string Thing::text_the(bool include_owner)
   }
 
   out += tpp->text_name();
-  if (get_follower_count()) {
-    out += " leader";
-  }
 
   return (out);
 }
@@ -194,11 +186,6 @@ std::string Thing::short_text_capitalized(void)
   }
 
   out += text_name();
-  if (get_follower_count()) {
-    out += " leader";
-  } else if (get_leader()) {
-    out += " soldier";
-  }
 
   char *b          = (char *) out.c_str();
   char *e          = b + out.size();

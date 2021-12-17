@@ -29,6 +29,11 @@ void Thing::on_open(void)
     if (found != std::string::npos) {
       fn = fn.replace(found, 2, "");
     }
+
+    if (mod == "me") {
+      mod = name();
+    }
+
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
     ERR("Bad on_open call [%s] expected mod:function, got %d elems", on_open.c_str(), (int) on_open.size());

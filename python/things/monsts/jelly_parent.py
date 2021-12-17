@@ -74,8 +74,8 @@ def tp_init(name, text_name):
     mytp.set_monst_size(my.MONST_SIZE_LARGE)
     mytp.set_normal_placement_rules(True)
     mytp.set_nutrition_dice("1d4")
-    mytp.set_on_death_do("jelly_parent.on_death()")
-    mytp.set_on_you_are_hit_but_still_alive_do("jelly_parent.on_you_are_hit_but_still_alive()")
+    mytp.set_on_death_do("me.on_death()")
+    mytp.set_on_you_are_hit_but_still_alive_do("me.on_you_are_hit_but_still_alive()")
     mytp.set_rarity(my.RARITY_COMMON)
     mytp.set_stat_armor_class(8)
     mytp.set_stat_attack_bonus(10)  # 10, means no bonus

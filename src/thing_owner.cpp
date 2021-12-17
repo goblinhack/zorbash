@@ -36,6 +36,10 @@ void Thing::on_owner_set(Thingp owner)
       fn = fn.replace(found, 2, "");
     }
 
+    if (mod == "me") {
+      mod = name();
+    }
+
     dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_string().c_str(), owner->to_string().c_str());
 
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, owner->id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
@@ -78,6 +82,10 @@ void Thing::on_owner_unset(Thingp owner)
     std::size_t found = fn.find("()");
     if (found != std::string::npos) {
       fn = fn.replace(found, 2, "");
+    }
+
+    if (mod == "me") {
+      mod = name();
     }
 
     dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_string().c_str(), owner->to_string().c_str());

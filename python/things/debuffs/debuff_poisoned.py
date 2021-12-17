@@ -23,7 +23,7 @@ def tp_init(name, text_name):
     mytp.set_is_debuff(True)
     mytp.set_is_loggable(True)
     mytp.set_long_text_description("Poison courses through your unlucky veins.")
-    mytp.set_on_tick_do("debuff_poisoned.on_tick()")
+    mytp.set_on_tick_do("me.on_tick()")
     mytp.set_text_debuff("You are poisoned")
     mytp.set_text_description("Poisoned debuff.")
     mytp.set_tile(tile="debuff_poisoned")

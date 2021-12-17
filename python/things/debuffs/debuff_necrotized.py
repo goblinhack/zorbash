@@ -23,7 +23,7 @@ def tp_init(name, text_name):
     mytp.set_is_debuff(True)
     mytp.set_is_loggable(True)
     mytp.set_long_text_description("Your skin is peeling off!")
-    mytp.set_on_tick_do("debuff_necrotized.on_tick()")
+    mytp.set_on_tick_do("me.on_tick()")
     mytp.set_text_debuff("You are rotting!")
     mytp.set_text_description("Rotting debuff.")
     mytp.set_tile(tile="debuff_necrotized")

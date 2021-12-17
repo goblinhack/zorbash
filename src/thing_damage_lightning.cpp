@@ -69,6 +69,10 @@ int Thing::on_owner_damage_lightning(Thingp owner, Thingp hitter, int damage)
       fn = fn.replace(found, 2, "");
     }
 
+    if (mod == "me") {
+      mod = name();
+    }
+
     dbg("Call %s.%s(%s, %s, %s, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), owner->to_string().c_str(),
         hitter->to_string().c_str(), damage);
 
@@ -76,8 +80,8 @@ int Thing::on_owner_damage_lightning(Thingp owner, Thingp hitter, int damage)
                           (unsigned int) curr_at.y, (unsigned int) damage);
   }
 
-  ERR("Bad on_owner_damage_lightning call [%s] expected mod:function, got %d elems", on_owner_damage_lightning.c_str(),
-      (int) on_owner_damage_lightning.size());
+  ERR("Bad on_owner_damage_lightning call [%s] expected mod:function, got %d elems",
+      on_owner_damage_lightning.c_str(), (int) on_owner_damage_lightning.size());
 
   return damage;
 }
@@ -103,6 +107,10 @@ int Thing::on_damage_lightning(Thingp hitter, int damage)
     std::size_t found = fn.find("()");
     if (found != std::string::npos) {
       fn = fn.replace(found, 2, "");
+    }
+
+    if (mod == "me") {
+      mod = name();
     }
 
     dbg("Call %s.%s(%s, %s, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), hitter->to_string().c_str(), damage);

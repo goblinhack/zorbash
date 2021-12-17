@@ -14,7 +14,6 @@
 
 bool Thing::carry(Thingp item, bool can_equip)
 {
-  TRACE_AND_INDENT();
   if (! item) {
     err("No thing to carry");
     return false;
@@ -25,12 +24,13 @@ bool Thing::carry(Thingp item, bool can_equip)
     return false;
   }
 
+  TRACE_AND_INDENT();
   dbg("Try to carry %s", item->to_string().c_str());
   TRACE_AND_INDENT();
 
   auto top_owner = item->get_top_owner();
   if (top_owner) {
-    dbg("Item %s has existing owner: %s", item->to_string().c_str(), top_owner->to_string().c_str());
+    dbg("Item %s has owner: %s", item->to_string().c_str(), top_owner->to_string().c_str());
   } else {
     dbg("Item %s has no owner", item->to_string().c_str());
   }
@@ -38,7 +38,7 @@ bool Thing::carry(Thingp item, bool can_equip)
   //
   // Only player/monsts or bags can carry items
   //
-  if (! maybe_infop() && ! is_bag()) {
+  if (! maybe_itemp() && ! is_bag()) {
     dbg("Cannot carry; not a monst or bag");
     return false;
   }
@@ -98,7 +98,7 @@ bool Thing::carry(Thingp item, bool can_equip)
     //
     // Continue
     //
-  } else if (is_monst()) {
+  } else if (is_monst() || (top_owner && top_owner->is_monst())) {
     //
     // Always carry
     //
@@ -172,7 +172,10 @@ bool Thing::carry(Thingp item, bool can_equip)
     }
   }
 
-  dbg("Can carry, set owner");
+  TRACE_AND_INDENT();
+  dbg("Can carry");
+  TRACE_AND_INDENT();
+
   if (! already_carried) {
     get_itemp()->carrying.push_front(item->id);
   }
@@ -184,9 +187,25 @@ bool Thing::carry(Thingp item, bool can_equip)
     // Avoid dup message
     //
   } else {
-    if (is_player()) {
-      if (! level->is_starting) {
+    if (! level->is_starting) {
+      if (is_player()) {
         TOPCON("You carry %s.", item->text_the().c_str());
+      } else if (is_monst()) {
+        if (level->player) {
+          if (get(level->player->get_aip()->can_see_currently.can_see, curr_at.x, curr_at.y)) {
+            TOPCON("%s collects %s.", text_the().c_str(), item->text_the().c_str());
+          } else if (item->is_weapon()) {
+            TOPCON("You hear the scraping noise of a weapon being lifted.");
+          } else if (item->is_ring()) {
+            TOPCON("You hear the powerful thrum of a magical ring being worn.");
+          } else if (item->is_wand()) {
+            TOPCON("You hear a strange swishing sound.");
+          } else if (item->is_food()) {
+            TOPCON("You hear a strange slurping sound.");
+          } else if (item->is_item_magical()) {
+            TOPCON("You hear the distant sound of magic, whatever that is.");
+          }
+        }
       }
     }
   }

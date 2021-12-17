@@ -14,7 +14,7 @@ def tp_init(name):
     mytp.set_is_floating(True)
     mytp.set_is_loggable(True)
     mytp.set_is_tickable(True)
-    mytp.set_on_death_do("explosion_minor.on_death()")
+    mytp.set_on_death_do("me.on_death()")
     mytp.set_z_depth(my.MAP_DEPTH_EXPLOSION_MINOR)
     mytp.set_z_prio(my.MAP_PRIO_IN_FRONT)
 

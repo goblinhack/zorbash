@@ -35,7 +35,12 @@ void Thing::update_light(void)
 
 void Thing::update(void)
 {
-  auto tpp = tp();
+  TRACE_AND_INDENT();
+  dbg("Update");
+  TRACE_AND_INDENT();
+
+  auto tpp     = tp();
+  int  carried = 0;
 
   {
     TRACE_AND_INDENT();
@@ -258,65 +263,84 @@ void Thing::update(void)
   // Auto carry of weapons?
   //
   if (is_weapon_equiper()) {
+    TRACE_AND_INDENT();
+    dbg("Is weapon equipper");
+    TRACE_AND_INDENT();
+
     if (is_carrier_of_treasure_class_a()) {
-      auto W = level->thing_new(tp_random_weapon_class_a(), curr_at);
+      auto W = level->thing_new(tp_random_weapon_class_a(), curr_at, this);
       if (W) {
-        carry(W);
+        carried += carry(W);
       }
     }
     if (is_carrier_of_treasure_class_b()) {
-      auto W = level->thing_new(tp_random_weapon_class_b(), curr_at);
+      auto W = level->thing_new(tp_random_weapon_class_b(), curr_at, this);
       if (W) {
-        carry(W);
+        carried += carry(W);
       }
     }
     if (is_carrier_of_treasure_class_c()) {
-      auto W = level->thing_new(tp_random_weapon_class_c(), curr_at);
+      auto W = level->thing_new(tp_random_weapon_class_c(), curr_at, this);
       if (W) {
-        carry(W);
+        carried += carry(W);
       }
     }
   }
 
   if (is_bag_item_container()) {
+    TRACE_AND_INDENT();
+    dbg("Is bag item container");
+    TRACE_AND_INDENT();
+
     if (is_carrier_of_treasure_class_a()) {
-      auto W = level->thing_new(tp_random_item_not_a_container_class_a(), curr_at);
+      auto W = level->thing_new(tp_random_item_not_a_container_class_a(), curr_at, this);
       if (W) {
-        carry(W);
+        carried += carry(W);
       }
     }
     if (is_carrier_of_treasure_class_b()) {
-      auto W = level->thing_new(tp_random_item_not_a_container_class_b(), curr_at);
+      auto W = level->thing_new(tp_random_item_not_a_container_class_b(), curr_at, this);
       if (W) {
-        carry(W);
+        carried += carry(W);
       }
     }
     if (is_carrier_of_treasure_class_c()) {
-      auto W = level->thing_new(tp_random_item_not_a_container_class_c(), curr_at);
+      auto W = level->thing_new(tp_random_item_not_a_container_class_c(), curr_at, this);
       if (W) {
-        carry(W);
+        carried += carry(W);
       }
     }
   } else if (is_item_carrier()) {
+    TRACE_AND_INDENT();
+    dbg("Is item carrier");
+    TRACE_AND_INDENT();
+
     if (is_carrier_of_treasure_class_a()) {
-      auto W = level->thing_new(tp_random_item_class_a(), curr_at);
+      auto W = level->thing_new(tp_random_item_class_a(), curr_at, this);
       if (W) {
-        carry(W);
+        carried += carry(W);
       }
     }
     if (is_carrier_of_treasure_class_b()) {
-      auto W = level->thing_new(tp_random_item_class_b(), curr_at);
+      auto W = level->thing_new(tp_random_item_class_b(), curr_at, this);
       if (W) {
-        carry(W);
+        carried += carry(W);
       }
     }
     if (is_carrier_of_treasure_class_c()) {
-      auto W = level->thing_new(tp_random_item_class_c(), curr_at);
+      auto W = level->thing_new(tp_random_item_class_c(), curr_at, this);
       if (W) {
-        carry(W);
+        carried += carry(W);
       }
     }
   }
 
   hunger_update();
+
+  if (carried && (is_monst() || is_player())) {
+    TRACE_AND_INDENT();
+    dbg("Final item list:");
+    TRACE_AND_INDENT();
+    check_all_carried();
+  }
 }

@@ -34,8 +34,9 @@ void wid_collect_destroy(void)
 static void wid_collect_slot(int slot)
 {
   TRACE_AND_INDENT();
-  DBG3("Collect slot %d", slot);
+  DBG2("Collect slot %d", slot);
   TRACE_AND_INDENT();
+
   if (slot >= (int) collect_items.size()) {
     wid_collect_destroy();
     return;
@@ -61,7 +62,7 @@ static void wid_collect_slot(int slot)
       auto bag_items = t->get_item_vector();
 
       if (! player->try_to_carry(t)) {
-        DBG3("Failed to collect slot %d", slot);
+        DBG2("Failed to collect slot %d", slot);
         return;
       }
 
@@ -74,7 +75,7 @@ static void wid_collect_slot(int slot)
       }
     } else {
       if (! player->try_to_carry(t)) {
-        DBG3("Failed to collect slot %d", slot);
+        DBG2("Failed to collect slot %d", slot);
         return;
       }
     }
@@ -236,7 +237,7 @@ static void wid_collect_mouse_over_begin(Widp w, int32_t relx, int32_t rely, int
   TRACE_AND_INDENT();
   int slot = wid_get_int_context(w);
 
-  DBG3("Describe collect slot %d", slot);
+  DBG2("Describe collect slot %d", slot);
   TRACE_AND_INDENT();
   if (slot >= (int) collect_items.size()) {
     wid_collect_destroy();
@@ -264,8 +265,9 @@ void Game::wid_collect_create(const std::list< Thingp > items /* intentional cop
 {
   TRACE_AND_INDENT();
   BOTCON("You lucky thing. Choose an item to collect.");
+  DBG2("Thing collect create");
+  TRACE_AND_INDENT();
 
-  DBG3("Thing collect create");
   wid_thing_info_fini();
   change_state(Game::STATE_COLLECTING_ITEMS);
 
@@ -277,37 +279,36 @@ void Game::wid_collect_create(const std::list< Thingp > items /* intentional cop
   }
 
   if (items.size()) {
-    for (auto t : items) {
-      if (t) {
-        player->log("Collect items: %s", t->to_string().c_str());
-      } else {
-        player->log("Collect items: <empty slot>");
-      }
-    }
-
     collect_items.clear();
     std::map< Thingp, bool > found;
     for (auto t : items) {
       if (unlikely(! t)) {
-        collect_items.push_back(t);
         continue;
       }
 
+      player->log("Collect item cand: %s", t->to_string().c_str());
       if (found.find(t) != found.end()) {
+        player->log("- exists: %s", t->to_string().c_str());
         continue;
       }
+
       if (! t->is_collectable()) {
+        player->log("- not collectable: %s", t->to_string().c_str());
         continue;
       }
+
       found[ t ] = true;
       collect_items.push_back(t);
 
-      if (t->maybe_infop()) {
+      if (t->maybe_itemp()) {
         for (const auto t : t->get_item_vector()) {
+          player->log("Collect sub-item cand: %s", t->to_string().c_str());
           if (found.find(t) != found.end()) {
+            player->log("- exists: %s", t->to_string().c_str());
             continue;
           }
           if (! t->is_collectable()) {
+            player->log("- not collectable: %s", t->to_string().c_str());
             continue;
           }
           found[ t ] = true;

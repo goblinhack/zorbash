@@ -6,6 +6,7 @@
 #include "my_dungeon.hpp"
 #include "my_game.hpp"
 #include "my_level.hpp"
+#include "my_monst.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_random.hpp"
 #include "my_sdl.hpp"
@@ -75,6 +76,12 @@ void Game::tick_begin_now(void)
 
   if (level) {
     level->lights_fade();
+
+    auto player = level->player;
+    if (player && ! robot_mode) {
+      level->fov_calculete(&player->get_aip()->can_see_currently, player->curr_at.x, player->curr_at.y,
+                           player->get_distance_vision());
+    }
   }
 }
 

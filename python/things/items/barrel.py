@@ -49,9 +49,9 @@ def tp_init(name, text_name):
     mytp.set_is_tickable(True)  # So it can interact with fire
     mytp.set_is_very_combustible(True)
     mytp.set_normal_placement_rules(True)
-    mytp.set_on_death_do("barrel.on_death()")
-    mytp.set_on_fall_do("barrel.on_fall()")
-    mytp.set_on_you_are_on_fire_do("barrel.on_fire()")
+    mytp.set_on_death_do("me.on_death()")
+    mytp.set_on_fall_do("me.on_fall()")
+    mytp.set_on_you_are_on_fire_do("me.on_fire()")
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("A barrel of oil. Why? Don't ask.")
     mytp.set_z_depth(my.MAP_DEPTH_OBJ)

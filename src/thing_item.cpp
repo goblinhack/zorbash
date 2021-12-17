@@ -84,7 +84,7 @@ void Thing::move_carried_items(void)
   // Move carried items too as when we attack, we will use say the
   // carried sword and so it had better be in the same location.
   //
-  if (maybe_infop()) {
+  if (maybe_itemp()) {
     for (const auto o : get_item_vector()) {
       o->move_to(curr_at);
       o->dir = dir;

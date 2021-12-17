@@ -1572,9 +1572,19 @@ bool Thing::ai_tick(bool recursing)
   auto threat = get_most_dangerous_visible_thing();
 
   //
-  // Update what we can see
+  // A threat can be a few tiles away; but if one is standing literally
+  // next to us! then it takes priority.
   //
-  bool light_walls = true;
+  auto adjacent_threat = get_most_dangerous_adjacent_thing();
+  if (adjacent_threat) {
+    AI_LOG("Adjacent threat", adjacent_threat);
+    if (is_dangerous(adjacent_threat)) {
+      threat = adjacent_threat;
+    } else {
+      AI_LOG("Adjacent threat (not dangerous)", adjacent_threat);
+      threat = nullptr;
+    }
+  }
 
   //
   // Update what we can see - which if a minion is from the perspective of the manifestor.
@@ -1585,10 +1595,9 @@ bool Thing::ai_tick(bool recursing)
   // We need to grow the light a bit for level explorers
   //
   if (is_explorer()) {
-    level->fov_calculete(&aip->can_see_currently, vision_souce.x, vision_souce.y, get_distance_vision() + 1,
-                         light_walls);
+    level->fov_calculete(&aip->can_see_currently, vision_souce.x, vision_souce.y, get_distance_vision() + 1);
   } else {
-    level->fov_calculete(&aip->can_see_currently, vision_souce.x, vision_souce.y, get_distance_vision(), light_walls);
+    level->fov_calculete(&aip->can_see_currently, vision_souce.x, vision_souce.y, get_distance_vision());
   }
 
   if (! recursing) {
@@ -1685,7 +1694,7 @@ bool Thing::ai_tick(bool recursing)
           //
           // If not too close to the thread we can try and do something else like pick up a weapon.
           //
-          if (distance(curr_at, threat->curr_at) > 1) {
+          if (distance(curr_at, threat->curr_at) > 2) {
             //
             // Look around for something nearby to do; like collect an item.
             //

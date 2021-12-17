@@ -41,6 +41,10 @@ void Thing::on_you_are_hit_but_still_alive(Thingp hitter,      // an arrow / mon
       fn = fn.replace(found, 2, "");
     }
 
+    if (mod == "me") {
+      mod = name();
+    }
+
     dbg("Call %s.%s(%s, %s, %s, crit=%d, damage=%d)", mod.c_str(), fn.c_str(), to_string().c_str(),
         hitter->to_string().c_str(), real_hitter->to_string().c_str(), crit, damage);
 
@@ -72,6 +76,10 @@ void Thing::on_you_are_hit_and_now_dead(Thingp hitter,      // an arrow / monst 
     std::size_t found = fn.find("()");
     if (found != std::string::npos) {
       fn = fn.replace(found, 2, "");
+    }
+
+    if (mod == "me") {
+      mod = name();
     }
 
     dbg("Call %s.%s(%s, %s, %s, crit=%d, damage=%d)", mod.c_str(), fn.c_str(), to_string().c_str(),
@@ -112,9 +120,14 @@ void Thing::on_you_miss_do(Thingp hitter)
       fn = fn.replace(found, 2, "");
     }
 
+    if (mod == "me") {
+      mod = name();
+    }
+
     dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_string().c_str(), hitter->to_string().c_str());
 
-    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
+    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, (unsigned int) curr_at.x,
+                    (unsigned int) curr_at.y);
   } else {
     ERR("Bad on_you_miss_do call [%s] expected mod:function, got %d elems", on_you_miss_do.c_str(),
         (int) on_you_miss_do.size());
@@ -140,6 +153,10 @@ void Thing::on_you_bite_attack(void)
     std::size_t found = fn.find("()");
     if (found != std::string::npos) {
       fn = fn.replace(found, 2, "");
+    }
+
+    if (mod == "me") {
+      mod = name();
     }
 
     dbg("Call %s.%s(%s)", mod.c_str(), fn.c_str(), to_string().c_str());

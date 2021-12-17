@@ -35,10 +35,10 @@ def tp_init(name):
     mytp.set_is_light_blocker(True)
     mytp.set_is_obs_wall_or_door(True)
     mytp.set_normal_placement_rules(True)
-    mytp.set_on_death_do("door_metal.on_death()")
+    mytp.set_on_death_do("me.on_death()")
     mytp.set_on_death_is_open(True)
-    mytp.set_on_open_do("door_metal.on_open()")
-    mytp.set_on_you_are_hit_but_still_alive_do("door_metal.on_you_are_hit_but_still_alive()")
+    mytp.set_on_open_do("me.on_open()")
+    mytp.set_on_you_are_hit_but_still_alive_do("me.on_you_are_hit_but_still_alive()")
     mytp.set_stat_armor_class(20)
     mytp.set_stat_attack_bonus(10)  # 10, means no bonus
     mytp.set_text_a_or_an("the")
@@ -60,7 +60,7 @@ def tp_init(name):
 
 
 def init():
-    tp_init(name="door2")
+    tp_init(name="door_metal")
 
 
 init()

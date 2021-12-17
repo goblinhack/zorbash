@@ -45,6 +45,10 @@ bool Thing::on_firing_at_something(Thingp target)
       fn = fn.replace(found, 2, "");
     }
 
+    if (mod == "me") {
+      mod = name();
+    }
+
     dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_string().c_str(), target->to_string().c_str());
 
     return py_call_bool_fn(mod.c_str(), fn.c_str(), id.id, target->id.id, (unsigned int) curr_at.x,

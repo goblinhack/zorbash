@@ -473,7 +473,7 @@ private:
   std::string _on_final_use_do;
   std::string _on_firing_at_something_do;
   std::string _on_idle_dice_str;
-  std::string _on_lifespan_do;
+  std::string _on_lifespan_tick_do;
   std::string _on_move_do;
   std::string _on_open_do;
   std::string _on_owner_damage_acid_do;
@@ -682,7 +682,7 @@ public:
   const std::string &on_fall_do(void) const { return _on_fall_do; }
   const std::string &on_final_use_do(void) const { return _on_final_use_do; }
   const std::string &on_firing_at_something_do(void) const { return _on_firing_at_something_do; }
-  const std::string &on_lifespan_do(void) const { return _on_lifespan_do; }
+  const std::string &on_lifespan_tick_do(void) const { return _on_lifespan_tick_do; }
   const std::string &on_move_do(void) const { return _on_move_do; }
   const std::string &on_open_do(void) const { return _on_open_do; }
   const std::string &on_owner_damage_acid_do(void) const { return _on_owner_damage_acid_do; }
@@ -1396,7 +1396,7 @@ public:
   void set_on_fall_do(const std::string &v) { _on_fall_do = v; }
   void set_on_final_use_do(const std::string &v) { _on_final_use_do = v; }
   void set_on_firing_at_something_do(const std::string &v) { _on_firing_at_something_do = v; }
-  void set_on_lifespan_do(const std::string &v) { _on_lifespan_do = v; }
+  void set_on_lifespan_tick_do(const std::string &v) { _on_lifespan_tick_do = v; }
   void set_on_move_do(const std::string &v) { _on_move_do = v; }
   void set_on_open_do(const std::string &v) { _on_open_do = v; }
   void set_on_owner_damage_acid_do(const std::string &v) { _on_owner_damage_acid_do = v; }

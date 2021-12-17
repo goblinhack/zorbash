@@ -20,7 +20,7 @@ def tp_init(name, tiles=[], bot3_tiles=[]):
     mytp.set_is_cursor_can_hover_over(True)
     mytp.set_is_described_when_hovering_over(True)
     mytp.set_is_interesting(True)
-    mytp.set_on_death_do("bridge.on_death()")
+    mytp.set_on_death_do("me.on_death()")
     mytp.set_text_a_or_an("the")
     mytp.set_text_description("Shaky bridge.")
     mytp.set_z_depth(my.MAP_DEPTH_FLOOR)

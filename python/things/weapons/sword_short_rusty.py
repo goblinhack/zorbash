@@ -47,7 +47,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_item_height(5)
     mytp.set_item_width(5)
     mytp.set_long_text_description("A rusting short sword. Ideal for absolutely no one.")
-    mytp.set_on_use_do("sword_short_rusty.on_use()")
+    mytp.set_on_use_do("me.on_use()")
     mytp.set_stat_attack_bonus(10)  # 10, means no bonus
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("Thy rusty means of justice.")

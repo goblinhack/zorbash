@@ -37,6 +37,10 @@ void Thing::on_use(Thingp what)
       fn = fn.replace(found, 2, "");
     }
 
+    if (mod == "me") {
+      mod = what->name();
+    }
+
     dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_string().c_str(), what->to_string().c_str());
 
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, 0U, (unsigned int) curr_at.x,
@@ -69,6 +73,10 @@ void Thing::on_use(Thingp what, Thingp target)
       std::size_t found = fn.find("()");
       if (found != std::string::npos) {
         fn = fn.replace(found, 2, "");
+      }
+
+      if (mod == "me") {
+        mod = what->name();
       }
 
       dbg("Call %s.%s(%s, %s, %s)", mod.c_str(), fn.c_str(), to_string().c_str(), what->to_string().c_str(),
@@ -104,6 +112,10 @@ void Thing::on_final_use(Thingp what)
       fn = fn.replace(found, 2, "");
     }
 
+    if (mod == "me") {
+      mod = what->name();
+    }
+
     dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_string().c_str(), what->to_string().c_str());
 
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, 0U, (unsigned int) curr_at.x,
@@ -137,6 +149,10 @@ void Thing::on_final_use(Thingp what, Thingp target)
       std::size_t found = fn.find("()");
       if (found != std::string::npos) {
         fn = fn.replace(found, 2, "");
+      }
+
+      if (mod == "me") {
+        mod = what->name();
       }
 
       dbg("Call %s.%s(%s, %s, %s)", mod.c_str(), fn.c_str(), to_string().c_str(), what->to_string().c_str(),

@@ -2,7 +2,7 @@ import my
 import tp
 
 
-def on_lifespan(owner, me, x, y):
+def on_lifespan_tick(owner, me, x, y):
     if my.thing_is_player(owner):
         my.topcon("One of your torches fizzles out.")
 
@@ -36,7 +36,7 @@ def tp_init(name, text_name, tiles=[]):
     mytp.set_light_strength(2)
     mytp.set_long_text_description("A bundle of torches to light the way. Be warned, they do burn out slowly. Don't find yourself lost in the dark...")
     mytp.set_normal_placement_rules(True)
-    mytp.set_on_lifespan_do("torch.on_lifespan()")
+    mytp.set_on_lifespan_tick_do("me.on_lifespan_tick()")
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("A small beacon of light in this blighted place.")
     mytp.set_z_depth(my.MAP_DEPTH_OBJ)

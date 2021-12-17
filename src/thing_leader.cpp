@@ -31,6 +31,10 @@ void Thing::on_leader_set(void)
       fn = fn.replace(found, 2, "");
     }
 
+    if (mod == "me") {
+      mod = name();
+    }
+
     dbg("Call %s.%s(%ss)", mod.c_str(), fn.c_str(), to_string().c_str());
 
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
@@ -67,6 +71,10 @@ void Thing::on_leader_unset(void)
     std::size_t found = fn.find("()");
     if (found != std::string::npos) {
       fn = fn.replace(found, 2, "");
+    }
+
+    if (mod == "me") {
+      mod = name();
     }
 
     dbg("Call %s.%s(%s)", mod.c_str(), fn.c_str(), to_string().c_str());

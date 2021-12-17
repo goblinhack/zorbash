@@ -54,8 +54,8 @@ def tp_init(name, text_name):
     mytp.set_long_text_description("A grave portal from which the dead crawl out.")
     mytp.set_minion_limit(4)
     mytp.set_normal_placement_rules(True)
-    mytp.set_on_death_do("ghost_minion_generator.on_death()")
-    mytp.set_on_idle_dice("1d10+10:skeleton_minion_generator.on_idle_dice()")
+    mytp.set_on_death_do("me.on_death()")
+    mytp.set_on_idle_dice("1d10+10:me.on_idle_dice()")
     mytp.set_stat_attack_bonus(10)  # 10, means no bonus
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("The dead rise again here.")

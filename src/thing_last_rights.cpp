@@ -104,17 +104,23 @@ void Thing::last_rites(Thingp defeater, const char *reason)
     }
   }
 
-  if (maybe_infop()) {
-    //
-    // So that slimes don't keep moving when dead
-    //
-    move_finish();
+  //
+  // So that slimes don't keep moving when dead
+  //
+  move_finish();
 
+  if (maybe_itemp()) {
     //
     // Drop everything!
     //
     if (on_death_drop_all_items()) {
       dbg("Drop all items on death");
+      if (is_monst() || is_player()) {
+        TRACE_AND_INDENT();
+        dbg("Final item list at death:");
+        TRACE_AND_INDENT();
+        check_all_carried();
+      }
       drop_all();
       dbg("Dropped all items");
     }
@@ -242,6 +248,10 @@ void Thing::last_rites(Thingp defeater, const char *reason)
         std::size_t found = fn.find("()");
         if (found != std::string::npos) {
           fn = fn.replace(found, 2, "");
+        }
+
+        if (mod == "me") {
+          mod = name();
         }
 
         dbg("Call %s.%s(%s)", mod.c_str(), fn.c_str(), to_string().c_str());

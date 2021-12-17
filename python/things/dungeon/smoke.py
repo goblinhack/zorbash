@@ -15,7 +15,7 @@ def tp_init(name):
     mytp.set_is_removeable_if_out_of_slots(True)
     mytp.set_is_smoke(True)
     mytp.set_is_tickable(True)  # for lifespan tick
-    mytp.set_on_fall_do("smoke.on_fall()")
+    mytp.set_on_fall_do("me.on_fall()")
     mytp.set_text_a_or_an("")
     mytp.set_text_description("Whisps of smoke.")
     mytp.set_z_depth(my.MAP_DEPTH_OBJ)

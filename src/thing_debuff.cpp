@@ -20,7 +20,8 @@ bool Thing::debuff_add(Thingp what)
   TRACE_AND_INDENT();
   dbg("Try to add debuff %s", what->to_string().c_str());
   TRACE_AND_INDENT();
-  if (! maybe_infop()) {
+
+  if (! maybe_itemp()) {
     dbg("No; not a monst");
     return false;
   }

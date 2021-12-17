@@ -69,6 +69,10 @@ int Thing::on_owner_damage_fire(Thingp owner, Thingp hitter, int damage)
       fn = fn.replace(found, 2, "");
     }
 
+    if (mod == "me") {
+      mod = name();
+    }
+
     dbg("Call %s.%s(%s, %s, %s, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), owner->to_string().c_str(),
         hitter->to_string().c_str(), damage);
 
@@ -103,6 +107,10 @@ int Thing::on_damage_fire(Thingp hitter, int damage)
     std::size_t found = fn.find("()");
     if (found != std::string::npos) {
       fn = fn.replace(found, 2, "");
+    }
+
+    if (mod == "me") {
+      mod = name();
     }
 
     dbg("Call %s.%s(%s, %s, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), hitter->to_string().c_str(), damage);

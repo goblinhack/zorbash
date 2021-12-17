@@ -31,7 +31,7 @@ def tp_init(name):
     mytp.set_is_tickable(True)
     mytp.set_light_color("yellow")
     mytp.set_light_strength(4)
-    mytp.set_on_death_do("explosion_major.on_death()")
+    mytp.set_on_death_do("me.on_death()")
     mytp.set_text_hits("blasts")
     mytp.set_z_depth(my.MAP_DEPTH_EXPLOSION_MAJOR)
     mytp.set_z_prio(my.MAP_PRIO_IN_FRONT)

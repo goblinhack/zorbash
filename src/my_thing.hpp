@@ -571,7 +571,7 @@ public:
   const std::string &on_firing_at_something_do(void);
   const std::string &on_you_are_hit_but_still_alive_do(void);
   const std::string &on_you_are_hit_and_now_dead_do(void);
-  const std::string &on_lifespan_do(void);
+  const std::string &on_lifespan_tick_do(void);
   const std::string &on_you_miss_do(void);
   const std::string &on_move_do(void);
   const std::string &on_open_do(void);
@@ -1634,7 +1634,7 @@ public:
   void on_final_use(Thingp what);
   void on_final_use(Thingp what, Thingp target);
   void on_fire(void);
-  void on_lifespan(Thingp hitter);
+  void on_lifespan_tick(Thingp hitter);
   void on_move(void);
   void on_open(void);
   void on_owner_set(Thingp owner);

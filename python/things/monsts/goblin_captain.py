@@ -121,15 +121,15 @@ def tp_init(name, text_name):
     mytp.set_long_text_description("Goblins are small, green skinned beings that lair in caves, abandoned mines, despoiled dungeons and other dismal settings, otherwise known as their homes. They spend their time defending their natural habitat from invading marauders like you. However, they usually carry some meagre amounts of gold, dug out from the depths with their bare, shaking hands. Best to find out... This particular goblin has risen through the ranks. As tough as stone nails in a stone coffin, this goblin is not prepared to take any of your cheek.")
     mytp.set_monst_size(my.MONST_SIZE_NORMAL)
     mytp.set_normal_placement_rules(True)
-    mytp.set_on_death_do("goblin-captain.on_death()")
+    mytp.set_on_death_do("me.on_death()")
     mytp.set_on_death_drop_all_items(True)
-    mytp.set_on_follower_set_do("goblin-captain.on_follower_set()")
-    mytp.set_on_follower_unset_do("goblin-captain.on_follower_unset()")
-    mytp.set_on_leader_set_do("goblin-captain.on_leader_set()")
-    mytp.set_on_leader_unset_do("goblin-captain.on_leader_unset()")
-    mytp.set_on_you_are_hit_but_still_alive_do("goblin-captain.on_you_are_hit_but_still_alive()")
-    mytp.set_on_you_bite_attack_do("goblin-captain.on_you_bite_attack()")
-    mytp.set_on_you_miss_do("goblin-captain.on_you_miss_do()")
+    mytp.set_on_follower_set_do("me.on_follower_set()")
+    mytp.set_on_follower_unset_do("me.on_follower_unset()")
+    mytp.set_on_leader_set_do("me.on_leader_set()")
+    mytp.set_on_leader_unset_do("me.on_leader_unset()")
+    mytp.set_on_you_are_hit_but_still_alive_do("me.on_you_are_hit_but_still_alive()")
+    mytp.set_on_you_bite_attack_do("me.on_you_bite_attack()")
+    mytp.set_on_you_miss_do("me.on_you_miss_do()")
     mytp.set_rarity(my.RARITY_COMMON)
     mytp.set_stamina(100)
     mytp.set_stat_armor_class(10)
@@ -161,7 +161,7 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="goblin-captain", text_name="goblin captain")
+    tp_init(name="goblin_captain", text_name="goblin captain")
 
 
 init()

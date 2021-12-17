@@ -13,14 +13,14 @@
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"
 
-void Thing::on_lifespan(Thingp what)
+void Thing::on_lifespan_tick(Thingp what)
 {
-  auto on_lifespan = what->tp()->on_lifespan_do();
-  if (std::empty(on_lifespan)) {
+  auto on_lifespan_tick = what->tp()->on_lifespan_tick_do();
+  if (std::empty(on_lifespan_tick)) {
     return;
   }
 
-  auto t = split_tokens(on_lifespan, '.');
+  auto t = split_tokens(on_lifespan_tick, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -29,12 +29,16 @@ void Thing::on_lifespan(Thingp what)
       fn = fn.replace(found, 2, "");
     }
 
+    if (mod == "me") {
+      mod = what->name();
+    }
+
     dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_string().c_str(), what->to_string().c_str());
 
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
-    ERR("Bad on_lifespan call [%s] expected mod:function, got %d elems", on_lifespan.c_str(),
-        (int) on_lifespan.size());
+    ERR("Bad on_lifespan_tick call [%s] expected mod:function, got %d elems", on_lifespan_tick.c_str(),
+        (int) on_lifespan_tick.size());
   }
 }
 
@@ -62,7 +66,7 @@ void Thing::lifespan_tick(void)
 
   auto top_owner = get_top_owner();
   if (top_owner) {
-    top_owner->on_lifespan(this);
+    top_owner->on_lifespan_tick(this);
   }
 
   //

@@ -34,6 +34,10 @@ bool Thing::on_tick(void)
       fn = fn.replace(found, 2, "");
     }
 
+    if (mod == "me") {
+      mod = name();
+    }
+
     auto owner = get_top_owner();
     if (owner) {
       dbg("Call %s.%s(owner=%s, item=%s, %d, %d)", mod.c_str(), fn.c_str(), owner->to_string().c_str(),
@@ -167,19 +171,6 @@ void Thing::achieve_goals_in_life(void)
   idle_check();
   if (is_dead) {
     return;
-  }
-
-  //
-  // Roll the dice and see if we do anything
-  //
-  if (! std::empty(get_on_idle_dice_str())) {
-    auto roll = get_idle_tick();
-    if (game->tick_current - get_tick_last_did_something() >= (unsigned int) roll) {
-      auto d = get_on_idle_dice();
-      py_call_void_fn(d.python_mod.c_str(), d.python_func.c_str(), id.id, (unsigned int) curr_at.x,
-                      (unsigned int) curr_at.y);
-      set_tick_last_did_something(game->tick_current);
-    }
   }
 
   if (! is_player()) {

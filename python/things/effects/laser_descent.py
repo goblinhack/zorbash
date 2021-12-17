@@ -2,7 +2,7 @@ import my
 import tp
 
 
-def on_bor(me, x, y):
+def on_born(me, x, y):
     my.level_spawn_at_thing(me, "explosion_major")
     my.level_spawn_using_items_radius_range(me, me, me, "explosion_destroy_floor")
 
@@ -19,7 +19,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_loggable(True)
     mytp.set_is_no_tile(True)
     mytp.set_is_usable(True)
-    mytp.set_on_born_do("laser_descent.on_born()")
+    mytp.set_on_born_do("me.on_born()")
     mytp.set_text_a_or_an("a")
     mytp.set_z_depth(my.MAP_DEPTH_OBJ)
     mytp.set_z_prio(my.MAP_PRIO_BEHIND)

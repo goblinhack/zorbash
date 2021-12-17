@@ -36,6 +36,10 @@ void Thing::on_equip(Thingp what)
       fn = fn.replace(found, 2, "");
     }
 
+    if (mod == "me") {
+      mod = what->name();
+    }
+
     dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_string().c_str(), what->to_string().c_str());
 
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
@@ -64,6 +68,10 @@ void Thing::on_unequip(Thingp what)
     std::size_t found = fn.find("()");
     if (found != std::string::npos) {
       fn = fn.replace(found, 2, "");
+    }
+
+    if (mod == "me") {
+      mod = what->name();
     }
 
     dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_string().c_str(), what->to_string().c_str());
@@ -446,7 +454,11 @@ bool Thing::equip(Thingp item, int equip)
   dbg("Has equipped: %s", item->to_string().c_str());
   auto top_owner = item->get_top_owner();
   if (top_owner) {
-    dbg("Has equipped %s, owner: %s", item->to_string().c_str(), top_owner->to_string().c_str());
+    if (top_owner != this) {
+      dbg("Has equipped %s, owner: %s", item->to_string().c_str(), top_owner->to_string().c_str());
+    } else {
+      dbg("Has equipped %s", item->to_string().c_str());
+    }
   } else {
     //
     // This is ok if being carried and we're about to set the owner

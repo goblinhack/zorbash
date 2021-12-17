@@ -38,7 +38,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_item_width(4)
     mytp.set_long_text_description("This most dangerous stone can devistate any are where it is thrown. Be careful where you drop it...")
     mytp.set_normal_placement_rules(True)
-    mytp.set_on_use_do("thunderstone.on_use()")
+    mytp.set_on_use_do("me.on_use()")
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("A harmless looking brownish stone")
     mytp.set_z_depth(my.MAP_DEPTH_OBJ)

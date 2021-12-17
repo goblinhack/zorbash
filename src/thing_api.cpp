@@ -5049,6 +5049,7 @@ int Thing::get_light_strength(void)
 int Thing::update_light_strength(void)
 {
   TRACE_AND_INDENT();
+
   if (! maybe_infop()) {
     return get_initial_light_strength();
   }
@@ -5108,6 +5109,7 @@ int Thing::incr_light_strength(void)
 uint32_t Thing::get_tick_last_did_something(void)
 {
   TRACE_AND_INDENT();
+
   if (maybe_infop()) {
     return (get_infop()->tick_last_did_something);
   } else {
@@ -5156,6 +5158,7 @@ uint32_t Thing::incr_tick_last_did_something(void)
 uint32_t Thing::get_tick_last_dropped(void)
 {
   TRACE_AND_INDENT();
+
   if (maybe_infop()) {
     return (get_infop()->tick_last_dropped);
   } else {
@@ -6125,10 +6128,10 @@ const std::string &Thing::on_you_are_hit_and_now_dead_do(void)
   return (tp()->on_you_are_hit_and_now_dead_do());
 }
 
-const std::string &Thing::on_lifespan_do(void)
+const std::string &Thing::on_lifespan_tick_do(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->on_lifespan_do());
+  return (tp()->on_lifespan_tick_do());
 }
 
 const std::string &Thing::on_you_miss_do(void)

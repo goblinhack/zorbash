@@ -328,8 +328,8 @@ class Tp:
     def set_on_tick_do(self, value):
         my.tp_set_on_tick_do(self, value)
 
-    def set_on_lifespan_do(self, value):
-        my.tp_set_on_lifespan_do(self, value)
+    def set_on_lifespan_tick_do(self, value):
+        my.tp_set_on_lifespan_tick_do(self, value)
 
     def set_on_you_bite_attack_do(self, value):
         my.tp_set_on_you_bite_attack_do(self, value)

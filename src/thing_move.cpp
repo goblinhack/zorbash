@@ -46,6 +46,10 @@ void Thing::on_move(void)
       fn = fn.replace(found, 2, "");
     }
 
+    if (mod == "me") {
+      mod = name();
+    }
+
     dbg("Call %s.%s(%s, %d, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), (int) curr_at.x, (int) curr_at.y);
 
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
@@ -506,11 +510,11 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
     }
   }
 
-  auto t = get_most_dangerous_adjacent_thing();
   //
   // If we allow the player here to get a free attack, then it looks nuts
   // as we end up attacking without actually attacking
   //
+  auto t = get_most_dangerous_adjacent_thing();
   if (is_monst() && t && ! t->is_player()) {
     auto free_attack = (((t->curr_at.x >= curr_at.x) && left) || ((t->curr_at.x <= curr_at.x) && right) ||
                         ((t->curr_at.y >= curr_at.y) && up) || ((t->curr_at.y <= curr_at.y) && down));
@@ -593,7 +597,7 @@ void Thing::update_interpolated_position(void)
         dbg("Changed position (new %d,%d, old %d,%d)", curr_at.x, curr_at.y, last_at.x, last_at.y);
       }
 
-      new_pos     = make_fpoint(curr_at);
+      new_pos = make_fpoint(curr_at);
       last_at = curr_at;
     }
   } else if (game->tick_dt >= 1) {
@@ -602,7 +606,7 @@ void Thing::update_interpolated_position(void)
         dbg("End of move position (new %d,%d, old %d,%d)", curr_at.x, curr_at.y, last_at.x, last_at.y);
       }
 
-      new_pos     = make_fpoint(curr_at);
+      new_pos = make_fpoint(curr_at);
       last_at = curr_at;
 
       move_finish();
@@ -646,7 +650,7 @@ void Thing::update_pos(point to, bool immediately)
 
   point old_at((int) curr_at.x, (int) curr_at.y);
 
-  last_at    = curr_at;
+  last_at        = curr_at;
   has_ever_moved = true;
 
   //

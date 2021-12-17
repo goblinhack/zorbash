@@ -49,8 +49,8 @@ def tp_init(name, text_name):
     mytp.set_long_text_description("A dark gateway for the creatures of the night. Also cheap boarding rates.")
     mytp.set_minion_limit(5)
     mytp.set_normal_placement_rules(True)
-    mytp.set_on_death_do("coffin_minion_generator.on_death()")
-    mytp.set_on_idle_dice("1d10+10:coffin_minion_generator.on_idle_dice()")
+    mytp.set_on_death_do("me.on_death()")
+    mytp.set_on_idle_dice("1d10+10:me.on_idle_dice()")
     mytp.set_stat_attack_bonus(10)  # 10, means no bonus
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("A cursed coffin, spawning all manner of surprises.")

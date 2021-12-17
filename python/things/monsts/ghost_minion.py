@@ -46,7 +46,7 @@ def tp_init(name, text_name):
     mytp.set_long_text_description("A spirit of one less fortunate than you. Beware, ghosts can traverse chasms that you cannot.")
     mytp.set_monst_size(my.MONST_SIZE_NORMAL)
     mytp.set_normal_placement_rules(True)
-    mytp.set_on_death_do("ghost.on_death()")
+    mytp.set_on_death_do("me.on_death()")
     mytp.set_rarity(my.RARITY_COMMON)
     mytp.set_stat_armor_class(11)
     mytp.set_stat_attack_bonus(10)  # 10, means no bonus

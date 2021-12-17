@@ -37,9 +37,14 @@ void Thing::on_follower_set(Thingp leader)
       fn = fn.replace(found, 2, "");
     }
 
+    if (mod == "me") {
+      mod = name();
+    }
+
     dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_string().c_str(), leader->to_string().c_str());
 
-    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, leader->id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
+    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, leader->id.id, (unsigned int) curr_at.x,
+                    (unsigned int) curr_at.y);
   } else {
     ERR("Bad on_follower_set call [%s] expected mod:function, got %d elems", on_follower_set.c_str(),
         (int) on_follower_set.size());
@@ -76,9 +81,14 @@ void Thing::on_follower_unset(Thingp leader)
       fn = fn.replace(found, 2, "");
     }
 
+    if (mod == "me") {
+      mod = name();
+    }
+
     dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_string().c_str(), leader->to_string().c_str());
 
-    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, leader->id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
+    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, leader->id.id, (unsigned int) curr_at.x,
+                    (unsigned int) curr_at.y);
   } else {
     ERR("Bad on_follower_unset call [%s] expected mod:function, got %d elems", on_follower_unset.c_str(),
         (int) on_follower_unset.size());
