@@ -3,12 +3,11 @@ import tp
 
 
 def on_leader_set(me, x, y):
-    my.thing_polymorph(me, "goblin-captain")
+    return
 
 
 def on_leader_unset(me, x, y):
-    if not my.thing_is_dead_or_dying(me):
-        my.topcon("The goblin soldier cries out in rage!")
+    return
 
 
 def on_follower_set(me, leader, x, y):
@@ -16,7 +15,8 @@ def on_follower_set(me, leader, x, y):
 
 
 def on_follower_unset(me, leader, x, y):
-    return
+    if not my.thing_is_dead_or_dying(me):
+        my.topcon("The goblin leader cries out in rage!")
 
 
 def on_you_bite_attack(me, x, y):
@@ -97,7 +97,7 @@ def tp_init(name, text_name):
     mytp.set_is_attackable_by_monst(True)
     mytp.set_is_attackable_by_player(True)
     mytp.set_is_bony(True)
-    mytp.set_is_carrier_of_treasure_class_a(True)
+    mytp.set_is_carrier_of_treasure_class_b(True)
     mytp.set_is_corpse_on_death(True)
     mytp.set_is_crushable(True)
     mytp.set_is_debug_type(True)
@@ -118,18 +118,18 @@ def tp_init(name, text_name):
     mytp.set_is_steal_item_chance_d1000(50)
     mytp.set_is_tickable(True)
     mytp.set_is_weapon_equiper(True)
-    mytp.set_long_text_description("Goblins are small, green skinned beings that lair in caves, abandoned mines, despoiled dungeons and other dismal settings, otherwise known as their homes. They spend their time defending their natural habitat from invading marauders like you. However, they usually carry some meagre amounts of gold, dug out from the depths with their bare, shaking hands. Best to find out...")
+    mytp.set_long_text_description("Goblins are small, green skinned beings that lair in caves, abandoned mines, despoiled dungeons and other dismal settings, otherwise known as their homes. They spend their time defending their natural habitat from invading marauders like you. However, they usually carry some meagre amounts of gold, dug out from the depths with their bare, shaking hands. Best to find out... This particular goblin has risen through the ranks. As tough as stone nails in a stone coffin, this goblin is not prepared to take any of your cheek.")
     mytp.set_monst_size(my.MONST_SIZE_NORMAL)
     mytp.set_normal_placement_rules(True)
-    mytp.set_on_death_do("goblin.on_death()")
+    mytp.set_on_death_do("goblin-captain.on_death()")
     mytp.set_on_death_drop_all_items(True)
-    mytp.set_on_follower_set_do("goblin.on_follower_set()")
-    mytp.set_on_follower_unset_do("goblin.on_follower_unset()")
-    mytp.set_on_leader_set_do("goblin.on_leader_set()")
-    mytp.set_on_leader_unset_do("goblin.on_leader_unset()")
-    mytp.set_on_you_are_hit_but_still_alive_do("goblin.on_you_are_hit_but_still_alive()")
-    mytp.set_on_you_bite_attack_do("goblin.on_you_bite_attack()")
-    mytp.set_on_you_miss_do("goblin.on_you_miss_do()")
+    mytp.set_on_follower_set_do("goblin-captain.on_follower_set()")
+    mytp.set_on_follower_unset_do("goblin-captain.on_follower_unset()")
+    mytp.set_on_leader_set_do("goblin-captain.on_leader_set()")
+    mytp.set_on_leader_unset_do("goblin-captain.on_leader_unset()")
+    mytp.set_on_you_are_hit_but_still_alive_do("goblin-captain.on_you_are_hit_but_still_alive()")
+    mytp.set_on_you_bite_attack_do("goblin-captain.on_you_bite_attack()")
+    mytp.set_on_you_miss_do("goblin-captain.on_you_miss_do()")
     mytp.set_rarity(my.RARITY_COMMON)
     mytp.set_stamina(100)
     mytp.set_stat_armor_class(10)
@@ -138,7 +138,7 @@ def tp_init(name, text_name):
     mytp.set_stat_dexterity(10)
     mytp.set_stat_strength(8)
     mytp.set_text_a_or_an("a")
-    mytp.set_text_description("A very lesser and a bit insecure goblin.")
+    mytp.set_text_description("A grizzled war-weary goblin.")
     mytp.set_text_hits("claws")
     mytp.set_z_depth(my.MAP_DEPTH_OBJ)
     mytp.set_z_prio(my.MAP_PRIO_NORMAL)
@@ -161,7 +161,7 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="goblin", text_name="lesser goblin")
+    tp_init(name="goblin-captain", text_name="goblin captain")
 
 
 init()
