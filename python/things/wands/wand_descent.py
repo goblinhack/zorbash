@@ -73,7 +73,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_normal_placement_rules(True)
     mytp.set_on_fall_do("me.on_fall()")
     mytp.set_on_final_use_do("me.on_final_use()")
-    mytp.set_on_idle_dice("1d1000+200:me.on_idle()")
+    mytp.set_on_idle_tick_frequency_dice("1d1000+200:me.on_idle()")
     mytp.set_on_you_are_hit_and_now_dead_do("me.on_you_are_hit_and_now_dead()")
     mytp.set_on_you_are_on_fire_do("me.on_fire()")
     mytp.set_range_max(7)

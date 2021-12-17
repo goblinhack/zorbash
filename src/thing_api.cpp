@@ -18,22 +18,40 @@
 //
 // Dice
 //
-const Dice &Thing::get_on_idle_dice(void)
+const Dice &Thing::get_on_idle_tick_frequency_dice(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->on_idle_dice());
+  return (tp()->on_idle_tick_frequency_dice());
 }
 
-const std::string &Thing::get_on_idle_dice_str(void)
+const std::string &Thing::get_on_idle_tick_frequency_dice_str(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->on_idle_dice_str());
+  return (tp()->on_idle_tick_frequency_dice_str());
 }
 
-int Thing::get_idle_tick(void)
+int Thing::get_idle_tick_frequency(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->on_idle_dice().roll());
+  return (tp()->on_idle_tick_frequency_dice().roll());
+}
+
+const Dice &Thing::get_spawn_group_size_dice(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->spawn_group_size_dice());
+}
+
+const std::string &Thing::get_spawn_group_size_dice_str(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->spawn_group_size_dice_str());
+}
+
+int Thing::get_spawn_group_size(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->spawn_group_size_dice().roll());
 }
 
 const Dice &Thing::get_nutrition_dice(void)
@@ -1292,6 +1310,18 @@ int Thing::distance_recruitment_max(void)
   return (tp()->distance_recruitment_max());
 }
 
+float Thing::get_distance_recruitment_max(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->distance_recruitment_max());
+}
+
+int Thing::get_spawn_group_radius(void)
+{
+  TRACE_AND_INDENT();
+  return (tp()->get_spawn_group_radius());
+}
+
 int Thing::distance_minion_vision_shared(void)
 {
   TRACE_AND_INDENT();
@@ -1986,12 +2016,6 @@ float Thing::get_distance_leader_max(void)
 {
   TRACE_AND_INDENT();
   return (tp()->distance_leader_max());
-}
-
-float Thing::get_distance_recruitment_max(void)
-{
-  TRACE_AND_INDENT();
-  return (tp()->distance_recruitment_max());
 }
 
 int Thing::minion_limit(void)

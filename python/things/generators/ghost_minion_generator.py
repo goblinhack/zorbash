@@ -2,7 +2,7 @@ import my
 import tp
 
 
-def on_idle_dice(me, x, y):
+def on_idle_tick_frequency_dice(me, x, y):
     my.level_spawn_next_to(me, "ghost_minion")
 
 
@@ -45,7 +45,7 @@ def tp_init(name, text_name):
     mytp.set_minion_limit(3)
     mytp.set_normal_placement_rules(True)
     mytp.set_on_death_do("me.on_death()")
-    mytp.set_on_idle_dice("1d20+20:me.on_idle_dice()")
+    mytp.set_on_idle_tick_frequency_dice("1d20+20:me.on_idle_tick_frequency_dice()")
     mytp.set_stat_attack_bonus(10)  # 10, means no bonus
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("A cursed pile of bones, spawning spirits.")

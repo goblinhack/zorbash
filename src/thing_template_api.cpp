@@ -13,13 +13,22 @@
 //
 // Dice
 //
-const Dice        &Tp::on_idle_dice(void) const { return _on_idle_dice; }
-const int          Tp::idle_tick(void) const { return _on_idle_dice.roll(); }
-const std::string &Tp::on_idle_dice_str(void) const { return _on_idle_dice_str; }
-void               Tp::set_on_idle_dice(const std::string &v)
+const Dice        &Tp::on_idle_tick_frequency_dice(void) const { return _on_idle_tick_frequency_dice; }
+const int          Tp::get_idle_tick_frequency(void) const { return _on_idle_tick_frequency_dice.roll(); }
+const std::string &Tp::on_idle_tick_frequency_dice_str(void) const { return _on_idle_tick_frequency_dice_str; }
+void               Tp::set_on_idle_tick_frequency_dice(const std::string &v)
 {
-  _on_idle_dice     = v;
-  _on_idle_dice_str = v;
+  _on_idle_tick_frequency_dice     = v;
+  _on_idle_tick_frequency_dice_str = v;
+}
+
+const Dice        &Tp::spawn_group_size_dice(void) const { return _spawn_group_size_dice; }
+const int          Tp::get_spawn_group_size(void) const { return _spawn_group_size_dice.roll(); }
+const std::string &Tp::spawn_group_size_dice_str(void) const { return _spawn_group_size_dice_str; }
+void               Tp::set_spawn_group_size_dice(const std::string &v)
+{
+  _spawn_group_size_dice     = v;
+  _spawn_group_size_dice_str = v;
 }
 
 const Dice        &Tp::lifespan_dice(void) const { return _lifespan_dice; }

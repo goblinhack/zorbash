@@ -75,7 +75,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_nutrition_dice("1d4")
     mytp.set_on_death_do("me.on_death()")
     mytp.set_on_death_drop_all_items(True)
-    mytp.set_on_idle_dice("1d5:me.on_idle()")
+    mytp.set_on_idle_tick_frequency_dice("1d5:me.on_idle()")
     mytp.set_rarity(my.RARITY_COMMON)
     mytp.set_stat_armor_class(6)
     mytp.set_stat_attack_bonus(10)  # 10, means no bonus

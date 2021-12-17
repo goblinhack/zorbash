@@ -335,6 +335,7 @@ PyObject *thing_hunger_clock_tick_frequency(PyObject *obj, PyObject *args, PyObj
 PyObject *thing_is_able_to_follow(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_distance_leader_max(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_distance_recruitment_max(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_spawn_group_radius(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_get_distance_minion_vision_shared(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_use_weapons(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_bony(PyObject *obj, PyObject *args, PyObject *keywds);

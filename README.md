@@ -4,7 +4,6 @@
 <!--                                                                                                                                              -->
 <!-- Next todo                                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
-<!-- - use 'this' for callbacks?                                                                              -->
 <!-- - leader unset callback                                                                                  -->
 <!-- - goblin leader                                                                                          -->
 <!-- - pirate goblin random carry of gold                                                                                                                       -->

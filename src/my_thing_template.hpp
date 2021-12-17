@@ -75,8 +75,9 @@ private:
   Dice _health_initial_dice {};
   Dice _lifespan_dice {};
   Dice _nutrition_dice {};
-  Dice _on_idle_dice {};
+  Dice _on_idle_tick_frequency_dice {};
   Dice _resurrect_dice {};
+  Dice _spawn_group_size_dice {};
 
   fsize _sz;
 
@@ -132,6 +133,7 @@ private:
   int _distance_manifestor_max {};
   int _distance_minion_vision_shared {};
   int _distance_recruitment_max {};
+  int _spawn_group_radius {};
   int _distance_throw {};
   int _distance_vision {};
   int _enchant_level {};
@@ -170,8 +172,10 @@ private:
   int _gfx_solid_shadow {};
   int _gfx_very_short_shadow_caster {};
   int _gfx_water {};
-  int _hunger_health_pct {};
   int _health_starving_pct {};
+  int _hunger_clock_tick_frequency {};
+  int _hunger_health_pct {};
+  int _hunger_insatiable {};
   int _internal_has_dir_anim {};
   int _internal_has_hp_anim {};
   int _is_able_to_attack_generators {};
@@ -186,6 +190,7 @@ private:
   int _is_able_to_jump {};
   int _is_able_to_jump_attack {};
   int _is_able_to_jump_attack_chance_d1000 {};
+  int _is_able_to_jump_escape {};
   int _is_able_to_jump_on_low_hp_chance_d1000 {};
   int _is_able_to_jump_onto {};
   int _is_able_to_jump_onto_chance_d1000 {};
@@ -202,6 +207,7 @@ private:
   int _is_acid {};
   int _is_alive_on_end_of_anim {};
   int _is_always_hit {};
+  int _is_aquatic {};
   int _is_ascend_dungeon {};
   int _is_ascend_sewer {};
   int _is_attackable_by_monst {};
@@ -263,6 +269,7 @@ private:
   int _is_ethereal {};
   int _is_ethereal_minion_generator {};
   int _is_exit_finder {};
+  int _is_explorer {};
   int _is_explosion {};
   int _is_fearless {};
   int _is_fire {};
@@ -282,7 +289,6 @@ private:
   int _is_heavy {};
   int _is_hittable {};
   int _is_humanoid {};
-  int _hunger_insatiable {};
   int _is_indestructible {};
   int _is_intelligent {};
   int _is_interesting {}; // e.g. something edible or a monst or lava
@@ -302,7 +308,6 @@ private:
   int _is_key {};
   int _is_laser {};
   int _is_lava {};
-  int _is_explorer {};
   int _is_light_blocker {};
   int _is_living {};
   int _is_loggable {};
@@ -355,12 +360,12 @@ private:
   int _is_tickable {}; // e.g. a monst or player or something moveable
   int _is_tmp_thing {};
   int _is_torch {};
+  int _is_treasure_chest {};
   int _is_treasure_class_a {};
   int _is_treasure_class_b {};
   int _is_treasure_class_c {};
-  int _is_treasure_type {};
-  int _is_treasure_chest {};
   int _is_treasure_eater {};
+  int _is_treasure_type {};
   int _is_undead {};
   int _is_usable {};
   int _is_used_when_thrown {};
@@ -408,8 +413,6 @@ private:
   int _unused_chance7_d1000 {};
   int _unused_chance8_d1000 {};
   int _unused_flag1 {};
-  int _is_able_to_jump_escape {};
-  int _hunger_clock_tick_frequency {};
   int _unused_flag2 {};
   int _unused_flag3 {};
   int _unused_flag4 {};
@@ -417,7 +420,6 @@ private:
   int _unused_flag6 {};
   int _unused_flag7 {};
   int _unused_flag8 {};
-  int _is_aquatic {};
   int _weapon_damage {};
   int _weapon_use_distance {};
 
@@ -444,11 +446,8 @@ private:
   std::string _lifespan_dice_str;
   std::string _light_color;
   std::string _long_text_description;
-  std::string _text_unused1;
-  std::string _text_unused2;
   std::string _name;
   std::string _nutrition_dice_str;
-  std::string _on_polymorphed_do;
   std::string _on_born_do;
   std::string _on_damage_acid_do;
   std::string _on_damage_bite_do;
@@ -472,7 +471,11 @@ private:
   std::string _on_fall_do;
   std::string _on_final_use_do;
   std::string _on_firing_at_something_do;
-  std::string _on_idle_dice_str;
+  std::string _on_follower_set_do;
+  std::string _on_follower_unset_do;
+  std::string _on_idle_tick_frequency_dice_str;
+  std::string _on_leader_set_do;
+  std::string _on_leader_unset_do;
   std::string _on_lifespan_tick_do;
   std::string _on_move_do;
   std::string _on_open_do;
@@ -494,10 +497,7 @@ private:
   std::string _on_owner_damage_strength_do;
   std::string _on_owner_set_do;
   std::string _on_owner_unset_do;
-  std::string _on_follower_set_do;
-  std::string _on_follower_unset_do;
-  std::string _on_leader_set_do;
-  std::string _on_leader_unset_do;
+  std::string _on_polymorphed_do;
   std::string _on_tick_do;
   std::string _on_unequip_do;
   std::string _on_use_do;
@@ -509,6 +509,7 @@ private:
   std::string _projectile_name;
   std::string _resurrect_dice_str;
   std::string _short_text_name;
+  std::string _spawn_group_size_dice_str;
   std::string _spawn_on_shoved;
   std::string _str1;
   std::string _str2;
@@ -523,6 +524,8 @@ private:
   std::string _text_skill;
   std::string _text_title;
   std::string _text_unused;
+  std::string _text_unused1;
+  std::string _text_unused2;
 
 public:
   Tp(void);
@@ -549,8 +552,9 @@ public:
   const Dice &gold_value_dice(void) const;
   const Dice &lifespan_dice(void) const;
   const Dice &nutrition_dice(void) const;
-  const Dice &on_idle_dice(void) const;
+  const Dice &on_idle_tick_frequency_dice(void) const;
   const Dice &resurrect_dice(void) const;
+  const Dice &spawn_group_size_dice(void) const;
 
   const int cash(void) const;
   const int get_damage_acid(void) const;
@@ -568,7 +572,8 @@ public:
   const int get_damage_necrosis(void) const;
   const int get_damage_poison(void) const;
   const int get_health_initial(void) const;
-  const int idle_tick(void) const;
+  const int get_idle_tick_frequency(void) const;
+  const int get_spawn_group_size(void) const;
   const int lifespan(void) const;
   const int nutrition(void) const;
   const int resurrect(void) const;
@@ -604,9 +609,6 @@ public:
   const Tilemap *tp_vert_tiles(void) const;
   const Tilemap *tp_x_tiles(void) const;
 
-  std::string short_text_capitalized(void) const;
-  std::string text_a_or_an(void) const;
-
   void set_damage_acid_dice(const std::string &);
   void set_damage_bite_dice(const std::string &);
   void set_damage_crush_dice(const std::string &);
@@ -625,8 +627,12 @@ public:
   void set_health_initial_dice(const std::string &);
   void set_lifespan_dice(const std::string &);
   void set_nutrition_dice(const std::string &);
-  void set_on_idle_dice(const std::string &);
+  void set_on_idle_tick_frequency_dice(const std::string &);
   void set_resurrect_dice(const std::string &);
+  void set_spawn_group_size_dice(const std::string &);
+
+  std::string short_text_capitalized(void) const;
+  std::string text_a_or_an(void) const;
 
   const std::string &get_damage_acid_dice_str(void) const;
   const std::string &get_damage_bite_dice_str(void) const;
@@ -646,8 +652,9 @@ public:
   const std::string &gold_value_dice_str(void) const;
   const std::string &lifespan_dice_str(void) const;
   const std::string &nutrition_dice_str(void) const;
-  const std::string &on_idle_dice_str(void) const;
+  const std::string &on_idle_tick_frequency_dice_str(void) const;
   const std::string &resurrect_dice_str(void) const;
+  const std::string &spawn_group_size_dice_str(void) const;
 
   const std::string &equip_carry_anim(void) const { return _equip_carry_anim; }
   const std::string &gfx_anim_use(void) const { return _gfx_anim_use; }
@@ -655,10 +662,7 @@ public:
   const std::string &laser_name(void) const { return _laser_name; }
   const std::string &light_color(void) const { return _light_color; }
   const std::string &long_text_description(void) const { return _long_text_description; }
-  const std::string &text_unused1(void) const { return _text_unused1; }
-  const std::string &text_unused2(void) const { return _text_unused2; }
   const std::string &name(void) const { return _name; }
-  const std::string &on_polymorphed_do(void) const { return _on_polymorphed_do; }
   const std::string &on_born_do(void) const { return _on_born_do; }
   const std::string &on_damage_acid_do(void) const { return _on_damage_acid_do; }
   const std::string &on_damage_bite_do(void) const { return _on_damage_bite_do; }
@@ -682,6 +686,10 @@ public:
   const std::string &on_fall_do(void) const { return _on_fall_do; }
   const std::string &on_final_use_do(void) const { return _on_final_use_do; }
   const std::string &on_firing_at_something_do(void) const { return _on_firing_at_something_do; }
+  const std::string &on_follower_set_do(void) const { return _on_follower_set_do; }
+  const std::string &on_follower_unset_do(void) const { return _on_follower_unset_do; }
+  const std::string &on_leader_set_do(void) const { return _on_leader_set_do; }
+  const std::string &on_leader_unset_do(void) const { return _on_leader_unset_do; }
   const std::string &on_lifespan_tick_do(void) const { return _on_lifespan_tick_do; }
   const std::string &on_move_do(void) const { return _on_move_do; }
   const std::string &on_open_do(void) const { return _on_open_do; }
@@ -703,10 +711,7 @@ public:
   const std::string &on_owner_damage_strength_do(void) const { return _on_owner_damage_strength_do; }
   const std::string &on_owner_set_do(void) const { return _on_owner_set_do; }
   const std::string &on_owner_unset_do(void) const { return _on_owner_unset_do; }
-  const std::string &on_follower_set_do(void) const { return _on_follower_set_do; }
-  const std::string &on_follower_unset_do(void) const { return _on_follower_unset_do; }
-  const std::string &on_leader_set_do(void) const { return _on_leader_set_do; }
-  const std::string &on_leader_unset_do(void) const { return _on_leader_unset_do; }
+  const std::string &on_polymorphed_do(void) const { return _on_polymorphed_do; }
   const std::string &on_tick_do(void) const { return _on_tick_do; }
   const std::string &on_unequip_do(void) const { return _on_unequip_do; }
   const std::string &on_use_do(void) const { return _on_use_do; }
@@ -729,6 +734,8 @@ public:
   const std::string &text_name(void) const { return _text_name; }
   const std::string &text_skill(void) const { return _text_skill; }
   const std::string &text_title(void) const { return _text_title; }
+  const std::string &text_unused1(void) const { return _text_unused1; }
+  const std::string &text_unused2(void) const { return _text_unused2; }
   const std::string &text_unused(void) const { return _text_unused; }
 
   int aggression_level_pct(void) const { return _aggression_level_pct; }
@@ -776,11 +783,11 @@ public:
   int damage_received_doubled_from_poison(void) const { return _damage_received_doubled_from_poison; }
   int damage_received_doubled_from_water(void) const { return _damage_received_doubled_from_water; }
   int distance_avoid(void) const { return _distance_avoid; }
-  int distance_leader_max(void) const { return _distance_leader_max; }
-  int distance_recruitment_max(void) const { return _distance_recruitment_max; }
-  int distance_manifestor_max(void) const { return _distance_manifestor_max; }
   int distance_jump(void) const { return _distance_jump; }
+  int distance_leader_max(void) const { return _distance_leader_max; }
+  int distance_manifestor_max(void) const { return _distance_manifestor_max; }
   int distance_minion_vision_shared(void) const { return _distance_minion_vision_shared; }
+  int distance_recruitment_max(void) const { return _distance_recruitment_max; }
   int distance_throw(void) const { return _distance_throw; }
   int distance_vision(void) const { return _distance_vision; }
   int enchant_level(void) const { return _enchant_level; }
@@ -797,6 +804,7 @@ public:
   int environ_prefers_spiderwebs(void) const { return _environ_prefers_spiderwebs; }
   int environ_prefers_water(void) const { return _environ_prefers_water; }
   int get_danger_level(void);
+  int get_spawn_group_radius(void) const { return _spawn_group_radius; }
   int gfx_an_animation_only(void) const { return _gfx_an_animation_only; }
   int gfx_animated_can_hflip(void) const { return _gfx_animated_can_hflip; }
   int gfx_animated_can_vflip(void) const { return _gfx_animated_can_vflip; }
@@ -820,8 +828,10 @@ public:
   int gfx_solid_shadow(void) const { return _gfx_solid_shadow; }
   int gfx_very_short_shadow_caster(void) const { return _gfx_very_short_shadow_caster; }
   int gfx_water(void) const { return _gfx_water; }
-  int hunger_health_pct(void) const { return _hunger_health_pct; }
   int health_starving_pct(void) const { return _health_starving_pct; }
+  int hunger_clock_tick_frequency(void) const { return _hunger_clock_tick_frequency; }
+  int hunger_health_pct(void) const { return _hunger_health_pct; }
+  int hunger_insatiable(void) const { return _hunger_insatiable; }
   int internal_has_dir_anim(void) const { return _internal_has_dir_anim; }
   int internal_has_hp_anim(void) const { return _internal_has_hp_anim; }
   int is_able_to_attack_generators(void) const { return _is_able_to_attack_generators; }
@@ -832,8 +842,10 @@ public:
   int is_able_to_enchant_items(void) const { return _is_able_to_enchant_items; }
   int is_able_to_fall(void) const { return _is_able_to_fall; }
   int is_able_to_fire_at(void) const { return _is_able_to_fire_at; }
+  int is_able_to_follow(void) const { return _is_able_to_follow; }
   int is_able_to_jump_attack_chance_d1000(void) const { return _is_able_to_jump_attack_chance_d1000; }
   int is_able_to_jump_attack(void) const { return _is_able_to_jump_attack; }
+  int is_able_to_jump_escape(void) const { return _is_able_to_jump_escape; }
   int is_able_to_jump_on_low_hp_chance_d1000(void) const { return _is_able_to_jump_on_low_hp_chance_d1000; }
   int is_able_to_jump_onto_chance_d1000(void) const { return _is_able_to_jump_onto_chance_d1000; }
   int is_able_to_jump_onto(void) const { return _is_able_to_jump_onto; }
@@ -851,6 +863,7 @@ public:
   int is_acid(void) const { return _is_acid; }
   int is_alive_on_end_of_anim(void) const { return _is_alive_on_end_of_anim; }
   int is_always_hit(void) const { return _is_always_hit; }
+  int is_aquatic(void) const { return _is_aquatic; }
   int is_ascend_dungeon(void) const { return _is_ascend_dungeon; }
   int is_ascend_sewer(void) const { return _is_ascend_sewer; }
   int is_attackable_by_monst(void) const { return _is_attackable_by_monst; }
@@ -912,6 +925,7 @@ public:
   int is_ethereal_minion_generator(void) const { return _is_ethereal_minion_generator; }
   int is_ethereal(void) const { return _is_ethereal; }
   int is_exit_finder(void) const { return _is_exit_finder; }
+  int is_explorer(void) const { return _is_explorer; }
   int is_explosion(void) const { return _is_explosion; }
   int is_fearless(void) const { return _is_fearless; }
   int is_fire(void) const { return _is_fire; }
@@ -931,7 +945,6 @@ public:
   int is_heavy(void) const { return _is_heavy; }
   int is_hittable(void) const { return _is_hittable; }
   int is_humanoid(void) const { return _is_humanoid; }
-  int hunger_insatiable(void) const { return _hunger_insatiable; }
   int is_indestructible(void) const { return _is_indestructible; }
   int is_intelligent(void) const { return _is_intelligent; }
   int is_interesting(void) const { return _is_interesting; }
@@ -950,7 +963,6 @@ public:
   int is_key(void) const { return _is_key; }
   int is_laser(void) const { return _is_laser; }
   int is_lava(void) const { return _is_lava; }
-  int is_explorer(void) const { return _is_explorer; }
   int is_light_blocker(void) const { return _is_light_blocker; }
   int is_living(void) const { return _is_living; }
   int is_loggable(void) const { return _is_loggable; }
@@ -1003,10 +1015,10 @@ public:
   int is_tickable(void) const { return _is_tickable; }
   int is_tmp_thing(void) const { return _is_tmp_thing; }
   int is_torch(void) const { return _is_torch; }
+  int is_treasure_chest(void) const { return _is_treasure_chest; }
   int is_treasure_class_a(void) const { return _is_treasure_class_a; }
   int is_treasure_class_b(void) const { return _is_treasure_class_b; }
   int is_treasure_class_c(void) const { return _is_treasure_class_c; }
-  int is_treasure_chest(void) const { return _is_treasure_chest; }
   int is_treasure_eater(void) const { return _is_treasure_eater; }
   int is_treasure_type(void) const { return _is_treasure_type; }
   int is_undead(void) const { return _is_undead; }
@@ -1055,9 +1067,6 @@ public:
   int unused_chance6_d1000(void) const { return _unused_chance6_d1000; }
   int unused_chance7_d1000(void) const { return _unused_chance7_d1000; }
   int unused_chance8_d1000(void) const { return _unused_chance8_d1000; }
-  int is_able_to_jump_escape(void) const { return _is_able_to_jump_escape; }
-  int hunger_clock_tick_frequency(void) const { return _hunger_clock_tick_frequency; }
-  int is_able_to_follow(void) const { return _is_able_to_follow; }
   int unused_flag1(void) const { return _unused_flag1; }
   int unused_flag2(void) const { return _unused_flag2; }
   int unused_flag3(void) const { return _unused_flag3; }
@@ -1066,7 +1075,6 @@ public:
   int unused_flag6(void) const { return _unused_flag6; }
   int unused_flag7(void) const { return _unused_flag7; }
   int unused_flag8(void) const { return _unused_flag8; }
-  int is_aquatic(void) const { return _is_aquatic; }
   int weapon_damage(void) const { return _weapon_damage; }
 
   void set_aggression_level_pct(int v) { _aggression_level_pct = v; }
@@ -1115,8 +1123,12 @@ public:
   void set_damage_received_doubled_from_poison(int v) { _damage_received_doubled_from_poison = v; }
   void set_damage_received_doubled_from_water(int v) { _damage_received_doubled_from_water = v; }
   void set_distance_avoid(int v) { _distance_avoid = v; }
+  void set_distance_jump(int v) { _distance_jump = v; }
+  void set_distance_leader_max(int v) { _distance_leader_max = v; }
   void set_distance_manifestor_max(int v) { _distance_manifestor_max = v; }
   void set_distance_minion_vision_shared(int v) { _distance_minion_vision_shared = v; }
+  void set_distance_recruitment_max(int v) { _distance_recruitment_max = v; }
+  void set_spawn_group_radius(int v) { _spawn_group_radius = v; }
   void set_distance_throw(int v) { _distance_throw = v; }
   void set_distance_vision(int v) { _distance_vision = v; }
   void set_enchant_level(int v) { _enchant_level = v; }
@@ -1157,8 +1169,10 @@ public:
   void set_gfx_solid_shadow(int v) { _gfx_solid_shadow = v; }
   void set_gfx_very_short_shadow_caster(int v) { _gfx_very_short_shadow_caster = v; }
   void set_gfx_water(int v) { _gfx_water = v; }
-  void set_hunger_health_pct(int v) { _hunger_health_pct = v; }
   void set_health_starving_pct(int v) { _health_starving_pct = v; }
+  void set_hunger_clock_tick_frequency(int v) { _hunger_clock_tick_frequency = v; }
+  void set_hunger_health_pct(int v) { _hunger_health_pct = v; }
+  void set_hunger_insatiable(int v) { _hunger_insatiable = v; }
   void set_internal_has_dir_anim(int v) { _internal_has_dir_anim = v; }
   void set_internal_has_hp_anim(int v) { _internal_has_hp_anim = v; }
   void set_is_able_to_attack_generators(int v) { _is_able_to_attack_generators = v; }
@@ -1169,9 +1183,10 @@ public:
   void set_is_able_to_enchant_items(int v) { _is_able_to_enchant_items = v; }
   void set_is_able_to_fall(int v) { _is_able_to_fall = v; }
   void set_is_able_to_fire_at(int v) { _is_able_to_fire_at = v; }
+  void set_is_able_to_follow(int v) { _is_able_to_follow = v; }
   void set_is_able_to_jump_attack_chance_d1000(int v) { _is_able_to_jump_attack_chance_d1000 = v; }
   void set_is_able_to_jump_attack(int v) { _is_able_to_jump_attack = v; }
-  void set_distance_jump(int v) { _distance_jump = v; }
+  void set_is_able_to_jump_escape(int v) { _is_able_to_jump_escape = v; }
   void set_is_able_to_jump(int v) { _is_able_to_jump = v; }
   void set_is_able_to_jump_on_low_hp_chance_d1000(int v) { _is_able_to_jump_on_low_hp_chance_d1000 = v; }
   void set_is_able_to_jump_onto_chance_d1000(int v) { _is_able_to_jump_onto_chance_d1000 = v; }
@@ -1190,6 +1205,7 @@ public:
   void set_is_alive_on_end_of_anim(int v) { _is_alive_on_end_of_anim = v; }
   void set_is_allied_with(const std::string &v) { _is_allied_with = v; }
   void set_is_always_hit(int v) { _is_always_hit = v; }
+  void set_is_aquatic(int v) { _is_aquatic = v; }
   void set_is_ascend_dungeon(int v) { _is_ascend_dungeon = v; }
   void set_is_ascend_sewer(int v) { _is_ascend_sewer = v; }
   void set_is_attackable_by_monst(int v) { _is_attackable_by_monst = v; }
@@ -1251,6 +1267,7 @@ public:
   void set_is_ethereal(int v) { _is_ethereal = v; }
   void set_is_ethereal_minion_generator(int v) { _is_ethereal_minion_generator = v; }
   void set_is_exit_finder(int v) { _is_exit_finder = v; }
+  void set_is_explorer(int v) { _is_explorer = v; }
   void set_is_explosion(int v) { _is_explosion = v; }
   void set_is_fearless(int v) { _is_fearless = v; }
   void set_is_fire(int v) { _is_fire = v; }
@@ -1270,7 +1287,6 @@ public:
   void set_is_heavy(int v) { _is_heavy = v; }
   void set_is_hittable(int v) { _is_hittable = v; }
   void set_is_humanoid(int v) { _is_humanoid = v; }
-  void set_hunger_insatiable(int v) { _hunger_insatiable = v; }
   void set_is_indestructible(int v) { _is_indestructible = v; }
   void set_is_intelligent(int v) { _is_intelligent = v; }
   void set_is_interesting(int v) { _is_interesting = v; }
@@ -1289,7 +1305,6 @@ public:
   void set_is_key(int v) { _is_key = v; }
   void set_is_laser(int v) { _is_laser = v; }
   void set_is_lava(int v) { _is_lava = v; }
-  void set_is_explorer(int v) { _is_explorer = v; }
   void set_is_light_blocker(int v) { _is_light_blocker = v; }
   void set_is_living(int v) { _is_living = v; }
   void set_is_loggable(int v) { _is_loggable = v; }
@@ -1342,10 +1357,10 @@ public:
   void set_is_tickable(int v) { _is_tickable = v; }
   void set_is_tmp_thing(int v) { _is_tmp_thing = v; }
   void set_is_torch(int v) { _is_torch = v; }
+  void set_is_treasure_chest(int v) { _is_treasure_chest = v; }
   void set_is_treasure_class_a(int v) { _is_treasure_class_a = v; }
   void set_is_treasure_class_b(int v) { _is_treasure_class_b = v; }
   void set_is_treasure_class_c(int v) { _is_treasure_class_c = v; }
-  void set_is_treasure_chest(int v) { _is_treasure_chest = v; }
   void set_is_treasure_eater(int v) { _is_treasure_eater = v; }
   void set_is_treasure_type(int v) { _is_treasure_type = v; }
   void set_is_undead(int v) { _is_undead = v; }
@@ -1364,13 +1379,10 @@ public:
   void set_light_color(const std::string &v) { _light_color = v; }
   void set_light_strength(int v) { _light_strength = v; }
   void set_long_text_description(const std::string &v) { _long_text_description = v; }
-  void set_text_unused1(const std::string &v) { _text_unused1 = v; }
-  void set_text_unused2(const std::string &v) { _text_unused2 = v; }
   void set_minion_limit(int v) { _minion_limit = v; }
   void set_monst_size(int v) { _monst_size = v; }
   void set_name(const std::string &v) { _name = v; }
   void set_normal_placement_rules(int v) { _normal_placement_rules = v; }
-  void set_on_polymorphed_do(const std::string &v) { _on_polymorphed_do = v; }
   void set_on_born_do(const std::string &v) { _on_born_do = v; }
   void set_on_damage_acid_do(const std::string &v) { _on_damage_acid_do = v; }
   void set_on_damage_bite_do(const std::string &v) { _on_damage_bite_do = v; }
@@ -1396,6 +1408,10 @@ public:
   void set_on_fall_do(const std::string &v) { _on_fall_do = v; }
   void set_on_final_use_do(const std::string &v) { _on_final_use_do = v; }
   void set_on_firing_at_something_do(const std::string &v) { _on_firing_at_something_do = v; }
+  void set_on_follower_set_do(const std::string &v) { _on_follower_set_do = v; }
+  void set_on_follower_unset_do(const std::string &v) { _on_follower_unset_do = v; }
+  void set_on_leader_set_do(const std::string &v) { _on_leader_set_do = v; }
+  void set_on_leader_unset_do(const std::string &v) { _on_leader_unset_do = v; }
   void set_on_lifespan_tick_do(const std::string &v) { _on_lifespan_tick_do = v; }
   void set_on_move_do(const std::string &v) { _on_move_do = v; }
   void set_on_open_do(const std::string &v) { _on_open_do = v; }
@@ -1417,10 +1433,7 @@ public:
   void set_on_owner_damage_strength_do(const std::string &v) { _on_owner_damage_strength_do = v; }
   void set_on_owner_set_do(const std::string &v) { _on_owner_set_do = v; }
   void set_on_owner_unset_do(const std::string &v) { _on_owner_unset_do = v; }
-  void set_on_leader_set_do(const std::string &v) { _on_leader_set_do = v; }
-  void set_on_leader_unset_do(const std::string &v) { _on_leader_unset_do = v; }
-  void set_on_follower_set_do(const std::string &v) { _on_follower_set_do = v; }
-  void set_on_follower_unset_do(const std::string &v) { _on_follower_unset_do = v; }
+  void set_on_polymorphed_do(const std::string &v) { _on_polymorphed_do = v; }
   void set_on_tick_do(const std::string &v) { _on_tick_do = v; }
   void set_on_unequip_do(const std::string &v) { _on_unequip_do = v; }
   void set_on_use_do(const std::string &v) { _on_use_do = v; }
@@ -1464,6 +1477,8 @@ public:
   void set_text_name(const std::string &v) { _text_name = v; }
   void set_text_skill(const std::string &v) { _text_skill = v; }
   void set_text_title(const std::string &v) { _text_title = v; }
+  void set_text_unused1(const std::string &v) { _text_unused1 = v; }
+  void set_text_unused2(const std::string &v) { _text_unused2 = v; }
   void set_text_unused(const std::string &v) { _text_unused = v; }
   void set_unused_chance1_d1000(int v) { _unused_chance1_d1000 = v; }
   void set_unused_chance2_d1000(int v) { _unused_chance2_d1000 = v; }
@@ -1473,11 +1488,6 @@ public:
   void set_unused_chance6_d1000(int v) { _unused_chance6_d1000 = v; }
   void set_unused_chance7_d1000(int v) { _unused_chance7_d1000 = v; }
   void set_unused_chance8_d1000(int v) { _unused_chance8_d1000 = v; }
-  void set_is_able_to_jump_escape(int v) { _is_able_to_jump_escape = v; }
-  void set_hunger_clock_tick_frequency(int v) { _hunger_clock_tick_frequency = v; }
-  void set_is_able_to_follow(int v) { _is_able_to_follow = v; }
-  void set_distance_leader_max(int v) { _distance_leader_max = v; }
-  void set_distance_recruitment_max(int v) { _distance_recruitment_max = v; }
   void set_unused_flag1(int v) { _unused_flag1 = v; }
   void set_unused_flag2(int v) { _unused_flag2 = v; }
   void set_unused_flag3(int v) { _unused_flag3 = v; }
@@ -1486,7 +1496,6 @@ public:
   void set_unused_flag6(int v) { _unused_flag6 = v; }
   void set_unused_flag7(int v) { _unused_flag7 = v; }
   void set_unused_flag8(int v) { _unused_flag8 = v; }
-  void set_is_aquatic(int v) { _is_aquatic = v; }
   void set_weapon_damage(int v) { _weapon_damage = v; }
   void set_weapon_use_distance(int v) { _weapon_use_distance = v; }
   void set_z_depth(int v) { z_depth = v; }
@@ -1501,55 +1510,55 @@ class Tp *string2tp(const std::wstring &s, int *len);
 class Tp *tp_find(const std::string &name);
 class Tp *tp_find(uint32_t id);
 class Tp *tp_load(int id, const std::string &file, const std::string &text_name, const std::string &text_short_name);
+class Tp *tp_random_ascend_dungeon(void);
 class Tp *tp_random_ascend_sewer(void);
+class Tp *tp_random_barrel(void);
+class Tp *tp_random_blood_splatter(void);
 class Tp *tp_random_blood(void);
 class Tp *tp_random_bones(void);
-class Tp *tp_random_blood_splatter(void);
-class Tp *tp_random_green_splatter(void);
-class Tp *tp_random_pink_splatter(void);
+class Tp *tp_random_brazier(void);
 class Tp *tp_random_deco(void);
+class Tp *tp_random_descend_dungeon(void);
 class Tp *tp_random_descend_sewer(void);
 class Tp *tp_random_dirt(void);
+class Tp *tp_random_door(void);
 class Tp *tp_random_dry_grass(void);
 class Tp *tp_random_enchantstone(void);
-class Tp *tp_random_skillstone(void);
-class Tp *tp_random_foilage(void);
-class Tp *tp_random_spiderweb(void);
-class Tp *tp_random_door(void);
-class Tp *tp_random_wall_dungeon(void);
-class Tp *tp_random_ascend_dungeon(void);
-class Tp *tp_random_descend_dungeon(void);
-class Tp *tp_random_floor(void);
-class Tp *tp_random_food(void);
 class Tp *tp_random_ethereal_minion_generator(void);
-class Tp *tp_random_minion_generator(void);
-class Tp *tp_random_minion_generator_easy(void);
-class Tp *tp_random_minion_generator_hard(void);
+class Tp *tp_random_floor(void);
+class Tp *tp_random_foilage(void);
+class Tp *tp_random_food(void);
 class Tp *tp_random_gold(void);
+class Tp *tp_random_green_splatter(void);
 class Tp *tp_random_item_class_a(void);
 class Tp *tp_random_item_class_b(void);
 class Tp *tp_random_item_class_c(void);
 class Tp *tp_random_item_not_a_container_class_a(void);
 class Tp *tp_random_item_not_a_container_class_b(void);
 class Tp *tp_random_item_not_a_container_class_c(void);
-class Tp *tp_random_weapon_class_a(void);
-class Tp *tp_random_weapon_class_b(void);
-class Tp *tp_random_weapon_class_c(void);
 class Tp *tp_random_key(void);
-class Tp *tp_random_monst(void);
+class Tp *tp_random_minion_generator_easy(void);
+class Tp *tp_random_minion_generator_hard(void);
+class Tp *tp_random_minion_generator(void);
 class Tp *tp_random_monst_easy(void);
-class Tp *tp_random_monst_med(void);
 class Tp *tp_random_monst_hard(void);
+class Tp *tp_random_monst_med(void);
+class Tp *tp_random_monst(void);
+class Tp *tp_random_pink_splatter(void);
 class Tp *tp_random_potion(void);
-class Tp *tp_random_wand(void);
 class Tp *tp_random_ring(void);
 class Tp *tp_random_ripple(void);
 class Tp *tp_random_rock(void);
 class Tp *tp_random_secret_door(void);
 class Tp *tp_random_sewer_wall(void);
-class Tp *tp_random_brazier(void);
-class Tp *tp_random_barrel(void);
+class Tp *tp_random_skillstone(void);
+class Tp *tp_random_spiderweb(void);
 class Tp *tp_random_treasure(void);
+class Tp *tp_random_wall_dungeon(void);
+class Tp *tp_random_wand(void);
+class Tp *tp_random_weapon_class_a(void);
+class Tp *tp_random_weapon_class_b(void);
+class Tp *tp_random_weapon_class_c(void);
 
 const Tpidmap &tp_get_skills(void);
 

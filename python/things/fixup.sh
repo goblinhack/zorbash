@@ -277,7 +277,7 @@ do
       set_hunger_clock_tick_frequency \
       set_is_able_to_follow \
       set_distance_leader_max \
-      set_distance_recruitment_max \
+      set_spawn_group_radius \
       set_distance_minion_vision_shared \
       set_is_able_to_use_weapons \
       set_is_bony \

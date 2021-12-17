@@ -240,6 +240,134 @@ bool Thing::spawn_radius_range(Thingp item, Thingp target, const std::string &wh
   return true;
 }
 
+bool Thing::spawn_radius_range(const std::string &what, uint32_t radius_min, uint32_t radius_max)
+{
+  TRACE_AND_INDENT();
+  auto tpp = tp_find(what);
+  if (unlikely(! tpp)) {
+    err("Cannot find %s to spawn", what.c_str());
+    return false;
+  }
+
+  dbg("Spawn %s in radius range %u to %u", what.c_str(), radius_min, radius_max);
+
+  //
+  // Don't spawn too many monsts
+  //
+  if (tpp->is_monst()) {
+    if (level->monst_count >= LEVELS_MONST_COUNT) {
+      return false;
+    }
+  }
+
+  for (auto x = curr_at.x - radius_max; x <= curr_at.x + radius_max; x++) {
+    for (auto y = curr_at.y - radius_max; y <= curr_at.y + radius_max; y++) {
+      float dist = DISTANCE(x, y, curr_at.x, curr_at.y);
+
+      if (dist >= radius_max + 1) {
+        continue;
+      }
+
+      if (dist < radius_min) {
+        continue;
+      }
+
+      if (level->is_rock(x, y) || level->is_wall(x, y)) {
+        continue;
+      }
+
+      auto c = level->thing_new(what, point(x, y));
+      c->inherit_from(this);
+      c->set_ts_anim_delay_end(time_get_time_ms_cached() + dist * 100);
+
+      if (is_spawner()) {
+        c->set_spawned_owner(this);
+      }
+
+      //
+      // Check if we are newly spawned over a chasm
+      // Or if something we spawned at needs to react to us
+      //
+      c->location_check_forced_all_things_at();
+    }
+  }
+
+  return true;
+}
+
+int Thing::spawn_randomly_in_radius_range(const std::string &what, int amount, uint32_t radius_min,
+                                          uint32_t radius_max)
+{
+  TRACE_AND_INDENT();
+  auto tpp = tp_find(what);
+  if (unlikely(! tpp)) {
+    err("Cannot find %s to spawn", what.c_str());
+    return false;
+  }
+
+  dbg("Spawn %s in radius range %u to %u", what.c_str(), radius_min, radius_max);
+
+  //
+  // Don't spawn too many monsts
+  //
+  if (tpp->is_monst()) {
+    if (level->monst_count >= LEVELS_MONST_COUNT) {
+      return false;
+    }
+  }
+
+  int spawned = 0;
+  while (--amount > 0) {
+    int tries = 10;
+    while (tries--) {
+      int x = pcg_random_range(radius_min, radius_max);
+      int d = pcg_random_range(0, 10);
+      if (d < 5) {
+        x = -x;
+      }
+
+      int y = pcg_random_range(radius_min, radius_max);
+      d     = pcg_random_range(0, 10);
+      if (d < 5) {
+        y = -y;
+      }
+
+      point spawn_at = curr_at + point(x, y);
+
+      float dist = distance(spawn_at, curr_at);
+      if (dist >= radius_max + 1) {
+        continue;
+      }
+
+      if (dist < radius_min) {
+        continue;
+      }
+
+      if (level->is_rock(x, y) || level->is_wall(x, y)) {
+        continue;
+      }
+
+      auto c = level->thing_new(what, spawn_at);
+      c->inherit_from(this);
+      c->set_ts_anim_delay_end(time_get_time_ms_cached() + dist * 100);
+
+      if (is_spawner()) {
+        c->set_spawned_owner(this);
+      }
+
+      //
+      // Check if we are newly spawned over a chasm
+      // Or if something we spawned at needs to react to us
+      //
+      c->location_check_forced_all_things_at();
+      spawned++;
+      break;
+    }
+  }
+
+  return spawned;
+}
+
 bool Thing::spawn_fire(const std::string &what)
 {
   TRACE_AND_INDENT();

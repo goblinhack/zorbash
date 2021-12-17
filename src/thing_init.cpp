@@ -235,10 +235,22 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
     set_owner(owner);
   }
 
-  on_born();
-
   if (is_tmp_thing()) {
     pcg_random_allowed = true;
+  }
+
+  on_born();
+
+  //
+  // Spawn goblin packs
+  //
+  static bool spawning_group;
+  if (! spawning_group) {
+    spawning_group = true;
+    if (get_spawn_group_size()) {
+      spawn_randomly_in_radius_range(name, get_spawn_group_size(), 1, get_spawn_group_radius());
+    }
+    spawning_group = false;
   }
 
   //

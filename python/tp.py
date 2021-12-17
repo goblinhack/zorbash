@@ -349,8 +349,11 @@ class Tp:
     def set_text_title(self, value):
         my.tp_set_text_title(self, value)
 
-    def set_on_idle_dice(self, value):
-        my.tp_set_on_idle_dice(self, value)
+    def set_on_idle_tick_frequency_dice(self, value):
+        my.tp_set_on_idle_tick_frequency_dice(self, value)
+
+    def set_spawn_group_size_dice(self, value):
+        my.tp_set_spawn_group_size_dice(self, value)
 
     def set_text_hits(self, value):
         my.tp_set_text_hits(self, value)
@@ -414,6 +417,9 @@ class Tp:
 
     def set_distance_recruitment_max(self, value):
         my.tp_set_distance_recruitment_max(self, value)
+
+    def set_spawn_group_radius(self, value):
+        my.tp_set_spawn_group_radius(self, value)
 
     def set_distance_minion_vision_shared(self, value):
         my.tp_set_distance_minion_vision_shared(self, value)
