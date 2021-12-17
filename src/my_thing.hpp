@@ -929,9 +929,9 @@ public:
   int gfx_very_short_shadow_caster(void);
   int gfx_water(void);
   int health_boost(int v);
-  int health_starving_pct(void);
-  int hunger_clock_tick_frequency(void);
-  int hunger_health_pct(void);
+  int get_health_starving_pct(void);
+  int get_hunger_clock_tick_frequency(void);
+  int get_hunger_health_pct(void);
   int hunger_insatiable(void);
   int incr_charge_count(int);
   int incr_charge_count(void);

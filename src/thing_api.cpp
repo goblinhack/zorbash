@@ -530,13 +530,13 @@ int Thing::environ_avoids_water(void)
   return (tp()->environ_avoids_water());
 }
 
-int Thing::hunger_health_pct(void)
+int Thing::get_hunger_health_pct(void)
 {
   TRACE_AND_INDENT();
   return (tp()->hunger_health_pct());
 }
 
-int Thing::health_starving_pct(void)
+int Thing::get_health_starving_pct(void)
 {
   TRACE_AND_INDENT();
   return (tp()->health_starving_pct());
@@ -1286,7 +1286,7 @@ int Thing::is_able_to_jump_escape(void)
   return (tp()->is_able_to_jump_escape());
 }
 
-int Thing::hunger_clock_tick_frequency(void)
+int Thing::get_hunger_clock_tick_frequency(void)
 {
   TRACE_AND_INDENT();
   return (tp()->hunger_clock_tick_frequency());

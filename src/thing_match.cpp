@@ -654,9 +654,6 @@ bool Thing::matches(const std::string &what)
   if (is_able_to_jump_escape() && (what == "is_able_to_jump_escape")) {
     return true;
   }
-  if (hunger_clock_tick_frequency() && (what == "hunger_clock_tick_frequency")) {
-    return true;
-  }
   if (is_able_to_follow() && (what == "is_able_to_follow")) {
     return true;
   }
@@ -1362,9 +1359,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   }
   if (what == "is_able_to_jump_escape") {
     return &Thing::is_able_to_jump_escape;
-  }
-  if (what == "hunger_clock_tick_frequency") {
-    return &Thing::hunger_clock_tick_frequency;
   }
   if (what == "is_able_to_follow") {
     return &Thing::is_able_to_follow;
