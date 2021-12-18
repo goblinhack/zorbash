@@ -40,7 +40,7 @@ void Thing::on_equip(Thingp what)
       mod = what->name();
     }
 
-    dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_string().c_str(), what->to_string().c_str());
+    dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), what->to_string().c_str());
 
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
@@ -74,7 +74,7 @@ void Thing::on_unequip(Thingp what)
       mod = what->name();
     }
 
-    dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_string().c_str(), what->to_string().c_str());
+    dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), what->to_string().c_str());
 
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
@@ -325,7 +325,7 @@ bool Thing::unequip(const char *why, int equip, bool allowed_to_recarry)
     return false;
   }
 
-  dbg("Unequiping current %s, why: %s", item->to_string().c_str(), why);
+  dbg("Unequiping current %s, why: %s", item->to_short_string().c_str(), why);
   equip_remove_anim(equip);
 
   //
@@ -346,9 +346,9 @@ bool Thing::unequip(const char *why, int equip, bool allowed_to_recarry)
 
   auto top_owner = item->get_top_owner();
   if (top_owner) {
-    dbg("Has unequipped %s, owner: %s", item->to_string().c_str(), top_owner->to_string().c_str());
+    dbg("Has unequipped %s, owner: %s", item->to_short_string().c_str(), top_owner->to_string().c_str());
   } else {
-    dbg("Has unequipped %s, no owner now", item->to_string().c_str());
+    dbg("Has unequipped %s, no owner now", item->to_short_string().c_str());
   }
 
   if (is_player()) {
@@ -395,7 +395,7 @@ bool Thing::equip(Thingp item, int equip)
   auto equip_tp = item->tp();
 
   if (get_equip(equip) == item) {
-    dbg("Re-equipping: %s", item->to_string().c_str());
+    dbg("Re-equipping: %s", item->to_short_string().c_str());
     //
     // Do not return here. We need to set the carry-anim post swing
     //
@@ -411,7 +411,7 @@ bool Thing::equip(Thingp item, int equip)
     unequip("equip swap", MONST_EQUIP_RING2, true);
   }
 
-  dbg("Is equipping: %s", item->to_string().c_str());
+  dbg("Is equipping: %s", item->to_short_string().c_str());
 
   //
   // Remove from the bag first so we can swap the current equipped thing.
@@ -430,7 +430,7 @@ bool Thing::equip(Thingp item, int equip)
 
   auto carry_anim_as = equip_tp->equip_carry_anim();
   if (carry_anim_as == "") {
-    err("Could not equip %s as has no carry anim", item->to_string().c_str());
+    err("Could not equip %s as has no carry anim", item->to_short_string().c_str());
     return false;
   }
 
@@ -451,19 +451,19 @@ bool Thing::equip(Thingp item, int equip)
   //
   carry_anim->set_owner(this);
 
-  dbg("Has equipped: %s", item->to_string().c_str());
+  dbg("Has equipped: %s", item->to_short_string().c_str());
   auto top_owner = item->get_top_owner();
   if (top_owner) {
     if (top_owner != this) {
-      dbg("Has equipped %s, owner: %s", item->to_string().c_str(), top_owner->to_string().c_str());
+      dbg("Has equipped %s, owner: %s", item->to_short_string().c_str(), top_owner->to_string().c_str());
     } else {
-      dbg("Has equipped %s", item->to_string().c_str());
+      dbg("Has equipped %s", item->to_short_string().c_str());
     }
   } else {
     //
     // This is ok if being carried and we're about to set the owner
     //
-    dbg("Has equipped %s, no owner now", item->to_string().c_str());
+    dbg("Has equipped %s, no owner now", item->to_short_string().c_str());
   }
 
   if (is_player()) {
@@ -518,7 +518,7 @@ void Thing::equip_remove_anim(int equip)
     return;
   }
 
-  dbg("Remove equip animations %s", item->to_string().c_str());
+  dbg("Remove equip animations %s", item->to_short_string().c_str());
   TRACE_AND_INDENT();
 
   //
@@ -604,7 +604,7 @@ bool Thing::equip_use(bool forced, int equip)
 
     used_as = equip_tp->gfx_anim_use();
     if (used_as == "") {
-      die("Could not use %s/%08" PRIx32 " has no 'use' animation frame", item->to_string().c_str(), item->id.id);
+      die("Could not use %s/%08" PRIx32 " has no 'use' animation frame", item->to_short_string().c_str(), item->id.id);
       return false;
     }
 

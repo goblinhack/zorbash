@@ -19,7 +19,7 @@
 void Thing::inventory_particle(Thingp item, uint32_t slot)
 {
   TRACE_AND_INDENT();
-  dbg("Create inventory particle? %s", item->to_string().c_str());
+  dbg("Create inventory particle? %s", item->to_short_string().c_str());
   TRACE_AND_INDENT();
 
   //
@@ -31,7 +31,7 @@ void Thing::inventory_particle(Thingp item, uint32_t slot)
   }
 
   if (item->is_collected_as_gold()) {
-    dbg("Inventory particle %s is collected as gold", item->to_string().c_str());
+    dbg("Inventory particle %s is collected as gold", item->to_short_string().c_str());
 
     std::string name = "gold and keys";
     auto        w    = wid_find(name);
@@ -84,7 +84,7 @@ void Thing::inventory_particle(Thingp item, uint32_t slot)
   }
 
   if (item->is_collect_as_keys()) {
-    dbg("Inventory particle %s is collected as key", item->to_string().c_str());
+    dbg("Inventory particle %s is collected as key", item->to_short_string().c_str());
 
     std::string name = "gold and keys";
     auto        w    = wid_find(name);
@@ -135,7 +135,7 @@ void Thing::inventory_particle(Thingp item, uint32_t slot)
 void Thing::inventory_particle(Thingp item, uint32_t slot, Thingp particle_target)
 {
   TRACE_AND_INDENT();
-  dbg("Create inventory particle %s with target %s", item->to_string().c_str(), particle_target->to_string().c_str());
+  dbg("Create inventory particle %s with target %s", item->to_short_string().c_str(), particle_target->to_string().c_str());
   TRACE_AND_INDENT();
 
   if (game->in_transit_item) {
@@ -198,7 +198,7 @@ void Thing::inventory_particle(Thingp item, uint32_t slot, Thingp particle_targe
 bool Thing::inventory_shortcuts_insert(Thingp item)
 {
   TRACE_AND_INDENT();
-  dbg("Inventory insert %s", item->to_string().c_str());
+  dbg("Inventory insert %s", item->to_short_string().c_str());
   TRACE_AND_INDENT();
 
   auto player = level->player;
@@ -325,7 +325,7 @@ bool Thing::inventory_shortcuts_insert(Thingp item)
 bool Thing::inventory_shortcuts_remove(Thingp item)
 {
   TRACE_AND_INDENT();
-  dbg("Inventory remove %s", item->to_string().c_str());
+  dbg("Inventory remove %s", item->to_short_string().c_str());
   TRACE_AND_INDENT();
 
   auto player = level->player;
@@ -391,7 +391,7 @@ bool Thing::inventory_shortcuts_remove(Thingp item)
 bool Thing::inventory_shortcuts_remove(Thingp item, Thingp particle_target)
 {
   TRACE_AND_INDENT();
-  dbg("Inventory remove %s with target %s", item->to_string().c_str(), particle_target->to_string().c_str());
+  dbg("Inventory remove %s with target %s", item->to_short_string().c_str(), particle_target->to_string().c_str());
   TRACE_AND_INDENT();
 
   auto player = level->player;

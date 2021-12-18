@@ -18,7 +18,7 @@
 ThingShoved Thing::try_to_shove(Thingp it, point delta)
 {
   TRACE_AND_INDENT();
-  dbg("Try to shove, %s delta %d,%d", it->to_string().c_str(), (int) delta.x, (int) delta.y);
+  dbg("Try to shove, %s delta %d,%d", it->to_short_string().c_str(), (int) delta.x, (int) delta.y);
   TRACE_AND_INDENT();
 
   if (! is_able_to_shove()) {
@@ -27,35 +27,35 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta)
   }
 
   if (! it->is_shovable()) {
-    dbg("Not able to shove %s", it->to_string().c_str());
+    dbg("Not able to shove %s", it->to_short_string().c_str());
     return (THING_SHOVE_NEVER_TRIED);
   }
 
   auto my_owner  = get_top_owner();
   auto its_owner = it->get_top_owner();
   if (my_owner && (my_owner == its_owner)) {
-    dbg("Not able to shove (same owner) %s", it->to_string().c_str());
+    dbg("Not able to shove (same owner) %s", it->to_short_string().c_str());
     return (THING_SHOVE_NEVER_TRIED);
   }
 
   auto my_manifestor  = get_top_manifestor();
   auto its_manifestor = it->get_top_manifestor();
   if (my_manifestor && (my_manifestor == its_manifestor)) {
-    dbg("Not able to shove (same master) %s", it->to_string().c_str());
+    dbg("Not able to shove (same master) %s", it->to_short_string().c_str());
     return (THING_SHOVE_NEVER_TRIED);
   }
 
   auto my_leader  = get_leader();
   auto its_leader = it->get_leader();
   if (my_leader && (my_leader == its_leader)) {
-    dbg("Not able to shove (same leader) %s", it->to_string().c_str());
+    dbg("Not able to shove (same leader) %s", it->to_short_string().c_str());
     return (THING_SHOVE_NEVER_TRIED);
   }
 
   auto my_spawned_owner  = get_top_spawned_owner();
   auto its_spawned_owner = it->get_top_spawned_owner();
   if (my_spawned_owner && (my_spawned_owner == its_spawned_owner)) {
-    dbg("Not able to shove (same spawner) %s", it->to_string().c_str());
+    dbg("Not able to shove (same spawner) %s", it->to_short_string().c_str());
     return (THING_SHOVE_NEVER_TRIED);
   }
 
@@ -63,11 +63,11 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta)
   // Sanity check we cannot shove more than one tile
   //
   if ((fabs(delta.x) > 1) || (fabs(delta.y) > 1)) {
-    dbg("Not able to shove (too far) %s", it->to_string().c_str());
+    dbg("Not able to shove (too far) %s", it->to_short_string().c_str());
     return (THING_SHOVE_NEVER_TRIED);
   }
 
-  dbg("Can shove, %s delta %d,%d", it->to_string().c_str(), (int) delta.x, (int) delta.y);
+  dbg("Can shove, %s delta %d,%d", it->to_short_string().c_str(), (int) delta.x, (int) delta.y);
   TRACE_AND_INDENT();
 
   move_finish();
@@ -211,7 +211,7 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta)
     }
   }
 
-  dbg("Handle location for shoved thing: %s", it->to_string().c_str());
+  dbg("Handle location for shoved thing: %s", it->to_short_string().c_str());
   it->location_check_forced();
 
   //
@@ -260,7 +260,7 @@ ThingShoved Thing::try_to_shove(point future_pos)
     if (this == it) {
       continue;
     }
-    dbg("Shove candidate, %s", it->to_string().c_str());
+    dbg("Shove candidate, %s", it->to_short_string().c_str());
 
     if (! it->is_shovable()) {
       continue;
@@ -270,7 +270,7 @@ ThingShoved Thing::try_to_shove(point future_pos)
       continue;
     }
 
-    dbg("Shove heavy candidate, %s", it->to_string().c_str());
+    dbg("Shove heavy candidate, %s", it->to_short_string().c_str());
     point shove_delta = delta;
     return (try_to_shove(it, shove_delta));
   }
@@ -281,13 +281,13 @@ ThingShoved Thing::try_to_shove(point future_pos)
     if (this == it) {
       continue;
     }
-    dbg("Shove candidate, %s", it->to_string().c_str());
+    dbg("Shove candidate, %s", it->to_short_string().c_str());
 
     if (! it->is_shovable()) {
       continue;
     }
 
-    dbg("Shove candidate, %s", it->to_string().c_str());
+    dbg("Shove candidate, %s", it->to_short_string().c_str());
     point shove_delta = delta;
     return (try_to_shove(it, shove_delta));
   }

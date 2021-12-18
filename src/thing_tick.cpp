@@ -45,7 +45,7 @@ bool Thing::on_tick(void)
       return py_call_bool_fn(mod.c_str(), fn.c_str(), owner->id.id, id.id, (unsigned int) curr_at.x,
                              (unsigned int) curr_at.y);
     } else {
-      dbg("Call %s.%s(item=%s, %d, %d)", mod.c_str(), fn.c_str(), to_string().c_str(), (unsigned int) curr_at.x,
+      dbg("Call %s.%s(item=%s, %d, %d)", mod.c_str(), fn.c_str(), to_short_string().c_str(), (unsigned int) curr_at.x,
           (unsigned int) curr_at.y);
       return py_call_bool_fn(mod.c_str(), fn.c_str(), 0U, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
     }

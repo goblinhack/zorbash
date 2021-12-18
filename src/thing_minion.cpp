@@ -117,13 +117,13 @@ void Thing::set_manifestor(Thingp manifestor)
     }
 
     if (manifestor) {
-      dbg("Will change minion owner %s->%s", old_manifestor->to_string().c_str(), manifestor->to_string().c_str());
+      dbg("Will change manifestor %s->%s", old_manifestor->to_string().c_str(), manifestor->to_string().c_str());
     } else {
-      dbg("Will remove minion owner %s", old_manifestor->to_string().c_str());
+      dbg("Will remove manifestor %s", old_manifestor->to_string().c_str());
     }
   } else {
     if (manifestor) {
-      dbg("Will set minion owner to %s", manifestor->to_string().c_str());
+      dbg("Will set manifestor to %s", manifestor->to_string().c_str());
     }
   }
 
@@ -143,11 +143,11 @@ void Thing::remove_manifestor(void)
   TRACE_AND_INDENT();
   auto old_manifestor = get_immediate_manifestor();
   if (! old_manifestor) {
-    err("No minion owner");
+    err("No manifestor");
     return;
   }
 
-  dbg("Remove minion owner %s", old_manifestor->to_string().c_str());
+  dbg("Remove manifestor %s", old_manifestor->to_string().c_str());
 
   set_manifestor_id(NoThingId);
   old_manifestor->decr_minion_count();

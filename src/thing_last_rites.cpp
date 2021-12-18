@@ -256,7 +256,7 @@ void Thing::last_rites(Thingp defeater, const char *reason)
           mod = name();
         }
 
-        dbg("Call %s.%s(%s)", mod.c_str(), fn.c_str(), to_string().c_str());
+        dbg("Call %s.%s(%s)", mod.c_str(), fn.c_str(), to_short_string().c_str());
 
         py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
       } else {

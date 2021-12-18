@@ -280,7 +280,7 @@ bool Thing::collision_add_candidates(Thingp it, point future_pos, int x, int y, 
   Thingp owner_it = it->get_immediate_owner();
   Thingp owner_me = me->get_immediate_owner();
 
-  dbg("Collision candidate? %s", it->to_string().c_str());
+  dbg("Collision candidate? %s", it->to_short_string().c_str());
   TRACE_AND_INDENT();
   if ((owner_it == me) || (owner_me == it)) {
     //
@@ -310,7 +310,7 @@ bool Thing::collision_add_candidates(Thingp it, point future_pos, int x, int y, 
       dbg("Yes; candidate to attack");
       thing_add_ai_possible_hit(it, "battle");
     } else {
-      dbg("No; cannot attack %s, no overlap", it->to_string().c_str());
+      dbg("No; cannot attack %s, no overlap", it->to_short_string().c_str());
     }
   } else if (can_eat(it)) {
     if (game->tick_current < it->get_tick_last_dropped() + 1) {
@@ -335,20 +335,20 @@ bool Thing::collision_add_candidates(Thingp it, point future_pos, int x, int y, 
     // Fire attack?
     //
     if (things_overlap(me, future_pos, it)) {
-      dbg("Yes; allow fire to burn %s", it->to_string().c_str());
+      dbg("Yes; allow fire to burn %s", it->to_short_string().c_str());
       thing_add_ai_possible_hit(it, "burn");
     } else {
-      dbg("No; cannot butn %s, no overlap", it->to_string().c_str());
+      dbg("No; cannot butn %s, no overlap", it->to_short_string().c_str());
     }
   } else if (is_lava() && (it->is_burnable() || it->is_very_combustible() || it->is_combustible())) {
     //
     // Fire attack?
     //
     if (things_overlap(me, future_pos, it)) {
-      dbg("Yes; allow fire to burn %s", it->to_string().c_str());
+      dbg("Yes; allow fire to burn %s", it->to_short_string().c_str());
       thing_add_ai_possible_hit(it, "burn");
     } else {
-      dbg("No; cannot butn %s, no overlap", it->to_string().c_str());
+      dbg("No; cannot butn %s, no overlap", it->to_short_string().c_str());
     }
   } else {
     //
@@ -372,7 +372,7 @@ bool Thing::collision_obstacle(point p)
     //
     if (collision_obstacle(it)) {
       if (it->is_loggable()) {
-        dbg("Collision obstacle: %s", it->to_string().c_str());
+        dbg("Collision obstacle: %s", it->to_short_string().c_str());
       }
       return true;
     }
@@ -419,7 +419,7 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
     return false;
   }
 
-  dbg("Collision check only? @%d,%d with %s)", future_pos.x, future_pos.y, it->to_string().c_str());
+  dbg("Collision check only? @%d,%d with %s)", future_pos.x, future_pos.y, it->to_short_string().c_str());
   TRACE_AND_INDENT();
 
   //
@@ -820,7 +820,7 @@ bool Thing::collision_check_only(point future_pos)
         // Skip things we cannot collide with
         //
         if (it->is_falling || it->is_jumping || it->is_changing_level) {
-          dbg("Ignore falling %s", it->to_string().c_str());
+          dbg("Ignore falling %s", it->to_short_string().c_str());
           continue;
         }
 

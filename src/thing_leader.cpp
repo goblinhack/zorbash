@@ -35,7 +35,7 @@ void Thing::on_leader_set(void)
       mod = name();
     }
 
-    dbg("Call %s.%s(%ss)", mod.c_str(), fn.c_str(), to_string().c_str());
+    dbg("Call %s.%s(%ss)", mod.c_str(), fn.c_str(), to_short_string().c_str());
 
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
@@ -77,7 +77,7 @@ void Thing::on_leader_unset(void)
       mod = name();
     }
 
-    dbg("Call %s.%s(%s)", mod.c_str(), fn.c_str(), to_string().c_str());
+    dbg("Call %s.%s(%s)", mod.c_str(), fn.c_str(), to_short_string().c_str());
 
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
@@ -174,13 +174,13 @@ void Thing::set_leader(Thingp leader)
     }
 
     if (leader) {
-      dbg("Will change leader owner %s->%s", old_leader->to_string().c_str(), leader->to_string().c_str());
+      dbg("Will change leader %s->%s", old_leader->to_string().c_str(), leader->to_string().c_str());
     } else {
-      dbg("Will remove leader owner %s", old_leader->to_string().c_str());
+      dbg("Will remove leader %s", old_leader->to_string().c_str());
     }
   } else {
     if (leader) {
-      dbg("Will set leader owner to %s", leader->to_string().c_str());
+      dbg("Will set leader to %s", leader->to_string().c_str());
     }
   }
 
@@ -336,7 +336,7 @@ void Thing::leader_tick(void)
     return;
   }
 
-  con("Is being led by %s", leader->to_string().c_str());
+  log("Is being led by %s", leader->to_string().c_str());
 
   set_leader(leader);
 }

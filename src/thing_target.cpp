@@ -61,7 +61,7 @@ bool Thing::target_attack_best(int equip)
   decr_stamina();
 
   if (item) {
-    dbg("Have equip item %s", item->to_string().c_str());
+    dbg("Have equip item %s", item->to_short_string().c_str());
     TRACE_AND_INDENT();
     on_use(item);
     if (item->collision_check_and_handle_at(hit_at, &target_attacked, &target_overlaps)) {

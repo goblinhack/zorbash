@@ -279,13 +279,13 @@ void Thing::remove_all_references()
             err("thing is still attached to (owner) %s", t->to_string().c_str());
           }
           if (id == t->get_infop()->manifestor_id) {
-            err("thing is still attached to (minion owner) %s", t->to_string().c_str());
+            err("thing is still attached to (manifestor) %s", t->to_string().c_str());
           }
           if (id == t->get_infop()->leader_id) {
-            err("thing is still attached to (leader owner) %s", t->to_string().c_str());
+            err("thing is still attached to (leader) %s", t->to_string().c_str());
           }
           if (id == t->get_infop()->spawner_owner_id) {
-            err("thing is still attached to (spawner owner) %s", t->to_string().c_str());
+            err("thing is still attached to (spawner) %s", t->to_string().c_str());
           }
         }
         if (t->maybe_itemp()) {
@@ -319,13 +319,13 @@ void Thing::remove_all_references()
           err("interesting thing is still attached to (owner) %s", t->to_string().c_str());
         }
         if (id == t->get_infop()->manifestor_id) {
-          err("interesting thing is still attached to (minion owner) %s", t->to_string().c_str());
+          err("interesting thing is still attached to (manifestor) %s", t->to_string().c_str());
         }
         if (id == t->get_infop()->leader_id) {
-          err("interesting thing is still attached to (leader owner) %s", t->to_string().c_str());
+          err("interesting thing is still attached to (leader) %s", t->to_string().c_str());
         }
         if (id == t->get_infop()->spawner_owner_id) {
-          err("interesting thing is still attached to (spawner owner) %s", t->to_string().c_str());
+          err("interesting thing is still attached to (spawner) %s", t->to_string().c_str());
         }
       }
       if (t->maybe_itemp()) {
@@ -357,13 +357,13 @@ void Thing::remove_all_references()
           err("interesting thing is still attached to (owner) %s", t->to_string().c_str());
         }
         if (id == t->get_infop()->manifestor_id) {
-          err("interesting thing is still attached to (minion owner) %s", t->to_string().c_str());
+          err("interesting thing is still attached to (manifestor) %s", t->to_string().c_str());
         }
         if (id == t->get_infop()->leader_id) {
-          err("interesting thing is still attached to (leader owner) %s", t->to_string().c_str());
+          err("interesting thing is still attached to (leader) %s", t->to_string().c_str());
         }
         if (id == t->get_infop()->spawner_owner_id) {
-          err("interesting thing is still attached to (spawner owner) %s", t->to_string().c_str());
+          err("interesting thing is still attached to (spawner) %s", t->to_string().c_str());
         }
       }
       if (t->maybe_itemp()) {

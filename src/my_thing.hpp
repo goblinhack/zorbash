@@ -1362,6 +1362,7 @@ public:
   std::string to_dbg_saved_string(void);
   std::string to_dbg_string(void);
   std::string to_string(void);
+  std::string to_short_string(void);
 
   std::vector< Lightp > &get_light(void);
 

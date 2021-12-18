@@ -14,7 +14,7 @@
 bool Thing::projectile_choose_target(Thingp item)
 {
   TRACE_AND_INDENT();
-  dbg("Trying to target a projectile with: %s", item->to_string().c_str());
+  dbg("Trying to target a projectile with: %s", item->to_short_string().c_str());
 
   if (! target_select(item)) {
     return false;

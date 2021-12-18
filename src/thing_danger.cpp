@@ -311,7 +311,7 @@ int Thing::is_dangerous(Thingp it)
     b += 2;
   }
 
-  // con("My danger level %d, its %d, %s", a, b, it->to_string().c_str());
+  // con("My danger level %d, its %d, %s", a, b, it->to_short_string().c_str());
 
   //
   // So giant rats will attack each other if at the same danger level
@@ -353,6 +353,6 @@ int Thing::get_danger_initial_level(Thingp it)
 {
   int a = get_danger_initial_level();
   int b = it->get_danger_initial_level();
-  // con("danger level %d vs %s %d", a, it->to_string().c_str(), b);
+  // con("danger level %d vs %s %d", a, it->to_short_string().c_str(), b);
   return b - a;
 }

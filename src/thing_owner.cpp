@@ -40,7 +40,7 @@ void Thing::on_owner_set(Thingp owner)
       mod = name();
     }
 
-    dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_string().c_str(), owner->to_string().c_str());
+    dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), owner->to_string().c_str());
 
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, owner->id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
@@ -88,7 +88,7 @@ void Thing::on_owner_unset(Thingp owner)
       mod = name();
     }
 
-    dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_string().c_str(), owner->to_string().c_str());
+    dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), owner->to_string().c_str());
 
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, owner->id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
@@ -233,7 +233,7 @@ bool Thing::change_owner(Thingp new_owner)
 
   if (old_owner->is_player()) {
     if (! old_owner->inventory_shortcuts_remove(this)) {
-      err("Failed to remove %s from inventory", to_string().c_str());
+      err("Failed to remove %s from inventory", to_short_string().c_str());
       return false;
     }
   }

@@ -45,8 +45,8 @@ void Thing::on_you_are_hit_but_still_alive(Thingp hitter,      // an arrow / mon
       mod = name();
     }
 
-    dbg("Call %s.%s(%s, %s, %s, crit=%d, damage=%d)", mod.c_str(), fn.c_str(), to_string().c_str(),
-        hitter->to_string().c_str(), real_hitter->to_string().c_str(), crit, damage);
+    dbg("Call %s.%s(%s, %s, %s, crit=%d, damage=%d)", mod.c_str(), fn.c_str(), to_short_string().c_str(),
+        hitter->to_short_string().c_str(), real_hitter->to_short_string().c_str(), crit, damage);
 
     //
     // Warning cannot handle negative values here for damage
@@ -82,8 +82,8 @@ void Thing::on_you_are_hit_and_now_dead(Thingp hitter,      // an arrow / monst 
       mod = name();
     }
 
-    dbg("Call %s.%s(%s, %s, %s, crit=%d, damage=%d)", mod.c_str(), fn.c_str(), to_string().c_str(),
-        hitter->to_string().c_str(), real_hitter->to_string().c_str(), crit, damage);
+    dbg("Call %s.%s(%s, %s, %s, crit=%d, damage=%d)", mod.c_str(), fn.c_str(), to_short_string().c_str(),
+        hitter->to_short_string().c_str(), real_hitter->to_short_string().c_str(), crit, damage);
 
     //
     // Warning cannot handle negative values here for damage
@@ -124,7 +124,7 @@ void Thing::on_you_miss_do(Thingp hitter)
       mod = name();
     }
 
-    dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_string().c_str(), hitter->to_string().c_str());
+    dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), hitter->to_short_string().c_str());
 
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, (unsigned int) curr_at.x,
                     (unsigned int) curr_at.y);
@@ -159,7 +159,7 @@ void Thing::on_you_bite_attack(void)
       mod = name();
     }
 
-    dbg("Call %s.%s(%s)", mod.c_str(), fn.c_str(), to_string().c_str());
+    dbg("Call %s.%s(%s)", mod.c_str(), fn.c_str(), to_short_string().c_str());
 
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
@@ -187,7 +187,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
   }
 
   if (! real_hitter->maybe_infop()) {
-    real_hitter->err("Hitter (orig %s) has no infop", hitter->to_string().c_str());
+    real_hitter->err("Hitter (orig %s) has no infop", hitter->to_short_string().c_str());
     return false;
   }
 
@@ -241,106 +241,106 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
 
   if (attack_poison) {
     if (! damage) {
-      real_hitter->log("No poison damage on %s", to_string().c_str());
+      real_hitter->log("No poison damage on %s", to_short_string().c_str());
       return false;
     } else {
-      real_hitter->log("Attack poison damage %d on %s", damage, to_string().c_str());
+      real_hitter->log("Attack poison damage %d on %s", damage, to_short_string().c_str());
     }
   } else if (attack_future1) {
     if (! damage) {
-      real_hitter->log("No damage_future1 damage on %s", to_string().c_str());
+      real_hitter->log("No damage_future1 damage on %s", to_short_string().c_str());
       return false;
     } else {
-      real_hitter->log("Attack damage_future1 damage %d on %s", damage, to_string().c_str());
+      real_hitter->log("Attack damage_future1 damage %d on %s", damage, to_short_string().c_str());
     }
   } else if (attack_future2) {
     if (! damage) {
-      real_hitter->log("No damage_future2 damage on %s", to_string().c_str());
+      real_hitter->log("No damage_future2 damage on %s", to_short_string().c_str());
       return false;
     } else {
-      real_hitter->log("Attack damage_future2 damage %d on %s", damage, to_string().c_str());
+      real_hitter->log("Attack damage_future2 damage %d on %s", damage, to_short_string().c_str());
     }
   } else if (attack_future3) {
     if (! damage) {
-      real_hitter->log("No damage_future3 damage on %s", to_string().c_str());
+      real_hitter->log("No damage_future3 damage on %s", to_short_string().c_str());
       return false;
     } else {
-      real_hitter->log("Attack damage_future3 damage %d on %s", damage, to_string().c_str());
+      real_hitter->log("Attack damage_future3 damage %d on %s", damage, to_short_string().c_str());
     }
   } else if (attack_future4) {
     if (! damage) {
-      real_hitter->log("No damage_future4 damage on %s", to_string().c_str());
+      real_hitter->log("No damage_future4 damage on %s", to_short_string().c_str());
       return false;
     } else {
-      real_hitter->log("Attack damage_future4 damage %d on %s", damage, to_string().c_str());
+      real_hitter->log("Attack damage_future4 damage %d on %s", damage, to_short_string().c_str());
     }
   } else if (attack_fire) {
     if (! damage) {
-      real_hitter->log("No damage_fire damage on %s", to_string().c_str());
+      real_hitter->log("No damage_fire damage on %s", to_short_string().c_str());
       return false;
     } else {
-      real_hitter->log("Attack damage_fire damage %d on %s", damage, to_string().c_str());
+      real_hitter->log("Attack damage_fire damage %d on %s", damage, to_short_string().c_str());
     }
   } else if (attack_crush) {
     if (! is_crushable()) {
-      real_hitter->log("Cannot crush %s", to_string().c_str());
+      real_hitter->log("Cannot crush %s", to_short_string().c_str());
       return false;
     }
 
     if (! damage) {
-      real_hitter->log("No damage_crush damage on %s", to_string().c_str());
+      real_hitter->log("No damage_crush damage on %s", to_short_string().c_str());
       return false;
     } else {
-      real_hitter->log("Attack damage_crush damage %d on %s", damage, to_string().c_str());
+      real_hitter->log("Attack damage_crush damage %d on %s", damage, to_short_string().c_str());
     }
   } else if (attack_lightning) {
     if (! damage) {
-      real_hitter->log("No damage_lightning damage on %s", to_string().c_str());
+      real_hitter->log("No damage_lightning damage on %s", to_short_string().c_str());
       return false;
     } else {
-      real_hitter->log("Attack damage_lightning damage %d on %s", damage, to_string().c_str());
+      real_hitter->log("Attack damage_lightning damage %d on %s", damage, to_short_string().c_str());
     }
   } else if (attack_energy) {
     if (! damage) {
-      real_hitter->log("No damage_energy damage on %s", to_string().c_str());
+      real_hitter->log("No damage_energy damage on %s", to_short_string().c_str());
       return false;
     } else {
-      real_hitter->log("Attack damage_energy damage %d on %s", damage, to_string().c_str());
+      real_hitter->log("Attack damage_energy damage %d on %s", damage, to_short_string().c_str());
     }
   } else if (attack_acid) {
     if (! damage) {
-      real_hitter->log("No damage_acid damage on %s", to_string().c_str());
+      real_hitter->log("No damage_acid damage on %s", to_short_string().c_str());
       return false;
     } else {
-      real_hitter->log("Attack damage_acid damage %d on %s", damage, to_string().c_str());
+      real_hitter->log("Attack damage_acid damage %d on %s", damage, to_short_string().c_str());
     }
   } else if (attack_digest) {
     if (! damage) {
-      real_hitter->log("No damage_digest damage on %s", to_string().c_str());
+      real_hitter->log("No damage_digest damage on %s", to_short_string().c_str());
       return false;
     } else {
-      real_hitter->log("Attack damage_digest damage %d on %s", damage, to_string().c_str());
+      real_hitter->log("Attack damage_digest damage %d on %s", damage, to_short_string().c_str());
     }
   } else if (attack_necrosis) {
     if (! damage) {
-      real_hitter->log("No necrosis damage on %s", to_string().c_str());
+      real_hitter->log("No necrosis damage on %s", to_short_string().c_str());
       return false;
     } else {
-      real_hitter->log("Attack necrosis damage %d on %s", damage, to_string().c_str());
+      real_hitter->log("Attack necrosis damage %d on %s", damage, to_short_string().c_str());
     }
   } else if (attack_bite) {
     if (! damage) {
-      real_hitter->log("No bite damage on %s", to_string().c_str());
+      real_hitter->log("No bite damage on %s", to_short_string().c_str());
       return false;
     } else {
-      real_hitter->log("Attack bite damage %d on %s", damage, to_string().c_str());
+      real_hitter->log("Attack bite damage %d on %s", damage, to_short_string().c_str());
     }
   } else {
     if (! damage) {
-      real_hitter->log("No melee damage on %s", to_string().c_str());
+      real_hitter->log("No melee damage on %s", to_short_string().c_str());
       return false;
     } else {
-      real_hitter->log("Attack melee damage %d on %s", damage, to_string().c_str());
+      real_hitter->log("Attack melee damage %d on %s", damage, to_short_string().c_str());
     }
   }
 
@@ -910,7 +910,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     //
     // Record who dun it.
     //
-    dbg("Is defeated by (%s) %u damage, health now %d", real_hitter->to_string().c_str(), damage, h);
+    dbg("Is defeated by (%s) %u damage, health now %d", real_hitter->to_short_string().c_str(), damage, h);
     std::string defeater = real_hitter->text_a_or_an();
 
     //
@@ -963,7 +963,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       real_hitter->consume(this);
     }
   } else {
-    dbg("Is hit by (%s) %u damage, health now %d", real_hitter->to_string().c_str(), damage, h);
+    dbg("Is hit by (%s) %u damage, health now %d", real_hitter->to_short_string().c_str(), damage, h);
   }
 
   if (is_player()) {
@@ -1011,16 +1011,16 @@ int Thing::is_hit(Thingp hitter, bool crit, bool attack_bite, bool attack_poison
     //
     // Allow attacks when dead
     //
-    hitter->log("Possible attack on %s", to_string().c_str());
+    hitter->log("Possible attack on %s", to_short_string().c_str());
   } else if (damage) {
     //
     // Filter attacks when dead
     //
     if (is_dead || is_dying) {
-      hitter->log("Already dead, no more melee hits %s", to_string().c_str());
+      hitter->log("Already dead, no more melee hits %s", to_short_string().c_str());
       return false;
     }
-    hitter->log("Possible attack on %s", to_string().c_str());
+    hitter->log("Possible attack on %s", to_short_string().c_str());
   } else {
     //
     // Failed attack
@@ -1059,7 +1059,7 @@ int Thing::is_hit(Thingp hitter, bool crit, bool attack_bite, bool attack_poison
   //
   if (maybe_aip()) {
     if (get_aip()->recently_hit_by.find(real_hitter->id) != get_aip()->recently_hit_by.end()) {
-      IF_DEBUG2 { hitter->log("No, I've already hit %s", to_string().c_str()); }
+      IF_DEBUG2 { hitter->log("No, I've already hit %s", to_short_string().c_str()); }
       return false;
     }
   }
@@ -1070,20 +1070,20 @@ int Thing::is_hit(Thingp hitter, bool crit, bool attack_bite, bool attack_poison
   //
   if (is_dead || is_dying) {
     if (real_hitter->can_eat(this)) {
-      IF_DEBUG2 { hitter->log("Cannot hit dead thing, but can eat: %s", to_string().c_str()); }
+      IF_DEBUG2 { hitter->log("Cannot hit dead thing, but can eat: %s", to_short_string().c_str()); }
     } else {
-      IF_DEBUG2 { hitter->log("Cannot hit: %s is dead", to_string().c_str()); }
+      IF_DEBUG2 { hitter->log("Cannot hit: %s is dead", to_short_string().c_str()); }
       return false;
     }
   }
 
   if (is_indestructible()) {
-    IF_DEBUG2 { hitter->log("Cannot hit: %s is indestructible", to_string().c_str()); }
+    IF_DEBUG2 { hitter->log("Cannot hit: %s is indestructible", to_short_string().c_str()); }
     return false;
   }
 
   if (is_resurrecting) {
-    IF_DEBUG2 { hitter->log("Cannot hit: %s is resurrecting", to_string().c_str()); }
+    IF_DEBUG2 { hitter->log("Cannot hit: %s is resurrecting", to_short_string().c_str()); }
     return false;
   }
 
@@ -1093,7 +1093,7 @@ int Thing::is_hit(Thingp hitter, bool crit, bool attack_bite, bool attack_poison
     // damage. We don't want the player to keep absorbing hits when
     // already dead though.
     //
-    IF_DEBUG2 { hitter->log("No, hitter %s is already dead", to_string().c_str()); }
+    IF_DEBUG2 { hitter->log("No, hitter %s is already dead", to_short_string().c_str()); }
     return false;
   }
 
@@ -1113,7 +1113,7 @@ int Thing::is_hit(Thingp hitter, bool crit, bool attack_bite, bool attack_poison
         //
         // Not something that typically damages walls.
         //
-        IF_DEBUG2 { hitter->log("No, %s is immune (1)", to_string().c_str()); }
+        IF_DEBUG2 { hitter->log("No, %s is immune (1)", to_short_string().c_str()); }
         return false;
       }
     }
@@ -1125,7 +1125,7 @@ int Thing::is_hit(Thingp hitter, bool crit, bool attack_bite, bool attack_poison
         //
         // Not something that typically damages walls.
         //
-        IF_DEBUG2 { hitter->log("No, %s is immune (2)", to_string().c_str()); }
+        IF_DEBUG2 { hitter->log("No, %s is immune (2)", to_short_string().c_str()); }
         return false;
       }
     }

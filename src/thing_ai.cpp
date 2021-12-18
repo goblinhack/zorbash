@@ -69,14 +69,14 @@ void Thing::ai_log(const std::string &short_msg, const std::string &long_msg, Th
 
     if (it) {
       CON("Robot: @(%s, %d,%d %d/%dh) %s, %s", level->to_string().c_str(), (int) curr_at.x, (int) curr_at.y,
-          get_health(), get_health_max(), long_msg.c_str(), it->to_string().c_str());
+          get_health(), get_health_max(), long_msg.c_str(), it->to_short_string().c_str());
     } else {
       CON("Robot: @(%s, %d,%d %d/%dh) %s", level->to_string().c_str(), (int) curr_at.x, (int) curr_at.y, get_health(),
           get_health_max(), long_msg.c_str());
     }
   } else {
     if (it) {
-      log("AI: %s, %s", long_msg.c_str(), it->to_string().c_str());
+      log("AI: %s, %s", long_msg.c_str(), it->to_short_string().c_str());
     } else {
       log("AI: %s", long_msg.c_str());
     }
@@ -641,14 +641,14 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
                     set(aip->interrupt_map.val, p.x, p.y, game->tick_current);
                     if (check_for_interrupts) {
                       something_changed++;
-                      dbg("Interrupted by thing worth collecting %s", it->to_string().c_str());
+                      dbg("Interrupted by thing worth collecting %s", it->to_short_string().c_str());
                     }
                   }
                   if (is_dangerous(it)) {
                     set(aip->interrupt_map.val, p.x, p.y, game->tick_current);
                     if (check_for_interrupts) {
                       something_changed++;
-                      dbg("Interrupted by dangerous thing %s", it->to_string().c_str());
+                      dbg("Interrupted by dangerous thing %s", it->to_short_string().c_str());
                     }
                   }
 
@@ -656,7 +656,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
                     set(aip->interrupt_map.val, p.x, p.y, game->tick_current);
                     if (check_for_interrupts) {
                       something_changed++;
-                      dbg("Interrupted by edible collecting %s", it->to_string().c_str());
+                      dbg("Interrupted by edible collecting %s", it->to_short_string().c_str());
                     }
                   }
                 }
@@ -940,7 +940,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
           // then it's not really fair to use that knowledge.
           //
           if (lit_recently) {
-            dbg("AI: Consider attacking? %s%s%s%s", it->to_string().c_str(), is_enemy(it) ? ", is enemy" : "",
+            dbg("AI: Consider attacking? %s%s%s%s", it->to_short_string().c_str(), is_enemy(it) ? ", is enemy" : "",
                 is_dangerous(it) ? ", is dangerous" : "", is_to_be_avoided(it) ? ", is to be avoided" : "");
 
             if (is_enemy(it) && (dist <= max_dist)) {

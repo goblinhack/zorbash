@@ -36,7 +36,9 @@ void Thing::update_light(void)
 void Thing::update(void)
 {
   TRACE_AND_INDENT();
-  dbg("Update");
+  if (is_loggable()) {
+    dbg("Update");
+  }
   TRACE_AND_INDENT();
 
   auto tpp     = tp();
