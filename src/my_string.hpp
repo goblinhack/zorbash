@@ -28,7 +28,7 @@ extern size_t strlcat_(char *dst, const char *src, size_t size);
 #define MAXSTR      1024
 #define MAXSHORTSTR 128
 
-char *dynprintf(const char *fmt, ...);
+char *dynprintf(const char *fmt, ...) __attribute__((format(printf, 1, 2)));
 char *dynvprintf(const char *fmt, va_list args);
 char *strappend(const char *in, const char *append);
 char *strcasestr_(const char *s, const char *find);
