@@ -88,10 +88,46 @@ std::string Thing::text_the(bool include_owner)
   return (out);
 }
 
+std::string Thing::text_the_no_dying(bool include_owner)
+{
+  TRACE_AND_INDENT();
+  auto tpp = tp();
+  verify(MTYPE_THING, this);
+  verify(MTYPE_TP, tpp);
+  if (unlikely(! tpp)) {
+    return ("<no name>");
+  }
+
+  std::string out = "the ";
+
+  //
+  // "the goblin's short sword" for example
+  //
+  auto top_owner = get_top_owner();
+  if (include_owner) {
+    if (top_owner && ! top_owner->is_player()) {
+      out += top_owner->text_name();
+      out += "'s ";
+    }
+  }
+
+  out += tpp->text_name();
+
+  return (out);
+}
+
 std::string Thing::text_The(void)
 {
   TRACE_AND_INDENT();
   auto out = text_the();
+  out[ 0 ] = toupper(out[ 0 ]);
+  return (out);
+}
+
+std::string Thing::text_The_no_dying(void)
+{
+  TRACE_AND_INDENT();
+  auto out = text_the_no_dying();
   out[ 0 ] = toupper(out[ 0 ]);
   return (out);
 }

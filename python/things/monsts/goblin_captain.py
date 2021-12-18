@@ -15,7 +15,7 @@ def on_follower_set(me, leader, x, y):
 
 
 def on_follower_unset(me, leader, x, y):
-    if not my.thing_is_dead_or_dying(me):
+    if not my.thing_is_dead_or_dying(leader):
         my.topcon("The goblin leader cries out in rage!")
 
 

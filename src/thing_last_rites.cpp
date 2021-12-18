@@ -92,8 +92,8 @@ void Thing::last_rites(Thingp defeater, const char *reason)
   //
   // Set is_dead after the log message or we print it as dead
   //
-  auto The = text_The();
-  is_dead  = true;
+  auto The_no_dying = text_The_no_dying();
+  is_dead           = true;
 
   //
   // Resurrect unless say this was a minion and its manifestor died
@@ -263,6 +263,9 @@ void Thing::last_rites(Thingp defeater, const char *reason)
     }
   }
 
+  remove_leader();
+  release_followers();
+
   //
   // Add to the hiscore table?
   //
@@ -286,21 +289,21 @@ void Thing::last_rites(Thingp defeater, const char *reason)
     level->map_follow_player = false;
     game->dead_select(reason);
   } else if (is_loggable()) {
-    dbg("%s defeated dead, %s", The.c_str(), reason);
+    dbg("%s defeated dead, %s", The_no_dying.c_str(), reason);
     if (defeater && (defeater != this)) {
       if (defeater->is_player()) {
         if (is_monst()) {
           if (is_undead()) {
-            TOPCON("%%fg=white$%s is vanquished, %s.%%fg=reset$", The.c_str(), reason);
+            TOPCON("%%fg=white$%s is vanquished, %s.%%fg=reset$", The_no_dying.c_str(), reason);
           } else {
-            TOPCON("%%fg=white$%s is defeated, %s.%%fg=reset$", The.c_str(), reason);
+            TOPCON("%%fg=white$%s is defeated, %s.%%fg=reset$", The_no_dying.c_str(), reason);
           }
         } else if (on_death_is_open()) {
           //
           // Already logged
           //
         } else {
-          TOPCON("%s is destroyed %s.", The.c_str(), reason);
+          TOPCON("%s is destroyed %s.", The_no_dying.c_str(), reason);
         }
 
         defeater->score_add(this);

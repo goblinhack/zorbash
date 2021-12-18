@@ -29,6 +29,8 @@ void Thing::hooks_remove()
 
   release_followers();
 
+  remove_leader();
+
   if (top_owner) {
     dbg("Detach %08" PRIx32 " from top owner %s", id.id, top_owner->to_string().c_str());
     TRACE_AND_INDENT();

@@ -38,7 +38,7 @@ void Thing::on_follower_set(Thingp leader)
     }
 
     if (mod == "me") {
-      mod = name();
+      mod = leader->name();
     }
 
     dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_string().c_str(), leader->to_string().c_str());
@@ -82,7 +82,7 @@ void Thing::on_follower_unset(Thingp leader)
     }
 
     if (mod == "me") {
-      mod = name();
+      mod = leader->name();
     }
 
     dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_string().c_str(), leader->to_string().c_str());

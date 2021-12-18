@@ -193,17 +193,15 @@ bool Thing::carry(Thingp item, bool can_equip)
       } else if (is_monst()) {
         if (level->player) {
           if (get(level->player->get_aip()->can_see_currently.can_see, curr_at.x, curr_at.y)) {
-            TOPCON("%s collects %s.", text_the().c_str(), item->text_the().c_str());
+            if (! already_carried) {
+              TOPCON("%s collects %s.", text_The().c_str(), item->text_the().c_str());
+            }
           } else if (item->is_weapon()) {
-            TOPCON("You hear the scraping noise of a weapon being lifted.");
-          } else if (item->is_ring()) {
-            TOPCON("You hear the powerful thrum of a magical ring being worn.");
-          } else if (item->is_wand()) {
-            TOPCON("You hear a strange swishing sound.");
+            TOPCON("You hear the noise of a weapons being drawn.");
           } else if (item->is_food()) {
             TOPCON("You hear a strange slurping sound.");
           } else if (item->is_item_magical()) {
-            TOPCON("You hear the distant sound of magic, whatever that is.");
+            TOPCON("You hear a distant evil laugh.");
           }
         }
       }

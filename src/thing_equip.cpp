@@ -476,6 +476,20 @@ bool Thing::equip(Thingp item, int equip)
         TOPCON("You put on %s.", item->text_the().c_str());
       }
     }
+  } else if (is_monst()) {
+    if (level->player) {
+      if (get(level->player->get_aip()->can_see_currently.can_see, curr_at.x, curr_at.y)) {
+        TOPCON("%s wields %s.", text_The().c_str(), item->text_the().c_str());
+      } else if (item->is_weapon()) {
+        TOPCON("You hear the whoosh of a weapon being wielded.");
+      } else if (item->is_ring()) {
+        TOPCON("You hear the powerful thrum of a magical ring being worn.");
+      } else if (item->is_wand()) {
+        TOPCON("You hear a strange magical swishing sound.");
+      } else if (item->is_item_magical()) {
+        TOPCON("You hear the distant sound of magic, whatever that is.");
+      }
+    }
   }
 
   on_equip(item);

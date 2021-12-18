@@ -202,14 +202,13 @@ void Thing::set_leader(Thingp leader)
 
 void Thing::remove_leader(void)
 {
-  TRACE_AND_INDENT();
   auto old_leader = get_leader();
   if (! old_leader) {
-    err("No leader owner");
     return;
   }
 
-  dbg("Remove leader owner %s", old_leader->to_string().c_str());
+  TRACE_AND_INDENT();
+  dbg("Remove leader %s", old_leader->to_string().c_str());
   on_follower_unset(old_leader);
 
   set_leader_id(NoThingId);
@@ -240,12 +239,12 @@ void Thing::destroy_followers(Thingp defeater)
   FOR_ALL_THING_GROUPS(group)
   {
     for (auto p : level->all_things[ group ]) {
-      auto leader = p.second;
-      auto o      = leader->get_leader();
+      auto follower = p.second;
+      auto o        = follower->get_leader();
       if (o && (o == this)) {
-        leader->remove_leader();
-        leader->is_resurrection_blocked = true;
-        leader->dead(defeater, "its leader died");
+        follower->remove_leader();
+        follower->is_resurrection_blocked = true;
+        follower->dead(defeater, "its leader died");
       }
     }
   }
@@ -268,10 +267,10 @@ void Thing::release_followers(void)
   FOR_ALL_THING_GROUPS(group)
   {
     for (auto p : level->all_things[ group ]) {
-      auto leader = p.second;
-      auto o      = leader->get_leader();
+      auto follower = p.second;
+      auto o        = follower->get_leader();
       if (o && (o == this)) {
-        leader->remove_leader();
+        follower->remove_leader();
       }
     }
   }
