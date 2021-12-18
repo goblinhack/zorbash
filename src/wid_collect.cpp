@@ -297,8 +297,37 @@ void Game::wid_collect_create(const std::list< Thingp > items /* intentional cop
         continue;
       }
 
-      found[ t ] = true;
-      collect_items.push_back(t);
+      bool ok_to_carry = true;
+
+      //
+      // We only have code for support for one bag, so just ignore if another bag is offered
+      //
+      if (t->is_bag()) {
+        bool already_carrying_a_bag = false;
+        for (const auto m : player->get_item_vector()) {
+          if (m->is_bag_item_container()) {
+            already_carrying_a_bag = true;
+            break;
+          }
+        }
+
+        //
+        // Only one bag please
+        //
+        if (already_carrying_a_bag) {
+          ok_to_carry = false;
+        }
+      } else if (t->is_bag_item_container()) {
+        //
+        // Ignore chests
+        //
+        ok_to_carry = false;
+      }
+
+      if (ok_to_carry) {
+        found[ t ] = true;
+        collect_items.push_back(t);
+      }
 
       if (t->maybe_itemp()) {
         for (const auto t : t->get_item_vector()) {
@@ -324,6 +353,11 @@ void Game::wid_collect_create(const std::list< Thingp > items /* intentional cop
         player->log("Final collect items: <empty slot>");
       }
     }
+  }
+
+  if (! collect_items.size()) {
+    TOPCON("Nothing to carry here.");
+    return;
   }
 
   auto  m     = TERM_WIDTH / 2;
