@@ -4,7 +4,6 @@
 <!--                                                                                                                                              -->
 <!-- Next todo                                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
-<!-- - jelly goblin eating sound when dead                                                                                                                      -->
 <!-- - pirate goblin random carry of gold                                                                                                                       -->
 <!-- - goblin mage                                                                                                                                -->
 <!-- - goblin totem                                           -->

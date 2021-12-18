@@ -88,32 +88,32 @@ void Thing::on_leader_unset(void)
 
 float Thing::get_distance_from_leader(void)
 {
-  auto manifestor = get_leader();
-  if (! manifestor) {
+  auto leader = get_leader();
+  if (! leader) {
     return -1;
   }
 
-  return distance(curr_at, manifestor->curr_at);
+  return distance(curr_at, leader->curr_at);
 }
 
 float Thing::get_distance_from_leader(point p)
 {
-  auto manifestor = get_leader();
-  if (! manifestor) {
+  auto leader = get_leader();
+  if (! leader) {
     return -1;
   }
 
-  return distance(p, manifestor->curr_at);
+  return distance(p, leader->curr_at);
 }
 
 bool Thing::too_far_from_leader(void)
 {
-  auto manifestor = get_leader();
-  if (! manifestor) {
+  auto leader = get_leader();
+  if (! leader) {
     return false;
   }
 
-  if (distance(curr_at, manifestor->curr_at) > get_distance_leader_max()) {
+  if (distance(curr_at, leader->curr_at) > get_distance_leader_max()) {
     return true;
   }
   return false;
@@ -121,12 +121,12 @@ bool Thing::too_far_from_leader(void)
 
 bool Thing::too_far_from_leader(point p)
 {
-  auto manifestor = get_leader();
-  if (! manifestor) {
+  auto leader = get_leader();
+  if (! leader) {
     return false;
   }
 
-  if (distance(p, manifestor->curr_at) > get_distance_leader_max()) {
+  if (distance(p, leader->curr_at) > get_distance_leader_max()) {
     return true;
   }
   return false;
@@ -134,12 +134,12 @@ bool Thing::too_far_from_leader(point p)
 
 bool Thing::too_far_from_leader(point p, float delta)
 {
-  auto manifestor = get_leader();
-  if (! manifestor) {
+  auto leader = get_leader();
+  if (! leader) {
     return false;
   }
 
-  if (distance(p, manifestor->curr_at) > get_distance_leader_max() + delta) {
+  if (distance(p, leader->curr_at) > get_distance_leader_max() + delta) {
     return true;
   }
   return false;
@@ -365,32 +365,22 @@ bool Thing::same_leader(Thingp it)
     me = this;
   }
 
+  me->con("XXX me");
+  it->con("XXX it");
+
   if (its_owner) {
     it = its_owner;
   }
 
-  if (it == this) {
+  if (it == me) {
     return true;
   }
 
-  Thingp my_leader = nullptr;
-  if (me->get_follower_count()) {
-    my_leader = me;
-  }
-  if (! my_leader) {
-    my_leader = me->get_leader();
-  }
+  Thingp my_leader  = me->get_leader();
+  Thingp its_leader = it->get_leader();
 
-  Thingp its_leader = nullptr;
-  if (me->get_follower_count()) {
-    its_leader = me;
-  }
-  if (! its_leader) {
-    its_leader = me->get_leader();
-  }
-
-#if 0
-  con("XXX me");
+#if 1
+  me->con("XXX me");
   it->con("XXX it");
   if (my_leader) {
     my_leader->con("my leader");
@@ -404,7 +394,7 @@ bool Thing::same_leader(Thingp it)
     return true;
   }
 
-  if (its_leader == this) {
+  if (its_leader && (its_leader == me)) {
     return true;
   }
 
