@@ -30,21 +30,19 @@ std::string Thing::to_string(void)
 
   if (unlikely(! tpp)) {
     TRACE_AND_INDENT();
-    return (string_sprintf("L%d,%d,%d %08" PRIx32 "(<no tp>%s%s%s%s%s%s%s%s%s @%d,%d)", level->world_at.x,
-                           level->world_at.y, level->world_at.z, id, is_dead ? "/dead" : "",
-                           is_scheduled_for_death ? "/dead-sched" : "", is_resurrecting ? "/resurrecting" : "",
-                           is_offscreen ? "/offscr" : "", is_on_fire() ? "/onfire" : "", is_hidden ? "/hidden" : "",
-                           is_jumping ? "/jumping" : "", is_moving ? "/mv" : "", is_falling ? "/fall" : "", curr_at.x,
-                           curr_at.y));
+    return (string_sprintf("L%d %08" PRIx32 "(<no tp>%s%s%s%s%s%s%s%s%s @%d,%d)", level->world_at.x,
+                           level->world_at.z, id, is_dead ? "/dead" : "", is_scheduled_for_death ? "/dead-sched" : "",
+                           is_resurrecting ? "/resurrecting" : "", is_offscreen ? "/offscr" : "",
+                           is_on_fire() ? "/onfire" : "", is_hidden ? "/hidden" : "", is_jumping ? "/jumping" : "",
+                           is_moving ? "/mv" : "", is_falling ? "/fall" : "", curr_at.x, curr_at.y));
   } else if (g_loading) {
     TRACE_AND_INDENT();
     //
     // Don't get health when loading as that looks for the owner
     //
     return (string_sprintf(
-        "L%d,%d,%d %08" PRIx32 "(%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s @%d,%d)", level->world_at.x, level->world_at.y,
-        level->world_at.z, id, tpp->name().c_str(), is_dead ? "/dead" : "",
-        is_scheduled_for_death ? "/dead-sched" : "", is_resurrecting ? "/resurrecting" : "",
+        "L%d %08" PRIx32 "(%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s @%d,%d)", level->world_at.z, id, tpp->name().c_str(),
+        is_dead ? "/dead" : "", is_scheduled_for_death ? "/dead-sched" : "", is_resurrecting ? "/resurrecting" : "",
         is_offscreen ? "/offscr" : "", is_on_fire() ? "/onfire" : "", is_hidden ? "/hidden" : "",
         is_jumping ? "/jumping" : "", is_moving ? "/mv" : "", is_falling ? "/fall" : "",
         is_changing_level ? "/chg-level" : "", is_waiting_to_ascend_dungeon ? "/ascend-dungeon" : "",
@@ -82,9 +80,8 @@ std::string Thing::to_string(void)
   } else if (get_health_max()) {
     TRACE_AND_INDENT();
     return (string_sprintf(
-        "L%d,%d,%d %08" PRIx32 "(%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s @%d,%d %d/%dh)", level->world_at.x, level->world_at.y,
-        level->world_at.z, id, tpp->name().c_str(), is_dead ? "/dead" : "",
-        is_scheduled_for_death ? "/dead-sched" : "", is_resurrecting ? "/resurrecting" : "",
+        "L%d %08" PRIx32 "(%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s @%d,%d %d/%dh)", level->world_at.z, id, tpp->name().c_str(),
+        is_dead ? "/dead" : "", is_scheduled_for_death ? "/dead-sched" : "", is_resurrecting ? "/resurrecting" : "",
         is_offscreen ? "/offscr" : "", is_on_fire() ? "/onfire" : "", is_hidden ? "/hidden" : "",
         is_jumping ? "/jumping" : "", is_moving ? "/mv" : "", is_falling ? "/fall" : "",
         is_changing_level ? "/chg-level" : "", is_waiting_to_ascend_dungeon ? "/ascend-dungeon" : "",
@@ -93,9 +90,8 @@ std::string Thing::to_string(void)
   } else if (is_tickable() || is_interesting()) {
     TRACE_AND_INDENT();
     return (string_sprintf(
-        "L%d,%d,%d %08" PRIx32 "(%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s @%d,%d)", level->world_at.x, level->world_at.y,
-        level->world_at.z, id, tpp->name().c_str(), is_dead ? "/dead" : "",
-        is_scheduled_for_death ? "/dead-sched" : "", is_resurrecting ? "/resurrecting" : "",
+        "L%d %08" PRIx32 "(%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s @%d,%d)", level->world_at.z, id, tpp->name().c_str(),
+        is_dead ? "/dead" : "", is_scheduled_for_death ? "/dead-sched" : "", is_resurrecting ? "/resurrecting" : "",
         is_offscreen ? "/offscr" : "", is_on_fire() ? "/onfire" : "", is_hidden ? "/hidden" : "",
         is_jumping ? "/jumping" : "", is_moving ? "/mv" : "", is_falling ? "/fall" : "",
         is_changing_level ? "/chg-level" : "", is_waiting_to_ascend_dungeon ? "/ascend-dungeon" : "",
@@ -103,12 +99,11 @@ std::string Thing::to_string(void)
         is_waiting_to_descend_sewer ? "/descend-sewer" : "", curr_at.x, curr_at.y));
   } else {
     TRACE_AND_INDENT();
-    return (string_sprintf("L%d,%d,%d %08" PRIx32 "(%s%s%s%s%s%s%s%s%s%s @%d,%d)", level->world_at.x,
-                           level->world_at.y, level->world_at.z, id, tpp->name().c_str(), is_dead ? "/dead" : "",
-                           is_scheduled_for_death ? "/dead-sched" : "", is_resurrecting ? "/resurrecting" : "",
-                           is_offscreen ? "/offscr" : "", is_on_fire() ? "/onfire" : "", is_hidden ? "/hidden" : "",
-                           is_jumping ? "/jumping" : "", is_moving ? "/mv" : "", is_falling ? "/fall" : "", curr_at.x,
-                           curr_at.y));
+    return (string_sprintf("L%d %08" PRIx32 "(%s%s%s%s%s%s%s%s%s%s @%d,%d)", level->world_at.z, id,
+                           tpp->name().c_str(), is_dead ? "/dead" : "", is_scheduled_for_death ? "/dead-sched" : "",
+                           is_resurrecting ? "/resurrecting" : "", is_offscreen ? "/offscr" : "",
+                           is_on_fire() ? "/onfire" : "", is_hidden ? "/hidden" : "", is_jumping ? "/jumping" : "",
+                           is_moving ? "/mv" : "", is_falling ? "/fall" : "", curr_at.x, curr_at.y));
   }
 }
 
@@ -128,11 +123,11 @@ std::string Thing::to_short_string(void)
 
   if (unlikely(! tpp)) {
     TRACE_AND_INDENT();
-    return (string_sprintf("L%d,%d,%d (<no tp>%s%s%s%s%s%s%s%s%s @%d,%d)", level->world_at.x, level->world_at.y,
-                           level->world_at.z, is_dead ? "/dead" : "", is_scheduled_for_death ? "/dead-sched" : "",
-                           is_resurrecting ? "/resurrecting" : "", is_offscreen ? "/offscr" : "",
-                           is_on_fire() ? "/onfire" : "", is_hidden ? "/hidden" : "", is_jumping ? "/jumping" : "",
-                           is_moving ? "/mv" : "", is_falling ? "/fall" : "", curr_at.x, curr_at.y));
+    return (string_sprintf("L%d (<no tp>%s%s%s%s%s%s%s%s%s @%d,%d)", level->world_at.z, is_dead ? "/dead" : "",
+                           is_scheduled_for_death ? "/dead-sched" : "", is_resurrecting ? "/resurrecting" : "",
+                           is_offscreen ? "/offscr" : "", is_on_fire() ? "/onfire" : "", is_hidden ? "/hidden" : "",
+                           is_jumping ? "/jumping" : "", is_moving ? "/mv" : "", is_falling ? "/fall" : "", curr_at.x,
+                           curr_at.y));
   } else {
     auto o = get_immediate_owner();
     if (o) {
@@ -146,10 +141,10 @@ std::string Thing::to_short_string(void)
           is_waiting_to_ascend_sewer ? "/asc-sewer" : "", curr_at.x, curr_at.y, o->to_string().c_str()));
     } else {
       return (string_sprintf(
-          "L%d,%d,%d (%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s @%d,%d)", level->world_at.x, level->world_at.y,
-          level->world_at.z, tpp->name().c_str(), is_dead ? "/dead" : "", is_scheduled_for_death ? "/dead-sched" : "",
-          is_resurrecting ? "/resurrecting" : "", is_offscreen ? "/offscr" : "", is_on_fire() ? "/onfire" : "",
-          is_hidden ? "/hidden" : "", is_jumping ? "/jumping" : "", is_moving ? "/mv" : "", is_falling ? "/fall" : "",
+          "L%d (%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s @%d,%d)", level->world_at.z, tpp->name().c_str(),
+          is_dead ? "/dead" : "", is_scheduled_for_death ? "/dead-sched" : "", is_resurrecting ? "/resurrecting" : "",
+          is_offscreen ? "/offscr" : "", is_on_fire() ? "/onfire" : "", is_hidden ? "/hidden" : "",
+          is_jumping ? "/jumping" : "", is_moving ? "/mv" : "", is_falling ? "/fall" : "",
           is_changing_level ? "/chg-level" : "", is_waiting_to_ascend_dungeon ? "/asc-dung" : "",
           is_waiting_to_descend_dungeon ? "/des-dung" : "", is_waiting_to_descend_sewer ? "/des-sewer" : "",
           is_waiting_to_ascend_sewer ? "/asc-sewer" : "", curr_at.x, curr_at.y));
@@ -163,14 +158,14 @@ std::string Thing::to_dbg_string(void)
   verify(MTYPE_THING, this);
 
   return (string_sprintf(
-      "L%d,%d,%d %08" PRIx32
+      "L%d %08" PRIx32
       " %s (@%d,%d)%s%s%s%s%s%s%s%s%s%s%s%s"
       "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s"
       "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s"
       "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s"
       "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s)",
-      level->world_at.x, level->world_at.y, level->world_at.z, id, tp() ? tp()->name().c_str() : "notp", curr_at.x,
-      curr_at.y, has_ever_moved ? ", has_ever_moved" : "", has_external_particle ? ", has_external_particle" : "",
+      level->world_at.z, id, tp() ? tp()->name().c_str() : "notp", curr_at.x, curr_at.y,
+      has_ever_moved ? ", has_ever_moved" : "", has_external_particle ? ", has_external_particle" : "",
       has_internal_particle ? ", has_internal_particle" : "", has_laser ? ", has_laser" : "",
       has_light ? ", has_light" : "", has_projectile ? ", has_projectile" : "", is_activated ? ", is_activated" : "",
       is_attached ? ", is_attached" : "", is_being_destroyed ? ", is_being_destroyed" : "",
@@ -229,15 +224,15 @@ std::string Thing::to_dbg_saved_string(void)
   verify(MTYPE_THING, this);
 
   return (string_sprintf(
-      "L%d,%d,%d %08" PRIx32
+      "L%d %08" PRIx32
       " %s (@%d,%d)%s%s%s%s%s%s%s%s%s%s%s%s%s"
       "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s"
       "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s"
       "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s"
       "%s%s%s%s%s%s%s%s%s%s%s%s%s%s)",
-      level->world_at.x, level->world_at.y, level->world_at.z, id, tp() ? tp()->name().c_str() : "notp", curr_at.x,
-      curr_at.y, has_ever_moved ? ", has_ever_moved" : "", has_laser ? ", has_laser" : "",
-      has_light ? ", has_light" : "", has_projectile ? ", has_projectile" : "", is_activated ? ", is_activated" : "",
+      level->world_at.z, id, tp() ? tp()->name().c_str() : "notp", curr_at.x, curr_at.y,
+      has_ever_moved ? ", has_ever_moved" : "", has_laser ? ", has_laser" : "", has_light ? ", has_light" : "",
+      has_projectile ? ", has_projectile" : "", is_activated ? ", is_activated" : "",
       is_attached ? ", is_attached" : "", is_being_destroyed ? ", is_being_destroyed" : "",
       is_bouncing ? ", is_bouncing" : "", is_changing_level ? ", is_changing_level" : "", is_dead ? ", is_dead" : "",
       is_scheduled_for_death ? ", is_scheduled_for_death" : "", is_dying ? ", is_dying" : "",

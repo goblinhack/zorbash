@@ -27,8 +27,8 @@ void Level::fini(void)
   TRACE_AND_INDENT();
   log("-");
   log("Destroying, seed %u", seed);
-  log("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
-  log("v v v v v v v v v v v v v v v v v v v v v v v v v v v ");
+  log("| | | | | | | | | | | | | | | | | | | | | | | | | | |");
+  log("v v v v v v v v v v v v v v v v v v v v v v v v v v v");
 
   is_being_destroyed = true;
 

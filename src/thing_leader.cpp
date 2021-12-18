@@ -355,57 +355,50 @@ bool Thing::same_leader(Thingp it)
     return false;
   }
 
+  auto   my_owner  = get_top_owner();
+  auto   its_owner = it->get_top_owner();
+  Thingp me;
+
+  if (my_owner) {
+    me = my_owner;
+  } else {
+    me = this;
+  }
+
+  if (its_owner) {
+    it = its_owner;
+  }
+
   if (it == this) {
     return true;
   }
 
-  auto my_owner  = get_top_owner();
-  auto its_owner = it->get_top_owner();
-
-  if (my_owner && (my_owner == its_owner)) {
-    return true;
-  }
-
-  if (its_owner == this) {
-    return true;
-  }
-
   Thingp my_leader = nullptr;
-  if (get_follower_count()) {
-    my_leader = this;
-  }
-  if (! my_leader && my_owner && my_owner->get_follower_count()) {
-    my_leader = my_owner;
-  }
-  if (! my_leader && my_owner) {
-    my_leader = my_owner->get_leader();
+  if (me->get_follower_count()) {
+    my_leader = me;
   }
   if (! my_leader) {
-    my_leader = get_leader();
+    my_leader = me->get_leader();
   }
 
   Thingp its_leader = nullptr;
-  if (it->get_follower_count()) {
-    its_leader = it;
-  }
-  if (! its_leader && its_owner && its_owner->get_follower_count()) {
-    its_leader = its_owner;
-  }
-  if (! its_leader && its_owner) {
-    its_leader = its_owner->get_leader();
+  if (me->get_follower_count()) {
+    its_leader = me;
   }
   if (! its_leader) {
-    its_leader = it->get_leader();
+    its_leader = me->get_leader();
   }
 
-  //  con("same leader");
-  //  it->con("same leader");
-  //  if (my_leader) {
-  //    my_leader->con("my leader");
-  //  }
-  //  if (its_leader) {
-  //    its_leader->con("its leader");
-  //  }
+#if 0
+  con("XXX me");
+  it->con("XXX it");
+  if (my_leader) {
+    my_leader->con("my leader");
+  }
+  if (its_leader) {
+    its_leader->con("its leader");
+  }
+#endif
 
   if (its_leader && (its_leader == my_leader)) {
     return true;

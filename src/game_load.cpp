@@ -1105,8 +1105,8 @@ void Game::load(void)
   TRACE_AND_INDENT();
   LOG("-");
   CON("DGN: Loading %s", save_file.c_str());
-  LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
-  LOG("v v v v v v v v v v v v v v v v v v v v v v v v v v v ");
+  LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | |");
+  LOG("v v v v v v v v v v v v v v v v v v v v v v v v v v v");
 
   g_loading = true;
   load(save_file, *this);
@@ -1114,8 +1114,8 @@ void Game::load(void)
 
   sdl_config_update_all();
 
-  LOG("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ");
-  LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
+  LOG("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^");
+  LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | |");
   CON("DGN: Loaded %s, seed %u", save_file.c_str(), seed);
   LOG("-");
 }
@@ -1168,8 +1168,8 @@ void Game::load_snapshot(void)
 
   LOG("-");
   CON("DGN: Loading %s", save_file.c_str());
-  LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
-  LOG("v v v v v v v v v v v v v v v v v v v v v v v v v v v ");
+  LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | |");
+  LOG("v v v v v v v v v v v v v v v v v v v v v v v v v v v");
 
   g_loading = true;
   load(save_file, *this);
@@ -1177,8 +1177,8 @@ void Game::load_snapshot(void)
 
   sdl_config_update_all();
 
-  LOG("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ");
-  LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
+  LOG("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^");
+  LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | |");
   CON("DGN: Loaded %s, seed %d", save_file.c_str(), seed);
   LOG("-");
 

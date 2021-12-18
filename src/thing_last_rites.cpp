@@ -130,54 +130,56 @@ void Thing::last_rites(Thingp defeater, const char *reason)
     debuff_remove_all();
   }
 
-  if (on_death_is_open()) {
-    dbg("Defeated, now open");
-    level_pop();
-    is_open = true;
-    level_push();
-    auto p = level->player;
-    if (p) {
-      float distance = get_distance_to_player();
-      if (is_door()) {
-        if (defeater && defeater->is_fire()) {
-          if (distance < 5) {
-            TOPCON("The door burns through.");
-          } else if (distance < DMAP_IS_PASSABLE) {
-            TOPCON("The hear the crackling of burning wood.");
+  if (! is_corpse_currently) {
+    if (on_death_is_open()) {
+      dbg("Defeated, now open");
+      level_pop();
+      is_open = true;
+      level_push();
+      auto p = level->player;
+      if (p) {
+        float distance = get_distance_to_player();
+        if (is_door()) {
+          if (defeater && defeater->is_fire()) {
+            if (distance < 5) {
+              TOPCON("The door burns through.");
+            } else if (distance < DMAP_IS_PASSABLE) {
+              TOPCON("The hear the crackling of burning wood.");
+            } else {
+              TOPCON("You smell smoke in the air.");
+            }
+          } else if (defeater && defeater->is_player()) {
+            TOPCON("The door crashes open.");
           } else {
-            TOPCON("You smell smoke in the air.");
+            if (distance <= 1) {
+              TOPCON("You see the door crash open.");
+            } else if (distance < DMAP_IS_PASSABLE) {
+              TOPCON("The hear the noise of a door crashing open.");
+            } else {
+              TOPCON("The hear the distant noise of a door crashing open.");
+            }
           }
-        } else if (defeater && defeater->is_player()) {
-          TOPCON("The door crashes open.");
+          p->update_light();
         } else {
-          if (distance <= 1) {
-            TOPCON("You see the door crash open.");
-          } else if (distance < DMAP_IS_PASSABLE) {
-            TOPCON("The hear the noise of a door crashing open.");
+          //
+          // e.g. treasure chest
+          //
+          if (defeater && defeater->is_fire()) {
+            if (distance < 5) {
+              TOPCON("%s burns.", text_The().c_str());
+            } else {
+              TOPCON("You smell smoke in the air.");
+            }
+          } else if (defeater && defeater->is_player()) {
+            TOPCON("%s breaks open.", text_The().c_str());
           } else {
-            TOPCON("The hear the distant noise of a door crashing open.");
-          }
-        }
-        p->update_light();
-      } else {
-        //
-        // e.g. treasure chest
-        //
-        if (defeater && defeater->is_fire()) {
-          if (distance < 5) {
-            TOPCON("%s burns.", text_The().c_str());
-          } else {
-            TOPCON("You smell smoke in the air.");
-          }
-        } else if (defeater && defeater->is_player()) {
-          TOPCON("%s breaks open.", text_The().c_str());
-        } else {
-          if (distance <= 1) {
-            TOPCON("You see %s crash open.", text_the().c_str());
-          } else if (distance < DMAP_IS_PASSABLE) {
-            TOPCON("The hear the noise of a %s crashing open.", short_text_a_or_an().c_str());
-          } else {
-            TOPCON("The hear the distant noise of %s crashing open.", short_text_a_or_an().c_str());
+            if (distance <= 1) {
+              TOPCON("You see %s crash open.", text_the().c_str());
+            } else if (distance < DMAP_IS_PASSABLE) {
+              TOPCON("The hear the noise of a %s crashing open.", short_text_a_or_an().c_str());
+            } else {
+              TOPCON("The hear the distant noise of %s crashing open.", short_text_a_or_an().c_str());
+            }
           }
         }
       }

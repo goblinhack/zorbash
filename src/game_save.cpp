@@ -898,13 +898,13 @@ void Game::save(void)
   TRACE_AND_INDENT();
   LOG("-");
   CON("DGN: Saving %s", save_file.c_str());
-  LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
-  LOG("v v v v v v v v v v v v v v v v v v v v v v v v v v v ");
+  LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | |");
+  LOG("v v v v v v v v v v v v v v v v v v v v v v v v v v v");
 
   save(save_file);
 
-  LOG("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ");
-  LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
+  LOG("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^");
+  LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | |");
   CON("DGN: Saved %s, seed %u", save_file.c_str(), seed);
   LOG("-");
 }
@@ -936,13 +936,13 @@ void Game::save(int slot)
 
   LOG("-");
   CON("DGN: Saving %s", save_file.c_str());
-  LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
-  LOG("v v v v v v v v v v v v v v v v v v v v v v v v v v v ");
+  LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | |");
+  LOG("v v v v v v v v v v v v v v v v v v v v v v v v v v v");
 
   save(save_file);
 
-  LOG("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ");
-  LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
+  LOG("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^");
+  LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | |");
   CON("DGN: Saved %s, seed %u", save_file.c_str(), seed);
   LOG("-");
 
@@ -968,13 +968,13 @@ void Game::save_snapshot(void)
 
   LOG("-");
   CON("DGN: Saving %s", save_file.c_str());
-  LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
-  LOG("v v v v v v v v v v v v v v v v v v v v v v v v v v v ");
+  LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | |");
+  LOG("v v v v v v v v v v v v v v v v v v v v v v v v v v v");
 
   save(save_file);
 
-  LOG("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ");
-  LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
+  LOG("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^");
+  LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | |");
   CON("DGN: Saved %s, seed %u", save_file.c_str(), seed);
   LOG("-");
 

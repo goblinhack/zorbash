@@ -371,7 +371,9 @@ bool Thing::collision_obstacle(point p)
     // "true" on collision
     //
     if (collision_obstacle(it)) {
-      dbg("Collision obstacle: %s", it->to_string().c_str());
+      if (it->is_loggable()) {
+        dbg("Collision obstacle: %s", it->to_string().c_str());
+      }
       return true;
     }
   }

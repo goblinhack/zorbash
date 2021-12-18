@@ -511,7 +511,8 @@ void Game::wid_thing_info_create_list(const std::vector< Thingp > &ts)
       if (t->long_text_description().empty()) {
         continue;
       }
-      // t->topcon("over");
+
+      IF_DEBUG2 { t->topcon("over"); }
 
       i++;
       if (! wid_thing_info_push_popup(t)) {
