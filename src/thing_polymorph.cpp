@@ -51,7 +51,7 @@ void Thing::on_polymorphed(void)
 void Thing::polymorph(Tpp into)
 {
   verify(MTYPE_THING, this);
-  log("Polymorpgh into: %s", into->name().c_str());
+  log("Polymorgh into: %s", into->name().c_str());
 
   tp_id = into->id;
   mytp  = nullptr;
@@ -86,5 +86,5 @@ void Thing::polymorph(Tpp into)
   update();
 
   on_polymorphed();
-  log("Polymorpghed into: %s", into->name().c_str());
+  log("Polymorphed into: %s", into->name().c_str());
 }

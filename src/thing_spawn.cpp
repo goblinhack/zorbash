@@ -343,7 +343,11 @@ int Thing::spawn_randomly_in_radius_range(const std::string &what, int amount, u
         continue;
       }
 
-      if (level->is_rock(x, y) || level->is_wall(x, y)) {
+      if (level->is_rock(spawn_at) || level->is_wall(spawn_at)) {
+        continue;
+      }
+
+      if (tpp->is_disliked_by_me(level, spawn_at)) {
         continue;
       }
 

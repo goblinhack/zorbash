@@ -151,7 +151,18 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
   }
 
   if (tpp->is_loggable()) {
-    dbg("Creating");
+    if (owner) {
+      dbg("Creating with owner %s", owner->to_string().c_str());
+    } else {
+      dbg("Creating");
+    }
+  }
+
+  //
+  // Important to set the owner before the on_born call as we use that for lasers.
+  //
+  if (owner) {
+    set_owner(owner);
   }
 
   //
@@ -227,13 +238,6 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
   }
 
   is_the_grid = tp()->is_the_grid();
-
-  //
-  // Important to set the owner before the on_born call as we use that for lasers.
-  //
-  if (owner) {
-    set_owner(owner);
-  }
 
   if (is_tmp_thing()) {
     pcg_random_allowed = true;

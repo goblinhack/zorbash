@@ -57,10 +57,18 @@ void Thing::inventory_particle(Thingp item, uint32_t slot)
       player->incr_score(value * 10);
       player->incr_gold(value);
 
-      if (value > 1) {
-        TOPCON("You collect %d gold coins.", value);
+      if (item->is_gold()) {
+        if (value > 1) {
+          TOPCON("You collect %d gold coins.", value);
+        } else {
+          TOPCON("You collect a lone piece of gold.");
+        }
       } else {
-        TOPCON("You collect a lone piece of gold.");
+        if (value > 1) {
+          TOPCON("The %s magically converts into %d gold.", item->text_The().c_str(), value);
+        } else {
+          TOPCON("The %s magically converts into a measly one gold.", item->text_The().c_str());
+        }
       }
     }
 
