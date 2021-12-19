@@ -20,7 +20,7 @@ void Level::dump(std::string pfx)
   LOG("%s map_at             %s", pfx.c_str(), map_at.to_string().c_str());
   LOG("%s map_follow_player  %u", pfx.c_str(), map_follow_player);
   LOG("%s map_wanted_at      %s", pfx.c_str(), map_wanted_at.to_string().c_str());
-  LOG("%s ts_dungeon_created %u", pfx.c_str(), ts_dungeon_created);
+  LOG("%s ts_created         %u", pfx.c_str(), ts_created);
 
   LOG("%s all_things", pfx.c_str());
   FOR_ALL_THING_GROUPS(group)

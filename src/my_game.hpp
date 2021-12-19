@@ -279,7 +279,7 @@ public:
   //
   // This is used to try and speed up animations if in the midst of a jelly storm
   //
-  bool current_tick_is_too_slow {};
+  bool tick_current_is_too_slow {};
   bool prev_tick_was_too_slow {};
 
   //

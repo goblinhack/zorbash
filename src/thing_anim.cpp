@@ -26,7 +26,7 @@ void Thing::animate(void)
   }
 
   if (is_tmp_thing()) {
-    if (game->current_tick_is_too_slow) {
+    if (game->tick_current_is_too_slow) {
       dead_scheduled("by end of anim; too slow");
       return;
     }

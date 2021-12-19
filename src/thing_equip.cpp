@@ -477,7 +477,7 @@ bool Thing::equip(Thingp item, int equip)
       }
     }
   } else if (is_monst()) {
-    if (level->player) {
+    if (level->player && (level->tick_created > game->tick_current)) {
       if (get(level->player->get_aip()->can_see_currently.can_see, curr_at.x, curr_at.y)) {
         TOPCON("%s wields %s.", text_The().c_str(), item->text_the().c_str());
       } else if (item->is_weapon()) {
@@ -604,7 +604,8 @@ bool Thing::equip_use(bool forced, int equip)
 
     used_as = equip_tp->gfx_anim_use();
     if (used_as == "") {
-      die("Could not use %s/%08" PRIx32 " has no 'use' animation frame", item->to_short_string().c_str(), item->id.id);
+      die("Could not use %s/%08" PRIx32 " has no 'use' animation frame", item->to_short_string().c_str(),
+          item->id.id);
       return false;
     }
 

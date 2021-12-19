@@ -191,7 +191,7 @@ bool Thing::carry(Thingp item, bool can_equip)
       if (is_player()) {
         TOPCON("You carry %s.", item->text_the().c_str());
       } else if (is_monst()) {
-        if (level->player) {
+        if (level->player && (level->tick_created > game->tick_current)) {
           if (get(level->player->get_aip()->can_see_currently.can_see, curr_at.x, curr_at.y)) {
             if (! already_carried) {
               TOPCON("%s collects %s.", text_The().c_str(), item->text_the().c_str());

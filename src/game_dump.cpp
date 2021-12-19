@@ -20,7 +20,7 @@ void Level::dump(std::string pfx, std::ostream &out)
   out << pfx << "map_at             " << map_at << std::endl;
   out << pfx << "map_follow_player  " << map_follow_player << std::endl;
   out << pfx << "map_wanted_at      " << map_wanted_at << std::endl;
-  out << pfx << "ts_dungeon_created " << ts_dungeon_created << std::endl;
+  out << pfx << "ts_created         " << ts_created << std::endl;
 
   out << pfx << "all_things" << std::endl;
   FOR_ALL_THING_GROUPS(group)

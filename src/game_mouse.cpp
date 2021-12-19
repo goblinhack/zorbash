@@ -186,7 +186,7 @@ uint8_t game_mouse_motion(int32_t x, int32_t y, int32_t relx, int32_t rely, int3
 
   if (level->cursor) {
     TRACE_AND_INDENT();
-    if (level->ts_dungeon_created && time_have_x_tenths_passed_since(10, level->ts_dungeon_created)) {
+    if (level->ts_created && time_have_x_tenths_passed_since(10, level->ts_created)) {
       if (level->player && ! level->player->is_dead) {
         level->cursor->visible();
       }

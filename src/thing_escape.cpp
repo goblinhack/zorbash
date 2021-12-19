@@ -70,7 +70,7 @@ bool Thing::ai_escape(void)
   }
 
   auto tries = THING_AI_ESCAPE_ATTEMPTS;
-  if (game->current_tick_is_too_slow || game->prev_tick_was_too_slow) {
+  if (game->tick_current_is_too_slow || game->prev_tick_was_too_slow) {
     tries = 1;
   }
   while (tries-- > 0) {

@@ -90,10 +90,12 @@ public:
   //
   // When this Level was made. Used to restore timestamps relative to this.
   //
-  ts_t ts_dungeon_created {};
-  ts_t ts_dungeon_saved {};
+  ts_t ts_created {};
+  ts_t ts_saved {};
   ts_t ts_fade_out_begin {};
   ts_t ts_fade_in_begin {};
+
+  uint32_t tick_created {};
 
   //
   // Where we are in the world
