@@ -590,7 +590,7 @@ public:
   const std::string &on_you_are_declared_a_follower_do(void);
   const std::string &on_death_of_a_follower_do(void);
   const std::string &on_you_are_declared_leader_do(void);
-  const std::string &on_death_of_leader_do(void);
+  const std::string &on_death_of_my_leader_do(void);
   const std::string &on_lifespan_tick_do(void);
   const std::string &on_move_do(void);
   const std::string &on_open_do(void);
@@ -1647,7 +1647,7 @@ public:
   void on_owner_set(Thingp owner);
   void on_owner_unset(Thingp owner);
   void on_you_are_declared_leader(void);
-  void on_death_of_leader(void);
+  void on_death_of_my_leader(void);
   void on_you_are_declared_a_follower(Thingp leader);
   void on_death_of_a_follower(Thingp leader);
   void on_unequip(Thingp what);
@@ -1706,8 +1706,8 @@ public:
   void try_to_carry(const std::list< Thingp > &items);
   void unleash_minions(void);
   void release_followers(void);
-  void notify_followers_of_death_of_leader(void);
-  void notify_of_death_of_leader(void);
+  void notify_followers_of_death_of_my_leader(void);
+  void notify_of_death_of_my_leader(void);
   void unleash_spawners_things(void);
   void unset_on_fire(void);
   void update_all(void);

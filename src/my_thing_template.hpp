@@ -475,7 +475,7 @@ private:
   std::string _on_death_of_a_follower_do;
   std::string _on_idle_tick_frequency_dice_str;
   std::string _on_you_are_declared_leader_do;
-  std::string _on_death_of_leader_do;
+  std::string _on_death_of_my_leader_do;
   std::string _on_lifespan_tick_do;
   std::string _on_move_do;
   std::string _on_open_do;
@@ -689,7 +689,7 @@ public:
   const std::string &on_you_are_declared_a_follower_do(void) const { return _on_you_are_declared_a_follower_do; }
   const std::string &on_death_of_a_follower_do(void) const { return _on_death_of_a_follower_do; }
   const std::string &on_you_are_declared_leader_do(void) const { return _on_you_are_declared_leader_do; }
-  const std::string &on_death_of_leader_do(void) const { return _on_death_of_leader_do; }
+  const std::string &on_death_of_my_leader_do(void) const { return _on_death_of_my_leader_do; }
   const std::string &on_lifespan_tick_do(void) const { return _on_lifespan_tick_do; }
   const std::string &on_move_do(void) const { return _on_move_do; }
   const std::string &on_open_do(void) const { return _on_open_do; }
@@ -1411,7 +1411,7 @@ public:
   void set_on_you_are_declared_a_follower_do(const std::string &v) { _on_you_are_declared_a_follower_do = v; }
   void set_on_death_of_a_follower_do(const std::string &v) { _on_death_of_a_follower_do = v; }
   void set_on_you_are_declared_leader_do(const std::string &v) { _on_you_are_declared_leader_do = v; }
-  void set_on_death_of_leader_do(const std::string &v) { _on_death_of_leader_do = v; }
+  void set_on_death_of_my_leader_do(const std::string &v) { _on_death_of_my_leader_do = v; }
   void set_on_lifespan_tick_do(const std::string &v) { _on_lifespan_tick_do = v; }
   void set_on_move_do(const std::string &v) { _on_move_do = v; }
   void set_on_open_do(const std::string &v) { _on_open_do = v; }

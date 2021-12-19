@@ -199,8 +199,8 @@ class Tp:
     def set_on_you_are_declared_leader_do(self, value):
         my.tp_set_on_you_are_declared_leader_do(self, value)
 
-    def set_on_death_of_leader_do(self, value):
-        my.tp_set_on_death_of_leader_do(self, value)
+    def set_on_death_of_my_leader_do(self, value):
+        my.tp_set_on_death_of_my_leader_do(self, value)
 
     def set_on_owner_damage_poison_do(self, value):
         my.tp_set_on_owner_damage_poison_do(self, value)

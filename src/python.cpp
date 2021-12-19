@@ -2823,7 +2823,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_TP_FUNCTION(on_owner_set_do),
     MY_ADD_PYTHON_TP_FUNCTION(on_owner_unset_do),
     MY_ADD_PYTHON_TP_FUNCTION(on_you_are_declared_leader_do),
-    MY_ADD_PYTHON_TP_FUNCTION(on_death_of_leader_do),
+    MY_ADD_PYTHON_TP_FUNCTION(on_death_of_my_leader_do),
     MY_ADD_PYTHON_TP_FUNCTION(on_you_are_declared_a_follower_do),
     MY_ADD_PYTHON_TP_FUNCTION(on_death_of_a_follower_do),
     MY_ADD_PYTHON_TP_FUNCTION(on_owner_damage_poison_do),

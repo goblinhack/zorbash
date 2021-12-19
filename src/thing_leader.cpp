@@ -44,10 +44,10 @@ void Thing::on_you_are_declared_leader(void)
   }
 }
 
-void Thing::on_death_of_leader(void)
+void Thing::on_death_of_my_leader(void)
 {
-  auto on_death_of_leader = on_death_of_leader_do();
-  if (std::empty(on_death_of_leader)) {
+  auto on_death_of_my_leader = on_death_of_my_leader_do();
+  if (std::empty(on_death_of_my_leader)) {
     return;
   }
 
@@ -64,7 +64,7 @@ void Thing::on_death_of_leader(void)
     return;
   }
 
-  auto t = split_tokens(on_death_of_leader, '.');
+  auto t = split_tokens(on_death_of_my_leader, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -81,8 +81,8 @@ void Thing::on_death_of_leader(void)
 
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
-    ERR("Bad on_death_of_leader call [%s] expected mod:function, got %d elems", on_death_of_leader.c_str(),
-        (int) on_death_of_leader.size());
+    ERR("Bad on_death_of_my_leader call [%s] expected mod:function, got %d elems", on_death_of_my_leader.c_str(),
+        (int) on_death_of_my_leader.size());
   }
 }
 
@@ -242,7 +242,7 @@ void Thing::release_followers(void)
   }
 }
 
-void Thing::notify_of_death_of_leader(void)
+void Thing::notify_of_death_of_my_leader(void)
 {
   auto leader = get_leader();
   if (! leader) {
@@ -251,13 +251,13 @@ void Thing::notify_of_death_of_leader(void)
 
   TRACE_AND_INDENT();
   dbg("Leader dead: %s", leader->to_string().c_str());
-  on_death_of_leader();
+  on_death_of_my_leader();
 }
 
 //
 // Detach all followers from their owner
 //
-void Thing::notify_followers_of_death_of_leader(void)
+void Thing::notify_followers_of_death_of_my_leader(void)
 {
   TRACE_AND_INDENT();
 
@@ -274,7 +274,7 @@ void Thing::notify_followers_of_death_of_leader(void)
       auto follower = p.second;
       auto o        = follower->get_leader();
       if (o && (o == this)) {
-        follower->notify_of_death_of_leader();
+        follower->notify_of_death_of_my_leader();
       }
     }
   }

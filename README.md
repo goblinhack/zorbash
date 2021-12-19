@@ -4,6 +4,7 @@
 <!--                                                                                                                                              -->
 <!-- Next todo                                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
+<!-- - goblin group distance                                                                                                                                    -->
 <!-- - pirate goblin random carry of gold                                                                                                                       -->
 <!-- - goblin mage                                                                                                                                -->
 <!-- - goblin totem                                           -->

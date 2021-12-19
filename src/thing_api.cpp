@@ -6236,10 +6236,10 @@ const std::string &Thing::on_you_are_declared_leader_do(void)
   return (tp()->on_you_are_declared_leader_do());
 }
 
-const std::string &Thing::on_death_of_leader_do(void)
+const std::string &Thing::on_death_of_my_leader_do(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->on_death_of_leader_do());
+  return (tp()->on_death_of_my_leader_do());
 }
 
 const std::string &Thing::on_owner_damage_poison_do(void)

@@ -278,7 +278,7 @@ void Thing::killed(Thingp defeater, const char *reason)
     //
     // If this is the leader, the followers may react
     //
-    notify_followers_of_death_of_leader();
+    notify_followers_of_death_of_my_leader();
 
     //
     // Tell the leader I am dead
