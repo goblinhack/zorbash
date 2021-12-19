@@ -351,6 +351,15 @@ int Thing::spawn_randomly_in_radius_range(const std::string &what, int amount, u
         continue;
       }
 
+      //
+      // For pack spawning make sure all followers can see each other
+      //
+      if (is_able_to_follow()) {
+        if (! level->can_see_unimpeded(spawn_at.x, spawn_at.y, curr_at.x, curr_at.y)) {
+          continue;
+        }
+      }
+
       auto c = level->thing_new(what, spawn_at);
       c->inherit_from(this);
       c->set_ts_anim_delay_end(time_get_time_ms_cached() + dist * 100);
