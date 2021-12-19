@@ -1561,8 +1561,8 @@ public:
   void destroyed(void);
   void destroy_minions(Thingp defeater);
   void destroy_spawned(Thingp defeater);
-  void last_rites(Thingp defeater, const char *reason);
-  void last_rites(Thingp defeater, const std::string &reason);
+  void killed(Thingp defeater, const char *reason);
+  void killed(Thingp defeater, const std::string &reason);
   void die(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
   void die_(const char *fmt, va_list args); // compile error without
   void dir_set_bl(void);

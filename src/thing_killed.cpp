@@ -19,16 +19,17 @@
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"
 
-void Thing::last_rites(Thingp defeater, const std::string &reason)
+void Thing::killed(Thingp defeater, const std::string &reason)
 {
   TRACE_AND_INDENT();
-  last_rites(defeater, reason.c_str());
+  killed(defeater, reason.c_str());
 }
 
 //
-// Lower level function than dead. Adds the thing to gc.
+// Things are first dead, then killed, then destroyed. At the end of this we
+// will add the thing to the gc (if it is not a corpse or resurrectable).
 //
-void Thing::last_rites(Thingp defeater, const char *reason)
+void Thing::killed(Thingp defeater, const char *reason)
 {
   //
   // Check we're not in a death loop
@@ -38,8 +39,12 @@ void Thing::last_rites(Thingp defeater, const char *reason)
   }
   is_dying = true;
 
-  dbg3("Destroy");
   TRACE_AND_INDENT();
+  if (is_loggable()) {
+    dbg("Killed");
+  }
+  TRACE_AND_INDENT();
+
   ///////////////////////////////////////////////////////////////
   // WARNING: defeater can be nullptr
   ///////////////////////////////////////////////////////////////
@@ -49,11 +54,14 @@ void Thing::last_rites(Thingp defeater, const char *reason)
   // If already dead, do nothing
   //
   if (is_dead) {
+    dbg("Already dead");
+
     //
     // Unless it is already a corpse. In such a case, if a corpse is
     // eaten we want to remove it.
     //
     if (! is_corpse_currently) {
+      dbg("Already a corpse, can't die again");
       return;
     }
 
@@ -61,6 +69,7 @@ void Thing::last_rites(Thingp defeater, const char *reason)
     // You only die once
     //
     if (is_player()) {
+      dbg("Player only dies once");
       return;
     }
   }

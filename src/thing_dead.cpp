@@ -20,7 +20,7 @@ void Thing::dead_(Thingp defeater, const char *fmt, va_list args)
   verify(MTYPE_THING, this);
   char reason[ MAXSTR ];
   vsnprintf(reason, MAXSTR, fmt, args);
-  last_rites(defeater, reason);
+  killed(defeater, reason);
 }
 
 void Thing::dead(Thingp defeater, const char *fmt, ...)
@@ -39,19 +39,19 @@ void Thing::dead_(const char *fmt, va_list args)
   verify(MTYPE_THING, this);
   char reason[ MAXSTR ];
   vsnprintf(reason, MAXSTR, fmt, args);
-  last_rites(nullptr, reason);
+  killed(nullptr, reason);
 }
 
 void Thing::dead(Thingp defeater, std::string &reason)
 {
   verify(MTYPE_THING, this);
-  last_rites(defeater, reason);
+  killed(defeater, reason);
 }
 
 void Thing::dead(const std::string &reason)
 {
   verify(MTYPE_THING, this);
-  last_rites(nullptr, reason);
+  killed(nullptr, reason);
 }
 
 void Thing::dead(const char *fmt, ...)
@@ -77,7 +77,7 @@ void Thing::dead_scheduled_(const char *fmt, va_list args)
 void Thing::dead_scheduled(const std::string &reason)
 {
   verify(MTYPE_THING, this);
-  last_rites(nullptr, reason);
+  killed(nullptr, reason);
 }
 
 void Thing::dead_scheduled(const char *fmt, ...)
