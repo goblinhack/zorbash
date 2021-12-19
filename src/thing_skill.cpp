@@ -18,7 +18,7 @@
 bool Thing::skill_add(Thingp what)
 {
   TRACE_AND_INDENT();
-  dbg("Try to add skill %s", what->to_string().c_str());
+  dbg("Try to add skill %s", what->to_short_string().c_str());
   TRACE_AND_INDENT();
   if (! maybe_itemp()) {
     dbg("No; not a monst");
@@ -52,7 +52,7 @@ bool Thing::skill_add(Thingp what)
   what->set_owner(this);
   what->hide();
 
-  dbg("Add skill %s", what->to_string().c_str());
+  dbg("Add skill %s", what->to_short_string().c_str());
 
   if (is_player()) {
     wid_skillbox_init();
@@ -64,11 +64,11 @@ bool Thing::skill_add(Thingp what)
 bool Thing::skill_remove(Thingp what)
 {
   TRACE_AND_INDENT();
-  dbg("Removing skill %s", what->to_string().c_str());
+  dbg("Removing skill %s", what->to_short_string().c_str());
   TRACE_AND_INDENT();
   auto existing_owner = what->get_immediate_owner();
   if (existing_owner != this) {
-    err("Attempt to remove skill %s which is not owned", what->to_string().c_str());
+    err("Attempt to remove skill %s which is not owned", what->to_short_string().c_str());
     return false;
   }
 
@@ -83,7 +83,7 @@ bool Thing::skill_remove(Thingp what)
   get_itemp()->skills.remove(what->id);
   game->request_remake_skillbox = true;
 
-  dbg("Removed %s", what->to_string().c_str());
+  dbg("Removed %s", what->to_short_string().c_str());
   return true;
 }
 
@@ -107,7 +107,7 @@ void Thing::skill_remove_all(void)
 bool Thing::skill_use(Thingp what)
 {
   TRACE_AND_INDENT();
-  dbg("Try to use skill %s", what->to_string().c_str());
+  dbg("Try to use skill %s", what->to_short_string().c_str());
   used(what, this, false /* remove after use */);
   return true;
 }

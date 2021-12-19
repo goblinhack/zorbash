@@ -2,21 +2,18 @@ import my
 import tp
 
 
-def on_leader_set(me, x, y):
+def on_you_are_declared_leader(me, x, y):
     my.thing_polymorph(me, "goblin_captain")
 
 
-def on_leader_unset(me, x, y):
+def on_you_are_declared_a_follower(me, leader, x, y):
+    # my.thing_polymorph(me, "goblin_soldier")
+    return
+
+
+def on_death_of_leader(me, x, y):
     if not my.thing_is_dead_or_dying(me):
         my.topcon("The goblin soldier cries out in rage!")
-
-
-def on_follower_set(me, leader, x, y):
-    return
-
-
-def on_follower_unset(me, leader, x, y):
-    return
 
 
 def on_you_bite_attack(me, x, y):
@@ -123,10 +120,9 @@ def tp_init(name, text_name):
     mytp.set_normal_placement_rules(True)
     mytp.set_on_death_do("me.on_death()")
     mytp.set_on_death_drop_all_items(True)
-    mytp.set_on_follower_set_do("me.on_follower_set()")
-    mytp.set_on_follower_unset_do("me.on_follower_unset()")
-    mytp.set_on_leader_set_do("me.on_leader_set()")
-    mytp.set_on_leader_unset_do("me.on_leader_unset()")
+    mytp.set_on_you_are_declared_a_follower_do("me.on_you_are_declared_a_follower()")
+    mytp.set_on_you_are_declared_leader_do("me.on_you_are_declared_leader()")
+    mytp.set_on_death_of_leader_do("me.on_death_of_leader()")
     mytp.set_on_you_are_hit_but_still_alive_do("me.on_you_are_hit_but_still_alive()")
     mytp.set_on_you_bite_attack_do("me.on_you_bite_attack()")
     mytp.set_on_you_miss_do("me.on_you_miss_do()")

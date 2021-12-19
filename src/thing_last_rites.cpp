@@ -186,188 +186,200 @@ void Thing::last_rites(Thingp defeater, const char *reason)
     }
   }
 
-  if (is_bleeder()) {
-    int splatters = pcg_random_range(2, 10);
-    for (int splatter = 0; splatter < splatters; splatter++) {
-      auto tpp = tp_random_blood();
-      (void) level->thing_new(tpp, curr_at);
-      if (unlikely(! tpp)) {
-        err("Could not place blood");
-        break;
-      }
-    }
-  }
-
-  //
-  // Add to the hiscore table?
-  //
-  if (is_player()) {
-    //
-    // Poor player
-    //
-    if (game->robot_mode) {
-      if (defeater && defeater->is_acid()) {
-        TOPCON("%%fg=red$RIP: Robot is dissolved to death %s.%%fg=reset$", reason);
-      } else if (defeater && defeater->is_fire()) {
-        TOPCON("%%fg=red$RIP: Robot is burnt to death %s.%%fg=reset$", reason);
-      } else if (defeater && defeater->is_water()) {
-        TOPCON("%%fg=red$RIP: Robot is drowned %s.%%fg=reset$", reason);
-      } else if (defeater && defeater->is_necrotic_danger_level()) {
-        TOPCON("%%fg=red$RIP: Robot is rotted to death %s.%%fg=reset$", reason);
-      } else if (defeater && defeater->is_engulfer()) {
-        TOPCON("%%fg=red$RIP: Robot is consumed %s.%%fg=reset$", reason);
-      } else if (defeater && defeater->is_monst()) {
-        TOPCON("%%fg=red$RIP: Robot is defeated %s.%%fg=reset$", reason);
-      } else {
-        TOPCON("%%fg=red$RIP: Robot is deactivated %s.%%fg=reset$", reason);
-      }
-    } else {
-      if (defeater && defeater->is_acid()) {
-        TOPCON("%%fg=red$RIP: You are dissolved to death %s.%%fg=reset$", reason);
-      } else if (defeater && defeater->is_fire()) {
-        TOPCON("%%fg=red$RIP: You are burnt to death %s.%%fg=reset$", reason);
-      } else if (defeater && defeater->is_water()) {
-        TOPCON("%%fg=red$RIP: You are drowned %s.", reason);
-      } else if (defeater && defeater->is_necrotic_danger_level()) {
-        TOPCON("%%fg=red$RIP: You are rotted to death %s.%%fg=reset$", reason);
-      } else if (defeater && defeater->is_engulfer()) {
-        TOPCON("%%fg=red$RIP: You are consumed %s.%%fg=reset$", reason);
-      } else if (defeater && defeater->is_monst()) {
-        TOPCON("%%fg=red$RIP: You are defeated %s.%%fg=reset$", reason);
-      } else {
-        TOPCON("%%fg=red$RIP: You are killed %s.%%fg=reset$", reason);
-      }
-    }
-  }
-
-  {
-    auto on_death = on_death_do();
-    if (! std::empty(on_death)) {
-      auto t = split_tokens(on_death, '.');
-      if (t.size() == 2) {
-        auto        mod   = t[ 0 ];
-        auto        fn    = t[ 1 ];
-        std::size_t found = fn.find("()");
-        if (found != std::string::npos) {
-          fn = fn.replace(found, 2, "");
-        }
-
-        if (mod == "me") {
-          mod = name();
-        }
-
-        dbg("Call %s.%s(%s)", mod.c_str(), fn.c_str(), to_short_string().c_str());
-
-        py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
-      } else {
-        ERR("Bad on_death call [%s] expected mod:function, got %d elems", on_death.c_str(), (int) on_death.size());
-      }
-    }
-  }
-
-  remove_leader();
-  release_followers();
-
-  //
-  // Add to the hiscore table?
-  //
-  if (is_player()) {
-    //
-    // Poor player
-    //
-    if (! get_score()) {
-      incr_score(1);
-    }
-
-    if (game->config.hiscores.is_new_hiscore(this)) {
-      if (game->robot_mode) {
-        TOPCON("%%fg=yellow$New robo high score, %s place!%%fg=reset$", game->config.hiscores.place_str(this));
-      } else {
-        TOPCON("%%fg=yellow$New high score, %s place!%%fg=reset$", game->config.hiscores.place_str(this));
-      }
-      game->config.hiscores.add_new_hiscore(this, title(), reason);
-    }
-
-    level->map_follow_player = false;
-    game->dead_select(reason);
-  } else if (is_loggable()) {
-    dbg("%s defeated dead, %s", The_no_dying.c_str(), reason);
-    if (defeater && (defeater != this)) {
-      if (defeater->is_player()) {
-        if (is_monst()) {
-          if (is_undead()) {
-            TOPCON("%%fg=white$%s is vanquished, %s.%%fg=reset$", The_no_dying.c_str(), reason);
-          } else {
-            TOPCON("%%fg=white$%s is defeated, %s.%%fg=reset$", The_no_dying.c_str(), reason);
-          }
-        } else if (on_death_is_open()) {
-          //
-          // Already logged
-          //
-        } else {
-          TOPCON("%s is destroyed %s.", The_no_dying.c_str(), reason);
-        }
-
-        defeater->score_add(this);
-      } else if (is_monst() && (get_distance_to_player() >= DMAP_IS_PASSABLE)) {
-        if (is_undead()) {
-          TOPCON("You hear a distant moan...");
-        } else if (is_jelly()) {
-          TOPCON("You hear a distant splat...");
-        } else if (is_humanoid()) {
-          TOPCON("You hear distant cursing...");
-        } else if (is_meat()) {
-          TOPCON("You hear the distant crunching of bones...");
-        } else {
-          TOPCON("You hear a distant shriek...");
-        }
-      }
-    }
-  }
-
-  is_dying = false;
-
-  if (is_corpse_currently) {
-    //
-    // Already a corpse
-    //
-    dbg("Already a corpse, clean it up");
-    if (! get_tick_resurrect_when()) {
-      if (is_bony()) {
-        dbg("Can place final bones");
-        auto tpp = tp_random_bones();
-        if (tpp) {
-          (void) level->thing_new(tpp, curr_at);
-        }
-      }
-    }
-  } else if (is_corpse_on_death()) {
-    //
-    // Leaves a corpse
-    //
-    dbg("Defeated, leaves corpse");
-    level->set_is_corpse(curr_at.x, curr_at.y);
-
-    if (i_set_is_monst) {
-      i_set_is_monst = false;
-      level->unset_is_monst(curr_at.x, curr_at.y);
-    }
-    return;
-  }
-
-  //
-  // If this was blocking the way to the player, update that now
-  //
   if (! level->is_being_destroyed) {
+    if (is_bleeder()) {
+      int splatters = pcg_random_range(2, 10);
+      for (int splatter = 0; splatter < splatters; splatter++) {
+        auto tpp = tp_random_blood();
+        (void) level->thing_new(tpp, curr_at);
+        if (unlikely(! tpp)) {
+          err("Could not place blood");
+          break;
+        }
+      }
+    }
+
+    //
+    // Add to the hiscore table?
+    //
+    if (is_player()) {
+      //
+      // Poor player
+      //
+      if (game->robot_mode) {
+        if (defeater && defeater->is_acid()) {
+          TOPCON("%%fg=red$RIP: Robot is dissolved to death %s.%%fg=reset$", reason);
+        } else if (defeater && defeater->is_fire()) {
+          TOPCON("%%fg=red$RIP: Robot is burnt to death %s.%%fg=reset$", reason);
+        } else if (defeater && defeater->is_water()) {
+          TOPCON("%%fg=red$RIP: Robot is drowned %s.%%fg=reset$", reason);
+        } else if (defeater && defeater->is_necrotic_danger_level()) {
+          TOPCON("%%fg=red$RIP: Robot is rotted to death %s.%%fg=reset$", reason);
+        } else if (defeater && defeater->is_engulfer()) {
+          TOPCON("%%fg=red$RIP: Robot is consumed %s.%%fg=reset$", reason);
+        } else if (defeater && defeater->is_monst()) {
+          TOPCON("%%fg=red$RIP: Robot is defeated %s.%%fg=reset$", reason);
+        } else {
+          TOPCON("%%fg=red$RIP: Robot is deactivated %s.%%fg=reset$", reason);
+        }
+      } else {
+        if (defeater && defeater->is_acid()) {
+          TOPCON("%%fg=red$RIP: You are dissolved to death %s.%%fg=reset$", reason);
+        } else if (defeater && defeater->is_fire()) {
+          TOPCON("%%fg=red$RIP: You are burnt to death %s.%%fg=reset$", reason);
+        } else if (defeater && defeater->is_water()) {
+          TOPCON("%%fg=red$RIP: You are drowned %s.", reason);
+        } else if (defeater && defeater->is_necrotic_danger_level()) {
+          TOPCON("%%fg=red$RIP: You are rotted to death %s.%%fg=reset$", reason);
+        } else if (defeater && defeater->is_engulfer()) {
+          TOPCON("%%fg=red$RIP: You are consumed %s.%%fg=reset$", reason);
+        } else if (defeater && defeater->is_monst()) {
+          TOPCON("%%fg=red$RIP: You are defeated %s.%%fg=reset$", reason);
+        } else {
+          TOPCON("%%fg=red$RIP: You are killed %s.%%fg=reset$", reason);
+        }
+      }
+    }
+
+    {
+      auto on_death = on_death_do();
+      if (! std::empty(on_death)) {
+        auto t = split_tokens(on_death, '.');
+        if (t.size() == 2) {
+          auto        mod   = t[ 0 ];
+          auto        fn    = t[ 1 ];
+          std::size_t found = fn.find("()");
+          if (found != std::string::npos) {
+            fn = fn.replace(found, 2, "");
+          }
+
+          if (mod == "me") {
+            mod = name();
+          }
+
+          dbg("Call %s.%s(%s)", mod.c_str(), fn.c_str(), to_short_string().c_str());
+
+          py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
+        } else {
+          ERR("Bad on_death call [%s] expected mod:function, got %d elems", on_death.c_str(), (int) on_death.size());
+        }
+      }
+    }
+
+    //
+    // If this is the leader, the followers may react
+    //
+    notify_followers_of_death_of_leader();
+
+    //
+    // Tell the leader I am dead
+    //
+    auto leader = get_leader();
+    if (leader) {
+      on_death_of_a_follower(leader);
+    }
+
+    //
+    // Add to the hiscore table?
+    //
+    if (is_player()) {
+      //
+      // Poor player
+      //
+      if (! get_score()) {
+        incr_score(1);
+      }
+
+      if (game->config.hiscores.is_new_hiscore(this)) {
+        if (game->robot_mode) {
+          TOPCON("%%fg=yellow$New robo high score, %s place!%%fg=reset$", game->config.hiscores.place_str(this));
+        } else {
+          TOPCON("%%fg=yellow$New high score, %s place!%%fg=reset$", game->config.hiscores.place_str(this));
+        }
+        game->config.hiscores.add_new_hiscore(this, title(), reason);
+      }
+
+      level->map_follow_player = false;
+      game->dead_select(reason);
+    } else if (is_loggable()) {
+      dbg("%s killed, %s", The_no_dying.c_str(), reason);
+      if (defeater && (defeater != this)) {
+        if (defeater->is_player()) {
+          if (is_monst()) {
+            if (is_undead()) {
+              TOPCON("%%fg=white$%s is vanquished, %s.%%fg=reset$", The_no_dying.c_str(), reason);
+            } else {
+              TOPCON("%%fg=white$%s is defeated, %s.%%fg=reset$", The_no_dying.c_str(), reason);
+            }
+          } else if (on_death_is_open()) {
+            //
+            // Already logged
+            //
+          } else {
+            TOPCON("%s is destroyed %s.", The_no_dying.c_str(), reason);
+          }
+
+          defeater->score_add(this);
+        } else if (is_monst() && (get_distance_to_player() >= DMAP_IS_PASSABLE)) {
+          if (is_undead()) {
+            TOPCON("You hear a distant moan...");
+          } else if (is_jelly()) {
+            TOPCON("You hear a distant splat...");
+          } else if (is_humanoid()) {
+            TOPCON("You hear distant cursing...");
+          } else if (is_meat()) {
+            TOPCON("You hear the distant crunching of bones...");
+          } else {
+            TOPCON("You hear a distant shriek...");
+          }
+        }
+      }
+    }
+
+    if (is_corpse_currently) {
+      //
+      // Already a corpse
+      //
+      dbg("Already a corpse, clean it up");
+      if (! get_tick_resurrect_when()) {
+        if (is_bony()) {
+          dbg("Can place final bones");
+          auto tpp = tp_random_bones();
+          if (tpp) {
+            (void) level->thing_new(tpp, curr_at);
+          }
+        }
+      }
+    } else if (is_corpse_on_death()) {
+      //
+      // Leaves a corpse
+      //
+      if (! level->is_being_destroyed) {
+        dbg("Defeated, leaves corpse");
+        level->set_is_corpse(curr_at.x, curr_at.y);
+
+        if (i_set_is_monst) {
+          i_set_is_monst = false;
+          level->unset_is_monst(curr_at.x, curr_at.y);
+        }
+        return;
+      }
+    }
+
+    //
+    // If this was blocking the way to the player, update that now
+    //
     if (is_obs_wall_or_door()) {
       level->request_dmap_to_player_update = true;
     }
   }
 
+  is_dying = false;
+
   level_pop();
 
   if (is_loggable()) {
-    dbg("Defeated, need to garbage collect");
+    dbg("Need to garbage collect");
   }
 
   gc();

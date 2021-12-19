@@ -696,13 +696,17 @@ static void wid_topcon_log_(std::wstring s)
   //
   wid_topcon_flush();
 
+  auto curr_msg = wid_get_text(wid_get_head(wid_topcon_input_line));
+
   if (last_msg == s) {
     s = last_msg + L" (x" + std::to_wstring(last_msg_count + 2) + L")";
     last_msg_count++;
     wid_topcon_replace(wid_topcon_input_line, s);
-  } else if (! last_msg.empty() && length_without_format(last_msg) + length_without_format(s) + 1 < UI_TOPCON_WIDTH) {
-    last_msg = last_msg + L" " + s;
-    wid_topcon_replace(wid_topcon_input_line, last_msg);
+  } else if (! curr_msg.empty() && length_without_format(curr_msg) + length_without_format(s) + 1 < UI_TOPCON_WIDTH) {
+    curr_msg = curr_msg + L" " + s;
+    wid_topcon_replace(wid_topcon_input_line, curr_msg);
+    last_msg       = L"";
+    last_msg_count = 0;
   } else {
     last_msg       = s;
     last_msg_count = 0;

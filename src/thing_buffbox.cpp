@@ -18,7 +18,7 @@
 bool Thing::buffbox_id_insert(Thingp what)
 {
   TRACE_AND_INDENT();
-  dbg("buffbox insert %s", what->to_string().c_str());
+  dbg("buffbox insert %s", what->to_short_string().c_str());
   TRACE_AND_INDENT();
   auto player = level->player;
   if (! player) {
@@ -82,7 +82,7 @@ bool Thing::buffbox_id_insert(Thingp what)
 bool Thing::buffbox_id_remove(Thingp what)
 {
   TRACE_AND_INDENT();
-  dbg("buffbox remove %s", what->to_string().c_str());
+  dbg("buffbox remove %s", what->to_short_string().c_str());
   TRACE_AND_INDENT();
   auto player = level->player;
   if (! player) {

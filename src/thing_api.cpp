@@ -6218,28 +6218,28 @@ const std::string &Thing::on_owner_unset_do(void)
   return (tp()->on_owner_unset_do());
 }
 
-const std::string &Thing::on_follower_set_do(void)
+const std::string &Thing::on_you_are_declared_a_follower_do(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->on_follower_set_do());
+  return (tp()->on_you_are_declared_a_follower_do());
 }
 
-const std::string &Thing::on_follower_unset_do(void)
+const std::string &Thing::on_death_of_a_follower_do(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->on_follower_unset_do());
+  return (tp()->on_death_of_a_follower_do());
 }
 
-const std::string &Thing::on_leader_set_do(void)
+const std::string &Thing::on_you_are_declared_leader_do(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->on_leader_set_do());
+  return (tp()->on_you_are_declared_leader_do());
 }
 
-const std::string &Thing::on_leader_unset_do(void)
+const std::string &Thing::on_death_of_leader_do(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->on_leader_unset_do());
+  return (tp()->on_death_of_leader_do());
 }
 
 const std::string &Thing::on_owner_damage_poison_do(void)

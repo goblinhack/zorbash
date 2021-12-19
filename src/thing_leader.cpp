@@ -15,14 +15,14 @@
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"
 
-void Thing::on_leader_set(void)
+void Thing::on_you_are_declared_leader(void)
 {
-  auto on_leader_set = on_leader_set_do();
-  if (std::empty(on_leader_set)) {
+  auto on_you_are_declared_leader = on_you_are_declared_leader_do();
+  if (std::empty(on_you_are_declared_leader)) {
     return;
   }
 
-  auto t = split_tokens(on_leader_set, '.');
+  auto t = split_tokens(on_you_are_declared_leader, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -39,15 +39,15 @@ void Thing::on_leader_set(void)
 
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
-    ERR("Bad on_leader_set call [%s] expected mod:function, got %d elems", on_leader_set.c_str(),
-        (int) on_leader_set.size());
+    ERR("Bad on_you_are_declared_leader call [%s] expected mod:function, got %d elems",
+        on_you_are_declared_leader.c_str(), (int) on_you_are_declared_leader.size());
   }
 }
 
-void Thing::on_leader_unset(void)
+void Thing::on_death_of_leader(void)
 {
-  auto on_leader_unset = on_leader_unset_do();
-  if (std::empty(on_leader_unset)) {
+  auto on_death_of_leader = on_death_of_leader_do();
+  if (std::empty(on_death_of_leader)) {
     return;
   }
 
@@ -55,16 +55,16 @@ void Thing::on_leader_unset(void)
   // Don't call this on death of the leader to avoid spurious post RIP messages
   //
   if (level->is_being_destroyed) {
-    dbg("Do not call unset, level being destroyed");
+    dbg("Do not call death, level being destroyed");
     return;
   }
 
   if (is_dying || is_dying) {
-    dbg("Do not call unset, leader is dying");
+    dbg("Do not call death, leader is dying");
     return;
   }
 
-  auto t = split_tokens(on_leader_unset, '.');
+  auto t = split_tokens(on_death_of_leader, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -81,8 +81,8 @@ void Thing::on_leader_unset(void)
 
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
-    ERR("Bad on_leader_unset call [%s] expected mod:function, got %d elems", on_leader_unset.c_str(),
-        (int) on_leader_unset.size());
+    ERR("Bad on_death_of_leader call [%s] expected mod:function, got %d elems", on_death_of_leader.c_str(),
+        (int) on_death_of_leader.size());
   }
 }
 
@@ -188,16 +188,18 @@ void Thing::set_leader(Thingp leader)
     set_leader_id(leader->id);
     leader->incr_follower_count();
     if (leader->get_follower_count() == 1) {
-      leader->on_leader_set();
+      leader->on_you_are_declared_leader();
     }
+    dbg("Leader set");
   } else {
     set_leader_id(NoThingId);
     if (old_leader) {
       old_leader->decr_follower_count();
     }
+    dbg("Leader unset");
   }
 
-  on_follower_set(leader);
+  on_you_are_declared_a_follower(leader);
 }
 
 void Thing::remove_leader(void)
@@ -209,45 +211,9 @@ void Thing::remove_leader(void)
 
   TRACE_AND_INDENT();
   dbg("Remove leader %s", old_leader->to_string().c_str());
-  on_follower_unset(old_leader);
 
   set_leader_id(NoThingId);
   old_leader->decr_follower_count();
-  if (old_leader->get_follower_count() == 0) {
-    old_leader->on_leader_unset();
-  }
-}
-
-//
-// Defeat and detach all followers from their owner
-//
-void Thing::destroy_followers(Thingp defeater)
-{
-  TRACE_AND_INDENT();
-
-  //
-  // Warning defeater can be nullptr - e.g. when a generator falls to
-  // a new level
-  //
-  if (! get_follower_count()) {
-    return;
-  }
-
-  //
-  // Slow, but not used too often
-  //
-  FOR_ALL_THING_GROUPS(group)
-  {
-    for (auto p : level->all_things[ group ]) {
-      auto follower = p.second;
-      auto o        = follower->get_leader();
-      if (o && (o == this)) {
-        follower->remove_leader();
-        follower->is_resurrection_blocked = true;
-        follower->dead(defeater, "its leader died");
-      }
-    }
-  }
 }
 
 //
@@ -271,6 +237,44 @@ void Thing::release_followers(void)
       auto o        = follower->get_leader();
       if (o && (o == this)) {
         follower->remove_leader();
+      }
+    }
+  }
+}
+
+void Thing::notify_of_death_of_leader(void)
+{
+  auto leader = get_leader();
+  if (! leader) {
+    return;
+  }
+
+  TRACE_AND_INDENT();
+  dbg("Leader dead: %s", leader->to_string().c_str());
+  on_death_of_leader();
+}
+
+//
+// Detach all followers from their owner
+//
+void Thing::notify_followers_of_death_of_leader(void)
+{
+  TRACE_AND_INDENT();
+
+  if (! get_follower_count()) {
+    return;
+  }
+
+  //
+  // Slow, but not used too often
+  //
+  FOR_ALL_THING_GROUPS(group)
+  {
+    for (auto p : level->all_things[ group ]) {
+      auto follower = p.second;
+      auto o        = follower->get_leader();
+      if (o && (o == this)) {
+        follower->notify_of_death_of_leader();
       }
     }
   }
@@ -365,9 +369,6 @@ bool Thing::same_leader(Thingp it)
     me = this;
   }
 
-  me->con("XXX me");
-  it->con("XXX it");
-
   if (its_owner) {
     it = its_owner;
   }
@@ -379,7 +380,7 @@ bool Thing::same_leader(Thingp it)
   Thingp my_leader  = me->get_leader();
   Thingp its_leader = it->get_leader();
 
-#if 1
+#if 0
   me->con("XXX me");
   it->con("XXX it");
   if (my_leader) {

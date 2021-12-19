@@ -18,7 +18,7 @@
 bool Thing::buff_add(Thingp what)
 {
   TRACE_AND_INDENT();
-  dbg("Try to add buff %s", what->to_string().c_str());
+  dbg("Try to add buff %s", what->to_short_string().c_str());
   TRACE_AND_INDENT();
 
   if (! maybe_itemp()) {
@@ -53,7 +53,7 @@ bool Thing::buff_add(Thingp what)
   what->set_owner(this);
   what->hide();
 
-  dbg("Add buff %s", what->to_string().c_str());
+  dbg("Add buff %s", what->to_short_string().c_str());
 
   if (is_player()) {
     wid_buffbox_init();
@@ -65,11 +65,11 @@ bool Thing::buff_add(Thingp what)
 bool Thing::buff_remove(Thingp what)
 {
   TRACE_AND_INDENT();
-  dbg("Removing buff %s", what->to_string().c_str());
+  dbg("Removing buff %s", what->to_short_string().c_str());
   TRACE_AND_INDENT();
   auto existing_owner = what->get_immediate_owner();
   if (existing_owner != this) {
-    err("Attempt to remove buff %s which is not owned", what->to_string().c_str());
+    err("Attempt to remove buff %s which is not owned", what->to_short_string().c_str());
     return false;
   }
 
@@ -81,7 +81,7 @@ bool Thing::buff_remove(Thingp what)
   get_itemp()->buffs.remove(what->id);
   game->request_remake_buffbox = true;
 
-  dbg("Removed %s", what->to_string().c_str());
+  dbg("Removed %s", what->to_short_string().c_str());
   return true;
 }
 
@@ -105,7 +105,7 @@ void Thing::buff_remove_all(void)
 bool Thing::buff_use(Thingp what)
 {
   TRACE_AND_INDENT();
-  dbg("Try to use buff %s", what->to_string().c_str());
+  dbg("Try to use buff %s", what->to_short_string().c_str());
   used(what, this, false /* remove after use */);
   return true;
 }

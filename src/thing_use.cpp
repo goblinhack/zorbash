@@ -41,7 +41,7 @@ void Thing::on_use(Thingp what)
       mod = what->name();
     }
 
-    dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), what->to_string().c_str());
+    dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), what->to_short_string().c_str());
 
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, 0U, (unsigned int) curr_at.x,
                     (unsigned int) curr_at.y);
@@ -79,7 +79,7 @@ void Thing::on_use(Thingp what, Thingp target)
         mod = what->name();
       }
 
-      dbg("Call %s.%s(%s, %s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), what->to_string().c_str(),
+      dbg("Call %s.%s(%s, %s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), what->to_short_string().c_str(),
           target->to_string().c_str());
 
       py_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, target->id.id, (unsigned int) curr_at.x,
@@ -116,7 +116,7 @@ void Thing::on_final_use(Thingp what)
       mod = what->name();
     }
 
-    dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), what->to_string().c_str());
+    dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), what->to_short_string().c_str());
 
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, 0U, (unsigned int) curr_at.x,
                     (unsigned int) curr_at.y);
@@ -155,7 +155,7 @@ void Thing::on_final_use(Thingp what, Thingp target)
         mod = what->name();
       }
 
-      dbg("Call %s.%s(%s, %s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), what->to_string().c_str(),
+      dbg("Call %s.%s(%s, %s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), what->to_short_string().c_str(),
           target->to_string().c_str());
 
       py_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, target->id.id, (unsigned int) curr_at.x,
@@ -176,7 +176,7 @@ void Thing::used(Thingp what, Thingp target, bool remove_after_use)
   }
 
   TRACE_AND_INDENT();
-  dbg("Attempt to use %s", what->to_string().c_str());
+  dbg("Attempt to use %s", what->to_short_string().c_str());
 
   if (target) {
     on_use(what, target);
@@ -186,7 +186,7 @@ void Thing::used(Thingp what, Thingp target, bool remove_after_use)
 
   auto existing_owner = what->get_top_owner();
   if (existing_owner != this) {
-    err("Attempt to use %s which is not carried", what->to_string().c_str());
+    err("Attempt to use %s which is not carried", what->to_short_string().c_str());
     return;
   }
 
@@ -196,7 +196,7 @@ void Thing::used(Thingp what, Thingp target, bool remove_after_use)
   if (what->get_charge_count()) {
     what->decr_charge_count();
     if (what->get_charge_count()) {
-      dbg("Used %s (has %d charges left)", what->to_string().c_str(), what->get_charge_count());
+      dbg("Used %s (has %d charges left)", what->to_short_string().c_str(), what->get_charge_count());
       game->request_remake_rightbar = true;
       return;
     }
@@ -208,7 +208,7 @@ void Thing::used(Thingp what, Thingp target, bool remove_after_use)
     on_final_use(what);
   }
 
-  dbg("Used %s", what->to_string().c_str());
+  dbg("Used %s", what->to_short_string().c_str());
 
   //
   // Remove the item from the inventory, possibly throwing it at the
@@ -252,35 +252,35 @@ bool Thing::use(Thingp what, int preferred_equip)
   }
 
   TRACE_AND_INDENT();
-  dbg("Trying to use: %s", what->to_string().c_str());
+  dbg("Trying to use: %s", what->to_short_string().c_str());
   TRACE_AND_INDENT();
 
   //
   // If dropping an in transit item into an eqiup slot, then the owner is not set
   //
   if (what->get_top_owner() == nullptr) {
-    dbg("Need to set owner for: %s", what->to_string().c_str());
+    dbg("Need to set owner for: %s", what->to_short_string().c_str());
     what->set_owner(this);
   }
 
   if (what->is_skill()) {
-    dbg("Trying to use skill: %s", what->to_string().c_str());
+    dbg("Trying to use skill: %s", what->to_short_string().c_str());
     TRACE_AND_INDENT();
     skill_use(what);
   } else if (what->is_enchantstone()) {
-    dbg("Trying to use enchantstone: %s", what->to_string().c_str());
+    dbg("Trying to use enchantstone: %s", what->to_short_string().c_str());
     TRACE_AND_INDENT();
     if (is_player()) {
       game->wid_enchant_an_item();
     }
   } else if (what->is_skillstone()) {
-    dbg("Trying to use skillstone: %s", what->to_string().c_str());
+    dbg("Trying to use skillstone: %s", what->to_short_string().c_str());
     TRACE_AND_INDENT();
     if (is_player()) {
       game->wid_skill_choose();
     }
   } else if (what->is_weapon()) {
-    dbg("Trying to use weapon: %s", what->to_string().c_str());
+    dbg("Trying to use weapon: %s", what->to_short_string().c_str());
     TRACE_AND_INDENT();
     if (preferred_equip == -1) {
       preferred_equip = MONST_EQUIP_WEAPON;
@@ -292,28 +292,28 @@ bool Thing::use(Thingp what, int preferred_equip)
       }
     }
   } else if (what->is_auto_throw()) {
-    dbg("Trying to throw item: %s", what->to_string().c_str());
+    dbg("Trying to throw item: %s", what->to_short_string().c_str());
     TRACE_AND_INDENT();
     throw_item_choose_target(what);
     if (is_player()) {
       level->describe(what);
     }
   } else if (what->is_target_auto_select()) {
-    dbg("Trying to choose target: %s", what->to_string().c_str());
+    dbg("Trying to choose target: %s", what->to_short_string().c_str());
     TRACE_AND_INDENT();
     fire_at_and_choose_target(what);
     if (is_player()) {
       level->describe(what);
     }
   } else if (what->is_auto_use()) {
-    dbg("Trying to auto use: %s", what->to_string().c_str());
+    dbg("Trying to auto use: %s", what->to_short_string().c_str());
     TRACE_AND_INDENT();
     use(what);
     if (is_player()) {
       level->describe(what);
     }
   } else if (what->is_food()) {
-    dbg("Trying to eat: %s", what->to_string().c_str());
+    dbg("Trying to eat: %s", what->to_short_string().c_str());
     TRACE_AND_INDENT();
     eat(what);
     used(what, this, true /* remove after use */);
@@ -321,7 +321,7 @@ bool Thing::use(Thingp what, int preferred_equip)
       game->tick_begin("player ate an item");
     }
   } else if (what->is_potion()) {
-    dbg("Trying to drink: %s", what->to_string().c_str());
+    dbg("Trying to drink: %s", what->to_short_string().c_str());
     TRACE_AND_INDENT();
     if (is_player()) {
       TOPCON("You quaff the %s.", what->text_the().c_str());
@@ -331,7 +331,7 @@ bool Thing::use(Thingp what, int preferred_equip)
       game->tick_begin("player drunk an item");
     }
   } else if (what->is_wand()) {
-    dbg("Trying to wave: %s", what->to_string().c_str());
+    dbg("Trying to wave: %s", what->to_short_string().c_str());
     TRACE_AND_INDENT();
     if (is_player()) {
       TOPCON("You wave the %s.", what->text_the().c_str());
@@ -341,7 +341,7 @@ bool Thing::use(Thingp what, int preferred_equip)
       game->tick_begin("player drunk an item");
     }
   } else if (what->is_ring()) {
-    dbg("Trying to put on: %s", what->to_string().c_str());
+    dbg("Trying to put on: %s", what->to_short_string().c_str());
     TRACE_AND_INDENT();
     //
     // Choose a free slot if not specified
@@ -362,7 +362,7 @@ bool Thing::use(Thingp what, int preferred_equip)
       }
     }
   } else if (! what->is_usable()) {
-    dbg("Trying to use, last resort: %s", what->to_string().c_str());
+    dbg("Trying to use, last resort: %s", what->to_short_string().c_str());
     TRACE_AND_INDENT();
     if (is_player()) {
       TOPCON("I don't know how to use %s.", what->text_the().c_str());

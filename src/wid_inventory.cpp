@@ -189,7 +189,7 @@ static uint8_t wid_inventory_item_option_use(Widp w, int32_t x, int32_t y, uint3
 
   if (what) {
     wid_inventory_fini();
-    player->log("Use %s", what->to_string().c_str());
+    player->log("Use %s", what->to_short_string().c_str());
     player->use(what);
     //
     // Don't do this. It closes up popups for skills
@@ -231,7 +231,7 @@ static uint8_t wid_inventory_item_option_eat(Widp w, int32_t x, int32_t y, uint3
       return true;
     }
     wid_inventory_fini();
-    player->log("Eat %s", what->to_string().c_str());
+    player->log("Eat %s", what->to_short_string().c_str());
     player->use(what);
     wid_inventory_init();
   }
@@ -270,7 +270,7 @@ static uint8_t wid_inventory_item_option_throw(Widp w, int32_t x, int32_t y, uin
       return true;
     }
     wid_inventory_fini();
-    player->log("Throw %s", what->to_string().c_str());
+    player->log("Throw %s", what->to_short_string().c_str());
     player->throw_item_choose_target(what);
   }
 

@@ -15,20 +15,20 @@
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"
 
-void Thing::on_follower_set(Thingp leader)
+void Thing::on_you_are_declared_a_follower(Thingp leader)
 {
   verify(MTYPE_THING, leader);
   if (! leader) {
-    err("Cannot follower_set null thing");
+    err("Cannot you_are_declared_a_follower null thing");
     return;
   }
 
-  auto on_follower_set = on_follower_set_do();
-  if (std::empty(on_follower_set)) {
+  auto on_you_are_declared_a_follower = on_you_are_declared_a_follower_do();
+  if (std::empty(on_you_are_declared_a_follower)) {
     return;
   }
 
-  auto t = split_tokens(on_follower_set, '.');
+  auto t = split_tokens(on_you_are_declared_a_follower, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -38,7 +38,7 @@ void Thing::on_follower_set(Thingp leader)
     }
 
     if (mod == "me") {
-      mod = leader->name();
+      mod = name();
     }
 
     dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), leader->to_string().c_str());
@@ -46,21 +46,21 @@ void Thing::on_follower_set(Thingp leader)
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, leader->id.id, (unsigned int) curr_at.x,
                     (unsigned int) curr_at.y);
   } else {
-    ERR("Bad on_follower_set call [%s] expected mod:function, got %d elems", on_follower_set.c_str(),
-        (int) on_follower_set.size());
+    ERR("Bad on_you_are_declared_a_follower call [%s] expected mod:function, got %d elems",
+        on_you_are_declared_a_follower.c_str(), (int) on_you_are_declared_a_follower.size());
   }
 }
 
-void Thing::on_follower_unset(Thingp leader)
+void Thing::on_death_of_a_follower(Thingp leader)
 {
   verify(MTYPE_THING, leader);
   if (! leader) {
-    err("Cannot follower_unset null thing");
+    err("Cannot follower_death null thing");
     return;
   }
 
-  auto on_follower_unset = on_follower_unset_do();
-  if (std::empty(on_follower_unset)) {
+  auto on_death_of_a_follower = on_death_of_a_follower_do();
+  if (std::empty(on_death_of_a_follower)) {
     return;
   }
 
@@ -72,7 +72,7 @@ void Thing::on_follower_unset(Thingp leader)
     return;
   }
 
-  auto t = split_tokens(on_follower_unset, '.');
+  auto t = split_tokens(on_death_of_a_follower, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -90,7 +90,7 @@ void Thing::on_follower_unset(Thingp leader)
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, leader->id.id, (unsigned int) curr_at.x,
                     (unsigned int) curr_at.y);
   } else {
-    ERR("Bad on_follower_unset call [%s] expected mod:function, got %d elems", on_follower_unset.c_str(),
-        (int) on_follower_unset.size());
+    ERR("Bad on_death_of_a_follower call [%s] expected mod:function, got %d elems", on_death_of_a_follower.c_str(),
+        (int) on_death_of_a_follower.size());
   }
 }

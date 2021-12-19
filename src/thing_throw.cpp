@@ -22,7 +22,7 @@ bool Thing::throw_item_choose_target(Thingp what)
   }
 
   TRACE_AND_INDENT();
-  dbg("Trying to throw: %s", what->to_string().c_str());
+  dbg("Trying to throw: %s", what->to_short_string().c_str());
 
   if (! what->is_throwable()) {
     if (is_player()) {
@@ -71,7 +71,7 @@ void Thing::throw_at(Thingp what, Thingp target)
     TOPCON("You throw %s.", what->text_the().c_str());
   }
 
-  dbg("Thrown %s", what->to_string().c_str());
+  dbg("Thrown %s", what->to_short_string().c_str());
   what->move_to_immediately(target->curr_at);
 
   //

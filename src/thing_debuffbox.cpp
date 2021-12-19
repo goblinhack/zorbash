@@ -18,7 +18,7 @@
 bool Thing::debuffbox_id_insert(Thingp what)
 {
   TRACE_AND_INDENT();
-  dbg("debuffbox insert %s", what->to_string().c_str());
+  dbg("debuffbox insert %s", what->to_short_string().c_str());
   TRACE_AND_INDENT();
   auto player = level->player;
   if (! player) {
@@ -93,7 +93,7 @@ bool Thing::debuffbox_id_insert(Thingp what)
 bool Thing::debuffbox_id_remove(Thingp what)
 {
   TRACE_AND_INDENT();
-  dbg("debuffbox remove %s", what->to_string().c_str());
+  dbg("debuffbox remove %s", what->to_short_string().c_str());
   TRACE_AND_INDENT();
 
   auto player = level->player;

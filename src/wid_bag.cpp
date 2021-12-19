@@ -202,7 +202,7 @@ uint8_t wid_in_transit_item_place(Widp w, int32_t x, int32_t y, uint32_t button)
       //
       // Equip the new item
       //
-      player->log("Use %s", what->to_string().c_str());
+      player->log("Use %s", what->to_short_string().c_str());
       player->use(what);
 
       wid_destroy(&game->in_transit_item);
@@ -222,7 +222,7 @@ uint8_t wid_in_transit_item_place(Widp w, int32_t x, int32_t y, uint32_t button)
       //
       // Wear the ring
       //
-      player->log("Use %s", what->to_string().c_str());
+      player->log("Use %s", what->to_short_string().c_str());
       player->use(what, MONST_EQUIP_RING1);
 
       wid_destroy(&game->in_transit_item);
@@ -242,7 +242,7 @@ uint8_t wid_in_transit_item_place(Widp w, int32_t x, int32_t y, uint32_t button)
       //
       // Wear the ring
       //
-      player->log("Use %s", what->to_string().c_str());
+      player->log("Use %s", what->to_short_string().c_str());
       player->use(what, MONST_EQUIP_RING2);
 
       wid_destroy(&game->in_transit_item);

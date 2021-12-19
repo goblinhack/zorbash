@@ -26,8 +26,12 @@ void Thing::level_leave(void)
   // Remove minions if they stay behind on the old level
   //
   unleash_minions();
-  release_followers();
   unleash_spawners_things();
+
+  //
+  // Do not release followers as goblins will turn on each other
+  //
+  // release_followers();
 
   {
     auto it = get_immediate_manifestor();

@@ -196,20 +196,20 @@ class Tp:
     def set_on_owner_unset_do(self, value):
         my.tp_set_on_owner_unset_do(self, value)
 
-    def set_on_leader_set_do(self, value):
-        my.tp_set_on_leader_set_do(self, value)
+    def set_on_you_are_declared_leader_do(self, value):
+        my.tp_set_on_you_are_declared_leader_do(self, value)
 
-    def set_on_leader_unset_do(self, value):
-        my.tp_set_on_leader_unset_do(self, value)
+    def set_on_death_of_leader_do(self, value):
+        my.tp_set_on_death_of_leader_do(self, value)
 
     def set_on_owner_damage_poison_do(self, value):
         my.tp_set_on_owner_damage_poison_do(self, value)
 
-    def set_on_follower_set_do(self, value):
-        my.tp_set_on_follower_set_do(self, value)
+    def set_on_you_are_declared_a_follower_do(self, value):
+        my.tp_set_on_you_are_declared_a_follower_do(self, value)
 
-    def set_on_follower_unset_do(self, value):
-        my.tp_set_on_follower_unset_do(self, value)
+    def set_on_death_of_a_follower_do(self, value):
+        my.tp_set_on_death_of_a_follower_do(self, value)
 
     def set_on_owner_damage_future1_do(self, value):
         my.tp_set_on_owner_damage_future1_do(self, value)

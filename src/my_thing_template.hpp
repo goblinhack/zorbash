@@ -471,11 +471,11 @@ private:
   std::string _on_fall_do;
   std::string _on_final_use_do;
   std::string _on_firing_at_something_do;
-  std::string _on_follower_set_do;
-  std::string _on_follower_unset_do;
+  std::string _on_you_are_declared_a_follower_do;
+  std::string _on_death_of_a_follower_do;
   std::string _on_idle_tick_frequency_dice_str;
-  std::string _on_leader_set_do;
-  std::string _on_leader_unset_do;
+  std::string _on_you_are_declared_leader_do;
+  std::string _on_death_of_leader_do;
   std::string _on_lifespan_tick_do;
   std::string _on_move_do;
   std::string _on_open_do;
@@ -686,10 +686,10 @@ public:
   const std::string &on_fall_do(void) const { return _on_fall_do; }
   const std::string &on_final_use_do(void) const { return _on_final_use_do; }
   const std::string &on_firing_at_something_do(void) const { return _on_firing_at_something_do; }
-  const std::string &on_follower_set_do(void) const { return _on_follower_set_do; }
-  const std::string &on_follower_unset_do(void) const { return _on_follower_unset_do; }
-  const std::string &on_leader_set_do(void) const { return _on_leader_set_do; }
-  const std::string &on_leader_unset_do(void) const { return _on_leader_unset_do; }
+  const std::string &on_you_are_declared_a_follower_do(void) const { return _on_you_are_declared_a_follower_do; }
+  const std::string &on_death_of_a_follower_do(void) const { return _on_death_of_a_follower_do; }
+  const std::string &on_you_are_declared_leader_do(void) const { return _on_you_are_declared_leader_do; }
+  const std::string &on_death_of_leader_do(void) const { return _on_death_of_leader_do; }
   const std::string &on_lifespan_tick_do(void) const { return _on_lifespan_tick_do; }
   const std::string &on_move_do(void) const { return _on_move_do; }
   const std::string &on_open_do(void) const { return _on_open_do; }
@@ -1408,10 +1408,10 @@ public:
   void set_on_fall_do(const std::string &v) { _on_fall_do = v; }
   void set_on_final_use_do(const std::string &v) { _on_final_use_do = v; }
   void set_on_firing_at_something_do(const std::string &v) { _on_firing_at_something_do = v; }
-  void set_on_follower_set_do(const std::string &v) { _on_follower_set_do = v; }
-  void set_on_follower_unset_do(const std::string &v) { _on_follower_unset_do = v; }
-  void set_on_leader_set_do(const std::string &v) { _on_leader_set_do = v; }
-  void set_on_leader_unset_do(const std::string &v) { _on_leader_unset_do = v; }
+  void set_on_you_are_declared_a_follower_do(const std::string &v) { _on_you_are_declared_a_follower_do = v; }
+  void set_on_death_of_a_follower_do(const std::string &v) { _on_death_of_a_follower_do = v; }
+  void set_on_you_are_declared_leader_do(const std::string &v) { _on_you_are_declared_leader_do = v; }
+  void set_on_death_of_leader_do(const std::string &v) { _on_death_of_leader_do = v; }
   void set_on_lifespan_tick_do(const std::string &v) { _on_lifespan_tick_do = v; }
   void set_on_move_do(const std::string &v) { _on_move_do = v; }
   void set_on_open_do(const std::string &v) { _on_open_do = v; }

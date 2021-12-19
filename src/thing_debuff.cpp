@@ -18,7 +18,7 @@
 bool Thing::debuff_add(Thingp what)
 {
   TRACE_AND_INDENT();
-  dbg("Try to add debuff %s", what->to_string().c_str());
+  dbg("Try to add debuff %s", what->to_short_string().c_str());
   TRACE_AND_INDENT();
 
   if (! maybe_itemp()) {
@@ -53,7 +53,7 @@ bool Thing::debuff_add(Thingp what)
   what->set_owner(this);
   what->hide();
 
-  dbg("Add debuff %s", what->to_string().c_str());
+  dbg("Add debuff %s", what->to_short_string().c_str());
 
   if (is_player()) {
     wid_debuffbox_init();
@@ -65,11 +65,11 @@ bool Thing::debuff_add(Thingp what)
 bool Thing::debuff_remove(Thingp what)
 {
   TRACE_AND_INDENT();
-  dbg("Removing debuff %s", what->to_string().c_str());
+  dbg("Removing debuff %s", what->to_short_string().c_str());
   TRACE_AND_INDENT();
   auto existing_owner = what->get_immediate_owner();
   if (existing_owner != this) {
-    err("Attempt to remove debuff %s which is not owned", what->to_string().c_str());
+    err("Attempt to remove debuff %s which is not owned", what->to_short_string().c_str());
     return false;
   }
 
@@ -81,7 +81,7 @@ bool Thing::debuff_remove(Thingp what)
   get_itemp()->debuffs.remove(what->id);
   game->request_remake_debuffbox = true;
 
-  dbg("Removed %s", what->to_string().c_str());
+  dbg("Removed %s", what->to_short_string().c_str());
   return true;
 }
 
@@ -105,7 +105,7 @@ void Thing::debuff_remove_all(void)
 bool Thing::debuff_use(Thingp what)
 {
   TRACE_AND_INDENT();
-  dbg("Try to use debuff %s", what->to_string().c_str());
+  dbg("Try to use debuff %s", what->to_short_string().c_str());
   used(what, this, false /* remove after use */);
   return true;
 }
