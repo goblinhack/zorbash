@@ -305,16 +305,16 @@ void Thing::leader_tick(void)
       continue;
     }
 
-    if (t->get_follower_count()) {
-      leader = t;
-      break;
-    }
-
     //
     // If a leader is too far away, ignore
     //
-    if (distance(t->curr_at, curr_at) > get_distance_recruitment_max() * 2) {
+    if (distance(t->curr_at, curr_at) > get_distance_recruitment_max()) {
       continue;
+    }
+
+    if (t->get_follower_count()) {
+      leader = t;
+      break;
     }
 
     if (allies.find(t->tp()) == allies.end()) {
@@ -340,7 +340,7 @@ void Thing::leader_tick(void)
     return;
   }
 
-  log("Is being led by %s", leader->to_string().c_str());
+  log("Is being led by %s dist %f", leader->to_string().c_str(), distance(leader->curr_at, curr_at));
 
   set_leader(leader);
 }
