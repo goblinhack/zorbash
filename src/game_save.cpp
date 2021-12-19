@@ -57,12 +57,15 @@ std::ostream &operator<<(std::ostream &out, Bits< ThingInfop & > const my)
   out << bits(my.t->wobble);
   out << bits(my.t->lunge_to);
   out << bits(my.t->last_failed_jump_at);
+
   out << bits(my.t->bounce_count);
   out << bits(my.t->capacity_height);
   out << bits(my.t->capacity_width);
   out << bits(my.t->charge_count);
+  out << bits(my.t->distance_throw);
   out << bits(my.t->enchant);
   out << bits(my.t->enchant_max);
+  out << bits(my.t->follower_count);
   out << bits(my.t->gold);
   out << bits(my.t->health);
   out << bits(my.t->health_max);
@@ -70,16 +73,17 @@ std::ostream &operator<<(std::ostream &out, Bits< ThingInfop & > const my)
   out << bits(my.t->lifespan);
   out << bits(my.t->light_strength);
   out << bits(my.t->minion_count);
-  out << bits(my.t->follower_count);
+  out << bits(my.t->monst_state);
+  out << bits(my.t->necrosis);
   out << bits(my.t->owned_count);
   out << bits(my.t->poison);
-  out << bits(my.t->necrosis);
-  out << bits(my.t->monst_state);
+  out << bits(my.t->score);
+  out << bits(my.t->spawned_count);
   out << bits(my.t->stamina);
   out << bits(my.t->stamina_max);
+  out << bits(my.t->stat_armor_class);
   out << bits(my.t->stat_attack_bonus);
   out << bits(my.t->stat_constitution);
-  out << bits(my.t->stat_armor_class);
   out << bits(my.t->stat_dexterity);
   out << bits(my.t->stats02);
   out << bits(my.t->stats03);
@@ -96,6 +100,7 @@ std::ostream &operator<<(std::ostream &out, Bits< ThingInfop & > const my)
   out << bits(my.t->stats19);
   out << bits(my.t->stat_strength);
   out << bits(my.t->submerged_offset);
+
   out << bits(my.t->distance_throw);
   out << bits(my.t->tick_resurrect_when);
   out << bits(my.t->msg);

@@ -910,7 +910,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     //
     // Record who dun it.
     //
-    dbg("Is defeated by (%s) %u damage, health now %d", real_hitter->to_short_string().c_str(), damage, h);
+    dbg("Is killed by (%s) %u damage, health now %d", real_hitter->to_short_string().c_str(), damage, h);
     std::string defeater = real_hitter->text_a_or_an();
 
     //

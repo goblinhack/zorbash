@@ -83,50 +83,48 @@ public:
   point lunge_to;            // When a monst attacks something
   point last_failed_jump_at; // Previous jump attempt
 
-  uint8_t monst_state      = {};
-  uint8_t bounce_count     = {};
-  uint8_t charge_count     = {}; // How many things this thing spawned.
-  uint8_t enchant          = {};
-  uint8_t enchant_max      = {};
-  uint8_t minion_count     = {}; // How many things this thing spawned.
-  uint8_t follower_count   = {}; // How many things this thing spawned.
-  uint8_t owned_count      = {}; // How many things this thing owns.
-  uint8_t spawned_count    = {}; // How many things this thing owns.
-  uint8_t capacity_height  = {};
-  uint8_t capacity_width   = {};
-  uint8_t keys             = {};
-  uint8_t light_strength   = {}; // Current strength, including torches
-  uint8_t submerged_offset = {}; // Pixels
-  uint8_t distance_throw   = {};
-
-  uint8_t stat_attack_bonus = {};
-  uint8_t stat_constitution = {};
-  uint8_t stat_armor_class  = {};
-  uint8_t stat_dexterity    = {};
-  uint8_t stats02           = {};
-  uint8_t stats03           = {};
-  uint8_t stats04           = {};
-  uint8_t stats05           = {};
-  uint8_t stats06           = {};
-  uint8_t stats07           = {};
-  uint8_t stats08           = {};
-  uint8_t stats09           = {};
-  uint8_t stats10           = {};
-  uint8_t stats11           = {};
-  uint8_t stats12           = {};
-  uint8_t stats17           = {};
-  uint8_t stats19           = {};
-  uint8_t stat_strength     = {};
-  uint8_t stamina           = {};
-  uint8_t stamina_max       = {};
-
+  int bounce_count        = {};
+  int capacity_height     = {};
+  int capacity_width      = {};
+  int charge_count        = {}; // How many things this thing spawned.
+  int distance_throw      = {};
+  int enchant             = {};
+  int enchant_max         = {};
+  int follower_count      = {}; // How many things this thing spawned.
   int gold                = {};
   int health              = {};
   int health_max          = {};
+  int keys                = {};
   int lifespan            = {}; // How many things this thing owns.
-  int poison              = {};
+  int light_strength      = {}; // Current strength, including torches
+  int minion_count        = {}; // How many things this thing spawned.
+  int monst_state         = {};
   int necrosis            = {};
+  int owned_count         = {}; // How many things this thing owns.
+  int poison              = {};
   int score               = {};
+  int spawned_count       = {}; // How many things this thing owns.
+  int stamina             = {};
+  int stamina_max         = {};
+  int stat_armor_class    = {};
+  int stat_attack_bonus   = {};
+  int stat_constitution   = {};
+  int stat_dexterity      = {};
+  int stats02             = {};
+  int stats03             = {};
+  int stats04             = {};
+  int stats05             = {};
+  int stats06             = {};
+  int stats07             = {};
+  int stats08             = {};
+  int stats09             = {};
+  int stats10             = {};
+  int stats11             = {};
+  int stats12             = {};
+  int stats17             = {};
+  int stats19             = {};
+  int stat_strength       = {};
+  int submerged_offset    = {}; // Pixels
   int tick_resurrect_when = {};
 
   std::string msg;         // Text that floats on screen

@@ -227,7 +227,7 @@ void Thing::killed(Thingp defeater, const char *reason)
         } else if (defeater && defeater->is_engulfer()) {
           TOPCON("%%fg=red$RIP: Robot is consumed %s.%%fg=reset$", reason);
         } else if (defeater && defeater->is_monst()) {
-          TOPCON("%%fg=red$RIP: Robot is defeated %s.%%fg=reset$", reason);
+          TOPCON("%%fg=red$RIP: Robot is disassembled %s.%%fg=reset$", reason);
         } else {
           TOPCON("%%fg=red$RIP: Robot is deactivated %s.%%fg=reset$", reason);
         }
@@ -243,7 +243,7 @@ void Thing::killed(Thingp defeater, const char *reason)
         } else if (defeater && defeater->is_engulfer()) {
           TOPCON("%%fg=red$RIP: You are consumed %s.%%fg=reset$", reason);
         } else if (defeater && defeater->is_monst()) {
-          TOPCON("%%fg=red$RIP: You are defeated %s.%%fg=reset$", reason);
+          TOPCON("%%fg=red$RIP: You are brutally killed %s.%%fg=reset$", reason);
         } else {
           TOPCON("%%fg=red$RIP: You are killed %s.%%fg=reset$", reason);
         }

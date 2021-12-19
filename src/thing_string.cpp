@@ -37,7 +37,7 @@ std::string Thing::to_string(void)
                            is_moving ? "/mv" : "", is_falling ? "/fall" : "", curr_at.x, curr_at.y));
   }
 
-  if (get_leader()) {
+  if (! g_loading && get_leader()) {
     auto l = get_leader();
     return (string_sprintf(
         "%08" PRIx32 " %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s %d,%d l:%s", id.id, tpp->name().c_str(), is_dead ? "/dead" : "",
@@ -49,7 +49,7 @@ std::string Thing::to_string(void)
         is_waiting_to_ascend_sewer ? "/asc-sewer" : "", curr_at.x, curr_at.y, l->to_string().c_str()));
   }
 
-  if (get_immediate_owner()) {
+  if (! g_loading && get_immediate_owner()) {
     auto o = get_immediate_owner();
     return (string_sprintf(
         "%08" PRIx32 " %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s %d,%d o:%s", id.id, tpp->name().c_str(), is_dead ? "/dead" : "",
