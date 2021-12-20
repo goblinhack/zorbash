@@ -325,7 +325,7 @@ PyObject *thing_is_wall_dungeon(PyObject *obj, PyObject *args, PyObject *keywds)
 PyObject *thing_is_wall(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_wand(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_water(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_weapon_equiper(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_unused_flag_11(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_weapon(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_wooden(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_set_manifestor(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -355,7 +355,7 @@ PyObject *thing_unused_flag4(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag5(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag6(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag7(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag8(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_able_to_use_magic(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_aquatic(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_possible_to_attack(PyObject *obj, PyObject *args, PyObject *keywds);
 

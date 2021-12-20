@@ -264,7 +264,7 @@ void Thing::update(void)
   //
   // Auto carry of weapons?
   //
-  if (is_weapon_equiper()) {
+  if (is_able_to_use_weapons()) {
     TRACE_AND_INDENT();
     dbg("Is weapon equipper");
     TRACE_AND_INDENT();

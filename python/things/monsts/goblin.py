@@ -3,7 +3,8 @@ import goblin_common
 
 
 def on_you_are_declared_leader(me, x, y):
-    my.thing_polymorph(me, "goblin_captain")
+    my.thing_polymorph(me, "goblin_acolyte")
+    # my.thing_polymorph(me, "goblin_captain")
 
 
 def on_you_are_declared_a_follower(me, leader, x, y):
@@ -16,6 +17,8 @@ def tp_init(name, text_name):
     mytp.set_on_you_are_declared_a_follower_do("me.on_you_are_declared_a_follower()")
     mytp.set_on_you_are_declared_leader_do("me.on_you_are_declared_leader()")
     mytp.set_text_description("A very lesser and a bit insecure goblin.")
+    mytp.set_is_able_to_use_weapons(True)
+    mytp.set_is_carrier_of_treasure_class_a(True)
 
     delay = 300
     mytp.set_tile(tile=name + ".1", delay_ms=delay, frame=1)

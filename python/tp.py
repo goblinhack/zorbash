@@ -397,8 +397,8 @@ class Tp:
     def set_unused_flag7(self, value):
         my.tp_set_unused_flag7(self, value)
 
-    def set_unused_flag8(self, value):
-        my.tp_set_unused_flag8(self, value)
+    def set_is_able_to_use_magic(self, value):
+        my.tp_set_is_able_to_use_magic(self, value)
 
     def set_is_aquatic(self, value):
         my.tp_set_is_aquatic(self, value)
@@ -901,8 +901,8 @@ class Tp:
     def set_damage_necrosis_chance_d1000(self, value):
         my.tp_set_damage_necrosis_chance_d1000(self, value)
 
-    def set_is_weapon_equiper(self, value):
-        my.tp_set_is_weapon_equiper(self, value)
+    def set_unused_flag_11(self, value):
+        my.tp_set_unused_flag_11(self, value)
 
     def set_is_bag_item(self, value):
         my.tp_set_is_bag_item(self, value)

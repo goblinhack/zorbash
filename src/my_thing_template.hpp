@@ -374,7 +374,7 @@ private:
   int _is_wall_dungeon {};
   int _is_wand {};
   int _is_weapon {};
-  int _is_weapon_equiper {};
+  int _unused_flag_11 {};
   int _is_wooden {};
   int _item_height {};
   int _item_width {};
@@ -419,7 +419,7 @@ private:
   int _unused_flag5 {};
   int _unused_flag6 {};
   int _unused_flag7 {};
-  int _unused_flag8 {};
+  int _is_able_to_use_magic {};
   int _weapon_damage {};
   int _weapon_use_distance {};
 
@@ -1028,7 +1028,7 @@ public:
   int is_wall_dungeon(void) const { return _is_wall_dungeon; }
   int is_wall(void) const { return _is_wall; }
   int is_wand(void) const { return _is_wand; }
-  int is_weapon_equiper(void) const { return _is_weapon_equiper; }
+  int unused_flag_11(void) const { return _unused_flag_11; }
   int is_weapon(void) const { return _is_weapon; }
   int is_wooden(void) const { return _is_wooden; }
   int item_height(void) const { return _item_height ? _item_height : 1; }
@@ -1074,7 +1074,7 @@ public:
   int unused_flag5(void) const { return _unused_flag5; }
   int unused_flag6(void) const { return _unused_flag6; }
   int unused_flag7(void) const { return _unused_flag7; }
-  int unused_flag8(void) const { return _unused_flag8; }
+  int is_able_to_use_magic(void) const { return _is_able_to_use_magic; }
   int weapon_damage(void) const { return _weapon_damage; }
 
   void set_aggression_level_pct(int v) { _aggression_level_pct = v; }
@@ -1370,7 +1370,7 @@ public:
   void set_is_wall_dungeon(int v) { _is_wall_dungeon = v; }
   void set_is_wall(int v) { _is_wall = v; }
   void set_is_wand(int v) { _is_wand = v; }
-  void set_is_weapon_equiper(int v) { _is_weapon_equiper = v; }
+  void set_unused_flag_11(int v) { _unused_flag_11 = v; }
   void set_is_weapon(int v) { _is_weapon = v; }
   void set_is_wooden(int v) { _is_wooden = v; }
   void set_item_height(int v) { _item_height = v; }
@@ -1495,7 +1495,7 @@ public:
   void set_unused_flag5(int v) { _unused_flag5 = v; }
   void set_unused_flag6(int v) { _unused_flag6 = v; }
   void set_unused_flag7(int v) { _unused_flag7 = v; }
-  void set_unused_flag8(int v) { _unused_flag8 = v; }
+  void set_is_able_to_use_magic(int v) { _is_able_to_use_magic = v; }
   void set_weapon_damage(int v) { _weapon_damage = v; }
   void set_weapon_use_distance(int v) { _weapon_use_distance = v; }
   void set_z_depth(int v) { z_depth = v; }

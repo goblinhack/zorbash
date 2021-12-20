@@ -247,7 +247,7 @@ PyObject *level_is_wall_dungeon_at(PyObject *obj, PyObject *args, PyObject *keyw
 PyObject *level_is_wand_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_water_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_weapon_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_weapon_equiper_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_unused_flag_11_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_wooden_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_able_to_jump_escape_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_hunger_clock_tick_frequency_at(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -270,6 +270,6 @@ PyObject *level_unused_flag4_at(PyObject *obj, PyObject *args, PyObject *keywds)
 PyObject *level_unused_flag5_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag6_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag7_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag8_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_able_to_use_magic_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_aquatic_at(PyObject *obj, PyObject *args, PyObject *keywds);
 #endif

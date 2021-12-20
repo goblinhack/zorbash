@@ -1223,7 +1223,7 @@ public:
   int is_wall(void);
   int is_wand(void);
   int is_water(void);
-  int is_weapon_equiper(void);
+  int unused_flag_11(void);
   int is_weapon(void);
   int is_wooden(void);
   int item_count_excluding_charges(Tpp item);
@@ -1329,7 +1329,7 @@ public:
   int unused_flag5(void);
   int unused_flag6(void);
   int unused_flag7(void);
-  int unused_flag8(void);
+  int is_able_to_use_magic(void);
   int update_light_strength(void);
   int weapon_damage(void);
   int worth_collecting(const Thingp it);

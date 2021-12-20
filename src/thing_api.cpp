@@ -1658,10 +1658,10 @@ int Thing::unused_flag7(void)
   return (tp()->unused_flag7());
 }
 
-int Thing::unused_flag8(void)
+int Thing::is_able_to_use_magic(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->unused_flag8());
+  return (tp()->is_able_to_use_magic());
 }
 
 int Thing::is_aquatic(void)
@@ -1976,10 +1976,10 @@ int Thing::is_weapon(void)
   return (tp()->is_weapon());
 }
 
-int Thing::is_weapon_equiper(void)
+int Thing::unused_flag_11(void)
 {
   TRACE_AND_INDENT();
-  return (tp()->is_weapon_equiper());
+  return (tp()->unused_flag_11());
 }
 
 int Thing::environ_prefers_fire(void)

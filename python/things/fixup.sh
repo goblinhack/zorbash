@@ -268,7 +268,7 @@ do
       set_is_wall_dungeon \
       set_is_wand \
       set_is_weapon \
-      set_is_weapon_equiper \
+      set_unused_flag_11 \
       set_is_wooden \
       set_normal_placement_rules \
       set_on_death_drop_all_items \
@@ -301,7 +301,7 @@ do
       set_unused_flag5 \
       set_unused_flag6 \
       set_unused_flag7 \
-      set_unused_flag8 \
+      set_is_able_to_use_magic \
       set_is_aquatic \
       set_on_death_is_open
     do

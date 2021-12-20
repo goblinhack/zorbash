@@ -87,7 +87,7 @@ bool Thing::carry(Thingp item, bool can_equip)
   // If we have no weapon yet, equip it
   //
   bool equipped = false;
-  if (can_equip && is_weapon_equiper() && item->is_auto_equipped() && item->is_weapon() &&
+  if (can_equip && is_able_to_use_weapons() && item->is_auto_equipped() && item->is_weapon() &&
       ! get_equip_id(MONST_EQUIP_WEAPON)) {
     if (equip(item, MONST_EQUIP_WEAPON)) {
       equipped = true;
