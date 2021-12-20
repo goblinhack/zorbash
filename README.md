@@ -4,7 +4,8 @@
 <!--                                                                                                                                              -->
 <!-- Next todo                                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
-<!-- - thing carry                                                                                                                                -->
+<!-- - goblins seem to pause                                                                                                                      -->
+<!-- - zx_thing carry                                                                                                                                -->
 <!-- - thing use wands                                                                                                                            -->
 <!-- - goblin mage                                                                                                                                -->
 <!-- - goblin totem                                           -->

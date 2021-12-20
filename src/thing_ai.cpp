@@ -1834,49 +1834,79 @@ bool Thing::ai_tick(bool recursing)
             }
           }
 
-          //
-          // Can we switch to a better ring?
-          //
-          Thingp curr_ring1 = get_equip(MONST_EQUIP_RING1);
-          Thingp curr_ring2 = get_equip(MONST_EQUIP_RING2);
-          Thingp best_ring  = nullptr;
-          get_carried_ring_highest_value(&best_ring);
-          if (best_ring) {
-            auto curr_ring1_val = curr_ring1 ? maybe_itemp_value(curr_ring1) : 0;
-            auto curr_ring2_val = curr_ring2 ? maybe_itemp_value(curr_ring2) : 0;
-            auto best_ring_val  = maybe_itemp_value(best_ring);
+          if (is_able_to_use_wands()) {
+            Thingp curr_wand = get_equip(MONST_EQUIP_WEAPON);
+            Thingp best_wand = nullptr;
+            get_carried_wand_highest_value(&best_wand);
+            if (best_wand) {
+              auto curr_wand_val = curr_wand ? maybe_itemp_value(curr_wand) : 0;
+              auto best_wand_val = maybe_itemp_value(best_wand);
 
-            if (! curr_ring1) {
-              if (use(best_ring, MONST_EQUIP_RING1)) {
-                AI_LOG("Change ring", best_ring);
-                if (is_player()) {
-                  game->tick_begin("Robot, has equipped ring1");
+              if (! curr_wand) {
+                if (use(best_wand, MONST_EQUIP_WEAPON)) {
+                  AI_LOG("Change wand", best_wand);
+                  if (is_player()) {
+                    game->tick_begin("Robot, has equipped wand");
+                  }
+                  return true;
                 }
-                return true;
+              } else if (best_wand_val > curr_wand_val) {
+                if (use(best_wand, MONST_EQUIP_WEAPON)) {
+                  AI_LOG("Change wand", best_wand);
+                  if (is_player()) {
+                    game->tick_begin("Robot, has changed to wand");
+                  }
+                  return true;
+                }
               }
-            } else if (! curr_ring2) {
-              if (use(best_ring, MONST_EQUIP_RING2)) {
-                AI_LOG("Change ring", best_ring);
-                if (is_player()) {
-                  game->tick_begin("Robot, has equipped ring2");
+            }
+          }
+
+          if (is_able_to_use_rings()) {
+            //
+            // Can we switch to a better ring?
+            //
+            Thingp curr_ring1 = get_equip(MONST_EQUIP_RING1);
+            Thingp curr_ring2 = get_equip(MONST_EQUIP_RING2);
+            Thingp best_ring  = nullptr;
+            get_carried_ring_highest_value(&best_ring);
+            if (best_ring) {
+              auto curr_ring1_val = curr_ring1 ? maybe_itemp_value(curr_ring1) : 0;
+              auto curr_ring2_val = curr_ring2 ? maybe_itemp_value(curr_ring2) : 0;
+              auto best_ring_val  = maybe_itemp_value(best_ring);
+
+              if (! curr_ring1) {
+                if (use(best_ring, MONST_EQUIP_RING1)) {
+                  AI_LOG("Change ring", best_ring);
+                  if (is_player()) {
+                    game->tick_begin("Robot, has equipped ring1");
+                  }
+                  return true;
                 }
-                return true;
-              }
-            } else if (best_ring_val > curr_ring1_val) {
-              if (use(best_ring, MONST_EQUIP_RING1)) {
-                AI_LOG("Change ring", best_ring);
-                if (is_player()) {
-                  game->tick_begin("Robot, has changed to ring1");
+              } else if (! curr_ring2) {
+                if (use(best_ring, MONST_EQUIP_RING2)) {
+                  AI_LOG("Change ring", best_ring);
+                  if (is_player()) {
+                    game->tick_begin("Robot, has equipped ring2");
+                  }
+                  return true;
                 }
-                return true;
-              }
-            } else if (best_ring_val > curr_ring2_val) {
-              if (use(best_ring, MONST_EQUIP_RING2)) {
-                AI_LOG("Change ring", best_ring);
-                if (is_player()) {
-                  game->tick_begin("Robot, has changedto ring2");
+              } else if (best_ring_val > curr_ring1_val) {
+                if (use(best_ring, MONST_EQUIP_RING1)) {
+                  AI_LOG("Change ring", best_ring);
+                  if (is_player()) {
+                    game->tick_begin("Robot, has changed to ring1");
+                  }
+                  return true;
                 }
-                return true;
+              } else if (best_ring_val > curr_ring2_val) {
+                if (use(best_ring, MONST_EQUIP_RING2)) {
+                  AI_LOG("Change ring", best_ring);
+                  if (is_player()) {
+                    game->tick_begin("Robot, has changedto ring2");
+                  }
+                  return true;
+                }
               }
             }
           }

@@ -149,7 +149,7 @@ static void sdl_init_joystick(void)
   TRACE_AND_INDENT();
   LOG("SDL: init input:");
 
-  SDL_GameController *controller = NULL;
+  SDL_GameController *controller = nullptr;
 
   LOG("- Init game controleer");
   SDL_InitSubSystem(SDL_INIT_GAMECONTROLLER);

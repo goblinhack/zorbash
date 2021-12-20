@@ -465,7 +465,7 @@ char *strcasestr_(const char *s, const char *find)
     do {
       do {
         if ((sc = *s++) == 0)
-          return (NULL);
+          return (nullptr);
       } while ((char) tolower((unsigned char) sc) != c);
     } while (strncasecmp(s, find, len) != 0);
     s--;

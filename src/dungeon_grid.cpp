@@ -638,7 +638,7 @@ bool Nodes::is_oob(const int x, const int y)
 DungeonNode *Nodes::node_addr(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
-    return (nullptr);
+    return nullptr;
   }
 
   return (&nodes[ offset(x, y) ]);
@@ -2164,5 +2164,5 @@ class Nodes *grid_test(void)
     continue;
     //        return (d);
   }
-  return (nullptr);
+  return nullptr;
 }

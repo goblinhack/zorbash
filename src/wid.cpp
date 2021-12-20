@@ -3146,7 +3146,7 @@ Widp wid_find(Widp w, const std::string &name)
       return (ret);
     }
   }
-  return (nullptr);
+  return nullptr;
 }
 
 static void wid_find_all_(Widp w, const std::string &name, std::list< Widp > &out)
@@ -3214,7 +3214,7 @@ Widp wid_find(const std::string &name)
     }
   }
   // DBG3("Wid [%s] not found", name.c_str());
-  return (nullptr);
+  return nullptr;
 }
 
 static void wid_find_all_at(Widp w, std::list< Widp > &out, const point &p)

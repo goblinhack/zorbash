@@ -861,7 +861,10 @@ public:
   int get_group(void);
   int get_health_initial(void);
   int get_health_max(void);
+  int get_health_starving_pct(void);
   int get_health(void);
+  int get_hunger_clock_tick_frequency(void);
+  int get_hunger_health_pct(void);
   int get_idle_count(void);
   int get_idle_tick_frequency(void);
   int get_initial_charge_count(void);
@@ -929,9 +932,6 @@ public:
   int gfx_very_short_shadow_caster(void);
   int gfx_water(void);
   int health_boost(int v);
-  int get_health_starving_pct(void);
-  int get_hunger_clock_tick_frequency(void);
-  int get_hunger_health_pct(void);
   int hunger_is_insatiable(void);
   int incr_charge_count(int);
   int incr_charge_count(void);
@@ -1035,6 +1035,7 @@ public:
   int is_able_to_see_through_doors(void);
   int is_able_to_shove(void);
   int is_able_to_tire(void);
+  int is_able_to_use_wands(void);
   int is_able_to_use_weapons(void);
   int is_able_to_walk_through_walls(void);
   int is_acid(void);
@@ -1223,7 +1224,6 @@ public:
   int is_wall(void);
   int is_wand(void);
   int is_water(void);
-  int unused_flag_11(void);
   int is_weapon(void);
   int is_wooden(void);
   int item_count_excluding_charges(Tpp item);
@@ -1322,6 +1322,7 @@ public:
   int unused_chance6_d1000(void);
   int unused_chance7_d1000(void);
   int unused_chance8_d1000(void);
+  int is_able_to_use_rings(void);
   int unused_flag1(void);
   int unused_flag2(void);
   int unused_flag3(void);
@@ -1329,7 +1330,6 @@ public:
   int unused_flag5(void);
   int unused_flag6(void);
   int unused_flag7(void);
-  int is_able_to_use_magic(void);
   int update_light_strength(void);
   int weapon_damage(void);
   int worth_collecting(const Thingp it);

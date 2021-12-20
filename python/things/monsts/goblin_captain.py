@@ -2,8 +2,8 @@ import my
 import goblin_common
 
 
-def on_death_of_a_follower(me, leader, x, y):
-    if not my.thing_is_dead_or_dying(leader):
+def on_death_of_a_follower(me, x, y):
+    if not my.thing_is_dead_or_dying(me):
         my.topcon("The goblin leader cries out in rage!")
 
 

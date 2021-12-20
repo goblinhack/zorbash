@@ -26,7 +26,7 @@ unsigned char *ramdisk_load(const char *filename, int *outlen)
   uint8_t *out = (__typeof__(out)) mymalloc(ramfile.len + 1, "ramdisk load");
   if (! out) {
     ERR("No memory for loading ramdisk out, %s", filename);
-    return (nullptr);
+    return nullptr;
   }
 
   memcpy(out, (unsigned char *) ramfile.data, ramfile.len);

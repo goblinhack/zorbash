@@ -181,7 +181,7 @@ exact(struct slre *r, const char **re)
 {
     int	old_data_size = r->data_size;
 
-    while (**re != '\0' && (strchr(meta_chars, **re)) == NULL)
+    while (**re != '\0' && (strchr(meta_chars, **re)) == nullptr)
         store_char_in_data(r, *(*re)++);
 
     emit(r, EXACT);
@@ -381,7 +381,7 @@ compile(struct slre *r, const char **re)
 int
 slre_compile(struct slre *r, const char *re)
 {
-    r->err_str = NULL;
+    r->err_str = nullptr;
     r->code_size = r->data_size = r->num_caps = r->anchored = 0;
 
     if (*re == '^')
@@ -406,7 +406,7 @@ slre_compile(struct slre *r, const char *re)
     emit(r, 0);
     emit(r, END);
 
-    return (r->err_str == NULL ? 1 : 0);
+    return (r->err_str == nullptr ? 1 : 0);
 }
 
 static int match(const struct slre *, int,
@@ -417,9 +417,9 @@ loop_greedy(const struct slre *r, int pc, const char *s, int len, int *ofs)
 {
     int	saved_offset, matched_offset = 0;
 
-    while (match(r, pc + 2, s, len, ofs, NULL)) {
+    while (match(r, pc + 2, s, len, ofs, nullptr)) {
         saved_offset = *ofs;
-        if (match(r, pc + r->code[pc + 1], s, len, ofs, NULL))
+        if (match(r, pc + r->code[pc + 1], s, len, ofs, nullptr))
             matched_offset = saved_offset;
         *ofs = saved_offset;
     }
@@ -432,9 +432,9 @@ loop_non_greedy(const struct slre *r, int pc, const char *s,int len, int *ofs)
 {
     int	saved_offset = *ofs;
 
-    while (match(r, pc + 2, s, len, ofs, NULL)) {
+    while (match(r, pc + 2, s, len, ofs, nullptr)) {
         saved_offset = *ofs;
-        if (match(r, pc + r->code[pc + 1], s, len, ofs, NULL))
+        if (match(r, pc + r->code[pc + 1], s, len, ofs, nullptr))
             break;
     }
 
@@ -590,12 +590,12 @@ match(const struct slre *r, int pc, const char *s, int len,
             pc++;
             break;
         case OPEN:
-            if (caps != NULL)
+            if (caps != nullptr)
                 caps[r->code[pc + 1]].ptr = s + *ofs;
             pc += 2;
             break;
         case CLOSE:
-            if (caps != NULL)
+            if (caps != nullptr)
                 caps[r->code[pc + 1]].len = (int)
                   ( (s + *ofs) - caps[r->code[pc + 1]].ptr );
             pc += 2;
@@ -642,7 +642,7 @@ int main(int argc, char *argv[])
 
     if (argc < 3) {
         printf("Usage: %s 'slre' <file> [count]\n", argv[0]);
-    } else if ((fp = fopen(argv[2], "rb")) == NULL) {
+    } else if ((fp = fopen(argv[2], "rb")) == nullptr) {
         printf("Error: cannot open %s:%s\n", argv[2], strerror(errno));
     } else if (!slre_compile(&slre, argv[1])) {
         printf("Error compiling slre: %s\n", slre.err_str);

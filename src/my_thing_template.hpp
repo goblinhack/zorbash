@@ -133,7 +133,6 @@ private:
   int _distance_manifestor_max {};
   int _distance_minion_vision_shared {};
   int _distance_recruitment_max {};
-  int _spawn_group_radius {};
   int _distance_throw {};
   int _distance_vision {};
   int _enchant_level {};
@@ -202,6 +201,7 @@ private:
   int _is_able_to_see_through_doors {};
   int _is_able_to_shove {};
   int _is_able_to_tire {};
+  int _is_able_to_use_wands {};
   int _is_able_to_use_weapons {};
   int _is_able_to_walk_through_walls {};
   int _is_acid {};
@@ -374,7 +374,6 @@ private:
   int _is_wall_dungeon {};
   int _is_wand {};
   int _is_weapon {};
-  int _unused_flag_11 {};
   int _is_wooden {};
   int _item_height {};
   int _item_width {};
@@ -386,6 +385,7 @@ private:
   int _on_death_is_open {};
   int _range_max {};
   int _rarity {};
+  int _spawn_group_radius {};
   int _stamina {};
   int _stat_armor_class {};
   int _stat_attack_bonus {};
@@ -413,13 +413,13 @@ private:
   int _unused_chance7_d1000 {};
   int _unused_chance8_d1000 {};
   int _unused_flag1 {};
+  int _is_able_to_use_rings {};
   int _unused_flag2 {};
   int _unused_flag3 {};
   int _unused_flag4 {};
   int _unused_flag5 {};
   int _unused_flag6 {};
   int _unused_flag7 {};
-  int _is_able_to_use_magic {};
   int _weapon_damage {};
   int _weapon_use_distance {};
 
@@ -858,6 +858,7 @@ public:
   int is_able_to_see_through_doors(void) const { return _is_able_to_see_through_doors; }
   int is_able_to_shove(void) const { return _is_able_to_shove; }
   int is_able_to_tire(void) const { return _is_able_to_tire; }
+  int is_able_to_use_wands(void) const { return _is_able_to_use_wands; }
   int is_able_to_use_weapons(void) const { return _is_able_to_use_weapons; }
   int is_able_to_walk_through_walls(void) const { return _is_able_to_walk_through_walls; }
   int is_acid(void) const { return _is_acid; }
@@ -1028,7 +1029,6 @@ public:
   int is_wall_dungeon(void) const { return _is_wall_dungeon; }
   int is_wall(void) const { return _is_wall; }
   int is_wand(void) const { return _is_wand; }
-  int unused_flag_11(void) const { return _unused_flag_11; }
   int is_weapon(void) const { return _is_weapon; }
   int is_wooden(void) const { return _is_wooden; }
   int item_height(void) const { return _item_height ? _item_height : 1; }
@@ -1067,6 +1067,7 @@ public:
   int unused_chance6_d1000(void) const { return _unused_chance6_d1000; }
   int unused_chance7_d1000(void) const { return _unused_chance7_d1000; }
   int unused_chance8_d1000(void) const { return _unused_chance8_d1000; }
+  int is_able_to_use_rings(void) const { return _is_able_to_use_rings; }
   int unused_flag1(void) const { return _unused_flag1; }
   int unused_flag2(void) const { return _unused_flag2; }
   int unused_flag3(void) const { return _unused_flag3; }
@@ -1074,7 +1075,6 @@ public:
   int unused_flag5(void) const { return _unused_flag5; }
   int unused_flag6(void) const { return _unused_flag6; }
   int unused_flag7(void) const { return _unused_flag7; }
-  int is_able_to_use_magic(void) const { return _is_able_to_use_magic; }
   int weapon_damage(void) const { return _weapon_damage; }
 
   void set_aggression_level_pct(int v) { _aggression_level_pct = v; }
@@ -1128,7 +1128,6 @@ public:
   void set_distance_manifestor_max(int v) { _distance_manifestor_max = v; }
   void set_distance_minion_vision_shared(int v) { _distance_minion_vision_shared = v; }
   void set_distance_recruitment_max(int v) { _distance_recruitment_max = v; }
-  void set_spawn_group_radius(int v) { _spawn_group_radius = v; }
   void set_distance_throw(int v) { _distance_throw = v; }
   void set_distance_vision(int v) { _distance_vision = v; }
   void set_enchant_level(int v) { _enchant_level = v; }
@@ -1199,6 +1198,7 @@ public:
   void set_is_able_to_see_through_doors(int v) { _is_able_to_see_through_doors = v; }
   void set_is_able_to_shove(int v) { _is_able_to_shove = v; }
   void set_is_able_to_tire(int v) { _is_able_to_tire = v; }
+  void set_is_able_to_use_wands(int v) { _is_able_to_use_wands = v; }
   void set_is_able_to_use_weapons(int v) { _is_able_to_use_weapons = v; }
   void set_is_able_to_walk_through_walls(int v) { _is_able_to_walk_through_walls = v; }
   void set_is_acid(int v) { _is_acid = v; }
@@ -1370,7 +1370,6 @@ public:
   void set_is_wall_dungeon(int v) { _is_wall_dungeon = v; }
   void set_is_wall(int v) { _is_wall = v; }
   void set_is_wand(int v) { _is_wand = v; }
-  void set_unused_flag_11(int v) { _unused_flag_11 = v; }
   void set_is_weapon(int v) { _is_weapon = v; }
   void set_is_wooden(int v) { _is_wooden = v; }
   void set_item_height(int v) { _item_height = v; }
@@ -1403,15 +1402,13 @@ public:
   void set_on_death_do(const std::string &v) { _on_death_do = v; }
   void set_on_death_drop_all_items(int v) { _on_death_drop_all_items = v; }
   void set_on_death_is_open(int v) { _on_death_is_open = v; }
+  void set_on_death_of_a_follower_do(const std::string &v) { _on_death_of_a_follower_do = v; }
+  void set_on_death_of_my_leader_do(const std::string &v) { _on_death_of_my_leader_do = v; }
   void set_on_enchant_do(const std::string &v) { _on_enchant_do = v; }
   void set_on_equip_do(const std::string &v) { _on_equip_do = v; }
   void set_on_fall_do(const std::string &v) { _on_fall_do = v; }
   void set_on_final_use_do(const std::string &v) { _on_final_use_do = v; }
   void set_on_firing_at_something_do(const std::string &v) { _on_firing_at_something_do = v; }
-  void set_on_you_are_declared_a_follower_do(const std::string &v) { _on_you_are_declared_a_follower_do = v; }
-  void set_on_death_of_a_follower_do(const std::string &v) { _on_death_of_a_follower_do = v; }
-  void set_on_you_are_declared_leader_do(const std::string &v) { _on_you_are_declared_leader_do = v; }
-  void set_on_death_of_my_leader_do(const std::string &v) { _on_death_of_my_leader_do = v; }
   void set_on_lifespan_tick_do(const std::string &v) { _on_lifespan_tick_do = v; }
   void set_on_move_do(const std::string &v) { _on_move_do = v; }
   void set_on_open_do(const std::string &v) { _on_open_do = v; }
@@ -1437,6 +1434,8 @@ public:
   void set_on_tick_do(const std::string &v) { _on_tick_do = v; }
   void set_on_unequip_do(const std::string &v) { _on_unequip_do = v; }
   void set_on_use_do(const std::string &v) { _on_use_do = v; }
+  void set_on_you_are_declared_a_follower_do(const std::string &v) { _on_you_are_declared_a_follower_do = v; }
+  void set_on_you_are_declared_leader_do(const std::string &v) { _on_you_are_declared_leader_do = v; }
   void set_on_you_are_hit_and_now_dead_do(const std::string &v) { _on_you_are_hit_and_now_dead_do = v; }
   void set_on_you_are_hit_but_still_alive_do(const std::string &v) { _on_you_are_hit_but_still_alive_do = v; }
   void set_on_you_are_on_fire_do(const std::string &v) { _on_you_are_on_fire_do = v; }
@@ -1446,6 +1445,7 @@ public:
   void set_range_max(int v) { _range_max = v; }
   void set_rarity(int v) { _rarity = v; }
   void set_short_text_name(const std::string &v) { _short_text_name = v; }
+  void set_spawn_group_radius(int v) { _spawn_group_radius = v; }
   void set_spawn_on_shoved(const std::string &v) { _spawn_on_shoved = v; }
   void set_stamina(int v) { _stamina = v; }
   void set_stat_armor_class(int v) { _stat_armor_class = v; }
@@ -1488,6 +1488,7 @@ public:
   void set_unused_chance6_d1000(int v) { _unused_chance6_d1000 = v; }
   void set_unused_chance7_d1000(int v) { _unused_chance7_d1000 = v; }
   void set_unused_chance8_d1000(int v) { _unused_chance8_d1000 = v; }
+  void set_is_able_to_use_rings(int v) { _is_able_to_use_rings = v; }
   void set_unused_flag1(int v) { _unused_flag1 = v; }
   void set_unused_flag2(int v) { _unused_flag2 = v; }
   void set_unused_flag3(int v) { _unused_flag3 = v; }
@@ -1495,7 +1496,6 @@ public:
   void set_unused_flag5(int v) { _unused_flag5 = v; }
   void set_unused_flag6(int v) { _unused_flag6 = v; }
   void set_unused_flag7(int v) { _unused_flag7 = v; }
-  void set_is_able_to_use_magic(int v) { _is_able_to_use_magic = v; }
   void set_weapon_damage(int v) { _weapon_damage = v; }
   void set_weapon_use_distance(int v) { _weapon_use_distance = v; }
   void set_z_depth(int v) { z_depth = v; }
@@ -1547,6 +1547,8 @@ class Tp *tp_random_monst(void);
 class Tp *tp_random_pink_splatter(void);
 class Tp *tp_random_potion(void);
 class Tp *tp_random_ring(void);
+class Tp *tp_random_wand(void);
+class Tp *tp_random_weapon(void);
 class Tp *tp_random_ripple(void);
 class Tp *tp_random_rock(void);
 class Tp *tp_random_secret_door(void);
@@ -1559,6 +1561,12 @@ class Tp *tp_random_wand(void);
 class Tp *tp_random_weapon_class_a(void);
 class Tp *tp_random_weapon_class_b(void);
 class Tp *tp_random_weapon_class_c(void);
+class Tp *tp_random_wand_class_a(void);
+class Tp *tp_random_wand_class_b(void);
+class Tp *tp_random_wand_class_c(void);
+class Tp *tp_random_ring_class_a(void);
+class Tp *tp_random_ring_class_b(void);
+class Tp *tp_random_ring_class_c(void);
 
 const Tpidmap &tp_get_skills(void);
 

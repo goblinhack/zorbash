@@ -202,7 +202,7 @@ wid_tilesp wid_tiles_find(std::string file)
 
   auto result = wid_tiles_all.find(file);
   if (result == wid_tiles_all.end()) {
-    return (nullptr);
+    return nullptr;
   }
 
   return (result->second);

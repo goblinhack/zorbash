@@ -763,7 +763,7 @@ bool Game::save(std::string file_to_save)
 
     lzo_uint new_len = 0;
     int      r =
-        lzo1x_decompress((lzo_bytep) tmp_compressed, compressed_len, (lzo_bytep) tmp_uncompressed, &new_len, NULL);
+        lzo1x_decompress((lzo_bytep) tmp_compressed, compressed_len, (lzo_bytep) tmp_uncompressed, &new_len, nullptr);
     if (r == LZO_E_OK && new_len == uncompressed_len) {
       if (memcmp(tmp_uncompressed, uncompressed, uncompressed_len)) {
         ERR("LZO compress-decompress failed");

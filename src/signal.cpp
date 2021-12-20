@@ -80,7 +80,7 @@ static void debug_crash_handler(int sig)
   uint32_t bufsize = max_path;
   _NSGetExecutablePath(prog_name, &bufsize);
 #elif defined WIN32
-  HMODULE module = GetModuleHandleA(NULL);
+  HMODULE module = GetModuleHandleA(nullptr);
   GetModuleFileNameA(module, prog_name, max_path);
 #elif defined __linux__
   int ret = readlink("/proc/self/exe", prog_name, max_path - 1);

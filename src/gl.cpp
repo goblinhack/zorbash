@@ -1157,25 +1157,25 @@ void gl_ext_init(void)
   wc.cbClsExtra    = 0;
   wc.cbWndExtra    = 0;
   wc.hInstance     = hInstance;
-  wc.hIcon         = LoadIcon(NULL, IDI_APPLICATION);
-  wc.hCursor       = LoadCursor(NULL, IDC_ARROW);
+  wc.hIcon         = LoadIcon(nullptr, IDI_APPLICATION);
+  wc.hCursor       = LoadCursor(nullptr, IDC_ARROW);
   wc.hbrBackground = (HBRUSH) (COLOR_WINDOW + 1);
-  wc.lpszMenuName  = NULL;
+  wc.lpszMenuName  = nullptr;
   wc.lpszClassName = g_szClassName;
-  wc.hIconSm       = LoadIcon(NULL, IDI_APPLICATION);
+  wc.hIconSm       = LoadIcon(nullptr, IDI_APPLICATION);
 
   CON("OpenGl: - RegisterClassEx");
   if (! RegisterClassEx(&wc)) {
-    MessageBox(NULL, "Window Registration Failed!", "Error!", MB_ICONEXCLAMATION | MB_OK);
+    MessageBox(nullptr, "Window Registration Failed!", "Error!", MB_ICONEXCLAMATION | MB_OK);
     return;
   }
 
   CON("OpenGl: - CreateWindowEx");
   hwnd = CreateWindowEx(WS_EX_CLIENTEDGE, g_szClassName, "zorbash startup", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT,
-                        CW_USEDEFAULT, 240, 120, NULL, NULL, hInstance, NULL);
+                        CW_USEDEFAULT, 240, 120, nullptr, nullptr, hInstance, nullptr);
 
-  if (hwnd == NULL) {
-    MessageBox(NULL, "Window Creation Failed!", "Error!", MB_ICONEXCLAMATION | MB_OK);
+  if (hwnd == nullptr) {
+    MessageBox(nullptr, "Window Creation Failed!", "Error!", MB_ICONEXCLAMATION | MB_OK);
     return;
   }
 
@@ -1194,7 +1194,7 @@ void gl_ext_init(void)
 
   // finish OpenGL rendering
   if (hGLRC) {
-    wglMakeCurrent(NULL, NULL);
+    wglMakeCurrent(nullptr, nullptr);
     wglDeleteContext(hGLRC);
   }
 

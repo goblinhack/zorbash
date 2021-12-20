@@ -79,7 +79,7 @@ int slre_compile(struct slre *, const char *re);
 
 //
 // Return 1 if match, 0 if no match.
-// If `captured_substrings' array is not NULL, then it is filled with the
+// If `captured_substrings' array is not nullptr, then it is filled with the
 // values of captured substrings. captured_substrings[0] element is always
 // a full matched substring. The round bracket captures start from
 // captured_substrings[1].

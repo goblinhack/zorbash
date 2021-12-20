@@ -33,7 +33,7 @@ Tile::~Tile(void) { oldptr(MTYPE_TILE, this); }
 Tilep tile_index_to_tile(uint16_t i)
 {
   if (unlikely(! i)) {
-    return (nullptr);
+    return nullptr;
   } else {
     return all_tiles_array[ i - 1 ];
   }

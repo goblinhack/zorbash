@@ -21,7 +21,7 @@ std::string Thing::to_string(void)
   verify(MTYPE_THING, this);
 
   if (unlikely(! level)) {
-    return (string_sprintf("%08" PRIx32 " <not in level> <no tp>%s%s%s%s%s%s%s%s%s %d,%d", id.id,
+    return (string_sprintf("%" PRIx32 " <not in level> <no tp>%s%s%s%s%s%s%s%s%s %d,%d", id.id,
                            is_dead ? "/dead" : "", is_scheduled_for_death ? "/dead-sched" : "",
                            is_resurrecting ? "/resurrecting" : "", is_offscreen ? "/offscr" : "",
                            is_on_fire() ? "/onfire" : "", is_hidden ? "/hid" : "", is_jumping ? "/jumping" : "",
@@ -30,7 +30,7 @@ std::string Thing::to_string(void)
 
   if (unlikely(! tpp)) {
     TRACE_AND_INDENT();
-    return (string_sprintf("%08" PRIx32 " L%d <no tp>%s%s%s%s%s%s%s%s%s %d,%d", id.id, level->world_at.z,
+    return (string_sprintf("%" PRIx32 " L%d <no tp>%s%s%s%s%s%s%s%s%s %d,%d", id.id, level->world_at.z,
                            is_dead ? "/dead" : "", is_scheduled_for_death ? "/dead-sched" : "",
                            is_resurrecting ? "/resurrecting" : "", is_offscreen ? "/offscr" : "",
                            is_on_fire() ? "/onfire" : "", is_hidden ? "/hid" : "", is_jumping ? "/jumping" : "",
@@ -40,7 +40,7 @@ std::string Thing::to_string(void)
   if (! g_loading && get_leader()) {
     auto l = get_leader();
     return (string_sprintf(
-        "%08" PRIx32 " %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s %d,%d l:%s", id.id, tpp->name().c_str(), is_dead ? "/dead" : "",
+        "%" PRIx32 " %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s %d,%d l:%s", id.id, tpp->name().c_str(), is_dead ? "/dead" : "",
         is_scheduled_for_death ? "/dead-sched" : "", is_resurrecting ? "/resurrecting" : "",
         is_offscreen ? "/offscr" : "", is_on_fire() ? "/onfire" : "", is_hidden ? "/hid" : "",
         is_jumping ? "/jumping" : "", is_moving ? "/mv" : "", is_falling ? "/fall" : "",
@@ -52,7 +52,7 @@ std::string Thing::to_string(void)
   if (! g_loading && get_immediate_owner()) {
     auto o = get_immediate_owner();
     return (string_sprintf(
-        "%08" PRIx32 " %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s %d,%d o:%s", id.id, tpp->name().c_str(), is_dead ? "/dead" : "",
+        "%" PRIx32 " %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s %d,%d o:%s", id.id, tpp->name().c_str(), is_dead ? "/dead" : "",
         is_scheduled_for_death ? "/dead-sched" : "", is_resurrecting ? "/resurrecting" : "",
         is_offscreen ? "/offscr" : "", is_on_fire() ? "/onfire" : "", is_hidden ? "/hid" : "",
         is_jumping ? "/jumping" : "", is_moving ? "/mv" : "", is_falling ? "/fall" : "",
@@ -62,7 +62,7 @@ std::string Thing::to_string(void)
   }
 
   return (string_sprintf(
-      "%08" PRIx32 " L%d %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s %d,%d", id.id, level->world_at.z, tpp->name().c_str(),
+      "%" PRIx32 " L%d %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s %d,%d", id.id, level->world_at.z, tpp->name().c_str(),
       is_dead ? "/dead" : "", is_scheduled_for_death ? "/dead-sched" : "", is_resurrecting ? "/resurrecting" : "",
       is_offscreen ? "/offscr" : "", is_on_fire() ? "/onfire" : "", is_hidden ? "/hid" : "",
       is_jumping ? "/jumping" : "", is_moving ? "/mv" : "", is_falling ? "/fall" : "",
@@ -81,7 +81,7 @@ std::string Thing::to_short_string(void)
   verify(MTYPE_THING, this);
 
   if (unlikely(! level)) {
-    return (string_sprintf("%08" PRIx32 " <not in level> <no tp>%s%s%s%s%s%s%s%s%s %d,%d", id.id,
+    return (string_sprintf("%" PRIx32 " <not in level> <no tp>%s%s%s%s%s%s%s%s%s %d,%d", id.id,
                            is_dead ? "/dead" : "", is_scheduled_for_death ? "/dead-sched" : "",
                            is_resurrecting ? "/resurrecting" : "", is_offscreen ? "/offscr" : "",
                            is_on_fire() ? "/onfire" : "", is_hidden ? "/hid" : "", is_jumping ? "/jumping" : "",
@@ -90,7 +90,7 @@ std::string Thing::to_short_string(void)
 
   if (unlikely(! tpp)) {
     TRACE_AND_INDENT();
-    return (string_sprintf("%08" PRIx32 " L%d <no tp>%s%s%s%s%s%s%s%s%s %d,%d", id.id, level->world_at.z,
+    return (string_sprintf("%" PRIx32 " L%d <no tp>%s%s%s%s%s%s%s%s%s %d,%d", id.id, level->world_at.z,
                            is_dead ? "/dead" : "", is_scheduled_for_death ? "/dead-sched" : "",
                            is_resurrecting ? "/resurrecting" : "", is_offscreen ? "/offscr" : "",
                            is_on_fire() ? "/onfire" : "", is_hidden ? "/hid" : "", is_jumping ? "/jumping" : "",
@@ -98,7 +98,7 @@ std::string Thing::to_short_string(void)
   }
 
   return (string_sprintf(
-      "%08" PRIx32 " L%d %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s %d,%d", id.id, level->world_at.z, tpp->name().c_str(),
+      "%" PRIx32 " L%d %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s %d,%d", id.id, level->world_at.z, tpp->name().c_str(),
       is_dead ? "/dead" : "", is_scheduled_for_death ? "/dead-sched" : "", is_resurrecting ? "/resurrecting" : "",
       is_offscreen ? "/offscr" : "", is_on_fire() ? "/onfire" : "", is_hidden ? "/hid" : "",
       is_jumping ? "/jumping" : "", is_moving ? "/mv" : "", is_falling ? "/fall" : "",
@@ -113,7 +113,7 @@ std::string Thing::to_dbg_string(void)
   verify(MTYPE_THING, this);
 
   return (string_sprintf(
-      "L%d %08" PRIx32
+      "L%d %" PRIx32
       " %s (%d,%d)%s%s%s%s%s%s%s%s%s%s%s%s"
       "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s"
       "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s"
@@ -179,7 +179,7 @@ std::string Thing::to_dbg_saved_string(void)
   verify(MTYPE_THING, this);
 
   return (string_sprintf(
-      "L%d %08" PRIx32
+      "L%d %" PRIx32
       " %s (%d,%d)%s%s%s%s%s%s%s%s%s%s%s%s%s"
       "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s"
       "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s"

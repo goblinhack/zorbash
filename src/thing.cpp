@@ -17,7 +17,7 @@ const Tpp Thing::tp_or_update(void)
     return (mytp);
   }
   if (unlikely(tp_id == -1)) {
-    return (nullptr);
+    return nullptr;
   }
   mytp = tp_id_map[ tp_id - 1 ];
   return (mytp);
@@ -31,7 +31,7 @@ const Tpp Thing::tp(void)
 
   if (unlikely(tp_id == -1)) {
     err("no tp set for tp_id %d", tp_id);
-    return (nullptr);
+    return nullptr;
   }
 
   //
@@ -42,7 +42,7 @@ const Tpp Thing::tp(void)
   } else {
     DIE("no tp_id_map has been set for invalid tp_id %d", tp_id);
   }
-  return (nullptr);
+  return nullptr;
 }
 
 uint8_t Thing::z_prio(void) { return (tp()->z_prio); }

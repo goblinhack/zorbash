@@ -291,7 +291,7 @@ void Dungeon::make_dungeon(void)
 char *Dungeon::cell_addr(const int x, const int y, const int z)
 {
   if (unlikely(is_oob(x, y, z))) {
-    return (nullptr);
+    return nullptr;
   }
 
   return (&getref(cells, offset(x, y, z)));
@@ -426,7 +426,7 @@ char Dungeon::getc_no_check(const int x, const int y, const int z)
 Roomp *Dungeon::cell_rooms_addr(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
-    return (nullptr);
+    return nullptr;
   }
 
   return (&getref(cells_room, offset(x, y)));
@@ -448,7 +448,7 @@ Roomp Dungeon::getr(const int x, const int y)
   if (p != nullptr) {
     return (*p);
   }
-  return (nullptr);
+  return nullptr;
 }
 
 Roomp Dungeon::getr_no_check(const int x, const int y)
@@ -457,7 +457,7 @@ Roomp Dungeon::getr_no_check(const int x, const int y)
   if (p != nullptr) {
     return (*p);
   }
-  return (nullptr);
+  return nullptr;
 }
 
 bool Dungeon::is_anything_at(const int x, const int y)
@@ -4075,7 +4075,7 @@ Dungeonp dungeon_test(void)
     new Dungeon(MAP_WIDTH, MAP_HEIGHT, MAP_GRID_WIDTH, MAP_GRID_HEIGHT, x);
   }
 
-  return (nullptr);
+  return nullptr;
 #else
   int x = 663;
   pcg_srand(x);

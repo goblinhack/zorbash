@@ -636,7 +636,7 @@ bool Thing::matches(const std::string &what)
   if (is_wand() && (what == "is_wand")) {
     return true;
   }
-  if (unused_flag_11() && (what == "unused_flag_11")) {
+  if (is_able_to_use_rings() && (what == "is_able_to_use_rings")) {
     return true;
   }
   if (is_weapon() && (what == "is_weapon")) {
@@ -717,7 +717,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag7() && (what == "unused_flag7")) {
     return true;
   }
-  if (is_able_to_use_magic() && (what == "is_able_to_use_magic")) {
+  if (is_able_to_use_wands() && (what == "is_able_to_use_wands")) {
     return true;
   }
   if (is_aquatic() && (what == "is_aquatic")) {
@@ -1345,8 +1345,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_water") {
     return &Thing::is_water;
   }
-  if (what == "unused_flag_11") {
-    return &Thing::unused_flag_11;
+  if (what == "is_able_to_use_rings") {
+    return &Thing::is_able_to_use_rings;
   }
   if (what == "is_weapon") {
     return &Thing::is_weapon;
@@ -1423,8 +1423,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag7") {
     return &Thing::unused_flag7;
   }
-  if (what == "is_able_to_use_magic") {
-    return &Thing::is_able_to_use_magic;
+  if (what == "is_able_to_use_wands") {
+    return &Thing::is_able_to_use_wands;
   }
   if (what == "is_aquatic") {
     return &Thing::is_aquatic;

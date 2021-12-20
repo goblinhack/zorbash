@@ -4278,7 +4278,7 @@ lzo_adler32(lzo_uint32_t adler, const lzo_bytep buf, lzo_uint len)
   lzo_uint32_t s2 = (adler >> 16) & 0xffff;
   unsigned k;
 
-  if (buf == NULL)
+  if (buf == nullptr)
     return 1;
 
   while (len > 0)
@@ -4866,7 +4866,7 @@ DVAL_ASSERT(lzo_xint dv, const lzo_bytep p)
 #if (LZO_DICT_USE_PTR)
 
 #define LZO_CHECK_MPOS_DET(m_pos,m_off,in,ip,max_offset) \
-    (m_pos == NULL || (m_off = pd(ip, m_pos)) > max_offset)
+    (m_pos == nullptr || (m_off = pd(ip, m_pos)) > max_offset)
 
 #define LZO_CHECK_MPOS_NON_DET(m_pos,m_off,in,ip,max_offset) \
   (BOUNDS_CHECKING_OFF_IN_EXPR(( \
@@ -5424,7 +5424,7 @@ DO_DECOMPRESS  ( const lzo_bytep in , lzo_uint  in_len,
   else
   {
     dict_len = 0;
-    dict_end = NULL;
+    dict_end = nullptr;
   }
 #endif
 
@@ -5965,7 +5965,7 @@ DO_DECOMPRESS  ( const lzo_bytep in , lzo_uint  in_len,
   else
   {
     dict_len = 0;
-    dict_end = NULL;
+    dict_end = nullptr;
   }
 #endif
 

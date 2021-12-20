@@ -75,7 +75,6 @@ def tp_init(name, text_name):
     mytp.set_is_able_to_see_in_the_dark(True)
     mytp.set_is_able_to_shove(True)
     mytp.set_is_able_to_tire(True)
-    mytp.set_is_allied_with("goblin")
     mytp.set_is_attackable_by_monst(True)
     mytp.set_is_attackable_by_player(True)
     mytp.set_is_bony(True)
@@ -106,8 +105,6 @@ def tp_init(name, text_name):
     mytp.set_on_you_bite_attack_do("goblin_common.on_you_bite_attack()")
     mytp.set_on_you_miss_do("goblin_common.on_you_miss_do()")
     mytp.set_rarity(my.RARITY_COMMON)
-    mytp.set_spawn_group_radius(4)
-    mytp.set_spawn_group_size_dice("1d8")
     mytp.set_stamina(100)
     mytp.set_stat_armor_class(10)
     mytp.set_stat_attack_bonus(10)  # 10, means no bonus

@@ -46,7 +46,7 @@ ts_t time_get_time_ms(void)
   if (unlikely(! sdl_main_loop_running || ! sdl_init_video)) {
     struct timeval tv;
 
-    gettimeofday(&tv, NULL);
+    gettimeofday(&tv, nullptr);
 
     uint32_t time_in_mill = ((uint32_t) (tv.tv_sec) * 1000) + (tv.tv_usec) / 1000;
 

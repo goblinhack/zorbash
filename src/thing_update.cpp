@@ -289,6 +289,56 @@ void Thing::update(void)
     }
   }
 
+  if (is_able_to_use_wands()) {
+    TRACE_AND_INDENT();
+    dbg("Is wand equipper");
+    TRACE_AND_INDENT();
+
+    if (is_carrier_of_treasure_class_a()) {
+      auto W = level->thing_new(tp_random_wand_class_a(), curr_at, this);
+      if (W) {
+        carried += carry(W);
+      }
+    }
+    if (is_carrier_of_treasure_class_b()) {
+      auto W = level->thing_new(tp_random_wand_class_b(), curr_at, this);
+      if (W) {
+        carried += carry(W);
+      }
+    }
+    if (is_carrier_of_treasure_class_c()) {
+      auto W = level->thing_new(tp_random_wand_class_c(), curr_at, this);
+      if (W) {
+        carried += carry(W);
+      }
+    }
+  }
+
+  if (is_able_to_use_rings()) {
+    TRACE_AND_INDENT();
+    dbg("Is ring equipper");
+    TRACE_AND_INDENT();
+
+    if (is_carrier_of_treasure_class_a()) {
+      auto W = level->thing_new(tp_random_ring_class_a(), curr_at, this);
+      if (W) {
+        carried += carry(W);
+      }
+    }
+    if (is_carrier_of_treasure_class_b()) {
+      auto W = level->thing_new(tp_random_ring_class_b(), curr_at, this);
+      if (W) {
+        carried += carry(W);
+      }
+    }
+    if (is_carrier_of_treasure_class_c()) {
+      auto W = level->thing_new(tp_random_ring_class_c(), curr_at, this);
+      if (W) {
+        carried += carry(W);
+      }
+    }
+  }
+
   if (is_bag_item_container()) {
     TRACE_AND_INDENT();
     dbg("Is bag item container");

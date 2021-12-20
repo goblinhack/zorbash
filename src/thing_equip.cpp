@@ -101,7 +101,7 @@ Thingp Thing::get_equip(int equip)
     return (level->thing_find(id));
   }
 
-  return (nullptr);
+  return nullptr;
 }
 
 void Thing::set_equip_carry_anim_id(ThingId equip_carry_anim_id, int equip)

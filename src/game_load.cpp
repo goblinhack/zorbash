@@ -955,7 +955,7 @@ bool Game::load(std::string file_to_load, class Game &target)
   memcpy(compressed, data, compressed_len);
 
   lzo_uint new_len = 0;
-  int      r = lzo1x_decompress((lzo_bytep) compressed, compressed_len, (lzo_bytep) uncompressed, &new_len, NULL);
+  int      r = lzo1x_decompress((lzo_bytep) compressed, compressed_len, (lzo_bytep) uncompressed, &new_len, nullptr);
   if (r == LZO_E_OK && new_len == uncompressed_len) {
     if (! game_load_headers_only) {
       CON("DGN: Loading %s, decompress %luMb -> %luMb", file_to_load.c_str(),
