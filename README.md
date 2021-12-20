@@ -4,6 +4,8 @@
 <!--                                                                                                                                              -->
 <!-- Next todo                                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
+<!-- - thing carry                                                                                                                                -->
+<!-- - thing use wands                                                                                                                            -->
 <!-- - goblin mage                                                                                                                                -->
 <!-- - goblin totem                                           -->
 <!-- - pirate goblin random carry of gold                                                                                                                       -->
