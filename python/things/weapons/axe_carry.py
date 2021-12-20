@@ -24,7 +24,7 @@ def init_carry(name):
 
 
 def init():
-    init_carry(name="axe_basic_carry")
+    init_carry(name="axe_carry")
 
 
 init()

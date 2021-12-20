@@ -36,12 +36,12 @@ def tp_init(name, text_name):
     mytp.set_z_depth(my.MAP_DEPTH_OBJ)
     mytp.set_z_prio(my.MAP_PRIO_BEHIND)
 
-    mytp.set_tile(tile="bag_large", delay_ms=1000)
+    mytp.set_tile(tile="bag_l", delay_ms=1000)
     mytp.update()
 
 
 def init():
-    tp_init(name="bag_large", text_name="large bag")
+    tp_init(name="bag_l", text_name="large bag")
 
 
 init()

@@ -61,7 +61,7 @@ static void log_(const char *fmt, va_list args)
   if (! g_log_stdout) {
     // No indent
   } else {
-    snprintf(buf + len, MAXLONGSTR - len, "%120s: %*s", "", g_callframes_depth, "");
+    snprintf(buf + len, MAXLONGSTR - len, "%80s: %*s", "", g_callframes_depth, "");
   }
 
   len = (int) strlen(buf);
@@ -83,7 +83,7 @@ static void log_missing_(const char *fmt, va_list args)
   if (! g_log_stdout) {
     // No indent
   } else {
-    snprintf(buf + len, MAXLONGSTR - len, "%120s: %*s", "", g_last_logged_callframes_depth, "");
+    snprintf(buf + len, MAXLONGSTR - len, "%80s: %*s", "", g_last_logged_callframes_depth, "");
   }
 
   len = (int) strlen(buf);

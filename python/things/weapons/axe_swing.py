@@ -2,7 +2,7 @@ import my
 import tp
 
 
-def tp_init(name):
+def init_swing(name):
     mytp = tp.Tp(name)
     mytp.set_collision_check(True)
     mytp.set_collision_hit_priority(10)
@@ -11,12 +11,13 @@ def tp_init(name):
     mytp.set_gfx_animated(True)
     mytp.set_gfx_attack_anim(True)
     mytp.set_gfx_short_shadow_caster(True)
+    mytp.set_gfx_show_outlined(True)
     mytp.set_is_able_to_fall(True)
     mytp.set_is_loggable(True)
     mytp.set_is_moveable(True)
     mytp.set_is_tmp_thing(True)
     mytp.set_text_a_or_an("a")
-    mytp.set_text_description("Thy wooden mechanism of justice.")
+    mytp.set_text_description("Thy shining pointy mechanism of justice.")
     mytp.set_z_depth(my.MAP_DEPTH_EQUIP)
     mytp.set_z_prio(my.MAP_PRIO_BEHIND)
 
@@ -74,7 +75,7 @@ def tp_init(name):
 
 
 def init():
-    tp_init(name="sword_short_wooden_swing")
+    init_swing(name="axe_swing")
 
 
 init()

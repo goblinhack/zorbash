@@ -420,7 +420,7 @@ bool Level::create_dungeon(point3d at, int seed)
             t->carry(w);
 
             {
-              auto p = thing_new("potion_health", point(x, y));
+              auto p = thing_new("pot_health", point(x, y));
               t->carry(p);
             }
             {
@@ -431,7 +431,7 @@ bool Level::create_dungeon(point3d at, int seed)
 
 #if 0
             {
-              thing_new("sword_short_wooden", point(x + 1, y));
+              thing_new("sword1_wood", point(x + 1, y));
             }
 
             {
@@ -478,7 +478,7 @@ bool Level::create_dungeon(point3d at, int seed)
             }
 
             {
-              auto p = thing_new("potion_health", point(x, y));
+              auto p = thing_new("pot_health", point(x, y));
               t->carry(p);
             }
 
@@ -511,7 +511,7 @@ bool Level::create_dungeon(point3d at, int seed)
             }
 
             {
-              auto w3 = thing_new("sword_short_wooden", point(x, y));
+              auto w3 = thing_new("sword1_wood", point(x, y));
               t->carry(w3);
             }
 
@@ -524,7 +524,7 @@ bool Level::create_dungeon(point3d at, int seed)
               t->carry(i);
             }
             if (1) {
-              auto b = thing_new("bag_small", point(x, y));
+              auto b = thing_new("bag_s", point(x, y));
               t->carry(b);
             }
 

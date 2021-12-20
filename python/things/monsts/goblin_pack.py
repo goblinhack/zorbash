@@ -3,8 +3,8 @@ import goblin_common
 
 
 def on_you_are_declared_leader(me, x, y):
-    # my.thing_polymorph(me, "goblin_acolyte")
-    my.thing_polymorph(me, "goblin_captain")
+    my.thing_polymorph(me, "goblin_acolyte")
+    # my.thing_polymorph(me, "goblin_captain")
 
 
 def on_you_are_declared_a_follower(me, leader, x, y):

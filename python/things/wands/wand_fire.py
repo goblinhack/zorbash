@@ -60,7 +60,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_usable(True)
     mytp.set_is_very_combustible(True)
     mytp.set_is_wand(True)
-    mytp.set_is_wooden(True)
+    mytp.set_is_wood(True)
     mytp.set_item_height(4)
     mytp.set_item_width(4)
     mytp.set_long_text_description("Discharges a powerful blast of fire upon an unwitting recipient...")

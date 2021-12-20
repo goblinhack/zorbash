@@ -15,7 +15,7 @@ def on_open(me, x, y):
 
 
 def tp_init(name):
-    mytp = tp.Tp(name, "wooden door")
+    mytp = tp.Tp(name, "wood door")
     mytp.set_collision_check(True)
     mytp.set_collision_hit_priority(9)
     mytp.set_damage_received_doubled_from_fire(True)

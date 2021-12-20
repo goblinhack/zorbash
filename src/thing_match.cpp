@@ -642,7 +642,7 @@ bool Thing::matches(const std::string &what)
   if (is_weapon() && (what == "is_weapon")) {
     return true;
   }
-  if (is_wooden() && (what == "is_wooden")) {
+  if (is_wood() && (what == "is_wood")) {
     return true;
   }
   if (minion_limit() && (what == "minion_limit")) {
@@ -1351,8 +1351,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_weapon") {
     return &Thing::is_weapon;
   }
-  if (what == "is_wooden") {
-    return &Thing::is_wooden;
+  if (what == "is_wood") {
+    return &Thing::is_wood;
   }
   if (what == "minion_limit") {
     return &Thing::minion_limit;

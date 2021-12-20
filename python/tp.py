@@ -553,8 +553,8 @@ class Tp:
     def set_is_metal(self, value):
         my.tp_set_is_metal(self, value)
 
-    def set_is_wooden(self, value):
-        my.tp_set_is_wooden(self, value)
+    def set_is_wood(self, value):
+        my.tp_set_is_wood(self, value)
 
     def set_is_engulfer(self, value):
         my.tp_set_is_engulfer(self, value)

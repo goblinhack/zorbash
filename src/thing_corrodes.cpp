@@ -34,7 +34,7 @@ void Thing::corrode_tick(void)
     if (is_organic()) {
       chance = 200;
     }
-    if (is_wooden()) {
+    if (is_wood()) {
       chance = 100;
     }
     if (is_metal()) {

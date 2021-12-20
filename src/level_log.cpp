@@ -24,7 +24,7 @@ void Level::log_(const char *fmt, va_list args)
   get_timestamp(buf, MAXLONGSTR);
   len = (int) strlen(buf);
 
-  snprintf(buf + len, MAXLONGSTR - len, "%120s: %*s", l->to_string().c_str(), g_callframes_depth, "");
+  snprintf(buf + len, MAXLONGSTR - len, "%80s: %*s", l->to_string().c_str(), g_callframes_depth, "");
 
   len = (int) strlen(buf);
   vsnprintf(buf + len, MAXLONGSTR - len, fmt, args);

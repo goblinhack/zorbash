@@ -2,7 +2,7 @@ import my
 import tp
 
 
-def init_swing(name):
+def tp_init(name):
     mytp = tp.Tp(name)
     mytp.set_collision_check(True)
     mytp.set_collision_hit_priority(10)
@@ -75,7 +75,7 @@ def init_swing(name):
 
 
 def init():
-    init_swing(name="axe_basic_swing")
+    tp_init(name="sword1_swing")
 
 
 init()

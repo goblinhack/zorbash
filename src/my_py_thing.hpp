@@ -338,7 +338,7 @@ PyObject *thing_is_wall(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_wand(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_water(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_weapon(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_wooden(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_wood(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_killed_by(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_kill(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_polymorph(PyObject *obj, PyObject *args, PyObject *keywds);

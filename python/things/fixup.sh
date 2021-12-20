@@ -269,7 +269,7 @@ do
       set_is_wand \
       set_is_weapon \
       set_is_able_to_use_rings \
-      set_is_wooden \
+      set_is_wood \
       set_normal_placement_rules \
       set_on_death_drop_all_items \
       set_unused_flag1 \
