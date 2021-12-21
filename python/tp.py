@@ -532,8 +532,8 @@ class Tp:
     def set_is_able_to_enchant_items(self, value):
         my.tp_set_is_able_to_enchant_items(self, value)
 
-    def set_is_able_to_attack_generators(self, value):
-        my.tp_set_is_able_to_attack_generators(self, value)
+    def set_is_able_to_attack_mobs(self, value):
+        my.tp_set_is_able_to_attack_mobs(self, value)
 
     def set_ai_wanderer(self, value):
         my.tp_set_ai_wanderer(self, value)
@@ -682,8 +682,8 @@ class Tp:
     def set_distance_vision(self, value):
         my.tp_set_distance_vision(self, value)
 
-    def set_is_ethereal_minion_generator(self, value):
-        my.tp_set_is_ethereal_minion_generator(self, value)
+    def set_is_ethereal_mob(self, value):
+        my.tp_set_is_ethereal_mob(self, value)
 
     def set_is_spawner(self, value):
         my.tp_set_is_spawner(self, value)
@@ -985,8 +985,8 @@ class Tp:
     def set_damage_received_doubled_from_water(self, value):
         my.tp_set_damage_received_doubled_from_water(self, value)
 
-    def set_is_minion_generator(self, value):
-        my.tp_set_is_minion_generator(self, value)
+    def set_is_mob(self, value):
+        my.tp_set_is_mob(self, value)
 
     def set_is_treasure_eater(self, value):
         my.tp_set_is_treasure_eater(self, value)

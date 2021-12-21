@@ -835,7 +835,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
         //
         // Don't attack your manifestor
         //
-        if (it->is_minion_generator() && (get_top_manifestor() == this)) {
+        if (it->is_mob() && (get_top_manifestor() == this)) {
           continue;
         }
 
@@ -978,12 +978,12 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
                 int avoid_score = ((max_dist - dist) * health_diff);
                 GOAL_AVOID_ADD(GOAL_PRIO_VERY_HIGH, avoid_score, "avoid-monst", it);
               }
-            } else if (it->is_minion_generator() && is_able_to_attack_generators()) {
+            } else if (it->is_mob() && is_able_to_attack_mobs()) {
               //
               // Very close, high priority attack
               //
               GOAL_ADD(GOAL_PRIO_HIGH, (int) (max_dist - dist) * health_diff - goal_penalty,
-                       "attack-nearby-generator", it);
+                       "attack-nearby-mob", it);
             } else if (possible_to_attack(it)) {
               if (dist < 2) {
                 //

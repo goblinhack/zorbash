@@ -64,8 +64,8 @@ PyObject *level_add_(PyObject *obj, PyObject *args, PyObject *keywds)
         if (m.is_floor || m.is_bridge || m.is_corridor || m.is_secret_corridor || m.is_dirt) {
           floor_string += c;
         } else if (m.is_blood || m.is_deep_water || m.is_door || m.is_ascend_dungeon || m.is_descend_dungeon ||
-                   m.is_descend_sewer || m.is_floor_deco || m.is_food || m.is_minion_generator_easy ||
-                   m.is_minion_generator_hard || m.is_gold || m.is_key || m.is_lava || m.is_monst_easy ||
+                   m.is_descend_sewer || m.is_floor_deco || m.is_food || m.is_mob_easy ||
+                   m.is_mob_hard || m.is_gold || m.is_key || m.is_lava || m.is_monst_easy ||
                    m.is_monst_med || m.is_monst_hard || m.is_enchantstone || m.is_skillstone ||
                    m.is_treasure_class_a || m.is_treasure_class_b || m.is_treasure_class_c || m.is_potion ||
                    m.is_wand || m.is_ring || m.is_secret_door || m.is_brazier || m.is_barrel || m.is_trap ||
@@ -108,7 +108,7 @@ PyObject *level_add_(PyObject *obj, PyObject *args, PyObject *keywds)
         }
 
         if (m.is_blood || m.is_ascend_dungeon || m.is_descend_dungeon || m.is_descend_sewer || m.is_floor_deco ||
-            m.is_food || m.is_minion_generator_easy || m.is_minion_generator_hard || m.is_gold || m.is_key ||
+            m.is_food || m.is_mob_easy || m.is_mob_hard || m.is_gold || m.is_key ||
             m.is_monst_easy || m.is_monst_med || m.is_monst_hard || m.is_enchantstone || m.is_skillstone ||
             m.is_treasure_class_a || m.is_treasure_class_b || m.is_treasure_class_c || m.is_potion || m.is_wand ||
             m.is_ring || m.is_brazier || m.is_barrel || m.is_trap || m.is_descend_sewer) {
@@ -388,7 +388,7 @@ LEVEL_BODY_GET_BOOL_AT(level_gfx_very_short_shadow_caster_at, gfx_very_short_sha
 LEVEL_BODY_GET_BOOL_AT(level_gfx_water_at, gfx_water)
 LEVEL_BODY_GET_BOOL_AT(level_hunger_clock_tick_frequency_at, get_hunger_clock_tick_frequency)
 LEVEL_BODY_GET_BOOL_AT(level_hunger_is_insatiable_at, hunger_is_insatiable)
-LEVEL_BODY_GET_BOOL_AT(level_is_able_to_attack_generators_at, is_able_to_attack_generators)
+LEVEL_BODY_GET_BOOL_AT(level_is_able_to_attack_mobs_at, is_able_to_attack_mobs)
 LEVEL_BODY_GET_BOOL_AT(level_is_able_to_break_down_doors_at, is_able_to_break_down_doors)
 LEVEL_BODY_GET_BOOL_AT(level_is_able_to_break_out_of_webs_at, is_able_to_break_out_of_webs)
 LEVEL_BODY_GET_BOOL_AT(level_is_able_to_change_levels_at, is_able_to_change_levels)
@@ -491,7 +491,7 @@ LEVEL_BODY_GET_BOOL_AT(level_is_enchantable_at, is_enchantable)
 LEVEL_BODY_GET_BOOL_AT(level_is_enchantstone_at, is_enchantstone)
 LEVEL_BODY_GET_BOOL_AT(level_is_engulfer_at, is_engulfer)
 LEVEL_BODY_GET_BOOL_AT(level_is_ethereal_at, is_ethereal)
-LEVEL_BODY_GET_BOOL_AT(level_is_ethereal_minion_generator_at, is_ethereal_minion_generator)
+LEVEL_BODY_GET_BOOL_AT(level_is_ethereal_mob_at, is_ethereal_mob)
 LEVEL_BODY_GET_BOOL_AT(level_is_exit_finder_at, is_exit_finder)
 LEVEL_BODY_GET_BOOL_AT(level_is_explorer_at, is_explorer)
 LEVEL_BODY_GET_BOOL_AT(level_is_explosion_at, is_explosion)
@@ -538,7 +538,7 @@ LEVEL_BODY_GET_BOOL_AT(level_is_meat_at, is_meat)
 LEVEL_BODY_GET_BOOL_AT(level_is_meat_eater_at, is_meat_eater)
 LEVEL_BODY_GET_BOOL_AT(level_is_metal_at, is_metal)
 LEVEL_BODY_GET_BOOL_AT(level_is_minion_at, is_minion)
-LEVEL_BODY_GET_BOOL_AT(level_is_minion_generator_at, is_minion_generator)
+LEVEL_BODY_GET_BOOL_AT(level_is_mob_at, is_mob)
 LEVEL_BODY_GET_BOOL_AT(level_is_monst_at, is_monst)
 LEVEL_BODY_GET_BOOL_AT(level_is_moveable_at, is_moveable)
 LEVEL_BODY_GET_BOOL_AT(level_is_msg_at, is_msg)

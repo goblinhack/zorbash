@@ -118,9 +118,9 @@ void Thing::level_pop(void)
     i_set_is_food = false;
     level->unset_is_food(mx, my);
   }
-  if (i_set_is_minion_generator) {
-    i_set_is_minion_generator = false;
-    level->unset_is_minion_generator(mx, my);
+  if (i_set_is_mob) {
+    i_set_is_mob = false;
+    level->unset_is_mob(mx, my);
   }
   if (i_set_is_gold) {
     i_set_is_gold = false;

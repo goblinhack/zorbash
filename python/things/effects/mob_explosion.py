@@ -28,7 +28,7 @@ def tp_init(name):
 
 
 def init():
-    tp_init(name="generator_explosion")
+    tp_init(name="mob_explosion")
 
 
 init()

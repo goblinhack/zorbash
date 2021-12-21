@@ -713,9 +713,9 @@ int32_t main(int32_t argc, char *argv[])
   gfx_init();
 
   //
-  // Random number generators
+  // Random number mobs
   //
-  CON("INI: Create random number generators");
+  CON("INI: Create random number mobs");
   double                             mean = 1.0;
   double                             std  = 0.5;
   std::normal_distribution< double > distribution;

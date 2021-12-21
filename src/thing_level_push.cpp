@@ -119,9 +119,9 @@ void Thing::level_push(void)
     i_set_is_food = true;
     level->set_is_food(mx, my);
   }
-  if (is_minion_generator()) {
-    i_set_is_minion_generator = true;
-    level->set_is_minion_generator(mx, my);
+  if (is_mob()) {
+    i_set_is_mob = true;
+    level->set_is_mob(mx, my);
   }
   if (is_gold()) {
     i_set_is_gold = true;

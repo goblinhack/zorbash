@@ -4,6 +4,8 @@
 <!--                                                                                                                                              -->
 <!-- Next todo                                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
+<!-- - robot wand use                                                                                                                             -->
+<!-- - robot fight goblins                                                                                                                        -->
 <!-- - goblins seem to pause                                                                                                                      -->
 <!-- - zx_thing carry                                                                                                                                -->
 <!-- - thing use wands                                                                                                                            -->
@@ -31,7 +33,7 @@
 <!-- Level                                                                                                                                        -->
 <!-- ------                                                                                                                                       -->
 <!-- - gold needs to do something - shop? buy/sell                                                                                                -->
-<!-- - totems are like generators, but do not spawn except initially. The worshippers are imbued with power but do not die when the totem does.   -->
+<!-- - totems are like mobs, but do not spawn except initially. The worshippers are imbued with power but do not die when the totem does.   -->
 <!-- - exploding bogs                                                                                                                             -->
 <!-- - vaults                                                                                                                                     -->
 <!-- - teleports                                                                                                                                  -->

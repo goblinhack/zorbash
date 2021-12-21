@@ -759,7 +759,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       //
       // Player hitting something else
       //
-      if (is_alive_monst() || is_minion_generator()) {
+      if (is_alive_monst() || is_mob()) {
         if (crit) {
           TOPCON("%%fg=red$You CRIT hit %s for %d damage!%%fg=reset$", text_the().c_str(), damage);
         } else {
@@ -914,7 +914,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     std::string defeater = real_hitter->text_a_or_an();
 
     //
-    // If not a monst, e.g. a generator then don't include defeated by
+    // If not a monst, e.g. a mob then don't include defeated by
     //
     auto reason = "by " + defeater;
 

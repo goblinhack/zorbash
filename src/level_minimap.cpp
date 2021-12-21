@@ -65,7 +65,7 @@ void Level::update_minimap(bool showing_two_levels, bool show_faded)
 
         if (is_lit_recently(x, y) && is_monst(x, y)) {
           c = RED;
-        } else if (is_minion_generator(x, y)) {
+        } else if (is_mob(x, y)) {
           c = PINK;
         } else if (player && (x == (int) player->curr_at.x) && (y == (int) player->curr_at.y)) {
           c = PINK;
@@ -199,7 +199,7 @@ void Level::update_minimap(bool showing_two_levels, bool show_faded)
           }
         } else if (is_monst(x, y)) {
           c = RED;
-        } else if (is_minion_generator(x, y)) {
+        } else if (is_mob(x, y)) {
           c = PINK;
         } else if (player && (x == (int) player->curr_at.x) && (y == (int) player->curr_at.y)) {
           c = WHITE;

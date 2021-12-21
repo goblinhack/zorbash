@@ -76,8 +76,8 @@ PyObject *map_load_room_(PyObject *obj, PyObject *args, PyObject *keywds)
           floor_string += c;
         } else if (m.is_blood || m.is_ascend_dungeon || m.is_barrel || m.is_brazier || m.is_deep_water ||
                    m.is_descend_dungeon || m.is_door || m.is_foilage || m.is_spiderweb || m.is_dry_grass ||
-                   m.is_floor_deco || m.is_food || m.is_gold || m.is_key || m.is_lava || m.is_minion_generator_easy ||
-                   m.is_minion_generator_hard || m.is_monst_easy || m.is_monst_med || m.is_monst_hard ||
+                   m.is_floor_deco || m.is_food || m.is_gold || m.is_key || m.is_lava || m.is_mob_easy ||
+                   m.is_mob_hard || m.is_monst_easy || m.is_monst_med || m.is_monst_hard ||
                    m.is_potion || m.is_secret_door || m.is_shallow_water || m.is_trap || m.is_enchantstone ||
                    m.is_skillstone || m.is_treasure_class_a || m.is_treasure_class_b || m.is_treasure_class_c ||
                    m.is_wand || m.is_ring || m.is_deep_water) {
@@ -119,7 +119,7 @@ PyObject *map_load_room_(PyObject *obj, PyObject *args, PyObject *keywds)
         }
 
         if (m.is_blood || m.is_ascend_dungeon || m.is_descend_dungeon || m.is_floor_deco || m.is_food ||
-            m.is_minion_generator_easy || m.is_minion_generator_hard || m.is_gold || m.is_key || m.is_monst_easy ||
+            m.is_mob_easy || m.is_mob_hard || m.is_gold || m.is_key || m.is_monst_easy ||
             m.is_monst_med || m.is_monst_hard || m.is_enchantstone || m.is_skillstone || m.is_treasure_class_a ||
             m.is_treasure_class_b || m.is_treasure_class_c || m.is_potion || m.is_wand || m.is_ring || m.is_brazier ||
             m.is_barrel || m.is_trap || m.is_descend_sewer) {

@@ -177,7 +177,7 @@ private:
   int _hunger_is_insatiable {};
   int _internal_has_dir_anim {};
   int _internal_has_hp_anim {};
-  int _is_able_to_attack_generators {};
+  int _is_able_to_attack_mobs {};
   int _is_able_to_break_down_doors {};
   int _is_able_to_break_out_of_webs {};
   int _is_able_to_change_levels {};
@@ -267,7 +267,7 @@ private:
   int _is_enchantstone {};
   int _is_engulfer {};
   int _is_ethereal {};
-  int _is_ethereal_minion_generator {};
+  int _is_ethereal_mob {};
   int _is_exit_finder {};
   int _is_explorer {};
   int _is_explosion {};
@@ -315,7 +315,7 @@ private:
   int _is_meat_eater {};
   int _is_metal {};
   int _is_minion {};
-  int _is_minion_generator {};
+  int _is_mob {};
   int _is_monst {};
   int _is_moveable {};
   int _is_msg {};
@@ -834,7 +834,7 @@ public:
   int hunger_is_insatiable(void) const { return _hunger_is_insatiable; }
   int internal_has_dir_anim(void) const { return _internal_has_dir_anim; }
   int internal_has_hp_anim(void) const { return _internal_has_hp_anim; }
-  int is_able_to_attack_generators(void) const { return _is_able_to_attack_generators; }
+  int is_able_to_attack_mobs(void) const { return _is_able_to_attack_mobs; }
   int is_able_to_break_down_doors(void) const { return _is_able_to_break_down_doors; }
   int is_able_to_break_out_of_webs(void) const { return _is_able_to_break_out_of_webs; }
   int is_able_to_change_levels(void) const { return _is_able_to_change_levels; }
@@ -923,7 +923,7 @@ public:
   int is_enchantable(void) const { return _is_enchantable; }
   int is_enchantstone(void) const { return _is_enchantstone; }
   int is_engulfer(void) const { return _is_engulfer; }
-  int is_ethereal_minion_generator(void) const { return _is_ethereal_minion_generator; }
+  int is_ethereal_mob(void) const { return _is_ethereal_mob; }
   int is_ethereal(void) const { return _is_ethereal; }
   int is_exit_finder(void) const { return _is_exit_finder; }
   int is_explorer(void) const { return _is_explorer; }
@@ -970,7 +970,7 @@ public:
   int is_meat_eater(void) const { return _is_meat_eater; }
   int is_meat(void) const { return _is_meat; }
   int is_metal(void) const { return _is_metal; }
-  int is_minion_generator(void) const { return _is_minion_generator; }
+  int is_mob(void) const { return _is_mob; }
   int is_minion(void) const { return _is_minion; }
   int is_monst(void) const { return _is_monst; }
   int is_moveable(void) const { return _is_moveable; }
@@ -1174,7 +1174,7 @@ public:
   void set_hunger_is_insatiable(int v) { _hunger_is_insatiable = v; }
   void set_internal_has_dir_anim(int v) { _internal_has_dir_anim = v; }
   void set_internal_has_hp_anim(int v) { _internal_has_hp_anim = v; }
-  void set_is_able_to_attack_generators(int v) { _is_able_to_attack_generators = v; }
+  void set_is_able_to_attack_mobs(int v) { _is_able_to_attack_mobs = v; }
   void set_is_able_to_break_down_doors(int v) { _is_able_to_break_down_doors = v; }
   void set_is_able_to_break_out_of_webs(int v) { _is_able_to_break_out_of_webs = v; }
   void set_is_able_to_change_levels(int v) { _is_able_to_change_levels = v; }
@@ -1265,7 +1265,7 @@ public:
   void set_is_enchantstone(int v) { _is_enchantstone = v; }
   void set_is_engulfer(int v) { _is_engulfer = v; }
   void set_is_ethereal(int v) { _is_ethereal = v; }
-  void set_is_ethereal_minion_generator(int v) { _is_ethereal_minion_generator = v; }
+  void set_is_ethereal_mob(int v) { _is_ethereal_mob = v; }
   void set_is_exit_finder(int v) { _is_exit_finder = v; }
   void set_is_explorer(int v) { _is_explorer = v; }
   void set_is_explosion(int v) { _is_explosion = v; }
@@ -1311,7 +1311,7 @@ public:
   void set_is_meat_eater(int v) { _is_meat_eater = v; }
   void set_is_meat(int v) { _is_meat = v; }
   void set_is_metal(int v) { _is_metal = v; }
-  void set_is_minion_generator(int v) { _is_minion_generator = v; }
+  void set_is_mob(int v) { _is_mob = v; }
   void set_is_minion(int v) { _is_minion = v; }
   void set_is_monst(int v) { _is_monst = v; }
   void set_is_moveable(int v) { _is_moveable = v; }
@@ -1524,7 +1524,7 @@ class Tp *tp_random_dirt(void);
 class Tp *tp_random_door(void);
 class Tp *tp_random_dry_grass(void);
 class Tp *tp_random_enchantstone(void);
-class Tp *tp_random_ethereal_minion_generator(void);
+class Tp *tp_random_ethereal_mob(void);
 class Tp *tp_random_floor(void);
 class Tp *tp_random_foilage(void);
 class Tp *tp_random_food(void);
@@ -1537,9 +1537,9 @@ class Tp *tp_random_item_not_a_container_class_a(void);
 class Tp *tp_random_item_not_a_container_class_b(void);
 class Tp *tp_random_item_not_a_container_class_c(void);
 class Tp *tp_random_key(void);
-class Tp *tp_random_minion_generator_easy(void);
-class Tp *tp_random_minion_generator_hard(void);
-class Tp *tp_random_minion_generator(void);
+class Tp *tp_random_mob_easy(void);
+class Tp *tp_random_mob_hard(void);
+class Tp *tp_random_mob(void);
 class Tp *tp_random_monst_easy(void);
 class Tp *tp_random_monst_hard(void);
 class Tp *tp_random_monst_med(void);

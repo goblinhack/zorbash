@@ -322,7 +322,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->i_set_is_key ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_lava ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_light_blocker ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->i_set_is_minion_generator ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->i_set_is_mob ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_monst ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_obs_wall_or_door ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_obs_destructable ? 1LLU : 0LLU) << shift; shift++;
@@ -451,7 +451,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->_is_key);
   out << bits(my.t->_is_lava);
   out << bits(my.t->_is_lit_currently);
-  out << bits(my.t->_is_minion_generator);
+  out << bits(my.t->_is_mob);
   out << bits(my.t->_is_monst);
   out << bits(my.t->_is_potion);
   out << bits(my.t->_is_ripple);

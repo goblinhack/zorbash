@@ -229,13 +229,13 @@ void Charmap::init_charmaps(void)
   c          = &all_charmaps[ char_index ];
   c->c       = char_index;
 
-  char_index                  = Charmap::MINION_GENERATOR_EASY;
+  char_index                  = Charmap::MINION_MOB_EASY;
   c                           = &all_charmaps[ char_index ];
   c->c                        = char_index;
-  c->is_minion_generator_easy = true;
+  c->is_mob_easy = true;
 
-  char_index                  = Charmap::MINION_GENERATOR_HARD;
+  char_index                  = Charmap::MINION_MOB_HARD;
   c                           = &all_charmaps[ char_index ];
   c->c                        = char_index;
-  c->is_minion_generator_easy = true;
+  c->is_mob_easy = true;
 }

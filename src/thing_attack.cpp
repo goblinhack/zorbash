@@ -743,7 +743,7 @@ bool Thing::attack(Thingp victim, bool prefer_attack_with_jaws)
     //
     // Don't swing weapons at pools of blood.
     //
-    if (victim->is_alive_monst() || victim->is_door() || victim->is_player() || victim->is_minion_generator()) {
+    if (victim->is_alive_monst() || victim->is_door() || victim->is_player() || victim->is_mob()) {
       if (get_equip(MONST_EQUIP_WEAPON)) {
         auto delta = victim->curr_at - curr_at;
         move_set_dir_from_delta(delta);

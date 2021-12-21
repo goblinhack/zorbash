@@ -283,10 +283,10 @@ bool Thing::ai_obstacle(Thingp it)
 
   if (is_ethereal()) {
     //
-    // This lets you skip around generators to avoid ghosts
+    // This lets you skip around mobs to avoid ghosts
     //
     if (is_minion()) {
-      if (it->is_minion_generator()) {
+      if (it->is_mob()) {
         if (it == get_top_manifestor()) {
           return true;
         }

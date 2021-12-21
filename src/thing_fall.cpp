@@ -88,9 +88,9 @@ void Thing::fall(float fall_height, ts_t ms)
   level_push();
 
   //
-  // If a generator falls, the connection to the minions is severed
+  // If a mob falls, the connection to the minions is severed
   //
-  if (is_minion_generator()) {
+  if (is_mob()) {
     destroy_minions(nullptr);
   }
 
@@ -231,7 +231,7 @@ bool Thing::fall_to_next_level(void)
     }
 
     if (next_level->is_ascend_dungeon(x, y) || next_level->is_monst(x, y) || next_level->is_rock(x, y) ||
-        next_level->is_door(x, y) || next_level->is_secret_door(x, y) || next_level->is_minion_generator(x, y) ||
+        next_level->is_door(x, y) || next_level->is_secret_door(x, y) || next_level->is_mob(x, y) ||
         next_level->is_chasm(x, y) || next_level->is_wall(x, y) || next_level->is_ascend_sewer(x, y) ||
         next_level->is_descend_sewer(x, y) || next_level->is_descend_dungeon(x, y)) {
       dbg("No, %d,%d is a special tile", x, y);
@@ -299,14 +299,14 @@ bool Thing::fall_to_next_level(void)
       visible();
 
       //
-      // Allow generators to fall without damage
+      // Allow mobs to fall without damage
       //
       int fall_damage = 0;
       if (is_player()) {
         fall_damage = pcg_random_range(20, 50);
       }
 
-      if (is_wand() || is_potion() || is_minion_generator() || is_monst()) {
+      if (is_wand() || is_potion() || is_mob() || is_monst()) {
         fall_damage = get_health() / 2;
       }
 

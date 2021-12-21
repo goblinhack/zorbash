@@ -61,7 +61,7 @@ def tp_init(name, text_name):
     mytp.set_health_initial_dice("2d6")
     mytp.set_hunger_clock_tick_frequency(50)
     mytp.set_hunger_health_pct(95)
-    mytp.set_is_able_to_attack_generators(True)
+    mytp.set_is_able_to_attack_mobs(True)
     mytp.set_is_able_to_break_down_doors(True)
     mytp.set_is_able_to_break_out_of_webs(True)
     mytp.set_is_able_to_change_levels(True)

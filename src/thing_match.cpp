@@ -27,7 +27,7 @@ bool Thing::matches(const std::string &what)
   if (aggression_level_pct() && (what == "aggression_level_pct")) {
     return true;
   }
-  if (is_able_to_attack_generators() && (what == "is_able_to_attack_generators")) {
+  if (is_able_to_attack_mobs() && (what == "is_able_to_attack_mobs")) {
     return true;
   }
   if (is_able_to_break_down_doors() && (what == "is_able_to_break_down_doors")) {
@@ -351,7 +351,7 @@ bool Thing::matches(const std::string &what)
   if (is_engulfer() && (what == "is_engulfer")) {
     return true;
   }
-  if (is_ethereal_minion_generator() && (what == "is_ethereal_minion_generator")) {
+  if (is_ethereal_mob() && (what == "is_ethereal_mob")) {
     return true;
   }
   if (is_ethereal() && (what == "is_ethereal")) {
@@ -477,7 +477,7 @@ bool Thing::matches(const std::string &what)
   if (is_metal() && (what == "is_metal")) {
     return true;
   }
-  if (is_minion_generator() && (what == "is_minion_generator")) {
+  if (is_mob() && (what == "is_mob")) {
     return true;
   }
   if (is_minion() && (what == "is_minion")) {
@@ -739,8 +739,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "aggression_level_pct") {
     return &Thing::aggression_level_pct;
   }
-  if (what == "is_able_to_attack_generators") {
-    return &Thing::is_able_to_attack_generators;
+  if (what == "is_able_to_attack_mobs") {
+    return &Thing::is_able_to_attack_mobs;
   }
   if (what == "is_able_to_break_down_doors") {
     return &Thing::is_able_to_break_down_doors;
@@ -1057,8 +1057,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_engulfer") {
     return &Thing::is_engulfer;
   }
-  if (what == "is_ethereal_minion_generator") {
-    return &Thing::is_ethereal_minion_generator;
+  if (what == "is_ethereal_mob") {
+    return &Thing::is_ethereal_mob;
   }
   if (what == "is_ethereal") {
     return &Thing::is_ethereal;
@@ -1183,8 +1183,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_metal") {
     return &Thing::is_metal;
   }
-  if (what == "is_minion_generator") {
-    return &Thing::is_minion_generator;
+  if (what == "is_mob") {
+    return &Thing::is_mob;
   }
   if (what == "is_minion") {
     return &Thing::is_minion;

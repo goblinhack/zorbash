@@ -40,8 +40,8 @@ public:
     GOLD                  = 'o',
     KEY                   = 'k',
     LAVA                  = 'L',
-    MINION_GENERATOR_EASY = 'g',
-    MINION_GENERATOR_HARD = 'G',
+    MINION_MOB_EASY = 'g',
+    MINION_MOB_HARD = 'G',
     MONST_EASY            = 'm',
     MONST_MED             = 'M',
     MONST_HARD            = 'H',
@@ -84,8 +84,8 @@ public:
   bool is_gold {false};
   bool is_key {false};
   bool is_lava {false};
-  bool is_minion_generator_hard {false};
-  bool is_minion_generator_easy {false};
+  bool is_mob_hard {false};
+  bool is_mob_easy {false};
   bool is_monst_easy {false};
   bool is_monst_med {false};
   bool is_monst_hard {false};

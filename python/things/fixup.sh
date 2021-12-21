@@ -19,7 +19,7 @@ for IN in \
     dungeon/*py \
     effects/*py \
     food/*py \
-    generators/*py \
+    mobs/*py \
     internal/*py \
     items/*py \
     monsts/*py \
@@ -37,7 +37,7 @@ do
     sed '/mytp.set_z_prio(/,$!d' $IN | tail -n +2 - > $POST
 
     for arg in \
-      set_is_able_to_attack_generators \
+      set_is_able_to_attack_mobs \
       set_is_able_to_break_down_doors \
       set_is_able_to_break_out_of_webs \
       set_is_able_to_collect_keys \
@@ -173,7 +173,7 @@ do
       set_is_enchantstone \
       set_is_engulfer \
       set_is_ethereal \
-      set_is_ethereal_minion_generator \
+      set_is_ethereal_mob \
       set_is_explosion \
       set_is_fearless \
       set_is_fire \
@@ -214,7 +214,7 @@ do
       set_is_meat_eater \
       set_is_metal \
       set_is_minion \
-      set_is_minion_generator \
+      set_is_mob \
       set_is_monst \
       set_is_moveable \
       set_is_msg \

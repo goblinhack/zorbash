@@ -29,11 +29,11 @@ static Tpidmap tp_dirt;
 static Tpidmap tp_door;
 static Tpidmap tp_dry_grass;
 static Tpidmap tp_enchantstone;
-static Tpidmap tp_ethereal_generator;
+static Tpidmap tp_ethereal_mob;
 static Tpidmap tp_floor;
 static Tpidmap tp_foilage;
 static Tpidmap tp_food;
-static Tpidmap tp_generator;
+static Tpidmap tp_mob;
 static Tpidmap tp_gold;
 static Tpidmap tp_green_splatter;
 static Tpidmap tp_item_class_a;
@@ -120,8 +120,8 @@ void tp_random_init(void)
     if (tp->is_skillstone()) {
       tp_skillstone.push_back(tp);
     }
-    if (tp->is_ethereal_minion_generator()) {
-      tp_ethereal_generator.push_back(tp);
+    if (tp->is_ethereal_mob()) {
+      tp_ethereal_mob.push_back(tp);
     }
     if (tp->is_floor()) {
       tp_floor.push_back(tp);
@@ -144,8 +144,8 @@ void tp_random_init(void)
     if (tp->is_key()) {
       tp_key.push_back(tp);
     }
-    if (tp->is_minion_generator()) {
-      tp_generator.push_back(tp);
+    if (tp->is_mob()) {
+      tp_mob.push_back(tp);
     }
     if (tp->is_potion()) {
       tp_potion.push_back(tp);
@@ -890,31 +890,31 @@ Tpp tp_random_secret_door(void)
   return tp_get_with_no_rarity_filter(tp_secret_door);
 }
 
-Tpp tp_random_minion_generator(void)
+Tpp tp_random_mob(void)
 {
   TRACE_NO_INDENT();
-  if (unlikely(! tp_generator.size())) {
-    ERR("No generator found");
+  if (unlikely(! tp_mob.size())) {
+    ERR("No mob found");
     return nullptr;
   }
-  return tp_get_with_rarity_filter(tp_generator);
+  return tp_get_with_rarity_filter(tp_mob);
 }
 
-Tpp tp_random_ethereal_minion_generator(void)
+Tpp tp_random_ethereal_mob(void)
 {
   TRACE_NO_INDENT();
-  if (unlikely(! tp_ethereal_generator.size())) {
-    ERR("No generator found");
+  if (unlikely(! tp_ethereal_mob.size())) {
+    ERR("No mob found");
     return nullptr;
   }
-  return tp_get_with_rarity_filter(tp_ethereal_generator);
+  return tp_get_with_rarity_filter(tp_ethereal_mob);
 }
 
-Tpp tp_random_minion_generator_easy(void) { return tp_random_minion_generator(); }
+Tpp tp_random_mob_easy(void) { return tp_random_mob(); }
 
-Tpp tp_random_minion_generator_hard(void) { return tp_random_minion_generator(); }
+Tpp tp_random_mob_hard(void) { return tp_random_mob(); }
 
-Tpp Level::tp_random_minion_generator(const point &p)
+Tpp Level::tp_random_mob(const point &p)
 {
   TRACE_NO_INDENT();
   auto tries = 0U;
@@ -922,7 +922,7 @@ Tpp Level::tp_random_minion_generator(const point &p)
     if (tries++ > 10000) {
       return nullptr;
     }
-    auto tpp = ::tp_random_minion_generator();
+    auto tpp = ::tp_random_mob();
     if (tpp->is_disliked_by_me(this, p)) {
       continue;
     }
@@ -930,16 +930,16 @@ Tpp Level::tp_random_minion_generator(const point &p)
   }
 }
 
-Tpp Level::tp_random_minion_generator_easy(const point &p)
+Tpp Level::tp_random_mob_easy(const point &p)
 {
   TRACE_NO_INDENT();
-  return tp_random_minion_generator(p);
+  return tp_random_mob(p);
 }
 
-Tpp Level::tp_random_minion_generator_hard(const point &p)
+Tpp Level::tp_random_mob_hard(const point &p)
 {
   TRACE_NO_INDENT();
-  return tp_random_minion_generator(p);
+  return tp_random_mob(p);
 }
 
 Tpp tp_random_blood(void)

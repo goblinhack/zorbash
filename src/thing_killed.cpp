@@ -88,9 +88,9 @@ void Thing::killed(Thingp defeater, const char *reason)
   }
 
   //
-  // If a minion generator dies, kill all minions
+  // If a minion mob dies, kill all minions
   //
-  if (defeater && is_minion_generator()) {
+  if (defeater && is_mob()) {
     destroy_minions(defeater);
   }
 

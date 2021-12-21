@@ -160,11 +160,11 @@ void Thing::destroy_minions(Thingp defeater)
 {
   TRACE_NO_INDENT();
   //
-  // Warning defeater can be nullptr - e.g. when a generator falls to
+  // Warning defeater can be nullptr - e.g. when a mob falls to
   // a new level
   //
 
-  if (! is_minion_generator()) {
+  if (! is_mob()) {
     return;
   }
 
@@ -195,7 +195,7 @@ void Thing::destroy_minions(Thingp defeater)
 void Thing::unleash_minions(void)
 {
   TRACE_NO_INDENT();
-  if (! is_minion_generator()) {
+  if (! is_mob()) {
     return;
   }
 

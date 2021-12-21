@@ -48,7 +48,7 @@ PyObject *level_gfx_long_shadow_caster_at(PyObject *obj, PyObject *args, PyObjec
 PyObject *level_gfx_solid_shadow_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_gfx_very_short_shadow_caster_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_gfx_water_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_able_to_attack_generators_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_able_to_attack_mobs_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_able_to_break_down_doors_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_able_to_break_out_of_webs_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_able_to_change_levels_at(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -145,7 +145,7 @@ PyObject *level_is_enchantable_at(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *level_is_enchantstone_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_engulfer_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_ethereal_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_ethereal_minion_generator_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_ethereal_mob_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_exit_finder_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_explosion_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_fearless_at(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -190,7 +190,7 @@ PyObject *level_is_meat_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_meat_eater_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_metal_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_minion_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_minion_generator_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_mob_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_monst_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_moveable_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_msg_at(PyObject *obj, PyObject *args, PyObject *keywds);

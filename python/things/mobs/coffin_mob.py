@@ -12,7 +12,7 @@ def on_idle_tick_frequency_dice(me, x, y):
 
 
 def on_death(me, x, y):
-    my.level_spawn_at_thing(me, "generator_explosion")
+    my.level_spawn_at_thing(me, "mob_explosion")
 
 
 def tp_init(name, text_name):
@@ -38,9 +38,9 @@ def tp_init(name, text_name):
     mytp.set_is_burnable(True)
     mytp.set_is_crushable(True)
     mytp.set_is_described_when_hovering_over(True)
-    mytp.set_is_ethereal_minion_generator(True)
+    mytp.set_is_ethereal_mob(True)
     mytp.set_is_loggable(True)
-    mytp.set_is_minion_generator(True)
+    mytp.set_is_mob(True)
     mytp.set_is_obs_destructable(True)
     mytp.set_is_shovable(True)
     mytp.set_is_tickable(True)
@@ -67,7 +67,7 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="coffin_minion_generator", text_name="pile of bones")
+    tp_init(name="coffin_mob", text_name="pile of bones")
 
 
 init()

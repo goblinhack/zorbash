@@ -890,10 +890,10 @@ int Thing::is_enchantstone(void)
   return (tp()->is_enchantstone());
 }
 
-int Thing::is_ethereal_minion_generator(void)
+int Thing::is_ethereal_mob(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_ethereal_minion_generator());
+  return (tp()->is_ethereal_mob());
 }
 
 int Thing::is_ethereal(void)
@@ -1166,10 +1166,10 @@ int Thing::is_meat(void)
   return (tp()->is_meat());
 }
 
-int Thing::is_minion_generator(void)
+int Thing::is_mob(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_minion_generator());
+  return (tp()->is_mob());
 }
 
 int Thing::is_minion(void)
@@ -1580,10 +1580,10 @@ int Thing::is_able_to_enchant_items(void)
   return (tp()->is_able_to_enchant_items());
 }
 
-int Thing::is_able_to_attack_generators(void)
+int Thing::is_able_to_attack_mobs(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_able_to_attack_generators());
+  return (tp()->is_able_to_attack_mobs());
 }
 
 int Thing::ai_wanderer(void)

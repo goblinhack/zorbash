@@ -22,7 +22,9 @@ bool Thing::target_select(Thingp what)
 
   game->change_state(Game::STATE_CHOOSING_TARGET);
   level->cursor_recreate();
-  level->cursor->visible();
+  if (level->cursor) {
+    level->cursor->visible();
+  }
   level->describe(what);
 
   return true;

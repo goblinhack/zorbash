@@ -481,7 +481,7 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
   if (me_tp->gfx_attack_anim()) {
     if (it_tp->is_monst()) {
       //
-      // Weapon hits monster or generator.
+      // Weapon hits monster or mob.
       //
       if (things_overlap(me, future_pos, it)) {
         dbg("Yes; overlaps and can attack");
@@ -638,11 +638,11 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
   }
 
   //
-  // This lets you skip around generators to avoid ghosts
+  // This lets you skip around mobs to avoid ghosts
   //
   if (is_ethereal()) {
     if (is_minion()) {
-      if (it->is_minion_generator()) {
+      if (it->is_mob()) {
         if (it == get_top_manifestor()) {
           if (things_overlap(me, future_pos, it)) {
             dbg("Yes; cannot pass through my manifestor");

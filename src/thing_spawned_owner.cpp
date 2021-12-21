@@ -102,7 +102,7 @@ void Thing::destroy_spawned(Thingp defeater)
 {
   TRACE_NO_INDENT();
   //
-  // Warning defeater can be nullptr - e.g. when a generator falls to
+  // Warning defeater can be nullptr - e.g. when a mob falls to
   // a new level
   //
 

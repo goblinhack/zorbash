@@ -160,7 +160,7 @@ public:
   uint64_t i_set_is_key                           : 1 {};
   uint64_t i_set_is_lava                          : 1 {};
   uint64_t i_set_is_light_blocker                 : 1 {};
-  uint64_t i_set_is_minion_generator              : 1 {};
+  uint64_t i_set_is_mob              : 1 {};
   uint64_t i_set_is_monst                         : 1 {};
   uint64_t i_set_is_necrotic_danger_level         : 1 {};
   uint64_t i_set_is_obs_destructable              : 1 {};
@@ -1010,7 +1010,7 @@ public:
   int incr_stat_strength(void);
   int incr_stuck_count(int);
   int incr_stuck_count(void);
-  int is_able_to_attack_generators(void);
+  int is_able_to_attack_mobs(void);
   int is_able_to_break_down_doors(void);
   int is_able_to_break_out_of_webs(void);
   int is_able_to_change_levels(void);
@@ -1117,7 +1117,7 @@ public:
   int is_enchantable(void);
   int is_enchantstone(void);
   int is_engulfer(void);
-  int is_ethereal_minion_generator(void);
+  int is_ethereal_mob(void);
   int is_ethereal(void);
   int is_exit_finder(void);
   int is_explorer(void);
@@ -1164,7 +1164,7 @@ public:
   int is_meat_eater(void);
   int is_meat(void);
   int is_metal(void);
-  int is_minion_generator(void);
+  int is_mob(void);
   int is_minion(void);
   int is_monst(void);
   int is_moveable(void);
