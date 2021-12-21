@@ -33,47 +33,57 @@ bool Thing::worth_eating(Thingp victim)
 
 bool Thing::can_eat(const Thingp itp)
 {
+  auto me = tp();
+
   TRACE_AND_INDENT();
-  auto me    = tp();
-  auto vitim = itp->tp();
+  log("Can eat? %s", itp->to_short_string().c_str());
+  TRACE_AND_INDENT();
 
   if (me->is_meat_eater()) {
-    if (vitim->is_meat()) {
+    if (itp->is_meat()) {
+      log("Can eat meat: %s", itp->to_short_string().c_str());
       return true;
     }
   }
   if (me->is_blood_eater()) {
-    if (vitim->is_blood()) {
+    if (itp->is_blood()) {
+      log("Can eat blood: %s", itp->to_short_string().c_str());
       return true;
     }
   }
   if (me->is_food_eater()) {
-    if (vitim->is_food()) {
+    if (itp->is_food()) {
+      log("Can eat food: %s", itp->to_short_string().c_str());
       return true;
     }
   }
   if (me->is_treasure_eater()) {
-    if (vitim->is_treasure_type()) {
+    if (itp->is_treasure_type()) {
+      log("Can eat treasure: %s", itp->to_short_string().c_str());
       return true;
     }
   }
   if (me->is_potion_eater()) {
-    if (vitim->is_potion()) {
+    if (itp->is_potion()) {
+      log("Can eat potion: %s", itp->to_short_string().c_str());
       return true;
     }
   }
   if (me->is_item_magical_eater()) {
-    if (vitim->is_item_magical()) {
+    if (itp->is_item_magical()) {
+      log("Can eat magical: %s", itp->to_short_string().c_str());
       return true;
     }
   }
   if (me->is_jelly_baby_eater()) {
-    if (vitim->is_jelly_baby()) {
+    if (itp->is_jelly_baby()) {
+      log("Can eat jelly: %s", itp->to_short_string().c_str());
       return true;
     }
   }
   if (is_player()) {
-    if (vitim->is_food()) {
+    if (itp->is_food()) {
+      log("Can eat food: %s", itp->to_short_string().c_str());
       return true;
     }
   }

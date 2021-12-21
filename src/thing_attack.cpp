@@ -44,6 +44,10 @@ bool Thing::possible_to_attack(const Thingp victim)
     return false;
   }
 
+  if (same_leader(victim)) {
+    return false;
+  }
+
   //
   // Weapons can't attack all by themselves. That would be nuts.
   //
@@ -95,9 +99,9 @@ bool Thing::possible_to_attack(const Thingp victim)
     }
   }
 
-  /*
-   * Don't attadk thy leader or follower
-   */
+  //
+  // Don't attadk thy leader or follower
+  //
   if (same_leader(victim)) {
     return false;
   }

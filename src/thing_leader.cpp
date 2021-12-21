@@ -391,6 +391,10 @@ bool Thing::same_leader(Thingp it)
   }
 #endif
 
+  if (my_leader && (my_leader == it)) {
+    return true;
+  }
+
   if (its_leader && (its_leader == my_leader)) {
     return true;
   }

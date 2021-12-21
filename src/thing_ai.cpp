@@ -1741,6 +1741,7 @@ bool Thing::ai_tick(bool recursing)
           //
           // If we're absolutely exhausted, we must rest, threat or no threat
           //
+          AI_LOG("Idle, rest check");
           if (is_able_to_tire() && (get_stamina() < get_stamina_max() / 3)) {
             AI_LOG("Low on stamina, rest");
             if (is_player()) {
@@ -1754,7 +1755,9 @@ bool Thing::ai_tick(bool recursing)
           // If really low on health and we have something we can eat, try
           // that.
           //
+          AI_LOG("Idle, health check");
           if (get_health() < get_health_max() / 3) {
+            AI_LOG("Idle, eat check as a bit hungry");
             if (can_eat_something()) {
               AI_LOG("Low on health, rest");
               if (is_player()) {
@@ -1771,10 +1774,12 @@ bool Thing::ai_tick(bool recursing)
           // could push us off of a cliff while we're doing other stuff.
           //
           if (is_able_to_enchant_items() || is_able_to_learn_skills()) {
+            AI_LOG("Idle, unfriendly monst check");
             if (! any_unfriendly_monst_visible()) {
               //
               // Can we enchant something?
               //
+              AI_LOG("Idle, enchant check");
               if (is_able_to_enchant_items()) {
                 if (get_enchantstone_count() && can_enchant_something()) {
                   AI_LOG("Try to enchant something");
@@ -1789,6 +1794,7 @@ bool Thing::ai_tick(bool recursing)
               //
               // Can we learn some skills?
               //
+              AI_LOG("Idle, enchant check");
               if (is_able_to_learn_skills()) {
                 if (get_skillstone_count() && can_learn_something()) {
                   AI_LOG("Try to use a skillstone");
@@ -1799,6 +1805,8 @@ bool Thing::ai_tick(bool recursing)
                   return true;
                 }
               }
+            } else {
+              AI_LOG("Idle, unfriendlies are near");
             }
           }
 
@@ -1807,6 +1815,7 @@ bool Thing::ai_tick(bool recursing)
           // wand jellys wandering around with swords!
           //
           if (is_able_to_use_weapons()) {
+            AI_LOG("Idle, weapon check");
             Thingp curr_weapon = get_equip(MONST_EQUIP_WEAPON);
             Thingp best_weapon = nullptr;
             get_carried_weapon_highest_value(&best_weapon);
@@ -1835,6 +1844,7 @@ bool Thing::ai_tick(bool recursing)
           }
 
           if (is_able_to_use_wands()) {
+            AI_LOG("Idle, wand check");
             Thingp curr_wand = get_equip(MONST_EQUIP_WEAPON);
             Thingp best_wand = nullptr;
             get_carried_wand_highest_value(&best_wand);
@@ -1843,6 +1853,7 @@ bool Thing::ai_tick(bool recursing)
               auto best_wand_val = maybe_itemp_value(best_wand);
 
               if (! curr_wand) {
+                AI_LOG("Idle, hhave a wand, but not used", best_wand);
                 if (use(best_wand, MONST_EQUIP_WEAPON)) {
                   AI_LOG("Change wand", best_wand);
                   if (is_player()) {
@@ -1851,8 +1862,9 @@ bool Thing::ai_tick(bool recursing)
                   return true;
                 }
               } else if (best_wand_val > curr_wand_val) {
+                AI_LOG("Idle, change from Old wand", curr_wand);
                 if (use(best_wand, MONST_EQUIP_WEAPON)) {
-                  AI_LOG("Change wand", best_wand);
+                  AI_LOG("Idle, change to new wand", best_wand);
                   if (is_player()) {
                     game->tick_begin("Robot, has changed to wand");
                   }
@@ -1863,6 +1875,7 @@ bool Thing::ai_tick(bool recursing)
           }
 
           if (is_able_to_use_rings()) {
+            AI_LOG("Idle, ring check");
             //
             // Can we switch to a better ring?
             //
@@ -1924,6 +1937,7 @@ bool Thing::ai_tick(bool recursing)
         // Look for goals. Each search type expands the scope of what we look at
         // until at the end, we end up looking for the exit.
         //
+        AI_LOG("Idle, look for goals");
         int search_type_max;
         if (is_able_to_jump()) {
           if (is_explorer()) {
