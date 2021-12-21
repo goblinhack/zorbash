@@ -28,7 +28,7 @@ static ts_t wid_last_wait_repeat;
 
 void wid_actionbar_close_all_popups(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   wid_thing_info_fini();
   wid_collect_destroy();
   wid_enchant_destroy();
@@ -38,13 +38,12 @@ void wid_actionbar_close_all_popups(void)
   wid_inventory_fini();
   game_quit_destroy();
   game_config_keyboard_destroy();
-  TRACE_AND_INDENT();
   game->change_state(Game::STATE_NORMAL);
 }
 
 void wid_actionbar_fini(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (wid_actionbar) {
     DBG("Actionbar fini");
     wid_destroy_nodelay(&wid_actionbar);
@@ -53,9 +52,9 @@ void wid_actionbar_fini(void)
 
 static uint8_t wid_actionbar_quit(Widp w, int32_t x, int32_t y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   DBG3("Actionbar quit");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   wid_actionbar_close_all_popups();
   if (game_quit_window) {
@@ -69,21 +68,21 @@ static uint8_t wid_actionbar_quit(Widp w, int32_t x, int32_t y, uint32_t button)
 
 static void wid_actionbar_quit_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   BOTCON("Select this to quit the dungeon.");
 }
 
 static void wid_actionbar_quit_over_e(Widp w)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   BOTCON(" ");
 }
 
 void wid_actionbar_robot_mode_toggle(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   DBG3("Actionbar robot");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   wid_actionbar_close_all_popups();
   game->robot_mode_requested = ! game->robot_mode_requested;
   wid_actionbar_init();
@@ -91,9 +90,9 @@ void wid_actionbar_robot_mode_toggle(void)
 
 void wid_actionbar_robot_mode_update(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   DBG3("Actionbar robot update");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   wid_actionbar_close_all_popups();
   if (game->level) {
     if (game->level->player) {
@@ -106,13 +105,13 @@ void wid_actionbar_robot_mode_update(void)
 
 void wid_actionbar_robot_mode_off(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (! game->robot_mode) {
     return;
   }
 
   DBG3("Actionbar robot");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   wid_actionbar_close_all_popups();
   if (game->level) {
     if (game->level->player) {
@@ -127,34 +126,34 @@ void wid_actionbar_robot_mode_off(void)
 
 static uint8_t wid_actionbar_robot(Widp w, int32_t x, int32_t y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   wid_actionbar_robot_mode_toggle();
   return true;
 }
 
 static void wid_actionbar_robot_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   BOTCON("Select this to explore the dungeon like a robot.");
 }
 
 static void wid_actionbar_robot_over_e(Widp w)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   BOTCON(" ");
 }
 
 static void wid_actionbar_ai_tick(Widp w)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   game->robot_mode_tick_requested = true;
 }
 
 static uint8_t wid_actionbar_close(Widp w, int32_t x, int32_t y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   DBG3("Actionbar close");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (! game->level) {
     return true;
   }
@@ -175,21 +174,21 @@ static uint8_t wid_actionbar_close(Widp w, int32_t x, int32_t y, uint32_t button
 
 static void wid_actionbar_close_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   BOTCON("Select this to close any popups.");
 }
 
 static void wid_actionbar_close_over_e(Widp w)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   BOTCON(" ");
 }
 
 static uint8_t wid_actionbar_load(Widp w, int32_t x, int32_t y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   DBG3("Actionbar load");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (! game->level) {
     return true;
   }
@@ -216,21 +215,21 @@ static uint8_t wid_actionbar_load(Widp w, int32_t x, int32_t y, uint32_t button)
 
 static void wid_actionbar_load_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   BOTCON("Select this to load a previously saved dungeon.");
 }
 
 static void wid_actionbar_load_over_e(Widp w)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   BOTCON(" ");
 }
 
 static uint8_t wid_actionbar_save(Widp w, int32_t x, int32_t y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   DBG3("Actionbar save");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (! game->level) {
     return true;
   }
@@ -257,21 +256,21 @@ static uint8_t wid_actionbar_save(Widp w, int32_t x, int32_t y, uint32_t button)
 
 static void wid_actionbar_save_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   BOTCON("Select this to save the current dungeon.");
 }
 
 static void wid_actionbar_save_over_e(Widp w)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   BOTCON(" ");
 }
 
 static uint8_t wid_actionbar_inventory(Widp w, int32_t x, int32_t y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   DBG("Actionbar inventory");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   game->request_destroy_thing_info = false;
 
   if (! game->level) {
@@ -304,21 +303,21 @@ static uint8_t wid_actionbar_inventory(Widp w, int32_t x, int32_t y, uint32_t bu
 
 static void wid_actionbar_inventory_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   BOTCON("Select this to see what you are carrying.");
 }
 
 static void wid_actionbar_inventory_over_e(Widp w)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   BOTCON(" ");
 }
 
 static uint8_t wid_actionbar_collect(Widp w, int32_t x, int32_t y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   DBG3("Actionbar collect");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (! game->level) {
     return true;
   }
@@ -353,21 +352,21 @@ static uint8_t wid_actionbar_collect(Widp w, int32_t x, int32_t y, uint32_t butt
 
 static void wid_actionbar_collect_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   BOTCON("Select this to collect any loot you are over.");
 }
 
 static void wid_actionbar_collect_over_e(Widp w)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   BOTCON(" ");
 }
 
 static uint8_t wid_actionbar_wait(Widp w, int32_t x, int32_t y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   DBG("Actionbar wait");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (! game->level) {
     return true;
   }
@@ -396,9 +395,9 @@ static uint8_t wid_actionbar_wait(Widp w, int32_t x, int32_t y, uint32_t button)
 
 static uint8_t wid_actionbar_repeat_wait(Widp w, int32_t x, int32_t y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   DBG3("Actionbar wait");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (! game->level) {
     return true;
   }
@@ -435,21 +434,21 @@ static uint8_t wid_actionbar_repeat_wait(Widp w, int32_t x, int32_t y, uint32_t 
 
 static void wid_actionbar_wait_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   BOTCON("Select this to happily pass the time of day.");
 }
 
 static void wid_actionbar_wait_over_e(Widp w)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   BOTCON(" ");
 }
 
 static uint8_t wid_actionbar_zoom_out(Widp w, int32_t x, int32_t y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   DBG3("Actionbar zoom out");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (! game->level) {
     return true;
   }
@@ -461,21 +460,21 @@ static uint8_t wid_actionbar_zoom_out(Widp w, int32_t x, int32_t y, uint32_t but
 
 static void wid_actionbar_zoom_out_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   BOTCON("Select this to zoom out the map.");
 }
 
 static void wid_actionbar_zoom_out_over_e(Widp w)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   BOTCON(" ");
 }
 
 static uint8_t wid_actionbar_zoom_in(Widp w, int32_t x, int32_t y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   DBG3("Actionbar zoom in");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (! game->level) {
     return true;
   }
@@ -487,21 +486,21 @@ static uint8_t wid_actionbar_zoom_in(Widp w, int32_t x, int32_t y, uint32_t butt
 
 static void wid_actionbar_zoom_in_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   BOTCON("Select this to zoom in the map.");
 }
 
 static void wid_actionbar_zoom_in_over_e(Widp w)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   BOTCON(" ");
 }
 
 static uint8_t wid_actionbar_configure(Widp w, int32_t x, int32_t y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   DBG3("Actionbar configure");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (! game->level) {
     return true;
   }
@@ -520,19 +519,19 @@ static uint8_t wid_actionbar_configure(Widp w, int32_t x, int32_t y, uint32_t bu
 
 static void wid_actionbar_configure_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   BOTCON("Select this to change key settings.");
 }
 
 static void wid_actionbar_configure_over_e(Widp w)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   BOTCON(" ");
 }
 
 void wid_actionbar_init(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   DBG("Actionbar init");
 
   if (! game->level) {
@@ -547,22 +546,21 @@ void wid_actionbar_init(void)
   if (player->is_dead) {
     return;
   }
-  TRACE_AND_INDENT();
+
   //
   // In case a scancode was used to open this widget
   //
-  TRACE_AND_INDENT();
   if (wid_actionbar) {
     DBG("Actionbar init exists close it and recreate");
     wid_actionbar_fini();
   }
-  TRACE_AND_INDENT();
+
   DBG("Actionbar init create");
+
   bool ui_icon_collect = false;
   if (player->check_anything_to_carry(false)) {
     ui_icon_collect = true;
   }
-  TRACE_AND_INDENT();
   bool ui_icon_close = false;
 
   if (wid_popup_exists()) {
@@ -579,14 +577,12 @@ void wid_actionbar_init(void)
     options++;
     options++;
   }
-  TRACE_AND_INDENT();
   int option_width = 4;
   int w            = options * option_width;
   int left_half    = w / 2;
   int right_half   = w - left_half;
 
   {
-    TRACE_AND_INDENT();
     point tl = make_point(TERM_WIDTH / 2 - left_half, TERM_HEIGHT - (option_width + 1));
     point br = make_point(TERM_WIDTH / 2 + right_half - 1, TERM_HEIGHT - 2);
 
@@ -748,6 +744,5 @@ void wid_actionbar_init(void)
     wid_set_on_mouse_over_end(w, wid_actionbar_close_over_e);
     x_at += option_width;
   }
-  TRACE_AND_INDENT();
   wid_update(wid_actionbar);
 }

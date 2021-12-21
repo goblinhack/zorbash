@@ -163,7 +163,7 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="skeleton_minion_long_leash", text_name="skeleton")
+    tp_init(name="skel_minion_wander", text_name="skeleton")
 
 
 init()

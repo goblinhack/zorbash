@@ -42,7 +42,6 @@ bool Thing::try_to_escape(void)
 
 bool Thing::ai_escape(void)
 {
-  TRACE_AND_INDENT();
   dbg("AI escape");
   TRACE_AND_INDENT();
 
@@ -86,7 +85,7 @@ bool Thing::ai_escape(void)
       get_aip()->wander_target = point(-1, -1);
     }
   }
-  TRACE_AND_INDENT();
+
   dbg("No escape goal");
   return false;
 }

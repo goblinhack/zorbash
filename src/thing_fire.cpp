@@ -15,7 +15,6 @@
 
 void Thing::fire_tick(void)
 {
-  TRACE_AND_INDENT();
   if (is_burnable() || is_combustible() || is_very_combustible()) {
     //
     // Keep going
@@ -24,6 +23,9 @@ void Thing::fire_tick(void)
     IF_DEBUG3 { log("No, is not fire avoider"); }
     return;
   }
+
+  TRACE_AND_INDENT();
+  dbg("Fire tick");
 
   bool  hit = false;
   point at  = curr_at;

@@ -15,7 +15,6 @@
 
 bool Thing::open_door(Thingp it)
 {
-  TRACE_AND_INDENT();
   if (! is_monst() && ! is_player()) {
     return false;
   }
@@ -40,6 +39,9 @@ bool Thing::open_door(Thingp it)
   if (it->is_dead) {
     return false;
   }
+
+  dbg("Open door");
+  TRACE_AND_INDENT();
 
   if (get_keys()) {
     decr_keys();
@@ -71,7 +73,6 @@ bool Thing::open_door(Thingp it)
 
 bool Thing::close_door(Thingp it)
 {
-  TRACE_AND_INDENT();
   if (is_on_fire()) {
     if (! it->is_on_fire()) {
       if (is_player()) {
@@ -92,6 +93,9 @@ bool Thing::close_door(Thingp it)
   if (it->is_dead) {
     return false;
   }
+
+  dbg("Close door");
+  TRACE_AND_INDENT();
 
   IF_DEBUG1 { it->log("Close"); }
   it->level_pop();

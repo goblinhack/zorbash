@@ -19,7 +19,7 @@
 //
 void Thing::on_fall(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto on_fall = tp()->on_fall_do();
   if (std::empty(on_fall)) {
     return;
@@ -48,9 +48,8 @@ void Thing::on_fall(void)
 
 void Thing::fall(float fall_height, ts_t ms)
 {
-  TRACE_AND_INDENT();
-  dbg("Can fall?");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   if (is_changing_level || is_hidden || is_falling || is_waiting_to_ascend_dungeon || is_waiting_to_descend_sewer ||
       is_waiting_to_descend_dungeon || is_waiting_to_ascend_sewer || is_waiting_to_leave_level_has_completed_fall ||
       is_jumping) {
@@ -79,6 +78,7 @@ void Thing::fall(float fall_height, ts_t ms)
   set_fall_height(fall_height);
 
   dbg("Begin falling");
+  TRACE_AND_INDENT();
 
   //
   // Push pop here is needed to remove items as they are now in freefall
@@ -121,6 +121,8 @@ float Thing::get_fall(void)
   if (ts >= get_ts_fall_end()) {
     is_falling = false;
     dbg("End of falling timestamp");
+    TRACE_AND_INDENT();
+
     level_push();
     is_waiting_to_leave_level_has_completed_fall = true;
 
@@ -161,7 +163,6 @@ bool Thing::fall_to_next_level(void)
     return false;
   }
 
-  TRACE_AND_INDENT();
   dbg("Try to fall to next level");
   TRACE_AND_INDENT();
 
@@ -270,12 +271,15 @@ bool Thing::fall_to_next_level(void)
       }
 
       dbg("Land on the next level, change level then move to %d,%d", x, y);
+      TRACE_AND_INDENT();
       level_change(next_level);
 
       dbg("Land on the next level, move to %d,%d", x, y);
+      TRACE_AND_INDENT();
       move_to_immediately(point(x, y));
 
       dbg("Level change move carried items");
+      TRACE_AND_INDENT();
       move_carried_items_immediately();
 
       if (is_player()) {
@@ -349,6 +353,8 @@ bool Thing::fall_to_next_level(void)
       // Update the z depth when falling
       //
       dbg("End of falling to next level");
+      TRACE_AND_INDENT();
+
       level_pop();
       is_falling        = false;
       is_changing_level = false;

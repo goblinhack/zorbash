@@ -17,7 +17,6 @@
 
 bool Thing::debuff_add(Thingp what)
 {
-  TRACE_AND_INDENT();
   dbg("Try to add debuff %s", what->to_short_string().c_str());
   TRACE_AND_INDENT();
 
@@ -64,9 +63,9 @@ bool Thing::debuff_add(Thingp what)
 
 bool Thing::debuff_remove(Thingp what)
 {
-  TRACE_AND_INDENT();
   dbg("Removing debuff %s", what->to_short_string().c_str());
   TRACE_AND_INDENT();
+
   auto existing_owner = what->get_immediate_owner();
   if (existing_owner != this) {
     err("Attempt to remove debuff %s which is not owned", what->to_short_string().c_str());
@@ -87,7 +86,7 @@ bool Thing::debuff_remove(Thingp what)
 
 void Thing::debuff_remove_all(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (! maybe_itemp()) {
     return;
   }
@@ -104,8 +103,9 @@ void Thing::debuff_remove_all(void)
 
 bool Thing::debuff_use(Thingp what)
 {
-  TRACE_AND_INDENT();
   dbg("Try to use debuff %s", what->to_short_string().c_str());
+  TRACE_AND_INDENT();
+
   used(what, this, false /* remove after use */);
   return true;
 }
@@ -124,9 +124,9 @@ bool Thing::debuff_add(Tpp what)
     return false;
   }
 
-  TRACE_AND_INDENT();
   dbg("Add debuff: %s", t->to_string().c_str());
   TRACE_AND_INDENT();
+
   debuff_add(t);
 
   return true;
@@ -156,9 +156,9 @@ bool Thing::debuff_add_if_not_found(Tpp what)
     return false;
   }
 
-  TRACE_AND_INDENT();
   dbg("Add debuff: %s", t->to_string().c_str());
   TRACE_AND_INDENT();
+
   debuff_add(t);
 
   return true;
@@ -188,7 +188,6 @@ void Thing::debuff_tick(void)
     return;
   }
 
-  TRACE_AND_INDENT();
   dbg("Debuff tick");
   TRACE_AND_INDENT();
 

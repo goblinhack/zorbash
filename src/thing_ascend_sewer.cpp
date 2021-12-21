@@ -16,14 +16,12 @@
 
 bool Thing::ascend_sewer_tick(void)
 {
-  TRACE_AND_INDENT();
   if (! level->is_ascend_sewer(curr_at.x, curr_at.y)) {
     return false;
   }
 
-  if (is_player()) {
-    dbg("Location check, ascend sewer");
-  }
+  dbg("Sewer tick");
+  TRACE_AND_INDENT();
 
 #if 0
   if (get_tick() - get_tick_last_level_change() < 1) {
@@ -51,10 +49,6 @@ bool Thing::ascend_sewer_tick(void)
 
 bool Thing::ascend_sewer(void)
 {
-  TRACE_AND_INDENT();
-  dbg("Ascend sewer");
-  TRACE_AND_INDENT();
-
   if (is_changing_level || is_hidden || is_falling || is_waiting_to_descend_dungeon || is_waiting_to_descend_sewer ||
       is_waiting_to_leave_level_has_completed_fall || is_jumping) {
     dbg("Ascend sewer; no");
@@ -64,6 +58,9 @@ bool Thing::ascend_sewer(void)
   if (! maybe_infop()) {
     return false;
   }
+
+  dbg("Ascend sewer");
+  TRACE_AND_INDENT();
 
   auto next_level = level->world_at + point3d(0, 0, -1);
   game->init_level(next_level);

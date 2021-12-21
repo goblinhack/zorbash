@@ -16,7 +16,7 @@
 
 void Thing::animate(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   Tilep tile;
   auto  tpp = tp();
 
@@ -138,7 +138,6 @@ void Thing::animate(void)
       Tilep new_tile;
 
       {
-        TRACE_AND_INDENT();
         new_tile = tile_next(tmap, tile);
         if (! new_tile) {
           new_tile = tile_first(tmap);

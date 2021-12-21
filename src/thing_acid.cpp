@@ -16,7 +16,6 @@
 
 void Thing::acid_tick(void)
 {
-  TRACE_AND_INDENT();
   if (! environ_avoids_acid()) {
     return;
   }
@@ -28,6 +27,7 @@ void Thing::acid_tick(void)
   bool hit;
 
   dbg("Acid tick");
+  TRACE_AND_INDENT();
 
   //
   // Give the player a chance

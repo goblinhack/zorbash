@@ -1,5 +1,5 @@
 import my
-import goblin_common
+import gob_all
 
 
 def on_death_of_a_follower(me, x, y):
@@ -8,7 +8,7 @@ def on_death_of_a_follower(me, x, y):
 
 
 def tp_init(name, text_name):
-    mytp = goblin_common.tp_init(name, text_name)
+    mytp = gob_all.tp_init(name, text_name)
     mytp.set_long_text_description("Goblins are small, green skinned beings that lair in caves, abandoned mines, despoiled dungeons and other dismal settings, otherwise known as their homes. They spend their time defending their natural habitat from invading marauders like you. However, they usually carry some meagre amounts of gold, dug out from the depths with their bare, shaking hands. Best to find out... This particular goblin has risen through the ranks. As tough as stone nails in a stone coffin, this goblin is not prepared to take any of your cheek.")
     mytp.set_on_death_of_a_follower_do("me.on_death_of_a_follower()")
     mytp.set_text_description("A grizzled war-weary goblin.")
@@ -35,7 +35,7 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="goblin_captain", text_name="goblin captain")
+    tp_init(name="gob_leader", text_name="goblin leader")
 
 
 init()

@@ -12,7 +12,7 @@
 
 int Tp::get_danger_level(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   int danger_level = 0;
 
   danger_level = get_health_initial() / 10;
@@ -90,7 +90,7 @@ int Tp::get_danger_level(void)
 
 int Thing::get_danger_initial_level(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   int danger_level = 0;
 
   danger_level = get_health_initial() / 10;
@@ -174,7 +174,7 @@ int Thing::get_danger_initial_level(void)
 
 int Thing::get_danger_current_level(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   if (is_dead || is_dying) {
     return 0;

@@ -21,7 +21,8 @@
 //
 void Thing::on_enchant(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   auto on_enchant = tp()->on_enchant_do();
   if (std::empty(on_enchant)) {
     return;
@@ -50,8 +51,13 @@ void Thing::on_enchant(void)
 
 bool Thing::enchant_with_stone(Thingp what)
 {
+  if (is_player()) {
+    TOPCON("You enchant %s.", what->text_the().c_str());
+  }
+
+  dbg("enchant %s", what->text_the().c_str());
   TRACE_AND_INDENT();
-  TOPCON("You enchant %s.", what->text_the().c_str());
+
   what->on_enchant();
   what->incr_enchant(1);
 
@@ -78,8 +84,13 @@ bool Thing::enchant_with_stone(Thingp what)
 
 bool Thing::enchant_without_stone(Thingp what)
 {
+  if (is_player()) {
+    TOPCON("You enchant %s.", what->text_the().c_str());
+  }
+
+  dbg("Enchant %s", what->text_the().c_str());
   TRACE_AND_INDENT();
-  TOPCON("You enchant %s.", what->text_the().c_str());
+
   what->on_enchant();
   what->incr_enchant(1);
 
@@ -88,7 +99,8 @@ bool Thing::enchant_without_stone(Thingp what)
 
 void Thing::enchant_randomly(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   if (! is_enchantable()) {
     return;
   }
@@ -104,7 +116,8 @@ void Thing::enchant_randomly(void)
 
 int Thing::get_enchantstone_count(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   int v = 0;
   for (const auto t : get_item_vector()) {
     if (! t->is_enchantstone()) {
@@ -118,7 +131,7 @@ int Thing::get_enchantstone_count(void)
 
 bool Thing::can_enchant_something(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   for (const auto t : get_item_vector()) {
     if (t->is_enchantable()) {
       log("Found something we can enchant: %s", t->to_string().c_str());
@@ -130,7 +143,7 @@ bool Thing::can_enchant_something(void)
 
 bool Thing::enchant_random_item_with_stone(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   std::vector< Thingp > cands;
   for (const auto t : get_item_vector()) {
     if (! t->is_enchantable()) {

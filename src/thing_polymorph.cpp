@@ -20,7 +20,7 @@
 
 void Thing::on_polymorphed(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto on_polymorphed = tp()->on_polymorphed_do();
   if (std::empty(on_polymorphed)) {
     return;
@@ -39,7 +39,8 @@ void Thing::on_polymorphed(void)
       mod = name();
     }
 
-    dbg("Call %s.%s(%s, %d, %d)", mod.c_str(), fn.c_str(), to_short_string().c_str(), (int) curr_at.x, (int) curr_at.y);
+    dbg("Call %s.%s(%s, %d, %d)", mod.c_str(), fn.c_str(), to_short_string().c_str(), (int) curr_at.x,
+        (int) curr_at.y);
 
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {

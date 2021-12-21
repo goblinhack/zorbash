@@ -63,17 +63,17 @@ void Thing::update_tick(void)
 
 void Thing::achieve_goals_in_life(void)
 {
-  TRACE_AND_INDENT();
   if (is_changing_level || is_falling || is_waiting_to_ascend_dungeon || is_waiting_to_descend_sewer ||
       is_waiting_to_descend_dungeon || is_waiting_to_ascend_sewer || is_waiting_to_leave_level_has_completed_fall ||
       is_the_grid) {
-    dbg("Skip achieve goals in life");
     return;
   }
 
-  dbg("Achieve goals tick %u", game->tick_current);
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
+  //
+  // Check torch counts
+  //
   update_light_strength();
 
   //
@@ -207,7 +207,6 @@ void Thing::achieve_goals_in_life(void)
   // If this thing has AI, it can try and reach goals
   //
   if (is_monst()) {
-    dbg("Get next hop");
     ai_get_next_hop();
     if (is_moving) {
       return;
@@ -242,11 +241,10 @@ void Thing::achieve_goals_in_life(void)
 
 void Thing::achieve_goals_in_death(void)
 {
-  TRACE_AND_INDENT();
   dbg("Achieve death goals at tick %u", game->tick_current);
+  TRACE_AND_INDENT();
 
   resurrect_tick();
-
   update_tick();
 }
 
@@ -255,7 +253,8 @@ void Thing::achieve_goals_in_death(void)
 //
 bool Thing::collision_check_do(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   if (! tp()->collision_check()) {
     return false;
   }
@@ -275,9 +274,9 @@ bool Thing::collision_check_do(void)
 
 void Thing::tick(void)
 {
+  dbg("Tick");
   TRACE_AND_INDENT();
-  IF_DEBUG3 { dbg("Tick"); }
-  TRACE_AND_INDENT();
+
   update_interpolated_position();
 
   //

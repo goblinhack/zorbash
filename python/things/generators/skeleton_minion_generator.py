@@ -4,13 +4,13 @@ import tp
 
 def on_idle_tick_frequency_dice(me, x, y):
     if my.pcg_randint(1, 100) < 10:
-        if my.level_spawn_next_to(me, "skeleton_minion_fire"):
+        if my.level_spawn_next_to(me, "skel_minion_fire"):
             my.thing_sound_play_channel(me, my.CHANNEL_MONST_BIRTH, "bones1")
     elif my.pcg_randint(1, 100) < 10:
-        if my.level_spawn_next_to(me, "skeleton_minion_long_leash"):
+        if my.level_spawn_next_to(me, "skel_minion_wander"):
             my.thing_sound_play_channel(me, my.CHANNEL_MONST_BIRTH, "bones1")
     else:
-        if my.level_spawn_next_to(me, "skeleton_minion"):
+        if my.level_spawn_next_to(me, "skel_minion"):
             my.thing_sound_play_channel(me, my.CHANNEL_MONST_BIRTH, "bones2")
 
 
@@ -76,7 +76,7 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="skeleton_minion_generator", text_name="pile of bones")
+    tp_init(name="skel_minion_generator", text_name="pile of bones")
 
 
 init()

@@ -16,8 +16,6 @@
 
 void Thing::barrel_tick(void)
 {
-  TRACE_AND_INDENT();
-
   if (is_floating()) {
     return;
   }
@@ -33,6 +31,9 @@ void Thing::barrel_tick(void)
   if (! level->is_barrel(curr_at.x, curr_at.y)) {
     return;
   }
+
+  dbg("Barrel tick");
+  TRACE_AND_INDENT();
 
   if (is_barrel()) {
     //

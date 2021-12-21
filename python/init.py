@@ -65,7 +65,7 @@ def timeme(py_function):
 
 def find_plugins(directory, pattern):
     for root, dirs, files in os.walk(directory):
-        for f in files:
+        for f in sorted(files):
             if fnmatch.fnmatch(f, pattern):
                 filename = os.path.normcase(os.path.join(root, f))
                 yield filename
@@ -82,7 +82,7 @@ def load_one_plugin(filename):
     if basename(filename) == "tp.py":
         return
 
-    # my.log("PYC: - loading init plugin: " + filename)
+    my.log("PYC: - loading init plugin: " + filename)
 
     mod_name, file_ext = os.path.splitext(os.path.split(filename)[-1])
 

@@ -42,7 +42,7 @@ void Thing::on_open(void)
 
 bool Thing::open(Thingp it)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (! is_monst() && ! is_player()) {
     return false;
   }

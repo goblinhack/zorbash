@@ -1,8 +1,8 @@
-import goblin_common
+import gob_all
 
 
 def tp_init(name, text_name):
-    mytp = goblin_common.tp_init(name, text_name)
+    mytp = gob_all.tp_init(name, text_name)
     mytp.set_long_text_description("Goblins are small, green skinned beings that lair in caves, abandoned mines, despoiled dungeons and other dismal settings, otherwise known as their homes. They spend their time defending their natural habitat from invading marauders like you. However, they usually carry some meagre amounts of gold, dug out from the depths with their bare, shaking hands. Best to find out...")
     mytp.set_text_description("A very lesser and a bit insecure goblin.")
     mytp.set_is_able_to_use_weapons(True)
@@ -26,7 +26,7 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="goblin", text_name="lesser goblin")
+    tp_init(name="gob_single", text_name="lesser goblin")
 
 
 init()

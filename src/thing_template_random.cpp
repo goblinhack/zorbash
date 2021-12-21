@@ -70,7 +70,7 @@ static Tpidmap tp_weapon_class_c;
 
 void tp_random_init(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   for (auto &tp : tp_id_map) {
     if (tp->is_ascend_dungeon()) {
       tp_ascend_dungeon.push_back(tp);
@@ -263,7 +263,7 @@ void tp_random_init(void)
 
 static Tpp tp_get_with_rarity_filter(Tpidmap &m)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   int tries = 10000;
   while (tries--) {
     auto tp = get(m, pcg_rand() % m.size());
@@ -302,13 +302,13 @@ static Tpp tp_get_with_rarity_filter(Tpidmap &m)
 
 static Tpp tp_get_with_no_rarity_filter(Tpidmap &m)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   return get(m, pcg_rand() % m.size());
 }
 
 Tpp tp_random_monst(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (unlikely(! tp_monst.size())) {
     ERR("No monsts found");
     return nullptr;
@@ -318,25 +318,25 @@ Tpp tp_random_monst(void)
 
 Tpp tp_random_monst_easy(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   return tp_random_monst();
 }
 
 Tpp tp_random_monst_med(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   return tp_random_monst();
 }
 
 Tpp tp_random_monst_hard(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   return tp_random_monst();
 }
 
 Tpp Level::tp_random_monst(const point &p)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto tries = 0U;
   for (;;) {
     if (tries++ > 10000) {
@@ -353,7 +353,7 @@ Tpp Level::tp_random_monst(const point &p)
 
 Tpp Level::tp_random_monst_easy(const point &p)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   Thingp current_player      = player;
   int    player_danger_level = 0;
 
@@ -404,7 +404,7 @@ Tpp Level::tp_random_monst_easy(const point &p)
 
 Tpp Level::tp_random_monst_med(const point &p)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   Thingp current_player      = player;
   int    player_danger_level = 0;
 
@@ -458,7 +458,7 @@ Tpp Level::tp_random_monst_med(const point &p)
 
 Tpp Level::tp_random_monst_hard(const point &p)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   Thingp current_player      = player;
   int    player_danger_level = 0;
   if (! current_player) {
@@ -511,7 +511,7 @@ Tpp Level::tp_random_monst_hard(const point &p)
 
 Tpp tp_random_food(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (unlikely(! tp_food.size())) {
     ERR("No foods found");
     return nullptr;
@@ -521,7 +521,7 @@ Tpp tp_random_food(void)
 
 Tpp tp_random_gold(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (unlikely(! tp_gold.size())) {
     ERR("No golds found");
     return nullptr;
@@ -531,7 +531,7 @@ Tpp tp_random_gold(void)
 
 Tpp tp_random_treasure(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (unlikely(! tp_treasure.size())) {
     ERR("No treasures found");
     return nullptr;
@@ -541,7 +541,7 @@ Tpp tp_random_treasure(void)
 
 Tpp tp_random_item_class_a(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (unlikely(! tp_item_class_a.size())) {
     ERR("No item_class_a found");
     return nullptr;
@@ -551,7 +551,7 @@ Tpp tp_random_item_class_a(void)
 
 Tpp tp_random_item_class_b(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (unlikely(! tp_item_class_b.size())) {
     ERR("No item_class_b found");
     return nullptr;
@@ -561,7 +561,7 @@ Tpp tp_random_item_class_b(void)
 
 Tpp tp_random_item_class_c(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (unlikely(! tp_item_class_c.size())) {
     ERR("No item_class_c found");
     return nullptr;
@@ -571,7 +571,7 @@ Tpp tp_random_item_class_c(void)
 
 Tpp tp_random_item_not_a_container_class_a(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (unlikely(! tp_item_not_a_container_class_a.size())) {
     ERR("No item_not_a_container_class_a found");
     return nullptr;
@@ -581,7 +581,7 @@ Tpp tp_random_item_not_a_container_class_a(void)
 
 Tpp tp_random_item_not_a_container_class_b(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (unlikely(! tp_item_not_a_container_class_b.size())) {
     ERR("No item_not_a_container_class_b found");
     return nullptr;
@@ -591,7 +591,7 @@ Tpp tp_random_item_not_a_container_class_b(void)
 
 Tpp tp_random_item_not_a_container_class_c(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (unlikely(! tp_item_not_a_container_class_c.size())) {
     ERR("No item_not_a_container_class_c found");
     return nullptr;
@@ -601,7 +601,7 @@ Tpp tp_random_item_not_a_container_class_c(void)
 
 Tpp tp_random_weapon_class_a(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (unlikely(! tp_weapon_class_a.size())) {
     return tp_random_weapon();
   }
@@ -610,7 +610,7 @@ Tpp tp_random_weapon_class_a(void)
 
 Tpp tp_random_weapon_class_b(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (unlikely(! tp_weapon_class_b.size())) {
     return tp_random_weapon_class_a();
   }
@@ -619,7 +619,7 @@ Tpp tp_random_weapon_class_b(void)
 
 Tpp tp_random_weapon_class_c(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (unlikely(! tp_weapon_class_c.size())) {
     return tp_random_weapon_class_b();
   }
@@ -628,7 +628,7 @@ Tpp tp_random_weapon_class_c(void)
 
 Tpp tp_random_wand_class_a(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (unlikely(! tp_wand_class_a.size())) {
     return tp_random_wand();
   }
@@ -637,7 +637,7 @@ Tpp tp_random_wand_class_a(void)
 
 Tpp tp_random_wand_class_b(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (unlikely(! tp_wand_class_b.size())) {
     return tp_random_wand_class_a();
   }
@@ -646,7 +646,7 @@ Tpp tp_random_wand_class_b(void)
 
 Tpp tp_random_wand_class_c(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (unlikely(! tp_wand_class_c.size())) {
     return tp_random_wand_class_b();
   }
@@ -655,7 +655,7 @@ Tpp tp_random_wand_class_c(void)
 
 Tpp tp_random_ring_class_a(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (unlikely(! tp_ring_class_a.size())) {
     return tp_random_ring();
   }
@@ -664,7 +664,7 @@ Tpp tp_random_ring_class_a(void)
 
 Tpp tp_random_ring_class_b(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (unlikely(! tp_ring_class_b.size())) {
     return tp_random_ring_class_a();
   }
@@ -673,7 +673,7 @@ Tpp tp_random_ring_class_b(void)
 
 Tpp tp_random_ring_class_c(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (unlikely(! tp_ring_class_c.size())) {
     return tp_random_ring_class_b();
   }
@@ -682,7 +682,7 @@ Tpp tp_random_ring_class_c(void)
 
 Tpp tp_random_dirt(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (unlikely(! tp_dirt.size())) {
     ERR("No dirts found");
     return nullptr;
@@ -692,7 +692,7 @@ Tpp tp_random_dirt(void)
 
 Tpp tp_random_dry_grass(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (unlikely(! tp_dry_grass.size())) {
     ERR("No dry_grass found");
     return nullptr;
@@ -702,7 +702,7 @@ Tpp tp_random_dry_grass(void)
 
 Tpp tp_random_enchantstone(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (unlikely(! tp_enchantstone.size())) {
     ERR("No enchantstones found");
     return nullptr;
@@ -712,7 +712,7 @@ Tpp tp_random_enchantstone(void)
 
 Tpp tp_random_skillstone(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (unlikely(! tp_skillstone.size())) {
     ERR("No skillstones found");
     return nullptr;
@@ -722,7 +722,7 @@ Tpp tp_random_skillstone(void)
 
 Tpp tp_random_foilage(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (unlikely(! tp_foilage.size())) {
     ERR("No foilages found");
     return nullptr;
@@ -732,7 +732,7 @@ Tpp tp_random_foilage(void)
 
 Tpp tp_random_spiderweb(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (unlikely(! tp_spiderweb.size())) {
     ERR("No spiderwebs found");
     return nullptr;
@@ -742,7 +742,7 @@ Tpp tp_random_spiderweb(void)
 
 Tpp tp_random_ripple(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (unlikely(! tp_ripples.size())) {
     ERR("No ripples found");
     return nullptr;
@@ -752,7 +752,7 @@ Tpp tp_random_ripple(void)
 
 Tpp tp_random_blood_splatter(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (unlikely(! tp_blood_splatter.size())) {
     ERR("No blood_splatter found");
     return nullptr;
@@ -762,7 +762,7 @@ Tpp tp_random_blood_splatter(void)
 
 Tpp tp_random_green_splatter(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (unlikely(! tp_green_splatter.size())) {
     ERR("No green_splatter found");
     return nullptr;
@@ -772,7 +772,7 @@ Tpp tp_random_green_splatter(void)
 
 Tpp tp_random_pink_splatter(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (unlikely(! tp_pink_splatter.size())) {
     ERR("No pink_splatter found");
     return nullptr;
@@ -782,7 +782,7 @@ Tpp tp_random_pink_splatter(void)
 
 Tpp tp_random_key(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (unlikely(! tp_key.size())) {
     ERR("No key found");
     return nullptr;
@@ -792,7 +792,7 @@ Tpp tp_random_key(void)
 
 Tpp tp_random_potion(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (unlikely(! tp_potion.size())) {
     ERR("No potion found");
     return nullptr;
@@ -802,7 +802,7 @@ Tpp tp_random_potion(void)
 
 Tpp tp_random_wand(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (unlikely(! tp_wand.size())) {
     ERR("No wand found");
     return nullptr;
@@ -812,7 +812,7 @@ Tpp tp_random_wand(void)
 
 Tpp tp_random_ring(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (unlikely(! tp_ring.size())) {
     ERR("No ring found");
     return nullptr;
@@ -822,7 +822,7 @@ Tpp tp_random_ring(void)
 
 Tpp tp_random_weapon(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (unlikely(! tp_weapon.size())) {
     ERR("No weapon found");
     return nullptr;
@@ -832,7 +832,7 @@ Tpp tp_random_weapon(void)
 
 Tpp tp_random_ascend_dungeon(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (unlikely(! tp_ascend_dungeon.size())) {
     ERR("No entrance found");
     return nullptr;
@@ -842,7 +842,7 @@ Tpp tp_random_ascend_dungeon(void)
 
 Tpp tp_random_descend_dungeon(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (unlikely(! tp_descend_dungeon.size())) {
     ERR("No exit found");
     return nullptr;
@@ -852,7 +852,7 @@ Tpp tp_random_descend_dungeon(void)
 
 Tpp tp_random_brazier(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (unlikely(! tp_brazier.size())) {
     ERR("No brazier found");
     return nullptr;
@@ -862,7 +862,7 @@ Tpp tp_random_brazier(void)
 
 Tpp tp_random_barrel(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (unlikely(! tp_barrel.size())) {
     ERR("No barrel found");
     return nullptr;
@@ -872,7 +872,7 @@ Tpp tp_random_barrel(void)
 
 Tpp tp_random_door(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (unlikely(! tp_door.size())) {
     ERR("No door found");
     return nullptr;
@@ -882,7 +882,7 @@ Tpp tp_random_door(void)
 
 Tpp tp_random_secret_door(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (unlikely(! tp_secret_door.size())) {
     ERR("No secret_door found");
     return nullptr;
@@ -892,7 +892,7 @@ Tpp tp_random_secret_door(void)
 
 Tpp tp_random_minion_generator(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (unlikely(! tp_generator.size())) {
     ERR("No generator found");
     return nullptr;
@@ -902,7 +902,7 @@ Tpp tp_random_minion_generator(void)
 
 Tpp tp_random_ethereal_minion_generator(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (unlikely(! tp_ethereal_generator.size())) {
     ERR("No generator found");
     return nullptr;
@@ -916,7 +916,7 @@ Tpp tp_random_minion_generator_hard(void) { return tp_random_minion_generator();
 
 Tpp Level::tp_random_minion_generator(const point &p)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto tries = 0U;
   for (;;) {
     if (tries++ > 10000) {
@@ -932,19 +932,19 @@ Tpp Level::tp_random_minion_generator(const point &p)
 
 Tpp Level::tp_random_minion_generator_easy(const point &p)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   return tp_random_minion_generator(p);
 }
 
 Tpp Level::tp_random_minion_generator_hard(const point &p)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   return tp_random_minion_generator(p);
 }
 
 Tpp tp_random_blood(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (unlikely(! tp_blood.size())) {
     ERR("No bloods found");
     return nullptr;
@@ -954,7 +954,7 @@ Tpp tp_random_blood(void)
 
 Tpp tp_random_bones(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (unlikely(! tp_bones.size())) {
     ERR("No bones found");
     return nullptr;
@@ -964,7 +964,7 @@ Tpp tp_random_bones(void)
 
 Tpp tp_random_wall_dungeon(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (unlikely(! tp_wall_dungeon.size())) {
     ERR("No dungeon walls found");
     return nullptr;
@@ -974,7 +974,7 @@ Tpp tp_random_wall_dungeon(void)
 
 Tpp tp_random_sewer_wall(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (unlikely(! tp_sewer_wall.size())) {
     ERR("No sewer walls found");
     return nullptr;
@@ -984,7 +984,7 @@ Tpp tp_random_sewer_wall(void)
 
 Tpp tp_random_rock(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (unlikely(! tp_rock.size())) {
     ERR("No rocks found");
     return nullptr;
@@ -994,7 +994,7 @@ Tpp tp_random_rock(void)
 
 Tpp tp_random_floor(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (unlikely(! tp_floor.size())) {
     ERR("No floors found");
     return nullptr;
@@ -1004,7 +1004,7 @@ Tpp tp_random_floor(void)
 
 Tpp tp_random_deco(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (unlikely(! tp_deco.size())) {
     ERR("No decos found");
     return nullptr;
@@ -1014,7 +1014,7 @@ Tpp tp_random_deco(void)
 
 Tpp tp_random_ascend_sewer(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (unlikely(! tp_ascend_sewer.size())) {
     ERR("No sewer entrances found");
     return nullptr;
@@ -1024,7 +1024,7 @@ Tpp tp_random_ascend_sewer(void)
 
 Tpp tp_random_descend_sewer(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (unlikely(! tp_descend_sewer.size())) {
     ERR("No sewer exits found");
     return nullptr;
@@ -1034,6 +1034,6 @@ Tpp tp_random_descend_sewer(void)
 
 const Tpidmap &tp_get_skills(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   return tp_skills;
 }

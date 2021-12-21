@@ -19,19 +19,19 @@
 
 const Dice &Thing::get_damage_necrosis_dice(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   return (tp()->get_damage_necrosis_dice());
 }
 
 const std::string &Thing::get_damage_necrosis_dice_str(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   return (tp()->get_damage_necrosis_dice_str());
 }
 
 int Thing::get_damage_necrosis(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto roll = tp()->get_damage_necrosis_dice().roll();
 
   if (roll) {
@@ -42,7 +42,7 @@ int Thing::get_damage_necrosis(void)
 
 int Thing::on_owner_damage_strength(Thingp owner, Thingp hitter, int damage)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   verify(MTYPE_THING, owner);
   if (! owner) {
     err("Cannot owner_damage_strength null thing");
@@ -88,7 +88,7 @@ int Thing::on_owner_damage_strength(Thingp owner, Thingp hitter, int damage)
 
 int Thing::on_owner_damage_necrosis(Thingp owner, Thingp hitter, int damage)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   verify(MTYPE_THING, owner);
   if (! owner) {
     err("Cannot owner_damage_necrosis null thing");
@@ -134,7 +134,7 @@ int Thing::on_owner_damage_necrosis(Thingp owner, Thingp hitter, int damage)
 
 int Thing::on_damage_necrosis(Thingp hitter, int damage)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   verify(MTYPE_THING, hitter);
   if (! hitter) {
     err("Cannot damage_necrosis null thing");
@@ -159,7 +159,8 @@ int Thing::on_damage_necrosis(Thingp hitter, int damage)
       mod = name();
     }
 
-    dbg("Call %s.%s(%s, %s, %d)", mod.c_str(), fn.c_str(), to_short_string().c_str(), hitter->to_short_string().c_str(), damage);
+    dbg("Call %s.%s(%s, %s, %d)", mod.c_str(), fn.c_str(), to_short_string().c_str(),
+        hitter->to_short_string().c_str(), damage);
 
     return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, (unsigned int) curr_at.x,
                           (unsigned int) curr_at.y, (unsigned int) damage);
@@ -173,7 +174,7 @@ int Thing::on_damage_necrosis(Thingp hitter, int damage)
 
 int Thing::on_damage_strength(Thingp hitter, int damage)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   verify(MTYPE_THING, hitter);
   if (! hitter) {
     err("Cannot damage_strength null thing");
@@ -198,7 +199,8 @@ int Thing::on_damage_strength(Thingp hitter, int damage)
       mod = name();
     }
 
-    dbg("Call %s.%s(%s, %s, %d)", mod.c_str(), fn.c_str(), to_short_string().c_str(), hitter->to_short_string().c_str(), damage);
+    dbg("Call %s.%s(%s, %s, %d)", mod.c_str(), fn.c_str(), to_short_string().c_str(),
+        hitter->to_short_string().c_str(), damage);
 
     return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, (unsigned int) curr_at.x,
                           (unsigned int) curr_at.y, (unsigned int) damage);
@@ -212,7 +214,7 @@ int Thing::on_damage_strength(Thingp hitter, int damage)
 
 int Thing::on_owner_damage_constitution(Thingp owner, Thingp hitter, int damage)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   verify(MTYPE_THING, owner);
   if (! owner) {
     err("Cannot owner_damage_constitution null thing");

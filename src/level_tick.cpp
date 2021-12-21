@@ -128,7 +128,7 @@ void Level::handle_input_events(void)
 
 bool Level::tick(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   // LOG("Tick");
   // TOPCON("monsts %d.", monst_count);
 

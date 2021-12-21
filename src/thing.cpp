@@ -57,7 +57,7 @@ std::size_t Thing::get_light_count(void)
 
 const ThingId &Thing::get_immediate_owner_id(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (! maybe_infop()) {
     return (NoThingId);
   }
@@ -66,7 +66,7 @@ const ThingId &Thing::get_immediate_owner_id(void)
 
 const ThingId &Thing::get_top_owner_id(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto t = get_top_owner();
   if (t) {
     return t->id;
@@ -76,14 +76,14 @@ const ThingId &Thing::get_top_owner_id(void)
 
 const ThingId &Thing::set_owner_id(const ThingId &v)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->owner_id = v);
 }
 
 const ThingId &Thing::get_immediate_manifestor_id(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (! maybe_infop()) {
     return (NoThingId);
   }
@@ -92,14 +92,14 @@ const ThingId &Thing::get_immediate_manifestor_id(void)
 
 const ThingId &Thing::set_manifestor_id(const ThingId &v)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->manifestor_id = v);
 }
 
 const ThingId &Thing::get_leader_id(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (! maybe_infop()) {
     return (NoThingId);
   }
@@ -108,14 +108,14 @@ const ThingId &Thing::get_leader_id(void)
 
 const ThingId &Thing::set_leader_id(const ThingId &v)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->leader_id = v);
 }
 
 const ThingId &Thing::get_immediate_spawned_owner_id(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (! maybe_infop()) {
     return (NoThingId);
   }
@@ -124,19 +124,19 @@ const ThingId &Thing::get_immediate_spawned_owner_id(void)
 
 const ThingId &Thing::set_spawned_owner_id(const ThingId &v)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->spawner_owner_id = v);
 }
 
 const fpoint &Thing::get_interpolated_at(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   return (interpolated_at);
 }
 
 void Thing::set_interpolated_at(fpoint v)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   interpolated_at = v;
 }

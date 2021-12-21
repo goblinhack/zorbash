@@ -24,7 +24,6 @@ bool Thing::carry(Thingp item, bool can_equip)
     return false;
   }
 
-  TRACE_AND_INDENT();
   dbg("Try to carry %s", item->to_short_string().c_str());
   TRACE_AND_INDENT();
 
@@ -172,8 +171,7 @@ bool Thing::carry(Thingp item, bool can_equip)
     }
   }
 
-  TRACE_AND_INDENT();
-  dbg("Can carry");
+  dbg("Yes, can carry %s", item->to_short_string().c_str());
   TRACE_AND_INDENT();
 
   if (! already_carried) {
@@ -226,14 +224,15 @@ bool Thing::carry(Thingp item, bool can_equip)
 
 bool Thing::try_to_carry(Thingp item)
 {
-  TRACE_AND_INDENT();
   dbg("Try to carry: %s", item->to_short_string().c_str());
   return carry(item);
 }
 
 std::list< Thingp > Thing::anything_to_carry_at(point at)
 {
+  dbg("Anything to carry?");
   TRACE_AND_INDENT();
+
   std::vector< std::pair< Thingp, int > > items;
 
   //
@@ -314,11 +313,7 @@ end:
   return out;
 }
 
-std::list< Thingp > Thing::anything_to_carry(void)
-{
-  TRACE_AND_INDENT();
-  return anything_to_carry_at(curr_at);
-}
+std::list< Thingp > Thing::anything_to_carry(void) { return anything_to_carry_at(curr_at); }
 
 bool Thing::check_anything_to_carry(bool auto_collect_allowed)
 {
@@ -389,7 +384,6 @@ void Thing::try_to_carry(const std::list< Thingp > &items)
 //
 bool Thing::try_to_carry_if_worthwhile_dropping_items_if_needed(Thingp item)
 {
-  TRACE_AND_INDENT();
   log("Try to carry if worthwhile: %s", item->to_short_string().c_str());
   TRACE_AND_INDENT();
 

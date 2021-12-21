@@ -16,7 +16,6 @@
 
 bool Thing::descend_dungeon_tick(void)
 {
-  TRACE_AND_INDENT();
   if (! is_able_to_change_levels()) {
     return false;
   }
@@ -25,9 +24,8 @@ bool Thing::descend_dungeon_tick(void)
     return false;
   }
 
-  if (is_player()) {
-    dbg("Location check, descend");
-  }
+  TRACE_AND_INDENT();
+  dbg("Descend tick");
 
 #if 0
   if (get_tick() - get_tick_last_level_change() < 1) {
@@ -50,10 +48,6 @@ bool Thing::descend_dungeon_tick(void)
 
 bool Thing::descend_dungeon(void)
 {
-  TRACE_AND_INDENT();
-  dbg("Descend dungeon");
-  TRACE_AND_INDENT();
-
   if (is_changing_level || is_hidden || is_falling || is_waiting_to_ascend_dungeon || is_waiting_to_descend_sewer ||
       is_waiting_to_leave_level_has_completed_fall || is_jumping) {
     dbg("Descend dungeon, no");
@@ -63,6 +57,9 @@ bool Thing::descend_dungeon(void)
   if (! maybe_infop()) {
     return false;
   }
+
+  dbg("Descend dungeon");
+  TRACE_AND_INDENT();
 
   if (is_monst()) {
     if (level->player) {

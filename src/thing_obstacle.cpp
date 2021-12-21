@@ -15,7 +15,7 @@
 
 bool Thing::ai_obstacle_for_me(const point &p)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   //
   // Avoid threats and treat them as obstacles

@@ -17,7 +17,8 @@
 
 ThingShoved Thing::try_to_shove(Thingp it, point delta)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   dbg("Try to shove, %s delta %d,%d", it->to_short_string().c_str(), (int) delta.x, (int) delta.y);
   TRACE_AND_INDENT();
 
@@ -68,7 +69,7 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta)
   }
 
   dbg("Can shove, %s delta %d,%d", it->to_short_string().c_str(), (int) delta.x, (int) delta.y);
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   move_finish();
 
@@ -238,7 +239,8 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta)
 
 ThingShoved Thing::try_to_shove(point future_pos)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   dbg("Try to shove, future pos %d,%d", (int) future_pos.x, (int) future_pos.y);
   TRACE_AND_INDENT();
 

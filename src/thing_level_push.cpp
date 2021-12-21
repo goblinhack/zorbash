@@ -15,7 +15,7 @@
 //
 void Thing::level_push(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   level_pop();
 
   int group = get_group();

@@ -15,13 +15,15 @@
 
 void Thing::brazier_tick(void)
 {
-  TRACE_AND_INDENT();
   //
   // This is for if you land on a brazier
   //
   if (! level->is_brazier(curr_at.x, curr_at.y)) {
     return;
   }
+
+  dbg("Brazier tick");
+  TRACE_AND_INDENT();
 
   static const std::vector< point > all_deltas = {
       point(-1, -1), point(1, -1), point(-1, 1), point(1, 1), point(0, -1), point(-1, 0), point(1, 0), point(0, 1),

@@ -27,7 +27,7 @@ Thing::~Thing_(void)
 
 void Thing::destroy(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   verify(MTYPE_THING, this);
 
   if (is_loggable()) {

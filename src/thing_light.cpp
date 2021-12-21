@@ -18,7 +18,7 @@
 
 std::vector< Lightp > &Thing::get_light(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   //
   // Faster to avoid the infop API as this is called a lot
@@ -32,7 +32,7 @@ std::vector< Lightp > &Thing::get_light(void)
 
 void Thing::new_light(point offset, int strength, color col, int fbo)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   new_infop();
   auto l = light_new(this, offset, strength, col, fbo);
   get_infop()->light.push_back(l);
@@ -42,7 +42,7 @@ void Thing::new_light(point offset, int strength, color col, int fbo)
 
 void Thing::new_light(point offset, int strength)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   new_infop();
   auto l = light_new(this, offset, strength);
   get_infop()->light.push_back(l);
@@ -51,7 +51,7 @@ void Thing::new_light(point offset, int strength)
 
 void Thing::delete_lights(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (maybe_infop()) {
     verify(MTYPE_INFOP, maybe_infop());
     for (auto &l : get_infop()->light) {
@@ -63,7 +63,7 @@ void Thing::delete_lights(void)
 
 void Thing::init_lights(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (unlikely(is_player())) {
     if (level->player && (level->player != this)) {
       DIE("Player exists in multiple places on map, %d,%d and %d,%d", level->player->curr_at.x,
@@ -123,7 +123,7 @@ void Thing::init_lights(void)
 
 void Thing::light_update_strength(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   float oldstr = get_initial_light_strength();
   float newstr = get_light_strength();
   if (! newstr) {

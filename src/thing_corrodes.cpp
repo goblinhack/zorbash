@@ -15,7 +15,6 @@
 
 void Thing::corrode_tick(void)
 {
-  TRACE_AND_INDENT();
   if (is_floating() || is_ethereal()) {
     return;
   }
@@ -23,6 +22,9 @@ void Thing::corrode_tick(void)
   if (is_acid()) {
     return;
   }
+
+  dbg("Corrode tick");
+  TRACE_AND_INDENT();
 
   //
   // Need to check if being consumed by a cleaner, hence owner check

@@ -24,7 +24,7 @@
 
 void Thing::on_move(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (is_player()) {
     //
     // Update reachability for the player
@@ -50,7 +50,8 @@ void Thing::on_move(void)
       mod = name();
     }
 
-    dbg("Call %s.%s(%s, %d, %d)", mod.c_str(), fn.c_str(), to_short_string().c_str(), (int) curr_at.x, (int) curr_at.y);
+    dbg("Call %s.%s(%s, %d, %d)", mod.c_str(), fn.c_str(), to_short_string().c_str(), (int) curr_at.x,
+        (int) curr_at.y);
 
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
@@ -60,14 +61,14 @@ void Thing::on_move(void)
 
 void Thing::move_finish(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (! is_moving) {
     return;
   }
   is_moving = false;
 
   dbg("Move finish");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   //
   // Set this so that we can pick up items again at the last location.
@@ -124,7 +125,7 @@ void Thing::move_finish(void)
 
 bool Thing::move(point future_pos)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (! is_hidden) {
     dbg("Move to %d,%d", future_pos.x, future_pos.y);
   }
@@ -144,7 +145,7 @@ bool Thing::move(point future_pos)
 
 bool Thing::move_no_shove_no_attack(point future_pos)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   dbg("Move, no shove, no attack to %s", future_pos.to_string().c_str());
   bool up              = future_pos.y < curr_at.y;
   bool down            = future_pos.y > curr_at.y;
@@ -161,7 +162,7 @@ bool Thing::move_no_shove_no_attack(point future_pos)
 
 bool Thing::move_no_shove_attack_allowed(point future_pos)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   dbg("Move, no shove, attack allowed to %s", future_pos.to_string().c_str());
   bool up              = future_pos.y < curr_at.y;
   bool down            = future_pos.y > curr_at.y;
@@ -179,7 +180,7 @@ bool Thing::move_no_shove_attack_allowed(point future_pos)
 bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8_t right, uint8_t must_attack,
                  uint8_t wait_or_collect, bool shove_allowed, bool attack_allowed)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   dbg("Move");
 
   if (is_dead) {
@@ -520,7 +521,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
                         ((t->curr_at.y >= curr_at.y) && up) || ((t->curr_at.y <= curr_at.y) && down));
 
     if (free_attack) {
-      TRACE_AND_INDENT();
+      TRACE_NO_INDENT();
       dbg("Free attack by %s", t->to_string().c_str());
       if (t->attack(this)) {
         //
@@ -560,7 +561,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
 
 void Thing::update_interpolated_position(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   fpoint new_pos = make_fpoint(curr_at);
   auto   tpp     = tp();
   float  step    = game->tick_dt;
@@ -638,7 +639,7 @@ void Thing::update_interpolated_position(void)
 
 void Thing::update_pos(point to, bool immediately)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (! is_hidden) {
     dbg("Update pos to %d,%d", to.x, to.y);
   }
@@ -754,7 +755,7 @@ void Thing::move_set_dir_from_delta(point delta)
 
 void Thing::move_to(point to)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   move_finish();
   auto delta = to - curr_at;
   move_set_dir_from_delta(delta);
@@ -764,7 +765,7 @@ void Thing::move_to(point to)
 
 void Thing::move_delta(point delta)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   move_finish();
   move_set_dir_from_delta(delta);
 
@@ -782,7 +783,7 @@ void Thing::move_delta(point delta)
 
 void Thing::move_to_immediately(point to)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   move_finish();
   auto delta = to - curr_at;
   move_set_dir_from_delta(delta);
@@ -825,7 +826,7 @@ void Thing::move_to_immediately(point to)
 
 bool Thing::move_to_try(const point &nh, const bool escaping, bool check_only)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (escaping) {
     dbg("Escape to attempt %d,%d", nh.x, nh.y);
   } else {
@@ -845,7 +846,7 @@ bool Thing::move_to_try(const point &nh, const bool escaping, bool check_only)
     // see if we can hit the thing that is in the way.
     //
     dbg("Cannot move to %d,%d will hit obstacle or monst", nh.x, nh.y);
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     bool target_attacked = false;
     bool target_overlaps = false;
     collision_check_and_handle_nearby(nh, &target_attacked, &target_overlaps);
@@ -861,7 +862,7 @@ bool Thing::move_to_try(const point &nh, const bool escaping, bool check_only)
 
     if (! escaping) {
       if (get_terrain_cost(nh) >= DMAP_LESS_PREFERRED_TERRAIN) {
-        TRACE_AND_INDENT();
+        TRACE_NO_INDENT();
         dbg("But %d,%d is less preferred terrain, avoid", nh.x, nh.y);
         return false;
       }
@@ -876,28 +877,28 @@ bool Thing::move_to_try(const point &nh, const bool escaping, bool check_only)
 
 bool Thing::move_to_or_attack(const point &nh)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   dbg("Move to or attack");
   return move_to_try(nh, false, false);
 }
 
 bool Thing::move_to_or_escape(const point &nh)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   dbg("Move to or escape");
   return move_to_try(nh, true, false);
 }
 
 bool Thing::move_to_or_attack_check_only(const point &nh)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   dbg("Move to or attack");
   return move_to_try(nh, false, true);
 }
 
 bool Thing::move_to_or_escape_check_only(const point &nh)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   dbg("Move to or escape");
   return move_to_try(nh, true, true);
 }

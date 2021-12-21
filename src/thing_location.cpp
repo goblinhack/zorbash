@@ -22,7 +22,7 @@
 //
 void Thing::location_check_forced(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   //
   // Prevent interactions that might generate things like smoke.
@@ -136,7 +136,7 @@ void Thing::location_check_forced(void)
 
 void Thing::location_check(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   if (maybe_infop()) {
     if (get_tick_last_location_check() == game->tick_current) {
@@ -157,8 +157,8 @@ void Thing::location_check(void)
 //
 void Thing::location_check_all_things_at(void)
 {
-  TRACE_AND_INDENT();
   dbg("Do location checks");
+  TRACE_AND_INDENT();
 
   //
   // Needs to be for all things to stuff that does nothing like bones can fall
@@ -169,8 +169,8 @@ void Thing::location_check_all_things_at(void)
     if (t->is_hidden) {
       continue;
     }
-    TRACE_AND_INDENT();
     IF_DEBUG2 { t->log("Do location check"); }
+    TRACE_AND_INDENT();
     t->location_check();
   }
   FOR_ALL_THINGS_END()
@@ -181,8 +181,8 @@ void Thing::location_check_all_things_at(void)
 //
 void Thing::location_check_forced_all_things_at(void)
 {
-  TRACE_AND_INDENT();
   dbg("Do location checks");
+  TRACE_AND_INDENT();
 
   //
   // Needs to be for all things to stuff that does nothing like bones can fall
@@ -193,8 +193,8 @@ void Thing::location_check_forced_all_things_at(void)
     if (t->is_hidden) {
       continue;
     }
-    TRACE_AND_INDENT();
     IF_DEBUG2 { t->log("Do location check"); }
+    TRACE_AND_INDENT();
     t->location_check_forced();
   }
   FOR_ALL_THINGS_END()

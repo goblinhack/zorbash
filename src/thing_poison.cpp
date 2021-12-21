@@ -13,6 +13,8 @@
 
 void Thing::poison_tick(void)
 {
+  TRACE_NO_INDENT();
+
   if (! is_monst() && ! is_player()) {
     return;
   }
@@ -22,7 +24,6 @@ void Thing::poison_tick(void)
     return;
   }
 
-  TRACE_AND_INDENT();
   dbg("Poison tick");
   TRACE_AND_INDENT();
 

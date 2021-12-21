@@ -17,7 +17,6 @@
 
 bool Thing::buff_add(Thingp what)
 {
-  TRACE_AND_INDENT();
   dbg("Try to add buff %s", what->to_short_string().c_str());
   TRACE_AND_INDENT();
 
@@ -64,9 +63,9 @@ bool Thing::buff_add(Thingp what)
 
 bool Thing::buff_remove(Thingp what)
 {
-  TRACE_AND_INDENT();
   dbg("Removing buff %s", what->to_short_string().c_str());
   TRACE_AND_INDENT();
+
   auto existing_owner = what->get_immediate_owner();
   if (existing_owner != this) {
     err("Attempt to remove buff %s which is not owned", what->to_short_string().c_str());
@@ -87,7 +86,8 @@ bool Thing::buff_remove(Thingp what)
 
 void Thing::buff_remove_all(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   if (! maybe_itemp()) {
     return;
   }
@@ -104,8 +104,9 @@ void Thing::buff_remove_all(void)
 
 bool Thing::buff_use(Thingp what)
 {
-  TRACE_AND_INDENT();
   dbg("Try to use buff %s", what->to_short_string().c_str());
+  TRACE_AND_INDENT();
+
   used(what, this, false /* remove after use */);
   return true;
 }
@@ -124,9 +125,9 @@ bool Thing::buff_add(Tpp what)
     return false;
   }
 
-  TRACE_AND_INDENT();
   dbg("Add buff: %s", t->to_string().c_str());
   TRACE_AND_INDENT();
+
   buff_add(t);
 
   return true;
@@ -152,11 +153,11 @@ void Thing::buff_tick(void)
   if (! maybe_itemp()) {
     return;
   }
+
   if (get_itemp()->buffs.empty()) {
     return;
   }
 
-  TRACE_AND_INDENT();
   dbg("Buff tick");
   TRACE_AND_INDENT();
 

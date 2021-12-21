@@ -13,7 +13,7 @@
 
 Thingp Thing::get_top_spawned_owner(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto id = get_immediate_spawned_owner_id();
   if (likely(id.ok())) {
     auto i = level->thing_find(id);
@@ -31,7 +31,7 @@ Thingp Thing::get_top_spawned_owner(void)
 
 Thingp Thing::get_immediate_spawned_owner(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto id = get_immediate_spawned_owner_id();
   if (likely(id.ok())) {
     auto i = level->thing_find(id);
@@ -46,7 +46,7 @@ Thingp Thing::get_immediate_spawned_owner(void)
 
 void Thing::set_spawned_owner(Thingp spawner_owner)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (spawner_owner) {
     verify(MTYPE_THING, spawner_owner);
   }
@@ -82,7 +82,7 @@ void Thing::set_spawned_owner(Thingp spawner_owner)
 
 void Thing::remove_spawner_owner(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto old_spawner_owner = get_immediate_spawned_owner();
   if (! old_spawner_owner) {
     err("No spawner owner");
@@ -100,7 +100,7 @@ void Thing::remove_spawner_owner(void)
 //
 void Thing::destroy_spawned(Thingp defeater)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   //
   // Warning defeater can be nullptr - e.g. when a generator falls to
   // a new level
@@ -132,7 +132,7 @@ void Thing::destroy_spawned(Thingp defeater)
 
 void Thing::unleash_spawners_things(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (! is_spawner()) {
     return;
   }

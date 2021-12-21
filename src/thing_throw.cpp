@@ -21,7 +21,7 @@ bool Thing::throw_item_choose_target(Thingp what)
     return false;
   }
 
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   dbg("Trying to throw: %s", what->to_short_string().c_str());
 
   if (! what->is_throwable()) {
@@ -43,7 +43,7 @@ bool Thing::throw_item_choose_target(Thingp what)
 
 void Thing::throw_at(Thingp what, Thingp target)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (! what) {
     what = game->request_to_throw_item;
   }

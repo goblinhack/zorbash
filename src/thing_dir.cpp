@@ -9,7 +9,7 @@
 
 point Thing::dir_to_direction(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (is_dir_tl()) {
     return point(-1, -1);
   }

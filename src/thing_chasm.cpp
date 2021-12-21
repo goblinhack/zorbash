@@ -14,13 +14,15 @@
 
 void Thing::chasm_tick(void)
 {
-  TRACE_AND_INDENT();
   if (is_floating() || is_ethereal()) {
     return;
   }
 
-  if (level->is_chasm(curr_at.x, curr_at.y)) {
-    dbg("Over a chasm");
-    fall(1, 750);
+  if (! level->is_chasm(curr_at.x, curr_at.y)) {
+    return;
   }
+
+  dbg("Over a chasm");
+  TRACE_AND_INDENT();
+  fall(1, 750);
 }

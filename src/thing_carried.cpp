@@ -17,9 +17,10 @@
 //
 std::list< Thingp > Thing::get_item_list(void)
 {
+  TRACE_NO_INDENT();
+
   std::list< Thingp > out;
 
-  TRACE_AND_INDENT();
   if (! maybe_itemp()) {
     static std::list< Thingp > empty;
     return empty;
@@ -46,9 +47,10 @@ std::list< Thingp > Thing::get_item_list(void)
 
 std::list< Thingp > Thing::get_treasure_list(void)
 {
+  TRACE_NO_INDENT();
+
   std::list< Thingp > out;
 
-  TRACE_AND_INDENT();
   if (! maybe_itemp()) {
     static std::list< Thingp > empty;
     return empty;
@@ -79,9 +81,10 @@ std::list< Thingp > Thing::get_treasure_list(void)
 
 std::list< Thingp > Thing::get_food_list(void)
 {
+  TRACE_NO_INDENT();
+
   std::list< Thingp > out;
 
-  TRACE_AND_INDENT();
   if (! maybe_itemp()) {
     static std::list< Thingp > empty;
     return empty;
@@ -112,9 +115,10 @@ std::list< Thingp > Thing::get_food_list(void)
 
 std::list< Thingp > Thing::get_wand_list(void)
 {
+  TRACE_NO_INDENT();
+
   std::list< Thingp > out;
 
-  TRACE_AND_INDENT();
   if (! maybe_itemp()) {
     static std::list< Thingp > empty;
     return empty;
@@ -145,9 +149,10 @@ std::list< Thingp > Thing::get_wand_list(void)
 
 std::list< Thingp > Thing::get_ring_list(void)
 {
+  TRACE_NO_INDENT();
+
   std::list< Thingp > out;
 
-  TRACE_AND_INDENT();
   if (! maybe_itemp()) {
     static std::list< Thingp > empty;
     return empty;
@@ -183,9 +188,10 @@ std::list< Thingp > Thing::get_ring_list(void)
 
 std::list< Thingp > Thing::get_weapon_list(void)
 {
+  TRACE_NO_INDENT();
+
   std::list< Thingp > out;
 
-  TRACE_AND_INDENT();
   if (! maybe_itemp()) {
     static std::list< Thingp > empty;
     return empty;
@@ -221,9 +227,10 @@ std::list< Thingp > Thing::get_weapon_list(void)
 
 std::vector< Thingp > Thing::get_item_vector(void)
 {
+  TRACE_NO_INDENT();
+
   std::vector< Thingp > out;
 
-  TRACE_AND_INDENT();
   if (! maybe_itemp()) {
     static std::vector< Thingp > empty;
     return empty;
@@ -251,9 +258,10 @@ std::vector< Thingp > Thing::get_item_vector(void)
 
 std::vector< Thingp > Thing::get_treasure_vector(void)
 {
+  TRACE_NO_INDENT();
+
   std::vector< Thingp > out;
 
-  TRACE_AND_INDENT();
   if (! maybe_itemp()) {
     static std::vector< Thingp > empty;
     return empty;
@@ -284,9 +292,10 @@ std::vector< Thingp > Thing::get_treasure_vector(void)
 
 std::vector< Thingp > Thing::get_food_vector(void)
 {
+  TRACE_NO_INDENT();
+
   std::vector< Thingp > out;
 
-  TRACE_AND_INDENT();
   if (! maybe_itemp()) {
     static std::vector< Thingp > empty;
     return empty;
@@ -317,9 +326,10 @@ std::vector< Thingp > Thing::get_food_vector(void)
 
 std::vector< Thingp > Thing::get_wand_vector(void)
 {
+  TRACE_NO_INDENT();
+
   std::vector< Thingp > out;
 
-  TRACE_AND_INDENT();
   if (! maybe_itemp()) {
     static std::vector< Thingp > empty;
     return empty;
@@ -352,7 +362,7 @@ std::vector< Thingp > Thing::get_ring_vector(void)
 {
   std::vector< Thingp > out;
 
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (! maybe_itemp()) {
     static std::vector< Thingp > empty;
     return empty;
@@ -385,7 +395,7 @@ std::vector< Thingp > Thing::get_weapon_vector(void)
 {
   std::vector< Thingp > out;
 
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (! maybe_itemp()) {
     static std::vector< Thingp > empty;
     return empty;
@@ -416,7 +426,7 @@ std::vector< Thingp > Thing::get_weapon_vector(void)
 
 int Thing::get_carried_weapon_count(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   int count = 0;
 
   if (! maybe_itemp()) {
@@ -433,7 +443,7 @@ int Thing::get_carried_weapon_count(void)
 
 int Thing::get_carried_wand_count(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   int count = 0;
 
   if (! maybe_itemp()) {
@@ -450,7 +460,7 @@ int Thing::get_carried_wand_count(void)
 
 int Thing::get_carried_ring_count(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   int count = 0;
 
   if (! maybe_itemp()) {
@@ -467,7 +477,7 @@ int Thing::get_carried_ring_count(void)
 
 int Thing::get_carried_food_count(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   int count = 0;
 
   if (! maybe_itemp()) {
@@ -484,7 +494,7 @@ int Thing::get_carried_food_count(void)
 
 int Thing::get_carried_weapon_least_value(Thingp *out)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   int least_value = -1;
 
   *out = nullptr;
@@ -513,7 +523,7 @@ int Thing::get_carried_weapon_least_value(Thingp *out)
 
 int Thing::get_carried_wand_least_value(Thingp *out)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   int least_value = -1;
 
   *out = nullptr;
@@ -542,7 +552,7 @@ int Thing::get_carried_wand_least_value(Thingp *out)
 
 int Thing::get_carried_ring_least_value(Thingp *out)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   int least_value = -1;
 
   *out = nullptr;
@@ -571,7 +581,7 @@ int Thing::get_carried_ring_least_value(Thingp *out)
 
 int Thing::get_carried_food_least_value(Thingp *out)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   int least_value = -1;
 
   *out = nullptr;
@@ -600,7 +610,7 @@ int Thing::get_carried_food_least_value(Thingp *out)
 
 int Thing::get_carried_weapon_highest_value(Thingp *out)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   int highest_value = -1;
 
   *out = nullptr;
@@ -629,7 +639,7 @@ int Thing::get_carried_weapon_highest_value(Thingp *out)
 
 int Thing::get_carried_wand_highest_value(Thingp *out)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   int highest_value = -1;
 
   *out = nullptr;
@@ -658,7 +668,7 @@ int Thing::get_carried_wand_highest_value(Thingp *out)
 
 int Thing::get_carried_ring_highest_value(Thingp *out)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   int highest_value = -1;
 
   *out = nullptr;
@@ -687,7 +697,7 @@ int Thing::get_carried_ring_highest_value(Thingp *out)
 
 int Thing::get_carried_food_highest_value(Thingp *out)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   int highest_value = -1;
 
   *out = nullptr;

@@ -11,8 +11,8 @@
 
 void Thing::rest(void)
 {
-  TRACE_AND_INDENT();
   dbg("Resting");
+  TRACE_AND_INDENT();
 
   if ((int) pcg_random_range(0, 200) < get_stat_strength()) {
     health_boost(1);

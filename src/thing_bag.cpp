@@ -47,7 +47,7 @@ bool Thing::bag_contains(Thingp item)
 //
 bool Thing::bag_add(Thingp item)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   //
   // Only players can compress bag contents. Monst just carry everything
@@ -152,7 +152,7 @@ bool Thing::bag_add(Thingp item)
 
 bool Thing::bag_add_test(Thingp item)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (! log_quiet) {
     dbg3("Bag: Add test %s", item->to_short_string().c_str());
   }
@@ -225,7 +225,7 @@ bool Thing::bag_add_test(Thingp item)
 
 bool Thing::bag_compress(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto bag           = get_bag();
   auto bw            = capacity_width();
   auto bh            = capacity_height();
@@ -291,7 +291,7 @@ bool Thing::bag_compress(void)
 
 bool Thing::bag_remove_at(Thingp item, point pos)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   verify(MTYPE_THING, item);
 
   auto bag    = get_bag();
@@ -334,7 +334,7 @@ bool Thing::bag_remove_at(Thingp item, point pos)
 
 bool Thing::bag_can_place_at(Thingp item, point pos)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (item == this) {
     TOPCON("Cannot place an item inside itself!");
     return false;
@@ -409,7 +409,7 @@ bool Thing::bag_can_place_at(Thingp item, point pos)
 
 bool Thing::bag_can_place_anywhere(Thingp item, point &pos)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (item == this) {
     TOPCON("Cannot place an item inside itself!");
     return false;
@@ -458,7 +458,7 @@ bool Thing::bag_can_place_anywhere(Thingp item, point &pos)
 
 bool Thing::bag_place_at(Thingp item, point pos)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto bag = get_bag();
   auto bw  = capacity_width();
   auto bh  = capacity_height();
@@ -510,7 +510,7 @@ bool Thing::bag_place_at(Thingp item, point pos)
 
 bool Thing::bag_remove(Thingp item)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (! item) {
     err("No item to remove");
     return false;
@@ -593,7 +593,7 @@ bool Thing::bag_remove(Thingp item)
 
 int bag_estimate_volume(const std::list< Thingp > &items)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   int volume = 0;
   for (auto t : items) {
     volume += t->item_width() * t->item_height();

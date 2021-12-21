@@ -72,7 +72,7 @@ bool Thing::too_far_from_manifestor(point p, float delta)
 
 Thingp Thing::get_top_manifestor(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto id = get_immediate_manifestor_id();
   if (likely(id.ok())) {
     auto i = level->thing_find(id);
@@ -90,7 +90,7 @@ Thingp Thing::get_top_manifestor(void)
 
 Thingp Thing::get_immediate_manifestor(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto id = get_immediate_manifestor_id();
   if (likely(id.ok())) {
     auto i = level->thing_find(id);
@@ -105,7 +105,7 @@ Thingp Thing::get_immediate_manifestor(void)
 
 void Thing::set_manifestor(Thingp manifestor)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (manifestor) {
     verify(MTYPE_THING, manifestor);
   }
@@ -140,7 +140,7 @@ void Thing::set_manifestor(Thingp manifestor)
 
 void Thing::remove_manifestor(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto old_manifestor = get_immediate_manifestor();
   if (! old_manifestor) {
     err("No manifestor");
@@ -158,7 +158,7 @@ void Thing::remove_manifestor(void)
 //
 void Thing::destroy_minions(Thingp defeater)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   //
   // Warning defeater can be nullptr - e.g. when a generator falls to
   // a new level
@@ -194,7 +194,7 @@ void Thing::destroy_minions(Thingp defeater)
 //
 void Thing::unleash_minions(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (! is_minion_generator()) {
     return;
   }

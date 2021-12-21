@@ -95,7 +95,7 @@ bool Thing::is_equipped(Thingp item)
 
 Thingp Thing::get_equip(int equip)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto id = get_equip_id(equip);
   if (id.ok()) {
     return (level->thing_find(id));
@@ -106,7 +106,7 @@ Thingp Thing::get_equip(int equip)
 
 void Thing::set_equip_carry_anim_id(ThingId equip_carry_anim_id, int equip)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   Thingp equip_carry_anim;
 
   if (! equip_carry_anim_id) {
@@ -124,7 +124,7 @@ void Thing::set_equip_carry_anim_id(ThingId equip_carry_anim_id, int equip)
 
 void Thing::set_equip_carry_anim(Thingp new_equip_carry_anim, int equip)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (new_equip_carry_anim) {
     verify(MTYPE_THING, new_equip_carry_anim);
   }
@@ -164,7 +164,7 @@ void Thing::set_equip_carry_anim(Thingp new_equip_carry_anim, int equip)
 
 void Thing::set_equip_use_anim_id(ThingId gfx_anim_use_id, int equip)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   Thingp gfx_anim_use;
 
   if (! gfx_anim_use_id) {
@@ -182,7 +182,7 @@ void Thing::set_equip_use_anim_id(ThingId gfx_anim_use_id, int equip)
 
 void Thing::set_equip_use_anim(Thingp new_gfx_anim_use, int equip)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (new_gfx_anim_use) {
     verify(MTYPE_THING, new_gfx_anim_use);
   }
@@ -218,7 +218,7 @@ void Thing::set_equip_use_anim(Thingp new_gfx_anim_use, int equip)
 
 void Thing::get_equip_use_offset(int *dx, int *dy, int equip)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   *dx = 0;
   *dy = 0;
 
@@ -283,7 +283,7 @@ void Thing::get_equip_use_offset(int *dx, int *dy, int equip)
 
 Thingp Thing::get_equip_carry_anim(int equip)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   Thingp equip_carry_anim = 0;
 
   auto id = get_equip_id_carry_anim(equip);
@@ -296,7 +296,7 @@ Thingp Thing::get_equip_carry_anim(int equip)
 
 Thingp Thing::get_equip_use_anim(int equip)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   //
   // If this gfx_anim_use has its own thing id for animations then
@@ -314,7 +314,8 @@ Thingp Thing::get_equip_use_anim(int equip)
 
 bool Thing::unequip(const char *why, int equip, bool allowed_to_recarry)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   if (! get_equip_id(equip)) {
     return false;
   }
@@ -326,6 +327,8 @@ bool Thing::unequip(const char *why, int equip, bool allowed_to_recarry)
   }
 
   dbg("Unequiping current %s, why: %s", item->to_short_string().c_str(), why);
+  TRACE_AND_INDENT();
+
   equip_remove_anim(equip);
 
   //
@@ -368,7 +371,7 @@ bool Thing::unequip(const char *why, int equip, bool allowed_to_recarry)
 
 bool Thing::unequip_me_from_owner(const char *why, bool allowed_to_recarry)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   auto top_owner = get_top_owner();
   if (! top_owner) {
@@ -391,7 +394,7 @@ bool Thing::unequip_me_from_owner(const char *why, bool allowed_to_recarry)
 //
 bool Thing::equip(Thingp item, int equip)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto equip_tp = item->tp();
 
   if (get_equip(equip) == item) {
@@ -412,6 +415,7 @@ bool Thing::equip(Thingp item, int equip)
   }
 
   dbg("Is equipping: %s", item->to_short_string().c_str());
+  TRACE_AND_INDENT();
 
   //
   // Remove from the bag first so we can swap the current equipped thing.
@@ -499,7 +503,7 @@ bool Thing::equip(Thingp item, int equip)
 
 void Thing::dump_equip(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   FOR_ALL_EQUIP(e)
   {
@@ -512,7 +516,7 @@ void Thing::dump_equip(void)
 
 void Thing::equip_remove_anim(int equip)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto item = get_equip(equip);
   if (! item) {
     return;
@@ -551,8 +555,6 @@ void Thing::equip_remove_anim(int equip)
 
 bool Thing::equip_use(bool forced, int equip)
 {
-  TRACE_AND_INDENT();
-
   dbg("Try to use equipped item");
   TRACE_AND_INDENT();
 

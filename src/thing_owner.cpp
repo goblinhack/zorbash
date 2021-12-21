@@ -99,7 +99,7 @@ void Thing::on_owner_unset(Thingp owner)
 
 Thingp Thing::get_top_owner(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   //
   // Things own themselves
@@ -129,7 +129,7 @@ Thingp Thing::get_top_owner(void)
 
 Thingp Thing::get_immediate_owner(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   //
   // Things own themselves
@@ -156,7 +156,7 @@ Thingp Thing::get_immediate_owner(void)
 
 void Thing::set_owner(Thingp owner)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (owner) {
     verify(MTYPE_THING, owner);
   }
@@ -193,7 +193,7 @@ void Thing::set_owner(Thingp owner)
 
 void Thing::remove_owner(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto old_owner = get_immediate_owner();
   if (! old_owner) {
     return;
@@ -214,7 +214,7 @@ void Thing::remove_owner(void)
 
 bool Thing::change_owner(Thingp new_owner)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (! new_owner) {
     err("No new owner");
     return true;

@@ -17,9 +17,11 @@
 
 bool Thing::skill_add(Thingp what)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   dbg("Try to add skill %s", what->to_short_string().c_str());
   TRACE_AND_INDENT();
+
   if (! maybe_itemp()) {
     dbg("No; not a monst");
     return false;
@@ -63,9 +65,11 @@ bool Thing::skill_add(Thingp what)
 
 bool Thing::skill_remove(Thingp what)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   dbg("Removing skill %s", what->to_short_string().c_str());
   TRACE_AND_INDENT();
+
   auto existing_owner = what->get_immediate_owner();
   if (existing_owner != this) {
     err("Attempt to remove skill %s which is not owned", what->to_short_string().c_str());
@@ -89,7 +93,7 @@ bool Thing::skill_remove(Thingp what)
 
 void Thing::skill_remove_all(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (! maybe_itemp()) {
     return;
   }
@@ -106,7 +110,7 @@ void Thing::skill_remove_all(void)
 
 bool Thing::skill_use(Thingp what)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   dbg("Try to use skill %s", what->to_short_string().c_str());
   used(what, this, false /* remove after use */);
   return true;
@@ -114,21 +118,21 @@ bool Thing::skill_use(Thingp what)
 
 void Thing::skill_deactivate(Thingp what)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   what->is_activated            = false;
   game->request_remake_skillbox = true;
 }
 
 void Thing::skill_activate(Thingp what)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   what->is_activated            = true;
   game->request_remake_skillbox = true;
 }
 
 int Thing::skill_enchant_count(const uint32_t slot)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (! maybe_itemp()) {
     return 0;
   }
@@ -152,7 +156,7 @@ int Thing::skill_enchant_count(const uint32_t slot)
 
 bool Thing::skill_add(Tpp what)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto t = level->thing_new(what, curr_at);
   if (unlikely(! t)) {
     err("Cannot learn skill");
@@ -182,7 +186,7 @@ bool Thing::skill_add(Tpp what)
 
 int Thing::get_skillstone_count(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   int v = 0;
   for (const auto t : get_item_vector()) {
     if (! t->is_skillstone()) {
@@ -196,7 +200,7 @@ int Thing::get_skillstone_count(void)
 
 bool Thing::can_learn_something(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   //
   // Once skills are maxxed out, that's it
@@ -230,7 +234,7 @@ bool Thing::can_learn_something(void)
 
 bool Thing::learn_random_skill(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   std::vector< Tpp > cands;
   for (auto tpp : tp_get_skills()) {

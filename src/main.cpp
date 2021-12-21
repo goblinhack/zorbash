@@ -619,7 +619,7 @@ static std::string create_appdata_dir(void)
 
 int32_t main(int32_t argc, char *argv[])
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   ARGV = argv;
 
   auto appdata = create_appdata_dir(); // Want this first so we get all logs
@@ -898,6 +898,7 @@ int32_t main(int32_t argc, char *argv[])
   config_gfx_vsync_update();
 
   g_opt_fast_start = false;
+  TRACE_NO_INDENT();
   sdl_loop();
   LOG("FINI: SDL loop finished");
 

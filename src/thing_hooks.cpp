@@ -20,7 +20,7 @@
 //
 void Thing::hooks_remove()
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   //
   // We are owned by something. i.e. we are a sword.
@@ -91,6 +91,7 @@ void Thing::hooks_remove()
         if (carry_anim) {
           dbg("Make carry weapon visible %s", top_owner->to_string().c_str());
           TRACE_AND_INDENT();
+
           //
           // But only if the owner is visible.
           //
@@ -150,7 +151,6 @@ void Thing::hooks_remove()
   //
   FOR_ALL_EQUIP(e)
   {
-    TRACE_AND_INDENT();
     Thingp item = get_equip_carry_anim(e);
     if (item) {
       verify(MTYPE_THING, item);
@@ -165,7 +165,6 @@ void Thing::hooks_remove()
 
   FOR_ALL_EQUIP(e)
   {
-    TRACE_AND_INDENT();
     Thingp item = get_equip_use_anim(e);
     if (item) {
       verify(MTYPE_THING, item);
@@ -181,7 +180,8 @@ void Thing::hooks_remove()
 
 void Thing::remove_all_references()
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   if (is_loggable()) {
     dbg("Remove all references");
   }

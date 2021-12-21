@@ -50,13 +50,13 @@ static void thing_possible_init(void) { thing_colls.resize(0); }
 //
 bool Thing::collision_find_best_target(bool *target_attacked, bool *target_overlaps)
 {
+  dbg("Collided with or can attack or eat something, find the best");
   TRACE_AND_INDENT();
+
   bool       ret  = false;
   auto       me   = this;
   ThingColl *best = nullptr;
 
-  dbg("Collided with or can attack or eat something, find the best");
-  TRACE_AND_INDENT();
   *target_attacked = false;
   *target_overlaps = false;
 
@@ -274,14 +274,14 @@ bool things_overlap(const Thingp A, point A_at, const Thingp B) { return A_at ==
 //
 bool Thing::collision_add_candidates(Thingp it, point future_pos, int x, int y, int dx, int dy)
 {
+  dbg("Collision candidate? %s", it->to_short_string().c_str());
   TRACE_AND_INDENT();
+
   auto me = this;
 
   Thingp owner_it = it->get_immediate_owner();
   Thingp owner_me = me->get_immediate_owner();
 
-  dbg("Collision candidate? %s", it->to_short_string().c_str());
-  TRACE_AND_INDENT();
   if ((owner_it == me) || (owner_me == it)) {
     //
     // If on fire, allow fire to burn its owner - you!
@@ -415,7 +415,6 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
   // and when swinging, it is hidden
   //
   if (is_falling || is_jumping || is_changing_level) {
-    dbg("Ignore collisions");
     return false;
   }
 
@@ -671,19 +670,16 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
 
 bool Thing::collision_check_and_handle(point future_pos, bool *target_attacked, bool *target_overlaps, float radius)
 {
-  TRACE_AND_INDENT();
-  if (is_loggable()) {
-    dbg("Collision handle");
-  }
-  TRACE_AND_INDENT();
   //
   // Do not include hidden as we use the sword being carried here
   // and when swinging, it is hidden
   //
   if (is_falling || is_jumping || is_changing_level) {
-    dbg("Ignore collisions");
     return false;
   }
+
+  dbg("Collision handle");
+  TRACE_AND_INDENT();
 
   int minx = future_pos.x - radius;
   while (minx < 0) {

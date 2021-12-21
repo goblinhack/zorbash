@@ -209,7 +209,7 @@ std::string Tp::text_a_or_an(void) const { return _text_a_or_an; }
 //
 std::string Tp::short_text_capitalized(void) const
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   std::string out        = text_name();
   char       *b          = (char *) out.c_str();
   char       *e          = b + out.size();

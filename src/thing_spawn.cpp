@@ -18,9 +18,9 @@
 
 bool Thing::spawn_next_to(const std::string &what)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   dbg("Spawn %s next to", what.c_str());
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   std::vector< point >              possible;
   static const std::vector< point > all_deltas = {
       point(-1, -1), point(1, -1), point(-1, 1), point(1, 1), point(0, -1), point(-1, 0), point(1, 0), point(0, 1),
@@ -98,7 +98,7 @@ bool Thing::spawn_next_to(const std::string &what)
 
 bool Thing::spawn_next_to_or_on_monst(const std::string &what)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   dbg("Spawn %s next to or on monst", what.c_str());
 
   std::vector< point >              possible;
@@ -170,7 +170,7 @@ bool Thing::spawn_next_to_or_on_monst(const std::string &what)
 bool Thing::spawn_radius_range(Thingp item, Thingp target, const std::string &what, uint32_t radius_min,
                                uint32_t radius_max)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto tpp = tp_find(what);
   if (unlikely(! tpp)) {
     err("Cannot find %s to spawn", what.c_str());
@@ -242,7 +242,7 @@ bool Thing::spawn_radius_range(Thingp item, Thingp target, const std::string &wh
 
 bool Thing::spawn_radius_range(const std::string &what, uint32_t radius_min, uint32_t radius_max)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto tpp = tp_find(what);
   if (unlikely(! tpp)) {
     err("Cannot find %s to spawn", what.c_str());
@@ -298,7 +298,7 @@ bool Thing::spawn_radius_range(const std::string &what, uint32_t radius_min, uin
 int Thing::spawn_randomly_in_radius_range(const std::string &what, int amount, uint32_t radius_min,
                                           uint32_t radius_max)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto tpp = tp_find(what);
   if (unlikely(! tpp)) {
     err("Cannot find %s to spawn", what.c_str());
@@ -383,7 +383,7 @@ int Thing::spawn_randomly_in_radius_range(const std::string &what, int amount, u
 
 bool Thing::spawn_fire(const std::string &what)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   dbg("Spawn fire: %s", what.c_str());
 
   std::vector< point >              possible;
@@ -433,7 +433,7 @@ bool Thing::spawn_fire(const std::string &what)
 
 Thingp Thing::spawn_at_if_possible(const std::string &what)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   dbg("Spawn under: %s", what.c_str());
 
   std::vector< point > possible;
@@ -471,7 +471,7 @@ Thingp Thing::spawn_at_if_possible(const std::string &what)
 
 Thingp Thing::spawn_at(const std::string &what)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   dbg("Spawn under: %s", what.c_str());
 
   std::vector< point > possible;

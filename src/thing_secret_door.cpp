@@ -16,7 +16,7 @@
 
 void Thing::secret_door_tick(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (! is_player()) {
     return;
   }

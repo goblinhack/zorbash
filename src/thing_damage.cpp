@@ -18,7 +18,7 @@
 
 int Thing::get_damage_max(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto max_damage = get_damage_bite_dice().max_roll();
   max_damage      = std::max(max_damage, get_damage_digest_dice().max_roll());
   max_damage      = std::max(max_damage, get_damage_melee_dice().max_roll());
@@ -42,7 +42,7 @@ int Thing::get_damage_max(void)
 
 int Thing::get_damage_min(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto min_damage = get_damage_bite_dice().min_roll();
   min_damage      = std::min(min_damage, get_damage_digest_dice().min_roll());
   min_damage      = std::min(min_damage, get_damage_melee_dice().min_roll());

@@ -159,54 +159,54 @@ void Thing::get_tiles()
 
 uint8_t tile_is_dir_down(Tilep t)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   return (t->dir == THING_DIR_DOWN);
 }
 
 uint8_t tile_is_dir_up(Tilep t)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   return (t->dir == THING_DIR_UP);
 }
 
 uint8_t tile_is_dir_left(Tilep t)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   return (t->dir == THING_DIR_LEFT);
 }
 
 uint8_t tile_is_dir_right(Tilep t)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   return (t->dir == THING_DIR_RIGHT);
 }
 
 uint8_t tile_is_dir_none(Tilep t)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   return (t->dir == THING_DIR_NONE);
 }
 
 uint8_t tile_is_dir_tl(Tilep t)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   return (t->dir == THING_DIR_TL);
 }
 
 uint8_t tile_is_dir_bl(Tilep t)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   return (t->dir == THING_DIR_BL);
 }
 
 uint8_t tile_is_dir_tr(Tilep t)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   return (t->dir == THING_DIR_TR);
 }
 
 uint8_t tile_is_dir_br(Tilep t)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   return (t->dir == THING_DIR_BR);
 }

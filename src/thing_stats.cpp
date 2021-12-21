@@ -14,7 +14,7 @@
 
 void Thing::stats_tick(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   //
   // Can this thing die if it's constiturion is too low?

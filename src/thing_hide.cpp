@@ -15,7 +15,7 @@
 
 void Thing::hide(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (is_hidden) {
     return;
   }
@@ -44,7 +44,7 @@ void Thing::hide(void)
 
   auto on_fire_anim_id = get_on_fire_anim_id();
   if (on_fire_anim_id.ok()) {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto w = level->thing_find(on_fire_anim_id);
     if (w) {
       w->hide();

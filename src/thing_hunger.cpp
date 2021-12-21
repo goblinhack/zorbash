@@ -13,6 +13,8 @@
 
 void Thing::hunger_clock_tick(void)
 {
+  TRACE_NO_INDENT();
+
   if (is_dead || ! get_hunger_clock_tick_frequency()) {
     return;
   }
@@ -24,16 +26,15 @@ void Thing::hunger_clock_tick(void)
     return;
   }
 
-  TRACE_AND_INDENT();
-  dbg("Hunger tick");
-  TRACE_AND_INDENT();
-
   //
   // Hunger only ticks on constitution fail
   //
   if (d20roll_under(get_stat_constitution())) {
     return;
   }
+
+  dbg("Hunger tick");
+  TRACE_AND_INDENT();
 
   if (get_health() > 1) {
     decr_health();
@@ -53,11 +54,12 @@ void Thing::hunger_clock_tick(void)
 
 void Thing::hunger_update(void)
 {
+  TRACE_NO_INDENT();
+
   if (is_dead || ! get_hunger_clock_tick_frequency()) {
     return;
   }
 
-  TRACE_AND_INDENT();
   dbg("Hunger update");
   TRACE_AND_INDENT();
 

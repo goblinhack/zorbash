@@ -13,13 +13,14 @@
 
 void Thing::necrosis_tick(void)
 {
+  TRACE_NO_INDENT();
+
   if ((is_alive_monst() || is_player()) && ! is_ethereal() && ! is_undead()) {
     auto old_necrosis = get_necrotized_amount();
     if (! old_necrosis) {
       return;
     }
 
-    TRACE_AND_INDENT();
     dbg("Necrosis tick");
     TRACE_AND_INDENT();
 

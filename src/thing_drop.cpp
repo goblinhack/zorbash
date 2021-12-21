@@ -15,13 +15,14 @@
 
 bool Thing::drop(Thingp what, Thingp target, bool stolen)
 {
+  TRACE_NO_INDENT();
+
   verify(MTYPE_THING, what);
   if (! what) {
     err("Cannot drop null thing");
     return false;
   }
 
-  TRACE_AND_INDENT();
   if (stolen) {
     if (target) {
       dbg("Drop (being stolen) %s at %s", what->to_short_string().c_str(), target->to_string().c_str());
@@ -140,13 +141,14 @@ bool Thing::drop(Thingp what, Thingp target, bool stolen)
 //
 bool Thing::drop_into_ether(Thingp what)
 {
+  TRACE_NO_INDENT();
+
   verify(MTYPE_THING, what);
   if (! what) {
     err("Cannot drop into ether null thing");
     return false;
   }
 
-  TRACE_AND_INDENT();
   dbg("Dropping %s into the ether", what->to_short_string().c_str());
   TRACE_AND_INDENT();
 
@@ -203,17 +205,19 @@ bool Thing::drop_into_ether(Thingp what)
 //
 bool Thing::drop_from_ether(Thingp what)
 {
+  TRACE_NO_INDENT();
+
   verify(MTYPE_THING, what);
   if (! what) {
     err("Cannot drop from ether null thing");
     return false;
   }
 
-  TRACE_AND_INDENT();
-  auto player = game->level->player;
-
   dbg("Drop from ether %s", what->to_short_string().c_str());
   TRACE_AND_INDENT();
+
+  auto player = game->level->player;
+
   what->hooks_remove();
   what->remove_owner();
   what->hide();
@@ -260,15 +264,11 @@ bool Thing::drop_from_ether(Thingp what)
   return true;
 }
 
-bool Thing::drop(Thingp what)
-{
-  TRACE_AND_INDENT();
-  return drop(what, nullptr);
-}
+bool Thing::drop(Thingp what) { return drop(what, nullptr); }
 
 void Thing::drop_all(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (! maybe_itemp()) {
     return;
   }
@@ -289,7 +289,6 @@ void Thing::check_all_carried(void)
     return;
   }
 
-  TRACE_AND_INDENT();
   log("Carried items:");
   TRACE_AND_INDENT();
 

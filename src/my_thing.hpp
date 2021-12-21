@@ -679,7 +679,6 @@ public:
              bool damage_lightning, bool damage_energy, bool damage_acid, bool damage_digest, int damage);
 
   int aggression_level_pct(void);
-  int ai_choose_goal(void);
   int ai_detect_secret_doors(void);
   int ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int type, bool check);
   int ai_obstacle(void);

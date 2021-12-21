@@ -12,7 +12,7 @@
 
 void Thing::water_tick(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (! level->is_water(curr_at.x, curr_at.y)) {
     return;
   }

@@ -16,7 +16,7 @@
 
 float Thing::how_far_i_can_jump(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto d = (float) distance_jump() + ceil(0.5 + (pcg_random_range(0, 100) / 100.0));
 
   if (get_stamina() < get_stamina_max() / 2) {
@@ -32,13 +32,15 @@ float Thing::how_far_i_can_jump(void)
 
 float Thing::how_far_i_can_jump_max(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto d = (float) distance_jump() + 1;
   return d;
 }
 
 bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
 {
+  TRACE_NO_INDENT();
+
   if (is_changing_level || is_hidden || is_falling || is_waiting_to_ascend_dungeon || is_waiting_to_descend_sewer ||
       is_waiting_to_descend_dungeon || is_waiting_to_ascend_sewer || is_waiting_to_leave_level_has_completed_fall ||
       is_jumping) {
@@ -49,12 +51,12 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
     return false;
   }
 
-  TRACE_AND_INDENT();
   if (be_careful) {
     dbg("Try to jump carefully %d,%d", to.x, to.y);
   } else {
     dbg("Try to jump to %d,%d", to.x, to.y);
   }
+  TRACE_AND_INDENT();
 
   //
   // Spider minions need to be leashed
@@ -62,9 +64,13 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   bool jumping_home = false;
   if (too_far_from_manifestor(to)) {
     dbg("No, minion is too far off the leash to jump");
+    TRACE_AND_INDENT();
+
     auto manifestor = get_top_manifestor();
     if (manifestor) {
       dbg("Try jumping home");
+      TRACE_AND_INDENT();
+
       to           = manifestor->curr_at;
       jumping_home = true;
     } else {
@@ -77,6 +83,8 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
       dbg("Jumping closer to the leader");
     } else {
       dbg("No, follower is too far from the leader to jump");
+      TRACE_AND_INDENT();
+
       auto leader = get_leader();
       if (leader) {
         dbg("Try jumping closer to the leader");
@@ -102,9 +110,10 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   auto y = to.y;
 
   dbg("Try jump to %d,%d", x, y);
+  TRACE_AND_INDENT();
 
   if (level->is_oob(x, y)) {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     dbg("No, oob");
     if (is_player()) {
       TOPCON("You can't jump into the void.");
@@ -327,7 +336,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
 
   auto on_fire_anim_id = get_on_fire_anim_id();
   if (on_fire_anim_id.ok()) {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto id = on_fire_anim_id;
     auto w  = level->thing_find(id);
     if (w) {
@@ -353,6 +362,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
       if (level->is_shallow_water((int) curr_at.x, (int) curr_at.y)) {
         point at(curr_at.x, curr_at.y);
         dbg("Causes ripples");
+        TRACE_AND_INDENT();
         if (game->robot_mode) {
           //
           // Faster
@@ -383,31 +393,31 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
 
 bool Thing::try_to_jump_carefully(point p, bool *too_far)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   return try_to_jump(p, true, too_far);
 }
 
 bool Thing::try_to_jump_carefree(point p, bool *too_far)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   return try_to_jump(p, false, too_far);
 }
 
 bool Thing::try_to_jump_carefully(point p)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   return try_to_jump(p, true, nullptr);
 }
 
 bool Thing::try_to_jump_carefree(point p)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   return try_to_jump(p, false, nullptr);
 }
 
 bool Thing::try_to_jump(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (is_changing_level || is_hidden || is_falling || is_waiting_to_ascend_dungeon || is_waiting_to_descend_sewer ||
       is_waiting_to_descend_dungeon || is_waiting_to_ascend_sewer || is_waiting_to_leave_level_has_completed_fall ||
       is_jumping) {
@@ -432,7 +442,7 @@ bool Thing::try_to_jump(void)
 
 bool Thing::try_to_jump_towards_player(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (is_changing_level || is_hidden || is_falling || is_waiting_to_ascend_dungeon || is_waiting_to_descend_sewer ||
       is_waiting_to_descend_dungeon || is_waiting_to_ascend_sewer || is_waiting_to_leave_level_has_completed_fall ||
       is_jumping) {
@@ -473,7 +483,7 @@ bool Thing::try_to_jump_towards_player(void)
 
 bool Thing::try_to_jump_away_from_player(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (is_changing_level || is_hidden || is_falling || is_waiting_to_ascend_dungeon || is_waiting_to_descend_sewer ||
       is_waiting_to_descend_dungeon || is_waiting_to_ascend_sewer || is_waiting_to_leave_level_has_completed_fall ||
       is_jumping) {
@@ -505,7 +515,7 @@ bool Thing::try_to_jump_away_from_player(void)
 
 bool Thing::try_harder_to_jump(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (is_changing_level || is_hidden || is_falling || is_waiting_to_ascend_dungeon || is_waiting_to_descend_sewer ||
       is_waiting_to_descend_dungeon || is_waiting_to_ascend_sewer || is_waiting_to_leave_level_has_completed_fall ||
       is_jumping) {
@@ -528,12 +538,14 @@ bool Thing::try_harder_to_jump(void)
 
 void Thing::jump_end(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (! is_jumping) {
     return;
   }
 
   dbg("End of jump");
+  TRACE_AND_INDENT();
+
   is_jumping = false;
   move_finish();
   update_interpolated_position();
@@ -568,7 +580,7 @@ void Thing::jump_end(void)
 
   auto on_fire_anim_id = get_on_fire_anim_id();
   if (on_fire_anim_id.ok()) {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto w = level->thing_find(on_fire_anim_id);
     if (w) {
       w->is_jumping = false;
@@ -618,6 +630,7 @@ bool Thing::jump_attack(Thingp maybe_victim)
     if ((int) pcg_random_range(0, 1000) > tp()->is_able_to_jump_attack_chance_d1000()) {
       dbg("Try to jump in direction of escape attack");
       TRACE_AND_INDENT();
+
       auto delta = maybe_victim->curr_at - maybe_victim->last_at;
       if (delta != point(0, 0)) {
         auto dest = maybe_victim->curr_at + (delta * 2);
@@ -632,6 +645,7 @@ bool Thing::jump_attack(Thingp maybe_victim)
     if ((int) pcg_random_range(0, 1000) > tp()->is_able_to_jump_attack_chance_d1000()) {
       dbg("Try to jump in front attack");
       TRACE_AND_INDENT();
+
       auto delta = maybe_victim->curr_at - curr_at;
       auto dest  = maybe_victim->curr_at + delta;
       return try_to_jump_carefully(dest);
@@ -641,6 +655,7 @@ bool Thing::jump_attack(Thingp maybe_victim)
   if ((int) pcg_random_range(0, 1000) > tp()->is_able_to_jump_attack_chance_d1000()) {
     dbg("Try to jump attack");
     TRACE_AND_INDENT();
+
     auto p         = get_aip()->move_path;
     auto jump_dist = pcg_random_range(0, p.size());
     return try_to_jump_carefully(get(p, jump_dist));
@@ -657,6 +672,7 @@ bool Thing::jump_attack(Thingp maybe_victim)
       {
         dbg("Try to jump onto weakly %s", maybe_victim->to_string().c_str());
         TRACE_AND_INDENT();
+
         if (try_to_jump_carefree(maybe_victim->curr_at)) {
           return true;
         }
@@ -665,6 +681,7 @@ bool Thing::jump_attack(Thingp maybe_victim)
       if ((int) pcg_random_range(0, 1000) < tp()->is_able_to_jump_onto_chance_d1000()) {
         dbg("Try to jump onto %s", maybe_victim->to_string().c_str());
         TRACE_AND_INDENT();
+
         if (try_to_jump_carefree(maybe_victim->curr_at)) {
           return true;
         }

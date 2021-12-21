@@ -12,7 +12,8 @@
 
 void Thing::level_pop(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   if (! is_attached) {
     return;
   }

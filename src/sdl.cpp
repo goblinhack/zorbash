@@ -1177,7 +1177,9 @@ uint8_t sdl_user_exit(tokens_t *tokens, void *context)
 //
 void sdl_loop(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+  LOG("SDL main loop");
+
   SDL_Event events[ 10 ];
   int       found;
   int       i;
@@ -1232,6 +1234,8 @@ void sdl_loop(void)
   }
 
   for (; /*ever*/;) {
+    // LOG("SDL tick");
+
     frames++;
     game->frame_count++;
 

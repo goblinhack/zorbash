@@ -16,7 +16,7 @@
 
 std::string Thing::text_a_or_an(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto tpp = tp();
   verify(MTYPE_THING, this);
   verify(MTYPE_TP, tpp);
@@ -50,7 +50,7 @@ std::string Thing::text_a_or_an(void)
 
 std::string Thing::text_the(bool include_owner)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto tpp = tp();
   verify(MTYPE_THING, this);
   verify(MTYPE_TP, tpp);
@@ -90,7 +90,7 @@ std::string Thing::text_the(bool include_owner)
 
 std::string Thing::text_the_no_dying(bool include_owner)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto tpp = tp();
   verify(MTYPE_THING, this);
   verify(MTYPE_TP, tpp);
@@ -118,7 +118,7 @@ std::string Thing::text_the_no_dying(bool include_owner)
 
 std::string Thing::text_The(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto out = text_the();
   out[ 0 ] = toupper(out[ 0 ]);
   return (out);
@@ -126,7 +126,7 @@ std::string Thing::text_The(void)
 
 std::string Thing::text_The_no_dying(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto out = text_the_no_dying();
   out[ 0 ] = toupper(out[ 0 ]);
   return (out);
@@ -134,7 +134,7 @@ std::string Thing::text_The_no_dying(void)
 
 std::string Thing::short_text_a_or_an(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto tpp = tp();
   verify(MTYPE_THING, this);
   verify(MTYPE_TP, tpp);
@@ -168,7 +168,7 @@ std::string Thing::short_text_a_or_an(void)
 
 std::string Thing::short_text_the(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto tpp = tp();
   verify(MTYPE_THING, this);
   verify(MTYPE_TP, tpp);
@@ -195,7 +195,7 @@ std::string Thing::short_text_the(void)
 
 std::string Thing::short_text_The(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto out = short_text_the();
   out[ 0 ] = toupper(out[ 0 ]);
   return (out);
@@ -206,7 +206,7 @@ std::string Thing::short_text_The(void)
 //
 std::string Thing::short_text_capitalized(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   std::string out;
 
   if (is_player() || is_monst()) {
@@ -249,7 +249,7 @@ std::string Thing::short_text_capitalized(void)
 
 void Thing::show_botcon_description(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto text = text_description();
 
   bool skip_showing_keys_to_use = true;

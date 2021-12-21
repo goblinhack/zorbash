@@ -18,7 +18,7 @@
 //
 int Thing::maybe_itemp_value(Thingp it)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   int value = 0;
 
   if (it->is_treasure_type()) {

@@ -17,9 +17,9 @@
 
 bool Thing::buffbox_id_insert(Thingp what)
 {
-  TRACE_AND_INDENT();
   dbg("buffbox insert %s", what->to_short_string().c_str());
   TRACE_AND_INDENT();
+
   auto player = level->player;
   if (! player) {
     return false;
@@ -81,9 +81,9 @@ bool Thing::buffbox_id_insert(Thingp what)
 
 bool Thing::buffbox_id_remove(Thingp what)
 {
-  TRACE_AND_INDENT();
   dbg("buffbox remove %s", what->to_short_string().c_str());
   TRACE_AND_INDENT();
+
   auto player = level->player;
   if (! player) {
     return false;
@@ -132,9 +132,9 @@ bool Thing::buffbox_id_remove(Thingp what)
 
 Thingp Level::buffbox_get(const uint32_t slot)
 {
-  TRACE_AND_INDENT();
   dbg("buffbox get slot %d", slot);
   TRACE_AND_INDENT();
+
   if (! player) {
     ERR("No player");
     return nullptr;
@@ -181,9 +181,9 @@ Thingp Level::buffbox_get(const uint32_t slot)
 
 bool Level::buffbox_over(const uint32_t slot)
 {
-  TRACE_AND_INDENT();
   DBG("buffbox: Over buffbox slot %d", slot);
   TRACE_AND_INDENT();
+
   if (! player) {
     DBG("buffbox: Ignore; no player");
     return false;
@@ -213,9 +213,9 @@ bool Level::buffbox_over(const uint32_t slot)
 
 Thingp Level::buffbox_describe(const uint32_t slot)
 {
-  TRACE_AND_INDENT();
   DBG("buffbox: Describe slot %d", slot);
   TRACE_AND_INDENT();
+
   auto what = buffbox_get(slot);
   if (what) {
     IF_DEBUG2 { what->log("buffbox: Describe slot %d", slot); }

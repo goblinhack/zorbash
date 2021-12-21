@@ -26,7 +26,7 @@ void Thing::on_you_are_hit_but_still_alive(Thingp hitter,      // an arrow / mon
     return;
   }
 
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto on_you_are_hit_but_still_alive = tp()->on_you_are_hit_but_still_alive_do();
   if (std::empty(on_you_are_hit_but_still_alive)) {
     return;
@@ -63,7 +63,7 @@ void Thing::on_you_are_hit_and_now_dead(Thingp hitter,      // an arrow / monst 
                                         Thingp real_hitter, // who fired the arrow?
                                         bool crit, int damage)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto on_you_are_hit_and_now_dead = tp()->on_you_are_hit_and_now_dead_do();
   if (std::empty(on_you_are_hit_and_now_dead)) {
     return;
@@ -105,7 +105,7 @@ void Thing::on_you_miss_do(Thingp hitter)
     return;
   }
 
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto on_you_miss_do = tp()->on_you_miss_do();
   if (std::empty(on_you_miss_do)) {
     return;
@@ -140,7 +140,7 @@ void Thing::on_you_bite_attack(void)
     return;
   }
 
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto on_you_bite_attack = tp()->on_you_bite_attack_do();
   if (std::empty(on_you_bite_attack)) {
     return;
@@ -175,7 +175,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
                          bool attack_crush, bool attack_lightning, bool attack_energy, bool attack_acid,
                          bool attack_digest, int damage)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (! hitter) {
     err("No hitter");
     return false;
@@ -1006,7 +1006,7 @@ int Thing::is_hit(Thingp hitter, bool crit, bool attack_bite, bool attack_poison
                   bool attack_fire, bool attack_crush, bool attack_lightning, bool attack_energy, bool attack_acid,
                   bool attack_digest, int damage)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (attack_bite || attack_digest) {
     //
     // Allow attacks when dead
@@ -1027,7 +1027,7 @@ int Thing::is_hit(Thingp hitter, bool crit, bool attack_bite, bool attack_poison
     hitter->log("No damage");
     return false;
   }
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   //
   // If an arrow, who really fired it?

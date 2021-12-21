@@ -11,7 +11,7 @@
 
 void Thing::stamina_boost(int v)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (! v) {
     return;
   }

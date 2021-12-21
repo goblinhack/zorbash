@@ -17,7 +17,7 @@
 
 int Thing::get_torch_count(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   int torch_count = 0;
 
   for (const auto o : get_item_vector()) {
@@ -37,7 +37,7 @@ int Thing::get_torch_count(void)
 
 void Thing::get_light_strength_including_torch_effect(uint8_t &out_light_strength)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   int light_strength = get_initial_light_strength();
   int torch_count    = get_torch_count();
 
@@ -60,7 +60,7 @@ void Thing::get_light_strength_including_torch_effect(uint8_t &out_light_strengt
 
 void Thing::update_light_strength_including_torch_effect(uint8_t &out_light_strength)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   uint8_t orig_light_strength = out_light_strength;
   uint8_t light_strength;
 

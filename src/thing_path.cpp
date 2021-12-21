@@ -30,7 +30,7 @@ bool Thing::path_pop_next_move(void)
     return false;
   }
 
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   std::string s = "";
   IF_DEBUG2
   {
@@ -78,7 +78,7 @@ bool Thing::path_pop_next_move(void)
         AI_LOG("", s);
       }
 
-      TRACE_AND_INDENT();
+      TRACE_NO_INDENT();
       if (aip->move_path.size()) {
         auto jump_pos = aip->move_path[ 0 ];
         aip->move_path.erase(aip->move_path.begin());
@@ -86,7 +86,7 @@ bool Thing::path_pop_next_move(void)
         //
         // If the thing we are going to land on is also a hazard, can we jump further?
         //
-        TRACE_AND_INDENT();
+        TRACE_NO_INDENT();
         if (is_disliked_by_me(jump_pos) && aip->move_path.size()) {
           IF_DEBUG2
           {
@@ -350,7 +350,7 @@ bool Thing::path_pop_next_move(void)
 //
 bool Thing::cursor_path_pop_first_move(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto cursor = level->cursor;
   if (! cursor) {
     return false;

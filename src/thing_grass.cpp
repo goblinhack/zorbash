@@ -17,7 +17,8 @@
 
 void Thing::grass_tick(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   if (! level->is_dry_grass(curr_at.x, curr_at.y)) {
     return;
   }

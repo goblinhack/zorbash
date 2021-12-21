@@ -62,7 +62,7 @@ uint8_t Thing::get_terrain_cost(point p)
 
 bool Thing::will_prefer_terrain(const Thingp itp)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto me = tp();
   auto it = itp->tp();
 

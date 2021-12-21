@@ -16,7 +16,7 @@
 
 bool Thing::is_hated_by_me(const point &p)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (level->is_shallow_water(p) || level->is_deep_water(p)) {
     if (environ_avoids_water()) {
       return true;
@@ -40,7 +40,7 @@ bool Thing::is_hated_by_me(const point &p)
 
 bool Tp::is_hated_by_me(Levelp level, point p) const
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (level->is_shallow_water(p) || level->is_deep_water(p)) {
     if (environ_avoids_water()) {
       return true;
@@ -64,7 +64,7 @@ bool Tp::is_hated_by_me(Levelp level, point p) const
 
 bool Thing::is_hated_by_me(const Thingp itp)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto me = tp();
   auto it = itp->tp();
 

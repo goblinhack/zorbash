@@ -30,7 +30,7 @@ static int              thing_possible_hit_size;
 //
 bool Thing::on_firing_at_something(Thingp target)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto on_firing_at_something = tp()->on_firing_at_something_do();
   if (std::empty(on_firing_at_something)) {
     return false;
@@ -189,7 +189,7 @@ bool Thing::fire_at_target(void)
 
 bool Thing::fire_at_and_choose_target(Thingp item)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (item->laser_name().empty()) {
     return projectile_choose_target(item);
   } else {

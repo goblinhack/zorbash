@@ -11,7 +11,7 @@
 
 int Thing::health_boost(int v)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (! v) {
     return false;
   }
@@ -38,7 +38,7 @@ int Thing::health_boost(int v)
 
 bool Thing::health_boost_would_occur(int v)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (! v) {
     return false;
   }
@@ -55,13 +55,13 @@ bool Thing::health_boost_would_occur(int v)
 
 bool Thing::is_bloodied(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   return get_health_pct() <= THING_HEALTH_BLOODIED_PCT1;
 }
 
 float Thing::get_health_pct(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   float pct = ((float) get_health() / (float) get_health_max()) * 100;
   return pct;
 }

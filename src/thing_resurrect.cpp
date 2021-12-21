@@ -14,7 +14,8 @@
 
 void Thing::resurrect_tick(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   //
   // Rise at the apointed time
   //

@@ -18,7 +18,8 @@
 
 void Thing::inventory_particle(Thingp item, uint32_t slot)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   dbg("Create inventory particle? %s", item->to_short_string().c_str());
   TRACE_AND_INDENT();
 
@@ -134,8 +135,10 @@ void Thing::inventory_particle(Thingp item, uint32_t slot)
 //
 void Thing::inventory_particle(Thingp item, uint32_t slot, Thingp particle_target)
 {
-  TRACE_AND_INDENT();
-  dbg("Create inventory particle %s with target %s", item->to_short_string().c_str(), particle_target->to_string().c_str());
+  TRACE_NO_INDENT();
+
+  dbg("Create inventory particle %s with target %s", item->to_short_string().c_str(),
+      particle_target->to_string().c_str());
   TRACE_AND_INDENT();
 
   if (game->in_transit_item) {
@@ -197,7 +200,8 @@ void Thing::inventory_particle(Thingp item, uint32_t slot, Thingp particle_targe
 
 bool Thing::inventory_shortcuts_insert(Thingp item)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   dbg("Inventory insert %s", item->to_short_string().c_str());
   TRACE_AND_INDENT();
 
@@ -324,7 +328,8 @@ bool Thing::inventory_shortcuts_insert(Thingp item)
 
 bool Thing::inventory_shortcuts_remove(Thingp item)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   dbg("Inventory remove %s", item->to_short_string().c_str());
   TRACE_AND_INDENT();
 
@@ -364,8 +369,8 @@ bool Thing::inventory_shortcuts_remove(Thingp item)
 
       inventory_particle(item, i, this);
 
-      TRACE_AND_INDENT();
       dbg("Remove slot");
+      TRACE_AND_INDENT();
 
       set(itemp->inventory_shortcuts, i, NoThingId);
 
@@ -390,7 +395,8 @@ bool Thing::inventory_shortcuts_remove(Thingp item)
 
 bool Thing::inventory_shortcuts_remove(Thingp item, Thingp particle_target)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   dbg("Inventory remove %s with target %s", item->to_short_string().c_str(), particle_target->to_string().c_str());
   TRACE_AND_INDENT();
 
@@ -460,7 +466,7 @@ bool Thing::inventory_shortcuts_remove(Thingp item, Thingp particle_target)
 
 int Thing::item_slot_charge_count(const uint32_t slot)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   auto itemp = maybe_itemp();
   if (! itemp) {
@@ -482,7 +488,7 @@ int Thing::item_slot_charge_count(const uint32_t slot)
 
 int Thing::item_enchant_count(const uint32_t slot)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   auto itemp = maybe_itemp();
   if (! itemp) {
@@ -507,7 +513,8 @@ int Thing::item_enchant_count(const uint32_t slot)
 
 Thingp Level::inventory_get(const uint32_t slot)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   dbg("Inventory get slot %d", slot);
   TRACE_AND_INDENT();
 
@@ -551,7 +558,8 @@ Thingp Level::inventory_get(void)
 
 bool Level::inventory_over(const uint32_t slot)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   LOG("Inventory: Over inventory slot %d", slot);
   TRACE_AND_INDENT();
 
@@ -600,7 +608,8 @@ bool Level::inventory_over(const uint32_t slot)
 
 bool Level::inventory_chosen(const uint32_t slot)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   LOG("Inventory: Chosen inventory slot %d", slot);
   TRACE_AND_INDENT();
 
@@ -663,7 +672,8 @@ bool Level::inventory_chosen(const uint32_t slot)
 
 bool Level::inventory_assign(const uint32_t slot, Thingp item)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   LOG("Inventory: Assign inventory slot %d", slot);
   TRACE_AND_INDENT();
 
@@ -713,11 +723,12 @@ bool Level::inventory_assign(const uint32_t slot, Thingp item)
 
 void Level::inventory_dump(void)
 {
+  TRACE_NO_INDENT();
+
   if (! player) {
     return;
   }
 
-  TRACE_AND_INDENT();
   con("Inventory: slots:");
   TRACE_AND_INDENT();
 
@@ -743,7 +754,7 @@ void Level::inventory_dump(void)
 
 int Level::inventory_get_slot(Thingp item)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   auto itemp = player->maybe_itemp();
   if (! itemp) {
@@ -772,7 +783,8 @@ int Level::inventory_get_slot(Thingp item)
 
 Thingp Level::inventory_describe(const uint32_t slot)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   LOG("Inventory: Describe slot %d", slot);
   TRACE_AND_INDENT();
 

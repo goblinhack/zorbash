@@ -21,7 +21,7 @@
 
 void Thing::killed(Thingp defeater, const std::string &reason)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   killed(defeater, reason.c_str());
 }
 
@@ -39,7 +39,7 @@ void Thing::killed(Thingp defeater, const char *reason)
   }
   is_dying = true;
 
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (is_loggable()) {
     dbg("Killed");
   }
@@ -124,10 +124,12 @@ void Thing::killed(Thingp defeater, const char *reason)
     //
     if (on_death_drop_all_items()) {
       dbg("Drop all items on death");
+      TRACE_AND_INDENT();
+
       if (is_monst() || is_player()) {
-        TRACE_AND_INDENT();
         dbg("Final item list at death:");
         TRACE_AND_INDENT();
+
         check_all_carried();
       }
       drop_all();

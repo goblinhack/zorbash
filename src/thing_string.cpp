@@ -16,7 +16,7 @@
 
 std::string Thing::to_string(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto tpp = tp();
   verify(MTYPE_THING, this);
 
@@ -29,7 +29,7 @@ std::string Thing::to_string(void)
   }
 
   if (unlikely(! tpp)) {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     return (string_sprintf("%" PRIx32 " L%d <no tp>%s%s%s%s%s%s%s%s%s %d,%d", id.id, level->world_at.z,
                            is_dead ? "/dead" : "", is_scheduled_for_death ? "/dead-sched" : "",
                            is_resurrecting ? "/resurrecting" : "", is_offscreen ? "/offscr" : "",
@@ -39,7 +39,6 @@ std::string Thing::to_string(void)
 
   /*
    * Makes debugs too long
-   */
   if (! g_loading && get_leader()) {
     auto l = get_leader();
     return (string_sprintf(
@@ -51,6 +50,7 @@ std::string Thing::to_string(void)
         is_waiting_to_descend_dungeon ? "/des-dung" : "", is_waiting_to_descend_sewer ? "/des-sewer" : "",
         is_waiting_to_ascend_sewer ? "/asc-sewer" : "", curr_at.x, curr_at.y, l->to_string().c_str()));
   }
+   */
 
   if (! g_loading && get_immediate_owner()) {
     auto o = get_immediate_owner();
@@ -79,7 +79,7 @@ std::string Thing::to_string(void)
 //
 std::string Thing::to_short_string(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto tpp = tp();
   verify(MTYPE_THING, this);
 
@@ -92,7 +92,7 @@ std::string Thing::to_short_string(void)
   }
 
   if (unlikely(! tpp)) {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     return (string_sprintf("%" PRIx32 " L%d <no tp>%s%s%s%s%s%s%s%s%s %d,%d", id.id, level->world_at.z,
                            is_dead ? "/dead" : "", is_scheduled_for_death ? "/dead-sched" : "",
                            is_resurrecting ? "/resurrecting" : "", is_offscreen ? "/offscr" : "",
@@ -112,7 +112,7 @@ std::string Thing::to_short_string(void)
 
 std::string Thing::to_dbg_string(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   verify(MTYPE_THING, this);
 
   return (string_sprintf(
@@ -178,7 +178,7 @@ std::string Thing::to_dbg_string(void)
 //
 std::string Thing::to_dbg_saved_string(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   verify(MTYPE_THING, this);
 
   return (string_sprintf(

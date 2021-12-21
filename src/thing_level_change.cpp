@@ -19,7 +19,8 @@
 //
 void Thing::level_change(Levelp l)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   if (level == l) {
     dbg("Change level; no, same level");
     return;
@@ -28,6 +29,8 @@ void Thing::level_change(Levelp l)
   auto old_level = level;
 
   dbg("Change level");
+  TRACE_AND_INDENT();
+
   level_leave();
   level = l;
   level_enter();

@@ -12,14 +12,14 @@
 
 bool Thing::describe_when_hovered_over_in_rightbar(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   level->describe(this);
   return true;
 }
 
 bool Thing::describe_when_hovering_over(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   level->describe(this);
   return true;
 }

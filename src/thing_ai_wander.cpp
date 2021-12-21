@@ -18,7 +18,7 @@
 
 bool Thing::ai_blocked(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   static const std::vector< point > move_deltas = {
       point(0, -1),
       point(-1, 0),
@@ -41,7 +41,7 @@ bool Thing::ai_blocked(void)
 
 bool Thing::ai_blocked_completely(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   static const std::vector< point > move_deltas = {
       point(0, -1), point(-1, 0), point(1, 0), point(0, 1), point(0, 0),
   };
@@ -69,7 +69,6 @@ bool Thing::ai_create_path(point &nh, const point start, const point end)
     return false;
   }
 
-  TRACE_AND_INDENT();
   dbg("AI create path from %d,%d to %d,%d", start.x, start.y, end.x, end.y);
   TRACE_AND_INDENT();
 
@@ -193,6 +192,7 @@ bool Thing::ai_create_path(point &nh, const point start, const point end)
 
 bool Thing::ai_choose_wander(point &nh)
 {
+  dbg("AI choose wander target");
   TRACE_AND_INDENT();
 
   if (! maybe_aip()) {
@@ -259,7 +259,6 @@ bool Thing::ai_choose_wander(point &nh)
 
 bool Thing::ai_wander(void)
 {
-  TRACE_AND_INDENT();
   dbg("AI wander");
   TRACE_AND_INDENT();
 

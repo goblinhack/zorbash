@@ -20,7 +20,7 @@
 
 bool Thing::will_avoid_monst(const Thingp it)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto me = tp();
 
   //
@@ -95,7 +95,7 @@ bool Thing::will_avoid_monst(const Thingp it)
 
 bool Thing::will_avoid_monst(const point &p)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto me = tp();
 
   FOR_ALL_THINGS_THAT_INTERACT_UNSAFE(level, it, p.x, p.y)
@@ -178,7 +178,7 @@ bool Thing::will_avoid_monst(const point &p)
 
 bool Thing::is_to_be_avoided(Thingp attacker)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (unlikely(! maybe_aip())) {
     return false;
   }
@@ -191,7 +191,7 @@ bool Thing::is_to_be_avoided(Thingp attacker)
 
 bool Thing::cannot_avoid(Thingp attacker)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (unlikely(! maybe_aip())) {
     return false;
   }
@@ -216,7 +216,7 @@ bool Thing::cannot_avoid(Thingp attacker)
 //
 void Thing::avoid_tick(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (! maybe_aip()) {
     return;
   }
@@ -261,7 +261,7 @@ void Thing::avoid_tick(void)
 
 void Thing::add_avoid(Thingp attacker)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   if (attacker == this) {
     return;

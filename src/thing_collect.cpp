@@ -453,7 +453,6 @@ int Thing::worth_collecting(Thingp item, Thingp *would_need_to_drop)
 
 int Thing::worth_collecting(Thingp item)
 {
-  TRACE_AND_INDENT();
   Thingp would_need_to_drop;
   return worth_collecting(item, &would_need_to_drop);
 }

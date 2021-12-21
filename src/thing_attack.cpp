@@ -19,7 +19,7 @@
 
 bool Thing::possible_to_attack(const Thingp victim)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto me = tp();
 
   if (victim == this) {
@@ -363,8 +363,7 @@ bool Thing::possible_to_attack_at(point at)
 {
   bool ret = false;
 
-  TRACE_AND_INDENT();
-  dbg("Possible to attack at %s", at.to_string().c_str());
+  dbg("Possible to attack? at %s", at.to_string().c_str());
   TRACE_AND_INDENT();
 
   FOR_ALL_COLLISION_THINGS(level, victim, at.x, at.y)
@@ -402,7 +401,6 @@ bool Thing::attack(point future_pos)
 
 bool Thing::attack(Thingp victim, bool prefer_attack_with_jaws)
 {
-  TRACE_AND_INDENT();
   dbg("Attack %s", victim->to_string().c_str());
   TRACE_AND_INDENT();
 
@@ -854,7 +852,7 @@ bool Thing::bite(Thingp victim) { return attack(victim, true); }
 
 int Thing::is_attacked_with_damage_melee(Thingp hitter, int damage)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   const bool crit             = false;
   const bool attack_bite      = false;
   const bool attack_poison    = false;
@@ -876,7 +874,7 @@ int Thing::is_attacked_with_damage_melee(Thingp hitter, int damage)
 
 int Thing::is_attacked_with_damage_bite(Thingp hitter, int damage)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   const bool crit             = false;
   const bool attack_bite      = true;
   const bool attack_poison    = false;
@@ -898,7 +896,7 @@ int Thing::is_attacked_with_damage_bite(Thingp hitter, int damage)
 
 int Thing::is_attacked_with_damage_poison(Thingp hitter, int damage)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   const bool crit             = false;
   const bool attack_bite      = false;
   const bool attack_poison    = true;
@@ -920,7 +918,7 @@ int Thing::is_attacked_with_damage_poison(Thingp hitter, int damage)
 
 int Thing::is_attacked_with_damage_necrosis(Thingp hitter, int damage)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   const bool crit             = false;
   const bool attack_bite      = false;
   const bool attack_poison    = false;
@@ -942,7 +940,7 @@ int Thing::is_attacked_with_damage_necrosis(Thingp hitter, int damage)
 
 int Thing::is_attacked_with_damage_future1(Thingp hitter, int damage)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   const bool crit             = false;
   const bool attack_bite      = false;
   const bool attack_poison    = false;
@@ -964,7 +962,7 @@ int Thing::is_attacked_with_damage_future1(Thingp hitter, int damage)
 
 int Thing::is_attacked_with_damage_future2(Thingp hitter, int damage)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   const bool crit             = false;
   const bool attack_bite      = false;
   const bool attack_poison    = false;
@@ -986,7 +984,7 @@ int Thing::is_attacked_with_damage_future2(Thingp hitter, int damage)
 
 int Thing::is_attacked_with_damage_future3(Thingp hitter, int damage)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   const bool crit             = false;
   const bool attack_bite      = false;
   const bool attack_poison    = false;
@@ -1008,7 +1006,7 @@ int Thing::is_attacked_with_damage_future3(Thingp hitter, int damage)
 
 int Thing::is_attacked_with_damage_future4(Thingp hitter, int damage)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   const bool crit             = false;
   const bool attack_bite      = false;
   const bool attack_poison    = false;
@@ -1030,7 +1028,7 @@ int Thing::is_attacked_with_damage_future4(Thingp hitter, int damage)
 
 int Thing::is_attacked_with_damage_fire(Thingp hitter, int damage)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   const bool crit             = false;
   const bool attack_bite      = false;
   const bool attack_poison    = false;
@@ -1052,7 +1050,7 @@ int Thing::is_attacked_with_damage_fire(Thingp hitter, int damage)
 
 int Thing::is_attacked_with_damage_crush(Thingp hitter, int damage)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   const bool crit             = false;
   const bool attack_bite      = false;
   const bool attack_poison    = false;
@@ -1074,7 +1072,7 @@ int Thing::is_attacked_with_damage_crush(Thingp hitter, int damage)
 
 int Thing::is_attacked_with_damage_lightning(Thingp hitter, int damage)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   const bool crit             = false;
   const bool attack_bite      = false;
   const bool attack_poison    = false;
@@ -1096,7 +1094,7 @@ int Thing::is_attacked_with_damage_lightning(Thingp hitter, int damage)
 
 int Thing::is_attacked_with_damage_energy(Thingp hitter, int damage)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   const bool crit             = false;
   const bool attack_bite      = false;
   const bool attack_poison    = false;
@@ -1118,7 +1116,7 @@ int Thing::is_attacked_with_damage_energy(Thingp hitter, int damage)
 
 int Thing::is_attacked_with_damage_acid(Thingp hitter, int damage)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   const bool crit             = false;
   const bool attack_bite      = false;
   const bool attack_poison    = false;
@@ -1140,7 +1138,7 @@ int Thing::is_attacked_with_damage_acid(Thingp hitter, int damage)
 
 int Thing::is_attacked_with_damage_digest(Thingp hitter, int damage)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   const bool crit             = false;
   const bool attack_bite      = false;
   const bool attack_poison    = false;

@@ -117,62 +117,62 @@ def tp_init(name, text_name):
     mytp.set_z_prio(my.MAP_PRIO_NORMAL)
 
     delay = 200
-    mytp.set_tile("skeleton_fire.1", is_dir_left=True, is_moving=True, delay_ms=delay)
-    mytp.set_tile("skeleton_fire.2", is_dir_left=True, is_moving=True, delay_ms=delay)
-    mytp.set_tile("skeleton_fire.3", is_dir_left=True, is_moving=True, delay_ms=delay)
-    mytp.set_tile("skeleton_fire.4", is_dir_left=True, is_moving=True, delay_ms=delay)
+    mytp.set_tile("skel_fire.1", is_dir_left=True, is_moving=True, delay_ms=delay)
+    mytp.set_tile("skel_fire.2", is_dir_left=True, is_moving=True, delay_ms=delay)
+    mytp.set_tile("skel_fire.3", is_dir_left=True, is_moving=True, delay_ms=delay)
+    mytp.set_tile("skel_fire.4", is_dir_left=True, is_moving=True, delay_ms=delay)
 
-    mytp.set_tile("skeleton_fire.1", is_dir_up=True, is_moving=True, delay_ms=delay)
-    mytp.set_tile("skeleton_fire.2", is_dir_up=True, is_moving=True, delay_ms=delay)
-    mytp.set_tile("skeleton_fire.3", is_dir_up=True, is_moving=True, delay_ms=delay)
-    mytp.set_tile("skeleton_fire.4", is_dir_up=True, is_moving=True, delay_ms=delay)
+    mytp.set_tile("skel_fire.1", is_dir_up=True, is_moving=True, delay_ms=delay)
+    mytp.set_tile("skel_fire.2", is_dir_up=True, is_moving=True, delay_ms=delay)
+    mytp.set_tile("skel_fire.3", is_dir_up=True, is_moving=True, delay_ms=delay)
+    mytp.set_tile("skel_fire.4", is_dir_up=True, is_moving=True, delay_ms=delay)
 
-    mytp.set_tile("skeleton_fire.1", is_dir_down=True, is_moving=True, delay_ms=delay)
-    mytp.set_tile("skeleton_fire.2", is_dir_down=True, is_moving=True, delay_ms=delay)
-    mytp.set_tile("skeleton_fire.3", is_dir_down=True, is_moving=True, delay_ms=delay)
-    mytp.set_tile("skeleton_fire.4", is_dir_down=True, is_moving=True, delay_ms=delay)
+    mytp.set_tile("skel_fire.1", is_dir_down=True, is_moving=True, delay_ms=delay)
+    mytp.set_tile("skel_fire.2", is_dir_down=True, is_moving=True, delay_ms=delay)
+    mytp.set_tile("skel_fire.3", is_dir_down=True, is_moving=True, delay_ms=delay)
+    mytp.set_tile("skel_fire.4", is_dir_down=True, is_moving=True, delay_ms=delay)
 
-    mytp.set_tile("skeleton_fire.1", is_dir_right=True, is_moving=True, delay_ms=delay)
-    mytp.set_tile("skeleton_fire.2", is_dir_right=True, is_moving=True, delay_ms=delay)
-    mytp.set_tile("skeleton_fire.3", is_dir_right=True, is_moving=True, delay_ms=delay)
-    mytp.set_tile("skeleton_fire.4", is_dir_right=True, is_moving=True, delay_ms=delay)
+    mytp.set_tile("skel_fire.1", is_dir_right=True, is_moving=True, delay_ms=delay)
+    mytp.set_tile("skel_fire.2", is_dir_right=True, is_moving=True, delay_ms=delay)
+    mytp.set_tile("skel_fire.3", is_dir_right=True, is_moving=True, delay_ms=delay)
+    mytp.set_tile("skel_fire.4", is_dir_right=True, is_moving=True, delay_ms=delay)
 
-    mytp.set_tile("skeleton_fire.1", is_dir_left=True, delay_ms=delay)
-    mytp.set_tile("skeleton_fire.2", is_dir_left=True, delay_ms=delay)
-    mytp.set_tile("skeleton_fire.3", is_dir_left=True, delay_ms=delay)
-    mytp.set_tile("skeleton_fire.4", is_dir_left=True, delay_ms=delay)
+    mytp.set_tile("skel_fire.1", is_dir_left=True, delay_ms=delay)
+    mytp.set_tile("skel_fire.2", is_dir_left=True, delay_ms=delay)
+    mytp.set_tile("skel_fire.3", is_dir_left=True, delay_ms=delay)
+    mytp.set_tile("skel_fire.4", is_dir_left=True, delay_ms=delay)
 
-    mytp.set_tile("skeleton_fire.1", is_dir_up=True, delay_ms=delay)
-    mytp.set_tile("skeleton_fire.2", is_dir_up=True, delay_ms=delay)
-    mytp.set_tile("skeleton_fire.3", is_dir_up=True, delay_ms=delay)
-    mytp.set_tile("skeleton_fire.4", is_dir_up=True, delay_ms=delay)
+    mytp.set_tile("skel_fire.1", is_dir_up=True, delay_ms=delay)
+    mytp.set_tile("skel_fire.2", is_dir_up=True, delay_ms=delay)
+    mytp.set_tile("skel_fire.3", is_dir_up=True, delay_ms=delay)
+    mytp.set_tile("skel_fire.4", is_dir_up=True, delay_ms=delay)
 
-    mytp.set_tile("skeleton_fire.1", is_dir_down=True, delay_ms=delay)
-    mytp.set_tile("skeleton_fire.2", is_dir_down=True, delay_ms=delay)
-    mytp.set_tile("skeleton_fire.3", is_dir_down=True, delay_ms=delay)
-    mytp.set_tile("skeleton_fire.4", is_dir_down=True, delay_ms=delay)
+    mytp.set_tile("skel_fire.1", is_dir_down=True, delay_ms=delay)
+    mytp.set_tile("skel_fire.2", is_dir_down=True, delay_ms=delay)
+    mytp.set_tile("skel_fire.3", is_dir_down=True, delay_ms=delay)
+    mytp.set_tile("skel_fire.4", is_dir_down=True, delay_ms=delay)
 
-    mytp.set_tile("skeleton_fire.1", is_dir_right=True, delay_ms=delay)
-    mytp.set_tile("skeleton_fire.2", is_dir_right=True, delay_ms=delay)
-    mytp.set_tile("skeleton_fire.3", is_dir_right=True, delay_ms=delay)
-    mytp.set_tile("skeleton_fire.4", is_dir_right=True, delay_ms=delay)
+    mytp.set_tile("skel_fire.1", is_dir_right=True, delay_ms=delay)
+    mytp.set_tile("skel_fire.2", is_dir_right=True, delay_ms=delay)
+    mytp.set_tile("skel_fire.3", is_dir_right=True, delay_ms=delay)
+    mytp.set_tile("skel_fire.4", is_dir_right=True, delay_ms=delay)
 
-    mytp.set_tile("skeleton_fire.1", is_dir_none=True, delay_ms=delay)
-    mytp.set_tile("skeleton_fire.2", is_dir_none=True, delay_ms=delay)
-    mytp.set_tile("skeleton_fire.3", is_dir_none=True, delay_ms=delay)
-    mytp.set_tile("skeleton_fire.4", is_dir_none=True, delay_ms=delay)
+    mytp.set_tile("skel_fire.1", is_dir_none=True, delay_ms=delay)
+    mytp.set_tile("skel_fire.2", is_dir_none=True, delay_ms=delay)
+    mytp.set_tile("skel_fire.3", is_dir_none=True, delay_ms=delay)
+    mytp.set_tile("skel_fire.4", is_dir_none=True, delay_ms=delay)
 
     delay = 20
-    mytp.set_tile("skeleton_fire.1.dead", is_dead=True, delay_ms=delay)
-    mytp.set_tile("skeleton_fire.2.dead", is_dead=True, delay_ms=delay)
-    mytp.set_tile("skeleton_fire.3.dead", is_dead=True, delay_ms=delay)
-    mytp.set_tile("skeleton_fire.4.dead", is_dead=True, delay_ms=delay, is_end_of_anim=True)
+    mytp.set_tile("skel_fire.1.dead", is_dead=True, delay_ms=delay)
+    mytp.set_tile("skel_fire.2.dead", is_dead=True, delay_ms=delay)
+    mytp.set_tile("skel_fire.3.dead", is_dead=True, delay_ms=delay)
+    mytp.set_tile("skel_fire.4.dead", is_dead=True, delay_ms=delay, is_end_of_anim=True)
 
-    mytp.set_tile("skeleton_fire.4.dead", is_resurrecting=True, delay_ms=delay)
-    mytp.set_tile("skeleton_fire.3.dead", is_resurrecting=True, delay_ms=delay)
-    mytp.set_tile("skeleton_fire.2.dead", is_resurrecting=True, delay_ms=delay)
+    mytp.set_tile("skel_fire.4.dead", is_resurrecting=True, delay_ms=delay)
+    mytp.set_tile("skel_fire.3.dead", is_resurrecting=True, delay_ms=delay)
+    mytp.set_tile("skel_fire.2.dead", is_resurrecting=True, delay_ms=delay)
     mytp.set_tile(
-        "skeleton_fire.1.dead",
+        "skel_fire.1.dead",
         is_resurrecting=True,
         is_end_of_anim=True,
         is_alive_on_end_of_anim=True,
@@ -182,7 +182,7 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="skeleton_fire", text_name="burning skeleton")
+    tp_init(name="skel_fire", text_name="burning skeleton")
 
 
 init()

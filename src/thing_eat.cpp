@@ -17,13 +17,14 @@
 
 bool Thing::worth_eating(Thingp victim)
 {
+  TRACE_NO_INDENT();
+
   verify(MTYPE_THING, victim);
   if (! victim) {
     err("Cannot check worth eating null thing");
     return false;
   }
 
-  TRACE_AND_INDENT();
   if (! can_eat(victim)) {
     return false;
   }
@@ -35,7 +36,6 @@ bool Thing::can_eat(const Thingp itp)
 {
   auto me = tp();
 
-  TRACE_AND_INDENT();
   log("Can eat? %s", itp->to_short_string().c_str());
   TRACE_AND_INDENT();
 
@@ -95,6 +95,8 @@ bool Thing::can_eat(const Thingp itp)
 //
 bool Thing::eat(Thingp victim)
 {
+  TRACE_NO_INDENT();
+
   verify(MTYPE_THING, victim);
   if (! victim) {
     err("Cannot eat null thing");
@@ -145,6 +147,8 @@ bool Thing::eat(Thingp victim)
 
 bool Thing::consume(Thingp victim)
 {
+  TRACE_NO_INDENT();
+
   verify(MTYPE_THING, victim);
   if (! victim) {
     err("Cannot eat null thing");
@@ -212,7 +216,8 @@ bool Thing::consume(Thingp victim)
 
 bool Thing::eat_something(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   Thingp best = nullptr;
 
   //
