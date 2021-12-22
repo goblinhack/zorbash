@@ -107,6 +107,12 @@ unsigned char *file_load(const char *filename, int *outlen)
   auto r = ramdisk_load(filename, outlen);
   if (r) {
     FILE_LOG("Read (ramdisk) %s, %dMb, %d bytes", filename, *outlen / (1024 * 1024), *outlen);
+
+    if (alt_filename) {
+      myfree(alt_filename);
+      alt_filename = 0;
+    }
+
     return r;
   }
 

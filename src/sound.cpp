@@ -34,9 +34,11 @@ void sound_fini(void)
   if (sound_init_done) {
     sound_init_done = false;
 
-    auto iter = all_sound.begin();
-
-    while (iter != all_sound.end()) {
+    for (;;) {
+      auto iter = all_sound.begin();
+      if (iter == all_sound.end()) {
+        break;
+      }
       delete iter->second;
       iter = all_sound.erase(iter);
     }
