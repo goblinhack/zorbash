@@ -40,8 +40,6 @@ void Thing::destroy(void)
       if (top_owner != immediate_owner) {
         dbg2("Is being destroyed, has immediate owner: %s", immediate_owner->to_string().c_str());
       }
-    } else {
-      dbg2("Is being destroyed, has no owner");
     }
   }
 

@@ -67,9 +67,6 @@ void Thing::move_finish(void)
   }
   is_moving = false;
 
-  dbg("Move finish");
-  TRACE_NO_INDENT();
-
   //
   // Set this so that we can pick up items again at the last location.
   //
@@ -89,15 +86,12 @@ void Thing::move_finish(void)
   // Make sure that things that declare they are finished moving really
   // are where they should be.
   //
-  dbg("Move finish update pos");
   update_pos(curr_at, true);
 
-  dbg("Move finish update interp pos");
   update_interpolated_position();
 
   move_carried_items();
 
-  dbg("Move finish call on move");
   on_move();
 
   if (maybe_aip()) {

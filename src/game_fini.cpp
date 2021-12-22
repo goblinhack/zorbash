@@ -8,15 +8,17 @@
 
 void Game::fini(void)
 {
+  LOG("Game fini");
   TRACE_AND_INDENT();
+
   fps_value         = 0;
   started           = false;
   things_are_moving = false;
   tick_completed    = 1;
   tick_current      = 1;
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   config.fini();
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   world.fini();
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 }

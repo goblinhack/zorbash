@@ -26,9 +26,6 @@ void Thing::acid_tick(void)
 
   bool hit;
 
-  dbg("Acid tick");
-  TRACE_AND_INDENT();
-
   //
   // Give the player a chance
   //
@@ -42,6 +39,9 @@ void Thing::acid_tick(void)
   }
 
   if (hit) {
+    dbg("Acid hit");
+    TRACE_AND_INDENT();
+
     FOR_ALL_THINGS_AT_DEPTH(level, t, curr_at.x, curr_at.y, MAP_DEPTH_FLOOR2)
     {
       if (! t->is_acid()) {

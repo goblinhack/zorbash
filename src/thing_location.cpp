@@ -143,7 +143,7 @@ void Thing::location_check(void)
       return;
     }
 
-    dbg("Do location check. Last %d, game tick %d", get_tick_last_location_check(), game->tick_current);
+    // dbg("Do location check. Last %d, game tick %d", get_tick_last_location_check(), game->tick_current);
     set_tick_last_location_check(game->tick_current);
   }
 

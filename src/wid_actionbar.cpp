@@ -45,14 +45,12 @@ void wid_actionbar_fini(void)
 {
   TRACE_NO_INDENT();
   if (wid_actionbar) {
-    DBG("Actionbar fini");
     wid_destroy_nodelay(&wid_actionbar);
   }
 }
 
 static uint8_t wid_actionbar_quit(Widp w, int32_t x, int32_t y, uint32_t button)
 {
-  TRACE_NO_INDENT();
   DBG3("Actionbar quit");
   TRACE_NO_INDENT();
 
@@ -80,9 +78,9 @@ static void wid_actionbar_quit_over_e(Widp w)
 
 void wid_actionbar_robot_mode_toggle(void)
 {
-  TRACE_NO_INDENT();
   DBG3("Actionbar robot");
   TRACE_NO_INDENT();
+
   wid_actionbar_close_all_popups();
   game->robot_mode_requested = ! game->robot_mode_requested;
   wid_actionbar_init();
@@ -90,9 +88,9 @@ void wid_actionbar_robot_mode_toggle(void)
 
 void wid_actionbar_robot_mode_update(void)
 {
-  TRACE_NO_INDENT();
   DBG3("Actionbar robot update");
   TRACE_NO_INDENT();
+
   wid_actionbar_close_all_popups();
   if (game->level) {
     if (game->level->player) {
@@ -112,6 +110,7 @@ void wid_actionbar_robot_mode_off(void)
 
   DBG3("Actionbar robot");
   TRACE_NO_INDENT();
+
   wid_actionbar_close_all_popups();
   if (game->level) {
     if (game->level->player) {
@@ -151,9 +150,9 @@ static void wid_actionbar_ai_tick(Widp w)
 
 static uint8_t wid_actionbar_close(Widp w, int32_t x, int32_t y, uint32_t button)
 {
-  TRACE_NO_INDENT();
   DBG3("Actionbar close");
   TRACE_NO_INDENT();
+
   if (! game->level) {
     return true;
   }
@@ -186,9 +185,9 @@ static void wid_actionbar_close_over_e(Widp w)
 
 static uint8_t wid_actionbar_load(Widp w, int32_t x, int32_t y, uint32_t button)
 {
-  TRACE_NO_INDENT();
   DBG3("Actionbar load");
   TRACE_NO_INDENT();
+
   if (! game->level) {
     return true;
   }
@@ -227,9 +226,9 @@ static void wid_actionbar_load_over_e(Widp w)
 
 static uint8_t wid_actionbar_save(Widp w, int32_t x, int32_t y, uint32_t button)
 {
-  TRACE_NO_INDENT();
   DBG3("Actionbar save");
   TRACE_NO_INDENT();
+
   if (! game->level) {
     return true;
   }
@@ -268,9 +267,9 @@ static void wid_actionbar_save_over_e(Widp w)
 
 static uint8_t wid_actionbar_inventory(Widp w, int32_t x, int32_t y, uint32_t button)
 {
-  TRACE_NO_INDENT();
   DBG("Actionbar inventory");
   TRACE_NO_INDENT();
+
   game->request_destroy_thing_info = false;
 
   if (! game->level) {
@@ -315,9 +314,9 @@ static void wid_actionbar_inventory_over_e(Widp w)
 
 static uint8_t wid_actionbar_collect(Widp w, int32_t x, int32_t y, uint32_t button)
 {
-  TRACE_NO_INDENT();
   DBG3("Actionbar collect");
   TRACE_NO_INDENT();
+
   if (! game->level) {
     return true;
   }
@@ -364,9 +363,9 @@ static void wid_actionbar_collect_over_e(Widp w)
 
 static uint8_t wid_actionbar_wait(Widp w, int32_t x, int32_t y, uint32_t button)
 {
-  TRACE_NO_INDENT();
   DBG("Actionbar wait");
   TRACE_NO_INDENT();
+
   if (! game->level) {
     return true;
   }
@@ -395,9 +394,9 @@ static uint8_t wid_actionbar_wait(Widp w, int32_t x, int32_t y, uint32_t button)
 
 static uint8_t wid_actionbar_repeat_wait(Widp w, int32_t x, int32_t y, uint32_t button)
 {
-  TRACE_NO_INDENT();
   DBG3("Actionbar wait");
   TRACE_NO_INDENT();
+
   if (! game->level) {
     return true;
   }
@@ -446,9 +445,9 @@ static void wid_actionbar_wait_over_e(Widp w)
 
 static uint8_t wid_actionbar_zoom_out(Widp w, int32_t x, int32_t y, uint32_t button)
 {
-  TRACE_NO_INDENT();
   DBG3("Actionbar zoom out");
   TRACE_NO_INDENT();
+
   if (! game->level) {
     return true;
   }
@@ -472,9 +471,9 @@ static void wid_actionbar_zoom_out_over_e(Widp w)
 
 static uint8_t wid_actionbar_zoom_in(Widp w, int32_t x, int32_t y, uint32_t button)
 {
-  TRACE_NO_INDENT();
   DBG3("Actionbar zoom in");
   TRACE_NO_INDENT();
+
   if (! game->level) {
     return true;
   }
@@ -498,9 +497,9 @@ static void wid_actionbar_zoom_in_over_e(Widp w)
 
 static uint8_t wid_actionbar_configure(Widp w, int32_t x, int32_t y, uint32_t button)
 {
-  TRACE_NO_INDENT();
   DBG3("Actionbar configure");
   TRACE_NO_INDENT();
+
   if (! game->level) {
     return true;
   }
@@ -532,7 +531,6 @@ static void wid_actionbar_configure_over_e(Widp w)
 void wid_actionbar_init(void)
 {
   TRACE_NO_INDENT();
-  DBG("Actionbar init");
 
   if (! game->level) {
     return;

@@ -14,8 +14,8 @@
 
 void Game::init(void)
 {
-  TRACE_AND_INDENT();
   LOG("Game init");
+  TRACE_AND_INDENT();
 
   if (g_opt_seed_name != "") {
     seed_name = g_opt_seed_name;
@@ -41,8 +41,8 @@ void Game::init(void)
 
 void Game::init_level(point3d p)
 {
-  TRACE_AND_INDENT();
   LOG("Game init level %d,%d,%d", p.x, p.y, p.z);
+  TRACE_AND_INDENT();
 
   auto level_seed = seed + p.x + p.y + p.z;
   auto l          = get(world.levels, p.x, p.y, p.z);
@@ -57,8 +57,8 @@ void Game::init_level(point3d p)
 
 void Game::init_levels(void)
 {
-  TRACE_AND_INDENT();
   LOG("Game init levels");
+  TRACE_AND_INDENT();
 
   //
   // Increase this to create more levels in advance

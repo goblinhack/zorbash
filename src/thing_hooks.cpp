@@ -182,11 +182,6 @@ void Thing::remove_all_references()
 {
   TRACE_NO_INDENT();
 
-  if (is_loggable()) {
-    dbg("Remove all references");
-  }
-  TRACE_AND_INDENT();
-
   //
   // Some things have lots of things they own
   //
@@ -381,8 +376,5 @@ void Thing::remove_all_references()
         }
       }
     }
-  }
-  if (is_loggable()) {
-    dbg("Removed all references");
   }
 }

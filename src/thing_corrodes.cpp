@@ -23,15 +23,15 @@ void Thing::corrode_tick(void)
     return;
   }
 
-  dbg("Corrode tick");
-  TRACE_AND_INDENT();
-
   //
   // Need to check if being consumed by a cleaner, hence owner check
   //
   auto owner = get_top_owner();
   if (level->is_acid(curr_at.x, curr_at.y) || (owner && owner->is_acid())) {
     int chance = 0;
+
+    dbg("Corrode tick");
+    TRACE_AND_INDENT();
 
     if (is_organic()) {
       chance = 200;

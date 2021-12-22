@@ -30,8 +30,6 @@ bool Thing::carry(Thingp item, bool can_equip)
   auto top_owner = item->get_top_owner();
   if (top_owner) {
     dbg("Item %s has owner: %s", item->to_short_string().c_str(), top_owner->to_string().c_str());
-  } else {
-    dbg("Item %s has no owner", item->to_short_string().c_str());
   }
 
   //

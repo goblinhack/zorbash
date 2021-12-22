@@ -11,13 +11,13 @@
 
 Level::Level(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   newptr(MTYPE_LEVEL, this, "level");
 }
 
 void Level::clear(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   _fade_in_map         = {};
   _gfx_water           = {};
   _heatmap             = {};

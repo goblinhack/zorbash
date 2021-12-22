@@ -18,7 +18,7 @@ WidPopup *game_quit_window;
 
 void game_quit_destroy(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   delete game_quit_window;
   game_quit_window = nullptr;
   game->change_state(Game::STATE_NORMAL);
@@ -26,7 +26,7 @@ void game_quit_destroy(void)
 
 static uint8_t game_quit_yes(Widp w, int32_t x, int32_t y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (game->started) {
     LOG("PLAYER: Restart game");
 
@@ -74,7 +74,7 @@ static uint8_t game_quit_yes(Widp w, int32_t x, int32_t y, uint32_t button)
 
 static uint8_t game_quit_no(Widp w, int32_t x, int32_t y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   game_quit_destroy();
   if (! game->level) {
     game->main_menu_select();
@@ -86,7 +86,7 @@ static uint8_t game_quit_no(Widp w, int32_t x, int32_t y, uint32_t button)
 
 static uint8_t game_quit_key_up(Widp w, const struct SDL_Keysym *key)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (sdl_shift_held) {
     if (key->scancode == (SDL_Scancode) game->config.key_console) {
       return false;
@@ -100,7 +100,7 @@ static uint8_t game_quit_key_up(Widp w, const struct SDL_Keysym *key)
       switch (key->sym) {
         default :
           {
-            TRACE_AND_INDENT();
+            TRACE_NO_INDENT();
             auto c = wid_event_to_char(key);
             switch (c) {
               case 'y' : game_quit_yes(nullptr, 0, 0, 0); return true;
@@ -117,7 +117,7 @@ static uint8_t game_quit_key_up(Widp w, const struct SDL_Keysym *key)
 
 static uint8_t game_quit_key_down(Widp w, const struct SDL_Keysym *key)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (sdl_shift_held) {
     if (key->scancode == (SDL_Scancode) game->config.key_console) {
       return false;
@@ -129,7 +129,7 @@ static uint8_t game_quit_key_down(Widp w, const struct SDL_Keysym *key)
 
 void Game::quit_select(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   LOG("Quit select");
 
   if (level && level->player) {
@@ -151,7 +151,7 @@ void Game::quit_select(void)
 
   game_quit_window = new WidPopup("Game quit", tl, br, nullptr, "", false, false);
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     Widp w = game_quit_window->wid_popup_container;
     wid_set_on_key_up(w, game_quit_key_up);
     wid_set_on_key_down(w, game_quit_key_down);
@@ -159,7 +159,7 @@ void Game::quit_select(void)
 
   int y_at = 0;
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = game_quit_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Quit");
 
@@ -172,7 +172,7 @@ void Game::quit_select(void)
 
   y_at = 2;
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = game_quit_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Yes");
 
@@ -185,7 +185,7 @@ void Game::quit_select(void)
   }
 
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = game_quit_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "No");
 

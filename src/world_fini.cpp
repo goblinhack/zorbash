@@ -10,8 +10,9 @@
 
 void World::fini(void)
 {
-  TRACE_AND_INDENT();
   LOG("World fini: Destroy all levels");
+  TRACE_AND_INDENT();
+
   for (auto x = 0; x < LEVELS_ACROSS; ++x) {
     for (auto y = 0; y < LEVELS_DOWN; ++y) {
       for (auto z = 0; z < LEVELS_DEEP; ++z) {

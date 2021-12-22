@@ -24,13 +24,13 @@ void Thing::fire_tick(void)
     return;
   }
 
-  TRACE_AND_INDENT();
-  dbg("Fire tick");
-
   bool  hit = false;
   point at  = curr_at;
 
   if (is_on_fire()) {
+    dbg("Fire tick");
+    TRACE_AND_INDENT();
+
     //
     // Give the player a chance
     //
@@ -86,6 +86,9 @@ void Thing::fire_tick(void)
   }
 
   if (hit) {
+    dbg("Fire hit");
+    TRACE_AND_INDENT();
+
     if (! is_on_fire()) {
       set_on_fire("caught fire");
     }

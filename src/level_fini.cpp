@@ -13,8 +13,9 @@
 
 Level::~Level(void)
 {
-  TRACE_AND_INDENT();
   log("Delete level");
+  TRACE_AND_INDENT();
+
   if (game->level == this) {
     log("Delete current game level");
     game->level = nullptr;
@@ -24,11 +25,11 @@ Level::~Level(void)
 
 void Level::fini(void)
 {
-  TRACE_AND_INDENT();
   log("-");
   log("Destroying, seed %u", seed);
   log("| | | | | | | | | | | | | | | | | | | | | | | | | | |");
   log("v v v v v v v v v v v v v v v v v v v v v v v v v v v");
+  TRACE_AND_INDENT();
 
   is_being_destroyed = true;
 
@@ -37,6 +38,7 @@ void Level::fini(void)
   // are referred to.
   //
   log("Destroy all things");
+
   FOR_ALL_THING_GROUPS(group)
   {
     for (auto x = 0; x < MAP_WIDTH; ++x) {
