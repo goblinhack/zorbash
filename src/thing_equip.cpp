@@ -433,11 +433,12 @@ bool Thing::equip(Thingp item, int equip)
   unequip("equip new", equip, true);
 
   auto carry_anim_as = equip_tp->equip_carry_anim();
-  if (carry_anim_as == "") {
+  if (carry_anim_as.empty()) {
     err("Could not equip %s as has no carry anim", item->to_short_string().c_str());
     return false;
   }
 
+  TRACE_NO_INDENT();
   auto carry_anim = level->thing_new(carry_anim_as, this);
 
   //
@@ -590,22 +591,32 @@ bool Thing::equip_use(bool forced, int equip)
 
   auto item = get_equip(equip);
   if (! item) {
+    dbg("No equipped item");
+    TRACE_AND_INDENT();
+
     if (equip == MONST_EQUIP_WEAPON) {
       if (is_player()) {
         TOPCON("You attack with bare fists!");
-
-        //
-        // Python callback
-        //
-        on_you_bite_attack();
       }
+
+      //
+      // Python callback
+      //
+      on_you_bite_attack();
     }
     used_as = gfx_anim_use();
+    if (used_as.empty()) {
+      die("Could not attack as you have no 'use' animation frame");
+      return false;
+    }
   } else {
+    dbg("Equipped item: %s", item->to_short_string().c_str());
+    TRACE_AND_INDENT();
+
     auto equip_tp = item->tp();
 
     used_as = equip_tp->gfx_anim_use();
-    if (used_as == "") {
+    if (used_as.empty()) {
       die("Could not use %s/%08" PRIx32 " has no 'use' animation frame", item->to_short_string().c_str(),
           item->id.id);
       return false;
@@ -621,6 +632,7 @@ bool Thing::equip_use(bool forced, int equip)
   //
   // Save the thing id so the client wid can keep track of the weapon.
   //
+  TRACE_NO_INDENT();
   auto use_anim = level->thing_new(used_as, this);
 
   //
@@ -643,6 +655,16 @@ bool Thing::equip_use(bool forced, int equip)
   return true;
 }
 
-bool Thing::equip_use_may_attack(int equip) { return equip_use(false, equip); }
+bool Thing::equip_use_may_attack(int equip)
+{
+  dbg("Equip use and may attack");
+  TRACE_AND_INDENT();
+  return equip_use(false, equip);
+}
 
-bool Thing::equip_use_must_attack(int equip) { return equip_use(true, equip); }
+bool Thing::equip_use_must_attack(int equip)
+{
+  dbg("Equip use and must attack");
+  TRACE_AND_INDENT();
+  return equip_use(true, equip);
+}

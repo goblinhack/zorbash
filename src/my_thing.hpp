@@ -823,6 +823,7 @@ public:
   int get_carried_ring_least_value(Thingp *out);
   int get_carried_wand_count(void);
   int get_carried_wand_highest_value(Thingp *out);
+  int get_carried_wand_highest_value_for_target(Thingp *out, Thingp target);
   int get_carried_wand_least_value(Thingp *out);
   int get_carried_weapon_count(void);
   int get_carried_weapon_highest_value(Thingp *out);

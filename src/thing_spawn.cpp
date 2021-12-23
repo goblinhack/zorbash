@@ -126,8 +126,8 @@ bool Thing::spawn_next_to_or_on_monst(const std::string &what)
     auto y = curr_at.y + d.y;
     auto p = point(x, y);
 
-    if (level->is_door(x, y) || level->is_secret_door(x, y) || level->is_mob(x, y) ||
-        level->is_hazard(x, y) || level->is_rock(x, y) || level->is_wall(x, y)) {
+    if (level->is_door(x, y) || level->is_secret_door(x, y) || level->is_mob(x, y) || level->is_hazard(x, y) ||
+        level->is_rock(x, y) || level->is_wall(x, y)) {
       continue;
     }
 
@@ -209,7 +209,10 @@ bool Thing::spawn_radius_range(Thingp item, Thingp target, const std::string &wh
     for (auto y = curr_at.y - radius_max; y <= curr_at.y + radius_max; y++) {
       float dist = DISTANCE(x, y, curr_at.x, curr_at.y);
 
-      if (dist >= radius_max + 1) {
+      //
+      // Radius needs to be the same as the check in get_carried_wand_highest_value_for_target
+      //
+      if (dist >= radius_max) {
         continue;
       }
 
@@ -264,7 +267,10 @@ bool Thing::spawn_radius_range(const std::string &what, uint32_t radius_min, uin
     for (auto y = curr_at.y - radius_max; y <= curr_at.y + radius_max; y++) {
       float dist = DISTANCE(x, y, curr_at.x, curr_at.y);
 
-      if (dist >= radius_max + 1) {
+      //
+      // Radius needs to be the same as the check in get_carried_wand_highest_value_for_target
+      //
+      if (dist >= radius_max) {
         continue;
       }
 
@@ -334,8 +340,11 @@ int Thing::spawn_randomly_in_radius_range(const std::string &what, int amount, u
 
       point spawn_at = curr_at + point(x, y);
 
+      //
+      // Radius needs to be the same as the check in get_carried_wand_highest_value_for_target
+      //
       float dist = distance(spawn_at, curr_at);
-      if (dist >= radius_max + 1) {
+      if (dist >= radius_max) {
         continue;
       }
 

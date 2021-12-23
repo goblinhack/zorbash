@@ -666,6 +666,44 @@ int Thing::get_carried_wand_highest_value(Thingp *out)
   return highest_value;
 }
 
+int Thing::get_carried_wand_highest_value_for_target(Thingp *out, Thingp target)
+{
+  TRACE_NO_INDENT();
+  int highest_value = -1;
+
+  *out = nullptr;
+  if (! maybe_itemp()) {
+    return highest_value;
+  }
+
+  for (const auto t : get_wand_list()) {
+    if (! t->is_wand()) {
+      continue;
+    }
+
+    //
+    // If intelligent don't use a wand that will hit you also
+    //
+    if (is_intelligent()) {
+      if (distance(curr_at, target->curr_at) <= t->blast_max_radius()) {
+        continue;
+      }
+    }
+
+    auto v = maybe_itemp_value(t);
+    if (! *out) {
+      *out          = t;
+      highest_value = v;
+    } else {
+      if (v > highest_value) {
+        *out          = t;
+        highest_value = v;
+      }
+    }
+  }
+  return highest_value;
+}
+
 int Thing::get_carried_ring_highest_value(Thingp *out)
 {
   TRACE_NO_INDENT();

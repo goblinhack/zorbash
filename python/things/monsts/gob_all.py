@@ -86,7 +86,6 @@ def tp_init(name, text_name):
     mytp.set_is_green_blooded(True)
     mytp.set_is_hittable(True)
     mytp.set_is_humanoid(True)
-    mytp.set_is_intelligent(True)
     mytp.set_is_item_carrier(True)
     mytp.set_is_item_collector(True)
     mytp.set_is_living(True)

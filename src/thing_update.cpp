@@ -40,7 +40,7 @@ void Thing::update(void)
   if (is_loggable()) {
     dbg("Update");
   }
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
 
   auto tpp     = tp();
   int  carried = 0;
@@ -266,9 +266,8 @@ void Thing::update(void)
   // Auto carry of weapons?
   //
   if (is_able_to_use_weapons()) {
-    TRACE_NO_INDENT();
     dbg("Is weapon equipper");
-    TRACE_NO_INDENT();
+    TRACE_AND_INDENT();
 
     if (is_carrier_of_treasure_class_a()) {
       auto W = level->thing_new(tp_random_weapon_class_a(), curr_at, this);
@@ -291,9 +290,8 @@ void Thing::update(void)
   }
 
   if (is_able_to_use_wands()) {
-    TRACE_NO_INDENT();
     dbg("Is wand equipper");
-    TRACE_NO_INDENT();
+    TRACE_AND_INDENT();
 
     if (is_carrier_of_treasure_class_a()) {
       auto W = level->thing_new(tp_random_wand_class_a(), curr_at, this);
@@ -316,9 +314,8 @@ void Thing::update(void)
   }
 
   if (is_able_to_use_rings()) {
-    TRACE_NO_INDENT();
     dbg("Is ring equipper");
-    TRACE_NO_INDENT();
+    TRACE_AND_INDENT();
 
     if (is_carrier_of_treasure_class_a()) {
       auto W = level->thing_new(tp_random_ring_class_a(), curr_at, this);
@@ -341,9 +338,8 @@ void Thing::update(void)
   }
 
   if (is_bag_item_container()) {
-    TRACE_NO_INDENT();
     dbg("Is bag item container");
-    TRACE_NO_INDENT();
+    TRACE_AND_INDENT();
 
     if (is_carrier_of_treasure_class_a()) {
       auto W = level->thing_new(tp_random_item_not_a_container_class_a(), curr_at, this);
@@ -364,9 +360,8 @@ void Thing::update(void)
       }
     }
   } else if (is_item_carrier()) {
-    TRACE_NO_INDENT();
     dbg("Is item carrier");
-    TRACE_NO_INDENT();
+    TRACE_AND_INDENT();
 
     if (is_carrier_of_treasure_class_a()) {
       auto W = level->thing_new(tp_random_item_class_a(), curr_at, this);
@@ -389,10 +384,12 @@ void Thing::update(void)
   }
 
   //
-  // Can we switch to a better weapon? Only if we can use weapons. We don't
-  // wand jellys wandering around with swords!
+  // Initial equp of weapons
   //
   if (is_able_to_use_weapons()) {
+    dbg("Weapon equip");
+    TRACE_AND_INDENT();
+
     Thingp best_weapon = nullptr;
     get_carried_weapon_highest_value(&best_weapon);
     if (best_weapon) {
@@ -400,7 +397,13 @@ void Thing::update(void)
     }
   }
 
+  //
+  // Initial equp of wand
+  //
   if (is_able_to_use_wands()) {
+    dbg("Wand equip");
+    TRACE_AND_INDENT();
+
     Thingp best_wand = nullptr;
     get_carried_wand_highest_value(&best_wand);
     if (best_wand) {
@@ -408,7 +411,13 @@ void Thing::update(void)
     }
   }
 
+  //
+  // Initial equp of rings
+  //
   if (is_able_to_use_rings()) {
+    dbg("Rings equip");
+    TRACE_AND_INDENT();
+
     //
     // Ring 1
     //
@@ -434,9 +443,8 @@ void Thing::update(void)
   hunger_update();
 
   if (carried && (is_monst() || is_player())) {
-    TRACE_NO_INDENT();
     dbg("Final item list:");
-    TRACE_NO_INDENT();
+    TRACE_AND_INDENT();
     check_all_carried();
   }
 }

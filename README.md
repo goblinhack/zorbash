@@ -4,8 +4,6 @@
 <!--                                                                                                                                              -->
 <!-- Next todo                                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
-<!-- - immediate appear of wand equip                                                                                                             -->
-<!-- - anim other wands                                                                                                                           -->
 <!-- - robot wand use                                                                                                                             -->
 <!-- - robot fight goblins                                                                                                                        -->
 <!-- - zx_thing carry                                                                                                                                -->

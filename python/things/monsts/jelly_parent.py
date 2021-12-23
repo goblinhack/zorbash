@@ -34,6 +34,7 @@ def tp_init(name, text_name):
     mytp.set_environ_avoids_fire(100)
     mytp.set_gfx_animated_can_hflip(True)
     mytp.set_gfx_animated(True)
+    mytp.set_gfx_anim_use("green_splatter")
     mytp.set_gfx_bounce_on_move(True)
     mytp.set_gfx_health_bar_shown(True)
     mytp.set_gfx_oversized_and_on_floor(True)

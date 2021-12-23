@@ -82,7 +82,8 @@ Thingp Thing::laser_fire_at(const std::string &laser_name, Thingp target)
     return nullptr;
   }
 
-  dbg("Firing named laser with: %s at %s", laser->to_string().c_str(), target->to_string().c_str());
+  dbg("Firing named laser with: %s at %s dist %f", laser->to_string().c_str(), target->to_string().c_str(),
+      distance(curr_at, target->curr_at));
 
   if (! laser->is_laser()) {
     if (is_player()) {

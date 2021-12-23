@@ -384,8 +384,8 @@ bool Thing::same_leader(Thingp it)
   Thingp its_leader = it->get_leader();
 
 #if 0
-  me->con("XXX me");
-  it->con("XXX it");
+  me->con("me");
+  it->con("it");
   if (my_leader) {
     my_leader->con("my leader");
   }

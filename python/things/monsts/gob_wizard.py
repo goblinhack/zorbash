@@ -18,6 +18,7 @@ def tp_init(name, text_name):
     mytp.set_distance_avoid(5)
     mytp.set_health_initial_dice("2d4+4")
     mytp.set_is_able_to_use_wands(True)
+    mytp.set_is_intelligent(True)
     mytp.set_is_able_to_use_rings(True)
 
     delay = 300

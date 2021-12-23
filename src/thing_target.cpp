@@ -37,9 +37,8 @@ bool Thing::target_select(Thingp item)
 //
 bool Thing::target_attack_best(int equip)
 {
-  TRACE_NO_INDENT();
   dbg("Try to attack with equpped item");
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
 
   int  dx, dy;
   auto item = get_equip(equip);
@@ -56,7 +55,7 @@ bool Thing::target_attack_best(int equip)
   auto hit_at          = curr_at + point(dx, dy);
 
   dbg("Attack at %d,%d delta %d,%d", hit_at.x, hit_at.y, dx, dy);
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
 
   //
   // Lunge at the target
@@ -65,7 +64,8 @@ bool Thing::target_attack_best(int equip)
 
   if (item) {
     dbg("Have equip item %s", item->to_short_string().c_str());
-    TRACE_NO_INDENT();
+    TRACE_AND_INDENT();
+
     on_use(item);
     if (item->collision_check_and_handle_at(hit_at, &target_attacked, &target_overlaps)) {
       lunge(hit_at);
@@ -77,7 +77,8 @@ bool Thing::target_attack_best(int equip)
     }
   } else {
     dbg("No equip item");
-    TRACE_NO_INDENT();
+    TRACE_AND_INDENT();
+
     if (collision_check_and_handle_at(hit_at, &target_attacked, &target_overlaps)) {
       lunge(hit_at);
       if (target_attacked) {

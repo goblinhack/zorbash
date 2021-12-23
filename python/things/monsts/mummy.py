@@ -79,7 +79,6 @@ def tp_init(name, text_name):
     mytp.set_is_fearless(True)
     mytp.set_is_green_blooded(True)
     mytp.set_is_hittable(True)
-    mytp.set_is_intelligent(True)
     mytp.set_is_loggable(True)
     mytp.set_is_monst(True)
     mytp.set_is_moveable(True)

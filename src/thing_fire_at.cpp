@@ -220,8 +220,21 @@ bool Thing::fire_at(Thingp target)
     return false;
   }
 
+  //
+  // If using a sword, allow the monst to use a wand without equipping
+  //
   if (! curr_weapon->is_wand()) {
-    return false;
+    if (is_able_to_use_wands()) {
+      Thingp best_wand = nullptr;
+      get_carried_wand_highest_value_for_target(&best_wand, target);
+      if (best_wand) {
+        curr_weapon = best_wand;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
   }
 
   if ((int) pcg_random_range(0, 100) > aggression_level_pct()) {
