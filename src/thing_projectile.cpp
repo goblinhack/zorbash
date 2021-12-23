@@ -16,6 +16,32 @@ bool Thing::projectile_choose_target(Thingp item)
   TRACE_AND_INDENT();
   dbg("Trying to target a projectile with: %s", item->to_short_string().c_str());
 
+  if (is_monst() || (game->robot_mode && is_player())) {
+    auto victim = get_best_visible_target();
+    if (! victim) {
+      dbg("No victim found");
+      return false;
+    }
+
+    log("Chosen target: %s", victim->to_short_string().c_str());
+    TRACE_AND_INDENT();
+
+    used(item, victim, true);
+
+    if (! item->projectile_name().empty()) {
+      projectile_fire_at(item->projectile_name(), victim);
+    } else {
+      err("Unknown projectile: %s.", item->text_the().c_str());
+      return false;
+    }
+
+    //
+    // Get the damage from the enchanted wand, so the blast inflicts that damage.
+    //
+    set_current_damage(item->get_current_damage());
+    return true;
+  }
+
   if (! target_select(item)) {
     return false;
   }

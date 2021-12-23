@@ -237,7 +237,7 @@ public:
   FovMap can_see_currently; // Shadowcasting of what can be seen currently
   FovMap can_see_ever;      // Shadowcasting of what can be seen ever on this level
 
-  point wander_target {-1, -1};
+  point wander_dest {-1, -1};
 
   std::map< ThingId, int > enemies {};      // List of things that wronged us
   std::map< ThingId, int > avoid {};        // List of things that wronged us and need to be avoided

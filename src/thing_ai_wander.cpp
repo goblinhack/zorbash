@@ -192,7 +192,7 @@ bool Thing::ai_create_path(point &nh, const point start, const point end)
 
 bool Thing::ai_choose_wander(point &nh)
 {
-  dbg("AI choose wander target");
+  dbg("AI choose wander dest");
   TRACE_AND_INDENT();
 
   if (! maybe_aip()) {
@@ -200,60 +200,60 @@ bool Thing::ai_choose_wander(point &nh)
   }
 
   //
-  // Reached the target? Choose a new one.
+  // Reached the dest? Choose a new one.
   //
-  auto target = get_aip()->wander_target;
-  if ((curr_at.x == target.x) && (curr_at.y == target.y)) {
-    dbg("Reached target");
-    target = point(-1, -1);
+  auto dest = get_aip()->wander_dest;
+  if ((curr_at.x == dest.x) && (curr_at.y == dest.y)) {
+    dbg("Reached dest");
+    dest = point(-1, -1);
   }
 
   //
   // Try to use the same location.
   //
-  if (ai_create_path(nh, curr_at, target)) {
+  if (ai_create_path(nh, curr_at, dest)) {
     return true;
   }
 
   //
   // Choose a new wander location
   //
-  get_aip()->wander_target = point(-1, -1);
+  get_aip()->wander_dest = point(-1, -1);
 
-  target = get_random_target();
+  dest = get_random_target();
 
   //
   // Minions are constrained
   //
-  if (too_far_from_manifestor(target)) {
-    dbg("Could not wander, too far off the leash; could not create path to %d,%d", target.x, target.y);
+  if (too_far_from_manifestor(dest)) {
+    dbg("Could not wander, too far off the leash; could not create path to %d,%d", dest.x, dest.y);
     return false;
   }
 
-  if (too_far_from_leader(target)) {
-    if (get_distance_from_leader() > too_far_from_leader(target)) {
-      dbg("Wander closer to leader via %d,%d", target.x, target.y);
+  if (too_far_from_leader(dest)) {
+    if (get_distance_from_leader() > too_far_from_leader(dest)) {
+      dbg("Wander closer to leader via %d,%d", dest.x, dest.y);
     } else {
-      dbg("Could not wander, too far from leader; could not create path to %d,%d", target.x, target.y);
+      dbg("Could not wander, too far from leader; could not create path to %d,%d", dest.x, dest.y);
       return false;
     }
   }
 
-  if (! ai_create_path(nh, curr_at, target)) {
-    dbg("Could not wander; could not create path to %d,%d", target.x, target.y);
+  if (! ai_create_path(nh, curr_at, dest)) {
+    dbg("Could not wander; could not create path to %d,%d", dest.x, dest.y);
     return false;
   }
 
-  if (target == curr_at) {
-    dbg("Could not wander; at target");
+  if (dest == curr_at) {
+    dbg("Could not wander; at dest");
     return false;
   }
 
-  get_aip()->wander_target = target;
+  get_aip()->wander_dest = dest;
 #ifdef ENABLE_DEBUG_AI_WANDER
-  thing_new("ai_path2", fpoint(target.x, target.y));
+  thing_new("ai_path2", fpoint(dest.x, dest.y));
 #endif
-  dbg("Wander to %d,%d nh %d,%d", target.x, target.y, nh.x, nh.y);
+  dbg("Wander to %d,%d nh %d,%d", dest.x, dest.y, nh.x, nh.y);
   return true;
 }
 
@@ -310,9 +310,9 @@ bool Thing::ai_wander(void)
       }
 
       //
-      // Set this so next time we will choose another target
+      // Set this so next time we will choose another dest
       //
-      get_aip()->wander_target = point(-1, -1);
+      get_aip()->wander_dest = point(-1, -1);
     }
   }
 

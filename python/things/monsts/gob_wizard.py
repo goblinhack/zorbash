@@ -14,6 +14,7 @@ def tp_init(name, text_name):
     mytp.set_text_description("A master of the dark gobliny arts.")
     mytp.set_is_carrier_of_treasure_class_b(True)
     mytp.set_stat_strength(8)
+    mytp.set_distance_avoid(5)
     mytp.set_health_initial_dice("2d4+4")
     mytp.set_is_able_to_use_wands(True)
     mytp.set_is_able_to_use_rings(True)

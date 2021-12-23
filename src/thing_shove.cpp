@@ -69,7 +69,7 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta)
   }
 
   dbg("Can shove, %s delta %d,%d", it->to_short_string().c_str(), (int) delta.x, (int) delta.y);
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
 
   move_finish();
 

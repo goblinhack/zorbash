@@ -13,11 +13,12 @@
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"
 
-bool Thing::target_select(Thingp what)
+bool Thing::target_select(Thingp item)
 {
   TRACE_NO_INDENT();
+
   if (game->state != Game::STATE_CHOOSING_TARGET) {
-    TOPCON("Choose a target to use %s at.", what->text_the().c_str());
+    TOPCON("Choose a target to use %s at.", item->text_the().c_str());
   }
 
   game->change_state(Game::STATE_CHOOSING_TARGET);
@@ -25,7 +26,7 @@ bool Thing::target_select(Thingp what)
   if (level->cursor) {
     level->cursor->visible();
   }
-  level->describe(what);
+  level->describe(item);
 
   return true;
 }

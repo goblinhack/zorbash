@@ -160,7 +160,7 @@ public:
   uint64_t i_set_is_key                           : 1 {};
   uint64_t i_set_is_lava                          : 1 {};
   uint64_t i_set_is_light_blocker                 : 1 {};
-  uint64_t i_set_is_mob              : 1 {};
+  uint64_t i_set_is_mob                           : 1 {};
   uint64_t i_set_is_monst                         : 1 {};
   uint64_t i_set_is_necrotic_danger_level         : 1 {};
   uint64_t i_set_is_obs_destructable              : 1 {};
@@ -249,31 +249,24 @@ public:
   bool too_far_from_leader(point p);
   bool too_far_from_leader(point p, float delta);
 
-  Thingp get_equip(int equip);
-  Thingp get_equip_carry_anim(int equip);
-  Thingp get_equip_use_anim(int equip);
-
-  void dump_equip(void);
-
-  Thingp get_immediate_manifestor();
-  Thingp get_top_manifestor();
-
-  Thingp get_leader();
-  bool   same_leader(Thingp it);
-
-  Thingp get_immediate_spawned_owner();
-  Thingp get_top_spawned_owner();
-
-  Thingp get_immediate_owner();
-  Thingp get_top_owner();
-
-  Thingp get_most_dangerous_adjacent_thing(void);
-  Thingp get_most_dangerous_visible_thing(void);
+  bool same_leader(Thingp it);
 
   Thingp get_best_fire_at_target(void);
+  Thingp get_best_visible_target(void);
+  Thingp get_equip_carry_anim(int equip);
+  Thingp get_equip(int equip);
+  Thingp get_equip_use_anim(int equip);
+  Thingp get_immediate_manifestor();
+  Thingp get_immediate_owner();
+  Thingp get_immediate_spawned_owner();
+  Thingp get_leader();
+  Thingp get_most_dangerous_adjacent_thing(void);
+  Thingp get_most_dangerous_visible_thing(void);
+  Thingp get_top_manifestor();
+  Thingp get_top_owner();
+  Thingp get_top_spawned_owner();
   Thingp laser_fire_at(const std::string &item, Thingp target);
   Thingp projectile_fire_at(const std::string &item, Thingp target);
-
   Thingp spawn_at(const std::string &what);
   Thingp spawn_at_if_possible(const std::string &what);
 
@@ -1525,7 +1518,6 @@ public:
   void buff_remove_all(void);
   void buff_tick();
   void chasm_tick();
-  void leader_tick();
   void check_all_carried();
   void clear_age_map(void);
   void clear_can_see_currently(void);
@@ -1560,8 +1552,6 @@ public:
   void destroyed(void);
   void destroy_minions(Thingp defeater);
   void destroy_spawned(Thingp defeater);
-  void killed(Thingp defeater, const char *reason);
-  void killed(Thingp defeater, const std::string &reason);
   void die(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
   void die_(const char *fmt, va_list args); // compile error without
   void dir_set_bl(void);
@@ -1575,6 +1565,7 @@ public:
   void dir_set_up(void);
   void dmap_modify_terrain_cost(point p, uint8_t *d);
   void drop_all(void);
+  void dump_equip(void);
   void dump(std::string prefix, std::ostream &out);
   void enchant_randomly(void);
   void enemies_tick(void);
@@ -1601,7 +1592,10 @@ public:
   void inventory_particle(Thingp what, uint32_t slot);
   void inventory_particle(Thingp what, uint32_t slot, Thingp particle_target);
   void jump_end(void);
+  void killed(Thingp defeater, const char *reason);
+  void killed(Thingp defeater, const std::string &reason);
   void lava_tick();
+  void leader_tick();
   void level_change(Levelp);
   void level_enter(void);
   void level_leave(void);
@@ -1625,15 +1619,16 @@ public:
   void move_to(point to);
   void msg(const std::string &);
   void necrosis_tick(void);
-  void polymorph(Tpp);
-  void update(void);
   void new_aip(void);
   void new_infop(void);
   void new_itemp(void);
   void new_light(point offset, int strength);
   void new_light(point offset, int strength, color col, int fbo);
+  void notify_followers_of_death_of_my_leader(void);
+  void notify_of_death_of_my_leader(void);
   void on_born(void);
-  void on_polymorphed(void);
+  void on_death_of_a_follower(Thingp leader);
+  void on_death_of_my_leader(void);
   void on_enchant(void);
   void on_equip(Thingp what);
   void on_fall(void);
@@ -1645,13 +1640,12 @@ public:
   void on_open(void);
   void on_owner_set(Thingp owner);
   void on_owner_unset(Thingp owner);
-  void on_you_are_declared_leader(void);
-  void on_death_of_my_leader(void);
-  void on_you_are_declared_a_follower(Thingp leader);
-  void on_death_of_a_follower(Thingp leader);
+  void on_polymorphed(void);
   void on_unequip(Thingp what);
   void on_use(Thingp what);
   void on_use(Thingp what, Thingp target);
+  void on_you_are_declared_a_follower(Thingp leader);
+  void on_you_are_declared_leader(void);
   void on_you_are_hit_and_now_dead(Thingp hitter, Thingp real_hitter, bool crit, int dmg);
   void on_you_are_hit_but_still_alive(Thingp hitter, Thingp real_hitter, bool crit, int dmg);
   void on_you_bite_attack(void);
@@ -1659,10 +1653,12 @@ public:
   void path_shorten(std::vector< point > &path);
   void poisoned(void);
   void poison_tick(void);
+  void polymorph(Tpp);
   void reinit(void);
+  void release_followers(void);
   void remove_all_references();
-  void remove_manifestor(void);
   void remove_leader(void);
+  void remove_manifestor(void);
   void remove_owner(void);
   void remove_spawner_owner(void);
   void reset_goal_penalty(Thingp attacker);
@@ -1683,9 +1679,9 @@ public:
   void set_fadeup_height(float);
   void set_fall_height(float);
   void set_interpolated_at(fpoint v);
+  void set_leader(Thingp leader);
   void set_lunge_to(point);
   void set_manifestor(Thingp manifestor);
-  void set_leader(Thingp leader);
   void set_msg(const std::string &);
   void set_owner(Thingp owner);
   void set_score(int);
@@ -1704,9 +1700,6 @@ public:
   void topcon_(const char *fmt, va_list args); // compile error without
   void try_to_carry(const std::list< Thingp > &items);
   void unleash_minions(void);
-  void release_followers(void);
-  void notify_followers_of_death_of_my_leader(void);
-  void notify_of_death_of_my_leader(void);
   void unleash_spawners_things(void);
   void unset_on_fire(void);
   void update_all(void);
@@ -1715,6 +1708,7 @@ public:
   void update_light(void);
   void update_pos(point, bool immediately);
   void update_tick(void);
+  void update(void);
   void used(Thingp w, Thingp target, bool remove_after_use);
   void visible();
   void water_tick();

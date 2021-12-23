@@ -175,8 +175,8 @@ void Thing::used(Thingp what, Thingp target, bool remove_after_use)
     return;
   }
 
-  TRACE_NO_INDENT();
   dbg("Attempt to use %s", what->to_short_string().c_str());
+  TRACE_AND_INDENT();
 
   if (target) {
     on_use(what, target);
@@ -299,7 +299,7 @@ bool Thing::use(Thingp what, int preferred_equip)
       level->describe(what);
     }
   } else if (what->is_target_auto_select()) {
-    dbg("Trying to choose target: %s", what->to_short_string().c_str());
+    dbg("Trying to fire: %s", what->to_short_string().c_str());
     TRACE_NO_INDENT();
     fire_at_and_choose_target(what);
     if (is_player()) {

@@ -982,8 +982,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
               //
               // Very close, high priority attack
               //
-              GOAL_ADD(GOAL_PRIO_HIGH, (int) (max_dist - dist) * health_diff - goal_penalty,
-                       "attack-nearby-mob", it);
+              GOAL_ADD(GOAL_PRIO_HIGH, (int) (max_dist - dist) * health_diff - goal_penalty, "attack-nearby-mob", it);
             } else if (possible_to_attack(it)) {
               if (dist < 2) {
                 //
@@ -1856,7 +1855,7 @@ bool Thing::ai_tick(bool recursing)
               auto best_wand_val = maybe_itemp_value(best_wand);
 
               if (! curr_wand) {
-                AI_LOG("Idle, hhave a wand, but not used", best_wand);
+                AI_LOG("Idle, have a wand, but not used", best_wand);
                 if (use(best_wand, MONST_EQUIP_WEAPON)) {
                   AI_LOG("Change wand", best_wand);
                   if (is_player()) {
@@ -1976,7 +1975,7 @@ bool Thing::ai_tick(bool recursing)
         //
         // If going somewhere, continue
         //
-        if (aip->wander_target != point(0, 0)) {
+        if (aip->wander_dest != point(0, 0)) {
           if (pcg_random_range(0, 100) < 50) {
             dbg("Try to continue wander");
             if (ai_wander()) {
@@ -2313,7 +2312,7 @@ void Thing::ai_get_next_hop(void)
       return;
     }
 
-    aip->wander_target = point(0, 0);
+    aip->wander_dest = point(0, 0);
 
     dbg("AI: cannot escape, try to wander");
     TRACE_AND_INDENT();
@@ -2328,7 +2327,7 @@ void Thing::ai_get_next_hop(void)
   // Find the best goal to go to
   //
   if (ai_tick()) {
-    aip->wander_target = point(0, 0);
+    aip->wander_dest = point(0, 0);
     return;
   }
 

@@ -214,14 +214,14 @@ bool Thing::ai_on_fire_choose_target(point &nh)
   //
   // Reached the target? Choose a new one.
   //
-  auto target = get_aip()->wander_target;
+  auto target = get_aip()->wander_dest;
 
   if (target != point(0, 0)) {
     if (! level->is_shallow_water(target.x, target.y)) {
       //
       // Choose a new wander location
       //
-      get_aip()->wander_target = point(0, 0);
+      get_aip()->wander_dest = point(0, 0);
     }
   }
 
@@ -234,7 +234,7 @@ bool Thing::ai_on_fire_choose_target(point &nh)
   //
   // Choose a new wander location
   //
-  get_aip()->wander_target = point(0, 0);
+  get_aip()->wander_dest = point(0, 0);
 
   auto attempts = 10;
   while (attempts--) {
@@ -256,7 +256,7 @@ bool Thing::ai_on_fire_choose_target(point &nh)
     if (got_one) {
       target = best;
       if (ai_create_on_fire_path(nh, start, target)) {
-        get_aip()->wander_target = target;
+        get_aip()->wander_dest = target;
         dbg("On-fire move to %d,%d nh %d,%d", target.x, target.y, nh.x, nh.y);
         return true;
       }
@@ -282,7 +282,7 @@ bool Thing::ai_on_fire(void)
       //
       // Set this so next time we will choose another target
       //
-      get_aip()->wander_target = point(0, 0);
+      get_aip()->wander_dest = point(0, 0);
     }
   }
 

@@ -231,3 +231,75 @@ bool Thing::any_adjacent_monst(void)
 
   return false;
 }
+
+Thingp Thing::get_best_visible_target(void)
+{
+  std::vector< std::pair< Thingp, int > > possible;
+
+  float d = get_distance_avoid();
+
+  for (auto dx = -d; dx <= d; dx++) {
+    for (auto dy = -d; dy <= d; dy++) {
+      point o(curr_at.x + dx, curr_at.y + dy);
+      if (level->is_oob(o)) {
+        continue;
+      }
+
+      if (! get(get_aip()->can_see_currently.can_see, o.x, o.y)) {
+        continue;
+      }
+
+      FOR_ALL_THINGS_THAT_INTERACT(level, t, o.x, o.y)
+      {
+        if (t == this) {
+          continue;
+        }
+
+        if (t->is_dead) {
+          continue;
+        }
+
+        if (! t->is_monst() && ! t->is_player()) {
+          continue;
+        }
+
+        if (! t->possible_to_attack(this)) {
+          continue;
+        }
+
+        auto score = t->get_health();
+
+        if (distance(t->curr_at, curr_at) < get_distance_avoid()) {
+          score += 100;
+        }
+
+        //
+        // If we're being engulfed, this is a serious threat!
+        //
+        if (t->curr_at == curr_at) {
+          score += 100;
+        }
+
+        if (will_avoid_monst(o)) {
+          score += 100;
+        }
+
+        score += t->get_health_max();
+        possible.push_back(std::make_pair(t, score));
+        dbg("Potential target: %s", t->to_string().c_str());
+      }
+      FOR_ALL_THINGS_END()
+    }
+  }
+
+  if (! possible.size()) {
+    return nullptr;
+  }
+
+  sort(possible.begin(), possible.end(),
+       [](const std::pair< Thingp, int > &a, const std::pair< Thingp, int > &b) -> bool {
+         return a.second > b.second;
+       });
+
+  return possible[ 0 ].first;
+}

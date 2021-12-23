@@ -97,22 +97,22 @@ void dmap_print(const Dmap *D, point at, point tl, point br)
     for (x = minx; x < maxx; x++) {
       uint8_t e = get(D->val, x, y);
       if (point(x, y) == at) {
-        debug += (" @ ");
+        debug += ("  @");
         continue;
       }
       if (e == DMAP_IS_WALL) {
-        debug += ("## ");
+        debug += (" ##");
         continue;
       }
       if (e == DMAP_IS_PASSABLE) {
-        debug += ("p  ");
+        debug += ("  p");
         continue;
       }
 
       if (e > 0) {
-        debug += string_sprintf("%-3X", e);
+        debug += string_sprintf("%3X", e);
       } else {
-        debug += "*  ";
+        debug += "  *";
       }
     }
     LOG("DMAP: %s", debug.c_str());
@@ -131,18 +131,18 @@ void dmap_print(const Dmap *D)
     for (x = 0; x < MAP_WIDTH; x++) {
       uint8_t e = get(D->val, x, y);
       if (e == DMAP_IS_WALL) {
-        debug += ("## ");
+        debug += (" ##");
         continue;
       }
       if (e == DMAP_IS_PASSABLE) {
-        debug += (".  ");
+        debug += ("  .");
         continue;
       }
 
       if (e > 0) {
-        debug += string_sprintf("%-3X", e);
+        debug += string_sprintf("%3X", e);
       } else {
-        debug += "*  ";
+        debug += "  *";
       }
     }
     LOG("DMAP: %s", debug.c_str());
