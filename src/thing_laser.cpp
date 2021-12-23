@@ -59,6 +59,11 @@ Thingp Thing::laser_fire_at(const std::string &laser_name, Thingp target)
     die("No laser name");
   }
 
+  auto collatoral_damage = in_the_way(curr_at, target->curr_at);
+  if (collatoral_damage) {
+    target = collatoral_damage;
+  }
+
   auto start = last_blit_at;
   auto end   = target->last_blit_at;
 
