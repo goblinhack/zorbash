@@ -5,12 +5,10 @@
 <!-- Next todo                                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
 <!-- - immediate appear of wand equip                                                                                                             -->
+<!-- - anim other wands                                                                                                                           -->
 <!-- - robot wand use                                                                                                                             -->
 <!-- - robot fight goblins                                                                                                                        -->
-<!-- - goblins seem to pause                                                                                                                      -->
 <!-- - zx_thing carry                                                                                                                                -->
-<!-- - thing use wands                                                                                                                            -->
-<!-- - goblin mage                                                                                                                                -->
 <!-- - goblin totem                                           -->
 <!-- - pirate goblin random carry of gold                                                                                                                       -->
 <!-- - robot will loop on sewers                                                                           -->
