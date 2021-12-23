@@ -265,6 +265,9 @@ public:
   Thingp get_top_manifestor();
   Thingp get_top_owner();
   Thingp get_top_spawned_owner();
+  Thingp in_the_way(const point s, const point e, int x, int y);
+  Thingp in_the_way(const point s, const point e);
+  Thingp in_the_way_(const point s, const point e, int x0_in, int y0_in, int x1_in, int y1_in, int flag);
   Thingp laser_fire_at(const std::string &item, Thingp target);
   Thingp projectile_fire_at(const std::string &item, Thingp target);
   Thingp spawn_at(const std::string &what);

@@ -267,6 +267,13 @@ Thingp Thing::get_best_visible_target(void)
           continue;
         }
 
+        //
+        // If no clear shot, then ignore
+        //
+        if (in_the_way(curr_at, t->curr_at)) {
+          continue;
+        }
+
         auto score = t->get_health();
 
         if (distance(t->curr_at, curr_at) < get_distance_avoid()) {
