@@ -4,20 +4,16 @@
 <!--                                                                                                                                              -->
 <!-- Next todo                                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
-<!-- - robot wand use                                                                                                                             -->
-<!-- - robot fight goblins                                                                                                                        -->
 <!-- - zx_thing carry                                                                                                                                -->
 <!-- - goblin totem                                           -->
 <!-- - pirate goblin random carry of gold                                                                                                                       -->
 <!-- - robot will loop on sewers                                                                           -->
-<!-- - laser damage should dissipate with multi targets                                                       -->
 <!-- - lightning damage                                                                                       -->
 <!-- - fire damage                                                                                       -->
 <!-- - energy damage                                                                                       -->
 <!-- - necro ring                                                                                                                                 -->
 <!-- - giant spider web throw                                                                                                                     -->
 <!-- - spider ball anims                                                                                                                          -->
-<!-- - AI wand use                                                                                                                                -->
 <!-- - antipoison potion                                                                                                                          -->
 <!-- - chocolote frog cures poison?                                                                                                               -->
 <!-- - holy water cures poison                                                                                                                    -->

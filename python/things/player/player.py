@@ -247,6 +247,7 @@ def on_damage_constitution(me, hitter, x, y, damage):
 
 def tp_init(name, text_name, short_text_name, title):
     mytp = tp.Tp(name, text_name, short_text_name)
+    mytp.set_aggression_level_pct(75)
     mytp.set_ai_detect_secret_doors(True)
     mytp.set_ai_resent_count(20)
     mytp.set_ai_shove_chance_d1000(50)
@@ -254,6 +255,7 @@ def tp_init(name, text_name, short_text_name, title):
     mytp.set_attack_undead(True)
     mytp.set_capacity_height(20)
     mytp.set_capacity_width(20)
+    mytp.set_collateral_damage_pct(90)
     mytp.set_collision_check(True)
     mytp.set_collision_hit_priority(20)
     mytp.set_damage_melee_chance_d1000(1000)
@@ -272,9 +274,6 @@ def tp_init(name, text_name, short_text_name, title):
     mytp.set_gfx_flickers(True)
     mytp.set_gfx_short_shadow_caster(True)
     mytp.set_gfx_show_outlined(True)
-    mytp.set_aggression_level_pct(75)
-    mytp.set_collateral_damage_pct(90)
-    mytp.set_is_intelligent(True)
     mytp.set_health_initial_dice("100")
     mytp.set_health_starving_pct(5)
     mytp.set_hunger_clock_tick_frequency(50)
@@ -303,6 +302,7 @@ def tp_init(name, text_name, short_text_name, title):
     mytp.set_is_exit_finder(True)
     mytp.set_is_explorer(True)
     mytp.set_is_humanoid(True)
+    mytp.set_is_intelligent(True)
     mytp.set_is_item_collector(True)
     mytp.set_is_living(True)
     mytp.set_is_loggable(True)

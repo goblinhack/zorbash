@@ -319,8 +319,10 @@ void Thing::killed(Thingp defeater, const char *reason)
           if (is_monst()) {
             if (is_undead()) {
               TOPCON("%%fg=white$%s is vanquished, %s.%%fg=reset$", The_no_dying.c_str(), reason);
+            } else if (is_jelly()) {
+              TOPCON("%%fg=white$%s is splattered, %s.%%fg=reset$", The_no_dying.c_str(), reason);
             } else {
-              TOPCON("%%fg=white$%s is defeated, %s.%%fg=reset$", The_no_dying.c_str(), reason);
+              TOPCON("%%fg=white$%s is dead, %s.%%fg=reset$", The_no_dying.c_str(), reason);
             }
           } else if (on_death_is_open()) {
             //
