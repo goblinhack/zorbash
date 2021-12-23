@@ -7,6 +7,7 @@
 #include "my_depth.hpp"
 #include "my_level.hpp"
 #include "my_light.hpp"
+#include "my_monst.hpp"
 #include "my_sprintf.hpp"
 #include "my_sys.hpp"
 #include "my_thing.hpp"
@@ -383,6 +384,49 @@ void Thing::update(void)
       auto W = level->thing_new(tp_random_item_class_c(), curr_at, this);
       if (W) {
         carried += carry(W);
+      }
+    }
+  }
+
+  //
+  // Can we switch to a better weapon? Only if we can use weapons. We don't
+  // wand jellys wandering around with swords!
+  //
+  if (is_able_to_use_weapons()) {
+    Thingp best_weapon = nullptr;
+    get_carried_weapon_highest_value(&best_weapon);
+    if (best_weapon) {
+      equip(best_weapon, MONST_EQUIP_WEAPON);
+    }
+  }
+
+  if (is_able_to_use_wands()) {
+    Thingp best_wand = nullptr;
+    get_carried_wand_highest_value(&best_wand);
+    if (best_wand) {
+      equip(best_wand, MONST_EQUIP_WEAPON);
+    }
+  }
+
+  if (is_able_to_use_rings()) {
+    //
+    // Ring 1
+    //
+    {
+      Thingp best_ring = nullptr;
+      get_carried_ring_highest_value(&best_ring);
+      if (best_ring) {
+        equip(best_ring, MONST_EQUIP_RING1);
+      }
+    }
+    //
+    // Ring 2
+    //
+    {
+      Thingp best_ring = nullptr;
+      get_carried_ring_highest_value(&best_ring);
+      if (best_ring) {
+        equip(best_ring, MONST_EQUIP_RING2);
       }
     }
   }
