@@ -172,6 +172,10 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
                 add_goal_penalty(goal.what);
               }
 
+              if (fire_at(goal.what)) {
+                return true;
+              }
+
               IF_DEBUG
               {
                 auto s = string_sprintf("Accept goal score %d @(%d,%d) %s", (int) goal.score, (int) goal.at.x,
@@ -184,6 +188,11 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
         }
         continue;
       }
+
+      if (fire_at(goal.what)) {
+        return true;
+      }
+
       if (ai_create_path_to_single_goal(minx, miny, maxx, maxy, goal, &saved_dmap)) {
         if (goal.what) {
           add_goal_penalty(goal.what);

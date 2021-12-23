@@ -11,13 +11,15 @@
 #include "my_thing.hpp"
 #include "my_tile.hpp"
 
-bool Thing::laser_choose_target(Thingp item)
+bool Thing::laser_choose_target(Thingp item, Thingp victim)
 {
   dbg("Trying to target a laser with: %s", item->to_short_string().c_str());
   TRACE_AND_INDENT();
 
   if (is_monst() || (game->robot_mode && is_player())) {
-    auto victim = get_best_visible_target();
+    if (! victim) {
+      victim = get_best_visible_target();
+    }
     if (! victim) {
       dbg("No victim found");
       return false;

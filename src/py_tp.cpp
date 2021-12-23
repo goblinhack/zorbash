@@ -1160,6 +1160,7 @@ PyObject *level_place_at(PyObject *obj, PyObject *args, PyObject *keywds)
 }
 
 TP_BODY_SET_INT(aggression_level_pct)
+TP_BODY_SET_INT(collateral_damage_pct)
 TP_BODY_SET_INT(ai_detect_secret_doors)
 TP_BODY_SET_INT(ai_obstacle)
 TP_BODY_SET_INT(ai_resent_count)

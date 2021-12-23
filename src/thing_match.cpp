@@ -24,9 +24,6 @@ bool Thing::matches(const std::string &what)
     return false;
   }
 
-  if (aggression_level_pct() && (what == "aggression_level_pct")) {
-    return true;
-  }
   if (is_able_to_attack_mobs() && (what == "is_able_to_attack_mobs")) {
     return true;
   }
@@ -736,9 +733,6 @@ bool Thing::matches(const std::string &what)
 
 std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
 {
-  if (what == "aggression_level_pct") {
-    return &Thing::aggression_level_pct;
-  }
   if (what == "is_able_to_attack_mobs") {
     return &Thing::is_able_to_attack_mobs;
   }

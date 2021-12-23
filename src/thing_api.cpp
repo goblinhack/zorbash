@@ -1406,6 +1406,12 @@ int Thing::is_crushable(void)
   return (tp()->is_crushable());
 }
 
+int Thing::collateral_damage_pct(void)
+{
+  TRACE_NO_INDENT();
+  return tp()->collateral_damage_pct();
+}
+
 int Thing::aggression_level_pct(void)
 {
   TRACE_NO_INDENT();

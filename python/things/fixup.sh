@@ -293,6 +293,7 @@ do
       set_is_able_to_jump_onto \
       set_is_crushable \
       set_aggression_level_pct \
+      set_collateral_damage_pct \
       set_is_able_to_see_in_the_dark \
       set_is_gfx_anim_synced_with_owner \
       set_unused_flag3 \

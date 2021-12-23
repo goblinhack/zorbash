@@ -288,7 +288,7 @@ def tp_init(name, text_name, short_text_name, title):
     mytp.set_is_able_to_open_doors(True)
     mytp.set_is_able_to_shove(True)
     mytp.set_is_able_to_use_rings(True)
-    mytp.set_is_able_to_use_wands(False)
+    mytp.set_is_able_to_use_wands(True)
     mytp.set_is_able_to_use_weapons(True)
     mytp.set_is_attackable_by_monst(True)
     mytp.set_is_bleeder(True)

@@ -82,6 +82,7 @@ private:
   fsize _sz;
 
   int _aggression_level_pct {};
+  int _collateral_damage_pct {};
   int _ai_detect_secret_doors {};
   int _ai_obstacle {};
   int _ai_resent_count {};
@@ -739,6 +740,7 @@ public:
   const std::string &text_unused(void) const { return _text_unused; }
 
   int aggression_level_pct(void) const { return _aggression_level_pct; }
+  int collateral_damage_pct(void) const { return _collateral_damage_pct; }
   int ai_detect_secret_doors(void) const { return _ai_detect_secret_doors; }
   int ai_obstacle(void) const { return _ai_obstacle; }
   int ai_resent_count(void) const { return _ai_resent_count; }
@@ -1078,6 +1080,7 @@ public:
   int weapon_damage(void) const { return _weapon_damage; }
 
   void set_aggression_level_pct(int v) { _aggression_level_pct = v; }
+  void set_collateral_damage_pct(int v) { _collateral_damage_pct = v; }
   void set_ai_detect_secret_doors(int v) { _ai_detect_secret_doors = v; }
   void set_ai_obstacle(int v) { _ai_obstacle = v; }
   void set_ai_resent_count(int v) { _ai_resent_count = v; }

@@ -372,6 +372,8 @@ public:
   bool fall(void);
   bool fire_at_and_choose_target(Thingp);
   bool fire_at_target(void);
+  bool fire_at(Thingp item, Thingp target);
+  bool fire_at(Thingp target);
   bool fire_choose_target(Thingp item);
   bool get_coords(point &blit_tl, point &blit_br, point &pre_blit_tl, point &pre_blit_br, Tilep &tile, bool refl);
   bool get_map_offset_coords(point &blit_tl, point &blit_br, Tilep &tile, bool reflection);
@@ -395,7 +397,7 @@ public:
   bool is_to_be_avoided(Thingp attacker);
   bool jump_attack(Thingp it = nullptr);
   bool laser_anim_exists(void);
-  bool laser_choose_target(Thingp item);
+  bool laser_choose_target(Thingp item, Thingp victim = nullptr);
   bool learn_random_skill(void);
   bool matches(const std::string &what);
   bool move_no_shove_attack_allowed(point future_pos);
@@ -417,7 +419,7 @@ public:
   bool possible_to_attack_at(point at);
   bool possible_to_attack(const Thingp it);
   bool projectile_anim_exists(void);
-  bool projectile_choose_target(Thingp item);
+  bool projectile_choose_target(Thingp item, Thingp victim = nullptr);
   bool set_on_fire(const std::string &why);
   bool skill_add(Thingp it);
   bool skill_add(Tpp what);
@@ -675,6 +677,7 @@ public:
              bool damage_lightning, bool damage_energy, bool damage_acid, bool damage_digest, int damage);
 
   int aggression_level_pct(void);
+  int collateral_damage_pct(void);
   int ai_detect_secret_doors(void);
   int ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int type, bool check);
   int ai_obstacle(void);

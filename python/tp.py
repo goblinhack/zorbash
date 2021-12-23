@@ -466,6 +466,9 @@ class Tp:
     def set_aggression_level_pct(self, value):
         my.tp_set_aggression_level_pct(self, value)
 
+    def set_collateral_damage_pct(self, value):
+        my.tp_set_collateral_damage_pct(self, value)
+
     def set_is_able_to_see_in_the_dark(self, value):
         my.tp_set_is_able_to_see_in_the_dark(self, value)
 

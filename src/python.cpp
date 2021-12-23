@@ -1890,7 +1890,6 @@ static PyObject *die_(PyObject *obj, PyObject *args, PyObject *keywds)
 }
 
 static PyMethodDef python_c_METHODS[] = {
-    MY_ADD_PYTHON_FUNCTION(level_aggression_level_pct_at),
     MY_ADD_PYTHON_FUNCTION(level_ai_detect_secret_doors_at),
     MY_ADD_PYTHON_FUNCTION(level_ai_resent_count_at),
     MY_ADD_PYTHON_FUNCTION(level_ai_wanderer_at),
@@ -2154,6 +2153,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_FUNCTION(non_pcg_randint),
     MY_ADD_PYTHON_FUNCTION(pcg_randint),
     MY_ADD_PYTHON_FUNCTION(thing_aggression_level_pct),
+    MY_ADD_PYTHON_FUNCTION(thing_collateral_damage_pct),
     MY_ADD_PYTHON_FUNCTION(thing_ai_detect_secret_doors),
     MY_ADD_PYTHON_FUNCTION(thing_ai_resent_count),
     MY_ADD_PYTHON_FUNCTION(thing_ai_wanderer),
@@ -2489,6 +2489,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_FUNCTION(thing_unused_flag6),
     MY_ADD_PYTHON_FUNCTION(thing_unused_flag7),
     MY_ADD_PYTHON_TP_FUNCTION(aggression_level_pct),
+    MY_ADD_PYTHON_TP_FUNCTION(collateral_damage_pct),
     MY_ADD_PYTHON_TP_FUNCTION(ai_detect_secret_doors),
     MY_ADD_PYTHON_TP_FUNCTION(ai_obstacle),
     MY_ADD_PYTHON_TP_FUNCTION(ai_resent_count),

@@ -190,6 +190,11 @@ void Thing::used(Thingp what, Thingp target, bool remove_after_use)
     return;
   }
 
+  if (is_monst()) {
+    dbg("Used %s (do not deplete %d charges)", what->to_short_string().c_str(), what->get_charge_count());
+    return;
+  }
+
   //
   // Decrement the charge count and do not remove, if it has charges
   //

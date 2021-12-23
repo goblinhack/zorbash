@@ -11,13 +11,15 @@
 #include "my_thing.hpp"
 #include "my_tile.hpp"
 
-bool Thing::projectile_choose_target(Thingp item)
+bool Thing::projectile_choose_target(Thingp item, Thingp victim)
 {
   TRACE_AND_INDENT();
   dbg("Trying to target a projectile with: %s", item->to_short_string().c_str());
 
   if (is_monst() || (game->robot_mode && is_player())) {
-    auto victim = get_best_visible_target();
+    if (! victim) {
+      victim = get_best_visible_target();
+    }
     if (! victim) {
       dbg("No victim found");
       return false;

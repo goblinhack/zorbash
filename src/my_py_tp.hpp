@@ -42,6 +42,7 @@ PyObject *level_place_at(PyObject *obj, PyObject *args, PyObject *keywds);
   }
 
 TP_SET_PROTO(aggression_level_pct)
+TP_SET_PROTO(collateral_damage_pct)
 TP_SET_PROTO(ai_detect_secret_doors)
 TP_SET_PROTO(ai_obstacle)
 TP_SET_PROTO(ai_resent_count)

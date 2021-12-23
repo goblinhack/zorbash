@@ -11,6 +11,7 @@
 #include "my_monst.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_python.hpp"
+#include "my_random.hpp"
 #include "my_string.hpp"
 #include "my_sys.hpp"
 #include "my_thing.hpp"
@@ -195,4 +196,41 @@ bool Thing::fire_at_and_choose_target(Thingp item)
   } else {
     return laser_choose_target(item);
   }
+}
+
+bool Thing::fire_at(Thingp item, Thingp target)
+{
+  TRACE_NO_INDENT();
+  if (item->laser_name().empty()) {
+    return projectile_choose_target(item, target);
+  } else {
+    return laser_choose_target(item, target);
+  }
+}
+
+bool Thing::fire_at(Thingp target)
+{
+  TRACE_NO_INDENT();
+  if (! target) {
+    return false;
+  }
+
+  Thingp curr_weapon = get_equip(MONST_EQUIP_WEAPON);
+  if (! curr_weapon) {
+    return false;
+  }
+
+  if (! curr_weapon->is_wand()) {
+    return false;
+  }
+
+  if ((int) pcg_random_range(0, 100) > aggression_level_pct()) {
+    return false;
+  }
+
+  if (! possible_to_attack(target)) {
+    return false;
+  }
+
+  return fire_at(curr_weapon, target);
 }

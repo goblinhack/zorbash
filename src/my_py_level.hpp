@@ -9,7 +9,6 @@
 #include <Python.h>
 
 PyObject *level_add_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_aggression_level_pct_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_ai_detect_secret_doors_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_ai_resent_count_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_ai_wanderer_at(PyObject *obj, PyObject *args, PyObject *keywds);
