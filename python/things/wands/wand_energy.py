@@ -100,6 +100,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_on_use_do("me.on_use()")
     mytp.set_on_you_are_hit_and_now_dead_do("me.on_you_are_hit_and_now_dead()")
     mytp.set_on_you_are_on_fire_do("me.on_fire()")
+    mytp.set_equip_carry_anim("wand_energy_carry")
     mytp.set_range_max(7)
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("A wand of energy.")

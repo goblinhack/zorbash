@@ -301,6 +301,11 @@ bool Thing::use(Thingp what, int preferred_equip)
   } else if (what->is_target_auto_select()) {
     dbg("Trying to fire: %s", what->to_short_string().c_str());
     TRACE_NO_INDENT();
+    if (is_monst()) {
+      if (! what->equip_carry_anim().empty()) {
+        equip(what, preferred_equip);
+      }
+    }
     fire_at_and_choose_target(what);
     if (is_player()) {
       level->describe(what);

@@ -4,6 +4,7 @@
 <!--                                                                                                                                              -->
 <!-- Next todo                                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
+<!-- - immediate appear of wand equip                                                                                                             -->
 <!-- - robot wand use                                                                                                                             -->
 <!-- - robot fight goblins                                                                                                                        -->
 <!-- - goblins seem to pause                                                                                                                      -->
