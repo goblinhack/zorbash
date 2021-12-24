@@ -48,6 +48,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_bag_item(True)
     mytp.set_is_collectable(True)
     mytp.set_is_crushable(True)
+    mytp.set_equip_carry_anim("wand_fire_carry")
     mytp.set_is_described_when_hovering_over(True)
     mytp.set_is_droppable(True)
     mytp.set_is_item_magical(True)

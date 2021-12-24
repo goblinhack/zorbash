@@ -783,7 +783,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
   IF_DEBUG2
   {
     if (is_debug_type()) {
-      log("Dmap can see:");
+      dbg("Dmap can see:");
       dmap_print(dmap_can_see, curr_at, point(minx, miny), point(maxx, maxy));
     }
   }
@@ -1846,7 +1846,7 @@ bool Thing::ai_tick(bool recursing)
                 if (use(best_weapon, MONST_EQUIP_WEAPON)) {
                   AI_LOG("Change weapon", best_weapon);
                   if (is_player()) {
-                    game->tick_begin("Robot, has changed to weapon");
+                    game->tick_begin("Robot, has changed weapon");
                   }
                   return true;
                 }
@@ -1877,7 +1877,7 @@ bool Thing::ai_tick(bool recursing)
                 if (use(best_wand, MONST_EQUIP_WEAPON)) {
                   AI_LOG("Idle, change to new wand", best_wand);
                   if (is_player()) {
-                    game->tick_begin("Robot, has changed to wand");
+                    game->tick_begin("Robot, has changed wand");
                   }
                   return true;
                 }
@@ -1919,7 +1919,7 @@ bool Thing::ai_tick(bool recursing)
                 if (use(best_ring, MONST_EQUIP_RING1)) {
                   AI_LOG("Change ring", best_ring);
                   if (is_player()) {
-                    game->tick_begin("Robot, has changed to ring1");
+                    game->tick_begin("Robot, has changed ring1");
                   }
                   return true;
                 }
@@ -1927,7 +1927,7 @@ bool Thing::ai_tick(bool recursing)
                 if (use(best_ring, MONST_EQUIP_RING2)) {
                   AI_LOG("Change ring", best_ring);
                   if (is_player()) {
-                    game->tick_begin("Robot, has changedto ring2");
+                    game->tick_begin("Robot, has changed ring2");
                   }
                   return true;
                 }

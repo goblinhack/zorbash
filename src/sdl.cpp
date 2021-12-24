@@ -1262,7 +1262,7 @@ void sdl_loop(void)
     static bool old_g_errored;
     if (unlikely(g_errored)) {
       if (g_errored != old_g_errored) {
-        ERR("An error occurred. Check the logs above.");
+        CON("%%fg=red$An error occurred. Check the logs above.%%fg=reset$");
         CON("To dismiss this console, press TAB.");
         CON("To continue playing at your own risk, try 'clear errored'");
         if (wid_console_window && ! (wid_console_window->visible)) {
