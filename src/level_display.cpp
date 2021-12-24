@@ -451,10 +451,13 @@ void Level::display_map(void)
     blit_fbo_game_pix(FBO_SMALL_POINT_LIGHTS);
 
     //
-    // Blit objects that are in front of small lights so that the
-    // player is not lost in lava glow
+    // Blit objects that are in front of small lights so that the player is not lost in lava glow
     //
     display_map_fg_things(FBO_MAP_VISIBLE, minx, miny, maxx, maxy);
+
+    //
+    // I want to see lasers on top of things like the entrance and not under.
+    //
     display_lasers();
     display_projectiles();
 
