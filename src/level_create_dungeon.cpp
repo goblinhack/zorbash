@@ -391,6 +391,11 @@ bool Level::create_dungeon(point3d at, int seed)
               t->carry(W);
               t->enchant_without_stone(W);
             }
+            {
+              auto W = thing_new("wand_fire", point(x, y));
+              t->carry(W);
+              t->enchant_without_stone(W);
+            }
 
             {
 #if 0
@@ -403,7 +408,7 @@ bool Level::create_dungeon(point3d at, int seed)
               }
 #endif
             }
-            IF_DEBUG3
+            IF_DEBUG2
             {
               // thing_new("spider_giant", point(x + 3, y));
               thing_new("chest1", point(x - 1, y - 1));

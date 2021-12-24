@@ -454,9 +454,9 @@ void Level::display_map(void)
     // Blit objects that are in front of small lights so that the
     // player is not lost in lava glow
     //
+    display_map_fg_things(FBO_MAP_VISIBLE, minx, miny, maxx, maxy);
     display_lasers();
     display_projectiles();
-    display_map_fg_things(FBO_MAP_VISIBLE, minx, miny, maxx, maxy);
 
     //
     // So we can see monsts jump over walls

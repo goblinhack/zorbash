@@ -342,6 +342,7 @@ PyObject *thing_is_weapon(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_wood(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_killed_by(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_kill(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_carry(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_polymorph(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_possible_to_attack(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_set_leader(PyObject *obj, PyObject *args, PyObject *keywds);

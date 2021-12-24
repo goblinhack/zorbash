@@ -110,9 +110,6 @@ public:
   int miny;
   int maxy;
 
-  //
-  // All randomness jumps off of this as the root
-  //
   bool cursor_found {};
   bool is_heatmap_valid {};
   bool is_starting {}; // Loading level
@@ -131,12 +128,23 @@ public:
   fpoint map_at;        // map tile location
   fpoint map_wanted_at; // map scroll desired at
 
-  float wobble = {}; // Fades when set
-
   int mouse_at {-1}; // ticks for every move
   int mouse_old {-1};
-  int seed {};
+
+  //
+  // Level shake
+  //
+  float wobble = {};
+
+  //
+  // Monsters on the level
+  //
   int monst_count {};
+
+  //
+  // All randomness jumps off of this as the root
+  //
+  int seed {};
 
 #define MAX_THING_GROUPS              3
 #define THING_GROUP_PRIO_HIGH         0

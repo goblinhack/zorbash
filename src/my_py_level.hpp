@@ -179,7 +179,6 @@ PyObject *level_is_jelly_baby_eater_at(PyObject *obj, PyObject *args, PyObject *
 PyObject *level_is_jelly_eater_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_jelly_parent_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_key_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_laser_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_lava_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_explorer_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_light_blocker_at(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -204,7 +203,6 @@ PyObject *level_is_player_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_poisonous_danger_level_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_potion_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_potion_eater_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_projectile_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_removeable_if_out_of_slots_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_resurrectable_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_ring_at(PyObject *obj, PyObject *args, PyObject *keywds);

@@ -448,6 +448,54 @@ PyObject *thing_kill(PyObject *obj, PyObject *args, PyObject *keywds)
   Py_RETURN_NONE;
 }
 
+PyObject *thing_carry(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_AND_INDENT();
+  uint32_t     me_id    = 0;
+  char        *what     = nullptr;
+  static char *kwlist[] = {(char *) "me", (char *) "what", 0};
+
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &me_id, &what)) {
+    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  if (! me_id) {
+    ERR("%s: No me thing ID set", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  Thingp me = game->thing_find(me_id);
+  if (! me) {
+    ERR("%s: Cannot find me thing ID %u", __FUNCTION__, me_id);
+    Py_RETURN_NONE;
+  }
+
+  if (! what) {
+    me->err("Could not carry nameless object");
+    Py_RETURN_NONE;
+  }
+
+  auto tp = tp_find(what);
+  if (unlikely(! tp)) {
+    me->err("Could not find to carry %s", what);
+    Py_RETURN_NONE;
+  }
+
+  auto item = me->level->thing_new(tp, me->curr_at);
+  if (! item) {
+    me->err("Could not create to carry %s", what);
+    Py_RETURN_NONE;
+  }
+
+  if (! me->carry(item)) {
+    me->err("Could not carry %s", what);
+    Py_RETURN_NONE;
+  }
+
+  return Py_BuildValue("I", item->id);
+}
+
 PyObject *thing_polymorph(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();

@@ -88,4 +88,6 @@ void Thing::polymorph(Tpp into)
 
   on_polymorphed();
   log("Polymorphed into: %s", into->name().c_str());
+
+  on_born();
 }

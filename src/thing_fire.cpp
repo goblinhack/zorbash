@@ -94,7 +94,7 @@ void Thing::fire_tick(void)
     }
 
     auto fire   = tp_find("fire");
-    auto damage = fire->get_damage_melee();
+    auto damage = fire->get_damage_fire();
 
     if (environ_avoids_fire()) {
       damage *= 2;

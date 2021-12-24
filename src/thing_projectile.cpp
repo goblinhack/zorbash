@@ -71,13 +71,10 @@ Thingp Thing::projectile_fire_at(const std::string &projectile_name, Thingp targ
     return nullptr;
   }
 
-  auto projectile = level->thing_new(projectile_name, curr_at);
+  auto projectile = level->thing_new(projectile_name, target->curr_at, this);
   if (! projectile) {
     return nullptr;
   }
-
-  projectile->set_owner(this);
-  projectile->move_to_immediately(target->curr_at);
 
   dbg("Firing named projectile with: %s at %s", projectile->to_string().c_str(), target->to_string().c_str());
 

@@ -6576,6 +6576,9 @@ int Thing::get_group(void)
   if (is_laser()) {
     return THING_GROUP_PRIO_HIGH;
   }
+  if (is_projectile()) {
+    return THING_GROUP_PRIO_HIGH;
+  }
   if (is_tmp_thing()) {
     return THING_GROUP_TMP;
   }

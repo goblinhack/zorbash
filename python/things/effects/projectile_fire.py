@@ -15,6 +15,7 @@ def on_born(me, x, y):
 #
 def tp_init(name, text_name, short_text_name):
     mytp = tp.Tp(name, text_name, short_text_name)
+    mytp.set_collision_check(True)
     mytp.set_damage_fire_chance_d1000(1000)
     mytp.set_damage_fire_dice("1d10")  # This is the damage when the monst fires
     mytp.set_is_fire(True)

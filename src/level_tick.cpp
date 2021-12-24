@@ -472,41 +472,41 @@ bool Level::tick(void)
   //
   // The robot needs to be more deterministic and less loosy goosey
   //
+  //
+  // No moving if weapons have not finished firing
+  //
+  if (all_projectiles.size()) {
+    return false;
+  }
+
+  if (new_projectiles.size()) {
+    return false;
+  }
+
+  if (all_lasers.size()) {
+    return false;
+  }
+
+  if (new_lasers.size()) {
+    return false;
+  }
+
+  if (all_internal_particles.size()) {
+    return false;
+  }
+
+  if (new_internal_particles.size()) {
+    return false;
+  }
+
+  if (all_external_particles.size()) {
+    return false;
+  }
+
+  if (new_external_particles.size()) {
+    return false;
+  }
   if (game->robot_mode) {
-    //
-    // No moving if weapons have not finished firing
-    //
-    if (all_projectiles.size()) {
-      return false;
-    }
-
-    if (new_projectiles.size()) {
-      return false;
-    }
-
-    if (all_lasers.size()) {
-      return false;
-    }
-
-    if (new_lasers.size()) {
-      return false;
-    }
-
-    if (all_internal_particles.size()) {
-      return false;
-    }
-
-    if (new_internal_particles.size()) {
-      return false;
-    }
-
-    if (all_external_particles.size()) {
-      return false;
-    }
-
-    if (new_external_particles.size()) {
-      return false;
-    }
   }
 
   //
