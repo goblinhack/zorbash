@@ -248,6 +248,7 @@ bool Thing::spawn_radius_range(Thingp item, Thingp target, const std::string &wh
     }
   }
 
+  location_check_forced_all_things_at();
   return true;
 }
 
@@ -306,6 +307,7 @@ bool Thing::spawn_radius_range(const std::string &what, uint32_t radius_min, uin
     }
   }
 
+  location_check_forced_all_things_at();
   return true;
 }
 
@@ -387,6 +389,8 @@ int Thing::spawn_randomly_in_radius_range(const std::string &what, int amount, u
       }
 
       auto c = level->thing_new(what, spawn_at);
+
+      c->log("Spawned");
       c->inherit_from(this);
       c->set_ts_anim_delay_end(time_get_time_ms_cached() + dist * 100);
 
@@ -404,6 +408,7 @@ int Thing::spawn_randomly_in_radius_range(const std::string &what, int amount, u
     }
   }
 
+  location_check_forced_all_things_at();
   return spawned;
 }
 

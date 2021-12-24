@@ -4,7 +4,6 @@
 <!--                                                                                                                                              -->
 <!-- Next todo                                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
-<!-- - when a monst ascends, randomly place it                                                                -->
 <!-- - lightning damage                                                                                       -->
 <!-- - goblin totem                                           -->
 <!-- - pirate goblin random carry of gold                                                                                                                       -->
@@ -17,6 +16,7 @@
 <!-- - holy water cures poison                                                                                                                    -->
 <!-- - darts / poison darts                                                                                                                       -->
 <!-- - equip armour etc                                                                                                                           -->
+<!-- - when a monst ascends, randomly place it                                                                -->
 <!-- - AI if you see a potion of health, drop food in preference?                                                                                 -->
 <!-- - AI did not pick up enchantstone due to space                                                                                               -->
 <!-- ------                                                                                                                                       -->
