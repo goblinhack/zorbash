@@ -569,6 +569,7 @@ bool Thing::get_coords(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
     if (owner) {
       fall = owner->get_fall();
     }
+
     auto s = ((blit_br.y - blit_tl.y - 1) / 2) * fall;
     blit_tl.x += s;
     blit_br.x -= s;
@@ -577,6 +578,13 @@ bool Thing::get_coords(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
 
     blit_tl.y += fall * 40;
     blit_br.y += fall * 40;
+  }
+
+  //
+  // Prevent items inside bags/chests being seen. This also works for falling.
+  //
+  if (owner && owner->is_bag_item_container()) {
+    blit = false;
   }
 
   //
