@@ -33,7 +33,7 @@ def tp_init(name, text_name, short_text_name):
 
 def init():
     tp_init(
-        name="laser_lightning_secondary",
+        name="laser_light_fork",
         text_name="fork lightning",
         short_text_name="fork lightning",
     )

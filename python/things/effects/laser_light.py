@@ -26,7 +26,7 @@ def on_use(owner, me, target, x, y):
                     if my.thing_is_player(thing):
                         my.topcon("Current surges through your body!")
 
-                    my.thing_fire_at(me, "laser_lightning_secondary", thing)
+                    my.thing_fire_at(me, "laser_light_fork", thing)
 
 
 #
@@ -52,7 +52,7 @@ def tp_init(name, text_name, short_text_name):
 
 def init():
     tp_init(
-        name="laser_lightning",
+        name="laser_light",
         text_name="ray of lightning",
         short_text_name="ray of lightning",
     )

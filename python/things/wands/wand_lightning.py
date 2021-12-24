@@ -67,7 +67,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_wood(True)
     mytp.set_item_height(4)
     mytp.set_item_width(4)
-    mytp.set_laser_name("laser_lightning")
+    mytp.set_laser_name("laser_light")
     mytp.set_long_text_description("This wand blasts a charge of lightning at its unwitting target. Be careful when standing in the same pool as your target... Also do not use in the bath.")
     mytp.set_normal_placement_rules(True)
     mytp.set_on_fall_do("me.on_fall()")
