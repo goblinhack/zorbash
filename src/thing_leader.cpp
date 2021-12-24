@@ -357,6 +357,19 @@ bool Thing::same_leader(Thingp it)
     return false;
   }
 
+  //
+  // Monster checks so things like lasers do not think they are part of a team
+  // with the firer the leader. If you remove this check lightning can still
+  // hit the firer.
+  //
+  if (! is_monst()) {
+    return false;
+  }
+
+  if (! it->is_monst()) {
+    return false;
+  }
+
   if (! is_interesting()) {
     return false;
   }

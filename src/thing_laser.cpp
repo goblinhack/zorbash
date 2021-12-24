@@ -79,6 +79,7 @@ Thingp Thing::laser_fire_at(const std::string &laser_name, Thingp target)
 
   auto laser = level->thing_new(laser_name, target->curr_at, this);
   if (! laser) {
+    log("No laser to fire");
     return nullptr;
   }
 
@@ -99,6 +100,11 @@ Thingp Thing::laser_fire_at(const std::string &laser_name, Thingp target)
   }
 
   level->new_laser(laser->id, start, end, game->current_move_speed);
+
+  //
+  // This is needed for secondary lasers
+  //
+  laser->last_blit_at = end;
 
   on_use(laser, target);
 

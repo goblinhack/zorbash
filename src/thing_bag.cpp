@@ -522,8 +522,16 @@ bool Thing::bag_remove(Thingp item)
 
   bool found = false;
   auto bag   = get_bag();
-  auto bw    = capacity_width();
-  auto bh    = capacity_height();
+
+  //
+  // Watch out here as lasers can have owners and do not live in bags.
+  //
+  if (! bag) {
+    return false;
+  }
+
+  auto bw = capacity_width();
+  auto bh = capacity_height();
 
   if (0) {
     LOG("Bag contents before remove:");

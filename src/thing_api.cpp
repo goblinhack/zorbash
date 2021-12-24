@@ -6548,7 +6548,11 @@ std::array< std::array< ThingId, MAX_BAG_WIDTH >, MAX_BAG_HEIGHT > *Thing::get_b
   if (maybe_itemp()) {
     return (&get_itemp()->bag);
   } else {
-    DIE("No bag");
+    //
+    // Watch out here as lasers can have owners and do not live in bags.
+    //
+    log("No bag");
+    return nullptr;
   }
 }
 
@@ -6558,7 +6562,11 @@ const std::array< std::array< ThingId, MAX_BAG_WIDTH >, MAX_BAG_HEIGHT > *Thing:
   if (maybe_itemp()) {
     return (&get_itemp()->bag);
   } else {
-    DIE("No bag");
+    //
+    // Watch out here as lasers can have owners and do not live in bags.
+    //
+    log("No bag");
+    return nullptr;
   }
 }
 

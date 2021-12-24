@@ -29,7 +29,13 @@ bool Thing::possible_to_attack(const Thingp victim)
   auto my_owner  = get_top_owner();
   auto its_owner = victim->get_top_owner();
   if (my_owner && (my_owner == its_owner)) {
-    return false;
+    if (is_laser()) {
+      //
+      // This is to allow lightning to strike the owner if they fire in water
+      //
+    } else {
+      return false;
+    }
   }
 
   auto my_manifestor  = get_top_manifestor();

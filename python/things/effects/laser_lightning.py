@@ -10,6 +10,11 @@ def on_born(me, x, y):
     my.level_spawn_at_thing(me, "explosion_minor")
     my.thing_sound_play_channel(me, my.CHANNEL_WEAPON, "lightning_a")
 
+
+def on_use(owner, me, target, x, y):
+    # my.con("owner   {} {:08X}".format(my.thing_get_name(owner), owner))
+    # my.con("me      {} {:08X}".format(my.thing_get_name(me), me))
+    # my.con("target  {} {:08X}".format(my.thing_get_name(target), target))
     #
     # Lightning can impact all things in the same pool
     #
@@ -19,7 +24,7 @@ def on_born(me, x, y):
             if thing != me:
                 if my.thing_possible_to_attack(me, thing):
                     if my.thing_is_player(thing):
-                        my.topcon("Current surges through your body")
+                        my.topcon("Current surges through your body!")
 
                     my.thing_fire_at(me, "laser_lightning_secondary", thing)
 
@@ -37,6 +42,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_no_tile(True)
     mytp.set_is_usable(True)
     mytp.set_on_born_do("me.on_born()")
+    mytp.set_on_use_do("me.on_use()")
     mytp.set_text_a_or_an("a")
     mytp.set_z_depth(my.MAP_DEPTH_OBJ)
     mytp.set_z_prio(my.MAP_PRIO_BEHIND)
