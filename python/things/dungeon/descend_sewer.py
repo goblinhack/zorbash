@@ -20,7 +20,7 @@ def tp_init(name, tiles=[], left1_tiles=[]):
     mytp.set_light_strength(1)
     mytp.set_long_text_description("A filthy sewer pipe. Watch out, they can spawn surprises. Don't fall in!")
     mytp.set_minion_limit(5)
-    mytp.set_on_idle_tick_frequency_dice("1d50+50:me.spawn()")
+    mytp.set_on_idle_tick_frequency_dice("1d50+50:descend_sewer.spawn()")
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("A slime coated sewer pipe.")
     mytp.set_z_depth(my.MAP_DEPTH_OBJ)

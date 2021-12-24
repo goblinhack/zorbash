@@ -876,7 +876,7 @@ PyObject *level_spawn_using_items_radius_range_(PyObject *obj, PyObject *args, P
     Py_RETURN_FALSE;
   }
 
-  if (t->spawn_radius_range(parent, target, std::string(what), radius_min, radius_max)) {
+  if (t->spawn_radius_range(parent, target, std::string(what), radius_min, radius_max + 1)) {
     Py_RETURN_TRUE;
   }
   Py_RETURN_FALSE;

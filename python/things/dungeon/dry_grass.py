@@ -20,7 +20,7 @@ def tp_init(name, tiles=[]):
     mytp.set_is_described_when_hovering_over(True)
     mytp.set_is_dry_grass(True)
     mytp.set_is_interesting(True)
-    mytp.set_on_you_are_hit_and_now_dead_do("me.on_you_are_hit_and_now_dead()")
+    mytp.set_on_you_are_hit_and_now_dead_do("dry_grass.on_you_are_hit_and_now_dead()")
     mytp.set_text_a_or_an("the")
     mytp.set_text_description("Brittle dry and slightly funky grass.")
     mytp.set_z_depth(my.MAP_DEPTH_FLOOR2)
