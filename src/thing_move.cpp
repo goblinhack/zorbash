@@ -99,12 +99,12 @@ void Thing::move_finish(void)
     {
       std::string s = "";
       for (auto p1 : get_aip()->move_path) {
-        s += p1.to_string() + " ";
+        s += " " + p1.to_string();
       }
       if (s.empty()) {
         log("End of move");
       } else {
-        log("End of move, moves left: %s", s.c_str());
+        log("End of move, moves left:%s", s.c_str());
       }
     }
 

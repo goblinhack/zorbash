@@ -35,13 +35,18 @@ bool Thing::path_pop_next_move(void)
   IF_DEBUG2
   {
     for (auto p : aip->move_path) {
-      s += p.to_string() + " ";
+      s += " " + p.to_string();
       (void) level->thing_new("ai_path1", point(p.x, p.y));
     }
   }
   auto to         = aip->move_path[ 0 ];
   auto future_pos = point(to.x, to.y);
-  dbg("Path pop next move %s, path: %s", future_pos.to_string().c_str(), s.c_str());
+
+  if (s.empty()) {
+    dbg("Path pop next move %s, path empty", future_pos.to_string().c_str());
+  } else {
+    dbg("Path pop next move %s, path:%s", future_pos.to_string().c_str(), s.c_str());
+  }
 
   //
   // Clean up the old cursor path

@@ -335,11 +335,11 @@ void Thing::killed(Thingp defeater, const char *reason)
           defeater->score_add(this);
         } else if (is_monst() && (get_distance_to_player() >= DMAP_IS_PASSABLE)) {
           if (is_undead()) {
-            TOPCON("You hear a distant moan...");
+            TOPCON("You hear the distant cry of the undead...");
           } else if (is_jelly()) {
             TOPCON("You hear a distant splat...");
           } else if (is_humanoid()) {
-            TOPCON("You hear distant cursing...");
+            TOPCON("You hear distant common language cursing...");
           } else if (is_meat()) {
             TOPCON("You hear the distant crunching of bones...");
           } else {

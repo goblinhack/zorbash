@@ -23,6 +23,10 @@ void Thing::score_add(Thingp victim)
 {
   TRACE_NO_INDENT();
 
+  if (! is_player()) {
+    return;
+  }
+
   if (victim->is_monst()) {
     auto score = get_danger_initial_level(victim);
     if (score > 0) {
