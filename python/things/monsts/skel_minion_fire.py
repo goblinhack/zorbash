@@ -38,6 +38,7 @@ def tp_init(name, text_name):
     mytp.set_attack_lunge(True)
     mytp.set_attack_meat(True)
     mytp.set_collision_check(True)
+    mytp.set_collision_hit_priority(20)
     mytp.set_damage_bite_chance_d1000(100)
     mytp.set_damage_bite_dice("1d4")
     mytp.set_damage_melee_chance_d1000(900)

@@ -49,6 +49,12 @@ void tp_fixup(void)
         DIE("Tp %s interesting floor?", tp->name().c_str());
       }
     }
+
+    if (tp->is_monst()) {
+      if (! tp->collision_hit_priority()) {
+        DIE("Tp %s is a monst that cannot be hit?", tp->name().c_str());
+      }
+    }
   }
 
   for (auto &tp : tp_name_map) {
