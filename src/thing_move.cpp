@@ -101,7 +101,11 @@ void Thing::move_finish(void)
       for (auto p1 : get_aip()->move_path) {
         s += p1.to_string() + " ";
       }
-      log("End of move, moves left: %s", s.c_str());
+      if (s.empty()) {
+        log("End of move");
+      } else {
+        log("End of move, moves left: %s", s.c_str());
+      }
     }
 
     if (! get_aip()->move_path.size() && (get_infop()->monst_state == MONST_STATE_MOVING)) {
@@ -639,10 +643,10 @@ void Thing::update_interpolated_position(void)
 
 void Thing::update_pos(point to, bool immediately)
 {
-  TRACE_NO_INDENT();
   if (! is_hidden) {
     dbg("Update pos to %d,%d", to.x, to.y);
   }
+  TRACE_AND_INDENT();
 
   point new_at((int) to.x, (int) to.y);
   if (level->is_oob(new_at)) {
@@ -826,12 +830,12 @@ void Thing::move_to_immediately(point to)
 
 bool Thing::move_to_try(const point &nh, const bool escaping, bool check_only)
 {
-  TRACE_NO_INDENT();
   if (escaping) {
     dbg("Escape to attempt %d,%d", nh.x, nh.y);
   } else {
     dbg("Move to attempt %d,%d", nh.x, nh.y);
   }
+  TRACE_AND_INDENT();
 
   //
   // Check to see if moving to this new location will hit something
@@ -846,7 +850,8 @@ bool Thing::move_to_try(const point &nh, const bool escaping, bool check_only)
     // see if we can hit the thing that is in the way.
     //
     dbg("Cannot move to %d,%d will hit obstacle or monst", nh.x, nh.y);
-    TRACE_NO_INDENT();
+    TRACE_AND_INDENT();
+
     bool target_attacked = false;
     bool target_overlaps = false;
     collision_check_and_handle_nearby(nh, &target_attacked, &target_overlaps);
@@ -877,29 +882,29 @@ bool Thing::move_to_try(const point &nh, const bool escaping, bool check_only)
 
 bool Thing::move_to_or_attack(const point &nh)
 {
-  TRACE_NO_INDENT();
   dbg("Move to or attack");
+  TRACE_AND_INDENT();
   return move_to_try(nh, false, false);
 }
 
 bool Thing::move_to_or_escape(const point &nh)
 {
-  TRACE_NO_INDENT();
   dbg("Move to or escape");
+  TRACE_AND_INDENT();
   return move_to_try(nh, true, false);
 }
 
 bool Thing::move_to_or_attack_check_only(const point &nh)
 {
-  TRACE_NO_INDENT();
   dbg("Move to or attack");
+  TRACE_AND_INDENT();
   return move_to_try(nh, false, true);
 }
 
 bool Thing::move_to_or_escape_check_only(const point &nh)
 {
-  TRACE_NO_INDENT();
   dbg("Move to or escape");
+  TRACE_AND_INDENT();
   return move_to_try(nh, true, true);
 }
 

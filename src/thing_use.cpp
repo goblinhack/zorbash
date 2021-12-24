@@ -260,6 +260,8 @@ bool Thing::use(Thingp what, int preferred_equip)
   dbg("Trying to use: %s", what->to_short_string().c_str());
   TRACE_AND_INDENT();
 
+  bool ret = true;
+
   //
   // If dropping an in transit item into an eqiup slot, then the owner is not set
   //
@@ -311,7 +313,7 @@ bool Thing::use(Thingp what, int preferred_equip)
         equip(what, preferred_equip);
       }
     }
-    fire_at_and_choose_target(what);
+    ret = fire_at_and_choose_target(what);
     if (is_player()) {
       level->describe(what);
     }
@@ -379,5 +381,5 @@ bool Thing::use(Thingp what, int preferred_equip)
       game->tick_begin("player tried to use something they could not");
     }
   }
-  return true;
+  return ret;
 }

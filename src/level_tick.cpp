@@ -531,6 +531,9 @@ bool Level::tick(void)
   bool tick_done = game->tick_end();
 
   if (tick_done) {
+    LOG("Level tick done");
+    TRACE_AND_INDENT();
+
     handle_all_pending_things();
     things_gc_if_possible();
     create_wandering_monster();
@@ -568,8 +571,13 @@ bool Level::tick(void)
 
   if (tick_done) {
     if (game->robot_mode) {
+      LOG("Level tick done and in robot mode");
+      TRACE_AND_INDENT();
+
       if (game->robot_mode_tick_requested) {
         LOG("Robot: tick requested");
+        TRACE_AND_INDENT();
+
         game->robot_mode_tick_requested = false;
         if (player) {
           if (game->robot_mode) {
@@ -581,6 +589,9 @@ bool Level::tick(void)
       }
 
       if (game->tick_requested.empty()) {
+        LOG("Robot: no tick requested");
+        TRACE_AND_INDENT();
+
         //
         // We can get stuck with timing with the inventory open. So make sure we close it.
         //

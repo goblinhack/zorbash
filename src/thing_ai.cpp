@@ -1863,7 +1863,7 @@ bool Thing::ai_tick(bool recursing)
               auto curr_wand_val = curr_wand ? maybe_itemp_value(curr_wand) : 0;
               auto best_wand_val = maybe_itemp_value(best_wand);
 
-              if (! curr_wand) {
+              if (! curr_wand || ! curr_wand->is_wand()) {
                 AI_LOG("Idle, have a wand, but not used", best_wand);
                 if (use(best_wand, MONST_EQUIP_WEAPON)) {
                   AI_LOG("Change wand", best_wand);
@@ -1873,7 +1873,7 @@ bool Thing::ai_tick(bool recursing)
                   return true;
                 }
               } else if (best_wand_val > curr_wand_val) {
-                AI_LOG("Idle, change from Old wand", curr_wand);
+                AI_LOG("Idle, change from old wand", curr_wand);
                 if (use(best_wand, MONST_EQUIP_WEAPON)) {
                   AI_LOG("Idle, change to new wand", best_wand);
                   if (is_player()) {
