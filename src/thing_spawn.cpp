@@ -67,6 +67,10 @@ bool Thing::spawn_next_to(const std::string &what)
       continue;
     }
 
+    if (ai_obstacle_for_me(p)) {
+      continue;
+    }
+
     possible.push_back(p);
   }
 
@@ -139,6 +143,10 @@ bool Thing::spawn_next_to_or_on_monst(const std::string &what)
     }
 
     if (collision_obstacle(p)) {
+      continue;
+    }
+
+    if (ai_obstacle_for_me(p)) {
       continue;
     }
 
@@ -311,13 +319,14 @@ int Thing::spawn_randomly_in_radius_range(const std::string &what, int amount, u
     return false;
   }
 
-  dbg("Spawn %s in radius range %u to %u", what.c_str(), radius_min, radius_max);
+  dbg("Spawn randomly %s in radius range %u to %u", what.c_str(), radius_min, radius_max);
 
   //
   // Don't spawn too many monsts
   //
   if (tpp->is_monst()) {
     if (level->monst_count >= LEVELS_MONST_COUNT) {
+      dbg("Too many monsters");
       return false;
     }
   }
@@ -357,6 +366,14 @@ int Thing::spawn_randomly_in_radius_range(const std::string &what, int amount, u
       }
 
       if (tpp->is_disliked_by_me(level, spawn_at)) {
+        continue;
+      }
+
+      if (collision_obstacle(spawn_at)) {
+        continue;
+      }
+
+      if (ai_obstacle_for_me(spawn_at)) {
         continue;
       }
 
@@ -410,6 +427,10 @@ bool Thing::spawn_fire(const std::string &what)
     }
 
     if (collision_obstacle(p)) {
+      continue;
+    }
+
+    if (ai_obstacle_for_me(p)) {
       continue;
     }
 

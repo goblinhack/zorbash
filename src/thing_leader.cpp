@@ -299,6 +299,8 @@ void Thing::leader_tick(void)
     return;
   }
 
+  log("Leader tick");
+
   Thingp leader = nullptr;
   auto   allies = tp()->allies;
 
@@ -336,14 +338,15 @@ void Thing::leader_tick(void)
   FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL_END(level)
 
   if (! leader) {
+    log("No leader");
     return;
   }
 
   if (leader == this) {
-    return;
+    log("I am the leader");
+  } else {
+    log("Is being led by %s dist %f", leader->to_string().c_str(), distance(leader->curr_at, curr_at));
   }
-
-  log("Is being led by %s dist %f", leader->to_string().c_str(), distance(leader->curr_at, curr_at));
 
   set_leader(leader);
 }

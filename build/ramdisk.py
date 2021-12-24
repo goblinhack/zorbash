@@ -22,27 +22,27 @@ root = pathlib.Path(".")
 # target. If so we need to rebuild the ramdisk.
 #
 try:
-    with open('zorbash-game') as unused:
+    with open("zorbash-game") as unused:
         newer = False
-        for filepath in root.rglob(r'data/fonts/*.tga'):
+        for filepath in root.rglob(r"data/fonts/*.tga"):
             if os.path.getctime("zorbash-game") < os.path.getctime(filepath):
                 print("{} is newer".format(filepath))
                 newer = True
                 break
 
-        for filepath in root.rglob(r'data/gfx/*.tga'):
+        for filepath in root.rglob(r"data/gfx/*.tga"):
             if os.path.getctime("zorbash-game") < os.path.getctime(filepath):
                 print("{} is newer".format(filepath))
                 newer = True
                 break
 
-        for filepath in root.rglob(r'data/sounds/*/*/.wav'):
+        for filepath in root.rglob(r"data/sounds/*/*/.wav"):
             if os.path.getctime("zorbash-game") < os.path.getctime(filepath):
                 print("{} is newer".format(filepath))
                 newer = True
                 break
 
-        for filepath in root.rglob(r'data/music/*.ogg'):
+        for filepath in root.rglob(r"data/music/*.ogg"):
             if os.path.getctime("zorbash-game") < os.path.getctime(filepath):
                 print("{} is newer".format(filepath))
                 newer = True
@@ -61,19 +61,19 @@ files = collections.defaultdict(list)
 #
 # For each .tga convert it to assembly to be included in the build
 #
-for filepath in root.rglob(r'data/gfx/*.tga'):
+for filepath in root.rglob(r"data/gfx/*.tga"):
     files[filepath.parent].append(filepath.name)
     number_of_files_to_add_to_ramdisk += 1
 
-for filepath in root.rglob(r'data/fonts/*.tga'):
+for filepath in root.rglob(r"data/fonts/*.tga"):
     files[filepath.parent].append(filepath.name)
     number_of_files_to_add_to_ramdisk += 1
 
-for filepath in root.rglob(r'data/sounds/*/*.wav'):
+for filepath in root.rglob(r"data/sounds/*/*.wav"):
     files[filepath.parent].append(filepath.name)
     number_of_files_to_add_to_ramdisk += 1
 
-for filepath in root.rglob(r'data/music/*.ogg'):
+for filepath in root.rglob(r"data/music/*.ogg"):
     files[filepath.parent].append(filepath.name)
     number_of_files_to_add_to_ramdisk += 1
 
@@ -98,7 +98,7 @@ for record_number, (folder, filenames) in enumerate(sorted(files.items())):
             myfile.write(".align 4\n")
             myfile.write(".globl data_{}_start_\n".format(c_filename))
             myfile.write("data_{}_start_:\n".format(c_filename))
-            myfile.write(".incbin \"../{}\"\n".format(rel_path_filename))
+            myfile.write('.incbin "../{}"\n'.format(rel_path_filename))
             myfile.write(".align 4\n")
             myfile.write(".globl data_{}_end_\n".format(c_filename))
             myfile.write("data_{}_end_:\n".format(c_filename))
@@ -109,7 +109,7 @@ for record_number, (folder, filenames) in enumerate(sorted(files.items())):
 # the files
 #
 with open("src/ramdisk_data.cpp".format(ram_file), "w") as myfile:
-    myfile.write("#include \"my_ramdisk.hpp\"")
+    myfile.write('#include "my_ramdisk.hpp"')
     myfile.write("\n")
     myfile.write("\n")
     myfile.write("void ramdisk_init (void)\n")
@@ -128,14 +128,14 @@ with open("src/ramdisk_data.cpp".format(ram_file), "w") as myfile:
             rel_path_filename = os.path.join(folder, orig_filename)
 
             myfile.write("    {\n")
-            myfile.write("        extern unsigned char *data_{}_start_\n           asm(\"data_{}_start_\");\n".format(c_filename, c_filename))
-            myfile.write("        extern unsigned char *data_{}_end_\n           asm(\"data_{}_end_\");\n".format(c_filename, c_filename))
+            myfile.write('        extern unsigned char *data_{}_start_\n           asm("data_{}_start_");\n'.format(c_filename, c_filename))
+            myfile.write('        extern unsigned char *data_{}_end_\n           asm("data_{}_end_");\n'.format(c_filename, c_filename))
             myfile.write("        static const unsigned char *const start =\n           (const unsigned char *const) (char*)&data_{}_start_;\n".format(c_filename, c_filename))
             myfile.write("        static const unsigned char *const end   =\n           (const unsigned char *const) (char*)&data_{}_end_;\n".format(c_filename, c_filename))
             myfile.write("        ramdisk_t r;\n")
             myfile.write("        r.data = start;\n")
             myfile.write("        r.len = end - start;\n")
-            myfile.write("        ramdisk_data[\"{}\"] = r;\n".format(rel_path_filename))
+            myfile.write('        ramdisk_data["{}"] = r;\n'.format(rel_path_filename))
             myfile.write("    }\n")
             myfile.write("\n")
 

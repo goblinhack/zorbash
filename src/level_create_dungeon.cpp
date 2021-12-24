@@ -387,12 +387,7 @@ bool Level::create_dungeon(point3d at, int seed)
           if (dungeon->is_ascend_dungeon(x, y)) {
             auto t = thing_new("player2", point(x, y));
             {
-              auto W = thing_new("wand_energy", point(x, y));
-              t->carry(W);
-              t->enchant_without_stone(W);
-            }
-            {
-              auto W = thing_new("wand_fire", point(x, y));
+              auto W = thing_new("wand_lightning", point(x, y));
               t->carry(W);
               t->enchant_without_stone(W);
             }

@@ -1,27 +1,13 @@
 import my
 
 my.sound_load(volume=1.0, file="data/sounds/misc/clack.wav", name="bonk")
-my.sound_load(
-    volume=1.0, file="data/sounds/impacts/explosion_a.wav", name="explosion_a"
-)
-my.sound_load(
-    volume=1.0, file="data/sounds/impacts/explosion_b.wav", name="explosion_b"
-)
-my.sound_load(
-    volume=1.0, file="data/sounds/impacts/explosion_c.wav", name="explosion_c"
-)
-my.sound_load(
-    volume=1.0, file="data/sounds/impacts/explosion_d.wav", name="explosion_d"
-)
-my.sound_load(
-    volume=1.0, file="data/sounds/impacts/explosion_e.wav", name="explosion_e"
-)
-my.sound_load(
-    volume=1.0, file="data/sounds/abilities/lightning_a.wav", name="lightning_a"
-)
-my.sound_load(
-    volume=1.0, file="data/sounds/abilities/lightning_b.wav", name="lightning_b"
-)
+my.sound_load(volume=1.0, file="data/sounds/impacts/explosion_a.wav", name="explosion_a")
+my.sound_load(volume=1.0, file="data/sounds/impacts/explosion_b.wav", name="explosion_b")
+my.sound_load(volume=1.0, file="data/sounds/impacts/explosion_c.wav", name="explosion_c")
+my.sound_load(volume=1.0, file="data/sounds/impacts/explosion_d.wav", name="explosion_d")
+my.sound_load(volume=1.0, file="data/sounds/impacts/explosion_e.wav", name="explosion_e")
+my.sound_load(volume=1.0, file="data/sounds/abilities/lightning_a.wav", name="lightning_a")
+my.sound_load(volume=1.0, file="data/sounds/abilities/lightning_b.wav", name="lightning_b")
 my.sound_load(
     volume=0.25,
     file="data/sounds/impacts/437653__dersuperanton__moan-male-beat-punch.wav",

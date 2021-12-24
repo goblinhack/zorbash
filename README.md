@@ -4,13 +4,10 @@
 <!--                                                                                                                                              -->
 <!-- Next todo                                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
-<!-- - zx_thing carry                                                                                                                                -->
+<!-- - lightning damage                                                                                       -->
 <!-- - goblin totem                                           -->
 <!-- - pirate goblin random carry of gold                                                                                                                       -->
 <!-- - robot will loop on sewers                                                                           -->
-<!-- - lightning damage                                                                                       -->
-<!-- - fire damage                                                                                       -->
-<!-- - energy damage                                                                                       -->
 <!-- - necro ring                                                                                                                                 -->
 <!-- - giant spider web throw                                                                                                                     -->
 <!-- - spider ball anims                                                                                                                          -->
