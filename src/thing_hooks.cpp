@@ -131,7 +131,12 @@ void Thing::hooks_remove()
   //
   top_owner = get_top_owner(); // Intentional to update this
   if (top_owner) {
-    top_owner->drop_into_ether(this);
+    //
+    // Don't try to drop lasers; as they are also owned.
+    //
+    if (is_item()) {
+      top_owner->drop_into_ether(this);
+    }
   }
 
   if (get_immediate_manifestor_id().ok()) {
