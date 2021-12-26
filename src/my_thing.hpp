@@ -1602,7 +1602,6 @@ public:
   void killed(Thingp defeater, const char *reason);
   void killed(Thingp defeater, const std::string &reason);
   void lava_tick();
-  void leader_tick();
   void level_change(Levelp);
   void level_enter(void);
   void level_leave(void);

@@ -37,10 +37,8 @@ std::string Thing::to_string(void)
                            is_moving ? "/mv" : "", is_falling ? "/fall" : "", curr_at.x, curr_at.y));
   }
 
-  /*
-   * Makes debugs too long
-  if (! g_loading && get_leader()) {
-    auto l = get_leader();
+  auto l = get_leader();
+  if (! g_loading && l && (l != this)) {
     return (string_sprintf(
         "%" PRIx32 " %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s %d,%d l:%s", id.id, tpp->name().c_str(), is_dead ? "/dead" : "",
         is_scheduled_for_death ? "/dead-sched" : "", is_resurrecting ? "/resurrecting" : "",
@@ -50,6 +48,8 @@ std::string Thing::to_string(void)
         is_waiting_to_descend_dungeon ? "/des-dung" : "", is_waiting_to_descend_sewer ? "/des-sewer" : "",
         is_waiting_to_ascend_sewer ? "/asc-sewer" : "", curr_at.x, curr_at.y, l->to_string().c_str()));
   }
+  /*
+   * Makes debugs too long
    */
 
   if (! g_loading && get_immediate_owner()) {
@@ -156,9 +156,8 @@ std::string Thing::to_dbg_string(void)
       i_set_is_foilage ? ", i_set_is_foilage" : "", i_set_is_food ? ", i_set_is_food" : "",
       i_set_is_gold ? ", i_set_is_gold" : "", i_set_is_hazard ? ", i_set_is_hazard" : "",
       i_set_is_key ? ", i_set_is_key" : "", i_set_is_lava ? ", i_set_is_lava" : "",
-      i_set_is_light_blocker ? ", i_set_is_light_blocker" : "",
-      i_set_is_mob ? ", i_set_is_mob" : "", i_set_is_monst ? ", i_set_is_monst" : "",
-      i_set_is_obs_wall_or_door ? ", i_set_is_obs_wall_or_door" : "",
+      i_set_is_light_blocker ? ", i_set_is_light_blocker" : "", i_set_is_mob ? ", i_set_is_mob" : "",
+      i_set_is_monst ? ", i_set_is_monst" : "", i_set_is_obs_wall_or_door ? ", i_set_is_obs_wall_or_door" : "",
       i_set_is_obs_destructable ? ", i_set_is_obs_destructable" : "",
       i_set_is_poisonous_danger_level ? ", i_set_is_poisonous_danger_level" : "",
       i_set_is_potion ? ", i_set_is_potion" : "", i_set_is_ripple ? ", i_set_is_ripple" : "",
@@ -221,9 +220,8 @@ std::string Thing::to_dbg_saved_string(void)
       i_set_is_foilage ? ", i_set_is_foilage" : "", i_set_is_food ? ", i_set_is_food" : "",
       i_set_is_gold ? ", i_set_is_gold" : "", i_set_is_hazard ? ", i_set_is_hazard" : "",
       i_set_is_key ? ", i_set_is_key" : "", i_set_is_lava ? ", i_set_is_lava" : "",
-      i_set_is_light_blocker ? ", i_set_is_light_blocker" : "",
-      i_set_is_mob ? ", i_set_is_mob" : "", i_set_is_monst ? ", i_set_is_monst" : "",
-      i_set_is_obs_wall_or_door ? ", i_set_is_obs_wall_or_door" : "",
+      i_set_is_light_blocker ? ", i_set_is_light_blocker" : "", i_set_is_mob ? ", i_set_is_mob" : "",
+      i_set_is_monst ? ", i_set_is_monst" : "", i_set_is_obs_wall_or_door ? ", i_set_is_obs_wall_or_door" : "",
       i_set_is_obs_destructable ? ", i_set_is_obs_destructable" : "",
       i_set_is_poisonous_danger_level ? ", i_set_is_poisonous_danger_level" : "",
       i_set_is_potion ? ", i_set_is_potion" : "", i_set_is_ripple ? ", i_set_is_ripple" : "",

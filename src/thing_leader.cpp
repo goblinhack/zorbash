@@ -185,22 +185,30 @@ void Thing::set_leader(Thingp leader)
     }
   }
 
-  if (leader) {
-    set_leader_id(leader->id);
-    leader->incr_follower_count();
-    if (leader->get_follower_count() == 1) {
-      leader->on_you_are_declared_leader();
-    }
-    dbg("Leader set");
-  } else {
-    set_leader_id(NoThingId);
-    if (old_leader) {
-      old_leader->decr_follower_count();
-    }
-    dbg("Leader unset");
+  if (old_leader) {
+    old_leader->decr_follower_count();
   }
 
-  on_you_are_declared_a_follower(leader);
+  if (leader) {
+    if (leader == this) {
+      //
+      // I am the leader
+      //
+      dbg("I am the leader");
+      leader->on_you_are_declared_leader();
+    } else {
+      //
+      // You are being led
+      //
+      set_leader_id(leader->id);
+      leader->incr_follower_count();
+      dbg("Leader set");
+      on_you_are_declared_a_follower(leader);
+    }
+  } else {
+    set_leader_id(NoThingId);
+    dbg("Leader unset");
+  }
 }
 
 void Thing::remove_leader(void)
@@ -281,74 +289,6 @@ void Thing::notify_followers_of_death_of_my_leader(void)
       }
     }
   }
-}
-
-void Thing::leader_tick(void)
-{
-  TRACE_NO_INDENT();
-
-  if (! is_able_to_follow()) {
-    return;
-  }
-
-  if (get_follower_count()) {
-    return;
-  }
-
-  if (get_leader()) {
-    return;
-  }
-
-  log("Leader tick");
-
-  Thingp leader = nullptr;
-  auto   allies = tp()->allies;
-
-  FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL(level, t)
-  {
-    if (! t->is_able_to_follow()) {
-      continue;
-    }
-
-    //
-    // If a leader is too far away, ignore
-    //
-    if (distance(t->curr_at, curr_at) > get_distance_recruitment_max()) {
-      continue;
-    }
-
-    if (t->get_follower_count()) {
-      leader = t;
-      break;
-    }
-
-    if (allies.find(t->tp()) == allies.end()) {
-      continue;
-    }
-
-    if (! leader) {
-      leader = t;
-      continue;
-    }
-
-    if (t->get_danger_current_level() > leader->get_danger_current_level()) {
-      leader = t;
-    }
-  }
-  FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL_END(level)
-
-  if (! leader) {
-    log("No leader");
-    return;
-  }
-
-  if (leader == this) {
-    log("I am the leader");
-  } else {
-    log("Is being led by %s dist %f", leader->to_string().c_str(), distance(leader->curr_at, curr_at));
-  }
-
-  set_leader(leader);
 }
 
 bool Thing::same_leader(Thingp it)
