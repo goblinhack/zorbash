@@ -3,7 +3,8 @@ import gob_all
 
 
 def on_you_are_declared_leader(me, x, y):
-    my.thing_polymorph(me, "gob_wizard")
+    my.thing_polymorph(me, "gob_pirate")
+    # my.thing_polymorph(me, "gob_wizard")
     # my.thing_polymorph(me, "gob_captain")
 
 

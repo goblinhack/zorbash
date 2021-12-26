@@ -160,6 +160,9 @@ class Tp:
     def set_long_text_description(self, value):
         my.tp_set_long_text_description(self, value)
 
+    def set_long_text_description_extra(self, value):
+        my.tp_set_long_text_description_extra(self, value)
+
     def set_text_unused1(self, value):
         my.tp_set_text_unused1(self, value)
 

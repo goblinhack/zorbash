@@ -129,6 +129,11 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
   } else {
     wid_popup_window->log(tp->long_text_description(), true);
     wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
+
+    if (! tp->long_text_description_extra().empty()) {
+      wid_popup_window->log(tp->long_text_description_extra(), true);
+      wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
+    }
   }
 
   wid_thing_info_add_enchant(wid_popup_window, t);
@@ -1112,7 +1117,7 @@ void Game::wid_thing_info_add_strength(WidPopup *w, Thingp t)
 
   if (t->is_alive_monst() || t->is_player()) {
     auto stat = t->get_stat_strength();
-    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Strength               %2d%3s", stat,
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Strength 2             %2d%3s", stat,
              stat_to_bonus_slash_str(stat).c_str());
     w->log(tmp);
   }

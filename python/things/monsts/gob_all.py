@@ -40,6 +40,7 @@ def tp_init(name, text_name):
     mytp.set_capacity_width(10)
     mytp.set_collateral_damage_pct(50)
     mytp.set_collision_check(True)
+    mytp.set_long_text_description("Goblins are small, green skinned beings that lair in caves, abandoned mines, despoiled dungeons and other dismal settings, otherwise known as their homes. They spend their time defending their natural habitat from invading marauders like you. However, they usually carry some meagre amounts of gold, dug out from the depths with their bare, shaking hands. Best to find out...")
     mytp.set_collision_hit_priority(10)
     mytp.set_damage_bite_chance_d1000(100)
     mytp.set_damage_bite_dice("1d6+2")

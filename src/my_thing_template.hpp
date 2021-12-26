@@ -447,6 +447,7 @@ private:
   std::string _lifespan_dice_str;
   std::string _light_color;
   std::string _long_text_description;
+  std::string _long_text_description_extra;
   std::string _name;
   std::string _nutrition_dice_str;
   std::string _on_born_do;
@@ -663,6 +664,7 @@ public:
   const std::string &laser_name(void) const { return _laser_name; }
   const std::string &light_color(void) const { return _light_color; }
   const std::string &long_text_description(void) const { return _long_text_description; }
+  const std::string &long_text_description_extra(void) const { return _long_text_description_extra; }
   const std::string &name(void) const { return _name; }
   const std::string &on_born_do(void) const { return _on_born_do; }
   const std::string &on_damage_acid_do(void) const { return _on_damage_acid_do; }
@@ -1381,6 +1383,7 @@ public:
   void set_light_color(const std::string &v) { _light_color = v; }
   void set_light_strength(int v) { _light_strength = v; }
   void set_long_text_description(const std::string &v) { _long_text_description = v; }
+  void set_long_text_description_extra(const std::string &v) { _long_text_description_extra = v; }
   void set_minion_limit(int v) { _minion_limit = v; }
   void set_monst_size(int v) { _monst_size = v; }
   void set_name(const std::string &v) { _name = v; }

@@ -561,6 +561,7 @@ public:
   const std::string &laser_name(void);
   const std::string &light_color(void);
   const std::string &long_text_description(void);
+  const std::string &long_text_description_extra(void);
   const std::string &name(void);
   const std::string &on_born_do(void);
   const std::string &on_damage_acid_do(void);

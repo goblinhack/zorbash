@@ -4,16 +4,16 @@ import gob_all
 
 def on_death_of_a_follower(me, x, y):
     if not my.thing_is_dead_or_dying(me):
-        my.topcon("The goblin leader cries out in rage!")
+        my.topcon("The goblin pirate cries out: Aaar!")
 
 
 def tp_init(name, text_name):
     mytp = gob_all.tp_init(name, text_name)
-    mytp.set_long_text_description("Goblins are small, green skinned beings that lair in caves, abandoned mines, despoiled dungeons and other dismal settings, otherwise known as their homes. They spend their time defending their natural habitat from invading marauders like you. However, they usually carry some meagre amounts of gold, dug out from the depths with their bare, shaking hands. Best to find out... This particular goblin has risen through the ranks. As tough as stone nails in a stone coffin, this goblin is not prepared to take any of your cheek.")
+    mytp.set_long_text_description_extra("This particular goblin was once a ruthless adventurer who plundered the seas in their mighty pirate ship, but due to a series of unfortunate and inexplicable events has now found themselves wandering the halls of this dungeon looking for the odd piece of eight.")
     mytp.set_on_death_of_a_follower_do("me.on_death_of_a_follower()")
-    mytp.set_text_description("A grizzled war-weary goblin.")
+    mytp.set_text_description("A one-eyed pirate goblin.")
     mytp.set_is_carrier_of_treasure_class_b(True)
-    mytp.set_stat_strength(12)
+    mytp.set_stat_strength(14)
     mytp.set_health_initial_dice("2d10+4")
     mytp.set_is_able_to_use_weapons(True)
 
@@ -35,7 +35,7 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="gob_leader", text_name="goblin leader")
+    tp_init(name="gob_pirate", text_name="goblin pirate")
 
 
 init()
