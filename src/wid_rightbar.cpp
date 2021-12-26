@@ -3,6 +3,7 @@
 // See the README.md file for license info.
 //
 
+#include "my_backtrace.hpp"
 #include "my_game.hpp"
 #include "my_monst.hpp"
 #include "my_ptrcheck.hpp"
@@ -10,7 +11,6 @@
 #include "my_string.hpp"
 #include "my_sys.hpp"
 #include "my_thing.hpp"
-#include "my_backtrace.hpp"
 #include "my_ui.hpp"
 #include "my_vector_bounds_check.hpp"
 #include "my_wid_buffbox.hpp"
@@ -297,8 +297,8 @@ static bool wid_rightbar_create(void)
     wid_set_shape_none(w);
 
     char tmp[ UI_SIDEBAR_RIGHT_WIDTH + 1 ];
-    snprintf(tmp, sizeof(tmp) - 1, "   %2d   %2d   %2d", player->get_stat_attack_bonus(), player->get_stat_armor_class(),
-             player->get_stat_strength());
+    snprintf(tmp, sizeof(tmp) - 1, "   %2d   %2d   %2d", player->get_stat_attack_bonus(),
+             player->get_stat_armor_class(), player->get_stat_strength());
     wid_set_text(w, tmp);
     wid_set_text_lhs(w, true);
   }
@@ -705,11 +705,11 @@ static bool wid_rightbar_create(void)
   //
   // Map
   //
-  y_at += 9;
+  y_at += 8;
   {
     auto  w  = wid_new_container(wid_rightbar, "minimap wid");
     point tl = make_point(0, y_at);
-    point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at + UI_SIDEBAR_RIGHT_WIDTH - 1);
+    point br = make_point(UI_SIDEBAR_RIGHT_WIDTH, y_at + UI_SIDEBAR_RIGHT_WIDTH);
 
     wid_set_pos(w, tl, br);
     wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);

@@ -30,6 +30,11 @@ def init_solid():
 
 
 @timeme
+def init_treasure_map():
+    my.tex_load(file="data/gfx/treasure_map.tga", name="treasure_map")
+
+
+@timeme
 def init_light():
     my.tex_load(file="data/gfx/light.tga", name="light")
     my.tex_load(file="data/gfx/glow.tga", name="glow")
@@ -10731,6 +10736,7 @@ init_laser_light_tiles()
 init_light()
 init_projectile_fire_tiles()
 init_solid()
+init_treasure_map()
 init_tiles1_floor()
 init_tiles1_monsts_and_items()
 init_tiles1_walls()
