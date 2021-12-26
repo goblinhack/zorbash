@@ -4,11 +4,10 @@
 <!--                                                                                                                                              -->
 <!-- Next todo                                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
-<!-- - lightning damage                                                                                       -->
-<!-- - goblin totem                                           -->
 <!-- - pirate goblin random carry of gold                                                                                                                       -->
+<!-- - pirate map ?                                                                                                                                             -->
+<!-- - necro protection ring                                                                                                                                 -->
 <!-- - robot will loop on sewers                                                                           -->
-<!-- - necro ring                                                                                                                                 -->
 <!-- - giant spider web throw                                                                                                                     -->
 <!-- - spider ball anims                                                                                                                          -->
 <!-- - antipoison potion                                                                                                                          -->
@@ -19,6 +18,7 @@
 <!-- - when a monst ascends, randomly place it                                                                -->
 <!-- - AI if you see a potion of health, drop food in preference?                                                                                 -->
 <!-- - AI did not pick up enchantstone due to space                                                                                               -->
+<!-- - ogre totem                                           -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Level                                                                                                                                        -->
