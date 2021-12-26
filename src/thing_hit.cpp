@@ -918,8 +918,12 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     //
     auto reason = "by " + defeater;
 
+    if (real_hitter->is_monst() || real_hitter->is_player()) {
+      reason = "killed by " + defeater;
+    }
+
     if ((real_hitter->curr_at == curr_at) && real_hitter->is_engulfer()) {
-      reason = "in the bowels of " + defeater;
+      reason = "digested in the bowels of " + defeater;
     }
 
     if (real_hitter == this) {

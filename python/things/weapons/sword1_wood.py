@@ -40,14 +40,14 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_treasure_type(True)
     mytp.set_is_usable(True)
     mytp.set_is_weapon(True)
-    mytp.set_is_wood(True)
+    mytp.set_is_wooden(True)
     mytp.set_item_height(4)
     mytp.set_item_width(4)
-    mytp.set_long_text_description("A wood short sword. Ideal for play fighting and not much else.")
+    mytp.set_long_text_description("A wooden short sword. Ideal for play fighting and not much else.")
     mytp.set_on_use_do("me.on_use()")
     mytp.set_stat_attack_bonus(10)  # 10, means no bonus
     mytp.set_text_a_or_an("a")
-    mytp.set_text_description("Thy wood means of justice.")
+    mytp.set_text_description("Thy wooden means of justice.")
     mytp.set_text_enchant("increase damage by 2")
     mytp.set_z_depth(my.MAP_DEPTH_OBJ)
     mytp.set_z_prio(my.MAP_PRIO_BEHIND)
@@ -60,8 +60,8 @@ def tp_init(name, text_name, short_text_name):
 def init():
     tp_init(
         name="sword1_wood",
-        text_name="wood short sword",
-        short_text_name="wood short sword",
+        text_name="wooden short sword",
+        short_text_name="wooden short sword",
     )
 
 

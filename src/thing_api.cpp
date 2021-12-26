@@ -1628,10 +1628,10 @@ int Thing::is_metal(void)
   return (tp()->is_metal());
 }
 
-int Thing::is_wood(void)
+int Thing::is_wooden(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_wood());
+  return (tp()->is_wooden());
 }
 
 int Thing::unused_flag5(void)

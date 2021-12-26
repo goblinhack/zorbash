@@ -1224,7 +1224,7 @@ public:
   int is_wand(void);
   int is_water(void);
   int is_weapon(void);
-  int is_wood(void);
+  int is_wooden(void);
   int item_count_excluding_charges(Tpp item);
   int item_count_including_charges(Tpp item);
   int item_enchant_count(const uint32_t slot);

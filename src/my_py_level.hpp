@@ -245,7 +245,7 @@ PyObject *level_is_wand_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_water_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_weapon_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_able_to_use_rings_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_wood_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_wooden_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_able_to_jump_escape_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_hunger_clock_tick_frequency_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_able_to_follow_at(PyObject *obj, PyObject *args, PyObject *keywds);

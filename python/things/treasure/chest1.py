@@ -47,7 +47,7 @@ def tp_init(name, text_name):
     mytp.set_is_treasure_class_a(True)
     mytp.set_is_treasure_class_b(True)
     mytp.set_is_treasure_type(True)
-    mytp.set_is_wood(True)
+    mytp.set_is_wooden(True)
     mytp.set_item_height(4)
     mytp.set_item_width(4)
     mytp.set_long_text_description("A small treasure chest.")

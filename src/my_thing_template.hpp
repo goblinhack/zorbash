@@ -375,7 +375,7 @@ private:
   int _is_wall_dungeon {};
   int _is_wand {};
   int _is_weapon {};
-  int _is_wood {};
+  int _is_wooden {};
   int _item_height {};
   int _item_width {};
   int _light_strength {};
@@ -1032,7 +1032,7 @@ public:
   int is_wall(void) const { return _is_wall; }
   int is_wand(void) const { return _is_wand; }
   int is_weapon(void) const { return _is_weapon; }
-  int is_wood(void) const { return _is_wood; }
+  int is_wooden(void) const { return _is_wooden; }
   int item_height(void) const { return _item_height ? _item_height : 1; }
   int item_width(void) const { return _item_width ? _item_width : 1; }
   int light_strength(void) const { return _light_strength; }
@@ -1374,7 +1374,7 @@ public:
   void set_is_wall(int v) { _is_wall = v; }
   void set_is_wand(int v) { _is_wand = v; }
   void set_is_weapon(int v) { _is_weapon = v; }
-  void set_is_wood(int v) { _is_wood = v; }
+  void set_is_wooden(int v) { _is_wooden = v; }
   void set_item_height(int v) { _item_height = v; }
   void set_item_width(int v) { _item_width = v; }
   void set_laser_name(const std::string &v) { _laser_name = v; }
