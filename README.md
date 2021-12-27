@@ -1,6 +1,7 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
 <!-- - click anywhere on treasure map                                                                                                             -->
+<!-- - some gold coins detail                                                                                                                     -->
 <!-- - when a monst ascends, randomly place it                                                                                                    -->
 <!-- - AI if you see a potion of health, drop food in preference?                                                                                 -->
 <!-- - AI did not pick up enchantstone due to space                                                                                               -->
@@ -10,8 +11,10 @@
 <!-- Next todo                                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
 <!-- - monster AI with treasure map                                                                                                               -->
-<!-- - some gold coins detail                                                                                                                     -->
 <!-- - pirate sword                                                                                                                               -->
+<!-- - goblin oldster                                                                                                                             -->
+<!-- - goblin priest                                                                                                                              -->
+<!-- - goblin necro                                                                                                                               -->
 <!-- - giant spider web throw                                                                                                                     -->
 <!-- - spider ball anims                                                                                                                          -->
 <!-- - equip armour etc                                                                                                                           -->
