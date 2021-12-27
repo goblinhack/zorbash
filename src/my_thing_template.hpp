@@ -574,7 +574,7 @@ public:
   const int get_damage_necrosis(void) const;
   const int get_damage_poison(void) const;
   const int get_health_initial(void) const;
-  const int get_idle_tick_frequency(void) const;
+  const int get_on_idle_tick_frequency(void) const;
   const int get_spawn_group_size(void) const;
   const int lifespan(void) const;
   const int nutrition(void) const;

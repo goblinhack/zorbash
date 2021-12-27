@@ -30,7 +30,7 @@ const std::string &Thing::get_on_idle_tick_frequency_dice_str(void)
   return (tp()->on_idle_tick_frequency_dice_str());
 }
 
-int Thing::get_idle_tick_frequency(void)
+int Thing::get_on_idle_tick_frequency(void)
 {
   TRACE_NO_INDENT();
   return (tp()->on_idle_tick_frequency_dice().roll());

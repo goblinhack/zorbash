@@ -868,7 +868,7 @@ public:
   int get_hunger_clock_tick_frequency(void);
   int get_hunger_health_pct(void);
   int get_idle_count(void);
-  int get_idle_tick_frequency(void);
+  int get_on_idle_tick_frequency(void);
   int get_initial_charge_count(void);
   int get_initial_light_strength(void);
   int get_keys(void);

@@ -21,7 +21,7 @@ bool Thing::idle_check(void)
   TRACE_NO_INDENT();
 
   if (! std::empty(get_on_idle_tick_frequency_dice_str())) {
-    auto roll = get_idle_tick_frequency();
+    auto roll = get_on_idle_tick_frequency();
     // con("%d %d roll %d", game->tick_current, get_tick_last_did_something(), roll);
     if (game->tick_current - get_tick_last_did_something() >= (unsigned int) roll) {
       // con("%d %d roll %d tick", game->tick_current, get_tick_last_did_something(), roll);

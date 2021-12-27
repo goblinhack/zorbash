@@ -14,7 +14,7 @@
 // Dice
 //
 const Dice        &Tp::on_idle_tick_frequency_dice(void) const { return _on_idle_tick_frequency_dice; }
-const int          Tp::get_idle_tick_frequency(void) const { return _on_idle_tick_frequency_dice.roll(); }
+const int          Tp::get_on_idle_tick_frequency(void) const { return _on_idle_tick_frequency_dice.roll(); }
 const std::string &Tp::on_idle_tick_frequency_dice_str(void) const { return _on_idle_tick_frequency_dice_str; }
 void               Tp::set_on_idle_tick_frequency_dice(const std::string &v)
 {
