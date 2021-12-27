@@ -482,7 +482,7 @@ bool Thing::equip(Thingp item, int equip)
       }
     }
   } else if (is_monst()) {
-    if (level->player && (level->tick_created > game->tick_current)) {
+    if (level->player && (level->tick_created < game->tick_current)) {
       if (get(level->player->get_aip()->can_see_currently.can_see, curr_at.x, curr_at.y)) {
         TOPCON("%s wields %s.", text_The().c_str(), item->text_the().c_str());
       } else if (item->is_weapon()) {

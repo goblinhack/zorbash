@@ -274,7 +274,7 @@ bool Thing::collision_check_do(void)
 
 void Thing::tick(void)
 {
-  dbg("Tick");
+  dbg("Tick %d", game->tick_current);
   TRACE_AND_INDENT();
 
   update_interpolated_position();

@@ -266,7 +266,7 @@ PyObject *level_unused_flag3_at(PyObject *obj, PyObject *args, PyObject *keywds)
 PyObject *level_unused_flag4_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag5_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag6_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag7_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_treasure_map_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_able_to_use_wands_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_aquatic_at(PyObject *obj, PyObject *args, PyObject *keywds);
 #endif

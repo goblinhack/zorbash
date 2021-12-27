@@ -44,6 +44,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_usable(True)
     mytp.set_item_height(4)
     mytp.set_item_width(4)
+    mytp.set_is_combustible(True)
     mytp.set_long_text_description("Use this magical stone to learn some new skills into your brain matter thing.")
     mytp.set_normal_placement_rules(True)
     mytp.set_on_fall_do("me.on_fall()")

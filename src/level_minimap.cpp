@@ -51,7 +51,14 @@ void Level::update_minimap(bool showing_two_levels, bool show_faded)
   float dx = 1;
   float dy = 1;
 
-  bool        has_treasure_map = false;
+  //
+  // Check if carrying a treasure map
+  //
+  bool has_treasure_map = false;
+  if (player && (player->get_treasure_map_count() > 0)) {
+    has_treasure_map = true;
+  }
+
   static Texp treasure_map;
   static int  treasure_map_id;
   if (! treasure_map) {

@@ -126,6 +126,7 @@ public:
   int stat_strength       = {};
   int submerged_offset    = {}; // Pixels
   int tick_resurrect_when = {};
+  int treasure_map_count  = {};
 
   std::string msg;         // Text that floats on screen
   std::string dead_reason; // What defeated me

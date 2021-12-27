@@ -132,6 +132,7 @@ bool Thing::drop(Thingp what, Thingp target, bool stolen)
   what->is_being_dropped = false;
   what->set_tick_last_dropped(game->tick_current);
   check_all_carried();
+  treasure_map_check();
 
   return true;
 }
@@ -196,6 +197,7 @@ bool Thing::drop_into_ether(Thingp what)
 
   dbg("Dropped %s into the ether", what->to_short_string().c_str());
   check_all_carried();
+  treasure_map_check();
 
   return true;
 }
@@ -260,6 +262,7 @@ bool Thing::drop_from_ether(Thingp what)
   }
   what->set_tick_last_dropped(game->tick_current);
   check_all_carried();
+  treasure_map_check();
 
   return true;
 }

@@ -1658,10 +1658,10 @@ int Thing::unused_flag6(void)
   return (tp()->unused_flag6());
 }
 
-int Thing::unused_flag7(void)
+int Thing::is_treasure_map(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag7());
+  return (tp()->is_treasure_map());
 }
 
 int Thing::is_able_to_use_wands(void)

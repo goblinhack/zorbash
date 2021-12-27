@@ -355,7 +355,7 @@ PyObject *thing_unused_flag3(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag4(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag5(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag6(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag7(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_treasure_map(PyObject *obj, PyObject *args, PyObject *keywds);
 
 PyObject *thing_get_damage_energy(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_get_damage_bite(PyObject *obj, PyObject *args, PyObject *keywds);

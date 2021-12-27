@@ -301,7 +301,7 @@ do
       set_unused_flag4 \
       set_unused_flag5 \
       set_unused_flag6 \
-      set_unused_flag7 \
+      set_is_treasure_map \
       set_is_able_to_use_wands \
       set_is_aquatic \
       set_on_death_is_open

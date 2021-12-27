@@ -3,6 +3,7 @@ import tp
 
 
 def spawn(me, x, y):
+    my.topcon("fire spawn")
     my.level_spawn_fire_around_thing(me, "small_fire")
 
 
@@ -29,7 +30,7 @@ def tp_init(name, text_name):
     mytp.set_lifespan_dice("1d20+20")
     mytp.set_light_color("yellow")
     mytp.set_light_strength(3)
-    mytp.set_on_idle_tick_frequency_dice("1d30+20:me.spawn()")
+    mytp.set_on_idle_tick_frequency_dice("1d10+10:me.spawn()")
     mytp.set_text_a_or_an("")
     mytp.set_text_description("Fire.")
     mytp.set_text_hits("burns")

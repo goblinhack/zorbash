@@ -67,42 +67,42 @@ std::istream &operator>>(std::istream &in, Bits< ThingInfop & > my)
   // v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v
   /////////////////////////////////////////////////////////////////////////
   // clang-format off
-   in >> bits(my.t->on_fire_id_anim);
-   in >> bits(my.t->owner_id);
-   in >> bits(my.t->manifestor_id);
-   in >> bits(my.t->leader_id);
-   in >> bits(my.t->spawner_owner_id);
-   in >> bits(my.t->light_col);
+   in >> bits(my.t->bounce_count);
    in >> bits(my.t->bounce_fade);
    in >> bits(my.t->bounce_height);
-   in >> bits(my.t->fadeup_fade);
-   in >> bits(my.t->fadeup_height);
-   in >> bits(my.t->fall_height);
-   in >> bits(my.t->wobble);
-   in >> bits(my.t->lunge_to);
-   in >> bits(my.t->last_failed_jump_at);
-
-   in >> bits(my.t->bounce_count);
    in >> bits(my.t->capacity_height);
    in >> bits(my.t->capacity_width);
    in >> bits(my.t->charge_count);
+   in >> bits(my.t->dead_reason);
    in >> bits(my.t->distance_throw);
    in >> bits(my.t->enchant);
    in >> bits(my.t->enchant_max);
+   in >> bits(my.t->fadeup_fade);
+   in >> bits(my.t->fadeup_height);
+   in >> bits(my.t->fall_height);
    in >> bits(my.t->follower_count);
    in >> bits(my.t->gold);
    in >> bits(my.t->health);
    in >> bits(my.t->health_max);
    in >> bits(my.t->keys);
+   in >> bits(my.t->last_failed_jump_at);
+   in >> bits(my.t->leader_id);
    in >> bits(my.t->lifespan);
+   in >> bits(my.t->light_col);
    in >> bits(my.t->light_strength);
+   in >> bits(my.t->lunge_to);
+   in >> bits(my.t->manifestor_id);
    in >> bits(my.t->minion_count);
    in >> bits(my.t->monst_state);
+   in >> bits(my.t->msg);
    in >> bits(my.t->necrosis);
+   in >> bits(my.t->on_fire_id_anim);
    in >> bits(my.t->owned_count);
+   in >> bits(my.t->owner_id);
    in >> bits(my.t->poison);
    in >> bits(my.t->score);
    in >> bits(my.t->spawned_count);
+   in >> bits(my.t->spawner_owner_id);
    in >> bits(my.t->stamina);
    in >> bits(my.t->stamina_max);
    in >> bits(my.t->stat_armor_class);
@@ -124,11 +124,15 @@ std::istream &operator>>(std::istream &in, Bits< ThingInfop & > my)
    in >> bits(my.t->stats19);
    in >> bits(my.t->stat_strength);
    in >> bits(my.t->submerged_offset);
-
-   in >> bits(my.t->distance_throw);
+   in >> bits(my.t->tick_last_did_something);
+   in >> bits(my.t->tick_last_dropped);
+   in >> bits(my.t->tick_last_escape);
+   in >> bits(my.t->tick_last_level_change);
+   in >> bits(my.t->tick_last_location_check);
    in >> bits(my.t->tick_resurrect_when);
-   in >> bits(my.t->msg);
-   in >> bits(my.t->dead_reason);
+   in >> bits(my.t->treasure_map_count);
+   in >> bits(my.t->wobble);
+   in >> bits(T); my.t->ts_anim_delay_end = load(T);
    in >> bits(T); my.t->ts_bounce_begin = load(T);
    in >> bits(T); my.t->ts_bounce_end = load(T);
    in >> bits(T); my.t->ts_fadeup_begin = load(T);
@@ -138,12 +142,6 @@ std::istream &operator>>(std::istream &in, Bits< ThingInfop & > my)
    in >> bits(T); my.t->ts_flip_start = load(T);
    in >> bits(T); my.t->ts_lunge_begin = load(T);
    in >> bits(T); my.t->ts_lunge_end = load(T);
-   in >> bits(T); my.t->ts_anim_delay_end = load(T);
-   in >> bits(my.t->tick_last_did_something);
-   in >> bits(my.t->tick_last_dropped);
-   in >> bits(my.t->tick_last_location_check);
-   in >> bits(my.t->tick_last_escape);
-   in >> bits(my.t->tick_last_level_change);
   // clang-format on
   /////////////////////////////////////////////////////////////////////////
   // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^

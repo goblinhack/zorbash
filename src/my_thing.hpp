@@ -853,6 +853,8 @@ public:
   int get_danger_initial_level(void);
   int get_enchant_max(void);
   int get_enchantstone_count(void);
+  int get_treasure_map_count(void);
+  int get_treasure_map_carried_count(void);
   int get_enchant(void);
   int get_follower_count(void);
   int get_goal_penalty(Thingp attacker);
@@ -1329,7 +1331,7 @@ public:
   int unused_flag4(void);
   int unused_flag5(void);
   int unused_flag6(void);
-  int unused_flag7(void);
+  int is_treasure_map(void);
   int update_light_strength(void);
   int weapon_damage(void);
   int worth_collecting(const Thingp it);
@@ -1488,6 +1490,7 @@ public:
   uint8_t is_visible();
   uint8_t z_prio(void);
 
+  void treasure_map_check(void);
   void achieve_goals_in_death();
   void achieve_goals_in_life();
   void acid_tick();
@@ -1675,6 +1678,7 @@ public:
   void score_add(Thingp victim);
   void secret_door_tick();
   void set_bounce_count(int);
+  void set_treasure_map_count(int);
   void set_bounce_fade(float);
   void set_bounce_height(float);
   void set_dead_reason(const std::string &);

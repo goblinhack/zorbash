@@ -189,6 +189,8 @@ void Thing::set_owner(Thingp owner)
   }
 
   on_owner_set(owner);
+
+  owner->treasure_map_check();
 }
 
 void Thing::remove_owner(void)
@@ -210,6 +212,8 @@ void Thing::remove_owner(void)
   // and that owner is now dead, the fire is free to fall into a chasm
   //
   location_check();
+
+  old_owner->treasure_map_check();
 }
 
 bool Thing::change_owner(Thingp new_owner)
@@ -263,6 +267,9 @@ bool Thing::change_owner(Thingp new_owner)
   }
 
   on_owner_set(new_owner);
+
+  old_owner->treasure_map_check();
+  new_owner->treasure_map_check();
 
   return true;
 }

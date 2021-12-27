@@ -2,12 +2,34 @@ import my
 import tp
 
 
-def on_use(owner, item, target, x, y):
+def explode(me, x, y):
+    my.con("explode {} {:08X}".format(my.thing_get_name(me), me))
+    my.thing_msg(me, "The thunderstone explodes into fragments.")
+    my.level_spawn_at_thing(me, "explosion_major")
+    my.level_spawn_fire_around_thing(me, "fire")
+    my.level_spawn_at_thing(me, "fire")
+    my.level_spawn_using_items_radius_range(me, me, me, "explosion_destroy_floor")
+    my.thing_kill(me, "exploded")
+
+
+def on_you_are_hit_and_now_dead(me, hitter, real_hitter, x, y, crit, damage):
+    explode(me, x, y)
+
+
+def on_fire(me, x, y):
+    explode(me, x, y)
+
+
+def on_fall(me, x, y):
+    explode(me, x, y)
+
+
+def on_use(owner, me, target, x, y):
     # my.con("owner   {} {:08X}".format(my.thing_get_name(owner), owner))
-    # my.con("item    {} {:08X}".format(my.thing_get_name(item), item))
+    # my.con("me    {} {:08X}".format(my.thing_get_name(me), me))
     # my.con("target  {} {:08X}".format(my.thing_get_name(target), target))
     my.level_spawn_at_thing(target, "explosion_major")
-    my.level_spawn_using_items_radius_range(owner, item, target, "explosion_destroy_floor")
+    my.level_spawn_using_items_radius_range(owner, me, target, "explosion_destroy_floor")
 
 
 def tp_init(name, text_name, short_text_name):
@@ -25,6 +47,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_described_when_hovering_over(True)
     mytp.set_is_droppable(True)
     mytp.set_is_interesting(True)
+    mytp.set_is_combustible(True)
     mytp.set_is_item(True)
     mytp.set_is_loggable(True)
     mytp.set_is_moveable(True)
@@ -38,6 +61,9 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_item_width(4)
     mytp.set_long_text_description("This most dangerous stone can devistate any are where it is thrown. Be careful where you drop it...")
     mytp.set_normal_placement_rules(True)
+    mytp.set_on_fall_do("me.on_fall()")
+    mytp.set_on_you_are_hit_and_now_dead_do("me.on_you_are_hit_and_now_dead()")
+    mytp.set_on_you_are_on_fire_do("me.on_fire()")
     mytp.set_on_use_do("me.on_use()")
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("A harmless looking brownish stone")

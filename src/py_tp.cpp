@@ -876,7 +876,10 @@ PyObject *level_spawn_using_items_radius_range_(PyObject *obj, PyObject *args, P
     Py_RETURN_FALSE;
   }
 
-  if (t->spawn_radius_range(parent, target, std::string(what), radius_min, radius_max + 1)) {
+  //
+  // This is intentionally 0,0 to use the items range unless overridden
+  //
+  if (t->spawn_radius_range(parent, target, std::string(what), radius_min, radius_max)) {
     Py_RETURN_TRUE;
   }
   Py_RETURN_FALSE;
@@ -1493,7 +1496,7 @@ TP_BODY_SET_INT(unused_flag3)
 TP_BODY_SET_INT(unused_flag4)
 TP_BODY_SET_INT(unused_flag5)
 TP_BODY_SET_INT(unused_flag6)
-TP_BODY_SET_INT(unused_flag7)
+TP_BODY_SET_INT(is_treasure_map)
 TP_BODY_SET_INT(weapon_damage)
 TP_BODY_SET_INT(z_depth)
 TP_BODY_SET_INT(z_prio)
