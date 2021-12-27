@@ -51,7 +51,7 @@ void Level::update_minimap(bool showing_two_levels, bool show_faded)
   float dx = 1;
   float dy = 1;
 
-  bool        has_treasure_map = true;
+  bool        has_treasure_map = false;
   static Texp treasure_map;
   static int  treasure_map_id;
   if (! treasure_map) {
@@ -193,49 +193,31 @@ void Level::update_minimap(bool showing_two_levels, bool show_faded)
       }
     }
   } else if (has_treasure_map) {
-    for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
-      for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
-        color c;
+    for (auto y = 0; y < MAP_HEIGHT; y++) {
+      for (auto x = 0; x < MAP_WIDTH; x++) {
+        color c = BLACK;
 
-        if (is_monst(x, y)) {
-          c = RED;
-        } else if (is_mob(x, y)) {
-          c = RED;
+        if (is_wall(x, y) || is_rock(x, y)) {
+          continue;
+        } else if (is_monst(x, y) || is_spiderweb(x, y) || is_mob(x, y)) {
+          c   = RED;
+          c.a = 255;
         } else if (player && (x == (int) player->curr_at.x) && (y == (int) player->curr_at.y)) {
-          c = PINK;
-        } else if (is_door(x, y)) {
-          c = BROWN;
-        } else if (is_lava(x, y)) {
-          c = ORANGE;
-        } else if (is_rock(x, y)) {
-          continue;
-        } else if (is_wall(x, y)) {
-          continue;
-        } else if (is_rock(x, y)) {
-          continue;
-        } else if (is_floor(x, y) || is_corridor(x, y)) {
-          c   = GRAY30;
-          c.a = 50;
-        } else if (is_bridge(x, y)) {
-          c = BROWN1;
-        } else if (is_shallow_water(x, y)) {
-          c   = BLUE2;
-          c.a = 50;
-        } else if (is_deep_water(x, y)) {
-          c   = BLUE3;
           c.a = 100;
-        } else if (is_dirt(x, y)) {
-          continue;
-        } else if (is_dry_grass(x, y)) {
-          continue;
-        } else if (is_enchantstone(x, y)) {
-          c = BLACK;
-        } else if (is_skillstone(x, y)) {
-          c = BLACK;
-        } else if (is_foilage(x, y)) {
-          continue;
-        } else if (is_spiderweb(x, y)) {
-          c = RED;
+        } else if (is_door(x, y)) {
+          c.a = 255;
+        } else if (is_lava(x, y)) {
+          c.a = 100;
+        } else if (is_floor(x, y) || is_corridor(x, y)) {
+          c.a = 100;
+        } else if (is_bridge(x, y)) {
+          c.a = 200;
+        } else if (is_chasm(x, y)) {
+          c.a = 50;
+        } else if (is_shallow_water(x, y)) {
+          c.a = 20;
+        } else if (is_deep_water(x, y)) {
+          c.a = 30;
         } else {
           continue;
         }
@@ -260,6 +242,28 @@ void Level::update_minimap(bool showing_two_levels, bool show_faded)
         auto brx = tlx + dx;
         auto bry = tly + dy;
         blit(solid_tex_id, tlx, tly, brx, bry);
+      }
+    }
+
+    //
+    // Add X marks the spot
+    //
+    glcolor(GREEN);
+    for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
+      for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
+        if (! is_key(x, y) && ! is_food(x, y) && ! is_treasure_type(x, y)) {
+          continue;
+        }
+
+        auto X   = x;
+        auto Y   = MAP_HEIGHT - y;
+        auto tlx = X * dx;
+        auto tly = Y * dy;
+        auto brx = tlx + dx;
+        auto bry = tly + dy;
+        blit(solid_tex_id, tlx, tly, brx, bry);
+        // blit(solid_tex_id, tlx - 2, tly - 2, brx, bry);
+        // blit(solid_tex_id, tlx + 2, tly + 2, brx, bry);
       }
     }
   } else {
