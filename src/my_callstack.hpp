@@ -38,14 +38,17 @@ thread_local unsigned char    g_callframes_depth;
 #else
 extern thread_local struct callframe callframes[ MAXCALLFRAME ];
 extern thread_local unsigned char    g_callframes_depth;
+extern thread_local unsigned char    g_callframes_indent;
 #endif
 #else
 #ifdef __MAIN__
 struct callframe callframes[ MAXCALLFRAME ];
 unsigned char    g_callframes_depth;
+unsigned char    g_callframes_indent;
 #else
 extern struct callframe callframes[ MAXCALLFRAME ];
 extern unsigned char    g_callframes_depth;
+extern unsigned char    g_callframes_indent;
 #endif
 #endif
 
@@ -58,6 +61,7 @@ struct tracer_t {
     // fprintf(stderr, "%s %s() line %d\n", file, func, line);
     if (DEBUG1) {
       if (unlikely(g_callframes_depth < MAXCALLFRAME)) {
+        g_callframes_indent++;
         callframe *c = &callframes[ g_callframes_depth++ ];
         c->func      = func;
         c->line      = line;
@@ -68,6 +72,9 @@ struct tracer_t {
   inline ~tracer_t()
   {
     if (DEBUG1) {
+      if (g_callframes_indent > 0) {
+        g_callframes_indent--;
+      }
       if (g_callframes_depth > 0) {
         g_callframes_depth--;
       }
@@ -82,13 +89,20 @@ struct tracer_no_indent_t {
     // fprintf(stderr, "%s %s() line %d\n", file, func, line);
     if (DEBUG1) {
       if (unlikely(g_callframes_depth < MAXCALLFRAME)) {
-        callframe *c = &callframes[ g_callframes_depth ];
+        callframe *c = &callframes[ g_callframes_depth++ ];
         c->func      = func;
         c->line      = line;
       }
     }
   }
 
-  inline ~tracer_no_indent_t() {}
+  inline ~tracer_no_indent_t()
+  {
+    if (DEBUG1) {
+      if (g_callframes_depth > 0) {
+        g_callframes_depth--;
+      }
+    }
+  }
 };
 #endif

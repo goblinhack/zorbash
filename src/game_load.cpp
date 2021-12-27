@@ -594,7 +594,7 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
         for (auto slot = 0; slot < MAP_SLOTS; slot++) {
           auto id = get(my.t->all_things_id_at[group], x, y, slot);
           if (id.ok()) {
-            CON("Load save slot %d @ %d,%d group %d : %08" PRIx32, slot, x, y, group, id.id);
+            CON("Load save slot %d @ %d,%d group %d : %" PRIx32, slot, x, y, group, id.id);
           }
         }
       }
@@ -628,19 +628,21 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
             if (t->id != id) {
               game_load_error = string_sprintf(
                   "found different thing than expected at map position "
-                  "%d,%d slot %d: found %08" PRIx32 ", expected %08" PRIx32,
+                  "%d,%d slot %d: found %" PRIx32 ", expected %" PRIx32,
                   x, y, slot, t->id.id, id.id);
 
-              for (auto slot = 0; slot < MAP_SLOTS; slot++) {
-                auto id = get(ids, x, y, slot);
-                CON("slot %d : %08" PRIx32, slot, id.id);
+              if (0) {
+                for (auto slot = 0; slot < MAP_SLOTS; slot++) {
+                  auto id = get(ids, x, y, slot);
+                  CON("slot %d : %" PRIx32, slot, id.id);
+                }
               }
 
               return in;
             }
 
             t->reinit();
-            // t->con("LOADED %f %f %d", t->curr_at.x, t->curr_at.y, t->id.id);
+            // t->con("LOADED @%d,%d %x", t->curr_at.x, t->curr_at.y, t->id.id);
 
             // CON("From save file  : %s", t->debug_str.c_str());
             // CON("Newly created as: %s", t->to_dbg_saved_string().c_str());
@@ -657,6 +659,8 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
       }
     }
   }
+
+  TRACE_NO_INDENT();
 
   //
   // Post thing reinit fixups for things that may carry other items

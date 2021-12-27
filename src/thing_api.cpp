@@ -5968,7 +5968,7 @@ ThingId Thing::get_equip_id(int equip)
 {
   TRACE_NO_INDENT();
   if (maybe_itemp()) {
-    // con("get weapon %08" PRIx32 "",  get_itemp()->equip_id);
+    // con("get weapon %" PRIx32 "",  get_itemp()->equip_id);
     return (get_itemp()->equip_id[ equip ]);
   } else {
     // con("get equip id => none");
@@ -5980,7 +5980,7 @@ ThingId Thing::set_equip_id(ThingId v, int equip)
 {
   TRACE_NO_INDENT();
   new_infop();
-  // con("set weapon %08" PRIx32 "", v);
+  // con("set weapon %" PRIx32 "", v);
   return (get_itemp()->equip_id[ equip ] = v);
 }
 

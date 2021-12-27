@@ -554,7 +554,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
         for (auto slot = 0; slot < MAP_SLOTS; slot++) {
           auto id = get(my.t->all_things_id_at[group], x, y, slot);
           if (id.ok()) {
-            CON("save slot %d @ %d,%d group %d : %08" PRIx32, slot, x, y, group, id.id);
+            CON("save slot %d @ %d,%d group %d : %" PRIx32, slot, x, y, group, id.id);
           }
         }
       }
@@ -572,7 +572,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
           if (id.ok()) {
             const Thingp t = my.t->thing_find(id);
             if (unlikely(! t)) {
-              ERR("Found a thing I could not save %08" PRIx32, id.id);
+              ERR("Found a thing I could not save %" PRIx32, id.id);
               return out;
             }
 

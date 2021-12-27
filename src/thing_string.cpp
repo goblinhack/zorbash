@@ -37,17 +37,20 @@ std::string Thing::to_string(void)
                            is_moving ? "/mv" : "", is_falling ? "/fall" : "", curr_at.x, curr_at.y));
   }
 
-  auto l = get_leader();
-  if (! g_loading && l && (l != this)) {
-    return (string_sprintf(
-        "%" PRIx32 " %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s %d,%d l:%s", id.id, tpp->name().c_str(), is_dead ? "/dead" : "",
-        is_scheduled_for_death ? "/dead-sched" : "", is_resurrecting ? "/resurrecting" : "",
-        is_offscreen ? "/offscr" : "", is_on_fire() ? "/onfire" : "", is_hidden ? "/hid" : "",
-        is_jumping ? "/jumping" : "", is_moving ? "/mv" : "", is_falling ? "/fall" : "",
-        is_changing_level ? "/chg-level" : "", is_waiting_to_ascend_dungeon ? "/asc-dung" : "",
-        is_waiting_to_descend_dungeon ? "/des-dung" : "", is_waiting_to_descend_sewer ? "/des-sewer" : "",
-        is_waiting_to_ascend_sewer ? "/asc-sewer" : "", curr_at.x, curr_at.y, l->to_string().c_str()));
+  if (! g_loading) {
+    auto l = get_leader();
+    if (l && (l != this)) {
+      return (string_sprintf(
+          "%" PRIx32 " %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s %d,%d l:%s", id.id, tpp->name().c_str(), is_dead ? "/dead" : "",
+          is_scheduled_for_death ? "/dead-sched" : "", is_resurrecting ? "/resurrecting" : "",
+          is_offscreen ? "/offscr" : "", is_on_fire() ? "/onfire" : "", is_hidden ? "/hid" : "",
+          is_jumping ? "/jumping" : "", is_moving ? "/mv" : "", is_falling ? "/fall" : "",
+          is_changing_level ? "/chg-level" : "", is_waiting_to_ascend_dungeon ? "/asc-dung" : "",
+          is_waiting_to_descend_dungeon ? "/des-dung" : "", is_waiting_to_descend_sewer ? "/des-sewer" : "",
+          is_waiting_to_ascend_sewer ? "/asc-sewer" : "", curr_at.x, curr_at.y, l->to_string().c_str()));
+    }
   }
+
   /*
    * Makes debugs too long
    */

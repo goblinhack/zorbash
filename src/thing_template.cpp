@@ -40,7 +40,7 @@ Tpp tp_find(uint32_t id)
   TRACE_AND_INDENT();
   auto result = get(tp_id_map, id - 1);
   if (! result) {
-    ERR("Thing template %08" PRIx32 " not found", id);
+    ERR("Thing template %" PRIx32 " not found", id);
   }
 
   return (result);

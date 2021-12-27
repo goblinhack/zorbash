@@ -17,7 +17,7 @@
 #define UI_BOTCON_VIS_HEIGHT         1
 #define UI_BOTCON_VIS_WIDTH          UI_BOTCON_WIDTH
 #define UI_BOTCON_WIDTH              (TERM_WIDTH)
-#define UI_CONSOLE_HEIGHT            200
+#define UI_CONSOLE_HEIGHT            500
 #define UI_CONSOLE_INPUT_COLOR       ORANGE
 #define UI_CONSOLE_TEXT_COLOR        GRAY
 #define UI_CONSOLE_WIDTH             (TERM_WIDTH - 3)

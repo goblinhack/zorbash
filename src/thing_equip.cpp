@@ -322,7 +322,7 @@ bool Thing::unequip(const char *why, int equip, bool allowed_to_recarry)
 
   auto item = get_equip(equip);
   if (! item) {
-    dbg("Could not unequip %08" PRIx32 ", no equip thing: %s", get_equip_id(equip).id, why);
+    dbg("Could not unequip %" PRIx32 ", no equip thing: %s", get_equip_id(equip).id, why);
     return false;
   }
 
@@ -617,7 +617,7 @@ bool Thing::equip_use(bool forced, int equip)
 
     used_as = equip_tp->gfx_anim_use();
     if (used_as.empty()) {
-      die("Could not use %s/%08" PRIx32 " has no 'use' animation frame", item->to_short_string().c_str(),
+      die("Could not use %s/%" PRIx32 " has no 'use' animation frame", item->to_short_string().c_str(),
           item->id.id);
       return false;
     }
