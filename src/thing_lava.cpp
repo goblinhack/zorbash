@@ -20,17 +20,11 @@ void Thing::lava_tick(void)
   TRACE_NO_INDENT();
 
   if (! environ_avoids_fire()) {
-    if (is_player()) {
-      dbg("Lava tick: No, not a fire avoider");
-    }
     return;
   }
 
   point at = curr_at;
   if (! level->is_lava(at.x, at.y)) {
-    if (is_player()) {
-      dbg("Lava tick: No, no lava");
-    }
     return;
   }
 
@@ -59,7 +53,7 @@ void Thing::lava_tick(void)
         continue;
       }
 
-      is_attacked_with_damage_melee(t, t->get_damage_melee());
+      is_attacked_with_damage_fire(t, t->get_damage_fire());
       break;
     }
     FOR_ALL_THINGS_END()

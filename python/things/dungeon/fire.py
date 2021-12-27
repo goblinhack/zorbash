@@ -3,7 +3,6 @@ import tp
 
 
 def spawn(me, x, y):
-    my.topcon("fire spawn")
     my.level_spawn_fire_around_thing(me, "small_fire")
 
 
