@@ -1652,10 +1652,10 @@ int Thing::is_health_booster(void)
   return (tp()->is_health_booster());
 }
 
-int Thing::unused_flag6(void)
+int Thing::is_beast_map(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag6());
+  return (tp()->is_beast_map());
 }
 
 int Thing::is_treasure_map(void)

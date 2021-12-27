@@ -190,7 +190,7 @@ void Thing::set_owner(Thingp owner)
 
   on_owner_set(owner);
 
-  owner->treasure_map_check();
+  owner->check_all_carried_maps();
 }
 
 void Thing::remove_owner(void)
@@ -213,7 +213,7 @@ void Thing::remove_owner(void)
   //
   location_check();
 
-  old_owner->treasure_map_check();
+  old_owner->check_all_carried_maps();
 }
 
 bool Thing::change_owner(Thingp new_owner)
@@ -268,8 +268,8 @@ bool Thing::change_owner(Thingp new_owner)
 
   on_owner_set(new_owner);
 
-  old_owner->treasure_map_check();
-  new_owner->treasure_map_check();
+  old_owner->check_all_carried_maps();
+  new_owner->check_all_carried_maps();
 
   return true;
 }

@@ -445,6 +445,6 @@ void Thing::update(void)
   if (carried && (is_monst() || is_player())) {
     dbg("Final item list:");
     TRACE_AND_INDENT();
-    check_all_carried();
+    check_all_carried_items_are_owned();
   }
 }

@@ -11,27 +11,54 @@
 #include <Python.h>
 
 PyObject *abs_to_pct_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *pcg_randint(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *non_pcg_randint(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *con_(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *die_(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *err_(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *log_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *map_load_room_(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *music_load_(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *music_play_(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *non_pcg_randint(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *pcg_randint(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *pct_to_abs_(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *puts_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *py_add_module(const char *mod);
 PyObject *py_obj_attr(const PyObject *py_str, const char *attr);
 PyObject *sound_load_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *music_load_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *sound_play_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_sound_play_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *sound_play_channel_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_sound_play_channel_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *music_play_(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *sound_play_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *tex_load_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *text_size_(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_sound_play_channel_(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_sound_play_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *tile_load_arr_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *tile_load_arr_sprites_(PyObject *obj, PyObject *args, PyObject *keywds);
-char     *py_obj_attr_str(const PyObject *py_obj, const char *attr);
-char     *py_obj_to_str(const PyObject *py_str);
-double    py_obj_attr_double(const PyObject *py_obj, const char *attr);
-double    py_obj_to_double(PyObject *py_obj);
+PyObject *topcon_(PyObject *obj, PyObject *args, PyObject *keywds);
+
+char *py_obj_attr_str(const PyObject *py_obj, const char *attr);
+char *py_obj_to_str(const PyObject *py_str);
+
+double py_obj_attr_double(const PyObject *py_obj, const char *attr);
+double py_obj_to_double(PyObject *py_obj);
+
+int py_obj_attr_int(const PyObject *py_obj, const char *attr);
+int py_obj_to_bool(PyObject *py_obj);
+int py_obj_to_int(PyObject *py_obj);
+
+PyMODINIT_FUNC py_my_module_create(void);
+
+std::string py_obj_to_string(const PyObject *py_str);
+
+uint64_t py_obj_attr_uint64(const PyObject *py_obj, const char *attr);
+uint64_t py_obj_to_uint64(PyObject *py_obj);
+
+void py_add_to_path(const char *path);
+void py_err(void);
+void py_exec(const char *str);
+void py_fini(void);
+void py_init(char *argv[]);
+void py_my_module_add_consts(void);
+void py_trace(void);
 
 void py_call_void(const char *name);
 void py_call_void_fn(const char *module, const char *name, int v1);
@@ -113,17 +140,6 @@ int  py_call_int_fn(const char *module, const char *name, unsigned int v1, unsig
                     unsigned int v4, unsigned int v5, unsigned int v6, unsigned int v7);
 int  py_call_int_fn(const char *module, const char *name, unsigned int v1, unsigned int v2, unsigned int v3,
                     unsigned int v4, unsigned int v5, unsigned int v6, unsigned int v7, unsigned int v8);
-int  py_obj_attr_int(const PyObject *py_obj, const char *attr);
-int  py_obj_to_int(PyObject *py_obj);
-int  py_obj_to_bool(PyObject *py_obj);
-std::string py_obj_to_string(const PyObject *py_str);
-uint64_t    py_obj_attr_uint64(const PyObject *py_obj, const char *attr);
-uint64_t    py_obj_to_uint64(PyObject *py_obj);
-void        py_err(void);
-void        py_exec(const char *str);
-void        py_trace(void);
-void        python_fini(void);
-void        python_init(char *argv[]);
 
 #define PY_PROTO(__fn__) PyObject *__fn__##_(PyObject *obj, PyObject *args, PyObject *keywds);
 
@@ -250,4 +266,6 @@ void        python_init(char *argv[]);
 
 void PY_LOG(const char *fmt, ...) __attribute__((format(printf, 1, 2)));
 void PY_DBG(const char *fmt, ...) __attribute__((format(printf, 1, 2)));
+
+extern PyObject *my_mod;
 #endif

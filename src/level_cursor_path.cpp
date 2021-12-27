@@ -4,6 +4,7 @@
 //
 
 #include "my_array_bounds_check.hpp"
+#include "my_backtrace.hpp"
 #include "my_dmap.hpp"
 #include "my_game.hpp"
 #include "my_gl.hpp"
@@ -369,6 +370,7 @@ void Level::cursor_path_create(void)
 void Level::cursor_path_create(const std::vector< point > &move_path)
 {
   TRACE_AND_INDENT();
+  // backtrace_dump();
   if (! cursor) {
     return;
   }
@@ -399,6 +401,7 @@ void Level::cursor_path_create(const std::vector< point > &move_path)
 //
 void Level::cursor_path_clear(void)
 {
+  // backtrace_dump();
   TRACE_AND_INDENT();
   auto level = game->get_current_level();
   if (! level) {

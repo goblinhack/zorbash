@@ -134,7 +134,7 @@ void Thing::killed(Thingp defeater, const char *reason)
         dbg("Final item list at death:");
         TRACE_AND_INDENT();
 
-        check_all_carried();
+        check_all_carried_items_are_owned();
       }
       drop_all();
       dbg("Dropped all items");

@@ -165,14 +165,20 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   // Block jumping over doors
   //
   if (is_player()) {
-    if (! level->is_lit_ever(x, y)) {
-      IF_DEBUG2 { log("No, is not lit or visited"); }
+    if (get_treasure_map_count()) {
+      //
+      // If we have a treasure map, allow wandering
+      //
+    } else {
+      if (! level->is_lit_ever(x, y)) {
+        IF_DEBUG2 { log("No, is not lit or visited"); }
 
-      if (is_player()) {
-        TOPCON("You can't jump into the unknown.");
+        if (is_player()) {
+          TOPCON("You can't jump into the unknown.");
+        }
+        dbg("You can't jump into the unknown.");
+        return false;
       }
-      dbg("You can't jump into the unknown.");
-      return false;
     }
   }
 

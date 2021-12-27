@@ -165,11 +165,11 @@ void quit(void)
 
   LOG("FINI: Cleanup done");
 
-  LOG("FINI: python_fini");
+  LOG("FINI: py_fini");
   //
   // This might exit
   //
-  python_fini();
+  py_fini();
 }
 
 void restart(void)
@@ -843,7 +843,7 @@ int32_t main(int32_t argc, char *argv[])
   ////////////////////////////////////////////////////////////////////////////////////////////////////
 
   CON("INI: Python init");
-  python_init(argv);
+  py_init(argv);
   py_call_void("init2");
   CON("INI: Python inited");
   ////////////////////////////////////////////////////////////////////////////////////////////////////

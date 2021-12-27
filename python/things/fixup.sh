@@ -300,7 +300,7 @@ do
       set_is_heavy \
       set_unused_flag4 \
       set_unused_flag5 \
-      set_unused_flag6 \
+      set_is_beast_map \
       set_is_treasure_map \
       set_is_able_to_use_wands \
       set_is_aquatic \

@@ -408,7 +408,8 @@ bool Level::create_dungeon(point3d at, int seed)
               // thing_new("spider_giant", point(x + 3, y));
               // thing_new("thunderstone", point(x - 1, y - 1));
               thing_new("treasure_map", point(x - 1, y - 2));
-              thing_new("fire", point(x + 1, y - 2));
+              thing_new("beast_map", point(x + 1, y - 2));
+              thing_new("fire", point(x + 2, y - 2));
               // thing_new("goblin", point(x + 1, y));
               // thing_new("gob_pack", point(x + 2, y));
 #if 0

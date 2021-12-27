@@ -394,8 +394,8 @@ class Tp:
     def set_unused_flag5(self, value):
         my.tp_set_unused_flag5(self, value)
 
-    def set_unused_flag6(self, value):
-        my.tp_set_unused_flag6(self, value)
+    def set_is_beast_map(self, value):
+        my.tp_set_is_beast_map(self, value)
 
     def set_is_treasure_map(self, value):
         my.tp_set_is_treasure_map(self, value)

@@ -678,7 +678,6 @@ public:
              bool damage_lightning, bool damage_energy, bool damage_acid, bool damage_digest, int damage);
 
   int aggression_level_pct(void);
-  int collateral_damage_pct(void);
   int ai_detect_secret_doors(void);
   int ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int type, bool check);
   int ai_obstacle(void);
@@ -698,6 +697,7 @@ public:
   int blast_min_radius(void);
   int capacity_height(void);
   int capacity_width(void);
+  int collateral_damage_pct(void);
   int collision_check(void);
   int collision_hit_priority(void);
   int damage_acid_chance_d1000(void);
@@ -815,6 +815,8 @@ public:
   int environ_prefers_poison(void);
   int environ_prefers_spiderwebs(void);
   int environ_prefers_water(void);
+  int get_beast_map_carried_count(void);
+  int get_beast_map_count(void);
   int get_bounce_count(void);
   int get_carried_food_count(void);
   int get_carried_food_highest_value(Thingp *out);
@@ -823,8 +825,8 @@ public:
   int get_carried_ring_highest_value(Thingp *out);
   int get_carried_ring_least_value(Thingp *out);
   int get_carried_wand_count(void);
-  int get_carried_wand_highest_value(Thingp *out);
   int get_carried_wand_highest_value_for_target(Thingp *out, Thingp target);
+  int get_carried_wand_highest_value(Thingp *out);
   int get_carried_wand_least_value(Thingp *out);
   int get_carried_weapon_count(void);
   int get_carried_weapon_highest_value(Thingp *out);
@@ -853,8 +855,6 @@ public:
   int get_danger_initial_level(void);
   int get_enchant_max(void);
   int get_enchantstone_count(void);
-  int get_treasure_map_count(void);
-  int get_treasure_map_carried_count(void);
   int get_enchant(void);
   int get_follower_count(void);
   int get_goal_penalty(Thingp attacker);
@@ -868,7 +868,6 @@ public:
   int get_hunger_clock_tick_frequency(void);
   int get_hunger_health_pct(void);
   int get_idle_count(void);
-  int get_on_idle_tick_frequency(void);
   int get_initial_charge_count(void);
   int get_initial_light_strength(void);
   int get_keys(void);
@@ -879,6 +878,7 @@ public:
   int get_minion_count(void);
   int get_necrotized_amount(void);
   int get_nutrition(void);
+  int get_on_idle_tick_frequency(void);
   int get_owned_count(void);
   int get_poisoned_amount(void);
   int get_resurrect(void);
@@ -910,6 +910,8 @@ public:
   int get_stuck_count(void);
   int get_submerged_offset(void);
   int get_torch_count(void);
+  int get_treasure_map_carried_count(void);
+  int get_treasure_map_count(void);
   int gfx_an_animation_only(void);
   int gfx_animated_can_hflip(void);
   int gfx_animated_can_vflip(void);
@@ -1037,6 +1039,7 @@ public:
   int is_able_to_see_through_doors(void);
   int is_able_to_shove(void);
   int is_able_to_tire(void);
+  int is_able_to_use_rings(void);
   int is_able_to_use_wands(void);
   int is_able_to_use_weapons(void);
   int is_able_to_walk_through_walls(void);
@@ -1072,6 +1075,7 @@ public:
   int is_bag_item(void);
   int is_bag(void);
   int is_barrel(void);
+  int is_beast_map(void);
   int is_bleeder(void);
   int is_blood_eater(void);
   int is_blood_splatter(void);
@@ -1167,8 +1171,8 @@ public:
   int is_meat_eater(void);
   int is_meat(void);
   int is_metal(void);
-  int is_mob(void);
   int is_minion(void);
+  int is_mob(void);
   int is_monst(void);
   int is_moveable(void);
   int is_msg(void);
@@ -1217,6 +1221,7 @@ public:
   int is_treasure_class_b(void);
   int is_treasure_class_c(void);
   int is_treasure_eater(void);
+  int is_treasure_map(void);
   int is_treasure_type(void);
   int is_undead(void);
   int is_usable(void);
@@ -1324,14 +1329,11 @@ public:
   int unused_chance6_d1000(void);
   int unused_chance7_d1000(void);
   int unused_chance8_d1000(void);
-  int is_able_to_use_rings(void);
   int unused_flag1(void);
   int unused_flag2(void);
   int unused_flag3(void);
   int unused_flag4(void);
   int unused_flag5(void);
-  int unused_flag6(void);
-  int is_treasure_map(void);
   int update_light_strength(void);
   int weapon_damage(void);
   int worth_collecting(const Thingp it);
@@ -1490,6 +1492,8 @@ public:
   uint8_t is_visible();
   uint8_t z_prio(void);
 
+  void check_all_carried_maps(void);
+  void beast_map_check(void);
   void treasure_map_check(void);
   void achieve_goals_in_death();
   void achieve_goals_in_life();
@@ -1529,7 +1533,7 @@ public:
   void buff_remove_all(void);
   void buff_tick();
   void chasm_tick();
-  void check_all_carried();
+  void check_all_carried_items_are_owned();
   void clear_age_map(void);
   void clear_can_see_currently(void);
   void clear_can_see_ever(void);
@@ -1678,6 +1682,7 @@ public:
   void score_add(Thingp victim);
   void secret_door_tick();
   void set_bounce_count(int);
+  void set_beast_map_count(int);
   void set_treasure_map_count(int);
   void set_bounce_fade(float);
   void set_bounce_height(float);

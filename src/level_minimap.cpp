@@ -59,6 +59,11 @@ void Level::update_minimap(bool showing_two_levels, bool show_faded)
     has_treasure_map = true;
   }
 
+  bool has_beast_map = false;
+  if (player && (player->get_beast_map_count() > 0)) {
+    has_beast_map = true;
+  }
+
   static Texp treasure_map;
   static int  treasure_map_id;
   if (! treasure_map) {
@@ -204,11 +209,21 @@ void Level::update_minimap(bool showing_two_levels, bool show_faded)
       for (auto x = 0; x < MAP_WIDTH; x++) {
         color c = BLACK;
 
-        if (is_wall(x, y) || is_rock(x, y)) {
-          continue;
-        } else if (is_monst(x, y) || is_spiderweb(x, y) || is_mob(x, y)) {
-          c   = RED;
+        if (is_key(x, y) || is_food(x, y) || is_treasure_type(x, y)) {
+          c   = GOLD2;
           c.a = 255;
+        } else if (is_monst(x, y) || is_spiderweb(x, y) || is_mob(x, y)) {
+          //
+          // Have both? Overlay the monsters
+          //
+          if (has_beast_map) {
+            c   = RED;
+            c.a = 255;
+          } else {
+            continue;
+          }
+        } else if (is_wall(x, y) || is_rock(x, y)) {
+          continue;
         } else if (player && (x == (int) player->curr_at.x) && (y == (int) player->curr_at.y)) {
           c.a = 100;
         } else if (is_door(x, y)) {
@@ -251,28 +266,6 @@ void Level::update_minimap(bool showing_two_levels, bool show_faded)
         blit(solid_tex_id, tlx, tly, brx, bry);
       }
     }
-
-    //
-    // Add X marks the spot
-    //
-    glcolor(GREEN);
-    for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
-      for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
-        if (! is_key(x, y) && ! is_food(x, y) && ! is_treasure_type(x, y)) {
-          continue;
-        }
-
-        auto X   = x;
-        auto Y   = MAP_HEIGHT - y;
-        auto tlx = X * dx;
-        auto tly = Y * dy;
-        auto brx = tlx + dx;
-        auto bry = tly + dy;
-        blit(solid_tex_id, tlx, tly, brx, bry);
-        // blit(solid_tex_id, tlx - 2, tly - 2, brx, bry);
-        // blit(solid_tex_id, tlx + 2, tly + 2, brx, bry);
-      }
-    }
   } else {
     //
     // Normal mode
@@ -287,7 +280,10 @@ void Level::update_minimap(bool showing_two_levels, bool show_faded)
 
         edge_of_sceen = false; // Not sure I like seeing this
 
-        if (! is_lit_ever(x, y)) {
+        if (is_monst(x, y) && has_beast_map) {
+          c   = RED;
+          c.a = 255;
+        } else if (! is_lit_ever(x, y)) {
           if (edge_of_sceen) {
             c   = DARKRED;
             c.a = 100;

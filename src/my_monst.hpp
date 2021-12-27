@@ -83,27 +83,21 @@ public:
   point lunge_to;            // When a monst attacks something
   point last_failed_jump_at; // Previous jump attempt
 
-  int bounce_count        = {};
   int capacity_height     = {};
   int capacity_width      = {};
-  int charge_count        = {}; // How many things this thing spawned.
   int distance_throw      = {};
   int enchant             = {};
   int enchant_max         = {};
-  int follower_count      = {}; // How many things this thing spawned.
   int gold                = {};
   int health              = {};
   int health_max          = {};
   int keys                = {};
   int lifespan            = {}; // How many things this thing owns.
   int light_strength      = {}; // Current strength, including torches
-  int minion_count        = {}; // How many things this thing spawned.
   int monst_state         = {};
   int necrosis            = {};
-  int owned_count         = {}; // How many things this thing owns.
   int poison              = {};
   int score               = {};
-  int spawned_count       = {}; // How many things this thing owns.
   int stamina             = {};
   int stamina_max         = {};
   int stat_armor_class    = {};
@@ -126,7 +120,15 @@ public:
   int stat_strength       = {};
   int submerged_offset    = {}; // Pixels
   int tick_resurrect_when = {};
-  int treasure_map_count  = {};
+
+  int8_t bounce_count       = {}; // Graphical bounce count
+  int8_t charge_count       = {}; // Wand charges
+  int8_t follower_count     = {}; // How many followers this leader has
+  int8_t minion_count       = {}; // How many minions this manifestor has
+  int8_t owned_count        = {}; // How many things own me
+  int8_t spawned_count      = {}; // How many things this thing spawned.
+  int8_t treasure_map_count = {}; // How many treasure maps held. Really only care if > 0
+  int8_t beast_map_count    = {}; // How many beast maps held. Really only care if > 0
 
   std::string msg;         // Text that floats on screen
   std::string dead_reason; // What defeated me

@@ -4,7 +4,8 @@
 <!--                                                                                                                                              -->
 <!-- Next todo                                                                                                                                    -->
 <!-- ------                              -->                                                                                                         -->
-<!-- - monster map                    -->
+<!-- - beast map                    -->
+<!-- - treasure map works on 1 level only -->
 <!-- - monster AI with treasure mp      -->
 <!-- - click anywhere on treasure map -->
 <!-- - monster map                         -->

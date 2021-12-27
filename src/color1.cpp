@@ -183,11 +183,11 @@ color FOREST_GREEN;
 color GAINSBORO;
 color GHOST_WHITE;
 color GHOSTWHITE;
+#endif
 color GOLD1;
 color GOLD2;
 color GOLD3;
 color GOLD4;
-#endif
 
 void color_init1(void)
 {
@@ -230,6 +230,10 @@ void color_init1(void)
   color_set("lightblue", &LIGHTBLUE, 173, 216, 230, 255);
   color_set("cyan", &CYAN, 0, 255, 255, 255);
   color_set("gold", &GOLD, 255, 215, 0, 255);
+  color_set("gold1", &GOLD1, 255, 215, 0, 255);
+  color_set("gold2", &GOLD2, 238, 201, 0, 255);
+  color_set("gold3", &GOLD3, 205, 173, 0, 255);
+  color_set("gold4", &GOLD4, 139, 117, 0, 255);
   color_set("forestgreen", &FORESTGREEN, 34, 139, 34, 255);
 
 #if 0
@@ -355,9 +359,5 @@ void color_init1(void)
   color_set("floralwhite", &FLORALWHITE, 255, 250, 240, 255);
   color_set("gainsboro", &GAINSBORO, 220, 220, 220, 255);
   color_set("ghostwhite", &GHOSTWHITE, 248, 248, 255, 255);
-  color_set("gold1", &GOLD1, 255, 215, 0, 255);
-  color_set("gold2", &GOLD2, 238, 201, 0, 255);
-  color_set("gold3", &GOLD3, 205, 173, 0, 255);
-  color_set("gold4", &GOLD4, 139, 117, 0, 255);
 #endif
 }

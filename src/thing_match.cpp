@@ -708,10 +708,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag5() && (what == "unused_flag5")) {
     return true;
   }
-  if (unused_flag6() && (what == "unused_flag6")) {
-    return true;
-  }
-  if (is_treasure_map() && (what == "is_treasure_map")) {
+  if (is_beast_map() && (what == "is_beast_map")) {
     return true;
   }
   if (is_able_to_use_wands() && (what == "is_able_to_use_wands")) {
@@ -1411,11 +1408,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag5") {
     return &Thing::unused_flag5;
   }
-  if (what == "unused_flag6") {
-    return &Thing::unused_flag6;
-  }
-  if (what == "is_treasure_map") {
-    return &Thing::is_treasure_map;
+  if (what == "is_beast_map") {
+    return &Thing::is_beast_map;
   }
   if (what == "is_able_to_use_wands") {
     return &Thing::is_able_to_use_wands;

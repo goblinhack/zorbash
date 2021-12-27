@@ -6606,7 +6606,7 @@ def init_tiles1_monsts_and_items():
         "enchantstone",
         "skillstone",
         "treasure_map",
-        "",
+        "beast_map",
         "",
         "",
         "axe.1",

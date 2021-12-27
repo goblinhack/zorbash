@@ -82,7 +82,6 @@ private:
   fsize _sz;
 
   int _aggression_level_pct {};
-  int _collateral_damage_pct {};
   int _ai_detect_secret_doors {};
   int _ai_obstacle {};
   int _ai_resent_count {};
@@ -106,6 +105,7 @@ private:
   int _capacity_height {};
   int _capacity_width {};
   int _charge_count {};
+  int _collateral_damage_pct {};
   int _collision_attack {};
   int _collision_check {};
   int _collision_hit_priority {};
@@ -202,6 +202,7 @@ private:
   int _is_able_to_see_through_doors {};
   int _is_able_to_shove {};
   int _is_able_to_tire {};
+  int _is_able_to_use_rings {};
   int _is_able_to_use_wands {};
   int _is_able_to_use_weapons {};
   int _is_able_to_walk_through_walls {};
@@ -222,6 +223,7 @@ private:
   int _is_bag_item_container {};
   int _is_bag_item_not_stackable {};
   int _is_barrel {};
+  int _is_beast_map {};
   int _is_bleeder {};
   int _is_blood {};
   int _is_blood_eater {};
@@ -366,6 +368,7 @@ private:
   int _is_treasure_class_b {};
   int _is_treasure_class_c {};
   int _is_treasure_eater {};
+  int _is_treasure_map {};
   int _is_treasure_type {};
   int _is_undead {};
   int _is_usable {};
@@ -414,13 +417,10 @@ private:
   int _unused_chance7_d1000 {};
   int _unused_chance8_d1000 {};
   int _unused_flag1 {};
-  int _is_able_to_use_rings {};
   int _unused_flag2 {};
   int _unused_flag3 {};
   int _unused_flag4 {};
   int _unused_flag5 {};
-  int _unused_flag6 {};
-  int _is_treasure_map {};
   int _weapon_damage {};
   int _weapon_use_distance {};
 
@@ -742,7 +742,6 @@ public:
   const std::string &text_unused(void) const { return _text_unused; }
 
   int aggression_level_pct(void) const { return _aggression_level_pct; }
-  int collateral_damage_pct(void) const { return _collateral_damage_pct; }
   int ai_detect_secret_doors(void) const { return _ai_detect_secret_doors; }
   int ai_obstacle(void) const { return _ai_obstacle; }
   int ai_resent_count(void) const { return _ai_resent_count; }
@@ -765,6 +764,7 @@ public:
   int capacity_height(void) const { return _capacity_height; }
   int capacity_width(void) const { return _capacity_width; }
   int charge_count(void) const { return _charge_count; }
+  int collateral_damage_pct(void) const { return _collateral_damage_pct; }
   int collision_check(void) const { return _collision_check; }
   int collision_hit_priority(void) const { return _collision_hit_priority; }
   int damage_acid_chance_d1000(void) const { return _damage_acid_chance_d1000; }
@@ -862,6 +862,7 @@ public:
   int is_able_to_see_through_doors(void) const { return _is_able_to_see_through_doors; }
   int is_able_to_shove(void) const { return _is_able_to_shove; }
   int is_able_to_tire(void) const { return _is_able_to_tire; }
+  int is_able_to_use_rings(void) const { return _is_able_to_use_rings; }
   int is_able_to_use_wands(void) const { return _is_able_to_use_wands; }
   int is_able_to_use_weapons(void) const { return _is_able_to_use_weapons; }
   int is_able_to_walk_through_walls(void) const { return _is_able_to_walk_through_walls; }
@@ -882,6 +883,7 @@ public:
   int is_bag_item(void) const { return _is_bag_item; }
   int is_bag(void) const { return _is_bag; }
   int is_barrel(void) const { return _is_barrel; }
+  int is_beast_map(void) const { return _is_beast_map; }
   int is_bleeder(void) const { return _is_bleeder; }
   int is_blood_eater(void) const { return _is_blood_eater; }
   int is_blood_splatter(void) const { return _is_blood_splatter; }
@@ -974,8 +976,8 @@ public:
   int is_meat_eater(void) const { return _is_meat_eater; }
   int is_meat(void) const { return _is_meat; }
   int is_metal(void) const { return _is_metal; }
-  int is_mob(void) const { return _is_mob; }
   int is_minion(void) const { return _is_minion; }
+  int is_mob(void) const { return _is_mob; }
   int is_monst(void) const { return _is_monst; }
   int is_moveable(void) const { return _is_moveable; }
   int is_msg(void) const { return _is_msg; }
@@ -1025,6 +1027,7 @@ public:
   int is_treasure_class_b(void) const { return _is_treasure_class_b; }
   int is_treasure_class_c(void) const { return _is_treasure_class_c; }
   int is_treasure_eater(void) const { return _is_treasure_eater; }
+  int is_treasure_map(void) const { return _is_treasure_map; }
   int is_treasure_type(void) const { return _is_treasure_type; }
   int is_undead(void) const { return _is_undead; }
   int is_usable(void) const { return _is_usable; }
@@ -1071,14 +1074,11 @@ public:
   int unused_chance6_d1000(void) const { return _unused_chance6_d1000; }
   int unused_chance7_d1000(void) const { return _unused_chance7_d1000; }
   int unused_chance8_d1000(void) const { return _unused_chance8_d1000; }
-  int is_able_to_use_rings(void) const { return _is_able_to_use_rings; }
   int unused_flag1(void) const { return _unused_flag1; }
   int unused_flag2(void) const { return _unused_flag2; }
   int unused_flag3(void) const { return _unused_flag3; }
   int unused_flag4(void) const { return _unused_flag4; }
   int unused_flag5(void) const { return _unused_flag5; }
-  int unused_flag6(void) const { return _unused_flag6; }
-  int is_treasure_map(void) const { return _is_treasure_map; }
   int weapon_damage(void) const { return _weapon_damage; }
 
   void set_aggression_level_pct(int v) { _aggression_level_pct = v; }
@@ -1500,7 +1500,7 @@ public:
   void set_unused_flag3(int v) { _unused_flag3 = v; }
   void set_unused_flag4(int v) { _unused_flag4 = v; }
   void set_unused_flag5(int v) { _unused_flag5 = v; }
-  void set_unused_flag6(int v) { _unused_flag6 = v; }
+  void set_is_beast_map(int v) { _is_beast_map = v; }
   void set_is_treasure_map(int v) { _is_treasure_map = v; }
   void set_weapon_damage(int v) { _weapon_damage = v; }
   void set_weapon_use_distance(int v) { _weapon_use_distance = v; }

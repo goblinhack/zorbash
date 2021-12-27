@@ -131,8 +131,8 @@ bool Thing::drop(Thingp what, Thingp target, bool stolen)
   }
   what->is_being_dropped = false;
   what->set_tick_last_dropped(game->tick_current);
-  check_all_carried();
-  treasure_map_check();
+  check_all_carried_items_are_owned();
+  check_all_carried_maps();
 
   return true;
 }
@@ -196,8 +196,8 @@ bool Thing::drop_into_ether(Thingp what)
   game->request_remake_rightbar = true;
 
   dbg("Dropped %s into the ether", what->to_short_string().c_str());
-  check_all_carried();
-  treasure_map_check();
+  check_all_carried_items_are_owned();
+  check_all_carried_maps();
 
   return true;
 }
@@ -261,8 +261,8 @@ bool Thing::drop_from_ether(Thingp what)
     sound_play("drop");
   }
   what->set_tick_last_dropped(game->tick_current);
-  check_all_carried();
-  treasure_map_check();
+  check_all_carried_items_are_owned();
+  check_all_carried_maps();
 
   return true;
 }
@@ -286,7 +286,7 @@ void Thing::drop_all(void)
   }
 }
 
-void Thing::check_all_carried(void)
+void Thing::check_all_carried_items_are_owned(void)
 {
   if (! maybe_itemp()) {
     return;
