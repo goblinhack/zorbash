@@ -333,7 +333,7 @@ void Thing::killed(Thingp defeater, const char *reason)
             // Already logged
             //
           } else {
-            TOPCON("%s is destroyed %s.", The_no_dying.c_str(), reason);
+            TOPCON("%s is destroyed, %s.", The_no_dying.c_str(), reason);
           }
 
           defeater->score_add(this);

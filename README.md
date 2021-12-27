@@ -1,35 +1,26 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- - click anywhere on treasure map                                                                                                             -->
+<!-- - when a monst ascends, randomly place it                                                                                                    -->
+<!-- - AI if you see a potion of health, drop food in preference?                                                                                 -->
+<!-- - AI did not pick up enchantstone due to space                                                                                               -->
+<!-- - robot will loop on sewers                                                                                                                  -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Next todo                                                                                                                                    -->
-<!-- ------                              -->                                                                                                         -->
-<!-- - beast map                    -->
-<!-- - treasure map works on 1 level only -->
-<!-- - monster AI with treasure mp      -->
-<!-- - click anywhere on treasure map -->
-<!-- - monster map                         -->
-<!-- - pirate goblin random carry of gold                                                                                                                       -->
-<!-- - pirate map ?                                                                                                                                             -->
-<!-- - necro protection ring                                                                                                                                 -->
-<!-- - robot will loop on sewers                                                                           -->
+<!-- ------                                                                                                                                       -->
+<!-- - monster AI with treasure map                                                                                                               -->
+<!-- - some gold coins detail                                                                                                                     -->
+<!-- - pirate sword                                                                                                                               -->
 <!-- - giant spider web throw                                                                                                                     -->
 <!-- - spider ball anims                                                                                                                          -->
-<!-- - antipoison potion                                                                                                                          -->
-<!-- - chocolote frog cures poison?                                                                                                               -->
-<!-- - holy water cures poison                                                                                                                    -->
-<!-- - darts / poison darts                                                                                                                       -->
 <!-- - equip armour etc                                                                                                                           -->
-<!-- - when a monst ascends, randomly place it                                                                -->
-<!-- - AI if you see a potion of health, drop food in preference?                                                                                 -->
-<!-- - AI did not pick up enchantstone due to space                                                                                               -->
-<!-- - ogre totem                                           -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Level                                                                                                                                        -->
 <!-- ------                                                                                                                                       -->
 <!-- - gold needs to do something - shop? buy/sell                                                                                                -->
-<!-- - totems are like mobs, but do not spawn except initially. The worshippers are imbued with power but do not die when the totem does.   -->
+<!-- - totems are like mobs, but do not spawn except initially. The worshippers are imbued with power but do not die when the totem does.         -->
 <!-- - exploding bogs                                                                                                                             -->
 <!-- - vaults                                                                                                                                     -->
 <!-- - teleports                                                                                                                                  -->
@@ -71,6 +62,7 @@
 <!--                                                                                                                                              -->
 <!-- Poison                                                                                                                                       -->
 <!-- ------                                                                                                                                       -->
+<!-- - chocolote frog cures poison?                                                                                                               -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Gasses                                                                                                                                       -->
@@ -91,6 +83,7 @@
 <!--                                                                                                                                              -->
 <!-- Rings                                                                                                                                        -->
 <!-- ------                                                                                                                                       -->
+<!-- - necro protection ring                                                                                                                      -->
 <!-- - ring combos?                                                                                                                               -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
@@ -102,10 +95,13 @@
 <!--                                                                                                                                              -->
 <!-- Potions                                                                                                                                      -->
 <!-- ------                                                                                                                                       -->
+<!-- - antipoison potion                                                                                                                          -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Weapons                                                                                                                                      -->
 <!-- ------                                                                                                                                       -->
+<!-- - holy water cures poison                                                                                                                    -->
+<!-- - darts / poison darts                                                                                                                       -->
 <!-- - damage when hitting walls                                                                                                                  -->
 <!-- - plutonium sword, no wall damage                                                                                                            -->
 <!-- - strength penalties                                                                                                                         -->
@@ -130,6 +126,7 @@
 <!--                                                                                                                                              -->
 <!-- Monsts                                                                                                                                       -->
 <!-- ------                                                                                                                                       -->
+<!-- - ogres and ogre totem                                                                                                                       -->
 <!-- - chickens - battle chickens - lay eggs as food - and they get names                                                                         -->
 <!-- - acid jellies should damage weapons                                                                                                         -->
 <!-- - spider that throws web?                                                                                                                    -->

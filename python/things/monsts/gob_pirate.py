@@ -9,6 +9,7 @@ def on_death_of_a_follower(me, x, y):
 
 def on_born(me, x, y):
     my.thing_carry(me, "treasure_map")
+    my.thing_carry(me, "gold6")
 
 
 def tp_init(name, text_name):
