@@ -21,6 +21,7 @@
 void Level::cursor_path_draw_circle(void)
 {
   TRACE_AND_INDENT();
+
   auto what = game->request_to_throw_item;
   if (! what) {
     what = game->request_to_fire_item;
@@ -88,6 +89,7 @@ void Level::cursor_path_draw_circle(void)
 void Level::cursor_path_draw_line(point start, point end)
 {
   TRACE_AND_INDENT();
+
   Dmap  d {};
   point dmap_start = start;
   point dmap_end   = end;
@@ -211,6 +213,7 @@ void Level::cursor_path_draw_line(point start, point end)
 void Level::cursor_path_draw_line(const std::vector< point > &move_path)
 {
   TRACE_AND_INDENT();
+
   game->cursor_move_path = move_path;
 
   for (auto &c : move_path) {
@@ -229,6 +232,7 @@ void Level::cursor_path_draw_line(const std::vector< point > &move_path)
 void Level::cursor_path_draw(point start, point end)
 {
   TRACE_AND_INDENT();
+
   if (! player) {
     return;
   }
@@ -258,6 +262,7 @@ void Level::cursor_path_draw(point start, point end)
 void Level::cursor_path_draw(const std::vector< point > &move_path)
 {
   TRACE_AND_INDENT();
+
   if (! player) {
     return;
   }
@@ -290,6 +295,7 @@ void Level::cursor_path_draw(const std::vector< point > &move_path)
 void Level::cursor_path_draw(void)
 {
   TRACE_AND_INDENT();
+
   if (! player) {
     return;
   }
@@ -311,6 +317,7 @@ void Level::cursor_path_draw(void)
 void Level::cursor_path_create(void)
 {
   TRACE_AND_INDENT();
+
   if (! cursor) {
     return;
   }
@@ -371,6 +378,7 @@ void Level::cursor_path_create(const std::vector< point > &move_path)
 {
   TRACE_AND_INDENT();
   // backtrace_dump();
+
   if (! cursor) {
     return;
   }
@@ -401,8 +409,9 @@ void Level::cursor_path_create(const std::vector< point > &move_path)
 //
 void Level::cursor_path_clear(void)
 {
-  // backtrace_dump();
   TRACE_AND_INDENT();
+  // backtrace_dump();
+
   auto level = game->get_current_level();
   if (! level) {
     return;

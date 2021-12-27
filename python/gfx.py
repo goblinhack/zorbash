@@ -123,7 +123,7 @@ def init_ui_rightbar():
         file="data/gfx/ui_rightbar.tga",
         name="ui_rightbar",
         width=128,
-        height=560,
+        height=416,
         arr=tiles,
     )
 

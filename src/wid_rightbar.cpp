@@ -23,6 +23,7 @@ static bool wid_rightbar_create(void);
 
 Widp wid_item_popup {};
 Widp wid_rightbar {};
+Widp wid_minimap {};
 
 void wid_rightbar_fini(void)
 {
@@ -144,7 +145,7 @@ static bool wid_rightbar_create(void)
   {
     TRACE_AND_INDENT();
     point tl = make_point(TERM_WIDTH - UI_SIDEBAR_RIGHT_WIDTH, 0);
-    point br = make_point(TERM_WIDTH - 1, 69);
+    point br = make_point(TERM_WIDTH - 1, UI_SIDEBAR_RIGHT_HEIGHT);
 
     wid_rightbar = wid_new_square_window("wid rightbar");
     wid_set_ignore_scroll_events(wid_rightbar, true);
@@ -707,9 +708,10 @@ static bool wid_rightbar_create(void)
   //
   y_at += 8;
   {
-    auto  w  = wid_new_container(wid_rightbar, "minimap wid");
-    point tl = make_point(0, y_at);
-    point br = make_point(UI_SIDEBAR_RIGHT_WIDTH, y_at + UI_SIDEBAR_RIGHT_WIDTH);
+    auto w      = wid_new_container(wid_rightbar, "minimap wid");
+    wid_minimap = w;
+    point tl    = make_point(0, y_at);
+    point br    = make_point(UI_SIDEBAR_RIGHT_WIDTH, y_at + UI_SIDEBAR_RIGHT_WIDTH);
 
     wid_set_pos(w, tl, br);
     wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);

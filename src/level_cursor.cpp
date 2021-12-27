@@ -4,6 +4,7 @@
 //
 
 #include "my_array_bounds_check.hpp"
+#include "my_backtrace.hpp"
 #include "my_game.hpp"
 #include "my_globals.hpp"
 #include "my_ptrcheck.hpp"
@@ -15,7 +16,6 @@
 #include "my_wid_bag.hpp"
 #include "my_wid_inventory.hpp"
 #include "my_wid_thing_info.hpp"
-//#include "my_backtrace.hpp"
 
 void Level::cursor_check_if_scroll_needed(void)
 {
@@ -131,6 +131,7 @@ void Level::cursor_recreate(void)
 {
   TRACE_AND_INDENT();
   // backtrace_dump();
+
   //
   // Player might be on another level
   //

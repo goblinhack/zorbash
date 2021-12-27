@@ -6435,9 +6435,15 @@ void wid_tick_all(void)
     game->request_remake_inventory = false;
   }
 
+  //
+  // If not over the minimap, clear the cursor. This allows us to click on the map
+  // and have the player move to that location.
+  //
   if (wid_over) {
     if (game->level) {
-      game->level->cursor_path_clear();
+      if (wid_over != wid_minimap) {
+        game->level->cursor_path_clear();
+      }
     }
   }
 }
