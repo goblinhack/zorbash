@@ -57,3 +57,33 @@ void Thing::treasure_map_check(void)
   }
   set_treasure_map_count(count);
 }
+
+bool Thing::treasure_map_available(void)
+{
+  TRACE_NO_INDENT();
+
+  if (! maybe_infop()) {
+    return false;
+  }
+
+  //
+  // Check if we have a map and that it works for this level
+  //
+  for (const auto t : get_item_vector()) {
+    if (! t->is_treasure_map()) {
+      continue;
+    }
+
+    //
+    // Enchanted maps work for all levels
+    //
+    if (! t->get_enchant()) {
+      auto born_at = t->get_born();
+      if (born_at.z != level->world_at.z) {
+        continue;
+      }
+    }
+    return true;
+  }
+  return false;
+}

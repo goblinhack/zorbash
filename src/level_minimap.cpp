@@ -55,8 +55,8 @@ void Level::update_minimap(bool showing_two_levels, bool show_faded)
   // Check if carrying a treasure map
   //
   bool has_treasure_map = false;
-  if (player && (player->get_treasure_map_count() > 0)) {
-    has_treasure_map = true;
+  if (player) {
+    has_treasure_map = player->treasure_map_available();
   }
 
   bool has_beast_map = false;

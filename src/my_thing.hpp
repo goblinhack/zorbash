@@ -242,16 +242,6 @@ public:
   ThingId set_equip_id_carry_anim(ThingId, int equip);
   ThingId set_equip_id_use_anim(ThingId, int equip);
 
-  bool too_far_from_manifestor(void);
-  bool too_far_from_manifestor(point p);
-  bool too_far_from_manifestor(point p, float delta);
-
-  bool too_far_from_leader(void);
-  bool too_far_from_leader(point p);
-  bool too_far_from_leader(point p, float delta);
-
-  bool same_leader(Thingp it);
-
   Thingp get_best_fire_at_target(void);
   Thingp get_best_visible_target(void);
   Thingp get_equip_carry_anim(int equip);
@@ -421,6 +411,7 @@ public:
   bool possible_to_attack(const Thingp it);
   bool projectile_anim_exists(void);
   bool projectile_choose_target(Thingp item, Thingp victim = nullptr);
+  bool same_leader(Thingp it);
   bool set_on_fire(const std::string &why);
   bool skill_add(Thingp it);
   bool skill_add(Tpp what);
@@ -431,8 +422,8 @@ public:
   bool spawn_fire(const std::string &what);
   bool spawn_next_to(const std::string &what);
   bool spawn_next_to_or_on_monst(const std::string &what);
-  bool spawn_radius_range(Thingp parent, Thingp target, const std::string &what, uint32_t rad_min, uint32_t rad_max);
   bool spawn_radius_range(const std::string &what, uint32_t rad_min, uint32_t rad_max);
+  bool spawn_radius_range(Thingp parent, Thingp target, const std::string &what, uint32_t rad_min, uint32_t rad_max);
   bool steal_item_from(Thingp);
   bool steal_treasure_from(Thingp);
   bool target_attack_best(int equip);
@@ -440,6 +431,13 @@ public:
   bool thing_sound_play_channel(int chan, const std::string &alias);
   bool thing_sound_play(const std::string &alias);
   bool throw_item_choose_target(Thingp item);
+  bool too_far_from_leader(point p);
+  bool too_far_from_leader(point p, float delta);
+  bool too_far_from_leader(void);
+  bool too_far_from_manifestor(point p);
+  bool too_far_from_manifestor(point p, float delta);
+  bool too_far_from_manifestor(void);
+  bool treasure_map_available(void);
   bool try_harder_to_jump(void);
   bool try_to_carry_if_worthwhile_dropping_items_if_needed(Thingp it);
   bool try_to_carry(Thingp w);
