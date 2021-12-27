@@ -67,6 +67,7 @@ std::istream &operator>>(std::istream &in, Bits< ThingInfop & > my)
   // v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v
   /////////////////////////////////////////////////////////////////////////
   // clang-format off
+   in >> bits(my.t->born);
    in >> bits(my.t->bounce_fade);
    in >> bits(my.t->bounce_height);
    in >> bits(my.t->capacity_height);

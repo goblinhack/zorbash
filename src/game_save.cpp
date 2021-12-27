@@ -44,6 +44,7 @@ std::ostream &operator<<(std::ostream &out, Bits< ThingInfop & > const my)
   // v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v
   /////////////////////////////////////////////////////////////////////////
   // clang-format off
+  out << bits(my.t->born);
   out << bits(my.t->bounce_fade);
   out << bits(my.t->bounce_height);
   out << bits(my.t->capacity_height);

@@ -104,6 +104,11 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
   //
   if (is_player() || is_monst() || is_item() || is_cursor()) {
     new_infop();
+
+    //
+    // This is useful for treasure maps to tell if they work on this level
+    //
+    set_born(point3d(born.x, born.y, level->world_at.z));
   }
 
   if (is_player() || is_monst() || is_item()) {

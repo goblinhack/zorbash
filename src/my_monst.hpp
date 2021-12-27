@@ -9,6 +9,7 @@
 
 #include "my_level_shadow_casting.hpp"
 #include "my_light.hpp"
+#include "my_point3d.hpp"
 #include "my_thing_ai.hpp"
 #include "my_thing_id.hpp"
 #include "my_time.hpp"
@@ -64,6 +65,8 @@ public:
   // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
   // v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v
   /////////////////////////////////////////////////////////////////////////
+
+  point3d born; // What level and depth was this born at
 
   ThingId on_fire_id_anim {};
   ThingId owner_id {};         // Who carries this thing?

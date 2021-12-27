@@ -15,6 +15,7 @@
 #include "my_dice.hpp"
 #include "my_fwd.hpp"
 #include "my_point.hpp"
+#include "my_point3d.hpp"
 #include "my_thing_ai.hpp"
 #include "my_thing_defs.hpp"
 #include "my_thing_id.hpp"
@@ -1339,6 +1340,8 @@ public:
   int worth_collecting(const Thingp it);
   int worth_collecting(const Thingp it, Thingp *would_need_to_drop);
 
+  point3d get_born(void);
+
   point get_vision_source(void);
   point dir_to_direction();
   point get_random_target(void);
@@ -1492,9 +1495,6 @@ public:
   uint8_t is_visible();
   uint8_t z_prio(void);
 
-  void check_all_carried_maps(void);
-  void beast_map_check(void);
-  void treasure_map_check(void);
   void achieve_goals_in_death();
   void achieve_goals_in_life();
   void acid_tick();
@@ -1512,6 +1512,7 @@ public:
   void animate();
   void avoid_tick(void);
   void barrel_tick();
+  void beast_map_check(void);
   void blit_end_reflection_submerged(uint8_t submerged);
   void blit_end_submerged(uint8_t submerged);
   void blit_floor_chasm(point &tl, point &br, const ThingTiles *tiles);
@@ -1534,6 +1535,7 @@ public:
   void buff_tick();
   void chasm_tick();
   void check_all_carried_items_are_owned();
+  void check_all_carried_maps(void);
   void clear_age_map(void);
   void clear_can_see_currently(void);
   void clear_can_see_ever(void);
@@ -1681,9 +1683,9 @@ public:
   void rotting(void);
   void score_add(Thingp victim);
   void secret_door_tick();
-  void set_bounce_count(int);
   void set_beast_map_count(int);
-  void set_treasure_map_count(int);
+  void set_born(point3d);
+  void set_bounce_count(int);
   void set_bounce_fade(float);
   void set_bounce_height(float);
   void set_dead_reason(const std::string &);
@@ -1703,6 +1705,7 @@ public:
   void set_score(int);
   void set_spawned_owner(Thingp spawner_owner);
   void set_submerged_offset(int);
+  void set_treasure_map_count(int);
   void set_wobble(float);
   void show_botcon_description(void);
   void skill_activate(Thingp what);
@@ -1714,6 +1717,7 @@ public:
   void tick();
   void topcon(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
   void topcon_(const char *fmt, va_list args); // compile error without
+  void treasure_map_check(void);
   void try_to_carry(const std::list< Thingp > &items);
   void unleash_minions(void);
   void unleash_spawners_things(void);

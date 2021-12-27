@@ -2,6 +2,12 @@ import my
 import tp
 
 
+def on_enchant(me, x, y):
+    owner = my.thing_get_top_owner_id(me)
+    if my.thing_is_player(owner):
+        my.topcon("The map glows. It seems full of knowledge.")
+
+
 def tp_init(name, text_name, short_text_name):
     mytp = tp.Tp(name, text_name, short_text_name)
     mytp.set_collision_hit_priority(0)
@@ -16,6 +22,9 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_item(True)
     mytp.set_is_loggable(True)
     mytp.set_is_moveable(True)
+    mytp.set_enchant_max(1)
+    mytp.set_is_enchantable(True)
+    mytp.set_on_enchant_do("me.on_enchant()")
     mytp.set_is_burnable(True)
     mytp.set_is_treasure_class_b(True)
     mytp.set_is_treasure_type(True)
