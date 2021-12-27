@@ -48,7 +48,7 @@ def tp_init(name, text_name):
     mytp.set_is_able_to_jump_attack(True)
     mytp.set_is_able_to_jump_escape(True)
     mytp.set_is_able_to_jump_on_low_hp_chance_d1000(500)
-    mytp.set_is_able_to_jump_randomly_chance_d1000(100)
+    mytp.set_is_able_to_jump_randomly_chance_d1000(20)
     mytp.set_is_able_to_jump(True)
     mytp.set_is_able_to_see_in_the_dark(True)
     mytp.set_is_attackable_by_monst(True)

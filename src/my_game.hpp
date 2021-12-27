@@ -331,6 +331,7 @@ public:
   bool     request_player_down {};
   bool     request_player_left {};
   bool     request_player_right {};
+  bool     request_player_wait_or_collect {};
 
   Thingp request_inventory_thing_over {};
   Thingp request_inventory_thing_selected {};

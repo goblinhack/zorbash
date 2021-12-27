@@ -112,6 +112,16 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
   //
   // Allow diagonal movements by checking for multiple presses
   //
+  if (key->scancode == (SDL_Scancode) game->config.key_wait_or_collect) {
+    //
+    // Handle in the next event, to give time to have two keys pressed to allow diagonal moves.
+    //
+    if (! game->request_player_move) {
+      game->request_player_move = time_get_time_ms();
+    }
+    game->request_player_wait_or_collect = true;
+    return false; // To avoid click noise
+  }
   if (key->scancode == (SDL_Scancode) game->config.key_move_left) {
     //
     // Handle in the next event, to give time to have two keys pressed to allow diagonal moves.
@@ -159,11 +169,6 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
   }
   if (key->scancode == (SDL_Scancode) game->config.key_jump) {
     jump = true;
-    player_tick(left, right, up, down, attack, wait, jump);
-    return false; // To avoid click noise
-  }
-  if (key->scancode == (SDL_Scancode) game->config.key_wait_or_collect) {
-    wait = true;
     player_tick(left, right, up, down, attack, wait, jump);
     return false; // To avoid click noise
   }

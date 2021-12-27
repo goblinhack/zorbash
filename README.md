@@ -3,9 +3,11 @@
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Next todo                                                                                                                                    -->
-<!-- ------                                                                                                                                       -->
-<!-- - click anywhere on treasure map
-<!-- - monster map                               
+<!-- ------                              -->                                                                                                         -->
+<!-- - monster map                    -->
+<!-- - monster AI with treasure mp      -->
+<!-- - click anywhere on treasure map -->
+<!-- - monster map                         -->
 <!-- - pirate goblin random carry of gold                                                                                                                       -->
 <!-- - pirate map ?                                                                                                                                             -->
 <!-- - necro protection ring                                                                                                                                 -->

@@ -105,23 +105,25 @@ void Level::handle_input_events(void)
 
     game->request_player_move = 0;
 
-    bool wait   = false;
-    bool jump   = false;
-    bool attack = false;
+    bool wait_or_collect = false;
+    bool jump            = false;
+    bool attack          = false;
 
-    up    = up || game->request_player_up;
-    down  = down || game->request_player_down;
-    right = right || game->request_player_right;
-    left  = left || game->request_player_left;
+    up              = up || game->request_player_up;
+    down            = down || game->request_player_down;
+    right           = right || game->request_player_right;
+    left            = left || game->request_player_left;
+    wait_or_collect = wait_or_collect || game->request_player_wait_or_collect;
 
-    game->request_player_up    = false;
-    game->request_player_down  = false;
-    game->request_player_right = false;
-    game->request_player_left  = false;
+    game->request_player_up              = false;
+    game->request_player_down            = false;
+    game->request_player_right           = false;
+    game->request_player_left            = false;
+    game->request_player_wait_or_collect = false;
 
-    if (up || down || left || right) {
+    if (up || down || left || right || wait_or_collect) {
       // TOPCON("%d%d%d%d", up, down, left, right);
-      player_tick(left, right, up, down, attack, wait, jump);
+      player_tick(left, right, up, down, attack, wait_or_collect, jump);
     }
   }
 }
