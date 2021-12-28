@@ -209,7 +209,7 @@ void Level::update_minimap(bool showing_two_levels, bool show_faded)
       for (auto x = 0; x < MAP_WIDTH; x++) {
         color c = BLACK;
 
-        if (is_key(x, y) || is_food(x, y) || is_treasure_type(x, y)) {
+        if (is_key(x, y) || is_food(x, y) || is_treasure_type(x, y) || is_skillstone(x, y) || is_enchantstone(x, y)) {
           c   = GOLD2;
           c.a = 255;
         } else if (is_monst(x, y) || is_spiderweb(x, y) || is_mob(x, y)) {
