@@ -409,8 +409,8 @@ bool Level::create_dungeon(point3d at, int seed)
               // thing_new("thunderstone", point(x - 1, y - 1));
               thing_new("treasure_map", point(x - 1, y - 2));
               thing_new("beast_map", point(x + 1, y - 2));
-              thing_new("fire", point(x + 2, y - 2));
-              // thing_new("goblin", point(x + 1, y));
+              // thing_new("fire", point(x + 2, y - 2));
+              //  thing_new("goblin", point(x + 1, y));
               thing_new("gob_pack", point(x + 2, y));
 #if 0
               thing_new("jelly_baby", point(x + 3, y - 1));
@@ -590,24 +590,6 @@ bool Level::create_dungeon(point3d at, int seed)
     }
 
     //
-    // Place some greenery
-    //
-    dbg2("DGN: Place grass");
-    place_dry_grass(dungeon);
-    if (g_errored) {
-      return false;
-    }
-
-    //
-    // Place some brownery
-    //
-    dbg2("DGN: Place foilage");
-    place_foilage(dungeon);
-    if (g_errored) {
-      return false;
-    }
-
-    //
     // Be evil
     //
     dbg2("DGN: Place spiderweb");
@@ -647,7 +629,28 @@ bool Level::create_dungeon(point3d at, int seed)
     // Final update of the heatmap to account placement of braziers
     //
     dbg2("DGN: Final update heatmap");
+    //
+    // Make sure and place dry grass after this
+    //
     update_heatmap();
+
+    //
+    // Place some greenery
+    //
+    dbg2("DGN: Place grass");
+    place_dry_grass(dungeon);
+    if (g_errored) {
+      return false;
+    }
+
+    //
+    // Place some brownery
+    //
+    dbg2("DGN: Place foilage");
+    place_foilage(dungeon);
+    if (g_errored) {
+      return false;
+    }
 
     delete dungeon;
     break;

@@ -273,10 +273,10 @@ void Dungeon::make_dungeon(void)
   add_spiderweb();
 
   DBG2("DGN: Generate grass");
-  dry_grass_gen(50, // fill prob
-                10, // R1
-                5,  // R2
-                4 /* generations */);
+  dry_grass_gen(1500, // fill prob
+                10,   // R1
+                5,    // R2
+                1 /* generations */);
 
   DBG2("DGN: Generate foilage");
   foilage_gen(10, // fill prob
@@ -3959,10 +3959,38 @@ void Dungeon::dry_grass_gen(unsigned int map_fill_prob, int map_r1, int map_r2, 
     }
   }
 
+  if (0) {
+    printf("initial grass\n");
+    for (y = 2; y < maze_h - 2; y++) {
+      for (x = 2; x < maze_w - 2; x++) {
+        if (get(map_curr, x, y)) {
+          printf(".");
+        } else {
+          printf(" ");
+        }
+      }
+      printf("\n");
+    }
+  }
+
   for (i = 0; i < MAP_GENERATIONS; i++) {
     cave_generation();
     std::copy(mbegin(map_save), mend(map_save), mbegin(map_curr));
     map_save = {};
+  }
+
+  if (0) {
+    printf("final grass\n");
+    for (y = 2; y < maze_h - 2; y++) {
+      for (x = 2; x < maze_w - 2; x++) {
+        if (get(map_curr, x, y)) {
+          printf(".");
+        } else {
+          printf(" ");
+        }
+      }
+      printf("\n");
+    }
   }
 
   for (x = 2; x < maze_w - 2; x++) {
