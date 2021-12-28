@@ -287,6 +287,25 @@ void Thing::update(void)
         carried += carry(W);
       }
     }
+
+    if (is_carrier_of_weapon_class_a()) {
+      auto W = level->thing_new(tp_random_weapon_class_a(), curr_at, this);
+      if (W) {
+        carried += carry(W);
+      }
+    }
+    if (is_carrier_of_weapon_class_b()) {
+      auto W = level->thing_new(tp_random_weapon_class_b(), curr_at, this);
+      if (W) {
+        carried += carry(W);
+      }
+    }
+    if (is_carrier_of_weapon_class_c()) {
+      auto W = level->thing_new(tp_random_weapon_class_c(), curr_at, this);
+      if (W) {
+        carried += carry(W);
+      }
+    }
   }
 
   if (is_able_to_use_wands()) {

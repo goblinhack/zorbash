@@ -237,6 +237,9 @@ private:
   int _is_carrier_of_treasure_class_a {};
   int _is_carrier_of_treasure_class_b {};
   int _is_carrier_of_treasure_class_c {};
+  int _is_carrier_of_weapon_class_a {};
+  int _is_carrier_of_weapon_class_b {};
+  int _is_carrier_of_weapon_class_c {};
   int _is_chasm {};
   int _is_collectable {};
   int _is_collect_as_keys {};
@@ -367,6 +370,9 @@ private:
   int _is_treasure_class_a {};
   int _is_treasure_class_b {};
   int _is_treasure_class_c {};
+  int _is_weapon_class_a {};
+  int _is_weapon_class_b {};
+  int _is_weapon_class_c {};
   int _is_treasure_eater {};
   int _is_treasure_map {};
   int _is_treasure_type {};
@@ -897,6 +903,9 @@ public:
   int is_carrier_of_treasure_class_a(void) const { return _is_carrier_of_treasure_class_a; }
   int is_carrier_of_treasure_class_b(void) const { return _is_carrier_of_treasure_class_b; }
   int is_carrier_of_treasure_class_c(void) const { return _is_carrier_of_treasure_class_c; }
+  int is_carrier_of_weapon_class_a(void) const { return _is_carrier_of_weapon_class_a; }
+  int is_carrier_of_weapon_class_b(void) const { return _is_carrier_of_weapon_class_b; }
+  int is_carrier_of_weapon_class_c(void) const { return _is_carrier_of_weapon_class_c; }
   int is_chasm(void) const { return _is_chasm; }
   int is_collectable(void) const { return _is_collectable; }
   int is_collect_as_keys(void) const { return _is_collect_as_keys; }
@@ -1026,6 +1035,9 @@ public:
   int is_treasure_class_a(void) const { return _is_treasure_class_a; }
   int is_treasure_class_b(void) const { return _is_treasure_class_b; }
   int is_treasure_class_c(void) const { return _is_treasure_class_c; }
+  int is_weapon_class_a(void) const { return _is_weapon_class_a; }
+  int is_weapon_class_b(void) const { return _is_weapon_class_b; }
+  int is_weapon_class_c(void) const { return _is_weapon_class_c; }
   int is_treasure_eater(void) const { return _is_treasure_eater; }
   int is_treasure_map(void) const { return _is_treasure_map; }
   int is_treasure_type(void) const { return _is_treasure_type; }
@@ -1237,6 +1249,9 @@ public:
   void set_is_carrier_of_treasure_class_a(int v) { _is_carrier_of_treasure_class_a = v; }
   void set_is_carrier_of_treasure_class_b(int v) { _is_carrier_of_treasure_class_b = v; }
   void set_is_carrier_of_treasure_class_c(int v) { _is_carrier_of_treasure_class_c = v; }
+  void set_is_carrier_of_weapon_class_a(int v) { _is_carrier_of_weapon_class_a = v; }
+  void set_is_carrier_of_weapon_class_b(int v) { _is_carrier_of_weapon_class_b = v; }
+  void set_is_carrier_of_weapon_class_c(int v) { _is_carrier_of_weapon_class_c = v; }
   void set_is_chasm(int v) { _is_chasm = v; }
   void set_is_collectable(int v) { _is_collectable = v; }
   void set_is_collect_as_keys(int v) { _is_collect_as_keys = v; }
@@ -1366,6 +1381,9 @@ public:
   void set_is_treasure_class_a(int v) { _is_treasure_class_a = v; }
   void set_is_treasure_class_b(int v) { _is_treasure_class_b = v; }
   void set_is_treasure_class_c(int v) { _is_treasure_class_c = v; }
+  void set_is_weapon_class_a(int v) { _is_weapon_class_a = v; }
+  void set_is_weapon_class_b(int v) { _is_weapon_class_b = v; }
+  void set_is_weapon_class_c(int v) { _is_weapon_class_c = v; }
   void set_is_treasure_eater(int v) { _is_treasure_eater = v; }
   void set_is_treasure_type(int v) { _is_treasure_type = v; }
   void set_is_undead(int v) { _is_undead = v; }

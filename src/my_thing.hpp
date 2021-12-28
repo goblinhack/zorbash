@@ -178,9 +178,6 @@ public:
   uint64_t i_set_is_smoke                         : 1 {};
   uint64_t i_set_is_spiderweb                     : 1 {};
   uint64_t i_set_is_sticky                        : 1 {};
-  uint64_t i_set_is_treasure_class_a              : 1 {};
-  uint64_t i_set_is_treasure_class_b              : 1 {};
-  uint64_t i_set_is_treasure_class_c              : 1 {};
   uint64_t i_set_is_treasure_type                 : 1 {};
   uint64_t i_set_is_wall                          : 1 {};
   uint64_t i_set_is_wand                          : 1 {};
@@ -1088,6 +1085,9 @@ public:
   int is_carrier_of_treasure_class_a(void);
   int is_carrier_of_treasure_class_b(void);
   int is_carrier_of_treasure_class_c(void);
+  int is_carrier_of_weapon_class_a(void);
+  int is_carrier_of_weapon_class_b(void);
+  int is_carrier_of_weapon_class_c(void);
   int is_chasm(void);
   int is_collectable(void);
   int is_collect_as_keys(void);
@@ -1219,6 +1219,9 @@ public:
   int is_treasure_class_a(void);
   int is_treasure_class_b(void);
   int is_treasure_class_c(void);
+  int is_weapon_class_a(void);
+  int is_weapon_class_b(void);
+  int is_weapon_class_c(void);
   int is_treasure_eater(void);
   int is_treasure_map(void);
   int is_treasure_type(void);

@@ -183,6 +183,15 @@ void tp_random_init(void)
       if (tp->is_treasure_class_c()) {
         tp_item_class_c.push_back(tp);
       }
+      if (tp->is_weapon_class_a()) {
+        tp_item_class_a.push_back(tp);
+      }
+      if (tp->is_weapon_class_b()) {
+        tp_item_class_b.push_back(tp);
+      }
+      if (tp->is_weapon_class_c()) {
+        tp_item_class_c.push_back(tp);
+      }
     } else {
       if (tp->is_treasure_class_a()) {
         tp_item_class_a.push_back(tp);
@@ -200,6 +209,24 @@ void tp_random_init(void)
         tp_item_not_a_container_class_b.push_back(tp);
       }
       if (tp->is_treasure_class_c()) {
+        tp_item_not_a_container_class_c.push_back(tp);
+      }
+      if (tp->is_weapon_class_a()) {
+        tp_item_class_a.push_back(tp);
+      }
+      if (tp->is_weapon_class_b()) {
+        tp_item_class_b.push_back(tp);
+      }
+      if (tp->is_weapon_class_c()) {
+        tp_item_class_c.push_back(tp);
+      }
+      if (tp->is_weapon_class_a()) {
+        tp_item_not_a_container_class_a.push_back(tp);
+      }
+      if (tp->is_weapon_class_b()) {
+        tp_item_not_a_container_class_b.push_back(tp);
+      }
+      if (tp->is_weapon_class_c()) {
         tp_item_not_a_container_class_c.push_back(tp);
       }
     }

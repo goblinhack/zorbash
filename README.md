@@ -1,5 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- - pirate should not have axe                                                                                                                 -->
 <!-- - grass?                                                                                                                                     -->
 <!-- - some gold coins detail                                                                                                                     -->
 <!-- - when a monst ascends, randomly place it                                                                                                    -->

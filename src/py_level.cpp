@@ -67,9 +67,9 @@ PyObject *level_add_(PyObject *obj, PyObject *args, PyObject *keywds)
                    m.is_descend_sewer || m.is_floor_deco || m.is_food || m.is_mob_easy || m.is_mob_hard ||
                    m.is_gold || m.is_key || m.is_lava || m.is_monst_easy || m.is_monst_med || m.is_monst_hard ||
                    m.is_enchantstone || m.is_skillstone || m.is_treasure_class_a || m.is_treasure_class_b ||
-                   m.is_treasure_class_c || m.is_potion || m.is_wand || m.is_ring || m.is_secret_door ||
-                   m.is_brazier || m.is_barrel || m.is_trap || m.is_shallow_water || m.is_deep_water ||
-                   m.is_floor_deco) {
+                   m.is_treasure_class_c || m.is_weapon_class_a || m.is_weapon_class_b || m.is_weapon_class_c ||
+                   m.is_potion || m.is_wand || m.is_ring || m.is_secret_door || m.is_brazier || m.is_barrel ||
+                   m.is_trap || m.is_shallow_water || m.is_deep_water || m.is_floor_deco) {
           floor_string += Charmap::FLOOR;
         } else {
           floor_string += Charmap::SPACE;
@@ -110,8 +110,9 @@ PyObject *level_add_(PyObject *obj, PyObject *args, PyObject *keywds)
         if (m.is_blood || m.is_ascend_dungeon || m.is_descend_dungeon || m.is_descend_sewer || m.is_floor_deco ||
             m.is_food || m.is_mob_easy || m.is_mob_hard || m.is_gold || m.is_key || m.is_monst_easy ||
             m.is_monst_med || m.is_monst_hard || m.is_enchantstone || m.is_skillstone || m.is_treasure_class_a ||
-            m.is_treasure_class_b || m.is_treasure_class_c || m.is_potion || m.is_wand || m.is_ring || m.is_brazier ||
-            m.is_barrel || m.is_trap || m.is_descend_sewer) {
+            m.is_treasure_class_b || m.is_treasure_class_c || m.is_weapon_class_a || m.is_weapon_class_b ||
+            m.is_weapon_class_c || m.is_potion || m.is_wand || m.is_ring || m.is_brazier || m.is_barrel ||
+            m.is_trap || m.is_descend_sewer) {
           obj_strings += c;
         } else {
           obj_strings += Charmap::SPACE;
@@ -442,9 +443,6 @@ LEVEL_BODY_GET_BOOL_AT(level_is_brazier_at, is_brazier)
 LEVEL_BODY_GET_BOOL_AT(level_is_bridge_at, is_bridge)
 LEVEL_BODY_GET_BOOL_AT(level_is_buff_at, is_buff)
 LEVEL_BODY_GET_BOOL_AT(level_is_burnable_at, is_burnable)
-LEVEL_BODY_GET_BOOL_AT(level_is_carrier_of_treasure_class_a_at, is_carrier_of_treasure_class_a)
-LEVEL_BODY_GET_BOOL_AT(level_is_carrier_of_treasure_class_b_at, is_carrier_of_treasure_class_b)
-LEVEL_BODY_GET_BOOL_AT(level_is_carrier_of_treasure_class_c_at, is_carrier_of_treasure_class_c)
 LEVEL_BODY_GET_BOOL_AT(level_is_carrying_item_at, is_carrying_item)
 LEVEL_BODY_GET_BOOL_AT(level_is_carrying_treasure_at, is_carrying_treasure)
 LEVEL_BODY_GET_BOOL_AT(level_is_chasm_at, is_chasm)
@@ -581,9 +579,6 @@ LEVEL_BODY_GET_BOOL_AT(level_is_tickable_at, is_tickable)
 LEVEL_BODY_GET_BOOL_AT(level_is_tmp_thing_at, is_tmp_thing)
 LEVEL_BODY_GET_BOOL_AT(level_is_torch_at, is_torch)
 LEVEL_BODY_GET_BOOL_AT(level_is_treasure_chest_at, is_treasure_chest)
-LEVEL_BODY_GET_BOOL_AT(level_is_treasure_class_a_at, is_treasure_class_a)
-LEVEL_BODY_GET_BOOL_AT(level_is_treasure_class_b_at, is_treasure_class_b)
-LEVEL_BODY_GET_BOOL_AT(level_is_treasure_class_c_at, is_treasure_class_c)
 LEVEL_BODY_GET_BOOL_AT(level_is_treasure_eater_at, is_treasure_eater)
 LEVEL_BODY_GET_BOOL_AT(level_is_treasure_type_at, is_treasure_type)
 LEVEL_BODY_GET_BOOL_AT(level_is_undead_at, is_undead)

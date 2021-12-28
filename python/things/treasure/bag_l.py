@@ -16,6 +16,8 @@ def tp_init(name, text_name):
     mytp.set_is_burnable(True)
     mytp.set_is_carrier_of_treasure_class_a(True)
     mytp.set_is_carrier_of_treasure_class_b(True)
+    mytp.set_is_carrier_of_weapon_class_a(True)
+    mytp.set_is_carrier_of_weapon_class_b(True)
     mytp.set_is_collectable(True)
     mytp.set_is_described_when_hovering_over(True)
     mytp.set_is_droppable(True)

@@ -13,6 +13,7 @@ def tp_init(name, text_name):
     mytp.set_on_death_of_a_follower_do("me.on_death_of_a_follower()")
     mytp.set_text_description("A grizzled war-weary goblin.")
     mytp.set_is_carrier_of_treasure_class_b(True)
+    mytp.set_is_carrier_of_weapon_class_b(True)
     mytp.set_stat_strength(12)
     mytp.set_health_initial_dice("2d10+4")
     mytp.set_is_able_to_use_weapons(True)

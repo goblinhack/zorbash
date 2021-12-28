@@ -138,18 +138,6 @@ void Thing::level_pop(void)
     i_set_is_heavy = false;
     level->unset_is_heavy(mx, my);
   }
-  if (i_set_is_treasure_class_a) {
-    i_set_is_treasure_class_a = false;
-    level->unset_is_treasure_class_a(mx, my);
-  }
-  if (i_set_is_treasure_class_b) {
-    i_set_is_treasure_class_b = false;
-    level->unset_is_treasure_class_b(mx, my);
-  }
-  if (i_set_is_treasure_class_c) {
-    i_set_is_treasure_class_c = false;
-    level->unset_is_treasure_class_c(mx, my);
-  }
   if (i_set_is_key) {
     i_set_is_key = false;
     level->unset_is_key(mx, my);

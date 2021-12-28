@@ -139,18 +139,6 @@ void Thing::level_push(void)
     i_set_is_heavy = true;
     level->set_is_heavy(mx, my);
   }
-  if (is_treasure_class_a()) {
-    i_set_is_treasure_class_a = true;
-    level->set_is_treasure_class_a(mx, my);
-  }
-  if (is_treasure_class_b()) {
-    i_set_is_treasure_class_b = true;
-    level->set_is_treasure_class_b(mx, my);
-  }
-  if (is_treasure_class_c()) {
-    i_set_is_treasure_class_c = true;
-    level->set_is_treasure_class_c(mx, my);
-  }
   if (is_key()) {
     i_set_is_key = true;
     level->set_is_key(mx, my);

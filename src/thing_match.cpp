@@ -246,15 +246,6 @@ bool Thing::matches(const std::string &what)
   if (is_burnable() && (what == "is_burnable")) {
     return true;
   }
-  if (is_carrier_of_treasure_class_a() && (what == "is_carrier_of_treasure_class_a")) {
-    return true;
-  }
-  if (is_carrier_of_treasure_class_b() && (what == "is_carrier_of_treasure_class_b")) {
-    return true;
-  }
-  if (is_carrier_of_treasure_class_c() && (what == "is_carrier_of_treasure_class_c")) {
-    return true;
-  }
   if (is_chasm() && (what == "is_chasm")) {
     return true;
   }
@@ -592,15 +583,6 @@ bool Thing::matches(const std::string &what)
     return true;
   }
   if (is_torch() && (what == "is_torch")) {
-    return true;
-  }
-  if (is_treasure_class_a() && (what == "is_treasure_class_a")) {
-    return true;
-  }
-  if (is_treasure_class_b() && (what == "is_treasure_class_b")) {
-    return true;
-  }
-  if (is_treasure_class_c() && (what == "is_treasure_class_c")) {
     return true;
   }
   if (is_treasure_chest() && (what == "is_treasure_chest")) {
@@ -952,15 +934,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_burnable") {
     return &Thing::is_burnable;
   }
-  if (what == "is_carrier_of_treasure_class_a") {
-    return &Thing::is_carrier_of_treasure_class_a;
-  }
-  if (what == "is_carrier_of_treasure_class_b") {
-    return &Thing::is_carrier_of_treasure_class_b;
-  }
-  if (what == "is_carrier_of_treasure_class_c") {
-    return &Thing::is_carrier_of_treasure_class_c;
-  }
   if (what == "is_chasm") {
     return &Thing::is_chasm;
   }
@@ -1293,15 +1266,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   }
   if (what == "is_torch") {
     return &Thing::is_torch;
-  }
-  if (what == "is_treasure_class_a") {
-    return &Thing::is_treasure_class_a;
-  }
-  if (what == "is_treasure_class_b") {
-    return &Thing::is_treasure_class_b;
-  }
-  if (what == "is_treasure_class_c") {
-    return &Thing::is_treasure_class_c;
   }
   if (what == "is_treasure_chest") {
     return &Thing::is_treasure_chest;

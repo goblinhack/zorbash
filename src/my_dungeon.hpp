@@ -118,6 +118,9 @@ public:
   bool   is_treasure_class_a(const int x, const int y);
   bool   is_treasure_class_b(const int x, const int y);
   bool   is_treasure_class_c(const int x, const int y);
+  bool   is_weapon_class_a(const int x, const int y);
+  bool   is_weapon_class_b(const int x, const int y);
+  bool   is_weapon_class_c(const int x, const int y);
   bool   is_key(const int x, const int y);
   bool   is_lava(const int x, const int y);
   bool   is_lava_no_check(const int x, const int y);

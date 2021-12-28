@@ -1011,12 +1011,11 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules(Dungeonp d)
       //
       // If a hard monst room then always give treasure
       //
-      auto r                    = d->getr(x, y);
-      bool always_give_treasure = false;
+      auto r           = d->getr(x, y);
+      bool be_generous = false;
       if (r) {
-        always_give_treasure = r->contains(MAP_DEPTH_OBJ, Charmap::MONST_HARD) ||
-                               r->contains(MAP_DEPTH_OBJ, Charmap::MONST_MED) ||
-                               r->contains(MAP_DEPTH_OBJ, Charmap::DOOR);
+        be_generous = r->contains(MAP_DEPTH_OBJ, Charmap::MONST_HARD) ||
+                      r->contains(MAP_DEPTH_OBJ, Charmap::MONST_MED) || r->contains(MAP_DEPTH_OBJ, Charmap::DOOR);
       }
 
       //
@@ -1034,7 +1033,7 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules(Dungeonp d)
         // Else choose a normal mob
         //
         if (d->is_mob_easy(x, y)) {
-          if (always_give_treasure) {
+          if (be_generous) {
             tp = tp_random_mob_easy(p);
           } else {
             if (pcg_random_range(0, 100) < 50) {
@@ -1051,7 +1050,7 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules(Dungeonp d)
       }
 
       if (d->is_treasure_type(x, y)) {
-        if (always_give_treasure) {
+        if (be_generous) {
           tp = tp_random_treasure();
         } else {
           if (pcg_random_range(0, 100) < 50) {
@@ -1076,7 +1075,7 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules(Dungeonp d)
         }
       } else {
         if (d->is_treasure_class_a(x, y)) {
-          if (always_give_treasure) {
+          if (be_generous) {
             tp = tp_random_item_class_a();
           } else {
             if (pcg_random_range(0, 100) < 50) {
@@ -1086,7 +1085,7 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules(Dungeonp d)
         }
 
         if (d->is_treasure_class_b(x, y)) {
-          if (always_give_treasure) {
+          if (be_generous) {
             tp = tp_random_item_class_b();
           } else {
             if (pcg_random_range(0, 100) < 50) {
@@ -1096,11 +1095,41 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules(Dungeonp d)
         }
 
         if (d->is_treasure_class_c(x, y)) {
-          if (always_give_treasure) {
+          if (be_generous) {
             tp = tp_random_item_class_c();
           } else {
             if (pcg_random_range(0, 100) < 50) {
               tp = tp_random_item_class_c();
+            }
+          }
+        }
+
+        if (d->is_weapon_class_a(x, y)) {
+          if (be_generous) {
+            tp = tp_random_weapon_class_a();
+          } else {
+            if (pcg_random_range(0, 100) < 50) {
+              tp = tp_random_weapon_class_a();
+            }
+          }
+        }
+
+        if (d->is_weapon_class_b(x, y)) {
+          if (be_generous) {
+            tp = tp_random_weapon_class_b();
+          } else {
+            if (pcg_random_range(0, 100) < 50) {
+              tp = tp_random_weapon_class_b();
+            }
+          }
+        }
+
+        if (d->is_weapon_class_c(x, y)) {
+          if (be_generous) {
+            tp = tp_random_weapon_class_c();
+          } else {
+            if (pcg_random_range(0, 100) < 50) {
+              tp = tp_random_weapon_class_c();
             }
           }
         }
@@ -1340,8 +1369,9 @@ void Level::place_floor_deco(Dungeonp d)
       if (d->is_food(x, y) || d->is_blood(x, y) || d->is_door(x, y) || d->is_ascend_dungeon(x, y) ||
           d->is_descend_dungeon(x, y) || d->is_mob_any(x, y) || d->is_key(x, y) || d->is_potion(x, y) ||
           d->is_barrel(x, y) || d->is_wand(x, y) || d->is_ring(x, y) || d->is_secret_door(x, y) ||
-          d->is_treasure_type(x, y) || d->is_treasure_class_a(x, y) || d->is_treasure_class_b(x, y) ||
-          d->is_treasure_class_c(x, y) || d->is_monst_any(x, y)) {
+          d->is_weapon_class_a(x, y) || d->is_weapon_class_b(x, y) || d->is_treasure_type(x, y) ||
+          d->is_treasure_class_a(x, y) || d->is_treasure_class_b(x, y) || d->is_treasure_class_c(x, y) ||
+          d->is_monst_any(x, y)) {
         continue;
       }
 
@@ -1382,8 +1412,9 @@ void Level::create_dungeon_place_random_floor_deco(Dungeonp d)
       if (d->is_food(x, y) || d->is_blood(x, y) || d->is_door(x, y) || d->is_ascend_dungeon(x, y) ||
           d->is_descend_dungeon(x, y) || d->is_mob_any(x, y) || d->is_key(x, y) || d->is_potion(x, y) ||
           d->is_barrel(x, y) || d->is_wand(x, y) || d->is_ring(x, y) || d->is_secret_door(x, y) ||
-          d->is_treasure_type(x, y) || d->is_treasure_class_a(x, y) || d->is_treasure_class_b(x, y) ||
-          d->is_treasure_class_c(x, y) || d->is_monst_any(x, y)) {
+          d->is_weapon_class_a(x, y) || d->is_weapon_class_b(x, y) || d->is_treasure_type(x, y) ||
+          d->is_treasure_class_a(x, y) || d->is_treasure_class_b(x, y) || d->is_treasure_class_c(x, y) ||
+          d->is_monst_any(x, y)) {
         continue;
       }
 
@@ -1639,8 +1670,9 @@ void Level::place_random_treasure(Dungeonp d)
     auto x = pcg_random_range(MAP_BORDER_ROCK, MAP_WIDTH - MAP_BORDER_ROCK);
     auto y = pcg_random_range(MAP_BORDER_ROCK, MAP_HEIGHT - MAP_BORDER_ROCK);
 
-    if (d->is_dirt(x, y) || d->is_treasure_class_a(x, y) || d->is_treasure_class_b(x, y) ||
-        d->is_treasure_class_c(x, y) || d->is_deep_water(x, y) || d->is_spiderweb(x, y) || d->is_foilage(x, y)) {
+    if (d->is_dirt(x, y) || d->is_weapon_class_a(x, y) || d->is_weapon_class_b(x, y) || d->is_weapon_class_c(x, y) ||
+        d->is_treasure_class_a(x, y) || d->is_treasure_class_b(x, y) || d->is_treasure_class_c(x, y) ||
+        d->is_deep_water(x, y) || d->is_spiderweb(x, y) || d->is_foilage(x, y)) {
       auto tp = tp_random_treasure();
       if (unlikely(! tp)) {
         return;
@@ -1692,8 +1724,9 @@ void Level::place_random_torches(Dungeonp d)
     auto x = pcg_random_range(MAP_BORDER_ROCK, MAP_WIDTH - MAP_BORDER_ROCK);
     auto y = pcg_random_range(MAP_BORDER_ROCK, MAP_HEIGHT - MAP_BORDER_ROCK);
 
-    if (d->is_dirt(x, y) || d->is_treasure_class_a(x, y) || d->is_treasure_class_b(x, y) ||
-        d->is_treasure_class_c(x, y) || d->is_deep_water(x, y) || d->is_spiderweb(x, y) || d->is_foilage(x, y)) {
+    if (d->is_dirt(x, y) || d->is_weapon_class_a(x, y) || d->is_weapon_class_b(x, y) || d->is_weapon_class_c(x, y) ||
+        d->is_treasure_class_a(x, y) || d->is_treasure_class_b(x, y) || d->is_treasure_class_c(x, y) ||
+        d->is_deep_water(x, y) || d->is_spiderweb(x, y) || d->is_foilage(x, y)) {
 
       if (d->is_deep_water(x, y) || d->is_foilage(x, y)) {
         continue;

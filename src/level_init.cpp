@@ -56,9 +56,6 @@ void Level::clear(void)
   _is_spiderweb        = {};
   _is_sticky           = {};
   _is_shovable         = {};
-  _is_treasure_class_a = {};
-  _is_treasure_class_b = {};
-  _is_treasure_class_c = {};
   _is_treasure_type    = {};
   _is_wall             = {};
 

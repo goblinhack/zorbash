@@ -185,6 +185,21 @@ void Charmap::init_charmaps(void)
   c->c                   = char_index;
   c->is_treasure_class_c = true;
 
+  char_index           = Charmap::WEAPON_CLASS_A;
+  c                    = &all_charmaps[ char_index ];
+  c->c                 = char_index;
+  c->is_weapon_class_a = true;
+
+  char_index           = Charmap::WEAPON_CLASS_B;
+  c                    = &all_charmaps[ char_index ];
+  c->c                 = char_index;
+  c->is_weapon_class_b = true;
+
+  char_index           = Charmap::WEAPON_CLASS_C;
+  c                    = &all_charmaps[ char_index ];
+  c->c                 = char_index;
+  c->is_weapon_class_c = true;
+
   char_index       = Charmap::MONST_EASY;
   c                = &all_charmaps[ char_index ];
   c->c             = char_index;
@@ -229,13 +244,13 @@ void Charmap::init_charmaps(void)
   c          = &all_charmaps[ char_index ];
   c->c       = char_index;
 
-  char_index                  = Charmap::MINION_MOB_EASY;
-  c                           = &all_charmaps[ char_index ];
-  c->c                        = char_index;
+  char_index     = Charmap::MINION_MOB_EASY;
+  c              = &all_charmaps[ char_index ];
+  c->c           = char_index;
   c->is_mob_easy = true;
 
-  char_index                  = Charmap::MINION_MOB_HARD;
-  c                           = &all_charmaps[ char_index ];
-  c->c                        = char_index;
+  char_index     = Charmap::MINION_MOB_HARD;
+  c              = &all_charmaps[ char_index ];
+  c->c           = char_index;
   c->is_mob_easy = true;
 }

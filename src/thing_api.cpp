@@ -722,6 +722,24 @@ int Thing::is_carrier_of_treasure_class_c(void)
   return (tp()->is_carrier_of_treasure_class_c());
 }
 
+int Thing::is_carrier_of_weapon_class_a(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_carrier_of_weapon_class_a());
+}
+
+int Thing::is_carrier_of_weapon_class_b(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_carrier_of_weapon_class_b());
+}
+
+int Thing::is_carrier_of_weapon_class_c(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_carrier_of_weapon_class_c());
+}
+
 int Thing::is_chasm(void)
 {
   TRACE_NO_INDENT();
@@ -1892,6 +1910,24 @@ int Thing::is_treasure_class_c(void)
   return (tp()->is_treasure_class_c());
 }
 
+int Thing::is_weapon_class_a(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_weapon_class_a());
+}
+
+int Thing::is_weapon_class_b(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_weapon_class_b());
+}
+
+int Thing::is_weapon_class_c(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_weapon_class_c());
+}
+
 int Thing::is_treasure_chest(void)
 {
   TRACE_NO_INDENT();
@@ -2418,6 +2454,7 @@ point3d Thing::get_born(void)
     return (get_infop()->born);
   } else {
     die("No born location");
+    return (point3d(-1, -1, -1));
   }
 }
 

@@ -1211,6 +1211,57 @@ bool Dungeon::is_treasure_class_c(const int x, const int y)
   return false;
 }
 
+bool Dungeon::is_weapon_class_a(const int x, const int y)
+{
+  if (unlikely(is_oob(x, y))) {
+    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+  }
+
+  for (auto d = 0; d < map_depth; d++) {
+    auto c = getc(x, y, d);
+    auto v = get(Charmap::all_charmaps, c);
+
+    if (v.is_weapon_class_a) {
+      return true;
+    }
+  }
+  return false;
+}
+
+bool Dungeon::is_weapon_class_b(const int x, const int y)
+{
+  if (unlikely(is_oob(x, y))) {
+    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+  }
+
+  for (auto d = 0; d < map_depth; d++) {
+    auto c = getc(x, y, d);
+    auto v = get(Charmap::all_charmaps, c);
+
+    if (v.is_weapon_class_b) {
+      return true;
+    }
+  }
+  return false;
+}
+
+bool Dungeon::is_weapon_class_c(const int x, const int y)
+{
+  if (unlikely(is_oob(x, y))) {
+    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+  }
+
+  for (auto d = 0; d < map_depth; d++) {
+    auto c = getc(x, y, d);
+    auto v = get(Charmap::all_charmaps, c);
+
+    if (v.is_weapon_class_c) {
+      return true;
+    }
+  }
+  return false;
+}
+
 bool Dungeon::is_gold(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {

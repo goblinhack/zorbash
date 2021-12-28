@@ -6,6 +6,7 @@ def tp_init(name, text_name):
     mytp.set_text_description("A very lesser and a bit insecure goblin.")
     mytp.set_is_able_to_use_weapons(True)
     mytp.set_is_carrier_of_treasure_class_a(True)
+    mytp.set_is_carrier_of_weapon_class_a(True)
 
     delay = 300
     mytp.set_tile(tile=name + ".1", delay_ms=delay, frame=1)

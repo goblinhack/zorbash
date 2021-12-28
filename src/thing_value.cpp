@@ -37,6 +37,18 @@ int Thing::maybe_itemp_value(Thingp it)
     value++;
   }
 
+  if (it->is_weapon_class_a()) {
+    value++;
+  }
+
+  if (it->is_weapon_class_b()) {
+    value++;
+  }
+
+  if (it->is_weapon_class_c()) {
+    value++;
+  }
+
   //
   // Things are more "valuable" if we need them now for a health boost
   //

@@ -123,7 +123,7 @@ std::string Thing::to_dbg_string(void)
       " %s (%d,%d)%s%s%s%s%s%s%s%s%s%s%s%s"
       "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s"
       "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s"
-      "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s"
+      "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s"
       "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s)",
       level->world_at.z, id.id, tp() ? tp()->name().c_str() : "notp", curr_at.x, curr_at.y,
       has_ever_moved ? ", has_ever_moved" : "", has_external_particle ? ", has_external_particle" : "",
@@ -168,9 +168,6 @@ std::string Thing::to_dbg_string(void)
       i_set_is_shallow_water ? ", i_set_is_shallow_water" : "", i_set_is_skillstone ? ", i_set_is_skillstone" : "",
       i_set_is_smoke ? ", i_set_is_smoke" : "", i_set_is_spiderweb ? ", i_set_is_spiderweb" : "",
       i_set_is_sticky ? ", i_set_is_sticky" : "", i_set_is_shovable ? ", i_set_is_shovable" : "",
-      i_set_is_treasure_class_a ? ", i_set_is_treasure_class_a" : "",
-      i_set_is_treasure_class_b ? ", i_set_is_treasure_class_b" : "",
-      i_set_is_treasure_class_c ? ", i_set_is_treasure_class_c" : "",
       i_set_is_treasure_type ? ", i_set_is_treasure_type" : "", i_set_is_wall ? ", i_set_is_wall" : "",
       i_set_is_wand ? ", i_set_is_wand" : "", i_set_is_ring ? ", i_set_is_ring" : ""));
 }
@@ -187,7 +184,7 @@ std::string Thing::to_dbg_saved_string(void)
       "L%d %" PRIx32
       " %s (%d,%d)%s%s%s%s%s%s%s%s%s%s%s%s%s"
       "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s"
-      "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s"
+      "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s"
       "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s"
       "%s%s%s%s%s%s%s%s%s%s%s%s%s%s)",
       level->world_at.z, id.id, tp() ? tp()->name().c_str() : "notp", curr_at.x, curr_at.y,
@@ -232,9 +229,6 @@ std::string Thing::to_dbg_saved_string(void)
       i_set_is_shallow_water ? ", i_set_is_shallow_water" : "", i_set_is_skillstone ? ", i_set_is_skillstone" : "",
       i_set_is_smoke ? ", i_set_is_smoke" : "", i_set_is_spiderweb ? ", i_set_is_spiderweb" : "",
       i_set_is_sticky ? ", i_set_is_sticky" : "", i_set_is_shovable ? ", i_set_is_shovable" : "",
-      i_set_is_treasure_class_a ? ", i_set_is_treasure_class_a" : "",
-      i_set_is_treasure_class_b ? ", i_set_is_treasure_class_b" : "",
-      i_set_is_treasure_class_c ? ", i_set_is_treasure_class_c" : "",
       i_set_is_treasure_type ? ", i_set_is_treasure_type" : "", i_set_is_wall ? ", i_set_is_wall" : "",
       i_set_is_wand ? ", i_set_is_wand" : "", i_set_is_ring ? ", i_set_is_ring" : ""));
 }

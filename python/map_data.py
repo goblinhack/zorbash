@@ -40,6 +40,9 @@ import my
 # TREASURE_CLASS_A              $  has a 50% chance of not heing generated
 # TREASURE_CLASS_B              2  has a 50% chance of not heing generated
 # TREASURE_CLASS_C              3  has a 50% chance of not heing generated
+# WEAPON_CLASS_A                (  has a 50% chance of not heing generated
+# WEAPON_CLASS_B                )  has a 50% chance of not heing generated
+# WEAPON_CLASS_C                -  has a 50% chance of not heing generated
 
 # FOOD                          f  always generated
 # GOLD                          o  always generated

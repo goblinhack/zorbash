@@ -709,6 +709,15 @@ class Tp:
     def set_is_carrier_of_treasure_class_a(self, value):
         my.tp_set_is_carrier_of_treasure_class_a(self, value)
 
+    def set_is_carrier_of_weapon_class_c(self, value):
+        my.tp_set_is_carrier_of_weapon_class_c(self, value)
+
+    def set_is_carrier_of_weapon_class_b(self, value):
+        my.tp_set_is_carrier_of_weapon_class_b(self, value)
+
+    def set_is_carrier_of_weapon_class_a(self, value):
+        my.tp_set_is_carrier_of_weapon_class_a(self, value)
+
     def set_is_torch(self, value):
         my.tp_set_is_torch(self, value)
 
@@ -835,9 +844,6 @@ class Tp:
     def set_is_able_to_fall(self, value):
         my.tp_set_is_able_to_fall(self, value)
 
-    def set_is_treasure_class_c(self, value):
-        my.tp_set_is_treasure_class_c(self, value)
-
     def set_item_height(self, value):
         my.tp_set_item_height(self, value)
 
@@ -916,9 +922,6 @@ class Tp:
     def set_is_attackable_by_player(self, value):
         my.tp_set_is_attackable_by_player(self, value)
 
-    def set_is_treasure_class_b(self, value):
-        my.tp_set_is_treasure_class_b(self, value)
-
     def set_is_item_eater(self, value):
         my.tp_set_is_item_eater(self, value)
 
@@ -972,6 +975,21 @@ class Tp:
 
     def set_is_treasure_class_a(self, value):
         my.tp_set_is_treasure_class_a(self, value)
+
+    def set_is_treasure_class_c(self, value):
+        my.tp_set_is_treasure_class_c(self, value)
+
+    def set_is_treasure_class_b(self, value):
+        my.tp_set_is_treasure_class_b(self, value)
+
+    def set_is_weapon_class_a(self, value):
+        my.tp_set_is_weapon_class_a(self, value)
+
+    def set_is_weapon_class_c(self, value):
+        my.tp_set_is_weapon_class_c(self, value)
+
+    def set_is_weapon_class_b(self, value):
+        my.tp_set_is_weapon_class_b(self, value)
 
     def set_is_bag(self, value):
         my.tp_set_is_bag(self, value)

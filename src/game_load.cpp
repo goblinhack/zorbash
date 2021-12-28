@@ -429,9 +429,6 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
   my.t->i_set_is_spiderweb = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->i_set_is_sticky = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->i_set_is_shovable = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
-  my.t->i_set_is_treasure_class_a = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
-  my.t->i_set_is_treasure_class_b = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
-  my.t->i_set_is_treasure_class_c = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->i_set_is_treasure_type = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->i_set_is_wall = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->i_set_is_wand = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
@@ -541,9 +538,6 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   in >> bits(my.t->_is_spiderweb);
   in >> bits(my.t->_is_sticky);
   in >> bits(my.t->_is_shovable);
-  in >> bits(my.t->_is_treasure_class_a);
-  in >> bits(my.t->_is_treasure_class_b);
-  in >> bits(my.t->_is_treasure_class_c);
   in >> bits(my.t->_is_treasure_type);
   in >> bits(my.t->_is_wall);
   in >> bits(my.t->_is_wand);

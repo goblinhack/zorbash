@@ -40,7 +40,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_moveable(True)
     mytp.set_is_rusty(True)
     mytp.set_is_sword(True)
-    mytp.set_is_treasure_class_a(True)
+    mytp.set_is_weapon_class_a(True)
     mytp.set_is_treasure_type(True)
     mytp.set_is_usable(True)
     mytp.set_is_weapon(True)
