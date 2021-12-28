@@ -161,6 +161,14 @@ void Thing::set_owner(Thingp owner)
     verify(MTYPE_THING, owner);
   }
 
+  //
+  // Catches errors when initializing things
+  //
+  if (! tp()) {
+    err("Thing has no template");
+    return;
+  }
+
   auto old_owner = get_immediate_owner();
   if (old_owner) {
     if (old_owner == owner) {

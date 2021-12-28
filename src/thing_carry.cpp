@@ -19,6 +19,11 @@ bool Thing::carry(Thingp item, bool can_equip)
     return false;
   }
 
+  if (! item->tp()) {
+    err("Cannot carry, has no tp");
+    return false;
+  }
+
   if (is_being_destroyed) {
     err("No thing is being destroyed");
     return false;

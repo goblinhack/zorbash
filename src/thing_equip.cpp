@@ -617,8 +617,7 @@ bool Thing::equip_use(bool forced, int equip)
 
     used_as = equip_tp->gfx_anim_use();
     if (used_as.empty()) {
-      die("Could not use %s/%" PRIx32 " has no 'use' animation frame", item->to_short_string().c_str(),
-          item->id.id);
+      die("Could not use %s/%" PRIx32 " has no 'use' animation frame", item->to_short_string().c_str(), item->id.id);
       return false;
     }
 
