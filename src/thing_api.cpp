@@ -6563,6 +6563,12 @@ const std::string &Thing::text_hits(void)
   return (tp()->text_hits());
 }
 
+const std::string &Thing::text_natural_attack_type(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->text_natural_attack_type());
+}
+
 const std::string &Thing::text_name(void)
 {
   TRACE_NO_INDENT();

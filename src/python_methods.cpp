@@ -1042,6 +1042,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_TP_FUNCTION(text_description),
     MY_ADD_PYTHON_TP_FUNCTION(text_enchant),
     MY_ADD_PYTHON_TP_FUNCTION(text_hits),
+    MY_ADD_PYTHON_TP_FUNCTION(text_natural_attack_type),
     MY_ADD_PYTHON_TP_FUNCTION(text_name),
     MY_ADD_PYTHON_TP_FUNCTION(text_skill),
     MY_ADD_PYTHON_TP_FUNCTION(text_title),

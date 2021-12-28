@@ -85,6 +85,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("A dungeon auto cleaner jelly thingy.")
     mytp.set_text_hits("burns")
+    mytp.set_text_natural_attack_type("burn")
     mytp.set_z_depth(my.MAP_DEPTH_OBJ)
     mytp.set_z_prio(my.MAP_PRIO_IN_FRONT)  # so it appears over things when consuming
 

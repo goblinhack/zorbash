@@ -54,7 +54,7 @@ def tp_init(name, text_name):
     mytp.set_stat_strength(7)
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("The angry spirit of one long passed.")
-    mytp.set_text_hits("slashes")
+    mytp.set_text_hits("touch")
     mytp.set_z_depth(my.MAP_DEPTH_OBJ)
     mytp.set_z_prio(my.MAP_PRIO_BEHIND)
 

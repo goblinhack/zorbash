@@ -361,6 +361,9 @@ class Tp:
     def set_text_hits(self, value):
         my.tp_set_text_hits(self, value)
 
+    def set_text_natural_attack_type(self, value):
+        my.tp_set_text_natural_attack_type(self, value)
+
     def set_spawn_on_shoved(self, value):
         my.tp_set_spawn_on_shoved(self, value)
 

@@ -33,6 +33,7 @@ def tp_init(name, text_name):
     mytp.set_text_a_or_an("")
     mytp.set_text_description("Fire.")
     mytp.set_text_hits("burns")
+    mytp.set_text_natural_attack_type("fire")
     mytp.set_z_depth(my.MAP_DEPTH_OBJ)
     mytp.set_z_prio(my.MAP_PRIO_IN_FRONT)
 

@@ -1405,3 +1405,32 @@ std::string strerror_to_string(const int err)
 #endif
   return "Could not decode errno: " + std::to_string(err) + " strerror_r errno=" + std::to_string(errno);
 }
+
+//
+// foo bar -> Foo Bar
+//
+std::string capitalized(std::string in)
+{
+  TRACE_NO_INDENT();
+  std::string out = in;
+
+  char *b          = (char *) out.c_str();
+  char *e          = b + out.size();
+  char *c          = b;
+  bool  word_start = true;
+  while (c < e) {
+    if (word_start) {
+      if (islower(*c)) {
+        *c = toupper(*c);
+      }
+      word_start = false;
+    } else if (*c == ' ') {
+      word_start = true;
+    }
+
+    c++;
+  }
+
+  return out;
+}
+

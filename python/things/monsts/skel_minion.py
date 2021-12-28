@@ -94,6 +94,7 @@ def tp_init(name, text_name):
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("The bones of one surprised to be moving again.")
     mytp.set_text_hits("claws")
+    mytp.set_text_natural_attack_type("claw")
     mytp.set_z_depth(my.MAP_DEPTH_OBJ)
     mytp.set_z_prio(my.MAP_PRIO_NORMAL)
 

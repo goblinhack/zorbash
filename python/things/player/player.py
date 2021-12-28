@@ -346,6 +346,7 @@ def tp_init(name, text_name, short_text_name, title):
     mytp.set_text_a_or_an("the")
     mytp.set_text_description("Our most noble adventurer. Press 'h' for help.")
     mytp.set_text_hits("hits")
+    mytp.set_text_natural_attack_type("punch")
     mytp.set_text_title(title)
     mytp.set_z_depth(my.MAP_DEPTH_OBJ)
     mytp.set_z_prio(my.MAP_PRIO_NORMAL)

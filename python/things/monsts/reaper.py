@@ -55,6 +55,7 @@ def tp_init(name, text_name):
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("A lesser reaper. Death incarnate.")
     mytp.set_text_hits("claws")
+    mytp.set_text_natural_attack_type("touch")
     mytp.set_z_depth(my.MAP_DEPTH_OBJ)
     mytp.set_z_prio(my.MAP_PRIO_NORMAL)
 

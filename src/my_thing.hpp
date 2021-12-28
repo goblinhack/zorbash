@@ -627,6 +627,7 @@ public:
   const std::string &text_description(void);
   const std::string &text_enchant(void);
   const std::string &text_hits(void);
+  const std::string &text_natural_attack_type(void);
   const std::string &text_name(void);
   const std::string &text_skill(void);
   const std::string &text_title(void);

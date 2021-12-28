@@ -528,6 +528,7 @@ private:
   std::string _text_description;
   std::string _text_enchant;
   std::string _text_hits;
+  std::string _text_natural_attack_type;
   std::string _text_name;
   std::string _text_skill;
   std::string _text_title;
@@ -740,6 +741,7 @@ public:
   const std::string &text_description(void) const { return _text_description; }
   const std::string &text_enchant(void) const { return _text_enchant; }
   const std::string &text_hits(void) const { return _text_hits; }
+  const std::string &text_natural_attack_type(void) const { return _text_natural_attack_type; }
   const std::string &text_name(void) const { return _text_name; }
   const std::string &text_skill(void) const { return _text_skill; }
   const std::string &text_title(void) const { return _text_title; }
@@ -1498,6 +1500,7 @@ public:
   void set_text_description(const std::string &v) { _text_description = v; }
   void set_text_enchant(const std::string &v) { _text_enchant = v; }
   void set_text_hits(const std::string &v) { _text_hits = v; }
+  void set_text_natural_attack_type(const std::string &v) { _text_natural_attack_type = v; }
   void set_text_name(const std::string &v) { _text_name = v; }
   void set_text_skill(const std::string &v) { _text_skill = v; }
   void set_text_title(const std::string &v) { _text_title = v; }

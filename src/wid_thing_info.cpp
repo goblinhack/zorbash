@@ -181,7 +181,7 @@ WidPopup *Game::wid_thing_info_create_popup_compact(const std::vector< Thingp > 
 
   auto  height = TERM_HEIGHT - UI_TOPCON_VIS_HEIGHT;
   point tl     = make_point(0, TERM_HEIGHT - 2 - height);
-  point br     = make_point(29, TERM_HEIGHT - 2);
+  point br     = make_point(UI_SIDEBAR_LEFT_WIDTH, TERM_HEIGHT - 2);
 
   auto wid_popup_window = new WidPopup("Thing info", tl, br, nullptr, "", false, false /* vert */);
 
@@ -260,7 +260,7 @@ bool Game::wid_thing_info_push_popup(Thingp t)
 
   auto  height = TERM_HEIGHT - UI_TOPCON_VIS_HEIGHT;
   point tl     = make_point(0, TERM_HEIGHT - 2 - height);
-  point br     = make_point(29, TERM_HEIGHT - 2);
+  point br     = make_point(UI_SIDEBAR_LEFT_WIDTH, TERM_HEIGHT - 2);
 
   auto w = game->wid_thing_info_create_popup(t, tl, br);
   if (unlikely(! w)) {
@@ -657,25 +657,68 @@ void Game::wid_thing_info_add_damage_melee(WidPopup *w, Thingp t)
 
   auto tp = t->tp();
   if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_item_magical()) {
-    auto damage_melee_dice = t->get_damage_melee_dice();
-    auto min_value         = damage_melee_dice.min_roll();
-    auto max_value         = damage_melee_dice.max_roll();
-    if (min_value > 0) {
-      if (min_value == max_value) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->get_damage_melee_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Melee  %21s", tmp2);
-      } else {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->get_damage_melee_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Melee  %21s", tmp2);
-      }
-      w->log(tmp);
-
-      int chance = (int) ((((float) tp->damage_melee_chance_d1000()) / 1000.0) * 100.0);
-      if (chance < 100) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- chance %19s", tmp2);
+    Thingp curr_weapon = t->get_equip(MONST_EQUIP_WEAPON);
+    if (curr_weapon) {
+      auto damage_melee_dice = curr_weapon->get_damage_melee_dice();
+      auto min_value         = damage_melee_dice.min_roll();
+      auto max_value         = damage_melee_dice.max_roll();
+      if (min_value > 0) {
+        if (min_value == max_value) {
+          snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->get_damage_melee_dice_str().c_str());
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Melee  %21s", tmp2);
+        } else {
+          snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->get_damage_melee_dice_str().c_str());
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Melee  %21s", tmp2);
+        }
+        w->log(tmp);
+        snprintf(tmp2, sizeof(tmp2) - 1, "%s", curr_weapon->short_text_capitalized().c_str());
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Weapon %19s", tmp2);
         w->log(tmp);
       }
+    } else if (! t->text_natural_attack_type().empty()) {
+      auto damage_melee_dice = t->get_damage_melee_dice();
+      auto min_value         = damage_melee_dice.min_roll();
+      auto max_value         = damage_melee_dice.max_roll();
+      if (min_value > 0) {
+        if (min_value == max_value) {
+          snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->get_damage_melee_dice_str().c_str());
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- %-7s%19s", capitalized(t->text_natural_attack_type()).c_str(),
+                   tmp2);
+        } else {
+          snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->get_damage_melee_dice_str().c_str());
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- %-7s%19s", capitalized(t->text_natural_attack_type()).c_str(),
+                   tmp2);
+        }
+        w->log(tmp);
+      }
+    } else {
+      auto damage_melee_dice = t->get_damage_melee_dice();
+      auto min_value         = damage_melee_dice.min_roll();
+      auto max_value         = damage_melee_dice.max_roll();
+      if (min_value > 0) {
+        if (min_value == max_value) {
+          snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->get_damage_melee_dice_str().c_str());
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Melee  %21s", tmp2);
+        } else {
+          snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->get_damage_melee_dice_str().c_str());
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Melee  %21s", tmp2);
+        }
+        w->log(tmp);
+
+        int chance = (int) ((((float) tp->damage_melee_chance_d1000()) / 1000.0) * 100.0);
+        if (chance < 100) {
+          snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %19s", tmp2);
+          w->log(tmp);
+        }
+      }
+    }
+
+    int chance = (int) ((((float) tp->damage_melee_chance_d1000()) / 1000.0) * 100.0);
+    if (chance < 100) {
+      snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
+      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %19s", tmp2);
+      w->log(tmp);
     }
   }
 }
@@ -704,7 +747,7 @@ void Game::wid_thing_info_add_damage_poison(WidPopup *w, Thingp t)
       int chance = (int) ((((float) tp->damage_poison_chance_d1000()) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- chance %19s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %19s", tmp2);
         w->log(tmp);
       }
     }
@@ -735,7 +778,7 @@ void Game::wid_thing_info_add_damage_future1(WidPopup *w, Thingp t)
       int chance = (int) ((((float) tp->damage_future1_chance_d1000()) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- chance %19s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %19s", tmp2);
         w->log(tmp);
       }
     }
@@ -766,7 +809,7 @@ void Game::wid_thing_info_add_damage_future2(WidPopup *w, Thingp t)
       int chance = (int) ((((float) tp->damage_future2_chance_d1000()) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- chance %19s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %19s", tmp2);
         w->log(tmp);
       }
     }
@@ -797,7 +840,7 @@ void Game::wid_thing_info_add_damage_future3(WidPopup *w, Thingp t)
       int chance = (int) ((((float) tp->damage_future3_chance_d1000()) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- chance %19s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %19s", tmp2);
         w->log(tmp);
       }
     }
@@ -828,7 +871,7 @@ void Game::wid_thing_info_add_damage_future4(WidPopup *w, Thingp t)
       int chance = (int) ((((float) tp->damage_future4_chance_d1000()) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- chance %19s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %19s", tmp2);
         w->log(tmp);
       }
     }
@@ -859,7 +902,7 @@ void Game::wid_thing_info_add_damage_fire(WidPopup *w, Thingp t)
       int chance = (int) ((((float) tp->damage_fire_chance_d1000()) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- chance %19s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %19s", tmp2);
         w->log(tmp);
       }
     }
@@ -890,7 +933,7 @@ void Game::wid_thing_info_add_damage_crush(WidPopup *w, Thingp t)
       int chance = (int) ((((float) tp->damage_crush_chance_d1000()) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- chance %19s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %19s", tmp2);
         w->log(tmp);
       }
     }
@@ -922,7 +965,7 @@ void Game::wid_thing_info_add_damage_lightning(WidPopup *w, Thingp t)
       int chance = (int) ((((float) tp->damage_lightning_chance_d1000()) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- chance %19s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %19s", tmp2);
         w->log(tmp);
       }
     }
@@ -953,7 +996,7 @@ void Game::wid_thing_info_add_damage_energy(WidPopup *w, Thingp t)
       int chance = (int) ((((float) tp->damage_energy_chance_d1000()) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- chance %19s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %19s", tmp2);
         w->log(tmp);
       }
     }
@@ -984,7 +1027,7 @@ void Game::wid_thing_info_add_damage_acid(WidPopup *w, Thingp t)
       int chance = (int) ((((float) tp->damage_acid_chance_d1000()) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- chance %19s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %19s", tmp2);
         w->log(tmp);
       }
     }
@@ -1015,7 +1058,7 @@ void Game::wid_thing_info_add_damage_bite(WidPopup *w, Thingp t)
       int chance = (int) ((((float) tp->damage_bite_chance_d1000()) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- chance %19s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %19s", tmp2);
         w->log(tmp);
       }
     }
@@ -1046,7 +1089,7 @@ void Game::wid_thing_info_add_damage_digest(WidPopup *w, Thingp t)
       int chance = (int) ((((float) tp->damage_digest_chance_d1000()) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- chance %19s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %19s", tmp2);
         w->log(tmp);
       }
     }
@@ -1077,7 +1120,7 @@ void Game::wid_thing_info_add_damage_necrosis(WidPopup *w, Thingp t)
       int chance = (int) ((((float) tp->damage_necrosis_chance_d1000()) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- chance %19s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %19s", tmp2);
         w->log(tmp);
       }
     }

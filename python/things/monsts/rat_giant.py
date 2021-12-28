@@ -99,6 +99,7 @@ def tp_init(name, text_name):
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("A giant rat. Slightly cute. Likely rabid.")
     mytp.set_text_hits("gores")
+    mytp.set_text_natural_attack_type("bite")
     mytp.set_z_depth(my.MAP_DEPTH_OBJ)
     mytp.set_z_prio(my.MAP_PRIO_NORMAL)
 
