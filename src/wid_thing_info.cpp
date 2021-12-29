@@ -119,7 +119,7 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
   wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
   wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
 
-  auto name = t->short_text_capitalized();
+  auto name = t->short_text_capitalise();
   wid_popup_window->log("%%fg=white$" + name);
   wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
 
@@ -190,7 +190,7 @@ WidPopup *Game::wid_thing_info_create_popup_compact(const std::vector< Thingp > 
   char tmp[ MAXSHORTSTR ];
 
   for (auto t : ts) {
-    auto name = t->short_text_capitalized();
+    auto name = t->short_text_capitalise();
     snprintf(tmp, sizeof(tmp) - 2, "%%fg=white$%-28s%%fg=reset$", name.c_str());
     for (auto c = tmp; c < tmp + sizeof(tmp); c++) {
       if (*c == ' ') {
@@ -671,7 +671,7 @@ void Game::wid_thing_info_add_damage_melee(WidPopup *w, Thingp t)
           snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Melee  %21s", tmp2);
         }
         w->log(tmp);
-        snprintf(tmp2, sizeof(tmp2) - 1, "%s", curr_weapon->short_text_capitalized().c_str());
+        snprintf(tmp2, sizeof(tmp2) - 1, "%s", curr_weapon->short_text_capitalise().c_str());
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Weapon %19s", tmp2);
         w->log(tmp);
       }
@@ -682,11 +682,11 @@ void Game::wid_thing_info_add_damage_melee(WidPopup *w, Thingp t)
       if (min_value > 0) {
         if (min_value == max_value) {
           snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->get_damage_melee_dice_str().c_str());
-          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- %-7s%19s", capitalized(t->text_natural_attack_type()).c_str(),
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- %-7s%19s", capitalise(t->text_natural_attack_type()).c_str(),
                    tmp2);
         } else {
           snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->get_damage_melee_dice_str().c_str());
-          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- %-7s%19s", capitalized(t->text_natural_attack_type()).c_str(),
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- %-7s%19s", capitalise(t->text_natural_attack_type()).c_str(),
                    tmp2);
         }
         w->log(tmp);

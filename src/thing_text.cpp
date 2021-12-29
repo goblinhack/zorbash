@@ -204,7 +204,7 @@ std::string Thing::short_text_The(void)
 //
 // foo bar -> Foo Bar
 //
-std::string Thing::short_text_capitalized(void)
+std::string Thing::short_text_capitalise(void)
 {
   TRACE_NO_INDENT();
   std::string out;

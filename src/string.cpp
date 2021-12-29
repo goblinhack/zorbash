@@ -1409,7 +1409,7 @@ std::string strerror_to_string(const int err)
 //
 // foo bar -> Foo Bar
 //
-std::string capitalized(std::string in)
+std::string capitalise(std::string in)
 {
   TRACE_NO_INDENT();
   std::string out = in;

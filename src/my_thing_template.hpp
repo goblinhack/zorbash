@@ -641,7 +641,7 @@ public:
   void set_resurrect_dice(const std::string &);
   void set_spawn_group_size_dice(const std::string &);
 
-  std::string short_text_capitalized(void) const;
+  std::string short_text_capitalise(void) const;
   std::string text_a_or_an(void) const;
 
   const std::string &get_damage_acid_dice_str(void) const;

@@ -1178,19 +1178,19 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules(Dungeonp d)
           if (r && r->is_secret) {
             t->enchant_randomly();
           }
-          con("DGN: Placed weapon '%s'", t->short_text_capitalized().c_str());
+          con("DGN: Placed weapon '%s'", t->short_text_capitalise().c_str());
         } else if (t->is_treasure_type()) {
           if (r && r->is_secret) {
             t->enchant_randomly();
           }
-          con("DGN: Placed treasure '%s'", t->short_text_capitalized().c_str());
+          con("DGN: Placed treasure '%s'", t->short_text_capitalise().c_str());
         } else if (t->is_bag()) {
-          con("DGN: Placed '%s'", t->short_text_capitalized().c_str());
+          con("DGN: Placed '%s'", t->short_text_capitalise().c_str());
         } else if (t->is_monst()) {
           //
           // Already logged
           //
-          // con("DGN: Placed random monster '%s'", t->short_text_capitalized().c_str());
+          // con("DGN: Placed random monster '%s'", t->short_text_capitalise().c_str());
         } else {
           //
           // Doors etc... don't log, not as interesting
@@ -1714,7 +1714,7 @@ void Level::place_random_treasure(Dungeonp d)
         }
       }
 
-      con("DGN: Placed random item '%s'", t->short_text_capitalized().c_str());
+      con("DGN: Placed random item '%s'", t->short_text_capitalise().c_str());
 
       if (treasure_max-- < 0) {
         return;

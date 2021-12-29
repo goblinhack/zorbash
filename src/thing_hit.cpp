@@ -4,6 +4,7 @@
 //
 
 #include "my_array_bounds_check.hpp"
+#include "my_english.hpp"
 #include "my_game.hpp"
 #include "my_monst.hpp"
 #include "my_python.hpp"
@@ -719,8 +720,8 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
         } else if (attack_bite) {
           if (! real_hitter->text_natural_attack_type().empty()) {
             TOPCON("%%fg=orange$%s %s you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(),
-                   capitalized(real_hitter->text_natural_attack_type()).c_str(), damage);
-            msg(real_hitter->text_natural_attack_type());
+                   pluralise(real_hitter->text_natural_attack_type()).c_str(), damage);
+            msg(capitalise(real_hitter->text_natural_attack_type()));
           } else {
             TOPCON("%%fg=orange$%s bites you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(), damage);
             msg("Chomp!");

@@ -1363,7 +1363,7 @@ public:
 
   std::string short_text_The(void);
   std::string short_text_a_or_an(void);
-  std::string short_text_capitalized(void);
+  std::string short_text_capitalise(void);
   std::string short_text_the(void);
   std::string text_The(void);
   std::string text_The_no_dying(void);
