@@ -717,8 +717,14 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
           TOPCON("%%fg=orange$%s burns you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(), damage);
           msg("Sizzle!");
         } else if (attack_bite) {
-          TOPCON("%%fg=orange$%s bites you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(), damage);
-          msg("Chomp!");
+          if (! real_hitter->text_natural_attack_type().empty()) {
+            TOPCON("%%fg=orange$%s %s you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(),
+                   capitalized(real_hitter->text_natural_attack_type()).c_str(), damage);
+            msg(real_hitter->text_natural_attack_type());
+          } else {
+            TOPCON("%%fg=orange$%s bites you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(), damage);
+            msg("Chomp!");
+          }
         } else if (attack_energy) {
           TOPCON("%%fg=orange$%s blasts you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(), damage);
           msg("Zap!");

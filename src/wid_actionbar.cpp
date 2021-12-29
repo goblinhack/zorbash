@@ -343,6 +343,7 @@ static uint8_t wid_actionbar_collect(Widp w, int32_t x, int32_t y, uint32_t butt
   auto items = player->anything_to_carry();
   if (items.empty()) {
     TOPCON("Nothing to carry here.");
+    wid_actionbar_init();
   } else {
     game->wid_collect_create(items);
   }
