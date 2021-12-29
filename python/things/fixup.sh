@@ -37,21 +37,8 @@ do
     sed '/mytp.set_z_prio(/,$!d' $IN | tail -n +2 - > $POST
 
     for arg in \
-      set_is_able_to_attack_mobs \
-      set_is_able_to_break_down_doors \
-      set_is_able_to_break_out_of_webs \
-      set_is_able_to_collect_keys \
+      set_aggression_level_pct \
       set_ai_detect_secret_doors \
-      set_is_able_to_enchant_items \
-      set_is_able_to_jump \
-      set_is_able_to_learn_skills \
-      set_is_able_to_open_doors \
-      set_is_able_to_see_through_doors \
-      set_is_able_to_shove \
-      set_is_able_to_walk_through_walls \
-      set_is_exit_finder \
-      set_is_item_collector \
-      set_is_explorer \
       set_ai_obstacle \
       set_ai_resent_count \
       set_ai_wanderer \
@@ -62,29 +49,27 @@ do
       set_attack_lunge \
       set_attack_meat \
       set_attack_undead \
+      set_collateral_damage_pct \
       set_collision_check \
       set_collision_hit_priority \
-      set_enchant_level \
-      set_enchant_max \
       set_damage_received_doubled_from_acid \
       set_damage_received_doubled_from_fire \
-      set_damage_received_doubled_from_poison \
       set_damage_received_doubled_from_necrosis \
+      set_damage_received_doubled_from_poison \
       set_damage_received_doubled_from_water \
+      set_distance_leader_max \
+      set_distance_minion_vision_shared \
+      set_enchant_level \
+      set_enchant_max \
       set_environ_avoids_acid \
       set_environ_avoids_fire \
-      set_environ_avoids_poison \
       set_environ_avoids_necrosis \
-      set_environ_avoids_water \
-      set_environ_avoids_acid \
-      set_environ_avoids_fire \
       set_environ_avoids_poison \
-      set_environ_avoids_necrosis \
       set_environ_avoids_water \
       set_environ_prefers_acid \
       set_environ_prefers_fire \
-      set_environ_prefers_poison \
       set_environ_prefers_necrosis \
+      set_environ_prefers_poison \
       set_environ_prefers_spiderwebs \
       set_environ_prefers_water \
       set_gfx_an_animation_only \
@@ -109,13 +94,36 @@ do
       set_gfx_solid_shadow \
       set_gfx_very_short_shadow_caster \
       set_gfx_water \
+      set_hunger_clock_tick_frequency \
+      set_hunger_is_insatiable \
+      set_is_able_to_attack_mobs \
+      set_is_able_to_break_down_doors \
+      set_is_able_to_break_out_of_webs \
       set_is_able_to_change_levels \
+      set_is_able_to_collect_keys \
+      set_is_able_to_enchant_items \
       set_is_able_to_fall \
       set_is_able_to_fire_at \
+      set_is_able_to_follow \
+      set_is_able_to_jump \
+      set_is_able_to_jump_attack \
+      set_is_able_to_jump_escape \
+      set_is_able_to_jump_onto \
+      set_is_able_to_jump_without_tiring \
+      set_is_able_to_learn_skills \
+      set_is_able_to_open_doors \
+      set_is_able_to_see_in_the_dark \
+      set_is_able_to_see_through_doors \
+      set_is_able_to_shove \
       set_is_able_to_tire \
+      set_is_able_to_use_rings \
+      set_is_able_to_use_wands \
+      set_is_able_to_use_weapons \
+      set_is_able_to_walk_through_walls \
       set_is_acid \
       set_is_alive_on_end_of_anim \
       set_is_always_hit \
+      set_is_aquatic \
       set_is_ascend_dungeon \
       set_is_ascend_sewer \
       set_is_attackable_by_monst \
@@ -129,11 +137,13 @@ do
       set_is_bag_item_container \
       set_is_bag_item_not_stackable \
       set_is_barrel \
+      set_is_beast_map \
       set_is_bleeder \
       set_is_blood \
       set_is_blood_eater \
       set_is_blood_splatter \
       set_is_bones \
+      set_is_bony \
       set_is_brazier \
       set_is_bridge \
       set_is_buff \
@@ -141,6 +151,9 @@ do
       set_is_carrier_of_treasure_class_a \
       set_is_carrier_of_treasure_class_b \
       set_is_carrier_of_treasure_class_c \
+      set_is_carrier_of_weapon_class_a \
+      set_is_carrier_of_weapon_class_b \
+      set_is_carrier_of_weapon_class_c \
       set_is_chasm \
       set_is_collectable \
       set_is_collect_as_keys \
@@ -149,6 +162,7 @@ do
       set_is_corpse_on_death \
       set_is_corridor \
       set_is_critical_to_level \
+      set_is_crushable \
       set_is_cursor \
       set_is_cursor_can_hover_over \
       set_is_cursor_can_hover_over_x2_click \
@@ -174,6 +188,8 @@ do
       set_is_engulfer \
       set_is_ethereal \
       set_is_ethereal_mob \
+      set_is_exit_finder \
+      set_is_explorer \
       set_is_explosion \
       set_is_fearless \
       set_is_fire \
@@ -183,18 +199,22 @@ do
       set_is_foilage \
       set_is_food \
       set_is_food_eater \
+      set_is_gfx_anim_synced_with_owner \
       set_is_glass \
       set_is_gold \
+      set_is_green_blooded \
+      set_is_green_splatter \
       set_is_hazard \
       set_is_health_booster \
+      set_is_heavy \
       set_is_hittable \
       set_is_humanoid \
-      set_hunger_is_insatiable \
       set_is_indestructible \
       set_is_intelligent \
       set_is_interesting \
       set_is_item \
       set_is_item_carrier \
+      set_is_item_collector \
       set_is_item_eater \
       set_is_item_magical \
       set_is_item_magical_eater \
@@ -218,17 +238,20 @@ do
       set_is_monst \
       set_is_moveable \
       set_is_msg \
+      set_is_necrotic_danger_level \
       set_is_no_tile \
       set_is_obs_destructable \
       set_is_obs_wall_or_door \
       set_is_openable \
       set_is_organic \
+      set_is_pink_blooded \
+      set_is_pink_splatter \
       set_is_player \
       set_is_poisonous_danger_level \
-      set_is_necrotic_danger_level \
       set_is_potion \
       set_is_potion_eater \
       set_is_projectile \
+      set_is_red_blooded \
       set_is_removeable_if_out_of_slots \
       set_is_resurrectable \
       set_is_ring \
@@ -244,6 +267,7 @@ do
       set_is_smoke \
       set_is_soft_body \
       set_is_spawner \
+      set_is_spider \
       set_is_spiderweb \
       set_is_sticky \
       set_is_stone \
@@ -254,12 +278,13 @@ do
       set_is_tickable \
       set_is_tmp_thing \
       set_is_torch \
+      set_is_treasure_chest \
       set_is_treasure_class_a \
       set_is_treasure_class_b \
       set_is_treasure_class_c \
-      set_is_treasure_type \
-      set_is_treasure_chest \
       set_is_treasure_eater \
+      set_is_treasure_map \
+      set_is_treasure_type \
       set_is_undead \
       set_is_usable \
       set_is_used_when_thrown \
@@ -268,42 +293,15 @@ do
       set_is_wall_dungeon \
       set_is_wand \
       set_is_weapon \
-      set_is_able_to_use_rings \
       set_is_wooden \
       set_normal_placement_rules \
       set_on_death_drop_all_items \
-      set_unused_flag1 \
-      set_is_able_to_jump_escape \
-      set_hunger_clock_tick_frequency \
-      set_is_able_to_follow \
-      set_distance_leader_max \
       set_spawn_group_radius \
-      set_distance_minion_vision_shared \
-      set_is_able_to_use_weapons \
-      set_is_bony \
-      set_is_pink_blooded \
-      set_is_pink_splatter \
-      set_is_green_splatter \
+      set_unused_flag1 \
       set_unused_flag2 \
-      set_is_red_blooded \
-      set_is_green_blooded \
-      set_is_able_to_jump_without_tiring \
-      set_is_spider \
-      set_is_able_to_jump_attack \
-      set_is_able_to_jump_onto \
-      set_is_crushable \
-      set_aggression_level_pct \
-      set_collateral_damage_pct \
-      set_is_able_to_see_in_the_dark \
-      set_is_gfx_anim_synced_with_owner \
       set_unused_flag3 \
-      set_is_heavy \
       set_unused_flag4 \
       set_unused_flag5 \
-      set_is_beast_map \
-      set_is_treasure_map \
-      set_is_able_to_use_wands \
-      set_is_aquatic \
       set_on_death_is_open
     do
         grep -q $arg $PAYLOAD

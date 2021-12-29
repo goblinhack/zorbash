@@ -10,14 +10,14 @@ def on_death_of_a_follower(me, x, y):
 def tp_init(name, text_name):
     mytp = zob_all.tp_init(name, text_name)
     mytp.set_long_text_description_extra("This particular zoblin has risen through the ranks. As tough as stone nails in a stone coffin, this zoblin is not prepared to take any of your cheek.")
-    mytp.set_on_death_of_a_follower_do("me.on_death_of_a_follower()")
-    mytp.set_text_description("A grizzled war-weary zoblin.")
-    mytp.set_is_carrier_of_treasure_class_b(True)
-    mytp.set_is_carrier_of_weapon_class_b(True)
     mytp.set_health_initial_dice("2d10")
-    mytp.set_stat_strength(12)
     mytp.set_health_initial_dice("2d10+4")
     mytp.set_is_able_to_use_weapons(True)
+    mytp.set_is_carrier_of_treasure_class_b(True)
+    mytp.set_is_carrier_of_weapon_class_b(True)
+    mytp.set_on_death_of_a_follower_do("me.on_death_of_a_follower()")
+    mytp.set_stat_strength(12)
+    mytp.set_text_description("A grizzled war-weary zoblin.")
 
     delay = 300
     mytp.set_tile(tile=name + ".1", delay_ms=delay, frame=1)
