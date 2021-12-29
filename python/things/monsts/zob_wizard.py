@@ -13,10 +13,10 @@ def on_born(me, x, y):
 
 def tp_init(name, text_name):
     mytp = zob_all.tp_init(name, text_name)
-    mytp.set_long_text_description_extra("This particular zoblin is learned in the dark gobliny arts. They worship their dark lord who lives in his dark lair. They also prefer dark chocolate.")
+    mytp.set_long_text_description_extra("This particular zoblin is learned in the dark zobliny arts. They worship their dark lord who lives in his dark lair. They also prefer dark chocolate.")
     mytp.set_on_death_of_a_follower_do("me.on_death_of_a_follower()")
     mytp.set_on_born_do("me.on_born()")
-    mytp.set_text_description("A master of the dark gobliny arts.")
+    mytp.set_text_description("A master of the dark zobliny arts.")
     mytp.set_is_carrier_of_treasure_class_b(True)
     mytp.set_stat_strength(8)
     mytp.set_distance_avoid(5)

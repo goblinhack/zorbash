@@ -11,7 +11,7 @@ def tp_init(name, text_name):
     mytp = zob_all.tp_init(name, text_name)
     mytp.set_long_text_description_extra("This particular zoblin has risen through the ranks. As tough as stone nails in a stone coffin, this zoblin is not prepared to take any of your cheek.")
     mytp.set_on_death_of_a_follower_do("me.on_death_of_a_follower()")
-    mytp.set_text_description("A grizzled war-weary goblin.")
+    mytp.set_text_description("A grizzled war-weary zoblin.")
     mytp.set_is_carrier_of_treasure_class_b(True)
     mytp.set_is_carrier_of_weapon_class_b(True)
     mytp.set_health_initial_dice("2d10")

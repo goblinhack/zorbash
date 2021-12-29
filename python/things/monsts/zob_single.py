@@ -3,7 +3,7 @@ import zob_all
 
 def tp_init(name, text_name):
     mytp = zob_all.tp_init(name, text_name)
-    mytp.set_text_description("A very lesser and a bit insecure goblin.")
+    mytp.set_text_description("A very lesser and a bit insecure zoblin.")
     mytp.set_is_able_to_use_weapons(True)
     mytp.set_is_carrier_of_treasure_class_a(True)
     mytp.set_is_carrier_of_weapon_class_a(True)
@@ -26,7 +26,7 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="zob_single", text_name="lesser goblin")
+    tp_init(name="zob_single", text_name="lesser zoblin")
 
 
 init()
