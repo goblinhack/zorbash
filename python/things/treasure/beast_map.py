@@ -8,6 +8,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_environ_avoids_fire(100)
     mytp.set_is_able_to_fall(True)
     mytp.set_is_bag_item(True)
+    mytp.set_gold_value_dice("600")
     mytp.set_is_beast_map(True)
     mytp.set_is_burnable(True)
     mytp.set_is_collectable(True)

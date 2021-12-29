@@ -426,11 +426,16 @@ void Game::wid_collect_create(const std::list< Thingp > items /* intentional cop
       wid_set_style(wid_item, UI_WID_STYLE_DARK);
 
       if (t) {
+        std::string text;
         if (slot < 9) {
-          wid_set_text(wid_item, " " + std::to_string(slot + 1) + ". " + t->text_description());
-        } else {
-          wid_set_text(wid_item, t->text_description());
+          text = " " + std::to_string(slot + 1) + ". ";
         }
+
+        text += t->text_description();
+        if (! t->get_gold_value_dice_str().empty()) {
+          text += " Value:" + t->get_gold_value_dice_str() + "gp";
+        }
+        wid_set_text(wid_item, text);
       }
 
       wid_set_text_lhs(wid_item, true);

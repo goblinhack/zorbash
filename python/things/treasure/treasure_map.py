@@ -14,6 +14,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_enchant_max(1)
     mytp.set_environ_avoids_fire(100)
     mytp.set_is_able_to_fall(True)
+    mytp.set_gold_value_dice("300")
     mytp.set_is_bag_item(True)
     mytp.set_is_burnable(True)
     mytp.set_is_collectable(True)
