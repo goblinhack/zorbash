@@ -1132,6 +1132,10 @@ void Game::wid_thing_info_add_attack(WidPopup *w, Thingp t)
 
   if (t->is_alive_monst() || t->is_player()) {
     auto stat = t->get_stat_attack_bonus();
+    if (stat == 10) {
+      return;
+    }
+
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Attack bonus           %2d%3s", stat,
              stat_to_bonus_slash_str(stat).c_str());
     w->log(tmp);
@@ -1158,7 +1162,7 @@ void Game::wid_thing_info_add_strength(WidPopup *w, Thingp t)
 
   if (t->is_alive_monst() || t->is_player()) {
     auto stat = t->get_stat_strength();
-    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Strength 2             %2d%3s", stat,
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Strength               %2d%3s", stat,
              stat_to_bonus_slash_str(stat).c_str());
     w->log(tmp);
   }
