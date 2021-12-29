@@ -144,6 +144,7 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
   // wid_thing_info_add_gold_value(wid_popup_window, t);
   wid_thing_info_add_nutrition(wid_popup_window, t);
   wid_thing_info_add_health(wid_popup_window, t);
+  wid_thing_info_add_damage_natural_attack(wid_popup_window, t);
   wid_thing_info_add_damage_melee(wid_popup_window, t);
   wid_thing_info_add_damage_poison(wid_popup_window, t);
   wid_thing_info_add_damage_future1(wid_popup_window, t);
@@ -155,7 +156,6 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
   wid_thing_info_add_damage_lightning(wid_popup_window, t);
   wid_thing_info_add_damage_energy(wid_popup_window, t);
   wid_thing_info_add_damage_acid(wid_popup_window, t);
-  wid_thing_info_add_damage_natural_attack(wid_popup_window, t);
   wid_thing_info_add_damage_digest(wid_popup_window, t);
   wid_thing_info_add_damage_necrosis(wid_popup_window, t);
   wid_thing_info_add_attack(wid_popup_window, t);
@@ -206,6 +206,7 @@ WidPopup *Game::wid_thing_info_create_popup_compact(const std::vector< Thingp > 
     // wid_thing_info_add_gold_value(wid_popup_window, t);
     wid_thing_info_add_nutrition(wid_popup_window, t);
     wid_thing_info_add_health(wid_popup_window, t);
+    wid_thing_info_add_damage_natural_attack(wid_popup_window, t);
     wid_thing_info_add_damage_melee(wid_popup_window, t);
     wid_thing_info_add_damage_poison(wid_popup_window, t);
     wid_thing_info_add_damage_future1(wid_popup_window, t);
@@ -218,7 +219,6 @@ WidPopup *Game::wid_thing_info_create_popup_compact(const std::vector< Thingp > 
     wid_thing_info_add_damage_energy(wid_popup_window, t);
     wid_thing_info_add_damage_acid(wid_popup_window, t);
     wid_thing_info_add_damage_digest(wid_popup_window, t);
-    wid_thing_info_add_damage_natural_attack(wid_popup_window, t);
     wid_thing_info_add_damage_necrosis(wid_popup_window, t);
     wid_thing_info_add_attack(wid_popup_window, t);
     wid_thing_info_add_defence(wid_popup_window, t);
@@ -658,10 +658,14 @@ void Game::wid_thing_info_add_damage_melee(WidPopup *w, Thingp t)
   auto tp = t->tp();
   if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_item_magical()) {
     Thingp curr_weapon = t->get_equip(MONST_EQUIP_WEAPON);
+
+    int min_value;
+    int max_value;
+
     if (curr_weapon) {
       auto damage_melee_dice = curr_weapon->get_damage_melee_dice();
-      auto min_value         = damage_melee_dice.min_roll();
-      auto max_value         = damage_melee_dice.max_roll();
+      min_value              = damage_melee_dice.min_roll();
+      max_value              = damage_melee_dice.max_roll();
       if (min_value > 0) {
         if (min_value == max_value) {
           snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->get_damage_melee_dice_str().c_str());
@@ -677,8 +681,8 @@ void Game::wid_thing_info_add_damage_melee(WidPopup *w, Thingp t)
       }
     } else {
       auto damage_melee_dice = t->get_damage_melee_dice();
-      auto min_value         = damage_melee_dice.min_roll();
-      auto max_value         = damage_melee_dice.max_roll();
+      min_value              = damage_melee_dice.min_roll();
+      max_value              = damage_melee_dice.max_roll();
       if (min_value > 0) {
         if (min_value == max_value) {
           snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->get_damage_melee_dice_str().c_str());
@@ -688,13 +692,15 @@ void Game::wid_thing_info_add_damage_melee(WidPopup *w, Thingp t)
           snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Melee  %21s", tmp2);
         }
         w->log(tmp);
+      }
+    }
 
-        int chance = (int) ((((float) tp->damage_melee_chance_d1000()) / 1000.0) * 100.0);
-        if (chance < 100) {
-          snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %19s", tmp2);
-          w->log(tmp);
-        }
+    if (min_value > 0) {
+      int chance = (int) ((((float) tp->damage_melee_chance_d1000()) / 1000.0) * 100.0);
+      if (chance < 100) {
+        snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %19s", tmp2);
+        w->log(tmp);
       }
     }
   }
@@ -1022,25 +1028,8 @@ void Game::wid_thing_info_add_damage_natural_attack(WidPopup *w, Thingp t)
     auto damage_natural_attack_dice = t->get_damage_natural_attack_dice();
     auto min_value                  = damage_natural_attack_dice.min_roll();
     auto max_value                  = damage_natural_attack_dice.max_roll();
-
-    if (! t->damage_natural_attack_type().empty()) {
-      auto damage_melee_dice = t->get_damage_melee_dice();
-      auto min_value         = damage_melee_dice.min_roll();
-      auto max_value         = damage_melee_dice.max_roll();
-      if (min_value > 0) {
-        if (min_value == max_value) {
-          snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->get_damage_melee_dice_str().c_str());
-          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- %-7s%19s", capitalise(t->damage_natural_attack_type()).c_str(),
-                   tmp2);
-        } else {
-          snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->get_damage_melee_dice_str().c_str());
-          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- %-7s%19s", capitalise(t->damage_natural_attack_type()).c_str(),
-                   tmp2);
-        }
-        w->log(tmp);
-      }
-    } else {
-      if (min_value > 0) {
+    if (min_value > 0) {
+      if (t->damage_natural_attack_type().empty()) {
         if (min_value == max_value) {
           snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->get_damage_natural_attack_dice_str().c_str());
           snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Bite   %21s", tmp2);
@@ -1050,13 +1039,25 @@ void Game::wid_thing_info_add_damage_natural_attack(WidPopup *w, Thingp t)
           snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Bite   %21s", tmp2);
         }
         w->log(tmp);
-
-        int chance = (int) ((((float) tp->damage_natural_attack_chance_d1000()) / 1000.0) * 100.0);
-        if (chance < 100) {
-          snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %19s", tmp2);
-          w->log(tmp);
+      } else {
+        if (min_value == max_value) {
+          snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->get_damage_natural_attack_dice_str().c_str());
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$%-9s%19s", capitalise(t->damage_natural_attack_type()).c_str(),
+                   tmp2);
+        } else {
+          snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value,
+                   t->get_damage_natural_attack_dice_str().c_str());
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$%-9s%19s", capitalise(t->damage_natural_attack_type()).c_str(),
+                   tmp2);
         }
+        w->log(tmp);
+      }
+
+      int chance = (int) ((((float) tp->damage_natural_attack_chance_d1000()) / 1000.0) * 100.0);
+      if (chance < 100) {
+        snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %19s", tmp2);
+        w->log(tmp);
       }
     }
   }

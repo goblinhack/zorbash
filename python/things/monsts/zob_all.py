@@ -43,7 +43,7 @@ def tp_init(name, text_name):
     mytp.set_collision_hit_priority(10)
     mytp.set_damage_melee_chance_d1000(900)  # Chance to use weapon
     mytp.set_damage_natural_attack_chance_d1000(100)
-    mytp.set_damage_natural_attack_dice("1d6+2")
+    mytp.set_damage_natural_attack_dice("1d4+2")
     mytp.set_damage_natural_attack_type("claw")
     mytp.set_distance_avoid(5)
     mytp.set_distance_jump(3)
