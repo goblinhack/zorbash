@@ -150,6 +150,7 @@ public:
   uint64_t i_set_is_dirt                          : 1 {};
   uint64_t i_set_is_door                          : 1 {};
   uint64_t i_set_is_dry_grass                     : 1 {};
+  uint64_t i_set_is_wet_grass                     : 1 {};
   uint64_t i_set_is_enchantstone                  : 1 {};
   uint64_t i_set_is_fire                          : 1 {};
   uint64_t i_set_is_floor                         : 1 {};
@@ -1121,6 +1122,7 @@ public:
   int is_door(void);
   int is_droppable(void);
   int is_dry_grass(void);
+  int is_wet_grass(void);
   int is_enchantable(void);
   int is_enchantstone(void);
   int is_engulfer(void);

@@ -896,6 +896,12 @@ int Thing::is_dry_grass(void)
   return (tp()->is_dry_grass());
 }
 
+int Thing::is_wet_grass(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_wet_grass());
+}
+
 int Thing::is_enchantable(void)
 {
   TRACE_NO_INDENT();

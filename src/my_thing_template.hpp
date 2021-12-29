@@ -269,6 +269,7 @@ private:
   int _is_door {};
   int _is_droppable {};
   int _is_dry_grass {};
+  int _is_wet_grass {};
   int _is_enchantable {};
   int _is_enchantstone {};
   int _is_engulfer {};
@@ -937,6 +938,7 @@ public:
   int is_door(void) const { return _is_door; }
   int is_droppable(void) const { return _is_droppable; }
   int is_dry_grass(void) const { return _is_dry_grass; }
+  int is_wet_grass(void) const { return _is_wet_grass; }
   int is_enchantable(void) const { return _is_enchantable; }
   int is_enchantstone(void) const { return _is_enchantstone; }
   int is_engulfer(void) const { return _is_engulfer; }
@@ -1283,6 +1285,7 @@ public:
   void set_is_door(int v) { _is_door = v; }
   void set_is_droppable(int v) { _is_droppable = v; }
   void set_is_dry_grass(int v) { _is_dry_grass = v; }
+  void set_is_wet_grass(int v) { _is_wet_grass = v; }
   void set_is_enchantable(int v) { _is_enchantable = v; }
   void set_is_enchantstone(int v) { _is_enchantstone = v; }
   void set_is_engulfer(int v) { _is_engulfer = v; }
@@ -1550,6 +1553,7 @@ class Tp *tp_random_descend_sewer(void);
 class Tp *tp_random_dirt(void);
 class Tp *tp_random_door(void);
 class Tp *tp_random_dry_grass(void);
+class Tp *tp_random_wet_grass(void);
 class Tp *tp_random_enchantstone(void);
 class Tp *tp_random_ethereal_mob(void);
 class Tp *tp_random_floor(void);

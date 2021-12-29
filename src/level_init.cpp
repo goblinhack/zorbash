@@ -36,6 +36,7 @@ void Level::clear(void)
   _is_dirt             = {};
   _is_door             = {};
   _is_dry_grass        = {};
+  _is_wet_grass        = {};
   _is_enchantstone     = {};
   _is_fire             = {};
   _is_floor            = {};

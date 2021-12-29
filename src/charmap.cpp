@@ -60,6 +60,11 @@ void Charmap::init_charmaps(void)
   c->c            = char_index;
   c->is_dry_grass = true;
 
+  char_index      = Charmap::WET_GRASS;
+  c               = &all_charmaps[ char_index ];
+  c->c            = char_index;
+  c->is_wet_grass = true;
+
   char_index         = Charmap::ENCHANTSTONE;
   c                  = &all_charmaps[ char_index ];
   c->c               = char_index;

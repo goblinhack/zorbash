@@ -62,6 +62,10 @@ void Thing::level_pop(void)
     i_set_is_dry_grass = false;
     level->unset_is_dry_grass(mx, my);
   }
+  if (i_set_is_wet_grass) {
+    i_set_is_wet_grass = false;
+    level->unset_is_wet_grass(mx, my);
+  }
   if (i_set_is_enchantstone) {
     i_set_is_enchantstone = false;
     level->unset_is_enchantstone(mx, my);

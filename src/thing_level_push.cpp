@@ -63,6 +63,10 @@ void Thing::level_push(void)
     i_set_is_dry_grass = true;
     level->set_is_dry_grass(mx, my);
   }
+  if (is_wet_grass()) {
+    i_set_is_wet_grass = true;
+    level->set_is_wet_grass(mx, my);
+  }
   if (is_enchantstone()) {
     i_set_is_enchantstone = true;
     level->set_is_enchantstone(mx, my);

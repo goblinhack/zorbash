@@ -638,7 +638,8 @@ bool Thing::get_coords(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
   }
 
   if (unlikely(is_in_water || is_monst() || is_item() || is_treasure_type() || is_skillstone() || is_player() ||
-               tpp->gfx_attack_anim() || tpp->gfx_on_fire_anim() || tpp->gfx_equip_carry_anim())) {
+               is_wet_grass() || is_foilage() || tpp->gfx_attack_anim() || tpp->gfx_on_fire_anim() ||
+               tpp->gfx_equip_carry_anim())) {
 
     //
     // Render the weapon and player on the same tile rules
@@ -664,7 +665,6 @@ bool Thing::get_coords(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
     if (is_floating()) {
       //
       // Ghosts do not sink into lava
-      // Don't submerge ascii charactars.
       //
       set_submerged_offset(0);
     }
@@ -780,6 +780,7 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
     if (unlikely(tpp->gfx_very_short_shadow_caster() || tpp->gfx_short_shadow_caster() ||
                  tpp->gfx_long_shadow_caster())) {
       if (auto submerged = blit_begin_submerged()) {
+
         blit_shadow(tpp, tile, blit_tl, blit_br);
         blit_end_submerged(submerged);
       } else {

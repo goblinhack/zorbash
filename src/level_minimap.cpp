@@ -132,8 +132,6 @@ void Level::update_minimap(bool showing_two_levels, bool show_faded)
           c = BLUE3;
         } else if (is_dirt(x, y)) {
           c = GRAY20;
-        } else if (is_dry_grass(x, y)) {
-          c = BROWN;
         } else if (is_enchantstone(x, y)) {
           c = YELLOW;
         } else if (is_skillstone(x, y)) {
@@ -331,8 +329,6 @@ void Level::update_minimap(bool showing_two_levels, bool show_faded)
           c = BLUE3;
         } else if (is_dirt(x, y)) {
           c = GRAY20;
-        } else if (is_dry_grass(x, y)) {
-          c = BROWN;
         } else if (is_enchantstone(x, y)) {
           c = YELLOW;
         } else if (is_skillstone(x, y)) {

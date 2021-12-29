@@ -330,6 +330,9 @@ bool Thing::matches(const std::string &what)
   if (is_dry_grass() && (what == "is_dry_grass")) {
     return true;
   }
+  if (is_wet_grass() && (what == "is_wet_grass")) {
+    return true;
+  }
   if (is_enchantable() && (what == "is_enchantable")) {
     return true;
   }
@@ -1011,6 +1014,9 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   }
   if (what == "is_dry_grass") {
     return &Thing::is_dry_grass;
+  }
+  if (what == "is_wet_grass") {
+    return &Thing::is_wet_grass;
   }
   if (what == "is_enchantable") {
     return &Thing::is_enchantable;

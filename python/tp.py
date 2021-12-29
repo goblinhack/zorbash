@@ -661,6 +661,9 @@ class Tp:
     def set_is_dry_grass(self, value):
         my.tp_set_is_dry_grass(self, value)
 
+    def set_is_wet_grass(self, value):
+        my.tp_set_is_wet_grass(self, value)
+
     def set_is_bridge(self, value):
         my.tp_set_is_bridge(self, value)
 

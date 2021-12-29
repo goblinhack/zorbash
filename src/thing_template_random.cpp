@@ -28,6 +28,7 @@ static Tpidmap tp_descend_sewer;
 static Tpidmap tp_dirt;
 static Tpidmap tp_door;
 static Tpidmap tp_dry_grass;
+static Tpidmap tp_wet_grass;
 static Tpidmap tp_enchantstone;
 static Tpidmap tp_ethereal_mob;
 static Tpidmap tp_floor;
@@ -113,6 +114,9 @@ void tp_random_init(void)
     }
     if (tp->is_dry_grass()) {
       tp_dry_grass.push_back(tp);
+    }
+    if (tp->is_wet_grass()) {
+      tp_wet_grass.push_back(tp);
     }
     if (tp->is_enchantstone()) {
       tp_enchantstone.push_back(tp);
@@ -725,6 +729,16 @@ Tpp tp_random_dry_grass(void)
     return nullptr;
   }
   return tp_get_with_no_rarity_filter(tp_dry_grass);
+}
+
+Tpp tp_random_wet_grass(void)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(! tp_wet_grass.size())) {
+    ERR("No wet_grass found");
+    return nullptr;
+  }
+  return tp_get_with_no_rarity_filter(tp_wet_grass);
 }
 
 Tpp tp_random_enchantstone(void)

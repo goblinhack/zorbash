@@ -93,6 +93,7 @@ public:
   bool   is_deep_water_no_check(const int x, const int y);
   bool   is_dirt(const int x, const int y);
   bool   is_dry_grass(const int x, const int y);
+  bool   is_wet_grass(const int x, const int y);
   bool   is_enchantstone(const int x, const int y);
   bool   is_skillstone(const int x, const int y);
   bool   is_foilage(const int x, const int y);
@@ -201,6 +202,7 @@ public:
   void cave_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int map_generations);
   void dirt_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int map_generations);
   void dry_grass_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int map_generations);
+  void wet_grass_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int map_generations);
   void foilage_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int map_generations);
   void water_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int map_generations);
 

@@ -224,6 +224,7 @@ PyObject *thing_is_dir_up(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_door(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_droppable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_dry_grass(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_wet_grass(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_enchantable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_enchantstone(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_engulfer(PyObject *obj, PyObject *args, PyObject *keywds);

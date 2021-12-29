@@ -75,7 +75,7 @@ PyObject *level_add_(PyObject *obj, PyObject *args, PyObject *keywds)
           floor_string += Charmap::SPACE;
         }
 
-        if (m.is_foilage || m.is_spiderweb || m.is_dry_grass) {
+        if (m.is_foilage || m.is_spiderweb || m.is_dry_grass || m.is_wet_grass) {
           floor2_string += c;
         } else {
           floor2_string += Charmap::SPACE;
@@ -484,6 +484,7 @@ LEVEL_BODY_GET_BOOL_AT(level_is_dir_up_at, is_dir_up)
 LEVEL_BODY_GET_BOOL_AT(level_is_door_at, is_door)
 LEVEL_BODY_GET_BOOL_AT(level_is_droppable_at, is_droppable)
 LEVEL_BODY_GET_BOOL_AT(level_is_dry_grass_at, is_dry_grass)
+LEVEL_BODY_GET_BOOL_AT(level_is_wet_grass_at, is_wet_grass)
 LEVEL_BODY_GET_BOOL_AT(level_is_enchantable_at, is_enchantable)
 LEVEL_BODY_GET_BOOL_AT(level_is_enchantstone_at, is_enchantstone)
 LEVEL_BODY_GET_BOOL_AT(level_is_engulfer_at, is_engulfer)

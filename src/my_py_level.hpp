@@ -137,6 +137,7 @@ PyObject *level_is_dir_up_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_door_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_droppable_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_dry_grass_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_wet_grass_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_enchantable_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_enchantstone_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_engulfer_at(PyObject *obj, PyObject *args, PyObject *keywds);

@@ -637,8 +637,14 @@ bool Level::create_dungeon(point3d at, int seed)
     //
     // Place some greenery
     //
-    dbg2("DGN: Place grass");
+    dbg2("DGN: Place dry grass");
     place_dry_grass(dungeon);
+    if (g_errored) {
+      return false;
+    }
+
+    dbg2("DGN: Place wet grass");
+    place_wet_grass(dungeon);
     if (g_errored) {
       return false;
     }
@@ -1761,6 +1767,23 @@ void Level::place_dry_grass(Dungeonp d)
 
         if (heatmap(x, y)) {
           continue;
+        }
+
+        (void) thing_new(tp->name(), point(x, y));
+      }
+    }
+  }
+}
+
+void Level::place_wet_grass(Dungeonp d)
+{
+  TRACE_AND_INDENT();
+  for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
+    for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
+      if (! d->is_anything_at(x, y) || d->is_wet_grass(x, y)) {
+        auto tp = tp_random_wet_grass();
+        if (unlikely(! tp)) {
+          return;
         }
 
         (void) thing_new(tp->name(), point(x, y));

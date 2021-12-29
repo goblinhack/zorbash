@@ -6118,6 +6118,26 @@ def init_tiles1_floor():
         "dry_grass_dead.17",
         "dry_grass_dead.18",
         "dry_grass_dead.19",
+        #########################################################################
+        "wet_grass.1",
+        "wet_grass.2",
+        "wet_grass.3",
+        "wet_grass.4",
+        "wet_grass.5",
+        "wet_grass.6",
+        "wet_grass.7",
+        "wet_grass.8",
+        "wet_grass.9",
+        "wet_grass.10",
+        "wet_grass.11",
+        "wet_grass.12",
+        "wet_grass.13",
+        "wet_grass.14",
+        "wet_grass.15",
+        "wet_grass.16",
+        "wet_grass.17",
+        "wet_grass.18",
+        "wet_grass.19",
     ]
 
     my.tile_load_arr_sprites(
