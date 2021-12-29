@@ -13,8 +13,8 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_collision_hit_priority(0)
     mytp.set_enchant_max(1)
     mytp.set_environ_avoids_fire(100)
-    mytp.set_is_able_to_fall(True)
     mytp.set_gold_value_dice("300")
+    mytp.set_is_able_to_fall(True)
     mytp.set_is_bag_item(True)
     mytp.set_is_burnable(True)
     mytp.set_is_collectable(True)
@@ -34,7 +34,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_normal_placement_rules(True)
     mytp.set_on_enchant_do("me.on_enchant()")
     mytp.set_text_a_or_an("a")
-    mytp.set_text_description("An aged treasure map")
+    mytp.set_text_description("An aged treasure map.")
     mytp.set_z_depth(my.MAP_DEPTH_OBJ)
     mytp.set_z_prio(my.MAP_PRIO_BEHIND)
 

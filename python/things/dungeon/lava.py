@@ -21,7 +21,7 @@ def lava_init(name, text_name, tiles=[]):
     mytp.set_light_color("red")
     mytp.set_light_strength(2)
     mytp.set_text_a_or_an("")
-    mytp.set_text_description("%%fg=orange$Freshly scented lava%%fg=reset$ (double click to move onto)")
+    mytp.set_text_description("%%fg=orange$Freshly scented lava%%fg=reset$ (double click to move onto).")
     mytp.set_text_hits("tickles")
     mytp.set_text_natural_attack_type("burn")
     mytp.set_z_depth(my.MAP_DEPTH_LAVA)

@@ -15,7 +15,7 @@ def chasm_init(name, text_name, tiles=[]):
     mytp.set_is_described_when_hovering_over(True)
     mytp.set_is_hazard(True)
     mytp.set_text_a_or_an("a")
-    mytp.set_text_description("%%fg=red$A yawning chasm to the unknown below%%fg=reset$ (double click to jump into)")
+    mytp.set_text_description("%%fg=red$A yawning chasm to the unknown below%%fg=reset$ (double click to jump into).")
     mytp.set_z_depth(my.MAP_DEPTH_CHASM)
     mytp.set_z_prio(my.MAP_PRIO_BEHIND)
 

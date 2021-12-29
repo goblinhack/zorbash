@@ -1,21 +1,12 @@
-import my
-import gob_all
-
-
-def on_death_of_my_leader(me, x, y):
-    if not my.thing_is_dead_or_dying(me):
-        my.topcon("The goblin soldier cries out in rage!")
+import zob_all
 
 
 def tp_init(name, text_name):
-    mytp = gob_all.tp_init(name, text_name)
-    mytp.set_long_text_description_extra("This particular goblin has is a battle hardened veteran of many wars.")
-    mytp.set_on_death_of_my_leader_do("me.on_death_of_my_leader()")
-    mytp.set_text_description("A grizzled war-weary soldier.")
-    mytp.set_stat_strength(10)
-    mytp.set_health_initial_dice("2d8+2")
+    mytp = zob_all.tp_init(name, text_name)
+    mytp.set_text_description("A very lesser and a bit insecure goblin.")
     mytp.set_is_able_to_use_weapons(True)
     mytp.set_is_carrier_of_treasure_class_a(True)
+    mytp.set_is_carrier_of_weapon_class_a(True)
 
     delay = 300
     mytp.set_tile(tile=name + ".1", delay_ms=delay, frame=1)
@@ -35,7 +26,7 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="gob_soldier", text_name="goblin soldier")
+    tp_init(name="zob_single", text_name="lesser goblin")
 
 
 init()

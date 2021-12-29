@@ -8,9 +8,9 @@
 <!--                                                                                                                                              -->
 <!-- Next todo                                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
-<!-- - goblin oldster                                                                                                                             -->
-<!-- - goblin priest                                                                                                                              -->
-<!-- - goblin necro                                                                                                                               -->
+<!-- - zoblin oldster                                                                                                                             -->
+<!-- - zoblin priest                                                                                                                              -->
+<!-- - zoblin necro                                                                                                                               -->
 <!-- - giant spider web throw                                                                                                                     -->
 <!-- - spider ball anims                                                                                                                          -->
 <!-- - equip armour etc                                                                                                                           -->

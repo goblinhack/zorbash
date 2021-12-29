@@ -1,28 +1,29 @@
 import my
-import gob_all
+import zob_all
 
 
-def on_death_of_a_follower(me, x, y):
-    if not my.thing_is_dead_or_dying(me):
-        my.topcon("The goblin pirate cries out: Aaar!")
+def on_death_of_a_follower(me, leader, x, y):
+    if not my.thing_is_dead_or_dying(leader):
+        my.topcon("The zoblin wizard curses darkly in rage!")
 
 
 def on_born(me, x, y):
-    my.thing_carry(me, "treasure_map")
-    my.thing_carry(me, "gold6")
-    my.thing_carry(me, "cutlass")
+    my.thing_carry(me, "wand_fire")
 
 
 def tp_init(name, text_name):
-    mytp = gob_all.tp_init(name, text_name)
-    mytp.set_long_text_description_extra("This particular goblin was once a ruthless adventurer who plundered the seas in their mighty pirate ship, but due to a series of unfortunate and inexplicable events has now found themselves wandering the halls of this dungeon looking for the odd piece of eight.")
+    mytp = zob_all.tp_init(name, text_name)
+    mytp.set_long_text_description_extra("This particular zoblin is learned in the dark gobliny arts. They worship their dark lord who lives in his dark lair. They also prefer dark chocolate.")
     mytp.set_on_death_of_a_follower_do("me.on_death_of_a_follower()")
     mytp.set_on_born_do("me.on_born()")
-    mytp.set_text_description("A one-eyed pirate goblin.")
-    mytp.set_is_carrier_of_treasure_class_c(True)
-    mytp.set_stat_strength(14)
-    mytp.set_health_initial_dice("2d10+4")
-    mytp.set_is_able_to_use_weapons(True)
+    mytp.set_text_description("A master of the dark gobliny arts.")
+    mytp.set_is_carrier_of_treasure_class_b(True)
+    mytp.set_stat_strength(8)
+    mytp.set_distance_avoid(5)
+    mytp.set_health_initial_dice("2d4+4")
+    mytp.set_is_able_to_use_wands(True)
+    mytp.set_is_intelligent(True)
+    mytp.set_is_able_to_use_rings(True)
 
     delay = 300
     mytp.set_tile(tile=name + ".1", delay_ms=delay, frame=1)
@@ -42,7 +43,7 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="gob_pirate", text_name="goblin pirate")
+    tp_init(name="zob_wizard", text_name="zoblin wizard")
 
 
 init()

@@ -20,7 +20,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_usable(True)
     mytp.set_item_height(4)
     mytp.set_item_width(4)
-    mytp.set_long_text_description("Dungeon durian. The best kind. It smells a bit like a dead goblin and tastes like heaven.")
+    mytp.set_long_text_description("Dungeon durian. The best kind. It smells a bit like a dead zoblin and tastes like heaven.")
     mytp.set_normal_placement_rules(True)
     mytp.set_nutrition_dice("10+1d50")
     mytp.set_rarity(my.RARITY_COMMON)

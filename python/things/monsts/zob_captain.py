@@ -1,29 +1,23 @@
 import my
-import gob_all
+import zob_all
 
 
-def on_death_of_a_follower(me, leader, x, y):
-    if not my.thing_is_dead_or_dying(leader):
-        my.topcon("The goblin wizard curses darkly in rage!")
-
-
-def on_born(me, x, y):
-    my.thing_carry(me, "wand_fire")
+def on_death_of_a_follower(me, x, y):
+    if not my.thing_is_dead_or_dying(me):
+        my.topcon("The zoblin leader cries out in rage!")
 
 
 def tp_init(name, text_name):
-    mytp = gob_all.tp_init(name, text_name)
-    mytp.set_long_text_description_extra("This particular goblin is learned in the dark gobliny arts. They worship their dark lord who lives in his dark lair. They also prefer dark chocolate.")
+    mytp = zob_all.tp_init(name, text_name)
+    mytp.set_long_text_description_extra("This particular zoblin has risen through the ranks. As tough as stone nails in a stone coffin, this zoblin is not prepared to take any of your cheek.")
     mytp.set_on_death_of_a_follower_do("me.on_death_of_a_follower()")
-    mytp.set_on_born_do("me.on_born()")
-    mytp.set_text_description("A master of the dark gobliny arts.")
+    mytp.set_text_description("A grizzled war-weary goblin.")
     mytp.set_is_carrier_of_treasure_class_b(True)
-    mytp.set_stat_strength(8)
-    mytp.set_distance_avoid(5)
-    mytp.set_health_initial_dice("2d4+4")
-    mytp.set_is_able_to_use_wands(True)
-    mytp.set_is_intelligent(True)
-    mytp.set_is_able_to_use_rings(True)
+    mytp.set_is_carrier_of_weapon_class_b(True)
+    mytp.set_health_initial_dice("2d10")
+    mytp.set_stat_strength(12)
+    mytp.set_health_initial_dice("2d10+4")
+    mytp.set_is_able_to_use_weapons(True)
 
     delay = 300
     mytp.set_tile(tile=name + ".1", delay_ms=delay, frame=1)
@@ -43,7 +37,7 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="gob_wizard", text_name="goblin wizard")
+    tp_init(name="zob_captain", text_name="zoblin leader")
 
 
 init()
