@@ -10,7 +10,6 @@ def tp_init(name, tiles=[]):
     mytp.set_is_able_to_fall(True)
     mytp.set_is_cursor_can_hover_over(True)
     mytp.set_is_described_when_hovering_over(True)
-    mytp.set_is_interesting(True)  # for submerging
     mytp.set_is_wet_grass(True)
     mytp.set_text_a_or_an("the")
     mytp.set_text_description("Tall and oddly healthy subterranean grass.")
