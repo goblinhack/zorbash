@@ -21,7 +21,7 @@ def tp_init(name, text_name):
     mytp.set_distance_avoid(5)
     mytp.set_text_hits("hits")
     mytp.set_gfx_anim_use("attack_punch")
-    mytp.set_text_natural_attack_type("punch")
+    mytp.set_damage_natural_attack_type("punch")
     mytp.set_health_initial_dice("2d8+4")
     mytp.set_is_intelligent(True)
 

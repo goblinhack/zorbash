@@ -20,10 +20,11 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_attack_lunge(True)
     mytp.set_collision_check(True)
     mytp.set_collision_hit_priority(10)
-    mytp.set_damage_bite_chance_d1000(1000)
-    mytp.set_damage_bite_dice("1d20")
     mytp.set_damage_digest_chance_d1000(1000)
     mytp.set_damage_digest_dice("1d40")
+    mytp.set_damage_natural_attack_chance_d1000(1000)
+    mytp.set_damage_natural_attack_dice("1d20")
+    mytp.set_damage_natural_attack_type("burn")
     mytp.set_damage_received_doubled_from_fire(True)
     mytp.set_distance_vision(3)
     mytp.set_environ_avoids_fire(100)
@@ -85,7 +86,6 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("A dungeon auto cleaner jelly thingy.")
     mytp.set_text_hits("burns")
-    mytp.set_text_natural_attack_type("burn")
     mytp.set_z_depth(my.MAP_DEPTH_OBJ)
     mytp.set_z_prio(my.MAP_PRIO_IN_FRONT)  # so it appears over things when consuming
 

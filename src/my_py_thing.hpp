@@ -351,7 +351,7 @@ PyObject *thing_unused_flag4(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag5(PyObject *obj, PyObject *args, PyObject *keywds);
 
 PyObject *thing_get_damage_energy(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_get_damage_bite(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_get_damage_natural_attack(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_get_damage_crush(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_get_damage_melee(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_get_damage_necrosis(PyObject *obj, PyObject *args, PyObject *keywds);

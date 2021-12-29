@@ -78,7 +78,7 @@ int Tp::get_danger_level(void)
   danger_level += get_damage_acid_dice().max_roll();
   danger_level += get_damage_digest_dice().max_roll();
   danger_level += get_damage_digest_dice().max_roll();
-  danger_level += get_damage_bite_dice().max_roll();
+  danger_level += get_damage_natural_attack_dice().max_roll();
 
   //
   // Don't include crush damage as it is non typical

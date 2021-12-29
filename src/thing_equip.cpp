@@ -456,7 +456,6 @@ bool Thing::equip(Thingp item, int equip)
   //
   carry_anim->set_owner(this);
 
-  dbg("Has equipped: %s", item->to_short_string().c_str());
   auto top_owner = item->get_top_owner();
   if (top_owner) {
     if (top_owner != this) {

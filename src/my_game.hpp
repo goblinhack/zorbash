@@ -188,7 +188,7 @@ public:
   void wid_thing_info_add_carry_info(WidPopup *w, Thingp t);
   void wid_thing_info_add_charge_count(WidPopup *w, Thingp t);
   void wid_thing_info_add_constitution(WidPopup *w, Thingp t);
-  void wid_thing_info_add_damage_bite(WidPopup *w, Thingp t);
+  void wid_thing_info_add_damage_natural_attack(WidPopup *w, Thingp t);
   void wid_thing_info_add_damage_digest(WidPopup *w, Thingp t);
   void wid_thing_info_add_damage_melee(WidPopup *w, Thingp t);
   void wid_thing_info_add_damage_necrosis(WidPopup *w, Thingp t);

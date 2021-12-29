@@ -233,8 +233,8 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     damage = buff_on_damage_necrosis(real_hitter, damage);
     damage = on_damage_necrosis(real_hitter, damage);
   } else if (attack_bite) {
-    damage = buff_on_damage_bite(real_hitter, damage);
-    damage = on_damage_bite(real_hitter, damage);
+    damage = buff_on_damage_natural_attack(real_hitter, damage);
+    damage = on_damage_natural_attack(real_hitter, damage);
   } else {
     damage = buff_on_damage_melee(real_hitter, damage);
     damage = on_damage_melee(real_hitter, damage);
@@ -718,10 +718,10 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
           TOPCON("%%fg=orange$%s burns you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(), damage);
           msg("Sizzle!");
         } else if (attack_bite) {
-          if (! real_hitter->text_natural_attack_type().empty()) {
+          if (! real_hitter->damage_natural_attack_type().empty()) {
             TOPCON("%%fg=orange$%s %s you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(),
-                   pluralise(real_hitter->text_natural_attack_type()).c_str(), damage);
-            msg(capitalise(real_hitter->text_natural_attack_type()));
+                   pluralise(real_hitter->damage_natural_attack_type()).c_str(), damage);
+            msg(capitalise(real_hitter->damage_natural_attack_type()));
           } else {
             TOPCON("%%fg=orange$%s bites you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(), damage);
             msg("Chomp!");

@@ -664,10 +664,10 @@ bool Thing::attack(Thingp victim, bool prefer_attack_with_jaws)
   // Bite?
   //
   if (! damage_set || prefer_attack_with_jaws) {
-    if ((int) pcg_random_range(0, 1000) < damage_bite_chance_d1000()) {
-      int damage_bite = get_damage_bite();
-      if (damage_bite > 0) {
-        damage      = damage_bite + stat_to_bonus(attack_total);
+    if ((int) pcg_random_range(0, 1000) < damage_natural_attack_chance_d1000()) {
+      int damage_natural_attack = get_damage_natural_attack();
+      if (damage_natural_attack > 0) {
+        damage      = damage_natural_attack + stat_to_bonus(attack_total);
         damage_set  = true;
         attack_bite = true;
       }
@@ -879,7 +879,7 @@ int Thing::is_attacked_with_damage_melee(Thingp hitter, int damage)
                  attack_acid, attack_digest, damage));
 }
 
-int Thing::is_attacked_with_damage_bite(Thingp hitter, int damage)
+int Thing::is_attacked_with_damage_natural_attack(Thingp hitter, int damage)
 {
   TRACE_NO_INDENT();
   const bool crit             = false;

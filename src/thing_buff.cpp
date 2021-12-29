@@ -430,7 +430,7 @@ int Thing::buff_on_damage_necrosis(Thingp hitter, int damage)
   return damage;
 }
 
-int Thing::buff_on_damage_bite(Thingp hitter, int damage)
+int Thing::buff_on_damage_natural_attack(Thingp hitter, int damage)
 {
   if (! maybe_itemp()) {
     return damage;
@@ -441,7 +441,7 @@ int Thing::buff_on_damage_bite(Thingp hitter, int damage)
   for (const auto &item : get_itemp()->buffs) {
     auto t = level->thing_find(item.id);
     if (t) {
-      damage = t->on_owner_damage_bite(this, hitter, damage);
+      damage = t->on_owner_damage_natural_attack(this, hitter, damage);
     }
   }
   return damage;

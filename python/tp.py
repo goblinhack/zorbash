@@ -256,8 +256,8 @@ class Tp:
     def set_on_owner_damage_necrosis_do(self, value):
         my.tp_set_on_owner_damage_necrosis_do(self, value)
 
-    def set_on_owner_damage_bite_do(self, value):
-        my.tp_set_on_owner_damage_bite_do(self, value)
+    def set_on_owner_damage_natural_attack_do(self, value):
+        my.tp_set_on_owner_damage_natural_attack_do(self, value)
 
     def set_on_damage_poison_do(self, value):
         my.tp_set_on_damage_poison_do(self, value)
@@ -304,8 +304,8 @@ class Tp:
     def set_on_damage_necrosis_do(self, value):
         my.tp_set_on_damage_necrosis_do(self, value)
 
-    def set_on_damage_bite_do(self, value):
-        my.tp_set_on_damage_bite_do(self, value)
+    def set_on_damage_natural_attack_do(self, value):
+        my.tp_set_on_damage_natural_attack_do(self, value)
 
     def set_on_you_are_hit_but_still_alive_do(self, value):
         my.tp_set_on_you_are_hit_but_still_alive_do(self, value)
@@ -361,8 +361,8 @@ class Tp:
     def set_text_hits(self, value):
         my.tp_set_text_hits(self, value)
 
-    def set_text_natural_attack_type(self, value):
-        my.tp_set_text_natural_attack_type(self, value)
+    def set_damage_natural_attack_type(self, value):
+        my.tp_set_damage_natural_attack_type(self, value)
 
     def set_spawn_on_shoved(self, value):
         my.tp_set_spawn_on_shoved(self, value)
@@ -1144,8 +1144,8 @@ class Tp:
     def set_damage_melee_chance_d1000(self, value):
         my.tp_set_damage_melee_chance_d1000(self, value)
 
-    def set_damage_bite_chance_d1000(self, value):
-        my.tp_set_damage_bite_chance_d1000(self, value)
+    def set_damage_natural_attack_chance_d1000(self, value):
+        my.tp_set_damage_natural_attack_chance_d1000(self, value)
 
     def set_is_able_to_jump_randomly_chance_d1000(self, value):
         my.tp_set_is_able_to_jump_randomly_chance_d1000(self, value)
@@ -1279,8 +1279,8 @@ class Tp:
     def set_damage_necrosis_dice(self, value):
         my.tp_set_damage_necrosis_dice(self, value)
 
-    def set_damage_bite_dice(self, value):
-        my.tp_set_damage_bite_dice(self, value)
+    def set_damage_natural_attack_dice(self, value):
+        my.tp_set_damage_natural_attack_dice(self, value)
 
     def set_gold_value_dice(self, value):
         my.tp_set_gold_value_dice(self, value)

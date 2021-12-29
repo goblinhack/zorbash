@@ -63,7 +63,7 @@ def on_owner_damage_digest(me, owner, hitter, x, y, damage):
     return damage
 
 
-def on_owner_damage_bite(me, owner, hitter, x, y, damage):
+def on_owner_damage_natural_attack(me, owner, hitter, x, y, damage):
     return damage
 
 
@@ -101,7 +101,6 @@ def tp_init(name, text_name):
     mytp.set_is_loggable(True)
     mytp.set_long_text_description("Poison causes you 50 percent less damage.")
     mytp.set_on_owner_damage_acid_do("me.on_owner_damage_acid()")
-    mytp.set_on_owner_damage_bite_do("me.on_owner_damage_bite()")
     mytp.set_on_owner_damage_constitution_do("me.on_owner_damage_constitution()")
     mytp.set_on_owner_damage_crush_do("me.on_owner_damage_crush()")
     mytp.set_on_owner_damage_digest_do("me.on_owner_damage_digest()")
@@ -113,6 +112,7 @@ def tp_init(name, text_name):
     mytp.set_on_owner_damage_future4_do("me.on_owner_damage_future4()")
     mytp.set_on_owner_damage_lightning_do("me.on_owner_damage_lightning()")
     mytp.set_on_owner_damage_melee_do("me.on_owner_damage_melee()")
+    mytp.set_on_owner_damage_natural_attack_do("me.on_owner_damage_natural_attack()")
     mytp.set_on_owner_damage_necrosis_do("me.on_owner_damage_necrosis()")
     mytp.set_on_owner_damage_poison_do("me.on_owner_damage_poison()")
     mytp.set_on_owner_damage_strength_do("me.on_owner_damage_strength()")

@@ -272,10 +272,10 @@ int Thing::damage_melee_chance_d1000(void)
   return (tp()->damage_melee_chance_d1000());
 }
 
-int Thing::damage_bite_chance_d1000(void)
+int Thing::damage_natural_attack_chance_d1000(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->damage_bite_chance_d1000());
+  return (tp()->damage_natural_attack_chance_d1000());
 }
 
 int Thing::is_able_to_shove(void)
@@ -6407,10 +6407,10 @@ const std::string &Thing::on_owner_damage_necrosis_do(void)
   return (tp()->on_owner_damage_necrosis_do());
 }
 
-const std::string &Thing::on_owner_damage_bite_do(void)
+const std::string &Thing::on_owner_damage_natural_attack_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_damage_bite_do());
+  return (tp()->on_owner_damage_natural_attack_do());
 }
 
 const std::string &Thing::on_damage_poison_do(void)
@@ -6503,10 +6503,10 @@ const std::string &Thing::on_damage_necrosis_do(void)
   return (tp()->on_damage_necrosis_do());
 }
 
-const std::string &Thing::on_damage_bite_do(void)
+const std::string &Thing::on_damage_natural_attack_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_damage_bite_do());
+  return (tp()->on_damage_natural_attack_do());
 }
 
 const std::string &Thing::projectile_name(void)
@@ -6569,10 +6569,10 @@ const std::string &Thing::text_hits(void)
   return (tp()->text_hits());
 }
 
-const std::string &Thing::text_natural_attack_type(void)
+const std::string &Thing::damage_natural_attack_type(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->text_natural_attack_type());
+  return (tp()->damage_natural_attack_type());
 }
 
 const std::string &Thing::text_name(void)

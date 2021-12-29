@@ -17,22 +17,22 @@
 #include "my_thing_template.hpp"
 #include <algorithm>
 
-const Dice &Thing::get_damage_bite_dice(void)
+const Dice &Thing::get_damage_natural_attack_dice(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->get_damage_bite_dice());
+  return (tp()->get_damage_natural_attack_dice());
 }
 
-const std::string &Thing::get_damage_bite_dice_str(void)
+const std::string &Thing::get_damage_natural_attack_dice_str(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->get_damage_bite_dice_str());
+  return (tp()->get_damage_natural_attack_dice_str());
 }
 
-int Thing::get_damage_bite(void)
+int Thing::get_damage_natural_attack(void)
 {
   TRACE_NO_INDENT();
-  auto roll = tp()->get_damage_bite_dice().roll();
+  auto roll = tp()->get_damage_natural_attack_dice().roll();
 
   if (roll) {
     return roll + get_enchant();
@@ -40,27 +40,27 @@ int Thing::get_damage_bite(void)
   return roll;
 }
 
-int Thing::on_owner_damage_bite(Thingp owner, Thingp hitter, int damage)
+int Thing::on_owner_damage_natural_attack(Thingp owner, Thingp hitter, int damage)
 {
   TRACE_NO_INDENT();
   verify(MTYPE_THING, owner);
   if (! owner) {
-    err("Cannot owner_damage_bite null thing");
+    err("Cannot owner_damage_natural_attack null thing");
     return damage;
   }
 
   verify(MTYPE_THING, hitter);
   if (! hitter) {
-    err("Cannot owner_damage_bite null thing");
+    err("Cannot owner_damage_natural_attack null thing");
     return damage;
   }
 
-  auto on_owner_damage_bite = on_owner_damage_bite_do();
-  if (std::empty(on_owner_damage_bite)) {
+  auto on_owner_damage_natural_attack = on_owner_damage_natural_attack_do();
+  if (std::empty(on_owner_damage_natural_attack)) {
     return damage;
   }
 
-  auto t = split_tokens(on_owner_damage_bite, '.');
+  auto t = split_tokens(on_owner_damage_natural_attack, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -80,28 +80,28 @@ int Thing::on_owner_damage_bite(Thingp owner, Thingp hitter, int damage)
                           (unsigned int) curr_at.y, (unsigned int) damage);
   }
 
-  ERR("Bad on_owner_damage_bite call [%s] expected mod:function, got %d elems", on_owner_damage_bite.c_str(),
-      (int) on_owner_damage_bite.size());
+  ERR("Bad on_owner_damage_natural_attack call [%s] expected mod:function, got %d elems", on_owner_damage_natural_attack.c_str(),
+      (int) on_owner_damage_natural_attack.size());
 
   return damage;
 }
 
-int Thing::on_damage_bite(Thingp hitter, int damage)
+int Thing::on_damage_natural_attack(Thingp hitter, int damage)
 {
   TRACE_NO_INDENT();
   verify(MTYPE_THING, hitter);
 
   if (! hitter) {
-    err("Cannot damage_bite null thing");
+    err("Cannot damage_natural_attack null thing");
     return damage;
   }
 
-  auto on_damage_bite = on_damage_bite_do();
-  if (std::empty(on_damage_bite)) {
+  auto on_damage_natural_attack = on_damage_natural_attack_do();
+  if (std::empty(on_damage_natural_attack)) {
     return damage;
   }
 
-  auto t = split_tokens(on_damage_bite, '.');
+  auto t = split_tokens(on_damage_natural_attack, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -121,8 +121,8 @@ int Thing::on_damage_bite(Thingp hitter, int damage)
                           (unsigned int) curr_at.y, (unsigned int) damage);
   }
 
-  ERR("Bad on_damage_bite call [%s] expected mod:function, got %d elems", on_damage_bite.c_str(),
-      (int) on_damage_bite.size());
+  ERR("Bad on_damage_natural_attack call [%s] expected mod:function, got %d elems", on_damage_natural_attack.c_str(),
+      (int) on_damage_natural_attack.size());
 
   return damage;
 }

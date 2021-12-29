@@ -166,13 +166,13 @@ void               Tp::set_damage_necrosis_dice(const std::string &v)
   _damage_necrosis_dice_str = v;
 }
 
-const Dice        &Tp::get_damage_bite_dice(void) const { return _damage_bite_dice; }
-const int          Tp::get_damage_bite(void) const { return _damage_bite_dice.roll(); }
-const std::string &Tp::get_damage_bite_dice_str(void) const { return _damage_bite_dice_str; }
-void               Tp::set_damage_bite_dice(const std::string &v)
+const Dice        &Tp::get_damage_natural_attack_dice(void) const { return _damage_natural_attack_dice; }
+const int          Tp::get_damage_natural_attack(void) const { return _damage_natural_attack_dice.roll(); }
+const std::string &Tp::get_damage_natural_attack_dice_str(void) const { return _damage_natural_attack_dice_str; }
+void               Tp::set_damage_natural_attack_dice(const std::string &v)
 {
-  _damage_bite_dice     = v;
-  _damage_bite_dice_str = v;
+  _damage_natural_attack_dice     = v;
+  _damage_natural_attack_dice_str = v;
 }
 
 const Dice        &Tp::get_health_initial_dice(void) const { return _health_initial_dice; }

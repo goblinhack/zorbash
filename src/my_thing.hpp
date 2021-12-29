@@ -467,7 +467,7 @@ public:
   int buff_on_damage_energy(Thingp hitter, int damage);
   int buff_on_damage_acid(Thingp hitter, int damage);
   int buff_on_damage_digest(Thingp hitter, int damage);
-  int buff_on_damage_bite(Thingp hitter, int damage);
+  int buff_on_damage_natural_attack(Thingp hitter, int damage);
   int buff_on_damage_melee(Thingp hitter, int damage);
   int buff_on_damage_necrosis(Thingp hitter, int damage);
   int buff_on_damage_strength(Thingp hitter, int damage);
@@ -484,13 +484,13 @@ public:
   int on_damage_energy(Thingp hitter, int damage);
   int on_damage_acid(Thingp hitter, int damage);
   int on_damage_digest(Thingp hitter, int damage);
-  int on_damage_bite(Thingp hitter, int damage);
+  int on_damage_natural_attack(Thingp hitter, int damage);
   int on_damage_melee(Thingp hitter, int damage);
   int on_damage_necrosis(Thingp hitter, int damage);
   int on_damage_strength(Thingp hitter, int damage);
   int on_damage_constitution(Thingp hitter, int damage);
 
-  const Dice &get_damage_bite_dice(void);
+  const Dice &get_damage_natural_attack_dice(void);
   const Dice &get_damage_crush_dice(void);
   const Dice &get_damage_melee_dice(void);
   const Dice &get_damage_poison_dice(void);
@@ -529,7 +529,7 @@ public:
   const fpoint &get_interpolated_at(void);
 
   const std::string  get_danger_level_str(Thingp); // Cannot return reference
-  const std::string &get_damage_bite_dice_str(void);
+  const std::string &get_damage_natural_attack_dice_str(void);
   const std::string &get_damage_crush_dice_str(void);
   const std::string &get_damage_melee_dice_str(void);
   const std::string &get_damage_poison_dice_str(void);
@@ -562,7 +562,7 @@ public:
   const std::string &name(void);
   const std::string &on_born_do(void);
   const std::string &on_damage_acid_do(void);
-  const std::string &on_damage_bite_do(void);
+  const std::string &on_damage_natural_attack_do(void);
   const std::string &on_damage_constitution_do(void);
   const std::string &on_damage_crush_do(void);
   const std::string &on_damage_digest_do(void);
@@ -591,7 +591,7 @@ public:
   const std::string &on_move_do(void);
   const std::string &on_open_do(void);
   const std::string &on_owner_damage_acid_do(void);
-  const std::string &on_owner_damage_bite_do(void);
+  const std::string &on_owner_damage_natural_attack_do(void);
   const std::string &on_owner_damage_constitution_do(void);
   const std::string &on_owner_damage_crush_do(void);
   const std::string &on_owner_damage_digest_do(void);
@@ -628,7 +628,7 @@ public:
   const std::string &text_description(void);
   const std::string &text_enchant(void);
   const std::string &text_hits(void);
-  const std::string &text_natural_attack_type(void);
+  const std::string &damage_natural_attack_type(void);
   const std::string &text_name(void);
   const std::string &text_skill(void);
   const std::string &text_title(void);
@@ -699,7 +699,7 @@ public:
   int collision_check(void);
   int collision_hit_priority(void);
   int damage_acid_chance_d1000(void);
-  int damage_bite_chance_d1000(void);
+  int damage_natural_attack_chance_d1000(void);
   int damage_crush_chance_d1000(void);
   int damage_digest_chance_d1000(void);
   int damage_energy_chance_d1000(void);
@@ -832,7 +832,7 @@ public:
   int get_charge_count(void);
   int get_current_damage(void);
   int get_damage_acid(void);
-  int get_damage_bite(void);
+  int get_damage_natural_attack(void);
   int get_damage_crush(void);
   int get_damage_digest(void);
   int get_damage_energy(void);
@@ -1051,7 +1051,7 @@ public:
   int is_attackable_by_monst(void);
   int is_attackable_by_player(void);
   int is_attacked_with_damage_acid(Thingp hitter, int damage);
-  int is_attacked_with_damage_bite(Thingp hitter, int damage);
+  int is_attacked_with_damage_natural_attack(Thingp hitter, int damage);
   int is_attacked_with_damage_crush(Thingp hitter, int damage);
   int is_attacked_with_damage_digest(Thingp hitter, int damage);
   int is_attacked_with_damage_energy(Thingp hitter, int damage);
@@ -1250,7 +1250,7 @@ public:
   int monst_size(void);
   int normal_placement_rules(void);
   int on_damage_acid(Thingp owner, Thingp hitter, int damage);
-  int on_damage_bite(Thingp owner, Thingp hitter, int damage);
+  int on_damage_natural_attack(Thingp owner, Thingp hitter, int damage);
   int on_damage_constitution(Thingp owner, Thingp hitter, int damage);
   int on_damage_crush(Thingp owner, Thingp hitter, int damage);
   int on_damage_digest(Thingp owner, Thingp hitter, int damage);
@@ -1268,7 +1268,7 @@ public:
   int on_death_drop_all_items(void);
   int on_death_is_open(void);
   int on_owner_damage_acid(Thingp owner, Thingp hitter, int damage);
-  int on_owner_damage_bite(Thingp owner, Thingp hitter, int damage);
+  int on_owner_damage_natural_attack(Thingp owner, Thingp hitter, int damage);
   int on_owner_damage_constitution(Thingp owner, Thingp hitter, int damage);
   int on_owner_damage_crush(Thingp owner, Thingp hitter, int damage);
   int on_owner_damage_digest(Thingp owner, Thingp hitter, int damage);

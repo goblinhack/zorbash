@@ -9,6 +9,7 @@ def lava_init(name, text_name, tiles=[]):
     mytp.set_collision_hit_priority(100)
     mytp.set_damage_fire_chance_d1000(1000)
     mytp.set_damage_fire_dice("1d12+6")
+    mytp.set_damage_natural_attack_type("burn")
     mytp.set_gfx_animated(True)
     mytp.set_gfx_glows(True)
     mytp.set_is_able_to_fall(True)
@@ -23,7 +24,6 @@ def lava_init(name, text_name, tiles=[]):
     mytp.set_text_a_or_an("")
     mytp.set_text_description("%%fg=orange$Freshly scented lava%%fg=reset$ (double click to move onto).")
     mytp.set_text_hits("tickles")
-    mytp.set_text_natural_attack_type("burn")
     mytp.set_z_depth(my.MAP_DEPTH_LAVA)
     mytp.set_z_prio(my.MAP_PRIO_NORMAL)
 

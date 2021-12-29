@@ -229,7 +229,7 @@ def on_damage_digest(me, hitter, x, y, damage):
     return damage
 
 
-def on_damage_bite(me, hitter, x, y, damage):
+def on_damage_natural_attack(me, hitter, x, y, damage):
     return damage
 
 
@@ -260,6 +260,7 @@ def tp_init(name, text_name, short_text_name, title):
     mytp.set_collision_hit_priority(20)
     mytp.set_damage_melee_chance_d1000(1000)
     mytp.set_damage_melee_dice("1d6+1")
+    mytp.set_damage_natural_attack_type("punch")
     mytp.set_distance_avoid(3)
     mytp.set_distance_jump(2)
     mytp.set_distance_throw(5)
@@ -318,7 +319,6 @@ def tp_init(name, text_name, short_text_name, title):
     mytp.set_monst_size(my.MONST_SIZE_NORMAL)
     mytp.set_on_born_do("player.on_born()")
     mytp.set_on_damage_acid_do("player.on_damage_acid()")
-    mytp.set_on_damage_bite_do("player.on_damage_bite()")
     mytp.set_on_damage_constitution_do("player.on_damage_constitution()")
     mytp.set_on_damage_crush_do("player.on_damage_crush()")
     mytp.set_on_damage_digest_do("player.on_damage_digest()")
@@ -330,6 +330,7 @@ def tp_init(name, text_name, short_text_name, title):
     mytp.set_on_damage_future4_do("player.on_damage_future4()")
     mytp.set_on_damage_lightning_do("player.on_damage_lightning()")
     mytp.set_on_damage_melee_do("player.on_damage_melee()")
+    mytp.set_on_damage_natural_attack_do("player.on_damage_natural_attack()")
     mytp.set_on_damage_necrosis_do("player.on_damage_necrosis()")
     mytp.set_on_damage_poison_do("player.on_damage_poison()")
     mytp.set_on_damage_strength_do("player.on_damage_strength()")
@@ -346,7 +347,6 @@ def tp_init(name, text_name, short_text_name, title):
     mytp.set_text_a_or_an("the")
     mytp.set_text_description("Our most noble adventurer. Press 'h' for help.")
     mytp.set_text_hits("hits")
-    mytp.set_text_natural_attack_type("punch")
     mytp.set_text_title(title)
     mytp.set_z_depth(my.MAP_DEPTH_OBJ)
     mytp.set_z_prio(my.MAP_PRIO_NORMAL)

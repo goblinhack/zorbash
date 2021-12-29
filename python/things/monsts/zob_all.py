@@ -41,10 +41,10 @@ def tp_init(name, text_name):
     mytp.set_collateral_damage_pct(50)
     mytp.set_collision_check(True)
     mytp.set_collision_hit_priority(10)
-    mytp.set_damage_bite_chance_d1000(100)
-    mytp.set_damage_bite_dice("1d6+2")
-    mytp.set_damage_melee_chance_d1000(900)
-    mytp.set_damage_melee_dice("1d4")
+    mytp.set_damage_melee_chance_d1000(900)  # Chance to use weapon
+    mytp.set_damage_natural_attack_chance_d1000(100)
+    mytp.set_damage_natural_attack_dice("1d6+2")
+    mytp.set_damage_natural_attack_type("claw")
     mytp.set_distance_avoid(5)
     mytp.set_distance_jump(3)
     mytp.set_distance_leader_max(5)
@@ -113,7 +113,6 @@ def tp_init(name, text_name):
     mytp.set_stat_strength(8)
     mytp.set_text_a_or_an("a")
     mytp.set_text_hits("claws")
-    mytp.set_text_natural_attack_type("claw")
     mytp.set_z_depth(my.MAP_DEPTH_OBJ)
     mytp.set_z_prio(my.MAP_PRIO_NORMAL)
     return mytp

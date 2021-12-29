@@ -58,7 +58,7 @@ public:
 
 private:
   Dice _damage_acid_dice {};
-  Dice _damage_bite_dice {};
+  Dice _damage_natural_attack_dice {};
   Dice _damage_crush_dice {};
   Dice _damage_digest_dice {};
   Dice _damage_energy_dice {};
@@ -110,7 +110,7 @@ private:
   int _collision_check {};
   int _collision_hit_priority {};
   int _damage_acid_chance_d1000 {};
-  int _damage_bite_chance_d1000 {};
+  int _damage_natural_attack_chance_d1000 {};
   int _damage_crush_chance_d1000 {};
   int _damage_digest_chance_d1000 {};
   int _damage_energy_chance_d1000 {};
@@ -432,7 +432,7 @@ private:
   int _weapon_use_distance {};
 
   std::string _damage_acid_dice_str;
-  std::string _damage_bite_dice_str;
+  std::string _damage_natural_attack_dice_str;
   std::string _damage_crush_dice_str;
   std::string _damage_digest_dice_str;
   std::string _damage_energy_dice_str;
@@ -459,7 +459,7 @@ private:
   std::string _nutrition_dice_str;
   std::string _on_born_do;
   std::string _on_damage_acid_do;
-  std::string _on_damage_bite_do;
+  std::string _on_damage_natural_attack_do;
   std::string _on_damage_constitution_do;
   std::string _on_damage_crush_do;
   std::string _on_damage_digest_do;
@@ -489,7 +489,7 @@ private:
   std::string _on_move_do;
   std::string _on_open_do;
   std::string _on_owner_damage_acid_do;
-  std::string _on_owner_damage_bite_do;
+  std::string _on_owner_damage_natural_attack_do;
   std::string _on_owner_damage_constitution_do;
   std::string _on_owner_damage_crush_do;
   std::string _on_owner_damage_digest_do;
@@ -529,7 +529,7 @@ private:
   std::string _text_description;
   std::string _text_enchant;
   std::string _text_hits;
-  std::string _text_natural_attack_type;
+  std::string _damage_natural_attack_type;
   std::string _text_name;
   std::string _text_skill;
   std::string _text_title;
@@ -545,7 +545,7 @@ public:
   bool is_hated_by_me(class Level *, point p) const;
 
   const Dice &get_damage_acid_dice(void) const;
-  const Dice &get_damage_bite_dice(void) const;
+  const Dice &get_damage_natural_attack_dice(void) const;
   const Dice &get_damage_crush_dice(void) const;
   const Dice &get_damage_digest_dice(void) const;
   const Dice &get_damage_energy_dice(void) const;
@@ -568,7 +568,7 @@ public:
 
   const int cash(void) const;
   const int get_damage_acid(void) const;
-  const int get_damage_bite(void) const;
+  const int get_damage_natural_attack(void) const;
   const int get_damage_crush(void) const;
   const int get_damage_digest(void) const;
   const int get_damage_energy(void) const;
@@ -620,7 +620,7 @@ public:
   const Tilemap *tp_x_tiles(void) const;
 
   void set_damage_acid_dice(const std::string &);
-  void set_damage_bite_dice(const std::string &);
+  void set_damage_natural_attack_dice(const std::string &);
   void set_damage_crush_dice(const std::string &);
   void set_damage_digest_dice(const std::string &);
   void set_damage_energy_dice(const std::string &);
@@ -645,7 +645,7 @@ public:
   std::string text_a_or_an(void) const;
 
   const std::string &get_damage_acid_dice_str(void) const;
-  const std::string &get_damage_bite_dice_str(void) const;
+  const std::string &get_damage_natural_attack_dice_str(void) const;
   const std::string &get_damage_crush_dice_str(void) const;
   const std::string &get_damage_digest_dice_str(void) const;
   const std::string &get_damage_energy_dice_str(void) const;
@@ -676,7 +676,7 @@ public:
   const std::string &name(void) const { return _name; }
   const std::string &on_born_do(void) const { return _on_born_do; }
   const std::string &on_damage_acid_do(void) const { return _on_damage_acid_do; }
-  const std::string &on_damage_bite_do(void) const { return _on_damage_bite_do; }
+  const std::string &on_damage_natural_attack_do(void) const { return _on_damage_natural_attack_do; }
   const std::string &on_damage_constitution_do(void) const { return _on_damage_constitution_do; }
   const std::string &on_damage_crush_do(void) const { return _on_damage_crush_do; }
   const std::string &on_damage_digest_do(void) const { return _on_damage_digest_do; }
@@ -705,7 +705,7 @@ public:
   const std::string &on_move_do(void) const { return _on_move_do; }
   const std::string &on_open_do(void) const { return _on_open_do; }
   const std::string &on_owner_damage_acid_do(void) const { return _on_owner_damage_acid_do; }
-  const std::string &on_owner_damage_bite_do(void) const { return _on_owner_damage_bite_do; }
+  const std::string &on_owner_damage_natural_attack_do(void) const { return _on_owner_damage_natural_attack_do; }
   const std::string &on_owner_damage_constitution_do(void) const { return _on_owner_damage_constitution_do; }
   const std::string &on_owner_damage_crush_do(void) const { return _on_owner_damage_crush_do; }
   const std::string &on_owner_damage_digest_do(void) const { return _on_owner_damage_digest_do; }
@@ -742,7 +742,7 @@ public:
   const std::string &text_description(void) const { return _text_description; }
   const std::string &text_enchant(void) const { return _text_enchant; }
   const std::string &text_hits(void) const { return _text_hits; }
-  const std::string &text_natural_attack_type(void) const { return _text_natural_attack_type; }
+  const std::string &damage_natural_attack_type(void) const { return _damage_natural_attack_type; }
   const std::string &text_name(void) const { return _text_name; }
   const std::string &text_skill(void) const { return _text_skill; }
   const std::string &text_title(void) const { return _text_title; }
@@ -777,7 +777,7 @@ public:
   int collision_check(void) const { return _collision_check; }
   int collision_hit_priority(void) const { return _collision_hit_priority; }
   int damage_acid_chance_d1000(void) const { return _damage_acid_chance_d1000; }
-  int damage_bite_chance_d1000(void) const { return _damage_bite_chance_d1000; }
+  int damage_natural_attack_chance_d1000(void) const { return _damage_natural_attack_chance_d1000; }
   int damage_crush_chance_d1000(void) const { return _damage_crush_chance_d1000; }
   int damage_digest_chance_d1000(void) const { return _damage_digest_chance_d1000; }
   int damage_energy_chance_d1000(void) const { return _damage_energy_chance_d1000; }
@@ -1125,7 +1125,7 @@ public:
   void set_collision_check(int v) { _collision_check = v; }
   void set_collision_hit_priority(int v) { _collision_hit_priority = v; }
   void set_damage_acid_chance_d1000(int v) { _damage_acid_chance_d1000 = v; }
-  void set_damage_bite_chance_d1000(int v) { _damage_bite_chance_d1000 = v; }
+  void set_damage_natural_attack_chance_d1000(int v) { _damage_natural_attack_chance_d1000 = v; }
   void set_damage_crush_chance_d1000(int v) { _damage_crush_chance_d1000 = v; }
   void set_damage_digest_chance_d1000(int v) { _damage_digest_chance_d1000 = v; }
   void set_damage_energy_chance_d1000(int v) { _damage_energy_chance_d1000 = v; }
@@ -1413,7 +1413,7 @@ public:
   void set_normal_placement_rules(int v) { _normal_placement_rules = v; }
   void set_on_born_do(const std::string &v) { _on_born_do = v; }
   void set_on_damage_acid_do(const std::string &v) { _on_damage_acid_do = v; }
-  void set_on_damage_bite_do(const std::string &v) { _on_damage_bite_do = v; }
+  void set_on_damage_natural_attack_do(const std::string &v) { _on_damage_natural_attack_do = v; }
   void set_on_damage_constitution_do(const std::string &v) { _on_damage_constitution_do = v; }
   void set_on_damage_crush_do(const std::string &v) { _on_damage_crush_do = v; }
   void set_on_damage_digest_do(const std::string &v) { _on_damage_digest_do = v; }
@@ -1442,7 +1442,7 @@ public:
   void set_on_move_do(const std::string &v) { _on_move_do = v; }
   void set_on_open_do(const std::string &v) { _on_open_do = v; }
   void set_on_owner_damage_acid_do(const std::string &v) { _on_owner_damage_acid_do = v; }
-  void set_on_owner_damage_bite_do(const std::string &v) { _on_owner_damage_bite_do = v; }
+  void set_on_owner_damage_natural_attack_do(const std::string &v) { _on_owner_damage_natural_attack_do = v; }
   void set_on_owner_damage_constitution_do(const std::string &v) { _on_owner_damage_constitution_do = v; }
   void set_on_owner_damage_crush_do(const std::string &v) { _on_owner_damage_crush_do = v; }
   void set_on_owner_damage_digest_do(const std::string &v) { _on_owner_damage_digest_do = v; }
@@ -1503,7 +1503,7 @@ public:
   void set_text_description(const std::string &v) { _text_description = v; }
   void set_text_enchant(const std::string &v) { _text_enchant = v; }
   void set_text_hits(const std::string &v) { _text_hits = v; }
-  void set_text_natural_attack_type(const std::string &v) { _text_natural_attack_type = v; }
+  void set_damage_natural_attack_type(const std::string &v) { _damage_natural_attack_type = v; }
   void set_text_name(const std::string &v) { _text_name = v; }
   void set_text_skill(const std::string &v) { _text_skill = v; }
   void set_text_title(const std::string &v) { _text_title = v; }

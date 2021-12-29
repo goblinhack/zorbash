@@ -10,7 +10,8 @@ def tp_init(name, text_name):
     mytp = tp.Tp(name, text_name)
     mytp.set_collision_check(True)
     mytp.set_damage_fire_chance_d1000(1000)
-    mytp.set_damage_melee_dice("1d3+1")
+    mytp.set_damage_fire_dice("1d3+1")
+    mytp.set_damage_natural_attack_type("burn")
     mytp.set_environ_avoids_water(100)
     mytp.set_gfx_animated(True)
     mytp.set_gfx_flickers(True)
@@ -31,7 +32,6 @@ def tp_init(name, text_name):
     mytp.set_text_a_or_an("")
     mytp.set_text_description("Fire embers.")
     mytp.set_text_hits("burns")
-    mytp.set_text_natural_attack_type("burn")
     mytp.set_z_depth(my.MAP_DEPTH_OBJ)
     mytp.set_z_prio(my.MAP_PRIO_IN_FRONT)
 
