@@ -3,13 +3,21 @@ import zob_all
 
 
 def on_you_are_declared_leader(me, x, y):
-    my.thing_polymorph(me, "zob_pirate")
-    # my.thing_polymorph(me, "zob_wizard")
-    # my.thing_polymorph(me, "zob_captain")
+    r = my.non_pcg_randint(1, 100)
+    if r < 90:
+        my.thing_polymorph(me, "zob_captain")
+    elif r < 95:
+        my.thing_polymorph(me, "zob_wizard")
+    else:
+        my.thing_polymorph(me, "zob_pirate")
 
 
 def on_you_are_declared_a_follower(me, leader, x, y):
-    my.thing_polymorph(me, "zob_soldier")
+    r = my.non_pcg_randint(1, 100)
+    if r < 90:
+        my.thing_polymorph(me, "zob_soldier")
+    else:
+        my.thing_polymorph(me, "zob_eldster")
 
 
 def tp_init(name, text_name):

@@ -249,13 +249,13 @@ void tp_random_init(void)
     }
 
     if (tp->is_weapon()) {
-      if (tp->is_treasure_class_a()) {
+      if (tp->is_weapon_class_a()) {
         tp_weapon_class_a.push_back(tp);
       }
-      if (tp->is_treasure_class_b()) {
+      if (tp->is_weapon_class_b()) {
         tp_weapon_class_b.push_back(tp);
       }
-      if (tp->is_treasure_class_c()) {
+      if (tp->is_weapon_class_c()) {
         tp_weapon_class_c.push_back(tp);
       }
     }
