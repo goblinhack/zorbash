@@ -34,6 +34,15 @@ int Thing::get_damage_max(void)
   max_damage      = std::max(max_damage, get_damage_acid_dice().max_roll());
   max_damage      = std::max(max_damage, get_damage_digest_dice().max_roll());
   max_damage      = std::max(max_damage, get_damage_necrosis_dice().max_roll());
+
+  //
+  // Add in weapons
+  //
+  Thingp curr_weapon = get_equip(MONST_EQUIP_WEAPON);
+  if (curr_weapon) {
+    max_damage = std::max(max_damage, curr_weapon->get_damage_max());
+  }
+
   //
   // Don't include crush damage as it is non typical
   //
@@ -58,6 +67,15 @@ int Thing::get_damage_min(void)
   min_damage      = std::min(min_damage, get_damage_acid_dice().min_roll());
   min_damage      = std::min(min_damage, get_damage_digest_dice().min_roll());
   min_damage      = std::min(min_damage, get_damage_necrosis_dice().min_roll());
+
+  //
+  // Add in weapons
+  //
+  Thingp curr_weapon = get_equip(MONST_EQUIP_WEAPON);
+  if (curr_weapon) {
+    min_damage = std::min(min_damage, curr_weapon->get_damage_min());
+  }
+
   //
   // Don't include crush damage as it is non typical
   //
