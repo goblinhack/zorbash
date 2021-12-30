@@ -13,7 +13,7 @@ def tp_init(name, text_name):
     mytp.set_attack_lunge(True)
     mytp.set_collision_check(True)
     mytp.set_collision_hit_priority(10)
-    mytp.set_damage_natural_attack_chance_d1000(1000)
+    mytp.set_damage_natural_attack_type("touch")
     mytp.set_damage_natural_attack_dice("1")
     mytp.set_distance_manifestor_max(6)
     mytp.set_distance_minion_vision_shared(True)
@@ -49,7 +49,7 @@ def tp_init(name, text_name):
     mytp.set_rarity(my.RARITY_COMMON)
     mytp.set_stat_armor_class(11)
     mytp.set_stat_attack_bonus(10)  # 10, means no bonus
-    mytp.set_stat_constitution(20)
+    mytp.set_stat_constitution(10)
     mytp.set_stat_dexterity(13)
     mytp.set_stat_strength(7)
     mytp.set_text_a_or_an("a")

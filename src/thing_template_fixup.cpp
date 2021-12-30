@@ -55,6 +55,71 @@ void tp_fixup(void)
         DIE("Tp %s is a monst that cannot be hit?", tp->name().c_str());
       }
     }
+
+    //
+    // If only a single attack type then make sure it is 1000%
+    //
+    int num_attack_types = 0;
+
+    num_attack_types += tp->get_damage_melee() ? 1 : 0;
+    num_attack_types += tp->get_damage_natural_attack() ? 1 : 0;
+    num_attack_types += tp->get_damage_poison() ? 1 : 0;
+    num_attack_types += tp->get_damage_future1() ? 1 : 0;
+    num_attack_types += tp->get_damage_future2() ? 1 : 0;
+    num_attack_types += tp->get_damage_future3() ? 1 : 0;
+    num_attack_types += tp->get_damage_future4() ? 1 : 0;
+    num_attack_types += tp->get_damage_fire() ? 1 : 0;
+    num_attack_types += tp->get_damage_crush() ? 1 : 0;
+    num_attack_types += tp->get_damage_lightning() ? 1 : 0;
+    num_attack_types += tp->get_damage_energy() ? 1 : 0;
+    num_attack_types += tp->get_damage_acid() ? 1 : 0;
+    num_attack_types += tp->get_damage_digest() ? 1 : 0;
+    num_attack_types += tp->get_damage_necrosis() ? 1 : 0;
+
+    if (num_attack_types == 1) {
+      if (tp->get_damage_acid() > 0) {
+        tp->set_damage_acid_chance_d1000(1000);
+      }
+      if (tp->get_damage_natural_attack() > 0) {
+        tp->set_damage_natural_attack_chance_d1000(1000);
+      }
+      if (tp->get_damage_crush() > 0) {
+        tp->set_damage_crush_chance_d1000(1000);
+      }
+      if (tp->get_damage_digest() > 0) {
+        tp->set_damage_digest_chance_d1000(1000);
+      }
+      if (tp->get_damage_energy() > 0) {
+        tp->set_damage_energy_chance_d1000(1000);
+      }
+      if (tp->get_damage_fire() > 0) {
+        tp->set_damage_fire_chance_d1000(1000);
+      }
+      if (tp->get_damage_future1() > 0) {
+        tp->set_damage_future1_chance_d1000(1000);
+      }
+      if (tp->get_damage_future2() > 0) {
+        tp->set_damage_future2_chance_d1000(1000);
+      }
+      if (tp->get_damage_future3() > 0) {
+        tp->set_damage_future3_chance_d1000(1000);
+      }
+      if (tp->get_damage_future4() > 0) {
+        tp->set_damage_future4_chance_d1000(1000);
+      }
+      if (tp->get_damage_lightning() > 0) {
+        tp->set_damage_lightning_chance_d1000(1000);
+      }
+      if (tp->get_damage_melee() > 0) {
+        tp->set_damage_melee_chance_d1000(1000);
+      }
+      if (tp->get_damage_necrosis() > 0) {
+        tp->set_damage_necrosis_chance_d1000(1000);
+      }
+      if (tp->get_damage_poison() > 0) {
+        tp->set_damage_poison_chance_d1000(1000);
+      }
+    }
   }
 
   for (auto &tp : tp_name_map) {

@@ -1,15 +1,15 @@
 import my
-import zob_all
+import zorb_all
 
 
 def on_death_of_a_follower(me, x, y):
     if not my.thing_is_dead_or_dying(me):
-        my.topcon("The zoblin eldster cries out in rage!")
+        my.topcon("The zorblin eldster cries out in rage!")
 
 
 def tp_init(name, text_name):
-    mytp = zob_all.tp_init(name, text_name)
-    mytp.set_long_text_description_extra("This particular zoblin is world weary and longing for an early retirement. Can you help?.")
+    mytp = zorb_all.tp_init(name, text_name)
+    mytp.set_long_text_description_extra("This particular zorblin is world weary and longing for an early retirement. Can you help?.")
     mytp.set_on_death_of_a_follower_do("me.on_death_of_a_follower()")
     mytp.set_text_description("A very war-weary goblin.")
     mytp.set_is_carrier_of_treasure_class_b(True)
@@ -36,7 +36,7 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="zob_eldster", text_name="zoblin leader")
+    tp_init(name="zorb_eldster", text_name="zorblin leader")
 
 
 init()

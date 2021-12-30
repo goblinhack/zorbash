@@ -253,7 +253,7 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
   on_born();
 
   //
-  // Spawn zoblin packs
+  // Spawn zorblin packs
   //
   static bool spawning_group;
   if (! spawning_group) {

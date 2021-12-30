@@ -1,10 +1,10 @@
 import my
-import zob_all
+import zorb_all
 
 
 def on_death_of_a_follower(me, leader, x, y):
     if not my.thing_is_dead_or_dying(leader):
-        my.topcon("The zoblin wizard curses darkly in rage!")
+        my.topcon("The zorblin wizard curses darkly in rage!")
 
 
 def on_born(me, x, y):
@@ -12,11 +12,11 @@ def on_born(me, x, y):
 
 
 def tp_init(name, text_name):
-    mytp = zob_all.tp_init(name, text_name)
-    mytp.set_long_text_description_extra("This particular zoblin is learned in the dark zobliny arts. They worship their dark lord who lives in his dark lair. They also prefer dark chocolate.")
+    mytp = zorb_all.tp_init(name, text_name)
+    mytp.set_long_text_description_extra("This particular zorblin is learned in the dark zorbliny arts. They worship their dark lord who lives in his dark lair. They also prefer dark chocolate.")
     mytp.set_on_death_of_a_follower_do("me.on_death_of_a_follower()")
     mytp.set_on_born_do("me.on_born()")
-    mytp.set_text_description("A master of the dark zobliny arts.")
+    mytp.set_text_description("A master of the dark zorbliny arts.")
     mytp.set_is_carrier_of_treasure_class_b(True)
     mytp.set_stat_strength(8)
     mytp.set_distance_avoid(5)
@@ -43,7 +43,7 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="zob_wizard", text_name="zoblin wizard")
+    tp_init(name="zorb_wizard", text_name="zorblin wizard")
 
 
 init()

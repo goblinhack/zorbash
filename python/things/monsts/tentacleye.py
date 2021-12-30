@@ -43,7 +43,6 @@ def tp_init(name, text_name):
     mytp.set_attack_meat(True)
     mytp.set_collision_check(True)
     mytp.set_collision_hit_priority(10)
-    mytp.set_damage_natural_attack_chance_d1000(1000)
     mytp.set_damage_natural_attack_dice("2d6")
     mytp.set_damage_natural_attack_type("whip")
     mytp.set_damage_received_doubled_from_fire(True)

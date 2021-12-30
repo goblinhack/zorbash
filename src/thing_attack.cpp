@@ -677,6 +677,9 @@ bool Thing::attack(Thingp victim, bool prefer_attack_with_jaws)
   //
   // Melee?
   //
+  // Not sure if I should keep melee chance as it is the fallback attack if nothing
+  // else hits.
+  //
   if (! damage_set) {
     if ((int) pcg_random_range(0, 1000) < damage_melee_chance_d1000()) {
       damage = get_damage_melee() + stat_to_bonus(attack_total);
