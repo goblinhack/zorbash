@@ -5,9 +5,9 @@ mytp = None
 
 
 def on_use(owner, item, target, x, y):
-    # my.con("owner   {} {:08X}".format(my.thing_get_name(owner), owner))
-    # my.con("item    {} {:08X}".format(my.thing_get_name(item), item))
-    # my.con("target  {} {:08X}".format(my.thing_get_name(target), target))
+    # my.con("owner   {} {:X}".format(my.thing_get_name(owner), owner))
+    # my.con("item    {} {:X}".format(my.thing_get_name(item), item))
+    # my.con("target  {} {:X}".format(my.thing_get_name(target), target))
     did_something = False
 
     enchant = my.thing_get_enchant(item)

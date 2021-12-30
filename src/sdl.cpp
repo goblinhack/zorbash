@@ -444,7 +444,7 @@ static void sdl_event(SDL_Event *event)
     case SDL_KEYDOWN :
       {
         if (g_grab_next_key) {
-          DBG("SDL: Keyboard: Grabbed 0x%08" PRIx32 " = %s / %s", event->key.keysym.sym,
+          DBG("SDL: Keyboard: Grabbed 0x%08" PRIX32 " = %s / %s", event->key.keysym.sym,
               SDL_GetKeyName(event->key.keysym.sym), SDL_GetScancodeName(event->key.keysym.scancode));
 
           g_grab_next_key      = false;
@@ -457,7 +457,7 @@ static void sdl_event(SDL_Event *event)
 
         key = &event->key.keysym;
 
-        DBG("SDL: Keyboard: Key pressed keycode 0x%08" PRIx32 " = %s %d", event->key.keysym.sym,
+        DBG("SDL: Keyboard: Key pressed keycode 0x%08" PRIX32 " = %s %d", event->key.keysym.sym,
             SDL_GetKeyName(event->key.keysym.sym), key->mod);
 
         {
@@ -505,7 +505,7 @@ static void sdl_event(SDL_Event *event)
         sdl_last_time_for_key = 0;
         memset(&last_key_pressed, 0, sizeof(*key));
 
-        DBG("SDL: Keyboard: Key released keycode 0x%08" PRIx32 " = %s", event->key.keysym.sym,
+        DBG("SDL: Keyboard: Key released keycode 0x%08" PRIX32 " = %s", event->key.keysym.sym,
             SDL_GetKeyName(event->key.keysym.sym));
 
         key = &event->key.keysym;
@@ -576,7 +576,7 @@ static void sdl_event(SDL_Event *event)
       {
         mouse_down = sdl_get_mouse();
 
-        DBG("SDL: Mouse DOWN: button %d pressed at %d,%d state %x", event->button.button, event->button.x,
+        DBG("SDL: Mouse DOWN: button %d pressed at %d,%d state %X", event->button.button, event->button.x,
             event->button.y, mouse_down);
 
         auto now             = time_get_time_ms_cached();

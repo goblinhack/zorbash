@@ -701,10 +701,18 @@ public:
   int damage_received_doubled_from_necrosis(void);
   int damage_received_doubled_from_poison(void);
   int damage_received_doubled_from_water(void);
+  int decr_armor_class(int);
+  int decr_armor_class(void);
+  int decr_attack_bonus(int);
+  int decr_attack_bonus(void);
   int decr_charge_count(int);
   int decr_charge_count(void);
+  int decr_constitution(int);
+  int decr_constitution(void);
   int decr_current_damage(int);
   int decr_current_damage(void);
+  int decr_dexterity(int);
+  int decr_dexterity(void);
   int decr_distance_throw(int);
   int decr_distance_throw(void);
   int decr_enchant(int);
@@ -741,14 +749,6 @@ public:
   int decr_stamina_max(int);
   int decr_stamina_max(void);
   int decr_stamina(void);
-  int decr_stat_armor_class(int);
-  int decr_stat_armor_class(void);
-  int decr_stat_attack_bonus(int);
-  int decr_stat_attack_bonus(void);
-  int decr_stat_constitution(int);
-  int decr_stat_constitution(void);
-  int decr_stat_dexterity(int);
-  int decr_stat_dexterity(void);
   int decr_stats02(int);
   int decr_stats02(void);
   int decr_stats03(int);
@@ -775,8 +775,8 @@ public:
   int decr_stats17(void);
   int decr_stats19(int);
   int decr_stats19(void);
-  int decr_stat_strength(int);
-  int decr_stat_strength(void);
+  int decr_strength(int);
+  int decr_strength(void);
   int decr_stuck_count(int);
   int decr_stuck_count(void);
   int defence(void);
@@ -797,6 +797,8 @@ public:
   int environ_prefers_poison(void);
   int environ_prefers_spiderwebs(void);
   int environ_prefers_water(void);
+  int get_armor_class(void);
+  int get_attack_bonus(void);
   int get_beast_map_carried_count(void);
   int get_beast_map_count(void);
   int get_bounce_count(void);
@@ -814,6 +816,7 @@ public:
   int get_carried_weapon_highest_value(Thingp *out);
   int get_carried_weapon_least_value(Thingp *out);
   int get_charge_count(void);
+  int get_constitution(void);
   int get_current_damage(void);
   int get_damage_acid(void);
   int get_damage_crush(void);
@@ -835,6 +838,7 @@ public:
   int get_danger_current_level(void);
   int get_danger_initial_level(Thingp);
   int get_danger_initial_level(void);
+  int get_dexterity(void);
   int get_enchant_max(void);
   int get_enchantstone_count(void);
   int get_enchant(void);
@@ -871,10 +875,6 @@ public:
   int get_spawn_group_size(void);
   int get_stamina_max(void);
   int get_stamina(void);
-  int get_stat_armor_class(void);
-  int get_stat_attack_bonus(void);
-  int get_stat_constitution(void);
-  int get_stat_dexterity(void);
   int get_stats02(void);
   int get_stats03(void);
   int get_stats04(void);
@@ -888,7 +888,7 @@ public:
   int get_stats12(void);
   int get_stats17(void);
   int get_stats19(void);
-  int get_stat_strength(void);
+  int get_strength(void);
   int get_stuck_count(void);
   int get_submerged_offset(void);
   int get_torch_count(void);
@@ -919,10 +919,18 @@ public:
   int gfx_water(void);
   int health_boost(int v);
   int hunger_is_insatiable(void);
+  int incr_armor_class(int);
+  int incr_armor_class(void);
+  int incr_attack_bonus(int);
+  int incr_attack_bonus(void);
   int incr_charge_count(int);
   int incr_charge_count(void);
+  int incr_constitution(int);
+  int incr_constitution(void);
   int incr_current_damage(int);
   int incr_current_damage(void);
+  int incr_dexterity(int);
+  int incr_dexterity(void);
   int incr_distance_throw(int);
   int incr_distance_throw(void);
   int incr_enchant(int);
@@ -959,14 +967,6 @@ public:
   int incr_stamina_max(int);
   int incr_stamina_max(void);
   int incr_stamina(void);
-  int incr_stat_armor_class(int);
-  int incr_stat_armor_class(void);
-  int incr_stat_attack_bonus(int);
-  int incr_stat_attack_bonus(void);
-  int incr_stat_constitution(int);
-  int incr_stat_constitution(void);
-  int incr_stat_dexterity(int);
-  int incr_stat_dexterity(void);
   int incr_stats02(int);
   int incr_stats02(void);
   int incr_stats03(int);
@@ -993,8 +993,8 @@ public:
   int incr_stats17(void);
   int incr_stats19(int);
   int incr_stats19(void);
-  int incr_stat_strength(int);
-  int incr_stat_strength(void);
+  int incr_strength(int);
+  int incr_strength(void);
   int incr_stuck_count(int);
   int incr_stuck_count(void);
   int is_able_to_attack_mobs(void);
@@ -1285,8 +1285,12 @@ public:
   int on_owner_damage_strength(Thingp owner, Thingp hitter, int damage);
   int range_max(void);
   int rarity(void);
+  int set_armor_class(int);
+  int set_attack_bonus(int);
   int set_charge_count(int);
+  int set_constitution(int);
   int set_current_damage(int);
+  int set_dexterity(int);
   int set_distance_throw(int);
   int set_enchant(int);
   int set_enchant_max(int);
@@ -1305,10 +1309,6 @@ public:
   int set_spawned_count(int);
   int set_stamina(int);
   int set_stamina_max(int);
-  int set_stat_armor_class(int);
-  int set_stat_attack_bonus(int);
-  int set_stat_constitution(int);
-  int set_stat_dexterity(int);
   int set_stats02(int);
   int set_stats03(int);
   int set_stats04(int);
@@ -1322,7 +1322,7 @@ public:
   int set_stats12(int);
   int set_stats17(int);
   int set_stats19(int);
-  int set_stat_strength(int);
+  int set_strength(int);
   int set_stuck_count(int);
   int skill_enchant_count(const uint32_t slot);
   int spawn_randomly_in_radius_range(const std::string &what, int amount, uint32_t radius_min, uint32_t radius_max);
@@ -1684,6 +1684,8 @@ public:
   void reset_goal_penalty(Thingp attacker);
   void rest();
   void resurrect_tick();
+  void resurrect();
+  void resurrect_forced();
   void rotting(void);
   void score_add(Thingp victim);
   void secret_door_tick();
@@ -1740,8 +1742,12 @@ public:
   void wobble(float wobble);
 
   const std::array< std::array< ThingId, MAX_BAG_WIDTH >, MAX_BAG_HEIGHT > *get_const_bag(void);
-  std::array< std::array< ThingId, MAX_BAG_WIDTH >, MAX_BAG_HEIGHT >       *get_bag(void);
-  static std::function< int(Thingp) >                                       matches_to_func(const std::string &what);
+
+  std::array< std::array< ThingId, MAX_BAG_WIDTH >, MAX_BAG_HEIGHT > *get_bag(void);
+
+  static std::function< int(Thingp) > matches_to_func(const std::string &what);
+
+  std::list< Thingp > get_all_followers(void);
 
   ThingInfop get_or_alloc_infop(void);
   ThingItemp get_or_alloc_itemp(void);

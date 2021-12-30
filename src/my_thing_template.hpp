@@ -398,10 +398,10 @@ private:
   int _rarity {};
   int _spawn_group_radius {};
   int _stamina {};
-  int _stat_armor_class {};
-  int _stat_attack_bonus {};
-  int _stat_constitution {};
-  int _stat_dexterity {};
+  int _armor_class {};
+  int _attack_bonus {};
+  int _constitution {};
+  int _dexterity {};
   int _stats02 {};
   int _stats03 {};
   int _stats04 {};
@@ -414,7 +414,7 @@ private:
   int _stats11 {};
   int _stats12 {};
   int _stats17 {};
-  int _stat_strength {};
+  int _strength {};
   int _unused_chance1_d1000 {};
   int _unused_chance2_d1000 {};
   int _unused_chance3_d1000 {};
@@ -1065,10 +1065,10 @@ public:
   int range_max(void) const { return _range_max; }
   int rarity(void) const { return _rarity; }
   int stamina(void) const { return _stamina; }
-  int stat_armor_class(void) const { return _stat_armor_class; }
-  int stat_attack_bonus(void) const { return _stat_attack_bonus; }
-  int stat_constitution(void) const { return _stat_constitution; }
-  int stat_dexterity(void) const { return _stat_dexterity; }
+  int armor_class(void) const { return _armor_class; }
+  int attack_bonus(void) const { return _attack_bonus; }
+  int constitution(void) const { return _constitution; }
+  int dexterity(void) const { return _dexterity; }
   int stats02(void) const { return _stats02; }
   int stats03(void) const { return _stats03; }
   int stats04(void) const { return _stats04; }
@@ -1081,7 +1081,7 @@ public:
   int stats11(void) const { return _stats11; }
   int stats12(void) const { return _stats12; }
   int stats17(void) const { return _stats17; }
-  int stat_strength(void) const { return _stat_strength; }
+  int strength(void) const { return _strength; }
   int unused_chance1_d1000(void) const { return _unused_chance1_d1000; }
   int unused_chance2_d1000(void) const { return _unused_chance2_d1000; }
   int unused_chance3_d1000(void) const { return _unused_chance3_d1000; }
@@ -1477,10 +1477,10 @@ public:
   void set_spawn_group_radius(int v) { _spawn_group_radius = v; }
   void set_spawn_on_shoved(const std::string &v) { _spawn_on_shoved = v; }
   void set_stamina(int v) { _stamina = v; }
-  void set_stat_armor_class(int v) { _stat_armor_class = v; }
-  void set_stat_attack_bonus(int v) { _stat_attack_bonus = v; }
-  void set_stat_constitution(int v) { _stat_constitution = v; }
-  void set_stat_dexterity(int v) { _stat_dexterity = v; }
+  void set_armor_class(int v) { _armor_class = v; }
+  void set_attack_bonus(int v) { _attack_bonus = v; }
+  void set_constitution(int v) { _constitution = v; }
+  void set_dexterity(int v) { _dexterity = v; }
   void set_stats02(int v) { _stats02 = v; }
   void set_stats03(int v) { _stats03 = v; }
   void set_stats04(int v) { _stats04 = v; }
@@ -1493,7 +1493,7 @@ public:
   void set_stats11(int v) { _stats11 = v; }
   void set_stats12(int v) { _stats12 = v; }
   void set_stats17(int v) { _stats17 = v; }
-  void set_stat_strength(int v) { _stat_strength = v; }
+  void set_strength(int v) { _strength = v; }
   void set_str1(const std::string &v) { _str1 = v; }
   void set_str2(const std::string &v) { _str2 = v; }
   void set_str4(const std::string &v) { _str4 = v; }

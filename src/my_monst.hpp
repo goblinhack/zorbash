@@ -103,10 +103,10 @@ public:
   int score               = {};
   int stamina             = {};
   int stamina_max         = {};
-  int stat_armor_class    = {};
-  int stat_attack_bonus   = {};
-  int stat_constitution   = {};
-  int stat_dexterity      = {};
+  int armor_class         = {};
+  int attack_bonus        = {};
+  int constitution        = {};
+  int dexterity           = {};
   int stats02             = {};
   int stats03             = {};
   int stats04             = {};
@@ -120,7 +120,7 @@ public:
   int stats12             = {};
   int stats17             = {};
   int stats19             = {};
-  int stat_strength       = {};
+  int strength            = {};
   int submerged_offset    = {}; // Pixels
   int tick_resurrect_when = {};
 

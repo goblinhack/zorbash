@@ -76,11 +76,11 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_on_death_drop_all_items(True)
     mytp.set_on_idle_tick_frequency_dice("1d5:me.on_idle()")
     mytp.set_rarity(my.RARITY_COMMON)
-    mytp.set_stat_armor_class(6)
-    mytp.set_stat_attack_bonus(10)  # 10, means no bonus
-    mytp.set_stat_constitution(20)
-    mytp.set_stat_dexterity(3)
-    mytp.set_stat_strength(14)
+    mytp.set_armor_class(6)
+    mytp.set_attack_bonus(10)  # 10, means no bonus
+    mytp.set_constitution(20)
+    mytp.set_dexterity(3)
+    mytp.set_strength(14)
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("A dungeon auto cleaner jelly thingy.")
     mytp.set_text_hits("burns")

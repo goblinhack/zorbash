@@ -448,6 +448,39 @@ PyObject *thing_kill(PyObject *obj, PyObject *args, PyObject *keywds)
   Py_RETURN_NONE;
 }
 
+PyObject *thing_resurrect(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_AND_INDENT();
+  uint32_t     me_id    = 0;
+  char        *reason   = nullptr;
+  static char *kwlist[] = {(char *) "me", (char *) "reason", 0};
+
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &me_id, &reason)) {
+    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  if (! me_id) {
+    ERR("%s: No me thing ID set", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  Thingp me = game->thing_find(me_id);
+  if (! me) {
+    ERR("%s: Cannot find me thing ID %u", __FUNCTION__, me_id);
+    Py_RETURN_NONE;
+  }
+
+  if (! reason) {
+    ERR("%s: No reason thing ID set", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  IF_DEBUG { me->log("Resurrected: reason %s", reason); }
+  me->resurrect_forced();
+  Py_RETURN_NONE;
+}
+
 PyObject *thing_carry(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
@@ -1158,6 +1191,7 @@ THING_BODY_GET_INT(thing_get_necrotized_amount, get_necrotized_amount)
 THING_BODY_GET_INT(thing_get_poisoned_amount, get_poisoned_amount)
 THING_BODY_GET_INT(thing_get_stamina, get_stamina)
 THING_BODY_GET_INT(thing_get_stamina_max, get_stamina_max)
+THING_BODY_GET_INT(thing_get_constitution, get_constitution)
 THING_BODY_GET_STRING(thing_get_name, text_name)
 THING_BODY_GET_THING(thing_get_immediate_manifestor_id, get_immediate_manifestor_id)
 THING_BODY_GET_THING(thing_get_immediate_owner_id, get_immediate_owner_id)
@@ -1174,6 +1208,7 @@ THING_BODY_SET_INT(thing_decr_necrotized_amount, decr_necrotized_amount)
 THING_BODY_SET_INT(thing_decr_poisoned_amount, decr_poisoned_amount)
 THING_BODY_SET_INT(thing_decr_stamina, decr_stamina)
 THING_BODY_SET_INT(thing_decr_stamina_max, decr_stamina_max)
+THING_BODY_SET_INT(thing_decr_constitution, decr_constitution)
 THING_BODY_SET_INT(thing_incr_charge_count, incr_charge_count)
 THING_BODY_SET_INT(thing_incr_current_damage, incr_current_damage)
 THING_BODY_SET_INT(thing_incr_enchant, incr_enchant)
@@ -1184,6 +1219,7 @@ THING_BODY_SET_INT(thing_incr_necrotized_amount, incr_necrotized_amount)
 THING_BODY_SET_INT(thing_incr_poisoned_amount, incr_poisoned_amount)
 THING_BODY_SET_INT(thing_incr_stamina, incr_stamina)
 THING_BODY_SET_INT(thing_incr_stamina_max, incr_stamina_max)
+THING_BODY_SET_INT(thing_incr_constitution, incr_constitution)
 THING_BODY_SET_INT(thing_set_current_damage, set_current_damage)
 THING_BODY_SET_INT(thing_set_enchant_max, set_enchant_max)
 THING_BODY_SET_INT(thing_set_enchant, set_enchant)
@@ -1193,5 +1229,6 @@ THING_BODY_SET_INT(thing_set_necrotized_amount, set_necrotized_amount)
 THING_BODY_SET_INT(thing_set_poisoned_amount, set_poisoned_amount)
 THING_BODY_SET_INT(thing_set_stamina_max, set_stamina_max)
 THING_BODY_SET_INT(thing_set_stamina, set_stamina)
+THING_BODY_SET_INT(thing_set_constitution, set_constitution)
 THING_BODY_SET_THING(thing_skill_activate, skill_activate)
 THING_BODY_SET_THING(thing_skill_deactivate, skill_deactivate)

@@ -105,11 +105,11 @@ def tp_init(name, text_name):
     mytp.set_on_you_miss_do("me.on_you_miss_do()")
     mytp.set_rarity(my.RARITY_COMMON)
     mytp.set_stamina(100)
-    mytp.set_stat_armor_class(14)
-    mytp.set_stat_attack_bonus(20)  # 10, means no bonus
-    mytp.set_stat_constitution(12)
-    mytp.set_stat_dexterity(16)
-    mytp.set_stat_strength(14)
+    mytp.set_armor_class(14)
+    mytp.set_attack_bonus(20)  # 10, means no bonus
+    mytp.set_constitution(12)
+    mytp.set_dexterity(16)
+    mytp.set_strength(14)
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("A giant spider.")
     mytp.set_text_hits("bites")

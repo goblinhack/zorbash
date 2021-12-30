@@ -16,7 +16,7 @@ def tp_init(name, text_name):
     mytp.set_is_carrier_of_treasure_class_b(True)
     mytp.set_is_carrier_of_weapon_class_b(True)
     mytp.set_on_death_of_a_follower_do("me.on_death_of_a_follower()")
-    mytp.set_stat_strength(12)
+    mytp.set_strength(12)
     mytp.set_text_description("A grizzled war-weary zorblin.")
 
     delay = 300

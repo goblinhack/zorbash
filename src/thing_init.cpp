@@ -279,7 +279,7 @@ void Thing::reinit(void)
   verify(MTYPE_THING, this);
   const auto tpp = tp_or_update();
   if (unlikely(! tpp)) {
-    ERR("No tp found for reinitialized thing ID %x tp_id %d", id.id, tp_id);
+    ERR("No tp found for reinitialized thing ID %X tp_id %d", id.id, tp_id);
     return;
   }
 

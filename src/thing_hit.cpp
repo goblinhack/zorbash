@@ -500,7 +500,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
             } else if (real_hitter->is_player()) {
               TOPCON("%s gains strength from your withering touch!", text_The().c_str());
             }
-            incr_stat_strength();
+            incr_strength();
             return false;
           }
         } else {
@@ -520,7 +520,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
               incr_necrotized_amount(damage - 1);
             }
           }
-          decr_stat_strength();
+          decr_strength();
           if (is_player()) {
             TOPCON("%%fg=limegreen$Your skin is rotting. You lose 1 permanent strength!%%fg=reset$");
           } else if (is_alive_monst() && real_hitter->is_player()) {
@@ -537,7 +537,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
             } else if (real_hitter->is_player()) {
               TOPCON("%s gains constitution from your withering touch!", text_The().c_str());
             }
-            incr_stat_constitution();
+            incr_constitution();
             return false;
           }
         } else {
@@ -557,7 +557,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
               incr_necrotized_amount(damage - 1);
             }
           }
-          decr_stat_constitution();
+          decr_constitution();
           if (is_player()) {
             TOPCON("%%fg=limegreen$Your skin is rotting. You lose 1 permanent constitution!%%fg=reset$");
           } else if (is_alive_monst() && real_hitter->is_player()) {

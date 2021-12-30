@@ -32,7 +32,7 @@ void Thing::hooks_remove()
   remove_leader();
 
   if (top_owner) {
-    dbg("Detach %" PRIx32 " from top owner %s", id.id, top_owner->to_string().c_str());
+    dbg("Detach %" PRIX32 " from top owner %s", id.id, top_owner->to_string().c_str());
     TRACE_AND_INDENT();
 
     if (top_owner->is_player()) {

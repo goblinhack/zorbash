@@ -1186,20 +1186,20 @@ class Tp:
     def set_stamina(self, value):
         my.tp_set_stamina(self, value)
 
-    def set_stat_strength(self, value):
-        my.tp_set_stat_strength(self, value)
+    def set_strength(self, value):
+        my.tp_set_strength(self, value)
 
-    def set_stat_dexterity(self, value):
-        my.tp_set_stat_dexterity(self, value)
+    def set_dexterity(self, value):
+        my.tp_set_dexterity(self, value)
 
-    def set_stat_armor_class(self, value):
-        my.tp_set_stat_armor_class(self, value)
+    def set_armor_class(self, value):
+        my.tp_set_armor_class(self, value)
 
-    def set_stat_attack_bonus(self, value):
-        my.tp_set_stat_attack_bonus(self, value)
+    def set_attack_bonus(self, value):
+        my.tp_set_attack_bonus(self, value)
 
-    def set_stat_constitution(self, value):
-        my.tp_set_stat_constitution(self, value)
+    def set_constitution(self, value):
+        my.tp_set_constitution(self, value)
 
     def set_distance_throw(self, value):
         my.tp_set_distance_throw(self, value)

@@ -47,7 +47,7 @@ void Level::fini(void)
           auto id = get(all_things_id_at[ group ], x, y, z);
           if (id.ok()) {
 #ifdef ENABLE_THING_ID_LOGS
-            LOG("Clean thing %" PRIx32 " at %d,%d", id.id, x, y);
+            LOG("Clean thing %" PRIX32 " at %d,%d", id.id, x, y);
 #endif
             auto t = thing_find(id);
             if (unlikely(! t)) {
@@ -78,7 +78,7 @@ void Level::fini(void)
         for (auto z = 0; z < MAP_SLOTS; ++z) {
           auto id = get(all_things_id_at[ group ], x, y, z);
           if (id.ok()) {
-            err("Level fini: Did not detach thing id %" PRIx32 " at %d,%d,%d", id.id, x, y, z);
+            err("Level fini: Did not detach thing id %" PRIX32 " at %d,%d,%d", id.id, x, y, z);
             auto t = thing_find(id);
             if (unlikely(! t)) {
               continue;

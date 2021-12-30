@@ -38,6 +38,11 @@ PyObject *thing_incr_stamina_max(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *thing_decr_stamina_max(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_get_stamina_max(PyObject *obj, PyObject *args, PyObject *keywds);
 
+PyObject *thing_set_constitution(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_incr_constitution(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_decr_constitution(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_get_constitution(PyObject *obj, PyObject *args, PyObject *keywds);
+
 PyObject *thing_set_enchant(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_incr_enchant(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_decr_enchant(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -337,6 +342,7 @@ PyObject *thing_is_weapon(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_wooden(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_killed_by(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_kill(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_resurrect(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_carry(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_polymorph(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_possible_to_attack(PyObject *obj, PyObject *args, PyObject *keywds);

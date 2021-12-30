@@ -291,6 +291,35 @@ void Thing::notify_followers_of_death_of_my_leader(void)
   }
 }
 
+//
+// Get all things following you
+//
+std::list< Thingp > Thing::get_all_followers(void)
+{
+  TRACE_NO_INDENT();
+
+  std::list< Thingp > out;
+  if (! get_follower_count()) {
+    return out;
+  }
+
+  //
+  // Slow, but not used too often
+  //
+  FOR_ALL_THING_GROUPS(group)
+  {
+    for (auto p : level->all_things[ group ]) {
+      auto follower = p.second;
+      auto leader   = follower->get_leader();
+      if (leader && (leader == this)) {
+        out.push_back(follower);
+      }
+    }
+  }
+
+  return out;
+}
+
 bool Thing::same_leader(Thingp it)
 {
   if (! it) {

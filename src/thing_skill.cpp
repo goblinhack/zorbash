@@ -163,7 +163,10 @@ bool Thing::skill_add(Tpp what)
     return false;
   }
 
-  TOPCON("You learn %s skill.", t->text_the().c_str());
+  if (is_player()) {
+    TOPCON("You learn %s skill.", t->text_the().c_str());
+  }
+
   skill_add(t);
 
   //

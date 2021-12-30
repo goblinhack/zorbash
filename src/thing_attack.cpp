@@ -432,10 +432,10 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   //
   // attack modifier: strength + attack bonus
   //
-  auto attack_total = get_stat_strength() + get_stat_attack_bonus();
+  auto attack_total = get_strength() + get_attack_bonus();
   if (owner) {
-    attack_total += owner->get_stat_strength();
-    attack_total += owner->get_stat_attack_bonus();
+    attack_total += owner->get_strength();
+    attack_total += owner->get_attack_bonus();
   }
 
   attack_total -= get_idle_count();
@@ -444,13 +444,13 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   //
   // defence modifier: armor class + dexterity
   //
-  auto defence_total = victim->get_stat_armor_class();
-  defence_total += victim->get_stat_dexterity();
+  auto defence_total = victim->get_armor_class();
+  defence_total += victim->get_dexterity();
 
   auto victim_owner = get_top_owner();
   if (victim_owner) {
-    defence_total = victim_owner->get_stat_armor_class();
-    defence_total = victim_owner->get_stat_dexterity();
+    defence_total = victim_owner->get_armor_class();
+    defence_total = victim_owner->get_dexterity();
   }
 
   defence_total -= victim->get_idle_count();

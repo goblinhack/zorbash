@@ -20,7 +20,7 @@ def tp_init(name, text_name):
     mytp.set_on_born_do("me.on_born()")
     mytp.set_text_description("A one-eyed pirate zorblin.")
     mytp.set_is_carrier_of_treasure_class_c(True)
-    mytp.set_stat_strength(14)
+    mytp.set_strength(14)
     mytp.set_health_initial_dice("2d10+4")
     mytp.set_health_initial_dice("2d10")
     mytp.set_is_able_to_use_weapons(True)

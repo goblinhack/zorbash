@@ -1479,7 +1479,7 @@ void Dungeon::dump(void)
           auto c  = cr.c;
 
           if (! c) {
-            ERR("Unknown map char 0x%x/%c at x %d, y %d, depth %d", m, m, x, y, d);
+            ERR("Unknown map char 0x%X/%c at x %d, y %d, depth %d", m, m, x, y, d);
           }
 
           if (nodes) {

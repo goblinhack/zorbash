@@ -12,6 +12,60 @@
 #include "my_sys.hpp"
 #include "my_thing.hpp"
 
+void Thing::resurrect(void)
+{
+  TRACE_NO_INDENT();
+
+  //
+  // Resurrect, but weaker
+  //
+  auto v = get_health_max() / 2;
+  if (v > 0) {
+    is_resurrecting = true;
+    tile_curr       = 0;
+    animate();
+
+    dbg("%%fg=orange$%s rises from the grave!%%fg=reset$", text_The().c_str());
+    set_health(v);
+    set_health_max(v);
+
+    //
+    // Catch up on ticks
+    //
+    set_tick_last_did_something(game->tick_current);
+    set_tick_resurrect_when(0);
+    is_dead  = false;
+    is_dying = false;
+
+    if (! i_set_is_monst) {
+      i_set_is_monst = true;
+      level->set_is_monst(curr_at.x, curr_at.y);
+    }
+  } else {
+    dbg("Too weak to rise from the grave");
+  }
+}
+
+void Thing::resurrect_forced(void)
+{
+  TRACE_NO_INDENT();
+
+  //
+  // Rise at the apointed time
+  //
+  if (game->tick_current < get_tick_resurrect_when()) {
+    dbg("Too soon to rise from the grave, at %d wait for %d", game->tick_current, get_tick_resurrect_when());
+    return;
+  }
+
+  if (is_resurrecting) {
+    dbg("Already resurrecting");
+    return;
+  }
+
+  resurrect();
+}
+
 void Thing::resurrect_tick(void)
 {
   TRACE_NO_INDENT();
@@ -56,32 +110,5 @@ void Thing::resurrect_tick(void)
   }
   FOR_ALL_THINGS_END()
 
-  //
-  // Resurrect, but weaker
-  //
-  auto v = get_health_max() / 2;
-  if (v > 0) {
-    is_resurrecting = true;
-    tile_curr       = 0;
-    animate();
-
-    dbg("%%fg=orange$%s rises from the grave!%%fg=reset$", text_The().c_str());
-    set_health(v);
-    set_health_max(v);
-
-    //
-    // Catch up on ticks
-    //
-    set_tick_last_did_something(game->tick_current);
-    set_tick_resurrect_when(0);
-    is_dead  = false;
-    is_dying = false;
-
-    if (! i_set_is_monst) {
-      i_set_is_monst = true;
-      level->set_is_monst(curr_at.x, curr_at.y);
-    }
-  } else {
-    dbg("Too weak to rise from the grave");
-  }
+  resurrect();
 }

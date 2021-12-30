@@ -310,6 +310,45 @@ PyObject *level_flood_fill_get_all_things(PyObject *obj, PyObject *args, PyObjec
   return (lst);
 }
 
+PyObject *thing_get_all_followers(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_AND_INDENT();
+  uint32_t     id       = 0;
+  static char *kwlist[] = {(char *) "id", 0};
+
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "I", kwlist, &id)) {
+    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    Py_RETURN_FALSE;
+  }
+
+  if (! id) {
+    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
+    Py_RETURN_FALSE;
+  }
+
+  Thingp t = game->thing_find(id);
+  if (unlikely(! t)) {
+    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
+    Py_RETURN_NONE;
+  }
+
+  auto followers = t->get_all_followers();
+
+  if (followers.empty()) {
+    Py_RETURN_NONE;
+  }
+
+  auto      items = followers.size();
+  PyObject *lst   = PyList_New(items);
+  auto      item  = 0;
+  for (auto follower : followers) {
+    PyList_SetItem(lst, item, Py_BuildValue("I", follower->id));
+    item++;
+  }
+
+  return (lst);
+}
+
 #define LEVEL_BODY_GET_BOOL_AT(__func__, __api__)                                                                    \
   PyObject *__func__(PyObject * obj, PyObject * args, PyObject * keywds)                                             \
   {                                                                                                                  \

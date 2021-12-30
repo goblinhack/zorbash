@@ -12,9 +12,9 @@ def on_born(me, x, y):
 
 
 def on_use(owner, me, target, x, y):
-    # my.con("owner   {} {:08X}".format(my.thing_get_name(owner), owner))
-    # my.con("me      {} {:08X}".format(my.thing_get_name(me), me))
-    # my.con("target  {} {:08X}".format(my.thing_get_name(target), target))
+    # my.con("owner   {} {:X}".format(my.thing_get_name(owner), owner))
+    # my.con("me      {} {:X}".format(my.thing_get_name(me), me))
+    # my.con("target  {} {:X}".format(my.thing_get_name(target), target))
     #
     # Lightning can impact all things in the same pool
     #

@@ -77,10 +77,10 @@ std::ostream &operator<<(std::ostream &out, Bits< ThingInfop & > const my)
   out << bits(my.t->spawner_owner_id);
   out << bits(my.t->stamina);
   out << bits(my.t->stamina_max);
-  out << bits(my.t->stat_armor_class);
-  out << bits(my.t->stat_attack_bonus);
-  out << bits(my.t->stat_constitution);
-  out << bits(my.t->stat_dexterity);
+  out << bits(my.t->armor_class);
+  out << bits(my.t->attack_bonus);
+  out << bits(my.t->constitution);
+  out << bits(my.t->dexterity);
   out << bits(my.t->stats02);
   out << bits(my.t->stats03);
   out << bits(my.t->stats04);
@@ -94,7 +94,7 @@ std::ostream &operator<<(std::ostream &out, Bits< ThingInfop & > const my)
   out << bits(my.t->stats12);
   out << bits(my.t->stats17);
   out << bits(my.t->stats19);
-  out << bits(my.t->stat_strength);
+  out << bits(my.t->strength);
   out << bits(my.t->submerged_offset);
   out << bits(my.t->tick_last_did_something);
   out << bits(my.t->tick_last_dropped);
@@ -404,7 +404,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   IF_DEBUG3
   {
     auto diff = out.tellp() - start;
-    LOG("SAVE %d bytes %s TP %d ID %x last_at %d,%d infop %p", (int) diff, name.c_str(), my.t->tp_id, my.t->id.id,
+    LOG("SAVE %d bytes %s TP %d ID %X last_at %d,%d infop %p", (int) diff, name.c_str(), my.t->tp_id, my.t->id.id,
         my.t->last_at.x, my.t->last_at.y, my.t->maybe_infop());
   }
   return (out);
@@ -550,7 +550,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
         for (auto slot = 0; slot < MAP_SLOTS; slot++) {
           auto id = get(my.t->all_things_id_at[group], x, y, slot);
           if (id.ok()) {
-            CON("save slot %d @ %d,%d group %d : %" PRIx32, slot, x, y, group, id.id);
+            CON("save slot %d @ %d,%d group %d : %" PRIX32, slot, x, y, group, id.id);
           }
         }
       }
@@ -568,7 +568,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
           if (id.ok()) {
             const Thingp t = my.t->thing_find(id);
             if (unlikely(! t)) {
-              ERR("Found a thing I could not save %" PRIx32, id.id);
+              ERR("Found a thing I could not save %" PRIX32, id.id);
               return out;
             }
 

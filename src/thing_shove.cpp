@@ -115,9 +115,9 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta)
   }
 
   if (! it->is_dead) {
-    dbg("Shove: It strength %d vs me %d", it->get_stat_strength(), get_stat_strength());
+    dbg("Shove: It strength %d vs me %d", it->get_strength(), get_strength());
 
-    if (! d20roll(get_stat_strength(), it->get_stat_strength())) {
+    if (! d20roll(get_strength(), it->get_strength())) {
       if (is_player()) {
         if (it->is_monst()) {
           TOPCON("%s shoves you back!", it->text_The().c_str());
@@ -186,6 +186,8 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta)
         TOPCON("%%fg=red$%s shoves you into the depths!%%fg=reset$", text_The().c_str());
       } else if (level->is_fire(shove_pos)) {
         TOPCON("%%fg=red$%s shoves you into the flames!%%fg=reset$", text_The().c_str());
+      } else if (it->is_dead) {
+        TOPCON("%s kicks your corpse for fun!", text_The().c_str());
       } else {
         TOPCON("%s shoves you!", text_The().c_str());
       }

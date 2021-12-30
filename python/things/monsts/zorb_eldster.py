@@ -14,7 +14,7 @@ def tp_init(name, text_name):
     mytp.set_text_description("A very war-weary goblin.")
     mytp.set_is_carrier_of_treasure_class_b(True)
     mytp.set_is_carrier_of_weapon_class_a(True)
-    mytp.set_stat_strength(8)
+    mytp.set_strength(8)
     mytp.set_health_initial_dice("2d5")
     mytp.set_is_able_to_use_weapons(True)
 

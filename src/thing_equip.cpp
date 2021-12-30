@@ -322,7 +322,7 @@ bool Thing::unequip(const char *why, int equip, bool allowed_to_recarry)
 
   auto item = get_equip(equip);
   if (! item) {
-    dbg("Could not unequip %" PRIx32 ", no equip thing: %s", get_equip_id(equip).id, why);
+    dbg("Could not unequip %" PRIX32 ", no equip thing: %s", get_equip_id(equip).id, why);
     return false;
   }
 
@@ -616,7 +616,7 @@ bool Thing::equip_use(bool forced, int equip)
 
     used_as = equip_tp->gfx_anim_use();
     if (used_as.empty()) {
-      die("Could not use %s/%" PRIx32 " has no 'use' animation frame", item->to_short_string().c_str(), item->id.id);
+      die("Could not use %s/%" PRIX32 " has no 'use' animation frame", item->to_short_string().c_str(), item->id.id);
       return false;
     }
 
@@ -680,9 +680,9 @@ std::string equip_name(int equip)
     case MONST_EQUIP_RING1 : return "ring1";
     case MONST_EQUIP_BOOTS : return "boots";
     case MONST_EQUIP_RING2 : return "ring2";
-    case MONST_EQUIP_MAX : return "unknown";
   }
-};
+  DIE("unknown equip enum");
+}
 
 bool Thing::equipped_anything(void)
 {

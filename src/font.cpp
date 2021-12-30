@@ -89,9 +89,9 @@ Tilep Font::unicode_to_tile(int u)
 {
   if ((u < 0) || (u >= TTF_GLYPH_MAX)) {
     if (u == L'?') {
-      DIE("unicode char 0x%x/%d -> bad index", u, u);
+      DIE("unicode char 0x%X/%d -> bad index", u, u);
     } else {
-      DIE("unicode char 0x%x/%d -> bad index", u, u);
+      DIE("unicode char 0x%X/%d -> bad index", u, u);
     }
     return (unicode_to_tile(L'?'));
   }
@@ -100,9 +100,9 @@ Tilep Font::unicode_to_tile(int u)
 
   if ((index < 0) || (index >= TTF_GLYPH_MAX)) {
     if (u == L'?') {
-      DIE("unicode char 0x%x/%d -> bad index %d", u, u, index);
+      DIE("unicode char 0x%X/%d -> bad index %d", u, u, index);
     } else {
-      DIE("unicode char 0x%x/%d -> bad index %d", u, u, index);
+      DIE("unicode char 0x%X/%d -> bad index %d", u, u, index);
     }
     return (unicode_to_tile(L'?'));
   }
@@ -118,9 +118,9 @@ Tilep Font::unicode_to_tile(int u)
   tile = tile_find(tile_name);
   if (unlikely(! tile)) {
     if (u == L'?') {
-      DIE("unicode char 0x%x/%d -> not found as tile %s", u, u, tile_name);
+      DIE("unicode char 0x%X/%d -> not found as tile %s", u, u, tile_name);
     } else {
-      DIE("unicode char 0x%x/%d -> not found as tile %s", u, u, tile_name);
+      DIE("unicode char 0x%X/%d -> not found as tile %s", u, u, tile_name);
       return (unicode_to_tile(L'?'));
     }
   }

@@ -252,7 +252,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
       if (! it->is_alive_monst()) {
         continue;
       }
-      if (! d20roll(get_stat_strength(), it->get_stat_strength())) {
+      if (! d20roll(get_strength(), it->get_strength())) {
         if (is_player()) {
           TOPCON("You are held in place and cannot move!");
         }
@@ -348,7 +348,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
     if (! must_attack) {
       if (! is_undead() && ! is_ethereal()) {
         if (up || down || left || right) {
-          if ((int) pcg_random_range(0, 20) > get_stat_constitution()) {
+          if ((int) pcg_random_range(0, 20) > get_constitution()) {
             if (pcg_random_range(0, 100) < 10) {
               decr_stamina();
             }

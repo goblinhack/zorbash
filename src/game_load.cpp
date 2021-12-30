@@ -100,10 +100,10 @@ std::istream &operator>>(std::istream &in, Bits< ThingInfop & > my)
    in >> bits(my.t->spawner_owner_id);
    in >> bits(my.t->stamina);
    in >> bits(my.t->stamina_max);
-   in >> bits(my.t->stat_armor_class);
-   in >> bits(my.t->stat_attack_bonus);
-   in >> bits(my.t->stat_constitution);
-   in >> bits(my.t->stat_dexterity);
+   in >> bits(my.t->armor_class);
+   in >> bits(my.t->attack_bonus);
+   in >> bits(my.t->constitution);
+   in >> bits(my.t->dexterity);
    in >> bits(my.t->stats02);
    in >> bits(my.t->stats03);
    in >> bits(my.t->stats04);
@@ -117,7 +117,7 @@ std::istream &operator>>(std::istream &in, Bits< ThingInfop & > my)
    in >> bits(my.t->stats12);
    in >> bits(my.t->stats17);
    in >> bits(my.t->stats19);
-   in >> bits(my.t->stat_strength);
+   in >> bits(my.t->strength);
    in >> bits(my.t->submerged_offset);
    in >> bits(my.t->tick_last_did_something);
    in >> bits(my.t->tick_last_dropped);
@@ -453,7 +453,7 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
   IF_DEBUG3
   {
     auto diff = in.tellg() - start;
-    LOG("LOAD %d bytes %s TP %d ID %x last_at %d,%d", (int) diff, name.c_str(), my.t->tp_id, my.t->id.id,
+    LOG("LOAD %d bytes %s TP %d ID %X last_at %d,%d", (int) diff, name.c_str(), my.t->tp_id, my.t->id.id,
         my.t->last_at.x, my.t->last_at.y);
   }
 
@@ -590,7 +590,7 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
         for (auto slot = 0; slot < MAP_SLOTS; slot++) {
           auto id = get(my.t->all_things_id_at[group], x, y, slot);
           if (id.ok()) {
-            CON("Load save slot %d @ %d,%d group %d : %" PRIx32, slot, x, y, group, id.id);
+            CON("Load save slot %d @ %d,%d group %d : %" PRIX32, slot, x, y, group, id.id);
           }
         }
       }
@@ -624,13 +624,13 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
             if (t->id != id) {
               game_load_error = string_sprintf(
                   "found different thing than expected at map position "
-                  "%d,%d slot %d: found %" PRIx32 ", expected %" PRIx32,
+                  "%d,%d slot %d: found %" PRIX32 ", expected %" PRIX32,
                   x, y, slot, t->id.id, id.id);
 
               if (0) {
                 for (auto slot = 0; slot < MAP_SLOTS; slot++) {
                   auto id = get(ids, x, y, slot);
-                  CON("slot %d : %" PRIx32, slot, id.id);
+                  CON("slot %d : %" PRIX32, slot, id.id);
                 }
               }
 
@@ -638,7 +638,7 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
             }
 
             t->reinit();
-            // t->con("LOADED @%d,%d %x", t->curr_at.x, t->curr_at.y, t->id.id);
+            // t->con("LOADED @%d,%d %X", t->curr_at.x, t->curr_at.y, t->id.id);
 
             // CON("From save file  : %s", t->debug_str.c_str());
             // CON("Newly created as: %s", t->to_dbg_saved_string().c_str());

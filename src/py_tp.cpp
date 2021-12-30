@@ -751,7 +751,7 @@ PyObject *level_spawn_next_to_(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_FALSE;
   }
 
-  PY_DBG("%s(%x, %s)", __FUNCTION__, id, what);
+  PY_DBG("%s(%X, %s)", __FUNCTION__, id, what);
 
   auto level = game->get_current_level();
   if (! level) {
@@ -760,7 +760,7 @@ PyObject *level_spawn_next_to_(PyObject *obj, PyObject *args, PyObject *keywds)
 
   auto t = level->thing_find(ThingId(id));
   if (unlikely(! t)) {
-    ERR("%s: Cannot find thing %08" PRIx32 "", __FUNCTION__, id);
+    ERR("%s: Cannot find thing %08" PRIX32 "", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
 
@@ -793,7 +793,7 @@ PyObject *level_spawn_next_to_or_on_monst_(PyObject *obj, PyObject *args, PyObje
     Py_RETURN_FALSE;
   }
 
-  PY_DBG("%s(%x, %s)", __FUNCTION__, id, what);
+  PY_DBG("%s(%X, %s)", __FUNCTION__, id, what);
 
   auto level = game->get_current_level();
   if (! level) {
@@ -802,7 +802,7 @@ PyObject *level_spawn_next_to_or_on_monst_(PyObject *obj, PyObject *args, PyObje
 
   auto t = level->thing_find(ThingId(id));
   if (unlikely(! t)) {
-    ERR("%s: Cannot find thing %08" PRIx32 "", __FUNCTION__, id);
+    ERR("%s: Cannot find thing %08" PRIX32 "", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
 
@@ -851,7 +851,7 @@ PyObject *level_spawn_using_items_radius_range_(PyObject *obj, PyObject *args, P
     Py_RETURN_FALSE;
   }
 
-  PY_DBG("%s(%x, %s, %u, %u)", __FUNCTION__, id, what, radius_min, radius_max);
+  PY_DBG("%s(%X, %s, %u, %u)", __FUNCTION__, id, what, radius_min, radius_max);
 
   auto level = game->get_current_level();
   if (! level) {
@@ -860,19 +860,19 @@ PyObject *level_spawn_using_items_radius_range_(PyObject *obj, PyObject *args, P
 
   auto t = level->thing_find(ThingId(id));
   if (unlikely(! t)) {
-    ERR("%s: Cannot find 'me' thing %08" PRIx32 "", __FUNCTION__, id);
+    ERR("%s: Cannot find 'me' thing %08" PRIX32 "", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
 
   auto parent = level->thing_find(ThingId(parent_id));
   if (! parent) {
-    ERR("%s: Cannot find parent thing %08" PRIx32 "", __FUNCTION__, id);
+    ERR("%s: Cannot find parent thing %08" PRIX32 "", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
 
   auto target = level->thing_find(ThingId(target_id));
   if (! target) {
-    ERR("%s: Cannot find target thing %08" PRIx32 "", __FUNCTION__, id);
+    ERR("%s: Cannot find target thing %08" PRIX32 "", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
 
@@ -908,7 +908,7 @@ PyObject *level_spawn_fire_around_thing(PyObject *obj, PyObject *args, PyObject 
     Py_RETURN_FALSE;
   }
 
-  PY_DBG("%s(%x, %s)", __FUNCTION__, id, what);
+  PY_DBG("%s(%X, %s)", __FUNCTION__, id, what);
 
   auto level = game->get_current_level();
   if (! level) {
@@ -917,7 +917,7 @@ PyObject *level_spawn_fire_around_thing(PyObject *obj, PyObject *args, PyObject 
 
   auto t = level->thing_find(ThingId(id));
   if (unlikely(! t)) {
-    ERR("%s: Cannot find thing %08" PRIx32 "", __FUNCTION__, id);
+    ERR("%s: Cannot find thing %08" PRIX32 "", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
 
@@ -950,7 +950,7 @@ PyObject *level_spawn_at_thing(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_FALSE;
   }
 
-  PY_DBG("%s(%x, %s)", __FUNCTION__, id, what);
+  PY_DBG("%s(%X, %s)", __FUNCTION__, id, what);
 
   auto level = game->get_current_level();
   if (! level) {
@@ -959,7 +959,7 @@ PyObject *level_spawn_at_thing(PyObject *obj, PyObject *args, PyObject *keywds)
 
   auto t = level->thing_find(ThingId(id));
   if (unlikely(! t)) {
-    ERR("%s: Cannot find thing %08" PRIx32 "", __FUNCTION__, id);
+    ERR("%s: Cannot find thing %08" PRIX32 "", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
 
@@ -993,7 +993,7 @@ PyObject *level_spawn_at_thing_if_possible(PyObject *obj, PyObject *args, PyObje
     Py_RETURN_FALSE;
   }
 
-  PY_DBG("%s(%x, %s)", __FUNCTION__, id, what);
+  PY_DBG("%s(%X, %s)", __FUNCTION__, id, what);
 
   auto level = game->get_current_level();
   if (! level) {
@@ -1002,7 +1002,7 @@ PyObject *level_spawn_at_thing_if_possible(PyObject *obj, PyObject *args, PyObje
 
   auto t = level->thing_find(ThingId(id));
   if (unlikely(! t)) {
-    ERR("%s: Cannot find thing %08" PRIx32 "", __FUNCTION__, id);
+    ERR("%s: Cannot find thing %08" PRIX32 "", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
 
@@ -1047,7 +1047,7 @@ PyObject *if_matches_then_dead_(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_FALSE;
   }
 
-  PY_DBG("%s(%x, %s, %d, %d)", __FUNCTION__, id, what, x, y);
+  PY_DBG("%s(%X, %s, %d, %d)", __FUNCTION__, id, what, x, y);
 
   auto level = game->get_current_level();
   if (! level) {
@@ -1056,7 +1056,7 @@ PyObject *if_matches_then_dead_(PyObject *obj, PyObject *args, PyObject *keywds)
 
   auto t = level->thing_find(ThingId(id));
   if (unlikely(! t)) {
-    ERR("%s: Cannot find thing %08" PRIx32 "", __FUNCTION__, id);
+    ERR("%s: Cannot find thing %08" PRIX32 "", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
 
@@ -1089,7 +1089,7 @@ PyObject *if_matches_(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_FALSE;
   }
 
-  PY_DBG("%s(%x, %s)", __FUNCTION__, id, what);
+  PY_DBG("%s(%X, %s)", __FUNCTION__, id, what);
 
   auto level = game->get_current_level();
   if (! level) {
@@ -1098,7 +1098,7 @@ PyObject *if_matches_(PyObject *obj, PyObject *args, PyObject *keywds)
 
   auto t = level->thing_find(ThingId(id));
   if (unlikely(! t)) {
-    ERR("%s: Cannot find thing %08" PRIx32 "", __FUNCTION__, id);
+    ERR("%s: Cannot find thing %08" PRIX32 "", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
 
@@ -1143,7 +1143,7 @@ PyObject *level_place_at(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_FALSE;
   }
 
-  PY_DBG("%s(%x, %s, %d, %d)", __FUNCTION__, id, what, x, y);
+  PY_DBG("%s(%X, %s, %d, %d)", __FUNCTION__, id, what, x, y);
 
   auto level = game->get_current_level();
   if (! level) {
@@ -1152,7 +1152,7 @@ PyObject *level_place_at(PyObject *obj, PyObject *args, PyObject *keywds)
 
   auto t = level->thing_find(ThingId(id));
   if (unlikely(! t)) {
-    ERR("%s: Cannot find thing %08" PRIx32 "", __FUNCTION__, id);
+    ERR("%s: Cannot find thing %08" PRIX32 "", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
 
@@ -1471,10 +1471,10 @@ TP_BODY_SET_INT(range_max)
 TP_BODY_SET_INT(rarity)
 TP_BODY_SET_INT(spawn_group_radius)
 TP_BODY_SET_INT(stamina)
-TP_BODY_SET_INT(stat_armor_class)
-TP_BODY_SET_INT(stat_attack_bonus)
-TP_BODY_SET_INT(stat_constitution)
-TP_BODY_SET_INT(stat_dexterity)
+TP_BODY_SET_INT(armor_class)
+TP_BODY_SET_INT(attack_bonus)
+TP_BODY_SET_INT(constitution)
+TP_BODY_SET_INT(dexterity)
 TP_BODY_SET_INT(stats02)
 TP_BODY_SET_INT(stats03)
 TP_BODY_SET_INT(stats04)
@@ -1487,7 +1487,7 @@ TP_BODY_SET_INT(stats10)
 TP_BODY_SET_INT(stats11)
 TP_BODY_SET_INT(stats12)
 TP_BODY_SET_INT(stats17)
-TP_BODY_SET_INT(stat_strength)
+TP_BODY_SET_INT(strength)
 TP_BODY_SET_INT(unused_chance1_d1000)
 TP_BODY_SET_INT(unused_chance2_d1000)
 TP_BODY_SET_INT(unused_chance3_d1000)

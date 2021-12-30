@@ -338,11 +338,11 @@ def tp_init(name, text_name, short_text_name, title):
     mytp.set_on_you_are_hit_but_still_alive_do("player.on_you_are_hit_but_still_alive()")
     mytp.set_on_you_natural_attack_do("player.on_you_natural_attack()")
     mytp.set_stamina(100)
-    mytp.set_stat_armor_class(10)
-    mytp.set_stat_attack_bonus(10)  # 10, means no bonus
-    mytp.set_stat_constitution(10)
-    mytp.set_stat_dexterity(10)
-    mytp.set_stat_strength(10)
+    mytp.set_armor_class(10)
+    mytp.set_attack_bonus(10)  # 10, means no bonus
+    mytp.set_constitution(10)
+    mytp.set_dexterity(10)
+    mytp.set_strength(10)
     mytp.set_text_a_or_an("the")
     mytp.set_text_description("Our most noble adventurer. Press 'h' for help.")
     mytp.set_text_hits("hits")
