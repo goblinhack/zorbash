@@ -13,7 +13,7 @@ def on_you_are_hit_but_still_alive(me, hitter, real_hitter, x, y, crit, damage):
         my.thing_sound_play_channel(me, my.CHANNEL_IMPACT, "player_hit5")
 
 
-def on_you_bite_attack(me, x, y):
+def on_you_natural_attack(me, x, y):
     my.sound_play("player_punch")
 
 
@@ -336,7 +336,7 @@ def tp_init(name, text_name, short_text_name, title):
     mytp.set_on_death_do("player.on_death()")
     mytp.set_on_move_do("player.on_move()")
     mytp.set_on_you_are_hit_but_still_alive_do("player.on_you_are_hit_but_still_alive()")
-    mytp.set_on_you_bite_attack_do("player.on_you_bite_attack()")
+    mytp.set_on_you_natural_attack_do("player.on_you_natural_attack()")
     mytp.set_stamina(100)
     mytp.set_stat_armor_class(10)
     mytp.set_stat_attack_bonus(10)  # 10, means no bonus

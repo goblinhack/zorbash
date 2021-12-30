@@ -135,19 +135,19 @@ void Thing::on_you_miss_do(Thingp hitter)
   }
 }
 
-void Thing::on_you_bite_attack(void)
+void Thing::on_you_natural_attack(void)
 {
   if (is_dead) {
     return;
   }
 
   TRACE_NO_INDENT();
-  auto on_you_bite_attack = tp()->on_you_bite_attack_do();
-  if (std::empty(on_you_bite_attack)) {
+  auto on_you_natural_attack = tp()->on_you_natural_attack_do();
+  if (std::empty(on_you_natural_attack)) {
     return;
   }
 
-  auto t = split_tokens(on_you_bite_attack, '.');
+  auto t = split_tokens(on_you_natural_attack, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -164,17 +164,17 @@ void Thing::on_you_bite_attack(void)
 
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
-    ERR("Bad on_you_bite_attack call [%s] expected mod:function, got %d elems", on_you_bite_attack.c_str(),
-        (int) on_you_bite_attack.size());
+    ERR("Bad on_you_natural_attack call [%s] expected mod:function, got %d elems", on_you_natural_attack.c_str(),
+        (int) on_you_natural_attack.size());
   }
 }
 
 int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
                          Thingp real_hitter, // who fired the arrow?
-                         bool crit, bool attack_bite, bool attack_poison, bool attack_necrosis, bool attack_future1,
-                         bool attack_future2, bool attack_future3, bool attack_future4, bool attack_fire,
-                         bool attack_crush, bool attack_lightning, bool attack_energy, bool attack_acid,
-                         bool attack_digest, int damage)
+                         bool crit, bool attack_natural, bool attack_poison, bool attack_necrosis,
+                         bool attack_future1, bool attack_future2, bool attack_future3, bool attack_future4,
+                         bool attack_fire, bool attack_crush, bool attack_lightning, bool attack_energy,
+                         bool attack_acid, bool attack_digest, int damage)
 {
   TRACE_NO_INDENT();
   if (! hitter) {
@@ -232,7 +232,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
   } else if (attack_necrosis) {
     damage = buff_on_damage_necrosis(real_hitter, damage);
     damage = on_damage_necrosis(real_hitter, damage);
-  } else if (attack_bite) {
+  } else if (attack_natural) {
     damage = buff_on_damage_natural_attack(real_hitter, damage);
     damage = on_damage_natural_attack(real_hitter, damage);
   } else {
@@ -329,12 +329,12 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     } else {
       real_hitter->log("Attack necrosis damage %d on %s", damage, to_short_string().c_str());
     }
-  } else if (attack_bite) {
+  } else if (attack_natural) {
     if (! damage) {
-      real_hitter->log("No bite damage on %s", to_short_string().c_str());
+      real_hitter->log("No natural attack damage on %s", to_short_string().c_str());
       return false;
     } else {
-      real_hitter->log("Attack bite damage %d on %s", damage, to_short_string().c_str());
+      real_hitter->log("Attack natural attack damage %d on %s", damage, to_short_string().c_str());
     }
   } else {
     if (! damage) {
@@ -669,8 +669,9 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
         } else if (attack_acid) {
           TOPCON("%%fg=red$%s dissolves your body!%%fg=reset$", real_hitter->text_The().c_str());
           msg("Sizzle!");
-        } else if (attack_bite) {
-          TOPCON("%%fg=red$%s bites deep!%%fg=reset$", real_hitter->text_The().c_str());
+        } else if (attack_natural) {
+          TOPCON("%%fg=red$%s %s deep!%%fg=reset$", real_hitter->text_The().c_str(),
+                 pluralise(real_hitter->damage_natural_attack_type()).c_str());
           msg("Urk!");
         } else if (attack_energy) {
           TOPCON("%%fg=red$%s blasts you apart!%%fg=reset$", real_hitter->text_The().c_str());
@@ -717,7 +718,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
         } else if (attack_acid) {
           TOPCON("%%fg=orange$%s burns you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(), damage);
           msg("Sizzle!");
-        } else if (attack_bite) {
+        } else if (attack_natural) {
           if (! real_hitter->damage_natural_attack_type().empty()) {
             TOPCON("%%fg=orange$%s %s you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(),
                    pluralise(real_hitter->damage_natural_attack_type()).c_str(), damage);
@@ -895,18 +896,18 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
   //
   // Are we carrying a weapon? If not, see if we can do a claw attack
   //
-  if (attack_bite || attack_bite || attack_poison || attack_digest ||
+  if (attack_natural || attack_poison || attack_digest ||
       ! real_hitter->get_equip_id_carry_anim(MONST_EQUIP_WEAPON).ok()) {
     auto claws = real_hitter->tp()->gfx_anim_use();
     if (claws != "") {
-      auto bite = level->thing_new(claws, curr_at);
-      bite->bounce(0.1, 0.1, 100, 3);
-      bite->move_set_dir_from_delta(delta);
+      auto natural_attack_effect = level->thing_new(claws, curr_at);
+      natural_attack_effect->bounce(0.1, 0.1, 100, 3);
+      natural_attack_effect->move_set_dir_from_delta(delta);
 
       //
       // Python callback
       //
-      real_hitter->on_you_bite_attack();
+      real_hitter->on_you_natural_attack();
     }
   }
 
@@ -960,7 +961,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
         reason = "by digestion";
       } else if (attack_necrosis) {
         reason = "by rotting";
-      } else if (attack_bite) {
+      } else if (attack_natural) {
         reason = "by over friendly biting";
       }
     }
@@ -1012,13 +1013,13 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
 //
 // Returns true on the target being dead.
 //
-int Thing::is_hit(Thingp hitter, bool crit, bool attack_bite, bool attack_poison, bool attack_necrosis,
+int Thing::is_hit(Thingp hitter, bool crit, bool attack_natural, bool attack_poison, bool attack_necrosis,
                   bool attack_future1, bool attack_future2, bool attack_future3, bool attack_future4,
                   bool attack_fire, bool attack_crush, bool attack_lightning, bool attack_energy, bool attack_acid,
                   bool attack_digest, int damage)
 {
   TRACE_NO_INDENT();
-  if (attack_bite || attack_digest) {
+  if (attack_natural || attack_digest) {
     //
     // Allow attacks when dead
     //
@@ -1150,7 +1151,7 @@ int Thing::is_hit(Thingp hitter, bool crit, bool attack_bite, bool attack_poison
   int hit_and_destroyed;
 
   hit_and_destroyed =
-      ai_hit_actual(hitter, real_hitter, crit, attack_bite, attack_poison, attack_necrosis, attack_future1,
+      ai_hit_actual(hitter, real_hitter, crit, attack_natural, attack_poison, attack_necrosis, attack_future1,
                     attack_future2, attack_future3, attack_future4, attack_fire, attack_crush, attack_lightning,
                     attack_energy, attack_acid, attack_digest, damage);
 

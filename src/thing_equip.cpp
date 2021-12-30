@@ -601,7 +601,7 @@ bool Thing::equip_use(bool forced, int equip)
       //
       // Python callback
       //
-      on_you_bite_attack();
+      on_you_natural_attack();
     }
     used_as = gfx_anim_use();
     if (used_as.empty()) {

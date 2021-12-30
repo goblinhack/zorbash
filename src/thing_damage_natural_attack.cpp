@@ -80,8 +80,8 @@ int Thing::on_owner_damage_natural_attack(Thingp owner, Thingp hitter, int damag
                           (unsigned int) curr_at.y, (unsigned int) damage);
   }
 
-  ERR("Bad on_owner_damage_natural_attack call [%s] expected mod:function, got %d elems", on_owner_damage_natural_attack.c_str(),
-      (int) on_owner_damage_natural_attack.size());
+  ERR("Bad on_owner_damage_natural_attack call [%s] expected mod:function, got %d elems",
+      on_owner_damage_natural_attack.c_str(), (int) on_owner_damage_natural_attack.size());
 
   return damage;
 }

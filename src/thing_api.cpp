@@ -6173,10 +6173,10 @@ const std::string &Thing::on_polymorphed_do(void)
   return (tp()->on_polymorphed_do());
 }
 
-const std::string &Thing::on_you_bite_attack_do(void)
+const std::string &Thing::on_you_natural_attack_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_you_bite_attack_do());
+  return (tp()->on_you_natural_attack_do());
 }
 
 const std::string &Thing::on_born_do(void)

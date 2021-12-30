@@ -1007,7 +1007,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_TP_FUNCTION(on_you_are_hit_and_now_dead_do),
     MY_ADD_PYTHON_TP_FUNCTION(on_you_are_hit_but_still_alive_do),
     MY_ADD_PYTHON_TP_FUNCTION(on_you_are_on_fire_do),
-    MY_ADD_PYTHON_TP_FUNCTION(on_you_bite_attack_do),
+    MY_ADD_PYTHON_TP_FUNCTION(on_you_natural_attack_do),
     MY_ADD_PYTHON_TP_FUNCTION(on_you_miss_do),
     MY_ADD_PYTHON_TP_FUNCTION(projectile_name),
     MY_ADD_PYTHON_TP_FUNCTION(range_max),

@@ -287,7 +287,7 @@ public:
   bool ascend_sewer_tick();
   bool ascend_sewer(void);
   bool attack(point future_pos);
-  bool attack(Thingp victim, bool prefer_attack_with_jaws = false);
+  bool attack(Thingp victim, bool prefer_natural_attack = false);
   bool bag_add_test(Thingp);
   bool bag_add(Thingp);
   bool bag_can_place_anywhere(Thingp item, point &pos);
@@ -297,7 +297,6 @@ public:
   bool bag_place_at(Thingp item, point pos);
   bool bag_remove_at(Thingp item, point pos);
   bool bag_remove(Thingp);
-  bool bite(Thingp victim);
   bool buff_add(Thingp it);
   bool buff_add(Tpp what);
   bool buffbox_id_insert(Thingp what);
@@ -398,6 +397,7 @@ public:
   bool move_to_or_escape_check_only(const point &nh);
   bool move_to_or_escape(const point &);
   bool move_to_try(const point &, const bool escaping, bool check_only);
+  bool natural_attack(Thingp victim);
   bool on_firing_at_something(Thingp hitter);
   bool on_tick(void);
   bool open_door(Thingp door);
@@ -455,40 +455,38 @@ public:
   bool will_avoid_monst(const Thingp it);
   bool will_prefer_terrain(const Thingp it);
   bool worth_eating(const Thingp it);
-
-  int buff_on_damage_poison(Thingp hitter, int damage);
-  int buff_on_damage_future1(Thingp hitter, int damage);
-  int buff_on_damage_future2(Thingp hitter, int damage);
-  int buff_on_damage_future3(Thingp hitter, int damage);
-  int buff_on_damage_future4(Thingp hitter, int damage);
-  int buff_on_damage_fire(Thingp hitter, int damage);
-  int buff_on_damage_crush(Thingp hitter, int damage);
-  int buff_on_damage_lightning(Thingp hitter, int damage);
-  int buff_on_damage_energy(Thingp hitter, int damage);
-  int buff_on_damage_acid(Thingp hitter, int damage);
-  int buff_on_damage_digest(Thingp hitter, int damage);
-  int buff_on_damage_natural_attack(Thingp hitter, int damage);
-  int buff_on_damage_melee(Thingp hitter, int damage);
-  int buff_on_damage_necrosis(Thingp hitter, int damage);
-  int buff_on_damage_strength(Thingp hitter, int damage);
-  int buff_on_damage_constitution(Thingp hitter, int damage);
-
-  int on_damage_poison(Thingp hitter, int damage);
-  int on_damage_future1(Thingp hitter, int damage);
-  int on_damage_future2(Thingp hitter, int damage);
-  int on_damage_future3(Thingp hitter, int damage);
-  int on_damage_future4(Thingp hitter, int damage);
-  int on_damage_fire(Thingp hitter, int damage);
-  int on_damage_crush(Thingp hitter, int damage);
-  int on_damage_lightning(Thingp hitter, int damage);
-  int on_damage_energy(Thingp hitter, int damage);
-  int on_damage_acid(Thingp hitter, int damage);
-  int on_damage_digest(Thingp hitter, int damage);
-  int on_damage_natural_attack(Thingp hitter, int damage);
-  int on_damage_melee(Thingp hitter, int damage);
-  int on_damage_necrosis(Thingp hitter, int damage);
-  int on_damage_strength(Thingp hitter, int damage);
-  int on_damage_constitution(Thingp hitter, int damage);
+  int  buff_on_damage_acid(Thingp hitter, int damage);
+  int  buff_on_damage_constitution(Thingp hitter, int damage);
+  int  buff_on_damage_crush(Thingp hitter, int damage);
+  int  buff_on_damage_digest(Thingp hitter, int damage);
+  int  buff_on_damage_energy(Thingp hitter, int damage);
+  int  buff_on_damage_fire(Thingp hitter, int damage);
+  int  buff_on_damage_future1(Thingp hitter, int damage);
+  int  buff_on_damage_future2(Thingp hitter, int damage);
+  int  buff_on_damage_future3(Thingp hitter, int damage);
+  int  buff_on_damage_future4(Thingp hitter, int damage);
+  int  buff_on_damage_lightning(Thingp hitter, int damage);
+  int  buff_on_damage_melee(Thingp hitter, int damage);
+  int  buff_on_damage_natural_attack(Thingp hitter, int damage);
+  int  buff_on_damage_necrosis(Thingp hitter, int damage);
+  int  buff_on_damage_poison(Thingp hitter, int damage);
+  int  buff_on_damage_strength(Thingp hitter, int damage);
+  int  on_damage_acid(Thingp hitter, int damage);
+  int  on_damage_constitution(Thingp hitter, int damage);
+  int  on_damage_crush(Thingp hitter, int damage);
+  int  on_damage_digest(Thingp hitter, int damage);
+  int  on_damage_energy(Thingp hitter, int damage);
+  int  on_damage_fire(Thingp hitter, int damage);
+  int  on_damage_future1(Thingp hitter, int damage);
+  int  on_damage_future2(Thingp hitter, int damage);
+  int  on_damage_future3(Thingp hitter, int damage);
+  int  on_damage_future4(Thingp hitter, int damage);
+  int  on_damage_lightning(Thingp hitter, int damage);
+  int  on_damage_melee(Thingp hitter, int damage);
+  int  on_damage_natural_attack(Thingp hitter, int damage);
+  int  on_damage_necrosis(Thingp hitter, int damage);
+  int  on_damage_poison(Thingp hitter, int damage);
+  int  on_damage_strength(Thingp hitter, int damage);
 
   const Dice &get_damage_natural_attack_dice(void);
   const Dice &get_damage_crush_dice(void);
@@ -615,7 +613,7 @@ public:
   const std::string &on_you_are_hit_and_now_dead_do(void);
   const std::string &on_you_are_hit_but_still_alive_do(void);
   const std::string &on_you_are_on_fire_do(void);
-  const std::string &on_you_bite_attack_do(void);
+  const std::string &on_you_natural_attack_do(void);
   const std::string &on_you_miss_do(void);
   const std::string &projectile_name(void);
   const std::string &short_text_name(void);
@@ -666,12 +664,12 @@ public:
   float how_far_i_can_jump(void);
   float update_wobble(void);
 
-  int ai_hit_actual(Thingp hitter, Thingp real_hitter, bool crit, bool bite, bool poison, bool necrosis,
+  int ai_hit_actual(Thingp hitter, Thingp real_hitter, bool crit, bool natural_attack, bool poison, bool necrosis,
                     bool damage_future1, bool damage_future2, bool damage_future3, bool damage_future4,
                     bool damage_fire, bool damage_crush, bool damage_lightning, bool damage_energy, bool damage_acid,
                     bool damage_digest, int dmg);
 
-  int is_hit(Thingp hitter, bool crit, bool bite, bool poison, bool necrosis, bool damage_future1,
+  int is_hit(Thingp hitter, bool crit, bool natural_attack, bool poison, bool necrosis, bool damage_future1,
              bool damage_future2, bool damage_future3, bool damage_future4, bool damage_fire, bool damage_crush,
              bool damage_lightning, bool damage_energy, bool damage_acid, bool damage_digest, int damage);
 
@@ -1668,7 +1666,7 @@ public:
   void on_you_are_declared_leader(void);
   void on_you_are_hit_and_now_dead(Thingp hitter, Thingp real_hitter, bool crit, int dmg);
   void on_you_are_hit_but_still_alive(Thingp hitter, Thingp real_hitter, bool crit, int dmg);
-  void on_you_bite_attack(void);
+  void on_you_natural_attack(void);
   void on_you_miss_do(Thingp hitter);
   void path_shorten(std::vector< point > &path);
   void poisoned(void);

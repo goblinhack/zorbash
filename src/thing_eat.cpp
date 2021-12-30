@@ -36,54 +36,54 @@ bool Thing::can_eat(const Thingp itp)
 {
   auto me = tp();
 
-  log("Can eat? %s", itp->to_short_string().c_str());
+  dbg("Can eat? %s", itp->to_short_string().c_str());
   TRACE_AND_INDENT();
 
   if (me->is_meat_eater()) {
     if (itp->is_meat()) {
-      log("Can eat meat: %s", itp->to_short_string().c_str());
+      dbg("Can eat meat: %s", itp->to_short_string().c_str());
       return true;
     }
   }
   if (me->is_blood_eater()) {
     if (itp->is_blood()) {
-      log("Can eat blood: %s", itp->to_short_string().c_str());
+      dbg("Can eat blood: %s", itp->to_short_string().c_str());
       return true;
     }
   }
   if (me->is_food_eater()) {
     if (itp->is_food()) {
-      log("Can eat food: %s", itp->to_short_string().c_str());
+      dbg("Can eat food: %s", itp->to_short_string().c_str());
       return true;
     }
   }
   if (me->is_treasure_eater()) {
     if (itp->is_treasure_type()) {
-      log("Can eat treasure: %s", itp->to_short_string().c_str());
+      dbg("Can eat treasure: %s", itp->to_short_string().c_str());
       return true;
     }
   }
   if (me->is_potion_eater()) {
     if (itp->is_potion()) {
-      log("Can eat potion: %s", itp->to_short_string().c_str());
+      dbg("Can eat potion: %s", itp->to_short_string().c_str());
       return true;
     }
   }
   if (me->is_item_magical_eater()) {
     if (itp->is_item_magical()) {
-      log("Can eat magical: %s", itp->to_short_string().c_str());
+      dbg("Can eat magical: %s", itp->to_short_string().c_str());
       return true;
     }
   }
   if (me->is_jelly_baby_eater()) {
     if (itp->is_jelly_baby()) {
-      log("Can eat jelly: %s", itp->to_short_string().c_str());
+      dbg("Can eat jelly: %s", itp->to_short_string().c_str());
       return true;
     }
   }
   if (is_player()) {
     if (itp->is_food()) {
-      log("Can eat food: %s", itp->to_short_string().c_str());
+      dbg("Can eat food: %s", itp->to_short_string().c_str());
       return true;
     }
   }
@@ -136,7 +136,7 @@ bool Thing::eat(Thingp victim)
       dbg("Eating %s", victim->text_the().c_str());
 
       if (victim->is_monst() || victim->is_player()) {
-        return bite(victim);
+        return natural_attack(victim);
       } else {
         return consume(victim);
       }

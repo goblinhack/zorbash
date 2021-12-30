@@ -2,7 +2,7 @@ import my
 import tp
 
 
-def on_you_bite_attack(me, x, y):
+def on_you_natural_attack(me, x, y):
     sound = f"growl{my.non_pcg_randint(1, 10)}"
     if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound):
         my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
@@ -100,7 +100,7 @@ def tp_init(name, text_name):
     mytp.set_on_death_do("zorb_all.on_death()")
     mytp.set_on_death_drop_all_items(True)
     mytp.set_on_you_are_hit_but_still_alive_do("zorb_all.on_you_are_hit_but_still_alive()")
-    mytp.set_on_you_bite_attack_do("zorb_all.on_you_bite_attack()")
+    mytp.set_on_you_natural_attack_do("zorb_all.on_you_natural_attack()")
     mytp.set_on_you_miss_do("zorb_all.on_you_miss_do()")
     mytp.set_rarity(my.RARITY_COMMON)
     mytp.set_stamina(100)
