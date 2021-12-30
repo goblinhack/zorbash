@@ -66,9 +66,9 @@ void Thing::inventory_particle(Thingp item, uint32_t slot)
         }
       } else {
         if (value > 1) {
-          TOPCON("The %s magically converts into %d gold.", item->text_The().c_str(), value);
+          TOPCON("%s magically converts into %d gold.", item->text_The().c_str(), value);
         } else {
-          TOPCON("The %s magically converts into a measly one gold.", item->text_The().c_str());
+          TOPCON("%s magically converts into a measly one gold.", item->text_The().c_str());
         }
       }
     }
