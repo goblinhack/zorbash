@@ -296,13 +296,13 @@ PyObject *thing_possible_to_attack(PyObject *obj, PyObject *args, PyObject *keyw
     Py_RETURN_NONE;
   }
 
-  hitter->dbg("Check if possible to attack target %s", target->to_string().c_str());
+  IF_DEBUG { hitter->log("Check if possible to attack target %s", target->to_string().c_str()); }
 
   if (hitter->possible_to_attack(target)) {
-    hitter->dbg("Check if possible to target %s; yes", target->to_string().c_str());
+    IF_DEBUG { hitter->log("Check if possible to target %s; yes", target->to_string().c_str()); }
     Py_RETURN_TRUE;
   } else {
-    hitter->dbg("Check if possible to attack %s; no", target->to_string().c_str());
+    IF_DEBUG { hitter->log("Check if possible to attack %s; no", target->to_string().c_str()); }
     Py_RETURN_FALSE;
   }
 }
@@ -347,7 +347,7 @@ PyObject *thing_fire_at(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_NONE;
   }
 
-  owner->dbg("Fire %s at %s", item, target->to_string().c_str());
+  IF_DEBUG { owner->log("Fire %s at %s", item, target->to_string().c_str()); }
 
   auto what      = std::string(item);
   auto fire_what = tp_find(what);
@@ -409,7 +409,7 @@ PyObject *thing_killed_by(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_NONE;
   }
 
-  me->dbg("Killed by %s, reason %s", defeater->to_string().c_str(), reason);
+  IF_DEBUG { me->log("Killed by %s, reason %s", defeater->to_string().c_str(), reason); }
   me->dead(defeater, "%s", reason);
 
   Py_RETURN_NONE;
@@ -443,7 +443,7 @@ PyObject *thing_kill(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_NONE;
   }
 
-  me->dbg("Defeated: reason %s", reason);
+  IF_DEBUG { me->log("Defeated: reason %s", reason); }
   me->dead("%s", reason);
   Py_RETURN_NONE;
 }
