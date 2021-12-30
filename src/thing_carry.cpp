@@ -463,3 +463,63 @@ bool Thing::try_to_carry_if_worthwhile_dropping_items_if_needed(Thingp item)
   }
   return true;
 }
+
+bool Thing::carrying_anything(void)
+{
+  TRACE_NO_INDENT();
+
+  if (! maybe_itemp()) {
+    return false;
+  }
+
+  if (get_itemp()->carrying.empty()) {
+    return false;
+  }
+
+  return true;
+}
+
+void Thing::check_all_carried_items_are_owned(void)
+{
+  if (! maybe_itemp()) {
+    return;
+  }
+
+  if (carrying_anything()) {
+    log("Carried items:");
+    TRACE_AND_INDENT();
+    for (const auto &what : get_item_list()) {
+      auto top_owner       = what->get_top_owner();
+      auto immediate_owner = what->get_immediate_owner();
+      if ((top_owner != this) && (immediate_owner != this)) {
+        if (immediate_owner) {
+          log("Immediate owner of %s is %s", what->to_short_string().c_str(), top_owner->to_string().c_str());
+          log("Top owner of %s is %s", what->to_short_string().c_str(), what->get_top_owner()->to_string().c_str());
+          err("Item check failed for %s which is not carried and owned by %s", what->to_short_string().c_str(),
+              immediate_owner->to_string().c_str());
+        } else {
+          err("Item check failed for %s which is not carried and not owned", what->to_short_string().c_str());
+        }
+        continue;
+      }
+
+      if (top_owner != immediate_owner) {
+        log("Carried %s, owner %s", what->to_short_string().c_str(), immediate_owner->to_string().c_str());
+      } else {
+        log("Carried %s", what->to_short_string().c_str());
+      }
+    }
+  }
+
+  if (equipped_anything()) {
+    log("Equipped items:");
+    TRACE_AND_INDENT();
+    FOR_ALL_EQUIP(e)
+    {
+      auto what = get_equip(e);
+      if (what) {
+        log("Equipped slot %s: %s", equip_name(e).c_str(), what->to_short_string().c_str());
+      }
+    }
+  }
+}

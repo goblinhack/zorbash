@@ -666,3 +666,39 @@ bool Thing::equip_use_must_attack(int equip)
   TRACE_AND_INDENT();
   return equip_use(true, equip);
 }
+
+std::string equip_name(int equip)
+{
+  switch (equip) {
+    case MONST_EQUIP_HELMET : return "helmet";
+    case MONST_EQUIP_AMULET : return "amulet";
+    case MONST_EQUIP_GAUNTLET : return "gauntlet";
+    case MONST_EQUIP_CLOAK : return "cloak";
+    case MONST_EQUIP_SHIELD : return "shield";
+    case MONST_EQUIP_ARMOR : return "armor";
+    case MONST_EQUIP_WEAPON : return "weapon";
+    case MONST_EQUIP_RING1 : return "ring1";
+    case MONST_EQUIP_BOOTS : return "boots";
+    case MONST_EQUIP_RING2 : return "ring2";
+    case MONST_EQUIP_MAX : return "unknown";
+  }
+};
+
+bool Thing::equipped_anything(void)
+{
+  TRACE_AND_INDENT();
+
+  if (! maybe_itemp()) {
+    return false;
+  }
+
+  FOR_ALL_EQUIP(e)
+  {
+    auto what = get_equip(e);
+    if (what) {
+      return true;
+    }
+  }
+
+  return false;
+}

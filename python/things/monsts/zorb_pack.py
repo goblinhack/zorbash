@@ -4,12 +4,14 @@ import zorb_all
 
 def on_you_are_declared_leader(me, x, y):
     r = my.non_pcg_randint(1, 100)
-    if r < 80:
-        my.thing_polymorph(me, "zorb_priest")
-    elif r < 90:
+    if r < 60:
         my.thing_polymorph(me, "zorb_captain")
-    elif r < 95:
+    elif r < 70:
+        my.thing_polymorph(me, "zorb_necro")
+    elif r < 80:
         my.thing_polymorph(me, "zorb_wizard")
+    elif r < 90:
+        my.thing_polymorph(me, "zorb_priest")
     else:
         my.thing_polymorph(me, "zorb_pirate")
 

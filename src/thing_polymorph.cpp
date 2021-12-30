@@ -90,4 +90,5 @@ void Thing::polymorph(Tpp into)
   log("Polymorphed into: %s", into->name().c_str());
 
   on_born();
+  check_all_carried_items_are_owned();
 }
