@@ -94,10 +94,19 @@ bool Thing::target_attack_best(int equip)
   //
   // Look in the chosen dir first, then behind us.
   //
-  static std::vector< point > all_deltas = {
+  std::vector< point > all_deltas = {
       point(dx, dy), point(-dx, -dy), point(-1, -1), point(1, -1), point(-1, 1), point(1, 1),
       point(0, -1),  point(-1, 0),    point(1, 0),   point(0, 1),  point(0, 0), // For spiderwebs
   };
+
+  //
+  // If stuck in a web we can only hit the web
+  //
+  if (level->is_spiderweb(curr_at)) {
+    std::vector< point > local_only = {point(0, 0)};
+
+    all_deltas = local_only;
+  }
 
   bool   found_best {};
   point  best_hit_at;

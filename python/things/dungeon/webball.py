@@ -6,7 +6,7 @@ def tp_init(name, tiles=[]):
     mytp = tp.Tp(name, "webball")
     mytp.set_collision_check(True)
     mytp.set_collision_hit_priority(2)
-    mytp.set_health_initial_dice("1d20")
+    mytp.set_health_initial_dice("1d40")
     mytp.set_is_able_to_fall(True)
     mytp.set_is_attackable_by_monst(True)
     mytp.set_is_attackable_by_player(True)
