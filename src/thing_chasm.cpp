@@ -14,7 +14,7 @@
 
 void Thing::chasm_tick(void)
 {
-  if (is_floating() || is_flying() || is_ethereal()) {
+  if (! is_able_to_fall()) {
     return;
   }
 
