@@ -375,7 +375,7 @@ PyObject *thing_fire_at(PyObject *obj, PyObject *args, PyObject *keywds)
   }
 }
 
-PyObject *thing_killed_by(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *thing_death_by(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
   uint32_t     me_id     = 0;
@@ -421,7 +421,7 @@ PyObject *thing_killed_by(PyObject *obj, PyObject *args, PyObject *keywds)
   Py_RETURN_NONE;
 }
 
-PyObject *thing_kill(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *thing_dead(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
   uint32_t     me_id    = 0;
@@ -455,7 +455,7 @@ PyObject *thing_kill(PyObject *obj, PyObject *args, PyObject *keywds)
   Py_RETURN_NONE;
 }
 
-PyObject *thing_perma_kill(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *thing_perma_death(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
   uint32_t     me_id    = 0;

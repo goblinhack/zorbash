@@ -7,11 +7,11 @@ def on_you_are_declared_leader(me, x, y):
     if r < 60:
         my.thing_polymorph(me, "zorb_captain")
     elif r < 70:
-        my.thing_polymorph(me, "zorb_necro")
+        my.thing_polymorph(me, "zorb_priest")
     elif r < 80:
         my.thing_polymorph(me, "zorb_wizard")
     elif r < 90:
-        my.thing_polymorph(me, "zorb_priest")
+        my.thing_polymorph(me, "zorb_necro")
     else:
         my.thing_polymorph(me, "zorb_pirate")
 

@@ -3,7 +3,7 @@ import tp
 
 
 def on_fall(me, x, y):
-    my.thing_kill(me, "dissipated")
+    my.thing_dead(me, "dissipated")
 
 
 def tp_init(name):

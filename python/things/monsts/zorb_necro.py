@@ -37,7 +37,7 @@ def on_death(me, x, y):
     for follower in my.thing_get_all_followers(me):
         if my.thing_is_resurrected_or_resurrecting(follower):
             my.thing_msg(follower, "Free at last!")
-            my.thing_perma_kill(follower, "Leader died!")
+            my.thing_perma_death(follower, "Leader died!")
 
 
 def tp_init(name, text_name):

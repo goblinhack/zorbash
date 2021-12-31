@@ -19,7 +19,7 @@ def explode(me, x, y):
     my.level_spawn_fire_around_thing(me, "fire")
     my.level_spawn_fire_around_thing(me, "fire")
     my.level_spawn_fire_around_thing(me, "fire")
-    my.thing_kill(me, "exploded")
+    my.thing_dead(me, "exploded")
 
 
 def on_you_are_hit_and_now_dead(me, hitter, real_hitter, x, y, crit, damage):
