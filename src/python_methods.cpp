@@ -590,6 +590,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_FUNCTION(thing_is_wet_grass),
     MY_ADD_PYTHON_FUNCTION(thing_is_wooden),
     MY_ADD_PYTHON_FUNCTION(thing_kill),
+    MY_ADD_PYTHON_FUNCTION(thing_perma_kill),
     MY_ADD_PYTHON_FUNCTION(thing_killed_by),
     MY_ADD_PYTHON_FUNCTION(thing_msg),
     MY_ADD_PYTHON_FUNCTION(thing_polymorph),

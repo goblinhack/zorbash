@@ -449,7 +449,41 @@ PyObject *thing_kill(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_NONE;
   }
 
-  IF_DEBUG { me->log("Defeated: reason %s", reason); }
+  IF_DEBUG { me->log("Perma killed: reason %s", reason); }
+  me->dead("%s", reason);
+  me->is_resurrection_blocked = true;
+  Py_RETURN_NONE;
+}
+
+PyObject *thing_perma_kill(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_AND_INDENT();
+  uint32_t     me_id    = 0;
+  char        *reason   = nullptr;
+  static char *kwlist[] = {(char *) "me", (char *) "reason", 0};
+
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &me_id, &reason)) {
+    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  if (! me_id) {
+    ERR("%s: No me thing ID set", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  Thingp me = game->thing_find(me_id);
+  if (! me) {
+    ERR("%s: Cannot find me thing ID %u", __FUNCTION__, me_id);
+    Py_RETURN_NONE;
+  }
+
+  if (! reason) {
+    ERR("%s: No reason thing ID set", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  IF_DEBUG { me->log("Killed: reason %s", reason); }
   me->dead("%s", reason);
   Py_RETURN_NONE;
 }
@@ -829,7 +863,7 @@ PyObject *thing_msg(PyObject *obj, PyObject *args, PyObject *keywds)
   //
   if (owner->get_distance_to_player() < DMAP_IS_PASSABLE) {
     if (owner->is_monst()) {
-      TOPCON("%s: %s", owner->text_The().c_str(), msg);
+      TOPCON("%s says '%s'", owner->text_The().c_str(), msg);
     } else {
       TOPCON("%s", msg);
     }
