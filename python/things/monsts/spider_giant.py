@@ -31,6 +31,14 @@ def on_born(me, x, y):
         my.thing_set_manifestor(me, it)
 
 
+def on_firing_at_something(me, target, x, y):  # Return True on doing an action
+    if my.pcg_randint(1, 100) < 10:
+        my.thing_fire_at(me, "projectile_web", target)
+        my.thing_sound_play_channel(me, my.CHANNEL_EXPLOSION, "slime1")
+        return True
+    return False
+
+
 def tp_init(name, text_name):
     mytp = tp.Tp(name, text_name)
     mytp.set_aggression_level_pct(100)
@@ -46,13 +54,14 @@ def tp_init(name, text_name):
     mytp.set_damage_natural_attack_type("gore")
     mytp.set_damage_poison_chance_d1000(100)
     mytp.set_damage_poison_dice("2d8+2")
+    mytp.set_on_firing_at_something_do("me.on_firing_at_something()")
     mytp.set_damage_received_doubled_from_fire(True)
     mytp.set_distance_avoid(5)
     mytp.set_distance_jump(2)
     mytp.set_distance_manifestor_max(5)
+    mytp.set_is_able_to_fire_at(True)
     mytp.set_distance_vision(5)
     mytp.set_environ_avoids_fire(100)
-    mytp.set_environ_avoids_fire(True)
     mytp.set_environ_avoids_water(100)
     mytp.set_environ_prefers_spiderwebs(True)
     mytp.set_gfx_animated_can_hflip(True)

@@ -6947,10 +6947,10 @@ def init_tiles1_monsts_and_items():
         "ghost_explosion.2",
         "ghost_explosion.3",
         "ghost_explosion.4",
-        "",
-        "",
-        "",
-        "",
+        "webball.1",
+        "webball.2",
+        "webball.3",
+        "webball.4",
         #########################################################################
         "mummy.1.100",
         "mummy.2.100",
@@ -10778,6 +10778,36 @@ def init_projectile_fire_tiles():
     )
 
 
+@timeme
+def init_projectile_web_tiles():
+    tiles = [
+        "projectile_web.1",
+        "projectile_web.2",
+        "projectile_web.3",
+        "projectile_web.4",
+        "projectile_web.5",
+        "projectile_web.6",
+        "projectile_web.7",
+        "projectile_web.8",
+        "projectile_web.9",
+        "projectile_web.10",
+        "projectile_web.11",
+        "projectile_web.12",
+        "projectile_web.13",
+        "projectile_web.14",
+        "projectile_web.15",
+        "projectile_web.16",
+    ]
+
+    my.tile_load_arr_sprites(
+        file="data/gfx/projectile_web.tga",
+        name="projectile_web",
+        width=32,
+        height=32,
+        arr=tiles,
+    )
+
+
 init_chasm()
 init_claws_tiles()
 init_explosions()
@@ -10787,6 +10817,7 @@ init_laser_light_fork_tiles()
 init_laser_light_tiles()
 init_light()
 init_projectile_fire_tiles()
+init_projectile_web_tiles()
 init_solid()
 init_treasure_map()
 init_tiles1_floor()
