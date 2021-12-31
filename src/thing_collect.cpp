@@ -351,7 +351,7 @@ int Thing::worth_collecting(Thingp item, Thingp *would_need_to_drop)
     }
   }
 
-  if (item->is_food()) {
+  if (item->is_food() || item->is_health_booster()) {
     Thingp worst_food       = nullptr;
     auto   worst_food_value = get_carried_food_least_value(&worst_food);
     //
