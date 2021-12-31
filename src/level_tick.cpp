@@ -28,6 +28,11 @@ void Level::handle_all_pending_things(int group)
     all_animated_things[ group ].insert(i);
   }
   all_animated_things_pending_add[ group ] = {};
+
+  for (auto &i : all_things_pending_fall[ group ]) {
+    i.second->fall_to_next_level();
+  }
+  all_things_pending_fall[ group ] = {};
 }
 
 void Level::handle_all_pending_things(void)

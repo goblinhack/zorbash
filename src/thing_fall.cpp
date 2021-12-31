@@ -127,10 +127,10 @@ float Thing::get_fall(void)
     is_waiting_to_leave_level_has_completed_fall = true;
 
     //
-    // Things that do not tick, like bones, push them now
+    // Things that do not tick, like bones, need to fall on the end of the tick
     //
     if (! is_tickable()) {
-      fall_to_next_level();
+      level->all_things_pending_fall[ get_group() ].insert(std::pair(id, this));
     }
     return 0;
   }

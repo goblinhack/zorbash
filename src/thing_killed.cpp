@@ -229,13 +229,13 @@ void Thing::killed(Thingp defeater, const char *reason)
         } else if (defeater && defeater->is_water()) {
           TOPCON("%%fg=red$RIP: Robot is drowned %s.%%fg=reset$", reason);
         } else if (defeater && defeater->is_necrotic_danger_level()) {
-          TOPCON("%%fg=red$RIP: Robot is rotted to death %s.%%fg=reset$", reason);
+          TOPCON("%%fg=red$RIP: Robot is falls to pieces, %s.%%fg=reset$", reason);
         } else if (defeater && defeater->is_engulfer()) {
-          TOPCON("%%fg=red$RIP: Robot is consumed %s.%%fg=reset$", reason);
+          TOPCON("%%fg=red$RIP: Robot is consumed, %s.%%fg=reset$", reason);
         } else if (defeater && defeater->is_monst()) {
-          TOPCON("%%fg=red$RIP: Robot is disassembled %s.%%fg=reset$", reason);
+          TOPCON("%%fg=red$RIP: Robot is disassembled, %s.%%fg=reset$", reason);
         } else {
-          TOPCON("%%fg=red$RIP: Robot is deactivated %s.%%fg=reset$", reason);
+          TOPCON("%%fg=red$RIP: Robot is deactivated, %s.%%fg=reset$", reason);
         }
       } else {
         if (defeater && defeater->is_acid()) {

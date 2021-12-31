@@ -170,17 +170,21 @@ public:
   // These are used to add/remove to all_things_of_interest when walking
   // is done; aboids the map becoming invalidated due to changes.
   //
-  bool                                                        all_things_of_interest_walk_in_progress {};
+  bool all_things_of_interest_walk_in_progress {};
+
   std::array< std::map< ThingId, Thingp >, MAX_THING_GROUPS > all_things_of_interest_pending_add {};
-
   std::array< std::map< ThingId, Thingp >, MAX_THING_GROUPS > all_things_of_interest_pending_remove {};
-
   std::array< std::map< ThingId, Thingp >, MAX_THING_GROUPS > all_animated_things {};
 
-  bool                                                        all_animated_things_walk_in_progress {};
-  std::array< std::map< ThingId, Thingp >, MAX_THING_GROUPS > all_animated_things_pending_add {};
+  bool all_animated_things_walk_in_progress {};
 
+  std::array< std::map< ThingId, Thingp >, MAX_THING_GROUPS > all_animated_things_pending_add {};
   std::array< std::map< ThingId, Thingp >, MAX_THING_GROUPS > all_animated_things_pending_remove {};
+
+  //
+  // This is for things that do not tick, like water; that need to fall
+  //
+  std::array< std::map< ThingId, Thingp >, MAX_THING_GROUPS > all_things_pending_fall {};
 
   //
   // All things that are to be destroyed

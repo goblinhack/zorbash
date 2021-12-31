@@ -477,6 +477,7 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   l->all_animated_things_pending_add       = {};
   l->all_animated_things_pending_remove    = {};
   l->all_things_to_be_destroyed            = {};
+  l->all_things_pending_fall               = {};
 
   uint32_t csum_in = 0;
   in >> bits(csum_in);
