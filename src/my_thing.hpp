@@ -390,6 +390,7 @@ public:
   bool laser_choose_target(Thingp item, Thingp victim = nullptr);
   bool learn_random_skill(void);
   bool matches(const std::string &what);
+  bool move_away_from_entrance(void);
   bool move_no_shove_attack_allowed(point future_pos);
   bool move_no_shove_no_attack(point future_pos);
   bool move(point to);
@@ -621,6 +622,7 @@ public:
   float get_distance_recruitment_max(void);
   float get_distance_throw(void);
   float get_distance_to_player(void);
+  float get_distance_to_player_on_different_level(void);
   float get_distance_vision(void);
   float get_fadeup_fade(void);
   float get_fadeup_height(void);

@@ -9,6 +9,7 @@
 #include "my_level.hpp"
 #include "my_light.hpp"
 #include "my_monst.hpp"
+#include "my_random.hpp"
 #include "my_sys.hpp"
 #include "my_thing.hpp"
 #include "my_world.hpp"
@@ -45,6 +46,14 @@ void Thing::level_change(Levelp l)
   }
 
   move_finish();
+
+  //
+  // Move the monster a bit - this fakes movement, so if the player follows, the monster
+  // is not just sitting on the entrance.
+  //
+  if (is_monst()) {
+    move_away_from_entrance();
+  }
 
   if (is_player()) {
     old_level->player = nullptr;
@@ -101,20 +110,80 @@ void Thing::level_change(Levelp l)
 
   if (is_player()) {
     l->scroll_map_to_player();
-  }
 
-  //
-  // Update the cursor position.
-  //
-  l->cursor_recreate();
-  l->cursor_path_clear();
+    //
+    // Update the cursor position.
+    //
+    l->cursor_recreate();
+    l->cursor_path_clear();
 
-  //
-  // For auto and normal save
-  //
-  if (is_player()) {
+    //
+    // For auto and normal save
+    //
     game->set_meta_data(l);
   }
 
   game->request_snapshot = true;
+}
+
+//
+// Move the monster a bit - this fakes movement, so if the player follows, the monster
+// is not just sitting on the entrance.
+//
+bool Thing::move_away_from_entrance(void)
+{
+  if (! level) {
+    return false;
+  }
+
+  if (! level->player) {
+    return false;
+  }
+
+  dbg("Try to move away from entrance");
+  TRACE_AND_INDENT();
+
+  auto d = get_distance_to_player_on_different_level();
+  d *= 2;
+  if (d < 2) {
+    d = 2;
+  }
+
+  auto tries = 1000;
+  while (tries-- > 0) {
+    int   x = curr_at.x + pcg_random_range(-d, d);
+    int   y = curr_at.y + pcg_random_range(-d, d);
+    point p(x, y);
+
+    if (x < MAP_BORDER_ROCK) {
+      continue;
+    }
+
+    if (y < MAP_BORDER_ROCK) {
+      continue;
+    }
+
+    if (x >= MAP_WIDTH - MAP_BORDER_ROCK) {
+      continue;
+    }
+
+    if (y >= MAP_HEIGHT - MAP_BORDER_ROCK) {
+      continue;
+    }
+
+    if (level->is_oob(p)) {
+      continue;
+    }
+
+    if (is_hated_by_me(p)) {
+      continue;
+    }
+
+    dbg("Move away from entrance, to %d,%d", x, y);
+    move_to_immediately(point(x, y));
+    return true;
+  }
+
+  dbg("Cold not move away from entrance");
+  return false;
 }

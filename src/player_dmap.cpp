@@ -32,6 +32,17 @@ float Thing::get_distance_to_player(void)
   return get(&game->level->dmap_to_player.val, (int) curr_at.x, (int) curr_at.y);
 }
 
+float Thing::get_distance_to_player_on_different_level(void)
+{
+  TRACE_AND_INDENT();
+  auto player = game->level->player;
+  if (! player) {
+    return DMAP_IS_WALL;
+  }
+
+  return get(&player->level->dmap_to_player.val, (int) curr_at.x, (int) curr_at.y);
+}
+
 void Level::dmap_to_player_update(void)
 {
   TRACE_AND_INDENT();
