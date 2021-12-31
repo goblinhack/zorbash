@@ -263,8 +263,7 @@ bool Thing::path_pop_next_move(void)
     }
 
     //
-    // Make sure and check for hazard after the monst, as the monst
-    // could be floating over lava or a chasm
+    // Make sure and check for hazard after the monst, as the monst could be floating over lava or a chasm
     //
     if (is_disliked_by_me(future_pos)) {
       IF_DEBUG2
@@ -276,9 +275,11 @@ bool Thing::path_pop_next_move(void)
       //
       // Could be a monster sitting in lava, attack it?
       //
-      AI_LOG("", "Move, no shove allowed, attack allowed");
-      if (move_no_shove_attack_allowed(future_pos)) {
-        return true;
+      if (level->is_monst(future_pos)) {
+        AI_LOG("", "Hazard, but a monst is on it. Try to attack it.");
+        if (move_no_shove_attack_allowed(future_pos)) {
+          return true;
+        }
       }
       return false;
     }
