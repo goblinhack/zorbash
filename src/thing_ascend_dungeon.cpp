@@ -31,14 +31,12 @@ bool Thing::ascend_dungeon_tick(void)
     dbg("Location check, ascend");
   }
 
-#if 0
-  if (get_tick() - get_tick_last_level_change() < 1) {
+  if (game->tick_current - get_tick_last_level_change() <= 1) {
     if (is_player()) {
       dbg("Location check, ascend, no too soon");
     }
     return false;
   }
-#endif
 
   if (level->world_at.z > 1) {
     if (is_player()) {

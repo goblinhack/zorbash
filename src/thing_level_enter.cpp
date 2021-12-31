@@ -19,7 +19,7 @@ void Thing::level_enter(void)
   TRACE_NO_INDENT();
 
   if (is_loggable()) {
-    dbg("Enter level");
+    dbg("Enter level %s", level->to_string().c_str());
   }
   TRACE_AND_INDENT();
 

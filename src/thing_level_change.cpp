@@ -22,7 +22,6 @@ void Thing::level_change(Levelp l)
   TRACE_NO_INDENT();
 
   if (level == l) {
-    dbg("Change level; no, same level");
     return;
   }
 

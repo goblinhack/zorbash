@@ -27,14 +27,12 @@ bool Thing::descend_dungeon_tick(void)
   TRACE_AND_INDENT();
   dbg("Descend tick");
 
-#if 0
-  if (get_tick() - get_tick_last_level_change() < 1) {
+  if (game->tick_current - get_tick_last_level_change() <= 1) {
     if (is_player()) {
       dbg("Location check, descend, no too soon");
     }
     return false;
   }
-#endif
 
   if (is_player()) {
     level->ts_fade_out_begin      = time_get_time_ms_cached();

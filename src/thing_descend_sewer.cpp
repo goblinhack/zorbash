@@ -23,14 +23,12 @@ bool Thing::descend_sewer_tick(void)
   dbg("Descend sewer tick");
   TRACE_AND_INDENT();
 
-#if 0
-  if (get_tick() - get_tick_last_level_change() < 1) {
+  if (game->tick_current - get_tick_last_level_change() <= 1) {
     if (is_player()) {
       dbg("Location check, descend sewer, no too soon");
     }
     return false;
   }
-#endif
 
   if (is_player()) {
     if (level->world_at.z & 1) {
@@ -100,7 +98,7 @@ bool Thing::descend_sewer(void)
 
   if (is_player()) {
     game->level = l;
-    TOPCON("You climb into the sewer. Why though?");
+    TOPCON("You descend into the sewer. Why though?");
   }
 
   dbg("Move to next level sewer entrance");
