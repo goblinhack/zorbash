@@ -67,11 +67,6 @@ void Thing::fall(float fall_height, ts_t ms)
     return;
   }
 
-  if (is_floating()) {
-    dbg("No, floating");
-    return;
-  }
-
   auto t = set_ts_fall_begin(time_get_time_ms_cached());
   set_ts_fall_end(t + ms);
 

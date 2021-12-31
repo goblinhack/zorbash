@@ -427,7 +427,7 @@ private:
   int _unused_flag2 {};
   int _unused_flag3 {};
   int _unused_flag4 {};
-  int _unused_flag5 {};
+  int _is_flying {};
   int _weapon_damage {};
   int _weapon_use_distance {};
 
@@ -1094,7 +1094,7 @@ public:
   int unused_flag2(void) const { return _unused_flag2; }
   int unused_flag3(void) const { return _unused_flag3; }
   int unused_flag4(void) const { return _unused_flag4; }
-  int unused_flag5(void) const { return _unused_flag5; }
+  int is_flying(void) const { return _is_flying; }
   int weapon_damage(void) const { return _weapon_damage; }
 
   void set_aggression_level_pct(int v) { _aggression_level_pct = v; }
@@ -1523,7 +1523,7 @@ public:
   void set_unused_flag2(int v) { _unused_flag2 = v; }
   void set_unused_flag3(int v) { _unused_flag3 = v; }
   void set_unused_flag4(int v) { _unused_flag4 = v; }
-  void set_unused_flag5(int v) { _unused_flag5 = v; }
+  void set_is_flying(int v) { _is_flying = v; }
   void set_is_beast_map(int v) { _is_beast_map = v; }
   void set_is_treasure_map(int v) { _is_treasure_map = v; }
   void set_weapon_damage(int v) { _weapon_damage = v; }

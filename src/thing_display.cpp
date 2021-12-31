@@ -662,7 +662,7 @@ bool Thing::get_coords(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
       is_in_water = true;
     }
 
-    if (is_floating()) {
+    if (! is_dead && (is_floating() || is_flying())) {
       //
       // Ghosts do not sink into lava
       //

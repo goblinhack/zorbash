@@ -25,7 +25,7 @@ bool Thing::is_disliked_by_me(const point &p)
     }
   }
 
-  if (! is_floating()) {
+  if (! is_floating() && ! is_flying()) {
     if (level->is_chasm(p)) {
       return true;
     }
@@ -66,7 +66,7 @@ bool Tp::is_disliked_by_me(Levelp level, point p) const
     }
   }
 
-  if (! is_floating()) {
+  if (! is_floating() && ! is_flying()) {
     if (level->is_chasm(p)) {
       return true;
     }

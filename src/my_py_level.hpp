@@ -259,6 +259,6 @@ PyObject *level_unused_flag1_at(PyObject *obj, PyObject *args, PyObject *keywds)
 PyObject *level_unused_flag2_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag3_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag4_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag5_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_flying_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_get_all_followers(PyObject *obj, PyObject *args, PyObject *keywds);
 #endif

@@ -60,7 +60,7 @@ def tp_init(name, text_name):
     mytp.set_is_corpse_on_death(True)
     mytp.set_is_crushable(True)
     mytp.set_is_described_when_hovering_over(True)
-    mytp.set_is_floating(True)
+    mytp.set_is_flying(True)
     mytp.set_is_hittable(True)
     mytp.set_is_loggable(True)
     mytp.set_is_meat_eater(True)

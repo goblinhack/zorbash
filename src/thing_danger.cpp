@@ -53,6 +53,9 @@ int Tp::get_danger_level(void)
   if (is_floating()) {
     danger_level += 2;
   }
+  if (is_flying()) {
+    danger_level += 2;
+  }
   if (is_able_to_jump()) {
     danger_level += 5;
   }
@@ -132,6 +135,9 @@ int Thing::get_danger_initial_level(void)
     danger_level += is_necrotic_danger_level() * 20;
   }
   if (is_floating()) {
+    danger_level += 2;
+  }
+  if (is_flying()) {
     danger_level += 2;
   }
   if (is_able_to_jump()) {
@@ -221,6 +227,9 @@ int Thing::get_danger_current_level(void)
     danger_level += is_necrotic_danger_level() * 20;
   }
   if (is_floating()) {
+    danger_level += 2;
+  }
+  if (is_flying()) {
     danger_level += 2;
   }
   if (is_able_to_jump()) {

@@ -70,8 +70,8 @@ bool Thing::collision_obstacle(Thingp it)
   //
   // Stop tentacleyes piling on top of each other
   //
-  if (it->is_floating()) {
-    if (is_floating()) {
+  if (it->is_floating() || it->is_flying()) {
+    if (is_floating() || is_flying()) {
       return true;
     }
   }
@@ -156,7 +156,7 @@ bool Thing::collision_obstacle(Thingp it)
     }
 
     if (it->is_chasm()) {
-      if (! is_floating()) {
+      if (! is_floating() && ! is_flying()) {
         return true;
       }
     }
@@ -220,8 +220,8 @@ bool Thing::ai_obstacle(Thingp it)
   //
   // Stop tentacleyes piling on top of each other
   //
-  if (it->is_floating()) {
-    if (is_floating()) {
+  if (it->is_floating() || it->is_flying()) {
+    if (is_floating() || is_flying()) {
       return true;
     }
   }
@@ -300,7 +300,7 @@ bool Thing::ai_obstacle(Thingp it)
 
   if (is_monst() || (is_player() && game->robot_mode)) {
     if (it->is_chasm()) {
-      if (! is_floating()) {
+      if (! is_floating() && ! is_flying()) {
         return true;
       }
     }

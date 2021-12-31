@@ -356,7 +356,7 @@ PyObject *thing_unused_flag1(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag2(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag3(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag4(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag5(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_flying(PyObject *obj, PyObject *args, PyObject *keywds);
 
 PyObject *thing_get_damage_energy(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_get_damage_natural_attack(PyObject *obj, PyObject *args, PyObject *keywds);

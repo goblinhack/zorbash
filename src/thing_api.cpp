@@ -551,6 +551,16 @@ int Thing::is_able_to_change_levels(void)
 int Thing::is_able_to_fall(void)
 {
   TRACE_NO_INDENT();
+
+  //
+  // Dead bats fall...
+  //
+  if (is_dead) {
+    if (is_corpse_on_death()) {
+      return true;
+    }
+  }
+
   return (tp()->is_able_to_fall());
 }
 
@@ -1664,10 +1674,10 @@ int Thing::is_wooden(void)
   return (tp()->is_wooden());
 }
 
-int Thing::unused_flag5(void)
+int Thing::is_flying(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag5());
+  return (tp()->is_flying());
 }
 
 int Thing::is_engulfer(void)

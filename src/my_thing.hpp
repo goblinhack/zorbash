@@ -1341,7 +1341,7 @@ public:
   int unused_flag2(void);
   int unused_flag3(void);
   int unused_flag4(void);
-  int unused_flag5(void);
+  int is_flying(void);
   int update_light_strength(void);
   int weapon_damage(void);
   int worth_collecting(const Thingp it);

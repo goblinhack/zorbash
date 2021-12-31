@@ -301,7 +301,7 @@ do
       set_unused_flag2 \
       set_unused_flag3 \
       set_unused_flag4 \
-      set_unused_flag5 \
+      set_is_flying \
       set_on_death_is_open
     do
         grep -q $arg $PAYLOAD

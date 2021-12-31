@@ -16,11 +16,7 @@
 
 void Thing::barrel_tick(void)
 {
-  if (is_floating()) {
-    return;
-  }
-
-  if (is_ethereal()) {
+  if (is_floating() || is_flying() || is_ethereal()) {
     return;
   }
 

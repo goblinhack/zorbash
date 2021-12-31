@@ -690,7 +690,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag4() && (what == "unused_flag4")) {
     return true;
   }
-  if (unused_flag5() && (what == "unused_flag5")) {
+  if (is_flying() && (what == "is_flying")) {
     return true;
   }
   if (is_beast_map() && (what == "is_beast_map")) {
@@ -1375,8 +1375,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag4") {
     return &Thing::unused_flag4;
   }
-  if (what == "unused_flag5") {
-    return &Thing::unused_flag5;
+  if (what == "is_flying") {
+    return &Thing::is_flying;
   }
   if (what == "is_beast_map") {
     return &Thing::is_beast_map;
