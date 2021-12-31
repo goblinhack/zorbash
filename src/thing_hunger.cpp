@@ -29,7 +29,7 @@ void Thing::hunger_clock_tick(void)
   //
   // Hunger only ticks on constitution fail
   //
-  if (d20roll_under(get_constitution())) {
+  if (d20roll_under(get_stat_constitution())) {
     return;
   }
 

@@ -7,6 +7,8 @@ def tp_init(name, text_name):
     mytp.set_aggression_level_pct(100)
     mytp.set_ai_resent_count(100)
     mytp.set_ai_wanderer(True)
+    mytp.set_armor_class(25)
+    mytp.set_attack_bonus(18)  # 10, means no bonus
     mytp.set_attack_humanoid(True)
     mytp.set_attack_lunge(True)
     mytp.set_collision_check(True)
@@ -47,11 +49,9 @@ def tp_init(name, text_name):
     mytp.set_normal_placement_rules(True)
     mytp.set_rarity(my.RARITY_VERY_RARE)
     mytp.set_resurrect_dice("1d10+30")
-    mytp.set_armor_class(25)
-    mytp.set_attack_bonus(18)  # 10, means no bonus
-    mytp.set_constitution(25)
-    mytp.set_dexterity(10)
-    mytp.set_strength(25)
+    mytp.set_stat_constitution(25)
+    mytp.set_stat_dexterity(10)
+    mytp.set_stat_strength(25)
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("A lesser reaper. Death incarnate.")
     mytp.set_text_hits("claws")

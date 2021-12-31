@@ -50,14 +50,6 @@ void Thing::resurrect_forced(void)
 {
   TRACE_NO_INDENT();
 
-  //
-  // Rise at the apointed time
-  //
-  if (game->tick_current < get_tick_resurrect_when()) {
-    dbg("Too soon to rise from the grave, at %d wait for %d", game->tick_current, get_tick_resurrect_when());
-    return;
-  }
-
   if (is_resurrecting) {
     dbg("Already resurrecting");
     return;

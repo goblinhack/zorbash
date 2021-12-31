@@ -1151,7 +1151,7 @@ void Game::wid_thing_info_add_strength(WidPopup *w, Thingp t)
   char tmp[ MAXSHORTSTR ];
 
   if (t->is_alive_monst() || t->is_player()) {
-    auto stat = t->get_strength();
+    auto stat = t->get_stat_strength();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Strength               %2d%3s", stat,
              stat_to_bonus_slash_str(stat).c_str());
     w->log(tmp);
@@ -1164,7 +1164,7 @@ void Game::wid_thing_info_add_dexterity(WidPopup *w, Thingp t)
   char tmp[ MAXSHORTSTR ];
 
   if (t->is_alive_monst() || t->is_player()) {
-    auto stat = t->get_dexterity();
+    auto stat = t->get_stat_dexterity();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Dexterity              %2d%3s", stat,
              stat_to_bonus_slash_str(stat).c_str());
     w->log(tmp);
@@ -1177,7 +1177,7 @@ void Game::wid_thing_info_add_constitution(WidPopup *w, Thingp t)
   char tmp[ MAXSHORTSTR ];
 
   if (t->is_alive_monst() || t->is_player()) {
-    auto stat = t->get_constitution();
+    auto stat = t->get_stat_constitution();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Constitution           %2d%3s", stat,
              stat_to_bonus_slash_str(stat).c_str());
     w->log(tmp);

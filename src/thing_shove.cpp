@@ -115,9 +115,9 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta)
   }
 
   if (! it->is_dead) {
-    dbg("Shove: It strength %d vs me %d", it->get_strength(), get_strength());
+    dbg("Shove: It strength %d vs me %d", it->get_stat_strength(), get_stat_strength());
 
-    if (! d20roll(get_strength(), it->get_strength())) {
+    if (! d20roll(get_stat_strength(), it->get_stat_strength())) {
       if (is_player()) {
         if (it->is_monst()) {
           TOPCON("%s shoves you back!", it->text_The().c_str());

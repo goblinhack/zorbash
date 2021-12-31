@@ -5,11 +5,11 @@
 <!-- - AI if you see a potion of health, drop food in preference?                                                                                 -->
 <!-- - AI did not pick up enchantstone due to space                                                                                               -->
 <!-- - robot will loop on sewers                                                                                                                  -->
+<!-- - fixed order for tps                                                                                                                        -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Next todo                                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
-<!-- - zorblin necro                                                                                                                              -->
 <!-- - giant spider web throw                                                                                                                     -->
 <!-- - spider ball anims                                                                                                                          -->
 <!-- - equip armour etc                                                                                                                           -->

@@ -16,6 +16,8 @@ def on_open(me, x, y):
 
 def tp_init(name):
     mytp = tp.Tp(name, "wood door")
+    mytp.set_armor_class(20)
+    mytp.set_attack_bonus(10)  # 10, means no bonus
     mytp.set_collision_check(True)
     mytp.set_collision_hit_priority(9)
     mytp.set_damage_received_doubled_from_fire(True)
@@ -43,8 +45,6 @@ def tp_init(name):
     mytp.set_on_death_is_open(True)
     mytp.set_on_open_do("me.on_open()")
     mytp.set_on_you_are_hit_but_still_alive_do("me.on_you_are_hit_but_still_alive()")
-    mytp.set_armor_class(20)
-    mytp.set_attack_bonus(10)  # 10, means no bonus
     mytp.set_text_a_or_an("the")
     mytp.set_text_description("A door covered in claw marks.")
     mytp.set_z_depth(my.MAP_DEPTH_OBJ)

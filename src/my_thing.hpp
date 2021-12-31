@@ -816,7 +816,7 @@ public:
   int get_carried_weapon_highest_value(Thingp *out);
   int get_carried_weapon_least_value(Thingp *out);
   int get_charge_count(void);
-  int get_constitution(void);
+  int get_stat_constitution(void);
   int get_current_damage(void);
   int get_damage_acid(void);
   int get_damage_crush(void);
@@ -838,7 +838,7 @@ public:
   int get_danger_current_level(void);
   int get_danger_initial_level(Thingp);
   int get_danger_initial_level(void);
-  int get_dexterity(void);
+  int get_stat_dexterity(void);
   int get_enchant_max(void);
   int get_enchantstone_count(void);
   int get_enchant(void);
@@ -888,7 +888,7 @@ public:
   int get_stats12(void);
   int get_stats17(void);
   int get_stats19(void);
-  int get_strength(void);
+  int get_stat_strength(void);
   int get_stuck_count(void);
   int get_submerged_offset(void);
   int get_torch_count(void);
@@ -1177,6 +1177,7 @@ public:
   int is_red_blooded(void);
   int is_removeable_if_out_of_slots(void);
   int is_resurrectable(void);
+  int is_resurrected_or_resurrecting(void);
   int is_ring(void);
   int is_ripple(void);
   int is_rock(void);
@@ -1288,9 +1289,9 @@ public:
   int set_armor_class(int);
   int set_attack_bonus(int);
   int set_charge_count(int);
-  int set_constitution(int);
+  int set_stat_constitution(int);
   int set_current_damage(int);
-  int set_dexterity(int);
+  int set_stat_dexterity(int);
   int set_distance_throw(int);
   int set_enchant(int);
   int set_enchant_max(int);
@@ -1322,7 +1323,7 @@ public:
   int set_stats12(int);
   int set_stats17(int);
   int set_stats19(int);
-  int set_strength(int);
+  int set_stat_strength(int);
   int set_stuck_count(int);
   int skill_enchant_count(const uint32_t slot);
   int spawn_randomly_in_radius_range(const std::string &what, int amount, uint32_t radius_min, uint32_t radius_max);

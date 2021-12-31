@@ -1292,6 +1292,12 @@ int Thing::is_resurrectable(void)
   return (tp()->is_resurrectable());
 }
 
+int Thing::is_resurrected_or_resurrecting(void)
+{
+  TRACE_NO_INDENT();
+  return (is_resurrected || is_resurrecting);
+}
+
 int Thing::is_ripple(void)
 {
   TRACE_NO_INDENT();
@@ -3286,7 +3292,7 @@ uint32_t Thing::incr_tick_resurrect_when(void)
 ////////////////////////////////////////////////////////////////////////////
 // dexterity
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_dexterity(void)
+int Thing::get_stat_dexterity(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
@@ -3296,7 +3302,7 @@ int Thing::get_dexterity(void)
   }
 }
 
-int Thing::set_dexterity(int v)
+int Thing::set_stat_dexterity(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4102,7 +4108,7 @@ int Thing::incr_stats12(void)
 ////////////////////////////////////////////////////////////////////////////
 // constitution
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_constitution(void)
+int Thing::get_stat_constitution(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
@@ -4112,7 +4118,7 @@ int Thing::get_constitution(void)
   }
 }
 
-int Thing::set_constitution(int v)
+int Thing::set_stat_constitution(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4651,7 +4657,7 @@ int Thing::incr_necrotized_amount(void)
 ////////////////////////////////////////////////////////////////////////////
 // strength
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_strength(void)
+int Thing::get_stat_strength(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
@@ -4661,7 +4667,7 @@ int Thing::get_strength(void)
   }
 }
 
-int Thing::set_strength(int v)
+int Thing::set_stat_strength(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {

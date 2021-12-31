@@ -27,6 +27,7 @@ def on_death(me, x, y):
 def tp_init(name, text_name):
     mytp = tp.Tp(name, text_name)
     mytp.set_ai_shove_chance_d1000(200)
+    mytp.set_attack_bonus(10)  # 10, means no bonus
     mytp.set_collision_check(True)
     mytp.set_collision_hit_priority(5)
     mytp.set_damage_received_doubled_from_fire(True)
@@ -56,7 +57,6 @@ def tp_init(name, text_name):
     mytp.set_normal_placement_rules(True)
     mytp.set_on_death_do("me.on_death()")
     mytp.set_on_idle_tick_frequency_dice("1d10+10:me.on_idle_tick_frequency_dice()")
-    mytp.set_attack_bonus(10)  # 10, means no bonus
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("The dead rise again here.")
     mytp.set_z_depth(my.MAP_DEPTH_OBJ)

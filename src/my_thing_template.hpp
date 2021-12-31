@@ -1479,8 +1479,8 @@ public:
   void set_stamina(int v) { _stamina = v; }
   void set_armor_class(int v) { _armor_class = v; }
   void set_attack_bonus(int v) { _attack_bonus = v; }
-  void set_constitution(int v) { _constitution = v; }
-  void set_dexterity(int v) { _dexterity = v; }
+  void set_stat_constitution(int v) { _constitution = v; }
+  void set_stat_dexterity(int v) { _dexterity = v; }
   void set_stats02(int v) { _stats02 = v; }
   void set_stats03(int v) { _stats03 = v; }
   void set_stats04(int v) { _stats04 = v; }
@@ -1493,7 +1493,7 @@ public:
   void set_stats11(int v) { _stats11 = v; }
   void set_stats12(int v) { _stats12 = v; }
   void set_stats17(int v) { _stats17 = v; }
-  void set_strength(int v) { _strength = v; }
+  void set_stat_strength(int v) { _strength = v; }
   void set_str1(const std::string &v) { _str1 = v; }
   void set_str2(const std::string &v) { _str2 = v; }
   void set_str4(const std::string &v) { _str4 = v; }

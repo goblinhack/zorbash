@@ -200,6 +200,7 @@ void Thing::achieve_goals_in_life(void)
   }
 
   if (on_tick()) {
+    dbg("Did something during tick callbac");
     return;
   }
 

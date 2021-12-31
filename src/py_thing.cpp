@@ -22,6 +22,7 @@
     uint32_t     value    = 0;                                                                                       \
     static char *kwlist[] = {(char *) "id", (char *) "value", 0};                                                    \
                                                                                                                      \
+    LOG("Called %s", __FUNCTION__);                                                                                  \
     if (! PyArg_ParseTupleAndKeywords(args, keywds, "Ii", kwlist, &id, &value)) {                                    \
       ERR("%s: Failed parsing keywords", __FUNCTION__);                                                              \
       Py_RETURN_FALSE;                                                                                               \
@@ -44,6 +45,7 @@
     uint32_t     id       = 0;                                                                                       \
     static char *kwlist[] = {(char *) "id", 0};                                                                      \
                                                                                                                      \
+    LOG("Called %s", __FUNCTION__);                                                                                  \
     if (! PyArg_ParseTupleAndKeywords(args, keywds, "I", kwlist, &id)) {                                             \
       ERR("%s: Failed parsing keywords", __FUNCTION__);                                                              \
       Py_RETURN_FALSE;                                                                                               \
@@ -66,6 +68,7 @@
     uint32_t     id       = 0;                                                                                       \
     static char *kwlist[] = {(char *) "id", 0};                                                                      \
                                                                                                                      \
+    LOG("Called %s", __FUNCTION__);                                                                                  \
     if (! PyArg_ParseTupleAndKeywords(args, keywds, "I", kwlist, &id)) {                                             \
       ERR("%s: Failed parsing keywords", __FUNCTION__);                                                              \
       Py_RETURN_FALSE;                                                                                               \
@@ -89,6 +92,7 @@
     uint32_t     oid      = 0;                                                                                       \
     static char *kwlist[] = {(char *) "id", (char *) "oid", 0};                                                      \
                                                                                                                      \
+    LOG("Called %s", __FUNCTION__);                                                                                  \
     if (! PyArg_ParseTupleAndKeywords(args, keywds, "II", kwlist, &id, &oid)) {                                      \
       ERR("%s: Failed parsing keywords", __FUNCTION__);                                                              \
       Py_RETURN_FALSE;                                                                                               \
@@ -127,6 +131,7 @@
     uint32_t     id       = 0;                                                                                       \
     static char *kwlist[] = {(char *) "id", 0};                                                                      \
                                                                                                                      \
+    LOG("Called %s", __FUNCTION__);                                                                                  \
     if (! PyArg_ParseTupleAndKeywords(args, keywds, "I", kwlist, &id)) {                                             \
       ERR("%s: Failed parsing keywords", __FUNCTION__);                                                              \
       Py_RETURN_FALSE;                                                                                               \
@@ -154,6 +159,7 @@
     uint32_t     id       = 0;                                                                                       \
     static char *kwlist[] = {(char *) "id", 0};                                                                      \
                                                                                                                      \
+    LOG("Called %s", __FUNCTION__);                                                                                  \
     if (! PyArg_ParseTupleAndKeywords(args, keywds, "I", kwlist, &id)) {                                             \
       ERR("%s: Failed parsing keywords", __FUNCTION__);                                                              \
       Py_RETURN_FALSE;                                                                                               \
@@ -822,7 +828,12 @@ PyObject *thing_msg(PyObject *obj, PyObject *args, PyObject *keywds)
   // If not reachable, suppress the msg
   //
   if (owner->get_distance_to_player() < DMAP_IS_PASSABLE) {
-    TOPCON("%s", msg);
+    if (owner->is_monst()) {
+      TOPCON("%s: %s", owner->text_The().c_str(), msg);
+    } else {
+      TOPCON("%s", msg);
+    }
+    owner->msg(msg);
   }
 
   Py_RETURN_NONE;
@@ -1023,6 +1034,7 @@ THING_BODY_GET_BOOL(thing_is_cursor, is_cursor)
 THING_BODY_GET_BOOL(thing_is_cursor_path_hazard_for_player, is_cursor_path_hazard_for_player)
 THING_BODY_GET_BOOL(thing_is_cursor_path, is_cursor_path)
 THING_BODY_GET_BOOL(thing_is_dead_on_end_of_anim, is_dead_on_end_of_anim)
+THING_BODY_GET_BOOL(thing_is_resurrected_or_resurrecting, is_resurrected_or_resurrecting)
 THING_BODY_GET_BOOL(thing_is_dead_or_dying, is_dead_or_dying)
 THING_BODY_GET_BOOL(thing_is_dead_or_dying_on_shove, is_dead_on_shove)
 THING_BODY_GET_BOOL(thing_is_debuff, is_debuff)
@@ -1191,7 +1203,7 @@ THING_BODY_GET_INT(thing_get_necrotized_amount, get_necrotized_amount)
 THING_BODY_GET_INT(thing_get_poisoned_amount, get_poisoned_amount)
 THING_BODY_GET_INT(thing_get_stamina, get_stamina)
 THING_BODY_GET_INT(thing_get_stamina_max, get_stamina_max)
-THING_BODY_GET_INT(thing_get_constitution, get_constitution)
+THING_BODY_GET_INT(thing_get_stat_constitution, get_stat_constitution)
 THING_BODY_GET_STRING(thing_get_name, text_name)
 THING_BODY_GET_THING(thing_get_immediate_manifestor_id, get_immediate_manifestor_id)
 THING_BODY_GET_THING(thing_get_immediate_owner_id, get_immediate_owner_id)
@@ -1229,6 +1241,6 @@ THING_BODY_SET_INT(thing_set_necrotized_amount, set_necrotized_amount)
 THING_BODY_SET_INT(thing_set_poisoned_amount, set_poisoned_amount)
 THING_BODY_SET_INT(thing_set_stamina_max, set_stamina_max)
 THING_BODY_SET_INT(thing_set_stamina, set_stamina)
-THING_BODY_SET_INT(thing_set_constitution, set_constitution)
+THING_BODY_SET_INT(thing_set_stat_constitution, set_stat_constitution)
 THING_BODY_SET_THING(thing_skill_activate, skill_activate)
 THING_BODY_SET_THING(thing_skill_deactivate, skill_deactivate)

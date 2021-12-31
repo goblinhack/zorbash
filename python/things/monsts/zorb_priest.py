@@ -17,7 +17,7 @@ def tp_init(name, text_name):
     mytp.set_on_death_of_a_follower_do("me.on_death_of_a_follower()")
     mytp.set_on_born_do("me.on_born()")
     mytp.set_text_description("A master in physical punishment.")
-    mytp.set_strength(12)
+    mytp.set_stat_strength(12)
     mytp.set_distance_avoid(5)
     mytp.set_text_hits("hits")
     mytp.set_gfx_anim_use("attack_punch")

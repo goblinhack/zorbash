@@ -31,7 +31,7 @@ def tp_init(name, text_name):
     mytp.set_ai_resent_count(100)
     mytp.set_ai_shove_chance_d1000(200)
     mytp.set_ai_wanderer(True)
-    mytp.set_armor_class(11)
+    mytp.set_armor_class(8)
     mytp.set_attack_blood(True)
     mytp.set_attack_bonus(10)  # 10, means no bonus
     mytp.set_attack_eater(True)
@@ -44,8 +44,6 @@ def tp_init(name, text_name):
     mytp.set_damage_natural_attack_chance_d1000(950)
     mytp.set_damage_natural_attack_dice("1d6+10")
     mytp.set_damage_natural_attack_type("touch")
-    mytp.set_damage_necrosis_chance_d1000(50)
-    mytp.set_damage_necrosis_dice("1")
     mytp.set_damage_received_doubled_from_fire(True)
     mytp.set_damage_received_doubled_from_water(True)
     mytp.set_distance_vision(5)
@@ -54,7 +52,6 @@ def tp_init(name, text_name):
     mytp.set_environ_avoids_fire(True)
     mytp.set_environ_avoids_water(100)
     mytp.set_environ_avoids_water(True)
-    mytp.set_environ_prefers_necrosis(True)
     mytp.set_gfx_animated_can_hflip(True)
     mytp.set_gfx_animated(True)
     mytp.set_gfx_anim_use("attack_claws")
@@ -83,12 +80,11 @@ def tp_init(name, text_name):
     mytp.set_is_loggable(True)
     mytp.set_is_monst(True)
     mytp.set_is_moveable(True)
-    mytp.set_is_necrotic_danger_level(1)  # danger level
     mytp.set_is_resurrectable(True)
     mytp.set_is_shovable(True)
     mytp.set_is_tickable(True)
     mytp.set_is_undead(True)
-    mytp.set_long_text_description("Possibly the corpse of one who ventured into this dungeon before. All life is gone now, and what remains is a corpse wrapped in rags. Death is no release for this poor creature. Watch out for its necrotic touch!")
+    mytp.set_long_text_description("A once proud zorblin, this poor creature has been resurrected as a zombie!")
     mytp.set_monst_size(my.MONST_SIZE_NORMAL)
     mytp.set_normal_placement_rules(True)
     mytp.set_on_death_do("me.on_death()")
@@ -97,11 +93,11 @@ def tp_init(name, text_name):
     mytp.set_on_you_natural_attack_do("me.on_you_natural_attack()")
     mytp.set_rarity(my.RARITY_COMMON)
     mytp.set_resurrect_dice("1d10+30")
-    mytp.set_stat_constitution(15)
-    mytp.set_stat_dexterity(10)
-    mytp.set_stat_strength(16)
+    mytp.set_stat_constitution(10)
+    mytp.set_stat_dexterity(8)
+    mytp.set_stat_strength(8)
     mytp.set_text_a_or_an("a")
-    mytp.set_text_description("A staggering corpse, covered in tissue paper.")
+    mytp.set_text_description("A staggering zorblin zombie, a zoblin!")
     mytp.set_text_hits("claws")
     mytp.set_z_depth(my.MAP_DEPTH_OBJ)
     mytp.set_z_prio(my.MAP_PRIO_NORMAL)
@@ -142,7 +138,7 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="mummy", text_name="mummy")
+    tp_init(name="zoblin", text_name="zoblin")
 
 
 init()

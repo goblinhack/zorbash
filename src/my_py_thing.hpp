@@ -38,10 +38,10 @@ PyObject *thing_incr_stamina_max(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *thing_decr_stamina_max(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_get_stamina_max(PyObject *obj, PyObject *args, PyObject *keywds);
 
-PyObject *thing_set_constitution(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_set_stat_constitution(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_incr_constitution(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_decr_constitution(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_get_constitution(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_get_stat_constitution(PyObject *obj, PyObject *args, PyObject *keywds);
 
 PyObject *thing_set_enchant(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_incr_enchant(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -207,6 +207,7 @@ PyObject *thing_is_cursor(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_dead_on_end_of_anim(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_dead_or_dying_on_shove(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_dead_or_dying(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_resurrected_or_resurrecting(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_debuff(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_debug_path(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_debug_type(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -301,7 +302,7 @@ PyObject *thing_is_potion(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_projectile(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_red_blooded(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_removeable_if_out_of_slots(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_resurrectable(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_resurrected_or_resurrecting(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_ring(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_ripple(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_rock(PyObject *obj, PyObject *args, PyObject *keywds);

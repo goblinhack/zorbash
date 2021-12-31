@@ -14,11 +14,11 @@ void Thing::rest(void)
   dbg("Resting");
   TRACE_AND_INDENT();
 
-  if ((int) pcg_random_range(0, 200) < get_strength()) {
+  if ((int) pcg_random_range(0, 200) < get_stat_strength()) {
     health_boost(1);
   }
 
-  if ((int) pcg_random_range(0, 20) < get_constitution()) {
+  if ((int) pcg_random_range(0, 20) < get_stat_constitution()) {
     stamina_boost(1);
   }
 }

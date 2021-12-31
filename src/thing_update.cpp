@@ -101,7 +101,7 @@ void Thing::update(void)
     TRACE_NO_INDENT();
     auto v = tpp->dexterity();
     if (unlikely(v)) {
-      set_dexterity(v);
+      set_stat_dexterity(v);
     }
   }
 
@@ -197,7 +197,7 @@ void Thing::update(void)
     TRACE_NO_INDENT();
     auto v = tpp->constitution();
     if (unlikely(v)) {
-      set_constitution(v);
+      set_stat_constitution(v);
     }
   }
 
@@ -213,7 +213,7 @@ void Thing::update(void)
     TRACE_NO_INDENT();
     auto v = tpp->constitution();
     if (unlikely(v)) {
-      set_constitution(v);
+      set_stat_constitution(v);
     }
   }
 
@@ -237,7 +237,7 @@ void Thing::update(void)
     TRACE_NO_INDENT();
     auto v = tpp->strength();
     if (unlikely(v)) {
-      set_strength(v);
+      set_stat_strength(v);
     }
   }
 
