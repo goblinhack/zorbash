@@ -1,17 +1,13 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- - robot fell into void on victimlake                                                                                                         -->
 <!-- - when a monst ascends, randomly place it                                                                                                    -->
 <!-- - AI if you see a potion of health, drop food in preference?                                                                                 -->
 <!-- - AI did not pick up enchantstone due to space                                                                                               -->
 <!-- - robot will loop on sewers                                                                                                                  -->
-<!-- - fixed order for tps                                                                                                                        -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Next todo                                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
-<!-- - giant spider web throw                                                                                                                     -->
-<!-- - spider ball anims                                                                                                                          -->
 <!-- - equip armour etc                                                                                                                           -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->

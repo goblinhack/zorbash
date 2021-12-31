@@ -47,8 +47,8 @@ PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_FALSE;
   }
 
-  static int id;
-  id++;
+  int id;
+  tp_get_id(tp_name, &id);
   tp_load(id, tp_name, tp_text_name, tp_short_text_name);
 
   myfree(tp_name);
