@@ -2960,23 +2960,27 @@ int Thing::incr_health_max(void)
 ////////////////////////////////////////////////////////////////////////////
 // defence
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_armor_class(void)
+int Thing::get_armor_class_total(void)
 {
   TRACE_NO_INDENT();
   int v = 0;
   if (maybe_infop()) {
     v = get_infop()->armor_class;
   }
-  auto owner = get_immediate_owner();
-  if (owner && (owner != this)) {
-    v += owner->get_armor_class();
+
+  auto armor = get_equip(MONST_EQUIP_ARMOR);
+  if (armor) {
+    v = std::max(armor->get_armor_class_total(), v);
   }
-  if (is_minion()) {
-    auto manifestor = get_immediate_manifestor();
-    if (manifestor) {
-      auto manifestor = get_immediate_manifestor();
-      v += manifestor->get_armor_class();
-    }
+  return v;
+}
+
+int Thing::get_armor_class(void)
+{
+  TRACE_NO_INDENT();
+  int v = 0;
+  if (maybe_infop()) {
+    v = get_infop()->armor_class;
   }
   return v;
 }

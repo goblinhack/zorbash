@@ -444,12 +444,12 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   //
   // defence modifier: armor class + dexterity
   //
-  auto defence_total = victim->get_armor_class();
+  auto defence_total = victim->get_armor_class_total();
   defence_total += victim->get_stat_dexterity();
 
   auto victim_owner = get_top_owner();
   if (victim_owner) {
-    defence_total = victim_owner->get_armor_class();
+    defence_total = victim_owner->get_armor_class_total();
     defence_total = victim_owner->get_stat_dexterity();
   }
 

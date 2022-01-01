@@ -802,6 +802,7 @@ public:
   int environ_prefers_spiderwebs(void);
   int environ_prefers_water(void);
   int get_armor_class(void);
+  int get_armor_class_total(void);
   int get_attack_bonus(void);
   int get_beast_map_carried_count(void);
   int get_beast_map_count(void);

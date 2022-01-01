@@ -159,7 +159,7 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
   wid_thing_info_add_damage_digest(wid_popup_window, t);
   wid_thing_info_add_damage_necrosis(wid_popup_window, t);
   wid_thing_info_add_attack(wid_popup_window, t);
-  wid_thing_info_add_defence(wid_popup_window, t);
+  wid_thing_info_add_armor_class(wid_popup_window, t);
   wid_thing_info_add_dexterity(wid_popup_window, t);
   wid_thing_info_add_strength(wid_popup_window, t);
   wid_thing_info_add_constitution(wid_popup_window, t);
@@ -221,7 +221,7 @@ WidPopup *Game::wid_thing_info_create_popup_compact(const std::vector< Thingp > 
     wid_thing_info_add_damage_digest(wid_popup_window, t);
     wid_thing_info_add_damage_necrosis(wid_popup_window, t);
     wid_thing_info_add_attack(wid_popup_window, t);
-    wid_thing_info_add_defence(wid_popup_window, t);
+    wid_thing_info_add_armor_class(wid_popup_window, t);
     wid_thing_info_add_dexterity(wid_popup_window, t);
     wid_thing_info_add_strength(wid_popup_window, t);
     wid_thing_info_add_constitution(wid_popup_window, t);
@@ -1132,16 +1132,27 @@ void Game::wid_thing_info_add_attack(WidPopup *w, Thingp t)
   }
 }
 
-void Game::wid_thing_info_add_defence(WidPopup *w, Thingp t)
+void Game::wid_thing_info_add_armor_class(WidPopup *w, Thingp t)
 {
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
 
   if (t->is_armor() || t->is_alive_monst() || t->is_player()) {
-    auto stat = t->get_armor_class();
-    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor class            %2d%3s", stat,
-             stat_to_bonus_slash_str(stat).c_str());
-    w->log(tmp);
+    auto ac       = t->get_armor_class();
+    auto ac_total = t->get_armor_class_total();
+    if (ac_total != ac) {
+      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor class base       %2d%3s", ac,
+               stat_to_bonus_slash_str(ac).c_str());
+      w->log(tmp);
+
+      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor class total      %2d%3s", ac_total,
+               stat_to_bonus_slash_str(ac_total).c_str());
+      w->log(tmp);
+    } else {
+      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor class            %2d%3s", ac,
+               stat_to_bonus_slash_str(ac).c_str());
+      w->log(tmp);
+    }
   }
 }
 

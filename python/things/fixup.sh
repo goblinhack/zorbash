@@ -117,6 +117,7 @@ do
       set_is_able_to_see_through_doors \
       set_is_able_to_shove \
       set_is_able_to_tire \
+      set_is_able_to_use_armor \
       set_is_able_to_use_rings \
       set_is_able_to_use_wands \
       set_is_able_to_use_weapons \
@@ -125,6 +126,7 @@ do
       set_is_alive_on_end_of_anim \
       set_is_always_hit \
       set_is_aquatic \
+      set_is_armor \
       set_is_ascend_dungeon \
       set_is_ascend_sewer \
       set_is_attackable_by_monst \
@@ -197,6 +199,7 @@ do
       set_is_floating \
       set_is_floor \
       set_is_floor_deco \
+      set_is_flying \
       set_is_foilage \
       set_is_food \
       set_is_food_eater \
@@ -265,6 +268,7 @@ do
       set_is_shovable \
       set_is_skill \
       set_is_skillstone \
+      set_is_slippery \
       set_is_smoke \
       set_is_soft_body \
       set_is_spawner \
@@ -299,10 +303,6 @@ do
       set_on_death_drop_all_items \
       set_spawn_group_radius \
       set_unused_flag1 \
-      set_is_able_to_use_armor \
-      set_is_slippery \
-      set_is_armor \
-      set_is_flying \
       set_on_death_is_open
     do
         grep -q $arg $PAYLOAD

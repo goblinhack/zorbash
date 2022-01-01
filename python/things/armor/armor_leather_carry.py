@@ -9,7 +9,6 @@ def tp_init(name):
     mytp.set_gfx_bounce_on_move(True)
     mytp.set_gfx_equip_carry_anim(True)
     mytp.set_gfx_short_shadow_caster(True)
-    mytp.set_gfx_show_outlined(True)
     mytp.set_is_gfx_anim_synced_with_owner(True)
     mytp.set_is_loggable(True)
     mytp.set_is_moveable(True)

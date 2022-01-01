@@ -122,6 +122,68 @@ static void wid_rightbar_inventory_over_e(Widp w)
   //
 }
 
+static void wid_rightbar_stats_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+{
+  TRACE_AND_INDENT();
+  DBG3("Stats: Begin over inventory");
+  TRACE_AND_INDENT();
+  if ((game->state == Game::STATE_CHOOSING_TARGET) || (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
+      (game->state == Game::STATE_COLLECTING_ITEMS) || (game->state == Game::STATE_INVENTORY) ||
+      (game->state == Game::STATE_CHOOSING_SKILLS) || (game->state == Game::STATE_SAVE_MENU) ||
+      (game->state == Game::STATE_LOAD_MENU) || (game->state == Game::STATE_QUIT_MENU) ||
+      (game->state == Game::STATE_ENCHANTING_ITEMS)) {
+    DBG3("Stats: Moving items; ignore");
+    return;
+  }
+
+  if (game->in_transit_item) {
+    DBG3("Stats: In transit item; ignore");
+    return;
+  }
+
+  auto level = game->get_current_level();
+  if (! level) {
+    DBG3("Stats: No level; ignore");
+    return;
+  }
+
+  if (level->player) {
+    game->wid_thing_info_create(level->player);
+  }
+}
+
+static void wid_rightbar_stats_over_e(Widp w)
+{
+  TRACE_AND_INDENT();
+  DBG3("Stats: End over inventory");
+  TRACE_AND_INDENT();
+  if ((game->state == Game::STATE_CHOOSING_TARGET) || (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
+      (game->state == Game::STATE_COLLECTING_ITEMS) || (game->state == Game::STATE_INVENTORY) ||
+      (game->state == Game::STATE_CHOOSING_SKILLS) || (game->state == Game::STATE_SAVE_MENU) ||
+      (game->state == Game::STATE_LOAD_MENU) || (game->state == Game::STATE_QUIT_MENU) ||
+      (game->state == Game::STATE_ENCHANTING_ITEMS)) {
+    DBG3("Stats: Moving items; ignore");
+    return;
+  }
+
+  if (game->in_transit_item) {
+    DBG3("Stats: In transit item; ignore");
+    return;
+  }
+
+  auto level = game->get_current_level();
+  if (! level) {
+    DBG3("Stats: No level; ignore");
+    return;
+  }
+
+  game->wid_thing_info_destroy_deferred();
+
+  //
+  // Do not create new wids in here
+  //
+}
+
 //
 // Create the test
 //
@@ -173,6 +235,8 @@ static bool wid_rightbar_create(void)
     wid_set_text(w, s);
     wid_set_shape_none(w);
     myfree(s);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_b);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_e);
   }
 
   y_at += 1;
@@ -188,6 +252,8 @@ static bool wid_rightbar_create(void)
     wid_set_text(w, s);
     wid_set_shape_none(w);
     myfree(s);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_b);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_e);
   }
 
   y_at += 2;
@@ -201,6 +267,8 @@ static bool wid_rightbar_create(void)
     wid_set_pos(w, tl, br);
     wid_set_text(w, player->title());
     wid_set_shape_none(w);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_b);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_e);
   }
 
   y_at += 3;
@@ -219,6 +287,8 @@ static bool wid_rightbar_create(void)
     wid_set_text_lhs(w, true);
     wid_set_shape_none(w);
     myfree(g);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_b);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_e);
   }
 
   ///////////////////////////////////////////////////////////////////////////
@@ -237,6 +307,8 @@ static bool wid_rightbar_create(void)
     i         = std::max(i, 0);
     auto icon = "health_bar_" + std::to_string(i);
     wid_set_fg_tilename(w, icon);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_b);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_e);
   }
   {
     TRACE_AND_INDENT();
@@ -250,6 +322,8 @@ static bool wid_rightbar_create(void)
     std::string s = std::to_string(player->get_health()) + "/" + std::to_string(player->get_health_max());
     wid_set_text(w, s);
     wid_set_text_rhs(w, true);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_b);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_e);
   }
   y_at += 2;
 
@@ -263,6 +337,8 @@ static bool wid_rightbar_create(void)
     point tl = make_point(0, y_at);
     point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH - 1, tl.y);
     wid_set_pos(w, tl, br);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_b);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_e);
 
     int i     = ((float) player->get_stamina() / (float) player->get_stamina_max()) * (float) UI_HEALTH_BAR_STEPS - 1;
     i         = std::min(i, UI_HEALTH_BAR_STEPS - 1);
@@ -278,6 +354,8 @@ static bool wid_rightbar_create(void)
     point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH - 4, tl.y);
     wid_set_pos(w, tl, br);
     wid_set_shape_none(w);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_b);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_e);
 
     std::string s = std::to_string(player->get_stamina()) + "/" + std::to_string(player->get_stamina_max());
     wid_set_text(w, s);
@@ -296,10 +374,12 @@ static bool wid_rightbar_create(void)
     point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH, tl.y);
     wid_set_pos(w, tl, br);
     wid_set_shape_none(w);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_b);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_e);
 
     char tmp[ UI_SIDEBAR_RIGHT_WIDTH + 1 ];
-    snprintf(tmp, sizeof(tmp) - 1, "   %2d   %2d   %2d", player->get_attack_bonus(),
-             player->get_armor_class(), player->get_stat_strength());
+    snprintf(tmp, sizeof(tmp) - 1, "   %2d   %2d   %2d", player->get_attack_bonus(), player->get_armor_class_total(),
+             player->get_stat_strength());
     wid_set_text(w, tmp);
     wid_set_text_lhs(w, true);
   }
@@ -316,6 +396,8 @@ static bool wid_rightbar_create(void)
     point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH, tl.y);
     wid_set_pos(w, tl, br);
     wid_set_shape_none(w);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_b);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_e);
 
     char tmp[ UI_SIDEBAR_RIGHT_WIDTH + 1 ];
     snprintf(tmp, sizeof(tmp) - 1, "   %2d   %2d   %2d", player->get_stat_constitution(), 0, 0);
