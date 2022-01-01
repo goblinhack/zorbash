@@ -401,10 +401,6 @@ bool Thing::equip(Thingp item, int equip)
 
   if (get_equip(equip) == item) {
     dbg("Re-equipping: %s", item->to_short_string().c_str());
-    //
-    // Do not return here. We need to set the carry-anim post swing
-    //
-    equip_remove_anim(equip);
     return false;
   }
 
@@ -482,7 +478,7 @@ bool Thing::equip(Thingp item, int equip)
         TOPCON("You put on %s.", item->text_the().c_str());
       }
     }
-  } else if (is_monst()) {
+  } else if (is_monst() && ! is_offscreen) {
     if (level->player && (level->tick_created < game->tick_current)) {
       if (get(level->player->get_aip()->can_see_currently.can_see, curr_at.x, curr_at.y)) {
         TOPCON("%s wields %s.", text_The().c_str(), item->text_the().c_str());

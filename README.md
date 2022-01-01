@@ -4,6 +4,9 @@
 <!--                                                                                                                                              -->
 <!-- Next todo                                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
+<!-- - sync armor anim frames                                                                                                                     -->
+<!-- - head should be on top of armor                                                                                                             -->
+<!-- - check armor damage                                                                                                                         -->
 <!-- - fish scale mail for water proofing                                                                                                         -->
 <!-- - dragon scale mail for fire proofing                                                                                                        -->
 <!-- ------                                                                                                                                       -->

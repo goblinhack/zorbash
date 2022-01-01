@@ -434,7 +434,7 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
   if (it->is_monst()) {
     if (is_barrel()) {
       if (things_overlap(me, future_pos, it)) {
-        if (it->is_soft_body()) {
+        if (it->is_toughness_soft()) {
           dbg("Overlaps; barrel can splat soft monst");
           return false;
         } else if (it->is_ethereal()) {

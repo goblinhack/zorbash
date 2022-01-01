@@ -398,10 +398,10 @@ void Thing::update(void)
   }
 
   //
-  // Initial equp of armor
+  // Initial equip of armor
   //
   if (is_able_to_use_armor()) {
-    dbg("Weapon equip");
+    dbg("Armor equip");
     TRACE_AND_INDENT();
 
     Thingp best_armor = nullptr;

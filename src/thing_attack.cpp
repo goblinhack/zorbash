@@ -858,8 +858,13 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
       auto weapon = my_owner->get_equip(MONST_EQUIP_WEAPON);
       if (weapon) {
         auto break_chance = breaking_chance_d1000();
-        TOPCON("B %d", break_chance);
-        if (victim->is_indestructible()) {
+        if (victim->is_toughness_soft()) {
+          break_chance /= 2;
+        }
+        if (victim->is_toughness_hard()) {
+          break_chance *= 2;
+        }
+        if (victim->is_toughness_indestructible()) {
           break_chance *= 2;
         }
         if ((int) pcg_random_range(0, 1000) < break_chance) {

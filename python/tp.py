@@ -979,8 +979,8 @@ class Tp:
     def set_unused_flag199(self, value):
         my.tp_set_unused_flag199(self, value)
 
-    def set_unused_flag200(self, value):
-        my.tp_set_unused_flag200(self, value)
+    def set_is_toughness_hard(self, value):
+        my.tp_set_is_toughness_hard(self, value)
 
     def set_is_able_to_use_armor(self, value):
         my.tp_set_is_able_to_use_armor(self, value)
@@ -1234,8 +1234,8 @@ class Tp:
     def set_is_enchantable(self, value):
         my.tp_set_is_enchantable(self, value)
 
-    def set_is_indestructible(self, value):
-        my.tp_set_is_indestructible(self, value)
+    def set_is_toughness_indestructible(self, value):
+        my.tp_set_is_toughness_indestructible(self, value)
 
     def set_is_bones(self, value):
         my.tp_set_is_bones(self, value)
@@ -1243,8 +1243,8 @@ class Tp:
     def set_is_allied_with(self, value):
         my.tp_set_is_allied_with(self, value)
 
-    def set_is_soft_body(self, value):
-        my.tp_set_is_soft_body(self, value)
+    def set_is_toughness_soft(self, value):
+        my.tp_set_is_toughness_soft(self, value)
 
     def set_is_foilage(self, value):
         my.tp_set_is_foilage(self, value)

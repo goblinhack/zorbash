@@ -1102,7 +1102,7 @@ int Thing::is_hit(Thingp hitter, bool crit, bool attack_natural, bool attack_poi
   //
   // Allow rocks on the main level to be destoryed; but not in the border
   //
-  if (is_indestructible()) {
+  if (is_toughness_indestructible()) {
     if ((curr_at.x < MAP_BORDER_ROCK) || (curr_at.y < MAP_BORDER_ROCK) ||
         (curr_at.x >= MAP_WIDTH - MAP_BORDER_ROCK) || (curr_at.y >= MAP_HEIGHT - MAP_BORDER_ROCK)) {
       IF_DEBUG2 { hitter->log("Cannot hit: %s is indestructible", to_short_string().c_str()); }

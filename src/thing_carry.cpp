@@ -201,7 +201,7 @@ bool Thing::carry(Thingp item, bool can_equip)
     if (! level->is_starting) {
       if (is_player()) {
         TOPCON("You carry %s.", item->text_the().c_str());
-      } else if (is_monst()) {
+      } else if (is_monst() && ! is_offscreen) {
         if (level->player && (level->tick_created < game->tick_current)) {
           if (get(level->player->get_aip()->can_see_currently.can_see, curr_at.x, curr_at.y)) {
             if (! already_carried) {
@@ -212,7 +212,7 @@ bool Thing::carry(Thingp item, bool can_equip)
           } else if (item->is_food()) {
             TOPCON("You hear a strange slurping sound.");
           } else if (item->is_item_magical()) {
-            TOPCON("You hear a distant evil laugh.");
+            TOPCON("You hear a greedy cackle.");
           }
         }
       }

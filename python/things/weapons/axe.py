@@ -15,6 +15,7 @@ def on_use(owner, item, target, x, y):
 def init_weapon(name, text_name, short_text_name):
     mytp = tp.Tp(name, text_name, short_text_name)
     mytp.set_attack_bonus(10)  # 10, means no bonus
+    mytp.set_breaking_chance_d1000(10)
     mytp.set_collision_check(True)
     mytp.set_collision_hit_priority(10)
     mytp.set_damage_melee_chance_d1000(1000)
@@ -32,10 +33,8 @@ def init_weapon(name, text_name, short_text_name):
     mytp.set_is_described_when_hovering_over(True)
     mytp.set_is_droppable(True)
     mytp.set_is_enchantable(True)
-    mytp.set_breaking_chance_d1000(10)
     mytp.set_is_interesting(True)
     mytp.set_is_item(True)
-    mytp.set_rarity(my.RARITY_UNCOMMON)
     mytp.set_is_loggable(True)
     mytp.set_is_metal(True)
     mytp.set_is_moveable(True)
@@ -47,6 +46,7 @@ def init_weapon(name, text_name, short_text_name):
     mytp.set_item_width(6)
     mytp.set_long_text_description("A gleaming axe. It's edge is hungry.")
     mytp.set_on_use_do("me.on_use()")
+    mytp.set_rarity(my.RARITY_UNCOMMON)
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("Thy choppy means of justice.")
     mytp.set_text_enchant("+1 damage")

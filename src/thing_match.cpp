@@ -399,7 +399,7 @@ bool Thing::matches(const std::string &what)
   if (hunger_is_insatiable() && (what == "hunger_is_insatiable")) {
     return true;
   }
-  if (is_indestructible() && (what == "is_indestructible")) {
+  if (is_toughness_indestructible() && (what == "is_toughness_indestructible")) {
     return true;
   }
   if (is_intelligent() && (what == "is_intelligent")) {
@@ -555,7 +555,7 @@ bool Thing::matches(const std::string &what)
   if (is_smoke() && (what == "is_smoke")) {
     return true;
   }
-  if (is_soft_body() && (what == "is_soft_body")) {
+  if (is_toughness_soft() && (what == "is_toughness_soft")) {
     return true;
   }
   if (is_spawner() && (what == "is_spawner")) {
@@ -1251,10 +1251,9 @@ bool Thing::matches(const std::string &what)
   if (unused_flag199() && (what == "unused_flag199")) {
     return true;
   }
-  if (unused_flag200() && (what == "unused_flag200")) {
+  if (is_toughness_hard() && (what == "is_toughness_hard")) {
     return true;
   }
-
   if (is_red_blooded() && (what == "is_red_blooded")) {
     return true;
   }
@@ -1682,8 +1681,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "hunger_is_insatiable") {
     return &Thing::hunger_is_insatiable;
   }
-  if (what == "is_indestructible") {
-    return &Thing::is_indestructible;
+  if (what == "is_toughness_indestructible") {
+    return &Thing::is_toughness_indestructible;
   }
   if (what == "is_intelligent") {
     return &Thing::is_intelligent;
@@ -1838,8 +1837,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_smoke") {
     return &Thing::is_smoke;
   }
-  if (what == "is_soft_body") {
-    return &Thing::is_soft_body;
+  if (what == "is_toughness_soft") {
+    return &Thing::is_toughness_soft;
   }
   if (what == "is_spawner") {
     return &Thing::is_spawner;
@@ -2534,8 +2533,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag199") {
     return &Thing::unused_flag199;
   }
-  if (what == "unused_flag200") {
-    return &Thing::unused_flag200;
+  if (what == "is_toughness_hard") {
+    return &Thing::is_toughness_hard;
   }
   if (what == "is_red_blooded") {
     return &Thing::is_red_blooded;

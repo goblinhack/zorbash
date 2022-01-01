@@ -74,6 +74,7 @@ def tp_init(name, text_name):
     mytp.set_is_resurrectable(True)
     mytp.set_is_shovable(True)
     mytp.set_is_tickable(True)
+    mytp.set_is_toughness_hard(True)
     mytp.set_is_undead(True)
     mytp.set_long_text_description("A collection of tortured bones, driven to wander the dungeon forever. Or at least until you release them. Such creatures abhor the cleansing powers of water.")
     mytp.set_monst_size(my.MONST_SIZE_NORMAL)

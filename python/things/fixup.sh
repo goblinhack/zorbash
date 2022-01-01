@@ -213,7 +213,7 @@ do
       set_is_heavy \
       set_is_hittable \
       set_is_humanoid \
-      set_is_indestructible \
+      set_is_toughness_indestructible \
       set_is_intelligent \
       set_is_interesting \
       set_is_item \
@@ -270,7 +270,7 @@ do
       set_is_skillstone \
       set_is_slippery \
       set_is_smoke \
-      set_is_soft_body \
+      set_is_toughness_soft \
       set_is_spawner \
       set_is_spider \
       set_is_spiderweb \
@@ -501,7 +501,7 @@ do
       set_unused_flag197 \
       set_unused_flag198 \
       set_unused_flag199 \
-      set_unused_flag200 \
+      set_is_toughness_hard \
       set_on_death_is_open
     do
         grep -q $arg $PAYLOAD

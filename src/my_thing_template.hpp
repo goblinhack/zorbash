@@ -87,7 +87,9 @@ private:
   int _ai_resent_count {};
   int _ai_shove_chance_d1000 {};
   int _ai_wanderer {};
+  int _armor_class {};
   int _attack_blood {};
+  int _attack_bonus {};
   int _attack_eater {};
   int _attack_engulf_chance_d1000 {};
   int _attack_humanoid {};
@@ -102,6 +104,7 @@ private:
   int _blit_off {};
   int _blit_right_off {};
   int _blit_top_off {};
+  int _breaking_chance_d1000 {};
   int _capacity_height {};
   int _capacity_width {};
   int _charge_count {};
@@ -109,8 +112,8 @@ private:
   int _collision_attack {};
   int _collision_check {};
   int _collision_hit_priority {};
+  int _constitution {};
   int _damage_acid_chance_d1000 {};
-  int _damage_natural_attack_chance_d1000 {};
   int _damage_crush_chance_d1000 {};
   int _damage_digest_chance_d1000 {};
   int _damage_energy_chance_d1000 {};
@@ -121,6 +124,7 @@ private:
   int _damage_future4_chance_d1000 {};
   int _damage_lightning_chance_d1000 {};
   int _damage_melee_chance_d1000 {};
+  int _damage_natural_attack_chance_d1000 {};
   int _damage_necrosis_chance_d1000 {};
   int _damage_poison_chance_d1000 {};
   int _damage_received_doubled_from_acid {};
@@ -128,6 +132,7 @@ private:
   int _damage_received_doubled_from_necrosis {};
   int _damage_received_doubled_from_poison {};
   int _damage_received_doubled_from_water {};
+  int _dexterity {};
   int _distance_avoid {};
   int _distance_jump {};
   int _distance_leader_max {};
@@ -202,6 +207,7 @@ private:
   int _is_able_to_see_through_doors {};
   int _is_able_to_shove {};
   int _is_able_to_tire {};
+  int _is_able_to_use_armor {};
   int _is_able_to_use_rings {};
   int _is_able_to_use_wands {};
   int _is_able_to_use_weapons {};
@@ -210,6 +216,7 @@ private:
   int _is_alive_on_end_of_anim {};
   int _is_always_hit {};
   int _is_aquatic {};
+  int _is_armor {};
   int _is_ascend_dungeon {};
   int _is_ascend_sewer {};
   int _is_attackable_by_monst {};
@@ -269,7 +276,6 @@ private:
   int _is_door {};
   int _is_droppable {};
   int _is_dry_grass {};
-  int _is_wet_grass {};
   int _is_enchantable {};
   int _is_enchantstone {};
   int _is_engulfer {};
@@ -283,6 +289,7 @@ private:
   int _is_floating {};
   int _is_floor {};
   int _is_floor_deco {};
+  int _is_flying {};
   int _is_foilage {};
   int _is_food {};
   int _is_food_eater {};
@@ -296,7 +303,6 @@ private:
   int _is_heavy {};
   int _is_hittable {};
   int _is_humanoid {};
-  int _is_indestructible {};
   int _is_intelligent {};
   int _is_interesting {}; // e.g. something edible or a monst or lava
   int _is_item {};
@@ -352,8 +358,8 @@ private:
   int _is_shovable {};
   int _is_skill {};
   int _is_skillstone {};
+  int _is_slippery {};
   int _is_smoke {};
-  int _is_soft_body {};
   int _is_spawner {};
   int _is_spider {};
   int _is_spiderweb {};
@@ -367,13 +373,13 @@ private:
   int _is_tickable {}; // e.g. a monst or player or something moveable
   int _is_tmp_thing {};
   int _is_torch {};
+  int _is_toughness_hard {};
+  int _is_toughness_indestructible {};
+  int _is_toughness_soft {};
   int _is_treasure_chest {};
   int _is_treasure_class_a {};
   int _is_treasure_class_b {};
   int _is_treasure_class_c {};
-  int _is_weapon_class_a {};
-  int _is_weapon_class_b {};
-  int _is_weapon_class_c {};
   int _is_treasure_eater {};
   int _is_treasure_map {};
   int _is_treasure_type {};
@@ -385,6 +391,10 @@ private:
   int _is_wall_dungeon {};
   int _is_wand {};
   int _is_weapon {};
+  int _is_weapon_class_a {};
+  int _is_weapon_class_b {};
+  int _is_weapon_class_c {};
+  int _is_wet_grass {};
   int _is_wooden {};
   int _item_height {};
   int _item_width {};
@@ -398,10 +408,6 @@ private:
   int _rarity {};
   int _spawn_group_radius {};
   int _stamina {};
-  int _armor_class {};
-  int _attack_bonus {};
-  int _constitution {};
-  int _dexterity {};
   int _stats02 {};
   int _stats03 {};
   int _stats04 {};
@@ -422,106 +428,8 @@ private:
   int _unused_chance5_d1000 {};
   int _unused_chance6_d1000 {};
   int _unused_chance7_d1000 {};
-  int _breaking_chance_d1000 {};
   int _unused_flag1 {};
-  int _unused_flag2 {};
-  int _unused_flag3 {};
-  int _unused_flag4 {};
-  int _unused_flag5 {};
-  int _unused_flag6 {};
-  int _unused_flag7 {};
-  int _unused_flag8 {};
-  int _unused_flag9 {};
   int _unused_flag10 {};
-  int _unused_flag11 {};
-  int _unused_flag12 {};
-  int _unused_flag13 {};
-  int _unused_flag14 {};
-  int _unused_flag15 {};
-  int _unused_flag16 {};
-  int _unused_flag17 {};
-  int _unused_flag18 {};
-  int _unused_flag19 {};
-  int _unused_flag20 {};
-  int _unused_flag21 {};
-  int _unused_flag22 {};
-  int _unused_flag23 {};
-  int _unused_flag24 {};
-  int _unused_flag25 {};
-  int _unused_flag26 {};
-  int _unused_flag27 {};
-  int _unused_flag28 {};
-  int _unused_flag29 {};
-  int _unused_flag30 {};
-  int _unused_flag31 {};
-  int _unused_flag32 {};
-  int _unused_flag33 {};
-  int _unused_flag34 {};
-  int _unused_flag35 {};
-  int _unused_flag36 {};
-  int _unused_flag37 {};
-  int _unused_flag38 {};
-  int _unused_flag39 {};
-  int _unused_flag40 {};
-  int _unused_flag41 {};
-  int _unused_flag42 {};
-  int _unused_flag43 {};
-  int _unused_flag44 {};
-  int _unused_flag45 {};
-  int _unused_flag46 {};
-  int _unused_flag47 {};
-  int _unused_flag48 {};
-  int _unused_flag49 {};
-  int _unused_flag50 {};
-  int _unused_flag51 {};
-  int _unused_flag52 {};
-  int _unused_flag53 {};
-  int _unused_flag54 {};
-  int _unused_flag55 {};
-  int _unused_flag56 {};
-  int _unused_flag57 {};
-  int _unused_flag58 {};
-  int _unused_flag59 {};
-  int _unused_flag60 {};
-  int _unused_flag61 {};
-  int _unused_flag62 {};
-  int _unused_flag63 {};
-  int _unused_flag64 {};
-  int _unused_flag65 {};
-  int _unused_flag66 {};
-  int _unused_flag67 {};
-  int _unused_flag68 {};
-  int _unused_flag69 {};
-  int _unused_flag70 {};
-  int _unused_flag71 {};
-  int _unused_flag72 {};
-  int _unused_flag73 {};
-  int _unused_flag74 {};
-  int _unused_flag75 {};
-  int _unused_flag76 {};
-  int _unused_flag77 {};
-  int _unused_flag78 {};
-  int _unused_flag79 {};
-  int _unused_flag80 {};
-  int _unused_flag81 {};
-  int _unused_flag82 {};
-  int _unused_flag83 {};
-  int _unused_flag84 {};
-  int _unused_flag85 {};
-  int _unused_flag86 {};
-  int _unused_flag87 {};
-  int _unused_flag88 {};
-  int _unused_flag89 {};
-  int _unused_flag90 {};
-  int _unused_flag91 {};
-  int _unused_flag92 {};
-  int _unused_flag93 {};
-  int _unused_flag94 {};
-  int _unused_flag95 {};
-  int _unused_flag96 {};
-  int _unused_flag97 {};
-  int _unused_flag98 {};
-  int _unused_flag99 {};
   int _unused_flag100 {};
   int _unused_flag101 {};
   int _unused_flag102 {};
@@ -532,6 +440,7 @@ private:
   int _unused_flag107 {};
   int _unused_flag108 {};
   int _unused_flag109 {};
+  int _unused_flag11 {};
   int _unused_flag110 {};
   int _unused_flag111 {};
   int _unused_flag112 {};
@@ -542,6 +451,7 @@ private:
   int _unused_flag117 {};
   int _unused_flag118 {};
   int _unused_flag119 {};
+  int _unused_flag12 {};
   int _unused_flag120 {};
   int _unused_flag121 {};
   int _unused_flag122 {};
@@ -552,6 +462,7 @@ private:
   int _unused_flag127 {};
   int _unused_flag128 {};
   int _unused_flag129 {};
+  int _unused_flag13 {};
   int _unused_flag130 {};
   int _unused_flag131 {};
   int _unused_flag132 {};
@@ -562,6 +473,7 @@ private:
   int _unused_flag137 {};
   int _unused_flag138 {};
   int _unused_flag139 {};
+  int _unused_flag14 {};
   int _unused_flag140 {};
   int _unused_flag141 {};
   int _unused_flag142 {};
@@ -572,6 +484,7 @@ private:
   int _unused_flag147 {};
   int _unused_flag148 {};
   int _unused_flag149 {};
+  int _unused_flag15 {};
   int _unused_flag150 {};
   int _unused_flag151 {};
   int _unused_flag152 {};
@@ -582,6 +495,7 @@ private:
   int _unused_flag157 {};
   int _unused_flag158 {};
   int _unused_flag159 {};
+  int _unused_flag16 {};
   int _unused_flag160 {};
   int _unused_flag161 {};
   int _unused_flag162 {};
@@ -592,6 +506,7 @@ private:
   int _unused_flag167 {};
   int _unused_flag168 {};
   int _unused_flag169 {};
+  int _unused_flag17 {};
   int _unused_flag170 {};
   int _unused_flag171 {};
   int _unused_flag172 {};
@@ -602,6 +517,7 @@ private:
   int _unused_flag177 {};
   int _unused_flag178 {};
   int _unused_flag179 {};
+  int _unused_flag18 {};
   int _unused_flag180 {};
   int _unused_flag181 {};
   int _unused_flag182 {};
@@ -612,6 +528,7 @@ private:
   int _unused_flag187 {};
   int _unused_flag188 {};
   int _unused_flag189 {};
+  int _unused_flag19 {};
   int _unused_flag190 {};
   int _unused_flag191 {};
   int _unused_flag192 {};
@@ -622,16 +539,98 @@ private:
   int _unused_flag197 {};
   int _unused_flag198 {};
   int _unused_flag199 {};
-  int _unused_flag200 {};
-  int _is_able_to_use_armor {};
-  int _is_slippery {};
-  int _is_armor {};
-  int _is_flying {};
+  int _unused_flag2 {};
+  int _unused_flag20 {};
+  int _unused_flag21 {};
+  int _unused_flag22 {};
+  int _unused_flag23 {};
+  int _unused_flag24 {};
+  int _unused_flag25 {};
+  int _unused_flag26 {};
+  int _unused_flag27 {};
+  int _unused_flag28 {};
+  int _unused_flag29 {};
+  int _unused_flag3 {};
+  int _unused_flag30 {};
+  int _unused_flag31 {};
+  int _unused_flag32 {};
+  int _unused_flag33 {};
+  int _unused_flag34 {};
+  int _unused_flag35 {};
+  int _unused_flag36 {};
+  int _unused_flag37 {};
+  int _unused_flag38 {};
+  int _unused_flag39 {};
+  int _unused_flag4 {};
+  int _unused_flag40 {};
+  int _unused_flag41 {};
+  int _unused_flag42 {};
+  int _unused_flag43 {};
+  int _unused_flag44 {};
+  int _unused_flag45 {};
+  int _unused_flag46 {};
+  int _unused_flag47 {};
+  int _unused_flag48 {};
+  int _unused_flag49 {};
+  int _unused_flag5 {};
+  int _unused_flag50 {};
+  int _unused_flag51 {};
+  int _unused_flag52 {};
+  int _unused_flag53 {};
+  int _unused_flag54 {};
+  int _unused_flag55 {};
+  int _unused_flag56 {};
+  int _unused_flag57 {};
+  int _unused_flag58 {};
+  int _unused_flag59 {};
+  int _unused_flag6 {};
+  int _unused_flag60 {};
+  int _unused_flag61 {};
+  int _unused_flag62 {};
+  int _unused_flag63 {};
+  int _unused_flag64 {};
+  int _unused_flag65 {};
+  int _unused_flag66 {};
+  int _unused_flag67 {};
+  int _unused_flag68 {};
+  int _unused_flag69 {};
+  int _unused_flag7 {};
+  int _unused_flag70 {};
+  int _unused_flag71 {};
+  int _unused_flag72 {};
+  int _unused_flag73 {};
+  int _unused_flag74 {};
+  int _unused_flag75 {};
+  int _unused_flag76 {};
+  int _unused_flag77 {};
+  int _unused_flag78 {};
+  int _unused_flag79 {};
+  int _unused_flag8 {};
+  int _unused_flag80 {};
+  int _unused_flag81 {};
+  int _unused_flag82 {};
+  int _unused_flag83 {};
+  int _unused_flag84 {};
+  int _unused_flag85 {};
+  int _unused_flag86 {};
+  int _unused_flag87 {};
+  int _unused_flag88 {};
+  int _unused_flag89 {};
+  int _unused_flag9 {};
+  int _unused_flag90 {};
+  int _unused_flag91 {};
+  int _unused_flag92 {};
+  int _unused_flag93 {};
+  int _unused_flag94 {};
+  int _unused_flag95 {};
+  int _unused_flag96 {};
+  int _unused_flag97 {};
+  int _unused_flag98 {};
+  int _unused_flag99 {};
   int _weapon_damage {};
   int _weapon_use_distance {};
 
   std::string _damage_acid_dice_str;
-  std::string _damage_natural_attack_dice_str;
   std::string _damage_crush_dice_str;
   std::string _damage_digest_dice_str;
   std::string _damage_energy_dice_str;
@@ -642,6 +641,8 @@ private:
   std::string _damage_future4_dice_str;
   std::string _damage_lightning_dice_str;
   std::string _damage_melee_dice_str;
+  std::string _damage_natural_attack_dice_str;
+  std::string _damage_natural_attack_type;
   std::string _damage_necrosis_dice_str;
   std::string _damage_poison_dice_str;
   std::string _equip_carry_anim;
@@ -658,7 +659,6 @@ private:
   std::string _nutrition_dice_str;
   std::string _on_born_do;
   std::string _on_damage_acid_do;
-  std::string _on_damage_natural_attack_do;
   std::string _on_damage_constitution_do;
   std::string _on_damage_crush_do;
   std::string _on_damage_digest_do;
@@ -670,25 +670,23 @@ private:
   std::string _on_damage_future4_do;
   std::string _on_damage_lightning_do;
   std::string _on_damage_melee_do;
+  std::string _on_damage_natural_attack_do;
   std::string _on_damage_necrosis_do;
   std::string _on_damage_poison_do;
   std::string _on_damage_strength_do;
   std::string _on_death_do;
+  std::string _on_death_of_a_follower_do;
+  std::string _on_death_of_my_leader_do;
   std::string _on_enchant_do;
   std::string _on_equip_do;
   std::string _on_fall_do;
   std::string _on_final_use_do;
   std::string _on_firing_at_something_do;
-  std::string _on_you_are_declared_a_follower_do;
-  std::string _on_death_of_a_follower_do;
   std::string _on_idle_tick_frequency_dice_str;
-  std::string _on_you_are_declared_leader_do;
-  std::string _on_death_of_my_leader_do;
   std::string _on_lifespan_tick_do;
   std::string _on_move_do;
   std::string _on_open_do;
   std::string _on_owner_damage_acid_do;
-  std::string _on_owner_damage_natural_attack_do;
   std::string _on_owner_damage_constitution_do;
   std::string _on_owner_damage_crush_do;
   std::string _on_owner_damage_digest_do;
@@ -700,6 +698,7 @@ private:
   std::string _on_owner_damage_future4_do;
   std::string _on_owner_damage_lightning_do;
   std::string _on_owner_damage_melee_do;
+  std::string _on_owner_damage_natural_attack_do;
   std::string _on_owner_damage_necrosis_do;
   std::string _on_owner_damage_poison_do;
   std::string _on_owner_damage_strength_do;
@@ -709,11 +708,13 @@ private:
   std::string _on_tick_do;
   std::string _on_unequip_do;
   std::string _on_use_do;
+  std::string _on_you_are_declared_a_follower_do;
+  std::string _on_you_are_declared_leader_do;
   std::string _on_you_are_hit_and_now_dead_do;
   std::string _on_you_are_hit_but_still_alive_do;
   std::string _on_you_are_on_fire_do;
-  std::string _on_you_natural_attack_do;
   std::string _on_you_miss_do;
+  std::string _on_you_natural_attack_do;
   std::string _projectile_name;
   std::string _resurrect_dice_str;
   std::string _short_text_name;
@@ -723,18 +724,17 @@ private:
   std::string _str2;
   std::string _str4;
   std::string _text_a_or_an;
-  std::string _text_unused3;
   std::string _text_debuff;
   std::string _text_description;
   std::string _text_enchant;
   std::string _text_hits;
-  std::string _damage_natural_attack_type;
   std::string _text_name;
   std::string _text_skill;
   std::string _text_title;
   std::string _text_unused;
   std::string _text_unused1;
   std::string _text_unused2;
+  std::string _text_unused3;
 
 public:
   Tp(void);
@@ -1171,7 +1171,6 @@ public:
   int is_heavy(void) const { return _is_heavy; }
   int is_hittable(void) const { return _is_hittable; }
   int is_humanoid(void) const { return _is_humanoid; }
-  int is_indestructible(void) const { return _is_indestructible; }
   int is_intelligent(void) const { return _is_intelligent; }
   int is_interesting(void) const { return _is_interesting; }
   int is_item_carrier(void) const { return _is_item_carrier; }
@@ -1228,7 +1227,6 @@ public:
   int is_skill(void) const { return _is_skill; }
   int is_slippery(void) const { return _is_slippery; }
   int is_smoke(void) const { return _is_smoke; }
-  int is_soft_body(void) const { return _is_soft_body; }
   int is_spawner(void) const { return _is_spawner; }
   int is_spider(void) const { return _is_spider; }
   int is_spiderweb(void) const { return _is_spiderweb; }
@@ -1242,6 +1240,9 @@ public:
   int is_tickable(void) const { return _is_tickable; }
   int is_tmp_thing(void) const { return _is_tmp_thing; }
   int is_torch(void) const { return _is_torch; }
+  int is_toughness_hard(void) const { return _is_toughness_hard; }
+  int is_toughness_indestructible(void) const { return _is_toughness_indestructible; }
+  int is_toughness_soft(void) const { return _is_toughness_soft; }
   int is_treasure_chest(void) const { return _is_treasure_chest; }
   int is_treasure_class_a(void) const { return _is_treasure_class_a; }
   int is_treasure_class_b(void) const { return _is_treasure_class_b; }
@@ -1404,7 +1405,6 @@ public:
   int unused_flag199(void) const { return _unused_flag199; }
   int unused_flag19(void) const { return _unused_flag19; }
   int unused_flag1(void) const { return _unused_flag1; }
-  int unused_flag200(void) const { return _unused_flag200; }
   int unused_flag20(void) const { return _unused_flag20; }
   int unused_flag21(void) const { return _unused_flag21; }
   int unused_flag22(void) const { return _unused_flag22; }
@@ -1718,7 +1718,6 @@ public:
   void set_is_heavy(int v) { _is_heavy = v; }
   void set_is_hittable(int v) { _is_hittable = v; }
   void set_is_humanoid(int v) { _is_humanoid = v; }
-  void set_is_indestructible(int v) { _is_indestructible = v; }
   void set_is_intelligent(int v) { _is_intelligent = v; }
   void set_is_interesting(int v) { _is_interesting = v; }
   void set_is_item_carrier(int v) { _is_item_carrier = v; }
@@ -1775,7 +1774,6 @@ public:
   void set_is_skillstone(int v) { _is_skillstone = v; }
   void set_is_slippery(int v) { _is_slippery = v; }
   void set_is_smoke(int v) { _is_smoke = v; }
-  void set_is_soft_body(int v) { _is_soft_body = v; }
   void set_is_spawner(int v) { _is_spawner = v; }
   void set_is_spider(int v) { _is_spider = v; }
   void set_is_spiderweb(int v) { _is_spiderweb = v; }
@@ -1789,6 +1787,9 @@ public:
   void set_is_tickable(int v) { _is_tickable = v; }
   void set_is_tmp_thing(int v) { _is_tmp_thing = v; }
   void set_is_torch(int v) { _is_torch = v; }
+  void set_is_toughness_hard(int v) { _is_toughness_hard = v; }
+  void set_is_toughness_indestructible(int v) { _is_toughness_indestructible = v; }
+  void set_is_toughness_soft(int v) { _is_toughness_soft = v; }
   void set_is_treasure_chest(int v) { _is_treasure_chest = v; }
   void set_is_treasure_class_a(int v) { _is_treasure_class_a = v; }
   void set_is_treasure_class_b(int v) { _is_treasure_class_b = v; }
@@ -2034,7 +2035,6 @@ public:
   void set_unused_flag199(int v) { _unused_flag199 = v; }
   void set_unused_flag19(int v) { _unused_flag19 = v; }
   void set_unused_flag1(int v) { _unused_flag1 = v; }
-  void set_unused_flag200(int v) { _unused_flag200 = v; }
   void set_unused_flag20(int v) { _unused_flag20 = v; }
   void set_unused_flag21(int v) { _unused_flag21 = v; }
   void set_unused_flag22(int v) { _unused_flag22 = v; }

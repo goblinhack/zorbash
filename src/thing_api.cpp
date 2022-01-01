@@ -1039,10 +1039,10 @@ int Thing::hunger_is_insatiable(void)
   return (tp()->hunger_is_insatiable());
 }
 
-int Thing::is_indestructible(void)
+int Thing::is_toughness_indestructible(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_indestructible());
+  return (tp()->is_toughness_indestructible());
 }
 
 int Thing::is_intelligent(void)
@@ -2599,10 +2599,10 @@ int Thing::unused_flag199(void)
   return (tp()->unused_flag199());
 }
 
-int Thing::unused_flag200(void)
+int Thing::is_toughness_hard(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag200());
+  return (tp()->is_toughness_hard());
 }
 
 int Thing::is_red_blooded(void)
@@ -2959,10 +2959,10 @@ int Thing::is_smoke(void)
   return (tp()->is_smoke());
 }
 
-int Thing::is_soft_body(void)
+int Thing::is_toughness_soft(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_soft_body());
+  return (tp()->is_toughness_soft());
 }
 
 int Thing::is_spawner(void)

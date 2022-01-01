@@ -268,7 +268,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
       // No getting stuck in webs
       // Also no cleaners stuck in their own gel
       //
-    } else if (is_soft_body() && level->is_heavy(curr_at.x, curr_at.y)) {
+    } else if (is_toughness_soft() && level->is_heavy(curr_at.x, curr_at.y)) {
       //
       // Makes sure ghosts (or the cursor!) do not get stuck under barrels
       //
