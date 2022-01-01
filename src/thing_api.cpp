@@ -6613,10 +6613,10 @@ const std::string &Thing::text_debuff(void)
   return (tp()->text_debuff());
 }
 
-const std::string &Thing::text_buff(void)
+const std::string &Thing::text_unused3(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->text_buff());
+  return (tp()->text_unused3());
 }
 
 const std::string &Thing::text_title(void)

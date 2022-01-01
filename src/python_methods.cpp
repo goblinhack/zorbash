@@ -1048,7 +1048,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_TP_FUNCTION(str2),
     MY_ADD_PYTHON_TP_FUNCTION(str4),
     MY_ADD_PYTHON_TP_FUNCTION(text_a_or_an),
-    MY_ADD_PYTHON_TP_FUNCTION(text_buff),
+    MY_ADD_PYTHON_TP_FUNCTION(text_unused3),
     MY_ADD_PYTHON_TP_FUNCTION(text_debuff),
     MY_ADD_PYTHON_TP_FUNCTION(text_description),
     MY_ADD_PYTHON_TP_FUNCTION(text_enchant),

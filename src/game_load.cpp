@@ -274,7 +274,7 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
     in >> bits(my.t->_infop);
   }
 
-  my.t->_itemsp            = nullptr;
+  my.t->_itemsp           = nullptr;
   bool monst_item_present = false;
   in >> bits(monst_item_present);
   if (monst_item_present) {

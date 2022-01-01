@@ -4,6 +4,14 @@ import tp
 mytp = None
 
 
+def on_equip(owner, me, x, y):
+    my.thing_buff_add(owner, "buff_slippery")
+
+
+def on_unequip(owner, me, x, y):
+    my.thing_buff_remove(owner, "buff_slippery")
+
+
 def on_enchant(me, x, y):
     owner = my.thing_get_top_owner_id(me)
     if my.thing_is_player(owner):
@@ -27,6 +35,8 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_crushable(False)
     mytp.set_is_described_when_hovering_over(True)
     mytp.set_is_droppable(True)
+    mytp.set_on_equip_do("me.on_equip()")
+    mytp.set_on_unequip_do("me.on_unequip()")
     mytp.set_is_enchantable(True)
     mytp.set_is_item(True)
     mytp.set_is_loggable(True)
@@ -35,7 +45,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_treasure_type(True)
     mytp.set_item_height(4)
     mytp.set_item_width(4)
-    mytp.set_long_text_description("Lathered armor. Not to be confused with leather armor, this armor is leather with a fine soapy film to help you wriggle out of conflicts.")
+    mytp.set_long_text_description("Lathered armor. Not to be confused with leather armor, this armor is leathery with a fine soapy film to help you wriggle out of sticky situations. Apart from that it is mostly useless.")
     mytp.set_normal_placement_rules(True)
     mytp.set_on_enchant_do("me.on_enchant()")
     mytp.set_text_a_or_an("a")

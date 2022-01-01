@@ -124,19 +124,16 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   //
   // Ensure cleaners do not get stuck in themselves!
   //
-  if (! is_sticky() && level->is_sticky(curr_at.x, curr_at.y)) {
-    if (environ_prefers_spiderwebs() && level->is_spiderweb(curr_at.x, curr_at.y)) {
-      //
-      // Ok ot move
-      //
-    } else {
-      if (is_player()) {
-        TOPCON("You try to jump but are stuck fast.");
-      }
-      wobble(25);
-      dbg("You try to jump but are stuck fast.");
-      return false;
+  if (is_stuck()) {
+    //
+    // Ok ot move
+    //
+    if (is_player()) {
+      TOPCON("You try to jump but are stuck fast.");
     }
+    wobble(25);
+    dbg("You try to jump but are stuck fast.");
+    return false;
   }
 
   //

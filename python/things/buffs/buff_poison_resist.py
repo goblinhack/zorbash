@@ -119,7 +119,6 @@ def tp_init(name, text_name):
     mytp.set_on_owner_set_do("me.on_owner_set()")
     mytp.set_on_owner_unset_do("me.on_owner_unset()")
     mytp.set_on_tick_do("me.on_tick()")
-    mytp.set_text_buff("You are mostly poison resistant")
     mytp.set_text_description("Poison resistant buff.")
     mytp.set_tile(tile="buff_poison_resist")
     # mytp.set_z_prio(my.MAP_PRIO_NORMAL) # End marker for fixup.sh

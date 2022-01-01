@@ -84,6 +84,25 @@ bool Thing::buff_remove(Thingp what)
   return true;
 }
 
+bool Thing::buff_find(const std::string &what)
+{
+  TRACE_AND_INDENT();
+
+  if (! maybe_itemsp()) {
+    return false;
+  }
+
+  for (auto id : get_itemsp()->buffs) {
+    auto t = level->thing_find(id);
+    if (t) {
+      if (t->name() == what) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
 void Thing::buff_remove_all(void)
 {
   TRACE_NO_INDENT();

@@ -139,8 +139,8 @@ class Tp:
     def set_text_debuff(self, value):
         my.tp_set_text_debuff(self, value)
 
-    def set_text_buff(self, value):
-        my.tp_set_text_buff(self, value)
+    def set_text_unused3(self, value):
+        my.tp_set_text_unused3(self, value)
 
     def set_str_str4(self, value):
         my.tp_set_str_str4(self, value)

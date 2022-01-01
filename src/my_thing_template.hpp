@@ -524,7 +524,7 @@ private:
   std::string _str2;
   std::string _str4;
   std::string _text_a_or_an;
-  std::string _text_buff;
+  std::string _text_unused3;
   std::string _text_debuff;
   std::string _text_description;
   std::string _text_enchant;
@@ -737,7 +737,7 @@ public:
   const std::string &str1(void) const { return _str1; }
   const std::string &str2(void) const { return _str2; }
   const std::string &str4(void) const { return _str4; }
-  const std::string &text_buff(void) const { return _text_buff; }
+  const std::string &text_unused3(void) const { return _text_unused3; }
   const std::string &text_debuff(void) const { return _text_debuff; }
   const std::string &text_description(void) const { return _text_description; }
   const std::string &text_enchant(void) const { return _text_enchant; }
@@ -1498,7 +1498,7 @@ public:
   void set_str2(const std::string &v) { _str2 = v; }
   void set_str4(const std::string &v) { _str4 = v; }
   void set_text_a_or_an(const std::string &v) { _text_a_or_an = v; }
-  void set_text_buff(const std::string &v) { _text_buff = v; }
+  void set_text_unused3(const std::string &v) { _text_unused3 = v; }
   void set_text_debuff(const std::string &v) { _text_debuff = v; }
   void set_text_description(const std::string &v) { _text_description = v; }
   void set_text_enchant(const std::string &v) { _text_enchant = v; }

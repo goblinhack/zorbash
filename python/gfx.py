@@ -6214,7 +6214,7 @@ def init_tiles1_monsts_and_items():
         ######################################################################
         "",
         "buff_poison_resist",
-        "",
+        "buff_slippery",
         "",
         "",
         "",

@@ -13,7 +13,6 @@ def tp_init(name):
     mytp.set_is_loggable(True)
     mytp.set_is_moveable(True)
     mytp.set_text_a_or_an("a")
-    mytp.set_text_description("Mighty wand.")
     mytp.set_z_depth(my.MAP_DEPTH_EQUIP)
     mytp.set_z_prio(my.MAP_PRIO_IN_FRONT)
 

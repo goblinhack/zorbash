@@ -54,9 +54,9 @@ public:
   Thing_(void);
   ~Thing_(void);
 
-  ThingInfop _infop {};
+  ThingInfop  _infop {};
   ThingItemsp _itemsp {};
-  ThingAip   _aip {};
+  ThingAip    _aip {};
 
   Levelp level {};
 
@@ -256,9 +256,9 @@ public:
   Thingp get_top_manifestor();
   Thingp get_top_owner();
   Thingp get_top_spawned_owner();
-  Thingp in_the_way(const point s, const point e, int x, int y);
   Thingp in_the_way(const point s, const point e);
   Thingp in_the_way_(const point s, const point e, int x0_in, int y0_in, int x1_in, int y1_in, int flag);
+  Thingp in_the_way(const point s, const point e, int x, int y);
   Thingp laser_fire_at(const std::string &item, Thingp target);
   Thingp projectile_fire_at(const std::string &item, Thingp target);
   Thingp spawn_at(const std::string &what);
@@ -303,6 +303,7 @@ public:
   bool buff_add(Tpp what);
   bool buffbox_id_insert(Thingp what);
   bool buffbox_id_remove(Thingp what);
+  bool buff_find(const std::string &);
   bool buff_remove(Thingp it);
   bool buff_remove(Tpp what);
   bool buff_use(Thingp it);
@@ -386,6 +387,7 @@ public:
   bool is_hated_by_me(const point &p);
   bool is_hated_by_me(const Thingp it);
   bool is_on_fire(void);
+  bool is_stuck(void);
   bool is_to_be_avoided(Thingp attacker);
   bool jump_attack(Thingp it = nullptr);
   bool laser_anim_exists(void);
@@ -594,7 +596,7 @@ public:
   const std::string &str1(void);
   const std::string &str2(void);
   const std::string &str4(void);
-  const std::string &text_buff(void);
+  const std::string &text_unused3(void);
   const std::string &text_debuff(void);
   const std::string &text_description(void);
   const std::string &text_enchant(void);
@@ -1678,8 +1680,8 @@ public:
   void on_you_are_declared_leader(void);
   void on_you_are_hit_and_now_dead(Thingp hitter, Thingp real_hitter, bool crit, int dmg);
   void on_you_are_hit_but_still_alive(Thingp hitter, Thingp real_hitter, bool crit, int dmg);
-  void on_you_natural_attack(void);
   void on_you_miss_do(Thingp hitter);
+  void on_you_natural_attack(void);
   void path_shorten(std::vector< point > &path);
   void poisoned(void);
   void poison_tick(void);
@@ -1693,9 +1695,9 @@ public:
   void remove_spawner_owner(void);
   void reset_goal_penalty(Thingp attacker);
   void rest();
-  void resurrect_tick();
   void resurrect();
   void resurrect_forced();
+  void resurrect_tick();
   void rotting(void);
   void score_add(Thingp victim);
   void secret_door_tick();
@@ -1759,17 +1761,17 @@ public:
 
   std::list< Thingp > get_all_followers(void);
 
-  ThingInfop get_or_alloc_infop(void);
+  ThingInfop  get_or_alloc_infop(void);
   ThingItemsp get_or_alloc_itemsp(void);
-  ThingAip   get_or_alloc_aip(void);
+  ThingAip    get_or_alloc_aip(void);
 
-  ThingInfop maybe_infop(void) { return _infop; }
+  ThingInfop  maybe_infop(void) { return _infop; }
   ThingItemsp maybe_itemsp(void) { return _itemsp; }
-  ThingAip   maybe_aip(void) { return _aip; }
+  ThingAip    maybe_aip(void) { return _aip; }
 
-  ThingInfop get_infop(void);
+  ThingInfop  get_infop(void);
   ThingItemsp get_itemsp(void);
-  ThingAip   get_aip(void);
+  ThingAip    get_aip(void);
 
 } Thing;
 

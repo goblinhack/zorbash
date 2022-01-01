@@ -333,7 +333,7 @@ bool Thing::ai_create_path_to_single_goal(int minx, int miny, int maxx, int maxy
     path_shorten(new_move_path);
 
     if (new_move_path.empty()) {
-      if (! is_sticky() && level->is_sticky(curr_at.x, curr_at.y)) {
+      if (is_stuck()) {
         AI_LOG("Stuck in something");
         if (is_player()) {
           game->tick_begin("Try to break free");

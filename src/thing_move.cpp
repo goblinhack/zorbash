@@ -302,40 +302,35 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
         incr_stuck_count();
         return false;
       }
-    } else if (! is_sticky() && level->is_sticky(curr_at.x, curr_at.y)) {
-      //
-      // Makes sure ghosts (or the cursor!) do not get stuck in webs.
-      //
-      if (! is_ethereal() && ! is_cursor() && ! is_cursor_path()) {
-        if (is_player()) {
-          if (level->is_spiderweb(curr_at.x, curr_at.y)) {
-            TOPCON("You are trapped in a web!");
-            game->tick_begin("trapped in a web");
-          } else {
-            TOPCON("You cannot move!");
-            game->tick_begin("trapped in something sticky");
-          }
-          msg(string_sprintf("%%fg=red$!"));
+    } else if (is_stuck()) {
+      if (is_player()) {
+        if (level->is_spiderweb(curr_at.x, curr_at.y)) {
+          TOPCON("You are trapped in a web!");
+          game->tick_begin("trapped in a web");
+        } else {
+          TOPCON("You cannot move!");
+          game->tick_begin("trapped in something sticky");
         }
-        lunge(future_pos);
-
-        //
-        // Shake the web
-        //
-        FOR_ALL_THINGS(level, t, curr_at.x, curr_at.y)
-        {
-          if (t->is_spiderweb()) {
-            t->wobble(10);
-          }
-          if (t->is_player() || t->is_monst()) {
-            t->wobble(20);
-          }
-        }
-        FOR_ALL_THINGS_END()
-
-        incr_stuck_count();
-        return false;
+        msg(string_sprintf("%%fg=red$!"));
       }
+      lunge(future_pos);
+
+      //
+      // Shake the web
+      //
+      FOR_ALL_THINGS(level, t, curr_at.x, curr_at.y)
+      {
+        if (t->is_spiderweb()) {
+          t->wobble(10);
+        }
+        if (t->is_player() || t->is_monst()) {
+          t->wobble(20);
+        }
+      }
+      FOR_ALL_THINGS_END()
+
+      incr_stuck_count();
+      return false;
     }
   }
 
