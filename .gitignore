@@ -6,6 +6,7 @@ build/windows/windows.xml
 data/gfx
 data/sounds
 python/__pycache__
+python/things/armor/__pycache__/
 python/things/buffs/__pycache__
 python/things/debuffs/__pycache__
 python/things/doors/__pycache__
