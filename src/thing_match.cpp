@@ -657,6 +657,604 @@ bool Thing::matches(const std::string &what)
   if (unused_flag1() && (what == "unused_flag1")) {
     return true;
   }
+  if (unused_flag2() && (what == "unused_flag2")) {
+    return true;
+  }
+  if (unused_flag3() && (what == "unused_flag3")) {
+    return true;
+  }
+  if (unused_flag4() && (what == "unused_flag4")) {
+    return true;
+  }
+  if (unused_flag5() && (what == "unused_flag5")) {
+    return true;
+  }
+  if (unused_flag6() && (what == "unused_flag6")) {
+    return true;
+  }
+  if (unused_flag7() && (what == "unused_flag7")) {
+    return true;
+  }
+  if (unused_flag8() && (what == "unused_flag8")) {
+    return true;
+  }
+  if (unused_flag9() && (what == "unused_flag9")) {
+    return true;
+  }
+  if (unused_flag10() && (what == "unused_flag10")) {
+    return true;
+  }
+  if (unused_flag11() && (what == "unused_flag11")) {
+    return true;
+  }
+  if (unused_flag12() && (what == "unused_flag12")) {
+    return true;
+  }
+  if (unused_flag13() && (what == "unused_flag13")) {
+    return true;
+  }
+  if (unused_flag14() && (what == "unused_flag14")) {
+    return true;
+  }
+  if (unused_flag15() && (what == "unused_flag15")) {
+    return true;
+  }
+  if (unused_flag16() && (what == "unused_flag16")) {
+    return true;
+  }
+  if (unused_flag17() && (what == "unused_flag17")) {
+    return true;
+  }
+  if (unused_flag18() && (what == "unused_flag18")) {
+    return true;
+  }
+  if (unused_flag19() && (what == "unused_flag19")) {
+    return true;
+  }
+  if (unused_flag20() && (what == "unused_flag20")) {
+    return true;
+  }
+  if (unused_flag21() && (what == "unused_flag21")) {
+    return true;
+  }
+  if (unused_flag22() && (what == "unused_flag22")) {
+    return true;
+  }
+  if (unused_flag23() && (what == "unused_flag23")) {
+    return true;
+  }
+  if (unused_flag24() && (what == "unused_flag24")) {
+    return true;
+  }
+  if (unused_flag25() && (what == "unused_flag25")) {
+    return true;
+  }
+  if (unused_flag26() && (what == "unused_flag26")) {
+    return true;
+  }
+  if (unused_flag27() && (what == "unused_flag27")) {
+    return true;
+  }
+  if (unused_flag28() && (what == "unused_flag28")) {
+    return true;
+  }
+  if (unused_flag29() && (what == "unused_flag29")) {
+    return true;
+  }
+  if (unused_flag30() && (what == "unused_flag30")) {
+    return true;
+  }
+  if (unused_flag31() && (what == "unused_flag31")) {
+    return true;
+  }
+  if (unused_flag32() && (what == "unused_flag32")) {
+    return true;
+  }
+  if (unused_flag33() && (what == "unused_flag33")) {
+    return true;
+  }
+  if (unused_flag34() && (what == "unused_flag34")) {
+    return true;
+  }
+  if (unused_flag35() && (what == "unused_flag35")) {
+    return true;
+  }
+  if (unused_flag36() && (what == "unused_flag36")) {
+    return true;
+  }
+  if (unused_flag37() && (what == "unused_flag37")) {
+    return true;
+  }
+  if (unused_flag38() && (what == "unused_flag38")) {
+    return true;
+  }
+  if (unused_flag39() && (what == "unused_flag39")) {
+    return true;
+  }
+  if (unused_flag40() && (what == "unused_flag40")) {
+    return true;
+  }
+  if (unused_flag41() && (what == "unused_flag41")) {
+    return true;
+  }
+  if (unused_flag42() && (what == "unused_flag42")) {
+    return true;
+  }
+  if (unused_flag43() && (what == "unused_flag43")) {
+    return true;
+  }
+  if (unused_flag44() && (what == "unused_flag44")) {
+    return true;
+  }
+  if (unused_flag45() && (what == "unused_flag45")) {
+    return true;
+  }
+  if (unused_flag46() && (what == "unused_flag46")) {
+    return true;
+  }
+  if (unused_flag47() && (what == "unused_flag47")) {
+    return true;
+  }
+  if (unused_flag48() && (what == "unused_flag48")) {
+    return true;
+  }
+  if (unused_flag49() && (what == "unused_flag49")) {
+    return true;
+  }
+  if (unused_flag50() && (what == "unused_flag50")) {
+    return true;
+  }
+  if (unused_flag51() && (what == "unused_flag51")) {
+    return true;
+  }
+  if (unused_flag52() && (what == "unused_flag52")) {
+    return true;
+  }
+  if (unused_flag53() && (what == "unused_flag53")) {
+    return true;
+  }
+  if (unused_flag54() && (what == "unused_flag54")) {
+    return true;
+  }
+  if (unused_flag55() && (what == "unused_flag55")) {
+    return true;
+  }
+  if (unused_flag56() && (what == "unused_flag56")) {
+    return true;
+  }
+  if (unused_flag57() && (what == "unused_flag57")) {
+    return true;
+  }
+  if (unused_flag58() && (what == "unused_flag58")) {
+    return true;
+  }
+  if (unused_flag59() && (what == "unused_flag59")) {
+    return true;
+  }
+  if (unused_flag60() && (what == "unused_flag60")) {
+    return true;
+  }
+  if (unused_flag61() && (what == "unused_flag61")) {
+    return true;
+  }
+  if (unused_flag62() && (what == "unused_flag62")) {
+    return true;
+  }
+  if (unused_flag63() && (what == "unused_flag63")) {
+    return true;
+  }
+  if (unused_flag64() && (what == "unused_flag64")) {
+    return true;
+  }
+  if (unused_flag65() && (what == "unused_flag65")) {
+    return true;
+  }
+  if (unused_flag66() && (what == "unused_flag66")) {
+    return true;
+  }
+  if (unused_flag67() && (what == "unused_flag67")) {
+    return true;
+  }
+  if (unused_flag68() && (what == "unused_flag68")) {
+    return true;
+  }
+  if (unused_flag69() && (what == "unused_flag69")) {
+    return true;
+  }
+  if (unused_flag70() && (what == "unused_flag70")) {
+    return true;
+  }
+  if (unused_flag71() && (what == "unused_flag71")) {
+    return true;
+  }
+  if (unused_flag72() && (what == "unused_flag72")) {
+    return true;
+  }
+  if (unused_flag73() && (what == "unused_flag73")) {
+    return true;
+  }
+  if (unused_flag74() && (what == "unused_flag74")) {
+    return true;
+  }
+  if (unused_flag75() && (what == "unused_flag75")) {
+    return true;
+  }
+  if (unused_flag76() && (what == "unused_flag76")) {
+    return true;
+  }
+  if (unused_flag77() && (what == "unused_flag77")) {
+    return true;
+  }
+  if (unused_flag78() && (what == "unused_flag78")) {
+    return true;
+  }
+  if (unused_flag79() && (what == "unused_flag79")) {
+    return true;
+  }
+  if (unused_flag80() && (what == "unused_flag80")) {
+    return true;
+  }
+  if (unused_flag81() && (what == "unused_flag81")) {
+    return true;
+  }
+  if (unused_flag82() && (what == "unused_flag82")) {
+    return true;
+  }
+  if (unused_flag83() && (what == "unused_flag83")) {
+    return true;
+  }
+  if (unused_flag84() && (what == "unused_flag84")) {
+    return true;
+  }
+  if (unused_flag85() && (what == "unused_flag85")) {
+    return true;
+  }
+  if (unused_flag86() && (what == "unused_flag86")) {
+    return true;
+  }
+  if (unused_flag87() && (what == "unused_flag87")) {
+    return true;
+  }
+  if (unused_flag88() && (what == "unused_flag88")) {
+    return true;
+  }
+  if (unused_flag89() && (what == "unused_flag89")) {
+    return true;
+  }
+  if (unused_flag90() && (what == "unused_flag90")) {
+    return true;
+  }
+  if (unused_flag91() && (what == "unused_flag91")) {
+    return true;
+  }
+  if (unused_flag92() && (what == "unused_flag92")) {
+    return true;
+  }
+  if (unused_flag93() && (what == "unused_flag93")) {
+    return true;
+  }
+  if (unused_flag94() && (what == "unused_flag94")) {
+    return true;
+  }
+  if (unused_flag95() && (what == "unused_flag95")) {
+    return true;
+  }
+  if (unused_flag96() && (what == "unused_flag96")) {
+    return true;
+  }
+  if (unused_flag97() && (what == "unused_flag97")) {
+    return true;
+  }
+  if (unused_flag98() && (what == "unused_flag98")) {
+    return true;
+  }
+  if (unused_flag99() && (what == "unused_flag99")) {
+    return true;
+  }
+  if (unused_flag100() && (what == "unused_flag100")) {
+    return true;
+  }
+  if (unused_flag101() && (what == "unused_flag101")) {
+    return true;
+  }
+  if (unused_flag102() && (what == "unused_flag102")) {
+    return true;
+  }
+  if (unused_flag103() && (what == "unused_flag103")) {
+    return true;
+  }
+  if (unused_flag104() && (what == "unused_flag104")) {
+    return true;
+  }
+  if (unused_flag105() && (what == "unused_flag105")) {
+    return true;
+  }
+  if (unused_flag106() && (what == "unused_flag106")) {
+    return true;
+  }
+  if (unused_flag107() && (what == "unused_flag107")) {
+    return true;
+  }
+  if (unused_flag108() && (what == "unused_flag108")) {
+    return true;
+  }
+  if (unused_flag109() && (what == "unused_flag109")) {
+    return true;
+  }
+  if (unused_flag110() && (what == "unused_flag110")) {
+    return true;
+  }
+  if (unused_flag111() && (what == "unused_flag111")) {
+    return true;
+  }
+  if (unused_flag112() && (what == "unused_flag112")) {
+    return true;
+  }
+  if (unused_flag113() && (what == "unused_flag113")) {
+    return true;
+  }
+  if (unused_flag114() && (what == "unused_flag114")) {
+    return true;
+  }
+  if (unused_flag115() && (what == "unused_flag115")) {
+    return true;
+  }
+  if (unused_flag116() && (what == "unused_flag116")) {
+    return true;
+  }
+  if (unused_flag117() && (what == "unused_flag117")) {
+    return true;
+  }
+  if (unused_flag118() && (what == "unused_flag118")) {
+    return true;
+  }
+  if (unused_flag119() && (what == "unused_flag119")) {
+    return true;
+  }
+  if (unused_flag120() && (what == "unused_flag120")) {
+    return true;
+  }
+  if (unused_flag121() && (what == "unused_flag121")) {
+    return true;
+  }
+  if (unused_flag122() && (what == "unused_flag122")) {
+    return true;
+  }
+  if (unused_flag123() && (what == "unused_flag123")) {
+    return true;
+  }
+  if (unused_flag124() && (what == "unused_flag124")) {
+    return true;
+  }
+  if (unused_flag125() && (what == "unused_flag125")) {
+    return true;
+  }
+  if (unused_flag126() && (what == "unused_flag126")) {
+    return true;
+  }
+  if (unused_flag127() && (what == "unused_flag127")) {
+    return true;
+  }
+  if (unused_flag128() && (what == "unused_flag128")) {
+    return true;
+  }
+  if (unused_flag129() && (what == "unused_flag129")) {
+    return true;
+  }
+  if (unused_flag130() && (what == "unused_flag130")) {
+    return true;
+  }
+  if (unused_flag131() && (what == "unused_flag131")) {
+    return true;
+  }
+  if (unused_flag132() && (what == "unused_flag132")) {
+    return true;
+  }
+  if (unused_flag133() && (what == "unused_flag133")) {
+    return true;
+  }
+  if (unused_flag134() && (what == "unused_flag134")) {
+    return true;
+  }
+  if (unused_flag135() && (what == "unused_flag135")) {
+    return true;
+  }
+  if (unused_flag136() && (what == "unused_flag136")) {
+    return true;
+  }
+  if (unused_flag137() && (what == "unused_flag137")) {
+    return true;
+  }
+  if (unused_flag138() && (what == "unused_flag138")) {
+    return true;
+  }
+  if (unused_flag139() && (what == "unused_flag139")) {
+    return true;
+  }
+  if (unused_flag140() && (what == "unused_flag140")) {
+    return true;
+  }
+  if (unused_flag141() && (what == "unused_flag141")) {
+    return true;
+  }
+  if (unused_flag142() && (what == "unused_flag142")) {
+    return true;
+  }
+  if (unused_flag143() && (what == "unused_flag143")) {
+    return true;
+  }
+  if (unused_flag144() && (what == "unused_flag144")) {
+    return true;
+  }
+  if (unused_flag145() && (what == "unused_flag145")) {
+    return true;
+  }
+  if (unused_flag146() && (what == "unused_flag146")) {
+    return true;
+  }
+  if (unused_flag147() && (what == "unused_flag147")) {
+    return true;
+  }
+  if (unused_flag148() && (what == "unused_flag148")) {
+    return true;
+  }
+  if (unused_flag149() && (what == "unused_flag149")) {
+    return true;
+  }
+  if (unused_flag150() && (what == "unused_flag150")) {
+    return true;
+  }
+  if (unused_flag151() && (what == "unused_flag151")) {
+    return true;
+  }
+  if (unused_flag152() && (what == "unused_flag152")) {
+    return true;
+  }
+  if (unused_flag153() && (what == "unused_flag153")) {
+    return true;
+  }
+  if (unused_flag154() && (what == "unused_flag154")) {
+    return true;
+  }
+  if (unused_flag155() && (what == "unused_flag155")) {
+    return true;
+  }
+  if (unused_flag156() && (what == "unused_flag156")) {
+    return true;
+  }
+  if (unused_flag157() && (what == "unused_flag157")) {
+    return true;
+  }
+  if (unused_flag158() && (what == "unused_flag158")) {
+    return true;
+  }
+  if (unused_flag159() && (what == "unused_flag159")) {
+    return true;
+  }
+  if (unused_flag160() && (what == "unused_flag160")) {
+    return true;
+  }
+  if (unused_flag161() && (what == "unused_flag161")) {
+    return true;
+  }
+  if (unused_flag162() && (what == "unused_flag162")) {
+    return true;
+  }
+  if (unused_flag163() && (what == "unused_flag163")) {
+    return true;
+  }
+  if (unused_flag164() && (what == "unused_flag164")) {
+    return true;
+  }
+  if (unused_flag165() && (what == "unused_flag165")) {
+    return true;
+  }
+  if (unused_flag166() && (what == "unused_flag166")) {
+    return true;
+  }
+  if (unused_flag167() && (what == "unused_flag167")) {
+    return true;
+  }
+  if (unused_flag168() && (what == "unused_flag168")) {
+    return true;
+  }
+  if (unused_flag169() && (what == "unused_flag169")) {
+    return true;
+  }
+  if (unused_flag170() && (what == "unused_flag170")) {
+    return true;
+  }
+  if (unused_flag171() && (what == "unused_flag171")) {
+    return true;
+  }
+  if (unused_flag172() && (what == "unused_flag172")) {
+    return true;
+  }
+  if (unused_flag173() && (what == "unused_flag173")) {
+    return true;
+  }
+  if (unused_flag174() && (what == "unused_flag174")) {
+    return true;
+  }
+  if (unused_flag175() && (what == "unused_flag175")) {
+    return true;
+  }
+  if (unused_flag176() && (what == "unused_flag176")) {
+    return true;
+  }
+  if (unused_flag177() && (what == "unused_flag177")) {
+    return true;
+  }
+  if (unused_flag178() && (what == "unused_flag178")) {
+    return true;
+  }
+  if (unused_flag179() && (what == "unused_flag179")) {
+    return true;
+  }
+  if (unused_flag180() && (what == "unused_flag180")) {
+    return true;
+  }
+  if (unused_flag181() && (what == "unused_flag181")) {
+    return true;
+  }
+  if (unused_flag182() && (what == "unused_flag182")) {
+    return true;
+  }
+  if (unused_flag183() && (what == "unused_flag183")) {
+    return true;
+  }
+  if (unused_flag184() && (what == "unused_flag184")) {
+    return true;
+  }
+  if (unused_flag185() && (what == "unused_flag185")) {
+    return true;
+  }
+  if (unused_flag186() && (what == "unused_flag186")) {
+    return true;
+  }
+  if (unused_flag187() && (what == "unused_flag187")) {
+    return true;
+  }
+  if (unused_flag188() && (what == "unused_flag188")) {
+    return true;
+  }
+  if (unused_flag189() && (what == "unused_flag189")) {
+    return true;
+  }
+  if (unused_flag190() && (what == "unused_flag190")) {
+    return true;
+  }
+  if (unused_flag191() && (what == "unused_flag191")) {
+    return true;
+  }
+  if (unused_flag192() && (what == "unused_flag192")) {
+    return true;
+  }
+  if (unused_flag193() && (what == "unused_flag193")) {
+    return true;
+  }
+  if (unused_flag194() && (what == "unused_flag194")) {
+    return true;
+  }
+  if (unused_flag195() && (what == "unused_flag195")) {
+    return true;
+  }
+  if (unused_flag196() && (what == "unused_flag196")) {
+    return true;
+  }
+  if (unused_flag197() && (what == "unused_flag197")) {
+    return true;
+  }
+  if (unused_flag198() && (what == "unused_flag198")) {
+    return true;
+  }
+  if (unused_flag199() && (what == "unused_flag199")) {
+    return true;
+  }
+  if (unused_flag200() && (what == "unused_flag200")) {
+    return true;
+  }
+
   if (is_red_blooded() && (what == "is_red_blooded")) {
     return true;
   }
@@ -1341,6 +1939,603 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   }
   if (what == "unused_flag1") {
     return &Thing::unused_flag1;
+  }
+  if (what == "unused_flag2") {
+    return &Thing::unused_flag2;
+  }
+  if (what == "unused_flag3") {
+    return &Thing::unused_flag3;
+  }
+  if (what == "unused_flag4") {
+    return &Thing::unused_flag4;
+  }
+  if (what == "unused_flag5") {
+    return &Thing::unused_flag5;
+  }
+  if (what == "unused_flag6") {
+    return &Thing::unused_flag6;
+  }
+  if (what == "unused_flag7") {
+    return &Thing::unused_flag7;
+  }
+  if (what == "unused_flag8") {
+    return &Thing::unused_flag8;
+  }
+  if (what == "unused_flag9") {
+    return &Thing::unused_flag9;
+  }
+  if (what == "unused_flag10") {
+    return &Thing::unused_flag10;
+  }
+  if (what == "unused_flag11") {
+    return &Thing::unused_flag11;
+  }
+  if (what == "unused_flag12") {
+    return &Thing::unused_flag12;
+  }
+  if (what == "unused_flag13") {
+    return &Thing::unused_flag13;
+  }
+  if (what == "unused_flag14") {
+    return &Thing::unused_flag14;
+  }
+  if (what == "unused_flag15") {
+    return &Thing::unused_flag15;
+  }
+  if (what == "unused_flag16") {
+    return &Thing::unused_flag16;
+  }
+  if (what == "unused_flag17") {
+    return &Thing::unused_flag17;
+  }
+  if (what == "unused_flag18") {
+    return &Thing::unused_flag18;
+  }
+  if (what == "unused_flag19") {
+    return &Thing::unused_flag19;
+  }
+  if (what == "unused_flag20") {
+    return &Thing::unused_flag20;
+  }
+  if (what == "unused_flag21") {
+    return &Thing::unused_flag21;
+  }
+  if (what == "unused_flag22") {
+    return &Thing::unused_flag22;
+  }
+  if (what == "unused_flag23") {
+    return &Thing::unused_flag23;
+  }
+  if (what == "unused_flag24") {
+    return &Thing::unused_flag24;
+  }
+  if (what == "unused_flag25") {
+    return &Thing::unused_flag25;
+  }
+  if (what == "unused_flag26") {
+    return &Thing::unused_flag26;
+  }
+  if (what == "unused_flag27") {
+    return &Thing::unused_flag27;
+  }
+  if (what == "unused_flag28") {
+    return &Thing::unused_flag28;
+  }
+  if (what == "unused_flag29") {
+    return &Thing::unused_flag29;
+  }
+  if (what == "unused_flag30") {
+    return &Thing::unused_flag30;
+  }
+  if (what == "unused_flag31") {
+    return &Thing::unused_flag31;
+  }
+  if (what == "unused_flag32") {
+    return &Thing::unused_flag32;
+  }
+  if (what == "unused_flag33") {
+    return &Thing::unused_flag33;
+  }
+  if (what == "unused_flag34") {
+    return &Thing::unused_flag34;
+  }
+  if (what == "unused_flag35") {
+    return &Thing::unused_flag35;
+  }
+  if (what == "unused_flag36") {
+    return &Thing::unused_flag36;
+  }
+  if (what == "unused_flag37") {
+    return &Thing::unused_flag37;
+  }
+  if (what == "unused_flag38") {
+    return &Thing::unused_flag38;
+  }
+  if (what == "unused_flag39") {
+    return &Thing::unused_flag39;
+  }
+  if (what == "unused_flag40") {
+    return &Thing::unused_flag40;
+  }
+  if (what == "unused_flag41") {
+    return &Thing::unused_flag41;
+  }
+  if (what == "unused_flag42") {
+    return &Thing::unused_flag42;
+  }
+  if (what == "unused_flag43") {
+    return &Thing::unused_flag43;
+  }
+  if (what == "unused_flag44") {
+    return &Thing::unused_flag44;
+  }
+  if (what == "unused_flag45") {
+    return &Thing::unused_flag45;
+  }
+  if (what == "unused_flag46") {
+    return &Thing::unused_flag46;
+  }
+  if (what == "unused_flag47") {
+    return &Thing::unused_flag47;
+  }
+  if (what == "unused_flag48") {
+    return &Thing::unused_flag48;
+  }
+  if (what == "unused_flag49") {
+    return &Thing::unused_flag49;
+  }
+  if (what == "unused_flag50") {
+    return &Thing::unused_flag50;
+  }
+  if (what == "unused_flag51") {
+    return &Thing::unused_flag51;
+  }
+  if (what == "unused_flag52") {
+    return &Thing::unused_flag52;
+  }
+  if (what == "unused_flag53") {
+    return &Thing::unused_flag53;
+  }
+  if (what == "unused_flag54") {
+    return &Thing::unused_flag54;
+  }
+  if (what == "unused_flag55") {
+    return &Thing::unused_flag55;
+  }
+  if (what == "unused_flag56") {
+    return &Thing::unused_flag56;
+  }
+  if (what == "unused_flag57") {
+    return &Thing::unused_flag57;
+  }
+  if (what == "unused_flag58") {
+    return &Thing::unused_flag58;
+  }
+  if (what == "unused_flag59") {
+    return &Thing::unused_flag59;
+  }
+  if (what == "unused_flag60") {
+    return &Thing::unused_flag60;
+  }
+  if (what == "unused_flag61") {
+    return &Thing::unused_flag61;
+  }
+  if (what == "unused_flag62") {
+    return &Thing::unused_flag62;
+  }
+  if (what == "unused_flag63") {
+    return &Thing::unused_flag63;
+  }
+  if (what == "unused_flag64") {
+    return &Thing::unused_flag64;
+  }
+  if (what == "unused_flag65") {
+    return &Thing::unused_flag65;
+  }
+  if (what == "unused_flag66") {
+    return &Thing::unused_flag66;
+  }
+  if (what == "unused_flag67") {
+    return &Thing::unused_flag67;
+  }
+  if (what == "unused_flag68") {
+    return &Thing::unused_flag68;
+  }
+  if (what == "unused_flag69") {
+    return &Thing::unused_flag69;
+  }
+  if (what == "unused_flag70") {
+    return &Thing::unused_flag70;
+  }
+  if (what == "unused_flag71") {
+    return &Thing::unused_flag71;
+  }
+  if (what == "unused_flag72") {
+    return &Thing::unused_flag72;
+  }
+  if (what == "unused_flag73") {
+    return &Thing::unused_flag73;
+  }
+  if (what == "unused_flag74") {
+    return &Thing::unused_flag74;
+  }
+  if (what == "unused_flag75") {
+    return &Thing::unused_flag75;
+  }
+  if (what == "unused_flag76") {
+    return &Thing::unused_flag76;
+  }
+  if (what == "unused_flag77") {
+    return &Thing::unused_flag77;
+  }
+  if (what == "unused_flag78") {
+    return &Thing::unused_flag78;
+  }
+  if (what == "unused_flag79") {
+    return &Thing::unused_flag79;
+  }
+  if (what == "unused_flag80") {
+    return &Thing::unused_flag80;
+  }
+  if (what == "unused_flag81") {
+    return &Thing::unused_flag81;
+  }
+  if (what == "unused_flag82") {
+    return &Thing::unused_flag82;
+  }
+  if (what == "unused_flag83") {
+    return &Thing::unused_flag83;
+  }
+  if (what == "unused_flag84") {
+    return &Thing::unused_flag84;
+  }
+  if (what == "unused_flag85") {
+    return &Thing::unused_flag85;
+  }
+  if (what == "unused_flag86") {
+    return &Thing::unused_flag86;
+  }
+  if (what == "unused_flag87") {
+    return &Thing::unused_flag87;
+  }
+  if (what == "unused_flag88") {
+    return &Thing::unused_flag88;
+  }
+  if (what == "unused_flag89") {
+    return &Thing::unused_flag89;
+  }
+  if (what == "unused_flag90") {
+    return &Thing::unused_flag90;
+  }
+  if (what == "unused_flag91") {
+    return &Thing::unused_flag91;
+  }
+  if (what == "unused_flag92") {
+    return &Thing::unused_flag92;
+  }
+  if (what == "unused_flag93") {
+    return &Thing::unused_flag93;
+  }
+  if (what == "unused_flag94") {
+    return &Thing::unused_flag94;
+  }
+  if (what == "unused_flag95") {
+    return &Thing::unused_flag95;
+  }
+  if (what == "unused_flag96") {
+    return &Thing::unused_flag96;
+  }
+  if (what == "unused_flag97") {
+    return &Thing::unused_flag97;
+  }
+  if (what == "unused_flag98") {
+    return &Thing::unused_flag98;
+  }
+  if (what == "unused_flag99") {
+    return &Thing::unused_flag99;
+  }
+  if (what == "unused_flag100") {
+    return &Thing::unused_flag100;
+  }
+  if (what == "unused_flag101") {
+    return &Thing::unused_flag101;
+  }
+  if (what == "unused_flag102") {
+    return &Thing::unused_flag102;
+  }
+  if (what == "unused_flag103") {
+    return &Thing::unused_flag103;
+  }
+  if (what == "unused_flag104") {
+    return &Thing::unused_flag104;
+  }
+  if (what == "unused_flag105") {
+    return &Thing::unused_flag105;
+  }
+  if (what == "unused_flag106") {
+    return &Thing::unused_flag106;
+  }
+  if (what == "unused_flag107") {
+    return &Thing::unused_flag107;
+  }
+  if (what == "unused_flag108") {
+    return &Thing::unused_flag108;
+  }
+  if (what == "unused_flag109") {
+    return &Thing::unused_flag109;
+  }
+  if (what == "unused_flag110") {
+    return &Thing::unused_flag110;
+  }
+  if (what == "unused_flag111") {
+    return &Thing::unused_flag111;
+  }
+  if (what == "unused_flag112") {
+    return &Thing::unused_flag112;
+  }
+  if (what == "unused_flag113") {
+    return &Thing::unused_flag113;
+  }
+  if (what == "unused_flag114") {
+    return &Thing::unused_flag114;
+  }
+  if (what == "unused_flag115") {
+    return &Thing::unused_flag115;
+  }
+  if (what == "unused_flag116") {
+    return &Thing::unused_flag116;
+  }
+  if (what == "unused_flag117") {
+    return &Thing::unused_flag117;
+  }
+  if (what == "unused_flag118") {
+    return &Thing::unused_flag118;
+  }
+  if (what == "unused_flag119") {
+    return &Thing::unused_flag119;
+  }
+  if (what == "unused_flag120") {
+    return &Thing::unused_flag120;
+  }
+  if (what == "unused_flag121") {
+    return &Thing::unused_flag121;
+  }
+  if (what == "unused_flag122") {
+    return &Thing::unused_flag122;
+  }
+  if (what == "unused_flag123") {
+    return &Thing::unused_flag123;
+  }
+  if (what == "unused_flag124") {
+    return &Thing::unused_flag124;
+  }
+  if (what == "unused_flag125") {
+    return &Thing::unused_flag125;
+  }
+  if (what == "unused_flag126") {
+    return &Thing::unused_flag126;
+  }
+  if (what == "unused_flag127") {
+    return &Thing::unused_flag127;
+  }
+  if (what == "unused_flag128") {
+    return &Thing::unused_flag128;
+  }
+  if (what == "unused_flag129") {
+    return &Thing::unused_flag129;
+  }
+  if (what == "unused_flag130") {
+    return &Thing::unused_flag130;
+  }
+  if (what == "unused_flag131") {
+    return &Thing::unused_flag131;
+  }
+  if (what == "unused_flag132") {
+    return &Thing::unused_flag132;
+  }
+  if (what == "unused_flag133") {
+    return &Thing::unused_flag133;
+  }
+  if (what == "unused_flag134") {
+    return &Thing::unused_flag134;
+  }
+  if (what == "unused_flag135") {
+    return &Thing::unused_flag135;
+  }
+  if (what == "unused_flag136") {
+    return &Thing::unused_flag136;
+  }
+  if (what == "unused_flag137") {
+    return &Thing::unused_flag137;
+  }
+  if (what == "unused_flag138") {
+    return &Thing::unused_flag138;
+  }
+  if (what == "unused_flag139") {
+    return &Thing::unused_flag139;
+  }
+  if (what == "unused_flag140") {
+    return &Thing::unused_flag140;
+  }
+  if (what == "unused_flag141") {
+    return &Thing::unused_flag141;
+  }
+  if (what == "unused_flag142") {
+    return &Thing::unused_flag142;
+  }
+  if (what == "unused_flag143") {
+    return &Thing::unused_flag143;
+  }
+  if (what == "unused_flag144") {
+    return &Thing::unused_flag144;
+  }
+  if (what == "unused_flag145") {
+    return &Thing::unused_flag145;
+  }
+  if (what == "unused_flag146") {
+    return &Thing::unused_flag146;
+  }
+  if (what == "unused_flag147") {
+    return &Thing::unused_flag147;
+  }
+  if (what == "unused_flag148") {
+    return &Thing::unused_flag148;
+  }
+  if (what == "unused_flag149") {
+    return &Thing::unused_flag149;
+  }
+  if (what == "unused_flag150") {
+    return &Thing::unused_flag150;
+  }
+  if (what == "unused_flag151") {
+    return &Thing::unused_flag151;
+  }
+  if (what == "unused_flag152") {
+    return &Thing::unused_flag152;
+  }
+  if (what == "unused_flag153") {
+    return &Thing::unused_flag153;
+  }
+  if (what == "unused_flag154") {
+    return &Thing::unused_flag154;
+  }
+  if (what == "unused_flag155") {
+    return &Thing::unused_flag155;
+  }
+  if (what == "unused_flag156") {
+    return &Thing::unused_flag156;
+  }
+  if (what == "unused_flag157") {
+    return &Thing::unused_flag157;
+  }
+  if (what == "unused_flag158") {
+    return &Thing::unused_flag158;
+  }
+  if (what == "unused_flag159") {
+    return &Thing::unused_flag159;
+  }
+  if (what == "unused_flag160") {
+    return &Thing::unused_flag160;
+  }
+  if (what == "unused_flag161") {
+    return &Thing::unused_flag161;
+  }
+  if (what == "unused_flag162") {
+    return &Thing::unused_flag162;
+  }
+  if (what == "unused_flag163") {
+    return &Thing::unused_flag163;
+  }
+  if (what == "unused_flag164") {
+    return &Thing::unused_flag164;
+  }
+  if (what == "unused_flag165") {
+    return &Thing::unused_flag165;
+  }
+  if (what == "unused_flag166") {
+    return &Thing::unused_flag166;
+  }
+  if (what == "unused_flag167") {
+    return &Thing::unused_flag167;
+  }
+  if (what == "unused_flag168") {
+    return &Thing::unused_flag168;
+  }
+  if (what == "unused_flag169") {
+    return &Thing::unused_flag169;
+  }
+  if (what == "unused_flag170") {
+    return &Thing::unused_flag170;
+  }
+  if (what == "unused_flag171") {
+    return &Thing::unused_flag171;
+  }
+  if (what == "unused_flag172") {
+    return &Thing::unused_flag172;
+  }
+  if (what == "unused_flag173") {
+    return &Thing::unused_flag173;
+  }
+  if (what == "unused_flag174") {
+    return &Thing::unused_flag174;
+  }
+  if (what == "unused_flag175") {
+    return &Thing::unused_flag175;
+  }
+  if (what == "unused_flag176") {
+    return &Thing::unused_flag176;
+  }
+  if (what == "unused_flag177") {
+    return &Thing::unused_flag177;
+  }
+  if (what == "unused_flag178") {
+    return &Thing::unused_flag178;
+  }
+  if (what == "unused_flag179") {
+    return &Thing::unused_flag179;
+  }
+  if (what == "unused_flag180") {
+    return &Thing::unused_flag180;
+  }
+  if (what == "unused_flag181") {
+    return &Thing::unused_flag181;
+  }
+  if (what == "unused_flag182") {
+    return &Thing::unused_flag182;
+  }
+  if (what == "unused_flag183") {
+    return &Thing::unused_flag183;
+  }
+  if (what == "unused_flag184") {
+    return &Thing::unused_flag184;
+  }
+  if (what == "unused_flag185") {
+    return &Thing::unused_flag185;
+  }
+  if (what == "unused_flag186") {
+    return &Thing::unused_flag186;
+  }
+  if (what == "unused_flag187") {
+    return &Thing::unused_flag187;
+  }
+  if (what == "unused_flag188") {
+    return &Thing::unused_flag188;
+  }
+  if (what == "unused_flag189") {
+    return &Thing::unused_flag189;
+  }
+  if (what == "unused_flag190") {
+    return &Thing::unused_flag190;
+  }
+  if (what == "unused_flag191") {
+    return &Thing::unused_flag191;
+  }
+  if (what == "unused_flag192") {
+    return &Thing::unused_flag192;
+  }
+  if (what == "unused_flag193") {
+    return &Thing::unused_flag193;
+  }
+  if (what == "unused_flag194") {
+    return &Thing::unused_flag194;
+  }
+  if (what == "unused_flag195") {
+    return &Thing::unused_flag195;
+  }
+  if (what == "unused_flag196") {
+    return &Thing::unused_flag196;
+  }
+  if (what == "unused_flag197") {
+    return &Thing::unused_flag197;
+  }
+  if (what == "unused_flag198") {
+    return &Thing::unused_flag198;
+  }
+  if (what == "unused_flag199") {
+    return &Thing::unused_flag199;
+  }
+  if (what == "unused_flag200") {
+    return &Thing::unused_flag200;
   }
   if (what == "is_red_blooded") {
     return &Thing::is_red_blooded;

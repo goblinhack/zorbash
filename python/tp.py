@@ -385,6 +385,603 @@ class Tp:
     def set_unused_flag1(self, value):
         my.tp_set_unused_flag1(self, value)
 
+    def set_unused_flag2(self, value):
+        my.tp_set_unused_flag2(self, value)
+
+    def set_unused_flag3(self, value):
+        my.tp_set_unused_flag3(self, value)
+
+    def set_unused_flag4(self, value):
+        my.tp_set_unused_flag4(self, value)
+
+    def set_unused_flag5(self, value):
+        my.tp_set_unused_flag5(self, value)
+
+    def set_unused_flag6(self, value):
+        my.tp_set_unused_flag6(self, value)
+
+    def set_unused_flag7(self, value):
+        my.tp_set_unused_flag7(self, value)
+
+    def set_unused_flag8(self, value):
+        my.tp_set_unused_flag8(self, value)
+
+    def set_unused_flag9(self, value):
+        my.tp_set_unused_flag9(self, value)
+
+    def set_unused_flag10(self, value):
+        my.tp_set_unused_flag10(self, value)
+
+    def set_unused_flag11(self, value):
+        my.tp_set_unused_flag11(self, value)
+
+    def set_unused_flag12(self, value):
+        my.tp_set_unused_flag12(self, value)
+
+    def set_unused_flag13(self, value):
+        my.tp_set_unused_flag13(self, value)
+
+    def set_unused_flag14(self, value):
+        my.tp_set_unused_flag14(self, value)
+
+    def set_unused_flag15(self, value):
+        my.tp_set_unused_flag15(self, value)
+
+    def set_unused_flag16(self, value):
+        my.tp_set_unused_flag16(self, value)
+
+    def set_unused_flag17(self, value):
+        my.tp_set_unused_flag17(self, value)
+
+    def set_unused_flag18(self, value):
+        my.tp_set_unused_flag18(self, value)
+
+    def set_unused_flag19(self, value):
+        my.tp_set_unused_flag19(self, value)
+
+    def set_unused_flag20(self, value):
+        my.tp_set_unused_flag20(self, value)
+
+    def set_unused_flag21(self, value):
+        my.tp_set_unused_flag21(self, value)
+
+    def set_unused_flag22(self, value):
+        my.tp_set_unused_flag22(self, value)
+
+    def set_unused_flag23(self, value):
+        my.tp_set_unused_flag23(self, value)
+
+    def set_unused_flag24(self, value):
+        my.tp_set_unused_flag24(self, value)
+
+    def set_unused_flag25(self, value):
+        my.tp_set_unused_flag25(self, value)
+
+    def set_unused_flag26(self, value):
+        my.tp_set_unused_flag26(self, value)
+
+    def set_unused_flag27(self, value):
+        my.tp_set_unused_flag27(self, value)
+
+    def set_unused_flag28(self, value):
+        my.tp_set_unused_flag28(self, value)
+
+    def set_unused_flag29(self, value):
+        my.tp_set_unused_flag29(self, value)
+
+    def set_unused_flag30(self, value):
+        my.tp_set_unused_flag30(self, value)
+
+    def set_unused_flag31(self, value):
+        my.tp_set_unused_flag31(self, value)
+
+    def set_unused_flag32(self, value):
+        my.tp_set_unused_flag32(self, value)
+
+    def set_unused_flag33(self, value):
+        my.tp_set_unused_flag33(self, value)
+
+    def set_unused_flag34(self, value):
+        my.tp_set_unused_flag34(self, value)
+
+    def set_unused_flag35(self, value):
+        my.tp_set_unused_flag35(self, value)
+
+    def set_unused_flag36(self, value):
+        my.tp_set_unused_flag36(self, value)
+
+    def set_unused_flag37(self, value):
+        my.tp_set_unused_flag37(self, value)
+
+    def set_unused_flag38(self, value):
+        my.tp_set_unused_flag38(self, value)
+
+    def set_unused_flag39(self, value):
+        my.tp_set_unused_flag39(self, value)
+
+    def set_unused_flag40(self, value):
+        my.tp_set_unused_flag40(self, value)
+
+    def set_unused_flag41(self, value):
+        my.tp_set_unused_flag41(self, value)
+
+    def set_unused_flag42(self, value):
+        my.tp_set_unused_flag42(self, value)
+
+    def set_unused_flag43(self, value):
+        my.tp_set_unused_flag43(self, value)
+
+    def set_unused_flag44(self, value):
+        my.tp_set_unused_flag44(self, value)
+
+    def set_unused_flag45(self, value):
+        my.tp_set_unused_flag45(self, value)
+
+    def set_unused_flag46(self, value):
+        my.tp_set_unused_flag46(self, value)
+
+    def set_unused_flag47(self, value):
+        my.tp_set_unused_flag47(self, value)
+
+    def set_unused_flag48(self, value):
+        my.tp_set_unused_flag48(self, value)
+
+    def set_unused_flag49(self, value):
+        my.tp_set_unused_flag49(self, value)
+
+    def set_unused_flag50(self, value):
+        my.tp_set_unused_flag50(self, value)
+
+    def set_unused_flag51(self, value):
+        my.tp_set_unused_flag51(self, value)
+
+    def set_unused_flag52(self, value):
+        my.tp_set_unused_flag52(self, value)
+
+    def set_unused_flag53(self, value):
+        my.tp_set_unused_flag53(self, value)
+
+    def set_unused_flag54(self, value):
+        my.tp_set_unused_flag54(self, value)
+
+    def set_unused_flag55(self, value):
+        my.tp_set_unused_flag55(self, value)
+
+    def set_unused_flag56(self, value):
+        my.tp_set_unused_flag56(self, value)
+
+    def set_unused_flag57(self, value):
+        my.tp_set_unused_flag57(self, value)
+
+    def set_unused_flag58(self, value):
+        my.tp_set_unused_flag58(self, value)
+
+    def set_unused_flag59(self, value):
+        my.tp_set_unused_flag59(self, value)
+
+    def set_unused_flag60(self, value):
+        my.tp_set_unused_flag60(self, value)
+
+    def set_unused_flag61(self, value):
+        my.tp_set_unused_flag61(self, value)
+
+    def set_unused_flag62(self, value):
+        my.tp_set_unused_flag62(self, value)
+
+    def set_unused_flag63(self, value):
+        my.tp_set_unused_flag63(self, value)
+
+    def set_unused_flag64(self, value):
+        my.tp_set_unused_flag64(self, value)
+
+    def set_unused_flag65(self, value):
+        my.tp_set_unused_flag65(self, value)
+
+    def set_unused_flag66(self, value):
+        my.tp_set_unused_flag66(self, value)
+
+    def set_unused_flag67(self, value):
+        my.tp_set_unused_flag67(self, value)
+
+    def set_unused_flag68(self, value):
+        my.tp_set_unused_flag68(self, value)
+
+    def set_unused_flag69(self, value):
+        my.tp_set_unused_flag69(self, value)
+
+    def set_unused_flag70(self, value):
+        my.tp_set_unused_flag70(self, value)
+
+    def set_unused_flag71(self, value):
+        my.tp_set_unused_flag71(self, value)
+
+    def set_unused_flag72(self, value):
+        my.tp_set_unused_flag72(self, value)
+
+    def set_unused_flag73(self, value):
+        my.tp_set_unused_flag73(self, value)
+
+    def set_unused_flag74(self, value):
+        my.tp_set_unused_flag74(self, value)
+
+    def set_unused_flag75(self, value):
+        my.tp_set_unused_flag75(self, value)
+
+    def set_unused_flag76(self, value):
+        my.tp_set_unused_flag76(self, value)
+
+    def set_unused_flag77(self, value):
+        my.tp_set_unused_flag77(self, value)
+
+    def set_unused_flag78(self, value):
+        my.tp_set_unused_flag78(self, value)
+
+    def set_unused_flag79(self, value):
+        my.tp_set_unused_flag79(self, value)
+
+    def set_unused_flag80(self, value):
+        my.tp_set_unused_flag80(self, value)
+
+    def set_unused_flag81(self, value):
+        my.tp_set_unused_flag81(self, value)
+
+    def set_unused_flag82(self, value):
+        my.tp_set_unused_flag82(self, value)
+
+    def set_unused_flag83(self, value):
+        my.tp_set_unused_flag83(self, value)
+
+    def set_unused_flag84(self, value):
+        my.tp_set_unused_flag84(self, value)
+
+    def set_unused_flag85(self, value):
+        my.tp_set_unused_flag85(self, value)
+
+    def set_unused_flag86(self, value):
+        my.tp_set_unused_flag86(self, value)
+
+    def set_unused_flag87(self, value):
+        my.tp_set_unused_flag87(self, value)
+
+    def set_unused_flag88(self, value):
+        my.tp_set_unused_flag88(self, value)
+
+    def set_unused_flag89(self, value):
+        my.tp_set_unused_flag89(self, value)
+
+    def set_unused_flag90(self, value):
+        my.tp_set_unused_flag90(self, value)
+
+    def set_unused_flag91(self, value):
+        my.tp_set_unused_flag91(self, value)
+
+    def set_unused_flag92(self, value):
+        my.tp_set_unused_flag92(self, value)
+
+    def set_unused_flag93(self, value):
+        my.tp_set_unused_flag93(self, value)
+
+    def set_unused_flag94(self, value):
+        my.tp_set_unused_flag94(self, value)
+
+    def set_unused_flag95(self, value):
+        my.tp_set_unused_flag95(self, value)
+
+    def set_unused_flag96(self, value):
+        my.tp_set_unused_flag96(self, value)
+
+    def set_unused_flag97(self, value):
+        my.tp_set_unused_flag97(self, value)
+
+    def set_unused_flag98(self, value):
+        my.tp_set_unused_flag98(self, value)
+
+    def set_unused_flag99(self, value):
+        my.tp_set_unused_flag99(self, value)
+
+    def set_unused_flag100(self, value):
+        my.tp_set_unused_flag100(self, value)
+
+    def set_unused_flag101(self, value):
+        my.tp_set_unused_flag101(self, value)
+
+    def set_unused_flag102(self, value):
+        my.tp_set_unused_flag102(self, value)
+
+    def set_unused_flag103(self, value):
+        my.tp_set_unused_flag103(self, value)
+
+    def set_unused_flag104(self, value):
+        my.tp_set_unused_flag104(self, value)
+
+    def set_unused_flag105(self, value):
+        my.tp_set_unused_flag105(self, value)
+
+    def set_unused_flag106(self, value):
+        my.tp_set_unused_flag106(self, value)
+
+    def set_unused_flag107(self, value):
+        my.tp_set_unused_flag107(self, value)
+
+    def set_unused_flag108(self, value):
+        my.tp_set_unused_flag108(self, value)
+
+    def set_unused_flag109(self, value):
+        my.tp_set_unused_flag109(self, value)
+
+    def set_unused_flag110(self, value):
+        my.tp_set_unused_flag110(self, value)
+
+    def set_unused_flag111(self, value):
+        my.tp_set_unused_flag111(self, value)
+
+    def set_unused_flag112(self, value):
+        my.tp_set_unused_flag112(self, value)
+
+    def set_unused_flag113(self, value):
+        my.tp_set_unused_flag113(self, value)
+
+    def set_unused_flag114(self, value):
+        my.tp_set_unused_flag114(self, value)
+
+    def set_unused_flag115(self, value):
+        my.tp_set_unused_flag115(self, value)
+
+    def set_unused_flag116(self, value):
+        my.tp_set_unused_flag116(self, value)
+
+    def set_unused_flag117(self, value):
+        my.tp_set_unused_flag117(self, value)
+
+    def set_unused_flag118(self, value):
+        my.tp_set_unused_flag118(self, value)
+
+    def set_unused_flag119(self, value):
+        my.tp_set_unused_flag119(self, value)
+
+    def set_unused_flag120(self, value):
+        my.tp_set_unused_flag120(self, value)
+
+    def set_unused_flag121(self, value):
+        my.tp_set_unused_flag121(self, value)
+
+    def set_unused_flag122(self, value):
+        my.tp_set_unused_flag122(self, value)
+
+    def set_unused_flag123(self, value):
+        my.tp_set_unused_flag123(self, value)
+
+    def set_unused_flag124(self, value):
+        my.tp_set_unused_flag124(self, value)
+
+    def set_unused_flag125(self, value):
+        my.tp_set_unused_flag125(self, value)
+
+    def set_unused_flag126(self, value):
+        my.tp_set_unused_flag126(self, value)
+
+    def set_unused_flag127(self, value):
+        my.tp_set_unused_flag127(self, value)
+
+    def set_unused_flag128(self, value):
+        my.tp_set_unused_flag128(self, value)
+
+    def set_unused_flag129(self, value):
+        my.tp_set_unused_flag129(self, value)
+
+    def set_unused_flag130(self, value):
+        my.tp_set_unused_flag130(self, value)
+
+    def set_unused_flag131(self, value):
+        my.tp_set_unused_flag131(self, value)
+
+    def set_unused_flag132(self, value):
+        my.tp_set_unused_flag132(self, value)
+
+    def set_unused_flag133(self, value):
+        my.tp_set_unused_flag133(self, value)
+
+    def set_unused_flag134(self, value):
+        my.tp_set_unused_flag134(self, value)
+
+    def set_unused_flag135(self, value):
+        my.tp_set_unused_flag135(self, value)
+
+    def set_unused_flag136(self, value):
+        my.tp_set_unused_flag136(self, value)
+
+    def set_unused_flag137(self, value):
+        my.tp_set_unused_flag137(self, value)
+
+    def set_unused_flag138(self, value):
+        my.tp_set_unused_flag138(self, value)
+
+    def set_unused_flag139(self, value):
+        my.tp_set_unused_flag139(self, value)
+
+    def set_unused_flag140(self, value):
+        my.tp_set_unused_flag140(self, value)
+
+    def set_unused_flag141(self, value):
+        my.tp_set_unused_flag141(self, value)
+
+    def set_unused_flag142(self, value):
+        my.tp_set_unused_flag142(self, value)
+
+    def set_unused_flag143(self, value):
+        my.tp_set_unused_flag143(self, value)
+
+    def set_unused_flag144(self, value):
+        my.tp_set_unused_flag144(self, value)
+
+    def set_unused_flag145(self, value):
+        my.tp_set_unused_flag145(self, value)
+
+    def set_unused_flag146(self, value):
+        my.tp_set_unused_flag146(self, value)
+
+    def set_unused_flag147(self, value):
+        my.tp_set_unused_flag147(self, value)
+
+    def set_unused_flag148(self, value):
+        my.tp_set_unused_flag148(self, value)
+
+    def set_unused_flag149(self, value):
+        my.tp_set_unused_flag149(self, value)
+
+    def set_unused_flag150(self, value):
+        my.tp_set_unused_flag150(self, value)
+
+    def set_unused_flag151(self, value):
+        my.tp_set_unused_flag151(self, value)
+
+    def set_unused_flag152(self, value):
+        my.tp_set_unused_flag152(self, value)
+
+    def set_unused_flag153(self, value):
+        my.tp_set_unused_flag153(self, value)
+
+    def set_unused_flag154(self, value):
+        my.tp_set_unused_flag154(self, value)
+
+    def set_unused_flag155(self, value):
+        my.tp_set_unused_flag155(self, value)
+
+    def set_unused_flag156(self, value):
+        my.tp_set_unused_flag156(self, value)
+
+    def set_unused_flag157(self, value):
+        my.tp_set_unused_flag157(self, value)
+
+    def set_unused_flag158(self, value):
+        my.tp_set_unused_flag158(self, value)
+
+    def set_unused_flag159(self, value):
+        my.tp_set_unused_flag159(self, value)
+
+    def set_unused_flag160(self, value):
+        my.tp_set_unused_flag160(self, value)
+
+    def set_unused_flag161(self, value):
+        my.tp_set_unused_flag161(self, value)
+
+    def set_unused_flag162(self, value):
+        my.tp_set_unused_flag162(self, value)
+
+    def set_unused_flag163(self, value):
+        my.tp_set_unused_flag163(self, value)
+
+    def set_unused_flag164(self, value):
+        my.tp_set_unused_flag164(self, value)
+
+    def set_unused_flag165(self, value):
+        my.tp_set_unused_flag165(self, value)
+
+    def set_unused_flag166(self, value):
+        my.tp_set_unused_flag166(self, value)
+
+    def set_unused_flag167(self, value):
+        my.tp_set_unused_flag167(self, value)
+
+    def set_unused_flag168(self, value):
+        my.tp_set_unused_flag168(self, value)
+
+    def set_unused_flag169(self, value):
+        my.tp_set_unused_flag169(self, value)
+
+    def set_unused_flag170(self, value):
+        my.tp_set_unused_flag170(self, value)
+
+    def set_unused_flag171(self, value):
+        my.tp_set_unused_flag171(self, value)
+
+    def set_unused_flag172(self, value):
+        my.tp_set_unused_flag172(self, value)
+
+    def set_unused_flag173(self, value):
+        my.tp_set_unused_flag173(self, value)
+
+    def set_unused_flag174(self, value):
+        my.tp_set_unused_flag174(self, value)
+
+    def set_unused_flag175(self, value):
+        my.tp_set_unused_flag175(self, value)
+
+    def set_unused_flag176(self, value):
+        my.tp_set_unused_flag176(self, value)
+
+    def set_unused_flag177(self, value):
+        my.tp_set_unused_flag177(self, value)
+
+    def set_unused_flag178(self, value):
+        my.tp_set_unused_flag178(self, value)
+
+    def set_unused_flag179(self, value):
+        my.tp_set_unused_flag179(self, value)
+
+    def set_unused_flag180(self, value):
+        my.tp_set_unused_flag180(self, value)
+
+    def set_unused_flag181(self, value):
+        my.tp_set_unused_flag181(self, value)
+
+    def set_unused_flag182(self, value):
+        my.tp_set_unused_flag182(self, value)
+
+    def set_unused_flag183(self, value):
+        my.tp_set_unused_flag183(self, value)
+
+    def set_unused_flag184(self, value):
+        my.tp_set_unused_flag184(self, value)
+
+    def set_unused_flag185(self, value):
+        my.tp_set_unused_flag185(self, value)
+
+    def set_unused_flag186(self, value):
+        my.tp_set_unused_flag186(self, value)
+
+    def set_unused_flag187(self, value):
+        my.tp_set_unused_flag187(self, value)
+
+    def set_unused_flag188(self, value):
+        my.tp_set_unused_flag188(self, value)
+
+    def set_unused_flag189(self, value):
+        my.tp_set_unused_flag189(self, value)
+
+    def set_unused_flag190(self, value):
+        my.tp_set_unused_flag190(self, value)
+
+    def set_unused_flag191(self, value):
+        my.tp_set_unused_flag191(self, value)
+
+    def set_unused_flag192(self, value):
+        my.tp_set_unused_flag192(self, value)
+
+    def set_unused_flag193(self, value):
+        my.tp_set_unused_flag193(self, value)
+
+    def set_unused_flag194(self, value):
+        my.tp_set_unused_flag194(self, value)
+
+    def set_unused_flag195(self, value):
+        my.tp_set_unused_flag195(self, value)
+
+    def set_unused_flag196(self, value):
+        my.tp_set_unused_flag196(self, value)
+
+    def set_unused_flag197(self, value):
+        my.tp_set_unused_flag197(self, value)
+
+    def set_unused_flag198(self, value):
+        my.tp_set_unused_flag198(self, value)
+
+    def set_unused_flag199(self, value):
+        my.tp_set_unused_flag199(self, value)
+
+    def set_unused_flag200(self, value):
+        my.tp_set_unused_flag200(self, value)
+
     def set_is_able_to_use_armor(self, value):
         my.tp_set_is_able_to_use_armor(self, value)
 
