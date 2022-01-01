@@ -296,6 +296,7 @@ def tp_init(name, text_name, short_text_name, title):
     mytp.set_is_able_to_use_weapons(True)
     mytp.set_is_attackable_by_monst(True)
     mytp.set_is_bleeder(True)
+    mytp.set_is_able_to_use_armor(True)
     mytp.set_is_bony(True)
     mytp.set_is_burnable(True)
     mytp.set_is_corpse_on_death(True)

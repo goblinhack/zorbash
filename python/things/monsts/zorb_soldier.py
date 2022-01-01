@@ -12,6 +12,7 @@ def tp_init(name, text_name):
     mytp.set_long_text_description_extra("This particular zorblin has is a battle hardened veteran of many wars.")
     mytp.set_on_death_of_my_leader_do("me.on_death_of_my_leader()")
     mytp.set_text_description("A grizzled war-weary soldier.")
+    mytp.set_is_able_to_use_armor(True)
     mytp.set_stat_strength(10)
     mytp.set_health_initial_dice("2d8+2")
     mytp.set_is_able_to_use_weapons(True)

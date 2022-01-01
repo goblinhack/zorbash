@@ -398,6 +398,20 @@ void Thing::update(void)
   }
 
   //
+  // Initial equp of armor
+  //
+  if (is_able_to_use_armor()) {
+    dbg("Weapon equip");
+    TRACE_AND_INDENT();
+
+    Thingp best_armor = nullptr;
+    get_carried_armor_highest_value(&best_armor);
+    if (best_armor) {
+      equip(best_armor, MONST_EQUIP_ARMOR);
+    }
+  }
+
+  //
   // Initial equp of wand
   //
   if (is_able_to_use_wands()) {

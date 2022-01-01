@@ -30,3 +30,71 @@ bool Thing::is_carrying_treasure(void)
 
   return false;
 }
+
+std::list< Thingp > Thing::get_treasure_list(void)
+{
+  TRACE_NO_INDENT();
+
+  std::list< Thingp > out;
+
+  if (! maybe_itemp()) {
+    static std::list< Thingp > empty;
+    return empty;
+  }
+
+  for (const auto &item : get_itemp()->carrying) {
+    auto t = level->thing_find(item.id);
+    if (unlikely(! t)) {
+      continue;
+    }
+    if (t->is_bag()) {
+      for (const auto &item : t->get_itemp()->carrying) {
+        auto t = level->thing_find(item.id);
+        if (unlikely(! t)) {
+          continue;
+        }
+        if (t->is_treasure_type()) {
+          out.push_back(t);
+        }
+      }
+    }
+    if (t->is_treasure_type()) {
+      out.push_back(t);
+    }
+  }
+  return out;
+}
+
+std::vector< Thingp > Thing::get_treasure_vector(void)
+{
+  TRACE_NO_INDENT();
+
+  std::vector< Thingp > out;
+
+  if (! maybe_itemp()) {
+    static std::vector< Thingp > empty;
+    return empty;
+  }
+
+  for (const auto &item : get_itemp()->carrying) {
+    auto t = level->thing_find(item.id);
+    if (unlikely(! t)) {
+      continue;
+    }
+    if (t->is_bag()) {
+      for (const auto &item : t->get_itemp()->carrying) {
+        auto t = level->thing_find(item.id);
+        if (unlikely(! t)) {
+          continue;
+        }
+        if (t->is_treasure_type()) {
+          out.push_back(t);
+        }
+      }
+    }
+    if (t->is_treasure_type()) {
+      out.push_back(t);
+    }
+  }
+  return out;
+}

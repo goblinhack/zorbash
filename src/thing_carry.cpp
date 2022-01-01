@@ -96,6 +96,16 @@ bool Thing::carry(Thingp item, bool can_equip)
     }
   }
 
+  //
+  // If we have no armor yet, equip it
+  //
+  if (can_equip && is_able_to_use_armor() && item->is_auto_equipped() && item->is_armor() &&
+      ! get_equip_id(MONST_EQUIP_ARMOR)) {
+    if (equip(item, MONST_EQUIP_ARMOR)) {
+      equipped = true;
+    }
+  }
+
   if (equipped) {
     //
     // Continue

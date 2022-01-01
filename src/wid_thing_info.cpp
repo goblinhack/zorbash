@@ -141,7 +141,7 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
   //
   // Not sure if we will have shops
   //
-  // wid_thing_info_add_gold_value(wid_popup_window, t);
+  wid_thing_info_add_gold_value(wid_popup_window, t);
   wid_thing_info_add_nutrition(wid_popup_window, t);
   wid_thing_info_add_health(wid_popup_window, t);
   wid_thing_info_add_damage_natural_attack(wid_popup_window, t);
@@ -203,7 +203,7 @@ WidPopup *Game::wid_thing_info_create_popup_compact(const std::vector< Thingp > 
     //
     // Not sure if we will have shops
     //
-    // wid_thing_info_add_gold_value(wid_popup_window, t);
+    wid_thing_info_add_gold_value(wid_popup_window, t);
     wid_thing_info_add_nutrition(wid_popup_window, t);
     wid_thing_info_add_health(wid_popup_window, t);
     wid_thing_info_add_damage_natural_attack(wid_popup_window, t);
@@ -1137,7 +1137,7 @@ void Game::wid_thing_info_add_defence(WidPopup *w, Thingp t)
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
 
-  if (t->is_alive_monst() || t->is_player()) {
+  if (t->is_armor() || t->is_alive_monst() || t->is_player()) {
     auto stat = t->get_armor_class();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor class            %2d%3s", stat,
              stat_to_bonus_slash_str(stat).c_str());

@@ -353,9 +353,9 @@ PyObject *thing_set_manifestor(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_spawn_group_radius(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_use_rings(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag1(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag2(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag3(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag4(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_able_to_use_armor(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_slippery(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_armor(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_flying(PyObject *obj, PyObject *args, PyObject *keywds);
 
 PyObject *thing_get_damage_energy(PyObject *obj, PyObject *args, PyObject *keywds);

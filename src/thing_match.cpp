@@ -678,16 +678,16 @@ bool Thing::matches(const std::string &what)
   if (is_crushable() && (what == "is_crushable")) {
     return true;
   }
-  if (unused_flag2() && (what == "unused_flag2")) {
+  if (is_able_to_use_armor() && (what == "is_able_to_use_armor")) {
     return true;
   }
   if (is_heavy() && (what == "is_heavy")) {
     return true;
   }
-  if (unused_flag3() && (what == "unused_flag3")) {
+  if (is_slippery() && (what == "is_slippery")) {
     return true;
   }
-  if (unused_flag4() && (what == "unused_flag4")) {
+  if (is_armor() && (what == "is_armor")) {
     return true;
   }
   if (is_flying() && (what == "is_flying")) {
@@ -1363,17 +1363,17 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_crushable") {
     return &Thing::is_crushable;
   }
-  if (what == "unused_flag2") {
-    return &Thing::unused_flag2;
+  if (what == "is_able_to_use_armor") {
+    return &Thing::is_able_to_use_armor;
   }
   if (what == "is_heavy") {
     return &Thing::is_heavy;
   }
-  if (what == "unused_flag3") {
-    return &Thing::unused_flag3;
+  if (what == "is_slippery") {
+    return &Thing::is_slippery;
   }
-  if (what == "unused_flag4") {
-    return &Thing::unused_flag4;
+  if (what == "is_armor") {
+    return &Thing::is_armor;
   }
   if (what == "is_flying") {
     return &Thing::is_flying;

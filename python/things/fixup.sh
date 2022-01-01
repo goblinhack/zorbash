@@ -12,17 +12,18 @@ POST=$(mktemp) || exit 1
 OUT=$(mktemp) || exit 1
 
 for IN in \
-    player/*py \
+    armor/*py \
     buffs/*py \
     debuffs/*py \
     doors/*py \
     dungeon/*py \
     effects/*py \
     food/*py \
-    mobs/*py \
     internal/*py \
     items/*py \
+    mobs/*py \
     monsts/*py \
+    player/*py \
     potions/*py \
     rings/*py \
     skills/*py \
@@ -298,9 +299,9 @@ do
       set_on_death_drop_all_items \
       set_spawn_group_radius \
       set_unused_flag1 \
-      set_unused_flag2 \
-      set_unused_flag3 \
-      set_unused_flag4 \
+      set_is_able_to_use_armor \
+      set_is_slippery \
+      set_is_armor \
       set_is_flying \
       set_on_death_is_open
     do

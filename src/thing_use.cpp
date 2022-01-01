@@ -298,6 +298,18 @@ bool Thing::use(Thingp what, int preferred_equip)
         game->tick_begin("player changed weapon");
       }
     }
+  } else if (what->is_armor()) {
+    dbg("Trying to use armor: %s", what->to_short_string().c_str());
+    TRACE_NO_INDENT();
+    if (preferred_equip == -1) {
+      preferred_equip = MONST_EQUIP_ARMOR;
+    }
+    if (equip(what, preferred_equip)) {
+      if (is_player()) {
+        TOPCON("You equip the %s.", what->text_the().c_str());
+        game->tick_begin("player changed armor");
+      }
+    }
   } else if (what->is_auto_throw()) {
     dbg("Trying to throw item: %s", what->to_short_string().c_str());
     TRACE_NO_INDENT();

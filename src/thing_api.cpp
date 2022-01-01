@@ -1512,10 +1512,10 @@ int Thing::is_item_magical(void)
   return (tp()->is_item_magical());
 }
 
-int Thing::unused_flag2(void)
+int Thing::is_able_to_use_armor(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag2());
+  return (tp()->is_able_to_use_armor());
 }
 
 int Thing::is_ring(void)
@@ -1560,10 +1560,10 @@ int Thing::attack_blood(void)
   return (tp()->attack_blood());
 }
 
-int Thing::unused_flag3(void)
+int Thing::is_slippery(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag3());
+  return (tp()->is_slippery());
 }
 
 int Thing::ai_detect_secret_doors(void)
@@ -1608,10 +1608,10 @@ int Thing::is_rusty(void)
   return (tp()->is_rusty());
 }
 
-int Thing::unused_flag4(void)
+int Thing::is_armor(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag4());
+  return (tp()->is_armor());
 }
 
 int Thing::is_able_to_learn_skills(void)

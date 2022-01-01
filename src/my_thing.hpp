@@ -214,6 +214,7 @@ public:
   std::list< Thingp > get_item_list(void);
   std::list< Thingp > get_treasure_list(void);
   std::list< Thingp > get_wand_list(void);
+  std::list< Thingp > get_armor_list(void);
   std::list< Thingp > get_ring_list(void);
   std::list< Thingp > get_food_list(void);
   std::list< Thingp > get_weapon_list(void);
@@ -221,6 +222,7 @@ public:
   std::vector< Thingp > get_item_vector(void);
   std::vector< Thingp > get_treasure_vector(void);
   std::vector< Thingp > get_wand_vector(void);
+  std::vector< Thingp > get_armor_vector(void);
   std::vector< Thingp > get_ring_vector(void);
   std::vector< Thingp > get_food_vector(void);
   std::vector< Thingp > get_weapon_vector(void);
@@ -814,6 +816,10 @@ public:
   int get_carried_wand_highest_value_for_target(Thingp *out, Thingp target);
   int get_carried_wand_highest_value(Thingp *out);
   int get_carried_wand_least_value(Thingp *out);
+  int get_carried_armor_count(void);
+  int get_carried_armor_highest_value_for_target(Thingp *out, Thingp target);
+  int get_carried_armor_highest_value(Thingp *out);
+  int get_carried_armor_least_value(Thingp *out);
   int get_carried_weapon_count(void);
   int get_carried_weapon_highest_value(Thingp *out);
   int get_carried_weapon_least_value(Thingp *out);
@@ -1338,9 +1344,9 @@ public:
   int unused_chance7_d1000(void);
   int unused_chance8_d1000(void);
   int unused_flag1(void);
-  int unused_flag2(void);
-  int unused_flag3(void);
-  int unused_flag4(void);
+  int is_able_to_use_armor(void);
+  int is_slippery(void);
+  int is_armor(void);
   int is_flying(void);
   int update_light_strength(void);
   int weapon_damage(void);

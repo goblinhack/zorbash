@@ -424,9 +424,9 @@ private:
   int _unused_chance7_d1000 {};
   int _unused_chance8_d1000 {};
   int _unused_flag1 {};
-  int _unused_flag2 {};
-  int _unused_flag3 {};
-  int _unused_flag4 {};
+  int _is_able_to_use_armor {};
+  int _is_slippery {};
+  int _is_armor {};
   int _is_flying {};
   int _weapon_damage {};
   int _weapon_use_distance {};
@@ -1091,9 +1091,9 @@ public:
   int unused_chance7_d1000(void) const { return _unused_chance7_d1000; }
   int unused_chance8_d1000(void) const { return _unused_chance8_d1000; }
   int unused_flag1(void) const { return _unused_flag1; }
-  int unused_flag2(void) const { return _unused_flag2; }
-  int unused_flag3(void) const { return _unused_flag3; }
-  int unused_flag4(void) const { return _unused_flag4; }
+  int is_able_to_use_armor(void) const { return _is_able_to_use_armor; }
+  int is_slippery(void) const { return _is_slippery; }
+  int is_armor(void) const { return _is_armor; }
   int is_flying(void) const { return _is_flying; }
   int weapon_damage(void) const { return _weapon_damage; }
 
@@ -1520,9 +1520,9 @@ public:
   void set_unused_chance8_d1000(int v) { _unused_chance8_d1000 = v; }
   void set_is_able_to_use_rings(int v) { _is_able_to_use_rings = v; }
   void set_unused_flag1(int v) { _unused_flag1 = v; }
-  void set_unused_flag2(int v) { _unused_flag2 = v; }
-  void set_unused_flag3(int v) { _unused_flag3 = v; }
-  void set_unused_flag4(int v) { _unused_flag4 = v; }
+  void set_is_able_to_use_armor(int v) { _is_able_to_use_armor = v; }
+  void set_is_slippery(int v) { _is_slippery = v; }
+  void set_is_armor(int v) { _is_armor = v; }
   void set_is_flying(int v) { _is_flying = v; }
   void set_is_beast_map(int v) { _is_beast_map = v; }
   void set_is_treasure_map(int v) { _is_treasure_map = v; }

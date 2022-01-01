@@ -256,9 +256,9 @@ PyObject *level_is_weapon_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_wet_grass_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_wooden_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag1_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag2_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag3_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag4_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_able_to_use_armor_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_slippery_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_armor_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_flying_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_get_all_followers(PyObject *obj, PyObject *args, PyObject *keywds);
 #endif

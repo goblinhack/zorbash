@@ -594,6 +594,9 @@ bool Thing::equip_use(bool forced, int equip)
     TRACE_AND_INDENT();
 
     if (equip == MONST_EQUIP_WEAPON) {
+      //
+      // We get here if trying to use a weapon but have none.
+      //
       if (is_player()) {
         TOPCON("You attack with bare fists!");
       }

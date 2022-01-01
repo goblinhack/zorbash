@@ -1865,6 +1865,35 @@ bool Thing::ai_tick(bool recursing)
             }
           }
 
+          if (is_able_to_use_armor()) {
+            AI_LOG("Idle, armor check");
+            Thingp curr_armor = get_equip(MONST_EQUIP_ARMOR);
+            Thingp best_armor = nullptr;
+            get_carried_armor_highest_value(&best_armor);
+            if (best_armor) {
+              auto curr_armor_val = curr_armor ? maybe_itemp_value(curr_armor) : 0;
+              auto best_armor_val = maybe_itemp_value(best_armor);
+
+              if (! curr_armor) {
+                if (use(best_armor, MONST_EQUIP_ARMOR)) {
+                  AI_LOG("Change armor", best_armor);
+                  if (is_player()) {
+                    game->tick_begin("Robot, has equipped armor");
+                  }
+                  return true;
+                }
+              } else if (best_armor_val > curr_armor_val) {
+                if (use(best_armor, MONST_EQUIP_ARMOR)) {
+                  AI_LOG("Change armor", best_armor);
+                  if (is_player()) {
+                    game->tick_begin("Robot, has changed armor");
+                  }
+                  return true;
+                }
+              }
+            }
+          }
+
           if (is_able_to_use_wands()) {
             AI_LOG("Idle, wand check");
             Thingp curr_wand = get_equip(MONST_EQUIP_WEAPON);

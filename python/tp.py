@@ -385,14 +385,14 @@ class Tp:
     def set_unused_flag1(self, value):
         my.tp_set_unused_flag1(self, value)
 
-    def set_unused_flag2(self, value):
-        my.tp_set_unused_flag2(self, value)
+    def set_is_able_to_use_armor(self, value):
+        my.tp_set_is_able_to_use_armor(self, value)
 
-    def set_unused_flag3(self, value):
-        my.tp_set_unused_flag3(self, value)
+    def set_is_slippery(self, value):
+        my.tp_set_is_slippery(self, value)
 
-    def set_unused_flag4(self, value):
-        my.tp_set_unused_flag4(self, value)
+    def set_is_armor(self, value):
+        my.tp_set_is_armor(self, value)
 
     def set_is_flying(self, value):
         my.tp_set_is_flying(self, value)
