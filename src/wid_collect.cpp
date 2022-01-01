@@ -329,7 +329,7 @@ void Game::wid_collect_create(const std::list< Thingp > items /* intentional cop
         collect_items.push_back(t);
       }
 
-      if (t->maybe_itemp()) {
+      if (t->maybe_itemsp()) {
         for (const auto t : t->get_item_vector()) {
           player->log("Collect sub-item cand: %s", t->to_string().c_str());
           if (found.find(t) != found.end()) {

@@ -252,7 +252,7 @@ bool Thing::change_owner(Thingp new_owner)
 
   on_owner_unset(old_owner);
 
-  old_owner->get_itemp()->carrying.remove(id);
+  old_owner->get_itemsp()->carrying.remove(id);
 
   hooks_remove();
 

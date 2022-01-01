@@ -40,7 +40,7 @@ bool Thing::carry(Thingp item, bool can_equip)
   //
   // Only player/monsts or bags can carry items
   //
-  if (! maybe_itemp() && ! is_bag()) {
+  if (! maybe_itemsp() && ! is_bag()) {
     dbg("Cannot carry; not a monst or bag");
     return false;
   }
@@ -119,15 +119,15 @@ bool Thing::carry(Thingp item, bool can_equip)
     //
     // Bag being carried
     //
-    dbg("Added bag to bag at %d,%d", item->get_itemp()->bag_position.x, item->get_itemp()->bag_position.y);
+    dbg("Added bag to bag at %d,%d", item->get_itemsp()->bag_position.x, item->get_itemsp()->bag_position.y);
   } else if (! item->is_bag_item()) {
     //
     // A key for example, does not go in a bag
     //
     dbg("Non item not added to bag");
   } else if (bag_add(item)) {
-    dbg("Added %s to bag at %d,%d", item->to_short_string().c_str(), item->get_itemp()->bag_position.x,
-        item->get_itemp()->bag_position.y);
+    dbg("Added %s to bag at %d,%d", item->to_short_string().c_str(), item->get_itemsp()->bag_position.x,
+        item->get_itemsp()->bag_position.y);
   } else {
     dbg("Cannot carry; cannot store in a bag");
     set_where_i_failed_to_collect_last(item->curr_at);
@@ -188,7 +188,7 @@ bool Thing::carry(Thingp item, bool can_equip)
   TRACE_AND_INDENT();
 
   if (! already_carried) {
-    get_itemp()->carrying.push_front(item->id);
+    get_itemsp()->carrying.push_front(item->id);
   }
   item->set_owner(this);
   item->hide();
@@ -295,7 +295,7 @@ std::list< Thingp > Thing::anything_to_carry_at(point at)
       open(t);
 
       for (const auto t : t->get_item_vector()) {
-        items.push_back(std::make_pair(t, maybe_itemp_value(t)));
+        items.push_back(std::make_pair(t, maybe_itemsp_value(t)));
       }
     }
 
@@ -309,7 +309,7 @@ std::list< Thingp > Thing::anything_to_carry_at(point at)
     }
 
     dbg("Potential item to carry: %s", t->to_string().c_str());
-    items.push_back(std::make_pair(t, maybe_itemp_value(t)));
+    items.push_back(std::make_pair(t, maybe_itemsp_value(t)));
   }
   FOR_ALL_THINGS_END()
 
@@ -478,11 +478,11 @@ bool Thing::carrying_anything(void)
 {
   TRACE_NO_INDENT();
 
-  if (! maybe_itemp()) {
+  if (! maybe_itemsp()) {
     return false;
   }
 
-  if (get_itemp()->carrying.empty()) {
+  if (get_itemsp()->carrying.empty()) {
     return false;
   }
 
@@ -491,7 +491,7 @@ bool Thing::carrying_anything(void)
 
 void Thing::check_all_carried_items_are_owned(void)
 {
-  if (! maybe_itemp()) {
+  if (! maybe_itemsp()) {
     return;
   }
 

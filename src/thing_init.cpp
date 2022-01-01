@@ -112,7 +112,7 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
   }
 
   if (is_player() || is_monst() || is_item()) {
-    new_itemp();
+    new_itemsp();
   }
 
   if (is_player() || is_monst() || is_cursor()) {

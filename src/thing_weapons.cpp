@@ -18,18 +18,18 @@ std::list< Thingp > Thing::get_weapon_list(void)
 
   std::list< Thingp > out;
 
-  if (! maybe_itemp()) {
+  if (! maybe_itemsp()) {
     static std::list< Thingp > empty;
     return empty;
   }
 
-  for (const auto &item : get_itemp()->carrying) {
+  for (const auto &item : get_itemsp()->carrying) {
     auto t = level->thing_find(item.id);
     if (unlikely(! t)) {
       continue;
     }
     if (t->is_bag()) {
-      for (const auto &item : t->get_itemp()->carrying) {
+      for (const auto &item : t->get_itemsp()->carrying) {
         auto t = level->thing_find(item.id);
         if (unlikely(! t)) {
           continue;
@@ -56,18 +56,18 @@ std::vector< Thingp > Thing::get_weapon_vector(void)
   std::vector< Thingp > out;
 
   TRACE_NO_INDENT();
-  if (! maybe_itemp()) {
+  if (! maybe_itemsp()) {
     static std::vector< Thingp > empty;
     return empty;
   }
 
-  for (const auto &item : get_itemp()->carrying) {
+  for (const auto &item : get_itemsp()->carrying) {
     auto t = level->thing_find(item.id);
     if (unlikely(! t)) {
       continue;
     }
     if (t->is_bag()) {
-      for (const auto &item : t->get_itemp()->carrying) {
+      for (const auto &item : t->get_itemsp()->carrying) {
         auto t = level->thing_find(item.id);
         if (unlikely(! t)) {
           continue;
@@ -89,7 +89,7 @@ int Thing::get_carried_weapon_count(void)
   TRACE_NO_INDENT();
   int count = 0;
 
-  if (! maybe_itemp()) {
+  if (! maybe_itemsp()) {
     return count;
   }
 
@@ -107,7 +107,7 @@ int Thing::get_carried_weapon_least_value(Thingp *out)
   int least_value = -1;
 
   *out = nullptr;
-  if (! maybe_itemp()) {
+  if (! maybe_itemsp()) {
     return least_value;
   }
 
@@ -116,7 +116,7 @@ int Thing::get_carried_weapon_least_value(Thingp *out)
       continue;
     }
 
-    auto v = maybe_itemp_value(t);
+    auto v = maybe_itemsp_value(t);
     if (! *out) {
       *out        = t;
       least_value = v;
@@ -136,7 +136,7 @@ int Thing::get_carried_weapon_highest_value(Thingp *out)
   int highest_value = -1;
 
   *out = nullptr;
-  if (! maybe_itemp()) {
+  if (! maybe_itemsp()) {
     return highest_value;
   }
 
@@ -145,7 +145,7 @@ int Thing::get_carried_weapon_highest_value(Thingp *out)
       continue;
     }
 
-    auto v = maybe_itemp_value(t);
+    auto v = maybe_itemsp_value(t);
     if (! *out) {
       *out          = t;
       highest_value = v;

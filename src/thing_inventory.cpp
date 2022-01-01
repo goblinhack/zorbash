@@ -214,15 +214,15 @@ bool Thing::inventory_shortcuts_insert(Thingp item)
     return false;
   }
 
-  auto itemp = maybe_itemp();
-  if (! itemp) {
-    ERR("No itemp for player");
+  auto itemsp = maybe_itemsp();
+  if (! itemsp) {
+    ERR("No itemsp for player");
     return false;
   }
 
   if (item->is_collected_as_gold()) {
     wid_thing_info_fini();
-    inventory_particle(item, itemp->inventory_shortcuts.size() - 1);
+    inventory_particle(item, itemsp->inventory_shortcuts.size() - 1);
     item->dead("by being collected");
 
     //
@@ -241,7 +241,7 @@ bool Thing::inventory_shortcuts_insert(Thingp item)
   if (item->is_collect_as_keys()) {
     wid_thing_info_fini();
     incr_keys(1);
-    inventory_particle(item, itemp->inventory_shortcuts.size() - 1);
+    inventory_particle(item, itemsp->inventory_shortcuts.size() - 1);
     item->dead("by being collected");
 
     //
@@ -258,9 +258,9 @@ bool Thing::inventory_shortcuts_insert(Thingp item)
   }
 
   int  free_slot       = -1;
-  auto inventory_items = itemp->inventory_shortcuts.size();
+  auto inventory_items = itemsp->inventory_shortcuts.size();
   for (auto i = 0U; i < inventory_items; i++) {
-    auto thing_id = get(itemp->inventory_shortcuts, i);
+    auto thing_id = get(itemsp->inventory_shortcuts, i);
     if (! thing_id) {
       if (free_slot == -1) {
         free_slot = i;
@@ -297,13 +297,13 @@ bool Thing::inventory_shortcuts_insert(Thingp item)
 
   int item_slot = -1;
   if (free_slot != -1) {
-    set(itemp->inventory_shortcuts, free_slot, item->id);
+    set(itemsp->inventory_shortcuts, free_slot, item->id);
     item_slot           = free_slot;
     game->previous_slot = item_slot;
   } else {
     if (inventory_items < UI_INVENTORY_QUICK_ITEMS_MAX) {
-      itemp->inventory_shortcuts.push_back(item->id);
-      item_slot           = itemp->inventory_shortcuts.size() - 1;
+      itemsp->inventory_shortcuts.push_back(item->id);
+      item_slot           = itemsp->inventory_shortcuts.size() - 1;
       game->previous_slot = item_slot;
     }
   }
@@ -342,9 +342,9 @@ bool Thing::inventory_shortcuts_remove(Thingp item)
     return false;
   }
 
-  auto itemp = maybe_itemp();
-  if (! itemp) {
-    ERR("No itemp for player");
+  auto itemsp = maybe_itemsp();
+  if (! itemsp) {
+    ERR("No itemsp for player");
     return false;
   }
 
@@ -353,9 +353,9 @@ bool Thing::inventory_shortcuts_remove(Thingp item)
     immediate_owner->bag_remove(item);
   }
 
-  auto inventory_items = itemp->inventory_shortcuts.size();
+  auto inventory_items = itemsp->inventory_shortcuts.size();
   for (auto i = 0U; i < inventory_items; i++) {
-    auto thing_id = get(itemp->inventory_shortcuts, i);
+    auto thing_id = get(itemsp->inventory_shortcuts, i);
     if (! thing_id) {
       continue;
     }
@@ -372,12 +372,12 @@ bool Thing::inventory_shortcuts_remove(Thingp item)
       dbg("Remove slot");
       TRACE_AND_INDENT();
 
-      set(itemp->inventory_shortcuts, i, NoThingId);
+      set(itemsp->inventory_shortcuts, i, NoThingId);
 
-      if (! itemp->inventory_shortcuts.size()) {
+      if (! itemsp->inventory_shortcuts.size()) {
         game->inventory_highlight_slot = {};
       } else {
-        while (game->inventory_highlight_slot >= itemp->inventory_shortcuts.size()) {
+        while (game->inventory_highlight_slot >= itemsp->inventory_shortcuts.size()) {
           game->inventory_highlight_slot--;
         }
       }
@@ -409,9 +409,9 @@ bool Thing::inventory_shortcuts_remove(Thingp item, Thingp particle_target)
     return false;
   }
 
-  auto itemp = maybe_itemp();
-  if (! itemp) {
-    ERR("No itemp for player");
+  auto itemsp = maybe_itemsp();
+  if (! itemsp) {
+    ERR("No itemsp for player");
     return false;
   }
 
@@ -420,9 +420,9 @@ bool Thing::inventory_shortcuts_remove(Thingp item, Thingp particle_target)
     immediate_owner->bag_remove(item);
   }
 
-  auto inventory_items = itemp->inventory_shortcuts.size();
+  auto inventory_items = itemsp->inventory_shortcuts.size();
   for (auto i = 0U; i < inventory_items; i++) {
-    auto thing_id = get(itemp->inventory_shortcuts, i);
+    auto thing_id = get(itemsp->inventory_shortcuts, i);
     if (! thing_id) {
       continue;
     }
@@ -441,12 +441,12 @@ bool Thing::inventory_shortcuts_remove(Thingp item, Thingp particle_target)
       dbg("Remove slot");
       TRACE_AND_INDENT();
 
-      itemp->inventory_shortcuts.erase(itemp->inventory_shortcuts.begin() + i);
+      itemsp->inventory_shortcuts.erase(itemsp->inventory_shortcuts.begin() + i);
 
-      if (! itemp->inventory_shortcuts.size()) {
+      if (! itemsp->inventory_shortcuts.size()) {
         game->inventory_highlight_slot = {};
       } else {
-        while (game->inventory_highlight_slot >= itemp->inventory_shortcuts.size()) {
+        while (game->inventory_highlight_slot >= itemsp->inventory_shortcuts.size()) {
           game->inventory_highlight_slot--;
         }
 
@@ -468,12 +468,12 @@ int Thing::item_slot_charge_count(const uint32_t slot)
 {
   TRACE_NO_INDENT();
 
-  auto itemp = maybe_itemp();
-  if (! itemp) {
+  auto itemsp = maybe_itemsp();
+  if (! itemsp) {
     return 0;
   }
 
-  auto thing_id = get(itemp->inventory_shortcuts, slot);
+  auto thing_id = get(itemsp->inventory_shortcuts, slot);
   if (! thing_id) {
     return 0;
   }
@@ -490,12 +490,12 @@ int Thing::item_enchant_count(const uint32_t slot)
 {
   TRACE_NO_INDENT();
 
-  auto itemp = maybe_itemp();
-  if (! itemp) {
+  auto itemsp = maybe_itemsp();
+  if (! itemsp) {
     return 0;
   }
 
-  auto thing_id = get(itemp->inventory_shortcuts, slot);
+  auto thing_id = get(itemsp->inventory_shortcuts, slot);
   if (! thing_id) {
     return 0;
   }
@@ -523,18 +523,18 @@ Thingp Level::inventory_get(const uint32_t slot)
     return nullptr;
   }
 
-  auto itemp = player->maybe_itemp();
-  if (! itemp) {
-    ERR("No itemp for player");
+  auto itemsp = player->maybe_itemsp();
+  if (! itemsp) {
+    ERR("No itemsp for player");
     return nullptr;
   }
 
-  if (slot >= itemp->inventory_shortcuts.size()) {
-    LOG("Slot %d out of range, max %d", slot, (int) itemp->inventory_shortcuts.size());
+  if (slot >= itemsp->inventory_shortcuts.size()) {
+    LOG("Slot %d out of range, max %d", slot, (int) itemsp->inventory_shortcuts.size());
     return nullptr;
   }
 
-  auto thing_id = get(itemp->inventory_shortcuts, slot);
+  auto thing_id = get(itemsp->inventory_shortcuts, slot);
   if (! thing_id) {
     LOG("Slot %d has no thing", slot);
     return nullptr;
@@ -568,18 +568,18 @@ bool Level::inventory_over(const uint32_t slot)
     return false;
   }
 
-  auto itemp = player->maybe_itemp();
-  if (! itemp) {
-    ERR("No itemp for player");
+  auto itemsp = player->maybe_itemsp();
+  if (! itemsp) {
+    ERR("No itemsp for player");
     return false;
   }
 
-  if (slot >= itemp->inventory_shortcuts.size()) {
+  if (slot >= itemsp->inventory_shortcuts.size()) {
     LOG("Inventory: Ignore; slot out of range");
     return false;
   }
 
-  auto oid = get(itemp->inventory_shortcuts, slot);
+  auto oid = get(itemsp->inventory_shortcuts, slot);
   if (! oid) {
     LOG("Inventory: Ignore; nothing at that slot %d", slot + 1);
     inventory_dump();
@@ -617,13 +617,13 @@ bool Level::inventory_chosen(const uint32_t slot)
     return false;
   }
 
-  auto itemp = player->maybe_itemp();
-  if (! itemp) {
-    ERR("No itemp for player");
+  auto itemsp = player->maybe_itemsp();
+  if (! itemsp) {
+    ERR("No itemsp for player");
     return false;
   }
 
-  if (slot >= itemp->inventory_shortcuts.size()) {
+  if (slot >= itemsp->inventory_shortcuts.size()) {
     TOPCON("Nothing at slot %d.", slot + 1);
     inventory_dump();
     sound_play("bonk");
@@ -633,7 +633,7 @@ bool Level::inventory_chosen(const uint32_t slot)
   LOG("Inventory: Request to remake inventory");
   game->request_remake_rightbar = true;
 
-  auto oid = get(itemp->inventory_shortcuts, slot);
+  auto oid = get(itemsp->inventory_shortcuts, slot);
   if (! oid) {
     TOPCON("Nothing item at that slot %d.", slot + 1);
     sound_play("bonk");
@@ -681,22 +681,22 @@ bool Level::inventory_assign(const uint32_t slot, Thingp item)
     return false;
   }
 
-  auto itemp = player->maybe_itemp();
-  if (! itemp) {
-    ERR("No itemp for player");
+  auto itemsp = player->maybe_itemsp();
+  if (! itemsp) {
+    ERR("No itemsp for player");
     return false;
   }
 
-  if (slot >= itemp->inventory_shortcuts.size()) {
-    itemp->inventory_shortcuts.resize(slot + 1);
+  if (slot >= itemsp->inventory_shortcuts.size()) {
+    itemsp->inventory_shortcuts.resize(slot + 1);
   }
 
   LOG("Inventory: Request to remake inventory");
   game->request_remake_rightbar = true;
 
-  auto inventory_items = itemp->inventory_shortcuts.size();
+  auto inventory_items = itemsp->inventory_shortcuts.size();
   for (auto i = 0U; i < inventory_items; i++) {
-    auto thing_id = get(itemp->inventory_shortcuts, i);
+    auto thing_id = get(itemsp->inventory_shortcuts, i);
     if (! thing_id) {
       continue;
     }
@@ -706,7 +706,7 @@ bool Level::inventory_assign(const uint32_t slot, Thingp item)
     }
 
     if (item->tp() == t->tp()) {
-      set(itemp->inventory_shortcuts, i, NoThingId);
+      set(itemsp->inventory_shortcuts, i, NoThingId);
       if (i == game->inventory_highlight_slot) {
         game->inventory_highlight_slot = slot;
         LOG("Inventory: Highlight slot %d", slot);
@@ -714,7 +714,7 @@ bool Level::inventory_assign(const uint32_t slot, Thingp item)
     }
   }
 
-  set(itemp->inventory_shortcuts, slot, item->id);
+  set(itemsp->inventory_shortcuts, slot, item->id);
   game->request_remake_rightbar = true;
   inventory_dump();
 
@@ -732,14 +732,14 @@ void Level::inventory_dump(void)
   con("Inventory: slots:");
   TRACE_AND_INDENT();
 
-  auto itemp = player->maybe_itemp();
-  if (! itemp) {
-    ERR("No itemp for player");
+  auto itemsp = player->maybe_itemsp();
+  if (! itemsp) {
+    ERR("No itemsp for player");
     return;
   }
 
-  for (auto i = 0U; i < itemp->inventory_shortcuts.size(); i++) {
-    auto thing_id = get(itemp->inventory_shortcuts, i);
+  for (auto i = 0U; i < itemsp->inventory_shortcuts.size(); i++) {
+    auto thing_id = get(itemsp->inventory_shortcuts, i);
     if (! thing_id) {
       continue;
     }
@@ -756,15 +756,15 @@ int Level::inventory_get_slot(Thingp item)
 {
   TRACE_NO_INDENT();
 
-  auto itemp = player->maybe_itemp();
-  if (! itemp) {
-    ERR("No itemp for player");
+  auto itemsp = player->maybe_itemsp();
+  if (! itemsp) {
+    ERR("No itemsp for player");
     return false;
   }
 
-  auto inventory_items = itemp->inventory_shortcuts.size();
+  auto inventory_items = itemsp->inventory_shortcuts.size();
   for (auto i = 0U; i < inventory_items; i++) {
-    auto thing_id = get(itemp->inventory_shortcuts, i);
+    auto thing_id = get(itemsp->inventory_shortcuts, i);
     if (! thing_id) {
       continue;
     }

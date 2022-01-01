@@ -22,7 +22,7 @@ bool Thing::skill_add(Thingp what)
   dbg("Try to add skill %s", what->to_short_string().c_str());
   TRACE_AND_INDENT();
 
-  if (! maybe_itemp()) {
+  if (! maybe_itemsp()) {
     dbg("No; not a monst");
     return false;
   }
@@ -36,7 +36,7 @@ bool Thing::skill_add(Thingp what)
     existing_owner->drop(what);
   }
 
-  for (const auto &item : get_itemp()->skills) {
+  for (const auto &item : get_itemsp()->skills) {
     if (item == what->id) {
       dbg("No; already carried");
       return false;
@@ -50,7 +50,7 @@ bool Thing::skill_add(Thingp what)
     }
   }
 
-  get_itemp()->skills.push_front(what->id);
+  get_itemsp()->skills.push_front(what->id);
   what->set_owner(this);
   what->hide();
 
@@ -84,7 +84,7 @@ bool Thing::skill_remove(Thingp what)
   }
 
   what->remove_owner();
-  get_itemp()->skills.remove(what->id);
+  get_itemsp()->skills.remove(what->id);
   game->request_remake_skillbox = true;
 
   dbg("Removed %s", what->to_short_string().c_str());
@@ -94,12 +94,12 @@ bool Thing::skill_remove(Thingp what)
 void Thing::skill_remove_all(void)
 {
   TRACE_NO_INDENT();
-  if (! maybe_itemp()) {
+  if (! maybe_itemsp()) {
     return;
   }
 
-  while (! get_itemp()->skills.empty()) {
-    auto id = *get_itemp()->skills.begin();
+  while (! get_itemsp()->skills.empty()) {
+    auto id = *get_itemsp()->skills.begin();
     auto t  = level->thing_find(id);
     if (unlikely(! t)) {
       return;
@@ -133,16 +133,16 @@ void Thing::skill_activate(Thingp what)
 int Thing::skill_enchant_count(const uint32_t slot)
 {
   TRACE_NO_INDENT();
-  if (! maybe_itemp()) {
+  if (! maybe_itemsp()) {
     return 0;
   }
 
-  auto thing_id = get(get_itemp()->skillbox_id, slot);
+  auto thing_id = get(get_itemsp()->skillbox_id, slot);
   if (! thing_id) {
     return 0;
   }
 
-  for (auto oid : get_itemp()->skills) {
+  for (auto oid : get_itemsp()->skills) {
     auto o = game->level->thing_find(oid);
     if (o) {
       if (o->id == thing_id) {
@@ -208,7 +208,7 @@ bool Thing::can_learn_something(void)
   //
   // Once skills are maxxed out, that's it
   //
-  if (get_itemp()->skills.size() >= UI_INVENTORY_QUICK_ITEMS_MAX) {
+  if (get_itemsp()->skills.size() >= UI_INVENTORY_QUICK_ITEMS_MAX) {
     return false;
   }
 
@@ -218,7 +218,7 @@ bool Thing::can_learn_something(void)
   //
   for (auto tpp : tp_get_skills()) {
     bool already_learned = false;
-    for (auto oid : get_itemp()->skills) {
+    for (auto oid : get_itemsp()->skills) {
       auto o = game->level->thing_find(oid);
       if (o) {
         if (o->tp() == tpp) {
@@ -242,7 +242,7 @@ bool Thing::learn_random_skill(void)
   std::vector< Tpp > cands;
   for (auto tpp : tp_get_skills()) {
     bool add = true;
-    for (auto oid : get_itemp()->skills) {
+    for (auto oid : get_itemsp()->skills) {
       auto o = game->level->thing_find(oid);
       if (o) {
         if (o->tp() == tpp) {

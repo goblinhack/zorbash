@@ -16,7 +16,7 @@
 //
 // Return a score, higher is better for perceived value to you
 //
-int Thing::maybe_itemp_value(Thingp it)
+int Thing::maybe_itemsp_value(Thingp it)
 {
   TRACE_NO_INDENT();
   int value = 0;

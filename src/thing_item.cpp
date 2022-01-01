@@ -84,7 +84,7 @@ void Thing::move_carried_items(void)
   // Move carried items too as when we attack, we will use say the
   // carried sword and so it had better be in the same location.
   //
-  if (maybe_itemp()) {
+  if (maybe_itemsp()) {
     for (const auto o : get_item_vector()) {
       o->move_to(curr_at);
       o->dir = dir;
@@ -166,7 +166,7 @@ void Thing::move_carried_items_immediately(void)
   // Move carried items too as when we attack, we will use say the
   // carried sword and so it had better be in the same location.
   //
-  if (maybe_itemp()) {
+  if (maybe_itemsp()) {
     for (const auto o : get_item_vector()) {
       o->move_to_immediately(curr_at);
       o->dir = dir;
@@ -187,11 +187,11 @@ void Thing::move_carried_items_immediately(void)
 bool Thing::is_carrying_item(void)
 {
   TRACE_NO_INDENT();
-  if (! maybe_itemp()) {
+  if (! maybe_itemsp()) {
     return false;
   }
 
-  if (get_itemp()->carrying.size()) {
+  if (get_itemsp()->carrying.size()) {
     return true;
   }
 

@@ -122,7 +122,7 @@ void Thing::killed(Thingp defeater, const char *reason)
   //
   move_finish();
 
-  if (maybe_itemp()) {
+  if (maybe_itemsp()) {
     //
     // Drop everything!
     //

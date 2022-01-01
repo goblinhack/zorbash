@@ -15,7 +15,7 @@
 bool Thing::is_carrying_treasure(void)
 {
   TRACE_NO_INDENT();
-  if (! maybe_itemp()) {
+  if (! maybe_itemsp()) {
     return false;
   }
 
@@ -37,18 +37,18 @@ std::list< Thingp > Thing::get_treasure_list(void)
 
   std::list< Thingp > out;
 
-  if (! maybe_itemp()) {
+  if (! maybe_itemsp()) {
     static std::list< Thingp > empty;
     return empty;
   }
 
-  for (const auto &item : get_itemp()->carrying) {
+  for (const auto &item : get_itemsp()->carrying) {
     auto t = level->thing_find(item.id);
     if (unlikely(! t)) {
       continue;
     }
     if (t->is_bag()) {
-      for (const auto &item : t->get_itemp()->carrying) {
+      for (const auto &item : t->get_itemsp()->carrying) {
         auto t = level->thing_find(item.id);
         if (unlikely(! t)) {
           continue;
@@ -71,18 +71,18 @@ std::vector< Thingp > Thing::get_treasure_vector(void)
 
   std::vector< Thingp > out;
 
-  if (! maybe_itemp()) {
+  if (! maybe_itemsp()) {
     static std::vector< Thingp > empty;
     return empty;
   }
 
-  for (const auto &item : get_itemp()->carrying) {
+  for (const auto &item : get_itemsp()->carrying) {
     auto t = level->thing_find(item.id);
     if (unlikely(! t)) {
       continue;
     }
     if (t->is_bag()) {
-      for (const auto &item : t->get_itemp()->carrying) {
+      for (const auto &item : t->get_itemsp()->carrying) {
         auto t = level->thing_find(item.id);
         if (unlikely(! t)) {
           continue;

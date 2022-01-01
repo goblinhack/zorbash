@@ -198,7 +198,7 @@ void Game::wid_enchant_an_item(void)
     enchant_items.push_back(t);
   }
 
-  for (auto id : player->get_itemp()->skills) {
+  for (auto id : player->get_itemsp()->skills) {
     auto t = thing_find(id);
     if (t) {
       auto tp = t->tp();

@@ -54,6 +54,9 @@ enum {
 
 #define FOR_ALL_EQUIP(_equip_) for (auto _equip_ = 0; _equip_ < MONST_EQUIP_MAX; _equip_++)
 
+//
+// Extra thing info. Needed for monsts and items.
+//
 typedef struct ThingInfo_ {
 public:
   std::vector< Lightp > light = {}; // Has light sources?
@@ -183,6 +186,10 @@ public:
 std::ostream &operator<<(std::ostream &out, Bits< const ThingInfop & > const my);
 std::istream &operator>>(std::istream &in, Bits< ThingInfop & > my);
 
+//
+// All carried items and buffs etc.. Typically only needed for an intelligent
+// monster or the player.
+//
 typedef struct ThingItem_ {
 public:
   /////////////////////////////////////////////////////////////////////////
@@ -226,8 +233,8 @@ public:
   //
   point preferred_bag_position {-1, -1};
 } ThingItem;
-std::ostream &operator<<(std::ostream &out, Bits< const ThingItemp & > const my);
-std::istream &operator>>(std::istream &in, Bits< ThingItemp & > my);
+std::ostream &operator<<(std::ostream &out, Bits< const ThingItemsp & > const my);
+std::istream &operator>>(std::istream &in, Bits< ThingItemsp & > my);
 
 typedef struct ThingAi_ {
 public:

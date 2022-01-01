@@ -2144,14 +2144,14 @@ void Thing::new_infop(void)
   }
 }
 
-void Thing::new_itemp(void)
+void Thing::new_itemsp(void)
 {
   TRACE_NO_INDENT();
-  if (unlikely(! _itemp)) {
-    _itemp = new ThingItem();
+  if (unlikely(! _itemsp)) {
+    _itemsp = new ThingItem();
     // uncomment to see who allocates things
     // err("New monst item");
-    newptr(MTYPE_ITEMP, _itemp, "ThingItem");
+    newptr(MTYPE_ITEMP, _itemsp, "ThingItem");
 
     if (mytp && (tp_id != -1)) {
       //
@@ -2185,14 +2185,14 @@ ThingInfop Thing::get_or_alloc_infop(void)
   return _infop;
 }
 
-ThingItemp Thing::get_or_alloc_itemp(void)
+ThingItemsp Thing::get_or_alloc_itemsp(void)
 {
   TRACE_NO_INDENT();
-  if (unlikely(! _itemp)) {
-    new_itemp();
+  if (unlikely(! _itemsp)) {
+    new_itemsp();
   }
-  IF_DEBUG3 { verify(MTYPE_ITEMP, _itemp); }
-  return _itemp;
+  IF_DEBUG3 { verify(MTYPE_ITEMP, _itemsp); }
+  return _itemsp;
 }
 
 ThingAip Thing::get_or_alloc_aip(void)
@@ -2215,14 +2215,14 @@ ThingInfop Thing::get_infop(void)
   return _infop;
 }
 
-ThingItemp Thing::get_itemp(void)
+ThingItemsp Thing::get_itemsp(void)
 {
   TRACE_NO_INDENT();
-  if (! _itemp) {
-    die("no _itemp");
+  if (! _itemsp) {
+    die("no _itemsp");
   }
-  IF_DEBUG3 { verify(MTYPE_ITEMP, _itemp); }
-  return _itemp;
+  IF_DEBUG3 { verify(MTYPE_ITEMP, _itemsp); }
+  return _itemsp;
 }
 
 ThingAip Thing::get_aip(void)
@@ -5464,8 +5464,8 @@ uint32_t Thing::incr_tick_last_level_change(void)
 point Thing::get_where_i_dropped_an_item_last(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_itemp()) {
-    return (get_itemp()->where_i_dropped_an_item_last);
+  if (maybe_itemsp()) {
+    return (get_itemsp()->where_i_dropped_an_item_last);
   } else {
     return (point(-1, -1));
   }
@@ -5474,8 +5474,8 @@ point Thing::get_where_i_dropped_an_item_last(void)
 point Thing::set_where_i_dropped_an_item_last(point v)
 {
   TRACE_NO_INDENT();
-  new_itemp();
-  return (get_itemp()->where_i_dropped_an_item_last = v);
+  new_itemsp();
+  return (get_itemsp()->where_i_dropped_an_item_last = v);
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -5484,8 +5484,8 @@ point Thing::set_where_i_dropped_an_item_last(point v)
 point Thing::get_where_i_failed_to_collect_last(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_itemp()) {
-    return (get_itemp()->where_i_failed_to_collect_last);
+  if (maybe_itemsp()) {
+    return (get_itemsp()->where_i_failed_to_collect_last);
   } else {
     return (point(-1, -1));
   }
@@ -5494,8 +5494,8 @@ point Thing::get_where_i_failed_to_collect_last(void)
 point Thing::set_where_i_failed_to_collect_last(point v)
 {
   TRACE_NO_INDENT();
-  new_itemp();
-  return (get_itemp()->where_i_failed_to_collect_last = v);
+  new_itemsp();
+  return (get_itemsp()->where_i_failed_to_collect_last = v);
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -5984,8 +5984,8 @@ ts_t Thing::incr_ts_fall_end(void)
 ThingId Thing::get_equip_id_carry_anim(int equip)
 {
   TRACE_NO_INDENT();
-  if (maybe_itemp()) {
-    auto id = get(get_itemp()->equip_id_carry_anim, equip);
+  if (maybe_itemsp()) {
+    auto id = get(get_itemsp()->equip_id_carry_anim, equip);
     if (id != NoThingId) {
       verify(MTYPE_THING, level->thing_find(id));
     }
@@ -5998,7 +5998,7 @@ ThingId Thing::set_equip_id_carry_anim(ThingId v, int equip)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (get_itemp()->equip_id_carry_anim[ equip ] = v);
+  return (get_itemsp()->equip_id_carry_anim[ equip ] = v);
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -6007,8 +6007,8 @@ ThingId Thing::set_equip_id_carry_anim(ThingId v, int equip)
 ThingId Thing::get_equip_id_use_anim(int equip)
 {
   TRACE_NO_INDENT();
-  if (maybe_itemp()) {
-    auto id = get(get_itemp()->equip_id_use_anim, equip);
+  if (maybe_itemsp()) {
+    auto id = get(get_itemsp()->equip_id_use_anim, equip);
     if (id != NoThingId) {
       verify(MTYPE_THING, level->thing_find(id));
     }
@@ -6021,7 +6021,7 @@ ThingId Thing::set_equip_id_use_anim(ThingId v, int equip)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (get_itemp()->equip_id_use_anim[ equip ] = v);
+  return (get_itemsp()->equip_id_use_anim[ equip ] = v);
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -6030,9 +6030,9 @@ ThingId Thing::set_equip_id_use_anim(ThingId v, int equip)
 ThingId Thing::get_equip_id(int equip)
 {
   TRACE_NO_INDENT();
-  if (maybe_itemp()) {
-    // con("get weapon %" PRIX32 "",  get_itemp()->equip_id);
-    return (get_itemp()->equip_id[ equip ]);
+  if (maybe_itemsp()) {
+    // con("get weapon %" PRIX32 "",  get_itemsp()->equip_id);
+    return (get_itemsp()->equip_id[ equip ]);
   } else {
     // con("get equip id => none");
     return NoThingId;
@@ -6044,7 +6044,7 @@ ThingId Thing::set_equip_id(ThingId v, int equip)
   TRACE_NO_INDENT();
   new_infop();
   // con("set weapon %" PRIX32 "", v);
-  return (get_itemp()->equip_id[ equip ] = v);
+  return (get_itemsp()->equip_id[ equip ] = v);
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -6640,8 +6640,8 @@ const std::string &Thing::equip_carry_anim(void)
 std::array< std::array< ThingId, MAX_BAG_WIDTH >, MAX_BAG_HEIGHT > *Thing::get_bag(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_itemp()) {
-    return (&get_itemp()->bag);
+  if (maybe_itemsp()) {
+    return (&get_itemsp()->bag);
   } else {
     //
     // Watch out here as lasers can have owners and do not live in bags.
@@ -6654,8 +6654,8 @@ std::array< std::array< ThingId, MAX_BAG_WIDTH >, MAX_BAG_HEIGHT > *Thing::get_b
 const std::array< std::array< ThingId, MAX_BAG_WIDTH >, MAX_BAG_HEIGHT > *Thing::get_const_bag(void)
 {
   TRACE_NO_INDENT();
-  if (maybe_itemp()) {
-    return (&get_itemp()->bag);
+  if (maybe_itemsp()) {
+    return (&get_itemsp()->bag);
   } else {
     //
     // Watch out here as lasers can have owners and do not live in bags.

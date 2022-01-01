@@ -604,8 +604,8 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     }
   }
 
-  if (real_hitter->maybe_itemp()) {
-    for (auto oid : real_hitter->get_itemp()->skills) {
+  if (real_hitter->maybe_itemsp()) {
+    for (auto oid : real_hitter->get_itemsp()->skills) {
       auto skill = level->thing_find(oid);
       if (skill && skill->is_activated) {
         //

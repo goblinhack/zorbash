@@ -190,7 +190,7 @@ std::istream &operator>>(std::istream &in, Bits< ThingInfop & > my)
   return (in);
 }
 
-std::istream &operator>>(std::istream &in, Bits< ThingItemp & > my)
+std::istream &operator>>(std::istream &in, Bits< ThingItemsp & > my)
 {
   TRACE_AND_INDENT();
   /////////////////////////////////////////////////////////////////////////
@@ -274,12 +274,12 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
     in >> bits(my.t->_infop);
   }
 
-  my.t->_itemp            = nullptr;
+  my.t->_itemsp            = nullptr;
   bool monst_item_present = false;
   in >> bits(monst_item_present);
   if (monst_item_present) {
-    my.t->new_itemp();
-    in >> bits(my.t->_itemp);
+    my.t->new_itemsp();
+    in >> bits(my.t->_itemsp);
   }
 
   my.t->_aip            = nullptr;

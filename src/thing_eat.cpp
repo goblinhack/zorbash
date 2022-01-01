@@ -247,7 +247,7 @@ bool Thing::eat_something(void)
   //
   // Try again but include potions
   //
-  for (const auto &item : get_itemp()->carrying) {
+  for (const auto &item : get_itemsp()->carrying) {
     auto t = level->thing_find(item.id);
     if (unlikely(! t)) {
       continue;

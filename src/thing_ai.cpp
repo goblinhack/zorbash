@@ -1842,8 +1842,8 @@ bool Thing::ai_tick(bool recursing)
             Thingp best_weapon = nullptr;
             get_carried_weapon_highest_value(&best_weapon);
             if (best_weapon) {
-              auto curr_weapon_val = curr_weapon ? maybe_itemp_value(curr_weapon) : 0;
-              auto best_weapon_val = maybe_itemp_value(best_weapon);
+              auto curr_weapon_val = curr_weapon ? maybe_itemsp_value(curr_weapon) : 0;
+              auto best_weapon_val = maybe_itemsp_value(best_weapon);
 
               if (! curr_weapon) {
                 if (use(best_weapon, MONST_EQUIP_WEAPON)) {
@@ -1871,8 +1871,8 @@ bool Thing::ai_tick(bool recursing)
             Thingp best_armor = nullptr;
             get_carried_armor_highest_value(&best_armor);
             if (best_armor) {
-              auto curr_armor_val = curr_armor ? maybe_itemp_value(curr_armor) : 0;
-              auto best_armor_val = maybe_itemp_value(best_armor);
+              auto curr_armor_val = curr_armor ? maybe_itemsp_value(curr_armor) : 0;
+              auto best_armor_val = maybe_itemsp_value(best_armor);
 
               if (! curr_armor) {
                 if (use(best_armor, MONST_EQUIP_ARMOR)) {
@@ -1900,8 +1900,8 @@ bool Thing::ai_tick(bool recursing)
             Thingp best_wand = nullptr;
             get_carried_wand_highest_value(&best_wand);
             if (best_wand) {
-              auto curr_wand_val = curr_wand ? maybe_itemp_value(curr_wand) : 0;
-              auto best_wand_val = maybe_itemp_value(best_wand);
+              auto curr_wand_val = curr_wand ? maybe_itemsp_value(curr_wand) : 0;
+              auto best_wand_val = maybe_itemsp_value(best_wand);
 
               if (! curr_wand || ! curr_wand->is_wand()) {
                 AI_LOG("Idle, have a wand, but not used", best_wand);
@@ -1935,9 +1935,9 @@ bool Thing::ai_tick(bool recursing)
             Thingp best_ring  = nullptr;
             get_carried_ring_highest_value(&best_ring);
             if (best_ring) {
-              auto curr_ring1_val = curr_ring1 ? maybe_itemp_value(curr_ring1) : 0;
-              auto curr_ring2_val = curr_ring2 ? maybe_itemp_value(curr_ring2) : 0;
-              auto best_ring_val  = maybe_itemp_value(best_ring);
+              auto curr_ring1_val = curr_ring1 ? maybe_itemsp_value(curr_ring1) : 0;
+              auto curr_ring2_val = curr_ring2 ? maybe_itemsp_value(curr_ring2) : 0;
+              auto best_ring_val  = maybe_itemsp_value(best_ring);
 
               if (! curr_ring1) {
                 if (use(best_ring, MONST_EQUIP_RING1)) {

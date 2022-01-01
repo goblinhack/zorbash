@@ -167,7 +167,7 @@ std::ostream &operator<<(std::ostream &out, Bits< ThingInfop & > const my)
   return (out);
 }
 
-std::ostream &operator<<(std::ostream &out, Bits< ThingItemp & > const my)
+std::ostream &operator<<(std::ostream &out, Bits< ThingItemsp & > const my)
 {
   TRACE_AND_INDENT();
   /////////////////////////////////////////////////////////////////////////
@@ -239,10 +239,10 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
     out << bits(my.t->_infop);
   }
 
-  bool monst_item_present = (my.t->maybe_itemp() != nullptr);
+  bool monst_item_present = (my.t->maybe_itemsp() != nullptr);
   out << bits(monst_item_present);
   if (monst_item_present) {
-    out << bits(my.t->_itemp);
+    out << bits(my.t->_itemsp);
   }
 
   bool monst_ai_present = (my.t->maybe_aip() != nullptr);

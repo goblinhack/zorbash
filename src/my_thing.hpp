@@ -55,7 +55,7 @@ public:
   ~Thing_(void);
 
   ThingInfop _infop {};
-  ThingItemp _itemp {};
+  ThingItemsp _itemsp {};
   ThingAip   _aip {};
 
   Levelp level {};
@@ -1239,7 +1239,7 @@ public:
   int item_slot_charge_count(const uint32_t slot);
   int item_width(void);
   int light_strength(void);
-  int maybe_itemp_value(const Thingp it);
+  int maybe_itemsp_value(const Thingp it);
   int minion_limit(void);
   int monst_size(void);
   int normal_placement_rules(void);
@@ -1651,7 +1651,7 @@ public:
   void necrosis_tick(void);
   void new_aip(void);
   void new_infop(void);
-  void new_itemp(void);
+  void new_itemsp(void);
   void new_light(point offset, int strength);
   void new_light(point offset, int strength, color col, int fbo);
   void notify_followers_of_death_of_my_leader(void);
@@ -1760,15 +1760,15 @@ public:
   std::list< Thingp > get_all_followers(void);
 
   ThingInfop get_or_alloc_infop(void);
-  ThingItemp get_or_alloc_itemp(void);
+  ThingItemsp get_or_alloc_itemsp(void);
   ThingAip   get_or_alloc_aip(void);
 
   ThingInfop maybe_infop(void) { return _infop; }
-  ThingItemp maybe_itemp(void) { return _itemp; }
+  ThingItemsp maybe_itemsp(void) { return _itemsp; }
   ThingAip   maybe_aip(void) { return _aip; }
 
   ThingInfop get_infop(void);
-  ThingItemp get_itemp(void);
+  ThingItemsp get_itemsp(void);
   ThingAip   get_aip(void);
 
 } Thing;

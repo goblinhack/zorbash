@@ -20,7 +20,7 @@ bool Thing::debuff_add(Thingp what)
   dbg("Try to add debuff %s", what->to_short_string().c_str());
   TRACE_AND_INDENT();
 
-  if (! maybe_itemp()) {
+  if (! maybe_itemsp()) {
     dbg("No; not a monst");
     return false;
   }
@@ -34,7 +34,7 @@ bool Thing::debuff_add(Thingp what)
     existing_owner->drop(what);
   }
 
-  for (const auto &item : get_itemp()->debuffs) {
+  for (const auto &item : get_itemsp()->debuffs) {
     if (item == what->id) {
       dbg("No; already carried");
       return false;
@@ -48,7 +48,7 @@ bool Thing::debuff_add(Thingp what)
     }
   }
 
-  get_itemp()->debuffs.push_front(what->id);
+  get_itemsp()->debuffs.push_front(what->id);
   what->set_owner(this);
   what->hide();
 
@@ -77,7 +77,7 @@ bool Thing::debuff_remove(Thingp what)
   }
 
   what->remove_owner();
-  get_itemp()->debuffs.remove(what->id);
+  get_itemsp()->debuffs.remove(what->id);
   game->request_remake_debuffbox = true;
 
   dbg("Removed %s", what->to_short_string().c_str());
@@ -87,12 +87,12 @@ bool Thing::debuff_remove(Thingp what)
 void Thing::debuff_remove_all(void)
 {
   TRACE_NO_INDENT();
-  if (! maybe_itemp()) {
+  if (! maybe_itemsp()) {
     return;
   }
 
-  while (! get_itemp()->debuffs.empty()) {
-    auto id = *get_itemp()->debuffs.begin();
+  while (! get_itemsp()->debuffs.empty()) {
+    auto id = *get_itemsp()->debuffs.begin();
     auto t  = level->thing_find(id);
     if (unlikely(! t)) {
       return;
@@ -112,7 +112,7 @@ bool Thing::debuff_use(Thingp what)
 
 bool Thing::debuff_add(Tpp what)
 {
-  if (! maybe_itemp()) {
+  if (! maybe_itemsp()) {
     return false;
   }
 
@@ -134,12 +134,12 @@ bool Thing::debuff_add(Tpp what)
 
 bool Thing::debuff_add_if_not_found(Tpp what)
 {
-  if (! maybe_itemp()) {
+  if (! maybe_itemsp()) {
     return false;
   }
 
-  while (! get_itemp()->debuffs.empty()) {
-    auto id = *get_itemp()->debuffs.begin();
+  while (! get_itemsp()->debuffs.empty()) {
+    auto id = *get_itemsp()->debuffs.begin();
     auto t  = level->thing_find(id);
     if (t) {
       if (t->tp() == what) {
@@ -166,10 +166,10 @@ bool Thing::debuff_add_if_not_found(Tpp what)
 
 bool Thing::debuff_remove(Tpp what)
 {
-  if (! maybe_itemp()) {
+  if (! maybe_itemsp()) {
     return false;
   }
-  for (const auto &item : get_itemp()->debuffs) {
+  for (const auto &item : get_itemsp()->debuffs) {
     auto t = level->thing_find(item.id);
     if (t && (t->tp() == what)) {
       debuff_remove(t);
@@ -181,17 +181,17 @@ bool Thing::debuff_remove(Tpp what)
 
 void Thing::debuff_tick(void)
 {
-  if (! maybe_itemp()) {
+  if (! maybe_itemsp()) {
     return;
   }
-  if (get_itemp()->debuffs.empty()) {
+  if (get_itemsp()->debuffs.empty()) {
     return;
   }
 
   dbg("Debuff tick");
   TRACE_AND_INDENT();
 
-  for (const auto &item : get_itemp()->debuffs) {
+  for (const auto &item : get_itemsp()->debuffs) {
     auto t = level->thing_find(item.id);
     if (t) {
       dbg("Debuff (%s)", t->to_string().c_str());

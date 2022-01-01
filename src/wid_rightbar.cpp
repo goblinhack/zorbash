@@ -406,9 +406,9 @@ static bool wid_rightbar_create(void)
   }
   y_at += 3;
 
-  auto itemp = player->maybe_itemp();
-  if (! itemp) {
-    ERR("No itemp for player");
+  auto itemsp = player->maybe_itemsp();
+  if (! itemsp) {
+    ERR("No itemsp for player");
     return false;
   }
 
@@ -451,8 +451,8 @@ static bool wid_rightbar_create(void)
       wid_set_pos(w, tl, br);
       wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
 
-      if (item < itemp->inventory_shortcuts.size()) {
-        auto thing_id = get(itemp->inventory_shortcuts, item);
+      if (item < itemsp->inventory_shortcuts.size()) {
+        auto thing_id = get(itemsp->inventory_shortcuts, item);
         if (! thing_id) {
           item++;
           continue;
@@ -494,7 +494,7 @@ static bool wid_rightbar_create(void)
         auto weapon = player->get_equip(MONST_EQUIP_WEAPON);
         if (weapon) {
           auto equip_id = weapon->id;
-          auto thing_id = get(itemp->inventory_shortcuts, i);
+          auto thing_id = get(itemsp->inventory_shortcuts, i);
           if (thing_id == equip_id) {
             static Tilep tile;
             if (unlikely(! tile)) {
@@ -570,8 +570,8 @@ static bool wid_rightbar_create(void)
       wid_set_pos(w, tl, br);
       wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
 
-      if (item < itemp->skillbox_id.size()) {
-        auto thing_id = get(itemp->skillbox_id, item);
+      if (item < itemsp->skillbox_id.size()) {
+        auto thing_id = get(itemsp->skillbox_id, item);
         if (! thing_id) {
           item++;
           continue;
@@ -580,7 +580,7 @@ static bool wid_rightbar_create(void)
         auto t         = level->thing_find(thing_id);
         bool activated = false;
 
-        for (auto id : itemp->skills) {
+        for (auto id : itemsp->skills) {
           auto o = level->thing_find(id);
           if (o) {
             if (o == t) {
@@ -662,8 +662,8 @@ static bool wid_rightbar_create(void)
       wid_set_pos(w, tl, br);
       wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
 
-      if (item < itemp->buffbox_id.size()) {
-        auto thing_id = get(itemp->buffbox_id, item);
+      if (item < itemsp->buffbox_id.size()) {
+        auto thing_id = get(itemsp->buffbox_id, item);
         if (! thing_id) {
           item++;
           continue;
@@ -672,7 +672,7 @@ static bool wid_rightbar_create(void)
         auto t         = level->thing_find(thing_id);
         bool activated = false;
 
-        for (auto id : itemp->buffs) {
+        for (auto id : itemsp->buffs) {
           auto o = level->thing_find(id);
           if (o) {
             if (o == t) {
@@ -737,8 +737,8 @@ static bool wid_rightbar_create(void)
       wid_set_pos(w, tl, br);
       wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
 
-      if (item < itemp->debuffbox_id.size()) {
-        auto thing_id = get(itemp->debuffbox_id, item);
+      if (item < itemsp->debuffbox_id.size()) {
+        auto thing_id = get(itemsp->debuffbox_id, item);
         if (! thing_id) {
           item++;
           continue;
@@ -747,7 +747,7 @@ static bool wid_rightbar_create(void)
         auto t         = level->thing_find(thing_id);
         bool activated = false;
 
-        for (auto id : itemp->debuffs) {
+        for (auto id : itemsp->debuffs) {
           auto o = level->thing_find(id);
           if (o) {
             if (o == t) {

@@ -146,9 +146,9 @@ void Thing::destroy(void)
     delete _infop;
   }
 
-  if (maybe_itemp()) {
-    oldptr(MTYPE_ITEMP, maybe_itemp());
-    delete _itemp;
+  if (maybe_itemsp()) {
+    oldptr(MTYPE_ITEMP, maybe_itemsp());
+    delete _itemsp;
   }
 
   if (maybe_aip()) {

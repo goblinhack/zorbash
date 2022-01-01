@@ -31,14 +31,14 @@ bool Thing::skillbox_id_insert(Thingp what)
     return false;
   }
 
-  if (! maybe_itemp()) {
+  if (! maybe_itemsp()) {
     return false;
   }
 
   int  free_slot      = -1;
-  auto skillbox_items = player->get_itemp()->skillbox_id.size();
+  auto skillbox_items = player->get_itemsp()->skillbox_id.size();
   for (auto i = 0U; i < skillbox_items; i++) {
-    auto thing_id = get_itemp()->skillbox_id[ i ];
+    auto thing_id = get_itemsp()->skillbox_id[ i ];
     if (! thing_id) {
       if (free_slot == -1) {
         free_slot = i;
@@ -58,7 +58,7 @@ bool Thing::skillbox_id_insert(Thingp what)
 
   int item_slot = -1;
   if (free_slot != -1) {
-    get_itemp()->skillbox_id[ free_slot ] = what->id;
+    get_itemsp()->skillbox_id[ free_slot ] = what->id;
     item_slot                             = free_slot;
   } else {
     if (skillbox_items >= UI_INVENTORY_QUICK_ITEMS_MAX) {
@@ -66,8 +66,8 @@ bool Thing::skillbox_id_insert(Thingp what)
       return false;
     }
 
-    get_itemp()->skillbox_id.push_back(what->id);
-    item_slot = get_itemp()->skillbox_id.size() - 1;
+    get_itemsp()->skillbox_id.push_back(what->id);
+    item_slot = get_itemsp()->skillbox_id.size() - 1;
   }
 
   game->previous_slot = item_slot;
@@ -97,7 +97,7 @@ bool Thing::skillbox_id_remove(Thingp what)
     return false;
   }
 
-  if (! maybe_itemp()) {
+  if (! maybe_itemsp()) {
     return false;
   }
 
@@ -106,9 +106,9 @@ bool Thing::skillbox_id_remove(Thingp what)
     immediate_owner->bag_remove(what);
   }
 
-  auto skillbox_items = player->get_itemp()->skillbox_id.size();
+  auto skillbox_items = player->get_itemsp()->skillbox_id.size();
   for (auto i = 0U; i < skillbox_items; i++) {
-    auto thing_id = get_itemp()->skillbox_id[ i ];
+    auto thing_id = get_itemsp()->skillbox_id[ i ];
     if (! thing_id) {
       continue;
     }
@@ -121,12 +121,12 @@ bool Thing::skillbox_id_remove(Thingp what)
       game->request_remake_skillbox = true;
 
       dbg("Remove slot");
-      get_itemp()->skillbox_id[ i ] = NoThingId;
+      get_itemsp()->skillbox_id[ i ] = NoThingId;
 
-      if (! get_itemp()->skillbox_id.size()) {
+      if (! get_itemsp()->skillbox_id.size()) {
         game->skillbox_highlight_slot = {};
       } else {
-        while (game->skillbox_highlight_slot >= get_itemp()->skillbox_id.size()) {
+        while (game->skillbox_highlight_slot >= get_itemsp()->skillbox_id.size()) {
           game->skillbox_highlight_slot--;
         }
       }
@@ -155,18 +155,18 @@ Thingp Level::skillbox_get(const uint32_t slot)
     return nullptr;
   }
 
-  auto itemp = player->maybe_itemp();
-  if (! itemp) {
-    ERR("No itemp for player");
+  auto itemsp = player->maybe_itemsp();
+  if (! itemsp) {
+    ERR("No itemsp for player");
     return nullptr;
   }
 
-  if (slot >= itemp->skillbox_id.size()) {
-    DBG("Slot %d out of range, max %d", slot, (int) itemp->skillbox_id.size());
+  if (slot >= itemsp->skillbox_id.size()) {
+    DBG("Slot %d out of range, max %d", slot, (int) itemsp->skillbox_id.size());
     return nullptr;
   }
 
-  auto thing_id = get(itemp->skillbox_id, slot);
+  auto thing_id = get(itemsp->skillbox_id, slot);
   if (! thing_id) {
     DBG("Slot %d has no tp", slot);
     return nullptr;
@@ -180,7 +180,7 @@ Thingp Level::skillbox_get(const uint32_t slot)
 
   DBG("Slot %d has %s", slot, t->name().c_str());
 
-  for (auto oid : itemp->skills) {
+  for (auto oid : itemsp->skills) {
     auto o = thing_find(oid);
     if (o) {
       if (o == t) {
@@ -208,18 +208,18 @@ bool Level::skillbox_over(const uint32_t slot)
     return false;
   }
 
-  auto itemp = player->maybe_itemp();
-  if (! itemp) {
-    ERR("No itemp for player");
+  auto itemsp = player->maybe_itemsp();
+  if (! itemsp) {
+    ERR("No itemsp for player");
     return false;
   }
 
-  if (slot >= itemp->skillbox_id.size()) {
+  if (slot >= itemsp->skillbox_id.size()) {
     DBG("Skillbox: Ignore; slot out of range");
     return false;
   }
 
-  auto oid = get(itemp->skillbox_id, slot);
+  auto oid = get(itemsp->skillbox_id, slot);
   if (! oid) {
     DBG("Skillbox: Ignore; nothing at that slot");
     return false;
@@ -256,13 +256,13 @@ bool Level::skillbox_chosen(const uint32_t slot)
     return false;
   }
 
-  auto itemp = player->maybe_itemp();
-  if (! itemp) {
-    ERR("No itemp for player");
+  auto itemsp = player->maybe_itemsp();
+  if (! itemsp) {
+    ERR("No itemsp for player");
     return false;
   }
 
-  if (slot >= itemp->skillbox_id.size()) {
+  if (slot >= itemsp->skillbox_id.size()) {
     DBG("Skillbox: Nothing in slot %d", slot);
     return false;
   }
@@ -270,7 +270,7 @@ bool Level::skillbox_chosen(const uint32_t slot)
   DBG("Skillbox: Request to remake skillbox");
   game->request_remake_skillbox = true;
 
-  auto oid = get(itemp->skillbox_id, slot);
+  auto oid = get(itemsp->skillbox_id, slot);
   if (! oid) {
     DBG("Skillbox: No skill at slot %d", slot);
     return false;

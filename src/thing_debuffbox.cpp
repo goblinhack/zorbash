@@ -29,14 +29,14 @@ bool Thing::debuffbox_id_insert(Thingp what)
     return false;
   }
 
-  if (! maybe_itemp()) {
+  if (! maybe_itemsp()) {
     return false;
   }
 
   int  free_slot       = -1;
-  auto debuffbox_items = player->get_itemp()->debuffbox_id.size();
+  auto debuffbox_items = player->get_itemsp()->debuffbox_id.size();
   for (auto i = 0U; i < debuffbox_items; i++) {
-    auto thing_id = get_itemp()->debuffbox_id[ i ];
+    auto thing_id = get_itemsp()->debuffbox_id[ i ];
     if (! thing_id) {
       if (free_slot == -1) {
         free_slot = i;
@@ -67,7 +67,7 @@ bool Thing::debuffbox_id_insert(Thingp what)
 
   int item_slot = -1;
   if (free_slot != -1) {
-    get_itemp()->debuffbox_id[ free_slot ] = what->id;
+    get_itemsp()->debuffbox_id[ free_slot ] = what->id;
     item_slot                              = free_slot;
   } else {
     if (debuffbox_items >= UI_INVENTORY_QUICK_ITEMS_MAX) {
@@ -75,8 +75,8 @@ bool Thing::debuffbox_id_insert(Thingp what)
       return false;
     }
 
-    get_itemp()->debuffbox_id.push_back(what->id);
-    item_slot = get_itemp()->debuffbox_id.size() - 1;
+    get_itemsp()->debuffbox_id.push_back(what->id);
+    item_slot = get_itemsp()->debuffbox_id.size() - 1;
   }
 
   game->previous_slot = item_slot;
@@ -104,7 +104,7 @@ bool Thing::debuffbox_id_remove(Thingp what)
     return false;
   }
 
-  if (! maybe_itemp()) {
+  if (! maybe_itemsp()) {
     return false;
   }
 
@@ -113,9 +113,9 @@ bool Thing::debuffbox_id_remove(Thingp what)
     immediate_owner->bag_remove(what);
   }
 
-  auto debuffbox_items = player->get_itemp()->debuffbox_id.size();
+  auto debuffbox_items = player->get_itemsp()->debuffbox_id.size();
   for (auto i = 0U; i < debuffbox_items; i++) {
-    auto thing_id = get_itemp()->debuffbox_id[ i ];
+    auto thing_id = get_itemsp()->debuffbox_id[ i ];
     if (! thing_id) {
       continue;
     }
@@ -128,7 +128,7 @@ bool Thing::debuffbox_id_remove(Thingp what)
       game->request_remake_debuffbox = true;
 
       dbg("Remove slot");
-      get_itemp()->debuffbox_id[ i ] = NoThingId;
+      get_itemsp()->debuffbox_id[ i ] = NoThingId;
 
       wid_debuffbox_init();
       if ((game->state != Game::STATE_CHOOSING_TARGET) && (game->state != Game::STATE_INVENTORY) &&
@@ -151,18 +151,18 @@ Thingp Level::debuffbox_get(const uint32_t slot)
     return nullptr;
   }
 
-  auto itemp = player->maybe_itemp();
-  if (! itemp) {
-    ERR("No itemp for player");
+  auto itemsp = player->maybe_itemsp();
+  if (! itemsp) {
+    ERR("No itemsp for player");
     return nullptr;
   }
 
-  if (slot >= itemp->debuffbox_id.size()) {
-    DBG("Slot %d out of range, max %d", slot, (int) itemp->debuffbox_id.size());
+  if (slot >= itemsp->debuffbox_id.size()) {
+    DBG("Slot %d out of range, max %d", slot, (int) itemsp->debuffbox_id.size());
     return nullptr;
   }
 
-  auto thing_id = get(itemp->debuffbox_id, slot);
+  auto thing_id = get(itemsp->debuffbox_id, slot);
   if (! thing_id) {
     DBG("Slot %d has no tp", slot);
     return nullptr;
@@ -176,7 +176,7 @@ Thingp Level::debuffbox_get(const uint32_t slot)
 
   DBG("Slot %d has %s", slot, t->name().c_str());
 
-  for (auto oid : itemp->debuffs) {
+  for (auto oid : itemsp->debuffs) {
     auto o = thing_find(oid);
     if (o) {
       if (o == t) {
@@ -200,18 +200,18 @@ bool Level::debuffbox_over(const uint32_t slot)
     return false;
   }
 
-  auto itemp = player->maybe_itemp();
-  if (! itemp) {
-    ERR("No itemp for player");
+  auto itemsp = player->maybe_itemsp();
+  if (! itemsp) {
+    ERR("No itemsp for player");
     return false;
   }
 
-  if (slot >= itemp->debuffbox_id.size()) {
+  if (slot >= itemsp->debuffbox_id.size()) {
     DBG("debuffbox: Ignore; slot out of range");
     return false;
   }
 
-  auto oid = get(itemp->debuffbox_id, slot);
+  auto oid = get(itemsp->debuffbox_id, slot);
   if (! oid) {
     DBG("debuffbox: Ignore; nothing at that slot");
     return false;

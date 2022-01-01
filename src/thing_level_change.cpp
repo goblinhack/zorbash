@@ -95,7 +95,7 @@ void Thing::level_change(Levelp l)
     }
   }
 
-  if (maybe_itemp()) {
+  if (maybe_itemsp()) {
     for (const auto it : get_item_vector()) {
       it->level_change(l);
     }

@@ -100,7 +100,7 @@ bool Thing::drop(Thingp what, Thingp target, bool stolen)
   }
 
   if (immediate_owner) {
-    immediate_owner->get_itemp()->carrying.remove(what->id);
+    immediate_owner->get_itemsp()->carrying.remove(what->id);
   }
 
   if (! stolen) {
@@ -191,7 +191,7 @@ bool Thing::drop_into_ether(Thingp what)
 
   what->remove_owner();
   if (immediate_owner) {
-    immediate_owner->get_itemp()->carrying.remove(what->id);
+    immediate_owner->get_itemsp()->carrying.remove(what->id);
   }
   game->request_remake_rightbar = true;
 
@@ -272,12 +272,12 @@ bool Thing::drop(Thingp what) { return drop(what, nullptr); }
 void Thing::drop_all(void)
 {
   TRACE_NO_INDENT();
-  if (! maybe_itemp()) {
+  if (! maybe_itemsp()) {
     return;
   }
 
-  while (! get_itemp()->carrying.empty()) {
-    auto id = *get_itemp()->carrying.begin();
+  while (! get_itemsp()->carrying.empty()) {
+    auto id = *get_itemsp()->carrying.begin();
     auto t  = level->thing_find(id);
     if (unlikely(! t)) {
       return;

@@ -288,16 +288,16 @@ void Thing::remove_all_references()
             err("thing is still attached to (spawner) %s", t->to_string().c_str());
           }
         }
-        if (t->maybe_itemp()) {
+        if (t->maybe_itemsp()) {
           FOR_ALL_EQUIP(e)
           {
-            if (id == t->get_itemp()->equip_id[ e ]) {
+            if (id == t->get_itemsp()->equip_id[ e ]) {
               err("thing is still attached to (equip) %s", t->to_string().c_str());
             }
-            if (id == t->get_itemp()->equip_id_carry_anim[ e ]) {
+            if (id == t->get_itemsp()->equip_id_carry_anim[ e ]) {
               err("thing is still attached to (equip carry) %s", t->to_string().c_str());
             }
-            if (id == t->get_itemp()->equip_id_use_anim[ e ]) {
+            if (id == t->get_itemsp()->equip_id_use_anim[ e ]) {
               err("thing is still attached to (equip use) %s", t->to_string().c_str());
             }
           }
@@ -328,16 +328,16 @@ void Thing::remove_all_references()
           err("interesting thing is still attached to (spawner) %s", t->to_string().c_str());
         }
       }
-      if (t->maybe_itemp()) {
+      if (t->maybe_itemsp()) {
         FOR_ALL_EQUIP(e)
         {
-          if (id == t->get_itemp()->equip_id[ e ]) {
+          if (id == t->get_itemsp()->equip_id[ e ]) {
             err("interesting thing is still attached to (equip) %s", t->to_string().c_str());
           }
-          if (id == t->get_itemp()->equip_id_carry_anim[ e ]) {
+          if (id == t->get_itemsp()->equip_id_carry_anim[ e ]) {
             err("interesting thing is still attached to (equip carry) %s", t->to_string().c_str());
           }
-          if (id == t->get_itemp()->equip_id_use_anim[ e ]) {
+          if (id == t->get_itemsp()->equip_id_use_anim[ e ]) {
             err("interesting thing is still attached to (equip use) %s", t->to_string().c_str());
           }
         }
@@ -366,16 +366,16 @@ void Thing::remove_all_references()
           err("interesting thing is still attached to (spawner) %s", t->to_string().c_str());
         }
       }
-      if (t->maybe_itemp()) {
+      if (t->maybe_itemsp()) {
         FOR_ALL_EQUIP(e)
         {
-          if (id == t->get_itemp()->equip_id[ e ]) {
+          if (id == t->get_itemsp()->equip_id[ e ]) {
             err("interesting thing is still attached to (equip) %s", t->to_string().c_str());
           }
-          if (id == t->get_itemp()->equip_id_carry_anim[ e ]) {
+          if (id == t->get_itemsp()->equip_id_carry_anim[ e ]) {
             err("interesting thing is still attached to (equip carry) %s", t->to_string().c_str());
           }
-          if (id == t->get_itemp()->equip_id_use_anim[ e ]) {
+          if (id == t->get_itemsp()->equip_id_use_anim[ e ]) {
             err("interesting thing is still attached to (equip use) %s", t->to_string().c_str());
           }
         }

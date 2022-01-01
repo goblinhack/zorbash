@@ -427,7 +427,7 @@ bool Thing::equip(Thingp item, int equip)
   //
   auto immediate_owner = item->get_immediate_owner();
   if (immediate_owner) {
-    immediate_owner->get_itemp()->carrying.remove(item->id);
+    immediate_owner->get_itemsp()->carrying.remove(item->id);
   }
 
   unequip("equip new", equip, true);
@@ -691,7 +691,7 @@ bool Thing::equipped_anything(void)
 {
   TRACE_AND_INDENT();
 
-  if (! maybe_itemp()) {
+  if (! maybe_itemsp()) {
     return false;
   }
 

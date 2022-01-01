@@ -66,7 +66,7 @@ void Thing::polymorph(Tpp into)
   }
 
   if (is_player() || is_monst() || is_item()) {
-    new_itemp();
+    new_itemsp();
   }
 
   if (is_player() || is_monst() || is_cursor()) {

@@ -1275,11 +1275,11 @@ void Game::wid_thing_info_add_carry_info(WidPopup *w, Thingp t)
     return;
   }
 
-  if (! t->maybe_itemp()) {
+  if (! t->maybe_itemsp()) {
     return;
   }
 
-  auto items = t->get_itemp()->carrying.size();
+  auto items = t->get_itemsp()->carrying.size();
 
   if (t->is_open) {
     w->log("It's open.", true);
