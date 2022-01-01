@@ -422,7 +422,7 @@ private:
   int _unused_chance5_d1000 {};
   int _unused_chance6_d1000 {};
   int _unused_chance7_d1000 {};
-  int _unused_chance8_d1000 {};
+  int _breaking_chance_d1000 {};
   int _unused_flag1 {};
   int _is_able_to_use_armor {};
   int _is_slippery {};
@@ -1089,7 +1089,7 @@ public:
   int unused_chance5_d1000(void) const { return _unused_chance5_d1000; }
   int unused_chance6_d1000(void) const { return _unused_chance6_d1000; }
   int unused_chance7_d1000(void) const { return _unused_chance7_d1000; }
-  int unused_chance8_d1000(void) const { return _unused_chance8_d1000; }
+  int breaking_chance_d1000(void) const { return _breaking_chance_d1000; }
   int unused_flag1(void) const { return _unused_flag1; }
   int is_able_to_use_armor(void) const { return _is_able_to_use_armor; }
   int is_slippery(void) const { return _is_slippery; }
@@ -1517,7 +1517,7 @@ public:
   void set_unused_chance5_d1000(int v) { _unused_chance5_d1000 = v; }
   void set_unused_chance6_d1000(int v) { _unused_chance6_d1000 = v; }
   void set_unused_chance7_d1000(int v) { _unused_chance7_d1000 = v; }
-  void set_unused_chance8_d1000(int v) { _unused_chance8_d1000 = v; }
+  void set_breaking_chance_d1000(int v) { _breaking_chance_d1000 = v; }
   void set_is_able_to_use_rings(int v) { _is_able_to_use_rings = v; }
   void set_unused_flag1(int v) { _unused_flag1 = v; }
   void set_is_able_to_use_armor(int v) { _is_able_to_use_armor = v; }

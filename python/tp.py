@@ -1138,8 +1138,8 @@ class Tp:
     def set_unused_chance7_d1000(self, value):
         my.tp_set_unused_chance7_d1000(self, value)
 
-    def set_unused_chance8_d1000(self, value):
-        my.tp_set_unused_chance8_d1000(self, value)
+    def set_breaking_chance_d1000(self, value):
+        my.tp_set_breaking_chance_d1000(self, value)
 
     def set_damage_melee_chance_d1000(self, value):
         my.tp_set_damage_melee_chance_d1000(self, value)

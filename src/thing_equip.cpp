@@ -356,7 +356,9 @@ bool Thing::unequip(const char *why, int equip, bool allowed_to_recarry)
 
   if (is_player()) {
     if (! level->is_starting && ! level->is_being_destroyed && ! is_dead && ! is_dying) {
-      if (item->is_ring()) {
+      if (item->is_dead) {
+        TOPCON("%s is broken.", item->text_The().c_str());
+      } else if (item->is_ring()) {
         TOPCON("You slip off the %s.", item->text_the().c_str());
       } else if (item->is_weapon()) {
         TOPCON("You unwield the %s.", item->text_the().c_str());

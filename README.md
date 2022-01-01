@@ -4,7 +4,8 @@
 <!--                                                                                                                                              -->
 <!-- Next todo                                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
-<!-- - equip armour etc                                                                                                                           -->
+<!-- - fish scale mail for water proofing                                                                                                         -->
+<!-- - dragon scale mail for fire proofing                                                                                                        -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Level                                                                                                                                        -->

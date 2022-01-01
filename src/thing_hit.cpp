@@ -811,6 +811,16 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
         } else {
           TOPCON("You hit %s.", text_the().c_str());
         }
+      } else if (is_rock() || is_wall_dungeon()) {
+        if (hitter->is_weapon()) {
+          TOPCON("You hit %s, why though?", text_the().c_str());
+        } else if (hitter->is_laser()) {
+          TOPCON("You zap %s, why though?", text_the().c_str());
+        } else if (hitter->is_item_magical()) {
+          TOPCON("You blast %s, why though?", text_the().c_str());
+        } else {
+          TOPCON("You hit %s, why though?", text_the().c_str());
+        }
       } else {
         if (hitter->is_weapon()) {
           TOPCON("You hit %s for %d damage.", text_the().c_str(), damage);
@@ -1089,9 +1099,15 @@ int Thing::is_hit(Thingp hitter, bool crit, bool attack_natural, bool attack_poi
     }
   }
 
+  //
+  // Allow rocks on the main level to be destoryed; but not in the border
+  //
   if (is_indestructible()) {
-    IF_DEBUG2 { hitter->log("Cannot hit: %s is indestructible", to_short_string().c_str()); }
-    return false;
+    if ((curr_at.x < MAP_BORDER_ROCK) || (curr_at.y < MAP_BORDER_ROCK) ||
+        (curr_at.x >= MAP_WIDTH - MAP_BORDER_ROCK) || (curr_at.y >= MAP_HEIGHT - MAP_BORDER_ROCK)) {
+      IF_DEBUG2 { hitter->log("Cannot hit: %s is indestructible", to_short_string().c_str()); }
+      return false;
+    }
   }
 
   if (is_resurrecting) {

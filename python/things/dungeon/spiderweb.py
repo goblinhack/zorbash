@@ -5,7 +5,7 @@ import tp
 def tp_init(name, tiles=[]):
     mytp = tp.Tp(name, "spiderweb")
     mytp.set_collision_check(True)
-    mytp.set_collision_hit_priority(2)
+    mytp.set_collision_hit_priority(3)
     mytp.set_health_initial_dice("1d20")
     mytp.set_is_able_to_fall(True)
     mytp.set_is_attackable_by_monst(True)

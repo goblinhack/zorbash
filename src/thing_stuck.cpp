@@ -14,23 +14,23 @@
 
 bool Thing::is_stuck(void)
 {
-  if (! level->is_sticky(curr_at.x, curr_at.y)) {
-    return false;
-  }
-
-  if (environ_prefers_spiderwebs() && level->is_spiderweb(curr_at.x, curr_at.y)) {
-    return false;
-  }
-
   if (is_sticky()) {
     return false;
   }
 
-  if (buff_find("buff_slippery")) {
+  if (! is_monst() && ! is_player()) {
     return false;
   }
 
-  if (! is_monst() && ! is_player()) {
+  if (! level->is_sticky(curr_at.x, curr_at.y)) {
+    return false;
+  }
+
+  if (buff_find_is_slippery()) {
+    return false;
+  }
+
+  if (environ_prefers_spiderwebs() && level->is_spiderweb(curr_at.x, curr_at.y)) {
     return false;
   }
 

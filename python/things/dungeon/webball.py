@@ -5,7 +5,7 @@ import tp
 def tp_init(name, tiles=[]):
     mytp = tp.Tp(name, "webball")
     mytp.set_collision_check(True)
-    mytp.set_collision_hit_priority(2)
+    mytp.set_collision_hit_priority(3)
     mytp.set_gfx_show_outlined(True)
     mytp.set_health_initial_dice("1d40")
     mytp.set_is_able_to_fall(True)

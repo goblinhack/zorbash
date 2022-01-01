@@ -260,10 +260,17 @@ int Thing::unused_chance7_d1000(void)
   return (tp()->unused_chance7_d1000());
 }
 
-int Thing::unused_chance8_d1000(void)
+int Thing::breaking_chance_d1000(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_chance8_d1000());
+
+  int chance = tp()->breaking_chance_d1000();
+  int e      = enchant_level();
+  while (e-- > 0) {
+    chance /= 2;
+  }
+
+  return chance;
 }
 
 int Thing::damage_melee_chance_d1000(void)

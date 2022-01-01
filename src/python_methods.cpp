@@ -1073,7 +1073,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_TP_FUNCTION(unused_chance5_d1000),
     MY_ADD_PYTHON_TP_FUNCTION(unused_chance6_d1000),
     MY_ADD_PYTHON_TP_FUNCTION(unused_chance7_d1000),
-    MY_ADD_PYTHON_TP_FUNCTION(unused_chance8_d1000),
+    MY_ADD_PYTHON_TP_FUNCTION(breaking_chance_d1000),
     MY_ADD_PYTHON_TP_FUNCTION(unused_flag1),
     MY_ADD_PYTHON_TP_FUNCTION(is_able_to_use_armor),
     MY_ADD_PYTHON_TP_FUNCTION(is_slippery),

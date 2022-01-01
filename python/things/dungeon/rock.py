@@ -25,8 +25,11 @@ def tp_init(
 
     mytp = tp.Tp(name, "rock")
     mytp.set_ai_obstacle(True)
+    mytp.set_collision_hit_priority(1)
     mytp.set_gfx_shown_in_bg(True)
     mytp.set_health_initial_dice("999")
+    mytp.set_is_attackable_by_monst(True)
+    mytp.set_is_attackable_by_player(True)
     mytp.set_is_cursor_can_hover_over(True)
     mytp.set_is_described_when_hovering_over(True)
     mytp.set_is_hittable(True)

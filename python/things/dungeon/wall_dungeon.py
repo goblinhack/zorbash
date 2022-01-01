@@ -25,7 +25,7 @@ def tp_init(
 
     mytp = tp.Tp(name, "dungeon wall")
     mytp.set_ai_obstacle(True)
-    mytp.set_collision_hit_priority(0)
+    mytp.set_collision_hit_priority(2)
     mytp.set_gfx_shown_in_bg(True)
     mytp.set_health_initial_dice("25d10")
     mytp.set_is_attackable_by_monst(True)

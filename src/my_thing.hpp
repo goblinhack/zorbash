@@ -304,6 +304,8 @@ public:
   bool buffbox_id_insert(Thingp what);
   bool buffbox_id_remove(Thingp what);
   bool buff_find(const std::string &);
+  bool buff_find_is_slippery(void);
+  ;
   bool buff_remove(Thingp it);
   bool buff_remove(Tpp what);
   bool buff_use(Thingp it);
@@ -1345,7 +1347,7 @@ public:
   int unused_chance5_d1000(void);
   int unused_chance6_d1000(void);
   int unused_chance7_d1000(void);
-  int unused_chance8_d1000(void);
+  int breaking_chance_d1000(void);
   int unused_flag1(void);
   int is_able_to_use_armor(void);
   int is_slippery(void);

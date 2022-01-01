@@ -1466,54 +1466,54 @@ extern "C" {
 #  define LZO_BLOCK_BEGIN           do {
 #  define LZO_BLOCK_END             } while __lzo_cte(0)
 #endif
-#if !defined(LZO_unused_flag)
+#if !defined(LZO_UNUSED)
 #  if (LZO_CC_BORLANDC && (__BORLANDC__ >= 0x0600))
-#    define LZO_unused_flag(var)         ((void) &var)
+#    define LZO_UNUSED(var)         ((void) &var)
 #  elif (LZO_CC_BORLANDC || LZO_CC_HIGHC || LZO_CC_NDPC || LZO_CC_PELLESC || LZO_CC_TURBOC)
-#    define LZO_unused_flag(var)         if (&var) ; else
+#    define LZO_UNUSED(var)         if (&var) ; else
 #  elif (LZO_CC_CLANG && (LZO_CC_CLANG >= 0x030200ul))
-#    define LZO_unused_flag(var)         ((void) &var)
+#    define LZO_UNUSED(var)         ((void) &var)
 #  elif (LZO_CC_CLANG || LZO_CC_GNUC || LZO_CC_LLVM || LZO_CC_PATHSCALE)
-#    define LZO_unused_flag(var)         ((void) var)
+#    define LZO_UNUSED(var)         ((void) var)
 #  elif (LZO_CC_MSC && (_MSC_VER < 900))
-#    define LZO_unused_flag(var)         if (&var) ; else
+#    define LZO_UNUSED(var)         if (&var) ; else
 #  elif (LZO_CC_KEILC)
-#    define LZO_unused_flag(var)         {extern int lzo_unused__[1-2*!(sizeof(var)>0)]; (void)lzo_unused__;}
+#    define LZO_UNUSED(var)         {extern int lzo_unused__[1-2*!(sizeof(var)>0)]; (void)lzo_unused__;}
 #  elif (LZO_CC_PACIFICC)
-#    define LZO_unused_flag(var)         ((void) sizeof(var))
+#    define LZO_UNUSED(var)         ((void) sizeof(var))
 #  elif (LZO_CC_WATCOMC) && defined(__cplusplus)
-#    define LZO_unused_flag(var)         ((void) var)
+#    define LZO_UNUSED(var)         ((void) var)
 #  else
-#    define LZO_unused_flag(var)         ((void) &var)
+#    define LZO_UNUSED(var)         ((void) &var)
 #  endif
 #endif
-#if !defined(LZO_unused_flag_RESULT)
-#  define LZO_unused_flag_RESULT(var)    LZO_unused_flag(var)
+#if !defined(LZO_UNUSED_RESULT)
+#  define LZO_UNUSED_RESULT(var)    LZO_UNUSED(var)
 #endif
-#if !defined(LZO_unused_flag_FUNC)
+#if !defined(LZO_UNUSED_FUNC)
 #  if (LZO_CC_BORLANDC && (__BORLANDC__ >= 0x0600))
-#    define LZO_unused_flag_FUNC(func)   ((void) func)
+#    define LZO_UNUSED_FUNC(func)   ((void) func)
 #  elif (LZO_CC_BORLANDC || LZO_CC_NDPC || LZO_CC_TURBOC)
-#    define LZO_unused_flag_FUNC(func)   if (func) ; else
+#    define LZO_UNUSED_FUNC(func)   if (func) ; else
 #  elif (LZO_CC_CLANG || LZO_CC_LLVM)
-#    define LZO_unused_flag_FUNC(func)   ((void) &func)
+#    define LZO_UNUSED_FUNC(func)   ((void) &func)
 #  elif (LZO_CC_MSC && (_MSC_VER < 900))
-#    define LZO_unused_flag_FUNC(func)   if (func) ; else
+#    define LZO_UNUSED_FUNC(func)   if (func) ; else
 #  elif (LZO_CC_MSC)
-#    define LZO_unused_flag_FUNC(func)   ((void) &func)
+#    define LZO_UNUSED_FUNC(func)   ((void) &func)
 #  elif (LZO_CC_KEILC || LZO_CC_PELLESC)
-#    define LZO_unused_flag_FUNC(func)   {extern int lzo_unused__[1-2*!(sizeof((int)func)>0)]; (void)lzo_unused__;}
+#    define LZO_UNUSED_FUNC(func)   {extern int lzo_unused__[1-2*!(sizeof((int)func)>0)]; (void)lzo_unused__;}
 #  else
-#    define LZO_unused_flag_FUNC(func)   ((void) func)
+#    define LZO_UNUSED_FUNC(func)   ((void) func)
 #  endif
 #endif
-#if !defined(LZO_unused_flag_LABEL)
+#if !defined(LZO_UNUSED_LABEL)
 #  if (LZO_CC_CLANG >= 0x020800ul)
-#    define LZO_unused_flag_LABEL(l)     (__lzo_gnuc_extension__ ((void) ((const void *) &&l)))
+#    define LZO_UNUSED_LABEL(l)     (__lzo_gnuc_extension__ ((void) ((const void *) &&l)))
 #  elif (LZO_CC_ARMCC || LZO_CC_CLANG || LZO_CC_INTELC || LZO_CC_WATCOMC)
-#    define LZO_unused_flag_LABEL(l)     if __lzo_cte(0) goto l
+#    define LZO_UNUSED_LABEL(l)     if __lzo_cte(0) goto l
 #  else
-#    define LZO_unused_flag_LABEL(l)     switch (0) case 1:goto l
+#    define LZO_UNUSED_LABEL(l)     switch (0) case 1:goto l
 #  endif
 #endif
 #if !defined(LZO_DEFINE_UNINITIALIZED_VAR)
@@ -3577,7 +3577,7 @@ __lzo_static_forceinline unsigned lzo_bitops_ctlz32_func(lzo_uint32_t v)
   unsigned r; r = (unsigned) __builtin_clzl(v); return r ^ 32;
 #define lzo_bitops_ctlz32(v)    (((unsigned) __builtin_clzl(v)) ^ 32)
 #else
-  LZO_unused_flag(v); return 0;
+  LZO_UNUSED(v); return 0;
 #endif
 }
 
@@ -3599,7 +3599,7 @@ __lzo_static_forceinline unsigned lzo_bitops_ctlz64_func(lzo_uint64_t v)
   unsigned r; r = (unsigned) __builtin_clzll(v); return r;
 #define lzo_bitops_ctlz64(v)    ((unsigned) __builtin_clzll(v))
 #else
-  LZO_unused_flag(v); return 0;
+  LZO_UNUSED(v); return 0;
 #endif
 }
 #endif
@@ -3618,7 +3618,7 @@ __lzo_static_forceinline unsigned lzo_bitops_cttz32_func(lzo_uint32_t v)
   unsigned r; r = (unsigned) __builtin_ctz(v); return r;
 #define lzo_bitops_cttz32(v)    ((unsigned) __builtin_ctz(v))
 #else
-  LZO_unused_flag(v); return 0;
+  LZO_UNUSED(v); return 0;
 #endif
 }
 
@@ -3640,19 +3640,19 @@ __lzo_static_forceinline unsigned lzo_bitops_cttz64_func(lzo_uint64_t v)
   unsigned r; r = (unsigned) __builtin_ctzll(v); return r;
 #define lzo_bitops_cttz64(v)    ((unsigned) __builtin_ctzll(v))
 #else
-  LZO_unused_flag(v); return 0;
+  LZO_UNUSED(v); return 0;
 #endif
 }
 #endif
 
 lzo_unused_funcs_impl(void, lzo_bitops_unused_funcs)(void)
 {
-  LZO_unused_flag_FUNC(lzo_bitops_unused_funcs);
-  LZO_unused_flag_FUNC(lzo_bitops_ctlz32_func);
-  LZO_unused_flag_FUNC(lzo_bitops_cttz32_func);
+  LZO_UNUSED_FUNC(lzo_bitops_unused_funcs);
+  LZO_UNUSED_FUNC(lzo_bitops_ctlz32_func);
+  LZO_UNUSED_FUNC(lzo_bitops_cttz32_func);
 #if defined(lzo_uint64_t)
-  LZO_unused_flag_FUNC(lzo_bitops_ctlz64_func);
-  LZO_unused_flag_FUNC(lzo_bitops_cttz64_func);
+  LZO_UNUSED_FUNC(lzo_bitops_ctlz64_func);
+  LZO_UNUSED_FUNC(lzo_bitops_cttz64_func);
 #endif
 }
 
@@ -3968,15 +3968,15 @@ __lzo_static_forceinline void lzo_memops_put_ne32(lzo_voidp dd, lzo_uint32_t vv)
 
 lzo_unused_funcs_impl(void, lzo_memops_unused_funcs)(void)
 {
-  LZO_unused_flag_FUNC(lzo_memops_unused_funcs);
-  LZO_unused_flag_FUNC(lzo_memops_get_le16);
-  LZO_unused_flag_FUNC(lzo_memops_get_le32);
-  LZO_unused_flag_FUNC(lzo_memops_get_ne16);
-  LZO_unused_flag_FUNC(lzo_memops_get_ne32);
-  LZO_unused_flag_FUNC(lzo_memops_put_le16);
-  LZO_unused_flag_FUNC(lzo_memops_put_le32);
-  LZO_unused_flag_FUNC(lzo_memops_put_ne16);
-  LZO_unused_flag_FUNC(lzo_memops_put_ne32);
+  LZO_UNUSED_FUNC(lzo_memops_unused_funcs);
+  LZO_UNUSED_FUNC(lzo_memops_get_le16);
+  LZO_UNUSED_FUNC(lzo_memops_get_le32);
+  LZO_UNUSED_FUNC(lzo_memops_get_ne16);
+  LZO_UNUSED_FUNC(lzo_memops_get_ne32);
+  LZO_UNUSED_FUNC(lzo_memops_put_le16);
+  LZO_UNUSED_FUNC(lzo_memops_put_le32);
+  LZO_UNUSED_FUNC(lzo_memops_put_ne16);
+  LZO_UNUSED_FUNC(lzo_memops_put_ne32);
 }
 
 #endif
@@ -4535,7 +4535,7 @@ _lzo_config_check(void)
   }}
 #endif
 #endif
-  LZO_unused_flag_FUNC(lzo_bitops_unused_funcs);
+  LZO_UNUSED_FUNC(lzo_bitops_unused_funcs);
 
   return r == 1 ? LZO_E_OK : LZO_E_ERROR;
 }
@@ -4588,7 +4588,7 @@ BOOL FAR PASCAL LibMain ( HANDLE hInstance, WORD wDataSegment,
 int __far __pascal LibMain ( int a, short b, short c, long d )
 #endif
 {
-  LZO_unused_flag(a); LZO_unused_flag(b); LZO_unused_flag(c); LZO_unused_flag(d);
+  LZO_UNUSED(a); LZO_UNUSED(b); LZO_UNUSED(c); LZO_UNUSED(d);
   return 1;
 }
 
@@ -5409,7 +5409,7 @@ DO_DECOMPRESS  ( const lzo_bytep in , lzo_uint  in_len,
   lzo_uint last_m_off = 0;
 #endif
 
-  LZO_unused_flag(wrkmem);
+  LZO_UNUSED(wrkmem);
 
 #if defined(COPY_DICT)
   if (dict)
@@ -5950,7 +5950,7 @@ DO_DECOMPRESS  ( const lzo_bytep in , lzo_uint  in_len,
   lzo_uint last_m_off = 0;
 #endif
 
-  LZO_unused_flag(wrkmem);
+  LZO_UNUSED(wrkmem);
 
 #if defined(COPY_DICT)
   if (dict)

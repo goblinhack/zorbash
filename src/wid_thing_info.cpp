@@ -601,7 +601,7 @@ void Game::wid_thing_info_add_gold_value(WidPopup *w, Thingp t)
     } else {
       snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->get_gold_value_dice_str().c_str());
     }
-    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Value  %17s````", tmp2);
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Value  %21s", tmp2);
     w->log(tmp);
   }
 }
@@ -626,7 +626,7 @@ void Game::wid_thing_info_add_nutrition(WidPopup *w, Thingp t)
       } else {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->get_nutrition_dice_str().c_str());
       }
-      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Food   %17s````", tmp2);
+      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Health %21s", tmp2);
       w->log(tmp);
     }
   }

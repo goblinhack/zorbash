@@ -815,6 +815,19 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
         victim->add_enemy(this);
 
         //
+        // See if armor crumbles
+        //
+        auto armor = victim->get_equip(MONST_EQUIP_ARMOR);
+        if (armor) {
+          if ((int) pcg_random_range(0, 1000) < breaking_chance_d1000()) {
+            if (is_player()) {
+              TOPCON("%s falls apart.", armor->text_The().c_str());
+            }
+            armor->dead("broken");
+          }
+        }
+
+        //
         // We tried to attack, so do not move
         //
         return true;
@@ -836,6 +849,25 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
     if (is_destroyed_on_hitting() || is_destroyed_on_hit_or_miss()) {
       dead("by foolishness");
     }
+
+    //
+    // See if the weapon crumbles
+    //
+    auto my_owner = get_top_owner();
+    if (my_owner) {
+      auto weapon = my_owner->get_equip(MONST_EQUIP_WEAPON);
+      if (weapon) {
+        auto break_chance = breaking_chance_d1000();
+        TOPCON("B %d", break_chance);
+        if (victim->is_indestructible()) {
+          break_chance *= 2;
+        }
+        if ((int) pcg_random_range(0, 1000) < break_chance) {
+          weapon->dead("broken");
+        }
+      }
+    }
+
     decr_stamina();
     return true;
   }
