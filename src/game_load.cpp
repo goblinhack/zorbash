@@ -67,6 +67,7 @@ std::istream &operator>>(std::istream &in, Bits< ThingInfop & > my)
   // v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v
   /////////////////////////////////////////////////////////////////////////
   // clang-format off
+   in >> bits(my.t->attack_bonus);
    in >> bits(my.t->born);
    in >> bits(my.t->bounce_fade);
    in >> bits(my.t->bounce_height);
@@ -87,7 +88,7 @@ std::istream &operator>>(std::istream &in, Bits< ThingInfop & > my)
    in >> bits(my.t->leader_id);
    in >> bits(my.t->lifespan);
    in >> bits(my.t->light_col);
-   in >> bits(my.t->light_strength);
+   in >> bits(my.t->light_power);
    in >> bits(my.t->lunge_to);
    in >> bits(my.t->manifestor_id);
    in >> bits(my.t->monst_state);
@@ -100,10 +101,9 @@ std::istream &operator>>(std::istream &in, Bits< ThingInfop & > my)
    in >> bits(my.t->spawner_owner_id);
    in >> bits(my.t->stamina);
    in >> bits(my.t->stamina_max);
-   in >> bits(my.t->armor_class);
-   in >> bits(my.t->attack_bonus);
-   in >> bits(my.t->constitution);
-   in >> bits(my.t->dexterity);
+   in >> bits(my.t->stat_con);
+   in >> bits(my.t->stat_def);
+   in >> bits(my.t->stat_dex);
    in >> bits(my.t->stats02);
    in >> bits(my.t->stats03);
    in >> bits(my.t->stats04);
@@ -117,7 +117,7 @@ std::istream &operator>>(std::istream &in, Bits< ThingInfop & > my)
    in >> bits(my.t->stats12);
    in >> bits(my.t->stats17);
    in >> bits(my.t->stats19);
-   in >> bits(my.t->strength);
+   in >> bits(my.t->stat_str);
    in >> bits(my.t->submerged_offset);
    in >> bits(my.t->tick_last_did_something);
    in >> bits(my.t->tick_last_dropped);

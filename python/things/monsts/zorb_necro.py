@@ -16,15 +16,15 @@ def on_tick(me, x, y):
         return False
 
     risen = 0
-    if my.thing_get_stat_constitution(me) > 1:
+    if my.thing_get_stat_con(me) > 1:
         for follower in my.thing_get_all_followers(me):
             if my.thing_is_dead_or_dying(follower):
                 my.thing_polymorph(follower, "zoblin")
                 my.thing_resurrect(follower, "arise")
-                my.thing_decr_constitution(me, 1)
+                my.thing_decr_stat_con(me, 1)
                 my.thing_msg(me, "Arise my minion!")
                 my.thing_msg(follower, "Groan!")
-                if my.thing_get_stat_constitution(me) <= 1:
+                if my.thing_get_stat_con(me) <= 1:
                     return True
                 risen += 1
 
@@ -48,7 +48,7 @@ def tp_init(name, text_name):
     mytp.set_on_born_do("me.on_born()")
     mytp.set_text_description("A master of the darkest arts.")
     mytp.set_is_carrier_of_treasure_class_b(True)
-    mytp.set_stat_strength(6)
+    mytp.set_stat_str(6)
     mytp.set_distance_avoid(5)
     mytp.set_health_initial_dice("2d3+4")
     mytp.set_is_able_to_use_wands(True)

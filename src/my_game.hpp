@@ -187,7 +187,7 @@ public:
   void wid_thing_info_add_attack(WidPopup *w, Thingp t);
   void wid_thing_info_add_carry_info(WidPopup *w, Thingp t);
   void wid_thing_info_add_charge_count(WidPopup *w, Thingp t);
-  void wid_thing_info_add_constitution(WidPopup *w, Thingp t);
+  void wid_thing_info_add_stat_con(WidPopup *w, Thingp t);
   void wid_thing_info_add_damage_natural_attack(WidPopup *w, Thingp t);
   void wid_thing_info_add_damage_digest(WidPopup *w, Thingp t);
   void wid_thing_info_add_damage_melee(WidPopup *w, Thingp t);
@@ -203,14 +203,14 @@ public:
   void wid_thing_info_add_damage_energy(WidPopup *w, Thingp t);
   void wid_thing_info_add_damage_acid(WidPopup *w, Thingp t);
   void wid_thing_info_add_danger_level(WidPopup *w, Thingp t);
-  void wid_thing_info_add_armor_class(WidPopup *w, Thingp t);
-  void wid_thing_info_add_dexterity(WidPopup *w, Thingp t);
+  void wid_thing_info_add_stat_def(WidPopup *w, Thingp t);
+  void wid_thing_info_add_stat_dex(WidPopup *w, Thingp t);
   void wid_thing_info_add_enchant(WidPopup *w, Thingp t);
   void wid_thing_info_add_gold_value(WidPopup *w, Thingp t);
   void wid_thing_info_add_health(WidPopup *w, Thingp t);
   void wid_thing_info_add_nutrition(WidPopup *w, Thingp t);
   void wid_thing_info_add_rarity(WidPopup *w, Thingp t);
-  void wid_thing_info_add_strength(WidPopup *w, Thingp t);
+  void wid_thing_info_add_stat_str(WidPopup *w, Thingp t);
   void wid_thing_info_clear_popup(void);
   void wid_thing_info_create_list(const std::vector< Thingp > &ts);
   void wid_thing_info_create(Thingp, bool when_hovering_over = false);

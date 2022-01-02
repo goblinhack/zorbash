@@ -87,7 +87,7 @@ private:
   int _ai_resent_count {};
   int _ai_shove_chance_d1000 {};
   int _ai_wanderer {};
-  int _armor_class {};
+  int _stat_def {};
   int _attack_blood {};
   int _attack_bonus {};
   int _attack_eater {};
@@ -112,7 +112,7 @@ private:
   int _collision_attack {};
   int _collision_check {};
   int _collision_hit_priority {};
-  int _constitution {};
+  int _stat_con {};
   int _damage_acid_chance_d1000 {};
   int _damage_crush_chance_d1000 {};
   int _damage_digest_chance_d1000 {};
@@ -132,7 +132,7 @@ private:
   int _damage_received_doubled_from_necrosis {};
   int _damage_received_doubled_from_poison {};
   int _damage_received_doubled_from_water {};
-  int _dexterity {};
+  int _stat_dex {};
   int _distance_avoid {};
   int _distance_jump {};
   int _distance_leader_max {};
@@ -398,7 +398,7 @@ private:
   int _is_wooden {};
   int _item_height {};
   int _item_width {};
-  int _light_strength {};
+  int _light_power {};
   int _minion_limit {};
   int _monst_size {};
   int _normal_placement_rules {};
@@ -420,7 +420,7 @@ private:
   int _stats11 {};
   int _stats12 {};
   int _stats17 {};
-  int _strength {};
+  int _stat_str {};
   int _unused_chance1_d1000 {};
   int _unused_chance2_d1000 {};
   int _unused_chance3_d1000 {};
@@ -659,7 +659,7 @@ private:
   std::string _nutrition_dice_str;
   std::string _on_born_do;
   std::string _on_damage_acid_do;
-  std::string _on_damage_constitution_do;
+  std::string _on_damage_stat_con_do;
   std::string _on_damage_crush_do;
   std::string _on_damage_digest_do;
   std::string _on_damage_energy_do;
@@ -673,7 +673,7 @@ private:
   std::string _on_damage_natural_attack_do;
   std::string _on_damage_necrosis_do;
   std::string _on_damage_poison_do;
-  std::string _on_damage_strength_do;
+  std::string _on_damage_stat_str_do;
   std::string _on_death_do;
   std::string _on_death_of_a_follower_do;
   std::string _on_death_of_my_leader_do;
@@ -687,7 +687,7 @@ private:
   std::string _on_move_do;
   std::string _on_open_do;
   std::string _on_owner_damage_acid_do;
-  std::string _on_owner_damage_constitution_do;
+  std::string _on_owner_damage_stat_con_do;
   std::string _on_owner_damage_crush_do;
   std::string _on_owner_damage_digest_do;
   std::string _on_owner_damage_energy_do;
@@ -701,7 +701,7 @@ private:
   std::string _on_owner_damage_natural_attack_do;
   std::string _on_owner_damage_necrosis_do;
   std::string _on_owner_damage_poison_do;
-  std::string _on_owner_damage_strength_do;
+  std::string _on_owner_damage_stat_str_do;
   std::string _on_owner_set_do;
   std::string _on_owner_unset_do;
   std::string _on_polymorphed_do;
@@ -876,7 +876,7 @@ public:
   const std::string &name(void) const { return _name; }
   const std::string &on_born_do(void) const { return _on_born_do; }
   const std::string &on_damage_acid_do(void) const { return _on_damage_acid_do; }
-  const std::string &on_damage_constitution_do(void) const { return _on_damage_constitution_do; }
+  const std::string &on_damage_stat_con_do(void) const { return _on_damage_stat_con_do; }
   const std::string &on_damage_crush_do(void) const { return _on_damage_crush_do; }
   const std::string &on_damage_digest_do(void) const { return _on_damage_digest_do; }
   const std::string &on_damage_energy_do(void) const { return _on_damage_energy_do; }
@@ -890,7 +890,7 @@ public:
   const std::string &on_damage_natural_attack_do(void) const { return _on_damage_natural_attack_do; }
   const std::string &on_damage_necrosis_do(void) const { return _on_damage_necrosis_do; }
   const std::string &on_damage_poison_do(void) const { return _on_damage_poison_do; }
-  const std::string &on_damage_strength_do(void) const { return _on_damage_strength_do; }
+  const std::string &on_damage_stat_str_do(void) const { return _on_damage_stat_str_do; }
   const std::string &on_death_do(void) const { return _on_death_do; }
   const std::string &on_death_of_a_follower_do(void) const { return _on_death_of_a_follower_do; }
   const std::string &on_death_of_my_leader_do(void) const { return _on_death_of_my_leader_do; }
@@ -903,7 +903,7 @@ public:
   const std::string &on_move_do(void) const { return _on_move_do; }
   const std::string &on_open_do(void) const { return _on_open_do; }
   const std::string &on_owner_damage_acid_do(void) const { return _on_owner_damage_acid_do; }
-  const std::string &on_owner_damage_constitution_do(void) const { return _on_owner_damage_constitution_do; }
+  const std::string &on_owner_damage_stat_con_do(void) const { return _on_owner_damage_stat_con_do; }
   const std::string &on_owner_damage_crush_do(void) const { return _on_owner_damage_crush_do; }
   const std::string &on_owner_damage_digest_do(void) const { return _on_owner_damage_digest_do; }
   const std::string &on_owner_damage_energy_do(void) const { return _on_owner_damage_energy_do; }
@@ -917,7 +917,7 @@ public:
   const std::string &on_owner_damage_natural_attack_do(void) const { return _on_owner_damage_natural_attack_do; }
   const std::string &on_owner_damage_necrosis_do(void) const { return _on_owner_damage_necrosis_do; }
   const std::string &on_owner_damage_poison_do(void) const { return _on_owner_damage_poison_do; }
-  const std::string &on_owner_damage_strength_do(void) const { return _on_owner_damage_strength_do; }
+  const std::string &on_owner_damage_stat_str_do(void) const { return _on_owner_damage_stat_str_do; }
   const std::string &on_owner_set_do(void) const { return _on_owner_set_do; }
   const std::string &on_owner_unset_do(void) const { return _on_owner_unset_do; }
   const std::string &on_polymorphed_do(void) const { return _on_polymorphed_do; }
@@ -955,7 +955,6 @@ public:
   int ai_resent_count(void) const { return _ai_resent_count; }
   int ai_shove_chance_d1000(void) const { return _ai_shove_chance_d1000; }
   int ai_wanderer(void) const { return _ai_wanderer; }
-  int armor_class(void) const { return _armor_class; }
   int attack_blood(void) const { return _attack_blood; }
   int attack_bonus(void) const { return _attack_bonus; }
   int attack_eater(void) const { return _attack_eater; }
@@ -978,7 +977,6 @@ public:
   int collateral_damage_pct(void) const { return _collateral_damage_pct; }
   int collision_check(void) const { return _collision_check; }
   int collision_hit_priority(void) const { return _collision_hit_priority; }
-  int constitution(void) const { return _constitution; }
   int damage_acid_chance_d1000(void) const { return _damage_acid_chance_d1000; }
   int damage_crush_chance_d1000(void) const { return _damage_crush_chance_d1000; }
   int damage_digest_chance_d1000(void) const { return _damage_digest_chance_d1000; }
@@ -998,7 +996,6 @@ public:
   int damage_received_doubled_from_necrosis(void) const { return _damage_received_doubled_from_necrosis; }
   int damage_received_doubled_from_poison(void) const { return _damage_received_doubled_from_poison; }
   int damage_received_doubled_from_water(void) const { return _damage_received_doubled_from_water; }
-  int dexterity(void) const { return _dexterity; }
   int distance_avoid(void) const { return _distance_avoid; }
   int distance_jump(void) const { return _distance_jump; }
   int distance_leader_max(void) const { return _distance_leader_max; }
@@ -1022,6 +1019,10 @@ public:
   int environ_prefers_water(void) const { return _environ_prefers_water; }
   int get_danger_level(void);
   int get_spawn_group_radius(void) const { return _spawn_group_radius; }
+  int get_stat_con(void) const { return _stat_con; }
+  int get_stat_def(void) const { return _stat_def; }
+  int get_stat_dex(void) const { return _stat_dex; }
+  int get_stat_str(void) const { return _stat_str; }
   int gfx_an_animation_only(void) const { return _gfx_an_animation_only; }
   int gfx_animated_can_hflip(void) const { return _gfx_animated_can_hflip; }
   int gfx_animated_can_vflip(void) const { return _gfx_animated_can_vflip; }
@@ -1241,8 +1242,8 @@ public:
   int is_tmp_thing(void) const { return _is_tmp_thing; }
   int is_torch(void) const { return _is_torch; }
   int is_toughness_hard(void) const { return _is_toughness_hard; }
-  int is_toughness_very_tough(void) const { return _is_toughness_very_tough; }
   int is_toughness_soft(void) const { return _is_toughness_soft; }
+  int is_toughness_very_tough(void) const { return _is_toughness_very_tough; }
   int is_treasure_chest(void) const { return _is_treasure_chest; }
   int is_treasure_class_a(void) const { return _is_treasure_class_a; }
   int is_treasure_class_b(void) const { return _is_treasure_class_b; }
@@ -1265,7 +1266,7 @@ public:
   int is_wooden(void) const { return _is_wooden; }
   int item_height(void) const { return _item_height ? _item_height : 1; }
   int item_width(void) const { return _item_width ? _item_width : 1; }
-  int light_strength(void) const { return _light_strength; }
+  int light_power(void) const { return _light_power; }
   int minion_limit(void) const { return _minion_limit; }
   int monst_size(void) const { return _monst_size; }
   int normal_placement_rules(void) const { return _normal_placement_rules; }
@@ -1286,7 +1287,6 @@ public:
   int stats11(void) const { return _stats11; }
   int stats12(void) const { return _stats12; }
   int stats17(void) const { return _stats17; }
-  int strength(void) const { return _strength; }
   int unused_chance1_d1000(void) const { return _unused_chance1_d1000; }
   int unused_chance2_d1000(void) const { return _unused_chance2_d1000; }
   int unused_chance3_d1000(void) const { return _unused_chance3_d1000; }
@@ -1501,7 +1501,6 @@ public:
   void set_ai_resent_count(int v) { _ai_resent_count = v; }
   void set_ai_shove_chance_d1000(int v) { _ai_shove_chance_d1000 = v; }
   void set_ai_wanderer(int v) { _ai_wanderer = v; }
-  void set_armor_class(int v) { _armor_class = v; }
   void set_attack_blood(int v) { _attack_blood = v; }
   void set_attack_bonus(int v) { _attack_bonus = v; }
   void set_attack_eater(int v) { _attack_eater = v; }
@@ -1788,8 +1787,8 @@ public:
   void set_is_tmp_thing(int v) { _is_tmp_thing = v; }
   void set_is_torch(int v) { _is_torch = v; }
   void set_is_toughness_hard(int v) { _is_toughness_hard = v; }
-  void set_is_toughness_very_tough(int v) { _is_toughness_very_tough = v; }
   void set_is_toughness_soft(int v) { _is_toughness_soft = v; }
+  void set_is_toughness_very_tough(int v) { _is_toughness_very_tough = v; }
   void set_is_treasure_chest(int v) { _is_treasure_chest = v; }
   void set_is_treasure_class_a(int v) { _is_treasure_class_a = v; }
   void set_is_treasure_class_b(int v) { _is_treasure_class_b = v; }
@@ -1814,7 +1813,7 @@ public:
   void set_item_width(int v) { _item_width = v; }
   void set_laser_name(const std::string &v) { _laser_name = v; }
   void set_light_color(const std::string &v) { _light_color = v; }
-  void set_light_strength(int v) { _light_strength = v; }
+  void set_light_power(int v) { _light_power = v; }
   void set_long_text_description(const std::string &v) { _long_text_description = v; }
   void set_long_text_description_extra(const std::string &v) { _long_text_description_extra = v; }
   void set_minion_limit(int v) { _minion_limit = v; }
@@ -1823,7 +1822,6 @@ public:
   void set_normal_placement_rules(int v) { _normal_placement_rules = v; }
   void set_on_born_do(const std::string &v) { _on_born_do = v; }
   void set_on_damage_acid_do(const std::string &v) { _on_damage_acid_do = v; }
-  void set_on_damage_constitution_do(const std::string &v) { _on_damage_constitution_do = v; }
   void set_on_damage_crush_do(const std::string &v) { _on_damage_crush_do = v; }
   void set_on_damage_digest_do(const std::string &v) { _on_damage_digest_do = v; }
   void set_on_damage_energy_do(const std::string &v) { _on_damage_energy_do = v; }
@@ -1837,7 +1835,8 @@ public:
   void set_on_damage_natural_attack_do(const std::string &v) { _on_damage_natural_attack_do = v; }
   void set_on_damage_necrosis_do(const std::string &v) { _on_damage_necrosis_do = v; }
   void set_on_damage_poison_do(const std::string &v) { _on_damage_poison_do = v; }
-  void set_on_damage_strength_do(const std::string &v) { _on_damage_strength_do = v; }
+  void set_on_damage_stat_con_do(const std::string &v) { _on_damage_stat_con_do = v; }
+  void set_on_damage_stat_str_do(const std::string &v) { _on_damage_stat_str_do = v; }
   void set_on_death_do(const std::string &v) { _on_death_do = v; }
   void set_on_death_drop_all_items(int v) { _on_death_drop_all_items = v; }
   void set_on_death_is_open(int v) { _on_death_is_open = v; }
@@ -1852,7 +1851,6 @@ public:
   void set_on_move_do(const std::string &v) { _on_move_do = v; }
   void set_on_open_do(const std::string &v) { _on_open_do = v; }
   void set_on_owner_damage_acid_do(const std::string &v) { _on_owner_damage_acid_do = v; }
-  void set_on_owner_damage_constitution_do(const std::string &v) { _on_owner_damage_constitution_do = v; }
   void set_on_owner_damage_crush_do(const std::string &v) { _on_owner_damage_crush_do = v; }
   void set_on_owner_damage_digest_do(const std::string &v) { _on_owner_damage_digest_do = v; }
   void set_on_owner_damage_energy_do(const std::string &v) { _on_owner_damage_energy_do = v; }
@@ -1866,7 +1864,8 @@ public:
   void set_on_owner_damage_natural_attack_do(const std::string &v) { _on_owner_damage_natural_attack_do = v; }
   void set_on_owner_damage_necrosis_do(const std::string &v) { _on_owner_damage_necrosis_do = v; }
   void set_on_owner_damage_poison_do(const std::string &v) { _on_owner_damage_poison_do = v; }
-  void set_on_owner_damage_strength_do(const std::string &v) { _on_owner_damage_strength_do = v; }
+  void set_on_owner_damage_stat_con_do(const std::string &v) { _on_owner_damage_stat_con_do = v; }
+  void set_on_owner_damage_stat_str_do(const std::string &v) { _on_owner_damage_stat_str_do = v; }
   void set_on_owner_set_do(const std::string &v) { _on_owner_set_do = v; }
   void set_on_owner_unset_do(const std::string &v) { _on_owner_unset_do = v; }
   void set_on_polymorphed_do(const std::string &v) { _on_polymorphed_do = v; }
@@ -1887,8 +1886,9 @@ public:
   void set_spawn_group_radius(int v) { _spawn_group_radius = v; }
   void set_spawn_on_shoved(const std::string &v) { _spawn_on_shoved = v; }
   void set_stamina(int v) { _stamina = v; }
-  void set_stat_constitution(int v) { _constitution = v; }
-  void set_stat_dexterity(int v) { _dexterity = v; }
+  void set_stat_con(int v) { _stat_con = v; }
+  void set_stat_def(int v) { _stat_def = v; }
+  void set_stat_dex(int v) { _stat_dex = v; }
   void set_stats02(int v) { _stats02 = v; }
   void set_stats03(int v) { _stats03 = v; }
   void set_stats04(int v) { _stats04 = v; }
@@ -1901,7 +1901,7 @@ public:
   void set_stats11(int v) { _stats11 = v; }
   void set_stats12(int v) { _stats12 = v; }
   void set_stats17(int v) { _stats17 = v; }
-  void set_stat_strength(int v) { _strength = v; }
+  void set_stat_str(int v) { _stat_str = v; }
   void set_str1(const std::string &v) { _str1 = v; }
   void set_str2(const std::string &v) { _str2 = v; }
   void set_str4(const std::string &v) { _str4 = v; }

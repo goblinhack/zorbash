@@ -364,7 +364,7 @@ static bool wid_rightbar_create(void)
   y_at += 2;
 
   ///////////////////////////////////////////////////////////////////////////
-  // ATT DEF STR
+  // AC STR CON
   ///////////////////////////////////////////////////////////////////////////
   {
     TRACE_AND_INDENT();
@@ -378,15 +378,15 @@ static bool wid_rightbar_create(void)
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_e);
 
     char tmp[ UI_SIDEBAR_RIGHT_WIDTH + 1 ];
-    snprintf(tmp, sizeof(tmp) - 1, "   %2d   %2d   %2d", player->get_attack_bonus(), player->get_armor_class_total(),
-             player->get_stat_strength());
+    snprintf(tmp, sizeof(tmp) - 1, "   %2d   %2d   %2d", player->get_stat_def_total(), player->get_stat_str_total(),
+             player->get_stat_con_total());
     wid_set_text(w, tmp);
     wid_set_text_lhs(w, true);
   }
   y_at += 1;
 
   ///////////////////////////////////////////////////////////////////////////
-  // CON
+  // DEX
   ///////////////////////////////////////////////////////////////////////////
   {
     TRACE_AND_INDENT();
@@ -400,7 +400,7 @@ static bool wid_rightbar_create(void)
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_e);
 
     char tmp[ UI_SIDEBAR_RIGHT_WIDTH + 1 ];
-    snprintf(tmp, sizeof(tmp) - 1, "   %2d   %2d   %2d", player->get_stat_constitution(), 0, 0);
+    snprintf(tmp, sizeof(tmp) - 1, "   %2d   %2d   %2d", player->get_stat_dex_total(), 0, 0);
     wid_set_text(w, tmp);
     wid_set_text_lhs(w, true);
   }

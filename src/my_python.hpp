@@ -57,7 +57,7 @@ void py_err(void);
 void py_exec(const char *str);
 void py_fini(void);
 void py_init(char *argv[]);
-void py_my_module_add_consts(void);
+void py_my_module_add_stat_consts(void);
 void py_trace(void);
 
 void py_call_void(const char *name);

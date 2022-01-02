@@ -237,11 +237,11 @@ def on_damage_necrosis(me, hitter, x, y, damage):
     return damage
 
 
-def on_damage_strength(me, hitter, x, y, damage):
+def on_damage_stat_str(me, hitter, x, y, damage):
     return damage
 
 
-def on_damage_constitution(me, hitter, x, y, damage):
+def on_damage_stat_con(me, hitter, x, y, damage):
     return damage
 
 
@@ -252,7 +252,6 @@ def tp_init(name, text_name, short_text_name, title):
     mytp.set_ai_resent_count(20)
     mytp.set_ai_shove_chance_d1000(50)
     mytp.set_ai_wanderer(True)
-    mytp.set_armor_class(10)
     mytp.set_attack_undead(True)
     mytp.set_capacity_height(20)
     mytp.set_capacity_width(20)
@@ -315,12 +314,11 @@ def tp_init(name, text_name, short_text_name, title):
     mytp.set_is_red_blooded(True)
     mytp.set_is_shovable(True)
     mytp.set_is_tickable(True)
-    mytp.set_light_strength(8)
+    mytp.set_light_power(8)
     mytp.set_long_text_description("Our most noble adventurer of no particular race or gender or creed. Devoid of fear and stout of heart. Likes kittens.")
     mytp.set_monst_size(my.MONST_SIZE_NORMAL)
     mytp.set_on_born_do("player.on_born()")
     mytp.set_on_damage_acid_do("player.on_damage_acid()")
-    mytp.set_on_damage_constitution_do("player.on_damage_constitution()")
     mytp.set_on_damage_crush_do("player.on_damage_crush()")
     mytp.set_on_damage_digest_do("player.on_damage_digest()")
     mytp.set_on_damage_energy_do("player.on_damage_energy()")
@@ -334,15 +332,17 @@ def tp_init(name, text_name, short_text_name, title):
     mytp.set_on_damage_natural_attack_do("player.on_damage_natural_attack()")
     mytp.set_on_damage_necrosis_do("player.on_damage_necrosis()")
     mytp.set_on_damage_poison_do("player.on_damage_poison()")
-    mytp.set_on_damage_strength_do("player.on_damage_strength()")
+    mytp.set_on_damage_stat_con_do("player.on_damage_stat_con()")
+    mytp.set_on_damage_stat_str_do("player.on_damage_stat_str()")
     mytp.set_on_death_do("player.on_death()")
     mytp.set_on_move_do("player.on_move()")
     mytp.set_on_you_are_hit_but_still_alive_do("player.on_you_are_hit_but_still_alive()")
     mytp.set_on_you_natural_attack_do("player.on_you_natural_attack()")
     mytp.set_stamina(100)
-    mytp.set_stat_constitution(10)
-    mytp.set_stat_dexterity(10)
-    mytp.set_stat_strength(10)
+    mytp.set_stat_con(10)
+    mytp.set_stat_def(10)
+    mytp.set_stat_dex(10)
+    mytp.set_stat_str(10)
     mytp.set_text_a_or_an("the")
     mytp.set_text_description("Our most noble adventurer. Press 'h' for help.")
     mytp.set_text_hits("hits")

@@ -1,15 +1,6 @@
-<!-- MVP plan                                                                                                                                     -->
-<!-- ------                                                                                                                                       -->
-<!-- - level pyramid                                                                                                                              -->
-<!-- - 4 bosses and final zorb boss                                                                                                               -->
-<!-- - orb of zorb                                                                                                                                -->
-<!-- ------                                                                                                                                       -->
-<!--                                                                                                                                              -->
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
 <!-- - cannot change armor                                                                                                                        -->
-<!-- - strength totals                                                                                                                            -->
-<!-- - skills for armor, def and damage                                                                                                           -->
 <!-- - head should be on top of armor                                                                                                             -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
@@ -17,6 +8,13 @@
 <!-- ------                                                                                                                                       -->
 <!-- - check fire attack                                                                                                                          -->
 <!-- - check armor damage                                                                                                                         -->
+<!-- ------                                                                                                                                       -->
+<!--                                                                                                                                              -->
+<!-- MVP plan                                                                                                                                     -->
+<!-- ------                                                                                                                                       -->
+<!-- - level pyramid                                                                                                                              -->
+<!-- - 4 bosses and final zorb boss                                                                                                               -->
+<!-- - orb of zorb                                                                                                                                -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Level                                                                                                                                        -->

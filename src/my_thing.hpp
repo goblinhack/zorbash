@@ -538,7 +538,7 @@ public:
   const std::string &on_born_do(void);
   const std::string &on_damage_acid_do(void);
   const std::string &on_damage_natural_attack_do(void);
-  const std::string &on_damage_constitution_do(void);
+  const std::string &on_damage_stat_con_do(void);
   const std::string &on_damage_crush_do(void);
   const std::string &on_damage_digest_do(void);
   const std::string &on_damage_energy_do(void);
@@ -551,7 +551,7 @@ public:
   const std::string &on_damage_melee_do(void);
   const std::string &on_damage_necrosis_do(void);
   const std::string &on_damage_poison_do(void);
-  const std::string &on_damage_strength_do(void);
+  const std::string &on_damage_stat_str_do(void);
   const std::string &on_death_do(void);
   const std::string &on_enchant_do(void);
   const std::string &on_equip_do(void);
@@ -567,7 +567,7 @@ public:
   const std::string &on_open_do(void);
   const std::string &on_owner_damage_acid_do(void);
   const std::string &on_owner_damage_natural_attack_do(void);
-  const std::string &on_owner_damage_constitution_do(void);
+  const std::string &on_owner_damage_stat_con_do(void);
   const std::string &on_owner_damage_crush_do(void);
   const std::string &on_owner_damage_digest_do(void);
   const std::string &on_owner_damage_energy_do(void);
@@ -580,7 +580,7 @@ public:
   const std::string &on_owner_damage_melee_do(void);
   const std::string &on_owner_damage_necrosis_do(void);
   const std::string &on_owner_damage_poison_do(void);
-  const std::string &on_owner_damage_strength_do(void);
+  const std::string &on_owner_damage_stat_str_do(void);
   const std::string &on_owner_set_do(void);
   const std::string &on_owner_unset_do(void);
   const std::string &on_polymorphed_do(void);
@@ -651,7 +651,6 @@ public:
              bool damage_future2, bool damage_future3, bool damage_future4, bool damage_fire, bool damage_crush,
              bool damage_lightning, bool damage_energy, bool damage_acid, bool damage_digest, int damage);
 
-  int get_attack_modifier(Thingp victim);
   int aggression_level_pct(void);
   int ai_detect_secret_doors(void);
   int ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int type, bool check);
@@ -672,7 +671,6 @@ public:
   int blast_min_radius(void);
   int break_chance_d10000(void);
   int buff_on_damage_acid(Thingp hitter, int damage);
-  int buff_on_damage_constitution(Thingp hitter, int damage);
   int buff_on_damage_crush(Thingp hitter, int damage);
   int buff_on_damage_digest(Thingp hitter, int damage);
   int buff_on_damage_energy(Thingp hitter, int damage);
@@ -686,7 +684,8 @@ public:
   int buff_on_damage_natural_attack(Thingp hitter, int damage);
   int buff_on_damage_necrosis(Thingp hitter, int damage);
   int buff_on_damage_poison(Thingp hitter, int damage);
-  int buff_on_damage_strength(Thingp hitter, int damage);
+  int buff_on_damage_stat_con(Thingp hitter, int damage);
+  int buff_on_damage_stat_str(Thingp hitter, int damage);
   int capacity_height(void);
   int capacity_width(void);
   int collateral_damage_pct(void);
@@ -711,18 +710,12 @@ public:
   int damage_received_doubled_from_necrosis(void);
   int damage_received_doubled_from_poison(void);
   int damage_received_doubled_from_water(void);
-  int decr_armor_class(int);
-  int decr_armor_class(void);
   int decr_attack_bonus(int);
   int decr_attack_bonus(void);
   int decr_charge_count(int);
   int decr_charge_count(void);
-  int decr_constitution(int);
-  int decr_constitution(void);
   int decr_current_damage(int);
   int decr_current_damage(void);
-  int decr_dexterity(int);
-  int decr_dexterity(void);
   int decr_distance_throw(int);
   int decr_distance_throw(void);
   int decr_enchant(int);
@@ -743,8 +736,8 @@ public:
   int decr_keys(void);
   int decr_lifespan(int);
   int decr_lifespan(void);
-  int decr_light_strength(int);
-  int decr_light_strength(void);
+  int decr_light_power(int);
+  int decr_light_power(void);
   int decr_minion_count(int);
   int decr_minion_count(void);
   int decr_necrotized_amount(int);
@@ -759,6 +752,12 @@ public:
   int decr_stamina_max(int);
   int decr_stamina_max(void);
   int decr_stamina(void);
+  int decr_stat_con(int);
+  int decr_stat_con(void);
+  int decr_stat_def(int);
+  int decr_stat_def(void);
+  int decr_stat_dex(int);
+  int decr_stat_dex(void);
   int decr_stats02(int);
   int decr_stats02(void);
   int decr_stats03(int);
@@ -785,8 +784,8 @@ public:
   int decr_stats17(void);
   int decr_stats19(int);
   int decr_stats19(void);
-  int decr_strength(int);
-  int decr_strength(void);
+  int decr_stat_str(int);
+  int decr_stat_str(void);
   int decr_stuck_count(int);
   int decr_stuck_count(void);
   int defence(void);
@@ -807,9 +806,8 @@ public:
   int environ_prefers_poison(void);
   int environ_prefers_spiderwebs(void);
   int environ_prefers_water(void);
-  int get_armor_class_total(void);
-  int get_armor_class(void);
   int get_attack_bonus(void);
+  int get_attack_modifier(Thingp victim);
   int get_beast_map_carried_count(void);
   int get_beast_map_count(void);
   int get_bounce_count(void);
@@ -868,12 +866,12 @@ public:
   int get_hunger_health_pct(void);
   int get_idle_count(void);
   int get_initial_charge_count(void);
-  int get_initial_light_strength(void);
+  int get_initial_light_power(void);
   int get_keys(void);
   int get_lifespan_initial(void);
   int get_lifespan(void);
-  int get_light_strength_initial(void);
-  int get_light_strength(void);
+  int get_light_power_initial(void);
+  int get_light_power(void);
   int get_minion_count(void);
   int get_necrotized_amount(void);
   int get_nutrition(void);
@@ -888,8 +886,12 @@ public:
   int get_spawn_group_size(void);
   int get_stamina_max(void);
   int get_stamina(void);
-  int get_stat_constitution(void);
-  int get_stat_dexterity(void);
+  int get_stat_con_total(void);
+  int get_stat_con(void);
+  int get_stat_def_total(void);
+  int get_stat_def(void);
+  int get_stat_dex_total(void);
+  int get_stat_dex(void);
   int get_stats02(void);
   int get_stats03(void);
   int get_stats04(void);
@@ -903,7 +905,8 @@ public:
   int get_stats12(void);
   int get_stats17(void);
   int get_stats19(void);
-  int get_stat_strength(void);
+  int get_stat_str_total(void);
+  int get_stat_str(void);
   int get_stuck_count(void);
   int get_submerged_offset(void);
   int get_torch_count(void);
@@ -934,18 +937,12 @@ public:
   int gfx_water(void);
   int health_boost(int v);
   int hunger_is_insatiable(void);
-  int incr_armor_class(int);
-  int incr_armor_class(void);
   int incr_attack_bonus(int);
   int incr_attack_bonus(void);
   int incr_charge_count(int);
   int incr_charge_count(void);
-  int incr_constitution(int);
-  int incr_constitution(void);
   int incr_current_damage(int);
   int incr_current_damage(void);
-  int incr_dexterity(int);
-  int incr_dexterity(void);
   int incr_distance_throw(int);
   int incr_distance_throw(void);
   int incr_enchant(int);
@@ -966,8 +963,8 @@ public:
   int incr_keys(void);
   int incr_lifespan(int);
   int incr_lifespan(void);
-  int incr_light_strength(int);
-  int incr_light_strength(void);
+  int incr_light_power(int);
+  int incr_light_power(void);
   int incr_minion_count(int);
   int incr_minion_count(void);
   int incr_necrotized_amount(int);
@@ -982,6 +979,12 @@ public:
   int incr_stamina_max(int);
   int incr_stamina_max(void);
   int incr_stamina(void);
+  int incr_stat_con(int);
+  int incr_stat_con(void);
+  int incr_stat_def(int);
+  int incr_stat_def(void);
+  int incr_stat_dex(int);
+  int incr_stat_dex(void);
   int incr_stats02(int);
   int incr_stats02(void);
   int incr_stats03(int);
@@ -1008,8 +1011,8 @@ public:
   int incr_stats17(void);
   int incr_stats19(int);
   int incr_stats19(void);
-  int incr_strength(int);
-  int incr_strength(void);
+  int incr_stat_str(int);
+  int incr_stat_str(void);
   int incr_stuck_count(int);
   int incr_stuck_count(void);
   int is_able_to_attack_mobs(void);
@@ -1220,8 +1223,8 @@ public:
   int is_tmp_thing(void);
   int is_torch(void);
   int is_toughness_hard(void);
-  int is_toughness_very_tough(void);
   int is_toughness_soft(void);
+  int is_toughness_very_tough(void);
   int is_treasure_chest(void);
   int is_treasure_class_a(void);
   int is_treasure_class_b(void);
@@ -1249,15 +1252,13 @@ public:
   int item_height(void);
   int item_slot_charge_count(const uint32_t slot);
   int item_width(void);
-  int light_strength(void);
+  int light_power(void);
   int maybe_itemsp_value(const Thingp it);
   int minion_limit(void);
   int monst_size(void);
   int normal_placement_rules(void);
   int on_damage_acid(Thingp hitter, int damage);
   int on_damage_acid(Thingp owner, Thingp hitter, int damage);
-  int on_damage_constitution(Thingp hitter, int damage);
-  int on_damage_constitution(Thingp owner, Thingp hitter, int damage);
   int on_damage_crush(Thingp hitter, int damage);
   int on_damage_crush(Thingp owner, Thingp hitter, int damage);
   int on_damage_digest(Thingp hitter, int damage);
@@ -1284,12 +1285,13 @@ public:
   int on_damage_necrosis(Thingp owner, Thingp hitter, int damage);
   int on_damage_poison(Thingp hitter, int damage);
   int on_damage_poison(Thingp owner, Thingp hitter, int damage);
-  int on_damage_strength(Thingp hitter, int damage);
-  int on_damage_strength(Thingp owner, Thingp hitter, int damage);
+  int on_damage_stat_con(Thingp hitter, int damage);
+  int on_damage_stat_con(Thingp owner, Thingp hitter, int damage);
+  int on_damage_stat_str(Thingp hitter, int damage);
+  int on_damage_stat_str(Thingp owner, Thingp hitter, int damage);
   int on_death_drop_all_items(void);
   int on_death_is_open(void);
   int on_owner_damage_acid(Thingp owner, Thingp hitter, int damage);
-  int on_owner_damage_constitution(Thingp owner, Thingp hitter, int damage);
   int on_owner_damage_crush(Thingp owner, Thingp hitter, int damage);
   int on_owner_damage_digest(Thingp owner, Thingp hitter, int damage);
   int on_owner_damage_energy(Thingp owner, Thingp hitter, int damage);
@@ -1303,10 +1305,10 @@ public:
   int on_owner_damage_natural_attack(Thingp owner, Thingp hitter, int damage);
   int on_owner_damage_necrosis(Thingp owner, Thingp hitter, int damage);
   int on_owner_damage_poison(Thingp owner, Thingp hitter, int damage);
-  int on_owner_damage_strength(Thingp owner, Thingp hitter, int damage);
+  int on_owner_damage_stat_con(Thingp owner, Thingp hitter, int damage);
+  int on_owner_damage_stat_str(Thingp owner, Thingp hitter, int damage);
   int range_max(void);
   int rarity(void);
-  int set_armor_class(int);
   int set_attack_bonus(int);
   int set_charge_count(int);
   int set_current_damage(int);
@@ -1320,7 +1322,7 @@ public:
   int set_idle_count(int);
   int set_keys(int);
   int set_lifespan(int);
-  int set_light_strength(int);
+  int set_light_power(int);
   int set_minion_count(int);
   int set_necrotized_amount(int);
   int set_owned_count(int);
@@ -1328,8 +1330,9 @@ public:
   int set_spawned_count(int);
   int set_stamina(int);
   int set_stamina_max(int);
-  int set_stat_constitution(int);
-  int set_stat_dexterity(int);
+  int set_stat_con(int);
+  int set_stat_def(int);
+  int set_stat_dex(int);
   int set_stats02(int);
   int set_stats03(int);
   int set_stats04(int);
@@ -1343,7 +1346,7 @@ public:
   int set_stats12(int);
   int set_stats17(int);
   int set_stats19(int);
-  int set_stat_strength(int);
+  int set_stat_str(int);
   int set_stuck_count(int);
   int skill_enchant_count(const uint32_t slot);
   int spawn_randomly_in_radius_range(const std::string &what, int amount, uint32_t radius_min, uint32_t radius_max);
@@ -1553,7 +1556,7 @@ public:
   int unused_flag98(void);
   int unused_flag99(void);
   int unused_flag9(void);
-  int update_light_strength(void);
+  int update_light_power(void);
   int weapon_damage(void);
   int worth_collecting(const Thingp it);
   int worth_collecting(const Thingp it, Thingp *would_need_to_drop);
@@ -1812,7 +1815,7 @@ public:
   void fire_tick();
   void gc(void);
   void get_equip_use_offset(int *dx, int *dy, int equip);
-  void get_light_strength_including_torch_effect(uint8_t &light_strength);
+  void get_light_power_including_torch_effect(uint8_t &light_power);
   void get_tiles(void);
   void goal_penalty_tick(void);
   void grass_tick();
@@ -1836,7 +1839,7 @@ public:
   void level_pop(void);
   void level_push(void);
   void lifespan_tick();
-  void light_update_strength(void);
+  void light_update_power(void);
   void location_check();
   void location_check_all_things_at();
   void location_check_forced();
@@ -1944,7 +1947,7 @@ public:
   void unset_on_fire(void);
   void update_all(void);
   void update_interpolated_position(void);
-  void update_light_strength_including_torch_effect(uint8_t &light_strength);
+  void update_light_power_including_torch_effect(uint8_t &light_power);
   void update_light(void);
   void update_pos(point, bool immediately);
   void update_tick(void);
@@ -1955,7 +1958,7 @@ public:
   void weapon_sheath(void);
   void wobble(float wobble);
 
-  const std::array< std::array< ThingId, MAX_BAG_WIDTH >, MAX_BAG_HEIGHT > *get_const_bag(void);
+  const std::array< std::array< ThingId, MAX_BAG_WIDTH >, MAX_BAG_HEIGHT > *get_stat_const_bag(void);
 
   std::array< std::array< ThingId, MAX_BAG_WIDTH >, MAX_BAG_HEIGHT > *get_bag(void);
 

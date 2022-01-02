@@ -101,6 +101,7 @@ public:
   point lunge_to;            // When a monst attacks something
   point last_failed_jump_at; // Previous jump attempt
 
+  int attack_bonus        = {};
   int capacity_height     = {};
   int capacity_width      = {};
   int distance_throw      = {};
@@ -111,17 +112,16 @@ public:
   int health_max          = {};
   int keys                = {};
   int lifespan            = {}; // How many things this thing owns.
-  int light_strength      = {}; // Current strength, including torches
+  int light_power         = {}; // Current strength, including torches
   int monst_state         = {};
   int necrosis            = {};
   int poison              = {};
   int score               = {};
   int stamina             = {};
   int stamina_max         = {};
-  int armor_class         = {};
-  int attack_bonus        = {};
-  int constitution        = {};
-  int dexterity           = {};
+  int stat_con            = {};
+  int stat_def            = {};
+  int stat_dex            = {};
   int stats02             = {};
   int stats03             = {};
   int stats04             = {};
@@ -135,7 +135,7 @@ public:
   int stats12             = {};
   int stats17             = {};
   int stats19             = {};
-  int strength            = {};
+  int stat_str            = {};
   int submerged_offset    = {}; // Pixels
   int tick_resurrect_when = {};
 

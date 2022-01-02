@@ -244,11 +244,11 @@ class Tp:
     def set_on_owner_damage_digest_do(self, value):
         my.tp_set_on_owner_damage_digest_do(self, value)
 
-    def set_on_owner_damage_constitution_do(self, value):
-        my.tp_set_on_owner_damage_constitution_do(self, value)
+    def set_on_owner_damage_stat_con_do(self, value):
+        my.tp_set_on_owner_damage_stat_con_do(self, value)
 
-    def set_on_owner_damage_strength_do(self, value):
-        my.tp_set_on_owner_damage_strength_do(self, value)
+    def set_on_owner_damage_stat_str_do(self, value):
+        my.tp_set_on_owner_damage_stat_str_do(self, value)
 
     def set_on_owner_damage_melee_do(self, value):
         my.tp_set_on_owner_damage_melee_do(self, value)
@@ -292,11 +292,11 @@ class Tp:
     def set_on_damage_digest_do(self, value):
         my.tp_set_on_damage_digest_do(self, value)
 
-    def set_on_damage_constitution_do(self, value):
-        my.tp_set_on_damage_constitution_do(self, value)
+    def set_on_damage_stat_con_do(self, value):
+        my.tp_set_on_damage_stat_con_do(self, value)
 
-    def set_on_damage_strength_do(self, value):
-        my.tp_set_on_damage_strength_do(self, value)
+    def set_on_damage_stat_str_do(self, value):
+        my.tp_set_on_damage_stat_str_do(self, value)
 
     def set_on_damage_melee_do(self, value):
         my.tp_set_on_damage_melee_do(self, value)
@@ -1783,20 +1783,20 @@ class Tp:
     def set_stamina(self, value):
         my.tp_set_stamina(self, value)
 
-    def set_stat_strength(self, value):
-        my.tp_set_stat_strength(self, value)
+    def set_stat_str(self, value):
+        my.tp_set_stat_str(self, value)
 
-    def set_stat_dexterity(self, value):
-        my.tp_set_stat_dexterity(self, value)
+    def set_stat_dex(self, value):
+        my.tp_set_stat_dex(self, value)
 
-    def set_armor_class(self, value):
-        my.tp_set_armor_class(self, value)
+    def set_stat_def(self, value):
+        my.tp_set_stat_def(self, value)
 
     def set_attack_bonus(self, value):
         my.tp_set_attack_bonus(self, value)
 
-    def set_stat_constitution(self, value):
-        my.tp_set_stat_constitution(self, value)
+    def set_stat_con(self, value):
+        my.tp_set_stat_con(self, value)
 
     def set_distance_throw(self, value):
         my.tp_set_distance_throw(self, value)
@@ -1933,8 +1933,8 @@ class Tp:
     def set_is_ripple(self, value):
         my.tp_set_is_ripple(self, value)
 
-    def set_light_strength(self, value):
-        my.tp_set_light_strength(self, value)
+    def set_light_power(self, value):
+        my.tp_set_light_power(self, value)
 
     def set_is_blood(self, value):
         my.tp_set_is_blood(self, value)

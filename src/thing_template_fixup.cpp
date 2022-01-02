@@ -56,15 +56,18 @@ void tp_fixup(void)
       }
     }
 
-    if (tp->is_monst() || tp->is_item() || tp->is_player()) {
-      if (! tp->strength()) {
-        tp->set_stat_strength(10);
+    if (tp->is_buff() || tp->is_debuff() || tp->is_skill() || tp->is_monst() || tp->is_item() || tp->is_player()) {
+      if (! tp->get_stat_str()) {
+        tp->set_stat_str(10);
       }
-      if (! tp->constitution()) {
-        tp->set_stat_constitution(10);
+      if (! tp->get_stat_def()) {
+        tp->set_stat_def(10);
       }
-      if (! tp->dexterity()) {
-        tp->set_stat_dexterity(10);
+      if (! tp->get_stat_con()) {
+        tp->set_stat_con(10);
+      }
+      if (! tp->get_stat_dex()) {
+        tp->set_stat_dex(10);
       }
     }
 

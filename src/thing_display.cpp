@@ -846,7 +846,7 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
   uint8_t fade = level->is_lit_currently(curr_at.x, curr_at.y);
   if (fbo == FBO_FULLMAP) {
     c.a = 255;
-  } else if (get_light_strength()) {
+  } else if (get_light_power()) {
     c.a = fade;
   }
 

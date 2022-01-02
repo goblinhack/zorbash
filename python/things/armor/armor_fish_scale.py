@@ -16,13 +16,12 @@ def on_enchant(me, x, y):
     owner = my.thing_get_top_owner_id(me)
     if my.thing_is_player(owner):
         my.topcon("The scale armor glows.")
-    my.thing_incr_armor_class(me, 2)
+    my.thing_incr_stat_def(me, 2)
 
 
 def tp_init(name, text_name, short_text_name):
     global mytp
     mytp = tp.Tp(name, text_name, short_text_name)
-    mytp.set_armor_class(12)
     mytp.set_break_chance_d10000(1000)
     mytp.set_enchant_max(10)
     mytp.set_equip_carry_anim("armor_fish_scale_carry")
@@ -49,6 +48,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_on_equip_do("me.on_equip()")
     mytp.set_on_unequip_do("me.on_unequip()")
     mytp.set_rarity(my.RARITY_COMMON)
+    mytp.set_stat_def(12)
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("Fish scale mail armor.")
     mytp.set_text_enchant("+2 AC")

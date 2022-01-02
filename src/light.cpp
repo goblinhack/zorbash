@@ -105,17 +105,17 @@ void Light::draw_line(int16_t index, const point &p0, const point &p1)
   }
 }
 
-Lightp light_new(Thingp owner, point offset, int strength, color col, int fbo)
+Lightp light_new(Thingp owner, point offset, int light_power, color col, int fbo)
 {
   TRACE_AND_INDENT();
   auto l = new Light(); // std::make_shared< class Light >();
 
-  l->offset        = offset;
-  l->strength      = strength;
-  l->orig_strength = strength;
-  l->owner         = owner;
-  l->col           = col;
-  l->fbo           = fbo;
+  l->offset           = offset;
+  l->light_power      = light_power;
+  l->light_power_orig = light_power;
+  l->owner            = owner;
+  l->col              = col;
+  l->fbo              = fbo;
 
   l->update_light_scale(1.0);
 
@@ -123,17 +123,17 @@ Lightp light_new(Thingp owner, point offset, int strength, color col, int fbo)
   return (l);
 }
 
-Lightp light_new(Thingp owner, point offset, int strength)
+Lightp light_new(Thingp owner, point offset, int light_power)
 {
   TRACE_AND_INDENT();
   auto l = new Light(); // std::make_shared< class Light >();
 
-  l->offset        = offset;
-  l->strength      = strength;
-  l->orig_strength = strength;
-  l->owner         = owner;
-  l->ray_cast_only = true;
-  l->fbo           = -1;
+  l->offset           = offset;
+  l->light_power      = light_power;
+  l->light_power_orig = light_power;
+  l->owner            = owner;
+  l->ray_cast_only    = true;
+  l->fbo              = -1;
 
   l->update_light_scale(1.0);
 
@@ -144,15 +144,15 @@ Lightp light_new(Thingp owner, point offset, int strength)
 void Light::update_light_scale(float scale)
 {
   TRACE_AND_INDENT();
-  strength = (float) orig_strength * TILE_WIDTH * scale;
+  light_power = (float) light_power_orig * TILE_WIDTH * scale;
   update();
 }
 
 void Light::update(void)
 {
   TRACE_AND_INDENT();
-  if (! strength) {
-    DIE("no light strength set");
+  if (! light_power) {
+    DIE("no light light_power set");
   }
 
   level          = owner->level;
@@ -168,7 +168,7 @@ void Light::update(void)
   for (auto i = 0; i < max_light_rays; i++) {
     double cosr, sinr;
     sincos(dr * i, &sinr, &cosr);
-    draw_line(i, point(0, 0), point(strength * cosr, strength * sinr));
+    draw_line(i, point(0, 0), point(light_power * cosr, light_power * sinr));
   }
 }
 
@@ -257,7 +257,7 @@ bool Light::calculate(void)
   // Walk the light rays in a circle. Find the nearest walls and then let
   // the light leak a little.
   //
-  auto d = (strength / TILE_WIDTH) + 1;
+  auto d = (light_power / TILE_WIDTH) + 1;
   if (likely(((player->curr_at.x >= d) && (player->curr_at.x <= MAP_WIDTH - d) && (player->curr_at.y >= d) &&
               (player->curr_at.y <= MAP_HEIGHT - d)))) {
     //
@@ -275,7 +275,7 @@ bool Light::calculate(void)
           if (unlikely(step >= end_of_points)) {
             break;
           }
-          if (unlikely(rp->distance > strength)) {
+          if (unlikely(rp->distance > light_power)) {
             break;
           }
           const int16_t p1x = light_pos.x + rp->p.x;
@@ -341,7 +341,7 @@ bool Light::calculate(void)
           if (unlikely(step >= end_of_points)) {
             break;
           }
-          if (unlikely(rp->distance > strength)) {
+          if (unlikely(rp->distance > light_power)) {
             break;
           }
           const int16_t p1x = light_pos.x + rp->p.x;
@@ -396,7 +396,7 @@ bool Light::calculate(void)
           if (unlikely(step >= end_of_points)) {
             break;
           }
-          if (unlikely(rp->distance > strength)) {
+          if (unlikely(rp->distance > light_power)) {
             break;
           }
           const int16_t p1x = light_pos.x + rp->p.x;
@@ -462,7 +462,7 @@ bool Light::calculate(void)
           if (unlikely(step >= end_of_points)) {
             break;
           }
-          if (unlikely(rp->distance > strength)) {
+          if (unlikely(rp->distance > light_power)) {
             break;
           }
           const int16_t p1x = light_pos.x + rp->p.x;
@@ -636,7 +636,7 @@ void Level::lights_render(int minx, int miny, int maxx, int maxy, int fbo)
   if (player) {
     glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 
-    player->light_update_strength();
+    player->light_update_power();
     for (auto l : player->get_light()) {
       if (l->ray_cast_only) {
         l->render(true);
@@ -722,7 +722,7 @@ void Level::lights_render_small_lights(int minx, int miny, int maxx, int maxy, i
           }
 
           auto  mid = (blit_br + blit_tl) / 2;
-          float s   = l->strength;
+          float s   = l->light_power;
           if (t->gfx_flickers()) {
             s -= (((float) non_pcg_random_range(0, 5)) / 10.0);
           }
@@ -794,7 +794,7 @@ void Level::lights_render_small_lights(int minx, int miny, int maxx, int maxy, i
             }
           }
 
-          auto  s   = l->strength + l->flicker;
+          auto  s   = l->light_power + l->flicker;
           auto  mid = (blit_br + blit_tl) / 2;
           auto  tlx = mid.x - s;
           auto  tly = mid.y - s;

@@ -342,7 +342,7 @@ bool Thing::bag_can_place_at(Thingp item, point pos)
 
   verify(MTYPE_THING, item);
 
-  auto bag = get_const_bag();
+  auto bag = get_stat_const_bag();
   auto bw  = capacity_width();
   auto bh  = capacity_height();
   auto w   = item->item_width();

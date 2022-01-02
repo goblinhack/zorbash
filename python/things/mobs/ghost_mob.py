@@ -40,7 +40,7 @@ def tp_init(name, text_name):
     mytp.set_is_shovable(True)
     mytp.set_is_tickable(True)
     mytp.set_light_color("cyan")
-    mytp.set_light_strength(2)
+    mytp.set_light_power(2)
     mytp.set_long_text_description("A bone portal which spews the angry spirits of those long passed.")
     mytp.set_minion_limit(3)
     mytp.set_normal_placement_rules(True)

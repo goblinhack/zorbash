@@ -102,7 +102,7 @@ void py_init(char *argv[])
     return;
   }
 
-  py_my_module_add_consts();
+  py_my_module_add_stat_consts();
 
   DBG3("INI: Calling PyImport_ImportModule for init module");
 

@@ -500,7 +500,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
             } else if (real_hitter->is_player()) {
               TOPCON("%s gains strength from your withering touch!", text_The().c_str());
             }
-            incr_strength();
+            incr_stat_str();
             return false;
           }
         } else {
@@ -509,7 +509,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
           } else {
             damage = 1;
           }
-          damage = buff_on_damage_strength(real_hitter, damage);
+          damage = buff_on_damage_stat_str(real_hitter, damage);
           if (! damage) {
             real_hitter->log("No strength damage");
             return false;
@@ -520,7 +520,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
               incr_necrotized_amount(damage - 1);
             }
           }
-          decr_strength();
+          decr_stat_str();
           if (is_player()) {
             TOPCON("%%fg=limegreen$Your skin is rotting. You lose 1 permanent strength!%%fg=reset$");
           } else if (is_alive_monst() && real_hitter->is_player()) {
@@ -533,11 +533,11 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
         if (environ_prefers_necrosis()) {
           if (hitter->is_necrotic_danger_level() || real_hitter->is_necrotic_danger_level()) {
             if (is_player()) {
-              TOPCON("You gain constitution from the withering touch!");
+              TOPCON("You gain con from the withering touch!");
             } else if (real_hitter->is_player()) {
-              TOPCON("%s gains constitution from your withering touch!", text_The().c_str());
+              TOPCON("%s gains con from your withering touch!", text_The().c_str());
             }
-            incr_constitution();
+            incr_stat_con();
             return false;
           }
         } else {
@@ -546,9 +546,9 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
           } else {
             damage = 1;
           }
-          damage = buff_on_damage_constitution(real_hitter, damage);
+          damage = buff_on_damage_stat_con(real_hitter, damage);
           if (! damage) {
-            real_hitter->log("No constitution damage");
+            real_hitter->log("No con damage");
             return false;
           }
           if (real_hitter->is_necrotic_danger_level()) {
@@ -557,11 +557,11 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
               incr_necrotized_amount(damage - 1);
             }
           }
-          decr_constitution();
+          decr_stat_con();
           if (is_player()) {
-            TOPCON("%%fg=limegreen$Your skin is rotting. You lose 1 permanent constitution!%%fg=reset$");
+            TOPCON("%%fg=limegreen$Your skin is rotting. You lose 1 permanent con!%%fg=reset$");
           } else if (is_alive_monst() && real_hitter->is_player()) {
-            TOPCON("%%fg=limegreen$Your rotting hand touches %s for 1 permanent constitution damage!%%fg=reset$",
+            TOPCON("%%fg=limegreen$Your rotting hand touches %s for 1 permanent con damage!%%fg=reset$",
                    text_the().c_str());
           }
           return true;

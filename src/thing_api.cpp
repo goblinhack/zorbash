@@ -175,7 +175,7 @@ float Thing::get_distance_vision(void)
     return v;
   }
 
-  auto l = get_light_strength();
+  auto l = get_light_power();
   if (l < v) {
     return l;
   }
@@ -343,12 +343,6 @@ int Thing::damage_received_doubled_from_water(void)
 {
   TRACE_NO_INDENT();
   return (tp()->damage_received_doubled_from_water());
-}
-
-int Thing::defence(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->armor_class());
 }
 
 int Thing::enchant_level(void)
@@ -4416,74 +4410,6 @@ uint32_t Thing::incr_tick_resurrect_when(void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// dexterity
-////////////////////////////////////////////////////////////////////////////
-int Thing::get_stat_dexterity(void)
-{
-  TRACE_NO_INDENT();
-  if (maybe_infop()) {
-    return (get_infop()->dexterity);
-  } else {
-    return 0;
-  }
-}
-
-int Thing::set_stat_dexterity(int v)
-{
-  TRACE_NO_INDENT();
-  if (is_player()) {
-    game->request_update_rightbar = true;
-  }
-  new_infop();
-  auto n = (get_infop()->dexterity = v);
-  return (n);
-}
-
-int Thing::decr_dexterity(int v)
-{
-  TRACE_NO_INDENT();
-  if (is_player()) {
-    game->request_update_rightbar = true;
-  }
-  new_infop();
-  auto n = (get_infop()->dexterity -= v);
-  return (n);
-}
-
-int Thing::incr_dexterity(int v)
-{
-  TRACE_NO_INDENT();
-  if (is_player()) {
-    game->request_update_rightbar = true;
-  }
-  new_infop();
-  auto n = (get_infop()->dexterity += v);
-  return (n);
-}
-
-int Thing::decr_dexterity(void)
-{
-  TRACE_NO_INDENT();
-  if (is_player()) {
-    game->request_update_rightbar = true;
-  }
-  new_infop();
-  auto n = (get_infop()->dexterity--);
-  return (n);
-}
-
-int Thing::incr_dexterity(void)
-{
-  TRACE_NO_INDENT();
-  if (is_player()) {
-    game->request_update_rightbar = true;
-  }
-  new_infop();
-  auto n = (get_infop()->dexterity++);
-  return (n);
-}
-
-////////////////////////////////////////////////////////////////////////////
 // stats02
 ////////////////////////////////////////////////////////////////////////////
 int Thing::get_stats02(void)
@@ -5232,74 +5158,6 @@ int Thing::incr_stats12(void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// constitution
-////////////////////////////////////////////////////////////////////////////
-int Thing::get_stat_constitution(void)
-{
-  TRACE_NO_INDENT();
-  if (maybe_infop()) {
-    return (get_infop()->constitution);
-  } else {
-    return 0;
-  }
-}
-
-int Thing::set_stat_constitution(int v)
-{
-  TRACE_NO_INDENT();
-  if (is_player()) {
-    game->request_update_rightbar = true;
-  }
-  new_infop();
-  auto n = (get_infop()->constitution = v);
-  return (n);
-}
-
-int Thing::decr_constitution(int v)
-{
-  TRACE_NO_INDENT();
-  if (is_player()) {
-    game->request_update_rightbar = true;
-  }
-  new_infop();
-  auto n = (get_infop()->constitution -= v);
-  return (n);
-}
-
-int Thing::incr_constitution(int v)
-{
-  TRACE_NO_INDENT();
-  if (is_player()) {
-    game->request_update_rightbar = true;
-  }
-  new_infop();
-  auto n = (get_infop()->constitution += v);
-  return (n);
-}
-
-int Thing::decr_constitution(void)
-{
-  TRACE_NO_INDENT();
-  if (is_player()) {
-    game->request_update_rightbar = true;
-  }
-  new_infop();
-  auto n = (get_infop()->constitution--);
-  return (n);
-}
-
-int Thing::incr_constitution(void)
-{
-  TRACE_NO_INDENT();
-  if (is_player()) {
-    game->request_update_rightbar = true;
-  }
-  new_infop();
-  auto n = (get_infop()->constitution++);
-  return (n);
-}
-
-////////////////////////////////////////////////////////////////////////////
 // attack_bonus
 ////////////////////////////////////////////////////////////////////////////
 int Thing::get_attack_bonus(void)
@@ -5781,74 +5639,6 @@ int Thing::incr_necrotized_amount(void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// strength
-////////////////////////////////////////////////////////////////////////////
-int Thing::get_stat_strength(void)
-{
-  TRACE_NO_INDENT();
-  if (maybe_infop()) {
-    return (get_infop()->strength);
-  } else {
-    return 0;
-  }
-}
-
-int Thing::set_stat_strength(int v)
-{
-  TRACE_NO_INDENT();
-  if (is_player()) {
-    game->request_update_rightbar = true;
-  }
-  new_infop();
-  auto n = (get_infop()->strength = v);
-  return (n);
-}
-
-int Thing::decr_strength(int v)
-{
-  TRACE_NO_INDENT();
-  if (is_player()) {
-    game->request_update_rightbar = true;
-  }
-  new_infop();
-  auto n = (get_infop()->strength -= v);
-  return (n);
-}
-
-int Thing::incr_strength(int v)
-{
-  TRACE_NO_INDENT();
-  if (is_player()) {
-    game->request_update_rightbar = true;
-  }
-  new_infop();
-  auto n = (get_infop()->strength += v);
-  return (n);
-}
-
-int Thing::decr_strength(void)
-{
-  TRACE_NO_INDENT();
-  if (is_player()) {
-    game->request_update_rightbar = true;
-  }
-  new_infop();
-  auto n = (get_infop()->strength--);
-  return (n);
-}
-
-int Thing::incr_strength(void)
-{
-  TRACE_NO_INDENT();
-  if (is_player()) {
-    game->request_update_rightbar = true;
-  }
-  new_infop();
-  auto n = (get_infop()->strength++);
-  return (n);
-}
-
-////////////////////////////////////////////////////////////////////////////
 // owned_count
 ////////////////////////////////////////////////////////////////////////////
 int Thing::get_owned_count(void)
@@ -6243,89 +6033,89 @@ int Thing::incr_lifespan(void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// light_strength
+// light_power
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_initial_light_strength(void)
+int Thing::get_initial_light_power(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->light_strength());
+  return (tp()->light_power());
 }
 
-int Thing::get_light_strength(void)
+int Thing::get_light_power(void)
 {
   TRACE_NO_INDENT();
 
   if (! maybe_infop()) {
-    return get_initial_light_strength();
+    return get_initial_light_power();
   }
 
-  uint8_t light_strength = get_infop()->light_strength;
+  uint8_t light_power = get_infop()->light_power;
 
-  if (! light_strength) {
-    light_strength = get_initial_light_strength();
+  if (! light_power) {
+    light_power = get_initial_light_power();
   }
 
-  get_light_strength_including_torch_effect(light_strength);
+  get_light_power_including_torch_effect(light_power);
 
-  get_infop()->light_strength = light_strength;
-  return light_strength;
+  get_infop()->light_power = light_power;
+  return light_power;
 }
 
-int Thing::update_light_strength(void)
+int Thing::update_light_power(void)
 {
   TRACE_NO_INDENT();
 
   if (! maybe_infop()) {
-    return get_initial_light_strength();
+    return get_initial_light_power();
   }
 
-  uint8_t light_strength = get_infop()->light_strength;
+  uint8_t light_power = get_infop()->light_power;
 
-  if (! light_strength) {
-    light_strength = get_initial_light_strength();
+  if (! light_power) {
+    light_power = get_initial_light_power();
   }
 
   if (is_player()) {
-    update_light_strength_including_torch_effect(light_strength);
+    update_light_power_including_torch_effect(light_power);
   }
 
-  get_infop()->light_strength = light_strength;
-  return light_strength;
+  get_infop()->light_power = light_power;
+  return light_power;
 }
 
-int Thing::set_light_strength(int v)
+int Thing::set_light_power(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (get_infop()->light_strength = v);
+  return (get_infop()->light_power = v);
 }
 
-int Thing::decr_light_strength(int v)
+int Thing::decr_light_power(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (get_infop()->light_strength -= v);
+  return (get_infop()->light_power -= v);
 }
 
-int Thing::incr_light_strength(int v)
+int Thing::incr_light_power(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (get_infop()->light_strength += v);
+  return (get_infop()->light_power += v);
 }
 
-int Thing::decr_light_strength(void)
+int Thing::decr_light_power(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (get_infop()->light_strength--);
+  return (get_infop()->light_power--);
 }
 
-int Thing::incr_light_strength(void)
+int Thing::incr_light_power(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (get_infop()->light_strength++);
+  return (get_infop()->light_power++);
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -7515,16 +7305,16 @@ const std::string &Thing::on_owner_damage_digest_do(void)
   return (tp()->on_owner_damage_digest_do());
 }
 
-const std::string &Thing::on_owner_damage_constitution_do(void)
+const std::string &Thing::on_owner_damage_stat_con_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_damage_constitution_do());
+  return (tp()->on_owner_damage_stat_con_do());
 }
 
-const std::string &Thing::on_owner_damage_strength_do(void)
+const std::string &Thing::on_owner_damage_stat_str_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_damage_strength_do());
+  return (tp()->on_owner_damage_stat_str_do());
 }
 
 const std::string &Thing::on_owner_damage_melee_do(void)
@@ -7611,16 +7401,16 @@ const std::string &Thing::on_damage_digest_do(void)
   return (tp()->on_damage_digest_do());
 }
 
-const std::string &Thing::on_damage_constitution_do(void)
+const std::string &Thing::on_damage_stat_con_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_damage_constitution_do());
+  return (tp()->on_damage_stat_con_do());
 }
 
-const std::string &Thing::on_damage_strength_do(void)
+const std::string &Thing::on_damage_stat_str_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_damage_strength_do());
+  return (tp()->on_damage_stat_str_do());
 }
 
 const std::string &Thing::on_damage_melee_do(void)
@@ -7763,7 +7553,7 @@ std::array< std::array< ThingId, MAX_BAG_WIDTH >, MAX_BAG_HEIGHT > *Thing::get_b
   }
 }
 
-const std::array< std::array< ThingId, MAX_BAG_WIDTH >, MAX_BAG_HEIGHT > *Thing::get_const_bag(void)
+const std::array< std::array< ThingId, MAX_BAG_WIDTH >, MAX_BAG_HEIGHT > *Thing::get_stat_const_bag(void)
 {
   TRACE_NO_INDENT();
   if (maybe_itemsp()) {

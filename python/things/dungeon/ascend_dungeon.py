@@ -14,7 +14,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_described_when_hovering_over(True)
     mytp.set_is_interesting(True)
     mytp.set_light_color("yellow")
-    mytp.set_light_strength(2)
+    mytp.set_light_power(2)
     mytp.set_normal_placement_rules(True)
     mytp.set_text_a_or_an("the")
     mytp.set_text_description("%%fg=gold$The way up.")

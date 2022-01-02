@@ -46,7 +46,7 @@ def init_weapon(name, text_name, short_text_name):
     mytp.set_long_text_description("A gleaming axe. It's edge is hungry.")
     mytp.set_on_use_do("me.on_use()")
     mytp.set_rarity(my.RARITY_UNCOMMON)
-    mytp.set_stat_strength(12)  # means +1 per enchant
+    mytp.set_stat_str(12)  # means +1 per enchant
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("Thy choppy means of justice.")
     mytp.set_text_enchant("+1 damage")

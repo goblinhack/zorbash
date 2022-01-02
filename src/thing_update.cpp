@@ -82,10 +82,9 @@ void Thing::update(void)
 
   {
     TRACE_NO_INDENT();
-    auto v = tpp->armor_class();
+    auto v = tpp->get_stat_def();
     if (unlikely(v)) {
-      set_armor_class(v);
-      set_stats19(v);
+      set_stat_def(v);
     }
   }
 
@@ -99,9 +98,9 @@ void Thing::update(void)
 
   {
     TRACE_NO_INDENT();
-    auto v = tpp->dexterity();
+    auto v = tpp->get_stat_dex();
     if (unlikely(v)) {
-      set_stat_dexterity(v);
+      set_stat_dex(v);
     }
   }
 
@@ -195,14 +194,6 @@ void Thing::update(void)
 
   {
     TRACE_NO_INDENT();
-    auto v = tpp->constitution();
-    if (unlikely(v)) {
-      set_stat_constitution(v);
-    }
-  }
-
-  {
-    TRACE_NO_INDENT();
     auto v = tpp->attack_bonus();
     if (unlikely(v)) {
       set_attack_bonus(v);
@@ -211,9 +202,9 @@ void Thing::update(void)
 
   {
     TRACE_NO_INDENT();
-    auto v = tpp->constitution();
+    auto v = tpp->get_stat_con();
     if (unlikely(v)) {
-      set_stat_constitution(v);
+      set_stat_con(v);
     }
   }
 
@@ -235,9 +226,9 @@ void Thing::update(void)
 
   {
     TRACE_NO_INDENT();
-    auto v = tpp->strength();
+    auto v = tpp->get_stat_str();
     if (unlikely(v)) {
-      set_stat_strength(v);
+      set_stat_str(v);
     }
   }
 

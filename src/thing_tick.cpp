@@ -74,7 +74,7 @@ void Thing::achieve_goals_in_life(void)
   //
   // Check torch counts
   //
-  update_light_strength();
+  update_light_power();
 
   //
   // Lifespan tick for carried torches must be before is_hidden check

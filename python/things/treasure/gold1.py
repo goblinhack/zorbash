@@ -24,7 +24,7 @@ def gold_init(name, text_name):
     mytp.set_is_treasure_class_a(True)
     mytp.set_is_treasure_type(True)
     mytp.set_light_color("yellow")
-    mytp.set_light_strength(1)
+    mytp.set_light_power(1)
     mytp.set_normal_placement_rules(True)
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("A gold goin.")

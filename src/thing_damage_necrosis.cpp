@@ -40,27 +40,27 @@ int Thing::get_damage_necrosis(void)
   return roll;
 }
 
-int Thing::on_owner_damage_strength(Thingp owner, Thingp hitter, int damage)
+int Thing::on_owner_damage_stat_str(Thingp owner, Thingp hitter, int damage)
 {
   TRACE_NO_INDENT();
   verify(MTYPE_THING, owner);
   if (! owner) {
-    err("Cannot owner_damage_strength null thing");
+    err("Cannot owner_damage_stat_str null thing");
     return damage;
   }
 
   verify(MTYPE_THING, hitter);
   if (! hitter) {
-    err("Cannot owner_damage_strength null thing");
+    err("Cannot owner_damage_stat_str null thing");
     return damage;
   }
 
-  auto on_owner_damage_strength = on_owner_damage_strength_do();
-  if (std::empty(on_owner_damage_strength)) {
+  auto on_owner_damage_stat_str = on_owner_damage_stat_str_do();
+  if (std::empty(on_owner_damage_stat_str)) {
     return damage;
   }
 
-  auto t = split_tokens(on_owner_damage_strength, '.');
+  auto t = split_tokens(on_owner_damage_stat_str, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -80,8 +80,8 @@ int Thing::on_owner_damage_strength(Thingp owner, Thingp hitter, int damage)
                           (unsigned int) curr_at.y, (unsigned int) damage);
   }
 
-  ERR("Bad on_owner_damage_strength call [%s] expected mod:function, got %d elems", on_owner_damage_strength.c_str(),
-      (int) on_owner_damage_strength.size());
+  ERR("Bad on_owner_damage_stat_str call [%s] expected mod:function, got %d elems", on_owner_damage_stat_str.c_str(),
+      (int) on_owner_damage_stat_str.size());
 
   return damage;
 }
@@ -172,21 +172,21 @@ int Thing::on_damage_necrosis(Thingp hitter, int damage)
   return damage;
 }
 
-int Thing::on_damage_strength(Thingp hitter, int damage)
+int Thing::on_damage_stat_str(Thingp hitter, int damage)
 {
   TRACE_NO_INDENT();
   verify(MTYPE_THING, hitter);
   if (! hitter) {
-    err("Cannot damage_strength null thing");
+    err("Cannot damage_stat_str null thing");
     return damage;
   }
 
-  auto on_damage_strength = on_damage_strength_do();
-  if (std::empty(on_damage_strength)) {
+  auto on_damage_stat_str = on_damage_stat_str_do();
+  if (std::empty(on_damage_stat_str)) {
     return damage;
   }
 
-  auto t = split_tokens(on_damage_strength, '.');
+  auto t = split_tokens(on_damage_stat_str, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -206,33 +206,33 @@ int Thing::on_damage_strength(Thingp hitter, int damage)
                           (unsigned int) curr_at.y, (unsigned int) damage);
   }
 
-  ERR("Bad on_damage_strength call [%s] expected mod:function, got %d elems", on_damage_strength.c_str(),
-      (int) on_damage_strength.size());
+  ERR("Bad on_damage_stat_str call [%s] expected mod:function, got %d elems", on_damage_stat_str.c_str(),
+      (int) on_damage_stat_str.size());
 
   return damage;
 }
 
-int Thing::on_owner_damage_constitution(Thingp owner, Thingp hitter, int damage)
+int Thing::on_owner_damage_stat_con(Thingp owner, Thingp hitter, int damage)
 {
   TRACE_NO_INDENT();
   verify(MTYPE_THING, owner);
   if (! owner) {
-    err("Cannot owner_damage_constitution null thing");
+    err("Cannot owner_damage_stat_con null thing");
     return damage;
   }
 
   verify(MTYPE_THING, hitter);
   if (! hitter) {
-    err("Cannot owner_damage_constitution null thing");
+    err("Cannot owner_damage_stat_con null thing");
     return damage;
   }
 
-  auto on_owner_damage_constitution = on_owner_damage_constitution_do();
-  if (std::empty(on_owner_damage_constitution)) {
+  auto on_owner_damage_stat_con = on_owner_damage_stat_con_do();
+  if (std::empty(on_owner_damage_stat_con)) {
     return damage;
   }
 
-  auto t = split_tokens(on_owner_damage_constitution, '.');
+  auto t = split_tokens(on_owner_damage_stat_con, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -252,8 +252,8 @@ int Thing::on_owner_damage_constitution(Thingp owner, Thingp hitter, int damage)
                           (unsigned int) curr_at.y, (unsigned int) damage);
   }
 
-  ERR("Bad on_owner_damage_constitution call [%s] expected mod:function, got %d elems",
-      on_owner_damage_constitution.c_str(), (int) on_owner_damage_constitution.size());
+  ERR("Bad on_owner_damage_stat_con call [%s] expected mod:function, got %d elems",
+      on_owner_damage_stat_con.c_str(), (int) on_owner_damage_stat_con.size());
 
   return damage;
 }

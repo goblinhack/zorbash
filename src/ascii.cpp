@@ -345,7 +345,7 @@ void ascii_set_context(int x, int y, void *context)
   cell->context = context;
 }
 
-void *ascii_get_context(int x, int y)
+void *ascii_get_stat_context(int x, int y)
 {
   if (! ascii_ok(x, y)) {
     return 0;

@@ -29,7 +29,7 @@ def tp_init(name, text_name):
     mytp.set_is_tickable(True)
     mytp.set_lifespan_dice("1d20+20")
     mytp.set_light_color("yellow")
-    mytp.set_light_strength(3)
+    mytp.set_light_power(3)
     mytp.set_on_idle_tick_frequency_dice("1d5+5:me.spawn()")
     mytp.set_text_a_or_an("")
     mytp.set_text_description("Fire.")

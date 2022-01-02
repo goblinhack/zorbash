@@ -24,7 +24,7 @@
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"
 
-void py_my_module_add_consts(void)
+void py_my_module_add_stat_consts(void)
 {
   TRACE_AND_INDENT();
   PyModule_AddIntConstant(my_mod, "TERM_HEIGHT", TERM_HEIGHT);

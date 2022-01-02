@@ -430,7 +430,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   }
 
   auto attack_modifier = get_attack_modifier(victim);
-  auto armor_class     = victim->get_armor_class_total();
+  auto stat_def     = victim->get_stat_def_total();
 
   bool damage_set       = false;
   bool attack_poison    = false;
@@ -736,22 +736,22 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
       //
     } else {
       bool hit                = false;
-      int  must_roll_at_least = 20 + attack_modifier - armor_class;
+      int  must_roll_at_least = 20 + attack_modifier - stat_def;
       int  i_rolled           = d20();
 
       if (i_rolled == 20) {
         crit = true;
         hit  = true;
         dbg("Attack on %s: ATT %s AC %d, to-hit %d, crit rolled %d -> hit", victim->to_short_string().c_str(),
-            modifier_to_str(attack_modifier).c_str(), armor_class, must_roll_at_least, i_rolled);
+            modifier_to_str(attack_modifier).c_str(), stat_def, must_roll_at_least, i_rolled);
       } else if (i_rolled == 1) {
         hit = false;
         dbg("Attack on %s: ATT %s AC %d, to-hit %d, fumble rolled %d -> miss", victim->to_short_string().c_str(),
-            modifier_to_str(attack_modifier).c_str(), armor_class, must_roll_at_least, i_rolled);
+            modifier_to_str(attack_modifier).c_str(), stat_def, must_roll_at_least, i_rolled);
       } else {
         hit = i_rolled >= must_roll_at_least;
         dbg("Attack on %s: ATT %s AC %d, to-hit %d, rolled %d -> %s", victim->to_short_string().c_str(),
-            modifier_to_str(attack_modifier).c_str(), armor_class, must_roll_at_least, i_rolled, hit ? "hit" : "miss");
+            modifier_to_str(attack_modifier).c_str(), stat_def, must_roll_at_least, i_rolled, hit ? "hit" : "miss");
       }
 
       //
@@ -772,7 +772,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
             TOPCON("%s misses.", text_The().c_str());
           }
         } else {
-          dbg("The attack missed (att modifier %d, AC %d) on %s", attack_modifier, armor_class,
+          dbg("The attack missed (att modifier %d, AC %d) on %s", attack_modifier, stat_def,
               victim->to_string().c_str());
         }
 

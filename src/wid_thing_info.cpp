@@ -159,10 +159,10 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
   wid_thing_info_add_damage_digest(wid_popup_window, t);
   wid_thing_info_add_damage_necrosis(wid_popup_window, t);
   wid_thing_info_add_attack(wid_popup_window, t);
-  wid_thing_info_add_armor_class(wid_popup_window, t);
-  wid_thing_info_add_dexterity(wid_popup_window, t);
-  wid_thing_info_add_strength(wid_popup_window, t);
-  wid_thing_info_add_constitution(wid_popup_window, t);
+  wid_thing_info_add_stat_def(wid_popup_window, t);
+  wid_thing_info_add_stat_str(wid_popup_window, t);
+  wid_thing_info_add_stat_con(wid_popup_window, t);
+  wid_thing_info_add_stat_dex(wid_popup_window, t);
   wid_thing_info_add_charge_count(wid_popup_window, t);
   wid_thing_info_add_danger_level(wid_popup_window, t);
   wid_thing_info_add_carry_info(wid_popup_window, t);
@@ -221,10 +221,10 @@ WidPopup *Game::wid_thing_info_create_popup_compact(const std::vector< Thingp > 
     wid_thing_info_add_damage_digest(wid_popup_window, t);
     wid_thing_info_add_damage_necrosis(wid_popup_window, t);
     wid_thing_info_add_attack(wid_popup_window, t);
-    wid_thing_info_add_armor_class(wid_popup_window, t);
-    wid_thing_info_add_dexterity(wid_popup_window, t);
-    wid_thing_info_add_strength(wid_popup_window, t);
-    wid_thing_info_add_constitution(wid_popup_window, t);
+    wid_thing_info_add_stat_def(wid_popup_window, t);
+    wid_thing_info_add_stat_str(wid_popup_window, t);
+    wid_thing_info_add_stat_con(wid_popup_window, t);
+    wid_thing_info_add_stat_dex(wid_popup_window, t);
     wid_thing_info_add_charge_count(wid_popup_window, t);
     wid_thing_info_add_danger_level(wid_popup_window, t);
   }
@@ -617,10 +617,11 @@ void Game::wid_thing_info_add_damage_melee(WidPopup *w, Thingp t)
       max_value              = damage_melee_dice.max_roll();
       if (min_value > 0) {
         if (min_value == max_value) {
-          snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->get_damage_melee_dice_str().c_str());
+          snprintf(tmp2, sizeof(tmp2) - 1, "%s", curr_weapon->get_damage_melee_dice_str().c_str());
           snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Melee  %21s", tmp2);
         } else {
-          snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->get_damage_melee_dice_str().c_str());
+          snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value,
+                   curr_weapon->get_damage_melee_dice_str().c_str());
           snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Melee  %21s", tmp2);
         }
         w->log(tmp);
@@ -1072,28 +1073,34 @@ void Game::wid_thing_info_add_attack(WidPopup *w, Thingp t)
 
   if (t->is_alive_monst() || t->is_player()) {
     auto stat = t->get_attack_bonus();
-    if (stat == 10) {
+    if (! stat) {
       return;
     }
 
-    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Attack bonus           %2d%3s", stat,
-             stat_to_bonus_slash_str(stat).c_str());
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Attack bonus           %2d```", stat);
     w->log(tmp);
   }
 }
 
-void Game::wid_thing_info_add_armor_class(WidPopup *w, Thingp t)
+void Game::wid_thing_info_add_stat_def(WidPopup *w, Thingp t)
 {
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
 
   if (t->is_armor() || t->is_alive_monst() || t->is_player()) {
-    auto ac       = t->get_armor_class();
-    auto ac_total = t->get_armor_class_total();
+    auto ac       = t->get_stat_def();
+    auto ac_total = t->get_stat_def_total();
     if (ac_total != ac) {
-      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor class base       %2d%3s", ac,
+      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor class natural    %2d%3s", ac,
                stat_to_bonus_slash_str(ac).c_str());
       w->log(tmp);
+
+      Thingp curr_armor = t->get_equip(MONST_EQUIP_ARMOR);
+      if (curr_armor) {
+        auto ac = curr_armor->get_stat_def();
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor class worn       ```%2s", stat_to_bonus_str(ac).c_str());
+        w->log(tmp);
+      }
 
       snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor class total      %2d%3s", ac_total,
                stat_to_bonus_slash_str(ac_total).c_str());
@@ -1106,72 +1113,72 @@ void Game::wid_thing_info_add_armor_class(WidPopup *w, Thingp t)
   }
 }
 
-void Game::wid_thing_info_add_strength(WidPopup *w, Thingp t)
+void Game::wid_thing_info_add_stat_str(WidPopup *w, Thingp t)
 {
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
 
   if (t->is_alive_monst() || t->is_player()) {
-    auto stat = t->get_stat_strength();
+    auto stat = t->get_stat_str();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Strength               %2d%3s", stat,
              stat_to_bonus_slash_str(stat).c_str());
     w->log(tmp);
   } else if (t->is_item() && t->is_enchantable()) {
-    auto stat = t->get_stat_strength();
+    auto stat = t->get_stat_str();
     if (stat != 10) {
       snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Strength modifier      %2d%3s", stat,
                stat_to_bonus_slash_str(stat).c_str());
       w->log(tmp);
 
-      if (stat_to_bonus(t->get_stat_strength()) > 0) {
+      if (stat_to_bonus(t->get_stat_str()) > 0) {
         w->log("-  +1 STR bonus per enchant");
       }
     }
   }
 }
 
-void Game::wid_thing_info_add_dexterity(WidPopup *w, Thingp t)
+void Game::wid_thing_info_add_stat_dex(WidPopup *w, Thingp t)
 {
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
 
   if (t->is_alive_monst() || t->is_player()) {
-    auto stat = t->get_stat_dexterity();
+    auto stat = t->get_stat_dex();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Dexterity              %2d%3s", stat,
              stat_to_bonus_slash_str(stat).c_str());
     w->log(tmp);
   } else if (t->is_item() && t->is_enchantable()) {
-    auto stat = t->get_stat_dexterity();
+    auto stat = t->get_stat_dex();
     if (stat != 10) {
       snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Dexterity modifier     %2d%3s", stat,
                stat_to_bonus_slash_str(stat).c_str());
       w->log(tmp);
 
-      if (stat_to_bonus(t->get_stat_dexterity()) > 0) {
+      if (stat_to_bonus(t->get_stat_dex()) > 0) {
         w->log("-  +1 DEX bonus per enchant");
       }
     }
   }
 }
 
-void Game::wid_thing_info_add_constitution(WidPopup *w, Thingp t)
+void Game::wid_thing_info_add_stat_con(WidPopup *w, Thingp t)
 {
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
 
   if (t->is_alive_monst() || t->is_player()) {
-    auto stat = t->get_stat_constitution();
+    auto stat = t->get_stat_con();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Constitution           %2d%3s", stat,
              stat_to_bonus_slash_str(stat).c_str());
     w->log(tmp);
   } else if (t->is_item() && t->is_enchantable()) {
-    auto stat = t->get_stat_constitution();
+    auto stat = t->get_stat_con();
     if (stat != 10) {
       snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Const. modifier        %2d%3s", stat,
                stat_to_bonus_slash_str(stat).c_str());
       w->log(tmp);
 
-      if (stat_to_bonus(t->get_stat_constitution()) > 0) {
+      if (stat_to_bonus(t->get_stat_con()) > 0) {
         w->log("-  +1 CON bonus per enchant");
       }
     }

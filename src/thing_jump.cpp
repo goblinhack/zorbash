@@ -147,7 +147,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
     if (! it->is_alive_monst()) {
       continue;
     }
-    if (! d20roll(get_stat_strength(), it->get_stat_strength())) {
+    if (! d20roll(get_stat_str(), it->get_stat_str())) {
       if (is_player()) {
         TOPCON("You are held in place!");
       }
@@ -385,7 +385,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   wobble(25);
 
   if (! is_able_to_jump_without_tiring()) {
-    if (d20() > get_stat_strength()) {
+    if (d20() > get_stat_str()) {
       decr_stamina(10);
     }
   }

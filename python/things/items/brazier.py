@@ -26,7 +26,7 @@ def tp_init(name, text_name, tiles=[]):
     mytp.set_is_shovable(True)
     mytp.set_is_tickable(True)  # for pushing and falling
     mytp.set_light_color("orange")
-    mytp.set_light_strength(2)
+    mytp.set_light_power(2)
     mytp.set_normal_placement_rules(True)
     mytp.set_spawn_on_shoved("fire")
     mytp.set_text_a_or_an("a")

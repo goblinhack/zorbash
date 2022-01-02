@@ -397,7 +397,7 @@ int Thing::buff_on_damage_digest(Thingp hitter, int damage)
   return damage;
 }
 
-int Thing::buff_on_damage_constitution(Thingp hitter, int damage)
+int Thing::buff_on_damage_stat_con(Thingp hitter, int damage)
 {
   if (! maybe_itemsp()) {
     return damage;
@@ -409,13 +409,13 @@ int Thing::buff_on_damage_constitution(Thingp hitter, int damage)
   {
     auto t = level->thing_find(item.id);
     if (t) {
-      damage = t->on_owner_damage_constitution(this, hitter, damage);
+      damage = t->on_owner_damage_stat_con(this, hitter, damage);
     }
   }
   return damage;
 }
 
-int Thing::buff_on_damage_strength(Thingp hitter, int damage)
+int Thing::buff_on_damage_stat_str(Thingp hitter, int damage)
 {
   if (! maybe_itemsp()) {
     return damage;
@@ -427,7 +427,7 @@ int Thing::buff_on_damage_strength(Thingp hitter, int damage)
   {
     auto t = level->thing_find(item.id);
     if (t) {
-      damage = t->on_owner_damage_strength(this, hitter, damage);
+      damage = t->on_owner_damage_stat_str(this, hitter, damage);
     }
   }
   return damage;

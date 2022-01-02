@@ -30,23 +30,23 @@ std::vector< Lightp > &Thing::get_light(void)
   return no_light;
 }
 
-void Thing::new_light(point offset, int strength, color col, int fbo)
+void Thing::new_light(point offset, int light_power, color col, int fbo)
 {
   TRACE_NO_INDENT();
   new_infop();
-  auto l = light_new(this, offset, strength, col, fbo);
+  auto l = light_new(this, offset, light_power, col, fbo);
   get_infop()->light.push_back(l);
-  get_infop()->light_strength = strength;
-  get_infop()->light_col      = col;
+  get_infop()->light_power = light_power;
+  get_infop()->light_col   = col;
 }
 
-void Thing::new_light(point offset, int strength)
+void Thing::new_light(point offset, int light_power)
 {
   TRACE_NO_INDENT();
   new_infop();
-  auto l = light_new(this, offset, strength);
+  auto l = light_new(this, offset, light_power);
   get_infop()->light.push_back(l);
-  get_infop()->light_strength = strength;
+  get_infop()->light_power = light_power;
 }
 
 void Thing::delete_lights(void)
@@ -73,35 +73,35 @@ void Thing::init_lights(void)
     level->player = this;
 
     //
-    // keep the light strength half the tiles drawn or we get artifacts
+    // keep the light light_power half the tiles drawn or we get artifacts
     // at the edges of the fbo
     //
     color col = WHITE;
 
-    int strength = get_initial_light_strength();
+    int light_power = get_initial_light_power();
 
     //
     // This is a raycast only light to mark things as visible
     //
-    new_light(point(0, 0), strength);
+    new_light(point(0, 0), light_power);
 
-    new_light(point(0, 0), strength / 2, col, FBO_FULLMAP_LIGHT);
-    new_light(point(0, 0), strength / 2, col, FBO_PLAYER_VISIBLE_LIGHTING);
+    new_light(point(0, 0), light_power / 2, col, FBO_FULLMAP_LIGHT);
+    new_light(point(0, 0), light_power / 2, col, FBO_PLAYER_VISIBLE_LIGHTING);
     new_light(point(0, 0), 4, col, FBO_SMALL_POINT_LIGHTS);
     col.a = 50;
-    new_light(point(0, 0), (strength * 2) / 3, col, FBO_PLAYER_VISIBLE_LIGHTING);
-    new_light(point(0, 0), (strength * 3) / 4, col, FBO_PLAYER_VISIBLE_LIGHTING);
-    new_light(point(0, 0), strength + 1, col, FBO_PLAYER_VISIBLE_LIGHTING);
-    new_light(point(0, 0), strength + 2, col, FBO_PLAYER_VISIBLE_LIGHTING);
-    new_light(point(0, 0), strength + 3, col, FBO_PLAYER_VISIBLE_LIGHTING);
-    new_light(point(0, 0), strength + 4, col, FBO_PLAYER_VISIBLE_LIGHTING);
-    new_light(point(0, 0), strength + 5, col, FBO_PLAYER_VISIBLE_LIGHTING);
-    new_light(point(0, 0), strength + 6, col, FBO_PLAYER_VISIBLE_LIGHTING);
+    new_light(point(0, 0), (light_power * 2) / 3, col, FBO_PLAYER_VISIBLE_LIGHTING);
+    new_light(point(0, 0), (light_power * 3) / 4, col, FBO_PLAYER_VISIBLE_LIGHTING);
+    new_light(point(0, 0), light_power + 1, col, FBO_PLAYER_VISIBLE_LIGHTING);
+    new_light(point(0, 0), light_power + 2, col, FBO_PLAYER_VISIBLE_LIGHTING);
+    new_light(point(0, 0), light_power + 3, col, FBO_PLAYER_VISIBLE_LIGHTING);
+    new_light(point(0, 0), light_power + 4, col, FBO_PLAYER_VISIBLE_LIGHTING);
+    new_light(point(0, 0), light_power + 5, col, FBO_PLAYER_VISIBLE_LIGHTING);
+    new_light(point(0, 0), light_power + 6, col, FBO_PLAYER_VISIBLE_LIGHTING);
 
     has_light = true;
     dbg("Player created");
   } else {
-    if (unlikely(get_light_strength())) {
+    if (unlikely(get_light_power())) {
       std::string l = light_color();
       if (l.empty()) {
         l = "white";
@@ -114,18 +114,18 @@ void Thing::init_lights(void)
       }
       if (add_light) {
         color c = string2color(l);
-        new_light(point(0, 0), get_light_strength(), c, FBO_PLAYER_VISIBLE_LIGHTING);
+        new_light(point(0, 0), get_light_power(), c, FBO_PLAYER_VISIBLE_LIGHTING);
         has_light = true;
       }
     }
   }
 }
 
-void Thing::light_update_strength(void)
+void Thing::light_update_power(void)
 {
   TRACE_NO_INDENT();
-  float oldstr = get_initial_light_strength();
-  float newstr = get_light_strength();
+  float oldstr = get_initial_light_power();
+  float newstr = get_light_power();
   if (! newstr) {
     newstr = 1;
   }

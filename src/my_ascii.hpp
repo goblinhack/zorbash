@@ -95,7 +95,7 @@ int         ascii_tp_tl1_tile(int x, int y, fpoint *);
 int         ascii_x_ok(int x);
 int         ascii_y_ok(int y);
 std::string ascii_strip(std::string const &text);
-void       *ascii_get_context(int x, int y);
+void       *ascii_get_stat_context(int x, int y);
 void        ascii_blit_layer(int z, int no_color);
 void        ascii_clear_display(void);
 void        ascii_clear_scissors(void);
