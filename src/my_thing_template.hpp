@@ -89,7 +89,7 @@ private:
   int _ai_wanderer {};
   int _stat_def {};
   int _attack_blood {};
-  int _attack_bonus {};
+  int _stat_att_mod {};
   int _attack_eater {};
   int _attack_engulf_chance_d1000 {};
   int _attack_humanoid {};
@@ -414,12 +414,11 @@ private:
   int _stats05 {};
   int _stats06 {};
   int _stats07 {};
-  int _stats08 {};
   int _stats09 {};
-  int _stats10 {};
-  int _stats11 {};
-  int _stats12 {};
-  int _stats17 {};
+  int _stat_def_mod {};
+  int _stat_con_mod {};
+  int _stat_dex_mod {};
+  int _stat_str_mod {};
   int _stat_str {};
   int _unused_chance1_d1000 {};
   int _unused_chance2_d1000 {};
@@ -956,7 +955,7 @@ public:
   int ai_shove_chance_d1000(void) const { return _ai_shove_chance_d1000; }
   int ai_wanderer(void) const { return _ai_wanderer; }
   int attack_blood(void) const { return _attack_blood; }
-  int attack_bonus(void) const { return _attack_bonus; }
+  int stat_att_mod(void) const { return _stat_att_mod; }
   int attack_eater(void) const { return _attack_eater; }
   int attack_engulf_chance_d1000(void) const { return _attack_engulf_chance_d1000; }
   int attack_humanoid(void) const { return _attack_humanoid; }
@@ -1281,12 +1280,11 @@ public:
   int stats05(void) const { return _stats05; }
   int stats06(void) const { return _stats06; }
   int stats07(void) const { return _stats07; }
-  int stats08(void) const { return _stats08; }
   int stats09(void) const { return _stats09; }
-  int stats10(void) const { return _stats10; }
-  int stats11(void) const { return _stats11; }
-  int stats12(void) const { return _stats12; }
-  int stats17(void) const { return _stats17; }
+  int stat_def_mod(void) const { return _stat_def_mod; }
+  int stat_con_mod(void) const { return _stat_con_mod; }
+  int stat_dex_mod(void) const { return _stat_dex_mod; }
+  int stat_str_mod(void) const { return _stat_str_mod; }
   int unused_chance1_d1000(void) const { return _unused_chance1_d1000; }
   int unused_chance2_d1000(void) const { return _unused_chance2_d1000; }
   int unused_chance3_d1000(void) const { return _unused_chance3_d1000; }
@@ -1502,7 +1500,6 @@ public:
   void set_ai_shove_chance_d1000(int v) { _ai_shove_chance_d1000 = v; }
   void set_ai_wanderer(int v) { _ai_wanderer = v; }
   void set_attack_blood(int v) { _attack_blood = v; }
-  void set_attack_bonus(int v) { _attack_bonus = v; }
   void set_attack_eater(int v) { _attack_eater = v; }
   void set_attack_engulf_chance_d1000(int v) { _attack_engulf_chance_d1000 = v; }
   void set_attack_humanoid(int v) { _attack_humanoid = v; }
@@ -1886,22 +1883,22 @@ public:
   void set_spawn_group_radius(int v) { _spawn_group_radius = v; }
   void set_spawn_on_shoved(const std::string &v) { _spawn_on_shoved = v; }
   void set_stamina(int v) { _stamina = v; }
+  void set_stat_att_mod(int v) { _stat_att_mod = v; }
   void set_stat_con(int v) { _stat_con = v; }
+  void set_stat_con_mod(int v) { _stat_con_mod = v; }
   void set_stat_def(int v) { _stat_def = v; }
+  void set_stat_def_mod(int v) { _stat_def_mod = v; }
   void set_stat_dex(int v) { _stat_dex = v; }
+  void set_stat_dex_mod(int v) { _stat_dex_mod = v; }
   void set_stats02(int v) { _stats02 = v; }
   void set_stats03(int v) { _stats03 = v; }
   void set_stats04(int v) { _stats04 = v; }
   void set_stats05(int v) { _stats05 = v; }
   void set_stats06(int v) { _stats06 = v; }
   void set_stats07(int v) { _stats07 = v; }
-  void set_stats08(int v) { _stats08 = v; }
   void set_stats09(int v) { _stats09 = v; }
-  void set_stats10(int v) { _stats10 = v; }
-  void set_stats11(int v) { _stats11 = v; }
-  void set_stats12(int v) { _stats12 = v; }
-  void set_stats17(int v) { _stats17 = v; }
   void set_stat_str(int v) { _stat_str = v; }
+  void set_stat_str_mod(int v) { _stat_str_mod = v; }
   void set_str1(const std::string &v) { _str1 = v; }
   void set_str2(const std::string &v) { _str2 = v; }
   void set_str4(const std::string &v) { _str4 = v; }

@@ -36,7 +36,7 @@ PyObject *tile_load_arr_sprites_(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *topcon_(PyObject *obj, PyObject *args, PyObject *keywds);
 
 char *py_obj_attr_str(const PyObject *py_obj, const char *attr);
-char *py_obj_to_str(const PyObject *py_str);
+char *py_obj_to_string(const PyObject *py_str);
 
 double py_obj_attr_double(const PyObject *py_obj, const char *attr);
 double py_obj_to_double(PyObject *py_obj);
@@ -47,7 +47,7 @@ int py_obj_to_int(PyObject *py_obj);
 
 PyMODINIT_FUNC py_my_module_create(void);
 
-std::string py_obj_to_string(const PyObject *py_str);
+std::string py_obj_to_stringing(const PyObject *py_str);
 
 uint64_t py_obj_attr_uint64(const PyObject *py_obj, const char *attr);
 uint64_t py_obj_to_uint64(PyObject *py_obj);

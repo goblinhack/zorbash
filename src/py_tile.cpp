@@ -66,7 +66,7 @@ PyObject *tile_load_arr_(PyObject *obj, PyObject *args, PyObject *keywds)
       continue;
     }
 
-    arr[ i ] = py_obj_to_str(strObj);
+    arr[ i ] = py_obj_to_string(strObj);
   }
 
   tile_load_arr(std::string(file ? file : ""), std::string(name ? name : ""), width, height, numLines, arr);
@@ -138,7 +138,7 @@ PyObject *tile_load_arr_sprites_(PyObject *obj, PyObject *args, PyObject *keywds
       continue;
     }
 
-    arr[ i ] = py_obj_to_str(strObj);
+    arr[ i ] = py_obj_to_string(strObj);
     PY_DBG("tile_load_arr:sprites(\"%s\")", arr[ i ]);
   }
 

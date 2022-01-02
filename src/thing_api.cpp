@@ -4818,74 +4818,6 @@ int Thing::incr_stats07(void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// stats08
-////////////////////////////////////////////////////////////////////////////
-int Thing::get_stats08(void)
-{
-  TRACE_NO_INDENT();
-  if (maybe_infop()) {
-    return (get_infop()->stats08);
-  } else {
-    return 0;
-  }
-}
-
-int Thing::set_stats08(int v)
-{
-  TRACE_NO_INDENT();
-  if (is_player()) {
-    game->request_update_rightbar = true;
-  }
-  new_infop();
-  auto n = (get_infop()->stats08 = v);
-  return (n);
-}
-
-int Thing::decr_stats08(int v)
-{
-  TRACE_NO_INDENT();
-  if (is_player()) {
-    game->request_update_rightbar = true;
-  }
-  new_infop();
-  auto n = (get_infop()->stats08 -= v);
-  return (n);
-}
-
-int Thing::incr_stats08(int v)
-{
-  TRACE_NO_INDENT();
-  if (is_player()) {
-    game->request_update_rightbar = true;
-  }
-  new_infop();
-  auto n = (get_infop()->stats08 += v);
-  return (n);
-}
-
-int Thing::decr_stats08(void)
-{
-  TRACE_NO_INDENT();
-  if (is_player()) {
-    game->request_update_rightbar = true;
-  }
-  new_infop();
-  auto n = (get_infop()->stats08--);
-  return (n);
-}
-
-int Thing::incr_stats08(void)
-{
-  TRACE_NO_INDENT();
-  if (is_player()) {
-    game->request_update_rightbar = true;
-  }
-  new_infop();
-  auto n = (get_infop()->stats08++);
-  return (n);
-}
-
-////////////////////////////////////////////////////////////////////////////
 // stats09
 ////////////////////////////////////////////////////////////////////////////
 int Thing::get_stats09(void)
@@ -4954,342 +4886,342 @@ int Thing::incr_stats09(void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// stats10
+// stat_def_mod
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_stats10(void)
+int Thing::get_stat_def_mod(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (get_infop()->stats10);
+    return (get_infop()->stat_def_mod);
   } else {
     return 0;
   }
 }
 
-int Thing::set_stats10(int v)
+int Thing::set_stat_def_mod(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (get_infop()->stats10 = v);
+  auto n = (get_infop()->stat_def_mod = v);
   return (n);
 }
 
-int Thing::decr_stats10(int v)
+int Thing::decr_stat_def_mod(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (get_infop()->stats10 -= v);
+  auto n = (get_infop()->stat_def_mod -= v);
   return (n);
 }
 
-int Thing::incr_stats10(int v)
+int Thing::incr_stat_def_mod(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (get_infop()->stats10 += v);
+  auto n = (get_infop()->stat_def_mod += v);
   return (n);
 }
 
-int Thing::decr_stats10(void)
+int Thing::decr_stat_def_mod(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (get_infop()->stats10--);
+  auto n = (get_infop()->stat_def_mod--);
   return (n);
 }
 
-int Thing::incr_stats10(void)
+int Thing::incr_stat_def_mod(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (get_infop()->stats10++);
+  auto n = (get_infop()->stat_def_mod++);
   return (n);
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// stats11
+// stat_con_mod
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_stats11(void)
+int Thing::get_stat_con_mod(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (get_infop()->stats11);
+    return (get_infop()->stat_con_mod);
   } else {
     return 0;
   }
 }
 
-int Thing::set_stats11(int v)
+int Thing::set_stat_con_mod(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (get_infop()->stats11 = v);
+  auto n = (get_infop()->stat_con_mod = v);
   return (n);
 }
 
-int Thing::decr_stats11(int v)
+int Thing::decr_stat_con_mod(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (get_infop()->stats11 -= v);
+  auto n = (get_infop()->stat_con_mod -= v);
   return (n);
 }
 
-int Thing::incr_stats11(int v)
+int Thing::incr_stat_con_mod(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (get_infop()->stats11 += v);
+  auto n = (get_infop()->stat_con_mod += v);
   return (n);
 }
 
-int Thing::decr_stats11(void)
+int Thing::decr_stat_con_mod(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (get_infop()->stats11--);
+  auto n = (get_infop()->stat_con_mod--);
   return (n);
 }
 
-int Thing::incr_stats11(void)
+int Thing::incr_stat_con_mod(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (get_infop()->stats11++);
+  auto n = (get_infop()->stat_con_mod++);
   return (n);
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// stats12
+// stat_dex_mod
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_stats12(void)
+int Thing::get_stat_dex_mod(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (get_infop()->stats12);
+    return (get_infop()->stat_dex_mod);
   } else {
     return 0;
   }
 }
 
-int Thing::set_stats12(int v)
+int Thing::set_stat_dex_mod(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (get_infop()->stats12 = v);
+  auto n = (get_infop()->stat_dex_mod = v);
   return (n);
 }
 
-int Thing::decr_stats12(int v)
+int Thing::decr_stat_dex_mod(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (get_infop()->stats12 -= v);
+  auto n = (get_infop()->stat_dex_mod -= v);
   return (n);
 }
 
-int Thing::incr_stats12(int v)
+int Thing::incr_stat_dex_mod(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (get_infop()->stats12 += v);
+  auto n = (get_infop()->stat_dex_mod += v);
   return (n);
 }
 
-int Thing::decr_stats12(void)
+int Thing::decr_stat_dex_mod(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (get_infop()->stats12--);
+  auto n = (get_infop()->stat_dex_mod--);
   return (n);
 }
 
-int Thing::incr_stats12(void)
+int Thing::incr_stat_dex_mod(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (get_infop()->stats12++);
+  auto n = (get_infop()->stat_dex_mod++);
   return (n);
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// attack_bonus
+// stat_att_mod
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_attack_bonus(void)
+int Thing::get_stat_att_mod(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (get_infop()->attack_bonus);
+    return (get_infop()->stat_att_mod);
   } else {
     return 0;
   }
 }
 
-int Thing::set_attack_bonus(int v)
+int Thing::set_stat_att_mod(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (get_infop()->attack_bonus = v);
+  auto n = (get_infop()->stat_att_mod = v);
   return (n);
 }
 
-int Thing::decr_attack_bonus(int v)
+int Thing::decr_stat_att_mod(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (get_infop()->attack_bonus -= v);
+  auto n = (get_infop()->stat_att_mod -= v);
   return (n);
 }
 
-int Thing::incr_attack_bonus(int v)
+int Thing::incr_stat_att_mod(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (get_infop()->attack_bonus += v);
+  auto n = (get_infop()->stat_att_mod += v);
   return (n);
 }
 
-int Thing::decr_attack_bonus(void)
+int Thing::decr_stat_att_mod(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (get_infop()->attack_bonus--);
+  auto n = (get_infop()->stat_att_mod--);
   return (n);
 }
 
-int Thing::incr_attack_bonus(void)
+int Thing::incr_stat_att_mod(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (get_infop()->attack_bonus++);
+  auto n = (get_infop()->stat_att_mod++);
   return (n);
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// stats17
+// stat_str_mod
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_stats17(void)
+int Thing::get_stat_str_mod(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (get_infop()->stats17);
+    return (get_infop()->stat_str_mod);
   } else {
     return 0;
   }
 }
 
-int Thing::set_stats17(int v)
+int Thing::set_stat_str_mod(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (get_infop()->stats17 = v);
+  auto n = (get_infop()->stat_str_mod = v);
   return (n);
 }
 
-int Thing::decr_stats17(int v)
+int Thing::decr_stat_str_mod(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (get_infop()->stats17 -= v);
+  auto n = (get_infop()->stat_str_mod -= v);
   return (n);
 }
 
-int Thing::incr_stats17(int v)
+int Thing::incr_stat_str_mod(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (get_infop()->stats17 += v);
+  auto n = (get_infop()->stat_str_mod += v);
   return (n);
 }
 
-int Thing::decr_stats17(void)
+int Thing::decr_stat_str_mod(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (get_infop()->stats17--);
+  auto n = (get_infop()->stat_str_mod--);
   return (n);
 }
 
-int Thing::incr_stats17(void)
+int Thing::incr_stat_str_mod(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (get_infop()->stats17++);
+  auto n = (get_infop()->stat_str_mod++);
   return (n);
 }
 

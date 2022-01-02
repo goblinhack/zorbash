@@ -69,7 +69,7 @@ PyObject *map_load_room_(PyObject *obj, PyObject *args, PyObject *keywds)
       std::string walls_string;
       std::string obj_strings;
 
-      for (auto &c : py_obj_to_string(o)) {
+      for (auto &c : py_obj_to_stringing(o)) {
         auto m = get(Charmap::all_charmaps, c);
 
         if (m.is_floor || m.is_bridge || m.is_corridor || m.is_secret_corridor || m.is_dirt) {

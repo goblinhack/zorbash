@@ -1,5 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- - how can I miss a zoblin in a web                                                                                                           -->
 <!-- - cannot change armor                                                                                                                        -->
 <!-- - head should be on top of armor                                                                                                             -->
 <!-- ------                                                                                                                                       -->
@@ -15,6 +16,11 @@
 <!-- - level pyramid                                                                                                                              -->
 <!-- - 4 bosses and final zorb boss                                                                                                               -->
 <!-- - orb of zorb                                                                                                                                -->
+<!-- ------                                                                                                                                       -->
+<!--                                                                                                                                              -->
+<!-- UI                                                                                                                                           -->
+<!-- ------                                                                                                                                       -->
+<!-- - rest until better                                                                                                                          -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Level                                                                                                                                        -->

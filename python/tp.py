@@ -1792,11 +1792,26 @@ class Tp:
     def set_stat_def(self, value):
         my.tp_set_stat_def(self, value)
 
-    def set_attack_bonus(self, value):
-        my.tp_set_attack_bonus(self, value)
+    def set_stat_att_mod(self, value):
+        my.tp_set_stat_att_mod(self, value)
 
     def set_stat_con(self, value):
         my.tp_set_stat_con(self, value)
+
+    def set_stat_str_mod(self, value):
+        my.tp_set_stat_str_mod(self, value)
+
+    def set_stat_dex_mod(self, value):
+        my.tp_set_stat_dex_mod(self, value)
+
+    def set_stat_def_mod(self, value):
+        my.tp_set_stat_def_mod(self, value)
+
+    def set_stat_att_mod_mod(self, value):
+        my.tp_set_stat_att_mod_mod(self, value)
+
+    def set_stat_con_mod(self, value):
+        my.tp_set_stat_con_mod(self, value)
 
     def set_distance_throw(self, value):
         my.tp_set_distance_throw(self, value)

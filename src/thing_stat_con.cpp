@@ -26,32 +26,29 @@ int Thing::get_stat_con_total(void)
     return owner->get_stat_con();
   }
 
-  int stat_con = 0;
-  int last_con = 0;
+  int stat = 0;
+  int prev = 0;
 
-  stat_con += get_stat_con();
-  last_con = stat_con;
-  dbg("Constitution: (%d/%d): %d", get_stat_con(), stat_to_bonus(get_stat_con()), stat_con);
+  stat = get_stat_con();
+  prev = stat;
+  dbg("Con: (%d/%d): %d", get_stat_con(), stat_to_bonus(get_stat_con()), stat);
 
   FOR_ALL_EQUIP(e)
   {
-    auto equip = get_equip(e);
-    if (equip) {
-      stat_con += stat_to_bonus(equip->get_stat_con());
+    auto iter = get_equip(e);
+    if (iter) {
+      stat += iter->get_stat_con_mod();
+      if (stat != prev) {
+        prev = stat;
+        dbg("Con: with (%s %s): %d", iter->to_short_string().c_str(),
+            modifier_to_string(iter->get_stat_con_mod()).c_str(), stat);
+      }
 
-      if (stat_con != last_con) {
-        last_con = stat_con;
-        dbg("Constitution with (%s stat_con %d/%d): %d", equip->to_short_string().c_str(), equip->get_stat_con(),
-            stat_to_bonus(equip->get_stat_con()), stat_con);
-
-        //
-        // Add enchanted stat_con
-        //
-        stat_con += equip->get_enchant();
-        if (stat_con != last_con) {
-          last_con = stat_con;
-          dbg("Constitution with (enchant %d): %d", equip->get_enchant(), stat_con);
-        }
+      auto enchant = iter->get_enchant();
+      stat += enchant;
+      if (stat != prev) {
+        prev = stat;
+        dbg("Con: with (%s enchant %d): %d", iter->to_short_string().c_str(), enchant, stat);
       }
     }
   }
@@ -59,48 +56,45 @@ int Thing::get_stat_con_total(void)
   if (maybe_itemsp()) {
     FOR_ALL_BUFFS(id)
     {
-      auto buff = level->thing_find(id);
-      if (buff) {
-        stat_con += stat_to_bonus(buff->get_stat_con());
-
-        if (stat_con != last_con) {
-          last_con = stat_con;
-          dbg("Constitution with buff (%s dex %d/%d): %d", buff->to_short_string().c_str(), buff->get_stat_con(),
-              stat_to_bonus(buff->get_stat_con()), stat_con);
+      auto iter = level->thing_find(id);
+      if (iter) {
+        stat += iter->get_stat_con_mod();
+        if (stat != prev) {
+          prev = stat;
+          dbg("Con: with (%s %s): %d", iter->to_short_string().c_str(),
+              modifier_to_string(iter->get_stat_con_mod()).c_str(), stat);
         }
       }
     }
 
     FOR_ALL_DEBUFFS(id)
     {
-      auto buff = level->thing_find(id);
-      if (buff) {
-        stat_con += stat_to_bonus(buff->get_stat_con());
-
-        if (stat_con != last_con) {
-          last_con = stat_con;
-          dbg("Constitution with debuff (%s dex %d/%d): %d", buff->to_short_string().c_str(), buff->get_stat_con(),
-              stat_to_bonus(buff->get_stat_con()), stat_con);
+      auto iter = level->thing_find(id);
+      if (iter) {
+        stat += iter->get_stat_con_mod();
+        if (stat != prev) {
+          prev = stat;
+          dbg("Con: with (%s %s): %d", iter->to_short_string().c_str(),
+              modifier_to_string(iter->get_stat_con_mod()).c_str(), stat);
         }
       }
     }
 
     FOR_ALL_SKILLS(id)
     {
-      auto buff = level->thing_find(id);
-      if (buff) {
-        stat_con += stat_to_bonus(buff->get_stat_con());
-
-        if (stat_con != last_con) {
-          last_con = stat_con;
-          dbg("Constitution with skill (%s dex %d/%d): %d", buff->to_short_string().c_str(), buff->get_stat_con(),
-              stat_to_bonus(buff->get_stat_con()), stat_con);
+      auto iter = level->thing_find(id);
+      if (iter) {
+        stat += iter->get_stat_con_mod();
+        if (stat != prev) {
+          prev = stat;
+          dbg("Con: with (%s %s): %d", iter->to_short_string().c_str(),
+              modifier_to_string(iter->get_stat_con_mod()).c_str(), stat);
         }
       }
     }
   }
 
-  return stat_con;
+  return stat;
 }
 
 int Thing::get_stat_con(void)

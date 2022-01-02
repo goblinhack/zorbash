@@ -67,7 +67,6 @@ std::istream &operator>>(std::istream &in, Bits< ThingInfop & > my)
   // v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v
   /////////////////////////////////////////////////////////////////////////
   // clang-format off
-   in >> bits(my.t->attack_bonus);
    in >> bits(my.t->born);
    in >> bits(my.t->bounce_fade);
    in >> bits(my.t->bounce_height);
@@ -101,23 +100,23 @@ std::istream &operator>>(std::istream &in, Bits< ThingInfop & > my)
    in >> bits(my.t->spawner_owner_id);
    in >> bits(my.t->stamina);
    in >> bits(my.t->stamina_max);
+   in >> bits(my.t->stat_att_mod);
    in >> bits(my.t->stat_con);
+   in >> bits(my.t->stat_con_mod);
    in >> bits(my.t->stat_def);
+   in >> bits(my.t->stat_def_mod);
    in >> bits(my.t->stat_dex);
+   in >> bits(my.t->stat_dex_mod);
    in >> bits(my.t->stats02);
    in >> bits(my.t->stats03);
    in >> bits(my.t->stats04);
    in >> bits(my.t->stats05);
    in >> bits(my.t->stats06);
    in >> bits(my.t->stats07);
-   in >> bits(my.t->stats08);
    in >> bits(my.t->stats09);
-   in >> bits(my.t->stats10);
-   in >> bits(my.t->stats11);
-   in >> bits(my.t->stats12);
-   in >> bits(my.t->stats17);
    in >> bits(my.t->stats19);
    in >> bits(my.t->stat_str);
+   in >> bits(my.t->stat_str_mod);
    in >> bits(my.t->submerged_offset);
    in >> bits(my.t->tick_last_did_something);
    in >> bits(my.t->tick_last_dropped);

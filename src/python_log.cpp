@@ -145,7 +145,7 @@ void py_err(void)
   PyTraceBack_Print(pbacktrace, pvalue);
 
   pyobj_str = PyObject_Str(pvalue);
-  py_str    = py_obj_to_str(pyobj_str);
+  py_str    = py_obj_to_string(pyobj_str);
   ERR("%s", py_str);
   myfree(py_str);
 
@@ -157,7 +157,7 @@ void py_err(void)
     Py_DECREF(list);
     Py_DECREF(string);
 
-    py_str = py_obj_to_str(ret);
+    py_str = py_obj_to_string(ret);
     ERR("%s", py_str);
     myfree(py_str);
 
@@ -175,8 +175,8 @@ void py_err(void)
 
     while (frame) {
       int   line     = frame->f_lineno;
-      char *filename = py_obj_to_str(frame->f_code->co_filename);
-      char *funcname = py_obj_to_str(frame->f_code->co_name);
+      char *filename = py_obj_to_string(frame->f_code->co_filename);
+      char *funcname = py_obj_to_string(frame->f_code->co_name);
       ERR("    %s(%d): %s\n", filename, line, funcname);
       frame = frame->f_back;
       myfree(filename);
@@ -200,8 +200,8 @@ void py_trace(void)
 
     while (frame) {
       int   line     = frame->f_lineno;
-      char *filename = py_obj_to_str(frame->f_code->co_filename);
-      char *funcname = py_obj_to_str(frame->f_code->co_name);
+      char *filename = py_obj_to_string(frame->f_code->co_filename);
+      char *funcname = py_obj_to_string(frame->f_code->co_name);
       CON(">>> %d. %s, line %d, %s()", cnt++, filename, line, funcname);
       frame = frame->f_back;
       myfree(filename);

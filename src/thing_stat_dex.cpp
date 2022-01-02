@@ -26,32 +26,29 @@ int Thing::get_stat_dex_total(void)
     return owner->get_stat_dex();
   }
 
-  int stat_dex = 0;
-  int last_dex = 0;
+  int stat = 0;
+  int prev = 0;
 
-  stat_dex += get_stat_dex();
-  last_dex = stat_dex;
-  dbg("Dex: (%d/%d): %d", get_stat_dex(), stat_to_bonus(get_stat_dex()), stat_dex);
+  stat = get_stat_dex();
+  prev = stat;
+  dbg("Dex: (%d/%d): %d", get_stat_dex(), stat_to_bonus(get_stat_dex()), stat);
 
   FOR_ALL_EQUIP(e)
   {
-    auto equip = get_equip(e);
-    if (equip) {
-      stat_dex += stat_to_bonus(equip->get_stat_dex());
+    auto iter = get_equip(e);
+    if (iter) {
+      stat += iter->get_stat_dex_mod();
+      if (stat != prev) {
+        prev = stat;
+        dbg("Dex: with (%s %s): %d", iter->to_short_string().c_str(),
+            modifier_to_string(iter->get_stat_dex_mod()).c_str(), stat);
+      }
 
-      if (stat_dex != last_dex) {
-        last_dex = stat_dex;
-        dbg("Dex: with (%s stat_dex %d/%d): %d", equip->to_short_string().c_str(), equip->get_stat_dex(),
-            stat_to_bonus(equip->get_stat_dex()), stat_dex);
-
-        //
-        // Add enchanted stat_dex
-        //
-        stat_dex += equip->get_enchant();
-        if (stat_dex != last_dex) {
-          last_dex = stat_dex;
-          dbg("Dex: with (enchant %d): %d", equip->get_enchant(), stat_dex);
-        }
+      auto enchant = iter->get_enchant();
+      stat += enchant;
+      if (stat != prev) {
+        prev = stat;
+        dbg("Dex: with (%s enchant %d): %d", iter->to_short_string().c_str(), enchant, stat);
       }
     }
   }
@@ -59,48 +56,45 @@ int Thing::get_stat_dex_total(void)
   if (maybe_itemsp()) {
     FOR_ALL_BUFFS(id)
     {
-      auto buff = level->thing_find(id);
-      if (buff) {
-        stat_dex += stat_to_bonus(buff->get_stat_dex());
-
-        if (stat_dex != last_dex) {
-          last_dex = stat_dex;
-          dbg("Dex: with buff (%s stat_dex %d/%d): %d", buff->to_short_string().c_str(), buff->get_stat_dex(),
-              stat_to_bonus(buff->get_stat_dex()), stat_dex);
+      auto iter = level->thing_find(id);
+      if (iter) {
+        stat += iter->get_stat_dex_mod();
+        if (stat != prev) {
+          prev = stat;
+          dbg("Dex: with (%s %s): %d", iter->to_short_string().c_str(),
+              modifier_to_string(iter->get_stat_dex_mod()).c_str(), stat);
         }
       }
     }
 
     FOR_ALL_DEBUFFS(id)
     {
-      auto buff = level->thing_find(id);
-      if (buff) {
-        stat_dex += stat_to_bonus(buff->get_stat_dex());
-
-        if (stat_dex != last_dex) {
-          last_dex = stat_dex;
-          dbg("Dex: with debuff (%s stat_dex %d/%d): %d", buff->to_short_string().c_str(), buff->get_stat_dex(),
-              stat_to_bonus(buff->get_stat_dex()), stat_dex);
+      auto iter = level->thing_find(id);
+      if (iter) {
+        stat += iter->get_stat_dex_mod();
+        if (stat != prev) {
+          prev = stat;
+          dbg("Dex: with (%s %s): %d", iter->to_short_string().c_str(),
+              modifier_to_string(iter->get_stat_dex_mod()).c_str(), stat);
         }
       }
     }
 
     FOR_ALL_SKILLS(id)
     {
-      auto buff = level->thing_find(id);
-      if (buff) {
-        stat_dex += stat_to_bonus(buff->get_stat_dex());
-
-        if (stat_dex != last_dex) {
-          last_dex = stat_dex;
-          dbg("Dex: with skill (%s stat_dex %d/%d): %d", buff->to_short_string().c_str(), buff->get_stat_dex(),
-              stat_to_bonus(buff->get_stat_dex()), stat_dex);
+      auto iter = level->thing_find(id);
+      if (iter) {
+        stat += iter->get_stat_dex_mod();
+        if (stat != prev) {
+          prev = stat;
+          dbg("Dex: with (%s %s): %d", iter->to_short_string().c_str(),
+              modifier_to_string(iter->get_stat_dex_mod()).c_str(), stat);
         }
       }
     }
   }
 
-  return stat_dex;
+  return stat;
 }
 
 int Thing::get_stat_dex(void)

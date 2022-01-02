@@ -26,39 +26,44 @@ int Thing::get_stat_def_total(void)
     return owner->get_stat_def_total();
   }
 
-  int stat_def      = 0;
-  int last_stat_def = 0;
+  int stat = 0;
+  int prev = 0;
 
-  stat_def = get_stat_def();
-  dbg("Def: %d", stat_def);
+  stat = get_stat_def();
+  prev = stat;
+  dbg("AC: %d", stat);
 
+  //
+  // Add def bonus
+  //
+  stat += get_stat_def_mod();
+  if (stat != prev) {
+    prev = stat;
+    dbg("AC: with: (mod %d): %d", get_stat_def_mod(), stat);
+  }
+
+  //
+  // Add dex bonus to def
+  //
   int dex_total = get_stat_dex_total();
-  stat_def += stat_to_bonus(dex_total);
-  last_stat_def = stat_def;
-  if (stat_def != last_stat_def) {
-    last_stat_def = stat_def;
-    dbg("Def: with: (dex %d): %d", dex_total, stat_def);
+  stat += stat_to_bonus(dex_total);
+  if (stat != prev) {
+    prev = stat;
+    dbg("AC: with: (dex %d): %d", dex_total, stat);
   }
 
   FOR_ALL_EQUIP(e)
   {
     auto equip = get_equip(e);
     if (equip) {
-      stat_def += stat_to_bonus(equip->get_stat_def());
-
-      if (stat_def != last_stat_def) {
-        last_stat_def = stat_def;
-        dbg("Def: with (%s def %d/%d): %d", equip->to_short_string().c_str(), equip->get_stat_def(),
-            stat_to_bonus(equip->get_stat_def()), stat_def);
-
-        //
-        // Add enchanted stat_def
-        //
-        stat_def += equip->get_enchant();
-        if (stat_def != last_stat_def) {
-          last_stat_def = stat_def;
-          dbg("Def: with (enchant %d): %d", equip->get_enchant(), stat_def);
-        }
+      //
+      // Choose the highest armor
+      //
+      stat = std::max(stat, equip->get_stat_def() + equip->get_stat_def_mod() + equip->get_enchant());
+      if (stat != prev) {
+        prev = stat;
+        dbg("AC: with (%s def %d/%d): %d", equip->to_short_string().c_str(), equip->get_stat_def(),
+            stat_to_bonus(equip->get_stat_def()), stat);
       }
     }
   }
@@ -68,12 +73,11 @@ int Thing::get_stat_def_total(void)
     {
       auto buff = level->thing_find(id);
       if (buff) {
-        stat_def += stat_to_bonus(buff->get_stat_def());
-
-        if (stat_def != last_stat_def) {
-          last_stat_def = stat_def;
-          dbg("Def: with buff (%s dex %d/%d): %d", buff->to_short_string().c_str(), buff->get_stat_def(),
-              stat_to_bonus(buff->get_stat_def()), stat_def);
+        stat += buff->get_stat_def_mod();
+        if (stat != prev) {
+          prev = stat;
+          dbg("AC: with buff (%s dex %d/%d): %d", buff->to_short_string().c_str(), buff->get_stat_def(),
+              stat_to_bonus(buff->get_stat_def()), stat);
         }
       }
     }
@@ -82,12 +86,11 @@ int Thing::get_stat_def_total(void)
     {
       auto buff = level->thing_find(id);
       if (buff) {
-        stat_def += stat_to_bonus(buff->get_stat_def());
-
-        if (stat_def != last_stat_def) {
-          last_stat_def = stat_def;
-          dbg("Def: with debuff (%s dex %d/%d): %d", buff->to_short_string().c_str(), buff->get_stat_def(),
-              stat_to_bonus(buff->get_stat_def()), stat_def);
+        stat += buff->get_stat_def_mod();
+        if (stat != prev) {
+          prev = stat;
+          dbg("AC: with debuff (%s dex %d/%d): %d", buff->to_short_string().c_str(), buff->get_stat_def(),
+              stat_to_bonus(buff->get_stat_def()), stat);
         }
       }
     }
@@ -96,12 +99,11 @@ int Thing::get_stat_def_total(void)
     {
       auto buff = level->thing_find(id);
       if (buff) {
-        stat_def += stat_to_bonus(buff->get_stat_def());
-
-        if (stat_def != last_stat_def) {
-          last_stat_def = stat_def;
-          dbg("Def: with skill (%s dex %d/%d): %d", buff->to_short_string().c_str(), buff->get_stat_def(),
-              stat_to_bonus(buff->get_stat_def()), stat_def);
+        stat += buff->get_stat_def_mod();
+        if (stat != prev) {
+          prev = stat;
+          dbg("AC: with skill (%s dex %d/%d): %d", buff->to_short_string().c_str(), buff->get_stat_def(),
+              stat_to_bonus(buff->get_stat_def()), stat);
         }
       }
     }
@@ -110,10 +112,10 @@ int Thing::get_stat_def_total(void)
   //
   // Penalties
   //
-  stat_def -= get_stuck_count();
-  if (stat_def != last_stat_def) {
-    last_stat_def = stat_def;
-    dbg("Def: with (stuck count %d): %d", get_stuck_count(), stat_def);
+  stat -= get_stuck_count();
+  if (stat != prev) {
+    prev = stat;
+    dbg("AC: with (stuck count %d): %d", get_stuck_count(), stat);
   }
 
   //
@@ -121,23 +123,23 @@ int Thing::get_stat_def_total(void)
   //
   if (! is_aquatic() && ! buff_find_is_aquatic()) {
     if (level->is_water(curr_at)) {
-      stat_def /= 2;
-      if (stat_def != last_stat_def) {
-        last_stat_def = stat_def;
-        dbg("Def: with (water penalty): %d", stat_def);
+      stat /= 2;
+      if (stat != prev) {
+        prev = stat;
+        dbg("AC: with (water penalty): %d", stat);
       }
     }
     if (level->is_deep_water(curr_at)) {
-      stat_def /= 2;
-      if (stat_def != last_stat_def) {
-        last_stat_def = stat_def;
-        dbg("Def: with (deep water penalty): %d", stat_def);
+      stat /= 2;
+      if (stat != prev) {
+        prev = stat;
+        dbg("AC: with (deep water penalty): %d", stat);
       }
     }
   }
 
-  dbg("Def: final: %d", stat_def);
-  return stat_def;
+  dbg("AC: final: %d", stat);
+  return stat;
 }
 
 int Thing::get_stat_def(void)

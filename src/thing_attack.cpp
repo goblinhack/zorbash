@@ -429,8 +429,8 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
     }
   }
 
-  auto attack_modifier = get_attack_modifier(victim);
-  auto stat_def     = victim->get_stat_def_total();
+  auto stat_att = get_attack_modifier(victim);
+  auto stat_def = victim->get_stat_def_total();
 
   bool damage_set       = false;
   bool attack_poison    = false;
@@ -622,7 +622,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
     if (d1000() < damage_natural_attack_chance_d1000()) {
       int damage_natural_attack = get_damage_natural_attack();
       if (damage_natural_attack > 0) {
-        damage         = damage_natural_attack + attack_modifier;
+        damage         = damage_natural_attack + stat_att;
         damage_set     = true;
         attack_natural = true;
       }
@@ -637,7 +637,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   //
   if (! damage_set) {
     if (d1000() < damage_melee_chance_d1000()) {
-      damage = get_damage_melee() + attack_modifier;
+      damage = get_damage_melee() + stat_att;
       if (damage > 0) {
         damage_set = true;
       }
@@ -646,7 +646,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   if (! damage_set) {
     if (owner) {
       if (d1000() < owner->damage_melee_chance_d1000()) {
-        damage = get_damage_melee() + attack_modifier;
+        damage = get_damage_melee() + stat_att;
         if (damage > 0) {
           damage_set = true;
         }
@@ -735,23 +735,23 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
       // You just cannot miss this.
       //
     } else {
-      bool hit                = false;
-      int  must_roll_at_least = 20 + attack_modifier - stat_def;
-      int  i_rolled           = d20();
+      bool hit      = false;
+      int  to_hit   = stat_def - stat_att;
+      int  i_rolled = d20();
 
       if (i_rolled == 20) {
         crit = true;
         hit  = true;
         dbg("Attack on %s: ATT %s AC %d, to-hit %d, crit rolled %d -> hit", victim->to_short_string().c_str(),
-            modifier_to_str(attack_modifier).c_str(), stat_def, must_roll_at_least, i_rolled);
+            modifier_to_string(stat_att).c_str(), stat_def, to_hit, i_rolled);
       } else if (i_rolled == 1) {
         hit = false;
         dbg("Attack on %s: ATT %s AC %d, to-hit %d, fumble rolled %d -> miss", victim->to_short_string().c_str(),
-            modifier_to_str(attack_modifier).c_str(), stat_def, must_roll_at_least, i_rolled);
+            modifier_to_string(stat_att).c_str(), stat_def, to_hit, i_rolled);
       } else {
-        hit = i_rolled >= must_roll_at_least;
+        hit = i_rolled >= to_hit;
         dbg("Attack on %s: ATT %s AC %d, to-hit %d, rolled %d -> %s", victim->to_short_string().c_str(),
-            modifier_to_str(attack_modifier).c_str(), stat_def, must_roll_at_least, i_rolled, hit ? "hit" : "miss");
+            modifier_to_string(stat_att).c_str(), stat_def, to_hit, i_rolled, hit ? "hit" : "miss");
       }
 
       //
@@ -772,8 +772,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
             TOPCON("%s misses.", text_The().c_str());
           }
         } else {
-          dbg("The attack missed (att modifier %d, AC %d) on %s", attack_modifier, stat_def,
-              victim->to_string().c_str());
+          dbg("The attack missed (att modifier %d, AC %d) on %s", stat_att, stat_def, victim->to_string().c_str());
         }
 
         if (attack_lunge()) {
@@ -789,9 +788,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
         // See if armor crumbles
         //
         auto armor = victim->get_equip(MONST_EQUIP_ARMOR);
-        victim->topcon("victim");
         if (armor) {
-          victim->topcon("has armor");
           if (d10000() < break_chance_d10000()) {
             if (is_player()) {
               TOPCON("%s falls apart.", armor->text_The().c_str());

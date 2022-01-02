@@ -1072,7 +1072,7 @@ void Game::wid_thing_info_add_attack(WidPopup *w, Thingp t)
   char tmp[ MAXSHORTSTR ];
 
   if (t->is_alive_monst() || t->is_player()) {
-    auto stat = t->get_attack_bonus();
+    auto stat = t->get_stat_att_mod();
     if (! stat) {
       return;
     }
@@ -1091,23 +1091,17 @@ void Game::wid_thing_info_add_stat_def(WidPopup *w, Thingp t)
     auto ac       = t->get_stat_def();
     auto ac_total = t->get_stat_def_total();
     if (ac_total != ac) {
-      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor class natural    %2d%3s", ac,
-               stat_to_bonus_slash_str(ac).c_str());
+      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor class natural       %2d", ac);
       w->log(tmp);
 
       Thingp curr_armor = t->get_equip(MONST_EQUIP_ARMOR);
       if (curr_armor) {
         auto ac = curr_armor->get_stat_def();
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor class worn       ```%2s", stat_to_bonus_str(ac).c_str());
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor class worn          %2d", ac);
         w->log(tmp);
       }
-
-      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor class total      %2d%3s", ac_total,
-               stat_to_bonus_slash_str(ac_total).c_str());
-      w->log(tmp);
     } else {
-      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor class            %2d%3s", ac,
-               stat_to_bonus_slash_str(ac).c_str());
+      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor class               %2d", ac);
       w->log(tmp);
     }
   }
@@ -1119,21 +1113,14 @@ void Game::wid_thing_info_add_stat_str(WidPopup *w, Thingp t)
   char tmp[ MAXSHORTSTR ];
 
   if (t->is_alive_monst() || t->is_player()) {
-    auto stat = t->get_stat_str();
+    auto stat = t->get_stat_str_total();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Strength               %2d%3s", stat,
              stat_to_bonus_slash_str(stat).c_str());
     w->log(tmp);
-  } else if (t->is_item() && t->is_enchantable()) {
-    auto stat = t->get_stat_str();
-    if (stat != 10) {
-      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Strength modifier      %2d%3s", stat,
-               stat_to_bonus_slash_str(stat).c_str());
-      w->log(tmp);
-
-      if (stat_to_bonus(t->get_stat_str()) > 0) {
-        w->log("-  +1 STR bonus per enchant");
-      }
-    }
+  } else if (t->get_stat_str_mod()) {
+    auto stat = t->get_stat_str_mod();
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Strength modifier        %3s", modifier_to_string(stat).c_str());
+    w->log(tmp);
   }
 }
 
@@ -1143,21 +1130,14 @@ void Game::wid_thing_info_add_stat_dex(WidPopup *w, Thingp t)
   char tmp[ MAXSHORTSTR ];
 
   if (t->is_alive_monst() || t->is_player()) {
-    auto stat = t->get_stat_dex();
+    auto stat = t->get_stat_dex_total();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Dexterity              %2d%3s", stat,
              stat_to_bonus_slash_str(stat).c_str());
     w->log(tmp);
-  } else if (t->is_item() && t->is_enchantable()) {
-    auto stat = t->get_stat_dex();
-    if (stat != 10) {
-      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Dexterity modifier     %2d%3s", stat,
-               stat_to_bonus_slash_str(stat).c_str());
-      w->log(tmp);
-
-      if (stat_to_bonus(t->get_stat_dex()) > 0) {
-        w->log("-  +1 DEX bonus per enchant");
-      }
-    }
+  } else if (t->get_stat_dex_mod()) {
+    auto stat = t->get_stat_dex_mod();
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Dexterity mod            %3s", modifier_to_string(stat).c_str());
+    w->log(tmp);
   }
 }
 
@@ -1167,21 +1147,14 @@ void Game::wid_thing_info_add_stat_con(WidPopup *w, Thingp t)
   char tmp[ MAXSHORTSTR ];
 
   if (t->is_alive_monst() || t->is_player()) {
-    auto stat = t->get_stat_con();
+    auto stat = t->get_stat_con_total();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Constitution           %2d%3s", stat,
              stat_to_bonus_slash_str(stat).c_str());
     w->log(tmp);
-  } else if (t->is_item() && t->is_enchantable()) {
-    auto stat = t->get_stat_con();
-    if (stat != 10) {
-      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Const. modifier        %2d%3s", stat,
-               stat_to_bonus_slash_str(stat).c_str());
-      w->log(tmp);
-
-      if (stat_to_bonus(t->get_stat_con()) > 0) {
-        w->log("-  +1 CON bonus per enchant");
-      }
-    }
+  } else if (t->get_stat_con_mod()) {
+    auto stat = t->get_stat_con_mod();
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Constitution mod         %3s", modifier_to_string(stat).c_str());
+    w->log(tmp);
   }
 }
 

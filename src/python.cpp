@@ -1456,7 +1456,7 @@ int py_call_int_fn(const char *module, const char *name, unsigned int val1, unsi
   return false;
 }
 
-char *py_obj_to_str(const PyObject *py_str)
+char *py_obj_to_string(const PyObject *py_str)
 {
   TRACE_AND_INDENT();
   PyObject *py_encstr;
@@ -1492,7 +1492,7 @@ err_out:
   return (outstr);
 }
 
-std::string py_obj_to_string(const PyObject *py_str)
+std::string py_obj_to_stringing(const PyObject *py_str)
 {
   TRACE_AND_INDENT();
   PyObject   *py_encstr;
@@ -1736,7 +1736,7 @@ char *py_obj_attr_str(const PyObject *py_obj, const char *attr)
     goto err_out;
   }
 
-  str = py_obj_to_str(py_encstr);
+  str = py_obj_to_string(py_encstr);
   if (! str) {
     goto err_out;
   }
@@ -1816,7 +1816,7 @@ sys.stderr = catchOutErr\n\
     PyObject *output = PyObject_GetAttrString(catcher, "value");
     py_err();
 
-    char *text = py_obj_to_str(output);
+    char *text = py_obj_to_string(output);
     if (text) {
       strchopc(text, '\n');
       CON("%s", text);
@@ -1852,7 +1852,7 @@ void py_add_to_path(const char *path)
       continue;
     }
 
-    item = py_obj_to_str(py_item);
+    item = py_obj_to_string(py_item);
     if (! item) {
       continue;
     }

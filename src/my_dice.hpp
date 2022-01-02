@@ -42,8 +42,8 @@ bool d20roll_under(int stat);
 
 int stat_to_bonus(int stat);
 
-const std::string stat_to_bonus_str(int stat);
+const std::string stat_to_bonus_string(int stat);
 const std::string stat_to_bonus_slash_str(int stat);
-const std::string modifier_to_str(int stat);
+const std::string modifier_to_string(int stat);
 
 #endif

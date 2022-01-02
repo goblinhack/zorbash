@@ -101,7 +101,6 @@ public:
   point lunge_to;            // When a monst attacks something
   point last_failed_jump_at; // Previous jump attempt
 
-  int attack_bonus        = {};
   int capacity_height     = {};
   int capacity_width      = {};
   int distance_throw      = {};
@@ -119,23 +118,23 @@ public:
   int score               = {};
   int stamina             = {};
   int stamina_max         = {};
+  int stat_att_mod        = {};
   int stat_con            = {};
+  int stat_con_mod        = {};
   int stat_def            = {};
+  int stat_def_mod        = {};
   int stat_dex            = {};
+  int stat_dex_mod        = {};
   int stats02             = {};
   int stats03             = {};
   int stats04             = {};
   int stats05             = {};
   int stats06             = {};
   int stats07             = {};
-  int stats08             = {};
   int stats09             = {};
-  int stats10             = {};
-  int stats11             = {};
-  int stats12             = {};
-  int stats17             = {};
   int stats19             = {};
   int stat_str            = {};
+  int stat_str_mod        = {};
   int submerged_offset    = {}; // Pixels
   int tick_resurrect_when = {};
 

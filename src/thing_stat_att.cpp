@@ -26,32 +26,42 @@ int Thing::get_attack_modifier(const Thingp victim)
     return owner->get_attack_modifier(victim);
   }
 
-  int attack_modifier      = 0;
-  int last_attack_modifier = 0;
-  int strength_total       = get_stat_str_total();
+  int stat = 0;
+  int prev = 0;
 
-  attack_modifier = stat_to_bonus(strength_total);
-  attack_modifier += get_attack_bonus();
-  last_attack_modifier = attack_modifier;
-  dbg("Att: (str %d): %d", strength_total, attack_modifier);
+  //
+  // Add att bonus
+  //
+  stat += get_stat_att_mod();
+  if (stat != prev) {
+    prev = stat;
+    dbg("Att: with: (mod %d): %d", get_stat_att_mod(), stat);
+  }
+
+  //
+  // Add str bonus to att
+  //
+  int str_total = get_stat_str_total();
+  stat          = stat_to_bonus(str_total);
+  stat += get_stat_att_mod();
+  prev = stat;
+  dbg("Att: (str %d): %d", str_total, stat);
 
   FOR_ALL_EQUIP(e)
   {
     auto equip = get_equip(e);
     if (equip) {
-      attack_modifier += equip->get_attack_bonus();
-      if (attack_modifier != last_attack_modifier) {
-        last_attack_modifier = attack_modifier;
-        dbg("Att with (%s): %d", equip->to_short_string().c_str(), attack_modifier);
+      stat += equip->get_stat_att_mod();
+      if (stat != prev) {
+        prev = stat;
+        dbg("Att with (%s): %d", equip->to_short_string().c_str(), stat);
+      }
 
-        //
-        // Add enchanted strength
-        //
-        attack_modifier += equip->get_enchant();
-        if (attack_modifier != last_attack_modifier) {
-          last_attack_modifier = attack_modifier;
-          dbg("Att with (enchant %d): %d", equip->get_enchant(), attack_modifier);
-        }
+      auto enchant = equip->get_enchant();
+      stat += enchant;
+      if (stat != prev) {
+        prev = stat;
+        dbg("Att with (%s enchant %d): %d", equip->to_short_string().c_str(), enchant, stat);
       }
     }
   }
@@ -61,10 +71,10 @@ int Thing::get_attack_modifier(const Thingp victim)
     {
       auto buff = level->thing_find(id);
       if (buff) {
-        attack_modifier += buff->get_attack_bonus();
-        if (attack_modifier != last_attack_modifier) {
-          last_attack_modifier = attack_modifier;
-          dbg("Att with buff (%s): %d", buff->to_short_string().c_str(), attack_modifier);
+        stat += buff->get_stat_att_mod();
+        if (stat != prev) {
+          prev = stat;
+          dbg("Att with buff (%s): %d", buff->to_short_string().c_str(), stat);
         }
       }
     }
@@ -73,10 +83,10 @@ int Thing::get_attack_modifier(const Thingp victim)
     {
       auto buff = level->thing_find(id);
       if (buff) {
-        attack_modifier += buff->get_attack_bonus();
-        if (attack_modifier != last_attack_modifier) {
-          last_attack_modifier = attack_modifier;
-          dbg("Att with debuff (%s): %d", buff->to_short_string().c_str(), attack_modifier);
+        stat += buff->get_stat_att_mod();
+        if (stat != prev) {
+          prev = stat;
+          dbg("Att with debuff (%s): %d", buff->to_short_string().c_str(), stat);
         }
       }
     }
@@ -85,10 +95,10 @@ int Thing::get_attack_modifier(const Thingp victim)
     {
       auto buff = level->thing_find(id);
       if (buff) {
-        attack_modifier += buff->get_attack_bonus();
-        if (attack_modifier != last_attack_modifier) {
-          last_attack_modifier = attack_modifier;
-          dbg("Att with skill (%s): %d", buff->to_short_string().c_str(), attack_modifier);
+        stat += buff->get_stat_att_mod();
+        if (stat != prev) {
+          prev = stat;
+          dbg("Att with skill (%s): %d", buff->to_short_string().c_str(), stat);
         }
       }
     }
@@ -97,10 +107,10 @@ int Thing::get_attack_modifier(const Thingp victim)
   //
   // Penalties
   //
-  attack_modifier -= get_stuck_count();
-  if (attack_modifier != last_attack_modifier) {
-    last_attack_modifier = attack_modifier;
-    dbg("Att with (stuck count %d): %d", get_stuck_count(), attack_modifier);
+  stat -= get_stuck_count();
+  if (stat != prev) {
+    prev = stat;
+    dbg("Att with (stuck count %d): %d", get_stuck_count(), stat);
   }
 
   //
@@ -108,20 +118,21 @@ int Thing::get_attack_modifier(const Thingp victim)
   //
   if (! is_aquatic() && ! buff_find_is_aquatic()) {
     if (level->is_water(curr_at)) {
-      attack_modifier /= 2;
-      if (attack_modifier != last_attack_modifier) {
-        last_attack_modifier = attack_modifier;
-        dbg("Att with (water penalty): %d", attack_modifier);
+      stat /= 2;
+      if (stat != prev) {
+        prev = stat;
+        dbg("Att with (water penalty): %d", stat);
       }
     }
     if (level->is_deep_water(curr_at)) {
-      attack_modifier /= 2;
-      if (attack_modifier != last_attack_modifier) {
-        last_attack_modifier = attack_modifier;
-        dbg("Att with (deep water penalty): %d", attack_modifier);
+      stat /= 2;
+      if (stat != prev) {
+        prev = stat;
+        dbg("Att with (deep water penalty): %d", stat);
       }
     }
   }
 
-  return attack_modifier;
+  dbg("Att: final: %d", stat);
+  return stat;
 }
