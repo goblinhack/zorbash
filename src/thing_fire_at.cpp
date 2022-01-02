@@ -237,7 +237,7 @@ bool Thing::fire_at(Thingp target)
     }
   }
 
-  if ((int) pcg_random_range(0, 100) > aggression_level_pct()) {
+  if (d100() > aggression_level_pct()) {
     return false;
   }
 

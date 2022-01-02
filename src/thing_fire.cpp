@@ -35,7 +35,7 @@ void Thing::fire_tick(void)
     // Give the player a chance
     //
     if (! level->is_smoke(at.x, at.y)) {
-      hit = ((int) pcg_random_range(0, 100) < 90);
+      hit = (d100() < 90);
       if (! hit) {
         if (is_player()) {
           TOPCON("%%fg=green$You feel a brief cool breeze and reprieve from the flames!%%fg=reset$");
@@ -61,7 +61,7 @@ void Thing::fire_tick(void)
     //
     // Too close to the flames
     //
-    hit = ((int) pcg_random_range(0, 100) < 70);
+    hit = (d100() < 70);
   } else if (level->is_fire(at.x, at.y)) {
     //
     // Give the player a chance
@@ -70,7 +70,7 @@ void Thing::fire_tick(void)
       auto smoke = level->thing_new("smoke", at);
       smoke->set_lifespan(pcg_random_range(1, 10));
 
-      hit = ((int) pcg_random_range(0, 100) < 20);
+      hit = (d100() < 20);
       if (hit) {
         if (is_player()) {
           TOPCON("%%fg=red$The flames wrap around you!%%fg=reset$");

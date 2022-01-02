@@ -260,11 +260,11 @@ int Thing::unused_chance7_d1000(void)
   return (tp()->unused_chance7_d1000());
 }
 
-int Thing::breaking_chance_d1000(void)
+int Thing::break_chance_d10000(void)
 {
   TRACE_NO_INDENT();
 
-  int chance = tp()->breaking_chance_d1000();
+  int chance = tp()->break_chance_d10000();
   int e      = enchant_level();
   while (e-- > 0) {
     chance /= 2;
@@ -1039,10 +1039,10 @@ int Thing::hunger_is_insatiable(void)
   return (tp()->hunger_is_insatiable());
 }
 
-int Thing::is_toughness_indestructible(void)
+int Thing::is_toughness_very_tough(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_toughness_indestructible());
+  return (tp()->is_toughness_very_tough());
 }
 
 int Thing::is_intelligent(void)
@@ -4155,95 +4155,6 @@ int Thing::incr_health_max(void)
   }
   new_infop();
   auto n = (get_infop()->health_max++);
-  return (n);
-}
-
-////////////////////////////////////////////////////////////////////////////
-// defence
-////////////////////////////////////////////////////////////////////////////
-int Thing::get_armor_class_total(void)
-{
-  TRACE_NO_INDENT();
-  int v = 0;
-  if (maybe_infop()) {
-    v = get_infop()->armor_class;
-  }
-
-  auto armor = get_equip(MONST_EQUIP_ARMOR);
-  if (armor) {
-    v = std::max(armor->get_armor_class_total(), v);
-  }
-  return v;
-}
-
-int Thing::get_armor_class(void)
-{
-  TRACE_NO_INDENT();
-  int v = 0;
-  if (maybe_infop()) {
-    v = get_infop()->armor_class;
-  }
-  return v;
-}
-
-int Thing::set_armor_class(int v)
-{
-  TRACE_NO_INDENT();
-  if (is_player()) {
-    game->request_update_rightbar = true;
-  }
-  new_infop();
-  auto n = (get_infop()->armor_class = v);
-  return (n);
-}
-
-int Thing::decr_armor_class(int v)
-{
-  TRACE_NO_INDENT();
-  if (is_player()) {
-    game->request_update_rightbar = true;
-  }
-  new_infop();
-  auto n = (get_infop()->armor_class -= v);
-  if (get_infop()->armor_class < 0) {
-    get_infop()->armor_class = 0;
-  }
-  return (n);
-}
-
-int Thing::incr_armor_class(int v)
-{
-  TRACE_NO_INDENT();
-  if (is_player()) {
-    game->request_update_rightbar = true;
-  }
-  new_infop();
-  auto n = (get_infop()->armor_class += v);
-  return (n);
-}
-
-int Thing::decr_armor_class(void)
-{
-  TRACE_NO_INDENT();
-  if (is_player()) {
-    game->request_update_rightbar = true;
-  }
-  new_infop();
-  auto n = (get_infop()->armor_class--);
-  if (get_infop()->armor_class < 0) {
-    get_infop()->armor_class = 0;
-  }
-  return (n);
-}
-
-int Thing::incr_armor_class(void)
-{
-  TRACE_NO_INDENT();
-  if (is_player()) {
-    game->request_update_rightbar = true;
-  }
-  new_infop();
-  auto n = (get_infop()->armor_class++);
   return (n);
 }
 

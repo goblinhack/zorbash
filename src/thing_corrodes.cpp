@@ -54,7 +54,7 @@ void Thing::corrode_tick(void)
     }
 
     if (chance) {
-      if ((int) pcg_random_range(0, 1000) < chance) {
+      if (d1000() < chance) {
         dead("Corroded in acid");
         return;
       }

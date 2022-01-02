@@ -13,7 +13,6 @@ def on_death(me, x, y):
 def tp_init(name, text_name):
     mytp = tp.Tp(name, text_name)
     mytp.set_ai_shove_chance_d1000(200)
-    mytp.set_attack_bonus(10)  # 10, means no bonus
     mytp.set_collision_check(True)
     mytp.set_collision_hit_priority(10)
     mytp.set_damage_received_doubled_from_fire(True)

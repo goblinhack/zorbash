@@ -318,7 +318,7 @@ PyObject *thing_is_tickable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_tmp_thing(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_torch(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_toughness_hard(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_toughness_indestructible(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_toughness_very_tough(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_toughness_soft(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_treasure_chest(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_treasure_eater(PyObject *obj, PyObject *args, PyObject *keywds);

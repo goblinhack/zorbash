@@ -253,7 +253,6 @@ def tp_init(name, text_name, short_text_name, title):
     mytp.set_ai_shove_chance_d1000(50)
     mytp.set_ai_wanderer(True)
     mytp.set_armor_class(10)
-    mytp.set_attack_bonus(10)  # 10, means no bonus
     mytp.set_attack_undead(True)
     mytp.set_capacity_height(20)
     mytp.set_capacity_width(20)

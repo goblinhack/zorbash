@@ -33,7 +33,6 @@ def tp_init(name, text_name):
     mytp.set_ai_wanderer(True)
     mytp.set_armor_class(11)
     mytp.set_attack_blood(True)
-    mytp.set_attack_bonus(10)  # 10, means no bonus
     mytp.set_attack_eater(True)
     mytp.set_attack_humanoid(True)
     mytp.set_attack_living(True)

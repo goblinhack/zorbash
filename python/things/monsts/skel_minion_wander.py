@@ -35,7 +35,6 @@ def tp_init(name, text_name):
     mytp.set_ai_resent_count(10)
     mytp.set_ai_shove_chance_d1000(200)
     mytp.set_armor_class(13)
-    mytp.set_attack_bonus(10)  # 10, means no bonus
     mytp.set_attack_humanoid(True)
     mytp.set_attack_lunge(True)
     mytp.set_attack_meat(True)

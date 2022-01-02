@@ -15,7 +15,7 @@ def tp_init(name, text_name, short_text_name):
     global mytp
     mytp = tp.Tp(name, text_name, short_text_name)
     mytp.set_armor_class(15)
-    mytp.set_breaking_chance_d1000(100)
+    mytp.set_break_chance_d10000(100)
     mytp.set_enchant_max(10)
     mytp.set_equip_carry_anim("armor_leather_carry")
     mytp.set_gfx_short_shadow_caster(True)

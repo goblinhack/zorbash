@@ -61,7 +61,7 @@ bool d20roll(int stat_a, int stat_b)
 }
 
 //
-// Succedd if we can roll under
+// Succeed if we can roll under
 //
 bool d20roll_under(int stat)
 {

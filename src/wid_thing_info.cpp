@@ -1166,6 +1166,15 @@ void Game::wid_thing_info_add_strength(WidPopup *w, Thingp t)
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Strength               %2d%3s", stat,
              stat_to_bonus_slash_str(stat).c_str());
     w->log(tmp);
+  } else if (t->is_item() && t->is_enchantable()) {
+    auto stat = t->get_stat_strength();
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Strength bonus         %2d%3s", stat,
+             stat_to_bonus_slash_str(stat).c_str());
+    w->log(tmp);
+
+    if (stat_to_bonus(t->get_stat_strength()) > 0) {
+      w->log("-  +1 STR bonus per enchant");
+    }
   }
 }
 
@@ -1179,6 +1188,15 @@ void Game::wid_thing_info_add_dexterity(WidPopup *w, Thingp t)
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Dexterity              %2d%3s", stat,
              stat_to_bonus_slash_str(stat).c_str());
     w->log(tmp);
+  } else if (t->is_item() && t->is_enchantable()) {
+    auto stat = t->get_stat_dexterity();
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Strength bonus         %2d%3s", stat,
+             stat_to_bonus_slash_str(stat).c_str());
+    w->log(tmp);
+
+    if (stat_to_bonus(t->get_stat_dexterity()) > 0) {
+      w->log("-  +1 DEX bonus per enchant");
+    }
   }
 }
 
@@ -1192,6 +1210,15 @@ void Game::wid_thing_info_add_constitution(WidPopup *w, Thingp t)
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Constitution           %2d%3s", stat,
              stat_to_bonus_slash_str(stat).c_str());
     w->log(tmp);
+  } else if (t->is_item() && t->is_enchantable()) {
+    auto stat = t->get_stat_constitution();
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Strength bonus         %2d%3s", stat,
+             stat_to_bonus_slash_str(stat).c_str());
+    w->log(tmp);
+
+    if (stat_to_bonus(t->get_stat_constitution()) > 0) {
+      w->log("-  +1 CON bonus per enchant");
+    }
   }
 }
 

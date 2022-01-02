@@ -16,7 +16,6 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_aggression_level_pct(100)
     mytp.set_ai_wanderer(True)
     mytp.set_armor_class(6)
-    mytp.set_attack_bonus(10)  # 10, means no bonus
     mytp.set_attack_eater(True)
     mytp.set_attack_engulf_chance_d1000(1000)
     mytp.set_attack_lunge(True)

@@ -14,8 +14,7 @@ def on_use(owner, item, target, x, y):
 
 def init_weapon(name, text_name, short_text_name):
     mytp = tp.Tp(name, text_name, short_text_name)
-    mytp.set_attack_bonus(10)  # 10, means no bonus
-    mytp.set_breaking_chance_d1000(10)
+    mytp.set_break_chance_d10000(10)
     mytp.set_collision_check(True)
     mytp.set_collision_hit_priority(10)
     mytp.set_damage_melee_chance_d1000(1000)
@@ -40,6 +39,7 @@ def init_weapon(name, text_name, short_text_name):
     mytp.set_is_moveable(True)
     mytp.set_is_treasure_type(True)
     mytp.set_is_usable(True)
+    mytp.set_stat_strength(12)  # means +1 per enchant
     mytp.set_is_weapon_class_b(True)
     mytp.set_is_weapon(True)
     mytp.set_item_height(6)

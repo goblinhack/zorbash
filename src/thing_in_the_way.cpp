@@ -26,7 +26,7 @@ Thingp Thing::in_the_way(const point s, const point e, int x, int y)
     // Occassionally allow goblins to fire through comrades
     //
     if (same_leader(t)) {
-      if ((int) pcg_random_range(0, 100) > collateral_damage_pct()) {
+      if (d100() > collateral_damage_pct()) {
         return t;
       }
       continue;

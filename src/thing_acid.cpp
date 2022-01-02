@@ -33,7 +33,7 @@ void Thing::acid_tick(void)
     auto smoke = level->thing_new("smoke", curr_at);
     smoke->set_lifespan(pcg_random_range(1, 10));
 
-    hit = ((int) pcg_random_range(0, 100) < 50);
+    hit = (d100() < 50);
   } else {
     hit = false;
   }

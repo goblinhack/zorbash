@@ -523,6 +523,11 @@ bool Level::create_dungeon(point3d at, int seed)
             }
 
             {
+              auto w3 = thing_new("axe", point(x, y));
+              t->carry(w3);
+            }
+
+            {
               auto W = thing_new("torch", point(x, y));
               t->carry(W);
             }

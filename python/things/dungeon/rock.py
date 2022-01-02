@@ -36,10 +36,10 @@ def tp_init(
     mytp.set_is_light_blocker(True)
     mytp.set_is_obs_wall_or_door(True)
     mytp.set_is_rock(True)
-    mytp.set_is_toughness_indestructible(True)
+    mytp.set_is_toughness_very_tough(True)
     mytp.set_is_wall(True)
     mytp.set_text_a_or_an("the")
-    mytp.set_text_description("Rocky the indestructible rock.")
+    mytp.set_text_description("Rocky the very_tough rock.")
     mytp.set_z_depth(my.MAP_DEPTH_OBJ)
     mytp.set_z_prio(my.MAP_PRIO_NORMAL)
 

@@ -44,7 +44,6 @@ def tp_init(name, text_name):
     mytp.set_aggression_level_pct(100)
     mytp.set_ai_resent_count(10)
     mytp.set_armor_class(14)
-    mytp.set_attack_bonus(20)  # 10, means no bonus
     mytp.set_attack_eater(True)
     mytp.set_attack_lunge(True)
     mytp.set_collision_check(True)

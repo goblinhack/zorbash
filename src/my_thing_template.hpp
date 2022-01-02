@@ -104,7 +104,7 @@ private:
   int _blit_off {};
   int _blit_right_off {};
   int _blit_top_off {};
-  int _breaking_chance_d1000 {};
+  int _break_chance_d10000 {};
   int _capacity_height {};
   int _capacity_width {};
   int _charge_count {};
@@ -374,7 +374,7 @@ private:
   int _is_tmp_thing {};
   int _is_torch {};
   int _is_toughness_hard {};
-  int _is_toughness_indestructible {};
+  int _is_toughness_very_tough {};
   int _is_toughness_soft {};
   int _is_treasure_chest {};
   int _is_treasure_class_a {};
@@ -971,7 +971,7 @@ public:
   int blit_left_off(void) const { return _blit_left_off; }
   int blit_right_off(void) const { return _blit_right_off; }
   int blit_top_off(void) const { return _blit_top_off; }
-  int breaking_chance_d1000(void) const { return _breaking_chance_d1000; }
+  int break_chance_d10000(void) const { return _break_chance_d10000; }
   int capacity_height(void) const { return _capacity_height; }
   int capacity_width(void) const { return _capacity_width; }
   int charge_count(void) const { return _charge_count; }
@@ -1241,7 +1241,7 @@ public:
   int is_tmp_thing(void) const { return _is_tmp_thing; }
   int is_torch(void) const { return _is_torch; }
   int is_toughness_hard(void) const { return _is_toughness_hard; }
-  int is_toughness_indestructible(void) const { return _is_toughness_indestructible; }
+  int is_toughness_very_tough(void) const { return _is_toughness_very_tough; }
   int is_toughness_soft(void) const { return _is_toughness_soft; }
   int is_treasure_chest(void) const { return _is_treasure_chest; }
   int is_treasure_class_a(void) const { return _is_treasure_class_a; }
@@ -1517,7 +1517,7 @@ public:
   void set_blit_left_off(int v) { _blit_left_off = v; }
   void set_blit_right_off(int v) { _blit_right_off = v; }
   void set_blit_top_off(int v) { _blit_top_off = v; }
-  void set_breaking_chance_d1000(int v) { _breaking_chance_d1000 = v; }
+  void set_break_chance_d10000(int v) { _break_chance_d10000 = v; }
   void set_capacity_height(int v) { _capacity_height = v; }
   void set_capacity_width(int v) { _capacity_width = v; }
   void set_charge_count(int v) { _charge_count = v; }
@@ -1788,7 +1788,7 @@ public:
   void set_is_tmp_thing(int v) { _is_tmp_thing = v; }
   void set_is_torch(int v) { _is_torch = v; }
   void set_is_toughness_hard(int v) { _is_toughness_hard = v; }
-  void set_is_toughness_indestructible(int v) { _is_toughness_indestructible = v; }
+  void set_is_toughness_very_tough(int v) { _is_toughness_very_tough = v; }
   void set_is_toughness_soft(int v) { _is_toughness_soft = v; }
   void set_is_treasure_chest(int v) { _is_treasure_chest = v; }
   void set_is_treasure_class_a(int v) { _is_treasure_class_a = v; }

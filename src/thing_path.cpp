@@ -193,7 +193,7 @@ bool Thing::path_pop_next_move(void)
     //
     // Someone in our way?
     //
-    if (level->is_shovable(future_pos) && (int) pcg_random_range(0, 1000) < tp()->ai_shove_chance_d1000()) {
+    if (level->is_shovable(future_pos) && d1000() < tp()->ai_shove_chance_d1000()) {
       //
       // Can the monst shove it into a something bad?
       //

@@ -429,53 +429,8 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
     }
   }
 
-  //
-  // attack modifier: strength + attack bonus
-  //
-  auto attack_total = get_stat_strength() + get_attack_bonus();
-  if (owner) {
-    attack_total += owner->get_stat_strength();
-    attack_total += owner->get_attack_bonus();
-  }
-
-  attack_total -= get_idle_count();
-  attack_total -= get_stuck_count();
-
-  //
-  // defence modifier: armor class + dexterity
-  //
-  auto defence_total = victim->get_armor_class_total();
-  defence_total += victim->get_stat_dexterity();
-
-  auto victim_owner = get_top_owner();
-  if (victim_owner) {
-    defence_total = victim_owner->get_armor_class_total();
-    defence_total = victim_owner->get_stat_dexterity();
-  }
-
-  defence_total -= victim->get_idle_count();
-  defence_total -= victim->get_stuck_count();
-
-  //
-  // Terrain penalties
-  //
-  if (! is_aquatic()) {
-    if (level->is_water(curr_at)) {
-      attack_total /= 2;
-    }
-    if (level->is_deep_water(curr_at)) {
-      attack_total /= 2;
-    }
-  }
-
-  if (! victim->is_aquatic()) {
-    if (level->is_water(victim->curr_at)) {
-      defence_total /= 2;
-    }
-    if (level->is_deep_water(victim->curr_at)) {
-      defence_total /= 2;
-    }
-  }
+  auto attack_modifier = get_attack_modifier(victim);
+  auto armor_class     = victim->get_armor_class_total();
 
   bool damage_set       = false;
   bool attack_poison    = false;
@@ -497,7 +452,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   // Chance of poison damage?
   //
   if (! damage_set || prefer_natural_attack) {
-    if ((int) pcg_random_range(0, 1000) < damage_poison_chance_d1000()) {
+    if (d1000() < damage_poison_chance_d1000()) {
       int damage_poison = get_damage_poison();
       if (damage_poison > 0) {
         damage        = damage_poison;
@@ -510,7 +465,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   // Chance of attack_future1 damage?
   //
   if (! damage_set) {
-    if ((int) pcg_random_range(0, 1000) < damage_future1_chance_d1000()) {
+    if (d1000() < damage_future1_chance_d1000()) {
       int attack_future1 = get_damage_future1();
       if (attack_future1 > 0) {
         damage         = attack_future1;
@@ -524,7 +479,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   // Chance of attack_future2 damage?
   //
   if (! damage_set) {
-    if ((int) pcg_random_range(0, 1000) < damage_future2_chance_d1000()) {
+    if (d1000() < damage_future2_chance_d1000()) {
       int attack_future2 = get_damage_future2();
       if (attack_future2 > 0) {
         damage         = attack_future2;
@@ -538,7 +493,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   // Chance of attack_future3 damage?
   //
   if (! damage_set) {
-    if ((int) pcg_random_range(0, 1000) < damage_future3_chance_d1000()) {
+    if (d1000() < damage_future3_chance_d1000()) {
       int attack_future3 = get_damage_future3();
       if (attack_future3 > 0) {
         damage         = attack_future3;
@@ -552,7 +507,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   // Chance of attack_future4 damage?
   //
   if (! damage_set) {
-    if ((int) pcg_random_range(0, 1000) < damage_future4_chance_d1000()) {
+    if (d1000() < damage_future4_chance_d1000()) {
       int attack_future4 = get_damage_future4();
       if (attack_future4 > 0) {
         damage         = attack_future4;
@@ -566,7 +521,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   // Chance of attack_fire damage?
   //
   if (! damage_set) {
-    if ((int) pcg_random_range(0, 1000) < damage_fire_chance_d1000()) {
+    if (d1000() < damage_fire_chance_d1000()) {
       int attack_fire = get_damage_fire();
       if (attack_fire > 0) {
         damage      = attack_fire;
@@ -580,7 +535,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   // Chance of attack_crush damage?
   //
   if (! damage_set) {
-    if ((int) pcg_random_range(0, 1000) < damage_crush_chance_d1000()) {
+    if (d1000() < damage_crush_chance_d1000()) {
       int attack_crush = get_damage_crush();
       if (attack_crush > 0) {
         damage       = attack_crush;
@@ -594,7 +549,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   // Chance of attack_lightning damage?
   //
   if (! damage_set) {
-    if ((int) pcg_random_range(0, 1000) < damage_lightning_chance_d1000()) {
+    if (d1000() < damage_lightning_chance_d1000()) {
       int attack_lightning = get_damage_lightning();
       if (attack_lightning > 0) {
         damage           = attack_lightning;
@@ -608,7 +563,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   // Chance of attack_energy damage?
   //
   if (! damage_set) {
-    if ((int) pcg_random_range(0, 1000) < damage_energy_chance_d1000()) {
+    if (d1000() < damage_energy_chance_d1000()) {
       int attack_energy = get_damage_energy();
       if (attack_energy > 0) {
         damage        = attack_energy;
@@ -622,7 +577,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   // Chance of attack_acid damage?
   //
   if (! damage_set) {
-    if ((int) pcg_random_range(0, 1000) < damage_acid_chance_d1000()) {
+    if (d1000() < damage_acid_chance_d1000()) {
       int attack_acid = get_damage_acid();
       if (attack_acid > 0) {
         damage      = attack_acid;
@@ -636,7 +591,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   // Chance of attack_digest damage?
   //
   if (! damage_set) {
-    if ((int) pcg_random_range(0, 1000) < damage_digest_chance_d1000()) {
+    if (d1000() < damage_digest_chance_d1000()) {
       int attack_digest = get_damage_digest();
       if (attack_digest > 0) {
         damage        = attack_digest;
@@ -650,7 +605,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   // Chance of necrosis damage?
   //
   if (! damage_set || prefer_natural_attack) {
-    if ((int) pcg_random_range(0, 1000) < damage_necrosis_chance_d1000()) {
+    if (d1000() < damage_necrosis_chance_d1000()) {
       int damage_necrosis = get_damage_necrosis();
       if (damage_necrosis > 0) {
         damage          = damage_necrosis;
@@ -664,10 +619,10 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   // Bite?
   //
   if (! damage_set || prefer_natural_attack) {
-    if ((int) pcg_random_range(0, 1000) < damage_natural_attack_chance_d1000()) {
+    if (d1000() < damage_natural_attack_chance_d1000()) {
       int damage_natural_attack = get_damage_natural_attack();
       if (damage_natural_attack > 0) {
-        damage         = damage_natural_attack + stat_to_bonus(attack_total);
+        damage         = damage_natural_attack + attack_modifier;
         damage_set     = true;
         attack_natural = true;
       }
@@ -681,8 +636,8 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   // else hits.
   //
   if (! damage_set) {
-    if ((int) pcg_random_range(0, 1000) < damage_melee_chance_d1000()) {
-      damage = get_damage_melee() + stat_to_bonus(attack_total);
+    if (d1000() < damage_melee_chance_d1000()) {
+      damage = get_damage_melee() + attack_modifier;
       if (damage > 0) {
         damage_set = true;
       }
@@ -690,8 +645,8 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   }
   if (! damage_set) {
     if (owner) {
-      if ((int) pcg_random_range(0, 1000) < owner->damage_melee_chance_d1000()) {
-        damage = get_damage_melee() + stat_to_bonus(attack_total);
+      if (d1000() < owner->damage_melee_chance_d1000()) {
+        damage = get_damage_melee() + attack_modifier;
         if (damage > 0) {
           damage_set = true;
         }
@@ -765,13 +720,12 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
     }
   }
 
-  bool crit   = false;
-  bool fumble = false;
+  bool crit = false;
 
   //
   // See if we can bypass its defences
   //
-  if (is_player() || is_alive_monst()) {
+  if (is_player() || is_alive_monst() || (owner && (owner->is_player() || owner->is_alive_monst()))) {
     if (victim->is_dead) {
       //
       // It's hard to miss a corpse.
@@ -781,8 +735,24 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
       // You just cannot miss this.
       //
     } else {
-      dbg("attack_total %d %s defence_total %d", attack_total, victim->to_string().c_str(), defence_total);
-      auto hit = d20roll(attack_total, defence_total, fumble, crit);
+      bool hit                = false;
+      int  must_roll_at_least = 20 + attack_modifier - armor_class;
+      int  i_rolled           = d20();
+
+      if (i_rolled == 20) {
+        crit = true;
+        hit  = true;
+        dbg("Attack on %s: ATT %s AC %d, to-hit %d, crit rolled %d -> hit", victim->to_short_string().c_str(),
+            modifier_to_str(attack_modifier).c_str(), armor_class, must_roll_at_least, i_rolled);
+      } else if (i_rolled == 1) {
+        hit = false;
+        dbg("Attack on %s: ATT %s AC %d, to-hit %d, fumble rolled %d -> miss", victim->to_short_string().c_str(),
+            modifier_to_str(attack_modifier).c_str(), armor_class, must_roll_at_least, i_rolled);
+      } else {
+        hit = i_rolled >= must_roll_at_least;
+        dbg("Attack on %s: ATT %s AC %d, to-hit %d, rolled %d -> %s", victim->to_short_string().c_str(),
+            modifier_to_str(attack_modifier).c_str(), armor_class, must_roll_at_least, i_rolled, hit ? "hit" : "miss");
+      }
 
       //
       // Cannot miss (if engulfing?)
@@ -802,7 +772,8 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
             TOPCON("%s misses.", text_The().c_str());
           }
         } else {
-          dbg("The attack missed (att %d, def %d) on %s", attack_total, defence_total, victim->to_string().c_str());
+          dbg("The attack missed (att modifier %d, AC %d) on %s", attack_modifier, armor_class,
+              victim->to_string().c_str());
         }
 
         if (attack_lunge()) {
@@ -818,8 +789,10 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
         // See if armor crumbles
         //
         auto armor = victim->get_equip(MONST_EQUIP_ARMOR);
+        victim->topcon("victim");
         if (armor) {
-          if ((int) pcg_random_range(0, 1000) < breaking_chance_d1000()) {
+          victim->topcon("has armor");
+          if (d10000() < break_chance_d10000()) {
             if (is_player()) {
               TOPCON("%s falls apart.", armor->text_The().c_str());
             }
@@ -857,17 +830,17 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
     if (my_owner) {
       auto weapon = my_owner->get_equip(MONST_EQUIP_WEAPON);
       if (weapon) {
-        auto break_chance = breaking_chance_d1000();
+        auto break_chance = break_chance_d10000();
         if (victim->is_toughness_soft()) {
           break_chance /= 2;
         }
         if (victim->is_toughness_hard()) {
           break_chance *= 2;
         }
-        if (victim->is_toughness_indestructible()) {
+        if (victim->is_toughness_very_tough()) {
           break_chance *= 2;
         }
-        if ((int) pcg_random_range(0, 1000) < break_chance) {
+        if (d10000() < break_chance) {
           weapon->dead("broken");
         }
       }

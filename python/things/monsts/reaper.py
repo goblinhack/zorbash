@@ -8,7 +8,6 @@ def tp_init(name, text_name):
     mytp.set_ai_resent_count(100)
     mytp.set_ai_wanderer(True)
     mytp.set_armor_class(25)
-    mytp.set_attack_bonus(18)  # 10, means no bonus
     mytp.set_attack_humanoid(True)
     mytp.set_attack_lunge(True)
     mytp.set_collision_check(True)

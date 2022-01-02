@@ -10,7 +10,6 @@ def tp_init(name, text_name):
     mytp = tp.Tp(name, text_name)
     mytp.set_aggression_level_pct(100)
     mytp.set_armor_class(11)
-    mytp.set_attack_bonus(10)  # 10, means no bonus
     mytp.set_attack_humanoid(True)
     mytp.set_attack_lunge(True)
     mytp.set_collision_check(True)

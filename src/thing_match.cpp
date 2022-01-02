@@ -399,7 +399,7 @@ bool Thing::matches(const std::string &what)
   if (hunger_is_insatiable() && (what == "hunger_is_insatiable")) {
     return true;
   }
-  if (is_toughness_indestructible() && (what == "is_toughness_indestructible")) {
+  if (is_toughness_very_tough() && (what == "is_toughness_very_tough")) {
     return true;
   }
   if (is_intelligent() && (what == "is_intelligent")) {
@@ -1681,8 +1681,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "hunger_is_insatiable") {
     return &Thing::hunger_is_insatiable;
   }
-  if (what == "is_toughness_indestructible") {
-    return &Thing::is_toughness_indestructible;
+  if (what == "is_toughness_very_tough") {
+    return &Thing::is_toughness_very_tough;
   }
   if (what == "is_intelligent") {
     return &Thing::is_intelligent;

@@ -1,13 +1,20 @@
+<!-- MVP plan                                                                                                                                     -->
+<!-- ------                                                                                                                                       -->
+<!-- - level pyramid                                                                                                                              -->
+<!-- - 4 bosses and final zorb boss                                                                                                               -->
+<!-- - orb of zorb                                                                                                                                -->
+<!-- ------                                                                                                                                       -->
+<!--                                                                                                                                              -->
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- - head should be on top of armor                                                                                                             -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Next todo                                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
-<!-- - sync armor anim frames                                                                                                                     -->
-<!-- - head should be on top of armor                                                                                                             -->
-<!-- - check armor damage                                                                                                                         -->
 <!-- - fish scale mail for water proofing                                                                                                         -->
+<!-- - check fire attack                                                                                                                          -->
+<!-- - check armor damage                                                                                                                         -->
 <!-- - dragon scale mail for fire proofing                                                                                                        -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
@@ -22,6 +29,7 @@
 <!-- - moving floor                                                                                                                               -->
 <!-- - shove chocolate frog statue, get frog?                                                                                                     -->
 <!-- ------                                                                                                                                       -->
+<!--                                                                                                                                              -->
 <!--                                                                                                                                              -->
 <!-- Traps                                                                                                                                        -->
 <!-- ------                                                                                                                                       -->
@@ -170,11 +178,10 @@ Zorbash
 
 Welcome to the lair of the dread tentacleye, Zorbash. Liberate the Orb of Zorb and defeat Zorbash to win.
 
-(Well you will once the game is finished! :)
+This is work in progress. My pplan is to release a minimal viable game this year; 2022. Likely linux
+only with windows to follow later.  4 bosses plus final boss.
 
-This is work in progress. Consider this in demo mode for now. The game is playable, but has no end yet.
-
-Comments and suggestions welcome at this early stage.
+Comments and suggestions welcome.
 
 Screenshots
 -----------
@@ -340,7 +347,6 @@ Sound effects
 - Impact sounds by Deathscyp, [found here](https://freesound.org/people/Deathscyp/)
 - Impact sounds by Dersuperanton, [found here](https://freesound.org/people/dersuperanton/)
 - Impact sounds by RobinHood76, [found here](https://freesound.org/people/Robinhood76/)
-- Key sounds by uEffects, [found here](https://freesound.org/people/uEffects/)
 - Slime sounds by Konstati, [found here](https://freesound.org/people/konstati/)
 - Sword sounds by Danjocross, [found here](https://freesound.org/people/Danjocross/)
 - Sword sounds by XxChr0nosxX, [found here](https://freesound.org/people/XxChr0nosxX/)

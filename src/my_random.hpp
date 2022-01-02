@@ -27,4 +27,10 @@
 #define non_pcg_random_range(a, b)           (rand() % ((b) - (a)) + (a))
 #define non_pcg_random_range_inclusive(a, b) (rand() % ((b) - (a) + 1) + (a))
 
+#define d10000() ((int) pcg_random_range_inclusive(1, 10000))
+#define d1000()  ((int) pcg_random_range_inclusive(1, 1000))
+#define d100()   ((int) pcg_random_range_inclusive(1, 100))
+#define d50()    ((int) pcg_random_range_inclusive(1, 50))
+#define d20()    ((int) pcg_random_range_inclusive(1, 20))
+
 #endif

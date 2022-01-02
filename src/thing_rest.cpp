@@ -18,7 +18,7 @@ void Thing::rest(void)
     health_boost(1);
   }
 
-  if ((int) pcg_random_range(0, 20) < get_stat_constitution()) {
+  if (d20() < get_stat_constitution()) {
     stamina_boost(1);
   }
 }

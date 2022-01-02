@@ -1234,8 +1234,8 @@ class Tp:
     def set_is_enchantable(self, value):
         my.tp_set_is_enchantable(self, value)
 
-    def set_is_toughness_indestructible(self, value):
-        my.tp_set_is_toughness_indestructible(self, value)
+    def set_is_toughness_very_tough(self, value):
+        my.tp_set_is_toughness_very_tough(self, value)
 
     def set_is_bones(self, value):
         my.tp_set_is_bones(self, value)
@@ -1735,8 +1735,8 @@ class Tp:
     def set_unused_chance7_d1000(self, value):
         my.tp_set_unused_chance7_d1000(self, value)
 
-    def set_breaking_chance_d1000(self, value):
-        my.tp_set_breaking_chance_d1000(self, value)
+    def set_break_chance_d10000(self, value):
+        my.tp_set_break_chance_d10000(self, value)
 
     def set_damage_melee_chance_d1000(self, value):
         my.tp_set_damage_melee_chance_d1000(self, value)

@@ -305,7 +305,6 @@ public:
   bool buffbox_id_remove(Thingp what);
   bool buff_find(const std::string &);
   bool buff_find_is_slippery(void);
-  ;
   bool buff_remove(Thingp it);
   bool buff_remove(Tpp what);
   bool buff_use(Thingp it);
@@ -651,6 +650,7 @@ public:
              bool damage_future2, bool damage_future3, bool damage_future4, bool damage_fire, bool damage_crush,
              bool damage_lightning, bool damage_energy, bool damage_acid, bool damage_digest, int damage);
 
+  int get_attack_modifier(Thingp victim);
   int aggression_level_pct(void);
   int ai_detect_secret_doors(void);
   int ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int type, bool check);
@@ -669,7 +669,7 @@ public:
   int attack(void);
   int blast_max_radius(void);
   int blast_min_radius(void);
-  int breaking_chance_d1000(void);
+  int break_chance_d10000(void);
   int buff_on_damage_acid(Thingp hitter, int damage);
   int buff_on_damage_constitution(Thingp hitter, int damage);
   int buff_on_damage_crush(Thingp hitter, int damage);
@@ -1219,7 +1219,7 @@ public:
   int is_tmp_thing(void);
   int is_torch(void);
   int is_toughness_hard(void);
-  int is_toughness_indestructible(void);
+  int is_toughness_very_tough(void);
   int is_toughness_soft(void);
   int is_treasure_chest(void);
   int is_treasure_class_a(void);

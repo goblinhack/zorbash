@@ -213,7 +213,7 @@ do
       set_is_heavy \
       set_is_hittable \
       set_is_humanoid \
-      set_is_toughness_indestructible \
+      set_is_toughness_very_tough \
       set_is_intelligent \
       set_is_interesting \
       set_is_item \

@@ -385,7 +385,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   wobble(25);
 
   if (! is_able_to_jump_without_tiring()) {
-    if ((int) pcg_random_range(0, 20) > get_stat_strength()) {
+    if (d20() > get_stat_strength()) {
       decr_stamina(10);
     }
   }
@@ -630,7 +630,7 @@ bool Thing::jump_attack(Thingp maybe_victim)
   }
 
   if (maybe_victim) {
-    if ((int) pcg_random_range(0, 1000) > tp()->is_able_to_jump_attack_chance_d1000()) {
+    if (d1000() > tp()->is_able_to_jump_attack_chance_d1000()) {
       dbg("Try to jump in direction of escape attack");
       TRACE_AND_INDENT();
 
@@ -645,7 +645,7 @@ bool Thing::jump_attack(Thingp maybe_victim)
       }
     }
 
-    if ((int) pcg_random_range(0, 1000) > tp()->is_able_to_jump_attack_chance_d1000()) {
+    if (d1000() > tp()->is_able_to_jump_attack_chance_d1000()) {
       dbg("Try to jump in front attack");
       TRACE_AND_INDENT();
 
@@ -655,7 +655,7 @@ bool Thing::jump_attack(Thingp maybe_victim)
     }
   }
 
-  if ((int) pcg_random_range(0, 1000) > tp()->is_able_to_jump_attack_chance_d1000()) {
+  if (d1000() > tp()->is_able_to_jump_attack_chance_d1000()) {
     dbg("Try to jump attack");
     TRACE_AND_INDENT();
 
@@ -681,7 +681,7 @@ bool Thing::jump_attack(Thingp maybe_victim)
         }
       }
 
-      if ((int) pcg_random_range(0, 1000) < tp()->is_able_to_jump_onto_chance_d1000()) {
+      if (d1000() < tp()->is_able_to_jump_onto_chance_d1000()) {
         dbg("Try to jump onto %s", maybe_victim->to_string().c_str());
         TRACE_AND_INDENT();
 

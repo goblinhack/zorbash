@@ -283,7 +283,7 @@ bool Thing::ai_create_path_to_single_goal(int minx, int miny, int maxx, int maxy
     //
     // Occasionally try the fallback path for a bit of variety.
     //
-    if ((int) pcg_random_range(0, 100) < 20) {
+    if (d100() < 20) {
       if (fallback.path.size()) {
         //
         // If the fallback path ends in an AI obstacle (like a chasm)
@@ -1004,7 +1004,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
                 // No hunting monsters we cannot see just because we have visited that area before.
                 // How aggressive are we?
                 //
-                if ((int) pcg_random_range(0, 100) < aggression_level_pct()) {
+                if (d100() < aggression_level_pct()) {
                   if (possible_to_attack(it)) {
                     GOAL_ADD(GOAL_PRIO_MED, -health_diff - goal_penalty, "can-attack-monst-unprovoked", it);
                     //

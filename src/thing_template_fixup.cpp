@@ -56,6 +56,18 @@ void tp_fixup(void)
       }
     }
 
+    if (tp->is_monst() || tp->is_item() || tp->is_player()) {
+      if (! tp->strength()) {
+        tp->set_stat_strength(10);
+      }
+      if (! tp->constitution()) {
+        tp->set_stat_constitution(10);
+      }
+      if (! tp->dexterity()) {
+        tp->set_stat_dexterity(10);
+      }
+    }
+
     //
     // If only a single attack type then make sure it is 1000%
     //

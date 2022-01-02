@@ -17,7 +17,6 @@ def on_open(me, x, y):
 def tp_init(name):
     mytp = tp.Tp(name, "wood door")
     mytp.set_armor_class(20)
-    mytp.set_attack_bonus(10)  # 10, means no bonus
     mytp.set_collision_check(True)
     mytp.set_collision_hit_priority(9)
     mytp.set_damage_received_doubled_from_fire(True)

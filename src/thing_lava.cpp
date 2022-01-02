@@ -37,7 +37,7 @@ void Thing::lava_tick(void)
   // Give the player a chance
   //
   if (! level->is_smoke(at.x, at.y)) {
-    hit = ((int) pcg_random_range(0, 100) < 80);
+    hit = (d100() < 80);
   } else {
     hit = true;
   }
