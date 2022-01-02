@@ -8,6 +8,7 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
 <!-- - cannot change armor                                                                                                                        -->
+<!-- - skills for armor, def and damage                                                                                                           -->
 <!-- - head should be on top of armor                                                                                                             -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
@@ -97,7 +98,9 @@
 <!--                                                                                                                                              -->
 <!-- Potions                                                                                                                                      -->
 <!-- ------                                                                                                                                       -->
+<!-- - have a monster use a potion?                                                                                                               -->
 <!-- - antipoison potion                                                                                                                          -->
+<!-- - enchant potion of descent radius                                                                                                           -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Armor                                                                                                                                        -->
@@ -109,19 +112,13 @@
 <!-- ------                                                                                                                                       -->
 <!-- - holy water cures poison                                                                                                                    -->
 <!-- - darts / poison darts                                                                                                                       -->
-<!-- - damage when hitting walls                                                                                                                  -->
 <!-- - plutonium sword, no wall damage                                                                                                            -->
 <!-- - strength penalties                                                                                                                         -->
 <!-- - gauntlet of lion armour (Henry II)                                                                                                         -->
 <!-- - axe hits all monsts around you ?                                                                                                           -->
-<!-- - three damage types, blunt(club warhammer) pierce(arrow javelin) or cut(axe scythe swwrd)                                                   -->
 <!-- - blessed items resist explosion                                                                                                             -->
 <!-- - warhammer should kill parent jelly in one go                                                                                               -->
 <!-- - warhammer smash skeletton                                                                                                                  -->
-<!-- - fire portion                                                                                                                               -->
-<!-- - enchant potion                                                                                                                             -->
-<!-- - enchant potion of descent radius                                                                                                           -->
-<!-- - have a monster use a potion?                                                                                                               -->
 <!-- - (blunt/warhamma?) slime specific weapon does not cause slimes to split                                                                     -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
@@ -142,7 +139,7 @@
 <!-- - bloodgrass, grows near corpses                                                                                                             -->
 <!-- - yak that eats foilage                                                                                                                      -->
 <!-- - shove/lure monsters into webs?                                                                                                             -->
-<!-- - rat pack and king rat                                                                                                                      -->
+<!-- - rat pack and king rat / cranium rat                                                                                                        -->
 <!-- - zombie camel?                                                                                                                              -->
 <!-- - new monst? should explode in fire?                                                                                                         -->
 <!-- - sewer wolf?                                                                                                                                -->
