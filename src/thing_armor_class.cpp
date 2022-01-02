@@ -103,7 +103,7 @@ int Thing::get_armor_class_total(void)
   //
   // Terrain penalties
   //
-  if (! is_aquatic()) {
+  if (! is_aquatic() && ! buff_find_is_aquatic()) {
     if (level->is_water(curr_at)) {
       armor_class /= 2;
       if (armor_class != last_armor_class) {

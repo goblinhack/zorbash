@@ -97,7 +97,7 @@ int Thing::get_attack_modifier(const Thingp victim)
   //
   // Terrain penalties
   //
-  if (! is_aquatic()) {
+  if (! is_aquatic() && ! buff_find_is_aquatic()) {
     if (level->is_water(curr_at)) {
       attack_modifier /= 2;
       if (attack_modifier != last_attack_modifier) {

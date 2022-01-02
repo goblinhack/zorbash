@@ -4,6 +4,14 @@ import tp
 mytp = None
 
 
+def on_equip(owner, me, x, y):
+    my.thing_buff_add(owner, "buff_aquatic")
+
+
+def on_unequip(owner, me, x, y):
+    my.thing_buff_remove(owner, "buff_aquatic")
+
+
 def on_enchant(me, x, y):
     owner = my.thing_get_top_owner_id(me)
     if my.thing_is_player(owner):
@@ -38,6 +46,8 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_long_text_description("Scale mail armor composed of lots of little fish shaped scales. Smells a bit fishy too. You might actually be wearing a fish.")
     mytp.set_normal_placement_rules(True)
     mytp.set_on_enchant_do("me.on_enchant()")
+    mytp.set_on_equip_do("me.on_equip()")
+    mytp.set_on_unequip_do("me.on_unequip()")
     mytp.set_rarity(my.RARITY_COMMON)
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("Fish scale mail armor.")

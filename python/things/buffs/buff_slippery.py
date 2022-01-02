@@ -32,7 +32,7 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="buff_slippery", text_name="slippery")
+    tp_init(name="buff_slippery", text_name="slippery as the banana")
 
 
 init()

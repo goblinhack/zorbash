@@ -7,15 +7,14 @@
 <!--                                                                                                                                              -->
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- - cannot change armor                                                                                                                        -->
 <!-- - head should be on top of armor                                                                                                             -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Next todo                                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
-<!-- - fish scale mail for water proofing                                                                                                         -->
 <!-- - check fire attack                                                                                                                          -->
 <!-- - check armor damage                                                                                                                         -->
-<!-- - dragon scale mail for fire proofing                                                                                                        -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Level                                                                                                                                        -->
@@ -99,6 +98,11 @@
 <!-- Potions                                                                                                                                      -->
 <!-- ------                                                                                                                                       -->
 <!-- - antipoison potion                                                                                                                          -->
+<!-- ------                                                                                                                                       -->
+<!--                                                                                                                                              -->
+<!-- Armor                                                                                                                                        -->
+<!-- ------                                                                                                                                       -->
+<!-- - dragon scale mail for fire proofing                                                                                                        -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Weapons                                                                                                                                      -->

@@ -103,25 +103,6 @@ bool Thing::buff_find(const std::string &what)
   return false;
 }
 
-bool Thing::buff_find_is_slippery(void)
-{
-  TRACE_AND_INDENT();
-
-  if (! maybe_itemsp()) {
-    return false;
-  }
-
-  for (auto id : get_itemsp()->buffs) {
-    auto t = level->thing_find(id);
-    if (t) {
-      if (t->is_slippery()) {
-        return true;
-      }
-    }
-  }
-  return false;
-}
-
 void Thing::buff_remove_all(void)
 {
   TRACE_NO_INDENT();

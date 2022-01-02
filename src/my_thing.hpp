@@ -305,6 +305,7 @@ public:
   bool buffbox_id_remove(Thingp what);
   bool buff_find(const std::string &);
   bool buff_find_is_slippery(void);
+  bool buff_find_is_aquatic(void);
   bool buff_remove(Thingp it);
   bool buff_remove(Tpp what);
   bool buff_use(Thingp it);
