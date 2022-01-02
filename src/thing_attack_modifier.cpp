@@ -59,7 +59,8 @@ int Thing::get_attack_modifier(const Thingp victim)
   }
 
   if (maybe_itemsp()) {
-    for (auto id : get_itemsp()->buffs) {
+    FOR_ALL_BUFFS(id)
+    {
       auto buff = level->thing_find(id);
       if (buff) {
         attack_modifier += stat_to_bonus(buff->get_stat_strength());
@@ -73,7 +74,8 @@ int Thing::get_attack_modifier(const Thingp victim)
       }
     }
 
-    for (auto id : get_itemsp()->debuffs) {
+    FOR_ALL_DEBUFFS(id)
+    {
       auto buff = level->thing_find(id);
       if (buff) {
         attack_modifier += stat_to_bonus(buff->get_stat_strength());

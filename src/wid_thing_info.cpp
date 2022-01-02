@@ -372,56 +372,6 @@ void Game::wid_thing_info_create(Thingp t, bool when_hovering_over)
 
   point mid(TERM_WIDTH / 2, TERM_HEIGHT - 5);
 
-#if 0
-  if (t->is_player() || t->is_bag_item_container()) {
-    IF_DEBUG1 { t->log("Thing info create bags"); }
-
-    if (bag_primary) {
-      delete bag_primary;
-      bag_primary = nullptr;
-    }
-
-    {
-      point tl    = mid - point(player->capacity_width() + 6, player->capacity_height() + 2);
-      point br    = tl + point(player->capacity_width() + 1, player->capacity_height() + 1);
-      bag_primary = new WidBag(player, false, tl, br, "Inventory");
-    }
-  }
-
-  for (auto b : game->bag_secondary) {
-    delete b;
-  }
-  game->bag_secondary.clear();
-
-  if (t->is_player() || t->is_bag_item_container()) {
-    int existing_bags_height = 0;
-
-    for (const auto &item : player->get_infop()->carrying) {
-      auto b = game->thing_find(item.id);
-      if (! b) {
-        continue;
-      }
-
-      if (! b->is_bag_item_container()) {
-        continue;
-      }
-
-      point tl = mid + point(1, -(b->capacity_height() + 2));
-      point br = tl + point(b->capacity_width() + 1, b->capacity_height() + 1);
-
-      tl.y -= existing_bags_height;
-      br.y -= existing_bags_height;
-      existing_bags_height += b->capacity_height() + 3;
-
-      if (b->is_bag()) {
-        game->bag_secondary.push_back(new WidBag(b, b == t, tl, br, "Bag"));
-      } else {
-        game->bag_secondary.push_back(new WidBag(b, b == t, tl, br, "Chest"));
-      }
-    }
-  }
-#endif
-
   recursion = false;
 }
 

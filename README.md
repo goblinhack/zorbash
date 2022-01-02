@@ -8,6 +8,7 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
 <!-- - cannot change armor                                                                                                                        -->
+<!-- - strength totals                                                                                                                            -->
 <!-- - skills for armor, def and damage                                                                                                           -->
 <!-- - head should be on top of armor                                                                                                             -->
 <!-- ------                                                                                                                                       -->
@@ -179,7 +180,7 @@ Zorbash
 
 Welcome to the lair of the dread tentacleye, Zorbash. Liberate the Orb of Zorb and defeat Zorbash to win.
 
-This is work in progress. My pplan is to release a minimal viable game this year; 2022. Likely linux
+This is work in progress. My plan is to release a minimal viable game this year; 2022. Likely linux
 only with windows to follow later.  4 bosses plus final boss.
 
 Comments and suggestions welcome.

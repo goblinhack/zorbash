@@ -45,7 +45,8 @@ static void wid_bag_add_items(Widp wid_bag_container, Thingp bag)
   //
   // Intentionally not walking the bag children here
   //
-  for (const auto &item : bag->get_itemsp()->carrying) {
+  FOR_ALL_CARRIED_BY(bag, item)
+  {
     auto t = game->thing_find(item.id);
     if (unlikely(! t)) {
       continue;

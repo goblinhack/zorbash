@@ -36,7 +36,8 @@ bool Thing::skill_add(Thingp what)
     existing_owner->drop(what);
   }
 
-  for (const auto &item : get_itemsp()->skills) {
+  FOR_ALL_SKILLS(item)
+  {
     if (item == what->id) {
       dbg("No; already carried");
       return false;
@@ -142,7 +143,8 @@ int Thing::skill_enchant_count(const uint32_t slot)
     return 0;
   }
 
-  for (auto oid : get_itemsp()->skills) {
+  FOR_ALL_SKILLS(oid)
+  {
     auto o = game->level->thing_find(oid);
     if (o) {
       if (o->id == thing_id) {
@@ -218,7 +220,8 @@ bool Thing::can_learn_something(void)
   //
   for (auto tpp : tp_get_skills()) {
     bool already_learned = false;
-    for (auto oid : get_itemsp()->skills) {
+    FOR_ALL_SKILLS(oid)
+    {
       auto o = game->level->thing_find(oid);
       if (o) {
         if (o->tp() == tpp) {
@@ -242,7 +245,8 @@ bool Thing::learn_random_skill(void)
   std::vector< Tpp > cands;
   for (auto tpp : tp_get_skills()) {
     bool add = true;
-    for (auto oid : get_itemsp()->skills) {
+    FOR_ALL_SKILLS(oid)
+    {
       auto o = game->level->thing_find(oid);
       if (o) {
         if (o->tp() == tpp) {

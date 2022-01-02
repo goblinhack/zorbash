@@ -198,7 +198,8 @@ void Game::wid_enchant_an_item(void)
     enchant_items.push_back(t);
   }
 
-  for (auto id : player->get_itemsp()->skills) {
+  FOR_ALL_SKILLS_LEARNED_BY(player, id)
+  {
     auto t = thing_find(id);
     if (t) {
       auto tp = t->tp();

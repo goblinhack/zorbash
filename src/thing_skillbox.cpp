@@ -59,7 +59,7 @@ bool Thing::skillbox_id_insert(Thingp what)
   int item_slot = -1;
   if (free_slot != -1) {
     get_itemsp()->skillbox_id[ free_slot ] = what->id;
-    item_slot                             = free_slot;
+    item_slot                              = free_slot;
   } else {
     if (skillbox_items >= UI_INVENTORY_QUICK_ITEMS_MAX) {
       TOPCON("No space to carry %s which is not carried.", what->text_the().c_str());

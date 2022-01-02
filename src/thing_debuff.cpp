@@ -34,7 +34,8 @@ bool Thing::debuff_add(Thingp what)
     existing_owner->drop(what);
   }
 
-  for (const auto &item : get_itemsp()->debuffs) {
+  FOR_ALL_DEBUFFS(item)
+  {
     if (item == what->id) {
       dbg("No; already carried");
       return false;
@@ -169,7 +170,8 @@ bool Thing::debuff_remove(Tpp what)
   if (! maybe_itemsp()) {
     return false;
   }
-  for (const auto &item : get_itemsp()->debuffs) {
+  FOR_ALL_DEBUFFS(item)
+  {
     auto t = level->thing_find(item.id);
     if (t && (t->tp() == what)) {
       debuff_remove(t);
@@ -191,7 +193,8 @@ void Thing::debuff_tick(void)
   dbg("Debuff tick");
   TRACE_AND_INDENT();
 
-  for (const auto &item : get_itemsp()->debuffs) {
+  FOR_ALL_DEBUFFS(item)
+  {
     auto t = level->thing_find(item.id);
     if (t) {
       dbg("Debuff (%s)", t->to_string().c_str());

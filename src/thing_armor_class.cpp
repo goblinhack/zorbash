@@ -65,7 +65,8 @@ int Thing::get_armor_class_total(void)
   }
 
   if (maybe_itemsp()) {
-    for (auto id : get_itemsp()->buffs) {
+    FOR_ALL_BUFFS(id)
+    {
       auto buff = level->thing_find(id);
       if (buff) {
         armor_class += stat_to_bonus(buff->get_stat_dexterity());
@@ -79,7 +80,8 @@ int Thing::get_armor_class_total(void)
       }
     }
 
-    for (auto id : get_itemsp()->debuffs) {
+    FOR_ALL_DEBUFFS(id)
+    {
       auto buff = level->thing_find(id);
       if (buff) {
         armor_class += stat_to_bonus(buff->get_stat_dexterity());

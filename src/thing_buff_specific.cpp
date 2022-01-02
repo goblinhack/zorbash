@@ -23,7 +23,8 @@ bool Thing::buff_find_is_slippery(void)
     return false;
   }
 
-  for (auto id : get_itemsp()->buffs) {
+  FOR_ALL_BUFFS(id)
+  {
     auto t = level->thing_find(id);
     if (t) {
       if (t->is_slippery()) {
@@ -42,7 +43,8 @@ bool Thing::buff_find_is_aquatic(void)
     return false;
   }
 
-  for (auto id : get_itemsp()->buffs) {
+  FOR_ALL_BUFFS(id)
+  {
     auto t = level->thing_find(id);
     if (t) {
       if (t->is_aquatic()) {
