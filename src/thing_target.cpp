@@ -62,37 +62,8 @@ bool Thing::target_attack_best(int equip)
   //
   decr_stamina();
 
-  if (item) {
-    dbg("Have equip item %s", item->to_short_string().c_str());
-    TRACE_AND_INDENT();
-
-    on_use(item);
-    if (item->collision_check_and_handle_at(hit_at, &target_attacked, &target_overlaps)) {
-      lunge(hit_at);
-      if (target_attacked) {
-        dbg("Attacked with equip item");
-        return true;
-      }
-      return false;
-    }
-  } else {
-    dbg("No equip item");
-    TRACE_AND_INDENT();
-
-    if (collision_check_and_handle_at(hit_at, &target_attacked, &target_overlaps)) {
-      lunge(hit_at);
-      if (target_attacked) {
-        dbg("No equip item but attacked");
-        return true;
-      }
-      return false;
-    }
-  }
-
   //
-  // We didn't hit anything. See if there's something else to hit.
-  //
-  // Look in the chosen dir first, then behind us.
+  // Look in the chosen dir first for something to hit, then behind us.
   //
   std::vector< point > all_deltas = {
       point(dx, dy), point(-dx, -dy), point(-1, -1), point(1, -1), point(-1, 1), point(1, 1),
@@ -114,6 +85,7 @@ bool Thing::target_attack_best(int equip)
   Thingp best          = nullptr;
 
   dbg("Try to find something to attack, attempt 1");
+  TRACE_AND_INDENT();
   for (const auto &d : all_deltas) {
     auto hit_at = curr_at + point(d.x, d.y);
 
@@ -166,6 +138,7 @@ bool Thing::target_attack_best(int equip)
     target_overlaps = false;
 
     dbg("Best target to hit is %s", best->to_string().c_str());
+    TRACE_AND_INDENT();
     if (item) {
       if (item->collision_check_and_handle_at(best_hit_at, &target_attacked, &target_overlaps)) {
         lunge(best_hit_at);
@@ -186,6 +159,7 @@ bool Thing::target_attack_best(int equip)
   best_priority = -999;
 
   dbg("Try to find something to attack, attempt 2");
+  TRACE_AND_INDENT();
   for (const auto &d : all_deltas) {
     auto hit_at = curr_at + point(d.x, d.y);
 
@@ -240,6 +214,7 @@ bool Thing::target_attack_best(int equip)
     target_overlaps = false;
 
     dbg("Best target (2nd try) to hit is %s", best->to_string().c_str());
+    TRACE_AND_INDENT();
     if (item) {
       if (item->collision_check_and_handle_at(best_hit_at, &target_attacked, &target_overlaps)) {
         lunge(best_hit_at);
@@ -260,6 +235,7 @@ bool Thing::target_attack_best(int equip)
   best_priority = -999;
 
   dbg("Try to find something to attack, attempt 3");
+  TRACE_AND_INDENT();
   for (const auto &d : all_deltas) {
     auto hit_at = curr_at + point(d.x, d.y);
 
@@ -308,6 +284,7 @@ bool Thing::target_attack_best(int equip)
     target_overlaps = false;
 
     dbg("Best target (3rd try) to hit is %s", best->to_string().c_str());
+    TRACE_AND_INDENT();
     if (item) {
       if (item->collision_check_and_handle_at(best_hit_at, &target_attacked, &target_overlaps)) {
         lunge(best_hit_at);
@@ -321,5 +298,36 @@ bool Thing::target_attack_best(int equip)
     }
   }
 
+  //
+  // Last resort
+  //
+  if (item) {
+    dbg("Have equip item %s", item->to_short_string().c_str());
+    TRACE_AND_INDENT();
+
+    on_use(item);
+    if (item->collision_check_and_handle_at(hit_at, &target_attacked, &target_overlaps)) {
+      lunge(hit_at);
+      if (target_attacked) {
+        dbg("Attacked with equip item");
+        return true;
+      }
+      return false;
+    }
+  } else {
+    dbg("No equip item");
+    TRACE_AND_INDENT();
+
+    if (collision_check_and_handle_at(hit_at, &target_attacked, &target_overlaps)) {
+      lunge(hit_at);
+      if (target_attacked) {
+        dbg("No equip item but attacked");
+        return true;
+      }
+      return false;
+    }
+  }
+
+  dbg("No target found");
   return false;
 }
