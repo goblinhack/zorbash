@@ -306,7 +306,6 @@ bool Thing::use(Thingp what, int preferred_equip)
     }
     if (equip(what, preferred_equip)) {
       if (is_player()) {
-        TOPCON("You equip the %s.", what->text_the().c_str());
         game->tick_begin("player changed armor");
       }
     }

@@ -212,6 +212,26 @@ uint8_t wid_in_transit_item_place(Widp w, int32_t x, int32_t y, uint32_t button)
       return true;
     }
 
+    if (over->name == "equip_armor") {
+      auto what = t;
+      if (! what->is_armor()) {
+        TOPCON("Cannot equip %s as armor.", what->text_the().c_str());
+        sound_play("bonk");
+        return false;
+      }
+
+      //
+      // Equip the new item
+      //
+      player->log("Use %s", what->to_short_string().c_str());
+      player->use(what);
+
+      wid_destroy(&game->in_transit_item);
+      wid_inventory_init();
+      game->request_remake_rightbar = true;
+      return true;
+    }
+
     if (over->name == "equip_ring1") {
       auto what = t;
       if (! what->is_ring()) {

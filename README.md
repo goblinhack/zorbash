@@ -1,6 +1,5 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- - cannot change armor                                                                                                                        -->
 <!-- - head should be on top of armor                                                                                                             -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
