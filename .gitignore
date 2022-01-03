@@ -25,6 +25,12 @@ python/things/skills/__pycache__
 python/things/treasure/__pycache__
 python/things/wands/__pycache__
 python/things/weapons/__pycache__
+python/things/shield/__pycache__
+python/things/boots/__pycache__
+python/things/amulet/__pycache__
+python/things/gauntlet/__pycache__
+python/things/cloak/__pycache__
+python/things/helmet/__pycache__
 *.session
 */*.session
 src/appdata
