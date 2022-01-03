@@ -810,7 +810,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
         //
         auto armor = victim->get_equip(MONST_EQUIP_ARMOR);
         if (armor) {
-          if (d10000() < break_chance_d10000()) {
+          if (d10000() < armor->break_chance_d10000()) {
             if (is_player()) {
               TOPCON("%s falls apart.", armor->text_The().c_str());
             }
@@ -820,7 +820,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
 
         auto shield = victim->get_equip(MONST_EQUIP_SHIELD);
         if (shield) {
-          if (d10000() < break_chance_d10000()) {
+          if (d10000() < shield->break_chance_d10000()) {
             if (is_player()) {
               TOPCON("%s falls apart.", shield->text_The().c_str());
             }
@@ -830,7 +830,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
 
         auto helmet = victim->get_equip(MONST_EQUIP_HELMET);
         if (helmet) {
-          if (d10000() < break_chance_d10000()) {
+          if (d10000() < helmet->break_chance_d10000()) {
             if (is_player()) {
               TOPCON("%s falls apart.", helmet->text_The().c_str());
             }
@@ -868,7 +868,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
     if (my_owner) {
       auto weapon = my_owner->get_equip(MONST_EQUIP_WEAPON);
       if (weapon) {
-        auto break_chance = break_chance_d10000();
+        auto break_chance = weapon->break_chance_d10000();
         if (victim->is_toughness_soft()) {
           break_chance /= 2;
         }
@@ -885,7 +885,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
 
       auto gauntlet = my_owner->get_equip(MONST_EQUIP_GAUNTLET);
       if (gauntlet) {
-        auto break_chance = break_chance_d10000();
+        auto break_chance = gauntlet->break_chance_d10000();
         if (victim->is_toughness_soft()) {
           break_chance /= 2;
         }

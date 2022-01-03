@@ -122,7 +122,8 @@ bool Thing::target_attack_best(int equip)
     //
     FOR_ALL_COLLISION_THINGS(level, t, hit_at.x, hit_at.y)
     {
-      int prio;
+      int prio = t->collision_hit_priority();
+      dbg("Cand: %s prio %d", t->to_short_string().c_str(), prio);
 
       //
       // Get the most important thing to hit.
@@ -138,7 +139,8 @@ bool Thing::target_attack_best(int equip)
       if (t->is_dead || t->is_dying) {
         continue;
       } else if (t->is_mob() || t->is_monst()) {
-        prio = t->collision_hit_priority() + get_danger_current_level(t);
+        prio += get_danger_current_level(t);
+        dbg("Cand: %s mob prio %d", t->to_short_string().c_str(), prio);
 
         //
         // Make sure we prefer monsts over things like doors if there is
@@ -192,14 +194,15 @@ bool Thing::target_attack_best(int equip)
     //
     FOR_ALL_COLLISION_THINGS(level, t, hit_at.x, hit_at.y)
     {
-      int prio;
+      int prio = t->collision_hit_priority();
+      dbg("Cand: %s prio %d", t->to_short_string().c_str(), prio);
 
       //
       // Get the most important thing to hit.
       //
       if (item && item->possible_to_attack(t)) {
         //
-        // Sword can attack
+        // Ok. Sword can attack
         //
       } else if (! possible_to_attack(t)) {
         continue;
@@ -208,7 +211,9 @@ bool Thing::target_attack_best(int equip)
       if (t->is_dead || t->is_dying) {
         continue;
       } else if (t->is_door()) {
-        prio = t->collision_hit_priority();
+        //
+        // Ok
+        //
       } else {
         continue;
       }
@@ -263,7 +268,8 @@ bool Thing::target_attack_best(int equip)
     //
     FOR_ALL_COLLISION_THINGS(level, t, hit_at.x, hit_at.y)
     {
-      int prio;
+      int prio = t->collision_hit_priority();
+      dbg("Cand: %s prio %d", t->to_short_string().c_str(), prio);
 
       //
       // Get the most important thing to hit.
@@ -273,13 +279,16 @@ bool Thing::target_attack_best(int equip)
         // Sword can attack
         //
       } else if (! possible_to_attack(t)) {
+        //
+        // Ok
+        //
         continue;
       }
 
       if (t->is_dead || t->is_dying) {
         continue;
       } else if (t->is_hittable()) {
-        prio = t->collision_hit_priority() + get_danger_current_level(t);
+        prio += get_danger_current_level(t);
       } else {
         continue;
       }

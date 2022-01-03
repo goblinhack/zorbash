@@ -5,7 +5,9 @@
 <!--                                                                                                                                              -->
 <!-- Next todo                                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
-<!-- - check armor damage                                                                                                                         -->
+<!-- - pointing up, enemy to the side, not attacking                                                                                              -->
+<!-- - mobs do not seem to attack?                                                                                                                -->
+<!-- - shield, helmet, boots, amulet, gauntlet, cloak                                                                                             -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->

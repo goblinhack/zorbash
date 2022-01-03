@@ -641,17 +641,28 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
   //
   // This lets you skip around mobs to avoid ghosts
   //
-  if (is_ethereal()) {
-    if (is_minion()) {
-      if (it->is_mob()) {
-        if (it == get_top_mob_spawner()) {
-          if (things_overlap(me, future_pos, it)) {
-            dbg("Yes; cannot pass through my mob_spawner");
-            return true;
-          }
+  if (is_minion()) {
+    if (same_mob(it)) {
+      if (things_overlap(me, future_pos, it)) {
+        dbg("Yes; cannot pass through my mob friend");
+        return true;
+      }
+    }
+
+    if (it->is_mob()) {
+      if (it == get_top_mob_spawner()) {
+        if (things_overlap(me, future_pos, it)) {
+          dbg("Yes; cannot pass through my mob spawner");
+          return true;
         }
       }
     }
+  }
+
+  //
+  // Check for this post minion checks so ethereal ghosts cannot pass through their mob spawner.
+  //
+  if (is_ethereal()) {
     dbg("No; I am ethereal");
     return false;
   }

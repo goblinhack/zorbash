@@ -67,7 +67,7 @@ void Thing::fire_tick(void)
     if (hit) {
       dbg("Fire tick: combustible and too close to the flames");
     }
-  } else if (is_meltable() && (level->heatmap(at.x, at.y) > 2)) {
+  } else if (is_meltable() && (level->heatmap(at.x, at.y) > 0)) {
     //
     // Too close to the flames?
     //
@@ -77,6 +77,7 @@ void Thing::fire_tick(void)
     // Make things more likely to melt the closer to the heat?
     //
     melt_chance += (melt_chance / 10) * level->heatmap(at.x, at.y);
+    topcon("melt chance %d", melt_chance);
 
     hit = d1000() < melt_chance;
     if (hit) {
