@@ -223,19 +223,18 @@ bool Thing::ai_choose_wander(point &nh)
   dest = get_random_target();
 
   //
-  // Minions are constrained
+  // Minions are constrained but we should stop the movement if it gets too far.
+  // There may be nowhere else for it to try to move.
   //
-  if (too_far_from_manifestor(dest)) {
-    dbg("Could not wander, too far off the leash; could not create path to %d,%d", dest.x, dest.y);
-    return false;
+  if (too_far_from_mob_spawner(dest)) {
+    dbg("Too far off the leash but allow wander anyway to %d,%d", dest.x, dest.y);
   }
 
   if (too_far_from_leader(dest)) {
     if (get_distance_from_leader() > too_far_from_leader(dest)) {
       dbg("Wander closer to leader via %d,%d", dest.x, dest.y);
     } else {
-      dbg("Could not wander, too far from leader; could not create path to %d,%d", dest.x, dest.y);
-      return false;
+      dbg("Too far from leader; but allow wander anyway to %d,%d", dest.x, dest.y);
     }
   }
 

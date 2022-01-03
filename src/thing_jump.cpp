@@ -62,16 +62,16 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   // Spider minions need to be leashed
   //
   bool jumping_home = false;
-  if (too_far_from_manifestor(to)) {
+  if (too_far_from_mob_spawner(to)) {
     dbg("No, minion is too far off the leash to jump");
     TRACE_AND_INDENT();
 
-    auto manifestor = get_top_manifestor();
-    if (manifestor) {
+    auto mob_spawner = get_top_mob_spawner();
+    if (mob_spawner) {
       dbg("Try jumping home");
       TRACE_AND_INDENT();
 
-      to           = manifestor->curr_at;
+      to           = mob_spawner->curr_at;
       jumping_home = true;
     } else {
       return false;
@@ -147,6 +147,13 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
     if (! it->is_alive_monst()) {
       continue;
     }
+
+    if (same_mob(it) || same_leader(it)) {
+      dbg("Friends are piling up, but allow jumping");
+      wobble(25);
+      continue;
+    }
+
     if (! d20roll(get_stat_str(), it->get_stat_str())) {
       if (is_player()) {
         TOPCON("You are held in place!");

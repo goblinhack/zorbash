@@ -69,6 +69,7 @@ void Thing::achieve_goals_in_life(void)
     return;
   }
 
+  // dbg("Tick %d goals to achieve", game->tick_current);
   TRACE_NO_INDENT();
 
   //
@@ -208,6 +209,7 @@ void Thing::achieve_goals_in_life(void)
   // If this thing has AI, it can try and reach goals
   //
   if (is_monst()) {
+    // dbg("Tick %d get next hop", game->tick_current);
     ai_get_next_hop();
     if (is_moving) {
       return;
@@ -233,6 +235,7 @@ void Thing::achieve_goals_in_life(void)
     //
     // Pop the next monst move.
     //
+    // dbg("Tick %d pop next move", game->tick_current);
     if (path_pop_next_move()) {
       dbg("Popped next move");
       return;
@@ -289,7 +292,7 @@ void Thing::tick(void)
 
   if (unlikely(is_dead)) {
     //
-    // Resurrect things unless that can do unless that has been disabled e.g. via minion manifestor death
+    // Resurrect things unless that can do unless that has been disabled e.g. via minion mob_spawner death
     //
     if (! is_resurrection_blocked && is_resurrectable()) {
       //

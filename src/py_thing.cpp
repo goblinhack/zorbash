@@ -602,7 +602,7 @@ PyObject *thing_polymorph(PyObject *obj, PyObject *args, PyObject *keywds)
   Py_RETURN_NONE;
 }
 
-PyObject *thing_set_manifestor(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *thing_set_mob_spawner(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
   uint32_t     me_id    = 0;
@@ -636,7 +636,7 @@ PyObject *thing_set_manifestor(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_NONE;
   }
 
-  me->set_manifestor(owner);
+  me->set_mob_spawner(owner);
   Py_RETURN_NONE;
 }
 
@@ -1437,7 +1437,7 @@ THING_BODY_GET_INT(thing_get_stamina, get_stamina)
 THING_BODY_GET_INT(thing_get_stamina_max, get_stamina_max)
 THING_BODY_GET_INT(thing_get_stat_con, get_stat_con)
 THING_BODY_GET_STRING(thing_get_name, text_name)
-THING_BODY_GET_THING(thing_get_immediate_manifestor_id, get_immediate_manifestor_id)
+THING_BODY_GET_THING(thing_get_immediate_mob_spawner_id, get_immediate_mob_spawner_id)
 THING_BODY_GET_THING(thing_get_immediate_owner_id, get_immediate_owner_id)
 THING_BODY_GET_THING(thing_get_immediate_spawned_owner_id, get_immediate_spawned_owner_id)
 THING_BODY_GET_THING(thing_get_leader_id, get_leader_id)

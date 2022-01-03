@@ -203,18 +203,18 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
   }
 
   //
-  // Don't let minions wander too far from their manifestor.
+  // Don't let minions wander too far from their mob_spawner.
   //
-  auto manifestor = get_top_manifestor();
-  if (manifestor) {
-    if (get_distance_manifestor_max()) {
-      auto new_distance  = distance(future_pos, manifestor->curr_at);
-      auto curr_distance = distance(curr_at, manifestor->curr_at);
+  auto mob_spawner = get_top_mob_spawner();
+  if (mob_spawner) {
+    if (get_distance_mob_spawner_max()) {
+      auto new_distance  = distance(future_pos, mob_spawner->curr_at);
+      auto curr_distance = distance(curr_at, mob_spawner->curr_at);
       if (new_distance <= curr_distance) {
         //
         // Always allow moves that end up closer to the base
         //
-      } else if (new_distance > get_distance_manifestor_max() + 1) {
+      } else if (new_distance > get_distance_mob_spawner_max() + 1) {
         //
         // Too far.
         //
@@ -224,7 +224,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
           //
         } else {
           dbg("Minion cannot move to %d,%d (new-dist %f, curr-dist %f); it tugs at the leash at %d,%d", future_pos.x,
-              future_pos.y, new_distance, curr_distance, manifestor->curr_at.x, manifestor->curr_at.y);
+              future_pos.y, new_distance, curr_distance, mob_spawner->curr_at.x, mob_spawner->curr_at.y);
           //
           // Don't make spiders (minions to webs) lunge
           //
@@ -252,6 +252,13 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
       if (! it->is_alive_monst()) {
         continue;
       }
+
+      if (same_mob(it) || same_leader(it)) {
+        dbg("Friends are piling up, but allow movement");
+        wobble(25);
+        continue;
+      }
+
       if (! d20roll(get_stat_str(), it->get_stat_str())) {
         if (is_player()) {
           TOPCON("You are held in place and cannot move!");

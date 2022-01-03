@@ -435,7 +435,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
         continue;
       }
 
-      if (too_far_from_manifestor(p)) {
+      if (too_far_from_mob_spawner(p)) {
         continue;
       }
 
@@ -842,9 +842,9 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
         }
 
         //
-        // Don't attack your manifestor
+        // Don't attack your mob_spawner
         //
-        if (it->is_mob() && (get_top_manifestor() == this)) {
+        if (it->is_mob() && (get_top_mob_spawner() == this)) {
           continue;
         }
 
@@ -858,7 +858,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
         //
         // Don't attack your fellow minion
         //
-        if (it->is_minion() && (it->get_top_manifestor() == get_top_manifestor())) {
+        if (it->is_minion() && (it->get_top_mob_spawner() == get_top_mob_spawner())) {
           continue;
         }
 
@@ -1090,7 +1090,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
     //
     // Don't look too far beyond where we can go
     //
-    if (too_far_from_manifestor(p)) {
+    if (too_far_from_mob_spawner(p)) {
       continue;
     }
 
@@ -1322,7 +1322,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
       continue;
     }
 
-    if (too_far_from_manifestor(p, 1)) {
+    if (too_far_from_mob_spawner(p, 1)) {
       continue;
     }
 
@@ -1395,9 +1395,9 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
     }
 
     if (is_minion()) {
-      auto manifestor = get_top_manifestor();
-      if (manifestor) {
-        auto dist = distance(p, manifestor->curr_at);
+      auto mob_spawner = get_top_mob_spawner();
+      if (mob_spawner) {
+        auto dist = distance(p, mob_spawner->curr_at);
         auto msg  = string_sprintf("search cand @(%d,%d) dist-from-owner %f", p.x, p.y, dist);
         GOAL_ADD(GOAL_PRIO_VERY_LOW, total_score, msg.c_str(), nullptr);
       } else {
@@ -1598,7 +1598,7 @@ bool Thing::ai_tick(bool recursing)
   }
 
   //
-  // Update what we can see - which if a minion is from the perspective of the manifestor.
+  // Update what we can see - which if a minion is from the perspective of the mob_spawner.
   //
   auto vision_souce = get_vision_source();
 
@@ -2061,37 +2061,6 @@ bool Thing::ai_tick(bool recursing)
                   AI_LOG("Change cloak", best_cloak);
                   if (is_player()) {
                     game->tick_begin("Robot, has changed cloak");
-                  }
-                  return true;
-                }
-              }
-            }
-          }
-
-          if (is_able_to_use_wands()) {
-            AI_LOG("Idle, wand check");
-            Thingp curr_wand = get_equip(MONST_EQUIP_WEAPON);
-            Thingp best_wand = nullptr;
-            get_carried_wand_highest_value(&best_wand);
-            if (best_wand) {
-              auto curr_wand_val = curr_wand ? maybe_itemsp_value(curr_wand) : 0;
-              auto best_wand_val = maybe_itemsp_value(best_wand);
-
-              if (! curr_wand || ! curr_wand->is_wand()) {
-                AI_LOG("Idle, have a wand, but not used", best_wand);
-                if (use(best_wand, MONST_EQUIP_WEAPON)) {
-                  AI_LOG("Change wand", best_wand);
-                  if (is_player()) {
-                    game->tick_begin("Robot, has equipped wand");
-                  }
-                  return true;
-                }
-              } else if (best_wand_val > curr_wand_val) {
-                AI_LOG("Idle, change from old wand", curr_wand);
-                if (use(best_wand, MONST_EQUIP_WEAPON)) {
-                  AI_LOG("Idle, change to new wand", best_wand);
-                  if (is_player()) {
-                    game->tick_begin("Robot, has changed wand");
                   }
                   return true;
                 }

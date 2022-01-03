@@ -132,7 +132,7 @@ private:
   int _distance_avoid {};
   int _distance_jump {};
   int _distance_leader_max {};
-  int _distance_manifestor_max {};
+  int _distance_mob_spawner_max {};
   int _distance_minion_vision_shared {};
   int _distance_recruitment_max {};
   int _distance_throw {};
@@ -996,7 +996,7 @@ public:
   int distance_avoid(void) const { return _distance_avoid; }
   int distance_jump(void) const { return _distance_jump; }
   int distance_leader_max(void) const { return _distance_leader_max; }
-  int distance_manifestor_max(void) const { return _distance_manifestor_max; }
+  int distance_mob_spawner_max(void) const { return _distance_mob_spawner_max; }
   int distance_minion_vision_shared(void) const { return _distance_minion_vision_shared; }
   int distance_recruitment_max(void) const { return _distance_recruitment_max; }
   int distance_throw(void) const { return _distance_throw; }
@@ -1542,7 +1542,7 @@ public:
   void set_distance_avoid(int v) { _distance_avoid = v; }
   void set_distance_jump(int v) { _distance_jump = v; }
   void set_distance_leader_max(int v) { _distance_leader_max = v; }
-  void set_distance_manifestor_max(int v) { _distance_manifestor_max = v; }
+  void set_distance_mob_spawner_max(int v) { _distance_mob_spawner_max = v; }
   void set_distance_minion_vision_shared(int v) { _distance_minion_vision_shared = v; }
   void set_distance_recruitment_max(int v) { _distance_recruitment_max = v; }
   void set_distance_throw(int v) { _distance_throw = v; }

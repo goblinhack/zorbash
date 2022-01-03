@@ -109,7 +109,7 @@ void Thing::killed(Thingp defeater, const char *reason)
   is_dead           = true;
 
   //
-  // Resurrect unless say this was a minion and its manifestor died
+  // Resurrect unless say this was a minion and its mob_spawner died
   //
   if (! is_resurrection_blocked) {
     if (is_resurrectable()) {

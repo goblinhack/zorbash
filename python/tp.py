@@ -1336,8 +1336,8 @@ class Tp:
     def set_charge_count(self, value):
         my.tp_set_charge_count(self, value)
 
-    def set_distance_manifestor_max(self, value):
-        my.tp_set_distance_manifestor_max(self, value)
+    def set_distance_mob_spawner_max(self, value):
+        my.tp_set_distance_mob_spawner_max(self, value)
 
     def set_is_skill(self, value):
         my.tp_set_is_skill(self, value)

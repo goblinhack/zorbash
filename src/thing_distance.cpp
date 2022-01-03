@@ -21,9 +21,9 @@ point Thing::get_random_target(void)
   //
   // Minions cannot wander too far
   //
-  auto manifestor = get_top_manifestor();
-  if (manifestor) {
-    d = (int) get_distance_manifestor_max();
+  auto mob_spawner = get_top_mob_spawner();
+  if (mob_spawner) {
+    d = (int) get_distance_mob_spawner_max();
   }
 
   auto leader = get_leader();

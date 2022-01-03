@@ -28,7 +28,7 @@ def on_death(me, x, y):
 def on_born(me, x, y):
     it = my.level_spawn_at_thing(me, "spiderweb")
     if it != 0:
-        my.thing_set_manifestor(me, it)
+        my.thing_set_mob_spawner(me, it)
 
 
 def on_firing_at_something(me, target, x, y):  # Return True on doing an action
@@ -55,7 +55,7 @@ def tp_init(name, text_name):
     mytp.set_damage_received_doubled_from_fire(True)
     mytp.set_distance_avoid(5)
     mytp.set_distance_jump(2)
-    mytp.set_distance_manifestor_max(5)
+    mytp.set_distance_mob_spawner_max(5)
     mytp.set_distance_vision(5)
     mytp.set_environ_avoids_fire(100)
     mytp.set_environ_avoids_water(100)

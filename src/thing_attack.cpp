@@ -38,9 +38,9 @@ bool Thing::possible_to_attack(const Thingp victim)
     }
   }
 
-  auto my_manifestor  = get_top_manifestor();
-  auto its_manifestor = victim->get_top_manifestor();
-  if (my_manifestor && (my_manifestor == its_manifestor)) {
+  auto my_mob_spawner  = get_top_mob_spawner();
+  auto its_mob_spawner = victim->get_top_mob_spawner();
+  if (my_mob_spawner && (my_mob_spawner == its_mob_spawner)) {
     return false;
   }
 

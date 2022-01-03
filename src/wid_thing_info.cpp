@@ -199,6 +199,8 @@ WidPopup *Game::wid_thing_info_create_popup_compact(const std::vector< Thingp > 
     }
     wid_popup_window->log(tmp);
 
+    IF_DEBUG2 { t->topcon("compact over"); }
+
     wid_thing_info_add_rarity(wid_popup_window, t);
     //
     // Not sure if we will have shops

@@ -66,7 +66,7 @@ std::ostream &operator<<(std::ostream &out, Bits< ThingInfop & > const my)
   out << bits(my.t->light_col);
   out << bits(my.t->light_power);
   out << bits(my.t->lunge_to);
-  out << bits(my.t->manifestor_id);
+  out << bits(my.t->mob_spawner_id);
   out << bits(my.t->monst_state);
   out << bits(my.t->msg);
   out << bits(my.t->necrosis);

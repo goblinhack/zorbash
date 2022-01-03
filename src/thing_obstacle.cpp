@@ -281,13 +281,13 @@ bool Thing::ai_obstacle(Thingp it)
     return false;
   }
 
-  if (is_ethereal()) {
+  if (! is_ethereal()) {
     //
     // This lets you skip around mobs to avoid ghosts
     //
     if (is_minion()) {
       if (it->is_mob()) {
-        if (it == get_top_manifestor()) {
+        if (it == get_top_mob_spawner()) {
           return true;
         }
       }

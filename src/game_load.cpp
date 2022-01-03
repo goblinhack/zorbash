@@ -89,7 +89,7 @@ std::istream &operator>>(std::istream &in, Bits< ThingInfop & > my)
    in >> bits(my.t->light_col);
    in >> bits(my.t->light_power);
    in >> bits(my.t->lunge_to);
-   in >> bits(my.t->manifestor_id);
+   in >> bits(my.t->mob_spawner_id);
    in >> bits(my.t->monst_state);
    in >> bits(my.t->msg);
    in >> bits(my.t->necrosis);

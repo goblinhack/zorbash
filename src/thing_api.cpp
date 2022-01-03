@@ -3259,10 +3259,10 @@ int Thing::environ_prefers_spiderwebs(void)
   return (tp()->environ_prefers_spiderwebs());
 }
 
-float Thing::get_distance_manifestor_max(void)
+float Thing::get_distance_mob_spawner_max(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->distance_manifestor_max());
+  return (tp()->distance_mob_spawner_max());
 }
 
 float Thing::get_distance_leader_max(void)
@@ -5287,10 +5287,10 @@ int Thing::get_stamina(void)
     v += owner->get_stamina();
   }
   if (is_minion()) {
-    auto manifestor = get_immediate_manifestor();
-    if (manifestor) {
-      auto manifestor = get_immediate_manifestor();
-      v += manifestor->get_stamina();
+    auto mob_spawner = get_immediate_mob_spawner();
+    if (mob_spawner) {
+      auto mob_spawner = get_immediate_mob_spawner();
+      v += mob_spawner->get_stamina();
     }
   }
   return v;
@@ -5357,10 +5357,10 @@ int Thing::get_enchant(void)
     v += owner->get_enchant();
   }
   if (is_minion()) {
-    auto manifestor = get_immediate_manifestor();
-    if (manifestor) {
-      auto manifestor = get_immediate_manifestor();
-      v += manifestor->get_enchant();
+    auto mob_spawner = get_immediate_mob_spawner();
+    if (mob_spawner) {
+      auto mob_spawner = get_immediate_mob_spawner();
+      v += mob_spawner->get_enchant();
     }
   }
   return v;
@@ -5427,10 +5427,10 @@ int Thing::get_poisoned_amount(void)
     v += owner->get_poisoned_amount();
   }
   if (is_minion()) {
-    auto manifestor = get_immediate_manifestor();
-    if (manifestor) {
-      auto manifestor = get_immediate_manifestor();
-      v += manifestor->get_poisoned_amount();
+    auto mob_spawner = get_immediate_mob_spawner();
+    if (mob_spawner) {
+      auto mob_spawner = get_immediate_mob_spawner();
+      v += mob_spawner->get_poisoned_amount();
     }
   }
   return v;
@@ -5503,10 +5503,10 @@ int Thing::get_necrotized_amount(void)
     v += owner->get_necrotized_amount();
   }
   if (is_minion()) {
-    auto manifestor = get_immediate_manifestor();
-    if (manifestor) {
-      auto manifestor = get_immediate_manifestor();
-      v += manifestor->get_necrotized_amount();
+    auto mob_spawner = get_immediate_mob_spawner();
+    if (mob_spawner) {
+      auto mob_spawner = get_immediate_mob_spawner();
+      v += mob_spawner->get_necrotized_amount();
     }
   }
   return v;

@@ -39,9 +39,9 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta)
     return (THING_SHOVE_NEVER_TRIED);
   }
 
-  auto my_manifestor  = get_top_manifestor();
-  auto its_manifestor = it->get_top_manifestor();
-  if (my_manifestor && (my_manifestor == its_manifestor)) {
+  auto my_mob_spawner  = get_top_mob_spawner();
+  auto its_mob_spawner = it->get_top_mob_spawner();
+  if (my_mob_spawner && (my_mob_spawner == its_mob_spawner)) {
     dbg("Not able to shove (same master) %s", it->to_short_string().c_str());
     return (THING_SHOVE_NEVER_TRIED);
   }

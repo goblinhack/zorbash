@@ -259,13 +259,13 @@ public:
   Thingp get_equip_carry_anim(int equip);
   Thingp get_equip(int equip);
   Thingp get_equip_use_anim(int equip);
-  Thingp get_immediate_manifestor();
+  Thingp get_immediate_mob_spawner();
   Thingp get_immediate_owner();
   Thingp get_immediate_spawned_owner();
   Thingp get_leader();
   Thingp get_most_dangerous_adjacent_thing(void);
   Thingp get_most_dangerous_visible_thing(void);
-  Thingp get_top_manifestor();
+  Thingp get_top_mob_spawner();
   Thingp get_top_owner();
   Thingp get_top_spawned_owner();
   Thingp in_the_way(const point s, const point e);
@@ -431,6 +431,7 @@ public:
   bool projectile_anim_exists(void);
   bool projectile_choose_target(Thingp item, Thingp victim = nullptr);
   bool same_leader(Thingp it);
+  bool same_mob(Thingp it);
   bool set_on_fire(const std::string &why);
   bool skill_add(Thingp it);
   bool skill_add(Tpp what);
@@ -453,9 +454,9 @@ public:
   bool too_far_from_leader(point p);
   bool too_far_from_leader(point p, float delta);
   bool too_far_from_leader(void);
-  bool too_far_from_manifestor(point p);
-  bool too_far_from_manifestor(point p, float delta);
-  bool too_far_from_manifestor(void);
+  bool too_far_from_mob_spawner(point p);
+  bool too_far_from_mob_spawner(point p, float delta);
+  bool too_far_from_mob_spawner(void);
   bool treasure_map_available(void);
   bool try_harder_to_jump(void);
   bool try_to_carry_if_worthwhile_dropping_items_if_needed(Thingp it);
@@ -500,12 +501,12 @@ public:
   const Dice &get_spawn_group_size_dice(void);
   const Dice &get_resurrect_dice(void);
 
-  const ThingId &get_immediate_manifestor_id(void);
+  const ThingId &get_immediate_mob_spawner_id(void);
   const ThingId &get_leader_id(void);
   const ThingId &get_immediate_owner_id(void);
   const ThingId &get_immediate_spawned_owner_id(void);
   const ThingId &get_top_owner_id(void);
-  const ThingId &set_manifestor_id(const ThingId &v);
+  const ThingId &set_mob_spawner_id(const ThingId &v);
   const ThingId &set_leader_id(const ThingId &v);
   const ThingId &set_owner_id(const ThingId &v);
   const ThingId &set_spawned_owner_id(const ThingId &v);
@@ -630,12 +631,12 @@ public:
   float get_distance_avoid(void);
   float get_distance_from_leader(point p);
   float get_distance_from_leader(void);
-  float get_distance_from_manifestor(point p);
-  float get_distance_from_manifestor(void);
+  float get_distance_from_mob_spawner(point p);
+  float get_distance_from_mob_spawner(void);
   float get_distance_leader_max(point p);
   float get_distance_leader_max(void);
-  float get_distance_manifestor_max(point p);
-  float get_distance_manifestor_max(void);
+  float get_distance_mob_spawner_max(point p);
+  float get_distance_mob_spawner_max(void);
   float get_distance_recruitment_max(point p);
   float get_distance_recruitment_max(void);
   float get_distance_throw(void);
@@ -1924,7 +1925,7 @@ public:
   void release_followers(void);
   void remove_all_references();
   void remove_leader(void);
-  void remove_manifestor(void);
+  void remove_mob_spawner(void);
   void remove_owner(void);
   void remove_spawner_owner(void);
   void reset_goal_penalty(Thingp attacker);
@@ -1951,7 +1952,7 @@ public:
   void set_interpolated_at(fpoint v);
   void set_leader(Thingp leader);
   void set_lunge_to(point);
-  void set_manifestor(Thingp manifestor);
+  void set_mob_spawner(Thingp mob_spawner);
   void set_msg(const std::string &);
   void set_owner(Thingp owner);
   void set_score(int);
