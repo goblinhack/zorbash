@@ -323,8 +323,13 @@ bool Thing::possible_to_attack(const Thingp victim)
 
   if (is_weapon()) {
     if (victim->is_sticky() || victim->is_spiderweb()) {
-      dbg("Can attack web %s", victim->to_string().c_str());
-      return true;
+      if (is_able_to_break_out_of_webs()) {
+        dbg("Can attack and break out of web %s", victim->to_string().c_str());
+        return true;
+      } else {
+        dbg("Can not break out of web %s", victim->to_string().c_str());
+        return false;
+      }
     }
   }
 
