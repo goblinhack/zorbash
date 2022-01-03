@@ -127,7 +127,11 @@ bool Thing::target_attack_best(int equip)
       //
       // Get the most important thing to hit.
       //
-      if (! possible_to_attack(t)) {
+      if (item && item->possible_to_attack(t)) {
+        //
+        // Sword can attack
+        //
+      } else if (! possible_to_attack(t)) {
         continue;
       }
 
@@ -193,7 +197,11 @@ bool Thing::target_attack_best(int equip)
       //
       // Get the most important thing to hit.
       //
-      if (! possible_to_attack(t)) {
+      if (item && item->possible_to_attack(t)) {
+        //
+        // Sword can attack
+        //
+      } else if (! possible_to_attack(t)) {
         continue;
       }
 
@@ -260,7 +268,11 @@ bool Thing::target_attack_best(int equip)
       //
       // Get the most important thing to hit.
       //
-      if (! possible_to_attack(t)) {
+      if (item && item->possible_to_attack(t)) {
+        //
+        // Sword can attack
+        //
+      } else if (! possible_to_attack(t)) {
         continue;
       }
 

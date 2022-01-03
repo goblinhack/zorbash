@@ -28,7 +28,7 @@ bool Thing::possible_to_attack(const Thingp victim)
 
   auto my_owner  = get_top_owner();
   auto its_owner = victim->get_top_owner();
-  if (my_owner && (my_owner == its_owner)) {
+  if (my_owner && ((my_owner == its_owner) || (my_owner == victim))) {
     if (is_laser()) {
       //
       // This is to allow lightning to strike the owner if they fire in water
@@ -322,7 +322,14 @@ bool Thing::possible_to_attack(const Thingp victim)
   }
 
   if (is_weapon()) {
-    if (victim->is_foilage() || victim->is_sticky() || victim->is_spiderweb()) {
+    if (victim->is_sticky() || victim->is_spiderweb()) {
+      dbg("Can attack web %s", victim->to_string().c_str());
+      return true;
+    }
+  }
+
+  if (is_weapon()) {
+    if (victim->is_foilage()) {
       dbg("Can attack scenery %s", victim->to_string().c_str());
       return true;
     }
@@ -334,7 +341,6 @@ bool Thing::possible_to_attack(const Thingp victim)
       victim->is_skillstone() || victim->is_foilage() || victim->is_spiderweb() || victim->is_sticky() ||
       victim->is_brazier() || victim->is_barrel() || victim->is_player() || victim->is_food() ||
       victim->is_bag_item()) {
-
     if (is_laser()) {
       dbg("Can attack as laser %s", victim->to_string().c_str());
       return true;
