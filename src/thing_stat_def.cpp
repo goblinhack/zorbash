@@ -52,18 +52,33 @@ int Thing::get_stat_def_total(void)
     dbg("AC: with: (dex %d): %d", dex_total, stat);
   }
 
+  //
+  // Choose the highest armor
+  //
   FOR_ALL_EQUIP(e)
   {
-    auto equip = get_equip(e);
-    if (equip) {
-      //
-      // Choose the highest armor
-      //
-      stat = std::max(stat, equip->get_stat_def() + equip->get_stat_def_mod() + equip->get_enchant());
+    auto iter = get_equip(e);
+    if (iter) {
+      stat = std::max(stat, iter->get_stat_def() + iter->get_stat_def_mod() + iter->get_enchant());
       if (stat != prev) {
         prev = stat;
-        dbg("AC: with (%s def %d/%d): %d", equip->to_short_string().c_str(), equip->get_stat_def(),
-            stat_to_bonus(equip->get_stat_def()), stat);
+        dbg("AC: with (%s def %d/%d): %d", iter->to_short_string().c_str(), iter->get_stat_def(),
+            stat_to_bonus(iter->get_stat_def()), stat);
+      }
+    }
+  }
+
+  //
+  // Now add modifiers
+  //
+  FOR_ALL_EQUIP(e)
+  {
+    auto iter = get_equip(e);
+    if (iter) {
+      stat += iter->get_stat_def_mod();
+      if (stat != prev) {
+        prev = stat;
+        dbg("AC: with: (%s mod %d): %d", iter->to_short_string().c_str(), get_stat_def_mod(), stat);
       }
     }
   }

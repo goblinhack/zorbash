@@ -1103,6 +1103,11 @@ void Game::wid_thing_info_add_stat_def(WidPopup *w, Thingp t)
           snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor class worn          %2d", ac);
           w->log(tmp);
         }
+        auto mod = curr_armor->get_stat_def_mod();
+        if (mod) {
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor class worn mod      %2d", mod);
+          w->log(tmp);
+        }
       }
 
       Thingp curr_shield = t->get_equip(MONST_EQUIP_SHIELD);
@@ -1112,13 +1117,24 @@ void Game::wid_thing_info_add_stat_def(WidPopup *w, Thingp t)
           snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor class shield        %2d", ac);
           w->log(tmp);
         }
+        auto mod = curr_shield->get_stat_def_mod();
+        if (mod) {
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor class shield mod    %2d", mod);
+          w->log(tmp);
+        }
       }
 
       Thingp curr_helmet = t->get_equip(MONST_EQUIP_HELMET);
       if (curr_helmet) {
         auto ac = curr_helmet->get_stat_def();
         if (ac != 10) {
-          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor class helmen        %2d", ac);
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor class helmet mod    %2d", ac);
+          w->log(tmp);
+        }
+
+        auto mod = curr_helmet->get_stat_def_mod();
+        if (mod) {
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor class helmet mod    %2d", mod);
           w->log(tmp);
         }
       }
@@ -1128,6 +1144,12 @@ void Game::wid_thing_info_add_stat_def(WidPopup *w, Thingp t)
         auto ac = curr_amulet->get_stat_def();
         if (ac != 10) {
           snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor class from amulet   %2d", ac);
+          w->log(tmp);
+        }
+
+        auto mod = curr_amulet->get_stat_def();
+        if (mod) {
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor class amulet mod    %2d", mod);
           w->log(tmp);
         }
       }
