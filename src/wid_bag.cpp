@@ -232,6 +232,126 @@ uint8_t wid_in_transit_item_place(Widp w, int32_t x, int32_t y, uint32_t button)
       return true;
     }
 
+    if (over->name == "equip_cloak") {
+      auto what = t;
+      if (! what->is_cloak()) {
+        TOPCON("Cannot equip %s as cloak.", what->text_the().c_str());
+        sound_play("bonk");
+        return false;
+      }
+
+      //
+      // Equip the new item
+      //
+      player->log("Use %s", what->to_short_string().c_str());
+      player->use(what);
+
+      wid_destroy(&game->in_transit_item);
+      wid_inventory_init();
+      game->request_remake_rightbar = true;
+      return true;
+    }
+
+    if (over->name == "equip_amulet") {
+      auto what = t;
+      if (! what->is_amulet()) {
+        TOPCON("Cannot equip %s as amulet.", what->text_the().c_str());
+        sound_play("bonk");
+        return false;
+      }
+
+      //
+      // Equip the new item
+      //
+      player->log("Use %s", what->to_short_string().c_str());
+      player->use(what);
+
+      wid_destroy(&game->in_transit_item);
+      wid_inventory_init();
+      game->request_remake_rightbar = true;
+      return true;
+    }
+
+    if (over->name == "equip_boots") {
+      auto what = t;
+      if (! what->is_boots()) {
+        TOPCON("Cannot equip %s as boots.", what->text_the().c_str());
+        sound_play("bonk");
+        return false;
+      }
+
+      //
+      // Equip the new item
+      //
+      player->log("Use %s", what->to_short_string().c_str());
+      player->use(what);
+
+      wid_destroy(&game->in_transit_item);
+      wid_inventory_init();
+      game->request_remake_rightbar = true;
+      return true;
+    }
+
+    if (over->name == "equip_helmet") {
+      auto what = t;
+      if (! what->is_helmet()) {
+        TOPCON("Cannot equip %s as helmet.", what->text_the().c_str());
+        sound_play("bonk");
+        return false;
+      }
+
+      //
+      // Equip the new item
+      //
+      player->log("Use %s", what->to_short_string().c_str());
+      player->use(what);
+
+      wid_destroy(&game->in_transit_item);
+      wid_inventory_init();
+      game->request_remake_rightbar = true;
+      return true;
+    }
+
+    if (over->name == "equip_gauntlet") {
+      auto what = t;
+      if (! what->is_gauntlet()) {
+        TOPCON("Cannot equip %s as gauntlet.", what->text_the().c_str());
+        sound_play("bonk");
+        return false;
+      }
+
+      //
+      // Equip the new item
+      //
+      player->log("Use %s", what->to_short_string().c_str());
+      player->use(what);
+
+      wid_destroy(&game->in_transit_item);
+      wid_inventory_init();
+      game->request_remake_rightbar = true;
+      return true;
+    }
+
+    if (over->name == "equip_shield") {
+      auto what = t;
+      if (! what->is_shield()) {
+        TOPCON("Cannot equip %s as shield.", what->text_the().c_str());
+        sound_play("bonk");
+        return false;
+      }
+
+      //
+      // Equip the new item
+      //
+      player->log("Use %s", what->to_short_string().c_str());
+      player->use(what);
+
+      wid_destroy(&game->in_transit_item);
+      wid_inventory_init();
+      game->request_remake_rightbar = true;
+      return true;
+    }
+
     if (over->name == "equip_ring1") {
       auto what = t;
       if (! what->is_ring()) {

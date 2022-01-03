@@ -488,19 +488,19 @@ do
       set_unused_flag184 \
       set_unused_flag185 \
       set_unused_flag186 \
-      set_unused_flag187 \
-      set_unused_flag188 \
-      set_unused_flag189 \
-      set_unused_flag190 \
-      set_unused_flag191 \
-      set_unused_flag192 \
-      set_unused_flag193 \
-      set_unused_flag194 \
-      set_unused_flag195 \
-      set_unused_flag196 \
-      set_unused_flag197 \
-      set_unused_flag198 \
-      set_unused_flag199 \
+      set_is_amulet \
+      set_is_able_to_use_amulet \
+      set_is_able_to_use_helmet \
+      set_is_able_to_use_boots \
+      set_is_able_to_use_cloak \
+      set_is_able_to_use_shield \
+      set_is_able_to_use_gauntlet \
+      set_is_able_to_use_helmet \
+      set_is_helmet \
+      set_is_boots \
+      set_is_shield \
+      set_is_cloak \
+      set_is_gauntlet \
       set_is_toughness_hard \
       set_on_death_is_open
     do

@@ -106,6 +106,76 @@ bool Thing::carry(Thingp item, bool can_equip)
     }
   }
 
+  //
+  // If we have no helmet yet, equip it
+  //
+  if (can_equip && is_able_to_use_helmet() && item->is_auto_equipped() && item->is_helmet() &&
+      ! get_equip_id(MONST_EQUIP_HELMET)) {
+    if (equip(item, MONST_EQUIP_HELMET)) {
+      equipped = true;
+    }
+  }
+
+  //
+  // If we have no helmet yet, equip it
+  //
+  if (can_equip && is_able_to_use_helmet() && item->is_auto_equipped() && item->is_helmet() &&
+      ! get_equip_id(MONST_EQUIP_HELMET)) {
+    if (equip(item, MONST_EQUIP_HELMET)) {
+      equipped = true;
+    }
+  }
+
+  //
+  // If we have no amulet yet, equip it
+  //
+  if (can_equip && is_able_to_use_amulet() && item->is_auto_equipped() && item->is_amulet() &&
+      ! get_equip_id(MONST_EQUIP_AMULET)) {
+    if (equip(item, MONST_EQUIP_AMULET)) {
+      equipped = true;
+    }
+  }
+
+  //
+  // If we have no boots yet, equip it
+  //
+  if (can_equip && is_able_to_use_boots() && item->is_auto_equipped() && item->is_boots() &&
+      ! get_equip_id(MONST_EQUIP_BOOTS)) {
+    if (equip(item, MONST_EQUIP_BOOTS)) {
+      equipped = true;
+    }
+  }
+
+  //
+  // If we have no gauntlet yet, equip it
+  //
+  if (can_equip && is_able_to_use_gauntlet() && item->is_auto_equipped() && item->is_gauntlet() &&
+      ! get_equip_id(MONST_EQUIP_GAUNTLET)) {
+    if (equip(item, MONST_EQUIP_GAUNTLET)) {
+      equipped = true;
+    }
+  }
+
+  //
+  // If we have no cloak yet, equip it
+  //
+  if (can_equip && is_able_to_use_cloak() && item->is_auto_equipped() && item->is_cloak() &&
+      ! get_equip_id(MONST_EQUIP_CLOAK)) {
+    if (equip(item, MONST_EQUIP_CLOAK)) {
+      equipped = true;
+    }
+  }
+
+  //
+  // If we have no shield yet, equip it
+  //
+  if (can_equip && is_able_to_use_shield() && item->is_auto_equipped() && item->is_shield() &&
+      ! get_equip_id(MONST_EQUIP_SHIELD)) {
+    if (equip(item, MONST_EQUIP_SHIELD)) {
+      equipped = true;
+    }
+  }
+
   if (equipped) {
     //
     // Continue

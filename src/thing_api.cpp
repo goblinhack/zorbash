@@ -2515,82 +2515,76 @@ int Thing::unused_flag186(void)
   return (tp()->unused_flag186());
 }
 
-int Thing::unused_flag187(void)
+int Thing::is_amulet(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag187());
+  return (tp()->is_amulet());
 }
 
-int Thing::unused_flag188(void)
+int Thing::is_able_to_use_amulet(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag188());
+  return (tp()->is_able_to_use_amulet());
 }
 
-int Thing::unused_flag189(void)
+int Thing::is_able_to_use_helmet(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag189());
+  return (tp()->is_able_to_use_helmet());
 }
 
-int Thing::unused_flag190(void)
+int Thing::is_able_to_use_boots(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag190());
+  return (tp()->is_able_to_use_boots());
 }
 
-int Thing::unused_flag191(void)
+int Thing::is_able_to_use_cloak(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag191());
+  return (tp()->is_able_to_use_cloak());
 }
 
-int Thing::unused_flag192(void)
+int Thing::is_able_to_use_shield(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag192());
+  return (tp()->is_able_to_use_shield());
 }
 
-int Thing::unused_flag193(void)
+int Thing::is_able_to_use_gauntlet(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag193());
+  return (tp()->is_able_to_use_gauntlet());
 }
 
-int Thing::unused_flag194(void)
+int Thing::is_helmet(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag194());
+  return (tp()->is_helmet());
 }
 
-int Thing::unused_flag195(void)
+int Thing::is_boots(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag195());
+  return (tp()->is_boots());
 }
 
-int Thing::unused_flag196(void)
+int Thing::is_shield(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag196());
+  return (tp()->is_shield());
 }
 
-int Thing::unused_flag197(void)
+int Thing::is_cloak(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag197());
+  return (tp()->is_cloak());
 }
 
-int Thing::unused_flag198(void)
+int Thing::is_gauntlet(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag198());
-}
-
-int Thing::unused_flag199(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->unused_flag199());
+  return (tp()->is_gauntlet());
 }
 
 int Thing::is_toughness_hard(void)

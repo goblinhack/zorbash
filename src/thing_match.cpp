@@ -1212,43 +1212,43 @@ bool Thing::matches(const std::string &what)
   if (unused_flag186() && (what == "unused_flag186")) {
     return true;
   }
-  if (unused_flag187() && (what == "unused_flag187")) {
+  if (is_amulet() && (what == "is_amulet")) {
     return true;
   }
-  if (unused_flag188() && (what == "unused_flag188")) {
+  if (is_able_to_use_amulet() && (what == "is_able_to_use_amulet")) {
     return true;
   }
-  if (unused_flag189() && (what == "unused_flag189")) {
+  if (is_able_to_use_helmet() && (what == "is_able_to_use_helmet")) {
     return true;
   }
-  if (unused_flag190() && (what == "unused_flag190")) {
+  if (is_able_to_use_boots() && (what == "is_able_to_use_boots")) {
     return true;
   }
-  if (unused_flag191() && (what == "unused_flag191")) {
+  if (is_able_to_use_cloak() && (what == "is_able_to_use_cloak")) {
     return true;
   }
-  if (unused_flag192() && (what == "unused_flag192")) {
+  if (is_able_to_use_shield() && (what == "is_able_to_use_shield")) {
     return true;
   }
-  if (unused_flag193() && (what == "unused_flag193")) {
+  if (is_able_to_use_gauntlet() && (what == "is_able_to_use_gauntlet")) {
     return true;
   }
-  if (unused_flag194() && (what == "unused_flag194")) {
+  if (is_able_to_use_helmet() && (what == "is_able_to_use_helmet")) {
     return true;
   }
-  if (unused_flag195() && (what == "unused_flag195")) {
+  if (is_helmet() && (what == "is_helmet")) {
     return true;
   }
-  if (unused_flag196() && (what == "unused_flag196")) {
+  if (is_boots() && (what == "is_boots")) {
     return true;
   }
-  if (unused_flag197() && (what == "unused_flag197")) {
+  if (is_shield() && (what == "is_shield")) {
     return true;
   }
-  if (unused_flag198() && (what == "unused_flag198")) {
+  if (is_cloak() && (what == "is_cloak")) {
     return true;
   }
-  if (unused_flag199() && (what == "unused_flag199")) {
+  if (is_gauntlet() && (what == "is_gauntlet")) {
     return true;
   }
   if (is_toughness_hard() && (what == "is_toughness_hard")) {
@@ -2494,44 +2494,44 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag186") {
     return &Thing::unused_flag186;
   }
-  if (what == "unused_flag187") {
-    return &Thing::unused_flag187;
+  if (what == "is_amulet") {
+    return &Thing::is_amulet;
   }
-  if (what == "unused_flag188") {
-    return &Thing::unused_flag188;
+  if (what == "is_able_to_use_amulet") {
+    return &Thing::is_able_to_use_amulet;
   }
-  if (what == "unused_flag189") {
-    return &Thing::unused_flag189;
+  if (what == "is_able_to_use_helmet") {
+    return &Thing::is_able_to_use_helmet;
   }
-  if (what == "unused_flag190") {
-    return &Thing::unused_flag190;
+  if (what == "is_able_to_use_boots") {
+    return &Thing::is_able_to_use_boots;
   }
-  if (what == "unused_flag191") {
-    return &Thing::unused_flag191;
+  if (what == "is_able_to_use_cloak") {
+    return &Thing::is_able_to_use_cloak;
   }
-  if (what == "unused_flag192") {
-    return &Thing::unused_flag192;
+  if (what == "is_able_to_use_shield") {
+    return &Thing::is_able_to_use_shield;
   }
-  if (what == "unused_flag193") {
-    return &Thing::unused_flag193;
+  if (what == "is_able_to_use_gauntlet") {
+    return &Thing::is_able_to_use_gauntlet;
   }
-  if (what == "unused_flag194") {
-    return &Thing::unused_flag194;
+  if (what == "is_able_to_use_helmet") {
+    return &Thing::is_able_to_use_helmet;
   }
-  if (what == "unused_flag195") {
-    return &Thing::unused_flag195;
+  if (what == "is_helmet") {
+    return &Thing::is_helmet;
   }
-  if (what == "unused_flag196") {
-    return &Thing::unused_flag196;
+  if (what == "is_boots") {
+    return &Thing::is_boots;
   }
-  if (what == "unused_flag197") {
-    return &Thing::unused_flag197;
+  if (what == "is_shield") {
+    return &Thing::is_shield;
   }
-  if (what == "unused_flag198") {
-    return &Thing::unused_flag198;
+  if (what == "is_cloak") {
+    return &Thing::is_cloak;
   }
-  if (what == "unused_flag199") {
-    return &Thing::unused_flag199;
+  if (what == "is_gauntlet") {
+    return &Thing::is_gauntlet;
   }
   if (what == "is_toughness_hard") {
     return &Thing::is_toughness_hard;

@@ -808,6 +808,26 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
           }
         }
 
+        auto shield = victim->get_equip(MONST_EQUIP_SHIELD);
+        if (shield) {
+          if (d10000() < break_chance_d10000()) {
+            if (is_player()) {
+              TOPCON("%s falls apart.", shield->text_The().c_str());
+            }
+            shield->dead("broken");
+          }
+        }
+
+        auto helmet = victim->get_equip(MONST_EQUIP_HELMET);
+        if (helmet) {
+          if (d10000() < break_chance_d10000()) {
+            if (is_player()) {
+              TOPCON("%s falls apart.", helmet->text_The().c_str());
+            }
+            helmet->dead("broken");
+          }
+        }
+
         //
         // We tried to attack, so do not move
         //
@@ -850,6 +870,23 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
         }
         if (d10000() < break_chance) {
           weapon->dead("broken");
+        }
+      }
+
+      auto gauntlet = my_owner->get_equip(MONST_EQUIP_GAUNTLET);
+      if (gauntlet) {
+        auto break_chance = break_chance_d10000();
+        if (victim->is_toughness_soft()) {
+          break_chance /= 2;
+        }
+        if (victim->is_toughness_hard()) {
+          break_chance *= 2;
+        }
+        if (victim->is_toughness_very_tough()) {
+          break_chance *= 2;
+        }
+        if (d10000() < break_chance) {
+          gauntlet->dead("broken");
         }
       }
     }

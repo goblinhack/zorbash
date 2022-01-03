@@ -445,6 +445,90 @@ void Thing::update(void)
     }
   }
 
+  //
+  // Initial equip of helmet
+  //
+  if (is_able_to_use_helmet()) {
+    dbg("Armor equip");
+    TRACE_AND_INDENT();
+
+    Thingp best_helmet = nullptr;
+    get_carried_helmet_highest_value(&best_helmet);
+    if (best_helmet) {
+      equip(best_helmet, MONST_EQUIP_HELMET);
+    }
+  }
+
+  //
+  // Initial equip of amulet
+  //
+  if (is_able_to_use_amulet()) {
+    dbg("Armor equip");
+    TRACE_AND_INDENT();
+
+    Thingp best_amulet = nullptr;
+    get_carried_amulet_highest_value(&best_amulet);
+    if (best_amulet) {
+      equip(best_amulet, MONST_EQUIP_AMULET);
+    }
+  }
+
+  //
+  // Initial equip of boots
+  //
+  if (is_able_to_use_boots()) {
+    dbg("Armor equip");
+    TRACE_AND_INDENT();
+
+    Thingp best_boots = nullptr;
+    get_carried_boots_highest_value(&best_boots);
+    if (best_boots) {
+      equip(best_boots, MONST_EQUIP_BOOTS);
+    }
+  }
+
+  //
+  // Initial equip of gauntlet
+  //
+  if (is_able_to_use_gauntlet()) {
+    dbg("Armor equip");
+    TRACE_AND_INDENT();
+
+    Thingp best_gauntlet = nullptr;
+    get_carried_gauntlet_highest_value(&best_gauntlet);
+    if (best_gauntlet) {
+      equip(best_gauntlet, MONST_EQUIP_GAUNTLET);
+    }
+  }
+
+  //
+  // Initial equip of cloak
+  //
+  if (is_able_to_use_cloak()) {
+    dbg("Armor equip");
+    TRACE_AND_INDENT();
+
+    Thingp best_cloak = nullptr;
+    get_carried_cloak_highest_value(&best_cloak);
+    if (best_cloak) {
+      equip(best_cloak, MONST_EQUIP_CLOAK);
+    }
+  }
+
+  //
+  // Initial equip of shield
+  //
+  if (is_able_to_use_shield()) {
+    dbg("Armor equip");
+    TRACE_AND_INDENT();
+
+    Thingp best_shield = nullptr;
+    get_carried_shield_highest_value(&best_shield);
+    if (best_shield) {
+      equip(best_shield, MONST_EQUIP_SHIELD);
+    }
+  }
+
   hunger_update();
 
   if (carried && (is_monst() || is_player())) {

@@ -1894,6 +1894,180 @@ bool Thing::ai_tick(bool recursing)
             }
           }
 
+          if (is_able_to_use_helmet()) {
+            AI_LOG("Idle, helmet check");
+            Thingp curr_helmet = get_equip(MONST_EQUIP_HELMET);
+            Thingp best_helmet = nullptr;
+            get_carried_helmet_highest_value(&best_helmet);
+            if (best_helmet) {
+              auto curr_helmet_val = curr_helmet ? maybe_itemsp_value(curr_helmet) : 0;
+              auto best_helmet_val = maybe_itemsp_value(best_helmet);
+
+              if (! curr_helmet) {
+                if (use(best_helmet, MONST_EQUIP_HELMET)) {
+                  AI_LOG("Change helmet", best_helmet);
+                  if (is_player()) {
+                    game->tick_begin("Robot, has equipped helmet");
+                  }
+                  return true;
+                }
+              } else if (best_helmet_val > curr_helmet_val) {
+                if (use(best_helmet, MONST_EQUIP_HELMET)) {
+                  AI_LOG("Change helmet", best_helmet);
+                  if (is_player()) {
+                    game->tick_begin("Robot, has changed helmet");
+                  }
+                  return true;
+                }
+              }
+            }
+          }
+
+          if (is_able_to_use_amulet()) {
+            AI_LOG("Idle, amulet check");
+            Thingp curr_amulet = get_equip(MONST_EQUIP_AMULET);
+            Thingp best_amulet = nullptr;
+            get_carried_amulet_highest_value(&best_amulet);
+            if (best_amulet) {
+              auto curr_amulet_val = curr_amulet ? maybe_itemsp_value(curr_amulet) : 0;
+              auto best_amulet_val = maybe_itemsp_value(best_amulet);
+
+              if (! curr_amulet) {
+                if (use(best_amulet, MONST_EQUIP_AMULET)) {
+                  AI_LOG("Change amulet", best_amulet);
+                  if (is_player()) {
+                    game->tick_begin("Robot, has equipped amulet");
+                  }
+                  return true;
+                }
+              } else if (best_amulet_val > curr_amulet_val) {
+                if (use(best_amulet, MONST_EQUIP_AMULET)) {
+                  AI_LOG("Change amulet", best_amulet);
+                  if (is_player()) {
+                    game->tick_begin("Robot, has changed amulet");
+                  }
+                  return true;
+                }
+              }
+            }
+          }
+
+          if (is_able_to_use_boots()) {
+            AI_LOG("Idle, boots check");
+            Thingp curr_boots = get_equip(MONST_EQUIP_BOOTS);
+            Thingp best_boots = nullptr;
+            get_carried_boots_highest_value(&best_boots);
+            if (best_boots) {
+              auto curr_boots_val = curr_boots ? maybe_itemsp_value(curr_boots) : 0;
+              auto best_boots_val = maybe_itemsp_value(best_boots);
+
+              if (! curr_boots) {
+                if (use(best_boots, MONST_EQUIP_BOOTS)) {
+                  AI_LOG("Change boots", best_boots);
+                  if (is_player()) {
+                    game->tick_begin("Robot, has equipped boots");
+                  }
+                  return true;
+                }
+              } else if (best_boots_val > curr_boots_val) {
+                if (use(best_boots, MONST_EQUIP_BOOTS)) {
+                  AI_LOG("Change boots", best_boots);
+                  if (is_player()) {
+                    game->tick_begin("Robot, has changed boots");
+                  }
+                  return true;
+                }
+              }
+            }
+          }
+
+          if (is_able_to_use_gauntlet()) {
+            AI_LOG("Idle, gauntlet check");
+            Thingp curr_gauntlet = get_equip(MONST_EQUIP_GAUNTLET);
+            Thingp best_gauntlet = nullptr;
+            get_carried_gauntlet_highest_value(&best_gauntlet);
+            if (best_gauntlet) {
+              auto curr_gauntlet_val = curr_gauntlet ? maybe_itemsp_value(curr_gauntlet) : 0;
+              auto best_gauntlet_val = maybe_itemsp_value(best_gauntlet);
+
+              if (! curr_gauntlet) {
+                if (use(best_gauntlet, MONST_EQUIP_GAUNTLET)) {
+                  AI_LOG("Change gauntlet", best_gauntlet);
+                  if (is_player()) {
+                    game->tick_begin("Robot, has equipped gauntlet");
+                  }
+                  return true;
+                }
+              } else if (best_gauntlet_val > curr_gauntlet_val) {
+                if (use(best_gauntlet, MONST_EQUIP_GAUNTLET)) {
+                  AI_LOG("Change gauntlet", best_gauntlet);
+                  if (is_player()) {
+                    game->tick_begin("Robot, has changed gauntlet");
+                  }
+                  return true;
+                }
+              }
+            }
+          }
+
+          if (is_able_to_use_shield()) {
+            AI_LOG("Idle, shield check");
+            Thingp curr_shield = get_equip(MONST_EQUIP_SHIELD);
+            Thingp best_shield = nullptr;
+            get_carried_shield_highest_value(&best_shield);
+            if (best_shield) {
+              auto curr_shield_val = curr_shield ? maybe_itemsp_value(curr_shield) : 0;
+              auto best_shield_val = maybe_itemsp_value(best_shield);
+
+              if (! curr_shield) {
+                if (use(best_shield, MONST_EQUIP_SHIELD)) {
+                  AI_LOG("Change shield", best_shield);
+                  if (is_player()) {
+                    game->tick_begin("Robot, has equipped shield");
+                  }
+                  return true;
+                }
+              } else if (best_shield_val > curr_shield_val) {
+                if (use(best_shield, MONST_EQUIP_SHIELD)) {
+                  AI_LOG("Change shield", best_shield);
+                  if (is_player()) {
+                    game->tick_begin("Robot, has changed shield");
+                  }
+                  return true;
+                }
+              }
+            }
+          }
+
+          if (is_able_to_use_cloak()) {
+            AI_LOG("Idle, cloak check");
+            Thingp curr_cloak = get_equip(MONST_EQUIP_CLOAK);
+            Thingp best_cloak = nullptr;
+            get_carried_cloak_highest_value(&best_cloak);
+            if (best_cloak) {
+              auto curr_cloak_val = curr_cloak ? maybe_itemsp_value(curr_cloak) : 0;
+              auto best_cloak_val = maybe_itemsp_value(best_cloak);
+
+              if (! curr_cloak) {
+                if (use(best_cloak, MONST_EQUIP_CLOAK)) {
+                  AI_LOG("Change cloak", best_cloak);
+                  if (is_player()) {
+                    game->tick_begin("Robot, has equipped cloak");
+                  }
+                  return true;
+                }
+              } else if (best_cloak_val > curr_cloak_val) {
+                if (use(best_cloak, MONST_EQUIP_CLOAK)) {
+                  AI_LOG("Change cloak", best_cloak);
+                  if (is_player()) {
+                    game->tick_begin("Robot, has changed cloak");
+                  }
+                  return true;
+                }
+              }
+            }
+          }
+
           if (is_able_to_use_wands()) {
             AI_LOG("Idle, wand check");
             Thingp curr_wand = get_equip(MONST_EQUIP_WEAPON);

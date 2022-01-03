@@ -940,44 +940,44 @@ class Tp:
     def set_unused_flag186(self, value):
         my.tp_set_unused_flag186(self, value)
 
-    def set_unused_flag187(self, value):
-        my.tp_set_unused_flag187(self, value)
+    def set_is_amulet(self, value):
+        my.tp_set_is_amulet(self, value)
 
-    def set_unused_flag188(self, value):
-        my.tp_set_unused_flag188(self, value)
+    def set_is_able_to_use_amulet(self, value):
+        my.tp_set_is_able_to_use_amulet(self, value)
 
-    def set_unused_flag189(self, value):
-        my.tp_set_unused_flag189(self, value)
+    def set_is_able_to_use_helmet(self, value):
+        my.tp_set_is_able_to_use_helmet(self, value)
 
-    def set_unused_flag190(self, value):
-        my.tp_set_unused_flag190(self, value)
+    def set_is_able_to_use_boots(self, value):
+        my.tp_set_is_able_to_use_boots(self, value)
 
-    def set_unused_flag191(self, value):
-        my.tp_set_unused_flag191(self, value)
+    def set_is_able_to_use_cloak(self, value):
+        my.tp_set_is_able_to_use_cloak(self, value)
 
-    def set_unused_flag192(self, value):
-        my.tp_set_unused_flag192(self, value)
+    def set_is_able_to_use_shield(self, value):
+        my.tp_set_is_able_to_use_shield(self, value)
 
-    def set_unused_flag193(self, value):
-        my.tp_set_unused_flag193(self, value)
+    def set_is_able_to_use_gauntlet(self, value):
+        my.tp_set_is_able_to_use_gauntlet(self, value)
 
-    def set_unused_flag194(self, value):
-        my.tp_set_unused_flag194(self, value)
+    def set_is_able_to_use_helmet(self, value):
+        my.tp_set_is_able_to_use_helmet(self, value)
 
-    def set_unused_flag195(self, value):
-        my.tp_set_unused_flag195(self, value)
+    def set_is_helmet(self, value):
+        my.tp_set_is_helmet(self, value)
 
-    def set_unused_flag196(self, value):
-        my.tp_set_unused_flag196(self, value)
+    def set_is_boots(self, value):
+        my.tp_set_is_boots(self, value)
 
-    def set_unused_flag197(self, value):
-        my.tp_set_unused_flag197(self, value)
+    def set_is_shield(self, value):
+        my.tp_set_is_shield(self, value)
 
-    def set_unused_flag198(self, value):
-        my.tp_set_unused_flag198(self, value)
+    def set_is_cloak(self, value):
+        my.tp_set_is_cloak(self, value)
 
-    def set_unused_flag199(self, value):
-        my.tp_set_unused_flag199(self, value)
+    def set_is_gauntlet(self, value):
+        my.tp_set_is_gauntlet(self, value)
 
     def set_is_toughness_hard(self, value):
         my.tp_set_is_toughness_hard(self, value)

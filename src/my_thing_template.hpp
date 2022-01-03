@@ -87,9 +87,7 @@ private:
   int _ai_resent_count {};
   int _ai_shove_chance_d1000 {};
   int _ai_wanderer {};
-  int _stat_def {};
   int _attack_blood {};
-  int _stat_att_mod {};
   int _attack_eater {};
   int _attack_engulf_chance_d1000 {};
   int _attack_humanoid {};
@@ -112,7 +110,6 @@ private:
   int _collision_attack {};
   int _collision_check {};
   int _collision_hit_priority {};
-  int _stat_con {};
   int _damage_acid_chance_d1000 {};
   int _damage_crush_chance_d1000 {};
   int _damage_digest_chance_d1000 {};
@@ -132,7 +129,6 @@ private:
   int _damage_received_doubled_from_necrosis {};
   int _damage_received_doubled_from_poison {};
   int _damage_received_doubled_from_water {};
-  int _stat_dex {};
   int _distance_avoid {};
   int _distance_jump {};
   int _distance_leader_max {};
@@ -208,7 +204,12 @@ private:
   int _is_able_to_shove {};
   int _is_able_to_tire {};
   int _is_able_to_use_armor {};
+  int _is_able_to_use_boots {};
+  int _is_able_to_use_cloak {};
+  int _is_able_to_use_gauntlet {};
+  int _is_able_to_use_helmet {};
   int _is_able_to_use_rings {};
+  int _is_able_to_use_shield {};
   int _is_able_to_use_wands {};
   int _is_able_to_use_weapons {};
   int _is_able_to_walk_through_walls {};
@@ -237,6 +238,7 @@ private:
   int _is_blood_splatter {};
   int _is_bones {};
   int _is_bony {};
+  int _is_boots {};
   int _is_brazier {};
   int _is_bridge {};
   int _is_buff {};
@@ -248,6 +250,7 @@ private:
   int _is_carrier_of_weapon_class_b {};
   int _is_carrier_of_weapon_class_c {};
   int _is_chasm {};
+  int _is_cloak {};
   int _is_collectable {};
   int _is_collect_as_keys {};
   int _is_collected_as_gold {};
@@ -293,6 +296,7 @@ private:
   int _is_foilage {};
   int _is_food {};
   int _is_food_eater {};
+  int _is_gauntlet {};
   int _is_gfx_anim_synced_with_owner {};
   int _is_glass {};
   int _is_gold {};
@@ -301,6 +305,7 @@ private:
   int _is_hazard {};
   int _is_health_booster {};
   int _is_heavy {};
+  int _is_helmet {};
   int _is_hittable {};
   int _is_humanoid {};
   int _is_intelligent {};
@@ -355,6 +360,7 @@ private:
   int _is_secret_door {};
   int _is_sewer_wall {};
   int _is_shallow_water {};
+  int _is_shield {};
   int _is_shovable {};
   int _is_skill {};
   int _is_skillstone {};
@@ -374,8 +380,8 @@ private:
   int _is_tmp_thing {};
   int _is_torch {};
   int _is_toughness_hard {};
-  int _is_toughness_very_tough {};
   int _is_toughness_soft {};
+  int _is_toughness_very_tough {};
   int _is_treasure_chest {};
   int _is_treasure_class_a {};
   int _is_treasure_class_b {};
@@ -408,6 +414,13 @@ private:
   int _rarity {};
   int _spawn_group_radius {};
   int _stamina {};
+  int _stat_att_mod {};
+  int _stat_con {};
+  int _stat_con_mod {};
+  int _stat_def {};
+  int _stat_def_mod {};
+  int _stat_dex {};
+  int _stat_dex_mod {};
   int _stats02 {};
   int _stats03 {};
   int _stats04 {};
@@ -415,11 +428,8 @@ private:
   int _stats06 {};
   int _stats07 {};
   int _stats09 {};
-  int _stat_def_mod {};
-  int _stat_con_mod {};
-  int _stat_dex_mod {};
-  int _stat_str_mod {};
   int _stat_str {};
+  int _stat_str_mod {};
   int _unused_chance1_d1000 {};
   int _unused_chance2_d1000 {};
   int _unused_chance3_d1000 {};
@@ -524,20 +534,9 @@ private:
   int _unused_flag184 {};
   int _unused_flag185 {};
   int _unused_flag186 {};
-  int _unused_flag187 {};
-  int _unused_flag188 {};
-  int _unused_flag189 {};
+  int _is_amulet {};
+  int _is_able_to_use_amulet {};
   int _unused_flag19 {};
-  int _unused_flag190 {};
-  int _unused_flag191 {};
-  int _unused_flag192 {};
-  int _unused_flag193 {};
-  int _unused_flag194 {};
-  int _unused_flag195 {};
-  int _unused_flag196 {};
-  int _unused_flag197 {};
-  int _unused_flag198 {};
-  int _unused_flag199 {};
   int _unused_flag2 {};
   int _unused_flag20 {};
   int _unused_flag21 {};
@@ -955,7 +954,6 @@ public:
   int ai_shove_chance_d1000(void) const { return _ai_shove_chance_d1000; }
   int ai_wanderer(void) const { return _ai_wanderer; }
   int attack_blood(void) const { return _attack_blood; }
-  int stat_att_mod(void) const { return _stat_att_mod; }
   int attack_eater(void) const { return _attack_eater; }
   int attack_engulf_chance_d1000(void) const { return _attack_engulf_chance_d1000; }
   int attack_humanoid(void) const { return _attack_humanoid; }
@@ -1076,7 +1074,12 @@ public:
   int is_able_to_shove(void) const { return _is_able_to_shove; }
   int is_able_to_tire(void) const { return _is_able_to_tire; }
   int is_able_to_use_armor(void) const { return _is_able_to_use_armor; }
+  int is_able_to_use_boots(void) const { return _is_able_to_use_boots; }
+  int is_able_to_use_cloak(void) const { return _is_able_to_use_cloak; }
+  int is_able_to_use_gauntlet(void) const { return _is_able_to_use_gauntlet; }
+  int is_able_to_use_helmet(void) const { return _is_able_to_use_helmet; }
   int is_able_to_use_rings(void) const { return _is_able_to_use_rings; }
+  int is_able_to_use_shield(void) const { return _is_able_to_use_shield; }
   int is_able_to_use_wands(void) const { return _is_able_to_use_wands; }
   int is_able_to_use_weapons(void) const { return _is_able_to_use_weapons; }
   int is_able_to_walk_through_walls(void) const { return _is_able_to_walk_through_walls; }
@@ -1105,6 +1108,7 @@ public:
   int is_blood(void) const { return _is_blood; }
   int is_bones(void) const { return _is_bones; }
   int is_bony(void) const { return _is_bony; }
+  int is_boots(void) const { return _is_boots; }
   int is_brazier(void) const { return _is_brazier; }
   int is_bridge(void) const { return _is_bridge; }
   int is_buff(void) const { return _is_buff; }
@@ -1116,6 +1120,7 @@ public:
   int is_carrier_of_weapon_class_b(void) const { return _is_carrier_of_weapon_class_b; }
   int is_carrier_of_weapon_class_c(void) const { return _is_carrier_of_weapon_class_c; }
   int is_chasm(void) const { return _is_chasm; }
+  int is_cloak(void) const { return _is_cloak; }
   int is_collectable(void) const { return _is_collectable; }
   int is_collect_as_keys(void) const { return _is_collect_as_keys; }
   int is_collected_as_gold(void) const { return _is_collected_as_gold; }
@@ -1161,6 +1166,7 @@ public:
   int is_foilage(void) const { return _is_foilage; }
   int is_food_eater(void) const { return _is_food_eater; }
   int is_food(void) const { return _is_food; }
+  int is_gauntlet(void) const { return _is_gauntlet; }
   int is_gfx_anim_synced_with_owner(void) const { return _is_gfx_anim_synced_with_owner; }
   int is_glass(void) const { return _is_glass; }
   int is_gold(void) const { return _is_gold; }
@@ -1169,6 +1175,7 @@ public:
   int is_hazard(void) const { return _is_hazard; }
   int is_health_booster(void) const { return _is_health_booster; }
   int is_heavy(void) const { return _is_heavy; }
+  int is_helmet(void) const { return _is_helmet; }
   int is_hittable(void) const { return _is_hittable; }
   int is_humanoid(void) const { return _is_humanoid; }
   int is_intelligent(void) const { return _is_intelligent; }
@@ -1222,6 +1229,7 @@ public:
   int is_secret_door(void) const { return _is_secret_door; }
   int is_sewer_wall(void) const { return _is_sewer_wall; }
   int is_shallow_water(void) const { return _is_shallow_water; }
+  int is_shield(void) const { return _is_shield; }
   int is_shovable(void) const { return _is_shovable; }
   int is_skillstone(void) const { return _is_skillstone; }
   int is_skill(void) const { return _is_skill; }
@@ -1274,6 +1282,10 @@ public:
   int range_max(void) const { return _range_max; }
   int rarity(void) const { return _rarity; }
   int stamina(void) const { return _stamina; }
+  int stat_att_mod(void) const { return _stat_att_mod; }
+  int stat_con_mod(void) const { return _stat_con_mod; }
+  int stat_def_mod(void) const { return _stat_def_mod; }
+  int stat_dex_mod(void) const { return _stat_dex_mod; }
   int stats02(void) const { return _stats02; }
   int stats03(void) const { return _stats03; }
   int stats04(void) const { return _stats04; }
@@ -1281,9 +1293,6 @@ public:
   int stats06(void) const { return _stats06; }
   int stats07(void) const { return _stats07; }
   int stats09(void) const { return _stats09; }
-  int stat_def_mod(void) const { return _stat_def_mod; }
-  int stat_con_mod(void) const { return _stat_con_mod; }
-  int stat_dex_mod(void) const { return _stat_dex_mod; }
   int stat_str_mod(void) const { return _stat_str_mod; }
   int unused_chance1_d1000(void) const { return _unused_chance1_d1000; }
   int unused_chance2_d1000(void) const { return _unused_chance2_d1000; }
@@ -1387,20 +1396,9 @@ public:
   int unused_flag184(void) const { return _unused_flag184; }
   int unused_flag185(void) const { return _unused_flag185; }
   int unused_flag186(void) const { return _unused_flag186; }
-  int unused_flag187(void) const { return _unused_flag187; }
-  int unused_flag188(void) const { return _unused_flag188; }
-  int unused_flag189(void) const { return _unused_flag189; }
+  int is_amulet(void) const { return _is_amulet; }
+  int is_able_to_use_amulet(void) const { return _is_able_to_use_amulet; }
   int unused_flag18(void) const { return _unused_flag18; }
-  int unused_flag190(void) const { return _unused_flag190; }
-  int unused_flag191(void) const { return _unused_flag191; }
-  int unused_flag192(void) const { return _unused_flag192; }
-  int unused_flag193(void) const { return _unused_flag193; }
-  int unused_flag194(void) const { return _unused_flag194; }
-  int unused_flag195(void) const { return _unused_flag195; }
-  int unused_flag196(void) const { return _unused_flag196; }
-  int unused_flag197(void) const { return _unused_flag197; }
-  int unused_flag198(void) const { return _unused_flag198; }
-  int unused_flag199(void) const { return _unused_flag199; }
   int unused_flag19(void) const { return _unused_flag19; }
   int unused_flag1(void) const { return _unused_flag1; }
   int unused_flag20(void) const { return _unused_flag20; }
@@ -1618,7 +1616,12 @@ public:
   void set_is_able_to_shove(int v) { _is_able_to_shove = v; }
   void set_is_able_to_tire(int v) { _is_able_to_tire = v; }
   void set_is_able_to_use_armor(int v) { _is_able_to_use_armor = v; }
+  void set_is_able_to_use_boots(int v) { _is_able_to_use_boots = v; }
+  void set_is_able_to_use_cloak(int v) { _is_able_to_use_cloak = v; }
+  void set_is_able_to_use_gauntlet(int v) { _is_able_to_use_gauntlet = v; }
+  void set_is_able_to_use_helmet(int v) { _is_able_to_use_helmet = v; }
   void set_is_able_to_use_rings(int v) { _is_able_to_use_rings = v; }
+  void set_is_able_to_use_shield(int v) { _is_able_to_use_shield = v; }
   void set_is_able_to_use_wands(int v) { _is_able_to_use_wands = v; }
   void set_is_able_to_use_weapons(int v) { _is_able_to_use_weapons = v; }
   void set_is_able_to_walk_through_walls(int v) { _is_able_to_walk_through_walls = v; }
@@ -1648,6 +1651,7 @@ public:
   void set_is_blood_splatter(int v) { _is_blood_splatter = v; }
   void set_is_bones(int v) { _is_bones = v; }
   void set_is_bony(int v) { _is_bony = v; }
+  void set_is_boots(int v) { _is_boots = v; }
   void set_is_brazier(int v) { _is_brazier = v; }
   void set_is_bridge(int v) { _is_bridge = v; }
   void set_is_buff(int v) { _is_buff = v; }
@@ -1659,6 +1663,7 @@ public:
   void set_is_carrier_of_weapon_class_b(int v) { _is_carrier_of_weapon_class_b = v; }
   void set_is_carrier_of_weapon_class_c(int v) { _is_carrier_of_weapon_class_c = v; }
   void set_is_chasm(int v) { _is_chasm = v; }
+  void set_is_cloak(int v) { _is_cloak = v; }
   void set_is_collectable(int v) { _is_collectable = v; }
   void set_is_collect_as_keys(int v) { _is_collect_as_keys = v; }
   void set_is_collected_as_gold(int v) { _is_collected_as_gold = v; }
@@ -1704,6 +1709,7 @@ public:
   void set_is_foilage(int v) { _is_foilage = v; }
   void set_is_food_eater(int v) { _is_food_eater = v; }
   void set_is_food(int v) { _is_food = v; }
+  void set_is_gauntlet(int v) { _is_gauntlet = v; }
   void set_is_gfx_anim_synced_with_owner(int v) { _is_gfx_anim_synced_with_owner = v; }
   void set_is_glass(int v) { _is_glass = v; }
   void set_is_gold(int v) { _is_gold = v; }
@@ -1712,6 +1718,7 @@ public:
   void set_is_hazard(int v) { _is_hazard = v; }
   void set_is_health_booster(int v) { _is_health_booster = v; }
   void set_is_heavy(int v) { _is_heavy = v; }
+  void set_is_helmet(int v) { _is_helmet = v; }
   void set_is_hittable(int v) { _is_hittable = v; }
   void set_is_humanoid(int v) { _is_humanoid = v; }
   void set_is_intelligent(int v) { _is_intelligent = v; }
@@ -1765,6 +1772,7 @@ public:
   void set_is_secret_door(int v) { _is_secret_door = v; }
   void set_is_sewer_wall(int v) { _is_sewer_wall = v; }
   void set_is_shallow_water(int v) { _is_shallow_water = v; }
+  void set_is_shield(int v) { _is_shield = v; }
   void set_is_shovable(int v) { _is_shovable = v; }
   void set_is_skill(int v) { _is_skill = v; }
   void set_is_skillstone(int v) { _is_skillstone = v; }
@@ -2016,20 +2024,9 @@ public:
   void set_unused_flag184(int v) { _unused_flag184 = v; }
   void set_unused_flag185(int v) { _unused_flag185 = v; }
   void set_unused_flag186(int v) { _unused_flag186 = v; }
-  void set_unused_flag187(int v) { _unused_flag187 = v; }
-  void set_unused_flag188(int v) { _unused_flag188 = v; }
-  void set_unused_flag189(int v) { _unused_flag189 = v; }
+  void set_is_amulet(int v) { _is_amulet = v; }
+  void set_is_able_to_use_amulet(int v) { _is_able_to_use_amulet = v; }
   void set_unused_flag18(int v) { _unused_flag18 = v; }
-  void set_unused_flag190(int v) { _unused_flag190 = v; }
-  void set_unused_flag191(int v) { _unused_flag191 = v; }
-  void set_unused_flag192(int v) { _unused_flag192 = v; }
-  void set_unused_flag193(int v) { _unused_flag193 = v; }
-  void set_unused_flag194(int v) { _unused_flag194 = v; }
-  void set_unused_flag195(int v) { _unused_flag195 = v; }
-  void set_unused_flag196(int v) { _unused_flag196 = v; }
-  void set_unused_flag197(int v) { _unused_flag197 = v; }
-  void set_unused_flag198(int v) { _unused_flag198 = v; }
-  void set_unused_flag199(int v) { _unused_flag199 = v; }
   void set_unused_flag19(int v) { _unused_flag19 = v; }
   void set_unused_flag1(int v) { _unused_flag1 = v; }
   void set_unused_flag20(int v) { _unused_flag20 = v; }

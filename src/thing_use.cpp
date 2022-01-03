@@ -309,6 +309,83 @@ bool Thing::use(Thingp what, int preferred_equip)
         game->tick_begin("player changed armor");
       }
     }
+  } else if (what->is_cloak()) {
+    dbg("Trying to use cloak: %s", what->to_short_string().c_str());
+    TRACE_NO_INDENT();
+    if (preferred_equip == -1) {
+      preferred_equip = MONST_EQUIP_CLOAK;
+    }
+    if (equip(what, preferred_equip)) {
+      if (is_player()) {
+        game->tick_begin("player changed cloak");
+      }
+    }
+  } else if (what->is_amulet()) {
+    dbg("Trying to use amulet: %s", what->to_short_string().c_str());
+    TRACE_NO_INDENT();
+    if (preferred_equip == -1) {
+      preferred_equip = MONST_EQUIP_AMULET;
+    }
+    if (equip(what, preferred_equip)) {
+      if (is_player()) {
+        game->tick_begin("player changed amulet");
+      }
+    }
+  } else if (what->is_boots()) {
+    dbg("Trying to use boots: %s", what->to_short_string().c_str());
+    TRACE_NO_INDENT();
+    if (preferred_equip == -1) {
+      preferred_equip = MONST_EQUIP_BOOTS;
+    }
+    if (equip(what, preferred_equip)) {
+      if (is_player()) {
+        game->tick_begin("player changed boots");
+      }
+    }
+  } else if (what->is_helmet()) {
+    dbg("Trying to use helmet: %s", what->to_short_string().c_str());
+    TRACE_NO_INDENT();
+    if (preferred_equip == -1) {
+      preferred_equip = MONST_EQUIP_HELMET;
+    }
+    if (equip(what, preferred_equip)) {
+      if (is_player()) {
+        game->tick_begin("player changed helmet");
+      }
+    }
+  } else if (what->is_amulet()) {
+    dbg("Trying to use amulet: %s", what->to_short_string().c_str());
+    TRACE_NO_INDENT();
+    if (preferred_equip == -1) {
+      preferred_equip = MONST_EQUIP_AMULET;
+    }
+    if (equip(what, preferred_equip)) {
+      if (is_player()) {
+        game->tick_begin("player changed amulet");
+      }
+    }
+  } else if (what->is_gauntlet()) {
+    dbg("Trying to use gauntlet: %s", what->to_short_string().c_str());
+    TRACE_NO_INDENT();
+    if (preferred_equip == -1) {
+      preferred_equip = MONST_EQUIP_GAUNTLET;
+    }
+    if (equip(what, preferred_equip)) {
+      if (is_player()) {
+        game->tick_begin("player changed gauntlet");
+      }
+    }
+  } else if (what->is_shield()) {
+    dbg("Trying to use shield: %s", what->to_short_string().c_str());
+    TRACE_NO_INDENT();
+    if (preferred_equip == -1) {
+      preferred_equip = MONST_EQUIP_SHIELD;
+    }
+    if (equip(what, preferred_equip)) {
+      if (is_player()) {
+        game->tick_begin("player changed shield");
+      }
+    }
   } else if (what->is_auto_throw()) {
     dbg("Trying to throw item: %s", what->to_short_string().c_str());
     TRACE_NO_INDENT();
