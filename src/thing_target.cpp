@@ -299,7 +299,7 @@ bool Thing::target_attack_best(int equip)
   }
 
   //
-  // Last resort
+  // Last resort where we just try and hit where we are pointing.
   //
   if (item) {
     dbg("Have equip item %s", item->to_short_string().c_str());

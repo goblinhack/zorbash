@@ -6,6 +6,7 @@
 #include "my_array_bounds_check.hpp"
 #include "my_level.hpp"
 #include "my_sprintf.hpp"
+#include "my_thing.hpp"
 
 uint8_t Level::heatmap(const point &p)
 {
@@ -209,12 +210,17 @@ void Level::heatmap_print(point at, point tl, point br)
   for (y = miny; y < maxy; y++) {
     std::string debug;
     for (x = minx; x < maxx; x++) {
+      point p(x, y);
       if (heatmap(x, y) > 0) {
         debug += string_sprintf("%2d", heatmap(x, y));
         continue;
       }
-      if (point(x, y) == at) {
+      if (p == at) {
         debug += (" @");
+        continue;
+      }
+      if (player && (player->curr_at == p)) {
+        debug += (" p");
         continue;
       }
       if (is_wall(x, y)) {
@@ -226,6 +232,10 @@ void Level::heatmap_print(point at, point tl, point br)
         continue;
       }
       if (is_monst(x, y)) {
+        debug += (" m");
+        continue;
+      }
+      if (is_mob(x, y)) {
         debug += (" m");
         continue;
       }

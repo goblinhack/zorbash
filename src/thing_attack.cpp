@@ -27,13 +27,16 @@ bool Thing::possible_to_attack(const Thingp victim)
   }
 
   //
-  // Check adjacent
+  // Note the victim may not be adjacent; the AI uses this to assess various
+  // things that may be some distant off.
   //
-  auto delta = victim->curr_at - curr_at;
-  if ((fabs(delta.x) > 1) || (fabs(delta.y) > 1)) {
-    dbg("Not adjacent to attack");
-    return false;
-  }
+  // Check adjacent. No don't. The AI uses this to look ahead.
+  //
+  // auto delta = victim->curr_at - curr_at;
+  // if ((fabs(delta.x) > 1) || (fabs(delta.y) > 1)) {
+  //   dbg("Not adjacent to attack");
+  //   return false;
+  // }
 
   auto my_owner  = get_top_owner();
   auto its_owner = victim->get_top_owner();

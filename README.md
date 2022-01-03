@@ -1,12 +1,9 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- - head should be on top of armor                                                                                                             -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Next todo                                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
-<!-- - pointing up, enemy to the side, not attacking                                                                                              -->
-<!-- - mobs do not seem to attack?                                                                                                                -->
 <!-- - shield, helmet, boots, amulet, gauntlet, cloak                                                                                             -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
@@ -19,6 +16,7 @@
 <!--                                                                                                                                              -->
 <!-- UI                                                                                                                                           -->
 <!-- ------                                                                                                                                       -->
+<!-- - monst head should be on top of armor                                                                                                       -->
 <!-- - rest until better                                                                                                                          -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
