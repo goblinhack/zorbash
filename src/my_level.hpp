@@ -741,27 +741,12 @@ public:
   uint8_t is_ring(const point &p);
   uint8_t is_water(const int x, const int y);
   uint8_t is_water(const point &p);
-
   uint8_t is_lit_currently(const int x, const int y);
   uint8_t is_lit_currently(const point &p);
   uint8_t is_lit_currently_no_check(const int x, const int y);
   uint8_t is_lit_currently_no_check(const point &p);
-  void    set_is_lit_currently(const int x, const int y);
-  void    set_is_lit_currently_no_check(const int x, const int y);
-  void    set_is_lit_currently_no_check(const int x, const int y, uint8_t v);
-  void    unset_is_lit_currently(const int x, const int y);
-  void    unset_is_lit_currently_no_check(const int x, const int y);
 
-  uint32_t is_map_changed(const int x, const int y);
-  uint32_t is_map_changed(const point &p);
-  uint32_t is_map_changed_no_check(const int x, const int y);
-  uint32_t is_map_changed_no_check(const point &p);
-  void     set_is_map_changed(const int x, const int y);
-  void     set_is_map_changed_no_check(const int x, const int y);
-  void     set_is_map_changed_no_check(const int x, const int y, uint32_t v);
-  void     unset_is_map_changed(const int x, const int y);
-  void     unset_is_map_changed_no_check(const int x, const int y);
-
+  void assign_leaders_and_followers(void);
   void clear(void);
   void con(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
   void con_(const char *fmt, va_list args); // compile error without
@@ -783,12 +768,10 @@ public:
   void create_dungeon_place_rocks(Dungeonp d, int variant, int block_width, int block_height, int tries);
   void create_dungeon_place_sewer_pipes(Dungeonp d);
   void create_dungeon_place_walls(Dungeonp d, Tpp tp, int variant, int block_width, int block_height, int tries);
-  void create(point3d at, int seed);
   void created(void);
-  void assign_leaders_and_followers(void);
+  void create(point3d at, int seed);
   void create_sewer_place_remaining_walls(const std::string &what);
   void create_sewer_place_walls(int variant, int block_width, int block_height, int tries);
-  void l_shaped_path_to_diag(std::vector< point > &path);
   void cursor_check_if_scroll_needed(void);
   void cursor_describe(void);
   void cursor_find_on_visible_things(const int16_t minx, const int16_t miny, const int16_t maxx, const int16_t maxy);
@@ -838,6 +821,7 @@ public:
   void handle_all_pending_things(int group);
   void handle_all_pending_things(void);
   void handle_input_events(void);
+  void heatmap_print(point at, point tl, point br);
   void incr_fade_in(const int x, const int y);
   void incr_fade_in_no_check(const int x, const int y);
   void incr_heatmap(const int x, const int y);
@@ -851,6 +835,7 @@ public:
   void lights_update_same_level(void);
   void log(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
   void log_(const char *fmt, va_list args); // compile error without
+  void l_shaped_path_to_diag(std::vector< point > &path);
   void new_external_particle(point start, point end, isize sz, uint32_t dur, Tilep, bool hflip, bool vis);
   void new_external_particle(ThingId, point start, point end, isize sz, uint32_t dur, Tilep, bool hflip, bool vis);
   void new_internal_particle(point start, point end, isize sz, uint32_t dur, Tilep tile, bool, bool vis);
@@ -859,13 +844,13 @@ public:
   void new_projectile(ThingId id, point start, point stop, uint32_t dur);
   void place_dirt(Dungeonp d);
   void place_dry_grass(Dungeonp d);
-  void place_wet_grass(Dungeonp d);
   void place_floor_deco(Dungeonp d);
   void place_foilage(Dungeonp d);
-  void place_random_treasure(Dungeonp d);
   void place_random_torches(Dungeonp d);
+  void place_random_treasure(Dungeonp d);
   void place_spiderweb(Dungeonp d);
   void place_the_grid(void);
+  void place_wet_grass(Dungeonp d);
   void screen_shake_end(void);
   void scroll_map_do(bool fast);
   void scroll_map_set_target(void);
@@ -885,14 +870,12 @@ public:
   void set_is_corpse(const int x, const int y);
   void set_is_corridor(const int x, const int y);
   void set_is_cursor_path_hazard_for_player(const int x, const int y);
-  void set_is_heavy(const int x, const int y);
   void set_is_deep_water(const int x, const int y);
   void set_is_descend_dungeon(const int x, const int y);
   void set_is_descend_sewer(const int x, const int y);
   void set_is_dirt(const int x, const int y);
   void set_is_door(const int x, const int y);
   void set_is_dry_grass(const int x, const int y);
-  void set_is_wet_grass(const int x, const int y);
   void set_is_enchantstone(const int x, const int y);
   void set_is_fire(const int x, const int y);
   void set_is_floor(const int x, const int y);
@@ -900,12 +883,19 @@ public:
   void set_is_food(const int x, const int y);
   void set_is_gold(const int x, const int y);
   void set_is_hazard(const int x, const int y);
+  void set_is_heavy(const int x, const int y);
   void set_is_key(const int x, const int y);
   void set_is_lava(const int x, const int y);
   void set_is_light_blocker(const int x, const int y);
   void set_is_light_blocker_no_check(const int x, const int y);
+  void set_is_lit_currently(const int x, const int y);
+  void set_is_lit_currently_no_check(const int x, const int y);
+  void set_is_lit_currently_no_check(const int x, const int y, uint8_t v);
   void set_is_lit_ever(const int x, const int y);
   void set_is_lit_ever_no_check(const int x, const int y);
+  void set_is_map_changed(const int x, const int y);
+  void set_is_map_changed_no_check(const int x, const int y);
+  void set_is_map_changed_no_check(const int x, const int y, uint32_t v);
   void set_is_mob(const int x, const int y);
   void set_is_monst(const int x, const int y);
   void set_is_obs_destructable(const int x, const int y);
@@ -913,6 +903,7 @@ public:
   void set_is_obs_wall_or_door(const int x, const int y);
   void set_is_obs_wall_or_door_no_check(const int x, const int y);
   void set_is_potion(const int x, const int y);
+  void set_is_ring(const int x, const int y);
   void set_is_ripple(const int x, const int y);
   void set_is_rock(const int x, const int y);
   void set_is_secret_door(const int x, const int y);
@@ -925,7 +916,7 @@ public:
   void set_is_treasure_type(const int x, const int y);
   void set_is_wall(const int x, const int y);
   void set_is_wand(const int x, const int y);
-  void set_is_ring(const int x, const int y);
+  void set_is_wet_grass(const int x, const int y);
   void set_wobble(float);
   void things_gc(bool force);
   void things_gc_force(void);
@@ -948,14 +939,12 @@ public:
   void unset_is_corpse(const int x, const int y);
   void unset_is_corridor(const int x, const int y);
   void unset_is_cursor_path_hazard_for_player(const int x, const int y);
-  void unset_is_heavy(const int x, const int y);
   void unset_is_deep_water(const int x, const int y);
   void unset_is_descend_dungeon(const int x, const int y);
   void unset_is_descend_sewer(const int x, const int y);
   void unset_is_dirt(const int x, const int y);
   void unset_is_door(const int x, const int y);
   void unset_is_dry_grass(const int x, const int y);
-  void unset_is_wet_grass(const int x, const int y);
   void unset_is_enchantstone(const int x, const int y);
   void unset_is_fire(const int x, const int y);
   void unset_is_floor(const int x, const int y);
@@ -963,12 +952,17 @@ public:
   void unset_is_food(const int x, const int y);
   void unset_is_gold(const int x, const int y);
   void unset_is_hazard(const int x, const int y);
+  void unset_is_heavy(const int x, const int y);
   void unset_is_key(const int x, const int y);
   void unset_is_lava(const int x, const int y);
   void unset_is_light_blocker(const int x, const int y);
   void unset_is_light_blocker_no_check(const int x, const int y);
+  void unset_is_lit_currently(const int x, const int y);
+  void unset_is_lit_currently_no_check(const int x, const int y);
   void unset_is_lit_ever(const int x, const int y);
   void unset_is_lit_ever_no_check(const int x, const int y);
+  void unset_is_map_changed(const int x, const int y);
+  void unset_is_map_changed_no_check(const int x, const int y);
   void unset_is_mob(const int x, const int y);
   void unset_is_monst(const int x, const int y);
   void unset_is_obs_destructable(const int x, const int y);
@@ -976,6 +970,7 @@ public:
   void unset_is_obs_wall_or_door(const int x, const int y);
   void unset_is_obs_wall_or_door_no_check(const int x, const int y);
   void unset_is_potion(const int x, const int y);
+  void unset_is_ring(const int x, const int y);
   void unset_is_ripple(const int x, const int y);
   void unset_is_rock(const int x, const int y);
   void unset_is_secret_door(const int x, const int y);
@@ -988,7 +983,7 @@ public:
   void unset_is_treasure_type(const int x, const int y);
   void unset_is_wall(const int x, const int y);
   void unset_is_wand(const int x, const int y);
-  void unset_is_ring(const int x, const int y);
+  void unset_is_wet_grass(const int x, const int y);
   void update_all_ticks(void);
   void update_deep_water(void);
   void update_hazard_tile_map(void);
@@ -1002,6 +997,11 @@ public:
   void update_things_next_to_a_chasm(void);
   void update(void);
   void update_water_next_to_lava(void);
+
+  uint32_t is_map_changed(const int x, const int y);
+  uint32_t is_map_changed(const point &p);
+  uint32_t is_map_changed_no_check(const int x, const int y);
+  uint32_t is_map_changed_no_check(const point &p);
 
   std::deque< point >  flood_fill(point) const;
   std::deque< point >  flood_fill_points(point, std::function< int(Thingp) > filter);

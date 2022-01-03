@@ -5,7 +5,6 @@
 <!--                                                                                                                                              -->
 <!-- Next todo                                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
-<!-- - check fire attack                                                                                                                          -->
 <!-- - check armor damage                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->

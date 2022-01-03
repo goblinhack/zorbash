@@ -393,9 +393,6 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
       TOPCON("You rest...");
       rest();
     }
-#if 0
-    location_check();
-#endif
     return false;
   }
 

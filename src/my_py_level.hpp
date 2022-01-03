@@ -354,7 +354,7 @@ PyObject *level_unused_flag182_at(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *level_unused_flag183_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag184_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag185_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag186_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_meltable_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_amulet_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_able_to_use_amulet_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_able_to_use_helmet_at(PyObject *obj, PyObject *args, PyObject *keywds);

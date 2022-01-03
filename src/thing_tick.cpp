@@ -167,6 +167,14 @@ void Thing::achieve_goals_in_life(void)
   }
 
   //
+  // This is to handle things that do not move, like a weapon that is on fire
+  //
+  location_check();
+  if (is_dead) {
+    return;
+  }
+
+  //
   // Roll the dice and see if we do anything
   //
   idle_check();

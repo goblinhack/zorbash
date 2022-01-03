@@ -436,7 +436,7 @@ private:
   int _unused_chance4_d1000 {};
   int _unused_chance5_d1000 {};
   int _unused_chance6_d1000 {};
-  int _unused_chance7_d1000 {};
+  int _melting_chance_d1000 {};
   int _unused_flag1 {};
   int _unused_flag10 {};
   int _unused_flag100 {};
@@ -533,7 +533,7 @@ private:
   int _unused_flag183 {};
   int _unused_flag184 {};
   int _unused_flag185 {};
-  int _unused_flag186 {};
+  int _is_meltable {};
   int _is_amulet {};
   int _is_able_to_use_amulet {};
   int _unused_flag19 {};
@@ -1300,7 +1300,7 @@ public:
   int unused_chance4_d1000(void) const { return _unused_chance4_d1000; }
   int unused_chance5_d1000(void) const { return _unused_chance5_d1000; }
   int unused_chance6_d1000(void) const { return _unused_chance6_d1000; }
-  int unused_chance7_d1000(void) const { return _unused_chance7_d1000; }
+  int melting_chance_d1000(void) const { return _melting_chance_d1000; }
   int unused_flag100(void) const { return _unused_flag100; }
   int unused_flag101(void) const { return _unused_flag101; }
   int unused_flag102(void) const { return _unused_flag102; }
@@ -1395,7 +1395,7 @@ public:
   int unused_flag183(void) const { return _unused_flag183; }
   int unused_flag184(void) const { return _unused_flag184; }
   int unused_flag185(void) const { return _unused_flag185; }
-  int unused_flag186(void) const { return _unused_flag186; }
+  int is_meltable(void) const { return _is_meltable; }
   int is_amulet(void) const { return _is_amulet; }
   int is_able_to_use_amulet(void) const { return _is_able_to_use_amulet; }
   int unused_flag18(void) const { return _unused_flag18; }
@@ -1928,7 +1928,7 @@ public:
   void set_unused_chance4_d1000(int v) { _unused_chance4_d1000 = v; }
   void set_unused_chance5_d1000(int v) { _unused_chance5_d1000 = v; }
   void set_unused_chance6_d1000(int v) { _unused_chance6_d1000 = v; }
-  void set_unused_chance7_d1000(int v) { _unused_chance7_d1000 = v; }
+  void set_melting_chance_d1000(int v) { _melting_chance_d1000 = v; }
   void set_unused_flag100(int v) { _unused_flag100 = v; }
   void set_unused_flag101(int v) { _unused_flag101 = v; }
   void set_unused_flag102(int v) { _unused_flag102 = v; }
@@ -2023,7 +2023,7 @@ public:
   void set_unused_flag183(int v) { _unused_flag183 = v; }
   void set_unused_flag184(int v) { _unused_flag184 = v; }
   void set_unused_flag185(int v) { _unused_flag185 = v; }
-  void set_unused_flag186(int v) { _unused_flag186 = v; }
+  void set_is_meltable(int v) { _is_meltable = v; }
   void set_is_amulet(int v) { _is_amulet = v; }
   void set_is_able_to_use_amulet(int v) { _is_able_to_use_amulet = v; }
   void set_unused_flag18(int v) { _unused_flag18 = v; }

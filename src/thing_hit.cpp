@@ -192,10 +192,6 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     return false;
   }
 
-  if (crit) {
-    damage *= 2;
-  }
-
   if (attack_poison) {
     damage = buff_on_damage_poison(real_hitter, damage);
     damage = on_damage_poison(real_hitter, damage);
@@ -570,26 +566,6 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     }
   }
 
-  IF_DEBUG2 { hitter->log("Hit %s (health %d) for damage %d", text_the().c_str(), get_health(), damage); }
-
-  //
-  // If hit by something then abort following any path
-  //
-  if (is_player()) {
-    if (game->robot_mode) {
-      if (get_infop()->monst_state == MONST_STATE_MOVING) {
-        clear_move_path("robot was hit while moving");
-      } else {
-        //
-        // Allow the robot to continue resting as it might have been
-        // trying to eat food to recover.
-        //
-      }
-    } else {
-      clear_move_path("player was hit");
-    }
-  }
-
   //
   // If a wand is firing a laser, then get the damage from the
   // wand so we can add in enchants.
@@ -616,6 +592,31 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
         real_hitter->use(skill);
         damage = real_hitter->get_current_damage();
       }
+    }
+  }
+
+  if (crit) {
+    damage *= 2;
+    IF_DEBUG2 { hitter->log("Hit %s (health %d) for CRIT damage %d", text_the().c_str(), get_health(), damage); }
+  } else {
+    IF_DEBUG2 { hitter->log("Hit %s (health %d) for damage %d", text_the().c_str(), get_health(), damage); }
+  }
+
+  //
+  // If hit by something then abort following any path
+  //
+  if (is_player()) {
+    if (game->robot_mode) {
+      if (get_infop()->monst_state == MONST_STATE_MOVING) {
+        clear_move_path("robot was hit while moving");
+      } else {
+        //
+        // Allow the robot to continue resting as it might have been
+        // trying to eat food to recover.
+        //
+      }
+    } else {
+      clear_move_path("player was hit");
     }
   }
 

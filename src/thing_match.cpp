@@ -1209,7 +1209,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag185() && (what == "unused_flag185")) {
     return true;
   }
-  if (unused_flag186() && (what == "unused_flag186")) {
+  if (is_meltable() && (what == "is_meltable")) {
     return true;
   }
   if (is_amulet() && (what == "is_amulet")) {
@@ -2491,8 +2491,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag185") {
     return &Thing::unused_flag185;
   }
-  if (what == "unused_flag186") {
-    return &Thing::unused_flag186;
+  if (what == "is_meltable") {
+    return &Thing::is_meltable;
   }
   if (what == "is_amulet") {
     return &Thing::is_amulet;

@@ -330,7 +330,8 @@ bool Thing::collision_add_candidates(Thingp it, point future_pos, int x, int y, 
     // Continue walking by falling through to return true
     //
     dbg("No; ignore corpse");
-  } else if (is_fire() && (it->is_burnable() || it->is_very_combustible() || it->is_combustible())) {
+  } else if (is_fire() &&
+             (it->is_meltable() || it->is_burnable() || it->is_very_combustible() || it->is_combustible())) {
     //
     // Fire attack?
     //
@@ -338,7 +339,7 @@ bool Thing::collision_add_candidates(Thingp it, point future_pos, int x, int y, 
       dbg("Yes; allow fire to burn %s", it->to_short_string().c_str());
       thing_add_ai_possible_hit(it, "burn");
     } else {
-      dbg("No; cannot butn %s, no overlap", it->to_short_string().c_str());
+      dbg("No; cannot burn %s, no overlap", it->to_short_string().c_str());
     }
   } else if (is_lava() && (it->is_burnable() || it->is_very_combustible() || it->is_combustible())) {
     //
@@ -348,7 +349,7 @@ bool Thing::collision_add_candidates(Thingp it, point future_pos, int x, int y, 
       dbg("Yes; allow fire to burn %s", it->to_short_string().c_str());
       thing_add_ai_possible_hit(it, "burn");
     } else {
-      dbg("No; cannot butn %s, no overlap", it->to_short_string().c_str());
+      dbg("No; cannot burn %s, no overlap", it->to_short_string().c_str());
     }
   } else {
     //

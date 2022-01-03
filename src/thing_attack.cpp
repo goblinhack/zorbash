@@ -26,6 +26,15 @@ bool Thing::possible_to_attack(const Thingp victim)
     return false;
   }
 
+  //
+  // Check adjacent
+  //
+  auto delta = victim->curr_at - curr_at;
+  if ((fabs(delta.x) > 1) || (fabs(delta.y) > 1)) {
+    dbg("Not adjacent to attack");
+    return false;
+  }
+
   auto my_owner  = get_top_owner();
   auto its_owner = victim->get_top_owner();
   if (my_owner && ((my_owner == its_owner) || (my_owner == victim))) {
@@ -308,7 +317,8 @@ bool Thing::possible_to_attack(const Thingp victim)
       //
       // Fire monsters do not attack always
       //
-    } else if (victim->is_burnable() || victim->is_very_combustible() || victim->is_combustible()) {
+    } else if (victim->is_meltable() || victim->is_burnable() || victim->is_very_combustible() ||
+               victim->is_combustible()) {
       if (! victim->is_fire() && ! victim->is_lava()) {
         dbg("Can attack as I am firey %s", victim->to_string().c_str());
         return true;
@@ -341,11 +351,11 @@ bool Thing::possible_to_attack(const Thingp victim)
   }
 
   if (victim->is_alive_monst() || victim->is_combustible() || victim->is_very_combustible() ||
-      victim->is_burnable() || victim->is_wall() || victim->is_rock() || victim->is_door() || victim->is_bridge() ||
-      victim->is_dry_grass() || victim->is_wet_grass() || victim->is_treasure_type() || victim->is_enchantstone() ||
-      victim->is_skillstone() || victim->is_foilage() || victim->is_spiderweb() || victim->is_sticky() ||
-      victim->is_brazier() || victim->is_barrel() || victim->is_player() || victim->is_food() ||
-      victim->is_bag_item()) {
+      victim->is_meltable() || victim->is_burnable() || victim->is_wall() || victim->is_rock() || victim->is_door() ||
+      victim->is_bridge() || victim->is_dry_grass() || victim->is_wet_grass() || victim->is_treasure_type() ||
+      victim->is_enchantstone() || victim->is_skillstone() || victim->is_foilage() || victim->is_spiderweb() ||
+      victim->is_sticky() || victim->is_brazier() || victim->is_barrel() || victim->is_player() ||
+      victim->is_food() || victim->is_bag_item()) {
     if (is_laser()) {
       dbg("Can attack as laser %s", victim->to_string().c_str());
       return true;

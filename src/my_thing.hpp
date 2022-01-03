@@ -1397,7 +1397,7 @@ public:
   int unused_chance4_d1000(void);
   int unused_chance5_d1000(void);
   int unused_chance6_d1000(void);
-  int unused_chance7_d1000(void);
+  int melting_chance_d1000(void);
   int unused_flag100(void);
   int unused_flag101(void);
   int unused_flag102(void);
@@ -1492,7 +1492,7 @@ public:
   int unused_flag183(void);
   int unused_flag184(void);
   int unused_flag185(void);
-  int unused_flag186(void);
+  int is_meltable(void);
   int is_amulet(void);
   int is_able_to_use_amulet(void);
   int unused_flag18(void);

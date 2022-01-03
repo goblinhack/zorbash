@@ -248,13 +248,21 @@ ThingShoved Thing::try_to_shove(point future_pos)
 
   if (! is_able_to_shove()) {
     dbg("Not able to shove");
-    return (THING_SHOVE_NEVER_TRIED);
+    return THING_SHOVE_NEVER_TRIED;
   }
 
+  //
+  // Check adjacent
+  //
   auto  x     = future_pos.x;
   auto  y     = future_pos.y;
   auto  delta = point(x, y) - curr_at;
   point p(future_pos.x, future_pos.y);
+
+  if ((fabs(delta.x) > 1) || (fabs(delta.y) > 1)) {
+    dbg("Not adjacent to shove");
+    return THING_SHOVE_NEVER_TRIED;
+  }
 
   //
   // Try to shove heavy things first.

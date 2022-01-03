@@ -144,7 +144,12 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
   }
 
   for (auto &g : goalmaps) {
-    IF_DEBUG2 { dmap_print(g.dmap, point(start.x, start.y), point(minx, miny), point(maxx, maxy)); }
+    IF_DEBUG2
+    {
+      AI_LOG("", "Modify dmap for terrain");
+      dmap_print(g.dmap, point(start.x, start.y), point(minx, miny), point(maxx, maxy));
+      level->heatmap_print(point(start.x, start.y), point(minx, miny), point(maxx, maxy));
+    }
 
     //
     // Modify the dmap for terrain.
@@ -157,6 +162,12 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
           dmap_modify_terrain_cost(p, c);
         }
       }
+    }
+
+    IF_DEBUG2
+    {
+      AI_LOG("", "Modified dmap for terrain");
+      dmap_print(g.dmap, point(start.x, start.y), point(minx, miny), point(maxx, maxy));
     }
 
     const Dmap saved_dmap = *g.dmap;

@@ -40,7 +40,15 @@ bool Thing::is_disliked_by_me(const point &p)
         }
       }
     } else {
-      if (heat >= 10) {
+      //
+      // Single fire looks like:
+      // .....
+      // .111.
+      // .151.
+      // .111.
+      // .....
+      //
+      if (heat >= 5) {
         if (environ_avoids_fire()) {
           return true;
         }
@@ -79,7 +87,15 @@ bool Tp::is_disliked_by_me(Levelp level, point p) const
         return true;
       }
     } else {
-      if (heat >= 10) { // avoid if hotter
+      //
+      // Single fire looks like:
+      // .....
+      // .111.
+      // .151.
+      // .111.
+      // .....
+      //
+      if (heat >= 5) { // avoid if hotter
         return true;
       }
     }

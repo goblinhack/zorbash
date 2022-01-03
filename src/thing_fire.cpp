@@ -3,19 +3,18 @@
 // See the README.md file for license info.
 //
 
-#include "my_depth.hpp"
+#include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
-#include "my_globals.hpp"
 #include "my_level.hpp"
+#include "my_monst.hpp"
 #include "my_random.hpp"
-#include "my_sprintf.hpp"
 #include "my_sys.hpp"
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"
 
 void Thing::fire_tick(void)
 {
-  if (is_burnable() || is_combustible() || is_very_combustible()) {
+  if (is_meltable() || is_burnable() || is_combustible() || is_very_combustible()) {
     //
     // Keep going
     //
@@ -28,7 +27,7 @@ void Thing::fire_tick(void)
   point at  = curr_at;
 
   if (is_on_fire()) {
-    dbg("Fire tick");
+    dbg("Fire tick: on fire");
     TRACE_AND_INDENT();
 
     //
@@ -57,11 +56,32 @@ void Thing::fire_tick(void)
     // Too close to the flames
     //
     hit = true;
+    if (hit) {
+      dbg("Fire tick: very combustible and too close to the flames");
+    }
   } else if (is_combustible() && (level->heatmap(at.x, at.y) > 2)) {
     //
     // Too close to the flames
     //
     hit = (d100() < 70);
+    if (hit) {
+      dbg("Fire tick: combustible and too close to the flames");
+    }
+  } else if (is_meltable() && (level->heatmap(at.x, at.y) > 2)) {
+    //
+    // Too close to the flames?
+    //
+    auto melt_chance = melting_chance_d1000();
+
+    //
+    // Make things more likely to melt the closer to the heat?
+    //
+    melt_chance += (melt_chance / 10) * level->heatmap(at.x, at.y);
+
+    hit = d1000() < melt_chance;
+    if (hit) {
+      dbg("Fire tick: melting");
+    }
   } else if (level->is_fire(at.x, at.y)) {
     //
     // Give the player a chance
@@ -107,7 +127,43 @@ void Thing::fire_tick(void)
 
     if (h <= 0) {
       h = set_health(0);
-      dead("by burning");
+      if (is_meltable()) {
+        if (! is_offscreen) {
+          if (level->player && (level->tick_created < game->tick_current)) {
+            if (get(level->player->get_aip()->can_see_currently.can_see, curr_at.x, curr_at.y)) {
+              TOPCON("%s is melted!", text_The().c_str());
+            }
+          }
+        }
+        dead("by melting");
+      } else {
+        if (! is_offscreen) {
+          if (level->player && (level->tick_created < game->tick_current)) {
+            if (get(level->player->get_aip()->can_see_currently.can_see, curr_at.x, curr_at.y)) {
+              TOPCON("%s burns to death!", text_The().c_str());
+            }
+          }
+        }
+        dead("by burning");
+      }
+    } else {
+      if (is_meltable()) {
+        if (! is_offscreen) {
+          if (level->player && (level->tick_created < game->tick_current)) {
+            if (get(level->player->get_aip()->can_see_currently.can_see, curr_at.x, curr_at.y)) {
+              TOPCON("%s melts!", text_The().c_str());
+            }
+          }
+        }
+      } else {
+        if (! is_offscreen) {
+          if (level->player && (level->tick_created < game->tick_current)) {
+            if (get(level->player->get_aip()->can_see_currently.can_see, curr_at.x, curr_at.y)) {
+              TOPCON("%s burns!", text_The().c_str());
+            }
+          }
+        }
+      }
     }
 
     if (! level->is_smoke(at.x, at.y)) {

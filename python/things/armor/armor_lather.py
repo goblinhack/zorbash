@@ -35,6 +35,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_described_when_hovering_over(True)
     mytp.set_is_droppable(True)
     mytp.set_is_enchantable(True)
+    mytp.set_is_interesting(True)
     mytp.set_is_item(True)
     mytp.set_is_loggable(True)
     mytp.set_is_treasure_class_a(True)

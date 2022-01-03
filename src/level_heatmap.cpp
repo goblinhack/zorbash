@@ -5,6 +5,7 @@
 
 #include "my_array_bounds_check.hpp"
 #include "my_level.hpp"
+#include "my_sprintf.hpp"
 
 uint8_t Level::heatmap(const point &p)
 {
@@ -122,4 +123,119 @@ void Level::update_heatmap(void)
     printf("\n");
   }
 #endif
+}
+
+void Level::heatmap_print(point at, point tl, point br)
+{
+  uint8_t x;
+  uint8_t y;
+
+  int minx, miny, maxx, maxy;
+  if (tl.x < br.x) {
+    minx = tl.x;
+    maxx = br.x;
+  } else {
+    minx = br.x;
+    maxx = tl.x;
+  }
+  if (tl.y < br.y) {
+    miny = tl.y;
+    maxy = br.y;
+  } else {
+    miny = br.y;
+    maxy = tl.y;
+  }
+
+  if (minx < 0) {
+    minx = 0;
+  }
+  if (miny < 0) {
+    miny = 0;
+  }
+  if (maxx >= MAP_WIDTH) {
+    maxx = MAP_WIDTH - 1;
+  }
+  if (maxy >= MAP_HEIGHT) {
+    maxy = MAP_HEIGHT - 1;
+  }
+
+  bool all_walls;
+
+  //
+  // Try to minimize the DMAP area if it is mostly walls at the edges, for speed.
+  //
+  all_walls = true;
+  for (x = minx; (x < maxx) && all_walls; x++) {
+    for (y = miny; (y < maxy) && all_walls; y++) {
+      all_walls = is_wall(x, y);
+    }
+    if (all_walls) {
+      minx = x;
+    }
+  }
+
+  all_walls = true;
+  for (x = maxx; (x > minx) && all_walls; x--) {
+    for (y = miny; (y < maxy) && all_walls; y++) {
+      all_walls = is_wall(x, y);
+    }
+    if (all_walls) {
+      maxx = x;
+    }
+  }
+
+  all_walls = true;
+  for (y = miny; (y < maxy) && all_walls; y++) {
+    for (x = minx; (x < maxx) && all_walls; x++) {
+      all_walls = is_wall(x, y);
+    }
+    if (all_walls) {
+      miny = y;
+    }
+  }
+
+  all_walls = true;
+  for (y = maxy; (y > miny) && all_walls; y--) {
+    for (x = minx; (x < maxx) && all_walls; x++) {
+      all_walls = is_wall(x, y);
+    }
+    if (all_walls) {
+      maxy = y;
+    }
+  }
+
+  LOG("HEATMAP: tl %d,%d br %d %d at %d,%d", minx, miny, maxx, maxy, at.x, at.y);
+
+  for (y = miny; y < maxy; y++) {
+    std::string debug;
+    for (x = minx; x < maxx; x++) {
+      if (heatmap(x, y) > 0) {
+        debug += string_sprintf("%2d", heatmap(x, y));
+        continue;
+      }
+      if (point(x, y) == at) {
+        debug += (" @");
+        continue;
+      }
+      if (is_wall(x, y)) {
+        debug += ("##");
+        continue;
+      }
+      if (is_chasm(x, y)) {
+        debug += (" C");
+        continue;
+      }
+      if (is_monst(x, y)) {
+        debug += (" m");
+        continue;
+      }
+      if (is_floor(x, y)) {
+        debug += (" .");
+        continue;
+      }
+
+      debug += "  ";
+    }
+    LOG("HEATMAP: %s", debug.c_str());
+  }
 }

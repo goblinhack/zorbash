@@ -254,10 +254,10 @@ int Thing::unused_chance6_d1000(void)
   return (tp()->unused_chance6_d1000());
 }
 
-int Thing::unused_chance7_d1000(void)
+int Thing::melting_chance_d1000(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_chance7_d1000());
+  return (tp()->melting_chance_d1000());
 }
 
 int Thing::break_chance_d10000(void)
@@ -2509,10 +2509,10 @@ int Thing::unused_flag185(void)
   return (tp()->unused_flag185());
 }
 
-int Thing::unused_flag186(void)
+int Thing::is_meltable(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag186());
+  return (tp()->is_meltable());
 }
 
 int Thing::is_amulet(void)

@@ -487,7 +487,7 @@ do
       set_unused_flag183 \
       set_unused_flag184 \
       set_unused_flag185 \
-      set_unused_flag186 \
+      set_is_meltable \
       set_is_amulet \
       set_is_able_to_use_amulet \
       set_is_able_to_use_helmet \

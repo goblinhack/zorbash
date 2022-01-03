@@ -35,6 +35,13 @@ bool Thing::is_hated_by_me(const point &p)
     }
   }
 
+  if (environ_avoids_fire()) {
+    int heat = level->heatmap(p);
+    if (heat > 0) { // avoid if hotter
+      return true;
+    }
+  }
+
   return false;
 }
 
@@ -55,6 +62,13 @@ bool Tp::is_hated_by_me(Levelp level, point p) const
 
   if (! is_floating() && ! is_flying() && ! is_able_to_jump()) {
     if (level->is_chasm(p)) {
+      return true;
+    }
+  }
+
+  if (environ_avoids_fire()) {
+    int heat = level->heatmap(p);
+    if (heat > 0) { // avoid if hotter
       return true;
     }
   }
@@ -156,6 +170,13 @@ bool Thing::is_hated_by_me(const Thingp itp)
       if (it->is_lava()) {
         return true;
       }
+    }
+  }
+
+  if (environ_avoids_fire()) {
+    int heat = level->heatmap(itp->curr_at);
+    if (heat > 0) { // avoid if hotter
+      return true;
     }
   }
 

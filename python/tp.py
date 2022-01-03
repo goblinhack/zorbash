@@ -937,8 +937,8 @@ class Tp:
     def set_unused_flag185(self, value):
         my.tp_set_unused_flag185(self, value)
 
-    def set_unused_flag186(self, value):
-        my.tp_set_unused_flag186(self, value)
+    def set_is_meltable(self, value):
+        my.tp_set_is_meltable(self, value)
 
     def set_is_amulet(self, value):
         my.tp_set_is_amulet(self, value)
@@ -1732,8 +1732,8 @@ class Tp:
     def set_unused_chance6_d1000(self, value):
         my.tp_set_unused_chance6_d1000(self, value)
 
-    def set_unused_chance7_d1000(self, value):
-        my.tp_set_unused_chance7_d1000(self, value)
+    def set_melting_chance_d1000(self, value):
+        my.tp_set_melting_chance_d1000(self, value)
 
     def set_break_chance_d10000(self, value):
         my.tp_set_break_chance_d10000(self, value)
