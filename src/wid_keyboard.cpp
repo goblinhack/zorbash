@@ -25,7 +25,7 @@ static const char *keys[ WID_KEYBOARD_DOWN ][ WID_KEYBOARD_ACROSS ] = {
         "@",
         "#",
         "$",
-        "%%",
+        "%",
         "^",
         "*",
         "(",

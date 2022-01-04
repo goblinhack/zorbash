@@ -562,7 +562,7 @@ void ascii_set_fg4(int x, int y, const wchar_t c) { ascii_set_fg4(x, y, font_lar
 
 void ascii_putf__(int x, int y, color fg, color bg, const std::wstring text)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   Tilep tile;
   int   bg_set    = false;
   auto  text_iter = text.begin();
@@ -582,51 +582,73 @@ void ascii_putf__(int x, int y, color fg, color bg, const std::wstring text)
     bg_set = true;
   }
 
-  tile = nullptr;
+  tile            = nullptr;
+  bool    got_pct = false;
+  wchar_t c       = 0;
 
-  while (text_iter != text.end()) {
-    auto c = *text_iter;
-    text_iter++;
+  for (;;) {
+    if (text.end() - text_iter <= 0) {
+      break;
+    }
 
-    if (unlikely(c == L'%')) {
-      if (std::string(text_iter, text_iter + 3) == "fg=") {
-        text_iter += 3;
-        auto tmp = std::string(text_iter, text.end());
-        int  len = 0;
-        fg       = string2color(tmp, &len);
-        text_iter += len + 1;
-        continue;
-      } else if (std::string(text_iter, text_iter + 3) == "bg=") {
-        text_iter += 3;
-        auto tmp = std::string(text_iter, text.end());
-        int  len = 0;
-        bg       = string2color(tmp, &len);
-        text_iter += len + 1;
-
-        bg_set = true;
-        continue;
-      } else if (std::string(text_iter, text_iter + 3) == "tp=") {
-        text_iter += 3;
-        auto tmp = std::string(text_iter, text.end());
-
-        int  len = 0;
-        auto tp  = string2tp(tmp, &len);
-        text_iter += len;
-
-        tile = tp_first_tile(tp);
-        continue;
-      } else if (std::string(text_iter, text_iter + 4) == "tex=") {
-        text_iter += 4;
-        continue;
-      } else if (std::string(text_iter, text_iter + 5) == "tile=") {
-        text_iter += 5;
-        auto tmp = std::string(text_iter, text.end());
-        int  len = 0;
-        tile     = string2tile(tmp, &len);
-        text_iter += len;
-        continue;
+    if (text_iter == text.end()) {
+      if (! got_pct) {
+        break;
       }
-      continue;
+      got_pct = false;
+    } else {
+      c = *text_iter;
+      text_iter++;
+
+      auto len = text.end() - text_iter;
+      if (len > 0) {
+        if (unlikely(c == L'%')) {
+          got_pct = true;
+          if ((len > 3) && (std::string(text_iter, text_iter + 3) == "fg=")) {
+            text_iter += 3;
+            auto tmp = std::string(text_iter, text.end());
+            int  len = 0;
+            fg       = string2color(tmp, &len);
+            text_iter += len + 1;
+            got_pct = false;
+            continue;
+          } else if ((len > 3) && (std::string(text_iter, text_iter + 3) == "bg=")) {
+            text_iter += 3;
+            auto tmp = std::string(text_iter, text.end());
+            int  len = 0;
+            bg       = string2color(tmp, &len);
+            text_iter += len + 1;
+
+            bg_set  = true;
+            got_pct = false;
+            continue;
+          } else if ((len > 3) && (std::string(text_iter, text_iter + 3) == "tp=")) {
+            text_iter += 3;
+            auto tmp = std::string(text_iter, text.end());
+
+            int  len = 0;
+            auto tp  = string2tp(tmp, &len);
+            text_iter += len;
+
+            tile    = tp_first_tile(tp);
+            got_pct = false;
+            continue;
+          } else if ((len > 4) && (std::string(text_iter, text_iter + 4) == "tex=")) {
+            text_iter += 4;
+            got_pct = false;
+            continue;
+          } else if ((len > 5) && (std::string(text_iter, text_iter + 5) == "tile=")) {
+            text_iter += 5;
+            auto tmp = std::string(text_iter, text.end());
+            int  len = 0;
+            tile     = string2tile(tmp, &len);
+            text_iter += len;
+            got_pct = false;
+            continue;
+          }
+          continue;
+        }
+      }
     }
 
     if (unlikely(! ascii_ok_for_scissors(x, y))) {
@@ -699,57 +721,80 @@ void ascii_putf__(int x, int y, color fg, color bg, const std::wstring text)
 
 int ascii_strlen(std::wstring const &text)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto text_iter = text.begin();
   int  x         = 0;
 
-  while (text_iter != text.end()) {
-    auto c = *text_iter;
-    text_iter++;
+  bool    got_pct = false;
+  wchar_t c       = 0;
 
-    if (c == L'%') {
-      if (text_iter != text.end()) {
-        if (*text_iter == L'%') {
-          text_iter++;
-        }
+  for (;;) {
+    if (text.end() - text_iter <= 0) {
+      break;
+    }
+
+    if (text_iter == text.end()) {
+      if (! got_pct) {
+        break;
       }
+      got_pct = false;
+    } else {
+      c = *text_iter;
+      text_iter++;
 
-      if (std::string(text_iter, text_iter + 3) == "fg=") {
-        text_iter += 3;
-        auto tmp = std::string(text_iter, text.end());
+      if (text_iter != text.end()) {
+        if (c == L'%') {
+          if (text_iter != text.end()) {
+            if (*text_iter == L'%') {
+              text_iter++;
+            }
+          }
 
-        int len = 0;
-        (void) string2color(tmp, &len);
-        text_iter += len + 1;
-        continue;
-      } else if (std::string(text_iter, text_iter + 3) == "bg=") {
-        text_iter += 3;
-        auto tmp = std::string(text_iter, text.end());
+          auto len = text.end() - text_iter;
+          if (len > 0) {
+            if ((len > 3) && (std::string(text_iter, text_iter + 3) == "fg=")) {
+              text_iter += 3;
+              if (text_iter != text.end()) {
+                auto tmp = std::string(text_iter, text.end());
 
-        int len = 0;
-        (void) string2color(tmp, &len);
-        text_iter += len + 1;
+                int len = 0;
+                (void) string2color(tmp, &len);
+                text_iter += len + 1;
+              }
+              continue;
+            } else if ((len > 3) && (std::string(text_iter, text_iter + 3) == "bg=")) {
+              text_iter += 3;
+              auto tmp = std::string(text_iter, text.end());
 
-        continue;
-      } else if (std::string(text_iter, text_iter + 3) == "tp=") {
-        text_iter += 3;
-        auto tmp = std::string(text_iter, text.end());
+              int len = 0;
+              (void) string2color(tmp, &len);
+              text_iter += len + 1;
 
-        int len = 0;
-        (void) string2tp(tmp, &len);
-        text_iter += len + 1;
+              continue;
+            } else if ((len > 3) && (std::string(text_iter, text_iter + 3) == "tp=")) {
+              text_iter += 3;
+              auto tmp = std::string(text_iter, text.end());
 
-        continue;
-      } else if (std::string(text_iter, text_iter + 4) == "tex=") {
-        text_iter += 4;
-        continue;
-      } else if (std::string(text_iter, text_iter + 5) == "tile=") {
-        text_iter += 5;
-        auto tmp = std::string(text_iter, text.end());
-        int  len = 0;
-        (void) string2tile(tmp, &len);
-        text_iter += len + 1;
-        continue;
+              int len = 0;
+              (void) string2tp(tmp, &len);
+              text_iter += len + 1;
+
+              continue;
+            } else if ((len > 4) && (std::string(text_iter, text_iter + 4) == "tex=")) {
+              text_iter += 4;
+              continue;
+            } else if ((len > 5) && (std::string(text_iter, text_iter + 5) == "tile=")) {
+              text_iter += 5;
+              auto tmp = std::string(text_iter, text.end());
+              int  len = 0;
+              (void) string2tile(tmp, &len);
+              text_iter += len + 1;
+              continue;
+            }
+          } else {
+            break;
+          }
+        }
       }
     }
 
@@ -761,7 +806,7 @@ int ascii_strlen(std::wstring const &text)
 
 int ascii_strlen(std::wstring const &text, std::wstring *col)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto text_iter = text.begin();
   int  x         = 0;
 
@@ -827,7 +872,7 @@ int ascii_strlen(std::wstring const &text, std::wstring *col)
 
 std::string ascii_strip(std::string const &text)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto        text_iter = text.begin();
   int         x         = 0;
   std::string out;
@@ -888,7 +933,7 @@ std::string ascii_strip(std::string const &text)
 
 static void ascii_putf_(int x, int y, color fg, color bg, std::wstring const fmt, va_list args)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   wchar_t buf[ MAXLONGSTR ];
 
   auto wrote = vswprintf(buf, MAXLONGSTR, fmt.c_str(), args);
@@ -907,7 +952,7 @@ static void ascii_putf_(int x, int y, color fg, color bg, std::wstring const fmt
 
 static void ascii_putf_(int x, int y, color fg, color bg, const wchar_t *fmt, va_list args)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   wchar_t buf[ MAXLONGSTR ];
 
   auto wrote = vswprintf(buf, MAXLONGSTR, fmt, args);
@@ -926,7 +971,7 @@ static void ascii_putf_(int x, int y, color fg, color bg, const wchar_t *fmt, va
 
 void ascii_putf(int x, int y, const wchar_t *fmt, ...)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   va_list args;
 
   va_start(args, fmt);
@@ -936,7 +981,7 @@ void ascii_putf(int x, int y, const wchar_t *fmt, ...)
 
 void ascii_putf(int x, int y, color fg, const wchar_t *fmt, ...)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   va_list args;
 
   va_start(args, fmt);
@@ -946,7 +991,7 @@ void ascii_putf(int x, int y, color fg, const wchar_t *fmt, ...)
 
 void ascii_putf(int x, int y, color fg, color bg, const wchar_t *fmt, ...)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   va_list args;
 
   va_start(args, fmt);
@@ -956,7 +1001,7 @@ void ascii_putf(int x, int y, color fg, color bg, const wchar_t *fmt, ...)
 
 void ascii_putf(int x, int y, const std::wstring fmt, ...)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   va_list args;
 
   va_start(args, fmt);
@@ -966,7 +1011,7 @@ void ascii_putf(int x, int y, const std::wstring fmt, ...)
 
 void ascii_putf(int x, int y, color fg, const std::wstring fmt, ...)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   va_list args;
 
   va_start(args, fmt);
@@ -976,7 +1021,7 @@ void ascii_putf(int x, int y, color fg, const std::wstring fmt, ...)
 
 void ascii_putf(int x, int y, color fg, color bg, const std::wstring fmt, ...)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   va_list args;
 
   va_start(args, fmt);
@@ -987,7 +1032,7 @@ void ascii_putf(int x, int y, color fg, color bg, const std::wstring fmt, ...)
 #ifdef ENABLE_UI_ASCII_MOUSE
 static void ascii_display_mouse(point mouse_tile_tl, point mouse_tile_br, point mouse_at)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   glcolor(GREEN);
 
   blit_init();
@@ -1003,7 +1048,7 @@ static void ascii_display_mouse(point mouse_tile_tl, point mouse_tile_br, point 
 
 void ascii_put_bg_square(int tlx, int tly, int brx, int bry, Tilep tile, color c)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   int x;
   int y;
 
@@ -1017,26 +1062,26 @@ void ascii_put_bg_square(int tlx, int tly, int brx, int bry, Tilep tile, color c
 
 void ascii_put_bg_square(int tlx, int tly, int brx, int bry, const char *tilename, color c)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   ascii_put_bg_square(tlx, tly, brx, bry, tile_find(tilename), c);
 }
 
 void ascii_put_bg_square(int tlx, int tly, int brx, int bry, wchar_t what, color c)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   ascii_put_bg_square(tlx, tly, brx, bry, font_large->unicode_to_tile(what), c);
 }
 
 static void ascii_map_thing_replace(int x, int y, Tilep tile, color c)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   ascii_set_bg(x, y, tile);
   ascii_set_bg(x, y, c);
 }
 
 static void do_ascii_line(int x0_in, int y0_in, int x1_in, int y1_in, int flag, Tilep tile, color c)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   float temp;
   float dx;
   float dy;
@@ -1106,7 +1151,7 @@ static void do_ascii_line(int x0_in, int y0_in, int x1_in, int y1_in, int flag, 
 
 void ascii_draw_line(int x0, int y0, int x1, int y1, Tilep tile, color c)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   float slope = 100.0;
 
   if (x0 != x1) {
@@ -1126,13 +1171,13 @@ void ascii_draw_line(int x0, int y0, int x1, int y1, Tilep tile, color c)
 
 void ascii_draw_line(int x0, int y0, int x1, int y1, wchar_t what, color c)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   ascii_draw_line(x0, y0, x1, y1, font_large->unicode_to_tile(what), c);
 }
 
 void ascii_draw_line(int x0, int y0, int x1, int y1, const char *tilename, color c)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   ascii_draw_line(x0, y0, x1, y1, tile_find(tilename), c);
 }
 
@@ -1141,7 +1186,7 @@ void ascii_draw_line(int x0, int y0, int x1, int y1, const char *tilename, color
 //
 static void ascii_blit(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   //
   // Get the mouse position to use. We use this to find the mouse tile that
   // we are over.
@@ -1321,7 +1366,7 @@ static void ascii_blit(void)
 //
 void ascii_display(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   mouse_found = false;
 
   gl_enter_2d_mode(game->config.ui_pix_width, game->config.ui_pix_height);
@@ -1338,7 +1383,7 @@ void ascii_display(void)
 
 void ascii_clear_display(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   for (auto y = 0; y < TERM_HEIGHT; y++) {
     for (auto x = 0; x < TERM_WIDTH; x++) {
       cells[ x ][ y ] = {};

@@ -209,6 +209,7 @@ std::initializer_list< std::string > tps = {
     "pillar1",
     "pink_splatter",
     "player1",
+    "player2",
     "pot_health",
     "pot_health_effect",
     "projectile_fire",

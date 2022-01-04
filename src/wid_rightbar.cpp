@@ -281,8 +281,9 @@ static bool wid_rightbar_create(void)
     point br = make_point(UI_SIDEBAR_RIGHT_WIDTH, y_at - 2);
 
     wid_set_pos(w, tl, br);
-    auto g = dynprintf("%%fg=gray$%06d %%fg=white$$%%fg=gray$%03d %%fg=yellow$%%tile=key_icon$%%fg=gray$%d",
-                       player->get_score(), player->get_gold(), player->get_keys());
+    auto g = dynprintf(
+        "%%fg=gray$%06d %%fg=white$%%tile=dollar_icon$%%fg=gray$%03d %%fg=yellow$%%tile=key_icon$%%fg=gray$%d",
+        player->get_score(), player->get_gold(), player->get_keys());
     wid_set_text(w, g);
     wid_set_text_lhs(w, true);
     wid_set_shape_none(w);
