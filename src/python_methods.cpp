@@ -576,6 +576,8 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_FUNCTION(thing_hunger_is_insatiable),
     MY_ADD_PYTHON_FUNCTION(thing_incr_charge_count),
     MY_ADD_PYTHON_FUNCTION(thing_incr_stat_con),
+    MY_ADD_PYTHON_FUNCTION(thing_incr_stat_def),
+    MY_ADD_PYTHON_FUNCTION(thing_incr_stat_str),
     MY_ADD_PYTHON_FUNCTION(thing_incr_current_damage),
     MY_ADD_PYTHON_FUNCTION(thing_incr_enchant),
     MY_ADD_PYTHON_FUNCTION(thing_incr_enchant_max),

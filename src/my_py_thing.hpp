@@ -112,6 +112,8 @@ PyObject *thing_hunger_clock_tick_frequency(PyObject *obj, PyObject *args, PyObj
 PyObject *thing_hunger_is_insatiable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_incr_charge_count(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_incr_stat_con(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_incr_stat_def(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_incr_stat_str(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_incr_current_damage(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_incr_enchant_max(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_incr_enchant(PyObject *obj, PyObject *args, PyObject *keywds);
