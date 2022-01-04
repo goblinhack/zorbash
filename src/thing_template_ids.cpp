@@ -20,12 +20,14 @@
 // to be in this list
 //
 std::initializer_list< std::string > tps = {
-    "",
+    "", // ID 0 means unused
     "acid1",
     "ai_path1",
     "ai_path2",
     "armor_fish_scale",
     "armor_fish_scale_carry",
+    "armor_lather",
+    "armor_lather_carry",
     "armor_lathered",
     "armor_lathered_carry",
     "armor_leather",
@@ -206,7 +208,7 @@ std::initializer_list< std::string > tps = {
     "mummy",
     "pillar1",
     "pink_splatter",
-    "player2",
+    "player1",
     "pot_health",
     "pot_health_effect",
     "projectile_fire",
@@ -222,8 +224,12 @@ std::initializer_list< std::string > tps = {
     "scythe_carry",
     "scythe_swing",
     "sewer_wall",
+    "shield_wooden",
+    "shield_wooden_carry",
     "shield_wooden_scale",
     "shield_wooden_scale_carry",
+    "shield_woodon",
+    "shield_woodon_carry",
     "shield_woodon_scale",
     "shield_woodon_scale_carry",
     "skeleton",

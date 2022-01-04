@@ -151,7 +151,7 @@ static uint8_t wid_keyboard_text_input_key_event(Widp w, const SDL_Keysym *key);
 static void wid_keyboard_update_buttons(Widp w)
 {
   wid_keyboard_ctx *ctx = (wid_keyboard_ctx *) wid_get_void_context(w);
-  verify(MTYPE_WID, ctx);
+  verify(MTYPE_MISC, ctx);
 
   int width  = 7;
   int height = 5;
@@ -200,7 +200,7 @@ static void wid_keyboard_update_buttons(Widp w)
 static void wid_keyboard_event(Widp w, int focusx, int focusy, const SDL_Keysym *key)
 {
   wid_keyboard_ctx *ctx = (wid_keyboard_ctx *) wid_get_void_context(w);
-  verify(MTYPE_WID, ctx);
+  verify(MTYPE_MISC, ctx);
 
   const char *add;
   if ((focusx == -1) && (focusy == -1)) {
@@ -348,7 +348,7 @@ static void wid_keyboard_set_focus(wid_keyboard_ctx *ctx, int focusx, int focusy
 static uint8_t wid_keyboard_parent_key_down(Widp w, const SDL_Keysym *key)
 {
   wid_keyboard_ctx *ctx = (wid_keyboard_ctx *) wid_get_void_context(w);
-  verify(MTYPE_WID, ctx);
+  verify(MTYPE_MISC, ctx);
 
   /*
    * Don't process events too soon. Else the menu might not even have
@@ -390,7 +390,7 @@ static uint8_t wid_keyboard_parent_key_down(Widp w, const SDL_Keysym *key)
 static uint8_t wid_keyboard_parent_joy_button(Widp w, int32_t x, int32_t y)
 {
   wid_keyboard_ctx *ctx = (wid_keyboard_ctx *) wid_get_void_context(w);
-  verify(MTYPE_WID, ctx);
+  verify(MTYPE_MISC, ctx);
   int ret = false;
 
   /*
@@ -471,7 +471,7 @@ static uint8_t wid_keyboard_parent_joy_button(Widp w, int32_t x, int32_t y)
 static uint8_t wid_keyboard_button_key_event(Widp w, const SDL_Keysym *key)
 {
   wid_keyboard_ctx *ctx = (wid_keyboard_ctx *) wid_get_void_context(w);
-  verify(MTYPE_WID, ctx);
+  verify(MTYPE_MISC, ctx);
 
   /*
    * Don't process events too soon. Else the menu might not even have
@@ -506,7 +506,7 @@ static uint8_t wid_keyboard_button_key_event(Widp w, const SDL_Keysym *key)
 static uint8_t wid_keyboard_button_joy_button_event(Widp w, int32_t x, int32_t y)
 {
   wid_keyboard_ctx *ctx = (wid_keyboard_ctx *) wid_get_void_context(w);
-  verify(MTYPE_WID, ctx);
+  verify(MTYPE_MISC, ctx);
   int ret = false;
 
   /*
@@ -591,7 +591,7 @@ static uint8_t wid_keyboard_button_joy_button_event(Widp w, int32_t x, int32_t y
 static uint8_t wid_keyboard_text_input_key_event(Widp w, const SDL_Keysym *key)
 {
   wid_keyboard_ctx *ctx = (wid_keyboard_ctx *) wid_get_void_context(w);
-  verify(MTYPE_WID, ctx);
+  verify(MTYPE_MISC, ctx);
 
   /*
    * Don't process events too soon. Else the menu might not even have
@@ -624,7 +624,7 @@ static uint8_t wid_keyboard_text_input_key_event(Widp w, const SDL_Keysym *key)
 static void wid_keyboard_mouse_over(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {
   wid_keyboard_ctx *ctx = (wid_keyboard_ctx *) wid_get_void_context(w);
-  verify(MTYPE_WID, ctx);
+  verify(MTYPE_MISC, ctx);
 
   if (! relx && ! rely && ! wheelx && ! wheely) {
     return;
@@ -649,7 +649,7 @@ static void wid_keyboard_mouse_over(Widp w, int32_t relx, int32_t rely, int32_t 
 static void wid_keyboard_destroy(Widp w)
 {
   wid_keyboard_ctx *ctx = (wid_keyboard_ctx *) wid_get_void_context(w);
-  verify(MTYPE_WID, ctx);
+  verify(MTYPE_MISC, ctx);
 
   wid_set_void_context(w, 0);
   delete ctx;
@@ -660,7 +660,7 @@ static void wid_keyboard_destroy(Widp w)
 static void wid_keyboard_tick(Widp w)
 {
   wid_keyboard_ctx *ctx = (wid_keyboard_ctx *) wid_get_void_context(w);
-  verify(MTYPE_WID, ctx);
+  verify(MTYPE_MISC, ctx);
 
   static int val;
   static int delta = 1;
@@ -710,7 +710,7 @@ static void wid_keyboard_tick(Widp w)
 static void wid_keyboard_destroy_begin(Widp w)
 {
   wid_keyboard_ctx *ctx = (wid_keyboard_ctx *) wid_get_void_context(w);
-  verify(MTYPE_WID, ctx);
+  verify(MTYPE_MISC, ctx);
 
   /*
    * Zoom buttons in
