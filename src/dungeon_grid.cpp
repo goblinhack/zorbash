@@ -15,7 +15,7 @@
 #include "my_sys.hpp"
 #include <list>
 
-static bool debug_enabled = true;
+static bool debug_enabled = false;
 
 /*
  * Start with a grid of nodes and a start point.

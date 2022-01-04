@@ -378,48 +378,80 @@ void wid_set_pos_pct(Widp w, fpoint tl, fpoint br)
 void wid_set_int_context(Widp w, int int_context)
 {
   TRACE_AND_INDENT();
+  if (! w) {
+    ERR("NULL pointer");
+    return;
+  }
   w->int_context = int_context;
 }
 
 int wid_get_int_context(Widp w)
 {
   TRACE_AND_INDENT();
+  if (! w) {
+    ERR("NULL pointer");
+    return 0;
+  }
   return (w->int_context);
 }
 
 void wid_set_void_context(Widp w, void *void_context)
 {
   TRACE_AND_INDENT();
+  if (! w) {
+    ERR("NULL pointer");
+    return;
+  }
   w->void_context = void_context;
 }
 
 void *wid_get_void_context(Widp w)
 {
   TRACE_AND_INDENT();
+  if (! w) {
+    ERR("NULL pointer");
+    return nullptr;
+  }
   return (w->void_context);
 }
 
 void wid_set_thing_id_context(Widp w, ThingId thing_id_context)
 {
   TRACE_AND_INDENT();
+  if (! w) {
+    ERR("NULL pointer");
+    return;
+  }
   w->thing_id_context = thing_id_context;
 }
 
 ThingId wid_get_thing_id_context(Widp w)
 {
   TRACE_AND_INDENT();
+  if (! w) {
+    ERR("NULL pointer");
+    return NoThingId;
+  }
   return (w->thing_id_context);
 }
 
 void wid_set_thing_id2_context(Widp w, ThingId thing_id_context)
 {
   TRACE_AND_INDENT();
+  if (! w) {
+    ERR("NULL pointer");
+    return;
+  }
   w->thing_id2_context = thing_id_context;
 }
 
 ThingId wid_get_thing_id2_context(Widp w)
 {
   TRACE_AND_INDENT();
+  if (! w) {
+    ERR("NULL pointer");
+    return NoThingId;
+  }
   return (w->thing_id2_context);
 }
 

@@ -3,7 +3,9 @@
 // See the README.md file for license info.
 //
 
+#include "game_levels_grid.hpp"
 #include "my_array_bounds_check.hpp"
+#include "my_dungeon_grid.hpp"
 #include "my_game.hpp"
 #include "my_globals.hpp"
 #include "my_level.hpp"
@@ -61,8 +63,9 @@ void Game::init_levels(void)
   TRACE_AND_INDENT();
 
 #if 0
-  auto nodes = new Nodes(10, 10, false /* not a dungeon */);
-  DIE("x");
+  game_levels_grid_init();
+  // DIE("x");
+  return;
 #endif
 
   //

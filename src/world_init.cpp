@@ -30,7 +30,6 @@ Levelp World::new_level_at(point3d at, int seed)
   TRACE_AND_INDENT();
   auto old_level = get(levels, at.x, at.y, at.z);
   delete old_level;
-  std::array< std::array< Roomp, DUNGEON_GRID_CHUNK_HEIGHT >, DUNGEON_GRID_CHUNK_WIDTH > node_rooms {};
 
   auto new_level = new Level();
   set(levels, at.x, at.y, at.z, new_level);
