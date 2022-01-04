@@ -60,6 +60,11 @@ void Game::init_levels(void)
   LOG("Game init levels");
   TRACE_AND_INDENT();
 
+#if 0
+  auto nodes = new Nodes(10, 10, false /* not a dungeon */);
+  DIE("x");
+#endif
+
   //
   // Increase this to create more levels in advance
   //

@@ -23,7 +23,7 @@ bool Level::create_dungeon(point3d at, int seed)
 
   while (true) {
     log("DGN: Create dungeon");
-    auto dungeon = new Dungeon(MAP_WIDTH, MAP_HEIGHT, MAP_GRID_WIDTH, MAP_GRID_HEIGHT, seed);
+    auto dungeon = new Dungeon(MAP_WIDTH, MAP_HEIGHT, DUNGEON_GRID_CHUNK_WIDTH, DUNGEON_GRID_CHUNK_HEIGHT, seed);
     if (dungeon->failed) {
       log("DGN: create dungeon, failed, retry");
       seed++;

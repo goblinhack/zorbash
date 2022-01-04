@@ -21,7 +21,7 @@
 class Grid
 {
 public:
-  std::array< std::array< Roomp, MAP_GRID_HEIGHT >, MAP_GRID_WIDTH > node_rooms {};
+  std::array< std::array< Roomp, DUNGEON_GRID_CHUNK_HEIGHT >, DUNGEON_GRID_CHUNK_WIDTH > node_rooms {};
 };
 
 typedef class Dungeon *Dungeonp;

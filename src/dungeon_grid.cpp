@@ -15,7 +15,7 @@
 #include "my_sys.hpp"
 #include <list>
 
-static bool debug_enabled = false;
+static bool debug_enabled = true;
 
 /*
  * Start with a grid of nodes and a start point.
@@ -178,6 +178,13 @@ redo:
     goto redo;
   }
 
+  if (! is_dungeon) {
+    if (max_depth != 8) {
+      debug("redo, not enough depth challenges");
+      goto redo;
+    }
+  }
+
   if (max_vdepth < grid_height - 2) {
     debug("redo, not enough vertical depth challenges");
     goto redo;
@@ -193,32 +200,36 @@ redo:
   remove_stubs();
   debug("removed stubs");
 
-  for (auto join = 1; join < depth - 2; join++) {
-    join_depth_secret(join, pass);
+  if (is_dungeon) {
+    for (auto join = 1; join < depth - 2; join++) {
+      join_depth_secret(join, pass);
+    }
+    debug("done first pass of rooms and joined secret rooms");
   }
-  debug("done first pass of rooms and joined secret rooms");
 
   //
   // Now place secret rooms and join them to the main
   // depth via secret doors
   //
-  pass              = 2;
-  auto secret_depth = 1;
-  while (secret_depth < 10) {
-    auto placed = snake_walk(secret_depth, 10, pass);
+  pass = 2;
+  if (is_dungeon) {
+    auto secret_depth = 1;
+    while (secret_depth < 10) {
+      auto placed = snake_walk(secret_depth, 10, pass);
 
-    if (debug_enabled) {
-      LOG("Node-grid: Level depth %d placed %d secret nodes", secret_depth, placed);
+      if (debug_enabled) {
+        LOG("Node-grid: Level depth %d placed %d secret nodes", secret_depth, placed);
+      }
+
+      if (! placed) {
+        break;
+      }
+
+      join_nodes_of_same_depth(secret_depth, pass);
+      secret_depth++;
     }
-
-    if (! placed) {
-      break;
-    }
-
-    join_nodes_of_same_depth(secret_depth, pass);
-    secret_depth++;
+    debug("done snake walk of secret rooms");
   }
-  debug("done snake walk of secret rooms");
 
   for (auto join = 1; join < depth; join++) {
     join_depth_to_next_depth(join, pass);
@@ -286,10 +297,12 @@ redo:
   //
   // Get rid of other paths that avoid the lock.
   //
-  for (auto depth = 2; depth <= max_depth; depth++) {
-    hide_other_locks(depth, 1);
+  if (is_dungeon) {
+    for (auto depth = 2; depth <= max_depth; depth++) {
+      hide_other_locks(depth, 1);
+    }
+    debug("hid other locks");
   }
-  debug("hid other locks");
 
   for (auto depth = 1; depth < max_depth; depth++) {
     if (! place_key(depth, 1)) {
@@ -321,8 +334,8 @@ void Nodes::dump(void)
 {
   const auto                             step   = 5;
   const auto                             center = 3;
-  const int                              h      = (MAP_GRID_HEIGHT + 1) * step;
-  const int                              w      = (MAP_GRID_WIDTH + 1) * step;
+  const int                              h      = (MAX_GRID_CHUNK_HEIGHT + 1) * step;
+  const int                              w      = (MAX_GRID_CHUNK_WIDTH + 1) * step;
   std::array< std::array< char, h >, w > out;
 
   for (auto y = 0; y < h; y++) {
@@ -742,6 +755,10 @@ void Nodes::init_nodes(void)
   }
 
   auto obstacles = ((grid_width * grid_height) / 6) * 4;
+
+  if (! is_dungeon) {
+    obstacles /= 4;
+  }
 
   while (obstacles--) {
     auto x = pcg_random_range(0, grid_width);
@@ -2001,7 +2018,7 @@ void Nodes::make_paths_off_critical_path_reachable(void)
   dmap_process(&d, dmap_start, dmap_end);
   // dmap_print_walls(&d);
 
-  std::array< std::array< bool, MAP_GRID_HEIGHT >, MAP_GRID_WIDTH > on_critical_path = {};
+  std::array< std::array< bool, MAX_GRID_CHUNK_HEIGHT >, MAX_GRID_CHUNK_WIDTH > on_critical_path = {};
 
   auto p = dmap_solve(&d, start);
   for (auto c : p) {
@@ -2159,7 +2176,7 @@ class Nodes *grid_test(void)
 {
   auto x = 1000;
   while (x--) {
-    /* auto d = */ new Nodes(MAP_GRID_WIDTH, MAP_GRID_HEIGHT);
+    /* auto d = */ new Nodes(MAX_GRID_CHUNK_WIDTH, MAX_GRID_CHUNK_HEIGHT, true);
 
     continue;
     //        return (d);

@@ -1448,15 +1448,15 @@ bool Dungeon::is_deep_water_no_check(const int x, const int y)
 
 void Dungeon::create_node_map(void)
 {
-  if (grid_width > MAP_GRID_WIDTH) {
-    ERR("Nodes width overflow. got %d, max %d", grid_width, MAP_GRID_WIDTH);
+  if (grid_width > DUNGEON_GRID_CHUNK_WIDTH) {
+    ERR("Nodes width overflow. got %d, max %d", grid_width, DUNGEON_GRID_CHUNK_WIDTH);
   }
 
-  if (grid_height > MAP_GRID_HEIGHT) {
-    ERR("Nodes height overflow. got %d, max %d", grid_height, MAP_GRID_HEIGHT);
+  if (grid_height > DUNGEON_GRID_CHUNK_HEIGHT) {
+    ERR("Nodes height overflow. got %d, max %d", grid_height, DUNGEON_GRID_CHUNK_HEIGHT);
   }
 
-  nodes = new Nodes(grid_width, grid_height);
+  nodes = new Nodes(grid_width, grid_height, true);
 }
 
 void Dungeon::dump(void)
@@ -4280,14 +4280,14 @@ Dungeonp dungeon_test(void)
     // smaller node numbers mean larger rooms
     //
     mysrand(x);
-    new Dungeon(MAP_WIDTH, MAP_HEIGHT, MAP_GRID_WIDTH, MAP_GRID_HEIGHT, x);
+    new Dungeon(MAP_WIDTH, MAP_HEIGHT, DUNGEON_GRID_CHUNK_WIDTH, DUNGEON_GRID_CHUNK_HEIGHT, x);
   }
 
   return nullptr;
 #else
   int x = 663;
   pcg_srand(x);
-  auto d = new Dungeon(MAP_WIDTH, MAP_HEIGHT, MAP_GRID_WIDTH, MAP_GRID_HEIGHT, x);
+  auto d = new Dungeon(MAP_WIDTH, MAP_HEIGHT, DUNGEON_GRID_CHUNK_WIDTH, DUNGEON_GRID_CHUNK_HEIGHT, x);
 
   return (d);
 #endif

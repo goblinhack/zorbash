@@ -99,17 +99,28 @@ class Nodes
 {
 public:
   std::vector< DungeonNode > nodes;
-  int                        grid_width {5};
-  int                        grid_height {5};
-  int                        max_depth {0};
-  int                        max_vdepth {0};
+
+  //
+  // We build either a single or all dungeons
+  //
+  int grid_width {5};
+  int grid_height {5};
+
+  bool is_dungeon {};
+
+  int max_depth {0};
+  int max_vdepth {0};
 
   //
   // Water, rocks etc...
   //
   int depth_obstacle {-1};
 
-  Nodes(int grid_width, int grid_height) : grid_width(grid_width), grid_height(grid_height) { finish_constructor(); }
+  Nodes(int grid_width, int grid_height, bool is_dungeon)
+      : grid_width(grid_width), grid_height(grid_height), is_dungeon(is_dungeon)
+  {
+    finish_constructor();
+  }
 
   Nodes() { finish_constructor(); }
 
