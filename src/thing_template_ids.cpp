@@ -3,7 +3,6 @@
 // See the README.md file for license info.
 //
 
-#include "my_array_bounds_check.hpp"
 #include "my_dice.hpp"
 #include "my_level.hpp"
 #include "my_ptrcheck.hpp"
@@ -11,7 +10,6 @@
 #include "my_sys.hpp"
 #include "my_thing_template.hpp"
 #include "my_tile.hpp"
-#include "my_vector_bounds_check.hpp"
 
 //
 // Templates can be assigned dynamic IDs - however the levels are more reproducable it

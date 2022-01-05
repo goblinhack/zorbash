@@ -3,7 +3,6 @@
 // See the README.md file for license info.
 //
 
-#include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
 #include "my_monst.hpp"
 #include "my_ptrcheck.hpp"
@@ -11,7 +10,6 @@
 #include "my_sys.hpp"
 #include "my_thing.hpp"
 #include "my_ui.hpp"
-#include "my_vector_bounds_check.hpp"
 #include "my_wid_buffbox.hpp"
 
 bool Thing::buff_find_is_slippery(void)

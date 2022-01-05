@@ -16,7 +16,6 @@
 #include "my_thing.hpp"
 #include "my_thing_ai.hpp"
 #include "my_thing_template.hpp"
-#include "my_vector_bounds_check.hpp"
 #include "my_wid_actionbar.hpp"
 #include "my_wid_inventory.hpp"
 #include "my_wid_popup.hpp"

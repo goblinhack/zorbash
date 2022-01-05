@@ -3,7 +3,6 @@
 // See the README.md file for license info.
 //
 
-#include "my_array_bounds_check.hpp"
 #include "my_globals.hpp"
 #include "my_log.hpp"
 #include "my_ptrcheck.hpp"

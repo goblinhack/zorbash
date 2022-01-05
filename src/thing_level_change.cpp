@@ -3,7 +3,6 @@
 // See the README.md file for license info.
 //
 
-#include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
 #include "my_gl.hpp"
 #include "my_light.hpp"

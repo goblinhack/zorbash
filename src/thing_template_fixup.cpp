@@ -3,7 +3,6 @@
 // See the README.md file for license info.
 //
 
-#include "my_array_bounds_check.hpp"
 #include "my_dice.hpp"
 #include "my_game.hpp"
 #include "my_random.hpp"
@@ -12,7 +11,6 @@
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"
 #include "my_tile.hpp"
-#include "my_vector_bounds_check.hpp"
 
 void tp_fixup(void)
 {
