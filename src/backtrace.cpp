@@ -17,6 +17,7 @@
 
 #include "my_backtrace.hpp"
 #include "my_globals.hpp"
+#include "my_globals_extra.hpp"
 #include "my_main.hpp"
 #include "my_sprintf.hpp"
 #include "my_sys.hpp"

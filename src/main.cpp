@@ -22,6 +22,7 @@ std::default_random_engine rng;
 #include "my_gfx.hpp"
 #include "my_gl.hpp"
 #include "my_globals.hpp"
+#include "my_globals_extra.hpp"
 #include "my_level_static.hpp"
 #include "my_main.hpp"
 #include "my_music.hpp"

@@ -4,6 +4,8 @@
 //
 
 #pragma once
+#include <vector>
+
 //
 // Create a vector of numbers
 //

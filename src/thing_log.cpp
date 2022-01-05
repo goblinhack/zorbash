@@ -6,6 +6,7 @@
 #include "my_backtrace.hpp"
 #include "my_console.hpp"
 #include "my_game.hpp"
+#include "my_globals_extra.hpp"
 #include "my_log.hpp"
 #include "my_main.hpp"
 #include "my_ptrcheck.hpp"

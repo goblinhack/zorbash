@@ -4,6 +4,7 @@
 //
 
 #include "my_globals.hpp"
+#include "my_globals_extra.hpp"
 
 class Game *game;
 
@@ -45,4 +46,4 @@ std::string g_opt_player_name;
 int TILES_ACROSS;
 int TILES_DOWN;
 
-uint16_t g_last_logged_callframes_depth;
+int g_last_logged_callframes_depth;

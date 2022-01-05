@@ -4,6 +4,7 @@
 /* NetHack may be freely redistributed.  See license for details. */
 
 #include "my_sys.hpp"
+#include <time.h>
 
 static struct tm *getlt(void)
 {

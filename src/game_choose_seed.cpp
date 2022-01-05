@@ -5,6 +5,7 @@
 
 #include "my_game.hpp"
 #include "my_globals.hpp"
+#include "my_globals_extra.hpp"
 #include "my_sdl.hpp"
 #include "my_string.hpp"
 #include "my_sys.hpp"

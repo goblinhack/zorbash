@@ -8,6 +8,7 @@
 #include "my_ptrcheck.hpp"
 #include "my_sys.hpp"
 #include "my_thing.hpp"
+#include <cinttypes> // PRIX32
 
 void Level::put_thing(int x, int y, ThingId id, int group)
 {

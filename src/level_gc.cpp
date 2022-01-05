@@ -12,6 +12,7 @@
 #include "my_sprintf.hpp"
 #include "my_sys.hpp"
 #include "my_thing.hpp"
+#include <cinttypes> // PRIX32
 
 void Level::things_gc(bool force)
 {

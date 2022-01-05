@@ -9,6 +9,7 @@
 #include "my_file.hpp"
 #include "my_game.hpp"
 #include "my_game_error.hpp"
+#include "my_globals_extra.hpp"
 #include "my_monst.hpp"
 #include "my_sdl.hpp"
 #include "my_sprintf.hpp"

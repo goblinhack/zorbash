@@ -7,7 +7,6 @@
 #ifndef _MY_SYS_HPP_
 #define _MY_SYS_HPP_
 
-#include <cinttypes> // PRIX32
 #include <stdint.h>
 
 #if __GNUC__ >= 8

@@ -3,10 +3,11 @@
 // See the README.md file for license info.
 //
 
+#include "my_backtrace.hpp"
 #include "my_game.hpp"
 #include "my_globals.hpp"
+#include "my_globals_extra.hpp"
 #include "my_sys.hpp"
-#include "my_backtrace.hpp"
 #include <signal.h>  // dirname
 #include <string.h>  // do not remove
 #include <strings.h> // do not remove

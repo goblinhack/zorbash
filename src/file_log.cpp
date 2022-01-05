@@ -5,6 +5,7 @@
 
 #include "my_file.hpp"
 #include "my_globals.hpp"
+#include "my_globals_extra.hpp"
 #include "my_log.hpp"
 #include "my_string.hpp"
 #include "my_sys.hpp"

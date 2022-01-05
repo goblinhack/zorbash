@@ -3,17 +3,15 @@
 // See the README.md file for license info.
 //
 
-#include "my_py_level.hpp"
-#include "my_py_thing.hpp"
-#include "my_py_tp.hpp"
-#include <frameobject.h>
-#include <map>
-
 #include "my_callstack.hpp"
+#include "my_globals_extra.hpp"
 #include "my_main.hpp"
 #include "my_monst.hpp"
 #include "my_ptrcheck.hpp"
+#include "my_py_level.hpp"
 #include "my_py_sdl.hpp"
+#include "my_py_thing.hpp"
+#include "my_py_tp.hpp"
 #include "my_python.hpp"
 #include "my_random.hpp"
 #include "my_sdl.hpp"
@@ -21,6 +19,8 @@
 #include "my_string.hpp"
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"
+#include <frameobject.h>
+#include <map>
 
 PyObject *con_(PyObject *obj, PyObject *args, PyObject *keywds)
 {

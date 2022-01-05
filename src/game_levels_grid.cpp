@@ -9,6 +9,7 @@
 #include "my_color.hpp"
 #include "my_dungeon_grid.hpp"
 #include "my_game.hpp"
+#include "my_globals_extra.hpp"
 #include "my_main.hpp"
 #include "my_math.hpp"
 #include "my_ptrcheck.hpp"

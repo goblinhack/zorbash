@@ -8,6 +8,7 @@
 #include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
 #include "my_gl.hpp"
+#include "my_globals_extra.hpp"
 #include "my_monst.hpp"
 #include "my_sdl.hpp"
 #include "my_string.hpp"

@@ -5,6 +5,7 @@
 
 #include "my_array_bounds_check.hpp"
 #include "my_gl.hpp"
+#include "my_globals_extra.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_sys.hpp"
 #include "my_tex.hpp"

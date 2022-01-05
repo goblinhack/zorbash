@@ -7,13 +7,6 @@
 #ifndef _MY_GLOBALS_HPP_
 #define _MY_GLOBALS_HPP_
 
-#include <map>
-#include <string>
-#include <vector> // linux
-
-extern std::map< std::string, class Tile * > all_tiles;
-extern std::vector< class Tile * >           all_tiles_array;
-
 extern char *DATA_PATH;
 extern char *EXEC_DIR;
 extern char *EXEC_FULL_PATH_AND_NAME;
@@ -21,9 +14,6 @@ extern char *EXEC_PYTHONPATH;
 extern char *GFX_PATH;
 extern char *TTF_PATH;
 extern char *WORLD_PATH;
-
-extern FILE *g_log_stdout;
-extern FILE *g_log_stderr;
 
 extern bool g_die_occurred;             // Fatal error has occurred
 extern bool g_do_screenshot;            // Grab a screen shot next fram
@@ -38,9 +28,6 @@ extern bool g_opt_new_game;             // Start in the game imediately
 extern bool g_opt_resume;               // Load last snapshot
 extern bool g_quitting;                 // Exitting the game
 extern bool g_render_black_and_white;   // Rendering map in black and white
-
-extern std::string g_opt_seed_name;
-extern std::string g_opt_player_name;
 
 // --debug  Basic debug
 // --debug2 Map is visible and memory checks enabled
@@ -130,7 +117,7 @@ extern int TILES_DOWN;
 //
 // Used to fill in gaps in log depth
 //
-extern uint16_t g_last_logged_callframes_depth;
+extern int g_last_logged_callframes_depth;
 
 #define MY_STDERR (g_log_stderr ? g_log_stderr : stderr)
 #define MY_STDOUT (g_log_stdout ? g_log_stdout : stdout)

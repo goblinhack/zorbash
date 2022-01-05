@@ -5,6 +5,7 @@
 
 #include "my_file.hpp"
 #include "my_globals.hpp"
+#include "my_globals_extra.hpp"
 #include "my_main.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_ramdisk.hpp"

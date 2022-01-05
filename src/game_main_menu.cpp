@@ -6,6 +6,7 @@
 #include "my_game.hpp"
 #include "my_gl.hpp"
 #include "my_globals.hpp"
+#include "my_globals_extra.hpp"
 #include "my_music.hpp"
 #include "my_random.hpp"
 #include "my_sdl.hpp"
