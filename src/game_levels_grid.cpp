@@ -82,6 +82,44 @@ static void game_levels_grid_set_focus(game_levels_grid_ctx *ctx, int focusx, in
 #define ROOM_WIDTH_CHARS  6
 #define ROOM_HEIGHT_CHARS 6
 
+static void game_levels_grid_update_button(game_levels_grid_ctx *ctx, Widp b, int x, int y)
+{
+  if (! b) {
+    return;
+  }
+
+  int width  = ROOM_WIDTH_CHARS - 1;
+  int height = ROOM_HEIGHT_CHARS - 1;
+
+  point tl;
+  point br;
+  color c;
+
+  tl.x = x * (width + 1);
+  tl.y = y * (height + 1);
+
+  br.x = tl.x;
+  br.y = tl.y;
+  br.x += width - 1;
+  br.y += height - 1;
+
+  if ((x == ctx->focusx) && (y == ctx->focusy)) {
+    c      = GREEN;
+    ctx->b = b;
+    wid_raise(b);
+  } else {
+    wid_lower(b);
+
+    c = GRAY70;
+  }
+
+  if (ctx->is_new) {
+    wid_set_pos(b, tl, br);
+  }
+
+  wid_set_color(b, WID_COLOR_TEXT_FG, c);
+}
+
 static void game_levels_grid_update_buttons(Widp w)
 {
   TRACE_NO_INDENT();
@@ -94,48 +132,17 @@ static void game_levels_grid_update_buttons(Widp w)
 
   verify(MTYPE_WID, ctx);
 
-  int width  = ROOM_WIDTH_CHARS - 1;
-  int height = ROOM_HEIGHT_CHARS - 1;
-
   int x, y;
 
   ctx->b = 0;
 
   for (x = 0; x < DUNGEONS_GRID_CHUNK_WIDTH; x++) {
     for (y = 0; y < DUNGEONS_GRID_CHUNK_HEIGHT; y++) {
-
       Widp b = ctx->buttons[ y ][ x ];
       if (! b) {
         continue;
       }
-
-      point tl;
-      point br;
-      color c;
-
-      tl.x = x * (width + 1);
-      tl.y = y * (height + 1);
-
-      br.x = tl.x;
-      br.y = tl.y;
-      br.x += width - 1;
-      br.y += height - 1;
-
-      if ((x == ctx->focusx) && (y == ctx->focusy)) {
-        c      = GREEN;
-        ctx->b = b;
-        wid_raise(b);
-      } else {
-        wid_lower(b);
-
-        c = GRAY70;
-      }
-
-      if (ctx->is_new) {
-        wid_set_pos(b, tl, br);
-      }
-
-      wid_set_color(b, WID_COLOR_TEXT_FG, c);
+      game_levels_grid_update_button(ctx, b, x, y);
     }
   }
   wid_update(w);
@@ -431,6 +438,12 @@ void game_levels_grid_init(void)
     wid_set_pos(button_container, tl, br);
     wid_set_void_context(button_container, ctx);
 
+    int32_t ptl_x;
+    int32_t ptl_y;
+    int32_t pbr_x;
+    int32_t pbr_y;
+    wid_get_tl_x_tl_y_br_x_br_y(button_container, &ptl_x, &ptl_y, &pbr_x, &pbr_y);
+
     /*
      * Create the buttons
      */
@@ -468,12 +481,12 @@ void game_levels_grid_init(void)
           text += "*";
         }
 
-        Widp b = wid_new_square_button(button_container, "wid level grid button");
-
+        //
+        // Create a button describing the level
+        //
+        Widp b                 = wid_new_square_button(button_container, "wid level grid button");
         ctx->buttons[ y ][ x ] = b;
-
         wid_set_text(b, text);
-
         wid_set_on_mouse_over_begin(b, game_levels_grid_mouse_over);
         wid_set_on_mouse_down(b, game_levels_grid_button_mouse_event);
         wid_set_style(b, UI_WID_STYLE_DARK);
@@ -481,10 +494,85 @@ void game_levels_grid_init(void)
         wid_set_mode(b, WID_MODE_OVER);
         wid_set_color(b, WID_COLOR_TEXT_FG, GREEN);
         wid_set_mode(b, WID_MODE_NORMAL);
-
         wid_set_void_context(b, ctx);
         int focus = (y << 8) | x;
         wid_set_int_context(b, focus);
+
+        game_levels_grid_update_button(ctx, b, x, y);
+
+        int32_t tl_x;
+        int32_t tl_y;
+        int32_t br_x;
+        int32_t br_y;
+        wid_get_tl_x_tl_y_br_x_br_y(b, &tl_x, &tl_y, &br_x, &br_y);
+        tl_x -= ptl_x;
+        tl_y -= ptl_y;
+        br_x -= pbr_x;
+        br_y -= pbr_y;
+
+        tl_y--;
+
+        //
+        // Create connectors between levels
+        //
+        if (node->has_door_down) {
+          Widp  b = wid_new_square_button(button_container, "wid level grid connector");
+          point tl(tl_x, tl_y);
+          point br(br_x, br_y);
+
+          tl.x += (ROOM_WIDTH_CHARS / 2) - 1;
+          br.x = tl.x;
+          tl.y += ROOM_HEIGHT_CHARS;
+          br.y = tl.y;
+
+          wid_set_pos(b, tl, br);
+          wid_set_text(b, "v");
+          wid_set_style(b, UI_WID_STYLE_DARK);
+        }
+
+        if (node->has_door_left) {
+          Widp  b = wid_new_square_button(button_container, "wid level grid connector");
+          point tl(tl_x, tl_y);
+          point br(br_x, br_y);
+
+          tl.x--;
+          br.x = tl.x;
+          tl.y += (ROOM_HEIGHT_CHARS / 2);
+          br.y = tl.y;
+
+          wid_set_pos(b, tl, br);
+          wid_set_text(b, "<");
+          wid_set_style(b, UI_WID_STYLE_DARK);
+        }
+
+        if (node->has_door_right) {
+          Widp  b = wid_new_square_button(button_container, "wid level grid connector");
+          point tl(tl_x, tl_y);
+          point br(br_x, br_y);
+
+          tl.x += ROOM_WIDTH_CHARS - 1;
+          br.x = tl.x;
+          tl.y += (ROOM_HEIGHT_CHARS / 2);
+          br.y = tl.y;
+
+          wid_set_pos(b, tl, br);
+          wid_set_text(b, ">");
+          wid_set_style(b, UI_WID_STYLE_DARK);
+        }
+
+        if (node->has_door_up) {
+          Widp  b = wid_new_square_button(button_container, "wid level grid connector");
+          point tl(tl_x, tl_y);
+          point br(br_x, br_y);
+
+          tl.x += (ROOM_WIDTH_CHARS / 2) - 1;
+          br.x = tl.x;
+          br.y = tl.y;
+
+          wid_set_pos(b, tl, br);
+          wid_set_text(b, "^");
+          wid_set_style(b, UI_WID_STYLE_DARK);
+        }
       }
     }
   }
