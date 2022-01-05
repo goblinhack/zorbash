@@ -148,7 +148,7 @@ void tp_random_init(void)
     if (tp->is_key()) {
       tp_key.push_back(tp);
     }
-    if (tp->is_mob()) {
+    if (tp->is_mob_spawner()) {
       tp_mob.push_back(tp);
     }
     if (tp->is_potion()) {

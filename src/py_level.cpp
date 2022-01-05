@@ -64,7 +64,7 @@ PyObject *level_add_(PyObject *obj, PyObject *args, PyObject *keywds)
         if (m.is_floor || m.is_bridge || m.is_corridor || m.is_secret_corridor || m.is_dirt) {
           floor_string += c;
         } else if (m.is_blood || m.is_deep_water || m.is_door || m.is_ascend_dungeon || m.is_descend_dungeon ||
-                   m.is_descend_sewer || m.is_floor_deco || m.is_food || m.is_mob_easy || m.is_mob_hard ||
+                   m.is_descend_sewer || m.is_floor_deco || m.is_food || m.is_mob_spawner_easy || m.is_mob_spawner_hard ||
                    m.is_gold || m.is_key || m.is_lava || m.is_monst_easy || m.is_monst_med || m.is_monst_hard ||
                    m.is_enchantstone || m.is_skillstone || m.is_treasure_class_a || m.is_treasure_class_b ||
                    m.is_treasure_class_c || m.is_weapon_class_a || m.is_weapon_class_b || m.is_weapon_class_c ||
@@ -108,7 +108,7 @@ PyObject *level_add_(PyObject *obj, PyObject *args, PyObject *keywds)
         }
 
         if (m.is_blood || m.is_ascend_dungeon || m.is_descend_dungeon || m.is_descend_sewer || m.is_floor_deco ||
-            m.is_food || m.is_mob_easy || m.is_mob_hard || m.is_gold || m.is_key || m.is_monst_easy ||
+            m.is_food || m.is_mob_spawner_easy || m.is_mob_spawner_hard || m.is_gold || m.is_key || m.is_monst_easy ||
             m.is_monst_med || m.is_monst_hard || m.is_enchantstone || m.is_skillstone || m.is_treasure_class_a ||
             m.is_treasure_class_b || m.is_treasure_class_c || m.is_weapon_class_a || m.is_weapon_class_b ||
             m.is_weapon_class_c || m.is_potion || m.is_wand || m.is_ring || m.is_brazier || m.is_barrel ||
@@ -585,7 +585,7 @@ LEVEL_BODY_GET_BOOL_AT(level_is_meat_at, is_meat)
 LEVEL_BODY_GET_BOOL_AT(level_is_meat_eater_at, is_meat_eater)
 LEVEL_BODY_GET_BOOL_AT(level_is_metal_at, is_metal)
 LEVEL_BODY_GET_BOOL_AT(level_is_minion_at, is_minion)
-LEVEL_BODY_GET_BOOL_AT(level_is_mob_at, is_mob)
+LEVEL_BODY_GET_BOOL_AT(level_is_mob_spawner_at, is_mob_spawner)
 LEVEL_BODY_GET_BOOL_AT(level_is_monst_at, is_monst)
 LEVEL_BODY_GET_BOOL_AT(level_is_moveable_at, is_moveable)
 LEVEL_BODY_GET_BOOL_AT(level_is_msg_at, is_msg)

@@ -333,7 +333,7 @@ private:
   int _is_meat_eater {};
   int _is_metal {};
   int _is_minion {};
-  int _is_mob {};
+  int _is_mob_spawner {};
   int _is_monst {};
   int _is_moveable {};
   int _is_msg {};
@@ -1202,7 +1202,7 @@ public:
   int is_meat(void) const { return _is_meat; }
   int is_metal(void) const { return _is_metal; }
   int is_minion(void) const { return _is_minion; }
-  int is_mob(void) const { return _is_mob; }
+  int is_mob_spawner(void) const { return _is_mob_spawner; }
   int is_monst(void) const { return _is_monst; }
   int is_moveable(void) const { return _is_moveable; }
   int is_msg(void) const { return _is_msg; }
@@ -1745,7 +1745,7 @@ public:
   void set_is_meat(int v) { _is_meat = v; }
   void set_is_metal(int v) { _is_metal = v; }
   void set_is_minion(int v) { _is_minion = v; }
-  void set_is_mob(int v) { _is_mob = v; }
+  void set_is_mob_spawner(int v) { _is_mob_spawner = v; }
   void set_is_monst(int v) { _is_monst = v; }
   void set_is_moveable(int v) { _is_moveable = v; }
   void set_is_msg(int v) { _is_msg = v; }

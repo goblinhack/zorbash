@@ -1,11 +1,14 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- - shield, helmet, boots, amulet, gauntlet, cloak                                                                                             -->
+<!-- - seed 1 robot and zoblin will not move                                                                                                      -->
+<!-- - the barrel burns to death on seed1                                                                                                         -->
+<!-- - the barrel health and safety alert seen twice on seed 1                                                                                    -->
+<!-- - the enchantstone explodes when close to lava???                                                                                            -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Next todo                                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
-<!-- - don't rest next to a mob spawner                                                                                                           -->
+<!-- - shield, helmet, boots, amulet, gauntlet, cloak                                                                                             -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->
@@ -23,6 +26,7 @@
 <!--                                                                                                                                              -->
 <!-- Level                                                                                                                                        -->
 <!-- ------                                                                                                                                       -->
+<!-- - tomb of past player ? or random player ? leads to random small room?                                                                       -->
 <!-- - gold needs to do something - shop? buy/sell                                                                                                -->
 <!-- - totems are like mobs, but do not spawn except initially. The worshippers are imbued with power but do not die when the totem does.         -->
 <!-- - exploding bogs                                                                                                                             -->

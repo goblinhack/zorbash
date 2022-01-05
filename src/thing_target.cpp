@@ -110,7 +110,7 @@ bool Thing::target_attack_best(int equip)
 
       if (t->is_dead || t->is_dying) {
         continue;
-      } else if (t->is_mob() || t->is_monst()) {
+      } else if (t->is_mob_spawner() || t->is_monst()) {
         prio += get_danger_current_level(t);
         dbg("Cand: %s mob prio %d", t->to_short_string().c_str(), prio);
 

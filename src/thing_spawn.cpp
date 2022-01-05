@@ -45,7 +45,7 @@ bool Thing::spawn_next_to(const std::string &what)
   //
   // Don't spawn too many minions
   //
-  if (is_mob()) {
+  if (is_mob_spawner()) {
     if (get_minion_count() >= minion_limit()) {
       return false;
     }
@@ -130,7 +130,7 @@ bool Thing::spawn_next_to_or_on_monst(const std::string &what)
     auto y = curr_at.y + d.y;
     auto p = point(x, y);
 
-    if (level->is_door(x, y) || level->is_secret_door(x, y) || level->is_mob(x, y) || level->is_hazard(x, y) ||
+    if (level->is_door(x, y) || level->is_secret_door(x, y) || level->is_mob_spawner(x, y) || level->is_hazard(x, y) ||
         level->is_rock(x, y) || level->is_wall(x, y)) {
       continue;
     }

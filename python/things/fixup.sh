@@ -238,7 +238,7 @@ do
       set_is_meat_eater \
       set_is_metal \
       set_is_minion \
-      set_is_mob \
+      set_is_mob_spawner \
       set_is_monst \
       set_is_moveable \
       set_is_msg \

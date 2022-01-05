@@ -164,7 +164,7 @@ void Thing::destroy_minions(Thingp defeater)
   // a new level
   //
 
-  if (! is_mob()) {
+  if (! is_mob_spawner()) {
     return;
   }
 
@@ -195,7 +195,7 @@ void Thing::destroy_minions(Thingp defeater)
 void Thing::unleash_minions(void)
 {
   TRACE_NO_INDENT();
-  if (! is_mob()) {
+  if (! is_mob_spawner()) {
     return;
   }
 

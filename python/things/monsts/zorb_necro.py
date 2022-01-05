@@ -17,7 +17,11 @@ def on_tick(me, x, y):
 
     risen = 0
     if my.thing_get_stat_con(me) > 1:
-        for follower in my.thing_get_all_followers(me):
+        followers = my.thing_get_all_followers(me)
+        if followers is None:
+            return False
+
+        for follower in followers:
             if my.thing_is_dead_or_dying(follower):
                 my.thing_polymorph(follower, "zoblin")
                 my.thing_resurrect(follower, "arise")
@@ -34,7 +38,11 @@ def on_tick(me, x, y):
 
 
 def on_death(me, x, y):
-    for follower in my.thing_get_all_followers(me):
+    followers = my.thing_get_all_followers(me)
+    if followers is None:
+        return False
+
+    for follower in followers:
         if my.thing_is_resurrected_or_resurrecting(follower):
             my.thing_msg(follower, "Free at last!")
             my.thing_perma_death(follower, "Leader died!")

@@ -94,7 +94,7 @@ void Level::update_minimap(bool showing_two_levels, bool show_faded)
 
         if (is_lit_recently(x, y) && is_monst(x, y)) {
           c = RED;
-        } else if (is_mob(x, y)) {
+        } else if (is_mob_spawner(x, y)) {
           c = PINK;
         } else if (player && (x == (int) player->curr_at.x) && (y == (int) player->curr_at.y)) {
           c = PINK;
@@ -210,7 +210,7 @@ void Level::update_minimap(bool showing_two_levels, bool show_faded)
         if (is_key(x, y) || is_food(x, y) || is_treasure_type(x, y) || is_skillstone(x, y) || is_enchantstone(x, y)) {
           c   = GOLD2;
           c.a = 255;
-        } else if (is_monst(x, y) || is_spiderweb(x, y) || is_mob(x, y)) {
+        } else if (is_monst(x, y) || is_spiderweb(x, y) || is_mob_spawner(x, y)) {
           //
           // Have both? Overlay the monsters
           //
@@ -291,7 +291,7 @@ void Level::update_minimap(bool showing_two_levels, bool show_faded)
           }
         } else if (is_monst(x, y)) {
           c = RED;
-        } else if (is_mob(x, y)) {
+        } else if (is_mob_spawner(x, y)) {
           c = PINK;
         } else if (player && (x == (int) player->curr_at.x) && (y == (int) player->curr_at.y)) {
           c = WHITE;

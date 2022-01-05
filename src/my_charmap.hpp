@@ -89,8 +89,8 @@ public:
   bool is_gold {false};
   bool is_key {false};
   bool is_lava {false};
-  bool is_mob_hard {false};
-  bool is_mob_easy {false};
+  bool is_mob_spawner_hard {false};
+  bool is_mob_spawner_easy {false};
   bool is_monst_easy {false};
   bool is_monst_med {false};
   bool is_monst_hard {false};

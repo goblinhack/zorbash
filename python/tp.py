@@ -1612,8 +1612,8 @@ class Tp:
     def set_damage_received_doubled_from_water(self, value):
         my.tp_set_damage_received_doubled_from_water(self, value)
 
-    def set_is_mob(self, value):
-        my.tp_set_is_mob(self, value)
+    def set_is_mob_spawner(self, value):
+        my.tp_set_is_mob_spawner(self, value)
 
     def set_is_treasure_eater(self, value):
         my.tp_set_is_treasure_eater(self, value)

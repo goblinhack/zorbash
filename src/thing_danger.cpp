@@ -281,7 +281,7 @@ int Thing::is_dangerous(Thingp it)
     return false;
   }
 
-  if (! it->is_monst() && ! it->is_player()) {
+  if (! it->is_mob_spawner() && ! it->is_monst() && ! it->is_player()) {
     return false;
   }
 

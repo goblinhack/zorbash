@@ -58,7 +58,7 @@ Thingp Thing::get_most_dangerous_adjacent_thing(void)
         }
       }
 
-      if (! it->is_monst() && ! it->is_player()) {
+      if (! it->is_mob_spawner() && ! it->is_monst() && ! it->is_player()) {
         continue;
       }
 

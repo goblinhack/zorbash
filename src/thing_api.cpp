@@ -1201,10 +1201,10 @@ int Thing::is_meat(void)
   return (tp()->is_meat());
 }
 
-int Thing::is_mob(void)
+int Thing::is_mob_spawner(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_mob());
+  return (tp()->is_mob_spawner());
 }
 
 int Thing::is_minion(void)

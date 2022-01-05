@@ -79,8 +79,8 @@ static game_levels_grid_ctx *g_ctx;
 static void game_levels_grid_destroy(Widp w);
 static void game_levels_grid_set_focus(game_levels_grid_ctx *ctx, int focusx, int focusy);
 
-#define ROOM_WIDTH_CHARS  8
-#define ROOM_HEIGHT_CHARS 3
+#define ROOM_WIDTH_CHARS  6
+#define ROOM_HEIGHT_CHARS 6
 
 static void game_levels_grid_update_buttons(Widp w)
 {
@@ -113,8 +113,8 @@ static void game_levels_grid_update_buttons(Widp w)
       point br;
       color c;
 
-      tl.x = x * (width + 2);
-      tl.y = y * (height + 2);
+      tl.x = x * (width + 1);
+      tl.y = y * (height + 1);
 
       br.x = tl.x;
       br.y = tl.y;
@@ -380,6 +380,29 @@ void game_levels_grid_init(void)
     wid_set_color(w, WID_COLOR_TEXT_FG, YELLOW);
   }
 
+  {
+    Widp w = wid_new_square_button(window, "wid level_grid seed");
+
+    point tl = make_point(TERM_WIDTH - 30, 4);
+    point br = make_point(TERM_WIDTH - 2, 6);
+
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, "Seed: " + g_opt_seed_name);
+    wid_set_style(w, UI_WID_STYLE_DARK);
+  }
+
+  {
+    TRACE_NO_INDENT();
+    Widp w = wid_new_square_button(window, "wid level_grid reroll");
+
+    point tl = make_point(TERM_WIDTH - 30, 7);
+    point br = make_point(TERM_WIDTH - 2, 9);
+
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, "Choose random seed?");
+    wid_set_style(w, UI_WID_STYLE_HIGHLIGHTED);
+  }
+
   /*
    * Create the button container
    */
@@ -401,6 +424,9 @@ void game_levels_grid_init(void)
     tl.y += offy;
     br.x += offx;
     br.y += offy;
+
+    tl.y += 5;
+    br.y += 5;
 
     wid_set_pos(button_container, tl, br);
     wid_set_void_context(button_container, ctx);

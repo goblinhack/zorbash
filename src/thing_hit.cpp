@@ -769,7 +769,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       //
       // Player hitting something else
       //
-      if (is_alive_monst() || is_mob()) {
+      if (is_alive_monst() || is_mob_spawner()) {
         if (crit) {
           TOPCON("%%fg=red$You CRIT hit %s for %d damage!%%fg=reset$", text_the().c_str(), damage);
         } else {
