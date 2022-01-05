@@ -757,7 +757,7 @@ void Nodes::init_nodes(void)
   auto obstacles = ((grid_width * grid_height) / 6) * 4;
 
   if (! is_dungeon) {
-    obstacles /= 4;
+    obstacles /= 10;
   }
 
   while (obstacles--) {

@@ -62,11 +62,11 @@ void Game::init_levels(void)
   LOG("Game init levels");
   TRACE_AND_INDENT();
 
-#if 0
-  game_levels_grid_init();
-  // DIE("x");
-  return;
-#endif
+  IF_DEBUG2
+  {
+    game_levels_grid_init();
+    return;
+  }
 
   //
   // Increase this to create more levels in advance
