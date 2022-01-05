@@ -9,6 +9,7 @@
 <!-- Next todo                                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
 <!-- - shield, helmet, boots, amulet, gauntlet, cloak                                                                                             -->
+<!-- - level fall through to special level ?                                                                                                      -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->
