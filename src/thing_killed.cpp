@@ -93,7 +93,7 @@ void Thing::killed(Thingp defeater, const char *reason)
   //
   // If a minion mob dies, kill all minions
   //
-  if (defeater && is_mob()) {
+  if (defeater && is_mob_spawner()) {
     destroy_minions(defeater);
   }
 

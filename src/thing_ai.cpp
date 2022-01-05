@@ -854,7 +854,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
         //
         // Don't attack your mob_spawner
         //
-        if (it->is_mob() && (get_top_mob_spawner() == this)) {
+        if (it->is_mob_spawner() && (get_top_mob_spawner() == this)) {
           continue;
         }
 
@@ -997,7 +997,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
                 int avoid_score = ((max_dist - dist) * health_diff);
                 GOAL_AVOID_ADD(GOAL_PRIO_VERY_HIGH, avoid_score, "avoid-monst", it);
               }
-            } else if (it->is_mob() && is_able_to_attack_mobs()) {
+            } else if (it->is_mob_spawner() && is_able_to_attack_mobs()) {
               //
               // Very close, high priority attack
               //

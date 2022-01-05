@@ -64,7 +64,7 @@ public:
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_key {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_lava {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_lit_currently {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_mob {};
+  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_mob_spawner {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_monst {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_potion {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_ripple {};
@@ -698,8 +698,8 @@ public:
   uint8_t is_lit_ever_no_check(const int x, const int y);
   uint8_t is_lit_ever_no_check(const point &p);
   uint8_t is_lit_recently(const int x, const int y);
-  uint8_t is_mob(const int x, const int y);
-  uint8_t is_mob(const point &p);
+  uint8_t is_mob_spawner(const int x, const int y);
+  uint8_t is_mob_spawner(const point &p);
   uint8_t is_monst(const int x, const int y);
   uint8_t is_monst_or_player(const point &p);
   uint8_t is_monst(const point &p);
@@ -896,7 +896,7 @@ public:
   void set_is_map_changed(const int x, const int y);
   void set_is_map_changed_no_check(const int x, const int y);
   void set_is_map_changed_no_check(const int x, const int y, uint32_t v);
-  void set_is_mob(const int x, const int y);
+  void set_is_mob_spawner(const int x, const int y);
   void set_is_monst(const int x, const int y);
   void set_is_obs_destructable(const int x, const int y);
   void set_is_obs_destructable_no_check(const int x, const int y);
@@ -963,7 +963,7 @@ public:
   void unset_is_lit_ever_no_check(const int x, const int y);
   void unset_is_map_changed(const int x, const int y);
   void unset_is_map_changed_no_check(const int x, const int y);
-  void unset_is_mob(const int x, const int y);
+  void unset_is_mob_spawner(const int x, const int y);
   void unset_is_monst(const int x, const int y);
   void unset_is_obs_destructable(const int x, const int y);
   void unset_is_obs_destructable_no_check(const int x, const int y);

@@ -285,7 +285,7 @@ bool Thing::ai_obstacle(Thingp it)
     // This lets you skip around mobs to avoid ghosts
     //
     if (is_minion()) {
-      if (it->is_mob()) {
+      if (it->is_mob_spawner()) {
         if (it == get_top_mob_spawner()) {
           return true;
         }

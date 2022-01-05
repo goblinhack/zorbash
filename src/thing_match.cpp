@@ -467,7 +467,7 @@ bool Thing::matches(const std::string &what)
   if (is_metal() && (what == "is_metal")) {
     return true;
   }
-  if (is_mob() && (what == "is_mob")) {
+  if (is_mob_spawner() && (what == "is_mob_spawner")) {
     return true;
   }
   if (is_minion() && (what == "is_minion")) {
@@ -1749,8 +1749,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_metal") {
     return &Thing::is_metal;
   }
-  if (what == "is_mob") {
-    return &Thing::is_mob;
+  if (what == "is_mob_spawner") {
+    return &Thing::is_mob_spawner;
   }
   if (what == "is_minion") {
     return &Thing::is_minion;

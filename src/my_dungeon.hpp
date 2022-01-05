@@ -111,9 +111,9 @@ public:
   bool   is_floor_deco_at(const int x, const int y);
   bool   is_floor_no_check(const int x, const int y);
   bool   is_food(const int x, const int y);
-  bool   is_mob_any(const int x, const int y);
-  bool   is_mob_easy(const int x, const int y);
-  bool   is_mob_hard(const int x, const int y);
+  bool   is_mob_spawner_any(const int x, const int y);
+  bool   is_mob_spawner_easy(const int x, const int y);
+  bool   is_mob_spawner_hard(const int x, const int y);
   bool   is_gold(const int x, const int y);
   bool   is_hazard(const int x, const int y);
   bool   is_treasure_class_a(const int x, const int y);

@@ -731,7 +731,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
     //
     // Don't swing weapons at pools of blood.
     //
-    if (victim->is_alive_monst() || victim->is_door() || victim->is_player() || victim->is_mob()) {
+    if (victim->is_alive_monst() || victim->is_door() || victim->is_player() || victim->is_mob_spawner()) {
       if (get_equip(MONST_EQUIP_WEAPON)) {
         auto delta = victim->curr_at - curr_at;
         move_set_dir_from_delta(delta);

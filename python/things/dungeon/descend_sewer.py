@@ -7,7 +7,7 @@ def spawn(me, x, y):
 
 
 def tp_init(name, tiles=[], left1_tiles=[]):
-    # mytp.set_is_mob(True) # don't set to avoid auto place
+    # mytp.set_is_mob_spawner(True) # don't set to avoid auto place
     mytp = tp.Tp(name)
     mytp.set_gfx_animated(True)
     mytp.set_gfx_shown_in_bg(True)

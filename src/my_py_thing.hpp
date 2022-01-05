@@ -274,7 +274,7 @@ PyObject *thing_is_meat_eater(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_meat(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_metal(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_minion(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_mob(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_mob_spawner(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_monst(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_moveable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_msg(PyObject *obj, PyObject *args, PyObject *keywds);

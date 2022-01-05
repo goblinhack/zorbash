@@ -814,7 +814,7 @@ bool Dungeon::is_monst_hard(const int x, const int y)
   return false;
 }
 
-bool Dungeon::is_mob_any(const int x, const int y)
+bool Dungeon::is_mob_spawner_any(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
@@ -824,34 +824,17 @@ bool Dungeon::is_mob_any(const int x, const int y)
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_mob_easy) {
+    if (v.is_mob_spawner_easy) {
       return true;
     }
-    if (v.is_mob_hard) {
-      return true;
-    }
-  }
-  return false;
-}
-
-bool Dungeon::is_mob_easy(const int x, const int y)
-{
-  if (unlikely(is_oob(x, y))) {
-    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
-
-  for (auto d = 0; d < map_depth; d++) {
-    auto c = getc(x, y, d);
-    auto v = get(Charmap::all_charmaps, c);
-
-    if (v.is_mob_easy) {
+    if (v.is_mob_spawner_hard) {
       return true;
     }
   }
   return false;
 }
 
-bool Dungeon::is_mob_hard(const int x, const int y)
+bool Dungeon::is_mob_spawner_easy(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
@@ -861,7 +844,24 @@ bool Dungeon::is_mob_hard(const int x, const int y)
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_mob_hard) {
+    if (v.is_mob_spawner_easy) {
+      return true;
+    }
+  }
+  return false;
+}
+
+bool Dungeon::is_mob_spawner_hard(const int x, const int y)
+{
+  if (unlikely(is_oob(x, y))) {
+    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+  }
+
+  for (auto d = 0; d < map_depth; d++) {
+    auto c = getc(x, y, d);
+    auto v = get(Charmap::all_charmaps, c);
+
+    if (v.is_mob_spawner_hard) {
       return true;
     }
   }

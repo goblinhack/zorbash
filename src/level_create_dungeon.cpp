@@ -1044,14 +1044,14 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules(Dungeonp d)
           d->is_hazard(x - 1, y - 1) && d->is_hazard(x + 1, y - 1) && d->is_hazard(x - 1, y + 1) &&
           d->is_hazard(x + 1, y + 1)) {
 
-        if (d->is_mob_easy(x, y) || d->is_mob_hard(x, y)) {
+        if (d->is_mob_spawner_easy(x, y) || d->is_mob_spawner_hard(x, y)) {
           tp = tp_random_ethereal_mob();
         }
       } else {
         //
         // Else choose a normal mob
         //
-        if (d->is_mob_easy(x, y)) {
+        if (d->is_mob_spawner_easy(x, y)) {
           if (be_generous) {
             tp = tp_random_mob_easy(p);
           } else {
@@ -1059,7 +1059,7 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules(Dungeonp d)
               tp = tp_random_mob_easy(p);
             }
           }
-        } else if (d->is_mob_hard(x, y)) {
+        } else if (d->is_mob_spawner_hard(x, y)) {
           tp = tp_random_mob_hard(p);
         }
       }
@@ -1386,7 +1386,7 @@ void Level::place_floor_deco(Dungeonp d)
       }
 
       if (d->is_food(x, y) || d->is_blood(x, y) || d->is_door(x, y) || d->is_ascend_dungeon(x, y) ||
-          d->is_descend_dungeon(x, y) || d->is_mob_any(x, y) || d->is_key(x, y) || d->is_potion(x, y) ||
+          d->is_descend_dungeon(x, y) || d->is_mob_spawner_any(x, y) || d->is_key(x, y) || d->is_potion(x, y) ||
           d->is_barrel(x, y) || d->is_wand(x, y) || d->is_ring(x, y) || d->is_secret_door(x, y) ||
           d->is_weapon_class_a(x, y) || d->is_weapon_class_b(x, y) || d->is_treasure_type(x, y) ||
           d->is_treasure_class_a(x, y) || d->is_treasure_class_b(x, y) || d->is_treasure_class_c(x, y) ||
@@ -1429,7 +1429,7 @@ void Level::create_dungeon_place_random_floor_deco(Dungeonp d)
       }
 
       if (d->is_food(x, y) || d->is_blood(x, y) || d->is_door(x, y) || d->is_ascend_dungeon(x, y) ||
-          d->is_descend_dungeon(x, y) || d->is_mob_any(x, y) || d->is_key(x, y) || d->is_potion(x, y) ||
+          d->is_descend_dungeon(x, y) || d->is_mob_spawner_any(x, y) || d->is_key(x, y) || d->is_potion(x, y) ||
           d->is_barrel(x, y) || d->is_wand(x, y) || d->is_ring(x, y) || d->is_secret_door(x, y) ||
           d->is_weapon_class_a(x, y) || d->is_weapon_class_b(x, y) || d->is_treasure_type(x, y) ||
           d->is_treasure_class_a(x, y) || d->is_treasure_class_b(x, y) || d->is_treasure_class_c(x, y) ||

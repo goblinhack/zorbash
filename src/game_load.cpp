@@ -413,7 +413,7 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
   my.t->i_set_is_key = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->i_set_is_lava = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->i_set_is_light_blocker = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
-  my.t->i_set_is_mob = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+  my.t->i_set_is_mob_spawner = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->i_set_is_monst = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->i_set_is_obs_wall_or_door = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->i_set_is_obs_destructable = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
@@ -528,7 +528,7 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   in >> bits(my.t->_is_key);
   in >> bits(my.t->_is_lava);
   in >> bits(my.t->_is_lit_currently);
-  in >> bits(my.t->_is_mob);
+  in >> bits(my.t->_is_mob_spawner);
   in >> bits(my.t->_is_monst);
   in >> bits(my.t->_is_potion);
   in >> bits(my.t->_is_ripple);

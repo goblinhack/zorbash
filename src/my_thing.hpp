@@ -162,7 +162,7 @@ public:
   uint64_t i_set_is_key                           : 1 {};
   uint64_t i_set_is_lava                          : 1 {};
   uint64_t i_set_is_light_blocker                 : 1 {};
-  uint64_t i_set_is_mob                           : 1 {};
+  uint64_t i_set_is_mob_spawner                           : 1 {};
   uint64_t i_set_is_monst                         : 1 {};
   uint64_t i_set_is_necrotic_danger_level         : 1 {};
   uint64_t i_set_is_obs_destructable              : 1 {};
@@ -1218,7 +1218,7 @@ public:
   int is_meat(void);
   int is_metal(void);
   int is_minion(void);
-  int is_mob(void);
+  int is_mob_spawner(void);
   int is_monst(void);
   int is_moveable(void);
   int is_msg(void);

@@ -42,7 +42,7 @@ bool Level::create_wandering_monster(void)
     }
 
     if (is_ascend_dungeon(x, y) || is_monst(x, y) || is_rock(x, y) || is_door(x, y) || is_secret_door(x, y) ||
-        is_mob(x, y) || is_chasm(x, y) || is_wall(x, y) || is_ascend_sewer(x, y) ||
+        is_mob_spawner(x, y) || is_chasm(x, y) || is_wall(x, y) || is_ascend_sewer(x, y) ||
         is_descend_sewer(x, y) || is_descend_dungeon(x, y)) {
       continue;
     }
