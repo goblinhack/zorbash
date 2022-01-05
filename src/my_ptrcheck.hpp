@@ -3,11 +3,6 @@
 #ifndef _MY__PTRCHECK_HPP__
 #define _MY__PTRCHECK_HPP__
 
-#include "my_callstack.hpp"
-#include "my_globals.hpp"
-#include <ctime>
-#include <string>
-
 //
 // __FUNCTION__ is not a preprocessor directive so we can't convert it into a
 // string
@@ -83,4 +78,4 @@ enum {
   MTYPE_MAX,
 };
 
-#endif // __PTRCHECK_HPP__
+#endif // _MY__PTRCHECK_HPP__
