@@ -6,7 +6,6 @@
 #include <SDL.h>
 #include <algorithm>
 
-#include "my_ascii.hpp"
 #include "my_command.hpp"
 #include "my_game.hpp"
 #include "my_sdl.hpp"

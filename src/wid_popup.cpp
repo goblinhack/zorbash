@@ -5,7 +5,6 @@
 
 #include <SDL.h>
 
-#include "my_ascii.hpp"
 #include "my_sdl.hpp"
 #include "my_string.hpp"
 #include "my_sys.hpp"

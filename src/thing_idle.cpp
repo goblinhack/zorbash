@@ -3,7 +3,6 @@
 // See the README.md file for license info.
 //
 
-#include "my_depth.hpp"
 #include "my_game.hpp"
 #include "my_globals.hpp"
 #include "my_python.hpp"

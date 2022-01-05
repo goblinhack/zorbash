@@ -5,7 +5,6 @@
 
 #include "my_dungeon.hpp"
 #include "my_game.hpp"
-#include "my_level.hpp"
 #include "my_monst.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_random.hpp"

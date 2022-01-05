@@ -3,7 +3,6 @@
 // See the README.md file for license info.
 //
 
-#include "my_ascii.hpp"
 #include "my_game.hpp"
 #include "my_gl.hpp"
 #include "my_player.hpp"

@@ -3,11 +3,9 @@
 // See the README.md file for license info.
 //
 
-#include "my_depth.hpp"
 #include "my_font.hpp"
 #include "my_game.hpp"
 #include "my_gl.hpp"
-#include "my_level.hpp"
 #include "my_sys.hpp"
 #include "my_tex.hpp"
 #include "my_thing.hpp"

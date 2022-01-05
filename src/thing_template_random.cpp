@@ -4,10 +4,8 @@
 //
 
 #include "my_array_bounds_check.hpp"
-#include "my_depth.hpp"
 #include "my_dice.hpp"
 #include "my_game.hpp"
-#include "my_level.hpp"
 #include "my_random.hpp"
 #include "my_sys.hpp"
 #include "my_thing.hpp"

@@ -4,10 +4,8 @@
 //
 
 #include "my_array_bounds_check.hpp"
-#include "my_ascii.hpp"
 #include "my_game.hpp"
 #include "my_gl.hpp"
-#include "my_level.hpp"
 #include "my_player.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_random.hpp"

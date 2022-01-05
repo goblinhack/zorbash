@@ -9,9 +9,7 @@
 #include <frameobject.h>
 #include <map>
 
-#include "my_ascii.hpp"
 #include "my_callstack.hpp"
-#include "my_depth.hpp"
 #include "my_main.hpp"
 #include "my_monst.hpp"
 #include "my_ptrcheck.hpp"

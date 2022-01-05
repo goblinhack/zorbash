@@ -4,10 +4,8 @@
 //
 
 #include "my_array_bounds_check.hpp"
-#include "my_ascii.hpp"
 #include "my_backtrace.hpp"
 #include "my_command.hpp"
-#include "my_depth.hpp"
 #include "my_game.hpp"
 #include "my_gl.hpp"
 #include "my_math.hpp"

@@ -5,9 +5,7 @@
 
 #include "my_array_bounds_check.hpp"
 #include "my_charmap.hpp"
-#include "my_depth.hpp"
 #include "my_game.hpp"
-#include "my_level.hpp"
 #include "my_level_static.hpp"
 #include "my_main.hpp"
 #include "my_ptrcheck.hpp"

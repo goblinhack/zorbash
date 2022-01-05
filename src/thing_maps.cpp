@@ -3,10 +3,8 @@
 // See the README.md file for license info.
 //
 
-#include "my_depth.hpp"
-#include "my_level.hpp"
 #include "my_main.hpp"
-#include "my_monst.hpp"
+// REMOVED #include "my_monst.hpp"
 #include "my_sys.hpp"
 #include "my_thing.hpp"
 

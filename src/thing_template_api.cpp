@@ -3,9 +3,7 @@
 // See the README.md file for license info.
 //
 
-#include "my_depth.hpp"
 #include "my_dice.hpp"
-#include "my_level.hpp"
 #include "my_sys.hpp"
 #include "my_thing_template.hpp"
 #include "my_tile.hpp"
