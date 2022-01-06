@@ -76,7 +76,6 @@ void Thing::fire_tick(void)
     // Make things more likely to melt the closer to the heat?
     //
     melt_chance += (melt_chance / 10) * level->heatmap(at.x, at.y);
-    topcon("melt chance %d", melt_chance);
 
     hit = d1000() < melt_chance;
     if (hit) {
@@ -140,7 +139,11 @@ void Thing::fire_tick(void)
         if (! is_offscreen) {
           if (level->player && (level->tick_created < game->tick_current)) {
             if (get(level->player->get_aip()->can_see_currently.can_see, curr_at.x, curr_at.y)) {
-              TOPCON("%s burns to death!", text_The().c_str());
+              if (is_monst()) {
+                TOPCON("%s burns to death!", text_The().c_str());
+              } else {
+                TOPCON("%s burns!", text_The().c_str());
+              }
             }
           }
         }

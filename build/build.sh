@@ -586,10 +586,10 @@ log_info "VERSION (game)             : $MYVER"
 cd src
 
 # Example timings at -j12
-#     53 secs
-# -O0 53 secs
-# -Og 131 secs
-# -O3 131 secs
+#     61 secs
+# -O0 61 secs
+# -O1 74 secs
+# -O3 77 secs
 
 if [[ $OPT_PROF != "" ]]; then
     C_FLAGS+=" -pg"

@@ -40,7 +40,7 @@ void Level::assign_leaders_and_followers(void)
   //
   for (auto t : cands) {
     Thingp group_cand = nullptr;
-    con("Cand %s", t->to_short_string().c_str());
+    dbg("Group cand %s", t->to_short_string().c_str());
     for (const auto &g : groups) {
       for (const auto &m : g.second) {
         //
@@ -69,9 +69,9 @@ void Level::assign_leaders_and_followers(void)
   //
   if (0) {
     for (const auto &g : groups) {
-      con("Group %p", g.first);
+      dbg("Group %p", g.first);
       for (const auto &m : g.second) {
-        con("- Member %s", m->to_short_string().c_str());
+        dbg("- Member %s", m->to_short_string().c_str());
       }
     }
   }
@@ -80,7 +80,7 @@ void Level::assign_leaders_and_followers(void)
   // Now choose the leader
   //
   for (const auto &g : groups) {
-    con("Group %p", g.first);
+    dbg("Group %p", g.first);
 
     Thingp leader = nullptr;
     for (const auto &m : g.second) {
@@ -98,9 +98,9 @@ void Level::assign_leaders_and_followers(void)
     //
     for (const auto &m : g.second) {
       if (m == leader) {
-        con("- Leader %s", m->to_short_string().c_str());
+        dbg("- Leader %s", m->to_short_string().c_str());
       } else {
-        con("- Member %s", m->to_short_string().c_str());
+        dbg("- Member %s", m->to_short_string().c_str());
       }
     }
 
