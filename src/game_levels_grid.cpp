@@ -80,8 +80,8 @@ static game_levels_grid_ctx *g_ctx;
 static void game_levels_grid_destroy(Widp w);
 static void game_levels_grid_set_focus(game_levels_grid_ctx *ctx, int focusx, int focusy);
 
-#define ROOM_WIDTH_CHARS  6
-#define ROOM_HEIGHT_CHARS 6
+#define ROOM_WIDTH_CHARS  7
+#define ROOM_HEIGHT_CHARS 7
 
 static void game_levels_grid_update_button(game_levels_grid_ctx *ctx, Widp b, int x, int y)
 {
@@ -105,20 +105,15 @@ static void game_levels_grid_update_button(game_levels_grid_ctx *ctx, Widp b, in
   br.y += height - 1;
 
   if ((x == ctx->focusx) && (y == ctx->focusy)) {
-    c      = GREEN;
     ctx->b = b;
     wid_raise(b);
   } else {
     wid_lower(b);
-
-    c = GRAY70;
   }
 
   if (ctx->is_new) {
     wid_set_pos(b, tl, br);
   }
-
-  wid_set_color(b, WID_COLOR_TEXT_FG, c);
 }
 
 static void game_levels_grid_update_buttons(Widp w)
@@ -233,50 +228,6 @@ static void game_levels_grid_tick(Widp w)
   TRACE_NO_INDENT();
   game_levels_grid_ctx *ctx = (game_levels_grid_ctx *) wid_get_void_context(w);
   verify(MTYPE_WID, ctx);
-
-  static int val;
-  static int delta = 1;
-  static int step  = 2;
-
-  val += delta * step;
-
-  if (val > 255) {
-    val   = 255;
-    delta = -1;
-  }
-
-  if (val < 200) {
-    val   = 200;
-    delta = 1;
-  }
-
-  int x, y;
-
-  for (x = 0; x < DUNGEONS_GRID_CHUNK_WIDTH; x++) {
-    for (y = 0; y < DUNGEONS_GRID_CHUNK_HEIGHT; y++) {
-
-      if ((x != ctx->focusx) || (y != ctx->focusy)) {
-        continue;
-      }
-
-      Widp b = ctx->buttons[ y ][ x ];
-
-      color c;
-      c   = GREEN;
-      c.g = val;
-
-      /*
-       * Make sure the other widgets look plain in all modes.
-       */
-      int mode;
-      for (mode = WID_MODE_NORMAL; mode < WID_MODE_LAST; mode++) {
-        wid_set_mode(b, (wid_mode) mode);
-        wid_set_color(b, WID_COLOR_TEXT_FG, c);
-      }
-
-      wid_set_mode(w, (wid_mode) WID_MODE_NORMAL);
-    }
-  }
 }
 
 static uint8_t game_levels_grid_go_back(Widp w, int32_t x, int32_t y, uint32_t button)
@@ -450,36 +401,39 @@ void game_levels_grid_init(void)
      */
     for (auto y = 0; y < ctx->nodes->grid_height; y++) {
       for (auto x = 0; x < ctx->nodes->grid_width; x++) {
-        auto node = ctx->nodes->getn(x, y);
+        auto        node = ctx->nodes->getn(x, y);
+        std::string bg_tilename;
+        std::string fg_tilename;
+
         if (! node) {
           continue;
         }
 
-        std::string text;
+        switch (node->depth) {
+          case -1 : break;
+          case 1 : bg_tilename = "dungeon_icon.1"; break;
+          case 2 : bg_tilename = "dungeon_icon.2"; break;
+          case 3 : bg_tilename = "dungeon_icon.3"; break;
+          case 4 : bg_tilename = "dungeon_icon.4"; break;
+          case 5 : bg_tilename = "dungeon_icon.5"; break;
+          case 6 : bg_tilename = "dungeon_icon.6"; break;
+          case 7 : bg_tilename = "dungeon_icon.7"; break;
+          case 8 : bg_tilename = "dungeon_icon.8"; break;
+        }
 
-        if (node->is_ascend_dungeon) {
-          text = "S";
-        }
-        if (node->is_descend_dungeon) {
-          text = "E";
-        }
         if (node->is_lock) {
-          text = "D";
+          fg_tilename = "boss_icon.1";
+          if (node->depth == 8) {
+            fg_tilename = "boss_icon.2";
+          }
         }
+
         if (node->is_key) {
-          text = "K";
+          fg_tilename = "key_level_icon";
         }
 
-        if (node->depth > 0) {
-          text += (char) ('0' + node->depth);
-        }
-
-        if (text.empty()) {
+        if (node->depth <= 0) {
           continue;
-        }
-
-        if (node->on_critical_path) {
-          text += "*";
         }
 
         //
@@ -487,14 +441,17 @@ void game_levels_grid_init(void)
         //
         Widp b                 = wid_new_square_button(button_container, "wid level grid button");
         ctx->buttons[ y ][ x ] = b;
-        wid_set_text(b, text);
+
+        if (! bg_tilename.empty()) {
+          wid_set_bg_tilename(b, bg_tilename);
+        }
+        if (! fg_tilename.empty()) {
+          wid_set_fg_tilename(b, fg_tilename);
+        }
+
         wid_set_on_mouse_over_begin(b, game_levels_grid_mouse_over);
         wid_set_on_mouse_down(b, game_levels_grid_button_mouse_event);
-        wid_set_style(b, UI_WID_STYLE_DARK);
-        wid_set_color(b, WID_COLOR_TEXT_FG, GREEN);
-        wid_set_mode(b, WID_MODE_OVER);
-        wid_set_color(b, WID_COLOR_TEXT_FG, GREEN);
-        wid_set_mode(b, WID_MODE_NORMAL);
+        wid_set_color(b, WID_COLOR_BG, WHITE);
         wid_set_void_context(b, ctx);
         int focus = (y << 8) | x;
         wid_set_int_context(b, focus);
@@ -527,8 +484,8 @@ void game_levels_grid_init(void)
           br.y = tl.y;
 
           wid_set_pos(b, tl, br);
-          wid_set_text(b, "v");
-          wid_set_style(b, UI_WID_STYLE_DARK);
+          wid_set_fg2_tilename(b, "down_icon");
+          wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
         }
 
         if (node->has_door_left) {
@@ -542,8 +499,8 @@ void game_levels_grid_init(void)
           br.y = tl.y;
 
           wid_set_pos(b, tl, br);
-          wid_set_text(b, "<");
-          wid_set_style(b, UI_WID_STYLE_DARK);
+          wid_set_fg2_tilename(b, "left_icon");
+          wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
         }
 
         if (node->has_door_right) {
@@ -557,8 +514,8 @@ void game_levels_grid_init(void)
           br.y = tl.y;
 
           wid_set_pos(b, tl, br);
-          wid_set_text(b, ">");
-          wid_set_style(b, UI_WID_STYLE_DARK);
+          wid_set_fg2_tilename(b, "right_icon");
+          wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
         }
 
         if (node->has_door_up) {
@@ -571,8 +528,8 @@ void game_levels_grid_init(void)
           br.y = tl.y;
 
           wid_set_pos(b, tl, br);
-          wid_set_text(b, "^");
-          wid_set_style(b, UI_WID_STYLE_DARK);
+          wid_set_fg2_tilename(b, "up_icon");
+          wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
         }
       }
     }
