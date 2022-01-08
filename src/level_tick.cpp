@@ -134,7 +134,7 @@ void Level::handle_input_events(void)
 bool Level::tick(void)
 {
   TRACE_NO_INDENT();
-  // LOG("Tick");
+  // log("Tick");
   // TOPCON("monsts %d.", monst_count);
 
   handle_input_events();
@@ -148,7 +148,9 @@ bool Level::tick(void)
   }
 
   if (! cursor) {
-    cursor = thing_new("cursor", player->curr_at);
+    if (player) {
+      cursor = thing_new("cursor", player->curr_at);
+    }
   }
 
   handle_all_pending_things();
@@ -575,7 +577,7 @@ bool Level::tick(void)
   }
 
   if (tick_done) {
-    if (game->robot_mode) {
+    if (player && game->robot_mode) {
       LOG("Level tick done and in robot mode");
       TRACE_AND_INDENT();
 
@@ -584,12 +586,10 @@ bool Level::tick(void)
         TRACE_AND_INDENT();
 
         game->robot_mode_tick_requested = false;
-        if (player) {
-          if (game->robot_mode) {
-            player->ai_tick();
-          } else if (player->get_aip()->move_path.size()) {
-            player->path_pop_next_move();
-          }
+        if (game->robot_mode) {
+          player->ai_tick();
+        } else if (player->get_aip()->move_path.size()) {
+          player->path_pop_next_move();
         }
       }
 
