@@ -506,13 +506,14 @@ static void parse_args(int32_t argc, char *argv[])
   }
 
   if (argc) {
-    g_opt_fast_start = true;
+    g_opt_no_slow_log_flush = true;
   }
 
   for (i = 1; i < argc; i++) {
     if (! strcasecmp(argv[ i ], "--quick-start") || ! strcasecmp(argv[ i ], "-quick-start") ||
         ! strcasecmp(argv[ i ], "--quickstart") || ! strcasecmp(argv[ i ], "-quickstart")) {
-      g_opt_new_game = true;
+      g_opt_quick_start = true;
+      g_opt_new_game    = true;
       continue;
     }
 
@@ -898,7 +899,7 @@ int32_t main(int32_t argc, char *argv[])
 
   config_gfx_vsync_update();
 
-  g_opt_fast_start = false;
+  g_opt_no_slow_log_flush = false;
   TRACE_NO_INDENT();
   sdl_loop();
   LOG("FINI: SDL loop finished");

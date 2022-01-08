@@ -1488,7 +1488,7 @@ void sdl_loop(void)
 void sdl_flush_display(void)
 {
   TRACE_NO_INDENT();
-  if (g_opt_fast_start) {
+  if (g_opt_no_slow_log_flush) {
     return;
   }
 

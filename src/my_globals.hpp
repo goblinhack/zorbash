@@ -19,15 +19,16 @@ extern bool g_die_occurred;             // Fatal error has occurred
 extern bool g_do_screenshot;            // Grab a screen shot next fram
 extern bool g_errored;                  // An error has occurred
 extern bool g_grab_next_key;            // Waiting for key input
-extern bool g_need_restart;             // Need to restart game
 extern bool g_loading;                  // Currently loading
-extern bool g_saved_snapshot;           // Just saved a snapshot
+extern bool g_need_restart;             // Need to restart game
+extern bool g_opt_new_game;             // Start in the dungeon menu
+extern bool g_opt_no_slow_log_flush;    // Do not flush after each console log at start
 extern bool g_opt_override_debug_level; // Temporary, used to disable existing debugs
-extern bool g_opt_fast_start;           // Do not flush after each console log at start
-extern bool g_opt_new_game;             // Start in the game imediately
+extern bool g_opt_quick_start;          // Start in the game imediately
 extern bool g_opt_resume;               // Load last snapshot
 extern bool g_quitting;                 // Exitting the game
 extern bool g_render_black_and_white;   // Rendering map in black and white
+extern bool g_saved_snapshot;           // Just saved a snapshot
 
 // --debug  Basic debug
 // --debug2 Map is visible and memory checks enabled
