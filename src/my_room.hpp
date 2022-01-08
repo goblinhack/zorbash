@@ -42,6 +42,9 @@ public:
   bool has_door_left {false};
   bool has_door_right {false};
 
+  bool is_hard_set {};
+  bool is_hard {};
+
   //
   // All doors in this room. We will choose one for connectivity.
   //
@@ -125,6 +128,8 @@ public:
   void  dump(void);
   void  con(void);
   bool  contains(int depth, char what);
+  bool  contains(int depth, char what, char);
+  bool  contains(int depth, char what, char, char);
 };
 
 void room_init(void);

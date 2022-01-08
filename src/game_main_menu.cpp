@@ -3,6 +3,7 @@
 // See the README.md file for license info.
 //
 
+#include "game_levels_grid.hpp"
 #include "my_game.hpp"
 #include "my_gl.hpp"
 #include "my_globals.hpp"
@@ -61,7 +62,7 @@ static uint8_t game_menu_quick_start(Widp w, int32_t x, int32_t y, uint32_t butt
 
   wid_visible(wid_topcon_window);
   TOPCON("Welcome to the lair of the dread monster, %%fg=red$Zorbash%%fg=reset$.");
-  TOPCON("Liberate the %%fg=yellow$Orb of Zorb%%fg=reset$ and defeat Zorbash to win.");
+  TOPCON("Collect the %%fg=yellow$crystals%%fg=reset$ and defeat Zorbash to win.");
 
   CON("%%fg=red$@@@@@@  @@@@@  @@@@@@  @@@@@@   @@@@@   @@@@  @@@ @@@%%fg=reset$");
   CON("%%fg=red$@@@@@@ @@@@@@@ @@@@@@@ @@@@@@@ @@@@@@@ @@@@@@ @@@ @@@%%fg=reset$");
@@ -109,7 +110,12 @@ static uint8_t game_main_menu_config(Widp w, int32_t x, int32_t y, uint32_t butt
 static uint8_t game_menu_slow_start(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
-  game_menu_quick_start(nullptr, 0, 0, 0);
+  // game_menu_quick_start(nullptr, 0, 0, 0);
+  game_main_menu_hide();
+  game_main_menu_destroy();
+  wid_visible(wid_topcon_window);
+  TOPCON("HELLO");
+  game_levels_grid_init();
   return false;
 }
 

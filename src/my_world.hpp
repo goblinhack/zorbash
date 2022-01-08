@@ -10,6 +10,13 @@
 #include "my_level.hpp"
 #include "my_point.hpp"
 
+namespace std
+{
+template <> struct hash< ThingId > {
+  size_t operator()(const ThingId &x) const noexcept { return std::hash< uint32_t >()(x.id); }
+};
+}; // namespace std
+
 class World
 {
 public:
@@ -17,7 +24,7 @@ public:
   //
   // All things on all levels
   //
-  std::map< ThingId, Thingp > all_thing_ptrs {};
+  std::unordered_map< ThingId, Thingp > all_thing_ptrs {};
   //
   // Which level in the world
   //

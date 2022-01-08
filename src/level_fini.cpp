@@ -25,11 +25,14 @@ Level::~Level(void)
 
 void Level::fini(void)
 {
-  log("-");
-  log("Destroying, seed %u", seed);
-  log("| | | | | | | | | | | | | | | | | | | | | | | | | | |");
-  log("v v v v v v v v v v v v v v v v v v v v v v v v v v v");
-  TRACE_AND_INDENT();
+  IF_DEBUG2
+  {
+    log("-");
+    log("Destroying, seed %u", seed);
+    log("| | | | | | | | | | | | | | | | | | | | | | | | | | |");
+    log("v v v v v v v v v v v v v v v v v v v v v v v v v v v");
+    TRACE_AND_INDENT();
+  }
 
   is_being_destroyed = true;
 
@@ -37,7 +40,7 @@ void Level::fini(void)
   // Destroying all things should detach them from all other places they
   // are referred to.
   //
-  log("Destroy all things");
+  dbg("Destroy all things");
 
   FOR_ALL_THING_GROUPS(group)
   {
@@ -62,15 +65,15 @@ void Level::fini(void)
       }
     }
   }
-  log("Destroyed all things");
+  dbg("Destroyed all things");
 
-  log("Garbage collection of things still on the map:");
+  dbg("Garbage collection of things still on the map:");
   things_gc_force();
 
   //
   // Check all things were fully detached
   //
-  log("Check all things are detached");
+  dbg("Check all things are detached");
   FOR_ALL_THING_GROUPS(group)
   {
     for (auto x = 0; x < MAP_WIDTH; ++x) {
@@ -97,8 +100,11 @@ void Level::fini(void)
     err("Level fini: Did not detach player, player %p still set on level", player);
   }
 
-  log("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ");
-  log("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
-  log("Destroyed, seed %u", seed);
-  log("-");
+  IF_DEBUG2
+  {
+    log("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ");
+    log("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
+    log("Destroyed, seed %u", seed);
+    log("-");
+  }
 }

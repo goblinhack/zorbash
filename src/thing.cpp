@@ -23,7 +23,7 @@ const Tpp Thing::tp_or_update(void)
   return (mytp);
 }
 
-const Tpp Thing::tp(void)
+const Tpp Thing::tp_slow(void)
 {
   if (likely(mytp != nullptr)) {
     return (mytp);

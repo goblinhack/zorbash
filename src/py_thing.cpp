@@ -20,7 +20,6 @@
     uint32_t     value    = 0;                                                                                       \
     static char *kwlist[] = {(char *) "id", (char *) "value", 0};                                                    \
                                                                                                                      \
-    LOG("Called %s", __FUNCTION__);                                                                                  \
     if (! PyArg_ParseTupleAndKeywords(args, keywds, "Ii", kwlist, &id, &value)) {                                    \
       ERR("%s: Failed parsing keywords", __FUNCTION__);                                                              \
       Py_RETURN_FALSE;                                                                                               \
@@ -43,7 +42,6 @@
     uint32_t     id       = 0;                                                                                       \
     static char *kwlist[] = {(char *) "id", 0};                                                                      \
                                                                                                                      \
-    LOG("Called %s", __FUNCTION__);                                                                                  \
     if (! PyArg_ParseTupleAndKeywords(args, keywds, "I", kwlist, &id)) {                                             \
       ERR("%s: Failed parsing keywords", __FUNCTION__);                                                              \
       Py_RETURN_FALSE;                                                                                               \
@@ -66,7 +64,6 @@
     uint32_t     id       = 0;                                                                                       \
     static char *kwlist[] = {(char *) "id", 0};                                                                      \
                                                                                                                      \
-    LOG("Called %s", __FUNCTION__);                                                                                  \
     if (! PyArg_ParseTupleAndKeywords(args, keywds, "I", kwlist, &id)) {                                             \
       ERR("%s: Failed parsing keywords", __FUNCTION__);                                                              \
       Py_RETURN_FALSE;                                                                                               \
@@ -90,7 +87,6 @@
     uint32_t     oid      = 0;                                                                                       \
     static char *kwlist[] = {(char *) "id", (char *) "oid", 0};                                                      \
                                                                                                                      \
-    LOG("Called %s", __FUNCTION__);                                                                                  \
     if (! PyArg_ParseTupleAndKeywords(args, keywds, "II", kwlist, &id, &oid)) {                                      \
       ERR("%s: Failed parsing keywords", __FUNCTION__);                                                              \
       Py_RETURN_FALSE;                                                                                               \
@@ -129,7 +125,6 @@
     uint32_t     id       = 0;                                                                                       \
     static char *kwlist[] = {(char *) "id", 0};                                                                      \
                                                                                                                      \
-    LOG("Called %s", __FUNCTION__);                                                                                  \
     if (! PyArg_ParseTupleAndKeywords(args, keywds, "I", kwlist, &id)) {                                             \
       ERR("%s: Failed parsing keywords", __FUNCTION__);                                                              \
       Py_RETURN_FALSE;                                                                                               \
@@ -157,7 +152,6 @@
     uint32_t     id       = 0;                                                                                       \
     static char *kwlist[] = {(char *) "id", 0};                                                                      \
                                                                                                                      \
-    LOG("Called %s", __FUNCTION__);                                                                                  \
     if (! PyArg_ParseTupleAndKeywords(args, keywds, "I", kwlist, &id)) {                                             \
       ERR("%s: Failed parsing keywords", __FUNCTION__);                                                              \
       Py_RETURN_FALSE;                                                                                               \

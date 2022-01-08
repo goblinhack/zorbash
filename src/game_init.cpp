@@ -14,7 +14,38 @@
 #include "my_sys.hpp"
 #include "my_world.hpp"
 
+void Game::pre_init(void)
+{
+  TRACE_AND_INDENT();
+
+  set_seed();
+
+  current_level = point3d(0, 0, 0);
+  level         = nullptr;
+
+  world.clear();
+}
+
 void Game::init(void)
+{
+  LOG("Game init");
+  TRACE_AND_INDENT();
+
+  pre_init();
+
+  CON("Creating level, name '%s', seed %u", seed_name.c_str(), seed);
+
+  // init_levels();
+  init_jump_paths();
+
+  // auto l = get(world.levels, current_level.x, current_level.y, current_level.z);
+  // if (! l) {
+  // return;
+  //}
+  // level = l;
+}
+
+void Game::set_seed(void)
 {
   LOG("Game init");
   TRACE_AND_INDENT();
@@ -25,35 +56,27 @@ void Game::init(void)
     seed_name = random_name(sizeof("4294967295") - 1);
   }
   seed = string_to_hash(seed_name);
-  CON("Creating level, name '%s', seed %u", seed_name.c_str(), seed);
-
-  current_level = point3d(LEVELS_ACROSS / 2, LEVELS_DOWN / 2, 1);
-  level         = nullptr;
-
-  world.clear();
-  init_levels();
-  init_jump_paths();
-
-  auto l = get(world.levels, current_level.x, current_level.y, current_level.z);
-  if (! l) {
-    return;
-  }
-  level = l;
+  pcg_srand(seed);
 }
 
 void Game::init_level(point3d p)
 {
-  LOG("Game init level %d,%d,%d", p.x, p.y, p.z);
+  DBG("Game init level %d,%d,%d", p.x, p.y, p.z);
   TRACE_AND_INDENT();
 
   auto level_seed = seed + p.x + p.y + p.z;
-  auto l          = get(world.levels, p.x, p.y, p.z);
+  TRACE_AND_INDENT();
+  auto l = get(world.levels, p.x, p.y, p.z);
+  TRACE_AND_INDENT();
   if (! l) {
+    DBG("Create new level at: %d,%d,%d", p.x, p.y, p.z);
     world.new_level_at(p, level_seed);
     l = get(world.levels, p.x, p.y, p.z);
     if (! l) {
-      ERR("No level created at %d,%d,%d", game->current_level.x, game->current_level.y, game->current_level.z);
+      ERR("No level created at: %d,%d,%d", game->current_level.x, game->current_level.y, game->current_level.z);
     }
+  } else {
+    LOG("Level already exists: %d,%d,%d", p.x, p.y, p.z);
   }
 }
 
@@ -62,11 +85,13 @@ void Game::init_levels(void)
   LOG("Game init levels");
   TRACE_AND_INDENT();
 
+#if 0
   IF_DEBUG2
   {
     game_levels_grid_init();
     return;
   }
+#endif
 
   //
   // Increase this to create more levels in advance

@@ -49,7 +49,7 @@ void Thing::on_polymorphed(void)
 void Thing::polymorph(Tpp into)
 {
   verify(MTYPE_THING, this);
-  log("Polymorgh into: %s", into->name().c_str());
+  dbg("Polymorgh into: %s", into->name().c_str());
 
   tp_id = into->id;
   mytp  = nullptr;
@@ -84,7 +84,7 @@ void Thing::polymorph(Tpp into)
   update();
 
   on_polymorphed();
-  log("Polymorphed into: %s", into->name().c_str());
+  dbg("Polymorphed into: %s", into->name().c_str());
 
   on_born();
   check_all_carried_items_are_owned();

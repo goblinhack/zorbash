@@ -26,10 +26,13 @@ void Level::create(point3d at, int seed)
   this->seed = seed;
   world_at   = at;
 
-  log("-");
-  log("Creating, seed %u", seed);
-  log("| | | | | | | | | | | | | | | | | | | | | | | | | | |");
-  log("v v v v v v v v v v v v v v v v v v v v v v v v v v v");
+  IF_DEBUG2
+  {
+    log("-");
+    log("Creating, seed %u", seed);
+    log("| | | | | | | | | | | | | | | | | | | | | | | | | | |");
+    log("v v v v v v v v v v v v v v v v v v v v v v v v v v v");
+  }
 
   //
   // Must set the level pointer so for e.g. spiders can spawn webs when born
@@ -45,10 +48,13 @@ void Level::create(point3d at, int seed)
 
   game->level_being_created = nullptr;
 
-  log("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^");
-  log("| | | | | | | | | | | | | | | | | | | | | | | | | | |");
-  log("Created, seed %u", seed);
-  log("-");
+  IF_DEBUG2
+  {
+    log("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^");
+    log("| | | | | | | | | | | | | | | | | | | | | | | | | | |");
+    log("Created, seed %u", seed);
+    log("-");
+  }
 
   if (! ret) {
     err("Failed to create level");

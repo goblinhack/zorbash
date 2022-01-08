@@ -16,20 +16,27 @@
 bool Level::create_dungeon(point3d at, int seed)
 {
   TRACE_AND_INDENT();
-  log("DGN: Create dungeon at (%d,%d,%d)", at.x, at.y, at.z);
-  TOPCON("Dungeon level %d is coming into being...", (at.z / 2) + 1);
+  dbg("DGN: Create dungeon at (%d,%d,%d)", at.x, at.y, at.z);
+
+  if (player) {
+    TOPCON("A new dungeon level is coming into being...");
+  }
 
   is_level_type_dungeon = true;
 
+  uint32_t start = time_get_time_ms();
+
   while (true) {
-    log("DGN: Create dungeon");
-    auto dungeon = new Dungeon(MAP_WIDTH, MAP_HEIGHT, DUNGEON_GRID_CHUNK_WIDTH, DUNGEON_GRID_CHUNK_HEIGHT, seed);
+    uint32_t start   = time_get_time_ms();
+    auto     dungeon = new Dungeon(MAP_WIDTH, MAP_HEIGHT, DUNGEON_GRID_CHUNK_WIDTH, DUNGEON_GRID_CHUNK_HEIGHT, seed);
     if (dungeon->failed) {
       log("DGN: create dungeon, failed, retry");
       seed++;
       delete dungeon;
       continue;
     }
+
+    log("DGN: Create dungeon layout (%d,%d,%d) took %u ms", at.x, at.y, at.z, time_get_time_ms() - start);
 
     //
     // Check we have a dungeon start
@@ -63,7 +70,7 @@ bool Level::create_dungeon(point3d at, int seed)
     auto dungeon = new Dungeon(0);
     if (g_errored) { return false; }
 #endif
-    auto tries = 1000;
+    auto tries = 500;
 
     auto wall_type = tp_random_wall_dungeon();
     if (! wall_type) {
@@ -380,19 +387,20 @@ bool Level::create_dungeon(point3d at, int seed)
     //
     // Place the player if we do not have one.
     //
-    if (! game->level) {
-      dbg2("DGN: Place player");
-      for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
-        for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
-          if (dungeon->is_ascend_dungeon(x, y)) {
-            auto t = thing_new("player2", point(x, y));
-            {
-              auto W = thing_new("wand_lightning", point(x, y));
-              t->carry(W);
-              t->enchant_without_stone(W);
-            }
+    if (0)
+      if (! game->level) {
+        dbg2("DGN: Place player");
+        for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
+          for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
+            if (dungeon->is_ascend_dungeon(x, y)) {
+              auto t = thing_new("player2", point(x, y));
+              {
+                auto W = thing_new("wand_lightning", point(x, y));
+                t->carry(W);
+                t->enchant_without_stone(W);
+              }
 
-            {
+              {
 #if 0
               for (auto m = 0; m < 500; m++) {
                 auto x = pcg_random_range(MAP_BORDER_ROCK, MAP_WIDTH - MAP_BORDER_ROCK);
@@ -402,21 +410,21 @@ bool Level::create_dungeon(point3d at, int seed)
                 }
               }
 #endif
-            }
-            IF_DEBUG2
-            {
-              thing_new("spiderweb", point(x + 3, y));
-              thing_new("armor_lather", point(x, y - 2));
-              thing_new("shield_woodon", point(x + 1, y - 3));
-              thing_new("shield_wooden", point(x, y - 3));
-              thing_new("fire", point(x - 1, y + 1));
-              thing_new("food_frog", point(x, y + 1));
-              // thing_new("thunderstone", point(x - 1, y - 1));
-              // thing_new("treasure_map", point(x - 1, y - 2));
-              // thing_new("beast_map", point(x + 1, y - 2));
-              // thing_new("fire", point(x + 2, y - 2));
-              // thing_new("zorblin", point(x + 1, y));
-              // thing_new("zorb_pack", point(x + 2, y));
+              }
+              IF_DEBUG2
+              {
+                thing_new("spiderweb", point(x + 3, y));
+                thing_new("armor_lather", point(x, y - 2));
+                thing_new("shield_woodon", point(x + 1, y - 3));
+                thing_new("shield_wooden", point(x, y - 3));
+                thing_new("fire", point(x - 1, y + 1));
+                thing_new("food_frog", point(x, y + 1));
+                // thing_new("thunderstone", point(x - 1, y - 1));
+                // thing_new("treasure_map", point(x - 1, y - 2));
+                // thing_new("beast_map", point(x + 1, y - 2));
+                // thing_new("fire", point(x + 2, y - 2));
+                // thing_new("zorblin", point(x + 1, y));
+                // thing_new("zorb_pack", point(x + 2, y));
 #if 0
               thing_new("jelly_baby", point(x + 3, y - 1));
               thing_new("jelly_baby", point(x + 4, y));
@@ -447,24 +455,24 @@ bool Level::create_dungeon(point3d at, int seed)
             }
 #endif
 
-              {
-                auto f = thing_new("enchantstone", point(x, y));
-                t->carry(f);
-              }
+                {
+                  auto f = thing_new("enchantstone", point(x, y));
+                  t->carry(f);
+                }
 
-              {
-                auto f = thing_new("skillstone", point(x, y));
-                t->carry(f);
-              }
+                {
+                  auto f = thing_new("skillstone", point(x, y));
+                  t->carry(f);
+                }
 
-              {
-                auto W = thing_new("wand_descent", point(x, y));
-                t->carry(W);
-              }
-              {
-                auto W = thing_new("wand_lightning", point(x, y));
-                t->carry(W);
-              }
+                {
+                  auto W = thing_new("wand_descent", point(x, y));
+                  t->carry(W);
+                }
+                {
+                  auto W = thing_new("wand_lightning", point(x, y));
+                  t->carry(W);
+                }
 #if 0
             auto w2 = thing_new("sword_rusty_basic", point(x, y));
             t->carry(w2);
@@ -502,50 +510,50 @@ bool Level::create_dungeon(point3d at, int seed)
               t->carry(W);
             }
 #endif
-              {
-                auto W = thing_new("ring_poison_resist", point(x, y));
-                t->carry(W);
+                {
+                  auto W = thing_new("ring_poison_resist", point(x, y));
+                  t->carry(W);
+                }
+
+                {
+                  auto W = thing_new("ring_poison_resist", point(x, y));
+                  t->carry(W);
+                }
+
+                {
+                  auto W = thing_new("key", point(x, y));
+                  t->carry(W);
+                }
               }
 
               {
-                auto W = thing_new("ring_poison_resist", point(x, y));
-                t->carry(W);
+                auto w3 = thing_new("sword1_wood", point(x, y));
+                t->carry(w3);
               }
 
               {
-                auto W = thing_new("key", point(x, y));
+                auto w3 = thing_new("axe", point(x, y));
+                t->carry(w3);
+              }
+
+              {
+                auto W = thing_new("torch", point(x, y));
                 t->carry(W);
               }
-            }
+              if (0) {
+                auto i = thing_new("thunderstone", point(x, y));
+                t->carry(i);
+              }
+              if (1) {
+                auto b = thing_new("bag_s", point(x, y));
+                t->carry(b);
+              }
 
-            {
-              auto w3 = thing_new("sword1_wood", point(x, y));
-              t->carry(w3);
+              goto placed_player;
             }
-
-            {
-              auto w3 = thing_new("axe", point(x, y));
-              t->carry(w3);
-            }
-
-            {
-              auto W = thing_new("torch", point(x, y));
-              t->carry(W);
-            }
-            if (0) {
-              auto i = thing_new("thunderstone", point(x, y));
-              t->carry(i);
-            }
-            if (1) {
-              auto b = thing_new("bag_s", point(x, y));
-              t->carry(b);
-            }
-
-            goto placed_player;
           }
         }
       }
-    }
 
   placed_player:
     //
@@ -629,16 +637,19 @@ bool Level::create_dungeon(point3d at, int seed)
     //
     // Zoom the map to the player
     //
-    dbg2("DGN: Scroll to player");
-    scroll_map_to_player();
-    if (g_errored) {
-      return false;
+    if (player) {
+      dbg2("DGN: Scroll to player");
+      scroll_map_to_player();
+      if (g_errored) {
+        return false;
+      }
     }
 
     //
     // Final update of the heatmap to account placement of braziers
     //
     dbg2("DGN: Final update heatmap");
+
     //
     // Make sure and place dry grass after this
     //
@@ -672,7 +683,7 @@ bool Level::create_dungeon(point3d at, int seed)
     break;
   }
 
-  dbg2("DGN: Done");
+  log("DGN: Populated dungeon at (%d,%d,%d) took %u ms", at.x, at.y, at.z, time_get_time_ms() - start);
   return true;
 }
 
@@ -957,6 +968,7 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules(Dungeonp d)
   for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
     for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
       Tpp tp {};
+
       //
       // Reset the seed for each cell to increase the chances
       // of repeatability if other small things change in the
@@ -1033,34 +1045,39 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules(Dungeonp d)
       auto r           = d->getr(x, y);
       bool be_generous = false;
       if (r) {
-        be_generous = r->contains(MAP_DEPTH_OBJ, Charmap::MONST_HARD) ||
-                      r->contains(MAP_DEPTH_OBJ, Charmap::MONST_MED) || r->contains(MAP_DEPTH_OBJ, Charmap::DOOR);
+        if (r->is_hard_set) {
+          be_generous = r->is_hard;
+        } else {
+          be_generous    = r->contains(MAP_DEPTH_OBJ, Charmap::MONST_HARD, Charmap::MONST_MED, Charmap::DOOR);
+          r->is_hard_set = true;
+          r->is_hard     = be_generous;
+        }
       }
 
-      //
-      // If surrounded by hazards then choose an ethereal mob
-      //
-      if (d->is_hazard(x - 1, y) && d->is_hazard(x + 1, y) && d->is_hazard(x, y - 1) && d->is_hazard(x, y + 1) &&
-          d->is_hazard(x - 1, y - 1) && d->is_hazard(x + 1, y - 1) && d->is_hazard(x - 1, y + 1) &&
-          d->is_hazard(x + 1, y + 1)) {
+      if (d->is_mob_spawner_easy(x, y) || d->is_mob_spawner_hard(x, y)) {
+        //
+        // If surrounded by hazards then choose an ethereal mob
+        //
+        if (d->is_hazard(x - 1, y) && d->is_hazard(x + 1, y) && d->is_hazard(x, y - 1) && d->is_hazard(x, y + 1) &&
+            d->is_hazard(x - 1, y - 1) && d->is_hazard(x + 1, y - 1) && d->is_hazard(x - 1, y + 1) &&
+            d->is_hazard(x + 1, y + 1)) {
 
-        if (d->is_mob_spawner_easy(x, y) || d->is_mob_spawner_hard(x, y)) {
           tp = tp_random_ethereal_mob();
-        }
-      } else {
-        //
-        // Else choose a normal mob
-        //
-        if (d->is_mob_spawner_easy(x, y)) {
-          if (be_generous) {
-            tp = tp_random_mob_easy(p);
-          } else {
-            if (pcg_random_range(0, 100) < 50) {
+        } else {
+          //
+          // Else choose a normal mob
+          //
+          if (d->is_mob_spawner_easy(x, y)) {
+            if (be_generous) {
               tp = tp_random_mob_easy(p);
+            } else {
+              if (pcg_random_range(0, 100) < 50) {
+                tp = tp_random_mob_easy(p);
+              }
             }
+          } else if (d->is_mob_spawner_hard(x, y)) {
+            tp = tp_random_mob_hard(p);
           }
-        } else if (d->is_mob_spawner_hard(x, y)) {
-          tp = tp_random_mob_hard(p);
         }
       }
 
@@ -1188,19 +1205,19 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules(Dungeonp d)
           if (r && r->is_secret) {
             t->enchant_randomly();
           }
-          con("DGN: Placed weapon '%s'", t->short_text_capitalise().c_str());
+          dbg("DGN: Placed weapon '%s'", t->short_text_capitalise().c_str());
         } else if (t->is_treasure_type()) {
           if (r && r->is_secret) {
             t->enchant_randomly();
           }
-          con("DGN: Placed treasure '%s'", t->short_text_capitalise().c_str());
+          dbg("DGN: Placed treasure '%s'", t->short_text_capitalise().c_str());
         } else if (t->is_bag()) {
-          con("DGN: Placed '%s'", t->short_text_capitalise().c_str());
+          dbg("DGN: Placed '%s'", t->short_text_capitalise().c_str());
         } else if (t->is_monst()) {
           //
           // Already logged
           //
-          // con("DGN: Placed random monster '%s'", t->short_text_capitalise().c_str());
+          // dbg("DGN: Placed random monster '%s'", t->short_text_capitalise().c_str());
         } else {
           //
           // Doors etc... don't log, not as interesting
@@ -1724,7 +1741,7 @@ void Level::place_random_treasure(Dungeonp d)
         }
       }
 
-      con("DGN: Placed random item '%s'", t->short_text_capitalise().c_str());
+      dbg("DGN: Placed random item '%s'", t->short_text_capitalise().c_str());
 
       if (treasure_max-- < 0) {
         return;
@@ -1756,7 +1773,7 @@ void Level::place_random_torches(Dungeonp d)
       //
       (void) thing_new("torch", point(x, y));
 
-      con("DGN: Placed random torch");
+      dbg("DGN: Placed random torch");
       if (torch_max-- < 0) {
         return;
       }

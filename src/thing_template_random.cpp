@@ -424,7 +424,7 @@ Tpp Level::tp_random_monst_easy(const point &p)
       }
     }
 
-    con("DGN: Placed easy monster '%s' difficulty %d (mine %d)", tpp->short_text_capitalise().c_str(),
+    dbg("DGN: Placed easy monster '%s' difficulty %d (mine %d)", tpp->short_text_capitalise().c_str(),
         tpp->get_danger_level(), player_danger_level);
     return tpp;
   }
@@ -478,7 +478,7 @@ Tpp Level::tp_random_monst_med(const point &p)
       }
     }
 
-    con("DGN: Placed medium monster '%s' difficulty %d (mine %d)", tpp->short_text_capitalise().c_str(),
+    dbg("DGN: Placed medium monster '%s' difficulty %d (mine %d)", tpp->short_text_capitalise().c_str(),
         tpp->get_danger_level(), player_danger_level);
     return tpp;
   }
@@ -531,7 +531,7 @@ Tpp Level::tp_random_monst_hard(const point &p)
       }
     }
 
-    con("DGN: Placed hard monster '%s' difficulty %d (mine %d)", tpp->short_text_capitalise().c_str(),
+    dbg("DGN: Placed hard monster '%s' difficulty %d (mine %d)", tpp->short_text_capitalise().c_str(),
         tpp->get_danger_level(), player_danger_level);
     return tpp;
   }

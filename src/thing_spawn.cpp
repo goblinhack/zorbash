@@ -128,8 +128,8 @@ bool Thing::spawn_next_to_or_on_monst(const std::string &what)
     auto y = curr_at.y + d.y;
     auto p = point(x, y);
 
-    if (level->is_door(x, y) || level->is_secret_door(x, y) || level->is_mob_spawner(x, y) || level->is_hazard(x, y) ||
-        level->is_rock(x, y) || level->is_wall(x, y)) {
+    if (level->is_door(x, y) || level->is_secret_door(x, y) || level->is_mob_spawner(x, y) ||
+        level->is_hazard(x, y) || level->is_rock(x, y) || level->is_wall(x, y)) {
       continue;
     }
 
@@ -388,7 +388,6 @@ int Thing::spawn_randomly_in_radius_range(const std::string &what, int amount, u
 
       auto c = level->thing_new(what, spawn_at);
 
-      c->log("Spawned");
       c->inherit_from(this);
       c->set_ts_anim_delay_end(time_get_time_ms_cached() + dist * 100);
 
@@ -448,7 +447,6 @@ bool Thing::spawn_fire(const std::string &what)
   auto chosen = possible[ pcg_random_range(0, cands) ];
 
   auto c = level->thing_new(what, chosen);
-  IF_DEBUG2 { c->log("Spawned"); }
   c->inherit_from(this);
 
   if (is_spawner()) {

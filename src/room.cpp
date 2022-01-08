@@ -286,3 +286,29 @@ bool Room::contains(int depth, char what)
   }
   return false;
 }
+
+bool Room::contains(int depth, char what1, char what2)
+{
+  for (auto y = 0; y < height; y++) {
+    for (auto x = 0; x < width; x++) {
+      auto m = get(data, x, y, depth);
+      if ((m == what1) || (m == what2)) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+bool Room::contains(int depth, char what1, char what2, char what3)
+{
+  for (auto y = 0; y < height; y++) {
+    for (auto x = 0; x < width; x++) {
+      auto m = get(data, x, y, depth);
+      if ((m == what1) || (m == what2) || (m == what3)) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
