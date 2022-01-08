@@ -359,7 +359,11 @@ static void game_levels_grid_tick(Widp w)
     }
   }
 
-  wid_set_style(ctx->wid_enter, UI_WID_STYLE_OK);
+  auto b = ctx->wid_enter;
+  wid_set_text(b, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$E%%fg=" UI_TEXT_COLOR_STR "$nter the Dungeon?");
+  wid_set_style(b, UI_WID_STYLE_OK);
+  wid_set_shape_square(b);
+  wid_update(b);
 
   ctx->generated = true;
 }
@@ -396,7 +400,7 @@ static uint8_t game_levels_grid_reroll(Widp w, int32_t x, int32_t y, uint32_t bu
   return true;
 }
 
-static uint8_t game_levels_grid_play(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t game_levels_grid_enter(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_NO_INDENT();
 
@@ -419,6 +423,15 @@ static uint8_t game_levels_grid_play(Widp w, int32_t x, int32_t y, uint32_t butt
   return true;
 }
 
+static uint8_t game_levels_grid_choose_seed(Widp w, int32_t x, int32_t y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  game_levels_grid_destroy(wid_get_top_parent(w));
+  game->fini();
+  game->choose_seed_select();
+  return false;
+}
+
 static uint8_t game_levels_grid_key_up(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_NO_INDENT();
@@ -438,6 +451,7 @@ static uint8_t game_levels_grid_key_up(Widp w, const struct SDL_Keysym *key)
             TRACE_NO_INDENT();
             auto c = wid_event_to_char(key);
             switch (c) {
+              case 'c' : game_levels_grid_choose_seed(nullptr, 0, 0, 0); return true;
               case 'r' : game_levels_grid_reroll(nullptr, 0, 0, 0); return true;
               case 'b' :
               case 'q' :
@@ -613,28 +627,42 @@ void game_levels_grid_init(void)
   point tl    = make_point(TERM_WIDTH - UI_WID_POPUP_WIDTH_NORMAL - 1, TERM_HEIGHT - 26);
   point br    = make_point(TERM_WIDTH - 1, TERM_HEIGHT - 1);
   auto  width = br.x - tl.x - 2;
-  int   y_at = y_at = TERM_HEIGHT - 18;
+  int   y_at = y_at = TERM_HEIGHT - 23;
   int   x_at = x_at = TERM_WIDTH - width - 2;
 
+  y_at += 3;
   {
     TRACE_NO_INDENT();
-    Widp w = wid_new_square_button(window, "wid level_grid reroll");
+    Widp w = wid_new_square_button(window, "Enter");
 
     point tl = make_point(x_at, y_at);
     point br = make_point(x_at + width, y_at + 8);
 
     wid_set_pos(w, tl, br);
-    wid_set_on_mouse_up(w, game_levels_grid_play);
-    wid_set_style(w, UI_WID_STYLE_GRAY);
-    wid_set_text(w, "%%fg=white$E%%fg=reset$nter the Dungeon!");
-    wid_set_style(w, UI_WID_STYLE_HIGHLIGHTED);
+    wid_set_on_mouse_up(w, game_levels_grid_enter);
+    wid_set_shape_none(w);
     ctx->wid_enter = w;
   }
 
   y_at += 10;
+
   {
     TRACE_NO_INDENT();
-    Widp w = wid_new_square_button(window, "wid level_grid reroll");
+    auto w = wid_new_square_button(window, "Choose seed");
+
+    point tl = make_point(x_at, y_at);
+    point br = make_point(x_at + width, y_at + 2);
+
+    wid_set_pos(w, tl, br);
+    wid_set_on_mouse_up(w, game_levels_grid_choose_seed);
+    wid_set_style(w, UI_WID_STYLE_NORMAL);
+    wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$C%%fg=" UI_TEXT_COLOR_STR "$hange seed");
+  }
+
+  y_at += 3;
+  {
+    TRACE_NO_INDENT();
+    Widp w = wid_new_square_button(window, "Reroll");
 
     point tl = make_point(x_at, y_at);
     point br = make_point(x_at + width, y_at + 2);
@@ -642,21 +670,20 @@ void game_levels_grid_init(void)
     wid_set_pos(w, tl, br);
     wid_set_on_mouse_up(w, game_levels_grid_reroll);
     wid_set_style(w, UI_WID_STYLE_NORMAL);
-    wid_set_text(w, "%%fg=white$R%%fg=reset$eroll?");
-    wid_set_style(w, UI_WID_STYLE_HIGHLIGHTED);
+    wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$R%%fg=" UI_TEXT_COLOR_STR "$andom level");
   }
 
   y_at += 3;
   {
     TRACE_NO_INDENT();
-    Widp w = wid_new_square_button(window, "wid level_grid reroll");
+    Widp w = wid_new_square_button(window, "Back");
 
     point tl = make_point(x_at, y_at);
     point br = make_point(x_at + width, y_at + 2);
 
     wid_set_pos(w, tl, br);
     wid_set_on_mouse_up(w, game_levels_grid_go_back);
-    wid_set_text(w, "%%fg=white$B%%fg=reset$ack?");
+    wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$B%%fg=" UI_TEXT_COLOR_STR "$ack?");
     wid_set_style(w, UI_WID_STYLE_NORMAL);
   }
 
