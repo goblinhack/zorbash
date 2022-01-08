@@ -3,8 +3,8 @@
 // See the README.md file for license info.
 //
 
-#include "game_levels_grid.hpp"
 #include "my_game.hpp"
+#include "my_game_dungeons.hpp"
 #include "my_gl.hpp"
 #include "my_globals.hpp"
 #include "my_globals_extra.hpp"
@@ -114,7 +114,7 @@ static uint8_t game_menu_slow_start(Widp w, int32_t x, int32_t y, uint32_t butto
   game_main_menu_hide();
   game_main_menu_destroy();
   wid_visible(wid_topcon_window);
-  game_levels_grid_init();
+  game_dungeons_init();
   return false;
 }
 
