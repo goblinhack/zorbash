@@ -28,44 +28,6 @@ uint32_t Level::num(void)
   return (uint32_t) (world_at.z / 2) + 1;
 }
 
-uint8_t Level::is_lava(const point &p)
-{
-  TRACE_NO_INDENT();
-  if (unlikely(is_oob(p.x, p.y))) {
-    return false;
-  }
-  return (get(_is_lava, p.x, p.y));
-}
-
-uint8_t Level::is_lava(const int x, const int y)
-{
-  TRACE_NO_INDENT();
-  if (unlikely(is_oob(x, y))) {
-    return false;
-  }
-  return (get(_is_lava, x, y));
-}
-
-void Level::set_is_lava(const int x, const int y)
-{
-  TRACE_NO_INDENT();
-  if (unlikely(is_oob(x, y))) {
-    return;
-  }
-  map_changed = true;
-  incr(_is_lava, x, y, (uint8_t) 1);
-}
-
-void Level::unset_is_lava(const int x, const int y)
-{
-  TRACE_NO_INDENT();
-  if (unlikely(is_oob(x, y))) {
-    return;
-  }
-  map_changed = true;
-  decr(_is_lava, x, y, (uint8_t) 1);
-}
-
 uint8_t Level::is_acid(const point &p)
 {
   TRACE_NO_INDENT();
@@ -330,44 +292,6 @@ void Level::unset_is_ripple(const int x, const int y)
   }
   map_changed = true;
   decr(_is_ripple, x, y, (uint8_t) 1);
-}
-
-uint8_t Level::is_brazier(const point &p)
-{
-  TRACE_NO_INDENT();
-  if (unlikely(is_oob(p.x, p.y))) {
-    return false;
-  }
-  return (get(_is_brazier, p.x, p.y));
-}
-
-uint8_t Level::is_brazier(const int x, const int y)
-{
-  TRACE_NO_INDENT();
-  if (unlikely(is_oob(x, y))) {
-    return false;
-  }
-  return (get(_is_brazier, x, y));
-}
-
-void Level::set_is_brazier(const int x, const int y)
-{
-  TRACE_NO_INDENT();
-  if (unlikely(is_oob(x, y))) {
-    return;
-  }
-  map_changed = true;
-  incr(_is_brazier, x, y, (uint8_t) 1);
-}
-
-void Level::unset_is_brazier(const int x, const int y)
-{
-  TRACE_NO_INDENT();
-  if (unlikely(is_oob(x, y))) {
-    return;
-  }
-  map_changed = true;
-  decr(_is_brazier, x, y, (uint8_t) 1);
 }
 
 uint8_t Level::is_barrel(const point &p)
@@ -1326,42 +1250,6 @@ void Level::unset_is_corpse(const int x, const int y)
     return;
   }
   decr(_is_corpse, x, y, (uint8_t) 1);
-}
-
-uint8_t Level::is_fire(const point &p)
-{
-  TRACE_NO_INDENT();
-  if (unlikely(is_oob(p.x, p.y))) {
-    return false;
-  }
-  return (get(_is_fire, p.x, p.y));
-}
-
-uint8_t Level::is_fire(const int x, const int y)
-{
-  TRACE_NO_INDENT();
-  if (unlikely(is_oob(x, y))) {
-    return false;
-  }
-  return (get(_is_fire, x, y));
-}
-
-void Level::set_is_fire(const int x, const int y)
-{
-  TRACE_NO_INDENT();
-  if (unlikely(is_oob(x, y))) {
-    return;
-  }
-  incr(_is_fire, x, y, (uint8_t) 1);
-}
-
-void Level::unset_is_fire(const int x, const int y)
-{
-  TRACE_NO_INDENT();
-  if (unlikely(is_oob(x, y))) {
-    return;
-  }
-  decr(_is_fire, x, y, (uint8_t) 1);
 }
 
 uint8_t Level::is_monst(const point &p)

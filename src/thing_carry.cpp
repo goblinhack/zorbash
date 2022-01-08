@@ -466,7 +466,7 @@ void Thing::try_to_carry(const std::list< Thingp > &items)
 //
 bool Thing::try_to_carry_if_worthwhile_dropping_items_if_needed(Thingp item)
 {
-  log("Try to carry if worthwhile: %s", item->to_short_string().c_str());
+  dbg("Try to carry if worthwhile: %s", item->to_short_string().c_str());
   TRACE_AND_INDENT();
 
   Thingp would_need_to_drop        = nullptr;
@@ -476,7 +476,7 @@ bool Thing::try_to_carry_if_worthwhile_dropping_items_if_needed(Thingp item)
   // Don't try to carry the bag itself if you're an AI. Carry the contents.
   //
   if (item->is_bag_item_container()) {
-    log("Try to carry contents of: %s", item->to_short_string().c_str());
+    dbg("Try to carry contents of: %s", item->to_short_string().c_str());
     TRACE_AND_INDENT();
 
     for (const auto t : item->get_item_vector()) {
@@ -489,18 +489,18 @@ bool Thing::try_to_carry_if_worthwhile_dropping_items_if_needed(Thingp item)
   }
 
   if (worth_collecting(item, &would_need_to_drop) < 0) {
-    log("Carry check: @(%s, %d,%d %d/%dh) is not worth collecting %s", level->to_string().c_str(), (int) curr_at.x,
+    dbg("Carry check: @(%s, %d,%d %d/%dh) is not worth collecting %s", level->to_string().c_str(), (int) curr_at.x,
         (int) curr_at.y, get_health(), get_health_max(), item->to_short_string().c_str());
     return false;
   }
 
   if (would_need_to_drop) {
-    log("Carry check: @(%s, %d,%d %d/%dh) try to carry %s by dropping %s", level->to_string().c_str(),
+    dbg("Carry check: @(%s, %d,%d %d/%dh) try to carry %s by dropping %s", level->to_string().c_str(),
         (int) curr_at.x, (int) curr_at.y, get_health(), get_health_max(), item->to_short_string().c_str(),
         would_need_to_drop->to_string().c_str());
 
     if (drop(would_need_to_drop)) {
-      log("Carry check: @(%s, %d,%d %d/%dh) dropped %s", level->to_string().c_str(), (int) curr_at.x, (int) curr_at.y,
+      dbg("Carry check: @(%s, %d,%d %d/%dh) dropped %s", level->to_string().c_str(), (int) curr_at.x, (int) curr_at.y,
           get_health(), get_health_max(), would_need_to_drop->to_string().c_str());
 
       if (is_player() && game->robot_mode) {
@@ -511,7 +511,7 @@ bool Thing::try_to_carry_if_worthwhile_dropping_items_if_needed(Thingp item)
       return true;
     }
 
-    log("Carry check: @(%s, %d,%d %d/%dh) failed to drop %s", level->to_string().c_str(), (int) curr_at.x,
+    dbg("Carry check: @(%s, %d,%d %d/%dh) failed to drop %s", level->to_string().c_str(), (int) curr_at.x,
         (int) curr_at.y, get_health(), get_health_max(), would_need_to_drop->to_string().c_str());
 
     if (is_player() && game->robot_mode) {
@@ -522,7 +522,7 @@ bool Thing::try_to_carry_if_worthwhile_dropping_items_if_needed(Thingp item)
   }
 
   if (try_to_carry(item)) {
-    log("Carry check: @(%s, %d,%d %d/%dh) collected %s", level->to_string().c_str(), (int) curr_at.x, (int) curr_at.y,
+    dbg("Carry check: @(%s, %d,%d %d/%dh) collected %s", level->to_string().c_str(), (int) curr_at.x, (int) curr_at.y,
         get_health(), get_health_max(), item->to_short_string().c_str());
 
     if (is_player() && game->robot_mode) {
@@ -533,7 +533,7 @@ bool Thing::try_to_carry_if_worthwhile_dropping_items_if_needed(Thingp item)
     return true;
   }
 
-  log("Carry check: @(%s, %d,%d %d/%dh) failed to collect %s", level->to_string().c_str(), (int) curr_at.x,
+  dbg("Carry check: @(%s, %d,%d %d/%dh) failed to collect %s", level->to_string().c_str(), (int) curr_at.x,
       (int) curr_at.y, get_health(), get_health_max(), item->to_short_string().c_str());
 
   if (is_player() && game->robot_mode) {
@@ -565,15 +565,15 @@ void Thing::check_all_carried_items_are_owned(void)
   }
 
   if (carrying_anything()) {
-    log("Carried items:");
+    dbg("Carried items:");
     TRACE_AND_INDENT();
     for (const auto &what : get_item_list()) {
       auto top_owner       = what->get_top_owner();
       auto immediate_owner = what->get_immediate_owner();
       if ((top_owner != this) && (immediate_owner != this)) {
         if (immediate_owner) {
-          log("Immediate owner of %s is %s", what->to_short_string().c_str(), top_owner->to_string().c_str());
-          log("Top owner of %s is %s", what->to_short_string().c_str(), what->get_top_owner()->to_string().c_str());
+          dbg("Immediate owner of %s is %s", what->to_short_string().c_str(), top_owner->to_string().c_str());
+          dbg("Top owner of %s is %s", what->to_short_string().c_str(), what->get_top_owner()->to_string().c_str());
           err("Item check failed for %s which is not carried and owned by %s", what->to_short_string().c_str(),
               immediate_owner->to_string().c_str());
         } else {
@@ -583,21 +583,21 @@ void Thing::check_all_carried_items_are_owned(void)
       }
 
       if (top_owner != immediate_owner) {
-        log("Carried %s, owner %s", what->to_short_string().c_str(), immediate_owner->to_string().c_str());
+        dbg("Carried %s, owner %s", what->to_short_string().c_str(), immediate_owner->to_string().c_str());
       } else {
-        log("Carried %s", what->to_short_string().c_str());
+        dbg("Carried %s", what->to_short_string().c_str());
       }
     }
   }
 
   if (equipped_anything()) {
-    log("Equipped items:");
+    dbg("Equipped items:");
     TRACE_AND_INDENT();
     FOR_ALL_EQUIP(e)
     {
       auto what = get_equip(e);
       if (what) {
-        log("Equipped slot %s: %s", equip_name(e).c_str(), what->to_short_string().c_str());
+        dbg("Equipped slot %s: %s", equip_name(e).c_str(), what->to_short_string().c_str());
       }
     }
   }

@@ -648,6 +648,7 @@ public:
   uint8_t is_blood(const int x, const int y);
   uint8_t is_blood(const point &p);
   uint8_t is_brazier(const int x, const int y);
+  uint8_t is_brazier_no_check(const int x, const int y);
   uint8_t is_brazier(const point &p);
   uint8_t is_bridge(const int x, const int y);
   uint8_t is_bridge(const point &p);
@@ -678,6 +679,7 @@ public:
   uint8_t is_enchantstone(const int x, const int y);
   uint8_t is_enchantstone(const point &p);
   uint8_t is_fire(const int x, const int y);
+  uint8_t is_fire_no_check(const int x, const int y);
   uint8_t is_fire(const point &p);
   uint8_t is_floor(const int x, const int y);
   uint8_t is_floor(const point &p);
@@ -691,8 +693,9 @@ public:
   uint8_t is_hazard(const point &p);
   uint8_t is_key(const int x, const int y);
   uint8_t is_key(const point &p);
-  uint8_t is_lava(const int x, const int y);
   uint8_t is_lava(const point &p);
+  uint8_t is_lava(const int x, const int y);
+  uint8_t is_lava_no_check(const int x, const int y);
   uint8_t is_lit_ever(const int x, const int y);
   uint8_t is_lit_ever(const point &p);
   uint8_t is_lit_ever_no_check(const int x, const int y);

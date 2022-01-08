@@ -29,6 +29,7 @@ public:
   // Not necessarily an actual key or lock, but something allowing access
   // to the other node. Only one key per node depth.
   //
+  bool is_walked {false};
   bool is_secret {false};
   bool is_key {false};
   bool is_lock {false};

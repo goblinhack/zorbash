@@ -50,10 +50,17 @@ typedef struct {
 
 typedef class Thing_
 {
+private:
+  //
+  // As this is called a lot, probably worth the memory
+  //
+  Tpp mytp {};
+
 public:
   Thing_(void);
   ~Thing_(void);
 
+public:
   ThingInfop  _infop {};
   ThingItemsp _itemsp {};
   ThingAip    _aip {};
@@ -162,7 +169,7 @@ public:
   uint64_t i_set_is_key                           : 1 {};
   uint64_t i_set_is_lava                          : 1 {};
   uint64_t i_set_is_light_blocker                 : 1 {};
-  uint64_t i_set_is_mob_spawner                           : 1 {};
+  uint64_t i_set_is_mob_spawner                   : 1 {};
   uint64_t i_set_is_monst                         : 1 {};
   uint64_t i_set_is_necrotic_danger_level         : 1 {};
   uint64_t i_set_is_obs_destructable              : 1 {};
@@ -201,11 +208,6 @@ public:
 #ifdef ENABLE_DEBUG_THING_SER
   std::string debug_str;
 #endif
-private:
-  //
-  // As this is called a lot, probably worth the memory
-  //
-  Tpp mytp {};
 
 public:
   //
@@ -511,7 +513,20 @@ public:
   const ThingId &set_owner_id(const ThingId &v);
   const ThingId &set_spawned_owner_id(const ThingId &v);
 
-  const Tpp tp(void);
+  const Tpp tp_slow(void);
+
+  //
+  // It's used a lot, so inline candidate
+  //
+  const Tpp tp(void)
+  {
+    if (likely(mytp != nullptr)) {
+      return (mytp);
+    }
+
+    return tp_slow();
+  }
+
   const Tpp tp_or_update(void);
 
   const fpoint &get_interpolated_at(void);

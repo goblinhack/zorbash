@@ -132,7 +132,7 @@ redo:
   while (depth < 10) {
     set_max_depth();
 
-    auto placed = snake_walk(depth, 5, pass);
+    auto placed = snake_walk(depth, 3, pass);
 
     if (debug_enabled) {
       LOG("Node-grid: Level depth %d placed %d nodes", depth, placed);
@@ -326,8 +326,11 @@ redo:
   //
   remove_redundant_directions();
 
-  dump();
-  LOG("Final map: ^^^^^^^^^^");
+  IF_DEBUG2
+  {
+    dump();
+    LOG("Final map: ^^^^^^^^^^");
+  }
 }
 
 void Nodes::dump(void)

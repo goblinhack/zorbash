@@ -233,8 +233,11 @@ void Dungeon::make_dungeon(void)
   TRACE_AND_INDENT();
   debug("add room walls");
 
-  LOG("Created basic layout:");
-  dump();
+  IF_DEBUG2
+  {
+    LOG("Created basic layout:");
+    dump();
+  }
 
   //
   // Add a cave as the under-dungeon
@@ -290,8 +293,11 @@ void Dungeon::make_dungeon(void)
               5,  // R2
               4 /* generations */);
 
-  LOG("DGN: Created, but not populated");
-  dump();
+  IF_DEBUG2
+  {
+    LOG("DGN: Created, but not populated");
+    dump();
+  }
 }
 
 char *Dungeon::cell_addr(const int x, const int y, const int z)
@@ -300,10 +306,10 @@ char *Dungeon::cell_addr(const int x, const int y, const int z)
     return nullptr;
   }
 
-  return (&getref(cells, offset(x, y, z)));
+  return (getptr(cells, offset(x, y, z)));
 }
 
-char *Dungeon::cell_addr_no_check(const int x, const int y, const int z) { return (&getref(cells, offset(x, y, z))); }
+char *Dungeon::cell_addr_no_check(const int x, const int y, const int z) { return (getptr(cells, offset(x, y, z))); }
 
 bool Dungeon::is_oob(const int x, const int y, const int z)
 {
@@ -354,7 +360,7 @@ Dungeon::Dungeon(int level)
   std::fill(cells.begin(), cells.end(), Charmap::SPACE);
 
   place_level(l);
-  dump();
+  IF_DEBUG2 { dump(); }
 }
 
 int Dungeon::offset(const int x, const int y, const int z)
@@ -435,10 +441,10 @@ Roomp *Dungeon::cell_rooms_addr(const int x, const int y)
     return nullptr;
   }
 
-  return (&getref(cells_room, offset(x, y)));
+  return (getptr(cells_room, offset(x, y)));
 }
 
-Roomp *Dungeon::cell_rooms_addr_no_check(const int x, const int y) { return (&getref(cells_room, offset(x, y))); }
+Roomp *Dungeon::cell_rooms_addr_no_check(const int x, const int y) { return (getptr(cells_room, offset(x, y))); }
 
 void Dungeon::putr(const int x, const int y, Roomp r)
 {
@@ -2160,15 +2166,125 @@ int Dungeon::draw_corridor(point start, point end, char w)
   TRACE_AND_INDENT();
   Dmap d {};
 
+  //
+  // Very close corridors we cannot use dmap as that will be len 0
+  //
+  if (start + point(1, 1) == end) {
+    if (! is_anything_at_no_check(start.x + 1, start.y)) {
+      putc(start.x + 1, start.y, MAP_DEPTH_FLOOR, w);
+      putc(start.x, start.y, MAP_DEPTH_OBJ, Charmap::DOOR);
+      putc(end.x, end.y, MAP_DEPTH_OBJ, Charmap::DOOR);
+      return 3;
+    }
+    if (! is_anything_at_no_check(start.x, start.y + 1)) {
+      putc(start.x, start.y + 1, MAP_DEPTH_FLOOR, w);
+      putc(start.x, start.y, MAP_DEPTH_OBJ, Charmap::DOOR);
+      putc(end.x, end.y, MAP_DEPTH_OBJ, Charmap::DOOR);
+      return 3;
+    }
+  }
+  if (start + point(1, -1) == end) {
+    if (! is_anything_at_no_check(start.x + 1, start.y)) {
+      putc(start.x + 1, start.y, MAP_DEPTH_FLOOR, w);
+      putc(start.x, start.y, MAP_DEPTH_OBJ, Charmap::DOOR);
+      putc(end.x, end.y, MAP_DEPTH_OBJ, Charmap::DOOR);
+      return 3;
+    }
+    if (! is_anything_at_no_check(start.x, start.y - 1)) {
+      putc(start.x, start.y - 1, MAP_DEPTH_FLOOR, w);
+      putc(start.x, start.y, MAP_DEPTH_OBJ, Charmap::DOOR);
+      putc(end.x, end.y, MAP_DEPTH_OBJ, Charmap::DOOR);
+      return 3;
+    }
+  }
+  if (start + point(-1, 1) == end) {
+    if (! is_anything_at_no_check(start.x - 1, start.y)) {
+      putc(start.x - 1, start.y, MAP_DEPTH_FLOOR, w);
+      putc(start.x, start.y, MAP_DEPTH_OBJ, Charmap::DOOR);
+      putc(end.x, end.y, MAP_DEPTH_OBJ, Charmap::DOOR);
+      return 3;
+    }
+    if (! is_anything_at_no_check(start.x, start.y + 1)) {
+      putc(start.x, start.y + 1, MAP_DEPTH_FLOOR, w);
+      putc(start.x, start.y, MAP_DEPTH_OBJ, Charmap::DOOR);
+      putc(end.x, end.y, MAP_DEPTH_OBJ, Charmap::DOOR);
+      return 3;
+    }
+  }
+  if (start + point(-1, -1) == end) {
+    if (! is_anything_at_no_check(start.x - 1, start.y)) {
+      putc(start.x - 1, start.y, MAP_DEPTH_FLOOR, w);
+      putc(start.x, start.y, MAP_DEPTH_OBJ, Charmap::DOOR);
+      putc(end.x, end.y, MAP_DEPTH_OBJ, Charmap::DOOR);
+      return 3;
+    }
+    if (! is_anything_at_no_check(start.x, start.y - 1)) {
+      putc(start.x, start.y - 1, MAP_DEPTH_FLOOR, w);
+      putc(start.x, start.y, MAP_DEPTH_OBJ, Charmap::DOOR);
+      putc(end.x, end.y, MAP_DEPTH_OBJ, Charmap::DOOR);
+      return 3;
+    }
+  }
+
+  //
+  // If close, try a direct walk
+  //
+  if (distance(start, end) < 4) {
+    std::vector< point > p;
+
+    auto at = start;
+
+    for (;;) {
+      if (at == end) {
+        for (auto i : p) {
+          putc(i.x, i.y, MAP_DEPTH_FLOOR, w);
+        }
+        putc(start.x, start.y, MAP_DEPTH_OBJ, Charmap::DOOR);
+        putc(end.x, end.y, MAP_DEPTH_OBJ, Charmap::DOOR);
+        return p.size();
+      }
+
+      if (end.x > at.x) {
+        point cand = at + point(1, 0);
+        if ((cand == end) || ! is_anything_at_no_check(cand.x, cand.y)) {
+          p.push_back(cand);
+          at = cand;
+          continue;
+        }
+      }
+      if (end.x < at.x) {
+        point cand = at + point(-1, 0);
+        if ((cand == end) || ! is_anything_at_no_check(cand.x, cand.y)) {
+          p.push_back(cand);
+          at = cand;
+          continue;
+        }
+      }
+      if (end.y > at.y) {
+        point cand = at + point(0, 1);
+        if ((cand == end) || ! is_anything_at_no_check(cand.x, cand.y)) {
+          p.push_back(cand);
+          at = cand;
+          continue;
+        }
+      }
+      if (end.y < at.y) {
+        point cand = at + point(0, -1);
+        if ((cand == end) || ! is_anything_at_no_check(cand.x, cand.y)) {
+          p.push_back(cand);
+          at = cand;
+          continue;
+        }
+      }
+      break;
+    }
+  }
+
 #if 0
   if (w == Charmap::CORRIDOR) {
-    LOG("Create corridor, between %d,%d and %d,%d",
-      start.x, start.y,
-      end.x, end.y);
+    LOG("Create corridor, between %d,%d and %d,%d", start.x, start.y, end.x, end.y);
   } else {
-    LOG("Create secret corridor, between %d,%d and %d,%d",
-      start.x, start.y,
-      end.x, end.y);
+    LOG("Create secret corridor, between %d,%d and %d,%d", start.x, start.y, end.x, end.y);
   }
 #endif
 
@@ -2295,6 +2411,7 @@ int Dungeon::draw_corridor(point start, point end, char w)
   set(d.val, start.x, start.y, DMAP_IS_PASSABLE);
 
   dmap_process(&d, dmap_start, dmap_end);
+  // dmap_print(&d, (dmap_start + dmap_end) / 2, dmap_start, dmap_end);
 
   auto p = dmap_solve(&d, start);
 
@@ -2739,7 +2856,7 @@ bool Dungeon::rooms_move_closer_together(void)
   // This is slow and causes jitter in the game when a monst falls
   // into a chasm.
   //
-  auto attempts_to_move_rooms_closer = 10;
+  auto attempts_to_move_rooms_closer = 5;
 
   choose_room_doors();
 
@@ -2983,7 +3100,7 @@ bool Dungeon::rooms_move_closer_together(void)
   auto ret = draw_corridors();
   TRACE_AND_INDENT();
   debug("success, placed shorter corridor layout");
-  return (ret);
+  return ret;
 }
 
 void Dungeon::assign_rooms_to_tiles(void)

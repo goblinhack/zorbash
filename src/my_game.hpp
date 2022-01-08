@@ -161,6 +161,8 @@ public:
   void init_level(point3d);
   void init_levels(void);
   void init(void);
+  void pre_init(void);
+  void set_seed(void);
   void load_config(void);
   void load(int slot);
   void load_select(void);
