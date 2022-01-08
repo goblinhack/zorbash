@@ -10,6 +10,7 @@
 #include "my_color.hpp"
 #include "my_dungeon_grid.hpp"
 #include "my_game.hpp"
+#include "my_gl.hpp"
 #include "my_globals_extra.hpp"
 #include "my_main.hpp"
 #include "my_math.hpp"
@@ -305,12 +306,25 @@ static void game_levels_grid_destroy(Widp w)
   delete ctx;
 }
 
+static void game_display_grid_bg(void)
+{
+  TRACE_AND_INDENT();
+  glcolor(WHITE);
+  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+  std::string t = "grid";
+  blit_init();
+  tile_blit(tile_find_mand(t.c_str()), point(0, 0), point(game->config.ui_pix_width, game->config.ui_pix_height));
+  blit_flush();
+}
+
 static void game_levels_grid_tick(Widp w)
 {
   TRACE_NO_INDENT();
   game_levels_grid_ctx *ctx = (game_levels_grid_ctx *) wid_get_void_context(w);
   verify(MTYPE_WID, ctx);
 
+  game_display_grid_bg();
   wid_set_style(ctx->wid_enter, UI_WID_STYLE_GRAY);
 
   if (! ctx->generated) {

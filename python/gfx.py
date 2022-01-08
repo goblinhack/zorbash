@@ -297,6 +297,16 @@ def init_title_bg():
 
 
 @timeme
+def init_grid_bg():
+    tiles = [
+        "grid",
+    ]
+    my.tile_load_arr(
+        file="data/gfx/grid.tga", name="grid", width=200, height=86, arr=tiles
+    )
+
+
+@timeme
 def init_ui_dead():
     tiles = [
         "ui_dead",
@@ -10847,6 +10857,7 @@ init_tiles3_lava()
 init_tiles3_sewer_water()
 init_tiles3_surface_effects()
 init_tiles3_water()
+init_grid_bg()
 init_title_bg()
 init_title_fg1()
 init_title_fg2()
