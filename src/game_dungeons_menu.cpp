@@ -21,6 +21,8 @@
 #include "my_ui.hpp"
 #include "my_wid.hpp"
 
+static uint8_t game_dungeons_enter(Widp w, int32_t x, int32_t y, uint32_t button);
+
 class game_dungeons_ctx
 {
 public:
@@ -334,6 +336,40 @@ static void game_dungeons_tick(Widp w)
   wid_set_style(ctx->wid_enter, UI_WID_STYLE_GRAY);
 
   if (! ctx->generated) {
+    if (g_opt_quick_start) {
+      for (auto x = 0; x < DUNGEONS_GRID_CHUNK_WIDTH; x++) {
+        for (auto y = 0; y < DUNGEONS_GRID_CHUNK_HEIGHT; y++) {
+          Widp b = ctx->buttons[ y ][ x ];
+          if (! b) {
+            continue;
+          }
+
+          auto node = ctx->nodes->getn(x, y);
+          if (! node->is_ascend_dungeon) {
+            continue;
+          }
+
+          auto level_at = game->current_level;
+          level_at.z += y;
+          level_at.x += x;
+          level_at.z *= 2;
+          level_at.z += 1;
+
+          game->init_level(level_at);
+          auto l = get(game->world.levels, level_at.x, level_at.y, level_at.z);
+          if (! l) {
+            return;
+          }
+
+          game->level     = l;
+          ctx->generating = true;
+          ctx->generated  = true;
+          game_dungeons_enter(w, 0, 0, 0);
+          return;
+        }
+      }
+    }
+
     for (auto x = 0; x < DUNGEONS_GRID_CHUNK_WIDTH; x++) {
       for (auto y = 0; y < DUNGEONS_GRID_CHUNK_HEIGHT; y++) {
         Widp b = ctx->buttons[ y ][ x ];
@@ -365,6 +401,13 @@ static void game_dungeons_tick(Widp w)
         }
 
         ctx->generating = true;
+
+        if (g_opt_quick_start) {
+          ctx->generated = true;
+          game_dungeons_enter(w, 0, 0, 0);
+          return;
+        }
+
         return;
       }
     }
